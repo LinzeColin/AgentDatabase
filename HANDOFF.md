@@ -137,6 +137,23 @@ find CodexSkills/skill_log_evals/persona-distiller/_corpora -path '*<slug>*/evid
 
 ---
 
+### ★★★★ 处置有**三种**状态，三份机器可读的文件，别只看两份
+
+| 状态 | 文件 | 现有条数 | 含义 |
+|---|---|---:|---|
+| 已入库 | `registry/codex/persona-distiller-group/team-index.json` 的 `products` | **101** | 做完并注册 |
+| 延后／拒发 | `skill_log_evals/persona-distiller/_ledgers/_延后名单.json` | **137** | **我判的**：够不着门、材料不可得 |
+| **受阻待裁** | `skill_log_evals/persona-distiller/_ledgers/_受阻待裁.json` | **3** | **我判不了的**：只能由用户拍板 |
+
+★ **第三份是 2026-08-10 移交前才建的。** 在那之前这个状态**只活在会话的任务表里**，
+而任务表不跟着仓走——核对时发现 Adams／Martens／Roberts-Austen 三人
+**既不在名册也不在延后名单**，接手的人会把他们当成「从没碰过」。
+
+★★ 用户裁定之后，把人**从受阻名单挪走**（入库进 team-index，判不做进延后名单），
+**别让同一个人同时留在两处**。
+
+---
+
 ## 5. 三条最贵的铁律（全文见 GithubProject/README.md）
 
 1. **主树只读，开发一律在 worktree。**
