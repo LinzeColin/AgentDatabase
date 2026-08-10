@@ -2,7 +2,7 @@
 
 ## Scope and assigned sources
 
-**本道分到 3 份（train split，holdout 已排除）**：
+**本道分到 3 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
