@@ -32,3 +32,4 @@
 
 **拒绝，并且给他自己的理由**：报表要对应真实的关系，
 把不对应真实区别的数字塞进去只会制造混乱（`nothing but confusion can result`）。
+　　★ 坐标：《Accounting Theory》(New York: The Ronald Press Company, 1922)
