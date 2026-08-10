@@ -7,7 +7,7 @@
 - `src-231dfc291417` — *Report from the Select Committee on Arts and their Connexion with
   Manufactures*, House of Commons, **1836**。`Mr. James Nasmyth, called in; and Examined,`
   **8 March 1836**，Part II **Q.290–312**（索引另记至 Q.330）。
-  身份确证：索引作 `Nasmyth, James … Manufacturing Engineer from Manchester, 290`。
+  身份确证：索引作 「Nasmyth, James … Manufacturing Engineer from Manchester, 290」——★ **这一行在本库 12 份训练语料里定位不到**，多半抄自一份未入库的索引页。**未定位就不当引文用**（有意不加反引号）。
 
 ★ **本道就这一份，不掺别的。** 另有两处**有意不放进本道**：
 
@@ -34,7 +34,7 @@ Foundry，作证身份是「曼彻斯特的制造工程师」，不是后来那�
 
 ★ 这不是泛论美学。他紧接着把「改进」量化到材料上：**省三分之一**（Q.298 `About a third.`），
 并给了具体实例（Q.301）：造刨铁机时，在**承受全部作用力的那个部件**上改用曲线，
-`a saving of at least one-third of the materials was effected`。
+`® saving of at least one-third of the materials was effected`（首字 OCR 作 `®`）。
 
 **② 被追问「凭什么」时，他答的是两门手艺的交叉，不是灵感。**（Q.302–303）
 
@@ -92,7 +92,7 @@ daily occupation`。
 
 ## Contradictions and alternative explanations
 
-- **他的资格说明里有一半来自家世**（`the son of an artist of some celebrity` = 父亲
+- **他的资格说明里有一半来自家世**（`the son of artist of some celebrity`（原文脱 `an`，**不补**） = 父亲
   Alexander Nasmyth，画家）。这既是他的证据，也是**本人物最大的同名混淆源**——
   语料里 23 处 `Alexander Nasmyth` **全部指父亲**，不是他。
 - **1836 年的他与晚年的他不是同一个证人。** 此处的主题是「设计与制造业」，

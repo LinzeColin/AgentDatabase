@@ -28,7 +28,7 @@
 > fourth son and tenth child of Alexander Nasmyth, ithe artist
 
 ★ 这条同时是**同名护栏的依据**：父亲是画家 Alexander Nasmyth，
-Wilkie 称他 `the founder of the landscape painting school of Scotland`。
+Wilkie 称他 `the founder of the landscape painting school of Seotland`（`Seotland` 原字如此）。
 **语料里 23 处 `Alexander Nasmyth` 全指父亲**（已写进 `meta.json:known_namesakes`）。
 
 **② ★★ 同一篇讣告内部自相矛盾。**
@@ -97,7 +97,7 @@ S1/S2 材料是别人对他的记述，**不能用来推他的思考方式**。
 ## Contradictions and alternative explanations
 
 - **核心风险已写在最前面**：讣告大部分内容是自传的复述，**与自传不构成两处证据**。
-- **讣告的褒扬语气是体裁决定的**（`Another of Edinburgh's famous sons has passed away`），
+- **讣告的褒扬语气是体裁决定的**（`AwornER:of Edinburgh’s famous sons has m passed away`（★ 开头两处 OCR 已坏，**不修补**）），
   **不能当成同代人的独立评价**。
 - MNRAS 1844／1846 两篇（S1）是学会记录员写的第三人称摘要——
   ★ 它们**可以**用来证「他在某年某会上讲了某题」，**不能**用来引他的原话。

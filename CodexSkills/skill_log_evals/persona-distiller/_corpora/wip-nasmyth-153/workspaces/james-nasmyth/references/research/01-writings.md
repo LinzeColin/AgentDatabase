@@ -69,7 +69,7 @@
 > engineer, of London … to him we are certainly indebted for the slide resU
 
 ★ 注意这不是一句客套：他用的是 `blamable`（不点名是**该受责备的**），
-并在文末（¶504）再次写 `as introduced by the late celebrated Henry Maudslay`。
+并在文末（¶504）再次写 `as introduced hy the late celehrated Henry Maudslay`（`hy`／`celehrated` 是 OCR，原字如此）。
 **这是一处可核的、主动的让功行为，不是后人替他总结的品德。**
 
 **⑦ 他指出这项工具改变的不是效率，而是「设计师敢想什么」。**（¶492）

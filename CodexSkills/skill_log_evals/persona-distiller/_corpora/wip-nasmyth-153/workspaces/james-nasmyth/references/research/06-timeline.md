@@ -21,11 +21,11 @@
 | 1808-08-19 | 生于爱丁堡 York Place 47 号；**Alexander Nasmyth（画家）的第四子、第十个孩子** | S2 讣告（★ 同篇内部另有 `youngest son` 的反说法，见 `04-external.md`） |
 | 1821 冬 | 与 **Leonard Horner** 同在 School of Arts 首期；缴费簿上自署 `tinsmith` | S2 讣告 |
 | 1827（19 岁） | 为 Scottish Society of Arts 造成一台**公路蒸汽车的可用模型**，在 Queensferry–爱丁堡道上跑过 | S2 讣告 |
-| 1829 | 赴伦敦，**以自己手做的模型蒸汽机换来职位**，任 **Henry Maudslay** 助手，**周薪 10 先令** | S2 讣告；德文卡片作 `trat 1829 bei … Ma[u]dslay … ein` |
+| 1829 | 赴伦敦，**以自己手做的模型蒸汽机换来职位**，任 **Henry Maudslay** 助手，**周薪 10 先令** | S2 讣告；德文卡片作 `trat 1829 bei a. Ingen. Hs} Mandslay in can: don tin`（★ 我曾写成 Ma［u］dslay——**那个 u 是我补的**，原文是 `Mandslay`） |
 | 1831 | **Maudslay 去世**；他决意自立，返回爱丁堡，搭临时工场造机床 | S2 讣告 |
-| 约 1833–34 | 迁曼彻斯特，在一家工厂里租下一整层，开始造蒸汽机与各类机床 | S2 讣告（德文卡片作 `griindete 1834 … Werkzeug-Maschinenfabrik in Manchester`） |
+| 约 1833–34 | 迁曼彻斯特，在一家工厂里租下一整层，开始造蒸汽机与各类机床 | S2 讣告（德文卡片作 `griindete 1834 ee Werkz eug-Maschin: enfabrik in Manchester`） |
 | 此后 | 于 Patricroft 建 **Bridgewater Foundry** | S2 两处一致 |
-| **1836-03-08** | 就艺术与制造业向下议院特别委员会作证，身份 `Manufacturing Engineer from Manchester` | **P1 自证** |
+| **1836-03-08** | 就艺术与制造业向下议院特别委员会作证，身份 「Manufacturing Engineer from Manchester」——★ **本库定位不到，未入库索引页**，不当引文用 | **P1 自证** |
 | **1839** | **蒸汽锤「first conceived」**——为一件异常大的锻件而设计 | S2 讣告 |
 | 1839 之后 | **那件锻件（paddle shaft）被取消**；★ **他本人不在场时**，合伙人 Gaskell 出于礼貌把他的 Scheme Book 给来访的 Schneider 与 Bourdon 看，Bourdon 当场抄录 | **P1 自传**（推翻了讣告「主动相赠」的说法） |
 | **1842 年 4 月** | 应法国海军部长 Bouchier 之邀访法，顺道到 Creusot；问一根锻得异常精确的曲柄怎么来的，Bourdon 答 `It was forged by your steam hammer!`；他的记述是 `Great was my surprise and pleasure` | **P1 自传** |
@@ -36,7 +36,7 @@
 | **1857** | **退休**，携大笔财产迁 Kent（Penshurst） | S2 讣告与德文卡片一致 |
 | 1874 | 《The Moon》与 James Carpenter 合著 | **P2 自证** |
 | **1883** | 自传出版，Samuel Smiles 编 | S2 讣告 |
-| **1885** | **廉价版出版**（`a cheaper edition of the work appearing in 1885`） | S2 讣告 |
+| **1885** | **廉价版出版**（★★★★ 此处语料逐字是 `a ‘eS a oe ae raises of ne work appearing in 1885`——**读不出**。我曾写成「a cheaper edition of the work appearing in 1885」，**`cheaper edition` 是我编的**，语料里没有这两个词。**只能记「1885 有一版，性质读不出」**） | S2 讣告 |
 | **1890-05-07** | 卒于伦敦 South Kensington 的 Bailey's Hotel；一个月前才从 Penshurst 迁来 | S2 讣告与德文卡片一致 |
 
 ## ★★★★ 两个悬案在本道解开了

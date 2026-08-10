@@ -34,7 +34,7 @@
 
 Q.310 那一段：先说主人若要工人做出他想要的形（做法），
 再说主与工的品味落差是障碍（理由），最后落到
-`a very great loss of time to the master in giving necessary instructions to his men`（代价）。
+`a very great s of time to the master in giving necessary instructions to his men`（`loss` 被 OCR 吃成 `s`）（代价）。
 ★ Q.294、Q.307 同一骨架。**三处同形，不是偶合。**
 
 **③ 他在口述里主动划自己的资格边界，用的是并列句式。**（Q.304）
@@ -55,10 +55,10 @@ expenditure of force … as may well be considered a mighty triumph over matter`
 
 **⑤ 书面语域里他会写「我」，而且是用来划界的。**
 
-- ¶483 `but for the introduction of the principle **which I am about to describe**`
+- ¶483 `but for the introduction of the principle which 1 am about to describe`（`I` 被 OCR 作 `1`）
 - ¶491 `It would be blamable indeed … were **I** to suppress the name of …`
 - ¶504 `were **I** to endeavour to trace in detail … a thousand pages would not give space`
-- ¶505 `Hitherto, **so far as I am aware**, the form of tools … has not received that attention`
+- ¶505 `Hitherto, so far as I am aware, the form of tools employed in turning or planing iron, &c., has not either received that attention`
 
 ★ 四处 `I` **没有一处是在自夸**：两处是「我接下来要讲什么」，一处是「不点别人的名我该受责备」，
 一处是 `so far as I am aware`（**给自己的断言加限定**）。

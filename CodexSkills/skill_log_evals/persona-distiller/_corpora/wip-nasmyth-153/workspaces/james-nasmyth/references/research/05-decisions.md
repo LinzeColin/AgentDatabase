@@ -22,7 +22,7 @@
 
 ★ 三处细节使它成为「决定」而非客套：
 1. 他用 `blamable`——**不点名是该受责备的**，即他把这当成义务而非礼节；
-2. 文末 ¶504 **再点一次**（`as introduced by the late celebrated Henry Maudslay`）；
+2. 文末 ¶504 **再点一次**（`as introduced hy the late celehrated Henry Maudslay`）；
 3. 这篇论文的主题**正是滑动原理本身**——**他是在自己最有资格居功的地方让功。**
 
 ### ★★ D2（P1）：被追问时他当场把自己的主张缩小
@@ -65,7 +65,7 @@
 ### ★★★ D6（S2）：他先把方案给了对手，专利是**发现对方造出来之后**才申请的
 
 见 `06-timeline.md` 的完整引文：1839 构思 → 锻件取消 → 把方案好处给了 Le Creusot 的
-Schneider → 两年后访 Creusot 发现已建成运转 → `After this he lost no time in obtaining a patent`。
+Schneider → 两年后访 Creusot 发现已建成运转 → `After this he lost no time. in obtaining a patent`（句中那个句点是 OCR 的，原字保留）。
 
 ★ **这一条如果在自传里核实，是本人物最强的一条决策证据**：
 它同时说明**他起初不打算圈占**，以及**他在什么条件下改变主意**。
