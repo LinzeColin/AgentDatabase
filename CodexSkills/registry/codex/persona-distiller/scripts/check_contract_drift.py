@@ -400,6 +400,28 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
         for name, err in by_design:
             skipped.append(f"[检查器镜像] {name} 起不来是**按设计如此**（跨技能依赖 registry_core）：{err}")
 
+    # --- B4. ★★★★ 2026-08-11：**教训库索引也是一份会漂的产物，而它是给接手方读的。**
+    #   `_ledgers/_教训库/_索引.md` 原本手写，**写完当天就漂了**：
+    #   头部写「113 份」而目录里 115，条目摘要停在两版之前
+    #   （`a-checker-nothing-calls` 索引写「第三批」，正文已是第六批）。
+    #   已改成 `_生成索引.py` 现算。★ 但**生成器没有调用方就还是会漂**——
+    #   下一个人改完教训文件不会记得跑它。[[a-checker-nothing-calls-is-not-a-checker]]
+    #   ★★ 这里只跑 `--check`（只报不写），漂了就报出来，**不替人改文件**。
+    idx_gen = root.parent.parent.parent / "skill_log_evals/persona-distiller/_ledgers/_教训库/_生成索引.py"
+    if not idx_gen.is_file():
+        skipped.append(f"[教训库索引] 找不到 {idx_gen.name}，**未核验**（不是通过）")
+    else:
+        r = subprocess.run([sys.executable, str(idx_gen), "--check"],
+                           capture_output=True, text=True)
+        if r.returncode == 1:
+            problems.append(
+                f"[教训库索引] **`_索引.md` 已漂**——{r.stdout.strip().lstrip('✗ ')}。"
+                f"接手方读的就是这份索引，跑 `python3 {idx_gen.name}` 重生成")
+        elif r.returncode != 0:
+            problems.append(f"[教训库索引·**自检失灵**] 生成器跑不起来（rc={r.returncode}）："
+                            f"{(r.stderr.strip().splitlines() or [''])[-1]}"
+                            f"——**这一轮的「无漂移」不作数**")
+
     # --- C. 身份输入合同 ---
     fam_file = root / "registries" / "identity-families.json"
     fam = _json(fam_file) or {}

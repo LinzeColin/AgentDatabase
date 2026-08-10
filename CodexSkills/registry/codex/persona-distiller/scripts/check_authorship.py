@@ -270,6 +270,38 @@ def build_patterns(full_name: str) -> dict:
         #   敬称列表收窄到常见几个，且都要求后跟空白——
         #   不许写成 `\w*\s+` 那种什么都吞的形态，否则
         #   `By his colleague Alexander Fleming` 会被当成他的署名。
+        # ★★★★ 2026-08-10（Martens #134，Shewhart #165 顺带查出）：
+        #   **署名前缀只写了英文的 `By`，而兜底那条的 `starts_by` 早就是多语的。**
+        #   两份清单不同步，后果是一整类人被系统性判「无据」。实测同一形态：
+        #       `By A. Martens, Berlin.`   → BYLINE ✓
+        #       `Von A. Martens, Berlin.`  → BYLINE ✗ **且 OCR 兜底也 ✗ —— 两条路都取不到**
+        #   而按本文件 v0.0.0.157 自己的注释，`Von A. Martens, Berlin.`
+        #   正是**这个人物最常见的印本署名**。
+        #   ★ 兜底那条要求「名是完整词」，所以 `Von A. Martens` 在那边也过不去；
+        #     英文的 `By A. Martens` 之所以能过，靠的正是这里的 `BYLINE`。
+        #     **于是德语／法语人物的首字母署名一份也取不到，而英语的全取得到。**
+        #   ★★ 前缀集合与 `starts_by` **共用同一份**，不再各写一遍。
+        #     `de`／`di` 这类介词靠调用点的**结构位置**兜住（行首或分隔符后，见 A-byline 分支），
+        #     且其后必须紧跟 `name_rx` 逐字匹配——`Eduard von Martens` 里的
+        #     贵族小品词不在行首，不会命中。
+        #   ★★★★ **这个多语前缀我加过又撤回了（2026-08-11），过程记在这里免得有人再加一次。**
+        #   动机是真的：`By A. Martens` 过而 **`Von A. Martens, Berlin.` 不过**，
+        #   而后者按本文件 v0.0.0.157 的注释是他**最常见的印本署名**——英语人物的
+        #   首字母署名取得到、德语人物的取不到，是一条系统性偏差。
+        #   ★ 我改成 `\b(?:By|Von|Par|Di|Av|Af|Door|De)\s+` 之后跑了全库前后对比：
+        #     **净增从 11 跳到 38**，多出的 27 条里大量是**别人写他的散文**：
+        #       louis-pasteur        `fut l'arrière-grand-père de Louis Pasteur`   ← de = 「的」
+        #       florence-nightingale `La première jeunesse de Florence Nightingale` ← 同上
+        #       robert-koch          `Die von R. Koch behandelten…`                ← von 是被动施事
+        #       gregor-mendel        `die der Hauptsache nach bereits von GREgor…` ← 正文引用
+        #   ★★ **`de`／`di` 在法语／意大利语里是所有格「的」，意思与「著」正相反**；
+        #     德语 `von` 在散文里同样是被动施事而非署名。我是把 `starts_by` 的清单
+        #     照抄过来的，**没有逐个问每个词在那门语言里到底是什么意思**。
+        #     [[regex-must-clear-the-corpus-language]]
+        #   ★★★ `starts_by` 里同样有这些词**没有出事**，是因为它锚在**行首**（`^`），
+        #     而这里是 `\b`——同一份清单，锚点不同，安全性天差地别。
+        #   → 撤回。**Martens 那条偏差仍然存在，作为已量的发现记着，
+        #     不靠一个我验不动的放宽去掩盖它。**
         "BYLINE": re.compile(
             rf"\bBy\s+(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?\s+)*"
             rf"{name_rx}\b", re.I),
@@ -556,7 +588,23 @@ def ocr_byline_evidence(text, first, last):
         #   而门只做算术、不问「分档对不对」（见 [[related-to-him-is-not-written-by-him]] 的反面）。
         #   ★ 只加**行首**的前缀，不动别处：`Eduard von Martens` 里的 `von` 是贵族小品词，
         #     它走的是整行大写那条路，不受影响。
-        starts_by = bool(re.match(r"^(?:by|von|par|di|av|af|door|de|av\.)[ \t]+", s, re.I))
+        # ★★★★ 2026-08-10（Shewhart #165）：**被 OCR 打坏的不止名字，还有 `By` 本身。**
+        #   实测 `bstj9-2-364` 的署名行照录是：
+        #       Br W. A. SHEWHART          ← `By` → `Br`，**名字一个字母都没错**
+        #   而 `BYLINE` 要求 `\bBy\s+`，`starts_by` 也只认 `by|von|par|…`，
+        #   于是**一份署名完好的自著论文被判「无据」**。
+        #   与 Fleming（敬称）／Livermore（分行）／Martens（德文 Von）／
+        #   Rosenhain（第二作者）同一族：**判据认得出名字，认不出名字前面那一小截。**
+        #   ★ 只放宽 `y` 那一个字母，且**必须双字母 + 空白**：
+        #     `y` 的常见误认是 `r v j 7 u`。名字那一半仍要求逐字或既有的编辑距离通过，
+        #     **两处模糊不许叠加** —— 前缀松了，名字就不再另外放宽。
+        #   ★★★★ **`y` 绝不能留在这个集合里。** 第一版写成 `[yrvj7u]`，于是干净的 `By `
+        #     自己也算「被打坏的前缀」，`_b == last_l` 那道闸门形同虚设——
+        #     自测当场回归：`By A. Fleming` 与 **`By A. Grant Fleming`（另一个人）**
+        #     双双被放行，而那正是这道护栏当初要挡的人。
+        #     干净的 `By` 归 `BYLINE` 管，本集合**只放它的误认形态**。
+        _by_ocr = bool(re.match(r"^B[rvj7u]\.?[ \t]+", s))          # ★ 不含 `y`；不加 re.I：`br`/`bv` 是常见英文词首
+        starts_by = bool(re.match(r"^(?:by|von|par|di|av|af|door|de|av\.)[ \t]+", s, re.I)) or _by_ocr
         allcaps = s == s.upper() and any(c.isalpha() for c in s)
         if not (starts_by or allcaps):
             continue
@@ -572,6 +620,8 @@ def ocr_byline_evidence(text, first, last):
            re.match(r"^[A-Z][A-Z .,'-]*\s+\d{1,4}$", s):
             continue
         body = re.sub(r"^(?:by|von|par|di|av|af|door|de)[ \t]+", "", s, flags=re.I)
+        if _by_ocr:                                    # 被打坏的 `By` 也要从 body 里剥掉
+            body = re.sub(r"^B[rvj7u]\.?[ \t]+", "", body)
         body = re.sub(r"^(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?[ \t]+)*",
                       "", body, flags=re.I)
         toks = [t for t in re.split(r"[^A-Za-z]+", body) if t][:5]
@@ -594,6 +644,44 @@ def ocr_byline_evidence(text, first, last):
                 return s
             continue
         a = toks[0].lower()
+        # ★★★★ 2026-08-10（Shewhart #165）：**期刊署名本来就只印首字母，而姓被打坏了。**
+        #   实测 `84021`（1922 PNAS）照录：
+        #       By W. a. Shbwhart          ← `Shewhart` → `Shbwhart`，距离 1
+        #   走不通既有的两条路：`BYLINE` 因为姓不逐字相等而落空；
+        #   本函数下面那条又要求**名是完整词**（`len(a) >= 4`），而印本上只有 `W.`。
+        #   ★ 关键是：**这不是放宽「首字母 + 同姓」那条禁令**——
+        #     该人物的六份 BSTJ 署的全是 `By W. A. SHEWHART`，
+        #     首字母署名在本语料里是**常态**，且它们已经从 `BYLINE` 正常通过了。
+        #     真正缺的只有「首字母署名 + 姓被打坏」这一格。
+        #   ★★ 三条设防，比完整名那条**更紧**：
+        #     1. **只走明示署名行**（`By …`／被打坏的 `By`），整行大写那一支不适用——
+        #        全大写行里「首字母 + 同姓」正是版口与馆藏名的形状；
+        #     2. **首字母必须相等**（`W` vs `Walter`）——不是随便一个缩写；
+        #     3. **姓的编辑距离 ≤1**（完整名那条给到 2），且长度差 ≤1。
+        #   ★★★ 同名护栏仍在调用点生效（`_blocked` / `_initial_blocked`），
+        #     本路只是**多给一个候选行**，不绕过任何一道护栏。
+        #   ★★★★ **首字母必须是带点印的。** 第一版漏了这一条，全库前后对比当场照出误收：
+        #       robert-koch / DeutscheMedizinischeWochenschrift：
+        #       `von —10° R noch nicht schmerzhaft war, dürfte sich hieraus er¬`
+        #     `von` 是德文署名前缀（Martens 那轮加的），于是这行进了本路；
+        #     `R` 被当成 Robert 的首字母，**`noch`（德语「仍然」）与 `Koch` 编辑距离 1** → 放行。
+        #     同族 [[regex-must-clear-the-corpus-language]]：`A.L.S` 匹配德语 `als`。
+        #   ★ 要求 `X.` 带点，是**印刷体例**而不是补丁：署名里的首字母一律带点
+        #     （`By W. A. SHEWHART`／`By H. C. Sorsy`／`Von A. Martens`），
+        #     而德文正文里的孤立大写字母不带点。
+        _initial_dot = bool(re.match(rf"^(?:\S+[ \t]+)?{re.escape(toks[0])}\.", body))
+        if starts_by and _initial_dot and len(a) == 1 and first_l and a == first_l[0]:
+            for _b_raw in toks[1:]:
+                _b = _b_raw.lower()
+                if len(_b) < 4 or abs(len(_b) - len(last_l)) > 1:
+                    continue
+                # ★★★ `_b == last_l`（姓完好）**只在前缀被打坏时**才收：
+                #   前缀干净时那一格归 `BYLINE` 管，本路不该重复放宽；
+                #   而 `Br W. A. SHEWHART` 恰恰**两条路都够不着**——
+                #   `BYLINE` 因前缀坏了打不着，本路又因姓完好而跳过。
+                #   第一版就漏在这里，是自测 ① 抓出来的。
+                if _edits_within(_b, last_l, 1) and (_b != last_l or _by_ocr):
+                    return s
         # ★ **名必须是完整词**——`A. Fleming` 这一整类在这里被挡住。
         #   同名陷阱恰是「首字母 + 别的中名 + 同姓」。
         if len(a) < 4 or not _edits_within(a, first_l, 2):
@@ -1878,6 +1966,79 @@ def self_test() -> int:
         print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
         if not _ok:
             bad.append(f"A-byline-ocr：{_lbl}")
+
+    # ★★★★ v0.0.0.-（Shewhart #165）：**被打坏的不止名字，还有 `By` 本身；
+    #   而期刊署名本来就只印首字母。** 两处实测照录：
+    #       Br W. A. SHEWHART     ← `By`→`Br`，名字一个字母没错（bstj9-2-364）
+    #       By W. a. Shbwhart     ← 姓距离 1，名只有首字母（84021 PNAS）
+    #   前者 `BYLINE` 因前缀坏了打不着、`ocr_byline_evidence` 又因姓完好而跳过——
+    #   **两条路中间的一格**，第一版就漏在这里，是自测 ① 抓出来的。
+    #   ★★★★ 第一版还把 `y` 写进了 OCR 混淆集 `[yrvj7u]`，于是**干净的 `By ` 也算被打坏**，
+    #     「姓完好则不收」那道闸门形同虚设——本文件自带的负对照当场回归：
+    #     `By A. Fleming` 与 **`By A. Grant Fleming`（另一个人）** 双双被放行。
+    #     **那正是这道护栏当初要挡的人。** 集合里现在没有 `y`。
+    print("\n══ `By` 被打坏 + 首字母署名 十七条对照（Shewhart #165 实测，含 1 条实跑照出的德文误收）══")
+    for _lbl, _s, _first, _last, _want in (
+            ("Br W. A. SHEWHART（**By→Br，姓完好**）", "Br W. A. SHEWHART", "Walter", "shewhart", True),
+            ("By W. a. Shbwhart（**姓距离 1 + 首字母**）", "By W. a. Shbwhart", "Walter", "shewhart", True),
+            ("By J. A. Shewhart（**首字母不是 W**）", "By J. A. Shewhart", "Walter", "shewhart", False),
+            ("By W. A. Stewart（**姓距离 2**）", "By W. A. Stewart", "Walter", "shewhart", False),
+            ("W. A. SHEWHART PAPERS（**全大写馆藏名**）", "W. A. SHEWHART PAPERS", "Walter", "shewhart", False),
+            ("Br Someone Else Entirely", "Br Someone Else Entirely", "Walter", "shewhart", False),
+            ("Brown W. A. Shbwhart（**Br+own 不是双字母前缀**）", "Brown W. A. Shbwhart", "Walter", "shewhart", False),
+            ("By W. A. SHEWHART（**前缀姓都干净 → 本路不收**）", "By W. A. SHEWHART", "Walter", "shewhart", False),
+            ("★ 同名陷阱 By A. Grant Fleming.", "By A. Grant Fleming.", "Alexander", "fleming", False),
+            ("★ 同名陷阱 By A. Fleming, F.R.C.S.", "By A. Fleming, F.R.C.S.", "Alexander", "fleming", False),
+            ("正对照 By Alexandbb Fleming, F.R.C.S., Estg.",
+             "By Alexandbb Fleming, F.R.C.S., Estg.", "Alexander", "fleming", True),
+            ("正对照 ALEXANDER FLENMING.", "ALEXANDER FLENMING.", "Alexander", "fleming", True),
+            # ★★★★ **全库前后对比照出来的唯一一条误收**（不是自测抓的，是实跑抓的）：
+            #   德文正文 `von —10° R noch nicht schmerzhaft war` —— `von` 是德文署名前缀，
+            #   `R` 被当成 Robert 的首字母，**`noch`（「仍然」）与 `Koch` 编辑距离 1**。
+            #   修法是要求首字母**带点**（印刷体例），而不是给 `noch` 打补丁。
+            #   同族 [[regex-must-clear-the-corpus-language]]。
+            ("★★ 德文正文 von —10° R noch nicht schmerzhaft war",
+             "von —10° R noch nicht schmerzhaft war, dürfte sich hieraus er", "Robert", "koch", False),
+            ("正对照 Br JOSEPH LISTER, M.B. Lond.（By→Br）",
+             "Br  JOSEPH  LISTER,  M.B.  Lond.  F.R.C.S.", "Joseph", "lister", True),
+            ("正对照 Bv WILLIAM OSLER, M.D.（By→Bv）",
+             "Bv  WILLIAM  OSLER,  M.D.,  F.R.CP..", "William", "osler", True),
+            ("正对照 By H. C. Sorsy, F.RS.（Sorby→Sorsy，首字母署名）",
+             "By H. C. Sorsy, F.RS., F.L.8., F.G.8.", "Henry", "sorby", True),
+            ("正对照 By H. L. Ganrt（Gantt→Ganrt，首字母署名）",
+             "By H. L. Ganrt, Pawtucket, R. I.", "Henry", "gantt", True)):
+        _got = bool(ocr_byline_evidence(_s, _first, _last))
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
+        if not _ok:
+            bad.append(f"By-打坏/首字母署名：{_lbl}")
+    # ★ 「本路不收」那一条**必须配一个正对照**，否则它可能是漏判而不是分工。
+    if not build_patterns("Walter A. Shewhart")["BYLINE"].search("By W. A. SHEWHART"):
+        bad.append("By-打坏/首字母署名：干净串没能从 BYLINE 走通——**上面那条「本路不收」就成了漏判**")
+        print("  ✗ 干净串 `By W. A. SHEWHART` 必须从 BYLINE 走通")
+    else:
+        print("  ✓ 干净串 `By W. A. SHEWHART` 从 **BYLINE** 走通（证明「本路不收」是分工不是漏判）")
+
+    # ★★★★ **多语署名前缀：已量的偏差，故意不修**（Martens #134，2026-08-11）
+    #   下面这六条**不是回归测试，是把偏差钉在原地**：前三条现在是红的（取不到），
+    #   而那正是当前射程的真实样子。**修它的那一版被撤回了**（理由见 BYLINE 定义处）。
+    print("\n══ 多语署名前缀：**已量的偏差，当前故意取不到**（Martens #134）══")
+    _pm = build_patterns("Adolf Martens")
+    for _lbl, _s, _now in (
+            ("Von A. Martens, Berlin.（**他最常见的印本署名**）", "Von A. Martens, Berlin.", False),
+            ("Von Adolf Martens.（德文全名署名）", "Von Adolf Martens.", False),
+            ("By A. Martens, Berlin.（英文同形态）", "By A. Martens, Berlin.", True),
+            ("★ Eduard von Martens（同名者，贵族小品词）", "Eduard von Martens", False),
+            ("★ Von Eduard Martens.（同名者）", "Von Eduard Martens.", False)):
+        _got = bool(_pm["BYLINE"].search(_s))
+        _ok = _got == _now
+        _tag = "取得到" if _now else ("**取不到（偏差）**" if "Martens," in _s or "Von Adolf" in _s else "拒绝（对）")
+        print(f"  {'✓' if _ok else '✗'} {_tag}　{_lbl}")
+        if not _ok:
+            bad.append(f"多语署名前缀·射程变了：{_lbl}（预期 {_now}，实得 {_got}）")
+    print("  ★ 前两条「取不到」是**已知偏差**：英语人物的首字母署名取得到、德语的取不到。"
+          "\n    修法试过（把前缀集合多语化），**全库净增从 11 跳到 38，多出的大量是"
+          "「别人写他」的散文**（`de Louis Pasteur`／`von R. Koch behandelten`），已撤回。")
 
     # ★★★ 同姓同名护栏（Coffin #130）——`_blocked` 只比姓，同姓的它一个也挡不住
     print("\n══ 同姓不同中名首字母 六条对照（v0.0.0.137）══")
