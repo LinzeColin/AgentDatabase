@@ -731,11 +731,12 @@
    "order": 19
   },
   {
-   "name": "Walter Shewhart",
+   "name": "Walter A. Shewhart",
    "family_zh": "财务合规师",
    "family_id": "finance-compliance",
    "priority": 5,
-   "order": 20
+   "order": 20,
+   "★ 改名依据": "2026-08-11：入库产物的规范名是 `Walter A. Shewhart`，队列原写 `Walter Shewhart`，两串 norm 后不等 → **NEXT 把刚入库的人又排了回来**。核过是同一个人：同名护栏选出 `shewhart-walter-a-1891`，探测查得 **0 个构成混淆风险的同姓者**（维基 `Shewhart` 词条重定向到他，非消歧义页），1914 年硕论题名页印 `WALTER  ANDREW  SHEWHART`。"
   },
   {
    "name": "Kaoru Ishikawa",

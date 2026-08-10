@@ -5,7 +5,7 @@ so it can never drift from memory. Run at the start of every work session.
 Usage:
   python3 next_person.py --registry-root <current-worktree>/CodexSkills/registry/codex/persona-distiller-group
 (Defaults point at the worktree used for the calibration; pass --registry-root for a fresh worktree.)"""
-import argparse, json, os, re, glob, pathlib
+import argparse, json, os, re, sys, glob, pathlib
 
 # ★★★★ 2026-08-10：**默认路径写死在另一个 worktree 上，实测已经失效。**
 #   旧默认 `…/AgentDatabase/character-distillation-skill-reorganize-d57595/…` **不存在**，
@@ -181,6 +181,39 @@ def main():
                                        or worked.get(norm(item["name"]))})
         else:
             pending.append(item)
+
+    #   ★★★★ 2026-08-11（Shewhart #165 撞出）：**队列名与 registry 名差一个中名首字母，
+    #     于是刚入库的人第二天又排回 NEXT。** 实测：registry 是 `Walter A. Shewhart`
+    #     （产物侧的规范名，题名页作 `WALTER ANDREW SHEWHART`），队列写的是 `Walter Shewhart`，
+    #     `norm()` 去标点后仍是两个不同的串 → 判不出他已完成 → **NEXT 指着一个刚入库的人**。
+    #
+    #   ★★ **修法不是把匹配放宽到「忽略中名」**——那正是 Coffin #130 的陷阱：
+    #     `Charles L. Coffin`（焊接发明人）与 `Charles A. Coffin`（GE 首任总裁）
+    #     **首尾名相同、中名不同，是两个人**。放宽会把他们并成一个。
+    #
+    #   → 只**响亮地报出来**，让人去核，**不替人决定他们是不是同一个**。
+    def _fl(s):
+        toks = [x for x in re.split(r'[^A-Za-z0-9]+', s) if x]
+        return (norm(toks[0]), norm(toks[-1])) if len(toks) >= 2 else None
+    _done_fl = {}
+    if os.path.isfile(ti):
+        for _p in idx.get("products", []):
+            for _tok in (_p.get("canonical_name"), _p.get("display_name"), _p.get("name")):
+                if _tok and _fl(_tok):
+                    _done_fl.setdefault(_fl(_tok), []).append(_tok)
+    _suspect = []
+    for _it in pending:
+        _k = _fl(_it["name"])
+        if _k and _k in _done_fl:
+            _suspect.append({"队列里写的": _it["name"], "registry 里的": _done_fl[_k],
+                             "★": "**首尾名相同而全名不同**——可能是同一个人（中名首字母之差），"
+                                  "也可能是同名者。**去核，不要自动并。**"})
+    if _suspect:
+        print("★★★ **有人排在 NEXT，而 registry 里存在首尾名相同的产物** —— "
+              "多半是队列名少了中名首字母，但 Coffin 那种同姓同名不同中名的也长这样：",
+              file=sys.stderr)
+        for _s in _suspect:
+            print("    " + json.dumps(_s, ensure_ascii=False), file=sys.stderr)
 
     print(json.dumps({
         # ★ 读不到就是 None，**不许写 0**（[[empty-default-swallows-unknown]]）
