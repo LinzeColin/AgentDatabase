@@ -72,5 +72,26 @@
   "subject_origin": "historical",
   "target_id": "tgt-c14ec0d74083",
   "time_scope": "all available periods, separated by role and material drift",
-  "updated_at": "2026-08-10T10:51:24Z"
+  "updated_at": "2026-08-10T10:51:24Z",
+  "attribution_basis": {
+    "authority": "作品归属依 Teubner／Loeb／Oxford 古典文本传统的传世归属，并以**每一份下载物自己印的署名行**逐份复核（见 covered_sources 逐条）。",
+    "citation": "Marcus Tullius Cicero（前 106–前 43）名下的哲学、修辞学论著、书信与演说。★ 本批**不含**任何归于其子 Marcus Tullius Cicero Minor（前 65–约前 27）的材料：`De Officiis` 的副题 `ad Marcum filium` 里，儿子是**收信人**，不是作者。",
+    "counting_convention": "★ 本条只解决「这一份是不是他名下的作品」，**不解决「这段话是不是他在说」**。本批 11 份对话体作品里，说话的多半不是他（De Amicitia 是 Laelius，De Senectute 是老 Cato，De Natura Deorum 是 Velleius／Balbus／Cotta，**De Republica 最极端——对话的戏剧时间在他出生之前**）。这些份的 `voice` 已逐份记为 `communicated` 而不是 `first-person`。另：`ad Familiares` 是**双向**书信集，收录大量他人写给他的回信，下游必须按发信人过滤。",
+    "covered_sources": [
+      "de_officiis_miller_1913_en.txt —— Gutenberg 书目头逐字：`Title: De Officiis / Author: Marcus Tullius Cicero / Translator: Walter Miller`",
+      "de_oratore_watson_1860_en.txt —— 题名页逐字：`CICERO ON ORATORY AND ORATORS. TRANSLATED OR EDITED BY J. 8S. WATSON.`（OCR 把 `J. S.` 认成 `J. 8S.`，照录不改）",
+      "de_natura_deorum_yonge_1878_en.txt —— ★ **本份的署名不在第一屏**：题名页 OCR 只剩 `BOM'S CLASSICAL LIBRARY. / THE NATUKE OF THE GODS, / DIVINATION, PATE, THE EEPUBLIC, / LAWS, ETC. / 1878`（Bohn 与 Nature/Fate/Republic 都被 OCR 讹了，照录）。作者名出现在正文内部，如 @1084170 `A REVIEW OF THE HISTORY OF CICERO'S TREATISE ON THE LAWS. BY FRANCIS BARHAM, ESQ.`。**归属依据是「本卷各篇皆为西塞罗传世作品」的书目事实，不是题名页署名** —— 这一份的证据等级低于同批其他份，如实记。",
+      "de_republica_featherstonhaugh_1829_en.txt —— Gutenberg 书目头逐字：`The Project Gutenberg eBook of The republic of Cicero`",
+      "letters_to_atticus_winstedt_vol1_en.txt —— Gutenberg 书目头逐字：`The Project Gutenberg eBook of Cicero: Letters to Atticus, Vol. 1 of 3`",
+      "letters_shuckburgh_1899_vol1_en.txt —— Gutenberg 书目头逐字：`The Project Gutenberg eBook of The Letters of Cicero, Volume 1`",
+      "tusculan_book1_yonge_1877_en.txt —— 页首逐字：`Cicero : Tusculan Disputations - Book 1 , 1-66  Translated by C.D. Yonge (1877).`",
+      "de_officiis_liber1_latin.txt —— 正文首行逐字：`M. TVLLI CICERONIS DE OFFICIIS LIBER PRIMVS`",
+      "de_oratore_liber1_latin.txt —— 正文首行逐字：`M. TVLLI CICERONIS DE ORATORE AD QVINTVM FRATREM LIBER PRIMVS`",
+      "de_amicitia_latin.txt —— 正文首行逐字：`M. TVLLI CICERONIS LAELIVS DE AMICITIA`",
+      "epistulae_ad_atticum_liber1_latin.txt —— 正文首行逐字：`M. TULLI CICERONIS EPISTULARUM AD ATTICUM LIBER PRIMUS`",
+      "in_catilinam_1_latin.txt —— ★ **这一份的署名是我自己弄丢的**：正文首行只剩 `ORATIO IN L. CATILINAM PRIMA`，因为我把 HTML 转文本时**连 `<head>` 一起剥掉了**，而署名在 `<title>` 里。回原 HTML 取逐字：`<title>Cicero: In Catilinam I</title>`；转出来的文本末尾也留着 `Cicero / The Latin Library / The Classics Page`。★ 记下来：**剥标签要保住 `<title>`，它常常是唯一的署名位**。"
+    ],
+    "disputed_policy": "西塞罗名下有一批**古代即已存疑或确定伪托**的篇目（`Rhetorica ad Herennium` 长期误挂他名、`Epistula ad Octavianum`、`Consolatio` 的文艺复兴伪作等）。**本批一份都没有收**——所以 `disputed_works` 是空数组，**不是因为没查，是因为收进来的 12 部作品全部无争议**。★ 判读依据：本批各篇的归属在 Teubner／Loeb／Oxford 三个校勘传统里一致，且每一份下载物自己的题名页都署他的名（逐份见 `covered_sources`）。★★ 若后续补入演说残篇或书信辑佚，**必须重查这一条**——辑佚正是伪托最容易混进来的地方。",
+    "disputed_works": []
+  }
 }
