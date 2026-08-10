@@ -286,6 +286,16 @@ def main() -> int:
                         help='这份材料是不是他本人在说话。`communicated` 指'
                              '「作者自供而第三人称写的」（如脚注 communicated by the author），'
                              '**单列一档，不并进 first-person**。')
+    # ★★★★ 2026-08-11 新增。此前 `title` **写死成 `source.name`（文件名），
+    #   且没有任何参数能改它** —— 这就是待办「全库 1,943/1,969 行的 title 就是文件名」
+    #   的根因：不是填得差，是**根本没有地方能填**。
+    #   后果不是难看：判「两份是不是同一部作品」时**除了内容重叠没有第二个证据源**，
+    #   引文坐标与「挂到哪部作品」也全落在文件名上。
+    #   ★ 默认仍是文件名，**向后兼容**；一次调用里的多个输入共用这一个题名，
+    #     所以**题名不同的材料要分次 ingest**（`--author`/`--published-at` 本来就是这个约定）。
+    parser.add_argument('--title',
+                        help='书目题名。不给则沿用文件名（历史行为）。'
+                             '★ 一次调用内所有输入共用，题名不同的要分次 ingest。')
     parser.add_argument('--abstract')
     # ★ v0.0.0.106：此前**没有任何办法在落盘时记下「凭什么说这是他写的」**。
     #   Liebig #124 实测：9 份「与他有关的书」（论战文／写给他的公开信／他人主编的文集／
@@ -432,7 +442,7 @@ def main() -> int:
 
             record = {
                 'source_id': source_id,
-                'title': source.name,
+                'title': args.title or source.name,
                 'author': args.author,
                 'published_at': args.published_at,
                 'accessed_at': utc_now(),

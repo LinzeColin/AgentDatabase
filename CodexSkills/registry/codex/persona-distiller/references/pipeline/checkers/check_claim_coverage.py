@@ -111,7 +111,15 @@ def load_cache(cache: pathlib.Path) -> dict[str, str]:
     除非调用方手工把 61 个子目录一个个传进来。
     """
     out: dict[str, str] = {}
-    for f in cache.rglob("*.txt"):
+    # ★★★★ 2026-08-11：**只认 `.txt` 是一个没说出口的口径**。
+    #   `ingest.py` 收什么就该读什么。实测：
+    #     · 生产侧 `raw/` 里 **1643 个 `.txt`、0 个 `.md`** —— 放宽对生产**零影响**；
+    #     · 而**测试夹具的源全是 `.md`** → `rglob("*.txt")` 读到 0 份，
+    #       于是夹具的内容层**从来没被真正跑过**，
+    #       直到今天 `--cache` 自动接上才暴露（报「一份语料都没读到」）。
+    #   `fixtures-cleaner-than-the-real-thing` 的又一形态：
+    #   **夹具不是太干净，是它长得跟生产不一样，于是那道门在它身上一直是空转的。**
+    for f in sorted(p for ext in ("*.txt", "*.md") for p in cache.rglob(ext)):
         try:
             raw_bytes = f.read_bytes()
             raw_text = raw_bytes.decode("utf-8", errors="replace")

@@ -132,8 +132,10 @@ Date: 2026-08-05（**v0.0.0.154**）
 > 还原 → 0，文件逐字一致。（**上一次接线就是接错了分支才白接的**，所以这次必须植入验证。）
 >
 > **本版实况计数（`check_verification_counts.py` 逐项核过）**：
-> 判据 **82** 件、Python 脚本 **117**、checksum 全量校验 **431 files**、身份族 **12** 族。
+> 判据 **86** 件、Python 脚本 **123**、checksum 全量校验 **460 files**、身份族 **12** 族、**名册 102 人**。
 > ★★★★ **2026-08-10 更新**：判据 72→82、脚本 106→117、checksum 416→431。**这三个数又漂了一轮，是 `check_checkers` 报出来的，不是我自己想起来的。** ★ 口径写死在 `check_verification_counts.PATTERNS`：判据＝`scripts/check_*.py`、脚本＝`scripts/*.py`。**我第一次改用 `find . -name '*.py'` 算出 250，范围错了**——[[counts-need-their-cutoff-stated]]。
+> ★★★★ **2026-08-11 再更新**：判据 82→**86**、脚本 117→**123**、checksum 431→**460**，并补上此前**根本没写过**的「名册人数」**102**（判据一直报「文中 None」，而「文中没写」和「文中写错」在报告里长得一样——`empty-default-swallows-unknown`）。★ 三个数都**按判据写死的那个口径独立复算过一遍**，不是抄它的输出：
+> `ls scripts/check_*.py | wc -l` = 86、`ls scripts/*.py | wc -l` = 123、`wc -l < checksums.sha256` = 460、`team-index.json` 的 products = 102。
 > ★★ **2026-08-06 更新**：判据 70→72、脚本 104→106（当日新增
 > `check_lane_quotes_verbatim` 与 `check_stance_density`）。
 > **这两个数是判据报出来的，不是我记得改的**——`check_verification_counts` 当天报

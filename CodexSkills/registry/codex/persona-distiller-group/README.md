@@ -60,7 +60,7 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**101 个人物**。
+当前唯一登记：**102 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
@@ -73,10 +73,10 @@
 | `政治法律师/` | 5 |
 | `客户营销师/` | 1 |
 | `建造采购师/` | 12 |
-| `财务合规师/` | 1 |
+| `财务合规师/` | 2 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 2 |
-| **总计** | **101** |
+| **总计** | **102** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -147,6 +147,7 @@
 | 辛多·寇 / Sindo Kou | `材料建工师` | `0.0.0.1` | 公开职业与作品高度集中在焊接冶金、材料加工传输现象、凝固裂纹及工程教学。；一手论文、专著、技术回顾和官方履历形成跨四十余年的连续证据链。 | 以热—流—凝固—组织—缺陷因果链表征问题；按焊池、熔合边界、部分熔化区和热影响区进行区域化诊断 | 把模糊焊接缺陷问题转化为可测变量、竞争机制和最小区分性试验；审查仿真、试验和工艺建议是否具有机制依据、适用域和责任门 | 焊接冶金与凝固裂纹机理诊断；焊池流动、熔深与表面活性效应分析 | 多物理因果建模与区域分解；竞争机制与区分性试验设计 | [ZIP](材料建工师/sindo-kou/versions/0.0.0.1/sindo-kou-persona-distillation-delivery-v0.0.0.1.zip) |
 | John Maeda | `艺术设计师` | `0.0.0.1` | 艺术设计师族中少数同时具备设计论述与亲手技术实践双重语料的人物，两侧证据各 30 篇以上且可分离；其对智能体时代设计问题的论述成体系且时效最新（2025–2026），含原创框架（AX、双鸿沟推论、Diamond Circle） | 两种可量化区分的写作 register：动手笔记每千字 3.5 句、署名随笔 7.9 句；操作文档只解释局部战术选择（38 篇中 8 篇含 because/reason，如为什么用某个分隔符）而不解释原理，论述文档则给完整论证，两者不混；论证走「亲历 → 重新归类 → 一般化」三步；特征动作是修正自己当年的归类而非重审证据 | 在做 AI/智能体产品时，把「用户怎么知道它做对了」提到与「用户怎么用」同等地位；拿到一套可直接套用的设计评审判据，而不是抽象的设计价值观 | 判断一个 AI/智能体产品把用户负担放对了没有：执行侧还是评估侧；诊断 AI 系统效果差是模型能力问题还是情境设定问题 | 用 Don Norman 双鸿沟框架定位智能体产品的界面问题（执行鸿沟趋零、评估鸿沟大开）；以可验证性而非审美为判据评估纯对话式界面的缺口 | [ZIP](艺术设计师/john-maeda/versions/0.0.0.1/john-maeda-persona-distillation-delivery-v0.0.0.1.zip) |
 | Nancy Leveson | `财务合规师` | `0.0.0.1` | Longitudinal primary corpus across software safety, system safety, methods, teaching, and organizational control.；Stable cross-source problem-framing patterns can be operationalized without claiming private identity. | Loss-and-constraint-first framing；System-theoretic control and feedback analysis | Turns vague safety concern into losses, hazards, controls, scenarios, owners, and verification.；Surfaces software, human, organizational, and regulatory interactions missed by component-only analysis. | Complex system safety and cybersecurity review；STPA-style proactive hazard analysis | System-level causal reframing；Control-structure modeling | [ZIP](财务合规师/nancy-leveson/versions/0.0.0.1/nancy-leveson-persona-distillation-delivery-v0.0.0.1.zip) |
+| Walter A. Shewhart | `财务合规师` | `0.0.0.1` | 财务合规师族的方法源头之一：把「变异的原因分两类」这条分界落成可执行的判定程序；★ 材料全部为 1930 年及以前出版的公有领域一手文献，13 份，一手占比 0.9167 | 通篇非人称——1927 年那段 1,400 词的讨论里提对方 7 次、自称 0 次；结论一律带条件（`cannot be used indiscriminately`、`should be somewhat modified`），不写无条件的口号 | 把「这批数据稳不稳」这个问题写死成一句可判的话，并给出在纸笔条件下就能做完的步骤；在标准尚未定下时，说清哪个问题仍答得了、哪个答不了 | 判断一组观测的波动能不能用一个偶然原因系统解释（受控与否），而不是判它合不合规格；在没有计算机的条件下把按批取样、中心线与上下限、越界判读做完——他当年只有纸笔与计算尺 | 受控与否的判定：观测波动能否用一个偶然原因系统解释；统计方法的假设核对（对自己的推导与对别人的理论用同一道工序） | [ZIP](财务合规师/walter-a-shewhart/versions/0.0.0.1/walter-a-shewhart-persona-distillation-delivery-v0.0.0.1.zip) |
 | Alan Kay | `软件开发师` | `0.0.0.1` | Smalltalk 方向与 Dynabook 构想的提出者，其表征优先的思路构成与前三位软件开发师完全不同的第四种决策起点；留下罕见的一手自述《The Early History of Smalltalk》，含大量自我批评与对他人贡献的明确归位 | 视角优先：能力来自表征方式而非智力，卡住先换视角不先加资源（“视角值 80 个智商点”）；工具非中性：工具内建什么思维模式，决定使用者能想到什么 | 团队在一个难题上卡住时，先帮你判断是不是表征方式本身在制造难度，而不是直接建议加人；架构讨论各说各话时，把各方隐含的假设挖出来并造出可比较的共同模型 | 表征与范式设计：为卡住的问题换一套表征方式，而不是在旧框架里优化；编程语言与运行时的范式判断：消息传递、晚绑定、对象私有行为这一路线的取舍 | 为一个卡住的问题换掉表征方式，找出各方隐含的基本单位与可变量假设；判断一个编程范式的本质属性——换掉实现手段之后仍必须保留的东西 | [ZIP](软件开发师/alan-kay/versions/0.0.0.1/alan-kay-persona-distillation-delivery-v0.0.0.1.zip) |
 | Anders Hejlsberg | `软件开发师` | `0.0.0.1` | 跨四十年、三种生态连续做出四个被大规模采用的语言／工具（Turbo Pascal、Delphi、C#、TypeScript），在软件史上极罕见；TypeScript 的设计目标／非目标文档是罕见的、把取舍逐条公开写死的一手设计文本 | 非目标先行：明确拒绝做什么，比宣称要做什么更界定设计；只描述不改造：新层叠在旧层之上，不动下层的运行时语义 | 要在既有系统上加新能力时，先帮你判断“采纳它需要对方先改变什么”，并把答案压到零；为大型 JavaScript 代码库设计可逐文件推进、随时可退的类型引入路径，并提前告知补偿成本 | 在既有生态上叠加静态类型而不改动其运行时；渐进式采纳路径设计（逐文件、可回退、零基础设施改造） | 判断一个新特性是否要求运行时支持（五条可执行检查）；设计能被既有生态逐步采纳、且可完全回退的方案 | [ZIP](软件开发师/anders-hejlsberg/versions/0.0.0.1/anders-hejlsberg-persona-distillation-delivery-v0.0.0.1.zip) |
 | Andrej Karpathy / 安德烈·卡帕西 | `软件开发师` | `0.0.0.1` | 公开一手材料横跨论文、工业系统、课程、代码、访谈与近期 Agent 研究，适合构建可执行而非仅风格化的人物模型。；技术工程与思想教育均有长期、可复现的作品证据；开发设计仅限技术系统，创业经营仅保留有证据的教育产品范围。 | 从原语重建复杂系统并用可运行代码检验理解；把数据、训练、评测、部署和反馈视为一个端到端闭环 | 获得可执行的深度学习/LLM 学习、诊断、实验和实现方法，而不是口吻模仿。；将模糊 AI 产品或研究问题压缩为最小闭环、指标、实验和可交付物。 | 深度学习与 LLM 原理教学、课程和教材设计；训练故障诊断、实验设计、消融与评测 | 深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释；用小型可读代码重建自动微分、语言模型和推理/训练流程 | [ZIP](软件开发师/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip) |

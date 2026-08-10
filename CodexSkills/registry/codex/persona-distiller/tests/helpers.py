@@ -155,7 +155,7 @@ def populate_release_ready(target: Path, material_root: Path) -> dict[str, Any]:
     lanes = ['writings', 'conversations', 'decisions', 'expression', 'external', 'timeline', 'writings', 'decisions']
     source_paths: list[Path] = []
     for index, lane in enumerate(lanes, 1):
-        source = material_root / f'source-{index}-{lane}.md'
+        source = material_root / f'source-{index}-{lane}.txt'
         # P1 means the subject's own words, so the fixture carries a real byline.
         # This also gives the v0.0.0.10 authorship gate end-to-end coverage in the suite:
         # a P1 source claimed for the subject must show structural attribution evidence.
@@ -176,19 +176,32 @@ def populate_release_ready(target: Path, material_root: Path) -> dict[str, Any]:
              f'the outcome measured, and why the decision went that way (trace {index}).\n\n') * 15,
             encoding='utf-8',
         )
-        source_paths.append(source)
-    ingest_args: list[object] = [
-        target, *source_paths, '--tier', 'P1', '--source-type', 'interview',
-        '--author', 'Example Thinker',
-        '--rights', 'synthetic-test-material; redistribution-permitted',
-    ]
-    # Every fixture source is cross-indexed to all six lanes so metadata coverage is explicit.
-    for dimension in ('writings', 'conversations', 'expression', 'external', 'decisions', 'timeline'):
-        ingest_args.extend(['--dimension', dimension])
-    payload = json.loads(run_script('ingest.py', *ingest_args).stdout)
-    source_ids = [item['source_id'] for item in payload['results'] if item['status'] == 'normalized']
+        source_paths.append((source, _topic['title']))
+    # ★★★★ 2026-08-11：**逐份 ingest，各带真书名**（此前是一次调用灌 9 份）。
+    #   起因：`--cache` 自动接上之后，夹具的 strict 发布门报出
+    #   「**9/9 行的 `title` 就是文件名（100%）**」——而这是**真的**：
+    #   `ingest.py` 从前把 `title` 写死成 `source.name` 且没有参数能改。
+    #   ★ 两处都是让夹具**长得像生产**，不是放宽判据：
+    #     · 源文件从 `.md` 改成 `.txt` —— 生产侧 `raw/` 实测 **1643 个 .txt、0 个 .md**，
+    #       而 8 个以上判据只读 `.txt`，于是**这些门在夹具身上一直是空转的**；
+    #     · 题名改成 `_FIXTURE_TOPICS` 里那个真书名。
+    #   `fixtures-cleaner-than-the-real-thing` 的又一形态：夹具不是太干净，是**形状不一样**。
+    source_ids: list[str] = []
+    for _src, _title in source_paths:
+        _args: list[object] = [
+            target, _src, '--tier', 'P1', '--source-type', 'interview',
+            '--author', 'Example Thinker', '--title', _title,
+            '--rights', 'synthetic-test-material; redistribution-permitted',
+        ]
+        # Every fixture source is cross-indexed to all six lanes so metadata coverage is explicit.
+        for dimension in ('writings', 'conversations', 'expression', 'external',
+                          'decisions', 'timeline'):
+            _args.extend(['--dimension', dimension])
+        _payload = json.loads(run_script('ingest.py', *_args).stdout)
+        source_ids += [it['source_id'] for it in _payload['results']
+                       if it['status'] == 'normalized']
 
-    holdout = material_root / 'holdout.md'
+    holdout = material_root / 'holdout.txt'
     holdout.write_text(
         'By Example Thinker\n\n'
         + ('Held-out synthetic decision record. It must never enter model Claims.\n') * 20,
@@ -196,7 +209,7 @@ def populate_release_ready(target: Path, material_root: Path) -> dict[str, Any]:
     completed = run_script(
         'ingest.py', target, holdout, '--holdout', '--tier', 'P1',
         '--source-type', 'decision-record', '--dimension', 'decisions',
-        '--author', 'Example Thinker',
+        '--author', 'Example Thinker', '--title', 'Held-out Decision Record',
         '--rights', 'synthetic-test-material; redistribution-permitted',
     )
     holdout_id = json.loads(completed.stdout)['results'][0]['source_id']
@@ -248,7 +261,17 @@ def populate_release_ready(target: Path, material_root: Path) -> dict[str, Any]:
         claim_id = f'clm-{index:012x}'
         claims.append({
             'claim_id': claim_id,
-            'claim': f'Synthetic executable cognitive pattern {index}.',
+            # ★★★★ 2026-08-11：**第 1 条带一句真逐字引文**。
+            #   起因：`--cache` 自动接上后，夹具的 strict 发布门报
+            #   「引文核验没有可核的对象」——**夹具的断言里一条引文都没有**，
+            #   而本产品的立身之本正是能出示一手逐字引文。
+            #   于是 `check_quote_integrity` 这道门**在夹具身上一直是空转的**。
+            #   ★ 引的这句在**每一份**合成源正文里都有，所以挂哪个源都能命中，
+            #     不依赖 `source_ids` 的取模结果（否则夹具会时绿时红）。
+            'claim': (f'Synthetic executable cognitive pattern {index}.'
+                      + ('　「It records the context, the constraint that bound it, '
+                         'the action taken」（Fixture Journal 1(1) 1–20, 1900）'
+                         if index == 1 else '')),
             'category': category,
             'status': 'pattern',
             'source_ids': [source_ids[index % len(source_ids)], source_ids[(index + 1) % len(source_ids)]],

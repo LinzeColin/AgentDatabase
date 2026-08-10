@@ -1436,7 +1436,11 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
         if code == -1:
             review['research_quote'] = out
         elif code == 3:
-            review['research_quote'] = '研究文档引文**未核成**（不是通过）：语料读不到，或一条引文都没扫到'
+            review['research_quote'] = '研究文档引文**未核成**（不是通过）：**一份语料都没读到**'
+        elif code == 4:
+            # ★ 研究文档里没有引文是**允许的**（不是每份研究道文档都必然带逐字引文），
+            #   但要说清是「没有可核的」而不是「核过了没问题」。
+            review['research_quote'] = '研究文档里**一条引文都没扫到**——没有可核的对象（不是通过）'
         elif code == 2:
             report.error('content.selftest-failed',
                          'check_quote_integrity 负对照未过——其研究文档结论不作数')
@@ -1638,6 +1642,13 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
                 report.error('content.quote-unresolved',
                              '引文核验**未做成**（不是通过）：一份语料都没读到，'
                              '确认 --cache 指到含 .txt 的目录（本流水线在 <工作区>/raw/ 下）')
+            elif code == 4:
+                # ★ 语料读到了，只是断言/答案里一条引文都没有。
+                #   与「语料读不到」是两回事，**不要印成同一句话**。
+                report.error('content.no-quotes-to-verify',
+                             '引文核验**没有可核的对象**（不是通过）：语料读到了，'
+                             '而断言与答案里**一条引文都没扫到**——'
+                             '本产品的立身之本是能出示一手逐字引文，一条都没有本身就是问题')
             elif code == 2:
                 report.error('content.selftest-failed',
                              'check_quote_integrity 负对照未过——其检查结论不作数')
