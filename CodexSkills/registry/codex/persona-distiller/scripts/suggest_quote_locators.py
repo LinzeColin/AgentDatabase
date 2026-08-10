@@ -87,19 +87,45 @@ def looks_like_quote(s: str) -> bool:
     return True
 
 
+#   ★★★★ 第四个盲区（2026-08-11，Nasmyth 撞出）：**校勘方括号**。
+#     产物里写的是 `collate[ral assistance]` —— 方括号是**编者补足残缺处**的通行惯例。
+#     按字面找当然找不到。**两种读法都要试**：
+#       ① 保留括号内容（编者补的字就是原文该有的字）→ `collateral assistance`
+#       ② 整个去掉（括号里是编者的说明，不是原文）→ `collate`
+#     任一命中即算。★ 这是**放宽**，但方向安全：它只会把「本来就是这份」认出来，
+#     不会把别份认成这份——因为两种读法都比原串更短或等长。
+_BRACKET_KEEP = re.compile(r"[\[\]]")
+_BRACKET_DROP = re.compile(r"\s*\[[^\]]*\]\s*")
+
+
+def _variants(quote: str) -> list[str]:
+    q = _BOLD.sub("", quote)
+    out = [q]
+    if "[" in q:
+        out.append(_BRACKET_KEEP.sub("", q))          # 保留内容
+        out.append(_BRACKET_DROP.sub(" ", q))         # 整个去掉
+    return out
+
+
 def contains_quote(body_flat: str, quote: str) -> bool:
-    """引文在不在这份语料里。★ 剥粗体、按省略号分段、**分段必须保持先后次序**。"""
-    q = flat(_BOLD.sub("", quote))
-    parts = [x for x in _ELLIPSIS.split(q) if len(x) >= 8]
-    if not parts:
-        return q in body_flat if q else False
-    pos = 0
-    for seg in parts:
-        i = body_flat.find(seg, pos)
-        if i < 0:
-            return False
-        pos = i + len(seg)          # ★ 次序：下一段必须在上一段之后
-    return True
+    """引文在不在这份语料里。★ 剥粗体、校勘括号两读、按省略号分段、**分段必须保持先后次序**。"""
+    for var in _variants(quote):
+        q = flat(var)
+        parts = [x for x in _ELLIPSIS.split(q) if len(x) >= 8]
+        if not parts:
+            if q and q in body_flat:
+                return True
+            continue
+        pos, ok = 0, True
+        for seg in parts:
+            i = body_flat.find(seg, pos)
+            if i < 0:
+                ok = False
+                break
+            pos = i + len(seg)          # ★ 次序：下一段必须在上一段之后
+        if ok:
+            return True
+    return False
 
 
 def load_sources(ws: pathlib.Path) -> list[dict]:
@@ -244,6 +270,12 @@ def self_test() -> int:
         not contains_quote(Bf, "to the data … this method"))
     chk("⑩ ★ 标识符不算引文（Blackwell 的 `sp-1267-misc--notes-3-3-1830-…`）",
         not looks_like_quote("sp-1267-misc--notes-3-3-1830-年少年习作本"))
+    chk("⑫ ★★ **校勘方括号**：`collate[ral assistance]` 要能对上语料里的 `collateral assistance`",
+        contains_quote(flat("but as a collateral assistance by which"), "as a collate[ral assistance] by which"))
+    chk("⑬ ★ 另一读法：括号里是编者说明时，去掉括号也要能对上",
+        contains_quote(flat("the paste should be changed daily and then"), "the paste should be changed daily [see note] and then"))
+    chk("⑭ ★★ **而括号两读不许把别份认成这份**——不相干的语料仍要判不命中",
+        not contains_quote(flat("something entirely different here"), "as a collate[ral assistance] by which"))
     chk("⑪ ★★ **而普通英文引文必须仍算引文**——第一版把空格去掉再判，"
         "结果任何不带标点的引文都被当成标识符排除，自测全红",
         looks_like_quote("this method cannot be applied to the data"))
