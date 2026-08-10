@@ -2699,6 +2699,52 @@ def run_claim_source_independence(report, target: Path) -> None:
     report.metrics['claim_source_independence'] = info
 
 
+def run_title_is_not_filename(report, target: Path) -> None:
+    """台账的 `title` 是真书目题名，还是文件名的副本？（v0.0.0.-新增）
+
+    ★★★★ 撞出它的是 Jenner #104 那次撤回：我发明了一条判据去分「同一部作品」，
+    负对照打掉之后想找第二个证据源，才发现 **`title` 就是文件名**。
+    全库实测 **1,941 / 1,969 行（99%）** 如此，真书目题名只有 28 行。
+
+    **只报不拦。** 99% 的行是这样，做成硬门会让每个工作区当场全红——
+    而这不是某一次操作的错，是历史累积。**拦不解决问题，只会让人去关门。**
+    把数字打出来，让它每次跑都被看见。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_title_is_not_filename.py'
+    if not script.exists():
+        report.metrics['title_is_not_filename'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_titlefn', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+        led = target / 'evidence' / 'source-ledger.jsonl'
+        if not led.is_file():
+            report.metrics['title_is_not_filename'] = {'状态': '没有台账，**未核验**（不是通过）'}
+            return
+        rows = [json.loads(l) for l in led.read_text(encoding='utf-8').splitlines() if l.strip()]
+        info = module.analyse(rows)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['title_is_not_filename'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    n = info['**`title` 就是文件名**']
+    report.metrics['title_is_not_filename'] = {
+        '台账行数': info['台账行数'],
+        '**`title` 就是文件名**': n,
+        '真书目题名': info['`title` 是真书目题名'],
+        '比例': info['比例'],
+        '★': '**只报不拦**——全库 99% 如此；拦不解决问题，只会让人去关门',
+    }
+    if n:
+        report.warn(
+            'corpus.title-is-just-the-filename',
+            f'**{n}/{info["台账行数"]} 行的 `title` 就是文件名**（{info["比例"]:.0%}）——'
+            '这个字段没有承载信息。后果不是难看：判「两份是不是同一部作品」时'
+            '**除了内容重叠没有第二个证据源**，引文坐标与「挂到哪部作品」也全落在文件名上。'
+            '★ 与空值不同——**空值至少诚实，填成文件名的字段看起来是填过的**。')
+
+
 def run_translation_witness(report, target: Path) -> None:
     """同一部作品的多个译本**不许当两处独立证据**（v0.0.0.80）。
 
@@ -3663,6 +3709,7 @@ def main() -> int:
         train_ids = {record.get('source_id') for record in sources if record.get('split') == 'train'}
         evaluate_research(report, target, thresholds, train_ids, args.allow_provisional)
         run_translation_witness(report, target)
+        run_title_is_not_filename(report, target)
         cases: list[dict[str, Any]] = []
         if args.phase in {'synthesis', 'release'}:
             evaluate_claims(report, target, thresholds, sources, args.allow_provisional)
