@@ -102,7 +102,7 @@ def builder_readable_files(target) -> list:
       全库现算（18 个有研究道的工作区，65 份带该节）：
         · **53 份是空节**——与出厂模板逐字相同，走模板豁免，不算问题；
         · **12 份非空**，其中
-            - **Mendel #125 的 3 份把 holdout 的书名直接写了出来**
+            - **Mendel #125 的 3 份把 holdout 的书名直接写了出来**（16 处）
               （`Focke 1881《Die Pflanzen-Mischlinge》、Bateson`）；
             - Carver #127 的 3 份写了件数与所在道（「本道有 3 件 holdout」）；
             - Roberts-Austen #135 的 6 份只写「本轮未提名」，**不泄任何东西**。
@@ -112,14 +112,21 @@ def builder_readable_files(target) -> list:
 
         | 泄的信息 | 谁 | 原文 |
         |---|---|---|
-        | **作品名／主题** | Mendel、**Pasteur**、**Rosenhain** | Pasteur：`其英译本《Louis Pasteur, his life and labours》留作 holdout`；Rosenhain：`1910 年论轻合金（holdout，此处连 source_id 都不写）` |
-        | 只有件数 | Blackwell 6、Carver 3、Koch 1、Lister 1 | 「holdout 的 6 份**不列在此**」 |
-        | 什么也没泄 | Roberts-Austen | 「（本轮未提名。）」 |
+        | **作品名／主题** | Mendel（16 处）、**Pasteur**（3）、**Rosenhain**（2） | Pasteur：`其英译本《Louis Pasteur, his life and labours》留作 holdout`；Rosenhain：`1910 年论轻合金（holdout，此处连 source_id 都不写）` |
+        | 只有件数 | Blackwell（6 处／件数 6）、Carver（7 处／件数 3）、Koch（1）、Lister（1） | 「holdout 的 6 份**不列在此**」 |
+        | 什么也没泄 | Roberts-Austen（2 处） | 「（本轮未提名。）」 |
 
         ★ Rosenhain 那条最说明问题：**同一段的下一行写着**
           「判据说得对：写下 id 本身就是引用，holdout 一旦在研究文档里露面就不再是盲的」——
           **我在写下这句话的同一处，把作品说了出来。**
           写「我不写 id」和「不泄漏」是两件事：**id 不是唯一的指针，标题也是。**
+
+        ★★★★ **这些处数本身我报错过一次**：并清单那天 `scan()` 里还留着旧的
+          「再加一遍研究道与 claims」三行，同一批文件进了两次，
+          **研究道那几类的处数全部虚高 2 倍**（我据此报过 Mendel 32／Carver 14／Blackwell 12）。
+          上表是修掉重复之后的真值。
+          ★ **分档结论没有因此改变**——分档是读原文得出的，不是按处数排的。
+            **这一次「先读命中再报率」把我从一个计数 bug 里捞了出来。**
         ★★ **所以本件不能只数处数**。处数多的可能是六份文档同一句样板（Blackwell），
           处数少的可能一句就点了名（Rosenhain 两行）。**报率之前先读命中。**
 
@@ -164,11 +171,17 @@ def scan(target: pathlib.Path) -> dict:
     rows = [json.loads(l) for l in led.read_text(encoding="utf-8").splitlines() if l.strip()]
     hold = [r for r in rows if r.get("split") == "holdout"]
 
+    # ★★★★ 2026-08-10：这里原本在 `builder_readable_files()` **之外又加了一遍**
+    #   研究道与 `claims.jsonl`。此前那两项不在清单里，所以补在这儿是对的；
+    #   而我当天把它们并进了 `builder_readable_files()`，**却忘了把这三行删掉**——
+    #   于是同一批文件进了两次，**那几类命中全部被数了两倍**。
+    #   ★ 后果不是「多打印几行」：我据此报出过 Mendel 32／Carver 14／Blackwell 12，
+    #     **真值是它们的一半**，而且这些数已经写进了提交信息与任务台账。
+    #   ★★ 抓到它的不是自测（自测只考正则与清单函数，不考 `scan()` 有没有重复喂），
+    #     是我回头读自己刚改过的那段代码。**「改了 A 处、忘了删 B 处」是加清单这类改动的固定形状。**
+    #   现在**只走一处真源**，谁该被扫由 `builder_readable_files()` 独家决定。
     files = builder_readable_files(target)
-    files += sorted((target / "references/research").glob("*.md"))
-    claims = target / "evidence/claims.jsonl"
-    if claims.is_file():
-        files.append(claims)
+    assert len(files) == len(set(files)), "同一个文件被喂了两次——**又是重复计数**"
 
     # ★★ 2026-08-07：**与出厂模板逐字相同的行要豁免，但必须报出豁免了几条。**
     #   首跑在 Whitworth 上报出 4 处，逐条读命中才发现是脚手架原文：
