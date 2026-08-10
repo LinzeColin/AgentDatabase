@@ -3807,8 +3807,13 @@ def run_longs_gate(report, target: Path) -> None:
         report.warn('corpus.longs-corruption',
                     f'**{len(problems)} 份语料的长 s 讹字率超过 {module.UNUSABLE:.0%}**——'
                     'esse→esfe、such→fuch，份数／分档／字数三样都是真的，所以既有的门都放行了；'
-                    '**从这些文件里取不出任何可核的逐字引文**。逐份见 '
-                    'metrics.longs_corruption。　' + problems[0])
+                    '**从这些文件里取不出任何可核的逐字引文**。'
+                    '★ 连带射程：`check_source_dedup` 对这些源的读数**不作数**——'
+                    '它读到的低值分不清「确实不同源」与「同源但字形认不出来」，'
+                    '**判重门对它们的沉默不构成「互相独立」的证据**'
+                    '（全库 245 对已声明同源实测中位 0.6709、低于门仅 1.6%，'
+                    '判据整体是好的；只有涉及本表这些源时它失去分辨力）。'
+                    '逐份见 metrics.longs_corruption。　' + problems[0])
 
 
 def run_quote_layer(report, target: Path) -> None:
