@@ -156,13 +156,22 @@ def longest_fragment(pq: str, texts) -> int:
 
 
 def load_corpus(ws: pathlib.Path) -> dict[str, str]:
+    """→ {相对 raw/ 的路径: 压平后的正文}。
+
+    ★★★★ **键必须是路径，不能是 basename。** 第一版用 `p.name`，于是
+    `raw/foo.txt` 与 `raw/src-XXXX/foo.txt` 撞成同一个键、**后读到的把前一个覆盖掉**。
+    全库实测（2026-08-10）：1856 个文件按 basename 去重后剩 1849，
+    冲突只出现在一个工作区、且那 7 组冲突内容全部相同——**这次侥幸没丢数据**。
+    但两份内容不同而重名时，判据会当作只有一份，**而它不会报错**。
+    """
     raw = ws / "raw"
     out: dict[str, str] = {}
     if not raw.is_dir():
         return out
     for p in raw.rglob("*"):
         if p.is_file():
-            out[p.name] = re.sub(r"\s+", " ", p.read_text(encoding="utf-8", errors="replace"))
+            out[str(p.relative_to(raw))] = re.sub(
+                r"\s+", " ", p.read_text(encoding="utf-8", errors="replace"))
     return out
 
 
@@ -171,12 +180,14 @@ def resolve(ledger: dict, corpus: dict[str, str], sid: str) -> tuple[str | None,
     if not rec:
         return None, None
     name = pathlib.Path(rec.get("local_path") or "").name
-    if name and name in corpus:
-        return name, corpus[name]
+    # ★ 键换成相对路径之后，这里要按**路径末段**匹配，不能再直接查 basename。
+    for k in corpus:
+        if pathlib.Path(k).name == name:
+            return k, corpus[k]
     stem = pathlib.Path(rec.get("local_path") or "").stem[:30]
     if stem:
         for k in corpus:
-            if k.startswith(stem):
+            if pathlib.Path(k).name.startswith(stem):
                 return k, corpus[k]
     return None, None
 
@@ -267,6 +278,7 @@ SELF_TESTS = """正例：引文出自它引的那份源 → 不报
 反例⑦：「」/ 弯引号 / «» / ‹› 四种非反引号形态各挂错一次 → **四种都要抓**
         （**只认反引号的第一版在这四条上全部静默报绿**）
 反例⑧：同一部作品的另一版（同组）→ 判「版本差」，**不许**判成「挂错作品」
+反例⑨：**同名不同目录、内容不同** → 两份都要被看见（键用 basename 会静默覆盖）
         （拿「片段占比 ≥40%」当分类依据的那一版在 Osler 真数据上分错，占比低是 OCR 烂）"""
 
 
@@ -377,6 +389,27 @@ def self_test() -> int:
                 "source_ids": ["src-missing"]})
         chk("取不到正文的源要计数", scan(ws)["取不到正文的源"], 1)
 
+        # ★★★★ 反例⑨：**同名不同目录、内容不同** —— 两份都要被看见。
+        #   第一版用 `p.name` 当键，后读到的会把前一个**静默覆盖掉**。
+        (ws / "raw" / "sub").mkdir(exist_ok=True)
+        uniq2 = "a completely separate sentence found only in the nested copy here"
+        (ws / "raw" / "sub" / "paper.txt").write_text(uniq2, encoding="utf-8")
+        chk("反例⑨：同名不同目录，两份都要看见",
+            len(load_corpus(ws)), 4)
+        (ws / "evidence" / "source-ledger.jsonl").write_text("\n".join(json.dumps(r) for r in [
+            {"source_id": "src-paper", "local_path": "raw/paper.txt"},
+            {"source_id": "src-book", "local_path": "raw/book.txt"},
+            {"source_id": "src-other", "local_path": "raw/other.txt"},
+            {"source_id": "src-nested", "local_path": "raw/sub/paper.txt"},
+        ]), encoding="utf-8")
+        claims({"claim_id": "clm-11", "claim": f"他写过 `{uniq2}`",
+                "source_ids": ["src-other"]})
+        r = scan(ws)
+        chk("反例⑨：嵌套那份里的句子也找得到（否则说明它被覆盖了）",
+            len(r["错挂"]), 1)
+        (ws / "raw" / "sub" / "paper.txt").unlink()
+        (ws / "raw" / "sub").rmdir()
+
         # ★★★★ 反例⑦：**只认反引号的那一版会在这里静默报绿。**
         #   四类引号形态（「」/ "" / «» / ‹›）逐一挂到不含它的源上，都必须报出。
         for tag, (lq, rq) in {"「」": ("「", "」"), "英文弯引号": ("“", "”"),
@@ -388,7 +421,7 @@ def self_test() -> int:
     print(SELF_TESTS)
     for b in bad:
         print("  ✗", b)
-    print(("  ✗ 自测 %d 条不过" % len(bad)) if bad else "  ✓ 自测全过（正例 3、反例 13）")
+    print(("  ✗ 自测 %d 条不过" % len(bad)) if bad else "  ✓ 自测全过（正例 3、反例 15）")
     return 1 if bad else 0
 
 
