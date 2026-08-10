@@ -1558,9 +1558,34 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
         report.metrics['checker_census'] = census
 
     review: dict[str, str] = {}
+    # ★★★★ v0.0.0.155：**没给 --cache 时自动用 `<target>/raw`**。
+    #   本文件里另外三处早就这么做了（run_corpus_text_checks 1069 行、
+    #   report_verbatim_quotes 1825 行、run_holdout_overlap 3199 行），
+    #   **只有管内容层的这一处没有** —— 于是：
+    #     · `package_target.py` 跑的是 `quality_check --phase release --strict`，**不带 --cache**；
+    #     · 「未做」只写进 review 说明，**不算 warning**，所以 `--strict` 也咬不住；
+    #     · 结果 `passed=True / errors=0 / warnings=0` —— **装饰性引用与伪造引文
+    #       从来没有在任何一次打包里被查过**。
+    #   2026-08-11 干净检出演练实测（Shewhart #165，昨天刚入库的第 102 个产物）：
+    #     无 cache + strict → passed=True  errors=0
+    #     有 cache + strict → **passed=False errors=1**（`content.decorative-citation`）
+    #   ★ 这不是放宽判据，是把一个函数改成和它三个兄弟一致；
+    #     判据本身一直是好的，**缺的是调用方给它输入**。
     if not cache_dirs:
-        review['corpus'] = '未提供 --cache，装饰性引用与伪造引文两项**未做**（不是通过）'
-    else:
+        _auto = target / 'raw'
+        if _auto.is_dir() and any(p.is_file() for p in _auto.rglob('*')):
+            cache_dirs = [str(_auto)]
+            review['corpus_cache'] = (
+                '未给 --cache，**自动使用 `%s`**（与本文件另外三处一致）' % _auto.name)
+    if not cache_dirs:
+        # ★ 语料目录真的不在标准位置时，「未做」必须有牙齿：记成 warning，
+        #   这样 `--strict`（打包走的就是 strict）会拦下来，而不是静默放行。
+        review['corpus'] = (
+            '没有 `--cache`，`<工作区>/raw` 也不存在或为空——'
+            '装饰性引用与伪造引文两项**未做（不是通过）**')
+        report.warn('content.corpus-unavailable',
+                    '内容层未核：既没给 --cache，工作区里也没有 raw/ 语料')
+    if cache_dirs:
         code, out = run('check_claim_coverage.py',
                         ['--workspace', str(target), '--cache', *cache_dirs])
         if code == -1:

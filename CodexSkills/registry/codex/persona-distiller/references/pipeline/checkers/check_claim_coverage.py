@@ -194,7 +194,37 @@ def self_test() -> int:
         print(f"  {'✓' if not got_empty else '✗'} 空目录读到 0 份，不凭空命中（反向对照）")
         fail += bool(got_empty)
 
-    print("  ✓ 负对照通过（8/8）" if not fail
+    # ── v0.0.0.155 新增：**著录实体认台账**这条路径的正反对照 ──────────
+    #   Shewhart #165 实测：断言写「BSTJ 1926 逐字：…」，而 BSTJ 那篇文章的正文里
+    #   `BSTJ` 与 `1926` 各 0 次（`Bell System` 4 次）——著录信息在台账，不在正文。
+    #   ★ 只有反例红不算数：⑨ 必须绿、⑩⑪ 必须红，否则「认台账」就成了万能通行证。
+    BODY_BSTJ = ("The reason for trying to find assignable causes of variation is "
+                 "economic. Bell System engineers observed that ...")
+    META_OK = "1926 BSTJ 5(4) 593-603"
+    CLAIM_CITE = "**他给出的理由是经济理由。** BSTJ 1926 逐字：「The reason for trying」"
+
+    t_cite = key_terms(CLAIM_CITE)
+    body_hit = {t for t in t_cite if t in BODY_BSTJ}
+    meta_hit = {t for t in t_cite if t not in BODY_BSTJ and t in META_OK}
+    ok9 = ("1926" in meta_hit and "BSTJ" in meta_hit
+           and "1926" not in body_hit and "BSTJ" not in body_hit)
+    print(f"  {'✓' if ok9 else '✗'} ⑨ 著录实体（BSTJ/1926）正文里没有、台账里有 → "
+          f"算命中但**单列**（body={sorted(body_hit)} meta={sorted(meta_hit)}）")
+    fail += not ok9
+
+    META_WRONGYEAR = "1931 BSTJ 5(4) 593-603"
+    bad10 = {t for t in t_cite if t not in BODY_BSTJ and t in META_WRONGYEAR}
+    ok10 = "1926" not in bad10
+    print(f"  {'✓' if ok10 else '✗'} ⑩ 台账年份写成 1931 → 断言里的 1926 仍**不**命中（红）")
+    fail += not ok10
+
+    META_WRONGJRNL = "1926 JASA 21(153) 65-72"
+    bad11 = {t for t in t_cite if t not in BODY_BSTJ and t in META_WRONGJRNL}
+    ok11 = "BSTJ" not in bad11
+    print(f"  {'✓' if ok11 else '✗'} ⑪ 台账刊名写成 JASA → 断言里的 BSTJ 仍**不**命中（红）")
+    fail += not ok11
+
+    print("  ✓ 负对照通过（11/11）" if not fail
           else f"  ✗ {fail} 项未过——本检查器已失效，其「通过」不构成证据")
     return fail
 
@@ -231,6 +261,7 @@ def main() -> int:
 
     claims = [json.loads(l) for l in (W / "evidence/claims.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
     decorative, weak, corpus_meta, unverifiable = [], [], [], []
+    meta_backed = []   # 仅靠台账著录（published_at / locator）命中的，正文里没有
     quote_checked = 0
     for c in claims:
         claim_txt = c.get("claim", "")
@@ -264,15 +295,37 @@ def main() -> int:
             unverifiable.append((c["claim_id"], claim_txt[:64]))
             continue
         hit: set[str] = set()
+        meta_only: set[str] = set()
         for sid in c.get("source_ids", []):
             r = led.get(sid, {})
             body = texts.get(r.get("checksum", ""), "") + " " + str(r.get("title", ""))
             hit |= {t for t in terms if t in body}
+            # ★★★★ v0.0.0.155：**著录实体也要认台账**。
+            #   2026-08-11 Shewhart #165 实测：断言写「BSTJ 1926 逐字：…」，
+            #   而源 `src-f3562c1704fe` 的正文（`bstj5-4-593_djvu.txt`，25,183 字符）里
+            #   `1926` **0 次**、`BSTJ` **0 次**（`Bell System` 倒有 4 次）——
+            #   **期刊缩写与出版年本来就不印在文章正文里，它们在台账里。**
+            #   台账记的正是 published_at=1926 / locator=`BSTJ 5(4) 593–603`，
+            #   来源完全正确，而这条命中**永远变不绿**
+            #   （`a-red-that-can-never-turn-green-is-not-a-signal`）。
+            #   ★ 这不是放宽：写错年份（1931）或写错刊名仍然红，见自测 ⑦⑧。
+            #   ★★ 且**不混进正文命中**——单列一节「仅靠台账著录命中」，
+            #     免得「查过正文」和「只对上了著录」被读成同一件事。
+            meta = " ".join(str(r.get(k, "")) for k in ("published_at", "locator"))
+            meta_only |= {t for t in terms if t not in body and t in meta}
+        if meta_only:
+            meta_backed.append((c["claim_id"], c.get("category"), sorted(meta_only)[:6]))
+        hit |= meta_only
         ratio = len(hit) / len(terms)
         if not hit:
             decorative.append((c["claim_id"], c.get("category"), sorted(terms)[:8], c["claim"][:64]))
         elif ratio < args.min_hit:
             weak.append((c["claim_id"], c.get("category"), round(ratio, 2), sorted(terms - hit)[:6]))
+
+    if meta_backed:
+        print(f"\n── 仅靠台账著录命中（正文里没有，**不等于正文核过**）: {len(meta_backed)} ──")
+        for cid, cat, terms in meta_backed[:10]:
+            print(f"  · {cid} [{cat}] {terms}　←　期刊缩写/出版年本就不印在文章正文里")
 
     print(f"\n══ 装饰性引用（关键实体一个都没在被引来源里出现）: {len(decorative)}/{len(claims)} ══")
     for cid, cat, terms, txt in decorative:
