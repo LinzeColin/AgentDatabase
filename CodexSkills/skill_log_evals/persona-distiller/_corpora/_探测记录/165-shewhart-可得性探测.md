@@ -241,6 +241,9 @@ MacTutor 的传记**明确不给姓氏来源**。→ **改记为未核实。**
 
 逐份剥标记后自己算的实词数（**没有采信子代理的自报**）：
 
+> ★★★ **下面这张表已作废，两处都错。** 保留原样，改正见本节末「复核」。
+
+
 | 文件 | 实词 | 页 | 词/页 |
 |---|---:|---:|---:|
 | `bstj3-1-43`（1924） | 14,835 | 45 | 330 |
@@ -278,3 +281,91 @@ of a quantity while it is being subjected to measurement」——**那正是「�
 - 但若有人按「承载方法」的口径复核，会得到 7，**与「零余量」的说法叠加就是差一份**。
 
 **两个数都记着，不选一个报。**（`counts-need-their-cutoff-stated`）
+
+
+---
+
+## ★★★ 复核：上面那张表**两处都错**，抓源代理的清单把我改过来了
+
+### 错一：**我把别人的文章算进了他名下**
+
+`84021`（1922 PNAS）我报 1,776 词。去数了署名行：
+
+```
+L 33 | ON THE MEASUREMENT OF A PHYSICAL QUANTITY WHOSE
+L 45 | By W. a. Shbwhart          ← OCR 讹字，实为 Shewhart
+L216 | ELECTRONIC BOMBARDMENT OF NICKEL
+L218 | By H. E. Farnsworth        ← ★ 另一位作者的文章，同一个扫描件里
+```
+
+| 段 | 实词 |
+|---|---:|
+| JSTOR 前言（L0–32） | 184 |
+| **Shewhart 正文（L33–215）** | **1,454** |
+| Farnsworth《镍的电子轰击》（L216–） | **254** |
+| 整份 | 1,892 |
+
+**我报的 1,776 是「整份」那一档。** 抓源代理先发现并剥出了
+`84021_shewhart_only.txt`；我按自己找的边界独立切了一次，
+**Farnsworth 那 254 词两边算出同一个数**，Shewhart 段两边差 8 词（切分点在题名行的归属上）。
+
+→ 入库用剥好的那份。**同族教训：`related-to-him-is-not-written-by-him`——
+这一次不是台账分档写错，是一个扫描件里物理上就有两个人的文章。**
+
+### 错二：**我报的词数没有写口径，而口径能改 15–20%**
+
+| 定义 | 规则 | bstj3-1-43 |
+|---|---|---:|
+| **A（代理用的，正确的那个）** | 空白切分，token 含 ≥1 个 ASCII 字母 | **15,738** |
+| B（我上一轮用的） | token 须匹配 `^[A-Za-z][A-Za-z'-]+$` | 13,287 |
+
+差 15.6%，七份全体差 14.5%–20.1%，**方向一致**。
+B 滤掉的是 `Fig.`、`No.`、`Table`、单字母变量——**而这是统计论文，滤掉的正是它的正文**。
+用 A。
+
+### 修正后的八份（定义 A）
+
+| # | 篇目 | 年 | 实词 |
+|---|---|---|---:|
+| 1 | Some Applications of Statistical Methods… BSTJ 3(1) | 1924 | 15,738 |
+| 2 | Correction of Data for Errors of Measurement BSTJ 5(1) | 1926 | 4,406 |
+| 3 | …Errors of Averages… BSTJ 5(2) | 1926 | 3,201 |
+| 4 | Quality Control Charts BSTJ 5(4) | 1926 | 3,623 |
+| 5 | Quality Control BSTJ 6(4) | 1927 | 4,647 |
+| 6 | Economic Quality Control… BSTJ 9(2) | 1930 | 7,808 |
+| 7 | 1914 硕士论文 | 1914 | 6,284 |
+| 8 | **1922 PNAS（已剥出 Shewhart 段）** | 1922 | **1,454** |
+
+**八份他本人正文合计 47,161 词**（我上一轮的「合计」里含 254 词不是他的）。
+
+---
+
+## ★★ 抓源代理自己报的两条「没核实」，照录不改
+
+### ㈠ 「页面标了 Public Domain」——**没能证实，证据指向相反**
+
+8 个 details 页搜 `public domain`（忽略大小写）**命中 0**。
+分母给了：该页 211,587 bytes，其余 197K–227K，均服务端渲染
+（同份 HTML 里搜得到 `Publication date` 等字段，说明搜得见）。
+8 份 metadata **没有任何** `licenseurl` / `rights` / `possible-copyright-status`；
+`publicdate` 是 archive.org **上传日期**，不是权利声明。
+JSTOR 前言写的是 `Free to Anyone in the World` 与
+`redistribute in any way for non-commercial purposes`
+——**那是再分发许可，且「非商业」这个限制本身就与公有领域不相容**。
+
+→ **本人物的 PD 依据只能是出版年**：8 份均美国出版、年份 ≤1930，
+按 95 年期、2026 年分界 1931，故均已进入美国公有领域。
+**这是从已核实年份做的法律推断，页面上没有一处这样写。**
+（同族：`aggregator-license-is-not-a-rights-claim`、`permissive-license-is-not-public-release`）
+
+### ㈡ 同名护栏**本轮没有被真正测试过**
+
+8 个标识符是探测简报直接给定的，抓源全程**没走检索路径**，
+不存在按姓名召回，也就谈不上挡住了 Andrew T./Lauren Shewhart、Shuchart、Schuchardt。
+**不能把这一轮记作那两条纪律的验证通过。**
+已做的是逐份他人署名扫描（`By …` 非 Shewhart）：7 份命中 0，
+**第 8 份命中 Farnsworth 一处并剥除**（即上面「错一」）。
+`Shewhart chart/cycle/Medal` 三个后世术语八份全 0。
+
+→ 记进 `test-the-guard-against-this-persons-namesake`：
+**给定标识符的抓源，等于把同名护栏整个绕过去了**；护栏只在检索路径上生效。
