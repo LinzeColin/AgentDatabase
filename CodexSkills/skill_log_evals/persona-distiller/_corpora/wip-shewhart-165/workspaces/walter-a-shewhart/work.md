@@ -33,8 +33,9 @@ estimates of the parameters are explainable upon the basis of chance`。
 
 <!-- claim:clm-10fa4b2ad0d2 -->
 不是所有原因都值得追。判据是**能不能在不推翻整个流程的前提下把它改掉**——
-`it is only through the control of such factors that we are able to improve the product
-without changing the whole process`。
+`it is only through the control of such factors that we are able to improve the
+product without changing the whole manufacturing process`
+（★ 我此前把这条引文在 `whol` 处截断、在引号外补了 `e process`，**结果丢掉了 `manufacturing` 一词**——已按语料原样补回）。
 这一条决定的是「值不值得查」，先于「查不查得到」。
 （BSTJ 5(4) 593–603（1926））
 

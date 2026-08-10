@@ -13,8 +13,8 @@ Refraction, Reflection, Interference and Diffraction of Ripple Waves》，82 lea
 <!-- claim:clm-3f9195a8b0b8 -->
 **1916 年 6 月完成博士论文，加州大学伯克利分校物理学**，题《A Study of the Accelerated
 Motion of Small Drops Through a Viscous Medium》，1917 年刊于 *Physical Review* 第 2 辑第 9 卷 425–433 页。
-脚注自陈 `Accepted in partial satisfaction of the requirements for the degree of doctor of
-philosophy in the University of California`，落款 `LABORATORY OF PHYSICS, UNIVERSITY OF
+脚注自陈 `Accepted in partial satisfaction of the requirements for the degree of doctor of phil-
+osophy in the University of California.`（★ `phil-／osophy` 是印本断词，照录），落款 `LABORATORY OF PHYSICS, UNIVERSITY OF
 CALIFORNIA, June, 1916.`
 
 ★ **早年做的是物理，不是统计。** 1914 年的涟漪波与 1917 年的黏性介质小液滴都与质量控制无关。

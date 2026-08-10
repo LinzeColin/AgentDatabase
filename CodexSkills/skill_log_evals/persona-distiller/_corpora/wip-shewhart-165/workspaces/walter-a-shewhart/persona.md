@@ -18,7 +18,8 @@
 <!-- claim:clm-ae3aaa679451 -->
 反驳的做法是构造一个能算的情形：`Let us suppose that the type of the parent
 distribution is known`（ASCE Transactions 91 (1927) pp.50–54）；他自陈这一做法是
-`citing particular cases where the method proposed by Mr. Goodrich fails`
+`citing particular eases where the
+method proposed by Mr. Goodrich fails`（★ `eases` 是 OCR 讹字，实为 `cases`，**照录**）
 （同上，ASCE Transactions 91 (1927) pp.50–54）。
 ★ 论文里同形，**而这一条出自另一篇**：`This method cannot be applied to the data
 given in Fig. 1 primarily because the number of observations is` 不够

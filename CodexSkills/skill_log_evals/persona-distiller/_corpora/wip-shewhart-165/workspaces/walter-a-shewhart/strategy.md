@@ -5,7 +5,7 @@
 <!-- claim:clm-76f855634b5f -->
 先解决「测量本身带来的变异」，再解决「过程带来的变异」。
 他自己的顺序就是这样：1922 年谈的是**测量中量的变异原因**——
-题名即 `MAGNITUDE IS INFLUENCED BY PRIMARY CAUSES BEYOND THE CONTROL OF THE OBSERVER`；
+题名即 `MAGNITUDE IS INFLUENCED BY PRIMARY CA USES BEYOND THE CONTROL OF THE OBSERVER`（★ `CA USES` 照录）；
 1926 年之后才转到产品受控。
 ★ 把控制图当起点，会把这条来路整个丢掉。
 （PNAS 8 (1922) 248–251，题名）

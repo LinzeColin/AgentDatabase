@@ -7,7 +7,7 @@
 眼前这些波动，能不能用一个偶然原因系统解释？
 
 ★ 这条分界比控制图早：1922 年在学院宣读的短文题名即
-`MAGNITUDE IS INFLUENCED BY PRIMARY CAUSES BEYOND THE CONTROL OF THE OBSERVER`，
+`MAGNITUDE IS INFLUENCED BY PRIMARY CA USES BEYOND THE CONTROL OF THE OBSERVER`（★ `CA USES` 是印本 OCR 的原样，**照录不改**），
 正文写 `the causes of variation of a quantity while it is being subjected to measurement`。
 控制图是它 1926 年之后的一个应用，不是起点。
 （PNAS 8 (1922) 248–251，题名）
