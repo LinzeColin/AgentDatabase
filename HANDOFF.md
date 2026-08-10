@@ -558,9 +558,24 @@ cd ~/Documents/Codex/GithubProject/AgentDatabase && git pull
 | 待推送提交 | **1027**（2026-08-11 实测；★ 每提交一次就变，**要报就当场跑** `git rev-list --count origin/main..HEAD`） |
 | 仓内 pack | **835.94 MiB** |
 | 已跟踪的语料文件 | **9,578** |
-| **最大的单个已跟踪文件** | **18.1 MB**（`probe-adams-131/raw/whoswho1922_djvu.txt`） |
+| 人物蒸馏语料里最大的文件 | **18.1 MiB**（`probe-adams-131/raw/whoswho1922_djvu.txt`） |
+| ★ **全仓最大的已跟踪文件** | **83.5 MiB**（`OpenAIDatabase/data/derived/behavior_intelligence/recurring_prompts/occurrences.jsonl`） |
+| 超过 100 MiB 硬上限的 | **0 个** |
+| 落在 50–100 MiB（GitHub 会警告）的 | **1 个**（就是上面那个） |
 
-★ **没有文件超过 GitHub 的 100 MB 硬上限**，所以不会因为单文件被整推拒掉。
+★ **没有文件超过 GitHub 的 100 MiB 硬上限**，所以不会因为单文件被整推拒掉。
+★★ **但余量只有 16.5 MiB，而且在最会长的那个文件上。**
+`occurrences.jsonl` 是**派生数据**（`data/derived/`），会随会话累积增长；
+它一旦越过 100 MiB，**整次推送会被拒绝**，而不是只拒这一个文件。
+**移交当晚推之前先量一遍**：
+
+```bash
+git -c core.quotepath=false ls-files -z | xargs -0 -I{} stat -f "%z	{}" {} | sort -rn | head -3
+```
+
+★★★ 2026-08-11 订正：这一节原本只写「最大 18.1 MB」，**那是人物蒸馏语料的口径**，
+读起来却像全仓口径——**把真实风险少报了 4.6 倍**。
+给数就要连口径一起给（`counts-need-their-cutoff-stated`）。
 
 ★★★★ **`git push --dry-run` 2026-08-10 实跑通过**（联了服务器，只是不更新 ref）：
 
