@@ -826,8 +826,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_source_dedup.py",
-      "sha256": "6d7281f82774a3fe74df05a4ca06e521c512c98a09b4baa2b6baa0ffbb69d871",
-      "size_bytes": 25662
+      "sha256": "3d2857646bf053afb6b20c7071d0d400dcd53b9574e8a197c7f017ba35691bf2",
+      "size_bytes": 30369
     },
     {
       "path": "references/pipeline/checkers/check_source_header_quotes.py",
@@ -1581,8 +1581,8 @@
     },
     {
       "path": "scripts/check_source_dedup.py",
-      "sha256": "6d7281f82774a3fe74df05a4ca06e521c512c98a09b4baa2b6baa0ffbb69d871",
-      "size_bytes": 25662
+      "sha256": "3d2857646bf053afb6b20c7071d0d400dcd53b9574e8a197c7f017ba35691bf2",
+      "size_bytes": 30369
     },
     {
       "path": "scripts/check_source_header_quotes.py",

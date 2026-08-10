@@ -246,10 +246,43 @@ def analyse(records: list, texts: dict, threshold: float = DEFAULT_THRESHOLD) ->
 
     comps = components(ids, dup_pairs)
     distinct = len(comps)
+
+    # ★★ v0.0.0.131：**声明也要并进作品数**。
+    #   本件的报错文案自己写着「这道门量的是**有几处独立证据**」，
+    #   而人已声明为同一部作品的份**不是独立证据**——可 `distinct_works`
+    #   此前只认实测重叠。Grotius #168 把 DJBP 七份声明成一部之后，
+    #   它仍报「21 份 → 21 部作品，虚高 1.0×」。
+    #
+    #   ★ 为什么必须靠声明：那七份 **21 对逐对比较全部低于门**，一条都看不见——
+    #     跨语种 0.0000／长 s 坏本 0.0033–0.0050／分卷 0.0001–0.0028／
+    #     两个英译 0.0003；最接近的「同版两半」0.2916 **差门 0.84 个百分点**。
+    #     每个低值本身都是对的：**「同一部作品」≠「同样的文本」。**
+    #
+    #   ★ 射程实测（全库 23 个工作区）：声明**额外**合并 **7 个作品、2 个工作区**，
+    #     其中 6 个就是上面那族。**没有任何人因此翻号**（Grotius 15 ≥ 门 8）。
+    #     ——第一次量成 179／16 个工作区，那是把「现算」写成了不带实测对的
+    #     `components(ids, [])`，**放大 25.6 倍**；实测见
+    #     `_ledgers/_判重分辨力全库实测-2026-08-11.md`。
+    #
+    #   两个数都留着：`distinct_works` 仍是**纯内容**口径（下游若只认它，行为不变），
+    #   `distinct_works_declared` 是**内容 ∪ 声明**，那才是「有几处独立证据」。
+    _decl_pairs = [(a, b, 1.0, True) for a, b in itertools.combinations(ids, 2)
+                   if (b in declared[a]) or (a in declared[b]) or (
+                       _decl_group.get(a, a) == _decl_group.get(b, b))]
+    comps_d = components(ids, dup_pairs + _decl_pairs)
+    distinct_d = len(comps_d)
+
     out = {
         "usable": len(ids),
         "distinct_works": distinct,
         "inflation": round(len(ids) / distinct, 3) if distinct else None,
+        "distinct_works_declared": distinct_d,
+        "inflation_declared": round(len(ids) / distinct_d, 3) if distinct_d else None,
+        "★ 两个作品数的区别": (
+            "`distinct_works` 只认实测重叠；`distinct_works_declared` 把 "
+            "`derived_from` 声明也并进去。**后者才是「有几处独立证据」**——"
+            "同一部作品的跨语种译本、分卷、坏 OCR 本，逐对重叠都在门下，"
+            "只有声明连得起来。"),
         "threshold": threshold,
         "**未声明的重复对**": undeclared,
         "已声明的重复对数": sum(1 for *_x, d in dup_pairs if d),
@@ -411,6 +444,46 @@ def self_test() -> int:
     a = shingles("the true plane is obtained by the mutual grinding of three surfaces " * 20)
     b = shingles("choice and chance an elementary treatise on permutations " * 20)
     chk(f"重叠 {containment(a, b):.4f} < 门槛", containment(a, b) < DEFAULT_THRESHOLD)
+
+    print("\n══ 声明并进作品数（v0.0.0.131）══")
+    #   真实形态：同一部作品的四份，**逐对重叠全部为 0**（跨语种／坏 OCR／分卷），
+    #   只有 derived_from 连得起来。取自 Grotius #168 的 DJBP 七份。
+    def _mk(sid, txt, dfrom=()):
+        return {"source_id": sid, "original_name": sid + ".txt", "split": "train",
+                "derived_from": list(dfrom)}, txt
+    WORDS = ["alpha beta gamma delta epsilon zeta eta theta iota kappa " * 6,
+             "unus duo tres quattuor quinque sex septem octo novem decem " * 6,
+             "one two three four five six seven eight nine ten " * 6,
+             "primus secundus tertius quartus quintus sextus septimus " * 6]
+    recs, txts = [], {}
+    for i, w in enumerate(WORDS):
+        others = ["w%d" % j for j in range(4) if j != i]
+        r, t = _mk("w%d" % i, w, others)
+        recs.append(r)
+        txts[r["source_id"]] = t
+    solo_r, solo_t = _mk("solo", "totally different words here nothing shared at all " * 6)
+    recs.append(solo_r)
+    txts["solo"] = solo_t
+
+    res = analyse(recs, txts)
+    pairwise_max = max(containment(shingles(txts[a]), shingles(txts[b]))
+                       for a, b in itertools.combinations(list(txts), 2))
+    chk(f"夹具的逐对重叠最高只有 {pairwise_max:.4f} < 门槛"
+        "（**门自己一对都看不见**，与真实形态一致）", pairwise_max < DEFAULT_THRESHOLD)
+    chk(f"纯内容口径 distinct_works = {res['distinct_works']}（5 份各自为政）",
+        res["distinct_works"] == 5)
+    chk(f"★ 并入声明后 distinct_works_declared = {res['distinct_works_declared']}"
+        "（四份并成一处 + solo）", res["distinct_works_declared"] == 2)
+    chk("★ **反对照**：没被声明的 solo **没有**被并进去",
+        any(len(g) == 1 for g in res["作品分组"]) and res["distinct_works_declared"] == 2)
+    chk("虚高倍数两个口径都给了",
+        res["inflation"] == 1.0 and res["inflation_declared"] == 2.5)
+
+    # 反对照 2：**去掉声明**则并不动——证明合并确实来自声明，不是别处
+    recs2 = [dict(r, derived_from=[]) for r in recs]
+    res2 = analyse(recs2, txts)
+    chk("★ **反对照**：删掉 derived_from 后 declared 口径退回 %d（合并确实来自声明）"
+        % res2["distinct_works_declared"], res2["distinct_works_declared"] == 5)
 
     print("\n── 反向对照：短到分不出词片时，报「看不见」而不是「没重复」 ──")
     r = analyse([{"source_id": "s1", "original_name": "tiny.txt"},
