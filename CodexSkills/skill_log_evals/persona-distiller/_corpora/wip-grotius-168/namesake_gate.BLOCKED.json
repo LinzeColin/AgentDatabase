@@ -1,0 +1,321 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Hugo Grotius；historical；法学家、外交官、神学家、史家。\n   专业背景：1583-04-10 – 1645-08-28。荷兰共和国法学家。Mare Liberum (1609)、De Jure Belli ac Pacis (1625)、De Veritate Religionis Christianae (1627)。GND 职业字段：Jurist / Historiker / Politiker / Theologe。。\n   应用价值：场景：国际法与自然法的原则推演；跨主权争端中的规范论证；以文本证据支撑的法理写作；关键能力：从第一原理推出可操作规则；把神学、法学、史料并置为一条论证；为具体海洋/战争争端给出可援引的判准。\n   区分依据：Wikidata Q154959 ∧ LCCN n78087113（标目含生卒 1583-1645）∧ GND 118542702（b=1583-04-10 d=1645-08-28）三者互相印证；与下列全部同名者在生卒年上不重叠，或在职业/机构上可分。。",
+    "B. 人物与身份：Hugo de Groot；historical；目标人物的祖父。\n   专业背景：1511 – 1567-04-12。★ 与目标人物**全名撞车**。。\n   应用价值：场景：不适用——本条只用于排除；关键能力：不适用——本条只用于排除。\n   区分依据：Wikidata Q110557854；生卒 1511–1567，早于目标人物出生 72 年。**全名相同，只能靠生卒年分**。。",
+    "C. 人物与身份：Hugo de Groot；public；荷兰作曲家、指挥（VARA 广播乐团）。\n   专业背景：1897 – 1986。★ **全名与目标人物完全相同**，且 LOC 把他单列为与 n78087113 不同的规范档。。\n   应用价值：场景：不适用——本条只用于排除；关键能力：不适用——本条只用于排除。\n   区分依据：LCCN n98009764（标目 Groot, Hugo de）；20 世纪音乐人，与 17 世纪法学著作无交集。**姓名完全无法分辨，只能靠年代与领域**。。",
+    "D. 人物与身份：Willem de Groot；historical；法学家（目标人物之弟）。\n   专业背景：1597-02-10 – 1662-03-12。规范档拉丁名 Guilelmus Grotius / Wilhelmus Grotius / Guillaume Grotius，职业字段 Jurist。自著《De principiis juris naturalis enchiridion》题名页作 Auctore Guilielmo Grotio jcto Delphensi。。\n   应用价值：场景：不适用——本条只用于排除；关键能力：不适用——本条只用于排除。\n   区分依据：Wikidata Q33129643 ∧ LCCN n82127326 ∧ GND 128535741。★★ **代尔夫特 + 法学家 + Grotius + 自然法，四个特征与目标人物全撞**——只能靠首名（Guilelmus/Wilhelmus vs Hugo）与生卒年分。。",
+    "E. 人物与身份：Cornelis de Groot；historical；莱顿大学罗马法教授（目标人物之叔）。\n   专业背景：1544/46 – 1610-08-05。规范档拉丁名 Cornelius de Groot，职业字段 Jurist。出拉丁法学注疏。。\n   应用价值：场景：不适用——本条只用于排除；关键能力：不适用——本条只用于排除。\n   区分依据：Wikidata Q1133607 ∧ GND 1055674853。★★ **同姓、同拉丁形、同学科（罗马法）、同城（莱顿）、同时代**——按姓氏＋学科检索必然混入。。",
+    "F. 人物与身份：Jan Cornets de Groot；historical；政治家、法学家、市长（目标人物之父）。\n   专业背景：1554 – 1640。★ GND **首选名字面就是 Janus de Grotius**，职业字段含 Jurist。。\n   应用价值：场景：不适用——本条只用于排除；关键能力：不适用——本条只用于排除。\n   区分依据：Wikidata Q2596609 ∧ GND 1011712989。首选名带 Grotius 形，按拉丁姓检索必然命中。。",
+    "G. 人物与身份：Pieter de Groot；historical；外交官、法学家（目标人物之子）。\n   专业背景：1615-03-28 – 1678-06-02。规范档拉丁名 Petrus Grotius，职业字段 Diplomat; Jurist。。\n   应用价值：场景：不适用——本条只用于排除；关键能力：不适用——本条只用于排除。\n   区分依据：Wikidata Q2195847 ∧ LCCN n85053983 ∧ GND 121560252。同为 Grotius 形 + 法学家 + 外交官，与目标人物职业高度重叠。。",
+    "H. 人物与身份：Cornelis de Groot；historical；目标人物之子。\n   专业背景：1613-02-02 – 1665-10-15。规范档拉丁名 Cornelius Grotius。。\n   应用价值：场景：不适用——本条只用于排除；关键能力：不适用——本条只用于排除。\n   区分依据：Wikidata Q106806196 ∧ GND 136951589。★ 与叔父 Cornelis（1544–1610）**同名**，两人之间也需要靠生卒年分。。",
+    "I. 人物与身份：Grotius；public；笔名（1775 年美洲小册子署名）。\n   专业背景：《Pills for the delegates: or The chairman chastised》(1775) 的署名。LOC 来源注写明「t.p. (Grotius)」。独立战争前夕的笔名，真实身份未定。。\n   应用价值：场景：不适用——本条只用于排除；关键能力：不适用——本条只用于排除。\n   区分依据：LCCN nr90009650，光杆姓、无生卒。★ **按姓氏检索必然命中，且它没有生卒年可以用来排除**——只能靠出版年（1775）与语言（英语）分。。",
+    "J. 人物与身份：Willem de Groot (Leiden printer)；historical；莱顿大学印刷商（active 1728-1765）。\n   专业背景：1734 年任 university printer。变体名字面就是 Grotius, Gulielmus；题名页作 Lugduni Batavorum, Typis Wilhelmi de Groot。。\n   应用价值：场景：不适用——本条只用于排除；关键能力：不适用——本条只用于排除。\n   区分依据：LCCN no2021014070。★★ **与弟弟 Willem 同名同拉丁形**，且他的名字出现在 impressum（出版者）而非署名位——**抓源时必须区分「谁写的」与「谁印的」**。。",
+    "K. 人物与身份：Michiel de Groot；historical；书商、装订商（荷兰共和国）。\n   专业背景：1634 – 1680。17 世纪 impressum 里的 de Groot 多为出版者。。\n   应用价值：场景：不适用——本条只用于排除；关键能力：不适用——本条只用于排除。\n   区分依据：Wikidata Q110769507。同上：impressum 位置的 de Groot 是出版者不是作者。。",
+    "L. 人物与身份：Cornelis de Groot (b. 1961)；public；莱顿大学商法讲师。\n   专业背景：生于 1961。。\n   应用价值：场景：不适用——本条只用于排除；关键能力：不适用——本条只用于排除。\n   区分依据：LCCN no91013173。★ **与叔父同名 + 同学科（法）+ 同校（莱顿）**，跨四个世纪撞在同一组特征上。。"
+  ],
+  "candidate_count": 12,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "国际法与自然法的原则推演",
+        "跨主权争端中的规范论证",
+        "以文本证据支撑的法理写作"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q154959",
+          "note": "逐条实调"
+        },
+        {
+          "locator": "LCCN n78087113 — 标目 Grotius, Hugo, 1583-1645",
+          "note": "id.loc.gov 实调"
+        },
+        {
+          "locator": "GND 118542702",
+          "note": "hub.culturegraph.org/entityfacts 实调；变体名含 Hugo De Groot / Hugo DeGroot"
+        }
+      ],
+      "canonical_name": "Hugo Grotius",
+      "distinguishing_basis": "Wikidata Q154959 ∧ LCCN n78087113（标目含生卒 1583-1645）∧ GND 118542702（b=1583-04-10 d=1645-08-28）三者互相印证；与下列全部同名者在生卒年上不重叠，或在职业/机构上可分。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "从第一原理推出可操作规则",
+        "把神学、法学、史料并置为一条论证",
+        "为具体海洋/战争争端给出可援引的判准"
+      ],
+      "label": "A",
+      "occupation_or_role": "法学家、外交官、神学家、史家",
+      "professional_background": "1583-04-10 – 1645-08-28。荷兰共和国法学家。Mare Liberum (1609)、De Jure Belli ac Pacis (1625)、De Veritate Religionis Christianae (1627)。GND 职业字段：Jurist / Historiker / Politiker / Theologe。",
+      "subject_uid": "grotius-hugo-1583"
+    },
+    {
+      "application_scenarios": [
+        "不适用——本条只用于排除"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q110557854",
+          "note": "逐条实调"
+        }
+      ],
+      "canonical_name": "Hugo de Groot",
+      "distinguishing_basis": "Wikidata Q110557854；生卒 1511–1567，早于目标人物出生 72 年。**全名相同，只能靠生卒年分**。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "不适用——本条只用于排除"
+      ],
+      "label": "B",
+      "occupation_or_role": "目标人物的祖父",
+      "professional_background": "1511 – 1567-04-12。★ 与目标人物**全名撞车**。",
+      "subject_uid": "de-groot-hugo-1511"
+    },
+    {
+      "application_scenarios": [
+        "不适用——本条只用于排除"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "LCCN n98009764",
+          "note": "id.loc.gov 实调"
+        }
+      ],
+      "canonical_name": "Hugo de Groot",
+      "distinguishing_basis": "LCCN n98009764（标目 Groot, Hugo de）；20 世纪音乐人，与 17 世纪法学著作无交集。**姓名完全无法分辨，只能靠年代与领域**。",
+      "evidence_level": "high",
+      "identity_category": "public",
+      "key_capabilities": [
+        "不适用——本条只用于排除"
+      ],
+      "label": "C",
+      "occupation_or_role": "荷兰作曲家、指挥（VARA 广播乐团）",
+      "professional_background": "1897 – 1986。★ **全名与目标人物完全相同**，且 LOC 把他单列为与 n78087113 不同的规范档。",
+      "subject_uid": "de-groot-hugo-1897"
+    },
+    {
+      "application_scenarios": [
+        "不适用——本条只用于排除"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q33129643"
+        },
+        {
+          "locator": "LCCN n82127326"
+        },
+        {
+          "locator": "GND 128535741",
+          "note": "prof=Jurist"
+        }
+      ],
+      "canonical_name": "Willem de Groot",
+      "distinguishing_basis": "Wikidata Q33129643 ∧ LCCN n82127326 ∧ GND 128535741。★★ **代尔夫特 + 法学家 + Grotius + 自然法，四个特征与目标人物全撞**——只能靠首名（Guilelmus/Wilhelmus vs Hugo）与生卒年分。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "不适用——本条只用于排除"
+      ],
+      "label": "D",
+      "occupation_or_role": "法学家（目标人物之弟）",
+      "professional_background": "1597-02-10 – 1662-03-12。规范档拉丁名 Guilelmus Grotius / Wilhelmus Grotius / Guillaume Grotius，职业字段 Jurist。自著《De principiis juris naturalis enchiridion》题名页作 Auctore Guilielmo Grotio jcto Delphensi。",
+      "subject_uid": "de-groot-willem-1597"
+    },
+    {
+      "application_scenarios": [
+        "不适用——本条只用于排除"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q1133607"
+        },
+        {
+          "locator": "GND 1055674853",
+          "note": "prof=Jurist"
+        }
+      ],
+      "canonical_name": "Cornelis de Groot",
+      "distinguishing_basis": "Wikidata Q1133607 ∧ GND 1055674853。★★ **同姓、同拉丁形、同学科（罗马法）、同城（莱顿）、同时代**——按姓氏＋学科检索必然混入。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "不适用——本条只用于排除"
+      ],
+      "label": "E",
+      "occupation_or_role": "莱顿大学罗马法教授（目标人物之叔）",
+      "professional_background": "1544/46 – 1610-08-05。规范档拉丁名 Cornelius de Groot，职业字段 Jurist。出拉丁法学注疏。",
+      "subject_uid": "de-groot-cornelis-1544"
+    },
+    {
+      "application_scenarios": [
+        "不适用——本条只用于排除"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q2596609"
+        },
+        {
+          "locator": "GND 1011712989"
+        }
+      ],
+      "canonical_name": "Jan Cornets de Groot",
+      "distinguishing_basis": "Wikidata Q2596609 ∧ GND 1011712989。首选名带 Grotius 形，按拉丁姓检索必然命中。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "不适用——本条只用于排除"
+      ],
+      "label": "F",
+      "occupation_or_role": "政治家、法学家、市长（目标人物之父）",
+      "professional_background": "1554 – 1640。★ GND **首选名字面就是 Janus de Grotius**，职业字段含 Jurist。",
+      "subject_uid": "de-groot-jan-1554"
+    },
+    {
+      "application_scenarios": [
+        "不适用——本条只用于排除"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q2195847"
+        },
+        {
+          "locator": "LCCN n85053983"
+        },
+        {
+          "locator": "GND 121560252"
+        }
+      ],
+      "canonical_name": "Pieter de Groot",
+      "distinguishing_basis": "Wikidata Q2195847 ∧ LCCN n85053983 ∧ GND 121560252。同为 Grotius 形 + 法学家 + 外交官，与目标人物职业高度重叠。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "不适用——本条只用于排除"
+      ],
+      "label": "G",
+      "occupation_or_role": "外交官、法学家（目标人物之子）",
+      "professional_background": "1615-03-28 – 1678-06-02。规范档拉丁名 Petrus Grotius，职业字段 Diplomat; Jurist。",
+      "subject_uid": "de-groot-pieter-1615"
+    },
+    {
+      "application_scenarios": [
+        "不适用——本条只用于排除"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q106806196"
+        },
+        {
+          "locator": "GND 136951589"
+        }
+      ],
+      "canonical_name": "Cornelis de Groot",
+      "distinguishing_basis": "Wikidata Q106806196 ∧ GND 136951589。★ 与叔父 Cornelis（1544–1610）**同名**，两人之间也需要靠生卒年分。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "不适用——本条只用于排除"
+      ],
+      "label": "H",
+      "occupation_or_role": "目标人物之子",
+      "professional_background": "1613-02-02 – 1665-10-15。规范档拉丁名 Cornelius Grotius。",
+      "subject_uid": "de-groot-cornelis-1613"
+    },
+    {
+      "application_scenarios": [
+        "不适用——本条只用于排除"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "LCCN nr90009650",
+          "note": "id.loc.gov 实调"
+        }
+      ],
+      "canonical_name": "Grotius",
+      "distinguishing_basis": "LCCN nr90009650，光杆姓、无生卒。★ **按姓氏检索必然命中，且它没有生卒年可以用来排除**——只能靠出版年（1775）与语言（英语）分。",
+      "evidence_level": "high",
+      "identity_category": "public",
+      "key_capabilities": [
+        "不适用——本条只用于排除"
+      ],
+      "label": "I",
+      "occupation_or_role": "笔名（1775 年美洲小册子署名）",
+      "professional_background": "《Pills for the delegates: or The chairman chastised》(1775) 的署名。LOC 来源注写明「t.p. (Grotius)」。独立战争前夕的笔名，真实身份未定。",
+      "subject_uid": "grotius-pseudonym-1775"
+    },
+    {
+      "application_scenarios": [
+        "不适用——本条只用于排除"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "LCCN no2021014070"
+        }
+      ],
+      "canonical_name": "Willem de Groot (Leiden printer)",
+      "distinguishing_basis": "LCCN no2021014070。★★ **与弟弟 Willem 同名同拉丁形**，且他的名字出现在 impressum（出版者）而非署名位——**抓源时必须区分「谁写的」与「谁印的」**。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "不适用——本条只用于排除"
+      ],
+      "label": "J",
+      "occupation_or_role": "莱顿大学印刷商（active 1728-1765）",
+      "professional_background": "1734 年任 university printer。变体名字面就是 Grotius, Gulielmus；题名页作 Lugduni Batavorum, Typis Wilhelmi de Groot。",
+      "subject_uid": "de-groot-willem-printer-1728"
+    },
+    {
+      "application_scenarios": [
+        "不适用——本条只用于排除"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q110769507"
+        }
+      ],
+      "canonical_name": "Michiel de Groot",
+      "distinguishing_basis": "Wikidata Q110769507。同上：impressum 位置的 de Groot 是出版者不是作者。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "不适用——本条只用于排除"
+      ],
+      "label": "K",
+      "occupation_or_role": "书商、装订商（荷兰共和国）",
+      "professional_background": "1634 – 1680。17 世纪 impressum 里的 de Groot 多为出版者。",
+      "subject_uid": "de-groot-michiel-1634"
+    },
+    {
+      "application_scenarios": [
+        "不适用——本条只用于排除"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "LCCN no91013173"
+        }
+      ],
+      "canonical_name": "Cornelis de Groot (b. 1961)",
+      "distinguishing_basis": "LCCN no91013173。★ **与叔父同名 + 同学科（法）+ 同校（莱顿）**，跨四个世纪撞在同一组特征上。",
+      "evidence_level": "high",
+      "identity_category": "public",
+      "key_capabilities": [
+        "不适用——本条只用于排除"
+      ],
+      "label": "L",
+      "occupation_or_role": "莱顿大学商法讲师",
+      "professional_background": "生于 1961。",
+      "subject_uid": "de-groot-cornelis-1961"
+    }
+  ],
+  "generated_at": "2026-08-10T19:11:08Z",
+  "normalized_name": "hugogrotius",
+  "resolution": "multiple",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "blocked",
+  "target_name": "Hugo Grotius"
+}

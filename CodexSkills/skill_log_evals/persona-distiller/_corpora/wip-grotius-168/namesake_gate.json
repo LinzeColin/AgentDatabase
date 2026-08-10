@@ -1,0 +1,53 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Hugo Grotius；historical；法学家、外交官、神学家、史家。\n   专业背景：1583-04-10 – 1645-08-28。荷兰共和国法学家。Mare Liberum (1609)、De Jure Belli ac Pacis (1625)、De Veritate Religionis Christianae (1627)。GND 职业字段：Jurist / Historiker / Politiker / Theologe。。\n   应用价值：场景：国际法与自然法的原则推演；跨主权争端中的规范论证；以文本证据支撑的法理写作；关键能力：从第一原理推出可操作规则；把神学、法学、史料并置为一条论证；为具体海洋/战争争端给出可援引的判准。\n   区分依据：Wikidata Q154959 ∧ LCCN n78087113（标目含生卒 1583-1645）∧ GND 118542702（b=1583-04-10 d=1645-08-28）三者互相印证；与下列全部同名者在生卒年上不重叠，或在职业/机构上可分。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "国际法与自然法的原则推演",
+        "跨主权争端中的规范论证",
+        "以文本证据支撑的法理写作"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q154959",
+          "note": "逐条实调"
+        },
+        {
+          "locator": "LCCN n78087113 — 标目 Grotius, Hugo, 1583-1645",
+          "note": "id.loc.gov 实调"
+        },
+        {
+          "locator": "GND 118542702",
+          "note": "hub.culturegraph.org/entityfacts 实调；变体名含 Hugo De Groot / Hugo DeGroot"
+        }
+      ],
+      "canonical_name": "Hugo Grotius",
+      "distinguishing_basis": "Wikidata Q154959 ∧ LCCN n78087113（标目含生卒 1583-1645）∧ GND 118542702（b=1583-04-10 d=1645-08-28）三者互相印证；与下列全部同名者在生卒年上不重叠，或在职业/机构上可分。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "从第一原理推出可操作规则",
+        "把神学、法学、史料并置为一条论证",
+        "为具体海洋/战争争端给出可援引的判准"
+      ],
+      "label": "A",
+      "occupation_or_role": "法学家、外交官、神学家、史家",
+      "professional_background": "1583-04-10 – 1645-08-28。荷兰共和国法学家。Mare Liberum (1609)、De Jure Belli ac Pacis (1625)、De Veritate Religionis Christianae (1627)。GND 职业字段：Jurist / Historiker / Politiker / Theologe。",
+      "subject_uid": "grotius-hugo-1583"
+    }
+  ],
+  "generated_at": "2026-08-10T19:11:38Z",
+  "normalized_name": "hugogrotius",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "grotius-hugo-1583",
+  "status": "ready",
+  "target_name": "Hugo Grotius"
+}
