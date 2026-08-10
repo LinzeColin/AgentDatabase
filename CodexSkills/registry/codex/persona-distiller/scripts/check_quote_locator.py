@@ -198,13 +198,25 @@ def main() -> int:
     ap.add_argument("--answers", type=pathlib.Path, nargs="*", default=[],
                     help="候选答案 JSON（id→文本）或盲判载荷（[{case_id,A,B}]）")
     ap.add_argument("--claims", type=pathlib.Path, help="断言层 claims.jsonl")
+    #   ★★★★ 2026-08-11（Shewhart #165 撞出）：**产物从来没被扫过。**
+    #     本件此前只收 `--answers`（盲判载荷）与 `--claims`，
+    #     而 `quality_check` 传进来的也只有这两样——
+    #     **十份 Markdown 产物，也就是用户真正读的那一份，一次都没被检查过。**
+    #     后果：缺陷坐在产物里，直到有人生成盲判载荷才冒出来，
+    #     那时它看着还像是「答题方没写坐标」——**根因被移了位**。
+    #   ★ 全库实测（424 条 ≥30 字符的逐字引文）：**176 条缺坐标（41.5%）**，
+    #     17 个工作区只有 4 个干净；**Adams 27/27、Thomson 19/19 全缺，
+    #     而这两人都已经判过分、delta 已入账**。
+    #   [[gates-cover-json-not-the-prose-users-read]]
+    ap.add_argument("--products", type=pathlib.Path, nargs="*", default=[],
+                    help="产物 Markdown（十份），逐份扫其中的长逐字引文")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
 
-    if a.self_test and not (a.answers or a.claims):
+    if a.self_test and not (a.answers or a.claims or a.products):
         return 2 if self_test() else 0
-    if not (a.answers or a.claims):
-        ap.error("--answers 或 --claims 至少给一个（除非只跑 --self-test）")
+    if not (a.answers or a.claims or a.products):
+        ap.error("--answers / --claims / --products 至少给一个（除非只跑 --self-test）")
 
     acc = {"total": 0, "ok": 0, "bad": []}
 
@@ -225,6 +237,10 @@ def main() -> int:
             for k, v in data.items():
                 if isinstance(v, str) and not k.startswith("_"):
                     scan(f"答案/{k}", v, acc)
+
+    for path in a.products:
+        if path.is_file():
+            scan(f"产物/{path.name}", path.read_text(encoding="utf-8", errors="replace"), acc)
 
     if not acc["total"]:
         print("一条长逐字引文都没扫到——**本次未检查（不是通过）**")

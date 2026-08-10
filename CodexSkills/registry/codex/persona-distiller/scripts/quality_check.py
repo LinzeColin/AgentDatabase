@@ -1621,35 +1621,11 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
                                              '——**未命中不等于伪造**，须人工核对；'
                                              '但「改了 OCR 错字再当逐字引文」也落在这里')
 
-    # ── v0.0.0.39：引文坐标（**不需要 cache**，判的是文本自身可不可回查）────
-    #   `check_quote_integrity` 管「这句在不在语料里」，管不了另一半：
-    #   **读者拿什么去回查。** 一句真引文若不写清出自哪篇哪年哪页，
-    #   读者只能选择信或不信——而这套产物的全部主张正是「你可以不信我，去核」。
-    #   Lister #108 席 E 在四处 note 与 _overall 里点了同一件事，判据数出范围：
-    #   17 条长引文，**9 条同段内无任何坐标线索**（评委的印象是「无一处」，实为 8 条有）。
-    loc_argv: list[str] = []
-    if claims.exists():
-        loc_argv += ['--claims', str(claims)]
+
+    #   ★ 2026-08-11：`payload` 原本在上面那段「引文坐标」里定义，
+    #     我把那段挪到函数末尾时**把定义一起带走了**，而这里还在用它
+    #     → `UnboundLocalError`。**搬运一段代码时，要问它给别人留下了什么。**
     payload = target / 'evals/judge_payload.v1.json'
-    if payload.exists():
-        loc_argv += ['--answers', str(payload)]
-    if not loc_argv:
-        review['quote_locator'] = '断言与答案都取不到，**引文坐标未核（不是通过）**'
-    else:
-        code, out = run('check_quote_locator.py', loc_argv)
-        if code == -1:
-            review['checker_missing'] = out
-        elif code == 3:
-            review['quote_locator'] = '一条长逐字引文都没扫到——**本次未检查（不是通过）**'
-        elif code == 2:
-            report.error('content.selftest-failed',
-                         'check_quote_locator 负对照未过——其检查结论不作数')
-        elif code != 0:
-            n = next((l for l in out.splitlines() if l.startswith('长逐字引文')), '')
-            report.error('content.quote-no-locator',
-                         f'有逐字引文无从回查：同段内既无年份也无卷页刊名。{n}')
-        else:
-            review['quote_locator'] = '✓ 每条长引文同段内都能找到坐标线索'
 
     # ── v0.0.0.40：同一段语料被多处引用时并排列出（**只列不判**）────────
     #   Lister #108 第 2 轮，两席各自独立报出同一处：boundary-01 据 PREFACE 说
@@ -1904,6 +1880,54 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     if review:
         report.metrics['content_review'] = review
 
+
+    # ★★★★ 2026-08-11：**这一段原本关在 `--cache` 分支里，而它自己写着「不需要 cache」。**
+    #   于是不带 `--cache` 跑门时，引文坐标**一次都没被查过**——
+    #   Shewhart #165 与 Thomson 的合成门都报 0 错，而独立跑判据分别是 0 缺 / 15 缺。
+    #   ★ 抓到它的是**反向对照**：我接完 `--products` 之后去跑一个已知 19/19 全缺的人物，
+    #     它却报 0 错。**若只跑正例（Shewhart 0 缺、门也 0 错），会以为接上了。**
+    #   [[a-checker-nothing-calls-is-not-a-checker]]／[[counter-example-red-can-be-red-by-coincidence]]
+    # ── v0.0.0.39：引文坐标（**不需要 cache**，判的是文本自身可不可回查）────
+    #   `check_quote_integrity` 管「这句在不在语料里」，管不了另一半：
+    #   **读者拿什么去回查。** 一句真引文若不写清出自哪篇哪年哪页，
+    #   读者只能选择信或不信——而这套产物的全部主张正是「你可以不信我，去核」。
+    #   Lister #108 席 E 在四处 note 与 _overall 里点了同一件事，判据数出范围：
+    #   17 条长引文，**9 条同段内无任何坐标线索**（评委的印象是「无一处」，实为 8 条有）。
+    loc_argv: list[str] = []
+    if claims.exists():
+        loc_argv += ['--claims', str(claims)]
+    payload = target / 'evals/judge_payload.v1.json'
+    if payload.exists():
+        loc_argv += ['--answers', str(payload)]
+    #   ★★★★ 2026-08-11（Shewhart #165）：**产物此前从来没被传进来。**
+    #     上面两行只喂 `--claims` 与盲判载荷，于是**十份 Markdown 产物——
+    #     用户真正读的那一份——一次都没被扫过引文坐标**。
+    #     缺陷因此坐在产物里，直到有人生成盲判载荷才冒出来，
+    #     那时它看着还像「答题方没写坐标」：**根因被移了位。**
+    #   ★ 全库实测 424 条 ≥30 字符的逐字引文，**176 条缺坐标（41.5%）**，
+    #     17 个工作区只有 4 个干净；**Adams 27/27、Thomson 19/19 全缺，
+    #     而这两人都已经判过分、delta 已入账**。
+    #   [[gates-cover-json-not-the-prose-users-read]]
+    _prods = [str(target / rel) for rel in RENDER_FILES if (target / rel).is_file()]
+    if _prods:
+        loc_argv += ['--products', *_prods]
+    if not loc_argv:
+        review['quote_locator'] = '断言、答案、产物都取不到，**引文坐标未核（不是通过）**'
+    else:
+        code, out = run('check_quote_locator.py', loc_argv)
+        if code == -1:
+            review['checker_missing'] = out
+        elif code == 3:
+            review['quote_locator'] = '一条长逐字引文都没扫到——**本次未检查（不是通过）**'
+        elif code == 2:
+            report.error('content.selftest-failed',
+                         'check_quote_locator 负对照未过——其检查结论不作数')
+        elif code != 0:
+            n = next((l for l in out.splitlines() if l.startswith('长逐字引文')), '')
+            report.error('content.quote-no-locator',
+                         f'有逐字引文无从回查：同段内既无年份也无卷页刊名。{n}')
+        else:
+            review['quote_locator'] = '✓ 每条长引文同段内都能找到坐标线索'
 
 def run_authorship_gate(report, target: Path, meta: dict[str, Any],
                         sources: list[dict[str, Any]]) -> None:
