@@ -150,6 +150,24 @@ def main():
                 worked[slugify(str(al))] = tag
                 worked[norm(str(al))] = tag
 
+    # ★ 生卒年记在**另一个台账** `_卒年.json` 里（204 条，带 Wikidata 出处），**不在队列里**。
+    #   NEXT 原来不读它，于是报出人名时看不到年份，判「够不够得着 PD 分界」要另跑一步。
+    #   ★★ **只打印，不据此过滤**：PD-only 规则的射程是待裁定 ㉜，
+    #   把它写进 NEXT 等于替人定了一条没裁定的政策（延后名单里已有 75 条挂着 `pd_scope_pending`）。
+    _years = {}
+    _yp = os.path.join(os.path.dirname(a.queue), "_卒年.json")
+    if os.path.isfile(_yp):
+        try:
+            for k, v in json.load(open(_yp, encoding="utf-8")).items():
+                if isinstance(v, dict) and v.get("born"):
+                    _years[norm(v.get("name") or k)] = (v.get("born"), v.get("died"))
+        except Exception:
+            pass
+
+    def _withyears(item):
+        yr = _years.get(norm(item["name"]))
+        return {**item, "生卒": f"{yr[0]}–{yr[1]}" if yr else "**卒年台账里没有**"} if item else item
+
     q = json.load(open(a.queue, encoding="utf-8"))["queue"]
     pending, done_in_q, deferred_in_q = [], 0, 0
     worked_not_shipped = []
@@ -183,8 +201,8 @@ def main():
         # ★ 做完了但没出货、也没记延后的——**多半卡在待裁定**。
         #   它们**已经排除出 NEXT**，但必须在这里被看见，否则就成了没人管的一批。
         "★ 已做但未出货（不进 NEXT，去看它卡在哪）": worked_not_shipped,
-        "NEXT": pending[0] if pending else None,
-        "upcoming": pending[:a.show],
+        "NEXT": _withyears(pending[0]) if pending else None,
+        "upcoming": [_withyears(x) for x in pending[:a.show]],
     }, ensure_ascii=False, indent=1))
 
 if __name__ == "__main__":
