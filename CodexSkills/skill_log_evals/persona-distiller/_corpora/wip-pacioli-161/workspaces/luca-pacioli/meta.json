@@ -115,11 +115,22 @@
     "why": "抄本合集，混有 Alberti《De re aedificatoria》片段、墨水配方与偏方；Pacioli 部分已被完整版 Summa 覆盖。"
    }
   ],
-  "counting_convention": "**同一版次的不同藏馆扫描只算一部作品。** 实测：Summa 至少 3 份独立扫描（Smithsonian/Burndy、Sevilla、SUCHO），De divina proportione 至少 3 份（Getty、Boston Public Library、Sevilla）。**按 identifier 计数会把 2 部作品数成 6 部。**　★★★★ **第二条，比上一条更要紧**：`check_claim_source_independence` 的作品分组**是语言盲的**——实测本人物 10 份源被分成 **10 个作品组**，而 `crivelli-1924`（英）/`geijsbeek-1914`（英）/`pacioli-1896-dutch`（荷）**译的是同一篇《Particularis de computis et scripturis》**，`winterberg-1889`（德）译的是《De divina proportione》。**跨语种的同一部作品，8 词片重叠一份都认不出来。**于是「方法类断言要 ≥2 处独立证据」这条门，**在本人物身上可以靠引两种译本轻松过掉**。**本工作区的纪律：同一部作品的不同译本一律只算一处证据，无论判据是否把它们分成了不同的组。**",
+  "counting_convention": "**同一版次的不同藏馆扫描只算一部作品。** 实测：Summa 至少 3 份独立扫描（Smithsonian/Burndy、Sevilla、SUCHO），De divina proportione 至少 3 份（Getty、Boston Public Library、Sevilla）。**按 identifier 计数会把 2 部作品数成 6 部。**　★★★★ **第二条，比上一条更要紧**：`check_claim_source_independence` 的作品分组**是语言盲的**——实测本人物 10 份源被分成 **10 个作品组**，而 `crivelli-1924`（英）/`geijsbeek-1914`（英）/`pacioli-1896-dutch`（荷）**译的是同一篇《Particularis de computis et scripturis》**，`winterberg-1889`（德）译的是《De divina proportione》。**跨语种的同一部作品，8 词片重叠一份都认不出来。**于是「方法类断言要 ≥2 处独立证据」这条门，**在本人物身上可以靠引两种译本轻松过掉**。**本工作区的纪律：同一部作品的不同译本一律只算一处证据，无论判据是否把它们分成了不同的组。**　★ 已按此在 `parallel_witnesses` 里申报两组：①《Particularis de computis et scripturis》的三份见证（Crivelli 英译／Geijsbeek 英译／1896 荷译）——**判据只认出前两份，荷译是跨目标语盲区，人工补的**；②《De divina proportione》的两份（1509 原刊／Winterberg 1889 德译）。**每组整体只算一处证据。**",
   "covered_sources": [
    "summa-arithmetica-1494-venice-djvu.txt —— 1494 威尼斯 Paganino de Paganini 印本（archive.org `summadearithmeti00paci`，Smithsonian/Burndy 藏）；扉页与版权页署 Pacioli。",
    "de-divina-proportione-1509-venice-getty.txt —— 1509 同一印工印本（archive.org `divinaproportion00paci`，Getty 藏）；**只有 Prima parte 是他所作**。",
    "de-viribus-quantitatis-1496-bologna-ms250.txt —— 博洛尼亚大学图书馆 MS 250 手稿；**归属依据是藏馆著录，不是印本署名，按较弱一档记**。"
+  ],
+  "parallel_witnesses": [
+   [
+    "src-17ba7903aac0",
+    "src-bcece04a709a",
+    "src-cf1287bdb650"
+   ],
+   [
+    "src-9090173c710f",
+    "src-671c6f35b828"
+   ]
   ]
  }
 }

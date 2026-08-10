@@ -2699,6 +2699,50 @@ def run_claim_source_independence(report, target: Path) -> None:
     report.metrics['claim_source_independence'] = info
 
 
+def run_translation_witness(report, target: Path) -> None:
+    """同一部作品的多个译本**不许当两处独立证据**（v0.0.0.80）。
+
+    `check_claim_source_independence` 的作品分组**是语言盲的**：实测 Pacioli #161 的
+    10 份源被它分成 **10 个作品组**，而其中三份译的是同一篇《Particularis de computis
+    et scripturis》。于是「方法类断言要 ≥2 处独立证据」**可以靠引两种译本过掉**。
+
+    ★ **本件敢当硬错**（与 `claim_source_independence` 只写 metrics 不同）：
+      它只在工作区**自己申报了** `parallel_witnesses` 时才可能报错，
+      而已入库的人一个都没申报过 → 对存量恒为 0 错，**拦不到无辜的人**。
+      申报之后的判定是**精确的集合运算，没有启发式，没有误报**。
+
+    ★★ 「自动认出哪些是译本」实测做不出来，已砍掉：阈值在一个工作区上标定，
+       全库一跑 **38,368 对**（Barton 10,502、Virchow 6,973），
+       而真阳性 0.080–0.102 **低于别处的噪声 0.12–0.19**。见检查器文件头。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_translation_witness.py'
+    if not script.exists():
+        report.metrics['translation_witness'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_transwit', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+        errors, collapsed, lines = module.check(target)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['translation_witness'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        report.error('corpus.translation-witness-crashed',
+                     f'并行见证判据跑不起来，**没核过不算通过**：{exc}')
+        return
+    groups = module.declared_groups(target)
+    report.metrics['translation_witness'] = {
+        '申报的并行见证组': len(groups),
+        '组内塌缩的断言': collapsed,
+        '错': errors,
+        '明细': [l for l in lines if l.startswith('✗')][:6],
+        '★': '申报 0 组**不等于**没有并行见证——本件不猜，只查申报',
+    }
+    for l in lines:
+        if l.startswith('✗'):
+            report.error('claim.parallel-witness-collapse', l.replace('\n', ' ').strip())
+
+
 def run_quote_attributed_source(report, target: Path) -> None:
     """引文在不在**它自己引的那份源**里（v0.0.0.79，**只写 metrics**）。
 
@@ -3618,6 +3662,7 @@ def main() -> int:
         run_pd_grounds(report, target)
         train_ids = {record.get('source_id') for record in sources if record.get('split') == 'train'}
         evaluate_research(report, target, thresholds, train_ids, args.allow_provisional)
+        run_translation_witness(report, target)
         cases: list[dict[str, Any]] = []
         if args.phase in {'synthesis', 'release'}:
             evaluate_claims(report, target, thresholds, sources, args.allow_provisional)

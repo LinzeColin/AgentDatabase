@@ -446,6 +446,263 @@ def markdown_report(data: dict[str, Any]) -> str:
 
 
 
+def report_semantic_residue(report, target: Path) -> None:
+    """**被订正掉的说法，换个措辞又活了**（只报不拦）。
+
+    ## 为什么它此前没有调用方——**不是忘了接，是接不上**
+
+    `check_semantic_residue` 要一份 `--rules`（name→正则）。
+    全库回查（2026-08-06）：**没有任何人物产出过 rules 文件**，
+    而 `corrections.jsonl` 里唯一有内容的是 Bessemer #132 的 2 条，
+    **两条的 `scope` 都是 `evaluation`**（判分方法的错），
+    不是「产物里某个说法被订正掉了」。
+
+    **→ 它找的那种输入，全库从来没有出现过。**
+    「无调用方」这个报警是对的，但根因是**上游没有产出**，不是接线漏了。
+
+    ## 本件的接法：从 `corrections.jsonl` 里 `scope == "content"` 的条目现取规则
+
+    这样它在**第一条内容域订正出现的那一刻**自动生效，不用再记得去接。
+    没有这类订正时报「未启用」——**不是「通过」**。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_semantic_residue.py'
+    if not script.exists():
+        report.metrics['semantic_residue'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    cor = None
+    for cand in (target / 'corrections' / 'corrections.jsonl',
+                 target.parent / 'corrections' / 'corrections.jsonl'):
+        if cand.is_file():
+            cor = cand
+            break
+    if cor is None:
+        report.metrics['semantic_residue'] = {
+            '状态': '未启用（本人物没有 corrections.jsonl）——**不是通过**'}
+        return
+    rules, skipped = {}, 0
+    for line in cor.read_text(encoding='utf-8').splitlines():
+        if not line.strip():
+            continue
+        try:
+            rec = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if str(rec.get('scope') or '') != 'content':
+            skipped += 1
+            continue
+        # 订正文本里被引号括起来的旧说法 → 规则
+        for old in re.findall(r'[「"“]([^「」"“”]{4,40})[」"”]',
+                              str(rec.get('text') or '')):
+            rules[f"{rec.get('correction_id', '?')}::{old[:20]}"] = re.escape(old)
+    if not rules:
+        report.metrics['semantic_residue'] = {
+            '状态': f'未启用（{skipped} 条订正全是非 content 域，取不到规则）——**不是通过**',
+            '★': ('全库回查：唯一有内容的订正是 Bessemer #132 的 2 条，'
+                  'scope 都是 `evaluation`。**这判据找的输入从来没出现过。**')}
+        return
+    try:
+        spec = importlib.util.spec_from_file_location('_pd_semres', script)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        files = sorted(set(list(target.rglob('*.md')) + list(target.rglob('*.jsonl'))))
+        hits = {}
+        for name, pat in rules.items():
+            rx = re.compile(pat)
+            for f in files:
+                if 'corrections' in f.parts:      # ★ 订正记录本身当然含旧说法
+                    continue
+                for m in rx.finditer(mod.scannable(f)):
+                    hits.setdefault(name, []).append(f'{f.name}@{m.start()}')
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['semantic_residue'] = {'状态': f'跑不起来，**未核验**：{exc}'}
+        return
+    report.metrics['semantic_residue'] = {
+        '规则条数': len(rules), '非 content 域跳过': skipped,
+        '**残留命中**': {k: v[:4] for k, v in hits.items()},
+    }
+    if hits:
+        report.warnings.append(
+            f'content.semantic-residue：{len(hits)} 条被订正过的说法仍在产物里')
+
+
+def report_verbatim_quotes(report, target: Path, cache) -> None:
+    """**渲染文档／身份分面／评测用例里的引文一样会伪造**（只报不拦）。
+
+    `check_quote_integrity` 只扫 `evidence/claims.jsonl`；本件补的是文档层与用例层。
+    ★ 它此前**在生产代码里没有任何调用方**——`check_checkers` 的接线审计报出来的。
+      「每个人物都在临时写脚本」（Robertson #97 那版还把维度选错了两次），
+      **而常规检查一直没接上。**
+
+    ★★ 它有两道语料：原样，与**去掉版口（页眉／页码）之后**的。
+      第二道只在第一道未命中时重试，**且必须报出来是靠它才命中的**——
+      「引文为真、只是横跨了版口」与「引文是编的」是两回事。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_verbatim_quotes.py'
+    if not script.exists():
+        report.metrics['verbatim_quotes'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    # ★ `--cache` 是 `nargs="+"`，**传进来是列表**——第一版按单个路径写，
+    #   当场 `TypeError: expected str… not list`。接线必须实跑，不能只看语法过。
+    dirs = [Path(c) for c in (cache if isinstance(cache, (list, tuple)) else [cache])
+            if c is not None and Path(c).is_dir()]
+    if not dirs:
+        report.metrics['verbatim_quotes'] = {
+            '状态': '**未核验**（不是通过）——没有可用的 --cache，取不到语料原文'}
+        return
+    try:
+        spec = importlib.util.spec_from_file_location('_pd_vq', script)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        raw = [p.read_text(encoding='utf-8', errors='replace')
+               for d in dirs for p in d.rglob('*.txt')]
+        corpus = "\n".join(mod.norm(t) for t in raw)
+        corpus2 = "\n".join(mod.norm(mod.strip_page_furniture(t)[0]) for t in raw)
+        qs = mod.collect(target, [])
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['verbatim_quotes'] = {'状态': f'跑不起来，**未核验**：{exc}'}
+        return
+    bad, crossed = [], []
+    for where, q in qs:
+        if mod._hit(q, corpus):
+            continue
+        (crossed if mod._hit(q, corpus2) else bad).append((where, q))
+    report.metrics['verbatim_quotes'] = {
+        '逐字英文引文': len(qs),
+        '**未命中**': len(bad),
+        '跨版口命中（引文为真）': len(crossed),
+        '未命中样例': [f'{w}: {q[:110]}' for w, q in bad[:6]],
+        '跨版口样例': [f'{w}: {q[:80]}' for w, q in crossed[:4]],
+    }
+    if bad:
+        report.warnings.append(
+            f'content.verbatim-quote：{len(bad)} 条逐字引文在语料里找不到原样'
+            '——**引文对不上就是引文对不上**')
+
+
+def report_catalogue_entries(report, target: Path,
+                            sources: list[dict[str, Any]]) -> None:
+    """**这份 P1 是「著录方描述这份文献」，不是文献本身**（只报不拦）。
+
+    三例确凿跨三个人物（见 `check_source_is_catalogue_entry.py` 文件头）：
+    Roberts-Austen 的 `letter00robe.txt`（他的话占 13%）、
+    Koch 的 `letter00koch.txt`（著录说 240 词而文件里几乎没有信文）、
+    Osler 的 `walt-whitman-1919.txt`（**描述一场从没发生过的演讲**）。
+
+    ★ 归属门问「文中有没有他的署名」——著录卡里**有**
+      （`A.L.S: (W. C, ROBERTS-AUSTEN)`），于是它过了归属门，
+      **而他 22 份真论文没过**。**没有一道门问「这份文件里有多少是他的话」。**
+
+    ★★ **只报不拦**：改分档是人的判断（判据文件头写着）。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_source_is_catalogue_entry.py'
+    if not script.exists():
+        report.metrics['catalogue_entries'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    try:
+        spec = importlib.util.spec_from_file_location('_pd_catent', script)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['catalogue_entries'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+
+    def _read(record):
+        rel = record.get('normalized_path') or record.get('local_path') or ''
+        p = target / str(rel)
+        if not p.is_file():
+            return None
+        try:
+            return p.read_text(encoding='utf-8', errors='replace')
+        except OSError:
+            return None
+
+    rep = mod.check(sources, _read)
+    report.metrics['catalogue_entries'] = rep
+    hits = rep.get('**疑似著录卡**') or {}
+    if hits:
+        report.warnings.append(
+            f'research.catalogue-entry：{len(hits)} 份 P1 像是「著录方描述这份文献」'
+            '而不是文献本身——**改分档是人的判断，本项只报不拦**')
+
+
+def report_stance_density(report, target: Path,
+                          sources: list[dict[str, Any]]) -> None:
+    """**声口的第二维：立场句密度**（只写 metrics，**不拦、不设阈值**）。
+
+    `report_own_voice` 答的是「他说了多少话」，用的是第一人称。
+    Mehl #137 实测撞出：**人可以在完全非人称的语域里有极强的声口**——
+    1936 年具名讲演开篇第一人称 0，而通篇是判断
+    （`the critic must remember` / `has been irregular, and little given to`）。
+
+    ★ 六个样本实测（详见 ㉙）：**两维并用能把三类人分开**——
+      两维都低（Coffin 0.95/0.00、Bain 0.91/0.23）／两维中等（Mehl 讲演 1.57/0.43）／
+      单维极高（Nasmyth 自传 29.67/0.07，叙事体）。
+
+    ★★★ **但差距只有 2 倍量级、绝对数是个位数句子。**
+      本件因此**只排序、只提示，不设阈值、不参与任何处置**——㉙ 的裁定要人做。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_stance_density.py'
+    if not script.exists():
+        report.metrics['stance_density'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    try:
+        spec = importlib.util.spec_from_file_location('_pd_stance', script)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['stance_density'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    tot = fp = st = st_nofp = 0
+    unread = []
+    unmeasured = []                 # ★ 判据自己说「未核验」的，**单列，不并进分母**
+    for record in sources:
+        if not str(record.get('tier') or '').startswith('P1'):
+            continue
+        rel = record.get('normalized_path') or record.get('local_path') or ''
+        p = target / str(rel)
+        if not p.is_file():
+            unread.append(record.get('source_id'))
+            continue
+        r = mod.measure(p.read_text(encoding='utf-8', errors='replace'))
+        # ★★★★ 2026-08-10：`check_stance_density.measure` 在**判不出语种**时
+        #   把三个计数字段返回 `None`（连同一句 `★ 未核验：语种判为 ?
+        #   ——本件只认英语，不是「这个人没有声口」`）。那是它有意的「我不知道」。
+        #   而这里原先写的是 `fp += r['第一人称命中']` ——
+        #   **`int + None` 直接 TypeError，整个质检门崩掉**（全库 6 个测试因此长红）。
+        #
+        #   ★ 修法**不许写 `or 0`**：那会把「判不出语种」静默算成
+        #     「这份材料里第一人称是 0」，即把「不知道」记成一个具体的好数——
+        #     而这一维正是 ㉙ 用来分辨「有没有声口」的。[[empty-default-swallows-unknown]]
+        #   **跳过，并单列出来。**
+        if r.get('第一人称命中') is None:
+            unmeasured.append({'source_id': record.get('source_id'),
+                               '原因': r.get('★ 未核验') or '判据未给计数'})
+            continue
+        tot += r['字符']
+        fp += r['第一人称命中']
+        st += r['**立场句**']
+        st_nofp += r['★ 其中不含第一人称的']
+    report.metrics['stance_density'] = {
+        'P1 字符合计': tot,
+        '**判据说未核验的**': len(unmeasured),
+        '★ 未核验的逐条（不并进分母，也不算 0）': unmeasured[:8],
+        '第一人称（动词式）/万字': round(fp / tot * 10000, 2) if tot else None,
+        '**立场句/万字**': round(st / tot * 10000, 2) if tot else None,
+        '其中不含第一人称的': st_nofp,
+        '读不到正文的': unread,          # ★ 读不到就说读不到
+        '★ 口径': ('**只排序、只提示，不设阈值。** 第一人称已排除图纸标号／化学式／'
+                   '罗马数字（三处真实假阳，见判据文件头），**但未排除专利套语**——'
+                   'Coffin 实测 73% 是 `I claim as my invention` 这一类，'
+                   '**专利型语料要另减一道**。'),
+        '★★ 参照（㉙ 六样本）': ('Coffin 0.95/0.00、Bain 0.91/0.23、'
+                                'Mehl 讲演 1.57/0.43、Nasmyth 自传 29.67/0.07'),
+    }
+
+
 def report_own_voice(report, target: Path, meta: dict[str, Any],
                      sources: list[dict[str, Any]]) -> None:
     """**语料里有多少字真是他自己写／说的**（v0.0.0.19 新增，只报不拦）。
@@ -877,6 +1134,172 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
             + (f"，**没核 {len(info.get('★ 没核的') or [])} 条（不是通过）**"
                if info.get('★ 没核的') else "")
             if info else '**未核（不是通过）**')
+
+    # ── 2026-08-07：**引文逐字在语料里，可它是别人说的**（候选子代理抓出来的） ──
+    #   Whitworth #152 的 `clm-e120a051a8ad` 初稿引 General Lefroy 的话当他本人的推测语气，
+    #   而他转引之后紧接着写自己确知铸铁做不到——**意思正好相反**。
+    #   ★★ `check_quote_integrity` 放行是因为**那句逐字确实在语料里**。
+    #     它问「在不在」，**不问「是谁说的」。逐字 ≠ 他的。**
+    code, out = run('check_quote_speaker.py', [str(target), '--json'])
+    if code == -1:
+        review['checker_missing'] = out
+    else:
+        try:
+            qs = json.loads(out)
+        except Exception:                                          # noqa: BLE001
+            qs = {}
+        if qs and '**引到别人的话**' in qs:
+            n_other = len(qs['**引到别人的话**'])
+            report.metrics['quote_speaker'] = {
+                '长逐字引文': qs.get('引文数'),
+                '**引到别人的话**': n_other,
+                '正文已注明出自他人（不判为误引）':
+                    len(qs.get('★ 正文已注明出自他人的（不判为误引，但列出来）') or []),
+                '★ 定位不到（未判，不是通过）':
+                    len(qs.get('★ 在语料里定位不到的（本件未判，不是通过）') or []),
+                '★★ 射程': '只认英文转引标记、只往回看 260 字符、只比姓、'
+                            '抓不到无标记的间接引语',
+            }
+            if n_other:
+                report.error('content.quote-is-someone-elses',
+                             f'**{n_other} 条引文是别人说的**（逐字在语料里，但转引自他人）：'
+                             f'　{[(x["转引自"], x["引文"][:40]) for x in qs["**引到别人的话**"][:3]]}')
+
+    # ── 2026-08-07：**建模者读得到的文件里提了 holdout**（Whitworth #152 撞出来） ──
+    #   候选方（隔离子代理）**主动上报**：`hypotheses.md` 写着「证据只有 holdout 里那一条，
+    #   train 侧没有第二处」——**把 holdout 的主题直接说了出来**，而它恰好对应那道 known 题。
+    #   ★ 那句话是我在「说明我已经把 holdout 内容删干净了」的语境里写下的。
+    #   ★★ **同一轮里 `corpus.holdout-leak` 与 `research.invalid-source` 两道门全绿**——
+    #     它们只认「id 与文件」，不认「有这么一份、它考什么」。
+    code, out = run('check_holdout_mention.py', [str(target), '--json'])
+    if code == -1:
+        review['checker_missing'] = out
+    else:
+        try:
+            hm = json.loads(out)
+        except Exception:                                          # noqa: BLE001
+            hm = {}
+        if hm and '状态' not in hm:
+            n_men = len(hm.get('**字面提及**') or [])
+            n_ov = len(hm.get('**与 holdout 正文的 8 词片重叠**') or [])
+            report.metrics['holdout_mention'] = {
+                '字面提及': n_men,
+                '与 holdout 正文重叠': n_ov,
+                '★ 与出厂模板逐字相同、已豁免': len(hm.get('★ 与出厂模板逐字相同、已豁免的') or []),
+                '★★ 射程': '抓不到「不提 holdout 也不抄它、却把题目描述出来」的写法——'
+                           '那一类只能靠人读或答题方主动上报',
+            }
+            if n_men:
+                report.error('corpus.holdout-mentioned-in-artifacts',
+                             f'**建模者读得到的文件里有 {n_men} 处提到 holdout**——'
+                             '知道「存在一份取不到的材料、它关于某某」已足够定位那道题。'
+                             f'　{[(m["文件"], m["命中"]) for m in hm["**字面提及**"][:3]]}')
+            if n_ov:
+                report.error('corpus.holdout-text-in-artifacts',
+                             f'**建模者读得到的文件与 holdout 正文有 {n_ov} 处 8 词片重叠**')
+
+    # ── 2026-08-10：**编号缺口本身泄题**（Nasmyth #153，候选侧子代理主动上报） ──
+    #   它在 `__incident__` 里写：「`references/sources` 的文件编号从 05d 跳到 05f，
+    #   我没有去查 05e 是什么。」——**它没查，但通道是我留的。**
+    #   ★ 上面那道 `check_holdout_mention` 抓的是「有没有**写**出 holdout」，
+    #     本件抓的是「**没写**，但目录结构自己说了出来」——**两道门管的不是同一件事**。
+    #   ★★ 缺口连着两侧邻居的描述性文件名一起看，泄的是**刊物与年代区间**
+    #     （Nasmyth 此例：05d 是 mnras-1852、05f 是 mnras-1855 → 缺的那份是 MNRAS 1852–1855）。
+    code, out = run('check_source_numbering_gap.py', [str(target), '--json'])
+    if code == -1:
+        review['checker_missing'] = out
+    else:
+        try:
+            ng = json.loads(out)
+        except Exception:                                          # noqa: BLE001
+            ng = {}
+        if ng:
+            g = ng.get('**编号缺口**') or []
+            confirmed = [d for d in g if not d.get('★ 这是疑似')]
+            on_holdout = [d for d in g if d.get('★ holdout 的文件名正落在这个缺口上')]
+            report.metrics['source_numbering_gap'] = {
+                '编号缺口': len(g),
+                '其中确认型': len(confirmed),
+                '其中疑似（组内首字母不是 a）': len(g) - len(confirmed),
+                '★ 缺口上正好是 holdout 的': len(on_holdout),
+                '★★ 射程': '只看文件名；**尾部被整份拿走的缺口抓不到**；'
+                           '补齐编号也堵不住「份数本身是信息」那一层',
+            }
+            for k in ('★ 没有 references/sources/', '★ 文件名不带顺序前缀',
+                      '★ holdout 文件名不带前缀'):
+                if k in ng:
+                    # ★ 「看不见」要留痕，**不许被读成通过**
+                    report.metrics['source_numbering_gap'][k] = ng[k]
+            if on_holdout:
+                report.error(
+                    'corpus.holdout-visible-as-numbering-gap',
+                    f'**holdout 的编号缺口暴露在建模者看得见的文件名序列里（{len(on_holdout)} 处）**——'
+                    '建模者不必打开任何禁读目录，数一遍文件名就知道「这里有一份被拿走了」，'
+                    '连着两侧邻居还能读出它的刊物与年代区间。'
+                    f'　{[(d["缺的编号"], d["左邻"], d["右邻"]) for d in on_holdout[:2]]}')
+            elif confirmed:
+                report.warn(
+                    'corpus.source-numbering-gap',
+                    f'**编号缺口 {len(confirmed)} 处**（不在 holdout 上，成因未判）：'
+                    f'　{[d["缺的编号"] for d in confirmed[:5]]}')
+
+    # ── 2026-08-07：**来源计数里有几份其实是同一部作品**（Whitworth #152 撞出来） ──
+    #   `source.minimum` 判的是 `len(usable)`，**`derived_from` 从头到尾没被读过**。
+    #   Whitworth #152 实测 `usable = 7`，而按内容去重只有 **3 部作品**（虚高 2.333×）：
+    #   quick 门要 8 份，**再抓 1 份门就转绿，而实质仍是 3 部**——靠灌分子过门。
+    #   ★★ 而且**光读声明不够**：同一批 7 对重叠 ≥30% 的关系里，
+    #     我自己只声明了 3 对，**漏的 4 对含我明知道的那一对**
+    #     （1854 报告整篇是 1858 卷的附录，写进了散文没写进字段）。
+    #     所以本件不信声明，直接比 8 词片内容。
+    #   ★ **不改 `source.minimum` 的口径**——中途改测量工具会让在做的人物前后不可比。
+    #     这里发的是「门是靠重份才绿的」这一条独立错，以及去重后的实数。
+    code, out = run('check_source_dedup.py', [str(target), '--json'])
+    if code == -1:
+        review['checker_missing'] = out
+    else:
+        try:
+            dd = json.loads(out)
+        except Exception:                                          # noqa: BLE001
+            dd = {}
+        if dd:
+            n_un = len(dd.get('**未声明的重复对**') or [])
+            report.metrics['source_dedup'] = {
+                '可用来源': dd.get('usable'),
+                '**按内容去重后的作品数**': dd.get('distinct_works'),
+                '虚高': dd.get('inflation'),
+                '未声明的重复对': n_un,
+                '已声明的重复对': dd.get('已声明的重复对数'),
+                '★ 本件看不见的份数（中日韩语料一律看不见，不是已核）':
+                    len(dd.get('★ 本件看不见的（分词后不足 8 词，多为中日韩或纯噪声）') or []),
+            }
+            if n_un:
+                report.error(
+                    'corpus.undeclared-duplicate-sources',
+                    f'**{n_un} 对来源重叠 ≥{dd.get("threshold")} 而两边都没声明 `derived_from`**——'
+                    '台账上看不出它们是同一部作品。**清掉这条错的唯一办法是补 `derived_from`**——'
+                    '★ 本件只读 `derived_from`（`check_source_dedup.py` 第 182 行），'
+                    '**在 `counting_convention` 里写散文不会让它变绿**：'
+                    '那件判据当初正是因为「散文里写了、机器读得到的字段里没写」才建的。'
+                    '散文该写，但它是给人看的，不是给这道门看的。'
+                    f'　{[(p["甲"][:26], p["乙"][:26], p["重叠"]) for p in dd["**未声明的重复对**"][:3]]}')
+            # ★ `thresholds` **不在本函数的作用域里**（`run_corpus_text_checks(report, target,
+            #   cache_dirs)`）。第一版直接写 `thresholds.get(...)`：`py_compile` 绿、
+            #   语法检查绿，**一跑就 NameError，整个 JSON 输出被打断**。
+            #   与 [[a-checker-nothing-calls-is-not-a-checker]] 第五批同形——
+            #   **只有真跑一次才看得见**。就地从 meta 取。
+            try:
+                _profile = json.loads((target / 'meta.json').read_text(encoding='utf-8')
+                                      ).get('profile', 'standard')
+                _min = (PROFILE_THRESHOLDS.get(_profile) or {}).get('min_sources')
+            except (OSError, ValueError):
+                _min = None
+            if (_min and dd.get('usable') is not None and dd.get('distinct_works') is not None
+                    and dd['usable'] >= _min > dd['distinct_works']):
+                report.error(
+                    'corpus.source-count-inflated-by-duplicates',
+                    f'**`source.minimum` 只是被重份撑绿的**：可用来源 {dd["usable"]} ≥ 门 {_min}，'
+                    f'而按内容去重后只有 **{dd["distinct_works"]} 部作品**（虚高 {dd["inflation"]}×）。'
+                    '**这道门量的是「有几个 source_id」，不是「有几处独立证据」。**')
 
     # ── v0.0.0.105：花体乱码是**替换**不是**缺失**，上面那件按「缺失」判，会漏 ────
     #   Liebig #124 实测，10 份已知的 Fraktur 乱码里 `check_ocr_language_death` 只抓到 **5**。
@@ -2276,6 +2699,90 @@ def run_claim_source_independence(report, target: Path) -> None:
     report.metrics['claim_source_independence'] = info
 
 
+def run_translation_witness(report, target: Path) -> None:
+    """同一部作品的多个译本**不许当两处独立证据**（v0.0.0.80）。
+
+    `check_claim_source_independence` 的作品分组**是语言盲的**：实测 Pacioli #161 的
+    10 份源被它分成 **10 个作品组**，而其中三份译的是同一篇《Particularis de computis
+    et scripturis》。于是「方法类断言要 ≥2 处独立证据」**可以靠引两种译本过掉**。
+
+    ★ **本件敢当硬错**（与 `claim_source_independence` 只写 metrics 不同）：
+      它只在工作区**自己申报了** `parallel_witnesses` 时才可能报错，
+      而已入库的人一个都没申报过 → 对存量恒为 0 错，**拦不到无辜的人**。
+      申报之后的判定是**精确的集合运算，没有启发式，没有误报**。
+
+    ★★ 「自动认出哪些是译本」实测做不出来，已砍掉：阈值在一个工作区上标定，
+       全库一跑 **38,368 对**（Barton 10,502、Virchow 6,973），
+       而真阳性 0.080–0.102 **低于别处的噪声 0.12–0.19**。见检查器文件头。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_translation_witness.py'
+    if not script.exists():
+        report.metrics['translation_witness'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_transwit', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+        errors, collapsed, lines = module.check(target)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['translation_witness'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        report.error('corpus.translation-witness-crashed',
+                     f'并行见证判据跑不起来，**没核过不算通过**：{exc}')
+        return
+    groups = module.declared_groups(target)
+    report.metrics['translation_witness'] = {
+        '申报的并行见证组': len(groups),
+        '组内塌缩的断言': collapsed,
+        '错': errors,
+        '明细': [l for l in lines if l.startswith('✗')][:6],
+        '★': '申报 0 组**不等于**没有并行见证——本件不猜，只查申报',
+    }
+    for l in lines:
+        if l.startswith('✗'):
+            report.error('claim.parallel-witness-collapse', l.replace('\n', ' ').strip())
+
+
+def run_quote_attributed_source(report, target: Path) -> None:
+    """引文在不在**它自己引的那份源**里（v0.0.0.79，**只写 metrics**）。
+
+    `check_quote_integrity` 扫的是全语料，所以「挂错源」它一定放行——
+    读者按 `source_ids` 回查会落到另一份文献上，而所有计数都不变。
+
+    落成时全库 27 个工作区回扫（长引文 **410** 条）：
+    **挂错作品 / 版本差合计 35 条**，集中在 Osler 9、Virchow 8、Koch 5、Nightingale 4。
+    **只写 metrics 不拦**：已入库的人未回扫过，硬拦会把整个名册一起拦下
+    （与 `claim_source_independence` 同一条纪律）。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_quote_attributed_source.py'
+    if not script.exists():
+        report.metrics['quote_attributed_source'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_quoteattr', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+        r = module.scan(target)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['quote_attributed_source'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    if '状态' in r:
+        report.metrics['quote_attributed_source'] = {'状态': r['状态']}
+        return
+    wrong = [b for b in r['错挂'] if not b.get('同一作品组')]
+    verz = [b for b in r['错挂'] if b.get('同一作品组')]
+    report.metrics['quote_attributed_source'] = {
+        '长引文': r['引文数'],
+        '挂错作品': len(wrong),
+        '版本差（作品对、逐字文本取自另一版）': len(verz),
+        '不唯一（同句见于多份源，挂错也照样绿）': len(r['不唯一']),
+        '取不到正文的源': r['取不到正文的源'],
+        '例': [f"{b['claim_id']}：挂 {b['它引的源']} → 实 {b['真实出处']}"
+               for b in (wrong + verz)[:6]],
+    }
+
+
 def run_evidence_per_claim(report, target: Path) -> None:
     """证据字段是逐条的还是填一次抄 N 遍（v0.0.0.78，**只写 metrics**）。
 
@@ -2535,6 +3042,46 @@ def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
     report.metrics['holdout_overlap'] = info
 
 
+def run_lane_quotes_verbatim(report, target: Path) -> None:
+    """**六道研究稿里的每条逐字引文，都要能在语料里原样找到。**
+
+    Roberts-Austen #135 实测：六道逐条标了 `source_id`、看上去无懈可击，
+    回原文比对 **31 条里 2 条对不上**，其中最难查的一条是
+    `Koyal` 被悄悄改回 `Royal`，**且句中一道版口被抹掉、两半缝成一句连续引文**。
+    **缝合处不留痕迹，读起来完全通顺。**
+
+    ★ 判准：**看得见的编辑记号（`**加粗**`／`<sup>`／`«»`／显式省略号）允许，
+      不留痕迹的改动不允许。**
+    ★★ 只写 metrics 不拦——**判据自己校了六轮**，全库还有 19 条未逐条分诊，
+      在那之前不拿它卡流程（见 `check_lane_quotes_verbatim.py` 文件头）。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_lane_quotes_verbatim.py'
+    if not script.exists():
+        report.metrics['lane_quotes'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    # ★ 与本文件其它件同一套查找层级（工作区可能嵌 1–3 层）
+    _cands = [target, target.parent, target.parent.parent]
+    ws = next((c for c in _cands if (c / 'references' / 'research').is_dir()), None)
+    if ws is None:
+        report.metrics['lane_quotes'] = {'状态': '没有 references/research，**未核验**（不是通过）'}
+        return
+    try:
+        spec = importlib.util.spec_from_file_location('_pd_lane_quotes', script)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        _, rep = mod.check(ws)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['lane_quotes'] = {'状态': f'跑不起来，**未核验**（不是通过）：{exc}'}
+        return
+    report.metrics['lane_quotes'] = rep
+    bad = sum(len(v.get('**对不上**', [])) for v in rep.get('逐道', {}).values())
+    if bad:
+        report.warnings.append(
+            f'research.lane_quotes：{bad} 条逐字引文回原文对不上——'
+            '**引文对不上就是引文对不上**，逐条读过再决定是改引文还是记盲区')
+
+
 def run_namesake_criteria(report, target: Path) -> None:
     """**按人物定制的同名判据**（v0.0.0.151 接线，只写 metrics）。
 
@@ -2548,8 +3095,15 @@ def run_namesake_criteria(report, target: Path) -> None:
     if not script.exists():
         report.metrics['namesake_criteria'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
         return
-    if not (target / 'namesake-criteria.json').is_file() and \
-       not (target.parent.parent / 'namesake-criteria.json').is_file():
+    # ★ 与 `report_own_voice` 用同一套查找层级——**先前这里只查 2 层、那边查 3 层**，
+    #   于是同一个工作区里一个说「已启用」、另一个说「不适用」。
+    #   Sorby 的工作区嵌了三层（wip/workspaces/<slug>/<slug>），正好卡在差的那一层。
+    _crit_paths = [target / 'namesake-criteria.json',
+                   target.parent / 'namesake-criteria.json',
+                   target.parent.parent / 'namesake-criteria.json',
+                   target.parent.parent.parent / 'namesake-criteria.json']
+    _crit = next((c for c in _crit_paths if c.is_file()), None)
+    if _crit is None:
         report.metrics['namesake_criteria'] = {
             '状态': '本人物没有定制判据——**不适用**（不是通过）',
             '★': '「名+姓」够不够，取决于这个人物有没有同名近亲。**每个人物都要单测一次。**'}
@@ -2560,8 +3114,7 @@ def run_namesake_criteria(report, target: Path) -> None:
     try:
         spec.loader.exec_module(mod)
         with contextlib.redirect_stdout(buffer):
-            n = mod.run(target if (target / 'namesake-criteria.json').is_file()
-                        else target.parent.parent)
+            n = mod.run(target, _crit)
     except Exception as exc:                                    # noqa: BLE001
         report.metrics['namesake_criteria'] = {'状态': f'运行失败，**未核验**：{exc}'}
         return
@@ -2609,7 +3162,12 @@ def run_rubric_health(report, target: Path) -> None:
         return
     info: dict[str, Any] = {}
     for name, mod_name in (('抄答案', 'check_rubric_copies_answer'),
-                           ('要求出戏', 'check_persona_frame_break')):
+                           ('要求出戏', 'check_persona_frame_break'),
+                           # ★ 席 F 与席 G 在 Sorby #133 第 2 轮**各自独立**指出：
+                           #   答案声明「照印本录，一字不改」，随即录出 `immu- nity`、
+                           #   `balf`、`wbat`——印本不可能有这些。**两句话自己打架，
+                           #   不需要语料就能判**（评委正是在没有语料的条件下抓到的）。
+                           ('忠实度自相矛盾', 'check_fidelity_claim_vs_artifacts')):
         script = here / f'{mod_name}.py'
         if not script.exists():
             info[name] = '判据未安装，**未核验**（不是通过）'
@@ -2627,6 +3185,16 @@ def run_rubric_health(report, target: Path) -> None:
                     '占比': z.get('占比'),
                     '★': ('冻结指令写着「中译与压缩也算抄」；上一层只比英文，'
                           '**中文要 12 个字才够**，实测违规在 3–5 字之间'),
+                }
+            elif name == '忠实度自相矛盾':
+                r = mod.check(cand)
+                z = r.get('**声明与痕迹同现**') or {}
+                info[name] = {
+                    '题数': len(z),
+                    '逐题': sorted(z),
+                    '★': ('声称逐字忠实于**印本**，却展示只有影印/OCR 才有的痕迹——'
+                          '要么「照印本录」这句错了，要么引文被动过。**只报不拦**：'
+                          '改法涉及引文，改哪一头由人定。'),
                 }
             else:
                 r = mod.check(cand, rubrics, prompts)
@@ -3082,13 +3650,19 @@ def main() -> int:
         run_verdict_attribution(report, target)
         run_rubric_health(report, target)
         run_namesake_criteria(report, target)
+        run_lane_quotes_verbatim(report, target)
         report_own_voice(report, target, meta, sources)
+        report_stance_density(report, target, sources)
+        report_catalogue_entries(report, target, sources)
+        report_verbatim_quotes(report, target, args.cache)
+        report_semantic_residue(report, target)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
         run_rights_basis(report, target)
         run_pd_grounds(report, target)
         train_ids = {record.get('source_id') for record in sources if record.get('split') == 'train'}
         evaluate_research(report, target, thresholds, train_ids, args.allow_provisional)
+        run_translation_witness(report, target)
         cases: list[dict[str, Any]] = []
         if args.phase in {'synthesis', 'release'}:
             evaluate_claims(report, target, thresholds, sources, args.allow_provisional)
@@ -3097,6 +3671,7 @@ def main() -> int:
             run_measurement_claims(report, target)
             run_evidence_per_claim(report, target)
             run_claim_source_independence(report, target)
+            run_quote_attributed_source(report, target)
             run_answer_constraints(report, target)
             run_verbatim_pointer(report, target)
             run_unwired_three(report, target)
