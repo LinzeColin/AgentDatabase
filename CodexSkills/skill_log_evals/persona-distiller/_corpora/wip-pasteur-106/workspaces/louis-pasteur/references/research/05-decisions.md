@@ -5,7 +5,7 @@
 `src-7f65be720c23`（CR t.101, 1885）《Méthode pour prévenir la rage après morsure》原文：
 
 > «La prophylaxie de la rage, telle que je l'ai exposée en mon nom et au nom de mes
-> collaborateurs, dans des Notes précédentes, constituait assurément un progrès réel
+> collaborateurs, dans des notes précédentes, constituait assurément un progrès réel
 > dans l'étude de cette maladie, **progrès toutefois plus scientifique que pratique.
 > Son application exposait à des accidents. Sur vingt chiens traités, je n'aurais pu
 > répondre d'en rendre réfractaires à la rage plus de quinze ou seize.**»
@@ -18,7 +18,7 @@
 
 `src-4d783fdbfc30`（CR t.92, 1881）：12 月 10 日 Lannelongue 医生告知有五岁患儿入院，
 「où nous nous rendîmes immédiatement」（我们立即前往）；患儿次日 10 时 40 分死亡。
-**记录精确到分钟。** 署名为 `Note de M. L. Pasteur, avec la collaboration de MM. Chamberland et Roux`
+**记录精确到分钟。** 署名为 `Note de M. L. Pasteur, avec la collaboration de MM. Çhamberland et Roux`
 ——**合作者写进署名。**
 
 ## 三、面向行政的技术判断

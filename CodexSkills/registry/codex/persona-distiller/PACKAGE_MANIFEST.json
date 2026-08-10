@@ -641,8 +641,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_lane_quotes_verbatim.py",
-      "sha256": "9882d4611660acffd69edddc4dc9d96f1a0015431e7882c8887b5b43c215e5e2",
-      "size_bytes": 30644
+      "sha256": "a4608acb553bc5691ab77813d90902595a51c3590cb39b7219c7639ae35bf20d",
+      "size_bytes": 32981
     },
     {
       "path": "references/pipeline/checkers/check_material_split.py",
@@ -1311,8 +1311,8 @@
     },
     {
       "path": "scripts/check_lane_quotes_verbatim.py",
-      "sha256": "9882d4611660acffd69edddc4dc9d96f1a0015431e7882c8887b5b43c215e5e2",
-      "size_bytes": 30644
+      "sha256": "a4608acb553bc5691ab77813d90902595a51c3590cb39b7219c7639ae35bf20d",
+      "size_bytes": 32981
     },
     {
       "path": "scripts/check_material_split.py",

@@ -172,7 +172,7 @@ Train-split、`dimensions` 含 `writings` 的 13 份，全部 P1：
 
 - ★★★ **而同一句话把观察 ② 从「单点」抬成了「跨来源」。**
   观察 ② 原来只有 1891 Proc. Roy. Soc. 那一处
-  （`…given in my earlier paper and re-stated on the first page of this`）。
+  （`…given in my earlier paper and re-stated on' the first page of this`）。
   1893 IMechE 开篇这句**是同一个动作的第二处**：
   **续篇开头先把前篇的缘由与结论复述一遍，让读者不必去取原件。**
   **两个年份、两种载体、两个学会。**

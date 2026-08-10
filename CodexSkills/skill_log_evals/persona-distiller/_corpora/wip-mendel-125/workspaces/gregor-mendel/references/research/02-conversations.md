@@ -28,7 +28,7 @@ Schreiben Sr. Hochw., des Hrn. G. Mendel … mit」；
 > `der seit zwei Jahren in der Umgebung von Brünn bedeutenden Schaden anrichtet.`
 > `Es ist der Bruchus pisi.`
 
-`referiren über einen Delinquenten`——**「就一名被告作报告」**。
+`über einen Delinquenten zu referiren`（★ 我曾写成「referiren über einen Delinquenten」（★ 有意不用反引号：本道判据把反引号内的长串一律当成「声称逐字」去核，而**这一句恰恰是反面例子**——今天已经在 `[sketch]` 那处踩过同一个坑），**语序是我调的**；原文是 `Ich erlaube mir über einen Delinquenten zu referiren`）——**「就一名被告作报告」**。
 这是本人物语料里**唯一一处清楚的幽默**，且是**克制的、格式化的**幽默：
 他把公文体（`Ich erlaube mir … zu referiren`）套在一只甲虫身上。
 
@@ -54,7 +54,7 @@ Schreiben Sr. Hochw., des Hrn. G. Mendel … mit」；
 
 > `Herr Abt Mendel schreibt uns aus Brünn: Gestern am 29. Juni um 7 Uhr Abends entlud`
 > `sich über unsere Stadt und Umgebung ein wahrhaft furchtbares Gewitter mit Hagelschlag`
-> `und wolkenbruchartigem Gussregen (54 Mm. in kaum mehr als einer halben Stunde).`
+> `und wolkenbruchartigem Gussregen ( 54 Mm. in kaum mehr als einer halben Stunde).`
 > `Der Hagel fiel in solcher Menge, dass er heute noch an schattigen Orten haufenweise liegt.`
 > `Die niedriger gelegenen Gässen und Plätze und viele ebenerdige Wohnungen wurden ganz`
 > `oder theilweise unter Wasser gesetzt. Der Schaden in Feldern und Gärten ist ein`

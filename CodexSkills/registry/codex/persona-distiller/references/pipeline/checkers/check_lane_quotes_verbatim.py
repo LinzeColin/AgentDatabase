@@ -85,6 +85,8 @@ _ELISION = re.compile(r"\s*(?:\.\.\.|…)\s*")
 _HYPHEN_BREAK = re.compile(r"[-¬­]\s+")          # 行末折行连字（含 OCR 的 ¬ 与软连字）
 _DASHES = re.compile(r"[—–−]")
 # 标点前的空白（OCR 版面产物，尤以德文/法文排印为多）
+# 撇号的各种排印形态——OCR 与手打之间必然不一致，**归一不动字母**
+_APOSTROPHE = re.compile(r"[\u2018\u2019\u201b\u02bc\u00b4`]")
 _SPACE_BEFORE_PUNCT = re.compile(r"\s+([,.;:!?)\]])")
 # 中日韩标点：出现即说明这是我写的散文，不是英文逐字引文
 # ★★★★ **`—` 与 `…` 有意不在这个集合里。**
@@ -128,13 +130,25 @@ def _norm(s: str) -> str:
     #   ★★ 但它确实放宽了判据：`a , b` 与 `a, b` 从此视为同一句。
     #     **这是有意的**——那是排印差异，不是内容差异。
     #     自测里配了反例：**字母一改，照样对不上。**
+    s = _APOSTROPHE.sub("'", s)
     s = _SPACE_BEFORE_PUNCT.sub(r"\1", s)
     # ★ 这里**不要**再把 ` - ` 缩成 `-`：那是我随手加的一条、没配自测，
     #   当场把 Roberts-Austen 从 0 条对不上打成 2 条
     #   （`[April 20, 1891. — In the course…` → `1891.-In`，
     #     `chronological sequence : —` → `sequence : -`）。
     #   **每加一条归一，就得同时问「它会不会把本来对得上的打散」。**
-    return " ".join(s.split())
+    s = " ".join(s.split())
+    # ★★★★ 2026-08-10：**引文断在跨行连字符上时，末尾那个连字符要去掉。**
+    #   `_HYPHEN_BREAK` 只处理 `连字符 + 空白`（`circum- stances` → `circumstances`），
+    #   而引文如果**正好断在半个词上**，连字符后面什么都没有，它就留在末尾：
+    #       Thomson #129 实测：`1 have tried that with considerable suc-`
+    #                          `It is my privilege, as … a young, vigorous and grow-`
+    #       语料里是 `suc- cess` → `success`、`grow- ing` → `growing`。
+    #   ★ 去掉末尾连字符后 `…considerable suc` 就是 `…considerable success` 的前缀，能对上。
+    #   ★★ **这确实放宽了一点**：截断的词只比到词干。
+    #     但整条引文本身很长，靠前面几十个词已经锁死了位置；
+    #     而**不去掉的话，凡是断在半个词上的引文一条都验不了**——那是更大的盲区。
+    return s[:-1] if s.endswith("-") else s
 
 
 def load_corpus(ws: pathlib.Path):
@@ -270,6 +284,23 @@ def self_test():
         print(("  ✓ " if ok else "  ✗ ") + lbl)
         if not ok:
             bad.append(lbl)
+
+    print("\n══ ★ 引文断在跨行连字符上（Thomson #129 实测两条）══")
+    chk("`…considerable suc-` 能对上语料的 `suc- cess`",
+        _norm("1 have tried that with considerable suc-")
+        in _norm("Pror. Tmomson:-1 have tried that with considerable suc- cess in a case"))
+    chk("`…vigorous and grow-` 能对上 `grow- ing`",
+        _norm("as the chief officer of a young, vigorous and grow-")
+        in _norm("It is my privilege, as the chief officer of a young, vigorous and grow- ing body"))
+    chk("★ 而词干不同仍然对不上（`suc-` vs `sur- vey`）",
+        _norm("with considerable suc-") not in _norm("with considerable sur- vey"))
+
+    print("\n══ ★ 撇号排印变体（Thomson #129 实测）══")
+    chk("弯撇号与直撇号视为同一个",
+        _norm("I think that Prof. Anthony's remarks are very apt")
+        in _norm("Pror. Taomson:-I think that Prof. Anthony\u2019s remarks are very apt indeed"))
+    chk("★ 而改了字母仍然对不上（`Anthony` → `Anthonys`）",
+        _norm("Prof. Anthonys remarks") not in _norm("Prof. Anthony\u2019s remarks"))
 
     print("\n══ ★ 带中日韩标点的不是引文（2026-08-10 全库实测 4 条）══")
     for s_ in ("《The Times》1878-01「A Billion Dissected」，落款",

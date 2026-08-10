@@ -71,7 +71,7 @@ train split，全部 P1 载体：
 
 > `jene Merkmale, welche ganz oder fast unverändert in die Hybride-Verbindung übergehen,`
 > `somit selbst die Hybriden-Merkmale repräsentiren, als dominirende, und jene,`
-> `welche in der Verbindung latent werden, als recessive bezeichnet.`
+> `welche in der Verbindung la_ tent werden, als recessive bezeichnet.`
 > `Der Ausdruck „recessiv" wurde desshalb gewählt, weil die damit benannten Merkmale`
 > `an den Hybriden zurücktreten oder ganz verschwinden`
 

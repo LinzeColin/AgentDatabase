@@ -23,11 +23,11 @@
 
 1881 年 t.92 的通报（`src-4d783fdbfc30`）以第一人称记录了一次同行相邀：
 
-> «**Le 10 décembre dernier, M. le D<sup>r</sup> Lannelongue, chirurgien de l'hôpital
+> «**Le 10 décembre dernier, M. le D r Lannelongue, chirurgien de l'hôpital
 > Sainte-Eugénie, eut l'obligeance de m'informer qu'un enfant de cinq ans, atteint
 > d'hydrophobie, venait d'entrer dans son service, où nous nous rendîmes immédiatement.**»
 
 **他的工作是被临床同行叫去的，不是在实验室里独自发生的。** 这条同时说明了
 他与医院系统的往来方式：消息经医生个人转达，他当日即到。
-该通报署名为 `Note de M. L. Pasteur, avec la collaboration de MM. Chamberland et Roux`
+该通报署名为 `Note de M. L. Pasteur, avec la collaboration de MM. Çhamberland et Roux`
 ——**合作者在署名里，不在致谢里。**

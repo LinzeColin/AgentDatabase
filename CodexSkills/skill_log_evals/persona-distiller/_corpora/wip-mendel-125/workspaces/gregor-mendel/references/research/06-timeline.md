@@ -23,17 +23,17 @@
 Bd.23 讣告全段（逐字照录，含 OCR 讹字）：
 
 > `Der Seeretär Herr Prof. G. v. Niessl theilt die betrübende Nachrieht von dem Tode`
-> `des hochverdienten Vereinsmiteliedes P. Gresor Mendel, inful. Abt des Augustinerstiftes`
+> `des hochverdienten Vereinsmiteliedes P. oO Sa Gresor Mendel, inful. Abt des Augustinerstiftes`
 > `in Brünn mit. Der Verstorbene gehörte seit der Gründung des Vereines zu seinen`
 > `eifrigssten und wohlwollendsten Förderern, indem er nicht allein denselben materiell`
 > `ausgiebig unterstützte, sondern auch lebhaften Antheil an den wissenschaftlichen`
 > `Arbeiten desselben nahm. Er benützte die Musse, welche ihm seine glückliche Stellung`
-> `gewährte, fast ausschliesslich zu sehr eingehenden naturwissenschaftlichen Studien,`
+> `gewährte, fast ‚ausschliesslich zu sehr eingehenden naturwissenschaftlichen Studien,`
 > `die durchaus von selbstständiger eigenthümlicher Auffassungsweise zeigten.`
 > `Hieher gehören insbesondere die Beobachtungen über die von ihm in grossen Mengen`
-> `cultivirten Pflanzenbastarde. Zugleich widmete er der Meteorologie ein lebhaftes`
+> `eultivirten Pflanzenbastarde. Zugleich widmete er der Meteorologie ein lebhaftes`
 > `Interesse Nach dem Tode des Bart Med. Dr. Olexik übernahm er die regelmässige Führung`
-> `der meteorologischen Beobachtung für Brünn, mit der ihm eigenen Sorgfalt und Pünktlichkeit.`
+> `der meteoro‚logischen Beobachtung für Brünn, mit der ihm eigenen Sorgfalt und Pünktlichkeit.`
 
 **逐项拆开：**
 
@@ -41,7 +41,7 @@ Bd.23 讣告全段（逐字照录，含 OCR 讹字）：
 |---|---|
 | **出资赞助学会**（`materiell ausgiebig unterstützte`） | 排在最前 |
 | `selbstständiger eigenthümlicher Auffassungsweise`（独立而独特的见解） | 一句 |
-| **植物杂种观察**（`die Beobachtungen über die … cultivirten Pflanzenbastarde`） | **一个从句** |
+| **植物杂种观察**（`die Beobachtungen über die … eultivirten Pflanzenbastarde`） | **一个从句** |
 | **气象**（接手 Olexik 之后的常规观测，`Sorgfalt und Pünktlichkeit`） | **两句，比杂交长** |
 
 ★★ **全卷实测**：`Erbse` **0 命中**、`Pisum` **0 命中**、`Versuche über` **0 命中**、
