@@ -13,9 +13,10 @@
 
 `src-d24956da3ad0` @4323：
 
-> `Cicero was born, one hundred and six years before the Christian era. The family was of ancient
-> 'equestrian' dignity, but as none of its members had hitherto borne any office of state, it did
-> not rank as 'noble'.`
+> `'equestrian'[1] dignity, but as none of its members had hitherto borne`
+（Collins 1871，与前一行 `and six years before the Christian era. The family was of ancient` 相接）
+
+★ **照录，`[1]` 是印本的脚注标记**——我第一版把它抹掉了，那就不是逐字引文了。
 
 这段的用处是**定位他的出身阶层**：骑士等级、有资历但**没有执政官祖先**，
 即所谓"新人"（novus homo）。这一条能解释 decisions 道里"起诉前先解释自己为何破例"
@@ -26,9 +27,8 @@
 
 `src-d24956da3ad0` @4859 谈他祖父：
 
-> `a stout old conservative, who had successfully resisted the attempt to introduce vote by ballot
-> into his native town, and hated the Greeks (who were just then coming into fashion) as heartily
-> as his English representative, fifty years ago, might have ha[ted]`
+> `the little Cicero was born; a stout old conservative, who had successfully`
+（Collins 1871；下文续 `resisted the attempt to introduce vote by ballot into his native town`）
 
 ★★ 作者**直接拿 1820 年代的英国乡绅去比附公元前 1 世纪的罗马人**。
 这不是偶发的修辞，是这套丛书的写法（"给英语读者的古典读本"）。

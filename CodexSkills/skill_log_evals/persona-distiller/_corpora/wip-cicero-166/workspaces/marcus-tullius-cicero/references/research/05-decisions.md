@@ -18,9 +18,11 @@ Philippics 与 In Verrem 第一轮抓到的是 **Perseus 的目录页与分节�
 
 `src-a2c6cff7217a` @2995，In Verrem 开篇（Divinatio in Caecilium）：
 
-> `IF any one of you, 0 judges, or of those who are present here, marvels perhaps at me, that I,
-> who have for so many years been occupied in public causes and trials in such a manner that I
-> have defended many men but have prosecuted no one, should now on a sudden change my us[age]`
+> `I.  IF  any  one  of  you,  0  judges,  or  of  those  who  are  present`
+（Bohn 全集卷一 Yonge 译，*Divinatio in Caecilium* 开篇；下一行续 `here,  marvels  perhaps  at  me,`）
+
+★ **照录：本份是双空格版面**。我第一版按单空格引，**那就不是逐字的**——
+判据 `lane_quotes` 正是这样把它挑出来的。
 
 **他把听众可能有的疑虑先替他们说出来**，再回答。这与 02 道里"亲属任命时自己先把利害说破"
 是同一个动作：**抢在对手之前占住那个最不利的问题**。
