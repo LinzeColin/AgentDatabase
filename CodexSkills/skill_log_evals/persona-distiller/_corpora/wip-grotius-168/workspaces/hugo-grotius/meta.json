@@ -87,6 +87,17 @@
     "disputed_works": [
       "thetworuthofthechr00kaftuoft —— 探测清单误记为 De Veritate 英译，回读题名页实为 Julius Kaftan《The Truth of the Christian Religion》T. & T. Clark 1894，且印着 'This Translation is Copyright by arrangement'。两书英译题名完全相同；**它能过年份门（1894 ≤1930），只在归属上不成立**。已删除，换用真本（题名页 `BY HUGO GROTIUS`）",
       "hugonisgrottiide00grotuoft —— 清单记为 1646 拉丁影印，实为 Kelsey 1925 英译第二卷（前言页字面 `VOLUME TWO THE TRANSLATION … CLARENDON PRESS … 1925`），8-gram 与 Kelsey 重合 72.5%（两个对照组均 0.0%）。保留为 `EXCLUDED_` 前缀，不计份数"
-    ]
+    ],
+    "covered_sources": [
+      "mare_liberum_1618_lat.txt —— 题名页属格署名 `Hvgonis GrotI[I] MARE LIBERVM …`，出版行 `LVGD[V]NI [B]ATAVOKVM, Ex Of[f]icin[a] Elzeviriana`。强。",
+      "poemata_1637_lat.txt —— 题名页 `Grotij [P]OEMAT[A] Collecta`，整理者是弟弟（序中自称 `fratrem meum`）。★ 射程限定：卷末 `cum amicorum elogijs` 一段是**别人写他**（父 Jan 贺诞、Apollonius Scottus 悼其幼子、婚礼贺诗），**不得取作他的声口**；逐处坐标见 `00-归属证据实测.md`。",
+      "epistolae_1687_lat.txt —— 题名页属格署名 `HVGONIS GR[O]TII … EPISTOL[AE] Q[u]otq[u]ot r[e]p[e]ri[r]i potuerunt`，出版行 `AMSTELODAMI, Ex Typographia P. & I. BLAEV`。强。",
+      "de_imperio_1751_fr.txt —— **译本**。署名来自 Project Gutenberg 头 `Author: Hugo Grotius` 与正文题下 `_Traduit du Latin de Grotius_`，**不是影印题名页**。中。",
+      "adamus_exul_barham_1839_en.txt —— **译本**，题名 `ADAMUS EXUL OF GROTIUS;`（Barham 英译）。中。",
+      "djbp_whewell_1853_en.txt —— **译本**，★ 署名行是译者：`AN ABRIDGED TRANSLATION. BY WILLIAM WHEWELL, D.D.`；原著者只出现在题名 `GROTIUS ON THE RIGHTS OF WAR AND PEACE`。中。",
+      "djbp_1853_lat_vol2.txt —— 题名页与逐页页眉均作 `HUGONIS GROTII`。强。",
+      "djbp_1853_lat_vol3.txt —— ★ **本卷题名页作者行与年份行 OCR 不可读**；归属靠卷首大标题 `HUGONIS GEOTII DE JURE BELLI AC PA£4~»` 与 vol1/vol2 同版式同出版者行**推得**。弱——记作推定，不记作读到。"
+    ],
+    "counting_convention": "★ 逐份认领的凭据全部写在 `covered_sources` 每一条里，弱凭据显式标弱（vol3 是推定、三份译本的署名行是译者）。本键**不放行任何未逐份点名的源**；判据只判『有没有被逐份认领』，不判『认领得对不对』，所以认领得对不对由 `00-归属证据实测.md` 的逐字读数负责。"
   }
 }

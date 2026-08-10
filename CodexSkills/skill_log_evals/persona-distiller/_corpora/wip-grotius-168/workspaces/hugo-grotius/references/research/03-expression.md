@@ -9,7 +9,7 @@
 | `src-fd2c87dfecb9` | 1637 | P1 | Hugonis Grotii Poemata（拉丁诗全集：Sacra／Patria／Nuptialia、哀歌、杂咏、铭辞等） |
 | `src-50d9d5f3ff5e` | 1839 | P1 | The Adamus Exul of Grotius, or The Prototype of Paradise Lost |
 
-★ 本节由台账机械导出，**不含任何阅读判断**；下面三节要读原文，仍是 `Pending.`。
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 
 ## Source-linked observations
 

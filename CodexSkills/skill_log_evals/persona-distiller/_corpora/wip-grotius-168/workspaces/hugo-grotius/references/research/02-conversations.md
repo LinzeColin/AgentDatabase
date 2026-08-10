@@ -10,7 +10,7 @@
 | `src-1a398fec8248` | 1806 | P1 | Hugonis Grotii Epistolae Ineditae（致 Oxenstierna 父子及瑞典参议，自法国寄出） |
 | `src-b7384d9e7530` | 1829 | P1 | Hugonis Grotii ad Ioh. Oxenstiernam et Ioh. Adl. Salvium … Epistolae Ineditae |
 
-★ 本节由台账机械导出，**不含任何阅读判断**；下面三节要读原文，仍是 `Pending.`。
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 
 ## Source-linked observations
 

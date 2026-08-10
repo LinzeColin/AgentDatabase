@@ -2,10 +2,9 @@
 
 ## Scope and assigned sources
 
-**本道 0 份。**
+**本道分到 0 份（train split）**。
 
-★ 这是事实不是遗漏：18 份 train 语料按抓源方的分道，`decisions` 与 `timeline` 两道没有材料。
-★★ `min_lanes` 门要 3 道，现有 writings／conversations／expression／external **4 道**，够。
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**。
 
 ## Source-linked observations
 
