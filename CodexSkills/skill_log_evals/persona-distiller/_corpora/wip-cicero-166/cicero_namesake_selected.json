@@ -1,0 +1,36 @@
+{
+ "_selection_record": "同名门第一次运行返回 **blocked（5 名候选，见 `namesake_gate.BLOCKED.json`）**。选定 **Marcus Tullius Cicero（前 106–前 43）**。其余 4 人不构成专家人格候选，登记它们是为了留下「已识别并排除」的记录。\n\n★★★★ **本人物的检索硬纪律，四条：**\n① **最危险的不是同姓，是 `Marcus Tullius Tiro`**——他的释奴秘书，**praenomen ＋ nomen 与本人完全相同**，只有 cognomen 不同。按 `Marcus Tullius` 检索会直接命中他。**而且他正是编辑出版 Cicero 书信的人**，所以书信类材料里两人必然同时出现。**凡书信的编辑说明、序、注释，一律先判是谁写的。**\n② **独子与父亲完全同名**（连 cognomen 都相同）。靠年代与官职分：父前 63 年执政官，子前 30 年。\n③ ★★★ **对话体作品里的「我」多数不是他**。实测《De Amicitia》：序言段第一人称密度 ≈1/30（那是 Cicero 自己），而正文 §20 ≈1/120（**那是角色 Laelius 在说**）。**摘录前必须先判断说话人是谁**——这是本人物独有的、比同名更容易出错的一条。\n④ ★★★★ **译本的出版年是硬门**：De Oratore / Brutus / Orator / De Natura Deorum / Academica 这五部，**搜索引擎默认给的现代 Loeb 译本全部晚于 1930**（Rackham 1933、Hendrickson/Hubbell 1939、Sutton/Rackham 1942）——**不合规**。每部都有更老的公有领域替代译本（Watson 1855、Jones 1776、Yonge 1853）。**抓源时按书名搜到的第一个译本多半是不能用的那个。**",
+ "selected": {
+  "canonical_name": "Marcus Tullius Cicero",
+  "lived": "前106–前43",
+  "why": "cognomen `Cicero`、praenomen `Marcus`、前 63 年执政官；《De Officiis》《De Oratore》与致 Atticus 书信的作者。"
+ },
+ "excluded_count": 4,
+ "excluded": [
+  {
+   "name_full": "Marcus Tullius Tiro",
+   "lived": "约前103–前4",
+   "risk": "★★★★ 最高",
+   "why_excluded": "他是 Cicero 的释奴秘书，不是 Cicero 本人；**同 praenomen 同 nomen**，且是书信集的编者——书信材料里必然同时出现。"
+  },
+  {
+   "name_full": "Marcus Tullius Cicero Minor",
+   "lived": "前65–?",
+   "risk": "高",
+   "why_excluded": "**与父亲完全同名**；前 30 年执政官，非前 63 年。"
+  },
+  {
+   "name_full": "Quintus Tullius Cicero",
+   "lived": "前102–前43",
+   "risk": "中",
+   "why_excluded": "胞弟；praenomen 是 `Quintus`。"
+  },
+  {
+   "name_full": "Quintus Tullius Cicero (the younger)",
+   "lived": "前67–前43",
+   "risk": "低",
+   "why_excluded": "侄子；praenomen 是 `Quintus`。"
+  }
+ ],
+ "★ 没能核实的": "独子的卒年查不到；侄子的职业查不到。**写「查不到」，没有编。**"
+}

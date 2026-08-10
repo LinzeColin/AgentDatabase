@@ -1,0 +1,136 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Marcus Tullius Cicero；历史人物；罗马政治家、演说家、哲学著作家。\n   专业背景：前 63 年执政官；著《De Officiis》《De Oratore》等；致 Atticus 等人的书信集传世。\n   应用价值：场景：法庭与元老院演说；哲学与修辞学著述；私人书信；关键能力：正反两面论证（新学园派方法）；把论著与自己真打过的案子绑在一起论证。\n   区分依据：cognomen 是 `Cicero`，praenomen `Marcus`；前 63 年执政官。**本人。**。",
+    "B. 人物与身份：Marcus Tullius Tiro；历史人物；Cicero 的释奴秘书。\n   专业背景：发明速记法（notae Tironianae）；编辑并出版了 Cicero 的书信。\n   应用价值：场景：速记与文书；书信编辑出版；关键能力：速记法；文稿编辑。\n   区分依据：★★★★ **praenomen ＋ nomen 与本人完全相同（`Marcus Tullius`），只有 cognomen 不同**——按姓名字符串检索会直接命中他。**本名单里风险最高的一个。**。",
+    "C. 人物与身份：Marcus Tullius Cicero Minor；历史人物；罗马执政官（前 30 年）。\n   专业背景：Cicero 的独子。\n   应用价值：场景：公职；关键能力：查不到。\n   区分依据：**与父亲完全同名（连 cognomen 都相同）**；靠年代与官职区分——父前 63 年执政官，子前 30 年。。",
+    "D. 人物与身份：Quintus Tullius Cicero；历史人物；罗马法务官、凯撒麾下将领。\n   专业背景：Cicero 的胞弟；传为《Commentariolum Petitionis》作者。\n   应用价值：场景：军政；关键能力：竞选实务写作（归属有争议）。\n   区分依据：praenomen 是 `Quintus`，不是 `Marcus`。。",
+    "E. 人物与身份：Quintus Tullius Cicero (the younger)；历史人物；查不到。\n   专业背景：Cicero 的侄子，胞弟之子，与其父同名。\n   应用价值：场景：查不到；关键能力：查不到。\n   区分依据：与其父同名，靠年代区分；与本人 praenomen 不同。。"
+  ],
+  "candidate_count": 5,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "法庭与元老院演说",
+        "哲学与修辞学著述",
+        "私人书信"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus:abo:phi,0474,055:2:8"
+        },
+        {
+          "locator": "The Latin Library: Cicero"
+        }
+      ],
+      "canonical_name": "Marcus Tullius Cicero",
+      "distinguishing_basis": "cognomen 是 `Cicero`，praenomen `Marcus`；前 63 年执政官。**本人。**",
+      "evidence_level": "high",
+      "identity_category": "历史人物",
+      "key_capabilities": [
+        "正反两面论证（新学园派方法）",
+        "把论著与自己真打过的案子绑在一起论证"
+      ],
+      "label": "A",
+      "occupation_or_role": "罗马政治家、演说家、哲学著作家",
+      "professional_background": "前 63 年执政官；著《De Officiis》《De Oratore》等；致 Atticus 等人的书信集传世",
+      "subject_uid": null
+    },
+    {
+      "application_scenarios": [
+        "速记与文书",
+        "书信编辑出版"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "探测报告 166-cicero-可得性探测.md §④"
+        }
+      ],
+      "canonical_name": "Marcus Tullius Tiro",
+      "distinguishing_basis": "★★★★ **praenomen ＋ nomen 与本人完全相同（`Marcus Tullius`），只有 cognomen 不同**——按姓名字符串检索会直接命中他。**本名单里风险最高的一个。**",
+      "evidence_level": "medium",
+      "identity_category": "历史人物",
+      "key_capabilities": [
+        "速记法",
+        "文稿编辑"
+      ],
+      "label": "B",
+      "occupation_or_role": "Cicero 的释奴秘书",
+      "professional_background": "发明速记法（notae Tironianae）；编辑并出版了 Cicero 的书信",
+      "subject_uid": null
+    },
+    {
+      "application_scenarios": [
+        "公职"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "探测报告 166-cicero-可得性探测.md §④"
+        }
+      ],
+      "canonical_name": "Marcus Tullius Cicero Minor",
+      "distinguishing_basis": "**与父亲完全同名（连 cognomen 都相同）**；靠年代与官职区分——父前 63 年执政官，子前 30 年。",
+      "evidence_level": "medium",
+      "identity_category": "历史人物",
+      "key_capabilities": [
+        "查不到"
+      ],
+      "label": "C",
+      "occupation_or_role": "罗马执政官（前 30 年）",
+      "professional_background": "Cicero 的独子",
+      "subject_uid": null
+    },
+    {
+      "application_scenarios": [
+        "军政"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "探测报告 166-cicero-可得性探测.md §④"
+        }
+      ],
+      "canonical_name": "Quintus Tullius Cicero",
+      "distinguishing_basis": "praenomen 是 `Quintus`，不是 `Marcus`。",
+      "evidence_level": "medium",
+      "identity_category": "历史人物",
+      "key_capabilities": [
+        "竞选实务写作（归属有争议）"
+      ],
+      "label": "D",
+      "occupation_or_role": "罗马法务官、凯撒麾下将领",
+      "professional_background": "Cicero 的胞弟；传为《Commentariolum Petitionis》作者",
+      "subject_uid": null
+    },
+    {
+      "application_scenarios": [
+        "查不到"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "探测报告 166-cicero-可得性探测.md §④"
+        }
+      ],
+      "canonical_name": "Quintus Tullius Cicero (the younger)",
+      "distinguishing_basis": "与其父同名，靠年代区分；与本人 praenomen 不同。",
+      "evidence_level": "low",
+      "identity_category": "历史人物",
+      "key_capabilities": [
+        "查不到"
+      ],
+      "label": "E",
+      "occupation_or_role": "查不到",
+      "professional_background": "Cicero 的侄子，胞弟之子，与其父同名",
+      "subject_uid": null
+    }
+  ],
+  "generated_at": "2026-08-10T10:49:11Z",
+  "normalized_name": "marcustulliuscicero",
+  "resolution": "multiple",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "blocked",
+  "target_name": "Marcus Tullius Cicero"
+}
