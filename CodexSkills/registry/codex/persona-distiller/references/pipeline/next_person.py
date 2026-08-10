@@ -15,9 +15,34 @@ import argparse, json, os, re, glob, pathlib
 #   8-13 移交之后接手方拿不到，NEXT 会静默换一份底稿。
 #   改法：**从本文件自己的位置推仓内路径**（本脚本就住在 `_ledgers/_pipeline/` 里），
 #   仓内没有才退回旧路径，且**每次都打印实际用了哪一份**。
-_HERE = pathlib.Path(__file__).resolve().parent          # …/_ledgers/_pipeline
-_LEDGERS = _HERE.parent                                  # …/_ledgers
-_SKILLS = _LEDGERS.parents[2]                            # …/CodexSkills
+_HERE = pathlib.Path(__file__).resolve().parent
+
+
+def _find_up(start, *names):
+    """从 start 向上找第一个含有全部 names 的目录。→ 找到的目录，或 None。
+
+    ★★★★ **不许按层数推。** 本脚本有两份副本：
+      `CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/next_person.py`
+      `CodexSkills/registry/codex/persona-distiller/references/pipeline/next_person.py`
+    层级完全不同。第一版按前者写死 `parents[2]`，
+    **而 HANDOFF 让接手方跑的是后者**——在干净检出里一跑，
+    三份路径全部退回仓外（`~/Downloads/`、一个不存在的 worktree）。
+    [[verifying-single-commands-is-not-verifying-the-chain]]：**要在收件人的布局里跑。**
+    """
+    p = start
+    for _ in range(12):
+        if all((p / n).exists() for n in names):
+            return p
+        if p.parent == p:
+            break
+        p = p.parent
+    return None
+
+
+_SKILLS = _find_up(_HERE, "registry", "skill_log_evals") or _find_up(_HERE, "CodexSkills")
+if _SKILLS is not None and (_SKILLS / "CodexSkills").exists():
+    _SKILLS = _SKILLS / "CodexSkills"
+_LEDGERS = (_SKILLS / "skill_log_evals/persona-distiller/_ledgers") if _SKILLS else None
 
 _FALLBACK_REG = "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller-group"
 DEF_DL = "/Users/linzezhang/Downloads/蒸馏"
@@ -25,13 +50,17 @@ DEF_DL = "/Users/linzezhang/Downloads/蒸馏"
 
 def _pick(in_repo, fallback):
     """仓内优先；仓内没有才用旧路径。→ (路径, 是不是退回来的)"""
-    return (str(in_repo), False) if pathlib.Path(in_repo).exists() else (str(fallback), True)
+    if in_repo is not None and pathlib.Path(in_repo).exists():
+        return str(in_repo), False
+    return str(fallback), True
 
 
-DEF_REG, _REG_FELL = _pick(_SKILLS / "registry/codex/persona-distiller-group", _FALLBACK_REG)
-DEF_Q, _Q_FELL = _pick(_LEDGERS / "_蒸馏队列.json", "/Users/linzezhang/Downloads/蒸馏/_蒸馏队列.json")
-DEF_DEFER, _D_FELL = _pick(_LEDGERS / "_延后名单.json", "/Users/linzezhang/Downloads/蒸馏/_延后名单.json")
-
+DEF_REG, _REG_FELL = _pick(_SKILLS / "registry/codex/persona-distiller-group" if _SKILLS else None,
+                           _FALLBACK_REG)
+DEF_Q, _Q_FELL = _pick(_LEDGERS / "_蒸馏队列.json" if _LEDGERS else None,
+                       "/Users/linzezhang/Downloads/蒸馏/_蒸馏队列.json")
+DEF_DEFER, _D_FELL = _pick(_LEDGERS / "_延后名单.json" if _LEDGERS else None,
+                           "/Users/linzezhang/Downloads/蒸馏/_延后名单.json")
 def norm(s):
     return re.sub(r'[^a-z0-9]', '', s.lower())
 
