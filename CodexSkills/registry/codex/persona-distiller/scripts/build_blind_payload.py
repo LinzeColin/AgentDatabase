@@ -240,9 +240,10 @@ def selftest() -> int:
     chk(f"{LEAK_CHECKER.name} 在", LEAK_CHECKER.is_file())
     chk(f"{LOC_CHECKER.name} 在", LOC_CHECKER.is_file())
     # ★ 反向对照：两道生成时判据必须都在——少一道就等于那一道从没跑过
-    chk("三道生成时判据都在（少一道 = 那道从没跑过）",
+    chk("四道生成时判据都在（少一道 = 那道从没跑过）",
         LEAK_CHECKER.is_file() and LOC_CHECKER.is_file()
-        and (HERE / "check_answer_holdout_leak.py").is_file())
+        and (HERE / "check_answer_holdout_leak.py").is_file()
+        and (HERE / "check_answer_numbers_in_corpus.py").is_file())
 
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
@@ -669,6 +670,23 @@ def main() -> int:
     #   而自述不是证据（[[self-report-is-not-evidence]]）。
     #   ★ 它**用基线答案做负对照**：基线从没读过任何文件，
     #     基线也说得出来的词不算 holdout 独有。
+    # ── 答案里的数字回核（v0.0.0.91，**只报不拦**）────────────────────────
+    #   Gantt #156 第 1 轮：候选在「不该给数」的那题主动补了 `千分之四`–`千分之六`
+    #   并说「这是我核过的东西」，而全语料里没有这个数。
+    #   ★ 本件**不拦**：`找不到` 可能是合理的（人物生年、常识年份），
+    #     `核不了` 更只是「要人看」。**它缩小人要看的范围，不替人下判断。**
+    nc = HERE / "check_answer_numbers_in_corpus.py"
+    print("\n── 答案里的数字回核（**只报不拦**）──")
+    if not nc.is_file():
+        print("⚠ check_answer_numbers_in_corpus.py 不在，**答案数字未核（不是通过）**")
+    else:
+        n = subprocess.run([sys.executable, str(nc), "--workspace", str(a.workspace),
+                            "--answers", str(cand_path)], capture_output=True, text=True)
+        print((n.stdout or "").rstrip())
+        if (n.stderr or "").strip():
+            for _l in n.stderr.rstrip().splitlines():
+                print("  │ " + _l)
+
     hl = HERE / "check_answer_holdout_leak.py"
     print("\n── holdout 泄漏门（专名与数字，带基线负对照）──")
     if not hl.is_file():
