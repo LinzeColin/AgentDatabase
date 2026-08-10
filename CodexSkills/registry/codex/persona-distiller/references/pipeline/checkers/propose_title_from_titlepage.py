@@ -134,6 +134,22 @@ def verify_title(text: str, expect: str) -> dict:
     ★★★★ 为什么是这个方向：抽取实测 2/9（藏章/献词/目录/出版者行全会被认成题名），
     而核验是可判定的——问「这个字符串在不在题名页附近」，答案只有是与否。
     假设从哪来无所谓（人读的、文件名、书目），**核验这一步是一手的**。
+
+    ## ★★★★ 它的限度（**用之前必须知道**）
+
+    它证明的是「这个字符串出现在**文件开头 9,000 字符内**」，
+    **不是「这是题名页上印的书名」**——**目录也落在这个窗口内**。
+
+    实测撞到：核验 `AN ALABAMA STUDENT` 得到 **8 个命中，其中 4 个是目录条目**——
+    《Counsels and Ideals》的目录里列着这篇文章的名字：
+
+    ```
+    ES 12. An Alabama Student. Johns Hopkins Hospital Bulletin…
+    ```
+
+    **处置是把锚点加长到目录条目不可能含有的程度**（`AN ALABAMA STUDENT AND OTHER BIOGRAPHIC`），
+    **不是放宽匹配**。★★ 所以：**每次都要读命中的片段**，看它长得像题名页还是像目录。
+    `--apply` 之前那句「先把命中的逐条读一遍」不是客套。
     """
     head = corpus_body(text)[:HEAD_CHARS]
     ph, pe = _proj(head), _proj(expect)
