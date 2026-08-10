@@ -1276,8 +1276,11 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                 report.error(
                     'corpus.undeclared-duplicate-sources',
                     f'**{n_un} 对来源重叠 ≥{dd.get("threshold")} 而两边都没声明 `derived_from`**——'
-                    '台账上看不出它们是同一部作品。要么补 `derived_from`，'
-                    '要么在 `attribution_basis.counting_convention` 里写清为什么该当两处证据。'
+                    '台账上看不出它们是同一部作品。**清掉这条错的唯一办法是补 `derived_from`**——'
+                    '★ 本件只读 `derived_from`（`check_source_dedup.py` 第 182 行），'
+                    '**在 `counting_convention` 里写散文不会让它变绿**：'
+                    '那件判据当初正是因为「散文里写了、机器读得到的字段里没写」才建的。'
+                    '散文该写，但它是给人看的，不是给这道门看的。'
                     f'　{[(p["甲"][:26], p["乙"][:26], p["重叠"]) for p in dd["**未声明的重复对**"][:3]]}')
             # ★ `thresholds` **不在本函数的作用域里**（`run_corpus_text_checks(report, target,
             #   cache_dirs)`）。第一版直接写 `thresholds.get(...)`：`py_compile` 绿、
