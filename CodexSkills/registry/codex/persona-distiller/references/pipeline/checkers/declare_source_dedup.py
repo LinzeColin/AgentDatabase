@@ -98,10 +98,39 @@ def run_checker(ws: pathlib.Path) -> dict:
     return json.loads(r.stdout)
 
 
-def is_certain(a: str, b: str) -> bool:
-    """去掉来源后缀之后词干相同 → **机械上确定是同一件的另一份副本**。"""
+# ★★★ 2026-08-10：`SUFFIX` 里有 `bsb`/`alt`/`bd\d`，**独独没有语种标记**。
+#   于是 `canalisation-abfuhr-1869-de` ↔ `canalisation-abfuhr-1869-bsb`
+#   （同一份德文报告的两个扫描来源，重叠 0.68）被判成「词干不同」，
+#   Virchow 整个工作区因此报「机械上确定 **0 对**」，126 对全推给人读。
+#
+#   ★★ **但语种标记不能无条件剥**：`x-de` ↔ `x-en` 是原文与译本，**不是同一件的副本**。
+#   （本项目已记过「判据的作品分组是语言盲的」这个坑。）
+#   所以剥语种标记有一个前提：**台账说这两份是同一种语言**。
+#   台账没写 language 的，就**不剥**——宁可漏报，不可错并。
+LANG_SUFFIX = re.compile(r"[-_](?:de|en|fr|la|it|es|nl|ru|el)$", re.I)
+
+
+def strip_lang(stem: str) -> str:
+    prev = None
+    while prev != stem:
+        prev, stem = stem, LANG_SUFFIX.sub("", stem)
+    return stem
+
+
+def is_certain(a: str, b: str, lang_a: str | None = None, lang_b: str | None = None) -> bool:
+    """去掉来源后缀之后词干相同 → **机械上确定是同一件的另一份副本**。
+
+    ★ 语种标记只在**台账明写两侧同语种**时才一并剥掉；
+      两侧语种不同、或有一侧没写，一律不剥（`x-de` vs `x-en` 必须判为不确定）。
+    """
     sa, sb = pathlib.PurePath(a).stem, pathlib.PurePath(b).stem
-    return sa != sb and strip_suffix(sa) == strip_suffix(sb)
+    if sa == sb:
+        return False
+    if strip_suffix(sa) == strip_suffix(sb):
+        return True
+    if lang_a and lang_b and lang_a == lang_b:
+        return strip_lang(strip_suffix(sa)) == strip_lang(strip_suffix(sb))
+    return False
 
 
 def decide(pairs: list[dict], byname: dict[str, dict], ws: pathlib.Path
@@ -198,8 +227,10 @@ def main() -> int:
 
     rows = [json.loads(l) for l in led.read_text(encoding="utf-8").splitlines() if l.strip()]
     byname = {pathlib.PurePath(r.get("local_path") or "").name: r for r in rows}
-    certain = [p for p in pairs if is_certain(p["甲"], p["乙"])]
-    uncertain = [p for p in pairs if not is_certain(p["甲"], p["乙"])]
+    lang = {k: (v.get("language") or None) for k, v in byname.items()}
+    _cert = lambda p: is_certain(p["甲"], p["乙"], lang.get(p["甲"]), lang.get(p["乙"]))
+    certain = [p for p in pairs if _cert(p)]
+    uncertain = [p for p in pairs if not _cert(p)]
     print(f"   **机械上确定（去后缀后词干相同）：{len(certain)} 对**")
     print(f"   需要人读的：{len(uncertain)} 对"
           + ("　★ 里面可能有**跨作品的真实重印**，方向不能靠干净度猜" if uncertain else ""))
@@ -233,10 +264,14 @@ def main() -> int:
     if missing:
         print(f"★ {missing} 条的基准件在台账里找不到，**跳过而不是猜**")
     n = 0
+    new_edges = 0   # ★ 真正新加进去的边；原本就声明过的**不算**
     for r in rows:
         nm = pathlib.PurePath(r.get("local_path") or "").name
         if nm in add:
-            r["derived_from"] = sorted(set(r.get("derived_from") or []) | add[nm])
+            prev = set(r.get("derived_from") or [])
+            merged = prev | add[nm]
+            new_edges += len(merged - prev)
+            r["derived_from"] = sorted(merged)
             r["★ derived_from 口径"] = (
                 "／".join(sorted(why[nm])) +
                 "。★ 本字段在此表示「**与所指来源实为同一部作品**」，不必是字面转录派生——"
@@ -250,8 +285,23 @@ def main() -> int:
     left = len(after["**未声明的重复对**"])
     ok = (after["distinct_works"] == before["distinct_works"]
           and after["inflation"] == before["inflation"])
-    print(f"\n→ 写了 {n} 份来源｜未声明 {len(pairs)} → **{left}**｜"
-          f"已声明 {after['已声明的重复对数']}")
+    print(f"\n→ 写了 {n} 份来源（**真新增 {new_edges} 条边**，其余原本就声明过）｜"
+          f"未声明 {len(pairs)} → **{left}**｜已声明 {after['已声明的重复对数']}")
+    # ★★★ 2026-08-10：我在 Virchow 上用临时脚本报了「声明 7 条」，而门一动没动——
+    #   那个计数器数的是「**判定通过的对**」，不是「**写盘新增的边**」：3 对早就声明过、
+    #   4 对落在被拒区间，**真新增 0**。所以 `真新增` 这个数**永远要打印**：
+    #   记账只认它，不认「判定了几对」。
+    #
+    #   ★ 下面这条**是不变量断言，不是信号** —— 现在的 `decide()` 只在这一对**自身**
+    #   两个成员之间选基准件，而这一对是判据报出来的「未声明」，
+    #   所以 `n>0 而 new_edges==0` 走不到。**故意留着**：哪天 `decide()` 改成
+    #   可以指向第三方基准件（合集代表件之类），这条就是唯一会喊的人。
+    #   —— 打不红的分支不许当信号用，所以它只做断言、不做「★ 提示」。
+    if n and new_edges == 0:
+        print("✗ **不变量破了**：写了 {} 份来源却一条新边都没加——"
+              "说明 `decide()` 指向了本来就连着的基准件。**这一轮不是进展。**".format(n),
+              file=sys.stderr)
+        return 1
     if left and not a.include_uncertain:
         print(f"★ 剩下的 {left} 对**是有意留着的**——它们需要人读，不是漏了。")
     print(f"→ 去重后作品 {before['distinct_works']} → {after['distinct_works']}｜"

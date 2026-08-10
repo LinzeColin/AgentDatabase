@@ -199,6 +199,57 @@ def _corpus_hard_problems(raw_data: bytes) -> list[str]:
     return hard
 
 
+_SEQ_PREFIX = re.compile(r"^(\d+)([a-z]?)-")
+
+
+def strip_sequence_prefix(stem: str) -> str:
+    """把**建模者看得见的**文件名里的全局顺序前缀去掉。
+
+    ★★★★ 2026-08-10 落地的一条通道封堵。缺陷长这样：
+
+        05a-mnras-1844-moon-model
+        05b-mnras-1846-optical-glass
+        05c-mnras-1851-source-of-light
+        05d-mnras-1852-jupiter-saturn
+        ★ 05e 被划成 holdout 移走了，**而序号不会自动补齐**
+        05f-mnras-1855-rotatory-nebulae
+
+    建模者不必打开任何禁读目录，**数一遍文件名就知道这里有一份被拿走了**；
+    连着两侧邻居还能读出它的**刊物与年代区间**（此例：MNRAS，1852–1855）。
+
+    ★ 发现它的不是判据，是 Nasmyth #153 候选侧答题子代理自己在 `__incident__` 里报的。
+
+    ★★ **为什么改在这里，而不是只写进抓源指令**：
+      抓源指令是散文，散文管不住下一个 agent 怎么起名。
+      这一层是**可见文件名唯一的生成处**，堵在这里对所有后续人物一次生效。
+      原始文件名（带前缀）仍完整保留在 `local_path` 里，**流水线侧一点信息都没丢**。
+
+    ★★★ **不动年份前缀**：`1900-crystalline-structure` 这类前缀是出版年，
+      缺的年份只表示那年没发表，**不是「被拿走了」**。
+      判别口径与 `check_source_numbering_gap._is_year` **必须一致**
+      （四位、不以 0 开头、1400–2100 → 年份），两边的自测互为对照。
+
+    >>> strip_sequence_prefix("05e-mnras-1854-lunar-craters")
+    'mnras-1854-lunar-craters'
+    >>> strip_sequence_prefix("0013-conv-1911-vxxx")
+    'conv-1911-vxxx'
+    >>> strip_sequence_prefix("1900-crystalline-structure")
+    '1900-crystalline-structure'
+    >>> strip_sequence_prefix("autobiography-1883")
+    'autobiography-1883'
+    """
+    m = _SEQ_PREFIX.match(stem)
+    if not m:
+        return stem
+    digits = m.group(1)
+    if len(digits) == 4 and not digits.startswith("0") and 1400 <= int(digits) <= 2100:
+        return stem                      # 年份，不是序号——**不动**
+    rest = stem[m.end():]
+    # ★ 去掉之后必须还剩下能认人的东西；`05e-` 这种只有前缀的**保持原样**，
+    #   否则会生成空文件名——**「修好一处，造出一个更难查的错」是本项目的常见形状**。
+    return rest if rest.strip("-_ ") else stem
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description='Ingest local materials into a Persona Distiller target.')
     parser.add_argument('target', type=Path)
@@ -373,7 +424,7 @@ def main() -> int:
                 if args.redact_pii:
                     normalized, pii_hits = redact_pii(normalized)
                     redactions.extend(pii_hits)
-                normalized_filename = f'{source.stem}.normalized.txt'
+                normalized_filename = f'{strip_sequence_prefix(source.stem)}.normalized.txt'
                 normalized_dir = (target / 'references' / 'holdout' / source_id) if split == 'holdout' else (target / 'references' / 'sources' / source_id)
                 normalized_path = normalized_dir / safe_filename(normalized_filename)
                 atomic_write_text(normalized_path, normalized, mode=0o600)
@@ -427,7 +478,18 @@ def main() -> int:
         'results': results,
     }
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    return 1 if any(item.get('status') == 'failed' for item in results) else 0
+    # ★★★ 2026-08-10 Cicero #166：我一次交进 19 份，其中 8 份 `.html` 全部
+    #   `skipped-unsupported`，而**退出码是 0**。我的驱动脚本只看返回码，
+    #   于是印了 19 个 `✓`，直到 `check_title_is_not_filename` 说「11/11 行」才露馅。
+    #   —— **你让它收的东西它没收下，这不是「成功」。** 现在也返回 1。
+    #   （`duplicate-skipped` 不算：那是幂等重跑的正常结果，东西本来就在库里。）
+    if summary['unsupported']:
+        print(f"✗ **{summary['unsupported']} 份因扩展名不受支持被跳过、一份都没收下** —— "
+              f"要么先转成受支持的格式，要么明确加 `--include-unsupported` "
+              f"（后者会把它当**不透明二进制**登记，正文抽不出来）。",
+              file=sys.stderr)
+    return 1 if (any(item.get('status') == 'failed' for item in results)
+                 or summary['unsupported']) else 0
 
 
 if __name__ == '__main__':

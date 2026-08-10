@@ -329,6 +329,29 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
                 f"[检查器镜像] {mirror.name} 在 scripts/ 与 references/pipeline/checkers/ "
                 f"两处不一致——**把门的是 scripts/ 那份**，改了 references/ 不会生效")
 
+    # --- B2b. ★★★ 2026-08-10：**镜像里不叫 `check_` 的那些，从来没被比过。**
+    #   上面两行的射程是 `glob("check_*.py")`，而镜像目录里还躺着十几个**流程工具**：
+    #   `assemble_judge_results.py`（**算 delta 的就是它**）、`build_blind_payload.py`、
+    #   `ingest.py`、`declare_source_dedup.py`、`finalize_release.py`……
+    #   实测：**5 个已经漂了**，`assemble_judge_results.py` 镜像比脚本少 **11.5 KB**。
+    #   而本项目出过的最贵一次事故正是它的前身：
+    #   「同一处除以 10 做了两遍，三轮 delta 全差一个数量级」。
+    #   ★ 收件人照镜像跑，拿到的会是另一套数——**而漂移门一直报「无漂移」**。
+    #   与 B2 同一句话：「同一件东西两份拷贝，改一处另一处继续活着」，
+    #   **只是这一批连查都没查过。**
+    for mirror in sorted((root / "references/pipeline/checkers").glob("*.py")):
+        if mirror.name.startswith("check_"):
+            continue                       # 上面 B2 已经比过
+        twin = root / "scripts" / mirror.name
+        if not twin.is_file():
+            continue
+        if mirror.read_bytes() != twin.read_bytes():
+            problems.append(
+                f"[流程工具镜像] {mirror.name} 两处不一致"
+                f"（镜像 {len(mirror.read_bytes())} 字节 / 脚本 {len(twin.read_bytes())} 字节）"
+                f"——**跑的是 scripts/ 那份，装出去的是 references/ 那份**；"
+                f"收件人照镜像跑会拿到另一套结果")
+
     # --- B3. ★★★★ 镜像**逐字节相同还不够，得起得来** ---
     #   2026-08-10 实测：我给两件判据加了 `from common import corpus_body`，
     #   `cp` 过去之后**字节完全相同**，本件报「无合同漂移」——

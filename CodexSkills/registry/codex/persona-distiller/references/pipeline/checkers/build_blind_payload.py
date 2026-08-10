@@ -240,8 +240,10 @@ def selftest() -> int:
     chk(f"{LEAK_CHECKER.name} 在", LEAK_CHECKER.is_file())
     chk(f"{LOC_CHECKER.name} 在", LOC_CHECKER.is_file())
     # ★ 反向对照：两道生成时判据必须都在——少一道就等于那一道从没跑过
-    chk("两道生成时判据都在（少一道 = 那道从没跑过）",
-        LEAK_CHECKER.is_file() and LOC_CHECKER.is_file())
+    chk("四道生成时判据都在（少一道 = 那道从没跑过）",
+        LEAK_CHECKER.is_file() and LOC_CHECKER.is_file()
+        and (HERE / "check_answer_holdout_leak.py").is_file()
+        and (HERE / "check_answer_numbers_in_corpus.py").is_file())
 
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
@@ -274,6 +276,25 @@ def locator_gate(cand_path) -> int:
     q = subprocess.run([sys.executable, str(LOC_CHECKER), "--answers", str(cand_path)],
                        capture_output=True, text=True)
     print(q.stdout.rstrip())
+    # ★★★★ 2026-08-07：**退出码 3 是「没有引文可查」，1 才是「有引文而缺坐标」。**
+    #   本门原先写 `if q.returncode != 0`，把两者混成一个，于是打印出两句互相矛盾的话：
+    #       「一条长逐字引文都没扫到——**本次未检查（不是通过）**」
+    #       「✗ **不许派发：有逐字引文找不到坐标。**」
+    #   **两句不可能同时为真。**
+    #   ★ 后果是这道门对「答案里没有长逐字引文」的人物**永远变不绿**——
+    #     [[a-red-that-can-never-turn-green-is-not-a-signal]]。
+    #   ★★ 而 Whitworth #152 之所以撞上，是**我自己两条规矩打架**：
+    #     为堵格式泄题通道，我要求两侧「禁反引号、英文引语转写成中文」，
+    #     于是长逐字引文一条也没有了。
+    #   修法：**只拦 rc==1（有引文而缺坐标）**；rc==3 报「未检查（不是通过）」并放行，
+    #   **但要把这句话打得足够响**，不许被读成「通过」。
+    if q.returncode == 3:
+        print("\n⚠⚠ **本轮答案里没有长逐字引文，因此这道门没有可查的东西——**")
+        print("   **这是「未检查」，不是「通过」。** 载荷放行，但这一轮的引文可回查性**没有被验证过**。")
+        print("   ★ 若这是格式规矩造成的（例如禁反引号／要求英文引语转写成中文），"
+              "那是有意的取舍：**堵住了格式泄题通道，代价是失去了引文坐标这一层的检查**。"
+              "两件事都要写进协议记录。")
+        return 0
     if q.returncode != 0:
         print("\n✗ **这份载荷不许派发评委：有逐字引文找不到坐标。**")
         print("  坐标 = 卷/期/页/篇名/图注编号，写在同一段里。")
@@ -437,15 +458,24 @@ def main() -> int:
     print(f"★ 候选与基线两侧已落进 {ev}/——发布门现在看得见它们")
 
     # 轮次之间 A/B 映射必须一致，否则各轮不可比
-    r1 = a.round_dir.parent / "round1" / f"{a.prefix}_blind_key.json"
-    # ★★ 找不到第 1 轮的 key 时**不许沉默跳过**——那正是本次的形态：
-    #   round_dir 落错了地方，`r1` 指向一个不存在的路径，`is_file()` 假，
-    #   于是「A/B 映射与第 1 轮逐条一致」这道检查**一句话都没说就没跑**。
-    #   沉默的跳过会被读成通过（见 [[empty-default-swallows-unknown]]）。
+    # ★★★★ 2026-08-07 修：原先写 `f"{a.prefix}_blind_key.json"`，**用本轮的前缀去上一轮找**。
+    #   而前缀按轮次变（`--prefix whitworth-152-round2`），第 1 轮的 key 叫
+    #   `whitworth-152-round1_blind_key.json`——**名字永远对不上，这道门永远变不绿**。
+    #   ★ 它给出的诊断还是错的：印「多半是 --round-dir 落在了工作区之外」，
+    #     而 round_dir 明明就在工作区里（上一行刚打印过解析后的绝对路径）。
+    #     **一个永远红、且把人指向错误病因的门，比没有这道门更贵。**
+    #     [[a-red-that-can-never-turn-green-is-not-a-signal]]
+    #   按形状找，不按前缀找——同一条纪律见 `find_seat_file`。
+    _r1_dir = a.round_dir.parent / "round1"
+    _r1_hits = sorted(_r1_dir.glob("*_blind_key.json"))
+    r1 = _r1_hits[0] if _r1_hits else _r1_dir / f"{a.prefix}_blind_key.json"
+    # ★★ 找不到第 1 轮的 key 时**不许沉默跳过**：
+    #   `is_file()` 假就整条检查一句话不说地没跑，
+    #   而沉默的跳过会被读成通过（见 [[empty-default-swallows-unknown]]）。
     if a.round_dir.name != "round1" and not r1.is_file():
-        print(f"✗ **找不到第 1 轮的 key：{r1}**")
+        print(f"✗ **{_r1_dir} 里没有 *_blind_key.json**")
         print("  轮次之间 A/B 映射是否一致**未核**——这不是通过。")
-        print("  多半是 --round-dir 落在了工作区之外。**中止。**")
+        print("  第 1 轮的 key 不在应在的地方；**中止**（不是「跳过这道检查」）。")
         return 5
     if a.round_dir.name != "round1" and r1.is_file():
         if json.loads(r1.read_text(encoding="utf-8")) != key:
@@ -503,6 +533,23 @@ def main() -> int:
         if rubrics:
             rub_json.write_text(json.dumps(rubrics, ensure_ascii=False), encoding="utf-8")
             argv += ["--rubrics", str(rub_json)]
+            # ★★★ 再写一份**按载荷编号**索引的，给喂判据的席位用。
+            #   起因：席 E 在 Sorby #133 第 3 轮自己报上来——
+            #   「载荷的 case_id 顺序与 v1.md 的逐题标准排列不一致，
+            #     **我先按题面文字把每题对回它那条标准再打分**」。
+            #   载荷用不透明编号 `q-01…` 且**按 case_id 字母序排**，而 v1.md 按套组顺序写；
+            #   评委手上没有揭盲键，只能**照题面文字手工做这个 join**。
+            #   ★ 手工 join 一旦错位，那一席的分就是拿错标准打的，**而且不会报错**。
+            #     席 E 发现了并自己纠正；同轮席 D 一个字没提——**我无从知道它有没有错位。**
+            #   ★★ 写出这份**不泄任何东西**：它只说「q-07 对应哪条标准」，
+            #     而 A/B 哪侧是候选仍然只在 `*_blind_key.json` 里。
+            by_qid = {q: rubrics.get(v.get("case_id"), "")
+                      for q, v in (key or {}).items()}
+            if any(by_qid.values()):
+                (a.round_dir / "rubrics_by_qid.json").write_text(
+                    json.dumps(by_qid, ensure_ascii=False, indent=1), encoding="utf-8")
+                print("  ✓ 已按载荷编号另写一份 `rubrics_by_qid.json`——"
+                      "**喂判据的席位直接用它，不要再手工对题面**")
         else:
             print("  ⚠ 没找到 `judge_prompts/v1.md` 的逐题 rubric——**只查了产物，没查判据**")
         fp = subprocess.run(argv, capture_output=True, text=True)
@@ -592,10 +639,73 @@ def main() -> int:
                         "--baseline-source", a.baseline_source],
                        capture_output=True, text=True)
     print(p.stdout.rstrip())
+    # ★★★★ 2026-08-07：`capture_output=True` **把 stderr 一起吞了**。
+    #   实测形态：我给 `--baseline-source` 传了散文，而它是四选一的枚举，
+    #   argparse 把「invalid choice」写进 stderr、退出码 2 ——
+    #   于是这道门印出的是**一个空的小节**，紧接着一句
+    #   「✗ 不许派发。**重写答案，不要改门。**」
+    #   **答案一个字都没问题，问题在我的命令行参数。**
+    #   照那句话去做的人会去重写一批好答案，而真因一个字都看不到。
+    #   [[empty-default-swallows-unknown]]：空输出被读成「门跑了且失败了」。
+    if (p.stderr or "").strip():
+        print("  ── 判据的 stderr（**以前这一段是被吞掉的**）──")
+        for _l in p.stderr.rstrip().splitlines():
+            print("  │ " + _l)
     if p.returncode != 0:
+        if not (p.stdout or "").strip():
+            # 门自己一句话没说 ≠ 门判了不合格
+            print("\n✗ **这道门没有产出任何判读就失败了**（退出码 "
+                  f"{p.returncode}）——**先看上面的 stderr，多半是调用方式不对，"
+                  "不是答案有问题。** 在排除这一点之前，不要动答案。")
+            return 1
         print("\n✗ **这份载荷不许派发评委。** 判出来的 delta 不能当作盲判结果引用——"
               "重写答案，不要改门。")
         return 1
+
+    # ── holdout 泄漏门（v0.0.0.90）────────────────────────────────────────
+    # ★★★★ 此前**没有任何判据看过答案与 holdout 的关系**：
+    #   `check_holdout_mention` 扫的是建模者可读文件，`check_holdout_overlap` 比的是
+    #   holdout ↔ train 语料，**两件都不看答案**。
+    #   于是「候选答题子代理偷读了 holdout」唯一的证据是它自己写的 `__incident__`——
+    #   而自述不是证据（[[self-report-is-not-evidence]]）。
+    #   ★ 它**用基线答案做负对照**：基线从没读过任何文件，
+    #     基线也说得出来的词不算 holdout 独有。
+    # ── 答案里的数字回核（v0.0.0.91，**只报不拦**）────────────────────────
+    #   Gantt #156 第 1 轮：候选在「不该给数」的那题主动补了 `千分之四`–`千分之六`
+    #   并说「这是我核过的东西」，而全语料里没有这个数。
+    #   ★ 本件**不拦**：`找不到` 可能是合理的（人物生年、常识年份），
+    #     `核不了` 更只是「要人看」。**它缩小人要看的范围，不替人下判断。**
+    nc = HERE / "check_answer_numbers_in_corpus.py"
+    print("\n── 答案里的数字回核（**只报不拦**）──")
+    if not nc.is_file():
+        print("⚠ check_answer_numbers_in_corpus.py 不在，**答案数字未核（不是通过）**")
+    else:
+        n = subprocess.run([sys.executable, str(nc), "--workspace", str(a.workspace),
+                            "--answers", str(cand_path)], capture_output=True, text=True)
+        print((n.stdout or "").rstrip())
+        if (n.stderr or "").strip():
+            for _l in n.stderr.rstrip().splitlines():
+                print("  │ " + _l)
+
+    hl = HERE / "check_answer_holdout_leak.py"
+    print("\n── holdout 泄漏门（专名与数字，带基线负对照）──")
+    if not hl.is_file():
+        print("⚠ check_answer_holdout_leak.py 不在，**holdout 泄漏未核（不是通过）**")
+    else:
+        h = subprocess.run([sys.executable, str(hl), "--workspace", str(a.workspace),
+                            "--candidate", str(cand_path), "--baseline", str(base_path)],
+                           capture_output=True, text=True)
+        print((h.stdout or "").rstrip())
+        if (h.stderr or "").strip():
+            for _l in h.stderr.rstrip().splitlines():
+                print("  │ " + _l)
+        if h.returncode != 0:
+            if not (h.stdout or "").strip():
+                print("\n✗ **这道门没有产出任何判读就失败了**（退出码 "
+                      f"{h.returncode}）——**先看上面的 stderr**，多半是调用方式不对。")
+            else:
+                print("\n✗ **候选答案里有只可能来自 holdout 的东西，这份载荷不许派发。**")
+            return 1
 
     return 0
 
