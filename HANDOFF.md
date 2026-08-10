@@ -35,14 +35,29 @@
   ```bash
   python3 -c "import json;print(len(json.load(open('CodexSkills/registry/codex/persona-distiller-group/team-index.json'))['products']))"
   ```
-- **在做**：**#156 Henry Gantt**（建造采购师）。
-  工作区：`CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-gantt-156/workspaces/henry-gantt`
-  - 语料 33 份、研究门 `passed=True`、断言 17 条、十份产物写完、16 题用例集写完，
-    **合成门 `passed=True`（0 错 1 警）**。
-  - 卡在：**第 1 轮盲评判分**。协议与预登记已写死在
-    `evals/round1/第1轮-协议记录.md`（**判分之前写的，判完只补数不改口径**）。
+- **刚做完**：**#156 Henry Gantt 记拒发**（真 delta **+0.0078**，quick 门 +0.03；
+  **两席跨零** F −0.0125 / G +0.0281）。判决书：
+  `_corpora/wip-gantt-156/workspaces/henry-gantt/evals/00-结案.md`。
+  ★ 这一轮的盲判装置是至今最干净的一次：均长比 1.01、
+  **「候选更短 ≥25%」这道门本项目首次通过（7/16）**、九种表面特征两侧全 0/16。
+- **#157–#160 建造采购师四人一次判掉**（Kelley/Walker/Oliver/Hau Lee）：
+  判据是**出版年**（1959/1982/1997）晚于 1931 分界，**第二个被 PD 规则清空的族**。
+- **在做**：**#161 Luca Pacioli**（财务合规师，1447–1517）。
+  工作区：`_corpora/wip-pacioli-161/workspaces/luca-pacioli`
+  - 同名护栏 `ready`；语料 **7 份**入库；`attribution_basis` 已按**印刷时代路径**声明
+    （disputed_works 6 条，`covered_sources` 逐份点名）。
+  - 卡在：**语料广度**——来源 7<8、道 1<3（全在 `writings`）。
+    第二轮抓源已派出，目标是补 `external`／`timeline` 两道。
+  - ★★ 两处**混合件**已写进台账，下游不许通篇当他的原创：
+    《De divina proportione》后半是 **Piero della Francesca 的书由他翻译**（瓦萨里剽窃公案）；
+    Geijsbeek 1914 英译本约后半段收的是 Manzoni／Stevin 等**别人的著作**。
 - **待用户裁定的条目**：见任务列表里带「待裁定」字样的那些（⑤⑱⑲⑳㉑㉒㉓㉕㉖㉚㉛㉜）。
   **这些不是你能自己决定的**，遇到就停下来问。
+  ★ 其中 **㉜（PD-only 规则的射程）已经在挡排期**：
+  延后名单里带 `pd_scope_pending: true` 的已累计 **76 人**，
+  而剩余队列里**生年 <1913（可能可做）的还有 62 人**——**队列没被规则耗尽**，
+  只是配重会把 NEXT 指向小族，而有些小族恰好整族都在分界之外。
+  **这些延后都是可一行反转的**，不要因为它没裁定就停下来。
 
 ---
 
