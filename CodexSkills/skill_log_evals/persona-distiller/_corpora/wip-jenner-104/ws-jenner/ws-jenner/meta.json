@@ -1,125 +1,136 @@
 {
-  "builder_version": "v0.0.0.5",
-  "chosen_subject_uid": "edward-jenner-1749",
-  "consent_authority": null,
-  "created_at": "2026-08-02T04:40:48Z",
-  "current_version": null,
-  "existential_hypotheses_enabled": false,
-  "identity_selection": {
-    "canonical": "healthcare-nursing",
-    "display": "医疗护理师",
-    "mode": "single",
-    "primary": "healthcare-nursing",
-    "weights": {
-      "healthcare-nursing": 1.0
-    }
-  },
-  "language": "en",
-  "model_version": "0.1.0-draft",
-  "name": "Edward Jenner",
-  "namesake_gate": {
-    "candidate_count": 1,
-    "chosen_candidate": {
-      "application_scenarios": [
-        "以极小的样本量（个位数病例）提出一个要求全社会改变行为的主张",
-        "把乡野流传的说法（挤奶女工不出天花）当作可检验的假说而非民间迷信",
-        "**主张被皇家学会退稿之后自费出版**——如何在没有机构背书时推进一件事",
-        "面对具名同行的公开反对与失败的复现报告如何回应"
-      ],
-      "authoritative_sources": [
-        {
-          "locator": "https://archive.org/details/b24759247"
-        },
-        {
-          "locator": "https://en.wikipedia.org/wiki/Edward_Jenner"
-        },
-        {
-          "locator": "https://www.britannica.com/biography/Edward-Jenner"
-        },
-        {
-          "locator": "https://www.jenner.ac.uk/about/edward-jenner"
-        },
-        {
-          "locator": "https://biotech.law.lsu.edu/cphl/history/articles/jenner.htm"
-        }
-      ],
-      "canonical_name": "Edward Jenner",
-      "distinguishing_basis": "1749-05-17–1823-01-26；伯克利；John Hunter 的学生；1798《Inquiry》作者；`vaccination` 一词的来源。**与其子 Edward Jenner Jr. 的分辨靠年代**：凡 1798 年之前的行医与出版记录均属本人。",
-      "evidence_level": "low",
-      "identity_category": "医疗护理师",
-      "key_capabilities": [
-        "把一条地方性口传观察转成可复现的操作程序",
-        "长期随访与再攻毒（接种后再种人痘验证保护力）",
-        "**博物学家的观察训练用在临床上**（他同期做杜鹃雏鸟的研究，1788 年因此入皇家学会）",
-        "自费出版与直接向读者说话的写作"
-      ],
-      "label": "A",
-      "occupation_or_role": "英国乡村医师、博物学家；牛痘接种（vaccination）的确立者",
-      "professional_background": "1749-05-17 生于格洛斯特郡伯克利，1823-01-26 卒于伯克利（脑出血）。1770 年赴伦敦师从 John Hunter，1773 年返回伯克利开业行医，此后除数次赴伦敦外一生留在伯克利。1798 年自费出版《An Inquiry into the Causes and Effects of the Variolae Vaccinae; a Disease Discovered in some of the Western Counties of England, Particularly Gloucestershire, and Known by the Name of The Cow Pox》。`vaccine`／`vaccination` 二词即由他所造的 Variolae vaccinae（「牛的痘」）而来。",
-      "subject_uid": "edward-jenner-1749"
-    },
-    "chosen_subject_uid": "edward-jenner-1749",
-    "normalized_name": "edwardjenner",
-    "resolution": "single",
-    "schema_version": "1.0"
-  },
-  "normalized_name": "edwardjenner",
-  "origin_review_required": false,
-  "product_version": null,
-  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
-  "profile": "deep",
-  "prohibited_uses": [
-    "identity authentication or deceptive impersonation",
-    "invented endorsement, signature, consent, private memory or current opinion",
-    "unsupported psychological diagnosis",
-    "replacement of accountable high-stakes professional judgment"
-  ],
-  "retention_policy": null,
-  "runtime_invocation_versioning": false,
-  "scenario": null,
-  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
-  "schema_version": "2.0",
-  "slug": "ws-jenner",
-  "status": "draft",
-  "subject_origin": "historical",
-  "target_id": "tgt-8bd525ad3f5e",
-  "time_scope": "1749-1823",
-  "updated_at": "2026-08-02T04:40:48Z",
-  "attribution_basis": {
-    "authority": "**印刷时代的实物证据，且本人在世时反复自认**：《An Inquiry into the Causes and Effects of the Variolae Vaccinae》1798 年伦敦自费出版，扉页署名 Edward Jenner, M.D. F.R.S.；《Further Observations》1799、《A Continuation of Facts and Observations》1800、《Instructions for Vaccine Inoculation》1801、《On the Varieties and Modifications of the Vaccine Pustule》1806、《Facts, for the Most Part Unobserved》1809、《A Letter to Charles Henry Parry》1822、《A Letter to Dr. Waterhouse》1824 —— 扉页署名俱在。另有 1788 年《Philosophical Transactions》78 卷 219–237 页《Observations on the Natural History of the Cuckoo》，**形态是写给 John Hunter 的一封信**，皇家学会档案有条目。二次权威：John Baron《The Life of Edward Jenner》（1827 初版／1838 增订）——Baron 是 Jenner 的友人兼医师，书中转录大量原始书信；用于书信真伪与年代仲裁。",
-    "citation": "1798《Inquiry》初版：https://archive.org/details/b24759247 ｜ 1788 杜鹃论文（皇家学会官方）：https://royalsocietypublishing.org/doi/10.1098/rstl.1788.0016，学会档案条目：https://makingscience.royalsociety.org/items/l-and-p_9_80/paper-observations-on-the-natural-history-of-the-cuckoo-by-edward-jenner ｜ Baron《Life of Edward Jenner》vol.1：https://archive.org/details/lifeofedwardjenn01barouoft，vol.2：https://archive.org/details/lifeofedwardjenn02barouoft ｜ 1797 年被退稿的那份手稿：Everard Home 致 Sir Joseph Banks 的评审报告，见 Medical History (CUP)《Edward Jenner's Unpublished Cowpox Inquiry and the Royal Society》",
-    "counting_convention": "**版次算源，译本单独记且不算本人字句。** 本工作区 53 条源里，同一著作的不同版次共 11 条（《Inquiry》4 版、《Further Observations》3 版、《Instructions》3 版、《The Origin》3 版、《On the Varieties》2 版、Moseley《An Oliver for a Rowland》3 版）。**这个数只用于交代口径，任何断言都不得建立在「本语料含 N 个版次」之上——那是账本事实。** 拉丁译本（1799 Disquisitio）与葡萄牙译本（1803 Indagacao）计 P1 源但**字句归译者**，引用时须标引文层（见 check_quote_layer.py）。",
-    "disputed_policy": "**没有伪托问题，但有两类必须分开的东西。** 其一，Jenner 是印刷时代人物且生前亲自监督多次再版，其著作归属在学界无争议——因此 disputed_works 为空数组，**这个空不是「没查过」，是「查了没有」**。其二，真正的争议不在「是不是他写的」而在「他写的对不对」：1799 年 Woodville 在天花医院的复现试验被后世判为牛痘苗受天花污染，其报告与 Jenner 的说法冲突；这类冲突**按事实分歧处理，进 divergence-map，不进归属争议**。其三，Baron 传记中转录的书信原件多数今已不存，**Baron 的转录本身是二手**，因此 Baron 卷记 P2 而非 P1，书信内容作断言时须注明「据 Baron 转录」。\n\n**★ v0.0.0.34 补记（第 1 轮盲判后回查扉页发现）**：原先声称本人所著的 P1 源里，**有两份根本不是他写的**——`b22006345`（扉页 PUBLISHED By Doctors JENNER and WOODVILLE，题献页 BY THEIR OBEDIENT SERVANT, THE AUTHOR，是第三方对照两人已发表事实的小册子）与 `b21439114`（扉页 BY THOMAS BEDDOES）。两份已改记 P2/external。**它们此前之所以能进 P1，是因为 historical 人物的归属由本声明整批放行、逐源不查**——这个口子由 `check_source_attribution.py` 堵上：`covered_sources` 必须逐份点名。另注：`b2201231x_0002` 扉页写 BY THE LATE EDWARD JENNER，**是身后出版**，断言层不得以第一人称说「我 1824 年写过」。",
-    "disputed_works": [],
-    "covered_sources": [
-      "archive.org/b24759247 (b24759247.txt)",
-      "archive.org/inquiryintocause00jenn (inquiryintocause00jenn.txt)",
-      "archive.org/b33519420_0002 (b33519420_0002.txt)",
-      "archive.org/b33519420_0003 (b33519420_0003.txt)",
-      "archive.org/b24927764 (b24927764.txt)",
-      "archive.org/b28748657 (b28748657.txt)",
-      "archive.org/b21354273 (b21354273.txt)",
-      "archive.org/b22010440 (b22010440.txt)",
-      "archive.org/b22010440_0002 (b22010440_0002.txt)",
-      "archive.org/39002011212074.med.yale.edu (39002011212074.med.yale.edu.txt)",
-      "archive.org/b22010452_0001 (b22010452_0001.txt)",
-      "archive.org/b22010452_0002 (b22010452_0002.txt)",
-      "archive.org/b2200953x (b2200953x.txt)",
-      "archive.org/b22013490_0002 (b22013490_0002.txt)",
-      "archive.org/b22012916_0001 (b22012916_0001.txt)",
-      "archive.org/b22007179_0001 (b22007179_0001.txt)",
-      "archive.org/b22007179_0003 (b22007179_0003.txt)",
-      "archive.org/b22007179_0006 (b22007179_0006.txt)",
-      "archive.org/b30796581 (b30796581.txt)",
-      "archive.org/jstor-106657 (jstor-106657.txt)",
-      "archive.org/b2201231x_0002 (b2201231x_0002.txt)",
-      "archive.org/b33519390_0001 (b33519390_0001.txt)",
-      "archive.org/b33519390_0002 (b33519390_0002.txt)",
-      "archive.org/disquisitiodecau00jenn (disquisitiodecau00jenn.txt)",
-      "archive.org/b22010440_0004 (b22010440_0004.txt)",
-      "archive.org/b22010452_0004 (b22010452_0004.txt)",
-      "archive.org/b22034985_0001 (b22034985_0001.txt)",
-      "archive.org/mcgill-letters-1790 (mcgill-letters-1790.txt)"
-    ]
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "edward-jenner-1749",
+ "consent_authority": null,
+ "created_at": "2026-08-02T04:40:48Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "healthcare-nursing",
+  "display": "医疗护理师",
+  "mode": "single",
+  "primary": "healthcare-nursing",
+  "weights": {
+   "healthcare-nursing": 1.0
   }
+ },
+ "language": "en",
+ "model_version": "0.1.0-draft",
+ "name": "Edward Jenner",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "以极小的样本量（个位数病例）提出一个要求全社会改变行为的主张",
+    "把乡野流传的说法（挤奶女工不出天花）当作可检验的假说而非民间迷信",
+    "**主张被皇家学会退稿之后自费出版**——如何在没有机构背书时推进一件事",
+    "面对具名同行的公开反对与失败的复现报告如何回应"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "https://archive.org/details/b24759247"
+    },
+    {
+     "locator": "https://en.wikipedia.org/wiki/Edward_Jenner"
+    },
+    {
+     "locator": "https://www.britannica.com/biography/Edward-Jenner"
+    },
+    {
+     "locator": "https://www.jenner.ac.uk/about/edward-jenner"
+    },
+    {
+     "locator": "https://biotech.law.lsu.edu/cphl/history/articles/jenner.htm"
+    }
+   ],
+   "canonical_name": "Edward Jenner",
+   "distinguishing_basis": "1749-05-17–1823-01-26；伯克利；John Hunter 的学生；1798《Inquiry》作者；`vaccination` 一词的来源。**与其子 Edward Jenner Jr. 的分辨靠年代**：凡 1798 年之前的行医与出版记录均属本人。",
+   "evidence_level": "low",
+   "identity_category": "医疗护理师",
+   "key_capabilities": [
+    "把一条地方性口传观察转成可复现的操作程序",
+    "长期随访与再攻毒（接种后再种人痘验证保护力）",
+    "**博物学家的观察训练用在临床上**（他同期做杜鹃雏鸟的研究，1788 年因此入皇家学会）",
+    "自费出版与直接向读者说话的写作"
+   ],
+   "label": "A",
+   "occupation_or_role": "英国乡村医师、博物学家；牛痘接种（vaccination）的确立者",
+   "professional_background": "1749-05-17 生于格洛斯特郡伯克利，1823-01-26 卒于伯克利（脑出血）。1770 年赴伦敦师从 John Hunter，1773 年返回伯克利开业行医，此后除数次赴伦敦外一生留在伯克利。1798 年自费出版《An Inquiry into the Causes and Effects of the Variolae Vaccinae; a Disease Discovered in some of the Western Counties of England, Particularly Gloucestershire, and Known by the Name of The Cow Pox》。`vaccine`／`vaccination` 二词即由他所造的 Variolae vaccinae（「牛的痘」）而来。",
+   "subject_uid": "edward-jenner-1749"
+  },
+  "chosen_subject_uid": "edward-jenner-1749",
+  "normalized_name": "edwardjenner",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "edwardjenner",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "deep",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "ws-jenner",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-8bd525ad3f5e",
+ "time_scope": "1749-1823",
+ "updated_at": "2026-08-02T04:40:48Z",
+ "attribution_basis": {
+  "authority": "**印刷时代的实物证据，且本人在世时反复自认**：《An Inquiry into the Causes and Effects of the Variolae Vaccinae》1798 年伦敦自费出版，扉页署名 Edward Jenner, M.D. F.R.S.；《Further Observations》1799、《A Continuation of Facts and Observations》1800、《Instructions for Vaccine Inoculation》1801、《On the Varieties and Modifications of the Vaccine Pustule》1806、《Facts, for the Most Part Unobserved》1809、《A Letter to Charles Henry Parry》1822、《A Letter to Dr. Waterhouse》1824 —— 扉页署名俱在。另有 1788 年《Philosophical Transactions》78 卷 219–237 页《Observations on the Natural History of the Cuckoo》，**形态是写给 John Hunter 的一封信**，皇家学会档案有条目。二次权威：John Baron《The Life of Edward Jenner》（1827 初版／1838 增订）——Baron 是 Jenner 的友人兼医师，书中转录大量原始书信；用于书信真伪与年代仲裁。",
+  "citation": "1798《Inquiry》初版：https://archive.org/details/b24759247 ｜ 1788 杜鹃论文（皇家学会官方）：https://royalsocietypublishing.org/doi/10.1098/rstl.1788.0016，学会档案条目：https://makingscience.royalsociety.org/items/l-and-p_9_80/paper-observations-on-the-natural-history-of-the-cuckoo-by-edward-jenner ｜ Baron《Life of Edward Jenner》vol.1：https://archive.org/details/lifeofedwardjenn01barouoft，vol.2：https://archive.org/details/lifeofedwardjenn02barouoft ｜ 1797 年被退稿的那份手稿：Everard Home 致 Sir Joseph Banks 的评审报告，见 Medical History (CUP)《Edward Jenner's Unpublished Cowpox Inquiry and the Royal Society》",
+  "counting_convention": "**版次算源，译本单独记且不算本人字句。** 本工作区 53 条源里，同一著作的不同版次共 11 条（《Inquiry》4 版、《Further Observations》3 版、《Instructions》3 版、《The Origin》3 版、《On the Varieties》2 版、Moseley《An Oliver for a Rowland》3 版）。**这个数只用于交代口径，任何断言都不得建立在「本语料含 N 个版次」之上——那是账本事实。** 拉丁译本（1799 Disquisitio）与葡萄牙译本（1803 Indagacao）计 P1 源但**字句归译者**，引用时须标引文层（见 check_quote_layer.py）。　★★★★ 2026-08-10：**拉丁文《Disquisitio de Caussis et Effectibus Variolarum Vaccinarum》是《An Inquiry》的译本**，与英文各版同属一部作品。已申报为并行见证（共 7 份），**整组只算一处证据**——`check_claim_source_independence` 的作品分组是语言盲的，看不出这一点。",
+  "disputed_policy": "**没有伪托问题，但有两类必须分开的东西。** 其一，Jenner 是印刷时代人物且生前亲自监督多次再版，其著作归属在学界无争议——因此 disputed_works 为空数组，**这个空不是「没查过」，是「查了没有」**。其二，真正的争议不在「是不是他写的」而在「他写的对不对」：1799 年 Woodville 在天花医院的复现试验被后世判为牛痘苗受天花污染，其报告与 Jenner 的说法冲突；这类冲突**按事实分歧处理，进 divergence-map，不进归属争议**。其三，Baron 传记中转录的书信原件多数今已不存，**Baron 的转录本身是二手**，因此 Baron 卷记 P2 而非 P1，书信内容作断言时须注明「据 Baron 转录」。\n\n**★ v0.0.0.34 补记（第 1 轮盲判后回查扉页发现）**：原先声称本人所著的 P1 源里，**有两份根本不是他写的**——`b22006345`（扉页 PUBLISHED By Doctors JENNER and WOODVILLE，题献页 BY THEIR OBEDIENT SERVANT, THE AUTHOR，是第三方对照两人已发表事实的小册子）与 `b21439114`（扉页 BY THOMAS BEDDOES）。两份已改记 P2/external。**它们此前之所以能进 P1，是因为 historical 人物的归属由本声明整批放行、逐源不查**——这个口子由 `check_source_attribution.py` 堵上：`covered_sources` 必须逐份点名。另注：`b2201231x_0002` 扉页写 BY THE LATE EDWARD JENNER，**是身后出版**，断言层不得以第一人称说「我 1824 年写过」。",
+  "disputed_works": [],
+  "covered_sources": [
+   "archive.org/b24759247 (b24759247.txt)",
+   "archive.org/inquiryintocause00jenn (inquiryintocause00jenn.txt)",
+   "archive.org/b33519420_0002 (b33519420_0002.txt)",
+   "archive.org/b33519420_0003 (b33519420_0003.txt)",
+   "archive.org/b24927764 (b24927764.txt)",
+   "archive.org/b28748657 (b28748657.txt)",
+   "archive.org/b21354273 (b21354273.txt)",
+   "archive.org/b22010440 (b22010440.txt)",
+   "archive.org/b22010440_0002 (b22010440_0002.txt)",
+   "archive.org/39002011212074.med.yale.edu (39002011212074.med.yale.edu.txt)",
+   "archive.org/b22010452_0001 (b22010452_0001.txt)",
+   "archive.org/b22010452_0002 (b22010452_0002.txt)",
+   "archive.org/b2200953x (b2200953x.txt)",
+   "archive.org/b22013490_0002 (b22013490_0002.txt)",
+   "archive.org/b22012916_0001 (b22012916_0001.txt)",
+   "archive.org/b22007179_0001 (b22007179_0001.txt)",
+   "archive.org/b22007179_0003 (b22007179_0003.txt)",
+   "archive.org/b22007179_0006 (b22007179_0006.txt)",
+   "archive.org/b30796581 (b30796581.txt)",
+   "archive.org/jstor-106657 (jstor-106657.txt)",
+   "archive.org/b2201231x_0002 (b2201231x_0002.txt)",
+   "archive.org/b33519390_0001 (b33519390_0001.txt)",
+   "archive.org/b33519390_0002 (b33519390_0002.txt)",
+   "archive.org/disquisitiodecau00jenn (disquisitiodecau00jenn.txt)",
+   "archive.org/b22010440_0004 (b22010440_0004.txt)",
+   "archive.org/b22010452_0004 (b22010452_0004.txt)",
+   "archive.org/b22034985_0001 (b22034985_0001.txt)",
+   "archive.org/mcgill-letters-1790 (mcgill-letters-1790.txt)"
+  ],
+  "parallel_witnesses": [
+   [
+    "src-f38076294dd1",
+    "src-ec9e81d982c3",
+    "src-ceaa28b8107c",
+    "src-38f9944054df",
+    "src-e02a1f1eee19",
+    "src-defc5c91fa33",
+    "src-ebe2f92f46c8"
+   ]
+  ]
+ }
 }
