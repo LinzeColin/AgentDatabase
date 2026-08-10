@@ -233,10 +233,14 @@ def main() -> int:
     if missing:
         print(f"★ {missing} 条的基准件在台账里找不到，**跳过而不是猜**")
     n = 0
+    new_edges = 0   # ★ 真正新加进去的边；原本就声明过的**不算**
     for r in rows:
         nm = pathlib.PurePath(r.get("local_path") or "").name
         if nm in add:
-            r["derived_from"] = sorted(set(r.get("derived_from") or []) | add[nm])
+            prev = set(r.get("derived_from") or [])
+            merged = prev | add[nm]
+            new_edges += len(merged - prev)
+            r["derived_from"] = sorted(merged)
             r["★ derived_from 口径"] = (
                 "／".join(sorted(why[nm])) +
                 "。★ 本字段在此表示「**与所指来源实为同一部作品**」，不必是字面转录派生——"
@@ -250,8 +254,23 @@ def main() -> int:
     left = len(after["**未声明的重复对**"])
     ok = (after["distinct_works"] == before["distinct_works"]
           and after["inflation"] == before["inflation"])
-    print(f"\n→ 写了 {n} 份来源｜未声明 {len(pairs)} → **{left}**｜"
-          f"已声明 {after['已声明的重复对数']}")
+    print(f"\n→ 写了 {n} 份来源（**真新增 {new_edges} 条边**，其余原本就声明过）｜"
+          f"未声明 {len(pairs)} → **{left}**｜已声明 {after['已声明的重复对数']}")
+    # ★★★ 2026-08-10：我在 Virchow 上用临时脚本报了「声明 7 条」，而门一动没动——
+    #   那个计数器数的是「**判定通过的对**」，不是「**写盘新增的边**」：3 对早就声明过、
+    #   4 对落在被拒区间，**真新增 0**。所以 `真新增` 这个数**永远要打印**：
+    #   记账只认它，不认「判定了几对」。
+    #
+    #   ★ 下面这条**是不变量断言，不是信号** —— 现在的 `decide()` 只在这一对**自身**
+    #   两个成员之间选基准件，而这一对是判据报出来的「未声明」，
+    #   所以 `n>0 而 new_edges==0` 走不到。**故意留着**：哪天 `decide()` 改成
+    #   可以指向第三方基准件（合集代表件之类），这条就是唯一会喊的人。
+    #   —— 打不红的分支不许当信号用，所以它只做断言、不做「★ 提示」。
+    if n and new_edges == 0:
+        print("✗ **不变量破了**：写了 {} 份来源却一条新边都没加——"
+              "说明 `decide()` 指向了本来就连着的基准件。**这一轮不是进展。**".format(n),
+              file=sys.stderr)
+        return 1
     if left and not a.include_uncertain:
         print(f"★ 剩下的 {left} 对**是有意留着的**——它们需要人读，不是漏了。")
     print(f"→ 去重后作品 {before['distinct_works']} → {after['distinct_works']}｜"
