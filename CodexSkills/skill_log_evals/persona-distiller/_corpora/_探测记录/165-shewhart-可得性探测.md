@@ -233,3 +233,48 @@ MacTutor 的传记**明确不给姓氏来源**。→ **改记为未核实。**
 
 ★ 最大的核实缺口：**VIAF 全程 403、未绕**，而 VIAF 44469 这个号是从 Wikidata 拿的、
 **不是从 VIAF 页面上读到的**。
+
+
+---
+
+## ★★★ 抓源之后自己复量：**8 份到齐，但「8」这个数有两种口径**
+
+逐份剥标记后自己算的实词数（**没有采信子代理的自报**）：
+
+| 文件 | 实词 | 页 | 词/页 |
+|---|---:|---:|---:|
+| `bstj3-1-43`（1924） | 14,835 | 45 | 330 |
+| `bstj9-2-364`（1930） | 7,385 | 26 | 284 |
+| `bstj6-4-722`（1927） | 4,264 | 14 | 305 |
+| `bstj5-1-11`（1926） | 4,050 | 16 | 253 |
+| `bstj5-4-593`（1926） | 3,172 | 11 | 288 |
+| `bstj5-2-308`（1926） | 3,024 | 12 | 252 |
+| `studyofpropagati00shew`（1914 硕论） | 5,814 | 82 leaves | **71** |
+| `84021`（1922 PNAS） | 1,776 | 4 | 444 |
+
+BSTJ 六篇词/页稳定在 250–330。**1914 硕论的 71 词/leaf 偏低，去核了：文本完整**——
+题名页 `A STUDY OF THE PROPAGATION, REFRACTION, REFLECTION, INTERFERENCE AND DIFFRACTION
+OF RIPPLE WAVES / BY / WALTER ANDREW SHEWHART / A. B. University of Illinois, 1913 / THESIS`，
+结尾是致谢 `In conclusion I wish to thank Dr. F. R. Watson…`。
+偏低是因为**它是带图版的物理论文**，82 leaves 含图版。
+
+### ★★ 「8 份」的两种口径，必须一起说
+
+| 口径 | 份数 |
+|---|---:|
+| **一手来源总数**（`min_sources` 数的就是这个） | **8** |
+| **承载他为人所知的方法**（BSTJ 六篇 + 1922 PNAS） | **7** |
+| 早年物理，与统计过程控制无关（1914 涟漪波硕论） | 1 |
+
+1922 那篇 PNAS **算在方法一侧**：正文开头即
+「it is impossible for the observer to control within narrow limits, **the causes of variation**
+of a quantity while it is being subjected to measurement」——**那正是「可归因变异」这条根**。
+
+★★★ **为什么必须写出这个差**：我在同一天判 Deming #167 时用的尺子是
+「**内容必须承载他为人所知的方法**，早年物理论文即使 ≤1930 也不算」。
+**同一把尺子用在 Shewhart 身上，是 7 < 8。**
+
+- `min_sources` 判据本身**只数来源、不问内容**，所以按判据 8 成立、门过得去；
+- 但若有人按「承载方法」的口径复核，会得到 7，**与「零余量」的说法叠加就是差一份**。
+
+**两个数都记着，不选一个报。**（`counts-need-their-cutoff-stated`）
