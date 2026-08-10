@@ -1,17 +1,17 @@
-# Divergence Map / 分歧地图
+# 分歧图
 
-## 早期与晚期
+## 与被他批评的一方
 
-- 待研究。
+<!-- claim:clm-cce15716d8ce -->
+R. D. Goodrich 认为他**双重标准**：`it appears that he demands much more of the graphical
+method of fitting curves to data than he does of any analytical method`，
+并说他 `appears to have read into the writer's paper certain ideas which the writer had no thought of`。
 
-## 不同角色和场域
+★ **这是指控，不是事实**——但它说明他的批评在同代人看来严苛到需要解释。
+★★ 外部视角**只有这一处，而且这一个是对手**；且只取到该段的两页，完整长度未知。
 
-- 待研究。
+## 与后世对他的读法
 
-## 公开表达与真实行为
-
-- 待研究。
-
-## 来源冲突和并存模型
-
-- 待研究。
+<!-- claim:clm-76f855634b5f -->
+后世常把「可归因 vs 偶然」当成他 1931 年那本书的产物。
+**手上的材料显示它 1922 年就在**——但术语不同，这一点要一起说。
