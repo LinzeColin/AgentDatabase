@@ -329,6 +329,54 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
                 f"[检查器镜像] {mirror.name} 在 scripts/ 与 references/pipeline/checkers/ "
                 f"两处不一致——**把门的是 scripts/ 那份**，改了 references/ 不会生效")
 
+    # --- B3. ★★★★ 镜像**逐字节相同还不够，得起得来** ---
+    #   2026-08-10 实测：我给两件判据加了 `from common import corpus_body`，
+    #   `cp` 过去之后**字节完全相同**，本件报「无合同漂移」——
+    #   而镜像目录里**没有 `common.py`**，那两件加上依赖它的第三件
+    #   一律 `ModuleNotFoundError`，**镜像里三件判据当场就是死的**。
+    #   同时发现 `package_target.py` / `quality_check.py` 在镜像里**一直**起不来
+    #   （缺 `delivery_builder` / `ledger`），**在我今天动它之前就是坏的**。
+    #   ★ 字节比对只回答「两份一不一样」，**不回答「这一份跑不跑得起来」**。
+    #   ★★ 抓到它的不是读代码，是**逐个真跑**（而且不能接管道——退出码会被吃掉）。
+    #   这里只做**导入**：执行顶层 import，不跑 main，82 件约几秒。
+    #   ★★★ 两档，不要混：
+    #     `check_*.py` 起不来 = **漏**（它们本该在镜像里就能跑）
+    #     打包链的 `package_target.py` / `delivery_builder.py` 起不来 = **按设计如此**，
+    #       它们 import 的 `registry_core` 住在**兄弟技能** `persona-distiller-group/scripts/`，
+    #       镜像永远不该把别的技能的模块拷进来。**列出来但不算漂移。**
+    CROSS_SKILL_OK = {"package_target.py", "delivery_builder.py"}
+    mirror_dir = root / "references/pipeline/checkers"
+    if mirror_dir.is_dir():
+        dead, by_design = [], []
+        for f in sorted(mirror_dir.glob("*.py")):
+            #   ★★★★ 路径**必须用绝对路径**。第一版写 `str(f)`（相对我的 cwd）
+            #     配 `cwd=mirror_dir`，Python 报「can't open file」而不是
+            #     ModuleNotFoundError，于是我的判断一个都没命中——
+            #     **99 个文件全"通过"，而它一个都没真的打开过。**
+            #     那句「真跑 99 个，起不来 0 个」我写进了两条提交，是假的。
+            r = subprocess.run(
+                [sys.executable, "-c",
+                 "import importlib.util,sys,pathlib;"
+                 "p=pathlib.Path(sys.argv[1]);"
+                 "sys.path.insert(0,str(p.parent));"
+                 "s=importlib.util.spec_from_file_location('m',p);"
+                 "m=importlib.util.module_from_spec(s);s.loader.exec_module(m)",
+                 str(f.resolve())],
+                capture_output=True, text=True, cwd=str(mirror_dir))
+            err = r.stderr.strip().splitlines()[-1] if r.stderr.strip() else ""
+            if "can't open file" in err or "No such file" in err:
+                problems.append(f"[检查器镜像·**自检失灵**] {f.name} 连打开都没打开——"
+                                f"路径传错了，**这一轮的「全绿」不作数**：{err}")
+                continue
+            if "ModuleNotFoundError" in err or "ImportError" in err:
+                (by_design if f.name in CROSS_SKILL_OK else dead).append((f.name, err))
+        for name, err in dead:
+            problems.append(
+                f"[检查器镜像·**起不来**] {name}：{err}"
+                f"——★ 字节与 scripts/ 一致**不代表它能跑**；镜像少的多半是它 import 的模块")
+        for name, err in by_design:
+            skipped.append(f"[检查器镜像] {name} 起不来是**按设计如此**（跨技能依赖 registry_core）：{err}")
+
     # --- C. 身份输入合同 ---
     fam_file = root / "registries" / "identity-families.json"
     fam = _json(fam_file) or {}
