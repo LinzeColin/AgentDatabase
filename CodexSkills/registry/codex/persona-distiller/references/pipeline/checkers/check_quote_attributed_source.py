@@ -169,7 +169,9 @@ def load_corpus(ws: pathlib.Path) -> dict[str, str]:
     if not raw.is_dir():
         return out
     for p in raw.rglob("*"):
-        if p.is_file():
+        # ★ 跳过 `.gitkeep` 这类占位符与零字节文件——它们匹配不到任何东西，
+        #   却会把「语料份数」这个我要往外报的数抬高。Pacioli 实测：台账 10 份而它报 11。
+        if p.is_file() and not p.name.startswith(".") and p.stat().st_size > 0:
             out[str(p.relative_to(raw))] = re.sub(
                 r"\s+", " ", p.read_text(encoding="utf-8", errors="replace"))
     return out
