@@ -531,6 +531,69 @@ def _compound_hit(toks, first_l, parts):
     return False
 
 
+def _latin_uv(s: str) -> str:
+    """拉丁文正字法归一：V→U、J→I。`HVGONIS` → `HUGONIS`、`IVRE` → `IURE`。"""
+    return s.upper().replace("V", "U").replace("J", "I")
+
+
+def latin_genitive_evidence(text, first, last):
+    """**拉丁题名页的属格署名。** 命中返回那一行，否则 None。
+
+    拉丁书的题名页不写 `By X`，写的是**属格**：
+    `HVGONIS GROTII DE IVRE BELLI AC PACIS`（「格劳秀斯的·论战争与和平法」）。
+    于是 `check_authorship` 的三条路（署名前缀／编者注／逐字稿轮次）**一条都不命中**，
+    而证据其实就印在第一页上。`regex-must-clear-the-corpus-language` 的新一种。
+
+    ## ★★★★ 必须带名，裸姓属格会过半判错
+
+    Grotius #168 逐份实测（`00-归属证据实测.md`）：
+    `epistolae_1687_lat` 里裸 `GROTII/GROTIO` **63 处，其中 34 处是收信人抬头**——
+    `GVILIELMO GROTIO`（致弟 Willem）、`CORNELIO/PETRO GROTIO`（致二子）。
+    **「写给弟弟的信」不是「弟弟写的」**；而同样的形式也出现在**弟弟自己的书**里
+    （弟弟的规范拉丁名字面就是 `Guilelmus Grotius`，职业字段 `Jurist`）。
+    带名之后同一份得 **31 处干净命中**。
+
+    ★ 「必须带名」这一条是从上一次事故来的：给本件加多语署名前缀（`de`/`von`/`par`）时，
+    `de Louis Pasteur`（「的」）与 `von R. Koch behandelten`（被动施事）
+    让净增假阳 11→38，**整批撤回**。属格不是介词，但同一个谨慎照用。
+
+    ## 判法
+
+    1. **V→U、J→I 归一**（`HVGONIS` 与 `HUGONIS` 是同一个词的两种刻法）；
+    2. 名与姓**都要在，且相邻**（中间只许空白）；
+    3. 各自用**词干 + 变格尾**：名取前 4 字母、姓取前 5 字母，尾部各放宽 ≤4/≤3；
+    4. **必须落在短行里**（≤120 字符）——题名页与卷首，不是散文中间。
+
+    ## ★★★★ 2026-08-11：**这条规则目前没有接线，因为它打坏了两道已有的护栏**
+
+    接进 `A-*` 判定链之后，本件自测里两条「版口护栏」当场变红：
+
+        · 版口护栏：父亲的正文，同样的版口（**版口对谁都不算署名**）→ got=True
+        · 版口护栏：★ 同一种版口，页码在右                      → got=True
+
+    根因：**拉丁书每一页的版口（running head）都印着属格作者名**，
+    形态与题名页那一行**无法用「短行 + 名姓相邻」区分**。
+    而那道护栏存在的理由恰恰是「**同一种版口也出现在父亲的正文上**」——
+    放行它等于把 `related-to-him-is-not-written-by-him` 的门自己拆了。
+
+    ★ 已撤回接线，函数与自测保留（8/8，含 `GVILIELMO/PETRO/CORNELIO GROTIO` 三条负对照）。
+    ★★ 要接上必须先解决「题名页 vs 版口」，而不是放宽本函数：
+      候选做法是**只看文件前 N% 的位置**（题名页在最前，版口贯穿全书），
+      或要求同段另有出版者／年份字样。**两者都要先在 Grotius 上量假阳，再谈接线。**
+    """
+    fn = _latin_uv(first)[:4]
+    ln = _latin_uv(last)[:5]
+    if len(fn) < 3 or len(ln) < 4:
+        return None
+    rx = re.compile(r"\b%s[A-Z]{0,4}\s+%s[A-Z]{0,3}\b" % (re.escape(fn), re.escape(ln)))
+    for line in text.splitlines():
+        if len(line) > 120:
+            continue
+        if rx.search(_latin_uv(line)):
+            return line.strip()[:160]
+    return None
+
+
 def ocr_byline_evidence(text, first, last):
     """**名字被 OCR 打坏的署名行。** 命中返回那一行，否则 None。
 
@@ -1616,6 +1679,13 @@ def _check_one(text, pat):
         #   署名型证据（随笔）则相反：文中出现别人的署名就说明切歪了。
         return True, "A-turns", ev, []
 
+    # ★★★★ v0.0.0.155 `A-latin-genitive`：**拉丁题名页的属格署名**。
+    #   拉丁书不写 `By X`，写 `HVGONIS GROTII DE IVRE BELLI AC PACIS`——
+    #   于是现有三条路一条都不命中，而证据就印在第一页上。
+    #   ★ **要求名与姓同时在且相邻**：裸姓属格在 Grotius 的书信集上会**过半判错**
+    #     （63 处裸命中里 34 处是 `GVILIELMO/PETRO/CORNELIO GROTIO` 收信人抬头）。
+    #   ★★ 与 `A-byline-ocr` 一样**受反证约束**（`if not counter`）：
+    #     文中若出现别人的署名，这条路也不该独自把它盖成本人所著。
     # ★ v0.0.0.56 `A-byline-ocr`：名字被 OCR 打坏的署名行。
     #   **最弱的一档，受反证约束**——它靠编辑距离，本来就比逐字命中松。
     if not counter:
