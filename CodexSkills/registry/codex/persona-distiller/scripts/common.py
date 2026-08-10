@@ -93,13 +93,25 @@ SECRET_PATTERNS = {
 #:   `# title:` 头被判据读回来当成署名证据（11/14）。**同一个错，换了个位置又来一次。**
 _PROVENANCE_HEAD = re.compile(r'\A\s*SOURCE:.*?^={20,}[ \t]*$\r?\n', re.S | re.M)
 
+#: **第二种出处表头**：开头连续的 `#` 注释行。
+#:   全库 **1,110 份 / 8 个工作区**（Barton 428、Nightingale 234、Fleming 138、
+#:   Thomson 112、Bessemer 110、Virchow 84、Rosenhain 3、Liebig 1）——
+#:   比 `SOURCE:` 那种（180 份 / 2 个工作区）**多 6 倍**。
+#:   占全文比例小得多（中位 0.18%–11.2%），但 Bessemer 11.2%、Thomson 10.4% 不算小。
+#:   ★ `check_source_header_quotes` 早就把「开头连续的 `#` 行」当表头——
+#:     **这个格式一直是已知的，只是 `corpus_body` 没跟上。**
+_HASH_HEAD = re.compile(r'\A(?:[ \t]*#[^\n]*\r?\n)+')
+
 
 def corpus_body(text: str) -> str:
-    """→ 语料文件的**正文**（剥掉抓源方写的出处表头）。
+    """→ 语料文件的**正文**（剥掉抓源方写的出处表头，两种格式都认）。
 
-    没有表头就原样返回——**不许因为文件里别处有 `====` 就从那里截断**。
+    没有表头就原样返回——**不许因为文件里别处有 `====` 或 `#` 就从那里截断**。
     """
     m = _PROVENANCE_HEAD.match(text)
+    if m:
+        return text[m.end():]
+    m = _HASH_HEAD.match(text)
     return text[m.end():] if m else text
 
 
