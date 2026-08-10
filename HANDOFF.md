@@ -29,35 +29,38 @@
 
 ## 2. 现在做到哪（**更新这一节，不要更新别处**）
 
-- **已入库：101 个产物**（2026-08-10 实测，来源
-  `CodexSkills/registry/codex/persona-distiller-group/team-index.json` 的 `products` 长度）。
-  ★ **要报这个数就当场跑一遍**，不要抄这一行：
+- **已入库：101 个产物**（2026-08-10 实测）。★ **要报这个数就当场跑一遍**，不要抄这一行：
   ```bash
   python3 -c "import json;print(len(json.load(open('CodexSkills/registry/codex/persona-distiller-group/team-index.json'))['products']))"
   ```
-- **刚做完**：**#156 Henry Gantt 记拒发**（真 delta **+0.0078**，quick 门 +0.03；
-  **两席跨零** F −0.0125 / G +0.0281）。判决书：
-  `_corpora/wip-gantt-156/workspaces/henry-gantt/evals/00-结案.md`。
-  ★ 这一轮的盲判装置是至今最干净的一次：均长比 1.01、
-  **「候选更短 ≥25%」这道门本项目首次通过（7/16）**、九种表面特征两侧全 0/16。
-- **#157–#160 建造采购师四人一次判掉**（Kelley/Walker/Oliver/Hau Lee）：
-  判据是**出版年**（1959/1982/1997）晚于 1931 分界，**第二个被 PD 规则清空的族**。
-- **在做**：**#161 Luca Pacioli**（财务合规师，1447–1517）。
-  工作区：`_corpora/wip-pacioli-161/workspaces/luca-pacioli`
-  - 同名护栏 `ready`；语料 **7 份**入库；`attribution_basis` 已按**印刷时代路径**声明
-    （disputed_works 6 条，`covered_sources` 逐份点名）。
-  - 卡在：**语料广度**——来源 7<8、道 1<3（全在 `writings`）。
-    第二轮抓源已派出，目标是补 `external`／`timeline` 两道。
-  - ★★ 两处**混合件**已写进台账，下游不许通篇当他的原创：
-    《De divina proportione》后半是 **Piero della Francesca 的书由他翻译**（瓦萨里剽窃公案）；
-    Geijsbeek 1914 英译本约后半段收的是 Manzoni／Stevin 等**别人的著作**。
-- **待用户裁定的条目**：见任务列表里带「待裁定」字样的那些（⑤⑱⑲⑳㉑㉒㉓㉕㉖㉚㉛㉜）。
+- **延后／拒发名单：137 条**（`_ledgers/_延后名单.json` 的 `total`），
+  其中 **77 条**带 `pd_scope_pending`（等待裁定 ㉜）。
+- **刚做完**：
+  - **#156 Henry Gantt 记拒发**——真 delta **+0.0078**，quick 门 +0.03，**两席跨零**
+    （F −0.0125 / G +0.0281）。判决书 `_corpora/wip-gantt-156/workspaces/henry-gantt/evals/00-结案.md`。
+    ★ 盲判装置是至今最干净的一次：均长比 1.01、**「候选更短 ≥25%」首次通过（7/16）**、
+    九种表面特征两侧全 0/16。
+  - **#157–#160 建造采购师四人一次判掉**（Kelley/Walker/Oliver/Hau Lee）——
+    判据是**出版年**晚于 1931 分界，**第二个被 PD 规则清空的族**。
+  - **#161 Luca Pacioli 记延后（新类别⑦：方法证据全部汇到一部作品）**。
+    ★ **这一条值得读，因为它不是「语料不够」**：10 份源、294 万字符、全部公有领域、
+    全部读得到、研究门 passed、断言层 14 条逐字引文预检全过——
+    **而他的记账论述只存在于一部作品**，三份译本只算一处证据，
+    于是「方法类断言要 ≥2 处独立证据」诚实地只满足到 **1 个 mental-model ＋ 1 个 heuristic**
+    （门要 2 和 3）。判决书 `_corpora/wip-pacioli-161/workspaces/luca-pacioli/references/research/00-处置.md`。
+- **本轮新落的判据**：`check_translation_witness.py`——
+  **同一部作品的多个译本不许当两处独立证据**。
+  根因：`check_claim_source_independence` 的作品分组**是语言盲的**，
+  实测把 Pacioli 的 10 份源分成 10 个作品组，而其中三份译的是同一篇论著。
+  ★ 它的「自动认出哪些是译本」那一半**实测做不出来，已砍掉**（全库误报 38,368 对），
+  文件头留了数字，别再建一遍。
+- **待用户裁定的条目**：见任务列表里带「待裁定」字样的那些（⑤⑱⑲⑳㉑㉒㉓㉕㉖㉚㉛㉜**㉝**）。
   **这些不是你能自己决定的**，遇到就停下来问。
-  ★ 其中 **㉜（PD-only 规则的射程）已经在挡排期**：
-  延后名单里带 `pd_scope_pending: true` 的已累计 **76 人**，
-  而剩余队列里**生年 <1913（可能可做）的还有 62 人**——**队列没被规则耗尽**，
-  只是配重会把 NEXT 指向小族，而有些小族恰好整族都在分界之外。
+  ★ **㉜（PD-only 规则的射程）已经在挡排期**：延后名单里 `pd_scope_pending` 已 **77 人**，
+  而剩余队列里生年 <1913（可能可做）的还有 **62 人**——**队列没被规则耗尽**。
   **这些延后都是可一行反转的**，不要因为它没裁定就停下来。
+  ★ **㉝ 是本轮新增**：`status: hypothesis` 在流程里没有落脚点，
+  门对它与 `pattern` 一视同仁地要 ≥2 处来源。
 
 ---
 
@@ -165,8 +168,53 @@ find CodexSkills/skill_log_evals/persona-distiller/_corpora -path '*<slug>*/evid
 
 ## 7. 交接时的注意
 
-- 这个仓 **3.5 GB / 18,000 个文件**，`.git` 880 MB。
-  **超 GitHub 100 MB 单文件硬限的：0 个。**
-- 分支 `claude/character-distillation-skill-reorganize-d57595` 曾领先 `origin/main`
-  **825 个提交**且从没推过——**移交前必须推上去**。
-- `_protected/` **永不删、永不上传**。
+### ★★★★ 给用户的一句话 prompt（**合并到 main 之后才成立**）
+
+```
+接手我的人物蒸馏项目：cd ~/Documents/Codex/GithubProject/AgentDatabase && git pull，读 HANDOFF.md 按它继续做，遇到标「待裁定」的条目停下来问我。
+```
+
+**不需要任何设置**：路径是本机已有的主树，`git pull` 之后 `HANDOFF.md` 就在仓根。
+
+### ★★★★ 它现在还不成立，缺的是这一步
+
+实测（2026-08-10）：
+
+| 检查 | 结果 |
+|---|---|
+| `~/Documents/Codex/GithubProject/AgentDatabase/HANDOFF.md` | **不存在** |
+| 主树分支 / 状态 | `main` / 干净 |
+| 主树 HEAD vs 本分支 | **落后 862 个提交** |
+
+**HANDOFF.md 只在 `claude/character-distillation-skill-reorganize-d57595` 上。**
+移交那晚要做完的是：
+
+```bash
+git push -u origin claude/character-distillation-skill-reorganize-d57595
+gh pr create --fill && gh pr merge --squash --delete-branch
+cd ~/Documents/Codex/GithubProject/AgentDatabase && git pull
+```
+
+做完之后，上面那句 prompt 才会在收件人的布局里跑通。
+
+### 已经在**干净检出**里验过的（不是在我的工作目录里验的）
+
+`git worktree add --detach` 一个全新检出，逐条跑：
+
+| 步骤 | 结果 |
+|---|---|
+| `HANDOFF.md` 在仓根 | ✓ |
+| §2 那条「当场跑一遍」的产物计数命令 | ✓ 101 |
+| `_ledgers/_每次开工必读.md` | ✓ |
+| `references/pipeline/next_person.py` | ✓ **NEXT = William Paton（财务合规师）** |
+
+★ `next_person.py` 会在 stderr 上打印台账来源；两处不一致时它**明说用的是仓内那份**
+并给出两边的 sha256 与 mtime。**看到那条警告不是出错，是它在告诉你用了哪一份。**
+★★ 演练检出跑完**已经收掉**（铁律 3：谁开的谁收）。
+
+### 交接前还要做的
+
+1. **`_scratch/agentdb-nasmyth-153` 这个 worktree 是我开的，得我收**：
+   合并 → 关 PR → `git worktree remove` → 删分支 → `git gc`（**禁止 `--prune=now`**）。
+2. **`_protected/` 永不上传**，交接时也不上传。
+3. **Notion 全程没碰过**，按约定要等 600 人全完成。
