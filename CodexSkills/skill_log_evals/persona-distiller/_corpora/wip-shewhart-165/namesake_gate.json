@@ -1,0 +1,69 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Shewhart, Walter A. (Walter Andrew), 1891-1967；historical；physicist; engineer; statistician; economist (Wikidata P106). Employers: Western Electric (Q2031258), Bell Labs (Q217365).。\n   专业背景：待权威资料确认。\n   应用价值：场景：统计过程控制／质量控制的文献检索；贝尔实验室 1920–30 年代的技术备忘录；以 Shewhart 命名的图表与循环的出处追溯；关键能力：统计过程控制（控制图）；制造质量的经济控制；测量与数据校正的方法论。\n   区分依据：**这一位就是目标人物本人**（Wikidata Q462232，1891-03-18–1967-03-11）。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "统计过程控制／质量控制的文献检索",
+        "贝尔实验室 1920–30 年代的技术备忘录",
+        "以 Shewhart 命名的图表与循环的出处追溯"
+      ],
+      "authoritative_sources": [
+        {
+          "kind": "wikidata",
+          "locator": "wikidata:Q462232"
+        },
+        {
+          "kind": "lccn",
+          "locator": "lccn:n86088156"
+        },
+        {
+          "kind": "viaf",
+          "locator": "viaf:44469"
+        },
+        {
+          "kind": "gnd",
+          "locator": "gnd:140897313"
+        },
+        {
+          "kind": "evidence",
+          "locator": "{'url': 'https://id.loc.gov/authorities/names/suggest2/?q=Shewhart&count=50', 'where': 'hits[0].suggestLabel and hits[0].more.sources', 'verbatim': 'Shewhart, Walter A. (Walter Andrew), 1891-1967 | found : Who Was Who in Amer., v. 4 (Shewhart, Walter Andrew, d. 3/11/67) | found : His Statistical met"
+        },
+        {
+          "kind": "evidence",
+          "locator": "{'url': 'https://www.wikidata.org/wiki/Special:EntityData/Q462232.json', 'where': 'claims P569/P570/P214/P244/P227', 'verbatim': 'P569 birth: +1891-03-18T00:00:00Z ; P570 death: +1967-03-11T00:00:00Z ; P214 VIAF: 44469 ; P244 LCNAF: n86088156 ; P227 GND: 140897313'}"
+        },
+        {
+          "kind": "evidence",
+          "locator": "{'url': 'https://mathshistory.st-andrews.ac.uk/Biographies/Shewhart/', 'where': 'biography header', 'verbatim': 'Born 18 March 1891 New Canton Illinois, USA / Died 11 March 1967 Troy Hills, New Jersey, USA'}"
+        }
+      ],
+      "canonical_name": "Shewhart, Walter A. (Walter Andrew), 1891-1967",
+      "distinguishing_basis": "**这一位就是目标人物本人**（Wikidata Q462232，1891-03-18–1967-03-11）",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "统计过程控制（控制图）",
+        "制造质量的经济控制",
+        "测量与数据校正的方法论"
+      ],
+      "label": "A",
+      "occupation_or_role": "physicist; engineer; statistician; economist (Wikidata P106). Employers: Western Electric (Q2031258), Bell Labs (Q217365).",
+      "professional_background": "待权威资料确认",
+      "subject_uid": "shewhart-walter-a-1891"
+    }
+  ],
+  "generated_at": "2026-08-10T13:57:13Z",
+  "normalized_name": "walterashewhart",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "shewhart-walter-a-1891",
+  "status": "ready",
+  "target_name": "Walter A. Shewhart"
+}

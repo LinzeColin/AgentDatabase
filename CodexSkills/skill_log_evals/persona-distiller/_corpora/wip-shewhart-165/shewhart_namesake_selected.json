@@ -1,0 +1,38 @@
+{
+  "_selection_record": "同名门第一次运行返回 **blocked（17 名候选，见 `namesake_gate.BLOCKED.json`）**。选定 **Walter A. Shewhart（1891-03-18–1967-03-11）**，权威标识 Wikidata **Q462232** / LCCN **n86088156** / VIAF **44469** / GND **140897313**（生卒经三个独立来源确认）。其余 16 人登记下来是为了留下「已识别并排除」的记录。\n\n★★★★ **本人物的检索硬纪律，四条：**\n① **最危险的不是别人，是 `Mark Shewhart`（OpenAlex A5054858528）** —— 他 1991–2020 年**就发表在统计过程控制图这个领域**，文献里常作 `M. Shewhart`。「Shewhart, M. (1991), Application of machine learning… to Statistical Process Control」**只差一个首字母，而且落在目标人物自己的领域里**。→ **凡 1950 年后的 Shewhart 署名，先判是不是他。** 目标人物 1967 年已故，**任何 1968 年以后的新作都不可能是他**（重印与译本除外）。\n② **真正的污染源是术语，不是同姓** —— `Shewhart chart`（ISO 7870-2、NIST 6.3.1、GND 主题词 4498185-5）、`Shewhart cycle`（PDCA/PDSA 的别名）、`Shewhart Medal`（ASQ，1948 年首颁，他本人是首位获奖者）。**实测第三方文献规模**：OpenAlex `title.search:Shewhart` = **766**、Crossref `query.title=Shewhart` = **531**（两者都抽了尾部核过，命中真实）。**同名门只比姓，一条都挡不住。** 建库时必须显式排除「别人写的、标题里带 Shewhart」的文献。\n③ **`Schuchardt` 是另一个常见德语姓**（Wikidata 上就有 113 个真人），其中**Karl Schuchardt（1901–1985）生卒几乎完全覆盖目标人物**、**Gerhard Schuchardt（1904–1981）职业同为 engineer** —— **只有拼写能把他们分开**，年代与职业这两把常用的筛子在这两个人身上都失效。\n④ **`R Shewhart` 很可能不是人** —— 无 DOI、无刊名，唯一「作品」是关于均值/中位数图的，形态符合解析器把 `Shewhart **R** chart`（R = 极差图）拆成了作者。**既没能证实也没能证伪，按未核实记着。**\n\n★★★★★ **一条我先前记错、现已撤回的**：#165 探测记录里写「姓氏由德语 Schuchardt 英语化而来」，**那句话只出现在搜索引擎的摘要里，不在任何一个真正读过的页面上**；MacTutor 明确不给姓氏来源。**已改为未核实。**",
+  "selected": {
+    "canonical_name": "Walter A. Shewhart",
+    "birth": "1891-03-18",
+    "death": "1967-03-11",
+    "identifiers": {
+      "wikidata": "Q462232",
+      "lccn": "n86088156",
+      "viaf": "44469",
+      "gnd": "140897313"
+    },
+    "★ VIAF 未直接核": "VIAF 全程 403（Cloudflare），**未绕**。VIAF 44469 这个号来自 Wikidata，**不是从 VIAF 页面上读到的** —— 这是本次最大的核实缺口。"
+  },
+  "★ 检索时必须排除的": [
+    "1968 年以后署名 Shewhart 的新作（他 1967 年已故）",
+    "`Mark Shewhart` / `M. Shewhart`（统计过程控制领域，1991–2020）",
+    "`Andrew T. Shewhart`（USAF/AFIT，涡轮气膜冷却，2014–2016）",
+    "`Lauren Shewhart`（Wright State，昆虫/生态，2014–2016）",
+    "`Carrie Shuchart` / `Chris Eric Shuchart`（拼写变体）",
+    "`Schuchardt` 全族（**非穷尽**：Wikidata 113 人、ORCID 38 人、LCNAF 上限 50 且忽略 start）",
+    "地名 `Shewhart Hollow`（Q35284911）与 `Shewhart-Gard Settling Basin`（Q49340389）",
+    "★ 以他命名的术语：`Shewhart chart` / `Shewhart cycle` / `Shewhart Medal`"
+  ],
+  "★ 未核实的（不要当成已核）": [
+    "**VIAF 从未被检索**（403，未绕）—— 它聚合约 50 家国家图书馆，是本次最大的缺口",
+    "ISO 与 ASQ 页面正文未读（均 403）；ISO 7870-2 的标题来自目录列表",
+    "五名非目标 Shewhart/Shuchart 的**生卒年全部查不到**，无权威档公布",
+    "`Schuchardt` **无处穷尽**",
+    "`R Shewhart` 是不是人",
+    "**姓氏源自 Schuchardt 的说法未核实**（只见于搜索引擎摘要）"
+  ],
+  "★ 两个单位陷阱": [
+    "LCNAF 对 Shewhart 报 `count: 2` —— 那是**标签数不是人数**（一条记录 + 变体）",
+    "OpenAlex 的 17 个「Shewhart 作者」里 **13 个是目标人物本人的重复碎片**",
+    "★ OpenAlex `search=Shewhart` 报 14,176 —— **已丢弃**：在第 ~9,981 名处抽 10 条，**0/10 标题含这个词**（命中里有 betatron 调谐、血镉研究），且 OpenAlex 分页上限 10,000，真实尾部够不着。**那是相关性噪声，不是计数。**"
+  ]
+}
