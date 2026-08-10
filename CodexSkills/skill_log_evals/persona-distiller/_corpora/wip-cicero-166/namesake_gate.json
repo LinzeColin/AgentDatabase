@@ -1,0 +1,46 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Marcus Tullius Cicero；历史人物；罗马政治家、演说家、哲学著作家。\n   专业背景：前 63 年执政官；著《De Officiis》《De Oratore》等；致 Atticus 等人的书信集传世。\n   应用价值：场景：法庭与元老院演说；哲学与修辞学著述；私人书信；关键能力：正反两面论证（新学园派方法）；把论著与自己真打过的案子绑在一起论证。\n   区分依据：cognomen 是 `Cicero`，praenomen `Marcus`；前 63 年执政官。**本人。**。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "法庭与元老院演说",
+        "哲学与修辞学著述",
+        "私人书信"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus:abo:phi,0474,055:2:8"
+        },
+        {
+          "locator": "The Latin Library: Cicero"
+        }
+      ],
+      "canonical_name": "Marcus Tullius Cicero",
+      "distinguishing_basis": "cognomen 是 `Cicero`，praenomen `Marcus`；前 63 年执政官。**本人。**",
+      "evidence_level": "high",
+      "identity_category": "历史人物",
+      "key_capabilities": [
+        "正反两面论证（新学园派方法）",
+        "把论著与自己真打过的案子绑在一起论证"
+      ],
+      "label": "A",
+      "occupation_or_role": "罗马政治家、演说家、哲学著作家",
+      "professional_background": "前 63 年执政官；著《De Officiis》《De Oratore》等；致 Atticus 等人的书信集传世",
+      "subject_uid": "cicero-m-tullius-106bc"
+    }
+  ],
+  "generated_at": "2026-08-10T10:51:12Z",
+  "normalized_name": "marcustulliuscicero",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "cicero-m-tullius-106bc",
+  "status": "ready",
+  "target_name": "Marcus Tullius Cicero"
+}
