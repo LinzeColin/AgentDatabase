@@ -561,7 +561,18 @@ def main() -> int:
     #   `check()` 第 278 行本来就独立扫 rubric，缺的只是一条不要求 answers 的入口。
     #   —— 判据要在**还改得动的时候**说话（见「判据没有调用方就不算做完」第 1 条：什么时候说话）。
     if not a.answers and a.rubrics:
-        d = json.loads(pathlib.Path(a.rubrics).read_text(encoding="utf-8"))
+        #   ★★★★ 2026-08-11：**本项目自己的用例文件是 JSONL，而这里只会 `json.loads` 整个文件。**
+        #     于是 `--rubrics evals/cases.jsonl` 直接抛 `JSONDecodeError: Extra data: line 2`——
+        #     「派发之前先验一遍 rubric」这条路**从命令行根本走不通**，
+        #     只有 `quality_check` 内部调用那条路是通的。
+        #     ★ 这与 [[a-checker-nothing-calls-is-not-a-checker]] 是同一族的另一面：
+        #       **判据有调用方，但它读不了被保证之物的真实格式。**
+        #     实测撞出：Shewhart #165 出用例时想先自查，命令行报错。
+        _raw = pathlib.Path(a.rubrics).read_text(encoding="utf-8")
+        try:
+            d = json.loads(_raw)
+        except json.JSONDecodeError:
+            d = [json.loads(_l) for _l in _raw.splitlines() if _l.strip()]   # JSONL 兜底
         rub = ({x.get("case_id", str(i)): x.get("rubric", "") for i, x in enumerate(d)}
                if isinstance(d, list) else d)
         # ★ 题面豁免要接到本模式上——答案侧早就有这条（`ASKS_ABOUT_STOCK`），
