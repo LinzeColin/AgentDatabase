@@ -169,8 +169,23 @@ find CodexSkills/skill_log_evals/persona-distiller/_corpora -path '*<slug>*/evid
 | 状态 | 文件 | 现有条数 | 含义 |
 |---|---|---:|---|
 | 已入库 | `registry/codex/persona-distiller-group/team-index.json` 的 `products` | **101** | 做完并注册 |
-| 延后／拒发 | `skill_log_evals/persona-distiller/_ledgers/_延后名单.json` | **137** | **我判的**：够不着门、材料不可得 |
+| 延后／拒发 | `skill_log_evals/persona-distiller/_ledgers/_延后名单.json` | **135** | **我判的**：够不着门、材料不可得 |
 | **受阻待裁** | `skill_log_evals/persona-distiller/_ledgers/_受阻待裁.json` | **3** | **我判不了的**：只能由用户拍板 |
+
+**核对命令**（第一步就跑）：
+
+```bash
+python3 CodexSkills/registry/codex/persona-distiller/scripts/check_disposition_exclusive.py
+```
+
+★ 它落成当天第一次跑真数据就抓到两条：**Steinhardt 与 Godin 同时在「已入库」和「延后名单」里**
+（是我把已交付的人错加进了延后名单，已移出，137 → 135）。
+
+### ★★★ 还有第四类：**跨人物的长期工程待办**
+
+`_ledgers/_长期待办.json`（5 条）。**它同样是 2026-08-10 才建的**——
+其中「本机 skill 副本落后」这一条，核对时**在整个仓里 0 处提及**，只活在会话任务表里。
+每条都写了 `done_when`（怎么判断它做完了）与 `blocked_by`。
 
 ★ **第三份是 2026-08-10 移交前才建的。** 在那之前这个状态**只活在会话的任务表里**，
 而任务表不跟着仓走——核对时发现 Adams／Martens／Roberts-Austen 三人
