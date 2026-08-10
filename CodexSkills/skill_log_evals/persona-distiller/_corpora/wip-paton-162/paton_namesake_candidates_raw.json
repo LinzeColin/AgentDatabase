@@ -1,0 +1,234 @@
+[
+  {
+    "role": "TARGET",
+    "name_full": "William Andrew Paton",
+    "name_forms_in_the_wild": ["William A. Paton", "W. A. Paton", "Paton, William A. (William Andrew), 1889-1991"],
+    "life_dates": "1889-07-19 – 1991-04-26 (Wikidata/Wikipedia); LC name authority records b. 1889-06-19 (Osceola, Michigan), d. 1991-04-25 (Pittsfield Twp., Michigan) citing SSDI — the two sources DISAGREE by one month on birth and one day on death; not resolved",
+    "nationality": "United States",
+    "field": "Accounting theory, accounting education; economics (PhD, U. Michigan 1917); CPA (Michigan, 1927); co-founder of the American Accounting Association; founding editor of The Accounting Review 1926-1929",
+    "authority_ids": {
+      "wikidata": "Q8004443",
+      "viaf": "110140296 (from Wikidata; viaf.org itself returned 403/404 to this machine, not independently re-verified)",
+      "lccn": "n79007435",
+      "isni": "0000000082981252",
+      "gnd": "171002407"
+    },
+    "how_to_tell_apart": "The only Paton whose authority record carries LC field-of-activity 'Accounting' (sh85000411) AND the 1889-1991 date span; if a source's date span is not 1889-1991 it is not him.",
+    "name_form_matches_william_paton": true,
+    "confusion_risk": "n/a (target)"
+  },
+  {
+    "role": "NAMESAKE",
+    "name_full": "William A. Paton, Jr.",
+    "name_forms_in_the_wild": ["William A. Paton Jr.", "William A. Paton (undifferentiated, no dates)", "Paton, William A., Jr., 1925-"],
+    "life_dates": "born 1925; death date not found",
+    "nationality": "United States",
+    "field": "Accounting — SAME FIELD as the target. LC assigns him the identical field-of-activity heading 'Accounting' (sh85000411) and the identical associated locale as his father.",
+    "authority_ids": {
+      "wikidata": "none found",
+      "viaf": "not found (viaf.org blocked to this machine)",
+      "lccn": "no2020089886 — AND a second, undifferentiated LC record no97013869 headed plainly 'Paton, William A.' with NO dates, established by the IMF Library from 'A study in liquidity, 1958: t.p. (William A. Paton, Jr.)'"
+    },
+    "how_to_tell_apart": "He is the target's SON (LC note on no2020089886: 'title page (William A. Paton Jr., son of William A. Paton, University of Michigan)'); the target's own record links to him via hasRelatedAuthority. Distinguish only by the 'Jr.' suffix or by date span 1925- ; a bare 'William A. Paton' with no dates may be EITHER man.",
+    "name_form_matches_william_paton": true,
+    "confusion_risk": "HIGHEST. Same surname, same forename, same middle initial, same field, same university, and they co-authored at least two books together (Asset Accounting, 1952; Essentials of Accounting, 1966 ed.). One of his two LC records carries no dates at all. A surname-only guard cannot see him; a full-name guard cannot see him either, because his name form is a superstring of the target's."
+  },
+  {
+    "role": "NAMESAKE",
+    "name_full": "William Agnew Paton",
+    "name_forms_in_the_wild": ["William Agnew Paton", "William A. Paton", "Paton, William Agnew, 1848-1918"],
+    "life_dates": "1848 – 1918",
+    "nationality": "United States",
+    "field": "Publishing and travel writing — publisher of the New York World, first business manager of Scribner's Magazine; author of 'Down the Islands: A Voyage to the Caribbees' and 'Picturesque Sicily'",
+    "authority_ids": {
+      "wikidata": "none found",
+      "viaf": "not found (viaf.org blocked to this machine)",
+      "lccn": "no00088442"
+    },
+    "how_to_tell_apart": "Dates 1848-1918; his subjects are travel, the Caribbean and Sicily, never accounting. But note he is BUSINESS-adjacent (magazine business manager), so a topical 'is it business writing?' filter will not separate him.",
+    "name_form_matches_william_paton": true,
+    "confusion_risk": "HIGH. 'William A. Paton' expands to his name exactly as well as to the target's, and his active years (1880s-1910s) overlap the target's earliest publications."
+  },
+  {
+    "role": "NAMESAKE",
+    "name_full": "Sir William Drummond Macdonald Paton",
+    "name_forms_in_the_wild": ["William D. M. Paton", "W. D. M. Paton", "Prof. Sir William Paton", "Paton, William, Sir"],
+    "life_dates": "1917-05-15 – 1993-10-17",
+    "nationality": "United Kingdom",
+    "field": "Pharmacology (professor of pharmacology, University of Oxford)",
+    "authority_ids": {
+      "wikidata": "Q15447416",
+      "viaf": "70106269 and 212463856 (from Wikidata)",
+      "lccn": "n50057424",
+      "isni": "0000000110696847"
+    },
+    "how_to_tell_apart": "British, knighted, medical/pharmacological subject matter, active 1950s-1990s. LC records him with variant headings 'Paton, William, Sir' and 'Paton, William Drummond Macdonald'.",
+    "name_form_matches_william_paton": true,
+    "confusion_risk": "MEDIUM. LC's own variant 'Paton, William, Sir' collapses to a bare 'William Paton' on a title page ('t.p. (William Paton)' is recorded verbatim in his LC record). See the project's Gantt lesson: a rank/title-based rule is REVERSED here — this namesake carries the title, the target does not."
+  },
+  {
+    "role": "NAMESAKE",
+    "name_full": "William Paton (ecumenist)",
+    "name_forms_in_the_wild": ["William Paton", "Paton, William, 1886-1943"],
+    "life_dates": "1886 – 1943",
+    "nationality": "United Kingdom",
+    "field": "Presbyterian missionary and ecumenist; general secretary of the National Christian Council of India, Burma and Ceylon 1922-1927; helped found the World Council of Churches",
+    "authority_ids": {
+      "wikidata": "Q18762128",
+      "viaf": "65336192 (from Wikidata)",
+      "lccn": "n81128180",
+      "isni": "0000000083895495"
+    },
+    "how_to_tell_apart": "Religious/missionary subject matter, British, and his LC record was established from 'Social ideals in India, 1919'. He is the FATHER of Sir William D. M. Paton.",
+    "name_form_matches_william_paton": true,
+    "confusion_risk": "HIGH for the 1918-1931 window specifically — his publishing life (from 1919) is exactly contemporaneous with the target's PD-eligible window, and his name form is the bare 'William Paton'."
+  },
+  {
+    "role": "NAMESAKE",
+    "name_full": "William Roger Paton",
+    "name_forms_in_the_wild": ["W. R. Paton", "Paton, W. R. (William Roger), 1857-1921"],
+    "life_dates": "1857-02-09 – 1921-04-21",
+    "nationality": "United Kingdom (Scotland); died on Samos, Greece",
+    "field": "Classical scholarship, epigraphy, translation — the Loeb translations of The Greek Anthology and Polybius",
+    "authority_ids": {
+      "wikidata": "Q8017733",
+      "viaf": "100178364 (from Wikidata)",
+      "lccn": "nr89005382",
+      "isni": "0000000106556999"
+    },
+    "how_to_tell_apart": "Middle initial R, dates 1857-1921, always attached to Greek/Latin texts. His Loeb volumes are 1916-1918 — inside the project's PD window — so an unqualified 'Paton, 1918' hit can land on him.",
+    "name_form_matches_william_paton": true,
+    "confusion_risk": "MEDIUM-HIGH. Heavily cited and heavily digitised; his 1916-1918 works sit in the same PD date band being harvested for the target."
+  },
+  {
+    "role": "NAMESAKE",
+    "name_full": "William Bryce Paton",
+    "name_forms_in_the_wild": ["W. B. Paton", "Paton, W. B. (William Bryce), 1907-1988"],
+    "life_dates": "1907 – 1988",
+    "nationality": "United Kingdom (Scotland)",
+    "field": "Librarianship — Scottish librarian, professor, president of the Library Association in 1962",
+    "authority_ids": {
+      "wikidata": "none found",
+      "viaf": "not found (viaf.org blocked to this machine)",
+      "lccn": "n78017320"
+    },
+    "how_to_tell_apart": "Middle initial B; library-science subject matter; Scottish.",
+    "name_form_matches_william_paton": true,
+    "confusion_risk": "LOW-MEDIUM. Same 'W. _ . Paton' shape and an academic/professional author, but no date-band or subject overlap."
+  },
+  {
+    "role": "NAMESAKE",
+    "name_full": "William D. Paton",
+    "name_forms_in_the_wild": ["William D. Paton", "Paton, William D., 1929-"],
+    "life_dates": "born 1929",
+    "nationality": "United States (inferred from subject matter: 'Criminal trial manual', 1969- ; not stated in the LC record)",
+    "field": "Criminal law / legal practice manuals",
+    "authority_ids": {
+      "wikidata": "none found",
+      "viaf": "not found (viaf.org blocked to this machine)",
+      "lccn": "n80160305"
+    },
+    "how_to_tell_apart": "Legal subject matter, active from 1969. Distinct from the pharmacologist despite both being 'William D. Paton'.",
+    "name_form_matches_william_paton": true,
+    "confusion_risk": "LOW-MEDIUM. Collides with the pharmacologist as much as with the target; matters mainly because 'William D. Paton' is ambiguous even after middle-initial matching."
+  },
+  {
+    "role": "NAMESAKE",
+    "name_full": "William Paton Paton",
+    "name_forms_in_the_wild": ["William Paton Paton", "Paton, William Paton, 1867-1894"],
+    "life_dates": "1867-06-15 – 1894-08-01 (drowned)",
+    "nationality": "not stated in the LC record",
+    "field": "not an author in his own right — the LC heading was established from a memorial volume, 'In memoriam William Paton Paton, 1894'",
+    "authority_ids": {
+      "wikidata": "none found",
+      "viaf": "not found (viaf.org blocked to this machine)",
+      "lccn": "nb2009025028"
+    },
+    "how_to_tell_apart": "His name contains 'William Paton' twice; he died in 1894 at 27 and wrote nothing.",
+    "name_form_matches_william_paton": true,
+    "confusion_risk": "LOW for corpus contamination, HIGH for string matching — 'William Paton' appears twice inside his heading, so any substring rule double-counts him."
+  },
+  {
+    "role": "NAMESAKE",
+    "name_full": "William Paton (Minister of the Church of Scotland)",
+    "name_forms_in_the_wild": ["William Paton"],
+    "life_dates": "not recorded in Wikidata",
+    "nationality": "United Kingdom (Scotland)",
+    "field": "Church of Scotland ministry",
+    "authority_ids": {
+      "wikidata": "Q103994716",
+      "viaf": "none on the Wikidata item",
+      "lccn": "none on the Wikidata item"
+    },
+    "how_to_tell_apart": "Cannot be separated on dates because Wikidata records none. Treat any undated 'William Paton' + Scottish church context as this man, not the target.",
+    "name_form_matches_william_paton": true,
+    "confusion_risk": "UNKNOWN — an undated authority record is unfalsifiable and therefore cannot be excluded by any date rule."
+  },
+  {
+    "role": "NAMESAKE",
+    "name_full": "William Paton (Bailie of Perth) / William Paton, of Luncarty, Perthshire / William Paton (Art researcher)",
+    "name_forms_in_the_wild": ["Paton, William (Bailie of Perth)", "Paton, William, of Luncarty, Perthshire", "Paton, William (Art researcher)"],
+    "life_dates": "none given in any of the three LC records",
+    "nationality": "United Kingdom (Scotland) for the first two; not stated for the third",
+    "field": "civic/local (Perth); estate owner; art research",
+    "authority_ids": {
+      "wikidata": "none found",
+      "viaf": "not found (viaf.org blocked to this machine)",
+      "lccn": "nr97001851 / nb99011452 / no2024098650"
+    },
+    "how_to_tell_apart": "LC differentiates these three by qualifier only, never by dates. Any of them can surface as a bare 'William Paton'.",
+    "name_form_matches_william_paton": true,
+    "confusion_risk": "LOW for content, MEDIUM for identifier hygiene — three more dateless 'William Paton' authority records in the same file."
+  },
+  {
+    "role": "SURNAME-ONLY COLLISION (name is NOT 'William Paton'; listed because the project's guard compares surname only)",
+    "name_full": "Herbert James Paton",
+    "name_forms_in_the_wild": ["H. J. Paton", "Paton"],
+    "life_dates": "1887-03-30 – 1969-08-02",
+    "nationality": "United Kingdom (Scotland)",
+    "field": "Philosophy — Kant scholarship; translator of Kant's Groundwork",
+    "authority_ids": {
+      "wikidata": "Q5734674",
+      "viaf": "85176743 (from Wikidata)",
+      "lccn": "n91003676",
+      "isni": "0000000116810356"
+    },
+    "how_to_tell_apart": "Forename Herbert, not William. Philosophy, not accounting. Born 1887 — only two years before the target, so a birth-decade heuristic does NOT separate them.",
+    "name_form_matches_william_paton": false,
+    "confusion_risk": "HIGH under a surname-only guard: an academic author named Paton, near-identical birth decade, whose works are cited as bare 'Paton'."
+  },
+  {
+    "role": "SURNAME-ONLY COLLISION (forename is 'William Paton'; surname is NOT Paton)",
+    "name_full": "William Paton Ker",
+    "name_forms_in_the_wild": ["W. P. Ker", "Ker, W. P. (William Paton), 1855-1923"],
+    "life_dates": "1855-08-30 – 1923-07-17",
+    "nationality": "United Kingdom (Scotland)",
+    "field": "English/medieval literary scholarship; professor at UCL and Oxford",
+    "authority_ids": {
+      "wikidata": "Q4219472",
+      "viaf": "51774688 (from Wikidata)",
+      "lccn": "n50044774",
+      "isni": "0000000110623285"
+    },
+    "how_to_tell_apart": "Surname is Ker. But the string 'William Paton' is his full forename, so a free-text search for 'William Paton' hits him and a surname-only guard does NOT.",
+    "name_form_matches_william_paton": false,
+    "confusion_risk": "MEDIUM — the inverse failure: full-name text search catches him, the surname guard misses him. Publishing years 1890s-1923 are inside the PD window."
+  },
+  {
+    "role": "SURNAME-ONLY COLLISION (forename is 'William Paton'; surname is NOT Paton)",
+    "name_full": "William Paton Mackay",
+    "name_forms_in_the_wild": ["W. P. Mackay", "Mackay, W. P. (William Paton), 1839-1885"],
+    "life_dates": "1839-05-13 – 1885-08-22",
+    "nationality": "United Kingdom (Scotland)",
+    "field": "Free Church of Scotland minister; hymn writer; author of the tract 'Grace and Truth' (translated into Welsh, Spanish and other languages)",
+    "authority_ids": {
+      "wikidata": "Q23899390",
+      "viaf": "9439429 (from Wikidata)",
+      "lccn": "no96039826",
+      "isni": "0000000073909603"
+    },
+    "how_to_tell_apart": "Surname is Mackay. He is the closest match found to the brief's '19th-century Scottish clergyman/translator' — but see the note field: no person actually NAMED 'William Paton' fitting that description was found.",
+    "name_form_matches_william_paton": false,
+    "confusion_risk": "MEDIUM — LC holds three separate headings for him (the base heading plus Welsh and Spanish translation headings), all containing the literal string 'William Paton'."
+  }
+]

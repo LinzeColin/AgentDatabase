@@ -1,0 +1,121 @@
+{
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "william-andrew-paton-1889",
+ "consent_authority": null,
+ "created_at": "2026-08-10T06:38:53Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "finance-compliance",
+  "display": "财务合规师",
+  "mode": "single",
+  "primary": "finance-compliance",
+  "weights": {
+   "finance-compliance": 1.0
+  }
+ },
+ "language": "en",
+ "model_version": "0.1.0-draft",
+ "name": "William Andrew Paton",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "本项目公有领域窗口（出版年 ≤1931）内他的著作：1916/1918《Principles of Accounting》（与 R. A. Stevenson 合著）、1921《Problems and Exercises》（合著）、**1922《Accounting Theory》（独著）**",
+    "1924《Accounting》（894 页独著）与 1919《The Economic Position of the United Kingdom》在 HathiTrust 是 PD 全视图，**本机被 Cloudflare 挡住，坐标已记全**"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "Wikidata Q8004443（P569 1889-07-19 / P570 1991-04-26）"
+    },
+    {
+     "locator": "LC Name Authority n79007435（据 1919 年 The economic position of the United Kingdom 扉页建立）"
+    },
+    {
+     "locator": "LC Name Authority no2020089886（子，1925-，同一领域标目）"
+    },
+    {
+     "locator": "LC Name Authority no97013869（子的**无生卒年**光秃标目）"
+    }
+   ],
+   "canonical_name": "William Andrew Paton",
+   "distinguishing_basis": "**本人物必须用带生卒年的全名形式 `William Andrew Paton, 1889-1991` 识别。** ★★★★ 最大的混淆风险是**他儿子** `William A. Paton, Jr., 1925-`（LCCN no2020089886）：LC 给父子**同一个领域标目**（sh85000411 Accounting）与**同一个关联地点**，且儿子**另有一条不带任何生卒年的光秃标目** `Paton, William A.`（LCCN no97013869，由 IMF 图书馆据 1958 年《A study in liquidity》建立）。父子还合著过至少两本（1952《Asset Accounting》、1966 版《Essentials of Accounting》）。**比姓挡不住他；比全名也挡不住他——他的名字是目标人物名字的超串。**",
+   "evidence_level": "high",
+   "identity_category": "财务合规师",
+   "key_capabilities": [
+    "会计理论（专有权本位 vs 企业实体本位）",
+    "会计教育",
+    "会计学术期刊编辑"
+   ],
+   "label": "A",
+   "occupation_or_role": "会计理论学者、密歇根大学教授；美国会计学会共同创建人；《The Accounting Review》创刊主编（1926–1929）",
+   "professional_background": "1889 年生于密歇根 Osceola，1991 年卒于密歇根 Pittsfield。★ **生卒日两个权威源不一致**：Wikidata/Wikipedia 记 1889-07-19 / 1991-04-26，LC 的 RWO 记录引 SSDI 记 1889-06-19 / 1991-04-25——**差一个月、差一天，未解决，两个都留着。** 密歇根大学经济学博士 1917；密歇根注册会计师 1927。1918–19 学年在华盛顿休假（War Trade Board 研究统计局，后任国内税务局所得税处特派主任）。",
+   "subject_uid": "william-andrew-paton-1889"
+  },
+  "chosen_subject_uid": "william-andrew-paton-1889",
+  "normalized_name": "williamandrewpaton",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "williamandrewpaton",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "william-andrew-paton",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-d50ce80a010c",
+ "time_scope": "1916–1931（本项目公有领域窗口内的出版年）",
+ "updated_at": "2026-08-10T06:38:53Z",
+ "attribution_basis": {
+  "authority": "LC Name Authority **n79007435**（LC 就是据 1919 年《The economic position of the United Kingdom, 1912-1918》扉页 `t.p. (William A. Paton)` 建立这条标目的）；Wikidata **Q8004443**。★ **生卒日两个权威源不一致**：Wikidata 记 1889-07-19 / 1991-04-26，LC 的 RWO 记录引 SSDI 记 1889-06-19 / 1991-04-25——**差一个月、差一天，未解决，两个都留着，产物里不许只写一个。**",
+  "citation": "印刷时代路径：**扉页署名可用**。1922《Accounting Theory》两份扫描件的正文里都能逐字取到 `By WILLIAM ANDREW PATON, Ph.D. Professor of Accounting, University of Michigan NEW YORK THE RONALD PRESS COMPANY 1922`。★★★★ **它用的是全名带中名 `WILLIAM ANDREW PATON`**——这正是与他儿子 `William A. Paton, Jr.`（1925-）的分水岭，而儿子另有一条**不带任何生卒年**的光秃 LC 标目 `Paton, William A.`（no97013869）。",
+  "disputed_policy": "合著件一律标 P2 并在 `tier_reason` 里写明合著人；**不得计入个人声口证据**。归属存疑的一律不入库，除非能独立坐实。",
+  "disputed_works": [
+   {
+    "work": "《Principles of Accounting》1916 / 1918",
+    "issue": "与 R. A. Stevenson 合著",
+    "本库能不能判": "**不能，且证据是负面的不是缺失的。** 序言通篇 `the authors`（`it has seemed to the authors that…`），结尾署 `W. A. P. R. A. S.`，**没有任何分工说明**；1918 版致谢还引入第三人：`to Professor David Friday … for suggestions which were used in the preparation of Chapter I`——**第一章有第三方贡献**。★ 客观佐证：他 1922 独著里的自称 `the writer` 在这两份里出现 **0 次**。",
+    "处置": "入库为 P2 背景语料，**不作声口证据**"
+   },
+   {
+    "work": "《Problems and Exercises》1921",
+    "issue": "与 Stevenson 合著的习题册",
+    "本库能不能判": "同上，`the writer` **0 次**，序言无分工说明",
+    "处置": "入库为 P2 背景语料"
+   },
+   {
+    "work": "《The Economic Position of the United Kingdom, 1912-1918》1919, GPO",
+    "issue": "扉页写 `by William A. Paton`，**而附注写 `compiled in the Bureau of Research and Statistics, War Trade Board`**——「由局里编成」不等于他独著。★ 他 1918–19 学年确在该局休假（密歇根大学传记独立记载），**任职属实，独著存疑**。",
+    "本库能不能判": "**本机拿不到全文**（HathiTrust 记录 100563507 三个副本全 `pd` 全视图，而 `babel.hathitrust.org` 对本机返回 403 Cloudflare；archive.org 无此件）",
+    "处置": "**未入库。** 属「通道受限」，坐标已记全，换台机器可续"
+   },
+   {
+    "work": "《Accounting》1924, Macmillan, 894 页（独著）",
+    "issue": "无归属争议，**纯粹是拿不到**",
+    "本库能不能判": "HathiTrust 记录 001125087，`mdp.39015053565910` / `uc1.$b98067` 两副本 `pd` 全视图；Google Books `Pqw2AAAAMAAJ` 只有 snippet；archive.org 无。**403 Cloudflare，没有尝试绕过。**",
+    "处置": "**未入库。** ★ 它是把独著份额从 31.79% 拉到 50%+ 的关键一本"
+   }
+  ],
+  "counting_convention": "两份 1922 扫描件是**同一本书**，已用 `derived_from` 声明，**只算一部作品**。★ **1916 与 1918 没有声明**：`check_source_dedup` 只报出 1 对重复，说明这两份的 8 词片重叠 <0.3——**227 页改写成 724 页，它们在文本上确实是两部东西**。我原本以为是「同一部作品的两个版次」，**判据的沉默纠正了这一点**；版次源流写在 1916 那条的 `★ 版次源流` 字段里当事实，不当同一作品计数。",
+  "covered_sources": {
+   "paton-1922-accounting-theory-cornell-scan.txt": "扉页署名逐字：`By WILLIAM ANDREW PATON, Ph.D. Professor of Accounting, University of Michigan NEW YORK THE RONALD PRESS COMPANY 1922`（康奈尔扫本，正文内，**不是我加的 URL 头**）",
+   "paton-1922-accounting-theory.txt": "同一扉页，Google 扫本 OCR 略脏：`By WILLIAM ANDREW PATON, Ph.D. Ptofesflor of Acrountini!, UniverGity of Michi^sn`——**照录，未改讹字**",
+   "paton-stevenson-1918-principles-of-accounting.txt": "合著，见 disputed_works",
+   "paton-stevenson-1916-principles-of-accounting-1st-ed.txt": "合著，见 disputed_works",
+   "paton-stevenson-1921-problems-and-exercises.txt": "合著，见 disputed_works"
+  }
+ }
+}

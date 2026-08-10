@@ -1,0 +1,52 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：William Andrew Paton；财务合规师；会计理论学者、密歇根大学教授；美国会计学会共同创建人；《The Accounting Review》创刊主编（1926–1929）。\n   专业背景：1889 年生于密歇根 Osceola，1991 年卒于密歇根 Pittsfield。★ **生卒日两个权威源不一致**：Wikidata/Wikipedia 记 1889-07-19 / 1991-04-26，LC 的 RWO 记录引 SSDI 记 1889-06-19 / 1991-04-25——**差一个月、差一天，未解决，两个都留着。** 密歇根大学经济学博士 1917；密歇根注册会计师 1927。1918–19 学年在华盛顿休假（War Trade Board 研究统计局，后任国内税务局所得税处特派主任）。。\n   应用价值：场景：本项目公有领域窗口（出版年 ≤1931）内他的著作：1916/1918《Principles of Accounting》（与 R. A. Stevenson 合著）、1921《Problems and Exercises》（合著）、**1922《Accounting Theory》（独著）**；1924《Accounting》（894 页独著）与 1919《The Economic Position of the United Kingdom》在 HathiTrust 是 PD 全视图，**本机被 Cloudflare 挡住，坐标已记全**；关键能力：会计理论（专有权本位 vs 企业实体本位）；会计教育；会计学术期刊编辑。\n   区分依据：**本人物必须用带生卒年的全名形式 `William Andrew Paton, 1889-1991` 识别。** ★★★★ 最大的混淆风险是**他儿子** `William A. Paton, Jr., 1925-`（LCCN no2020089886）：LC 给父子**同一个领域标目**（sh85000411 Accounting）与**同一个关联地点**，且儿子**另有一条不带任何生卒年的光秃标目** `Paton, William A.`（LCCN no97013869，由 IMF 图书馆据 1958 年《A study in liquidity》建立）。父子还合著过至少两本（1952《Asset Accounting》、1966 版《Essentials of Accounting》）。**比姓挡不住他；比全名也挡不住他——他的名字是目标人物名字的超串。**。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "本项目公有领域窗口（出版年 ≤1931）内他的著作：1916/1918《Principles of Accounting》（与 R. A. Stevenson 合著）、1921《Problems and Exercises》（合著）、**1922《Accounting Theory》（独著）**",
+        "1924《Accounting》（894 页独著）与 1919《The Economic Position of the United Kingdom》在 HathiTrust 是 PD 全视图，**本机被 Cloudflare 挡住，坐标已记全**"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q8004443（P569 1889-07-19 / P570 1991-04-26）"
+        },
+        {
+          "locator": "LC Name Authority n79007435（据 1919 年 The economic position of the United Kingdom 扉页建立）"
+        },
+        {
+          "locator": "LC Name Authority no2020089886（子，1925-，同一领域标目）"
+        },
+        {
+          "locator": "LC Name Authority no97013869（子的**无生卒年**光秃标目）"
+        }
+      ],
+      "canonical_name": "William Andrew Paton",
+      "distinguishing_basis": "**本人物必须用带生卒年的全名形式 `William Andrew Paton, 1889-1991` 识别。** ★★★★ 最大的混淆风险是**他儿子** `William A. Paton, Jr., 1925-`（LCCN no2020089886）：LC 给父子**同一个领域标目**（sh85000411 Accounting）与**同一个关联地点**，且儿子**另有一条不带任何生卒年的光秃标目** `Paton, William A.`（LCCN no97013869，由 IMF 图书馆据 1958 年《A study in liquidity》建立）。父子还合著过至少两本（1952《Asset Accounting》、1966 版《Essentials of Accounting》）。**比姓挡不住他；比全名也挡不住他——他的名字是目标人物名字的超串。**",
+      "evidence_level": "high",
+      "identity_category": "财务合规师",
+      "key_capabilities": [
+        "会计理论（专有权本位 vs 企业实体本位）",
+        "会计教育",
+        "会计学术期刊编辑"
+      ],
+      "label": "A",
+      "occupation_or_role": "会计理论学者、密歇根大学教授；美国会计学会共同创建人；《The Accounting Review》创刊主编（1926–1929）",
+      "professional_background": "1889 年生于密歇根 Osceola，1991 年卒于密歇根 Pittsfield。★ **生卒日两个权威源不一致**：Wikidata/Wikipedia 记 1889-07-19 / 1991-04-26，LC 的 RWO 记录引 SSDI 记 1889-06-19 / 1991-04-25——**差一个月、差一天，未解决，两个都留着。** 密歇根大学经济学博士 1917；密歇根注册会计师 1927。1918–19 学年在华盛顿休假（War Trade Board 研究统计局，后任国内税务局所得税处特派主任）。",
+      "subject_uid": "william-andrew-paton-1889"
+    }
+  ],
+  "generated_at": "2026-08-10T06:38:40Z",
+  "normalized_name": "williamandrewpaton",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "william-andrew-paton-1889",
+  "status": "ready",
+  "target_name": "William Andrew Paton"
+}

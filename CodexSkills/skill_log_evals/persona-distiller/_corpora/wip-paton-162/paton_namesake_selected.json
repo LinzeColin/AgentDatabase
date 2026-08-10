@@ -1,0 +1,118 @@
+{
+ "_selection_record": "同名门第一次运行返回 **blocked（14 名候选，见 `namesake_gate.BLOCKED.json`）**。选定 William Andrew Paton (1889–1991)。**其余 13 人不构成专家人格候选**，登记它们是为了留下「已识别并排除」的记录。\n\n★★★★ **由此得出本人物的检索硬纪律，三条**：\n① **本项目的 PD 窗口（出版年 ≤1931）本身就排除了儿子**——他 1925 年生，1931 年时 6 岁。**任何窗口内的出版物都不可能是他的。** 这是本人物最强的一条判别，比任何名字匹配都硬。\n② **窗口内真正会撞的是另外两个**：`William Agnew Paton`（1848–1918，纽约《World》出版人、写游记，**也是商业圈的人**，所以「是不是商业写作」这类主题过滤分不开他）与 `William Roger Paton`（1857–1921，Loeb 版《希腊诗选》译者，**1916–1918 的 Loeb 卷正好落在窗口内**）。**两人都可按题材分开，但必须真的去分。**\n③ **窗口之外的一律先判归属**：1938 年以后成文的「William A. Paton」材料，在没有明确生卒年或没有写明 1889–1991 时段事件时，**一律先判归属再采用**——父子同领域、同机构、且儿子有一条无生卒年的光秃标目。\n\n★ 与 Livermore #100 同型（祖孙三代同名），处置照同一先例。",
+ "excluded_count": 13,
+ "excluded": [
+  {
+   "name_full": "William A. Paton, Jr.",
+   "life_dates": "born 1925; death date not found",
+   "field": "Accounting — SAME FIELD as the target. LC assigns him the identical field-of-activity heading 'Accounting' (sh85000411) and the identical associated locale as his father.",
+   "nationality": "United States"
+  },
+  {
+   "name_full": "William Agnew Paton",
+   "life_dates": "1848 – 1918",
+   "field": "Publishing and travel writing — publisher of the New York World, first business manager of Scribner's Magazine; author of 'Down the Islands: A Voyage to the Caribbees' and 'Picturesque Sicily'",
+   "nationality": "United States"
+  },
+  {
+   "name_full": "Sir William Drummond Macdonald Paton",
+   "life_dates": "1917-05-15 – 1993-10-17",
+   "field": "Pharmacology (professor of pharmacology, University of Oxford)",
+   "nationality": "United Kingdom"
+  },
+  {
+   "name_full": "William Paton (ecumenist)",
+   "life_dates": "1886 – 1943",
+   "field": "Presbyterian missionary and ecumenist; general secretary of the National Christian Council of India, Burma and Ceylon 1922-1927; helped found the World Council of Churches",
+   "nationality": "United Kingdom"
+  },
+  {
+   "name_full": "William Roger Paton",
+   "life_dates": "1857-02-09 – 1921-04-21",
+   "field": "Classical scholarship, epigraphy, translation — the Loeb translations of The Greek Anthology and Polybius",
+   "nationality": "United Kingdom (Scotland); died on Samos, Greece"
+  },
+  {
+   "name_full": "William Bryce Paton",
+   "life_dates": "1907 – 1988",
+   "field": "Librarianship — Scottish librarian, professor, president of the Library Association in 1962",
+   "nationality": "United Kingdom (Scotland)"
+  },
+  {
+   "name_full": "William D. Paton",
+   "life_dates": "born 1929",
+   "field": "Criminal law / legal practice manuals",
+   "nationality": "United States (inferred from subject matter: 'Criminal trial manual', 1969- ; not stated in the LC record)"
+  },
+  {
+   "name_full": "William Paton Paton",
+   "life_dates": "1867-06-15 – 1894-08-01 (drowned)",
+   "field": "not an author in his own right — the LC heading was established from a memorial volume, 'In memoriam William Paton Paton, 1894'",
+   "nationality": "not stated in the LC record"
+  },
+  {
+   "name_full": "William Paton (Minister of the Church of Scotland)",
+   "life_dates": "not recorded in Wikidata",
+   "field": "Church of Scotland ministry",
+   "nationality": "United Kingdom (Scotland)"
+  },
+  {
+   "name_full": "William Paton (Bailie of Perth) / William Paton, of Luncarty, Perthshire / William Paton (Art researcher)",
+   "life_dates": "none given in any of the three LC records",
+   "field": "civic/local (Perth); estate owner; art research",
+   "nationality": "United Kingdom (Scotland) for the first two; not stated for the third"
+  },
+  {
+   "name_full": "Herbert James Paton",
+   "life_dates": "1887-03-30 – 1969-08-02",
+   "field": "Philosophy — Kant scholarship; translator of Kant's Groundwork",
+   "nationality": "United Kingdom (Scotland)"
+  },
+  {
+   "name_full": "William Paton Ker",
+   "life_dates": "1855-08-30 – 1923-07-17",
+   "field": "English/medieval literary scholarship; professor at UCL and Oxford",
+   "nationality": "United Kingdom (Scotland)"
+  },
+  {
+   "name_full": "William Paton Mackay",
+   "life_dates": "1839-05-13 – 1885-08-22",
+   "field": "Free Church of Scotland minister; hymn writer; author of the tract 'Grace and Truth' (translated into Welsh, Spanish and other languages)",
+   "nationality": "United Kingdom (Scotland)"
+  }
+ ],
+ "candidates": [
+  {
+   "canonical_name": "William Andrew Paton",
+   "subject_uid": "william-andrew-paton-1889",
+   "identity_category": "财务合规师",
+   "occupation_or_role": "会计理论学者、密歇根大学教授；美国会计学会共同创建人；《The Accounting Review》创刊主编（1926–1929）",
+   "professional_background": "1889 年生于密歇根 Osceola，1991 年卒于密歇根 Pittsfield。★ **生卒日两个权威源不一致**：Wikidata/Wikipedia 记 1889-07-19 / 1991-04-26，LC 的 RWO 记录引 SSDI 记 1889-06-19 / 1991-04-25——**差一个月、差一天，未解决，两个都留着。** 密歇根大学经济学博士 1917；密歇根注册会计师 1927。1918–19 学年在华盛顿休假（War Trade Board 研究统计局，后任国内税务局所得税处特派主任）。",
+   "application_scenarios": [
+    "本项目公有领域窗口（出版年 ≤1931）内他的著作：1916/1918《Principles of Accounting》（与 R. A. Stevenson 合著）、1921《Problems and Exercises》（合著）、**1922《Accounting Theory》（独著）**",
+    "1924《Accounting》（894 页独著）与 1919《The Economic Position of the United Kingdom》在 HathiTrust 是 PD 全视图，**本机被 Cloudflare 挡住，坐标已记全**"
+   ],
+   "key_capabilities": [
+    "会计理论（专有权本位 vs 企业实体本位）",
+    "会计教育",
+    "会计学术期刊编辑"
+   ],
+   "distinguishing_basis": "**本人物必须用带生卒年的全名形式 `William Andrew Paton, 1889-1991` 识别。** ★★★★ 最大的混淆风险是**他儿子** `William A. Paton, Jr., 1925-`（LCCN no2020089886）：LC 给父子**同一个领域标目**（sh85000411 Accounting）与**同一个关联地点**，且儿子**另有一条不带任何生卒年的光秃标目** `Paton, William A.`（LCCN no97013869，由 IMF 图书馆据 1958 年《A study in liquidity》建立）。父子还合著过至少两本（1952《Asset Accounting》、1966 版《Essentials of Accounting》）。**比姓挡不住他；比全名也挡不住他——他的名字是目标人物名字的超串。**",
+   "authoritative_sources": [
+    {
+     "locator": "Wikidata Q8004443（P569 1889-07-19 / P570 1991-04-26）"
+    },
+    {
+     "locator": "LC Name Authority n79007435（据 1919 年 The economic position of the United Kingdom 扉页建立）"
+    },
+    {
+     "locator": "LC Name Authority no2020089886（子，1925-，同一领域标目）"
+    },
+    {
+     "locator": "LC Name Authority no97013869（子的**无生卒年**光秃标目）"
+    }
+   ],
+   "evidence_level": "high"
+  }
+ ]
+}
