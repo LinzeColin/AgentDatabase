@@ -2,7 +2,15 @@
 
 ## Scope and assigned sources
 
-Pending. Use train-split source IDs only.
+**本道分到 3 份（train split，holdout 已排除）**：
+
+| source_id | 出版年 | tier | 题名 |
+|---|---|---|---|
+| `src-1be9153766c6` | 1687 | P1 | Epistolae quotquot reperiri potuerunt（书信集，现存最大的一部） |
+| `src-1a398fec8248` | 1806 | P1 | Hugonis Grotii Epistolae Ineditae（致 Oxenstierna 父子及瑞典参议，自法国寄出） |
+| `src-b7384d9e7530` | 1829 | P1 | Hugonis Grotii ad Ioh. Oxenstiernam et Ioh. Adl. Salvium … Epistolae Ineditae |
+
+★ 本节由台账机械导出，**不含任何阅读判断**；下面三节要读原文，仍是 `Pending.`。
 
 ## Source-linked observations
 
