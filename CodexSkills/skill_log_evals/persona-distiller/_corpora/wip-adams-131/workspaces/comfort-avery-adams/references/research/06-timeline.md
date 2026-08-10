@@ -8,7 +8,7 @@
   ★ archive.org 该扫描件的 `date` 字段写 **1922**，那是**第一版**年份；**引用必须写 1925**。
 - **1904 年**已在 A.I.E.E. 发表署名文（卷 XXIII pp.63–76），当时印作 **`C. A. Adams, Jr.`**。
 - **1918–1919 年任 A.I.E.E. 会长**，1919-06-24 于 Lake Placid 年会作会长致辞。
-- 1922 年仍在会刊的委员会名册上（「COMMITTEE ON CODE OF PRINCIPLES OF PROFESSIONAL CONDUCT, C. A. Adams, Chairman」（★ **本库 72 份语料里定位不到**，多半抄自未入库的名录页；未定位就不当逐字引文用））。
+- 1922 年仍在会刊的委员会名册上（‹COMMITTEE ON CODE OF PRINCIPLES OF PROFESSIONAL CONDUCT, C. A. Adams, Chairman›（★ **本库 72 份语料里定位不到**，多半抄自未入库的名录页；未定位就不当逐字引文用））。
 
 ## ★ 不许写进任何地方的三个数
 

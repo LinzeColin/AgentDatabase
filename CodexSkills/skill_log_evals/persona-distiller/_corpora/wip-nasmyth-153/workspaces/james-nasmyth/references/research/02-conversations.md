@@ -15,7 +15,7 @@
   订阅墙），只有马克思《资本论》第 15 章的逐字转引。**转引不能当引文核查的锚点。**
   ★★ 更硬的一条：抓源实测 **1867 年 First report 全文里 `Nasmyth` 出现 0 次**——
   连「那份报告里有他的材料」这个前提本身都没能证实。
-- 1871 年那次下议院委员会陈述：DNB 记「Nasmyth obtained leave to be heard by the committee」，
+- 1871 年那次下议院委员会陈述：DNB 记‹Nasmyth obtained leave to be heard by the committee›，
   **但没说是哪个委员会**，本轮定位失败。
 
 ★ 时点要记住：**1836 年他 27 岁，蒸汽锤（1842）还没有。** 此时他在 Patricroft 建 Bridgewater

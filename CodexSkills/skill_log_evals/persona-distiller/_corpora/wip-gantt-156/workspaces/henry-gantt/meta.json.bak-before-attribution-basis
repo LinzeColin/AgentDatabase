@@ -1,0 +1,197 @@
+{
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "henry-laurence-gantt-1861-1919",
+ "consent_authority": null,
+ "created_at": "2026-08-10T01:26:48Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "construction-procurement",
+  "display": "建造采购师",
+  "mode": "single",
+  "primary": "construction-procurement",
+  "weights": {
+   "construction-procurement": 1.0
+  }
+ },
+ "language": "zh",
+ "model_version": "0.1.0-draft",
+ "name": "Henry Gantt",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "进度排程与产能可视化",
+    "工时—奖金激励制度设计",
+    "工业组织与管理"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "ASME Transactions vol.41 (1919) pp.1120–1121 讣告 `HENRY LAURENCE GANTT` — https://archive.org/details/transactionsof41amer"
+    },
+    {
+     "locator": "美国工业关系委员会记录 vol.1 p.955 `TESTIMONY OF HENRY LAWRENCE GANTT`（1914-04-15） — https://archive.org/details/industrialrelati01unitrich"
+    },
+    {
+     "locator": "https://en.wikipedia.org/wiki/Henry_Gantt"
+    },
+    {
+     "locator": "McDonogh School 档案 MS-11 *Henry (Harry) L. Gantt Collection, Class of 1878* — https://www.mcdonogh.org/static/files/Archives/ms011_henry_l_gantt_'78_final.pdf"
+    }
+   ],
+   "canonical_name": "Henry Laurence Gantt",
+   "distinguishing_basis": "★★★★ **选定依据（留痕，不是默认）**：队列条目族别为「建造采购师／technical-engineer」，而同名的 **Henry Gantt（1831–1884，弗吉尼亚农场主、南军上校）姓名与本人完全相同**——**同名护栏在多候选时按设计 blocked，此处是显式选定，不是它自己解开的。**\n区分依据：本人物 1861-05-20 生、1919-11-23 卒，Johns Hopkins A.B.(1880)、Stevens M.E.(1884)，ASME 会员并有 10 篇署名论文与 1919 年学会讣告；上校那位无任何工程学会记录。\n\n★★ 一手印刷品里**两种中名拼写都出现**：ASME Transactions 作 `Henry Laurence Gantt`（讣告 vol.41 p.1120），而**美国国会工业关系委员会记录作 `TESTIMONY OF HENRY LAWRENCE GANTT`**（vol.1 p.955）。**Laurence 与 Lawrence 都是一手用法，不是 OCR 讹误，检索式两种都要收。** 另有昵称 `Harry`（McDonogh School 档案把藏品命名为 The Henry (Harry) L. Gantt Collection, Class of 1878）。OCR 实测变体：Ganit / Ganrt / Ganlt / Gantrr / II. L. Gantt / TI. L. Gantt / Gantt, H. B.",
+   "evidence_level": "low",
+   "identity_category": "historical",
+   "key_capabilities": [
+    "把生产计划画成可核对的时间表",
+    "用奖金制改造计件工资",
+    "在学会与国会场合就管理方法作证与辩论"
+   ],
+   "label": "A",
+   "occupation_or_role": "美国机械工程师、管理学家；甘特图（Gantt chart）与奖金制的提出者",
+   "professional_background": "1861-05-20 生于马里兰州 Calvert County，1919-11-23 卒。Johns Hopkins A.B.(1880)、Stevens Institute M.E.(1884)。曾在 Midvale Steel 与 Frederick W. Taylor 共事，后自任咨询工程师，客户含 Westinghouse、American Locomotive、Remington、Saco-Lowell、Ingersoll-Rand、Amoskeag、Cheney Bros. 等。一战期间任职于军械与船务部门。★ 无头衔（一手文献一律作 `Mr. Gantt` / `H. L. Gantt, Member of the Society`）；学位仅 A.B. 与 M.E.",
+   "subject_uid": "henry-laurence-gantt-1861-1919"
+  },
+  "chosen_subject_uid": "henry-laurence-gantt-1861-1919",
+  "normalized_name": "henrygantt",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "henrygantt",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "henry-gantt",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-015b003c8f09",
+ "time_scope": "all available periods, separated by role and material drift",
+ "updated_at": "2026-08-10T01:26:48Z",
+ "known_namesakes": [
+  {
+   "name": "Henry Gantt",
+   "years": "1831–1884",
+   "who": "弗吉尼亚农场主、南军上校",
+   "why": "★★★★ **姓名与本人完全相同**，且年代重叠（1831–1884 vs 1861–1919）。**他有军衔而本人无头衔——「有头衔即排除」这条规则在本人物上是反的。**",
+   "titles": [
+    "Col",
+    "Colonel"
+   ]
+  },
+  {
+   "name": "William Andrew Horsley Gantt",
+   "alias": [
+    "W. Horsley Gantt"
+   ],
+   "years": "1892–1980",
+   "who": "生理学／心理学家，巴甫洛夫的学生，在 Johns Hopkins 创办 Pavlovian Laboratory",
+   "why": "★★★ **最高危**：同姓 ＋ **同校（Johns Hopkins）** ＋ 同城（Baltimore），而本人正是 Johns Hopkins 1880 届 A.B.。★ **有无亲缘关系查不到，不推断。**",
+   "titles": [
+    "Dr"
+   ],
+   "distinguishing_given_tokens": [
+    "Horsley"
+   ]
+  },
+  {
+   "name": "Harvey Gantt",
+   "years": "1943–",
+   "who": "美国建筑师、Charlotte 市长",
+   "why": "★★ 同姓且**是建筑师**——本人物族别正是「建造采购师」，检索最容易把他吸进来。在世。",
+   "distinguishing_given_tokens": [
+    "Harvey"
+   ]
+  },
+  {
+   "name": "Love Rosa Gantt",
+   "years": "1875–1935",
+   "who": "美国医生",
+   "why": "同姓，生卒年与本人高度重叠——**按年代筛选筛不掉**。",
+   "distinguishing_given_tokens": [
+    "Rosa"
+   ]
+  },
+  {
+   "name": "Mary E. Snow Gantt",
+   "alias": [
+    "Mrs. H. L. Gantt",
+    "Mrs. Henry L. Gantt"
+   ],
+   "who": "本人之妻（Fitchburg, Mass.，1899-11-29 成婚）",
+   "why": "★★★★ **护栏的第一个真漏洞**：ASME Transactions v30/v32/v33 的出席与夫人名单里有 `Mrs. H. L. Gantt` 与 `Mrs. Henry L. Gantt`——**这两个串把 `H. L. Gantt` 与 `Henry L. Gantt` 完整包含在内**。不检查左侧敬称的子串护栏会把她的记录算成他的。",
+   "titles": [
+    "Mrs"
+   ],
+   "distinguishing_given_tokens": [
+    "Snow"
+   ]
+  },
+  {
+   "name": "Edward Gantt",
+   "who": "圣公会牧师（1746–1837）",
+   "why": "同姓名单（Wikipedia: Gantt (surname)），年代与领域均不重叠，列出备查。",
+   "distinguishing_given_tokens": [
+    "Edward"
+   ]
+  },
+  {
+   "name": "Edward W. Gantt",
+   "who": "政客兼南军（1829–1874）",
+   "why": "同姓名单（Wikipedia: Gantt (surname)），年代与领域均不重叠，列出备查。",
+   "distinguishing_given_tokens": [
+    "Edward"
+   ]
+  },
+  {
+   "name": "David F. Gantt",
+   "who": "纽约州议员（1941–2020）",
+   "why": "同姓名单（Wikipedia: Gantt (surname)），年代与领域均不重叠，列出备查。",
+   "distinguishing_given_tokens": [
+    "David"
+   ]
+  },
+  {
+   "name": "Bob Gantt",
+   "who": "篮球运动员（1922–1994）",
+   "why": "同姓名单（Wikipedia: Gantt (surname)），年代与领域均不重叠，列出备查。",
+   "distinguishing_given_tokens": [
+    "Bob"
+   ]
+  },
+  {
+   "name": "Fred Gantt",
+   "who": "篮球运动员（1922–2002）",
+   "why": "同姓名单（Wikipedia: Gantt (surname)），年代与领域均不重叠，列出备查。",
+   "distinguishing_given_tokens": [
+    "Fred"
+   ]
+  }
+ ],
+ "own_titles": [],
+ "★ own_titles 为空是明确声明": "**本人物无任何头衔**：一手文献一律作 `Mr. Gantt` / `H. L. Gantt, … Member of the Society`，国会记录作 `Mr. GANTT … consulting engineer`。学位只有 **A.B.（Johns Hopkins, 1880）** 与 **M.E.（Stevens Institute, 1884）**，无 Dr./Prof./军衔。\n★★ **这一条要和 known_namesakes 第一条一起读**：同名的那位 Henry Gantt **是上校**——所以对本人物而言，**「候选行里出现军衔」是排除信号，不是接受信号**。",
+ "★★★★ 名字形式的分歧（两种拼写都是一手用法）": "ASME Transactions 作 **Henry Laurence Gantt**（讣告 vol.41 p.1120）；**美国国会工业关系委员会记录作 `TESTIMONY OF HENRY LAWRENCE GANTT`**（vol.1 p.955）。\n**Laurence 与 Lawrence 都是一手用法，不是 OCR 讹误——检索式两种都要收。**\n另有昵称 `Harry`（McDonogh School 档案 MS-11 命名为 *The Henry (Harry) L. Gantt Collection*），但**未在他本人署名里见过**。\n★ OCR 实测变体（抓源与判据都要容忍）：`Ganit`／`Ganrt`／`Ganlt`／`Gantrr`／`II. L. Gantt`／`TI. L. Gantt`／`Gantt, H. B.`（v17 出席名单，前一行是 `Gale, H,. B.`，判为 L→B 误读）。",
+ "★★ 与 Taylor 的纠缠（最容易把别人的话算到他头上）": [
+  "Taylor《Shop Management》ASME Trans. v24 (1903) §171–173 整段在讲 `Mr. Gantt's system`／`Mr. Gantt's plan`，**且与 Gantt 自己那篇 No.1002 同在 v24**——该卷 45 处 `Gantt` 大部分是 Taylor 在写他。",
+  "Taylor《On the Art of Cutting Metals》Trans. v28 称滑尺 `has since been patented jointly by Messrs. Barth, Gantt and the writer`——**三人共有专利，不是他个人成果**。",
+  "CIR 1914 vol.1 里 Taylor 的证词大段谈 Gantt；Carl Barth 的证词里 Barth 与 Gantt **两句紧挨着**。",
+  "★★★ **另一类不是 Taylor 但同样致命**：ASME 讨论排版中途换过体例——v16–v25、v30 是 `Mr. Gantt.— <第一人称原话>`（**逐字**）；v32、v38、v40 变成 `H. L. Gantt said that…`／`Henry L. Gantt thought…`（**学会秘书第三人称转述**）。v40 论文后还有整段 `In presenting his paper the author pointed out that…`（约 470 词）——**读起来完全像他，一个字都不是他的。这一批不许当逐字口述用。**",
+  "Wallace Clark《The Gantt Chart》(1922)：**作者是 Clark，全书零处 Gantt 署名文字**，而 archive.org 的 creator 字段把 Gantt 列为共同作者——**元数据陷阱**。",
+  "William Kent《Investigating an Industry》(1914)：archive.org creator 列 Kent + Gantt，**实际只有 998 词的 Introduction 是他的**（署 `Henry L. Gantt.`），正文与 Preface 全是 Kent。整本 31,665 词若按合著入库，**一手占比会被灌水**。"
+ ],
+ "★ known_namesakes 里的 titles 是护栏真正吃的字段": "`check_authorship._title_blocked` 拿**候选署名行里出现的头衔**去比同名者声明的头衔，命中即拒。所以同名者的头衔**必须写进来**，否则那一层是空转。\n★ 本人物 `own_titles` 为空——**候选行里只要出现头衔，就不是他**。",
+ "★★ 合并条目已拆开": "原先有一条把五个人塞进一个 `name` 字符串（`Edward Gantt / Edward W. Gantt / …`），护栏按空白分词后**把姓 `Gantt` 当成了同名者的独有词元，反而把目标人物自己全挡掉**。**一个字段放一个人**，别塞列表。",
+ "★★★ distinguishing_given_tokens 是人手写的，判据不推断": "护栏只认这个字段里列出的词元，**不从名字里推**。★ 推断版曾被自测打红：Adams #131 是**父子同名**，词元完全相同、只有 `Jr.` 区分，推断会把儿子（目标人物）自己挡掉。\n★★ **同名上校 `Henry Gantt` 有意不写这个字段**——他和本人物名字完全一样，**只能靠 `titles: [Col, Colonel]` 挡**，写名字词元反而会误伤本人物。"
+}

@@ -117,7 +117,7 @@ Schneider → 两年后访 Creusot 发现已建成运转 → `After this he lost
 - **讣告（S2）**：原文这一句 OCR 已经坏到不能当引文用——逐字是
   `Mr mara Bipeber ab the | gave the benefit of his Shox to M. Ecinaidae, the proprietor of
   the great ironworks at Creuzot`。**主语与受赠人两处都读不出来。**
-  ★★★★ 此处**曾被我写成**「Mr Nasmyth … gave the benefit of his ［sketch］ to M. ［Schneider］」
+  ★★★★ 此处**曾被我写成**‹Mr Nasmyth … gave the benefit of his ［sketch］ to M. ［Schneider］›
   （★ 这一行**有意不用反引号、方括号也换成全角**：本道判据把反引号内的长英文串一律
   当成「声称逐字」去核，而这句**恰恰是反面例子**。**反面例子不该冒充引文**——
   改的是我的写法，不是判据的口径。）

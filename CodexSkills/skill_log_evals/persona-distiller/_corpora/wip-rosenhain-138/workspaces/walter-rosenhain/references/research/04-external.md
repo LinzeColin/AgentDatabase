@@ -44,7 +44,7 @@ during about eight days`——**他的名字已成为一种制样方法的代称
 ★★ 同源风险已记：archive.org 上另有 `useofmodifiedros15317scot`
 《Use of a modified **Rosenhain furnace** for thermal analysis》，
 作者是 Scott 与 Freeman——**以他命名的仪器，不是他的作品**，已拒收，
-理由与 Roberts-Austen #135 的 A 类完全同形（「by the Eoberts-Austen recording pyrometer」（★ **本库定位不到这个搭配**：语料里只有 `Sir W. Eoberts-Austen and Mr. T. Andrews`；这是我的转述，不当逐字引文用））。
+理由与 Roberts-Austen #135 的 A 类完全同形（‹by the Eoberts-Austen recording pyrometer›（★ **本库定位不到这个搭配**：语料里只有 `Sir W. Eoberts-Austen and Mr. T. Andrews`；这是我的转述，不当逐字引文用））。
 
 ## ★ 本道的诚实边界
 

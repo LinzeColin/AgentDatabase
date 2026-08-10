@@ -18,7 +18,7 @@ Jeans 记旧法之坏，用词与他本人几乎相同（`as imperfect as it was
 
 1877 年那本《The Whitworth Measuring Machine》（archive.org 标识符 whitworthmeasur00whitgoog，
 **这是著录号不是引文，无从在语料里回查**）的 creator 字段**错把他列为作者**，
-而标题页是 「MADE BY SIR JOSEPH WHITWORTH … BY T. M. GOODEVE … AND C. P. B. SHELLEY」（★ **书名页排印，不是他说的话**）——
+而标题页是 ‹MADE BY SIR JOSEPH WHITWORTH … BY T. M. GOODEVE … AND C. P. B. SHELLEY›（★ **书名页排印，不是他说的话**）——
 他是仪器的制造者，不是书的作者。**该书未入库，故这一行的标题页文字也不在本工作区的语料里。**
 
 ## ★ 同名污染
