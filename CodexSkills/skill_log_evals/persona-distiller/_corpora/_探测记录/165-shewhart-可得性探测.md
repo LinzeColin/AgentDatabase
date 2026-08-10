@@ -369,3 +369,76 @@ JSTOR 前言写的是 `Free to Anyone in the World` 与
 
 → 记进 `test-the-guard-against-this-persons-namesake`：
 **给定标识符的抓源，等于把同名护栏整个绕过去了**；护栏只在检索路径上生效。
+
+
+---
+
+## ★★★ 第二轮抓源之后：11 份，而**两种口径的差从 1 变成了 3**
+
+新增三份（详见工作区台账）：1928 JFI、1917 Physical Review（**即他的伯克利博士论文**）、
+1919 School Science and Mathematics。
+
+| 口径 | 份数 | 是哪些 |
+|---|---:|---|
+| **一手来源总数**（`min_sources` 数的就是这个） | **11** | 全部 |
+| **承载他为人所知的方法** | **8** | BSTJ 六篇 + 1922 PNAS + 1928 JFI |
+| 早年物理／哲学随笔，**不承载 SPC** | **3** | 1914 硕论（涟漪波）、1917 博论（黏性介质中的小液滴）、1919 SSM |
+
+### 逐份的判法（不猜，读了正文）
+
+- **1928 JFI《Economic Aspects of Engineering Applications of Statistical Methods》**
+  —— 题目里就是统计方法，**算**。
+- **1917 Physical Review** —— 黏性介质中小液滴的加速运动，纯物理，**不算**。
+  （它同时是他的博士论文：脚注自陈 `Accepted in partial satisfaction of the
+  requirements for the degree of doctor of philosophy in the University of California`。）
+- **1919 SSM《The Role Played by Generalizations in Laboratory Physics》** —— **不算**。
+  实测词频：`statistic` **0**、`probab` **0**、`error` **0**、`average` **0**；
+  `generaliz` 13、`experiment` 8。它是**物理教学期刊上的哲学随笔**。
+
+  ★★ 但有一句必须照录，因为它与他后来的东西共鸣得刺眼：
+
+  > `a search for permanence in a world whose law is variation`
+
+  ★★★ **共鸣不等于承载。** 这句话读起来像统计过程控制的种子，
+  但整篇没有一个统计词。**把它算进「方法」那一栏就是为了凑数放宽判据**——不算。
+
+### 于是两种口径给出相反的结论
+
+| | 口径 | 数 | 真实下限 9 |
+|---|---|---:|---|
+| 判据实际用的 | 一手来源总数 | **11** | **过了，余 2** |
+| 我判 Deming 用的 | 承载他的方法 | **8** | **差 1** |
+
+**判据只数来源、不问内容，所以按判据 11 成立、`min_sources` 这道门是真过了。**
+但按「承载方法」复核仍然差一份 —— **两个数都记着，不选一个报。**
+（`counts-need-their-cutoff-stated`）
+
+---
+
+## 现在唯一挡着的是 `min_lanes`
+
+11 份分布：`writings` 8 ／ `decisions` 3 ／ 其余四道 **0**。门要 3 道。
+
+**第三道的材料存在且已定位**：ASCE Transactions Vol. 91 (1927) 里
+他对 E. P. Goodrich《Plotting Skew Frequency Data》的讨论发言（`conversations`）
+＋ Goodrich 逐条驳他的回应段（`external`）——**一份材料同时解两道**，
+免费、无访问限制、1927 年公有领域、坐标 leaf 63–69。
+
+**卡点是可量的，而且不是结构性的**：这一卷 OCR 系统性丢虚词——
+
+| 文件 | ≤2 字母词占比 |
+|---|---:|
+| ASCE v91 全卷 | **0.0265** |
+| ASCE v91 Shewhart 段 | 0.0589 |
+| 本轮另三份 | 0.2406 / 0.2501 / 0.3093 |
+| 上一轮那份「已知 OCR 差」的 BSTJ 9-2-364 | 0.2815 |
+
+**正常英语散文 25–28%。** BSTJ 那份的毛病是**认错字母**，这一卷是**整词丢失**——
+`a / of / to / in / is` 这类丢了约八成。`_djvu.txt`、`_hocr_searchtext`、
+原始 `_hocr.html` 三处同值，**词根本不在 hOCR 里**，文本派生件救不回来。
+
+★ 该件元数据自报 `confidence: 94`、950 页均值 93.35——**自报 94 分的同时丢了八成虚词**。
+
+→ 只能重新 OCR 页图。本机**没有** tesseract / pdftotext / ocrmypdf，
+但**有 `swift` + `swiftc` + `Vision.framework`**（macOS 自带 OCR），
+也有 `fitz`(PyMuPDF)。**正在建这条路**——成不成另记。
