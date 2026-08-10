@@ -47,6 +47,24 @@ import pathlib
 import re
 import sys
 
+#: ★ 剥掉抓源方写的出处表头再量——**表头是出处说明，不是他的话**。
+#:   全库只有 Adams（144 份）与 Coffin（36 份）有这种表头，
+#:   实测占全文**聚合 17.2% / 11.7%**，**逐份中位 39.1% / 16.1%**。
+#: ★★ 接上之后**逐个量过前后差**，只写量到的：
+#:   · `check_lane_quotes_verbatim` @ Coffin：核过 1 → 0，
+#:     报出 `Coffin, Charles L., Detroit, Mich.` **对不上**——
+#:     那句「逐字引文」只存在于**我自己写的表头里**。这是 Barton 事故的引文版，实锤一条。
+#:   · ★★★★ `check_ocr_language_death` @ Coffin：不剥时「**每一份都在下限之上**」，
+#:     剥掉表头后报出 **2 份虚词占比 0.101（下限 0.15）**——
+#:     **我那段干净的英文表头把 OCR 烂掉的文件托过了及格线。**
+#:     同一件在 Adams 上是「可判份数 94 → 60」：34 份**只因表头的词数才够得上判**。
+#:   · `check_first_person_density`：正文字符 −0.6%，密度 1.68 → **1.69**——
+#:     **几乎没变**。我一度在这里写「第一人称密度被表头拉偏」，**那句没有实测支撑，已删**。
+#:   · 其余多数判据前后一致。**接线是按「表头不是他的话」这条原则做的，不是因为每个都变了。**
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from common import corpus_body  # noqa: E402
+
 _PAGE_FURNITURE = re.compile(r"\[版口：([^\]]*)\]")
 
 # ★★★ 引文里**允许**的三类排版记号，比对前一律剥掉。
@@ -164,7 +182,7 @@ def load_corpus(ws: pathlib.Path):
         p = ws / str(r.get("normalized_path") or r.get("local_path") or "")
         if p.is_file():
             corp[r.get("source_id")] = _norm(
-                p.read_text(encoding="utf-8", errors="replace"))
+                corpus_body(p.read_text(encoding="utf-8", errors="replace")))
         else:
             unread.append(r.get("source_id"))
     return corp, unread
@@ -264,7 +282,7 @@ def check(ws: pathlib.Path):
         return 2, {"错": unread}
     res, bad = {}, 0
     for f in sorted((ws / "references" / "research").glob("0*.md")):
-        qs = extract_quotes(f.read_text(encoding="utf-8"))
+        qs = extract_quotes(corpus_body(f.read_text(encoding="utf-8")))
         miss = [q for q in qs if verify(q, corp) is None]
         bad += len(miss)
         res[f.name] = {"引文数": len(qs), "核过": len(qs) - len(miss),

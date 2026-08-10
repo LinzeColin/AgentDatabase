@@ -81,6 +81,24 @@ import pathlib
 import re
 import sys
 
+#: ★ 剥掉抓源方写的出处表头再量——**表头是出处说明，不是他的话**。
+#:   全库只有 Adams（144 份）与 Coffin（36 份）有这种表头，
+#:   实测占全文**聚合 17.2% / 11.7%**，**逐份中位 39.1% / 16.1%**。
+#: ★★ 接上之后**逐个量过前后差**，只写量到的：
+#:   · `check_lane_quotes_verbatim` @ Coffin：核过 1 → 0，
+#:     报出 `Coffin, Charles L., Detroit, Mich.` **对不上**——
+#:     那句「逐字引文」只存在于**我自己写的表头里**。这是 Barton 事故的引文版，实锤一条。
+#:   · ★★★★ `check_ocr_language_death` @ Coffin：不剥时「**每一份都在下限之上**」，
+#:     剥掉表头后报出 **2 份虚词占比 0.101（下限 0.15）**——
+#:     **我那段干净的英文表头把 OCR 烂掉的文件托过了及格线。**
+#:     同一件在 Adams 上是「可判份数 94 → 60」：34 份**只因表头的词数才够得上判**。
+#:   · `check_first_person_density`：正文字符 −0.6%，密度 1.68 → **1.69**——
+#:     **几乎没变**。我一度在这里写「第一人称密度被表头拉偏」，**那句没有实测支撑，已删**。
+#:   · 其余多数判据前后一致。**接线是按「表头不是他的话」这条原则做的，不是因为每个都变了。**
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from common import corpus_body  # noqa: E402
+
 # 只认动词锚定的第一人称——裸 `I` 在 OCR 语料里 75% 是零件标号
 VERB = (r"\bI (?:have|had|am|was|claim|find|found|prefer|may|make|made|use|used|do|did|"
         r"desire|employ|shown|show|believe|consider|know|knew|think|thought|wish|intend)\b")
@@ -153,7 +171,7 @@ def scan(root: pathlib.Path) -> dict:
     files = sorted(p for p in root.rglob("*.txt") if p.name != "_ids.txt")
     per, tot_c, tot_raw, tot_b, tot_d, allsub = [], 0, 0, 0, 0, []
     for f in files:
-        r = scan_text(f.read_text(encoding="utf-8", errors="replace"))
+        r = scan_text(corpus_body(f.read_text(encoding="utf-8", errors="replace")))
         tot_c += r["chars"]
         tot_raw += r["raw_I"]
         tot_b += r["boilerplate"]
@@ -164,7 +182,7 @@ def scan(root: pathlib.Path) -> dict:
     n = len(allsub)
     sample = ""
     for f in files[:6]:
-        sample += body_of(f.read_text(encoding="utf-8", errors="replace"))[:20000]
+        sample += body_of(corpus_body(f.read_text(encoding="utf-8", errors="replace")))[:20000]
     if sample and not looks_english(sample):
         return {"语料": str(root), "源数": len(files), "正文字符": tot_c,
                 "**本判据不适用**": "**这份语料不是英文。** 本件只认英文的第一人称动词锚点"

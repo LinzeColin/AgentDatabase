@@ -52,6 +52,24 @@ import pathlib
 import re
 import sys
 
+#: ★ 剥掉抓源方写的出处表头再量——**表头是出处说明，不是他的话**。
+#:   全库只有 Adams（144 份）与 Coffin（36 份）有这种表头，
+#:   实测占全文**聚合 17.2% / 11.7%**，**逐份中位 39.1% / 16.1%**。
+#: ★★ 接上之后**逐个量过前后差**，只写量到的：
+#:   · `check_lane_quotes_verbatim` @ Coffin：核过 1 → 0，
+#:     报出 `Coffin, Charles L., Detroit, Mich.` **对不上**——
+#:     那句「逐字引文」只存在于**我自己写的表头里**。这是 Barton 事故的引文版，实锤一条。
+#:   · ★★★★ `check_ocr_language_death` @ Coffin：不剥时「**每一份都在下限之上**」，
+#:     剥掉表头后报出 **2 份虚词占比 0.101（下限 0.15）**——
+#:     **我那段干净的英文表头把 OCR 烂掉的文件托过了及格线。**
+#:     同一件在 Adams 上是「可判份数 94 → 60」：34 份**只因表头的词数才够得上判**。
+#:   · `check_first_person_density`：正文字符 −0.6%，密度 1.68 → **1.69**——
+#:     **几乎没变**。我一度在这里写「第一人称密度被表头拉偏」，**那句没有实测支撑，已删**。
+#:   · 其余多数判据前后一致。**接线是按「表头不是他的话」这条原则做的，不是因为每个都变了。**
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from common import corpus_body  # noqa: E402
+
 GOOD_DE = re.compile(r"\b(der|die|und|ist|sich|nicht|den|dem|eine|auch)\b", re.I)
 MOJI_DE = re.compile(r"\b(ber|bie|unb|ift|ben|bem|aud|nid|fid|baf)\b", re.I)
 MIN_SIGNAL = 0.005          # 两侧都低于此 → 判「不是德文，没测」
@@ -97,7 +115,7 @@ def scan(raw_dir: pathlib.Path) -> dict:
         if f is None:
             skipped.append(d.name)
             continue
-        r = legibility(f.read_text(encoding="utf-8", errors="ignore"))
+        r = legibility(corpus_body(f.read_text(encoding="utf-8", errors="ignore")))
         r["short"] = d.name
         if r["verdict"] != "not-german":
             checked += 1
