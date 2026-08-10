@@ -2615,9 +2615,41 @@
    "处置类": "延后",
    "★ 处置类的原键": "class",
    "★ disposition 未记": false
+  },
+  {
+   "name": "Herbert Heinrich",
+   "aliases": [
+    "Herbert William Heinrich",
+    "H. W. Heinrich",
+    "H.W. Heinrich"
+   ],
+   "family_zh": "财务合规师",
+   "deferred_at": "2026-08-10",
+   "seq": 164,
+   "disposition": "延后",
+   "class": "⑩ **代表作差一年进入公有领域**（新类别，**有明确到期日**）",
+   "reason": "★★★★ 《Industrial Accident Prevention: A Scientific Approach》首版 **1931**（McGraw-Hill，x+366 页，三处互不相关的馆藏目录一致：UW-Madison／OpenLibrary LCCN 31004075／Google Books 的加州大学藏本）。PD 分界是 **≤1930**，**差一年**——**2027-01-01 进入公有领域。**\n★★ 版权页图像**没能亲眼看到**：HathiTrust／WorldCat／LOC 目录页一律 403，JSTOR 撞上验证码（**探测方没有去解，退了出来，这是对的**）。所以 1931 这个年份是**多处目录转录互相印证**，不是页面影像。\n★ 后续版次全部 ≥1931：1941 二版（474 页）／1950 三版（470 页）／1959 四版／1980 五版（身后）。\n\n**≤1930 已核过的一手材料：4 份，约 32 页、1.5–2 万词**——\n  ① 《Monthly Labor Review》25(2), 1927-08, pp.46–50（会议演讲的重刊，**正文已直接读到**）\n  ② 《Proc. Casualty Actuarial Society》XVI, 1929, pp.170–174（CAS 自己的摘要页确认）\n  ③ 《MLR》30(2), 1930-02, ~pp.83–88（**只核到目录，正文未开**）\n  ④ 《MLR》31(5), 1930-11, pp.72–87（**正文已直接读到**）\nquick 门要 **min_sources 8**，实得 4；**min_lanes 3** 也只有 writings 一道。\n★ 另有 3–4 条线索在《The Travelers Standard》（旅行者保险公司内刊，1923／1927-11／1928）——**全网找不到公开数字化版本，属通道受限，不是不存在**。",
+   "★★★★ 声口：同一个人，两种语域，一个有一个没有": "1927 那篇由演讲改成的文章：约 1,300 词里 **6 处显式第一人称**（`I am going to consider…`／`I propose to call your attention…`／`in my opinion…`），约每 200 词一处。\n1930 那篇正式会议论文：同样约 1,300 词里 **第一人称 0 处**，通篇非人称／被动。\n★★★ **只抽后一种去量，会得出「这个人没有声口」的错误结论**——与 [[measured-voice-in-the-wrong-register]] 完全同型，而这次是探测方独立撞到的。",
+   "★ 同名护栏（重启时直接用）": {
+    "最大干扰源": "**`Heinrich` 在德语里既是姓也是名**——Heinrich Hertz（1857–1894 物理）、Heinrich Heine（1797–1856 诗人）、**Heinrich Himmler（1900–1945，年代重叠，关键词污染最重）**、Heinrich Schliemann、Heinrich Böll。",
+    "同姓者": "Carl Heinrich（1880–1955，美国昆虫学家，年代与国籍最接近，领域无关）",
+    "锚点": "他一律署 **`H. W. Heinrich` / `Herbert W. Heinrich`，Travelers Insurance Co., Hartford, Conn.**"
+   },
+   "★ 没能核实的": [
+    "1931 版权页图像本身（HathiTrust/WorldCat/LOC 403、JSTOR 验证码）",
+    "《The Travelers Standard》1923／1927-11／1928 三四篇的正文（无公开数字化）",
+    "CAS-1929 与 MLR-1930-02 两篇的正文（只核了摘要/目录）",
+    "全部词数是估算，不是精确统计",
+    "出生地 Pownal vs Bennington, VT 两说不一致",
+    "National Safety News / NSC Transactions 上 1931 年前有无他的文章（搜了没找到，**是没找到不是不存在**）"
+   ],
+   "unblock_todo": "★★★★ **2027-01-01 自动解锁**——那天《Industrial Accident Prevention》进入公有领域，他立刻从「4 份、一道」变成「代表作 366 页 ＋ 4 篇期刊、两道以上」。**这是本名单里少见的、有确定到期日的延后**，与 Henderson/Peplau 同类（版权在保护期内、等得到），而不是 Watson 那种（作者在世、没有到期日）。★ 重启前先做一件事：**把 1931 这个年份用版权页影像坐实**——现在只有目录转录。",
+   "处置类": "延后",
+   "★ 处置类的原键": "class",
+   "★ disposition 未记": false
   }
  ],
- "total": 137,
+ "total": 138,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
