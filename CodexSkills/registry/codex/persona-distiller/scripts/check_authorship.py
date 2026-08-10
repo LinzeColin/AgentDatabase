@@ -666,7 +666,20 @@ def normalize_namesakes(raw) -> tuple:
     return tuple(dict.fromkeys(out))          # 去重且保序
 
 
-_TITLES = re.compile(r"\b(Sir|Dame|Lord|Lady|Baronet|Bart|Bt|Rev|Revd)\b\.?", re.I)
+# ★★★★ 2026-08-10（Gantt #156）：**这张表原来只有英国爵位与教职衔。**
+#   排期前拿本人物的真实同名场测了一遍护栏，**10 条错 5 条**，两种新形态都栽在这张表上：
+#     · `Col. Henry Gantt`（1831–1884，南军上校）——**姓名与目标人物完全相同**，
+#       唯一的区分点就是那个 `Col.`，而表里没有军衔。
+#     · `Mrs. H. L. Gantt` / `Mrs. Henry L. Gantt`（他妻子）——
+#       **这两个串把目标人物的全名完整包含在内**，表里没有 `Mrs`。
+#   ★ 机制本来就在（`_title_blocked` 拿候选行的头衔去比同名者声明的头衔），
+#     **缺的只是这张表认不认得那些头衔**。
+#   ★★ **`Mr` 有意不进表**：目标人物一手文献一律作 `Mr. Gantt`，把它算成头衔会把他自己挡掉。
+_TITLES = re.compile(
+    r"\b(Sir|Dame|Lord|Lady|Baronet|Bart|Bt|Rev|Revd"
+    r"|Mrs|Miss|Ms|Mme|Mlle"                      # 指向另一个人的称谓（配偶／女性亲属）
+    r"|Col|Colonel|Capt|Captain|Maj|Major|Gen|General|Lt|Lieut|Lieutenant|Adm|Admiral"  # 军衔
+    r"|Dr|Prof|Professor)\b\.?", re.I)
 
 
 def _titles_of(name) -> frozenset:
@@ -677,6 +690,61 @@ def _titles_of(name) -> frozenset:
         out.add("baronet" if t in ("bart", "bt", "baronet") else t)
     return frozenset(out)
 
+
+def _own_toks(first_l, last_l, own_mid=""):
+    """目标人物自己的词元集（名 + 中名 + **姓**）。
+
+    ★★★★ 我第一版在 `standalone_ocr` 里直接写了 `full_name`，**那个名字不在这个函数的作用域里**。
+      `py_compile` 是绿的、`--self-test` 也是绿的（自测走的是别的入口），
+      **真跑一次才会 NameError**——[[a-checker-nothing-calls-is-not-a-checker]] 第五批那个形状。
+      所以这里改成从**这个函数真的拿得到的三个参数**重建词元集。
+    """
+    out = {str(first_l or "").lower(), str(last_l or "").lower()}
+    for t in re.split(r"[^A-Za-z]+", str(own_mid or "")):
+        if t:
+            out.add(t.lower())
+    return {t for t in out if t}
+
+
+def _given_tokens(name: str) -> set:
+    """名字里除姓之外的词元（小写，去点）。`W. Horsley Gantt` → {`w`, `horsley`}。"""
+    toks = [t.strip(".,;:'\"").lower() for t in re.split(r"\s+", str(name or "")) if t.strip(".,;:")]
+    return {t for t in toks[:-1] if t and t.isalpha()} if len(toks) > 1 else set()
+
+
+def _given_name_blocked(cand_line: str, own_tokens, namesakes) -> str:
+    """**同姓、无头衔，只有名字不同**——这一层此前完全没有。
+
+    ★★★★ 2026-08-10（Gantt #156）：拿本人物的真实同名场测护栏，扩了头衔表之后
+      **10 条仍错 2 条**：`By W. Horsley Gantt` 与 `By Harvey Gantt` 双双被放行。
+      它们与目标人物**同姓、都没有头衔**，唯一的区别就是名字——
+      **而护栏此前只比姓**，那正是 [[test-the-guard-against-this-persons-namesake]] 的原始缺陷。
+
+    ## ★★★★ 判法是「只认显式声明」，**一个字都不推断**
+
+    只看同名者条目里的 `distinguishing_given_tokens`（人手写的）。
+    候选行里出现其中任一词元即拒。
+
+    ★ **第一版是推断的**（拿同名者名字里「目标人物没有的」词元当区分点），
+      **自测当场把它打红**：Adams #131 是**父子同名**，
+      `Comfort Avery Adams` 与 `Comfort Avery Adams, Jr.` **词元完全相同**，
+      唯一的区别是 `Jr.`；而 `own_mid` 没声明时 `avery` 会被算成「父亲独有」，
+      **于是把儿子（目标人物）自己挡掉**。
+      → **推断出来的区分点在父子同名上必然出错，改成只认人写的。**
+    ★★ 没写这个字段的人物，这一层**不生效**（返回空），**不影响任何既有人物**。
+    """
+    if not namesakes:
+        return ""
+    for ns in namesakes:
+        if not isinstance(ns, dict):
+            continue
+        for tok in ns.get("distinguishing_given_tokens") or ():
+            t = str(tok).strip()
+            if len(t) < 3:
+                continue
+            if re.search(r"\b" + re.escape(t) + r"\b", cand_line, re.I):
+                return t
+    return ""
 
 def _title_blocked(cand_line, own_titles, namesakes) -> str:
     """署名带的头衔**目标没有、而某个已声明同名者有** → 拒绝，返回那个头衔。
@@ -858,7 +926,9 @@ def standalone_ocr(text, first_l, last_l, namesakes, own_mid="", own_titles=None
             if (cand and _edits_within(cand, last_l, 2)
                     and not _blocked(cand, last_l, namesakes)
                     and not _initial_blocked(m.group(1), last_l, namesakes, own_mid)
-                    and not _title_blocked(m.group(1), own_titles, namesakes)):
+                    and not _title_blocked(m.group(1), own_titles, namesakes)
+                    # ★ 第四道：同姓、无头衔、只有名字不同（Gantt #156 的 W. Horsley / Harvey）
+                    and not _given_name_blocked(m.group(1), None, namesakes)):
                 return s
             continue
 
@@ -884,7 +954,8 @@ def standalone_ocr(text, first_l, last_l, namesakes, own_mid="", own_titles=None
         if (not cand or not _edits_within(cand, last_l, 2)
                 or _blocked(cand, last_l, namesakes)
                 or _initial_blocked(s, last_l, namesakes, own_mid)
-                or _title_blocked(s, own_titles, namesakes)):
+                or _title_blocked(s, own_titles, namesakes)
+                or _given_name_blocked(s, None, namesakes)):
             continue
         # 名也必须对得上（≥4 字母、距离 ≤2）——**只有首字母缩写的一律不认**
         if any(len(x) >= 4 and _edits_within(x.lower(), first_l, 2) for x in toks[:-1]):
