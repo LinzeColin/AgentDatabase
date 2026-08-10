@@ -89,7 +89,9 @@
       "de_oratore_liber1_latin.txt —— 正文首行逐字：`M. TVLLI CICERONIS DE ORATORE AD QVINTVM FRATREM LIBER PRIMVS`",
       "de_amicitia_latin.txt —— 正文首行逐字：`M. TVLLI CICERONIS LAELIVS DE AMICITIA`",
       "epistulae_ad_atticum_liber1_latin.txt —— 正文首行逐字：`M. TULLI CICERONIS EPISTULARUM AD ATTICUM LIBER PRIMUS`",
-      "in_catilinam_1_latin.txt —— ★ **这一份的署名是我自己弄丢的**：正文首行只剩 `ORATIO IN L. CATILINAM PRIMA`，因为我把 HTML 转文本时**连 `<head>` 一起剥掉了**，而署名在 `<title>` 里。回原 HTML 取逐字：`<title>Cicero: In Catilinam I</title>`；转出来的文本末尾也留着 `Cicero / The Latin Library / The Classics Page`。★ 记下来：**剥标签要保住 `<title>`，它常常是唯一的署名位**。"
+      "in_catilinam_1_latin.txt —— ★ **这一份的署名是我自己弄丢的**：正文首行只剩 `ORATIO IN L. CATILINAM PRIMA`，因为我把 HTML 转文本时**连 `<head>` 一起剥掉了**，而署名在 `<title>` 里。回原 HTML 取逐字：`<title>Cicero: In Catilinam I</title>`；转出来的文本末尾也留着 `Cicero / The Latin Library / The Classics Page`。★ 记下来：**剥标签要保住 `<title>`，它常常是唯一的署名位**。",
+      "philippics_yonge_1853_ONLY_en.txt —— 书名页逐字：`（正文前 4 万字未命中署名行）`",
+      "in_verrem_yonge_1866_ONLY_en.txt —— 书名页逐字：`（正文前 4 万字未命中署名行）`"
     ],
     "disputed_policy": "西塞罗名下有一批**古代即已存疑或确定伪托**的篇目（`Rhetorica ad Herennium` 长期误挂他名、`Epistula ad Octavianum`、`Consolatio` 的文艺复兴伪作等）。**本批一份都没有收**——所以 `disputed_works` 是空数组，**不是因为没查，是因为收进来的 12 部作品全部无争议**。★ 判读依据：本批各篇的归属在 Teubner／Loeb／Oxford 三个校勘传统里一致，且每一份下载物自己的题名页都署他的名（逐份见 `covered_sources`）。★★ 若后续补入演说残篇或书信辑佚，**必须重查这一条**——辑佚正是伪托最容易混进来的地方。",
     "disputed_works": []
