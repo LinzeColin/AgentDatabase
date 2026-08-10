@@ -478,7 +478,18 @@ def main() -> int:
         'results': results,
     }
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    return 1 if any(item.get('status') == 'failed' for item in results) else 0
+    # ★★★ 2026-08-10 Cicero #166：我一次交进 19 份，其中 8 份 `.html` 全部
+    #   `skipped-unsupported`，而**退出码是 0**。我的驱动脚本只看返回码，
+    #   于是印了 19 个 `✓`，直到 `check_title_is_not_filename` 说「11/11 行」才露馅。
+    #   —— **你让它收的东西它没收下，这不是「成功」。** 现在也返回 1。
+    #   （`duplicate-skipped` 不算：那是幂等重跑的正常结果，东西本来就在库里。）
+    if summary['unsupported']:
+        print(f"✗ **{summary['unsupported']} 份因扩展名不受支持被跳过、一份都没收下** —— "
+              f"要么先转成受支持的格式，要么明确加 `--include-unsupported` "
+              f"（后者会把它当**不透明二进制**登记，正文抽不出来）。",
+              file=sys.stderr)
+    return 1 if (any(item.get('status') == 'failed' for item in results)
+                 or summary['unsupported']) else 0
 
 
 if __name__ == '__main__':
