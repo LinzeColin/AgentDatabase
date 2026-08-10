@@ -48,6 +48,22 @@
     **而他的记账论述只存在于一部作品**，三份译本只算一处证据，
     于是「方法类断言要 ≥2 处独立证据」诚实地只满足到 **1 个 mental-model ＋ 1 个 heuristic**
     （门要 2 和 3）。判决书 `_corpora/wip-pacioli-161/workspaces/luca-pacioli/references/research/00-处置.md`。
+- **在办：#162 William Andrew Paton**（财务合规师，1889–1991）。
+  工作区 `_corpora/wip-paton-162/workspaces/william-andrew-paton`（**单层，不是双层嵌套**）。
+  - 同名门 blocked(14) → 按 Livermore #100 先例选定 → **ready**。
+    ★★★★ **最大风险是他儿子** `William A. Paton, Jr., 1925-`：
+    LC 给父子**同一个领域标目**，儿子另有一条**不带生卒年的光秃标目**，父子还合著过。
+    **最硬的判别是 PD 窗口本身**——他 1925 年生，1931 年 6 岁，**窗口内不可能有他的东西**。
+  - 语料 **5 份 / 50.7 万词**，全部 `writings` 道。
+    **独著只占 31.79%**（只有 1922《Accounting Theory》一本），三本合著无分工说明。
+  - ★★★ **声口在 `the writer` 不在 `I`**：全 5 份 498 个 `I` 逐个分类完，
+    **属于他本人的 0 个**（罗马数字／页码讹字／数学变量 `I`／被引用的他人话语）。
+    1922 那本 14 处 `the writer`，每处都在下判断。
+  - **研究门错 8 → 3**，剩下的全是「语料不够广」：
+    来源 5<8、覆盖 1 道<3、完成 0 道<3。**第二轮抓源已派出**（补 external / timeline
+    ＋《The Accounting Review》1926–1931 他自己的文章）。
+  - ★ 拿不到的两本已记坐标：1924《Accounting》894 页独著、1919 GPO 那本，
+    **HathiTrust 是 PD 全视图而本机被 Cloudflare 挡住，没有尝试绕过**。
 - **本轮新落的判据**：`check_translation_witness.py`——
   **同一部作品的多个译本不许当两处独立证据**。
   根因：`check_claim_source_independence` 的作品分组**是语言盲的**，
@@ -82,6 +98,16 @@ cd CodexSkills/registry/codex/persona-distiller
 | 造盲判载荷 | `python3 scripts/build_blind_payload.py --workspace <ws> --round-dir round1 --candidate <c.json> --baseline <b.json>` |
 | 汇总判分 | `python3 scripts/assemble_judge_results.py …` |
 | 打包 / 入库 | `python3 scripts/package_target.py …` / `register_persona.py …` |
+| **声明重复源**（先 dry-run） | `python3 scripts/declare_source_dedup.py <workspace>` |
+
+★★★★ `declare_source_dedup.py` **默认只写「机械上确定」的那一类**
+（去掉来源后缀后词干相同＝同一件的另一份副本）。
+**其余只列出来给人读，不写。** 这不是保守，是实测：
+Nightingale 465 对里**只有 48 对是确定的**，其余 417 对包含
+`royal-commission-report-1858` ↔ `mortality-british-army-1858`（0.44）这种
+**跨作品的真实重印**——皇家委员会报告收录了她的 Notes，两者确实大段相同，
+**但不是同一部作品**，方向靠干净度猜必然出错。
+★ Blackwell 61 对一次做完（全对）**是个例外，别当通例**。
 
 ★ **NEXT 一律以 `next_person.py` 的输出为准**，不许凭记忆或凭队列文件里的顺序。
 
