@@ -418,7 +418,15 @@ To github.com:LinzeColin/AgentDatabase.git
 
 ### 交接前还要做的
 
-1. **`_scratch/agentdb-nasmyth-153` 这个 worktree 是我开的，得我收**：
+1. ★★★★ **唯一真正的卡点：推 + 合并到 main。** 这一步**必须由用户授权**，
+   我不会自己按下去——它是对外可见且不易撤回的。
+   - 实测（2026-08-10，**不改变任何远端状态**）：`git push --dry-run` 通过，
+     远端可达、分支会**新建**（`* [new branch]`），无拒绝；
+     本分支领先 `origin/main` **929 个提交**，包 **835.94 MiB**，最大被跟踪文件 18.1 MB（无超 100MB 的）。
+   - **合并之前那句一句话 prompt 不成立**——主树上没有 `HANDOFF.md`。
+2. **`_scratch/agentdb-nasmyth-153` 这个 worktree 是我开的，得我收**：
    合并 → 关 PR → `git worktree remove` → 删分支 → `git gc`（**禁止 `--prune=now`**）。
-2. **`_protected/` 永不上传**，交接时也不上传。
-3. **Notion 全程没碰过**，按约定要等 600 人全完成。
+3. **`_protected/` 永不上传**，交接时也不上传。
+4. **Notion 全程没碰过**，按约定要等 600 人全完成。
+5. **教训库同步到 113 份**（`_ledgers/_教训库/`）——★ 它原本不在 GitHub 上，
+   接手方一条都读不到。交接当晚**再同步一次**（我每天都在往里写）。
