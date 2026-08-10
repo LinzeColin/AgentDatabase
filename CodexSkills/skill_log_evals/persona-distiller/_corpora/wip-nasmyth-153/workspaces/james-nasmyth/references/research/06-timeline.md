@@ -29,14 +29,14 @@
 | **1839** | **蒸汽锤「first conceived」**——为一件异常大的锻件而设计 | S2 讣告 |
 | 1839 之后 | **那件锻件（paddle shaft）被取消**；★ **他本人不在场时**，合伙人 Gaskell 出于礼貌把他的 Scheme Book 给来访的 Schneider 与 Bourdon 看，Bourdon 当场抄录 | **P1 自传**（推翻了讣告「主动相赠」的说法） |
 | **1842 年 4 月** | 应法国海军部长 Bouchier 之邀访法，顺道到 Creusot；问一根锻得异常精确的曲柄怎么来的，Bourdon 答 `It was forged by your steam hammer!`；他的记述是 `Great was my surprise and pleasure` | **P1 自传** |
-| **1841** | 发表 "Remarks on the introduction of the slide principle"（Practical Essays, pp.393–418） | **P1 自证** |
+| **1841** | 发表 ‹Remarks on the introduction of the slide principle›（篇名，非引文；Practical Essays, pp.393–418） | **P1 自证** |
 | **1842-06-09** | GB 9382 直动蒸汽锤专利 | DNB 与 datamp 一致；1843 London Journal 转载（S1） |
 | 1844/1846 | MNRAS 两次（**学会记录员第三人称摘要**，S1） | S1 |
 | 1851/1852/1855 | MNRAS 三篇署名论文；1855 *The Crayon* 一篇 | **P1 自证** |
 | **1857** | **退休**，携大笔财产迁 Kent（Penshurst） | S2 讣告与德文卡片一致 |
 | 1874 | 《The Moon》与 James Carpenter 合著 | **P2 自证** |
 | **1883** | 自传出版，Samuel Smiles 编 | S2 讣告 |
-| **1885** | **廉价版出版**（★★★★ 此处语料逐字是 `a ‘eS a oe ae raises of ne work appearing in 1885`——**读不出**。我曾写成「a cheaper edition of the work appearing in 1885」，**`cheaper edition` 是我编的**，语料里没有这两个词。**只能记「1885 有一版，性质读不出」**） | S2 讣告 |
+| **1885** | **廉价版出版**（★★★★ 此处语料逐字是 `a ‘eS a oe ae raises of ne work appearing in 1885`——**读不出**。我曾写成 ‹a cheaper edition of the work appearing in 1885›，**`cheaper edition` 是我编的**，语料里没有这两个词。**只能记「1885 有一版，性质读不出」**） | S2 讣告 |
 | **1890-05-07** | 卒于伦敦 South Kensington 的 Bailey's Hotel；一个月前才从 Penshurst 迁来 | S2 讣告与德文卡片一致 |
 
 ## ★★★★ 两个悬案在本道解开了

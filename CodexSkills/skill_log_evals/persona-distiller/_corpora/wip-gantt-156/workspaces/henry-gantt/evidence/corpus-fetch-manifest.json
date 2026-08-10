@@ -59,7 +59,21 @@
   },
   "一手占比_P1除以全部": 0.9091,
   "规范化文本总词数": 254539,
-  "其中一手总词数": 208439
+  "其中一手总词数": 208439,
+  "train_holdout": {
+   "train 份数": 30,
+   "holdout 份数": 3,
+   "train 分道": {
+    "writings": 17,
+    "decisions": 4,
+    "conversations": 11,
+    "timeline": 2,
+    "external": 3
+   },
+   "train 词数": 249782,
+   "holdout 词数": 4757,
+   "holdout 占一手词数比": 0.0228
+  }
  },
  "本轮做过的验证_可复跑": [
   "① 表头验证：13 卷 ASME 逐卷读扉页，全部印着 AMERICAN SOCIETY OF MECHANICAL ENGINEERS——项目此前踩过 transactionsofam30amer 实为 CIVIL ENGINEERS 的坑",
@@ -77,5 +91,32 @@
   "v39「Expenses and Costs」篇首署名被 OCR 吃掉姓（印作 By H. L. New Yorks, N. Y.）；归属靠同文件内页眉「H. L. GANTT 887」+ 本卷目次两处",
   "未设任何 holdout：密封哪几份属评测设计决定，本轮只抓源，不替评测方选题",
   "索引线索未追：1880-1904 累积索引另有「Gantt and Maury on non-aqueous vapors, VII. 735, 739, 686」（vol.7，1885-86），是否本人、是否合著均未核，未入库"
- ]
+ ],
+ "归属认定": {
+  "声称本人所著的 P1 源": 30,
+  "靠 A-* 印刷署名证据自动认定": 14,
+  "靠 meta.json:attribution_basis 逐份点名认定": 16,
+  "未被认领": 0,
+  "A-* 证据分布": {
+   "A-byline-standalone": 3,
+   "A-byline": 9,
+   "A-signature-block": 1,
+   "A-byline-ocr": 1
+  },
+  "★ 16 份没拿到 A-* 的原因（不是「不是他写的」）": "① 6 篇 ASME 论文的署名行被 OCR 讹成 Ganrt/Ganrr，v39 那篇连姓都丢了（印作 By H. L. New Yorks, N. Y.）；② 10 份学会发言记录与 1 份国会证词结构上就没有 by 署名行，归属靠发言人标签与页内小标题。逐份印刷证据已写进 attribution_basis.covered_sources。",
+  "★★ 这道门一开始是绿在空分母上的": "台账 author 原按署名行写作 `H. L. Gantt`，而门按 meta.json 的 `name`（`Henry Gantt`）匹配——**30 份一份都没被检查，门照样报绿**。已加 `target_name: Henry Laurence Gantt` 并把 P1 的 author 归一（署名行逐字仍在 attribution 字段里未改）。",
+  "★★★ 负对照（证明这次的绿不是又一次空过）": "在**本人物自己的数据**上清空 attribution_basis.covered_sources → 恰好那 16 份转红、A-* 那 14 份仍绿；恢复後全绿。"
+ },
+ "holdout 是我在建模开始前密封的_附理由与撤销方法": {
+  "为什么现在封而不是留给下游": "release 门 `source.no-holdout` 是硬错；而 holdout 的意义是「建模者没读过」——**建模开始之後再封就没有意义了**。本项目已有「45 份 holdout 里 18 份从未真隔离」的账。",
+  "选了哪三份与凭什么": [
+   "asme-v25-1904-modifying-systems-of-management.txt（1515 词，writings，中期）—— 其核心主张在 v23 论文与两部书里已充分覆盖",
+   "annals-v85-1919-influence-of-executives.txt（2607 词，writings+decisions，晚期，去世前两月）—— 同期 Organizing for Work 覆盖该阶段",
+   "asme-v36-1914-gantt-verbatim-remarks.txt（635 词，conversations）—— 口语侧训练由国会证词 8589 词与其余 8 卷发言承担"
+  ],
+  "选法口径": "跨两道（writings/conversations）、跨早中晚，且**撤出後 train 侧五道全部仍非空**；不封任何确立其核心学说的材料。",
+  "物理隔离已实测": "check_material_split 通过：raw/ 30 份、references/sources/ 30 份，**holdout 泄漏 0**；三份正文只存在于 references/holdout/。另手工 find 复核三个文件名在 raw/ 与 references/sources/ 下命中均为 0。",
+  "★ 这是可逆的，撤销方法": "删掉台账里那 3 条 holdout 记录与 references/holdout/ 下对应目录，再用本清单记录的抓源坐标重跑 ingest.py（不加 --holdout）即可回到 train。三份的 identifier／行号／署名行全部记录在案，source_id 由内容 sha256 决定，重跑後不变。",
+  "★★ 下游若要改 holdout 选择": "**换之前先确认建模者是否已经读过替换进来的那份**——读过就不能再当 holdout 用。"
+ }
 }
