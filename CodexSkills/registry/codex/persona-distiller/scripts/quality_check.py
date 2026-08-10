@@ -3191,6 +3191,54 @@ def run_rubric_health(report, target: Path) -> None:
     cases_f = target / 'evals' / 'cases.jsonl'
     cand_f = target / 'evals' / 'candidate_answers.json'
     if not (cases_f.is_file() and cand_f.is_file()):
+        # ★★★ 2026-08-10：**答案还不存在的时候，rubric 已经可以查了。**
+        #   原来这里直接 return「未核验」，于是「判据要求出戏」这件事最早也要等到
+        #   `build_blind_payload`（候选答案已产出）才被看见——那时 rubric 还改得动，
+        #   但整套答案已经是照着它写出来的了。
+        #   而 rubric 就写在 `cases.jsonl` 里，**写完那一刻就能查**。
+        #   实测（Cicero #166）：写完 16 条当场跑，**红了我自己 3 条**——
+        #   两条是真把「OCR 讹字」「本语料」写进了得分条件，一条是豁免表的缺口。
+        if cases_f.is_file():
+            fb = here / 'check_persona_frame_break.py'
+            if not fb.exists():
+                report.metrics['rubric_health'] = {'状态': '判据未安装，**未核验**（不是通过）'}
+                return
+            try:
+                rub, pro = {}, {}
+                for line in cases_f.read_text(encoding='utf-8').splitlines():
+                    if line.strip():
+                        r = json.loads(line)
+                        rub[r['case_id']] = str(r.get('rubric') or '')
+                        pro[r['case_id']] = str(r.get('prompt') or '')
+                spec = importlib.util.spec_from_file_location('_pd_fb_early', fb)
+                mod = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(mod)
+                bad = {}
+                for cid, ru in sorted(rub.items()):
+                    if not mod.scan_text(ru):
+                        continue
+                    q = pro.get(cid) or ''
+                    if q and any(re.search(p, q) for p in mod.ASKS_ABOUT_STOCK):
+                        continue
+                    if (q and any(re.search(p, q) for p in mod.USER_BRINGS_MATERIAL)
+                            and any(re.search(p, q) for p in mod.PROCESSING_ASK)):
+                        continue
+                    bad[cid] = mod.scan_text(ru)
+            except Exception as exc:                            # noqa: BLE001
+                report.metrics['rubric_health'] = {'状态': f'只验判据时读入失败，**未核验**：{exc}'}
+                return
+            report.metrics['rubric_health'] = {
+                '状态': '**答案尚未产出——本轮只验了 rubric**（不是全部核验）',
+                '判据条数': len(rub),
+                '**判据要求出戏的**': bad,
+                '★ 口径': '**只报不拦**：改不改由人定。但它现在**在答案写出来之前**说话，'
+                          '而不是等到派发前才说——那时答案已经是照着这条 rubric 写的了。'}
+            if bad:
+                report.warn('eval.rubric-demands-frame-break',
+                            f'**{len(bad)} 条 rubric 把「谈资料库/扫描件/未收录」写成了得分条件**：'
+                            f'{", ".join(sorted(bad))} —— 人物说那种话就是出戏，'
+                            f'而同一份盲判指令又要评委扣「出戏」。**现在改还来得及。**')
+            return
         report.metrics['rubric_health'] = {'状态': '没有 cases/答案，**未核验**（不是通过）'}
         return
     try:
