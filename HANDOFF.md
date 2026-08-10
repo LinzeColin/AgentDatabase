@@ -79,9 +79,27 @@ cd CodexSkills/registry/codex/persona-distiller
 | 判据与工具（**唯一真源**） | `CodexSkills/registry/codex/persona-distiller/scripts/` |
 | 判据镜像（合同：`check_*.py` 与上面**逐字节相同**） | `.../references/pipeline/checkers/` |
 | 人物工作区 | `CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-<名>-<编号>/` |
+| ★ 工作区的**真实层级**要用 `find … -path '*/evidence/claims.jsonl'` 定位 | 见下 |
 | 名册（已入库的人） | `CodexSkills/registry/codex/persona-distiller-group/` |
 | **台账**（队列 / 延后名单 / 卒年 / 额度 / 决策） | `CodexSkills/skill_log_evals/persona-distiller/_ledgers/` |
 | 已交付的 44 个 zip | `CodexSkills/skill_log_evals/persona-distiller/_ledgers/*.zip` |
+
+### ★★ 工作区层级：有三个人是**双层嵌套**，别猜路径
+
+`_corpora/wip-osler-110/workspaces/william-osler/**william-osler**/`（Nightingale、Virchow 同）；
+而近期的人（Gantt、Nasmyth、Pacioli）是单层。
+**根因是 `init_target.py --workspace` 会自己追加 slug**——
+传 `.../workspaces/<slug>` 就会变成 `.../workspaces/<slug>/<slug>`，
+**要传 `.../workspaces`**。
+
+**所以定位工作区一律用：**
+
+```bash
+find CodexSkills/skill_log_evals/persona-distiller/_corpora -path '*<slug>*/evidence/claims.jsonl'
+```
+
+★ 路径猜错时判据会老实返回 `状态: …未核验（不是通过）`——
+**但只有你把 `状态` 字段打印出来才看得见。** 2026-08-10 我因此差点把「没核过」记成「修好了」。
 
 ★ 台账原本只在 `~/Downloads/蒸馏/`，**2026-08-10 搬进仓**。
 `next_person.py` 现在**仓内优先**；两处都在且内容不同时，它会把两边的 sha256 与 mtime
