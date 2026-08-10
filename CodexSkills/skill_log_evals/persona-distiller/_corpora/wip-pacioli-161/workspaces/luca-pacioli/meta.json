@@ -82,7 +82,7 @@
  "attribution_basis": {
   "authority": "**印刷时代路径**：本人物的两部主要作品都是具名印工的印本，扉页与版权页可用作署名证据——《Summa de arithmetica, geometria, proportioni et proportionalità》1494 年威尼斯 Paganino de Paganini 印本；《De divina proportione》1509 年同一印工印本。手稿《De viribus quantitatis》（博洛尼亚大学图书馆 MS 250）无扉页，其归属依据是**藏馆著录**，不是印本署名——**分档时按较弱的一档记**。★ 三份的 authorship_evidence 都不是 A-byline 自动命中的结果，**是按本条依据人工认定的**，`stamp_authorship_evidence` 未能在 OCR 里定位到扉页署名行（15 世纪印本的扉页版式与 OCR 质量都与 19 世纪不同）。",
   "citation": "Wikidata Q87620（label: Luca Pacioli；description: Italian father of accounting, ~1445–1517）；archive.org identifier `summadearithmeti00paci`（Smithsonian/Burndy Library 藏 1494 印本）、`divinaproportion00paci`（Getty Research Institute 藏 1509 印本）、`DeViribusQuantitatis`（Biblioteca Universitaria di Bologna MS 250）。",
-  "disputed_policy": "**两条硬规矩。** ① **《De divina proportione》一册两作者**：Prima parte 是他本人所作，而后半 `a1r–c10r` 是 **Piero della Francesca《Libellus de quinque corporibus regularibus》由他从拉丁文译成意大利文**，书内即署 Piero 为原作者——**做事实抽取时不许把通篇当成他的原创**，这正是瓦萨里指控他剽窃的那部分材料。② **译本不是他的原话**：Geijsbeek 1914／Crivelli 1924／1896 荷译／Winterberg 1889 德译一律记 P2，且 Geijsbeek 那一份**约后半段根本不是他写的**（自「STEVIN'S JOURNAL AND LEDGER REPRODUCED」起收的是 Manzoni／Pietra／Stevin／Ympyn／Dafforne 的著作）。**引用前必须先切分。**",
+  "disputed_policy": "**两条硬规矩。** ① **《De divina proportione》一册两作者**：Prima parte 是他本人所作，而后半 `a1r–c10r` 是 **Piero della Francesca《Libellus de quinque corporibus regularibus》由他从拉丁文译成意大利文**，★★★★ **「书内即署 Piero」这一点我核不了**：1509 Getty 扫本的 OCR 里 `Francesca` 0 次、`Borgo` 0 次、`quinque corporibus` 0 次（仅有的两处 `Piero` 是题献名单里不相干的人名）。该结构出自抓源方转述的 BPL 藏本著录，**本库无正文可核**。**能核的是 Winterberg 1889 德译本导言**：`der eine von den fünf regelmässigen Körpern sogar seine Autorschaft nicht von Pacioli, sondern von Piero della Francesca … ableitet`——**做事实抽取时不许把通篇当成他的原创**，这正是瓦萨里指控他剽窃的那部分材料。② **译本不是他的原话**：Geijsbeek 1914／Crivelli 1924／1896 荷译／Winterberg 1889 德译一律记 P2，且 Geijsbeek 那一份**约后半段根本不是他写的**（自「STEVIN'S JOURNAL AND LEDGER REPRODUCED」起收的是 Manzoni／Pietra／Stevin／Ympyn／Dafforne 的著作）。**引用前必须先切分。**",
   "disputed_works": [
    {
     "title": "Euclidis Megarensis … Opera（1509 年他校订的欧几里得）",
@@ -92,7 +92,7 @@
    {
     "title": "《De divina proportione》后半部 Libellus de quinque corporibus regularibus",
     "verdict": "**已入库但须内部切分**",
-    "why": "原作者是 Piero della Francesca，他只是译者。"
+    "why": "原作者是 Piero della Francesca，他只是译者。★ **这一点在本库里只有二手支撑**（Winterberg 1889 德译导言），**1509 扫本的 OCR 里查不到 Piero/Francesca/Borgo 任何一个**。"
    },
    {
     "title": "archive.org `161Pacioli`",
