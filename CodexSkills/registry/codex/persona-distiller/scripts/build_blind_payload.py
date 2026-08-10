@@ -240,8 +240,9 @@ def selftest() -> int:
     chk(f"{LEAK_CHECKER.name} 在", LEAK_CHECKER.is_file())
     chk(f"{LOC_CHECKER.name} 在", LOC_CHECKER.is_file())
     # ★ 反向对照：两道生成时判据必须都在——少一道就等于那一道从没跑过
-    chk("两道生成时判据都在（少一道 = 那道从没跑过）",
-        LEAK_CHECKER.is_file() and LOC_CHECKER.is_file())
+    chk("三道生成时判据都在（少一道 = 那道从没跑过）",
+        LEAK_CHECKER.is_file() and LOC_CHECKER.is_file()
+        and (HERE / "check_answer_holdout_leak.py").is_file())
 
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
@@ -659,6 +660,34 @@ def main() -> int:
         print("\n✗ **这份载荷不许派发评委。** 判出来的 delta 不能当作盲判结果引用——"
               "重写答案，不要改门。")
         return 1
+
+    # ── holdout 泄漏门（v0.0.0.90）────────────────────────────────────────
+    # ★★★★ 此前**没有任何判据看过答案与 holdout 的关系**：
+    #   `check_holdout_mention` 扫的是建模者可读文件，`check_holdout_overlap` 比的是
+    #   holdout ↔ train 语料，**两件都不看答案**。
+    #   于是「候选答题子代理偷读了 holdout」唯一的证据是它自己写的 `__incident__`——
+    #   而自述不是证据（[[self-report-is-not-evidence]]）。
+    #   ★ 它**用基线答案做负对照**：基线从没读过任何文件，
+    #     基线也说得出来的词不算 holdout 独有。
+    hl = HERE / "check_answer_holdout_leak.py"
+    print("\n── holdout 泄漏门（专名与数字，带基线负对照）──")
+    if not hl.is_file():
+        print("⚠ check_answer_holdout_leak.py 不在，**holdout 泄漏未核（不是通过）**")
+    else:
+        h = subprocess.run([sys.executable, str(hl), "--workspace", str(a.workspace),
+                            "--candidate", str(cand_path), "--baseline", str(base_path)],
+                           capture_output=True, text=True)
+        print((h.stdout or "").rstrip())
+        if (h.stderr or "").strip():
+            for _l in h.stderr.rstrip().splitlines():
+                print("  │ " + _l)
+        if h.returncode != 0:
+            if not (h.stdout or "").strip():
+                print("\n✗ **这道门没有产出任何判读就失败了**（退出码 "
+                      f"{h.returncode}）——**先看上面的 stderr**，多半是调用方式不对。")
+            else:
+                print("\n✗ **候选答案里有只可能来自 holdout 的东西，这份载荷不许派发。**")
+            return 1
 
     return 0
 
