@@ -157,6 +157,25 @@ ASKS_ABOUT_STOCK = (
     r"你确实拥有的材料", r"你手上(?:有|拥有)的", r"依据你(?:所)?有的",
     r"你(?:的)?语料", r"本产物的语料", r"你收录",
 )
+# ★★ 2026-08-10 新增，**与上面那组不是一回事**：
+#   上面是「题面在问**人物自己的库存**」；这一组是「**用户自己带来了材料**，问怎么处理」。
+#   两者都该豁免，但理由不同——后者谈的是**用户文件里的编者说明/前言/脚注**，
+#   不是人物在替自己的检索系统说话。
+#   撞出它的：Cicero #166 的 tool-use 题「**我**手上有他全部现存书信的电子文本，想统计…」——
+#   豁免表里只有「**你**手上有的」，于是这题被误报成「判据要求出戏」。
+#   ★★★ 这个豁免第一版**开得太宽**：只要题面出现「我手上有」就放行，
+#   而与 rubric 里出戏的是不是同一件事无关。用一个反例当场戳穿：
+#   坏 rubric（「正确答案是说明本库未收录，并指出扫描件那一列被裁掉了」）
+#   配题面「我手上有一批扫描件。」——**被豁免掉了，返回 0**。
+#   收窄为**两个条件都要满足**：① 用户确实带来了材料；② 题面确实在问**怎么处理**它。
+#   光有材料不算——「我手上有一批扫描件」不是一个处理请求。
+USER_BRINGS_MATERIAL = (
+    r"我(?:手上|这里)(?:有|拿着|存了)", r"我(?:自己)?下载(?:了|好)", r"我(?:有|拿到)(?:一批|一份|全部)",
+)
+PROCESSING_ASK = (
+    r"统计", r"计数", r"数一下", r"解析", r"处理", r"过滤", r"筛(?:选|出)",
+    r"提取", r"清洗", r"分词", r"怎么(?:做|弄|办)", r"如何(?:做|处理)",
+)
 # 第一人称扮演的痕迹 vs 第三人称指称对象
 _FIRST = re.compile(r"我(?:当年|当时|那时|这辈子|自己试过|的做法|们那边|手边)")
 _THIRD = re.compile(r"[他她]")
@@ -490,6 +509,36 @@ def self_test() -> int:
                     _got = True
         chk(_why, _got == _should)
 
+    # ★★★ 只验判据模式（2026-08-10 新增）——**三态都要在这里，不能只在终端里跑过一次**。
+    #   第 ③ 条是**我自己开的洞被自己的反例戳穿**留下的：豁免第一版只看「我手上有」，
+    #   于是一条真正要求出戏的 rubric 配上「我手上有一批扫描件。」就被放行了。
+    print("\n  —— 只验判据模式（rubric-only）——")
+    def _rubric_only(rub: dict, pro: dict) -> bool:
+        """→ 是否有「判据要求出戏」的命中（True = 该红）。与 main 里同一段逻辑。"""
+        for cid, ru in rub.items():
+            if not scan_text(ru):
+                continue
+            q = pro.get(cid) or ""
+            if q and any(re.search(p, q) for p in ASKS_ABOUT_STOCK):
+                continue
+            if (q and any(re.search(p, q) for p in USER_BRINGS_MATERIAL)
+                    and any(re.search(p, q) for p in PROCESSING_ASK)):
+                continue
+            return True
+        return False
+    BAD = {"x-known-01": "正确答案是说明**本库未收录该篇**，并指出扫描件那一列被裁掉了，核不到号。"}
+    chk("① 反例：把「本库未收录」写成得分条件 → **该红**",
+        _rubric_only(BAD, {}) is True)
+    chk("② 反例：同一条坏判据 + 题面「我手上有一批扫描件。」→ **仍该红**"
+        "（只有材料、没在问怎么处理，不该豁免）",
+        _rubric_only(BAD, {"x-known-01": "我手上有一批扫描件。"}) is True)
+    chk("③ 正例：题面「我手上有他全部现存书信的电子文本，想统计…」→ **该豁免**"
+        "（材料是用户带来的，且确实在问怎么处理）",
+        _rubric_only({"x-tool-use-01": "必须提醒：译者前言、编者说明、脚注不算他的话。"},
+                     {"x-tool-use-01": "我手上有他全部现存书信的电子文本，想统计让步的频率。"}) is False)
+    chk("④ 正例：干净判据 → 不红",
+        _rubric_only({"x-voice-01": "该出现的形状：先交代说话人的位置，再给主张。"}, {}) is False)
+
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
     return 0 if ok else 2
 
@@ -504,8 +553,53 @@ def main() -> int:
     a = ap.parse_args()
     if a.self_test:
         return self_test()
+    # ★★★ 2026-08-10：只验 rubric 的模式。
+    #   本判据原来必须有 answers 才肯跑，而 answers 只有**派发之后**才存在——
+    #   那时 rubric 已经冻结，抓到也来不及。而教训恰恰是
+    #   「**改产物没用，产物是照着判据长的**」：10/16 条 rubric 把「本库没收录」
+    #   定成正确答案，同一份指令又要评委扣「出戏」，两头拉扯。
+    #   `check()` 第 278 行本来就独立扫 rubric，缺的只是一条不要求 answers 的入口。
+    #   —— 判据要在**还改得动的时候**说话（见「判据没有调用方就不算做完」第 1 条：什么时候说话）。
+    if not a.answers and a.rubrics:
+        d = json.loads(pathlib.Path(a.rubrics).read_text(encoding="utf-8"))
+        rub = ({x.get("case_id", str(i)): x.get("rubric", "") for i, x in enumerate(d)}
+               if isinstance(d, list) else d)
+        # ★ 题面豁免要接到本模式上——答案侧早就有这条（`ASKS_ABOUT_STOCK`），
+        #   而 rubric 侧没接：于是「用户自己拿着电子文本来问怎么统计」这种题
+        #   被误报成「判据要求出戏」。**题面自己在问材料，谈材料就是该做的事。**
+        #   实例：Cicero #166 的 tool-use 题——用户说「我手上有他全部现存书信的电子文本」。
+        pro = {}
+        if a.prompts:
+            dp = json.loads(pathlib.Path(a.prompts).read_text(encoding="utf-8"))
+            pro = ({x.get("case_id", str(i)): (x.get("prompt") or x.get("question") or "")
+                    for i, x in enumerate(dp)} if isinstance(dp, list) else dp)
+        bad, exempt = {}, []
+        for cid, ru in sorted(rub.items()):
+            h = scan_text(ru)
+            if not h:
+                continue
+            q = pro.get(cid) or ""
+            if q and any(re.search(p, q) for p in ASKS_ABOUT_STOCK):
+                exempt.append(f"{cid}——**题面在问人物自己的库存**，判据谈材料是对的")
+                continue
+            if (q and any(re.search(p, q) for p in USER_BRINGS_MATERIAL)
+                    and any(re.search(p, q) for p in PROCESSING_ASK)):
+                exempt.append(f"{cid}——**材料是用户带来的**，谈的是用户文件里的编者说明/前言/脚注，"
+                              "不是人物在替自己的检索系统说话")
+                continue
+            bad[cid] = h
+        out = {"模式": "**只验判据（派发之前）**",
+               "判据条数": len(rub),
+               "**判据要求出戏的**": bad,
+               "已豁免（题面自己在问材料）": exempt,
+               "★ 口径": "本模式**只看 rubric**，不看产物——"
+                        "目的是在 rubric 还改得动的时候拦住它。"
+                        "命中的意思是：**这条 rubric 把「谈资料库/扫描件/未收录」写成了得分条件**，"
+                        "而人物说那种话就是出戏。"}
+        print(json.dumps(out, ensure_ascii=False, indent=2))
+        return 1 if bad else 0
     if not a.answers:
-        ap.error("要么 --self-test，要么给 answers 文件")
+        ap.error("要么 --self-test，要么给 answers 文件，要么 --rubrics 单独验判据")
 
     ans = json.loads(pathlib.Path(a.answers).read_text(encoding="utf-8"))
     rub = None
