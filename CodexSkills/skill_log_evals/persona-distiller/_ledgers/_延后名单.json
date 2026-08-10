@@ -2578,9 +2578,46 @@
     "William A. Paton"
    ],
    "★ aliases 为什么要写": "队列 `_蒸馏队列.json` 里他叫 **William Paton**，本名单写的是全名，`next_person.py` 的 `norm()` 认不出是同一个人，**他会排回 NEXT**。实测撞到过。★ 只写显式别名，**不许让工具去猜**——猜会把同姓的另一个人并进来。"
+  },
+  {
+   "name": "A. C. Littleton",
+   "aliases": [
+    "Ananias Charles Littleton",
+    "A.C. Littleton",
+    "Ananias C. Littleton"
+   ],
+   "family_zh": "财务合规师",
+   "deferred_at": "2026-08-10",
+   "seq": 163,
+   "disposition": "延后",
+   "class": "⑨ **成名作全部落在 PD 分界之后**（新类别）",
+   "reason": "生 1886 卒 1974，生年足够早、材料也真的有——**卡点不在「有没有」，在「有的是不是他**。\n★ 已核过出版年的 ≤1930 一手材料 **7 份**（1 本书 ＋ 6 篇《The Accounting Review》论文），合计约 122–134 页、3–4 万英文词。quick 门要 **min_sources 8**，**差 1 份**。\n★★ **min_lanes 3 是硬卡点**：这 7 份**全部是 writings**（conversations／expression／external／decisions／timeline 各 0）。与 Vavilov #126 同型。\n★★★★ **而真正的理由是这一条**：他查到的 7 部著作出版年 **1933–1965，没有一部 ≤1930**——\n  《Accounting Evolution to 1900》**1933**（书名里的 1900 是内容年代不是出版年）、\n  《An Introduction to Corporate Accounting Standards》（与 Paton 合著）1940、\n  《Structure of Accounting Theory》1953、《Studies in the History of Accounting》1956、\n  《Essays on Accountancy》1961、《Accounting Theory: Continuity and Change》1962、\n  《Significant Accounting Essays》1965。\n**他 1931 年前唯一的独著是一本入门教材**（1919 版权／1920 书名页，约 74 页）——不是他后来立身的那几部理论/史学代表作。\n★ 与 Nowlan #155「结构性不可能」不同：Nowlan 是**生得太晚**，Littleton 是**成熟期太晚**——可取得的那部分**不是他之所以是他的那部分**。",
+   "★ 探测方式": "**开工前量的，一份源都没抓**（#154 Sellers 的教训）。全程只探测：未下载任何文件、未写入任何工作区、并发恒为 1、未碰付费墙、未绕任何访问控制。报告存 `_corpora/_探测记录/163-littleton-可得性探测.md`。",
+   "★ 我给探测方的三条线索，两条被证伪": {
+    "「1922 年拿到博士」": "**错的**。AAA 名人堂给 1931、UIUC 档案馆给 1932（两处互相不一致，但都 ≥1931）。1922 是伊利诺伊大学授出**第一个会计学硕士**的年份，他本人硕士是 1918。",
+    "「Journal of Accountancy 1920 年代有他的文章」": "**没查到**。搜了多次，1931 年前一篇都没有；唯一命中是约 1946 年的一则读者来信。",
+    "「University of Illinois Bulletin 有他的文章」": "**也没查到**具体可核实的一篇。"
+   },
+   "★ 没能核实的（不当事实用）": [
+    "「Two Fables of Bookkeeping」1927-12：抓取工具对长文档截断，够不到目标页码",
+    "「The Economic Function of Accountancy」1918：HathiTrust 对本工具 403，只有二手索引",
+    "《The Certified Public Accountant》上的两篇（1927、1928）：没找到开放数字化版本",
+    "「Lectures on Retail Merchandising」约 1920：只在 UIUC 档案馆手稿目录，疑为未出版讲义",
+    "1930 年 6/9/12 三期未逐期核对，可能有遗漏"
+   ],
+   "★ 同名护栏（已备好，重启时直接用）": {
+    "最强区分特征": "**`Ananias` 是极罕见的教名**——维基消歧义页上其余 20 位姓 Littleton 的人里一个都没有。比对齐生卒年更可靠。",
+    "领域年代最近的同姓者": "Martin W. Littleton（1872–1934，律师/纽约州联邦众议员，田纳西出身、自学成才、从未上过大学——与他的伊利诺伊本硕博履历正相反）；Benjamin Horsley Littleton（1889–1966，法官，**年代重叠度最高**）；C. Scott Littleton（1933–2010，人类学家，**缩写 C. 易与 A. C. 混**）",
+    "地名": "美国 10 处＋英国约 12 处＋爱尔兰 2 处。★ **风险最高的是 Littleton, Illinois**——州名会与 University of Illinois 同时出现在检索结果里。",
+    "同领域同姓者": "**没有查到任何一位同姓且同为会计/商学领域的人**。"
+   },
+   "unblock_todo": "若裁定 ㉜（PD-only 规则的射程）放宽到「作者已故 + 可合法取得」，他立刻可做——1933 的《Accounting Evolution to 1900》是他的代表作，且他 1974 年已故。★ **在现行 PD-only 规则下不可能**：差 1 份源、且三道只有一道。",
+   "处置类": "延后",
+   "★ 处置类的原键": "class",
+   "★ disposition 未记": false
   }
  ],
- "total": 136,
+ "total": 137,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
