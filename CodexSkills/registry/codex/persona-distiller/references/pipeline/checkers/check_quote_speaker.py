@@ -161,9 +161,29 @@ def _quoted_texts(blob: str):
 _EMPH = re.compile(r"\*\*|__|\*(?=\S)|(?<=\S)\*")
 
 
+_APOSTROPHE = re.compile(r"[\u2018\u2019\u201b\u02bc\u00b4]")
+_SPACE_BEFORE_PUNCT = re.compile(r"\s+([,.;:!?)\]])")
+
+
 def norm(s: str) -> str:
-    """折行断词接回来，剥掉 Markdown 强调，空白压平。**定位用这一版，报数用原文。**"""
-    return _WS.sub(" ", _EMPH.sub("", _HYPHEN_BREAK.sub("", s))).strip()
+    """折行断词接回来，剥掉 Markdown 强调，空白压平。**定位用这一版，报数用原文。**
+
+    ★★★★ 2026-08-10：**撇号与「标点前空白」两条是从 `check_lane_quotes_verbatim` 移植的。**
+      这是**今天第四次**撞上「两件判据看同一批文本、口径各写各的」：
+        · 省略号分段（本件缺）
+        · 行内反引号提取（那件缺）
+        · 中日韩标点／表格行／URL 过滤（本件缺）
+        · **撇号与标点前空白归一（本件缺）** ← 这一条
+      ★★ **这一条移植过来之后实测 0 变化**（定位不到仍是 19 条）——
+        我以为会修好的那几条（如 Rosenhain 的 `Prof. Perry's plea` vs 语料 `Prof. Perry’s`）
+        **早就被下面的投影兜底接住了**。
+        **仍然保留**：口径对齐是为了不让两件判据将来再分叉，
+        但**不能把它记成一次修复**——它现在没修好任何一条。
+      ★ 与那件一致：**只动排印，不动字母**。
+    """
+    s = _WS.sub(" ", _EMPH.sub("", _HYPHEN_BREAK.sub("", s))).strip()
+    s = _APOSTROPHE.sub("'", s)
+    return _SPACE_BEFORE_PUNCT.sub(r"\1", s)
 
 
 def is_cjk_heavy(s: str, ratio: float = 0.15) -> bool:
