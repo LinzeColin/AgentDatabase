@@ -89,6 +89,32 @@ _RENDER = (
 BUILDER_READABLE = _RENDER
 
 
+# ★★★ 2026-08-10：**「提到 holdout」与「说出它是哪一份」后果差很远，而本件把它们混成一个数。**
+#   全库实测 25 行命中里：**23 行是泛泛提及**（「本路不引 holdout」，不说哪一份，无害），
+#   **只有 3 行点名**（Adams 的 `work.md` 1 行 + Virchow 的研究道 2 行）。
+#   只报总数会让人以为有 25 处泄题，或反过来把 3 处真的淹掉。
+#
+#   ★ 我第一次手写「点名」判据时**漏了 Adams**：只认书名号／`.txt`／`src-`，
+#     而他写的是「1904 年那篇排斥式电动机的会后书面补充（**卷 XXIII pp.63–76**）划为 holdout」——
+#     **用卷次页码点名，不带书名号。** 所以坐标形式必须一起认。
+NAMES_THE_WORK = (
+    r"《[^》]{2,60}》",                       # 书名号
+    r"\.txt\b",                              # 文件名
+    r"src-[a-f0-9]{12}",                      # 源 id
+    r"卷\s*[IVXLC\d]+",                       # 卷 XXIII / 卷 12
+    r"\bvol\.?\s*[IVXLC\d]+",                # vol. XXIII
+    r"pp?\.\s*\d+",                          # p.63 / pp.63–76
+    r"第\s*\d+\s*[卷期页]",                   # 第 23 卷
+    r"(?<!\d)1[5-9]\d\d(?!\d)\s*年[^\n]{0,12}(?:那篇|这篇|的[^\n]{0,8}[篇文书报])",  # 1877 年的《…》/1904 年那篇
+)
+_NAMES_RE = re.compile("|".join(NAMES_THE_WORK))
+
+
+def names_the_work(line: str) -> bool:
+    """→ 这一行是不是**说出了 holdout 是哪一份**（而不只是提到有个 holdout）。"""
+    return bool(_NAMES_RE.search(line))
+
+
 def builder_readable_files(target) -> list:
     """十份产物 + **工作区根目录下的一切 `.md`**
     + **`references/research/` 下的六份研究道文档** + **`evidence/claims.jsonl`**。
@@ -231,7 +257,8 @@ def scan(target: pathlib.Path) -> dict:
             a = max(t.rfind("\n", 0, m.start()) + 1, 0)
             e = t.find("\n", m.end())
             whole = t[a:e if e > 0 else None]
-            rec = {"文件": f.name, "行": line, "命中": m.group(0), "整行": whole[:160]}
+            rec = {"文件": f.name, "行": line, "命中": m.group(0), "整行": whole[:160],
+                   "★ 点名了是哪一份": names_the_work(whole)}
             (exempted if whole.strip() in tmpl_lines else mentions).append(rec)
         if hold_sh:
             common = shingles(t) & hold_sh
@@ -243,6 +270,9 @@ def scan(target: pathlib.Path) -> dict:
         "holdout 份数": len(hold),
         "扫过的建模者可读文件": len(files),
         "**字面提及**": mentions,
+        # ★ 分档：泛泛提到「有个 holdout」无害；**说出它是哪一份才是泄题**。
+        "**其中点名了是哪一份的**": [x for x in mentions if x["★ 点名了是哪一份"]],
+        "★ 只是泛泛提及（不说哪一份）": sum(1 for x in mentions if not x["★ 点名了是哪一份"]),
         "★ 与出厂模板逐字相同、已豁免的": exempted,
         "**与 holdout 独有内容的 8 词片重叠**": overlaps,
         "★ holdout 词片": len(hold_raw),
@@ -355,6 +385,33 @@ def self_test() -> int:
     print("  例如「他评价别人产品的材料我们取不到」：没有关键词、没有重叠、照样泄题。")
     print("  今天那次是靠层一抓到的；**我当时若换个说法就漏了**。")
     print("  层二只能抓同语种的近似复述——**中文转述英文 holdout 的主题，它一个字看不见**。")
+
+    # ★★★ 2026-08-10 新增：**「泛提」与「点名」必须分开**（全库 25 行里只有 3 行是点名）
+
+    print("\n  —— 点名判定（泛提 vs 说出是哪一份）——")
+
+    for _line, _exp, _why in (
+
+        ("> **1877 年的《Sectionstechnik》故意留作 holdout，本路不引它。**", True,
+
+         "Virchow 实例：书名号 + 年份 → **点名**"),
+
+        ("1904 年那篇排斥式电动机的会后书面补充（卷 XXIII pp.63–76）**划为 holdout**，", True,
+
+         "★ Adams 实例：**卷次页码点名、不带书名号** —— 我第一版正则漏的就是它"),
+
+        ("该篇留作 holdout（notes-on-nursing-1860.txt）", True, "文件名 → 点名"),
+
+        ("holdout 见 src-1a59d21f7eab", True, "源 id → 点名"),
+
+        ("本路不引 holdout。", False, "泛提 → **不算点名**"),
+
+        ("> 留出集一旦被引用，known 套组就不可信。", False, "泛提 → **不算点名**"),
+
+    ):
+
+        chk(f"{_why}", names_the_work(_line) == _exp)
+
 
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
     return 0 if ok else 2
