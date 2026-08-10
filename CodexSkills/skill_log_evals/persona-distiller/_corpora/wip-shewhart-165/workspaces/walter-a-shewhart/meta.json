@@ -108,18 +108,27 @@
       "bstj6-4-722_djvu.txt —— 正文 L6 逐字：`By W. A. SHEWHART`",
       "bstj9-2-364_djvu.txt —— 正文 L2 逐字：`Br W. A. SHEWHART`（**OCR 把 `By` 认成 `Br`，照录**）。该件 OCR 质量整体偏差，另见 `JOVRSAL`、`TFXHNCAL`。",
       "studyofpropagati00shew_djvu.txt —— 题名页 L33 逐字：`WALTER  ANDREW  SHEWHART`；L35 `A.  B.  University  of  Illinois,  1913`；L54 `1914`（**双空格版面，照录**）",
-      "84021_shewhart_only.txt —— L14 逐字：`By W. a. Shbwhart`（**OCR 讹字，照录**）；书眉 `STATISTICS: W. A. SHEWHART`；L19 `Read before the Academy, April 25, 1922`"
+      "84021_shewhart_only.txt —— L14 逐字：`By W. a. Shbwhart`（**OCR 讹字，照录**）；书眉 `STATISTICS: W. A. SHEWHART`；L19 `Read before the Academy, April 25, 1922`",
+      "jfi_1928_03_shewhart_only.txt —— 正文逐字：`W. A. SHEWHART, Ph.D.`；书眉 `396 W. A. SHEWHART. (J. F. 1.`",
+      "pr_1917_05_shewhart_only.txt —— 正文逐字：`By W. A. SHEWHART.`；书眉 `426 W. A. SHEWHART. SERIES.`；脚注自陈 `Accepted in partial satisfaction of the requirements for the degree of doctor of philosophy in the University of California`（**即他的伯克利博士论文**）",
+      "ssm_1919_01_shewhart_only.txt —— 正文逐字：`By W. A. SHEWHART,` / `Western Electric Co., New York City.`",
+      "asce91_shewhart_discussion.txt —— 讨论记录的发言标签，正文逐字：`W. A. SHEWHART,* Esq. (by letter).—Some very broad claims are made`。★ **起讫由发言标签定，不按书眉切**：结束在下一位发言人 `W. H. R. NImMo,7 Assoc. M. AM. Soc. C. E. (by letter).—` 之前。实测 p.50 书眉写 SHEWHART 而前 37 行是前一位（Streiff 谈径流与太阳黑子）的尾巴、p.54 书眉写 NIMMO 而他的话还延续 19 行——**照书眉切两头都会切错人**。",
+      "asce91_goodrich_on_shewhart.txt —— **这一份不是他写的**（S1／external）：书眉 `R. D. GOODRICH ÔN PLOTTING SKEW FREQUENCY DATA`，正文自称 `the writer`、提 `Mr. Shewhart` 4 次。"
     ],
     "disputed_works": [
       "★★ **`84021` 那个扫描件里物理上有两个人的文章**：L216 起是 `ELECTRONIC BOMBARDMENT OF NICKEL / By H. E. Farnsworth`（254 实词）。已剥出 `84021_shewhart_only.txt`，**否则会把别人的 254 词算进他名下**。原始整份 1,892 词 = JSTOR 前言 184 + Shewhart 1,454 + Farnsworth 254。",
       "其余 7 份逐份扫过他人署名（`By …` 非 Shewhart），**命中 0**。",
-      "后世以他命名的术语 `Shewhart chart` / `Shewhart cycle` / `Shewhart Medal`——八份全 0 命中。这一类是本人物最实际的语料污染源（**别人写的、只是提到他名字**的文本）。"
+      "后世以他命名的术语 `Shewhart chart` / `Shewhart cycle` / `Shewhart Medal`——八份全 0 命中。这一类是本人物最实际的语料污染源（**别人写的、只是提到他名字**的文本）。",
+      "★★ **ASCE 那一卷的书眉与说话人不是一回事**：p.50 书眉 SHEWHART 而前 37 行属前一位发言人，p.54 书眉 NIMMO 而他的话还延续 19 行。**逐份的起讫一律由发言标签定**（`X, … (by letter).—`），不由书眉定。",
+      "★ 简报把被讨论论文的作者写作 **E. P. Goodrich**，而页面书眉印的是 **R. D. Goodrich**，且该段正文自称 `the writer's paper`——**以页面为准**，记 R. D.。"
     ],
     "unresolved": [
       "★★ **同名护栏本轮没有被真正测试过。** 8 个标识符是探测简报直接给定的，抓源全程没走检索路径，不存在按姓名召回，因此谈不上挡住了 Andrew T./Lauren Shewhart、Shuchart、Schuchardt。**不能记作那两条纪律的验证通过。**",
       "★ **BSTJ 六篇的出版年，正文里一个字都没印。** 年份证据全部来自 archive.org details 页的 `Publication date` 字段与 metadata。只有硕论（题名页 `1914`）与 PNAS（`Read before the Academy, April 25, 1922`、书眉 `Vol. 8, 1922`）有文内年份。**两处文内旁证给出下界**：`bstj6-4-722` 自引 1926 年 10 月那篇；`bstj9-2-364` L58 提 `a recent issue, July, 1927`。",
       "★★ **「页面标了 Public Domain」没能证实，证据指向相反。** 8 个 details 页搜 `public domain` 命中 0（分母 197K–227K bytes，同页搜得到 `Publication date`，说明搜得见）；metadata 无 `licenseurl`/`rights`；`publicdate` 是上传日期不是权利声明。JSTOR 前言写的是 `redistribute … for non-commercial purposes`——**那是再分发许可，「非商业」这个限制本身就与公有领域不相容**。→ **PD 依据只能是出版年**（均美国出版、≤1930，2026 年分界 1931）。**这是从已核实年份做的法律推断，页面上没有一处这样写。**",
-      "没有核对扫描件与纸本原刊；页码、卷期全部依据 archive.org 自述，无独立第二来源。"
+      "没有核对扫描件与纸本原刊；页码、卷期全部依据 archive.org 自述，无独立第二来源。",
+      "★★★ **ASCE 两份的正文是我自己重新 OCR 得到的**，不是 archive.org 的派生件。原因：该卷 archive.org OCR **系统性丢虚词**（≤2 字母词占比 **0.0265**，正常散文 0.25–0.28，`a/of/to/in/is` 丢了约八成），`_djvu.txt`／`_hocr_searchtext`／原始 `_hocr.html` 三处同值，词根本不在 hOCR 里。改用 **macOS Vision**（Objective-C + Vision.framework，`usesLanguageCorrection = NO`，只识别不清洗）重 OCR 原生页图（2236×3448），重 OCR 后 ≤2 字母词占比 **0.3331 / 0.2370**。**下游若要逐字引文，引的是我这一遍 OCR 的字，不是 archive.org 的。**",
+      "★ Goodrich 那一份**只有 pp.106–107 两页，该段完整长度未知**——leaf119 以句中 `understand his attitude or purpose.` 开头，说明前面还有内容没取。"
     ],
     "disputed_policy": "**本人物没有托名件问题，真正的疑作风险有两类，分别处理**：\n① **同一个扫描件里混进别人的文章。** 不是编目错误，是物理事实——`84021` 里 L216 起就是 `ELECTRONIC BOMBARDMENT OF NICKEL / By H. E. Farnsworth`。规则：**逐份扫他人署名行（`By …` 非 Shewhart），命中就按行号切开、只留他那一段**，并把切掉的词数记在案（254 词）。其余 7 份命中 0。\n② **以他命名的后世术语把别人写的文本吸进来。** `Shewhart chart` / `Shewhart cycle` / `Shewhart Medal` 会命中大量「某教材第 X 章讲 Shewhart 图」「某人获 XX 年 Shewhart 奖」——**那些是别人写的**。规则：**按字符串 `Shewhart` 召回的材料一律不直接收**，必须先看署名行是不是他。八份实测三个术语全 0 命中。\n③ 同姓者（Andrew T./Lauren Shewhart）与拼写变体（Shuchart / Schuchardt）：探测阶段查得 **0 个构成实际混淆风险的同姓公众人物**（维基百科 `Shewhart` 词条本身就重定向到他，不是消歧义页）。★★ **但本轮抓源是直接给定 8 个标识符的，全程没走检索路径——护栏没有被真正测试过，不记作验证通过。**\n④ 地名 `Shewhart Hollow`（伊利诺伊 Pike County）是他自家地产，不是需排除的另一实体，但也不构成归属证据。"
   }
