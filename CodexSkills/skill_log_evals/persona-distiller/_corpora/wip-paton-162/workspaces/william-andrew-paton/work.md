@@ -6,6 +6,7 @@
 
 1917 年那篇论文就是这个结构——先说记账员的经验规则不触及基本关系：
 `The rules-of-thumb guiding the bookkeeper (which do not get at the fundamental relations involved) are inade- quate; and it is partly because of this`
+　　★ 坐标：The Journal of Accountancy / The Ronald Press Co. Vol.23 Iss.1 (Jan 1917), pp.7-26
 再展开他自己的解释。
 
 ## 写作方式

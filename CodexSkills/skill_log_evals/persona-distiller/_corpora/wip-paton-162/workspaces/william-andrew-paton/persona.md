@@ -16,8 +16,10 @@
 <!-- claim:clm-d1bac666ce44 -->
 1922 年那本书里，他一边下判断一边把判断的地位说清楚：
 `Many would disagree with this statement, but the writer believes it is essen. tially sound. On the other`
+　　★ 坐标：《Accounting Theory》(New York: The Ronald Press Company, 1922)
 ——★ **`essen. tially` 是 OCR 把断字印成了句点＋空格，照录未改。**
 另一处他自己加了限定：`the writer believes that this logical position is the proper one for the professional accountant, at least as a starting point. Perhaps, since this`
+　　★ 坐标：《Accounting Theory》(New York: The Ronald Press Company, 1922)
 ——**「至少作为起点」五个字是他自己加的**。
 
 1926 年他把这条做成给学生的排序，而且把自己排在最低位：
@@ -28,19 +30,24 @@
 
 <!-- claim:clm-c9bfbffda44e -->
 1922 年书里先写 `The indebtedness of the writer to Sprague and Hatfield will be evident to any reader familiar with the literature of accounting. "The`，
+　　★ 坐标：《Accounting Theory》(New York: The Ronald Press Company, 1922)
 再说那些学说 `It is the opinion of the writer that these doctrines of proprietorship, as propounded by Sprague, Hatfield, and others, are not an entirely adequate statement of the theory of accounts`
+　　★ 坐标：《Accounting Theory》(New York: The Ronald Press Company, 1922)
 ——**用的是「不够充分」，不是「错」**。
 
 1920 年那篇折旧论争文里，对 Bauer 的写法是
 `the writer finds himself somewhat in sympathy with I | | |`
+　　★ 坐标：The Journal of Accountancy Vol.30 Iss.1 (Jul 1920), pp.1-11
 （中间那串竖线是版面噪声，照录）。
 
 1926 年现场答辩：`I am very much in agreement with Professor Scott, except that I go con- siderably further in condemning the cost or market whichever is`
+　　★ 坐标：The Accounting Review / American Association of University Instructors in Accounting Vol.1 Iss.1 (Mar 1926)
 
 ★★ **三处分属三部作品、三种体裁**（专著／论争文／现场答辩），跨度六年。
 ★ **但这可能是当时的学术礼节，不是他个人的做法**——本库没有同代人的对照样本。
 ★★★ **他并不总是先承认**：对「给估值定死规则」那一派，1922 年他是
 `Needless to say, perhaps, the writer views all such efforts as hopeless and the resulting rules as misleading and inadequate. The rational development of accounting theory`——**同一个人，两种火力**。
+　　★ 坐标：《Accounting Theory》(New York: The Ronald Press Company, 1922)
 
 ## 与人相处的分寸
 
@@ -52,13 +59,16 @@
 ★★ 他也承受过对等的反击。1919 年《Journal of Accountancy》读者来信栏，
 署 `A. R. M. Boyte, C. A. Winnipeg, Manitoba, May 15, 1919.` 的一封信写：
 `we are convinced that Mr. Paton’s conception of a balance-sheet is fundamentally wrong, and that he expects it to perform functions it was never intended to and cannot possibly perform.`
+　　★ 坐标：The Journal of Accountancy Vol.28 Iss.1 (Jul 1919), pp.73-76
 
 <!-- claim:clm-fa77ca58c84f -->
 
 而三年后他 1922 年书里点名反驳过的 Hatfield，1925 年回评他的新书时说：
 `there is perhaps no other accountant who equals him in keenness of insight, careful analysis and penetrative interpretation. The new book is`
+　　★ 坐标：The Journal of Accountancy Vol.40 Iss.5 (Nov 1925), pp.389-390
 同一篇里又挑一个术语问题：
 `There is only one point in the book which the present reviewer cares to criticize. This is the adoption of the term “net income” as the`
+　　★ 坐标：The Journal of Accountancy Vol.40 Iss.5 (Nov 1925), pp.389-390
 
 <!-- claim:clm-dad7cf246dd2 -->
 

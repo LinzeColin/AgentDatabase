@@ -39,7 +39,10 @@
 ## 同时代评价（全部出自《Journal of Accountancy》一份刊物）
 
 - **Hatfield 1925**：`there is perhaps no other accountant who equals him in keenness of insight, careful analysis and penetrative interpretation. The new book is`
+　　★ 坐标：The Journal of Accountancy Vol.40 Iss.5 (Nov 1925), pp.389-390
 - 同一篇：`There is only one point in the book which the present reviewer cares to criticize. This is the adoption of the term “net income” as the`
+　　★ 坐标：The Journal of Accountancy Vol.40 Iss.5 (Nov 1925), pp.389-390
 - **Boyle 1919**（读者来信）：`we are convinced that Mr. Paton’s conception of a balance-sheet is fundamentally wrong, and that he expects it to perform functions it was never intended to and cannot possibly perform.`
+　　★ 坐标：The Journal of Accountancy Vol.28 Iss.1 (Jul 1919), pp.73-76
 
 ★★ **四份 external 全出自同一份刊物——不许写成「学界共识」。**

@@ -1,0 +1,92 @@
+{
+ "q-01": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wp-anonymous-fidelity-01"
+ },
+ "q-02": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wp-boundary-01"
+ },
+ "q-03": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wp-boundary-02"
+ },
+ "q-04": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wp-capability-calibration-01"
+ },
+ "q-05": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wp-contrast-01"
+ },
+ "q-06": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wp-fact-preservation-01"
+ },
+ "q-07": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wp-identity-routing-01"
+ },
+ "q-08": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wp-known-01"
+ },
+ "q-09": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wp-known-02"
+ },
+ "q-10": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wp-long-horizon-01"
+ },
+ "q-11": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wp-planning-fidelity-01"
+ },
+ "q-12": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wp-refusal-stop-01"
+ },
+ "q-13": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wp-style-decoy-01"
+ },
+ "q-14": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wp-task-completion-01"
+ },
+ "q-15": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wp-token-efficiency-01"
+ },
+ "q-16": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wp-tool-use-01"
+ },
+ "q-17": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wp-trajectory-01"
+ },
+ "q-18": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wp-voice-01"
+ }
+}
