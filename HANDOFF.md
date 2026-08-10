@@ -257,6 +257,21 @@ cd ~/Documents/Codex/GithubProject/AgentDatabase && git pull
 
 做完之后，上面那句 prompt 才会在收件人的布局里跑通。
 
+### ★★ 这一推有多大（实测，2026-08-10）
+
+| 项 | 值 |
+|---|---|
+| 待推送提交 | **870** |
+| 仓内 pack | **835.94 MiB** |
+| 已跟踪的语料文件 | **9,578** |
+| **最大的单个已跟踪文件** | **18.1 MB**（`probe-adams-131/raw/whoswho1922_djvu.txt`） |
+
+★ **没有文件超过 GitHub 的 100 MB 硬上限**，所以不会因为单文件被整推拒掉。
+★★ 但这是一次**大推**（语料整个在库里），网络慢的时候会跑很久——
+**移交那晚给它留时间，别掐掉。**
+★★★ `git count-objects` 会报两条 `garbage found: …/worktrees/agentdb-nasmyth-153/info/sparse-checkout`
+的警告——那是 worktree 的元数据，**与推送无关，不要去动它**。
+
 ### 已经在**干净检出**里验过的（不是在我的工作目录里验的）
 
 `git worktree add --detach` 一个全新检出，逐条跑：
