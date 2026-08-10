@@ -80,6 +80,12 @@ import argparse
 import itertools
 import json
 import pathlib
+
+#: ★ 剥掉抓源方写的出处表头再量——**表头是给人看的出处说明，不是他的话**。
+#:   Adams 实测表头占全文中位 39.1%，两两 2556 对里 1764 对因此越线。
+import sys as _sys
+_sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from common import corpus_body  # noqa: E402
 import re
 import sys
 
@@ -263,7 +269,8 @@ def load(target: pathlib.Path) -> tuple:
     for r in usable:
         d = target / "references/sources" / r["source_id"]
         f = next(iter(sorted(d.glob("*.txt"))), None) if d.is_dir() else None
-        texts[r["source_id"]] = f.read_text(encoding="utf-8", errors="replace") if f else ""
+        texts[r["source_id"]] = (corpus_body(f.read_text(encoding="utf-8", errors="replace"))
+                                 if f else "")
     return usable, texts
 
 

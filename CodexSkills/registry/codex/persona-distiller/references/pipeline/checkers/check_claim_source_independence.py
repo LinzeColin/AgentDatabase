@@ -49,6 +49,12 @@ counsel-to-parents-1878          ← sp-1240(52%)
 import argparse
 import json
 import pathlib
+
+#: ★ 剥掉抓源方写的出处表头再量——**表头是给人看的出处说明，不是他的话**。
+#:   Adams 实测表头占全文中位 39.1%，两两 2556 对里 1764 对因此越线。
+import sys as _sys
+_sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from common import corpus_body  # noqa: E402
 import re
 import sys
 import zlib
@@ -316,7 +322,7 @@ def main() -> int:
         r = json.loads(line)
         p = a.workspace / (r.get("local_path") or "")
         if r.get("source_id") and p.is_file():
-            texts[r["source_id"]] = p.read_text(encoding="utf-8", errors="replace")
+            texts[r["source_id"]] = corpus_body(p.read_text(encoding="utf-8", errors="replace"))
     if not texts:
         print("✗ **一份正文都读不到——未核验（不是通过）**"); return 3
 
