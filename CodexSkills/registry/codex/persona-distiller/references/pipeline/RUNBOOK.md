@@ -4067,3 +4067,63 @@ Koch（2 亿字符）报 0.07——**不是声口薄，是判据不认识德文*
 本次探测给了两根支柱，我逐根去核：会长致辞**核住了**
 （26,033 字符、第一人称密度 4.32/万字，一篇抵得上 Thomson #129 全语料的 4.25）；
 22 条发言**核不到**。**核得住的那根足以开工，核不到的那根不许当依据。**
+
+---
+
+## 第七十五种：**文档写的下限，不是真实的下限**——两条规则各自成立、合起来矛盾
+
+**撞出它的是 Shewhart #165（2026-08-10）。** 他一手正好 8 份，`quick` 的
+`min_sources` 正好是 8。研究门于是**绿了**。
+
+`quality_check.py` 里这两条：
+
+```
+L132   len(usable) >= min_sources          # usable 只含 split == 'train'
+L149   phase in {synthesis, release} and not holdout → source.no-holdout（报错）
+```
+
+两条各自都对，**合起来是矛盾的**：
+
+| 留几份 holdout | 研究门 | 合成门 |
+|---|---|---|
+| 0 | ✓ 8 ≥ 8 | ✗ `source.no-holdout` |
+| 1 | ✗ train 掉到 7 < 8 | ✗ 同上 |
+
+→ **holdout 那一份必须从总数里扣，所以真实下限是 `min_sources + 1`。**
+
+| profile | 文档写的 | **真实下限** |
+|---|---:|---:|
+| quick | 8 | **9** |
+| standard | 24 | **25** |
+| deep | 45 | **46** |
+
+**没有任何地方写着 9。**
+
+### ★★ 为什么这不只是「多跑一次门」
+
+研究门放行之后，人会去写六道研究、几十条断言、十份产物、一整套用例——
+**全部做完之后**才在合成门上撞见 `source.no-holdout`，
+然后发现**无论怎么改文字都过不去**，因为要补的是**材料**。
+
+判据 `check_corpus_feasibility.py` 把这一撞提前到抓源刚结束的时候，
+报 `corpus.structurally-infeasible` 并算出**还差几份**。
+
+### 判据要穷举 holdout 的选法，不能随便扣一份
+
+★ 某一道可能**只有 1 份材料撑着**，恰好把那一份扣成 holdout，道数就掉了——
+换一份扣就没事。只试一种选法会把**能过的人误判成不可能**。
+自测 ③ 专门锁这一条。
+
+### 全库实测（23 个有 meta 的工作区）
+
+**17 绿 / 6 红。** 红的 6 个里 5 个是**已知受阻**的人
+（Benardos / Koch / Liebig / Martens / Semmelweis），**新增只有 Shewhart 一个**；
+**所有已判分出货的人全绿**——正对照成立，它不是一道恒红的门。
+（见 [[a-red-that-can-never-turn-green-is-not-a-signal]] 的反面：
+这道门要能变绿，才说明它在报信息。）
+
+### ★ 顺带记一条判据自己的坑
+
+`check_corpus_feasibility.py` 第一版用了 `str | None` 注解，
+**本机 python 3.9 在运行期就抛 TypeError**——`from __future__ import annotations` 补上。
+`list[dict]` 在 3.9 是可以的（PEP 585），`X | Y` 要 3.10（PEP 604）。
