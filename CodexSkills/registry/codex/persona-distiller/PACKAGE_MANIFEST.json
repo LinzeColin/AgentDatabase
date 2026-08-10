@@ -381,8 +381,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "a1beef40be9f4dfed9458a093269e206c2051c4cbb1a5ec799343c3afd27e9c9",
-      "size_bytes": 230596
+      "sha256": "54697ba7e212fd1bea679cccda5f81dc4baa263950ad51120cd2bb789991c174",
+      "size_bytes": 231555
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -521,8 +521,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_authorship.py",
-      "sha256": "85a1c958b89b7fe497f24d96971d477592687f3518e1b13d8bae3f79ddbe3196",
-      "size_bytes": 168049
+      "sha256": "852d86f407c10f97697716cd52ba8c7191e54fed678c23d39a73f8828f9a4f63",
+      "size_bytes": 172254
     },
     {
       "path": "references/pipeline/checkers/check_baseline_provenance.py",
@@ -641,8 +641,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_first_person_density.py",
-      "sha256": "c53083e08b333fd629ac5a1dea95e1dca4c52f16be42791c9e436fbc663efff0",
-      "size_bytes": 21250
+      "sha256": "32c0e90556b43a0d976250134769e357deaabb87c6dc4f1b526241648dd9ec0b",
+      "size_bytes": 23095
     },
     {
       "path": "references/pipeline/checkers/check_gate_reachability.py",
@@ -891,8 +891,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_verification_counts.py",
-      "sha256": "04cf303017303bedafeb06c559b33fcb875a73c99f223ece5e99235bb80d0c25",
-      "size_bytes": 22333
+      "sha256": "403d6a7a2532e2624b1e6e8381b1a7e1871caeef66a2b8323512a7af5bd5c6d1",
+      "size_bytes": 22803
     },
     {
       "path": "references/pipeline/checkers/check_version_bump_ships_product.py",
@@ -1266,8 +1266,8 @@
     },
     {
       "path": "scripts/check_authorship.py",
-      "sha256": "85a1c958b89b7fe497f24d96971d477592687f3518e1b13d8bae3f79ddbe3196",
-      "size_bytes": 168049
+      "sha256": "852d86f407c10f97697716cd52ba8c7191e54fed678c23d39a73f8828f9a4f63",
+      "size_bytes": 172254
     },
     {
       "path": "scripts/check_baseline_provenance.py",
@@ -1386,8 +1386,8 @@
     },
     {
       "path": "scripts/check_first_person_density.py",
-      "sha256": "c53083e08b333fd629ac5a1dea95e1dca4c52f16be42791c9e436fbc663efff0",
-      "size_bytes": 21250
+      "sha256": "32c0e90556b43a0d976250134769e357deaabb87c6dc4f1b526241648dd9ec0b",
+      "size_bytes": 23095
     },
     {
       "path": "scripts/check_gate_reachability.py",
@@ -1636,8 +1636,8 @@
     },
     {
       "path": "scripts/check_verification_counts.py",
-      "sha256": "04cf303017303bedafeb06c559b33fcb875a73c99f223ece5e99235bb80d0c25",
-      "size_bytes": 22333
+      "sha256": "403d6a7a2532e2624b1e6e8381b1a7e1871caeef66a2b8323512a7af5bd5c6d1",
+      "size_bytes": 22803
     },
     {
       "path": "scripts/check_version_bump_ships_product.py",
