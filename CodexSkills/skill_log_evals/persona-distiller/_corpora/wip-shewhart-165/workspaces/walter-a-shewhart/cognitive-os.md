@@ -10,6 +10,7 @@
 `MAGNITUDE IS INFLUENCED BY PRIMARY CAUSES BEYOND THE CONTROL OF THE OBSERVER`，
 正文写 `the causes of variation of a quantity while it is being subjected to measurement`。
 控制图是它 1926 年之后的一个应用，不是起点。
+（PNAS 8 (1922) 248–251，题名）
 
 ★★ **术语变过**：1922 年是 `primary causes`，1926 年之后才是 `assignable causes`。
 把两者当成同一个词用，要给理由。

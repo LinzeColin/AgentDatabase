@@ -8,6 +8,7 @@
 题名即 `MAGNITUDE IS INFLUENCED BY PRIMARY CAUSES BEYOND THE CONTROL OF THE OBSERVER`；
 1926 年之后才转到产品受控。
 ★ 把控制图当起点，会把这条来路整个丢掉。
+（PNAS 8 (1922) 248–251，题名）
 
 ★★ 但**术语变过**：1922 年是 `primary causes`，1926 年之后才是 `assignable causes`。
 主张两者是同一件事，需要给理由，不能当成同一个词直接用。

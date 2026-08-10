@@ -8,6 +8,7 @@
 1913 年伊利诺伊大学 A.B.；**1914 年同校硕士**，论文题《A Study of the Propagation,
 Refraction, Reflection, Interference and Diffraction of Ripple Waves》，82 leaves。
 题名页印 `WALTER  ANDREW  SHEWHART` / `A.  B.  University  of  Illinois,  1913` / `1914`。
+（University of Illinois 1914 硕论，题名页）
 
 <!-- claim:clm-3f9195a8b0b8 -->
 **1916 年 6 月完成博士论文，加州大学伯克利分校物理学**，题《A Study of the Accelerated
@@ -22,6 +23,7 @@ CALIFORNIA, June, 1916.`
 
 <!-- claim:clm-1f98db38d85b -->
 **1919 年任职 Western Electric Co.，纽约市**（署名下方印 `Western Electric Co., New York City.`）。
+（School Science and Mathematics 19(1) 24–28（1919），署名下方）
 
 <!-- claim:clm-d44f217de429 -->
 **1924–1930 年在 *Bell System Technical Journal* 发表六篇**：
@@ -31,10 +33,12 @@ CALIFORNIA, June, 1916.`
 
 <!-- claim:clm-b17de59e4af5 -->
 其中一处下界旁证是他自引：1927 年那篇的脚注 `iShewhart, W. A., "Quality Control Charts," October 1926.`
+（BSTJ 6(4) 722–735（1927），脚注）
 
 <!-- claim:clm-de60b5c86978 -->
 **1927 年他对 R. D. Goodrich《Plotting Skew Frequency Data》的讨论意见是书面提交的**，
 发言标签印 `W. A. SHEWHART,* Esq. (by letter).—`。
+（ASCE Transactions 91 (1927) p.50）
 
 ## 不知道的
 

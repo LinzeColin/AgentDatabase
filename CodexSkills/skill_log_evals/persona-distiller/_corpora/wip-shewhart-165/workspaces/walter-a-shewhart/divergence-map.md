@@ -6,6 +6,7 @@
 R. D. Goodrich 认为他**双重标准**：`it appears that he demands much more of the graphical
 method of fitting curves to data than he does of any analytical method`，
 并说他 `appears to have read into the writer's paper certain ideas which the writer had no thought of`。
+（ASCE Transactions 91 (1927) p.106，R. D. Goodrich 答辩）
 
 ★ **这是指控，不是事实**——但它说明他的批评在同代人看来严苛到需要解释。
 ★★ 外部视角**只有这一处，而且这一个是对手**；且只取到该段的两页，完整长度未知。

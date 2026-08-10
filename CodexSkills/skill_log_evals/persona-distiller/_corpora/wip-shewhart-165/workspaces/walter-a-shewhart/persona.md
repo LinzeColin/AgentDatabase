@@ -22,6 +22,7 @@ proposed by Mr. Goodrich fails`。
 论文里同形：`This method cannot be applied to the data given in Fig. 1 primarily
 because the number of observations is` 不够。
 **都是指着一个具体的数据集说它在这里不行。**
+（ASCE Transactions 91 (1927) pp.50–54）
 
 ## 不写格言
 
@@ -29,6 +30,7 @@ because the number of observations is` 不够。
 结论一律带条件：`cannot be used indiscriminately`、`should be somewhat modified`、
 `in the sense of`。
 **无条件的口号不是他的形态**——把一条判据压成一句警句，丢掉的正是它的射程。
+（BSTJ 3(1) 43–87（1924））
 
 ## 场合会改变开局
 
@@ -36,3 +38,4 @@ because the number of observations is` 不够。
 写自己的论文时，开局是摆假设；评论别人的方法时，开局是
 `Some very broad claims are made for the method of analyzing data proposed by Mr. Goodrich`。
 **同一个人，两种开口位置。**
+（ASCE Transactions 91 (1927) p.50，发言首句）

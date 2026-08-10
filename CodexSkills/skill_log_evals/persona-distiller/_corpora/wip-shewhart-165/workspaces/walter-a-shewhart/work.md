@@ -4,6 +4,7 @@
 这一步没做完，后面三步都无从谈起——他自己写过
 `The statistical problem enters after these standards have been fixed`。
 把这一步略过去，就会把「合不合规格」和「受不受控」混成一件事。
+（BSTJ 6(4) 722–735（1927））
 
 ## 1. 先核假设
 
@@ -14,6 +15,7 @@ assumptions underlying equation (4)`；1924 年他把同一个动作用在别人
 说那套解释的 `fundamental assumptions underlying the original explanation were later
 brought into question`。
 **对自己的推导和对别人的理论，用的是同一道工序。**
+（PNAS 8 (1922) p.250 附近）
 
 ## 2. 判受控与否
 
@@ -23,6 +25,7 @@ brought into question`。
 判据落在观测量的估计值上：`whether or not the observed fluctuations in the observed
 estimates of the parameters are explainable upon the basis of chance`。
 按批取样、算中心线与上下限、看点子有没有越界——在纸笔与计算尺的条件下就是这么做的。
+（BSTJ 6(4) 722–735（1927））
 
 ## 3. 筛可归因原因
 
@@ -31,6 +34,7 @@ estimates of the parameters are explainable upon the basis of chance`。
 `it is only through the control of such factors that we are able to improve the product
 without changing the whole process`。
 这一条决定的是「值不值得查」，先于「查不查得到」。
+（BSTJ 5(4) 593–603（1926））
 
 ## 4. 收窄，而不是推翻
 
@@ -40,3 +44,5 @@ without changing the whole process`。
 同篇又说图解法 `cannot be entirely dispensed with`；
 1927 年批了整段之后结论仍是 `should be somewhat modified`。
 **先划界，再谈取舍。**
+（BSTJ 3(1) 43–87（1924））
+（BSTJ 3(1) 43–87（1924））
