@@ -56,6 +56,52 @@ def flat(s: str) -> str:
     return WS.sub(" ", s).strip().lower()
 
 
+#   ★★★★ 2026-08-11：**第一版把 53 条报成「语料里找不到」，读完命中才发现多数是本件的盲区。**
+#     [[read-the-hits-before-reporting-the-rate]]——我差点把 53 当成缺陷数报出去。
+#     三类都是本件自己的问题：
+#       ① 引文里嵌了 markdown 粗体：`mit **Sputum von Phthisikern**`（Koch）、
+#          `the paste should be changed **daily**`（Lister）——不剥 `**` 一条也对不上；
+#       ② 引文里有省略号：`IF any one of you … marvels perhaps at me`（Cicero）——
+#          那是**有意截断的引文**，要把 `…` 当通配，分段各自匹配且**保持先后次序**；
+#       ③ 反引号里根本不是引文：`sp-1267-misc--notes-3-3-1830-年少年习作本`（Blackwell）
+#          是源标识符。**标识符不该进引文集合。**
+_BOLD = re.compile(r"\*\*|__")
+_ELLIPSIS = re.compile(r"\s*(?:…|\.\.\.|\. \. \.)\s*")
+#   标识符：没有空格，或形如 `src-xxxx` / `a-b-c-1902` 这类全小写连字符串
+_IDENT = re.compile(r"^[a-z0-9][a-z0-9._\-]*$|^src-[0-9a-f]+$", re.I)
+
+
+def looks_like_quote(s: str) -> bool:
+    """★ 标识符、文件名、纯路径不算引文。
+
+    ★★ 第一版写成 `_IDENT.match(s.replace(" ", ""))` —— **把空格去掉再判**，
+    于是「任何不带标点的英文引文」去掉空格后都变成纯字母串，全被当成标识符排除掉，
+    **自测当场全红**。判的必须是**原串**：标识符的特征是**根本没有空格**。
+    """
+    s = s.strip()
+    if " " not in s:
+        return False                      # 无空格 → 标识符 / 文件名 / 路径
+    #   还有一类带空格但仍是标识符的：全是连字符串拼的（`a-b-c 1902-年少年习作本`）
+    if s.count("-") >= 3 and len(s.split()) <= 3:
+        return False
+    return True
+
+
+def contains_quote(body_flat: str, quote: str) -> bool:
+    """引文在不在这份语料里。★ 剥粗体、按省略号分段、**分段必须保持先后次序**。"""
+    q = flat(_BOLD.sub("", quote))
+    parts = [x for x in _ELLIPSIS.split(q) if len(x) >= 8]
+    if not parts:
+        return q in body_flat if q else False
+    pos = 0
+    for seg in parts:
+        i = body_flat.find(seg, pos)
+        if i < 0:
+            return False
+        pos = i + len(seg)          # ★ 次序：下一段必须在上一段之后
+    return True
+
+
 def load_sources(ws: pathlib.Path) -> list[dict]:
     led = ws / "evidence" / "source-ledger.jsonl"
     if not led.is_file():
@@ -100,8 +146,10 @@ def suggest(ws: pathlib.Path) -> dict:
             continue
         text = p.read_text(encoding="utf-8", errors="replace")
         for m in QUOTE.finditer(text):
-            q = flat(m.group(1))
-            hits = [s for s, b in bodies if q in b]
+            raw = m.group(1)
+            if not looks_like_quote(raw):
+                continue          # ★ 标识符不算引文
+            hits = [s for s, b in bodies if contains_quote(b, raw)]
             item = {"文件": rel, "引文": m.group(1)[:70],
                     "命中份数": len(hits),
                     "命中": [h["source_id"] for h in hits][:5]}
@@ -184,6 +232,21 @@ def self_test() -> int:
         r3 = suggest(ws)
         b3 = next(x for x in r3["逐条"] if x["引文"].startswith("several of the"))
         chk("⑥ ★★ 引文命中的是 **holdout** → 必须报出来（产物不该引它）", "★★" in b3)
+
+    #   ★★ 三条新能力各自的正反对照（2026-08-11 加的那三处盲区）
+    B = "some  text\nthis  method  cannot  be  applied  to  the  data\nmore"
+    Bf = flat(B)
+    chk("⑦ ★ 引文里嵌 markdown 粗体 → 剥掉 `**` 后要匹配上（Koch/Lister 的形态）",
+        contains_quote(Bf, "this method **cannot be applied** to the data"))
+    chk("⑧ ★ 引文里有省略号 → 分段匹配（Cicero 的形态）",
+        contains_quote(Bf, "this method … to the data"))
+    chk("⑨ ★★ **省略号分段必须保持先后次序**——倒序的不许当成命中",
+        not contains_quote(Bf, "to the data … this method"))
+    chk("⑩ ★ 标识符不算引文（Blackwell 的 `sp-1267-misc--notes-3-3-1830-…`）",
+        not looks_like_quote("sp-1267-misc--notes-3-3-1830-年少年习作本"))
+    chk("⑪ ★★ **而普通英文引文必须仍算引文**——第一版把空格去掉再判，"
+        "结果任何不带标点的引文都被当成标识符排除，自测全红",
+        looks_like_quote("this method cannot be applied to the data"))
 
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
     return 0 if ok else 2
