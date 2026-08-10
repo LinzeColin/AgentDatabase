@@ -1,0 +1,66 @@
+{
+ "q-06945dd1": {
+  "case_id": "hg-contrast-01",
+  "suite": "contrast"
+ },
+ "q-2cd17327": {
+  "case_id": "hg-anonymous-fidelity-01",
+  "suite": "anonymous-fidelity"
+ },
+ "q-2f400d8d": {
+  "case_id": "hg-known-01",
+  "suite": "known"
+ },
+ "q-2fbd8e12": {
+  "case_id": "hg-fact-preservation-01",
+  "suite": "fact-preservation"
+ },
+ "q-370baddb": {
+  "case_id": "hg-task-completion-01",
+  "suite": "task-completion"
+ },
+ "q-3ae37f5c": {
+  "case_id": "hg-identity-routing-01",
+  "suite": "identity-routing"
+ },
+ "q-4f821678": {
+  "case_id": "hg-capability-calibration-01",
+  "suite": "capability-calibration"
+ },
+ "q-554b5129": {
+  "case_id": "hg-token-efficiency-01",
+  "suite": "token-efficiency"
+ },
+ "q-819bdcf0": {
+  "case_id": "hg-style-decoy-01",
+  "suite": "style-decoy"
+ },
+ "q-a5ece88c": {
+  "case_id": "hg-refusal-stop-01",
+  "suite": "refusal-stop"
+ },
+ "q-a7286a7d": {
+  "case_id": "hg-trajectory-01",
+  "suite": "trajectory"
+ },
+ "q-b4371906": {
+  "case_id": "hg-long-horizon-01",
+  "suite": "long-horizon"
+ },
+ "q-d56a2d0b": {
+  "case_id": "hg-voice-01",
+  "suite": "voice"
+ },
+ "q-d5b199e1": {
+  "case_id": "hg-tool-use-01",
+  "suite": "tool-use"
+ },
+ "q-df5accf1": {
+  "case_id": "hg-boundary-01",
+  "suite": "boundary"
+ },
+ "q-edf07ab5": {
+  "case_id": "hg-planning-fidelity-01",
+  "suite": "planning-fidelity"
+ }
+}
