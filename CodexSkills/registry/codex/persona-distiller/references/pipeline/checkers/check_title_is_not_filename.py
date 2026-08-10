@@ -24,7 +24,7 @@ b21354273.txt                published_at 1799   title: b21354273.txt
 | | 行数 | 占比 |
 |---|---:|---:|
 | `title` **就是文件名** | **1,941** | **99%** |
-| `title` 是真书目题名 | 28 | 1% |
+| `title` 是真书目题名 | **26** | 1% |
 | `title` 为空 | 0 | — |
 
 **这不是「有几处漏了」，是这个字段从来没有承载过信息。**
@@ -41,8 +41,19 @@ b21354273.txt                published_at 1799   title: b21354273.txt
 
 ## 判据
 
-对每一条 usable 的台账行：`title` 若等于 `local_path` 的文件名（或去掉扩展名后相等），
-判为**没有题名**。**报出比例与条数，不拦。**
+对每一条 usable 的台账行：`title` **归一化后**（大小写、`:` `_` `-` `.` 与空白折叠）
+若等于 `local_path` 的文件名（或去掉扩展名后），判为**没有题名**。**报出比例与条数，不拦。**
+
+★★ 归一化不是可有可无：第一版只比字面相等，把
+`bz1884_0108_uuid:b85.txt`（文件名 `bz1884_0108_uuid_b85.txt`）判成了真题名——
+**「28 行真题名」里有 2 行是假阳，真值 26 行。**
+那类字符替换是入库时对非法文件名字符做的转写，不是有人写了题名。
+
+## 唯一像样的样板在 Martens 工作区
+
+25 行里的写法值得照抄：
+`Handbuch der Materialienkunde für den Maschinenbau, Bd. 1（Berlin: Julius Springer, 1898）`
+——**题名 ＋ 卷次 ＋ 出版地 ＋ 出版者 ＋ 年**。回填时按这个格式。
 
 ★ **为什么只报不拦**：99% 的行是这样，做成硬门会让每个工作区当场全红，
 而这不是某一次操作的错，是历史累积。**拦不解决问题，只会让人去关门。**
@@ -55,7 +66,19 @@ from __future__ import annotations
 import argparse
 import json
 import pathlib
+import re
 import sys
+
+
+def _norm(x: str) -> str:
+    """归一化：大小写、`:` `_` `-` `.` 与空白一律折叠。
+
+    ★★★ 第一版只比**字面相等**，于是把
+    `bz1884_0108_uuid:b85.txt`（文件名 `bz1884_0108_uuid_b85.txt`，**只差 `:` 与 `_`**）
+    判成了「真书目题名」——**28 行「真题名」里有 2 行是假阳**。
+    这类字符替换多半是入库时对非法文件名字符做的转写，**不是有人写了题名**。
+    """
+    return re.sub(r"[\s:_\-.]+", "", x).lower()
 
 
 def analyse(rows: list) -> dict:
@@ -66,7 +89,7 @@ def analyse(rows: list) -> dict:
         stem = pathlib.PurePath(n).stem
         if not t:
             empty += 1
-        elif t == n or t == stem:
+        elif _norm(t) in (_norm(n), _norm(stem)):
             same += 1
             if len(examples) < 5:
                 examples.append({"source_id": r.get("source_id"), "title": t,
@@ -82,6 +105,7 @@ def analyse(rows: list) -> dict:
         "比例": round(same / tot, 4) if tot else 0.0,
         "抽样": examples,
         "口径": ("`title` 等于 `local_path` 的文件名（或去掉扩展名后相等）即判「没有题名」。"
+                 "**归一化后**比较（大小写、`:_-.` 与空白折叠）。"
                  "**只报不拦**——全库 99% 如此，做成硬门只会让人去关门。"),
     }
 
@@ -121,7 +145,23 @@ def selftest() -> int:
                    "title": "notes.txt 的扫描件：Notes on Nursing, 1860"}])
     chk("不报（是包含不是相等）", a5["**`title` 就是文件名**"] == 0)
 
-    print("── 反向对照 ④：`local_path` 缺失时不许把任意 title 判成文件名 ──")
+    print("── ★★★ 反向对照 ④：**只差 `:` 与 `_` 的**要判成文件名（第一版漏了 2 行）──")
+    a41 = analyse([{"source_id": "s41", "local_path": "raw/x/bz1884_0108_uuid_b85.txt",
+                    "title": "bz1884_0108_uuid:b85.txt"}])
+    chk(f"报出（实报 {a41['**`title` 就是文件名**']}）", a41["**`title` 就是文件名**"] == 1)
+
+    print("── ★ 反向对照 ⑤：大小写不同也要判成文件名 ──")
+    a42 = analyse([{"source_id": "s42", "local_path": "raw/x/Notes-On-Nursing.txt",
+                    "title": "notes on nursing.txt"}])
+    chk(f"报出（实报 {a42['**`title` 就是文件名**']}）", a42["**`title` 就是文件名**"] == 1)
+
+    print("── ★★ 反向对照 ⑥：**归一化不许把真题名误伤** ──")
+    a43 = analyse([{"source_id": "s43", "local_path": "raw/x/hb1898-01.txt",
+                    "title": "Handbuch der Materialienkunde für den Maschinenbau, Bd. 1（Berlin: Julius Springer, 1898）"}])
+    chk(f"不报（实报 {a43['**`title` 就是文件名**']}），计入真题名",
+        a43["**`title` 就是文件名**"] == 0 and a43["`title` 是真书目题名"] == 1)
+
+    print("── 反向对照 ⑦：`local_path` 缺失时不许把任意 title 判成文件名 ──")
     a6 = analyse([{"source_id": "s6", "title": "Some Real Title"}])
     chk("计入「真题名」", a6["`title` 是真书目题名"] == 1 and a6["**`title` 就是文件名**"] == 0)
 
