@@ -362,6 +362,19 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
     #   ★ 字节比对只回答「两份一不一样」，**不回答「这一份跑不跑得起来」**。
     #   ★★ 抓到它的不是读代码，是**逐个真跑**（而且不能接管道——退出码会被吃掉）。
     #   这里只做**导入**：执行顶层 import，不跑 main，82 件约几秒。
+    #   ★★★★ 2026-08-11 把这条边界量了一遍：镜像树 **86 件 `check_*.py` 各跑 `--self-test`**，
+    #     **85 件过、1 件不过**——`check_holdout_mention.py`。
+    #     它**导入是成功的**（不缺模块），坏在 main 里：
+    #         tmpl_root = Path(__file__).resolve().parent.parent / "templates" / "target"
+    #     在 `scripts/` 下解析成 `<包根>/templates/target`（**存在，32 项**）；
+    #     在 `references/pipeline/checkers/` 下解析成 `references/templates/target`（**不存在**）。
+    #     → **模板读到 0 行，自测失败；而本件因为只做导入，看不见它。**
+    #   ★ 这不是本件漏了，是**它声明过的边界**——但边界现在有了具名实例与数字：
+    #     「不跑 main」漏掉的**实测就是 1/86**，而那 1 件恰是 holdout 提及门。
+    #   ★★ 要补这一层，成本是把 86 件的 `--self-test` 都跑一遍（分钟级，不是秒级）；
+    #     `finalize_release` 里已有全量 pytest，**别在这里重复造**。
+    #     完整测量与两个候选修法（各剩一个未消风险）见
+    #     `_ledgers/_镜像树跑不跑得起来-2026-08-11.md`。
     #   ★★★ 两档，不要混：
     #     `check_*.py` 起不来 = **漏**（它们本该在镜像里就能跑）
     #     打包链的 `package_target.py` / `delivery_builder.py` 起不来 = **按设计如此**，
