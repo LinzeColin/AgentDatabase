@@ -1960,6 +1960,47 @@ def self_test() -> int:
         if not _ok:
             bad.append(f"形态 G：{_lbl}")
 
+    print("\n══ ★★★★ Gantt #156 的真实同名场（12 条，2026-08-10 排期前实测）══")
+    #   ★ 这 12 条**在第一份语料落地之前**跑过一次，当时 10 条错 5 条。
+    #     写成常设自测是因为：**判据的自测只能证明它挡得住它见过的那一类**，
+    #     而每换一个人物，失效的方式都不一样（相似姓 → 相同姓 → 全名被包含 → 头衔方向相反）。
+    _G_NS = [
+        {"name": "Henry Gantt", "titles": ["Col", "Colonel"]},          # 同名南军上校
+        {"name": "Mary E. Snow Gantt", "titles": ["Mrs"],               # 他妻子
+         "distinguishing_given_tokens": ["Snow"]},
+        {"name": "William Andrew Horsley Gantt", "titles": ["Dr"],
+         "distinguishing_given_tokens": ["Horsley"]},
+        {"name": "Harvey Gantt", "distinguishing_given_tokens": ["Harvey"]},
+        {"name": "Love Rosa Gantt", "distinguishing_given_tokens": ["Rosa"]},
+        {"name": "Edward W. Gantt", "distinguishing_given_tokens": ["Edward"]},
+    ]
+    _G_OWN_TITLES = []          # ★ 本人物无头衔——候选行里只要出现头衔就不是他
+    for _line, _accept, _why in [
+        ("BY H. L. GANTT.", True, "他惯用的缩写"),
+        ("By Henry L. Gantt.", True, "全名"),
+        ("By Henry Laurence Gantt", True, "ASME 讣告的中名拼写"),
+        ("TESTIMONY OF HENRY LAWRENCE GANTT", True,
+         "★ 国会记录用 Lawrence——**也是一手用法，不是 OCR 讹误**"),
+        ("Mrs. H. L. Gantt", False,
+         "★★★★ 他妻子——**这个串把 `H. L. Gantt` 完整包含在内**"),
+        ("Mrs. Henry L. Gantt", False, "★★★★ 同上"),
+        ("Col. Henry Gantt", False,
+         "★★★ 同名上校——**姓名完全相同，只能靠军衔挡**；本人物无头衔，规则方向是反的"),
+        ("By W. Horsley Gantt", False, "同姓＋同校（Johns Hopkins）＋同城"),
+        ("By Harvey Gantt", False, "同姓建筑师——本人物族别正是建造采购师"),
+        ("By Edward W. Gantt", False, "同姓政客"),
+        ("By Love Rosa Gantt", False, "同姓医生，生卒年与本人重叠"),
+        ("By Frederick W. Taylor", False, "他的同事——Taylor 写他的段落最多"),
+    ]:
+        _b = (_title_blocked(_line, _G_OWN_TITLES, _G_NS)
+              or _given_name_blocked(_line, None, _G_NS))
+        _got = ("gantt" in _line.lower()) and not _b
+        _ok = _got == _accept
+        print(f"  {'✓' if _ok else '✗'} {'应认出' if _accept else '应拒绝'}　"
+              f"{_line[:36]}　（{_why[:34]}）")
+        if not _ok:
+            bad.append(f"Gantt 同名场：{_line}")
+
     print("\n══ 父子同名，只有 Jr. 能正面认定 四条对照（v0.0.0.137）══")
     _NSA = ("Comfort Avery Adams",)          # 他父亲的全名与他一字不差
     for _lbl, _s, _want in (
