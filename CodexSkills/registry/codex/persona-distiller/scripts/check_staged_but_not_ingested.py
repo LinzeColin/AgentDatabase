@@ -135,12 +135,22 @@ def audit(corpora: pathlib.Path) -> dict:
             #      **本件要问的那个差结构上不存在**，且 `check_corpus_presence`
             #      已经在比「账本 vs 磁盘」，是**被别的判据覆盖了**，不是漏洞。
             #   ② 没有外层 `raw/`：这人**没走过抓源台账那一步**，本件无从比。
-            #   ③ 其它：真的说不清，那才是缺口。
+            #   ③ **清单里有、而一份都没灌进工作区**（`ingested` 为空）：
+            #      这人抓源被挡住了（如 Benardos #128：清单 21 份、灌 0 份，
+            #      通道受限记延后）。**那不是缺口，是「一份都没抓到」这个事实本身。**
+            #      ★★ 2026-08-10 之前这一档落进「说不清」，全库唯一的一条就是它。
+            #      ★ 我第一版写成「外层 raw/ 只有标记文件」——**那是我 `ls raw/` 看到
+            #        2 个文件就断的，而清单在 `_ids.txt` 文件里，不在目录里**，
+            #        `staged_names` 实际给出 21 个真名。**读错了前提，改了两次。**
+            #   ④ 其它：真的说不清，那才是缺口。
             has_ws = bool(list(person.glob("workspaces/*")) + list(person.glob("ws-*")))
             if staged and not has_ws:
                 kind = "扁平布局（抓源与工作区共用 raw/）——本件的差结构上不存在，归 check_corpus_presence 管"
             elif not staged:
                 kind = "没有外层 raw/：**没走过抓源台账那一步**，无从比"
+            elif staged and not ingested:
+                kind = (f"抓源清单里 {len(staged)} 份，**一份都没灌进工作区**"
+                        f"（灌 0 份）：抓源被挡住了，**不是缺口**")
             else:
                 kind = "**说不清**"
             skipped.append(f"{person.name}：{kind}")
