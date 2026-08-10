@@ -96,8 +96,22 @@ def overlap(a: set, b: set) -> float:
     return len(a & b) / small if small else 0.0
 
 
-def group_works(texts: dict) -> dict:
-    """→ {source_id: 作品组代表}。重叠 ≥30% 的并进同一组（并查集）。"""
+def pairwise(texts: dict) -> dict:
+    """→ {(a, b): 重叠率}，**直接**两两，不做任何传递。"""
+    ids = sorted(texts)
+    sh = {i: shingles(texts[i]) for i in ids}
+    return {(a, b): overlap(sh[a], sh[b])
+            for i, a in enumerate(ids) for b in ids[i + 1:]}
+
+
+def group_works(texts: dict, _pw: dict = None) -> dict:
+    """→ {source_id: 作品组代表}。重叠 ≥30% 的并进同一组（并查集）。
+
+    ★★★★ **这个函数的结果只能当参考，不能当判据**——见 `evaluate` 里那段注释。
+    并查集是**传递闭包**：A↔B 0.35、B↔C 0.35 就把 A 与 C 判成同一部，
+    而 A↔C 实测可以是 **0.000**。Lister 工作区实测：最大分量 **32 份（占 52%）**，
+    分量内随手挑的三对重叠是 **0.001 / 0.000 / 0.000**。
+    """
     ids = sorted(texts)
     parent = {i: i for i in ids}
 
@@ -106,19 +120,39 @@ def group_works(texts: dict) -> dict:
             parent[x] = parent[parent[x]]; x = parent[x]
         return x
 
-    sh = {i: shingles(texts[i]) for i in ids}
-    for i, a in enumerate(ids):
-        for b in ids[i + 1:]:
-            if overlap(sh[a], sh[b]) >= DUP_THRESHOLD:
-                ra, rb = find(a), find(b)
-                if ra != rb:
-                    parent[rb] = ra
+    pw = _pw if _pw is not None else pairwise(texts)
+    for (a, b), v in pw.items():
+        if v >= DUP_THRESHOLD:
+            ra, rb = find(a), find(b)
+            if ra != rb:
+                parent[rb] = ra
     return {i: find(i) for i in ids}
 
 
-def evaluate(claims: list, works: dict) -> tuple:
-    """→ (问题列表, 计量)。"""
-    problems, collapsed, checked = [], 0, 0
+def evaluate(claims: list, works: dict, pw: dict = None) -> tuple:
+    """→ (问题列表, 计量)。
+
+    ★★★★ **判「塌缩」用被引源之间的直接重叠，不用全局连通分量。**
+
+    原先用 `works`（并查集分量）判，实测把两类东西混在一起：
+
+    - 真塌缩：草稿与它的印本，直接重叠 0.9+；
+    - **传递噪声**：A↔B 0.35、B↔C 0.35，而 **A↔C = 0.000**，
+      整个工作区被一条条边串成一个 32 份的大分量（Lister 实测占 52%），
+      于是「引了这两份」必然被判成同一部。
+
+    现在的口径：**被引的源两两直接重叠都 ≥30%，才算实质只有 1 处证据。**
+    只要存在一对直接重叠 <30%，那就是两处证据，不报。
+
+    分量口径的结果**不丢弃**，作为 `参考·按连通分量` 一并打印——
+    [[empty-default-swallows-unknown]]：换口径不许把旧口径的数字静默吞掉。
+    """
+    problems, collapsed, checked, comp_only = [], 0, 0, 0
+    pw = pw or {}
+
+    def ov(a, b):
+        return pw.get((a, b), pw.get((b, a), 0.0))
+
     for c in claims:
         if c.get("status") == "superseded":
             continue
@@ -128,19 +162,26 @@ def evaluate(claims: list, works: dict) -> tuple:
         if len(sids) < 2:
             continue
         checked += 1
-        distinct = {works[s] for s in sids}
-        if len(distinct) < 2:
+        pairs = [(a, b) for i, a in enumerate(sids) for b in sids[i + 1:]]
+        lowest = min((ov(a, b) for a, b in pairs), default=1.0)
+        by_comp = len({works[s] for s in sids}) < 2
+        if lowest >= DUP_THRESHOLD:
             collapsed += 1
             problems.append(
                 f"`{c.get('claim_id')}`（{c.get('category')}）引了 {len(sids)} 个 source_id，"
-                f"**但它们是同一部作品的多个见证**——实质只有 1 处证据：{', '.join(sids[:4])}")
+                f"**但它们两两直接重叠都 ≥{DUP_THRESHOLD:.0%}（最低 {lowest:.0%}）"
+                f"——是同一部作品的多个见证**，实质只有 1 处证据：{', '.join(sids[:4])}")
+        elif by_comp:
+            comp_only += 1
     info = {
         "检查的断言": checked,
         "**全部来源塌缩成一部作品的**": collapsed,
-        "作品组数": len({v for v in works.values()}),
+        "参考·按连通分量多报的": comp_only,
+        "作品组数（连通分量，仅供参考）": len({v for v in works.values()}),
         "来源数": len(works),
         "口径": ("判「两份源是不是同一部作品」，**不判「引得对不对」**——"
-                 f"两两 {SHINGLE} 词片重叠 ≥{DUP_THRESHOLD:.0%}（以较短一侧为分母）即判同一作品"),
+                 f"**被引的源两两直接** {SHINGLE} 词片重叠都 ≥{DUP_THRESHOLD:.0%}"
+                 "（以较短一侧为分母）才判塌缩；**不做传递闭包**"),
     }
     return problems, info
 
@@ -167,34 +208,36 @@ def selftest() -> int:
                     for i in range(12)])
 
     print("── 正向：草稿与其印本必须判为同一作品 ──")
-    works = group_works({"pub-a": BODY_A, "ms-a": DRAFT_A, "pub-b": BODY_B})
+    TEXTS = {"pub-a": BODY_A, "ms-a": DRAFT_A, "pub-b": BODY_B}
+    PW = pairwise(TEXTS)
+    works = group_works(TEXTS, PW)
     chk("草稿与印本同组", works["pub-a"] == works["ms-a"])
     chk("另一部书不同组", works["pub-b"] != works["pub-a"])
 
     print("── 正向：断言只引「草稿＋其印本」→ 必须报出 ──")
     pb, info = evaluate([{"claim_id": "clm-x", "category": "heuristic",
-                          "source_ids": ["pub-a", "ms-a"]}], works)
+                          "source_ids": ["pub-a", "ms-a"]}], works, PW)
     chk(f"报出 1 条（实报 {len(pb)}）", len(pb) == 1 and "同一部作品" in pb[0])
 
     print("── 反向对照 ①：引两部真不同的书 → 不许报 ──")
     pb2, _ = evaluate([{"claim_id": "clm-y", "category": "heuristic",
-                        "source_ids": ["pub-a", "pub-b"]}], works)
+                        "source_ids": ["pub-a", "pub-b"]}], works, PW)
     chk("一条不报", not pb2)
 
     print("── 反向对照 ②：**只引一个源的断言不归本门管** ──")
     #   「只有一个来源」是 `check_claim_anchors` 的活；本门只判「多个源是不是同一物」。
     pb3, info3 = evaluate([{"claim_id": "clm-z", "category": "heuristic",
-                            "source_ids": ["pub-a"]}], works)
+                            "source_ids": ["pub-a"]}], works, PW)
     chk("不报，且不计入「检查的断言」", not pb3 and info3["检查的断言"] == 0)
 
     print("── 反向对照 ③：fact 类不要求多源，不归本门管 ──")
     pb4, info4 = evaluate([{"claim_id": "clm-f", "category": "fact",
-                            "source_ids": ["pub-a", "ms-a"]}], works)
+                            "source_ids": ["pub-a", "ms-a"]}], works, PW)
     chk("不报", not pb4 and info4["检查的断言"] == 0)
 
     print("── 反向对照 ④：superseded 的断言不判 ──")
     pb5, _ = evaluate([{"claim_id": "clm-s", "category": "heuristic", "status": "superseded",
-                        "source_ids": ["pub-a", "ms-a"]}], works)
+                        "source_ids": ["pub-a", "ms-a"]}], works, PW)
     chk("不报", not pb5)
 
     print("── ★ 反向对照 ⑤：分母取较短一侧——取长的会漏判 ──")
@@ -206,9 +249,41 @@ def selftest() -> int:
 
     print("── 反向对照 ⑥：引了不在语料里的 source_id → 跳过，不许当成独立证据 ──")
     pb6, info6 = evaluate([{"claim_id": "clm-u", "category": "heuristic",
-                            "source_ids": ["pub-a", "不存在的源"]}], works)
+                            "source_ids": ["pub-a", "不存在的源"]}], works, PW)
     chk("有效源不足 2 个 → 不计入检查（**由 check_claim_anchors 管**）",
         not pb6 and info6["检查的断言"] == 0)
+
+    print("── ★★★★ 反向对照 ⑦：**传递链不许把两处证据判成一处** ──")
+    #   夹具照着真事故造：Lister 工作区里一条条 0.3x 的边把 32 份源串成一个分量，
+    #   而分量内随手挑的三对重叠是 0.001 / 0.000 / 0.000。
+    #   [[fixtures-cleaner-than-the-real-thing]]：原先 6 条反向对照，一条都没造出链条。
+    HALF1 = _mk(*[f"chain left segment token {i} of the shared middle document" for i in range(30)])
+    HALF2 = _mk(*[f"chain right segment token {i} of the shared middle document" for i in range(30)])
+    MID = HALF1 + " " + HALF2                      # B 同时含 A 与 C 的内容
+    T2 = {"end-a": HALF1, "mid-b": MID, "end-c": HALF2}
+    PW2 = pairwise(T2)
+    #   ★ pairwise 的键按 sorted(ids) 排，取的时候必须两个方向都试——
+    #     第一版写死一个方向，`bc` 取到 None 当场炸了。宁可炸，也别默默取到 0.0。
+    def pv(x, y):
+        v = PW2.get((x, y), PW2.get((y, x)))
+        assert v is not None, f"自测取不到 {x}↔{y} 的重叠——夹具或键序变了"
+        return v
+    ab, ac, bc = pv("end-a", "mid-b"), pv("end-a", "end-c"), pv("mid-b", "end-c")
+    chk(f"链条造对了：A↔B {ab:.0%} ≥30%、B↔C {bc:.0%} ≥30%、**A↔C {ac:.0%} <30%**",
+        ab >= DUP_THRESHOLD and bc >= DUP_THRESHOLD and ac < DUP_THRESHOLD)
+    W2 = group_works(T2, PW2)
+    chk("并查集**确实**把 A 与 C 并成了一组（所以旧口径必然误报）",
+        W2["end-a"] == W2["end-c"])
+    pb7, info7 = evaluate([{"claim_id": "clm-t", "category": "heuristic",
+                            "source_ids": ["end-a", "end-c"]}], W2, PW2)
+    chk(f"**新口径不报**（实报 {len(pb7)}），并记下「按分量会多报 {info7['参考·按连通分量多报的']} 条」",
+        not pb7 and info7["参考·按连通分量多报的"] == 1)
+
+    print("── ★ 正例仍须是绿的：真塌缩不许因为这次改口径而漏掉 ──")
+    #   [[counter-example-red-can-be-red-by-coincidence]]：只看反例红了不算数。
+    pb8, _ = evaluate([{"claim_id": "clm-x2", "category": "heuristic",
+                        "source_ids": ["end-a", "mid-b"]}], W2, PW2)
+    chk(f"A 与 B 直接重叠 {ab:.0%} ≥30% → **仍然报出**（实报 {len(pb8)}）", len(pb8) == 1)
 
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
@@ -245,8 +320,9 @@ def main() -> int:
     if not texts:
         print("✗ **一份正文都读不到——未核验（不是通过）**"); return 3
 
-    works = group_works(texts)
-    problems, info = evaluate(claims, works)
+    pw = pairwise(texts)
+    works = group_works(texts, pw)
+    problems, info = evaluate(claims, works, pw)
     for k, v in info.items():
         print(f"  {k}: {v}")
     if not problems:
