@@ -1,29 +1,124 @@
-# Expression DNA and micro-behavior
+# Expression
 
-## Scope and assigned sources
+## ★★★★ 先说这一道是空的，以及为什么
 
-Pending. Use train-split source IDs only.
+**`expression` 道在台账里 0 份来源。**
 
-## Source-linked observations
+本项目对这一道的定义是**社媒类、即时、短、面向不特定读者的自我表达**。
+**1861–1919 的人不存在这种材料**——**这是真实缺口，不是抓源遗漏。**
 
-Pending.
+★ **不许用「他没有 expression 道材料」去推任何关于他的事。**
+它只说明**那种载体在他那个年代不存在**。
+
+## 那么这一道还能做什么：**把语域差量出来，并且量到年份上**
+
+★★★★ **全量实测（25 份 ≥500 词的来源，逐份数，分母是每份自己的词数）**：
+
+| 来源 | 词数 | `the writer` | `I` 密度 |
+|---|---|---|---|
+| v12 1891 论文 | 2,888 | 0 | **0.0‰**（一个 `I` 都没有） |
+| **v23 1902** | 7,341 | **9** | 0.8‰ |
+| **v30 1908** | 5,066 | **11** | **0.6‰**（全库最低） |
+| v24 1903 | 4,435 | 6 | 2.0‰ |
+| v32 1910 | 2,356 | 3 | 3.0‰ |
+| 1910 书 | 36,114 | 3 | 2.1‰ |
+| 1913 书 | 58,909 | 4 | 2.3‰ |
+| v39 1917 | 1,503 | 2 | 3.3‰ |
+| **1916 书** | 24,594 | **0** | 3.0‰ |
+| **v40 1918** | 1,589 | **0** | 1.3‰ |
+| **1919 书** | 24,124 | **0** | 1.7‰ |
+| **v12 1891 会场发言** | 886 | 0 | **16.9‰** |
+| **v24 1903 会场发言** | 2,128 | 1 | **16.0‰** |
+| **1914 宣誓证词** | 8,522 | 0 | **22.5‰** |
+
+★ **两条结论，第二条是我第一稿写错了才发现的：**
+
+**① 口述与书面的差贯穿整个生涯，且早在 1891 年就在。**
+会场发言 16–17‰、证词 22.5‰，而同期论文 0–3‰。**这不是晚年才有的现象。**
+
+**② `the writer` 不是他的「书面自称」，是一个阶段。**
+它集中在 **1902–1913**（v23 九处、v30 十一处），**1916 年之后归零**——
+1916 书、1918 论文、1919 书**各 0 处**。
+★★ **我第一稿写成「书面自称是 `the writer`」，那是把一个阶段说成了常态。**
+逐份量完才看见它有起有落。**[[samples-cannot-support-universal-claims]]：两份论文撑不起「他的书面语」。**
+
+★★★ **密度口径要说清**：上表的 `I` 是**整份文件**里的裸 `I` 除以该文件总词数——
+**证词那一份里包含提问方的话**，所以 22.5‰ 是**下界**；
+抓源方只数他自己的轮次得 35.6‰。**两个数口径不同，不许混用。**
+
+★ 两侧各一处逐字例：
+
+书面（1902 v23）：
+
+> THE system described in this paper been intro-- duced by the writer into the large machine
+> shop of the Beth- lehem Steel Company
+
+口述（1914 证词开场）：
+
+> I would like to have somebody pretty soon bring that blackboard up here, because I am going
+> to want to make some diagrams.
+
+## ★★★ E-1：**产物的语气必须取自口述那一侧**
+
+**这是本道给下游最重要的一条。**
+
+若从 **1902–1913 那批**论文与书里推语气，得到的会是一个用 `the writer` 自称、不说「我」的人——
+**那是那十年 ASME 论文的体例，不是他**（1916 年之后他自己就不用了）。
+`02-conversations` 里那些句子才是他：
+
+> If you would like, I can go into that subject and explain, but that is with you.
+
+> Wait a moment. Perhaps I made a mistake in what I said there.
+
+> No ; he — well, I really do not know. I have forgotten the details of it, and I would not
+> like to say.
+
+★ **同一条纪律在 Nasmyth #153 上写过一次**（他一生只有一份逐字口述，
+所以 `persona.md` 整节打折）。**Gantt 的情况相反：口述材料很厚，
+薄的是书面语的声口**——**两个人物的处置方向是反的，不要照抄。**
 
 ## Candidate Claims
 
-Pending.
+**X1（fact，可成条）**：**他在 1902–1913 的论文与书里用 `the writer` 自称，1916 年之后不再用；
+而口述场合始终用 `I`，密度高一个数量级。**
+- 证据 A：1902 v23（9 处 `the writer`，`I` 0.8‰）与 1908 v30（11 处，0.6‰）
+- 证据 B：**1916 书 / 1918 v40 / 1919 书各 0 处**——**这是「阶段」而非「常态」的关键反证**
+- 证据 C：口述侧 1891 会场 16.9‰、1903 会场 16.0‰、1914 证词 22.5‰
+- 语境：**论文 / 专著 / 会场 / 宣誓作证**，四个语境 → **达标**
+- ★ **这是一条关于「材料形态」的事实，不是关于「他这个人」的断言。**
+  **不许升格成「他在正式场合更谦逊」之类的性格判断**——
+  语域差异是体例决定的，[[measured-voice-in-the-wrong-register]]。
+
+★ **本道不产出其它断言。** 0 份来源的道不该有自己的观察。
 
 ## Contradictions and alternative explanations
 
-Pending.
+- **语域差可能全部由体例解释**：1900 年代 ASME 论文本来就要求第三人称。
+  ★★ **但「1916 年之后他自己不用了」这一点体例解释不了**——**体例不会只对他一个人放松。**
+  这是本道唯一一处指向「他自己变了」的证据，**而它仍然只是一个负向观察（0 处），不是正面陈述。**
+  ★ **反证方向**：若同期别人的 ASME 论文也一律用 `the writer`，那就是体例；
+  若有人用 `I`，才说明这是他的选择。**本轮没有做这个对照。**
+- **口述那一侧只有一场是宣誓作证**（另有 11 份会场发言本轮只读了 v16 一处）。
+  ★ 若那 11 份的密度接近书面语，则「十倍差」是**证词这一场**的特点，不是口述语域的特点。
+  **这一条悬着。**
 
 ## Unknowns and source gaps
 
-Pending.
+- **`expression` 道 0 份，且不可能有**（载体不存在）。
+- **11 份 ASME 会场发言本轮只读了 1 份**——上面那条反证做不了。
+- **没有任何私人书信**（McDonough School 档案 MS-11 的 8 封亲笔信未数字化）。
+  ★ 书信是介于书面与口述之间的语域，**若能取到，这一道才真正有东西**。
 
-## Proposed Holdout cases
+## Proposed evaluation-set candidates
 
-IDs only; research Agents must not inspect Holdout bodies.
+（本轮未提名。提名须在隔离样本划定之后、且不打开正文。）
 
 ## Handoff to adjudication
 
-Pending.
+- Validate origin independence and evaluation-set separation before promotion.
+- ★★★★ **本道给下游的第一条**：**`persona.md` 的语气取自口述那一侧，不取自论文与书。**
+  从 **1902–1913 那批**书面语推，会推出一个用 `the writer` 自称的人——**那是那十年的体例，不是他。**
+  ★ **他自己 1916 年之后就不这么写了**，这一点必须一起带上。
+- ★★ **X1 不许升格成性格判断。** 它是关于材料形态的事实。
+- ★ **`expression` 道为 0 要写进 `divergence-map`**，并写明是**载体不存在**，
+  不是**没找到**——**这两件事在产物里读起来完全不同。**
