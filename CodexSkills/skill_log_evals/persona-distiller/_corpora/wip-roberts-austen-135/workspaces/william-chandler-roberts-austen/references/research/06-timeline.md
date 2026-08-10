@@ -39,7 +39,7 @@ Train-split、`dimensions` 含 `timeline` 的 **1 份**：
 配合 `1889. Appointed to the Alloys Research Committee`——
 **合金研究委员会报告共五份：1891、1893、1895、1897、1899。**
 
-★ 这正是抓源员报「`Proc. IMechE 1880–1910` 在 archive.org `numFound 0`」的那批，
+★ 这正是抓源员报「Proc. IMechE 1880–1910 在 archive.org 检索 numFound 0（★ 有意不用反引号：**这是抓源记录，不是引文**）」的那批，
 也是 01-writings 观察 ① 里他说「标定方法的细节在那份 IMechE 报告里」所指的东西。
 **现在缺口有了确切的年份清单，下一轮可以按年去找，而不是按刊名盲搜。**
 

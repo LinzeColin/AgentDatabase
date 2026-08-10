@@ -48,7 +48,7 @@
   unprofitable」／「The construction and use of leaching vats or tubs are so well known that
   I have not deemed it necessary to illustrate them」（`src-7a3ec62e6f8b`）
   ——**取舍、知识边界、以及「众所周知的不必画」的省略判断。**
-- 「for the front part I prefer to make of mica, and colored glass」（`src-51e690f6a614`）
+- 「for the front part 1, I prefer to make of mica, and colored glass」（`src-51e690f6a614`）
 - 「I have shown the conductor made entirely of metal」（`src-6157ba6c3857`）
 
 ★★ **写断言只能靠这 8 句加装置描述本身。**
