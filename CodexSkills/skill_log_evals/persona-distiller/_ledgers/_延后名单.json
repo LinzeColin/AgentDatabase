@@ -2571,7 +2571,13 @@
    "★ 处置类的原键": "class",
    "★ disposition 未记": false,
    "verdict_doc": "_corpora/wip-paton-162/workspaces/william-andrew-paton/evals/00-结案.md",
-   "★ 一次实测事故": "v4 第一遍量出「基线均 349.9、候选更短 1/18 = 6%」，而子代理自报 372.7。**是我在写手还没跑完的时候读了 `/tmp/paton_baseline4.json`。**按最终文件（sha256 `a7701e131b13`）重量得上述数字。**手还在跑，就不许量它的输出。**"
+   "★ 一次实测事故": "v4 第一遍量出「基线均 349.9、候选更短 1/18 = 6%」，而子代理自报 372.7。**是我在写手还没跑完的时候读了 `/tmp/paton_baseline4.json`。**按最终文件（sha256 `a7701e131b13`）重量得上述数字。**手还在跑，就不许量它的输出。**",
+   "aliases": [
+    "William Paton",
+    "W. A. Paton",
+    "William A. Paton"
+   ],
+   "★ aliases 为什么要写": "队列 `_蒸馏队列.json` 里他叫 **William Paton**，本名单写的是全名，`next_person.py` 的 `norm()` 认不出是同一个人，**他会排回 NEXT**。实测撞到过。★ 只写显式别名，**不许让工具去猜**——猜会把同姓的另一个人并进来。"
   }
  ],
  "total": 136,
