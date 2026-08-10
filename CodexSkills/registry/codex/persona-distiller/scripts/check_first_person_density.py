@@ -74,6 +74,40 @@
   （见 `check_persona_frame_break` 的 `analytic` 模式）。**它只把数摆出来。**
 - **不判「够不够」。** 够不够取决于要出哪些用例——
   `voice`／`trajectory`／`contrast` 要他谈自己，`known`／`tool-use` 只要他讲做法。
+
+## ★★★★ 2026-08-11 新增的一个盲区：**译本里的 `I` 可能是译者的**
+
+Grotius #168 实测：18 源 / 2,140 万字符 / 裸 `I` 13,567，本件判为「93% 噪音」。
+去抽 6 份读那些命中的原文，**75.1% 既不是零件标号也不是罗马数字
+（卷章号只占 3.4%），而是真实的英文第一人称——说话的却不是他**：
+
+    · the translation with which **I have** accompanied the text,
+      **I have** omitted all the quotations
+    · **I agree** with a former ed[itor]
+
+**是译者与编者在卷首序、译注、编者按里说话。**
+Grotius 的五个英译本（Whewell 1853 / Kelsey 1925 / Evats 1682 /
+Magoffin 1916 / Barham 1839）与一本传记（Butler 1826）都带大段这种文字。
+
+### 射程声明（**用本件的读数之前必须知道**）
+
+**本件分不出「译文里的 I」与「译者说的 I」。**
+对**靠译本取材的人物**（Grotius、Cicero、Galen 这一类），
+本件给出的「实质第一人称句」**含译者，未去除**——
+那个数**不能直接当他的声口用**。
+
+★ 两头都不可用的形态（Grotius 实测）：
+  · **英译本**量到的是译者；
+  · **拉丁一手件**的 `ego` 有 **39%** 被 OCR 读成 `cgo`（长 s → f），
+    9/10 份的 `est` 存活率 ≤1.5% —— 量不到他。
+  → 这类人物**要先重 OCR 一手件**，再谈声口。
+
+★★ 怎么区分（尚未落成判据，先写在这里）：正文与**卷首序／译注／编者按**
+分开计数；后者通常集中在文件前部、且带 `translator`／`editor`／`preface`／
+`the reader` 一类词。**这个做法还没量过假阳，别当已验证的用。**
+
+关联 `measured-voice-in-the-wrong-register`（同一人物在 Campbell 删节本上
+量出 0.007/千词、Kelsey 全译本 0.85，**差 130 倍**）。
 """
 import argparse
 import json
