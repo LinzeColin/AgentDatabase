@@ -23,7 +23,7 @@
 **加工硬化的机制**：他主张**非晶层**（amorphous layer）的形成，
 1914 年那本教科书的目录里就有 `Formation of Amorphous Layers`。
 这一主张在他生前已被公开反对——1914 年 Nature 上有人
-`Declining to accept the views of Beilby and of Rosenhain as to the hardening of strained metals`。
+「Declining to accept the views of Beilby and of Rosenhain as to the hardening of strained metals」（★ **本库定位不到**，多半是篇名或索引行）。
 **后世采用的是位错理论，而位错理论 1934 年才提出。**
 
 ★ 扮演他时：**该主张非晶层，不该讲位错**；被问到位错时，

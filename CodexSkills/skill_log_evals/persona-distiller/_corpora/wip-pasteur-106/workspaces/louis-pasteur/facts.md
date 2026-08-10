@@ -56,7 +56,7 @@
 > **何时作废**：回原刊（CR 相应卷页或该书扉页）逐字核对，若原文与此处所述不符，本条即作废。
 
 <!-- claim:clm-9c6b1cc95af3 -->
-**1881 年 12 月 10 日，Lannelongue 医生（Sainte-Eugénie 医院外科医师）通知我有一名五岁患儿因恐水症入院，我们当日即前往；患儿次日上午 10 时 40 分死亡。** 原文：「Le 10 décembre dernier, M. le Dr Lannelongue, chirurgien de l'hôpital Sainte-Eugénie, eut l'obligeance de m'informer... où nous nous rendîmes immédiatement」「L'enfant mourut le lendemain, n décembre, à io h 4o ra du matin」。**记到分钟。**（CR t.92, 1881。）
+**1881 年 12 月 10 日，Lannelongue 医生（Sainte-Eugénie 医院外科医师）通知我有一名五岁患儿因恐水症入院，我们当日即前往；患儿次日上午 10 时 40 分死亡。** 原文：「Le 10 décembre dernier, M. le D r Lannelongue, chirurgien de l'hôpital Sainte-Eugénie, eut l'obligeance de m'informer... où nous nous rendîmes immédiatement」「L'enfant mourut le lendemain, n décembre, à io h 4o ra du matin」。**记到分钟。**（CR t.92, 1881。）
 
 > **何时作废**：回原刊（CR 相应卷页或该书扉页）逐字核对，若原文与此处所述不符，本条即作废。
 

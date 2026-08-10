@@ -1,0 +1,81 @@
+{
+ "生成时间_utc": "2026-08-10T02:00:30Z",
+ "人物": "Henry Laurence Gantt (1861-05-20 – 1919-11-23)",
+ "本轮抓源口径": {
+  "公有领域判据": "美国 1931 年前出版；本批最晚一件 1923（Clark 第 2 次印刷），全部合规",
+  "并发": "恒为 1，逐份串行下载",
+  "付费墙_验证码": "零次触碰；全部来自 archive.org 免费直链",
+  "全文判在与否的方法": "curl -sL 落地 + grep，并打印 wc -c 作分母；★ 不用 WebFetch 下「文中没有 X」的判断"
+ },
+ "计数": {
+  "source_id 份数": 33,
+  "checksum 去重后份数": 33,
+  "独立作品数（算出来的，不是手写的）": 19,
+  "独立作品数的算法": "P1 全体 30 份 − source_type=speech 的发言记录 10 份 − 被 derived_from 指到的书版次 1 份 = 19",
+  "独立作品清单": [
+   "annals-v61-1915-the-effect-of-idle-plant-on-costs-and-profits.txt",
+   "annals-v85-1919-influence-of-executives.txt",
+   "asme-v12-1891-steel-castings.txt",
+   "asme-v15-1894-recent-progress-in-the-manufacture-of-steel-castings.txt",
+   "asme-v23-1902-bonus-system-of-rewarding-labor.txt",
+   "asme-v24-1903-graphical-daily-balance-in-manufacture.txt",
+   "asme-v25-1904-modifying-systems-of-management.txt",
+   "asme-v30-1908-training-workmen-in-habits-of-industry-and-cooperation.txt",
+   "asme-v32-1910-the-mechanical-engineer-and-the-textile-industry.txt",
+   "asme-v36-1914-measuring-efficiency.txt",
+   "asme-v37-1915-the-relation-between-production-and-costs.txt",
+   "asme-v38-1916-productive-capacity-as-a-measure-of-the-value-of-an-industrial-property.txt",
+   "asme-v39-1917-expenses-and-costs.txt",
+   "asme-v40-1918-efficiency-and-democracy.txt",
+   "cir-1914-gantt-testimony.txt",
+   "industrial-leadership-1916.txt",
+   "kent-1913-investigating-an-industry-GANTT-INTRODUCTION-ONLY.txt",
+   "organizing-for-work-1919.txt",
+   "work-wages-profits-1913.txt"
+  ],
+  "发言记录（不计作独立作品）": [
+   "asme-v12-1891-gantt-verbatim-remarks.txt",
+   "asme-v15-1894-gantt-verbatim-remarks.txt",
+   "asme-v16-1895-gantt-verbatim-remarks.txt",
+   "asme-v18-1897-gantt-verbatim-remarks.txt",
+   "asme-v23-1902-gantt-verbatim-remarks.txt",
+   "asme-v24-1903-gantt-verbatim-remarks.txt",
+   "asme-v25-1904-gantt-verbatim-remarks.txt",
+   "asme-v36-1914-gantt-verbatim-remarks.txt",
+   "asme-v37-1915-gantt-tribute-to-frederick-w-taylor.txt",
+   "asme-v38-1916-gantt-remarks-in-presenting-his-paper.txt"
+  ],
+  "分档": {
+   "P1": 30,
+   "P2": 1,
+   "S2": 2
+  },
+  "分道": {
+   "writings": 19,
+   "decisions": 5,
+   "conversations": 12,
+   "timeline": 2,
+   "external": 3
+  },
+  "一手占比_P1除以全部": 0.9091,
+  "规范化文本总词数": 254539,
+  "其中一手总词数": 208439
+ },
+ "本轮做过的验证_可复跑": [
+  "① 表头验证：13 卷 ASME 逐卷读扉页，全部印着 AMERICAN SOCIETY OF MECHANICAL ENGINEERS——项目此前踩过 transactionsofam30amer 实为 CIVIL ENGINEERS 的坑",
+  "② 卷号以印本为准，不信 archive.org metadata：_1910_30 印本作「VOLUME 32—1910」；_1916_37 印本目次作「CONTENTS OF VOLUME XXXVIII」。两处 metadata 都错",
+  "③ 署名行逐字抄进 attribution，OCR 讹字用方括号标校读，不改原文",
+  "④ 重叠用 8-gram 独立复算并跑负对照：v39 论文 × Organizing for Work = 0.0%（0/1492）、Annals v61 × 同书 = 0.2%（3/1444）——证明 47–60% 那几对不是「管理学文本天生相似」",
+  "⑤ 逐字 vs 转述分开存档：v38「the author said:」+直接引语 → P1/first-person；v40「the author pointed out that…」间接引语 → P2/third-person，单独存成实物",
+  "⑥ 同名污染体检：33 份 grep「Mrs. H./Mrs. Henry」命中 0（`Mrs. H. L. Gantt` 确实在 v32 卷第 38185 行的夫人名单里，但那一页没被切进任何语料）",
+  "⑦ HTML 错误页体检：33 份全部非 HTML（项目此前有 4 份 archive.org 错误页混进 primary_ratio 的先例）",
+  "⑧ 论文起止边界逐篇翻到 DISCUSSION 行核过，别人的讨论一律不在一手文件内"
+ ],
+ "已知未解与射程外": [
+  "expression 道为 0——1861–1919 的人物没有社媒/短帖类材料，是真实缺口不是遗漏",
+  "ASME 编号 1479(v37) 与 1618(v39) 未能在印本 OCR 上核到；标题+署名+页眉三条证据充分，编号取自抓源清单与 vol.41 讣告列名",
+  "v39「Expenses and Costs」篇首署名被 OCR 吃掉姓（印作 By H. L. New Yorks, N. Y.）；归属靠同文件内页眉「H. L. GANTT 887」+ 本卷目次两处",
+  "未设任何 holdout：密封哪几份属评测设计决定，本轮只抓源，不替评测方选题",
+  "索引线索未追：1880-1904 累积索引另有「Gantt and Maury on non-aqueous vapors, VII. 735, 739, 686」（vol.7，1885-86），是否本人、是否合著均未核，未入库"
+ ]
+}

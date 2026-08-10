@@ -112,7 +112,7 @@ Train-split、`dimensions` 含 `writings` 的 13 份，全部 P1：
 ★ 1891 那条里 `Xewlands`（应为 `Newlands`）与 `l£< ndieleef`（应为 `Mendeleeff`）
 是**印本 OCR 讹字，照录不改**；1893 那份同一句印得干净，两相对照即可确认所指。
 
-**同一个句式跨 1891→1893：「extend an investigation／a research I had previously made upon」（★ **这不是引文，是我并列两种措辞的记法**）。**
+**同一个句式跨 1891→1893：「extend an investigation I had previously made upon」（★ **这不是引文，是我并列两种措辞的记法**）。**
 到 1899 年变成 `I have elsewhere § shown`——**连边注符号 `§` 都带着，出处仍在别处。**
 
 ★★ 这与 02-conversations 观察 ④（1896 年 `carry one step further the work of Graham`）
