@@ -49,9 +49,18 @@ holdout 的正文按设计不许出现在产物里；拿 holdout 去定位引文
 
 | | |
 |---|---|
-| 长逐字引文 | **402 条** |
+| 长逐字引文 | **432 条** |
 | **引到别人的话** | **0 条** |
-| 在语料里定位不到（**未判，不是通过**） | 29 条 |
+| 在语料里定位不到（**未判，不是通过**） | **22 条** |
+| 带省略号、分段逐条都在同一源里（引文是真的，只是判不了说话人） | 8 条 |
+
+★★★★ **402 那个数是我加错的**：逐工作区的表是对的（25+29+26+86+14+12+7+57+53+13+22+28+30+30），
+**我心算成了 402，真值 432**，而且它已经写进了一次提交信息。
+[[self-reported-numbers-must-be-computed]]——**列都在眼前了还是要让机器加。**
+
+★ 「定位不到」由 29 降到 22，降的那 7 条不是修好了文档，是**本件补上了省略号分段定位**：
+带 `…` 的引文此前一律落进「定位不到」，而 `check_lane_quotes_verbatim.verify`
+早就按 `…` 分段验了——**同一批引文在两件判据下一绿一红，是两件判据的口径没对齐。**
 
 逐工作区：Carver 86／Mendel 57／Nasmyth 53／Whitworth 30／Thomson 30／Bessemer 29／
 Rosenhain 28／Blackwell 26／Adams 25／RA 22／Coffin 14／Pasteur 13／Koch 12／Lister 7。
@@ -205,6 +214,9 @@ def _not_a_quote(t: str) -> bool:
     return False
 
 
+_ELISION_RE = re.compile(r"\s*(?:\.\.\.|…)\s*")
+
+
 def load_corpus(ws: pathlib.Path) -> list:
     """**只读 train**（`references/sources/`），holdout 一律不进来。"""
     out = []
@@ -301,6 +313,7 @@ def check(quotes, corpus, subject: str) -> dict:
     sub_sur = surname_of(subject)
     normed = [(f, norm(t)) for f, t in corpus]
     wrong, unlocated, declared, by_projection = [], [], [], []
+    elided_ok = []   # 带省略号、分段都在同一源里、但首段太短判不了说话人
     for item in quotes:
         src, q = item[0], item[1]
         around = item[2] if len(item) > 2 else ""     # 引文在产物里所处的那段文字
@@ -311,6 +324,50 @@ def check(quotes, corpus, subject: str) -> dict:
             if i >= 0:
                 where = (f, t, i)
                 break
+        if where is None:
+            # ★★★★ 2026-08-10：**带省略号的引文此前一律落进「定位不到」。**
+            #   Nasmyth #153 实测：7 条「定位不到」里 **5 条只是带了 `…`**——
+            #     `It would be blamable indeed … were I to suppress the name of …`
+            #     `devoting himself to astronomical … researches`
+            #   `check_lane_quotes_verbatim.verify` 早就按 `…` 分段验了，**本件没有**，
+            #   于是同一批引文在两件判据下一绿一红。**两件判据的口径必须自己对齐。**
+            #
+            #   ★ 用**第一段**去定位，不是最长的那段：
+            #     本件接下来要往回看 260 字符找说话人标记，
+            #     而那个标记在**引文开头之前**——锚到后面的段就找不到它了。
+            #   ★★ 第一段仍要够长（`MIN_QUOTE`），否则短前缀会乱命中。
+            segs = [x.strip() for x in _ELISION_RE.split(nq) if x.strip()]
+            if len(segs) > 1:
+                head = segs[0]
+                if len(head) >= MIN_QUOTE:
+                    for f, t in normed:
+                        i = t.find(head)
+                        if i >= 0:
+                            where = (f, t, i)
+                            break
+                if where is None:
+                    # ★★★★ **首段太短，判不了说话人——但那不等于「语料里没有」。**
+                    #   只要**每一段都在同一份来源里、且顺序不乱**，这条引文就是真的；
+                    #   缺的只是「往回看 260 字符找说话人标记」所需要的那个位置。
+                    #   ★ 分开报：混进「定位不到」会把「判据够不着」说成「文档有问题」，
+                    #     那正是 [[checker-blindspot-read-as-defect]] 记的那个形状。
+                    long_segs = [x for x in segs if len(x) >= 12]
+                    for f, t in normed:
+                        pos, ok = 0, bool(long_segs)
+                        for x in long_segs:
+                            j = t.find(x, pos)
+                            if j < 0:
+                                ok = False
+                                break
+                            pos = j + len(x)
+                        if ok:
+                            elided_ok.append({"出处": src, "引文": q,
+                                              "语料": pathlib.Path(f).name})
+                            break
+                    else:
+                        pass
+                    if elided_ok and elided_ok[-1].get("引文") == q:
+                        continue
         if where is None:
             # ★ 兜底：既有判据的投影（抹平标点/markdown/引号形态）与长 s 折叠。
             #   命中就**不算「定位不到」**——但那一层没有位置可用，
@@ -357,6 +414,7 @@ def check(quotes, corpus, subject: str) -> dict:
             "**引到别人的话**": wrong,
             "★ 只在投影/长s折叠后才定位到的（在语料里，但本件判不了说话人）": by_projection,
             "★ 正文已注明出自他人的（不判为误引，但列出来）": declared,
+            "★ 带省略号、分段都在同一源里（在语料里，但首段太短，说话人判不了）": elided_ok,
             "★ 在语料里定位不到的（本件未判，不是通过）": unlocated}
 
 
@@ -536,6 +594,13 @@ def main() -> int:
     if bp:
         print(f"\n★ 只在投影/长 s 折叠后才定位到的：{len(bp)} 条"
               f"（**它们在语料里**，但那一层没有位置，说话人本件判不了）")
+    eo = r.get("★ 带省略号、分段都在同一源里（在语料里，但首段太短，说话人判不了）") or []
+    if eo:
+        print(f"\n★ 带省略号、分段逐条都在同一份来源里：{len(eo)} 条"
+              "（**引文是真的**，缺的只是判说话人所需要的那个位置——"
+              "**这一档不该混进「定位不到」**）")
+        for x in eo[:6]:
+            print(f"  · {x['出处']}：「{x['引文'][:72]}」")
     un = r["★ 在语料里定位不到的（本件未判，不是通过）"]
     if un:
         print(f"\n⚠ ★ 在语料里定位不到的（**本件未判，不是通过**）：{len(un)} 条")
