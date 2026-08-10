@@ -98,10 +98,39 @@ def run_checker(ws: pathlib.Path) -> dict:
     return json.loads(r.stdout)
 
 
-def is_certain(a: str, b: str) -> bool:
-    """去掉来源后缀之后词干相同 → **机械上确定是同一件的另一份副本**。"""
+# ★★★ 2026-08-10：`SUFFIX` 里有 `bsb`/`alt`/`bd\d`，**独独没有语种标记**。
+#   于是 `canalisation-abfuhr-1869-de` ↔ `canalisation-abfuhr-1869-bsb`
+#   （同一份德文报告的两个扫描来源，重叠 0.68）被判成「词干不同」，
+#   Virchow 整个工作区因此报「机械上确定 **0 对**」，126 对全推给人读。
+#
+#   ★★ **但语种标记不能无条件剥**：`x-de` ↔ `x-en` 是原文与译本，**不是同一件的副本**。
+#   （本项目已记过「判据的作品分组是语言盲的」这个坑。）
+#   所以剥语种标记有一个前提：**台账说这两份是同一种语言**。
+#   台账没写 language 的，就**不剥**——宁可漏报，不可错并。
+LANG_SUFFIX = re.compile(r"[-_](?:de|en|fr|la|it|es|nl|ru|el)$", re.I)
+
+
+def strip_lang(stem: str) -> str:
+    prev = None
+    while prev != stem:
+        prev, stem = stem, LANG_SUFFIX.sub("", stem)
+    return stem
+
+
+def is_certain(a: str, b: str, lang_a: str | None = None, lang_b: str | None = None) -> bool:
+    """去掉来源后缀之后词干相同 → **机械上确定是同一件的另一份副本**。
+
+    ★ 语种标记只在**台账明写两侧同语种**时才一并剥掉；
+      两侧语种不同、或有一侧没写，一律不剥（`x-de` vs `x-en` 必须判为不确定）。
+    """
     sa, sb = pathlib.PurePath(a).stem, pathlib.PurePath(b).stem
-    return sa != sb and strip_suffix(sa) == strip_suffix(sb)
+    if sa == sb:
+        return False
+    if strip_suffix(sa) == strip_suffix(sb):
+        return True
+    if lang_a and lang_b and lang_a == lang_b:
+        return strip_lang(strip_suffix(sa)) == strip_lang(strip_suffix(sb))
+    return False
 
 
 def decide(pairs: list[dict], byname: dict[str, dict], ws: pathlib.Path
@@ -198,8 +227,10 @@ def main() -> int:
 
     rows = [json.loads(l) for l in led.read_text(encoding="utf-8").splitlines() if l.strip()]
     byname = {pathlib.PurePath(r.get("local_path") or "").name: r for r in rows}
-    certain = [p for p in pairs if is_certain(p["甲"], p["乙"])]
-    uncertain = [p for p in pairs if not is_certain(p["甲"], p["乙"])]
+    lang = {k: (v.get("language") or None) for k, v in byname.items()}
+    _cert = lambda p: is_certain(p["甲"], p["乙"], lang.get(p["甲"]), lang.get(p["乙"]))
+    certain = [p for p in pairs if _cert(p)]
+    uncertain = [p for p in pairs if not _cert(p)]
     print(f"   **机械上确定（去后缀后词干相同）：{len(certain)} 对**")
     print(f"   需要人读的：{len(uncertain)} 对"
           + ("　★ 里面可能有**跨作品的真实重印**，方向不能靠干净度猜" if uncertain else ""))
