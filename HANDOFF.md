@@ -267,6 +267,16 @@ cd ~/Documents/Codex/GithubProject/AgentDatabase && git pull
 | **最大的单个已跟踪文件** | **18.1 MB**（`probe-adams-131/raw/whoswho1922_djvu.txt`） |
 
 ★ **没有文件超过 GitHub 的 100 MB 硬上限**，所以不会因为单文件被整推拒掉。
+
+★★★★ **`git push --dry-run` 2026-08-10 实跑通过**（联了服务器，只是不更新 ref）：
+
+```
+To github.com:LinzeColin/AgentDatabase.git
+ * [new branch]  claude/character-distillation-skill-reorganize-d57595 -> ...
+```
+
+**远端可达、凭据可用、分支会作为新分支建立、无任何拒绝。**
+移交那晚照 §7 的三条命令走即可。
 ★★ 但这是一次**大推**（语料整个在库里），网络慢的时候会跑很久——
 **移交那晚给它留时间，别掐掉。**
 ★★★ `git count-objects` 会报两条 `garbage found: …/worktrees/agentdb-nasmyth-153/info/sparse-checkout`
