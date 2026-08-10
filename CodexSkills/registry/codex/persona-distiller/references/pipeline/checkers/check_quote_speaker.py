@@ -184,6 +184,10 @@ def surname_of(name: str) -> str:
 _URLISH = re.compile(r"^(?:https?://|www\.|/|\./|[A-Za-z]:\\)|\.(?:txt|md|json|jsonl|pdf|html?)$", re.I)
 
 
+_CJK_PUNCT = re.compile(r"[《》「」『』，、。；：？！（）【】]")
+_TABLE_ROW = re.compile(r"^\s*\|")
+
+
 def _not_a_quote(t: str) -> bool:
     """URL、路径、索引行**不是引文**——扩清单进研究道之后才冒出来的一类噪声。
 
@@ -204,6 +208,16 @@ def _not_a_quote(t: str) -> bool:
       · **索引行**：逗号分隔且以页码收尾（`…, 290`），且不含句号句读。
     """
     t = t.strip()
+    # ★★★★ 2026-08-10：**这三条是从 `check_lane_quotes_verbatim` 移植过来的。**
+    #   同一天我在那件判据上加了它们，**本件一条都没有**——
+    #   于是同一批字符串在两件判据下一个被滤掉、一个被当成「定位不到的引文」。
+    #   **今天第三次撞上「两件判据的口径没对齐」**（前两次：省略号分段、行内反引号）。
+    #   实测本件因此虚报的：Bessemer 2 条（`《The Times》…，落款`）、
+    #   Blackwell 1 条（表格行 `| P1 | …`）、Roberts-Austen 2 条、Whitworth 1 条（索引行）。
+    if _CJK_PUNCT.search(t):        # 带中日韩标点 → 是我写的散文，不是英文逐字引文
+        return True
+    if _TABLE_ROW.match(t):         # Markdown 表格行
+        return True
     if _URLISH.search(t):
         return True
     if " " not in t or re.fullmatch(r"[\w.\-/]+", t):
