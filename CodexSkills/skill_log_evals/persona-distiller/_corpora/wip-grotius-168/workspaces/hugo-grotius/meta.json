@@ -79,5 +79,14 @@
   "subject_origin": "historical",
   "target_id": "tgt-fefe172ec318",
   "time_scope": "all available periods, separated by role and material drift",
-  "updated_at": "2026-08-10T20:02:37Z"
+  "updated_at": "2026-08-10T20:02:37Z",
+  "attribution_basis": {
+    "authority": "题名页署名（逐份回读，不是靠编目）。印刷时代人物：拉丁本作属格 `HVGONIS GROTII …`／英译本作 `BY HUGO GROTIUS`。规范档三源互证：Wikidata Q154959 ∧ LCCN n78087113（标目含生卒 1583-1645）∧ GND 118542702（b=1583-04-10 d=1645-08-28）。★ VIAF 通道被 Cloudflare 403 挡住、未绕，本依据**不使用任何 VIAF 号**。",
+    "citation": "逐份依据见 `_corpora/_探测记录/168-grotius-可得性探测.md` 与抓源 MANIFEST 的「凭什么判定作者」栏；同名排除依据见 `wip-grotius-168/00-同名判定.md`",
+    "disputed_policy": "三类一律不计入 P1：①**弟弟 Willem de Groot 的自著**（规范拉丁名 `Guilelmus Grotius`，职业 Jurist，题名页作 `Auctore Guilielmo Grotio jcto Delphensi`——代尔夫特＋法学家＋Grotius＋自然法四特征与本人全撞）；②**书信集里的收信人抬头**（`GVILIELMO/CORNELIO/PETRO GROTIO` 是收信人，不是作者——`epistolae_1687` 里63 处裸 `GROTII` 命中有 34 处属此类）；③**impressum 里的 de Groot 是出版者不是作者**（`Typis Wilhelmi de Groot` 莱顿大学印刷商、Michiel de Groot 书商）。★ `disputed_works` 非空：抓源阶段已实际剔除两份，逐条列出。",
+    "disputed_works": [
+      "thetworuthofthechr00kaftuoft —— 探测清单误记为 De Veritate 英译，回读题名页实为 Julius Kaftan《The Truth of the Christian Religion》T. & T. Clark 1894，且印着 'This Translation is Copyright by arrangement'。两书英译题名完全相同；**它能过年份门（1894 ≤1930），只在归属上不成立**。已删除，换用真本（题名页 `BY HUGO GROTIUS`）",
+      "hugonisgrottiide00grotuoft —— 清单记为 1646 拉丁影印，实为 Kelsey 1925 英译第二卷（前言页字面 `VOLUME TWO THE TRANSLATION … CLARENDON PRESS … 1925`），8-gram 与 Kelsey 重合 72.5%（两个对照组均 0.0%）。保留为 `EXCLUDED_` 前缀，不计份数"
+    ]
+  }
 }
