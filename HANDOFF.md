@@ -34,7 +34,7 @@
   python3 -c "import json;print(len(json.load(open('CodexSkills/registry/codex/persona-distiller-group/team-index.json'))['products']))"
   ```
 - **延后／拒发名单：137 条**（`_ledgers/_延后名单.json` 的 `total`），
-  其中 **77 条**带 `pd_scope_pending`（等待裁定 ㉜）。
+  其中 **75 条**带 `pd_scope_pending`（等待裁定 ㉜）。
 - **刚做完**：
   - **#156 Henry Gantt 记拒发**——真 delta **+0.0078**，quick 门 +0.03，**两席跨零**
     （F −0.0125 / G +0.0281）。判决书 `_corpora/wip-gantt-156/workspaces/henry-gantt/evals/00-结案.md`。
@@ -72,7 +72,7 @@
   文件头留了数字，别再建一遍。
 - **待用户裁定的条目**：见任务列表里带「待裁定」字样的那些（⑤⑱⑲⑳㉑㉒㉓㉕㉖㉚㉛㉜**㉝**）。
   **这些不是你能自己决定的**，遇到就停下来问。
-  ★ **㉜（PD-only 规则的射程）已经在挡排期**：延后名单里 `pd_scope_pending` 已 **77 人**，
+  ★ **㉜（PD-only 规则的射程）已经在挡排期**：延后名单里 `pd_scope_pending` 已 **75 人**，
   而剩余队列里生年 <1913（可能可做）的还有 **62 人**——**队列没被规则耗尽**。
   **这些延后都是可一行反转的**，不要因为它没裁定就停下来。
   ★ **㉝ 是本轮新增**：`status: hypothesis` 在流程里没有落脚点，
@@ -260,7 +260,7 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/check_disposition_e
 |---|---|
 | `~/Documents/Codex/GithubProject/AgentDatabase/HANDOFF.md` | **不存在** |
 | 主树分支 / 状态 | `main` / 干净 |
-| 主树 HEAD vs 本分支 | **落后 862 个提交** |
+| 主树 HEAD vs 本分支 | **落后 877 个提交**（同上，当场跑） |
 
 **HANDOFF.md 只在 `claude/character-distillation-skill-reorganize-d57595` 上。**
 移交那晚要做完的是：
@@ -277,7 +277,7 @@ cd ~/Documents/Codex/GithubProject/AgentDatabase && git pull
 
 | 项 | 值 |
 |---|---|
-| 待推送提交 | **870** |
+| 待推送提交 | **877**（★ 这个数每提交一次就变，**要报就当场跑** `git rev-list --count origin/main..HEAD`） |
 | 仓内 pack | **835.94 MiB** |
 | 已跟踪的语料文件 | **9,578** |
 | **最大的单个已跟踪文件** | **18.1 MB**（`probe-adams-131/raw/whoswho1922_djvu.txt`） |
