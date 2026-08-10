@@ -29,13 +29,49 @@
 
 ## 2. 现在做到哪（**更新这一节，不要更新别处**）
 
-- **已入库：101 个产物**（2026-08-10 实测）。★ **要报这个数就当场跑一遍**，不要抄这一行：
+- **已入库：102 个产物**（2026-08-11 实测）。★ **要报这个数就当场跑一遍**，不要抄这一行：
   ```bash
   python3 -c "import json;print(len(json.load(open('CodexSkills/registry/codex/persona-distiller-group/team-index.json'))['products']))"
   ```
-- **延后／拒发名单：137 条**（`_ledgers/_延后名单.json` 的 `total`；★ 要报这个数就当场跑一遍，别抄），
-  其中 **75 条**带 `pd_scope_pending`（等待裁定 ㉜）。
-- **刚做完**：
+- **延后／拒发名单：139 条**（2026-08-11 实测），其中 **75 条**带 `pd_scope_pending`（等待裁定 ㉜）。
+  ★ **列表的键是 `deferred`，不是 `items`/`entries`**——写 `d.get("items") or []` 会**静默返回 0**，
+  我 2026-08-11 差一点把这个 0 写进本节。**取不到就让它炸，别给空默认**：
+  ```bash
+  python3 -c "import json;d=json.load(open('CodexSkills/skill_log_evals/persona-distiller/_ledgers/_延后名单.json'));i=d['deferred'];print(len(i), sum(1 for x in i if x.get('pd_scope_pending')))"
+  ```
+
+### 2026-08-11 这一天（**接手前最后一批改动，都在判据层**）
+
+- **#165 Walter A. Shewhart 已入库**（第 102 个，v0.0.0.1，财务合规师族）。
+  delta **+0.1822**、两席同号 16/16、四道门全过；★ 但预登记要求的单列改了结论——
+  抽掉「候选有文献而基线没有」的 3 个套组后剩 13 题只有 **+0.0812 / 1.71 SE**，
+  判为**不进第 2 轮**（结构性限制，不是噪声）。他也是**全库第一个 `capability_evidence: true`**。
+- **#168 Hugo Grotius 开工**（政治法律师，1583–1645）。同名护栏已过
+  （`ready/single/grotius-hugo-1583`），**12 个候选里 3 位只靠一个特征才分得开**；
+  抓源在跑。★ 开工须知全在 `_corpora/wip-grotius-168/00-同名判定.md`，
+  探测在 `_corpora/_探测记录/168-grotius-可得性探测.md`。
+  **最要紧的一条：不要用 Campbell 1901 译本量声口**——它只有 Kelsey 1925 的 36% 长、
+  整章没收 Prolegomena，密度会低 **130 倍**（0.007 vs 0.85 每千词），差点据此记了延后。
+- **四处判据缺陷，都是「门是绿的而它根本没在查」那一类**：
+  1. **交接文档的第一条命令跑不通**（`namesake_gate.py <人名>` 而工具要 `--name`）。
+     已落成 `check_handoff_commands.py`（接进 `finalize_release.py`）。
+  2. **内容层三项检查在每一次打包里都没跑过**：`package_target.py` 跑
+     `quality_check --strict` **不带 `--cache`**，而「未做」不算 warning。
+     已改成自动用 `<工作区>/raw`，两者都没有时记 warning。
+  3. **`check_claim_coverage` 的 join key 两边算法不一样**：台账存 `sha256(原始字节)`，
+     判据算 `sha256(剥表头后的正文)` → 四个带抓源表头的工作区**一条都回连不上**。
+  4. **`check_verdict_attribution` 只扫一层**，真值集少了一个人（96 → 112）。
+- **全库装饰性引用射程已量清**（`_ledgers/_装饰性引用射程-2026-08-11.csv/.md`）：
+  29 个工作区**全部可量**，干净 25、有装饰性引用 4，
+  **102 个已交付产物里一个都不涉及**。
+  ★ 这个数是**四步**才稳下来的，中途报出的「5 个回连不上、6 个无 raw/」**全是假象**。
+- ★★ **6 个工作区的路径重了一层**：`wip-X/workspaces/<slug>/<slug>/`
+  （Barton #117 / Fleming #111 / Nightingale #112 / Osler #110 / Sorby #133 / Virchow #109）。
+  **glob `workspaces/*/` 拿到的是只含内层的空壳。**
+  目录本身没动（都是已归档件，移交前不做大改动），改的是工具的射程——
+  写新工具时**两层都要扫**。
+
+- **更早做完的**：
   - **#156 Henry Gantt 记拒发**——真 delta **+0.0078**，quick 门 +0.03，**两席跨零**
     （F −0.0125 / G +0.0281）。判决书 `_corpora/wip-gantt-156/workspaces/henry-gantt/evals/00-结案.md`。
     ★ 盲判装置是至今最干净的一次：均长比 1.01、**「候选更短 ≥25%」首次通过（7/16）**、
@@ -502,7 +538,7 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/check_disposition_e
 |---|---|
 | `~/Documents/Codex/GithubProject/AgentDatabase/HANDOFF.md` | **不存在** |
 | 主树分支 / 状态 | `main` / 干净 |
-| 主树 HEAD vs 本分支 | **落后 877 个提交**（同上，当场跑） |
+| 主树 HEAD vs 本分支 | **落后 1027 个提交**（2026-08-11 当场跑；★ 每提交一次就变） |
 
 **HANDOFF.md 只在 `claude/character-distillation-skill-reorganize-d57595` 上。**
 移交那晚要做完的是：
@@ -519,7 +555,7 @@ cd ~/Documents/Codex/GithubProject/AgentDatabase && git pull
 
 | 项 | 值 |
 |---|---|
-| 待推送提交 | **877**（★ 这个数每提交一次就变，**要报就当场跑** `git rev-list --count origin/main..HEAD`） |
+| 待推送提交 | **1027**（2026-08-11 实测；★ 每提交一次就变，**要报就当场跑** `git rev-list --count origin/main..HEAD`） |
 | 仓内 pack | **835.94 MiB** |
 | 已跟踪的语料文件 | **9,578** |
 | **最大的单个已跟踪文件** | **18.1 MB**（`probe-adams-131/raw/whoswho1922_djvu.txt`） |
@@ -588,7 +624,7 @@ To github.com:LinzeColin/AgentDatabase.git
    我不会自己按下去——它是对外可见且不易撤回的。
    - 实测（2026-08-10，**不改变任何远端状态**）：`git push --dry-run` 通过，
      远端可达、分支会**新建**（`* [new branch]`），无拒绝；
-     本分支领先 `origin/main` **929 个提交**，包 **835.94 MiB**，最大被跟踪文件 18.1 MB（无超 100MB 的）。
+     本分支领先 `origin/main` **1027 个提交**（2026-08-11 实测），包 **835.94 MiB**，最大被跟踪文件 18.1 MB（无超 100MB 的）。
    - **合并之前那句一句话 prompt 不成立**——主树上没有 `HANDOFF.md`。
 2. **`_scratch/agentdb-nasmyth-153` 这个 worktree 是我开的，得我收**：
    合并 → 关 PR → `git worktree remove` → 删分支 → `git gc`（**禁止 `--prune=now`**）。
