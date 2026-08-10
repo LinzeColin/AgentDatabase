@@ -113,6 +113,18 @@ cd CodexSkills/registry/codex/persona-distiller
 find CodexSkills/skill_log_evals/persona-distiller/_corpora -path '*<slug>*/evidence/claims.jsonl'
 ```
 
+### ★★ 抓源方**不要**把下载件写进 `raw/`
+
+`ingest.py` 会把每份源**复制两处**：`raw/src-<id>/<名>.txt` 与
+`references/sources/src-<id>/<名>.normalized.txt`。
+所以如果抓源方直接把原件下载到 `raw/`，灌完之后 `raw/` 里会同时有
+`raw/<名>.txt` 与 `raw/src-<id>/<名>.txt` —— **同一份文件两次**。
+
+**给抓源子代理的指令里，落盘目录要写工作区外的暂存目录**（或 `_staging/`），
+灌完再删暂存。2026-08-10 我给 Pacioli 的指令写成了 `raw/`，
+于是那个工作区成了全库 28 个里**唯一**有同名冲突的一个
+（文件 17 份、按 basename 去重后 10 份）。
+
 ★ 路径猜错时判据会老实返回 `状态: …未核验（不是通过）`——
 **但只有你把 `状态` 字段打印出来才看得见。** 2026-08-10 我因此差点把「没核过」记成「修好了」。
 
