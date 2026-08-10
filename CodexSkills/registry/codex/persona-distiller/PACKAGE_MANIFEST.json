@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "6473e440d010e52a60f1fe5c0394041d3fa4d8d42feb19b8ee0858b2ee1fe71d",
-      "size_bytes": 135072
+      "sha256": "31efcdd12625221936f035c5309b641bd30ed746fbd621e91dc27d77fb5c616e",
+      "size_bytes": 135839
     },
     {
       "path": "VERSION",
@@ -450,6 +450,11 @@
       "size_bytes": 5574
     },
     {
+      "path": "references/pipeline/checkers/00-next_person.py-是遗留的-别跑.md",
+      "sha256": "74a29c59fb5c447bb21ee523da6b173a79c593e28919eb87b6653b2fa8ca0251",
+      "size_bytes": 2615
+    },
+    {
       "path": "references/pipeline/checkers/README.md",
       "sha256": "100358609cccc075698fc7e56f6194bf219cda89154be10cad4a3a7740193192",
       "size_bytes": 5276
@@ -566,8 +571,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_contract_drift.py",
-      "sha256": "c13cde5521633db6ee2e2887c6d3f89983ab82eb4cbfb436f06d88f547c514bb",
-      "size_bytes": 29157
+      "sha256": "6e049f1c85063031709eb965cd1ec0a79588869a46dac35ca260b8647b41626b",
+      "size_bytes": 30379
     },
     {
       "path": "references/pipeline/checkers/check_corpus_ceiling.py",
@@ -651,8 +656,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_handoff_commands.py",
-      "sha256": "6a03e3ab7de7be4b8c7fe7ee8707b1ae644397673d49b8a84ae08189d64204fe",
-      "size_bytes": 29084
+      "sha256": "1473ad35d1b0d5dfc9457b67d96c192e3ec99c1f62a2784c3e85e27d37adee46",
+      "size_bytes": 30582
     },
     {
       "path": "references/pipeline/checkers/check_holdout_mention.py",
@@ -673,6 +678,11 @@
       "path": "references/pipeline/checkers/check_lane_quotes_verbatim.py",
       "sha256": "b084c226fb7df162732ca9063af9ce65789a5b62474a459f13561516c4425d9f",
       "size_bytes": 34485
+    },
+    {
+      "path": "references/pipeline/checkers/check_longs_corruption.py",
+      "sha256": "10f58362b0f34deb7ef1a7dad7f350d57f44e0e52a567a60a9a72a66c93ecd64",
+      "size_bytes": 18821
     },
     {
       "path": "references/pipeline/checkers/check_material_split.py",
@@ -920,6 +930,11 @@
       "size_bytes": 12737
     },
     {
+      "path": "references/pipeline/checkers/emit_lane_scope.py",
+      "sha256": "d5d8890ec6483bf364756902530be261e1a9f382367013957f782e3e079842d7",
+      "size_bytes": 14017
+    },
+    {
       "path": "references/pipeline/checkers/finalize_release.py",
       "sha256": "ea9ea3ba32fc0bce06a5caf4f44fca10dd53c47e86b7d724ac8b524c569da30f",
       "size_bytes": 7466
@@ -951,8 +966,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "0e85a9790c5f6095d7b5c6e4936534ea86b2033c637f8e6f9d3008438b104ccf",
-      "size_bytes": 225935
+      "sha256": "ec64a71520cc15341e823866ffcb9c900c7dbafda877049ce18708a88ecacf99",
+      "size_bytes": 231499
     },
     {
       "path": "references/pipeline/checkers/show_fetch_distance.py",
@@ -1311,8 +1326,8 @@
     },
     {
       "path": "scripts/check_contract_drift.py",
-      "sha256": "c13cde5521633db6ee2e2887c6d3f89983ab82eb4cbfb436f06d88f547c514bb",
-      "size_bytes": 29157
+      "sha256": "6e049f1c85063031709eb965cd1ec0a79588869a46dac35ca260b8647b41626b",
+      "size_bytes": 30379
     },
     {
       "path": "scripts/check_corpus_ceiling.py",
@@ -1396,8 +1411,8 @@
     },
     {
       "path": "scripts/check_handoff_commands.py",
-      "sha256": "6a03e3ab7de7be4b8c7fe7ee8707b1ae644397673d49b8a84ae08189d64204fe",
-      "size_bytes": 29084
+      "sha256": "1473ad35d1b0d5dfc9457b67d96c192e3ec99c1f62a2784c3e85e27d37adee46",
+      "size_bytes": 30582
     },
     {
       "path": "scripts/check_holdout_mention.py",
@@ -1418,6 +1433,11 @@
       "path": "scripts/check_lane_quotes_verbatim.py",
       "sha256": "b084c226fb7df162732ca9063af9ce65789a5b62474a459f13561516c4425d9f",
       "size_bytes": 34485
+    },
+    {
+      "path": "scripts/check_longs_corruption.py",
+      "sha256": "10f58362b0f34deb7ef1a7dad7f350d57f44e0e52a567a60a9a72a66c93ecd64",
+      "size_bytes": 18821
     },
     {
       "path": "scripts/check_material_split.py",
@@ -1670,6 +1690,11 @@
       "size_bytes": 12872
     },
     {
+      "path": "scripts/emit_lane_scope.py",
+      "sha256": "d5d8890ec6483bf364756902530be261e1a9f382367013957f782e3e079842d7",
+      "size_bytes": 14017
+    },
+    {
       "path": "scripts/eval_runner.py",
       "sha256": "0aeb5f1cc83569d53f8a6c475bc93f9f07ee72a2c1b2766c46bfaf81336fa690",
       "size_bytes": 14056
@@ -1751,8 +1776,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "0e85a9790c5f6095d7b5c6e4936534ea86b2033c637f8e6f9d3008438b104ccf",
-      "size_bytes": 225935
+      "sha256": "ec64a71520cc15341e823866ffcb9c900c7dbafda877049ce18708a88ecacf99",
+      "size_bytes": 231499
     },
     {
       "path": "scripts/register_persona.py",
