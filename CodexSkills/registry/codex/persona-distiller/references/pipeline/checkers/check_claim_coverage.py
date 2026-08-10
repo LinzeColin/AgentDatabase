@@ -113,10 +113,30 @@ def load_cache(cache: pathlib.Path) -> dict[str, str]:
     out: dict[str, str] = {}
     for f in cache.rglob("*.txt"):
         try:
-            t = corpus_body(f.read_text(encoding="utf-8", errors="replace"))
+            raw_bytes = f.read_bytes()
+            raw_text = raw_bytes.decode("utf-8", errors="replace")
         except Exception:
             continue
-        out[hashlib.sha256(t.encode("utf-8")).hexdigest()] = t
+        body = corpus_body(raw_text)
+        # ★★★★ v0.0.0.155：**两把钥匙都登记，值都是剥了表头的正文**。
+        #
+        #   台账里的 `checksum` 是 `sha256(原始字节)`（`ingest.py:360`，
+        #   且 `source_id = src-{checksum[:12]}` **就是从它派生的**——
+        #   改生产端会动全库每一个 source_id，所以只能在这一侧对齐）。
+        #   而这里为了「表头不是他的话」，比对用的正文是 `corpus_body()` 之后的 body。
+        #   **两侧算法不一致，只在「这份文件没有抓源表头」时才偶然相等。**
+        #
+        #   2026-08-11 实测（台账条数 / 按 body 命中 / 按原始字节命中）：
+        #     Adams    72 /  0 / 69      Bessemer 55 /  0 / 54
+        #     Coffin   18 /  0 / 18      Thomson  56 /  0 / 53
+        #     Cicero   19 / 11 / 11      Shewhart 13 / 12 / 12
+        #   ——四个带表头的工作区**一条都对不上**，判据对它们一律 exit 2
+        #   「语料回连不上，结论不可信」。不是语料坏了，是**join key 两边不一样**。
+        #
+        #   ★ 值仍然是 `body`：**表头不算他的话这条语义没有放宽**，
+        #     放宽的只是「用哪个哈希找得到这份文件」。
+        out[hashlib.sha256(raw_bytes).hexdigest()] = body
+        out[hashlib.sha256(body.encode("utf-8")).hexdigest()] = body
     return out
 
 
@@ -187,6 +207,39 @@ def self_test() -> int:
         print(f"  {'✓' if got_flat else '✗'} 平铺布局 dir/x.txt 仍能读到（反向对照）")
         fail += not got_flat
 
+        # ── v0.0.0.155：**台账的 checksum 是原始字节的**，这一路要能回连 ──
+        #   四个带抓源表头的工作区（Adams/Bessemer/Coffin/Thomson）此前
+        #   **一条都对不上**，判据对它们一律 exit 2「结论不可信」。
+        hdr = root / "hdr"
+        hdr.mkdir()
+        HEAD = "# source: archive.org/details/xyz\n# fetched: 2026-08-11\n"
+        raw_with_head = HEAD + body
+        (hdr / "c.txt").write_text(raw_with_head, encoding="utf-8")
+        cache_h = load_cache(hdr)
+        k_raw = hashlib.sha256(raw_with_head.encode("utf-8")).hexdigest()
+        k_body = hashlib.sha256(body.encode("utf-8")).hexdigest()
+
+        ok_raw = k_raw in cache_h
+        print(f"  {'✓' if ok_raw else '✗'} 带表头的文件：**按原始字节的 checksum 找得到**"
+              f"（台账存的就是这一种，ingest.py:360）")
+        fail += not ok_raw
+
+        ok_body_key = k_body in cache_h
+        print(f"  {'✓' if ok_body_key else '✗'} 同一份文件：按剥表头后的 checksum 也找得到（向后兼容）")
+        fail += not ok_body_key
+
+        # ★★ 非放宽性的证明：**取到的值必须是剥了表头的正文**
+        val_ok = (cache_h.get(k_raw) == body
+                  and "archive.org/details/xyz" not in cache_h.get(k_raw, ""))
+        print(f"  {'✓' if val_ok else '✗'} ★ 取到的**值仍是剥了表头的正文**——"
+              f"「表头不算他的话」没有被放宽，放宽的只是「用哪个哈希找得到」")
+        fail += not val_ok
+
+        # 反向对照：不相干的 checksum 仍然找不到
+        k_none = hashlib.sha256(b"nothing like this in the corpus").hexdigest()
+        print(f"  {'✓' if k_none not in cache_h else '✗'} 反向对照：不相干的 checksum 仍然回连不上")
+        fail += k_none in cache_h
+
         # 反向对照之二：目录里没有任何 .txt 时必须是空，不得凭空命中
         empty = root / "empty"
         empty.mkdir()
@@ -224,7 +277,7 @@ def self_test() -> int:
     print(f"  {'✓' if ok11 else '✗'} ⑪ 台账刊名写成 JASA → 断言里的 BSTJ 仍**不**命中（红）")
     fail += not ok11
 
-    print("  ✓ 负对照通过（11/11）" if not fail
+    print("  ✓ 负对照通过（15/15）" if not fail
           else f"  ✗ {fail} 项未过——本检查器已失效，其「通过」不构成证据")
     return fail
 
