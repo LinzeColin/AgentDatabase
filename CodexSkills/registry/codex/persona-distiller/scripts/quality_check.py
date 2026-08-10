@@ -3712,6 +3712,105 @@ def run_source_attribution(report, target: Path, meta: dict[str, Any],
         report.error('research.source-unclaimed', pb.split('\n')[0])
 
 
+def run_lane_scope_drift(report, target: Path) -> None:
+    """研究道 Scope 表 vs 台账（v0.0.0.131 新增，**只列不判**）。
+
+    那张表本来就该是台账的投影，而它一直是手打的。手打有两个后果：
+
+    1. **改判后表就过期。** Grotius #168 把一份源从 train 改判 holdout 之后，
+       `01-writings.md` 里仍列着它的 `source_id`——研究方读得到的文件里
+       印着一份密封材料的编号，正是 `check_holdout_mention` 要抓的东西。
+    2. **手打会漏。** 新灌进 train 的源不会自己长到表里。
+
+    ## 为什么只列不判
+
+    全库 24 个工作区实测：**holdout 泄漏 0 处**（那一处是 #168 改判时新造的，已修），
+    真正的差异是 **73 处分道记错**——文档把某源归到 A 道、台账说它是 B 道。
+    那是记账不齐，不是泄题；硬拦会把一批已完成/已拒发的人物一起拦下。
+
+    修法：`python3 scripts/emit_lane_scope.py <workspace>`。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'emit_lane_scope.py'
+    if not script.exists():
+        report.metrics['lane_scope'] = {'状态': 'emit_lane_scope.py 未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_lanescope', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['lane_scope'] = {'状态': f'工具加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.self_test() != 0:
+            report.metrics['lane_scope'] = {'状态': '**自测未过，其结论不作数**'}
+            return
+    try:
+        changed, n_files, n_rows = module.process(target, check=True)
+    except SystemExit as exc:            # 本件自己泄了 holdout 时会 SystemExit
+        report.error('corpus.holdout-mentioned-in-artifacts', str(exc))
+        return
+    report.metrics['lane_scope'] = {
+        '道文件': n_files, '台账行': n_rows,
+        '与台账不一致的道': changed,
+        '修法': 'python3 scripts/emit_lane_scope.py <workspace>',
+        '口径': '**只列不判**——全库实测 holdout 泄漏 0 处，差异全是分道记错'}
+
+
+def run_longs_gate(report, target: Path) -> None:
+    """长 s 讹字门（v0.0.0.131 新增，**只报不拦**）——这份语料能不能做逐字引文？
+
+    与 `corpus.fraktur-mojibake` 同一族：**份数／分档／字数三样都是真的，
+    所以既有的门全放行**，而从这些文件里取不出任何可核的逐字引文。
+    区别只在字形——花体是 der→ber，早期近代印本是长 s → `esse`→`esfe`。
+
+    ## 触发实例（Grotius #168）
+
+    这个面板此前**只活在手上**，每次现敲。它在 #168 上当场翻了车：
+    `epistolae_oxenstierna_1829_lat` 用 `est/eft` 量是 0.61%（看着干净），
+    用整个面板量是 **97.75%**——差 160 倍。真因是 `st` 用连字的排版惯例，
+    **凡带 `st` 的词对对这种字体系统性失明**。落成判据后面板剔除了 `est/eft`。
+
+    实测：#168 的 23 份里 **12 份不可做逐字引文**，其中两份是**英文**
+    （Selden 1652 = 0.9957、Evats 1682 = 0.9875）——
+    第一版只做拉丁面板时这两份被判「不适用」，**漏掉了**。
+
+    ## 为什么走 warn 不走 error
+
+    与 `corpus.fraktur-mojibake` 保持同一通道：这是语料的**事实**不是产物的缺陷，
+    人物照样可以只用干净的那几份做断言。硬拦会把一批合法人物一起拦下。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_longs_corruption.py'
+    if not script.exists():
+        report.metrics['longs_corruption'] = {
+            '状态': 'check_longs_corruption.py 未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_longs', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['longs_corruption'] = {'状态': f'检查器加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.self_test() != 0:
+            report.error('content.selftest-failed',
+                         'check_longs_corruption.py 负对照未过——其检查结论不作数')
+            return
+    problems, info = module.evaluate(target)
+    report.metrics['longs_corruption'] = info
+    if problems:
+        report.warn('corpus.longs-corruption',
+                    f'**{len(problems)} 份语料的长 s 讹字率超过 {module.UNUSABLE:.0%}**——'
+                    'esse→esfe、such→fuch，份数／分档／字数三样都是真的，所以既有的门都放行了；'
+                    '**从这些文件里取不出任何可核的逐字引文**。逐份见 '
+                    'metrics.longs_corruption。　' + problems[0])
+
+
 def run_quote_layer(report, target: Path) -> None:
     """引文层门（v0.0.0.32 新增，**只报不拦**）——这句外语是他写的，还是译者写的？
 
@@ -3916,6 +4015,10 @@ def main() -> int:
         run_fact_density(report, target, sources)
         run_quote_layer(report, target)
         run_ocr_gate(report, target, sources)
+        # ★ 与 run_ocr_gate 同族、同一条 warn 通道：问「这份语料的字形还认得出来吗」。
+        #   同样放无条件段——等到发布门才发现「12 份引不出逐字」就晚了。
+        run_longs_gate(report, target)
+        run_lane_scope_drift(report, target)
         # ★★ 放在**无条件段**：本文件没有 `if args.phase == 'research'` 分支，
         #   2547 行之前的都是三个 phase 共跑的。这两件问「语料本身能不能用」，
         #   **必须最早跑**——等到发布门才发现「10 份乱码」「1 份装错文件」，
