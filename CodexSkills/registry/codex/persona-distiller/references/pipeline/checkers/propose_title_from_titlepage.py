@@ -120,6 +120,38 @@ def _title_candidate(head: str):
     return None
 
 
+
+#: OCR 容错投影：只留字母，全部小写。
+#:   题名页常见的坏法：`PRACTITIGNERS`（O→G）、`DESIGJ^ED`（N→J^）、字间插空格。
+#:   投影后仍要求**连续子串命中**，不做模糊匹配——模糊匹配会把「像」当成「是」。
+def _proj(x: str) -> str:
+    return re.sub(r"[^a-z]", "", x.lower())
+
+
+def verify_title(text: str, expect: str) -> dict:
+    """→ {命中, 位置, 片段}。**核验一个题名假设，不是抽取题名。**
+
+    ★★★★ 为什么是这个方向：抽取实测 2/9（藏章/献词/目录/出版者行全会被认成题名），
+    而核验是可判定的——问「这个字符串在不在题名页附近」，答案只有是与否。
+    假设从哪来无所谓（人读的、文件名、书目），**核验这一步是一手的**。
+    """
+    head = corpus_body(text)[:HEAD_CHARS]
+    ph, pe = _proj(head), _proj(expect)
+    if not pe:
+        return {"命中": False, "位置": None, "片段": None, "★": "expect 投影后为空，**不算核验**"}
+    i = ph.find(pe)
+    if i < 0:
+        return {"命中": False, "位置": None, "片段": None}
+    #: 把投影位置映回原文，给人看一眼实际印的是什么（含 OCR 讹字）
+    k, j = 0, 0
+    for j, ch in enumerate(head):
+        if re.match(r"[a-z]", ch.lower()) and ch.isascii():
+            if k == i:
+                break
+            k += 1
+    return {"命中": True, "位置": j,
+            "片段": re.sub(r"\s+", " ", head[max(0, j - 10):j + len(expect) + 30])}
+
 def selftest() -> int:
     fails = []
 
@@ -148,6 +180,26 @@ def selftest() -> int:
     e = propose("sia a God we STE ey Fe a neia ns Bat tA a Salepte OT er ti Rear ered")
     chk("版次 None", e["版次"] is None)
 
+    print("── ★★★ 核验方向：题名假设**在**题名页里 → 命中 ──")
+    v1 = verify_title("HARVARD MEDICAL LIBRARY BOSTON THE PRINCIPLES AND PRACTICE OF "
+                      "MEDICINE DESIGNED FOR THE USE OF PRACTITIONERS",
+                      "PRINCIPLES AND PRACTICE OF MEDICINE")
+    chk(f"命中（片段：{str(v1['片段'])[:44]}）", v1["命中"])
+
+    print("── ★★ 核验能容 OCR 讹字（`PRACTITIGNERS` 里的 O→G 不影响前面那段）──")
+    v2 = verify_title("THE PRINCIPLES AND PRACTICE OF MEDICINE DESIGNED FOR THE USE OF "
+                      "PRACTITIGNERS AND STUDENTS", "PRINCIPLES AND PRACTICE OF MEDICINE")
+    chk("命中", v2["命中"])
+
+    print("── ★★★★ 反向对照：题名假设**不在**里面 → 不许命中 ──")
+    v3 = verify_title("HARVARD MEDICAL LIBRARY BOSTON DIGITIZED BY THE INTERNET ARCHIVE",
+                      "PRINCIPLES AND PRACTICE OF MEDICINE")
+    chk(f"不命中（实得 {v3['命中']}）", not v3["命中"])
+
+    print("── ★ 反向对照：空的 expect **不算核验通过** ──")
+    v4 = verify_title("ANYTHING AT ALL", "")
+    chk(f"不命中且标明不算核验（{str(v4.get('★'))[:24]}）", not v4["命中"] and v4.get("★"))
+
     print("── ★★★★ 砍掉的那一半：**留一条自测证明它为什么不能用** ──")
     #   Osler 的 PPM 14 份 dry-run，9 条题名提议只有 2 条对。这里复现两种典型坏法。
     bad1 = _title_candidate("MEDICAL CENTER STANFORD, CAUF THE PRINCIPLES AND PRACTICE")
@@ -165,6 +217,9 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--workspace", type=pathlib.Path)
     ap.add_argument("--filter", default="", help="只看文件名含这个子串的")
+    ap.add_argument("--verify-title", default="",
+                    help="**核验**一个题名假设在不在题名页里（是/否）。"
+                         "★ 与「抽取题名」不同——抽取实测 2/9 已砍，核验是可判定的。")
     ap.add_argument("--apply", action="store_true",
                     help="真写台账。**给之前必须先 dry-run 读一遍**")
     ap.add_argument("--self-test", action="store_true")
@@ -180,6 +235,47 @@ def main() -> int:
         print(f"✗ **{led} 不在——未核验（不是通过）**")
         return 3
     rows = [json.loads(l) for l in led.read_text(encoding="utf-8").splitlines() if l.strip()]
+
+    #: ★★★★ 核验模式：给了 --verify-title 就只做「这个题名在不在」，不碰版次。
+    if a.verify_title:
+        hit, miss = [], []
+        for r in rows:
+            lp = r.get("local_path") or ""
+            nm = pathlib.PurePath(lp).name
+            if a.filter and a.filter not in nm:
+                continue
+            f = a.workspace / lp
+            if not f.is_file():
+                g = list(a.workspace.rglob(nm)) if nm else []
+                if not g:
+                    miss.append((nm, "文件找不到")); continue
+                f = g[0]
+            v = verify_title(f.read_text(encoding="utf-8", errors="ignore"), a.verify_title)
+            (hit if v["命中"] else miss).append((nm, v.get("片段") or "题名页里没有这个字符串"))
+        print(f"核验题名 `{a.verify_title}`：**命中 {len(hit)} 份**｜未命中 {len(miss)} 份")
+        for nm, frag in hit:
+            print(f"  ✓ {nm[:40]:42} …{str(frag)[:64]}…")
+        for nm, why in miss:
+            print(f"  · {nm[:40]:42} {why}")
+        if not a.apply:
+            print("\n（dry-run。**先把命中的逐条读一遍**，确认题名页真印着它，再加 --apply。）")
+            return 0
+        n = 0
+        for r in rows:
+            nm = pathlib.PurePath(r.get("local_path") or "").name
+            if nm in {h[0] for h in hit}:
+                r["title"] = a.verify_title
+                r["★ title 的来源"] = (
+                    f"**核验过**：`{a.verify_title}` 这个字符串确实出现在 `{nm}` 自己的"
+                    f"题名页附近（剥掉出处表头后的前 {HEAD_CHARS} 字符，投影去掉非字母后连续命中）。"
+                    "★★ 这是**核验一个假设**，不是**抽取题名**——"
+                    "抽取实测 2/9（藏章/献词/目录/出版者行都会被认成题名），已砍。"
+                    "★ 假设从哪来无所谓，**核验这一步是一手的**。")
+                n += 1
+        led.write_text("\n".join(json.dumps(x, ensure_ascii=False) for x in rows) + "\n",
+                       encoding="utf-8")
+        print(f"\n→ 写了 {n} 条 title")
+        return 0
 
     proposals, unreadable = [], []
     for r in rows:
