@@ -1,0 +1,1484 @@
+{
+ "a. c. littleton": {
+  "name": "A. C. Littleton",
+  "born": 1886,
+  "died": 1974,
+  "source": "Wikidata Q19666655（P569 1886-12-04 / P570 1974-01-13；enwiki「Ananias Charles Littleton」）",
+  "confidence": "high"
+ },
+ "abraham lincoln": {
+  "name": "Abraham Lincoln",
+  "born": 1809,
+  "died": 1865,
+  "source": "Wikidata Q91（P569 1809-02-12 / P570 1865-04-15；enwiki「Abraham Lincoln」）",
+  "confidence": "high"
+ },
+ "adolf martens": {
+  "name": "Adolf Martens",
+  "born": 1850,
+  "died": 1914,
+  "source": "Wikidata Q66166（P569 1850-03-06 / P570 1914-07-24；enwiki「Adolf Martens」）",
+  "confidence": "high"
+ },
+ "akio morita": {
+  "name": "Akio Morita",
+  "born": 1921,
+  "died": 1999,
+  "source": "Wikidata Q310845（P569 1921-01-26 / P570 1999-10-03；enwiki「Akio Morita」）",
+  "confidence": "high"
+ },
+ "al ries": {
+  "name": "Al Ries",
+  "born": 1926,
+  "died": 2022,
+  "source": "Wikidata Q2985733（P569 1926-11-14 / P570 2022-10-07；enwiki「Al Ries」）",
+  "confidence": "high"
+ },
+ "albert howard": {
+  "name": "Albert Howard",
+  "born": 1873,
+  "died": 1947,
+  "source": "Wikidata Q1473903（P569 1873-12-08 / P570 1947-10-20；enwiki「Albert Howard」）",
+  "confidence": "high"
+ },
+ "aldo leopold": {
+  "name": "Aldo Leopold",
+  "born": 1887,
+  "died": 1948,
+  "source": "Wikidata Q971382（P569 1887-01-11 / P570 1948-04-21；enwiki「Aldo Leopold」）",
+  "confidence": "high"
+ },
+ "alexander fleming": {
+  "name": "Alexander Fleming",
+  "born": 1881,
+  "died": 1955,
+  "source": "Wikidata Q37064（P569 1881-08-06 / P570 1955-03-11；enwiki「Alexander Fleming」）",
+  "confidence": "high"
+ },
+ "alfred sloan": {
+  "name": "Alfred Sloan",
+  "born": 1875,
+  "died": 1966,
+  "source": "Wikidata Q344045（P569 1875-05-23 / P570 1966-02-17；enwiki「Alfred P. Sloan」）",
+  "confidence": "high"
+ },
+ "andreas vesalius": {
+  "name": "Andreas Vesalius",
+  "born": 1514,
+  "died": 1564,
+  "source": "Wikidata Q170267（P569 1514-12-31 / P570 1564-10-16；enwiki「Andreas Vesalius」）",
+  "confidence": "high"
+ },
+ "anton tedesko": {
+  "name": "Anton Tedesko",
+  "born": 1903,
+  "died": 1994,
+  "source": "Wikidata Q30559602（P569 1903-05-25 / P570 1994-04-02；enwiki「Anton Tedesko」）",
+  "confidence": "high"
+ },
+ "aristotle": {
+  "name": "Aristotle",
+  "born": -384,
+  "died": -322,
+  "source": "Wikidata Q868（P569 0384-00-00 BC(年精度) / P570 0322-00-00 BC(年精度)；enwiki「Aristotle」）",
+  "confidence": "high"
+ },
+ "atul gawande": {
+  "name": "Atul Gawande",
+  "born": 1965,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q2751383（P569 1965-11-05 / P570 无声明；enwiki「Atul Gawande」）",
+  "confidence": "high"
+ },
+ "benjamin bloom": {
+  "name": "Benjamin Bloom",
+  "born": 1913,
+  "died": 1999,
+  "source": "Wikidata Q436017（P569 1913-02-21 / P570 1999-09-13；enwiki「Benjamin Bloom」）",
+  "confidence": "high"
+ },
+ "bill bernbach": {
+  "name": "Bill Bernbach",
+  "born": 1911,
+  "died": 1982,
+  "source": "Wikidata Q326108（P569 1911-08-13 / P570 1982-10-02；enwiki「William Bernbach」）",
+  "confidence": "high"
+ },
+ "buckminster fuller": {
+  "name": "Buckminster Fuller",
+  "born": 1895,
+  "died": 1983,
+  "source": "Wikidata Q102289（P569 1895-07-12 / P570 1983-07-01；enwiki「Buckminster Fuller」）",
+  "confidence": "high"
+ },
+ "byron sharp": {
+  "name": "Byron Sharp",
+  "born": null,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q5004467（P569 1960-00-00(十年精度) / P570 无声明；enwiki「Byron Sharp」）",
+  "confidence": "low",
+  "note": "生年不可用（1960-00-00(十年精度)：精度低于年），按规则留空、不取中点"
+ },
+ "c. l. coffin": {
+  "name": "C. L. Coffin",
+  "born": 1844,
+  "died": 1926,
+  "source": "Wikidata Q3499437（P569 1844-00-00(年精度) / P570 1926-00-00(年精度)；enwiki「Charles L. Coffin」）｜同名核准：pass-2：改用更完整姓名形式检索才命中",
+  "confidence": "high"
+ },
+ "charles eames": {
+  "name": "Charles Eames",
+  "born": 1907,
+  "died": 1978,
+  "source": "Wikidata Q170411（P569 1907-06-17 / P570 1978-08-21；enwiki「Charles Eames」）",
+  "confidence": "high"
+ },
+ "charles m. eastman": {
+  "name": "Charles M. Eastman",
+  "born": 1940,
+  "died": 2020,
+  "source": "Wikidata Q18630942（P569 1940-05-05 / P570 2020-11-09；enwiki「Charles M. Eastman」）",
+  "confidence": "high"
+ },
+ "charles perrow": {
+  "name": "Charles Perrow",
+  "born": 1925,
+  "died": 2019,
+  "source": "Wikidata Q363706（P569 1925-02-09 / P570 2019-11-12；enwiki「Charles Perrow」）",
+  "confidence": "high"
+ },
+ "cicero": {
+  "name": "Cicero",
+  "born": -106,
+  "died": -43,
+  "source": "Wikidata Q1541（P569 0106-01-03 BC / P570 0043-12-07 BC；enwiki「Cicero」）",
+  "confidence": "high"
+ },
+ "clara barton": {
+  "name": "Clara Barton",
+  "born": 1821,
+  "died": 1912,
+  "source": "同名门 wip-barton-117/namesake_gate.json｜实录「生卒 1821-1912」",
+  "note": "★ 由同名门的 distinguishing_basis / authoritative_sources 严格模式抽取，未凭记忆填"
+ },
+ "claude c. hopkins": {
+  "name": "Claude C. Hopkins",
+  "born": 1866,
+  "died": 1932,
+  "source": "Wikidata Q711306（P569 1866-01-14 / P570 1932-09-22；enwiki「Claude C. Hopkins」）",
+  "confidence": "high"
+ },
+ "coco chanel": {
+  "name": "Coco Chanel",
+  "born": 1883,
+  "died": 1971,
+  "source": "Wikidata Q45661（P569 1883-08-19 / P570 1971-01-10；enwiki「Coco Chanel」）",
+  "confidence": "high"
+ },
+ "comfort avery adams": {
+  "name": "Comfort Avery Adams",
+  "born": 1868,
+  "died": 1958,
+  "source": "Wikidata Q5151668（P569 1868-11-01 / P570 1958-02-21；enwiki「Comfort A. Adams」）｜同名核准：字面同名的 Q123651343 是无职业的族谱条目；焊接/AWS 首任会长是 Comfort A. Adams",
+  "confidence": "high"
+ },
+ "confucius": {
+  "name": "Confucius",
+  "born": null,
+  "died": null,
+  "source": "Wikidata Q4604（P569 0551-00-00 BC(年精度)(circa) / P570 0479-00-00 BC(年精度)(circa)；enwiki「Confucius」）",
+  "confidence": "low",
+  "note": "生年不可用（0551-00-00 BC(年精度)(circa)：带 circa 限定），按规则留空、不取中点；卒年不可用（0479-00-00 BC(年精度)(circa)：带 circa 限定），按规则留空、不取中点"
+ },
+ "david aaker": {
+  "name": "David Aaker",
+  "born": 1938,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q1173491（P569 1938-00-00(年精度) / P570 无声明；enwiki「David Aaker」）",
+  "confidence": "high"
+ },
+ "david ogilvy": {
+  "name": "David Ogilvy",
+  "born": 1911,
+  "died": 1999,
+  "source": "Wikidata Q198743（P569 1911-06-23 / P570 1999-07-21；enwiki「David Ogilvy (businessman)」）",
+  "confidence": "high"
+ },
+ "david simchi-levi": {
+  "name": "David Simchi-Levi",
+  "born": 1955,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q64759139（P569 1955-08-21 / P570 无声明；enwiki「David Simchi-Levi」）",
+  "confidence": "high"
+ },
+ "david swensen": {
+  "name": "David Swensen",
+  "born": 1954,
+  "died": 2021,
+  "source": "Wikidata Q1174392（P569 1954-01-26 / P570 2021-05-05；enwiki「David F. Swensen」）｜同名核准：首位候选 Q12714139 是挪威政治家 1826-1904；耶鲁 CIO 是 David F. Swensen",
+  "confidence": "high"
+ },
+ "dieter rams": {
+  "name": "Dieter Rams",
+  "born": 1932,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q76427（P569 1932-05-20 / P570 无声明；enwiki「Dieter Rams」）",
+  "confidence": "high"
+ },
+ "don peppers": {
+  "name": "Don Peppers",
+  "born": 1950,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q5293311（P569 1950-10-01 / P570 无声明；enwiki「Don Peppers」）",
+  "confidence": "high"
+ },
+ "edgar bain": {
+  "name": "Edgar Bain",
+  "born": 1891,
+  "died": 1971,
+  "source": "Wikidata Q742183（P569 1891-09-14 / P570 1971-11-27；enwiki「Edgar Bain」）",
+  "confidence": "high"
+ },
+ "eduardo torroja": {
+  "name": "Eduardo Torroja",
+  "born": 1899,
+  "died": 1961,
+  "source": "Wikidata Q517006（P569 1899-08-27 / P570 1961-06-15；enwiki「Eduardo Torroja」）",
+  "confidence": "high"
+ },
+ "edward bernays": {
+  "name": "Edward Bernays",
+  "born": 1891,
+  "died": 1995,
+  "source": "Wikidata Q434839（P569 1891-11-22 / P570 1995-03-09；enwiki「Edward Bernays」）",
+  "confidence": "high"
+ },
+ "edward jenner": {
+  "name": "Edward Jenner",
+  "born": 1749,
+  "died": 1823,
+  "source": "同名门 wip-jenner-104/jenner_namesake_candidates.json｜实录「1749-05-17–1823-01-26」",
+  "note": "★ 由同名门的 distinguishing_basis / authoritative_sources 严格模式抽取，未凭记忆填"
+ },
+ "elihu thomson": {
+  "name": "Elihu Thomson",
+  "born": 1853,
+  "died": 1937,
+  "source": "Wikidata Q559794（P569 1853-03-29 / P570 1937-03-13；enwiki「Elihu Thomson」）",
+  "confidence": "high"
+ },
+ "eliyahu goldratt": {
+  "name": "Eliyahu Goldratt",
+  "born": 1947,
+  "died": 2011,
+  "source": "Wikidata Q368732（P569 1947-03-31 / P570 2011-06-11；enwiki「Eliyahu M. Goldratt」）",
+  "confidence": "high"
+ },
+ "elizabeth blackwell": {
+  "name": "Elizabeth Blackwell",
+  "born": 1821,
+  "died": 1910,
+  "source": "Wikidata Q234572（P569 1821-02-03 / P570 1910-05-31；enwiki「Elizabeth Blackwell」）",
+  "confidence": "high"
+ },
+ "eugene fama": {
+  "name": "Eugene Fama",
+  "born": 1939,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q359317（P569 1939-02-14 / P570 无声明；enwiki「Eugene Fama」）",
+  "confidence": "high"
+ },
+ "fazlur rahman khan": {
+  "name": "Fazlur Rahman Khan",
+  "born": 1929,
+  "died": 1982,
+  "source": "Wikidata Q62918（P569 1929-04-03 / P570 1982-03-27；enwiki「Fazlur Rahman Khan」）",
+  "confidence": "high"
+ },
+ "fischer black": {
+  "name": "Fischer Black",
+  "born": 1938,
+  "died": 1995,
+  "source": "Wikidata Q963275（P569 1938-01-11 / P570 1995-08-30；enwiki「Fischer Black」）",
+  "confidence": "high"
+ },
+ "florence nightingale": {
+  "name": "Florence Nightingale",
+  "born": 1820,
+  "died": 1910,
+  "source": "同名门 wip-nightingale-112/nightingale_namesake_gate.json｜实录「1820-05-12 – 1910-08-13」",
+  "note": "★ 由同名门的 distinguishing_basis / authoritative_sources 严格模式抽取，未凭记忆填"
+ },
+ "franco modigliani": {
+  "name": "Franco Modigliani",
+  "born": 1918,
+  "died": 2003,
+  "source": "Wikidata Q205850（P569 1918-06-18 / P570 2003-09-25；enwiki「Franco Modigliani」）",
+  "confidence": "high"
+ },
+ "frank lloyd wright": {
+  "name": "Frank Lloyd Wright",
+  "born": 1867,
+  "died": 1959,
+  "source": "Wikidata Q5604（P569 1867-06-08 / P570 1959-04-09；enwiki「Frank Lloyd Wright」）",
+  "confidence": "high"
+ },
+ "friedrich frobel": {
+  "name": "Friedrich Frobel",
+  "born": 1782,
+  "died": 1852,
+  "source": "Wikidata Q76679（P569 1782-04-21 / P570 1852-06-21；enwiki「Friedrich Fröbel」）",
+  "confidence": "high"
+ },
+ "galen": {
+  "name": "Galen",
+  "born": 129,
+  "died": null,
+  "source": "Wikidata Q8778（P569 0129-09-00(月精度) / P570 0300-00-00(世纪精度)；enwiki「Galen」）",
+  "confidence": "low",
+  "note": "卒年不可用（0300-00-00(世纪精度)：精度低于年），按规则留空、不取中点"
+ },
+ "genichi taguchi": {
+  "name": "Genichi Taguchi",
+  "born": 1924,
+  "died": 2012,
+  "source": "Wikidata Q201416（P569 1924-01-01 / P570 2012-06-02；enwiki「Genichi Taguchi」）",
+  "confidence": "high"
+ },
+ "geoffrey moore": {
+  "name": "Geoffrey Moore",
+  "born": 1946,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q3101094（P569 1946-07-31 / P570 无声明；enwiki「Geoffrey Moore」）",
+  "confidence": "high"
+ },
+ "george washington carver": {
+  "name": "George Washington Carver",
+  "born": null,
+  "died": 1943,
+  "source": "Wikidata Q296898（P569 1864-01-01(circa) / P570 1943-01-05；enwiki「George Washington Carver」）",
+  "confidence": "low",
+  "note": "生年不可用（1864-01-01(circa)：带 circa 限定），按规则留空、不取中点"
+ },
+ "gifford pinchot": {
+  "name": "Gifford Pinchot",
+  "born": 1865,
+  "died": 1946,
+  "source": "Wikidata Q534301（P569 1865-08-11 / P570 1946-10-04；enwiki「Gifford Pinchot」）",
+  "confidence": "high"
+ },
+ "grace hopper": {
+  "name": "Grace Hopper",
+  "born": 1906,
+  "died": 1992,
+  "source": "Wikidata Q11641（P569 1906-12-09 / P570 1992-01-01；enwiki「Grace Hopper」）",
+  "confidence": "high"
+ },
+ "gregor mendel": {
+  "name": "Gregor Mendel",
+  "born": 1822,
+  "died": 1884,
+  "source": "Wikidata Q37970（P569 1822-07-20 / P570 1884-01-06；enwiki「Gregor Mendel」）",
+  "confidence": "high"
+ },
+ "gustave eiffel": {
+  "name": "Gustave Eiffel",
+  "born": 1832,
+  "died": 1923,
+  "source": "Wikidata Q20882（P569 1832-12-15 / P570 1923-12-27；enwiki「Gustave Eiffel」）",
+  "confidence": "high"
+ },
+ "h. l. a. hart": {
+  "name": "H. L. A. Hart",
+  "born": 1907,
+  "died": 1992,
+  "source": "Wikidata Q374834（P569 1907-07-18 / P570 1992-12-19；enwiki「H. L. A. Hart」）",
+  "confidence": "high"
+ },
+ "hans kelsen": {
+  "name": "Hans Kelsen",
+  "born": 1881,
+  "died": 1973,
+  "source": "Wikidata Q84165（P569 1881-10-11 / P570 1973-04-19；enwiki「Hans Kelsen」）",
+  "confidence": "high"
+ },
+ "hardy cross": {
+  "name": "Hardy Cross",
+  "born": 1885,
+  "died": 1959,
+  "source": "Wikidata Q380079（P569 1885-02-10 / P570 1959-02-11；enwiki「Hardy Cross」）",
+  "confidence": "high"
+ },
+ "harold kerzner": {
+  "name": "Harold Kerzner",
+  "born": 1940,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q16262001（P569 1940-01-01(年精度) / P570 无声明；enwiki「Harold Kerzner」）",
+  "confidence": "high"
+ },
+ "harry markowitz": {
+  "name": "Harry Markowitz",
+  "born": 1927,
+  "died": 2023,
+  "source": "Wikidata Q272508（P569 1927-08-24 / P570 2023-06-22；enwiki「Harry Markowitz」）",
+  "confidence": "high"
+ },
+ "henry bessemer": {
+  "name": "Henry Bessemer",
+  "born": 1813,
+  "died": 1898,
+  "source": "Wikidata Q310201（P569 1813-01-19 / P570 1898-03-15；enwiki「Henry Bessemer」）",
+  "confidence": "high"
+ },
+ "henry clifton sorby": {
+  "name": "Henry Clifton Sorby",
+  "born": 1826,
+  "died": 1908,
+  "source": "Wikidata Q1346007（P569 1826-05-10 / P570 1908-03-09；enwiki「Henry Clifton Sorby」）",
+  "confidence": "high"
+ },
+ "henry dreyfuss": {
+  "name": "Henry Dreyfuss",
+  "born": 1904,
+  "died": 1972,
+  "source": "Wikidata Q940346（P569 1904-03-02 / P570 1972-10-05；enwiki「Henry Dreyfuss」）",
+  "confidence": "high"
+ },
+ "henry ford": {
+  "name": "Henry Ford",
+  "born": 1863,
+  "died": 1947,
+  "source": "Wikidata Q8768（P569 1863-07-30 / P570 1947-04-07；enwiki「Henry Ford」）",
+  "confidence": "high"
+ },
+ "henry gantt": {
+  "name": "Henry Gantt",
+  "born": 1861,
+  "died": 1919,
+  "source": "Wikidata Q313947（P569 1861-05-20 / P570 1919-11-23；enwiki「Henry Gantt」）",
+  "confidence": "high"
+ },
+ "henry maudslay": {
+  "name": "Henry Maudslay",
+  "born": 1771,
+  "died": 1831,
+  "source": "Wikidata Q936499（P569 1771-08-22 / P570 1831-02-14；enwiki「Henry Maudslay」）",
+  "confidence": "high"
+ },
+ "herb kelleher": {
+  "name": "Herb Kelleher",
+  "born": 1931,
+  "died": 2019,
+  "source": "Wikidata Q764247（P569 1931-03-12 / P570 2019-01-03；enwiki「Herb Kelleher」）",
+  "confidence": "high"
+ },
+ "herbert heinrich": {
+  "name": "Herbert Heinrich",
+  "born": 1886,
+  "died": 1962,
+  "source": "Wikidata Q2117588（P569 1886-10-06 / P570 1962-06-22；enwiki「Herbert William Heinrich」）｜同名核准：pass-2：改用更完整姓名形式检索才命中",
+  "confidence": "high"
+ },
+ "hildegard peplau": {
+  "name": "Hildegard Peplau",
+  "born": 1909,
+  "died": 1999,
+  "source": "Wikidata Q451576（P569 1909-09-01 / P570 1999-03-17；enwiki「Hildegard Peplau」）",
+  "confidence": "high"
+ },
+ "hippocrates": {
+  "name": "Hippocrates",
+  "born": null,
+  "died": null,
+  "source": "Wikidata Q5264（P569 0460-00-00 BC(年精度)(circa) / P570 0370-00-00 BC(年精度)(circa)；enwiki「Hippocrates」）",
+  "confidence": "low",
+  "note": "生年不可用（0460-00-00 BC(年精度)(circa)：带 circa 限定），按规则留空、不取中点；卒年不可用（0370-00-00 BC(年精度)(circa)：带 circa 限定），按规则留空、不取中点"
+ },
+ "howard gardner": {
+  "name": "Howard Gardner",
+  "born": 1943,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q176515（P569 1943-07-11 / P570 无声明；enwiki「Howard Gardner」）",
+  "confidence": "high"
+ },
+ "hugo grotius": {
+  "name": "Hugo Grotius",
+  "born": 1583,
+  "died": 1645,
+  "source": "Wikidata Q154959（P569 1583-04-10 / P570 1645-08-28；enwiki「Hugo Grotius」）",
+  "confidence": "high"
+ },
+ "ignaz semmelweis": {
+  "name": "Ignaz Semmelweis",
+  "born": 1818,
+  "died": 1865,
+  "source": "Wikidata Q59736（P569 1818-07-01 / P570 1865-08-13；enwiki「Ignaz Semmelweis」）",
+  "confidence": "high"
+ },
+ "immanuel kant": {
+  "name": "Immanuel Kant",
+  "born": 1724,
+  "died": 1804,
+  "source": "Wikidata Q9312（P569 1724-04-22 / P570 1804-02-12；enwiki「Immanuel Kant」）",
+  "confidence": "high"
+ },
+ "indra nooyi": {
+  "name": "Indra Nooyi",
+  "born": 1955,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q264913（P569 1955-09-28 / P570 无声明；enwiki「Indra Nooyi」）",
+  "confidence": "high"
+ },
+ "ingvar kamprad": {
+  "name": "Ingvar Kamprad",
+  "born": 1926,
+  "died": 2018,
+  "source": "Wikidata Q216932（P569 1926-03-30 / P570 2018-01-27；enwiki「Ingvar Kamprad」）",
+  "confidence": "high"
+ },
+ "jack trout": {
+  "name": "Jack Trout",
+  "born": 1935,
+  "died": 2017,
+  "source": "Wikidata Q983171（P569 1935-01-31 / P570 2017-06-04；enwiki「Jack Trout」）",
+  "confidence": "high"
+ },
+ "jack welch": {
+  "name": "Jack Welch",
+  "born": 1935,
+  "died": 2020,
+  "source": "Wikidata Q355314（P569 1935-11-19 / P570 2020-03-01；enwiki「Jack Welch」）",
+  "confidence": "high"
+ },
+ "james nasmyth": {
+  "name": "James Nasmyth",
+  "born": 1808,
+  "died": 1890,
+  "source": "Wikidata Q240633（P569 1808-08-19 / P570 1890-05-07；enwiki「James Nasmyth」）",
+  "confidence": "high"
+ },
+ "james reason": {
+  "name": "James Reason",
+  "born": 1938,
+  "died": 2025,
+  "source": "Wikidata Q3161362（P569 1938-05-01 / P570 2025-02-05；enwiki「James Reason」）",
+  "confidence": "high"
+ },
+ "jamie dimon": {
+  "name": "Jamie Dimon",
+  "born": 1956,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q922169（P569 1956-03-13 / P570 无声明；enwiki「Jamie Dimon」）",
+  "confidence": "high"
+ },
+ "jay lush": {
+  "name": "Jay Lush",
+  "born": 1896,
+  "died": 1982,
+  "source": "Wikidata Q5968861（P569 1896-01-03 / P570 1982-05-01；enwiki「Jay Laurence Lush」）",
+  "confidence": "high"
+ },
+ "jean piaget": {
+  "name": "Jean Piaget",
+  "born": 1896,
+  "died": 1980,
+  "source": "Wikidata Q123190（P569 1896-08-09 / P570 1980-09-16；enwiki「Jean Piaget」）",
+  "confidence": "high"
+ },
+ "jean watson": {
+  "name": "Jean Watson",
+  "born": 1940,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q3175102（P569 1940-06-10 / P570 无声明；enwiki「Jean Watson」）｜同名核准：护理理论家；其余候选为捷克作家与越野滑雪运动员",
+  "confidence": "high"
+ },
+ "jean-jacques rousseau": {
+  "name": "Jean-Jacques Rousseau",
+  "born": 1712,
+  "died": 1778,
+  "source": "Wikidata Q6527（P569 1712-06-28 / P570 1778-07-02；enwiki「Jean-Jacques Rousseau」）",
+  "confidence": "high"
+ },
+ "jeff bezos": {
+  "name": "Jeff Bezos",
+  "born": 1964,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q312556（P569 1964-01-12 / P570 无声明；enwiki「Jeff Bezos」）",
+  "confidence": "high"
+ },
+ "jesse livermore": {
+  "name": "Jesse Livermore",
+  "born": 1877,
+  "died": 1940,
+  "source": "Wikidata Q724153（P569 1877-07-26 / P570 1940-11-28；enwiki「Jesse Livermore」）",
+  "confidence": "high"
+ },
+ "jesse vincent": {
+  "name": "Jesse Vincent",
+  "born": 1976,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q6186939（P569 1976-06-21 / P570 无声明；enwiki「Jesse Vincent」）｜同名核准：pass-2：改用更完整姓名形式检索才命中",
+  "confidence": "high"
+ },
+ "jim collins": {
+  "name": "Jim Collins",
+  "born": 1958,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q1134293（P569 1958-01-25 / P570 无声明；enwiki「James C. Collins」）",
+  "confidence": "high"
+ },
+ "jim simons": {
+  "name": "Jim Simons",
+  "born": 1938,
+  "died": 2024,
+  "source": "Wikidata Q560847（P569 1938-04-25 / P570 2024-05-10；enwiki「Jim Simons」）",
+  "confidence": "high"
+ },
+ "johann pestalozzi": {
+  "name": "Johann Pestalozzi",
+  "born": 1746,
+  "died": 1827,
+  "source": "Wikidata Q105428（P569 1746-01-12 / P570 1827-02-17；enwiki「Johann Heinrich Pestalozzi」）",
+  "confidence": "high"
+ },
+ "john amos comenius": {
+  "name": "John Amos Comenius",
+  "born": 1592,
+  "died": 1670,
+  "source": "Wikidata Q12735（P569 1592-03-28 / P570 1670-11-15；enwiki「John Amos Comenius」）",
+  "confidence": "high"
+ },
+ "john carmack": {
+  "name": "John Carmack",
+  "born": 1970,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q92605（P569 1970-08-21 / P570 无声明；enwiki「John Carmack」）",
+  "confidence": "high"
+ },
+ "john dewey": {
+  "name": "John Dewey",
+  "born": 1859,
+  "died": 1952,
+  "source": "Wikidata Q131805（P569 1859-10-20 / P570 1952-06-01；enwiki「John Dewey」）",
+  "confidence": "high"
+ },
+ "john fondahl": {
+  "name": "John Fondahl",
+  "born": 1924,
+  "died": 2008,
+  "source": "LoC 规范档 no2005083085（heading「Fondahl, John W. (John Walker), 1924-2008」；fieldOfActivity「Civil engineering Critical path analysis」）",
+  "confidence": "high"
+ },
+ "john hattie": {
+  "name": "John Hattie",
+  "born": 1950,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q1700398（P569 1950-01-01(年精度) / P570 无声明；enwiki「John Hattie」）",
+  "confidence": "high"
+ },
+ "john marshall": {
+  "name": "John Marshall",
+  "born": 1755,
+  "died": 1835,
+  "source": "Wikidata Q310829（P569 1755-09-24 / P570 1835-07-06；enwiki「John Marshall」）",
+  "confidence": "high"
+ },
+ "john templeton": {
+  "name": "John Templeton",
+  "born": 1912,
+  "died": 2008,
+  "source": "Wikidata Q248767（P569 1912-11-29 / P570 2008-07-08；enwiki「John Templeton」）",
+  "confidence": "high"
+ },
+ "josef albers": {
+  "name": "Josef Albers",
+  "born": 1888,
+  "died": 1976,
+  "source": "Wikidata Q170071（P569 1888-03-19 / P570 1976-03-25；enwiki「Josef Albers」）",
+  "confidence": "high"
+ },
+ "joseph juran": {
+  "name": "Joseph Juran",
+  "born": 1904,
+  "died": 2008,
+  "source": "Wikidata Q536301（P569 1904-12-24 / P570 2008-02-28；enwiki「Joseph M. Juran」）",
+  "confidence": "high"
+ },
+ "joseph lister": {
+  "name": "Joseph Lister",
+  "born": 1827,
+  "died": 1912,
+  "source": "Wikidata Q155768（P569 1827-04-05 / P570 1912-02-10；enwiki「Joseph Lister」）",
+  "confidence": "high"
+ },
+ "joseph whitworth": {
+  "name": "Joseph Whitworth",
+  "born": 1804,
+  "died": 1887,
+  "source": "Wikidata Q712307（P569 1804-12-21 / P570 1887-01-22；enwiki「Joseph Whitworth」）",
+  "confidence": "high"
+ },
+ "julian robertson": {
+  "name": "Julian Robertson",
+  "born": 1932,
+  "died": 2022,
+  "source": "Wikidata Q6307515（P569 1932-06-25 / P570 2022-08-23；enwiki「Julian Robertson」）",
+  "confidence": "high"
+ },
+ "justus von liebig": {
+  "name": "Justus von Liebig",
+  "born": 1803,
+  "died": 1873,
+  "source": "Wikidata Q16571（P569 1803-05-12 / P570 1873-04-18；enwiki「Justus von Liebig」）",
+  "confidence": "high"
+ },
+ "kaoru ishikawa": {
+  "name": "Kaoru Ishikawa",
+  "born": 1915,
+  "died": 1989,
+  "source": "Wikidata Q381014（P569 1915-07-13 / P570 1989-04-16；enwiki「Kaoru Ishikawa」）",
+  "confidence": "high"
+ },
+ "kenneth humphreys": {
+  "name": "Kenneth Humphreys",
+  "born": 1938,
+  "died": 2023,
+  "source": "LoC 规范档 n79079538（heading「Humphreys, Kenneth K., 1938-2023」；note「Basic cost engineering, c1981 CIP data sheet (b. 1/19/38)」、讣告「January 19, 1938-May 26, 2023 … executive director of AACE」）",
+  "confidence": "high"
+ },
+ "kenya hara": {
+  "name": "Kenya Hara",
+  "born": 1958,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q973509（P569 1958-06-05 / P570 无声明；enwiki「Kenya Hara」）",
+  "confidence": "high"
+ },
+ "kevin lane keller": {
+  "name": "Kevin Lane Keller",
+  "born": 1956,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q6396753（P569 1956-06-23 / P570 无声明；enwiki「Kevin Lane Keller」）",
+  "confidence": "high"
+ },
+ "konosuke matsushita": {
+  "name": "Konosuke Matsushita",
+  "born": 1894,
+  "died": 1989,
+  "source": "Wikidata Q252785（P569 1894-11-27 / P570 1989-04-27；enwiki「Kōnosuke Matsushita」）",
+  "confidence": "high"
+ },
+ "le corbusier": {
+  "name": "Le Corbusier",
+  "born": 1887,
+  "died": 1965,
+  "source": "Wikidata Q4724（P569 1887-10-06 / P570 1965-08-27；enwiki「Le Corbusier」）",
+  "confidence": "high"
+ },
+ "lee kuan yew": {
+  "name": "Lee Kuan Yew",
+  "born": 1923,
+  "died": 2015,
+  "source": "Wikidata Q131248（P569 1923-09-16 / P570 2015-03-23；enwiki「Lee Kuan Yew」）",
+  "confidence": "high"
+ },
+ "leo burnett": {
+  "name": "Leo Burnett",
+  "born": 1891,
+  "died": 1971,
+  "source": "Wikidata Q326356（P569 1891-10-21 / P570 1971-06-07；enwiki「Leo Burnett」）",
+  "confidence": "high"
+ },
+ "leonardo da vinci": {
+  "name": "Leonardo da Vinci",
+  "born": 1452,
+  "died": 1519,
+  "source": "Wikidata Q762（P569 1452-04-15 / P570 1519-05-02；enwiki「Leonardo da Vinci」）",
+  "confidence": "high"
+ },
+ "lev vygotsky": {
+  "name": "Lev Vygotsky",
+  "born": 1896,
+  "died": 1934,
+  "source": "Wikidata Q180819（P569 1896-11-17 / P570 1934-06-10；enwiki「Lev Vygotsky」）",
+  "confidence": "high"
+ },
+ "louis brandeis": {
+  "name": "Louis Brandeis",
+  "born": 1856,
+  "died": 1941,
+  "source": "Wikidata Q520840（P569 1856-11-13 / P570 1941-10-05；enwiki「Louis Brandeis」）",
+  "confidence": "high"
+ },
+ "louis pasteur": {
+  "name": "Louis Pasteur",
+  "born": 1822,
+  "died": 1895,
+  "source": "Wikidata Q529（P569 1822-12-27 / P570 1895-09-28；enwiki「Louis Pasteur」）",
+  "confidence": "high"
+ },
+ "luca pacioli": {
+  "name": "Luca Pacioli",
+  "born": null,
+  "died": 1517,
+  "source": "Wikidata Q87620（P569 1440-00-00(十年精度) / P570 1517-00-00(年精度)；enwiki「Luca Pacioli」）",
+  "confidence": "low",
+  "note": "生年不可用（1440-00-00(十年精度)：精度低于年），按规则留空、不取中点"
+ },
+ "luther burbank": {
+  "name": "Luther Burbank",
+  "born": 1849,
+  "died": 1926,
+  "source": "Wikidata Q333419（P569 1849-03-07 / P570 1926-04-11；enwiki「Luther Burbank」）",
+  "confidence": "high"
+ },
+ "m. s. swaminathan": {
+  "name": "M. S. Swaminathan",
+  "born": 1925,
+  "died": 2023,
+  "source": "Wikidata Q982109（P569 1925-08-07 / P570 2023-09-28；enwiki「M. S. Swaminathan」）",
+  "confidence": "high"
+ },
+ "margaret hamilton": {
+  "name": "Margaret Hamilton",
+  "born": 1936,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q11628（P569 1936-08-17 / P570 无声明；enwiki「Margaret Hamilton (software engineer)」）",
+  "confidence": "high"
+ },
+ "maria montessori": {
+  "name": "Maria Montessori",
+  "born": 1870,
+  "died": 1952,
+  "source": "Wikidata Q131117（P569 1870-08-31 / P570 1952-05-06；enwiki「Maria Montessori」）",
+  "confidence": "high"
+ },
+ "martha rogers": {
+  "name": "Martha Rogers",
+  "born": 1955,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q6774537（P569 1955-03-10 / P570 无声明；enwiki「Martha Rogers (professor)」）｜同名核准：杜克大学营销学者／Peppers&Rogers；Q91627859 是 Nature Conservancy 研究员",
+  "confidence": "high"
+ },
+ "martin christopher": {
+  "name": "Martin Christopher",
+  "born": 1945,
+  "died": null,
+  "source": "Wikidata Q133758804（P569 1945-01-01(年精度) / P570 无声明）｜同名核准：LoC n79103742 note 将「Martin Christopher, prof. of market. and logistics, Cranfield」与 b. 11-21-45 绑定，与该条目 1945 相符",
+  "confidence": "low",
+  "note": "无 P570 卒年声明，且 enwiki 未列入 Category:Living people，存殁未证实，故不标 alive"
+ },
+ "mary barra": {
+  "name": "Mary Barra",
+  "born": 1961,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q6779013（P569 1961-12-24 / P570 无声明；enwiki「Mary Barra」）",
+  "confidence": "high"
+ },
+ "mary wells lawrence": {
+  "name": "Mary Wells Lawrence",
+  "born": 1928,
+  "died": 2024,
+  "source": "Wikidata Q324650（P569 1928-05-25 / P570 2024-05-11；enwiki「Mary Wells Lawrence」）",
+  "confidence": "high"
+ },
+ "masanobu fukuoka": {
+  "name": "Masanobu Fukuoka",
+  "born": 1913,
+  "died": 2008,
+  "source": "Wikidata Q334997（P569 1913-02-02 / P570 2008-08-16；enwiki「Masanobu Fukuoka」）",
+  "confidence": "high"
+ },
+ "massimo vignelli": {
+  "name": "Massimo Vignelli",
+  "born": 1931,
+  "died": 2014,
+  "source": "Wikidata Q2317903（P569 1931-01-10 / P570 2014-05-27；enwiki「Massimo Vignelli」）",
+  "confidence": "high"
+ },
+ "merton miller": {
+  "name": "Merton Miller",
+  "born": 1923,
+  "died": 2000,
+  "source": "Wikidata Q157255（P569 1923-05-16 / P570 2000-06-03；enwiki「Merton Miller」）",
+  "confidence": "high"
+ },
+ "michael debakey": {
+  "name": "Michael DeBakey",
+  "born": 1908,
+  "died": 2008,
+  "source": "Wikidata Q335003（P569 1908-09-07 / P570 2008-07-11；enwiki「Michael DeBakey」）",
+  "confidence": "high"
+ },
+ "michael steinhardt": {
+  "name": "Michael Steinhardt",
+  "born": 1940,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q3308537（P569 1940-12-07 / P570 无声明；enwiki「Michael Steinhardt」）",
+  "confidence": "high"
+ },
+ "michelangelo": {
+  "name": "Michelangelo",
+  "born": 1475,
+  "died": 1564,
+  "source": "Wikidata Q5592（P569 1475-03-06 / P570 1564-02-18；enwiki「Michelangelo」）",
+  "confidence": "high"
+ },
+ "milton glaser": {
+  "name": "Milton Glaser",
+  "born": 1929,
+  "died": 2020,
+  "source": "Wikidata Q1351481（P569 1929-06-26 / P570 2020-06-26；enwiki「Milton Glaser」）",
+  "confidence": "high"
+ },
+ "morris cohen": {
+  "name": "Morris Cohen",
+  "born": 1911,
+  "died": 2005,
+  "source": "Wikidata Q6913647（P569 1911-11-27 / P570 2005-05-27；enwiki「Morris Cohen (scientist)」）",
+  "confidence": "high"
+ },
+ "myron scholes": {
+  "name": "Myron Scholes",
+  "born": 1941,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q295647（P569 1941-07-01 / P570 无声明；enwiki「Myron Scholes」）",
+  "confidence": "high"
+ },
+ "nelson mandela": {
+  "name": "Nelson Mandela",
+  "born": 1918,
+  "died": 2013,
+  "source": "Wikidata Q8023（P569 1918-07-18 / P570 2013-12-05；enwiki「Nelson Mandela」）",
+  "confidence": "high"
+ },
+ "niccolo machiavelli": {
+  "name": "Niccolo Machiavelli",
+  "born": 1469,
+  "died": 1527,
+  "source": "Wikidata Q1399（P569 1469-05-03 / P570 1527-06-21；enwiki「Niccolò Machiavelli」）",
+  "confidence": "high"
+ },
+ "nikolai benardos": {
+  "name": "Nikolai Benardos",
+  "born": 1842,
+  "died": 1905,
+  "source": "Wikidata Q2605969（P569 1842-07-26 / P570 1905-09-08；enwiki「Nikolay Benardos」）",
+  "confidence": "high"
+ },
+ "nikolai slavyanov": {
+  "name": "Nikolai Slavyanov",
+  "born": 1854,
+  "died": 1897,
+  "source": "Wikidata Q2630661（P569 1854-04-23 / P570 1897-10-05；enwiki「Nikolay Slavyanov」）",
+  "confidence": "high"
+ },
+ "nikolai vavilov": {
+  "name": "Nikolai Vavilov",
+  "born": 1887,
+  "died": 1943,
+  "source": "Wikidata Q214926（P569 1887-11-13 / P570 1943-01-26；enwiki「Nikolai Vavilov」）",
+  "confidence": "high"
+ },
+ "norman borlaug": {
+  "name": "Norman Borlaug",
+  "born": 1914,
+  "died": 2009,
+  "source": "Wikidata Q154824（P569 1914-03-25 / P570 2009-09-12；enwiki「Norman Borlaug」）",
+  "confidence": "high"
+ },
+ "oliver wendell holmes jr.": {
+  "name": "Oliver Wendell Holmes Jr.",
+  "born": 1841,
+  "died": 1935,
+  "source": "Wikidata Q360574（P569 1841-03-08 / P570 1935-03-06；enwiki「Oliver Wendell Holmes Jr.」）",
+  "confidence": "high"
+ },
+ "otto von bismarck": {
+  "name": "Otto von Bismarck",
+  "born": 1815,
+  "died": 1898,
+  "source": "Wikidata Q8442（P569 1815-04-01 / P570 1898-07-30；enwiki「Otto von Bismarck」）",
+  "confidence": "high"
+ },
+ "ove arup": {
+  "name": "Ove Arup",
+  "born": 1895,
+  "died": 1988,
+  "source": "Wikidata Q717683（P569 1895-04-16 / P570 1988-02-05；enwiki「Ove Arup」）",
+  "confidence": "high"
+ },
+ "pablo picasso": {
+  "name": "Pablo Picasso",
+  "born": 1881,
+  "died": 1973,
+  "source": "Wikidata Q5593（P569 1881-10-25 / P570 1973-04-08；enwiki「Pablo Picasso」）",
+  "confidence": "high"
+ },
+ "patrick macleamy": {
+  "name": "Patrick MacLeamy",
+  "born": 1942,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q27881405（P569 1942-10-02 / P570 无声明；enwiki「Patrick MacLeamy」）",
+  "confidence": "high"
+ },
+ "paul farmer": {
+  "name": "Paul Farmer",
+  "born": 1959,
+  "died": 2022,
+  "source": "Wikidata Q2263705（P569 1959-10-26 / P570 2022-02-21；enwiki「Paul Farmer」）",
+  "confidence": "high"
+ },
+ "paul rand": {
+  "name": "Paul Rand",
+  "born": 1914,
+  "died": 1996,
+  "source": "Wikidata Q468160（P569 1914-08-15 / P570 1996-11-26；enwiki「Paul Rand」）",
+  "confidence": "high"
+ },
+ "paulo freire": {
+  "name": "Paulo Freire",
+  "born": 1921,
+  "died": 1997,
+  "source": "Wikidata Q164797（P569 1921-09-19 / P570 1997-05-02；enwiki「Paulo Freire」）",
+  "confidence": "high"
+ },
+ "peter drucker": {
+  "name": "Peter Drucker",
+  "born": 1909,
+  "died": 2005,
+  "source": "Wikidata Q84238（P569 1909-11-19 / P570 2005-11-11；enwiki「Peter Drucker」）",
+  "confidence": "high"
+ },
+ "peter kraljic": {
+  "name": "Peter Kraljic",
+  "born": 1939,
+  "died": null,
+  "source": "Wikidata Q18644926（P569 1939-00-00(年精度) / P570 无声明）",
+  "confidence": "low",
+  "note": "无 P570 卒年声明，且 enwiki 未列入 Category:Living people，存殁未证实，故不标 alive"
+ },
+ "peter steinberger": {
+  "name": "Peter Steinberger",
+  "born": 1986,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q137924561（P569 1986-05-22 / P570 无声明；enwiki「Peter Steinberger (programmer)」）｜同名核准：pass-2：改用更完整姓名形式检索才命中",
+  "confidence": "high"
+ },
+ "philip kotler": {
+  "name": "Philip Kotler",
+  "born": 1931,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q164170（P569 1931-05-27 / P570 无声明；enwiki「Philip Kotler」）",
+  "confidence": "high"
+ },
+ "pier luigi nervi": {
+  "name": "Pier Luigi Nervi",
+  "born": 1891,
+  "died": 1979,
+  "source": "Wikidata Q313528（P569 1891-06-21 / P570 1979-01-09；enwiki「Pier Luigi Nervi」）",
+  "confidence": "high"
+ },
+ "plato": {
+  "name": "Plato",
+  "born": null,
+  "died": null,
+  "source": "Wikidata Q859（P569 0428-00-00 BC(十年精度) / P570 0348-00-00 BC(十年精度)；enwiki「Plato」）",
+  "confidence": "low",
+  "note": "生年不可用（0428-00-00 BC(十年精度)：精度低于年），按规则留空、不取中点；卒年不可用（0348-00-00 BC(十年精度)：精度低于年），按规则留空、不取中点"
+ },
+ "pol duwez": {
+  "name": "Pol Duwez",
+  "born": 1907,
+  "died": 1984,
+  "source": "Wikidata Q7208808（P569 1907-12-11 / P570 1984-12-31；enwiki「Pol Duwez」）",
+  "confidence": "high"
+ },
+ "ray kroc": {
+  "name": "Ray Kroc",
+  "born": 1902,
+  "died": 1984,
+  "source": "Wikidata Q319648（P569 1902-10-05 / P570 1984-01-14；enwiki「Ray Kroc」）",
+  "confidence": "high"
+ },
+ "raymond loewy": {
+  "name": "Raymond Loewy",
+  "born": 1893,
+  "died": 1986,
+  "source": "Wikidata Q435509（P569 1893-11-05 / P570 1986-07-14；enwiki「Raymond Loewy」）",
+  "confidence": "high"
+ },
+ "regis mckenna": {
+  "name": "Regis McKenna",
+  "born": 1939,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q3622758（P569 1939-00-00(年精度) / P570 无声明；enwiki「Regis McKenna」）",
+  "confidence": "high"
+ },
+ "richard branson": {
+  "name": "Richard Branson",
+  "born": 1950,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q194419（P569 1950-07-18 / P570 无声明；enwiki「Richard Branson」）",
+  "confidence": "high"
+ },
+ "robert franklin mehl": {
+  "name": "Robert Franklin Mehl",
+  "born": 1898,
+  "died": 1976,
+  "source": "Wikidata Q7344500（P569 1898-03-30 / P570 1976-01-29；enwiki「Robert Franklin Mehl」）",
+  "confidence": "high"
+ },
+ "robert kaplan": {
+  "name": "Robert Kaplan",
+  "born": 1940,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q631376（P569 1940-05-02 / P570 无声明；enwiki「Robert S. Kaplan」）｜同名核准：平衡计分卡会计学者，非 Q2157782（数学普及作者）",
+  "confidence": "high"
+ },
+ "robert koch": {
+  "name": "Robert Koch",
+  "born": 1843,
+  "died": 1910,
+  "source": "Wikidata Q37193（P569 1843-12-11 / P570 1910-05-27；enwiki「Robert Koch」）",
+  "confidence": "high"
+ },
+ "robert merton": {
+  "name": "Robert Merton",
+  "born": 1944,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q287542（P569 1944-07-31 / P570 无声明；enwiki「Robert C. Merton」）｜同名核准：经济学家 Robert C. Merton，非其父社会学家 Robert K. Merton（Q312843）",
+  "confidence": "high"
+ },
+ "ronald dworkin": {
+  "name": "Ronald Dworkin",
+  "born": 1931,
+  "died": 2013,
+  "source": "Wikidata Q319803（P569 1931-12-11 / P570 2013-02-14；enwiki「Ronald Dworkin」）",
+  "confidence": "high"
+ },
+ "rosser reeves": {
+  "name": "Rosser Reeves",
+  "born": 1910,
+  "died": 1984,
+  "source": "Wikidata Q204950（P569 1910-09-10 / P570 1984-01-24；enwiki「Rosser Reeves」）",
+  "confidence": "high"
+ },
+ "rudolf virchow": {
+  "name": "Rudolf Virchow",
+  "born": 1821,
+  "died": 1902,
+  "source": "Wikidata Q76432（P569 1821-10-13 / P570 1902-09-05；enwiki「Rudolf Virchow」）",
+  "confidence": "high"
+ },
+ "russell archibald": {
+  "name": "Russell Archibald",
+  "born": 1924,
+  "died": null,
+  "source": "LoC 规范档 n86143397（note「Managing high-technology programs and projects, c1992: CIP t.p. (Russell D. Archibald) data sheet (b. 2-10-24)」）",
+  "confidence": "low",
+  "note": "仅生年有据（1924-02-10）；LoC 与 Wikidata 均无卒年记载，也无 enwiki 条目可查存殁，故不标 alive"
+ },
+ "ruth bader ginsburg": {
+  "name": "Ruth Bader Ginsburg",
+  "born": 1933,
+  "died": 2020,
+  "source": "Wikidata Q11116（P569 1933-03-15 / P570 2020-09-18；enwiki「Ruth Bader Ginsburg」）",
+  "confidence": "high"
+ },
+ "satya nadella": {
+  "name": "Satya Nadella",
+  "born": 1967,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q7426870（P569 1967-08-19 / P570 无声明；enwiki「Satya Nadella」）",
+  "confidence": "high"
+ },
+ "saul bass": {
+  "name": "Saul Bass",
+  "born": 1920,
+  "died": 1996,
+  "source": "Wikidata Q536884（P569 1920-05-08 / P570 1996-04-25；enwiki「Saul Bass」）",
+  "confidence": "high"
+ },
+ "sergio zyman": {
+  "name": "Sergio Zyman",
+  "born": 1945,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q3491309（P569 1945-07-30 / P570 无声明；enwiki「Sergio Zyman」）",
+  "confidence": "high"
+ },
+ "seth godin": {
+  "name": "Seth Godin",
+  "born": 1960,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q439396（P569 1960-07-10 / P570 无声明；enwiki「Seth Godin」）",
+  "confidence": "high"
+ },
+ "seymour papert": {
+  "name": "Seymour Papert",
+  "born": 1928,
+  "died": 2016,
+  "source": "Wikidata Q335027（P569 1928-02-29 / P570 2016-07-31；enwiki「Seymour Papert」）",
+  "confidence": "high"
+ },
+ "sidney dekker": {
+  "name": "Sidney Dekker",
+  "born": 1969,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q17305843（P569 1969-01-01(年精度) / P570 无声明；enwiki「Sidney Dekker」）",
+  "confidence": "high"
+ },
+ "socrates": {
+  "name": "Socrates",
+  "born": null,
+  "died": -399,
+  "source": "Wikidata Q913（P569 0470-00-00 BC(年精度)(circa) / P570 0399-02-15 BC；enwiki「Socrates」）",
+  "confidence": "low",
+  "note": "生年不可用（0470-00-00 BC(年精度)(circa)：带 circa 限定），按规则留空、不取中点"
+ },
+ "soichiro honda": {
+  "name": "Soichiro Honda",
+  "born": 1906,
+  "died": 1991,
+  "source": "Wikidata Q313304（P569 1906-11-17 / P570 1991-08-05；enwiki「Soichiro Honda」）",
+  "confidence": "high"
+ },
+ "solon": {
+  "name": "Solon",
+  "born": null,
+  "died": null,
+  "source": "Wikidata Q133337（P569 0630-00-00 BC(年精度)(circa) / P570 0560-00-00 BC(年精度)(circa)；enwiki「Solon」）",
+  "confidence": "low",
+  "note": "生年不可用（0630-00-00 BC(年精度)(circa)：带 circa 限定），按规则留空、不取中点；卒年不可用（0560-00-00 BC(年精度)(circa)：带 circa 限定），按规则留空、不取中点"
+ },
+ "stanley druckenmiller": {
+  "name": "Stanley Druckenmiller",
+  "born": 1953,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q7599568（P569 1953-06-14 / P570 无声明；enwiki「Stanley Druckenmiller」）",
+  "confidence": "high"
+ },
+ "stephen timoshenko": {
+  "name": "Stephen Timoshenko",
+  "born": 1878,
+  "died": 1972,
+  "source": "Wikidata Q551204（P569 1878-12-11 / P570 1972-05-29；enwiki「Stephen Timoshenko」）",
+  "confidence": "high"
+ },
+ "steve jobs": {
+  "name": "Steve Jobs",
+  "born": 1955,
+  "died": 2011,
+  "source": "Wikidata Q19837（P569 1955-02-24 / P570 2011-10-05；enwiki「Steve Jobs」）",
+  "confidence": "high"
+ },
+ "tadao ando": {
+  "name": "Tadao Ando",
+  "born": 1941,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q208220（P569 1941-09-13 / P570 无声明；enwiki「Tadao Ando」）",
+  "confidence": "high"
+ },
+ "temple grandin": {
+  "name": "Temple Grandin",
+  "born": 1947,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q232810（P569 1947-08-29 / P570 无声明；enwiki「Temple Grandin」）",
+  "confidence": "high"
+ },
+ "theodore levitt": {
+  "name": "Theodore Levitt",
+  "born": 1925,
+  "died": 2006,
+  "source": "Wikidata Q61690（P569 1925-03-01 / P570 2006-06-28；enwiki「Theodore Levitt」）",
+  "confidence": "high"
+ },
+ "thomas jefferson": {
+  "name": "Thomas Jefferson",
+  "born": 1743,
+  "died": 1826,
+  "source": "Wikidata Q11812（P569 1743-04-13 / P570 1826-07-04；enwiki「Thomas Jefferson」）",
+  "confidence": "high"
+ },
+ "virginia henderson": {
+  "name": "Virginia Henderson",
+  "born": 1897,
+  "died": 1996,
+  "source": "Wikidata Q272256（P569 1897-11-30 / P570 1996-03-19；enwiki「Virginia Henderson」）",
+  "confidence": "high"
+ },
+ "w. edwards deming": {
+  "name": "W. Edwards Deming",
+  "born": 1900,
+  "died": 1993,
+  "source": "Wikidata Q311472（P569 1900-10-14 / P570 1993-12-20；enwiki「W. Edwards Deming」）",
+  "confidence": "high"
+ },
+ "waloddi weibull": {
+  "name": "Waloddi Weibull",
+  "born": 1887,
+  "died": 1979,
+  "source": "Wikidata Q1387593（P569 1887-06-18 / P570 1979-10-12；enwiki「Waloddi Weibull」）",
+  "confidence": "high"
+ },
+ "walter gropius": {
+  "name": "Walter Gropius",
+  "born": 1883,
+  "died": 1969,
+  "source": "Wikidata Q61071（P569 1883-05-18 / P570 1969-07-05；enwiki「Walter Gropius」）",
+  "confidence": "high"
+ },
+ "walter rosenhain": {
+  "name": "Walter Rosenhain",
+  "born": 1875,
+  "died": 1934,
+  "source": "Wikidata Q10393106（P569 1875-08-24 / P570 1934-03-17；enwiki「Walter Rosenhain」）",
+  "confidence": "high"
+ },
+ "walter shewhart": {
+  "name": "Walter Shewhart",
+  "born": 1891,
+  "died": 1967,
+  "source": "Wikidata Q462232（P569 1891-03-18 / P570 1967-03-11；enwiki「Walter A. Shewhart」）",
+  "confidence": "high"
+ },
+ "wes jackson": {
+  "name": "Wes Jackson",
+  "born": 1936,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q248469（P569 1936-00-00(年精度) / P570 无声明；enwiki「Wes Jackson」）",
+  "confidence": "high"
+ },
+ "william blackstone": {
+  "name": "William Blackstone",
+  "born": 1723,
+  "died": 1780,
+  "source": "Wikidata Q332449（P569 1723-07-10 / P570 1780-02-14；enwiki「William Blackstone」）",
+  "confidence": "high"
+ },
+ "william chandler roberts-austen": {
+  "name": "William Chandler Roberts-Austen",
+  "born": 1843,
+  "died": 1902,
+  "source": "Wikidata Q921502（P569 1843-03-03 / P570 1902-11-22；enwiki「William Chandler Roberts-Austen」）",
+  "confidence": "high"
+ },
+ "william d. callister": {
+  "name": "William D. Callister",
+  "born": 1940,
+  "died": null,
+  "source": "Wikidata Q112375194（P569 1940-08-15 / P570 无声明）",
+  "confidence": "low",
+  "note": "无 P570 卒年声明，且 enwiki 未列入 Category:Living people，存殁未证实，故不标 alive"
+ },
+ "william harvey": {
+  "name": "William Harvey",
+  "born": 1578,
+  "died": 1657,
+  "source": "Wikidata Q93128（P569 1578-04-01 / P570 1657-06-03；enwiki「William Harvey」）",
+  "confidence": "high"
+ },
+ "william osler": {
+  "name": "William Osler",
+  "born": 1849,
+  "died": 1919,
+  "source": "同名门 wip-osler-110/namesake_gate.json｜实录「creator:\\\"Osler, William, Sir, 1849-1919」",
+  "note": "★ 由同名门的 distinguishing_basis / authoritative_sources 严格模式抽取，未凭记忆填"
+ },
+ "william paton": {
+  "name": "William Paton",
+  "born": 1889,
+  "died": 1991,
+  "source": "Wikidata Q8004443（P569 1889-07-19 / P570 1991-04-26；enwiki「William Andrew Paton」）｜同名核准：pass-2：改用更完整姓名形式检索才命中",
+  "confidence": "high"
+ },
+ "william sellers": {
+  "name": "William Sellers",
+  "born": 1824,
+  "died": 1905,
+  "source": "Wikidata Q2073155（P569 1824-09-19 / P570 1905-01-24；enwiki「William Sellers」）",
+  "confidence": "high"
+ },
+ "william sharpe": {
+  "name": "William Sharpe",
+  "born": 1934,
+  "died": null,
+  "alive": true,
+  "source": "Wikidata Q274111（P569 1934-06-16 / P570 无声明；enwiki「William F. Sharpe」）｜同名核准：字面同名的 Q105078773 是神经外科医生；CAPM 经济学家是 William F. Sharpe",
+  "confidence": "high"
+ },
+ "winston churchill": {
+  "name": "Winston Churchill",
+  "born": 1874,
+  "died": 1965,
+  "source": "Wikidata Q8016（P569 1874-11-30 / P570 1965-01-24；enwiki「Winston Churchill」）",
+  "confidence": "high"
+ },
+ "yuan longping": {
+  "name": "Yuan Longping",
+  "born": 1930,
+  "died": 2021,
+  "source": "Wikidata Q3141326（P569 1930-09-07 / P570 2021-05-22；enwiki「Yuan Longping」）",
+  "confidence": "high"
+ },
+ "zaha hadid": {
+  "name": "Zaha Hadid",
+  "born": 1950,
+  "died": 2016,
+  "source": "Wikidata Q47780（P569 1950-10-31 / P570 2016-03-31；enwiki「Zaha Hadid」）",
+  "confidence": "high"
+ },
+ "jesse lauriston livermore": {
+  "name": "Jesse Lauriston Livermore",
+  "born": 1877,
+  "died": 1940,
+  "source": "同名门 wip-livermore-100/livermore_namesake_candidates.json｜实录「生卒 1877-1940」",
+  "note": "★ 由同名门的 distinguishing_basis / authoritative_sources 严格模式抽取，未凭记忆填"
+ },
+ "rudolf ludwig karl virchow": {
+  "name": "Rudolf Ludwig Karl Virchow",
+  "born": 1821,
+  "died": 1902,
+  "source": "同名门 wip-virchow-109/namesake_gate.json｜实录「creator:\\\"Virchow, Rudolf, 1821-1902」",
+  "note": "★ 由同名门的 distinguishing_basis / authoritative_sources 严格模式抽取，未凭记忆填"
+ }
+}

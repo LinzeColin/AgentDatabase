@@ -29,7 +29,7 @@ Usage:
 
 `--no-counterweight` 复现漂移行为，仅供负对照；**日常不要用它。**
 """
-import argparse, json, os, re, glob, subprocess, sys
+import argparse, json, os, re, glob, subprocess, sys, time
 
 # ★★★ v0.0.0.154：原先这里写死的是**某一个 worktree 的绝对路径**
 #   （…/character-distillation-skill-reorganize-d57595/…）。
@@ -39,10 +39,42 @@ import argparse, json, os, re, glob, subprocess, sys
 #   兄弟包在 <skill>/../persona-distiller-group。
 DEF_REG = os.path.abspath(os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "persona-distiller-group"))
-DEF_DL = "/Users/linzezhang/Downloads/蒸馏"
-DEF_Q = "/Users/linzezhang/Downloads/蒸馏/_蒸馏队列.json"
-DEF_DEFER = "/Users/linzezhang/Downloads/蒸馏/_延后名单.json"
-DEF_YEARS = "/Users/linzezhang/Downloads/蒸馏/_卒年.json"   # ★ 可以不存在
+# ★★★★ 台账搬进仓了（2026-08-10）。**仓内优先，`~/Downloads` 只当兜底。**
+#   为什么搬：这三本决定「下一个做谁」，而它们此前只在 `~/Downloads/蒸馏`——
+#   **换一台机器、或换一个接手的人，这条链当场断，且断法是「找不到名册」不是报错。**
+#   ★ 兜底不是静默的：仓内与 Downloads **都在且内容不同**时，**逐本打印两边的 sha256 与 mtime**。
+#     静默取一边就是又一次「空默认值吞掉不知道」。
+_LEDGERS = os.path.abspath(os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "..", "..", "..", "..", "..", "skill_log_evals", "persona-distiller", "_ledgers"))
+_HOME_DL = "/Users/linzezhang/Downloads/蒸馏"
+
+
+def _pick(name):
+    """仓内优先；两边都在且不同 → 用仓内的，但**把差异喊出来**。"""
+    a = os.path.join(_LEDGERS, name)
+    b = os.path.join(_HOME_DL, name)
+    if os.path.isfile(a) and os.path.isfile(b):
+        try:
+            import hashlib
+            ha = hashlib.sha256(open(a, "rb").read()).hexdigest()[:12]
+            hb = hashlib.sha256(open(b, "rb").read()).hexdigest()[:12]
+            if ha != hb:
+                sys.stderr.write(
+                    "★★★★ 台账两处不一致，**本次用的是仓内那份**：%s\n"
+                    "      仓内 %s  mtime %s\n      Downloads %s  mtime %s\n"
+                    % (name, ha, time.strftime('%F %T', time.localtime(os.path.getmtime(a))),
+                       hb, time.strftime('%F %T', time.localtime(os.path.getmtime(b)))))
+        except Exception as exc:                                   # noqa: BLE001
+            sys.stderr.write("★ 台账比对失败（不影响取值，但没核过）：%r\n" % (exc,))
+        return a
+    return a if os.path.isfile(a) else b
+
+
+DEF_DL = _LEDGERS if os.path.isdir(_LEDGERS) else _HOME_DL
+DEF_Q = _pick("_蒸馏队列.json")
+DEF_DEFER = _pick("_延后名单.json")
+DEF_YEARS = _pick("_卒年.json")   # ★ 可以不存在
 
 def norm(s):
     return re.sub(r'[^a-z0-9]', '', s.lower())

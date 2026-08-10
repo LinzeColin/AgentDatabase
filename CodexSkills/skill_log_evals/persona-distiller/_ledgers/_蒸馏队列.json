@@ -1,0 +1,1665 @@
+{
+ "generated_note": "target roster; done-state derived live by next_person.py",
+ "total": 237,
+ "queue": [
+  {
+   "name": "Dennis Ritchie",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 1
+  },
+  {
+   "name": "Ken Thompson",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 2
+  },
+  {
+   "name": "Linus Torvalds",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 3
+  },
+  {
+   "name": "Donald Knuth",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 4
+  },
+  {
+   "name": "Grace Hopper",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 5
+  },
+  {
+   "name": "Alan Kay",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 6
+  },
+  {
+   "name": "Guido van Rossum",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 7
+  },
+  {
+   "name": "Bjarne Stroustrup",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 8
+  },
+  {
+   "name": "Anders Hejlsberg",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 9
+  },
+  {
+   "name": "John Carmack",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 10
+  },
+  {
+   "name": "Tim Berners-Lee",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 11
+  },
+  {
+   "name": "Vint Cerf",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 12
+  },
+  {
+   "name": "Barbara Liskov",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 13
+  },
+  {
+   "name": "Leslie Lamport",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 14
+  },
+  {
+   "name": "Edsger Dijkstra",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 15
+  },
+  {
+   "name": "Tony Hoare",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 16
+  },
+  {
+   "name": "John McCarthy",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 17
+  },
+  {
+   "name": "Rob Pike",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 18
+  },
+  {
+   "name": "Margaret Hamilton",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 19
+  },
+  {
+   "name": "Douglas Engelbart",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 1,
+   "order": 20
+  },
+  {
+   "name": "Warren Buffett",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 1
+  },
+  {
+   "name": "Charlie Munger",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 2
+  },
+  {
+   "name": "Benjamin Graham",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 3
+  },
+  {
+   "name": "Philip Fisher",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 4
+  },
+  {
+   "name": "Peter Lynch",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 5
+  },
+  {
+   "name": "John Bogle",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 6
+  },
+  {
+   "name": "Ray Dalio",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 7
+  },
+  {
+   "name": "George Soros",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 8
+  },
+  {
+   "name": "Jim Simons",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 9
+  },
+  {
+   "name": "David Swensen",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 10
+  },
+  {
+   "name": "Howard Marks",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 11
+  },
+  {
+   "name": "Seth Klarman",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 12
+  },
+  {
+   "name": "Joel Greenblatt",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 13
+  },
+  {
+   "name": "Stanley Druckenmiller",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 14
+  },
+  {
+   "name": "Carl Icahn",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 15
+  },
+  {
+   "name": "John Templeton",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 16
+  },
+  {
+   "name": "Julian Robertson",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 17
+  },
+  {
+   "name": "Michael Steinhardt",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 18
+  },
+  {
+   "name": "Jesse Livermore",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 2,
+   "order": 19
+  },
+  {
+   "name": "Nikolai Slavyanov",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 1
+  },
+  {
+   "name": "Nikolai Benardos",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 2
+  },
+  {
+   "name": "Elihu Thomson",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 3
+  },
+  {
+   "name": "C. L. Coffin",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 4
+  },
+  {
+   "name": "Comfort Avery Adams",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 5
+  },
+  {
+   "name": "Henry Bessemer",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 6
+  },
+  {
+   "name": "Henry Clifton Sorby",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 7
+  },
+  {
+   "name": "Adolf Martens",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 8
+  },
+  {
+   "name": "William Chandler Roberts-Austen",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 9
+  },
+  {
+   "name": "Edgar Bain",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 10
+  },
+  {
+   "name": "Robert Franklin Mehl",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 11
+  },
+  {
+   "name": "Walter Rosenhain",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 12
+  },
+  {
+   "name": "Pol Duwez",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 13
+  },
+  {
+   "name": "Morris Cohen",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 14
+  },
+  {
+   "name": "William D. Callister",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 15
+  },
+  {
+   "name": "Gustave Eiffel",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 16
+  },
+  {
+   "name": "Fazlur Rahman Khan",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 17
+  },
+  {
+   "name": "Ove Arup",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 18
+  },
+  {
+   "name": "Hardy Cross",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 19
+  },
+  {
+   "name": "Eduardo Torroja",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 20
+  },
+  {
+   "name": "Pier Luigi Nervi",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 21
+  },
+  {
+   "name": "Anton Tedesko",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 22
+  },
+  {
+   "name": "Stephen Timoshenko",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 23
+  },
+  {
+   "name": "Henry Maudslay",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 24
+  },
+  {
+   "name": "Joseph Whitworth",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 25
+  },
+  {
+   "name": "James Nasmyth",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 26
+  },
+  {
+   "name": "William Sellers",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 27
+  },
+  {
+   "name": "Waloddi Weibull",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 28
+  },
+  {
+   "name": "John Moubray",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 29
+  },
+  {
+   "name": "Stanley Nowlan",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 30
+  },
+  {
+   "name": "Charles M. Eastman",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 1
+  },
+  {
+   "name": "Patrick MacLeamy",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 2
+  },
+  {
+   "name": "Jerry Laiserin",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 3
+  },
+  {
+   "name": "Henry Gantt",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 4
+  },
+  {
+   "name": "Harold Kerzner",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 5
+  },
+  {
+   "name": "Russell Archibald",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 6
+  },
+  {
+   "name": "John Fondahl",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 7
+  },
+  {
+   "name": "James Kelley",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 8
+  },
+  {
+   "name": "Morgan Walker",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 9
+  },
+  {
+   "name": "Kenneth Humphreys",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 10
+  },
+  {
+   "name": "Eliyahu Goldratt",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 11
+  },
+  {
+   "name": "Peter Kraljic",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 12
+  },
+  {
+   "name": "Keith Oliver",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 13
+  },
+  {
+   "name": "Martin Christopher",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 14
+  },
+  {
+   "name": "Hau Lee",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 15
+  },
+  {
+   "name": "David Simchi-Levi",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 16
+  },
+  {
+   "name": "Luca Pacioli",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 1
+  },
+  {
+   "name": "William Paton",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 2
+  },
+  {
+   "name": "A. C. Littleton",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 3
+  },
+  {
+   "name": "Robert Kaplan",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 4
+  },
+  {
+   "name": "Harry Markowitz",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 5
+  },
+  {
+   "name": "William Sharpe",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 6
+  },
+  {
+   "name": "Eugene Fama",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 7
+  },
+  {
+   "name": "Robert Merton",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 8
+  },
+  {
+   "name": "Myron Scholes",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 9
+  },
+  {
+   "name": "Fischer Black",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 10
+  },
+  {
+   "name": "Franco Modigliani",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 11
+  },
+  {
+   "name": "Merton Miller",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 12
+  },
+  {
+   "name": "Herbert Heinrich",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 13
+  },
+  {
+   "name": "James Reason",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 14
+  },
+  {
+   "name": "Charles Perrow",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 15
+  },
+  {
+   "name": "Nancy Leveson",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 16
+  },
+  {
+   "name": "Sidney Dekker",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 17
+  },
+  {
+   "name": "W. Edwards Deming",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 18
+  },
+  {
+   "name": "Joseph Juran",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 19
+  },
+  {
+   "name": "Walter Shewhart",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 20
+  },
+  {
+   "name": "Kaoru Ishikawa",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 21
+  },
+  {
+   "name": "Genichi Taguchi",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 22
+  },
+  {
+   "name": "Cicero",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 1
+  },
+  {
+   "name": "Hugo Grotius",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 2
+  },
+  {
+   "name": "William Blackstone",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 3
+  },
+  {
+   "name": "Oliver Wendell Holmes Jr.",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 4
+  },
+  {
+   "name": "Hans Kelsen",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 5
+  },
+  {
+   "name": "H. L. A. Hart",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 6
+  },
+  {
+   "name": "Ronald Dworkin",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 7
+  },
+  {
+   "name": "Louis Brandeis",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 8
+  },
+  {
+   "name": "John Marshall",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 9
+  },
+  {
+   "name": "Ruth Bader Ginsburg",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 10
+  },
+  {
+   "name": "Solon",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 11
+  },
+  {
+   "name": "Abraham Lincoln",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 12
+  },
+  {
+   "name": "Otto von Bismarck",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 13
+  },
+  {
+   "name": "Nelson Mandela",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 14
+  },
+  {
+   "name": "Lee Kuan Yew",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 15
+  },
+  {
+   "name": "Winston Churchill",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 16
+  },
+  {
+   "name": "Niccolo Machiavelli",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 17
+  },
+  {
+   "name": "Thomas Jefferson",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 18
+  },
+  {
+   "name": "Philip Kotler",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 1
+  },
+  {
+   "name": "David Ogilvy",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 2
+  },
+  {
+   "name": "Claude C. Hopkins",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 3
+  },
+  {
+   "name": "Edward Bernays",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 4
+  },
+  {
+   "name": "Theodore Levitt",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 5
+  },
+  {
+   "name": "Seth Godin",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 6
+  },
+  {
+   "name": "Byron Sharp",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 7
+  },
+  {
+   "name": "Al Ries",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 8
+  },
+  {
+   "name": "Jack Trout",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 9
+  },
+  {
+   "name": "Leo Burnett",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 10
+  },
+  {
+   "name": "Bill Bernbach",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 11
+  },
+  {
+   "name": "Rosser Reeves",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 12
+  },
+  {
+   "name": "Regis McKenna",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 13
+  },
+  {
+   "name": "Don Peppers",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 14
+  },
+  {
+   "name": "Martha Rogers",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 15
+  },
+  {
+   "name": "Geoffrey Moore",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 16
+  },
+  {
+   "name": "David Aaker",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 17
+  },
+  {
+   "name": "Kevin Lane Keller",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 18
+  },
+  {
+   "name": "Sergio Zyman",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 19
+  },
+  {
+   "name": "Mary Wells Lawrence",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 20
+  },
+  {
+   "name": "Henry Ford",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 1
+  },
+  {
+   "name": "Alfred Sloan",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 2
+  },
+  {
+   "name": "Konosuke Matsushita",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 3
+  },
+  {
+   "name": "Akio Morita",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 4
+  },
+  {
+   "name": "Soichiro Honda",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 5
+  },
+  {
+   "name": "Ray Kroc",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 6
+  },
+  {
+   "name": "Ingvar Kamprad",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 7
+  },
+  {
+   "name": "Jack Welch",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 8
+  },
+  {
+   "name": "Herb Kelleher",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 9
+  },
+  {
+   "name": "Jeff Bezos",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 10
+  },
+  {
+   "name": "Steve Jobs",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 11
+  },
+  {
+   "name": "Peter Drucker",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 12
+  },
+  {
+   "name": "Jim Collins",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 13
+  },
+  {
+   "name": "Satya Nadella",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 14
+  },
+  {
+   "name": "Mary Barra",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 15
+  },
+  {
+   "name": "Indra Nooyi",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 16
+  },
+  {
+   "name": "Jamie Dimon",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 17
+  },
+  {
+   "name": "Richard Branson",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 18
+  },
+  {
+   "name": "Leonardo da Vinci",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 1
+  },
+  {
+   "name": "Michelangelo",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 2
+  },
+  {
+   "name": "Pablo Picasso",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 3
+  },
+  {
+   "name": "Dieter Rams",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 4
+  },
+  {
+   "name": "Paul Rand",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 5
+  },
+  {
+   "name": "Milton Glaser",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 6
+  },
+  {
+   "name": "Massimo Vignelli",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 7
+  },
+  {
+   "name": "Saul Bass",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 8
+  },
+  {
+   "name": "Josef Albers",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 9
+  },
+  {
+   "name": "Walter Gropius",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 10
+  },
+  {
+   "name": "Le Corbusier",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 11
+  },
+  {
+   "name": "Frank Lloyd Wright",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 12
+  },
+  {
+   "name": "Charles Eames",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 13
+  },
+  {
+   "name": "Raymond Loewy",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 14
+  },
+  {
+   "name": "Henry Dreyfuss",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 15
+  },
+  {
+   "name": "Buckminster Fuller",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 16
+  },
+  {
+   "name": "Zaha Hadid",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 17
+  },
+  {
+   "name": "Tadao Ando",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 18
+  },
+  {
+   "name": "Kenya Hara",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 19
+  },
+  {
+   "name": "Coco Chanel",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 20
+  },
+  {
+   "name": "Confucius",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 1
+  },
+  {
+   "name": "Socrates",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 2
+  },
+  {
+   "name": "Plato",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 3
+  },
+  {
+   "name": "Aristotle",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 4
+  },
+  {
+   "name": "Immanuel Kant",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 5
+  },
+  {
+   "name": "Jean-Jacques Rousseau",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 6
+  },
+  {
+   "name": "Johann Pestalozzi",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 7
+  },
+  {
+   "name": "Friedrich Frobel",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 8
+  },
+  {
+   "name": "John Amos Comenius",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 9
+  },
+  {
+   "name": "John Dewey",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 10
+  },
+  {
+   "name": "Maria Montessori",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 11
+  },
+  {
+   "name": "Lev Vygotsky",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 12
+  },
+  {
+   "name": "Jean Piaget",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 13
+  },
+  {
+   "name": "Paulo Freire",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 14
+  },
+  {
+   "name": "Benjamin Bloom",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 15
+  },
+  {
+   "name": "Howard Gardner",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 16
+  },
+  {
+   "name": "Seymour Papert",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 17
+  },
+  {
+   "name": "John Hattie",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 18
+  },
+  {
+   "name": "Hippocrates",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 1
+  },
+  {
+   "name": "Galen",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 2
+  },
+  {
+   "name": "Andreas Vesalius",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 3
+  },
+  {
+   "name": "William Harvey",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 4
+  },
+  {
+   "name": "Edward Jenner",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 5
+  },
+  {
+   "name": "Ignaz Semmelweis",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 6
+  },
+  {
+   "name": "Louis Pasteur",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 7
+  },
+  {
+   "name": "Robert Koch",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 8
+  },
+  {
+   "name": "Joseph Lister",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 9
+  },
+  {
+   "name": "Rudolf Virchow",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 10
+  },
+  {
+   "name": "William Osler",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 11
+  },
+  {
+   "name": "Alexander Fleming",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 12
+  },
+  {
+   "name": "Florence Nightingale",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 13
+  },
+  {
+   "name": "Virginia Henderson",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 14
+  },
+  {
+   "name": "Hildegard Peplau",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 15
+  },
+  {
+   "name": "Jean Watson",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 16
+  },
+  {
+   "name": "Clara Barton",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 17
+  },
+  {
+   "name": "Elizabeth Blackwell",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 18
+  },
+  {
+   "name": "Michael DeBakey",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 19
+  },
+  {
+   "name": "Atul Gawande",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 20
+  },
+  {
+   "name": "Paul Farmer",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 21
+  },
+  {
+   "name": "Norman Borlaug",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 1
+  },
+  {
+   "name": "Yuan Longping",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 2
+  },
+  {
+   "name": "Justus von Liebig",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 3
+  },
+  {
+   "name": "Gregor Mendel",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 4
+  },
+  {
+   "name": "Nikolai Vavilov",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 5
+  },
+  {
+   "name": "George Washington Carver",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 6
+  },
+  {
+   "name": "Luther Burbank",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 7
+  },
+  {
+   "name": "M. S. Swaminathan",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 8
+  },
+  {
+   "name": "Albert Howard",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 9
+  },
+  {
+   "name": "Masanobu Fukuoka",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 10
+  },
+  {
+   "name": "Wes Jackson",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 11
+  },
+  {
+   "name": "Gifford Pinchot",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 12
+  },
+  {
+   "name": "Aldo Leopold",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 13
+  },
+  {
+   "name": "Jay Lush",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 14
+  },
+  {
+   "name": "Temple Grandin",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 15
+  }
+ ]
+}
