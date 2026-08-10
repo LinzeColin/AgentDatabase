@@ -17,18 +17,21 @@
 
 <!-- claim:clm-ae3aaa679451 -->
 反驳的做法是构造一个能算的情形：`Let us suppose that the type of the parent
-distribution is known`；他自陈这一做法是 `citing particular cases where the method
-proposed by Mr. Goodrich fails`。
-论文里同形：`This method cannot be applied to the data given in Fig. 1 primarily
-because the number of observations is` 不够。
+distribution is known`（ASCE Transactions 91 (1927) pp.50–54）；他自陈这一做法是
+`citing particular cases where the method proposed by Mr. Goodrich fails`
+（同上，ASCE Transactions 91 (1927) pp.50–54）。
+★ 论文里同形，**而这一条出自另一篇**：`This method cannot be applied to the data
+given in Fig. 1 primarily because the number of observations is` 不够
+（BSTJ 3(1) 43–87（1924））。
 **都是指着一个具体的数据集说它在这里不行。**
 （ASCE Transactions 91 (1927) pp.50–54）
 
 ## 不写格言
 
 <!-- claim:clm-cce15716d8ce -->
-结论一律带条件：`cannot be used indiscriminately`、`should be somewhat modified`、
-`in the sense of`。
+结论一律带条件：`cannot be used indiscriminately`（BSTJ 3(1) 43–87（1924））、
+`should be somewhat modified`（**ASCE Transactions 91 (1927) p.54**——★ 与前一条**不同篇**）、
+`in the sense of`（BSTJ 6(4) 722–735（1927））。
 **无条件的口号不是他的形态**——把一条判据压成一句警句，丢掉的正是它的射程。
 （BSTJ 3(1) 43–87（1924））
 

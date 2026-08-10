@@ -692,9 +692,19 @@ def main() -> int:
     if not hl.is_file():
         print("⚠ check_answer_holdout_leak.py 不在，**holdout 泄漏未核（不是通过）**")
     else:
-        h = subprocess.run([sys.executable, str(hl), "--workspace", str(a.workspace),
-                            "--candidate", str(cand_path), "--baseline", str(base_path)],
-                           capture_output=True, text=True)
+        #   ★★★★ 2026-08-11（Shewhart #165）：**必须把题面也传进去，否则 known 题 100% 误报。**
+        #     每一道 known 题都必然点名 holdout 那部作品——那正是 known 题的定义
+        #     （「1928 年你在《富兰克林研究所学报》上那篇…」）。
+        #     实测：候选答的是「里面**没有** 1928 年的《富兰克林研究所学报》文章」，
+        #     **它在说那篇不在它手上，而门把这句判成了泄漏**，并拦下了整份载荷。
+        #     同批误报的还有 `Bell System Technical Journal`／`Study`／`Through`／
+        #     `Transactions`——那些**在产物里本来就有**（判据侧已加产物排除集）。
+        _prompts = a.workspace / "evals" / "cases.jsonl"
+        _hl_argv = [sys.executable, str(hl), "--workspace", str(a.workspace),
+                    "--candidate", str(cand_path), "--baseline", str(base_path)]
+        if _prompts.is_file():
+            _hl_argv += ["--prompts", str(_prompts)]
+        h = subprocess.run(_hl_argv, capture_output=True, text=True)
         print((h.stdout or "").rstrip())
         if (h.stderr or "").strip():
             for _l in h.stderr.rstrip().splitlines():

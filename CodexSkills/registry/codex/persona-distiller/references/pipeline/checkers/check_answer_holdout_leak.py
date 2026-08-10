@@ -74,7 +74,8 @@ def load_answers(path: pathlib.Path) -> dict[str, str]:
     return out
 
 
-def scan(ws: pathlib.Path, candidate: pathlib.Path, baseline: pathlib.Path | None) -> dict:
+def scan(ws: pathlib.Path, candidate: pathlib.Path, baseline: "pathlib.Path | None",
+         prompts: "pathlib.Path | None" = None) -> dict:
     ws = ws.expanduser().resolve()
     led = ws / "evidence" / "source-ledger.jsonl"
     if not led.is_file():
@@ -112,13 +113,54 @@ def scan(ws: pathlib.Path, candidate: pathlib.Path, baseline: pathlib.Path | Non
     # ★ 负对照：基线从没读过任何文件；它也命中的词**不是 holdout 独有**，剔掉。
     common_sense_p = {t for t in only_p if t in base_text}
     common_sense_n = {t for t in only_n if t in base_text}
-    hit_p = sorted({t for t in only_p if t in cand_text} - common_sense_p)
-    hit_n = sorted({t for t in only_n if t in cand_text} - common_sense_n)
+
+    #   ★★★★ 2026-08-11（Shewhart #165 撞出）：**还要减掉两样，否则必然误报。**
+    #
+    #   ① **产物**——候选方的合法输入就是那十份 Markdown。
+    #      holdout 那部作品的刊名、丛书名、题名里的通用词（`Study`、`Through`、
+    #      `Transactions`、`Bell System Technical Journal`）**同时出现在产物里**，
+    #      因为产物本来就要列出他的其他著作。**候选说得出它们，不是因为读了 holdout。**
+    #
+    #   ② **题面**——★★ 这一条是结构性的：**每一道 known 题都必然点名 holdout 那部作品**，
+    #      那正是 known 题的定义（「1928 年你在《富兰克林研究所学报》上那篇…」）。
+    #      不减题面，**known 题会 100% 误报**。
+    #      实测：候选那句话是「里面**没有** 1928 年的《富兰克林研究所学报》文章」——
+    #      **它在说那篇不在它手上，而门把这句判成了泄漏。**
+    #
+    #   ★ 减法要减在**分子**上（候选命中），不是把 holdout 词表整个缩小——
+    #      [[overlap-metrics-need-a-shared-baseline-subtracted]]。
+    prod_text = ""
+    for _rel in ("facts.md", "cognitive-os.md", "decision-policy.md", "strategy.md",
+                 "capabilities.md", "persona.md", "work.md", "boundaries.md",
+                 "hypotheses.md", "divergence-map.md"):
+        _p = ws / _rel
+        if _p.is_file():
+            prod_text += " " + _p.read_text(encoding="utf-8", errors="replace")
+    prompt_text = ""
+    if prompts and prompts.is_file():
+        for _l in prompts.read_text(encoding="utf-8", errors="replace").splitlines():
+            if _l.strip():
+                try:
+                    prompt_text += " " + str(json.loads(_l).get("prompt", ""))
+                except Exception:                                   # noqa: BLE001
+                    prompt_text += " " + _l
+    in_products_p = {t for t in only_p if t in prod_text}
+    in_products_n = {t for t in only_n if t in prod_text}
+    in_prompt_p = {t for t in only_p if t in prompt_text}
+    in_prompt_n = {t for t in only_n if t in prompt_text}
+
+    hit_p = sorted({t for t in only_p if t in cand_text}
+                   - common_sense_p - in_products_p - in_prompt_p)
+    hit_n = sorted({t for t in only_n if t in cand_text}
+                   - common_sense_n - in_products_n - in_prompt_n)
 
     return {
         "holdout 份数": len(hold_paths), "train 份数": len(train_paths),
         "holdout 独有专名": len(only_p), "holdout 独有数字": len(only_n),
         "被基线也命中而剔除的": len(common_sense_p) + len(common_sense_n),
+        "★ 因产物里本来就有而剔除的": len(in_products_p) + len(in_products_n),
+        "★★ 因题面里本来就有而剔除的": len(in_prompt_p) + len(in_prompt_n),
+        "有没有题面": bool(prompt_text),
         "候选命中专名": hit_p, "候选命中数字": hit_n,
         "有没有负对照": bool(base),
     }
@@ -197,6 +239,9 @@ def main() -> int:
     ap.add_argument("--workspace", type=pathlib.Path)
     ap.add_argument("--candidate", type=pathlib.Path)
     ap.add_argument("--baseline", type=pathlib.Path)
+    ap.add_argument("--prompts", type=pathlib.Path,
+                    help="题面 JSONL（{case_id,prompt}）。★ **不给它，known 题会 100% 误报**"
+                         "——每道 known 题都必然点名 holdout 那部作品。")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
@@ -204,7 +249,7 @@ def main() -> int:
         return self_test()
     if not (a.workspace and a.candidate):
         ap.error("要给 --workspace 与 --candidate")
-    r = scan(a.workspace, a.candidate, a.baseline)
+    r = scan(a.workspace, a.candidate, a.baseline, a.prompts)
     if a.json:
         print(json.dumps(r, ensure_ascii=False, indent=1))
     else:
@@ -217,6 +262,10 @@ def main() -> int:
                  r["holdout 独有数字"], r["被基线也命中而剔除的"]))
         if not r["有没有负对照"]:
             print("  ★ **没有基线答案做负对照**——本次结论的强度低一档")
+        print("  ★ 因产物里本来就有而剔除 %d；因题面里本来就有而剔除 %d%s"
+              % (r.get("★ 因产物里本来就有而剔除的", 0),
+                 r.get("★★ 因题面里本来就有而剔除的", 0),
+                 "" if r.get("有没有题面") else "（**没给 --prompts，known 题会误报**）"))
         if r["候选命中专名"] or r["候选命中数字"]:
             print("  ✗ **候选答案里出现了只可能来自 holdout 的东西**：")
             print("      专名", r["候选命中专名"][:20])

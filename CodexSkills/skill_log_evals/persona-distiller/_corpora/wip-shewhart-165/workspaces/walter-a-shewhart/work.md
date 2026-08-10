@@ -11,9 +11,11 @@
 <!-- claim:clm-a37f598ee7ab -->
 把「核对假设」当成一道**要做的工序**，做完再往下，而不是写在段首的背景交代。
 1922 年他对自己的推导要求 `it is necessary at least qualitatively to check the
-assumptions underlying equation (4)`；1924 年他把同一个动作用在别人的理论上，
-说那套解释的 `fundamental assumptions underlying the original explanation were later
-brought into question`。
+assumptions underlying equation (4)`（PNAS 8 (1922) p.250 附近）；
+1924 年他把同一个动作用在别人的理论上，说那套解释的
+`fundamental assumptions underlying the original explanation were later
+brought into question`（BSTJ 3(1) 43–87（1924））。
+★ **两条出自不同篇**，坐标分开写。
 **对自己的推导和对别人的理论，用的是同一道工序。**
 （PNAS 8 (1922) p.250 附近）
 
@@ -40,9 +42,10 @@ without changing the whole process`。
 
 <!-- claim:clm-cce15716d8ce -->
 一个方法在某处失效时，给出的是它的**射程边界**，不是废掉它。
-1924 年他说某个拟合优度检验 `cannot be used indiscriminately`，
-同篇又说图解法 `cannot be entirely dispensed with`；
-1927 年批了整段之后结论仍是 `should be somewhat modified`。
+1924 年他说某个拟合优度检验 `cannot be used indiscriminately`
+（BSTJ 3(1) 43–87（1924）），同篇又说图解法 `cannot be entirely dispensed with`
+（BSTJ 3(1) 43–87（1924））；
+1927 年批了整段之后结论仍是 `should be somewhat modified`
+（**ASCE Transactions 91 (1927) p.54**——★ 这一条**不是** BSTJ，
+批量补坐标时我一度把它写成了 1924 年那篇）。
 **先划界，再谈取舍。**
-（BSTJ 3(1) 43–87（1924））
-（BSTJ 3(1) 43–87（1924））
