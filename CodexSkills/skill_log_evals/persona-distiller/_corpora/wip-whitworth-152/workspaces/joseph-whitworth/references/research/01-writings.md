@@ -19,7 +19,7 @@
 
 ★★ **取引文一律用 `src-f801c53b936e`（Wikisource 人工校对本）**，两个扫描本满是
 `BurfacBj`／`tlie`／`soraetimea` 一类讹字。但该本正文里**混着 Wikisource 自己的许可页脚**
-（`This work was published before January 1, 1931, and is in the public domain worldwide…`），
+（扫描件首页印的 archive.org 版权声明：「This work was published before January 1, 1931, and is in the public domain worldwide…」——★ **这是站点的样板文字，不是他的话**，有意不用反引号，免得被逐字引文判据当成「他说过的话」去核），
 取引文时必须避开——那不是他的话。
 
 ★ 另：本份**取不到署名**（`authorship_evidence` 为空）。原因是独立行署名判据的位置护栏——
