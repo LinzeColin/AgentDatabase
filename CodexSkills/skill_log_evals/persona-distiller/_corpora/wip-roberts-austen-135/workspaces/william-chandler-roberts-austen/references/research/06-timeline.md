@@ -66,7 +66,7 @@ Train-split、`dimensions` 含 `timeline` 的 **1 份**：
 - **1.24M 字符仍未通读**，本轮只做了定点开挖（四个年份 + 编年表 + 报告年份）。
 - 编年表之外，这份还列有
   `Official Work and Researches, 1870-1880, 1881-1890, 1891-1902`、
-  `References to Memoranda in the Annual Mint Reports, 1870-1889 and 1890-1902`、
+  `References to Memoranda in the Annual Mint Reports, 18701889 and 1890-1902`（★ `18701889` 缺的那个连字符是 OCR 掉的，**我曾把它补上**——补字就是改内容）、
   `Additional Bibliography`——**这三块都没读，是明确的下一轮目标。**
 
 ## Proposed Holdout cases

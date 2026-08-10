@@ -5,7 +5,7 @@
 
 - 源：`src-84c26905a4ef` `src-83e7c18ba316`
 - 篇幅 **26,033 字符**，**整篇第一人称**。
-- 首行照录：`COOPERATION / PRESIDENT'S ADDRESS / BY C. A. ADAMS`。
+- 首行照录：`COOPERATION PRESIDENT'S ADDRESS BY C. A. ADAMS`（★ 斜杠是我加的换行记号，原文没有）。
 - 出处经**目录、提要索引、页眉三重印证**。
 
 ## 密度

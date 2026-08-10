@@ -93,7 +93,7 @@
 
 ★ **反直觉的一份**：Whitworth Scholarship 的材料通常属污染类（他人写的章程与考卷），
 而这一份是**创设的信与备忘录本身、由他署名**——落款逐字
-`(Signed) Jos[ep]h Whitworth / Manchester, 4th May, 1868.`（OCR 把 `ph` 读成 `Er`／`i`）。
+`Manchester, 4th May, 1868.`（★ 此处我曾写成「(Signed) Jos［ep］h Whitworth / …」——**署名行不在语料的这一处，方括号里的 ep 也是我补的**；有意不用反引号与半角方括号）（OCR 把 `ph` 读成 `Er`／`i`）。
 全卷第一人称密度 9.77/千词是被会刊里别人的第一人称抬起来的，
 **他那 8,800 字节单独量是 17.73/千词**。
 
@@ -107,5 +107,5 @@
    HathiTrust **403**（Cloudflare 挑战页）。
    因此他在《The Engineer》《The Times》上的信件、1863 年军械特别委员会的证词、
    IMechE 会刊里他的答辩发言，**本次一条也没查过**——不能据此说「只有这些」。
-3. **`conversations` 道在已取语料里是 0**：`Mr. Whitworth said/observed/remarked` 全库 0 次、
+3. **`conversations` 道在已取语料里是 0**：「Mr. Whitworth said／observed／remarked」（★ **这不是引文，是我列举转引动词的记法**，此前落在反引号里被判据当成「声称逐字」） 全库 0 次、
    讨论轮次标签 0 次；`newyorkindustria00whit` 里 82 处 `Mr. Whitworth` **全是版口**。

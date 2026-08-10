@@ -30,7 +30,7 @@
 ## 焊接之外（同一人，已逐件核过身份）
 
 - `src-7a3ec62e6f8b`（442,016，1890-12-02）**处理含铅银锌矿石**——
-  题页 `CHARLES L. COFFIN, OE DETROIT, MICHIGAN, ASSIGNOR OF ONE-HALF TO GEORGE H. LOTHROP, OF SAME PLACE`。
+  题页 `CHARLES L. COFFIN, OE DETROIT, MICHIGAN, ASSIGNOR OF ONE-HALF TO GEORGE H. LO'I‘I'IROP, OF SAME PLACE`（★ `LO'I‘I'IROP` 是 OCR 原字，我曾把它「改正」成 `LOTHROP`）。
   ★ 本件是**他自己的话最多的一份**（实质第一人称 3 句）。
 - `src-583443e78127`（845,760，1907-03-05）**金属桶**，题页 `OF DETROIT, MICHIGAN`。
 
