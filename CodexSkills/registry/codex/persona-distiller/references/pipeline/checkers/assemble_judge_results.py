@@ -271,18 +271,44 @@ def summarize(rows: list) -> dict:
     }
 
 
-def flatten(rows: list, real_id: dict) -> list:
+def flatten(rows: list, real_id: dict, baseline_source: str = "unknown",
+            run_record: str = "") -> list:
     """逐对记录 → 工作区 `results.jsonl` 的扁平行。
 
     ★ 写进工作区的那份**必须用真 case_id**，不是载荷里的不透明编号。
       第一版直接把 `q-01…` 写了进去，发布门拿它去 `cases.jsonl` 查一条都对不上，
       于是 **overall / delta / boundary / fact 四项全部报 0.000**——
       看上去像产物彻底失败，实际是判据在跟一份对不上号的文件说话。
+
+    ★★★★ 2026-08-11（Shewhart #165 撞出）：**`baseline_source` 此前根本没被写过。**
+
+      `build_blind_payload` **收** `--baseline-source`（用于它自己那道泄题门），
+      而本件写 `results.jsonl` 时**一个字都不写**；
+      发布门 `check_baseline_provenance` 与 `answer_surface_leak` 都从这份文件读它，
+      读到的永远是 `unknown`。
+
+      后果不是漏记一个字段：**用户 2026-08-05 在待裁定 ⑭ 裁过
+      「裸模型基线的长度两条只报不拦」，而那个值传不到发布门 —— 这条裁定至今不可达。**
+      任何真跑了裸模型基线的人物，都会被长度门硬拦在发布之前。
+
+      ★ 本件因此收 `--baseline-source`，并且**对 `bare-model-run` 强制要运行记录路径**——
+      代码注释里原本就担心「声明成 bare-model-run 就免拦会变成一句谁都能写的话」，
+      **要运行记录正是那句担心的落地**。
     """
-    return [{"case_id": real_id[r["case_id"]], "system": sys_,
-             "overall_score": round(r[sys_], 4),
-             "judge_id": r["seat"], "suite": r["suite"]}
-            for r in rows for sys_ in ("candidate", "baseline")]
+    row = {"case_id": None, "system": None, "overall_score": None,
+           "judge_id": None, "suite": None}
+    out = []
+    for r in rows:
+        for sys_ in ("candidate", "baseline"):
+            d = {"case_id": real_id[r["case_id"]], "system": sys_,
+                 "overall_score": round(r[sys_], 4),
+                 "judge_id": r["seat"], "suite": r["suite"]}
+            if sys_ == "baseline":
+                d["baseline_source"] = baseline_source
+                if run_record:
+                    d["baseline_run_record"] = run_record
+            out.append(d)
+    return out
 
 
 # ══════════════════ 自测 ══════════════════
@@ -536,6 +562,17 @@ def main() -> int:
     ap.add_argument("--key", help="盲判 key 的路径；默认取 round-dir 里的 *_blind_key.json")
     ap.add_argument("--seat", action="append", default=[],
                     help="席位，形如 seat-D-score-v1:cb_judge_D.json，可给多次")
+    #   ★★★★ 2026-08-11：**这两个参数此前不存在，于是待裁定 ⑭ 的裁定传不到发布门。**
+    ap.add_argument("--baseline-source", default="unknown",
+                    choices=["bare-model-run", "prior-version",
+                             "self-authored-strawman", "unknown"],
+                    help="基线是怎么来的。**缺省 unknown**——"
+                         "「没标」与「标了不能用」在证据上是同一件事。")
+    ap.add_argument("--baseline-run-record", default="",
+                    help="`bare-model-run` **必须**给：那次裸模型运行的记录路径"
+                         "（派发指令 / 代理记录 / 答案文件）。"
+                         "★ 不要运行记录的话，「声明成 bare-model-run 就免拦」"
+                         "就成了一句谁都能写的话。")
     ap.add_argument("--self-test", action="store_true")
     ap.add_argument("--census", metavar="CORPORA_ROOT",
                     help="全库普查：每人末轮两档 delta（**别再手搓这段读取**）")
@@ -617,7 +654,12 @@ def main() -> int:
 
     s = summarize(rows)
     real = {q: v["case_id"] for q, v in key.items()}
-    flat = flatten(rows, real)
+    #   ★ `bare-model-run` 不给运行记录 → 直接拒绝，不许静默降级成 unknown
+    if a.baseline_source == "bare-model-run" and not a.baseline_run_record:
+        print("✗ `--baseline-source bare-model-run` **必须同时给 `--baseline-run-record`**——"
+              "那是「这确实是裸模型实答」的唯一可出示凭据。", file=sys.stderr)
+        return 3
+    flat = flatten(rows, real, a.baseline_source, a.baseline_run_record)
 
     # 不变量 ③
     unknown = {r["case_id"] for r in flat} - set(suite_by_real)
