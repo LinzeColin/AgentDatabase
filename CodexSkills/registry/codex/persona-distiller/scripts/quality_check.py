@@ -1182,13 +1182,29 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
         if hm and '状态' not in hm:
             n_men = len(hm.get('**字面提及**') or [])
             n_ov = len(hm.get('**与 holdout 正文的 8 词片重叠**') or [])
+            # ★★★ 2026-08-10：**「泛提」与「点名」后果差很远，但只报一个总数看不出来。**
+            #   全库实测：Barton **16 处字面提及、点名 0**（全是「本路不引 holdout」这类，
+            #   不说是哪一份）；而真正泄题的是 Adams 1 处、Virchow 2 处。
+            #   **旧的不分档计数会把 Barton 显示成全库最严重的。**
+            #   ★ **报错条件一个字没改**——任何提及仍然报错。
+            #     这道门当初就是被一句「善意的泛提」触发的（「我已经把 holdout 删干净了」），
+            #     把泛提放行等于把它的立门理由删掉。分档只进计量，供人分轻重。
+            n_named = len(hm.get('**其中点名了是哪一份的**') or [])
             report.metrics['holdout_mention'] = {
                 '字面提及': n_men,
+                '**其中点名了是哪一份的**': n_named,
+                '★ 只是泛泛提及（不说哪一份）': n_men - n_named,
                 '与 holdout 正文重叠': n_ov,
                 '★ 与出厂模板逐字相同、已豁免': len(hm.get('★ 与出厂模板逐字相同、已豁免的') or []),
                 '★★ 射程': '抓不到「不提 holdout 也不抄它、却把题目描述出来」的写法——'
                            '那一类只能靠人读或答题方主动上报',
             }
+            if n_named:
+                report.error('corpus.holdout-work-named-in-artifacts',
+                             f'**建模者读得到的文件里有 {n_named} 处直接说出了 holdout 是哪一份**'
+                             f'（书名／卷次页码／文件名／源 id）——这比「提到有个 holdout」严重得多，'
+                             f'**它把那道题考什么也告诉了**。'
+                             f'　{[(m["文件"], m["行"]) for m in hm["**其中点名了是哪一份的**"][:3]]}')
             if n_men:
                 report.error('corpus.holdout-mentioned-in-artifacts',
                              f'**建模者读得到的文件里有 {n_men} 处提到 holdout**——'
@@ -3715,6 +3731,24 @@ def main() -> int:
     args = parser.parse_args()
 
     target = args.target.expanduser().resolve()
+    # ★★★ 2026-08-10：**双层嵌套的工作区**（`workspaces/<slug>/<slug>/`）今天绊了我四次。
+    #   Osler / Nightingale / Virchow / Barton 都是这个形状，
+    #   而 `ls -d .../workspaces/*/` 取到的是**外层**，于是报 `target.invalid`。
+    #   判据没错，是调用方每次都要多走一步。**在入口处替它走掉。**
+    #
+    #   ★ 条件收得很紧：**当前目录没有 `meta.json`，而恰好只有一个直接子目录有**。
+    #     多于一个就不猜——那说明这个路径本来就有歧义。
+    #   ★★ **下降之后必须大声打印实际用的路径**：不打印就变成了另一种「指错文件」
+    #     （见 `gate-green-but-pointed-at-wrong-artifact`：门绿了而指的不是你以为的那份）。
+    if not (target / 'meta.json').is_file():
+        _kids = [d for d in sorted(target.iterdir()) if d.is_dir() and (d / 'meta.json').is_file()]             if target.is_dir() else []
+        if len(_kids) == 1:
+            print(f"★ 给的目录没有 meta.json，**自动下降一层**：{target.name} → {_kids[0].name}\n"
+                  f"  ★★ 实际用的路径：{_kids[0]}", file=sys.stderr)
+            target = _kids[0]
+        elif len(_kids) > 1:
+            print(f"★ 给的目录没有 meta.json，而有 {len(_kids)} 个子目录都有——"
+                  f"**不猜**，请指明是哪一个：{[d.name for d in _kids]}", file=sys.stderr)
     try:
         meta = ensure_target(target)
     except (ValueError, OSError) as exc:
