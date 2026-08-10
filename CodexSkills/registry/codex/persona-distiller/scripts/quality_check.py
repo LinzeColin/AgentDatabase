@@ -2715,6 +2715,59 @@ def run_claim_source_independence(report, target: Path) -> None:
     report.metrics['claim_source_independence'] = info
 
 
+def run_corpus_feasibility(report, target: Path) -> None:
+    """**手上这批材料，还有没有可能走完全程？**（v0.0.0.-新增，Shewhart #165 撞出）
+
+    ★★★ 本文件自己的两条规则合起来是矛盾的，而没有任何地方写着：
+
+    - L132：`len(usable) >= min_sources`，`usable` **只含 `split == 'train'`**；
+    - L149：synthesis/release 阶段**没有 holdout 就报错**。
+
+    → holdout 那一份必须从总数里扣，**所以真实下限是 `min_sources + 1`**。
+    quick 档文档写 8，真实是 9。Shewhart #165 一手正好 8 份：
+    **研究门绿、合成门必错，且怎么改文字都过不去**。
+
+    ★★ 代价不是多跑一次门：研究门放行之后，人会去写六道研究、几十条断言、
+    十份产物、一整套用例，**全部做完之后**才撞见 `source.no-holdout`。
+    本判据把这一撞提前到抓源刚结束的时候。
+
+    判据穷举「扣哪一份当 holdout」——★ 只试一种选法会误判：
+    某一道可能只有 1 份材料撑着，恰好扣掉它道数就掉了，换一份扣就没事。
+
+    全库实测（2026-08-10，23 个有 meta 的工作区）：**17 绿 / 6 红**，
+    红的 6 个里 5 个是**已知受阻**的人（Benardos/Koch/Liebig/Martens/Semmelweis），
+    **新增只有 Shewhart 一个**；所有已判分出货的人全绿——正对照成立。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_corpus_feasibility.py'
+    if not script.exists():
+        report.metrics['corpus_feasibility'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_feas', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+        problems, info = module.evaluate(target, report.profile)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['corpus_feasibility'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    report.metrics['corpus_feasibility'] = info
+    if info.get('结论') == 'impossible-without-more-material':
+        report.error(
+            'corpus.structurally-infeasible',
+            f"**这批材料在结构上走不完全程**：可用 {info.get('可用材料总数')} 份 < "
+            f"**真实下限 {info.get('★ 真实下限')}**"
+            f"（{info.get('min_sources')} 份 train + 至少 1 份 holdout，"
+            f"因为 `min_sources` 只数 train 而合成阶段强制要有 holdout）"
+            f" —— **至少还要 {info.get('还差')} 份材料**；"
+            f"**再写多少文字都过不去**，现在停手比做完十份产物再撞上便宜")
+    elif info.get('结论') == 'needs-more-material':
+        report.warn(
+            'corpus.no-viable-holdout-split',
+            f"**扣任何一份当 holdout 都满足不了 profile 门**："
+            f"{'；'.join(info.get('拦路的') or [])} —— 差的是材料，不是文字")
+
+
 def run_filename_year_vs_ledger(report, target: Path) -> None:
     """文件名里的四位年份 vs 台账 `published_at`——两边对不上，就至少有一处记错了。
 
@@ -3823,6 +3876,7 @@ def main() -> int:
         report_semantic_residue(report, target)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
+        run_corpus_feasibility(report, target)
         run_rights_basis(report, target)
         run_pd_grounds(report, target)
         train_ids = {record.get('source_id') for record in sources if record.get('split') == 'train'}
