@@ -180,3 +180,47 @@ python3 scripts/check_longs_corruption.py --self-test
 ★ 拉丁逐字引文的**全部**来源就是新引进的那四份（DJBP 1853 三卷 + De Iure Praedae 1869）——现有 8 份拉丁源讹字率 92%–98%，一句都引不出来。
 ★ 英文侧 Selden 1652（0.9957）与 **Evats 1682（0.9875）** 同样不可用；后者是靠 A-byline 过了归属门的一手源——**归属成立不等于文本可引**。
 ★ 唯一「不适用」的是 `de_imperio_1751_fr.txt`（法文，两个语域的锚词都不够，本面板管不到它）。
+
+---
+
+# ★★ 2026-08-11 更正：上面那张表**说过头了**，能完整逐字引的拉丁源只有 1 份
+
+上表按长 s 面板把 DJBP 1853 三卷判成「干净」，并据此写下
+「拉丁逐字引文的**全部**来源就是新引进的那四份」。**那句话超出了判据量的范围。**
+
+去 vol1 的 Prolegomena 回读原句才看见（@83307，页眉 `xlvi PROLEGOMENA`）：
+
+> `Et **hee** quidem **que** jam diximus, locum aliquem haberent, etiamsi daremus,`
+> `quod sine summo scelere dari nequit, non esse Deum, aut non curari ab eo negotia humana`
+
+`hee`＝**haec**、`que`＝**quae**、别处 `ssculis`＝**saeculis**。
+长 s 是干净的（讹字率 0.0035），而 **ae 连字被打散了**——这是另一种坏法，
+第一版判据看不见它。**从 vol1 取逐字拉丁引文，会把 Grotius 写的 `quae` 印成 `que`。**
+
+## 实测（判据已加这一维）
+
+| 文件 | 长 s 讹字率 | ae/千字母 | quae : 独立 que | ae 连字 |
+|---|---:|---:|---|---|
+| `de_iure_praedae_1869_lat` | 0.0018 | **8.70** | 743 : 39 | **完好** |
+| `djbp_1853_lat_vol1` | 0.0035 | 0.29 | 24 : **463** | **打散** |
+| `djbp_1853_lat_vol2` | 0.0060 | 0.31 | 14 : **432** | **打散** |
+| `djbp_1853_lat_vol3` | 0.0101 | 1.16 | 120 : 36 | **打散** |
+| （未 ingest）`de_veritate_1809_lat` | 0.0027 | 5.30 | 474 : 61 | 完好 |
+| （未 ingest）`de_veritate_1813_lat` | 0.0038 | 5.37 | 485 : 103 | 完好 |
+
+判据重跑后 Grotius 的分布从「干净 9」变成 **干净 7 / 混杂 3 / 不可用 12 / 不适用 1**。
+
+## 结论改成
+
+- **能完整逐字引的拉丁一手源：只有 `de_iure_praedae_1869_lat` 一份。**
+- DJBP 1853 三卷仍然有用（**拉丁正文可读、可做内容依据、Prolegomena 可定位**），
+  但**取逐字引文时必须逐处核 ae**，或注明「据 1853 Whewell 校订本，ae 连字依 OCR 原样」。
+- 上一节那张表**不删**，它是错在哪里的记录。→ [[verbatim-is-not-understood]]
+
+## 这次是怎么发现的
+
+不是判据抓到的——**是我去回读了那句最有名的原文**。
+判据只量了它量的那一种坏法，而我把它的「干净」读成了「可逐字引」。
+已把 ae 这一维加进 `check_longs_corruption.py`（7 条自测，含
+「vol1 长 s 判干净而 ae 打散」这条反对照，与
+「合取设计本数据测不到，是安全边际不是已验证」这条诚实记录）。

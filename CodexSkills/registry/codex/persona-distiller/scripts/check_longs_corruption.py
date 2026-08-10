@@ -101,6 +101,30 @@ REGIMES = {
 }
 DIAGNOSTIC = [("est", "eft")]        # 只报不算，用来暴露 st 连字
 MIN_PANEL_HITS = 30
+
+# ── ★★ 第二种坏法：**ae 连字被打散**（v0.0.0.131 加，拉丁专用）
+#
+#   DJBP 1853 拉丁三卷的长 s **完全干净**（讹字率 0.0035），我据此把它们写进
+#   「可做逐字引文」那张表。去 Prolegomena 回读原句才发现：
+#
+#       Et hee quidem que jam diximus … etiamsi daremus … non esse Deum
+#              ↑haec  ↑quae
+#
+#   `quae`→`que`、`haec`→`hee`、`saeculis`→`ssculis`。
+#   **从 vol1 取逐字拉丁引文，会把 Grotius 写的 `quae` 印成 `que`。**
+#   → 判据只量了一种坏法，而我据它下的结论超出了它量的范围。
+#     [[verbatim-is-not-understood]] 的另一半：**改了讹字再当逐字引文用。**
+#
+#   两个信号取**合取**（单用任一个都会误伤）：
+#     ① `ae` 双字母 / 千字母 —— 拉丁散文里 ae 是高频
+#     ② `quae` 占 `quae`+独立 `que` 的比 —— 独立成词的 `que` 在规范拉丁里罕见
+#
+#   本机实测（缝在 2.32 与 5.30 之间）：
+#     完好 de_iure_praedae_1869 8.70/0.950、de_veritate_1809 5.30/0.886、1813 5.37/0.825
+#     打散 djbp_1853_vol1 0.29/0.049、vol2 0.31/0.031、vol3 1.16/0.769、
+#          epistolae_1687 0.19/0.032、poemata_1637 0.67/0.144
+AE_PER_1000_MIN = 3.5
+AE_QUAE_RATIO_MIN = 0.80
 UNUSABLE = 0.20
 CLEAN = 0.01
 
@@ -108,6 +132,29 @@ _WORD = re.compile(r"[a-z]+")
 
 
 _RANK = {"不可用": 3, "混杂": 2, "未核": 1, "干净": 0}
+
+
+def ae_ligature(text: str) -> dict:
+    """→ 拉丁 ae 连字有没有被打散。两个信号取**合取**，见常量处的实测表。"""
+    low = text.lower()
+    letters = len(re.findall(r"[a-z]", low))
+    if not letters:
+        return {"判读": "未核", "理由": "无拉丁字母"}
+    per_k = len(re.findall(r"ae", low)) / letters * 1000
+    quae = len(re.findall(r"\bquae\b", low))
+    que = len(re.findall(r"\bque\b", low))
+    ratio = quae / (quae + que) if (quae + que) else None
+    out = {"ae_per_1000": round(per_k, 2), "quae": quae, "que": que,
+           "quae_ratio": round(ratio, 3) if ratio is not None else None}
+    if ratio is None or quae + que < 20:
+        out["判读"] = "未核"
+        out["理由"] = "`quae`/`que` 合计只有 %d 次 < 20，**样本量不够，不是「完好」**" % (quae + que)
+        return out
+    broken = per_k < AE_PER_1000_MIN and ratio < AE_QUAE_RATIO_MIN
+    out["判读"] = "**打散**" if broken else "完好"
+    out["理由"] = ("ae %.2f/千字母（门 %.1f）、quae 占比 %.3f（门 %.2f）"
+                   % (per_k, AE_PER_1000_MIN, ratio, AE_QUAE_RATIO_MIN))
+    return out
 
 
 def _one_regime(c: Counter, total: int, name: str, spec: dict) -> dict:
@@ -157,9 +204,20 @@ def measure(text: str) -> dict:
                     reason="**两个语域都不适用**（" +
                            "；".join("%s：%s" % kv for kv in peek.items()) + "）")
     worst = max(hits, key=lambda r: _RANK[r["verdict"]])
-    return dict(out, verdict=worst["verdict"], rate=worst.get("rate"),
-                reason=worst["reason"] + ("" if len(hits) == 1 else
-                                          "　（两语域都适用，取更差的一侧）"))
+    verdict = worst["verdict"]
+    reason = worst["reason"] + ("" if len(hits) == 1 else "　（两语域都适用，取更差的一侧）")
+
+    # ★ 拉丁语域再问一次 ae 连字。长 s 干净 ≠ 可逐字引 —— DJBP 1853 三卷就是这样。
+    if any(r["语域"] == "拉丁" for r in hits):
+        ae = ae_ligature(text)
+        out["ae_连字"] = ae
+        if ae["判读"] == "**打散**":
+            reason += ("　★ **但 ae 连字被打散**（%s）：`quae`→`que`、`haec`→`hee`，"
+                       "**逐字引用会印出作者没写的形**" % ae["理由"])
+            if _RANK[verdict] < _RANK["混杂"]:
+                verdict = "混杂"
+
+    return dict(out, verdict=verdict, rate=worst.get("rate"), reason=reason)
 
 
 def load_sources(target: pathlib.Path) -> list:
@@ -283,6 +341,50 @@ def self_test() -> int:
         min(en_anc) > REGIMES["英文"]["anchor_min"] > 63.9)
     chk("★ 第一版只有拉丁面板时，evats 1682 被判「不适用」而真值是坏的",
         REAL_EN["djbp_evats_1682_en"][3] == "坏")
+
+    print("\n══ ★★ ae 连字：长 s 干净 ≠ 可逐字引 ══")
+    #   本机 2026-08-11 实测。**这一组的存在本身是一次更正**：
+    #   我先按长 s 面板把 DJBP 1853 三卷写进「可做逐字引文」，
+    #   去 Prolegomena 回读原句才看见 `quae`→`que`、`haec`→`hee`。
+    REAL_AE = {  # 文件: (ae/千字母, quae, 独立 que, 真值)
+        "de_iure_praedae_1869_lat": (8.70, 743, 39, "完好"),
+        "de_veritate_1809_lat":     (5.30, 474, 61, "完好"),
+        "de_veritate_1813_lat":     (5.37, 485, 103, "完好"),
+        "djbp_1853_lat_vol1":       (0.29, 24, 463, "打散"),
+        "djbp_1853_lat_vol2":       (0.31, 14, 432, "打散"),
+        "djbp_1853_lat_vol3":       (1.16, 120, 36, "打散"),
+        "epistolae_1687_lat":       (0.19, 6, 181, "打散"),
+        "poemata_1637_lat":         (0.67, 23, 137, "打散"),
+    }
+    ok_ae = [v[0] for v in REAL_AE.values() if v[3] == "完好"]
+    bad_ae = [v[0] for v in REAL_AE.values() if v[3] == "打散"]
+    chk("完好 %d 份 ae/千字母 落在 %.2f–%.2f" % (len(ok_ae), min(ok_ae), max(ok_ae)),
+        min(ok_ae) >= AE_PER_1000_MIN)
+    chk("打散 %d 份落在 %.2f–%.2f" % (len(bad_ae), min(bad_ae), max(bad_ae)),
+        max(bad_ae) < AE_PER_1000_MIN)
+    chk("门槛 %.1f 落在缝里（%.2f ← 缝 → %.2f）" % (AE_PER_1000_MIN, max(bad_ae), min(ok_ae)),
+        max(bad_ae) < AE_PER_1000_MIN < min(ok_ae))
+    # ★ 不合成假文本——`quae` 本身就含 `ae`，拼出来的文本复现不出真实比值，
+    #   那种夹具比原文「干净」，测的是我拼的东西不是判据。
+    #   直接把判据的规则套在**实测数对**上。[[fixtures-cleaner-than-the-real-thing]]
+    def rule(per_k, quae, que):
+        r = quae / (quae + que)
+        return "打散" if (per_k < AE_PER_1000_MIN and r < AE_QUAE_RATIO_MIN) else "完好"
+    mis = [k for k, v in REAL_AE.items() if rule(v[0], v[1], v[2]) != v[3]]
+    chk("★ 规则套在 8 组实测数对上，逐份与真值对得上（错 %d 份）" % len(mis), not mis)
+    # ★ 诚实记一条：这 8 组里**两个信号从来没有分歧**（都同时越线或同时不越线），
+    #   所以「合取」这个设计**本数据测不到**——它是留的安全边际，不是被验证过的。
+    #   写死这个事实，将来若出现分歧样本，本条会红，那时才该讨论用哪个信号。
+    agree = all((v[0] < AE_PER_1000_MIN) == (v[1] / (v[1] + v[2]) < AE_QUAE_RATIO_MIN)
+                for v in REAL_AE.values())
+    chk("★ 8 组里两个信号**从无分歧** → 「合取」这个设计本数据**测不到**，"
+        "是安全边际不是已验证（出现分歧样本时本条会红）", agree)
+    chk("★★ **反对照**：`djbp_1853_lat_vol1` 长 s 讹字率只有 0.0035（判「干净」），"
+        "而 ae 是打散的 —— **单看长 s 会把它写成「可逐字引」**",
+        REAL_AE["djbp_1853_lat_vol1"][3] == "打散")
+    tiny = ae_ligature("quae quae que " + "x" * 500)
+    chk("★ `quae`+`que` 不足 20 次 → **%s**，不是「完好」" % tiny["判读"],
+        tiny["判读"] == "未核")
 
     print("\n══ measure() 直跑 ══")
     m = measure("enim autem atque igitur quidem quoniam nisi tamen etiam quae quod " * 40
