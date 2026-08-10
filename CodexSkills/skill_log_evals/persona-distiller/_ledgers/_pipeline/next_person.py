@@ -114,13 +114,53 @@ def main():
             for al in (item.get("aliases") or []):
                 deferred.add(norm(al))
 
+    # ★★★ 2026-08-10：**第三种状态原来没有落脚处** —— 「做完了但没出货」。
+    #   `done` 认的是 registry（出货了），`deferred` 认的是延后名单，
+    #   而**卡在待裁定的人两处都不在**，于是永远排在 NEXT 最前面。
+    #   实测：`upcoming` 只有 6 个，**其中 4 个已经有工作区**——
+    #   Adams（卡 ㉒）、Martens（卡 ㉕）、Roberts-Austen（卡 ㉕），
+    #   **还有当天刚做完的 Cicero**。下一个 agent 会被派去重做。
+    #   判别依据取**磁盘上有没有工作区**：`_corpora/wip-*/workspaces/<slug>/`。
+    #   ★ 它们**不静默丢掉**，单列成一栏打印出来（[[empty-default-swallows-unknown]]）。
+    #   ★★ slug 对不上时**不许靠名字推断**（同姓者那条教训）。
+    #     改读工作区自己 `meta.json` 里**声明的** `name`／`normalized_name`——
+    #     那是数据，不是猜测。实测：队列写 `Cicero`、工作区 slug 是
+    #     `marcus-tullius-cicero`，只比 slug 会漏掉当天刚做完的人。
+    worked = {}
+    _corp = os.path.join(os.path.dirname(os.path.dirname(a.queue)), "_corpora")
+    for ws in glob.glob(os.path.join(_corp, "wip-*", "workspaces", "*")):
+        if not os.path.isdir(ws):
+            continue
+        tag = os.path.basename(os.path.dirname(os.path.dirname(ws)))
+        worked[os.path.basename(ws)] = tag
+        mj = os.path.join(ws, "meta.json")
+        if os.path.isfile(mj):
+            try:
+                md = json.load(open(mj, encoding="utf-8"))
+            except Exception:
+                continue
+            for k in ("name", "normalized_name", "slug"):
+                v = md.get(k)
+                if v:
+                    worked[slugify(str(v))] = tag
+                    worked[norm(str(v))] = tag
+            # ★ 队列名与工作区正式名不同时（队列 `Cicero` / 工作区 `Marcus Tullius Cicero`），
+            #   **由工作区自己在 meta.json 里声明 `aliases`**——声明的才认，一律不推断。
+            for al in (md.get("aliases") or []):
+                worked[slugify(str(al))] = tag
+                worked[norm(str(al))] = tag
+
     q = json.load(open(a.queue, encoding="utf-8"))["queue"]
     pending, done_in_q, deferred_in_q = [], 0, 0
+    worked_not_shipped = []
     for item in q:
         if norm(item["name"]) in done_norm or slugify(item["name"]) in done_slug:
             done_in_q += 1
         elif norm(item["name"]) in deferred:
             deferred_in_q += 1
+        elif slugify(item["name"]) in worked or norm(item["name"]) in worked:
+            worked_not_shipped.append({**item, "工作区": worked.get(slugify(item["name"]))
+                                       or worked.get(norm(item["name"]))})
         else:
             pending.append(item)
 
@@ -140,6 +180,9 @@ def main():
         "queue_done": done_in_q,
         "queue_pending": len(pending),
         "queue_deferred": deferred_in_q,
+        # ★ 做完了但没出货、也没记延后的——**多半卡在待裁定**。
+        #   它们**已经排除出 NEXT**，但必须在这里被看见，否则就成了没人管的一批。
+        "★ 已做但未出货（不进 NEXT，去看它卡在哪）": worked_not_shipped,
         "NEXT": pending[0] if pending else None,
         "upcoming": pending[:a.show],
     }, ensure_ascii=False, indent=1))

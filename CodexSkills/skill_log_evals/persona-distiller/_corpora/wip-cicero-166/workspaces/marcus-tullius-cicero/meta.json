@@ -95,5 +95,9 @@
     ],
     "disputed_policy": "西塞罗名下有一批**古代即已存疑或确定伪托**的篇目（`Rhetorica ad Herennium` 长期误挂他名、`Epistula ad Octavianum`、`Consolatio` 的文艺复兴伪作等）。**本批一份都没有收**——所以 `disputed_works` 是空数组，**不是因为没查，是因为收进来的 12 部作品全部无争议**。★ 判读依据：本批各篇的归属在 Teubner／Loeb／Oxford 三个校勘传统里一致，且每一份下载物自己的题名页都署他的名（逐份见 `covered_sources`）。★★ 若后续补入演说残篇或书信辑佚，**必须重查这一条**——辑佚正是伪托最容易混进来的地方。",
     "disputed_works": []
-  }
+  },
+  "aliases": [
+    "Cicero"
+  ],
+  "★ aliases 口径": "**队列里写的名字与本工作区的正式名不同**（队列 `Cicero` / 这里 `Marcus Tullius Cicero`），于是 `next_person.py` 认不出这个人已经做过，把他排回了 NEXT。**别名由工作区自己声明**——声明的才认，一律不做名字推断（同姓者会被推错，见 `test-the-guard-against-this-persons-namesake`）。"
 }
