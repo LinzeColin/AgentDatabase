@@ -107,7 +107,15 @@ S1/S2 材料是别人对他的记述，**不能用来推他的思考方式**。
 `05-decisions.md` 初稿据讣告（S2）写「他先把方案给了对手，专利是发现对方造出来之后才申请的」，
 并已标明「自传核到之前不得当成确定事实」。**核了，不成立。**
 
-- **讣告（S2）**：`Mr Nasmyth … gave the benefit of his [sketch] to M. [Schneider]`——**主动相赠**。
+- **讣告（S2）**：原文这一句 OCR 已经坏到不能当引文用——逐字是
+  `Mr mara Bipeber ab the | gave the benefit of his Shox to M. Ecinaidae, the proprietor of
+  the great ironworks at Creuzot`。**主语与受赠人两处都读不出来。**
+  ★★★★ 此处**曾被我写成**「Mr Nasmyth … gave the benefit of his ［sketch］ to M. ［Schneider］」
+  （★ 这一行**有意不用反引号、方括号也换成全角**：本道判据把反引号内的长英文串一律
+  当成「声称逐字」去核，而这句**恰恰是反面例子**。**反面例子不该冒充引文**——
+  改的是我的写法，不是判据的口径。）
+  ——方括号里的两个词**是我猜的，语料里没有**，而我还拿它去对照自传、削弱了一手源的读法。
+  **这不是转写，是编造。** 现在只保留能读出来的部分，并据此把这条证据的分量降到「读不出」。
 - **自传（P1，`src-75240b0a8dbb`，他自己写的）**：他当时**不在场**；合伙人 Gaskell
   `as an act of courtesy he brought them my Scheme Book and allowed them to examine it`；
   Bourdon `took careful notes and sketches of the constructive details of the hammer`；

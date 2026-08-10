@@ -152,6 +152,39 @@ def surname_of(name: str) -> str:
     return toks[-1].lower().strip(".'-") if toks else ""
 
 
+_URLISH = re.compile(r"^(?:https?://|www\.|/|\./|[A-Za-z]:\\)|\.(?:txt|md|json|jsonl|pdf|html?)$", re.I)
+
+
+def _not_a_quote(t: str) -> bool:
+    """URL、路径、索引行**不是引文**——扩清单进研究道之后才冒出来的一类噪声。
+
+    ★★★★ 2026-08-10：把研究道并进清单，引文从 31 条涨到 53 条，
+      其中混进了这些（它们同样被反引号括着）：
+
+        `https://archive.org/details/practicalessays00nasmgoog`
+        `Nasmyth, James … Manufacturing Engineer from Manchester, 290`   ← 索书索引行
+
+      它们当然在语料里定位不到，于是**冒充「未判」那一节的问题**——
+      这与 `check_lane_quotes_verbatim` 里记过的
+      「`proceedingsofiow07iowa.txt` 被当成引文报失败」是同一件事。
+      **同一个坑在两件判据上各踩一次，说明它是「反引号即引文」这个假设本身的毛病。**
+
+    判法（与那件保持一致的部分 + 本件特有的索引行）：
+      · URL / 路径 / 文件名；
+      · 没有空格、或整体只由 `[\w.\-/]` 组成的标识符；
+      · **索引行**：逗号分隔且以页码收尾（`…, 290`），且不含句号句读。
+    """
+    t = t.strip()
+    if _URLISH.search(t):
+        return True
+    if " " not in t or re.fullmatch(r"[\w.\-/]+", t):
+        return True
+    # 索引行：`姓, 名 … 说明, 页码`——**以数字收尾且通篇无句号**
+    if re.search(r",\s*\d{1,4}$", t) and "." not in t:
+        return True
+    return False
+
+
 def load_corpus(ws: pathlib.Path) -> list:
     """**只读 train**（`references/sources/`），holdout 一律不进来。"""
     out = []
@@ -166,17 +199,32 @@ def collect_quotes(ws: pathlib.Path) -> list:
     ★ 第三项是给「正文有没有自己署上真说话人」用的，见 `check()`。
     """
     got, seen = [], set()
-    for name in RENDER_FILES:
-        p = ws / name
+    # ★★★★ 2026-08-10：**研究道文档此前不在这张清单里。**
+    #   同一天 `check_holdout_mention` 刚因为同一个毛病被扩过清单
+    #   （它当时只扫十份产物，而研究道是建模者读得最多的一类）。
+    #   本件是**系统审计**找出来的第二例，不是又撞上的：
+    #   做法是「把所有带硬编码文件清单的判据列出来，逐个问它扫的是不是它保证的全部」。
+    #
+    #   ★ 为什么研究道必须进来：Nasmyth #153 的六份研究道里有 **33 条逐字引文**，
+    #     `check_lane_quotes_verbatim` 查过它们「是不是逐字」，
+    #     **但从来没有人查过「这话是不是他说的」**——
+    #     而那两件事是独立的：一句逐字抄自语料的话，完全可能是**别人在他的书里说的**。
+    #   ★★ 出处名保持带路径（`research/01-writings.md`），
+    #     这样报出来时**一眼看得出是产物还是研究道**，两类的处置不一样。
+    scan_files = [(n, ws / n) for n in RENDER_FILES]
+    scan_files += [(f"research/{p.name}", p)
+                   for p in sorted((ws / "references" / "research").glob("*.md"))]
+    for label, p in scan_files:
         if not p.is_file():
             continue
         body = p.read_text(encoding="utf-8", errors="replace")
         for para in body.split("\n\n"):          # 段为单位，引文的上下文就在同一段里
             for q in _quoted_texts(para):
                 q = q.strip()
-                if len(q) >= MIN_QUOTE and not is_cjk_heavy(q) and q not in seen:
+                if (len(q) >= MIN_QUOTE and not is_cjk_heavy(q)
+                        and not _not_a_quote(q) and q not in seen):
                     seen.add(q)
-                    got.append((p.name, q, para))
+                    got.append((label, q, para))
     cj = ws / "evidence/claims.jsonl"
     if cj.is_file():
         for line in cj.read_text(encoding="utf-8").splitlines():

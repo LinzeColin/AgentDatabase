@@ -147,6 +147,24 @@ def extract_quotes(md: str):
                 seg.append(s)
         if seg:
             blocks.append(" ".join(seg))
+    # ★★★★ 2026-08-10：**段落内的反引号引文此前一条都没验过。**
+    #   本件原来只从 `>` 引用块里取引文。Nasmyth #153 实测：
+    #     引用块内 33 条（判据验的就是这些，全绿）
+    #     **段落内反引号 30 条 —— 从来没进过判据，其中 14 条对不上**
+    #   而那 14 条里**有两份是 `[sketch]`／`[Schneider]` 这种我自己补的方括号编造**
+    #   （在 `04-external.md` 与 `05-decisions.md`）。
+    #   我当天已经修过 `06-timeline.md` 里的同一处，**以为改完了**——
+    #   本件报 0 条对不上，于是「改完了」这个结论看着还有判据背书。
+    #   [[fixed-the-symptom-kept-the-root-cause]] ＋ 清单缺口，两个一起犯。
+    #
+    #   ★ 抓到它的不是本件，是 `check_quote_speaker` 扩清单进研究道之后
+    #     报出「在语料里定位不到 14 条」。**两件判据互为对照才看得见。**
+    #   ★★ 只取**引用块之外**的反引号，块内的已经由上面那条路走过了，
+    #     否则同一条会被数两次——同一天刚在 `check_holdout_mention` 上犯过重复计数。
+    nonblk = "\n".join(l for l in md.split("\n") if not l.lstrip().startswith(">"))
+    for inline in re.findall(r"`([^`\n]{25,400})`", nonblk):
+        blocks.append(inline)
+
     out = []
     for b in blocks:
         for m in (re.findall(r"`([^`]+)`", b) or [b]):
@@ -219,6 +237,25 @@ def self_test():
         print(("  ✓ " if ok else "  ✗ ") + lbl)
         if not ok:
             bad.append(lbl)
+
+    print("\n══ ★★★★ 段落内反引号引文（2026-08-10 —— 此前一条都没进过判据）══")
+    # ★ 夹具照真实研究道的排法写：中文引导句在**块外**，块内只有引文本身。
+    #   第一版我把引导句写进了块里，整块 CJK 占比超阈值被过滤——
+    #   **红的是夹具不是代码**，而我差点去改代码。
+    MD = ("正文里这样写：`a very great loss of time to the master in giving necessary instructions`（代价）。\n"
+          "\n引用块里的这条：\n"
+          "\n> the correctness of his eycy had we entirely to depend for accuracy\n")
+    qs = extract_quotes(MD)
+    chk(f"段落内那条被取到了（共 {len(qs)} 条）",
+        any("loss of time to the master" in q for q in qs))
+    chk("引用块那条也还在", any("correctness of his eycy" in q for q in qs))
+    # ★ 反例①：**同一条不许被数两次**——块内的反引号引文只能出现一次
+    MD2 = "> 块里带反引号：`the correctness of his eycy had we entirely to depend for accuracy`\n"
+    q2 = extract_quotes(MD2)
+    chk(f"块内的反引号引文只出现一次（{len(q2)} 条）", len(q2) == 1)
+    # ★ 反例②：URL／标识符不是引文（同一个坑在 check_quote_speaker 上也踩过）
+    MD3 = "见 `https://archive.org/details/practicalessays00nasmgoog` 与 `proceedingsofiow07iowa.txt`。\n"
+    chk(f"URL 与文件名不算引文（{extract_quotes(MD3)}）", not extract_quotes(MD3))
 
     # ══ ★★★★ 真实样本：**分栏竖线**（Nasmyth #153，2026-08-10）══
     #   议会卷与报刊是双栏扫描，OCR 把栏界打成 `|`。
