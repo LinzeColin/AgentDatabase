@@ -84,6 +84,8 @@ _ELISION = re.compile(r"\s*(?:\.\.\.|…)\s*")
 #   **这是扫本的差别，不是引文改了字**——与「悄悄改讹字」不是一类。
 _HYPHEN_BREAK = re.compile(r"[-¬­]\s+")          # 行末折行连字（含 OCR 的 ¬ 与软连字）
 _DASHES = re.compile(r"[—–−]")
+# 标点前的空白（OCR 版面产物，尤以德文/法文排印为多）
+_SPACE_BEFORE_PUNCT = re.compile(r"\s+([,.;:!?)\]])")
 
 
 def _norm(s: str) -> str:
@@ -105,6 +107,19 @@ def _norm(s: str) -> str:
     #     `|` 变空白只会让更多东西对上，**不会拆散已经对上的**（空白最后统一压平）。
     #     自测里配了正例与反例各一。
     s = s.replace("|", " ")
+    # ★★★★ 2026-08-10：**标点前的空白按版面处理。**
+    #   Mendel #125 实测：13 条对不上里 **7 条是同一件事**——
+    #   OCR 在德文标点前留了空格：
+    #       `Brünn : Gestern`、`( 54 Mm . in`、`Menge , dass`、`gesetzt . Der`
+    #   我写研究道时把它们按正常排印收紧了，于是「逐字」对不上。
+    #
+    #   ★ 与「把 eycy 改成 eye」的分界仍然是**动没动字母**：
+    #     去掉标点前的空格不动任何字母，且**两侧同时归一**，
+    #     所以它只可能让更多东西对上，**不可能拆散已经对上的**。
+    #   ★★ 但它确实放宽了判据：`a , b` 与 `a, b` 从此视为同一句。
+    #     **这是有意的**——那是排印差异，不是内容差异。
+    #     自测里配了反例：**字母一改，照样对不上。**
+    s = _SPACE_BEFORE_PUNCT.sub(r"\1", s)
     # ★ 这里**不要**再把 ` - ` 缩成 `-`：那是我随手加的一条、没配自测，
     #   当场把 Roberts-Austen 从 0 条对不上打成 2 条
     #   （`[April 20, 1891. — In the course…` → `1891.-In`，
@@ -237,6 +252,26 @@ def self_test():
         print(("  ✓ " if ok else "  ✗ ") + lbl)
         if not ok:
             bad.append(lbl)
+
+    print("\n══ ★★★★ 标点前的空白（Mendel #125，13 条里 7 条是这一件事）══")
+    _DE_REAL = ("Herr Abt Mendel schreibt uns aus Brünn : Gestern am 29. Juni um 7 Uhr Abends "
+                "entlud sich über unsere Stadt ein Gewitter mit Hagelschlag und wolkenbruchartigem "
+                "Gussregen ( 54 Mm . in kaum mehr als einer halben Stunde ) .")
+    _DE_MINE = ("Herr Abt Mendel schreibt uns aus Brünn: Gestern am 29. Juni um 7 Uhr Abends entlud")
+    chk("标点前空白归一后，德文那句对得上", _norm(_DE_MINE) in _norm(_DE_REAL))
+    chk("同段的括号与句点也对得上",
+        _norm("54 Mm. in kaum mehr als einer halben Stunde") in _norm(_DE_REAL))
+    # ★★ 反例：**改了字母仍然必须对不上**——这道门存在的理由不许被顺手削掉
+    chk("而把 `eultivirten` 改成 `cultivirten` 仍然对不上",
+        _norm("in grossen Mengen cultivirten Pflanzenbastarde")
+        not in _norm("in grossen Mengen eultivirten Pflanzenbastarde"))
+    chk("★ 删掉 OCR 垃圾字也仍然对不上（`P. oO Sa Gresor` → `P. Gresor`）",
+        _norm("Vereinsmiteliedes P. Gresor Mendel")
+        not in _norm("Vereinsmiteliedes P. oO Sa Gresor Mendel"))
+    # ★★★ 反例：**词序改了照样对不上**（Mendel 第 7 条就是我把语序调了）
+    chk("★★ 调换词序仍然对不上（`referiren über einen Delinquenten` vs 原文语序）",
+        _norm("referiren über einen Delinquenten")
+        not in _norm("Ich erlaube mir über einen Delinquenten zu referiren"))
 
     print("\n══ ★★★★ 段落内反引号引文（2026-08-10 —— 此前一条都没进过判据）══")
     # ★ 夹具照真实研究道的排法写：中文引导句在**块外**，块内只有引文本身。
