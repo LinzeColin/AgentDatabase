@@ -127,6 +127,7 @@ Nightingale 465 对里**只有 48 对是确定的**，其余 417 对包含
 | 名册（已入库的人） | `CodexSkills/registry/codex/persona-distiller-group/` |
 | **台账**（队列 / 延后名单 / 卒年 / 额度 / 决策） | `CodexSkills/skill_log_evals/persona-distiller/_ledgers/` |
 | 已交付的 44 个 zip | `CodexSkills/skill_log_evals/persona-distiller/_ledgers/*.zip` |
+| **★★★★ 教训库（101 条实测事故）** | `CodexSkills/skill_log_evals/persona-distiller/_ledgers/_教训库/`，**入口是 `_索引.md`** |
 
 ### ★★ 工作区层级：有三个人是**双层嵌套**，别猜路径
 
@@ -296,6 +297,25 @@ To github.com:LinzeColin/AgentDatabase.git
 ★ `next_person.py` 会在 stderr 上打印台账来源；两处不一致时它**明说用的是仓内那份**
 并给出两边的 sha256 与 mtime。**看到那条警告不是出错，是它在告诉你用了哪一份。**
 ★★ 演练检出跑完**已经收掉**（铁律 3：谁开的谁收）。
+
+### ★★★★ 教训库：**它原本不在仓里，接手方一条都读不到**
+
+`_ledgers/_教训库/` 是 2026-08-10 移交前才复制进来的 **101 条实测教训**（约 468 KB）。
+**原本存在上一任 agent 的私有存储 `~/.claude/projects/…/memory/` 下——
+不在 GitHub 上。** 核对移交时才发现这个缺口。
+
+- **入口是 `_索引.md`**：一行一条，带一句话钩子。
+- **动手改判据之前先在索引里搜相关的词**——这个项目里判据第一版出错是常态，多半有人踩过。
+- ★ **这是快照，不是活文档。** 里面提到的文件、字段、命令可能已经变了，
+  引用到具体路径时**先去仓里确认它还在**。
+- ★★ **移交那晚要重导一次**（本会话之后又攒了新的）：
+
+  ```bash
+  cp ~/.claude/projects/-Users-linzezhang-Documents-Codex-GithubProject-AgentDatabase/memory/*.md \
+     CodexSkills/skill_log_evals/persona-distiller/_ledgers/_教训库/
+  mv CodexSkills/skill_log_evals/persona-distiller/_ledgers/_教训库/MEMORY.md \
+     CodexSkills/skill_log_evals/persona-distiller/_ledgers/_教训库/_索引.md
+  ```
 
 ### 交接前还要做的
 
