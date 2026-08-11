@@ -134,12 +134,21 @@ def check(root: pathlib.Path, doc: pathlib.Path) -> int:
         text, scope = text[i:j], "「## 3. 怎么跑」那一节"
     else:
         scope = "**整篇**（没找到「## 3. 怎么跑」小节）"
+    # ★★ 射程：**不能只扫本技能目录**。必读里那条
+    #   `python3 .../persona-distiller-group/scripts/validate_group.py --registry-root <…>`
+    #   属于**同级的另一个技能**，只扫 persona-distiller 会把它报成「找不到脚本」——
+    #   而文档是对的。**今天已经栽过一次射程漏扫**（check_paper_lanes 的 glob 只认一层）。
+    roots = [root]
+    sibling = root.parent / "persona-distiller-group"
+    if sibling.is_dir():
+        roots.append(sibling)
     sources = {}
-    for f in sorted(root.rglob("*.py")):
-        try:
-            sources[f.name] = f.read_text(encoding="utf-8", errors="ignore")
-        except OSError:
-            continue
+    for r in roots:
+        for f in sorted(r.rglob("*.py")):
+            try:
+                sources.setdefault(f.name, f.read_text(encoding="utf-8", errors="ignore"))
+            except OSError:
+                continue
     res = scan(text, sources)
     print(f"扫的范围：{scope}｜脚本 {len(sources)} 份｜检查了 {res['检查的配对']} 个「选项+占位符」配对")
     bad = res["**文档用了而脚本没有的选项**"] + res["**值的形状对不上的**"]
@@ -243,8 +252,20 @@ def main() -> int:
     a = ap.parse_args()
     if a.self_test:
         return self_test()
-    doc = a.doc or (ROOT_DEFAULT.parent.parent.parent.parent / "HANDOFF.md")
-    return check(a.root, doc)
+    if a.doc:
+        return check(a.root, a.doc)
+    # ★ 默认扫**两份**：HANDOFF 与 `_每次开工必读.md`——
+    #   接手方读的就是这两份，只核一份等于半条防线。
+    wt = ROOT_DEFAULT.parent.parent.parent.parent
+    docs = [wt / "HANDOFF.md",
+            (ROOT_DEFAULT.parent.parent.parent
+             / "skill_log_evals/persona-distiller/_ledgers/_每次开工必读.md")]
+    rc = 0
+    for d in docs:
+        print(f"── {d.name}")
+        rc = max(rc, check(a.root, d))
+        print()
+    return rc
 
 
 if __name__ == "__main__":

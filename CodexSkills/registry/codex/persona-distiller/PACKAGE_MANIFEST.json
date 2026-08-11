@@ -621,8 +621,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_doc_command_shapes.py",
-      "sha256": "fb863748edbdd56d73b06402c8f4fe90ce597a6b83f6b35b2cc520760f5195ec",
-      "size_bytes": 12069
+      "sha256": "c30f3c382b8097752d2f76c1191d1aea16040e5e153717bdb7cd80c700d5a8f6",
+      "size_bytes": 13080
     },
     {
       "path": "references/pipeline/checkers/check_evidence_is_per_claim.py",
@@ -1411,8 +1411,8 @@
     },
     {
       "path": "scripts/check_doc_command_shapes.py",
-      "sha256": "fb863748edbdd56d73b06402c8f4fe90ce597a6b83f6b35b2cc520760f5195ec",
-      "size_bytes": 12069
+      "sha256": "c30f3c382b8097752d2f76c1191d1aea16040e5e153717bdb7cd80c700d5a8f6",
+      "size_bytes": 13080
     },
     {
       "path": "scripts/check_evidence_is_per_claim.py",
