@@ -1,0 +1,22 @@
+{
+ "★": "不透明题号 → case_id。**不发给答题方，也不发给评委。**",
+ "seed": "holmes-170-round1-prompts",
+ "map": {
+  "q-b1a56f8e": "owh-known-01",
+  "q-b9a6040e": "owh-boundary-01",
+  "q-f56db2b2": "owh-voice-01",
+  "q-8ed688ca": "owh-trajectory-01",
+  "q-c9be6686": "owh-contrast-01",
+  "q-3ee2e9c8": "owh-fact-01",
+  "q-6d0f560f": "owh-decoy-01",
+  "q-c30e7c08": "owh-task-01",
+  "q-6d741c36": "owh-plan-01",
+  "q-093703c1": "owh-tool-01",
+  "q-6b129834": "owh-calib-01",
+  "q-748b8811": "owh-refusal-01",
+  "q-e9582e14": "owh-long-01",
+  "q-18e3619a": "owh-route-01",
+  "q-45960ab6": "owh-anon-01",
+  "q-c7364bd0": "owh-token-01"
+ }
+}
