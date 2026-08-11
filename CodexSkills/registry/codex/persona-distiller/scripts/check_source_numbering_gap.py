@@ -251,6 +251,84 @@ def self_test() -> int:
     chk(f"末尾被拿走 → 本件报 0 个缺口（**这是抓不到，不是没有**）：{gaps(TAIL)}",
         not gaps(TAIL))
 
+    # ══════════════════════════════════════════════════════════════
+    # ㉚ `scan()` / `_visible_names()` / `_holdout_names()`
+    #    —— 2026-08-12 之前这三个从没被自测进入过
+    # ══════════════════════════════════════════════════════════════
+    #
+    # 上面各条打的是 `gaps()`（**一串文件名里的编号缺口**），那把尺子已经很硬。
+    # 而 `scan()` 决定：**哪些文件算「建模者看得见」、缺口要不要挂上 holdout 的名字**。
+    # 前者正是本件的立身之本——`references/holdout/` **一旦被算进可见**，
+    # 这道门就再也报不出任何缺口（因为缺口被 holdout 自己填上了）。
+    import tempfile as _tf
+    print("\n══ ㉚ scan() 本体（tempdir 上搭真工作区）══")
+
+    def _ws(vis=(), hold=(), notes=()):
+        d = pathlib.Path(_tf.mkdtemp())
+        for sub, names in (("references/sources", vis),
+                           ("references/holdout", hold),
+                           ("references/holdout-notes", notes)):
+            if names:
+                (d / sub).mkdir(parents=True, exist_ok=True)
+                for n in names:
+                    (d / sub / n).write_text("x", encoding="utf-8")
+        return d
+
+    V = ["05a-mnras-1844-moon-model.txt", "05b-mnras-1846-optical-glass.txt",
+         "05d-mnras-1852-jupiter-saturn.txt"]
+    r = scan(_ws(vis=V, hold=["05c-mnras-1851-source-of-light.txt"]))
+    g = r["**编号缺口**"]
+    chk(f"㉚a 缺口 05c 被报出，且**★ 那一栏点出 holdout 的文件名**"
+        f"（{g[0].get('★ holdout 的文件名正落在这个缺口上') if g else '（无缺口）'}）",
+        len(g) == 1 and g[0]["缺的编号"] == "05c"
+        and g[0]["★ holdout 的文件名正落在这个缺口上"] == "05c-mnras-1851-source-of-light.txt")
+
+    chk("㉚a′ 两侧邻居的完整文件名一起报出（泄的是刊物与年代区间）",
+        g[0]["左邻"] == "05b-mnras-1846-optical-glass.txt"
+        and g[0]["右邻"] == "05d-mnras-1852-jupiter-saturn.txt")
+
+    # ㉚b 缺口在、而 holdout 不在这个号上 ⇒ ★ 栏必须是 None（**不许乱认领**）
+    r = scan(_ws(vis=V, hold=["09a-别的.txt"]))
+    g = r["**编号缺口**"]
+    chk("㉚b 缺口不是 holdout 留下的 → ★ 栏为空（成因由人判，判据不替它认领）",
+        len(g) == 1 and g[0]["★ holdout 的文件名正落在这个缺口上"] is None)
+
+    # ㉚c ★★★ 本件的立身之本：`references/holdout/` **不算可见**。
+    #    把它算进去，缺口就被 holdout 自己填平，这道门永远报 0。
+    d = _ws(vis=V, hold=["05c-mnras-1851-source-of-light.txt"],
+            notes=["05c-笔记.md"])
+    chk("㉚c **`_visible_names` 只取 references/sources/**——"
+        "holdout 与 holdout-notes 一个都不算可见（算进去这道门就永远报 0）",
+        set(_visible_names(d)) == set(V)
+        and _holdout_names(d) == ["05c-mnras-1851-source-of-light.txt"])
+
+    # ㉚d 射程：`rglob` 要递归进子目录，否则分册存放的语料整片看不见
+    d = pathlib.Path(_tf.mkdtemp())
+    (d / "references/sources/vol1").mkdir(parents=True)
+    (d / "references/sources/01-a.txt").write_text("x", encoding="utf-8")
+    (d / "references/sources/vol1/03-c.txt").write_text("x", encoding="utf-8")
+    chk("㉚d 射程：`references/sources/` **递归**（子目录里的语料也算可见）",
+        set(_visible_names(d)) == {"01-a.txt", "03-c.txt"})
+
+    # ㉚e/f/g 三种「未核」——**都不许被读成通过**
+    r = scan(_ws(vis=[], hold=["05c-x.txt"]))
+    chk("㉚e 没有 references/sources/ → 明写「**未核（不是通过）**」",
+        "**未核（不是通过）**" in str(r.get("★ 没有 references/sources/")))
+
+    r = scan(_ws(vis=["moon-model.txt", "optical-glass.txt"]))
+    chk("㉚f 文件名不带顺序前缀 → 明写「本件**看不见任何东西**（不是通过）」",
+        "看不见任何东西" in str(r.get("★ 文件名不带顺序前缀")))
+
+    r = scan(_ws(vis=V, hold=["无前缀的holdout.txt"]))
+    chk("㉚g holdout 文件名不带前缀 → 明写「**判不出缺口是不是它留下的**」",
+        "判不出" in str(r.get("★ holdout 文件名不带前缀")))
+
+    # ㉚h 反向：连号无缺口 ⇒ 报 0 个缺口，且三条「未核」一条都不出现。
+    #    没有它，上面几条可能只是「什么都报」。
+    r = scan(_ws(vis=["05a-x.txt", "05b-y.txt", "05c-z.txt"]))
+    chk("㉚h 反向：连号无缺口 → 缺口 0 个，且三条「未核」都不出现",
+        not r["**编号缺口**"] and not any(k.startswith("★") for k in r))
+
     print("\n★ 射程：只看文件名；不判断缺口成因；**补齐编号也堵不住「份数本身是信息」那一层**。")
     print("\n" + ("✓ 自测全过" if ok else "✗ **自测未过**"))
     return 0 if ok else 1

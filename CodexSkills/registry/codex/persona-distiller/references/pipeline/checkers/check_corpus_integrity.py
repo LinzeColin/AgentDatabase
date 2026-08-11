@@ -212,6 +212,64 @@ def self_test() -> int:
         fails.append(f"反向对照失败：关掉 HTML 与取不到判据后 {still} 仍被硬拦——"
                      f"说明拦住它们的不是这两条判据")
 
+    # ══════════════════════════════════════════════════════════════
+    # ㉝ `check_file()` 本体 —— 2026-08-12 之前它一次也没被自测进入过
+    # ══════════════════════════════════════════════════════════════
+    #
+    # 上面全部在打 `check_bytes()`（**给定字节该判什么**），那把尺子已被四条
+    # 真实落盘样本钉死。而 `check_file()` 是**从磁盘到那把尺子之间的一段**：
+    # 它决定读多少、怎么解码、`size` 是什么。三件事都能单独出错，而
+    # `check_bytes` 那一层完全看不见。
+    import tempfile as _tf
+    print("\n── ㉝ check_file()（tempdir 上跑真文件）──")
+    _d = pathlib.Path(_tf.mkdtemp())
+
+    def _w(name, data):
+        f = _d / name
+        f.write_bytes(data if isinstance(data, bytes) else data.encode("utf-8"))
+        return f
+
+    h, s = check_file(_w("err.html.txt", REAL_IA_ERROR))
+    _ok = bool(h) and "HTML" in h[0]
+    print(f"  {'✓' if _ok else '✗'} ㉝a 真实落盘的 archive.org 错误页 → **硬拦**")
+    fails.append("㉝a") if not _ok else None
+
+    clean = ("Edward Jenner wrote to his friend in plain English about the "
+             "inoculation of cowpox, and the results of that experiment. " * 40)
+    h, s = check_file(_w("clean.txt", clean))
+    _ok = not h and not s
+    print(f"  {'✓' if _ok else '✗'} ㉝b 干净英文语料 → 0 硬 0 软（h={len(h)} s={len(s)}）")
+    fails.append("㉝b") if not _ok else None
+
+    h, s = check_file(_w("tiny.txt", "太短了。"))
+    _ok = not h and any("过短" in x for x in s)
+    print(f"  {'✓' if _ok else '✗'} ㉝c 过短 → **只软报不硬拦**（软报 {len(s)} 条）")
+    fails.append("㉝c") if not _ok else None
+
+    # ㉝d ★ 二进制／非 UTF-8：`check_file` 用 `decode("utf-8","replace")`，
+    #    坏字节变成 U+FFFD——**它不在 `READABLE` 里**，所以可读占比会掉下来。
+    #    这一条同时验「不许崩」与「判得出」。
+    h, s = check_file(_w("bin.txt", bytes(range(0x80, 0x100)) * 40))
+    _ok = any("可读字符占比" in x for x in s)
+    print(f"  {'✓' if _ok else '✗'} ㉝d 非 UTF-8 字节流 → 不崩，且报「可读字符占比」低")
+    fails.append("㉝d") if not _ok else None
+
+    # ㉝e `size` 必须是**字节数**，不是解码后的字符数。
+    #    一份 1200 字节的中文文件解码后只有 400 字符——按字符数判就会被
+    #    「过短 <2000」误伤两次。造一份**字节数够而字符数不够**的样本钉住它。
+    zh = "这是一份完整的中文语料，句子读起来很自然，标点也齐全。" * 20   # ≈1560 字节
+    f = _w("zh.txt", zh)
+    h, s = check_file(f)
+    _ok = len(f.read_bytes()) > len(zh) and any("过短" in x and str(len(f.read_bytes())) in x
+                                                for x in s)
+    print(f"  {'✓' if _ok else '✗'} ㉝e `size` 是**字节数**不是字符数"
+          f"（{len(zh)} 字 → {len(f.read_bytes())} 字节，报的是后者）")
+    fails.append("㉝e") if not _ok else None
+
+    # ★ 收口必须在**所有**断言之后。2026-08-12 第一版我把 ㉝ 块插在
+    #   `if fails: return 1` 的**后面**——五条断言照跑照印 ✗，而**没人读它们**：
+    #   四个变异体全部打出 ✗ 而 rc 仍是 0。
+    #   `[[a-checker-nothing-calls-is-not-a-checker]]` 的微缩版，就在我自己手里。
     for f in fails:
         print(f"✗ {f}")
     if fails:

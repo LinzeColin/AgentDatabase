@@ -29,11 +29,16 @@
 
 ## 冻结名单的用法
 
-`KNOWN` 是 2026-08-12 的实况：**当日首扫 18 件，逐件补完后现为 12 件**
-（依次补掉 `check_holdout_mention`→17、`check_holdout_overlap` 等 →13、`check_quote_integrity`→12）。
-**它不是待办清单**——存量逐件补自测的成本很高，
-且多数判据的判定函数需要构造完整工作区。本判据要挡的是**新增**：
+`KNOWN` 是「已知缺口」的冻结名单。**2026-08-12 当日首扫 18 件，同日逐件补完清零。**
+补完顺序：`holdout_mention`→17、`holdout_overlap` 等→13、`quote_integrity`→12、
+`anchor_coherence`/`material_split`/`refusal_overflow`→9、
+`ocr_homoglyphs`/`longs_corruption`→7、`ocr_language_death`/
+`unqualified_priority_claim`/`semantic_residue`→4、`source_numbering_gap`→3、
+`threshold_doc_drift`→2、`version_bump_ships_product`→1、`corpus_integrity`→**0**。
+**名单空了不等于这道门没用了。** 它挡的是**新增**：
 新写的判据不许再交一个「验了配料、没验判决」的自测。
+★ 每一件的补法都一样：**tempdir 造夹具跑真判定函数 → 变异验证
+（每组先跑 M0 正例确认装置成立）→ 真实工作区冒烟 → 同步镜像**。
 
 ★ **补完一件就把它从 `KNOWN` 里删掉**（`check()` 会主动提醒），否则名单越来越假——
   那正是本判据要防的病换个地方复发。
@@ -58,11 +63,11 @@ DECISION = re.compile(
     r"^(check|audit|evaluate|scan|verdict|locate|classify|census|detect|judge|analy[sz]e)")
 
 # 2026-08-12 实况。**冻结，不是待办**——见模块 docstring。
-KNOWN = {
-    "check_corpus_integrity.py",
-    "check_source_numbering_gap.py", "check_threshold_doc_drift.py",
-"check_version_bump_ships_product.py",
-}
+# ★★★ 2026-08-12：**清空了。** 当天首扫 18 件，一天内逐件补完，
+#   每件都在 tempdir/真工作区上跑真判定函数，并配变异验证（每组先跑 M0 正例）。
+#   名单空不等于这道门没用了——它挡的是**新增**：
+#   新写的判据不许再交一个「验了配料、没验判决」的自测。
+KNOWN: set = set()
 
 _PROBE = r'''
 import ast, contextlib, io, pathlib, runpy, sys, json

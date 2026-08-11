@@ -396,8 +396,8 @@
     },
     {
       "path": "references/ledgers/_拒答溢出门-整代人物空过-2026-08-12.md",
-      "sha256": "61ebfea29a9ae5328e8d4e950b4fb5a4ad55a52f3d18a626da36b6b08ede325e",
-      "size_bytes": 8929
+      "sha256": "d83b6d492ca780133408f605dea730a75b421c23286e2f97f448235f59f1adf6",
+      "size_bytes": 11242
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -601,8 +601,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_corpus_integrity.py",
-      "sha256": "7c0033837ad94a141701fa444e7889a9e93a903c8181aa8aaa959b2c3e327bb8",
-      "size_bytes": 17329
+      "sha256": "82117edc85ad52c8149d30bc73291f59221fdc740469def1ed4f44c39ca6ccfa",
+      "size_bytes": 21031
     },
     {
       "path": "references/pipeline/checkers/check_corpus_presence.py",
@@ -841,8 +841,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_selftest_reach.py",
-      "sha256": "c4a6e07ddee50eb19b35fce8d3575e2f3fe44b908fc5592e6cc5640d8b5601ab",
-      "size_bytes": 10977
+      "sha256": "608052a05c3a10853b1eed295bdb78cc17fa9634c6f98813176a3e931246ec13",
+      "size_bytes": 11590
     },
     {
       "path": "references/pipeline/checkers/check_semantic_residue.py",
@@ -881,8 +881,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_source_numbering_gap.py",
-      "sha256": "89b6cf487066316cafd1abf42c071d610dd32fe847caeb1c3492dac598323eec",
-      "size_bytes": 14349
+      "sha256": "9f87d6a47dd22f9e88a21d7f369d414257922a0834233c7f083bb863d0375175",
+      "size_bytes": 19290
     },
     {
       "path": "references/pipeline/checkers/check_staged_but_not_ingested.py",
@@ -901,8 +901,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_threshold_doc_drift.py",
-      "sha256": "d3aff0436205e5b9fcd4a50f23b86ba02ec77b580ed5f40faa380dd5e242d82f",
-      "size_bytes": 6126
+      "sha256": "2fe46720d782e01b91ef71369b7562c8a2695fd4109133fc49d3d85c0d9e5d40",
+      "size_bytes": 10318
     },
     {
       "path": "references/pipeline/checkers/check_title_is_not_filename.py",
@@ -946,8 +946,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_version_bump_ships_product.py",
-      "sha256": "079982de6180a42ff1a109a02c216bec3ea11c037fa168368a96778f053f66c2",
-      "size_bytes": 12760
+      "sha256": "6f07e5d682208f4f53504821eebedc52044aeb7745bf026308148fdb0e199bc9",
+      "size_bytes": 20481
     },
     {
       "path": "references/pipeline/checkers/classify_early.py",
@@ -1391,8 +1391,8 @@
     },
     {
       "path": "scripts/check_corpus_integrity.py",
-      "sha256": "7c0033837ad94a141701fa444e7889a9e93a903c8181aa8aaa959b2c3e327bb8",
-      "size_bytes": 17329
+      "sha256": "82117edc85ad52c8149d30bc73291f59221fdc740469def1ed4f44c39ca6ccfa",
+      "size_bytes": 21031
     },
     {
       "path": "scripts/check_corpus_presence.py",
@@ -1631,8 +1631,8 @@
     },
     {
       "path": "scripts/check_selftest_reach.py",
-      "sha256": "c4a6e07ddee50eb19b35fce8d3575e2f3fe44b908fc5592e6cc5640d8b5601ab",
-      "size_bytes": 10977
+      "sha256": "608052a05c3a10853b1eed295bdb78cc17fa9634c6f98813176a3e931246ec13",
+      "size_bytes": 11590
     },
     {
       "path": "scripts/check_semantic_residue.py",
@@ -1671,8 +1671,8 @@
     },
     {
       "path": "scripts/check_source_numbering_gap.py",
-      "sha256": "89b6cf487066316cafd1abf42c071d610dd32fe847caeb1c3492dac598323eec",
-      "size_bytes": 14349
+      "sha256": "9f87d6a47dd22f9e88a21d7f369d414257922a0834233c7f083bb863d0375175",
+      "size_bytes": 19290
     },
     {
       "path": "scripts/check_staged_but_not_ingested.py",
@@ -1691,8 +1691,8 @@
     },
     {
       "path": "scripts/check_threshold_doc_drift.py",
-      "sha256": "d3aff0436205e5b9fcd4a50f23b86ba02ec77b580ed5f40faa380dd5e242d82f",
-      "size_bytes": 6126
+      "sha256": "2fe46720d782e01b91ef71369b7562c8a2695fd4109133fc49d3d85c0d9e5d40",
+      "size_bytes": 10318
     },
     {
       "path": "scripts/check_title_is_not_filename.py",
@@ -1736,8 +1736,8 @@
     },
     {
       "path": "scripts/check_version_bump_ships_product.py",
-      "sha256": "079982de6180a42ff1a109a02c216bec3ea11c037fa168368a96778f053f66c2",
-      "size_bytes": 12760
+      "sha256": "6f07e5d682208f4f53504821eebedc52044aeb7745bf026308148fdb0e199bc9",
+      "size_bytes": 20481
     },
     {
       "path": "scripts/common.py",
