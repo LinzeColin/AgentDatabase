@@ -1,0 +1,32 @@
+{
+  "n": 9,
+  "ia_identifier": "diebundesverfass00kels",
+  "src_dir": "src-98577cc73747",
+  "filename": "bundesverfassung-1920-coedited-1922.txt",
+  "remote_filename": "diebundesverfass00kels_djvu.txt",
+  "download_url": "https://archive.org/download/diebundesverfass00kels/diebundesverfass00kels_djvu.txt",
+  "final_url": "https://dn790008.ca.archive.org/0/items/diebundesverfass00kels/diebundesverfass00kels_djvu.txt",
+  "http_status": 200,
+  "bytes": 1224918,
+  "sha256": "73c6dda24b55453517bd20e00e45f5c52c4bf8dd0dad402f9b32231900c7a4e7",
+  "ia_reported_size": "1224918",
+  "ia_metadata_date_field": "1922",
+  "ia_title_field": "Die Bundesverfassung vom 1. Oktober, 1920; mit Anhängen: 1. Die derzeit geltenden Bundesverfassungsgesetze samt Nebengesetzen. 2. Materialien zur Bundesverfassung; hrsg. in verbindung mit Georg Froehlich und Adolf Merkl",
+  "ia_creator_field": [
+    "Kelsen, Hans, 1881-1973",
+    "Austria. Constitution"
+  ],
+  "ia_publisher_field": "Wien, Deuticke",
+  "ia_language_field": "ger",
+  "ia_contributor_field": "Robarts - University of Toronto",
+  "ia_possible_copyright_status": null,
+  "ia_licenseurl": null,
+  "ia_description": [
+    "Contains text of the Austrian Bundesverfassung of 1920",
+    "52"
+  ],
+  "details_url": "https://archive.org/details/diebundesverfass00kels",
+  "fetched_utc": "2026-08-11T10:53:48Z",
+  "elapsed_s": 5.23,
+  "note": "落盘 .txt 与 IA 返回字节完全一致，未加任何出处表头、未做任何 OCR 修改。"
+}

@@ -1,0 +1,29 @@
+{
+  "n": 6,
+  "ia_identifier": "sozialismusundst00kels",
+  "src_dir": "src-06466a84b056",
+  "filename": "sozialismus-und-staat-1920.txt",
+  "remote_filename": "sozialismusundst00kels_djvu.txt",
+  "download_url": "https://archive.org/download/sozialismusundst00kels/sozialismusundst00kels_djvu.txt",
+  "final_url": "https://dn720703.ca.archive.org/0/items/sozialismusundst00kels/sozialismusundst00kels_djvu.txt",
+  "http_status": 200,
+  "bytes": 318269,
+  "sha256": "0fc9f0c6b3e04a6bdb579c6d19210a4fba43640189acecef7d91e49457f72c06",
+  "ia_reported_size": "318269",
+  "ia_metadata_date_field": "1920",
+  "ia_title_field": "Sozialismus und Staat : eine Untersuchung der politischen Theorie des Marxismus",
+  "ia_creator_field": "Kelsen, Hans, 1881-1973",
+  "ia_publisher_field": "Leipzig : C.L. Hirschfeld",
+  "ia_language_field": "ger",
+  "ia_contributor_field": "University of Illinois Urbana-Champaign",
+  "ia_possible_copyright_status": null,
+  "ia_licenseurl": null,
+  "ia_description": [
+    "iv, 129 pages ; 22 cm",
+    "Includes bibliographical references"
+  ],
+  "details_url": "https://archive.org/details/sozialismusundst00kels",
+  "fetched_utc": "2026-08-11T10:53:31Z",
+  "elapsed_s": 2.97,
+  "note": "落盘 .txt 与 IA 返回字节完全一致，未加任何出处表头、未做任何 OCR 修改。"
+}
