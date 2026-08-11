@@ -230,6 +230,28 @@ def _paper_lanes(root: pathlib.Path) -> list[str]:
             + " —— **跑 `scripts/check_paper_lanes.py` 看全表**"]
 
 
+def _doc_command_shapes(root: pathlib.Path) -> list[str]:
+    """**HANDOFF「怎么跑」里的命令，参数形状与脚本对不对得上**（`check_doc_command_shapes.py`）。
+
+    起因：那一节第 ③ 条写着 `--identity <identity.json>`，而它要的是**族号 1-12 或族名**
+    ——**接手方按文档敲的第一条建工作区命令就会失败**，而这条错
+    **不是读文档发现的，是真跑 #172 时撞出来的**。
+    """
+    mod = root / "scripts" / "check_doc_command_shapes.py"
+    if not mod.is_file():
+        return []
+    import subprocess
+    r = subprocess.run([sys.executable, str(mod)], capture_output=True, text=True, cwd=str(root))
+    if r.returncode == 0:
+        return []
+    lines = [l.strip() for l in (r.stdout or "").splitlines() if l.strip().startswith("✗")]
+    if not lines:
+        return [f"[文档命令] check_doc_command_shapes 跑不起来（rc={r.returncode}）："
+                f"{(r.stderr or r.stdout)[:160]}"]
+    return ["[文档命令] **HANDOFF 里的命令与脚本对不上**：" + "；".join(lines)
+            + " —— **只报不拦**，逐条读了再改"]
+
+
 def _verification_counts(root: pathlib.Path) -> list[str]:
     """**VERIFICATION.md 里能机械数出来的量，必须与实况相等。**
 
@@ -435,6 +457,7 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
     problems.extend(_verification_counts(root))
     problems.extend(_selftest_reach(root))
     problems.extend(_paper_lanes(root))
+    problems.extend(_doc_command_shapes(root))
 
     # ★★ v0.0.0.94 新增第四条比对：**CHANGELOG 的最高条目必须等于 VERSION**。
     #   实测背景：2026-08-04 一天写了 v0.0.0.84–94 十一条 CHANGELOG，

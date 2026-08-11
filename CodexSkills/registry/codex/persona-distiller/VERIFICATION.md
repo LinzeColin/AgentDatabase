@@ -132,7 +132,7 @@ Date: 2026-08-05（**v0.0.0.154**）
 > 还原 → 0，文件逐字一致。（**上一次接线就是接错了分支才白接的**，所以这次必须植入验证。）
 >
 > **本版实况计数（`check_verification_counts.py` 逐项核过）**：
-> 判据 **91** 件、Python 脚本 **132**、checksum 全量校验 **479 files**、身份族 **12** 族、**名册 102 人**。
+> 判据 **92** 件、Python 脚本 **133**、checksum 全量校验 **481 files**、身份族 **12** 族、**名册 102 人**。
 > ★★★★ **2026-08-10 更新**：判据 72→82、脚本 106→117、checksum 416→431。**这三个数又漂了一轮，是 `check_checkers` 报出来的，不是我自己想起来的。** ★ 口径写死在 `check_verification_counts.PATTERNS`：判据＝`scripts/check_*.py`、脚本＝`scripts/*.py`。**我第一次改用 `find . -name '*.py'` 算出 250，范围错了**——[[counts-need-their-cutoff-stated]]。
 > ★★★★ **2026-08-11 再更新**：判据 82→**86**、脚本 117→**123**、checksum 431→**460**，并补上此前**根本没写过**的「名册人数」**102**（判据一直报「文中 None」，而「文中没写」和「文中写错」在报告里长得一样——`empty-default-swallows-unknown`）。★ 三个数都**按判据写死的那个口径独立复算过一遍**，不是抄它的输出：
 > `ls scripts/check_*.py | wc -l` = 86、`ls scripts/*.py | wc -l` = 123、`wc -l < checksums.sha256` = 460、`team-index.json` 的 products = 102。
@@ -158,6 +158,10 @@ Date: 2026-08-05（**v0.0.0.154**）
 >   （474→475、475→476）。**接线当天就开始还本了。**
 > ★ 独立复算：`ls scripts/check_*.py | wc -l` = 90、`ls scripts/*.py | wc -l` = 131、
 >   `wc -l < checksums.sha256` = 477。
+> ★★★ **2026-08-12 第七次更新**：判据 91→**92**、脚本 132→**133**、checksum 479→**481**。
+> 新增 `check_doc_command_shapes.py`（文档里的命令与脚本参数形状对不对得上）。
+> ★ 这三个数**现算**：`ls scripts/check_*.py | wc -l` = 92、`ls scripts/*.py | wc -l` = 133、
+>   `wc -l < checksums.sha256` = 481。
 > ★★★ **2026-08-12 第六次更新**：判据 90→**91**、脚本 131→**132**、checksum 477→**479**。
 > 新增 `check_paper_lanes.py`（纸面道：某道的全部支撑都来自多道源），scripts/ 与
 > references/pipeline/checkers/ 各一份 ⇒ checksum +2；另 VERIFICATION 与漂移门自身改动。

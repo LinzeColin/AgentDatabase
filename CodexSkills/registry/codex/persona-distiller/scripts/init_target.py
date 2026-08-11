@@ -79,7 +79,7 @@ def main() -> int:
     parser.add_argument('--namesake-gate', required=True, type=Path, help='Ready schema-1 namesake gate produced before initialization.')
     parser.add_argument('--scenario', help='Optional primary scenario. Runtime still routes other scenarios.')
     parser.add_argument('--slug')
-    parser.add_argument('--workspace', default='./workspaces')
+    parser.add_argument('--workspace', default='./workspaces', help='工作区目录（会在其下建 <slug>/ 子目录）')
     parser.add_argument('--profile', choices=['quick', 'standard', 'deep'], default='deep')
     parser.add_argument('--subject-origin', choices=['auto', 'public', 'private', 'self', 'fictional', 'historical'], default='auto')
     parser.add_argument('--consent-authority')

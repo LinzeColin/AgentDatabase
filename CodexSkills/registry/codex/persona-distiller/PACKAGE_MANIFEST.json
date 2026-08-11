@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "73b8acc80c91825ab96debf46d578526f2c2ae290f80ad2af960e80f7b9c6570",
-      "size_bytes": 138419
+      "sha256": "16d362b060dd38a024db5189df88d4e87bc17e82e721a87515b21269c4c54b1a",
+      "size_bytes": 138781
     },
     {
       "path": "VERSION",
@@ -571,8 +571,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_contract_drift.py",
-      "sha256": "06dcc4e940ce95eb3d4dd459b5df7c48a5fed656852a1c6d078cdef50bbc4ce4",
-      "size_bytes": 46105
+      "sha256": "041b5513d3bdb36750928ce80969413a6ee77a7bd1cae6d5ea4011743437baba",
+      "size_bytes": 47304
     },
     {
       "path": "references/pipeline/checkers/check_corpus_ceiling.py",
@@ -618,6 +618,11 @@
       "path": "references/pipeline/checkers/check_distillation_freshness.py",
       "sha256": "176906c6649388e3c72d73e9726c3fb74f5d3cb018b3bf2dec556f05e906d613",
       "size_bytes": 10649
+    },
+    {
+      "path": "references/pipeline/checkers/check_doc_command_shapes.py",
+      "sha256": "fb863748edbdd56d73b06402c8f4fe90ce597a6b83f6b35b2cc520760f5195ec",
+      "size_bytes": 12069
     },
     {
       "path": "references/pipeline/checkers/check_evidence_is_per_claim.py",
@@ -1356,8 +1361,8 @@
     },
     {
       "path": "scripts/check_contract_drift.py",
-      "sha256": "06dcc4e940ce95eb3d4dd459b5df7c48a5fed656852a1c6d078cdef50bbc4ce4",
-      "size_bytes": 46105
+      "sha256": "041b5513d3bdb36750928ce80969413a6ee77a7bd1cae6d5ea4011743437baba",
+      "size_bytes": 47304
     },
     {
       "path": "scripts/check_corpus_ceiling.py",
@@ -1403,6 +1408,11 @@
       "path": "scripts/check_distillation_freshness.py",
       "sha256": "176906c6649388e3c72d73e9726c3fb74f5d3cb018b3bf2dec556f05e906d613",
       "size_bytes": 10649
+    },
+    {
+      "path": "scripts/check_doc_command_shapes.py",
+      "sha256": "fb863748edbdd56d73b06402c8f4fe90ce597a6b83f6b35b2cc520760f5195ec",
+      "size_bytes": 12069
     },
     {
       "path": "scripts/check_evidence_is_per_claim.py",
@@ -1771,8 +1781,8 @@
     },
     {
       "path": "scripts/init_target.py",
-      "sha256": "2ca94ec108df470ca95051752ffccb4337342559dc15fb1d2a38a4bbbd21964f",
-      "size_bytes": 12189
+      "sha256": "853e031b2909b504c1d3b29bb4a433090e561d107652c4c55e9ee228458b650f",
+      "size_bytes": 12252
     },
     {
       "path": "scripts/install.ps1",
