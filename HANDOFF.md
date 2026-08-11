@@ -732,6 +732,14 @@ bash machine/handoff/build_handoff_commit.sh --branch handoff/2026-08-13
 | **真把 pre-push 钩子跑一遍** | 放行 |
 | `_corpora` 内记录类 / 语料目录外 文件数与 HEAD **必须相等** | 3344/3344、8965/8965 |
 
+★★★★ **推之前先重跑一次脚本。** 每在工作分支上多提交一次，
+`handoff/*` 那个分支就旧一次——它是当时那棵树的快照，不会自己跟上。
+2026-08-12 实测：我在建好分支之后又改了 Kelsen 的 05 道 scope 表，
+**分支里还是旧的**，重跑才带上。
+
+    git branch -D handoff/2026-08-13 2>/dev/null
+    bash machine/handoff/build_handoff_commit.sh --branch handoff/2026-08-13
+
 跑完之后由**人**按下这一步（脚本不推送）：
 
 ```bash
