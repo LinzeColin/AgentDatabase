@@ -157,6 +157,30 @@ def _one_ledger_per_workspace(root: pathlib.Path,
                        "**判据会把它当成容器并下沉**，单位名会变成子目录名，"
                        "于是「扫了几个」对得上而「扫的是谁」是错的。"
                        "已知豁免（已判过分、不动）：Blackstone #169、Holmes #170")
+
+    # ★★★ 2026-08-12 第二种形态：**同一个人物有两份 `claims.jsonl`，且内容不同。**
+    #   撞出它的是核 #95「Koch 41 条压在一对源上」时：
+    #   `wip-koch-107/claims.jsonl` 与 `.../evidence/claims.jsonl` 都是 46 条、
+    #   **而 5 条的 `source_ids` 不同**——外层那份缺了后来补上的第三个来源
+    #   `src-c8bca1856b9e`。判据读的是 `evidence/` 那份（权威），
+    #   所以判决不受影响；**危险的是人**：照外层那份数，同一个问题会多算 3 条。
+    #   全库实测 **6 个人物**有两份且**六对内容全都不同**
+    #   （jenner-104 / koch-107 / lister-108 / osler-110 / pasteur-106 / virchow-109）。
+    #   ⇒ 与上面那条同一个病：**一个人物的同一份东西，仓里有两个版本，而没人说哪个算数。**
+    CLAIMS_KNOWN = {
+        "wip-jenner-104", "wip-koch-107", "wip-lister-108",
+        "wip-osler-110", "wip-pasteur-106", "wip-virchow-109",
+    }
+    per: dict[str, list[str]] = {}
+    for cl in corpora.rglob("claims.jsonl"):
+        per.setdefault(cl.relative_to(corpora).parts[0], []).append(
+            str(cl.relative_to(corpora)))
+    for person, files in sorted(per.items()):
+        if len(files) > 1 and person not in CLAIMS_KNOWN:
+            out.append(f"[一个人物两份 claims.jsonl] {person} —— {sorted(files)}；"
+                       "**权威的是 `<工作区>/evidence/claims.jsonl`**，另一份是陈旧快照。"
+                       "判据读权威那份、判决不受影响，**而人照另一份数就会得到不同的数**。"
+                       "已知 6 个已存在的在豁免名单里（都已判过分，不动）。")
     return out
 
 
