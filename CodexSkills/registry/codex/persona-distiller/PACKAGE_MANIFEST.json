@@ -56,7 +56,7 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "31efcdd12625221936f035c5309b641bd30ed746fbd621e91dc27d77fb5c616e",
+      "sha256": "70b5a54a3ea01842cafbf21656d587e3a31889b76ef5f652d35db8a951380aa1",
       "size_bytes": 135839
     },
     {
@@ -381,8 +381,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "7c64a6ef972221583f353614a44099a5e388b0fc9cf1d98777cdf45a0ceb5db0",
-      "size_bytes": 238228
+      "sha256": "ce30a11f434a88d5fa6967f4862db4cc7beee919ead2b8ede6610d7c248eba76",
+      "size_bytes": 239103
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
