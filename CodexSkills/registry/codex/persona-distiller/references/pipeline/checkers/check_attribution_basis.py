@@ -328,9 +328,29 @@ def main() -> int:
     if _src is None:
         info["★ 来源层未核（不是通过）"] = "两个台账路径都不存在"
     else:
-        # ★ 姓取**最后一段**；`X von Y` 里 Y 才是姓（与 check_authorship 同一口径）。
-        _tok = [t for t in str(meta.get("name") or "").split() if t]
-        surname = _tok[-1] if _tok else ""
+        # ★★★ 2026-08-11：**不再在这里自己推姓**，改为复用 `check_authorship.build_patterns`。
+        #   本文件头部记着「`split()[0]` 在另一个文件里又长了一遍」——
+        #   而这次是**世代后缀**：`Oliver Wendell Holmes Jr.` 取最后一段得 **`Jr.`**，
+        #   于是 `check_sources` 会拿 `jr.` 去匹配 author 字段，**一份都对不上**。
+        #   （同一个病根的第三次：`split()[0]` → `[-1]` → 后缀。**复制一份逻辑就会再长一遍**，
+        #   所以这次直接借同一把尺子，不再维护第二份。）
+        surname = ""
+        _nm = str(meta.get("name") or "").strip()
+        if _nm:
+            try:
+                import importlib.util as _ilu
+                _sp = _ilu.spec_from_file_location(
+                    "_pd_ca_ab", pathlib.Path(__file__).resolve().parent / "check_authorship.py")
+                _m = _ilu.module_from_spec(_sp)
+                _sp.loader.exec_module(_m)
+                surname = _m.build_patterns(_nm)["surname"]
+            except Exception as _e:                                  # noqa: BLE001
+                # ★ 借不到就**说出来**，不要静默退回旧算法
+                info["★ 姓氏推导降级（不是通过）"] = (
+                    "借不到 check_authorship.build_patterns（%s），"
+                    "退回「取最后一段」——**对带 Jr./Sr./II 的人名会取错**" % _e)
+                _tok = [x for x in _nm.split() if x]
+                surname = _tok[-1] if _tok else ""
         sp, si = check_sources(rows, surname)
         problems += sp
         info.update(si)

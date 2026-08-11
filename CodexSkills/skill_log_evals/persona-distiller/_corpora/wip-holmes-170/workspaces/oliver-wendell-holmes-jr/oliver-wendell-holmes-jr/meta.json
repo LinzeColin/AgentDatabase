@@ -83,5 +83,24 @@
   "subject_origin": "historical",
   "target_id": "tgt-4a73c71f041e",
   "time_scope": "1841–1935",
-  "updated_at": "2026-08-11T07:00:08Z"
+  "updated_at": "2026-08-11T07:00:08Z",
+  "attribution_basis": {
+    "authority": "印刷时代人物，扉页署名＋印工年份可用，**但对这个人单靠署名远远不够**——**同名的是他父亲**（Oliver Wendell Holmes Sr., 1809–1894），而 LoC **根本没有 Sr. 形**：父亲的权威标目就是裸名 `Holmes, Oliver Wendell, 1809-1894`；裸名查询 `label/「Holmes, Oliver Wendell」` **302 到儿子** n79054782——**而 19 世纪印本正是这样署名的**。GND 更糟：父子 100 字段**逐字节相同**，只有 `$d` 不同。因此归属依据取四条并用：①**印本年**（父自 1858 年起以裸名大量出版，子的首部专著 *The Common Law* 在 1881；1881 年前只署裸名的默认归父）；②**规范档标识符**（子 LCCN n79054782 / Wikidata Q360574 / GND 118706594；父 n80032729 / Q319829 / GND 118706608）；③**职业档**（父是医生兼诗人、哈佛医学院教授，**从未任司法职务**）；④**出生地**（父 Cambridge / 子 Boston）。★ **至少两条成立才计入 P1。** ★★ `Harvard` **不得作为判据**——父子 P108 雇主同为 Harvard University、P69 同就读 Harvard College，**共有的东西不能当判据**。",
+    "citation": "本工作区 `../../namesake-excluded.json` 与 `../../holmes_namesake_candidates.json`：23 个同名候选逐条实调 Wikidata / LoC / GND 所得。★ **出处交代**：这些是子代理实调的，**我本人未重跑**；我自核过的是「23/23 通过 `namesake_gate._candidate()` 字段校验」与「单候选重跑后门返回 ready/single/holmes-oliver-wendell-jr-1841」。★★ **VIAF 全站 403**（主机级 bot 墙，Shakespeare 公开簇同样 403），**未作任何规避**；因此 VIAF 号只是 Wikidata 的 P214 声明、**未回读**，不得单独作为判据。",
+    "disputed_policy": "四类一律不计入 P1：①**父亲名下的作品**——最危险的一类，且裸名署名会静默落到儿子身上；已知实例：LoC 名称-题名规范档 `no2021140324`「Holmes, Oliver Wendell, 1809-1894. Contagiousness of puerperal fever」——**父亲那篇产褥热论文正挂在裸名标目下**。②**判例集里不是他写的层**：syllabus／headnote 由 Reporter of Decisions 编写、案由与律师名由书记官编、**主笔不是他的意见**——三者一律不入 P1，只取「他主笔的意见 + 他署名的异议／协同意见」（依据须逐字照录该卷卷首关于 syllabus 性质的声明）。③**印本年 > 1930 的**：*Holmes–Pollock Letters*(1941)、*Holmes–Laski Letters*(1953) 等身后整理的书信集——**这是他最有声口的材料，恰恰不能用**。④**仅凭 LoC `n87108083` 挂靠的材料**：那是一条**已废止的未分化名称记录**（1987–2016 把多个 Wendell Holmes 混在一个标目下），**至今返回 HTTP 200**，只在 recordStatus 里写 deprecated——**只判「解析得通吗」的程序会把多人记录当成有效身份接受**。★ `disputed_works` 现只列已证实的两条，**不是「查过了没有别的」**：语料尚未落盘。",
+    "disputed_works": [
+      {
+        "work": "On the Contagiousness of Puerperal Fever（1843）",
+        "为什么会误收": "署名为裸名 `Oliver Wendell Holmes`，与目标 19 世纪印本的署名完全相同；LoC 把它挂在裸名标目 no2021140324 下",
+        "证据": "holmes_namesake_candidates.json 中父亲条的 distinguishing_basis，逐条实调所得",
+        "处置": "归父亲（1843 < 1881，且题材为产科医学）；不计入 P1"
+      },
+      {
+        "work": "Archives and records management 类著作（1960 年代）",
+        "为什么会误收": "作者 Oliver Wendell Holmes（档案学家，1902–1981）**全名与目标完全相同**，且题材是档案管理，而目标的一手件正是档案文书——**主题词筛不掉**",
+        "证据": "同上候选文件；LCCN n83205669 / GND 133040364",
+        "处置": "靠标识符与生卒年排除；判不出来时落 unknown，**不许硬判**"
+      }
+    ]
+  }
 }
