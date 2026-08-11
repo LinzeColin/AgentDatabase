@@ -888,6 +888,21 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/check_disposition_e
 
 **不需要任何设置**：路径是本机已有的主树，`git pull` 之后 `HANDOFF.md` 就在仓根。
 
+**★ 这句话的前提 2026-08-12 逐条实测过**（推送之前能验的都验了）：
+
+| 前提 | 实测 |
+|---|---|
+| `~/Documents/Codex/GithubProject/AgentDatabase` 存在 | ✓ |
+| 是 git 仓 | ✓ |
+| 停在 `main` | ✓ |
+| 工作树干净（0 处改动） | ✓ —— **`git pull` 不会撞冲突** |
+| 远端 = `git@github.com:LinzeColin/AgentDatabase.git` | ✓ |
+| 与 `origin/main` 零分歧（`rev-list --left-right --count` = `0 0`） | ✓ —— **快进合并成立** |
+| 仓根有 `HANDOFF.md` | **推送后才有**（当前没有，符合预期） |
+
+**★★ 接手方第一步的自证**：`git pull` 完成后，仓根应当出现 `HANDOFF.md`。
+若没有出现，说明**推送那一步没做**——不要往下走，先回来问。
+
 ### ★★★★ 移交怎么做（**2026-08-11 已实测通过，旧做法已作废**）
 
 ```bash
