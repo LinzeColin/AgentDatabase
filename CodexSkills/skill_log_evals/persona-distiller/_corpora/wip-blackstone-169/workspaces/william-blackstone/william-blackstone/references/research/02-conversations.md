@@ -2,7 +2,13 @@
 
 ## Scope and assigned sources
 
-Pending. Use train-split source IDs only.
+**本道分到 1 份（train split）**：
+
+| source_id | 出版年 | tier | 题名 |
+|---|---|---|---|
+| `src-2c00f19a2df5` | 1773 | P1 | A Reply to Dr. Priestley's Remarks on the Fourth Volume of…adelphia, M DCC LXXIII [1773] |
+
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 
 ## Source-linked observations
 
