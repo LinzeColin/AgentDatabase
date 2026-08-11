@@ -1,0 +1,147 @@
+[
+ {
+  "name": "Ken Thompson",
+  "family": "软件开发师",
+  "order": 2
+ },
+ {
+  "name": "Alan Kay",
+  "family": "软件开发师",
+  "order": 6
+ },
+ {
+  "name": "Anders Hejlsberg",
+  "family": "软件开发师",
+  "order": 9
+ },
+ {
+  "name": "Barbara Liskov",
+  "family": "软件开发师",
+  "order": 13
+ },
+ {
+  "name": "Tony Hoare",
+  "family": "软件开发师",
+  "order": 16
+ },
+ {
+  "name": "Douglas Engelbart",
+  "family": "软件开发师",
+  "order": 20
+ },
+ {
+  "name": "Plato",
+  "family": "思想教育师",
+  "order": 3
+ },
+ {
+  "name": "Jean-Jacques Rousseau",
+  "family": "思想教育师",
+  "order": 6
+ },
+ {
+  "name": "John Amos Comenius",
+  "family": "思想教育师",
+  "order": 9
+ },
+ {
+  "name": "Lev Vygotsky",
+  "family": "思想教育师",
+  "order": 12
+ },
+ {
+  "name": "Charlie Munger",
+  "family": "投资资本师",
+  "order": 2
+ },
+ {
+  "name": "Peter Lynch",
+  "family": "投资资本师",
+  "order": 5
+ },
+ {
+  "name": "George Soros",
+  "family": "投资资本师",
+  "order": 8
+ },
+ {
+  "name": "Joel Greenblatt",
+  "family": "投资资本师",
+  "order": 13
+ },
+ {
+  "name": "William Blackstone",
+  "family": "政治法律师",
+  "order": 3
+ },
+ {
+  "name": "H. L. A. Hart",
+  "family": "政治法律师",
+  "order": 6
+ },
+ {
+  "name": "Solon",
+  "family": "政治法律师",
+  "order": 11
+ },
+ {
+  "name": "Winston Churchill",
+  "family": "政治法律师",
+  "order": 16
+ },
+ {
+  "name": "Leonardo da Vinci",
+  "family": "艺术设计师",
+  "order": 1
+ },
+ {
+  "name": "Josef Albers",
+  "family": "艺术设计师",
+  "order": 9
+ },
+ {
+  "name": "Frank Lloyd Wright",
+  "family": "艺术设计师",
+  "order": 12
+ },
+ {
+  "name": "Henry Dreyfuss",
+  "family": "艺术设计师",
+  "order": 15
+ },
+ {
+  "name": "David Ogilvy",
+  "family": "客户营销师",
+  "order": 2
+ },
+ {
+  "name": "Byron Sharp",
+  "family": "客户营销师",
+  "order": 7
+ },
+ {
+  "name": "Rosser Reeves",
+  "family": "客户营销师",
+  "order": 12
+ },
+ {
+  "name": "Konosuke Matsushita",
+  "family": "创业经营师",
+  "order": 3
+ },
+ {
+  "name": "Peter Drucker",
+  "family": "创业经营师",
+  "order": 12
+ },
+ {
+  "name": "Gifford Pinchot",
+  "family": "农林牧渔师",
+  "order": 12
+ },
+ {
+  "name": "Nancy Leveson",
+  "family": "财务合规师",
+  "order": 16
+ }
+]

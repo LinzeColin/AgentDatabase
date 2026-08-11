@@ -11266,8 +11266,8 @@
      "present": true,
      "split": "train",
      "tier": "S1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/lifeofhugogrotiu00butluoft（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-2e9cff2611dd",
@@ -11279,8 +11279,8 @@
      "present": true,
      "split": "train",
      "tier": "S1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/ioannisdelaetant00laet_0（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-b0e9a4b92aa5",
@@ -11292,8 +11292,8 @@
      "present": true,
      "split": "train",
      "tier": "S1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/ioannisdelaetant00laet_2（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-52882c964c73",
@@ -11305,8 +11305,8 @@
      "present": true,
      "split": "train",
      "tier": "S1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/ofdominionorowne00seld（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-50d9d5f3ff5e",
@@ -11318,8 +11318,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/adamusexulgroti00grotgoog（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-f4df79764828",
@@ -11331,8 +11331,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/hugonisgrotiiann00grot（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-6de33e4db80d",
@@ -11344,8 +11344,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://www.gutenberg.org/ebooks/14905（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-aa617a65bf8d",
@@ -11357,8 +11357,8 @@
      "present": true,
      "split": "holdout",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/bub_gb_N_rOpPIeLwUC（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-cb4b5545eb76",
@@ -11370,8 +11370,8 @@
      "present": true,
      "split": "holdout",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/thetruthofthechr00grotuoft（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-238b4a9f8cb9",
@@ -11383,8 +11383,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/bub_gb_9GTcjhD3wRgC（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-667bd84bb386",
@@ -11396,8 +11396,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/mostexcellenthug00grot（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-2808cba204dc",
@@ -11409,8 +11409,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/dejurebelliacpac013020mbp（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-03c6588cea95",
@@ -11422,8 +11422,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/onrightsofwarpea00grotuoft（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-1be9153766c6",
@@ -11435,8 +11435,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/bub_gb_7cDeih1PbMkC（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-1a398fec8248",
@@ -11448,8 +11448,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/hugonisgrotiiepi00grot（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-b7384d9e7530",
@@ -11461,8 +11461,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/hugonisgrotiiad00crgoog（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-6c85055b8605",
@@ -11474,8 +11474,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/bub_gb_9AutU4aFPyAC（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-52fd74630d7b",
@@ -11487,8 +11487,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/freedomofseasorr00grot（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-fd2c87dfecb9",
@@ -11500,8 +11500,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/bub_gb_D-T4XTbuclUC（出自 00-抓源清单.md 该文件名一节）"
     },
     {
      "source_id": "src-8651f2b87336",
@@ -11513,8 +11513,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/hugonisgrotiide00barbgoog（出自 00-重OCR报告.md：`hugonisgrotiide00/01/02barbgoog` 三卷并列，**卷序按并列顺序对应**）"
     },
     {
      "source_id": "src-d3bf3e7d3c8f",
@@ -11526,8 +11526,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/hugonisgrotiide01barbgoog（出自 00-重OCR报告.md：同上并列，**卷序按并列顺序对应**）"
     },
     {
      "source_id": "src-576d609b0ef0",
@@ -11539,8 +11539,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/hugonisgrotiide02barbgoog（出自 00-重OCR报告.md：同上并列，**卷序按并列顺序对应**；★ 本卷题名页 OCR 不可读，归属靠卷内标题与兄弟卷）"
     },
     {
      "source_id": "src-19eca701ec61",
@@ -11552,8 +11552,8 @@
      "present": true,
      "split": "train",
      "tier": "P1",
-     "refetch": "none",
-     "locator": null
+     "refetch": "url",
+     "locator": "https://archive.org/details/ledroitdeprised02hamagoog（出自 00-重OCR报告.md：`ledroitdeprised02hamagoog`）"
     }
    ]
   },
@@ -27164,9 +27164,9 @@
  },
  "tally_refetch": {
   "item": 134,
-  "url": 1993,
+  "url": 2016,
   "prose": 507,
-  "none": 79
+  "none": 56
  },
  "totals": {
   "workspaces": 34,

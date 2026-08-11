@@ -1,0 +1,152 @@
+[
+ {
+  "name": "Dennis Ritchie",
+  "family": "软件开发师",
+  "order": 1
+ },
+ {
+  "name": "Donald Knuth",
+  "family": "软件开发师",
+  "order": 4
+ },
+ {
+  "name": "Bjarne Stroustrup",
+  "family": "软件开发师",
+  "order": 8
+ },
+ {
+  "name": "Vint Cerf",
+  "family": "软件开发师",
+  "order": 12
+ },
+ {
+  "name": "Edsger Dijkstra",
+  "family": "软件开发师",
+  "order": 15
+ },
+ {
+  "name": "Rob Pike",
+  "family": "软件开发师",
+  "order": 18
+ },
+ {
+  "name": "Socrates",
+  "family": "思想教育师",
+  "order": 2
+ },
+ {
+  "name": "Immanuel Kant",
+  "family": "思想教育师",
+  "order": 5
+ },
+ {
+  "name": "Friedrich Frobel",
+  "family": "思想教育师",
+  "order": 8
+ },
+ {
+  "name": "Maria Montessori",
+  "family": "思想教育师",
+  "order": 11
+ },
+ {
+  "name": "Warren Buffett",
+  "family": "投资资本师",
+  "order": 1
+ },
+ {
+  "name": "Philip Fisher",
+  "family": "投资资本师",
+  "order": 4
+ },
+ {
+  "name": "Ray Dalio",
+  "family": "投资资本师",
+  "order": 7
+ },
+ {
+  "name": "Seth Klarman",
+  "family": "投资资本师",
+  "order": 12
+ },
+ {
+  "name": "Julian Robertson",
+  "family": "投资资本师",
+  "order": 17
+ },
+ {
+  "name": "Hans Kelsen",
+  "family": "政治法律师",
+  "order": 5
+ },
+ {
+  "name": "John Marshall",
+  "family": "政治法律师",
+  "order": 9
+ },
+ {
+  "name": "Otto von Bismarck",
+  "family": "政治法律师",
+  "order": 13
+ },
+ {
+  "name": "Thomas Jefferson",
+  "family": "政治法律师",
+  "order": 18
+ },
+ {
+  "name": "Pablo Picasso",
+  "family": "艺术设计师",
+  "order": 3
+ },
+ {
+  "name": "Le Corbusier",
+  "family": "艺术设计师",
+  "order": 11
+ },
+ {
+  "name": "Raymond Loewy",
+  "family": "艺术设计师",
+  "order": 14
+ },
+ {
+  "name": "Coco Chanel",
+  "family": "艺术设计师",
+  "order": 20
+ },
+ {
+  "name": "Edward Bernays",
+  "family": "客户营销师",
+  "order": 4
+ },
+ {
+  "name": "Bill Bernbach",
+  "family": "客户营销师",
+  "order": 11
+ },
+ {
+  "name": "Alfred Sloan",
+  "family": "创业经营师",
+  "order": 2
+ },
+ {
+  "name": "Ray Kroc",
+  "family": "创业经营师",
+  "order": 6
+ },
+ {
+  "name": "Albert Howard",
+  "family": "农林牧渔师",
+  "order": 9
+ },
+ {
+  "name": "Jay Lush",
+  "family": "农林牧渔师",
+  "order": 14
+ },
+ {
+  "name": "John Moubray",
+  "family": "材料建工师",
+  "order": 29
+ }
+]

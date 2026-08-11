@@ -1,0 +1,147 @@
+[
+ {
+  "name": "Linus Torvalds",
+  "family": "软件开发师",
+  "order": 3
+ },
+ {
+  "name": "Guido van Rossum",
+  "family": "软件开发师",
+  "order": 7
+ },
+ {
+  "name": "Tim Berners-Lee",
+  "family": "软件开发师",
+  "order": 11
+ },
+ {
+  "name": "Leslie Lamport",
+  "family": "软件开发师",
+  "order": 14
+ },
+ {
+  "name": "John McCarthy",
+  "family": "软件开发师",
+  "order": 17
+ },
+ {
+  "name": "Confucius",
+  "family": "思想教育师",
+  "order": 1
+ },
+ {
+  "name": "Aristotle",
+  "family": "思想教育师",
+  "order": 4
+ },
+ {
+  "name": "Johann Pestalozzi",
+  "family": "思想教育师",
+  "order": 7
+ },
+ {
+  "name": "John Dewey",
+  "family": "思想教育师",
+  "order": 10
+ },
+ {
+  "name": "Jean Piaget",
+  "family": "思想教育师",
+  "order": 13
+ },
+ {
+  "name": "Benjamin Graham",
+  "family": "投资资本师",
+  "order": 3
+ },
+ {
+  "name": "John Bogle",
+  "family": "投资资本师",
+  "order": 6
+ },
+ {
+  "name": "Howard Marks",
+  "family": "投资资本师",
+  "order": 11
+ },
+ {
+  "name": "Carl Icahn",
+  "family": "投资资本师",
+  "order": 15
+ },
+ {
+  "name": "Oliver Wendell Holmes Jr.",
+  "family": "政治法律师",
+  "order": 4
+ },
+ {
+  "name": "Louis Brandeis",
+  "family": "政治法律师",
+  "order": 8
+ },
+ {
+  "name": "Abraham Lincoln",
+  "family": "政治法律师",
+  "order": 12
+ },
+ {
+  "name": "Niccolo Machiavelli",
+  "family": "政治法律师",
+  "order": 17
+ },
+ {
+  "name": "Michelangelo",
+  "family": "艺术设计师",
+  "order": 2
+ },
+ {
+  "name": "Walter Gropius",
+  "family": "艺术设计师",
+  "order": 10
+ },
+ {
+  "name": "Charles Eames",
+  "family": "艺术设计师",
+  "order": 13
+ },
+ {
+  "name": "Buckminster Fuller",
+  "family": "艺术设计师",
+  "order": 16
+ },
+ {
+  "name": "Claude C. Hopkins",
+  "family": "客户营销师",
+  "order": 3
+ },
+ {
+  "name": "Leo Burnett",
+  "family": "客户营销师",
+  "order": 10
+ },
+ {
+  "name": "Henry Ford",
+  "family": "创业经营师",
+  "order": 1
+ },
+ {
+  "name": "Soichiro Honda",
+  "family": "创业经营师",
+  "order": 5
+ },
+ {
+  "name": "Luther Burbank",
+  "family": "农林牧渔师",
+  "order": 7
+ },
+ {
+  "name": "Aldo Leopold",
+  "family": "农林牧渔师",
+  "order": 13
+ },
+ {
+  "name": "Joseph Juran",
+  "family": "财务合规师",
+  "order": 19
+ }
+]
