@@ -29,7 +29,8 @@
 
 ## 冻结名单的用法
 
-`KNOWN` 是 2026-08-12 的实况（当日 18 件，补完 `check_holdout_mention` 后 17 件）。
+`KNOWN` 是 2026-08-12 的实况：**当日首扫 18 件，逐件补完后现为 12 件**
+（依次补掉 `check_holdout_mention`→17、`check_holdout_overlap` 等 →13、`check_quote_integrity`→12）。
 **它不是待办清单**——存量逐件补自测的成本很高，
 且多数判据的判定函数需要构造完整工作区。本判据要挡的是**新增**：
 新写的判据不许再交一个「验了配料、没验判决」的自测。
@@ -62,7 +63,7 @@ KNOWN = {
     "check_corpus_integrity.py",
     "check_longs_corruption.py",
     "check_material_split.py", "check_ocr_homoglyphs.py",
-    "check_ocr_language_death.py", "check_quote_integrity.py",
+    "check_ocr_language_death.py",
     "check_refusal_overflow.py",
     "check_semantic_residue.py",
     "check_source_numbering_gap.py", "check_threshold_doc_drift.py",

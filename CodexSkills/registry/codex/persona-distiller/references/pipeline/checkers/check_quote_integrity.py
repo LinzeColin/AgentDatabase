@@ -241,6 +241,35 @@ def load_corpus(cache_dirs) -> tuple[list, list]:
     return texts, folded
 
 
+def scan_text(label: str, unit_id: str, text: str, acc, texts, folded=None) -> None:
+    """把一段文本里的引文逐段核进 `acc`。**本件的判定函数。**
+
+    ★★ `acc["unchecked"]` 是本函数最要紧的一个数：**「抽出来了但太短，没核」
+      与「核过了、命中」在旧版报告里长得一样**，屏幕上印的是「✓ 全部可在语料中找到」。
+      Grotius #168 实测：`facts.md` 的 10 条引文**只有 5 条真进了核验**。
+      ⇒ 不动门槛（动它就是全库 102 份产物一起变），只把「没查」的条数数出来。
+
+    ★ 2026-08-12 从 `main()` 的嵌套闭包提到模块级——**为的是让自测能真跑它**。
+      提出来时只多了 `texts`/`folded` 两个入参，逻辑逐字未动。
+    """
+    acc["unchecked"] += count_unchecked(text)
+    for m in Q.finditer(text):
+        acc["quotes"] += 1
+        for seg in SPLIT.split(_q(m)):
+            if len(proj(seg)) < MIN:
+                acc["unchecked"] += 1     # 抽出来了但太短——同样是**没查**
+                continue
+            if IDENT.match(seg.strip()):
+                acc["idents"] += 1        # 标识符不是引文，**只计数不判**
+                continue
+            acc["segs"] += 1
+            hit = find(seg, texts, folded)
+            if hit == "longs":
+                acc["longs"].append((unit_id, re.sub(r"\s+", " ", seg).strip()[:100]))
+            elif not hit:
+                acc["bad"].append((f"{label}/{unit_id}", re.sub(r"\s+", " ", seg).strip()[:100]))
+
+
 def self_test(projected=None, folded=None) -> int:
     """负对照 + 真实夹具 + 反向对照。任何一条不合即判本检查器失效。
 
@@ -367,6 +396,76 @@ def self_test(projected=None, folded=None) -> int:
     print(f"  {'✓' if ok5 else '✗'} **反对照**：标识符／来源号／中文串不计入未核")
     missed += not ok5
 
+    # ══════════════════════════════════════════════════════════════
+    # ⑳ ★★★ `scan_text()` 本身——**2026-08-12 之前它一次也没被自测进入过**
+    # ══════════════════════════════════════════════════════════════
+    #
+    # 上面各组验的是 `find()` / `count_unchecked()` / `proj()` 这些**配料**，
+    # 而 `scan_text()` 才是**把一段文本拆成引文段、逐段核、并决定它算 bad／longs／
+    # idents／unchecked 哪一栏**的那一段——本件的判定函数。
+    # 它此前嵌在 `main()` 里，**自测调不到**；当天提到模块级就是为了这一组。
+    #
+    # ★★ 重点验 `unchecked`：**「抽出来了但太短、没核」与「核过了、命中」
+    #   在旧版报告里长得一样**，屏幕上印「✓ 全部可在语料中找到」。
+    #   Grotius #168 实测 10 条只有 5 条真进了核验。
+    _tex, _fol = fixture_corpus()
+
+    def _scan(text):
+        acc = {"quotes": 0, "segs": 0, "bad": [], "longs": [], "idents": 0, "unchecked": 0}
+        scan_text("测", "u-1", text, acc, _tex, _fol)
+        return acc
+
+    a = _scan("他写道：`It was shewn to the Council, and returned to me`。")
+    _ok = a["segs"] >= 1 and not a["bad"]
+    print(f"  {'✓' if _ok else '✗'} ⑳a 语料里有的整句 → 核过且命中（segs={a['segs']} bad={len(a['bad'])}）")
+    missed += not _ok
+
+    a = _scan("他写道：`This sentence never appears anywhere in the corpus at all`。")
+    _ok = len(a["bad"]) == 1
+    print(f"  {'✓' if _ok else '✗'} ⑳b 语料里没有的整句 → 报未命中（bad={len(a['bad'])}）")
+    missed += not _ok
+
+    # ⑳c / ⑳c′ ★★★ **没查不许冒充查过了**——本件的立身之本。
+    #
+    # ★★ 「没查」有**两个来源**，必须分开钉死，否则一条断言会替另一条挡枪：
+    #   ⑳c  段级：`Q` 抽到了，而 `proj(seg) < MIN`（20 字母）⇒ 不核，计 unchecked。
+    #   ⑳c′ 文本级：`Q` 根本抽不到（它自己要求 ≥18 字符）⇒ `count_unchecked()` 数出来。
+    #
+    # ★ 2026-08-12 第一版把两者合成一条（只断言 `unchecked >= 1`），
+    #   **变异测试当场戳穿**：把段级那行 `acc["unchecked"] += 1` 改成 `acc["segs"] += 1`，
+    #   自测**一条都没红**——因为该条的 unchecked 其实是文本级贡献的，
+    #   断言从头到尾没走进段级分支。**夹具不在射程里，「绿」什么也没证明。**
+    #   （现夹具是先单独喂给 `scan_text` 确认它报出东西之后才写的断言。）
+    #
+    # ⑳c 段级：页码引注是真实形态——够 18 字符进得了 `Q`，而字母只有 19 个。
+    _t = "他记道：\u201cVol. II, pp. 101\u2013103, 210\u2014214.\u201d"
+    a = _scan(_t)
+    _ok = (a["quotes"] == 1 and a["segs"] == 0 and not a["bad"]
+           and a["unchecked"] == 1 and count_unchecked(_t) == 0)
+    print(f"  {'✓' if _ok else '✗'} ⑳c **段级**太短 → 计 unchecked，不进 segs/bad"
+          f"（quotes={a['quotes']} segs={a['segs']} unchecked={a['unchecked']}"
+          f"，其中文本级贡献 {count_unchecked(_t)}）")
+    missed += not _ok
+
+    # ⑳c′ 文本级：`Q` 连抽都抽不到的短原文串（Grotius #168 那 5 条就是这种）。
+    _t = "他写道：`too short`。"
+    a = _scan(_t)
+    _ok = a["quotes"] == 0 and a["unchecked"] == 1 and count_unchecked(_t) == 1
+    print(f"  {'✓' if _ok else '✗'} ⑳c\u2032 **文本级**抽不到的短串 → 仍计 unchecked"
+          f"（quotes={a['quotes']} unchecked={a['unchecked']}）")
+    missed += not _ok
+
+    a = _scan("见 `emit_lane_scope_and_more_stuff` 一节。")
+    _ok = a["idents"] >= 1 and not a["bad"]
+    print(f"  {'✓' if _ok else '✗'} ⑳d 标识符 → 只计 idents，不报未命中（idents={a['idents']}）")
+    missed += not _ok
+
+    a = _scan("`It was shewn to the Council, and returned to me` 与 "
+              "`This sentence never appears anywhere in the corpus at all`。")
+    _ok = a["quotes"] == 2 and len(a["bad"]) == 1
+    print(f"  {'✓' if _ok else '✗'} ⑳e 一段两条引文 → 各自判（quotes={a['quotes']} bad={len(a['bad'])}）")
+    missed += not _ok
+
     print("\n  ✓ 负对照通过" if not missed else f"\n  ✗ {missed} 条不合——本检查器已失效，不得依赖其结论")
     return missed
 
@@ -438,31 +537,19 @@ def main() -> int:
     #   而屏幕上印的是「✓ 全部可在语料中找到」。
     #   ★ 本次**不动这两个门槛**（动它就是全库 102 份产物一起变），
     #     只做一件事：**把「没查」的条数数出来、印出来**，不让它冒充「查过了」。
-    def scan(label: str, unit_id: str, text: str, acc):
-        acc["unchecked"] += count_unchecked(text)
-        for m in Q.finditer(text):
-            acc["quotes"] += 1
-            for seg in SPLIT.split(_q(m)):
-                if len(proj(seg)) < MIN:
-                    acc["unchecked"] += 1     # 抽出来了但太短——同样是**没查**
-                    continue
-                if IDENT.match(seg.strip()):
-                    acc["idents"] += 1        # 标识符不是引文，**只计数不判**
-                    continue
-                acc["segs"] += 1
-                hit = find(seg, texts, folded)
-                if hit == "longs":
-                    acc["longs"].append((unit_id, re.sub(r"\s+", " ", seg).strip()[:100]))
-                elif not hit:
-                    acc["bad"].append((f"{label}/{unit_id}", re.sub(r"\s+", " ", seg).strip()[:100]))
-
+    # ★ 2026-08-12：判定逻辑已提到模块级 `scan_text()`，**调用点直接调它**。
+    #   原先这里留过一个同名薄委托 `scan()` 只为少改四处调用点——
+    #   而 `check_selftest_reach` 照样把它算进「判定类函数没被自测进入」（它匹配 `^scan`），
+    #   ★★ **留一个空壳绕过判据是最差的一种「补完」**：名单少一件，实际一件没补。
+    #   ★ 也**不改名了事**：改成 `_sc` 能让它不匹配 `^scan`，但那只是躲开正则。
+    #   真删掉，四处调用点各多传 `texts, folded` 两个参数。
     acc = {"quotes": 0, "segs": 0, "bad": [], "longs": [], "idents": 0, "unchecked": 0}
 
     if a.claims:
         for line in a.claims.read_text(encoding="utf-8").splitlines():
             if line.strip():
                 r = json.loads(line)
-                scan("断言", r["claim_id"], r["claim"], acc)
+                scan_text("断言", r["claim_id"], r["claim"], acc, texts, folded)
 
     # ★ v0.0.0.137：**围栏代码块不是引文。** ```bash … ``` 里是命令，
     #   不是在声称「语料里有这句」。Thomson #129 实测：README/SKILL 模板里的
@@ -471,7 +558,7 @@ def main() -> int:
     #   标识符过滤只挡得住单个词，挡不住多词命令行。
     _FENCE = re.compile(r"^```.*?^```", re.M | re.S)
     for path in a.docs:
-        scan("研究", path.name, _FENCE.sub("", corpus_body(path.read_text(encoding="utf-8"))), acc)
+        scan_text("研究", path.name, _FENCE.sub("", corpus_body(path.read_text(encoding="utf-8"))), acc, texts, folded)
 
     for path in a.answers:
         data = json.loads(path.read_text(encoding="utf-8"))
@@ -479,11 +566,11 @@ def main() -> int:
             for row in data:
                 for side in ("A", "B"):
                     if isinstance(row.get(side), str):
-                        scan("答案", f"{row.get('case_id')}:{side}", row[side], acc)
+                        scan_text("答案", f"{row.get('case_id')}:{side}", row[side], acc, texts, folded)
         elif isinstance(data, dict):         # id → 文本
             for k, v in data.items():
                 if isinstance(v, str) and not k.startswith("_"):
-                    scan("答案", k, v, acc)
+                    scan_text("答案", k, v, acc, texts, folded)
 
     if not a.claims and not a.answers and not a.docs:
         print("  ⚠ --claims / --answers / --docs 一个都没给，**什么都没核**（不是通过）")
