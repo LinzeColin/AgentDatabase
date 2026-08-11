@@ -1763,7 +1763,7 @@ def _check_one(text, pat):
         #   署名型证据（随笔）则相反：文中出现别人的署名就说明切歪了。
         return True, "A-turns", ev, []
 
-    # ★★★★ v0.0.0.155 `A-latin-genitive`：**拉丁题名页的属格署名**。
+    # ★★★★ 2026-08-11 `A-latin-genitive`：**拉丁题名页的属格署名**。
     #   拉丁书不写 `By X`，写 `HVGONIS GROTII DE IVRE BELLI AC PACIS`——
     #   于是现有三条路一条都不命中，而证据就印在第一页上。
     #   ★ **要求名与姓同时在且相邻**：裸姓属格在 Grotius 的书信集上会**过半判错**

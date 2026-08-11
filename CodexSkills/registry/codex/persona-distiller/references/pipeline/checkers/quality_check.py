@@ -1734,7 +1734,7 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
         report.metrics['checker_census'] = census
 
     review: dict[str, str] = {}
-    # ★★★★ v0.0.0.155：**没给 --cache 时自动用 `<target>/raw`**。
+    # ★★★★ 2026-08-11：**没给 --cache 时自动用 `<target>/raw`**。
     #   本文件里另外三处早就这么做了（run_corpus_text_checks 1069 行、
     #   report_verbatim_quotes 1825 行、run_holdout_overlap 3199 行），
     #   **只有管内容层的这一处没有** —— 于是：

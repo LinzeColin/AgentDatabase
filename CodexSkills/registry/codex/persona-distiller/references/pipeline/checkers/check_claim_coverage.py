@@ -126,7 +126,7 @@ def load_cache(cache: pathlib.Path) -> dict[str, str]:
         except Exception:
             continue
         body = corpus_body(raw_text)
-        # ★★★★ v0.0.0.155：**两把钥匙都登记，值都是剥了表头的正文**。
+        # ★★★★ 2026-08-11：**两把钥匙都登记，值都是剥了表头的正文**。
         #
         #   台账里的 `checksum` 是 `sha256(原始字节)`（`ingest.py:360`，
         #   且 `source_id = src-{checksum[:12]}` **就是从它派生的**——
@@ -215,7 +215,7 @@ def self_test() -> int:
         print(f"  {'✓' if got_flat else '✗'} 平铺布局 dir/x.txt 仍能读到（反向对照）")
         fail += not got_flat
 
-        # ── v0.0.0.155：**台账的 checksum 是原始字节的**，这一路要能回连 ──
+        # ── 2026-08-11：**台账的 checksum 是原始字节的**，这一路要能回连 ──
         #   四个带抓源表头的工作区（Adams/Bessemer/Coffin/Thomson）此前
         #   **一条都对不上**，判据对它们一律 exit 2「结论不可信」。
         hdr = root / "hdr"
@@ -255,7 +255,7 @@ def self_test() -> int:
         print(f"  {'✓' if not got_empty else '✗'} 空目录读到 0 份，不凭空命中（反向对照）")
         fail += bool(got_empty)
 
-    # ── v0.0.0.155 新增：**著录实体认台账**这条路径的正反对照 ──────────
+    # ── 2026-08-11 新增：**著录实体认台账**这条路径的正反对照 ──────────
     #   Shewhart #165 实测：断言写「BSTJ 1926 逐字：…」，而 BSTJ 那篇文章的正文里
     #   `BSTJ` 与 `1926` 各 0 次（`Bell System` 4 次）——著录信息在台账，不在正文。
     #   ★ 只有反例红不算数：⑨ 必须绿、⑩⑪ 必须红，否则「认台账」就成了万能通行证。
@@ -361,7 +361,7 @@ def main() -> int:
             r = led.get(sid, {})
             body = texts.get(r.get("checksum", ""), "") + " " + str(r.get("title", ""))
             hit |= {t for t in terms if t in body}
-            # ★★★★ v0.0.0.155：**著录实体也要认台账**。
+            # ★★★★ 2026-08-11：**著录实体也要认台账**。
             #   2026-08-11 Shewhart #165 实测：断言写「BSTJ 1926 逐字：…」，
             #   而源 `src-f3562c1704fe` 的正文（`bstj5-4-593_djvu.txt`，25,183 字符）里
             #   `1926` **0 次**、`BSTJ` **0 次**（`Bell System` 倒有 4 次）——

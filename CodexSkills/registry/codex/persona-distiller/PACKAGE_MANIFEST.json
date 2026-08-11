@@ -526,7 +526,7 @@
     },
     {
       "path": "references/pipeline/checkers/check_authorship.py",
-      "sha256": "b18b90ce9dda0cb4000d9409c641be2ade9556fd23db0d984b5df19b0f39293e",
+      "sha256": "1480b1d4990b64e95a0d53d84a68e79c2aba729c390ee0b522f84e290f5c2f32",
       "size_bytes": 179761
     },
     {
@@ -561,7 +561,7 @@
     },
     {
       "path": "references/pipeline/checkers/check_claim_coverage.py",
-      "sha256": "9ad81f30657ef44c36ec844fef13611eed67fe3516c49d366d9a017b323b6af7",
+      "sha256": "ef5a41ec25fc1880f113cd8886b04dd6eafd040751696d0bed5b684553c7a7e2",
       "size_bytes": 23251
     },
     {
@@ -646,8 +646,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_first_person_density.py",
-      "sha256": "32c0e90556b43a0d976250134769e357deaabb87c6dc4f1b526241648dd9ec0b",
-      "size_bytes": 23095
+      "sha256": "546de35dd9ee49a611e5fdc745086eda65c2eb7dac05ab436fa396ff2e0975e2",
+      "size_bytes": 32799
     },
     {
       "path": "references/pipeline/checkers/check_gate_reachability.py",
@@ -761,7 +761,7 @@
     },
     {
       "path": "references/pipeline/checkers/check_quote_locator.py",
-      "sha256": "2ab516b236a015b6440eb87dea7e6875d7b60e5f04dc7ec0fcc8a82e6ff1b857",
+      "sha256": "dd5b60c394a025d392f5992275605377536d87e247cbb267126a62c293e59b38",
       "size_bytes": 26657
     },
     {
@@ -981,7 +981,7 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "802d7ce9907f1bd771cfd4ff58176ec2bc277694ab5aacf6778d46bc3a1a910a",
+      "sha256": "6798ddb368f8449bac558c853b99de8e2903c44a253d0217aad04d40fdd464a8",
       "size_bytes": 245886
     },
     {
@@ -1301,7 +1301,7 @@
     },
     {
       "path": "scripts/check_authorship.py",
-      "sha256": "b18b90ce9dda0cb4000d9409c641be2ade9556fd23db0d984b5df19b0f39293e",
+      "sha256": "1480b1d4990b64e95a0d53d84a68e79c2aba729c390ee0b522f84e290f5c2f32",
       "size_bytes": 179761
     },
     {
@@ -1336,7 +1336,7 @@
     },
     {
       "path": "scripts/check_claim_coverage.py",
-      "sha256": "9ad81f30657ef44c36ec844fef13611eed67fe3516c49d366d9a017b323b6af7",
+      "sha256": "ef5a41ec25fc1880f113cd8886b04dd6eafd040751696d0bed5b684553c7a7e2",
       "size_bytes": 23251
     },
     {
@@ -1421,8 +1421,8 @@
     },
     {
       "path": "scripts/check_first_person_density.py",
-      "sha256": "32c0e90556b43a0d976250134769e357deaabb87c6dc4f1b526241648dd9ec0b",
-      "size_bytes": 23095
+      "sha256": "546de35dd9ee49a611e5fdc745086eda65c2eb7dac05ab436fa396ff2e0975e2",
+      "size_bytes": 32799
     },
     {
       "path": "scripts/check_gate_reachability.py",
@@ -1536,7 +1536,7 @@
     },
     {
       "path": "scripts/check_quote_locator.py",
-      "sha256": "2ab516b236a015b6440eb87dea7e6875d7b60e5f04dc7ec0fcc8a82e6ff1b857",
+      "sha256": "dd5b60c394a025d392f5992275605377536d87e247cbb267126a62c293e59b38",
       "size_bytes": 26657
     },
     {
@@ -1816,7 +1816,7 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "802d7ce9907f1bd771cfd4ff58176ec2bc277694ab5aacf6778d46bc3a1a910a",
+      "sha256": "6798ddb368f8449bac558c853b99de8e2903c44a253d0217aad04d40fdd464a8",
       "size_bytes": 245886
     },
     {

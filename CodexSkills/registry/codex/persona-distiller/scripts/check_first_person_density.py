@@ -68,6 +68,24 @@
   本件的语言判定**只抽前 6 份各 2 万字**，抽到英文就整份算英文。
   **→ 这两条的「薄」不作数。** 要作数得逐份判语言，本件还没做。
 
+  > ### ★★★★★ 2026-08-11：**上面这段「还没做」已经做了**
+  >
+  > 上面那几行**从写下的那天起就是准确的**，而它在文件里挂着没被修——
+  > 我这次不是发现了它，是发现**它被记下来却一直没人动**
+  > （[[a-checker-nothing-calls-is-not-a-checker]] 同族：写下来 ≠ 落成判据）。
+  >
+  > 实跑真判据量清了射程：**受影响的不是 2 个人物，是 6 个**——
+  > Koch 74%／Galen 88%／Pasteur 87%／Slavyanov 61%（俄语）／Grotius 50%／Harvey 46%
+  > 的语料是本件读不了的语种，而其中 **Koch／Galen／Slavyanov 三个照样印出了数**
+  > （0.07／0.47／0.02），Pasteur 拦住了——**差别只在按路径排序的前 6 份恰好是什么**。
+  >
+  > 修法见下面 `language_split()`：语种改**按字符加权判全量**、密度只除可读语种的字符、
+  > 可读占比一律打印。修后这 6 个**全部改判为不适用**。
+  >
+  > ★ **没有找到被这个数带偏的已发布判断**：靠第一人称密度做的两条延后
+  > （Coffin #130／Bain #136）语料都是 100% 英文，Slavyanov #115 的延后理由是
+  > 一手占比 8/53 而不是声口。**缺陷是真的，而我没查到它改变过哪个结论。**
+
 ## ★ 它不做什么
 
 - **不拦。** 密度低不等于做不成：分析型产物、第三人称产物本来就不靠第一人称
@@ -201,6 +219,62 @@ def looks_english(text: str) -> bool:
     return len(_EN.findall(text)) / n * 10000 >= 60
 
 
+# ★★★★★ 2026-08-11 修：**语种关原来是抽样的，抽样能被文件排序绕过。**
+#
+# 原写法：`sample = files[:6]` 各取 20000 字符，只要这 6 份像英文就照常报数。
+# `files` 是按路径排序的，于是**语料里哪几份排在前面，决定了这道关开还是关**。
+#
+# 2026-08-11 实跑真判据（不是模拟）：
+#
+# | 人物 | 语料非英文占比 | 这道关 | 它印出来的数 |
+# |---|---|---|---|
+# | Koch #107 | 74% | **没拦住** | `0.07/万字` |
+# | Galen #101 | 88% | **没拦住** | `0.47/万字` |
+# | Slavyanov #115 | 61%（俄语） | **没拦住** | `0.02/万字` |
+# | Pasteur #106 | 87% | 拦住了 | 不适用 |
+#
+# ★ Koch 那个 `0.07/万字` **正是本件文档里举的、说「给了数就会被人当成薄」的那个数**——
+#   护栏写在同一个文件里，而它拦不住自己举的例子。
+#   [[a-gate-that-says-independent-may-not-be]] 同族：门自称做了某件事而并没有做。
+#
+# 修法三条：
+# 1. **不抽样**：语种按**字符加权**判全量，短文不单独判（Godin 87% 的文件 <2000 字节，
+#    按文件设最小长度会把他整个人废掉），而是并进同一个池子按字符算。
+# 2. **密度只除可读语种的字符**：原来分母含着判据读不了的那部分，
+#    46% 德语的语料会让英文侧密度凭空低 46%。[[ratio-gates-can-be-passed-by-shrinking]] 的反向。
+# 3. **可读占比一律打印**，低于 `_READABLE_FLOOR` 才拒绝报数。
+#    [[counts-need-their-cutoff-stated]]：单给一个数等于替读者选了口径。
+_READABLE_FLOOR = 0.50
+
+
+def language_split(files: list) -> tuple:
+    """按**字符加权**统计可读（英文）与不可读的占比。
+
+    返回 `(可读字符, 不可读字符, 不可读的源目录名)`。
+    ★ 逐份判，但短文不因为短而被判「不明」——它照样按自己的字符数计入两侧之一。
+      短文的语种判定确实更抖（Godin 一篇 291 字符的博文只命中 1 个虚词、
+      密度 34.4 < 60 而它明明是英文），所以**这个数只用来算占比、不用来给单份贴标签**。
+    """
+    ok = bad = 0
+    bad_names = []
+    for path in files:
+        # ★★ 必须与 `scan_text` 用**同一套正文口径**（`body_of` ＋ 空白压平）。
+        #   第一版我漏了压平这一步，于是 Lister #108（不可读 = 0）两个密度
+        #   报出 5.11 与 4.69 **不相等**——分母不是同一个东西，跨人物就不可比。
+        #   自测 ⑦ 就是钉死这一条的。
+        body = re.sub(r"\s+", " ",
+                      body_of(corpus_body(path.read_text(encoding='utf-8', errors='replace'))))
+        if not body:
+            continue
+        if looks_english(body):
+            ok += len(body)
+        else:
+            bad += len(body)
+            if len(bad_names) < 12:
+                bad_names.append(path.parent.name)
+    return ok, bad, bad_names
+
+
 def scan(root: pathlib.Path) -> dict:
     files = sorted(p for p in root.rglob("*.txt") if p.name != "_ids.txt")
     per, tot_c, tot_raw, tot_b, tot_d, allsub = [], 0, 0, 0, 0, []
@@ -214,22 +288,30 @@ def scan(root: pathlib.Path) -> dict:
         per.append({"源": f.parent.name, "字符": r["chars"],
                     "裸I": r["raw_I"], "实质": len(r["substantive"])})
     n = len(allsub)
-    sample = ""
-    for f in files[:6]:
-        sample += body_of(corpus_body(f.read_text(encoding="utf-8", errors="replace")))[:20000]
-    if sample and not looks_english(sample):
+    en_c, other_c, other_names = language_split(files)
+    lang_total = en_c + other_c
+    readable = en_c / lang_total if lang_total else 1.0
+    lang_line = ("可读语种（英文）%s／不可读 %s ——**可读占比 %.0f%%**"
+                 % (f"{en_c:,}", f"{other_c:,}", 100 * readable))
+    if lang_total and readable < _READABLE_FLOOR:
         return {"语料": str(root), "源数": len(files), "正文字符": tot_c,
-                "**本判据不适用**": "**这份语料不是英文。** 本件只认英文的第一人称动词锚点"
+                "语种（按字符）": lang_line,
+                "不可读的源（前 12）": other_names,
+                "**本判据不适用**": "**这份语料多半不是英文。** 本件只认英文的第一人称动词锚点"
                                      "（`I have`／`I find`／`I prefer`…），"
                                      "德文 `ich habe`、法文 `j'ai`、俄文 `я` **一个都不认**。\n"
                                      "★ 实测：Mendel #125（德文）15,789,533 字符报「实质 0 句」、"
                                      "Koch #107（德文）2 亿字符报 0.07/万字——**那不是声口薄，"
-                                     "是判据不认识那门语言。给了数就会被人当成薄。**",
+                                     "是判据不认识那门语言。给了数就会被人当成薄。**\n"
+                                     "★★ 这道关 2026-08-11 之前只看排序最前的 6 份，"
+                                     "Koch／Galen／Slavyanov 都是这样被放行的。",
                 "**实质第一人称句**": None, "**密度（每万字）**": None}
     out = {
         "语料": str(root),
         "源数": len(files),
         "正文字符": tot_c,
+        "语种（按字符）": lang_line,
+        "★ 不可读的源（前 12）": other_names or "（无）",
         "裸 I 命中": tot_raw,
         "★ 其中噪音（零件标号等，近似）": f"{max(0, tot_raw - n - tot_b)}"
                                     f"（{max(0, tot_raw - n - tot_b) / max(tot_raw,1):.0%}）"
@@ -237,7 +319,10 @@ def scan(root: pathlib.Path) -> dict:
         "套语（是他的字，不是他的话）": tot_b,
         "指示性（指图/签署/回指，不含主张）": tot_d,
         "**实质第一人称句**": n,
-        "**密度（每万字）**": round(n / max(tot_c, 1) * 10000, 2),
+        "密度（每万字·全部字符）": round(n / max(tot_c, 1) * 10000, 2),
+        # ★ 这个才是跨人物可比的数：分母不含判据读不了的那部分。
+        #   两个数并排给，是为了让「差在哪」看得见——只给一个就等于替读者选了口径。
+        "**密度（每万字·仅可读语种）**": round(n / max(en_c, 1) * 10000, 2),
         "逐句原文": [f"[{w}] {s[:150]}" for w, s in allsub[:40]],
         "逐源": sorted(per, key=lambda x: -x["实质"])[:12],
         "★ 口径": ("**只报不拦。** 密度低不等于做不成——分析型／第三人称产物本来就不靠第一人称。"
@@ -369,6 +454,79 @@ def self_test() -> int:
         _n = len(_sub) if isinstance(_sub, (list, tuple)) else int(_sub or 0)
         chk(f"{_why}（实质句 {_n}，要 {'≥1' if _min else '=0'}）",
             (_n >= 1) if _min else (_n == 0))
+
+    # ── ★★★★★ 语种关（2026-08-11 新增）──────────────────────────────
+    # 这一组测的是 `scan()` 这一层，**必须真建目录走 rglob**——
+    # 原来的 bug（`files[:6]` 抽样）只存在于 `scan()` 里，
+    # 任何只调 `scan_text()` 的自测都碰不到它。
+    # [[a-checker-nothing-calls-is-not-a-checker]] 第五批「检查不经过被保证之物」。
+    import tempfile
+
+    # 语料段落逐字取自本项目真语料，不是我编的干净句子
+    # （[[fixtures-cleaner-than-the-real-thing]]）。
+    # ★★ 夹具里**必须保留真语料的折行与多空格**。
+    #   第一版我写成单行单空格，于是「去掉空白压平」这条变异**打不红 ⑦**——
+    #   夹具比原文干净就等于没测（[[fixtures-cleaner-than-the-real-thing]]，同日第六次）。
+    _EN_BODY = ("Of course in using the word \"vacuum\" I do not mean absolute \n"
+                "vacuum, but that which is ordinarily obtained by the use of an \n"
+                "air-pump.   The construction and use of leaching vats are so \n"
+                "well known that it is not necessary  to describe them here. \n\n" * 8)
+    _DE_BODY = ("Seit in neuerer Zeit der Ruf nach politischer Bildung und \n"
+                "Erziehung immer lauter und allgemeiner geworden ist, beginnt \n"
+                "man sich auch eines  auffallenden Mangels zu besinnen, den das \n"
+                "Geistesleben des 19. Jahrhunderts aufweist. \n\n" * 8)
+
+    def _corpus(spec):
+        """spec = [(目录名, 正文, 份数)]；返回临时语料根。"""
+        tmp = tempfile.mkdtemp()
+        root = pathlib.Path(tmp)
+        for name, body, count in spec:
+            for i in range(count):
+                d = root / f"{name}-{i:02d}"
+                d.mkdir(parents=True, exist_ok=True)
+                (d / f"{name}-{i:02d}.txt").write_text(body, encoding="utf-8")
+        return root
+
+    print("── ★★★ 语种关：抽样绕过必须被堵死 ──")
+
+    # ① 全英文 → 报数
+    r = scan(_corpus([("aaa-en", _EN_BODY, 4)]))
+    chk("① 全英文语料照常报数", r.get("**密度（每万字·仅可读语种）**") is not None)
+
+    # ② 全德语 → 拒绝报数
+    r = scan(_corpus([("aaa-de", _DE_BODY, 4)]))
+    chk("② 全德语拒绝报数", r.get("**本判据不适用**") is not None)
+
+    # ③ ★★★ 回归用例：**排序最前的 6 份是英文，而字符大头是德语**。
+    #    修补前 `files[:6]` 只看前 6 份，这一例会被放行——
+    #    Koch #107（74% 非英文，印出 0.07/万字）就是这么漏的。
+    r = scan(_corpus([("aaa-en", _EN_BODY, 6), ("zzz-de", _DE_BODY, 30)]))
+    chk("③ 前 6 份英文＋德语占大头 → 必须拒绝报数",
+        r.get("**本判据不适用**") is not None)
+
+    # ④ ★ 过校正守卫：**少量德语不许把整份语料废掉**（英文占大头就照常报）
+    r = scan(_corpus([("aaa-en", _EN_BODY, 20), ("zzz-de", _DE_BODY, 3)]))
+    chk("④ 少量德语不废掉整份语料", r.get("**密度（每万字·仅可读语种）**") is not None)
+
+    # ⑤ ★★ 分母：可读语种密度必须**高于**全字符密度（因为分母小了）。
+    #    没有这一条，把「仅可读」写成和「全部」一样也能过 ④。
+    both_ok = (r.get("**密度（每万字·仅可读语种）**", 0)
+               > r.get("密度（每万字·全部字符）", 0))
+    chk("⑤ 掺了德语时，仅可读密度 > 全字符密度", both_ok)
+
+    # ⑥ ★ 占比一律打印，不管拦不拦
+    r_pass = scan(_corpus([("aaa-en", _EN_BODY, 4)]))
+    r_block = scan(_corpus([("aaa-de", _DE_BODY, 4)]))
+    chk("⑥ 放行与拦截都打印语种占比",
+        "语种（按字符）" in r_pass and "语种（按字符）" in r_block)
+
+    # ⑦ ★★★ 分母同一性：**不可读 = 0 时，两个密度必须完全相等**。
+    #    没有这一条，「仅可读」可以用另一套正文口径算出来而看着挺合理——
+    #    第一版我就漏了空白压平，Lister #108 不可读 0 却报 5.11 vs 4.69。
+    #    [[gate-green-but-pointed-at-wrong-artifact]]：数出来了，指的不是同一个东西。
+    same = (r_pass.get("密度（每万字·全部字符）")
+            == r_pass.get("**密度（每万字·仅可读语种）**"))
+    chk("⑦ 全英文语料上，两个密度必须相等（分母同一性）", same)
 
     return 0 if ok else 2
 

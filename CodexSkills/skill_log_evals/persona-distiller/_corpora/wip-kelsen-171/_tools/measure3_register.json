@@ -1,0 +1,194 @@
+[
+  {
+    "source_id": "src-6629126855ff",
+    "published_at": "1905",
+    "dimensions": [
+      "writings"
+    ],
+    "split": "holdout",
+    "words": 56398,
+    "total": 33,
+    "noun": 7,
+    "quoted": 4,
+    "voice": 26,
+    "voice_floor": 22,
+    "per10k": 4.61,
+    "per10k_floor": 3.9
+  },
+  {
+    "source_id": "src-13f100f9f5b3",
+    "published_at": "1907",
+    "dimensions": [
+      "decisions"
+    ],
+    "split": "train",
+    "words": 89287,
+    "total": 0,
+    "noun": 0,
+    "quoted": 0,
+    "voice": 0,
+    "voice_floor": 0,
+    "per10k": 0.0,
+    "per10k_floor": 0.0
+  },
+  {
+    "source_id": "src-ccb348b4687c",
+    "published_at": "1914",
+    "dimensions": [
+      "expression"
+    ],
+    "split": "train",
+    "words": 16013,
+    "total": 6,
+    "noun": 0,
+    "quoted": 2,
+    "voice": 6,
+    "voice_floor": 4,
+    "per10k": 3.75,
+    "per10k_floor": 2.5
+  },
+  {
+    "source_id": "src-c78fac5e78b4",
+    "published_at": "1916",
+    "dimensions": [
+      "expression"
+    ],
+    "split": "train",
+    "words": 20118,
+    "total": 14,
+    "noun": 0,
+    "quoted": 0,
+    "voice": 14,
+    "voice_floor": 14,
+    "per10k": 6.96,
+    "per10k_floor": 6.96
+  },
+  {
+    "source_id": "src-bfbcf301361b",
+    "published_at": "1918",
+    "dimensions": [
+      "expression"
+    ],
+    "split": "train",
+    "words": 8359,
+    "total": 25,
+    "noun": 13,
+    "quoted": 1,
+    "voice": 12,
+    "voice_floor": 11,
+    "per10k": 14.36,
+    "per10k_floor": 13.16
+  },
+  {
+    "source_id": "src-0fc9f0c6b3e0",
+    "published_at": "1920",
+    "dimensions": [
+      "writings"
+    ],
+    "split": "train",
+    "words": 41759,
+    "total": 7,
+    "noun": 0,
+    "quoted": 3,
+    "voice": 7,
+    "voice_floor": 4,
+    "per10k": 1.68,
+    "per10k_floor": 0.96
+  },
+  {
+    "source_id": "src-5be5faaef4d3",
+    "published_at": "1920",
+    "dimensions": [
+      "writings"
+    ],
+    "split": "train",
+    "words": 12970,
+    "total": 8,
+    "noun": 0,
+    "quoted": 1,
+    "voice": 8,
+    "voice_floor": 7,
+    "per10k": 6.17,
+    "per10k_floor": 5.4
+  },
+  {
+    "source_id": "src-f7ad7280693a",
+    "published_at": "1922",
+    "dimensions": [
+      "expression"
+    ],
+    "split": "train",
+    "words": 7322,
+    "total": 0,
+    "noun": 0,
+    "quoted": 0,
+    "voice": 0,
+    "voice_floor": 0,
+    "per10k": 0.0,
+    "per10k_floor": 0.0
+  },
+  {
+    "source_id": "src-73c6dda24b55",
+    "published_at": "1922",
+    "dimensions": [
+      "decisions"
+    ],
+    "split": "train",
+    "words": 176804,
+    "total": 0,
+    "noun": 0,
+    "quoted": 0,
+    "voice": 0,
+    "voice_floor": 0,
+    "per10k": 0.0,
+    "per10k_floor": 0.0
+  },
+  {
+    "source_id": "src-eb08f86eb37d",
+    "published_at": "1925",
+    "dimensions": [
+      "writings"
+    ],
+    "split": "train",
+    "words": 238600,
+    "total": 87,
+    "noun": 14,
+    "quoted": 3,
+    "voice": 73,
+    "voice_floor": 70,
+    "per10k": 3.06,
+    "per10k_floor": 2.93
+  },
+  {
+    "source_id": "src-31c509a0e332",
+    "published_at": "1926",
+    "dimensions": [
+      "expression"
+    ],
+    "split": "train",
+    "words": 38342,
+    "total": 1,
+    "noun": 1,
+    "quoted": 0,
+    "voice": 0,
+    "voice_floor": 0,
+    "per10k": 0.0,
+    "per10k_floor": 0.0
+  },
+  {
+    "source_id": "src-a0e86f4a1b24",
+    "published_at": "1928",
+    "dimensions": [
+      "writings"
+    ],
+    "split": "train",
+    "words": 127214,
+    "total": 66,
+    "noun": 14,
+    "quoted": 6,
+    "voice": 52,
+    "voice_floor": 46,
+    "per10k": 4.09,
+    "per10k_floor": 3.62
+  }
+]
