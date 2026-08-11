@@ -381,8 +381,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "0f939f4b2e5d54914e9c0c9bac38db1e51c6c447aac6f4118893c2cff7989288",
-      "size_bytes": 244034
+      "sha256": "cf5ca62f1b3fd7ac944e37c024c311bff9c22056077dcbd607d4b13b9dd80b4a",
+      "size_bytes": 247858
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -661,8 +661,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_holdout_mention.py",
-      "sha256": "d427a1f7924f359be16f38fd7b3b6041cba0ed85a23bd972cc90dd64fd98f682",
-      "size_bytes": 39174
+      "sha256": "f0bcb687526370c2a56d86e192f170499b178c10d2d88ec1395fd9e53bf62cd9",
+      "size_bytes": 40188
     },
     {
       "path": "references/pipeline/checkers/check_holdout_overlap.py",
@@ -1446,8 +1446,8 @@
     },
     {
       "path": "scripts/check_holdout_mention.py",
-      "sha256": "d427a1f7924f359be16f38fd7b3b6041cba0ed85a23bd972cc90dd64fd98f682",
-      "size_bytes": 39174
+      "sha256": "f0bcb687526370c2a56d86e192f170499b178c10d2d88ec1395fd9e53bf62cd9",
+      "size_bytes": 40188
     },
     {
       "path": "scripts/check_holdout_overlap.py",

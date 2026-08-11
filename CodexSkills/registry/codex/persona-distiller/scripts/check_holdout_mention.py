@@ -322,6 +322,17 @@ def scan(target: pathlib.Path) -> dict:
         "**字面提及**": mentions,
         # ★ 分档：泛泛提到「有个 holdout」无害；**说出它是哪一份才是泄题**。
         "**其中点名了是哪一份的**": [x for x in mentions if x["★ 点名了是哪一份"]],
+        # ★★★ 2026-08-12 加的射程说明：上面这个「点名」是
+        #   **窗口里出现了作品名／source_id** —— 它**不保证那就是 holdout 那一份**。
+        #   实测三例：Koch「传记（皆 S2，其中一份不入训练）… `src-b58f8581c014` 等 7 份」，
+        #   窗口里那个 id 是**代表性的 train 源**，真正泄的是「holdout 是 7 份传记之一」。
+        #   而 Pasteur 是**真点名**：「`src-…`《La Vie de Pasteur》…**其一个译本**不入训练」。
+        #   ⇒ **这一栏要逐条读原文再定性**，别把三例并成「都点名了」。
+        #     [[read-the-hits-before-reporting-the-rate]]
+        "★ 「点名」这一栏的射程": (
+            "判的是**窗口里有没有出现作品名/source_id**，"
+            "**不保证那个 id 就是 holdout 那一份**——可能是同节里的 train 源。"
+            "逐条读原文，区分「真点名」与「缩小到 N 份之一」。"),
         "★ 只是泛泛提及（不说哪一份）": sum(1 for x in mentions if not x["★ 点名了是哪一份"]),
         "★ 与出厂模板逐字相同、已豁免的": exempted,
         "**与 holdout 独有内容的 8 词片重叠**": overlaps,
