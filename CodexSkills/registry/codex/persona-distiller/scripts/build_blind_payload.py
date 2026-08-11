@@ -295,6 +295,39 @@ def selftest() -> int:
         for i in range(1, 17))
     chk("**反对照**：A/B 翻转仍由 `sha256(cid)%2` 决定，排序改动没碰它", ok_flip)
 
+    # ★★★ v0.0.0.154：**走一遍命令行的冒烟**。
+    #   本文件的自测此前**一次也没经过 `main()`**——只测 `assign()` 之类的纯函数。
+    #   于是 2026-08-11 我加 `--balanced-positions` 时把变量写成 `args.…`
+    #   （main 里的局部变量叫 `a`），**自测全过、`ast.parse` 全过，而工具每次调用必崩**，
+    #   坏版本还提交了一次。抓到它的是我坚持真跑一次命令行。
+    #   [[a-checker-nothing-calls-is-not-a-checker]] 第五批：**检查不经过被保证之物**。
+    #   ↓ 这一条只问一件事：`main()` 这条路走不走得通、有没有 Traceback。
+    print("\n── ★★ 命令行冒烟（**唯一一条经过 `main()` 的自测**）──")
+    import subprocess as _sp, tempfile as _tf
+    with _tf.TemporaryDirectory() as _d:
+        _dp = pathlib.Path(_d)
+        (_dp / "evals").mkdir()
+        (_dp / "evals/cases.jsonl").write_text("\n".join(
+            json.dumps({"case_id": "sm-%02d" % i, "suite": "known",
+                        "prompt": "题面 %d" % i, "rubric": "判据 %d" % i,
+                        "holdout_source_ids": []}, ensure_ascii=False)
+            for i in range(4)), encoding="utf-8")
+        _ans = {"sm-%02d" % i: "答案答案答案答案答案答案答案答案 %d" % i for i in range(4)}
+        for _n in ("c.json", "b.json"):
+            (_dp / _n).write_text(json.dumps(_ans, ensure_ascii=False), encoding="utf-8")
+        for _flag, _label in (([], "默认"),
+                              (["--balanced-positions"], "--balanced-positions"),
+                              (["--key-dir", str(_dp / "kd")], "--key-dir")):
+            _r = _sp.run([sys.executable, str(pathlib.Path(__file__).resolve()),
+                          "--workspace", str(_dp), "--round-dir", str(_dp / "rd"),
+                          "--candidate", str(_dp / "c.json"),
+                          "--baseline", str(_dp / "b.json"),
+                          "--prefix", "sm", "--skip-leak-check"] + _flag,
+                         capture_output=True, text=True)
+            _crash = "Traceback" in (_r.stderr or "")
+            chk("命令行 %s → 没有 Traceback" % _label, not _crash)
+            if _crash:
+                print("      " + (_r.stderr or "").strip().splitlines()[-1][:120])
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
 
@@ -379,6 +412,16 @@ def main() -> int:
     #     按候选所在位次把第 1 轮拆开——在 A 侧 席K −0.0125／席L **+0.0225**（n=4），
     #     在 B 侧 −0.0433／−0.0317（n=12），**两席方向一致**，位次效应约 +0.015～+0.027。
     #     此前 ⑱ 只有「理论上会混杂」，现在有数了。
+    # ★★★ v0.0.0.154：**让 key 能放到评委够不着的目录。**
+    #   评委拿到的是**文件路径**，但取一次 `dirname` 就能看见同目录的兄弟文件。
+    #   本会话两次撞到（都由代理自己上报、都称未打开）：
+    #     · Holmes 第 1 轮，候选方 `ls` 轮次目录，看到 `prompt_key.json`；
+    #     · Holmes 第 2 轮，席 K 的自检脚本 `os.listdir`，看到 key 与**另一席的判分文件名**。
+    #   **嘱咐管不住 `ls`，目录布局管得住**——但前提是工具允许把 key 写到别处。
+    #   ★ 默认仍是 round-dir，**不动任何既有轮次**；跨轮独立性检查按同一约定找上一轮的 key。
+    ap.add_argument("--key-dir", type=pathlib.Path, default=None,
+                    help="盲判 key 的落盘目录（默认＝round-dir）。"
+                         "★ 设成评委够不着的目录，可堵掉 `ls` 这条通道")
     ap.add_argument("--balanced-positions", action="store_true",
                     help="A/B 强制 8/8（默认关，历史行为是 sha256%%2 抛硬币）。"
                          "★ 同一人物的各轮必须一致，中途不许改")
@@ -400,7 +443,7 @@ def main() -> int:
 
     cand = json.loads(pathlib.Path(a.candidate).read_text(encoding="utf-8"))
     base = json.loads(pathlib.Path(a.baseline).read_text(encoding="utf-8"))
-    payload, key = assign(cases, cand, base, balanced=args.balanced_positions)
+    payload, key = assign(cases, cand, base, balanced=a.balanced_positions)
 
     # ★★★ `--round-dir round2` 这种**裸相对名**必须落在工作区里，不是当前目录。
     #   实测代价：在技能目录下跑，它把载荷与**盲判 key** 写进了
@@ -507,8 +550,13 @@ def main() -> int:
                 print("  ✓ 指令引到的字段，载荷里都有")
         except Exception as _exc:                                # noqa: BLE001
             print(f"  ⚠ 输出无法解析，**未核（不是通过）**：{_exc}")
-    (a.round_dir / f"{a.prefix}_blind_key.json").write_text(
+    _key_dir = a.key_dir or a.round_dir
+    _key_dir.mkdir(parents=True, exist_ok=True)
+    _key_path = _key_dir / f"{a.prefix}_blind_key.json"
+    _key_path.write_text(
         json.dumps(key, ensure_ascii=False, indent=1), encoding="utf-8")
+    if a.key_dir and a.key_dir.resolve() != a.round_dir.resolve():
+        print(f"  ★ key 落在 {_key_path}，**不在评委拿得到的轮次目录里**")
 
     # ★ 两侧一起落进工作区——**门看不见的东西，等于没做。**
     cand_path = ev / "judge_payload.v1.json"
@@ -549,7 +597,7 @@ def main() -> int:
         rk = HERE / "check_blind_rounds_independent.py"
         if rk.is_file():
             q = subprocess.run([sys.executable, str(rk), "--keys", str(r1),
-                                str(a.round_dir / f"{a.prefix}_blind_key.json")],
+                                str(_key_path)],
                                capture_output=True, text=True)
             for line in (q.stdout or "").splitlines():
                 if line.strip():
