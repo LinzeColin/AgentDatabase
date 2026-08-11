@@ -80,6 +80,13 @@ LATIN_ANCHORS = ["enim", "autem", "atque", "igitur", "quidem",
                  "nisi", "quoniam", "tamen", "etiam", "quae", "quod"]
 ENGLISH_ANCHORS = ["the", "and", "of", "to", "that", "which",
                    "not", "with", "for", "have"]
+# ★★★ v0.0.0.154 加第三个语域：**德语**。起因是 Kelsen #171 的一份 1916 年论文——
+#   `check_ocr_language_death` 放它过去（虚词占比正常），本件报「两个语域都不适用」，
+#   而它的 `Kelsen` 出现 **0 次**、`Kelfen` 出现 **15 次**：**他自己的姓被长 s 打碎了**。
+#   两件判据之间恰好有这一档缝：**虚词还在，而实词里的 ſ 全塌**。
+#   德语锚词同样一个都不含字母 s。
+GERMAN_ANCHORS = ["und", "nicht", "durch", "oder", "nach",
+                  "bei", "dem", "werden", "wenn", "aber"]
 
 # ★ 两个面板都**不含任何带 `st` 的词对**——见文件头，`est/eft` 对 st 连字失明。
 #   英文面板的讹形一个都不是真词（`fuch`/`fhall`/`himfelf`/`faid`/`whofe`/
@@ -97,6 +104,21 @@ REGIMES = {
         "panel": [("such", "fuch"), ("shall", "fhall"), ("himself", "himfelf"),
                   ("said", "faid"), ("whose", "whofe"), ("those", "thofe"),
                   ("these", "thefe"), ("also", "alfo"), ("use", "ufe")],
+    },
+    # ★ 德语面板的取舍（每一条都是排除掉某个具体风险）：
+    #   · **不收 `sein/fein`** —— `fein` 是真德语词（细、精），会在干净文本上误报；
+    #   · **不收任何带 `st` 的词对**（`ist/ift`、`selbst/…`）—— 与拉丁英文两档同一条规矩，
+    #     st 连字会让这类词对失明（见文件头）；
+    #   · **不收词尾 s**（`als`、`das`）—— 德语词尾用圆 s，长 s 讹变根本碰不到它。
+    #   讹形 `fich`/`fie`/`fehr`/`foll`/`wiffenschaft` 一个都不是德语真词；
+    #   `find` 是英语词但不是德语词，锚词已把英文文本挡在门外。
+    "德语": {
+        # 缝：法语 2.6 / 被 Fraktur 毁掉的德语 33.6–45.6 / 干净德语 467.9–694.9
+        # ★ 门槛 15 坐在**法语与坏德语之间**（12.9 倍），不是坐在好坏德语之间——
+        #   坏德语必须**judged**，不能被踢成「语域不适用」（那是「不判冒充通过」）。
+        "anchors": GERMAN_ANCHORS, "anchor_min": 15.0,
+        "panel": [("sich", "fich"), ("sind", "find"), ("so", "fo"), ("sie", "fie"),
+                  ("sehr", "fehr"), ("wissenschaft", "wiffenschaft"), ("soll", "foll")],
     },
 }
 DIAGNOSTIC = [("est", "eft")]        # 只报不算，用来暴露 st 连字
@@ -253,6 +275,35 @@ def self_test() -> int:
         nonlocal ok
         ok = ok and bool(cond)
         print(("  ✓ " if cond else "  ✗ ") + msg)
+
+    # ── ★★★ 德语语域（v0.0.0.154 加）：**用 Kelsen #171 的 12 份真实测值**，不是构造的 ──
+    print("\n══ ★★★ 德语语域：Kelsen #171 的 12 份实测（n=12，不是拉丁那档的 227）══")
+    GER = {  # 文件: (锚/万词, 正形, 讹形, 真值)
+        "allgemeine-staatslehre-1925":        (673.2, 4778,   0, "干净"),
+        "problem-der-souveraenitaet-1928":    (530.8, 1808,   0, "干净"),
+        "staatslehre-dante-1905":             (467.9,  780,   0, "干净"),
+        "rechtswissenschaft-1916":            (577.7,   22, 162, "不可用"),
+        "kommentar-reichsratswahlordnung-1907": (45.6,  73, 225, "不可用"),
+        "bundesverfassung-1922-coedited":      (33.6,   53, 449, "不可用"),
+        "rapports-de-systeme-1926-fr":          (2.6,    5,   0, "不适用"),
+    }
+    for name, (an, good, bad, want) in GER.items():
+        rate = bad / max(good + bad, 1)
+        if an < REGIMES["德语"]["anchor_min"]:
+            got = "不适用"
+        else:
+            got = "干净" if rate < 0.20 else "不可用"
+        chk(f"德语 {name}：锚 {an}、讹字率 {rate:.4f} → {got}（应为 {want}）", got == want)
+    # ★★ 门槛坐在**法语与坏德语之间**（2.6 vs 33.6，12.9 倍），不是坐在好坏德语之间：
+    #    坏德语必须被判，不能踢成「不适用」——那是「不判冒充通过」。
+    chk("德语门槛把坏德语留在judged 之内（33.6 > 15.0）",
+        33.6 > REGIMES["德语"]["anchor_min"] > 2.6)
+    # ★★★ 误报防线：`fein` 是**真德语词**，若进面板会在干净文本上误报。
+    chk("**`sein/fein` 不在德语面板里**（fein 是真德语词）",
+        all(g != "sein" for g, _ in REGIMES["德语"]["panel"]))
+    chk("德语面板不含任何带 `st` 的词对（st 连字会让它失明）",
+        all("st" not in g and "st" not in b for g, b in REGIMES["德语"]["panel"]))
+    chk("德语锚词一个都不含字母 s", all("s" not in a for a in GERMAN_ANCHORS))
 
     print("\n══ ★★★★ 逐字真实样本：Grotius #168 的 17 份实测 ══")
     #   2026-08-11 在真语料上跑出来的**实测值**，不是构造的。
