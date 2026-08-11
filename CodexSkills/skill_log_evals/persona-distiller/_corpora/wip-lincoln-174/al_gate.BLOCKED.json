@@ -1,0 +1,114 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Abraham Lincoln；政治法律师；美国第 16 任总统（1861-03-04 – 1865-04-15）；此前为伊利诺伊州执业律师。\n   专业背景：1809-02-12 生于肯塔基 LaRue 县一间单室木屋，1865-04-15 在华盛顿特区遇刺身亡。1836-09-09 取得伊利诺伊州律师资格，在斯普林菲尔德执业，1844 年与 William Herndon 合伙。1834-12-01–1842-12-04 任伊利诺伊州众议员（Sangamon 县，四任）；1847-03-04–1849-03-03 任联邦众议员（伊利诺伊第 7 选区）。**存世自述文本**：Lyceum 演说（1838-01-27）、Peoria 演说（1854-10）、House Divided 演说（1858）、Cooper Union 演说（1860-02-27）、Gettysburg Address（1863-11-19）、两次就职演说、1861–1864 年历次国情咨文。。\n   应用价值：场景：以演说推进一个政治判断；律师执业中的事实与法律分离；在分裂局势下的公开表态；关键能力：长篇公开演说的构造；把宪法争点讲给非法律听众；书信与文告写作。\n   区分依据：生卒年 1809–1865 与队列条目逐位相同；占据基础词条。",
+    "B. 人物与身份：Abraham Lincoln (captain)；政治法律师；总统的祖父。\n   专业背景：1744–1786。消歧页描述为「grandfather of President Lincoln」。**同名同姓且是直系亲属**——家族文书、土地契据与族谱资料会同时命中，且年代早于目标，按年代筛反而更容易混进来。。\n   应用价值：场景：殖民地边疆定居；关键能力：—。\n   区分依据：生卒 1744–1786；**同名直系亲属是最容易混进家族档案的一类**。",
+    "C. 人物与身份：Abe Lincoln (musician)；艺术设计师；美国迪克西兰爵士长号手。\n   专业背景：1907–2000。消歧页描述为「American Dixieland jazz trombonist」。。\n   应用价值：场景：爵士乐演奏；关键能力：长号。\n   区分依据：20 世纪音乐人；作品**不在**公有领域，误取同时违反 PD 规则。",
+    "D. 人物与身份：SM Abraham Lincoln；政治法律师；孟加拉国人权活动家。\n   专业背景：生于 1966，**在世**。消歧页描述为「Bangladeshi human rights activist」。。\n   应用价值：场景：人权倡导；关键能力：—。\n   区分依据：**在世**，无到期日；本项目不做在世人物。"
+  ],
+  "candidate_count": 4,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "以演说推进一个政治判断",
+        "律师执业中的事实与法律分离",
+        "在分裂局势下的公开表态"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Abraham_Lincoln",
+          "note": "生卒、任职、演说与日期取自此页"
+        }
+      ],
+      "canonical_name": "Abraham Lincoln",
+      "distinguishing_basis": "生卒年 1809–1865 与队列条目逐位相同；占据基础词条",
+      "evidence_level": "high",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "长篇公开演说的构造",
+        "把宪法争点讲给非法律听众",
+        "书信与文告写作"
+      ],
+      "label": "A",
+      "occupation_or_role": "美国第 16 任总统（1861-03-04 – 1865-04-15）；此前为伊利诺伊州执业律师",
+      "professional_background": "1809-02-12 生于肯塔基 LaRue 县一间单室木屋，1865-04-15 在华盛顿特区遇刺身亡。1836-09-09 取得伊利诺伊州律师资格，在斯普林菲尔德执业，1844 年与 William Herndon 合伙。1834-12-01–1842-12-04 任伊利诺伊州众议员（Sangamon 县，四任）；1847-03-04–1849-03-03 任联邦众议员（伊利诺伊第 7 选区）。**存世自述文本**：Lyceum 演说（1838-01-27）、Peoria 演说（1854-10）、House Divided 演说（1858）、Cooper Union 演说（1860-02-27）、Gettysburg Address（1863-11-19）、两次就职演说、1861–1864 年历次国情咨文。",
+      "subject_uid": "abraham-lincoln-1809-1865"
+    },
+    {
+      "application_scenarios": [
+        "殖民地边疆定居"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Abraham_Lincoln_(disambiguation)",
+          "note": "该页首条"
+        }
+      ],
+      "canonical_name": "Abraham Lincoln (captain)",
+      "distinguishing_basis": "生卒 1744–1786；**同名直系亲属是最容易混进家族档案的一类**",
+      "evidence_level": "medium",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "—"
+      ],
+      "label": "B",
+      "occupation_or_role": "总统的祖父",
+      "professional_background": "1744–1786。消歧页描述为「grandfather of President Lincoln」。**同名同姓且是直系亲属**——家族文书、土地契据与族谱资料会同时命中，且年代早于目标，按年代筛反而更容易混进来。",
+      "subject_uid": "abraham-lincoln-captain-1744-1786"
+    },
+    {
+      "application_scenarios": [
+        "爵士乐演奏"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Abraham_Lincoln_(disambiguation)",
+          "note": "该页第二条"
+        }
+      ],
+      "canonical_name": "Abe Lincoln (musician)",
+      "distinguishing_basis": "20 世纪音乐人；作品**不在**公有领域，误取同时违反 PD 规则",
+      "evidence_level": "medium",
+      "identity_category": "艺术设计师",
+      "key_capabilities": [
+        "长号"
+      ],
+      "label": "C",
+      "occupation_or_role": "美国迪克西兰爵士长号手",
+      "professional_background": "1907–2000。消歧页描述为「American Dixieland jazz trombonist」。",
+      "subject_uid": "abe-lincoln-musician-1907-2000"
+    },
+    {
+      "application_scenarios": [
+        "人权倡导"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Abraham_Lincoln_(disambiguation)",
+          "note": "该页第三条"
+        }
+      ],
+      "canonical_name": "SM Abraham Lincoln",
+      "distinguishing_basis": "**在世**，无到期日；本项目不做在世人物",
+      "evidence_level": "medium",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "—"
+      ],
+      "label": "D",
+      "occupation_or_role": "孟加拉国人权活动家",
+      "professional_background": "生于 1966，**在世**。消歧页描述为「Bangladeshi human rights activist」。",
+      "subject_uid": "sm-abraham-lincoln-b1966"
+    }
+  ],
+  "generated_at": "2026-08-11T23:55:48Z",
+  "normalized_name": "abrahamlincoln",
+  "resolution": "multiple",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "blocked",
+  "target_name": "Abraham Lincoln"
+}

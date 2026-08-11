@@ -1,0 +1,47 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：John Marshall；政治法律师；美国第四任首席大法官（1801-02-04 – 1835-07-06），此前任国务卿、联邦众议员。\n   专业背景：1755-09-24 生于弗吉尼亚 Germantown，1835-07-06 卒于费城。独立战争中在大陆军任上尉（1775–1780，第 3、第 11 弗吉尼亚团；布兰迪万、日耳曼敦、福吉谷、蒙茅斯、查尔斯顿围城）。1794-10–1795-03 代理弗吉尼亚州总检察长；1797 年与 Pinckney、Gerry 同赴法国使团；1799-03-05–1800-06-06 任弗吉尼亚第 13 选区众议员；1800-06-13–1801-03-04 任国务卿；1801 年起任首席大法官至去世，任期逾 34 年。**自著**：《The Life of George Washington》五卷、近一千页，前两卷 1804 年出版；另为学校编的节本 1838 年出版（卒后三年）。。\n   应用价值：场景：司法审查的确立与其推理（Marbury v. Madison, 1803）；联邦与州权限的划分（McCulloch v. Maryland, 1819；Gibbons v. Ogden, 1824）；以判决意见书为体裁的长篇法律论证；为同代人立传时的史料取舍（《华盛顿传》）；关键能力：把宪法条文推到具体争议上的分步论证；在意见书里同时处理管辖权与实体问题；州法与联邦法冲突时的优先级判断（Fletcher v. Peck, 1810）；长篇传记写作与史料编次。\n   区分依据：生卒年 1755–1835 与队列条目逐位相同；且是消歧页上**唯一占据基础词条**的人（他不在消歧页列表里，正因为基础词条是他）。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "司法审查的确立与其推理（Marbury v. Madison, 1803）",
+        "联邦与州权限的划分（McCulloch v. Maryland, 1819；Gibbons v. Ogden, 1824）",
+        "以判决意见书为体裁的长篇法律论证",
+        "为同代人立传时的史料取舍（《华盛顿传》）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/John_Marshall",
+          "note": "基础词条即目标本人；生卒、任职、《华盛顿传》卷数与出版年取自此页"
+        }
+      ],
+      "canonical_name": "John Marshall",
+      "distinguishing_basis": "生卒年 1755–1835 与队列条目逐位相同；且是消歧页上**唯一占据基础词条**的人（他不在消歧页列表里，正因为基础词条是他）",
+      "evidence_level": "high",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "把宪法条文推到具体争议上的分步论证",
+        "在意见书里同时处理管辖权与实体问题",
+        "州法与联邦法冲突时的优先级判断（Fletcher v. Peck, 1810）",
+        "长篇传记写作与史料编次"
+      ],
+      "label": "A",
+      "occupation_or_role": "美国第四任首席大法官（1801-02-04 – 1835-07-06），此前任国务卿、联邦众议员",
+      "professional_background": "1755-09-24 生于弗吉尼亚 Germantown，1835-07-06 卒于费城。独立战争中在大陆军任上尉（1775–1780，第 3、第 11 弗吉尼亚团；布兰迪万、日耳曼敦、福吉谷、蒙茅斯、查尔斯顿围城）。1794-10–1795-03 代理弗吉尼亚州总检察长；1797 年与 Pinckney、Gerry 同赴法国使团；1799-03-05–1800-06-06 任弗吉尼亚第 13 选区众议员；1800-06-13–1801-03-04 任国务卿；1801 年起任首席大法官至去世，任期逾 34 年。**自著**：《The Life of George Washington》五卷、近一千页，前两卷 1804 年出版；另为学校编的节本 1838 年出版（卒后三年）。",
+      "subject_uid": "john-marshall-1755-1835"
+    }
+  ],
+  "generated_at": "2026-08-11T23:53:56Z",
+  "normalized_name": "johnmarshall",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "john-marshall-1755-1835",
+  "status": "ready",
+  "target_name": "John Marshall"
+}

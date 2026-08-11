@@ -1,0 +1,162 @@
+{
+  "_note": "候选集的取法（**先说规则，再列人**）：en.wikipedia「John Marshall (disambiguation)」共列 58 名同名者。全列进来无助于判断——本门要防的是**语料检索被同名者的作品污染**，所以取的是交集：①同名；②**有著述或名字印在题名页上**；③其作品同样落在公有领域（出版 ≤1930），因而会与目标一起出现在 archive.org / Gutenberg 的同名检索里。年代筛不掉他们（见 namesakes-whose-works-are-also-public-domain）。未入选的 46 人（运动员、当代人物等）不产生题名页，全名单见消歧页。",
+  "_selection_rule_for_next_step": "队列条目 `John Marshall` 带生卒年 1755–1835；候选中生卒年与之逐位相同的**有且只有一名**。按族选不唯一（法律类有 5 名），故用生卒年。",
+  "candidates": [
+    {
+      "canonical_name": "John Marshall",
+      "subject_uid": "john-marshall-1755-1835",
+      "identity_category": "政治法律师",
+      "occupation_or_role": "美国第四任首席大法官（1801-02-04 – 1835-07-06），此前任国务卿、联邦众议员",
+      "professional_background": "1755-09-24 生于弗吉尼亚 Germantown，1835-07-06 卒于费城。独立战争中在大陆军任上尉（1775–1780，第 3、第 11 弗吉尼亚团；布兰迪万、日耳曼敦、福吉谷、蒙茅斯、查尔斯顿围城）。1794-10–1795-03 代理弗吉尼亚州总检察长；1797 年与 Pinckney、Gerry 同赴法国使团；1799-03-05–1800-06-06 任弗吉尼亚第 13 选区众议员；1800-06-13–1801-03-04 任国务卿；1801 年起任首席大法官至去世，任期逾 34 年。**自著**：《The Life of George Washington》五卷、近一千页，前两卷 1804 年出版；另为学校编的节本 1838 年出版（卒后三年）。",
+      "application_scenarios": [
+        "司法审查的确立与其推理（Marbury v. Madison, 1803）",
+        "联邦与州权限的划分（McCulloch v. Maryland, 1819；Gibbons v. Ogden, 1824）",
+        "以判决意见书为体裁的长篇法律论证",
+        "为同代人立传时的史料取舍（《华盛顿传》）"
+      ],
+      "key_capabilities": [
+        "把宪法条文推到具体争议上的分步论证",
+        "在意见书里同时处理管辖权与实体问题",
+        "州法与联邦法冲突时的优先级判断（Fletcher v. Peck, 1810）",
+        "长篇传记写作与史料编次"
+      ],
+      "distinguishing_basis": "生卒年 1755–1835 与队列条目逐位相同；且是消歧页上**唯一占据基础词条**的人（他不在消歧页列表里，正因为基础词条是他）",
+      "authoritative_sources": [
+        {"locator": "https://en.wikipedia.org/wiki/John_Marshall", "note": "基础词条即目标本人；生卒、任职、《华盛顿传》卷数与出版年取自此页"}
+      ],
+      "evidence_level": "high"
+    },
+    {
+      "canonical_name": "John Marshall Harlan",
+      "subject_uid": "john-marshall-harlan-1833-1911",
+      "identity_category": "政治法律师",
+      "occupation_or_role": "美国最高法院大法官（1877–1911）",
+      "professional_background": "1833–1911。消歧页 Law 节列为 U.S. Supreme Court justice。**其判决意见书与目标的同样收在 U.S. Reports 里，且同为公有领域**——按「John Marshall」检索 U.S. Reports 会同时命中两人。",
+      "application_scenarios": ["最高法院判决意见书", "宪法争议"],
+      "key_capabilities": ["司法意见写作"],
+      "distinguishing_basis": "生卒 1833–1911，与目标不重叠；**但同在 U.S. Reports，是本人物最主要的语料污染源**",
+      "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/John_Marshall_(disambiguation)", "note": "Law 节第 4 条"}],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "John Marshall Harlan II",
+      "subject_uid": "john-marshall-harlan-ii-1899-1971",
+      "identity_category": "政治法律师",
+      "occupation_or_role": "美国最高法院大法官",
+      "professional_background": "1899–1971。同上，同在 U.S. Reports；**卒于 1971，其作品多数不在公有领域**，但署名仍会命中检索。",
+      "application_scenarios": ["最高法院判决意见书"],
+      "key_capabilities": ["司法意见写作"],
+      "distinguishing_basis": "生卒 1899–1971；作品多数**不**在公有领域，误取会同时违反 PD 规则",
+      "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/John_Marshall_(disambiguation)", "note": "Law 节第 5 条"}],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "John Marshall (biographer)",
+      "subject_uid": "john-marshall-biographer-1784-1837",
+      "identity_category": "思想教育师",
+      "occupation_or_role": "英国皇家海军军官、作者",
+      "professional_background": "约 1784–1837。消歧页 Military 节列为「officer in the British Royal Navy and author」。**卒年与目标仅差两年，且同为著者、作品同为公有领域**——按姓名加年代筛**筛不掉他**。",
+      "application_scenarios": ["海军人物传记"],
+      "key_capabilities": ["传记写作"],
+      "distinguishing_basis": "英国海军而非美国司法；**年代几乎完全重叠，是本门最危险的一名**",
+      "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/John_Marshall_(disambiguation)", "note": "Military 节第 3 条"}],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "John Marshall (publisher)",
+      "subject_uid": "john-marshall-publisher-1756-1824",
+      "identity_category": "艺术设计师",
+      "occupation_or_role": "伦敦出版商，专营儿童文学",
+      "professional_background": "1756–1824。**生年只比目标晚一年**。作为出版商，他的名字印在大量书籍题名页上——`title` 与 `publisher` 两栏都会命中「John Marshall」，而那些书**一个字都不是他写的**。",
+      "application_scenarios": ["童书出版"],
+      "key_capabilities": ["出版发行"],
+      "distinguishing_basis": "出版商而非作者；**题名页署名会被误读成一手著述**（见 related-to-him-is-not-written-by-him）",
+      "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/John_Marshall_(disambiguation)", "note": "Others 节第 2 条"}],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "John Marshall (Newcastle publisher and printer)",
+      "subject_uid": "john-marshall-newcastle-fl1810-1831",
+      "identity_category": "艺术设计师",
+      "occupation_or_role": "纽卡斯尔出版商与印刷商（活跃 1810–1831）",
+      "professional_background": "活跃期 1810–1831，**与目标任首席大法官的年份完全重叠**。同上，署名出现在题名页与版权页。",
+      "application_scenarios": ["印刷出版"],
+      "key_capabilities": ["印刷"],
+      "distinguishing_basis": "印刷商而非作者；活跃期与目标重叠",
+      "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/John_Marshall_(disambiguation)", "note": "Others 节第 3 条"}],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "John Marshall (industrialist)",
+      "subject_uid": "john-marshall-industrialist-1765-1845",
+      "identity_category": "创业经营师",
+      "occupation_or_role": "英国实业家与政治人物（利兹亚麻业）",
+      "professional_background": "1765–1845，**生卒年与目标高度重叠**。消歧页 Politics 节列为 British businessman and politician。留有商业与议会文书。",
+      "application_scenarios": ["工厂经营", "议会活动"],
+      "key_capabilities": ["实业经营"],
+      "distinguishing_basis": "英国实业家；年代重叠但领域与国别不同",
+      "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/John_Marshall_(disambiguation)", "note": "Politics 节第 6 条"}],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "John George Marshall",
+      "subject_uid": "john-george-marshall-1786-1880",
+      "identity_category": "政治法律师",
+      "occupation_or_role": "新斯科舍的律师、法官与政治人物",
+      "professional_background": "1786–1880。同为法律职业、同为英语法律著述、作品同为公有领域。",
+      "application_scenarios": ["殖民地法院实务"],
+      "key_capabilities": ["法律写作"],
+      "distinguishing_basis": "加拿大新斯科舍而非美国联邦；中名 George 可区分，**但检索常按 first+last 匹配**",
+      "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/John_Marshall_(disambiguation)", "note": "Law 节第 1 条"}],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "John Marshall, Lord Curriehill",
+      "subject_uid": "john-marshall-lord-curriehill-1794-1868",
+      "identity_category": "政治法律师",
+      "occupation_or_role": "英国法官",
+      "professional_background": "1794–1868。苏格兰司法界，判例汇编中留有署名意见。",
+      "application_scenarios": ["苏格兰法院判决"],
+      "key_capabilities": ["司法意见写作"],
+      "distinguishing_basis": "苏格兰而非美国；有贵族称号可区分",
+      "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/John_Marshall_(disambiguation)", "note": "Law 节第 2 条"}],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "John Marshall (surgeon)",
+      "subject_uid": "john-marshall-surgeon-1818-1891",
+      "identity_category": "医疗护理师",
+      "occupation_or_role": "英国外科医生、解剖学教师",
+      "professional_background": "1818–1891。著有解剖学教材，**作品同为公有领域且大量数字化**。",
+      "application_scenarios": ["解剖学教学"],
+      "key_capabilities": ["外科与解剖教学"],
+      "distinguishing_basis": "医学而非法律；年代不重叠",
+      "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/John_Marshall_(disambiguation)", "note": "Science 节第 2 条"}],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "John Marshall (classicist)",
+      "subject_uid": "john-marshall-classicist-1845-1915",
+      "identity_category": "思想教育师",
+      "occupation_or_role": "英国古典学者、爱丁堡皇家中学校长",
+      "professional_background": "1845–1915。有古典学著述，公有领域。",
+      "application_scenarios": ["古典学教学"],
+      "key_capabilities": ["古典文本编注"],
+      "distinguishing_basis": "古典学而非法律；年代不重叠",
+      "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/John_Marshall_(disambiguation)", "note": "Others 节第 4 条"}],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "John Marshall (archaeologist)",
+      "subject_uid": "john-marshall-archaeologist-1876-1958",
+      "identity_category": "思想教育师",
+      "occupation_or_role": "印度考古调查局总监（1902–1928）",
+      "professional_background": "1876–1958。**1928 年前的报告在公有领域**，且以「John Marshall」署名，数字化程度高。",
+      "application_scenarios": ["考古发掘报告"],
+      "key_capabilities": ["考古报告写作"],
+      "distinguishing_basis": "考古而非法律；**其 1928 年前著作是 PD，检索必命中**",
+      "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/John_Marshall_(disambiguation)", "note": "Science 节第 1 条"}],
+      "evidence_level": "medium"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+ "_note": "从 4 名候选中选定。判准同 #173：队列条目生卒年 1809–1865，唯一命中。阻断记录 al_gate.BLOCKED.json，4 张卡全文在其中。",
+ "selected_from": 4,
+ "selection_rule": "queue.生卒 == candidate.life_dates，唯一命中",
+ "blocked_record": "al_gate.BLOCKED.json",
+ "★ 抓源时必须逐份排除": [
+  "Abraham Lincoln (captain)（1744–1786）—— 总统的祖父，同名直系亲属，家族档案必混",
+  "Abe Lincoln (musician)（1907–2000）—— 20 世纪，作品不在 PD",
+  "SM Abraham Lincoln（1966– ）—— 在世"
+ ],
+ "candidates": [
+  {
+   "canonical_name": "Abraham Lincoln",
+   "subject_uid": "abraham-lincoln-1809-1865",
+   "identity_category": "政治法律师",
+   "occupation_or_role": "美国第 16 任总统（1861-03-04 – 1865-04-15）；此前为伊利诺伊州执业律师",
+   "professional_background": "1809-02-12 生于肯塔基 LaRue 县一间单室木屋，1865-04-15 在华盛顿特区遇刺身亡。1836-09-09 取得伊利诺伊州律师资格，在斯普林菲尔德执业，1844 年与 William Herndon 合伙。1834-12-01–1842-12-04 任伊利诺伊州众议员（Sangamon 县，四任）；1847-03-04–1849-03-03 任联邦众议员（伊利诺伊第 7 选区）。**存世自述文本**：Lyceum 演说（1838-01-27）、Peoria 演说（1854-10）、House Divided 演说（1858）、Cooper Union 演说（1860-02-27）、Gettysburg Address（1863-11-19）、两次就职演说、1861–1864 年历次国情咨文。",
+   "application_scenarios": [
+    "以演说推进一个政治判断",
+    "律师执业中的事实与法律分离",
+    "在分裂局势下的公开表态"
+   ],
+   "key_capabilities": [
+    "长篇公开演说的构造",
+    "把宪法争点讲给非法律听众",
+    "书信与文告写作"
+   ],
+   "distinguishing_basis": "生卒年 1809–1865 与队列条目逐位相同；占据基础词条",
+   "authoritative_sources": [
+    {
+     "locator": "https://en.wikipedia.org/wiki/Abraham_Lincoln",
+     "note": "生卒、任职、演说与日期取自此页"
+    }
+   ],
+   "evidence_level": "high"
+  }
+ ]
+}

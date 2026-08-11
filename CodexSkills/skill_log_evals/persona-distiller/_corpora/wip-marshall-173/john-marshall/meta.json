@@ -1,0 +1,77 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "john-marshall-1755-1835",
+  "consent_authority": null,
+  "created_at": "2026-08-11T23:54:24Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "political-legal",
+    "display": "政治法律师",
+    "mode": "single",
+    "primary": "political-legal",
+    "weights": {
+      "political-legal": 1.0
+    }
+  },
+  "language": "en",
+  "model_version": "0.1.0-draft",
+  "name": "John Marshall",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "司法审查的确立与其推理（Marbury v. Madison, 1803）",
+        "联邦与州权限的划分（McCulloch v. Maryland, 1819；Gibbons v. Ogden, 1824）",
+        "以判决意见书为体裁的长篇法律论证",
+        "为同代人立传时的史料取舍（《华盛顿传》）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/John_Marshall",
+          "note": "基础词条即目标本人；生卒、任职、《华盛顿传》卷数与出版年取自此页"
+        }
+      ],
+      "canonical_name": "John Marshall",
+      "distinguishing_basis": "生卒年 1755–1835 与队列条目逐位相同；且是消歧页上**唯一占据基础词条**的人（他不在消歧页列表里，正因为基础词条是他）",
+      "evidence_level": "high",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "把宪法条文推到具体争议上的分步论证",
+        "在意见书里同时处理管辖权与实体问题",
+        "州法与联邦法冲突时的优先级判断（Fletcher v. Peck, 1810）",
+        "长篇传记写作与史料编次"
+      ],
+      "label": "A",
+      "occupation_or_role": "美国第四任首席大法官（1801-02-04 – 1835-07-06），此前任国务卿、联邦众议员",
+      "professional_background": "1755-09-24 生于弗吉尼亚 Germantown，1835-07-06 卒于费城。独立战争中在大陆军任上尉（1775–1780，第 3、第 11 弗吉尼亚团；布兰迪万、日耳曼敦、福吉谷、蒙茅斯、查尔斯顿围城）。1794-10–1795-03 代理弗吉尼亚州总检察长；1797 年与 Pinckney、Gerry 同赴法国使团；1799-03-05–1800-06-06 任弗吉尼亚第 13 选区众议员；1800-06-13–1801-03-04 任国务卿；1801 年起任首席大法官至去世，任期逾 34 年。**自著**：《The Life of George Washington》五卷、近一千页，前两卷 1804 年出版；另为学校编的节本 1838 年出版（卒后三年）。",
+      "subject_uid": "john-marshall-1755-1835"
+    },
+    "chosen_subject_uid": "john-marshall-1755-1835",
+    "normalized_name": "johnmarshall",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "johnmarshall",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "john-marshall",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-ba90b76a96bd",
+  "time_scope": "1755-1835",
+  "updated_at": "2026-08-11T23:54:24Z"
+}
