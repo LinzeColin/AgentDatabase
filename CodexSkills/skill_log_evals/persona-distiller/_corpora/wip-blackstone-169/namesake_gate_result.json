@@ -1,0 +1,413 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：William Blackstone；historical；法学家、法官、牛津大学法学讲授者、托利党议员。\n   专业背景：1723-07-10 – 1780-02-14。生卒日精确到日，三库互相印证：LoC n79120719 的 birthdates 字段作 1723-07-10、deathdates 作 1780-02-14；VIAF 39385957 的 birthDate/deathDate 同为 1723-07-10 / 1780-02-14；Wikidata Q332449 的 P569/P570 同为 1723-07-10 / 1780-02-14（day 精度）。出生地 London (England)（LoC n79120719 birthplaces 字段）。职业：LoC n79120719 occupations 作 Lawyers / Judges / Politicians，activityfields 作 Common law；GND 118511483 的 550 字段作 Jurist，678 字段作「Sir; Oxford (Wirkungsort); Engl. Jurist」；Wikidata Q332449 P106 作 barrister / judge / jurist / politician / university teacher / writer。任职（Wikidata Q332449）：P108 雇主 University of Oxford；P69 就学于 Pembroke College、Charterhouse School；P39 历任 King's Counsel、serjeant-at-law、第 12 届（1761-03-30 – 1768-03-11）与第 13 届（1768 – 1770）大不列颠议会议员、Justice of the Common Pleas（1770-06-25 – 1780-02-14）、Justice of the King's Bench。代表作：Commentaries on the Laws of England（Wikidata Q332449 P800；LoC 名称-题名规范档 n85050029，含四卷分卷 Of the rights of persons = n2005035547、Of the rights of things = no2025024710、Of public wrongs = n85050031）；另有 Analysis of the Laws of England（法译本规范档 n2010024588）、Considerations on Copyholders（n2005031336）、Lectures on the Laws of England（n92122503）、书信集 Correspondence / The Letters of Sir William Blackstone（n2010054906）。注：未查证「首任 Vinerian 讲席教授」这一常见说法——本轮四库中没有任何一条记录写出该职位，故不写入。。\n   应用价值：场景：英国普通法释义与法律教义学推理；18 世纪英格兰宪制、财产权、刑法体系的结构化讲授；法律文本的体系化编排与法学教育设计；关键能力：把散乱判例法整理成可讲授的四卷体系（人的权利 / 物的权利 / 私的不法 / 公的不法）；普通法原则的说理与释义写作；司法审判与议会政治实务。\n   区分依据：Wikidata Q332449 ∧ LCCN n79120719 ∧ GND 118511483 三者互相印证，且这三个标识符由 VIAF 39385957 的 sources 直接列出（LC|n 79120719、DNB|118511483、WKP|Q332449，另含 BNF|11974547、ISNI|0000000122785185、SUDOC|032505248、J9U|987007258607705171），即互证关系是 VIAF 直接观察到的，不是我跨库推断的。与下列同名者的分开方式：(1) 与 1595–1675 的 William Blackstone/Blaxton 相差约 128 年且职业为英国国教牧师与北美殖民地拓居者，LoC 是两条独立规范档 n94033805 vs n79120719；(2) 与其孙 William Seymour Blackstone (1809–1881) 靠中名 Seymour 与议员身份分开，LoC nb2003069290；(3) 与 William E. Blackstone (1841–1935) 靠中名 E./Eugene 与神学家职业分开，GND 128758473；(4) **最高风险者是 William T. Blackstone (1931–1977)，美国哲学教授，著作为 The Concept of Equality、Political Philosophy: An Introduction、Philosophy & Environmental Crisis 等权利/平等/政治哲学主题**——年代筛得掉他但主题筛不掉，按题材检索「Blackstone + rights / equality / law」必然混入，须靠 LCCN n80007838 / GND 1188905643 硬排除；(5) **次高风险者是无生卒年的 LoC n81036634（VIAF 214407301），署名 William Blackstone Jr. 的现代通俗法律书作者**，著有 Be Your Own Lawyer (1981)、Don't Ask Your Lawyer——同名且同为法律题材，且该 VIAF 簇里已经混进一条 The Oxford edition of Dicey: Commentaries on the Laws of England，是本轮观察到的最直接污染证据。★ 另需注意三名并非同名、但会被按姓名检索一并召回的**合作署名者**（VIAF 以 local.personalNames all \"Blackstone, William\" 检索时确实返回了他们）：Auguste-Pierre Damiens de Gomicourt (VIAF 100270477, 1723–1790，法译者，**生年与目标同为 1723**)、Edward Chitty (VIAF 34527996, 1804–1863，编注者)、William Draper Lewis (VIAF 29918590, 1867–1949，编者)——「与他有关」不等于「他写的」，其署名不得计入目标人物一手语料。。",
+    "B. 人物与身份：William Blackstone；namesake；英国国教牧师、北美新英格兰早期拓居者（波士顿与罗德岛第一位欧洲定居者）。\n   专业背景：1595 – 1675-05-26。Wikidata Q2578062 主标签作 William Blaxton，**别名含 William Blackstone**（本轮 wbsearchentities 的 match.type 即为 alias），P569=1595（Wikidata 返回 1595-01-01）、P570=1675-05-26，P106 作 Anglican priest / Christian minister / chaplain / entrepreneur。LoC 立有独立规范档 n94033805「Blackstone, William, 1595-1675」，其 670 来源注写明：Rev. William Blackstone；b. 03-05-1595 in Durham County, Eng.；was a clergyman, scholar and an American pioneer；settled in Boston and Rhode Island。VIAF 38601822 的 birthDate=1595 / deathDate=1675，sources 直接列出 LC|n 94033805 与 WKP|Q2578062。GND 无对应记录（本轮 PER=Blackstone 共 23 条中无此人）。。\n   应用价值：场景：17 世纪新英格兰殖民地史与早期定居史的辨识对象；同名门排除：拼写变体 Blaxton/Blackstone 造成的作者归属混淆；关键能力：英国国教神职与布道；北美殖民地拓殖与果园经营。\n   区分依据：与目标人物相差约 128 年（1595–1675 vs 1723–1780），职业为牧师/拓居者而非法学家；LoC 为两条彼此独立的规范档（n94033805 vs n79120719），VIAF 亦为两个独立簇（38601822 vs 39385957）。**主要风险在拼写变体**：其权威主标签在 Wikidata 是 Blaxton，而 LoC 立作 Blackstone，按 Blackstone 检索会召回他而按 Blaxton 检索不会。。",
+    "C. 人物与身份：William Seymour Blackstone；namesake；英国政治家、沃灵福德（Wallingford）选区议员。\n   专业背景：1809 – 1881（**仅年精度**：Wikidata Q8018295 的 P569/P570 precision=9，SPARQL 渲染出的 1809-01-01/1881-01-01 是年精度占位，不是真实日期，本条已复核 precision 字段后据实标注）。Wikidata Q8018295 描述作 British politician，P106=politician。LoC 规范档 nb2003069290「Blackstone, William Seymour, 1809-1881」，670 来源注仅一条：William Seymour Blackstone (1809-1881), 2003。VIAF 48739004 的 birthDate=1809 / deathDate=1881，sources 列出 LC|nb2003069290、WKP|Q8018295、ISNI|0000000051624690。GND 无对应记录。英文维基「William Blackstone (disambiguation)」页明确写其为目标人物之孙（his grandson, MP for Wallingford）——该亲属关系出自维基消歧页，非四库中任一条，故仅作提示、不作权威断言。。\n   应用价值：场景：19 世纪英国议会政治的辨识对象；同名门排除：与祖父同姓同名首词、且同在 Wallingford 有关联（目标人物 1779 年任 Wallingford 自治市 Recorder）；关键能力：议会代议与选区事务。\n   区分依据：靠中名 Seymour 与生卒年（1809–1881 vs 1723–1780）分开；LoC nb2003069290 vs n79120719 是两条独立规范档。**风险点**：二人同与 Wallingford 关联（目标人物有一幅画像题作 Recorder of the Borough of Wallingford (1779)，见 Wikidata Q118553978），且据维基消歧页为祖孙关系，家族文书与地方档案极易互串；仅按姓名首末词或按地名筛选无法分开，必须用中名 Seymour 或 LCCN 硬判。。",
+    "D. 人物与身份：William E. Blackstone；namesake；美国福音派传教活动家、神学著作者、基督教锡安主义者。\n   专业背景：1841-10-06 – 1935-11-07（VIAF 37979846 给出日精度；Wikidata Q13575324 P569/P570 同；LoC n88005012 的 birthdates/deathdates 仅到年 1841/1935）。全名 William Eugene Blackstone（LoC n88005012 变体形含 Blackstone, William Eugene, 1841-1935；GND 128758473 的 400 变体形同）。GND 128758473 的 550 职业作 Theologe。LoC 670 来源注：Biographical dictionary of Christian missions, ©1998 (Blackstone, William Eugene (1841-1935), American missions activist and philanthropist)；代表作 Jesus Is Coming、The Premillennial Second Coming。Wikidata Q13575324 P800 代表作作 Blackstone Memorial。VIAF 37979846 sources 直接列出 LC|n 88005012、DNB|128758473、WKP|Q13575324。。\n   应用价值：场景：19–20 世纪美国福音派与基督教锡安主义研究的辨识对象；同名门排除：署名常缩为 W. E. Blackstone 或 W.E.B.；关键能力：末世论神学写作与布道；宗教政治请愿组织（Blackstone Memorial）。\n   区分依据：靠中名首字母 E./Eugene 与生卒年（1841–1935 vs 1723–1780）分开，三库均为独立记录（LCCN n88005012、GND 128758473、Wikidata Q13575324）。**风险点**：其署名变体含 Blackstone, W. E. 与纯首字母 W. E. B.，本任务要求排查的「W. Blackstone」写法会召回他；且 LoC 记录另有希伯来文变体形，跨字体检索时更难比对。。",
+    "E. 人物与身份：William T. Blackstone；namesake；美国哲学教授（佐治亚大学），伦理学、政治哲学、权利与平等理论。\n   专业背景：1931-12-08 – 1977-11-14（生卒日仅出自 Wikidata Q115391903，P569/P570 均为 day 精度，已复核）。**其余三库只给生年、不给卒年**：GND 1188905643 的 100 字段作「Blackstone, William T. $d1931-」、548 只登记 dateOfBirth，678 传记注作「Professor für Philosophie an der University of Georgia」、550 职业作 Philosoph；LoC n80007838 的 670 注作「Information from 678 converted Dec. 8, 2014 (Ph.D., Duke Univ.; b. 1931)」；VIAF 32077356 的 birthDate=1931、deathDate=0。VIAF 32077356 名下著作（titles/work）含：The Concept of Equality、Education and Ethics、Francis Hutcheson and Contemporary Ethical Theory、Meaning and Existence、Philosophy & Environmental Crisis、Philosophy and the Human Condition、Political Philosophy: An Introduction、The Problem of Religious Knowledge (1963)。VIAF 32077356 sources 含 LC|n 80007838、DNB|1188905643、BNF|12374207、SUDOC|251198766、ISNI|0000000081111917 等 12 条。。\n   应用价值：场景：20 世纪美国伦理学与政治哲学研究的辨识对象；同名门排除：**题材重叠型污染的最高风险者**——权利/平等/政治哲学与目标人物的法理学主题同域；关键能力：分析伦理学与元伦理学论证；权利、平等、环境伦理的哲学论述；哲学教材与文集编纂。\n   区分依据：靠中名首字母 T./Thomas（VIAF 32077356 的 NTA 名形作 Blackstone, William Thomas）与生年 1931 分开。**本清单中题材污染风险最高的一位**：年代筛得掉（相差两个世纪），但按主题词筛不掉——「Blackstone + rights / equality / law / political philosophy」这类检索式会同时命中他与目标人物，且他确有一本 Political Philosophy: An Introduction。必须用 LCCN n80007838 / GND 1188905643 / VIAF 32077356 做硬排除，不能只靠年代或主题启发式。。",
+    "F. 人物与身份：William Blackstone；namesake；现代通俗法律读物作者（署名 William Blackstone, Jr.）。\n   专业背景：生卒年**查不到**：LoC n81036634 的标目为无日期的「Blackstone, William」，无 birthdates/deathdates 字段；VIAF 214407301 的 birthDate/deathDate 均为 0。LoC n81036634 唯一的 670 来源注为「found : His Be your own lawyer, 1981: t.p. (William Blackstone, Jr.)」，即该规范档系据 1981 年出版的《Be Your Own Lawyer》题名页署名建立，署名带 Jr.。VIAF 214407301 名下著作（titles/work）三条：Be your own lawyer, 1981；Don't ask your lawyer : how to judge, deal, and win in and out of court；**The Oxford edition of Dicey : commentaries on the laws of England**。VIAF 214407301 sources 仅两条：LC|n 81036634 与 J9U|987007274355305171；无 Wikidata、无 GND。国籍、任职、教育背景四库中均无记录，**查不到，不推测**。。\n   应用价值：场景：20 世纪末美国通俗法律自助读物的辨识对象；同名门排除：**书目层污染的现行证据点**——其 VIAF 簇内已混入一条 commentaries on the laws of England 题名；关键能力：面向非专业读者的法律程序说明写作。\n   区分依据：**无生卒年可用于分开**——这是本清单里唯一一位连年代筛都用不上的同名者，只能靠标识符（LCCN n81036634 / VIAF 214407301）硬排除。风险等级仅次于 William T. Blackstone 而在污染证据上更直接：VIAF 214407301 簇内已经挂着一条「The Oxford edition of Dicey : commentaries on the laws of England」，题名与目标人物的代表作字面高度接近，说明书目层的串档**已经发生**，不是假想风险。凡以「作者名 = William Blackstone 且主题 = law」为条件的自动抓取，必然把 1981 年的自助读物与 18 世纪释义混为一谈。。",
+    "G. 人物与身份：William J. Blackstone；namesake；审计经理（John Fluke Manufacturing, Inc., 西雅图），银行审计著作者。\n   专业背景：生卒年**查不到**：LoC n83196291 无 birthdates/deathdates 字段；VIAF 70312489 的 birthDate/deathDate 均为 0。LoC n83196291 唯一的 670 来源注为「found : Bank control and audit, c1983: t.p. (William J. Blackstone, audit mngr, John Fluke Manufacturing, Inc., Seattle, Wash.)」，即职衔与机构出自 1983 年《Bank Control and Audit》题名页。VIAF 70312489 sources 仅两条：LC|n 83196291 与 ISNI|0000000023667917；无 Wikidata、无 GND。。\n   应用价值：场景：20 世纪末美国银行审计实务文献的辨识对象；同名门排除：中名首字母 J. 与目标人物无中名，按「W. Blackstone」缩写检索时无法分开；关键能力：银行内部控制与审计实务。\n   区分依据：靠中名首字母 J. 分开；无生卒年可用，只能靠 LCCN n83196291 / VIAF 70312489 硬排除。题材（银行审计）与目标人物无重叠，**污染风险为本清单最低一档**，但若检索式写成缩写「W. Blackstone」则仍会召回。。",
+    "H. 人物与身份：William Blackstone；namesake；查不到——GND 记录中除贵族称号「Sir」外无任何职业字段。\n   专业背景：生卒年**查不到**。GND 1146806930 是一条极薄的人名规范档：MARC21 100 字段仅作「Blackstone, William」（无 $d 生卒年），550 字段只登记一项 $aSir $4adel（贵族称号 Adelstitel），无 548 生卒、无职业、无 678 传记注、无 670 来源注。VIAF 869151246516844130833 的 sources **只有一条** DNB|1146806930，birthDate/deathDate 均为 0，即该 VIAF 簇未与任何其他机构的规范档合并。LoC 与 Wikidata 中查不到可对应的记录。。\n   应用价值：场景：同名门排除：无属性的薄规范档，任何按姓名的自动比对都无法判定它指谁；关键能力：查不到。\n   区分依据：**无法与目标人物分开，也无法与之合并——身份未定。** 该记录唯一的实质属性是贵族称号「Sir」，而目标人物正是 Sir William Blackstone（GND 118511483 的 400 变体形即含「Blackstone, William $cSir $d1723-1780」），因此它**很可能是目标人物的一条未合并重复档**；但 GND 把它单独立为 1146806930 而未与 118511483 合并，VIAF 也未把两簇合并，本轮四库中没有任何一条记录写出它指谁。按「两条独立证据否则不写」的规矩，此处只登记「未定」，不断言它是目标人物、也不断言它是另一个人。处置建议：不得作为目标人物的一手来源标识符使用；若语料中出现仅凭 GND 1146806930 挂靠的材料，一律先挂起待判。。",
+    "I. 人物与身份：William Blackstone Hubbard；namesake；美国政治家、银行家。\n   专业背景：1795-08-26 – 1866-01-05（Wikidata Q18739704 P569/P570；VIAF 24516624 的 birthDate/deathDate 同为 1795-08-26 / 1866-01-05）。Wikidata Q18739704 描述作 American politician，P106 作 banker / politician。LoC 规范档 nr98034004，标目形作「Hubbard, William Blackstone, 1795-1866」（VIAF 24516624 的 LC 名形）。VIAF 24516624 sources 列出 LC|nr 98034004、WKP|Q18739704、ISNI|0000000052686017；LCCN nr98034004 已单独回读 LoC 规范档确认，标目形为「Hubbard, William Blackstone, 1795-1866」。GND 中**未确认**有对应记录：VIAF 24516624 的 sources 不含 DNB 链；直查 GND（PER=Hubbard, William，返回 7 条）中有一条无生卒年的「Hubbard, William B.」，是否为同一人**无法判定，不作断言**。**属中名承载型同名**：其姓氏为 Hubbard，「William Blackstone」是其名与中名。。\n   应用价值：场景：19 世纪美国俄亥俄州政治与银行业的辨识对象；同名门排除：中名承载型——姓名前两词与目标人物完全一致；关键能力：州级政治与立法事务；银行经营。\n   区分依据：姓氏不同（Hubbard vs Blackstone），但**姓名前两词完全一致**，任何以「William Blackstone」为前缀或以「以 William Blackstone 开头」为条件的检索都会召回他；LoC 的排序形作「Hubbard, William Blackstone」，按倒装姓名检索反而不会召回，两种检索式给出不同结果，须都测。生卒年 1795–1866 与目标人物不重叠。。",
+    "J. 人物与身份：William Blackstone Bradbury；namesake；查不到——Wikidata 未登记职业字段，描述作「Millionaire of San Francisco, CA」。\n   专业背景：1835-01-02 – 1913-01-04（Wikidata Q140179548 的 P569/P570，已复核 precision=11 即 day 精度，故这是真实日期而非年精度占位）。Wikidata Q140179548 描述作「Millionaire of San Francisco, CA (1835-1913)」，**无 P106 职业、无 P214/P244/P227 标识符**。LoC、GND、VIAF 中均**查不到**对应记录，且三处的「0」都带正对照，不是查询式看不见造成的假阴：LoC suggest2（q=Bradbury, William Blackstone，rdftype=PersonalName）count=0，而同式查 q=Hubbard, William Blackstone 返回 1 条 nr98034004——**同一条查询式能看见倒装中名承载者**；GND SRU（PER=Bradbury, William Blackstone）numberOfRecords=0，而同式查 PER=Hubbard, William 返回 7 条——**能看见该姓氏的人**；VIAF（local.personalNames all「Blackstone, William」）18 条中无此人，而同一结果集里确实含 Hubbard, William Blackstone（VIAF 24516624）——**同一次检索能召回中名承载者**。**属中名承载型同名**：姓氏为 Bradbury。。\n   应用价值：场景：同名门排除：中名承载型，仅在 Wikidata 有记录、书目库中无著作；关键能力：查不到。\n   区分依据：姓氏不同（Bradbury vs Blackstone），生卒年 1835–1913 与目标人物不重叠。**书目污染风险很低**——三个书目规范库（LoC/GND/VIAF）都查不到他，说明他名下没有编目著作，不会以作者身份进入语料；但按「William Blackstone」做全文或人名前缀检索时会被召回。仅 Wikidata 一处来源，证据强度低于本清单其余多库互证者。。",
+    "K. 人物与身份：William Blackstone Rennell；namesake；查不到——Wikidata 未登记职业字段，描述仅作「(died 1912)」。\n   专业背景：生年**查不到**；卒于 1912-12-11（Wikidata Q75394310 的 P570，已复核 precision=11 即 day 精度；该实体**没有 P569 出生日期**）。Wikidata Q75394310 描述仅作「(died 1912)」，无 P106 职业、无 P214/P244/P227 标识符。LoC、GND、VIAF 中均**查不到**对应记录，三处「0」均带正对照（LoC suggest2 q=Rennell, William Blackstone → 0，同式 q=Hubbard, William Blackstone → 1；GND PER=Rennell, William Blackstone → 0，同式 PER=Hubbard, William → 7；VIAF 同一次 local.personalNames all 检索的 18 条里含 Hubbard 而无 Rennell）。**属中名承载型同名**：姓氏为 Rennell。。\n   应用价值：场景：同名门排除：中名承载型，仅在 Wikidata 有记录、书目库中无著作；关键能力：查不到。\n   区分依据：姓氏不同（Rennell vs Blackstone），卒年 1912 与目标人物（卒 1780）不重叠。三个书目规范库均无记录，作者身份污染风险很低；按人名前缀检索会被召回。仅 Wikidata 一处来源。。",
+    "L. 人物与身份：William Blackstone Lee；namesake；查不到——《Alumni Oxonienses》牛津校友名录条目所指之人，本轮四库中无独立的人物记录。\n   专业背景：生卒年**查不到**。Wikidata 中存在两个条目 Q110229667「Lee, William Blackstone (1)」与 Q110229668「Lee, William Blackstone (2)」，但二者的 P31 均为 **biographical article（传记条目）而非 human**——它们是《Alumni Oxonienses: the Members of the University of Oxford, 1715-1886》的两条名录条目实体，不是人物实体，因此没有 P569/P570/P106。条目编号 (1)/(2) 表明该名录中至少收录了两位同名的 William Blackstone Lee。LoC、GND、VIAF 中均**查不到**对应的人物规范档，三处「0」均带正对照（LoC suggest2 q=Lee, William Blackstone → 0，同式 q=Hubbard, William Blackstone → 1；GND PER=Lee, William Blackstone → 0，同式 PER=Hubbard, William → 7；VIAF 同一次 local.personalNames all 检索的 18 条里含 Hubbard 而无 Lee）。**属中名承载型同名**：姓氏为 Lee。。\n   应用价值：场景：同名门排除：牛津校友名录中的中名承载者——与目标人物共享同一份牛津档案语境；关键能力：查不到。\n   区分依据：姓氏不同（Lee vs Blackstone）。**值得单列的理由是语境重叠而非姓名形态**：目标人物的雇主是 University of Oxford（Wikidata Q332449 P108）、就学于 Pembroke College，而这两条是同一部牛津校友名录中的「William Blackstone」字样条目——凡从牛津大学档案、校友名录、学院记录抓取语料的路径，都会在同一份文献里同时遇到目标人物和这两条。另需注意同一部名录另有一条 Q106359737「Blackstone, William Seymour」，同属该名录。这三条都是**文献条目实体**，不可当作人物证据使用。。",
+    "M. 人物与身份：Billy Higgins；namesake；美国杂耍剧（vaudeville）演员、喜剧演员、歌手、词曲作者——**并非真正的同名者，是第三方数据库的错误归名**。\n   专业背景：1888-06-09 – 1937-04-19（Wikidata Q27881374，P106=musician，GND 1112579869）。**本条不是一位叫 William Blackstone 的人，而是一处已被记录在案的数据库错误归名，列入本清单是为了让下游知道它是错的、不要再当成同名者处理。** 依据链：英文维基「William Blackstone (disambiguation)」页把他列为「the name sometimes attributed to Billy Higgins」；但回到「Billy Higgins (vaudeville)」条目正文，其编者注写明——BMI（Broadcast Music, Inc.）歌曲数据库**错误地**把本条目的 Higgins 标为 William Blackstone；「Blackstone」实为**另一位** Billy Higgins（1936–2001，爵士鼓手，与本条目人物无直接关系）之母的娘家姓，其母全名 Anna Bell Marie Blackstone (1903–2001)。**Wikidata Q27881374 的英文别名只有「William Weldon Higgins」，不含「William Blackstone」**（本轮 wbgetentities props=aliases 实查确认）；LoC、GND、VIAF 中亦无任何记录把「William Blackstone」挂在他名下。。\n   应用价值：场景：同名门排除：第三方曲库（BMI）层面的错误归名，须在词曲/演艺类语料中拦截；关键能力：杂耍剧表演与词曲创作。\n   区分依据：**他不是同名者，权威库里没有任何一条把「William Blackstone」记为他的名形**——四库中零命中，唯一的关联出自 BMI 歌曲数据库的一处错误，且该错误的成因（另一位同名鼓手之母的娘家姓）已被维基编者注明。处置：若语料抓取路径经过 BMI 或任何以歌曲著作权登记为源的数据库，需显式拦截；若只走图书馆规范档与书目库，则此路不通、无需处理。列出它的价值在于——**这是本轮唯一一处「污染源不在权威库里，而在权威库之外的第三方数据库」的实例**，说明只查四大规范档并不能覆盖全部同名风险。。"
+  ],
+  "candidate_count": 13,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "英国普通法释义与法律教义学推理",
+        "18 世纪英格兰宪制、财产权、刑法体系的结构化讲授",
+        "法律文本的体系化编排与法学教育设计"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q332449",
+          "note": "逐条实调：wbsearchentities + SPARQL 直查，P569=1723-07-10 / P570=1780-02-14（day 精度）、P106、P108、P39、P69、P800"
+        },
+        {
+          "locator": "LCCN n79120719 (id.loc.gov/authorities/names/n79120719)",
+          "note": "逐条实调：id.loc.gov/authorities/names/suggest2?q=Blackstone, William&rdftype=PersonalName；含 birthdates/deathdates/occupations/activityfields/birthplaces 字段"
+        },
+        {
+          "locator": "GND 118511483 (d-nb.info/gnd/118511483)",
+          "note": "逐条实调：services.dnb.de/sru/authorities SRU，MARC21 001=118511483、100=Blackstone, William $d1723-1780、550=Jurist、678=Sir; Oxford (Wirkungsort); Engl. Jurist"
+        },
+        {
+          "locator": "VIAF 39385957",
+          "note": "逐条实调：POST viaf.org/api/search (local.personalNames all) + POST viaf.org/api/cluster-record；birthDate/deathDate 与 sources 中的 LC/DNB/WKP 三链由 VIAF 直接给出"
+        }
+      ],
+      "canonical_name": "William Blackstone",
+      "distinguishing_basis": "Wikidata Q332449 ∧ LCCN n79120719 ∧ GND 118511483 三者互相印证，且这三个标识符由 VIAF 39385957 的 sources 直接列出（LC|n 79120719、DNB|118511483、WKP|Q332449，另含 BNF|11974547、ISNI|0000000122785185、SUDOC|032505248、J9U|987007258607705171），即互证关系是 VIAF 直接观察到的，不是我跨库推断的。与下列同名者的分开方式：(1) 与 1595–1675 的 William Blackstone/Blaxton 相差约 128 年且职业为英国国教牧师与北美殖民地拓居者，LoC 是两条独立规范档 n94033805 vs n79120719；(2) 与其孙 William Seymour Blackstone (1809–1881) 靠中名 Seymour 与议员身份分开，LoC nb2003069290；(3) 与 William E. Blackstone (1841–1935) 靠中名 E./Eugene 与神学家职业分开，GND 128758473；(4) **最高风险者是 William T. Blackstone (1931–1977)，美国哲学教授，著作为 The Concept of Equality、Political Philosophy: An Introduction、Philosophy & Environmental Crisis 等权利/平等/政治哲学主题**——年代筛得掉他但主题筛不掉，按题材检索「Blackstone + rights / equality / law」必然混入，须靠 LCCN n80007838 / GND 1188905643 硬排除；(5) **次高风险者是无生卒年的 LoC n81036634（VIAF 214407301），署名 William Blackstone Jr. 的现代通俗法律书作者**，著有 Be Your Own Lawyer (1981)、Don't Ask Your Lawyer——同名且同为法律题材，且该 VIAF 簇里已经混进一条 The Oxford edition of Dicey: Commentaries on the Laws of England，是本轮观察到的最直接污染证据。★ 另需注意三名并非同名、但会被按姓名检索一并召回的**合作署名者**（VIAF 以 local.personalNames all \"Blackstone, William\" 检索时确实返回了他们）：Auguste-Pierre Damiens de Gomicourt (VIAF 100270477, 1723–1790，法译者，**生年与目标同为 1723**)、Edward Chitty (VIAF 34527996, 1804–1863，编注者)、William Draper Lewis (VIAF 29918590, 1867–1949，编者)——「与他有关」不等于「他写的」，其署名不得计入目标人物一手语料。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "把散乱判例法整理成可讲授的四卷体系（人的权利 / 物的权利 / 私的不法 / 公的不法）",
+        "普通法原则的说理与释义写作",
+        "司法审判与议会政治实务"
+      ],
+      "label": "A",
+      "occupation_or_role": "法学家、法官、牛津大学法学讲授者、托利党议员",
+      "professional_background": "1723-07-10 – 1780-02-14。生卒日精确到日，三库互相印证：LoC n79120719 的 birthdates 字段作 1723-07-10、deathdates 作 1780-02-14；VIAF 39385957 的 birthDate/deathDate 同为 1723-07-10 / 1780-02-14；Wikidata Q332449 的 P569/P570 同为 1723-07-10 / 1780-02-14（day 精度）。出生地 London (England)（LoC n79120719 birthplaces 字段）。职业：LoC n79120719 occupations 作 Lawyers / Judges / Politicians，activityfields 作 Common law；GND 118511483 的 550 字段作 Jurist，678 字段作「Sir; Oxford (Wirkungsort); Engl. Jurist」；Wikidata Q332449 P106 作 barrister / judge / jurist / politician / university teacher / writer。任职（Wikidata Q332449）：P108 雇主 University of Oxford；P69 就学于 Pembroke College、Charterhouse School；P39 历任 King's Counsel、serjeant-at-law、第 12 届（1761-03-30 – 1768-03-11）与第 13 届（1768 – 1770）大不列颠议会议员、Justice of the Common Pleas（1770-06-25 – 1780-02-14）、Justice of the King's Bench。代表作：Commentaries on the Laws of England（Wikidata Q332449 P800；LoC 名称-题名规范档 n85050029，含四卷分卷 Of the rights of persons = n2005035547、Of the rights of things = no2025024710、Of public wrongs = n85050031）；另有 Analysis of the Laws of England（法译本规范档 n2010024588）、Considerations on Copyholders（n2005031336）、Lectures on the Laws of England（n92122503）、书信集 Correspondence / The Letters of Sir William Blackstone（n2010054906）。注：未查证「首任 Vinerian 讲席教授」这一常见说法——本轮四库中没有任何一条记录写出该职位，故不写入。",
+      "subject_uid": "blackstone-william-1723"
+    },
+    {
+      "application_scenarios": [
+        "17 世纪新英格兰殖民地史与早期定居史的辨识对象",
+        "同名门排除：拼写变体 Blaxton/Blackstone 造成的作者归属混淆"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q2578062",
+          "note": "逐条实调：wbsearchentities 以 alias「William Blackstone」命中；SPARQL 确认 P569/P570/P106"
+        },
+        {
+          "locator": "LCCN n94033805",
+          "note": "逐条实调：LoC suggest2 rdftype=PersonalName；670 来源注给出 clergyman/scholar/American pioneer 与 Boston、Rhode Island"
+        },
+        {
+          "locator": "VIAF 38601822",
+          "note": "逐条实调：cluster-record 的 sources 直接列出 LC|n 94033805 与 WKP|Q2578062"
+        }
+      ],
+      "canonical_name": "William Blackstone",
+      "distinguishing_basis": "与目标人物相差约 128 年（1595–1675 vs 1723–1780），职业为牧师/拓居者而非法学家；LoC 为两条彼此独立的规范档（n94033805 vs n79120719），VIAF 亦为两个独立簇（38601822 vs 39385957）。**主要风险在拼写变体**：其权威主标签在 Wikidata 是 Blaxton，而 LoC 立作 Blackstone，按 Blackstone 检索会召回他而按 Blaxton 检索不会。",
+      "evidence_level": "high",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "英国国教神职与布道",
+        "北美殖民地拓殖与果园经营"
+      ],
+      "label": "B",
+      "occupation_or_role": "英国国教牧师、北美新英格兰早期拓居者（波士顿与罗德岛第一位欧洲定居者）",
+      "professional_background": "1595 – 1675-05-26。Wikidata Q2578062 主标签作 William Blaxton，**别名含 William Blackstone**（本轮 wbsearchentities 的 match.type 即为 alias），P569=1595（Wikidata 返回 1595-01-01）、P570=1675-05-26，P106 作 Anglican priest / Christian minister / chaplain / entrepreneur。LoC 立有独立规范档 n94033805「Blackstone, William, 1595-1675」，其 670 来源注写明：Rev. William Blackstone；b. 03-05-1595 in Durham County, Eng.；was a clergyman, scholar and an American pioneer；settled in Boston and Rhode Island。VIAF 38601822 的 birthDate=1595 / deathDate=1675，sources 直接列出 LC|n 94033805 与 WKP|Q2578062。GND 无对应记录（本轮 PER=Blackstone 共 23 条中无此人）。",
+      "subject_uid": "blackstone-william-1595"
+    },
+    {
+      "application_scenarios": [
+        "19 世纪英国议会政治的辨识对象",
+        "同名门排除：与祖父同姓同名首词、且同在 Wallingford 有关联（目标人物 1779 年任 Wallingford 自治市 Recorder）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q8018295",
+          "note": "逐条实调：wbgetentities props=claims 复核 P569/P570 precision=9（年精度）"
+        },
+        {
+          "locator": "LCCN nb2003069290",
+          "note": "逐条实调：LoC suggest2 rdftype=PersonalName"
+        },
+        {
+          "locator": "VIAF 48739004",
+          "note": "逐条实调：cluster-record sources 列出 LC|nb2003069290 与 WKP|Q8018295"
+        }
+      ],
+      "canonical_name": "William Seymour Blackstone",
+      "distinguishing_basis": "靠中名 Seymour 与生卒年（1809–1881 vs 1723–1780）分开；LoC nb2003069290 vs n79120719 是两条独立规范档。**风险点**：二人同与 Wallingford 关联（目标人物有一幅画像题作 Recorder of the Borough of Wallingford (1779)，见 Wikidata Q118553978），且据维基消歧页为祖孙关系，家族文书与地方档案极易互串；仅按姓名首末词或按地名筛选无法分开，必须用中名 Seymour 或 LCCN 硬判。",
+      "evidence_level": "high",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "议会代议与选区事务"
+      ],
+      "label": "C",
+      "occupation_or_role": "英国政治家、沃灵福德（Wallingford）选区议员",
+      "professional_background": "1809 – 1881（**仅年精度**：Wikidata Q8018295 的 P569/P570 precision=9，SPARQL 渲染出的 1809-01-01/1881-01-01 是年精度占位，不是真实日期，本条已复核 precision 字段后据实标注）。Wikidata Q8018295 描述作 British politician，P106=politician。LoC 规范档 nb2003069290「Blackstone, William Seymour, 1809-1881」，670 来源注仅一条：William Seymour Blackstone (1809-1881), 2003。VIAF 48739004 的 birthDate=1809 / deathDate=1881，sources 列出 LC|nb2003069290、WKP|Q8018295、ISNI|0000000051624690。GND 无对应记录。英文维基「William Blackstone (disambiguation)」页明确写其为目标人物之孙（his grandson, MP for Wallingford）——该亲属关系出自维基消歧页，非四库中任一条，故仅作提示、不作权威断言。",
+      "subject_uid": "blackstone-william-seymour-1809"
+    },
+    {
+      "application_scenarios": [
+        "19–20 世纪美国福音派与基督教锡安主义研究的辨识对象",
+        "同名门排除：署名常缩为 W. E. Blackstone 或 W.E.B."
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q13575324",
+          "note": "逐条实调：SPARQL 直查 P569/P570/P106/P800"
+        },
+        {
+          "locator": "LCCN n88005012",
+          "note": "逐条实调：LoC suggest2；含 variantLabels 与 670 来源注"
+        },
+        {
+          "locator": "GND 128758473",
+          "note": "逐条实调：DNB SRU；MARC21 100=Blackstone, William E. $d1841-1935、550=Theologe、400 含 8 条变体形"
+        },
+        {
+          "locator": "VIAF 37979846",
+          "note": "逐条实调：cluster-record sources 三链齐全"
+        }
+      ],
+      "canonical_name": "William E. Blackstone",
+      "distinguishing_basis": "靠中名首字母 E./Eugene 与生卒年（1841–1935 vs 1723–1780）分开，三库均为独立记录（LCCN n88005012、GND 128758473、Wikidata Q13575324）。**风险点**：其署名变体含 Blackstone, W. E. 与纯首字母 W. E. B.，本任务要求排查的「W. Blackstone」写法会召回他；且 LoC 记录另有希伯来文变体形，跨字体检索时更难比对。",
+      "evidence_level": "high",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "末世论神学写作与布道",
+        "宗教政治请愿组织（Blackstone Memorial）"
+      ],
+      "label": "D",
+      "occupation_or_role": "美国福音派传教活动家、神学著作者、基督教锡安主义者",
+      "professional_background": "1841-10-06 – 1935-11-07（VIAF 37979846 给出日精度；Wikidata Q13575324 P569/P570 同；LoC n88005012 的 birthdates/deathdates 仅到年 1841/1935）。全名 William Eugene Blackstone（LoC n88005012 变体形含 Blackstone, William Eugene, 1841-1935；GND 128758473 的 400 变体形同）。GND 128758473 的 550 职业作 Theologe。LoC 670 来源注：Biographical dictionary of Christian missions, ©1998 (Blackstone, William Eugene (1841-1935), American missions activist and philanthropist)；代表作 Jesus Is Coming、The Premillennial Second Coming。Wikidata Q13575324 P800 代表作作 Blackstone Memorial。VIAF 37979846 sources 直接列出 LC|n 88005012、DNB|128758473、WKP|Q13575324。",
+      "subject_uid": "blackstone-william-e-1841"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪美国伦理学与政治哲学研究的辨识对象",
+        "同名门排除：**题材重叠型污染的最高风险者**——权利/平等/政治哲学与目标人物的法理学主题同域"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q115391903",
+          "note": "逐条实调：wbgetentities props=claims，P569/P570 precision=11；该实体无 VIAF/LCCN/GND 声明，卒年 1977-11-14 目前只有这一处来源"
+        },
+        {
+          "locator": "LCCN n80007838",
+          "note": "逐条实调：LoC suggest2；670 注给出 Ph.D., Duke Univ.; b. 1931"
+        },
+        {
+          "locator": "GND 1188905643",
+          "note": "逐条实调：DNB SRU；678=Professor für Philosophie an der University of Georgia、550=Philosoph"
+        },
+        {
+          "locator": "VIAF 32077356",
+          "note": "逐条实调：cluster-record；sources 12 条与 titles/work 8 部著作"
+        }
+      ],
+      "canonical_name": "William T. Blackstone",
+      "distinguishing_basis": "靠中名首字母 T./Thomas（VIAF 32077356 的 NTA 名形作 Blackstone, William Thomas）与生年 1931 分开。**本清单中题材污染风险最高的一位**：年代筛得掉（相差两个世纪），但按主题词筛不掉——「Blackstone + rights / equality / law / political philosophy」这类检索式会同时命中他与目标人物，且他确有一本 Political Philosophy: An Introduction。必须用 LCCN n80007838 / GND 1188905643 / VIAF 32077356 做硬排除，不能只靠年代或主题启发式。",
+      "evidence_level": "high",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "分析伦理学与元伦理学论证",
+        "权利、平等、环境伦理的哲学论述",
+        "哲学教材与文集编纂"
+      ],
+      "label": "E",
+      "occupation_or_role": "美国哲学教授（佐治亚大学），伦理学、政治哲学、权利与平等理论",
+      "professional_background": "1931-12-08 – 1977-11-14（生卒日仅出自 Wikidata Q115391903，P569/P570 均为 day 精度，已复核）。**其余三库只给生年、不给卒年**：GND 1188905643 的 100 字段作「Blackstone, William T. $d1931-」、548 只登记 dateOfBirth，678 传记注作「Professor für Philosophie an der University of Georgia」、550 职业作 Philosoph；LoC n80007838 的 670 注作「Information from 678 converted Dec. 8, 2014 (Ph.D., Duke Univ.; b. 1931)」；VIAF 32077356 的 birthDate=1931、deathDate=0。VIAF 32077356 名下著作（titles/work）含：The Concept of Equality、Education and Ethics、Francis Hutcheson and Contemporary Ethical Theory、Meaning and Existence、Philosophy & Environmental Crisis、Philosophy and the Human Condition、Political Philosophy: An Introduction、The Problem of Religious Knowledge (1963)。VIAF 32077356 sources 含 LC|n 80007838、DNB|1188905643、BNF|12374207、SUDOC|251198766、ISNI|0000000081111917 等 12 条。",
+      "subject_uid": "blackstone-william-t-1931"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪末美国通俗法律自助读物的辨识对象",
+        "同名门排除：**书目层污染的现行证据点**——其 VIAF 簇内已混入一条 commentaries on the laws of England 题名"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "LCCN n81036634",
+          "note": "逐条实调：LoC suggest2 rdftype=PersonalName；670 注为唯一依据，无生卒年字段"
+        },
+        {
+          "locator": "VIAF 214407301",
+          "note": "逐条实调：cluster-record；sources 仅 LC|n 81036634 与 J9U|987007274355305171；titles/work 三条"
+        }
+      ],
+      "canonical_name": "William Blackstone",
+      "distinguishing_basis": "**无生卒年可用于分开**——这是本清单里唯一一位连年代筛都用不上的同名者，只能靠标识符（LCCN n81036634 / VIAF 214407301）硬排除。风险等级仅次于 William T. Blackstone 而在污染证据上更直接：VIAF 214407301 簇内已经挂着一条「The Oxford edition of Dicey : commentaries on the laws of England」，题名与目标人物的代表作字面高度接近，说明书目层的串档**已经发生**，不是假想风险。凡以「作者名 = William Blackstone 且主题 = law」为条件的自动抓取，必然把 1981 年的自助读物与 18 世纪释义混为一谈。",
+      "evidence_level": "medium",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "面向非专业读者的法律程序说明写作"
+      ],
+      "label": "F",
+      "occupation_or_role": "现代通俗法律读物作者（署名 William Blackstone, Jr.）",
+      "professional_background": "生卒年**查不到**：LoC n81036634 的标目为无日期的「Blackstone, William」，无 birthdates/deathdates 字段；VIAF 214407301 的 birthDate/deathDate 均为 0。LoC n81036634 唯一的 670 来源注为「found : His Be your own lawyer, 1981: t.p. (William Blackstone, Jr.)」，即该规范档系据 1981 年出版的《Be Your Own Lawyer》题名页署名建立，署名带 Jr.。VIAF 214407301 名下著作（titles/work）三条：Be your own lawyer, 1981；Don't ask your lawyer : how to judge, deal, and win in and out of court；**The Oxford edition of Dicey : commentaries on the laws of England**。VIAF 214407301 sources 仅两条：LC|n 81036634 与 J9U|987007274355305171；无 Wikidata、无 GND。国籍、任职、教育背景四库中均无记录，**查不到，不推测**。",
+      "subject_uid": "blackstone-william-jr-lc-n81036634"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪末美国银行审计实务文献的辨识对象",
+        "同名门排除：中名首字母 J. 与目标人物无中名，按「W. Blackstone」缩写检索时无法分开"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "LCCN n83196291",
+          "note": "逐条实调：LoC suggest2 rdftype=PersonalName；670 注为唯一依据"
+        },
+        {
+          "locator": "VIAF 70312489",
+          "note": "逐条实调：cluster-record；sources 仅 LC 与 ISNI 两条"
+        }
+      ],
+      "canonical_name": "William J. Blackstone",
+      "distinguishing_basis": "靠中名首字母 J. 分开；无生卒年可用，只能靠 LCCN n83196291 / VIAF 70312489 硬排除。题材（银行审计）与目标人物无重叠，**污染风险为本清单最低一档**，但若检索式写成缩写「W. Blackstone」则仍会召回。",
+      "evidence_level": "medium",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "银行内部控制与审计实务"
+      ],
+      "label": "G",
+      "occupation_or_role": "审计经理（John Fluke Manufacturing, Inc., 西雅图），银行审计著作者",
+      "professional_background": "生卒年**查不到**：LoC n83196291 无 birthdates/deathdates 字段；VIAF 70312489 的 birthDate/deathDate 均为 0。LoC n83196291 唯一的 670 来源注为「found : Bank control and audit, c1983: t.p. (William J. Blackstone, audit mngr, John Fluke Manufacturing, Inc., Seattle, Wash.)」，即职衔与机构出自 1983 年《Bank Control and Audit》题名页。VIAF 70312489 sources 仅两条：LC|n 83196291 与 ISNI|0000000023667917；无 Wikidata、无 GND。",
+      "subject_uid": "blackstone-william-j-lc-n83196291"
+    },
+    {
+      "application_scenarios": [
+        "同名门排除：无属性的薄规范档，任何按姓名的自动比对都无法判定它指谁"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "GND 1146806930",
+          "note": "逐条实调：DNB SRU，PER=Blackstone 共 23 条中的一条；MARC21 仅 100 与 550($aSir $4adel) 两个实质字段"
+        },
+        {
+          "locator": "VIAF 869151246516844130833",
+          "note": "逐条实调：cluster-record；sources 仅 DNB|1146806930 一条，未与任何其他机构合并"
+        }
+      ],
+      "canonical_name": "William Blackstone",
+      "distinguishing_basis": "**无法与目标人物分开，也无法与之合并——身份未定。** 该记录唯一的实质属性是贵族称号「Sir」，而目标人物正是 Sir William Blackstone（GND 118511483 的 400 变体形即含「Blackstone, William $cSir $d1723-1780」），因此它**很可能是目标人物的一条未合并重复档**；但 GND 把它单独立为 1146806930 而未与 118511483 合并，VIAF 也未把两簇合并，本轮四库中没有任何一条记录写出它指谁。按「两条独立证据否则不写」的规矩，此处只登记「未定」，不断言它是目标人物、也不断言它是另一个人。处置建议：不得作为目标人物的一手来源标识符使用；若语料中出现仅凭 GND 1146806930 挂靠的材料，一律先挂起待判。",
+      "evidence_level": "low",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "查不到"
+      ],
+      "label": "H",
+      "occupation_or_role": "查不到——GND 记录中除贵族称号「Sir」外无任何职业字段",
+      "professional_background": "生卒年**查不到**。GND 1146806930 是一条极薄的人名规范档：MARC21 100 字段仅作「Blackstone, William」（无 $d 生卒年），550 字段只登记一项 $aSir $4adel（贵族称号 Adelstitel），无 548 生卒、无职业、无 678 传记注、无 670 来源注。VIAF 869151246516844130833 的 sources **只有一条** DNB|1146806930，birthDate/deathDate 均为 0，即该 VIAF 簇未与任何其他机构的规范档合并。LoC 与 Wikidata 中查不到可对应的记录。",
+      "subject_uid": "blackstone-william-gnd-1146806930"
+    },
+    {
+      "application_scenarios": [
+        "19 世纪美国俄亥俄州政治与银行业的辨识对象",
+        "同名门排除：中名承载型——姓名前两词与目标人物完全一致"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q18739704",
+          "note": "逐条实调：wbsearchentities 与 SPARQL 直查 P569/P570/P106"
+        },
+        {
+          "locator": "LCCN nr98034004",
+          "note": "逐条实调：先由 VIAF 24516624 的 sources 给出（LC|nr 98034004），再单独回读 LoC suggest2（q=Hubbard, William Blackstone，count=1）确认标目形为「Hubbard, William Blackstone, 1795-1866」——两库各自独立命中"
+        },
+        {
+          "locator": "VIAF 24516624",
+          "note": "逐条实调：search + cluster-record；birthDate/deathDate 与三链来源"
+        }
+      ],
+      "canonical_name": "William Blackstone Hubbard",
+      "distinguishing_basis": "姓氏不同（Hubbard vs Blackstone），但**姓名前两词完全一致**，任何以「William Blackstone」为前缀或以「以 William Blackstone 开头」为条件的检索都会召回他；LoC 的排序形作「Hubbard, William Blackstone」，按倒装姓名检索反而不会召回，两种检索式给出不同结果，须都测。生卒年 1795–1866 与目标人物不重叠。",
+      "evidence_level": "high",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "州级政治与立法事务",
+        "银行经营"
+      ],
+      "label": "I",
+      "occupation_or_role": "美国政治家、银行家",
+      "professional_background": "1795-08-26 – 1866-01-05（Wikidata Q18739704 P569/P570；VIAF 24516624 的 birthDate/deathDate 同为 1795-08-26 / 1866-01-05）。Wikidata Q18739704 描述作 American politician，P106 作 banker / politician。LoC 规范档 nr98034004，标目形作「Hubbard, William Blackstone, 1795-1866」（VIAF 24516624 的 LC 名形）。VIAF 24516624 sources 列出 LC|nr 98034004、WKP|Q18739704、ISNI|0000000052686017；LCCN nr98034004 已单独回读 LoC 规范档确认，标目形为「Hubbard, William Blackstone, 1795-1866」。GND 中**未确认**有对应记录：VIAF 24516624 的 sources 不含 DNB 链；直查 GND（PER=Hubbard, William，返回 7 条）中有一条无生卒年的「Hubbard, William B.」，是否为同一人**无法判定，不作断言**。**属中名承载型同名**：其姓氏为 Hubbard，「William Blackstone」是其名与中名。",
+      "subject_uid": "hubbard-william-blackstone-1795"
+    },
+    {
+      "application_scenarios": [
+        "同名门排除：中名承载型，仅在 Wikidata 有记录、书目库中无著作"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q140179548",
+          "note": "逐条实调：wbsearchentities 命中 + wbgetentities props=claims 复核 P569/P570 precision=11；该实体无 VIAF/LCCN/GND 声明"
+        }
+      ],
+      "canonical_name": "William Blackstone Bradbury",
+      "distinguishing_basis": "姓氏不同（Bradbury vs Blackstone），生卒年 1835–1913 与目标人物不重叠。**书目污染风险很低**——三个书目规范库（LoC/GND/VIAF）都查不到他，说明他名下没有编目著作，不会以作者身份进入语料；但按「William Blackstone」做全文或人名前缀检索时会被召回。仅 Wikidata 一处来源，证据强度低于本清单其余多库互证者。",
+      "evidence_level": "low",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "查不到"
+      ],
+      "label": "J",
+      "occupation_or_role": "查不到——Wikidata 未登记职业字段，描述作「Millionaire of San Francisco, CA」",
+      "professional_background": "1835-01-02 – 1913-01-04（Wikidata Q140179548 的 P569/P570，已复核 precision=11 即 day 精度，故这是真实日期而非年精度占位）。Wikidata Q140179548 描述作「Millionaire of San Francisco, CA (1835-1913)」，**无 P106 职业、无 P214/P244/P227 标识符**。LoC、GND、VIAF 中均**查不到**对应记录，且三处的「0」都带正对照，不是查询式看不见造成的假阴：LoC suggest2（q=Bradbury, William Blackstone，rdftype=PersonalName）count=0，而同式查 q=Hubbard, William Blackstone 返回 1 条 nr98034004——**同一条查询式能看见倒装中名承载者**；GND SRU（PER=Bradbury, William Blackstone）numberOfRecords=0，而同式查 PER=Hubbard, William 返回 7 条——**能看见该姓氏的人**；VIAF（local.personalNames all「Blackstone, William」）18 条中无此人，而同一结果集里确实含 Hubbard, William Blackstone（VIAF 24516624）——**同一次检索能召回中名承载者**。**属中名承载型同名**：姓氏为 Bradbury。",
+      "subject_uid": "bradbury-william-blackstone-1835"
+    },
+    {
+      "application_scenarios": [
+        "同名门排除：中名承载型，仅在 Wikidata 有记录、书目库中无著作"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q75394310",
+          "note": "逐条实调：wbsearchentities 命中 + wbgetentities props=claims 复核，只有 P570=1912-12-11，无 P569"
+        }
+      ],
+      "canonical_name": "William Blackstone Rennell",
+      "distinguishing_basis": "姓氏不同（Rennell vs Blackstone），卒年 1912 与目标人物（卒 1780）不重叠。三个书目规范库均无记录，作者身份污染风险很低；按人名前缀检索会被召回。仅 Wikidata 一处来源。",
+      "evidence_level": "low",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "查不到"
+      ],
+      "label": "K",
+      "occupation_or_role": "查不到——Wikidata 未登记职业字段，描述仅作「(died 1912)」",
+      "professional_background": "生年**查不到**；卒于 1912-12-11（Wikidata Q75394310 的 P570，已复核 precision=11 即 day 精度；该实体**没有 P569 出生日期**）。Wikidata Q75394310 描述仅作「(died 1912)」，无 P106 职业、无 P214/P244/P227 标识符。LoC、GND、VIAF 中均**查不到**对应记录，三处「0」均带正对照（LoC suggest2 q=Rennell, William Blackstone → 0，同式 q=Hubbard, William Blackstone → 1；GND PER=Rennell, William Blackstone → 0，同式 PER=Hubbard, William → 7；VIAF 同一次 local.personalNames all 检索的 18 条里含 Hubbard 而无 Rennell）。**属中名承载型同名**：姓氏为 Rennell。",
+      "subject_uid": "rennell-william-blackstone-d1912"
+    },
+    {
+      "application_scenarios": [
+        "同名门排除：牛津校友名录中的中名承载者——与目标人物共享同一份牛津档案语境"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q110229667",
+          "note": "逐条实调：SPARQL 直查，P31=biographical article，无 P569/P570/P106"
+        },
+        {
+          "locator": "Wikidata Q110229668",
+          "note": "逐条实调：SPARQL 直查，P31=biographical article，无 P569/P570/P106"
+        }
+      ],
+      "canonical_name": "William Blackstone Lee",
+      "distinguishing_basis": "姓氏不同（Lee vs Blackstone）。**值得单列的理由是语境重叠而非姓名形态**：目标人物的雇主是 University of Oxford（Wikidata Q332449 P108）、就学于 Pembroke College，而这两条是同一部牛津校友名录中的「William Blackstone」字样条目——凡从牛津大学档案、校友名录、学院记录抓取语料的路径，都会在同一份文献里同时遇到目标人物和这两条。另需注意同一部名录另有一条 Q106359737「Blackstone, William Seymour」，同属该名录。这三条都是**文献条目实体**，不可当作人物证据使用。",
+      "evidence_level": "low",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "查不到"
+      ],
+      "label": "L",
+      "occupation_or_role": "查不到——《Alumni Oxonienses》牛津校友名录条目所指之人，本轮四库中无独立的人物记录",
+      "professional_background": "生卒年**查不到**。Wikidata 中存在两个条目 Q110229667「Lee, William Blackstone (1)」与 Q110229668「Lee, William Blackstone (2)」，但二者的 P31 均为 **biographical article（传记条目）而非 human**——它们是《Alumni Oxonienses: the Members of the University of Oxford, 1715-1886》的两条名录条目实体，不是人物实体，因此没有 P569/P570/P106。条目编号 (1)/(2) 表明该名录中至少收录了两位同名的 William Blackstone Lee。LoC、GND、VIAF 中均**查不到**对应的人物规范档，三处「0」均带正对照（LoC suggest2 q=Lee, William Blackstone → 0，同式 q=Hubbard, William Blackstone → 1；GND PER=Lee, William Blackstone → 0，同式 PER=Hubbard, William → 7；VIAF 同一次 local.personalNames all 检索的 18 条里含 Hubbard 而无 Lee）。**属中名承载型同名**：姓氏为 Lee。",
+      "subject_uid": "lee-william-blackstone-alumni-oxonienses"
+    },
+    {
+      "application_scenarios": [
+        "同名门排除：第三方曲库（BMI）层面的错误归名，须在词曲/演艺类语料中拦截"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q27881374",
+          "note": "逐条实调：wbgetentities props=labels|aliases|descriptions；英文别名仅 William Weldon Higgins，**不含 William Blackstone**——即此归名在 Wikidata 无据"
+        },
+        {
+          "locator": "en.wikipedia.org: Billy Higgins (vaudeville)，条目 Refbegin 编者注",
+          "note": "逐条实调：action=parse prop=wikitext；注文原样指出 BMI 数据库 incorrectly identify，并给出 Anna Bell Marie Blackstone (1903–2001) 的成因。**维基不是权威规范档，此条按「已记录的第三方错误」登记，不作权威身份断言**"
+        }
+      ],
+      "canonical_name": "Billy Higgins",
+      "distinguishing_basis": "**他不是同名者，权威库里没有任何一条把「William Blackstone」记为他的名形**——四库中零命中，唯一的关联出自 BMI 歌曲数据库的一处错误，且该错误的成因（另一位同名鼓手之母的娘家姓）已被维基编者注明。处置：若语料抓取路径经过 BMI 或任何以歌曲著作权登记为源的数据库，需显式拦截；若只走图书馆规范档与书目库，则此路不通、无需处理。列出它的价值在于——**这是本轮唯一一处「污染源不在权威库里，而在权威库之外的第三方数据库」的实例**，说明只查四大规范档并不能覆盖全部同名风险。",
+      "evidence_level": "low",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "杂耍剧表演与词曲创作"
+      ],
+      "label": "M",
+      "occupation_or_role": "美国杂耍剧（vaudeville）演员、喜剧演员、歌手、词曲作者——**并非真正的同名者，是第三方数据库的错误归名**",
+      "professional_background": "1888-06-09 – 1937-04-19（Wikidata Q27881374，P106=musician，GND 1112579869）。**本条不是一位叫 William Blackstone 的人，而是一处已被记录在案的数据库错误归名，列入本清单是为了让下游知道它是错的、不要再当成同名者处理。** 依据链：英文维基「William Blackstone (disambiguation)」页把他列为「the name sometimes attributed to Billy Higgins」；但回到「Billy Higgins (vaudeville)」条目正文，其编者注写明——BMI（Broadcast Music, Inc.）歌曲数据库**错误地**把本条目的 Higgins 标为 William Blackstone；「Blackstone」实为**另一位** Billy Higgins（1936–2001，爵士鼓手，与本条目人物无直接关系）之母的娘家姓，其母全名 Anna Bell Marie Blackstone (1903–2001)。**Wikidata Q27881374 的英文别名只有「William Weldon Higgins」，不含「William Blackstone」**（本轮 wbgetentities props=aliases 实查确认）；LoC、GND、VIAF 中亦无任何记录把「William Blackstone」挂在他名下。",
+      "subject_uid": "higgins-billy-1888-misattribution"
+    }
+  ],
+  "generated_at": "2026-08-11T05:02:05Z",
+  "normalized_name": "williamblackstone",
+  "resolution": "multiple",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "blocked",
+  "target_name": "William Blackstone"
+}

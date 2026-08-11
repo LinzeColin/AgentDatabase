@@ -1,0 +1,34 @@
+{
+ "subject": "William Blackstone",
+ "surname": "Blackstone",
+ "★ 为什么这个人非要有这份文件": "实测 `check_authorship.build_patterns('William Blackstone')['name_rx']` 打这个人自己的 13 个同名候选：**14 个署名变体里 12 个被认成目标本人**。原因在 name_rx 允许 0–2 个中间词且认 `W.`，而 4 位同名者的名＋中名字面就是 `William Blackstone`（Hubbard/Bradbury/Rennell/Lee），另有 2 位就叫 `William Blackstone`。**靠姓名分不开，必须靠排除名单。**",
+ "excluded_names": [
+  "William Seymour Blackstone",
+  "William E. Blackstone",
+  "W. E. Blackstone",
+  "Blackstone, W. E.",
+  "William T. Blackstone",
+  "W. T. Blackstone",
+  "William J. Blackstone",
+  "W. J. Blackstone",
+  "William Blackstone, Jr.",
+  "William Blackstone Jr.",
+  "W. Blackstone, Jr.",
+  "William Blackstone Hubbard",
+  "William Blackstone Bradbury",
+  "William Blackstone Rennell",
+  "William Blackstone Lee",
+  "William Blaxton"
+ ],
+ "any_of_markers": [
+  "Common Pleas",
+  "King's Bench",
+  "Pembroke College",
+  "Charterhouse",
+  "serjeant"
+ ],
+ "marker_window": 60,
+ "★ 区分符的出处与射程": "五个区分符全部取自 `blackstone_namesake_candidates.json` 目标条 A 的 Wikidata Q332449 字段（P39 历任 Justice of the Common Pleas / Justice of the King's Bench / serjeant-at-law；P69 就学于 Pembroke College、Charterhouse School）——**是规范档字段，不是我从扉页想象的**。★ **未验之处**：常见说法「首任 Vinerian 讲席教授」在四库中查不到任何一条记录，**因此没有把 Vinerian 放进区分符**，尽管它很可能真的印在扉页上。★ **同样没放的**：`Commentaries on the Laws of England`——它是最像区分符的短语，但已证实的污染件 *The Oxford edition of Dicey: commentaries on the laws of England* 题名里就有它，**放进去等于把污染件确认成目标本人**。",
+ "★ 待语料落盘后要复核": "区分符是否真出现在扉页上，本轮无法验（语料未到）。若一份都不命中，判定会全落 unknown——**那是对的，不要为了好看去放宽**。",
+ "★ 窗口为什么是 60 不是默认的 40": "实测：18 世纪扉页的写法 `Sir William Blackstone, Knt. one of the Justices of the Court of Common Pleas` 里，`Blackstone` 末尾到 `Common Pleas` 起点**相距 43 字**，默认 40 够不着——**目标本人 3 条真实扉页写法被确认 0/3**，代价方向是「丢真材料」（Sorby #133 那次的教训：少了的东西不会报错）。开到 60 → 3/3，且同名者仍全部被挡住。★ 我一度写成「开到 60 的代价是把谈论他的二手文本也确认成他写的」——**那句是错的**：实测 40 与 60 都是 3/3，**那是区分符机制本来就有的性质，不是放宽带来的**。该由 `check_authorship` 的署名证据去管，本判据只在姓名已出现时裁「是他还是同名者」。"
+}

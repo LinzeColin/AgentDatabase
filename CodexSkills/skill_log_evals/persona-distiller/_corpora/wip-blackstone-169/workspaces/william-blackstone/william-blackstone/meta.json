@@ -1,0 +1,100 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "blackstone-william-1723",
+  "consent_authority": null,
+  "created_at": "2026-08-11T05:03:39Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "political-legal",
+    "display": "政治法律师",
+    "mode": "single",
+    "primary": "political-legal",
+    "weights": {
+      "political-legal": 1.0
+    }
+  },
+  "language": "en",
+  "model_version": "0.1.0-draft",
+  "name": "William Blackstone",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "英国普通法释义与法律教义学推理",
+        "18 世纪英格兰宪制、财产权、刑法体系的结构化讲授",
+        "法律文本的体系化编排与法学教育设计"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q332449",
+          "note": "逐条实调：wbsearchentities + SPARQL 直查，P569=1723-07-10 / P570=1780-02-14（day 精度）、P106、P108、P39、P69、P800"
+        },
+        {
+          "locator": "LCCN n79120719 (id.loc.gov/authorities/names/n79120719)",
+          "note": "逐条实调：id.loc.gov/authorities/names/suggest2?q=Blackstone, William&rdftype=PersonalName；含 birthdates/deathdates/occupations/activityfields/birthplaces 字段"
+        },
+        {
+          "locator": "GND 118511483 (d-nb.info/gnd/118511483)",
+          "note": "逐条实调：services.dnb.de/sru/authorities SRU，MARC21 001=118511483、100=Blackstone, William $d1723-1780、550=Jurist、678=Sir; Oxford (Wirkungsort); Engl. Jurist"
+        },
+        {
+          "locator": "VIAF 39385957",
+          "note": "逐条实调：POST viaf.org/api/search (local.personalNames all) + POST viaf.org/api/cluster-record；birthDate/deathDate 与 sources 中的 LC/DNB/WKP 三链由 VIAF 直接给出"
+        }
+      ],
+      "canonical_name": "William Blackstone",
+      "distinguishing_basis": "Wikidata Q332449 ∧ LCCN n79120719 ∧ GND 118511483 三者互相印证，且这三个标识符由 VIAF 39385957 的 sources 直接列出（LC|n 79120719、DNB|118511483、WKP|Q332449，另含 BNF|11974547、ISNI|0000000122785185、SUDOC|032505248、J9U|987007258607705171），即互证关系是 VIAF 直接观察到的，不是我跨库推断的。与下列同名者的分开方式：(1) 与 1595–1675 的 William Blackstone/Blaxton 相差约 128 年且职业为英国国教牧师与北美殖民地拓居者，LoC 是两条独立规范档 n94033805 vs n79120719；(2) 与其孙 William Seymour Blackstone (1809–1881) 靠中名 Seymour 与议员身份分开，LoC nb2003069290；(3) 与 William E. Blackstone (1841–1935) 靠中名 E./Eugene 与神学家职业分开，GND 128758473；(4) **最高风险者是 William T. Blackstone (1931–1977)，美国哲学教授，著作为 The Concept of Equality、Political Philosophy: An Introduction、Philosophy & Environmental Crisis 等权利/平等/政治哲学主题**——年代筛得掉他但主题筛不掉，按题材检索「Blackstone + rights / equality / law」必然混入，须靠 LCCN n80007838 / GND 1188905643 硬排除；(5) **次高风险者是无生卒年的 LoC n81036634（VIAF 214407301），署名 William Blackstone Jr. 的现代通俗法律书作者**，著有 Be Your Own Lawyer (1981)、Don't Ask Your Lawyer——同名且同为法律题材，且该 VIAF 簇里已经混进一条 The Oxford edition of Dicey: Commentaries on the Laws of England，是本轮观察到的最直接污染证据。★ 另需注意三名并非同名、但会被按姓名检索一并召回的**合作署名者**（VIAF 以 local.personalNames all \"Blackstone, William\" 检索时确实返回了他们）：Auguste-Pierre Damiens de Gomicourt (VIAF 100270477, 1723–1790，法译者，**生年与目标同为 1723**)、Edward Chitty (VIAF 34527996, 1804–1863，编注者)、William Draper Lewis (VIAF 29918590, 1867–1949，编者)——「与他有关」不等于「他写的」，其署名不得计入目标人物一手语料。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "把散乱判例法整理成可讲授的四卷体系（人的权利 / 物的权利 / 私的不法 / 公的不法）",
+        "普通法原则的说理与释义写作",
+        "司法审判与议会政治实务"
+      ],
+      "label": "A",
+      "occupation_or_role": "法学家、法官、牛津大学法学讲授者、托利党议员",
+      "professional_background": "1723-07-10 – 1780-02-14。生卒日精确到日，三库互相印证：LoC n79120719 的 birthdates 字段作 1723-07-10、deathdates 作 1780-02-14；VIAF 39385957 的 birthDate/deathDate 同为 1723-07-10 / 1780-02-14；Wikidata Q332449 的 P569/P570 同为 1723-07-10 / 1780-02-14（day 精度）。出生地 London (England)（LoC n79120719 birthplaces 字段）。职业：LoC n79120719 occupations 作 Lawyers / Judges / Politicians，activityfields 作 Common law；GND 118511483 的 550 字段作 Jurist，678 字段作「Sir; Oxford (Wirkungsort); Engl. Jurist」；Wikidata Q332449 P106 作 barrister / judge / jurist / politician / university teacher / writer。任职（Wikidata Q332449）：P108 雇主 University of Oxford；P69 就学于 Pembroke College、Charterhouse School；P39 历任 King's Counsel、serjeant-at-law、第 12 届（1761-03-30 – 1768-03-11）与第 13 届（1768 – 1770）大不列颠议会议员、Justice of the Common Pleas（1770-06-25 – 1780-02-14）、Justice of the King's Bench。代表作：Commentaries on the Laws of England（Wikidata Q332449 P800；LoC 名称-题名规范档 n85050029，含四卷分卷 Of the rights of persons = n2005035547、Of the rights of things = no2025024710、Of public wrongs = n85050031）；另有 Analysis of the Laws of England（法译本规范档 n2010024588）、Considerations on Copyholders（n2005031336）、Lectures on the Laws of England（n92122503）、书信集 Correspondence / The Letters of Sir William Blackstone（n2010054906）。注：未查证「首任 Vinerian 讲席教授」这一常见说法——本轮四库中没有任何一条记录写出该职位，故不写入。",
+      "subject_uid": "blackstone-william-1723"
+    },
+    "chosen_subject_uid": "blackstone-william-1723",
+    "normalized_name": "williamblackstone",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "williamblackstone",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "william-blackstone",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-ad1b211b7249",
+  "time_scope": "1723–1780",
+  "updated_at": "2026-08-11T05:03:39Z",
+  "attribution_basis": {
+    "authority": "印刷时代人物：扉页署名＋印工年份可用，但**单靠署名不够**——本人物的同名者中有 6 位的署名与目标字面不可分（4 位的名＋中名就是 `William Blackstone`：Hubbard/Bradbury/Rennell/Lee；另 2 位就叫 `William Blackstone`：1595–1675 的拓居者、GND 1146806930 的未定档）。因此归属依据取三条并用：①**作品名在他已知著作表内**（Commentaries on the Laws of England 四卷、An Analysis of the Laws of England、A Treatise on the Law of Descents in Fee-Simple、Considerations on Copyholders、Law Tracts、Reports of Cases…Westminster-Hall）；②**初版印工年份落在 1756–1781**（他 1780 卒，1781 的 Reports 为身后刊）；③**规范档标识符**为 LCCN n79120719 / GND 118511483 / Wikidata Q332449 / VIAF 39385957。★ 三条中至少两条成立才计入 P1。",
+    "citation": "本工作区 `../../namesake-excluded.json` 与 `../../blackstone_namesake_candidates.json`：13 个同名候选逐条实调 Wikidata / LoC / GND / VIAF 四库所得，目标的四库互证关系由 VIAF 39385957 的 sources 字段直接列出（LC|n 79120719、DNB|118511483、WKP|Q332449），非跨库推断。★ 出处交代：**这四库是子代理实调的，我本人未重跑一遍**；我自核过的是「namesake_gate.py 确实读并校验 evidence_level」（scripts/namesake_gate.py:85,87）与「单候选重跑后门返回 ready/single/blackstone-william-1723」。",
+    "disputed_policy": "三类一律不计入 P1：①**同名者名下的作品**——已知污染实例：VIAF 214407301（William Blackstone, Jr.）簇中混有 *The Oxford edition of Dicey: commentaries on the laws of England*，题名含 commentaries，极易误收；②**编者附加物**——身后刊本（Reports of Cases, 1781，由 James Clitherow 整理）与后世版次的导言、编者注、校勘记不是他的话，只取正文；③**出版年 > 1930 的版次**——按公有领域判据排除（其编辑成果仍在保护期内）。★ `disputed_works` 现为**仅一条已证实的误归属**，不是「查过了没有别的」：语料尚未落盘，逐份读扉页之后才能补全。**空与未查在机器眼里一样，故此处写明它不空但不完整。**",
+    "disputed_works": [
+      {
+        "work": "The Oxford edition of Dicey: commentaries on the laws of England",
+        "为什么会误收": "题名含 commentaries，且被归入 VIAF 214407301（William Blackstone, Jr.）簇",
+        "证据": "blackstone_namesake_candidates.json 中 F 条的 distinguishing_basis，逐条实调所得",
+        "处置": "不计入 P1；若语料中出现，标为同名者材料"
+      }
+    ]
+  }
+}

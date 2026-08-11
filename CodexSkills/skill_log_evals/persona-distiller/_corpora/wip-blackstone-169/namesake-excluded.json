@@ -1,0 +1,150 @@
+{
+ "★ 口径": "**被排除的不是「无关的人」，是「同名且会在同一批文件里出现的人」**——排除依据必须逐条写明，不能只写「不是他」。",
+ "★ 本清单的来源": "全部字段**逐字取自** `blackstone_namesake_candidates.json`（子代理逐条实调 Wikidata/LoC/GND/VIAF 四库所得），本文件由脚本生成，**没有手抄、没有改写**。",
+ "target": {
+  "subject_uid": "blackstone-william-1723",
+  "canonical_name": "William Blackstone",
+  "生卒": "1723-07-10 – 1780-02-14",
+  "选定依据": "队列 #169 记的生卒为 1723–1780；候选 A 四库（Wikidata Q332449 ∧ LCCN n79120719 ∧ GND 118511483 ∧ VIAF 39385957）生卒精确到日且互证，唯一匹配。**这一步是机械匹配，不是判断**。"
+ },
+ "★ 身份未定（既不排除也不并入）": {
+  "subject_uid": "blackstone-william-gnd-1146806930",
+  "说明": "**无法与目标人物分开，也无法与之合并——身份未定。** 该记录唯一的实质属性是贵族称号「Sir」，而目标人物正是 Sir William Blackstone（GND 118511483 的 400 变体形即含「Blackstone, William $cSir $d1723-1780」），因此它**很可能是目标人物的一条未合并重复档**；但 GND 把它单独立为 1146806930 而未与 118511483 合并，VIAF 也未把两簇合并，本轮四库中没有任何一条记录写出它指谁。按「两条独立证据否则不写」的规矩，此处只登记「未定」，不断言它是目标人物、也不断言它是另一个人。处置建议：不得作为目标人物的一手来源标识符使用；若语料中出现仅凭 GND 1146806930 挂靠的材料，一律先挂起待判。",
+  "处置": "不得作为目标人物的一手来源标识符使用；语料中若出现仅凭 GND 1146806930 挂靠的材料，一律先挂起待判。"
+ },
+ "excluded": [
+  {
+   "canonical_name": "William Blackstone",
+   "subject_uid": "blackstone-william-1595",
+   "为什么会撞上": "英国国教牧师、北美新英格兰早期拓居者（波士顿与罗德岛第一位欧洲定居者）",
+   "排除依据": "与目标人物相差约 128 年（1595–1675 vs 1723–1780），职业为牧师/拓居者而非法学家；LoC 为两条彼此独立的规范档（n94033805 vs n79120719），VIAF 亦为两个独立簇（38601822 vs 39385957）。**主要风险在拼写变体**：其权威主标签在 Wikidata 是 Blaxton，而 LoC 立作 Blackstone，按 Blackstone 检索会召回他而按 Blaxton 检索不会。",
+   "标识符（用于硬排除）": [
+    "Wikidata Q2578062",
+    "LCCN n94033805",
+    "VIAF 38601822"
+   ],
+   "evidence_level": "high"
+  },
+  {
+   "canonical_name": "William Seymour Blackstone",
+   "subject_uid": "blackstone-william-seymour-1809",
+   "为什么会撞上": "英国政治家、沃灵福德（Wallingford）选区议员",
+   "排除依据": "靠中名 Seymour 与生卒年（1809–1881 vs 1723–1780）分开；LoC nb2003069290 vs n79120719 是两条独立规范档。**风险点**：二人同与 Wallingford 关联（目标人物有一幅画像题作 Recorder of the Borough of Wallingford (1779)，见 Wikidata Q118553978），且据维基消歧页为祖孙关系，家族文书与地方档案极易互串；仅按姓名首末词或按地名筛选无法分开，必须用中名 Seymour 或 LCCN 硬判。",
+   "标识符（用于硬排除）": [
+    "Wikidata Q8018295",
+    "LCCN nb2003069290",
+    "VIAF 48739004"
+   ],
+   "evidence_level": "high"
+  },
+  {
+   "canonical_name": "William E. Blackstone",
+   "subject_uid": "blackstone-william-e-1841",
+   "为什么会撞上": "美国福音派传教活动家、神学著作者、基督教锡安主义者",
+   "排除依据": "靠中名首字母 E./Eugene 与生卒年（1841–1935 vs 1723–1780）分开，三库均为独立记录（LCCN n88005012、GND 128758473、Wikidata Q13575324）。**风险点**：其署名变体含 Blackstone, W. E. 与纯首字母 W. E. B.，本任务要求排查的「W. Blackstone」写法会召回他；且 LoC 记录另有希伯来文变体形，跨字体检索时更难比对。",
+   "标识符（用于硬排除）": [
+    "Wikidata Q13575324",
+    "LCCN n88005012",
+    "GND 128758473",
+    "VIAF 37979846"
+   ],
+   "evidence_level": "high"
+  },
+  {
+   "canonical_name": "William T. Blackstone",
+   "subject_uid": "blackstone-william-t-1931",
+   "为什么会撞上": "美国哲学教授（佐治亚大学），伦理学、政治哲学、权利与平等理论",
+   "排除依据": "靠中名首字母 T./Thomas（VIAF 32077356 的 NTA 名形作 Blackstone, William Thomas）与生年 1931 分开。**本清单中题材污染风险最高的一位**：年代筛得掉（相差两个世纪），但按主题词筛不掉——「Blackstone + rights / equality / law / political philosophy」这类检索式会同时命中他与目标人物，且他确有一本 Political Philosophy: An Introduction。必须用 LCCN n80007838 / GND 1188905643 / VIAF 32077356 做硬排除，不能只靠年代或主题启发式。",
+   "标识符（用于硬排除）": [
+    "Wikidata Q115391903",
+    "LCCN n80007838",
+    "GND 1188905643",
+    "VIAF 32077356"
+   ],
+   "evidence_level": "high"
+  },
+  {
+   "canonical_name": "William Blackstone",
+   "subject_uid": "blackstone-william-jr-lc-n81036634",
+   "为什么会撞上": "现代通俗法律读物作者（署名 William Blackstone, Jr.）",
+   "排除依据": "**无生卒年可用于分开**——这是本清单里唯一一位连年代筛都用不上的同名者，只能靠标识符（LCCN n81036634 / VIAF 214407301）硬排除。风险等级仅次于 William T. Blackstone 而在污染证据上更直接：VIAF 214407301 簇内已经挂着一条「The Oxford edition of Dicey : commentaries on the laws of England」，题名与目标人物的代表作字面高度接近，说明书目层的串档**已经发生**，不是假想风险。凡以「作者名 = William Blackstone 且主题 = law」为条件的自动抓取，必然把 1981 年的自助读物与 18 世纪释义混为一谈。",
+   "标识符（用于硬排除）": [
+    "LCCN n81036634",
+    "VIAF 214407301"
+   ],
+   "evidence_level": "medium"
+  },
+  {
+   "canonical_name": "William J. Blackstone",
+   "subject_uid": "blackstone-william-j-lc-n83196291",
+   "为什么会撞上": "审计经理（John Fluke Manufacturing, Inc., 西雅图），银行审计著作者",
+   "排除依据": "靠中名首字母 J. 分开；无生卒年可用，只能靠 LCCN n83196291 / VIAF 70312489 硬排除。题材（银行审计）与目标人物无重叠，**污染风险为本清单最低一档**，但若检索式写成缩写「W. Blackstone」则仍会召回。",
+   "标识符（用于硬排除）": [
+    "LCCN n83196291",
+    "VIAF 70312489"
+   ],
+   "evidence_level": "medium"
+  },
+  {
+   "canonical_name": "William Blackstone Hubbard",
+   "subject_uid": "hubbard-william-blackstone-1795",
+   "为什么会撞上": "美国政治家、银行家",
+   "排除依据": "姓氏不同（Hubbard vs Blackstone），但**姓名前两词完全一致**，任何以「William Blackstone」为前缀或以「以 William Blackstone 开头」为条件的检索都会召回他；LoC 的排序形作「Hubbard, William Blackstone」，按倒装姓名检索反而不会召回，两种检索式给出不同结果，须都测。生卒年 1795–1866 与目标人物不重叠。",
+   "标识符（用于硬排除）": [
+    "Wikidata Q18739704",
+    "LCCN nr98034004",
+    "VIAF 24516624"
+   ],
+   "evidence_level": "high"
+  },
+  {
+   "canonical_name": "William Blackstone Bradbury",
+   "subject_uid": "bradbury-william-blackstone-1835",
+   "为什么会撞上": "查不到——Wikidata 未登记职业字段，描述作「Millionaire of San Francisco, CA」",
+   "排除依据": "姓氏不同（Bradbury vs Blackstone），生卒年 1835–1913 与目标人物不重叠。**书目污染风险很低**——三个书目规范库（LoC/GND/VIAF）都查不到他，说明他名下没有编目著作，不会以作者身份进入语料；但按「William Blackstone」做全文或人名前缀检索时会被召回。仅 Wikidata 一处来源，证据强度低于本清单其余多库互证者。",
+   "标识符（用于硬排除）": [
+    "Wikidata Q140179548"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "William Blackstone Rennell",
+   "subject_uid": "rennell-william-blackstone-d1912",
+   "为什么会撞上": "查不到——Wikidata 未登记职业字段，描述仅作「(died 1912)」",
+   "排除依据": "姓氏不同（Rennell vs Blackstone），卒年 1912 与目标人物（卒 1780）不重叠。三个书目规范库均无记录，作者身份污染风险很低；按人名前缀检索会被召回。仅 Wikidata 一处来源。",
+   "标识符（用于硬排除）": [
+    "Wikidata Q75394310"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "William Blackstone Lee",
+   "subject_uid": "lee-william-blackstone-alumni-oxonienses",
+   "为什么会撞上": "查不到——《Alumni Oxonienses》牛津校友名录条目所指之人，本轮四库中无独立的人物记录",
+   "排除依据": "姓氏不同（Lee vs Blackstone）。**值得单列的理由是语境重叠而非姓名形态**：目标人物的雇主是 University of Oxford（Wikidata Q332449 P108）、就学于 Pembroke College，而这两条是同一部牛津校友名录中的「William Blackstone」字样条目——凡从牛津大学档案、校友名录、学院记录抓取语料的路径，都会在同一份文献里同时遇到目标人物和这两条。另需注意同一部名录另有一条 Q106359737「Blackstone, William Seymour」，同属该名录。这三条都是**文献条目实体**，不可当作人物证据使用。",
+   "标识符（用于硬排除）": [
+    "Wikidata Q110229667",
+    "Wikidata Q110229668"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "Billy Higgins",
+   "subject_uid": "higgins-billy-1888-misattribution",
+   "为什么会撞上": "美国杂耍剧（vaudeville）演员、喜剧演员、歌手、词曲作者——**并非真正的同名者，是第三方数据库的错误归名**",
+   "排除依据": "**他不是同名者，权威库里没有任何一条把「William Blackstone」记为他的名形**——四库中零命中，唯一的关联出自 BMI 歌曲数据库的一处错误，且该错误的成因（另一位同名鼓手之母的娘家姓）已被维基编者注明。处置：若语料抓取路径经过 BMI 或任何以歌曲著作权登记为源的数据库，需显式拦截；若只走图书馆规范档与书目库，则此路不通、无需处理。列出它的价值在于——**这是本轮唯一一处「污染源不在权威库里，而在权威库之外的第三方数据库」的实例**，说明只查四大规范档并不能覆盖全部同名风险。",
+   "标识符（用于硬排除）": [
+    "Wikidata Q27881374",
+    "en.wikipedia.org: Billy Higgins (vaudeville)，条目 Refbegin 编者注"
+   ],
+   "evidence_level": "low"
+  }
+ ],
+ "★ 抓源时的实操要求": [
+  "**凡命中 `Blackstone` 而年代不在 1723–1780 署名窗口内的，一律先当作可疑**——本轮 13 个候选里 4 个查不到生卒年，年代筛对他们完全失效。",
+  "**F（William Blackstone, Jr.，VIAF 214407301）的污染已经发生、不是假想**：该簇里已混进一条 *The Oxford edition of Dicey: commentaries on the laws of England*。",
+  "**E（William T. Blackstone，1931–1977）按主题词筛不掉**：美国哲学教授，写的是 rights / equality / law，与目标撞题材，必须用标识符硬排除。",
+  "**C（其孙 William Seymour Blackstone）与目标同与 Wallingford 关联**，按地名或姓名首末词筛不开，必须用中名 Seymour 或 LCCN 硬判。",
+  "**B（Blaxton）的主标签在 Wikidata 是 Blaxton 而 LoC 立作 Blackstone**——按 Blackstone 检索会召回他，按 Blaxton 不会。"
+ ]
+}
