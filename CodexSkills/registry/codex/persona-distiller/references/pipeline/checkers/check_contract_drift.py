@@ -109,6 +109,51 @@ def norm(v: str | None) -> str | None:
     return v[1:] if v.startswith("v") else v
 
 
+def _one_ledger_per_workspace(root: pathlib.Path) -> list[str]:
+    """**一个工作区只许有一份 `source-ledger.jsonl`。**
+
+    ## 撞出它的那一次（2026-08-12）
+
+    `check_scan_reach` 报：**该扫 42 个、实际扫了 42 个**——计数对上，
+    **而集合不同**：少扫 2 个工作区根、多扫它们的 `evidence` 子目录。
+    若那道判据只比计数，`42 = 42` 会一直是绿的
+    （[[two-errors-cancelled-so-the-gate-stayed-green]]）。
+
+    根因：Blackstone #169 与 Holmes #170 各有**两份**账本
+    （`<ws>/evidence/` 与 `<ws>/_corpus/`），触发了
+    `check_corpus_presence.scan()` 的「一个目录里多份账本 ⇒ 它是容器不是工作区」
+    规则，于是把 `evidence` 当成了单位名。
+
+    ★ **那条规则本身是对的**（它是为「`--root` 传成上级目录时 17 个工作区被
+      collapse 成一行、然后报绿」那次事故立的）。错的是不该有两份账本。
+
+    ★★ 两份**内容不同、不是副本**：Holmes 是 14 条 vs 16 条，
+      且共有的 14 条逐条也不同；多出的两条是生涯尾段卷次，**被引 0 次**。
+
+    → 本条只报**新出现的**：已知的那两个已判过分，重出账本等于改动被评分的东西，
+      按红线不动，因此列入豁免名单。
+    """
+    KNOWN = {
+        "wip-blackstone-169/workspaces/william-blackstone/william-blackstone",
+        "wip-holmes-170/workspaces/oliver-wendell-holmes-jr/oliver-wendell-holmes-jr",
+    }
+    corpora = root.parent.parent.parent / "skill_log_evals/persona-distiller/_corpora"
+    if not corpora.is_dir():
+        return []
+    out = []
+    seen: dict[str, list[str]] = {}
+    for led in corpora.rglob("source-ledger.jsonl"):
+        ws = led.parent.parent if led.parent.name in {"evidence", "_corpus"} else led.parent
+        seen.setdefault(str(ws.relative_to(corpora)), []).append(led.parent.name)
+    for ws, dirs in sorted(seen.items()):
+        if len(dirs) > 1 and ws not in KNOWN:
+            out.append(f"[一个工作区两份账本] {ws} —— 账本在 {sorted(dirs)}；"
+                       "**判据会把它当成容器并下沉**，单位名会变成子目录名，"
+                       "于是「扫了几个」对得上而「扫的是谁」是错的。"
+                       "已知豁免（已判过分、不动）：Blackstone #169、Holmes #170")
+    return out
+
+
 def _json(path: pathlib.Path):
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -274,6 +319,8 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
     _cs_bad, _cs_skip = _checksums_fresh(root)
     problems.extend(_cs_bad)
     skipped.extend(_cs_skip)
+
+    problems.extend(_one_ledger_per_workspace(root))
 
     # ★★ v0.0.0.94 新增第四条比对：**CHANGELOG 的最高条目必须等于 VERSION**。
     #   实测背景：2026-08-04 一天写了 v0.0.0.84–94 十一条 CHANGELOG，
