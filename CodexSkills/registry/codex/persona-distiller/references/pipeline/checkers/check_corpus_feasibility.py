@@ -134,16 +134,39 @@ def evaluate(target: pathlib.Path, profile: str | None = None) -> tuple[list[str
     if not led.is_file():
         return [], {'状态': f'没有 {led}，**未核验**（不是通过）'}
     rows = [json.loads(l) for l in led.read_text(encoding='utf-8').splitlines() if l.strip()]
+    profile_note = None
     if profile is None:
+        # ★★★ 2026-08-12：这一段原来是**静默退到 quick**——
+        #   `meta.json` 读不出来时 `except: pass`，profile 保持 'quick'。
+        #   实测同一批 12 份材料：meta 写 `deep` 报「走不完全程」，
+        #   **meta 坏掉报「可行」**——一个损坏的文件把判决从失败翻成通过。
+        #   全库 36/36 个工作区都有 meta.json，其中 **11 个是 deep**：
+        #   它们一旦 meta 损坏，就会被按最松的 quick 门判，而**没有任何提示**。
+        #   ⇒ [[empty-default-swallows-unknown]]：`[]`/默认值被读成「没问题」。
+        #   现在**仍然按 quick 继续算**（不拦人），但**必须把这件事说出来**。
         meta = target / 'meta.json'
         profile = 'quick'
-        if meta.is_file():
+        if not meta.is_file():
+            profile_note = (f'**没有 {meta.name}**，按 quick 算——'
+                            '全库 36/36 个工作区都有这个文件，**缺它本身就不正常**')
+        else:
             try:
-                profile = json.loads(meta.read_text(encoding='utf-8')).get('profile') or 'quick'
-            except Exception:
-                pass
+                declared = json.loads(meta.read_text(encoding='utf-8')).get('profile')
+            except Exception as exc:
+                declared = None
+                profile_note = (f'**{meta.name} 读不出来**（{type(exc).__name__}），'
+                                '按 quick 算——**若它本该是 deep/standard，本次结论偏松**')
+            else:
+                if declared in {'quick', 'standard', 'deep'}:
+                    profile = declared
+                else:
+                    profile_note = (f'**{meta.name} 里的 profile 是 {declared!r}**，不是三档之一，'
+                                    '按 quick 算——**若它本该是 deep/standard，本次结论偏松**')
     info = feasibility(rows, profile)
     problems = []
+    if profile_note:
+        info['★★ profile 未确认'] = profile_note
+        problems.append(f'[profile] {profile_note}')
     if not info['可行']:
         head = ('**这批材料在结构上走不完全程**' if info['结论'] == 'impossible-without-more-material'
                 else '**扣任何一份当 holdout 都满足不了 profile 门**')
@@ -224,6 +247,70 @@ def self_test() -> int:
     r = feasibility([S(i) for i in range(45)], profile='deep')
     chk('⑨ deep 45 份 → 不可行（真实下限 46）',
         (not r['可行']) and r['★ 真实下限'] == 46)
+
+    # ══════════════════════════════════════════════════════════════
+    # ⑪ `evaluate()` 本身——**2026-08-12 之前它一次也没被自测进入过**
+    # ══════════════════════════════════════════════════════════════
+    #
+    # 上面全在考 `feasibility()`（纯函数）。`evaluate()` 才是
+    # **读磁盘、决定用哪一档门、拼出判决**的那一段——而**档是它自己从 meta.json 猜的**。
+    #
+    # ★ 补它的直接动机是 #172 Brandeis：我刚把它的输出
+    #   「可用 0｜**真实下限 9**（文档写的是 8）」写进了抓源清单。
+    #   一个我正在引用其结论的判据，它的判定函数却从没被自测跑过。
+    import tempfile as _tf
+
+    def _mkws(td, n, meta=None):
+        ws = pathlib.Path(td)
+        (ws / 'evidence').mkdir(parents=True, exist_ok=True)
+        rows = [{'source_id': f's{i}', 'split': 'train', 'tier': 'P1',
+                 'extraction_status': 'ok',
+                 'dimensions': ['writings', 'decisions', 'expression'][:1 + (i % 3)]}
+                for i in range(n)]
+        (ws / 'evidence' / 'source-ledger.jsonl').write_text(
+            '\n'.join(json.dumps(r) for r in rows) + '\n', encoding='utf-8')
+        if meta is not None:
+            (ws / 'meta.json').write_text(meta, encoding='utf-8')
+        return ws
+
+    with _tf.TemporaryDirectory() as td:
+        # ⑪a 账本不存在 → 明写「未核验」，不许静默当通过
+        problems, info = evaluate(pathlib.Path(td) / 'nope')
+        chk('⑪a 没有账本 → 明写「未核验（不是通过）」',
+            problems == [] and '未核验' in str(info.get('状态', '')))
+
+        # ⑪b meta 声明 deep → 必须按 deep 判（12 份在 deep 下不可行）
+        _, info = evaluate(_mkws(td + '/b', 12, '{"profile":"deep"}'))
+        chk('⑪b meta 写 deep → 用 deep 门', info['profile'] == 'deep' and not info['可行'])
+
+        # ⑪c ★★★ **meta 读不出来时，不许静默降到 quick 就完事**——必须报出来。
+        #   回归的正是当天实测到的那件：同一批 12 份材料，
+        #   meta 写 deep 报「走不完全程」，**meta 坏掉报「可行」**。
+        problems, info = evaluate(_mkws(td + '/c', 12, 'NOT JSON'))
+        chk('⑪c meta 坏掉 → **报出 [profile] 未确认**，不是静默按 quick 通过',
+            any(s.startswith('[profile]') for s in problems)
+            and '★★ profile 未确认' in info)
+
+        # ⑪c′ profile 值不是三档之一（打字错）→ 同样要报
+        problems, _ = evaluate(_mkws(td + '/c2', 12, '{"profile":"deeep"}'))
+        chk("⑪c′ profile 写成 'deeep' → 也要报，不许当成 quick 静静通过",
+            any(s.startswith('[profile]') for s in problems))
+
+        # ⑪d meta 缺失 → 报（全库 36/36 都有，缺它本身不正常）
+        problems, _ = evaluate(_mkws(td + '/d', 12, None))
+        chk('⑪d 没有 meta.json → 也要报（全库 36/36 都有）',
+            any(s.startswith('[profile]') for s in problems))
+
+        # ⑪e 正对照：meta 正常写 quick → **一句 [profile] 都不许报**
+        problems, info = evaluate(_mkws(td + '/e', 12, '{"profile":"quick"}'))
+        chk('⑪e meta 正常 → 不报 [profile]（否则每个工作区都在喊狼来了）',
+            not any(s.startswith('[profile]') for s in problems)
+            and info['profile'] == 'quick')
+
+        # ⑪f ★ 显式传 profile 时**不许去读 meta**（调用方说了算）
+        _, info = evaluate(_mkws(td + '/f', 12, 'NOT JSON'), profile='deep')
+        chk('⑪f 显式传 profile=deep → 用 deep，且不因坏 meta 报错',
+            info['profile'] == 'deep' and '★★ profile 未确认' not in info)
 
     print('\n' + ('✓ 自测全过' if ok else '✗ 自测未过'))
     return 0 if ok else 2
