@@ -24,7 +24,12 @@ HERE = pathlib.Path(__file__).resolve().parent
 RAW = HERE / "raw"
 NOTE_HEAD = re.compile(r"^\s*\(\d{1,3}\)")
 # 正文恢复的标志：页码边码（`42-43 OF THE N`）、章眉（`CHAP. 2]`）、或整块只有一个页码。
-BODY_RESUME = re.compile(r"(^|\n)\s*(?:\d{1,4}\s*$|\d{1,4}-\d{1,4}\s+[A-Z]|CHAP\.|\*)", re.M)
+# ★★★ 只认 `CHAP.` 是不够的：`SECT. 1] OF THE LAW. 34-35-36` 也是章眉，
+#   漏掉它会让注块属性一路传播下去，**把他就职讲词里的话判成编者的**——
+#   那是「丢真材料」的方向，比误收更难发现（Sorby #133 记过同一形态）。
+BODY_RESUME = re.compile(
+    r"(^|\n)\s*(?:\d{1,4}\s*$|\d{1,4}(?:-\d{1,4})+\s*$|\d{1,4}-\d{1,4}\s+[A-Z]"
+    r"|CHAP\.|SECT\.|SECTION\b|BOOK\s+THE\b|INTRODUCTION\b|\*)", re.M)
 
 
 def blocks(text):
@@ -148,6 +153,14 @@ def self_test():
     chk("②c 注的续段 → 命中", bool(r2c), True)
     chk("②c 注的续段 → **不许判成他的话**",
         bool(r2c and (r2c[0][2] or r2c[0][4])), True)
+
+    # ★★★ ⑤b 正对照：**就职讲词里的这一句必须判成他的话**。
+    #   第一版传播规则因为不认 `SECT.` 章眉，把它判成了编者注——
+    #   **丢真材料的方向**。这一条是读原文起疑后补的。
+    r5b = find("You will permit me, however, very briefly to describe rather what I conceive", [bk1])
+    chk("⑤b 就职讲词 → 命中", bool(r5b), True)
+    chk("⑤b 就职讲词 → **必须判成他的话**",
+        bool(r5b and not r5b[0][2] and not r5b[0][4]), True)
 
     # ⑤ 正对照：**他自己的第一人称**必须判为干净正文
     r5 = find("I shall not here enter into any minute inquiries",
