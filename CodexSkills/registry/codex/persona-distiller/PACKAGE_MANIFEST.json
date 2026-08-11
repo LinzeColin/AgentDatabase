@@ -526,8 +526,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_authorship.py",
-      "sha256": "852d86f407c10f97697716cd52ba8c7191e54fed678c23d39a73f8828f9a4f63",
-      "size_bytes": 172254
+      "sha256": "a1637ecbef4cd31d899b92e44291b1a5f97b9d4e6b129346b1862bc95a0a2d06",
+      "size_bytes": 176259
     },
     {
       "path": "references/pipeline/checkers/check_baseline_provenance.py",
@@ -1281,8 +1281,8 @@
     },
     {
       "path": "scripts/check_authorship.py",
-      "sha256": "852d86f407c10f97697716cd52ba8c7191e54fed678c23d39a73f8828f9a4f63",
-      "size_bytes": 172254
+      "sha256": "a1637ecbef4cd31d899b92e44291b1a5f97b9d4e6b129346b1862bc95a0a2d06",
+      "size_bytes": 176259
     },
     {
       "path": "scripts/check_baseline_provenance.py",
