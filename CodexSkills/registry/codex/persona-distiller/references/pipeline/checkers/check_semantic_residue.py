@@ -97,6 +97,42 @@ def scannable(path: pathlib.Path) -> str:
     return "\n".join(out)
 
 
+def judge(texts: dict, pat: str, neg_exempt: bool = True) -> tuple:
+    """**本件的判定函数**：一条规则扫过全部文本 → `([命中…], 被豁免的处数)`。
+
+    ★★ 2026-08-12 从 `main()` 里提到模块级。原因不是整洁，是**自测重写了一份旧版**：
+    `self_test()` 里那段 `rx.search` + `NEG.search` 与这里**不是同一套判定**——
+    它**没有剥 Markdown 强调符那一步**。也就是说下面这个真实漏判
+
+        「此说是**错的**」
+
+    ——`**` 插在「是」与「错的」之间，把豁免词「是错的」整词打断，
+    于是一条**明确写着被推翻**的历史引用会被当成残留。
+    这个修法**只在 `main()` 里**，而自测验的是没修的那一版：
+    删掉下面那行 `re.sub`，旧自测照样全绿。
+
+    ★ 这里原先举的例子是「事后证明是**假的**」，**它不承力**——
+      `事后证明` 自己就在 `NEG` 里，剥不剥强调符都会被豁免。
+      2026-08-12 补自测时靠变异测试当场发现（删掉 `re.sub` 仍是一条都没红），已换。
+
+    ⇒ [[a-checker-nothing-calls-is-not-a-checker]] 的同族：
+      **自测必须调被保证的那段真代码**，抄一份等于没测。
+    """
+    rx, hits, exempted = re.compile(pat), [], 0
+    for f, t in texts.items():
+        for m in rx.finditer(t):
+            ctx = t[max(0, m.start() - WIN):m.end() + WIN]
+            # ★ 先剥 Markdown 强调符再匹配否定语境（见 docstring 里的真实漏判）。
+            #   与第三十种同源：**判据依赖字面连续，而排版会切断字面。**
+            ctx = re.sub(r"[*_`~]+", "", ctx)
+            if neg_exempt and NEG.search(ctx):
+                exempted += 1
+                continue
+            name = getattr(f, "name", str(f))
+            hits.append((name, m.start(), m.group(0)[:70]))
+    return hits, exempted
+
+
 # (规则, 应被抓到的残留句, 应被豁免的订正句)
 SELF_TEST = [
     (r"(长文|该文|这篇文章)[^。\n]{0,40}(催生|据此|促成)[^。\n]{0,25}(Prophet|P2P)",
@@ -116,21 +152,85 @@ SELF_TEST = [
 
 def self_test() -> int:
     """两向负对照：残留必须抓到，订正后的否定表述必须豁免。"""
-    print("══ 负对照 ══")
+    print("══ 负对照（**跑真 `judge()`，不再抄一份判定逻辑**）══")
     fail = 0
     for pat, residue, corrected in SELF_TEST:
-        rx = re.compile(pat)
-        m = rx.search(residue)
-        caught = bool(m) and not NEG.search(
-            residue[max(0, m.start() - WIN):m.end() + WIN]) if m else False
-        m2 = rx.search(corrected)
-        exempted = (not m2) or bool(NEG.search(
-            corrected[max(0, m2.start() - WIN):m2.end() + WIN]))
+        caught = bool(judge({"残留.md": residue}, pat)[0])
+        exempted = not judge({"订正.md": corrected}, pat)[0]
         print(f"  {'✓' if caught else '✗'} 抓到残留: 「{residue[:44]}…」")
         print(f"  {'✓' if exempted else '✗'} 豁免订正: 「{corrected[:44]}…」")
         fail += (not caught) + (not exempted)
-    print(f"  ✓ 负对照通过（{len(SELF_TEST)}/{len(SELF_TEST)}）" if not fail
-          else f"  ✗ {fail} 项未过——本检查器已失效，其「0 残留」不构成证据")
+
+    # ══════════════════════════════════════════════════════════════
+    # ㉙ `judge()` 与 `scannable()`/`walk()`
+    #    —— 2026-08-12 之前这三个从没被自测进入过
+    # ══════════════════════════════════════════════════════════════
+    print("\n── ㉙a **Markdown 强调符打断豁免词**（真实漏判，此前无自测）──")
+    # `**` 插在「是」与「错的」之间 → 豁免词整词被切断 →
+    # 一条明确写着被推翻的历史引用会被当成残留。
+    #
+    # ★★ 2026-08-12 造夹具时的一处更正：第一版我照抄了 docstring 里的
+    #   「事后证明是**假的**」，而**变异测试当场证明它不承力**——
+    #   `事后证明` 自己就在 `NEG` 里，剥不剥强调符都会被豁免。
+    #   删掉那行 `re.sub` 重跑，自测**一条都没红**。
+    #   换成下面这句（不剥时 `NEG` 零命中、剥后才命中 `是错的`）才验得成。
+    #   ⇒ [[counter-example-red-can-be-red-by-coincidence]]：
+    #     **夹具要让被验的那一步成为唯一的承力点**，否则「绿」什么也没证明。
+    _P = r"看空所以(退出|清盘)"
+    _MD = "他看空所以退出，此说是**错的**。"
+    _ok = not judge({"a.md": _MD}, _P)[0]
+    print(f"  {'✓' if _ok else '✗'} ㉙a 「是**错的**」（星号插在豁免词中间）→ **仍被豁免**")
+    fail += not _ok
+    # 反向：同一句去掉否定语境 ⇒ 必须报。否则上面只是「什么都不报」。
+    _ok = bool(judge({"a.md": "他看空所以退出，把资本还给了投资人。"}, _P)[0])
+    print(f"  {'✓' if _ok else '✗'} ㉙a′ 反向：去掉否定语境 → **仍要报**（不是什么都不报）")
+    fail += not _ok
+
+    print("── ㉙b `--no-neg-exempt`：关掉豁免要能把它们全放回来 ──")
+    _h, _e = judge({"a.md": _MD}, _P, neg_exempt=False)
+    _ok = len(_h) == 1 and _e == 0
+    print(f"  {'✓' if _ok else '✗'} 关掉豁免 → 命中 {len(_h)}、豁免计数 {_e}"
+          f"（**用它复核豁免有没有吃掉真命中**）")
+    fail += not _ok
+
+    print("── ㉙c `scannable()`：baseline 一类字段按设计不扫 ──")
+    import tempfile as _tf
+    _d = pathlib.Path(_tf.mkdtemp())
+    _RES = "他看空所以退出，把资本还给了投资人。"
+    (_d / "p.json").write_text(json.dumps(
+        {"candidate": "他自陈不懂这个市场。", "baseline": _RES}, ensure_ascii=False),
+        encoding="utf-8")
+    _t = scannable(_d / "p.json")
+    _ok = "不懂这个市场" in _t and _RES not in _t
+    print(f"  {'✓' if _ok else '✗'} `baseline` 字段被剔掉、`candidate` 留下"
+          f"（baseline 是**故意写差的对照答案**，扫它必然误报）")
+    fail += not _ok
+
+    # ㉙d `walk()` 要递归进嵌套 dict/list——否则深层正文整片扫不到
+    (_d / "n.jsonl").write_text(json.dumps(
+        {"rows": [{"text": _RES}], "meta": {"note": "别的"}}, ensure_ascii=False) + "\n",
+        encoding="utf-8")
+    _t = scannable(_d / "n.jsonl")
+    _ok = _RES in _t and "别的" in _t
+    print(f"  {'✓' if _ok else '✗'} ㉙d `walk()` 递归进 list/dict（深层正文也要被扫到）")
+    fail += not _ok
+
+    # ㉙e ★ 解析不了的 JSON **整份照扫**（宁可误报不可漏报）——这条口径要钉住
+    (_d / "bad.json").write_text("{not json at all " + _RES, encoding="utf-8")
+    _t = scannable(_d / "bad.json")
+    _ok = _RES in _t
+    print(f"  {'✓' if _ok else '✗'} ㉙e JSON 解析不了 → **整份照扫**（宁可误报不可漏报）")
+    fail += not _ok
+
+    # ㉙f ★ 射程声明：`.md` 原样返回，**里面的 `baseline:` 字样不会被剔掉**。
+    #    这不是缺陷、是射程——写成断言，免得下一个人以为 md 里也筛过。
+    (_d / "x.md").write_text("baseline: " + _RES, encoding="utf-8")
+    _ok = _RES in scannable(_d / "x.md")
+    print(f"  {'✓' if _ok else '✗'} ㉙f 射程：`.md` 原样返回，**md 里的 baseline 字样不筛**")
+    fail += not _ok
+
+    print(f"\n  ✓ 负对照通过" if not fail
+          else f"\n  ✗ {fail} 项未过——本检查器已失效，其「0 残留」不构成证据")
     return fail
 
 
@@ -155,20 +255,8 @@ def main() -> int:
 
     total, exempted = 0, 0
     for name, pat in rules.items():
-        rx, hits = re.compile(pat), []
-        for f, t in texts.items():
-            for m in rx.finditer(t):
-                ctx = t[max(0, m.start() - WIN):m.end() + WIN]
-                # ★ 先剥 Markdown 强调符再匹配否定语境。
-                #   实测漏判：「事后证明是**假的**」——`**` 插在「是」与「假的」之间，
-                #   把豁免词「是错的/是假的」这一类整词打断，于是一条**明确写着被推翻**
-                #   的历史引用被当成了残留。
-                #   这与第三十种同源：**判据依赖字面连续，而排版会切断字面。**
-                ctx = re.sub(r"[*_`~]+", "", ctx)
-                if not a.no_neg_exempt and NEG.search(ctx):
-                    exempted += 1
-                    continue
-                hits.append((f.name, m.start(), m.group(0)[:70]))
+        hits, ex = judge(texts, pat, neg_exempt=not a.no_neg_exempt)
+        exempted += ex
         print(f"  {'✓' if not hits else '✗'} {name}: {len(hits)}")
         for fn, pos, s in hits[:4]:
             print(f"        {fn}@{pos}: {s}")

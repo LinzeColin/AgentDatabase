@@ -396,8 +396,8 @@
     },
     {
       "path": "references/ledgers/_拒答溢出门-整代人物空过-2026-08-12.md",
-      "sha256": "9148c17d6c74af20e75c4f071a8d3f7bfc4bae56e82d8e31aff284cedc386bcd",
-      "size_bytes": 7589
+      "sha256": "61ebfea29a9ae5328e8d4e950b4fb5a4ad55a52f3d18a626da36b6b08ede325e",
+      "size_bytes": 8929
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -736,8 +736,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_ocr_language_death.py",
-      "sha256": "176d8dce8ae670f753abf8b5eea3373711c4c2cd08321bb7aeb76e72fbb65726",
-      "size_bytes": 17955
+      "sha256": "f0d8668ec7a1d3f6627ad2d2e21efc975dd6284bc4562c40ffe086382e1596ae",
+      "size_bytes": 25152
     },
     {
       "path": "references/pipeline/checkers/check_ocr_legibility.py",
@@ -841,13 +841,13 @@
     },
     {
       "path": "references/pipeline/checkers/check_selftest_reach.py",
-      "sha256": "a904b553c2e41b8044097e60ef6a7dfc151d6f3cfcc26e37eb1558d2b1f7d76f",
-      "size_bytes": 11088
+      "sha256": "c4a6e07ddee50eb19b35fce8d3575e2f3fe44b908fc5592e6cc5640d8b5601ab",
+      "size_bytes": 10977
     },
     {
       "path": "references/pipeline/checkers/check_semantic_residue.py",
-      "sha256": "afd0218a9d790fb9f90f925e9e2e5665434b7cc2f0de603ccdeb2cdf5b168b1a",
-      "size_bytes": 10202
+      "sha256": "8b5d9bef3abc6d60d36a60a691bc92a1a7273151316b39efed4a4a464a155d2c",
+      "size_bytes": 15476
     },
     {
       "path": "references/pipeline/checkers/check_shared_anchor.py",
@@ -921,8 +921,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_unqualified_priority_claim.py",
-      "sha256": "0d467453400e992fc641ede62bb9b3309b86b89b67c3ba35c4df4905454ca07b",
-      "size_bytes": 8357
+      "sha256": "a24c553ee3ce012be9cde24ac21545d40c46b61ab18f672483e5f11d2fdc8816",
+      "size_bytes": 14004
     },
     {
       "path": "references/pipeline/checkers/check_unsourced_names.py",
@@ -1526,8 +1526,8 @@
     },
     {
       "path": "scripts/check_ocr_language_death.py",
-      "sha256": "176d8dce8ae670f753abf8b5eea3373711c4c2cd08321bb7aeb76e72fbb65726",
-      "size_bytes": 17955
+      "sha256": "f0d8668ec7a1d3f6627ad2d2e21efc975dd6284bc4562c40ffe086382e1596ae",
+      "size_bytes": 25152
     },
     {
       "path": "scripts/check_ocr_legibility.py",
@@ -1631,13 +1631,13 @@
     },
     {
       "path": "scripts/check_selftest_reach.py",
-      "sha256": "a904b553c2e41b8044097e60ef6a7dfc151d6f3cfcc26e37eb1558d2b1f7d76f",
-      "size_bytes": 11088
+      "sha256": "c4a6e07ddee50eb19b35fce8d3575e2f3fe44b908fc5592e6cc5640d8b5601ab",
+      "size_bytes": 10977
     },
     {
       "path": "scripts/check_semantic_residue.py",
-      "sha256": "afd0218a9d790fb9f90f925e9e2e5665434b7cc2f0de603ccdeb2cdf5b168b1a",
-      "size_bytes": 10202
+      "sha256": "8b5d9bef3abc6d60d36a60a691bc92a1a7273151316b39efed4a4a464a155d2c",
+      "size_bytes": 15476
     },
     {
       "path": "scripts/check_shared_anchor.py",
@@ -1711,8 +1711,8 @@
     },
     {
       "path": "scripts/check_unqualified_priority_claim.py",
-      "sha256": "0d467453400e992fc641ede62bb9b3309b86b89b67c3ba35c4df4905454ca07b",
-      "size_bytes": 8357
+      "sha256": "a24c553ee3ce012be9cde24ac21545d40c46b61ab18f672483e5f11d2fdc8816",
+      "size_bytes": 14004
     },
     {
       "path": "scripts/check_unsourced_names.py",

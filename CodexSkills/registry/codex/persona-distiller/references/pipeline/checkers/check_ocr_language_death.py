@@ -197,16 +197,38 @@ def rate(text: str) -> tuple[float, str, int]:
 
 
 def scan(paths):
+    """→ 每份文件一行 `{path, rate, lang, words[, skipped|error]}`。
+
+    ★ 射程（要一起说，否则「扫了 N 份」这个数会骗人）：
+    - 目录只递归 `*.txt`；`.md` 语料本件看不见。
+    - **下划线开头的文件跳过**（`_ids.txt` 这类台账不是语料）——
+      跳过的仍然出现在结果里，标 `skipped`，**不许静默消失**。
+    - `rate` 为 `-1` = 词数不足不判，`-2` = 读不了。**两者都不是「干净」。**
+
+    ★★ 2026-08-12：读失败原先是 `except Exception: continue`——**整条记录消失**，
+      而 `main()` 只会说「扫了 N 份」，N 里根本没有它。
+      一批文件坏在编码上，屏幕会印「✓ 每一份都在下限之上」。
+      [[empty-default-swallows-unknown]]、[[a-gates-scan-set-is-smaller-than-reality]]。
+    """
     out = []
     for p in paths:
         p = pathlib.Path(p)
-        files = sorted(p.rglob("*.txt")) if p.is_dir() else [p]
+        try:
+            files = sorted(p.rglob("*.txt")) if p.is_dir() else [p]
+        except OSError as exc:
+            out.append({"path": str(p)[:120], "rate": -2.0, "lang": "-",
+                        "words": 0, "error": f"路径展不开：{exc}"})
+            continue
         for f in files:
             if f.name.startswith("_"):
+                out.append({"path": str(f), "rate": -1.0, "lang": "-",
+                            "words": 0, "skipped": "下划线开头（台账，不是语料）"})
                 continue
             try:
                 t = corpus_body(f.read_text(encoding="utf-8", errors="replace"))
-            except Exception:
+            except Exception as exc:                              # noqa: BLE001
+                out.append({"path": str(f), "rate": -2.0, "lang": "-",
+                            "words": 0, "error": str(exc)})
                 continue
             r, lang, n = rate(t)
             out.append({"path": str(f), "rate": r, "lang": lang, "words": n})
@@ -285,7 +307,88 @@ def self_test() -> int:
     print(f"  {'✓' if p4 else '✗'} 空文本 → 不判（不得当作已毁）")
     fail += not p4
 
-    print("\n  ✓ 负对照通过（7/7）" if not fail
+    # ══════════════════════════════════════════════════════════════
+    # ㉗ `scan()` 本体 —— 2026-08-12 之前它一次也没被自测进入过
+    # ══════════════════════════════════════════════════════════════
+    #
+    # 上面六条打的是 `rate()`（**一段文本的虚词占比**），那把尺子是从 227 份
+    # 真实语料的分布里读出来的，已经很硬。而 `scan()` 决定
+    # **哪些文件进得了那把尺子底下、进不去的怎么记**——它此前从没被自测走到。
+    print("\n══ ㉗ scan() 本体（tempdir 上跑真流程）══")
+    import tempfile as _tf
+    _DE = ("der die das und in von zu mit auf ist nicht ein eine dem den "
+           "für als auch es an werden aus er hat dass sie nach bei um noch " * 60)
+    _DEAD = ("bev bie bas unb tn oon 3u mtt auf ift nidjt em erne bem ben "
+             "fiir aid audj e3 an merben au3 ex fjat baft fie nadj bet urn nod) " * 60)
+
+    def _sc(files, arg="dir"):
+        d = pathlib.Path(_tf.mkdtemp())
+        for name, body in files.items():
+            f = d / name
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_text(body, encoding="utf-8")
+        return scan([str(d)] if arg == "dir" else [str(d / n) for n in files])
+
+    rows = _sc({"ok.txt": _DE})
+    ok = len(rows) == 1 and rows[0]["rate"] >= FLOOR
+    print(f"  {'✓' if ok else '✗'} ㉗a 干净德文 → 1 行、占比 {rows[0]['rate']:.3f} ≥ 下限 {FLOOR}")
+    fail += not ok
+
+    rows = _sc({"dead.txt": _DEAD})
+    ok = len(rows) == 1 and 0 <= rows[0]["rate"] < FLOOR
+    print(f"  {'✓' if ok else '✗'} ㉗b Fraktur 认错字母的德文 → 占比 {rows[0]['rate']:.3f} < 下限")
+    fail += not ok
+
+    # ㉗c 射程：目录递归、多份都要走到；**`.md` 本件看不见**（写清，不是缺陷）
+    rows = _sc({"a.txt": _DE, "sub/b.txt": _DEAD, "c.md": _DEAD})
+    names = sorted(pathlib.Path(r["path"]).name for r in rows)
+    ok = names == ["a.txt", "b.txt"]
+    print(f"  {'✓' if ok else '✗'} ㉗c 射程：递归到子目录、**只认 .txt**（{names}）")
+    fail += not ok
+
+    # ㉗d 下划线开头的台账要**标出来**，不是静默消失
+    rows = _sc({"_ids.txt": _DE, "a.txt": _DE})
+    sk = [r for r in rows if r.get("skipped")]
+    ok = len(rows) == 2 and len(sk) == 1 and "_ids.txt" in sk[0]["path"]
+    print(f"  {'✓' if ok else '✗'} ㉗d 下划线开头 → 出现在结果里并标 `skipped`（不是消失）")
+    fail += not ok
+
+    # ㉗e ★★ **读不了的文件不许静默消失**（2026-08-12 修的真缺陷）。
+    #    改前是 `except Exception: continue`——那一行整条记录就没了，
+    #    而屏幕会印「扫了 N 份 … ✓ 每一份都在下限之上」，N 里根本没有它。
+    #    ★ 制造读失败要挑**不会被 `is_dir()` 岔走**的形态：
+    #      第一版我用同名目录，`is_dir()` 为真 → 走 rglob 分支 → **零行**，
+    #      断言当场变红（正是它该做的）。断裂符号链接才落在读文件那条路上。
+    _d = pathlib.Path(_tf.mkdtemp())
+    (_d / "a.txt").write_text(_DE, encoding="utf-8")
+    (_d / "b.txt").symlink_to(_d / "nowhere.txt")   # 断链：is_dir/is_file 均假 → 走读文件
+    rows = scan([str(_d / "a.txt"), str(_d / "b.txt")])
+    br = [r for r in rows if r.get("error")]
+    ok = len(rows) == 2 and len(br) == 1 and br[0]["rate"] == -2.0
+    print(f"  {'✓' if ok else '✗'} ㉗e **读不了 → 带 error 进结果、rate=-2**（不是静默丢掉）")
+    fail += not ok
+
+    # ㉗f 词数不足 → rate=-1（不判），**与「读不了」的 -2 分得开**
+    rows = _sc({"tiny.txt": "der die das und in"})
+    ok = len(rows) == 1 and rows[0]["rate"] == -1.0 and not rows[0].get("error")
+    print(f"  {'✓' if ok else '✗'} ㉗f 词数不足 → rate=-1（不判），与 -2「读不了」分得开")
+    fail += not ok
+
+    # ㉗g `corpus_body` 必须承力：**出处表头是干净散文，会把烂 OCR 托过下限。**
+    #    这不是假设——本件在 Coffin 上实测过：不剥表头「每一份都在下限之上」，
+    #    剥掉之后报出 **2 份虚词占比 0.101（下限 0.15）**。
+    #    ★ 2026-08-12：拆掉 `corpus_body` 重跑，上面 ㉗a–㉗f **一条都不红**
+    #      ——因为我的夹具全都没有表头。[[counter-example-red-can-be-red-by-coincidence]]
+    #      第三种形态：**分支没被数据走到，「没红」什么也没证明。** 故补这一条。
+    _HDR = "SOURCE: der die das und in von zu mit auf ist nicht ein eine dem den " * 30 \
+           + "\n" + "=" * 24 + "\n"
+    rows = _sc({"h.txt": _HDR + _DEAD})
+    ok = len(rows) == 1 and 0 <= rows[0]["rate"] < FLOOR
+    print(f"  {'✓' if ok else '✗'} ㉗g **干净的出处表头不许把烂 OCR 托过下限**"
+          f"（剥表头后 {rows[0]['rate']:.3f} < {FLOOR}；不剥会被托到 0.4 以上）")
+    fail += not ok
+
+    print("\n  ✓ 负对照通过" if not fail
           else f"\n  ✗ {fail} 项未过——本检查器已失效，其「通过」不构成证据")
     return fail
 
@@ -306,13 +409,22 @@ def main() -> int:
 
     rows = scan(a.paths)
     judged = [r for r in rows if r["rate"] >= 0]
+    broken = [r for r in rows if r.get("error")]
+    skipped = [r for r in rows if r.get("skipped")]
+    short = len(rows) - len(judged) - len(broken) - len(skipped)
+    # ★ 读不了的必须自己占一行——它不是「词数不足」，更不是「干净」。
+    if broken:
+        print(f"⚠ **{len(broken)} 份读不了**（不是通过，是没查）：")
+        for r in broken[:8]:
+            print(f"     {r['path']}　{r['error'][:70]}")
     if not judged:
         print(f"没有词数 ≥{MIN_WORDS} 的文件——**本次未检查（不是通过）**")
-        return 0
+        return 3 if broken else 0
 
     dead = sorted((r for r in judged if r["rate"] < a.floor), key=lambda r: r["rate"])
     print(f"扫了 {len(rows)} 份，其中可判 {len(judged)} 份"
-          f"（词数 <{MIN_WORDS} 的 {len(rows) - len(judged)} 份不判）")
+          f"（词数 <{MIN_WORDS} 的 {short} 份不判"
+          f"｜跳过 {len(skipped)} 份（下划线开头）｜**读不了 {len(broken)} 份**）")
     print(f"虚词占比下限 {a.floor}"
           f"（**从 227 份真实语料的分布里读出来的**：0.117–0.239 之间一份都没有）\n")
 

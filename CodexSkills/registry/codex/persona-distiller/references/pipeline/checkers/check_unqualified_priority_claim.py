@@ -94,22 +94,43 @@ def scan_text(unit_id: str, text: str, acc):
 
 
 def scan(paths):
-    acc = {"claims": 0, "qualified": 0, "bad": []}
+    """→ `{claims, qualified, bad, units, badjson, unread}`。
+
+    ★ 射程（不写清，「0 处」就会骗人）：
+    - `.jsonl` **按行**拆成单元；其余按整份文件扫。
+    - jsonl 里**只取顶层的字符串字段**，且跳过 `id`/`case_id`——
+      **嵌套 dict/list 里的正文本件看不见**。
+    - `units` 是真正被送进 `scan_text` 的单元数。
+      **「claims=0」与「一个单元都没扫到」在旧版报告里长得一样**，故单列。
+
+    ★★ 2026-08-12：坏 JSON 行原先是 `except ValueError: continue`——**整行消失**，
+      而屏幕只会说「首创声明 0 处」。同理读不了的文件原先直接抛异常崩掉。
+      两者现在都记数并报出来（[[empty-default-swallows-unknown]]）。
+    """
+    acc = {"claims": 0, "qualified": 0, "bad": [],
+           "units": 0, "badjson": 0, "unread": []}
     for p in paths:
+        try:
+            raw = p.read_text(encoding="utf-8", errors="replace")
+        except OSError as exc:
+            acc["unread"].append((str(p), str(exc)))
+            continue
         if p.suffix == ".jsonl":
-            for i, line in enumerate(p.read_text(encoding="utf-8",
-                                                 errors="replace").splitlines(), 1):
+            for i, line in enumerate(raw.splitlines(), 1):
                 if not line.strip():
                     continue
                 try:
                     r = json.loads(line)
                 except ValueError:
+                    acc["badjson"] += 1          # ← 不许静默消失
                     continue
                 blob = " ".join(str(v) for k, v in r.items()
                                 if isinstance(v, str) and k not in ("id", "case_id"))
+                acc["units"] += 1
                 scan_text(f"{p.name}:{i}", blob, acc)
         else:
-            scan_text(p.name, p.read_text(encoding="utf-8", errors="replace"), acc)
+            acc["units"] += 1
+            scan_text(p.name, raw, acc)
     return acc
 
 
@@ -165,6 +186,73 @@ def selftest() -> int:
     a = run("我量过三次，两次成功。")
     chk("普通陈述 → 不报，且 claims=0", not a["bad"] and a["claims"] == 0)
 
+    # ══════════════════════════════════════════════════════════════
+    # ㉘ `scan()` 本体 —— 2026-08-12 之前它一次也没被自测进入过
+    # ══════════════════════════════════════════════════════════════
+    #
+    # 上面各条打的是 `scan_text()`（**一段话算不算无限定首创声明**），
+    # 而 `scan()` 决定**哪些文本进得了那把尺子底下**：`.jsonl` 怎么拆、
+    # 哪些字段被拼进 blob、坏行与读不了的怎么记。
+    print("\n── ㉘ scan() 本体（tempdir 上跑真流程）──")
+    import tempfile as _tf
+    _BAD = "电弧焊是我发明的。"                       # 无限定 → 应报
+    # ★ 夹具**先单独喂给 `scan_text` 确认它落在射程里**才写的断言：
+    #   第一版写的是「电弧焊我 1881 年做成，同期还有别人在做。」——
+    #   `CLAIM` **根本不认它**（claims=0），于是 ㉘b 断言 claims==2 当场变红。
+    #   [[counter-example-red-can-be-red-by-coincidence]]：夹具不在射程里，绿也好红也好都不作数。
+    _OK = "电弧焊是我 1881 年发明的，同期还有别人在做。"   # 认得出 + 带年份让渡 → 放行
+
+    def _files(d: dict):
+        t = pathlib.Path(_tf.mkdtemp())
+        out = []
+        for name, body in d.items():
+            f = t / name
+            f.write_text(body, encoding="utf-8")
+            out.append(f)
+        return out, t
+
+    ps, _ = _files({"a.md": _BAD})
+    a = scan(ps)
+    chk(f"㉘a 单份 .md → units=1、报 1 处（units={a['units']} bad={len(a['bad'])}）",
+        a["units"] == 1 and len(a["bad"]) == 1)
+
+    ps, _ = _files({"c.jsonl": json.dumps({"claim": _BAD}, ensure_ascii=False) + "\n"
+                              + json.dumps({"claim": _OK}, ensure_ascii=False) + "\n"})
+    a = scan(ps)
+    chk(f"㉘b `.jsonl` **按行拆**成 2 个单元，只报无限定那行"
+        f"（units={a['units']} claims={a['claims']} bad={len(a['bad'])}）",
+        a["units"] == 2 and a["claims"] == 2 and len(a["bad"]) == 1)
+
+    # ㉘c ★ 坏 JSON 行不许静默消失（改前是 `except ValueError: continue`）
+    ps, _ = _files({"c.jsonl": "{not json\n"
+                               + json.dumps({"claim": _BAD}, ensure_ascii=False) + "\n"})
+    a = scan(ps)
+    chk(f"㉘c 坏 JSON 行 → 记进 `badjson`（{a['badjson']}），**不是静默丢掉**",
+        a["badjson"] == 1 and a["units"] == 1 and len(a["bad"]) == 1)
+
+    # ㉘d ★ 读不了的文件不许把整次扫描崩掉，也不许静默消失
+    _t = pathlib.Path(_tf.mkdtemp())
+    (_t / "ok.md").write_text(_BAD, encoding="utf-8")
+    (_t / "gone.md").symlink_to(_t / "nowhere.md")     # 断链
+    a = scan([_t / "ok.md", _t / "gone.md"])
+    chk(f"㉘d 读不了的文件 → 进 `unread`（{len(a['unread'])} 份），其余照扫"
+        f"（units={a['units']}）",
+        len(a["unread"]) == 1 and a["units"] == 1 and len(a["bad"]) == 1)
+
+    # ㉘e ★★ 射程声明：jsonl 里**嵌套 dict/list 中的正文本件看不见**。
+    #    这不是缺陷、是射程——写成断言才不会被下一个人当成「查过了」。
+    ps, _ = _files({"c.jsonl": json.dumps({"nested": {"claim": _BAD}},
+                                          ensure_ascii=False) + "\n"})
+    a = scan(ps)
+    chk("㉘e 射程：**嵌套字段里的首创声明扫不到**（顶层字符串字段之外看不见）",
+        a["units"] == 1 and a["claims"] == 0)
+
+    # ㉘f 射程：`id`/`case_id` 被排除——题号里带的字样不该被当成正文
+    ps, _ = _files({"c.jsonl": json.dumps({"case_id": _BAD, "claim": "我量过三次。"},
+                                          ensure_ascii=False) + "\n"})
+    a = scan(ps)
+    chk("㉘f 射程：`case_id` 不进 blob（题号不是正文）", a["claims"] == 0)
+
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
 
@@ -182,6 +270,16 @@ def main() -> int:
         print("✗ **一个文件都没读到——本次未检查（不是通过）**")
         return 3
     acc = scan(paths)
+    print(f"已扫 **{acc['units']}** 个单元"
+          f"（{len(paths)} 份文件；`.jsonl` 按行拆）")
+    if acc["badjson"] or acc["unread"]:
+        print(f"⚠ **{acc['badjson']} 行 JSON 解析不了、{len(acc['unread'])} 份文件读不了"
+              f"——那些没被查，不是没问题**")
+        for pth, err in acc["unread"][:5]:
+            print(f"     {pth}　{err[:70]}")
+    if not acc["units"]:
+        print("✗ **一个单元都没扫到——本次未检查（不是通过）**")
+        return 3
     print(f"第一人称首创声明 **{acc['claims']}** 处，其中带限定 **{acc['qualified']}** 处\n")
     if not acc["bad"]:
         print("  ✓ 没有无限定的首创声明")
