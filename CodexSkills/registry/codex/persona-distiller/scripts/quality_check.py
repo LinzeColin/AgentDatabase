@@ -96,14 +96,186 @@ class Report:
 
 
 def non_placeholder(path: Path) -> bool:
+    """这份研究道稿有没有**实质内容**。
+
+    ## ★★★ v0.0.0.154 修：**机械导出的分道表把 Pending 稀释掉了**
+
+    2026-08-11 Kelsen #171 实测：`03-expression.md` **全文只有
+    `emit_lane_scope.py` 导出的 5 行表格 + 5 行「Pending.」**，
+    而本函数判它 `True`，`research_lanes_complete` 因此报 3 道全完成——
+    **跑一个工具、一个字不写，研究阶段的完成门就过了。**
+
+    原因是表格行被算进 `meaningful`：5 个 Pending < max(2, 10 // 2) = 5？
+    实际 meaningful 约 13 行（表头＋分隔＋5 行数据＋★ 说明＋5 行 Pending），
+    门槛被抬到 6，于是 5 < 6 通过。**分母是自动生成的，分子是没写的。**
+
+    → 修法：`meaningful` **不算 markdown 表格行**，也不算那句机械导出的说明。
+      判的是「人写了多少」，不是「工具生成了多少」。
+      同族：[[gates-cover-json-not-the-prose-users-read]]、装饰性引用能过质检门。
+    """
     if not path.exists():
         return False
     text = path.read_text(encoding='utf-8').strip()
     if len(text) < 500:
         return False
-    meaningful = [line for line in text.splitlines() if line.strip() and not line.lstrip().startswith('#')]
+    meaningful = [line for line in text.splitlines()
+                  if line.strip()
+                  and not line.lstrip().startswith('#')
+                  # ★ 表格行与机械导出的说明**不算人写的内容**
+                  and not line.lstrip().startswith('|')
+                  and 'emit_lane_scope' not in line]
     placeholder_lines = [line for line in meaningful if re.search(r'\bPending\b|待补充|待研究|placeholder', line, re.I)]
     return len(meaningful) >= 5 and len(placeholder_lines) < max(2, len(meaningful) // 2)
+
+
+# ★ 反例夹具**逐字取自** Kelsen #171 的 `03-expression.md`（就是那份骗过旧判据的稿），
+#   不是我照着症状编的简化版——[[fixtures-cleaner-than-the-real-thing]]：
+#   夹具比原文干净就等于没测（同一天已栽过五次）。
+_FIXTURE_MECHANICAL_ONLY = """# Expression DNA and micro-behavior
+
+## Scope and assigned sources
+
+**本道分到 5 份（train split）**：
+
+| source_id | 出版年 | tier | 题名 |
+|---|---|---|---|
+| `src-ccb348b4687c` | 1914 | P1 | Eine Grundlegung der Rechtssoziologie |
+| `src-c78fac5e78b4` | 1916 | P1 | Die Rechtswissenschaft als Norm- oder als Kulturwissenschaft |
+| `src-bfbcf301361b` | 1918 | P1 | Politische Weltanschauung und Erziehung |
+| `src-f7ad7280693a` | 1922 | P1 | Staat und Recht |
+| `src-31c509a0e332` | 1926 | P1 | Les rapports de système entre le droit interne et le droit international public |
+
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
+
+## Source-linked observations
+
+Pending.
+
+## Candidate Claims
+
+Pending.
+
+## Contradictions and alternative explanations
+
+Pending.
+
+## Unknowns and source gaps
+
+Pending.
+
+## Proposed Holdout cases
+
+IDs only; research Agents must not inspect Holdout bodies.
+
+## Handoff to adjudication
+
+Pending.
+"""
+
+# ★ 正例同样取自真文件（Kelsen `01-writings.md` 的开头＋两段实质散文），
+#   **保留了同样的机械导出表格**——正例必须证明「有表格」本身不是判 False 的理由。
+_FIXTURE_WRITTEN = """# Writings and systematic works
+
+## Scope and assigned sources
+
+**本道分到 4 份（train split）**：
+
+| source_id | 出版年 | tier | 题名 |
+|---|---|---|---|
+| `src-0fc9f0c6b3e0` | 1920 | P1 | Sozialismus und Staat |
+| `src-5be5faaef4d3` | 1920 | P1 | Vom Wesen und Wert der Demokratie |
+
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
+
+## Source-linked observations
+
+### 1. 两件 1920 年的「书」其实是期刊抽印本——题名页自己写着
+
+题名页紧接一行标出它是抽印本，并给出与原刊的页码对照表。
+→ 这两件在编目里像专著，在题名页上是期刊抽印本。
+下游谈「他写了几部书」时必须带这个口径，否则会把两篇长文数成两部专著。
+
+### 2. 他开篇的动作：先指出一个词已经失去确定含义
+
+正文第一段先描述局面，随即把这一点翻成问题：这个口号越是通行，越是失去确定的意义。
+→ 他不是先立定义，而是先证明现有的用法已经不成其为定义。
+
+## Candidate Claims
+
+- K1（work-method）：立论前先证明现有用法已失去确定含义，再重建定义。
+- K3（fact）：1920 年那两件在题名页上是期刊抽印本，不是独立专著。
+
+## Contradictions and alternative explanations
+
+- 「先拆词再定义」可能是德语法学论文的通用体例，不是他个人特征；本工作区分不开。
+
+## Unknowns and source gaps
+
+- 1911 年那部大书本机四条通道都取不到，本道的时间下沿因此停在 1920。
+
+## Handoff to adjudication
+
+K1 交跨道合流求第二簇；K3 是事实陈述，单道成立。
+"""
+
+
+def self_test() -> int:
+    """`non_placeholder` 的正反自测。
+
+    ★ 立此自测的直接原因：v0.0.0.154 之前，**跑一个 `emit_lane_scope.py`、
+      一个字不写，`research_lanes_complete` 就报这道完成**。
+      机械导出的表格把分母撑大，把 Pending 稀释到门槛之下。
+    """
+    import tempfile
+    failures: list[str] = []
+
+    def check(label: str, body: str, expect: bool) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / 'lane.md'
+            path.write_text(body, encoding='utf-8')
+            got = non_placeholder(path)
+        if got != expect:
+            failures.append(f'{label}：期望 {expect}，实得 {got}')
+
+    # ① 反例（**这条是本次修补的靶子**）：只有机械导出的表格 + Pending → 未完成
+    check('① 机械导出+全 Pending', _FIXTURE_MECHANICAL_ONLY, False)
+
+    # ② 正例：同样带机械导出的表格，但有人写的散文 → 完成
+    #    ★ 没有这条，就可以用「凡含表格一律 False」这种坏修法把 ① 蒙对。
+    check('② 有表格也有散文', _FIXTURE_WRITTEN, True)
+
+    # ③ ★ 过校正守卫：实质写完、只在「未知」一节留 1 处 Pending → 仍算完成。
+    #    研究稿本来就该诚实标出缺口，标了缺口不等于没写。
+    check('③ 写完但留 1 处 Pending', _FIXTURE_WRITTEN + '\n## 补记\n\nPending.\n', True)
+
+    # ④ 长度门仍在：太短一律未完成（表格再多也不行）
+    check('④ 不足 500 字符', '# T\n\n| a | b |\n|---|---|\n| 1 | 2 |\n\n实质一句。\n', False)
+
+    # ⑤ ★ 反向：把表格行全删掉，反例应当**仍是** False——
+    #    证明 ① 的红不是靠「行数变少」凑出来的（[[counter-example-red-can-be-red-by-coincidence]]）。
+    _no_table = '\n'.join(l for l in _FIXTURE_MECHANICAL_ONLY.splitlines()
+                          if not l.lstrip().startswith('|'))
+    check('⑤ 反例去掉表格后仍未完成', _no_table + '\n' + 'x' * 500, False)
+
+    # ⑥ ★ 这条**专为覆盖 `emit_lane_scope` 那一行过滤**而设：
+    #    先只加 ①–⑤ 时，把该过滤删掉自测仍然全绿——**一条没人测的过滤**
+    #    （[[a-checker-nothing-calls-is-not-a-checker]]）。
+    #    它只在边界上是决定性的：门槛 `max(2, N//2)` 随 N 的奇偶跳一格，
+    #    多算这一行机械说明会把 N 从 7 抬到 8、门槛从 3 抬到 4，
+    #    于是「7 行里 3 行还是 Pending」的稿子被判成完成。
+    _borderline = (_FIXTURE_MECHANICAL_ONLY
+                   .replace('## Source-linked observations\n\nPending.',
+                            '## Source-linked observations\n\n'
+                            '他在两处都先指出对方用的那个词已经失去确定含义，再另起定义。', 1)
+                   .replace('## Candidate Claims\n\nPending.',
+                            '## Candidate Claims\n\n'
+                            '- K1（work-method）：立论前先证明现有用法已失去确定含义。', 1))
+    check('⑥ 边界 7 行 3 处 Pending 仍未完成', _borderline, False)
+
+    for line in failures:
+        print(f'✗ {line}', file=sys.stderr)
+    print(f'non_placeholder 自测：{6 - len(failures)}/6 通过', file=sys.stderr)
+    return 1 if failures else 0
 
 
 def evaluate_sources(report: Report, target: Path, thresholds: dict[str, Any], allow_provisional: bool) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -4012,6 +4184,10 @@ def run_attribution_basis(report, target: Path, meta: dict[str, Any],
 
 
 def main() -> int:
+    # ★ 在 argparse 之前拦掉：`target` 是必填位置参数，走 argparse 就要求先给一个工作区，
+    #   而自测本来就该能在**没有任何工作区**的机器上跑。
+    if '--self-test' in sys.argv[1:]:
+        return self_test()
     parser = argparse.ArgumentParser(description='Evidence-aware quality gate for Persona Distiller targets.')
     parser.add_argument('target', type=Path)
     parser.add_argument('--phase', choices=['research', 'synthesis', 'release'], default='release')
