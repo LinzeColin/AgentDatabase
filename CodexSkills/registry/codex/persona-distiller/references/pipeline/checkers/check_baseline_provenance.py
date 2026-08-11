@@ -118,6 +118,26 @@ def _rows(*sources):
 
 def self_test() -> int:
     fails = []
+
+    # ★★★ 2026-08-11 变异实测补的：**`invalid:` 这个标记从没被断言过**。
+    #   把 `if src not in ALL: src = f"invalid:{src}"` 删掉，**自测一条都没红**——
+    #   因为它不影响 `usable`／`capability_evidence`（不认识的来源本来就不在 USABLE 里），
+    #   **它只影响人读 `by_source` 时能不能看出「这个来源名我不认识」**。
+    #   拼错一个来源名、或换了个新来源忘了登记，全靠这个标记暴露。
+    _s = summarize([
+        {"system": "baseline", "baseline_source": "bare-model-run"},
+        {"system": "baseline", "baseline_source": "typo-source-xyz"},
+        {"system": "candidate", "baseline_source": "ignored"},
+    ])
+    if not any(k.startswith("invalid:") for k in _s["by_source"]):
+        fails.append("**不认识的 baseline_source 没有被标成 `invalid:`**——"
+                     "拼错来源名就看不出来了")
+    if "invalid:bare-model-run" in _s["by_source"]:
+        fails.append("**认识的来源被误标成 invalid**")
+    if _s["baseline_rows"] != 2:
+        fails.append("baseline 行数应为 2（candidate 那行不该算）")
+    print("  %s `invalid:` 标记：%s" % (
+        "✓" if not fails else "✗", _s["by_source"]))
     with tempfile.TemporaryDirectory() as td:
         tmp = pathlib.Path(td)
 
