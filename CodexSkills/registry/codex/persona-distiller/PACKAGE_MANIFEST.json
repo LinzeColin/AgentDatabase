@@ -701,8 +701,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_namesake_separability.py",
-      "sha256": "c7286186d7f73a8c1972f05923d4c955fddb2ffc08c77dea28f2c6b648e6d5b5",
-      "size_bytes": 19879
+      "sha256": "def8d17130fbe371350ca889c6bdad554bfff841671facbaf8034ef61d468987",
+      "size_bytes": 20755
     },
     {
       "path": "references/pipeline/checkers/check_negative_space_leak.py",
@@ -1486,8 +1486,8 @@
     },
     {
       "path": "scripts/check_namesake_separability.py",
-      "sha256": "c7286186d7f73a8c1972f05923d4c955fddb2ffc08c77dea28f2c6b648e6d5b5",
-      "size_bytes": 19879
+      "sha256": "def8d17130fbe371350ca889c6bdad554bfff841671facbaf8034ef61d468987",
+      "size_bytes": 20755
     },
     {
       "path": "scripts/check_negative_space_leak.py",

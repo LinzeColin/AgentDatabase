@@ -188,14 +188,18 @@ def evaluate(target_dir: pathlib.Path, target_name: str, mod) -> dict:
     crit, missing, unpolicied = criteria_gap(target_dir, diff, same)
     # ★ 三档各自的条数要现算——**第一版把三档合报成「都靠 excluded_names」，
     #   同一个工具、同一类错误我犯了第二次**（[[gates-cover-json-not-the-prose-users-read]]）。
-    _unex, _pol = set(), ""
+    _unex, _pol, _crit_unread = set(), "", None
     if crit:
         try:
             _o = json.loads(pathlib.Path(crit).read_text(encoding="utf-8"))
             _unex = {_norm(x) for x in (_o.get("unexcludable_names") or [])}
             _pol = str(_o.get("identical_name_policy") or "").strip()
-        except Exception:
-            pass
+        except Exception as _exc:                                # noqa: BLE001
+            # ★★ 2026-08-12：这里原来是 `pass`。后果不是判决变了（判决来自
+            #   `criteria_gap`），而是**分档计数悄悄塌回上面那条注释批评过的「三档合报」**：
+            #   `_unex` 空 ⇒ `n_unex` 归 0 ⇒ 那几条被并进「靠 excluded_names」。
+            #   **同一类错误在同一个函数里，我第三次犯**——这次让它出声。
+            _crit_unread = f"{type(_exc).__name__}"
     n_unex = sum(1 for n in diff if _norm(n) in _unex and _pol)
     n_excl = len(diff) - n_unex - len(missing)
     bad = bool(missing) or bool(unpolicied)
@@ -205,7 +209,11 @@ def evaluate(target_dir: pathlib.Path, target_name: str, mod) -> dict:
             "靠 excluded_names": n_excl, "靠 unexcludable_names＋政策": n_unex,
             "分不开的是": confused, "未覆盖": missing,
             "字面同名未定政策": unpolicied,
-            "criteria": str(crit) if crit else None, "出处": str(src)}
+            "criteria": str(crit) if crit else None, "出处": str(src),
+            **({"★★ 分档未确认": f"**{pathlib.Path(crit).name} 读不出来（{_crit_unread}）**"
+                                 "——「靠 excluded_names / 靠 unexcludable_names＋政策」"
+                                 "这两个数**本轮不可信**（判决本身不受影响）"}
+               if _crit_unread else {})}
 
 
 def _fixture(tmp: pathlib.Path, name, cands, excluded=None):
