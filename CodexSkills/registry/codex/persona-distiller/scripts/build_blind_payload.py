@@ -133,7 +133,24 @@ def assign(cases: dict, cand: dict, base: dict, balanced: bool = False) -> tuple
     """
     flips = _balanced_flips(sorted(cases)) if balanced else None
     payload, key = [], {}
-    for i, cid in enumerate(sorted(cases), 1):
+    # ★★★★ 2026-08-11：**发题的顺序原先是按 case_id 字母序，那本身就是套组线索。**
+    #
+    #   原写 `enumerate(sorted(cases), 1)`，于是每个人物、每一轮都恒有：
+    #       q-01 = anonymous-fidelity｜q-02 = boundary｜…｜q-16 = voice
+    #   评委只要知道那 16 个套组名（它们是标准的、每个人物都一样），
+    #   **就能从位次反推出这一题在测什么**。
+    #
+    #   ★ 抓到它的是 Grotius #168 第 2 轮的席 K，它在观察报告里写：
+    #     「派发说题号是 8 位十六进制，载荷里实际是 q-01…q-16 顺序编号，
+    #       且同类题相邻——**顺序本身携带信息**」。
+    #   本件的文件头一直写着「发给评委的一律是 q-01…，套组归属只留在 key 里」——
+    #   **那句话只对了一半：编号不带信息了，顺序还带着。**
+    #
+    #   改成按 cid 的哈希排：仍然确定、可复现，但**与套组名的字母序不相关**。
+    #   ★ A/B 翻转仍由 `sha256(cid) % 2` 驱动，**不受本次改动影响**——
+    #     「各轮之间 A/B 必须逐条一致」那条不变量保住了。
+    order = sorted(cases, key=lambda c: hashlib.sha256(("order|" + c).encode()).hexdigest())
+    for i, cid in enumerate(order, 1):
         if cid not in cand or cid not in base:
             raise SystemExit(f"✗ **缺答案：{cid}**——不是「这题跳过」，是载荷不完整")
         flip = flips[cid] if flips is not None else \
@@ -244,6 +261,39 @@ def selftest() -> int:
         LEAK_CHECKER.is_file() and LOC_CHECKER.is_file()
         and (HERE / "check_answer_holdout_leak.py").is_file()
         and (HERE / "check_answer_numbers_in_corpus.py").is_file())
+
+    print("\n── ★★ 发题顺序不许携带套组信息（2026-08-11，席 K 抓到）──")
+    SUITES = ["known", "boundary", "voice", "trajectory", "contrast", "fact-preservation",
+              "style-decoy", "task-completion", "planning-fidelity", "tool-use",
+              "capability-calibration", "refusal-stop", "long-horizon", "identity-routing",
+              "anonymous-fidelity", "token-efficiency"]
+    _cases = {f"hg-{s}-01": f"题面：{s}" for s in SUITES}
+    _cand = {k: "候选文" for k in _cases}
+    _base = {k: "基线文" for k in _cases}
+    _pay, _key = assign(_cases, _cand, _base)
+
+    seq = [_key[f"q-{i:02d}"]["case_id"] for i in range(1, 17)]
+    alpha = sorted(_cases)
+    chk("发题顺序**不等于** case_id 字母序（字母序＝套组名顺序，恒定可反推）",
+        seq != alpha)
+
+    # ★ 反对照①：仍须确定可复现——同样的输入两次必须给出同样的顺序
+    _pay2, _key2 = assign(_cases, _cand, _base)
+    chk("**反对照**：同输入两次 → 顺序完全相同（确定、可复现）",
+        [_key2[f"q-{i:02d}"]["case_id"] for i in range(1, 17)] == seq)
+
+    # ★ 反对照②：16 题一个不多一个不少，且 q-01…q-16 与 case_id 一一对应
+    chk("**反对照**：16 题齐、无重复、与 case_id 一一对应",
+        len(seq) == 16 and len(set(seq)) == 16 and set(seq) == set(_cases))
+
+    # ★ 反对照③：**A/B 翻转不受排序改动影响**——那条不变量是「各轮之间逐条一致」
+    import hashlib as _h
+    ok_flip = all(
+        _key[f"q-{i:02d}"]["A"] == ("candidate"
+                                    if int(_h.sha256(seq[i - 1].encode()).hexdigest(), 16) % 2 == 0
+                                    else "baseline")
+        for i in range(1, 17))
+    chk("**反对照**：A/B 翻转仍由 `sha256(cid)%2` 决定，排序改动没碰它", ok_flip)
 
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
