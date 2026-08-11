@@ -375,6 +375,11 @@
       "size_bytes": 124037
     },
     {
+      "path": "references/ledgers/_变异装置本身要先验-2026-08-12.md",
+      "sha256": "b4c81f8ec7d1a6f099dbb9b7181a22e8b3fb61d7ad52e2cc595e801855923782",
+      "size_bytes": 4423
+    },
+    {
       "path": "references/ledgers/_周报_2026-08-06.md",
       "sha256": "d3797f1d3f3120ffd776f2672ddc9300a2dc681f262654b5e69de67fdece0f79",
       "size_bytes": 9284
