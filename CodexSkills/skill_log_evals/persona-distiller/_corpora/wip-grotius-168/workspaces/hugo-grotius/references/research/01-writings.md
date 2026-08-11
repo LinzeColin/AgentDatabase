@@ -130,7 +130,30 @@
 ★ 本条只说**结构**：没有核对那 9+13 条是否真的两两一致，
 也没有判断哪一条被引对了。**「他这样论证」成立，「他论证得对」未查。**
 
-### ★ 本节没做什么
+### 五、★★ 另一部作品里**换了一套装置，方法是同一个**：先立通则，再逐条拆掉对方所有可能的名分
+
+`src-52fd74630d7b`（*Mare Liberum*，Magoffin 1916 拉英对照本）十三章的章题**本身就是论证提纲**：
+
+> `CHAPTER I By the Law of Nations navigation is free to all persons whatsoever`（@49015）
+
+> `CHAPTER II The Portuguese have no right by title of discovery to sovereignty over the East Ind`（@63057）
+
+> `CHAPTER VIII By the Law of Nations trade is free to all persons whatsoever`（@250541）
+
+> `CHAPTER XII The Portuguese prohibition of trade has no foundation in equity`（@276601）
+
+> `CHAPTER XIII The Dutch must maintain their right of trade with the East Indies by pe`（@288040）
+
+排布是：**I 立通则（航行自由）→ II–VII 逐条否掉对方能主张的每一种名分**
+（发现、教皇赠与、战争、时效、习惯……）**→ VIII 再立第二条通则（贸易自由）
+→ IX–XI 再逐条否掉 → XII 收到衡平 → XIII 落到结论。**
+
+★★ 与观察四对照：De Iure Praedae 用的是**编号公理**，这里用的是**穷举反证**——
+**装置不同，形状相同：先把判准摆在台面上，再让每一个反例逐一撞上去。**
+→ 这把 C-01 的射程从「一部作品」扩到了两部，**但要改写：
+他固定的不是「编号」，是「先立判准、再逐条销案」。**
+
+★ 本条同样只说结构。**没有读章内正文**，也没有核对每一章是否真的做到了它的标题。
 
 - 只读了本道 12 份里的 2 份（`src-19eca701ec61`、`src-8651f2b87336`）。
   其余 10 份**尚未读**，不是「读过没发现」。
@@ -143,14 +166,18 @@
 > 支撑不住的写进「Unknowns」，不写进这里。
 > 每条都标明**它是关于形态的还是关于主张的**——本轮全部是形态。
 
-### C-01（形态）他先把判断规则**编号立完**，再用「依第 N 条」把结论挂回去
+### C-01（形态）他**先把判准摆在台面上，再让每一个反例逐条撞上去**
 
-- **依据**：观察 一（Lex I…Lex XII 逐条陈述）＋ 观察 四（目录 `Regulae IX et Leges XIII`，
-  后文三处按编号回引，并标出 `regulae` 是 `leges` 的出处）。
-- **可检验的形状**：给他一个新案子，他应当**先问它落在哪一条**，
-  而不是先给结论再补理由；他应当能说出**依据的编号与层级**。
-- **射程**：只在 `src-19eca701ec61` 一份上核过。
-  DJBP（1625）是否沿用同一套编号**未查**——那是另一部作品。
+- **依据**：
+  - `src-19eca701ec61`：观察 一（Lex I…Lex XII 逐条陈述）＋ 观察 四
+    （目录 `Regulae IX et Leges XIII`，后文三处按编号回引，并标出 `regulae` 是 `leges` 的出处）。
+  - `src-52fd74630d7b`：观察 五（十三章＝立通则 → 逐条销案 → 再立通则 → 再销案 → 收束）。
+- **★ 本条第一版写的是「他把规则**编号**立完」——被观察五改写了**：
+  Mare Liberum 里没有编号，用的是穷举反证。**固定的不是装置，是次序**：
+  判准先行、反例后撞。编号只是他在 De Iure Praedae 用的那一种实现。
+- **可检验的形状**：给他一个新案子，他应当**先问判准是什么**，
+  再逐一处理对方能提出的每一种名分——而不是先给结论再补理由。
+- **射程**：两部作品、两种装置。**DJBP（1625）未查**。
 
 ### C-02（形态）他给每条规则配一个**读者已经承认的权威**，位置固定在陈述之后
 
