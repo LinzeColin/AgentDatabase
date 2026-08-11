@@ -79,5 +79,28 @@
   "subject_origin": "historical",
   "target_id": "tgt-01d686c39663",
   "time_scope": "all available periods, separated by role and material drift",
-  "updated_at": "2026-08-11T11:33:35Z"
+  "updated_at": "2026-08-11T11:33:35Z",
+  "attribution_basis": {
+    "citation": "逐件的题名页／封面署名照录存在台账 `attribution` 字段；抓源方另留 `raw/<src>/SOURCE.json`（含 IA 的 title/creator/publisher/date 原字段与下载时的 sha256）。",
+    "authority": "GND 118561219 ／ LCCN n50045680 ／ Wikidata Q84165 三库互证生卒 1881-10-11 – 1973-04-19；抓源方本轮直查 DNB SRU 逐字取回 GND 记录。★ 已知分歧：LCCN 的 deathDate 实为 1973-04-20（2 对 2，不是 3 对 1），两说指同一人。",
+    "covered_sources": "12 件逐件说明靠什么证明是他写的：① 10 件的题名页年份可从正文取得，署名与题名页一致；② 2 件题名页无年，退回 K10plus／DNB 编目值（Dante 1905、Recueil 1926）；③ **`rechtswissenschaft-norm-oder-kultur-1916` 的署名被 OCR 打碎**——全文 `Kelsen` 出现 0 次、`Kelfen` 出现 15 次（长 s ſ→f，讹形比 36.0%）。**这件的归属不靠文中署名，靠编目**（K10plus 记 Kelsen, Hans 著，Schmollers Jahrbuch 40 卷）；★ 它同时被本工作区标为 `不可做逐字引文`，研究道不得从它取任何逐字串。④ `bundesverfassung-1922` 是三人合编，**不单独归他**（见 counting_convention）。",
+    "counting_convention": "**不算作他一人所著的**：`die-bundesverfassung-1920-coedited-1922`（Kelsen＋Froehlich＋Merkl 三人合编的法条汇编，tier 记 P2、道记 decisions、标 co-edited，任何一段都不单独归他）。★ 抓源方发现一条与此前提相抵触的一手证据：该卷 Kelsen 署名的 Vorrede 写 `ich allein …die Verantwortung übernehme`，且 Froehlich/Merkl 在书里的身份是 `Mitarbeiter`。**本轮不据此改判**——该卷讹形比 99.8%，那两段照录本身就不能当逐字引文用；要不要单独切出 Vorrede 留待后续。**不作声口证据的**：`les-rapports-de-systeme-1926`（法语，未见译者署名也未见本人以法文撰写的声明）——可作事实来源。**四件禁引**（1907／1916／1922／1928）仍入台账以撑材料面，但**一句逐字都不许引**。",
+    "disputed_works": [
+      {
+        "work": "Die Bundesverfassung vom 1. Oktober 1920（＝Die Verfassungsgesetze der Republik Österreich, T. 5，1922）",
+        "src": "src-98577cc73747 对应件",
+        "争点": "三人合编（Kelsen＋Froehlich＋Merkl）。**而该卷 Kelsen 署名的 Vorrede 写 `ich allein …die Verantwortung übernehme`，且 Froehlich／Merkl 在书里的身份是 `Mitarbeiter`（协作者）而非对等合编者**——一手证据与「三人合编」这个前提相抵触。",
+        "本轮处置": "**仍按合编处理**：tier P2、道 decisions、标 co-edited，任何一段都不单独归他。理由是该卷讹形比 99.8%，上述两段本身就不能当逐字引文用，据它改判等于用不可引的文字去改归属。",
+        "重开条件": "取得该卷排体干净的另一版次（或该 Vorrede 的独立印本），能做逐字引文之后再议是否把 Vorrede 单独切出。"
+      },
+      {
+        "work": "Die Rechtswissenschaft als Norm- oder als Kulturwissenschaft（1916）",
+        "src": "src-c78fac5e78b4 对应件",
+        "争点": "**文中查无署名证据**——全文 `Kelsen` 出现 0 次、`Kelfen` 出现 15 次（长 s ſ→f，讹形比 36.0%）。归属门因此报 unproven。",
+        "本轮处置": "归属**不靠文中署名，靠编目**（K10plus 记 Kelsen, Hans 著，载 Schmollers Jahrbuch 40 卷）；同时标 `不可做逐字引文`，研究道不得从它取任何逐字串。",
+        "重开条件": "取得该篇排体干净的扫描件，或另一处独立印本。"
+      }
+    ],
+    "disputed_policy": "**三条，按本项目记档的教训写死：**\n① **争议件不删，入台账并逐件写明争点与处置**——删掉等于把问题藏进「没有」里。\n② **不据不可引的文字改归属**：讹形比 >20% 的件，其正文照录不能当逐字引文用，因此也不能拿它去推翻或确立归属（1922 那卷的 Vorrede 正是这一条的适用对象）。\n③ **归属靠编目时必须点名是哪一条编目记录**，不许只写「编目支持」；并且该件同时标 `不可做逐字引文`，**下游不得从它取逐字串**。\n★ 与 `counting_convention` 的分工：那一栏说「哪些不计入他一人所著」，本栏说「有争议的怎么办」。"
+  }
 }
