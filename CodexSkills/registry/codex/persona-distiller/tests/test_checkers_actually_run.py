@@ -64,7 +64,14 @@ class CheckersActuallyRunTests(unittest.TestCase):
     def test_the_whole_sweep_is_cheap_enough_to_keep_running(self) -> None:
         """**这条是给上一条兜底的**：扫一遍要是变慢到几分钟，下一个人就会把它注释掉。
 
-        实测 10.3 秒。给 90 秒的闸——不是性能指标，是「别让它悄悄退化成没人跑」。
+        实测 **30.3 秒 / 90 件**（2026-08-12 现算）。90 秒的闸——不是性能指标，
+        是「别让它悄悄退化成没人跑」。
+
+        ★ 这一天里它就涨了三倍（10.3 → 30.3 秒），涨在两件上，**都是有意的**：
+          · `check_selftest_reach` 10.0 秒——它要起 89 个子进程各跑一遍自测
+          · `check_contract_drift` 15.2 秒——它现在会转调上面那件
+          写下来是因为**下一个看到 30 秒的人应该知道钱花在哪**，
+          而不是先怀疑哪里退化了。
         """
         checkers = sorted(ROOT.glob('scripts/check_*.py'))
         start = time.time()

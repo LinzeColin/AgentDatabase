@@ -160,6 +160,31 @@ def _one_ledger_per_workspace(root: pathlib.Path,
     return out
 
 
+def _selftest_reach(root: pathlib.Path) -> list[str]:
+    """**判据的自测有没有走到它自己的判定函数**（`check_selftest_reach.py`）。
+
+    接在这里的理由：必读与 HANDOFF 都写着「**改完判据跑那道漂移门就够**」，
+    而本条正是「改完判据」之后最该问的一句。同门的另外两条（一区两账本、自报数字）
+    也都是这个性质——这道门实际上已经是「**改完判据之后的那一道**」。
+
+    ★ 成本：全扫 89 件约 10 秒（本门原本 5.3 秒）。量过才接的，不是拍脑袋。
+    """
+    mod = root / "scripts" / "check_selftest_reach.py"
+    if not mod.is_file():
+        return []
+    import subprocess
+    r = subprocess.run([sys.executable, str(mod)], capture_output=True, text=True,
+                       cwd=str(root))
+    if r.returncode == 0:
+        return []
+    if "新出现" not in (r.stdout or ""):
+        return [f"[自测射程] check_selftest_reach 跑不起来（rc={r.returncode}）："
+                f"{(r.stderr or r.stdout)[:160]}"]
+    lines = [l.strip() for l in (r.stdout or "").splitlines() if "从没被自测进入" in l]
+    return ["[自测射程] **新出现「验了配料、没验判决」的自测**：" + "；".join(lines)
+            + " —— **跑 `scripts/check_selftest_reach.py` 看全表**"]
+
+
 def _verification_counts(root: pathlib.Path) -> list[str]:
     """**VERIFICATION.md 里能机械数出来的量，必须与实况相等。**
 
@@ -363,6 +388,7 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
 
     problems.extend(_one_ledger_per_workspace(root))
     problems.extend(_verification_counts(root))
+    problems.extend(_selftest_reach(root))
 
     # ★★ v0.0.0.94 新增第四条比对：**CHANGELOG 的最高条目必须等于 VERSION**。
     #   实测背景：2026-08-04 一天写了 v0.0.0.84–94 十一条 CHANGELOG，
