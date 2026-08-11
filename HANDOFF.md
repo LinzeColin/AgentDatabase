@@ -38,7 +38,7 @@
   ```bash
   python3 -c "import json;print(len(json.load(open('CodexSkills/registry/codex/persona-distiller-group/team-index.json'))['products']))"
   ```
-- **延后／拒发名单：139 条**（2026-08-11 实测），其中 **75 条**带 `pd_scope_pending`（等待裁定 ㉜）。
+- **延后／拒发名单：140 条**（2026-08-11 实测），其中 **75 条**带 `pd_scope_pending`（等待裁定 ㉜）。
   ★ **列表的键是 `deferred`，不是 `items`/`entries`**——写 `d.get("items") or []` 会**静默返回 0**，
   我 2026-08-11 差一点把这个 0 写进本节。**取不到就让它炸，别给空默认**：
   ```bash
@@ -89,9 +89,44 @@
     判据已改成**报「未核 N 处」而不冒充「查过了」**（不动两道门槛——动它是全库一起变）。
     ★ **全库回扫**：338 条短串、37 条对不上，逐条读后只有 **16 条**是疑似逐字串、
     分布在 8 个人，**一半是同名者的名字形**。这 16 条**未改**，归入既有技术债。
-  - **下一步**：两侧答案子代理已派发（`evals/round1/`，协议与预登记见
-    `evals/round1/第1轮-协议记录.md`，**判分之前写的**）→ 泄题门 →
-    `build_blind_payload` → 两席评委（**都不喂 rubric**）→ `package_target` → `register_persona`。
+  - ★★★★ **两轮判完，记拒发**（延后名单 seq 168）：
+
+        | 轮 | 席一 | 席二 | 诚实 delta | 按判分前写死的规则怎么读 |
+        | 1 | H -0.0137 | J -0.0144 | **-0.0141** | <2SE(0.0328) → 测不出差别 |
+        | 2 | K -0.0675 | L -0.0306 | **-0.0491** | >2SE 且 ≤-0.03 → **明确劣于基线** |
+
+    与 Bessemer #132／Thomson #129／Sorby #133 同类。**第 3 轮额度未用。**
+  - ★★ **两轮不能当同质的两次测量**：摆动 0.0350 超 2 SE，
+    而两轮之间产物改过、长度带改过（140–280→140–210）、候选侧加两条禁令、候选侧跑了三次。
+  - ★★★ **候选侧作废重跑两次，两次都是我自己泄的题**（两次都靠答题方 `__incident__` 上报抓到，
+    三道门全绿且都没报错）：
+    ① `hypotheses.md`／`01-writings.md` 写「分到的十二份里没有一份是护教／神学体裁」，
+       而 holdout 正是护教之作；「十二份」这个数出自我当天写的 `emit_lane_scope.py`。
+    ② **修完之后我加的那段「为什么改」的注解里直接写了「holdout 恰好就是一部护教之作」**——
+       比原句更直接。**教训已成规矩：改动理由不写在答题方读得到的文件里，写进 `evals/`。**
+  - 修好泄题后 `known` 从 +0.0600 掉到 **-0.2700**——**那个正分很可能是泄题喂出来的**。
+
+## 2026-08-11 晚：**三件新判据 / 工具**（都配了正反自测与变异实测）
+
+- `check_negative_space_leak.py` —— **按体裁描述缺口 = 说出 holdout 是什么**。
+  全库回扫：8 个人 13 处；**抓到一处比 Grotius 更直接的**——
+  Osler `05-decisions.md:24` 写着「1896 年那篇 Thomas Dover 传记随笔故意留作 holdout」，
+  篇目年份体裁一次说全。**B 类 4 处、A 类 9 处（逐条对过 holdout，A 类 0 处泄题）。**
+- `build_blind_payload` **发题顺序不再按字母序**——
+  原先 `enumerate(sorted(cases),1)` 让 `q-01` 恒等于 anonymous-fidelity、`q-16` 恒等于 voice，
+  **顺序本身在泄套组**。**这是评委（席 K）在观察报告里指出来的。**
+  已改成按 `sha256("order|"+cid)` 排；A/B 翻转仍由 cid 哈希驱动，不变量未动。
+- `check_claim_source_independence` **接上 `derived_from`**——
+  台账早就声明 Koch 那两份是同一部书（`Gesammelte Werke` 两次馆藏扫描），
+  判据却只看内容重叠。**跨语种同源的内容重叠恒为 0，只有声明抓得到。**
+  全库塌缩 18 条，**89% 靠声明判出**；当场在 Grotius 身上抓到 1 条并补了真独立的第二处证据。
+- `make_blind_prompts.py` / `emit_corpus_pointer.py` —— 两件新共享件，
+  分别做「不透明题面 + 反映射」与「语料指针清单」，
+  **都用已完成人物的既有产物做过逐字节正对照**。
+
+  - **下一步**：NEXT = **William Blackstone**（1723–1780，政治法律师；`next_person.py` 输出）。
+    同名门已跑，报 `UNVERIFIED_NAMESAKE_NO_CANDIDATES`——**那不是「没有同名风险」，是「没核」**，
+    候选检索已派子代理。
   ★ 开工须知全在 `_corpora/wip-grotius-168/00-同名判定.md`，
   探测在 `_corpora/_探测记录/168-grotius-可得性探测.md`。
   **最要紧的一条：不要用 Campbell 1901 译本量声口**——它只有 Kelsey 1925 的 36% 长、
