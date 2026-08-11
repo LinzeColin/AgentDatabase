@@ -3,7 +3,10 @@
 # 用法：bash publish_jl.sh
 set -euo pipefail
 SP="$(cd "$(dirname "$0")" && pwd)"
-SK=/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller
+# ★★ 2026-08-12：这里原本写死
+#   SK=/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/...
+#   **那个 worktree 已经不存在**，脚本直接跑必失败。改成从本文件位置往上推。
+SK="$(cd "$SP/../../../../registry/codex/persona-distiller" && pwd)"
 G="$SK/../persona-distiller-group"
 T="$SP/jesse-livermore"
 
