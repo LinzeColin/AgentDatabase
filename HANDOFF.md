@@ -7,12 +7,15 @@
 
 ## ★★★★★ 接手第一件事要知道：**判据会报一条错，那不是缺陷**
 
-移交树**不含语料**（`_corpora/*/raw/` 被剔掉，7388 个文件）。
+移交树**不含语料**（`_corpora/*/raw/` 被剔掉，**7395 个文件**（现算））。
 2026-08-12 在临时目录里按接手方视角实跑过整条链：
 
     ✓ HANDOFF.md 在｜✓ `_每次开工必读.md` 在
-    ✓ `next_person.py` 跑得起来 → NEXT = Louis Brandeis
-      queue_total 237｜done 40｜pending 51｜deferred 141
+    ✓ `next_person.py` 跑得起来 → NEXT = **John Marshall**（1755–1835，政治法律师）
+      queue_total 237｜done 40｜pending **50**｜deferred 141
+      ★ NEXT 会随在办的人变：Brandeis #172 的工作区已建，`next_person.py`
+        把「已做但未出货」的六个人排除在 NEXT 之外（Adams/Martens/
+        Roberts-Austen/Cicero/Kelsen/Brandeis）——**那是设计，不是异常**。
     ✓ `quality_check --phase research` 跑得起来，**exit=1**，
       唯一的错是 **`research.ledger-file-missing`**，完成道仍读得出 3 道
 
