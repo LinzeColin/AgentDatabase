@@ -1,0 +1,703 @@
+{
+ "schema": "corpus-bundle/1",
+ "note": "只读打包，源树未改动",
+ "parts": [
+  {
+   "wip": "_next",
+   "files": 7,
+   "raw_bytes": 34667,
+   "tar_bytes": 15232,
+   "split": false,
+   "artifacts": [
+    "_next.tar.gz"
+   ],
+   "sha256": {
+    "_next.tar.gz": "89f3eb620ad22fe0be6816a40d514202a74855a8c9851e6c2002aa6642627a1e"
+   }
+  },
+  {
+   "wip": "_探测记录",
+   "files": 6,
+   "raw_bytes": 121317,
+   "tar_bytes": 54181,
+   "split": false,
+   "artifacts": [
+    "_探测记录.tar.gz"
+   ],
+   "sha256": {
+    "_探测记录.tar.gz": "587e22f37208f4ffca8b5cd8ed6195aec154edb5535abe8afa675ab83c4f545f"
+   }
+  },
+  {
+   "wip": "probe-adams-131",
+   "files": 28,
+   "raw_bytes": 44620682,
+   "tar_bytes": 17069874,
+   "split": false,
+   "artifacts": [
+    "probe-adams-131.tar.gz"
+   ],
+   "sha256": {
+    "probe-adams-131.tar.gz": "fd8b0d69e114c271b88ccd105e8489d72292db41bb2d55aa92ea666abfd57e55"
+   }
+  },
+  {
+   "wip": "wip-adams-131",
+   "files": 366,
+   "raw_bytes": 3108205,
+   "tar_bytes": 934346,
+   "split": false,
+   "artifacts": [
+    "wip-adams-131.tar.gz"
+   ],
+   "sha256": {
+    "wip-adams-131.tar.gz": "af6a9e7565a5295e9ffc6423d02cc235b84765f58b5c6c9717a40cca5442d674"
+   }
+  },
+  {
+   "wip": "wip-bain-136",
+   "files": 6,
+   "raw_bytes": 34252,
+   "tar_bytes": 11725,
+   "split": false,
+   "artifacts": [
+    "wip-bain-136.tar.gz"
+   ],
+   "sha256": {
+    "wip-bain-136.tar.gz": "8496ade3235de0df8f9b231c58285d85f89d1ee3f6f2023c42f66bca06cfe7b3"
+   }
+  },
+  {
+   "wip": "wip-barton-117",
+   "files": 751,
+   "raw_bytes": 186784153,
+   "tar_bytes": 67393176,
+   "split": false,
+   "artifacts": [
+    "wip-barton-117.tar.gz"
+   ],
+   "sha256": {
+    "wip-barton-117.tar.gz": "76da8a61b7b2871c9291b98331880384e34a654fe91c38a8d82f7c505e0c6a91"
+   }
+  },
+  {
+   "wip": "wip-benardos-128",
+   "files": 99,
+   "raw_bytes": 312403,
+   "tar_bytes": 112934,
+   "split": false,
+   "artifacts": [
+    "wip-benardos-128.tar.gz"
+   ],
+   "sha256": {
+    "wip-benardos-128.tar.gz": "d780acf22c57aebb14e8cabd87562686456261679d1b69c5bf9bbadd1cddfaeb"
+   }
+  },
+  {
+   "wip": "wip-bessemer-132",
+   "files": 281,
+   "raw_bytes": 5959724,
+   "tar_bytes": 2113486,
+   "split": false,
+   "artifacts": [
+    "wip-bessemer-132.tar.gz"
+   ],
+   "sha256": {
+    "wip-bessemer-132.tar.gz": "b26f2ce09d0837afe9254763380424fc395216e647e87918b197a5a4b7d89413"
+   }
+  },
+  {
+   "wip": "wip-blackwell-118",
+   "files": 386,
+   "raw_bytes": 31007457,
+   "tar_bytes": 10640390,
+   "split": false,
+   "artifacts": [
+    "wip-blackwell-118.tar.gz"
+   ],
+   "sha256": {
+    "wip-blackwell-118.tar.gz": "e3ba87d95c868f7d543c58b412ac74a17cfa1d5408c7815b0d8b593bcce72f20"
+   }
+  },
+  {
+   "wip": "wip-callister-141",
+   "files": 1,
+   "raw_bytes": 3027,
+   "tar_bytes": 2016,
+   "split": false,
+   "artifacts": [
+    "wip-callister-141.tar.gz"
+   ],
+   "sha256": {
+    "wip-callister-141.tar.gz": "0ff1f16af1d3424471ee05e723055b7282833eea4b388252b7b1868ad4c895c6"
+   }
+  },
+  {
+   "wip": "wip-carver-127",
+   "files": 226,
+   "raw_bytes": 4777304,
+   "tar_bytes": 1626599,
+   "split": false,
+   "artifacts": [
+    "wip-carver-127.tar.gz"
+   ],
+   "sha256": {
+    "wip-carver-127.tar.gz": "dc2981b45c92fbe54ded49e6a3e211b7c0badbfdb1568861a69d50eb744d1375"
+   }
+  },
+  {
+   "wip": "wip-cicero-166",
+   "files": 135,
+   "raw_bytes": 25229397,
+   "tar_bytes": 8987894,
+   "split": false,
+   "artifacts": [
+    "wip-cicero-166.tar.gz"
+   ],
+   "sha256": {
+    "wip-cicero-166.tar.gz": "c9e0b5a3a2e62fb2ddde75ea610129d1f6e423e93a41b0d64a99a7e171da780a"
+   }
+  },
+  {
+   "wip": "wip-coffin-130",
+   "files": 144,
+   "raw_bytes": 862450,
+   "tar_bytes": 255850,
+   "split": false,
+   "artifacts": [
+    "wip-coffin-130.tar.gz"
+   ],
+   "sha256": {
+    "wip-coffin-130.tar.gz": "07789c9c0dcd6a81c9ea935962b9472bf96566e66a9ba3690650fb753376dc36"
+   }
+  },
+  {
+   "wip": "wip-cohen-140",
+   "files": 1,
+   "raw_bytes": 3078,
+   "tar_bytes": 2222,
+   "split": false,
+   "artifacts": [
+    "wip-cohen-140.tar.gz"
+   ],
+   "sha256": {
+    "wip-cohen-140.tar.gz": "56f55ee7de1f0debc4b45f341bfe12cbf126a47436f1c6df0b307c6b1c2a0e35"
+   }
+  },
+  {
+   "wip": "wip-debakey-119",
+   "files": 2,
+   "raw_bytes": 6024,
+   "tar_bytes": 3582,
+   "split": false,
+   "artifacts": [
+    "wip-debakey-119.tar.gz"
+   ],
+   "sha256": {
+    "wip-debakey-119.tar.gz": "6573c051adc291e14b5d3fa742eced70babf8c094f2725ea7cf5fb4d06347c34"
+   }
+  },
+  {
+   "wip": "wip-duwez-139",
+   "files": 1,
+   "raw_bytes": 4268,
+   "tar_bytes": 2806,
+   "split": false,
+   "artifacts": [
+    "wip-duwez-139.tar.gz"
+   ],
+   "sha256": {
+    "wip-duwez-139.tar.gz": "85a783febe5a389b24b8e54c0ffe6a8b0b9b1ec9c143280c38b8f38ce97ae1fe"
+   }
+  },
+  {
+   "wip": "wip-eiffel-142",
+   "files": 14,
+   "raw_bytes": 3451862,
+   "tar_bytes": 1226420,
+   "split": false,
+   "artifacts": [
+    "wip-eiffel-142.tar.gz"
+   ],
+   "sha256": {
+    "wip-eiffel-142.tar.gz": "4ed41e035559859d4388d4a2e6bc646cc93b81b484a363dd22d34ecee9df422a"
+   }
+  },
+  {
+   "wip": "wip-fleming-111",
+   "files": 322,
+   "raw_bytes": 8001074,
+   "tar_bytes": 2813890,
+   "split": false,
+   "artifacts": [
+    "wip-fleming-111.tar.gz"
+   ],
+   "sha256": {
+    "wip-fleming-111.tar.gz": "33904a6d7cb32bc2bd498d3f140e232fe1bd90055d7c26bcc50b13e74b419277"
+   }
+  },
+  {
+   "wip": "wip-galen-101",
+   "files": 270,
+   "raw_bytes": 73138375,
+   "tar_bytes": 27748458,
+   "split": false,
+   "artifacts": [
+    "wip-galen-101.tar.gz"
+   ],
+   "sha256": {
+    "wip-galen-101.tar.gz": "3171203087eb8f73b0c541ea0ee0fe69d376fbebb7eda12c2ca7b47358fdb4ec"
+   }
+  },
+  {
+   "wip": "wip-gantt-156",
+   "files": 159,
+   "raw_bytes": 3476724,
+   "tar_bytes": 1219809,
+   "split": false,
+   "artifacts": [
+    "wip-gantt-156.tar.gz"
+   ],
+   "sha256": {
+    "wip-gantt-156.tar.gz": "0f5c9e4a342e1bc02e5b19736f6777b6f52c24b6d3d415edf2584a7bfc70db0c"
+   }
+  },
+  {
+   "wip": "wip-godin",
+   "files": 673,
+   "raw_bytes": 1300836,
+   "tar_bytes": 524835,
+   "split": false,
+   "artifacts": [
+    "wip-godin.tar.gz"
+   ],
+   "sha256": {
+    "wip-godin.tar.gz": "cd3e8b391572addc531ff7852429852599c0321f5d8a3406fa1ff1379542e97a"
+   }
+  },
+  {
+   "wip": "wip-grotius-168",
+   "files": 157,
+   "raw_bytes": 65845159,
+   "tar_bytes": 27658729,
+   "split": false,
+   "artifacts": [
+    "wip-grotius-168.tar.gz"
+   ],
+   "sha256": {
+    "wip-grotius-168.tar.gz": "0d533457a4f385315239c595c56be84cb54b6cde6f6388ccd689369fcb262288"
+   }
+  },
+  {
+   "wip": "wip-harvey-103",
+   "files": 170,
+   "raw_bytes": 66622939,
+   "tar_bytes": 26755196,
+   "split": false,
+   "artifacts": [
+    "wip-harvey-103.tar.gz"
+   ],
+   "sha256": {
+    "wip-harvey-103.tar.gz": "46328d58bcdd8d93a43e2f5e3dc8ec41eb01c1db840a1be8d483a05b47c1ecec"
+   }
+  },
+  {
+   "wip": "wip-henderson-113",
+   "files": 4,
+   "raw_bytes": 231257,
+   "tar_bytes": 82031,
+   "split": false,
+   "artifacts": [
+    "wip-henderson-113.tar.gz"
+   ],
+   "sha256": {
+    "wip-henderson-113.tar.gz": "6cc28035b85fe8053c6870c9b17706d0c8ee5d96d2ae7cb4e7db7515f0985767"
+   }
+  },
+  {
+   "wip": "wip-jenner-104",
+   "files": 262,
+   "raw_bytes": 36306307,
+   "tar_bytes": 12896672,
+   "split": false,
+   "artifacts": [
+    "wip-jenner-104.tar.gz"
+   ],
+   "sha256": {
+    "wip-jenner-104.tar.gz": "f1af1ec81d8301d725a7f9f0be8b324638eb2d2eee75b40f50cc16e1d4cc1d15"
+   }
+  },
+  {
+   "wip": "wip-koch-107",
+   "files": 470,
+   "raw_bytes": 653151872,
+   "tar_bytes": 241009226,
+   "split": true,
+   "artifacts": [
+    "wip-koch-107.tar.gz.part-aa",
+    "wip-koch-107.tar.gz.part-ab",
+    "wip-koch-107.tar.gz.part-ac"
+   ],
+   "sha256": {
+    "wip-koch-107.tar.gz.part-aa": "ca00f0048a47adc644fc1ec4fa6818d6952535418b831c15e556eef52fe24b65",
+    "wip-koch-107.tar.gz.part-ab": "af33290c6b5d224f741c3851d79b8fda24570c5a08e1f9bc199a8d1d6950509c",
+    "wip-koch-107.tar.gz.part-ac": "1f79655317d66db802c30e7d96fe1144e9fffeef6f70709d693fb5b4c9b0c27f"
+   }
+  },
+  {
+   "wip": "wip-liebig-124",
+   "files": 203,
+   "raw_bytes": 69489446,
+   "tar_bytes": 24374366,
+   "split": false,
+   "artifacts": [
+    "wip-liebig-124.tar.gz"
+   ],
+   "sha256": {
+    "wip-liebig-124.tar.gz": "49e5090a6bf6d5b8ffa2aa640b0c2c93f118797d9530b5dcd6999eb24a72abd4"
+   }
+  },
+  {
+   "wip": "wip-lister-108",
+   "files": 291,
+   "raw_bytes": 78351763,
+   "tar_bytes": 26865130,
+   "split": false,
+   "artifacts": [
+    "wip-lister-108.tar.gz"
+   ],
+   "sha256": {
+    "wip-lister-108.tar.gz": "5a9c487271a6c4ddb0f654841763c727b2792ac7f4b9341166ff627766d936ae"
+   }
+  },
+  {
+   "wip": "wip-livermore-100",
+   "files": 56,
+   "raw_bytes": 1413912,
+   "tar_bytes": 361805,
+   "split": false,
+   "artifacts": [
+    "wip-livermore-100.tar.gz"
+   ],
+   "sha256": {
+    "wip-livermore-100.tar.gz": "e312d33d818dc8452f6e28f784a0caa4c386f64085f4d17414d336d2e01e6cab"
+   }
+  },
+  {
+   "wip": "wip-martens-134",
+   "files": 170,
+   "raw_bytes": 24349591,
+   "tar_bytes": 8706660,
+   "split": false,
+   "artifacts": [
+    "wip-martens-134.tar.gz"
+   ],
+   "sha256": {
+    "wip-martens-134.tar.gz": "8f11bacfbdbc651e9f8d6d4cb78b246fd44c63c82f074620ef6cbbbddaeffac7"
+   }
+  },
+  {
+   "wip": "wip-maudslay-151",
+   "files": 1,
+   "raw_bytes": 2977,
+   "tar_bytes": 2063,
+   "split": false,
+   "artifacts": [
+    "wip-maudslay-151.tar.gz"
+   ],
+   "sha256": {
+    "wip-maudslay-151.tar.gz": "cae7a7d0f1ba110a44d5c15b4b85acb7b956b57c35abb35c886d56a589d5912d"
+   }
+  },
+  {
+   "wip": "wip-mehl-137",
+   "files": 6,
+   "raw_bytes": 40272,
+   "tar_bytes": 13357,
+   "split": false,
+   "artifacts": [
+    "wip-mehl-137.tar.gz"
+   ],
+   "sha256": {
+    "wip-mehl-137.tar.gz": "f442a56ed20c0a03cb45f80619427def8890b3a7472745b2dd20e277d9f8608c"
+   }
+  },
+  {
+   "wip": "wip-mendel-125",
+   "files": 133,
+   "raw_bytes": 37344449,
+   "tar_bytes": 13834447,
+   "split": false,
+   "artifacts": [
+    "wip-mendel-125.tar.gz"
+   ],
+   "sha256": {
+    "wip-mendel-125.tar.gz": "c5cb6c845319dac6910cd4a6f0804e3397c788be66ba56c288ad8ed354ee0032"
+   }
+  },
+  {
+   "wip": "wip-nasmyth-153",
+   "files": 125,
+   "raw_bytes": 3341815,
+   "tar_bytes": 1226700,
+   "split": false,
+   "artifacts": [
+    "wip-nasmyth-153.tar.gz"
+   ],
+   "sha256": {
+    "wip-nasmyth-153.tar.gz": "f35f4a3ae73cc764521579fdf5d9c7fbb60f282cf3f1b1a98d868e59e591882f"
+   }
+  },
+  {
+   "wip": "wip-nightingale-112",
+   "files": 469,
+   "raw_bytes": 140113190,
+   "tar_bytes": 47366039,
+   "split": false,
+   "artifacts": [
+    "wip-nightingale-112.tar.gz"
+   ],
+   "sha256": {
+    "wip-nightingale-112.tar.gz": "5de2af2092fd3fff2d29b5fdf7ac24ebde62af76de25f76374854f6d88301d29"
+   }
+  },
+  {
+   "wip": "wip-osler-110",
+   "files": 422,
+   "raw_bytes": 290206685,
+   "tar_bytes": 98166576,
+   "split": false,
+   "artifacts": [
+    "wip-osler-110.tar.gz"
+   ],
+   "sha256": {
+    "wip-osler-110.tar.gz": "b7aea7afd2e27cb15f6f7c142c8998ecbd7829ca2593cd6c4dddc66d2dd32006"
+   }
+  },
+  {
+   "wip": "wip-pacioli-161",
+   "files": 94,
+   "raw_bytes": 13338800,
+   "tar_bytes": 5623658,
+   "split": false,
+   "artifacts": [
+    "wip-pacioli-161.tar.gz"
+   ],
+   "sha256": {
+    "wip-pacioli-161.tar.gz": "e1b7564a59ad1dcdc11b2fe9462cca289506b9df5c7272ae66532def5e0ca012"
+   }
+  },
+  {
+   "wip": "wip-pasteur-106",
+   "files": 283,
+   "raw_bytes": 115487943,
+   "tar_bytes": 37975641,
+   "split": false,
+   "artifacts": [
+    "wip-pasteur-106.tar.gz"
+   ],
+   "sha256": {
+    "wip-pasteur-106.tar.gz": "ccdd49dab82a90cb698a53eb0d7d816dafa43639487433ff2f9d9dba5bbc8689"
+   }
+  },
+  {
+   "wip": "wip-paton-162",
+   "files": 136,
+   "raw_bytes": 10866620,
+   "tar_bytes": 3239939,
+   "split": false,
+   "artifacts": [
+    "wip-paton-162.tar.gz"
+   ],
+   "sha256": {
+    "wip-paton-162.tar.gz": "9ba3a9c4dc669a755ac02ce63a8947b6e0c9404d6eb57ddea5493c19f9b8e5fd"
+   }
+  },
+  {
+   "wip": "wip-peplau-114",
+   "files": 6,
+   "raw_bytes": 220659,
+   "tar_bytes": 82376,
+   "split": false,
+   "artifacts": [
+    "wip-peplau-114.tar.gz"
+   ],
+   "sha256": {
+    "wip-peplau-114.tar.gz": "d19e5d59fc46ed7d1359b0dd9fc2a75122e17dca3d2d71f6951445dbccec4920"
+   }
+  },
+  {
+   "wip": "wip-roberts-austen-135",
+   "files": 190,
+   "raw_bytes": 23399801,
+   "tar_bytes": 8013352,
+   "split": false,
+   "artifacts": [
+    "wip-roberts-austen-135.tar.gz"
+   ],
+   "sha256": {
+    "wip-roberts-austen-135.tar.gz": "a0f5af4a59a37600934f5d893148c8ffaf01bcfe551f65029e05ede34db7be5d"
+   }
+  },
+  {
+   "wip": "wip-rosenhain-138",
+   "files": 153,
+   "raw_bytes": 6142563,
+   "tar_bytes": 2048584,
+   "split": false,
+   "artifacts": [
+    "wip-rosenhain-138.tar.gz"
+   ],
+   "sha256": {
+    "wip-rosenhain-138.tar.gz": "abebaee753397c31c32a283f089f0c6a9be74ab09e58e7e9e695f335a6ead4bb"
+   }
+  },
+  {
+   "wip": "wip-semmelweis-105",
+   "files": 259,
+   "raw_bytes": 169648471,
+   "tar_bytes": 59515959,
+   "split": false,
+   "artifacts": [
+    "wip-semmelweis-105.tar.gz"
+   ],
+   "sha256": {
+    "wip-semmelweis-105.tar.gz": "1b294728e2115a9261f2f297ed20649be87706e6b82721e3b50f17f10c6110ab"
+   }
+  },
+  {
+   "wip": "wip-shewhart-165",
+   "files": 114,
+   "raw_bytes": 1166577,
+   "tar_bytes": 414504,
+   "split": false,
+   "artifacts": [
+    "wip-shewhart-165.tar.gz"
+   ],
+   "sha256": {
+    "wip-shewhart-165.tar.gz": "c59b00536d70a25bb70362dcbbf4402a15b95b3471e0d253db3a97548090ea60"
+   }
+  },
+  {
+   "wip": "wip-slavyanov-115",
+   "files": 68,
+   "raw_bytes": 980769,
+   "tar_bytes": 315684,
+   "split": false,
+   "artifacts": [
+    "wip-slavyanov-115.tar.gz"
+   ],
+   "sha256": {
+    "wip-slavyanov-115.tar.gz": "af0dc94d5876c75bcfdc953a6e90d261ea94102543a40a6e91112a65663a14d1"
+   }
+  },
+  {
+   "wip": "wip-sorby-133",
+   "files": 273,
+   "raw_bytes": 15851076,
+   "tar_bytes": 5764390,
+   "split": false,
+   "artifacts": [
+    "wip-sorby-133.tar.gz"
+   ],
+   "sha256": {
+    "wip-sorby-133.tar.gz": "635d349a64edfe08c15bb1feefaa647a203698978ac47807246a924dfb1253d3"
+   }
+  },
+  {
+   "wip": "wip-steinhardt-98",
+   "files": 312,
+   "raw_bytes": 4494885,
+   "tar_bytes": 1595210,
+   "split": false,
+   "artifacts": [
+    "wip-steinhardt-98.tar.gz"
+   ],
+   "sha256": {
+    "wip-steinhardt-98.tar.gz": "0be47c82f039271eac7c0d231a21d8f75837de44fa4bc34932687cf20433e67b"
+   }
+  },
+  {
+   "wip": "wip-thomson-129",
+   "files": 307,
+   "raw_bytes": 4056363,
+   "tar_bytes": 1412294,
+   "split": false,
+   "artifacts": [
+    "wip-thomson-129.tar.gz"
+   ],
+   "sha256": {
+    "wip-thomson-129.tar.gz": "b549d608e81fce0b587e6eb706e45d7ac3d5b0766b77a4d5f48dfc1f8ee3a812"
+   }
+  },
+  {
+   "wip": "wip-timoshenko-150",
+   "files": 1,
+   "raw_bytes": 3029,
+   "tar_bytes": 2139,
+   "split": false,
+   "artifacts": [
+    "wip-timoshenko-150.tar.gz"
+   ],
+   "sha256": {
+    "wip-timoshenko-150.tar.gz": "f6264cc5aa43761bea0e1ca33acecc440e8882457d03278186d94ac9bb4a8c7f"
+   }
+  },
+  {
+   "wip": "wip-vesalius-102",
+   "files": 91,
+   "raw_bytes": 36506046,
+   "tar_bytes": 15030689,
+   "split": false,
+   "artifacts": [
+    "wip-vesalius-102.tar.gz"
+   ],
+   "sha256": {
+    "wip-vesalius-102.tar.gz": "f262eb572de49db98b4de9507fd58c9bee720157160795c78ea4dc65f93dc974"
+   }
+  },
+  {
+   "wip": "wip-virchow-109",
+   "files": 792,
+   "raw_bytes": 564587721,
+   "tar_bytes": 206124068,
+   "split": true,
+   "artifacts": [
+    "wip-virchow-109.tar.gz.part-aa",
+    "wip-virchow-109.tar.gz.part-ab",
+    "wip-virchow-109.tar.gz.part-ac"
+   ],
+   "sha256": {
+    "wip-virchow-109.tar.gz.part-aa": "d88e5f522ac352f2a8ad84977591dba289800ff0ae4e950d0eecd3c998249bd0",
+    "wip-virchow-109.tar.gz.part-ab": "611e84cd4325e41176253509d82c99bed42a0de3ec0bf45bd23193ad3493e3bc",
+    "wip-virchow-109.tar.gz.part-ac": "d0b13c27318fda8f3b67ea035f87912192b93b38a1cb5bfd2fdc11c6a36b9cc3"
+   }
+  },
+  {
+   "wip": "wip-watson-116",
+   "files": 12,
+   "raw_bytes": 207408,
+   "tar_bytes": 74606,
+   "split": false,
+   "artifacts": [
+    "wip-watson-116.tar.gz"
+   ],
+   "sha256": {
+    "wip-watson-116.tar.gz": "0d1e8d4556da741799561f4858338a01d1122e03db0be8a2900b3501a65fb859"
+   }
+  },
+  {
+   "wip": "wip-whitworth-152",
+   "files": 151,
+   "raw_bytes": 24059126,
+   "tar_bytes": 8463534,
+   "split": false,
+   "artifacts": [
+    "wip-whitworth-152.tar.gz"
+   ],
+   "sha256": {
+    "wip-whitworth-152.tar.gz": "7d0588a19f8c4374e88146e842be14d770fd430189adddae5e7972a538b62998"
+   }
+  }
+ ]
+}
