@@ -620,26 +620,57 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/check_disposition_e
 
 **不需要任何设置**：路径是本机已有的主树，`git pull` 之后 `HANDOFF.md` 就在仓根。
 
-### ★★★★ 它现在还不成立，缺的是这一步
-
-实测（2026-08-10）：
-
-| 检查 | 结果 |
-|---|---|
-| `~/Documents/Codex/GithubProject/AgentDatabase/HANDOFF.md` | **不存在** |
-| 主树分支 / 状态 | `main` / 干净 |
-| 主树 HEAD vs 本分支 | **落后 1027 个提交**（2026-08-11 当场跑；★ 每提交一次就变） |
-
-**HANDOFF.md 只在 `claude/character-distillation-skill-reorganize-d57595` 上。**
-移交那晚要做完的是：
+### ★★★★ 移交怎么做（**2026-08-11 已实测通过，旧做法已作废**）
 
 ```bash
-git push -u origin claude/character-distillation-skill-reorganize-d57595
-gh pr create --fill && gh pr merge --squash --delete-branch
-cd ~/Documents/Codex/GithubProject/AgentDatabase && git pull
+bash machine/handoff/build_handoff_commit.sh --branch handoff/2026-08-13
 ```
 
-做完之后，上面那句 prompt 才会在收件人的布局里跑通。
+脚本会**造一个以 `origin/main` 为父的提交**，树 = 当前 HEAD 树**减去语料**，
+并当场自验三件事，任一不过就退出 1 且不建分支：
+
+| 自验 | 实测值 |
+|---|---|
+| 新 blob 量（闸 200 MB） | **31 MB** |
+| **真把 pre-push 钩子跑一遍** | 放行 |
+| `_corpora` 内记录类 / 语料目录外 文件数与 HEAD **必须相等** | 3344/3344、8965/8965 |
+
+跑完之后由**人**按下这一步（脚本不推送）：
+
+```bash
+git push origin handoff/2026-08-13:main
+```
+
+**它是快进合并**——那个提交的父就是 `origin/main`。推完主树 `git pull` 即可，
+上面那句一句话 prompt 随即成立。
+
+### ★★★ 旧做法（`git push -u origin claude/…` + PR）**不要再用**
+
+    origin/main..HEAD：**1128 个提交、新 blob 2106.2 MB**，而闸是 200 MB —— 超 10.5 倍。
+    ★ **删文件不缩小推送量**（blob 在这 1128 个提交的历史里）；
+    ★ `git filter-repo` 在 `blob:none` 部分克隆上不可用；
+    ★ 孤儿分支也不行：没有共同祖先，git 会把整棵树 743.7 MB 全送。
+
+### ★★★★ 语料另存（用户已定：**仓里只放指针**）
+
+语料 2731.8 MB 不进 git。仓里留的是
+`CodexSkills/skill_log_evals/persona-distiller/_ledgers/_语料指针清单.json`
+（34 工作区 / 2071 行 / 853.9 MB；**74.3% 有 URL、4.9% 有档案条目号、
+18.7% 只有文字性坐标、2.1% 无坐标**——最后那两档换台机器重抓不回来，要另存 Release／私有仓）。
+
+### ★★★★ 推之前必须先装钩子（**本工作树默认没有**）
+
+```bash
+cp .githooks/pre-push.worktree .githooks/pre-push && chmod +x .githooks/pre-push
+```
+
+**实证**：`core.hooksPath = .githooks` 是相对路径，而 `.githooks/` 在版本库里 0 个文件被跟踪——
+它只是主树的一个本地未跟踪目录。**于是每个 worktree 的 pre-push 环节静默不跑**：
+本地裸仓实测，推 2 GB 真分支 → 退出码 0、守卫 0 次出声、**920 MB 真的落进去**。
+装上之后同一条推送 → 退出码 1、只落 76 KB。
+
+★ **不要整份拷主树那个 `.githooks/pre-push`**：它尾部 `exec ops/memory-atlas/canonical_gate.sh`，
+而该脚本同样是主树独有的未跟踪文件——实测**会把合法的小推送也堵死**。
 
 ### ★★ 这一推有多大（实测，2026-08-10）
 
