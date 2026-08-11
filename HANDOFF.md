@@ -68,6 +68,22 @@
 >      于是范围拼成非法串、rev-list 空输出，**又得到一个假的「0 MB 放行」**。
 >   ⇒ 三次都是同一个病：**没先确认自己量的是不是闸量的那个东西。**
 >
+> ### ★ 算术已经算清了：**甲是可行的，差额全在 `_corpora`**
+>
+> 把那 2167 MB 按路径拆开：
+>
+>     2013.6 MB  CodexSkills/skill_log_evals/persona-distiller/_corpora   ← **93%**
+>      115.2 MB  CodexSkills/registry/codex/persona-distiller
+>       31.8 MB  CodexSkills/skill_log_evals/persona-distiller/_ledgers
+>        4.3 MB  CodexSkills/registry/codex/persona-distiller-group
+>        1.4 MB  HANDOFF.md
+>
+> ⇒ **照现状推 2167 MB → 拒绝；去掉 `_corpora` 的新增 ≈ 153 MB → 过闸。**
+>
+> ★ 别被另一个数误导：**不含语料的完整树是 744 MB**，但那大半是
+>   `OpenAIDatabase/data/public_raw/codex`（415 MB）等**远端早已有**的东西。
+>   **闸只数新增**，所以要看的是 153 MB 那个数，不是 744 MB。
+>
 > ### 这一条只能由人定，选项与代价
 >
 > | | 做法 | 代价 |
