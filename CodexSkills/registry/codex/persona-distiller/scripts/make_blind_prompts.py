@@ -84,6 +84,35 @@ def build(cases: list, seed: str) -> tuple:
             {q: prompts[q] for q in sorted(prompts)})
 
 
+def unmap(answers: dict, key: dict) -> dict:
+    """把答题方交回来的 `{q-xxxxxxxx: 答案}` 换回 `{case_id: 答案}`。
+
+    ★ 2026-08-11：**这一步不做，`build_blind_payload` 会报「缺答案」**——
+    它按 `case_id` 找答案，而答题两侧拿到的是不透明号。
+    #152 的 `round1/` 里那两个 `byid_*.json` 就是这一步的产物，
+    同样是手搓的（#152/#153/#166 各一次）。
+
+    ★ `__incident__` 这类**双下划线元键原样保留**：候选方用它上报隔离事故，
+      丢掉它等于把事故报告吞了（[[empty-default-swallows-unknown]]）。
+    """
+    m = key["map"]
+    out, unknown = {}, []
+    for q, text in answers.items():
+        if q.startswith("__") and q.endswith("__"):
+            out[q] = text
+            continue
+        if q not in m:
+            unknown.append(q)
+            continue
+        out[m[q]] = text
+    if unknown:
+        raise SystemExit("答案里有 key 文件不认识的题号（**别静默丢掉**）：" + ", ".join(unknown))
+    missing = [c for c in m.values() if c not in out]
+    if missing:
+        raise SystemExit("这些 case_id 没有答案（**不是「跳过」，是不完整**）：" + ", ".join(missing))
+    return out
+
+
 def _dump(obj, path: pathlib.Path) -> None:
     path.write_text(json.dumps(obj, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
@@ -144,6 +173,32 @@ def self_test() -> int:
     note("发出去的顺序≠cases 原序（顺序不泄套组）", ok5)
     fail += not ok5
 
+    # ⑦ 反映射：`__incident__` 必须原样保留——丢掉它等于把事故报告吞了。
+    key7 = {"map": {"q-aaa": "hg-known-01", "q-bbb": "hg-voice-01"}}
+    got = unmap({"q-aaa": "A", "q-bbb": "B", "__incident__": "看见了 holdout 目录名"}, key7)
+    ok7 = got == {"hg-known-01": "A", "hg-voice-01": "B",
+                  "__incident__": "看见了 holdout 目录名"}
+    note("反映射换回 case_id，且 `__incident__` 原样保留", ok7)
+    fail += not ok7
+
+    # ⑦′ **反对照**：少一题必须炸，不许静默少一条就往下走。
+    try:
+        unmap({"q-aaa": "A"}, key7)
+        ok7b = False
+    except SystemExit:
+        ok7b = True
+    note("**反对照**：少一题 → 直接炸（不是静默跳过）", ok7b)
+    fail += not ok7b
+
+    # ⑦″ **反对照**：key 认不得的题号也必须炸。
+    try:
+        unmap({"q-aaa": "A", "q-bbb": "B", "q-zzz": "野的"}, key7)
+        ok7c = False
+    except SystemExit:
+        ok7c = True
+    note("**反对照**：key 不认识的题号 → 直接炸（不是丢掉）", ok7c)
+    fail += not ok7c
+
     print(f"\n  ✓ 自测通过（{n[0]}/{n[0]}）" if not fail
           else f"\n  ✗ {fail}/{n[0]} 项未过——本件的输出不作数")
     return fail
@@ -156,11 +211,27 @@ def main() -> int:
     ap.add_argument("--out-dir", type=pathlib.Path, help="落盘目录（本轮的 roundN）")
     ap.add_argument("--verify-against", type=pathlib.Path,
                     help="正对照：拿一个**已完成人物**的 roundN 目录比对，须逐字节重建")
+    ap.add_argument("--unmap", type=pathlib.Path,
+                    help="把答题方交回的 {q-xxxxxxxx: 答案} 换回 {case_id: 答案}")
+    ap.add_argument("--key", type=pathlib.Path, help="配 --unmap 用的 prompt_key.json")
+    ap.add_argument("--out", type=pathlib.Path, help="配 --unmap 用的输出路径")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
 
     if a.self_test:
         return 2 if self_test() else 0
+
+    if a.unmap:
+        if not a.key or not a.out:
+            ap.error("--unmap 须同时给 --key 与 --out")
+        ans = json.loads(a.unmap.read_text(encoding="utf-8"))
+        key = json.loads(a.key.read_text(encoding="utf-8"))
+        byid = unmap(ans, key)
+        _dump(byid, a.out)
+        meta = [k for k in byid if k.startswith("__")]
+        print(f"  ✓ {a.unmap.name} → {a.out}（{len(byid) - len(meta)} 题"
+              + (f"，另带元键 {', '.join(meta)}" if meta else "，无元键") + "）")
+        return 0
     if not a.cases or not a.seed:
         ap.error("须给 --cases 与 --seed（除非只跑 --self-test）")
 

@@ -69,9 +69,29 @@
   - ★★ 我为此登记过待裁定 **㊱，已当天撤回**（标作废不删，见 `_待用户裁定.md`）。
     错在：同一次输出里 `research.attribution-basis` 那两条就是答案，
     而我盯着 6 条属格把它当背景噪声跳过了。
-  - **下一步（不需要裁定）**：15 条 P1 源逐条挂 `attribution` 字段
-    （`ingest.py --attribution` 已有，依据在抓源 MANIFEST 的「凭什么判定作者」栏里现成）；
-    然后写研究道与断言层（剩下的 `source-unclaimed` 15 + `lane-completion` 1 就是这个）。
+  - ★★ **同日晚些时候的进展（这一段是最新状态）**：
+    语料 19 → **23 份**（21 train + 2 holdout）；研究道 01–04、断言层 16 条生效、
+    十份产物正文、16 道用例**都已写完**。
+    **研究门 0 错、合成门 0 错**；release 门只剩两条：
+    `eval.no-results`（还没判分，预期）与 `corpus.ocr-dead-as-primary`
+    （**留红并记账**，见 `_ledgers/_一手源与可逐字引用是两件事-2026-08-11.md`）。
+  - ★★★ **holdout 是整部 De Veritate 的两个语种版本**（拉丁 1640 + 英译 1809）。
+    **为什么整部封而不按重叠率封**：`check_holdout_overlap` 报 0.007%，
+    而**跨语种的内容重叠在结构上恒为 0**——判据对这种情形没有分辨力。
+  - ★★★★ **派发判分前逐条核题面，撞出一个判据缺陷**：
+    `check_quote_integrity.find()` 里写着 `if len(q) < MIN: return "exact"`——
+    **「太短，不作判据」和「已核实」共用一个返回值**。
+    加上 `Q` 抽取正则本身要求 ≥19 字，**短于 19 字的逐字串从头到尾没被看过一眼**。
+    实测 `facts.md`：10 条引文只有 5 条进了核验，而屏幕印「✓ 全部可在语料中找到」。
+    据此在本人物产物里查出并改掉**四串真编造**（`Guilielmus Grotius`、`Janus de Grotius`、
+    `Clarissimum Virum`、把 `Notae ad`／`Responsio ad` 当题名页体裁词），
+    以及一道用例题面里**我自己编的题名页**（`Delphensi` 语料 0 次）。
+    判据已改成**报「未核 N 处」而不冒充「查过了」**（不动两道门槛——动它是全库一起变）。
+    ★ **全库回扫**：338 条短串、37 条对不上，逐条读后只有 **16 条**是疑似逐字串、
+    分布在 8 个人，**一半是同名者的名字形**。这 16 条**未改**，归入既有技术债。
+  - **下一步**：两侧答案子代理已派发（`evals/round1/`，协议与预登记见
+    `evals/round1/第1轮-协议记录.md`，**判分之前写的**）→ 泄题门 →
+    `build_blind_payload` → 两席评委（**都不喂 rubric**）→ `package_target` → `register_persona`。
   ★ 开工须知全在 `_corpora/wip-grotius-168/00-同名判定.md`，
   探测在 `_corpora/_探测记录/168-grotius-可得性探测.md`。
   **最要紧的一条：不要用 Campbell 1901 译本量声口**——它只有 Kelsey 1925 的 36% 长、
