@@ -99,6 +99,37 @@
 （`cujus contrarium … inseverint`），并补上理由与见证。
 **让步是方法论的，不是主张。** 读这段时若只取前半句，会把他读成他明确否认的立场。
 
+### 四、★★★ 不只是编号——他**建了一套公理系统，然后按编号引用它推导**
+
+`src-19eca701ec61` 的卷首目录（@24971）把第二章的内容写死了：
+
+> `Prolegomena, in quibus Regulae IX et Leges XIII. CAPUT TER`
+
+即：**九条规则（Regulae IX）＋ 十三条法则（Leges XIII）**，全在第二章里立完。
+
+关键不在「他编了号」，而在**后文按编号回引**。三处：
+
+> `Bellum igitur omne quatuor causarum ex aliqua oriri necesse est. Prima est sui defensio , ex lege prima.`
+
+（@171760：「因此一切战争必起于四因之一。第一是自卫，**出自第一法**。」）
+
+> `Unde bella civilia juste suscipiun- tur secundum regulam quintam sive septimam et legem nonam : extema secundum legem duodecimam et regulam nonam`
+
+（@233615：「故内战之正当依**第五或第七规则与第九法**；外战依**第十二法与第九规则**。」
+`extema`＝`externa`。）
+
+> `injustas esse per legem de* cimam tertiam: quod et regulae convincunt unde si`
+
+（@192943：「据**第十三法**为不义；诸规则亦证之——它们正是各法的出处。」
+`de* cimam tertiam`＝`decimam tertiam`。）
+
+**这三处不是修辞上的编号，是形式系统的用法**：先立公理，再用「依第 N 条」把
+具体结论挂回具体公理。★ 而且他标出了层级——`regulae` 是 `leges` 的出处
+（`quod et regulae convincunt unde singulae leges oriuntur`）。
+
+★ 本条只说**结构**：没有核对那 9+13 条是否真的两两一致，
+也没有判断哪一条被引对了。**「他这样论证」成立，「他论证得对」未查。**
+
 ### ★ 本节没做什么
 
 - 只读了本道 12 份里的 2 份（`src-19eca701ec61`、`src-8651f2b87336`）。
@@ -108,7 +139,39 @@
 
 ## Candidate Claims
 
-Pending.
+> 口径：每条候选断言只写**本道观察直接支撑得住**的部分，
+> 支撑不住的写进「Unknowns」，不写进这里。
+> 每条都标明**它是关于形态的还是关于主张的**——本轮全部是形态。
+
+### C-01（形态）他先把判断规则**编号立完**，再用「依第 N 条」把结论挂回去
+
+- **依据**：观察 一（Lex I…Lex XII 逐条陈述）＋ 观察 四（目录 `Regulae IX et Leges XIII`，
+  后文三处按编号回引，并标出 `regulae` 是 `leges` 的出处）。
+- **可检验的形状**：给他一个新案子，他应当**先问它落在哪一条**，
+  而不是先给结论再补理由；他应当能说出**依据的编号与层级**。
+- **射程**：只在 `src-19eca701ec61` 一份上核过。
+  DJBP（1625）是否沿用同一套编号**未查**——那是另一部作品。
+
+### C-02（形态）他给每条规则配一个**读者已经承认的权威**，位置固定在陈述之后
+
+- **依据**：观察 二（`quod quidem cum TuUio ' ita interpretabimur`；紧接 Seneca 一段）。
+- **可检验的形状**：他的论证单元应当是「命题 → 权威 → 推论」，
+  而**不是**「权威说了什么，所以……」。
+- **射程**：只看了同一段落里的两处。**引证是否忠于原书，本道不判。**
+
+### C-03（形态）他会**主动把最强的让步先说出来，再自己收回**
+
+- **依据**：观察 三（`etiamsi daremus … non esse Deum`，
+  紧接 `cujus contrarium cum nobis partim ratio, partim traditio perpetua inseverint`）。
+- **可检验的形状**：遇到「你的前提要是不成立呢」，
+  他应当**先承认那个假设下结论仍成立**，再说明他本人并不接受那个假设。
+- ★ **反面即误读**：只取前半句会把他读成他明确否认的立场——
+  这一条同时是**该人物产物的一个已知失真风险**。
+
+### ★ 本轮没有一条是关于「他主张什么」的
+
+三条全是**他怎么论证**。实体主张（战争何时正当、海洋能否占有……）
+要等本道其余 10 份读完再提；现在提就是拿两份材料替十二份说话。
 
 ## Contradictions and alternative explanations
 
