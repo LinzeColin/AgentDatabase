@@ -3251,6 +3251,19 @@ def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
         info['**逐条**'] = hard[:8]
         info['口径'] = ('holdout 的内容已在 train 中出现——**用它出的 known 题不测泛化，'
                         '且一定得高分**。正解是换源，不是调阈值。')
+        # ★★★ v0.0.0.154：**research 阶段改成硬拦**，其余阶段照旧只报不拦。
+        #   原来的「只报不拦」理由是：「已入库 100 人的 holdout 从未按这条扫过，
+        #   硬拦会把发布一起拦下」。★ 这条理由**在 research 阶段不成立**：
+        #   那时候还没有产物、没有分数、没有发布可拦，而它自己的注释写着
+        #   「划 holdout 的时候看到它就该换源——那时候换还来得及」。
+        #   → 于是拦在来得及的那一刻，不拦在来不及的那一刻。
+        #   ★ 已入库的 7 个人物（见待裁定 ㊱）本来就该红，重跑他们的 research 会红，
+        #     **那是正确行为，不是回归**。
+        if report.phase == 'research':
+            report.error('corpus.holdout-overlap',
+                         'holdout 与 train 有内容重合（%d 条硬失败）——**现在换源还来得及**；'
+                         '逐条见 metrics.holdout_overlap，受污染段清单见 '
+                         'reports/holdout-contaminated-passages.json' % len(hard))
     report.metrics['holdout_overlap'] = info
 
 
