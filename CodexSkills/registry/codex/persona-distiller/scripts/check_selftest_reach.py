@@ -22,14 +22,20 @@
    locate / classify / census / detect / judge / analyse`）。
    其余没被进入的多数是**有意的**——`load_corpus` / `repo_root` / `body` 这类加载器，
    自测本就不该碰真实树（见 `check_checkers.selftest_touches_disk`）。
-   全库实测：37 件有函数没被进入，而判定类只占 18 件。
-   **报「37」是唬人，报「18」才是这道判据的射程。**
+   **报大数是唬人，报判定类那个数才是这道判据的射程。**
+   ★ 具体数字**不写死在这里**——它每补一件自测就往下走一格（当天就从 18 走到 17）。
+     **跑一次 `python3 scripts/check_selftest_reach.py` 就有**，别信注释里的存量数。
+     ⇒ [[self-reported-numbers-must-be-computed]]
 
 ## 冻结名单的用法
 
-`KNOWN` 是 2026-08-12 的实况。**它不是待办清单**——存量逐件补自测的成本很高，
+`KNOWN` 是 2026-08-12 的实况（当日 18 件，补完 `check_holdout_mention` 后 17 件）。
+**它不是待办清单**——存量逐件补自测的成本很高，
 且多数判据的判定函数需要构造完整工作区。本判据要挡的是**新增**：
 新写的判据不许再交一个「验了配料、没验判决」的自测。
+
+★ **补完一件就把它从 `KNOWN` 里删掉**（`check()` 会主动提醒），否则名单越来越假——
+  那正是本判据要防的病换个地方复发。
 
 ⇒ 同族：[[a-checker-nothing-calls-is-not-a-checker]]（判据要有调用方）、
   本件是它的下一层：**自测要走到被保证之物**。
@@ -54,7 +60,7 @@ DECISION = re.compile(
 KNOWN = {
     "check_anchor_coherence.py", "check_corpus_feasibility.py",
     "check_corpus_integrity.py", "check_filename_year_vs_ledger.py",
-    "check_holdout_mention.py", "check_longs_corruption.py",
+    "check_longs_corruption.py",
     "check_material_split.py", "check_ocr_homoglyphs.py",
     "check_ocr_language_death.py", "check_quote_integrity.py",
     "check_refusal_overflow.py", "check_scan_reach.py",

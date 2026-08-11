@@ -495,6 +495,104 @@ def self_test() -> int:
     chk("★ 只看单行时 lister 那条会漏（证明窗口是必须的）",
         names_the_work(_LISTER.splitlines()[0]) is False)
 
+    # ══════════════════════════════════════════════════════════════════
+    # ⑧ `scan()` 本身——**2026-08-12 之前它一次也没被自测进入过**
+    # ══════════════════════════════════════════════════════════════════
+    #
+    # 上面全部在考 `MENTION` 正则、`naming_window`、`names_the_work`、
+    # `builder_readable_files`、`shingles`——**都是配料**。
+    # `scan()` 才是把它们合起来出判决的那一段。
+    #
+    # ★ 这不是猜的：本文件第 249–257 行的注解**自己写着**
+    #   「抓到它的不是自测（自测只考正则与清单函数，**不考 `scan()` 有没有重复喂**），
+    #     是我回头读自己刚改过的那段代码」。
+    #   那次的后果是**同一批文件进了两次、命中被数了两倍**，
+    #   我据此报出过 Mendel 32／Carver 14／Blackwell 12，**真值是它们的一半**，
+    #   而且这些数已经写进了提交信息与任务台账。
+    #
+    # ⑧a 就是那次的回归：**同一个文件不许被喂两次。**
+    import tempfile as _tf
+    # ★★★ 夹具必须**带上共有的第三方**，否则 ⑧e 那条负对照是假的。
+    #   我第一版写成 holdout 全是 `holdoutword*`、train 全是 `trainword*`——两边不相交，
+    #   于是「减不减 train」结果一样，**变异 M2（去掉减法）打不红**。
+    #   真实情况恰恰相反：Koch #107 的 holdout 正文 **84.7% 本来就在 train 里**
+    #   （同一部作品被收进两侧），Nightingale #112 是 44.8%。
+    #   ⇒ [[fixtures-cleaner-than-the-real-thing]]：夹具比原文干净就等于没测。
+    _shared = " ".join(f"sharedword{i:03d}" for i in range(120))   # holdout 与 train 共有
+    _hold_only = " ".join(f"holdoutword{i:03d}" for i in range(120))
+    _train_only = " ".join(f"trainword{i:03d}" for i in range(120))
+    _hold_body = _shared + " " + _hold_only
+    _train_body = _shared + " " + _train_only
+
+    def _mk(td, product_text, *, with_holdout=True, hold_on_disk=True):
+        ws = pathlib.Path(td)
+        (ws / "evidence").mkdir(parents=True, exist_ok=True)
+        (ws / "references/research").mkdir(parents=True, exist_ok=True)
+        (ws / "raw").mkdir(parents=True, exist_ok=True)
+        rows = [{"source_id": "t1", "split": "train", "local_path": "raw/t1.txt"}]
+        if with_holdout:
+            rows.append({"source_id": "h1", "split": "holdout", "local_path": "raw/h1.txt"})
+        (ws / "evidence/source-ledger.jsonl").write_text(
+            "\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n",
+            encoding="utf-8")
+        (ws / "raw/t1.txt").write_text(_train_body, encoding="utf-8")
+        if with_holdout and hold_on_disk:
+            (ws / "raw/h1.txt").write_text(_hold_body, encoding="utf-8")
+        (ws / "references/research/01-writings.md").write_text(product_text, encoding="utf-8")
+        return ws
+
+    with _tf.TemporaryDirectory() as _td:
+        ws = _mk(_td + "/a", "本道有 3 件 holdout，不在此列。\n")
+        r = scan(ws)
+        chk(f"⑧a **同一个文件不许被喂两次**（扫过 {r['扫过的建模者可读文件']} 份，"
+            f"字面提及 {len(r['**字面提及**'])} 处）",
+            len(r["**字面提及**"]) == 1)
+        chk("⑧a′ 泛泛提及**不算点名**", len(r["**其中点名了是哪一份的**"]) == 0)
+
+    with _tf.TemporaryDirectory() as _td:
+        ws = _mk(_td + "/b",
+                 "留作 holdout 的是《Die Pflanzen-Mischlinge》。\n见 `src-000000000001`。\n")
+        r = scan(ws)
+        chk("⑧b 点名作品 → **进「点名了是哪一份」那一栏**",
+            len(r["**其中点名了是哪一份的**"]) >= 1)
+
+    with _tf.TemporaryDirectory() as _td:
+        ws = _mk(_td + "/c", "本人物的写作以清晰见长。\n")
+        r = scan(ws)
+        chk("⑧c 没有任何提及 → 两栏都空", not r["**字面提及**"] and not r["**其中点名了是哪一份的**"])
+
+    with _tf.TemporaryDirectory() as _td:
+        # ★★ 层二：产物抄了 holdout **独有**的正文 → 必须报重叠
+        ws = _mk(_td + "/d", _hold_only[:600] + "\n")
+        r = scan(ws)
+        chk(f"⑧d 产物含 holdout **独有**正文 → 报重叠"
+            f"（{len(r['**与 holdout 独有内容的 8 词片重叠**'])} 处）",
+            len(r["**与 holdout 独有内容的 8 词片重叠**"]) >= 1)
+
+    with _tf.TemporaryDirectory() as _td:
+        # ★★★ 反向：产物抄的是 **holdout 与 train 共有**的那一段 → **不许**报重叠。
+        #   这一条是 [[overlap-metrics-need-a-shared-baseline-subtracted]] 的守卫：
+        #   首版没减 train，全库回扫误报 17 处——Koch 的 holdout 正文 84.7% 本就在 train 里，
+        #   产物引 train 就会「与 holdout 重叠」，**而那根本不是泄漏**。
+        ws = _mk(_td + "/e", _shared[:600] + "\n")
+        r = scan(ws)
+        chk(f"⑧e 产物抄的是 **holdout 与 train 共有**的段 → **不许**报重叠"
+            f"（扣除前共有 {r['★ 其中与 train 共有（已扣除）']} 片、扣除后剩 {r['★ 扣除后剩下（层二真正比的）']} 片）",
+            not r["**与 holdout 独有内容的 8 词片重叠**"])
+        chk("⑧e′ 且**共有的第三方确实存在**（否则上一条是空过的假绿）",
+            r["★ 其中与 train 共有（已扣除）"] > 0)
+
+    with _tf.TemporaryDirectory() as _td:
+        ws = _mk(_td + "/f", "干净正文。\n", with_holdout=False)
+        r = scan(ws)
+        chk("⑧f 没有 holdout → **明写「无从判定」，不是通过**",
+            "★ 本工作区没有 holdout" in r)
+
+    with _tf.TemporaryDirectory() as _td:
+        ws = _mk(_td + "/g", "干净正文。\n", hold_on_disk=False)
+        r = scan(ws)
+        chk("⑧g holdout 正文读不到 → **明写「未核」，不是通过** [[empty-default-swallows-unknown]]",
+            "★★ holdout 正文读不到" in r)
 
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
     return 0 if ok else 2

@@ -661,8 +661,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_holdout_mention.py",
-      "sha256": "9320cfa5364f2a4eebcc8fc0f9b91ec9a17e8aa613d3378cbab4e33431f6d4e5",
-      "size_bytes": 32881
+      "sha256": "d427a1f7924f359be16f38fd7b3b6041cba0ed85a23bd972cc90dd64fd98f682",
+      "size_bytes": 39174
     },
     {
       "path": "references/pipeline/checkers/check_holdout_overlap.py",
@@ -816,8 +816,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_selftest_reach.py",
-      "sha256": "aaa78654debbea41ed8f4d607020be9048beff09ee9b6dc058b8349ddb810243",
-      "size_bytes": 10876
+      "sha256": "afdfe5a25f0cb63d5ba18224b6e88efbdce5985a668c0fb88e4880fcf8f77611",
+      "size_bytes": 11287
     },
     {
       "path": "references/pipeline/checkers/check_semantic_residue.py",
@@ -1441,8 +1441,8 @@
     },
     {
       "path": "scripts/check_holdout_mention.py",
-      "sha256": "9320cfa5364f2a4eebcc8fc0f9b91ec9a17e8aa613d3378cbab4e33431f6d4e5",
-      "size_bytes": 32881
+      "sha256": "d427a1f7924f359be16f38fd7b3b6041cba0ed85a23bd972cc90dd64fd98f682",
+      "size_bytes": 39174
     },
     {
       "path": "scripts/check_holdout_overlap.py",
@@ -1596,8 +1596,8 @@
     },
     {
       "path": "scripts/check_selftest_reach.py",
-      "sha256": "aaa78654debbea41ed8f4d607020be9048beff09ee9b6dc058b8349ddb810243",
-      "size_bytes": 10876
+      "sha256": "afdfe5a25f0cb63d5ba18224b6e88efbdce5985a668c0fb88e4880fcf8f77611",
+      "size_bytes": 11287
     },
     {
       "path": "scripts/check_semantic_residue.py",
