@@ -1,0 +1,57 @@
+{
+ "★ 这份文件是什么": "同名门返回 blocked（25 个候选）之后的**显式选定**。门的作用是逼出这一步，不是被绕过。",
+ "★ 选定依据": "三元组齐：全名 Hans Kelsen ＋ 生卒 1881-10-11–1973-04-19 ＋ GND 118561219 / LCCN n50045680。★ 抓源方本轮直查 DNB SRU 逐字取回过其中的 GND 记录。★ 已知分歧：LCCN n50045680 的 deathDate 实为 1973-04-20（2 对 2，不是 3 对 1）——**不影响选定**，两说都指同一人。",
+ "★ 被排除的 24 位": [
+  "Adolf Kelsen",
+  "Brent Kelsen",
+  "Dominique Kelsen",
+  "Pierre Kelsen",
+  "Pierre Kelsen（第二实体）",
+  "Broche Kelsen",
+  "Hanna Renate Kelsen",
+  "（Q115004308）",
+  "Léa Kelsen",
+  "David (P./Paul) Kelsen",
+  "Judith R. Kelsen",
+  "Keith Kelsen",
+  "Sylvio Kelsen Coelho",
+  "Kelsen Dantas Eulálio / Kelsen DE Oliveira Teixeira",
+  "Irene Kelsen",
+  "Emma Kelsen",
+  "Kate Kelsen",
+  "Don Kelsen",
+  "Michael Robert Kelsen",
+  "D. Kelsen",
+  "Kelsen Jacobs",
+  "Jens Kelsen",
+  "Jesper Kelsen",
+  "Angel Kelsen Arbaiza"
+ ],
+ "★ 排除依据不在本文件": "逐条依据、10 条规则、11 条自测、6 次变异、对本轮语料实跑，全部在 `kelsen_namesake_candidates.json`。★ 其中 M1/M2（词边界）**单独改坏不打红**，抓源方已如实标注「不许据此宣称词边界已验过」。",
+ "candidates": [
+  {
+   "canonical_name": "Hans Kelsen",
+   "subject_uid": "kelsen-hans-1881",
+   "identity_category": "historical",
+   "occupation_or_role": "奥地利／美国法学家、纯粹法学创始人、奥地利宪法法院法官、宪法起草者、维也纳与科隆及美国多校教授",
+   "professional_background": "1881-10-11 – 1973-04-19（GND 548 datx『11.10.1881-19.04.1973』）。规范档：GND=118561219；LCCN=n50045680；Wikidata=Q84165；VIAF=31998356（★未在 VIAF 侧核过：机器可读端点不可达，见探测 §0）",
+   "application_scenarios": [
+    "法理学与规范理论的分析",
+    "宪法与国际法的层级构造问题",
+    "把道德词换算成可判断的法效力问题"
+   ],
+   "key_capabilities": [
+    "把规范体系写成可检验的层级结构",
+    "区分「实然」与「应然」并据此划自己的射程",
+    "以德语学术散文逐层拆解概念"
+   ],
+   "authoritative_sources": [
+    "118561219",
+    "n50045680",
+    "Q84165",
+    "31998356（★未在 VIAF 侧核过：机器可读端点不可达，见探测 §0）"
+   ],
+   "evidence_level": "high"
+  }
+ ]
+}

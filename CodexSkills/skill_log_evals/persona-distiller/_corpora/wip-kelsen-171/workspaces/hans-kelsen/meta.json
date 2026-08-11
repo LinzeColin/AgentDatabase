@@ -1,0 +1,83 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "kelsen-hans-1881",
+  "consent_authority": null,
+  "created_at": "2026-08-11T11:33:35Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "political-legal",
+    "display": "政治法律师",
+    "mode": "single",
+    "primary": "political-legal",
+    "weights": {
+      "political-legal": 1.0
+    }
+  },
+  "language": "zh-CN",
+  "model_version": "0.1.0-draft",
+  "name": "Hans Kelsen",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "法理学与规范理论的分析",
+        "宪法与国际法的层级构造问题",
+        "把道德词换算成可判断的法效力问题"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "118561219"
+        },
+        {
+          "locator": "n50045680"
+        },
+        {
+          "locator": "Q84165"
+        },
+        {
+          "locator": "31998356（★未在 VIAF 侧核过：机器可读端点不可达，见探测 §0）"
+        }
+      ],
+      "canonical_name": "Hans Kelsen",
+      "distinguishing_basis": "",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "把规范体系写成可检验的层级结构",
+        "区分「实然」与「应然」并据此划自己的射程",
+        "以德语学术散文逐层拆解概念"
+      ],
+      "label": "A",
+      "occupation_or_role": "奥地利／美国法学家、纯粹法学创始人、奥地利宪法法院法官、宪法起草者、维也纳与科隆及美国多校教授",
+      "professional_background": "1881-10-11 – 1973-04-19（GND 548 datx『11.10.1881-19.04.1973』）。规范档：GND=118561219；LCCN=n50045680；Wikidata=Q84165；VIAF=31998356（★未在 VIAF 侧核过：机器可读端点不可达，见探测 §0）",
+      "subject_uid": "kelsen-hans-1881"
+    },
+    "chosen_subject_uid": "kelsen-hans-1881",
+    "normalized_name": "hanskelsen",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "hanskelsen",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "hans-kelsen",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-01d686c39663",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-11T11:33:35Z"
+}

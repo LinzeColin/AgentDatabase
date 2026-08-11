@@ -1,0 +1,122 @@
+[
+ {
+  "n": 1,
+  "title": "Die Staatslehre des Dante Alighieri",
+  "year": "1905",
+  "dim": "writings",
+  "voice": "first-person",
+  "type": "Antiqua",
+  "verdict": "可",
+  "src": "src-308be29151ce"
+ },
+ {
+  "n": 2,
+  "title": "Kommentar zur österreichischen Reichsratswahlordnung",
+  "year": "1907",
+  "dim": "decisions",
+  "voice": "third-person",
+  "type": "Fraktur",
+  "verdict": "禁",
+  "src": "src-37171ebfc83a"
+ },
+ {
+  "n": 3,
+  "title": "Eine Grundlegung der Rechtssoziologie",
+  "year": "1914",
+  "dim": "expression",
+  "voice": "first-person",
+  "type": "Antiqua",
+  "verdict": "可",
+  "src": "src-c42f2325eb59"
+ },
+ {
+  "n": 4,
+  "title": "Die Rechtswissenschaft als Norm- oder als Kulturwissenschaft",
+  "year": "1916",
+  "dim": "expression",
+  "voice": "first-person",
+  "type": "Fraktur",
+  "verdict": "禁",
+  "src": "src-f1f485d4a3ec"
+ },
+ {
+  "n": 5,
+  "title": "Politische Weltanschauung und Erziehung",
+  "year": "1918",
+  "dim": "expression",
+  "voice": "first-person",
+  "type": "Antiqua",
+  "verdict": "可",
+  "src": "src-3035f33a18c3"
+ },
+ {
+  "n": 6,
+  "title": "Sozialismus und Staat",
+  "year": "1920",
+  "dim": "writings",
+  "voice": "first-person",
+  "type": "Antiqua",
+  "verdict": "可",
+  "src": "src-06466a84b056"
+ },
+ {
+  "n": 7,
+  "title": "Vom Wesen und Wert der Demokratie",
+  "year": "1920",
+  "dim": "writings",
+  "voice": "first-person",
+  "type": "Antiqua",
+  "verdict": "可",
+  "src": "src-0101153a70ac"
+ },
+ {
+  "n": 8,
+  "title": "Staat und Recht",
+  "year": "1922",
+  "dim": "expression",
+  "voice": "first-person（复数）",
+  "type": "Antiqua",
+  "verdict": "可",
+  "src": "src-36f78a9079e6"
+ },
+ {
+  "n": 9,
+  "title": "Die Bundesverfassung vom 1. Oktober 1920（＝Die Verfassungsgesetze der Republik Österreich, T. 5）",
+  "year": "1922",
+  "dim": "decisions",
+  "voice": "co-edited（不判归属）",
+  "type": "Fraktur",
+  "verdict": "禁",
+  "src": "src-98577cc73747"
+ },
+ {
+  "n": 10,
+  "title": "Allgemeine Staatslehre",
+  "year": "1925",
+  "dim": "writings",
+  "voice": "first-person",
+  "type": "Antiqua",
+  "verdict": "可",
+  "src": "src-4fae0b145146"
+ },
+ {
+  "n": 11,
+  "title": "Les rapports de système entre le droit interne et le droit international public",
+  "year": "1926",
+  "dim": "expression",
+  "voice": "不作声口证据",
+  "type": "Antiqua",
+  "verdict": "可",
+  "src": "src-24dc5ceb27d9"
+ },
+ {
+  "n": 12,
+  "title": "Das Problem der Souveränität und die Theorie des Völkerrechts（2. Aufl.）",
+  "year": "1928",
+  "dim": "writings",
+  "voice": "first-person",
+  "type": "Antiqua",
+  "verdict": "禁",
+  "src": "src-a8167d895156"
+ }
+]

@@ -1,0 +1,109 @@
+{
+  "build_depth": {
+    "art-designer": "screening",
+    "entrepreneur-operator": "screening",
+    "investor-capital-allocator": "screening",
+    "software-developer": "screening",
+    "technical-engineer": "screening",
+    "thinker-educator": "screening"
+  },
+  "generated_at": "2026-08-11T11:33:35Z",
+  "identity_selection": {
+    "canonical": "political-legal",
+    "display": "政治法律师",
+    "mode": "single",
+    "primary": "political-legal",
+    "weights": {
+      "political-legal": 1.0
+    }
+  },
+  "product_release_versioning": {
+    "consumed_on": "successful-registration",
+    "format": "0.0.0.N",
+    "maximum": "0.0.0.999",
+    "minimum": "0.0.0.1",
+    "scope": "per-canonical-person"
+  },
+  "provided_scenario": null,
+  "research": {
+    "base_lanes": [
+      "writings",
+      "conversations",
+      "expression",
+      "external",
+      "decisions",
+      "timeline"
+    ],
+    "completeness_method": [
+      "source-universe",
+      "coverage-cube",
+      "origin-clustering",
+      "gap-expansion",
+      "two-round-saturation"
+    ],
+    "primary_identity_focus": [
+      "制度与规则解释",
+      "政策和判决",
+      "联盟与博弈",
+      "承诺和执行差异",
+      "程序正义",
+      "公共风险和权力约束"
+    ],
+    "scenario_priors": [
+      "政策分析",
+      "制度设计",
+      "法律论证",
+      "公共治理",
+      "谈判博弈",
+      "政治风险"
+    ],
+    "source_priorities": [
+      "laws",
+      "judgments",
+      "votes",
+      "policy-documents",
+      "hearings",
+      "speeches",
+      "coalition-records",
+      "implementation-results"
+    ]
+  },
+  "runtime_identity_routing": {
+    "mode": "automatic",
+    "source": "distilled-identity-selection",
+    "task_reweighting": true,
+    "user_selection_required": false
+  },
+  "runtime_invocation_versioning": {
+    "audit_records": "optional-unnumbered",
+    "enabled": false,
+    "user_visible_version": false,
+    "versioned_output_names": false
+  },
+  "runtime_model_load_order": [
+    "boundaries.md",
+    "corrections/ACTIVE.md",
+    "facts.md",
+    "identity-facets/<selection>.md",
+    "cognitive-os.md",
+    "decision-policy.md",
+    "strategy.md",
+    "capabilities.md",
+    "work.md",
+    "persona.md",
+    "scenario-adapters/<inferred>.md",
+    "divergence-map.md"
+  ],
+  "runtime_readiness": {
+    "art-designer": "provisional-until-evidenced",
+    "entrepreneur-operator": "provisional-until-evidenced",
+    "investor-capital-allocator": "provisional-until-evidenced",
+    "software-developer": "provisional-until-evidenced",
+    "technical-engineer": "provisional-until-evidenced",
+    "thinker-educator": "provisional-until-evidenced"
+  },
+  "scenario_policy": "infer-per-task",
+  "schema_version": "1.0",
+  "subject_origin": "historical",
+  "target_name": "Hans Kelsen"
+}
