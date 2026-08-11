@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "5fa4f5e0942086f9f423f2e67a59124b14ead9e787bba9d32f2ba82d93c1b4e0",
-      "size_bytes": 141152
+      "sha256": "d9d2be213a33533612b949eacd2f17febb282581c3bba29a66916571f71b8a1c",
+      "size_bytes": 142102
     },
     {
       "path": "VERSION",
@@ -960,6 +960,11 @@
       "size_bytes": 5237
     },
     {
+      "path": "references/pipeline/checkers/collect_honest_delta.py",
+      "sha256": "c613bdebadff1ca466c8f09c312814cf555e1cc54d14a86ee74858e7a155bd20",
+      "size_bytes": 21053
+    },
+    {
       "path": "references/pipeline/checkers/common.py",
       "sha256": "550a82709bb31d27c569d606620e548bf7e94ab3ed5cc702d700f3614fb716d7",
       "size_bytes": 15051
@@ -1743,6 +1748,11 @@
       "path": "scripts/check_version_bump_ships_product.py",
       "sha256": "6f07e5d682208f4f53504821eebedc52044aeb7745bf026308148fdb0e199bc9",
       "size_bytes": 20481
+    },
+    {
+      "path": "scripts/collect_honest_delta.py",
+      "sha256": "c613bdebadff1ca466c8f09c312814cf555e1cc54d14a86ee74858e7a155bd20",
+      "size_bytes": 21053
     },
     {
       "path": "scripts/common.py",
