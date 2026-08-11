@@ -3748,7 +3748,14 @@ def run_lane_scope_drift(report, target: Path) -> None:
             report.metrics['lane_scope'] = {'状态': '**自测未过，其结论不作数**'}
             return
     try:
-        changed, n_files, n_rows = module.process(target, check=True)
+        # ★ 2026-08-11：`process()` 的返回值从 3 元组改成 4 元组（多了「被覆盖的手写行」），
+        #   而**这里没跟着改**——当天 Barton 研究门报 `data.parse: too many values to unpack
+        #   (expected 3)`，整段语料文本检查（含重复源判据）**被这条异常吞掉、一句都没报**。
+        #   [[a-checker-nothing-calls-is-not-a-checker]] 的反面：**改返回值要把调用方全找一遍，
+        #   包括别的文件里的**。这里改成宽松解包，以后再加字段也不会炸。
+        _res = module.process(target, check=True)
+        changed, n_files, n_rows = _res[0], _res[1], _res[2]
+        _dropped = _res[3] if len(_res) > 3 else {}
     except SystemExit as exc:            # 本件自己泄了 holdout 时会 SystemExit
         report.error('corpus.holdout-mentioned-in-artifacts', str(exc))
         return
