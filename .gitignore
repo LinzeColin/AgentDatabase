@@ -7,3 +7,9 @@
 data/raw/
 data/raw_encrypted/
 data/private_imports/
+
+# 本地安装的 pre-push 钩子（每个 worktree 自己装，见 HANDOFF §7）。
+# ★ 必须忽略：主树有一个同名的**未跟踪**文件，一旦这份被提交，
+#   主树 checkout 会因「未跟踪文件会被覆盖」直接失败。
+#   跟踪的那份叫 .githooks/pre-push.worktree，装法：cp 它过来。
+.githooks/pre-push
