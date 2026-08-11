@@ -1081,22 +1081,36 @@ def report_refusal_overflow(report, target: Path) -> None:
             report.metrics['refusal_overflow'] = {'状态': '**负对照未过，其结论不作数**'}
             return
 
-    hits, scanned = [], 0
+    # ★★ 2026-08-12：`scanned` 原先数的是**文件份数**，而不是**答案条数**。
+    #   于是「载荷在、但一条答案都没解析出来」印成 `已扫载荷: 1`——
+    #   而当天实测：21/31 份载荷是扁平形状 `{case_id: 文本}`，
+    #   旧版 `check_payload` 把它们**一条不剩地跳过**，这道门整代人物都是空过的。
+    #   改数答案条数，并把「文件在而零条」单列成一句话。
+    files, answers, hits = 0, 0, []
     for rel in ('evals/judge_payload.v1.json',):
         p = target / rel
         if not p.is_file():
             continue
+        files += 1
         try:
-            for cid, res in module.check_payload(p, 'candidate'):
-                hits.append(cid)
+            rows = module.scan_payload(p, 'candidate')
         except Exception:                                        # noqa: BLE001
             continue
-        scanned += 1
-    info: dict[str, Any] = {'已扫载荷': scanned, '拒答溢出条数': len(hits)}
+        answers += len(rows)
+        hits += [cid for cid, _res, bad in rows if bad]
+    info: dict[str, Any] = {'已扫载荷': files, '已扫答案': answers,
+                            '拒答溢出候选': len(hits)}
+    if files and not answers:
+        info['状态'] = ('**载荷在而一条答案都没解析出来——未核验，不是通过**'
+                        '（形状对不上？行式 `[{case_id, candidate}]` / 扁平 `{case_id: 文本}`）')
     if hits:
-        info['**这些答案拒了答且什么也没留下**'] = hits[:12]
-        info['口径'] = ('有拒答标记且可执行判断为 0。**数的是句式不是语义**——'
-                        '陈述句形式的判断会被漏掉，故只报不拦。')
+        info['**这几条值得人去读一眼**'] = hits[:12]
+        info['★ 口径'] = (
+            '有拒答标记且可执行判断为 0。**数的是句式不是语义**，故只报不拦。\n'
+            '★★ **这是候选名单，不是缺陷数**：2026-08-12 全库实测（588 条不同答案）'
+            '首扫 62 条，逐条读原文后发现**读了 11 条、9 条是误杀**——'
+            '判据认不出圈号编号、「你该去问他」、「查第 8 版」这类给法。'
+            '八类已补进 ACTIONABLE（62→29），而抽读剩余仍见误杀。**逐条读过才算数。**')
     report.metrics['refusal_overflow'] = info
 
 

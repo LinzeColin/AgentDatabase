@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "c6e5b876fe2874b69d3a245891308e35f8771676fa464e66002ea56030cd167a",
-      "size_bytes": 140004
+      "sha256": "6c82f26ac7edb387877bc43d1d6add2712d391c89efb1c76d3950fc091688b9e",
+      "size_bytes": 140475
     },
     {
       "path": "VERSION",
@@ -391,8 +391,13 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "6b104208c990bbc44638601598f15744f6dcf5c28ee403cc1d96d440a1b7e0bc",
-      "size_bytes": 249726
+      "sha256": "51d7527f71ae61527daab0e8ad860916a87e064c044cfb6ab694d7cb9d4e8345",
+      "size_bytes": 253532
+    },
+    {
+      "path": "references/ledgers/_拒答溢出门-整代人物空过-2026-08-12.md",
+      "sha256": "53490789806f6ed31f513fc90be6f9d5a89ec9838f9bda50aa096bc115774e64",
+      "size_bytes": 6387
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -496,8 +501,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_anchor_coherence.py",
-      "sha256": "42645c1699430fcca7a69a093aa75431bf3678214b1b0c1e7443aca257e322aa",
-      "size_bytes": 5014
+      "sha256": "532fd99dcbcf77e0c98211e6ca09bb0d45c7607381fe9e2c56f1f430be92fd3a",
+      "size_bytes": 10211
     },
     {
       "path": "references/pipeline/checkers/check_answer_holdout_leak.py",
@@ -701,8 +706,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_material_split.py",
-      "sha256": "7081e4655f8d6bf6914780624881461a883b5e088e482ad6ef4ae6e6edbc625c",
-      "size_bytes": 4652
+      "sha256": "820ce516da6110edc9bc95fd1441ee82bfba7f47ce73e69252c67e3f9e7659d0",
+      "size_bytes": 9445
     },
     {
       "path": "references/pipeline/checkers/check_measurement_claims.py",
@@ -801,8 +806,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_refusal_overflow.py",
-      "sha256": "53175f962d78baf661230660091e66fedc39b9206265dec1fbd713934f388708",
-      "size_bytes": 8737
+      "sha256": "8535db6644459d4cb9cbc3b20d29995b714c8a12dd4d52382726eeb51c07d2db",
+      "size_bytes": 21953
     },
     {
       "path": "references/pipeline/checkers/check_restraint_without_remainder.py",
@@ -836,8 +841,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_selftest_reach.py",
-      "sha256": "87997611727644187a0178509087434d4b14aff400d65a80e29c054c8504a7d2",
-      "size_bytes": 11245
+      "sha256": "8806de0b796a7abc583a171037bd0ad2d567beffb350856ab1d6518859812832",
+      "size_bytes": 11152
     },
     {
       "path": "references/pipeline/checkers/check_semantic_residue.py",
@@ -1006,8 +1011,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "bd12c27ab8bef6323ca4ac42e98d0ecdac3cd7c8efb939102e2eb8810bbe1e58",
-      "size_bytes": 247829
+      "sha256": "a3d74f1dfc67b64100f3b9e4b8572e4bbefa4b72dadcc8f00f24c4ab6dc946c7",
+      "size_bytes": 249003
     },
     {
       "path": "references/pipeline/checkers/render_claims.py",
@@ -1286,8 +1291,8 @@
     },
     {
       "path": "scripts/check_anchor_coherence.py",
-      "sha256": "42645c1699430fcca7a69a093aa75431bf3678214b1b0c1e7443aca257e322aa",
-      "size_bytes": 5014
+      "sha256": "532fd99dcbcf77e0c98211e6ca09bb0d45c7607381fe9e2c56f1f430be92fd3a",
+      "size_bytes": 10211
     },
     {
       "path": "scripts/check_answer_holdout_leak.py",
@@ -1491,8 +1496,8 @@
     },
     {
       "path": "scripts/check_material_split.py",
-      "sha256": "7081e4655f8d6bf6914780624881461a883b5e088e482ad6ef4ae6e6edbc625c",
-      "size_bytes": 4652
+      "sha256": "820ce516da6110edc9bc95fd1441ee82bfba7f47ce73e69252c67e3f9e7659d0",
+      "size_bytes": 9445
     },
     {
       "path": "scripts/check_measurement_claims.py",
@@ -1591,8 +1596,8 @@
     },
     {
       "path": "scripts/check_refusal_overflow.py",
-      "sha256": "53175f962d78baf661230660091e66fedc39b9206265dec1fbd713934f388708",
-      "size_bytes": 8737
+      "sha256": "8535db6644459d4cb9cbc3b20d29995b714c8a12dd4d52382726eeb51c07d2db",
+      "size_bytes": 21953
     },
     {
       "path": "scripts/check_restraint_without_remainder.py",
@@ -1626,8 +1631,8 @@
     },
     {
       "path": "scripts/check_selftest_reach.py",
-      "sha256": "87997611727644187a0178509087434d4b14aff400d65a80e29c054c8504a7d2",
-      "size_bytes": 11245
+      "sha256": "8806de0b796a7abc583a171037bd0ad2d567beffb350856ab1d6518859812832",
+      "size_bytes": 11152
     },
     {
       "path": "scripts/check_semantic_residue.py",
@@ -1856,8 +1861,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "bd12c27ab8bef6323ca4ac42e98d0ecdac3cd7c8efb939102e2eb8810bbe1e58",
-      "size_bytes": 247829
+      "sha256": "a3d74f1dfc67b64100f3b9e4b8572e4bbefa4b72dadcc8f00f24c4ab6dc946c7",
+      "size_bytes": 249003
     },
     {
       "path": "scripts/register_persona.py",
