@@ -155,10 +155,36 @@
 
 ★ 本条同样只说结构。**没有读章内正文**，也没有核对每一章是否真的做到了它的标题。
 
-- 只读了本道 12 份里的 2 份（`src-19eca701ec61`、`src-8651f2b87336`）。
-  其余 10 份**尚未读**，不是「读过没发现」。
-- 三条观察都只是**形态**（他怎么排论证），**没有一条是关于他主张了什么**。
-  实体主张要等其余各份读完再提。
+### 六、★★★ 开篇第一句就在**划边界**：谁已经做过、谁没做过、我做哪一块
+
+`src-2808cba204dc`（DJBP，Kelsey 1925 英译）Prolegomena 第 1 节（@120282）：
+
+> `I. T'HE municipal law of Rome and of other states has been treated by many, who have undertaken to elucidate it by means of commentaries or to reduce it to a convenient digest. That body of law, however, which is concerned with the mutual relations among states or rulers of states, whether derived from nature, or established by divine ordinances, or having its origin in custom and tacit agree- ment, few have touched upon. Up to the present time no one has treated it in a comprehensive and systematic manner ; yet the welfare of mankind demands that this task be accomplished.`
+
+（`T'HE`＝`THE`、`agree- ment`＝`agreement`，OCR 与折行原样。）
+
+**三步，一句不多**：①「市民法**已有许多人**做过」→
+②「而国与国之间那一部分，**少有人触及**」→
+③「**至今无人以周全而系统的方式处理它**；而人类的福祉要求此事被完成」。
+
+紧接第 2 节立刻搬权威——**不是为论点担保，是为「这题目值得做」担保**：
+
+> `2. Cicero justly characterized as of surpassing worth a knowledge of treaties of alliance, conventions, and understandings of peoples, kings and foreign nations`
+
+★★ 这是观察二那条「命题 → 权威」的**同一形状用在了立项上**。
+
+★ DJBP 同样是编号的：Prolegomena 分节（I / VI / XIII…），全书 3 卷 57 章、
+286 处「罗马数字. 大写起句」的编号小节 → **C-01 的射程扩到第三部作品。**
+
+★ 本条只读了 Prolegomena 开头约 1,100 字符，**正文一章未读**。
+
+### ★ 本节没做什么
+
+- 只读了本道 12 份里的 **4 份**（`src-19eca701ec61`、`src-8651f2b87336`、
+  `src-52fd74630d7b`、`src-2808cba204dc`），且后两份只读了章题与开篇。
+  其余 8 份**尚未读**，不是「读过没发现」。
+- 六条观察全是**形态**（他怎么排论证、怎么立项），
+  **没有一条是关于他主张了什么**。实体主张要等其余各份读完再提。
 
 ## Candidate Claims
 
@@ -177,7 +203,19 @@
   判准先行、反例后撞。编号只是他在 De Iure Praedae 用的那一种实现。
 - **可检验的形状**：给他一个新案子，他应当**先问判准是什么**，
   再逐一处理对方能提出的每一种名分——而不是先给结论再补理由。
-- **射程**：两部作品、两种装置。**DJBP（1625）未查**。
+- **射程**：**三部作品**（De Iure Praedae 编号公理／Mare Liberum 穷举反证／
+  DJBP 三卷 57 章 286 处编号小节），三种规模同一形状。
+  ★ 但 Mare Liberum 与 De Iure Praedae **是同一部作品的整体与被单刊的一章**
+  （台账已声明），所以严格说是**两处独立证据**，不是三处。
+
+### C-04（形态）立项时他**先划边界**：谁已经做过、谁没做过、我做哪一块
+
+- **依据**：观察 六（DJBP Prolegomena 第 1 节三步：已有许多人做 → 少有人触及 →
+  至今无人系统处理，而人类福祉要求做它；第 2 节立刻用 Cicero 为**题目的价值**担保）。
+- **可检验的形状**：问他为什么要做某件事，他应当**先报已有工作的边界**，
+  再指出缺口，最后说明这个缺口为什么必须补——而不是直接讲自己的方案。
+- **射程**：只在 DJBP 一处核过。
+  De Iure Praedae 与 Mare Liberum 的开篇**是否同一形状未查**。
 
 ### C-02（形态）他给每条规则配一个**读者已经承认的权威**，位置固定在陈述之后
 
