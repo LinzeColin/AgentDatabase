@@ -5,6 +5,36 @@
 
 ---
 
+## ★★★★★ 接手第一件事要知道：**判据会报一条错，那不是缺陷**
+
+移交树**不含语料**（`_corpora/*/raw/` 被剔掉，7388 个文件）。
+2026-08-12 在临时目录里按接手方视角实跑过整条链：
+
+    ✓ HANDOFF.md 在｜✓ `_每次开工必读.md` 在
+    ✓ `next_person.py` 跑得起来 → NEXT = Louis Brandeis
+      queue_total 237｜done 40｜pending 51｜deferred 141
+    ✓ `quality_check --phase research` 跑得起来，**exit=1**，
+      唯一的错是 **`research.ledger-file-missing`**，完成道仍读得出 3 道
+
+⇒ **那一条错是「语料不在这棵树上」的正确表现**，不是要修的缺陷。
+  判据**没有静默通过、也没有给出错的数**——这正是它该有的样子。
+
+### 要跑需要语料的判据（引文核验、OCR、塌缩、覆盖）时怎么办
+
+台账里每份源都有 `locator` + `checksum`：
+
+    locator 有值 1993 / 2065（96.5%）—— 509 条完整 http URL、1483 条 `item <IA 条目号>`
+    checksum   2065 / 2065（100%）—— 取回后逐份校验用
+    locator 空的 72 条，**全在已延后／已拒发的人物身上**（Paton 24／Cicero 19／
+      Nasmyth 13／Pacioli 10／Semmelweis 6），**无一属于已入库人物**
+
+⇒ 按 `locator` 取回，按 `checksum` 逐份核。**不需要向我要任何东西。**
+
+★ 不需要语料的部分（台账、断言、产物、用例、判据自测、漂移门、71 个测试）
+  在移交树里**全部能跑**。
+
+---
+
 ## 0. 先读这两份，其余都是细节
 
 1. `~/Documents/Codex/GithubProject/README.md` 的 **「七条铁律」**
