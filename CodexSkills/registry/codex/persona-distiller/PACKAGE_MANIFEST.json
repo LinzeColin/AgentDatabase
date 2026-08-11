@@ -2310,6 +2310,11 @@
       "size_bytes": 20349
     },
     {
+      "path": "tests/test_checkers_actually_run.py",
+      "sha256": "7cc28613176efa922208768df81a5a572a15391cf4080572005087843647597d",
+      "size_bytes": 4091
+    },
+    {
       "path": "tests/test_group_contract.py",
       "sha256": "086166051a7c8a3b1b4488b98ea95aa5b43399cec382b5b5e20bb59107d7a34e",
       "size_bytes": 9974
