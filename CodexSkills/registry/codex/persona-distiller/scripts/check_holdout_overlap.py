@@ -411,6 +411,114 @@ def self_test() -> int:
     #     我第一版把这条的预期写成「判为样板」，红的是预期不是实现。
     chk("⑥c 样板占少数 → 不许判成样板",
         _is_boiler_run(long_boiler[:24] + para, (24 + len(para), 0, 0), boiler_set), False)
+
+    # ══════════════════════════════════════════════════════════════════════
+    # ⑦ ★★★ `check()` 本身 —— **在 2026-08-12 之前，这个函数从没被自测进入过**
+    # ══════════════════════════════════════════════════════════════════════
+    #
+    # 上面 ①–⑥ 验的全是**配料**（shingles / runs / _is_boiler_run），
+    # 而 `check()` 才是分 train/holdout、套阈值、**出判决**的那一段。
+    # 用 `sys.settrace` 逐件量过：89 件判据里 37 件有函数从没被自测进入，本件是其一。
+    #
+    # ★ 利害最大的一条在 `locate()` 里：它的注释自己写着
+    #   「**这就是它从未跑通、也没人发现的原因**」（Nightingale #112 实测 117 条
+    #   一条也定位不到，判据只会说「无法判定」）——**修好之后仍然没有自测**。
+    #
+    # ★★ 而 `check()` 的输出正是待裁定 ㊲ 的全部依据
+    #   （七个已入库人物 holdout 与 train 整段逐字重复）。**判决所依赖的函数没有对照。**
+    #
+    # ★★★ `selftest_touches_disk` 也看不见本件：它取 `fns.get("main")`，
+    #   而本文件用的是内联 `if __name__` 块（全库 3 件如此）——见 check_checkers 那条已记的盲区。
+    import contextlib as _ctx, io as _io, tempfile as _tmp
+
+    def _run_check(ws, cache):
+        """跑 check() 并吞掉它的正常输出，只取返回码。"""
+        buf = _io.StringIO()
+        with _ctx.redirect_stdout(buf):
+            rc = check(ws, cache)
+        return rc, buf.getvalue()
+
+    def _mkws(td, rows, files, sub="evidence"):
+        ws = pathlib.Path(td) / "ws"
+        (ws / sub).mkdir(parents=True, exist_ok=True)
+        (ws / sub / "source-ledger.jsonl").write_text(
+            "\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n",
+            encoding="utf-8")
+        for rel, text in files.items():
+            p = ws.parent / rel if rel.startswith("..") else ws / rel
+            p = pathlib.Path(str(p).replace("../", ""))
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(text, encoding="utf-8")
+        return ws
+
+    # 造语料：三段互不相干的词流，长度都远超 RUN_WARN(50) 与 N(8)
+    def _words(tag, k):
+        return " ".join(f"{tag}word{i:03d}" for i in range(k))
+    SHARED = _words("shared", 200)      # 会被逐字转载的那一段
+    UNIQ_A = _words("alpha", 200)
+    UNIQ_B = _words("bravo", 200)
+    BOILER = _words("boiler", 120)      # 多份 train 共有 ⇒ 应被样板过滤剔除
+
+    with _tmp.TemporaryDirectory() as td:
+        cache = [pathlib.Path(td) / "cache"]
+        cache[0].mkdir(parents=True, exist_ok=True)
+
+        # ⑦a ★ locate() 的三种布局都必须解析得到（这是那次事故的原样）
+        (cache[0] / "byname.txt").write_text(UNIQ_B, encoding="utf-8")
+        ws = _mkws(td, [
+            {"source_id": "t-rel", "split": "train", "local_path": "raw/t1.txt"},
+            {"source_id": "t-parent", "split": "train", "local_path": "sib/t2.txt"},
+            {"source_id": "h-basename", "split": "holdout", "local_path": "nowhere/byname.txt"},
+        ], {"raw/t1.txt": UNIQ_A, "../sib/t2.txt": SHARED})
+        rc, out = _run_check(ws, cache)
+        chk("⑦a locate 三种布局（ws 相对 / ws.parent 相对 / cache 按文件名）全部解析",
+            "找不到正文的源" not in out, True)
+        chk("⑦a′ 无关 holdout → 判通过", rc, 0)
+
+        # ⑦b ★★ 定位不到时**必须报「无法判定，不算通过」**，绝不许静默返回 0
+        ws = _mkws(td + "/b", [
+            {"source_id": "t1", "split": "train", "local_path": "raw/t1.txt"},
+            {"source_id": "h1", "split": "holdout", "local_path": "raw/ghost.txt"},
+        ], {"raw/t1.txt": UNIQ_A})
+        rc, out = _run_check(ws, cache)
+        chk("⑦b 有源定位不到 → rc=2（无法判定），不是 0", rc, 2)
+
+        # ⑦c 账本里没有 holdout → 同样是「无法判定」，不是「没问题」
+        ws = _mkws(td + "/c", [
+            {"source_id": "t1", "split": "train", "local_path": "raw/t1.txt"},
+        ], {"raw/t1.txt": UNIQ_A})
+        rc, out = _run_check(ws, cache)
+        chk("⑦c 账本无 holdout → rc=2，不是 0（[[empty-default-swallows-unknown]]）", rc, 2)
+
+        # ⑦d 负对照：holdout 是某份 train 的逐字转载 → 硬失败
+        ws = _mkws(td + "/d", [
+            {"source_id": "t1", "split": "train", "local_path": "raw/t1.txt"},
+            {"source_id": "t2", "split": "train", "local_path": "raw/t2.txt"},
+            {"source_id": "h1", "split": "holdout", "local_path": "raw/h1.txt"},
+        ], {"raw/t1.txt": UNIQ_A, "raw/t2.txt": SHARED, "raw/h1.txt": SHARED})
+        rc, out = _run_check(ws, cache)
+        chk("⑦d holdout 是 train 的逐字转载 → rc=1", rc, 1)
+        chk("⑦d′ 且点名了是哪一份 train", "t2" in out, True)
+
+        # ⑦e ★★★ **样板过滤不许把真内容一起吃掉**——这是「两个错抵消」的入口：
+        #   若 df 阈值算错，样板与真重复会一起被剔除，于是**转载也报绿**。
+        rows = [{"source_id": f"t{i}", "split": "train", "local_path": f"raw/t{i}.txt"}
+                for i in range(6)]
+        rows.append({"source_id": "h1", "split": "holdout", "local_path": "raw/h1.txt"})
+        files = {f"raw/t{i}.txt": BOILER + " " + _words(f"filler{i}", 150) for i in range(6)}
+        files["raw/t3.txt"] = BOILER + " " + SHARED          # 只有 t3 含真内容
+        files["raw/h1.txt"] = BOILER + " " + SHARED          # holdout = 样板 + 真转载
+        ws = _mkws(td + "/e", rows, files)
+        rc, out = _run_check(ws, cache)
+        chk("⑦e 样板被剔除后**真转载仍须抓到** → rc=1", rc, 1)
+        chk("⑦e′ 且指的是 t3（不是任意一份共享样板的源）", "t3" in out, True)
+
+        # ⑦f 正对照：六份 train 共享样板、holdout 只有样板 → **不许**报硬失败
+        files["raw/h1.txt"] = BOILER + " " + _words("clean", 150)
+        ws = _mkws(td + "/f", rows, files)
+        rc, out = _run_check(ws, cache)
+        chk("⑦f holdout 只与 train 共享样板 → 不许判硬失败", rc, 0)
+
     return 0 if (ok1 and ok2 and not fails) else 1
 
 
