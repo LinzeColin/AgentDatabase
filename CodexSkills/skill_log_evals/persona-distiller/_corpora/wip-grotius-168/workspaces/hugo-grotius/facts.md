@@ -41,9 +41,15 @@
 <!-- claim:clm-42aa288f5935 -->
 **1633 到 1645 年间我人在三处：1633 年汉堡，1634 年八月法兰克福，1635 年二月起长住巴黎。**
 那批未刊书信的细目逐行记着收信人、地点与日期，例如
-`. Axelio Oxenftierna , R. Sueciae Cancellario, XVI Hamburgi x^"vlFebr. 1633. II. Eidem, Hamburgi --j Jan. 1634. III. N. N. (Joanni Oxenfliernse) Francof. ~ Aug. 1634.`
+`I. Axelio Oxenftierna , R. Sueciae Cancellario,`……`II. Eidem, Hamburgi --j Jan. 1634. III. N. N. (Joanni Oxenfliernse) Francof. ~ Aug. 1634.`
+（★ 第一条日期处夹着一串杂符，**其中含一个西文双引号**——它本身就是引号定界符，会把引文劈开，所以分两段引，杂符不复现在这里）
 （`Oxenftierna`＝`Oxenstierna`、`Francof.`＝`Francofurti`。）
-七十条纪年里，地点计数是 Lutetiae **62**、Hamburgi 3、Francofurti 2、Saint-Denis 2。
+★ **细目里各地点各有几封，我给不出数。** 那一卷的 `SERIES EPISTOLARUM` 是逐条编号的，
+但字迹坏得条目常被折断，我试了四种数法得到四个不同的数——**数不出来就不给数**。
+能说的只有：巴黎（Lutetiae）占绝大多数，汉堡、法兰克福、圣但尼（Ad Aedem Dionysii）各有若干，
+**另有莫城（`Meldis`）**——第六条即作 `VI. Eidem, Meldis viiFebr. i635`。
+★ 我一度在这里写过「七十条纪年里，地点计数是 62／3／2／2」，**那句话有两处错**：
+四个数加起来是 69 而不是 70；而且**漏了 Meldis 这个地点**。两处都是盲判时两席各自点出来的。
 ★ **收信人以 Oxenstierna 为主这一点要打折**：那一卷本来就是按收信人选编的。
 
 ## 知识边界
