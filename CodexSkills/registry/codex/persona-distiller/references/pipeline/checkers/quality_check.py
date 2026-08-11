@@ -3879,6 +3879,62 @@ def run_quote_layer(report, target: Path) -> None:
     report.metrics['quote_layer'] = info
 
 
+def run_namesake_separability(report, target: Path, meta: dict[str, Any]) -> None:
+    """**同名可分性门**：这个人的同名者，靠姓名分得开吗？分不开就必须写明怎么分。
+
+    `check_namesake_criteria` 早就在了，但它**没有 criteria 文件的人物一律跳过**——
+    全库 31 个工作区实测**只有 4 个有该文件**，而「跳过」在产物里和「通过」长得一模一样。
+    本门补的是前一步：**先量分不分得开，分不开才要求 criteria**。
+
+    Blackstone #169 实测：`build_patterns` 的 name_rx 打他自己的 13 个候选，
+    **14 个署名变体里 12 个被认成目标本人**；其中 3 条候选的 `canonical_name`
+    与目标**逐字相同**——那一档不能靠 excluded_names，只能靠标识符／年代，
+    故单列为 `identical_name_policy`。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_namesake_separability.py'
+    if not script.exists():
+        report.metrics['namesake_separability'] = {
+            '状态': 'check_namesake_separability.py 未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_nssep', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['namesake_separability'] = {
+            '状态': f'检查器加载失败，**未核验**：{exc}'}
+        return
+    # ★ 负对照不过 → 它的「全绿」不构成任何证据。与其余硬门同一条纪律。
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.self_test() != 0:
+            report.error('content.selftest-failed',
+                         'check_namesake_separability.py 负对照未过——其检查结论不作数')
+            return
+    name = str(meta.get('name') or '')
+    if not name:
+        report.metrics['namesake_separability'] = {
+            '状态': 'meta.json 没有 name，**未核验**（不是通过）'}
+        return
+    with contextlib.redirect_stdout(buffer):
+        result = module.evaluate(target, name, module._load_authorship())
+    report.metrics['namesake_separability'] = {
+        k: v for k, v in result.items() if k != '分不开的是'}
+    if result['状态'] == 'skip':
+        return
+    for n in result.get('未覆盖') or []:
+        report.error('research.namesake-unseparable',
+                     f'同名者「{n}」与目标姓名分不开，且未被 namesake-criteria.json 的 '
+                     f'excluded_names 覆盖')
+    if result.get('字面同名未定政策'):
+        report.error('research.namesake-identical-name',
+                     f'{len(result["字面同名未定政策"])} 条候选的名字与目标**逐字相同**，'
+                     f'而 criteria 里没有 `identical_name_policy`——'
+                     f'这一档不能靠 excluded_names（写进去等于排除目标本人），'
+                     f'要写明靠标识符／年代／出处怎么分')
+
+
 def run_attribution_basis(report, target: Path, meta: dict[str, Any],
                           sources: list[dict[str, Any]]) -> None:
     """归属依据门（v0.0.0.24 新增）——**印刷时代之前的人物，靠什么证明是他写的**。
@@ -4016,6 +4072,7 @@ def main() -> int:
         run_authorship_gate(report, target, meta, sources)
         run_corpus_integrity(report, target)
         run_attribution_basis(report, target, meta, sources)
+        run_namesake_separability(report, target, meta)
         run_source_attribution(report, target, meta, sources)
         run_fact_density(report, target, sources)
         run_quote_layer(report, target)
