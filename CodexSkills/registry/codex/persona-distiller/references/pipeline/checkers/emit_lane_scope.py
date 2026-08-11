@@ -108,11 +108,48 @@ def splice(text: str, body: str) -> str:
     return text[:i] + HEAD + "\n" + body + (text[j + 1:] if j >= 0 else "")
 
 
+def scope_body(text: str) -> str:
+    """→ Scope 节的正文（不含标题）。找不到返回空串。"""
+    i = text.find(HEAD)
+    if i < 0:
+        return ""
+    j = text.find("\n## ", i + len(HEAD))
+    return text[i + len(HEAD):(j if j >= 0 else len(text))]
+
+
+def dropped_lines(old: str, new: str) -> list:
+    """→ 覆盖时会**丢掉的手写行**（老 Scope 节里有、新的里没有的实质行）。
+
+    ★★★ 2026-08-11 实测逼出来的：Blackstone #169 的 `06-timeline.md` 是 0 源道，
+    而我把模板的 `Pending.` 换成了自己写的两句判断
+    （「本道是**印本年表不是生平年表**」「用的是扉页上逐字照录的印本年」）——
+    于是上面那道「留着 Pending. 就不覆盖」的保护**不认识我写的东西**，
+    重出时把它们**静默抹掉了**。
+
+    本函数不阻止覆盖（Scope 节本就该由机器拥有），**只是不让它静默**：
+    把要丢的行打出来，人自己决定搬到哪一节去。
+    """
+    have = {l.strip() for l in scope_body(new).splitlines() if l.strip()}
+    out = []
+    for l in scope_body(old).splitlines():
+        s = l.strip()
+        if not s or s in have:
+            continue
+        # 表格行与工具自己的说明不算手写
+        if s.startswith("|") or s.startswith("★ 本节由台账机械导出"):
+            continue
+        if s.startswith("**本道分到") or s == "Pending. Use train-split source IDs only.":
+            continue
+        out.append(s)
+    return out
+
+
 def process(ws: pathlib.Path, check: bool) -> tuple:
     rows = load_ledger(ws)
     files = lane_files(ws)
     changed, holdout_ids = [], {r.get("source_id") for r in rows
                                 if r.get("split") == "holdout"}
+    dropped = {}
     for lane, p in sorted(files.items()):
         old = p.read_text(encoding="utf-8")
         # ★ 0 源的道若还留着模板原句，**不许覆盖**。
@@ -135,9 +172,12 @@ def process(ws: pathlib.Path, check: bool) -> tuple:
             raise SystemExit("**本件自己泄了 holdout**：%s（%s）" % (leaked, p.name))
         if new != old:
             changed.append(p.name)
+            lost = dropped_lines(old, new)
+            if lost:
+                dropped[p.name] = lost
             if not check:
                 p.write_text(new, encoding="utf-8")
-    return changed, len(files), len(rows)
+    return changed, len(files), len(rows), dropped
 
 
 def self_test() -> int:
@@ -171,7 +211,7 @@ def self_test() -> int:
             (ws / "references" / "research" / ("%02d-%s.md" % (n, lane))).write_text(
                 tmpl, encoding="utf-8")
 
-        changed, nf, nr = process(ws, check=False)
+        changed, nf, nr, _ = process(ws, check=False)
         w = (ws / "references" / "research" / "01-writings.md").read_text(encoding="utf-8")
         chk("两份道文件都被改写（%s）" % changed, len(changed) == 2)
         chk("★ holdout 的 source_id **不在**输出里", "src-cccccccccccc" not in w)
@@ -183,7 +223,7 @@ def self_test() -> int:
         e = (ws / "references" / "research" / "04-external.md").read_text(encoding="utf-8")
         chk("题名里的 `|` 被转义，表没被撑破", r"Ext\|pipe" in e)
 
-        again, _, _ = process(ws, check=False)
+        again, _, _, _ = process(ws, check=False)
         chk("**幂等**：连跑两次无差异", not again)
         chk("--check 在已同步时报 0 处", not process(ws, check=True)[0])
 
@@ -248,6 +288,24 @@ def self_test() -> int:
         chk("**反对照**：0 源但表里还留着旧条目 → 被清成「0 份」",
             "本道分到 0 份" in q.read_text(encoding="utf-8"))
 
+        # ★★★ 覆盖手写行时必须**报出来**——照搬 Blackstone #169 那次事故的形状：
+        #   0 源道，模板的 `Pending.` 被换成了两句判断，于是「留着 Pending. 不覆盖」
+        #   那道保护不认识它们，重出时静默抹掉。
+        r = ws / "references" / "research" / "01-writings.md"
+        r.write_text("# W\n\n" + HEAD + "\n\n"
+                     "**本道的定位：印本年表，不是生平年表。**\n"
+                     "它用的是扉页上逐字照录的印本年。\n\n"
+                     "## Source-linked observations\n\nPending.\n", encoding="utf-8")
+        _, _, _, dr = process(ws, check=True)
+        chk("★ --check 就要报出会被覆盖的手写行",
+            any("印本年表" in l for l in dr.get("01-writings.md", [])))
+        _, _, _, dr2 = process(ws, check=False)
+        chk("★ 真写盘时同样报出来",
+            any("逐字照录" in l for l in dr2.get("01-writings.md", [])))
+        chk("**反对照**：表格行与模板句不算手写行",
+            all("|" not in l and "Pending." not in l
+                for l in dr2.get("01-writings.md", [])))
+
         # 无 Scope 标题的文件不许被动
         p = ws / "references" / "research" / "06-timeline.md"
         p.write_text("# 没有 Scope 节\n\n正文\n", encoding="utf-8")
@@ -270,12 +328,24 @@ def main() -> int:
     if not a.workspace:
         ap.error("要么给 workspace，要么用 --self-test")
     ws = pathlib.Path(a.workspace)
-    changed, nf, nr = process(ws, a.check)
+    changed, nf, nr, dropped = process(ws, a.check)
     print("台账 %d 行；道文件 %d 份" % (nr, nf))
     if not changed:
         print("Scope 节与台账一致，无需改动")
         return 0
     print(("**过期 %d 份**：" if a.check else "已重出 %d 份：") % len(changed) + ", ".join(changed))
+    if dropped:
+        # ★★★ 不阻止覆盖（Scope 节本就该由机器拥有），**只是不让它静默**。
+        #   起因：Blackstone #169 的 06-timeline.md 是 0 源道，我把模板的 `Pending.`
+        #   换成了两句判断，于是「留着 Pending. 就不覆盖」那道保护不认识它们，
+        #   重出时**静默抹掉**。判断性的话该搬到 Source-linked observations。
+        verb = "会被覆盖掉" if a.check else "已被覆盖掉"
+        print("\n★★ **下列手写行%s**（Scope 节由工具拥有，判断性的话请搬到 "
+              "`Source-linked observations`）：" % verb)
+        for name, lines in sorted(dropped.items()):
+            print("  【%s】" % name)
+            for l in lines:
+                print("     %s" % l[:110])
     return 1 if a.check else 0
 
 
