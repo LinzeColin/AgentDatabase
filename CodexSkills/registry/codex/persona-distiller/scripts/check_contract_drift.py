@@ -109,7 +109,8 @@ def norm(v: str | None) -> str | None:
     return v[1:] if v.startswith("v") else v
 
 
-def _one_ledger_per_workspace(root: pathlib.Path) -> list[str]:
+def _one_ledger_per_workspace(root: pathlib.Path,
+                              corpora: pathlib.Path | None = None) -> list[str]:
     """**一个工作区只许有一份 `source-ledger.jsonl`。**
 
     ## 撞出它的那一次（2026-08-12）
@@ -137,7 +138,12 @@ def _one_ledger_per_workspace(root: pathlib.Path) -> list[str]:
         "wip-blackstone-169/workspaces/william-blackstone/william-blackstone",
         "wip-holmes-170/workspaces/oliver-wendell-holmes-jr/oliver-wendell-holmes-jr",
     }
-    corpora = root.parent.parent.parent / "skill_log_evals/persona-distiller/_corpora"
+    # ★ `corpora` 可注入**只为让自测碰得到这段逻辑**：默认值与原来逐字相同。
+    #   2026-08-12 发现本函数与 `_verification_counts` 在 `--self-test` 里
+    #   **两条都只走「路径不存在 → 返回 []」**，于是「正对照 0 报」对它们毫无意义，
+    #   负对照更是一条都没有 —— [[empty-default-swallows-unknown]] 的原样。
+    if corpora is None:
+        corpora = root.parent.parent.parent / "skill_log_evals/persona-distiller/_corpora"
     if not corpora.is_dir():
         return []
     out = []
@@ -692,12 +698,74 @@ def self_test() -> int:
         if any("builder_version" in p for p in problems):
             failures.append("误报：故意钉住的 builder_version v0.0.0.5 被当成漂移")
 
+        # ── D. `_verification_counts`（2026-08-12 接进本门）────────────────────
+        # ★ 补这一组的起因：接完线才发现它在自测里**只走「文件不存在 → 返回 []」**，
+        #   于是上面那句「正对照 0 报」对它一个字都不成立，负对照更是一条没有。
+        #   ⇒ [[empty-default-swallows-unknown]]：`[]` 被读成「没问题」。
+        stub = clean / "scripts" / "check_verification_counts.py"
+        stub.parent.mkdir(parents=True, exist_ok=True)
+
+        def _stub(body: str) -> list[str]:
+            stub.write_text(body, encoding="utf-8")
+            return _verification_counts(clean)
+
+        # D1 负对照：被调判据报「对不上」→ 本门必须转述，且要带上项名与两个数
+        got = _stub("print('''{\"**对不上的项数**\": 1, \"明细\": ["
+                    "{\"项\": \"判据件数\", \"实况\": 89, \"文中\": \"[77]\", \"判定\": \"对不上\"}]}''')\n")
+        if not (got and "[自报数字]" in got[0] and "判据件数" in got[0]
+                and "89" in got[0] and "77" in got[0]):
+            failures.append(f"负对照未被抓出：D1·自报数字对不上（实得 {got}）")
+
+        # D2 正对照：报 0 项 → 本门不许报（否则每次提交都在喊狼来了）
+        if _stub("print('{\"**对不上的项数**\": 0, \"明细\": []}')\n"):
+            failures.append("误报：D2·被调判据报 0 项，本门却仍然报了")
+
+        # D3 ★★ **最容易漏的一条**：被调判据自己崩了 / 吐的不是 JSON。
+        #   此时既不能当成「0 项」放行，也不能连门一起崩——必须**报出来**。
+        #   同族教训 [[untested-fallback-branches-only-fire-on-their-machine]]：
+        #   没走过的兜底分支，只在别人机器上发作。
+        got = _stub("import sys; sys.stderr.write('boom\\n'); sys.exit(3)\n")
+        if not (got and "跑不起来" in got[0]):
+            failures.append(f"负对照未被抓出：D3·被调判据崩掉时静默放行（实得 {got}）")
+        got = _stub("print('这不是 JSON')\n")
+        if not (got and "跑不起来" in got[0]):
+            failures.append(f"负对照未被抓出：D3b·被调判据吐非 JSON 时静默放行（实得 {got}）")
+        stub.unlink()
+
+        # ── E. `_one_ledger_per_workspace`（同日接进本门，同样从没被夹具驱动过）──
+        corp = tmp / "corpora"
+        for rel, dirs in (
+            ("wip-x-001/workspaces/alice/alice", ["evidence"]),            # E2 正：一份
+            ("wip-y-002/workspaces/bob/bob", ["evidence", "_corpus"]),     # E1 负：两份
+            # E3 正：**已判过分的两个在豁免名单里**，重出账本才是更大的破坏
+            ("wip-holmes-170/workspaces/oliver-wendell-holmes-jr/oliver-wendell-holmes-jr",
+             ["evidence", "_corpus"]),
+        ):
+            for d in dirs:
+                p = corp / rel / d
+                p.mkdir(parents=True, exist_ok=True)
+                (p / "source-ledger.jsonl").write_text("{}\n", encoding="utf-8")
+        got = _one_ledger_per_workspace(clean, corpora=corp)
+        blob = " ".join(got)
+        if "wip-y-002" not in blob:
+            failures.append(f"负对照未被抓出：E1·一个工作区两份账本（实得 {got}）")
+        if "wip-x-001" in blob:
+            failures.append("误报：E2·只有一份账本的工作区被当成两份")
+        if "wip-holmes-170" in blob:
+            failures.append("误报：E3·豁免名单里的 Holmes #170 仍被报出")
+
     for f in failures:
         print(f"✗ {f}")
     if failures:
         print(f"负对照未通过：{len(failures)} 项")
         return 1
-    print("负对照通过：正对照 0 报，坏样本 5 类全部抓出，钉住的 builder 版本未被误伤")
+    # ★ 这句原写「坏样本 **5 类**全部抓出」——那 5 指的是 `want` 那个元组。
+    #   2026-08-12 加了 D（自报数字 4 条）与 E（一区两账本 3 条）之后它就少报了，
+    #   而**没有任何东西会提醒它**。改成点名分组，不写数：
+    #   数一旦手写，每加一条负对照就陈旧一次 [[self-reported-numbers-must-be-computed]]。
+    print("负对照通过：正对照 0 报；A 版本三轴 / B2 检查器镜像 / C1 输入合同 / C2 陈旧族数 / "
+          "D 自报数字（含**被调判据崩掉不许静默放行**）/ E 一个工作区两份账本（含豁免名单）"
+          "各组坏样本全部抓出，钉住的 builder 版本未被误伤")
     return 0
 
 
