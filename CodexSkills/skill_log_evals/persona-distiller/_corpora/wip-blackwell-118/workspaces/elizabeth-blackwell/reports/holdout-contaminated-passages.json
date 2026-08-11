@@ -1,0 +1,206 @@
+{
+  "src-05f204fa9d76": [
+    {
+      "words": 85,
+      "train_source": "src-a60d08301dac",
+      "text_head": "50 0 5 0 50 75 0 7 6 75 100 0 10 0 100 125 0 12 6 125"
+    },
+    {
+      "words": 78,
+      "train_source": "src-8e8bb3cd393b",
+      "text_head": "2 0 pimlico railways 2 6 pimlico railways 2 0 pimlico railways 2 0 adelaide wharf 1 0 adelaide wharf"
+    },
+    {
+      "words": 53,
+      "train_source": "src-8e8bb3cd393b",
+      "text_head": "national bank of india 80 king william street national bank of scotland london office nicholas lane national provincial bank of"
+    },
+    {
+      "words": 50,
+      "train_source": "src-8e8bb3cd393b",
+      "text_head": "2 0 west india docks 3 6 west india docks 3 6 albert gate 2 6 albert gate 1 0"
+    },
+    {
+      "words": 74,
+      "train_source": "src-a03497151b47",
+      "text_head": "10 0 1 0 10 15 0 1 6 15 20 0 2 0 20 25 0 2 6 25"
+    },
+    {
+      "words": 74,
+      "train_source": "src-a03497151b47",
+      "text_head": "10 0 1 0 10 15 0 1 6 15 20 0 2 0 20 25 0 2 6 25"
+    },
+    {
+      "words": 59,
+      "train_source": "src-fa9323450221",
+      "text_head": "25 0 2 6 25 50 0 5 0 50 75 0 7 6 75 100 0 10 0 100"
+    }
+  ],
+  "src-4e29d5330b24": [
+    {
+      "words": 193,
+      "train_source": "src-61060e998da0",
+      "text_head": "lease or tack 1 for any definite term not exceeding a year of any dwelling house or part of a"
+    },
+    {
+      "words": 98,
+      "train_source": "src-61060e998da0",
+      "text_head": "weight of the contents of the parcel no parcel containing explosive articles articles liable to sudden combustion perishable articles articles"
+    },
+    {
+      "words": 68,
+      "train_source": "src-61060e998da0",
+      "text_head": "for the loss and damage of inland registered postal packets of all kinds upon prepayment of a fee in addition"
+    },
+    {
+      "words": 67,
+      "train_source": "src-61060e998da0",
+      "text_head": "posted singly or in a packet one halfpenny but a packet containing two or more registered newspapers is not chargeable"
+    },
+    {
+      "words": 65,
+      "train_source": "src-61060e998da0",
+      "text_head": "oz in weight may be tendered to a servant of the railway company over whose line they are to be"
+    },
+    {
+      "words": 63,
+      "train_source": "src-61060e998da0",
+      "text_head": "weight of the contents of the parcel no parcel containing explosive articles articles liable to sudden combustion perishable articles articles"
+    },
+    {
+      "words": 129,
+      "train_source": "src-b257d99583e6",
+      "text_head": "up to a maximum limit of 120 for the loss and damage of inland registered postal packets of all kinds"
+    },
+    {
+      "words": 64,
+      "train_source": "src-b257d99583e6",
+      "text_head": "30 40 10d telegraph money orders inland money may be transmitted by telegraph money order up to 40 for each"
+    },
+    {
+      "words": 64,
+      "train_source": "src-b257d99583e6",
+      "text_head": "30 40 10d telegraph money orders inland money may be transmitted by telegraph money order up to 40 for each"
+    },
+    {
+      "words": 50,
+      "train_source": "src-b257d99583e6",
+      "text_head": "up to a maximum limit of 120 for the loss and damage of inland registered postal packets of all kinds"
+    },
+    {
+      "words": 102,
+      "train_source": "src-fa9323450221",
+      "text_head": "likely to injure other parcels liquids unless securely packed in proper cases or any article or substance specially prohibited from"
+    },
+    {
+      "words": 92,
+      "train_source": "src-fa9323450221",
+      "text_head": "grants of the honour or dignity of a duke 350 0 0 of a marquis 300 0 0 of an"
+    },
+    {
+      "words": 83,
+      "train_source": "src-fa9323450221",
+      "text_head": "2 for any definite term less than a year a of any furnished dwelling house or apartments where the rent"
+    },
+    {
+      "words": 73,
+      "train_source": "src-fa9323450221",
+      "text_head": "the consideration moving either to the lessor or to any other person consists of any money stock or security in"
+    },
+    {
+      "words": 67,
+      "train_source": "src-fa9323450221",
+      "text_head": "posted singly or in a packet one halfpenny but a packet containing two or more registered newspapers is not chargeable"
+    },
+    {
+      "words": 60,
+      "train_source": "src-fa9323450221",
+      "text_head": "accurate statement of the nature and value of the contents the date of posting and the sender s name and"
+    },
+    {
+      "words": 56,
+      "train_source": "src-fa9323450221",
+      "text_head": "ensigns only 10 0 0 grant of the custody of the person or estate of a lunatic 2 0 0"
+    },
+    {
+      "words": 55,
+      "train_source": "src-fa9323450221",
+      "text_head": "circus mark lane and battersea post offices in london as well as at the head offices in edinburgh dublin and"
+    },
+    {
+      "words": 51,
+      "train_source": "src-fa9323450221",
+      "text_head": "street lombard street ludgate circus and mark lane post offices such parcels must be presented at the counter between 9"
+    },
+    {
+      "words": 99,
+      "train_source": "src-267b7e3a9bca",
+      "text_head": "for any other definite term or for any indefinite term of any lands tenements or heritable subjects where the consideration"
+    },
+    {
+      "words": 79,
+      "train_source": "src-267b7e3a9bca",
+      "text_head": "no parcel containing explosive articles articles liable to sudden combustion perishable articles articles likely to injure other parcels liquids unless"
+    },
+    {
+      "words": 79,
+      "train_source": "src-267b7e3a9bca",
+      "text_head": "no parcel containing explosive articles articles liable to sudden combustion perishable articles articles likely to injure other parcels liquids unless"
+    },
+    {
+      "words": 73,
+      "train_source": "src-267b7e3a9bca",
+      "text_head": "an earl 250 0 0 of a viscount 200 0 0 of a baron 150 0 0 of a baronet"
+    },
+    {
+      "words": 67,
+      "train_source": "src-267b7e3a9bca",
+      "text_head": "posted singly or in a packet one halfpenny but a packet containing two or more registered newspapers is not chargeable"
+    },
+    {
+      "words": 54,
+      "train_source": "src-267b7e3a9bca",
+      "text_head": "in respect of such consideration the same duty as a conveyance on a sale for the same consideration where the"
+    },
+    {
+      "words": 67,
+      "train_source": "src-a03497151b47",
+      "text_head": "posted singly or in a packet one halfpenny but a packet containing two or more registered newspapers is not chargeable"
+    },
+    {
+      "words": 67,
+      "train_source": "src-a03497151b47",
+      "text_head": "posted singly or in a packet one halfpenny but a packet containing two or more registered newspapers is not chargeable"
+    },
+    {
+      "words": 67,
+      "train_source": "src-a03497151b47",
+      "text_head": "posted singly or in a packet one halfpenny but a packet containing two or more registered newspapers is not chargeable"
+    },
+    {
+      "words": 57,
+      "train_source": "src-a03497151b47",
+      "text_head": "0 grants of the honour or dignity of a duke 350 0 0 of a marquis 300 0 0 of"
+    },
+    {
+      "words": 57,
+      "train_source": "src-a03497151b47",
+      "text_head": "0 grants of the honour or dignity of a duke 350 0 0 of a marquis 300 0 0 of"
+    },
+    {
+      "words": 57,
+      "train_source": "src-a03497151b47",
+      "text_head": "0 grants of the honour or dignity of a duke 350 0 0 of a marquis 300 0 0 of"
+    },
+    {
+      "words": 67,
+      "train_source": "src-fe2535891e86",
+      "text_head": "posted singly or in a packet one halfpenny but a packet containing two or more registered newspapers is not chargeable"
+    },
+    {
+      "words": 56,
+      "train_source": "src-fe2535891e86",
+      "text_head": "posted singly or in a packet one halfpenny but a packet containing two or more registered newspapers is not chargeable"
+    }
+  ]
+}
