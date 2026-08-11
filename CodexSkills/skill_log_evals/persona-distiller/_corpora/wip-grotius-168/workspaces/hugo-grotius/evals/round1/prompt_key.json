@@ -1,0 +1,22 @@
+{
+ "★": "不透明题号 → case_id。**不发给答题方，也不发给评委。**",
+ "seed": "grotius-168-round1-prompts",
+ "map": {
+  "q-da1409e3": "hg-known-01",
+  "q-22444f82": "hg-boundary-01",
+  "q-e4fa4eca": "hg-voice-01",
+  "q-a7e84892": "hg-trajectory-01",
+  "q-fcd13083": "hg-contrast-01",
+  "q-6d336469": "hg-fact-preservation-01",
+  "q-ed7d35ff": "hg-style-decoy-01",
+  "q-fe6de6d7": "hg-task-completion-01",
+  "q-e7572cda": "hg-planning-fidelity-01",
+  "q-9c95a74e": "hg-tool-use-01",
+  "q-eb384254": "hg-capability-calibration-01",
+  "q-c7c45378": "hg-refusal-stop-01",
+  "q-2891a79c": "hg-long-horizon-01",
+  "q-1c7329f8": "hg-identity-routing-01",
+  "q-8ae80b07": "hg-anonymous-fidelity-01",
+  "q-acf5be90": "hg-token-efficiency-01"
+ }
+}

@@ -70,6 +70,38 @@ NONWORD = re.compile(r"[^0-9A-Za-z]+")
 MIN = 20        # 投影后的最小长度；再短就不足以判定
 LONGS = re.compile(r"[fs]")
 
+# ★ 2026-08-11：**提到模块级。** 原先它是 `main()` 的局部量，
+#   于是自测里引用它当场 NameError——自测跑起来才看得见，
+#   `py_compile` 与 `--help` 都碰不到（[[a-checker-nothing-calls-is-not-a-checker]]）。
+IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9]*(?:[._\-/][A-Za-z0-9_]+)+$")
+
+# ★ 短于 `Q` 抽取下限的引号串——`Q` 要求首字母之后还有 18 个字符，
+#   于是 ``Guilelmus Grotius``（17 字）**根本不会被抽出来**。
+UNEXTRACTED = re.compile(r"`([^`\n]{2,%d})`|「([^」\n]{2,%d})」" % (MIN - 1, MIN - 1))
+
+
+def count_unchecked(text: str) -> int:
+    """数「**看起来像原文、而本判据够不着**」的短串。
+
+    ★★ 2026-08-11：两道长度门槛叠着，短原文串从头到尾没被看过一眼——
+    `Q` 抽不到，`find()` 又对 proj<MIN 的段旧版直接答 `exact`。
+    Grotius #168 实测：`facts.md` 的 10 条引文只有 5 条进了核验，
+    而屏幕上印的是「✓ 全部可在语料中找到」。
+    ★ 本件**不动那两个门槛**（动它就是全库一百多份产物一起变），
+      只做一件事：**把「没查」的条数数出来**，不让它冒充「查过了」。
+
+    ★ 单独成函数，是为了让自测打**这一段真代码**：
+      先前那版把同样的逻辑在自测里抄了一遍，于是关掉真代码时自测照样全绿
+      （[[a-checker-nothing-calls-is-not-a-checker]]，同日第二次）。
+    """
+    n = 0
+    for m in UNEXTRACTED.finditer(text):
+        s = (m.group(1) or m.group(2) or "").strip()
+        # 只数**看起来像原文**的：至少 8 个西文字母，且不是标识符
+        if len(re.sub(r"[^A-Za-zÀ-ÿ]", "", s)) >= 8 and not IDENT.match(s):
+            n += 1
+    return n
+
 # v0.0.0.37：引号形态原本只认「」与 " —— **法文 «» 一律扫不到。**
 # Pasteur #106 实测：答案里 11 条外语引文，只有 4 条被看见，**7 条法文 «» 从未被扫过**（64%）。
 # 与 v0.0.0.26（非西方姓名形态）、v0.0.0.35（射程停在断言层）同一族：
@@ -112,10 +144,22 @@ def fold_s(s: str) -> str:
 
 
 def find(seg: str, projected, folded=None) -> str:
-    """返回 'exact' / 'longs' / '' —— 空串表示未命中。"""
+    """返回 'exact' / 'longs' / 'short' / '' —— 空串表示未命中。
+
+    ★★ 2026-08-11：`short` 这一档是新加的，**此前这里返回的是 `exact`。**
+    Grotius #168 实测撞出来：我拿 `find()` 去核 `Guilelmus Grotius`
+    （弟弟的拉丁名主格形，**语料里一处也没有**），它答 `exact`。
+    原因就是下面这一行——「太短不作判据」被写成了「已核实」。
+    我据此报过一句「23 条短引文 0 条对不上」，**那句话是空的**：
+    这 23 条一条也没被真查过，`find` 对它们一律答 exact。
+    （[[empty-default-swallows-unknown]]：不知道被写成了没问题。）
+
+    ★ 只改返回值、不改门槛：调用方 `scan` 本来就在调它之前跳过短段，
+      所以计数不变；变的是**「不判」不再冒充「判过了」**。
+    """
     q = proj(seg)
     if len(q) < MIN:
-        return "exact"                   # 太短，不作判据
+        return "short"                   # 太短，**不作判据——也不算通过**
     if any(q in t for t in projected):
         return "exact"
     if folded is not None and any(fold_s(q) in t for t in folded):
@@ -284,6 +328,45 @@ def self_test(projected=None, folded=None) -> int:
         print(f"  {'✓' if not t_e else '✗'} 空目录读到 0 份，不凭空命中（反向对照）")
         missed += bool(t_e)
 
+    # ══ ★★ 「不判」不许冒充「判过了」（2026-08-11，Grotius #168）══
+    print("\n══ ★ 短串：不判 ≠ 通过 ══")
+    tex, fol = fixture_corpus()
+
+    # ① `find()` 对短于 MIN 的串必须答 `short`，**不能答 `exact`**。
+    #    旧版答 exact，于是我拿它核一个语料里根本不存在的名字形，它说「有」。
+    r1 = find("Guilelmus Grotius", tex, fol)          # 16 字，夹具语料里没有
+    ok1 = r1 == "short"
+    print(f"  {'✓' if ok1 else '✗'} 短串 → find 答 {r1!r}（须为 'short'，旧版答 'exact'）")
+    missed += not ok1
+
+    # ①′ **反对照**：够长且真在语料里的，仍须答 exact——否则这条改动把判据废了。
+    r2 = find("It was shewn to the Council, and returned to me", tex, fol)
+    ok2 = r2 == "exact"
+    print(f"  {'✓' if ok2 else '✗'} **反对照**：够长且在语料里 → 仍答 {r2!r}（须为 'exact'）")
+    missed += not ok2
+
+    # ①″ **反对照**：够长且不在语料里的，仍须答 ''——短串档不许顺手放行长串。
+    r3 = find("this sentence is nowhere in any fixture corpus at all", tex, fol)
+    ok3 = r3 == ""
+    print(f"  {'✓' if ok3 else '✗'} **反对照**：够长且不在语料里 → 仍答未命中")
+    missed += not ok3
+
+    # ② 未核计数：短反引号串必须被数出来。用与 main 同一条正则，不另抄。
+    _count = count_unchecked          # ← 打的是 main 用的同一段代码，不是抄件
+    ok4 = _count("弟弟的拉丁名作 `Guilelmus Grotius`，父亲作 `Janus de Grotius`。") == 2
+    print(f"  {'✓' if ok4 else '✗'} 两处短原文串被数进「未核」")
+    missed += not ok4
+
+    # ②′ **反对照**：标识符与纯中文不算未核——否则每份文档都会报一堆假的未核数，
+    #     而误报的代价是作者学会忽略这个数（与文件头 Fleming 那次同一个失效方向）。
+    # ★ 夹具里的标识符必须**落在 UNEXTRACTED 的长度窗口内**（2–19 字），
+    #   否则它根本走不到 IDENT 那一步，这条反对照就是空的——
+    #   第一版我写的是 `check_quote_locator.py`（23 字），**变异测试当场证明它测不到东西**
+    #   （[[fixtures-cleaner-than-the-real-thing]]：夹具比要测的路径更窄，等于没测）。
+    ok5 = _count("见 `emit_lane_scope` 与 `ledger.py`，另见「他说的话」。") == 0
+    print(f"  {'✓' if ok5 else '✗'} **反对照**：标识符／来源号／中文串不计入未核")
+    missed += not ok5
+
     print("\n  ✓ 负对照通过" if not missed else f"\n  ✗ {missed} 条不合——本检查器已失效，不得依赖其结论")
     return missed
 
@@ -345,13 +428,23 @@ def main() -> int:
     #   接进门之后就是长期误报，而误报的代价是作者学会忽略这道门。
     #   口径：**无空白 + 由 . _ - / 连接的字母数字段**判为标识符，跳过。
     #   ★ 只跳这一种形状——德文长复合词（`Milzbrandbakterien`）没有分隔符，照核不误。
-    IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9]*(?:[._\-/][A-Za-z0-9_]+)+$")
+    # IDENT 已提到模块级——main 与 self_test 共用同一个
 
+    # ★★ 2026-08-11：**两道长度门槛叠着，短原文串从头到尾没被看过一眼。**
+    #   ① `Q` 自己要求首字母之后还有 18 个字符（`{18,300}`），
+    #      于是 ``Guilelmus Grotius``（17 字）**根本不会被抽出来**；
+    #   ② 就算抽出来了，`find()` 对 proj<MIN 的段旧版直接答 `exact`。
+    #   Grotius #168 实测：`facts.md` 的 10 条引文只有 5 条进了核验，
+    #   而屏幕上印的是「✓ 全部可在语料中找到」。
+    #   ★ 本次**不动这两个门槛**（动它就是全库 102 份产物一起变），
+    #     只做一件事：**把「没查」的条数数出来、印出来**，不让它冒充「查过了」。
     def scan(label: str, unit_id: str, text: str, acc):
+        acc["unchecked"] += count_unchecked(text)
         for m in Q.finditer(text):
             acc["quotes"] += 1
             for seg in SPLIT.split(_q(m)):
                 if len(proj(seg)) < MIN:
+                    acc["unchecked"] += 1     # 抽出来了但太短——同样是**没查**
                     continue
                 if IDENT.match(seg.strip()):
                     acc["idents"] += 1        # 标识符不是引文，**只计数不判**
@@ -363,7 +456,7 @@ def main() -> int:
                 elif not hit:
                     acc["bad"].append((f"{label}/{unit_id}", re.sub(r"\s+", " ", seg).strip()[:100]))
 
-    acc = {"quotes": 0, "segs": 0, "bad": [], "longs": [], "idents": 0}
+    acc = {"quotes": 0, "segs": 0, "bad": [], "longs": [], "idents": 0, "unchecked": 0}
 
     if a.claims:
         for line in a.claims.read_text(encoding="utf-8").splitlines():
@@ -399,6 +492,13 @@ def main() -> int:
           f"未命中 {len(acc['bad'])} 个，长 s 还原后才命中 {len(acc['longs'])} 个"
           + (f"，跳过标识符 {acc['idents']} 个（判据名/字段名/来源号，不是引文）"
              if acc["idents"] else ""))
+    # ★★ 2026-08-11：**没查的要单独报，不许并进「通过」里。**
+    if acc["unchecked"]:
+        print(f"  ⚠ **另有 {acc['unchecked']} 处短原文串未核**"
+              f"（短于 {MIN}，本判据的两道长度门槛都拦在前面）——"
+              f"**这是「没查」，不是「查过没问题」**。"
+              f"\n    Grotius #168 实测：其中一条是语料里根本不存在的名字形，"
+              f"而屏幕当时印的是「全部可在语料中找到」。")
     for cid, s in acc["longs"]:
         print(f"  · 长 s 还原后命中 {cid}: 「{s[:70]}」")
     for cid, s in acc["bad"]:
@@ -411,7 +511,9 @@ def main() -> int:
               "确认答案里的引文用的是本判据认得的形态"
               "（「」／\"\"／«»／„“／‹›／反引号）")
         return 4          # ★ 与「语料读不到」(3) **分开**：见下方说明
-    print("  ✓ 全部可在语料中找到" if not acc["bad"]
+    print("  ✓ 已核的片段全部可在语料中找到"
+          + ("（**未核的那 %d 处不在此列**）" % acc["unchecked"] if acc["unchecked"] else "")
+          if not acc["bad"]
           else "\n  ⚠ 未命中不等于伪造——须人工看一眼原文再定（见文件头）。"
                "\n    但**「改了 OCR 错字再当逐字引文用」也会落在这里**，那一类是真问题。")
     # ★ v0.0.0.38：退出码分三种，此前三种情形都返回 2，调用方无从分辨，

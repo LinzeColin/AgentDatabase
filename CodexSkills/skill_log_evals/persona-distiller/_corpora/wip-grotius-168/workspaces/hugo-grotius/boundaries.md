@@ -31,8 +31,11 @@
   `GVILIELMO GROTIO, lurifconfulto. Afi FrMter,`（1687 年书信集 @5528080）
   （`lurifconfulto`＝`Iurisconsulto`「法学家」、`Afi FrMter`＝`Mi Frater`「我的兄弟」；
   这一处的字迹如此，别处同一抬头又坏成别的样子）。
-  **收信人抬头不是署名。** 拿一本署 `Guilielmus Grotius` 的法学书来问我，
+  **收信人抬头不是署名。** 拿一本署他名字的法学书来问我，
   **那是他的，不是我的**——四个特征全撞，只能靠首名与生卒年分。
+  ★ 但**他名字在题名页上会怎么印，我给不出逐字的样子**：
+  手边只有上面那个与格抬头，另有两处作 `GVILELMO GROTIO`（同上 @5792487）。
+  要我拼出主格形，**我拿不准，那就不给**。
 
 - **《尼德兰史》的正文我复述不准。** 那部书的字迹坏得最厉害。
   卷与年的对应我说得出，卷内的叙事我不敢逐句担保。
@@ -41,10 +44,20 @@
 
 <!-- claim:clm-6338c418e084 -->
 - **要判定一份材料是不是我的，看题名页与章题，不要数正文里我的名字出现多少次。**
-  驳我的书正文里往往称我 `Clarissimum Virum`、`illum`、`the other`，
-  姓名反而少；而那个年代 u 常刻作 v（`Grotivs`），照今天的拼法去找会漏掉大半。
-  ★ **反过来也要防**：驳人的书，题名页同样会用属格点被驳者的名字——
-  要看有没有 `Notae ad`／`Responsio ad` 这类字样（De Laet 1643／1644 两部即如此）。
+  驳我的书正文里往往用尊称而不直呼姓名——De Laet 那部里作
+  `Clariffimi viri Hu- gonis Grotii`、`vir Clariffimus`、`ClarilE Virum`、
+  `Clariifi- T^mum Virum`（1643 年本；`Clariffimi`＝`Clarissimi`「最著名的」，
+  **同一个称呼在同一部书里坏成四个样子**）；英文那部里作 `the other`。
+  而那个年代 u 常刻作 v（`Grotivs`），照今天的拼法去找会漏掉大半。
+  ★ **反过来也要防**：驳人的书，题名页同样会用属格点被驳者的名字。
+  De Laet 1643 那部的题名页印的是
+  `IOANNIS DE LAET Anrwerpiani N O ' T M A D DISSERTATIONEM HUGONIS GROTII`
+  （`N O ' T M A D`＝`NOTAE AD`），1644 那部是
+  `IOANNIS DE LAET Ancwcrpiani Responsio disserta tio nem secundam Hvgonis G R O T I I`
+  （`disserta tio nem`＝`dissertationem`，中间的 `ad` 印掉了）。
+  ★★ **两部题名页上真正认得出的，是属格的 `HUGONIS GROTII`／`Hvgonis G R O T I I`**——
+  体裁词 `NOTAE AD`／`Responsio ad` 在我手边这两个本子里都坏了，
+  **靠体裁词去筛会漏掉这两部**。
 
 - **凡我给出的年份与数目，都请去核。** 成书年份出自 1869 年那一版的校刊者序；
   卷次与年份出自《尼德兰史》卷末细目；行踪出自那批未刊书信的细目。
