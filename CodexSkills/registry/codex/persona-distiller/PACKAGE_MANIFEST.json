@@ -381,8 +381,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "462dc1f65163aa1dc92b37f6623d3da9b17b152839c87f7b1ef6cf11cbd7f36c",
-      "size_bytes": 236528
+      "sha256": "7c64a6ef972221583f353614a44099a5e388b0fc9cf1d98777cdf45a0ceb5db0",
+      "size_bytes": 238228
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -676,8 +676,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_lane_quotes_verbatim.py",
-      "sha256": "14f001619022183b61ae6ce6e972ed4a09c211979b2656a365a11a8ad3b7ce8d",
-      "size_bytes": 40255
+      "sha256": "5c9bfb7c8f65e5fb5594010cbff3f6bc2b88d7baaf1a4775679cc60287df5b73",
+      "size_bytes": 45793
     },
     {
       "path": "references/pipeline/checkers/check_longs_corruption.py",
@@ -1451,8 +1451,8 @@
     },
     {
       "path": "scripts/check_lane_quotes_verbatim.py",
-      "sha256": "14f001619022183b61ae6ce6e972ed4a09c211979b2656a365a11a8ad3b7ce8d",
-      "size_bytes": 40255
+      "sha256": "5c9bfb7c8f65e5fb5594010cbff3f6bc2b88d7baaf1a4775679cc60287df5b73",
+      "size_bytes": 45793
     },
     {
       "path": "scripts/check_longs_corruption.py",

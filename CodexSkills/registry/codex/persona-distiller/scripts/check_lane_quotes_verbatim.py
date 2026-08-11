@@ -175,22 +175,44 @@ def _norm(s: str) -> str:
 
 
 def load_corpus(ws: pathlib.Path):
-    """→ {source_id: 归一化后的全文}。读不到的**记下来**，不当成没问题。"""
+    """→ `(train 语料, 读不到的, holdout 语料)`。读不到的**记下来**，不当成没问题。
+
+    ## ★★★★★ 2026-08-11：**train 与 holdout 分开返回**
+
+    原来它返回一个混在一起的 `{source_id: 全文}`，`holdout` 也在里面。两个后果：
+
+    1. **研究道引到 holdout 也会「核过」** ——判据拿整个语料去找，
+       命中 holdout 与命中 train 一样算通过，于是
+       「研究方不得查看 holdout 正文」这条约束**在这里是空的**。
+    2. 调试时一句 `print(corpus)` 就能把 holdout 正文倒进人的上下文。
+       Kelsen #171 当天就这么泄了 5%（含完整目录），
+       见 `_corpora/wip-kelsen-171/06-holdout污染事故-2026-08-11.md`。
+
+    现在 `verify()` 只拿 train 去核；命中不了 train 而命中 holdout 的，
+    由调用方报成**独立的一类重错**（`引到了 holdout`），不再和「对不上」混为一谈——
+    两者的处置完全不同：前者是隔离破了，后者只是引错了字。
+
+    ★ 返回三元组是**故意的破坏性改动**：旧写法 `corp, unread = load_corpus(ws)`
+      会当场 `ValueError`，而不是静默拿到少一半的语料。
+      [[empty-default-swallows-unknown]]：宁可炸，不要静默。
+    """
     led = ws / "evidence" / "source-ledger.jsonl"
     if not led.is_file():
-        return None, [f"没有 {led}"]
-    corp, unread = {}, []
+        return None, [f"没有 {led}"], {}
+    corp, unread, held = {}, [], {}
     for line in led.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         r = json.loads(line)
         p = ws / str(r.get("normalized_path") or r.get("local_path") or "")
-        if p.is_file():
-            corp[r.get("source_id")] = _norm(
-                corpus_body(p.read_text(encoding="utf-8", errors="replace")))
-        else:
+        if not p.is_file():
             unread.append(r.get("source_id"))
-    return corp, unread
+            continue
+        body = _norm(corpus_body(p.read_text(encoding="utf-8", errors="replace")))
+        # ★ 只有明确标 `holdout` 的才进 holdout 桶；`split` 缺失一律按 train 处理，
+        #   **不许把「不知道」当成 holdout**——那会把该核的源悄悄移出核验面。
+        (held if r.get("split") == "holdout" else corp)[r.get("source_id")] = body
+    return corp, unread, held
 
 
 def extract_quotes(md: str):
@@ -310,22 +332,41 @@ def verify(quote: str, corpus: dict):
 
 
 def check(ws: pathlib.Path):
-    corp, unread = load_corpus(ws)
+    corp, unread, held = load_corpus(ws)
     if corp is None:
         return 2, {"错": unread}
-    res, bad = {}, 0
+    res, bad, leaked = {}, 0, 0
     for f in sorted((ws / "references" / "research").glob("0*.md")):
         qs = extract_quotes(corpus_body(f.read_text(encoding="utf-8")))
-        miss = [q for q in qs if verify(q, corp) is None]
+        miss, from_holdout = [], []
+        for q in qs:
+            if verify(q, corp) is not None:
+                continue
+            # ★★ 核不到 train，就再问一句：**是不是引到了 holdout**。
+            #   这两件事的处置完全不同——引错了字是改一句话，
+            #   引到 holdout 是隔离破了、这一人的分数不作数。
+            sid = verify(q, held) if held else None
+            (from_holdout if sid else miss).append((q, sid))
         bad += len(miss)
-        res[f.name] = {"引文数": len(qs), "核过": len(qs) - len(miss),
-                       "**对不上**": [q[:140] for q in miss]}
-    return (0 if bad == 0 else 1), {
+        leaked += len(from_holdout)
+        res[f.name] = {"引文数": len(qs), "核过": len(qs) - len(miss) - len(from_holdout),
+                       "**对不上**": [q[:140] for q, _ in miss]}
+        if from_holdout:
+            res[f.name]["★★★ 引到了 holdout"] = [
+                f"{sid}：{q[:110]}" for q, sid in from_holdout]
+    out = {
         "逐道": res,
         "合计": f"{sum(v['引文数'] for v in res.values())} 条引文，对不上 {bad} 条",
         "读不到正文的来源": unread,      # ★ 读不到就说读不到
-        "通过": bad == 0 and not unread,
+        "holdout 源数": len(held),
+        "通过": bad == 0 and leaked == 0 and not unread,
     }
+    if leaked:
+        out["★★★ 隔离破了"] = (
+            f"**{leaked} 条引文核不到 train，却在 holdout 里找到了。**"
+            "研究道不得引 holdout——这不是「引错字」，是隔离破了，"
+            "这一人物的判分不作数。")
+    return (0 if (bad == 0 and leaked == 0) else 1), out
 
 
 def self_test():
@@ -624,12 +665,61 @@ def self_test():
     chk("⑦ 被判为散文而跳过的条数要有计数",
         isinstance(getattr(extract_quotes, "skipped_prose", None), int))
 
+    print("\n══ ★★★★★ 隔离：**研究道引到 holdout 不许算「核过」** ══")
+    # 这一组必须真建工作区走 `check()`——`load_corpus` 分桶的效果只在那一层看得见。
+    import tempfile
+    _TRAIN = ("Of course in using the word \"vacuum\" I do not mean absolute vacuum, "
+              "but that which is ordinarily obtained by the use of an air-pump.")
+    _HELD = ("Ueber Dante schreiben heisst wohl Eulen nach Athen tragen! "
+             "In einer sechshundertjaehrigen Literatur bemuehen sich alle gebildeten Nationen.")
+
+    def _ws(lane_quote):
+        root = pathlib.Path(tempfile.mkdtemp())
+        (root / "evidence").mkdir(parents=True)
+        (root / "references" / "research").mkdir(parents=True)
+        (root / "raw" / "src-train000000").mkdir(parents=True)
+        (root / "references" / "holdout" / "src-held0000000").mkdir(parents=True)
+        (root / "raw/src-train000000/a.txt").write_text(_TRAIN, encoding="utf-8")
+        (root / "references/holdout/src-held0000000/b.txt").write_text(_HELD, encoding="utf-8")
+        (root / "evidence/source-ledger.jsonl").write_text(
+            json.dumps({"source_id": "src-train000000", "split": "train",
+                        "local_path": "raw/src-train000000/a.txt"}, ensure_ascii=False) + "\n" +
+            json.dumps({"source_id": "src-held0000000", "split": "holdout",
+                        "local_path": "references/holdout/src-held0000000/b.txt"},
+                       ensure_ascii=False) + "\n", encoding="utf-8")
+        (root / "references/research/01-writings.md").write_text(
+            "散文一句。`%s`\n" % lane_quote, encoding="utf-8")
+        return root
+
+    rc, out = check(_ws(_TRAIN[:120]))
+    chk("⑧ 引 train 照旧核过（rc=%d）" % rc, rc == 0 and out["通过"])
+
+    rc, out = check(_ws(_HELD[:120]))
+    lane = out["逐道"]["01-writings.md"]
+    chk("⑨ ★ 引 holdout：不许算核过（核过=%d）" % lane["核过"], lane["核过"] == 0)
+    chk("⑩ ★★ 引 holdout：**不许混进「对不上」**（对不上=%d）" % len(lane["**对不上**"]),
+        not lane["**对不上**"])
+    chk("⑪ ★★★ 引 holdout：要单列成「隔离破了」并且不通过",
+        "★★★ 隔离破了" in out and rc == 1 and not out["通过"])
+    chk("⑫ 单列里要点出是哪一份 holdout 源",
+        any("src-held0000000" in s for s in lane.get("★★★ 引到了 holdout", [])))
+
+    # ⑬ ★ 过校正守卫：`split` 缺失的源**按 train 处理**，不许被当成 holdout 移出核验面
+    root = _ws(_TRAIN[:120])
+    led = root / "evidence/source-ledger.jsonl"
+    led.write_text("\n".join(
+        json.dumps({k: v for k, v in json.loads(l).items() if k != "split"}, ensure_ascii=False)
+        for l in led.read_text(encoding="utf-8").splitlines() if l.strip()) + "\n",
+        encoding="utf-8")
+    rc, out = check(root)
+    chk("⑬ split 缺失按 train 处理（仍核过，rc=%d）" % rc, rc == 0)
+
     if bad:
         print("\n未过：")
         for b in bad:
             print("  · " + b)
         return 2
-    print("\n✓ 自测全过（3 正 + 5 反 + 2 条取法 + 7 条跨行）")
+    print("\n✓ 自测全过（3 正 + 5 反 + 2 条取法 + 7 条跨行 + 6 条隔离）")
     return 0
 
 
