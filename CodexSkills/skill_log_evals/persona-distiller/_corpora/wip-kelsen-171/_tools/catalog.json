@@ -1,0 +1,163 @@
+{
+  "diestaatslehrede00kels": [
+    {
+      "ppn": "146748832",
+      "008_date1": "1905",
+      "245a": "Die Staatslehre des Dante Alighieri",
+      "245b": "Deuticke",
+      "245c": "von Hans Kelsen",
+      "250a": null,
+      "260a": "Wien [u.a]",
+      "260b": "Deuticke",
+      "260c": "1905",
+      "300a": "IV, 152 S.",
+      "numberOfRecords": "1"
+    }
+  ],
+  "kommentarzurste00kelsgoog": [
+    {
+      "ppn": "377334669",
+      "008_date1": "1907",
+      "245a": "Kommentar zur österreichischen Reichsratswahlordnung",
+      "245b": "(gesetz v. 26. Jänner 1907)",
+      "245c": "Von Dr. Hans Kelsen",
+      "250a": null,
+      "260a": "Wien",
+      "260b": "Manz",
+      "260c": "1907",
+      "300a": "V, 217 S",
+      "numberOfRecords": "1"
+    }
+  ],
+  "kelsen-eine-grundlegung-der-rechtssoziologie": [
+    {
+      "ppn": "39473713X",
+      "008_date1": "1914",
+      "245a": "Eine Grundlegung der Rechtssoziologie",
+      "245b": "txt",
+      "245c": "Hans Kelsen",
+      "250a": null,
+      "260a": "Text",
+      "260b": "txt",
+      "260c": "1914",
+      "300a": null,
+      "numberOfRecords": "1"
+    }
+  ],
+  "sozialismusundst00kels": [
+    {
+      "ppn": "138477094",
+      "008_date1": "1920",
+      "245a": "Sozialismus und Staat",
+      "245b": "eine Untersuchung der politischen Theorie des Marxismus",
+      "245c": "von Hans Kelsen",
+      "250a": null,
+      "260a": "Leipzig",
+      "260b": "Hirschfeld",
+      "260c": "1920",
+      "300a": "IV, 129 S.",
+      "numberOfRecords": "1"
+    }
+  ],
+  "vomwesenundwertd00kels": [
+    {
+      "ppn": "019970889",
+      "008_date1": "1920",
+      "245a": "Vom Wesen und Wert der Demokratie",
+      "245b": "Mohr",
+      "245c": "von Hans Kelsen",
+      "250a": null,
+      "260a": "Tübingen",
+      "260b": "Mohr",
+      "260c": "1920",
+      "300a": "38 S",
+      "numberOfRecords": "1"
+    }
+  ],
+  "diebundesverfass00kels": [
+    {
+      "ppn": "066037980",
+      "008_date1": "1922",
+      "245a": "Die Bundesverfassung vom 1. Oktober 1920 (Gesetz vom 1. Oktober 1920, B.G.Bl. Nr 1, womit die Republik Österreich als Bundesstaat eingerichtet wird)",
+      "245b": "mit Anh.: 1: Die derzeit geltenden Bundesverfassungsgesetze samt Nebengesetzen. 2. Materialien zur Bundesverfassung",
+      "245c": "hrsg. in Verb. mit Georg Froehlich u. Adolf Merkl von Hans Kelsen",
+      "250a": null,
+      "260a": "Wien",
+      "260b": "Deuticke",
+      "260c": "1922",
+      "300a": "X, 535 S",
+      "numberOfRecords": "1"
+    },
+    {
+      "ppn": "140516891",
+      "008_date1": "1922",
+      "245a": "Die Verfassungsgesetze der Republik Deutschösterreich",
+      "245b": "Deuticke",
+      "245c": "hrsg. von Hans Kelsen",
+      "250a": null,
+      "260a": "Wien [u.a.]",
+      "260b": "Deuticke",
+      "260c": "1922",
+      "300a": "X, 535 S.",
+      "numberOfRecords": "1"
+    }
+  ],
+  "allgemeinestaats00kels": [
+    {
+      "ppn": "021386498",
+      "008_date1": "1925",
+      "245a": "Allgemeine Staatslehre",
+      "245b": "Julius Springer",
+      "245c": "von Dr. Hans Kelsen, Professor an der Universität Wien",
+      "250a": null,
+      "260a": "Berlin",
+      "260b": "Julius Springer",
+      "260c": "1925",
+      "300a": "XVI, 433 Seiten",
+      "numberOfRecords": "1"
+    }
+  ],
+  "kelsen-fr-les-rapports-de-systeme-": [
+    {
+      "ppn": "394725883",
+      "008_date1": "1927",
+      "245a": "Les rapports de systéme entre le droit interne et le droit international public",
+      "245b": "txt",
+      "245c": "par Hans Kelsen",
+      "250a": null,
+      "260a": "Text",
+      "260b": "txt",
+      "260c": "1927",
+      "300a": null,
+      "numberOfRecords": "1"
+    }
+  ],
+  "in.ernet.dli.2015.190098": [
+    {
+      "ppn": "141182563",
+      "008_date1": "1920",
+      "245a": "Das Problem der Souveränität und die Theorie des Völkerrechts",
+      "245b": "Beitrag zu einer reinen Rechtslehre",
+      "245c": "von Hans Kelsen",
+      "250a": null,
+      "260a": "Tübingen",
+      "260b": "Mohr",
+      "260c": "1920",
+      "300a": "X, 320 S.",
+      "numberOfRecords": "1"
+    },
+    {
+      "ppn": "019970358",
+      "008_date1": "1928",
+      "245a": "Das Problem der Souveränität und die Theorie des Völkerrechts",
+      "245b": "Beitrag zu einer reinen Rechtslehre",
+      "245c": "von Hans Kelsen",
+      "250a": "2., photomechanisch gedr. Aufl.",
+      "260a": "Tübingen",
+      "260b": "Mohr",
+      "260c": "1928",
+      "300a": "XII, 320 S.",
+      "numberOfRecords": "1"
+    }
+  ]
+}

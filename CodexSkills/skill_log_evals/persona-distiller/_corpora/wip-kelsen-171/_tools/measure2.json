@@ -1,0 +1,1894 @@
+[
+  {
+    "src_dir": "src-0101153a70ac",
+    "file": "wesen-und-wert-der-demokratie-1920.txt",
+    "ia_identifier": "vomwesenundwertd00kels",
+    "genre": "writings",
+    "year": "1920",
+    "lang": "ger",
+    "bytes": 109462,
+    "sha256": "5be5faaef4d3300d942c596cba685163cdaeb87164577df92ed30632fadfe4cb",
+    "bytes_match_source_json": true,
+    "sha256_match_source_json": true,
+    "ia_reported_size": 109462,
+    "bytes_match_ia_reported": true,
+    "lines": 2170,
+    "words_whole_file": 13096,
+    "words_body": 13096,
+    "foreign_blocks": [],
+    "corruption": {
+      "pairs": {
+        "nicht": {
+          "shape": "n[iı][dcĉ][^\\W\\d_]{0,3}t",
+          "good": 127,
+          "named_bad_form": "nidjt",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 127,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "nicht",
+              127
+            ]
+          ]
+        },
+        "ist": {
+          "shape": "[iı][fſj\\[]t|ift|iſt|i\\[t",
+          "good": 180,
+          "named_bad_form": "ift",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 180,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "ist",
+              180
+            ]
+          ]
+        },
+        "und": {
+          "shape": "[unm][nu][dbt]",
+          "good": 282,
+          "named_bad_form": "nnd",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 282,
+          "family_bad": 3,
+          "family_ratio": 0.0105,
+          "family_ratio_str": "1.1%",
+          "family_top": [
+            [
+              "und",
+              282
+            ],
+            [
+              "unb",
+              3
+            ]
+          ]
+        },
+        "sein": {
+          "shape": "[sfſ]e[iı][nu]",
+          "good": 40,
+          "named_bad_form": "fein",
+          "named_bad": 0,
+          "named_ratio": null,
+          "named_ratio_str": "n/a(N=40<50)",
+          "family_good": 40,
+          "family_bad": 0,
+          "family_ratio": null,
+          "family_ratio_str": "n/a(N=40<50)",
+          "family_top": [
+            [
+              "sein",
+              40
+            ]
+          ]
+        }
+      },
+      "pooled_named": 0.0,
+      "pooled_named_str": "0.0%",
+      "pooled_named_N": 629,
+      "pooled_family": 0.0047,
+      "pooled_family_str": "0.5%",
+      "pooled_family_N": 632,
+      "max_named_pair": [
+        "",
+        0.0
+      ],
+      "max_family_pair": [
+        "und",
+        0.0105
+      ],
+      "long_s": 0,
+      "long_s_ratio": 0.0,
+      "long_s_ratio_str": "0.0%",
+      "hb_good": 410,
+      "hb_bad": 0,
+      "hb_ratio": 0.0,
+      "hb_ratio_str": "0.0%",
+      "diacritics": 1299,
+      "diacritics_per_1k_words": 99.2
+    },
+    "no_verbatim_quote": false,
+    "trigger": [],
+    "first_person": {
+      "ich_strict": 8,
+      "wir_strict": 13,
+      "ich_ocr_var": 0,
+      "wir_ocr_var": 0,
+      "ich_per_10k": 6.11,
+      "wir_per_10k": 9.93,
+      "ich_tol_per_10k": 6.11,
+      "wir_tol_per_10k": 9.93,
+      "je_fr": 11,
+      "nous_fr": 0
+    }
+  },
+  {
+    "src_dir": "src-06466a84b056",
+    "file": "sozialismus-und-staat-1920.txt",
+    "ia_identifier": "sozialismusundst00kels",
+    "genre": "writings",
+    "year": "1920",
+    "lang": "ger",
+    "bytes": 318269,
+    "sha256": "0fc9f0c6b3e04a6bdb579c6d19210a4fba43640189acecef7d91e49457f72c06",
+    "bytes_match_source_json": true,
+    "sha256_match_source_json": true,
+    "ia_reported_size": 318269,
+    "bytes_match_ia_reported": true,
+    "lines": 7009,
+    "words_whole_file": 41653,
+    "words_body": 41653,
+    "foreign_blocks": [],
+    "corruption": {
+      "pairs": {
+        "nicht": {
+          "shape": "n[iı][dcĉ][^\\W\\d_]{0,3}t",
+          "good": 423,
+          "named_bad_form": "nidjt",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 423,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "nicht",
+              423
+            ]
+          ]
+        },
+        "ist": {
+          "shape": "[iı][fſj\\[]t|ift|iſt|i\\[t",
+          "good": 510,
+          "named_bad_form": "ift",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 510,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "ist",
+              510
+            ]
+          ]
+        },
+        "und": {
+          "shape": "[unm][nu][dbt]",
+          "good": 990,
+          "named_bad_form": "nnd",
+          "named_bad": 2,
+          "named_ratio": 0.002,
+          "named_ratio_str": "0.2%",
+          "family_good": 990,
+          "family_bad": 3,
+          "family_ratio": 0.003,
+          "family_ratio_str": "0.3%",
+          "family_top": [
+            [
+              "und",
+              990
+            ],
+            [
+              "nnd",
+              2
+            ],
+            [
+              "uud",
+              1
+            ]
+          ]
+        },
+        "sein": {
+          "shape": "[sfſ]e[iı][nu]",
+          "good": 122,
+          "named_bad_form": "fein",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 122,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "sein",
+              122
+            ]
+          ]
+        }
+      },
+      "pooled_named": 0.001,
+      "pooled_named_str": "0.1%",
+      "pooled_named_N": 2047,
+      "pooled_family": 0.0015,
+      "pooled_family_str": "0.1%",
+      "pooled_family_N": 2048,
+      "max_named_pair": [
+        "und",
+        0.002
+      ],
+      "max_family_pair": [
+        "und",
+        0.003
+      ],
+      "long_s": 0,
+      "long_s_ratio": 0.0,
+      "long_s_ratio_str": "0.0%",
+      "hb_good": 1335,
+      "hb_bad": 2,
+      "hb_ratio": 0.0015,
+      "hb_ratio_str": "0.1%",
+      "diacritics": 3800,
+      "diacritics_per_1k_words": 91.2
+    },
+    "no_verbatim_quote": false,
+    "trigger": [],
+    "first_person": {
+      "ich_strict": 7,
+      "wir_strict": 35,
+      "ich_ocr_var": 0,
+      "wir_ocr_var": 0,
+      "ich_per_10k": 1.68,
+      "wir_per_10k": 8.4,
+      "ich_tol_per_10k": 1.68,
+      "wir_tol_per_10k": 8.4,
+      "je_fr": 20,
+      "nous_fr": 0
+    }
+  },
+  {
+    "src_dir": "src-24dc5ceb27d9",
+    "file": "rapports-de-systeme-1926-fr.txt",
+    "ia_identifier": "kelsen-fr-les-rapports-de-systeme-",
+    "genre": "expression",
+    "year": "1926",
+    "lang": "fre",
+    "bytes": 244297,
+    "sha256": "31c509a0e332a07d112fe9797c5c0c8a11c3d99c36f4d7a6baa50bf9df847d55",
+    "bytes_match_source_json": true,
+    "sha256_match_source_json": true,
+    "ia_reported_size": 244297,
+    "bytes_match_ia_reported": true,
+    "lines": 4685,
+    "words_whole_file": 38410,
+    "words_body": 38199,
+    "foreign_blocks": [
+      {
+        "lines": [
+          19,
+          95
+        ],
+        "why": "海牙学院编的 NOTICE BIOGRAPHIQUE + PUBLICATIONS（第三人称写他，非他的文字）",
+        "words": 211,
+        "ich": 0,
+        "wir": 0
+      }
+    ],
+    "corruption": {
+      "pairs": {
+        "est": {
+          "good": 626,
+          "named_bad_form": "eft",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%"
+        },
+        "dans": {
+          "good": 199,
+          "named_bad_form": "dana",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%"
+        },
+        "pour": {
+          "good": 165,
+          "named_bad_form": "ponr",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%"
+        },
+        "qui": {
+          "good": 384,
+          "named_bad_form": "qni",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%"
+        },
+        "les": {
+          "good": 533,
+          "named_bad_form": "lea",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%"
+        },
+        "des": {
+          "good": 449,
+          "named_bad_form": "dea",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%"
+        },
+        "une": {
+          "good": 442,
+          "named_bad_form": "nne",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%"
+        }
+      },
+      "pooled_named": 0.0,
+      "pooled_named_str": "0.0%",
+      "pooled_named_N": 2798,
+      "pooled_family": 0.0,
+      "pooled_family_str": "0.0%",
+      "pooled_family_N": 2798,
+      "max_named_pair": [
+        "",
+        0.0
+      ],
+      "max_family_pair": [
+        "",
+        0.0
+      ],
+      "long_s": 0,
+      "long_s_ratio": 0.0,
+      "long_s_ratio_str": "0.0%",
+      "hb_good": 1,
+      "hb_bad": 0,
+      "hb_ratio": null,
+      "hb_ratio_str": "n/a(N=1<50)",
+      "diacritics": 7405,
+      "diacritics_per_1k_words": 192.8
+    },
+    "no_verbatim_quote": false,
+    "trigger": [],
+    "first_person": {
+      "ich_strict": 1,
+      "wir_strict": 0,
+      "ich_ocr_var": 0,
+      "wir_ocr_var": 0,
+      "ich_per_10k": 0.26,
+      "wir_per_10k": 0.0,
+      "ich_tol_per_10k": 0.26,
+      "wir_tol_per_10k": 0.0,
+      "je_fr": 4,
+      "nous_fr": 69
+    }
+  },
+  {
+    "src_dir": "src-3035f33a18c3",
+    "file": "politische-weltanschauung-erziehung-1918.txt",
+    "ia_identifier": "kelsen-politische-weltanschauung-und-erziehung",
+    "genre": "expression",
+    "year": "1918",
+    "lang": "ger",
+    "bytes": 63571,
+    "sha256": "bfbcf301361b4cd0c47314b667a63c15f770414d50f955aa5d49a5f9d0ec9c7b",
+    "bytes_match_source_json": true,
+    "sha256_match_source_json": true,
+    "ia_reported_size": 63571,
+    "bytes_match_ia_reported": true,
+    "lines": 1310,
+    "words_whole_file": 8505,
+    "words_body": 8505,
+    "foreign_blocks": [],
+    "corruption": {
+      "pairs": {
+        "nicht": {
+          "shape": "n[iı][dcĉ][^\\W\\d_]{0,3}t",
+          "good": 88,
+          "named_bad_form": "nidjt",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 88,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "nicht",
+              88
+            ]
+          ]
+        },
+        "ist": {
+          "shape": "[iı][fſj\\[]t|ift|iſt|i\\[t",
+          "good": 135,
+          "named_bad_form": "ift",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 135,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "ist",
+              135
+            ]
+          ]
+        },
+        "und": {
+          "shape": "[unm][nu][dbt]",
+          "good": 243,
+          "named_bad_form": "nnd",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 243,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "und",
+              243
+            ]
+          ]
+        },
+        "sein": {
+          "shape": "[sfſ]e[iı][nu]",
+          "good": 33,
+          "named_bad_form": "fein",
+          "named_bad": 0,
+          "named_ratio": null,
+          "named_ratio_str": "n/a(N=33<50)",
+          "family_good": 33,
+          "family_bad": 0,
+          "family_ratio": null,
+          "family_ratio_str": "n/a(N=33<50)",
+          "family_top": [
+            [
+              "sein",
+              33
+            ]
+          ]
+        }
+      },
+      "pooled_named": 0.0,
+      "pooled_named_str": "0.0%",
+      "pooled_named_N": 499,
+      "pooled_family": 0.0,
+      "pooled_family_str": "0.0%",
+      "pooled_family_N": 499,
+      "max_named_pair": [
+        "",
+        0.0
+      ],
+      "max_family_pair": [
+        "",
+        0.0
+      ],
+      "long_s": 0,
+      "long_s_ratio": 0.0,
+      "long_s_ratio_str": "0.0%",
+      "hb_good": 296,
+      "hb_bad": 0,
+      "hb_ratio": 0.0,
+      "hb_ratio_str": "0.0%",
+      "diacritics": 811,
+      "diacritics_per_1k_words": 95.4
+    },
+    "no_verbatim_quote": false,
+    "trigger": [],
+    "first_person": {
+      "ich_strict": 25,
+      "wir_strict": 1,
+      "ich_ocr_var": 0,
+      "wir_ocr_var": 0,
+      "ich_per_10k": 29.39,
+      "wir_per_10k": 1.18,
+      "ich_tol_per_10k": 29.39,
+      "wir_tol_per_10k": 1.18,
+      "je_fr": 1,
+      "nous_fr": 0
+    }
+  },
+  {
+    "src_dir": "src-308be29151ce",
+    "file": "staatslehre-dante-1905.txt",
+    "ia_identifier": "diestaatslehrede00kels",
+    "genre": "writings",
+    "year": "1905",
+    "lang": "ger",
+    "bytes": 451614,
+    "sha256": "6629126855ff75d664f16081a98b5e6c6e85fb1be3ce527ae8e2bacc275f2a94",
+    "bytes_match_source_json": true,
+    "sha256_match_source_json": true,
+    "ia_reported_size": 451614,
+    "bytes_match_ia_reported": true,
+    "lines": 8292,
+    "words_whole_file": 56362,
+    "words_body": 56344,
+    "foreign_blocks": [
+      {
+        "lines": [
+          0,
+          8
+        ],
+        "why": "IA『Digitized by the Internet Archive』告示",
+        "words": 18,
+        "ich": 0,
+        "wir": 0
+      }
+    ],
+    "corruption": {
+      "pairs": {
+        "nicht": {
+          "shape": "n[iı][dcĉ][^\\W\\d_]{0,3}t",
+          "good": 302,
+          "named_bad_form": "nidjt",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 302,
+          "family_bad": 8,
+          "family_ratio": 0.0258,
+          "family_ratio_str": "2.6%",
+          "family_top": [
+            [
+              "nicht",
+              302
+            ],
+            [
+              "niclit",
+              6
+            ],
+            [
+              "nicbt",
+              1
+            ],
+            [
+              "niciit",
+              1
+            ]
+          ]
+        },
+        "ist": {
+          "shape": "[iı][fſj\\[]t|ift|iſt|i\\[t",
+          "good": 454,
+          "named_bad_form": "ift",
+          "named_bad": 3,
+          "named_ratio": 0.0066,
+          "named_ratio_str": "0.7%",
+          "family_good": 454,
+          "family_bad": 3,
+          "family_ratio": 0.0066,
+          "family_ratio_str": "0.7%",
+          "family_top": [
+            [
+              "ist",
+              454
+            ],
+            [
+              "ift",
+              3
+            ]
+          ]
+        },
+        "und": {
+          "shape": "[unm][nu][dbt]",
+          "good": 1086,
+          "named_bad_form": "nnd",
+          "named_bad": 4,
+          "named_ratio": 0.0037,
+          "named_ratio_str": "0.4%",
+          "family_good": 1086,
+          "family_bad": 10,
+          "family_ratio": 0.0091,
+          "family_ratio_str": "0.9%",
+          "family_top": [
+            [
+              "und",
+              1086
+            ],
+            [
+              "unt",
+              4
+            ],
+            [
+              "nnd",
+              4
+            ],
+            [
+              "uut",
+              1
+            ],
+            [
+              "nud",
+              1
+            ]
+          ]
+        },
+        "sein": {
+          "shape": "[sfſ]e[iı][nu]",
+          "good": 111,
+          "named_bad_form": "fein",
+          "named_bad": 1,
+          "named_ratio": 0.0089,
+          "named_ratio_str": "0.9%",
+          "family_good": 111,
+          "family_bad": 1,
+          "family_ratio": 0.0089,
+          "family_ratio_str": "0.9%",
+          "family_top": [
+            [
+              "sein",
+              111
+            ],
+            [
+              "fein",
+              1
+            ]
+          ]
+        }
+      },
+      "pooled_named": 0.0041,
+      "pooled_named_str": "0.4%",
+      "pooled_named_N": 1961,
+      "pooled_family": 0.0111,
+      "pooled_family_str": "1.1%",
+      "pooled_family_N": 1975,
+      "max_named_pair": [
+        "sein",
+        0.0089
+      ],
+      "max_family_pair": [
+        "nicht",
+        0.0258
+      ],
+      "long_s": 0,
+      "long_s_ratio": 0.0,
+      "long_s_ratio_str": "0.0%",
+      "hb_good": 1382,
+      "hb_bad": 2,
+      "hb_ratio": 0.0014,
+      "hb_ratio_str": "0.1%",
+      "diacritics": 4166,
+      "diacritics_per_1k_words": 73.9
+    },
+    "no_verbatim_quote": false,
+    "trigger": [],
+    "first_person": {
+      "ich_strict": 33,
+      "wir_strict": 38,
+      "ich_ocr_var": 0,
+      "wir_ocr_var": 2,
+      "ich_per_10k": 5.86,
+      "wir_per_10k": 6.74,
+      "ich_tol_per_10k": 5.86,
+      "wir_tol_per_10k": 7.1,
+      "je_fr": 17,
+      "nous_fr": 0
+    }
+  },
+  {
+    "src_dir": "src-36f78a9079e6",
+    "file": "staat-und-recht-1922.txt",
+    "ia_identifier": "kelsen-staat-und-recht",
+    "genre": "expression",
+    "year": "1922",
+    "lang": "ger",
+    "bytes": 55786,
+    "sha256": "f7ad7280693abf4c43034802ca52599eaf36f672b53357e1c3fe5e12d1c7a668",
+    "bytes_match_source_json": true,
+    "sha256_match_source_json": true,
+    "ia_reported_size": 55786,
+    "bytes_match_ia_reported": true,
+    "lines": 1015,
+    "words_whole_file": 7472,
+    "words_body": 7472,
+    "foreign_blocks": [],
+    "corruption": {
+      "pairs": {
+        "nicht": {
+          "shape": "n[iı][dcĉ][^\\W\\d_]{0,3}t",
+          "good": 58,
+          "named_bad_form": "nidjt",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 58,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "nicht",
+              58
+            ]
+          ]
+        },
+        "ist": {
+          "shape": "[iı][fſj\\[]t|ift|iſt|i\\[t",
+          "good": 92,
+          "named_bad_form": "ift",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 91,
+          "family_bad": 1,
+          "family_ratio": 0.0109,
+          "family_ratio_str": "1.1%",
+          "family_top": [
+            [
+              "ist",
+              91
+            ],
+            [
+              "ıst",
+              1
+            ]
+          ]
+        },
+        "und": {
+          "shape": "[unm][nu][dbt]",
+          "good": 199,
+          "named_bad_form": "nnd",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 199,
+          "family_bad": 1,
+          "family_ratio": 0.005,
+          "family_ratio_str": "0.5%",
+          "family_top": [
+            [
+              "und",
+              199
+            ],
+            [
+              "unb",
+              1
+            ]
+          ]
+        },
+        "sein": {
+          "shape": "[sfſ]e[iı][nu]",
+          "good": 30,
+          "named_bad_form": "fein",
+          "named_bad": 0,
+          "named_ratio": null,
+          "named_ratio_str": "n/a(N=30<50)",
+          "family_good": 30,
+          "family_bad": 0,
+          "family_ratio": null,
+          "family_ratio_str": "n/a(N=30<50)",
+          "family_top": [
+            [
+              "sein",
+              30
+            ]
+          ]
+        }
+      },
+      "pooled_named": 0.0,
+      "pooled_named_str": "0.0%",
+      "pooled_named_N": 379,
+      "pooled_family": 0.0053,
+      "pooled_family_str": "0.5%",
+      "pooled_family_N": 380,
+      "max_named_pair": [
+        "",
+        0.0
+      ],
+      "max_family_pair": [
+        "ist",
+        0.0109
+      ],
+      "long_s": 0,
+      "long_s_ratio": 0.0,
+      "long_s_ratio_str": "0.0%",
+      "hb_good": 202,
+      "hb_bad": 0,
+      "hb_ratio": 0.0,
+      "hb_ratio_str": "0.0%",
+      "diacritics": 557,
+      "diacritics_per_1k_words": 74.5
+    },
+    "no_verbatim_quote": false,
+    "trigger": [],
+    "first_person": {
+      "ich_strict": 0,
+      "wir_strict": 5,
+      "ich_ocr_var": 0,
+      "wir_ocr_var": 0,
+      "ich_per_10k": 0.0,
+      "wir_per_10k": 6.69,
+      "ich_tol_per_10k": 0.0,
+      "wir_tol_per_10k": 6.69,
+      "je_fr": 0,
+      "nous_fr": 0
+    }
+  },
+  {
+    "src_dir": "src-37171ebfc83a",
+    "file": "kommentar-reichsratswahlordnung-1907.txt",
+    "ia_identifier": "kommentarzurste00kelsgoog",
+    "genre": "decisions",
+    "year": "1907",
+    "lang": "ger",
+    "bytes": 558936,
+    "sha256": "13f100f9f5b35433a55c4df2601b5f881b676c6a5615ef668bc97897348af86a",
+    "bytes_match_source_json": true,
+    "sha256_match_source_json": true,
+    "ia_reported_size": 558936,
+    "bytes_match_ia_reported": true,
+    "lines": 21038,
+    "words_whole_file": 82102,
+    "words_body": 81081,
+    "foreign_blocks": [
+      {
+        "lines": [
+          0,
+          97
+        ],
+        "why": "Google 扫描样板（英德双语使用条款）——★全文 6 个 wir 全在这里",
+        "words": 1021,
+        "ich": 0,
+        "wir": 6
+      }
+    ],
+    "corruption": {
+      "pairs": {
+        "nicht": {
+          "shape": "n[iı][dcĉ][^\\W\\d_]{0,3}t",
+          "good": 3,
+          "named_bad_form": "nidjt",
+          "named_bad": 1,
+          "named_ratio": null,
+          "named_ratio_str": "n/a(N=4<50)",
+          "family_good": 3,
+          "family_bad": 4,
+          "family_ratio": null,
+          "family_ratio_str": "n/a(N=7<50)",
+          "family_top": [
+            [
+              "nicht",
+              3
+            ],
+            [
+              "nidejt",
+              2
+            ],
+            [
+              "nidjt",
+              1
+            ],
+            [
+              "nidit",
+              1
+            ]
+          ]
+        },
+        "ist": {
+          "shape": "[iı][fſj\\[]t|ift|iſt|i\\[t",
+          "good": 16,
+          "named_bad_form": "ift",
+          "named_bad": 511,
+          "named_ratio": 0.9696,
+          "named_ratio_str": "97.0%",
+          "family_good": 16,
+          "family_bad": 511,
+          "family_ratio": 0.9696,
+          "family_ratio_str": "97.0%",
+          "family_top": [
+            [
+              "ift",
+              511
+            ],
+            [
+              "ist",
+              16
+            ]
+          ]
+        },
+        "und": {
+          "shape": "[unm][nu][dbt]",
+          "good": 20,
+          "named_bad_form": "nnd",
+          "named_bad": 1,
+          "named_ratio": null,
+          "named_ratio_str": "n/a(N=21<50)",
+          "family_good": 20,
+          "family_bad": 1032,
+          "family_ratio": 0.981,
+          "family_ratio_str": "98.1%",
+          "family_top": [
+            [
+              "unb",
+              970
+            ],
+            [
+              "nnb",
+              55
+            ],
+            [
+              "und",
+              20
+            ],
+            [
+              "unt",
+              3
+            ],
+            [
+              "mnb",
+              2
+            ],
+            [
+              "nnd",
+              1
+            ],
+            [
+              "nnt",
+              1
+            ]
+          ]
+        },
+        "sein": {
+          "shape": "[sfſ]e[iı][nu]",
+          "good": 3,
+          "named_bad_form": "fein",
+          "named_bad": 99,
+          "named_ratio": 0.9706,
+          "named_ratio_str": "97.1%",
+          "family_good": 3,
+          "family_bad": 99,
+          "family_ratio": 0.9706,
+          "family_ratio_str": "97.1%",
+          "family_top": [
+            [
+              "fein",
+              99
+            ],
+            [
+              "sein",
+              3
+            ]
+          ]
+        }
+      },
+      "pooled_named": 0.9358,
+      "pooled_named_str": "93.6%",
+      "pooled_named_N": 654,
+      "pooled_family": 0.9751,
+      "pooled_family_str": "97.5%",
+      "pooled_family_N": 1688,
+      "max_named_pair": [
+        "sein",
+        0.9706
+      ],
+      "max_family_pair": [
+        "und",
+        0.981
+      ],
+      "long_s": 0,
+      "long_s_ratio": 0.0,
+      "long_s_ratio_str": "0.0%",
+      "hb_good": 13,
+      "hb_bad": 1,
+      "hb_ratio": null,
+      "hb_ratio_str": "n/a(N=14<50)",
+      "diacritics": 10134,
+      "diacritics_per_1k_words": 123.4
+    },
+    "no_verbatim_quote": true,
+    "trigger": [
+      "指令四对合池 93.6%",
+      "指令四对单对最高 sein=97.1%",
+      "实测形族合池 97.5%",
+      "实测形族单对最高 und=98.1%"
+    ],
+    "first_person": {
+      "ich_strict": 0,
+      "wir_strict": 0,
+      "ich_ocr_var": 7,
+      "wir_ocr_var": 1,
+      "ich_per_10k": 0.0,
+      "wir_per_10k": 0.0,
+      "ich_tol_per_10k": 0.86,
+      "wir_tol_per_10k": 0.12,
+      "je_fr": 34,
+      "nous_fr": 0
+    }
+  },
+  {
+    "src_dir": "src-4fae0b145146",
+    "file": "allgemeine-staatslehre-1925.txt",
+    "ia_identifier": "allgemeinestaats00kels",
+    "genre": "writings",
+    "year": "1925",
+    "lang": "ger",
+    "bytes": 1845866,
+    "sha256": "eb08f86eb37d63b36480c339d177a66ad9bdbb14ec66ab71de888e1d79275008",
+    "bytes_match_source_json": true,
+    "sha256_match_source_json": true,
+    "ia_reported_size": 1845866,
+    "bytes_match_ia_reported": true,
+    "lines": 32727,
+    "words_whole_file": 240148,
+    "words_body": 240127,
+    "foreign_blocks": [
+      {
+        "lines": [
+          123,
+          129
+        ],
+        "why": "IA『Digitized by the Internet Archive』告示",
+        "words": 21,
+        "ich": 0,
+        "wir": 0
+      }
+    ],
+    "corruption": {
+      "pairs": {
+        "nicht": {
+          "shape": "n[iı][dcĉ][^\\W\\d_]{0,3}t",
+          "good": 2266,
+          "named_bad_form": "nidjt",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 2266,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "nicht",
+              2266
+            ]
+          ]
+        },
+        "ist": {
+          "shape": "[iı][fſj\\[]t|ift|iſt|i\\[t",
+          "good": 3399,
+          "named_bad_form": "ift",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 3398,
+          "family_bad": 1,
+          "family_ratio": 0.0003,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "ist",
+              3398
+            ],
+            [
+              "ıst",
+              1
+            ]
+          ]
+        },
+        "und": {
+          "shape": "[unm][nu][dbt]",
+          "good": 5218,
+          "named_bad_form": "nnd",
+          "named_bad": 1,
+          "named_ratio": 0.0002,
+          "named_ratio_str": "0.0%",
+          "family_good": 5218,
+          "family_bad": 3,
+          "family_ratio": 0.0006,
+          "family_ratio_str": "0.1%",
+          "family_top": [
+            [
+              "und",
+              5218
+            ],
+            [
+              "mut",
+              2
+            ],
+            [
+              "nnd",
+              1
+            ]
+          ]
+        },
+        "sein": {
+          "shape": "[sfſ]e[iı][nu]",
+          "good": 681,
+          "named_bad_form": "fein",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 681,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "sein",
+              681
+            ]
+          ]
+        }
+      },
+      "pooled_named": 0.0001,
+      "pooled_named_str": "0.0%",
+      "pooled_named_N": 11565,
+      "pooled_family": 0.0003,
+      "pooled_family_str": "0.0%",
+      "pooled_family_N": 11567,
+      "max_named_pair": [
+        "und",
+        0.0002
+      ],
+      "max_family_pair": [
+        "und",
+        0.0006
+      ],
+      "long_s": 0,
+      "long_s_ratio": 0.0,
+      "long_s_ratio_str": "0.0%",
+      "hb_good": 7860,
+      "hb_bad": 0,
+      "hb_ratio": 0.0,
+      "hb_ratio_str": "0.0%",
+      "diacritics": 22662,
+      "diacritics_per_1k_words": 94.4
+    },
+    "no_verbatim_quote": false,
+    "trigger": [],
+    "first_person": {
+      "ich_strict": 88,
+      "wir_strict": 70,
+      "ich_ocr_var": 0,
+      "wir_ocr_var": 0,
+      "ich_per_10k": 3.66,
+      "wir_per_10k": 2.92,
+      "ich_tol_per_10k": 3.66,
+      "wir_tol_per_10k": 2.92,
+      "je_fr": 81,
+      "nous_fr": 0
+    }
+  },
+  {
+    "src_dir": "src-98577cc73747",
+    "file": "bundesverfassung-1920-coedited-1922.txt",
+    "ia_identifier": "diebundesverfass00kels",
+    "genre": "decisions",
+    "year": "1922",
+    "lang": "ger",
+    "bytes": 1224918,
+    "sha256": "73c6dda24b55453517bd20e00e45f5c52c4bf8dd0dad402f9b32231900c7a4e7",
+    "bytes_match_source_json": true,
+    "sha256_match_source_json": true,
+    "ia_reported_size": 1224918,
+    "bytes_match_ia_reported": true,
+    "lines": 24851,
+    "words_whole_file": 168431,
+    "words_body": 168413,
+    "foreign_blocks": [
+      {
+        "lines": [
+          20,
+          28
+        ],
+        "why": "IA『Digitized by the Internet Archive』告示",
+        "words": 18,
+        "ich": 0,
+        "wir": 0
+      }
+    ],
+    "corruption": {
+      "pairs": {
+        "nicht": {
+          "shape": "n[iı][dcĉ][^\\W\\d_]{0,3}t",
+          "good": 1,
+          "named_bad_form": "nidjt",
+          "named_bad": 78,
+          "named_ratio": 0.9873,
+          "named_ratio_str": "98.7%",
+          "family_good": 1,
+          "family_bad": 162,
+          "family_ratio": 0.9939,
+          "family_ratio_str": "99.4%",
+          "family_top": [
+            [
+              "nidjt",
+              78
+            ],
+            [
+              "nidit",
+              64
+            ],
+            [
+              "nicfjt",
+              4
+            ],
+            [
+              "nicbt",
+              4
+            ],
+            [
+              "nicfit",
+              4
+            ],
+            [
+              "nict",
+              3
+            ],
+            [
+              "nicijt",
+              2
+            ],
+            [
+              "nidfit",
+              1
+            ]
+          ]
+        },
+        "ist": {
+          "shape": "[iı][fſj\\[]t|ift|iſt|i\\[t",
+          "good": 0,
+          "named_bad_form": "ift",
+          "named_bad": 1165,
+          "named_ratio": 1.0,
+          "named_ratio_str": "100.0%",
+          "family_good": 0,
+          "family_bad": 1330,
+          "family_ratio": 1.0,
+          "family_ratio_str": "100.0%",
+          "family_top": [
+            [
+              "ift",
+              1165
+            ],
+            [
+              "i[t",
+              165
+            ]
+          ]
+        },
+        "und": {
+          "shape": "[unm][nu][dbt]",
+          "good": 6,
+          "named_bad_form": "nnd",
+          "named_bad": 6,
+          "named_ratio": null,
+          "named_ratio_str": "n/a(N=12<50)",
+          "family_good": 6,
+          "family_bad": 2725,
+          "family_ratio": 0.9978,
+          "family_ratio_str": "99.8%",
+          "family_top": [
+            [
+              "unb",
+              2428
+            ],
+            [
+              "nnb",
+              214
+            ],
+            [
+              "uub",
+              47
+            ],
+            [
+              "unt",
+              13
+            ],
+            [
+              "nnd",
+              6
+            ],
+            [
+              "und",
+              6
+            ],
+            [
+              "nud",
+              6
+            ],
+            [
+              "nnt",
+              3
+            ]
+          ]
+        },
+        "sein": {
+          "shape": "[sfſ]e[iı][nu]",
+          "good": 1,
+          "named_bad_form": "fein",
+          "named_bad": 167,
+          "named_ratio": 0.994,
+          "named_ratio_str": "99.4%",
+          "family_good": 1,
+          "family_bad": 167,
+          "family_ratio": 0.994,
+          "family_ratio_str": "99.4%",
+          "family_top": [
+            [
+              "fein",
+              167
+            ],
+            [
+              "sein",
+              1
+            ]
+          ]
+        }
+      },
+      "pooled_named": 0.9944,
+      "pooled_named_str": "99.4%",
+      "pooled_named_N": 1424,
+      "pooled_family": 0.9982,
+      "pooled_family_str": "99.8%",
+      "pooled_family_N": 4392,
+      "max_named_pair": [
+        "ist",
+        1.0
+      ],
+      "max_family_pair": [
+        "ist",
+        1.0
+      ],
+      "long_s": 0,
+      "long_s_ratio": 0.0,
+      "long_s_ratio_str": "0.0%",
+      "hb_good": 2,
+      "hb_bad": 8,
+      "hb_ratio": null,
+      "hb_ratio_str": "n/a(N=10<50)",
+      "diacritics": 19993,
+      "diacritics_per_1k_words": 118.7
+    },
+    "no_verbatim_quote": true,
+    "trigger": [
+      "指令四对合池 99.4%",
+      "指令四对单对最高 ist=100.0%",
+      "实测形族合池 99.8%",
+      "实测形族单对最高 ist=100.0%"
+    ],
+    "first_person": {
+      "ich_strict": 0,
+      "wir_strict": 2,
+      "ich_ocr_var": 60,
+      "wir_ocr_var": 1,
+      "ich_per_10k": 0.0,
+      "wir_per_10k": 0.12,
+      "ich_tol_per_10k": 3.56,
+      "wir_tol_per_10k": 0.18,
+      "je_fr": 69,
+      "nous_fr": 0
+    }
+  },
+  {
+    "src_dir": "src-a8167d895156",
+    "file": "problem-der-souveraenitaet-1928.txt",
+    "ia_identifier": "in.ernet.dli.2015.190098",
+    "genre": "writings",
+    "year": "1928",
+    "lang": "ger",
+    "bytes": 954167,
+    "sha256": "a0e86f4a1b244c47cfc7ec8ce4d7c43d7d9368c71125775227999f19e23f9496",
+    "bytes_match_source_json": true,
+    "sha256_match_source_json": true,
+    "ia_reported_size": 954167,
+    "bytes_match_ia_reported": true,
+    "lines": 17664,
+    "words_whole_file": 128850,
+    "words_body": 128850,
+    "foreign_blocks": [],
+    "corruption": {
+      "pairs": {
+        "nicht": {
+          "shape": "n[iı][dcĉ][^\\W\\d_]{0,3}t",
+          "good": 817,
+          "named_bad_form": "nidjt",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 817,
+          "family_bad": 408,
+          "family_ratio": 0.3331,
+          "family_ratio_str": "33.3%",
+          "family_top": [
+            [
+              "nicht",
+              817
+            ],
+            [
+              "nicbt",
+              353
+            ],
+            [
+              "niclit",
+              32
+            ],
+            [
+              "nickt",
+              17
+            ],
+            [
+              "niciit",
+              3
+            ],
+            [
+              "niclt",
+              1
+            ],
+            [
+              "nicrt",
+              1
+            ],
+            [
+              "nictt",
+              1
+            ]
+          ]
+        },
+        "ist": {
+          "shape": "[iı][fſj\\[]t|ift|iſt|i\\[t",
+          "good": 1745,
+          "named_bad_form": "ift",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 1745,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "ist",
+              1745
+            ]
+          ]
+        },
+        "und": {
+          "shape": "[unm][nu][dbt]",
+          "good": 2048,
+          "named_bad_form": "nnd",
+          "named_bad": 259,
+          "named_ratio": 0.1123,
+          "named_ratio_str": "11.2%",
+          "family_good": 2048,
+          "family_bad": 292,
+          "family_ratio": 0.1248,
+          "family_ratio_str": "12.5%",
+          "family_top": [
+            [
+              "und",
+              2048
+            ],
+            [
+              "nnd",
+              259
+            ],
+            [
+              "mub",
+              22
+            ],
+            [
+              "uud",
+              5
+            ],
+            [
+              "mnb",
+              2
+            ],
+            [
+              "mut",
+              2
+            ],
+            [
+              "nnt",
+              1
+            ],
+            [
+              "mnd",
+              1
+            ]
+          ]
+        },
+        "sein": {
+          "shape": "[sfſ]e[iı][nu]",
+          "good": 380,
+          "named_bad_form": "fein",
+          "named_bad": 1,
+          "named_ratio": 0.0026,
+          "named_ratio_str": "0.3%",
+          "family_good": 380,
+          "family_bad": 2,
+          "family_ratio": 0.0052,
+          "family_ratio_str": "0.5%",
+          "family_top": [
+            [
+              "sein",
+              380
+            ],
+            [
+              "seiu",
+              1
+            ],
+            [
+              "fein",
+              1
+            ]
+          ]
+        }
+      },
+      "pooled_named": 0.0495,
+      "pooled_named_str": "5.0%",
+      "pooled_named_N": 5250,
+      "pooled_family": 0.1233,
+      "pooled_family_str": "12.3%",
+      "pooled_family_N": 5692,
+      "max_named_pair": [
+        "und",
+        0.1123
+      ],
+      "max_family_pair": [
+        "nicht",
+        0.3331
+      ],
+      "long_s": 0,
+      "long_s_ratio": 0.0,
+      "long_s_ratio_str": "0.0%",
+      "hb_good": 2416,
+      "hb_bad": 1003,
+      "hb_ratio": 0.2934,
+      "hb_ratio_str": "29.3%",
+      "diacritics": 0,
+      "diacritics_per_1k_words": 0.0
+    },
+    "no_verbatim_quote": true,
+    "trigger": [
+      "实测形族单对最高 nicht=33.3%",
+      "h→b 混淆 29.3%（★指令未写的轴，N=3419）",
+      "变音符近乎全失（0.0/千词，阈值 5.0）★指令未写的轴"
+    ],
+    "first_person": {
+      "ich_strict": 66,
+      "wir_strict": 38,
+      "ich_ocr_var": 30,
+      "wir_ocr_var": 0,
+      "ich_per_10k": 5.12,
+      "wir_per_10k": 2.95,
+      "ich_tol_per_10k": 7.45,
+      "wir_tol_per_10k": 2.95,
+      "je_fr": 16,
+      "nous_fr": 0
+    }
+  },
+  {
+    "src_dir": "src-c42f2325eb59",
+    "file": "grundlegung-rechtssoziologie-1914.txt",
+    "ia_identifier": "kelsen-eine-grundlegung-der-rechtssoziologie",
+    "genre": "expression",
+    "year": "1914",
+    "lang": "ger",
+    "bytes": 121387,
+    "sha256": "ccb348b4687c5770b742b94024017a3bad3ed69022b02f6f0cafbc26ba758cf7",
+    "bytes_match_source_json": true,
+    "sha256_match_source_json": true,
+    "ia_reported_size": 121387,
+    "bytes_match_ia_reported": true,
+    "lines": 2344,
+    "words_whole_file": 16322,
+    "words_body": 16322,
+    "foreign_blocks": [],
+    "corruption": {
+      "pairs": {
+        "nicht": {
+          "shape": "n[iı][dcĉ][^\\W\\d_]{0,3}t",
+          "good": 167,
+          "named_bad_form": "nidjt",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 167,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "nicht",
+              167
+            ]
+          ]
+        },
+        "ist": {
+          "shape": "[iı][fſj\\[]t|ift|iſt|i\\[t",
+          "good": 262,
+          "named_bad_form": "ift",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 262,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "ist",
+              262
+            ]
+          ]
+        },
+        "und": {
+          "shape": "[unm][nu][dbt]",
+          "good": 342,
+          "named_bad_form": "nnd",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 342,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "und",
+              342
+            ]
+          ]
+        },
+        "sein": {
+          "shape": "[sfſ]e[iı][nu]",
+          "good": 88,
+          "named_bad_form": "fein",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 88,
+          "family_bad": 0,
+          "family_ratio": 0.0,
+          "family_ratio_str": "0.0%",
+          "family_top": [
+            [
+              "sein",
+              88
+            ]
+          ]
+        }
+      },
+      "pooled_named": 0.0,
+      "pooled_named_str": "0.0%",
+      "pooled_named_N": 859,
+      "pooled_family": 0.0,
+      "pooled_family_str": "0.0%",
+      "pooled_family_N": 859,
+      "max_named_pair": [
+        "",
+        0.0
+      ],
+      "max_family_pair": [
+        "",
+        0.0
+      ],
+      "long_s": 0,
+      "long_s_ratio": 0.0,
+      "long_s_ratio_str": "0.0%",
+      "hb_good": 506,
+      "hb_bad": 0,
+      "hb_ratio": 0.0,
+      "hb_ratio_str": "0.0%",
+      "diacritics": 1483,
+      "diacritics_per_1k_words": 90.9
+    },
+    "no_verbatim_quote": false,
+    "trigger": [],
+    "first_person": {
+      "ich_strict": 6,
+      "wir_strict": 8,
+      "ich_ocr_var": 0,
+      "wir_ocr_var": 0,
+      "ich_per_10k": 3.68,
+      "wir_per_10k": 4.9,
+      "ich_tol_per_10k": 3.68,
+      "wir_tol_per_10k": 4.9,
+      "je_fr": 2,
+      "nous_fr": 0
+    }
+  },
+  {
+    "src_dir": "src-f1f485d4a3ec",
+    "file": "rechtswissenschaft-norm-oder-kultur-1916.txt",
+    "ia_identifier": "kelsen-rechtswissenschaft-als-norm-oder-kultur",
+    "genre": "expression",
+    "year": "1916",
+    "lang": "ger",
+    "bytes": 151605,
+    "sha256": "c78fac5e78b4a65f7c043dc143cee902a26f9e62a6ba11eedcea5f8136e0cafd",
+    "bytes_match_source_json": true,
+    "sha256_match_source_json": true,
+    "ia_reported_size": 151605,
+    "bytes_match_ia_reported": true,
+    "lines": 2855,
+    "words_whole_file": 19999,
+    "words_body": 19999,
+    "foreign_blocks": [],
+    "corruption": {
+      "pairs": {
+        "nicht": {
+          "shape": "n[iı][dcĉ][^\\W\\d_]{0,3}t",
+          "good": 194,
+          "named_bad_form": "nidjt",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 194,
+          "family_bad": 27,
+          "family_ratio": 0.1222,
+          "family_ratio_str": "12.2%",
+          "family_top": [
+            [
+              "nicht",
+              194
+            ],
+            [
+              "nidert",
+              26
+            ],
+            [
+              "nidt",
+              1
+            ]
+          ]
+        },
+        "ist": {
+          "shape": "[iı][fſj\\[]t|ift|iſt|i\\[t",
+          "good": 39,
+          "named_bad_form": "ift",
+          "named_bad": 236,
+          "named_ratio": 0.8582,
+          "named_ratio_str": "85.8%",
+          "family_good": 0,
+          "family_bad": 282,
+          "family_ratio": 1.0,
+          "family_ratio_str": "100.0%",
+          "family_top": [
+            [
+              "ift",
+              236
+            ],
+            [
+              "iſt",
+              39
+            ],
+            [
+              "ijt",
+              7
+            ]
+          ]
+        },
+        "und": {
+          "shape": "[unm][nu][dbt]",
+          "good": 391,
+          "named_bad_form": "nnd",
+          "named_bad": 0,
+          "named_ratio": 0.0,
+          "named_ratio_str": "0.0%",
+          "family_good": 391,
+          "family_bad": 1,
+          "family_ratio": 0.0026,
+          "family_ratio_str": "0.3%",
+          "family_top": [
+            [
+              "und",
+              391
+            ],
+            [
+              "unb",
+              1
+            ]
+          ]
+        },
+        "sein": {
+          "shape": "[sfſ]e[iı][nu]",
+          "good": 53,
+          "named_bad_form": "fein",
+          "named_bad": 59,
+          "named_ratio": 0.5268,
+          "named_ratio_str": "52.7%",
+          "family_good": 51,
+          "family_bad": 61,
+          "family_ratio": 0.5446,
+          "family_ratio_str": "54.5%",
+          "family_top": [
+            [
+              "fein",
+              59
+            ],
+            [
+              "sein",
+              51
+            ],
+            [
+              "ſein",
+              2
+            ]
+          ]
+        }
+      },
+      "pooled_named": 0.3035,
+      "pooled_named_str": "30.3%",
+      "pooled_named_N": 972,
+      "pooled_family": 0.3684,
+      "pooled_family_str": "36.8%",
+      "pooled_family_N": 1007,
+      "max_named_pair": [
+        "ist",
+        0.8582
+      ],
+      "max_family_pair": [
+        "ist",
+        1.0
+      ],
+      "long_s": 1917,
+      "long_s_ratio": 0.3605,
+      "long_s_ratio_str": "36.0%",
+      "hb_good": 423,
+      "hb_bad": 0,
+      "hb_ratio": 0.0,
+      "hb_ratio_str": "0.0%",
+      "diacritics": 1494,
+      "diacritics_per_1k_words": 74.7
+    },
+    "no_verbatim_quote": true,
+    "trigger": [
+      "指令四对合池 30.3%",
+      "指令四对单对最高 ist=85.8%",
+      "实测形族合池 36.8%",
+      "实测形族单对最高 ist=100.0%",
+      "长s残留 36.0%"
+    ],
+    "first_person": {
+      "ich_strict": 14,
+      "wir_strict": 10,
+      "ich_ocr_var": 0,
+      "wir_ocr_var": 0,
+      "ich_per_10k": 7.0,
+      "wir_per_10k": 5.0,
+      "ich_tol_per_10k": 7.0,
+      "wir_tol_per_10k": 5.0,
+      "je_fr": 2,
+      "nous_fr": 0
+    }
+  }
+]

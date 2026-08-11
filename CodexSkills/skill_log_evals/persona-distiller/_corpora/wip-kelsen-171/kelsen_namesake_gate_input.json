@@ -1,0 +1,440 @@
+{
+ "★ 说明": "由 kelsen_namesake_candidates.json 机械转换而来；**同名者的 application_scenarios / key_capabilities 是占位**，它们只用于被排除，不构成任何能力主张。研究细节（10 条规则、11 条自测、6 次变异、对本轮语料实跑）仍以原文件为准。",
+ "candidates": [
+  {
+   "canonical_name": "Hans Kelsen",
+   "subject_uid": "kelsen-hans-1881",
+   "identity_category": "historical",
+   "occupation_or_role": "奥地利／美国法学家、纯粹法学创始人、奥地利宪法法院法官、宪法起草者、维也纳与科隆及美国多校教授",
+   "professional_background": "1881-10-11 – 1973-04-19（GND 548 datx『11.10.1881-19.04.1973』）。规范档：GND=118561219；LCCN=n50045680；Wikidata=Q84165；VIAF=31998356（★未在 VIAF 侧核过：机器可读端点不可达，见探测 §0）",
+   "application_scenarios": [
+    "法理学与规范理论的分析",
+    "宪法与国际法的层级构造问题",
+    "把道德词换算成可判断的法效力问题"
+   ],
+   "key_capabilities": [
+    "把规范体系写成可检验的层级结构",
+    "区分「实然」与「应然」并据此划自己的射程",
+    "以德语学术散文逐层拆解概念"
+   ],
+   "authoritative_sources": [
+    "118561219",
+    "n50045680",
+    "Q84165",
+    "31998356（★未在 VIAF 侧核过：机器可读端点不可达，见探测 §0）"
+   ],
+   "evidence_level": "high"
+  },
+  {
+   "canonical_name": "Adolf Kelsen",
+   "subject_uid": "adolf-kelsen-1850",
+   "identity_category": "namesake",
+   "occupation_or_role": "奥地利灯具制造商（GND 550: Unternehmer；678: Lampenfabrikant）；Wikidata P40 直指 Q84165 —— 目标人物之父",
+   "professional_background": "1850-06-06 – 1907-07-12｜GND 137731892; VIAF 81878324; Q55853330｜本轮核验：是——本轮直查 DNB SRU WOE=137731892，100$a『Kelsen, Adolf』$d1850-1907、678$b『Lampenfabrikant』逐字取回",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "GND 137731892",
+    "VIAF 81878324",
+    "Q55853330"
+   ],
+   "evidence_level": "high"
+  },
+  {
+   "canonical_name": "Brent Kelsen",
+   "subject_uid": "brent-kelsen-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "—",
+   "professional_background": "—｜GND 171752449; Q89913885｜本轮核验：否（沿用探测报告）",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "GND 171752449",
+    "Q89913885"
+   ],
+   "evidence_level": "medium"
+  },
+  {
+   "canonical_name": "Dominique Kelsen",
+   "subject_uid": "dominique-kelsen-1895",
+   "identity_category": "namesake",
+   "occupation_or_role": "卢森堡足球运动员",
+   "professional_background": "1895-01-18 – 1945-11-14｜Q16568780｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "Q16568780"
+   ],
+   "evidence_level": "medium"
+  },
+  {
+   "canonical_name": "Pierre Kelsen",
+   "subject_uid": "pierre-kelsen-1950",
+   "identity_category": "namesake",
+   "occupation_or_role": "卢森堡篮球运动员",
+   "professional_background": "生 1950｜Q49970641｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "Q49970641"
+   ],
+   "evidence_level": "medium"
+  },
+  {
+   "canonical_name": "Pierre Kelsen（第二实体）",
+   "subject_uid": "pierre-kelsen-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "未核是否与上一条重复",
+   "professional_background": "—｜Q102197062｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "Q102197062"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "Broche Kelsen",
+   "subject_uid": "broche-kelsen-1858",
+   "identity_category": "namesake",
+   "occupation_or_role": "—",
+   "professional_background": "1858-03-15 – 1943-02-01｜Q105355395｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "Q105355395"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "Hanna Renate Kelsen",
+   "subject_uid": "hanna-renate-kelsen-1914",
+   "identity_category": "namesake",
+   "occupation_or_role": "Hans Kelsen 之女（Q84165 P40 指向她）",
+   "professional_background": "1914-11-23 – 2001-06-02｜Q113633781｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "Q113633781"
+   ],
+   "evidence_level": "medium"
+  },
+  {
+   "canonical_name": "（Q115004308）",
+   "subject_uid": "q115004308-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "Hans Kelsen 另一子女",
+   "professional_background": "—｜Q115004308｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "Q115004308"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "Léa Kelsen",
+   "subject_uid": "lea-kelsen-1997",
+   "identity_category": "namesake",
+   "occupation_or_role": "—",
+   "professional_background": "生 1997｜Q126367617｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "Q126367617"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "David (P./Paul) Kelsen",
+   "subject_uid": "david-p-paul-kelsen-1984",
+   "identity_category": "namesake",
+   "occupation_or_role": "美国肿瘤科医师，Memorial Sloan-Kettering；著 Gastrointestinal oncology (2002)",
+   "professional_background": "1984–2002+｜LCCN n86148559｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "LCCN n86148559"
+   ],
+   "evidence_level": "high"
+  },
+  {
+   "canonical_name": "Judith R. Kelsen",
+   "subject_uid": "judith-r-kelsen-2022",
+   "identity_category": "namesake",
+   "occupation_or_role": "儿科消化科医师，费城儿童医院",
+   "professional_background": "2022｜LCCN n2024180963｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "LCCN n2024180963"
+   ],
+   "evidence_level": "medium"
+  },
+  {
+   "canonical_name": "Keith Kelsen",
+   "subject_uid": "keith-kelsen-2010",
+   "identity_category": "namesake",
+   "occupation_or_role": "著 Unleashing the power of digital signage",
+   "professional_background": "2010｜LCCN n2009069881｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "LCCN n2009069881"
+   ],
+   "evidence_level": "medium"
+  },
+  {
+   "canonical_name": "Sylvio Kelsen Coelho",
+   "subject_uid": "sylvio-kelsen-coelho-2020",
+   "identity_category": "namesake",
+   "occupation_or_role": "巴西；**Kelsen 是中名**；著 Empresas estatais",
+   "professional_background": "2020｜LCCN n2024253062｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "LCCN n2024253062"
+   ],
+   "evidence_level": "high"
+  },
+  {
+   "canonical_name": "Kelsen Dantas Eulálio / Kelsen DE Oliveira Teixeira",
+   "subject_uid": "kelsen-dantas-eulalio-kelsen-de-oliveira-teixeira-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "巴西研究者；**Kelsen 是名不是姓**",
+   "professional_background": "当代｜Q96646133 / Q95269382｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "Q96646133 / Q95269382"
+   ],
+   "evidence_level": "high"
+  },
+  {
+   "canonical_name": "Irene Kelsen",
+   "subject_uid": "irene-kelsen-1915",
+   "identity_category": "namesake",
+   "occupation_or_role": "★同为法律著作者：Victorian law of real estate",
+   "professional_background": "生 1915｜OL13477572A（无规范档）｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "OL13477572A（无规范档）"
+   ],
+   "evidence_level": "medium"
+  },
+  {
+   "canonical_name": "Emma Kelsen",
+   "subject_uid": "emma-kelsen-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "—",
+   "professional_background": "—｜OL10982604A｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "OL10982604A"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "Kate Kelsen",
+   "subject_uid": "kate-kelsen-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "—",
+   "professional_background": "—｜OL14436542A｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "OL14436542A"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "Don Kelsen",
+   "subject_uid": "don-kelsen-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "—",
+   "professional_background": "—｜OL9323424A｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "OL9323424A"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "Michael Robert Kelsen",
+   "subject_uid": "michael-robert-kelsen-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "—",
+   "professional_background": "—｜OL15070028A｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "OL15070028A"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "D. Kelsen",
+   "subject_uid": "d-kelsen-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "著 Magenkarzinom",
+   "professional_background": "—｜OL3333664A｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "OL3333664A"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "Kelsen Jacobs",
+   "subject_uid": "kelsen-jacobs-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "Kelsen 是名",
+   "professional_background": "—｜OL14271769A｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "OL14271769A"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "Jens Kelsen",
+   "subject_uid": "jens-kelsen-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "IA/PubMed 条目",
+   "professional_background": "—｜—｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "—"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "Jesper Kelsen",
+   "subject_uid": "jesper-kelsen-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "IA/PubMed 条目",
+   "professional_background": "—｜—｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "—"
+   ],
+   "evidence_level": "low"
+  },
+  {
+   "canonical_name": "Angel Kelsen Arbaiza",
+   "subject_uid": "angel-kelsen-arbaiza-nodate",
+   "identity_category": "namesake",
+   "occupation_or_role": "IA 条目",
+   "professional_background": "—｜—｜本轮核验：否",
+   "application_scenarios": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "key_capabilities": [
+    "不适用——本条是同名者，仅用于排除"
+   ],
+   "authoritative_sources": [
+    "—"
+   ],
+   "evidence_level": "low"
+  }
+ ]
+}

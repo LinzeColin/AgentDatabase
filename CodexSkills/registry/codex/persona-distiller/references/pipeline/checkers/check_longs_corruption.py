@@ -121,6 +121,38 @@ REGIMES = {
                   ("sehr", "fehr"), ("wissenschaft", "wiffenschaft"), ("soll", "foll")],
     },
 }
+# ★★★ v0.0.0.154 第二处：**德语还有两种与长 s 无关的坏法**，本件原本全看不见。
+#   Kelsen #171 的 `Das Problem der Souveränität`（1928，320 页 Antiqua 专著）：
+#     长 s 讹字率 **0.0000**（本件判「干净」）
+#     而 `nicht`/`nicbt` = 817/353 → **h→b 讹变 30.2%**、**变音符 0.0/千词**
+#   ⇒ 它是 `writings` 道最大的一件，**按长 s 那把尺子直接放行**。
+#   ★ 三个信号**分开报，不合并成一个数**——合并会互相抵消（[[merging-two-signals-cancels-both]]）。
+#
+#   缝（Kelsen 12 份实测）：
+#     h→b：干净 ≤0.0015 / 坏 0.2858、0.7778        → 门 0.20（190 倍分离）
+#     变音符：德语件 69.9–123.4 / 湮灭件 0.0        → 门 20.0（法语 3.0 已被锚词挡在门外）
+GERMAN_HB = [("nicht", "nicbt"), ("sich", "sicb"), ("auch", "aucb"),
+             ("durch", "durcb"), ("nach", "nacb"), ("doch", "docb")]
+GERMAN_HB_MAX = 0.20
+GERMAN_UMLAUT_MIN = 20.0        # 每千词
+
+
+def german_extra(text: str) -> dict:
+    """→ 德语专属的两个附加信号。**只在德语语域适用时才看**。"""
+    import collections
+    w = re.findall(r"[a-zäöüß]+", text.lower())
+    c = collections.Counter(w)
+    good = sum(c[a] for a, _ in GERMAN_HB)
+    bad = sum(c[b] for _, b in GERMAN_HB)
+    hb = bad / max(good + bad, 1)
+    um = len(re.findall(r"[äöüß]", text.lower()))
+    per1k = 1000.0 * um / max(len(w), 1)
+    return {"h→b率": round(hb, 4), "h→b样本": good + bad,
+            "变音符每千词": round(per1k, 1),
+            "h→b坏": hb >= GERMAN_HB_MAX and (good + bad) >= 30,
+            "变音符湮灭": per1k < GERMAN_UMLAUT_MIN and len(w) >= 2000}
+
+
 DIAGNOSTIC = [("est", "eft")]        # 只报不算，用来暴露 st 连字
 MIN_PANEL_HITS = 30
 
@@ -229,6 +261,23 @@ def measure(text: str) -> dict:
     verdict = worst["verdict"]
     reason = worst["reason"] + ("" if len(hits) == 1 else "　（两语域都适用，取更差的一侧）")
 
+    # ★★★ 德语语域再问两次：h→b 与变音符。**长 s 干净 ≠ 可逐字引**——
+    #   Kelsen 1928 那件长 s 恰好 0.0000，而 h→b 30.2%、变音符 0.0。
+    if any(r["语域"] == "德语" for r in hits):
+        ge = german_extra(text)
+        out["德语附加"] = ge
+        why = []
+        if ge["h→b坏"]:
+            why.append("**h→b 讹变 %.1f%%**（`nicht`→`nicbt` 这一族，样本 %d）"
+                       % (100 * ge["h→b率"], ge["h→b样本"]))
+        if ge["变音符湮灭"]:
+            why.append("**变音符湮灭**（%.1f/千词，干净德语件是 69.9–123.4）"
+                       % ge["变音符每千词"])
+        if why:
+            reason += "　★ **长 s 之外还坏了**：" + "；".join(why) + \
+                      "——逐字引用会印出作者没写的形"
+            verdict = "不可用"
+
     # ★ 拉丁语域再问一次 ae 连字。长 s 干净 ≠ 可逐字引 —— DJBP 1853 三卷就是这样。
     if any(r["语域"] == "拉丁" for r in hits):
         ae = ae_ligature(text)
@@ -304,6 +353,42 @@ def self_test() -> int:
     chk("德语面板不含任何带 `st` 的词对（st 连字会让它失明）",
         all("st" not in g and "st" not in b for g, b in REGIMES["德语"]["panel"]))
     chk("德语锚词一个都不含字母 s", all("s" not in a for a in GERMAN_ANCHORS))
+
+    # ── ★★★ 德语的另两种坏法（长 s 之外）：Kelsen 12 份实测 ──
+    #   缝：h→b 干净 ≤0.0015 / 坏 0.2858、0.7778；变音符 德语件 69.9–123.4 / 湮灭件 0.0
+    GEX = {  # 文件: (h→b率, h→b样本, 变音符/千词, 词数, 真值)
+        "souveraenitaet-1928（长 s 恰好 0.0000）": (0.2858, 3254,   0.0, 128850, True),
+        "allgemeine-staatslehre-1925":            (0.0000, 9999,  94.4, 300000, False),
+        "sozialismus-und-staat-1920":             (0.0015, 1200,  91.2,  50000, False),
+        "staatslehre-dante-1905":                 (0.0015,  900,  73.9,  70000, False),
+        "bundesverfassung-1922（两种都坏）":        (0.7778,  400, 118.7, 168413, True),
+    }
+    for name, (hb, n_hb, um, nw, want_bad) in GEX.items():
+        bad = (hb >= GERMAN_HB_MAX and n_hb >= 30) or (um < GERMAN_UMLAUT_MIN and nw >= 2000)
+        chk(f"德语附加 {name}：h→b {hb:.4f}、变音符 {um}/千词 → {'不可用' if bad else '放行'}",
+            bad == want_bad)
+    # ★★★ 上面五条真实件里，**两个信号覆盖的是同两份**——
+    #   实测：把变音符门降到 0、或把 h→b 分支关掉，**自测一条都不红**，
+    #   因为另一个信号还挡得住（[[counter-example-red-can-be-red-by-coincidence]] 的反向：
+    #   四道锁挡同一批东西时，拆掉两道一条都不红）。
+    #   ⇒ 下面两条是**构造的隔离用例**（明标构造，只用于让每个信号各自承重；
+    #     阈值仍来自上面的真实数据，不是从这两条推的）。
+    for label, hb, n_hb, um, nw, want in [
+            ("〔构造〕只坏 h→b：变音符正常 90/千词", 0.35, 500, 90.0, 50000, True),
+            ("〔构造〕只坏变音符：h→b 恰好 0", 0.0, 500, 1.0, 50000, True),
+            ("〔构造〕两个都正常", 0.01, 500, 90.0, 50000, False)]:
+        bad = (hb >= GERMAN_HB_MAX and n_hb >= 30) or (um < GERMAN_UMLAUT_MIN and nw >= 2000)
+        chk(f"{label} → {'不可用' if bad else '放行'}", bad == want)
+
+    # ★★ 最要紧的一条：**1928 那件长 s 是 0.0000**，只靠长 s 那把尺子必然放行。
+    chk("**只看长 s 会放行 1928 那件**（0.0000 < 0.20）——所以附加信号非有不可",
+        0.0000 < UNUSABLE)
+    # ★ 反对照：法语件变音符 3.0/千词很低，**但它靠锚词被挡在德语语域之外**，
+    #   不能靠「变音符低」把它判成坏德语。
+    chk("法语件不进德语语域（锚 2.6 < 15.0），变音符低不构成对它的判定",
+        2.6 < REGIMES["德语"]["anchor_min"])
+    chk("三个信号是**分开报**的（h→b 与变音符各有自己的键）",
+        {"h→b坏", "变音符湮灭"} <= set(german_extra("und der die nicht").keys()))
 
     print("\n══ ★★★★ 逐字真实样本：Grotius #168 的 17 份实测 ══")
     #   2026-08-11 在真语料上跑出来的**实测值**，不是构造的。

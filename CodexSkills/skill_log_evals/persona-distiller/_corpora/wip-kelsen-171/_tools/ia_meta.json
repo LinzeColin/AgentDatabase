@@ -1,0 +1,380 @@
+{
+  "diestaatslehrede00kels": {
+    "date": "1905",
+    "year": null,
+    "title": "Die staatslehre des Dante Alighieri",
+    "creator": "Kelsen, Hans, 1881-1973",
+    "publisher": "Wien und Leipzig, F. Deuticke",
+    "language": "ger",
+    "description": "27",
+    "possible-copyright-status": null,
+    "licenseurl": null,
+    "imagecount": "172",
+    "scanningcentre": null,
+    "sponsor": "University of Toronto",
+    "contributor": "PIMS - University of Toronto",
+    "identifier-access": "http://www.archive.org/details/diestaatslehrede00kels",
+    "collection": [
+      "pimslibrary",
+      "toronto",
+      "university_of_toronto"
+    ],
+    "txt_files": [
+      {
+        "name": "diestaatslehrede00kels_djvu.txt",
+        "size": "451614",
+        "format": "DjVuTXT",
+        "sha1": "b96eb8f5eac2da9b0c6f057a1bc3707f259e6b55"
+      }
+    ]
+  },
+  "kommentarzurste00kelsgoog": {
+    "date": "1907",
+    "year": "1907",
+    "title": "Kommentar zur österreichischen Reichsratswahlordnung",
+    "creator": "Hans Kelsen",
+    "publisher": "Manz",
+    "language": "German",
+    "description": "Book digitized by Google from the library of Harvard University and uploaded to the Internet Archive by user tpb.",
+    "possible-copyright-status": "NOT_IN_COPYRIGHT",
+    "licenseurl": null,
+    "imagecount": "244",
+    "scanningcentre": null,
+    "sponsor": "Google",
+    "contributor": "Harvard University",
+    "identifier-access": "http://www.archive.org/details/kommentarzurste00kelsgoog",
+    "collection": "americana",
+    "txt_files": [
+      {
+        "name": "kommentarzurste00kelsgoog_djvu.txt",
+        "size": "558936",
+        "format": "DjVuTXT",
+        "sha1": "46bcf3b8472e94dfe7c0c6f16b504bb08599fd95"
+      }
+    ]
+  },
+  "kelsen-eine-grundlegung-der-rechtssoziologie": {
+    "date": "1914",
+    "year": null,
+    "title": "Eine Grundlegung der Rechtssoziologie",
+    "creator": "Hans Kelsen",
+    "publisher": null,
+    "language": "ger",
+    "description": "Archiv für Sozialwissenschaft und Sozialpolitik, Band 39, Tübingen 1914, Seite 839 - 876<br />",
+    "possible-copyright-status": null,
+    "licenseurl": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "imagecount": null,
+    "scanningcentre": null,
+    "sponsor": null,
+    "contributor": null,
+    "identifier-access": "http://archive.org/details/kelsen-eine-grundlegung-der-rechtssoziologie",
+    "collection": [
+      "booksbylanguage_german",
+      "booksbylanguage"
+    ],
+    "txt_files": [
+      {
+        "name": "Kelsen_Eine Grundlegung der Rechtssoziologie_djvu.txt",
+        "size": "121387",
+        "format": "DjVuTXT",
+        "sha1": "016847f252a434dbc282749fafc218f347dc75af"
+      }
+    ]
+  },
+  "kelsen-rechtswissenschaft-als-norm-oder-kultur": {
+    "date": "1916",
+    "year": null,
+    "title": "Die Rechtswissenschaft als Norm- oder als Kulturwissenschaft",
+    "creator": "Hans Kelsen",
+    "publisher": null,
+    "language": "ger",
+    "description": "Schmollers Jahrbuch für Gesetzgebung, Verwaltung und Volkswirtschaft im Deutschen Reiche, Jahrgang 40, München 1916, Seite 95 - 153<br />",
+    "possible-copyright-status": null,
+    "licenseurl": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "imagecount": null,
+    "scanningcentre": null,
+    "sponsor": null,
+    "contributor": null,
+    "identifier-access": "http://archive.org/details/kelsen-rechtswissenschaft-als-norm-oder-kultur",
+    "collection": [
+      "booksbylanguage_german",
+      "booksbylanguage"
+    ],
+    "txt_files": [
+      {
+        "name": "Kelsen_Rechtswissenschaft als Norm oder Kultur_djvu.txt",
+        "size": "151605",
+        "format": "DjVuTXT",
+        "sha1": "711de4b500fc6f3e7903c0ffd561346bb9f18de9"
+      }
+    ]
+  },
+  "kelsen-politische-weltanschauung-und-erziehung": {
+    "date": "1918",
+    "year": null,
+    "title": "Politische Weltanschauung und Erziehung",
+    "creator": "Hans Kelsen",
+    "publisher": null,
+    "language": "ger",
+    "description": "Annalen für soziale Politik und Gesetzgebung, Band 2, Berlin 1918, Seite 1 - 26<br />",
+    "possible-copyright-status": null,
+    "licenseurl": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "imagecount": null,
+    "scanningcentre": null,
+    "sponsor": null,
+    "contributor": null,
+    "identifier-access": "http://archive.org/details/kelsen-politische-weltanschauung-und-erziehung",
+    "collection": [
+      "booksbylanguage_german",
+      "booksbylanguage"
+    ],
+    "txt_files": [
+      {
+        "name": "Kelsen_Politische Weltanschauung und Erziehung_djvu.txt",
+        "size": "63571",
+        "format": "DjVuTXT",
+        "sha1": "3eecbfd6baf8b57cddf01fcd9a679fa394bdbf06"
+      }
+    ]
+  },
+  "sozialismusundst00kels": {
+    "date": "1920",
+    "year": null,
+    "title": "Sozialismus und Staat : eine Untersuchung der politischen Theorie des Marxismus",
+    "creator": "Kelsen, Hans, 1881-1973",
+    "publisher": "Leipzig : C.L. Hirschfeld",
+    "language": "ger",
+    "description": [
+      "iv, 129 pages ; 22 cm",
+      "Includes bibliographical references"
+    ],
+    "possible-copyright-status": null,
+    "licenseurl": null,
+    "imagecount": "142",
+    "scanningcentre": null,
+    "sponsor": "University of Illinois Urbana-Champaign Alternates",
+    "contributor": "University of Illinois Urbana-Champaign",
+    "identifier-access": "http://archive.org/details/sozialismusundst00kels",
+    "collection": [
+      "university_of_illinois_urbana-champaign",
+      "americana"
+    ],
+    "txt_files": [
+      {
+        "name": "sozialismusundst00kels_djvu.txt",
+        "size": "318269",
+        "format": "DjVuTXT",
+        "sha1": "8c7b6daaaf291379811bc7dff8283bf85419d7af"
+      },
+      {
+        "name": "stub.txt",
+        "size": "0",
+        "format": "Text",
+        "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+      }
+    ]
+  },
+  "vomwesenundwertd00kels": {
+    "date": "1920",
+    "year": null,
+    "title": "Vom Wesen und Wert der Demokratie",
+    "creator": "Kelsen, Hans, 1881-1973",
+    "publisher": "Tubingen : J.C.B. Mohr",
+    "language": "ger",
+    "description": "38 p",
+    "possible-copyright-status": null,
+    "licenseurl": null,
+    "imagecount": "52",
+    "scanningcentre": null,
+    "sponsor": "University of British Columbia Library",
+    "contributor": "University of British Columbia Library",
+    "identifier-access": "http://www.archive.org/details/vomwesenundwertd00kels",
+    "collection": [
+      "ubclibrary",
+      "toronto"
+    ],
+    "txt_files": [
+      {
+        "name": "vomwesenundwertd00kels_djvu.txt",
+        "size": "109462",
+        "format": "DjVuTXT",
+        "sha1": "82694ea4151791bff9f87303df013d547cb2f389"
+      }
+    ]
+  },
+  "kelsen-staat-und-recht": {
+    "date": "1922",
+    "year": null,
+    "title": "Staat und Recht",
+    "creator": "Hans Kelsen",
+    "publisher": null,
+    "language": "ger",
+    "description": "Kölner Vierteljahreshefte für Sozialwissenschaften, Jahrgang 2, Heft 4, München und Leipzig 1922, Seite 18 - 37<br />",
+    "possible-copyright-status": null,
+    "licenseurl": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "imagecount": null,
+    "scanningcentre": null,
+    "sponsor": null,
+    "contributor": null,
+    "identifier-access": "http://archive.org/details/kelsen-staat-und-recht",
+    "collection": [
+      "booksbylanguage_german",
+      "booksbylanguage"
+    ],
+    "txt_files": [
+      {
+        "name": "Kelsen_Staat und Recht_djvu.txt",
+        "size": "55786",
+        "format": "DjVuTXT",
+        "sha1": "9b47400f2cc388d475716e127a2bde409caa0dba"
+      }
+    ]
+  },
+  "diebundesverfass00kels": {
+    "date": "1922",
+    "year": null,
+    "title": "Die Bundesverfassung vom 1. Oktober, 1920; mit Anhängen: 1. Die derzeit geltenden Bundesverfassungsgesetze samt Nebengesetzen. 2. Materialien zur Bundesverfassung; hrsg. in verbindung mit Georg Froehlich und Adolf Merkl",
+    "creator": [
+      "Kelsen, Hans, 1881-1973",
+      "Austria. Constitution"
+    ],
+    "publisher": "Wien, Deuticke",
+    "language": "ger",
+    "description": [
+      "Contains text of the Austrian Bundesverfassung of 1920",
+      "52"
+    ],
+    "possible-copyright-status": null,
+    "licenseurl": null,
+    "imagecount": "560",
+    "scanningcentre": null,
+    "sponsor": "University of Toronto",
+    "contributor": "Robarts - University of Toronto",
+    "identifier-access": "http://www.archive.org/details/diebundesverfass00kels",
+    "collection": [
+      "robarts",
+      "toronto",
+      "university_of_toronto"
+    ],
+    "txt_files": [
+      {
+        "name": "diebundesverfass00kels_djvu.txt",
+        "size": "1224918",
+        "format": "DjVuTXT",
+        "sha1": "916bf442ed02c6ed7acc51efcaa8f2dfca3bdac2"
+      }
+    ]
+  },
+  "allgemeinestaats00kels": {
+    "date": "1925",
+    "year": null,
+    "title": "Allgemeine staatslehre",
+    "creator": "Kelsen, Hans, 1881-1973",
+    "publisher": "Berlin : J. Springer",
+    "language": "ger",
+    "description": "\"Belege und verweise\": p. [373]-417",
+    "possible-copyright-status": null,
+    "licenseurl": null,
+    "imagecount": "464",
+    "scanningcentre": null,
+    "sponsor": "University of British Columbia Library",
+    "contributor": "University of British Columbia Library",
+    "identifier-access": "http://www.archive.org/details/allgemeinestaats00kels",
+    "collection": [
+      "ubclibrary",
+      "toronto"
+    ],
+    "txt_files": [
+      {
+        "name": "allgemeinestaats00kels_djvu.txt",
+        "size": "1845866",
+        "format": "DjVuTXT",
+        "sha1": "2d84738f38c92056244b782a72e2e7aacb48e784"
+      }
+    ]
+  },
+  "kelsen-fr-les-rapports-de-systeme-": {
+    "date": "1926",
+    "year": null,
+    "title": "Les Rapports De Système Entre Le Droit Interne Et Le Droit International Public de Hans Kelsen",
+    "creator": "Hans Kelsen",
+    "publisher": null,
+    "language": "fre",
+    "description": "1926 Hague course taught by Hans Kelsen, expanding on his 1920 monograph on sovereignty<br />",
+    "possible-copyright-status": null,
+    "licenseurl": null,
+    "imagecount": null,
+    "scanningcentre": null,
+    "sponsor": null,
+    "contributor": null,
+    "identifier-access": "http://archive.org/details/kelsen-fr-les-rapports-de-systeme-",
+    "collection": [
+      "booksbylanguage_french",
+      "booksbylanguage"
+    ],
+    "txt_files": [
+      {
+        "name": "9000 kelsen FR Les rapports de système entre le droit interne et le droit international public 1926 haye_djvu.txt",
+        "size": "244297",
+        "format": "DjVuTXT",
+        "sha1": "b3cea6e01e9f267980ac789078e5913f0c052411"
+      }
+    ]
+  },
+  "in.ernet.dli.2015.190098": {
+    "date": "1928",
+    "year": null,
+    "title": "Das Problem Der Souveranitat Udn Die Theorie",
+    "creator": "Hans Kelsen",
+    "publisher": null,
+    "language": "eng",
+    "description": "<p><b>Book Source:</b> <a href=\"http://www.new.dli.ernet.in/handle/2015/190098\" rel=\"nofollow\">Digital Library of India Item 2015.190098</a></p><p>dc.contributor.author: Hans Kelsen<br />dc.date.accessioned: 2015-07-07T23:49:21Z<br />dc.date.available: 2015-07-07T23:49:21Z<br />dc.date.digitalpublicationdate: 2020-12-07<br />dc.date.citation: 1928<br />dc.identifier.barcode: 5990010114631<br />dc.identifier.origpath: /rawdataupload/upload/0114/633<br />dc.identifier.copyno: 1<br />dc.identifier.uri: http://www.new.dli.ernet.in/handle/2015/190098<br />dc.description.scanningcentre: IIIT, Allahabad<br />dc.description.main: 1<br />dc.description.tagged: 0<br />dc.description.totalpages: 333<br />dc.format.mimetype: application/pdf<br />dc.language.iso: English<br />dc.publisher: Verlag Von J. C. B. Mohr<br />dc.rights: Out_of_copyright<br />dc.source.library: University Liberey  Allahabad<br />dc.subject.classification: Literture<br />dc.title: Das Problem Der Souveranitat Udn Die Theorie<br /></p>",
+    "possible-copyright-status": null,
+    "licenseurl": null,
+    "imagecount": null,
+    "scanningcentre": null,
+    "sponsor": null,
+    "contributor": null,
+    "identifier-access": "http://archive.org/details/in.ernet.dli.2015.190098",
+    "collection": [
+      "digitallibraryindia",
+      "JaiGyan"
+    ],
+    "txt_files": [
+      {
+        "name": "2015.190098.Das-Problem-Der-Souveranitat-Udn-Die-Theorie_djvu.txt",
+        "size": "954167",
+        "format": "DjVuTXT",
+        "sha1": "8023102e780f723c19b5bda645312641228cbdb1"
+      }
+    ]
+  },
+  "diestaatslehred00kelsgoog": {
+    "date": "1905",
+    "year": "1905",
+    "title": "Die Staatslehre des Dante Alighieri",
+    "creator": "Kelsen, Hans, 1881-1973",
+    "publisher": "Wien, Leipzig, F. Deuticke",
+    "language": "ger",
+    "description": [
+      "Book digitized by Google from the library of the University of California and uploaded to the Internet Archive by user tpb.",
+      "\"Literatur\" : p. [150]-152"
+    ],
+    "possible-copyright-status": "NOT_IN_COPYRIGHT",
+    "licenseurl": null,
+    "imagecount": "166",
+    "scanningcentre": null,
+    "sponsor": "Google",
+    "contributor": "University of California",
+    "identifier-access": "http://www.archive.org/details/diestaatslehred00kelsgoog",
+    "collection": "americana",
+    "txt_files": [
+      {
+        "name": "diestaatslehred00kelsgoog_djvu.txt",
+        "size": "393251",
+        "format": "DjVuTXT",
+        "sha1": "9ee3672c8bc26e7ddcc7d46917c0ace4122b9367"
+      }
+    ]
+  }
+}

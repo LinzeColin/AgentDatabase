@@ -1,0 +1,766 @@
+{
+  "person": "Hans Kelsen",
+  "life_dates": "1881-10-11 – 1973-04-19（GND 548 datx『11.10.1881-19.04.1973』）",
+  "life_dates_dispute": "★ 死亡日两说：GND 记 19.04.1973、Wikidata preferred 记 1973-04-19；而 **LCCN n50045680 的 deathDate 字段本轮直查是 1973-04-20**，Wikidata normal-rank 亦为 04-20。→ 01-可得性探测.md §① 写的『GND 与 LCCN 都记 4-19』**在 LCCN 一侧不成立**，本轮已改记为 2 对 2。对护栏无影响（护栏只用到年份 1881–1973）。",
+  "authority_ids": {
+    "GND": "118561219",
+    "LCCN": "n50045680",
+    "Wikidata": "Q84165",
+    "VIAF": "31998356（★未在 VIAF 侧核过：机器可读端点不可达，见探测 §0）"
+  },
+  "generated": "2026-08-11",
+  "rule": {
+    "triple": "全名位 ∧ （生卒 1881–1973 ∨ GND 118561219 ∨ LCCN n50045680）",
+    "name_regex": "(?<![A-Za-zÀ-ÿ])(?:Hans\\s+Kelsen|Kelsen,\\s*Hans|Kelsen,\\s*H\\.|H\\.\\s*Kelsen|Kelsen,\\s*Frantisek|Kelzen,\\s*Hans|Keruzen,\\s*Hansu|Qelzen,\\s*Hans|Κέλσεν,\\s*Χανς|Kel[ʹ']zen,\\s*Gans|קלזן,\\s*הנס|K[ʻ']o-lu-sun)(?![a-zà-ÿ])",
+    "discriminator_regex": "(?<![0-9])1881(?![0-9])[^\\n]{0,40}(?<![0-9])1973(?![0-9])|118561219|n\\s?50045680",
+    "hard_block_regex": "(?<![A-Za-zÀ-ÿ])(?:Hans[\\s\\-]Kelsen[\\s\\-]Institut|Hans[\\s\\-]Kelsen[\\s\\-]Werke|HKW)(?![A-Za-zÀ-ÿ])",
+    "given_name_kelsen_regex": "(?<![A-Za-zÀ-ÿ])Kelsen\\s+[A-ZÀ-Þ][a-zà-ÿ]+",
+    "forbidden_as_exclusion_term": [
+      "H. Kelsen",
+      "Kelsen, H.",
+      "Kelsen H"
+    ],
+    "forbidden_reason": "`H. Kelsen` / `Kelsen, H.` 是本人的 GND 400 变体名；拿它当排除词会把目标人物本人挡掉",
+    "word_boundary": "所有子串匹配带 (?<![A-Za-zÀ-ÿ]) / (?![A-Za-zÀ-ÿ]) 词边界，否则 K̇elsengdongrub 必中",
+    "surname_position_invalid_for": "巴西的『名＝Kelsen』（Kelsen Dantas Eulálio / Kelsen DE Oliveira Teixeira / Sylvio Kelsen Coelho）——姓氏位匹配对它们无效，必须另扫名位",
+    "vienna_trade_escalation": {
+      "year_range": [
+        1900,
+        1913
+      ],
+      "trigger_terms": [
+        "Wien",
+        "Vienna",
+        "Handelsmuseum",
+        "Handelskammer",
+        "Lampen",
+        "Fabrik",
+        "Firma",
+        "Gewerbe",
+        "Adressbuch",
+        "Lehmann"
+      ],
+      "action": "不许只比姓；必须读出作者全称，与 Adolf Kelsen (1850-1907, GND 137731892, Lampenfabrikant) 分开"
+    }
+  },
+  "self_test": {
+    "must_block": [
+      {
+        "s": "Hans Kelsen-Institut, Wien",
+        "why": "现代校勘机构（LCCN n83039512 / Q135652732）",
+        "verdict": "not_target",
+        "reason": "hard_block(现代校勘本 HKW / Kelsen-Institut)"
+      },
+      {
+        "s": "Hans Kelsen Werke, Bd. 3, Mohr Siebeck 2010",
+        "why": "HKW 现代校勘本，在版权期，最像一手件",
+        "verdict": "not_target",
+        "reason": "hard_block(现代校勘本 HKW / Kelsen-Institut)"
+      },
+      {
+        "s": "HKW 5, hrsg. vom Hans Kelsen-Institut",
+        "why": "缩写形态",
+        "verdict": "not_target",
+        "reason": "hard_block(现代校勘本 HKW / Kelsen-Institut)"
+      },
+      {
+        "s": "Kelsen, Adolf, 1850-1907",
+        "why": "父亲，Lampenfabrikant，GND 137731892；同姓同城，卒年落在他前两部书之间",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Kelsen Dantas Eulálio",
+        "why": "巴西，Kelsen 是**名**不是姓（Q96646133）——姓氏位匹配对它无效",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Kelsen DE Oliveira Teixeira",
+        "why": "同上（Q95269382）",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Sylvio Kelsen Coelho",
+        "why": "巴西，Kelsen 是中名（LCCN n2024253062）",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "K̇elsengdongrub",
+        "why": "纯子串碰撞（LCCN no2024137962）——不加词边界必中",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "David P. Kelsen, Gastrointestinal oncology, 2002",
+        "why": "美国肿瘤科医师 LCCN n86148559",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Irene Kelsen, Victorian law of real estate",
+        "why": "★同为法律著作者（OL13477572A），题材筛不掉",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Keith Kelsen, Unleashing the power of digital signage",
+        "why": "LCCN n2009069881",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Judith R. Kelsen",
+        "why": "LCCN n2024180963",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Dominique Kelsen (1895-1945)",
+        "why": "卢森堡足球运动员 Q16568780",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Pierre Kelsen",
+        "why": "卢森堡篮球运动员 Q49970641",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Hanna Renate Kelsen, 1914-2001",
+        "why": "Hans Kelsen 之女 Q113633781",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Kelsen Familie",
+        "why": "GND 13725945X，家族项不是人",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Kelsen Group / Kelsen Arts",
+        "why": "公司名 Q115864759 / Q139498739",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Kelsenstraße, Linz",
+        "why": "地名 Q134309783",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Kelsenova, Praha",
+        "why": "地名 Q43388234",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Adolf Kelsen, Lampenfabrik, Wien 1905",
+        "why": "★1900–1913 维也纳工商类，必须升级核全称",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      },
+      {
+        "s": "Brent Kelsen",
+        "why": "GND 171752449 / Q89913885",
+        "verdict": "not_target",
+        "reason": "姓名位（含 11 种规范档变体）未命中"
+      }
+    ],
+    "must_pass": [
+      {
+        "s": "Kelsen, Hans, 1881-1973",
+        "src": "GND 118561219 $100a$d / LCCN n50045680 authoritativeLabel",
+        "verdict": "target",
+        "reason": "三元组齐"
+      },
+      {
+        "s": "Kelsen, H., 1881-1973",
+        "src": "GND 400 ——★本人变体名，绝不许当排除词",
+        "verdict": "target",
+        "reason": "三元组齐"
+      },
+      {
+        "s": "Kelsen, Frantisek, 1881-1973",
+        "src": "GND 400",
+        "verdict": "target",
+        "reason": "三元组齐"
+      },
+      {
+        "s": "Kelzen, Hans, 1881-1973",
+        "src": "GND 400",
+        "verdict": "target",
+        "reason": "三元组齐"
+      },
+      {
+        "s": "Keruzen, Hansu, 1881-1973",
+        "src": "GND 400",
+        "verdict": "target",
+        "reason": "三元组齐"
+      },
+      {
+        "s": "Qelzen, Hans, 1881-1973",
+        "src": "GND 400",
+        "verdict": "target",
+        "reason": "三元组齐"
+      },
+      {
+        "s": "Κέλσεν, Χανς, 1881-1973",
+        "src": "GND 400 $9 U:Grek",
+        "verdict": "target",
+        "reason": "三元组齐"
+      },
+      {
+        "s": "Kelʹzen, Gans, 1881-1973",
+        "src": "★本轮新取：LCCN n50045680 variantLabel (und-latn)，探测报告未列",
+        "verdict": "target",
+        "reason": "三元组齐"
+      },
+      {
+        "s": "קלזן, הנס, 1881-1973",
+        "src": "★本轮新取：LCCN n50045680 variantLabel (und-hebr)，探测报告未列",
+        "verdict": "target",
+        "reason": "三元组齐"
+      },
+      {
+        "s": "Kʻo-lu-sun, 1881-1973",
+        "src": "★本轮新取：LCCN n50045680 variantLabel（中文罗马化），探测报告未列",
+        "verdict": "target",
+        "reason": "三元组齐"
+      },
+      {
+        "s": "Hans Kelsen (GND 118561219)",
+        "src": "只给规范档号、不给生卒的写法",
+        "verdict": "target",
+        "reason": "三元组齐"
+      },
+      {
+        "s": "Hans Kelsen, LCCN n50045680",
+        "src": "只给 LCCN 的写法",
+        "verdict": "target",
+        "reason": "三元组齐"
+      }
+    ],
+    "must_be_undecided": [
+      {
+        "s": "Hans Kelsen",
+        "why": "只有名字、没有生卒也没有规范档号 —— 判『不是他』和判『是他』都是编的",
+        "verdict": "undecided",
+        "reason": "姓名位命中、判别位（1881–1973 / GND 118561219 / LCCN n50045680）缺 → 必须人工核全称，不许默认放过或默认排除"
+      },
+      {
+        "s": "H. Kelsen, Reine Rechtslehre",
+        "why": "★本人变体名的正序写法，无判别位；判成 not_target 就等于把他自己挡了",
+        "verdict": "undecided",
+        "reason": "姓名位命中、判别位（1881–1973 / GND 118561219 / LCCN n50045680）缺 → 必须人工核全称，不许默认放过或默认排除"
+      },
+      {
+        "s": "Kelsen, H.",
+        "why": "GND 400 变体名，无判别位",
+        "verdict": "undecided",
+        "reason": "姓名位命中、判别位（1881–1973 / GND 118561219 / LCCN n50045680）缺 → 必须人工核全称，不许默认放过或默认排除"
+      },
+      {
+        "s": "Kelsen, Hans, Wien 1907",
+        "why": "有年份但不是生卒 → ★1900–1913 维也纳档，必须升级核全称（父亲 Adolf Kelsen 卒于 1907）",
+        "verdict": "undecided",
+        "reason": "姓名位命中、判别位（1881–1973 / GND 118561219 / LCCN n50045680）缺 → 必须人工核全称，不许默认放过或默认排除"
+      }
+    ],
+    "false_positive_count": 0,
+    "false_negative_count": 0,
+    "wrong_undecided_count": 0,
+    "false_positives": [],
+    "false_negatives": [],
+    "wrong_undecided": [],
+    "verdict": "PASS",
+    "note": "★ 三侧用的是同一个 judge()，不是三把尺子（本项目记档：判据方向反了、两侧同跑一把尺才查出来）。★★ 本护栏第一版自测就打红：11 种规范档变体名里有 9 种『姓名位未命中』——我没有把 `H. Kelsen` 写进排除词，但**没写进识别位**的净效果一样是把本人挡在外面。指令只禁止了前一种写法，后一种是自测抓出来的。"
+  },
+  "mutation_test": {
+    "why": "绿了不等于起作用——本项目记档：切错位置的判据照样能在两个状态间给出不同答案。所以逐条把护栏改坏，看自测会不会打红。",
+    "baseline": {
+      "block_leak": 0,
+      "pass_lost": 0,
+      "wrong_verdict": 0
+    },
+    "rows": [
+      {
+        "mutation": "M1 去掉尾部词边界",
+        "delta_block_leak": 0,
+        "delta_pass_lost": 0,
+        "delta_wrong_verdict": 0,
+        "went_red": false
+      },
+      {
+        "mutation": "M2 去掉首部词边界",
+        "delta_block_leak": 0,
+        "delta_pass_lost": 0,
+        "delta_wrong_verdict": 0,
+        "went_red": false
+      },
+      {
+        "mutation": "M3 姓名位退化成只比姓 Kelsen",
+        "delta_block_leak": 15,
+        "delta_pass_lost": 7,
+        "delta_wrong_verdict": 0,
+        "went_red": true
+      },
+      {
+        "mutation": "M4 拆掉硬拦 HKW/Kelsen-Institut",
+        "delta_block_leak": 3,
+        "delta_pass_lost": 0,
+        "delta_wrong_verdict": 0,
+        "went_red": true
+      },
+      {
+        "mutation": "M5 判别位放宽成『有 4 位数年份即可』",
+        "delta_block_leak": 0,
+        "delta_pass_lost": 0,
+        "delta_wrong_verdict": 1,
+        "went_red": true
+      },
+      {
+        "mutation": "M6 判别位收紧成只认 GND",
+        "delta_block_leak": 0,
+        "delta_pass_lost": 11,
+        "delta_wrong_verdict": 0,
+        "went_red": true
+      },
+      {
+        "mutation": "M7 把 H. Kelsen 从识别位删掉（＝指令禁止的那种做法）",
+        "delta_block_leak": 0,
+        "delta_pass_lost": 1,
+        "delta_wrong_verdict": 2,
+        "went_red": true
+      },
+      {
+        "mutation": "M3+M1 只比姓 ∧ 无词边界",
+        "delta_block_leak": 17,
+        "delta_pass_lost": 7,
+        "delta_wrong_verdict": 0,
+        "went_red": true
+      }
+    ],
+    "covered": [
+      "M3 姓名位退化成只比姓 Kelsen",
+      "M4 拆掉硬拦 HKW/Kelsen-Institut",
+      "M5 判别位放宽成『有 4 位数年份即可』",
+      "M6 判别位收紧成只认 GND",
+      "M7 把 H. Kelsen 从识别位删掉（＝指令禁止的那种做法）",
+      "M3+M1 只比姓 ∧ 无词边界"
+    ],
+    "NOT_covered": [
+      "M1 去掉尾部词边界",
+      "M2 去掉首部词边界"
+    ],
+    "honest_note": "★ M1/M2（词边界）单独改坏时自测**不打红**——因为本护栏用的是全名匹配，词边界在当前形态下不是承重件。它只有在护栏退化成『只比姓』时才承重：M3+M1 一起改才漏。**不许据此宣称『词边界已验过』**，只能说：当前形态下它是冗余防线，一旦有人把匹配放宽到姓氏位，它立刻变成唯一那道。"
+  },
+  "unicode_normalization_probe": {
+    "string": "K̇elsengdongrub",
+    "codepoints_head": [
+      "0x4b",
+      "0x307",
+      "0x65",
+      "0x6c"
+    ],
+    "naive_contains_Kelsen_raw": false,
+    "naive_contains_Kelsen_after_diacritic_folding": true,
+    "surname_match_with_word_boundary_after_folding": false,
+    "finding": "★ 探测报告 ⑤-C 写的『naive contains(\"Kelsen\") 必中』**未归一化时不成立**：K 与 e 之间夹着组合符 U+0307，原串里根本没有 `Kelsen` 这个子串。只有上游做过去组合符/折叠（多数检索管道会做）它才会中——那时词边界确实是唯一挡住它的东西。结论方向没错，触发条件报告里漏了一步。"
+  },
+  "run_against_this_round_corpus": {
+    "n_items": 12,
+    "hard_block_hits_total": 0,
+    "given_name_kelsen_hits_total": 0,
+    "items": [
+      {
+        "src_dir": "src-0101153a70ac",
+        "file": "wesen-und-wert-der-demokratie-1920.txt",
+        "hard_block_hits": 0,
+        "given_name_kelsen_hits": 0,
+        "fullname_hits_in_text": 2,
+        "ia_creator_field": "Kelsen, Hans, 1881-1973",
+        "creator_field_verdict": "target",
+        "creator_field_reason": "三元组齐"
+      },
+      {
+        "src_dir": "src-06466a84b056",
+        "file": "sozialismus-und-staat-1920.txt",
+        "hard_block_hits": 0,
+        "given_name_kelsen_hits": 0,
+        "fullname_hits_in_text": 2,
+        "ia_creator_field": "Kelsen, Hans, 1881-1973",
+        "creator_field_verdict": "target",
+        "creator_field_reason": "三元组齐"
+      },
+      {
+        "src_dir": "src-24dc5ceb27d9",
+        "file": "rapports-de-systeme-1926-fr.txt",
+        "hard_block_hits": 0,
+        "given_name_kelsen_hits": 0,
+        "fullname_hits_in_text": 0,
+        "ia_creator_field": "Hans Kelsen",
+        "creator_field_verdict": "undecided",
+        "creator_field_reason": "姓名位命中、判别位（1881–1973 / GND 118561219 / LCCN n50045680）缺 → 必须人工核全称，不许默认放过或默认排除"
+      },
+      {
+        "src_dir": "src-3035f33a18c3",
+        "file": "politische-weltanschauung-erziehung-1918.txt",
+        "hard_block_hits": 0,
+        "given_name_kelsen_hits": 0,
+        "fullname_hits_in_text": 10,
+        "ia_creator_field": "Hans Kelsen",
+        "creator_field_verdict": "undecided",
+        "creator_field_reason": "姓名位命中、判别位（1881–1973 / GND 118561219 / LCCN n50045680）缺 → 必须人工核全称，不许默认放过或默认排除"
+      },
+      {
+        "src_dir": "src-308be29151ce",
+        "file": "staatslehre-dante-1905.txt",
+        "hard_block_hits": 0,
+        "given_name_kelsen_hits": 0,
+        "fullname_hits_in_text": 1,
+        "ia_creator_field": "Kelsen, Hans, 1881-1973",
+        "creator_field_verdict": "target",
+        "creator_field_reason": "三元组齐"
+      },
+      {
+        "src_dir": "src-36f78a9079e6",
+        "file": "staat-und-recht-1922.txt",
+        "hard_block_hits": 0,
+        "given_name_kelsen_hits": 0,
+        "fullname_hits_in_text": 10,
+        "ia_creator_field": "Hans Kelsen",
+        "creator_field_verdict": "undecided",
+        "creator_field_reason": "姓名位命中、判别位（1881–1973 / GND 118561219 / LCCN n50045680）缺 → 必须人工核全称，不许默认放过或默认排除"
+      },
+      {
+        "src_dir": "src-37171ebfc83a",
+        "file": "kommentar-reichsratswahlordnung-1907.txt",
+        "hard_block_hits": 0,
+        "given_name_kelsen_hits": 0,
+        "fullname_hits_in_text": 0,
+        "ia_creator_field": "Hans Kelsen",
+        "creator_field_verdict": "undecided",
+        "creator_field_reason": "姓名位命中、判别位（1881–1973 / GND 118561219 / LCCN n50045680）缺 → 必须人工核全称，不许默认放过或默认排除"
+      },
+      {
+        "src_dir": "src-4fae0b145146",
+        "file": "allgemeine-staatslehre-1925.txt",
+        "hard_block_hits": 0,
+        "given_name_kelsen_hits": 0,
+        "fullname_hits_in_text": 1,
+        "ia_creator_field": "Kelsen, Hans, 1881-1973",
+        "creator_field_verdict": "target",
+        "creator_field_reason": "三元组齐"
+      },
+      {
+        "src_dir": "src-98577cc73747",
+        "file": "bundesverfassung-1920-coedited-1922.txt",
+        "hard_block_hits": 0,
+        "given_name_kelsen_hits": 0,
+        "fullname_hits_in_text": 0,
+        "ia_creator_field": [
+          "Kelsen, Hans, 1881-1973",
+          "Austria. Constitution"
+        ],
+        "creator_field_verdict": "target",
+        "creator_field_reason": "三元组齐"
+      },
+      {
+        "src_dir": "src-a8167d895156",
+        "file": "problem-der-souveraenitaet-1928.txt",
+        "hard_block_hits": 0,
+        "given_name_kelsen_hits": 0,
+        "fullname_hits_in_text": 1,
+        "ia_creator_field": "Hans Kelsen",
+        "creator_field_verdict": "undecided",
+        "creator_field_reason": "姓名位命中、判别位（1881–1973 / GND 118561219 / LCCN n50045680）缺 → 必须人工核全称，不许默认放过或默认排除"
+      },
+      {
+        "src_dir": "src-c42f2325eb59",
+        "file": "grundlegung-rechtssoziologie-1914.txt",
+        "hard_block_hits": 0,
+        "given_name_kelsen_hits": 0,
+        "fullname_hits_in_text": 19,
+        "ia_creator_field": "Hans Kelsen",
+        "creator_field_verdict": "undecided",
+        "creator_field_reason": "姓名位命中、判别位（1881–1973 / GND 118561219 / LCCN n50045680）缺 → 必须人工核全称，不许默认放过或默认排除"
+      },
+      {
+        "src_dir": "src-f1f485d4a3ec",
+        "file": "rechtswissenschaft-norm-oder-kultur-1916.txt",
+        "hard_block_hits": 0,
+        "given_name_kelsen_hits": 0,
+        "fullname_hits_in_text": 0,
+        "ia_creator_field": "Hans Kelsen",
+        "creator_field_verdict": "undecided",
+        "creator_field_reason": "姓名位命中、判别位（1881–1973 / GND 118561219 / LCCN n50045680）缺 → 必须人工核全称，不许默认放过或默认排除"
+      }
+    ],
+    "note": "★ 『0 次拦截』与『没跑』打印出来是同一个 0（本项目记档），所以这里连**分母**一起给：12 件全部真跑过，硬拦命中 0、名位 Kelsen 命中 0。另注：本轮 12 件是**按给定 IA identifier 直取**的，不走检索路径 —— 护栏在这条通道上本来就没有拦截机会，这个 0 只证明『没有污染混进来』，不证明『护栏有效』；护栏的有效性由上面的 self_test 正反对照证明。"
+  },
+  "candidates": [
+    {
+      "name": "Adolf Kelsen",
+      "dates": "1850-06-06 – 1907-07-12",
+      "role": "奥地利灯具制造商（GND 550: Unternehmer；678: Lampenfabrikant）；Wikidata P40 直指 Q84165 —— 目标人物之父",
+      "authority": "GND 137731892; VIAF 81878324; Q55853330",
+      "evidence_level": "high",
+      "verified_this_round": "是——本轮直查 DNB SRU WOE=137731892，100$a『Kelsen, Adolf』$d1850-1907、678$b『Lampenfabrikant』逐字取回",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Brent Kelsen",
+      "dates": "—",
+      "role": "—",
+      "authority": "GND 171752449; Q89913885",
+      "evidence_level": "medium",
+      "verified_this_round": "否（沿用探测报告）",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Dominique Kelsen",
+      "dates": "1895-01-18 – 1945-11-14",
+      "role": "卢森堡足球运动员",
+      "authority": "Q16568780",
+      "evidence_level": "medium",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Pierre Kelsen",
+      "dates": "生 1950",
+      "role": "卢森堡篮球运动员",
+      "authority": "Q49970641",
+      "evidence_level": "medium",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Pierre Kelsen（第二实体）",
+      "dates": "—",
+      "role": "未核是否与上一条重复",
+      "authority": "Q102197062",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Broche Kelsen",
+      "dates": "1858-03-15 – 1943-02-01",
+      "role": "—",
+      "authority": "Q105355395",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Hanna Renate Kelsen",
+      "dates": "1914-11-23 – 2001-06-02",
+      "role": "Hans Kelsen 之女（Q84165 P40 指向她）",
+      "authority": "Q113633781",
+      "evidence_level": "medium",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "（Q115004308）",
+      "dates": "—",
+      "role": "Hans Kelsen 另一子女",
+      "authority": "Q115004308",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Léa Kelsen",
+      "dates": "生 1997",
+      "role": "—",
+      "authority": "Q126367617",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "David (P./Paul) Kelsen",
+      "dates": "1984–2002+",
+      "role": "美国肿瘤科医师，Memorial Sloan-Kettering；著 Gastrointestinal oncology (2002)",
+      "authority": "LCCN n86148559",
+      "evidence_level": "high",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Judith R. Kelsen",
+      "dates": "2022",
+      "role": "儿科消化科医师，费城儿童医院",
+      "authority": "LCCN n2024180963",
+      "evidence_level": "medium",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Keith Kelsen",
+      "dates": "2010",
+      "role": "著 Unleashing the power of digital signage",
+      "authority": "LCCN n2009069881",
+      "evidence_level": "medium",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Sylvio Kelsen Coelho",
+      "dates": "2020",
+      "role": "巴西；**Kelsen 是中名**；著 Empresas estatais",
+      "authority": "LCCN n2024253062",
+      "evidence_level": "high",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Kelsen Dantas Eulálio / Kelsen DE Oliveira Teixeira",
+      "dates": "当代",
+      "role": "巴西研究者；**Kelsen 是名不是姓**",
+      "authority": "Q96646133 / Q95269382",
+      "evidence_level": "high",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Irene Kelsen",
+      "dates": "生 1915",
+      "role": "★同为法律著作者：Victorian law of real estate",
+      "authority": "OL13477572A（无规范档）",
+      "evidence_level": "medium",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Emma Kelsen",
+      "dates": "—",
+      "role": "—",
+      "authority": "OL10982604A",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Kate Kelsen",
+      "dates": "—",
+      "role": "—",
+      "authority": "OL14436542A",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Don Kelsen",
+      "dates": "—",
+      "role": "—",
+      "authority": "OL9323424A",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Michael Robert Kelsen",
+      "dates": "—",
+      "role": "—",
+      "authority": "OL15070028A",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "D. Kelsen",
+      "dates": "—",
+      "role": "著 Magenkarzinom",
+      "authority": "OL3333664A",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Kelsen Jacobs",
+      "dates": "—",
+      "role": "Kelsen 是名",
+      "authority": "OL14271769A",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Jens Kelsen",
+      "dates": "—",
+      "role": "IA/PubMed 条目",
+      "authority": "—",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Jesper Kelsen",
+      "dates": "—",
+      "role": "IA/PubMed 条目",
+      "authority": "—",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    },
+    {
+      "name": "Angel Kelsen Arbaiza",
+      "dates": "—",
+      "role": "IA 条目",
+      "authority": "—",
+      "evidence_level": "low",
+      "verified_this_round": "否",
+      "identity_category": "namesake"
+    }
+  ],
+  "non_person_entities": [
+    {
+      "name": "Hans Kelsen-Institut",
+      "authority": "LCCN n83039512; Q135652732",
+      "why_dangerous": "★本轮最大污染源：它编的 Hans Kelsen Werke (HKW) 是现代校勘本、在版权期，而书名与作者名与目标完全一致"
+    },
+    {
+      "name": "Hans Kelsen Werke (HKW)",
+      "authority": "Q116111193; Mohr Siebeck, 2007–",
+      "why_dangerous": "现代校勘本，在版权期"
+    },
+    {
+      "name": "Kelsen Familie",
+      "authority": "GND 13725945X",
+      "why_dangerous": "家族项，不是人，但会命中姓名匹配"
+    },
+    {
+      "name": "K̇elsengdongrub",
+      "authority": "LCCN no2024137962（蒙文，1945）",
+      "why_dangerous": "纯子串碰撞 K̇elsen|gdongrub，naive contains(\"Kelsen\") 必中"
+    },
+    {
+      "name": "Kelsen（德国聚落）/ Kelsenstraße（林茨）/ Kelsenova（布拉格）",
+      "authority": "Q1437153 / Q134309783 / Q43388234",
+      "why_dangerous": "地名子串"
+    },
+    {
+      "name": "Kelsen Group / Kelsen Arts",
+      "authority": "Q115864759 / Q139498739",
+      "why_dangerous": "公司名"
+    }
+  ],
+  "provenance": {
+    "候选清单来源": "01-可得性探测.md ⑤（Wikidata SPARQL + wbsearchentities 七语种 + GND SRU + LC suggest2 + OpenLibrary + IA creator）",
+    "本轮独立复核的": [
+      "GND 118561219 的 100/400/548 字段（DNB SRU，MARC21）",
+      "GND 137731892 Adolf Kelsen（同上）",
+      "LCCN n50045680 的 variantLabel / birthDate / deathDate（id.loc.gov JSON）"
+    ],
+    "本轮未复核、沿用探测报告的": "其余 22 位自然人与 6 项非自然人的标识符"
+  }
+}
