@@ -112,12 +112,17 @@
 >
 > 把移交提交 `git archive` 到一个空目录（12649 个文件，无语料），**在收件人的布局里**跑：
 >
-> | 步骤 | 结果 | 判读规则 |
+> | 步骤 | 结果（**2026-08-12 末次复验**） | 判读规则 |
 > |---|---|---|
-> | `next_person.py` | 通，NEXT = **Louis Brandeis**（政治法律师） | 它 stderr 会打印「实际用的路径」，**必须指向你自己的树**——指到别处就是串了 |
-> | 90 件判据各跑 `--self-test` | **90/90 过** | 全过；不过的那件名字会打出来 |
-> | `check_contract_drift.py` | 绿（约 15 秒） | 会跳过 2 件跨技能依赖的镜像，**那是按设计如此，不是错** |
+> | 导出的文件数 | 12729（无语料） | —— |
+> | `next_person.py` | 通，NEXT = **John Marshall** | 它 stderr 会打印「实际用的路径」，**必须指向你自己的树**——指到别处就是串了 |
+> | **92 件**判据各跑 `--self-test` | **92/92 过** | 全过；不过的那件名字会打出来 |
+> | `check_contract_drift.py` | 绿 | 会跳过 2 件跨技能依赖的镜像，**那是按设计如此，不是错** |
+> | `check_doc_command_shapes.py` | 绿（HANDOFF 与必读**两份都扫**） | 它核的是「文档里的命令与脚本参数形状对不对得上」 |
 > | `pytest tests/ -q` | **73 passed**（约 5 分钟） | 全过 |
+>
+> ★ NEXT 从 Louis Brandeis 变成 **John Marshall**，**不是异常**：
+>   #172 Brandeis 的工作区当天已建，`next_person.py` 会把在办的人排除。
 >
 > ★ 为什么非要在干净目录跑：本项目栽过两次——
 >   [[verifying-single-commands-is-not-verifying-the-chain]]（三条命令各自绿、整链走完 89/91 红）、
