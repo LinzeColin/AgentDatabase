@@ -178,12 +178,38 @@
 
 ★ 本条只读了 Prolegomena 开头约 1,100 字符，**正文一章未读**。
 
+### 七、★★ 第四部作品：同一个动作**收进了一个专章**
+
+`src-6de33e4db80d`（*De imperio summarum potestatum circa sacra*，1751 法译本）
+十二章，前四章的排布：
+
+> `CHAPITRE I. _Le Pouvoir du Magistrat politique s'étend sur les choses sacrées._`（@5128）
+
+> `CHAPITRE II. _Le pouvoir sur les choses sacrées, & la fonction sacrée sont distincts._`（@35070）
+
+> `CHAPITRE IV. _Solution des objections contre le pouvoir du Magistrat politique sur la Religion._`（@85311）
+
+**I 立通则 → II 先把两个会被混起来的概念分开 → III 划两者的边界 → IV 专章处理反对意见。**
+
+★★ 与 Mare Liberum 对照：那里反例被摊在 II–VII 六章里逐条销案，
+**这里收进第 IV 一章**。→ 「反例后撞」这个动作在**第四部作品**上再次出现，
+而**它在版面上的实现又换了一种**。
+
+★ 另记一条对 expression／conversations 两道有用的：本份是法译本，**保留了第一人称**——
+
+> `CHAPITRE VIII _De la Législation sur les choses sacrées_. J'ai jusqu'à présent considéré le pouvoir en génér`（@230201）
+
+`J'ai jusqu'à présent considéré`（「我至此考察的是……」）是**章与章之间的接榫句**。
+★ 但这是 **1751 年译者的法文**，不是他的拉丁原文——**不得当作他的措辞**。
+
+★ 本条只读了章题与一句接榫句，**正文一章未读**。
+
 ### ★ 本节没做什么
 
-- 只读了本道 12 份里的 **4 份**（`src-19eca701ec61`、`src-8651f2b87336`、
-  `src-52fd74630d7b`、`src-2808cba204dc`），且后两份只读了章题与开篇。
-  其余 8 份**尚未读**，不是「读过没发现」。
-- 六条观察全是**形态**（他怎么排论证、怎么立项），
+- 只读了本道 12 份里的 **5 份**（`src-19eca701ec61`、`src-8651f2b87336`、
+  `src-52fd74630d7b`、`src-2808cba204dc`、`src-6de33e4db80d`），
+  且后三份只读了章题与开篇。其余 7 份**尚未读**，不是「读过没发现」。
+- 七条观察全是**形态**（他怎么排论证、怎么立项），
   **没有一条是关于他主张了什么**。实体主张要等其余各份读完再提。
 
 ## Candidate Claims
