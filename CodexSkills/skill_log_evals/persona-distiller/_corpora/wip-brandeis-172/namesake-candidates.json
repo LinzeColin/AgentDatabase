@@ -1,0 +1,317 @@
+{
+  "_采集说明": {
+    "日期": "2026-08-12",
+    "做法": "Wikidata 姓氏属性 P734 = Q21491384（Brandeis 姓）的**全量** SPARQL 查询，逐行照录；外加 wbsearchentities 对 'Brandeis' 与 'Louis Brandeis' 两次检索。",
+    "★ 只写实调到的字段": "本文件里的 Q-id、生卒日期全部来自上述实调结果，逐字照录。**除目标本人外，其余人的 LCCN / GND 我没有逐个去查，因此一律不写**——编一个 id 比留空危险得多。",
+    "★★ 有意排除的（不是漏掉）": "SPARQL 返回 40 余条 description 为 'Holocaust victim' / 'prisoner in ... Ghetto' 的条目（Q104408981、Q104409015、Q104411794…）。它们**未见任何已出版作品**，不构成署名混淆风险，故不逐条列入。**唯一例外已列入**：Q106819710，因为它与目标**姓名逐字相同**。",
+    "★★★ 机构类同名": "wbsearchentities 首屏 25 条里有 20 条是 Brandeis University 及其下属机构（Brandeis University Press、Brandeis law journal、Brandeis Medal、Michtom School…）。它们**以本人命名**，因此按姓氏筛选必然命中。已单列一条代表项，处置规则写在 disposition 里。"
+  },
+  "candidates": [
+    {
+      "canonical_name": "Louis Brandeis",
+      "subject_uid": "brandeis-louis-1856",
+      "identity_category": "historical",
+      "occupation_or_role": "美国最高法院大法官、律师、改革派政治人物",
+      "professional_background": "1856-11-13 – 1941-10-05。Wikidata P106 记 judge / lawyer / politician。1916–1939 任美国最高法院大法官；此前在波士顿执业，以 Muller v. Oregon (1908) 的「Brandeis Brief」与 Other People's Money and How the Bankers Use It (1914) 知名。",
+      "application_scenarios": [
+        "以社会事实与统计支撑法律论证",
+        "对规模与集中的经济结构判断",
+        "在异议意见中提出可被后世援引的判准"
+      ],
+      "key_capabilities": [
+        "把经验数据编进法律论证（Brandeis Brief 的做法）",
+        "对『大』本身的成本给出可核算的说法",
+        "以公开写作影响立法与舆论，而非只在法庭内"
+      ],
+      "distinguishing_basis": "Wikidata Q520840（P569 1856-11-13、P570 1941-10-05）∧ LCCN n79018108（**标目逐字为 'Brandeis, Louis D., 1856-1941'**，含生卒年）∧ GND 118659790（preferredName 'Brandeis, Louis Dembitz'，1856–1941）三者互相印证。★ 三条 id 均于 2026-08-12 逐条实调。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q520840",
+          "note": "wbgetentities 实调；P244=n79018108、P227=118659790、P214=97302419、P213=0000000081687780"
+        },
+        {
+          "locator": "LCCN n79018108 — 标目 'Brandeis, Louis D., 1856-1941'",
+          "note": "id.loc.gov 实调；变体名 'Brandeis, Louis Dembitz, 1856-1941'、'Brandis, Luʼis D., 1856-1941'、希伯来文形式"
+        },
+        {
+          "locator": "GND 118659790",
+          "note": "d-nb.info 实调（culturegraph 与 lobid 两个端点当日均不可达，已换官方 d-nb.info）；变体名 'Brandeis, Louis D.'、'Brandeis, Louis'、'Dembitz Brandeis, Louis'"
+        }
+      ],
+      "disposition": "target",
+      "evidence_level": "high"
+    },
+    {
+      "canonical_name": "Louis Brandeis (1902–1945)",
+      "subject_uid": "brandeis-louis-1902",
+      "identity_category": "historical",
+      "occupation_or_role": "大屠杀遇难者",
+      "professional_background": "1902-07-01 – 1945-01-17。Wikidata description 'Holocaust victim (born 1902)'。",
+      "distinguishing_basis": "★★★ **与目标姓名逐字相同**，仅靠姓名无法区分；靠生卒年区分（1902–1945 vs 1856–1941）。未见任何已出版作品。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q106819710",
+          "note": "SPARQL P734 实调"
+        }
+      ],
+      "disposition": "not-target｜**同名门必须显式挡他**：任何署名 'Louis Brandeis' 而年代落在 1941 之后的材料，先按此人排除",
+      "application_scenarios": [
+        "无——未见任何已出版作品"
+      ],
+      "key_capabilities": [
+        "无——本条只为挡住姓名逐字相同的混淆"
+      ],
+      "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Alfred Brandeis",
+      "subject_uid": "brandeis-alfred-1854",
+      "identity_category": "historical",
+      "occupation_or_role": "路易维尔商人（谷物贸易）",
+      "professional_background": "1854-03-23 – 1928-08-08。Wikidata description 'Louisville businessman and **brother of Louis Brandeis** (1854-1928)'。",
+      "distinguishing_basis": "★★★ **本轮最高风险的一个**：他是目标的兄长，两人有大量往来书信，而书信集里**双方的信都在同一册**。按姓氏或按『Brandeis 通信』取材，必然把他写的信混进一手。⇒ 与 [[related-to-him-is-not-written-by-him]] 同型（Liebig 9 份混进一手，把占比从 0.7419 拉到 0.5192）。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q140188321",
+          "note": "SPARQL P734 实调"
+        }
+      ],
+      "disposition": "not-target｜**书信类材料逐封核署名**，不许按册整体归到目标名下",
+      "application_scenarios": [
+        "谷物贸易经营",
+        "与其弟的长期通信"
+      ],
+      "key_capabilities": [
+        "商业往来记录",
+        "**书信另一侧的署名人**"
+      ],
+      "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Madeline Brandeis",
+      "subject_uid": "brandeis-madeline-1897",
+      "identity_category": "historical",
+      "occupation_or_role": "美国作家、电影制片人",
+      "professional_background": "1897-12-18 – 1937-06-27。Wikidata description 'American writer and film producer (1897-1937)'。",
+      "distinguishing_basis": "★★ **她真的出书**，且活跃年代与目标重叠、作品多在公有领域分界之前——按姓氏检索古籍库必然大量命中。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q6726997",
+          "note": "SPARQL P734 实调"
+        }
+      ],
+      "disposition": "not-target｜**署名筛选不能只比姓**，要比全名与出版年",
+      "application_scenarios": [
+        "少年读物写作",
+        "早期电影制片"
+      ],
+      "key_capabilities": [
+        "面向儿童的国别系列读物",
+        "默片时代制片"
+      ],
+      "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Irma Brandeis",
+      "subject_uid": "brandeis-irma-1905",
+      "identity_category": "historical",
+      "occupation_or_role": "美国大学教师、但丁学者",
+      "professional_background": "1905-02-03 – 1990-01-29。Wikidata description 'American university teacher (1905-1990)'。",
+      "distinguishing_basis": "学术著作者，姓氏相同、年代部分重叠；生卒年可分。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q3802063",
+          "note": "SPARQL P734 实调"
+        }
+      ],
+      "disposition": "not-target",
+      "application_scenarios": [
+        "但丁研究与教学"
+      ],
+      "key_capabilities": [
+        "意大利文学学术写作"
+      ],
+      "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Antonietta Brandeis",
+      "subject_uid": "brandeis-antonietta-1848",
+      "identity_category": "historical",
+      "occupation_or_role": "意大利画家",
+      "professional_background": "1848-01-13 – 1926-03-20（Wikidata 另有一条 1849-01-13 的生日声明，两条并存）。",
+      "distinguishing_basis": "画家，作品为图像非文本；姓氏相同、年代与目标重叠。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q2006411",
+          "note": "SPARQL P734 实调；★ 生日有 1848/1849 两个声明，照录不裁决"
+        }
+      ],
+      "disposition": "not-target",
+      "application_scenarios": [
+        "威尼斯风景绘画"
+      ],
+      "key_capabilities": [
+        "油画（图像，非文本）"
+      ],
+      "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Eugen Brandeis",
+      "subject_uid": "brandeis-eugen-1846",
+      "identity_category": "historical",
+      "occupation_or_role": "德国工程师、殖民地行政官",
+      "professional_background": "1846-09-23 – 1931-12-09。Wikidata description 'German engineer and colonial administrator (1846-1931)'。",
+      "distinguishing_basis": "行政官会留下公文与报告，姓氏相同、年代高度重叠（1846–1931 vs 1856–1941）。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q1262835",
+          "note": "SPARQL P734 实调"
+        }
+      ],
+      "disposition": "not-target",
+      "application_scenarios": [
+        "德属太平洋殖民地行政"
+      ],
+      "key_capabilities": [
+        "行政公文与报告"
+      ],
+      "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Antoine Brandeis",
+      "subject_uid": "brandeis-antoine-1868",
+      "identity_category": "historical",
+      "occupation_or_role": "德国民族学者",
+      "professional_background": "1868-03-25 – 1945-04-24。Wikidata description 'German ethnologist'。★ 另有 Q112362490 'Antoine Brandeis'（1868 生，无描述），两条可能指同一人，**本轮不裁决**。",
+      "distinguishing_basis": "民族学者有出版物；姓氏相同、年代重叠。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q95195603",
+          "note": "SPARQL P734 实调"
+        },
+        {
+          "locator": "Wikidata Q112362490",
+          "note": "同上；两条是否同一人未裁决"
+        }
+      ],
+      "disposition": "not-target",
+      "application_scenarios": [
+        "民族学调查与著述"
+      ],
+      "key_capabilities": [
+        "民族志写作"
+      ],
+      "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Friedrich Brandeis (传教士, 1835–1920)",
+      "subject_uid": "brandeis-friedrich-1835-missionary",
+      "identity_category": "historical",
+      "occupation_or_role": "德国传教士",
+      "professional_background": "1835-04-06 – 1920-08-09。",
+      "distinguishing_basis": "★ **与下一条同名同姓且同生年（1835）**，两人本身就要靠职业与卒年区分——这说明只比姓名不够。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q1268215",
+          "note": "SPARQL P734 实调"
+        }
+      ],
+      "disposition": "not-target",
+      "application_scenarios": [
+        "传教事务"
+      ],
+      "key_capabilities": [
+        "传教记录"
+      ],
+      "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Friedrich Brandeis (作曲家, 1835–1889)",
+      "subject_uid": "brandeis-friedrich-1835-composer",
+      "identity_category": "historical",
+      "occupation_or_role": "奥地利钢琴家、作曲家、管风琴师",
+      "professional_background": "1835-07-05 – 1889-05-14。",
+      "distinguishing_basis": "见上一条。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q28744731",
+          "note": "SPARQL P734 实调"
+        }
+      ],
+      "disposition": "not-target",
+      "application_scenarios": [
+        "钢琴与管风琴演奏、作曲"
+      ],
+      "key_capabilities": [
+        "乐谱（非文本）"
+      ],
+      "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Jan Adolf Brandeis",
+      "subject_uid": "brandeis-janadolf-1818",
+      "identity_category": "historical",
+      "occupation_or_role": "捷克画家、摄影师",
+      "professional_background": "1818-06-09 – 1872-11-13。",
+      "distinguishing_basis": "年代早于目标主要活跃期，可分。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q18508340",
+          "note": "SPARQL P734 实调"
+        }
+      ],
+      "disposition": "not-target",
+      "application_scenarios": [
+        "绘画与摄影"
+      ],
+      "key_capabilities": [
+        "图像作品（非文本）"
+      ],
+      "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Adele Brandeis",
+      "subject_uid": "brandeis-adele-1885",
+      "identity_category": "historical",
+      "occupation_or_role": "美国艺术行政管理者",
+      "professional_background": "1885 – 1975。",
+      "distinguishing_basis": "同为美国、姓氏相同、年代重叠；职业与生卒年可分。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q4681872",
+          "note": "SPARQL P734 实调"
+        }
+      ],
+      "disposition": "not-target",
+      "application_scenarios": [
+        "公共艺术项目管理"
+      ],
+      "key_capabilities": [
+        "艺术行政文书"
+      ],
+      "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Brandeis University（及其约 20 个下属机构）",
+      "subject_uid": "brandeis-university-institution",
+      "identity_category": "institution",
+      "occupation_or_role": "美国私立研究型大学（以本人命名）",
+      "professional_background": "Q49119。检索 'Brandeis' 时首屏 25 条中有 20 条属此族：Brandeis University Press (Q76977390)、Brandeis law journal (Q27719463)、Brandeis Medal (Q4956634)、Brandeis International Business School (Q4956632)、Michtom School of Computer Science (Q104176788) 等。",
+      "distinguishing_basis": "★★★ **它以本人命名，所以按姓氏筛选必然全部命中，且它们的出版物都晚于 1941 年**。⇒ 这正是 Coffin #130 那次事故的形状：GE 总裁 Charles A. Coffin 被当成焊接发明人的署名放行——**护栏只比姓，同姓的一个也挡不住**。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q49119 及同族 Q76977390 / Q27719463 / Q4956634 / Q4956632 / Q104176788",
+          "note": "wbsearchentities 实调"
+        }
+      ],
+      "disposition": "not-target｜**机构出版物一律排除**：Brandeis University Press 等的署名是机构不是人",
+      "application_scenarios": [
+        "高等教育与学术出版"
+      ],
+      "key_capabilities": [
+        "**机构署名**的出版物，非个人作品"
+      ],
+      "evidence_level": "low"
+    }
+  ]
+}

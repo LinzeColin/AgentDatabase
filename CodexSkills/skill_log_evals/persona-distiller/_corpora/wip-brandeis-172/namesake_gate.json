@@ -1,0 +1,53 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Louis Brandeis；historical；美国最高法院大法官、律师、改革派政治人物。\n   专业背景：1856-11-13 – 1941-10-05。Wikidata P106 记 judge / lawyer / politician。1916–1939 任美国最高法院大法官；此前在波士顿执业，以 Muller v. Oregon (1908) 的「Brandeis Brief」与 Other People's Money and How the Bankers Use It (1914) 知名。。\n   应用价值：场景：以社会事实与统计支撑法律论证；对规模与集中的经济结构判断；在异议意见中提出可被后世援引的判准；关键能力：把经验数据编进法律论证（Brandeis Brief 的做法）；对『大』本身的成本给出可核算的说法；以公开写作影响立法与舆论，而非只在法庭内。\n   区分依据：Wikidata Q520840（P569 1856-11-13、P570 1941-10-05）∧ LCCN n79018108（**标目逐字为 'Brandeis, Louis D., 1856-1941'**，含生卒年）∧ GND 118659790（preferredName 'Brandeis, Louis Dembitz'，1856–1941）三者互相印证。★ 三条 id 均于 2026-08-12 逐条实调。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "以社会事实与统计支撑法律论证",
+        "对规模与集中的经济结构判断",
+        "在异议意见中提出可被后世援引的判准"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q520840",
+          "note": "wbgetentities 实调；P244=n79018108、P227=118659790、P214=97302419、P213=0000000081687780"
+        },
+        {
+          "locator": "LCCN n79018108 — 标目 'Brandeis, Louis D., 1856-1941'",
+          "note": "id.loc.gov 实调；变体名 'Brandeis, Louis Dembitz, 1856-1941'、'Brandis, Luʼis D., 1856-1941'、希伯来文形式"
+        },
+        {
+          "locator": "GND 118659790",
+          "note": "d-nb.info 实调（culturegraph 与 lobid 两个端点当日均不可达，已换官方 d-nb.info）；变体名 'Brandeis, Louis D.'、'Brandeis, Louis'、'Dembitz Brandeis, Louis'"
+        }
+      ],
+      "canonical_name": "Louis Brandeis",
+      "distinguishing_basis": "Wikidata Q520840（P569 1856-11-13、P570 1941-10-05）∧ LCCN n79018108（**标目逐字为 'Brandeis, Louis D., 1856-1941'**，含生卒年）∧ GND 118659790（preferredName 'Brandeis, Louis Dembitz'，1856–1941）三者互相印证。★ 三条 id 均于 2026-08-12 逐条实调。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "把经验数据编进法律论证（Brandeis Brief 的做法）",
+        "对『大』本身的成本给出可核算的说法",
+        "以公开写作影响立法与舆论，而非只在法庭内"
+      ],
+      "label": "A",
+      "occupation_or_role": "美国最高法院大法官、律师、改革派政治人物",
+      "professional_background": "1856-11-13 – 1941-10-05。Wikidata P106 记 judge / lawyer / politician。1916–1939 任美国最高法院大法官；此前在波士顿执业，以 Muller v. Oregon (1908) 的「Brandeis Brief」与 Other People's Money and How the Bankers Use It (1914) 知名。",
+      "subject_uid": "brandeis-louis-1856"
+    }
+  ],
+  "generated_at": "2026-08-11T16:20:10Z",
+  "normalized_name": "louisbrandeis",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "brandeis-louis-1856",
+  "status": "ready",
+  "target_name": "Louis Brandeis"
+}
