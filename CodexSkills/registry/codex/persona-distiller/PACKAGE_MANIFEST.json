@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "53fa4153b7351766f5d3fd7662e46c0539c07a86a0d81bd3155ead3dfb0c5d7b",
-      "size_bytes": 137547
+      "sha256": "73b8acc80c91825ab96debf46d578526f2c2ae290f80ad2af960e80f7b9c6570",
+      "size_bytes": 138419
     },
     {
       "path": "VERSION",
@@ -571,8 +571,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_contract_drift.py",
-      "sha256": "e618fffe37e824665c31945d8ac6b3655883ba5c1c5da2ddca9718cb48dbd9ae",
-      "size_bytes": 43273
+      "sha256": "e38c758389b31234a7951f9282b3a64576f72064c9e7055100416ae03021435a",
+      "size_bytes": 44374
     },
     {
       "path": "references/pipeline/checkers/check_corpus_ceiling.py",
@@ -723,6 +723,11 @@
       "path": "references/pipeline/checkers/check_ocr_legibility.py",
       "sha256": "77b35b8f81f1e47813065ac4b7d1a3415c51f4eaf0e7a2098f114e6cbcbc945e",
       "size_bytes": 11493
+    },
+    {
+      "path": "references/pipeline/checkers/check_paper_lanes.py",
+      "sha256": "92d8747daffc8befb7ab978793621bba13b9296c8b77e78c1724a91b3a8e9aa9",
+      "size_bytes": 13724
     },
     {
       "path": "references/pipeline/checkers/check_pd_grounds.py",
@@ -1351,8 +1356,8 @@
     },
     {
       "path": "scripts/check_contract_drift.py",
-      "sha256": "e618fffe37e824665c31945d8ac6b3655883ba5c1c5da2ddca9718cb48dbd9ae",
-      "size_bytes": 43273
+      "sha256": "e38c758389b31234a7951f9282b3a64576f72064c9e7055100416ae03021435a",
+      "size_bytes": 44374
     },
     {
       "path": "scripts/check_corpus_ceiling.py",
@@ -1503,6 +1508,11 @@
       "path": "scripts/check_ocr_legibility.py",
       "sha256": "77b35b8f81f1e47813065ac4b7d1a3415c51f4eaf0e7a2098f114e6cbcbc945e",
       "size_bytes": 11493
+    },
+    {
+      "path": "scripts/check_paper_lanes.py",
+      "sha256": "92d8747daffc8befb7ab978793621bba13b9296c8b77e78c1724a91b3a8e9aa9",
+      "size_bytes": 13724
     },
     {
       "path": "scripts/check_pd_grounds.py",

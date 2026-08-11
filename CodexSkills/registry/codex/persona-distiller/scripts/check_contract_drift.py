@@ -185,6 +185,27 @@ def _selftest_reach(root: pathlib.Path) -> list[str]:
             + " —— **跑 `scripts/check_selftest_reach.py` 看全表**"]
 
 
+def _paper_lanes(root: pathlib.Path) -> list[str]:
+    """**纸面道**：某道的全部支撑都来自「一条同时挂多道」的源（`check_paper_lanes.py`）。
+
+    与本门另外三条同性质——都是「改完判据/加完人物之后最该问的一句」。
+    ★ 成本：全扫 43 份账本约 1 秒。
+    """
+    mod = root / "scripts" / "check_paper_lanes.py"
+    if not mod.is_file():
+        return []
+    import subprocess
+    r = subprocess.run([sys.executable, str(mod)], capture_output=True, text=True, cwd=str(root))
+    if r.returncode == 0:
+        return []
+    if "新出现" not in (r.stdout or ""):
+        return [f"[纸面道] check_paper_lanes 跑不起来（rc={r.returncode}）："
+                f"{(r.stderr or r.stdout)[:160]}"]
+    lines = [l.strip() for l in (r.stdout or "").splitlines() if "**新增**" in l]
+    return ["[纸面道] **新出现工作区有「纸面道」**（该道没有一条专属的源）：" + "；".join(lines)
+            + " —— **跑 `scripts/check_paper_lanes.py` 看全表**"]
+
+
 def _verification_counts(root: pathlib.Path) -> list[str]:
     """**VERIFICATION.md 里能机械数出来的量，必须与实况相等。**
 
@@ -389,6 +410,7 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
     problems.extend(_one_ledger_per_workspace(root))
     problems.extend(_verification_counts(root))
     problems.extend(_selftest_reach(root))
+    problems.extend(_paper_lanes(root))
 
     # ★★ v0.0.0.94 新增第四条比对：**CHANGELOG 的最高条目必须等于 VERSION**。
     #   实测背景：2026-08-04 一天写了 v0.0.0.84–94 十一条 CHANGELOG，
