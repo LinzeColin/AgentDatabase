@@ -370,6 +370,43 @@ def wiring_audit(directory: pathlib.Path) -> dict:
             "**解析失败退回原文搜索的**": sorted(unparsed)}
 
 
+def _entry_source(src: str, tree, fns: dict) -> str:
+    """判据「真实入口」的源码：`main()`，**没有 main() 就取内联 `if __name__` 块**，
+    并把入口直接调到的模块内函数一并算进来（一层）。
+
+    ★ 为什么要跟进一层：三件无 `main()` 的判据（anchor_coherence / holdout_overlap /
+      material_split）内联块里只有一句 `sys.exit(check(...))`，
+      **读文件的动作全在 `check()` 里**。只看内联块会得到「它不读文件」的错结论——
+      比原来的「看不见」更糟，因为那是个**看起来有答案的错答案**。
+    """
+    import ast as _a
+    mn = fns.get("main")
+    if mn is not None:
+        entry = _a.get_source_segment(src, mn) or ""
+    else:
+        entry = ""
+        for node in tree.body:
+            if (isinstance(node, _a.If) and isinstance(node.test, _a.Compare)
+                    and getattr(node.test.left, "id", None) == "__name__"):
+                entry = _a.get_source_segment(src, node) or ""
+                break
+    if not entry:
+        return ""
+    called = set()
+    try:
+        for n in _a.walk(_a.parse(entry.lstrip())):
+            if isinstance(n, _a.Call) and isinstance(n.func, _a.Name):
+                called.add(n.func.id)
+    except SyntaxError:
+        pass
+    parts = [entry]
+    for name in sorted(called):
+        node = fns.get(name)
+        if node is not None and name not in {"main"}:
+            parts.append(_a.get_source_segment(src, node) or "")
+    return "\n".join(parts)
+
+
 def selftest_touches_disk(directory: pathlib.Path) -> dict:
     """★ **自测有没有走过「从磁盘加载」这条路**——v0.0.0.100 新增。
 
@@ -397,9 +434,16 @@ def selftest_touches_disk(directory: pathlib.Path) -> dict:
         if not st:
             continue
         st_src = _ast.get_source_segment(src, st) or ""
-        mn = fns.get("main")
-        mn_src = (_ast.get_source_segment(src, mn) or "") if mn else ""
-        reads = bool(_re.search(r"read_text|open\(|json\.load|is_file\(\)|glob\(|rglob\(", mn_src))
+
+        # ★★ 2026-08-12 修的盲区：原来只取 `fns.get("main")`。
+        #   **没有 `main()` 函数的判据（用内联 `if __name__` 块）它一个也看不见**——
+        #   全库 3 件：check_anchor_coherence / check_holdout_overlap / check_material_split。
+        #   check_holdout_overlap 恰恰是**待裁定 ㊲ 的全部依据**，
+        #   而它的 `check()` 直到当天才第一次有自测。
+        #   ⇒ 与 [[a-checker-nothing-calls-is-not-a-checker]] 同族：
+        #     判据的射程边界要真去数，不能假定「大家都写 main()」。
+        entry_src = _entry_source(src, tree, fns)
+        reads = bool(_re.search(r"read_text|open\(|json\.load|is_file\(\)|glob\(|rglob\(", entry_src))
         touches = bool(_re.search(r"tempfile|TemporaryDirectory|NamedTemporary|write_text|mkdtemp", st_src))
         rows.append((f.stem, reads, touches))
     need = [n for n, r, tch in rows if r and not tch]
@@ -503,12 +547,53 @@ def self_test() -> int:
             print(f"  ✗ **stdout 不是纯 JSON**：{_e}")
             bad.append(f"--json 输出无法解析：{_e}")
 
+    # ── `selftest_touches_disk` / `_entry_source` 的四向对照 ────────────────
+    # ★ 2026-08-12 补。此前**这两个函数一次也没被自测进入过**
+    #   （用 sys.settrace 逐件量的：89 件判据里 37 件有函数从没被自测进入）。
+    #   而它原来的 `fns.get("main")` 有个盲区：**没有 `main()` 的判据一件也看不见**。
+    #   修完实测名单 38 → 45，**多出 7 件不是 3 件**——
+    #   除那 3 件无 main() 的，还有 5 件 main() 只是转调、读文件在被调函数里。
+    #   ⇒ 比集合不比计数 [[two-errors-cancelled-so-the-gate-stayed-green]]。
+    print("\n── selftest_touches_disk：入口识别的四向对照 ──")
+    _READS = "    p = pathlib.Path('x')\n    return p.read_text()\n"
+    _CASES = {
+        # 名称: (源码, 是否应当进「读文件而自测不碰文件系统」名单)
+        "check_fx_main_reads.py": (
+            f"import pathlib\ndef main():\n{_READS}\ndef self_test():\n    return 0\n", True),
+        # ★★ 被修的那一类：无 main()，内联块调 check()，**读文件在 check() 里**
+        "check_fx_inline_reads.py": (
+            f"import pathlib\ndef check(ws):\n{_READS}\n"
+            "def self_test():\n    return 0\n"
+            "if __name__ == '__main__':\n    check(None)\n", True),
+        # 同上，但自测用了 tempfile → 不该进名单
+        "check_fx_inline_tmp.py": (
+            f"import pathlib, tempfile\ndef check(ws):\n{_READS}\n"
+            "def self_test():\n    with tempfile.TemporaryDirectory() as t:\n        return 0\n"
+            "if __name__ == '__main__':\n    check(None)\n", False),
+        # 压根不读文件 → 不该进名单（否则名单会被灌水到没人看）
+        "check_fx_no_read.py": (
+            "def main():\n    return 0\ndef self_test():\n    return 0\n", False),
+    }
+    with tempfile.TemporaryDirectory() as tmp3:
+        d3 = pathlib.Path(tmp3)
+        for name, (src, _) in _CASES.items():
+            (d3 / name).write_text(src, encoding="utf-8")
+        got = set(selftest_touches_disk(d3)["名单"])
+        for name, (_, want) in _CASES.items():
+            stem = name[:-3]
+            ok = (stem in got) == want
+            print(f"  {'✓' if ok else '✗'} {stem}：期望{'进' if want else '不进'}名单，"
+                  f"实得{'进' if stem in got else '不进'}")
+            if not ok:
+                bad.append(f"selftest_touches_disk 判错 {stem}")
+
     if bad:
         print("\n负对照未过：")
         for b in bad:
             print(f"  · {b}")
         return 2
-    print(f"\n负对照通过（{len(FIXTURES)} 档各一例；真实夹具探测两向对照均过）")
+    print(f"\n负对照通过（{len(FIXTURES)} 档各一例；真实夹具探测两向对照均过；"
+          f"selftest_touches_disk 入口识别四向对照均过）")
     return 0
 
 
