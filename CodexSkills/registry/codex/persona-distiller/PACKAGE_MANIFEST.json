@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "6c82f26ac7edb387877bc43d1d6add2712d391c89efb1c76d3950fc091688b9e",
-      "size_bytes": 140475
+      "sha256": "5fa4f5e0942086f9f423f2e67a59124b14ead9e787bba9d32f2ba82d93c1b4e0",
+      "size_bytes": 141152
     },
     {
       "path": "VERSION",
@@ -375,6 +375,11 @@
       "size_bytes": 124037
     },
     {
+      "path": "references/ledgers/_判分产物三种形状-2026-08-12.md",
+      "sha256": "f11fbe4be167336507889c657da8bd5f19ec7bf18fe00f5e5db34adc174f4a59",
+      "size_bytes": 3026
+    },
+    {
       "path": "references/ledgers/_变异装置本身要先验-2026-08-12.md",
       "sha256": "b4c81f8ec7d1a6f099dbb9b7181a22e8b3fb61d7ad52e2cc595e801855923782",
       "size_bytes": 4423
@@ -391,8 +396,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "1b21bcca103ac58b13ce159add99b1f46325ec8d7bb80b3d1740b3889e0dc767",
-      "size_bytes": 259408
+      "sha256": "9d7a88a249aa4e85e23ce6b0658bd34e3e94f391cf251f56ce810d54d4f806f4",
+      "size_bytes": 260323
     },
     {
       "path": "references/ledgers/_拒答溢出门-整代人物空过-2026-08-12.md",
