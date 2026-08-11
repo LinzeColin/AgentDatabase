@@ -1,0 +1,652 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Oliver Wendell Holmes Jr.；historical；美国法学家、联邦最高法院大法官、马萨诸塞州最高法院首席法官、哈佛法学院教授、法理学著述者。\n   专业背景：1841-03-08 – 1935-03-06。生卒日精确到日，三库互证：Wikidata Q360574 的 P569/P570 均为 day 精度（precision=11）；LoC n79054782 的 birthdates=1841-03-08、deathdates=1935-03-06；GND 118706594 的 548 字段 $a08.03.1841-06.03.1935 $4datx（Exakte Lebensdaten）。出生地 Boston (Mass.)（LoC n79054782 birthplaces 字段）。职业：LoC n79054782 occupations 作 Judges；GND 118706594 的 550 字段作 Jurist（berc 特征职业）、Richter、Rechtstheoretiker、Autor、Hochschullehrer、Herausgeber；Wikidata Q360574 P106 作 jurist / judge / lawyer / university teacher / politician / philosopher / editor / author。任职与教育（Wikidata Q360574）：P39=Associate Justice of the Supreme Court of the United States (Q11144)、P108 雇主=Harvard University (Q13371)、P69 就学于 Harvard Law School (Q49122) 与 Harvard College (Q49123)。代表作 P800=The Path of the Law (Q55889364, 1897)。GND 118706594 的 678 传记注原文写出父子关系与履历：「Sohn des Schriftstellers und Arztes Oliver Wendell Holmes Sr. (1809-1894); 1870 Herausgeber der Zeitschrift \"American Law Review\"; 1882 Professor für Rechtswissenschaft in Harvard; 1902-1932 Richter am Obersten Gerichtshof der Vereinigten Staaten」。★ 标目形态（本轮最要紧的观察）：LoC n79054782 的现行标目是「Holmes, Oliver Wendell, Jr., 1841-1935」（marcKey 1001 $aHolmes, Oliver Wendell,$cJr.,$d1841-1935），**但其 MADS 的 hasEarlierEstablishedForm 为「Holmes, Oliver Wendell, 1841-1935」——即他此前的既定标目是不带 Jr. 的裸名形**，该形同时也登记为 variantLabel（出现两次）。而 **GND 118706594 的 100 字段至今作「Holmes, Oliver Wendell $d1841-1935」，根本不带 Jr.**，Jr. 只作为 400 变体形「Holmes Jr., Oliver Wendell $d1841-1935」存在。Wikidata Q360574 的英文主标签同样是裸名「Oliver Wendell Holmes」，其英文别名含「Oliver Holmes」「Oliver W. Holmes Jr.」等 10 条。VIAF ID 34517870 出自 Wikidata Q360574 的 P214 声明与本轮**未能回读 VIAF 本体**（见 authoritative_sources 说明），故按第三方声明登记、不作 VIAF 已核实的断言。。\n   应用价值：场景：美国普通法法理学与司法意见书写作；宪法第一修正案、言论自由与「明显而即刻的危险」标准的推理；法律现实主义 / 法律的经验主义基础（The Path of the Law、The Common Law）；关键能力：把法律从形式逻辑推演改述为经验与政策后果的判断（「法律的生命不在逻辑而在经验」式论证）；司法意见与异议意见的凝练写作；法律史与法教义学的体系化重构。\n   区分依据：Wikidata Q360574 ∧ LCCN n79054782 ∧ GND 118706594 三者互证，且互证关系有**库内直接链接**而非我跨库推断：GND 118706594 的 024 字段直接写出 $an79054782 $2lccn。**与父亲的分开方式是本条的全部难点**，见 holmes-oliver-wendell-sr-1809 条；此处只记要点：四库中**没有任何一库把 Jr./Sr. 同时用在父子二人身上**——LoC 只给儿子加 $cJr. 而父亲的标目是裸名，GND 父子两条 100 字段是**逐字节相同的「Holmes, Oliver Wendell」，仅 $d 日期不同**。可用于硬分开的判据只有三样：(1) 生卒年 1841-1935 vs 1809-1894；(2) 标识符 n79054782 / 118706594 / Q360574 vs n80032729 / 118706608 / Q319829；(3) 职业档 Judges·Jurist·Richter vs Physicians·Poets·Schriftsteller·Arzt。**姓名字符串本身在四库中没有一处能可靠分开父子**。。",
+    "B. 人物与身份：Oliver Wendell Holmes Sr.；namesake；美国医生、哈佛医学院解剖学教授、诗人、随笔作家、小说家；《The Autocrat of the Breakfast-Table》作者；产褥热传染性论文作者。\n   专业背景：1809-08-29 – 1894-10-07。三库互证：Wikidata Q319829 的 P569/P570 为 day 精度；LoC n80032729 的 birthdates=1809-08-29、deathdates=1894-10-07；GND 118706608 的 548 $a29.08.1809-07.10.1894 $4datx。出生地 Cambridge (Mass.)（LoC n80032729 birthplaces；**注意与儿子的 Boston (Mass.) 不同，这是四库中少数几个真能分开父子的字段之一**）。职业：LoC n80032729 occupations 作 Physicians / Poets / Essayists / Novelists；GND 118706608 的 550 作 Schriftsteller（berc 特征职业）与 Arzt；Wikidata Q319829 P106 作 physician / poet / physician writer / university teacher / novelist / medical author / writer。LoC n80032729 的 notes 字段原文：「[Oliver Wendell Holmes (1809-1894) was a physician, poet, essayist, and novelist in Massachusetts.]」；LC 分类 PS1950-PS1998。Wikidata Q319829 的 P40（子女）直接含 Q360574，即**父子关系由 Wikidata 双向声明**（儿子侧 P22=Q319829）。★★★ **标目形态——这是本人物最要命的一条**：LoC n80032729 的现行标目是「Holmes, Oliver Wendell, 1809-1894」，marcKey 为 `1001 $aHolmes, Oliver Wendell,$d1809-1894`，**没有 $c Sr.**；其 MADS 中唯一的变体形是「Holmes, O. W. (Oliver Wendell), 1809-1894」，**既无 Sr. 形，也无 hasEarlierEstablishedForm**。实测标签解析：id.loc.gov/authorities/names/label/「Holmes, Oliver Wendell, Sr.」→ **404**，「Holmes, Oliver Wendell, Sr., 1809-1894」→ **404**。GND 118706608 的 100 同样作「Holmes, Oliver Wendell $d1809-1894」，400 变体只有「Wendell Holmes, Oliver」与「Holmes, Oliver W.」，**Sr. 在 GND 里一次都没出现**。Wikidata Q319829 的英文主标签是裸名「Oliver Wendell Holmes」，「Oliver Wendell Holmes Sr.」只是别名。VIAF 7405944 出自 Wikidata P214 声明，本轮未回读（VIAF 全站 403，见目标条）。。\n   应用价值：场景：19 世纪美国医学史（产褥热传染性、接触传染论）的辨识对象；19 世纪美国文学（Breakfast-Table 系列随笔、Fireside Poets）的辨识对象；同名门排除：**本清单第一优先拦截对象**；关键能力：临床医学与解剖学教学；医学论证写作（The Contagiousness of Puerperal Fever）；随笔与诗歌创作。\n   区分依据：★★★ **本清单风险最高者，且高出其余各条一个数量级——理由是四库中没有一处能靠姓名字符串把他与目标人物分开。** 逐库实测：(1) **LoC**：父亲的**权威标目**就是裸名「Holmes, Oliver Wendell, 1809-1894」（无 Sr.），而儿子的**前既定标目**（MADS hasEarlierEstablishedForm）正是裸名「Holmes, Oliver Wendell, 1841-1935」——**两人的裸名形只差四位数字，且父亲那一形是现行权威形、儿子那一形是历史权威形**。这意味着凡在 LoC 加 Jr. 之前建立的编目数据，儿子一律以裸名挂着。LoC 自己的 670 注就记录了一例：「found : LCCN 2007000976: The collected legal papers, 2007 (access point: Holmes, Oliver Wendell, 1841-1935; usage: Oliver Wendell Holmes)」——**2007 年的一部儿子的著作集，编目访问点用的是不带 Jr. 的形，题名页用法是纯「Oliver Wendell Holmes」**。(2) **标签解析实测更糟**：label/「Holmes, Oliver Wendell」（**裸名、无日期、无后缀**）→ 302 重定向到 **n79054782（儿子）**；label/「Holmes, Oliver Wendell, 1809-1894」→ n80032729（父亲）。即**一条不带日期的裸名查询会静默落到儿子身上**。该端点是精确匹配而非模糊匹配，负对照 label/「Zzqq, Notareal Person 1234」→ 404、正对照 label/「Shakespeare, William, 1564-1616」→ 302 n78095332 —— 所以「裸名解析到儿子」意味着该字符串**确实作为索引访问点存在于儿子的记录上**，不是搜索引擎的凑合匹配。(3) **GND 最糟**：父子两条记录的 100 字段是**逐字节相同的「Holmes, Oliver Wendell」**，仅 $d 不同（118706608 $d1809-1894 vs 118706594 $d1841-1935），**两条都不带任何后缀**；且两人的 400 变体形也高度同构（父：Wendell Holmes, Oliver / Holmes, Oliver W.；子：Holmes, Oliver W. / Wendell Holmes, Oliver / Holmes Jr., Oliver Wendell / Holmes, O. W.）——**「Holmes, Oliver W.」与「Wendell Holmes, Oliver」两串在父子两条记录上同时存在，只有日期能分**。(4) **Wikidata**：父子的英文主标签**完全相同**，都是「Oliver Wendell Holmes」；Jr./Sr. 只活在别名里。**语境重叠使非姓名判据同样失效**：二人 P108 雇主**同为 Harvard University (Q13371)**、P69 同就读 **Harvard College (Q49123)**、同在波士顿地区、同为多产作者、且 LoC 都给了大量 name-title 规范档。**可用的硬判据只有生卒年、标识符、职业档、出生地（Cambridge vs Boston）四样。** 另有一处已发生的书目层重叠证据：LoC name-title 规范档 **no2021140324「Holmes, Oliver Wendell, 1809-1894. Contagiousness of puerperal fever」**——父亲最著名的医学论文正是挂在**裸名无后缀**标目下；任何以「Oliver Wendell Holmes + 著作」为条件的抓取都会把它算作目标人物的一手件。。",
+    "C. 人物与身份：Oliver Wendell Holmes (archivist, 1902-1981)；namesake；美国档案学家（archivist），美国国家档案馆档案管理著述者。\n   专业背景：1902-02-02 – 1981-11-25（Wikidata Q27922577 的 P569/P570 均为 day 精度）。**姓名与目标人物及其父亲完全相同**。三库均有独立记录：LoC **n83205669**，标目作「Holmes, Oliver W. (Oliver Wendell), 1902-1981」，marcKey `1001 $aHolmes, Oliver W.$q(Oliver Wendell),$d1902-1981`，其 **variantLabels 与 relateds 均含裸名形「Holmes, Oliver Wendell, 1902-」**；670 来源注两条：「found : His Stagecoach East, 1983: t.p. (Oliver W. Holmes) dust jkt. (d. 1981)」与「found : LC data base, 9-28-83 (hdg.: Holmes, Oliver Wendell, 1902- ; usage: Oliver W. Holmes)」——**后者明写他此前的标目就是裸名「Holmes, Oliver Wendell, 1902-」**。GND **133040364**，100 作「Holmes, Oliver W. $d1902-1981」，400 变体含 **「Holmes, Oliver Wendell $d1902-1981」「Wendell Holmes, Oliver $d1902-1981」「Holmes, O. W. $d1902-1981」——与父子二人的变体形完全同构**；670 作 LCAuth，700 交叉链 (DLC)n 83205669。Wikidata Q27922577 描述作「archivist (1902-1981)」，P106=archivist (Q635734)，P244=n83205669、P227=133040364、P214=13488772（VIAF ID 为 Wikidata 声明，本轮未回读）。。\n   应用价值：场景：20 世纪美国档案学与国家档案馆史的辨识对象；同名门排除：**三人共用同一姓名字符串中的第三人**；关键能力：档案整理、著录与档案行政；档案学专业写作。\n   区分依据：**风险仅次于父亲，且有一重父亲没有的叠加危险：他是档案学家。** 姓名字符串「Holmes, Oliver Wendell」在 LCNAF 与 GND 中由**三个人**共用——父亲（LoC 权威形 / GND 100）、目标人物（LoC 前既定形 / GND 400）、以及本人（LoC 变体形与前标目 / GND 400）。三者在两库中都只能靠 $d 日期分开：1809-1894 / 1841-1935 / 1902-1981。**叠加危险在于职业与语境**：目标人物的一手材料主体是**档案性质的文书**（书信、司法文件、哈佛法学院图书馆藏品），而本人的著作正是**关于档案管理的**；因此凡以「Oliver Wendell Holmes + archives / papers / manuscripts / collection」为条件的检索，会同时命中「目标人物的档案」与「此人写的档案学著作」，**主题词筛不掉他**——这与 Blackstone 轮次里 William T. Blackstone（题材重叠型）是同一种缺陷，但此处姓名是**完全相同**而非只差中名首字母，故更难。必须用 LCCN n83205669 / GND 133040364 / Wikidata Q27922577 硬排除。另注意其生年 1902 与目标人物**就任最高法院大法官的年份 1902 相同**，按「Holmes 1902」做年份启发式会同时命中两者。。",
+    "D. 人物与身份：Oliver W. Holmes（署名亦作 Oliver W. Holmes Jr.，20 世纪末西部小说作者）；namesake；美国西部题材小说作者（Incident on Jubal Mountain, 2001）。\n   专业背景：生卒年**查不到**：LoC no2002012187 无 birthdates/deathdates 字段，标目为无日期的「Holmes, Oliver W.」，marcKey `1001 $aHolmes, Oliver W.`。该规范档**唯一的 670 来源注**是：「found : Incident on Jubal Mountain, 2001: t.p. (Oliver W. Holmes) half title (Oliver W. Holmes Jr.)」——即题名页署「Oliver W. Holmes」而**副标题页署「Oliver W. Holmes Jr.」**。国籍、任职、教育背景四库中均无记录，**查不到，不推测**。Wikidata 与 GND 中未找到可对应的记录：GND SRU（PER=Holmes, Oliver，numberOfRecords=6）返回的 6 条中无此人，该查询式的正对照见下（PER=Shakespeare, William 返回 173 条，且其中含同名者 Shakespeare, William $d1849-1931，证明该查询式既通、又确实会召回同名者）。VIAF 无法核（全站 403）。。\n   应用价值：场景：20 世纪末美国西部小说的辨识对象；同名门排除：**唯一一个把「Jr.」这一区分记号也一并占用的同名者**；关键能力：西部题材类型小说写作。\n   区分依据：**这是本清单中最反直觉的一条**：整个消歧方案的落脚点是「用 Jr. 把目标人物与父亲分开」，而**此人恰恰也署「Oliver W. Holmes Jr.」**（LoC 670 注亲录其半题名页署名）。于是「Oliver W. Holmes Jr.」这一串**并不能唯一指向目标人物**；LoC 也为目标人物登记了变体形「Holmes, O. W. (Oliver Wendell), Jr., 1841-1935」，两者按缩写形式检索会互相召回。无生卒年可用于分开，**只能靠 LCCN no2002012187 硬排除**。所幸题材（西部小说）与目标人物无重叠，且其作品出版于 2001 年、远晚于目标人物卒年，按出版年可作辅助过滤；但**凡以署名字符串「O. W. Holmes Jr.」为唯一条件的自动归属一律不成立**。。",
+    "E. 人物与身份：Wendell Holmes（GND 1233239910，身份未定）；namesake；查不到——GND 记录中仅有职业「Jurist」一项，无生卒年、无国籍以外的任何属性。\n   专业背景：生卒年**查不到**。GND 1233239910 是一条极薄的人名规范档：MARC21 100 字段仅作「Holmes, Wendell」（**无 $d 生卒年、无后缀、无中名**），043 国别代码作 $cXD-US（美国），550 职业作 **$aJurist $4berc（Charakteristischer Beruf，特征职业）**，040 著录机构 DE-B212、079 $ag $qf。**无 400 变体形、无 548 生卒、无 678 传记注、无 670 来源注、无 024 外部标识符**。LoC 与 Wikidata 中查不到可对应的记录：LoC label/「Holmes, Wendell」未作为独立人名规范档出现在 suggest2?q=Holmes, Oliver 的 7 条 PersonalName 结果中；GND SRU（PER=Holmes, Wendell）numberOfRecords=4，本条为其一。VIAF 无法核（全站 403），故**无法判断该 GND 号是否已与任何其他机构的规范档合并**。。\n   应用价值：场景：同名门排除：无属性的薄规范档，任何按姓名的自动比对都无法判定它指谁；关键能力：查不到。\n   区分依据：**无法与目标人物分开，也无法与之合并——身份未定。** 该记录仅有的两项实质属性是「美国」与「Jurist」，而**目标人物的 GND 118706594 的特征职业恰恰就是 Jurist（同一个 550 $4berc 位置、同一个 GND 概念号 4029050-5）**，且目标人物登记有 400 变体形「Wendell Holmes, Oliver $d1841-1935」、其通称简写亦常作「Wendell Holmes」。因此本条**很可能是目标人物的一条未合并重复档**；但 GND 把它单独立为 1233239910 而未与 118706594 合并，本轮四库中也没有任何一条记录写出它指谁，且 VIAF 侧因全站 403 无法验证合并状态。按「两条独立证据否则不写」的规矩，此处只登记「未定」，**不断言它是目标人物、也不断言它是另一个人**。处置建议：不得作为目标人物的一手来源标识符使用；若语料中出现仅凭 GND 1233239910 挂靠的材料，一律先挂起待判。（形态与 Blackstone 轮次的 GND 1146806930「仅有 Sir 一项属性」完全同类。）。",
+    "F. 人物与身份：Dwight Oliver Wendell Holmes；namesake；美国教育家、社会学著述者、摩根州立学院（Morgan State）校长。\n   专业背景：1877-11-18 – 1963-09-07（Wikidata Q20979279 的 P569/P570 均为 day 精度）。**全名直接包含「Oliver Wendell Holmes」全串**：Wikidata 主标签作「Dwight O. W. Holmes」，英文别名含 **「Dwight Oliver Wendell Holmes」** 与「D. O. W. Holmes」。P106 作 sociologist / novelist / educator；P69 就学于 Howard University (Q49088) 与 Columbia University (Q1068752)；P27=美国。**LoC 规范档 n2002068320 已单独回读确认**，标目形作「Holmes, Dwight Oliver Wendell, 1877-1963」（suggest2?q=Holmes, Dwight，count=2/hits=1）——**生卒年由 LoC 与 Wikidata 两库各自独立给出、互相印证**，非单库孤证。VIAF 49600134 为 Wikidata P214 声明，本轮未回读（全站 403）。GND 中未找到对应记录：SRU（PER=Holmes, Wendell）4 条与（PER=Wendell Holmes）5 条中均无此人；该查询式的正对照为 PER=Shakespeare, William → 173 条且含同名者，证明查询式本身通。。\n   应用价值：场景：20 世纪美国黑人高等教育史的辨识对象；同名门排除：**中名承载型，且承载的是目标人物的完整姓名三词**；关键能力：高等教育行政与校政管理；教育社会学写作。\n   区分依据：姓氏同为 Holmes，且**「Oliver Wendell」完整地作为其中名存在**——「Dwight Oliver Wendell Holmes」这一串**包含目标人物姓名的全部三个词且顺序一致**，任何以「Oliver Wendell Holmes」作子串匹配（而非整串相等）的检索都会召回他。本轮 Wikidata CirrusSearch（inlabel:\"Oliver Wendell Holmes\" haswbstatement:P31=Q5）返回的 7 名真人中就含他，**即这不是假想风险，是同一次检索里实际发生的召回**。分开方式：靠首名 Dwight 与生卒年 1877-1963；标识符 Q20979279 / LCCN n2002068320。**注意倒装形陷阱**：LoC 排序形当作「Holmes, Dwight Oliver Wendell」，按倒装姓名检索不会召回，按正序前缀检索会——两种检索式给出不同结果，须都测。。",
+    "G. 人物与身份：Fanny Bowditch Dixwell Holmes；namesake；目标人物的配偶；本身非著述者——四库中无职业字段。\n   专业背景：1840（年精度）– 1929-04-30（Wikidata Q43400596 的 P570 同时登记 1929 年精度与 1929-04-30 日精度两条；P569 仅 1840 年精度）。Wikidata 描述原文作「wife of U. S. Supreme Court Justice Oliver Wendell Holmes, Jr.」，**英文别名含「Mrs. Oliver Wendell Holmes」**。无 P106 职业字段。**LoC 规范档 n2001080492 已单独回读确认**，标目形作「Holmes, Fanny Bowditch Dixwell, 1840-1929」（suggest2?q=Holmes, Fanny，count=2/hits=2）——**卒年 1929 由 LoC 与 Wikidata 两库各自独立给出**。VIAF 75662594 出自 Wikidata P214 声明，本轮未回读（全站 403）。GND 中未找到对应记录。★ 同一次 q=Holmes, Fanny 检索返回的第二条是 **no2023122888「Barnett, W., Mrs」**——一条以「Mrs + 丈夫姓名」立目的规范档，说明 LCNAF 中确实存在**整类以夫姓称谓立目的记录**，本条的风险不是孤例。。\n   应用价值：场景：同名门排除：**配偶冠夫姓型——姓名字符串完整包含目标人物姓名**；关键能力：查不到。\n   区分依据：她并非与目标人物同名的另一个人，而是**其姓名的一种称谓形式完整包含目标人物全名**：别名「Mrs. Oliver Wendell Holmes」中「Oliver Wendell Holmes」三词齐全且顺序一致。**这一类最容易漏掉，因为消歧检查通常只比对「姓 + 名」而不看称谓前缀**——凡按子串匹配、或按「以 Oliver Wendell Holmes 结尾」检索的路径都会召回她。风险场景具体而现实：19 世纪末至 20 世纪初的社交记事、书信收发记录、报刊报道大量以「Mrs. Oliver Wendell Holmes」指称她，**这些文本会被按姓名检索的抓取器判为目标人物的一手材料，而其中她才是主语**。分开方式：Wikidata Q43400596 / LCCN n2001080492 硬排除，或要求称谓前缀 Mrs. 触发拦截。（同类形态在本项目 Gantt 轮次已出现过一次——配偶姓名含目标人物全名而护栏只比姓，一个也挡不住。）。",
+    "H. 人物与身份：Wendell Holmes（美国演员，1914-1962）；namesake；美国演员、电视演员、电影演员。\n   专业背景：1914-08-17 – 1962-04-27（Wikidata Q28604507 的 P569/P570 均为 day 精度）。Wikidata 主标签作「Wendell Holmes」，**英文别名为「Oliver Wendell Holmes」——即其全名登记形与目标人物完全相同**（本轮 wbgetentities props=aliases 实查确认，match.type=alias）。P106 作 actor / television actor / film actor；P734 姓氏 Holmes、P735 名字含 Oliver 与 Wendell 两项；P27=美国。LoC、GND 中未找到对应记录：LoC suggest2（q=Holmes, Oliver Wendell / q=Holmes, Oliver，rdftype=PersonalName）共 7 条 PersonalName 结果中无此人；GND SRU（PER=Holmes, Oliver，6 条 / PER=Holmes, Wendell，4 条）中亦无。两处「0」均带正对照：LoC 同式查 q=Holmes, Oliver Wendell 返回 3 条含父子二人、GND 同式查 PER=Shakespeare, William 返回 173 条含同名者 Shakespeare, William $d1849-1931 —— 证明两个查询式本身都通。VIAF 无法核（全站 403）。。\n   应用价值：场景：20 世纪中叶美国影视演艺的辨识对象；同名门排除：全名与目标人物完全相同，但仅存在于 Wikidata；关键能力：影视表演。\n   区分依据：**全名字符串与目标人物完全相同**（Oliver Wendell Holmes），靠生卒年 1914-1962 与职业（演员）分开。**书目污染风险低**——LoC 与 GND 两个书目规范库都查不到他，说明他名下没有编目著作，不会以作者身份进入语料；但按「Oliver Wendell Holmes」做全文检索、人物百科检索或 Wikidata 实体链接时会被召回，**且因其主标签是「Wendell Holmes」而全名藏在别名里，只比对主标签的去重逻辑看不见这次撞名**。演艺类语料（影视数据库、剧目表）是其可能的污染通道。。",
+    "I. 人物与身份：Oliver Holmes（格拉斯哥大学生理学者）；namesake；生理学研究者与教科书作者（格拉斯哥大学生理学系）。\n   专业背景：生卒年**查不到**：LoC n83138056 无 birthdates/deathdates 字段，标目为无日期的「Holmes, Oliver」，marcKey `10010$aHolmes, Oliver`，变体形「Holmes, O. (Oliver)」。两条 670 来源注：「found : Jennett, S. Multiple choice questions in physiology, 1983 (a.e.) CIP t.p. (Oliver Holmes, MB, Dept. of Physiology, Univ. of Glasgow)」与「found : His Human neurophysiology, 1990: CIP t.p. (O. Holmes; Dept. of Physiology, Univ. of Glasgow) data sht. (Oliver Holmes)」——**职衔与机构（MB，格拉斯哥大学生理学系）出自题名页，是该规范档的唯一依据**。Wikidata 与 GND 中未找到可对应的记录（GND PER=Holmes, Oliver 的 6 条中无；正对照见前条）。VIAF 无法核（全站 403）。。\n   应用价值：场景：20 世纪末英国生理学教科书文献的辨识对象；同名门排除：**其标目形恰是目标人物 Wikidata 别名之一「Oliver Holmes」**；关键能力：神经生理学教学与教科书写作。\n   区分依据：**风险点在于目标人物的 Wikidata 英文别名中就有一条纯「Oliver Holmes」**（本轮 wbgetentities 实查确认），而本人的 LoC 权威标目正是无日期的「Holmes, Oliver」。**实测已坐实**：id.loc.gov/authorities/names/label/「Holmes, Oliver」→ 302 重定向到 **n83138056（本人）**——即在 LoC 侧，一条裸「Oliver Holmes」查询解析到的是这位格拉斯哥生理学者，而不是目标人物；该端点为精确匹配（负对照 label/「Zzqq, Notareal Person 1234」→ 404、正对照 label/「Shakespeare, William, 1564-1616」→ 302）。即凡以「Oliver Holmes」为检索式的路径，会同时命中目标人物（经 Wikidata 别名）与本人（经 LoC 权威标目），**且本人无生卒年可用于年代过滤**——这是本清单里除 no2002012187 外第二位连年代筛都用不上的同名者，只能靠 LCCN n83138056 硬排除。题材（生理学）与目标人物无重叠，但**与其父亲（医生、哈佛医学院教授）题材相邻**，在医学语料路径上会形成父—子—本人三方混淆。。",
+    "J. 人物与身份：Oliver Holmes（1776-1841，震教派长老）；namesake；震教派（Shaker）长老，缅因州 Sabbathday Lake 教团。\n   专业背景：1776 – 1841（LoC n94093766 标目形「Holmes, Oliver, 1776-1841」，marcKey `10010$aHolmes, Oliver,$d1776-1841`）。唯一的 670 来源注：「found : NUCMC data from United Society of Shakers, Shaker Library for His Oliver Holmes his book, 1797 (Oliver Holmes; 1776-1841; Shaker elder; Sabbathday Lake, Me.)」——**生卒年、身份与地点均出自 NUCMC 手稿著录，是该规范档的唯一依据**。Wikidata 与 GND 中未找到可对应的记录（正对照见前条）。VIAF 无法核（全站 403）。。\n   应用价值：场景：18-19 世纪美国震教派手稿的辨识对象；同名门排除：卒年 1841 与目标人物生年 1841 相同；关键能力：震教派教团事务与教务文书。\n   区分依据：靠全名（无中名 Wendell）与生卒年分开。**风险点是一个易被忽略的数字巧合：他的卒年 1841 正是目标人物的生年 1841**——凡按「Holmes + 1841」做年份启发式匹配的路径会同时命中两者，而这类匹配在处理手稿/档案著录（其著录常只给单个年份）时相当常见。其材料形态（1797 年手稿、NUCMC 著录）与目标人物早期档案同属手稿类，检索通道重叠。题材（宗教教团）无重叠，风险等级中下。。",
+    "K. 人物与身份：Oliver M. Holmes；namesake；地图绘制/出版相关者（蒙大拿州 Great Falls 宣传地图署名人）。\n   专业背景：生卒年**查不到**：LoC no2010122729 无 birthdates/deathdates 字段，标目为无日期的「Holmes, Oliver M.」，marcKey `1001 $aHolmes, Oliver M.`。唯一的 670 来源注：「found : Great Falls, Montana, marketing and distribution point for this empire of rich resources, 192-?: map recto (Oliver M. Holmes)」——即该规范档系据一件 1920 年代地图正面的署名建立。国籍、职业、任职四库中均无记录，**查不到，不推测**。Wikidata 与 GND 中未找到可对应的记录（正对照见前条）。VIAF 无法核（全站 403）。。\n   应用价值：场景：20 世纪初美国地图资料的辨识对象；同名门排除：中名首字母 M. 与目标人物无中名，按「O. Holmes」缩写检索时无法分开；关键能力：查不到。\n   区分依据：靠中名首字母 M. 分开；无生卒年可用，只能靠 LCCN no2010122729 硬排除。题材（地图）与目标人物无重叠，**污染风险为本清单最低一档**；但其署名活跃期（192-?）落在目标人物在世期间内（卒于 1935），按年代范围过滤**不能**排除他，这一点与其余靠年代即可分开的同名者不同。。",
+    "L. 人物与身份：John Wendell Holmes；namesake；加拿大外交官、政治学者、国际关系学者。\n   专业背景：1910-06-18（Wikidata Q1167295 的 P569 登记两个 day 精度值 1910-06-18 与 1910-06-10，**二者冲突，本条如实并列不择一**；GND 140428275 的 548 $a10.06.1910-13.08.1988 支持 06-10 一读）– 1988-08-13。Wikidata Q1167295 P106 作 diplomat / political scientist / international relations scholar；P108 雇主 University of Toronto。GND **140428275**：100 作「Holmes, John W. $d1910-1988」，400 变体含 **「Holmes, John Wendell $d1910-1988」「Wendell Holmes, John $d1910-1988」**「Holmes, J. W.」「Holmes, John」；550 特征职业 Politologe；678 传记注「Kanad. Politologe」。LoC 规范档 n50036400 与 VIAF 109036151 出自 Wikidata 的 P244/P214 声明，本轮未单独回读（VIAF 全站 403）。。\n   应用价值：场景：20 世纪加拿大外交与国际关系文献的辨识对象；同名门排除：中名承载型——GND 变体形「Wendell Holmes, John」与目标人物变体形「Wendell Holmes, Oliver」同构；关键能力：外交实务与国际关系分析；政治学写作与教学。\n   区分依据：姓氏同为 Holmes、中名同为 Wendell，靠首名 John 与生卒年 1910-1988 分开。**风险点在 GND 的倒装变体形**：本人登记有「Wendell Holmes, John $d1910-1988」，目标人物登记有「Wendell Holmes, Oliver $d1841-1935」，父亲登记有「Wendell Holmes, Oliver $d1809-1894」，档案学家登记有「Wendell Holmes, Oliver $d1902-1981」——**GND 中「Wendell Holmes, X」这一形态由至少四个人共用**，凡按该倒装形检索或按「Wendell Holmes」二词检索的路径会一并召回。本轮 GND SRU（PER=Wendell Holmes）返回的 5 条中他排在首位，**是实际发生的召回而非假想**。题材（外交/政治学）与目标人物的法理学有边缘相邻（国际法、公共事务），但重叠度低。。",
+    "M. 人物与身份：Wendell Holmes Tisdale；namesake；查不到——GND 记录中无职业字段。\n   专业背景：生于 1892，卒年**查不到**（GND 1315941864 的 548 字段作 $a1892- $4datl，只登记 dateOfBirth；LoC nr2004038251 的 birthdates 亦只有 1892）。GND 100 作「Tisdale, W. H. $d1892-」，400 变体两条：「Tisdale, W.H. $d1892-」与 **「Tisdale, Wendell Holmes $d1892- $4navo（FullerFormOfNameOfThePerson，完整姓名形）」**——即「Wendell Holmes」是其名与中名，姓氏为 Tisdale。GND 无 550 职业、无 678 传记注。**LoC 有独立规范档 nr2004038251**，标目作「Tisdale, W. H. (Wendell Holmes), 1892-」，marcKey `1001 $aTisdale, W. H.$q(Wendell Holmes),$d1892-`，变体形含「Tisdale, Wendell Holmes, 1892-」与「Tisdale, W. H. (Wendell Holmes), b. 1892」；670 来源注两条：「found : Smuts of wheat and rye and their control, 1927: p. 1 (W. H. Tisdale)」与「found : OCLC, Dec. 3, 2004 (hdg.: Tisdale, W. H. (Wendell Holmes), 1892-; Tisdale, W. H.; **Tisdale, Wendall Holmes**; usage: W. H. Tisdale)」——**注意 OCLC 那条里「Wendall」是拼写讹变形，按正确拼写 Wendell 检索不会召回它**。由 1927 年小麦黑穗病著作可知其为植物病理学者。Wikidata 中未找到可对应的记录。VIAF 无法核（全站 403）。。\n   应用价值：场景：同名门排除：中名承载型，姓氏为 Tisdale，仅 GND 有记录；关键能力：查不到。\n   区分依据：姓氏不同（Tisdale vs Holmes），**但「Wendell Holmes」二词完整且顺序一致地构成其名与中名**，凡以「Wendell Holmes」为子串或前缀的检索都会召回他——本轮 GND SRU（PER=Wendell Holmes）返回的 5 条、LoC suggest2（q=Tisdale, Wendell Holmes）返回的 1 条都实际召回了他。生年 1892 与目标人物（生 1841）不重叠，但其在世期与目标人物晚年重叠，年代过滤不能可靠排除。题材（植物病理学）与目标人物无重叠，污染风险低。**值得单列的理由是它演示了两个检索式方向问题**：(1) 按姓氏 Holmes 检索（LoC/GND 的 `PER=Holmes, *`、`q=Holmes, *`）**永远看不见他**，只有按「Wendell Holmes」二词或按其真实姓氏 Tisdale 检索才会出现——中名承载型同名者需要一条**与主检索式方向不同**的额外查询才能被发现；(2) 其 LoC 670 注中 OCLC 记录的名形是**拼错的「Tisdale, Wendall Holmes」**，按正确拼写「Wendell」做精确匹配的去重逻辑**看不见那一条**，属拼写变体型漏网。。",
+    "N. 人物与身份：Wendell Holmes Stephenson；namesake；美国历史学教授、史学著述者。\n   专业背景：1899 – 1970（Wikidata Q52158618 的 P569/P570 **均为年精度**：SPARQL/wbgetentities 渲染出的 1899-01-01 与 1970-01-01 是年精度占位，非真实日期，已复核 precision 字段）。Wikidata 描述作「American professor of history」，P106 作 historian / writer；P734 姓氏 Stephenson、P735 名字含 Wendell。**LoC 规范档 n85239091 已单独回读确认**，标目形作「Stephenson, Wendell Holmes, 1899-1970」（suggest2?q=Stephenson, Wendell Holmes，count=1/hits=1）——**该标目把 1899-1970 两个年份写死，与 Wikidata 的年精度声明独立吻合，故本条生卒年不是单库孤证**。VIAF 51816284 出自 Wikidata P214 声明，本轮未回读（全站 403）。GND 中未找到对应记录（PER=Wendell Holmes 的 5 条、PER=Holmes, Wendell 的 4 条中均无；正对照 PER=Shakespeare, William → 173 条）。。\n   应用价值：场景：20 世纪美国南方史学史的辨识对象；同名门排除：中名承载型，姓氏为 Stephenson；关键能力：美国史研究与史学史写作；史料编纂。\n   区分依据：姓氏不同（Stephenson vs Holmes），**「Wendell Holmes」二词完整且顺序一致地构成其名与中名**，按该二词检索会召回——本轮 Wikidata CirrusSearch（inlabel:\"Wendell Holmes\"）14 条中含他。生卒年 1899-1970 与目标人物不重叠。**风险点在题材而非姓名**：他是历史学教授且著述涉及 19 世纪美国史，其作品与研究目标人物的史学文献在同一批检索结果中出现的概率不低；但因姓氏不同，只要检索式要求姓氏为 Holmes 就能排除，**属可用廉价规则排除的一类**。。",
+    "O. 人物与身份：Wendell Holmes Camp；namesake；美国植物学家、分类学者、大学教师。\n   专业背景：1904 – 1963（Wikidata Q21506896 的 P569/P570 **均为年精度**，已复核）。英文别名含「W. H. Camp」「Wendell H. Camp」「Red Camp」「Wendell Holmes (Red) Camp」及植物学作者缩写「Camp」。P106 作 botanist / taxonomist；P734 姓氏 Camp、P735 名字含 Wendell。**LoC 规范档 no99034729 已单独回读确认**，标目形作「Camp, W. H. (Wendell Holmes), 1904-1963」（suggest2?q=Camp, Wendell Holmes，count=1/hits=1）——**「Wendell Holmes」以 $q 补名形式写在标目里，与 Wikidata 的 1904/1963 独立吻合**。VIAF 29164168 出自 Wikidata P214 声明，本轮未回读（全站 403）。GND 中未找到对应记录（正对照见前条）。。\n   应用价值：场景：20 世纪美国植物分类学文献的辨识对象；同名门排除：中名承载型，姓氏为 Camp；关键能力：植物分类学研究与命名。\n   区分依据：姓氏不同（Camp vs Holmes），生卒年 1904-1963 与目标人物不重叠，题材（植物学）无重叠。**污染风险为本清单最低一档**；按「Wendell Holmes」二词检索会召回（本轮 Wikidata CirrusSearch 14 条中含他），但只要检索式要求姓氏为 Holmes 即可排除。。",
+    "P. 人物与身份：Oliver Wendell Holmes Cotter；namesake；查不到——Wikidata 未登记职业字段，描述仅作「(born 1879)」。\n   专业背景：生于 1879-09-16（Wikidata Q75634613 的 P569，day 精度）；卒年**查不到**（无 P570）。Wikidata 描述仅作「(born 1879)」，**无 P106 职业、无 P214/P244/P227 标识符**；P735 名字登记为 Oliver、Wendell、Holmes 三项（即「Holmes」在此是名字成分而非姓氏），P22 父亲=Q75634594。**姓氏为 Cotter，「Oliver Wendell Holmes」完整构成其名与中名。** LoC、GND 中均**查不到**对应记录，两处「0」均带正对照：LoC suggest2（q=Cotter, Oliver Wendell Holmes，rdftype=PersonalName）count=0/hits=0，而同式查 q=Holmes, Oliver Wendell 返回 3 条含父子二人；GND SRU（PER=Wendell Holmes）5 条中无此人，而同式确实召回了另一位中名承载者 Tisdale, Wendell Holmes（GND 1315941864）——**同一条查询式能看见中名承载者**。VIAF 无法核（全站 403）。。\n   应用价值：场景：同名门排除：中名承载型，姓氏为 Cotter，仅 Wikidata 有记录、书目库中无著作；关键能力：查不到。\n   区分依据：姓氏不同（Cotter vs Holmes），**但「Oliver Wendell Holmes」三词完整、顺序一致地构成其名与中名**，是本清单中除 Dwight Oliver Wendell Holmes 外第二个完整承载目标人物全名的人。本轮 Wikidata CirrusSearch（inlabel:\"Oliver Wendell Holmes\" haswbstatement:P31=Q5）返回的 7 名真人中含他，**是实际发生的召回**。生年 1879 落在目标人物在世期内，**年代过滤不能排除他**。**书目污染风险很低**——LoC 与 GND 都查不到他，说明其名下无编目著作，不会以作者身份进入语料；但按人名前缀或子串检索时会被召回。仅 Wikidata 一处来源，证据强度低于本清单多库互证者。。",
+    "Q. 人物与身份：Oliver Holmes Gish；namesake；美国地球物理学家、物理学者。\n   专业背景：1883 – 1987（Wikidata Q113623398 的 P569/P570 **均为年精度**，已复核；该跨度 104 年异常，四库中无更精确来源可校，**如实照录不作修正**）。P106 作 geophysicist / physicist / researcher。P214=29237193 为 Wikidata 声明，本轮未回读（VIAF 全站 403）。**LoC 有独立规范档 no2004019602**，标目作「Gish, O. H. (Oliver Holmes)」，marcKey `10010$aGish, O. H.$q(Oliver Holmes)`，**variantLabel 作「Gish, Oliver Holmes」**，无 birthdates/deathdates 字段（**即 LoC 侧查不到生卒年，Wikidata 的 1883–1987 无第二处可校**）；670 来源注两条：「found : Earth-current results from Watheroo Observatory, Western Australia, 1932-1942, 1949: t.p. (O.H. Gish)」与「found : OCLC, 1 Mar. 2004 (hdg.: Gish, Oliver Holmes; Gish, O.H.; usage: O.H. Gish, Oliver H. Gish)」——地球物理观测著作与署名习惯由此确认。GND 中未找到对应记录（PER=Holmes, Oliver 6 条与 PER=Wendell Holmes 5 条中均无；正对照 PER=Shakespeare, William → 173 条）。**姓氏为 Gish，「Oliver Holmes」构成其名与中名。**。\n   应用价值：场景：20 世纪美国地球物理学文献的辨识对象；同名门排除：中名承载型，姓氏为 Gish；关键能力：大气电学与地球物理观测研究。\n   区分依据：姓氏不同（Gish vs Holmes），题材（地球物理）无重叠。「Oliver Holmes」二词完整构成其名与中名，按该二词做子串检索会召回；因目标人物的 Wikidata 英文别名中恰有一条纯「Oliver Holmes」，**二者在「Oliver Holmes」这一串上直接相撞**，且 LoC 把「Gish, Oliver Holmes」立为正式变体形，该串在 LCNAF 中确实可检索。生年 1883 落在目标人物在世期内，年代过滤不能可靠排除。**与前一版本的更正**：本条初稿写「LoC 中未找到对应记录」，实调 suggest2?q=Gish, Oliver Holmes 后证伪——LoC 有 no2004019602，故其**确有编目著作进入书目库**（1949 年 Watheroo 观测站报告），可以作者身份进入语料；风险由「不会进入语料」上调为「会进入语料但题材可分」。仍属低风险，因题材相距极远且姓氏不同。。",
+    "R. 人物与身份：Oliver Holmes Woodward；namesake；澳大利亚军人（隧道工兵）、采矿工程师。\n   专业背景：1885-10-08 – 1966-08-24（Wikidata Q7087951 的 P569/P570 均为 day 精度）。Wikidata 主标签作「Oliver Woodward」，**英文别名与 P1477 出生名均作「Oliver Holmes Woodward」**（P1477 语言标记 en-au）。P106 作 military personnel / mining engineer；P734 姓氏 Woodward；P27=澳大利亚。P214=92913688 为 Wikidata 声明，本轮未回读（VIAF 全站 403）。LoC、GND 中**查不到**对应记录，两处「0」均带正对照：LoC suggest2（q=Woodward, Oliver Holmes，rdftype=PersonalName）count=0/hits=0，而**同式**查 q=Gish, Oliver Holmes 返回 1 条 no2004019602、q=Holmes, Oliver Wendell 返回 3 条含父子二人——**同一条查询式既能看见中名承载者、也能看见目标人物**；GND SRU（PER=Holmes, Oliver 6 条 / PER=Wendell Holmes 5 条）中无此人，正对照 PER=Shakespeare, William → 173 条且含同名者。。\n   应用价值：场景：第一次世界大战澳大利亚隧道工兵史的辨识对象；同名门排除：中名承载型，姓氏为 Woodward；关键能力：军事工程与坑道作业；采矿工程。\n   区分依据：姓氏不同（Woodward vs Holmes），国别为澳大利亚，题材（军事工程/采矿）无重叠。「Oliver Holmes」二词构成其名与中名，与目标人物的 Wikidata 别名「Oliver Holmes」在该串上相撞；且其主标签「Oliver Woodward」不含 Holmes，**只比对主标签的去重逻辑看不见这次撞名**，须读 P1477/别名才发现。生卒 1885-1966 与目标人物在世期大幅重叠，年代过滤不能排除。风险等级低。。",
+    "S. 人物与身份：Francis Oliver Holmes；namesake；美国植物学家、植物病毒学者、寄生虫学者。\n   专业背景：生卒年**两条 Wikidata 记录彼此冲突，本条如实并列不择一**：Q21515978「Francis Oliver Holmes, U.S. botanist and parasitologist」登记 P569=1899（年精度）、P570=1990-10-12（day 精度），别名「F.O.Holmes」，P106=botanist；Q112388104「Francis Oliver Holmes」登记 P569=1897、P570=1990（均年精度），P106 作 parasitologist 与 virologist，P214=29190121。**二者姓名完全相同、卒年同为 1990、职业相邻，极可能是同一人的两条未合并的 Wikidata 重复实体**，但两实体间无 P31/P460 等互指声明，本轮四库中亦无任何记录写出二者关系，**故只登记「疑似重复、未定」，不断言合并**。LoC、GND 中未找到对应记录（正对照见 Cotter 条）。VIAF 29190121 为 Q112388104 的 P214 声明，本轮未回读（全站 403），**因而无法用 VIAF 簇来判断这两个 Q 号是否指同一人**——这正是 VIAF 不可达造成的实际能力损失之一。LoC 中**查不到**对应记录：suggest2（q=Holmes, Francis Oliver，rdftype=PersonalName）count=0/hits=0，正对照**同式**查 q=Holmes, Oliver Wendell 返回 3 条、q=Gish, Oliver Holmes 返回 1 条，证明查询式本身通。GND 中亦无（PER=Holmes, Oliver 6 条中无；正对照 PER=Shakespeare, William → 173 条）。。\n   应用价值：场景：20 世纪美国植物病毒学文献的辨识对象；同名门排除：首名承载型（Francis + Oliver Holmes），且自身存在重复实体；关键能力：植物病毒学与病害研究。\n   区分依据：姓氏同为 Holmes，靠首名 Francis 与生卒年（1897/1899-1990）分开，题材（植物病毒学）与目标人物无重叠。**风险点是署名缩写**：其植物学作者缩写为「F.O.Holmes」，而目标人物常见缩写为「O. W. Holmes」/「O.W.H.」——两者不撞；但「Oliver Holmes」二词在其全名中完整出现，按子串检索会召回。**单列的第二个理由是它本身演示了一处判据盲区**：同一个人在 Wikidata 有两条实体、生年相差两年，若消歧流程按「Q 号唯一即人唯一」计数，会把他算成两个不同的同名者，从而虚增同名者总数——本轮如实按一人登记并标注疑似重复。。",
+    "T. 人物与身份：Wendell H. Holmes（路易斯安那州立大学法学院教授）；namesake；美国法学教授（Louisiana State University Law Center），商事组织法著述者。\n   专业背景：生卒年**查不到**：LoC no99018606 无 birthdates/deathdates 字段，标目为无日期的「Holmes, Wendell H.」，marcKey `1001 $aHolmes, Wendell H.`。**唯一的 670 来源注**：「found : Business organizations, 1999: t.p. (Wendell H. Holmes, Prof. of Law, Louisiana State University Law Center)」——即职衔（法学教授）与机构（LSU 法律中心）出自 1999 年《Business Organizations》题名页，是该规范档的全部依据。Wikidata 与 GND 中未找到可对应的记录：GND SRU（PER=Holmes, Wendell）4 条与（PER=Wendell Holmes）5 条中均无此人，正对照 PER=Shakespeare, William → 173 条且含同名者，证明查询式本身通。VIAF 无法核（全站 403）。。\n   应用价值：场景：20 世纪末美国商事组织法教科书文献的辨识对象；同名门排除：**姓氏 Holmes + 中名 Wendell + 法学职业三者同时重合的唯一一位**；关键能力：商事组织法教学与教科书写作。\n   区分依据：**这是本清单中题材污染风险最高的一位（父亲与档案学家属姓名污染，此人属题材污染）。** 三项关键属性与目标人物同时重合：姓氏 Holmes、中名 Wendell、**职业为法学教授**。目标人物在 GND 118706594 中的特征职业是 Jurist、且曾任哈佛法学院教授——凡以「Holmes + law / jurisprudence / law professor / legal」为条件的主题检索，会同时命中他与目标人物，**年代筛也筛不掉他**：他无生卒年可用，其著作出版于 1999 年可作辅助过滤，但规范档本身不带日期，按标目做匹配时没有任何日期字段可比。这与 Blackstone 轮次的 William T. Blackstone（哲学教授、权利/平等题材）是同一种缺陷形态，但此处**中名也相同**，故比那一例更难分。必须用 LCCN no99018606 硬排除，**不能只靠年代或主题启发式**。另注意其署名可缩为「W. H. Holmes」，与目标人物的「O. W. Holmes」不撞，这是唯一可用的廉价区分点。。",
+    "U. 人物与身份：Holmes, Wendell（LoC 已废止的未分化名称记录 n87108083 及其拆分出的两人）；namesake；多人共用的一条规范档——插画者、音乐人等，具体人数四库中未写明。\n   专业背景：**这不是一个人，而是 LCNAF 中一条曾经把多个不同的人合并在同一标目下的「未分化名称记录」（undifferentiated name record）。** LoC **n87108083** 现仍可解析（HTTP 200），其 MADS RDF 的 @type 为 **PersonalName / Variant / DeprecatedAuthority**，variantLabel 作「Holmes, Wendell」，editorialNote 原文：**「[Last identity on undifferentiated record; reported for deletion.]」**；adminMetadata 两条 recordInfo 给出完整生命周期——recordStatus=**new**、recordChangeDate=**1987-07-01**、recordContentSource=dlc；以及 recordStatus=**deprecated**、recordChangeDate=**2016-07-11**、recordContentSource=ncu。即该标目自 1987 年起作为多人共用记录存在了约 29 年，2016 年才废止拆分。拆分出的两条现行记录均带注记「[Formerly on undifferentiated name record: n  87108083]」：(1) **n2016037583「Holmes, Wendell」**——无生卒年，670 注「found : His Jeffersontown, Kentucky, 1966 (dwg. by Wendell Holmes)」，即 1966 年肯塔基地方志的绘图者；另有一条 notfound 注（Ww south, southwest, 20th ed.; Ww Kentucky, 1974）表明编目员查证未果。(2) **no2016078290「Holmes, Wendell, 1943-2015」**——birthdates=1943-12-19、deathdates=2015-06-19，670 三条注明其为 the Holmes Brothers 三重奏的歌手/吉他手/钢琴手，卒于马里兰州 Rosedale。**原记录究竟合并过几个人，四库中没有写出，查不到，不推测。**。\n   应用价值：场景：同名门排除：**已证实发生过的机构级人名合并事故，且合并期长达 29 年**；遗留书目数据清洗：凡 2016 年前采集的「Holmes, Wendell」访问点一律不可信；关键能力：查不到（原记录混合多人，无统一能力可言）。\n   区分依据：**本条的价值不在于这几个人本身（他们与目标人物题材毫无重叠、风险很低），而在于它是本轮唯一一处「权威库自己承认曾经把多个人混为一谈」的成文证据。** 三点可直接落成判据：(1) **遗留数据不可信**：任何在 2016-07-11 之前采集、或从 2016 年前的书目库继承而来的「Holmes, Wendell」访问点，**按 LoC 自己的记录就指向多于一个人**，不能当作单一身份使用；而「Wendell Holmes」正是目标人物最常见的简称形（其 GND 400 变体形即「Wendell Holmes, Oliver」）。(2) **废止记录仍然可解析**：n87108083 至今返回 HTTP 200 而非 404 或 410，**只在 recordStatus 字段里写着 deprecated**——凡只判断「标识符解析得通吗」而不读 recordStatus 的程序，会把一条已废止的多人记录当成有效身份接受。这是一条现成的静默失败通道。(3) **未分化记录这一机制本身要单独测**：LCNAF 中此类记录不止一条，按姓名检索时它们与正常规范档形态相同，须显式检查 @type 是否含 DeprecatedAuthority、以及注记中是否出现「undifferentiated」字样。**处置建议**：把 n87108083 加入硬排除名单；并对本清单其余各条的 LCCN 逐一回读 recordStatus，本轮已回读的目标人物 n79054782 与父亲 n80032729 均为正常有效记录、未见 deprecated 标记。。",
+    "V. 人物与身份：其余低风险 Oliver Holmes 同名者（合并登记 5 人）；namesake；运动员、系谱记录人物等，均与目标人物无题材重叠。\n   专业背景：本条合并登记 5 名经 Wikidata CirrusSearch（inlabel:\"Oliver Holmes\" haswbstatement:P31=Q5，共 10 条真人）召回、但风险显著低于前列各条者，逐条如实照录：(1) **Q7087604「Oliver Holmes」**——英格兰橄榄球联盟球员，P569=1992-08-07（day 精度）、无 P570、P106=rugby league player、P27=英国。(2) **Q100804924「Oliver Holmes」**——大学篮球运动员（2003–2006，North Carolina-Asheville），**无 P569/P570**，P106=basketball player、P69=Q7895940。(3) **Q123643810「Oliver Holmes」**——描述作「2 Nov 1777 - 6 Jul 1825」，**该生卒仅存在于实体描述文本中、未登记为 P569/P570 声明**（本轮 wbgetentities props=claims 实查确认无这两个属性），P22 父=Q123643612、P40 子=Q123643809、P39=Q5589790；系谱型条目。(4) **Q76096628「Sir Hugh Oliver Holmes」**——描述作「Peerage person ID=528163」，**无 P569/P570/P106**，P40 子=Q75958019；系谱型条目，「Oliver」为中名。(5) **Q124519370「Oliver Mejias」**——委内瑞拉棒球运动员，别名与 P1477 出生名作「Oliver Holmes Mejias」（西班牙语），P569=1976-09-21、P106=baseball player、P27=委内瑞拉；**姓氏为 Mejias，「Oliver Holmes」为其名与中名**。以上 5 人在 LoC 与 GND 中均**查不到**对应记录（LoC suggest2 q=Holmes, Oliver 的 7 条 PersonalName 结果中无；GND PER=Holmes, Oliver 的 6 条中无），两处「0」均带正对照（LoC 同式返回父子二人共 3 条；GND 同式的正对照 PER=Shakespeare, William 返回 173 条含同名者）。VIAF 无法核（全站 403）。。\n   应用价值：场景：同名门排除：低风险 Oliver Holmes 群，仅 Wikidata 有记录、书目库中无著作；关键能力：查不到（各人职业见 professional_background，与目标人物无能力重叠）。\n   区分依据：5 人均无编目著作进入 LoC/GND 书目规范库，**不会以作者身份进入语料**，故书目层污染风险很低；合并登记而非逐条展开，是因为逐条展开会让清单的注意力从真正的高危项（父亲、档案学家、署 Jr. 的小说作者）上分散。**仍需登记的理由有二**：其一，按「Oliver Holmes」检索时它们会被一并召回，而目标人物的 Wikidata 英文别名恰有一条纯「Oliver Holmes」，**召回集必然混合**；其二，其中 Q123643810 与 Q76096628 是**系谱型条目**（Peerage/家族记录），既无职业也无（声明形式的）生卒年，**任何按属性做的自动判别对它们都返回「不知道」而非「不是」**——按「空值即通过」的默认逻辑会被静默放行，须显式挂起。另注意 Q123643810 的生卒「1777-1825」只写在描述文本里、不在 P569/P570 声明中，**读 claims 的程序看不见它、读 description 的人看得见**，两种读法会得到不同的判断。。",
+    "W. 人物与身份：其余 Wendell Holmes 中名承载者（合并登记 3 人）；namesake；系谱记录人物与学位获得者，均与目标人物无题材重叠。\n   专业背景：本条合并登记 3 名经 Wikidata CirrusSearch（inlabel:\"Wendell Holmes\" haswbstatement:P31=Q5，共 14 条真人）召回的中名承载者，逐条如实照录：(1) **Q75658060「Wendell Holmes McCulloch」**——描述作「Peerage person ID=276815」，**无 P569/P570/P106**，P22 父=Q75658030、P40 子=Q75658063；系谱型条目，姓氏为 McCulloch。(2) **Q76157467「Wendell Holmes」**——描述作「Peerage person ID=569940」，**无 P569/P570/P106**，P734 姓氏=Holmes、P40 子=Q76157468；系谱型条目，**姓名与目标人物的常用简称形完全相同且无任何属性可用于判别**。(3) **Q102147706「Wendell Holmes Mills, Jr.」**——描述作「Ph.D. University of Michigan 1976」，**无 P569/P570**，P106=Q1650915、P69=Q230492；姓氏为 Mills，**且其姓名带「Jr.」后缀**。以上 3 人在 **GND** 中**查不到**对应记录（PER=Holmes, Wendell 的 4 条与 PER=Wendell Holmes 的 5 条中均无；正对照 PER=Shakespeare, William → 173 条含同名者）。**LoC 侧不能写「查不到」，只能写「对应关系未定」**：LoC suggest2（q=Holmes, Wendell）确实返回 3 条人名规范档（n2016037583「Holmes, Wendell」无生卒年、no2016078290「Holmes, Wendell, 1943-2015」、no99018606「Holmes, Wendell H.」），**但这 3 条与上述 3 个 Wikidata 实体之间没有任何共享标识符**（三个 Wikidata 实体均无 P244 声明，三条 LoC 记录均无 Wikidata 链），**故无法判定谁与谁对应，也无法判定它们是否为同一批人**——尤其 Q76157467「Wendell Holmes」与 n2016037583「Holmes, Wendell」二者都无生卒年、都只有姓名，**既不能合并也不能排除**。按「两条独立证据否则不写」的规矩，此处只登记「未定」。另有 **Q112526637「Wendell H. McCulloch」**（1921–2016，P106=jurist、P244=n82054332、P214=2554695）经同一次检索召回，**职业为 jurist 与目标人物同域**，姓氏为 McCulloch、中名缩写 H.，靠姓氏与生卒年可分开。VIAF 无法核（全站 403）。。\n   应用价值：场景：同名门排除：Wendell Holmes 中名承载群，多为系谱型条目；同名门排除：Q76157467 与 Q112526637 两条需显式挂起；关键能力：查不到（各人职业见 professional_background）。\n   区分依据：多数靠姓氏（McCulloch / Mills）即可排除，书目库中无著作、不会以作者身份进入语料。**两条需要单独注意**：(1) **Q76157467「Wendell Holmes」**——姓氏就是 Holmes、姓名恰是目标人物最常见的简称形、且**无生卒年、无职业、无任何外部标识符**，属「按属性判别只能返回不知道」的一类，与 GND 1233239910 同形，须显式挂起而非静默放行；(2) **Q112526637「Wendell H. McCulloch」的 P106 是 jurist**——与目标人物的 GND 特征职业同为法学，属**题材重叠型**，虽姓氏不同，但按「Wendell Holmes + 法学」这类主题检索式会被召回，不能只靠题材启发式排除，须用姓氏或 LCCN n82054332 硬判。。"
+  ],
+  "candidate_count": 23,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "美国普通法法理学与司法意见书写作",
+        "宪法第一修正案、言论自由与「明显而即刻的危险」标准的推理",
+        "法律现实主义 / 法律的经验主义基础（The Path of the Law、The Common Law）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q360574",
+          "note": "逐条实调：action=query&list=search 的 CirrusSearch（inlabel:\"Oliver Wendell Holmes\" haswbstatement:P31=Q5）命中 + wbgetentities props=labels|aliases|descriptions|claims 回读；P569/P570 precision=11、P106/P108/P69/P39/P800/P22 与 P214/P244/P227 三标识符声明"
+        },
+        {
+          "locator": "LCCN n79054782 (id.loc.gov/authorities/names/n79054782)",
+          "note": "逐条实调：id.loc.gov/authorities/names/suggest2?q=Holmes, Oliver Wendell&rdftype=PersonalName（作品索引 /search/ 未使用）；另回读 n79054782.madsrdf.json 取得 hasEarlierEstablishedForm / hasVariant 三条；670 来源注含 LCCN 2007000976"
+        },
+        {
+          "locator": "GND 118706594 (d-nb.info/gnd/118706594)",
+          "note": "逐条实调：services.dnb.de/sru/authorities SRU（query=PER=Holmes, Oliver，recordSchema=MARC21-xml）；100/400/548/550/670/678 与 024 中的 lccn 交叉链"
+        },
+        {
+          "locator": "VIAF 34517870 —— **本轮取不到，未回读**",
+          "note": "该 VIAF ID 仅出自 Wikidata Q360574 的 P214 声明，**不是我从 VIAF 读到的**。viaf.org 本轮全站不可达：POST /api/search、POST /api/cluster-record、legacy /viaf/search、/viaf/AutoSuggest、以及站点根 / 全部返回 HTTP 403 与同一张 5482 字节 Cloudflare「Sorry, you have been blocked」页。正对照：同一台机器同一时刻 GET id.loc.gov/authorities/names/n79054782.json 返回 200，且 GET viaf.org/viaf/96994048/viaf.json（Shakespeare，已知存在的公开簇）同样 403 —— 证明这是**主机级 bot 墙**，与我的查询式和目标人物均无关。按约束「不绕任何访问控制」未作任何规避尝试。"
+        }
+      ],
+      "canonical_name": "Oliver Wendell Holmes Jr.",
+      "distinguishing_basis": "Wikidata Q360574 ∧ LCCN n79054782 ∧ GND 118706594 三者互证，且互证关系有**库内直接链接**而非我跨库推断：GND 118706594 的 024 字段直接写出 $an79054782 $2lccn。**与父亲的分开方式是本条的全部难点**，见 holmes-oliver-wendell-sr-1809 条；此处只记要点：四库中**没有任何一库把 Jr./Sr. 同时用在父子二人身上**——LoC 只给儿子加 $cJr. 而父亲的标目是裸名，GND 父子两条 100 字段是**逐字节相同的「Holmes, Oliver Wendell」，仅 $d 日期不同**。可用于硬分开的判据只有三样：(1) 生卒年 1841-1935 vs 1809-1894；(2) 标识符 n79054782 / 118706594 / Q360574 vs n80032729 / 118706608 / Q319829；(3) 职业档 Judges·Jurist·Richter vs Physicians·Poets·Schriftsteller·Arzt。**姓名字符串本身在四库中没有一处能可靠分开父子**。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "把法律从形式逻辑推演改述为经验与政策后果的判断（「法律的生命不在逻辑而在经验」式论证）",
+        "司法意见与异议意见的凝练写作",
+        "法律史与法教义学的体系化重构"
+      ],
+      "label": "A",
+      "occupation_or_role": "美国法学家、联邦最高法院大法官、马萨诸塞州最高法院首席法官、哈佛法学院教授、法理学著述者",
+      "professional_background": "1841-03-08 – 1935-03-06。生卒日精确到日，三库互证：Wikidata Q360574 的 P569/P570 均为 day 精度（precision=11）；LoC n79054782 的 birthdates=1841-03-08、deathdates=1935-03-06；GND 118706594 的 548 字段 $a08.03.1841-06.03.1935 $4datx（Exakte Lebensdaten）。出生地 Boston (Mass.)（LoC n79054782 birthplaces 字段）。职业：LoC n79054782 occupations 作 Judges；GND 118706594 的 550 字段作 Jurist（berc 特征职业）、Richter、Rechtstheoretiker、Autor、Hochschullehrer、Herausgeber；Wikidata Q360574 P106 作 jurist / judge / lawyer / university teacher / politician / philosopher / editor / author。任职与教育（Wikidata Q360574）：P39=Associate Justice of the Supreme Court of the United States (Q11144)、P108 雇主=Harvard University (Q13371)、P69 就学于 Harvard Law School (Q49122) 与 Harvard College (Q49123)。代表作 P800=The Path of the Law (Q55889364, 1897)。GND 118706594 的 678 传记注原文写出父子关系与履历：「Sohn des Schriftstellers und Arztes Oliver Wendell Holmes Sr. (1809-1894); 1870 Herausgeber der Zeitschrift \"American Law Review\"; 1882 Professor für Rechtswissenschaft in Harvard; 1902-1932 Richter am Obersten Gerichtshof der Vereinigten Staaten」。★ 标目形态（本轮最要紧的观察）：LoC n79054782 的现行标目是「Holmes, Oliver Wendell, Jr., 1841-1935」（marcKey 1001 $aHolmes, Oliver Wendell,$cJr.,$d1841-1935），**但其 MADS 的 hasEarlierEstablishedForm 为「Holmes, Oliver Wendell, 1841-1935」——即他此前的既定标目是不带 Jr. 的裸名形**，该形同时也登记为 variantLabel（出现两次）。而 **GND 118706594 的 100 字段至今作「Holmes, Oliver Wendell $d1841-1935」，根本不带 Jr.**，Jr. 只作为 400 变体形「Holmes Jr., Oliver Wendell $d1841-1935」存在。Wikidata Q360574 的英文主标签同样是裸名「Oliver Wendell Holmes」，其英文别名含「Oliver Holmes」「Oliver W. Holmes Jr.」等 10 条。VIAF ID 34517870 出自 Wikidata Q360574 的 P214 声明与本轮**未能回读 VIAF 本体**（见 authoritative_sources 说明），故按第三方声明登记、不作 VIAF 已核实的断言。",
+      "subject_uid": "holmes-oliver-wendell-jr-1841"
+    },
+    {
+      "application_scenarios": [
+        "19 世纪美国医学史（产褥热传染性、接触传染论）的辨识对象",
+        "19 世纪美国文学（Breakfast-Table 系列随笔、Fireside Poets）的辨识对象",
+        "同名门排除：**本清单第一优先拦截对象**"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q319829",
+          "note": "逐条实调：wbsearchentities + CirrusSearch 命中，wbgetentities props=labels|aliases|descriptions|claims 回读；P569/P570 precision=11、P40 子女含 Q360574、P106/P108/P69/P800"
+        },
+        {
+          "locator": "LCCN n80032729 (id.loc.gov/authorities/names/n80032729)",
+          "note": "逐条实调：suggest2 rdftype=PersonalName + n80032729.madsrdf.json 回读；确认 marcKey 无 $c、无 Sr. 形、无 EarlierEstablishedForm；另实测 label/ 端点四条解析与两条正负对照"
+        },
+        {
+          "locator": "GND 118706608 (d-nb.info/gnd/118706608)",
+          "note": "逐条实调：DNB SRU；100=Holmes, Oliver Wendell $d1809-1894（无后缀）、400 两条、550=Schriftsteller/Arzt、024 含 wikidata Q319829 与 isni 0000 0001 2276 0877、700 交叉链 (DLC)n 80032729"
+        },
+        {
+          "locator": "LCCN no2021140324（name-title 规范档「Holmes, Oliver Wendell, 1809-1894. Contagiousness of puerperal fever」）",
+          "note": "逐条实调：suggest2 不加 rdftype 过滤时返回，rdftypes=NameTitle/ComplexType/Authority；作为「父亲著作挂在裸名标目下」的直接书目证据"
+        },
+        {
+          "locator": "VIAF 7405944 —— **本轮取不到，未回读**",
+          "note": "仅出自 Wikidata Q319829 的 P214 声明。VIAF 全站 403，理由与正对照见目标条 holmes-oliver-wendell-jr-1841。"
+        }
+      ],
+      "canonical_name": "Oliver Wendell Holmes Sr.",
+      "distinguishing_basis": "★★★ **本清单风险最高者，且高出其余各条一个数量级——理由是四库中没有一处能靠姓名字符串把他与目标人物分开。** 逐库实测：(1) **LoC**：父亲的**权威标目**就是裸名「Holmes, Oliver Wendell, 1809-1894」（无 Sr.），而儿子的**前既定标目**（MADS hasEarlierEstablishedForm）正是裸名「Holmes, Oliver Wendell, 1841-1935」——**两人的裸名形只差四位数字，且父亲那一形是现行权威形、儿子那一形是历史权威形**。这意味着凡在 LoC 加 Jr. 之前建立的编目数据，儿子一律以裸名挂着。LoC 自己的 670 注就记录了一例：「found : LCCN 2007000976: The collected legal papers, 2007 (access point: Holmes, Oliver Wendell, 1841-1935; usage: Oliver Wendell Holmes)」——**2007 年的一部儿子的著作集，编目访问点用的是不带 Jr. 的形，题名页用法是纯「Oliver Wendell Holmes」**。(2) **标签解析实测更糟**：label/「Holmes, Oliver Wendell」（**裸名、无日期、无后缀**）→ 302 重定向到 **n79054782（儿子）**；label/「Holmes, Oliver Wendell, 1809-1894」→ n80032729（父亲）。即**一条不带日期的裸名查询会静默落到儿子身上**。该端点是精确匹配而非模糊匹配，负对照 label/「Zzqq, Notareal Person 1234」→ 404、正对照 label/「Shakespeare, William, 1564-1616」→ 302 n78095332 —— 所以「裸名解析到儿子」意味着该字符串**确实作为索引访问点存在于儿子的记录上**，不是搜索引擎的凑合匹配。(3) **GND 最糟**：父子两条记录的 100 字段是**逐字节相同的「Holmes, Oliver Wendell」**，仅 $d 不同（118706608 $d1809-1894 vs 118706594 $d1841-1935），**两条都不带任何后缀**；且两人的 400 变体形也高度同构（父：Wendell Holmes, Oliver / Holmes, Oliver W.；子：Holmes, Oliver W. / Wendell Holmes, Oliver / Holmes Jr., Oliver Wendell / Holmes, O. W.）——**「Holmes, Oliver W.」与「Wendell Holmes, Oliver」两串在父子两条记录上同时存在，只有日期能分**。(4) **Wikidata**：父子的英文主标签**完全相同**，都是「Oliver Wendell Holmes」；Jr./Sr. 只活在别名里。**语境重叠使非姓名判据同样失效**：二人 P108 雇主**同为 Harvard University (Q13371)**、P69 同就读 **Harvard College (Q49123)**、同在波士顿地区、同为多产作者、且 LoC 都给了大量 name-title 规范档。**可用的硬判据只有生卒年、标识符、职业档、出生地（Cambridge vs Boston）四样。** 另有一处已发生的书目层重叠证据：LoC name-title 规范档 **no2021140324「Holmes, Oliver Wendell, 1809-1894. Contagiousness of puerperal fever」**——父亲最著名的医学论文正是挂在**裸名无后缀**标目下；任何以「Oliver Wendell Holmes + 著作」为条件的抓取都会把它算作目标人物的一手件。",
+      "evidence_level": "high",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "临床医学与解剖学教学",
+        "医学论证写作（The Contagiousness of Puerperal Fever）",
+        "随笔与诗歌创作"
+      ],
+      "label": "B",
+      "occupation_or_role": "美国医生、哈佛医学院解剖学教授、诗人、随笔作家、小说家；《The Autocrat of the Breakfast-Table》作者；产褥热传染性论文作者",
+      "professional_background": "1809-08-29 – 1894-10-07。三库互证：Wikidata Q319829 的 P569/P570 为 day 精度；LoC n80032729 的 birthdates=1809-08-29、deathdates=1894-10-07；GND 118706608 的 548 $a29.08.1809-07.10.1894 $4datx。出生地 Cambridge (Mass.)（LoC n80032729 birthplaces；**注意与儿子的 Boston (Mass.) 不同，这是四库中少数几个真能分开父子的字段之一**）。职业：LoC n80032729 occupations 作 Physicians / Poets / Essayists / Novelists；GND 118706608 的 550 作 Schriftsteller（berc 特征职业）与 Arzt；Wikidata Q319829 P106 作 physician / poet / physician writer / university teacher / novelist / medical author / writer。LoC n80032729 的 notes 字段原文：「[Oliver Wendell Holmes (1809-1894) was a physician, poet, essayist, and novelist in Massachusetts.]」；LC 分类 PS1950-PS1998。Wikidata Q319829 的 P40（子女）直接含 Q360574，即**父子关系由 Wikidata 双向声明**（儿子侧 P22=Q319829）。★★★ **标目形态——这是本人物最要命的一条**：LoC n80032729 的现行标目是「Holmes, Oliver Wendell, 1809-1894」，marcKey 为 `1001 $aHolmes, Oliver Wendell,$d1809-1894`，**没有 $c Sr.**；其 MADS 中唯一的变体形是「Holmes, O. W. (Oliver Wendell), 1809-1894」，**既无 Sr. 形，也无 hasEarlierEstablishedForm**。实测标签解析：id.loc.gov/authorities/names/label/「Holmes, Oliver Wendell, Sr.」→ **404**，「Holmes, Oliver Wendell, Sr., 1809-1894」→ **404**。GND 118706608 的 100 同样作「Holmes, Oliver Wendell $d1809-1894」，400 变体只有「Wendell Holmes, Oliver」与「Holmes, Oliver W.」，**Sr. 在 GND 里一次都没出现**。Wikidata Q319829 的英文主标签是裸名「Oliver Wendell Holmes」，「Oliver Wendell Holmes Sr.」只是别名。VIAF 7405944 出自 Wikidata P214 声明，本轮未回读（VIAF 全站 403，见目标条）。",
+      "subject_uid": "holmes-oliver-wendell-sr-1809"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪美国档案学与国家档案馆史的辨识对象",
+        "同名门排除：**三人共用同一姓名字符串中的第三人**"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q27922577",
+          "note": "逐条实调：CirrusSearch inlabel 命中 + wbgetentities 回读；P569/P570 precision=11、P106=Q635734、P244/P227/P214 三声明"
+        },
+        {
+          "locator": "LCCN n83205669",
+          "note": "逐条实调：suggest2 rdftype=PersonalName；marcKey、variantLabels、relateds、两条 670 来源注"
+        },
+        {
+          "locator": "GND 133040364",
+          "note": "逐条实调：DNB SRU（PER=Holmes, Oliver）；100/400 三条变体/548/670/700 交叉链"
+        }
+      ],
+      "canonical_name": "Oliver Wendell Holmes (archivist, 1902-1981)",
+      "distinguishing_basis": "**风险仅次于父亲，且有一重父亲没有的叠加危险：他是档案学家。** 姓名字符串「Holmes, Oliver Wendell」在 LCNAF 与 GND 中由**三个人**共用——父亲（LoC 权威形 / GND 100）、目标人物（LoC 前既定形 / GND 400）、以及本人（LoC 变体形与前标目 / GND 400）。三者在两库中都只能靠 $d 日期分开：1809-1894 / 1841-1935 / 1902-1981。**叠加危险在于职业与语境**：目标人物的一手材料主体是**档案性质的文书**（书信、司法文件、哈佛法学院图书馆藏品），而本人的著作正是**关于档案管理的**；因此凡以「Oliver Wendell Holmes + archives / papers / manuscripts / collection」为条件的检索，会同时命中「目标人物的档案」与「此人写的档案学著作」，**主题词筛不掉他**——这与 Blackstone 轮次里 William T. Blackstone（题材重叠型）是同一种缺陷，但此处姓名是**完全相同**而非只差中名首字母，故更难。必须用 LCCN n83205669 / GND 133040364 / Wikidata Q27922577 硬排除。另注意其生年 1902 与目标人物**就任最高法院大法官的年份 1902 相同**，按「Holmes 1902」做年份启发式会同时命中两者。",
+      "evidence_level": "high",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "档案整理、著录与档案行政",
+        "档案学专业写作"
+      ],
+      "label": "C",
+      "occupation_or_role": "美国档案学家（archivist），美国国家档案馆档案管理著述者",
+      "professional_background": "1902-02-02 – 1981-11-25（Wikidata Q27922577 的 P569/P570 均为 day 精度）。**姓名与目标人物及其父亲完全相同**。三库均有独立记录：LoC **n83205669**，标目作「Holmes, Oliver W. (Oliver Wendell), 1902-1981」，marcKey `1001 $aHolmes, Oliver W.$q(Oliver Wendell),$d1902-1981`，其 **variantLabels 与 relateds 均含裸名形「Holmes, Oliver Wendell, 1902-」**；670 来源注两条：「found : His Stagecoach East, 1983: t.p. (Oliver W. Holmes) dust jkt. (d. 1981)」与「found : LC data base, 9-28-83 (hdg.: Holmes, Oliver Wendell, 1902- ; usage: Oliver W. Holmes)」——**后者明写他此前的标目就是裸名「Holmes, Oliver Wendell, 1902-」**。GND **133040364**，100 作「Holmes, Oliver W. $d1902-1981」，400 变体含 **「Holmes, Oliver Wendell $d1902-1981」「Wendell Holmes, Oliver $d1902-1981」「Holmes, O. W. $d1902-1981」——与父子二人的变体形完全同构**；670 作 LCAuth，700 交叉链 (DLC)n 83205669。Wikidata Q27922577 描述作「archivist (1902-1981)」，P106=archivist (Q635734)，P244=n83205669、P227=133040364、P214=13488772（VIAF ID 为 Wikidata 声明，本轮未回读）。",
+      "subject_uid": "holmes-oliver-wendell-archivist-1902"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪末美国西部小说的辨识对象",
+        "同名门排除：**唯一一个把「Jr.」这一区分记号也一并占用的同名者**"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "LCCN no2002012187",
+          "note": "逐条实调：suggest2?q=Holmes, Oliver&rdftype=PersonalName；670 注为唯一依据，无生卒年字段"
+        }
+      ],
+      "canonical_name": "Oliver W. Holmes（署名亦作 Oliver W. Holmes Jr.，20 世纪末西部小说作者）",
+      "distinguishing_basis": "**这是本清单中最反直觉的一条**：整个消歧方案的落脚点是「用 Jr. 把目标人物与父亲分开」，而**此人恰恰也署「Oliver W. Holmes Jr.」**（LoC 670 注亲录其半题名页署名）。于是「Oliver W. Holmes Jr.」这一串**并不能唯一指向目标人物**；LoC 也为目标人物登记了变体形「Holmes, O. W. (Oliver Wendell), Jr., 1841-1935」，两者按缩写形式检索会互相召回。无生卒年可用于分开，**只能靠 LCCN no2002012187 硬排除**。所幸题材（西部小说）与目标人物无重叠，且其作品出版于 2001 年、远晚于目标人物卒年，按出版年可作辅助过滤；但**凡以署名字符串「O. W. Holmes Jr.」为唯一条件的自动归属一律不成立**。",
+      "evidence_level": "medium",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "西部题材类型小说写作"
+      ],
+      "label": "D",
+      "occupation_or_role": "美国西部题材小说作者（Incident on Jubal Mountain, 2001）",
+      "professional_background": "生卒年**查不到**：LoC no2002012187 无 birthdates/deathdates 字段，标目为无日期的「Holmes, Oliver W.」，marcKey `1001 $aHolmes, Oliver W.`。该规范档**唯一的 670 来源注**是：「found : Incident on Jubal Mountain, 2001: t.p. (Oliver W. Holmes) half title (Oliver W. Holmes Jr.)」——即题名页署「Oliver W. Holmes」而**副标题页署「Oliver W. Holmes Jr.」**。国籍、任职、教育背景四库中均无记录，**查不到，不推测**。Wikidata 与 GND 中未找到可对应的记录：GND SRU（PER=Holmes, Oliver，numberOfRecords=6）返回的 6 条中无此人，该查询式的正对照见下（PER=Shakespeare, William 返回 173 条，且其中含同名者 Shakespeare, William $d1849-1931，证明该查询式既通、又确实会召回同名者）。VIAF 无法核（全站 403）。",
+      "subject_uid": "holmes-oliver-w-lc-no2002012187"
+    },
+    {
+      "application_scenarios": [
+        "同名门排除：无属性的薄规范档，任何按姓名的自动比对都无法判定它指谁"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "GND 1233239910 (d-nb.info/gnd/1233239910)",
+          "note": "逐条实调：DNB SRU（query=PER=Holmes, Wendell，numberOfRecords=4）；全记录仅 024/035/040/042/043/075/079/100/550 九个字段，实质属性只有 043 $cXD-US 与 550 $aJurist"
+        }
+      ],
+      "canonical_name": "Wendell Holmes（GND 1233239910，身份未定）",
+      "distinguishing_basis": "**无法与目标人物分开，也无法与之合并——身份未定。** 该记录仅有的两项实质属性是「美国」与「Jurist」，而**目标人物的 GND 118706594 的特征职业恰恰就是 Jurist（同一个 550 $4berc 位置、同一个 GND 概念号 4029050-5）**，且目标人物登记有 400 变体形「Wendell Holmes, Oliver $d1841-1935」、其通称简写亦常作「Wendell Holmes」。因此本条**很可能是目标人物的一条未合并重复档**；但 GND 把它单独立为 1233239910 而未与 118706594 合并，本轮四库中也没有任何一条记录写出它指谁，且 VIAF 侧因全站 403 无法验证合并状态。按「两条独立证据否则不写」的规矩，此处只登记「未定」，**不断言它是目标人物、也不断言它是另一个人**。处置建议：不得作为目标人物的一手来源标识符使用；若语料中出现仅凭 GND 1233239910 挂靠的材料，一律先挂起待判。（形态与 Blackstone 轮次的 GND 1146806930「仅有 Sir 一项属性」完全同类。）",
+      "evidence_level": "low",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "查不到"
+      ],
+      "label": "E",
+      "occupation_or_role": "查不到——GND 记录中仅有职业「Jurist」一项，无生卒年、无国籍以外的任何属性",
+      "professional_background": "生卒年**查不到**。GND 1233239910 是一条极薄的人名规范档：MARC21 100 字段仅作「Holmes, Wendell」（**无 $d 生卒年、无后缀、无中名**），043 国别代码作 $cXD-US（美国），550 职业作 **$aJurist $4berc（Charakteristischer Beruf，特征职业）**，040 著录机构 DE-B212、079 $ag $qf。**无 400 变体形、无 548 生卒、无 678 传记注、无 670 来源注、无 024 外部标识符**。LoC 与 Wikidata 中查不到可对应的记录：LoC label/「Holmes, Wendell」未作为独立人名规范档出现在 suggest2?q=Holmes, Oliver 的 7 条 PersonalName 结果中；GND SRU（PER=Holmes, Wendell）numberOfRecords=4，本条为其一。VIAF 无法核（全站 403），故**无法判断该 GND 号是否已与任何其他机构的规范档合并**。",
+      "subject_uid": "holmes-wendell-gnd-1233239910"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪美国黑人高等教育史的辨识对象",
+        "同名门排除：**中名承载型，且承载的是目标人物的完整姓名三词**"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q20979279",
+          "note": "逐条实调：CirrusSearch inlabel:\"Oliver Wendell Holmes\" haswbstatement:P31=Q5 命中（7 名真人之一）+ wbgetentities props=labels|aliases|claims 回读；P569/P570 precision=11、P106/P69/P244/P214"
+        },
+        {
+          "locator": "LCCN n2002068320",
+          "note": "逐条实调：id.loc.gov suggest2?q=Holmes, Dwight&rdftype=PersonalName（count=2，hits=1）；标目形「Holmes, Dwight Oliver Wendell, 1877-1963」与 Wikidata 的生卒年独立吻合"
+        }
+      ],
+      "canonical_name": "Dwight Oliver Wendell Holmes",
+      "distinguishing_basis": "姓氏同为 Holmes，且**「Oliver Wendell」完整地作为其中名存在**——「Dwight Oliver Wendell Holmes」这一串**包含目标人物姓名的全部三个词且顺序一致**，任何以「Oliver Wendell Holmes」作子串匹配（而非整串相等）的检索都会召回他。本轮 Wikidata CirrusSearch（inlabel:\"Oliver Wendell Holmes\" haswbstatement:P31=Q5）返回的 7 名真人中就含他，**即这不是假想风险，是同一次检索里实际发生的召回**。分开方式：靠首名 Dwight 与生卒年 1877-1963；标识符 Q20979279 / LCCN n2002068320。**注意倒装形陷阱**：LoC 排序形当作「Holmes, Dwight Oliver Wendell」，按倒装姓名检索不会召回，按正序前缀检索会——两种检索式给出不同结果，须都测。",
+      "evidence_level": "high",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "高等教育行政与校政管理",
+        "教育社会学写作"
+      ],
+      "label": "F",
+      "occupation_or_role": "美国教育家、社会学著述者、摩根州立学院（Morgan State）校长",
+      "professional_background": "1877-11-18 – 1963-09-07（Wikidata Q20979279 的 P569/P570 均为 day 精度）。**全名直接包含「Oliver Wendell Holmes」全串**：Wikidata 主标签作「Dwight O. W. Holmes」，英文别名含 **「Dwight Oliver Wendell Holmes」** 与「D. O. W. Holmes」。P106 作 sociologist / novelist / educator；P69 就学于 Howard University (Q49088) 与 Columbia University (Q1068752)；P27=美国。**LoC 规范档 n2002068320 已单独回读确认**，标目形作「Holmes, Dwight Oliver Wendell, 1877-1963」（suggest2?q=Holmes, Dwight，count=2/hits=1）——**生卒年由 LoC 与 Wikidata 两库各自独立给出、互相印证**，非单库孤证。VIAF 49600134 为 Wikidata P214 声明，本轮未回读（全站 403）。GND 中未找到对应记录：SRU（PER=Holmes, Wendell）4 条与（PER=Wendell Holmes）5 条中均无此人；该查询式的正对照为 PER=Shakespeare, William → 173 条且含同名者，证明查询式本身通。",
+      "subject_uid": "holmes-dwight-oliver-wendell-1877"
+    },
+    {
+      "application_scenarios": [
+        "同名门排除：**配偶冠夫姓型——姓名字符串完整包含目标人物姓名**"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q43400596",
+          "note": "逐条实调：CirrusSearch inlabel:\"Oliver Wendell Holmes\" haswbstatement:P31=Q5 命中（7 名真人之一）+ wbgetentities props=labels|aliases|descriptions|claims 回读；别名「Mrs. Oliver Wendell Holmes」为实查所得，非推测"
+        },
+        {
+          "locator": "LCCN n2001080492",
+          "note": "逐条实调：id.loc.gov suggest2?q=Holmes, Fanny&rdftype=PersonalName（count=2，hits=2）；标目形「Holmes, Fanny Bowditch Dixwell, 1840-1929」，与 Wikidata 的 1840/1929 独立吻合"
+        },
+        {
+          "locator": "VIAF 75662594 —— **本轮取不到，未回读**",
+          "note": "仅出自 Wikidata Q43400596 的 P214 声明。VIAF 全站 403（理由与正对照见目标条）。"
+        }
+      ],
+      "canonical_name": "Fanny Bowditch Dixwell Holmes",
+      "distinguishing_basis": "她并非与目标人物同名的另一个人，而是**其姓名的一种称谓形式完整包含目标人物全名**：别名「Mrs. Oliver Wendell Holmes」中「Oliver Wendell Holmes」三词齐全且顺序一致。**这一类最容易漏掉，因为消歧检查通常只比对「姓 + 名」而不看称谓前缀**——凡按子串匹配、或按「以 Oliver Wendell Holmes 结尾」检索的路径都会召回她。风险场景具体而现实：19 世纪末至 20 世纪初的社交记事、书信收发记录、报刊报道大量以「Mrs. Oliver Wendell Holmes」指称她，**这些文本会被按姓名检索的抓取器判为目标人物的一手材料，而其中她才是主语**。分开方式：Wikidata Q43400596 / LCCN n2001080492 硬排除，或要求称谓前缀 Mrs. 触发拦截。（同类形态在本项目 Gantt 轮次已出现过一次——配偶姓名含目标人物全名而护栏只比姓，一个也挡不住。）",
+      "evidence_level": "high",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "查不到"
+      ],
+      "label": "G",
+      "occupation_or_role": "目标人物的配偶；本身非著述者——四库中无职业字段",
+      "professional_background": "1840（年精度）– 1929-04-30（Wikidata Q43400596 的 P570 同时登记 1929 年精度与 1929-04-30 日精度两条；P569 仅 1840 年精度）。Wikidata 描述原文作「wife of U. S. Supreme Court Justice Oliver Wendell Holmes, Jr.」，**英文别名含「Mrs. Oliver Wendell Holmes」**。无 P106 职业字段。**LoC 规范档 n2001080492 已单独回读确认**，标目形作「Holmes, Fanny Bowditch Dixwell, 1840-1929」（suggest2?q=Holmes, Fanny，count=2/hits=2）——**卒年 1929 由 LoC 与 Wikidata 两库各自独立给出**。VIAF 75662594 出自 Wikidata P214 声明，本轮未回读（全站 403）。GND 中未找到对应记录。★ 同一次 q=Holmes, Fanny 检索返回的第二条是 **no2023122888「Barnett, W., Mrs」**——一条以「Mrs + 丈夫姓名」立目的规范档，说明 LCNAF 中确实存在**整类以夫姓称谓立目的记录**，本条的风险不是孤例。",
+      "subject_uid": "holmes-fanny-dixwell-1840-spouse"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪中叶美国影视演艺的辨识对象",
+        "同名门排除：全名与目标人物完全相同，但仅存在于 Wikidata"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q28604507",
+          "note": "逐条实调：wbsearchentities 以 alias「Oliver Wendell Holmes」命中（match.type=alias）+ wbgetentities props=labels|aliases|claims 回读；P569/P570 precision=11、P106/P734/P735"
+        }
+      ],
+      "canonical_name": "Wendell Holmes（美国演员，1914-1962）",
+      "distinguishing_basis": "**全名字符串与目标人物完全相同**（Oliver Wendell Holmes），靠生卒年 1914-1962 与职业（演员）分开。**书目污染风险低**——LoC 与 GND 两个书目规范库都查不到他，说明他名下没有编目著作，不会以作者身份进入语料；但按「Oliver Wendell Holmes」做全文检索、人物百科检索或 Wikidata 实体链接时会被召回，**且因其主标签是「Wendell Holmes」而全名藏在别名里，只比对主标签的去重逻辑看不见这次撞名**。演艺类语料（影视数据库、剧目表）是其可能的污染通道。",
+      "evidence_level": "medium",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "影视表演"
+      ],
+      "label": "H",
+      "occupation_or_role": "美国演员、电视演员、电影演员",
+      "professional_background": "1914-08-17 – 1962-04-27（Wikidata Q28604507 的 P569/P570 均为 day 精度）。Wikidata 主标签作「Wendell Holmes」，**英文别名为「Oliver Wendell Holmes」——即其全名登记形与目标人物完全相同**（本轮 wbgetentities props=aliases 实查确认，match.type=alias）。P106 作 actor / television actor / film actor；P734 姓氏 Holmes、P735 名字含 Oliver 与 Wendell 两项；P27=美国。LoC、GND 中未找到对应记录：LoC suggest2（q=Holmes, Oliver Wendell / q=Holmes, Oliver，rdftype=PersonalName）共 7 条 PersonalName 结果中无此人；GND SRU（PER=Holmes, Oliver，6 条 / PER=Holmes, Wendell，4 条）中亦无。两处「0」均带正对照：LoC 同式查 q=Holmes, Oliver Wendell 返回 3 条含父子二人、GND 同式查 PER=Shakespeare, William 返回 173 条含同名者 Shakespeare, William $d1849-1931 —— 证明两个查询式本身都通。VIAF 无法核（全站 403）。",
+      "subject_uid": "holmes-wendell-actor-1914"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪末英国生理学教科书文献的辨识对象",
+        "同名门排除：**其标目形恰是目标人物 Wikidata 别名之一「Oliver Holmes」**"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "LCCN n83138056",
+          "note": "逐条实调：suggest2?q=Holmes, Oliver&rdftype=PersonalName；marcKey、variantLabels 与两条 670 来源注为全部依据，无生卒年字段"
+        }
+      ],
+      "canonical_name": "Oliver Holmes（格拉斯哥大学生理学者）",
+      "distinguishing_basis": "**风险点在于目标人物的 Wikidata 英文别名中就有一条纯「Oliver Holmes」**（本轮 wbgetentities 实查确认），而本人的 LoC 权威标目正是无日期的「Holmes, Oliver」。**实测已坐实**：id.loc.gov/authorities/names/label/「Holmes, Oliver」→ 302 重定向到 **n83138056（本人）**——即在 LoC 侧，一条裸「Oliver Holmes」查询解析到的是这位格拉斯哥生理学者，而不是目标人物；该端点为精确匹配（负对照 label/「Zzqq, Notareal Person 1234」→ 404、正对照 label/「Shakespeare, William, 1564-1616」→ 302）。即凡以「Oliver Holmes」为检索式的路径，会同时命中目标人物（经 Wikidata 别名）与本人（经 LoC 权威标目），**且本人无生卒年可用于年代过滤**——这是本清单里除 no2002012187 外第二位连年代筛都用不上的同名者，只能靠 LCCN n83138056 硬排除。题材（生理学）与目标人物无重叠，但**与其父亲（医生、哈佛医学院教授）题材相邻**，在医学语料路径上会形成父—子—本人三方混淆。",
+      "evidence_level": "medium",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "神经生理学教学与教科书写作"
+      ],
+      "label": "I",
+      "occupation_or_role": "生理学研究者与教科书作者（格拉斯哥大学生理学系）",
+      "professional_background": "生卒年**查不到**：LoC n83138056 无 birthdates/deathdates 字段，标目为无日期的「Holmes, Oliver」，marcKey `10010$aHolmes, Oliver`，变体形「Holmes, O. (Oliver)」。两条 670 来源注：「found : Jennett, S. Multiple choice questions in physiology, 1983 (a.e.) CIP t.p. (Oliver Holmes, MB, Dept. of Physiology, Univ. of Glasgow)」与「found : His Human neurophysiology, 1990: CIP t.p. (O. Holmes; Dept. of Physiology, Univ. of Glasgow) data sht. (Oliver Holmes)」——**职衔与机构（MB，格拉斯哥大学生理学系）出自题名页，是该规范档的唯一依据**。Wikidata 与 GND 中未找到可对应的记录（GND PER=Holmes, Oliver 的 6 条中无；正对照见前条）。VIAF 无法核（全站 403）。",
+      "subject_uid": "holmes-oliver-lc-n83138056"
+    },
+    {
+      "application_scenarios": [
+        "18-19 世纪美国震教派手稿的辨识对象",
+        "同名门排除：卒年 1841 与目标人物生年 1841 相同"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "LCCN n94093766",
+          "note": "逐条实调：suggest2?q=Holmes, Oliver&rdftype=PersonalName；marcKey 与唯一一条 670 NUCMC 来源注"
+        }
+      ],
+      "canonical_name": "Oliver Holmes（1776-1841，震教派长老）",
+      "distinguishing_basis": "靠全名（无中名 Wendell）与生卒年分开。**风险点是一个易被忽略的数字巧合：他的卒年 1841 正是目标人物的生年 1841**——凡按「Holmes + 1841」做年份启发式匹配的路径会同时命中两者，而这类匹配在处理手稿/档案著录（其著录常只给单个年份）时相当常见。其材料形态（1797 年手稿、NUCMC 著录）与目标人物早期档案同属手稿类，检索通道重叠。题材（宗教教团）无重叠，风险等级中下。",
+      "evidence_level": "medium",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "震教派教团事务与教务文书"
+      ],
+      "label": "J",
+      "occupation_or_role": "震教派（Shaker）长老，缅因州 Sabbathday Lake 教团",
+      "professional_background": "1776 – 1841（LoC n94093766 标目形「Holmes, Oliver, 1776-1841」，marcKey `10010$aHolmes, Oliver,$d1776-1841`）。唯一的 670 来源注：「found : NUCMC data from United Society of Shakers, Shaker Library for His Oliver Holmes his book, 1797 (Oliver Holmes; 1776-1841; Shaker elder; Sabbathday Lake, Me.)」——**生卒年、身份与地点均出自 NUCMC 手稿著录，是该规范档的唯一依据**。Wikidata 与 GND 中未找到可对应的记录（正对照见前条）。VIAF 无法核（全站 403）。",
+      "subject_uid": "holmes-oliver-1776-shaker"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪初美国地图资料的辨识对象",
+        "同名门排除：中名首字母 M. 与目标人物无中名，按「O. Holmes」缩写检索时无法分开"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "LCCN no2010122729",
+          "note": "逐条实调：suggest2?q=Holmes, Oliver M.&rdftype=PersonalName（count=1，hits=1）；670 注为唯一依据"
+        }
+      ],
+      "canonical_name": "Oliver M. Holmes",
+      "distinguishing_basis": "靠中名首字母 M. 分开；无生卒年可用，只能靠 LCCN no2010122729 硬排除。题材（地图）与目标人物无重叠，**污染风险为本清单最低一档**；但其署名活跃期（192-?）落在目标人物在世期间内（卒于 1935），按年代范围过滤**不能**排除他，这一点与其余靠年代即可分开的同名者不同。",
+      "evidence_level": "medium",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "查不到"
+      ],
+      "label": "K",
+      "occupation_or_role": "地图绘制/出版相关者（蒙大拿州 Great Falls 宣传地图署名人）",
+      "professional_background": "生卒年**查不到**：LoC no2010122729 无 birthdates/deathdates 字段，标目为无日期的「Holmes, Oliver M.」，marcKey `1001 $aHolmes, Oliver M.`。唯一的 670 来源注：「found : Great Falls, Montana, marketing and distribution point for this empire of rich resources, 192-?: map recto (Oliver M. Holmes)」——即该规范档系据一件 1920 年代地图正面的署名建立。国籍、职业、任职四库中均无记录，**查不到，不推测**。Wikidata 与 GND 中未找到可对应的记录（正对照见前条）。VIAF 无法核（全站 403）。",
+      "subject_uid": "holmes-oliver-m-lc-no2010122729"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪加拿大外交与国际关系文献的辨识对象",
+        "同名门排除：中名承载型——GND 变体形「Wendell Holmes, John」与目标人物变体形「Wendell Holmes, Oliver」同构"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q1167295",
+          "note": "逐条实调：CirrusSearch inlabel:\"Wendell Holmes\" haswbstatement:P31=Q5 命中 + wbgetentities 回读；P569 两值冲突已如实记录、P570/P106/P108/P244/P214/P227"
+        },
+        {
+          "locator": "GND 140428275 (d-nb.info/gnd/140428275)",
+          "note": "逐条实调：DNB SRU（PER=Wendell Holmes，numberOfRecords=5，本条为其一）；100/400 四条变体/548/550/678"
+        }
+      ],
+      "canonical_name": "John Wendell Holmes",
+      "distinguishing_basis": "姓氏同为 Holmes、中名同为 Wendell，靠首名 John 与生卒年 1910-1988 分开。**风险点在 GND 的倒装变体形**：本人登记有「Wendell Holmes, John $d1910-1988」，目标人物登记有「Wendell Holmes, Oliver $d1841-1935」，父亲登记有「Wendell Holmes, Oliver $d1809-1894」，档案学家登记有「Wendell Holmes, Oliver $d1902-1981」——**GND 中「Wendell Holmes, X」这一形态由至少四个人共用**，凡按该倒装形检索或按「Wendell Holmes」二词检索的路径会一并召回。本轮 GND SRU（PER=Wendell Holmes）返回的 5 条中他排在首位，**是实际发生的召回而非假想**。题材（外交/政治学）与目标人物的法理学有边缘相邻（国际法、公共事务），但重叠度低。",
+      "evidence_level": "high",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "外交实务与国际关系分析",
+        "政治学写作与教学"
+      ],
+      "label": "L",
+      "occupation_or_role": "加拿大外交官、政治学者、国际关系学者",
+      "professional_background": "1910-06-18（Wikidata Q1167295 的 P569 登记两个 day 精度值 1910-06-18 与 1910-06-10，**二者冲突，本条如实并列不择一**；GND 140428275 的 548 $a10.06.1910-13.08.1988 支持 06-10 一读）– 1988-08-13。Wikidata Q1167295 P106 作 diplomat / political scientist / international relations scholar；P108 雇主 University of Toronto。GND **140428275**：100 作「Holmes, John W. $d1910-1988」，400 变体含 **「Holmes, John Wendell $d1910-1988」「Wendell Holmes, John $d1910-1988」**「Holmes, J. W.」「Holmes, John」；550 特征职业 Politologe；678 传记注「Kanad. Politologe」。LoC 规范档 n50036400 与 VIAF 109036151 出自 Wikidata 的 P244/P214 声明，本轮未单独回读（VIAF 全站 403）。",
+      "subject_uid": "holmes-john-wendell-1910"
+    },
+    {
+      "application_scenarios": [
+        "同名门排除：中名承载型，姓氏为 Tisdale，仅 GND 有记录"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "GND 1315941864 (d-nb.info/gnd/1315941864)",
+          "note": "逐条实调：DNB SRU（query=PER=Wendell Holmes，numberOfRecords=5，本条为其一）；100/400（含 $4navo 完整姓名形）/548"
+        },
+        {
+          "locator": "LCCN nr2004038251",
+          "note": "逐条实调：id.loc.gov suggest2?q=Tisdale, Wendell Holmes&rdftype=PersonalName（count=1，hits=1）；marcKey、三条 variantLabels、两条 670 来源注（含 OCLC 的 Wendall 讹写形）、birthdates=1892"
+        }
+      ],
+      "canonical_name": "Wendell Holmes Tisdale",
+      "distinguishing_basis": "姓氏不同（Tisdale vs Holmes），**但「Wendell Holmes」二词完整且顺序一致地构成其名与中名**，凡以「Wendell Holmes」为子串或前缀的检索都会召回他——本轮 GND SRU（PER=Wendell Holmes）返回的 5 条、LoC suggest2（q=Tisdale, Wendell Holmes）返回的 1 条都实际召回了他。生年 1892 与目标人物（生 1841）不重叠，但其在世期与目标人物晚年重叠，年代过滤不能可靠排除。题材（植物病理学）与目标人物无重叠，污染风险低。**值得单列的理由是它演示了两个检索式方向问题**：(1) 按姓氏 Holmes 检索（LoC/GND 的 `PER=Holmes, *`、`q=Holmes, *`）**永远看不见他**，只有按「Wendell Holmes」二词或按其真实姓氏 Tisdale 检索才会出现——中名承载型同名者需要一条**与主检索式方向不同**的额外查询才能被发现；(2) 其 LoC 670 注中 OCLC 记录的名形是**拼错的「Tisdale, Wendall Holmes」**，按正确拼写「Wendell」做精确匹配的去重逻辑**看不见那一条**，属拼写变体型漏网。",
+      "evidence_level": "medium",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "查不到"
+      ],
+      "label": "M",
+      "occupation_or_role": "查不到——GND 记录中无职业字段",
+      "professional_background": "生于 1892，卒年**查不到**（GND 1315941864 的 548 字段作 $a1892- $4datl，只登记 dateOfBirth；LoC nr2004038251 的 birthdates 亦只有 1892）。GND 100 作「Tisdale, W. H. $d1892-」，400 变体两条：「Tisdale, W.H. $d1892-」与 **「Tisdale, Wendell Holmes $d1892- $4navo（FullerFormOfNameOfThePerson，完整姓名形）」**——即「Wendell Holmes」是其名与中名，姓氏为 Tisdale。GND 无 550 职业、无 678 传记注。**LoC 有独立规范档 nr2004038251**，标目作「Tisdale, W. H. (Wendell Holmes), 1892-」，marcKey `1001 $aTisdale, W. H.$q(Wendell Holmes),$d1892-`，变体形含「Tisdale, Wendell Holmes, 1892-」与「Tisdale, W. H. (Wendell Holmes), b. 1892」；670 来源注两条：「found : Smuts of wheat and rye and their control, 1927: p. 1 (W. H. Tisdale)」与「found : OCLC, Dec. 3, 2004 (hdg.: Tisdale, W. H. (Wendell Holmes), 1892-; Tisdale, W. H.; **Tisdale, Wendall Holmes**; usage: W. H. Tisdale)」——**注意 OCLC 那条里「Wendall」是拼写讹变形，按正确拼写 Wendell 检索不会召回它**。由 1927 年小麦黑穗病著作可知其为植物病理学者。Wikidata 中未找到可对应的记录。VIAF 无法核（全站 403）。",
+      "subject_uid": "tisdale-wendell-holmes-1892"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪美国南方史学史的辨识对象",
+        "同名门排除：中名承载型，姓氏为 Stephenson"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q52158618",
+          "note": "逐条实调：CirrusSearch inlabel:\"Wendell Holmes\" haswbstatement:P31=Q5 命中 + wbgetentities props=claims 复核 P569/P570 precision=9（年精度）"
+        },
+        {
+          "locator": "LCCN n85239091",
+          "note": "逐条实调：id.loc.gov suggest2?q=Stephenson, Wendell Holmes&rdftype=PersonalName（count=1，hits=1）；标目形「Stephenson, Wendell Holmes, 1899-1970」"
+        }
+      ],
+      "canonical_name": "Wendell Holmes Stephenson",
+      "distinguishing_basis": "姓氏不同（Stephenson vs Holmes），**「Wendell Holmes」二词完整且顺序一致地构成其名与中名**，按该二词检索会召回——本轮 Wikidata CirrusSearch（inlabel:\"Wendell Holmes\"）14 条中含他。生卒年 1899-1970 与目标人物不重叠。**风险点在题材而非姓名**：他是历史学教授且著述涉及 19 世纪美国史，其作品与研究目标人物的史学文献在同一批检索结果中出现的概率不低；但因姓氏不同，只要检索式要求姓氏为 Holmes 就能排除，**属可用廉价规则排除的一类**。",
+      "evidence_level": "medium",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "美国史研究与史学史写作",
+        "史料编纂"
+      ],
+      "label": "N",
+      "occupation_or_role": "美国历史学教授、史学著述者",
+      "professional_background": "1899 – 1970（Wikidata Q52158618 的 P569/P570 **均为年精度**：SPARQL/wbgetentities 渲染出的 1899-01-01 与 1970-01-01 是年精度占位，非真实日期，已复核 precision 字段）。Wikidata 描述作「American professor of history」，P106 作 historian / writer；P734 姓氏 Stephenson、P735 名字含 Wendell。**LoC 规范档 n85239091 已单独回读确认**，标目形作「Stephenson, Wendell Holmes, 1899-1970」（suggest2?q=Stephenson, Wendell Holmes，count=1/hits=1）——**该标目把 1899-1970 两个年份写死，与 Wikidata 的年精度声明独立吻合，故本条生卒年不是单库孤证**。VIAF 51816284 出自 Wikidata P214 声明，本轮未回读（全站 403）。GND 中未找到对应记录（PER=Wendell Holmes 的 5 条、PER=Holmes, Wendell 的 4 条中均无；正对照 PER=Shakespeare, William → 173 条）。",
+      "subject_uid": "stephenson-wendell-holmes-1899"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪美国植物分类学文献的辨识对象",
+        "同名门排除：中名承载型，姓氏为 Camp"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q21506896",
+          "note": "逐条实调：CirrusSearch inlabel:\"Wendell Holmes\" haswbstatement:P31=Q5 命中 + wbgetentities props=labels|aliases|claims 复核 P569/P570 precision=9"
+        },
+        {
+          "locator": "LCCN no99034729",
+          "note": "逐条实调：id.loc.gov suggest2?q=Camp, Wendell Holmes&rdftype=PersonalName（count=1，hits=1）；标目形「Camp, W. H. (Wendell Holmes), 1904-1963」"
+        }
+      ],
+      "canonical_name": "Wendell Holmes Camp",
+      "distinguishing_basis": "姓氏不同（Camp vs Holmes），生卒年 1904-1963 与目标人物不重叠，题材（植物学）无重叠。**污染风险为本清单最低一档**；按「Wendell Holmes」二词检索会召回（本轮 Wikidata CirrusSearch 14 条中含他），但只要检索式要求姓氏为 Holmes 即可排除。",
+      "evidence_level": "medium",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "植物分类学研究与命名"
+      ],
+      "label": "O",
+      "occupation_or_role": "美国植物学家、分类学者、大学教师",
+      "professional_background": "1904 – 1963（Wikidata Q21506896 的 P569/P570 **均为年精度**，已复核）。英文别名含「W. H. Camp」「Wendell H. Camp」「Red Camp」「Wendell Holmes (Red) Camp」及植物学作者缩写「Camp」。P106 作 botanist / taxonomist；P734 姓氏 Camp、P735 名字含 Wendell。**LoC 规范档 no99034729 已单独回读确认**，标目形作「Camp, W. H. (Wendell Holmes), 1904-1963」（suggest2?q=Camp, Wendell Holmes，count=1/hits=1）——**「Wendell Holmes」以 $q 补名形式写在标目里，与 Wikidata 的 1904/1963 独立吻合**。VIAF 29164168 出自 Wikidata P214 声明，本轮未回读（全站 403）。GND 中未找到对应记录（正对照见前条）。",
+      "subject_uid": "camp-wendell-holmes-1904"
+    },
+    {
+      "application_scenarios": [
+        "同名门排除：中名承载型，姓氏为 Cotter，仅 Wikidata 有记录、书目库中无著作"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q75634613",
+          "note": "逐条实调：CirrusSearch 命中 + wbgetentities props=labels|aliases|claims 复核；P569 precision=11、P735 三项、P22；该实体无 VIAF/LCCN/GND 声明"
+        }
+      ],
+      "canonical_name": "Oliver Wendell Holmes Cotter",
+      "distinguishing_basis": "姓氏不同（Cotter vs Holmes），**但「Oliver Wendell Holmes」三词完整、顺序一致地构成其名与中名**，是本清单中除 Dwight Oliver Wendell Holmes 外第二个完整承载目标人物全名的人。本轮 Wikidata CirrusSearch（inlabel:\"Oliver Wendell Holmes\" haswbstatement:P31=Q5）返回的 7 名真人中含他，**是实际发生的召回**。生年 1879 落在目标人物在世期内，**年代过滤不能排除他**。**书目污染风险很低**——LoC 与 GND 都查不到他，说明其名下无编目著作，不会以作者身份进入语料；但按人名前缀或子串检索时会被召回。仅 Wikidata 一处来源，证据强度低于本清单多库互证者。",
+      "evidence_level": "low",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "查不到"
+      ],
+      "label": "P",
+      "occupation_or_role": "查不到——Wikidata 未登记职业字段，描述仅作「(born 1879)」",
+      "professional_background": "生于 1879-09-16（Wikidata Q75634613 的 P569，day 精度）；卒年**查不到**（无 P570）。Wikidata 描述仅作「(born 1879)」，**无 P106 职业、无 P214/P244/P227 标识符**；P735 名字登记为 Oliver、Wendell、Holmes 三项（即「Holmes」在此是名字成分而非姓氏），P22 父亲=Q75634594。**姓氏为 Cotter，「Oliver Wendell Holmes」完整构成其名与中名。** LoC、GND 中均**查不到**对应记录，两处「0」均带正对照：LoC suggest2（q=Cotter, Oliver Wendell Holmes，rdftype=PersonalName）count=0/hits=0，而同式查 q=Holmes, Oliver Wendell 返回 3 条含父子二人；GND SRU（PER=Wendell Holmes）5 条中无此人，而同式确实召回了另一位中名承载者 Tisdale, Wendell Holmes（GND 1315941864）——**同一条查询式能看见中名承载者**。VIAF 无法核（全站 403）。",
+      "subject_uid": "cotter-oliver-wendell-holmes-1879"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪美国地球物理学文献的辨识对象",
+        "同名门排除：中名承载型，姓氏为 Gish"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q113623398",
+          "note": "逐条实调：CirrusSearch inlabel:\"Oliver Holmes\" haswbstatement:P31=Q5 命中 + wbgetentities props=claims 复核 P569/P570 precision=9"
+        },
+        {
+          "locator": "LCCN no2004019602",
+          "note": "逐条实调：id.loc.gov suggest2?q=Gish, Oliver Holmes&rdftype=PersonalName（count=1，hits=1）；marcKey、variantLabel「Gish, Oliver Holmes」、两条 670 来源注；**无生卒年字段**，故 Wikidata 的 1883–1987 仍是孤证"
+        }
+      ],
+      "canonical_name": "Oliver Holmes Gish",
+      "distinguishing_basis": "姓氏不同（Gish vs Holmes），题材（地球物理）无重叠。「Oliver Holmes」二词完整构成其名与中名，按该二词做子串检索会召回；因目标人物的 Wikidata 英文别名中恰有一条纯「Oliver Holmes」，**二者在「Oliver Holmes」这一串上直接相撞**，且 LoC 把「Gish, Oliver Holmes」立为正式变体形，该串在 LCNAF 中确实可检索。生年 1883 落在目标人物在世期内，年代过滤不能可靠排除。**与前一版本的更正**：本条初稿写「LoC 中未找到对应记录」，实调 suggest2?q=Gish, Oliver Holmes 后证伪——LoC 有 no2004019602，故其**确有编目著作进入书目库**（1949 年 Watheroo 观测站报告），可以作者身份进入语料；风险由「不会进入语料」上调为「会进入语料但题材可分」。仍属低风险，因题材相距极远且姓氏不同。",
+      "evidence_level": "medium",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "大气电学与地球物理观测研究"
+      ],
+      "label": "Q",
+      "occupation_or_role": "美国地球物理学家、物理学者",
+      "professional_background": "1883 – 1987（Wikidata Q113623398 的 P569/P570 **均为年精度**，已复核；该跨度 104 年异常，四库中无更精确来源可校，**如实照录不作修正**）。P106 作 geophysicist / physicist / researcher。P214=29237193 为 Wikidata 声明，本轮未回读（VIAF 全站 403）。**LoC 有独立规范档 no2004019602**，标目作「Gish, O. H. (Oliver Holmes)」，marcKey `10010$aGish, O. H.$q(Oliver Holmes)`，**variantLabel 作「Gish, Oliver Holmes」**，无 birthdates/deathdates 字段（**即 LoC 侧查不到生卒年，Wikidata 的 1883–1987 无第二处可校**）；670 来源注两条：「found : Earth-current results from Watheroo Observatory, Western Australia, 1932-1942, 1949: t.p. (O.H. Gish)」与「found : OCLC, 1 Mar. 2004 (hdg.: Gish, Oliver Holmes; Gish, O.H.; usage: O.H. Gish, Oliver H. Gish)」——地球物理观测著作与署名习惯由此确认。GND 中未找到对应记录（PER=Holmes, Oliver 6 条与 PER=Wendell Holmes 5 条中均无；正对照 PER=Shakespeare, William → 173 条）。**姓氏为 Gish，「Oliver Holmes」构成其名与中名。**",
+      "subject_uid": "gish-oliver-holmes-1883"
+    },
+    {
+      "application_scenarios": [
+        "第一次世界大战澳大利亚隧道工兵史的辨识对象",
+        "同名门排除：中名承载型，姓氏为 Woodward"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q7087951",
+          "note": "逐条实调：CirrusSearch inlabel:\"Oliver Holmes\" haswbstatement:P31=Q5 命中 + wbgetentities props=labels|aliases|claims 回读；P569/P570 precision=11、P1477 出生名"
+        }
+      ],
+      "canonical_name": "Oliver Holmes Woodward",
+      "distinguishing_basis": "姓氏不同（Woodward vs Holmes），国别为澳大利亚，题材（军事工程/采矿）无重叠。「Oliver Holmes」二词构成其名与中名，与目标人物的 Wikidata 别名「Oliver Holmes」在该串上相撞；且其主标签「Oliver Woodward」不含 Holmes，**只比对主标签的去重逻辑看不见这次撞名**，须读 P1477/别名才发现。生卒 1885-1966 与目标人物在世期大幅重叠，年代过滤不能排除。风险等级低。",
+      "evidence_level": "low",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "军事工程与坑道作业",
+        "采矿工程"
+      ],
+      "label": "R",
+      "occupation_or_role": "澳大利亚军人（隧道工兵）、采矿工程师",
+      "professional_background": "1885-10-08 – 1966-08-24（Wikidata Q7087951 的 P569/P570 均为 day 精度）。Wikidata 主标签作「Oliver Woodward」，**英文别名与 P1477 出生名均作「Oliver Holmes Woodward」**（P1477 语言标记 en-au）。P106 作 military personnel / mining engineer；P734 姓氏 Woodward；P27=澳大利亚。P214=92913688 为 Wikidata 声明，本轮未回读（VIAF 全站 403）。LoC、GND 中**查不到**对应记录，两处「0」均带正对照：LoC suggest2（q=Woodward, Oliver Holmes，rdftype=PersonalName）count=0/hits=0，而**同式**查 q=Gish, Oliver Holmes 返回 1 条 no2004019602、q=Holmes, Oliver Wendell 返回 3 条含父子二人——**同一条查询式既能看见中名承载者、也能看见目标人物**；GND SRU（PER=Holmes, Oliver 6 条 / PER=Wendell Holmes 5 条）中无此人，正对照 PER=Shakespeare, William → 173 条且含同名者。",
+      "subject_uid": "woodward-oliver-holmes-1885"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪美国植物病毒学文献的辨识对象",
+        "同名门排除：首名承载型（Francis + Oliver Holmes），且自身存在重复实体"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q21515978",
+          "note": "逐条实调：CirrusSearch inlabel:\"Oliver Holmes\" haswbstatement:P31=Q5 命中 + wbgetentities props=claims 复核；P569 precision=9、P570 precision=11、别名 F.O.Holmes"
+        },
+        {
+          "locator": "Wikidata Q112388104",
+          "note": "逐条实调：同一次 CirrusSearch 与 wbgetentities 回读；P569/P570 均 precision=9、P106=parasitologist/virologist、P214=29190121。与 Q21515978 疑似重复，两实体间无互指声明"
+        }
+      ],
+      "canonical_name": "Francis Oliver Holmes",
+      "distinguishing_basis": "姓氏同为 Holmes，靠首名 Francis 与生卒年（1897/1899-1990）分开，题材（植物病毒学）与目标人物无重叠。**风险点是署名缩写**：其植物学作者缩写为「F.O.Holmes」，而目标人物常见缩写为「O. W. Holmes」/「O.W.H.」——两者不撞；但「Oliver Holmes」二词在其全名中完整出现，按子串检索会召回。**单列的第二个理由是它本身演示了一处判据盲区**：同一个人在 Wikidata 有两条实体、生年相差两年，若消歧流程按「Q 号唯一即人唯一」计数，会把他算成两个不同的同名者，从而虚增同名者总数——本轮如实按一人登记并标注疑似重复。",
+      "evidence_level": "low",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "植物病毒学与病害研究"
+      ],
+      "label": "S",
+      "occupation_or_role": "美国植物学家、植物病毒学者、寄生虫学者",
+      "professional_background": "生卒年**两条 Wikidata 记录彼此冲突，本条如实并列不择一**：Q21515978「Francis Oliver Holmes, U.S. botanist and parasitologist」登记 P569=1899（年精度）、P570=1990-10-12（day 精度），别名「F.O.Holmes」，P106=botanist；Q112388104「Francis Oliver Holmes」登记 P569=1897、P570=1990（均年精度），P106 作 parasitologist 与 virologist，P214=29190121。**二者姓名完全相同、卒年同为 1990、职业相邻，极可能是同一人的两条未合并的 Wikidata 重复实体**，但两实体间无 P31/P460 等互指声明，本轮四库中亦无任何记录写出二者关系，**故只登记「疑似重复、未定」，不断言合并**。LoC、GND 中未找到对应记录（正对照见 Cotter 条）。VIAF 29190121 为 Q112388104 的 P214 声明，本轮未回读（全站 403），**因而无法用 VIAF 簇来判断这两个 Q 号是否指同一人**——这正是 VIAF 不可达造成的实际能力损失之一。LoC 中**查不到**对应记录：suggest2（q=Holmes, Francis Oliver，rdftype=PersonalName）count=0/hits=0，正对照**同式**查 q=Holmes, Oliver Wendell 返回 3 条、q=Gish, Oliver Holmes 返回 1 条，证明查询式本身通。GND 中亦无（PER=Holmes, Oliver 6 条中无；正对照 PER=Shakespeare, William → 173 条）。",
+      "subject_uid": "holmes-francis-oliver-botanist"
+    },
+    {
+      "application_scenarios": [
+        "20 世纪末美国商事组织法教科书文献的辨识对象",
+        "同名门排除：**姓氏 Holmes + 中名 Wendell + 法学职业三者同时重合的唯一一位**"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "LCCN no99018606",
+          "note": "逐条实调：id.loc.gov suggest2?q=Holmes, Wendell&rdftype=PersonalName（count=3，hits=3，本条为其一）；marcKey 与唯一一条 670 来源注为全部依据，无生卒年字段"
+        }
+      ],
+      "canonical_name": "Wendell H. Holmes（路易斯安那州立大学法学院教授）",
+      "distinguishing_basis": "**这是本清单中题材污染风险最高的一位（父亲与档案学家属姓名污染，此人属题材污染）。** 三项关键属性与目标人物同时重合：姓氏 Holmes、中名 Wendell、**职业为法学教授**。目标人物在 GND 118706594 中的特征职业是 Jurist、且曾任哈佛法学院教授——凡以「Holmes + law / jurisprudence / law professor / legal」为条件的主题检索，会同时命中他与目标人物，**年代筛也筛不掉他**：他无生卒年可用，其著作出版于 1999 年可作辅助过滤，但规范档本身不带日期，按标目做匹配时没有任何日期字段可比。这与 Blackstone 轮次的 William T. Blackstone（哲学教授、权利/平等题材）是同一种缺陷形态，但此处**中名也相同**，故比那一例更难分。必须用 LCCN no99018606 硬排除，**不能只靠年代或主题启发式**。另注意其署名可缩为「W. H. Holmes」，与目标人物的「O. W. Holmes」不撞，这是唯一可用的廉价区分点。",
+      "evidence_level": "medium",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "商事组织法教学与教科书写作"
+      ],
+      "label": "T",
+      "occupation_or_role": "美国法学教授（Louisiana State University Law Center），商事组织法著述者",
+      "professional_background": "生卒年**查不到**：LoC no99018606 无 birthdates/deathdates 字段，标目为无日期的「Holmes, Wendell H.」，marcKey `1001 $aHolmes, Wendell H.`。**唯一的 670 来源注**：「found : Business organizations, 1999: t.p. (Wendell H. Holmes, Prof. of Law, Louisiana State University Law Center)」——即职衔（法学教授）与机构（LSU 法律中心）出自 1999 年《Business Organizations》题名页，是该规范档的全部依据。Wikidata 与 GND 中未找到可对应的记录：GND SRU（PER=Holmes, Wendell）4 条与（PER=Wendell Holmes）5 条中均无此人，正对照 PER=Shakespeare, William → 173 条且含同名者，证明查询式本身通。VIAF 无法核（全站 403）。",
+      "subject_uid": "holmes-wendell-h-lc-no99018606"
+    },
+    {
+      "application_scenarios": [
+        "同名门排除：**已证实发生过的机构级人名合并事故，且合并期长达 29 年**",
+        "遗留书目数据清洗：凡 2016 年前采集的「Holmes, Wendell」访问点一律不可信"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "LCCN n87108083（DeprecatedAuthority）",
+          "note": "逐条实调：GET id.loc.gov/authorities/names/n87108083.madsrdf.json（HTTP 200）；@type 含 DeprecatedAuthority、editorialNote 原文、两条 recordInfo 的 recordStatus=new(1987-07-01,dlc) 与 deprecated(2016-07-11,ncu) 均为字段实读"
+        },
+        {
+          "locator": "LCCN n2016037583 与 LCCN no2016078290",
+          "note": "逐条实调：id.loc.gov suggest2?q=Holmes, Wendell&rdftype=PersonalName（count=3，hits=3）；两条的 notes 字段均含「[Formerly on undifferentiated name record: n  87108083]」，即拆分关系由 LoC 自身写出，非我推断"
+        }
+      ],
+      "canonical_name": "Holmes, Wendell（LoC 已废止的未分化名称记录 n87108083 及其拆分出的两人）",
+      "distinguishing_basis": "**本条的价值不在于这几个人本身（他们与目标人物题材毫无重叠、风险很低），而在于它是本轮唯一一处「权威库自己承认曾经把多个人混为一谈」的成文证据。** 三点可直接落成判据：(1) **遗留数据不可信**：任何在 2016-07-11 之前采集、或从 2016 年前的书目库继承而来的「Holmes, Wendell」访问点，**按 LoC 自己的记录就指向多于一个人**，不能当作单一身份使用；而「Wendell Holmes」正是目标人物最常见的简称形（其 GND 400 变体形即「Wendell Holmes, Oliver」）。(2) **废止记录仍然可解析**：n87108083 至今返回 HTTP 200 而非 404 或 410，**只在 recordStatus 字段里写着 deprecated**——凡只判断「标识符解析得通吗」而不读 recordStatus 的程序，会把一条已废止的多人记录当成有效身份接受。这是一条现成的静默失败通道。(3) **未分化记录这一机制本身要单独测**：LCNAF 中此类记录不止一条，按姓名检索时它们与正常规范档形态相同，须显式检查 @type 是否含 DeprecatedAuthority、以及注记中是否出现「undifferentiated」字样。**处置建议**：把 n87108083 加入硬排除名单；并对本清单其余各条的 LCCN 逐一回读 recordStatus，本轮已回读的目标人物 n79054782 与父亲 n80032729 均为正常有效记录、未见 deprecated 标记。",
+      "evidence_level": "high",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "查不到（原记录混合多人，无统一能力可言）"
+      ],
+      "label": "U",
+      "occupation_or_role": "多人共用的一条规范档——插画者、音乐人等，具体人数四库中未写明",
+      "professional_background": "**这不是一个人，而是 LCNAF 中一条曾经把多个不同的人合并在同一标目下的「未分化名称记录」（undifferentiated name record）。** LoC **n87108083** 现仍可解析（HTTP 200），其 MADS RDF 的 @type 为 **PersonalName / Variant / DeprecatedAuthority**，variantLabel 作「Holmes, Wendell」，editorialNote 原文：**「[Last identity on undifferentiated record; reported for deletion.]」**；adminMetadata 两条 recordInfo 给出完整生命周期——recordStatus=**new**、recordChangeDate=**1987-07-01**、recordContentSource=dlc；以及 recordStatus=**deprecated**、recordChangeDate=**2016-07-11**、recordContentSource=ncu。即该标目自 1987 年起作为多人共用记录存在了约 29 年，2016 年才废止拆分。拆分出的两条现行记录均带注记「[Formerly on undifferentiated name record: n  87108083]」：(1) **n2016037583「Holmes, Wendell」**——无生卒年，670 注「found : His Jeffersontown, Kentucky, 1966 (dwg. by Wendell Holmes)」，即 1966 年肯塔基地方志的绘图者；另有一条 notfound 注（Ww south, southwest, 20th ed.; Ww Kentucky, 1974）表明编目员查证未果。(2) **no2016078290「Holmes, Wendell, 1943-2015」**——birthdates=1943-12-19、deathdates=2015-06-19，670 三条注明其为 the Holmes Brothers 三重奏的歌手/吉他手/钢琴手，卒于马里兰州 Rosedale。**原记录究竟合并过几个人，四库中没有写出，查不到，不推测。**",
+      "subject_uid": "holmes-wendell-undifferentiated-n87108083"
+    },
+    {
+      "application_scenarios": [
+        "同名门排除：低风险 Oliver Holmes 群，仅 Wikidata 有记录、书目库中无著作"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q7087604 / Q100804924 / Q123643810 / Q76096628 / Q124519370",
+          "note": "逐条实调：CirrusSearch inlabel:\"Oliver Holmes\" haswbstatement:P31=Q5（totalhits=10）命中 + 一次 wbgetentities props=labels|aliases|descriptions|claims 批量回读全部 5 条；P569/P570 的有无与精度均按 claims 实查结果登记，描述文本中的年份未当作声明"
+        }
+      ],
+      "canonical_name": "其余低风险 Oliver Holmes 同名者（合并登记 5 人）",
+      "distinguishing_basis": "5 人均无编目著作进入 LoC/GND 书目规范库，**不会以作者身份进入语料**，故书目层污染风险很低；合并登记而非逐条展开，是因为逐条展开会让清单的注意力从真正的高危项（父亲、档案学家、署 Jr. 的小说作者）上分散。**仍需登记的理由有二**：其一，按「Oliver Holmes」检索时它们会被一并召回，而目标人物的 Wikidata 英文别名恰有一条纯「Oliver Holmes」，**召回集必然混合**；其二，其中 Q123643810 与 Q76096628 是**系谱型条目**（Peerage/家族记录），既无职业也无（声明形式的）生卒年，**任何按属性做的自动判别对它们都返回「不知道」而非「不是」**——按「空值即通过」的默认逻辑会被静默放行，须显式挂起。另注意 Q123643810 的生卒「1777-1825」只写在描述文本里、不在 P569/P570 声明中，**读 claims 的程序看不见它、读 description 的人看得见**，两种读法会得到不同的判断。",
+      "evidence_level": "low",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "查不到（各人职业见 professional_background，与目标人物无能力重叠）"
+      ],
+      "label": "V",
+      "occupation_or_role": "运动员、系谱记录人物等，均与目标人物无题材重叠",
+      "professional_background": "本条合并登记 5 名经 Wikidata CirrusSearch（inlabel:\"Oliver Holmes\" haswbstatement:P31=Q5，共 10 条真人）召回、但风险显著低于前列各条者，逐条如实照录：(1) **Q7087604「Oliver Holmes」**——英格兰橄榄球联盟球员，P569=1992-08-07（day 精度）、无 P570、P106=rugby league player、P27=英国。(2) **Q100804924「Oliver Holmes」**——大学篮球运动员（2003–2006，North Carolina-Asheville），**无 P569/P570**，P106=basketball player、P69=Q7895940。(3) **Q123643810「Oliver Holmes」**——描述作「2 Nov 1777 - 6 Jul 1825」，**该生卒仅存在于实体描述文本中、未登记为 P569/P570 声明**（本轮 wbgetentities props=claims 实查确认无这两个属性），P22 父=Q123643612、P40 子=Q123643809、P39=Q5589790；系谱型条目。(4) **Q76096628「Sir Hugh Oliver Holmes」**——描述作「Peerage person ID=528163」，**无 P569/P570/P106**，P40 子=Q75958019；系谱型条目，「Oliver」为中名。(5) **Q124519370「Oliver Mejias」**——委内瑞拉棒球运动员，别名与 P1477 出生名作「Oliver Holmes Mejias」（西班牙语），P569=1976-09-21、P106=baseball player、P27=委内瑞拉；**姓氏为 Mejias，「Oliver Holmes」为其名与中名**。以上 5 人在 LoC 与 GND 中均**查不到**对应记录（LoC suggest2 q=Holmes, Oliver 的 7 条 PersonalName 结果中无；GND PER=Holmes, Oliver 的 6 条中无），两处「0」均带正对照（LoC 同式返回父子二人共 3 条；GND 同式的正对照 PER=Shakespeare, William 返回 173 条含同名者）。VIAF 无法核（全站 403）。",
+      "subject_uid": "holmes-oliver-lowrisk-cluster-wikidata"
+    },
+    {
+      "application_scenarios": [
+        "同名门排除：Wendell Holmes 中名承载群，多为系谱型条目",
+        "同名门排除：Q76157467 与 Q112526637 两条需显式挂起"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q75658060 / Q76157467 / Q102147706 / Q112526637",
+          "note": "逐条实调：CirrusSearch inlabel:\"Wendell Holmes\" haswbstatement:P31=Q5（totalhits=14）命中 + 一次 wbgetentities props=labels|aliases|descriptions|claims 批量回读全部 4 条；属性的有无按 claims 实查结果登记"
+        }
+      ],
+      "canonical_name": "其余 Wendell Holmes 中名承载者（合并登记 3 人）",
+      "distinguishing_basis": "多数靠姓氏（McCulloch / Mills）即可排除，书目库中无著作、不会以作者身份进入语料。**两条需要单独注意**：(1) **Q76157467「Wendell Holmes」**——姓氏就是 Holmes、姓名恰是目标人物最常见的简称形、且**无生卒年、无职业、无任何外部标识符**，属「按属性判别只能返回不知道」的一类，与 GND 1233239910 同形，须显式挂起而非静默放行；(2) **Q112526637「Wendell H. McCulloch」的 P106 是 jurist**——与目标人物的 GND 特征职业同为法学，属**题材重叠型**，虽姓氏不同，但按「Wendell Holmes + 法学」这类主题检索式会被召回，不能只靠题材启发式排除，须用姓氏或 LCCN n82054332 硬判。",
+      "evidence_level": "low",
+      "identity_category": "namesake",
+      "key_capabilities": [
+        "查不到（各人职业见 professional_background）"
+      ],
+      "label": "W",
+      "occupation_or_role": "系谱记录人物与学位获得者，均与目标人物无题材重叠",
+      "professional_background": "本条合并登记 3 名经 Wikidata CirrusSearch（inlabel:\"Wendell Holmes\" haswbstatement:P31=Q5，共 14 条真人）召回的中名承载者，逐条如实照录：(1) **Q75658060「Wendell Holmes McCulloch」**——描述作「Peerage person ID=276815」，**无 P569/P570/P106**，P22 父=Q75658030、P40 子=Q75658063；系谱型条目，姓氏为 McCulloch。(2) **Q76157467「Wendell Holmes」**——描述作「Peerage person ID=569940」，**无 P569/P570/P106**，P734 姓氏=Holmes、P40 子=Q76157468；系谱型条目，**姓名与目标人物的常用简称形完全相同且无任何属性可用于判别**。(3) **Q102147706「Wendell Holmes Mills, Jr.」**——描述作「Ph.D. University of Michigan 1976」，**无 P569/P570**，P106=Q1650915、P69=Q230492；姓氏为 Mills，**且其姓名带「Jr.」后缀**。以上 3 人在 **GND** 中**查不到**对应记录（PER=Holmes, Wendell 的 4 条与 PER=Wendell Holmes 的 5 条中均无；正对照 PER=Shakespeare, William → 173 条含同名者）。**LoC 侧不能写「查不到」，只能写「对应关系未定」**：LoC suggest2（q=Holmes, Wendell）确实返回 3 条人名规范档（n2016037583「Holmes, Wendell」无生卒年、no2016078290「Holmes, Wendell, 1943-2015」、no99018606「Holmes, Wendell H.」），**但这 3 条与上述 3 个 Wikidata 实体之间没有任何共享标识符**（三个 Wikidata 实体均无 P244 声明，三条 LoC 记录均无 Wikidata 链），**故无法判定谁与谁对应，也无法判定它们是否为同一批人**——尤其 Q76157467「Wendell Holmes」与 n2016037583「Holmes, Wendell」二者都无生卒年、都只有姓名，**既不能合并也不能排除**。按「两条独立证据否则不写」的规矩，此处只登记「未定」。另有 **Q112526637「Wendell H. McCulloch」**（1921–2016，P106=jurist、P244=n82054332、P214=2554695）经同一次检索召回，**职业为 jurist 与目标人物同域**，姓氏为 McCulloch、中名缩写 H.，靠姓氏与生卒年可分开。VIAF 无法核（全站 403）。",
+      "subject_uid": "holmes-wendell-middlename-cluster-wikidata"
+    }
+  ],
+  "generated_at": "2026-08-11T06:59:50Z",
+  "normalized_name": "oliverwendellholmesjr",
+  "resolution": "multiple",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "blocked",
+  "target_name": "Oliver Wendell Holmes Jr."
+}

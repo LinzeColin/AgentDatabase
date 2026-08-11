@@ -159,7 +159,16 @@ def criteria_gap(target_dir: pathlib.Path, diff_named: list, same_named: list):
     except Exception:
         return crit, list(diff_named), list(same_named)
     norm = {_norm(x) for x in (o.get("excluded_names") or [])}
-    missing = [n for n in diff_named if _norm(n) not in norm]
+    # ★★★ 第三档（Holmes #170 逼出来的）：**有些名字不能写进 excluded_names，
+    #   因为那个字符串同时是目标本人的署名形式**。
+    #   实例：西部小说作者署 `Oliver W. Holmes Jr.`，而目标本人常署
+    #   `Oliver W. Holmes` / `O. W. Holmes`——把它排除掉就是**丢真材料**。
+    #   这一档要的不是「被排除」，而是**逐条点名 + 有处置政策**，
+    #   与「字面完全相同」那一档同理。**不点名照样红。**
+    unex = {_norm(x) for x in (o.get("unexcludable_names") or [])}
+    policy0 = str(o.get("identical_name_policy") or "").strip()
+    missing = [n for n in diff_named
+               if _norm(n) not in norm and not (_norm(n) in unex and policy0)]
     # 字面同名那一档：要的是**写明怎么分**，不是出现在排除名单里
     policy = str(o.get("identical_name_policy") or "").strip()
     unpolicied = [] if policy else list(same_named)
@@ -177,10 +186,23 @@ def evaluate(target_dir: pathlib.Path, target_name: str, mod) -> dict:
                 "字面同名未定政策": [], "出处": str(src)}
     same, diff = split_identical(target_name, confused)
     crit, missing, unpolicied = criteria_gap(target_dir, diff, same)
+    # ★ 三档各自的条数要现算——**第一版把三档合报成「都靠 excluded_names」，
+    #   同一个工具、同一类错误我犯了第二次**（[[gates-cover-json-not-the-prose-users-read]]）。
+    _unex, _pol = set(), ""
+    if crit:
+        try:
+            _o = json.loads(pathlib.Path(crit).read_text(encoding="utf-8"))
+            _unex = {_norm(x) for x in (_o.get("unexcludable_names") or [])}
+            _pol = str(_o.get("identical_name_policy") or "").strip()
+        except Exception:
+            pass
+    n_unex = sum(1 for n in diff if _norm(n) in _unex and _pol)
+    n_excl = len(diff) - n_unex - len(missing)
     bad = bool(missing) or bool(unpolicied)
     return {"状态": "fail" if bad else "ok",
             "候选数": len(names), "分不开": len(confused),
             "★ 其中字面完全相同": len(same),
+            "靠 excluded_names": n_excl, "靠 unexcludable_names＋政策": n_unex,
             "分不开的是": confused, "未覆盖": missing,
             "字面同名未定政策": unpolicied,
             "criteria": str(crit) if crit else None, "出处": str(src)}
@@ -254,6 +276,22 @@ def self_test() -> int:
         r = evaluate(d, "X Y", mod)
         chk("⑤ 无候选名单 → skip（不是 ok）", r["状态"], "skip")
 
+        # ★★★ ⑧ 第三档：声明为「不可用字符串排除」+ 有政策 → 放行；
+        #   **只声明、不写政策 → 仍必须红**（反对照）。
+        d = _fixture(tmp / "h", "William Blackstone",
+                     ["William Blackstone", "William Seymour Blackstone"],
+                     excluded=[])
+        crit = d / "namesake-criteria.json"
+        o = json.loads(crit.read_text(encoding="utf-8"))
+        o["unexcludable_names"] = ["William Seymour Blackstone"]
+        crit.write_text(json.dumps(o, ensure_ascii=False), encoding="utf-8")
+        r = evaluate(d, "William Blackstone", mod)
+        chk("⑧ 只声明不可排除、没有政策 → 仍 fail", r["状态"], "fail")
+        o["identical_name_policy"] = "靠 LCCN 与中名硬判"
+        crit.write_text(json.dumps(o, ensure_ascii=False), encoding="utf-8")
+        r = evaluate(d, "William Blackstone", mod)
+        chk("⑧ 声明 + 政策齐 → ok", r["状态"], "ok")
+
         # ⑥ ★ 名单里**两条同字面**：第一条是目标自己，第二条是真同名者，必须算
         d = _fixture(tmp / "f", "William Blackstone",
                      ["William Blackstone", "William Blackstone"])
@@ -320,11 +358,15 @@ def main() -> int:
         return 0
     if r["状态"] == "ok":
         same = r.get("★ 其中字面完全相同", 0)
-        by_list = r["分不开"] - same
         print("✓ 同名可分性：%d 个候选里 **%d 条姓名分不开**，均已有处置：\n"
               "  · %d 条靠 excluded_names 排除\n"
-              "  · %d 条**与目标字面完全相同**，靠 identical_name_policy 写明的依据分开\n"
-              "  criteria：%s" % (r["候选数"], r["分不开"], by_list, same, r["criteria"]))
+              "  · %d 条**声明为不可用字符串排除**（那个串同时是目标本人的署名形式），"
+              "靠 identical_name_policy 的硬判据分开\n"
+              "  · %d 条**与目标字面完全相同**，同样靠 identical_name_policy\n"
+              "  criteria：%s" % (r["候选数"], r["分不开"],
+                                 r.get("靠 excluded_names", 0),
+                                 r.get("靠 unexcludable_names＋政策", 0),
+                                 same, r["criteria"]))
         return 0
     n_bad = len(r["未覆盖"]) + len(r["字面同名未定政策"])
     print("✗ 同名可分性 %d 条问题：\n" % n_bad)

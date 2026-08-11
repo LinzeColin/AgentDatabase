@@ -1,0 +1,57 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Oliver Wendell Holmes Jr.；historical；美国法学家、联邦最高法院大法官、马萨诸塞州最高法院首席法官、哈佛法学院教授、法理学著述者。\n   专业背景：1841-03-08 – 1935-03-06。生卒日精确到日，三库互证：Wikidata Q360574 的 P569/P570 均为 day 精度（precision=11）；LoC n79054782 的 birthdates=1841-03-08、deathdates=1935-03-06；GND 118706594 的 548 字段 $a08.03.1841-06.03.1935 $4datx（Exakte Lebensdaten）。出生地 Boston (Mass.)（LoC n79054782 birthplaces 字段）。职业：LoC n79054782 occupations 作 Judges；GND 118706594 的 550 字段作 Jurist（berc 特征职业）、Richter、Rechtstheoretiker、Autor、Hochschullehrer、Herausgeber；Wikidata Q360574 P106 作 jurist / judge / lawyer / university teacher / politician / philosopher / editor / author。任职与教育（Wikidata Q360574）：P39=Associate Justice of the Supreme Court of the United States (Q11144)、P108 雇主=Harvard University (Q13371)、P69 就学于 Harvard Law School (Q49122) 与 Harvard College (Q49123)。代表作 P800=The Path of the Law (Q55889364, 1897)。GND 118706594 的 678 传记注原文写出父子关系与履历：「Sohn des Schriftstellers und Arztes Oliver Wendell Holmes Sr. (1809-1894); 1870 Herausgeber der Zeitschrift \"American Law Review\"; 1882 Professor für Rechtswissenschaft in Harvard; 1902-1932 Richter am Obersten Gerichtshof der Vereinigten Staaten」。★ 标目形态（本轮最要紧的观察）：LoC n79054782 的现行标目是「Holmes, Oliver Wendell, Jr., 1841-1935」（marcKey 1001 $aHolmes, Oliver Wendell,$cJr.,$d1841-1935），**但其 MADS 的 hasEarlierEstablishedForm 为「Holmes, Oliver Wendell, 1841-1935」——即他此前的既定标目是不带 Jr. 的裸名形**，该形同时也登记为 variantLabel（出现两次）。而 **GND 118706594 的 100 字段至今作「Holmes, Oliver Wendell $d1841-1935」，根本不带 Jr.**，Jr. 只作为 400 变体形「Holmes Jr., Oliver Wendell $d1841-1935」存在。Wikidata Q360574 的英文主标签同样是裸名「Oliver Wendell Holmes」，其英文别名含「Oliver Holmes」「Oliver W. Holmes Jr.」等 10 条。VIAF ID 34517870 出自 Wikidata Q360574 的 P214 声明与本轮**未能回读 VIAF 本体**（见 authoritative_sources 说明），故按第三方声明登记、不作 VIAF 已核实的断言。。\n   应用价值：场景：美国普通法法理学与司法意见书写作；宪法第一修正案、言论自由与「明显而即刻的危险」标准的推理；法律现实主义 / 法律的经验主义基础（The Path of the Law、The Common Law）；关键能力：把法律从形式逻辑推演改述为经验与政策后果的判断（「法律的生命不在逻辑而在经验」式论证）；司法意见与异议意见的凝练写作；法律史与法教义学的体系化重构。\n   区分依据：Wikidata Q360574 ∧ LCCN n79054782 ∧ GND 118706594 三者互证，且互证关系有**库内直接链接**而非我跨库推断：GND 118706594 的 024 字段直接写出 $an79054782 $2lccn。**与父亲的分开方式是本条的全部难点**，见 holmes-oliver-wendell-sr-1809 条；此处只记要点：四库中**没有任何一库把 Jr./Sr. 同时用在父子二人身上**——LoC 只给儿子加 $cJr. 而父亲的标目是裸名，GND 父子两条 100 字段是**逐字节相同的「Holmes, Oliver Wendell」，仅 $d 日期不同**。可用于硬分开的判据只有三样：(1) 生卒年 1841-1935 vs 1809-1894；(2) 标识符 n79054782 / 118706594 / Q360574 vs n80032729 / 118706608 / Q319829；(3) 职业档 Judges·Jurist·Richter vs Physicians·Poets·Schriftsteller·Arzt。**姓名字符串本身在四库中没有一处能可靠分开父子**。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "美国普通法法理学与司法意见书写作",
+        "宪法第一修正案、言论自由与「明显而即刻的危险」标准的推理",
+        "法律现实主义 / 法律的经验主义基础（The Path of the Law、The Common Law）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q360574",
+          "note": "逐条实调：action=query&list=search 的 CirrusSearch（inlabel:\"Oliver Wendell Holmes\" haswbstatement:P31=Q5）命中 + wbgetentities props=labels|aliases|descriptions|claims 回读；P569/P570 precision=11、P106/P108/P69/P39/P800/P22 与 P214/P244/P227 三标识符声明"
+        },
+        {
+          "locator": "LCCN n79054782 (id.loc.gov/authorities/names/n79054782)",
+          "note": "逐条实调：id.loc.gov/authorities/names/suggest2?q=Holmes, Oliver Wendell&rdftype=PersonalName（作品索引 /search/ 未使用）；另回读 n79054782.madsrdf.json 取得 hasEarlierEstablishedForm / hasVariant 三条；670 来源注含 LCCN 2007000976"
+        },
+        {
+          "locator": "GND 118706594 (d-nb.info/gnd/118706594)",
+          "note": "逐条实调：services.dnb.de/sru/authorities SRU（query=PER=Holmes, Oliver，recordSchema=MARC21-xml）；100/400/548/550/670/678 与 024 中的 lccn 交叉链"
+        },
+        {
+          "locator": "VIAF 34517870 —— **本轮取不到，未回读**",
+          "note": "该 VIAF ID 仅出自 Wikidata Q360574 的 P214 声明，**不是我从 VIAF 读到的**。viaf.org 本轮全站不可达：POST /api/search、POST /api/cluster-record、legacy /viaf/search、/viaf/AutoSuggest、以及站点根 / 全部返回 HTTP 403 与同一张 5482 字节 Cloudflare「Sorry, you have been blocked」页。正对照：同一台机器同一时刻 GET id.loc.gov/authorities/names/n79054782.json 返回 200，且 GET viaf.org/viaf/96994048/viaf.json（Shakespeare，已知存在的公开簇）同样 403 —— 证明这是**主机级 bot 墙**，与我的查询式和目标人物均无关。按约束「不绕任何访问控制」未作任何规避尝试。"
+        }
+      ],
+      "canonical_name": "Oliver Wendell Holmes Jr.",
+      "distinguishing_basis": "Wikidata Q360574 ∧ LCCN n79054782 ∧ GND 118706594 三者互证，且互证关系有**库内直接链接**而非我跨库推断：GND 118706594 的 024 字段直接写出 $an79054782 $2lccn。**与父亲的分开方式是本条的全部难点**，见 holmes-oliver-wendell-sr-1809 条；此处只记要点：四库中**没有任何一库把 Jr./Sr. 同时用在父子二人身上**——LoC 只给儿子加 $cJr. 而父亲的标目是裸名，GND 父子两条 100 字段是**逐字节相同的「Holmes, Oliver Wendell」，仅 $d 日期不同**。可用于硬分开的判据只有三样：(1) 生卒年 1841-1935 vs 1809-1894；(2) 标识符 n79054782 / 118706594 / Q360574 vs n80032729 / 118706608 / Q319829；(3) 职业档 Judges·Jurist·Richter vs Physicians·Poets·Schriftsteller·Arzt。**姓名字符串本身在四库中没有一处能可靠分开父子**。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "把法律从形式逻辑推演改述为经验与政策后果的判断（「法律的生命不在逻辑而在经验」式论证）",
+        "司法意见与异议意见的凝练写作",
+        "法律史与法教义学的体系化重构"
+      ],
+      "label": "A",
+      "occupation_or_role": "美国法学家、联邦最高法院大法官、马萨诸塞州最高法院首席法官、哈佛法学院教授、法理学著述者",
+      "professional_background": "1841-03-08 – 1935-03-06。生卒日精确到日，三库互证：Wikidata Q360574 的 P569/P570 均为 day 精度（precision=11）；LoC n79054782 的 birthdates=1841-03-08、deathdates=1935-03-06；GND 118706594 的 548 字段 $a08.03.1841-06.03.1935 $4datx（Exakte Lebensdaten）。出生地 Boston (Mass.)（LoC n79054782 birthplaces 字段）。职业：LoC n79054782 occupations 作 Judges；GND 118706594 的 550 字段作 Jurist（berc 特征职业）、Richter、Rechtstheoretiker、Autor、Hochschullehrer、Herausgeber；Wikidata Q360574 P106 作 jurist / judge / lawyer / university teacher / politician / philosopher / editor / author。任职与教育（Wikidata Q360574）：P39=Associate Justice of the Supreme Court of the United States (Q11144)、P108 雇主=Harvard University (Q13371)、P69 就学于 Harvard Law School (Q49122) 与 Harvard College (Q49123)。代表作 P800=The Path of the Law (Q55889364, 1897)。GND 118706594 的 678 传记注原文写出父子关系与履历：「Sohn des Schriftstellers und Arztes Oliver Wendell Holmes Sr. (1809-1894); 1870 Herausgeber der Zeitschrift \"American Law Review\"; 1882 Professor für Rechtswissenschaft in Harvard; 1902-1932 Richter am Obersten Gerichtshof der Vereinigten Staaten」。★ 标目形态（本轮最要紧的观察）：LoC n79054782 的现行标目是「Holmes, Oliver Wendell, Jr., 1841-1935」（marcKey 1001 $aHolmes, Oliver Wendell,$cJr.,$d1841-1935），**但其 MADS 的 hasEarlierEstablishedForm 为「Holmes, Oliver Wendell, 1841-1935」——即他此前的既定标目是不带 Jr. 的裸名形**，该形同时也登记为 variantLabel（出现两次）。而 **GND 118706594 的 100 字段至今作「Holmes, Oliver Wendell $d1841-1935」，根本不带 Jr.**，Jr. 只作为 400 变体形「Holmes Jr., Oliver Wendell $d1841-1935」存在。Wikidata Q360574 的英文主标签同样是裸名「Oliver Wendell Holmes」，其英文别名含「Oliver Holmes」「Oliver W. Holmes Jr.」等 10 条。VIAF ID 34517870 出自 Wikidata Q360574 的 P214 声明与本轮**未能回读 VIAF 本体**（见 authoritative_sources 说明），故按第三方声明登记、不作 VIAF 已核实的断言。",
+      "subject_uid": "holmes-oliver-wendell-jr-1841"
+    }
+  ],
+  "generated_at": "2026-08-11T06:59:50Z",
+  "normalized_name": "oliverwendellholmesjr",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "holmes-oliver-wendell-jr-1841",
+  "status": "ready",
+  "target_name": "Oliver Wendell Holmes Jr."
+}
