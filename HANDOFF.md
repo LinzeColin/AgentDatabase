@@ -903,6 +903,32 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/check_disposition_e
 **★★ 接手方第一步的自证**：`git pull` 完成后，仓根应当出现 `HANDOFF.md`。
 若没有出现，说明**推送那一步没做**——不要往下走，先回来问。
 
+### ★★★ 本机装的那份 skill 是 **v0.0.0.13**，**别用它**
+
+2026-08-12 实测三层版本：
+
+| 位置 | 版本 | 判据件数 |
+|---|---|---|
+| 工作分支（推送的就是它） | **v0.0.0.154** | **91** |
+| 主树 `AgentDatabase`（`git pull` 拿到的） | v0.0.0.22 | —— |
+| **本机安装** `~/.codex/skills/persona-distiller` | **v0.0.0.13** | **9** |
+
+`~/.codex/skills/persona-distiller` 是**实体副本**（最后修改 2026-07-29，273 个文件 vs 仓内 486），
+**推送不会更新它**。另有 `~/.claude/skills/persona-distiller-group` 与
+`~/.codex/skills/persona-distiller-group`，都是 v0.0.0.8、**0 件判据**。
+
+**⇒ 规矩：一律从仓里跑，不要按名字调用已安装的 skill。**
+本文件「怎么跑」那一节给的全是仓内相对路径
+（`cd .../registry/codex/persona-distiller && python3 scripts/...`），**不依赖安装副本**。
+
+★ 若你确实想刷新安装副本：**先确认主树已经是 v0.0.0.154**（推送之后），再从主树拷；
+  **绝不要从工作分支拷**——那是 [[permissive-license-is-not-public-release]] 的同族：
+  未合并的分支不是发布物。这一条本来就记在任务清单里
+  （「本机 skill 副本落后：**先合 main 再装，别装未合并的分支**」）。
+
+★★ **落后 141 个版本、少 82 件判据**意味着：按名字调用会拿到一个
+  **没有今天全部判据**的流水线——holdout 隔离、纸面道、自测射程、自报数字四道门全都不在里面。
+
 ### ★★★★ 移交怎么做（**2026-08-11 已实测通过，旧做法已作废**）
 
 ```bash
