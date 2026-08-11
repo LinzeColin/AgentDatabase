@@ -1,0 +1,139 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Thomas Jefferson；政治法律师；美国第 3 任总统（1801–1809）；此前任国务卿、副总统、驻法公使、弗吉尼亚州长。\n   专业背景：1743-04-13 生于弗吉尼亚 Shadwell 种植园，1826-07-04 卒于蒙蒂塞洛。弗吉尼亚下议院议员（1769–1775）、第二届大陆会议代表（1775–1776）、弗吉尼亚众议院议员（1776–1779）、弗吉尼亚州长（1779–1781）、邦联国会代表（1782–1784）、条约谈判全权公使（1784–1786）、驻法公使（1785–1789）、国务卿（1790–1793）、副总统（1797–1801）、总统（1801–1809）。**自著**：《独立宣言》主要执笔人（1776 年 6 月 11–28 日间写成）；《Notes on the State of Virginia》（1785 法文版、1787 英文版）；《Bill for Establishing Religious Freedom》（弗吉尼亚众议院任内起草，后由麦迪逊重提）；《Jefferson's Manual》（1801）；《Jefferson Bible》（1820）。另终生记 commonplace book，后以《Jefferson's Literary Commonplace Book》《Legal Commonplace Book》出版。。\n   应用价值：场景：建国文献的起草；以文书推动一项制度改革（宗教自由法案）；议事规则的编纂（Jefferson's Manual）；对一州的自然与制度做系统描述；关键能力：政治文书起草；把观察整理成条目式著作；长期书信往还中的论证；议事程序的规则化。\n   区分依据：生卒年 1743–1826 与队列条目逐位相同；占据基础词条。",
+    "B. 人物与身份：Thomas Jefferson Randolph；政治法律师；消歧页未给描述。\n   专业背景：消歧页列出但**未给生卒年与描述**。★ 本项目**不替它补**（零编造）——抓源时若命中此名，须按实物题名页确认身份。危险点在于：**他的名字里完整含有「Thomas Jefferson」**，凡编者栏、题献、家族文书都会命中。。\n   应用价值：场景：待抓源时按题名页确认；关键能力：待确认。\n   区分依据：**姓名完整包含目标全名**，字符串匹配无法区分；消歧页无生卒年，不能按年代筛。",
+    "C. 人物与身份：Thomas Jefferson Hogg；思想教育师；消歧页未给描述。\n   专业背景：消歧页列出但**未给生卒年与描述**，本项目不替它补。危险点同上：**姓名完整包含「Thomas Jefferson」**。。\n   应用价值：场景：待抓源时按题名页确认；关键能力：待确认。\n   区分依据：**姓名完整包含目标全名**；消歧页无生卒年。",
+    "D. 人物与身份：Thomas Garland Jefferson；政治法律师；VMI 学员，1864 年新市场战役阵亡。\n   专业背景：1847–1864。消歧页描述为「VMI cadet killed at the Battle of New Market」。年代落在 PD 区间内，留有校档与书信。。\n   应用价值：场景：军校学员书信；关键能力：—。\n   区分依据：生卒 1847–1864，与目标不重叠；中名 Garland 可区分。",
+    "E. 人物与身份：Thomas Jefferson (actor)；艺术设计师；美国演员。\n   专业背景：1856–1932。消歧页描述为「American actor」。**活跃期跨 1930 分界**，剧目单与影片资料会命中同名检索。。\n   应用价值：场景：舞台与早期电影；关键能力：表演。\n   区分依据：演员而非政治人物；生卒 1856–1932。"
+  ],
+  "candidate_count": 5,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "建国文献的起草",
+        "以文书推动一项制度改革（宗教自由法案）",
+        "议事规则的编纂（Jefferson's Manual）",
+        "对一州的自然与制度做系统描述"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Thomas_Jefferson",
+          "note": "生卒、任职、著作与出版年取自此页"
+        }
+      ],
+      "canonical_name": "Thomas Jefferson",
+      "distinguishing_basis": "生卒年 1743–1826 与队列条目逐位相同；占据基础词条",
+      "evidence_level": "high",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "政治文书起草",
+        "把观察整理成条目式著作",
+        "长期书信往还中的论证",
+        "议事程序的规则化"
+      ],
+      "label": "A",
+      "occupation_or_role": "美国第 3 任总统（1801–1809）；此前任国务卿、副总统、驻法公使、弗吉尼亚州长",
+      "professional_background": "1743-04-13 生于弗吉尼亚 Shadwell 种植园，1826-07-04 卒于蒙蒂塞洛。弗吉尼亚下议院议员（1769–1775）、第二届大陆会议代表（1775–1776）、弗吉尼亚众议院议员（1776–1779）、弗吉尼亚州长（1779–1781）、邦联国会代表（1782–1784）、条约谈判全权公使（1784–1786）、驻法公使（1785–1789）、国务卿（1790–1793）、副总统（1797–1801）、总统（1801–1809）。**自著**：《独立宣言》主要执笔人（1776 年 6 月 11–28 日间写成）；《Notes on the State of Virginia》（1785 法文版、1787 英文版）；《Bill for Establishing Religious Freedom》（弗吉尼亚众议院任内起草，后由麦迪逊重提）；《Jefferson's Manual》（1801）；《Jefferson Bible》（1820）。另终生记 commonplace book，后以《Jefferson's Literary Commonplace Book》《Legal Commonplace Book》出版。",
+      "subject_uid": "thomas-jefferson-1743-1826"
+    },
+    {
+      "application_scenarios": [
+        "待抓源时按题名页确认"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Thomas_Jefferson_(disambiguation)",
+          "note": "该页列出，无描述"
+        }
+      ],
+      "canonical_name": "Thomas Jefferson Randolph",
+      "distinguishing_basis": "**姓名完整包含目标全名**，字符串匹配无法区分；消歧页无生卒年，不能按年代筛",
+      "evidence_level": "low",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "待确认"
+      ],
+      "label": "B",
+      "occupation_or_role": "消歧页未给描述",
+      "professional_background": "消歧页列出但**未给生卒年与描述**。★ 本项目**不替它补**（零编造）——抓源时若命中此名，须按实物题名页确认身份。危险点在于：**他的名字里完整含有「Thomas Jefferson」**，凡编者栏、题献、家族文书都会命中。",
+      "subject_uid": "thomas-jefferson-randolph"
+    },
+    {
+      "application_scenarios": [
+        "待抓源时按题名页确认"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Thomas_Jefferson_(disambiguation)",
+          "note": "该页列出，无描述"
+        }
+      ],
+      "canonical_name": "Thomas Jefferson Hogg",
+      "distinguishing_basis": "**姓名完整包含目标全名**；消歧页无生卒年",
+      "evidence_level": "low",
+      "identity_category": "思想教育师",
+      "key_capabilities": [
+        "待确认"
+      ],
+      "label": "C",
+      "occupation_or_role": "消歧页未给描述",
+      "professional_background": "消歧页列出但**未给生卒年与描述**，本项目不替它补。危险点同上：**姓名完整包含「Thomas Jefferson」**。",
+      "subject_uid": "thomas-jefferson-hogg"
+    },
+    {
+      "application_scenarios": [
+        "军校学员书信"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Thomas_Jefferson_(disambiguation)",
+          "note": "该页第 6 条"
+        }
+      ],
+      "canonical_name": "Thomas Garland Jefferson",
+      "distinguishing_basis": "生卒 1847–1864，与目标不重叠；中名 Garland 可区分",
+      "evidence_level": "medium",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "—"
+      ],
+      "label": "D",
+      "occupation_or_role": "VMI 学员，1864 年新市场战役阵亡",
+      "professional_background": "1847–1864。消歧页描述为「VMI cadet killed at the Battle of New Market」。年代落在 PD 区间内，留有校档与书信。",
+      "subject_uid": "thomas-garland-jefferson-1847-1864"
+    },
+    {
+      "application_scenarios": [
+        "舞台与早期电影"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Thomas_Jefferson_(disambiguation)",
+          "note": "该页第 4 条"
+        }
+      ],
+      "canonical_name": "Thomas Jefferson (actor)",
+      "distinguishing_basis": "演员而非政治人物；生卒 1856–1932",
+      "evidence_level": "medium",
+      "identity_category": "艺术设计师",
+      "key_capabilities": [
+        "表演"
+      ],
+      "label": "E",
+      "occupation_or_role": "美国演员",
+      "professional_background": "1856–1932。消歧页描述为「American actor」。**活跃期跨 1930 分界**，剧目单与影片资料会命中同名检索。",
+      "subject_uid": "thomas-jefferson-actor-1856-1932"
+    }
+  ],
+  "generated_at": "2026-08-11T23:58:32Z",
+  "normalized_name": "thomasjefferson",
+  "resolution": "multiple",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "blocked",
+  "target_name": "Thomas Jefferson"
+}

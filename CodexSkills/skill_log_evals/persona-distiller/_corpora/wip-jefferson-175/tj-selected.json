@@ -1,0 +1,41 @@
+{
+ "_note": "从 5 名候选中选定（消歧页共 9 名同名者，按「有著述/会出现在题名页且作品同为 PD」筛到 5）。判准：队列生卒年 1743–1826，唯一命中。阻断记录 tj_gate.BLOCKED.json。",
+ "selected_from": 5,
+ "selection_rule": "queue.生卒 == candidate.life_dates，唯一命中",
+ "blocked_record": "tj_gate.BLOCKED.json",
+ "★ 抓源时必须逐份排除": [
+  "Thomas Jefferson Randolph —— **姓名完整包含目标全名**，且消歧页无生卒年，年代筛与字符串筛都无效；须按题名页确认",
+  "Thomas Jefferson Hogg —— 同上，姓名完整包含目标全名",
+  "Thomas Garland Jefferson（1847–1864）—— 中名可区分",
+  "Thomas Jefferson (actor)（1856–1932）—— 活跃期跨 1930 分界"
+ ],
+ "candidates": [
+  {
+   "canonical_name": "Thomas Jefferson",
+   "subject_uid": "thomas-jefferson-1743-1826",
+   "identity_category": "政治法律师",
+   "occupation_or_role": "美国第 3 任总统（1801–1809）；此前任国务卿、副总统、驻法公使、弗吉尼亚州长",
+   "professional_background": "1743-04-13 生于弗吉尼亚 Shadwell 种植园，1826-07-04 卒于蒙蒂塞洛。弗吉尼亚下议院议员（1769–1775）、第二届大陆会议代表（1775–1776）、弗吉尼亚众议院议员（1776–1779）、弗吉尼亚州长（1779–1781）、邦联国会代表（1782–1784）、条约谈判全权公使（1784–1786）、驻法公使（1785–1789）、国务卿（1790–1793）、副总统（1797–1801）、总统（1801–1809）。**自著**：《独立宣言》主要执笔人（1776 年 6 月 11–28 日间写成）；《Notes on the State of Virginia》（1785 法文版、1787 英文版）；《Bill for Establishing Religious Freedom》（弗吉尼亚众议院任内起草，后由麦迪逊重提）；《Jefferson's Manual》（1801）；《Jefferson Bible》（1820）。另终生记 commonplace book，后以《Jefferson's Literary Commonplace Book》《Legal Commonplace Book》出版。",
+   "application_scenarios": [
+    "建国文献的起草",
+    "以文书推动一项制度改革（宗教自由法案）",
+    "议事规则的编纂（Jefferson's Manual）",
+    "对一州的自然与制度做系统描述"
+   ],
+   "key_capabilities": [
+    "政治文书起草",
+    "把观察整理成条目式著作",
+    "长期书信往还中的论证",
+    "议事程序的规则化"
+   ],
+   "distinguishing_basis": "生卒年 1743–1826 与队列条目逐位相同；占据基础词条",
+   "authoritative_sources": [
+    {
+     "locator": "https://en.wikipedia.org/wiki/Thomas_Jefferson",
+     "note": "生卒、任职、著作与出版年取自此页"
+    }
+   ],
+   "evidence_level": "high"
+  }
+ ]
+}

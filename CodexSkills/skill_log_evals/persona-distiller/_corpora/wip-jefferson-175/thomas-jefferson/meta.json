@@ -1,0 +1,77 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "thomas-jefferson-1743-1826",
+  "consent_authority": null,
+  "created_at": "2026-08-11T23:58:33Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "political-legal",
+    "display": "政治法律师",
+    "mode": "single",
+    "primary": "political-legal",
+    "weights": {
+      "political-legal": 1.0
+    }
+  },
+  "language": "en",
+  "model_version": "0.1.0-draft",
+  "name": "Thomas Jefferson",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "建国文献的起草",
+        "以文书推动一项制度改革（宗教自由法案）",
+        "议事规则的编纂（Jefferson's Manual）",
+        "对一州的自然与制度做系统描述"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Thomas_Jefferson",
+          "note": "生卒、任职、著作与出版年取自此页"
+        }
+      ],
+      "canonical_name": "Thomas Jefferson",
+      "distinguishing_basis": "生卒年 1743–1826 与队列条目逐位相同；占据基础词条",
+      "evidence_level": "high",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "政治文书起草",
+        "把观察整理成条目式著作",
+        "长期书信往还中的论证",
+        "议事程序的规则化"
+      ],
+      "label": "A",
+      "occupation_or_role": "美国第 3 任总统（1801–1809）；此前任国务卿、副总统、驻法公使、弗吉尼亚州长",
+      "professional_background": "1743-04-13 生于弗吉尼亚 Shadwell 种植园，1826-07-04 卒于蒙蒂塞洛。弗吉尼亚下议院议员（1769–1775）、第二届大陆会议代表（1775–1776）、弗吉尼亚众议院议员（1776–1779）、弗吉尼亚州长（1779–1781）、邦联国会代表（1782–1784）、条约谈判全权公使（1784–1786）、驻法公使（1785–1789）、国务卿（1790–1793）、副总统（1797–1801）、总统（1801–1809）。**自著**：《独立宣言》主要执笔人（1776 年 6 月 11–28 日间写成）；《Notes on the State of Virginia》（1785 法文版、1787 英文版）；《Bill for Establishing Religious Freedom》（弗吉尼亚众议院任内起草，后由麦迪逊重提）；《Jefferson's Manual》（1801）；《Jefferson Bible》（1820）。另终生记 commonplace book，后以《Jefferson's Literary Commonplace Book》《Legal Commonplace Book》出版。",
+      "subject_uid": "thomas-jefferson-1743-1826"
+    },
+    "chosen_subject_uid": "thomas-jefferson-1743-1826",
+    "normalized_name": "thomasjefferson",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "thomasjefferson",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "thomas-jefferson",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-19e7e3dfa29f",
+  "time_scope": "1743-1826",
+  "updated_at": "2026-08-11T23:58:33Z"
+}
