@@ -658,6 +658,48 @@ git push origin handoff/2026-08-13:main
 （34 工作区 / 2071 行 / 853.9 MB；**74.3% 有 URL、4.9% 有档案条目号、
 18.7% 只有文字性坐标、2.1% 无坐标**——最后那两档换台机器重抓不回来，要另存 Release／私有仓）。
 
+### ★★★★ 语料怎么还原（**2026-08-11 全量验过**）
+
+分卷在两处，**内容相同、原件未删**：
+
+    /private/tmp/corpus-bundle/                                  ← ★ `/private/tmp` 会被系统清理
+    ~/Documents/Codex/GithubProject/_scratch/corpus-bundle-handoff-2026-08-13/   ← 用这个
+
+清单：`CodexSkills/skill_log_evals/persona-distiller/_ledgers/_语料分卷清单.json`
+（`schema: corpus-bundle/1`；**53 个 `parts`、57 个 artifact**——4 项 `split: true` 拆了多卷。
+★ **`parts` 里没有 `path` 字段**，要找文件按 `artifacts` 里的名字找。）
+
+还原：
+
+```bash
+tar -xzf <名>.tar.gz -C <目标目录>                    # 不分卷的
+cat <名>.tar.gz.part-a? | tar -xz -C <目标目录>        # 分卷的（★ 记得 set -o pipefail）
+```
+
+**已验到底的三层**（都是实测，不是估计）：
+
+| 层 | 结果 |
+|---|---|
+| 两处各逐卷核 sha256 | **各 57/57 一致，0 不一致、0 缺失**，各 980 MB |
+| 53 项全量真解，比文件数与字节总和 | **53/53 一致，0 处不一致，0 解包失败** |
+| 52 个未改动 wip 逐文件比还原件 vs 现树 | **9900 个逐字节相同，内容不同 0 处** |
+
+### ★★★★ 比对路径之前**必须先 NFC 归一化**，否则会得到一份完整而错误的差异表
+
+上面第三层最初报出「只在还原件 2 ／ 只在现树 2」，去查是
+**Unicode 归一化形式不同**：还原件是 `h` + U+0308（NFD），现树是 U+00F6（NFC，`ö`）——
+**路径打印出来一模一样，内容 sha256 也相同**。
+
+```python
+import unicodedata
+key = unicodedata.normalize("NFC", relative_path)
+```
+
+**本库有德语与中文文件名**，任何按路径字符串比对的程序不做这一步都会误报。
+★ 同一轮我还栽过一次更大的：比对基准少取一层目录（tar 内含 `<wip>/` 顶层），
+得到「相同 0 ／ 只在还原件 9902 ／ 只在现树 9902」——
+**9902 == 9902 的完全对称，就是「基准错了」的指纹**。
+
 ### ★★★★ 推之前必须先装钩子（**本工作树默认没有**）
 
 ```bash
