@@ -641,8 +641,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_filename_year_vs_ledger.py",
-      "sha256": "1262731d1ba33d64707bf9266c97b0d263fa0b2699e20303af4c57832effb51e",
-      "size_bytes": 9661
+      "sha256": "742a0a68503b900df7078790eea03b1f6469c2eab0539ee5a88492c81dbdfaae",
+      "size_bytes": 14162
     },
     {
       "path": "references/pipeline/checkers/check_first_person_density.py",
@@ -821,8 +821,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_selftest_reach.py",
-      "sha256": "afdfe5a25f0cb63d5ba18224b6e88efbdce5985a668c0fb88e4880fcf8f77611",
-      "size_bytes": 11287
+      "sha256": "613de48c1b57ba1dcf6af696e6b64ee282c780a117a12969e45cbfd919195047",
+      "size_bytes": 11251
     },
     {
       "path": "references/pipeline/checkers/check_semantic_residue.py",
@@ -1426,8 +1426,8 @@
     },
     {
       "path": "scripts/check_filename_year_vs_ledger.py",
-      "sha256": "1262731d1ba33d64707bf9266c97b0d263fa0b2699e20303af4c57832effb51e",
-      "size_bytes": 9661
+      "sha256": "742a0a68503b900df7078790eea03b1f6469c2eab0539ee5a88492c81dbdfaae",
+      "size_bytes": 14162
     },
     {
       "path": "scripts/check_first_person_density.py",
@@ -1606,8 +1606,8 @@
     },
     {
       "path": "scripts/check_selftest_reach.py",
-      "sha256": "afdfe5a25f0cb63d5ba18224b6e88efbdce5985a668c0fb88e4880fcf8f77611",
-      "size_bytes": 11287
+      "sha256": "613de48c1b57ba1dcf6af696e6b64ee282c780a117a12969e45cbfd919195047",
+      "size_bytes": 11251
     },
     {
       "path": "scripts/check_semantic_residue.py",

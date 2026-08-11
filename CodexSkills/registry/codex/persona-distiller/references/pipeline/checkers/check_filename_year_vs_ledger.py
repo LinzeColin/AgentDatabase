@@ -145,6 +145,73 @@ def self_test() -> int:
     chk("⑨ 文件名里的 2015 是 IA 编号 → 判据仍会报（**已知假阳，射程里写明了**）",
         len(r["跨PD分界"]) == 1)
 
+    # ══════════════════════════════════════════════════════════════
+    # ⑩ `evaluate()` 本身——**2026-08-12 之前它一次也没被自测进入过**
+    # ══════════════════════════════════════════════════════════════
+    #
+    # 上面 ①–⑨ 全在考 `scan_rows`（纯函数），而 `evaluate()` 才是
+    # **从磁盘读账本、拼出给人看的那句判决**的那一段。
+    # 用 `sys.settrace` 逐件量过：本件在「判定函数没被自测进入」的名单里。
+    #
+    # ★ 补它的直接动机是 #172 Brandeis：他的 `decisions` 道要取 U.S. Reports 合订本，
+    #   而 **archive.org 那批件的 `date` 字段一律是 `1754-01-01`**（265/282 卷实测）。
+    #   谁照它填 `published_at`，全库会多出一批 1754 年的伪年份——
+    #   **而挡这一类的就是本判据**。它自己没被自测跑过，等于那道防线没验过。
+    import tempfile as _tf
+
+    def _mk(td, rows):
+        ws = pathlib.Path(td)
+        (ws / "evidence").mkdir(parents=True, exist_ok=True)
+        (ws / "evidence" / "source-ledger.jsonl").write_text(
+            "\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n",
+            encoding="utf-8")
+        return ws
+
+    with _tf.TemporaryDirectory() as td:
+        # ⑩a ★ Brandeis 的真实形状：卷号文件名 + 被 archive.org 的 1754 污染的 published_at
+        ws = _mk(td + "/a", [{"source_id": "s1",
+                              "local_path": "raw/unitedstatesrepo0281unse_1930.txt",
+                              "published_at": "1754-01-01"}])
+        problems, info = evaluate(ws)
+        # ★★★ **我第一版把这条的预期写错了**：以为 1754 会触发「跨 PD 分界」。
+        #   去读实际输出才明白：**1754 与 1930 都 < 1931，两边同侧，不跨界**，
+        #   它落进的是「差 ≥2 年」那一栏（差 176 年）。判据是对的，错的是我的预期。
+        #   ⇒ 这一条**对 #172 的抓源指令是个更正**：archive.org 的 1754 污染
+        #     在 **≤1930 的卷上只会报「差 ≥2 年」**，不会触发 PD 警报；
+        #     **只有当真实年份 ≥1931 时才跨界**（见下面 ⑩a″）。
+        chk("⑩a 1754 伪年份 vs 文件名 1930 → 报「差 ≥2 年」（两边同在 PD 内，不跨界）",
+            len(problems) == 1 and "差 ≥2 年" in problems[0]
+            and info["跨PD分界"] == 0 and info["不一致"] == 1)
+        chk("⑩a′ 且 info 里逐条列出了 source_id", any(
+            x.get("source_id") == "s1" for x in info["**逐条**"]))
+
+        # ⑩a″ 真正跨界的形状：文件名 1932 而台账被填成 1754 → **必须报跨 PD 分界**
+        ws2 = _mk(td + "/a2", [{"source_id": "s1b",
+                                "local_path": "raw/unitedstatesrepo0286unse_1932.txt",
+                                "published_at": "1754-01-01"}])
+        problems2, info2 = evaluate(ws2)
+        chk("⑩a″ 文件名 1932 vs 台账 1754 → **跨 PD 分界**（这一条会改变能不能用）",
+            info2["跨PD分界"] == 1 and any("跨过 PD 分界" in s for s in problems2))
+
+        # ⑩b 正对照：两边一致 → 一句都不报
+        ws = _mk(td + "/b", [{"source_id": "s2", "local_path": "raw/x_1914.txt",
+                              "published_at": "1914-05-01"}])
+        problems, _ = evaluate(ws)
+        chk("⑩b 两边年份一致 → 不报", problems == [])
+
+        # ⑩c ★★ **账本不存在时必须明说「未核验」，不许静默当通过**
+        problems, info = evaluate(pathlib.Path(td) / "nope")
+        chk("⑩c 没有账本 → 明写「未核验（不是通过）」而不是空过",
+            problems == [] and "未核验" in str(info.get("状态", "")))
+
+        # ⑩d 差 1 年默认不算问题，`--strict` 才算——两个方向都验
+        rows = [{"source_id": "s3", "local_path": "raw/y_1929.txt",
+                 "published_at": "1930-01-01"}]
+        p0, _ = evaluate(_mk(td + "/d0", rows), strict=False)
+        p1, _ = evaluate(_mk(td + "/d1", rows), strict=True)
+        chk("⑩d 差 1 年：默认不报", p0 == [])
+        chk("⑩d′ 差 1 年：--strict 报", len(p1) == 1)
+
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
     return 0 if ok else 2
 
