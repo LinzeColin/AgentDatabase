@@ -699,5 +699,12 @@
     "wip-whitworth-152.tar.gz": "7d0588a19f8c4374e88146e842be14d770fd430189adddae5e7972a538b62998"
    }
   }
- ]
+ ],
+ "★ 落点（2026-08-11 实测补记）": {
+  "原落点": "/private/tmp/corpus-bundle/ —— ★★ **`/private/tmp` 会被系统定期清理**，而移交在 8-13。清单原本**没有记落点目录**，是我按 artifact 名全盘找才找到的。",
+  "已复制到": "/Users/linzezhang/Documents/Codex/GithubProject/_scratch/corpus-bundle-handoff-2026-08-13/（按铁律，临时产物放 `_scratch/`；**原件未删**，两处都在）",
+  "两处均已逐卷核过 sha256": "原落点 57/57 一致；新落点 57/57 一致；0 不一致、0 缺失；各 980 MB",
+  "★ 清单自身的坑": "`parts` 里**没有 path 字段**（只有 wip/files/raw_bytes/tar_bytes/split/artifacts/sha256）。我第一次按 `path` 去数，得到「在位 0／53」——**那是拿不存在的字段量出来的，无效**。**要找文件请按 `artifacts` 里的名字找。**",
+  "★ 另一个数要更正": "`parts` 是 **53 项**，而 artifact 是 **57 个**（有 4 项拆了多卷，`split: true`）。「53 卷」这个说法**只对 parts 成立，不对文件数成立**。"
+ }
 }
