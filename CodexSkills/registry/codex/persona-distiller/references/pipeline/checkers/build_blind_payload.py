@@ -370,6 +370,18 @@ def main() -> int:
                          "（仍照报），其余照旧硬拦——见待裁定 ⑭")
     ap.add_argument("--skip-leak-check", action="store_true",
                     help="★ 只在判据本身出问题时用；跳过就等于把泄题拖到判完之后才发现")
+    # ★★★ v0.0.0.154：**给 `balanced` 补一个开关。**
+    #   这个能力早就实现好了、自测也齐（见 `assign` 的 docstring 与自测「位次平衡」一节），
+    #   **但没有任何命令行入口**——从流水线里根本够不着，等于不存在。
+    #   [[a-checker-nothing-calls-is-not-a-checker]]：能力在那儿而没有调用方，就不算做完。
+    #   ★ **默认仍是 False，不动任何既有轮次**；是否改默认是待裁定 ⑱。
+    #   ★★ Holmes #170 给 ⑱ 补上了实测：两轮**都**抽到 4/12（工具报「位次与系统相关度 75%」），
+    #     按候选所在位次把第 1 轮拆开——在 A 侧 席K −0.0125／席L **+0.0225**（n=4），
+    #     在 B 侧 −0.0433／−0.0317（n=12），**两席方向一致**，位次效应约 +0.015～+0.027。
+    #     此前 ⑱ 只有「理论上会混杂」，现在有数了。
+    ap.add_argument("--balanced-positions", action="store_true",
+                    help="A/B 强制 8/8（默认关，历史行为是 sha256%%2 抛硬币）。"
+                         "★ 同一人物的各轮必须一致，中途不许改")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
 
@@ -388,7 +400,7 @@ def main() -> int:
 
     cand = json.loads(pathlib.Path(a.candidate).read_text(encoding="utf-8"))
     base = json.loads(pathlib.Path(a.baseline).read_text(encoding="utf-8"))
-    payload, key = assign(cases, cand, base)
+    payload, key = assign(cases, cand, base, balanced=args.balanced_positions)
 
     # ★★★ `--round-dir round2` 这种**裸相对名**必须落在工作区里，不是当前目录。
     #   实测代价：在技能目录下跑，它把载荷与**盲判 key** 写进了
