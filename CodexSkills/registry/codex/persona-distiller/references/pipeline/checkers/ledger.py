@@ -100,6 +100,33 @@ def claim_add(args: argparse.Namespace) -> int:
     }
     with target_lock(target):
         append_jsonl(target / 'evidence' / 'claims.jsonl', record)
+        # ★★ 2026-08-11：**把被替代的那条真的标废**。
+        #   此前 `--supersedes` 只在新条上记一个链接，validate 也只查引用完整性，
+        #   **没有任何地方翻转旧条的状态** —— 于是「我改了一条断言」实际变成
+        #   「我加了一条，旧的还在」：新旧同时进 fact_density、同时进各项下限、
+        #   同时被下游产物渲染，而旧的那条往往正是因为不够好才被替代的。
+        #   Grotius #168 实测：替代之后合成门仍在报旧条
+        #   `clm-7c532aba1de2 needs at least two supporting sources`。
+        #   ★ 全库射程实测 = **2 条，且都是本次新造的** —— 也就是说
+        #   `--supersedes` 这个开关**从来没有人用过**，所以这个缺口一直看不见。
+        #   [[a-checker-nothing-calls-is-not-a-checker]] 的另一种：**没有调用方的功能**。
+        if args.supersedes:
+            path = target / 'evidence' / 'claims.jsonl'
+            rows = read_jsonl(path)
+            hit = False
+            for r in rows:
+                if r.get('claim_id') == args.supersedes:
+                    r['status'] = 'superseded'
+                    r['superseded_by'] = claim_id
+                    r['updated_at'] = utc_now()
+                    hit = True
+            if hit:
+                path.write_text(''.join(json.dumps(r, ensure_ascii=False) + '\n'
+                                        for r in rows), encoding='utf-8')
+            else:
+                # 引用不存在时**不静默**：validate 会报，但这里也要让人当场看见
+                print('WARN: --supersedes %s 在本工作区找不到，旧条未标废'
+                      % args.supersedes, file=sys.stderr)
     print(json.dumps(record, ensure_ascii=False, indent=2))
     return 0
 

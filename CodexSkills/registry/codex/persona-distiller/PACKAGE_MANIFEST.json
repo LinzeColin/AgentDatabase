@@ -946,8 +946,8 @@
     },
     {
       "path": "references/pipeline/checkers/ledger.py",
-      "sha256": "0ed1e2998ea57c1214397984574a210cad6764fb7c8acd50c4c543e920c451c3",
-      "size_bytes": 12419
+      "sha256": "92b1712bfe0df22dd94effbbca6f2edae2a71930c51cb3b85458ba02f0da6f8f",
+      "size_bytes": 14206
     },
     {
       "path": "references/pipeline/checkers/next_person.py",
@@ -1736,8 +1736,8 @@
     },
     {
       "path": "scripts/ledger.py",
-      "sha256": "0ed1e2998ea57c1214397984574a210cad6764fb7c8acd50c4c543e920c451c3",
-      "size_bytes": 12419
+      "sha256": "92b1712bfe0df22dd94effbbca6f2edae2a71930c51cb3b85458ba02f0da6f8f",
+      "size_bytes": 14206
     },
     {
       "path": "scripts/merge_research.py",
