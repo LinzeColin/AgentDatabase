@@ -163,6 +163,23 @@ def build_patterns(full_name: str) -> dict:
     #     （`de Gaulle` 是姓，`Leonardo da Vinci` 的 `Vinci` 是地名），
     #     **本轮没有语料能判**——名册里一个这样的人物都还没做过。
     #     **没有依据就不改**，留给撞上它的那一轮，别凭想象扩大射程。
+    # ★★★ 2026-08-11 实测（Holmes #170 抓源前测护栏时撞到）：
+    #   `build_patterns("Oliver Wendell Holmes Jr.")` → **surname = 'Jr.'**，
+    #   因为下面几个分支一律拿 `tokens[-1]` 当姓，而 `Jr.` 就是最后一个词。
+    #   后果是**丢真材料**方向的：他本人 5 种真实署名
+    #   （`Oliver Wendell Holmes, Jr.` / `O. W. Holmes, Jr.` / `OLIVER WENDELL HOLMES` …）
+    #   **一条都认不出来**——照这样跑，他的每一份源都会被判 `research.source-unclaimed`。
+    #   与 Liebig 那次（`Justus von Liebig` → surname='Justus'，过归属 1/30）同族。
+    #   ★ 世代后缀**不是姓**，剥掉；它在署名里可有可无，剥掉之后照样匹配得上带后缀的写法。
+    GENERATIONAL = {"jr", "jr.", "sr", "sr.", "ii", "iii", "iv", "v",
+                    "esq", "esq.", "phd", "ph.d.", "md", "m.d."}
+    while len(tokens) > 2 and tokens[-1].lower().strip(",") in GENERATIONAL:
+        tokens = tokens[:-1]
+    # ★ 剥完还要去掉姓上残留的逗号：`Oliver Wendell Holmes, Jr.` 分词后
+    #   末段是 `Holmes,`，只在判后缀时 strip(",") 会让 surname 变成 `Holmes,`——
+    #   **这是我自己第一版没修干净的一半，被本文件的自测当场抓到。**
+    tokens = [tk.rstrip(",") for tk in tokens if tk.rstrip(",")]
+
     PARTICLE = {"von", "van"}
     if len(tokens) >= 3 and tokens[1].lower() in PARTICLE:
         # 「X von Y」：**Y 才是姓**（名 X + 姓 Y，小品词可有可无）
@@ -1966,6 +1983,45 @@ SELFTEST_MASTHEAD_NEGATIVE = [
 def self_test() -> int:
     pat = build_patterns(SELFTEST_NAME)
     bad = []
+
+    # ★★★ 世代后缀不是姓（Holmes #170 抓源前实测撞到）
+    #   `build_patterns("Oliver Wendell Holmes Jr.")` 原本给出 surname='Jr.'，
+    #   于是他本人的署名一条都认不出来——**丢真材料**的方向。
+    #   与 Liebig 那次（surname='Justus'，过归属 1/30）同族。
+    for _name, _want in (("Oliver Wendell Holmes Jr.", "Holmes"),
+                         ("Oliver Wendell Holmes, Jr.", "Holmes"),
+                         ("John Smith Sr.", "Smith"),
+                         ("Henry Ford II", "Ford"),
+                         # ★ 反对照：既有三个分支不许被弄坏
+                         ("Justus von Liebig", "Liebig"),
+                         ("Galen of Pergamon", "Galen"),
+                         ("Galen", "Galen"),
+                         ("Henry Clifton Sorby", "Sorby"),
+                         # ★★ 反对照：**只有两段时不许剥**——
+                         #   `Jr. Smith` 这种写法里 Smith 才是姓，剥了就没姓了
+                         ("Jr. Smith", "Smith")):
+        _got = build_patterns(_name)["surname"]
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} 姓氏推导 {_name!r} → {_got!r}"
+              + ("" if _ok else f"（应为 {_want!r}）"))
+        if not _ok:
+            bad.append(f"姓氏推导 {_name} 得 {_got}，应为 {_want}")
+
+    _hp = build_patterns("Oliver Wendell Holmes Jr.")
+    import re as _re
+    _rx = _re.compile(_hp["name_rx"])
+    for _s, _want_hit in (("Oliver Wendell Holmes, Jr.", True),
+                          ("O. W. Holmes, Jr.", True),
+                          ("Oliver Wendell Holmes", True),
+                          # ★ 反对照：别人的名字不许被这套模式认下
+                          ("Wendell Holmes Tisdale", False)):
+        _hit = bool(_rx.search(_s))
+        _ok = _hit == _want_hit
+        print(f"  {'✓' if _ok else '✗'} name_rx {_s!r} → {'认' if _hit else '不认'}"
+              + ("" if _ok else "（**方向反了**）"))
+        if not _ok:
+            bad.append(f"name_rx {_s} 判成 {_hit}")
+
     for label, text in SELFTEST_POSITIVE:
         ok, code, ev, _ = check_text(text, pat)
         print(f"  {'✓' if ok else '✗'} 正例 {label}: {code or '——'} {ev[:60]}")
