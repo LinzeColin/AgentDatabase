@@ -396,8 +396,8 @@
     },
     {
       "path": "references/ledgers/_拒答溢出门-整代人物空过-2026-08-12.md",
-      "sha256": "53490789806f6ed31f513fc90be6f9d5a89ec9838f9bda50aa096bc115774e64",
-      "size_bytes": 6387
+      "sha256": "9148c17d6c74af20e75c4f071a8d3f7bfc4bae56e82d8e31aff284cedc386bcd",
+      "size_bytes": 7589
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -701,8 +701,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_longs_corruption.py",
-      "sha256": "5a74aafc6088678c76745f2462758023564af2f636b1d5a068e1b72277b9b9e3",
-      "size_bytes": 34331
+      "sha256": "04b5b146298e1366ee9c888d59b9d7af68783a3384ff1c4edd96c6b3fab47dce",
+      "size_bytes": 41400
     },
     {
       "path": "references/pipeline/checkers/check_material_split.py",
@@ -731,8 +731,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_ocr_homoglyphs.py",
-      "sha256": "f0b67de8fce2275fe9b89e5f13b525fe0899c6514ebd251c99cdb3a67d4dd07c",
-      "size_bytes": 26851
+      "sha256": "229ad01f4b507781898113c2f918d4d5a111561570571a04a762dd7bba95ede1",
+      "size_bytes": 33237
     },
     {
       "path": "references/pipeline/checkers/check_ocr_language_death.py",
@@ -841,8 +841,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_selftest_reach.py",
-      "sha256": "8806de0b796a7abc583a171037bd0ad2d567beffb350856ab1d6518859812832",
-      "size_bytes": 11152
+      "sha256": "a904b553c2e41b8044097e60ef6a7dfc151d6f3cfcc26e37eb1558d2b1f7d76f",
+      "size_bytes": 11088
     },
     {
       "path": "references/pipeline/checkers/check_semantic_residue.py",
@@ -1491,8 +1491,8 @@
     },
     {
       "path": "scripts/check_longs_corruption.py",
-      "sha256": "5a74aafc6088678c76745f2462758023564af2f636b1d5a068e1b72277b9b9e3",
-      "size_bytes": 34331
+      "sha256": "04b5b146298e1366ee9c888d59b9d7af68783a3384ff1c4edd96c6b3fab47dce",
+      "size_bytes": 41400
     },
     {
       "path": "scripts/check_material_split.py",
@@ -1521,8 +1521,8 @@
     },
     {
       "path": "scripts/check_ocr_homoglyphs.py",
-      "sha256": "f0b67de8fce2275fe9b89e5f13b525fe0899c6514ebd251c99cdb3a67d4dd07c",
-      "size_bytes": 26851
+      "sha256": "229ad01f4b507781898113c2f918d4d5a111561570571a04a762dd7bba95ede1",
+      "size_bytes": 33237
     },
     {
       "path": "scripts/check_ocr_language_death.py",
@@ -1631,8 +1631,8 @@
     },
     {
       "path": "scripts/check_selftest_reach.py",
-      "sha256": "8806de0b796a7abc583a171037bd0ad2d567beffb350856ab1d6518859812832",
-      "size_bytes": 11152
+      "sha256": "a904b553c2e41b8044097e60ef6a7dfc151d6f3cfcc26e37eb1558d2b1f7d76f",
+      "size_bytes": 11088
     },
     {
       "path": "scripts/check_semantic_residue.py",

@@ -378,6 +378,91 @@ def self_test() -> int:
     if r["all_homoglyph"]:
         failures.append("反向对照失败：非拉丁为主的文档不该套用 B 判据")
 
+    # ══════════════════════════════════════════════════════════════
+    # ㉕ `check_corpus()` / `_has_genuine_nonlatin()`
+    #    —— 2026-08-12 之前这两个从没被自测进入过
+    # ══════════════════════════════════════════════════════════════
+    #
+    # 上面各条打的是 `scan_text()`（**一段文本里有没有同形字**）与
+    # `check_quotes()`（引文层）。而 `check_corpus()` 是语料层的入口：
+    # 它决定**哪些文件被读、读到的是文件的哪一段、什么样的结果算「有问题」**。
+    # `check_selftest_reach` 把本件列在「验了配料、没验判决」名单上——它是对的。
+    print("\n══ ㉕ check_corpus() 本体（tempdir 上跑真流程）══")
+    _CLEAN = "HOW TO TRADE IN STOCKS. The tape tells the truth about the market."
+    # ★ 逐字真实样本：Livermore #100 的 OCR 把 `PREFACE` 扫成七个西里尔同形字。
+    _ALLH = "THE РКЕҒАСЕ of this book explains how the tape tells the truth."
+    # 词内混文种：末尾 `E` 是 CYRILLIC CAPITAL IE（U+0415）。
+    _MIX = "HOW TO TRADЕ IN STOCKS, said the man about the market and the tape."
+
+    def _corp(files: dict, extra=()):
+        with tempfile.TemporaryDirectory() as td:
+            d = pathlib.Path(td)
+            for name, body in files.items():
+                (d / name).write_text(body, encoding="utf-8")
+            paths = [d / n for n in files] + [d / x for x in extra]
+            for x in extra:
+                (d / x).mkdir(exist_ok=True)
+            return check_corpus(paths)
+
+    rep = _corp({"clean.txt": _CLEAN})
+    ok = rep == []
+    print(f"  {'✓' if ok else '✗'} ㉕a 干净英文语料 → 0 份报告（{len(rep)}）")
+    failures += [] if ok else ["㉕a 干净语料被误报"]
+
+    rep = _corp({"a.txt": _ALLH})
+    ok = (len(rep) == 1 and rep[0]["counts"]["all_homoglyph_words"] == 1
+          and rep[0]["samples"][0]["as_scanned"] == "РКЕҒАСЕ")
+    print(f"  {'✓' if ok else '✗'} ㉕b 全同形字词 `РКЕҒАСЕ` → 报出，并给出 as_scanned")
+    failures += [] if ok else ["㉕b 全同形字词未报"]
+
+    # ★★ `restore()` 只说明「这里出过 OCR 错」，**不是原文**：
+    #    这一处 reads_as 是 `PKEFACE`，而原书写的是 `PREFACE`——
+    #    OCR 认错了字母（R→K）**又**用错了文种。拿它当「修好的引文」交付就是编造。
+    ok = rep and rep[0]["samples"][0]["reads_as"] == "PKEFACE"
+    print(f"  {'✓' if ok else '✗'} ㉕b′ `reads_as` 是 **PKEFACE 不是 PREFACE**"
+          f"——同形字表揭示不了原文，不许拿它修引文")
+    failures += [] if ok else ["㉕b′ restore() 的射程说明失效"]
+
+    rep = _corp({"m.txt": _MIX})
+    ok = len(rep) == 1 and rep[0]["counts"]["mixed_words"] == 1
+    print(f"  {'✓' if ok else '✗'} ㉕c 词内混文种 `TRADЕ` → 报出（A 判据，恒为错）")
+    failures += [] if ok else ["㉕c 词内混文种未报"]
+
+    # ㉕d 射程：多份文件都要扫到，不是只扫第一份或最后一份。
+    rep = _corp({"a.txt": _ALLH, "b.txt": _MIX, "c.txt": _CLEAN})
+    names = sorted(pathlib.Path(r["file"]).name for r in rep)
+    ok = names == ["a.txt", "b.txt"]
+    print(f"  {'✓' if ok else '✗'} ㉕d 射程：三份里恰好报出有问题的两份（{names}）")
+    failures += [] if ok else ["㉕d 射程"]
+
+    # ㉕e **读不了的文件不许静默消失**——它要带 error 出现在报告里。
+    rep = _corp({"a.txt": _ALLH}, extra=("adir",))
+    errs = [r for r in rep if "error" in r]
+    ok = len(errs) == 1 and len(rep) == 2
+    print(f"  {'✓' if ok else '✗'} ㉕e 读不了的路径 → 带 error 进报告（不是静默跳过）")
+    failures += [] if ok else ["㉕e 读失败可见性"]
+
+    # ㉕f ★ 射程声明（**不是缺陷**）：出处表头由 `corpus_body` 剥掉，
+    #    表头里的同形字**按设计不查**——表头是抓源方写的，不是他的话。
+    #    两种表头格式都要剥（`SOURCE: …\n====` 与开头连续的 `#` 行）。
+    for tag, hdr in (("SOURCE 式", "SOURCE: РКЕҒАСЕ scan\n" + "=" * 24 + "\n"),
+                     ("# 式", "# source: РКЕҒАСЕ scan\n# url: http://x\n")):
+        rep = _corp({"h.txt": hdr + _CLEAN})
+        ok = rep == []
+        print(f"  {'✓' if ok else '✗'} ㉕f 射程：{tag}出处表头里的同形字**按设计不查**（表头非他的话）")
+        failures += [] if ok else [f"㉕f 表头射程（{tag}）"]
+
+    # ㉕g `_has_genuine_nonlatin` 是**提示**不是判定——两个实测值证明它分不开。
+    #    Benardos #128 真俄语 35.0%／Barton #117 真 OCR 垃圾 26.7%，同在门 0.15 之上。
+    _ru = {"counts": {"non_latin_chars": 1000, "genuine_nonlatin_chars": 350}}
+    _junk = {"counts": {"non_latin_chars": 1000, "genuine_nonlatin_chars": 267}}
+    _none = {"counts": {"non_latin_chars": 0, "genuine_nonlatin_chars": 0}}
+    ok = (_has_genuine_nonlatin(_ru) and _has_genuine_nonlatin(_junk)
+          and not _has_genuine_nonlatin(_none))
+    print(f"  {'✓' if ok else '✗'} ㉕g `_has_genuine_nonlatin`：真俄语 35.0% 与 OCR 垃圾 26.7% "
+          f"**双双为真** ⇒ 它分不开，只能当提示（无非拉丁时为假）")
+    failures += [] if ok else ["㉕g 提示项的射程"]
+
     for f in failures:
         print(f"✗ {f}")
     if failures:
@@ -385,7 +470,8 @@ def self_test() -> int:
         return 1
     print("负对照通过：干净英文/真俄语/中文三条正对照 0 报，"
           "词内混文种、全同形字词、引文层三类坏样本全部抓出，"
-          "且非拉丁为主的文档不套用 B 判据")
+          "非拉丁为主的文档不套用 B 判据；"
+          "另 check_corpus 本体九条（含读失败可见性与两种表头射程）")
     return 0
 
 
@@ -408,11 +494,21 @@ def main() -> int:
 
     files: list[pathlib.Path] = []
     for p in args.paths:
-        if p.is_dir():
+        # ★ 2026-08-12：`is_dir()` 对**病态路径**不是返回 False，而是抛 OSError
+        #   （实测 Errno 63「File name too long」——起因是我在 zsh 里对未加引号的
+        #   变量指望它按换行分词，**zsh 不做分词**，整串路径变成了一个参数）。
+        #   本件本来就有一条干净的「用法错误：… 不存在」出口，
+        #   不该在它前面掉进 traceback。**崩了也不是「查过了」。**
+        try:
+            is_dir, is_file = p.is_dir(), p.is_file()
+        except OSError as exc:
+            print(f"用法错误：{str(p)[:120]}… 取不到状态（{exc}）", file=sys.stderr)
+            return 3
+        if is_dir:
             files.extend(sorted(q for q in p.rglob("*")
                                 if q.is_file() and q.suffix in
                                 {".txt", ".md", ".py", ".json", ".jsonl"}))
-        elif p.is_file():
+        elif is_file:
             files.append(p)
         else:
             print(f"用法错误：{p} 不存在", file=sys.stderr)

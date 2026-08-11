@@ -63,14 +63,33 @@ import json
 import pathlib
 import re
 import sys
+import tempfile
 from collections import Counter
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+def _fallback_corpus_body(t):
+    """`common` 起不来时的兜底：**原样返回，不剥出处表头**。
+
+    ★★ 2026-08-12：这是「我这台机器永远走不到」的那条路
+    （[[untested-fallback-branches-only-fire-on-their-machine]]）。
+    走到它意味着**量的是「表头 + 正文」**——同族判据 `check_ocr_language_death`
+    已经栽过一次：我那段干净的英文表头把 OCR 烂掉的文件托过了及格线。
+
+    实测本件在现有语料上**零影响**（带表头的只有 Adams 144 份、Coffin 36 份，
+    是英/德文，语种门本来就判「未核」）——但**降级必须看得见**，
+    所以它每进程喊一次。静默降级就是「未检查冒充通过」。
+    """
+    if not getattr(_fallback_corpus_body, "_warned", False):
+        _fallback_corpus_body._warned = True
+        print("⚠ `common` 起不来，出处表头**未被剥掉**——本次量的是「表头 + 正文」，"
+              "结论可能偏乐观（表头是干净文字，会稀释讹字率）", file=sys.stderr)
+    return t
+
+
 try:
     from common import corpus_body
 except ImportError:                                          # pragma: no cover
-    def corpus_body(t):                                      # type: ignore
-        return t
+    corpus_body = _fallback_corpus_body                      # type: ignore
 
 # ── 两个语域各一套。锚词一律**不含字母 s**，长 s 讹变碰不到它们，
 #    所以在坏 OCR 上照样测得准。
@@ -550,6 +569,99 @@ def self_test() -> int:
     m4 = measure("enim autem atque igitur quidem quoniam " * 40)      # 拉丁但面板 0 命中
     chk("★ 拉丁但面板 0 命中 → **%s**，不是「干净」" % m4["verdict"], m4["verdict"] == "未核")
     chk("   空文本 → 未核", measure("")["verdict"] == "未核")
+
+    # ══════════════════════════════════════════════════════════════
+    # ㉖ `evaluate()` / `load_sources()` / `corpus_body` 兜底
+    #    —— 2026-08-12 之前这三个从没被自测进入过
+    # ══════════════════════════════════════════════════════════════
+    #
+    # 上面全部在打 `measure()`（**一段文本的讹字率**），那把尺子已经被真实测值钉死。
+    # 而 `evaluate()` 才是工作区入口：它决定**哪些源被量、量不到的怎么记、
+    # 什么进 problems**。`check_selftest_reach` 把本件列在
+    # 「验了配料、没验判决」名单上——它是对的。
+    print("\n══ ㉖ evaluate() 本体（tempdir 上跑真流程）══")
+    _LAT_OK = ("enim autem atque igitur quidem quoniam nisi tamen etiam quae quod " * 40
+               + "esse ipse causa sunt possit " * 20)
+    _LAT_BAD = ("enim autem atque igitur quidem quoniam nisi tamen etiam quae quod " * 40
+                + "esfe ipfe caufa funt poffit " * 20)
+
+    def _ws(rows, files):
+        d = pathlib.Path(tempfile.mkdtemp())
+        (d / "evidence").mkdir(parents=True, exist_ok=True)
+        if rows is not None:
+            (d / "evidence/source-ledger.jsonl").write_text(
+                "\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n",
+                encoding="utf-8")
+        for rel, body in files.items():
+            f = d / rel
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_text(body, encoding="utf-8")
+        return d
+
+    d = _ws([{"source_id": "src-ok", "local_path": "raw/ok.txt"}],
+            {"raw/ok.txt": _LAT_OK})
+    probs, rep = evaluate(d)
+    chk(f"㉖a 干净拉丁 → problems 0、分布 {rep['分布']}",
+        not probs and rep["分布"].get("干净") == 1)
+
+    d = _ws([{"source_id": "src-bad", "local_path": "raw/bad.txt"}],
+            {"raw/bad.txt": _LAT_BAD})
+    probs, rep = evaluate(d)
+    chk(f"㉖b 讹变拉丁 → problems 1 且**点名 source_id**"
+        f"（{probs[0][:34] if probs else '（无）'}…）",
+        len(probs) == 1 and "src-bad" in probs[0] and rep["分布"].get("不可用") == 1)
+
+    # ㉖c ★ 正文不在工作区**不是缺陷**（holdout 的正文按设计放在 references/holdout/）——
+    #    它必须单独记一栏，**不许混进 problems，也不许静默消失**。
+    d = _ws([{"source_id": "src-hold", "local_path": "raw/nope.txt"}], {})
+    probs, rep = evaluate(d)
+    chk(f"㉖c 正文不在工作区 → 单列一栏、不进 problems（{rep['分布']}）",
+        not probs and rep["分布"].get("正文不在工作区") == 1)
+
+    # ㉖d 射程：三行账本三种结局都要各归各位，不是只走第一行。
+    d = _ws([{"source_id": "src-ok", "local_path": "raw/ok.txt"},
+             {"source_id": "src-bad", "local_path": "raw/bad.txt"},
+             {"source_id": "src-hold", "local_path": "raw/nope.txt"}],
+            {"raw/ok.txt": _LAT_OK, "raw/bad.txt": _LAT_BAD})
+    probs, rep = evaluate(d)
+    chk(f"㉖d 射程：三行账本 → 干净1/不可用1/不在工作区1（{rep['分布']}），逐份 {len(rep['逐份'])} 条",
+        rep["分布"] == {"干净": 1, "不可用": 1, "正文不在工作区": 1} and len(rep["逐份"]) == 2)
+
+    # ㉖e ★★ **没有账本 ≠ 全部干净。** 现状是两者输出一样（分布都是 {}）——
+    #    这一条把它钉住：`load_sources` 返回空时，`分布` 必须是空的，
+    #    调用方**不许**把它读成通过。`main()` 据此单印一句（见下）。
+    d = _ws(None, {})
+    chk("㉖e 没有账本 → load_sources 返回 []、分布为空（**不是「全部干净」**）",
+        load_sources(d) == [] and evaluate(d)[1]["分布"] == {})
+
+    # ㉖f `corpus_body` 真的被调用：出处表头里塞满讹形，剥掉之后不该影响判定。
+    _HDR = "SOURCE: esfe ipfe caufa funt poffit " * 6 + "\n" + "=" * 24 + "\n"
+    d = _ws([{"source_id": "src-hdr", "local_path": "raw/h.txt"}],
+            {"raw/h.txt": _HDR + _LAT_OK})
+    probs, rep = evaluate(d)
+    chk(f"㉖f 出处表头里的讹形被 `corpus_body` 剥掉 → 仍判干净（{rep['分布']}）",
+        not probs and rep["分布"].get("干净") == 1)
+
+    # ㉖g ★★ `corpus_body` 的 ImportError 兜底是 `return t`（**不剥表头的空操作**）。
+    #    它是「我这台机器永远走不到」的那条路（[[untested-fallback-branches-only-fire-on-their-machine]]）。
+    #    实测：现有语料上它**零影响**——带表头的只有 Adams/Coffin，是英/德文，
+    #    语种门本来就判「未核」。但降级必须看得见，所以现在它会往 stderr 喊一声。
+    #    ⇒ 所以这一条**真去调它**，看它①原样返回②确实往 stderr 喊了那一声。
+    #      「读代码确认」不算：这条分支在我这台机器上永远走不到。
+    import contextlib as _ctx
+    import io as _io
+    _fallback_corpus_body._warned = False
+    _err = _io.StringIO()
+    with _ctx.redirect_stderr(_err):
+        _r1 = _fallback_corpus_body("SOURCE: x\n" + "=" * 24 + "\nbody")
+        _r2 = _fallback_corpus_body("again")          # 第二次不该重复喊
+    _msg = _err.getvalue()
+    chk(f"㉖g 兜底**真跑一遍**：原样返回（不剥表头）+ stderr 喊一次且只喊一次"
+        f"（喊了 {_msg.count('未被剥掉')} 次）",
+        _r1.startswith("SOURCE:") and _r2 == "again" and _msg.count("未被剥掉") == 1)
+    #    对照：真 `corpus_body` 必须剥掉表头——否则上面那条只是「两个都不剥」。
+    chk("㉖g′ 对照：真 `corpus_body` 剥得掉同一段表头",
+        corpus_body("SOURCE: x\n" + "=" * 24 + "\nbody").strip() == "body")
 
     print("\n" + ("自测通过" if ok else "**自测未过**"))
     return 0 if ok else 1
