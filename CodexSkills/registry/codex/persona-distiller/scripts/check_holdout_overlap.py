@@ -67,8 +67,37 @@ import argparse, json, pathlib, re, sys
 
 N = 8
 HARD, SOFT = 0.30, 0.10
+# ★★★ 连续逐字段的两条线，**由全库 29 个工作区的实测分布定**
+#   （见 `_ledgers/_holdout连续段全库分布-2026-08-11.md`）。
+#
+#   `RUN_WARN=50`：非样板的连续逐字段一到 50 词，就逐段落盘，**出评测题必须避开**。
+#
+#   `RUN_HARD_COUNT=50`：**按段数、不按长度**硬失败。为什么不按长度——实测：
+#
+#       Whitworth 最长 496 词 = Google 图书扫描声明（**样板**）
+#       Lister   最长 215 词 = 他本人的换药指示（**真内容**）
+#
+#   **样板可以比内容长一倍以上**，所以长度分不开这两类。样板过滤（df）能滤掉一部分
+#   （Whitworth 496→89、Blackstone 82→0、Thomson 66→0、Fleming 54→0），
+#   但滤不干净：Whitworth 剩下的 89 词仍是 Google 的使用条款，
+#   因为它只出现在他 2–3 份源里、够不着 `df_max`。而**把 df_max 压到 2 会连
+#   Lister 这个真阳性一起杀掉**——他那段正好也在两份 train 源里。
+#
+#   → 工作区内的 df **原理上分不开**这两类。所以本件的产物是**逐段清单**，
+#     它要被读；硬失败的判据因此是「**还读不读得完、避不避得开**」：
+#     段数 ≥50 时人工避开不再可信（Lister 247 段 → ✗；Blackwell 40、
+#     Holmes 17、Whitworth 1 → ⚠ 逐段读）。
+RUN_WARN, RUN_HARD_COUNT = 50, 50
 _WORD = re.compile(r"[a-z0-9']+")
 _ALPHA = re.compile(r"[a-z]")
+# ★★★ 连续段专用分词：**不含撇号**。
+#   `_WORD` 把撇号算进词里（`plaintiffs'` 是一个词），这对 shingle 无所谓，
+#   但对「连续多少词相同」是致命的：OCR 在两个印本上撒的游离撇号位置不同，
+#   一个撇号就把一整段截成两段。Holmes #170 实测**同一段被量成 94 词，
+#   换成本分词后是 136 词**——差 42 词，且方向是**低报泄漏**。
+#   （与自测 ④ 的 M1 变异同类：低报比误报危险。）
+#   `_WORD` 不动，因为覆盖率那一栏的历史行为不能改。
+_RUN_WORD = re.compile(r"[a-z0-9]+")
 
 
 def shingles(text: str, n: int = N) -> set:
@@ -100,6 +129,91 @@ def body(path: pathlib.Path) -> str:
     t = re.sub(r"skip to (main|sidebar)|market folly|Tracking top hedge funds"
                r"|About/Contact|New Hedge Fund Newsletter[^\n]*", " ", t, flags=re.I)
     return t
+
+
+def runs(hold_words: list, train_words: list, n: int = N, cap: int = 64) -> list:
+    """→ [(词数, train 侧起点, holdout 侧起点)]，两侧**连续逐字相同**的段，长的在前。
+
+    ## ★★★ 为什么覆盖率不够——Holmes #170 实测
+
+    覆盖率的分母是**整份 holdout**。Holmes 的 holdout 是 34.7 万片 shingle，
+    而 train 里那本 1929 年 Vanguard 合辑有一节标题就叫
+    `EXCERPTS FROM OTHER MAJORITY OPINIONS`，逐字转载了 holdout 卷次里的多数意见——
+    **≥8 词的连续共有段 167 处、合计 3700 词（占 holdout 全文 1.04%）；
+    其中 ≥50 词的 17 处，最长一段 136 词**。（两个口径要分开写——
+    只给一个数等于替读者选了对自己有利的那档，[[counts-need-their-cutoff-stated]]。）
+
+        覆盖率 = 0.0157 → 远低于 SOFT 0.10 → **这道门当时是绿的**。
+
+    分母越大，绝对量再大的转载也压不动比值。**holdout 越大，比值门越瞎**
+    （同一形态见 [[ratio-gates-can-be-passed-by-shrinking]]）。
+
+    而评测题是**按段出的，不是按语料出的**：一段 136 词的逐字文字既在 holdout
+    又在 train，用它出的题就不测泛化——**不管它占全份的百分之几**。
+    所以这里量的是**绝对长度**，与 holdout 的大小无关。
+
+    做法：holdout 的每个 n 元组记下**全部**出现位置（不是只记第一个——
+    只记第一个会把重复出现的段量短，那是**低报泄漏**的方向），
+    再从 train 侧逐个贪婪向后延伸取最长。`cap` 限制单个 n 元组的候选位置数，
+    防止高频短语让复杂度爆掉。
+    """
+    idx = {}
+    for i in range(len(hold_words) - n + 1):
+        idx.setdefault(" ".join(hold_words[i:i + n]), []).append(i)
+    out, i = [], 0
+    while i <= len(train_words) - n:
+        pos = idx.get(" ".join(train_words[i:i + n]))
+        if not pos:
+            i += 1
+            continue
+        best_len, best_j = 0, pos[0]
+        for j in pos[:cap]:
+            L = n
+            while i + L < len(train_words) and j + L < len(hold_words) \
+                    and train_words[i + L] == hold_words[j + L]:
+                L += 1
+            if L > best_len:
+                best_len, best_j = L, j
+        out.append((best_len, i, best_j))
+        i += best_len
+    out.sort(reverse=True)
+    return out
+
+
+BOILER_RUN_FRAC = 0.5
+
+
+def _is_boiler_run(train_words: list, run, boiler: set, n: int = N) -> bool:
+    """这一段连续文字是**样板**还是**内容**？
+
+    ## ★★★ 为什么不能只看长度（2026-08-11 全库实测，29 个工作区）
+
+    在「覆盖率 <0.10、旧门全绿」那一组里，**最长的几段几乎都不是内容**：
+
+    | 工作区 | 最长段 | 那段是什么 |
+    |---|---|---|
+    | joseph-whitworth | **496 词** | Google 图书的扫描声明 |
+    | joseph-lister | 215 词 | **真内容**（换药手法） |
+    | elizabeth-blackwell | 193 词 | **真内容**（法条原文） |
+    | oliver-wendell-holmes-jr | 136 词 | **真内容**（转载的意见正文） |
+    | william-blackstone | 82 词 | 题名页 |
+    | elihu-thomson | 66 词 | **本流水线自己写的溯源头** |
+    | alexander-fleming | 54 词 | 出版社简介 |
+
+    **样板可以比内容长得多**——496 > 215。所以阈值再怎么调也分不开这两类，
+    分它们的**不是长度，是「这段字在本工作区出现了几次」**：
+    扫描声明、题名页、溯源头会出现在同一工作区的多份源里，
+    而真转载只出现在被转载的那一份里（df == 1）。这正是本件文件头写的那条定则。
+
+    第一版把它写成「抽样中**有一处**不是样板就保留」——太松，
+    上表里 496／82／66 三段全被放过。改成**按比例**：
+    整段的 n 元组里有 ≥`BOILER_RUN_FRAC` 落在样板集里，判为样板。
+    """
+    grams = [" ".join(train_words[run[1] + k:run[1] + k + n])
+             for k in range(0, run[0] - n + 1)]
+    if not grams:
+        return False
+    return sum(1 for g in grams if g in boiler) / len(grams) >= BOILER_RUN_FRAC
 
 
 def check(ws: pathlib.Path, cache: list[pathlib.Path]) -> int:
@@ -151,7 +265,7 @@ def check(ws: pathlib.Path, cache: list[pathlib.Path]) -> int:
     tr_sh = {s: t - boiler for s, t in tr_sh.items()}
     print(f"train {len(tr)} 份 / holdout {len(ho)} 份，n={N} 连续词")
     print(f"样板过滤：出现在 >{df_max} 份 train 源中的 shingle 共 {len(boiler)} 个，已剔除\n")
-    hard = soft = 0
+    hard = soft = n_pass = 0
     for s, p in ho:
         hs = shingles(body(p)) - boiler
         if not hs:
@@ -169,15 +283,62 @@ def check(ws: pathlib.Path, cache: list[pathlib.Path]) -> int:
         if cov < 0.01:
             print(f"        最高覆盖 {cov:.2%}（与 {top}）")
 
+    # ── ★ 第二把尺子：**连续逐字段的绝对长度**（比值门看不见的那一种，见 runs()）──
+    tr_w = {s: _RUN_WORD.findall(body(p).lower()) for s, p in tr}
+    longest = 0
+    passages = {}
+    for s, p in ho:
+        hw = _RUN_WORD.findall(body(p).lower())
+        rows = []
+        for ts, tw in tr_w.items():
+            rs = [r for r in runs(hw, tw) if r[0] >= RUN_WARN]
+            rs = [r for r in rs if not _is_boiler_run(tw, r, boiler)]
+            if rs:
+                rows.append((rs[0][0], len(rs), ts, rs))
+        rows.sort(reverse=True)
+        if not rows:
+            print(f"  ✓ {s} 最长连续逐字段 < {RUN_WARN} 词")
+            continue
+        top = rows[0][0]
+        cnt_all = sum(r[1] for r in rows)
+        longest = max(longest, top)
+        n_pass += cnt_all
+        mark = "✗" if cnt_all >= RUN_HARD_COUNT else "⚠"
+        print(f"  {mark} {s} **最长连续逐字段 {top} 词**"
+              f"（≥{RUN_WARN} 词的段共 {cnt_all} 处）")
+        for mx, cnt, ts, rs in rows[:3]:
+            print(f"        与 {ts}：最长 {mx} 词、{cnt} 处｜"
+                  f"「{' '.join(tr_w[ts][rs[0][1]:rs[0][1] + 12])}…」")
+        passages[s] = [{"words": r[0], "train_source": ts,
+                        "text_head": " ".join(tr_w[ts][r[1]:r[1] + 20])}
+                       for mx, cnt, ts, rs in rows for r in rs]
+    if passages:
+        out = ws / "reports/holdout-contaminated-passages.json"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(passages, ensure_ascii=False, indent=2),
+                       encoding="utf-8")
+        print(f"\n  ★ 受污染段已逐段落盘：{out.relative_to(ws)}"
+              f"——**出评测题时必须避开这些段**")
+
     print(f"\n硬失败 {hard} / 待人工核 {soft}")
+    if n_pass >= RUN_HARD_COUNT:
+        print(f"✗ **非样板的连续逐字段 {n_pass} 处 ≥ {RUN_HARD_COUNT}（最长 {longest} 词）**"
+              f"\n  ——多到无法逐段避开，该 holdout 必须换掉。"
+              f"\n  覆盖率那一栏看不见这件事：分母是整份 holdout，绝对量再大也压不动比值。")
+        return 1
+    if n_pass:
+        print(f"⚠ **非样板的连续逐字段 {n_pass} 处（最长 {longest} 词）**"
+              f"\n  ——逐段读清单，**出评测题必须避开这些段**；避不开就换 holdout。")
     if hard:
         print("✗ 有 holdout 的内容已在 train 中出现——**必须换源**。"
               "\n  用它出的 known 题不测泛化，且一定得高分。")
         return 1
     if soft:
         print("⚠ 有中等重合，逐条核完再往下走（同场活动的不同报道可接受，转载不可）")
-    else:
+    elif not n_pass:
         print("✓ 无内容重合")
+    # ★ `n_pass > 0` 时**不许再印「✓ 无内容重合」**：上一行刚说有 17 处受污染段，
+    #   下一行盖一个绿章，读的人只会记住绿章。[[empty-default-swallows-unknown]]
     return 0
 
 
@@ -191,7 +352,66 @@ def self_test() -> int:
     ok2 = len(dup & shingles(b)) / len(dup) < SOFT
     print(f"  {'✓' if ok1 else '✗'} 重复文本被抓到")
     print(f"  {'✓' if ok2 else '✗'} 无关文本被放过")
-    return 0 if (ok1 and ok2) else 1
+
+    # ── runs()：连续逐字段 ──
+    fails = []
+
+    def chk(label, got, want):
+        print(f"  {'✓' if got == want else '✗'} {label}"
+              + ("" if got == want else f"  得 {got!r} 应为 {want!r}"))
+        if got != want:
+            fails.append(label)
+
+    para = ("the common law is not a brachylogous system but grows by the "
+            "slow accretion of decisions each of which is a compromise between "
+            "the felt necessities of the time and the received tradition of the "
+            "past and no general proposition can settle a concrete case for the "
+            "line has to be drawn somewhere between the extremes that everyone "
+            "admits and the point at which reasonable men will differ in their "
+            "judgment of degree").split()
+    noise = ("an entirely unrelated discussion of tariffs and freight rates in "
+             "the several states during the same period").split()
+    # ① 正对照：整段逐字转载必须量到**整段的长度**
+    r1 = runs(noise + para + noise, ["prelude"] + para + ["tail"])
+    chk("① 60+ 词整段 → 量到整段", r1[0][0] if r1 else 0, len(para))
+    # ② 反对照：不相干文本一段都不许有
+    chk("② 不相干文本 → 无连续段", runs(noise, "wholly different words about "
+                                    "chemistry and metallurgy here".split()), [])
+    # ③ 反对照：**换行方式不同不许影响判定**（真语料两侧折行必然不同；
+    #    夹具若两侧折行一样，就是 [[fixtures-cleaner-than-the-real-thing]]）
+    wrapped = _RUN_WORD.findall("\n".join(" ".join(para[i:i + 7])
+                                      for i in range(0, len(para), 7)).lower())
+    chk("③ 折行不同 → 仍量到整段", (runs(para, wrapped) or [(0,)])[0][0], len(para))
+    # ★★★ ④ 反对照：**同一段在 holdout 里出现两次，而第一次被截断**。
+    #    只记第一个出现位置的实现会报 8 词（= 低报泄漏），必须报整段。
+    hold2 = para[:N] + ["INTERRUPTED"] + noise + para
+    chk("④ 首次出现被截断 → 不许低报", (runs(hold2, para) or [(0,)])[0][0], len(para))
+    # ★★★ ⑤b 反对照：**一侧多一个 OCR 游离撇号，不许把连续段截断**。
+    #    含撇号的分词在 Holmes #170 上把 136 词的段量成 94 词（低报泄漏）。
+    dirty = list(para)
+    dirty[len(para) // 2] = dirty[len(para) // 2] + "'"
+    chk("⑤b 游离撇号 → 仍量到整段",
+        (runs(para, _RUN_WORD.findall(" ".join(dirty))) or [(0,)])[0][0], len(para))
+    # ⑤ 正对照：**线本身要能分档**——刚好够 RUN_WARN 的段不算硬失败
+    chk("⑤ 两条线都为正且段数线可达", RUN_WARN > 0 and RUN_HARD_COUNT > 0, True)
+
+    # ── _is_boiler_run：样板段与内容段 ──
+    # ★ 这一对是**成对**的：只测「样板被丢掉」而不测「内容被留下」，
+    #   一个恒返回 True 的实现也能全绿（[[counter-example-red-can-be-coincidence]]）。
+    boiler_set = {" ".join(noise[k:k + N]) for k in range(len(noise) - N + 1)}
+    long_boiler = (noise * 6)[:60]
+    chk("⑥ 样板段（多份源共有）→ 判为样板",
+        _is_boiler_run(long_boiler, (len(long_boiler), 0, 0), boiler_set), True)
+    chk("⑥b **内容段 → 不许判成样板**",
+        _is_boiler_run(para, (len(para), 0, 0), boiler_set), False)
+    # ⑥c 边界：**样板占少数时必须留下**（否则真内容会被样板过滤吃掉）。
+    #   ★ 这里有个反直觉的点，写下来免得下次又算错：
+    #     「一半词数」不等于「一半 n 元组」——**跨接缝的 n 元组一个都不是样板**，
+    #     所以 60 词样板 + 60 词内容实测只有 39/113 = 0.345 是样板。
+    #     我第一版把这条的预期写成「判为样板」，红的是预期不是实现。
+    chk("⑥c 样板占少数 → 不许判成样板",
+        _is_boiler_run(long_boiler[:24] + para, (24 + len(para), 0, 0), boiler_set), False)
+    return 0 if (ok1 and ok2 and not fails) else 1
 
 
 if __name__ == "__main__":

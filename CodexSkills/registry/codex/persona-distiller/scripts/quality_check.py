@@ -4116,6 +4116,15 @@ def main() -> int:
         run_translation_witness(report, target)
         run_title_is_not_filename(report, target)
         run_filename_year_vs_ledger(report, target)
+        # ★★★ v0.0.0.154：**从 synthesis 提前到 research**。
+        #   污染在**切分那一刻**就存在了，而这道门原本要到合成阶段才跑——
+        #   等它开口时，建模者已经把受污染的 train 文本整本读完了。
+        #   它自己的注释写着「划 holdout 的时候看到它就该换源，那时候换还来得及」，
+        #   而调用点把它挂在了来不及的那一阶段。
+        #   Holmes #170 实测：train 侧那本 1929 年合辑有一节标题就叫
+        #   `EXCERPTS FROM OTHER MAJORITY OPINIONS`，与 holdout 有 167 段连续逐字文字、
+        #   最长 136 词——**而覆盖率只有 0.0157，比值门当时全绿**。
+        run_holdout_overlap(report, target, args.cache)
         cases: list[dict[str, Any]] = []
         if args.phase in {'synthesis', 'release'}:
             evaluate_claims(report, target, thresholds, sources, args.allow_provisional)
@@ -4130,7 +4139,6 @@ def main() -> int:
             run_unwired_three(report, target)
             run_unqualified_priority(report, target)
             run_sole_authorship(report, target)
-            run_holdout_overlap(report, target, args.cache)
         if args.phase == 'release':
             evaluate_results(report, target, thresholds, cases)
             run_suite_single_drag(report, target, thresholds)
