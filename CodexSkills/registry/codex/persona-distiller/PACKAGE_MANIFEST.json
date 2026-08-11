@@ -826,13 +826,13 @@
     },
     {
       "path": "references/pipeline/checkers/check_self_reported_counts.py",
-      "sha256": "df718357b640a12cbf27edb20aebf7a65ca8fd6fc4c1bc25b60f4db11ce0602f",
-      "size_bytes": 17138
+      "sha256": "40dc54733ad3874ce1065ece1a80512c1374ffaf3a40de9263c30b84250b7633",
+      "size_bytes": 20840
     },
     {
       "path": "references/pipeline/checkers/check_selftest_reach.py",
-      "sha256": "924d2cd575f0004bc2777939d480e8298974ee6e9151716368c49a1012168d86",
-      "size_bytes": 11197
+      "sha256": "4204640ff76a61946b1689eeac83d6f0ed62553c4c8027b52a09f4fc32df91c8",
+      "size_bytes": 11164
     },
     {
       "path": "references/pipeline/checkers/check_semantic_residue.py",
@@ -1616,13 +1616,13 @@
     },
     {
       "path": "scripts/check_self_reported_counts.py",
-      "sha256": "df718357b640a12cbf27edb20aebf7a65ca8fd6fc4c1bc25b60f4db11ce0602f",
-      "size_bytes": 17138
+      "sha256": "40dc54733ad3874ce1065ece1a80512c1374ffaf3a40de9263c30b84250b7633",
+      "size_bytes": 20840
     },
     {
       "path": "scripts/check_selftest_reach.py",
-      "sha256": "924d2cd575f0004bc2777939d480e8298974ee6e9151716368c49a1012168d86",
-      "size_bytes": 11197
+      "sha256": "4204640ff76a61946b1689eeac83d6f0ed62553c4c8027b52a09f4fc32df91c8",
+      "size_bytes": 11164
     },
     {
       "path": "scripts/check_semantic_residue.py",

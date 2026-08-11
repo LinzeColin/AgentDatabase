@@ -306,7 +306,68 @@ def self_test() -> int:
         print(f"  {'✓' if okz else '✗'} 「{s}」→ 不计入")
         fail += not okz
 
-    print("\n  ✓ 负对照通过（13/13）" if not fail
+    # ══════════════════════════════════════════════════════════════
+    # ★★★ `scan()` 本身——**2026-08-12 之前从没被自测进入过**
+    # ══════════════════════════════════════════════════════════════
+    #
+    # 上面 13 条全在验 `check_text`（纯函数）。`scan()` 才是
+    # **读文件、按 JSON 形状分发**的那一段，而判分产物**实测有至少五种格式**
+    # （[[eval-artifacts-have-five-schemas]]）——分发错一种，那一批就整批静默漏掉。
+    #
+    # ★ 挑它补的直接理由：2026-08-12 我自己两次自报数字出错
+    #   （把问题率当合格率、用 `max` 挑字段），**而管这件事的判据自己没验过实读**。
+    import json as _json
+    import tempfile as _tf
+
+    def _w(td, name, obj):
+        f = pathlib.Path(td) / name
+        f.write_text(_json.dumps(obj, ensure_ascii=False), encoding="utf-8")
+        return str(f)
+
+    # ★ 用**本件自己的真实样本**（Virchow #109，自称十七字实为 14）——
+    #   我第一版自造了「本节共十二条，实际列出三条」，**它不触发**：
+    #   本件只认「N 字」这种**字数**声明，条数声明不在射程内。
+    #   ⇒ 造夹具前先确认它落在判据的射程里，否则「没红」证明不了任何事
+    #     （[[counter-example-red-can-be-red-by-coincidence]] 的第三种形态）。
+    BAD = "**因为成因常在住房、口粮与教育里。**（不含标点十七字，数过的。）"
+    OK = "**因为成因常在住房、口粮与教育里。**（不含标点十四字，数过的。）"
+
+    with _tf.TemporaryDirectory() as td:
+        # ⑭ 形状一：顶层是 list，逐行取 A/B 两侧
+        p1 = _w(td, "a.json", [{"case_id": "q-01", "A": BAD, "B": OK}])
+        acc = scan([p1])
+        _ok = (len(acc["bad"]) == 1
+            and "q-01:A" in str(acc["bad"][0]))
+        print(f"  {'✓' if _ok else '✗'} ⑭ list 形状：A 侧的声明被抓到")
+        fail += not _ok
+
+        # ⑮ 形状二：顶层是 dict，键即 uid
+        p2 = _w(td, "b.json", {"case-9": BAD, "_meta": BAD})
+        acc = scan([p2])
+        _ok = (any("case-9" in str(x) for x in acc["bad"]))
+        print(f"  {'✓' if _ok else '✗'} ⑮ dict 形状：抓到 case-9")
+        fail += not _ok
+        # ⑮′ ★ `_` 开头的键是元数据，**不许当答案扫**（否则元数据里的数字会算成声明）
+        _ok = (not any("_meta" in str(x) for x in acc["bad"]))
+        print(f"  {'✓' if _ok else '✗'} ⑮′ `_meta` 被跳过（下划线开头＝元数据）")
+        fail += not _ok
+
+        # ⑯ ★★ **第三种形状：既不是 list 也不是 dict-of-str**——
+        #   实测判分产物至少五种格式，本件只认两种。**认不出来时必须是「没扫到」而不是「没问题」**，
+        #   而 `seen` 就是那个能把两者分开的数。
+        p3 = _w(td, "c.json", {"rows": [{"A": BAD}]})   # 嵌套一层，本件不认
+        acc = scan([p3])
+        _ok = (acc["bad"] == [] and acc["seen"] == 0)
+        print(f"  {'✓' if _ok else '✗'} ⑯ 认不出的形状 → bad 为空**且 seen 为 0**（不是「查过没问题」）")
+        fail += not _ok
+
+        # ⑰ 多文件累加，不覆盖
+        acc = scan([p1, p2])
+        _ok = (len(acc["bad"]) >= 2)
+        print(f"  {'✓' if _ok else '✗'} ⑰ 多文件累加：两处都在")
+        fail += not _ok
+
+    print("\n  ✓ 负对照通过" if not fail
           else f"\n  ✗ {fail} 项未过——本检查器已失效，其「通过」不构成证据")
     return fail
 
