@@ -190,6 +190,19 @@ def self_test() -> int:
         ok = ok and bool(cond)
         print(("  ✓ " if cond else "  ✗ ") + msg)
 
+    # ★★★ 2026-08-11 变异实测补的：**`_sd_ci` 之前没有任何断言**。
+    #   把它抹成 `return (0.0, 0.0)`，四条反向对照**一条都没红**——
+    #   因为它只出现在「★ SE 自身的区间」那一栏，而那一栏从没被断言过。
+    #   而那一栏正是用来说「sd 不确定度很大」、拦住过度自信的结论的。
+    print("── ★★ `_sd_ci`：SE 自身的区间 ──")
+    lo5, hi5 = _sd_ci(5)
+    lo40, hi40 = _sd_ci(40)
+    chk("小样本时区间**跨过 1**（lo<1<hi）", lo5 < 1.0 < hi5)
+    chk("大样本时也跨过 1", lo40 < 1.0 < hi40)
+    chk("★ **样本越小，区间越宽**（n=5 宽于 n=40）", (hi5 - lo5) > (hi40 - lo40))
+    chk("★ 反对照：**不许退化成 0 宽**（这正是变异抹掉的那一步）", (hi5 - lo5) > 0.1)
+    chk("表里没有的 n 走最近邻，不抛异常", isinstance(_sd_ci(7), tuple) and len(_sd_ci(7)) == 2)
+
     import tempfile
 
     def mk(root, name, items, scores_by_seat, key=None):
