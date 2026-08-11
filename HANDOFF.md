@@ -917,7 +917,8 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/check_disposition_e
 
 **不需要任何设置**：路径是本机已有的主树，`git pull` 之后 `HANDOFF.md` 就在仓根。
 
-**★ 这句话的前提 2026-08-12 逐条实测过**（推送之前能验的都验了）：
+**★ 这句话的前提 2026-08-12 逐条实测过，当日**收尾又重验一遍**，六条全部仍成立**
+（推送之前能验的都验了）：
 
 | 前提 | 实测 |
 |---|---|
@@ -938,7 +939,7 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/check_disposition_e
 
 | 位置 | 版本 | 判据件数 |
 |---|---|---|
-| 工作分支（推送的就是它） | **v0.0.0.154** | **91** |
+| 工作分支（推送的就是它） | **v0.0.0.154** | **92** |
 | 主树 `AgentDatabase`（`git pull` 拿到的） | v0.0.0.22 | —— |
 | **本机安装** `~/.codex/skills/persona-distiller` | **v0.0.0.13** | **9** |
 
