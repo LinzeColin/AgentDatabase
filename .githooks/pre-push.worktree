@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# worktree 版 pre-push —— **只跑体积闸**，并把跑不了的那道门大声说出来。
+#
+# ## 为什么本文件必须存在（2026-08-11 实证）
+#
+# `core.hooksPath = .githooks`（local 作用域，所有 worktree 共享这条配置），
+# 而 `.githooks/` **在版本库里 0 个文件被跟踪**——它只是主树的一个本地未跟踪目录。
+# 于是 git 在每个 worktree 里解析出的 `.githooks/pre-push` **不存在**，
+# **整个 pre-push 环节静默不跑**。
+#
+# 本地裸仓实测（不碰任何远端）：
+#
+#     ① 本树无 .githooks/pre-push：推 2 GB 真分支 → 退出码 0、守卫 0 次出声、
+#        **920 MB 真的落进裸仓**
+#     ② 放上守卫后同一条推送 → 退出码 1、守卫出声 1 次、只落 76 KB
+#
+# ★ 而铁律 2 要求**一切开发都在 worktree**。
+#   于是那道 200 MB 的闸只护着唯一不开发的地方。
+#
+# ## 为什么不直接把主树那份拷过来
+#
+# 主树 `.githooks/pre-push` 尾部是
+# `exec "$repo/ops/memory-atlas/canonical_gate.sh" "$repo" quick`，
+# 而 `canonical_gate.sh` **同样是主树独有的未跟踪文件**（`git ls-files` 命中 0）。
+# 实测：整份拷过来之后，**一次合法的小推送被堵死**
+# （`No such file or directory`，退出码 1，裸仓一个 ref 也没收到）。
+# **那是把「没有守卫」换成「谁也推不了」，不是修好。**
+#
+# ## 跑不了的那道门要大声说
+#
+# 「没装就跳过」的分支静默 exit 0 是本项目吃过的亏
+# （[[untested-fallback-branches-only-fire-on-their-machine]]）。
+# 所以下面找不到 canonical_gate.sh 时**打印一行明示**，再放行——
+# 放行的是「体积闸已判过」，不是「所有门都过了」。
+#
+# 逃生口：LINZE_ALLOW_BULK_PUSH=1 git push ...
+set -uo pipefail
+
+BULK_LIMIT_MB=${LINZE_BULK_LIMIT_MB:-200}
+z=0000000000000000000000000000000000000000
+
+if [[ -z "${LINZE_ALLOW_BULK_PUSH:-}" ]]; then
+  while read -r lref lsha rref rsha; do
+    [[ "$lsha" == "$z" ]] && continue                 # 删分支
+    if [[ "$rsha" == "$z" ]]; then rng="$lsha --not --remotes"; else rng="$rsha..$lsha"; fi
+    # rev-list --objects 每行是 "<sha> <path>"，cat-file 只吃纯 sha：
+    # 不切掉路径的话结果恒为 0，这个闸就成了摆设（上游第一版正是这么错的）。
+    bytes=$(git rev-list --objects $rng 2>/dev/null | awk '{print $1}' \
+      | git cat-file --batch-check='%(objecttype) %(objectsize)' 2>/dev/null \
+      | awk '/^blob/{s+=$2} END{print s+0}')
+    mb=$(( bytes / 1048576 ))
+    if (( mb > BULK_LIMIT_MB )); then
+      {
+        echo ""
+        echo "  ✗ 拒绝推送：本次要推 ${mb} MB 新增内容（上限 ${BULK_LIMIT_MB} MB）。"
+        echo ""
+        echo "  仓一旦收下就吐不出来 —— git 历史删不掉，除非 rewrite 全部 commit hash。"
+        echo "  每个 clone、每个 worktree 都要跟着复制一份。"
+        echo ""
+        echo "  看是谁占的："
+        echo "      git rev-list --objects $rng | awk '{print \$1\" \"\$2}' \\"
+        echo "        | git cat-file --batch-check='%(objecttype) %(objectsize) %(rest)' \\"
+        echo "        | sort -k2 -rn | head -20"
+        echo ""
+        echo "  这类产物应 .gitignore，另存 GitHub Release / 私有仓。"
+        echo "  R2 有额度红线（Standard 10GB 免费、IA 一次操作起步 \$9.91）。"
+        echo ""
+        echo "  确认无误要强推：LINZE_ALLOW_BULK_PUSH=1 git push ..."
+        echo ""
+      } >&2
+      exit 1
+    fi
+  done
+fi
+
+repo=$(git rev-parse --show-toplevel)
+gate="$repo/ops/memory-atlas/canonical_gate.sh"
+if [[ -x "$gate" ]]; then
+  exec "$gate" "$repo" quick >/dev/null
+fi
+echo "  · pre-push：体积闸已过（≤ ${BULK_LIMIT_MB} MB）。" >&2
+echo "    ★ **memory-atlas 的 quick 门在本 worktree 跑不了**——" >&2
+echo "      $gate 不存在（它是主树独有的未跟踪文件）。" >&2
+echo "      **放行的是「体积闸判过了」，不是「所有门都过了」。**" >&2
+exit 0
