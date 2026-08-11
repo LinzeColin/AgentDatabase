@@ -115,8 +115,30 @@
 > 它们的文件名是**描述性命名**（`de_officiis_miller_1913_en.txt`），
 > **推不出 IA 条目号**，要补得真去查（需要网络）。
 >
-> ⇒ **移走语料对已入库人物的可恢复性风险，只有 Semmelweis 那 6 条。**
->   其余 66 条属于已经不再产出分数的人物。
+> ⇒ ★ **更正**：我先写「Semmelweis 是唯一一个已入库人物」，**那是错的**——
+>   `registry/codex/` 里没有它，它**在延后名单里**。
+>   **72 条缺口无一属于已入库人物，移走语料对已发布分数零风险。**
+>
+> ### 顺手在 Semmelweis 台账里抓到两条：**台账自己的命名约定与 tier 打架**
+>
+> 该台账的文件名前缀是有约定的：`w_` = 他的作品，`x_` = 别人的。而 7 条 P1 里：
+>
+>     P1  w_gesammelte_werke_v1 / v2 / ia_1905      他的文集（三份，疑似同源，未查）
+>     P1  w_offener_brief_saemmtliche_professoren_1862   ✓
+>     P1  w_zwei_offene_briefe_spaeth_scanzoni_1861      ✓
+>     P1  **x_**eisenmann_die_kindbettfieber_1834        ✗ Eisenmann 的书
+>     P1  **x_**virchow_gesammelte_abhandlungen_1862     ✗ Virchow 的文集
+>
+> ⇒ 两条 `x_` 记着 P1，与 [[related-to-him-is-not-written-by-him]] 同型
+>   （Liebig 9 份混进一手，占比 0.7419→0.5192）。
+>
+> ★★ 我在这一步差点又误报一条：`w_zwei_offene_briefe_spaeth_scanzoni_…` 我按
+>   「文件名含别人名字」的启发式判成混入，**去读才知道那是他写给 Späth 与 Scanzoni
+>   的两封公开信——名字是收信人不是作者**，P1 完全正确。
+>
+> ★★★ 该人物一手占比实测 **0.1186**（7/59），远低于 quick 门 0.40——
+>   与它在延后名单里一致，不是新问题。**年份与文件名对不上的另有 4/6**，
+>   与 #100「元数据整组挂错源」是同一件事的实证。
 >
 > ### 这一条只能由人定，选项与代价
 >
