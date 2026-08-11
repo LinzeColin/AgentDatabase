@@ -95,6 +95,14 @@
         "证据": "blackstone_namesake_candidates.json 中 F 条的 distinguishing_basis，逐条实调所得",
         "处置": "不计入 P1；若语料中出现，标为同名者材料"
       }
+    ],
+    "covered_sources": [
+      "★ 口径：**点名不是免检，是我为这 5 份的归属背书**。依据全部是本工作区语料里逐字照录的扉页／正文，全文见 evidence/source-ledger.jsonl 各行的 attribution。拿不到 A-* 戳是因为 OCR 把署名打碎了，**不是没有署名**——唯一例外是第 3 条。",
+      "commentaries_bk2_1898_en.txt —— 扉页 `Stk WILLIAM BLACKSTONE, Knight One of the Justices of His Majesty's Court of Common Pleas`（`Stk` = OCR 打碎的 `SIR`）。该头衔 1770–1780 只属目标一人。",
+      "discourse_study_of_law_1758_en.txt —— 牛津 Vinerian 讲席**首任**教授的就职讲词；文内自述 `a ſtudy, which is now firſt adopts ed by public academical authority`。讲席 1758 年首创，首任者唯一。",
+      "lawyers_farewell_to_his_muse_1763_en.txt —— ★ **本诗在 Dodsley 选集里不署名**（体例 `BY SEVERAL HANDS`）。归属靠**另一份语料内的同代人证词**：遗嘱执行人 James Clitherow 撰、附于 1781 年 Reports 卷首的传记，在 reports_westminster_1781_en_vol1.txt 内照录作 `The Lawyer's Faracell 1 Mae`（OCR 打碎的 `Farewell to his Muse`）。**本批唯一一份不靠自身扉页定的。**",
+      "reply_to_priestley_1773_en.txt —— 分辑扉页作 `B Y T H E AUTHOR OF THE COMMENTARIES`，**印本不印名字**；正文起首 `his Remarks on ſome paragraphs in the fourth volume of my Com- mentaries` 以第一人称认领《释义》。",
+      "reports_westminster_1781_en_vol2.txt —— 扉页 `Taken and n by the Hotvurable | Six WILLIAM BLACKSTONE, Knt.`（`Six` = OCR 的 `Sir`），与第一卷同套同年同印工（`W. STRAHAN; T. CADELL`），遗嘱执行人依遗嘱刊行。"
     ]
   }
 }

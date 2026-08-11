@@ -18,18 +18,23 @@
   "William Blackstone Bradbury",
   "William Blackstone Rennell",
   "William Blackstone Lee",
-  "William Blaxton"
+  "William Blaxton",
+  "Henry Blackstone",
+  "H. Blackstone",
+  "Henry Blackstone, of the Middle Temple"
  ],
  "any_of_markers": [
-  "Common Pleas",
-  "King's Bench",
+  "VINERIAN",
+  "Vinerian",
+  "Solicitor General",
+  "Knight",
+  "Knt",
   "Pembroke College",
-  "Charterhouse",
-  "serjeant"
+  "Charterhouse"
  ],
  "marker_window": 60,
- "★ 区分符的出处与射程": "五个区分符全部取自 `blackstone_namesake_candidates.json` 目标条 A 的 Wikidata Q332449 字段（P39 历任 Justice of the Common Pleas / Justice of the King's Bench / serjeant-at-law；P69 就学于 Pembroke College、Charterhouse School）——**是规范档字段，不是我从扉页想象的**。★ **未验之处**：常见说法「首任 Vinerian 讲席教授」在四库中查不到任何一条记录，**因此没有把 Vinerian 放进区分符**，尽管它很可能真的印在扉页上。★ **同样没放的**：`Commentaries on the Laws of England`——它是最像区分符的短语，但已证实的污染件 *The Oxford edition of Dicey: commentaries on the laws of England* 题名里就有它，**放进去等于把污染件确认成目标本人**。",
- "★ 待语料落盘后要复核": "区分符是否真出现在扉页上，本轮无法验（语料未到）。若一份都不命中，判定会全落 unknown——**那是对的，不要为了好看去放宽**。",
+ "★ 区分符的出处与射程": "★★★ **本轮改过一次，起因是抓源方报来一个我表里没有的同名者：Henry Blackstone（of the Middle Temple，1788/1796 年 Common Pleas 判例汇编，IA creator 字段明写其名）。**实测：我原来的区分符 `Common Pleas` **把他的汇编确认成了目标本人**（`Reports … Court of Common Pleas. By Henry Blackstone` → 判定「目标本人」）。**那是我自己挑的区分符造成的误收**，方向最坏。现在的区分符**全部取自本工作区语料的真扉页**，不再取自规范档字段、更不靠想：①`VINERIAN PROFESSOR OF THE LAWS OF ENG…`（1766 Analysis 扉页逐字）——★ 我上一版特意没放它，理由是「四库查不到这个职位」；**那个理由只对规范档成立，扉页把它定死了**，故改放。②`Solicitor General to her Majeſty`（1781 Reports 卷内广告页逐字）；③`Knight` / `Knt.`（1781 Reports、1898 Commentaries 四卷扉页均有）——Henry Blackstone 未受封。④`Pembroke College` / `Charterhouse`（Wikidata Q332449 P69，扉页未见，留作备用）。★★ **删掉了 `Common Pleas` 与 `King's Bench`**：两者都是 Henry Blackstone 报道的法院，**共有的东西不能当区分符**。代价是 1898 年四卷扉页只靠 `Knight` 命中。",
+ "★ 待语料落盘后要复核": "**已复核（2026-08-11 语料到位后当场做的）**：拿 15 份真文件的卷首 20000 字逐份跑 classify，结果见 `_corpus/00-同名判定实测.md`。",
  "★ 窗口为什么是 60 不是默认的 40": "实测：18 世纪扉页的写法 `Sir William Blackstone, Knt. one of the Justices of the Court of Common Pleas` 里，`Blackstone` 末尾到 `Common Pleas` 起点**相距 43 字**，默认 40 够不着——**目标本人 3 条真实扉页写法被确认 0/3**，代价方向是「丢真材料」（Sorby #133 那次的教训：少了的东西不会报错）。开到 60 → 3/3，且同名者仍全部被挡住。★ 我一度写成「开到 60 的代价是把谈论他的二手文本也确认成他写的」——**那句是错的**：实测 40 与 60 都是 3/3，**那是区分符机制本来就有的性质，不是放宽带来的**。该由 `check_authorship` 的署名证据去管，本判据只在姓名已出现时裁「是他还是同名者」。",
  "identical_name_policy": "★ 候选名单里有 **4 条 `canonical_name` 逐字都是 `William Blackstone`**（含目标本人），这一档**不能靠 excluded_names**——写进去等于排除目标本人。逐条的分法：①**1595–1675 的拓居者**（LCCN n94033805 / VIAF 38601822，Wikidata 主标签作 Blaxton）：靠年代（相差约 128 年）与 LoC 两条独立规范档分开；②**William Blackstone, Jr.**（LCCN n81036634 / VIAF 214407301，生卒查不到）：**年代筛对他完全失效**，只能靠标识符硬排除；其簇里已混进 *The Oxford edition of Dicey: commentaries on the laws of England*，是已证实的污染件；③**GND 1146806930**：身份未定，既不排除也不并入——不得作为目标的一手来源标识符使用，仅凭它挂靠的材料一律先挂起待判。★ 因此本人物的归属**不能只看署名**，必须落到 `attribution_basis` 的三条并用（作品名在著作表内／初版印工 1756–1781／规范档标识符，至少两条成立）。"
 }
