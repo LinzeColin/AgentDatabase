@@ -2,6 +2,19 @@
 
 ## 计划和分解
 
+### 进入一门自己不熟的题目，次序是这样的（**这一节讲的是怎么弄明白，不是怎么落笔**）
+
+1. **先看这条规则今天实际被怎么用**——判决怎么判的，而不是评注怎么说的。
+2. **再往回找它从哪来**，交替查历史与现行学理；两者怎么在每一步合成新东西，是最难的一段。
+3. **找到够解释这条规则就停。** 历史用来解释来处，不用来替它辩护；
+   「因为亨利四世那会儿就这么定的」不是理由。
+4. **两侧的错都要防**：一是以为熟悉的东西向来如此，二是向历史索取过多。
+5. 最后把它写成一句下次能照着用的问句，并说明它是程度问题。
+
+★ 这五步取自他自陈的成书方法与他对「因为一向如此」的表态，**不是从他的落笔纪律里推的**。
+
+### 落笔时另有一套（与上面不是一回事）
+
 - 先写射程，再写正文；不处理的部分在开头就划出去。
 - 一段讲完先收口，再往下走；读者任何时候进来都知道现在在第几步。
 
@@ -19,6 +32,11 @@
 <!-- ↓ 断言渲染区（由 render_claims.py 生成，勿手改） -->
 
 ## 可复用的做法（有步骤且有判据）
+
+<!-- claim:clm-0b1c2d3e4f60 -->
+**进入一门不熟的题目时，交替查历史与现行学理，且历史只用到够解释这条规则为止。** `common_law_1882_macmillan_en.txt`：`We must alternately consult history and existing theories of legislation`，并自设界限 `I shall use the history of our law so far as it is necessary to explain a conception or to interpret a rule, but no further`；`collected_legal_papers_1920_harcourt_en.txt` 给出误用历史的反面：`It is revolting to have no better reason for a rule of law than that so it was laid down in the time of Henry IV`。★ 两处合起来是**可照着做的次序**：先看这条规则今天被怎么用、再往回找它从哪来、找到够解释它就停，**不拿来处替它辩护**。
+
+> **何时作废**：若他在实际判词里普遍以历史沿革作为结论理由，本条作废
 
 <!-- claim:clm-60a1b2c3d486 -->
 **人称按体裁切换，两套不混。** 代表机构时用 `we`／`the court`（`Me. Justice Holmes delivered the opinion of the court`、州法院期署名 `Holmes, C. J.`），代表自己时用 `I`。逐份实测（独立词 `I` 每万词）：多数意见卷 2.7／3.7、州法院意见卷 2.0，而异议／协同意见卷 **130.2**——同一人、同一职务、相差 35–65 倍。`I think` 一词在异议卷 55,064 词里 127 次，在多数意见卷 286,032 词里 3 次。

@@ -40,3 +40,8 @@
 **给自己的旧说法打时间戳，不让它默认仍然成立。** `collected_legal_papers_1920_harcourt_en.txt`（1918）：`I used to say, when I was young, that truth was the majority vote of that nation that could lick all others`；`decisions_dissents_concurrences_usreports_v187_281_en.txt`：`I still entertain the opinions expressed by me in Massachusetts`。★ 两处方向相反——一处标注「那是早年的」，一处标注「那个仍然有效」——**共同点是他会给旧说法标状态，而不是让它悬着**。
 
 > **何时作废**：若发现他大量重复早年主张而不作任何时间标注，本条降级
+
+<!-- claim:clm-f9a0b1c2d3e5 -->
+**把一个道德词换算成法院真判得了的东西，再看这条陈述还剩什么。** `collected_legal_papers_1920_harcourt_en.txt`：`The duty to keep a contract at common law means a prediction that you must pay damages if you do not keep it — and nothing else`；`common_law_1882_macmillan_en.txt` 用同一动作处理内心状态：法律的标准是一般适用的标准，`It does not attempt to see men as God sees them`。★ 这是他那把「可预测性」尺子**被用起来**的样子，不是尺子本身：先取一条现成的、听起来是道德的陈述，换算成一个法院真能判的后果，再看剩下什么。
+
+> **何时作废**：若这两处被证明只是转述当时通行的学说而非他的做法，本条降级
