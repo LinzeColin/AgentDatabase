@@ -66,7 +66,18 @@ MENTION = re.compile(
     r"holdout|hold-out|保留集|留出集|"
     r"已划为[^\n]{0,6}(?:保留|留出)|"
     r"train\s*侧(?:没有|不含|取不到)|"
-    r"(?:不计入|不列入)本道",
+    r"(?:不计入|不列入)本道|"
+    # ★★★ 2026-08-11 补：**中文平白说法**。此前词表只有 `holdout` 一族，
+    #   于是「不入训练」这种等价说法**门一个都不认识**。
+    #   全库实测 10 处，其中 **6 处附近 160 字符内没有任何原词表词 → 门完全看不见**：
+    #     · lister-108 `## 传记（S2，其中一份不入训练）src-6448ba81d2d2 等 4 份。` → **四选一**
+    #     · koch-107   `## 传记（皆 S2，其中一份不入训练）src-b58f8581c014（Cohn 回忆录…` → 同型
+    #     · pasteur-106 先点书名与译本，再说「其一个译本不入训练」
+    #   与 [[a-gate-that-says-independent-may-not-be]] 同类：**门报 0，而它要挡的就在那儿。**
+    #   ★ 收紧不放宽：这些词只是进入「提及」层，是否算**点名**仍由 `names_the_work` 判，
+    #     所以「本道无不入训练的材料」这种否定句照旧只算泛提。
+    r"不入训练|不进训练|未入训练|不参与训练|不在训练侧|"
+    r"排除在训练之外|不作训练用|训练侧(?:没有|不含|取不到)",
     re.I)
 SHINGLE_N = 8
 _WORD = re.compile(r"[a-z0-9]+")
@@ -108,6 +119,44 @@ NAMES_THE_WORK = (
     r"(?<!\d)1[5-9]\d\d(?!\d)\s*年[^\n]{0,12}(?:那篇|这篇|的[^\n]{0,8}[篇文书报])",  # 1877 年的《…》/1904 年那篇
 )
 _NAMES_RE = re.compile("|".join(NAMES_THE_WORK))
+
+
+def naming_window(text: str, pos: int) -> str:
+    """→ 判「点名」时该看的那一段：**提及所在行 + 其后至多 3 个非空行**。
+
+    ## 为什么不能只看一行（2026-08-11 实测）
+
+    真实语料里点名**就在下面两行**，中间隔一个空行：
+
+        ## 传记（S2，其中一份不入训练）
+        <空行>
+        `src-6448ba81d2d2` 等 4 份。            ← lister-108，**四选一**
+
+        ## 传记（皆 S2，其中一份不入训练）
+        <空行>
+        `src-b58f8581c014`（Cohn 回忆录…）等 7 份。  ← koch-107，**七选一**
+
+    按行判时两处都报「不点名」。★★ 而我给这两条写的第一版自测夹具
+    **把它们压成了一行**——[[fixtures-cleaner-than-the-real-thing]]，
+    于是自测绿、真语料漏。现在自测用的是**逐字取自语料的多行原文**。
+
+    ★ 窗口在遇到新的 `#` 标题时截断：跨节的 id 与本次提及无关。
+    """
+    a = max(text.rfind("\n", 0, pos) + 1, 0)
+    out, n, i = [text[a:text.find("\n", pos) if text.find("\n", pos) > 0 else len(text)]], 0, None
+    i = text.find("\n", pos)
+    while i > 0 and n < 3:
+        j = text.find("\n", i + 1)
+        ln = text[i + 1:j if j > 0 else len(text)]
+        if ln.lstrip().startswith("#"):
+            break
+        if ln.strip():
+            out.append(ln)
+            n += 1
+        i = j
+        if i <= 0:
+            break
+    return "\n".join(out)
 
 
 def names_the_work(line: str) -> bool:
@@ -258,7 +307,8 @@ def scan(target: pathlib.Path) -> dict:
             e = t.find("\n", m.end())
             whole = t[a:e if e > 0 else None]
             rec = {"文件": f.name, "行": line, "命中": m.group(0), "整行": whole[:160],
-                   "★ 点名了是哪一份": names_the_work(whole)}
+                   # ★ 判「点名」看窗口不看单行——真实语料里点名在下面两行，见 naming_window
+                   "★ 点名了是哪一份": names_the_work(naming_window(t, m.start()))}
             (exempted if whole.strip() in tmpl_lines else mentions).append(rec)
         if hold_sh:
             common = shingles(t) & hold_sh
@@ -408,9 +458,42 @@ def self_test() -> int:
 
         ("> 留出集一旦被引用，known 套组就不可信。", False, "泛提 → **不算点名**"),
 
+        ("本道无**不入训练**的材料。", False,
+         "★ 否定句 → 只算泛提，**不点名**（收紧不许误伤这种）"),
+
+        ("本道 **36 件 train**（另有几件不入训练）", False,
+         "★ 只说件数不说是哪几件 → 泛提"),
+
     ):
 
         chk(f"{_why}", names_the_work(_line) == _exp)
+
+    print("\n══ ★★ 点名在下面两行：**夹具必须是多行的**（2026-08-11）══")
+    #   逐字取自语料，**含空行**。第一版我把它们压成一行 → 自测绿而真语料漏。
+    _LISTER = ("## 传记（S2，其中一份不入训练）\n"
+               "\n"
+               "`src-6448ba81d2d2` 等 4 份。\n")
+    _KOCH = ("## 传记（皆 S2，其中一份不入训练）\n"
+             "\n"
+             "`src-b58f8581c014`（Cohn 回忆录，**Fraktur OCR 报废 2.3%**）等 7 份。\n")
+    _CLEAN = ("## 传记（S2，其中一份不入训练）\n"
+              "\n"
+              "共 4 份，此处不列它们的编号。\n")
+    _CROSS = ("## 传记（S2，其中一份不入训练）\n"
+              "\n"
+              "## 另一节\n"
+              "\n"
+              "`src-6448ba81d2d2` 等 4 份。\n")
+    for _lbl, _txt, _exp in (
+            ("★★ lister-108 真实多行原文 → **点名**（四选一）", _LISTER, True),
+            ("★★ koch-107 真实多行原文 → **点名**（七选一）", _KOCH, True),
+            ("★ 反对照：同样的提及，下文**不给编号** → 不点名", _CLEAN, False),
+            ("★ 反对照：编号在**另一节**里 → 窗口应在标题处截断，不点名", _CROSS, False)):
+        _m = MENTION.search(_txt)
+        _got = names_the_work(naming_window(_txt, _m.start())) if _m else None
+        chk(_lbl, _got == _exp)
+    chk("★ 只看单行时 lister 那条会漏（证明窗口是必须的）",
+        names_the_work(_LISTER.splitlines()[0]) is False)
 
 
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
