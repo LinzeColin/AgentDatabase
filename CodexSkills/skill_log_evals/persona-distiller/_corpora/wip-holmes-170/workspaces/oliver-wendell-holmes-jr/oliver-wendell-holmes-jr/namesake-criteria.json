@@ -1,50 +1,60 @@
 {
- "subject": "Oliver Wendell Holmes Jr.",
- "surname": "Holmes",
- "marker_window": 60,
- "★ 为什么这个人非要有这份文件": "实测 `build_patterns('Oliver Wendell Holmes Jr.')['name_rx']` 打 22 个排除者，**12 个姓名分不开**，其中包括**他父亲**与**裸名形式本身**。★ 而裸名 `Oliver Wendell Holmes` 正是 **19 世纪印本的署名法**，父子都用它。",
- "excluded_names": [
-  "Wendell Holmes（GND 1233239910，身份未定）",
-  "Dwight Oliver Wendell Holmes",
-  "Wendell Holmes（美国演员，1914-1962）",
-  "Oliver M. Holmes",
-  "John Wendell Holmes",
-  "Wendell Holmes Tisdale",
-  "Wendell Holmes Stephenson",
-  "Wendell Holmes Camp",
-  "Oliver Wendell Holmes Cotter",
-  "Oliver Holmes Gish",
-  "Oliver Holmes Woodward",
-  "Francis Oliver Holmes",
-  "Wendell H. Holmes（路易斯安那州立大学法学院教授）",
-  "Oliver Wendell Holmes Sr.",
-  "Oliver Wendell Holmes, Sr.",
-  "Wendell Holmes Tisdale",
-  "Wendell Holmes Stephenson",
-  "Wendell Holmes Camp",
-  "Mrs. Oliver Wendell Holmes"
- ],
- "any_of_markers": [
-  "Justice",
-  "Supreme Court",
-  "dissenting",
-  "Circuit Justice",
-  "Common Law"
- ],
- "★ 区分符的出处与射程": "五个区分符都指向**司法职务**，而父亲从未任司法职务（他是医生兼诗人、哈佛医学院教授）。★ **`Harvard` 绝不能当区分符**：父子 P108 雇主同为 Harvard University、P69 同就读 Harvard College——**共有的东西不能当区分符**（Blackstone #169 那次我用 `Common Pleas` 犯过一模一样的错，它是目标与 Henry Blackstone 共有的法院）。★ 待语料落盘后**必须复核**这五个是否真出现在扉页／判决首行附近，并把实测写下来。",
- "bare_name_before_year": {
-  "year": 1881,
-  "bare": "Oliver Wendell Holmes",
-  "reason": "**父亲 1809–1894 自 1858 年《The Autocrat of the Breakfast-Table》起以裸名大量出版**，而子的首部专著 *The Common Law* 在 1881。1881 年之前只署裸名的印本，默认归父亲。★ 这是 Sorby #133 父子同名那次留下的机制，本人物是它第二次真正派上用场。"
- },
- "★★ 「用 Jr. 区分」不成立，不要依赖它": "LCCN no2002012187 的西部小说作者**半题名页署 `Oliver W. Holmes Jr.`**；且 LoC 里儿子的标目**曾经也是裸名**（MADS 的 hasEarlierEstablishedForm ＝`Holmes, Oliver Wendell, 1841-1935`），Jr. 之前建立的编目一律以裸名挂着。",
- "identical_name_policy": "★ 裸名 `Oliver Wendell Holmes` **父子共用，且 LoC 把裸名解析到儿子**（302 → n79054782）——**不能写进 excluded_names**（写进去等于排除目标本人）。分法只有四样：①**印本年**（见 bare_name_before_year）；②**标识符**（子 n79054782/Q360574/GND 118706594；父 n80032729/Q319829/GND 118706608）；③**职业档**（父是医生兼诗人，从未任司法职务）；④**出生地**（父 Cambridge / 子 Boston）。★ 另有一条会骗过程序：LoC `n87108083` 是**已废止的未分化记录**，**至今返回 HTTP 200**，只在 recordStatus 里写 deprecated——**不得作为任何一方的身份依据**。",
- "unexcludable_names": [
-  "Oliver Wendell Holmes (archivist, 1902-1981)",
-  "Oliver W. Holmes（署名亦作 Oliver W. Holmes Jr.，20 世纪末西部小说作者）",
-  "Oliver Holmes（格拉斯哥大学生理学者）",
-  "Oliver Holmes（1776-1841，震教派长老）",
-  "其余低风险 Oliver Holmes 同名者（合并登记 5 人）"
- ],
- "★★ 为什么这五条不能写进 excluded_names": "**把它们的署名串排除掉，会连目标本人一起排除。** 逐条：①档案学家的署名就是裸名 `Oliver Wendell Holmes`——与目标 19 世纪印本的署名完全相同；②西部小说作者署 `Oliver W. Holmes Jr.`，而目标本人常署 `Oliver W. Holmes` / `O. W. Holmes`——**排除它等于丢目标的真材料**（这个方向比误收更难发现）；③④⑤ 的署名是 `Oliver Holmes`，虽比目标少一个中名，但 19 世纪引证里省略中名很常见，**排除它有丢材料的风险，因此也不排除**。→ 这五条一律走 `identical_name_policy` 那套硬判据（印本年／标识符／职业档／出生地），**判不出来就落 unknown，不许硬判**。"
+  "subject": "Oliver Wendell Holmes Jr.",
+  "surname": "Holmes",
+  "marker_window": 60,
+  "★ 为什么这个人非要有这份文件": "实测 `build_patterns('Oliver Wendell Holmes Jr.')['name_rx']` 打 22 个排除者，**12 个姓名分不开**，其中包括**他父亲**与**裸名形式本身**。★ 而裸名 `Oliver Wendell Holmes` 正是 **19 世纪印本的署名法**，父子都用它。",
+  "excluded_names": [
+    "Wendell Holmes（GND 1233239910，身份未定）",
+    "Dwight Oliver Wendell Holmes",
+    "Wendell Holmes（美国演员，1914-1962）",
+    "Oliver M. Holmes",
+    "John Wendell Holmes",
+    "Wendell Holmes Tisdale",
+    "Wendell Holmes Stephenson",
+    "Wendell Holmes Camp",
+    "Oliver Wendell Holmes Cotter",
+    "Oliver Holmes Gish",
+    "Oliver Holmes Woodward",
+    "Francis Oliver Holmes",
+    "Wendell H. Holmes（路易斯安那州立大学法学院教授）",
+    "Oliver Wendell Holmes Sr.",
+    "Oliver Wendell Holmes, Sr.",
+    "Wendell Holmes Tisdale",
+    "Wendell Holmes Stephenson",
+    "Wendell Holmes Camp",
+    "Mrs. Oliver Wendell Holmes"
+  ],
+  "any_of_markers": [
+    "Justice",
+    "Supreme Court",
+    "dissenting",
+    "Common Law",
+    "Junior"
+  ],
+  "★ 区分符的出处与射程": "五个区分符都指向**司法职务**，而父亲从未任司法职务（他是医生兼诗人、哈佛医学院教授）。★ **`Harvard` 绝不能当区分符**：父子 P108 雇主同为 Harvard University、P69 同就读 Harvard College——**共有的东西不能当区分符**（Blackstone #169 那次我用 `Common Pleas` 犯过一模一样的错，它是目标与 Henry Blackstone 共有的法院）。★ 待语料落盘后**必须复核**这五个是否真出现在扉页／判决首行附近，并把实测写下来。",
+  "bare_name_before_year": {
+    "year": 1881,
+    "bare": "Oliver Wendell Holmes",
+    "reason": "**父亲 1809–1894 自 1858 年《The Autocrat of the Breakfast-Table》起以裸名大量出版**，而子的首部专著 *The Common Law* 在 1881。1881 年之前只署裸名的印本，默认归父亲。★ 这是 Sorby #133 父子同名那次留下的机制，本人物是它第二次真正派上用场。"
+  },
+  "★★ 「用 Jr. 区分」不成立，不要依赖它": "LCCN no2002012187 的西部小说作者**半题名页署 `Oliver W. Holmes Jr.`**；且 LoC 里儿子的标目**曾经也是裸名**（MADS 的 hasEarlierEstablishedForm ＝`Holmes, Oliver Wendell, 1841-1935`），Jr. 之前建立的编目一律以裸名挂着。",
+  "identical_name_policy": "★ 裸名 `Oliver Wendell Holmes` **父子共用，且 LoC 把裸名解析到儿子**（302 → n79054782）——**不能写进 excluded_names**（写进去等于排除目标本人）。分法只有四样：①**印本年**（见 bare_name_before_year）；②**标识符**（子 n79054782/Q360574/GND 118706594；父 n80032729/Q319829/GND 118706608）；③**职业档**（父是医生兼诗人，从未任司法职务）；④**出生地**（父 Cambridge / 子 Boston）。★ 另有一条会骗过程序：LoC `n87108083` 是**已废止的未分化记录**，**至今返回 HTTP 200**，只在 recordStatus 里写 deprecated——**不得作为任何一方的身份依据**。",
+  "unexcludable_names": [
+    "Oliver Wendell Holmes (archivist, 1902-1981)",
+    "Oliver W. Holmes（署名亦作 Oliver W. Holmes Jr.，20 世纪末西部小说作者）",
+    "Oliver Holmes（格拉斯哥大学生理学者）",
+    "Oliver Holmes（1776-1841，震教派长老）",
+    "其余低风险 Oliver Holmes 同名者（合并登记 5 人）"
+  ],
+  "★★ 为什么这五条不能写进 excluded_names": "**把它们的署名串排除掉，会连目标本人一起排除。** 逐条：①档案学家的署名就是裸名 `Oliver Wendell Holmes`——与目标 19 世纪印本的署名完全相同；②西部小说作者署 `Oliver W. Holmes Jr.`，而目标本人常署 `Oliver W. Holmes` / `O. W. Holmes`——**排除它等于丢目标的真材料**（这个方向比误收更难发现）；③④⑤ 的署名是 `Oliver Holmes`，虽比目标少一个中名，但 19 世纪引证里省略中名很常见，**排除它有丢材料的风险，因此也不排除**。→ 这五条一律走 `identical_name_policy` 那套硬判据（印本年／标识符／职业档／出生地），**判不出来就落 unknown，不许硬判**。",
+  "★ 区分符实测（2026-08-11，语料落盘后复核）": "按 criteria 自己要求的复核已做，**逐份数了出现次数**（13 份 train）：`Justice` 11 份、`Supreme Court` 11 份、`dissenting` 9 份、`Common Law` 4 份；**`Circuit Justice` 0 份 → 已删**（抓源方也独立报了这一条）。新增 `Junior`（5 份）：题名页作 `By Oliver Wendell Holmes, Junior`，**父亲从不署 Junior**，故对父子这一对是决定性的；★ 它对 LCCN no2002012187 那位西部小说作者**不决定性**，但那位署的是 `Oliver W. Holmes Jr.`（`Oliver W.` 而非 `Oliver Wendell`），本轮语料里 0 命中。",
+  "bare_name_after_year": {
+    "year": 1894,
+    "bare": "Oliver Wendell Holmes",
+    "reason": "父 Oliver Wendell Holmes Sr. 1809–1894（LCCN n80032729／Q319829／GND 118706608）卒于 1894 年，此后印行的裸名署名不可能是他。★ 这是 `bare_name_before_year` 的对称一半；用**卒年**，不用生年或目标出道年。",
+    "★ 残余风险": "同名的西部小说作者（LCCN no2002012187）在 20 世纪出版，理论上落在本规则的年份区间内，但他署 `Oliver W. Holmes Jr.` 而非裸名 `Oliver Wendell Holmes`，本轮语料对他 0 命中。**换语料要重核这一条。**"
+  },
+  "adjudicated": {
+    "src-96246ca9968e": "1884 年 Keene 讲词单行本。题名页照录作 `BV HON. Oliver Wendell Holmes, Jr.`（`BV`＝`BY` 的 OCR 讹形），带 `Jr.` 而非 `Junior`，且印本年 1884 早于父卒年 1894，两条自动规则都够不着。**定夺依据（语料内部，可回查）**：该讲词的正文有 68.7% 落在 `src-de206b40fe7b`（1891 年《Speeches》，已判目标本人）之内、68.5% 落在 `src-4c4e28b10d9c`（1913 年增订本）之内，两处均已在台账写 `derived_from`。★ 不把 `Jr.` 加进 any_of_markers——本文件自己写明 `Jr.` 对西部小说作者不决定性，**为了消一条警告去放宽区分符是不许的**。"
+  }
 }
