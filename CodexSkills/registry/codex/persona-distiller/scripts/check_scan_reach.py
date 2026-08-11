@@ -162,6 +162,40 @@ def selftest() -> int:
     ext = {g for g in got if not any(covers(g, w) for w in want)}
     chk("实扫里有名册没有的 → 报出来", ext == {"wip-x"})
 
+    # ══════════════════════════════════════════════════════════════
+    # ★★★ `scanned()` 本身——**2026-08-12 之前从没被自测进入过**
+    # ══════════════════════════════════════════════════════════════
+    #
+    # 上面全在验 `roster()`（该扫谁）与 `covers()`（覆盖判定），
+    # 而 `scanned()`（**实际扫了谁**）一次没被调过。
+    # 它做的事是**动态加载 `check_corpus_presence.py` 并调它的 `scan()`**——
+    # 那个模块一改签名/一改返回形状，本件就空转，而**自测全绿**。
+    #
+    # ★ 讽刺之处：本件的职责正是「扫的集合对不对」。
+    #   2026-08-12 一天撞到四次「判据扫的集合比实况小」，其中一次就是它报出来的
+    #   （该扫 42 实扫 42，**计数对上而集合不同**）。
+    #   ⇒ [[a-gates-scan-set-is-smaller-than-reality]]
+    print("── ★★★ `scanned()`：真去调 check_corpus_presence.scan() ──")
+    _presence = pathlib.Path(__file__).resolve().parent / "check_corpus_presence.py"
+    if not _presence.is_file():
+        chk("**找不到 check_corpus_presence.py——未核，不是通过**", False)
+    else:
+        with tempfile.TemporaryDirectory() as td:
+            root = pathlib.Path(td)
+            mk(root, "wip-a", 2)                  # 顶层账本
+            mk(root, "wip-b", 3, nested=True)     # evidence/ 下的账本
+            got = scanned(root, _presence)
+            # ⑨ 两种布局都要被真正扫到——**不是「数得上」，是 scan() 真报出了它们**
+            chk("⑨ scanned() 两种布局都取到：{wip-a, wip-b}",
+                got == {"wip-a", "wip-b"})
+            # ⑨′ ★ 与 roster() 对上——这两个数**必须比集合，不是比计数**
+            chk("⑨′ scanned() 与 roster() 集合相等（不是只有个数相等）",
+                got == roster(root))
+        with tempfile.TemporaryDirectory() as td:
+            # ⑨″ 空树：不许崩，也不许报出东西
+            got = scanned(pathlib.Path(td), _presence)
+            chk("⑨″ 空树 → scanned() 返回空集且不崩", got == set())
+
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
 

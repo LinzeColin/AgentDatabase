@@ -63,7 +63,7 @@ KNOWN = {
     "check_longs_corruption.py",
     "check_material_split.py", "check_ocr_homoglyphs.py",
     "check_ocr_language_death.py", "check_quote_integrity.py",
-    "check_refusal_overflow.py", "check_scan_reach.py",
+    "check_refusal_overflow.py",
     "check_self_reported_counts.py", "check_semantic_residue.py",
     "check_source_numbering_gap.py", "check_threshold_doc_drift.py",
     "check_unqualified_priority_claim.py", "check_version_bump_ships_product.py",
