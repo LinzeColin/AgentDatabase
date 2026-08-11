@@ -726,8 +726,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_paper_lanes.py",
-      "sha256": "92d8747daffc8befb7ab978793621bba13b9296c8b77e78c1724a91b3a8e9aa9",
-      "size_bytes": 13724
+      "sha256": "806a5da793f629f9ccbd6e67b14e044dead87829bb38f530fe767eeaa8869f70",
+      "size_bytes": 16825
     },
     {
       "path": "references/pipeline/checkers/check_pd_grounds.py",
@@ -1511,8 +1511,8 @@
     },
     {
       "path": "scripts/check_paper_lanes.py",
-      "sha256": "92d8747daffc8befb7ab978793621bba13b9296c8b77e78c1724a91b3a8e9aa9",
-      "size_bytes": 13724
+      "sha256": "806a5da793f629f9ccbd6e67b14e044dead87829bb38f530fe767eeaa8869f70",
+      "size_bytes": 16825
     },
     {
       "path": "scripts/check_pd_grounds.py",

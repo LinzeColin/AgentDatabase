@@ -149,9 +149,18 @@ def check(corpora: pathlib.Path, min_lanes: int = 3) -> int:
         drop = "  ★★ 去掉纸面道就掉到 %d 道（门 %d）" % (r["去掉纸面道后还剩"], min_lanes) \
             if r["去掉纸面道后还剩"] < min_lanes else ""
         tag = "（冻结名单内）" if ws in KNOWN else "**新增**"
-        blanket = ("  ★★★ **最大组合 %s 占 %.1f%%（%d 条源）——这不像逐条判断，像批量刷的**"
-                   % (r["最大组合"], 100 * r["最大组合占比"], r["可用源"])
-                   ) if r["最大组合占比"] >= 0.80 else ""
+        # ★★ 判「像批量刷的」要**两个条件同时成立**：占比高 **且** 那个组合本身含 ≥2 道。
+        #   我第一版只看占比 ≥80%，**当天就自己量出误报率 4/5 = 80%**：
+        #     Carver 94.7% 的最大组合是 `writings`、Semmelweis 88.1% 是 `external`、
+        #     Adams 87.0% 是 `conversations`、Bessemer 83.3% 是 `writings`
+        #     ——那只是**语料本来就以一种材料为主**，完全正常，不是没逐条判断。
+        #   加上 `≥2 道` 之后全库只剩 **Livermore 一个**（97.0%，三元组）。
+        #   ⇒ [[read-the-hits-before-reporting-the-rate]]：报率之前先读命中。
+        ndim = len(r["最大组合"].split("+")) if r["最大组合"] else 0
+        blanket = ("  ★★★ **最大组合 %s（%d 道）占 %.1f%%（%d 条源）"
+                   "——一个多道组合刷在几乎所有源上，这不像逐条判断**"
+                   % (r["最大组合"], ndim, 100 * r["最大组合占比"], r["可用源"])
+                   ) if (r["最大组合占比"] >= 0.80 and ndim >= 2) else ""
         print(f"   {ws:<26} 覆盖 {len(r['覆盖的道'])} 道｜纸面 {len(r['纸面道'])}："
               f"{'+'.join(r['纸面道'])}{drop} {tag}{blanket}")
     if fixed:
@@ -206,6 +215,14 @@ def self_test() -> int:
     if got["去掉纸面道后还剩"] != 0:
         bad.append("D′·全是纸面道时应剩 0 道")
 
+    # D″ ★ 单道组合占比再高，也**不许**被说成「批量刷」——这是当天量出的 80% 误报。
+    #   （这里只验 analyse 给出的量；文案在 check() 里按 `ndim>=2` 判。）
+    got = analyse([row(f"s{i}", ["writings"]) for i in range(19)] + [row("x", ["external"])])
+    if got["最大组合"] != "writings" or abs(got["最大组合占比"] - 0.95) > 1e-9:
+        bad.append(f"D″·单道组合的占比算错（实得 {got['最大组合']} {got['最大组合占比']:.4f}）")
+    if len(got["最大组合"].split("+")) != 1:
+        bad.append("D″′·单道组合被算成多道")
+
     # E 反向：空账本不许崩，也不许报出东西
     got = analyse([])
     if got["覆盖的道"] or got["纸面道"]:
@@ -230,6 +247,29 @@ def self_test() -> int:
             bad.append(f"F·check() 遇到新增纸面道应返回 1（实得 {rc}）")
         if "wip-zz-999" not in out or "expression" not in out:
             bad.append("F′·check() 没有点名是哪个工作区／哪一道")
+        # F‴ ★★★ **「≥2 道」那个条件必须由夹具来验，production 验不出来。**
+        #   实测：在真实语料上去掉该条件，全库输出**一个字都不变**（1 → 1）——
+        #   因为没有任何现存工作区同时满足「有纸面道」与「单道组合占比 ≥80%」。
+        #   **我第一次的变异因此是无效的**：数据表达不出这个差别。
+        #   这个夹具造的正是那个形状：95% 单道 `writings` + 5% `writings+expression`
+        #   ⇒ `expression` 是纸面道，而最大组合是**单道** `writings`、占比 95%。
+        #   ⇒ [[counter-example-red-can-be-red-by-coincidence]] 的反面：
+        #     **变异没红，也可能是数据碰巧盖不到那条分支。**
+        corp2 = pathlib.Path(td) / "c2"
+        ev2 = corp2 / "wip-fx-002" / "workspaces" / "fx" / "evidence"
+        ev2.mkdir(parents=True)
+        (ev2 / "source-ledger.jsonl").write_text(
+            "\n".join([row(f"w{i}", ["writings"]) for i in range(19)]
+                      + [row("x", ["writings", "expression"])]) + "\n", encoding="utf-8")
+        buf3 = io.StringIO()
+        with contextlib.redirect_stdout(buf3):
+            check(corp2)
+        out3 = buf3.getvalue()
+        if "expression" not in out3:
+            bad.append("F‴·95%单道+5%双道 时 expression 应被判为纸面道")
+        if "像逐条判断" in out3:
+            bad.append("F‴′·**单道组合占比 95% 被误报成「批量刷」**——`ndim>=2` 那个条件没起作用")
+
         # F″ 语料根不存在 → 明说「未核」，**不许静默当通过**
         buf2 = io.StringIO()
         with contextlib.redirect_stdout(buf2):
@@ -243,7 +283,8 @@ def self_test() -> int:
         print(f"负对照未过：{len(bad)} 项")
         return 1
     print("负对照通过：A 纸面道抓出｜B 专属源不误报｜C holdout/U/failed 不参与｜"
-          "D 一条顶三道全是纸面｜E 空账本｜F **真跑 check() 并点名**")
+          "D 一条顶三道全是纸面｜**D″ 单道组合占比高不算批量刷**｜E 空账本｜"
+          "F **真跑 check() 并点名**")
     return 0
 
 
