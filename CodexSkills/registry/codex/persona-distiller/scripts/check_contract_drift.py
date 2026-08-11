@@ -218,10 +218,62 @@ def read_frontmatter_description(skill_md: pathlib.Path) -> str:
     return " ".join(out)
 
 
+def _checksums_fresh(root: pathlib.Path) -> tuple[list[str], list[str]]:
+    """`checksums.sha256` 与磁盘现状对不对得上。
+
+    ## ★★★ 为什么把这一条塞进**漂移门**，而不是留给全量自检
+
+    2026-08-11：我改了 `scripts/quality_check.py`、它的镜像、以及一份 references 文档，
+    **`--self-test` 全绿、本门（漂移）全绿、9 件判据逐件自测全绿**，
+    而 `checksums.sha256` 没重算——**71 个测试里 4 个红**，
+    全量自检才报出 `release checksum verification failed`。
+
+    差别在**跑的频率**：改完判据我必跑这道漂移门（本会话跑了五六次），
+    而全量自检要两分多钟，我不会每次都跑。**把检查放到有流量的那条路上。**
+
+    ★ 只报**内容对不上**与**清单里有而磁盘没有**两类；
+      「磁盘有而清单没有」交给 `build_manifest` 与全量自检，
+      因为工作中途新建文件是常态，在这里报会天天误报。
+    """
+    import hashlib
+    f = root / "checksums.sha256"
+    if not f.is_file():
+        return [], ["[发布清单] checksums.sha256 不在——**未核（不是通过）**"]
+    bad, missing = [], []
+    for line in f.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or "  " not in line:
+            continue
+        digest, rel = line.split("  ", 1)
+        target = root / rel
+        if not target.is_file():
+            missing.append(rel)
+            continue
+        h = hashlib.sha256()
+        with open(target, "rb") as fh:
+            for chunk in iter(lambda: fh.read(1 << 20), b""):
+                h.update(chunk)
+        if h.hexdigest() != digest:
+            bad.append(rel)
+    out = []
+    if bad:
+        out.append("[发布清单] **checksums.sha256 与磁盘对不上 %d 个文件**："
+                   "%s —— 改了随包分发的文件却没重算清单。"
+                   "**跑 `scripts/build_manifest.py`，不要手写校验和。**"
+                   % (len(bad), bad[:5]))
+    if missing:
+        out.append("[发布清单] 清单里有而磁盘上没有 %d 个：%s" % (len(missing), missing[:5]))
+    return out, []
+
+
 def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
     """→ (漂移清单, 跳过说明)。"""
     problems: list[str] = []
     skipped: list[str] = []
+
+    _cs_bad, _cs_skip = _checksums_fresh(root)
+    problems.extend(_cs_bad)
+    skipped.extend(_cs_skip)
 
     # ★★ v0.0.0.94 新增第四条比对：**CHANGELOG 的最高条目必须等于 VERSION**。
     #   实测背景：2026-08-04 一天写了 v0.0.0.84–94 十一条 CHANGELOG，
