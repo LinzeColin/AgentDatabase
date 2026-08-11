@@ -380,6 +380,11 @@
       "size_bytes": 9284
     },
     {
+      "path": "references/ledgers/_周报_2026-08-12.md",
+      "sha256": "bbc0b187f20815d08fb4dc88a0695bcf7d7be69b1d358ac744131f9c94c01b61",
+      "size_bytes": 7458
+    },
+    {
       "path": "references/ledgers/_待用户裁定.md",
       "sha256": "6b104208c990bbc44638601598f15744f6dcf5c28ee403cc1d96d440a1b7e0bc",
       "size_bytes": 249726
@@ -411,8 +416,8 @@
     },
     {
       "path": "references/ledgers/_额度台账.md",
-      "sha256": "f408b087649c5ce2a597fdcd1db39880b1caca7b8c3df947baaa08c1234d9587",
-      "size_bytes": 20982
+      "sha256": "f522449df3cc4d15788115f417286d2f65e1741385e3d22ab3dae0e735066d2f",
+      "size_bytes": 22111
     },
     {
       "path": "references/lifecycle-and-memory.md",
