@@ -116,6 +116,11 @@ _SPACE_BEFORE_PUNCT = re.compile(r"\s+([,.;:!?)\]])")
 #     才看见「变绿」其实是分母掉了 32。[[ratio-gates-can-be-passed-by-shrinking]]
 _CJK_PUNCT = re.compile(r"[《》「」『』，、。；：？！（）【】]")
 
+#: ★ 「这一段是散文，不是引文」的**结构**判据（只用于跨行反引号那一路）。
+#:   一句真的逐字引文里不会有空行、markdown 标题、列表项、表格竖线、`**` 或 `★`。
+#:   靠结构而不是靠字符集，是因为引文可能是德/法/拉丁文，按语种判会误伤。
+_PROSE_SHAPE = re.compile(r"\n\s*\n|(?:^|\n)\s*#{1,6}\s|(?:^|\n)\s*[-*+]\s|\||\*\*|★")
+
 
 def _norm(s: str) -> str:
     s = _MARKUP.sub("", s)
@@ -220,6 +225,34 @@ def extract_quotes(md: str):
     nonblk = "\n".join(l for l in md.split("\n") if not l.lstrip().startswith(">"))
     for inline in re.findall(r"`([^`\n]{25,400})`", nonblk):
         blocks.append(inline)
+
+    # ★★★★★ 2026-08-11：**同一个洞的第三次。**
+    #   ① 原来只验 `>` 引用块 → 段落内反引号一条没验过（08-10 修，当场抓到 14 条对不上）；
+    #   ② 修法是 `` `([^`\n]{25,400})` `` —— **`\n` 被排除在字符类外**，
+    #      于是**跨行的反引号引文仍然一条都不验**，而本件照报「通过: True」。
+    #
+    #   Kelsen #171 实测：我把 03 道的长引文写成跨行反引号时，本件只认出 3 条；
+    #   改写成 `>` 引用块之后认出 9 条。**中间那 6 条从头到尾没被任何判据看过。**
+    #   全库扫：**73 条**跨行反引号引文处在这个盲区里（逐条读过，是真引文——
+    #   题名页、日记行、版权声明），最多的 Holmes #170 有 28 条。
+    #
+    # ★ 为什么不能简单地把 `\n` 放进字符类：那样会从任意一个反引号匹配到下一个，
+    #   把**两段行内代码之间的整片中文散文**当成引文。第一版我就这么量的，
+    #   报出「1394 条」——去读命中，前四条没有一条是引文
+    #   （[[read-the-hits-before-reporting-the-rate]]）。
+    #   判别靠的是**结构**：真引文里不会有空行、markdown 标题、列表项、表格竖线、`**`、`★`。
+    #
+    # ★★ 被结构判据滤掉的条数**要报出来**，不许静默——静默跳过正是上面两次的病根。
+    skipped_prose = 0
+    for m in re.finditer(r"`([^`]{25,900}?)`", nonblk, re.S):
+        span = m.group(1)
+        if "\n" not in span:
+            continue                                   # 单行的上面那一路已经取过
+        if _PROSE_SHAPE.search(span):
+            skipped_prose += 1
+            continue
+        blocks.append(span)
+    extract_quotes.skipped_prose = skipped_prose       # 供 main 打印
 
     out = []
     for b in blocks:
@@ -539,12 +572,64 @@ def self_test():
     chk(f"中文散文里的字段名不算引文（{len(extract_quotes(md2))}）",
         not extract_quotes(md2))
 
+    print("\n══ ★★★★★ 跨行反引号：**第三次堵同一个洞** ══")
+    # 夹具逐字取自 Kelsen #171 的 03 道与 Barton #117 的 01 道——**不是我编的干净句子**
+    _multi = ("`Wenn einer der Führer und Begründer der neuestens\n"
+              "immer stärker vordringenden sogenannten »soziologischen« Rechtswissenschaft\n"
+              "mit einem großen Werke vor die Oeffentlichkeit tritt`\n")
+    qs = extract_quotes(_multi)
+    chk(f"① 跨行反引号的德语引文要取到（{len(qs)}）", len(qs) == 1)
+
+    _multi2 = ("`THE STORY OF MY CHILDHOOD BY CLARA BARTON\n"
+               "NEW YORK THE BAKER & TAYLOR CO. 1907`\n")
+    chk(f"② 跨行的题名页照录要取到（{len(extract_quotes(_multi2))}）",
+        len(extract_quotes(_multi2)) == 1)
+
+    # ★★★ 反例：两个反引号单元格之间的**表格行**不许被当成引文。
+    #   夹具逐字取自 Blackstone #169 的 01 道。**必须用这一条而不是中文散文那一条**——
+    #   中文散文会被既有的「CJK 占比」守卫挡下，于是那种夹具**测不到本条结构判据**：
+    #   实测把 `_PROSE_SHAPE` 整条删掉，中文夹具照样绿。
+    #   [[counter-example-red-can-be-red-by-coincidence]]：红了可能是别的门红的。
+    #   ★ 这一条是纯英文，CJK 两道守卫都碰不到它，**只有结构判据能挡**。
+    #     全库实测：删掉 `_PROSE_SHAPE` 会多出 **135 条**这样的假引文（890 → 1025）。
+    _table = ("| 1758 | P1 | A Discourse on the Study of the Law | `src-aaaaaaaaaaaa` |\n"
+              "| 1762 | P1 | Law Tracts, in Two Volumes, Vol. I | `src-bbbbbbbbbbbb` |\n"
+              "| 1766 | P1 | An Analysis of the Laws of England | `src-cccccccccccc` |\n")
+    chk(f"③ 表格行不算引文（纯英文，只有结构判据能挡）（{len(extract_quotes(_table))}）",
+        not extract_quotes(_table))
+
+    # ③b 中文散文那一路照旧要挡住（**它由 CJK 守卫负责，不是本次新增的那条**）
+    _prose = ("`dimensions` 这一道**几乎没有他的声口**，必须写明。\n\n"
+              "## 密度\n\n"
+              "实测 236,252 字符、实质第一人称 0 句。\n"
+              "`split` 字段另说。\n")
+    chk(f"③b 两段代码之间的中文散文不算引文（{len(extract_quotes(_prose))}）",
+        not extract_quotes(_prose))
+
+    # ★ 过校正守卫：单行反引号与 `>` 引用块**仍要照旧取到**（别为了 ① 把老路弄坏）
+    _single = "散文里有一句 `Copyright, 1898, by Clara Barton` 是逐字的。\n"
+    chk(f"④ 单行反引号仍取到（{len(extract_quotes(_single))}）",
+        len(extract_quotes(_single)) == 1)
+    _blk = "> Copyright, 1907, by The Journal Publishing Co.,\n> New York\n"
+    chk(f"⑤ `>` 引用块仍取到（{len(extract_quotes(_blk))}）",
+        len(extract_quotes(_blk)) == 1)
+
+    # ⑥ ★ 不许重复计数：`>` 块里的跨行反引号只算一次
+    _both = "> `Copyright, 1898, by Clara Barton\n> and others`\n"
+    chk(f"⑥ 引用块内的跨行反引号不重复计数（{len(extract_quotes(_both))}）",
+        len(extract_quotes(_both)) == 1)
+
+    # ⑦ ★★ 跳过的条数要能被读到，不许静默（前两次的病根就是静默）
+    extract_quotes(_prose)
+    chk("⑦ 被判为散文而跳过的条数要有计数",
+        isinstance(getattr(extract_quotes, "skipped_prose", None), int))
+
     if bad:
         print("\n未过：")
         for b in bad:
             print("  · " + b)
         return 2
-    print("\n✓ 自测全过（3 正 + 5 反 + 2 条取法）")
+    print("\n✓ 自测全过（3 正 + 5 反 + 2 条取法 + 7 条跨行）")
     return 0
 
 

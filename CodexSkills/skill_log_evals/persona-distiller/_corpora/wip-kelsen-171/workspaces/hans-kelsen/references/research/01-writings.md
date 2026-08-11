@@ -44,9 +44,13 @@ Von Hans Kelsen (Wien).`，其载体页眉显示是 Carl Grünberg 主编的 *Ar
 
 `src-5be5faaef4d3` 正文第一段先描述局面——
 `Ein offenes und unumwundenes Bekenntnis zur Auto- kratie ist während der letzten Jahrzehnte
-weder bei einem bedeutenden Staatsmanne noch bei einem namhaften Literaten zu verzeichnen`——
+weder bei einem [版口：;] bedeutenden Staatsmanne noch bei einem namhaften Literaten [版口：]] zu verzeichnen`——
 随即把这一点翻成问题：`Jahrhundert fast allgemein beherrschende Schlagwort`，
 而 `Gerade darum aber verliert es`（`wie jedes Schlagwort`）确定的意义。
+
+★ 上引两处 `[版口：…]` 是**扫描页边的杂字**（`;` 与 `]`），照录不删。
+  ★★ 这条引文我第一版把它们**悄悄吞掉了**——判据当时看不见跨行反引号，
+  所以没报。判据改能认跨行之后当场打红。[[verbatim-is-not-understood]]
 
 → **他不是先立定义，而是先证明现有的用法已经不成其为定义。**
 这与 01 道另一份的起手同形：`src-0fc9f0c6b3e0` 的第一节标题就是
