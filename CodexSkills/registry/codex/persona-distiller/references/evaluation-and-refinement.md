@@ -104,3 +104,43 @@ Holmes 第 1 轮实测：候选均长 148.3、基线均长 182.2，**候选更�
 > 免拦的理由是「真裸模型必然篇幅不同」，**不是「长度无所谓」**。
 > 盲性因此受限：**这一轮的 delta 有能力证据，但不是干净的盲判。**
 
+## 跑一轮判分的目录布局（v0.0.0.154 起）
+
+**先说为什么要有这一节**：本项目两次撞到同一件事——代理拿到的是**文件路径**，
+但取一次 `dirname` 就能看见同目录的兄弟文件。
+
+- Holmes 第 1 轮：候选方 `ls` 轮次目录，看到 `prompt_key.json`（自报未打开）；
+- Holmes 第 2 轮：席 K 的自检脚本 `os.listdir`，看到 key 与**另一席的判分文件名**（自报未打开）。
+
+两次都是代理**自己上报**的。按 [[self-report-is-not-evidence]]，
+主循环核不了「没打开」。**嘱咐管不住 `ls`，目录布局管得住。**
+
+### 布局：四样东西各待各的地方
+
+    <人物>/round<N>/                 ← **只放载荷**，这是评委唯一拿得到的目录
+    <人物>/answers-round<N>/candidate/   ← 候选侧只写这里
+    <人物>/answers-round<N>/baseline/    ← 基线侧只写这里
+    <工作区>/evals/round<N>/          ← key、协议记录、基线运行记录、byid 中间件
+
+`build_blind_payload.py` 从 v0.0.0.154 起支持 `--key-dir`：
+
+    python3 build_blind_payload.py --workspace <W> \
+        --round-dir <人物>/round<N> \
+        --key-dir  <W>/evals/round<N> \
+        --candidate ... --baseline ... --baseline-source bare-model-run
+
+★ `--key-dir` 默认等于 `--round-dir`（不动任何既有轮次）。**新人物一律显式给它。**
+
+### `--balanced-positions`：**待裁定 ⑱，先别自己开**
+
+A/B 现按 `sha256 % 2` 分配，会抽到偏斜（Holmes 两轮都是 4/12）。
+`--balanced-positions` 强制 8/8，已实测有效（4/16 → 8/16）。
+**但改不改默认是待裁定 ⑱**，且同一人物各轮必须一致——
+**不要在某一个人物身上单方面打开**，那会让他与其余人不可比。
+
+### 每次改了工具的 `main()`，当场补一条命令行冒烟
+
+`build_blind_payload.py` 的自测里有一节「命令行冒烟」，是**唯一一条经过 `main()` 的自测**。
+它的由来：我加开关时把 `a` 写成 `args`，**三道静态检查全绿而工具每次调用必崩**。
+全库暴露面 94/100（见 `_ledgers/_自测不经过main的暴露面-2026-08-11.md`）。
+
