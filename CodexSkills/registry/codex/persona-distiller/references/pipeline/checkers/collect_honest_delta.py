@@ -181,7 +181,11 @@ def read_one(path: pathlib.Path) -> dict | None:
     rec = {"path": str(path), "形状": shape, "臂": arm, "席": seats,
            "案例": len(cand), "量纲除数": div,
            "口径": "、".join(rule) if rule else "全份（无 round／rubric_fed 字段）",
-           "delta": round(statistics.mean(c) - statistics.mean(b), 4)}
+           "delta": round(statistics.mean(c) - statistics.mean(b), 4),
+           # ★ 两条臂的**绝对分**（已归一到 0–1）。delta 是差，差看不出
+           #   「候选变差」还是「对照本来就强」——那两件事的处置方向相反。
+           "候选均": round(statistics.mean(c), 4),
+           "对照均": round(statistics.mean(b), 4)}
     if per_seat:
         rec["★ 逐席"] = per_seat
         rec["★ 席数 > 2"] = ("**这份里可能压着两组不同条件的读数**（Thomson #129 实测："
@@ -249,6 +253,12 @@ def self_test() -> int:
     r = read_one(w("a/results.jsonl", lg))
     chk(f"① 长表 vs baseline → 臂={r.get('臂')} delta={r.get('delta'):+.4f}（应 +0.1000，除数 1）",
         r.get("臂") == "baseline" and abs(r["delta"] - 0.1) < 1e-9 and r["量纲除数"] == 1.0)
+    # ①a 两条臂的**绝对分**要在，且**方向不许反**（候选 0.9 高于对照 0.8）。
+    #   只断言 delta 的话，把两个键写反也照样绿。
+    chk(f"①a 绝对分 候选={r.get('候选均')} 对照={r.get('对照均')}（应 0.9 / 0.8，**不许写反**）",
+        abs(r.get("候选均", -9) - 0.9) < 1e-9 and abs(r.get("对照均", -9) - 0.8) < 1e-9)
+    chk("①b 候选均 − 对照均 == delta（同一把尺子，不是两处各算各的）",
+        abs(r["候选均"] - r["对照均"] - r["delta"]) < 1e-9)
 
     # ② 长表 vs bare_model —— **不许当成 baseline**
     bm = [{"case_id": f"c{i}", "judge_id": "F", "system": s, "overall_score": v}
@@ -263,6 +273,10 @@ def self_test() -> int:
     r = read_one(w("c/results.jsonl", wd))
     chk(f"③ 宽表 0–10 → 除数 {r.get('量纲除数')}、delta {r.get('delta'):+.4f}（应 +0.1000）",
         r["量纲除数"] == 10.0 and abs(r["delta"] - 0.1) < 1e-9)
+    # ③a ★ 绝对分也必须**跟着归一**。delta 是差，差在两侧同乘 10 时看不出没归一；
+    #   绝对分会——0–10 的原分直接漏出来就是 9.0 / 8.0。
+    chk(f"③a 0–10 的绝对分要归一到 0–1：候选={r.get('候选均')} 对照={r.get('对照均')}（应 0.9 / 0.8）",
+        abs(r["候选均"] - 0.9) < 1e-9 and abs(r["对照均"] - 0.8) < 1e-9)
 
     # ③′ ★★ 宽表**本来就是 0–1**（Barton 那份就是）——不许照除 10
     wd1 = [{"case_id": f"c{i}", "seat": "seat-D", "candidate": 0.9, "baseline": 0.8}

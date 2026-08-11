@@ -1114,6 +1114,69 @@ def report_refusal_overflow(report, target: Path) -> None:
     report.metrics['refusal_overflow'] = info
 
 
+def report_baseline_in_persona(report, target: Path) -> None:
+    """**基线入戏门**（v0.0.0.155 新增，只报不拦）：对照臂也必须在扮演这个人。
+
+    ## 为什么要有这道门
+
+    2026-08-12 实测：#106–112 那七个人的基线是**第三人称百科口吻**
+    （「是南丁格尔最广为流传的著作」「科赫……他把照相作为记录手段」），
+    而 #101–104 的基线是**入戏第一人称**。同一族、同一套题、连号，
+    **delta 区间完全不重叠**（−0.1456…+0.0156 vs +0.0803…+0.1364），
+    两批的候选臂只差 +0.0320，**对照臂差 −0.1183**。
+
+    拿「扮演 X」去比「介绍 X」，赢的是任务差异，不是产物。
+    剔掉这 7 个之后全库中位 delta 从 **+0.0300 变成 −0.0003**，
+    正收益从 14/22 变成 7/15，过 deep 门的从 10 人变成 3 人。
+
+    ## 为什么只报不拦
+
+    判据数的是**第一人称覆盖率**，阈值是在 22 个已判分人物上**拟合**的
+    （不入戏那批 0.062–0.250，其余 0.438–1.000）。
+    对第 23 个人没有保证，所以它输出的是**候选名单**，要人去读。
+    以拟合阈值去硬拦发布，误杀一次就会有人把这门关掉。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_baseline_in_persona.py'
+    if not script.exists():
+        report.metrics['baseline_in_persona'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_bip', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['baseline_in_persona'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.self_test() != 0:
+            report.metrics['baseline_in_persona'] = {'状态': '**负对照未过，其结论不作数**'}
+            return
+
+    found = [p for p in sorted(target.rglob('*.json'))
+             if ('baseline' in p.name.lower() or 'bare' in p.name.lower())
+             and 'prompt' not in p.name.lower()]
+    if not found:
+        report.metrics['baseline_in_persona'] = {
+            '状态': '**没找到对照臂载荷——未核验，不是通过**（判分前应已有 `evals/baseline.v1.json`）'}
+        return
+    payload = found[0]
+    stat = module.scan_payload(payload)
+    verdict = module.judge_payload(stat)
+    info: dict[str, Any] = {'载荷': payload.name, '已扫答案': stat.get('总数', 0),
+                            '第一人称覆盖率': round(stat.get('覆盖率', 0.0), 3),
+                            '状态': verdict['状态']}
+    if verdict['候选']:
+        info['**这几条值得人去读一眼**'] = stat['无第一人称的'][:8]
+        info['★ 口径'] = (
+            '按整份载荷算第一人称覆盖率，**不判单条**——中文成句常省主语，'
+            'Harvey #103 的 `hv-decoy-01` 通篇无「我」而完全是入戏的。\n'
+            '★★ **这是候选名单，不是判决**：阈值在 22 个已判分人物上拟合，'
+            '对第 23 个人没有保证。**去读原文，看它是在扮演这个人还是在介绍这个人。**')
+    report.metrics['baseline_in_persona'] = info
+
+
 def run_ocr_gate(report, target: Path, sources: list[dict[str, Any]]) -> None:
     """OCR 同形字门（v0.0.0.17 新增）。
 
@@ -4332,6 +4395,7 @@ def main() -> int:
         report_verbatim_quotes(report, target, args.cache)
         report_semantic_residue(report, target)
         report_refusal_overflow(report, target)
+        report_baseline_in_persona(report, target)
         run_corpus_ceiling(report, target, report.profile)
         run_corpus_feasibility(report, target)
         run_rights_basis(report, target)

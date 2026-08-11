@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "2867aa21a480d990aff1cca08e51c146c51e61cb629fcb64d81ecd9663cc7cab",
-      "size_bytes": 142646
+      "sha256": "1aa9d940f659c9ae4e4d816e66a534959d60dc72b69b629474675a39dd1c2bf7",
+      "size_bytes": 143595
     },
     {
       "path": "VERSION",
@@ -396,8 +396,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "2b7db9658206b02fa9703ada70725eb234b4d2ccc6d58895535b7316c9821828",
-      "size_bytes": 261169
+      "sha256": "c62d812b892ba6b7bebc0aa9d289cf9ac07484caa5891128db61d3e2c62efdef",
+      "size_bytes": 271612
     },
     {
       "path": "references/ledgers/_拒答溢出门-整代人物空过-2026-08-12.md",
@@ -431,8 +431,8 @@
     },
     {
       "path": "references/ledgers/_门与分辨力-全库实测-2026-08-12.md",
-      "sha256": "40bbcc619fd019ef9d2b6d8aa5a198424610f070c6595ac18ec7f95456bbe8cb",
-      "size_bytes": 5701
+      "sha256": "04571e03d45e0044673af998f4751f9c366b9321e7409de688a148f3e4732900",
+      "size_bytes": 10187
     },
     {
       "path": "references/ledgers/_额度台账.md",
@@ -553,6 +553,11 @@
       "path": "references/pipeline/checkers/check_authorship.py",
       "sha256": "1480b1d4990b64e95a0d53d84a68e79c2aba729c390ee0b522f84e290f5c2f32",
       "size_bytes": 179761
+    },
+    {
+      "path": "references/pipeline/checkers/check_baseline_in_persona.py",
+      "sha256": "33dd672710a4ff58763e080d41d13bdf5b1a3cc60b1c71284f4f613a52f38042",
+      "size_bytes": 14736
     },
     {
       "path": "references/pipeline/checkers/check_baseline_provenance.py",
@@ -966,8 +971,8 @@
     },
     {
       "path": "references/pipeline/checkers/collect_honest_delta.py",
-      "sha256": "c613bdebadff1ca466c8f09c312814cf555e1cc54d14a86ee74858e7a155bd20",
-      "size_bytes": 21053
+      "sha256": "6a7de3f53fed2fe22e4c24509319e0c1e8dd8a38859e135643f3fce7aff75441",
+      "size_bytes": 22316
     },
     {
       "path": "references/pipeline/checkers/common.py",
@@ -1026,8 +1031,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "a3d74f1dfc67b64100f3b9e4b8572e4bbefa4b72dadcc8f00f24c4ab6dc946c7",
-      "size_bytes": 249003
+      "sha256": "85a897504f1b215d9978ba323944ee1b7f05e9be0d76dc62e608f13cf75c47fc",
+      "size_bytes": 252516
     },
     {
       "path": "references/pipeline/checkers/render_claims.py",
@@ -1348,6 +1353,11 @@
       "path": "scripts/check_authorship.py",
       "sha256": "1480b1d4990b64e95a0d53d84a68e79c2aba729c390ee0b522f84e290f5c2f32",
       "size_bytes": 179761
+    },
+    {
+      "path": "scripts/check_baseline_in_persona.py",
+      "sha256": "33dd672710a4ff58763e080d41d13bdf5b1a3cc60b1c71284f4f613a52f38042",
+      "size_bytes": 14736
     },
     {
       "path": "scripts/check_baseline_provenance.py",
@@ -1756,8 +1766,8 @@
     },
     {
       "path": "scripts/collect_honest_delta.py",
-      "sha256": "c613bdebadff1ca466c8f09c312814cf555e1cc54d14a86ee74858e7a155bd20",
-      "size_bytes": 21053
+      "sha256": "6a7de3f53fed2fe22e4c24509319e0c1e8dd8a38859e135643f3fce7aff75441",
+      "size_bytes": 22316
     },
     {
       "path": "scripts/common.py",
@@ -1881,8 +1891,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "a3d74f1dfc67b64100f3b9e4b8572e4bbefa4b72dadcc8f00f24c4ab6dc946c7",
-      "size_bytes": 249003
+      "sha256": "85a897504f1b215d9978ba323944ee1b7f05e9be0d76dc62e608f13cf75c47fc",
+      "size_bytes": 252516
     },
     {
       "path": "scripts/register_persona.py",
