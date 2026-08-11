@@ -594,8 +594,13 @@ python3 references/pipeline/next_person.py
 python3 scripts/namesake_gate.py --name "<人名>" --output <护栏结果.json>
 
 # ③ 建工作区（三个必填：--name / --identity / --namesake-gate）
-python3 scripts/init_target.py --name "<人名>" --identity <identity.json> \
+#   ★★ --identity 是**族号 1-12 或族名**，**不是 JSON 文件**
+#      （本行原写 `<identity.json>`，2026-08-12 真跑 #172 时发现是错的）
+#   ★  --namesake-gate 要传 **ready 那份**；若你做了两步判定，
+#      BLOCKED 那份只是枚举证据，传进去会被拒
+python3 scripts/init_target.py --name "<人名>" --identity 7 \
     --namesake-gate <护栏结果.json> --profile quick --workspace <工作区目录>
+#   实跑示例（#172）：--identity 7（政治法律师）--namesake-gate .../namesake_gate.json
 
 # ④ 灌语料（两个位置参数：工作区、一个或多个输入文件）
 python3 scripts/ingest.py <工作区目录> <语料文件> --tier P1 --dimension writings \
