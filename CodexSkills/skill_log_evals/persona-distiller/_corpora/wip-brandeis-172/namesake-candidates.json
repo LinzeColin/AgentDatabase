@@ -312,6 +312,30 @@
         "**机构署名**的出版物，非个人作品"
       ],
       "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Louis Brandeis Wehle",
+      "subject_uid": "wehle-louisbrandeis-1880",
+      "identity_category": "historical",
+      "occupation_or_role": "美国律师",
+      "professional_background": "1880 – 1959。Wikidata Q106454400 description 'American lawyer (1880-1959)'。**目标的侄子**（据本工作区 08-11 预筛）。",
+      "application_scenarios": [
+        "法律执业",
+        "与其舅父同框出现的文献"
+      ],
+      "key_capabilities": [
+        "法律文书",
+        "**姓名中段即为目标的姓**"
+      ],
+      "distinguishing_basis": "★★ **他的中名就是 Brandeis**，全名 'Louis Brandeis Wehle' 里 'Louis Brandeis' 连续出现——**任何按『Louis Brandeis』做子串匹配的筛选都会命中他**。姓氏字段是 Wehle，靠姓氏能分，靠全名子串分不了。",
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q106454400",
+          "note": "wbsearchentities 检索 'Louis Brandeis' 时出现在结果里（本轮实调）；★ 我第一版候选文件漏了他，是本工作区 08-11 的 00-预筛.md 提醒的"
+        }
+      ],
+      "disposition": "not-target｜**子串匹配必须挡他**：'Louis Brandeis Wehle' 含 'Louis Brandeis'",
+      "evidence_level": "low"
     }
   ]
 }

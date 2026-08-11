@@ -12,9 +12,10 @@
     "J. 人物与身份：Friedrich Brandeis (作曲家, 1835–1889)；historical；奥地利钢琴家、作曲家、管风琴师。\n   专业背景：1835-07-05 – 1889-05-14。。\n   应用价值：场景：钢琴与管风琴演奏、作曲；关键能力：乐谱（非文本）。\n   区分依据：见上一条。。",
     "K. 人物与身份：Jan Adolf Brandeis；historical；捷克画家、摄影师。\n   专业背景：1818-06-09 – 1872-11-13。。\n   应用价值：场景：绘画与摄影；关键能力：图像作品（非文本）。\n   区分依据：年代早于目标主要活跃期，可分。。",
     "L. 人物与身份：Adele Brandeis；historical；美国艺术行政管理者。\n   专业背景：1885 – 1975。。\n   应用价值：场景：公共艺术项目管理；关键能力：艺术行政文书。\n   区分依据：同为美国、姓氏相同、年代重叠；职业与生卒年可分。。",
-    "M. 人物与身份：Brandeis University（及其约 20 个下属机构）；institution；美国私立研究型大学（以本人命名）。\n   专业背景：Q49119。检索 'Brandeis' 时首屏 25 条中有 20 条属此族：Brandeis University Press (Q76977390)、Brandeis law journal (Q27719463)、Brandeis Medal (Q4956634)、Brandeis International Business School (Q4956632)、Michtom School of Computer Science (Q104176788) 等。。\n   应用价值：场景：高等教育与学术出版；关键能力：**机构署名**的出版物，非个人作品。\n   区分依据：★★★ **它以本人命名，所以按姓氏筛选必然全部命中，且它们的出版物都晚于 1941 年**。⇒ 这正是 Coffin #130 那次事故的形状：GE 总裁 Charles A. Coffin 被当成焊接发明人的署名放行——**护栏只比姓，同姓的一个也挡不住**。。"
+    "M. 人物与身份：Brandeis University（及其约 20 个下属机构）；institution；美国私立研究型大学（以本人命名）。\n   专业背景：Q49119。检索 'Brandeis' 时首屏 25 条中有 20 条属此族：Brandeis University Press (Q76977390)、Brandeis law journal (Q27719463)、Brandeis Medal (Q4956634)、Brandeis International Business School (Q4956632)、Michtom School of Computer Science (Q104176788) 等。。\n   应用价值：场景：高等教育与学术出版；关键能力：**机构署名**的出版物，非个人作品。\n   区分依据：★★★ **它以本人命名，所以按姓氏筛选必然全部命中，且它们的出版物都晚于 1941 年**。⇒ 这正是 Coffin #130 那次事故的形状：GE 总裁 Charles A. Coffin 被当成焊接发明人的署名放行——**护栏只比姓，同姓的一个也挡不住**。。",
+    "N. 人物与身份：Louis Brandeis Wehle；historical；美国律师。\n   专业背景：1880 – 1959。Wikidata Q106454400 description 'American lawyer (1880-1959)'。**目标的侄子**（据本工作区 08-11 预筛）。。\n   应用价值：场景：法律执业；与其舅父同框出现的文献；关键能力：法律文书；**姓名中段即为目标的姓**。\n   区分依据：★★ **他的中名就是 Brandeis**，全名 'Louis Brandeis Wehle' 里 'Louis Brandeis' 连续出现——**任何按『Louis Brandeis』做子串匹配的筛选都会命中他**。姓氏字段是 Wehle，靠姓氏能分，靠全名子串分不了。。"
   ],
-  "candidate_count": 13,
+  "candidate_count": 14,
   "candidates": [
     {
       "application_scenarios": [
@@ -321,9 +322,33 @@
       "occupation_or_role": "美国私立研究型大学（以本人命名）",
       "professional_background": "Q49119。检索 'Brandeis' 时首屏 25 条中有 20 条属此族：Brandeis University Press (Q76977390)、Brandeis law journal (Q27719463)、Brandeis Medal (Q4956634)、Brandeis International Business School (Q4956632)、Michtom School of Computer Science (Q104176788) 等。",
       "subject_uid": "brandeis-university-institution"
+    },
+    {
+      "application_scenarios": [
+        "法律执业",
+        "与其舅父同框出现的文献"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q106454400",
+          "note": "wbsearchentities 检索 'Louis Brandeis' 时出现在结果里（本轮实调）；★ 我第一版候选文件漏了他，是本工作区 08-11 的 00-预筛.md 提醒的"
+        }
+      ],
+      "canonical_name": "Louis Brandeis Wehle",
+      "distinguishing_basis": "★★ **他的中名就是 Brandeis**，全名 'Louis Brandeis Wehle' 里 'Louis Brandeis' 连续出现——**任何按『Louis Brandeis』做子串匹配的筛选都会命中他**。姓氏字段是 Wehle，靠姓氏能分，靠全名子串分不了。",
+      "evidence_level": "low",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "法律文书",
+        "**姓名中段即为目标的姓**"
+      ],
+      "label": "N",
+      "occupation_or_role": "美国律师",
+      "professional_background": "1880 – 1959。Wikidata Q106454400 description 'American lawyer (1880-1959)'。**目标的侄子**（据本工作区 08-11 预筛）。",
+      "subject_uid": "wehle-louisbrandeis-1880"
     }
   ],
-  "generated_at": "2026-08-11T16:19:52Z",
+  "generated_at": "2026-08-11T16:21:55Z",
   "normalized_name": "louisbrandeis",
   "resolution": "multiple",
   "schema_version": "1.0",
