@@ -154,6 +154,41 @@ def _one_ledger_per_workspace(root: pathlib.Path) -> list[str]:
     return out
 
 
+def _verification_counts(root: pathlib.Path) -> list[str]:
+    """**VERIFICATION.md 里能机械数出来的量，必须与实况相等。**
+
+    2026-08-12：`check_checkers` 报它有 **5 项**对不上，全是当天的工作造成的陈旧
+    （判据 87→89、脚本 125→130、checksum 465→474、
+    待裁定速览表 35 行→37 行、条数「三十五」→「三十七」）。
+    **其中两条是新登记的待裁定 ㊲㊳ 只进了正文没进速览表**——
+    接手的人先看的就是那张表，会**漏掉当天最新的两条**。
+
+    ★ 这一件此前 `quality_check` 与本门**都不跑它**（今天逐条查过调用方，
+      六件里只有它两条例行路径都空）——[[a-checker-nothing-calls-is-not-a-checker]]。
+
+    ★★ 它**只报不改**是有意的：对不上时不知道该改哪边（文档陈旧 还是 仓库真少了东西），
+      那是人的判断。本门也只把它的结论转述出来，不替它决定。
+    """
+    mod = root / "scripts" / "check_verification_counts.py"
+    if not mod.is_file():
+        return []
+    import subprocess
+    import json as _j
+    r = subprocess.run([sys.executable, str(mod)], capture_output=True, text=True, cwd=str(root))
+    try:
+        d = _j.loads(r.stdout)
+    except Exception:
+        return [f"[自报数字] check_verification_counts 跑不起来（rc={r.returncode}）："
+                f"{(r.stderr or r.stdout)[:160]}"]
+    n = d.get("**对不上的项数**", 0)
+    if not n:
+        return []
+    bad = [x for x in d.get("明细", []) if "对不上" in str(x.get("判定", ""))]
+    return [f"[自报数字] VERIFICATION.md **{n} 项与实况对不上**："
+            + "；".join(f"{x['项']} 实况 {x['实况']} 文中 {x['文中']}" for x in bad)
+            + " —— **跑 `scripts/check_verification_counts.py` 看全表**"]
+
+
 def _json(path: pathlib.Path):
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -321,6 +356,7 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
     skipped.extend(_cs_skip)
 
     problems.extend(_one_ledger_per_workspace(root))
+    problems.extend(_verification_counts(root))
 
     # ★★ v0.0.0.94 新增第四条比对：**CHANGELOG 的最高条目必须等于 VERSION**。
     #   实测背景：2026-08-04 一天写了 v0.0.0.84–94 十一条 CHANGELOG，
