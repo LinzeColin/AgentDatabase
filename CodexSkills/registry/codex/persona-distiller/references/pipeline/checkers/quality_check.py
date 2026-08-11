@@ -1505,17 +1505,25 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
         report.error('content.selftest-failed',
                      'check_ocr_legibility 负对照未过——其检查结论不作数')
     else:
+        # ★★★ 2026-08-12：这里原来是 `except: n_bad = 0`，而下面那行会印
+        #   **`✓ 没有花体乱码`**——**解析失败与「真的没有」在报告里长得一模一样**。
+        #   同一个文件里 `staged_not_ingested` / `source_header_quotes` 两处
+        #   早就用的是「**未核（不是通过）**：输出解析不了」——按它自己的先例改。
+        #   ⇒ [[empty-default-swallows-unknown]]：绿章不许盖在「不知道」上。
+        n_bad = None
         try:
             n_bad = json.loads(out).get('**判为花体乱码**', 0)
-        except Exception:
-            n_bad = 0
+        except Exception:                                        # noqa: BLE001
+            review['fraktur_mojibake'] = ('**未核（不是通过）**：'
+                                          'check_ocr_legibility 的输出解析不了')
         if n_bad:
             report.warn('corpus.fraktur-mojibake',
                         f'**{n_bad} 份德文语料是花体 OCR 乱码**——'
                         'der→ber、und→unb、ist→ift，整篇没有一个词能拿去检索或引用。'
                         '份数／分档／字数三样都是真的，所以既有的门都放行了；'
                         '**从这些文件里取不出任何可核的逐字引文**。')
-        review['fraktur_mojibake'] = f'{n_bad} 份' if n_bad else '✓ 没有花体乱码'
+        if n_bad is not None:
+            review['fraktur_mojibake'] = f'{n_bad} 份' if n_bad else '✓ 没有花体乱码'
 
     # ★★★ v0.0.0.136：**台账上有、磁盘上没有的源。**
     #   Blackwell #118 实测：台账 95 行里有 6 行（4 本日记＋2 份手稿，**88,685 词，全是 P1**）
@@ -4041,6 +4049,7 @@ def run_quote_layer(report, target: Path) -> None:
             return
 
     hits, scanned = [], 0
+    failed: list[str] = []
     payload = target / 'evals/judge_payload.v1.json'
     if payload.is_file():
         try:
@@ -4053,17 +4062,30 @@ def run_quote_layer(report, target: Path) -> None:
                 for x in module.check_text(str(r.get('candidate', ''))):
                     hits.append((r.get('case_id') or '?', x))
             scanned += 1
-        except Exception:                                        # noqa: BLE001
-            pass
+        except Exception as exc:                                 # noqa: BLE001
+            # ★★ 原来是 `pass`：`scanned += 1` 在 try 里，所以一失败就
+            #   **既没扫到、也没记下**，报告里只剩「已扫 0 / 问题 0」——**读起来像干净**。
+            failed.append(f'judge_payload.v1.json（{type(exc).__name__}）')
     for md in sorted((target / 'docs').glob('*.md')):
         try:
             for x in module.check_text(md.read_text(encoding='utf-8')):
                 hits.append((f'docs/{md.name}', x))
             scanned += 1
-        except Exception:                                        # noqa: BLE001
+        except Exception as exc:                                 # noqa: BLE001
+            failed.append(f'docs/{md.name}（{type(exc).__name__}）')
             continue
 
     info: dict[str, Any] = {'已扫文件': scanned, '引文层问题': len(hits)}
+    if scanned == 0 and not failed:
+        # ★ 第三种形态：**没东西可扫**（研究阶段还没有 judge_payload、也没有 docs/*.md）。
+        #   「已扫 0 / 问题 0」读起来像「查过且干净」，而实际是**这道检查没起作用**。
+        #   ⇒ [[empty-default-swallows-unknown]]：0 覆盖率不许长得像通过。
+        info['★★'] = '**一个文件都没扫到**——本项这一轮**没有起作用**，不是「查过没问题」'
+    if failed:
+        # **读不了的文件不是「没问题的文件」**，必须单列。
+        info['**读不了、因而未核的**'] = failed[:8]
+        info['★'] = (f'**{len(failed)} 个文件没扫成**——上面那个「引文层问题」的数'
+                     '**不覆盖它们**，别当成全量结论')
     if hits:
         info['**这些地方分不清原文与译文**'] = [f'{c}　{x}' for c, x in hits[:12]]
         info['口径'] = ('**数的是形态，不判真伪**——标了「译文」的伪造引文照样过；'

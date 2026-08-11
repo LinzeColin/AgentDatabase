@@ -991,8 +991,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "6798ddb368f8449bac558c853b99de8e2903c44a253d0217aad04d40fdd464a8",
-      "size_bytes": 245886
+      "sha256": "bd12c27ab8bef6323ca4ac42e98d0ecdac3cd7c8efb939102e2eb8810bbe1e58",
+      "size_bytes": 247829
     },
     {
       "path": "references/pipeline/checkers/render_claims.py",
@@ -1836,8 +1836,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "6798ddb368f8449bac558c853b99de8e2903c44a253d0217aad04d40fdd464a8",
-      "size_bytes": 245886
+      "sha256": "bd12c27ab8bef6323ca4ac42e98d0ecdac3cd7c8efb939102e2eb8810bbe1e58",
+      "size_bytes": 247829
     },
     {
       "path": "scripts/register_persona.py",
