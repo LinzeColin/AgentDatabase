@@ -201,9 +201,56 @@ def main():
         # ★ 做完了但没出货、也没记延后的——**多半卡在待裁定**。
         #   它们**已经排除出 NEXT**，但必须在这里被看见，否则就成了没人管的一批。
         "★ 已做但未出货（不进 NEXT，去看它卡在哪）": worked_not_shipped,
+        # ★★★★ 2026-08-11：**把分族配重打进输出。**
+        #
+        #   `_决策台账.md` 记着一条规则：「每轮 5 人须含 1 名最少三族的人」，
+        #   理由是「按语料可取得性排期会让 12 族单向漂移」。
+        #   **本文件此前一次都没提到它** —— 规则记下来了，从没被任何代码读过。
+        #
+        #   而它要防的事已经发生，且可量：
+        #       software-developer 已入库 **34**｜art-designer 1｜customer-marketing 1
+        #       **healthcare-nursing 0**（而该族已延后/拒发 **21 人**）
+        #       最多/最少 = **34 : 1**
+        #
+        #   ★ **这里只报，不改选谁。** 「优先顺序」在决策台账里明写是用户指定的，
+        #     擅自按配重改 NEXT 等于替人改了一条锁定项。
+        #     报出来，让排期的人自己看得见。
+        "★ 分族配重（只报不覆盖，规则见 _决策台账.md）": _family_balance(idx if os.path.isfile(ti) else None, q, a),
         "NEXT": _withyears(pending[0]) if pending else None,
         "upcoming": [_withyears(x) for x in pending[:a.show]],
     }, ensure_ascii=False, indent=1))
+
+
+def _family_balance(idx, q, a):
+    """按族数已入库产物，报出「最少三族」与 NEXT 属不属于它们。
+
+    ★ 只报不覆盖：见调用处的注释。
+    ★ **不猜入库时序**：`team-index.json` 是按 (族, 名字) 排序的，
+      **没有任何入库时间字段**——所以「漂移是不是还在继续」这件事
+      用现有数据答不了，本函数**不报**那个。
+      （2026-08-11 我按数组末尾读出「最近 12 个全是 software-developer」，
+        那是排序造成的假象，差一点写进台账。）
+    """
+    import collections
+    if idx is None:
+        # ★ 注册表读不到时**不许报 0**——那正是本文件头记的那个坑
+        #   （`registry_products` 打印成 0 而真值是 101）。
+        return {"★": "**注册表读不到，本节未核（不是「各族都是 0」）**"}
+    prods = idx.get("products") or []
+    fam = collections.Counter((p.get("identity_family_id") or "?") for p in prods)
+    inq = collections.Counter(x.get("family_id") for x in q)
+    for f in inq:                      # 队列里有、却一个都没入库的族，也要出现在表里
+        fam.setdefault(f, 0)
+    ranked = sorted(fam.items(), key=lambda kv: (kv[1], kv[0]))
+    least3 = [k for k, _ in ranked[:3]]
+    return {
+        "每族已入库": dict(sorted(fam.items(), key=lambda kv: -kv[1])),
+        "**最少三族**": least3,
+        "最多/最少": ("%d / %d" % (ranked[-1][1], ranked[0][1])) if ranked else None,
+        "★ 规则": "每轮 5 人须含 1 名最少三族的人（_决策台账.md）；**本工具只报，不改 NEXT 选谁**",
+        "★ 本工具答不了的": "「漂移是不是还在继续」——team-index.json 没有入库时间字段，"
+                            "它是按 (族, 名字) 排序的，**不要拿数组末尾当最近入库**",
+    }
 
 if __name__ == "__main__":
     main()
