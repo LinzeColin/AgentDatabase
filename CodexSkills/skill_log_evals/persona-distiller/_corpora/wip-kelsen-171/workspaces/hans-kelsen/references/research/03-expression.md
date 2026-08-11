@@ -168,6 +168,19 @@
 
 IDs only; research Agents must not inspect Holdout bodies.
 
+## ★ 够不上断言门的观察（记在这里，不写进 claims.jsonl）
+
+**「他把政治世界观往下追到性格，再拆成『我—观』与『你—观』」**
+（`Individualismus und Kollektivismus: im Grunde nur Ich-Anschauung und Du-Anschauung!`）
+是一条真实且可核的观察，但它**只有 `src-bfbcf301361b` 一篇文本可证**，
+而 `mental-model` 属多源类别（≥2 源／≥2 语境／≥2 独立证据簇）。
+
+★ 我一度把它写进了 `claims.jsonl`，合成门当场报 `claim.insufficient-support` ／
+`claim.insufficient-contexts` ／ `claim.non-independent` 三条，**已撤回**。
+**没有给它改成不要求多源的类别去蒙混过门**——那是为凑数放宽判据。
+
+⇒ 它留在这里作为观察；若后续取到 1911 或 1922 年那几部取不到的书，可回来补第二簇。
+
 ## Handoff to adjudication
 
 - K6 已有跨道第二簇（本道 + 01 道），**可进多源类别**。
