@@ -2,15 +2,26 @@
 
 ## Scope and assigned sources
 
-Train-split、`dimensions` 含 `external` 的 **1 份**：
+**本道分到 1 份（train split）**：
 
-| source_id | 年 | 分档 | 载体 |
+| source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
-| `src-82666b7fcea2` | 1912 | **S1** | DNB 补编条目（5916 字符） |
+| `src-82666b7fcea2` | 1912 | S1 | dnb1912-roberts-austen.txt |
 
-★ **本道只有一份，且是二手。** 下面每一条都只有这一个出处。
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 
 ## Source-linked observations
+
+★ 2026-08-12：下面几行原在本文件开头那个 Scope 节里。
+  那一节由 emit_lane_scope.py 从台账**机械重出、不含阅读判断**，
+  手写内容重出时会被静默抹掉——判断性的话搬到这里才留得住。
+  ★★ 本条注释**刻意不用反引号**：反引号里的英文会被
+     check_lane_quotes_verbatim 当成一条待核引文，而它当然核不到
+     （第一版就是这么把三个工作区改红的）。
+
+Train-split、`dimensions` 含 `external` 的 **1 份**：
+★ **本道只有一份，且是二手。** 下面每一条都只有这一个出处。
+
 
 ### ★★★ ① 他是 Graham 的**私人助手**——这解释了 expression 道那条二十年线索
 

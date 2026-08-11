@@ -2,10 +2,40 @@
 
 ## Scope and assigned sources
 
+**本道分到 15 份（train split）**：
+
+| source_id | 出版年 | tier | 题名 |
+|---|---|---|---|
+| `src-e49d80d0a32d` | 1916 | P2 | paton-stevenson-1916-principles-of-accounting-1st-ed.txt |
+| `src-5ae98c74e3a9` | 1917 | P1 | paton-1917-theory-of-the-double-entry-system.txt |
+| `src-d4b721b63010` | 1918 | P2 | paton-stevenson-1918-principles-of-accounting.txt |
+| `src-67ae7addce08` | 1919 | P1 | paton-1919-some-phases-of-capital-stock.txt |
+| `src-11e622e6e35a` | 1920 | P1 | paton-1920-interest-during-construction.txt |
+| `src-186b2ae576dc` | 1920 | P1 | paton-1920-proprietors-salaries.txt |
+| `src-5d4fcf54f917` | 1920 | P1 | paton-1920-depreciation-appreciation-and-productive-capacity.txt |
+| `src-643e176d84fe` | 1920 | P1 | paton-1920-some-current-valuation-accounts.txt |
+| `src-5279563131ef` | 1921 | P2 | paton-stevenson-1921-problems-and-exercises.txt |
+| `src-5165e744ea10` | 1922 | P1 | paton-1922-accounting-theory.txt |
+| `src-7d7c0f944f58` | 1922 | P1 | paton-1922-review-of-orwin-farming-costs.txt |
+| `src-d24b0b5393b4` | 1922 | P1 | paton-1922-accounting-theory-cornell-scan.txt |
+| `src-2e661bbd496a` | 1926 | P1 | paton-1926-discussion-conservatism-in-inventory-valuations.txt |
+| `src-1f1dc3137d9e` | 1927 | P1 | paton-1927-distribution-costs-and-inventory-values.txt |
+| `src-5a198de4c1aa` | 1928 | P1 | paton-1928-review-of-rorem-accounting-method.txt |
+
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
+
+## Source-linked observations
+
+★ 2026-08-12：下面几行原在本文件开头那个 Scope 节里。
+  那一节由 emit_lane_scope.py 从台账**机械重出、不含阅读判断**，
+  手写内容重出时会被静默抹掉——判断性的话搬到这里才留得住。
+  ★★ 本条注释**刻意不用反引号**：反引号里的英文会被
+     check_lane_quotes_verbatim 当成一条待核引文，而它当然核不到
+     （第一版就是这么把三个工作区改红的）。
+
 **19 份 writings**：1922《Accounting Theory》两份扫描件（同一本书）、
 1916/1918《Principles of Accounting》与 1921 习题册（**均与 R. A. Stevenson 合著**）、
 1917–1929 期刊论文 12 篇、他写的书评 2 篇、会议发言逐字记录 1 份。
-
 ★★★★ **本道最要紧的一句写在最前面**：**他的自称是 `the writer`，不是 `I`。**
 按 `I` 去量会把他判死——全部语料里 498 个 `I` 逐个分类完，
 **属于他本人的第一人称 0 个**（罗马数字 `Part I`／页码 OCR 讹字 `I6`=16／

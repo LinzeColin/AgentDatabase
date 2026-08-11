@@ -2,9 +2,26 @@
 
 ## Scope and assigned sources
 
+**本道分到 2 份（train split）**：
+
+| source_id | 出版年 | tier | 题名 |
+|---|---|---|---|
+| `src-0af54aee74c3` | 1908 | S2 | rouseball-1908-short-account-history-mathematics-pacioli.txt |
+| `src-11b5ad20c3cc` | 1911 | S2 | catholic-encyclopedia-1911-lucas-pacioli.txt |
+
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
+
+## Source-linked observations
+
+★ 2026-08-12：下面几行原在本文件开头那个 Scope 节里。
+  那一节由 emit_lane_scope.py 从台账**机械重出、不含阅读判断**，
+  手写内容重出时会被静默抹掉——判断性的话搬到这里才留得住。
+  ★★ 本条注释**刻意不用反引号**：反引号里的英文会被
+     check_lane_quotes_verbatim 当成一条待核引文，而它当然核不到
+     （第一版就是这么把三个工作区改红的）。
+
 **2 份，均为 S2**：`catholic-encyclopedia-1911`、`rouseball-1908`。
 （`geijsbeek-1914` 的导论里也有一份任教城市名单，本道一并核了，见 T2。）
-
 ★★★★ **本道最重要的一句写在最前面**：**这三份来源在两件基本事实上互相不一致**——
 **卒年**与**任教城市名单**。**产物里不许悄悄取一个当确定值。**
 

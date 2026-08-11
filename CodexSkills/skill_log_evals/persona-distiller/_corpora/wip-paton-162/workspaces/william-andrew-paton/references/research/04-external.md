@@ -2,9 +2,28 @@
 
 ## Scope and assigned sources
 
+**本道分到 4 份（train split）**：
+
+| source_id | 出版年 | tier | 题名 |
+|---|---|---|---|
+| `src-2f202de93fb3` | 1919 | S1 | boyle-1919-correspondence-on-patons-some-phases-of-capital-stock.txt |
+| `src-815cccaac6b5` | 1919 | S1 | lawton-1919-review-of-paton-stevenson-principles-of-accounting.txt |
+| `src-747828975dfc` | 1923 | S1 | lawton-1923-review-of-paton-accounting-theory.txt |
+| `src-f3a34474a91c` | 1925 | S1 | hatfield-1925-review-of-paton-accounting.txt |
+
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
+
+## Source-linked observations
+
+★ 2026-08-12：下面几行原在本文件开头那个 Scope 节里。
+  那一节由 emit_lane_scope.py 从台账**机械重出、不含阅读判断**，
+  手写内容重出时会被静默抹掉——判断性的话搬到这里才留得住。
+  ★★ 本条注释**刻意不用反引号**：反引号里的英文会被
+     check_lane_quotes_verbatim 当成一条待核引文，而它当然核不到
+     （第一版就是这么把三个工作区改红的）。
+
 **4 份，全部 S1**，全部是**同时代人整篇写他**（1919–1925，《Journal of Accountancy》）：
 `lawton-1919`、`boyle-1919`、`lawton-1923`、`hatfield-1925`。
-
 ★ **本道不产出任何关于他思考方式的断言。** 四份都是别人评他。
 
 ## ★★★★ E1：Lawton 1923 —— **1922 那本书的同时代书评**，把他的主张压成一个公式

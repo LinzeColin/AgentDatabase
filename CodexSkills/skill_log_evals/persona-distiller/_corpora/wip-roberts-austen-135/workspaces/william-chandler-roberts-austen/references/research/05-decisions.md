@@ -2,18 +2,29 @@
 
 ## Scope and assigned sources
 
-Train-split、`dimensions` 含 `decisions` 的 **3 份**：
+**本道分到 3 份（train split）**：
 
-| source_id | 年 | 分档 | 载体 |
+| source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
-| `src-42286afc9366` | 1902 | P1 | Phil. Trans. 金银合金（**整版扫本，本道不引它**，见下） |
-| `src-dfa437e17e2d` | **1895** | P1 | IMechE **合金研究委员会第三报告** |
-| `src-5bf1098b8d50` | **1897** | P1 | IMechE **合金研究委员会第四报告** |
+| `src-dfa437e17e2d` | 1895 | P1 | imeche1895-alloys-research-third-report.txt |
+| `src-5bf1098b8d50` | 1897 | P1 | imeche1897-alloys-research-fourth-report.txt |
+| `src-42286afc9366` | 1902 | P1 | philtrans08066202.txt |
 
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
+
+## Source-linked observations
+
+★ 2026-08-12：下面几行原在本文件开头那个 Scope 节里。
+  那一节由 emit_lane_scope.py 从台账**机械重出、不含阅读判断**，
+  手写内容重出时会被静默抹掉——判断性的话搬到这里才留得住。
+  ★★ 本条注释**刻意不用反引号**：反引号里的英文会被
+     check_lane_quotes_verbatim 当成一条待核引文，而它当然核不到
+     （第一版就是这么把三个工作区改红的）。
+
+Train-split、`dimensions` 含 `decisions` 的 **3 份**：
 ★★ **本道上一轮写的是「读完确认为空」。** 那是对的——当时只有 1902 那一份。
 后两份是**按 06-timeline 挖出的年份补抓回来的**，本道因此从空变为有。
 
-## Source-linked observations
 
 ### ★★★ ① 一段完整的取舍：**放弃 → 造仪器 → 重启 → 发表**
 

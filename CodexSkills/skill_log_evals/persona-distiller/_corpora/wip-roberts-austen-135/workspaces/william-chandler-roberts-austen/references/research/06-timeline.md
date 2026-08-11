@@ -2,16 +2,27 @@
 
 ## Scope and assigned sources
 
+**本道分到 1 份（train split）**：
+
+| source_id | 出版年 | tier | 题名 |
+|---|---|---|---|
+| `src-2b601c0c1e58` | 1914 | P2 | robertsaustenar00smitgoog.txt |
+
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
+
+## Source-linked observations
+
+★ 2026-08-12：下面几行原在本文件开头那个 Scope 节里。
+  那一节由 emit_lane_scope.py 从台账**机械重出、不含阅读判断**，
+  手写内容重出时会被静默抹掉——判断性的话搬到这里才留得住。
+  ★★ 本条注释**刻意不用反引号**：反引号里的英文会被
+     check_lane_quotes_verbatim 当成一条待核引文，而它当然核不到
+     （第一版就是这么把三个工作区改红的）。
+
 Train-split、`dimensions` 含 `timeline` 的 **1 份**：
-
-| source_id | 年 | 分档 | 载体 | 规模 |
-|---|---|---|---|---|
-| `src-2b601c0c1e58` | 1914 | **P2** | `robertsaustenar00smitgoog`（Griffin 冶金丛书卷，含纪念性传略） | **1,242,774 字符** |
-
 ★ **本轮仍未通读**，但已按 04-external 得到的四个节点定点开挖，
 **挖到了这份材料里的编年表**，下面每一条都是逐字核过的。
 
-## Source-linked observations
 
 ### ★★★ ① 这份里有一张**按年排的履历表**
 

@@ -2,31 +2,46 @@
 
 ## Scope and assigned sources
 
+**本道分到 16 份（train split）**：
+
+| source_id | 出版年 | tier | 题名 |
+|---|---|---|---|
+| `src-a16660d41422` | 1888 | P1 | philtrans00412410.txt |
+| `src-827f6033da2f` | 1890 | P1 | philtrans00429265.txt |
+| `src-b63e790a63d6` | 1890 | P1 | paper-doi-10_1038_041420a0.txt |
+| `src-3a7b624f0324` | 1891 | P1 | philtrans07401700.txt |
+| `src-8268c67b4de9` | 1891 | P1 | intrometallurgy00roberich.txt |
+| `src-d690d5a293a8` | 1891 | P1 | imeche1891-alloys-research-first-report.txt |
+| `src-391ca73471aa` | 1893 | P1 | imeche1893-alloys-research-second-report.txt |
+| `src-11156663a5e4` | 1895 | P1 | philtrans05512448.txt |
+| `src-4ae0892cbde8` | 1896 | P1 | philtrans09730582.txt |
+| `src-60539abbb73b` | 1896 | P1 | philtrans05894557.txt |
+| `src-fff1b6898cd1` | 1896 | P1 | philtrans00706421.txt |
+| `src-06496f1d3bc2` | 1898 | P1 | canadasmetalsal00robegoog.txt |
+| `src-baf16940309f` | 1898 | P1 | philtrans04290113.txt |
+| `src-269db01c421a` | 1899 | P1 | imeche1899-alloys-research-fifth-report.txt |
+| `src-2ebdf104a176` | 1900 | P1 | philtrans01205368.txt |
+| `src-accdb5e0821f` | 1900 | P1 | philtrans09607756.txt |
+
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
+
+## Source-linked observations
+
+★ 2026-08-12：下面几行原在本文件开头那个 Scope 节里。
+  那一节由 emit_lane_scope.py 从台账**机械重出、不含阅读判断**，
+  手写内容重出时会被静默抹掉——判断性的话搬到这里才留得住。
+  ★★ 本条注释**刻意不用反引号**：反引号里的英文会被
+     check_lane_quotes_verbatim 当成一条待核引文，而它当然核不到
+     （第一版就是这么把三个工作区改红的）。
+
 Train-split、`dimensions` 含 `writings` 的 13 份，全部 P1：
-
-| source_id | 年 | 载体 |
-|---|---|---|
-| `src-a16660d41422` | 1888 | Phil. Trans.「On certain Mechanical Properties of Metals considered in relation to the Periodic Law」 |
-| `src-827f6033da2f` | 1891 | Proc. Roy. Soc.「On Certain Properties of Metals considered in Relation to the Periodic Law」 |
-| `src-3a7b624f0324` | 1891 | Phil. Trans.（Gold–Aluminium Series of Alloys 那一卷） |
-| `src-11156663a5e4` `src-4ae0892cbde8` `src-60539abbb73b` `src-fff1b6898cd1` | 1895–96 | Phil. Trans. 合金系列 |
-| `src-baf16940309f` `src-2ebdf104a176` `src-accdb5e0821f` | 1898–1900 | Phil. Trans. 合金系列 |
-| `src-b63e790a63d6` | 1890 | Nature |
-| `src-06496f1d3bc2` | 1898 | Canada's Metals（讲演单行本） |
-| `src-8268c67b4de9` | 1891 | Introduction to the Study of Metallurgy |
-| **`src-d690d5a293a8`** | **1891** | **Alloys Research Committee 第一份报告**（Proc. IMechE） |
-| **`src-391ca73471aa`** | **1893** | **同上，第二份** |
-| **`src-269db01c421a`** | **1899** | **同上，第五份** |
-
 ★ **本道只用训练侧材料**；非训练侧的不在此列，写作时未打开。
-
 ★★ **上一轮记的「五份报告全缺」已补齐**（原记 `numFound 0`——
 那是**检索式的缺陷不是材料不存在**：`title` 字段只写 `Proceedings`、
 `year` 对四卷都报 1849，改用 `creator:` 检索得 numFound 118）。
 其中 **1895 与 1897 两份 `dimensions` 记的是 `decisions`，本道不引**，
 留给 05-decisions；本道只取 `writings` 那三份。
 
-## Source-linked observations
 
 ### ① 方法细节不在论文里，在另一份报告里，由论文**指过去**
 

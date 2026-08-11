@@ -2,19 +2,32 @@
 
 ## Scope and assigned sources
 
-Train-split、`dimensions` 含 `expression` 的 8 份，**时间跨度 1876–1899**，本道最宽：
+**本道分到 8 份（train split）**：
 
-| source_id | 年 | 载体 |
-|---|---|---|
-| `src-4b50569ba761` | **1876** | Nature，Graham 文集书评（署 **`W. Chandler Roberts`**，改姓前） |
-| `src-567238c2ad76` | 1879 | Nature |
-| `src-6f608ad2e089` | 1880 | Nature |
-| `src-d563a762c431` | 1884 | Cantor Lectures |
-| `src-ff6f30e8b7e9` `src-851b1f460f29` | 1891 | Nature |
-| `src-4df10147b875` | 1895 | Nature |
-| `src-2c1d75e7564f` | **1899** | JISI 会长就任致辞（**第三人称转述体**，8 万字） |
+| source_id | 出版年 | tier | 题名 |
+|---|---|---|---|
+| `src-4b50569ba761` | 1876 | P1 | paper-doi-10_1038_015153a0.txt |
+| `src-567238c2ad76` | 1879 | P1 | paper-doi-10_1038_020587b0.txt |
+| `src-6f608ad2e089` | 1880 | P1 | paper-doi-10_1038_021272a0.txt |
+| `src-d563a762c431` | 1884 | P1 | cantorlectureso00robegoog.txt |
+| `src-851b1f460f29` | 1891 | P1 | paper-doi-10_1038_044245a0.txt |
+| `src-ff6f30e8b7e9` | 1891 | P1 | paper-doi-10_1038_043388a0.txt |
+| `src-4df10147b875` | 1895 | P1 | paper-doi-10_1038_052367a0.txt |
+| `src-2c1d75e7564f` | 1899 | P1 | jisi55-1899-presidential-address.txt |
+
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 
 ## Source-linked observations
+
+★ 2026-08-12：下面几行原在本文件开头那个 Scope 节里。
+  那一节由 emit_lane_scope.py 从台账**机械重出、不含阅读判断**，
+  手写内容重出时会被静默抹掉——判断性的话搬到这里才留得住。
+  ★★ 本条注释**刻意不用反引号**：反引号里的英文会被
+     check_lane_quotes_verbatim 当成一条待核引文，而它当然核不到
+     （第一版就是这么把三个工作区改红的）。
+
+Train-split、`dimensions` 含 `expression` 的 8 份，**时间跨度 1876–1899**，本道最宽：
+
 
 ### ★★★ ① 二十年、两个署名、同一条线索
 

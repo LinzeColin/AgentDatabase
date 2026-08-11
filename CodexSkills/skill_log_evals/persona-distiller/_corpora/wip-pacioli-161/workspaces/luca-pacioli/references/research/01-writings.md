@@ -2,12 +2,19 @@
 
 ## Scope and assigned sources
 
-**7 份**：3 份一手原刊（P1）＋ 4 份 1931 年前的译本（P2）。
+**本道分到 7 份（train split）**：
 
-- P1：`summa-arithmetica-1494`（威尼斯原刊）、`de-divina-proportione-1509`（Getty 藏本）、
-  `de-viribus-quantitatis-1496`（博洛尼亚 MS 250 手稿）
-- P2：`geijsbeek-1914`（英译）、`crivelli-1924`（英译）、`pacioli-1896-dutch`（荷译）、
-  `winterberg-1889`（德译）
+| source_id | 出版年 | tier | 题名 |
+|---|---|---|---|
+| `src-a065a9dd18dc` | 1494 | P1 | summa-arithmetica-1494-venice-djvu.txt |
+| `src-0ab42213e81b` | 1500 | P1 | de-viribus-quantitatis-1496-bologna-ms250.txt |
+| `src-9090173c710f` | 1509 | P1 | de-divina-proportione-1509-venice-getty.txt |
+| `src-671c6f35b828` | 1889 | P2 | winterberg-1889-german-translation-divina-proportione.txt |
+| `src-cf1287bdb650` | 1896 | P2 | pacioli-1896-dutch-translation-koopmansboekhouding.txt |
+| `src-bcece04a709a` | 1914 | P2 | geijsbeek-1914-ancient-double-entry-bookkeeping.txt |
+| `src-17ba7903aac0` | 1924 | P2 | crivelli-1924-original-translation-double-entry.txt |
+
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 
 ## ★★★★ 本道的第一条结论：**一手在库、是公有领域、也读得到，而它的 OCR 撑不起逐字引用**
 
@@ -48,6 +55,20 @@
 3. ★ 这不是「取不到」，也不是「不是他写的」。**是第四种**：**一手不可引用。**
 
 ## Source-linked observations
+
+★ 2026-08-12：下面几行原在本文件开头那个 Scope 节里。
+  那一节由 emit_lane_scope.py 从台账**机械重出、不含阅读判断**，
+  手写内容重出时会被静默抹掉——判断性的话搬到这里才留得住。
+  ★★ 本条注释**刻意不用反引号**：反引号里的英文会被
+     check_lane_quotes_verbatim 当成一条待核引文，而它当然核不到
+     （第一版就是这么把三个工作区改红的）。
+
+**7 份**：3 份一手原刊（P1）＋ 4 份 1931 年前的译本（P2）。
+- P1：`summa-arithmetica-1494`（威尼斯原刊）、`de-divina-proportione-1509`（Getty 藏本）、
+`de-viribus-quantitatis-1496`（博洛尼亚 MS 250 手稿）
+- P2：`geijsbeek-1914`（英译）、`crivelli-1924`（英译）、`pacioli-1896-dutch`（荷译）、
+`winterberg-1889`（德译）
+
 
 ### ★★★ W1：他自己那句解二次方程的口诀——**经二手转述才读得到**
 
