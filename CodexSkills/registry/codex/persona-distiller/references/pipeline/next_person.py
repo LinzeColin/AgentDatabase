@@ -5,7 +5,7 @@ so it can never drift from memory. Run at the start of every work session.
 Usage:
   python3 next_person.py --registry-root <current-worktree>/CodexSkills/registry/codex/persona-distiller-group
 (Defaults point at the worktree used for the calibration; pass --registry-root for a fresh worktree.)"""
-import argparse, json, os, re, glob, pathlib
+import argparse, json, os, re, glob, pathlib, sys
 
 # ★★★★ 2026-08-10：**默认路径写死在另一个 worktree 上，实测已经失效。**
 #   旧默认 `…/AgentDatabase/character-distillation-skill-reorganize-d57595/…` **不存在**，
@@ -49,9 +49,23 @@ DEF_DL = "/Users/linzezhang/Downloads/蒸馏"
 
 
 def _pick(in_repo, fallback):
-    """仓内优先；仓内没有才用旧路径。→ (路径, 是不是退回来的)"""
+    """仓内优先；仓内没有才用旧路径。→ (路径, 是不是退回来的)
+
+    ★★★ 2026-08-12：原来退回时**不检查旧路径存不存在**，直接把它当结果返回。
+      而 `_FALLBACK_REG` 指的是 `character-distillation-skill-reorganize-d57595`
+      ——**那个 worktree 早就不存在了**（当天实测 `_pick('/nonexistent', _FALLBACK_REG)`
+      返回的就是一个不存在的路径，只标了 `fell=True`）。
+      于是「仓内找不到」会静默变成「指向一个不存在的地方」，
+      下游要么空跑要么报一个看不懂的错。
+      ⇒ [[untested-fallback-branches-only-fire-on-their-machine]]：
+        没走过的兜底分支，只在别人机器上发作。
+      现在**退回时也验一次**，两边都没有就把这件事喊出来。
+    """
     if in_repo is not None and pathlib.Path(in_repo).exists():
         return str(in_repo), False
+    if not pathlib.Path(fallback).exists():
+        print(f"★★ 仓内找不到 {in_repo}，而旧路径 {fallback} **也不存在**"
+              f"——两边都没有，下面的结果不可信。", file=sys.stderr)
     return str(fallback), True
 
 
