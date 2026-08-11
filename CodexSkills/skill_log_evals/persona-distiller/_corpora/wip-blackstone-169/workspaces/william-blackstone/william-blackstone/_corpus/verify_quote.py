@@ -23,14 +23,31 @@ import sys
 HERE = pathlib.Path(__file__).resolve().parent
 RAW = HERE / "raw"
 NOTE_HEAD = re.compile(r"^\s*\(\d{1,3}\)")
+# 正文恢复的标志：页码边码（`42-43 OF THE N`）、章眉（`CHAP. 2]`）、或整块只有一个页码。
+BODY_RESUME = re.compile(r"(^|\n)\s*(?:\d{1,4}\s*$|\d{1,4}-\d{1,4}\s+[A-Z]|CHAP\.|\*)", re.M)
 
 
 def blocks(text):
-    """→ [(起, 止, 是不是编者注块)]，按空行切。"""
-    out, pos = [], 0
+    """→ [(起, 止, 是不是编者注块)]，按空行切。
+
+    ★★★ 第三条规则：**注会跨空行续段**。Book 1 的注 (8) 开头是
+    `Mr. Justice Coleridge remarks that he understands the author to mean…`，
+    而续段 `It Bepcars to me, however, … I cannot agree that when a law,
+    decided to be constitutional, is in full force…` **另起一块、不带注号**——
+    只按块首判会把它当成正文，于是**编者的第一人称被当成他的话**。
+    （`decided to be constitutional` 是 judicial review 意义上的用法，
+    18 世纪的英国法学家不会这么说；**是读原文才看出来的，不是判据抓到的**。）
+
+    所以注块的属性**向后传播**，直到出现正文恢复的标志（页码边码／章眉／`*`）。
+    """
+    out, pos, carry = [], 0, False
     for b in re.split(r"(\n\s*\n)", text):
         if b.strip() and not re.fullmatch(r"\n\s*\n", b):
-            out.append((pos, pos + len(b), bool(NOTE_HEAD.match(b))))
+            if NOTE_HEAD.match(b):
+                carry = True
+            elif carry and BODY_RESUME.search(b):
+                carry = False
+            out.append((pos, pos + len(b), carry))
         pos += len(b)
     return out
 
@@ -124,6 +141,13 @@ def self_test():
 
     # ④ 反对照：太短的串不判（不许冒充「已核」）
     chk("④ 太短 → 不判", find("the law", [bk1])[0][0], "**太短，不判**")
+
+    # ★★★ ②c 反对照：**跨块续段的编者注**（注 (8) 的续段）。
+    #   只按块首判会把它当正文——这是读原文才发现的，判据没抓到。
+    r2c = find("I cannot agree that when a law, decided to be constitutional", [bk1])
+    chk("②c 注的续段 → 命中", bool(r2c), True)
+    chk("②c 注的续段 → **不许判成他的话**",
+        bool(r2c and (r2c[0][2] or r2c[0][4])), True)
 
     # ⑤ 正对照：**他自己的第一人称**必须判为干净正文
     r5 = find("I shall not here enter into any minute inquiries",
