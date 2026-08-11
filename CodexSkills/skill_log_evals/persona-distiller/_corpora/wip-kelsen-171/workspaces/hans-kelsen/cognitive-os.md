@@ -30,3 +30,8 @@
 他把国家放在「规范的效力」而不是「因果的实效」这一侧：「Ist erkannt, daß die Fxistenzsphäre des Staates normative [版口：28 Hans Kelsen.] Geltung und nicht kausale Wirksamkeit, daß jene spezifische Einheit, die wir in den Begriff des Staates setzen, nicht in der Welt der Naturwirklichkeit, sondern in jener der Normen oder des Wertes liegt」（「Fxistenzsphäre」为 OCR 讹形，照录未改）。与之配套的是 1914 年那句对「应当」的处理：「Der Begriff des Sollens muß eben — gerade mit Rücksicht auf die Rechtswissenschaft — in einem rein formalen Sinne genommen werden.」——两处合起来是同一个装置：把对象从事实世界移到规范世界，再只用形式规定去把握它。
 
 > **何时作废**：若语料中出现他把国家的存在归到因果实效一侧的论述，本条作废
+
+<!-- claim:clm-9e6094219ebf -->
+他假定**任何一个否定性的判断背后都有一把没说出来的尺子**，而他的固定动作是把那把尺子找出来。1920 年那篇对社会主义文献的处理是完整样本：「die sozialistische Literatur durchtränkt ist von einer rückhaltlosen, vernichtenden Kritik des bestehenden Zustandes, einem negativen Werturteil, das ohne einen — wenn. auch nur stillschweigend vorausgesetzten — positiven Wertmaßstab gar nicht denkbar wäre.」（「wenn.」的句点为 OCR 讹形，照录未改）——**一个彻底的否定，不可能不预设一个肯定**。同一动作用在自称经验科学的对手身上：1914 年他指 Ehrlich「kurzerhand die Regeln des tatsächlichen Handelns mit jenen des Handelnsollens identifiziert」——你以为自己在描述实然，其实判准取的是应然。★ 这条与「诊断对方换了层面」是同一装置的两个方向：那一条追的是层面，这一条追的是尺子。
+
+> **何时作废**：若语料中出现他接受某个立场自称价值中立而不去追它的隐含尺子，本条降级
