@@ -1,5 +1,33 @@
 # HANDOFF —— 接手这个仓要知道的全部
 
+
+### 第 1 批的下一步（阶段 3），以及**为什么这轮停在这里**
+
+**已就绪**：6 人（#173 Marshall／#174 Lincoln／#175 Jefferson／#176 Bismarck／
+#179 Kant／#180 Pestalozzi）的 `evidence/source-ledger.jsonl` 已生成，
+用判据的 `--ledger` 路径判出 **deep**。
+
+**下一步是三件，前两件不需要子代理，第三件需要**：
+
+1. **分道写研究散文**（`research/01-writings.md` 等六份）——
+   `Scope and assigned sources` 那节用 `emit_lane_scope.py` 由台账现算生成，**别手打**。
+2. **合成人物包**。
+3. **判分**：恒 2 席、**必须是独立子代理**、按人物冻结指令、每人上限 3 轮。
+   ★ **本会话不能派子代理**（harness：`Do not call the AgentTool unless the user requested it`）
+     ⇒ 第 3 件要么由你授权派子代理，要么由接手的人做。
+
+**还没做的两件（都不是阻塞）**：
+- `split` 全是 `train`，**holdout 一条都没分**——分错比不分更糟，工具有意不猜。
+- 3 人只到 quick（Machiavelli 缺 decisions/timeline、Rousseau 与 Fröbel 缺 decisions，
+  且 Fröbel 的 decisions 在 IA 上 numFound=**0**）；
+  **Comenius #182 只有 2 道，够不着 quick，建议记延后**（通道受限，捷克数字图书馆可续）。
+
+### ★ 一处与你的裁定不一致（存量，本轮没碰）
+你早先裁定「语料另存 Release／私有仓，**仓里只放指针**」。
+本轮 10 人**严格执行**（正文 0 份进仓，指针 + sha256 全在）。
+但**仓里还有 2061 份存量语料正文**（Virchow 226、Barton 210、Godin 193、Koch 120…），
+是本会话之前提交的。**删它们是不可逆动作，留给你定。**
+
 ## ★ 2026-08-12 常设授权变更（用户原话：「下载不需要授权，全部同意」）
 
 **下载不再需要逐次授权。** 保留给人的从三件减为**两件**：
