@@ -48,13 +48,64 @@
 > ★★ 记这一条的理由：判据那句话本身写得很硬（「引文对不上就是引文对不上」），
 >   **那是为了防止有人拿「可能是路径问题」搪塞过去**——
 >   在有语料的树上它是对的，**在这棵树上它会把人吓到去改不该改的东西**。
+>
+> ### ★ 这棵树上还会冒出别的码——**先说清哪些我验过、哪些没验**
+>
+> 2026-08-12 在移交树上抽 8 个工作区跑 `--phase research`，**8/8 都是 rc=1**，
+> 出现过的码如下。**只有 `lane_quotes` 一条做过有语料/无语料的对照**（上表），
+> 其余**未验**，不要把它们一律当成「没语料造成的」：
+>
+> | 码 | 出现 | 验过吗 |
+> |---|---:|---|
+> | `research.ledger-file-missing`（error） | 8/8 | **验过**——首节已说明 |
+> | `research.lane_quotes：N 条对不上`（warn） | 8/8 | **验过**——有语料时消失 |
+> | `corpus.holdout-mentioned-in-artifacts`（error） | 3 | **未验** |
+> | `corpus.holdout-work-named-in-artifacts`（error） | 2 | **未验** |
+> | `source.primary-ratio`（error） | 1 | **未验** |
+> | `corpus.title-is-just-the-filename`（warn） | 6 | **未验**（★ 但它是**已知存量债**，见 ㊵-③） |
+> | `eval.rubric-demands-frame-break`（warn） | 4 | **未验**（★ 已知：10/16 rubric 把「本库没收录」定为正确答案） |
+> | `source.filename-year-mismatch`（warn） | 2 | **未验** |
+> | `corpus.no-viable-holdout-split`（warn） | 1 | **未验** |
+>
+> ★★ **「未验」是实话，不是托辞**：有语料的对照跑一个 Koch 要 **20 分钟以上**
+>   （121 份源 × 引文逐条回原文），4 个工作区就是一个多小时。
+>   ⇒ **要判某一条到底是不是「没语料」造成的，就对着那一个人物跑一次有语料的对照**，
+>     别照搬 `lane_quotes` 的结论。
 
 ### 要跑需要语料的判据（引文核验、OCR、塌缩、覆盖）时怎么办
 
 台账里每份源都有 `locator` + `checksum`：
 
-    locator 有值 1993 / 2065（96.5%）—— 509 条完整 http URL、1483 条 `item <IA 条目号>`
-    checksum   2065 / 2065（100%）—— 取回后逐份校验用
+    locator 有值 **1993 / 2065（96.5%）**｜checksum **2065 / 2065（100%）**——取回后逐份校验用
+
+> ## ★★★ 2026-08-12 收尾复算：**上面这行原来的分类是错的**
+>
+> 原文写「509 条完整 http URL、**1483 条 `item <IA 条目号>`**」。
+> 在解出的移交树上逐行现算，**只有 112 条真的长成 `item <编号>`**，
+> 另外 1372 条是「其他形式」——多数把 URL 藏在 `｜` 分隔的后半段。
+> **按「串里任意位置有没有 http」重分三档**（这才是能不能取回来的判准）：
+>
+> | 档 | 条数 | 占有值的 | 怎么取 |
+> |---|---:|---:|---|
+> | ① **串里含 http** | **1342** | **67.3%** | **可直接点开** |
+> | ② 无 http 但有 `archive.org` / `item` / IA 式 id | **380** | 19.1% | 按 id 去 IA 取 |
+> | ③ **两者都无，只有书誌描述** | **271** | **13.6%** | **只能按题名检索——取不回来的风险全在这一档** |
+>
+> ⇒ **①+② = 1722/1993 = 86.4% 有机器可循的取回路径**；
+>   加上 locator 为空的 72 条，**真正难取的是 271 + 72 = 343 条（占 2065 的 16.6%）**。
+>
+> ★ 第 ③ 档长什么样（随机抽的，**不是挑出来的**）：
+>
+>     local:p_bmj_1865_v1.txt
+>     Bulletin No.12
+>     Nature vol. 77 p. 260
+>     Monthly Microscopical Journal vol. XVI (1876) pp. 64-67
+>     United States Patent No. 51399 -- "Improvement in the manufacture of malleable iron and steel"
+>     _backup_ms/ms_2019_jta_allegations_and_his_statement.txt
+>
+> ⇒ 其中 `local:` 与 `_backup_ms/` 开头的**指的是本机路径，换台机器一定取不到**；
+>   期刊卷页那几种**人能查到，机器不能**。
+> ★★ **不要把 96.5% 读成「96.5% 能取回来」**——那是「有 locator」，不是「取得回」。
     locator 空的 72 条，**全在已延后／已拒发的人物身上**（Paton 24／Cicero 19／
       Nasmyth 13／Pacioli 10／Semmelweis 6），**无一属于已入库人物**
 
