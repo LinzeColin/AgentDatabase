@@ -1,6 +1,6 @@
-# 抓源 → 阶段 2 的五件工具（2026-08-12 新建，第 1 批 10 人跑通）
+# 抓源 → 阶段 2 的**七件**工具（2026-08-12 新建，第 1 批 10 人跑通）
 
-**这五件不是判据**（判据在 `registry/codex/persona-distiller/scripts/`，91 件，本轮一件没动）。
+**这七件不是判据**（判据在 `registry/codex/persona-distiller/scripts/`，91 件，本轮一件没动）。
 它们是把「一个人名」变成「判据能吃的四个数」的流水线。
 
 ## 一条命令跑完一个人
@@ -16,14 +16,19 @@ python3 $PL/fetch_ia.py   --ids-file $W/_ids.txt --out $W
 python3 $PL/classify_primary.py --raw $W --surname <姓> [--surname 别拼法]
 python3 $PL/dedup_corpus.py     --raw $W
 python3 $PL/assign_lanes.py     --raw $W
+python3 $PL/scan_copyright.py   --raw $W          # ★ PD 最后一道，**逐条读命中**
 python3 $PL/measure_voice.py    --raw $W --samples 8
+python3 $PL/emit_source_ledger.py --raw $W --workspace wip-<name>-<n>/workspaces/<slug>
+python3 ../../../registry/codex/persona-distiller/scripts/emit_lane_scope.py \
+        wip-<name>-<n>/workspaces/<slug>          # Scope 节由台账现算，**别手打**
 ```
 
 然后把四个数喂给**项目自己的判据**（★ 档位由它判，不要自己算）：
 
 ```bash
+# 台账已生成时**用 --ledger**（口径与门完全一致，不用自己传数）：
 python3 ../../../registry/codex/persona-distiller/scripts/check_corpus_ceiling.py \
-  --primary <一手份数> --total <独立文献数> --lanes <道数> --profile deep
+  --ledger wip-<name>-<n>/workspaces/<slug>/evidence/source-ledger.jsonl --profile deep
 ```
 
 `--profile` 依次试 `deep → standard → quick`，**第一个 rc=0 的就是这个人能到的档**。
@@ -46,7 +51,7 @@ python3 ../../../registry/codex/persona-distiller/scripts/check_corpus_ceiling.p
 
 ---
 
-## ★★ 四个最容易踩的坑（第 1 批全踩过一遍）
+## ★★ 五个最容易踩的坑（第 1 批全踩过一遍）
 
 ### ① 「我跑了判据」不等于结论可靠
 

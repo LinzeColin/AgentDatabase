@@ -6,7 +6,6 @@
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
-| `src-eda7d8153527` | 1854 | P1 | The writings of Abraham Lincoln; |
 | `src-2723a0056843` | 1862 | P1 | Insurgent privateers in foreign ports : message from the P…t privateers in foreign ports |
 | `src-9e17d9796521` | 1865 | P1 | Gems from Abraham Lincoln : born February 11th, 1809, in H…5th, 1865, at Washington, D.C |
 | `src-c80788c2eea1` | 1902 | P1 | Complete works : |
@@ -35,6 +34,7 @@
 | `src-accfb35ec5a5` | 1905 | P1 | The writings of Abraham Lincoln |
 | `src-b4caa81ea573` | 1905 | P1 | Complete works of Abraham Lincoln |
 | `src-cdb68ea774e5` | 1905 | P1 | Complete works of Abraham Lincoln |
+| `src-eda7d8153527` | 1905 | P1 | The writings of Abraham Lincoln; |
 | `src-f9611096ce5f` | 1905 | P1 | Complete works of Abraham Lincoln |
 | `src-fe2a0f60853f` | 1905 | P1 | Complete works of Abraham Lincoln |
 | `src-17e372b665cb` | 1906 | P1 | Complete works of Abraham Lincoln |

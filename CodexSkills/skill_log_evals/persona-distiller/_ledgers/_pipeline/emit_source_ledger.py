@@ -46,6 +46,17 @@ THIS_YEAR = 2026
 PD_CUTOFF = THIS_YEAR - 95            # 2026 → 1931（「1931 年以前」）
 LATEST_PD_YEAR = PD_CUTOFF - 1        # 2026 → 1930（可用的最晚出版年）
 
+# ★ 没有 IA 编目年时的兜底顺序：**正文里的版权页 > 题名页年份最大值**。
+#   实测（2026-08-12）20 条没有编目年的里，有两条正文里写得清清楚楚：
+#     `Berlin Druck und Verlag von Georg Reimer 1913`
+#     `Copyright, 1919, by Yale University Press`
+#   ——先前只取「题名页年份最大值」，把这类确切线索白白丢掉了。
+IMPRINT_RE = [
+    re.compile(r"[Cc]opyright,?\s+(?:by\s+[^\n,]{0,40},?\s*)?((?:1[5-9]|20)\d{2})"),
+    re.compile(r"(?:Verlag|Druck und Verlag|Press|PRESS|& Co\.|Sons|Company)[^\n]{0,60}?"
+               r"\b((?:1[5-9]|20)\d{2})\b"),
+]
+
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -106,8 +117,20 @@ def main() -> int:
             if m:
                 cat = m.group(1)
                 break
+        imp = ""
+        if not cat:
+            f = raw / r["file"]
+            if f.exists():
+                h = "\n".join(f.read_text(encoding="utf-8", errors="replace").splitlines()[:200])
+                for rx in IMPRINT_RE:
+                    m2 = rx.search(h)
+                    if m2:
+                        imp = m2.group(1)
+                        break
         if cat:
             pub, basis = cat, "IA 编目年"
+        elif imp:
+            pub, basis = imp, "正文版权页／出版者行的年份"
         elif yrs:
             pub, basis = str(yrs[-1]), "**题名页年份取最大，未经编目确认**"
         else:
