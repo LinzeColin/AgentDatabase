@@ -12,10 +12,14 @@
 
     ✓ HANDOFF.md 在｜✓ `_每次开工必读.md` 在
     ✓ `next_person.py` 跑得起来 → NEXT = **John Marshall**（1755–1835，政治法律师）
-      queue_total 237｜done 40｜pending **50**｜deferred 141
-      ★ NEXT 会随在办的人变：Brandeis #172 的工作区已建，`next_person.py`
-        把「已做但未出货」的六个人排除在 NEXT 之外（Adams/Martens/
-        Roberts-Austen/Cicero/Kelsen/Brandeis）——**那是设计，不是异常**。
+      queue_total 237｜done 40｜pending **50**｜deferred **146**（**2026-08-12 收尾现算**）
+      ★★ **同日晚些时候变过一次，别照旧读**：原写「把『已做但未出货』的**六个人**
+        排除在 NEXT 之外（Adams/Martens/Roberts-Austen/Cicero/Kelsen/Brandeis）」。
+        用户当天授权我自裁 40 条之后，**前五人已逐条裁完并归档进 `_延后名单.json`**
+        （deferred 141 → **146**），**这一栏现在只剩 1 个：Louis Brandeis**。
+        ★ 他**不是延后也不是做完**：预备四份文件已齐、没有任何东西挡着，
+          只是**没被排进批次**——见 `_corpora/wip-brandeis-172/00-状态-预备已完成等排批次.md`。
+        ⇒ 「已做但未出货」是**诊断桶不是处置**，桶里有人不等于有人卡着。
     ✓ `quality_check --phase research` 跑得起来，**exit=1**，
       唯一的错是 **`research.ledger-file-missing`**，完成道仍读得出 3 道
 
