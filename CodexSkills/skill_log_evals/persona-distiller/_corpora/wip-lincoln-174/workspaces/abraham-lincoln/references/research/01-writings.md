@@ -2,11 +2,10 @@
 
 ## Scope and assigned sources
 
-**本道分到 44 份（train split）**：
+**本道分到 43 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
-| `src-2723a0056843` | 1862 | P1 | Insurgent privateers in foreign ports : message from the P…t privateers in foreign ports |
 | `src-9e17d9796521` | 1865 | P1 | Gems from Abraham Lincoln : born February 11th, 1809, in H…5th, 1865, at Washington, D.C |
 | `src-c80788c2eea1` | 1902 | P1 | Complete works : |
 | `src-bdc84412b7df` | 1903 | P1 | Complete works of Abraham Lincoln |
