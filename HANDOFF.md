@@ -1,26 +1,49 @@
 # HANDOFF —— 接手这个仓要知道的全部
 
 
-### 第 1 批的下一步（阶段 3），以及**为什么这轮停在这里**
+### 第 1 批做到哪了（**2026-08-12 17:55 现算**），以及**为什么停在这里**
 
-**已就绪**：6 人（#173 Marshall／#174 Lincoln／#175 Jefferson／#176 Bismarck／
-#179 Kant／#180 Pestalozzi）的 `evidence/source-ledger.jsonl` 已生成，
-用判据的 `--ledger` 路径判出 **deep**。
+> 下面每个数都是当场跑出来的，不是抄的。口径：`source-ledger.jsonl` 行数。
 
-**下一步是三件，前两件不需要子代理，第三件需要**：
+| 人 | 台账 | 道 | 一手占比 | 档 | holdout | 有观察节的道 | 逐字引文 |
+|---|---:|---:|---:|---|---:|---:|---:|
+| #173 Marshall | 95 | 6 | 0.7684 | **deep** | 1 | 3（writings 是**否定结论**） | 5 |
+| #174 Lincoln | 70 | 6 | 0.9714 | **deep** | 3 | 4 | 7 |
+| #175 Jefferson | 73 | 6 | 0.9178 | **deep** | 8 | 3 | 6 |
+| #176 Bismarck | 70 | 6 | 0.9000 | **deep** | 10 | 3 | 5 |
+| #180 Pestalozzi | 70 | 6 | 0.9857 | **deep** | 10 | 3 | 5 |
+| #177 Machiavelli | 79 | 4 | 0.8481 | quick | **0** | 3 | 6 |
+| #178 Rousseau | 103 | 4 | 0.8835 | quick | **0** | 3 | 8 |
+| #179 Kant | 65 | 3 | 0.9692 | quick | 10 | 3 | 5 |
+| #181 Fröbel | 51 | 5 | 0.9804 | quick | **0** | 3（writings 是**否定结论**） | 5 |
+| #182 Comenius | — | — | — | **记延后** | — | — | — |
 
-1. **分道写研究散文**（`research/01-writings.md` 等六份）——
-   `Scope and assigned sources` 那节用 `emit_lane_scope.py` 由台账现算生成，**别手打**。
+**合计 676 份，一手 611（0.9038）。台账里的每一份在盘上都在（「台账有盘无」= 0，九人全查过）。**
+
+★ **档位是 5 deep / 4 quick，不是先前记的 6 deep / 3 quick**：
+Kant 原判 deep 是**靠三条题名词误配出来的假道**顶上去的（`chronolog` 命中《全集·按年代编次》、
+`judgment` 命中《判断力批判》、`oration` ⊂ `commemoration`），修正后 6 道→3 道。
+详见 `_ledgers/_题名词造出来的假道-Kant从deep掉到quick-2026-08-12.md`。
+
+**已完成（阶段 3 的可做部分）**：
+- 九人研究道各 **≥3 条**写了 source-linked 观察节，`check_lane_quotes_verbatim` **九人全绿、对不上 0 条**
+- 九人 `attribution_basis` 齐全，`check_attribution_basis` **rc=0**
+- holdout 已分 6 人并过 overlap 门；★ **Machiavelli／Rousseau／Fröbel 还没分**（下一步第 1 件）
+
+**下一步三件，前两件不需要子代理**：
+
+1. **给 Machiavelli／Rousseau／Fröbel 分 holdout**（`assign_holdout.py`，
+   **率与绝对数双卡**：`--max-overlap 0.05` 且 `--max-abs 40`），再跑 `check_holdout_overlap`。
 2. **合成人物包**。
 3. **判分**：恒 2 席、**必须是独立子代理**、按人物冻结指令、每人上限 3 轮。
    ★ **本会话不能派子代理**（harness：`Do not call the AgentTool unless the user requested it`）
-     ⇒ 第 3 件要么由你授权派子代理，要么由接手的人做。
+     ⇒ 第 3 件要么由你授权派子代理，要么由接手的人做。**这是真正的停点。**
 
-**还没做的两件（都不是阻塞）**：
-- `split` 全是 `train`，**holdout 一条都没分**——分错比不分更糟，工具有意不猜。
-- 3 人只到 quick（Machiavelli 缺 decisions/timeline、Rousseau 与 Fröbel 缺 decisions，
-  且 Fröbel 的 decisions 在 IA 上 numFound=**0**）；
-  **Comenius #182 只有 2 道，够不着 quick，建议记延后**（通道受限，捷克数字图书馆可续）。
+★ **写研究道时必用的两件**（都在 `_ledgers/_pipeline/`，坑写在 README 第 8–10 条）：
+`pull_quotes.py --pick median`（**默认已改，别用 first——它把候选钉在卷首**）
+→ `flag_borrowed_voice.py`（标出「这句的第一人称可能不是本人」，**只给理由，说话人由人判**）。
+本批 **9 次**取到的第一人称不属于本人，其中 Marshall 的 `writings` 道**整道判为否定**
+——他 56 份里 49 份是《华盛顿传》，机械取的 10 条候选 10 条都是华盛顿的话。
 
 ### ★ 一处与你的裁定不一致（存量，本轮没碰）
 你早先裁定「语料另存 Release／私有仓，**仓里只放指针**」。
@@ -37,7 +60,10 @@
 
 ★ 授权的是**下载**，不是「什么都能下」——公有领域、不碰付费墙、
   **不绕任何访问控制**（archive.org 的 `access-restricted-item` 一律硬跳过）这几条不变。
-★ 第 1 批 10 人抓源与阶段 2 已完成：**775 份 / 661 份独立文献**，**6 人达 deep**（Marshall/Lincoln/Jefferson/Bismarck/Kant/Pestalozzi）、3 人 quick（Machiavelli/Rousseau/Fröbel）、**Comenius #182 够不着 quick 建议记延后**，
+★ 第 1 批 10 人抓源与阶段 2 已完成：**台账 676 份 / 一手 611（0.9038）**，
+  **5 人 deep**（Marshall/Lincoln/Jefferson/Bismarck/Pestalozzi）、**4 人 quick**（Machiavelli/Rousseau/**Kant**/Fröbel）、**Comenius #182 记延后**，
+  ★ 早先写的「775 份 / 6 人达 deep」两处都已作废：份数是抓取批次的累计数不是台账口径，
+    Kant 的 deep 是三条假道顶上去的（见本文件开头的现算表），
   见 `_ledgers/_第1批抓源完成-670份-2026-08-12.md`。
   **语料不进 git，仓里只放指针**（`_ids*.txt` + 带 sha256 的 `_fetch-manifest.json`），
   重建用 `<raw>/_ids-rebuild.txt`（**不是 `_ids-final.txt`**，后者是「打算抓的」不是「抓到的」）。
