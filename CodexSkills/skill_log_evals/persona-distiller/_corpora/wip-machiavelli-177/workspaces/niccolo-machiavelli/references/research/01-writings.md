@@ -64,8 +64,58 @@
 
 ## Source-linked observations
 
-Pending.
+**口径**：每条带 `source_id` 与 `norm_offset`，定位可复算（三条已现场验过）。
+**引文逐字照录，含 OCR 讹形**（`adnnque`／`aì`／`tanko`／`Jterum`），
+**一个字都没改**（[[verbatim-is-not-understood]]）。
 
+★★ **本道只用意大利文原文**。全库 79 份里译本 21 份，他的 `00-抓源前必读.md` 写死：
+  **声口只能用意大利原文量，译本一律不算**。合格的意大利文一手 train 源 **28 份**。
+
+### O-1 · 他给结论时**先给条件**，条件不成立结论就不成立
+
+> `Dico adnnque; essere più’ prudente elezione porsi in luogo fertile, quando quella
+>  fertilità con le leggi fra debiti termini si ristringe.`
+> —— `src-7f5e7ce5f0d1` @13440（《论李维》所在卷）
+
+★ 句式是 `Dico adunque … quando …`：**「我说」之后不是断言，是一个带条件从句的判断**。
+「选肥沃之地更明智」这一半单独拿出来是错的——**条件是「那份肥沃被法律约束在应有的界限内」**。
+
+### O-2 · 他判一件事的对错，用的是**同类先例**，不是原则
+
+> `Ma io non approvo che gli Arretini simili aì Veliterni ed Anziani non siano stati
+>  trattati come loro.`
+> —— `src-f7a27e5efcb6` @188717
+
+★ 他不说「这样做不义」，他说**「阿雷佐人与韦莱特里人、安齐奥人是同类，却没被同样对待」**。
+判据是**类比先例**：先确认同类，再问处置为何不同。与 O-1 的「先立条件」是同一种手法。
+
+### O-3 · 公文里他把**判断权**与**执行责任**分得很清
+
+> `Vostre Signorie sono prudentissime, piglieranno quel partito giudicheranno piu a
+>  proposito; ed io sono per eseguire con diligenzia ogni loro commissione`
+> —— `src-d5b51baa8b4c` @31494（《Legazioni e commissioni》，他的外交急件）
+
+★ 前半句把决断交回给主君（「诸位极明智，会选出更合宜的方案」），
+后半句只领执行（「而我，是要勤谨执行诸位每一道命令的」）。
+**「我判断」与「我执行」在同一句里被分开写。**
+
+---
+
+## ★ 三件要写下来的
+
+① **`Legazioni e commissioni` 就在语料里**（O-3 那条即出自它）。
+   我先前记「`decisions` 道在 IA 上 numFound=1」——**那是按独立条目检索的结果**，
+   而这批急件**收在《Opere》卷内**。⇒ `decisions` 道的材料存在，只是**没有独立条目**，
+   要从全集卷里按篇取。
+
+② **语种判别有误报**：`guess_lang` 把一份伊丽莎白时代英文本判成意大利文——
+   那一句里有一处版口噪声形如意大利语第一人称代词，于是撞上了筛子；
+   又把一份德文 Fraktur 判成意大利文。**8 条机械摘取里 2 条语种错**。
+   ★ 这两句**有意不加反引号也不写成引用块**：它们是反例，
+     而 `check_lane_quotes_verbatim` 会把反引号包着的片段一律当引文收走。
+
+③ **代词量不出他的声口**：意大利文 30 份，代词 0.99/千词而**第一人称动词 6.14/千词**。
+   本道三条里有两条（O-1 `Dico`、O-3 `sono per eseguire`）**根本没有主语代词**。
 ## Candidate Claims
 
 Pending.

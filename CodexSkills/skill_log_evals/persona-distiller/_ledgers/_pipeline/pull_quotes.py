@@ -59,6 +59,15 @@ BAD_RUN = re.compile(r"\b[A-Za-z]{1,2}\b \b[A-Za-z]{1,2}\b \b[A-Za-z]{1,2}\b")
 #      (March i, 1832, to May 29, 1856) : "I Am Humble Abraham Lincoln.`
 #   ③ **从词中间起头**：`s of the 24th of February last…`／`e evil spirit…`
 #      —— 句子正则从 `.?!` 之后切，而缩写里的点会把切口落在词中。
+# 第一人称的判法**按语种走**。主语脱落语要看动词，不能看代词。
+FP = {
+    "en": r"\bI\b|\bmy\b|\bme\b",
+    "it": r"\bio\b|\bmi[oaei]\b|\b(credo|dico|voglio|penso|posso|debbo|giudico|scrivo|parlo)\b",
+    "la": r"\bego\b|\bmihi\b|\bme(us|a|um|o|am)\b|\b(dico|credo|volo|possum|scribo|puto|arbitror)\b",
+    "de": r"\bich\b|\bmein\w*\b|\bmir\b|\bmich\b",
+    "fr": r"\bje\b|\bj'\b|\bmon\b|\bma\b|\bmes\b|\bmoi\b",
+}
+
 ATTRIB = re.compile(r"(?i)\b(eulogy|delivered before|an address (by|on)|"
                     r"introduction by|edited by|translated by|memorial (address|volume)|"
                     r"tribute to|in memoriam|obituary)\b")
@@ -94,7 +103,11 @@ def main() -> int:
     ap.add_argument("--max-len", type=int, default=200)
     ap.add_argument("--exclude-third-party", action="store_true")
     ap.add_argument("--first-person", action="store_true",
-                    help="只要含第一人称的句子（英文 I/my/me）")
+                    help="只要含第一人称的句子")
+    ap.add_argument("--lang", default="en", choices=sorted(FP.keys()),
+                    help="第一人称的判法按语种走。★ **意大利语/拉丁语是主语脱落语，"
+                         "第一人称主要靠动词词尾**——拿代词去筛会几乎筛空"
+                         "（Machiavelli 实测：代词 0.99/千词 而动词 6.14/千词）")
     a = ap.parse_args()
 
     raw = pathlib.Path(a.raw)
@@ -120,13 +133,13 @@ def main() -> int:
             s = m.group(0).strip()
             if len(BAD_CHARS.findall(s)) > 1 or BAD_RUN.search(s):
                 continue
-            if not re.match(r"[\"\u201c]?[A-Z]", s):        # ③ 必须从大写字母起头
+            if not re.match(r"[\"\u201c]?[A-ZÀ-Þ]", s):     # ③ 必须从大写字母起头
                 continue
             if ATTRIB.search(s) or TOC_LIKE.search(s):       # ①② 悼词署名行／目录行
                 continue
             if TITLEPAGE.search(s):                          # ④ 题名页
                 continue
-            if a.first_person and not re.search(r"\bI\b|\bmy\b|\bme\b", s):
+            if a.first_person and not re.search(FP[a.lang], s, 0 if a.lang == "en" else re.I):
                 continue
             off = norm.find(s)
             if off < 0 or norm[off:off + len(s)] != s:      # ★ 自校验，不过不输出
