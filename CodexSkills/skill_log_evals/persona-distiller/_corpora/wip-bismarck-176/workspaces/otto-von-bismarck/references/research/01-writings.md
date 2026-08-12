@@ -2,14 +2,11 @@
 
 ## Scope and assigned sources
 
-**本道分到 18 份（train split）**：
+**本道分到 15 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
 | `src-2f8b247e4d11` | 1882 | P1 | Preussen im Bundestag, 1851 bis 1859 : Dokumente der K. Preuss. Bundestags-Gesandtschaft |
-| `src-4e9f21cba8c8` | 1882 | P1 | Preussen im Bundestag, 1851 bis 1859 : Dokumente der K. Preuss. Bundestags-Gesandtschaft |
-| `src-c730cce1d709` | 1896 | P1 | Bismarck for silver [microform] : he says independent free…out international bimetallism |
-| `src-83f0e820c3b2` | 1898 | P1 | Bismarck-Portefeuille |
 | `src-b943cca7e9dd` | 1898 | P1 | Bismarck-Portefeuille |
 | `src-eabd5cdf8dff` | 1898 | P1 | Bismarck-Portefeuille |
 | `src-077bc686aed9` | 1903 | P1 | Bismarcks staatsrecht : die stellungnahme des fürsten Ott… bearbeitet und herausgegeben |

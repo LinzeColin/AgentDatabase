@@ -73,5 +73,11 @@
   "subject_origin": "historical",
   "target_id": "tgt-19e7e3dfa29f",
   "time_scope": "1743-1826",
-  "updated_at": "2026-08-11T23:58:33Z"
+  "updated_at": "2026-08-11T23:58:33Z",
+  "attribution_basis": {
+    "authority": "主干编本的题名页逐字（`src-2080428c7f4f`）：`The Works of Thomas Jefferson Collected and Edited by Paul Leicester Ford Volume III G. P. Putnam's Sons New York and London … 1904`，扉页另印 `FEDERAL EDITION Limited to 1000 signed and numbered sets`。同扫描件印康奈尔的 `There are no known copyright restrictions…`",
+    "citation": "archive.org item `cu31924092892011`（题名页原文见 authority）",
+    "disputed_policy": "① ★ 语料里另有 3 份的编者行是 `EDITED BY THOMAS JEFFERSON RANDOLPH` ——**那是他的外孙**，也正是同名门里排除的对象之一。他编的是 1829 年《Memoir, Correspondence…》，**编者身份成立、不构成归属问题**，但检索时按姓名字符串匹配会与目标混淆，**已按生卒年区分**。\n② 已剔除 1 份**在版权期内**的材料：`correspondencebe0000jeff`（正文印 `Copyright 1930 by the University of Virginia` **＋ `Copyright 1931 by Société…`**），见 `raw/_blocked-copyright.txt`。\n③ 本轮**没有**发现托名篇目；检索按 creator 收窄并逐份排除 Randolph／Hogg 等姓名包含目标全名者。",
+    "disputed_works": []
+  }
 }

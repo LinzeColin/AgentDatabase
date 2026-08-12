@@ -2,14 +2,13 @@
 
 ## Scope and assigned sources
 
-**本道分到 61 份（train split）**：
+**本道分到 52 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
 | `src-42cea47efc53` | 1781 | P1 | Lienhard und Gertrud |
 | `src-ec56edc16d30` | 1781 | P1 | Lienhard und Gertrud |
 | `src-0ac0430b0bd5` | 1790 | P1 | Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu vereinfachen. 2 |
-| `src-5fb86375774b` | 1790 | P1 | Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu vereinfachen. 1 |
 | `src-844021790645` | 1790 | P1 | Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu vereinfachen. 2 |
 | `src-7f0f6feca579` | 1792 | P1 | Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu vereinfachen. 3 |
 | `src-daf5ded51781` | 1792 | P1 | Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu vereinfachen. 3 |
@@ -17,16 +16,12 @@
 | `src-e8dc4740199f` | 1797 | P1 | Meine Nachforschungen über den Gang der Natur in der Entwiklung des Menschengeschlechts |
 | `src-aa40a14c2501` | 1800 | P1 | Leonard & Gertrude. A popular story, written originally in…ower orders of society.  1800 |
 | `src-d30613613c98` | 1801 | P1 | Leonard and Gertrude. A popular story |
-| `src-46f93c4176cd` | 1803 | P1 | ABC der Anschauung oder Anschauungs-Lehre der Maßverhältnisse. 1 |
-| `src-54fb6856980e` | 1803 | P1 | Buch der mütter; |
 | `src-b886d7402b7b` | 1803 | P1 | ABC der Anschauung oder Anschauungs-Lehre der Maßverhältnisse. 2 |
 | `src-035d789f0099` | 1819 | P1 | Sämmtliche Schriften |
 | `src-3b5d5f021934` | 1819 | P1 | Sämmtliche Schriften |
 | `src-3d5a9b664cc4` | 1819 | P1 | Sämmtliche Schriften |
 | `src-4031b6090d47` | 1819 | P1 | Sämmtliche Schriften |
 | `src-413dab629c0f` | 1819 | P1 | Pestalozzi's sämmtliche Schriften. 1 |
-| `src-442afe91c8a1` | 1819 | P1 | Sämmtliche Schriften |
-| `src-6b07fbead5b0` | 1819 | P1 | Sämmtliche Schriften |
 | `src-6d5cd0c1f383` | 1819 | P1 | Sämmtliche Schriften |
 | `src-7507dd75903a` | 1819 | P1 | Sämmtliche Schriften |
 | `src-8d00638c094c` | 1819 | P1 | Pestalozzi's sämmtliche Schriften. 3 |
@@ -55,18 +50,14 @@
 | `src-54ef5ba9b255` | 1869 | P1 | Pestalozzi's sämmtliche werke. Gesichtet, vervollständig…ternden einleitungen versehen |
 | `src-64f3ae1ac327` | 1869 | P1 | Pestalozzi's sämmtliche werke. Gesichtet, vervollständig…ternden einleitungen versehen |
 | `src-c6e5607e0f7e` | 1869 | P1 | Pestalozzi's sämmtliche werke. Gesichtet, vervollständig…ternden einleitungen versehen |
-| `src-1eb49c877fe6` | 1882 | P1 | Die Pädagogik Johann Heinrich Pestalozzi's in wortgetreuen Auszügen aus seinen Werken |
 | `src-7edf6595c82f` | 1885 | P1 | Leonard and Gertrude |
 | `src-1ce019d13e13` | 1888 | P1 | Cómo educa Jertrudis á sus hijos |
 | `src-7c075c939b58` | 1895 | P1 | Pestalozzi's Leonard and Gertrude. -- |
 | `src-18a5a0caaae5` | 1898 | P1 | How Gertrude teaches her children; an attempt to help moth… and an account of the method |
-| `src-58ac21088a08` | 1899 | P1 | Sämtliche Werke; |
-| `src-64aeef8c354a` | 1899 | P1 | Sämtliche Werke; |
 | `src-6e7703b6f0f5` | 1899 | P1 | Sämtliche Werke; |
 | `src-a492cba7836a` | 1899 | P1 | Pestalozzi's sämtliche Werke |
 | `src-e9b7dcd6764b` | 1900 | P1 | How Gertrude teaches her children; an attempt to help moth… and an account of The method |
 | `src-469b0e10f10c` | 1915 | P1 | How Gertrude teaches her children: an attempt to help moth… and an account of the method |
-| `src-0e110ce02271` | 1926 | P1 | Mie Indagini |
 
 ★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 

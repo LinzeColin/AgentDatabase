@@ -2,11 +2,10 @@
 
 ## Scope and assigned sources
 
-**本道分到 9 份（train split）**：
+**本道分到 8 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
-| `src-106864c12dfa` | 1903 | P1 | Writings. Library ed., containing his autobiography, notes…Ellery Bergh, managing editor |
 | `src-146f63540200` | 1903 | P1 | Writings. Library ed., containing his autobiography, notes…Ellery Bergh, managing editor |
 | `src-353f9fbf1714` | 1903 | P1 | Writings. Library ed., containing his autobiography, notes…Ellery Bergh, managing editor |
 | `src-6e2ef4ff69a7` | 1903 | P1 | Writings. Library ed., containing his autobiography, notes…Ellery Bergh, managing editor |

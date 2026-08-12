@@ -2,17 +2,14 @@
 
 ## Scope and assigned sources
 
-**本道分到 30 份（train split）**：
+**本道分到 26 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
-| `src-4f30582e77e0` | 1774 | P1 | A summary view of the rights of British America. : Set for… Virginia. Now in convention. |
 | `src-6a3cf5192354` | 1776 | P1 | Versión Final De La Declaración De La Independencia |
 | `src-843f7cba4fcc` | 1786 | P1 | Draught of a fundamental constitution for the commonwealth of Virginia |
 | `src-29b9a8e05249` | 1787 | P1 | Notes on the state of Virginia. Written by Thomas Jefferso…aware and Pennsylvania.  1787 |
-| `src-3f4febe479e3` | 1800 | P1 | The Annual register, and Virginian repository for the year 1800 |
 | `src-b107fc414c7e` | 1801 | P1 | Notes on the state of Virginia |
-| `src-5ebe1ee2ca41` | 1806 | P1 | The memorial of the merchants & traders of the city of Baltimore |
 | `src-1eeb8d395518` | 1832 | P1 | Notes on the state of Virginia |
 | `src-5d9f1ea8579d` | 1851 | P1 | An essay towards facilitating instruction in the Anglo-Sax…of the University of Virginia |
 | `src-f3ee30d59c57` | 1854 | P1 | The writings of Thomas Jefferson |
@@ -26,7 +23,6 @@
 | `src-f20b182b53fb` | 1903 | P1 | The writings of Thomas Jefferson |
 | `src-06b2c10518b9` | 1904 | P1 | Works; |
 | `src-2080428c7f4f` | 1904 | P1 | The works of Thomas Jefferson; |
-| `src-252ce7838048` | 1904 | P1 | The life and morals of Jesus of Nazareth : extracted textu…k, Latin, French, and English |
 | `src-354b5e5d9486` | 1904 | P1 | The works of Thomas Jefferson; |
 | `src-979a7acc8e1b` | 1904 | P1 | Works; |
 | `src-b25132260b5c` | 1904 | P1 | Works; |

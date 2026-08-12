@@ -2,7 +2,7 @@
 
 ## Scope and assigned sources
 
-**本道分到 10 份（train split）**：
+**本道分到 9 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
@@ -15,7 +15,6 @@
 | `src-be0b3ab8adad` | 1911 | P1 | The best of Lincoln : early speeches, Springfield speech, Cooper Union speech, etc. |
 | `src-3994ac473078` | 1920 | P1 | Early speeches of Abraham Lincoln, 1830-1860 |
 | `src-5067960bb8f2` | 1920 | P1 | The cross of Gettysburg : Lincoln's immortal address in cruciform arrangement |
-| `src-187a0d34e657` | 1925 | P1 | Lincoln's Last Speech in Springfield in the Campaign of 1858 |
 
 ★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 

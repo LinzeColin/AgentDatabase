@@ -57,12 +57,32 @@ import sys
 
 WS = re.compile(r"\s+")
 K = 25          # k 词片；overlap 门看 ≥50 词的连续段，25 足以侦测且更严
+SAMPLE = 5      # 抽样率 1/5，**按哈希值抽**（见 shingles 的注释：按位置抽会漏 4/5）
 
 
 def shingles(text: str) -> set:
+    """k 词片的**按哈希值抽样**（不是按位置）。
+
+    ★★★ 首版写的是 `for i in range(0, …, 5)` —— **按位置每 5 个取一个**。
+    那是错的：两份文档若在共享段上的**起始偏移模 5 不同**，
+    采样到的 k 词片**一个都不会重合**，哪怕它们逐字相同。
+    漏报概率 4/5。
+
+    实测（Kant #179，2026-08-12）：按位置抽样算出**中位重合率 0.0%**，
+    据此选的 11 份 holdout 送进 `check_holdout_overlap`，
+    结果是 **503 处 ≥50 词的连续逐字段，最长 3096 词**。
+    **一个 3096 词的逐字段，在我的指标里是 0%。**
+
+    ⇒ 改为**按哈希值抽样**（`h % SAMPLE == 0`）：同一段文字无论落在哪个偏移上，
+      被抽中的那些 k 词片都一样，**与对齐无关**。抽样率不变，漏报没了。
+    """
     w = WS.sub(" ", text).lower().split()
-    return {hashlib.blake2b(" ".join(w[i:i + K]).encode(), digest_size=8).digest()
-            for i in range(0, max(1, len(w) - K + 1), 5)}
+    out = set()
+    for i in range(max(1, len(w) - K + 1)):
+        h = hashlib.blake2b(" ".join(w[i:i + K]).encode(), digest_size=8).digest()
+        if h[0] % SAMPLE == 0:          # ★ 按值抽样，与位置无关
+            out.add(h)
+    return out
 
 
 def main() -> int:

@@ -73,5 +73,11 @@
   "subject_origin": "historical",
   "target_id": "tgt-ba90b76a96bd",
   "time_scope": "1755-1835",
-  "updated_at": "2026-08-11T23:54:24Z"
+  "updated_at": "2026-08-11T23:54:24Z",
+  "attribution_basis": {
+    "authority": "主干编本的题名页逐字（`src-302df088d8b0`）：`John Marshall COMPLETE CONSTITUTIONAL DECISIONS Edited with ANNOTATIONS HISTORICAL. CRITICAL AND LEGAL By JOHN M. DILLON Of the New York Bar … CHICAGO CALLAGHAN & COMPANY 1903`。同扫描件另印康奈尔大学的权利声明：`There are no known copyright restrictions in the United States on the use of the text.`",
+    "citation": "archive.org item `cu31924024323069`（题名页原文见 authority，校验和记于 source-ledger 的 checksum）",
+    "disputed_policy": "① ★ **判决意见必须按篇取，不按卷取**：U.S. Reports 一卷里收着全体大法官的意见，整卷记成他的一手就是「与他有关 ≠ 他写的」。本轮台账按 item 计，**尚未按篇拆**，⇒ `decisions` 道的份数是**卷数不是篇数**，断言层引用时必须逐篇核署名。\n② 语料里 **38 份是同一部《The Life of George Washington》**的不同卷/版（题名归并后 95→29），那是他自著（维基条目：前两卷 1804 出版），**不是争议篇目**，但**不可当成 38 处独立证据**。\n③ 本轮**没有**发现托名或归属存疑的篇目；检索方式是按 creator=`Marshall, John, 1755-1835` 收窄，并逐份排除同名的 Harlan／传记作者／出版商三人（见 `00-抓源前必读.md`）。",
+    "disputed_works": []
+  }
 }
