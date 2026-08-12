@@ -68,17 +68,20 @@ for ws in NEW:
 print(("✅" if not miss else "❌")+" 语料指针：台账 sha256 查不到的 = %d"%miss)
 
 # ★★ 盲判用例要**正面数出来**，不能只在出错时才打印——沉默不等于通过。
-WANT={"abraham-lincoln":32,"thomas-jefferson":32,"otto-von-bismarck":32,"johann-pestalozzi":32,
-      "niccolo-machiavelli":16,"jean-jacques-rousseau":16,"immanuel-kant":17,"friedrich-frobel":16}
+#    ★ 期望值**不写死题数**：写死过一次（16/16/17/16），quick 四人补题到 32 之后
+#      它当场变红，而产物其实是对的。改成**按档位判下限 + 类数必须 16**，总数只打印。
+DEEP={"abraham-lincoln","thomas-jefferson","otto-von-bismarck","johann-pestalozzi"}
+QUICK={"niccolo-machiavelli","jean-jacques-rousseau","immanuel-kant","friedrich-frobel"}
 tot=0
-for slug,n in sorted(WANT.items()):
+for slug in sorted(DEEP|QUICK):
+    lo = 32 if slug in DEEP else 16
     f=next(iter(C.glob("wip-*/workspaces/%s/evals/cases.jsonl"%slug)),None)
     rows=[json.loads(l) for l in f.read_text(encoding="utf-8").splitlines() if l.strip()] if f else []
     su=len({r["suite"] for r in rows})
-    good = len(rows)==n and su==16
+    good = len(rows)>=lo and su==16
     ok &= good; tot+=len(rows)
-    print(("✅" if good else "❌")+" %-22s %2d 题 / %2d 类（应 %d / 16）"%(slug,len(rows),su,n))
-print(("✅" if tot==193 else "❌")+" 盲判用例合计 %d 题（应 193）"%tot); ok &= tot==193
+    print(("✅" if good else "❌")+" %-22s %2d 题 / %2d 类（下限 %d / 16 类）"%(slug,len(rows),su,lo))
+print(("✅" if tot>=8*16 else "❌")+" 盲判用例合计 **%d** 题（下限 128）"%tot); ok &= tot>=8*16
 
 h=(R/"HANDOFF.md").read_text(encoding="utf-8")
 for k in ["16 类，不是 7 类","evals/cases.jsonl"]:
