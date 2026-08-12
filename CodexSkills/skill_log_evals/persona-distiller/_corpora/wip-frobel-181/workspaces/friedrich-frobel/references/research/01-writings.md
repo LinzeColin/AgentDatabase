@@ -44,8 +44,61 @@
 
 ## Source-linked observations
 
-Pending.
+★★★ **本道的主要结论是一个否定结论：这批语料里几乎找不到他本人的第一人称。**
 
+## 一、可用面比数字小得多
+
+| 口径 | 数 |
+|---|---:|
+| 台账条数 | 51 |
+| **译本**（元数据 ∪ 题名页） | **29（57%）** |
+| **德文原文一手** | **4** |
+
+`measure_voice` 报他 2.44/千词 —— **而那 2.44 里相当一部分不是他的**，见下。
+
+## 二、机械摘取 6 条，**逐条人判后 0 条可作声口样本**
+
+| 出处 | 为什么不是他 |
+|---|---|
+| 偏移 4024 | 说话人称 Louise Fröbel 为「**我的亲戚**」（`meinen Verwandten Frau Louiſe Fröbel`）——而她是**福禄贝尔的妻子**。⇒ 编者 |
+| 偏移 1497 | `muß ich Anftand nehmen, das Motiv, welches **feiner** Seele vorſchwebte` ——「**他**心中的动机」。⇒ 编者 |
+| 偏移 3238 | 「我几乎每个下午、常常连夜在**他**身边工作」。⇒ 编者 |
+| 偏移 212338 | Fraktur OCR 崩坏，不可读 |
+| 两条英文 | 第三人称传记（`This announcement was made in 1829 … in Froebel's breast`） |
+
+★ 三条可读的第一人称**偏移都在 1500–4100**，即**卷首编者序之内**。
+  他的《Gesammelte pädagogische Schriften》由 **Wichard Lange** 编订并作长序，
+  **那一层的「我」是 Lange 的**。
+
+## 三、跳过编者序、进正文深处之后，`ich` 仍然多半不是他
+
+224 处（前 15% 之外）里抽查三处：
+
+- 偏移 231957 —— `ihr würdet ſo durch mich das wahrhaft ewige Leben empfangen und ich
+  würde euch das wahrhaft ewige Leben geben` ⇒ **那是基督在说话**（引用/化用经文）
+- 偏移 278359 —— Fraktur 崩坏
+- 偏移 334122 —— **唯一一条是他自己的**，见 O-1
+
+### O-1 · 他的写法是**禁止读者说某一句具体的话**
+
+> `Vater, Lehrer, Kinderführer antworte nicht: Davon weiß ich felbft noch nichts, das
+>  kenne ich felbft noch nicht.`
+> —— `src-0e9685ee5c80` @334122（`felbft`＝`selbst`，长 s 被 OCR 读成 f，**未改**）
+
+★ 「父亲、教师、育儿者，**不要这样回答**：『这个我自己也还不知道，这个我自己也还不认识。』」
+**句中的「我」是他替对方拟的推辞，祈使的那个人才是他。**
+⇒ 他不写「应当如何」，他**先把对方会说的那句话写出来，再禁止它**。
+
+---
+
+## ★★ 处置建议：**按 Coffin #130 的先例对待**
+
+Coffin 的情形是「三道门全过、17 万字里实质的话只有 8 句」。
+Fröbel 这里更细一层：**门看到的 2.44/千词，主要来自编者序与引用的经文**。
+
+⇒ **在补到更多德文原文之前，不要给他做声口向的断言。**
+  事实与观点仍可用（《人的教育》正文是他写的），
+  但「他会怎么说」这一面，**这批语料撑不住**。
 ## Candidate Claims
 
 Pending.
