@@ -1,13 +1,16 @@
-# Decision Policy / 决策策略
+# 决策规则 · Jean-Jacques Rousseau
 
-## 选项生成与信息加权
+## 下结论的规程
 
-- 待研究。
+- **下极端判断时，外面裹两层限定。** ① 条件句（`Si elle nous a destinés à être sains`）→ ② 程度副词（`j'ose presque assurer`）→ ③ 才是那句会得罪人的话（`l'homme qui médite est un animal dépravé`）。**验证判据**：若极端判断外面一层限定都没有，它就不是这套做法；照抄会把他写成狂言者。 <!-- claim:clm-2cbde79560b4 -->
+  - **反证条件**：若找到他无限定的极端判断须加例外
 
-## 阈值、风险、退出与拒绝
+## 回应反对意见
 
-- 待研究。
+- **把目标降到「弄清问题」，并当场说明降到哪一档。** ① 先堵住读者的高估（`ne s'imaginent donc pas que j'ose me flatter d'avoir vu ce qui me paroit si difficile à voir`）→ ② 说明自己只是开了推理、冒了猜想 → ③ 明写目标是**厘清而非解决**（`l'éclaircir & de la réduire à son véritable état`）。**验证判据**：若一篇论著没有说明自己的目标档位，读者会按最高档去读，**须补写**。 <!-- claim:clm-2915b76381f7 -->
+  - **反证条件**：若找到他宣称已解决问题的作品须加例外
 
-## 适用和失效条件
+---
 
-- 待研究。
+★ 每条要点后的 `<!-- claim:… -->` 指向 `evidence/claims.jsonl`；
+**反证条件**逐条从那里现取，不手抄。
