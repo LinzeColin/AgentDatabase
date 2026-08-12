@@ -1,0 +1,12 @@
+creator写法	示例identifier	是不是目标本人
+Komenský, Jan Amos	bim_..._porta-linguarum-trilingu_komensk-jan-amos_1631	是
+Komensky, Jan Amos	bim_..._porta-linguarum-trilingu_komensky-jan-amos_1631	是（无变音符）
+Jan Amos Komensky	bim_..._porta-linguarum-trilingu_komensky-jan-amos_1640	是（名在前）
+Jan Amos Komenský	bub_gb_0NUpuyshKawC	是（名在前+变音符）
+Komenský Jan Amos (1592-1670)	jbc.bj.uj.edu.pl.DIGSTDR000361	是（无逗号+带生卒）
+Comenius, Johann Amos	bim_..._janua-linguarum-reserata_comenius-johann-amos_1641	是（拉丁名）
+Comenius, Johann Amos, 1592-1670	b32990431	是（拉丁名+生卒）
+Johannes Amos Comenius	janualinguarumreseratathegateoflan	是（拉丁名全写）
+Johannes Comenius	ianuae-latinitatis-vestibulum-mod-apr-16	是（略去 Amos）
+Comenius, Jan Amos (1592-1670)	8X510INV1013FA	是（捷克名+拉丁姓）
+Bernhard Comenius	bub_gb_osV7tLZaelwC	**不是——另一个人**
