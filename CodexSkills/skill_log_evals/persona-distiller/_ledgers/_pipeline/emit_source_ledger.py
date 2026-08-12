@@ -34,6 +34,7 @@ import argparse
 import datetime
 import json
 import pathlib
+import re
 import sys
 
 THIS_YEAR = 2026
@@ -90,8 +91,27 @@ def main() -> int:
         is_primary = p.get("档") == "一手"
         ti = r.get("ia_title"); ti = "; ".join(ti) if isinstance(ti, list) else str(ti or "")
         au = r.get("ia_creator"); au = "; ".join(au) if isinstance(au, list) else str(au or "")
-        yrs = [int(y) for y in (r.get("titlepage_years") or []) if y.isdigit()]
-        pub = str(min(yrs)) if yrs else str(r.get("ia_year", "") or "")
+        # ★★ 出版年**不取 `min(titlepage_years)`**。
+        #   第一版这么取，于是 Bismarck（1815–1898）的书信集被标成
+        #   **出版年 1647 / 1761 / 1815** —— 正文前几页里最早那个四位数
+        #   往往是**文中提到的年份**（或藏书章、OCR 噪声），不是版次年。
+        #   ⇒ 优先用 IA 的编目年（图书馆说的），题名页年份留作**佐证与交叉核对**。
+        #   ★ 仍要记住 `ia_date` 可能是原作年不是版次年
+        #     （`_IA的date是原作年不是版次年-2026-08-11.md`），所以两者不一致时**印出来**。
+        yrs = sorted(int(y) for y in (r.get("titlepage_years") or []) if y.isdigit())
+        cat = ""
+        for fld in ("ia_date", "ia_year"):
+            v = str(r.get(fld, "") or "")
+            m = re.search(r"\b(1[5-9]\d{2}|20[0-2]\d)\b", v)
+            if m:
+                cat = m.group(1)
+                break
+        if cat:
+            pub, basis = cat, "IA 编目年"
+        elif yrs:
+            pub, basis = str(yrs[-1]), "**题名页年份取最大，未经编目确认**"
+        else:
+            pub, basis = "", "**取不到**"
         out.append({
             "source_id": sid(i),
             "title": ti or i,                       # ② 真题名，不用文件名
@@ -112,9 +132,12 @@ def main() -> int:
             "authorship_detail": {"code": "ia-creator-field",
                                   "evidence": (p.get("依据") or "")[:200]},
             "rights": f"pre{PD_CUTOFF}",            # ④ 随年份滚动；= pre1931
+            "published_at_basis": basis,
+            "titlepage_years": [str(y) for y in yrs],
             "rights_basis": (f"公有领域 = 出版于 ≤{LATEST_PD_YEAR}"
                              f"（分界 {PD_CUTOFF} = {THIS_YEAR} − 95）；"
-                             f"题名页年份 {pub or '**未取到**'}"),
+                             f"出版年 {pub or '**未取到**'}（{basis}）；"
+                             f"题名页年份 {yrs or '无'}"),
             "extraction_status": "raw",
             "normalized_path": None,
             "normalized_checksum": None,
@@ -142,6 +165,14 @@ def main() -> int:
           f"｜**derived_from 已填 {dn} 条**（{len(rep)} 个重复簇）")
     print(f"  ★ `split` 全部写作 `train` —— **holdout 由人另行指定，本工具不猜**")
     print(f"  ★ `rights` = pre{PD_CUTOFF}（出版年 ≤{LATEST_PD_YEAR}；{THIS_YEAR} − 95，随年份滚动）")
+    noc = [o for o in out if "未经编目确认" in o["published_at_basis"]]
+    if noc:
+        print(f"  ⚠️ **{len(noc)} 条没有编目年**，出版年取自题名页最大值——**这些要人核**")
+    odd = [o for o in out if o["published_at"].isdigit() and o["titlepage_years"]
+           and int(o["published_at"]) < min(int(y) for y in o["titlepage_years"]) - 60]
+    if odd:
+        print(f"  ⚠️ 编目年比题名页最早年份还早 60 年以上的 {len(odd)} 条（**原作年 vs 版次年**）："
+              + "、".join(f'{o["source_id"]}({o["published_at"]})' for o in odd[:5]))
     late = [o for o in out if o["published_at"].isdigit() and int(o["published_at"]) > LATEST_PD_YEAR]
     if late:
         print(f"  ⚠️ **题名页年份 >{LATEST_PD_YEAR} 的有 {len(late)} 条**，逐条核："

@@ -40,6 +40,8 @@ python3 ../../../registry/codex/persona-distiller/scripts/check_corpus_ceiling.p
 | `classify_primary.py` | 一手／二手 | **`需人判` 不默认成一手**，只能由 `_primary-decisions.json` 显式裁掉；`(?<!auto)biograph`；`former owner` = 藏书主不是作者 |
 | `dedup_corpus.py` | 文件数 → 独立文献数 | 用 token shingle 的 min-hash，**不用 `difflib`**；**只报簇不替人判**「同卷多扫描」还是「同书不同卷」 |
 | `assign_lanes.py` | 分六条研究道 | 道语义**取自 35 个存量 `source-ledger.jsonl` 实测**，不按字面猜 |
+| `scan_copyright.py` | **PD 的最后一道，唯一读正文的一道** | 元数据挡不住在版权期内的重印／译本——**实测 6 份混进来**；决定性信号只有 ISBN 与「© 年份 >1930」，`All rights reserved` 是老书的套话不算 |
+| `emit_source_ledger.py` | → `evidence/source-ledger.jsonl` | `derived_from` 由查重簇填；`title` 用真题名；`split` 全 train，**holdout 由人另指** |
 | `measure_voice.py` | 声口密度 | **先修 OCR 折行断字**（一份文件里 77.8% 的命中是断字）；**先打印命中原句再报率**；主语脱落语另看动词 |
 
 ---
@@ -80,7 +82,16 @@ Jefferson Davis、Thomas Jefferson Lamar、Thomas Paine 的传记、
 
 ⇒ 道空了就**按那条道单独检索并抓**，别指望主检索式顺带抓到。
 
-### ④ 声口要单独量，而且要先读命中
+### ④ PD 判定**必须打开正文看**，元数据挡不住
+
+`access-restricted-item` 与 `IA year > 1930` 两道**都没拦住** 6 份在版权期内的材料，
+因为 **IA 的 `date`/`year` 记的是原作年不是版次年**：
+`kantsgesammeltes0000kant_l9l8` 元数据写 **1902**，书里印着 **`© 1978 by Walter de Gruyter`**。
+⇒ 抓完必跑 `scan_copyright.py`，**并逐条读命中**：
+  首扫 21 条红，读完只有 6 条成立，其余 12 条是 1882–1903 年老书上的
+  `All rights reserved`（当年的套话，版权早已到期）、3 条是数字化年/OCR 噪声。
+
+### ⑤ 声口要单独量，而且要先读命中
 
 门数的是**来源**不是**声口**。Coffin #130 三道门全过、17 万字里实质的话只有 8 句。
 量之前先修折行断字，量完先读 8 条原句 —— 第 1 批实测：

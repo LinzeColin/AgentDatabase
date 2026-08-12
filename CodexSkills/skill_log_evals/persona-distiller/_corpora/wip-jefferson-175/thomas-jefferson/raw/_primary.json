@@ -1,12 +1,12 @@
 {
-  "总数": 74,
+  "总数": 73,
   "计数": {
-    "一手": 68,
+    "一手": 67,
     "二手": 6,
     "需人判": 0
   },
-  "一手占比下界": 0.9189,
-  "一手占比上界": 0.9189,
+  "一手占比下界": 0.9178,
+  "一手占比上界": 0.9178,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -64,14 +64,6 @@
       "title": "Histoire des promesses illusoires depuis la Paix des Pirenees",
       "creator": "Courtilz de Sandras, Gatien, 1644-1712; Jefferson, Thomas, 1743-1826, former own",
       "words": 34269
-    },
-    {
-      "identifier": "correspondencebe0000jeff",
-      "档": "一手",
-      "依据": "目标为第一作者，题名含「correspondence」",
-      "title": "Correspondence between Thomas Jefferson and Pierre Samuel du Pont de Nemours, 17",
-      "creator": "Jefferson, Thomas, 1743-1826",
-      "words": 93689
     },
     {
       "identifier": "cu31924026091581",

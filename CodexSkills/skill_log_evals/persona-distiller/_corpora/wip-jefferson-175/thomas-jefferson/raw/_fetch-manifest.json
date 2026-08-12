@@ -1,7 +1,7 @@
 {
   "生成时刻": "2026-08-12T13:59:22",
   "请求数": 10,
-  "已取回": 74,
+  "已取回": 73,
   "skipped_access_restricted": 0,
   "失败": 2,
   "并发降级": "无（全程并发 4）",
@@ -173,40 +173,6 @@
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
       "titlepage_years": [],
       "digitization_years": []
-    },
-    {
-      "identifier": "correspondencebe0000jeff",
-      "status": "已取回",
-      "note": "",
-      "file": "correspondencebe0000jeff.txt",
-      "source_url": "https://archive.org/download/correspondencebe0000jeff/correspondencebe0000jeff_djvu.txt",
-      "sha256": "975bbd0d2c751dfa78ee5917a8ad3577c815106717c66b309723a44b0c859e6f",
-      "bytes": 547700,
-      "words": 93689,
-      "fetched_at": "2026-08-12T12:49:42",
-      "ia_date": "1930",
-      "ia_year": "",
-      "ia_publicdate": "2025-04-04 00:45:14",
-      "ia_creator": "Jefferson, Thomas, 1743-1826",
-      "ia_title": "Correspondence between Thomas Jefferson and Pierre Samuel du Pont de Nemours, 1798-1817;",
-      "ia_licenseurl": "",
-      "titlepage_years": [
-        "1739",
-        "1798",
-        "1800",
-        "1802",
-        "1803",
-        "1804",
-        "1805",
-        "1809",
-        "1815",
-        "1817",
-        "1930",
-        "1931"
-      ],
-      "digitization_years": [
-        "2025"
-      ]
     },
     {
       "identifier": "cu31924026091581",
@@ -899,7 +865,9 @@
         "1772",
         "1773"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2005"
+      ]
     },
     {
       "identifier": "memoirscorrespo00jeffgoog",
@@ -2085,5 +2053,6 @@
       "digitization_years": []
     }
   ],
-  "★同名剔除": "4 份（见 _blocked-namesake.txt，**记录保留在那里，不是静默删**）"
+  "★同名剔除": "4 份（见 _blocked-namesake.txt，**记录保留在那里，不是静默删**）",
+  "★版权移除": "1 份（见 _blocked-copyright.txt）"
 }

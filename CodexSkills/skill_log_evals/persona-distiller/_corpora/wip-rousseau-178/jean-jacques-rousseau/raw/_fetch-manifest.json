@@ -1,7 +1,7 @@
 {
   "生成时刻": "2026-08-12T14:00:38",
   "请求数": 20,
-  "已取回": 104,
+  "已取回": 103,
   "skipped_access_restricted": 0,
   "失败": 8,
   "并发降级": "无（全程并发 4）",
@@ -1242,10 +1242,11 @@
       "ia_title": "Confessions of J. J. Rousseau, the - Volume 04",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1903",
-        "2004"
+        "1903"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2004"
+      ]
     },
     {
       "identifier": "confessionsofjjr03905gut",
@@ -1266,10 +1267,11 @@
       "titlepage_years": [
         "1732",
         "1741",
-        "1903",
-        "2004"
+        "1903"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2004"
+      ]
     },
     {
       "identifier": "confessionsofjjr03906gut",
@@ -1289,10 +1291,11 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1764",
-        "1903",
-        "2004"
+        "1903"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2004"
+      ]
     },
     {
       "identifier": "confessionsofjjr03912gut",
@@ -1311,10 +1314,11 @@
       "ia_title": "Confessions of J. J. Rousseau, the - Volume 12",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1903",
-        "2004"
+        "1903"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2004"
+      ]
     },
     {
       "identifier": "confessionsofjjr03913gut",
@@ -1341,10 +1345,11 @@
         "1772",
         "1778",
         "1896",
-        "1903",
-        "2006"
+        "1903"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2006"
+      ]
     },
     {
       "identifier": "contratsocialou00rous",
@@ -1566,38 +1571,6 @@
       "ia_title": "Discours sur l'origine & les fondements de l'inégalité parmi les hommes:",
       "ia_licenseurl": "",
       "titlepage_years": [],
-      "digitization_years": []
-    },
-    {
-      "identifier": "discourssurlorig0000rous_m0u7",
-      "status": "已取回",
-      "note": "",
-      "file": "discourssurlorig0000rous_m0u7.txt",
-      "source_url": "https://archive.org/download/discourssurlorig0000rous_m0u7/discourssurlorig0000rous_m0u7_djvu.txt",
-      "sha256": "b906684c3a8f546db2f636cbf26b2d58a32955a163098792f6b066325ba6b18a",
-      "bytes": 398291,
-      "words": 63641,
-      "fetched_at": "2026-08-12T14:00:19",
-      "ia_date": "1922",
-      "ia_year": "",
-      "ia_publicdate": "2026-06-01 09:17:52",
-      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
-      "ia_title": "Discours sur l'origine et les fondements de l'inégalité parmi les hommes",
-      "ia_licenseurl": "",
-      "titlepage_years": [
-        "1672",
-        "1673",
-        "1700",
-        "1711",
-        "1712",
-        "1713",
-        "1717",
-        "1722",
-        "1728",
-        "1732",
-        "1741",
-        "1745"
-      ],
       "digitization_years": []
     },
     {
@@ -2459,8 +2432,11 @@
         "1898",
         "1905"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2016"
+      ]
     }
   ],
-  "★同名剔除": "2 份（见 _blocked-namesake.txt，记录保留）"
+  "★同名剔除": "2 份（见 _blocked-namesake.txt，记录保留）",
+  "★版权移除": "1 份（见 _blocked-copyright.txt）"
 }

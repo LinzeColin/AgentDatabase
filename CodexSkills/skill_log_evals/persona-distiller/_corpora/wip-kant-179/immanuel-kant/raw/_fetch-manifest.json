@@ -1,7 +1,7 @@
 {
   "生成时刻": "2026-08-12T13:25:43",
   "请求数": 40,
-  "已取回": 69,
+  "已取回": 65,
   "skipped_access_restricted": 0,
   "失败": 1,
   "并发降级": "无（全程并发 4）",
@@ -424,34 +424,6 @@
       "digitization_years": []
     },
     {
-      "identifier": "FilosofaDeLaHistoriaEmmanuelKant",
-      "status": "已取回",
-      "note": "",
-      "file": "FilosofaDeLaHistoriaEmmanuelKant.txt",
-      "source_url": "https://archive.org/download/FilosofaDeLaHistoriaEmmanuelKant/Filosofía de la historia - Emmanuel Kant_djvu.txt",
-      "sha256": "71c96efa7d2bf9ccb498bcfe1de75055ae85725f244fca7fdc8aedaf7075dd4e",
-      "bytes": 190802,
-      "words": 31406,
-      "fetched_at": "2026-08-12T12:53:46",
-      "ia_date": "",
-      "ia_year": "",
-      "ia_publicdate": "2019-01-13 05:14:25",
-      "ia_creator": "Kant, Immanuel",
-      "ia_title": "Filosofía De La Historia Emmanuel Kant",
-      "ia_licenseurl": "",
-      "titlepage_years": [
-        "1784",
-        "1786",
-        "1788",
-        "1798",
-        "1941",
-        "1979",
-        "2015",
-        "2017"
-      ],
-      "digitization_years": []
-    },
-    {
       "identifier": "ImmanuelKantsKritikDerReinenVernunftMitEinerEinleitungUnd",
       "status": "已取回",
       "note": "",
@@ -471,38 +443,6 @@
         "1781",
         "1787",
         "1889"
-      ],
-      "digitization_years": []
-    },
-    {
-      "identifier": "Kant-polmica-CRP",
-      "status": "已取回",
-      "note": "",
-      "file": "Kant-polmica-CRP.txt",
-      "source_url": "https://archive.org/download/Kant-polmica-CRP/[Immanuel_Kant]_La_pol_mica_sobre_la__Critica_de(z-lib.org)_djvu.txt",
-      "sha256": "def48baea048e7f8d5d6621e133178680397ddf597ca8ec4baa61fc3c2ed3d2d",
-      "bytes": 348771,
-      "words": 55767,
-      "fetched_at": "2026-08-12T12:53:59",
-      "ia_date": "",
-      "ia_year": "",
-      "ia_publicdate": "2019-05-10 18:58:21",
-      "ia_creator": "Kant, Immanuel",
-      "ia_title": "Immanuel Kant - La polémica sobre la Crítica de la Razón Pura (respuesta a Eberhard)",
-      "ia_licenseurl": "",
-      "titlepage_years": [
-        "1783",
-        "1787",
-        "1788",
-        "1789",
-        "1790",
-        "1793",
-        "1797",
-        "1968",
-        "1983",
-        "1986",
-        "1987",
-        "1989"
       ],
       "digitization_years": []
     },
@@ -1278,7 +1218,9 @@
         "1815",
         "1816"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2016"
+      ]
     },
     {
       "identifier": "immanuelkantpap00kant",
@@ -1516,40 +1458,6 @@
       "digitization_years": []
     },
     {
-      "identifier": "kantsgesammeltes0000kant_l9l8",
-      "status": "已取回",
-      "note": "",
-      "file": "kantsgesammeltes0000kant_l9l8.txt",
-      "source_url": "https://archive.org/download/kantsgesammeltes0000kant_l9l8/kantsgesammeltes0000kant_l9l8_djvu.txt",
-      "sha256": "e52407343b5c61db10b1034d2a8e49e0b5934d7ae6edd773f5174ced7167846a",
-      "bytes": 1780239,
-      "words": 285392,
-      "fetched_at": "2026-08-12T13:25:04",
-      "ia_date": "1902",
-      "ia_year": "",
-      "ia_publicdate": "2022-08-03 08:15:39",
-      "ia_creator": "Kant, Immanuel, 1724-1804, author",
-      "ia_title": "Kant's Gesammelte Schriften ",
-      "ia_licenseurl": "",
-      "titlepage_years": [
-        "1581",
-        "1744",
-        "1751",
-        "1757",
-        "1760",
-        "1763",
-        "1767",
-        "1769",
-        "1774",
-        "1776",
-        "1781",
-        "1792"
-      ],
-      "digitization_years": [
-        "2022"
-      ]
-    },
-    {
       "identifier": "kantsgesammeltes0010kant",
       "status": "已取回",
       "note": "",
@@ -1578,32 +1486,6 @@
         "1761",
         "1762",
         "1763"
-      ],
-      "digitization_years": [
-        "2019"
-      ]
-    },
-    {
-      "identifier": "kantsgesammeltes0027kant",
-      "status": "已取回",
-      "note": "",
-      "file": "kantsgesammeltes0027kant.txt",
-      "source_url": "https://archive.org/download/kantsgesammeltes0027kant/kantsgesammeltes0027kant_djvu.txt",
-      "sha256": "a41f9d99da0c1122ca023cef9eee8fcc2fce8cea465dbe73eb2d8b8361ff76e5",
-      "bytes": 1581796,
-      "words": 205868,
-      "fetched_at": "2026-08-12T13:25:14",
-      "ia_date": "1910",
-      "ia_year": "",
-      "ia_publicdate": "2019-06-13 13:07:33",
-      "ia_creator": "Kant, Immanuel, 1724-1804",
-      "ia_title": "Kant's gesammelte Schriften",
-      "ia_licenseurl": "",
-      "titlepage_years": [
-        "1751",
-        "1763",
-        "1788",
-        "1975"
       ],
       "digitization_years": [
         "2019"
@@ -1693,10 +1575,11 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1790",
-        "1913",
-        "2017"
+        "1913"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2017"
+      ]
     },
     {
       "identifier": "kantsintroductio00kantuoft",
@@ -1885,5 +1768,6 @@
       ],
       "digitization_years": []
     }
-  ]
+  ],
+  "★版权移除": "4 份（见 _blocked-copyright.txt）"
 }

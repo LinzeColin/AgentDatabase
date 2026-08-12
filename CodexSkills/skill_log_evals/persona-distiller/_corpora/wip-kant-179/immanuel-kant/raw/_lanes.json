@@ -2,7 +2,7 @@
   "lanes": 6,
   "去掉纸面道后": 5,
   "逐道份数": {
-    "writings": 57,
+    "writings": 53,
     "conversations": 3,
     "expression": 3,
     "decisions": 1,
@@ -93,19 +93,9 @@
       "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
     },
     {
-      "identifier": "FilosofaDeLaHistoriaEmmanuelKant",
-      "道": "writings",
-      "title": "Filosofía De La Historia Emmanuel Kant"
-    },
-    {
       "identifier": "ImmanuelKantsKritikDerReinenVernunftMitEinerEinleitungUnd",
       "道": "writings",
       "title": "Immanuel Kant's Kritik der reinen Vernunft: mit einer Einleitung und A"
-    },
-    {
-      "identifier": "Kant-polmica-CRP",
-      "道": "writings",
-      "title": "Immanuel Kant - La polémica sobre la Crítica de la Razón Pura (respues"
     },
     {
       "identifier": "KantAntropologiaPrammatica",
@@ -298,17 +288,7 @@
       "title": "Immanuel Kant's Critique of pure reason : in commemoration of the cent"
     },
     {
-      "identifier": "kantsgesammeltes0000kant_l9l8",
-      "道": "writings",
-      "title": "Kant's Gesammelte Schriften "
-    },
-    {
       "identifier": "kantsgesammeltes0010kant",
-      "道": "writings",
-      "title": "Kant's gesammelte Schriften"
-    },
-    {
-      "identifier": "kantsgesammeltes0027kant",
       "道": "writings",
       "title": "Kant's gesammelte Schriften"
     },

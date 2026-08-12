@@ -3,7 +3,7 @@
   "去掉纸面道后": 5,
   "逐道份数": {
     "writings": 30,
-    "conversations": 28,
+    "conversations": 27,
     "expression": 9,
     "decisions": 1,
     "timeline": 4,
@@ -46,11 +46,6 @@
       "identifier": "bub_gb_LlJBAAAAcAAJ",
       "道": "external",
       "title": "Histoire des promesses illusoires depuis la Paix des Pirenees"
-    },
-    {
-      "identifier": "correspondencebe0000jeff",
-      "道": "conversations",
-      "title": "Correspondence between Thomas Jefferson and Pierre Samuel du Pont de N"
     },
     {
       "identifier": "cu31924026091581",

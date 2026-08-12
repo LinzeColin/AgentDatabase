@@ -155,10 +155,11 @@
         "1831",
         "1864",
         "1865",
-        "1905",
-        "2006"
+        "1905"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2006"
+      ]
     },
     {
       "identifier": "completeworksab09fishgoog",

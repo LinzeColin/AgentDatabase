@@ -4,7 +4,7 @@
   "逐道份数": {
     "writings": 62,
     "conversations": 14,
-    "expression": 10,
+    "expression": 9,
     "decisions": 0,
     "timeline": 6,
     "external": 12
@@ -361,11 +361,6 @@
       "identifier": "discourssurlori01rousgoog",
       "道": "expression",
       "title": "Discours sur l'origine & les fondements de l'inégalité parmi les hom"
-    },
-    {
-      "identifier": "discourssurlorig0000rous_m0u7",
-      "道": "expression",
-      "title": "Discours sur l'origine et les fondements de l'inégalité parmi les ho"
     },
     {
       "identifier": "discourssurlorig00rous_0",

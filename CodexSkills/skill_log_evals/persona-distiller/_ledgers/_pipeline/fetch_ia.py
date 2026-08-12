@@ -58,6 +58,10 @@ YEAR_RE = re.compile(r"\b(1[5-9]\d{2}|20[0-2]\d)\b")
 #     第一版写成 `[^\n]{0,120}` 于是两条都漏网 ——
 #     同 [[fixtures-cleaner-than-the-real-thing]]：自造夹具里样板不折行。
 DIGI_RE = re.compile(r"[Dd]igiti[sz]ed\s+by[\s\S]{0,140}?\b((?:19|20)\d{2})\b")
+#   ★ Project Gutenberg 的 `Release Date: June 15, 2006 [EBook #18591]` 同理——
+#     那是电子书发布日，不是出版年。实测 Marshall 5 卷《华盛顿传》与 Lincoln 的
+#     PG 合集因此被标成「出版年 2006」。**底本仍是 PD，只是年份取错了。**
+PG_DATE_RE = re.compile(r"Release\s+Date:[^\n\[]{0,40}?\b((?:19|20)\d{2})\b")
 
 # 并发闸门：一旦撞 429/403 就永久降到 1
 _lock = threading.Lock()
@@ -170,8 +174,10 @@ def fetch_one(ident: str, out: pathlib.Path, skip_existing: bool = False) -> dic
         "ia_licenseurl": m.get("licenseurl", ""),
         # ★ 正文头 400 行里出现的四位年份 —— PD 判定看这个，不看 ia_date
         #   ★ 已剔除 IA 数字化样板里的年份（见 DIGI_RE）
-        "titlepage_years": sorted(set(YEAR_RE.findall(head)) - set(DIGI_RE.findall(head)))[:12],
-        "digitization_years": sorted(set(DIGI_RE.findall(head))),
+        "titlepage_years": sorted(set(YEAR_RE.findall(head))
+                                  - set(DIGI_RE.findall(head))
+                                  - set(PG_DATE_RE.findall(head)))[:12],
+        "digitization_years": sorted(set(DIGI_RE.findall(head)) | set(PG_DATE_RE.findall(head))),
     })
     return rec
 

@@ -1,12 +1,12 @@
 {
-  "总数": 69,
+  "总数": 65,
   "计数": {
-    "一手": 67,
+    "一手": 63,
     "二手": 2,
     "需人判": 0
   },
-  "一手占比下界": 0.971,
-  "一手占比上界": 0.971,
+  "一手占比下界": 0.9692,
+  "一手占比上界": 0.9692,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -138,28 +138,12 @@
       "words": 183781
     },
     {
-      "identifier": "FilosofaDeLaHistoriaEmmanuelKant",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
-      "title": "Filosofía De La Historia Emmanuel Kant",
-      "creator": "Kant, Immanuel",
-      "words": 31406
-    },
-    {
       "identifier": "ImmanuelKantsKritikDerReinenVernunftMitEinerEinleitungUnd",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
       "title": "Immanuel Kant's Kritik der reinen Vernunft: mit einer Einleitung und Anmerkungen",
       "creator": "Kant, Immanuel",
       "words": 278342
-    },
-    {
-      "identifier": "Kant-polmica-CRP",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
-      "title": "Immanuel Kant - La polémica sobre la Crítica de la Razón Pura (respuesta a Eberh",
-      "creator": "Kant, Immanuel",
-      "words": 55767
     },
     {
       "identifier": "KantAntropologiaPrammatica",
@@ -466,28 +450,12 @@
       "words": 165013
     },
     {
-      "identifier": "kantsgesammeltes0000kant_l9l8",
-      "档": "一手",
-      "依据": "目标为第一作者，题名含「schriften」",
-      "title": "Kant's Gesammelte Schriften ",
-      "creator": "Kant, Immanuel, 1724-1804, author",
-      "words": 285392
-    },
-    {
       "identifier": "kantsgesammeltes0010kant",
       "档": "一手",
       "依据": "目标为第一作者，题名含「schriften」",
       "title": "Kant's gesammelte Schriften",
       "creator": "Kant, Immanuel, 1724-1804",
       "words": 189648
-    },
-    {
-      "identifier": "kantsgesammeltes0027kant",
-      "档": "一手",
-      "依据": "目标为第一作者，题名含「schriften」",
-      "title": "Kant's gesammelte Schriften",
-      "creator": "Kant, Immanuel, 1724-1804",
-      "words": 205868
     },
     {
       "identifier": "kantsgesammeltes12kant",

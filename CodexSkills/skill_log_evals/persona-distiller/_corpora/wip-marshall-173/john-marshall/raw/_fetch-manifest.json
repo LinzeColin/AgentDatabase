@@ -2101,7 +2101,9 @@
         "1819",
         "1831"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2009"
+      ]
     },
     {
       "identifier": "opinionsoflatech00mars",
@@ -2315,10 +2317,11 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1804",
-        "1926",
-        "2006"
+        "1926"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2006"
+      ]
     },
     {
       "identifier": "thelifeofgeorgew18592gut",
@@ -2345,10 +2348,11 @@
         "1750",
         "1753",
         "1754",
-        "1926",
-        "2006"
+        "1926"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2006"
+      ]
     },
     {
       "identifier": "thelifeofgeorgew18593gut",
@@ -2370,10 +2374,11 @@
         "1778",
         "1781",
         "1795",
-        "1926",
-        "2006"
+        "1926"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2006"
+      ]
     },
     {
       "identifier": "thelifeofgeorgew18594gut",
@@ -2393,10 +2398,11 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1781",
-        "1926",
-        "2006"
+        "1926"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2006"
+      ]
     },
     {
       "identifier": "thelifeofgeorgew18595gut",
@@ -2419,10 +2425,11 @@
         "1792",
         "1793",
         "1852",
-        "1926",
-        "2006"
+        "1926"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2006"
+      ]
     },
     {
       "identifier": "thelifeofgeorgew28859gut",
@@ -2451,10 +2458,11 @@
         "1757",
         "1758",
         "1759",
-        "1835",
-        "2009"
+        "1835"
       ],
-      "digitization_years": []
+      "digitization_years": [
+        "2009"
+      ]
     },
     {
       "identifier": "writingsjohnmar01marsgoog",

@@ -1,12 +1,12 @@
 {
-  "总数": 104,
+  "总数": 103,
   "计数": {
-    "一手": 92,
+    "一手": 91,
     "二手": 12,
     "需人判": 0
   },
-  "一手占比下界": 0.8846,
-  "一手占比上界": 0.8846,
+  "一手占比下界": 0.8835,
+  "一手占比上界": 0.8835,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -568,14 +568,6 @@
       "title": "Discours sur l'origine & les fondements de l'inégalité parmi les hommes:",
       "creator": "Rousseau, Jean-Jacques, 1712-1778",
       "words": 50838
-    },
-    {
-      "identifier": "discourssurlorig0000rous_m0u7",
-      "档": "一手",
-      "依据": "目标为第一作者，题名含「discours」",
-      "title": "Discours sur l'origine et les fondements de l'inégalité parmi les hommes",
-      "creator": "Rousseau, Jean-Jacques, 1712-1778",
-      "words": 63641
     },
     {
       "identifier": "discourssurlorig00rous_0",
