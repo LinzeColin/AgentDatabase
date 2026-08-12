@@ -18,3 +18,16 @@
 #   写成精确名 = 仓里留着一份**过时且更短**的清单，重建出来的语料比实际少一半。
 !*/*/raw/_ids*.txt
 !*/*/raw/_fetch-manifest.json
+
+# ★★ 2026-08-12：语料从 `wip-X/<slug>/raw/` 搬到 `wip-X/workspaces/<slug>/raw/`
+#   （存量 42 个工作区就是后者；前者是我发明的，导致判据报「读不到正文」）。
+#   **搬完必须补这一层规则** —— 上面 `*/*/raw/*.txt` 只盖两层，盖不住三层，
+#   于是 **764 份正文一次性进了暂存区**。
+# ★ 验证只能用 `git check-ignore -v <文件>` 或 `git status --porcelain -uall`：
+#   `git status --porcelain`（不带 -uall）**把未跟踪目录折叠成一行**，
+#   逐文件 grep 会数出 0，我就是这样被自己的检查骗过去的。
+*/workspaces/*/raw/*.txt
+*/workspaces/*/raw/*.xml
+*/workspaces/*/raw/*.pdf
+!*/workspaces/*/raw/_ids*.txt
+!*/workspaces/*/raw/_fetch-manifest.json
