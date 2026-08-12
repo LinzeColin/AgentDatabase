@@ -66,6 +66,20 @@ for ws in NEW:
     m=sum(1 for r in rows if r.get("checksum") not in shas); miss+=m
     if m: print("❌ %s 有 %d 条台账在 manifest 里查不到 sha256"%(ws,m)); ok=False
 print(("✅" if not miss else "❌")+" 语料指针：台账 sha256 查不到的 = %d"%miss)
+
+# ★★ 盲判用例要**正面数出来**，不能只在出错时才打印——沉默不等于通过。
+WANT={"abraham-lincoln":32,"thomas-jefferson":32,"otto-von-bismarck":32,"johann-pestalozzi":32,
+      "niccolo-machiavelli":16,"jean-jacques-rousseau":16,"immanuel-kant":17,"friedrich-frobel":16}
+tot=0
+for slug,n in sorted(WANT.items()):
+    f=next(iter(C.glob("wip-*/workspaces/%s/evals/cases.jsonl"%slug)),None)
+    rows=[json.loads(l) for l in f.read_text(encoding="utf-8").splitlines() if l.strip()] if f else []
+    su=len({r["suite"] for r in rows})
+    good = len(rows)==n and su==16
+    ok &= good; tot+=len(rows)
+    print(("✅" if good else "❌")+" %-22s %2d 题 / %2d 类（应 %d / 16）"%(slug,len(rows),su,n))
+print(("✅" if tot==193 else "❌")+" 盲判用例合计 %d 题（应 193）"%tot); ok &= tot==193
+
 h=(R/"HANDOFF.md").read_text(encoding="utf-8")
 for k in ["16 类，不是 7 类","evals/cases.jsonl"]:
     print(("✅" if k in h else "❌")+" HANDOFF 含「%s」"%k); ok&= k in h
