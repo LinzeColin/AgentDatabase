@@ -1,0 +1,83 @@
+# 01-writings 的观察层草稿（**待并入正文，先记方法与逐条判读**）
+
+> 本文件是 `01-writings.md` 的 `Source-linked observations` 一节的工作稿。
+> 之所以单独放：**观察层要人逐条判说话人**，而 Scope 节是机械生成的，
+> 两者混在一个文件里会让 `emit_lane_scope.py` 的幂等复核变得难读。
+
+---
+
+## 一、可用的一手面比台账数字小得多
+
+| 口径 | 数 |
+|---|---:|
+| `writings` 道的台账条数 | 44 |
+| 其中 `tier == P1` | 44 |
+| **其中前置页不含第三方编者/导言/文章** | **9** |
+
+⇒ **35/44（80%）的文件前置页里有第三方内容**（`front_matter_third_party`）。
+  Lincoln 的「全集」多为 Nicolay–Hay 编本，题名页即写
+  `With a General Introduction by Richard Watson Gilder, and Special Articles
+  by Other Eminent Persons`，且**开篇往往是他身后的悼词**。
+  取引文必须从这 9 份起，或逐段核说话人。
+
+---
+
+## 二、机械摘取 9 条，**人判之后只有 3 条可直接用**
+
+工具：`_ledgers/_pipeline/pull_quotes.py`
+（逐字切出、`norm_offset` 可复算、自带 `text[off:off+len]==quote` 断言）。
+筛选条件：`--lane writings --exclude-third-party --first-person`。
+
+### ✓ 三条确认是他的
+
+| source_id | norm_offset | 引文（逐字，OCR 原样） |
+|---|---:|---|
+| `src-9e17d9796521` | 4165 | `My Friends: No one not in my position can appreciate the sadness I feel at this parting.` |
+| `src-c80788c2eea1` | 1492 | `I do but quote from one of those speeches when I declare that "I have no purpose, directly or indirectly, to interfere with the institution of slavery in the States where it exists.` |
+| `src-e343dec9cc6b` | 11506 | `I believe this Government cannot endure permanently half slave and half free.` |
+
+### ～ 两条大概率是他，**未定到具体讲词，不入断言层**
+
+| source_id | 引文 | 待办 |
+|---|---|---|
+| `src-5c96f622593c` @10236 | `I do not hold the South responsible for slavery any more than I do the North.` | 定到哪一次讲演与日期再用 |
+| `src-d2370d713009` @8943（`src-c45f37859100` @9159 同文） | `I then introduced a bill for a railroad, instead of a canal, which passed the House, lost in the Senate by the casting vote of the Speaker, Zadoc Casey.` | 伊利诺伊州议会时期说得通，**但也可能是同僚的回忆**；Zadoc Casey 任州众议院议长这一点要另行核 |
+
+### ✗ 三条**不是他说的**，已剔除
+
+| source_id | 引文 | 为什么不是 |
+|---|---|---|
+| `src-0004a5f8b45d` @4386（`src-a6dbf2130a2f` @4654 同文） | `In 1848, when I first went on the bench, the circuit embraced fourteen •counties, and Mr.` | ★★ **林肯一生没当过法官。** 说这话的是巡回法庭的某位法官，回忆录被收进这册 |
+| `src-2723a0056843` @6200 | `Morse, the consul at London, in order that I might make it the basis of a formal ajDplication to the British government for its intervention.` | 该件题名是 `message from the President … **transmitting a report from the Secretary of State**`；正文主体是随文转呈的领事往来，**不是林肯本人的话** |
+
+---
+
+## ★★★ 三、这一节最要紧的一条结论
+
+`In 1848, when I first went on the bench…` 这一条：
+
+- 逐字无误 ✓
+- `norm_offset` 可复算、断言通过 ✓
+- 出自 `tier == P1` 的一手文件 ✓
+- 含第一人称 ✓
+- 前置页不含第三方（`front_matter_third_party == false`）✓
+
+**五道机械判据全过，而它不是林肯说的。**
+
+⇒ **没有任何机械规则挡得住它。** 说话人这一关只能靠：
+① 人读，② 项目自己的 `check_lane_quotes_verbatim.py` / `quote_speaker` 那一层。
+本轮的可用率是 **3/9 直接可用、2/9 待定、4/9 剔除**——
+**把机械摘取的产物直接当引文用，错误率会在四成上下。**
+
+同型先例：Marshall #173 的《华盛顿传》里第一人称**是华盛顿的**
+（[[gates-count-sources-not-voice]]）。
+
+---
+
+## 四、下一步
+
+1. 把上表三条确认引文并入 `01-writings.md` 的 `Source-linked observations`，
+   每条带 `source_id` 与 `norm_offset`。
+2. 两条待定的先不进断言层（[[self-report-is-not-evidence]]：定不到出处就别当证据）。
+3. 其余五道（conversations／expression／decisions／timeline／external）照此流程做，
+   **每道都要重跑一次「人判说话人」这一步**。
