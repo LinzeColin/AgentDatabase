@@ -66,6 +66,14 @@ ATTRIB = re.compile(r"(?i)\b(eulogy|delivered before|an address (by|on)|"
 #     `Sturtevant xi Early Speeches, … (March i, 1832, to May 29, 1856)` 漏网
 #     ——`xi` 是两字符而 `i` 只有一字符。改为**出现任何一个 ≥2 字符的罗马数字**即判：
 #     正经散文里句中几乎不会出现 `xi`／`vii`／`iv` 这种孤立记号。
+#   ④ **题名页**：`Lincoln I ABRAHAM LINCOLN LETTERS AND ADDRESSES WITH A BRIEF
+#      BIOGRAPHY THE STORY OF THE BOOK, NOTES ON THE TEXT, LIST OF AUTHORITIES
+#      AND INDEX NEW YORK THE SUN DIAL CLASSICS CO.` —— 连续多个全大写词。
+#   ⑤ **编者在说话**：`The three letters that follow were at one time in my
+#      possession and I will vouch for their genuineness…` —— 第一人称是收藏者的。
+#      ★ 这一条**没有任何机械特征**，只能靠人读，与
+#      `In 1848, when I first went on the bench…` 同类。
+TITLEPAGE = re.compile(r"(?:\b[A-Z]{3,}\b[ ,.]+){4,}")
 TOC_LIKE = re.compile(r"(\b[ivxlcdm]{2,6}\b|"                            # 任一罗马数字
                       r"\.{3,}|"                                          # 目录引导点
                       r"(\d+\s*,\s*){3,})")                             # 一串数字
@@ -115,6 +123,8 @@ def main() -> int:
             if not re.match(r"[\"\u201c]?[A-Z]", s):        # ③ 必须从大写字母起头
                 continue
             if ATTRIB.search(s) or TOC_LIKE.search(s):       # ①② 悼词署名行／目录行
+                continue
+            if TITLEPAGE.search(s):                          # ④ 题名页
                 continue
             if a.first_person and not re.search(r"\bI\b|\bmy\b|\bme\b", s):
                 continue
