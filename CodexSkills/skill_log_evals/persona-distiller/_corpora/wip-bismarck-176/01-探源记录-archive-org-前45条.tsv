@@ -1,46 +1,46 @@
-identifier	year	work	kind	editor_or_tr
-lesdiscoursdemle12bism	1862	Les discours de M. le comte de Bismarck	演说集(法译)	译者未署
-10558638bsb	1867	Die Reden des Grafen von Bismarck-Schönhausen 1	演说集	编者未署
-dieredengehalten00bismuoft	1867	Die Reden gehalten im Reichstag des norddeutschen Bundes	演说集	附宪法对照
-10558639bsb	1869	Die Reden des Grafen von Bismarck-Schönhausen 2	演说集	编者未署
-11281960bsb	1869	Die Reden des Grafen von Bismarck-Schönhausen 2	演说集	另一数字化
-10629304bsb	1870	Die Reden des Grafen von Bismarck-Schönhausen 3	演说集	编者未署
-11281961bsb	1870	Die Reden des Grafen von Bismarck-Schönhausen 3	演说集	另一数字化
-11281959bsb	1870	Die Reden des Grafen von Bismarck-Schönhausen 1	演说集	另一数字化
-dieredendesgraf00bismgoog	1870	Die Reden des Grafen, Dritte Sammlung 1869-1870	演说集	编者未署
-11332890bsb	1876	Bismarckbriefe 1844-1870	书信集	Originalbriefe
-11358069bsb	1877	Ausgewählte Reden 1	演说选	**含传略+导言+注释**
-bismarckbriefeo00bismgoog	1877	Bismarckbriefe 1844-1870	书信集	另一数字化
-11358072bsb	1877	Ausgewählte Reden 4	演说选	**含传略+导言+注释**
-india.history.resource.85205	1879	Prince Bismarck's Letters to his Wife...	书信集(英译)	Maxse 译
-11746952bsb	1880	Bismarckbriefe 1844-1870	书信集	另一数字化
-11358070bsb	1881	Ausgewählte Reden 2	演说选	**含传略+导言+注释**
-11635417bsb	1881	Die Reden des Abgeordneten 1847-1851	演说集	编者未署
-11358071bsb	1881	Ausgewählte Reden 3	演说选	**含传略+导言+注释**
-mdebismarckdput00riedgoog	1881	M. de Bismarck, député (1847-1851)	演说集(法译)	Riedel
-preussenimbundes02bism	1882	Preussen im Bundestag 1851-1859	公文集	Poschinger 编
-publicationenau18archgoog	1882	Preussen im Bundestag 1851-1859	公文集	Poschinger 编
-preussenimbunde00bismgoog	1882	Preussen im Bundestag 1851-1859	公文集	Poschinger 编
-preussenimbundes03bism	1882	Preussen im Bundestag 1851-1859	公文集	Poschinger 编
-preussenimbundes01bism	1882	Preussen im Bundestag 1851-1859	公文集	Poschinger 编
-preussenimbundes04bism	1882	Preussen im Bundestag 1851-1859	公文集	Poschinger 编
-preussenimbunde00poscgoog	1882	Preussen im Bundestag 1851-1859	公文集	Poschinger 编
-preussenimbunde04bismgoog	1882	Preussen im Bundestag 1851-1859	公文集	Poschinger 编
-bub_gb_KsNVAAAAYAAJ	1882	Preussen im Bundestag 1851-1859	公文集	Poschinger 编
-11533482bsb	1882	Reden 1879-1882 zur Wirtschafts-/Finanz-/Sozialreform	演说集	编者未署
-correspondancedi02bism	1883	Correspondance diplomatique (1851-1859)	公文集(法译)	Funck-Brentano 编/Schmitt 译
-correspondancedi01bism	1883	Correspondance diplomatique (1851-1859)	公文集(法译)	Funck-Brentano 编/Schmitt 译
-11635447bsb	1885	Kernworte Bismarcks 1847-85	语录	Festgabe
-11635420bsb	1885	Fürst Bismarck als Redner 3	演说全集	**含导言+说明**
-11635419bsb	1885	Fürst Bismarck als Redner 2	演说全集	**含导言+说明**
-bub_gb_CWAPAAAAYAAJ	1885	Lettres politiques confidentielles 1851-1858	书信集(法译)	Poschinger
-11635418bsb	1885	Fürst Bismarck als Redner 1	演说全集	**含导言+说明**
-lettrespolitiqu00langgoog	1885	Lettres politiques confidentielles 1851-1858	书信集(法译)	Poschinger/Lang
-frstbismarcksei01bismgoog	1886	Fürst Bismarck: sein politisches Leben und Wirken	**传记+文献汇编**	Hahn 编
-11635421bsb	1886	Fürst Bismarck als Redner 4	演说全集	**含导言+说明**
-bub_gb_JjsRAAAAYAAJ	1887	Die Militär-vorlage im Deutschen Reichstage	议会记录	含 Moltke
-11635422bsb	1887	Fürst Bismarck als Redner 5	演说全集	**含导言+说明**
-vierredenzurusze00bism	1888	Vier Reden zur äuszeren Politik	演说集	—
-11635415bsb	1888	Ausgewählte Reden 5	演说选	**含传略+导言+注释**
-11635423bsb	1888	Fürst Bismarck als Redner 6	演说全集	**含导言+说明**
-11635424bsb	1888	Fürst Bismarck als Redner 7	演说全集	**含导言+说明**
+identifier	year	lang	role	title
+lesdiscoursdemle12bism	1862	fre	译本	Les discours de M. le comte de Bismarck
+10558638bsb	1867	ger	author	Die Reden des Grafen von Bismarck-Schönhausen 1
+dieredengehalten00bismuoft	1867	ger	author	Die Reden gehalten im Reichstag des norddeutschen Bundes
+10558639bsb	1869	ger	author	Die Reden des Grafen von Bismarck-Schönhausen 2
+11281960bsb	1869	ger	author	Die Reden des Grafen von Bismarck-Schönhausen 2
+10629304bsb	1870	ger	author	Die Reden des Grafen von Bismarck-Schönhausen 3
+11281961bsb	1870	ger	author	Die Reden des Grafen von Bismarck-Schönhausen 3
+11281959bsb	1870	ger	author	Die Reden des Grafen von Bismarck-Schönhausen 1
+dieredendesgraf00bismgoog	1870	ger	author	Die Reden des Grafen, Dritte Sammlung 1869-1870
+11332890bsb	1876	ger	author	Bismarckbriefe 1844-1870
+11358069bsb	1877	ger	编者层	Ausgewählte Reden 1
+bismarckbriefeo00bismgoog	1877	ger	author	Bismarckbriefe 1844-1870
+11358072bsb	1877	ger	编者层	Ausgewählte Reden 4
+india.history.resource.85205	1879	eng	译本	Prince Bismarck's Letters to his Wife...
+11746952bsb	1880	ger	author	Bismarckbriefe 1844-1870
+11358070bsb	1881	ger	编者层	Ausgewählte Reden 2
+11635417bsb	1881	ger	author	Die Reden des Abgeordneten 1847-1851
+11358071bsb	1881	ger	编者层	Ausgewählte Reden 3
+mdebismarckdput00riedgoog	1881	fre	译本	M. de Bismarck, député (1847-1851)
+preussenimbundes02bism	1882	ger	author	Preussen im Bundestag 1851-1859
+publicationenau18archgoog	1882	ger	author	Preussen im Bundestag 1851-1859
+preussenimbunde00bismgoog	1882	ger	author	Preussen im Bundestag 1851-1859
+preussenimbundes03bism	1882	ger	author	Preussen im Bundestag 1851-1859
+preussenimbundes01bism	1882	ger	author	Preussen im Bundestag 1851-1859
+preussenimbundes04bism	1882	ger	author	Preussen im Bundestag 1851-1859
+preussenimbunde00poscgoog	1882	ger	author	Preussen im Bundestag 1851-1859
+preussenimbunde04bismgoog	1882	ger	author	Preussen im Bundestag 1851-1859
+bub_gb_KsNVAAAAYAAJ	1882	ger	author	Preussen im Bundestag 1851-1859
+11533482bsb	1882	ger	author	Reden 1879-1882 zur Wirtschafts-/Finanz-/Sozialreform
+correspondancedi02bism	1883	fre	译本	Correspondance diplomatique (1851-1859)
+correspondancedi01bism	1883	fre	译本	Correspondance diplomatique (1851-1859)
+11635447bsb	1885	ger	author	Kernworte Bismarcks 1847-85
+11635420bsb	1885	ger	编者层	Fürst Bismarck als Redner 3
+11635419bsb	1885	ger	编者层	Fürst Bismarck als Redner 2
+bub_gb_CWAPAAAAYAAJ	1885	fre	译本	Lettres politiques confidentielles 1851-1858
+11635418bsb	1885	ger	编者层	Fürst Bismarck als Redner 1
+lettrespolitiqu00langgoog	1885	fre	译本	Lettres politiques confidentielles 1851-1858
+frstbismarcksei01bismgoog	1886	ger	author	Fürst Bismarck: sein politisches Leben und Wirken
+11635421bsb	1886	ger	编者层	Fürst Bismarck als Redner 4
+bub_gb_JjsRAAAAYAAJ	1887	ger	author	Die Militär-vorlage im Deutschen Reichstage
+11635422bsb	1887	ger	编者层	Fürst Bismarck als Redner 5
+vierredenzurusze00bism	1888	ger	author	Vier Reden zur äuszeren Politik
+11635415bsb	1888	ger	编者层	Ausgewählte Reden 5
+11635423bsb	1888	ger	编者层	Fürst Bismarck als Redner 6
+11635424bsb	1888	ger	编者层	Fürst Bismarck als Redner 7
