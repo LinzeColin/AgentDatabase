@@ -1,4 +1,4 @@
-# 抓源 → 研究阶段的**九件**工具（2026-08-12 新建，第 1 批 10 人跑通）
+# 抓源 → 研究阶段的**十件**工具（2026-08-12 新建，第 1 批 10 人跑通）
 
 **这九件不是判据**（判据在 `registry/codex/persona-distiller/scripts/`，91 件，本轮一件没动）。
 它们是把「一个人名」变成「判据能吃的四个数」的流水线。
@@ -53,6 +53,7 @@ python3 ../../../registry/codex/persona-distiller/scripts/check_corpus_ceiling.p
 | `emit_source_ledger.py` | → `evidence/source-ledger.jsonl` | `derived_from` 由查重簇填；`title` 用真题名；`split` 全 train，**holdout 由人另指** |
 | `pull_quotes.py` | 取**可复算定位**的逐字引文 | `norm_offset` 自带 `text[off:off+len]==quote` 断言；四道筛（悼词署名行/目录行/词中起头/题名页）；★ **它判不了说话人** |
 | `assign_holdout.py` | 分盲判密封面 | 用**判据自己那把尺子**量重合；**已引用过的不密封**；**不抽空任何一道**；★ k 词片**按哈希值抽不按位置抽** |
+| `flag_borrowed_voice.py` | **标记「这句的第一人称可能不是本人」** | 四种机制①传记转录他人书信②小说角色对白③校勘者/编者序言④权利声明；★ **只给理由和原文证据，说话人由人定**；正 7 例负 12 例**全取真语料**，另做逐条拆规则的变异测试 |
 | `measure_voice.py` | 声口密度 | **先修 OCR 折行断字**（一份文件里 77.8% 的命中是断字）；**先打印命中原句再报率**；主语脱落语另看动词 |
 
 ---
@@ -143,3 +144,67 @@ python3 $PL/fetch_ia.py --ids-file <raw>/_ids-rebuild.txt --out <raw>
 ```
 
 **已端到端验过**：干净目录重抓 4 份，sha256 与仓内 manifest 逐份相同。
+
+---
+
+## ★★ 第 8–10 个坑（2026-08-12 下午续，都是**改了工具才发现的**）
+
+### ⑧ 取样恒定停在卷首 —— 我在最脏的那一段里取了七次
+
+`pull_quotes.py` 第一版每份文件 `break` 在**第一个命中**上，注释写着「保多样性」。
+多样性在**源之间**，深度上却恒定停在开头。实测偏移中位数：
+
+| 人 | `--pick first` | `--pick median` |
+|---|---:|---:|
+| Lincoln | 8,943（最大 11,506） | **286,560**（最大 1,007,931） |
+| Jefferson | 5,568 | **346,107** |
+| Rousseau | 1,723 | **155,968** |
+| Marshall | 41,884 | **793,105** |
+
+**卷首正是编者序、献词、题名页、数字化声明住的地方**——
+本批 9 次「第一人称属于别人」里有 4 次是这么捡回来的。
+`--pick` 默认已改 `median`。
+
+同批另一个偏移缺陷：`off = norm.find(s)` 取的是**全文首次出现**的位置，
+不是刚匹配到的那一处；同一句重复出现时（重印全集里常见）上下文会读到**错的那一处**，
+而**自校验查不出来——两处文本本来就一样**。已改 `m.start()`。
+
+### ⑨ 「第一人称属于别人」有**九种载体**，只有前八种能被机器提示
+
+已落成 `flag_borrowed_voice.py` 的四条规则覆盖①②③④；
+另外几种是**读上下文才认得出的**：
+
+- **书简集里两个方向的信都有** —— Kant 一条句子像极了他，后面跟着呼语 `mein lieber Kant`
+- **选集把本人的文字选进了「二手」那一道** —— 法文《Kant. Choix de textes》里
+  一条第一人称的前文写着 `ce reproche fait à ma théorie`
+- **编者引诗颂扬传主** —— Kant 一份英译本里 `Of him, more than of any child of man,
+  the poet's words are true—` 后面是歌德的句子
+- **编者写的年表条目**（第三人称）—— Fröbel 会话道 3 条候选全是这种
+
+⇒ 工具的作用是**把可疑的先标出来**，不是替人判。
+
+### ⑩ 题名词会造出**不存在的道**，而且误差单向朝「够得着更高档」漂
+
+`assign_lanes.py` 按题名词分道，实测三类误配：
+`chronolog` ⊂ `in chronologischer Reihenfolge`（**版本编排方式**）、
+`judgment` 命中《判断力批判》（**书名**）、
+`oration` ⊂ `commemoration`（**纯子串**）。
+**Kant 的 6 条道里 3 条是假的，修正后 3 条，档位由 deep 落到 quick。**
+
+★ 为什么单向：一份本该进 `writings` 的书被放进**空着的**道，`lanes` 就 +1；
+而 `writings` 在任何有语料的人身上都非空，residual 落回去只会让计数不变。
+**凡是「越错越好看」的指标，都要主动去查，不能等它报红。**
+
+另：`discourse／discours／discorsi` **分不出讲辞和专著**（Rousseau 的《论人类不平等》、
+Machiavelli 的《论李维》都是专著），已整个从 `expression` 移除。
+
+审计口径：676 份先按词边界扫出 **142 条，逐条读完只有 3 条成立**
+——其余是 `decision`→`decisions` 这类词形变化与 `Bismarckbriefe` 这类德语合成词。
+**报率之前先读命中。**
+
+### 附：`external` 那一道本来就该是二手
+
+`pull_quotes.py` 只收 `tier=P1/P2`，于是 Kant 与 Machiavelli 的 `external`
+永远取空——**而那正是这条道的定义**（别人怎么看他）。
+已加 `--allow-secondary`，**并要求观察节里写明说话人是谁**。
+
