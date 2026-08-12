@@ -35,6 +35,21 @@ import random
 import re
 import sys
 
+# ★★ 译者标记：**必须按词边界匹配**。
+#   2026-08-13 实测：原来写的是 `"tr" in creator.lower()`，
+#   于是 `Henry G. Gilbert Nursery and Seed Trade Catalog Collection` 里的 **`Trade`**
+#   把 Burbank #183 的 **22 份英文种苗目录全标成了「疑似译本」**——全假。
+#   同 [[regex-must-clear-the-corpus-language]]（`A.L.S` 撞德语 `als`、`lister` ⊂ `callister`）。
+#   ⇒ 收窄成词元：`tr.` / `trans.` / `translat*` / `traduit` / `übers*` / `übersetzt` / `traduzione`。
+#   ★ 正对照：Fröbel #181 与 Machiavelli #177 的英译本仍须被标出来（改完两边都跑过）。
+TRANSLATOR_RE = re.compile(
+    r"(?<![A-Za-z])(tr|trans)\.(?![A-Za-z])"          # `tr.` / `trans.`
+    r"|translat"                                       # translator / translated / translation
+    r"|traduit|traduzione|traducci|tradutor"           # 法/意/西/葡
+    r"|[üu]bers(?:etz|\.)"                            # übersetzt / übers.
+    r"|vertaal|[оО]перевод",
+    re.I)
+
 # 每种语言：(不含歧义的第一人称词, 有歧义的单独列)
 MARKERS = {
     "en": (r"\b(my|me|myself|mine)\b", r"(?<![A-Za-z])I(?![A-Za-z])"),
@@ -95,12 +110,20 @@ def guess_lang(text: str) -> str:
     return max(votes, key=votes.get) if max(votes.values()) > 30 else "?"
 
 
+NATIVE = None
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--raw", required=True)
+    ap.add_argument("--native-lang", default=None,
+                    help="人物写作的母语（en/de/fr/it/…）。给了它就按语种判译本——"
+                         "**这是唯一高召回的判法**，元数据大多不写 translated")
     ap.add_argument("--samples", type=int, default=8)
     ap.add_argument("--seed", type=int, default=20260812)
     a = ap.parse_args()
+    global NATIVE
+    NATIVE = (a.native_lang or '').lower() or None
     raw = pathlib.Path(a.raw)
     mf = raw / "_fetch-manifest.json"
     if not mf.exists():
@@ -140,7 +163,11 @@ def main() -> int:
         #   （[[empty-default-swallows-unknown]]）。⇒ 不适用时记 None，显示 `—`。
         vb = (len(re.findall(VERBS_1SG[lang], text, re.I))
               if lang in PRO_DROP else None)
-        tr = "tr" in str(r.get("ia_creator", "")).lower() or "translat" in str(r.get("ia_title", "")).lower()
+        meta_tr = bool(TRANSLATOR_RE.search(str(r.get("ia_creator", "")))
+                       or TRANSLATOR_RE.search(str(r.get("ia_title", ""))))
+        # ★★ 语种判法优先：文件语种 ≠ 人物母语 ⇒ 译本。元数据只作补充。
+        lang_tr = bool(NATIVE and lang not in ("?", NATIVE))
+        tr = lang_tr or meta_tr
         rows.append({"id": r["identifier"], "lang": lang, "words": n,
                      "无歧义每千词": round(c / n * 1000, 2),
                      "有歧义每千词": round(b / n * 1000, 2),
@@ -171,6 +198,9 @@ def main() -> int:
               f" —— 这两个数差很多时，**低的那个是量具错，不是没声口**")
     tr_n = sum(1 for x in rows if x["疑似译本"])
     print(f"疑似译本 {tr_n}／{len(rows)} 份 —— **译本量到的是译者的文风，不是他的声口**")
+    print("  口径：" + ("语种 ≠ %s（高召回）＋ 元数据标记" % NATIVE if NATIVE else
+          "**只按元数据标记（低召回）**——IA 大多不写 translated，"
+          "要判准请给 `--native-lang`"))
 
     print(f"\n★ **先读命中，再看率**（随机 {a.samples} 条，种子 {a.seed}）：")
     for ident, s in rng.sample(all_hits, min(a.samples, len(all_hits))):
