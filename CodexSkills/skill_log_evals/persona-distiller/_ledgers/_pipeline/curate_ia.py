@@ -49,6 +49,16 @@ EXCLUDE = {
     #   只能按生卒年与「Karl」排（见 wip-frobel-181/02-探源分析 第二刀）
     "frobel": ["Karl Friedrich", "Fröbel, Karl", "Fröbel, Julius", "Guido von"],
     "comenius": ["Comenius, Bernhard"],
+    # ★★ Burbank 的污染形态是**法人商号**，不是同名自然人——而**不能按商号排**：
+    #   实测 184 行里 **123 行同时含「Burbank, Luther, 1849-1926」与某个商号段**
+    #   （`Luther Burbank (Firm)`／`Burbank, Luther Company`／`Luther Burbank Society`
+    #    ／`Burbank's Experiment Farms`／`Henry G. Gilbert Nursery and Seed Trade Catalog Collection`）。
+    #   按商号排会砍掉 **67%**，其中包括他自己的书。
+    #   ⇒ EXCLUDE 留空，一手／二手交给 `classify_primary.py` 判（它的 `需人判` 不默认成一手）。
+    #   ★ 真正的风险在别处：**184 行里 103 行（56%）是种苗价目表／商品目录**，
+    #     其余去重只剩 **11 种题名**。这是「语料够份数而声口不够」的高风险面
+    #     （同 Coffin #130／Sellers #154），**抓完必须先量声口再往下走**。
+    "burbank": [],
 }
 # 目标必须出现在 creator 里的**姓名词元**（同一个 creator 段里全部出现即命中）。
 # ★★ 曾写成 `["Fröbel, Friedrich"]` 这种「姓, 名」定串，于是
@@ -68,6 +78,7 @@ REQUIRE = {
     "pestalozzi": [["pestalozzi"]],
     "frobel": [["fröbel", "friedrich"], ["froebel", "friedrich"], ["frobel", "friedrich"]],
     "comenius": [["comenius"], ["komensk"]],
+    "burbank": [["burbank", "luther"]],
 }
 
 
