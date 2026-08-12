@@ -1,7 +1,7 @@
 {
   "生成时刻": "2026-08-12T13:59:22",
   "请求数": 10,
-  "已取回": 78,
+  "已取回": 74,
   "skipped_access_restricted": 0,
   "失败": 2,
   "并发降级": "无（全程并发 4）",
@@ -165,28 +165,6 @@
       "ia_title": "Histoire des promesses illusoires depuis la Paix des Pirenees",
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
       "titlepage_years": []
-    },
-    {
-      "identifier": "centennialcelebr00jeff",
-      "status": "已取回",
-      "note": "",
-      "file": "centennialcelebr00jeff.txt",
-      "source_url": "https://archive.org/download/centennialcelebr00jeff/centennialcelebr00jeff_djvu.txt",
-      "sha256": "fffb413bfb67b90eadc9e7ce327ccad80d80cc089ee35d6158e95e26e28523cf",
-      "bytes": 191473,
-      "words": 28748,
-      "fetched_at": "2026-08-12T13:59:06",
-      "ia_date": "1908",
-      "ia_year": "",
-      "ia_publicdate": "2008-07-17 14:46:26",
-      "ia_creator": "Jefferson, Me",
-      "ia_title": "Centennial celebration of the town of Jefferson, Lincoln County, Maine, U.S.A., August 21, 1907;",
-      "ia_licenseurl": "",
-      "titlepage_years": [
-        "1807",
-        "1907",
-        "1908"
-      ]
     },
     {
       "identifier": "correspondencebe0000jeff",
@@ -470,57 +448,6 @@
         "1787",
         "1904",
         "1924"
-      ]
-    },
-    {
-      "identifier": "davismemorialvol00jone",
-      "status": "已取回",
-      "note": "",
-      "file": "davismemorialvol00jone.txt",
-      "source_url": "https://archive.org/download/davismemorialvol00jone/davismemorialvol00jone_djvu.txt",
-      "sha256": "537b1405807552a0afa1a58a3651f5bc6244dbed62211d7f660aa7b8b095bcbe",
-      "bytes": 1772521,
-      "words": 263574,
-      "fetched_at": "2026-08-12T13:59:09",
-      "ia_date": "1890",
-      "ia_year": "",
-      "ia_publicdate": "2007-12-04 18:01:20",
-      "ia_creator": "Jones, J. William (John William), 1836-1909",
-      "ia_title": "The Davis memorial volume; or, Our dead president, Jefferson Davis, and the world's tribute to his memory, by J. Wm. Jones",
-      "ia_licenseurl": "",
-      "titlepage_years": [
-        "1870",
-        "1886",
-        "1890",
-        "1935",
-        "2007"
-      ]
-    },
-    {
-      "identifier": "davismemorialvol00joneiala",
-      "status": "已取回",
-      "note": "",
-      "file": "davismemorialvol00joneiala.txt",
-      "source_url": "https://archive.org/download/davismemorialvol00joneiala/davismemorialvol00joneiala_djvu.txt",
-      "sha256": "b5e8d201bcc45712229f440cad175a519d83de59be951088831195d4a61bdfc4",
-      "bytes": 1765211,
-      "words": 262567,
-      "fetched_at": "2026-08-12T13:59:11",
-      "ia_date": "1890",
-      "ia_year": "",
-      "ia_publicdate": "2006-11-07 07:41:59",
-      "ia_creator": "Jones, J. William (John William), 1836-1909",
-      "ia_title": "The Davis memorial volume; or, Our dead president, Jefferson Davis, and the world's tribute to his memory, by J. Wm. Jones",
-      "ia_licenseurl": "",
-      "titlepage_years": [
-        "1822",
-        "1861",
-        "1870",
-        "1886",
-        "1890",
-        "1995",
-        "1996",
-        "1997"
       ]
     },
     {
@@ -1072,37 +999,6 @@
       "ia_title": "A summary view of the rights of British America. : Set forth in some resolutions intended for the inspection of the present delegates of the people of Virginia. Now in convention.",
       "ia_licenseurl": "",
       "titlepage_years": []
-    },
-    {
-      "identifier": "thomasjeffersonl00wils",
-      "status": "已取回",
-      "note": "",
-      "file": "thomasjeffersonl00wils.txt",
-      "source_url": "https://archive.org/download/thomasjeffersonl00wils/thomasjeffersonl00wils_djvu.txt",
-      "sha256": "5ec99d7aaab34749d3700306f19e1a0fbe1ad0c2dc30c06955821fa4b78788a6",
-      "bytes": 174207,
-      "words": 25697,
-      "fetched_at": "2026-08-12T13:59:15",
-      "ia_date": "1920",
-      "ia_year": "",
-      "ia_publicdate": "2009-05-04 14:18:11",
-      "ia_creator": "Wilson, Samuel Tyndale, 1858-1944",
-      "ia_title": "Thomas Jefferson Lamar : a memorial sketch",
-      "ia_licenseurl": "",
-      "titlepage_years": [
-        "1797",
-        "1806",
-        "1823",
-        "1824",
-        "1825",
-        "1826",
-        "1828",
-        "1829",
-        "1832",
-        "1833",
-        "1834",
-        "1836"
-      ]
     },
     {
       "identifier": "tudesconomiques00fovigoog",
@@ -2107,5 +2003,6 @@
         "1854"
       ]
     }
-  ]
+  ],
+  "★同名剔除": "4 份（见 _blocked-namesake.txt，**记录保留在那里，不是静默删**）"
 }

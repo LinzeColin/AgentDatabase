@@ -1,5 +1,5 @@
 {
-  "文件数": 78,
+  "文件数": 74,
   "阈值": 0.55,
   "重复簇": [
     [
@@ -16,10 +16,6 @@
     [
       "cu31924092892011",
       "workofjeffer03jeffuoft"
-    ],
-    [
-      "davismemorialvol00jone",
-      "davismemorialvol00joneiala"
     ],
     [
       "jeffersonthomas09lipsrich",
@@ -52,6 +48,6 @@
       "youthofjefferson00cookrich"
     ]
   ],
-  "独立文献数上界": 62,
+  "独立文献数上界": 59,
   "★口径": "min-hash Jaccard；同卷多扫描与同书不同卷需人判"
 }

@@ -1,13 +1,13 @@
 {
-  "lanes": 5,
-  "去掉纸面道后": 4,
+  "lanes": 6,
+  "去掉纸面道后": 5,
   "逐道份数": {
-    "writings": 31,
+    "writings": 30,
     "conversations": 28,
     "expression": 9,
     "decisions": 1,
-    "timeline": 0,
-    "external": 9
+    "timeline": 4,
+    "external": 2
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -48,11 +48,6 @@
       "title": "Histoire des promesses illusoires depuis la Paix des Pirenees"
     },
     {
-      "identifier": "centennialcelebr00jeff",
-      "道": "writings",
-      "title": "Centennial celebration of the town of Jefferson, Lincoln County, Maine"
-    },
-    {
       "identifier": "correspondencebe0000jeff",
       "道": "conversations",
       "title": "Correspondence between Thomas Jefferson and Pierre Samuel du Pont de N"
@@ -69,7 +64,7 @@
     },
     {
       "identifier": "cu31924028751760",
-      "道": "external",
+      "道": "timeline",
       "title": "Jefferson and his colleagues : a chronicle of the Virginia dynasty "
     },
     {
@@ -101,16 +96,6 @@
       "identifier": "cu31924092892037",
       "道": "writings",
       "title": "The works of Thomas Jefferson;"
-    },
-    {
-      "identifier": "davismemorialvol00jone",
-      "道": "external",
-      "title": "The Davis memorial volume; or, Our dead president, Jefferson Davis, an"
-    },
-    {
-      "identifier": "davismemorialvol00joneiala",
-      "道": "external",
-      "title": "The Davis memorial volume; or, Our dead president, Jefferson Davis, an"
     },
     {
       "identifier": "gpl_1600362",
@@ -218,11 +203,6 @@
       "title": "A summary view of the rights of British America. : Set forth in some r"
     },
     {
-      "identifier": "thomasjeffersonl00wils",
-      "道": "external",
-      "title": "Thomas Jefferson Lamar : a memorial sketch"
-    },
-    {
       "identifier": "tudesconomiques00fovigoog",
       "道": "writings",
       "title": "Draught of a fundamental constitution for the commonwealth of Virginia"
@@ -234,7 +214,7 @@
     },
     {
       "identifier": "virginiadynasty00johnrich",
-      "道": "external",
+      "道": "timeline",
       "title": "Jefferson and his colleagues; a chronicle of the Virginia dynasty"
     },
     {
@@ -394,12 +374,12 @@
     },
     {
       "identifier": "youthofjefferson00cookiala",
-      "道": "external",
+      "道": "timeline",
       "title": "The youth of Jefferson, or, A chronicle of college scrapes at Williams"
     },
     {
       "identifier": "youthofjefferson00cookrich",
-      "道": "external",
+      "道": "timeline",
       "title": "The youth of Jefferson, or, A chronicle of college scrapes at Williams"
     }
   ]

@@ -7,7 +7,7 @@
     "expression": 10,
     "decisions": 0,
     "timeline": 6,
-    "external": 14
+    "external": 12
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -338,11 +338,6 @@
       "title": "Rousseau and naturalism in life and thought"
     },
     {
-      "identifier": "cu31924032526596",
-      "道": "external",
-      "title": "The life of Thomas Paine; mover of the \"Declaration of independence;\" "
-    },
-    {
       "identifier": "ddiscourssurlori00rous",
       "道": "expression",
       "title": "Discours sur l'origine et les fondemens de l'inégalité parmi les homme"
@@ -436,11 +431,6 @@
       "identifier": "jjrousseaucitoy00rous",
       "道": "writings",
       "title": "J.J. Rousseau citoyen de Genève, a Mr. d'Alembert ... Sur son article "
-    },
-    {
-      "identifier": "memorial00unit",
-      "道": "external",
-      "title": "Memorial addresses on the life and character of Rousseau O. Crump (lat"
     },
     {
       "identifier": "mileoudelducatio00rous",

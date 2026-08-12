@@ -1,13 +1,13 @@
 {
-  "lanes": 5,
-  "去掉纸面道后": 4,
+  "lanes": 6,
+  "去掉纸面道后": 5,
   "逐道份数": {
     "writings": 56,
     "conversations": 4,
     "expression": 1,
     "decisions": 12,
-    "timeline": 0,
-    "external": 22
+    "timeline": 2,
+    "external": 20
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -144,7 +144,7 @@
     },
     {
       "identifier": "johnmarshalland01corwgoog",
-      "道": "external",
+      "道": "timeline",
       "title": "John Marshall and the Constitution; a chronicle of the Supreme court"
     },
     {
@@ -164,7 +164,7 @@
     },
     {
       "identifier": "johnmarshallcons00corwuoft",
-      "道": "external",
+      "道": "timeline",
       "title": "John Marshall and the Constitution : a chronicle of the Supreme Court"
     },
     {

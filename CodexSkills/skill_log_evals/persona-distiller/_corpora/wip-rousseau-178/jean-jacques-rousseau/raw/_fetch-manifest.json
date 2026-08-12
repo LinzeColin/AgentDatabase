@@ -1,7 +1,7 @@
 {
   "生成时刻": "2026-08-12T14:00:38",
   "请求数": 20,
-  "已取回": 106,
+  "已取回": 104,
   "skipped_access_restricted": 0,
   "失败": 8,
   "并发降级": "无（全程并发 4）",
@@ -1398,37 +1398,6 @@
       ]
     },
     {
-      "identifier": "cu31924032526596",
-      "status": "已取回",
-      "note": "",
-      "file": "cu31924032526596.txt",
-      "source_url": "https://archive.org/download/cu31924032526596/cu31924032526596_djvu.txt",
-      "sha256": "1bb09c57aa296a877f1d9b1351e32587ff9c0b53f8b839c21b2a88396f4e3791",
-      "bytes": 274337,
-      "words": 47260,
-      "fetched_at": "2026-08-12T13:52:43",
-      "ia_date": "1860",
-      "ia_year": "",
-      "ia_publicdate": "2009-11-17 17:15:58",
-      "ia_creator": "Blanchard, Calvin, 1808-1868",
-      "ia_title": "The life of Thomas Paine; mover of the \"Declaration of independence;\" secretary of foreign affairs under the first American Congress; members of the National convention of France: author of \"Common sense,\" \"The crisis,\" \"Rights of man,\" \"Age of reason,\" &amp;c., &amp;c.: the man, whose motto was, \"The world is my country; to do good, my religion.\" Embracing practical considerations on human rights; demonstrating that man tends irrepressibly to actual freedom; and showing a liberty-aim connection in the action of the world's three great author-heroes,--Rousseau, Paine, and Comte",
-      "ia_licenseurl": "",
-      "titlepage_years": [
-        "1737",
-        "1759",
-        "1760",
-        "1763",
-        "1768",
-        "1771",
-        "1772",
-        "1774",
-        "1854",
-        "1860",
-        "1919",
-        "1924"
-      ]
-    },
-    {
       "identifier": "ddiscourssurlori00rous",
       "status": "已取回",
       "note": "",
@@ -1897,33 +1866,6 @@
       "identifier": "lesconfessionsd04rousgoog",
       "status": "无文本层",
       "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
-    },
-    {
-      "identifier": "memorial00unit",
-      "status": "已取回",
-      "note": "",
-      "file": "memorial00unit.txt",
-      "source_url": "https://archive.org/download/memorial00unit/memorial00unit_djvu.txt",
-      "sha256": "34da19963f444ecb20eb313d00f4e9c007398e6fc24b61e3ec1b0bc2ea741ec4",
-      "bytes": 72765,
-      "words": 10911,
-      "fetched_at": "2026-08-12T13:52:54",
-      "ia_date": "1903",
-      "ia_year": "",
-      "ia_publicdate": "2008-05-14 13:25:55",
-      "ia_creator": [
-        "United States. 57th Congress, 2d session, 1902-1903. [from old catalog]",
-        "United States. Congress. Memorial addresses. [from old catalog]"
-      ],
-      "ia_title": "Memorial addresses on the life and character of Rousseau O. Crump (late a representative from Michigan), delivered in the House of representatives and Senate, Fifty-seventh Congress",
-      "ia_licenseurl": "",
-      "titlepage_years": [
-        "1842",
-        "1894",
-        "1901",
-        "1902",
-        "1903"
-      ]
     },
     {
       "identifier": "mileoudelducatio00rous",
@@ -2400,5 +2342,6 @@
         "1905"
       ]
     }
-  ]
+  ],
+  "★同名剔除": "2 份（见 _blocked-namesake.txt，记录保留）"
 }

@@ -5,19 +5,17 @@
     "独立文献": 65,
     "一手": 50,
     "需人判": 0,
-    "道": 5,
+    "道": 6,
     "逐道": {
       "writings": 56,
       "conversations": 4,
       "expression": 1,
       "decisions": 12,
-      "timeline": 0,
-      "external": 22
+      "timeline": 2,
+      "external": 20
     },
-    "判据给的档": "quick",
-    "仍空": [
-      "timeline"
-    ]
+    "判据给的档": "deep",
+    "仍空": []
   },
   {
     "人": "#174 Lincoln",
@@ -39,23 +37,21 @@
   },
   {
     "人": "#175 Jefferson",
-    "文件": 78,
-    "独立文献": 62,
-    "一手": 55,
+    "文件": 74,
+    "独立文献": 59,
+    "一手": 54,
     "需人判": 0,
-    "道": 5,
+    "道": 6,
     "逐道": {
-      "writings": 31,
+      "writings": 30,
       "conversations": 28,
       "expression": 9,
       "decisions": 1,
-      "timeline": 0,
-      "external": 9
+      "timeline": 4,
+      "external": 2
     },
-    "判据给的档": "quick",
-    "仍空": [
-      "timeline"
-    ]
+    "判据给的档": "deep",
+    "仍空": []
   },
   {
     "人": "#176 Bismarck",
@@ -98,18 +94,18 @@
   },
   {
     "人": "#178 Rousseau",
-    "文件": 106,
-    "独立文献": 106,
-    "一手": 90,
-    "需人判": 3,
+    "文件": 104,
+    "独立文献": 104,
+    "一手": 92,
+    "需人判": 0,
     "道": 5,
     "逐道": {
-      "writings": 63,
+      "writings": 62,
       "conversations": 14,
       "expression": 10,
       "decisions": 0,
       "timeline": 6,
-      "external": 13
+      "external": 12
     },
     "判据给的档": "quick",
     "仍空": [

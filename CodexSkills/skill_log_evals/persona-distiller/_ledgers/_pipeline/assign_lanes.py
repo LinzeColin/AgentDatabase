@@ -34,8 +34,15 @@
    ★ 首版真按「一律进未分道」写过，实测 **Marshall 73 份里 51 份未分道（70%）**，
      `lanes` 被压到 4 —— 那不是「他只有 4 道」，是**我的题名表太窄**。
 
-② **`external` 只由「一手/二手」分类结果决定，不看题名。**
-   否则会出现「他自己的书因为题名像评论而进了 external」这种反向错。
+② **`external` 由「二手」**且**题名不是年表类**决定。
+   —— 首版写成「二手一律进 external」，于是
+   《John Marshall and the Constitution; **a chronicle** of the Supreme court》(1919)、
+   《Jefferson and his colleagues: **a chronicle** of the Virginia dynasty》、
+   《**Calendar** of the correspondence of Thomas Jefferson》
+   全被塞进 external，而**存量口径里第三方年表正是 `timeline` 那一道**
+   （Liebig 的 timeline 装的就是大学校史 `chronikderunive00giesgoog` 与 ADB 条目）。
+   ⇒ **二手 + 年表类题名 ⇒ timeline；二手 + 其余 ⇒ external。**
+   反方向的错同样要防：他自己的书不能因为题名像评论而进 external。
 
 ★ 本工具**只按题名分**，是粗判。`check_paper_lanes.py` 会再问
   「这几道里有几道是纸面的」——**一道只有 1 份的道，多半是纸面的**，
@@ -78,10 +85,14 @@ DEFAULT_WRITINGS = r"work|works|writing|schriften|s[äa]mtliche|opere|scritti|" 
                    r"histor|geschichte|storia|critique|kritik|prolegomena|notes on"
 
 
+TIMELINE_PAT = next(p for l, p in PATTERNS if l == "timeline")
+
+
 def lane_of(title: str, is_secondary: bool) -> str:
-    if is_secondary:
-        return "external"          # ★ 只由分类结果定，不看题名
     t = (title or "").lower()
+    if is_secondary:
+        # ★ 第三方的**年表类**归 timeline，不归 external（存量口径）
+        return "timeline" if re.search(TIMELINE_PAT, t) else "external"
     for lane, pat in PATTERNS:
         if re.search(pat, t):
             return lane

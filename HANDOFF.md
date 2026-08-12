@@ -9,7 +9,7 @@
 
 ★ 授权的是**下载**，不是「什么都能下」——公有领域、不碰付费墙、
   **不绕任何访问控制**（archive.org 的 `access-restricted-item` 一律硬跳过）这几条不变。
-★ 第 1 批 10 人抓源已完成：**670 份 / 572 份独立文献 / 8,076 万词**，
+★ 第 1 批 10 人抓源与阶段 2 已完成：**775 份 / 661 份独立文献**，**6 人达 deep**（Marshall/Lincoln/Jefferson/Bismarck/Kant/Pestalozzi）、3 人 quick（Machiavelli/Rousseau/Fröbel）、**Comenius #182 够不着 quick 建议记延后**，
   见 `_ledgers/_第1批抓源完成-670份-2026-08-12.md`。
   **语料不进 git，仓里只放指针**（`_ids*.txt` + 带 sha256 的 `_fetch-manifest.json`），
   重建命令写在 `_corpora/.gitignore` 里。

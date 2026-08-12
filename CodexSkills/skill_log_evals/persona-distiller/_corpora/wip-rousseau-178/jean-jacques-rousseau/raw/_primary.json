@@ -1,12 +1,12 @@
 {
-  "总数": 106,
+  "总数": 104,
   "计数": {
     "一手": 92,
-    "二手": 14,
+    "二手": 12,
     "需人判": 0
   },
-  "一手占比下界": 0.8679,
-  "一手占比上界": 0.8679,
+  "一手占比下界": 0.8846,
+  "一手占比上界": 0.8846,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -530,14 +530,6 @@
       "words": 83041
     },
     {
-      "identifier": "cu31924032526596",
-      "档": "二手",
-      "依据": "题名含「life of」且含目标姓名",
-      "title": "The life of Thomas Paine; mover of the \"Declaration of independence;\" secretary ",
-      "creator": "Blanchard, Calvin, 1808-1868",
-      "words": 47260
-    },
-    {
       "identifier": "ddiscourssurlori00rous",
       "档": "一手",
       "依据": "目标为第一作者，题名含「discours」",
@@ -688,14 +680,6 @@
       "title": "J.J. Rousseau citoyen de Genève, a Mr. d'Alembert ... Sur son article Genève dan",
       "creator": "Rousseau, Jean-Jacques, 1712-1778; Alembert, Jean Le Rond d', 1717-1783",
       "words": 71873
-    },
-    {
-      "identifier": "memorial00unit",
-      "档": "二手",
-      "依据": "目标不在 creator 字段里",
-      "title": "Memorial addresses on the life and character of Rousseau O. Crump (late a repres",
-      "creator": "United States. 57th Congress, 2d session, 1902-1903. [from old catalog]; United ",
-      "words": 10911
     },
     {
       "identifier": "mileoudelducatio00rous",
