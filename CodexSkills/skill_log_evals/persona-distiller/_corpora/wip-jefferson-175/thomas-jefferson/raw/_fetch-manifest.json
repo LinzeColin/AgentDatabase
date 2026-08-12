@@ -24,7 +24,8 @@
       "ia_creator": "Jefferson, Thomas",
       "ia_title": "Memoirs, Correspondence and Private Papers of Thomas Jefferson, late President of the United States. 2",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "10069010bsb",
@@ -45,7 +46,8 @@
       "titlepage_years": [
         "1786",
         "1829"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "americanpolitica00jeff",
@@ -69,7 +71,9 @@
       "ia_title": "The american political classics : Jefferson, Washington and Lincoln",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1920",
+        "1920"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -92,7 +96,8 @@
       "titlepage_years": [
         "1798",
         "1861"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "annualregistervi00jeff",
@@ -120,7 +125,8 @@
         "1799",
         "1800",
         "1921"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_notes-on-the-state-of-vi_jefferson-thomas_1787",
@@ -142,7 +148,8 @@
         "1781",
         "1782",
         "1787"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_LlJBAAAAcAAJ",
@@ -164,7 +171,8 @@
       ],
       "ia_title": "Histoire des promesses illusoires depuis la Paix des Pirenees",
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "correspondencebe0000jeff",
@@ -195,6 +203,9 @@
         "1817",
         "1930",
         "1931"
+      ],
+      "digitization_years": [
+        "2025"
       ]
     },
     {
@@ -221,7 +232,8 @@
         "1869",
         "1871",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924027055718",
@@ -249,7 +261,8 @@
         "1892",
         "1899",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924028751760",
@@ -278,7 +291,8 @@
         "1905",
         "1921",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924071238426",
@@ -304,7 +318,8 @@
         "1826",
         "1853",
         "1854"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924071238442",
@@ -332,7 +347,8 @@
         "1853",
         "1854",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924071238467",
@@ -365,7 +381,8 @@
         "1809",
         "1853",
         "1854"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924092528631",
@@ -396,7 +413,8 @@
         "1774",
         "1776",
         "1777"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924092892011",
@@ -422,7 +440,8 @@
         "1781",
         "1904",
         "1997"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924092892037",
@@ -448,7 +467,8 @@
         "1787",
         "1904",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "gpl_1600362",
@@ -466,7 +486,8 @@
       "ia_creator": "Jefferson, Thomas",
       "ia_title": "The memorial of the merchants & traders of the city of Baltimore",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "historyofgreece02mitfuoft",
@@ -502,7 +523,8 @@
         "1896",
         "1905",
         "1906"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "jeffersonthomas09lipsrich",
@@ -534,7 +556,8 @@
         "1825",
         "1834",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "jeffersonthomas18lipsrich",
@@ -563,7 +586,8 @@
         "1808",
         "1853",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "jstor-1005111",
@@ -583,7 +607,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1798"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "jstor-1921491",
@@ -609,7 +634,8 @@
         "1784",
         "1796",
         "1824"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lettersaddresses00jeffiala",
@@ -637,7 +663,8 @@
         "1771",
         "1773",
         "1775"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lettersandaddres00jeffiala",
@@ -666,7 +693,8 @@
         "1773",
         "1905",
         "1908"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lettersandaddres00jeffuoft",
@@ -696,7 +724,8 @@
         "1905",
         "1907",
         "1933"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifemoralsjesusnaz00jeff",
@@ -717,7 +746,8 @@
       "titlepage_years": [
         "1803",
         "1902"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifemoralsof00jeff",
@@ -751,7 +781,8 @@
         "1886",
         "1890",
         "1895"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "manualofparliame00jeff",
@@ -772,7 +803,9 @@
       "titlepage_years": [
         "1663",
         "1840",
-        "1871",
+        "1871"
+      ],
+      "digitization_years": [
         "2011"
       ]
     },
@@ -804,7 +837,8 @@
         "1821",
         "1823",
         "1907"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "masterthoughtst00jeffgoog",
@@ -832,7 +866,8 @@
         "1823",
         "1880",
         "1907"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "memoircorrespond16781gut",
@@ -863,7 +898,8 @@
         "1769",
         "1772",
         "1773"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "memoirscorrespo00jeffgoog",
@@ -885,7 +921,8 @@
         "1774",
         "1790",
         "1829"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "memoirscorrespo01jeffgoog",
@@ -907,7 +944,8 @@
         "1786",
         "1790",
         "1829"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "notesonstateofvir00jeff",
@@ -933,7 +971,8 @@
         "1801",
         "1832",
         "1916"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "notesonstateofvirg00jeff",
@@ -955,7 +994,9 @@
         "1735",
         "1763",
         "1782",
-        "1801",
+        "1801"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -980,7 +1021,8 @@
         "1776",
         "1789",
         "1843"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "summaryviewofrig00jeff_1",
@@ -998,7 +1040,8 @@
       "ia_creator": "Jefferson, Thomas, 1743-1826",
       "ia_title": "A summary view of the rights of British America. : Set forth in some resolutions intended for the inspection of the present delegates of the people of Virginia. Now in convention.",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "tudesconomiques00fovigoog",
@@ -1026,7 +1069,8 @@
         "1882",
         "1885",
         "1912"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "version-final-de-la-declaracion-de-la-independencia",
@@ -1044,7 +1088,8 @@
       "ia_creator": "Jefferson Thomas (1743-1826)",
       "ia_title": "Versión Final De La Declaración De La Independencia",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "virginiadynasty00johnrich",
@@ -1069,7 +1114,8 @@
         "1803",
         "1807",
         "1921"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "virginiakentucky00jeff",
@@ -1094,7 +1140,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1798"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "workofjeffer02jeffuoft",
@@ -1125,7 +1172,8 @@
         "1777",
         "1805",
         "1904"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "workofjeffer03jeffuoft",
@@ -1150,7 +1198,8 @@
         "1780",
         "1781",
         "1904"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "workofjeffer07jeffuoft",
@@ -1176,7 +1225,8 @@
         "1793",
         "1816",
         "1904"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "worksofjefferson02jeffuoft",
@@ -1205,7 +1255,8 @@
         "1853",
         "1861",
         "1980"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "worksofjefferson06jeffuoft",
@@ -1232,7 +1283,8 @@
         "1826",
         "1853",
         "1861"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "worksofjefferson07jeffuoft",
@@ -1259,7 +1311,8 @@
         "1826",
         "1853",
         "1861"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "worksofjefferson09jeffuoft",
@@ -1289,7 +1342,8 @@
         "1788",
         "1800",
         "1861"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "worksthomasjeff01fordgoog",
@@ -1315,7 +1369,8 @@
         "1799",
         "1800",
         "1905"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsbeinghis06jeffuoft",
@@ -1342,7 +1397,8 @@
         "1826",
         "1853",
         "1854"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsbeinghis07jeffuoft",
@@ -1368,7 +1424,8 @@
         "1826",
         "1853",
         "1854"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingslibrary03jeff",
@@ -1397,7 +1454,9 @@
         "1807",
         "1809",
         "1816",
-        "1903",
+        "1903"
+      ],
+      "digitization_years": [
         "2009"
       ]
     },
@@ -1430,7 +1489,8 @@
         "1825",
         "1853",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingslibrarye01jeffuoft",
@@ -1461,7 +1521,8 @@
         "1784",
         "1785",
         "1898"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingslibrarye02jeffuoft",
@@ -1489,7 +1550,8 @@
         "1853",
         "1898",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingslibrarye05jeffuoft",
@@ -1516,7 +1578,8 @@
         "1853",
         "1902",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingslibrarye07jeffuoft",
@@ -1546,7 +1609,8 @@
         "1784",
         "1853",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingslibrarye10jeffuoft",
@@ -1576,7 +1640,8 @@
         "1786",
         "1853",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingslibrarye13jeffuoft",
@@ -1611,7 +1676,8 @@
         "1801",
         "1820",
         "1821"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingslibrarye16jeffuoft",
@@ -1636,7 +1702,8 @@
       "titlepage_years": [
         "1853",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsoft04jeffiala",
@@ -1663,7 +1730,8 @@
         "1786",
         "1787",
         "1894"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsoft06jeffiala",
@@ -1692,7 +1760,8 @@
         "1857",
         "1984",
         "1990"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsoft09jeffiala",
@@ -1723,7 +1792,8 @@
         "1800",
         "1853",
         "1857"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsofthom02jeff",
@@ -1751,7 +1821,8 @@
         "1779",
         "1781",
         "1893"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsofthoma09jeff",
@@ -1778,7 +1849,8 @@
         "1800",
         "1853",
         "1854"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsofthomas0000vari_j3j9",
@@ -1798,7 +1870,9 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1853",
-        "1903",
+        "1903"
+      ],
+      "digitization_years": [
         "2026"
       ]
     },
@@ -1826,7 +1900,8 @@
         "1826",
         "1853",
         "1857"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsthomas13jeffrich",
@@ -1863,7 +1938,8 @@
         "1776",
         "1777",
         "1778"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsthomas17jeffrich",
@@ -1895,7 +1971,8 @@
         "1853",
         "1905",
         "1907"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsthomasj00editgoog",
@@ -1924,7 +2001,8 @@
         "1821",
         "1848",
         "1853"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsthomasj00washgoog",
@@ -1946,7 +2024,8 @@
         "1790",
         "1853",
         "1854"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "yhm-spe-rob-aa03a",
@@ -1977,7 +2056,8 @@
         "1835",
         "1843",
         "1854"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "youthofjefferson00cookrich",
@@ -2001,7 +2081,8 @@
       "titlepage_years": [
         "1764",
         "1854"
-      ]
+      ],
+      "digitization_years": []
     }
   ],
   "★同名剔除": "4 份（见 _blocked-namesake.txt，**记录保留在那里，不是静默删**）"

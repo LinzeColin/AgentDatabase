@@ -28,7 +28,8 @@
         "1856",
         "1862",
         "1923"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "LapsleyLincWritsLincDoug1",
@@ -50,7 +51,8 @@
         "1854",
         "1858",
         "1923"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "LincLastSpeech2",
@@ -73,7 +75,8 @@
         "1856",
         "1858",
         "1859"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "anecdotesofabrah03linc",
@@ -95,7 +98,9 @@
       "ia_title": "Anecdotes of Abraham Lincoln and Lincoln's stories : including early life stories, professional life stories, White House stories, war stories, miscellaneous stories",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1879",
+        "1879"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -123,7 +128,9 @@
         "1858",
         "1894",
         "1898",
-        "1911",
+        "1911"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -150,7 +157,8 @@
         "1865",
         "1905",
         "2006"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworksab09fishgoog",
@@ -177,7 +185,8 @@
       "titlepage_years": [
         "1809",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworksab11fishgoog",
@@ -203,7 +212,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworkscov1linc",
@@ -232,7 +242,8 @@
         "1893",
         "1894",
         "1915"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworkso2127linc",
@@ -259,7 +270,9 @@
       "titlepage_years": [
         "1861",
         "1864",
-        "1905",
+        "1905"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -288,7 +301,9 @@
       "titlepage_years": [
         "1809",
         "1894",
-        "1903",
+        "1903"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -321,7 +336,9 @@
         "1859",
         "1861",
         "1895",
-        "1904",
+        "1904"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -351,7 +368,9 @@
         "1832",
         "1854",
         "1861",
-        "1896",
+        "1896"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -380,7 +399,9 @@
       "titlepage_years": [
         "1809",
         "1858",
-        "1894",
+        "1894"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -408,7 +429,9 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1809",
-        "1903",
+        "1903"
+      ],
+      "digitization_years": [
         "2008"
       ]
     },
@@ -440,7 +463,8 @@
         "1861",
         "1894",
         "1905"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworksofa08linco",
@@ -469,7 +493,8 @@
         "1865",
         "1894",
         "1905"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworksofa09linc",
@@ -497,7 +522,8 @@
         "1861",
         "1862",
         "1878"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworksofa11linco",
@@ -523,7 +549,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1865"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworksofa13linc",
@@ -554,7 +581,8 @@
         "1787",
         "1866",
         "1894"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworksofa16linc",
@@ -591,7 +619,8 @@
         "1864",
         "1865",
         "1894"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworksofav12linc",
@@ -628,6 +657,9 @@
         "1864",
         "1865",
         "1894"
+      ],
+      "digitization_years": [
+        "2012"
       ]
     },
     {
@@ -657,7 +689,8 @@
         "1894",
         "1901",
         "1904"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworksofv3linc",
@@ -692,7 +725,8 @@
         "1895",
         "1904",
         "1905"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworksofv4linc",
@@ -718,7 +752,9 @@
       "titlepage_years": [
         "1809",
         "1894",
-        "1903",
+        "1903"
+      ],
+      "digitization_years": [
         "2012"
       ]
     },
@@ -747,7 +783,8 @@
         "1858",
         "1861",
         "1894"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworksov9linc",
@@ -775,7 +812,8 @@
         "1864",
         "1865",
         "1894"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "completeworkv1linc",
@@ -803,7 +841,9 @@
         "1863",
         "1893",
         "1901",
-        "1904",
+        "1904"
+      ],
+      "digitization_years": [
         "2012"
       ]
     },
@@ -831,7 +871,9 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1864",
-        "1865",
+        "1865"
+      ],
+      "digitization_years": [
         "2012"
       ]
     },
@@ -860,7 +902,9 @@
       "titlepage_years": [
         "1809",
         "1894",
-        "1903",
+        "1903"
+      ],
+      "digitization_years": [
         "2012"
       ]
     },
@@ -887,7 +931,9 @@
       "ia_title": "Complete works of Abraham Lincoln",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1865",
+        "1865"
+      ],
+      "digitization_years": [
         "2012"
       ]
     },
@@ -917,7 +963,9 @@
         "1863",
         "1893",
         "1901",
-        "1904",
+        "1904"
+      ],
+      "digitization_years": [
         "2012"
       ]
     },
@@ -948,7 +996,9 @@
         "1787",
         "1861",
         "1894",
-        "1902",
+        "1902"
+      ],
+      "digitization_years": [
         "2012"
       ]
     },
@@ -978,7 +1028,9 @@
         "1809",
         "1894",
         "1903",
-        "1905",
+        "1905"
+      ],
+      "digitization_years": [
         "2012"
       ]
     },
@@ -1002,7 +1054,8 @@
       ],
       "ia_title": "The cross of Gettysburg : Lincoln's immortal address in cruciform arrangement",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1031,7 +1084,8 @@
         "1894",
         "1902",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "earlyspeechesofa1858linc",
@@ -1057,7 +1111,8 @@
         "1858",
         "1860",
         "1928"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "earlyspeechesofatslinc",
@@ -1088,7 +1143,8 @@
         "1858",
         "1860",
         "1927"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "earlyspeechesspr00linc",
@@ -1110,7 +1166,8 @@
         "1848",
         "1856",
         "1894"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "emancipationproc00linc",
@@ -1128,7 +1185,8 @@
       "ia_creator": "Lincoln, Abraham, 1809-1865",
       "ia_title": "Emancipation proclamation of January 1st, 1864 [sic]",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1156,7 +1214,8 @@
         "1861",
         "1863",
         "1909"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "firstsecondinaug02link",
@@ -1181,7 +1240,8 @@
         "1787",
         "1861",
         "1909"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "gemsfromabrahaml00linc",
@@ -1207,7 +1267,9 @@
         "1840",
         "1861",
         "1862",
-        "1865",
+        "1865"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1230,7 +1292,8 @@
       ],
       "ia_title": "General orders. No. 1. War department, adjutant general's office, Washington, January 2, 1863. The following proclamation by the President is published for the information and government of the army and all concerned: By the President of the United States of America. A proclamation",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "gettysburgaddres02linc",
@@ -1251,7 +1314,8 @@
       "titlepage_years": [
         "1808",
         "1908"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "gettysburghspeech00lincrich",
@@ -1276,7 +1340,8 @@
       "titlepage_years": [
         "1871",
         "1899"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "gettysburgspeec3835linc",
@@ -1302,7 +1367,8 @@
         "1864",
         "1871",
         "1888"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "inauguraladdress00linc",
@@ -1325,7 +1391,9 @@
         "1776",
         "1778",
         "1787",
-        "1861",
+        "1861"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1352,7 +1420,8 @@
       "titlepage_years": [
         "1836",
         "2020"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "insurgentprivate00linc",
@@ -1375,7 +1444,9 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1861",
-        "1862",
+        "1862"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1401,7 +1472,8 @@
         "1861",
         "1864",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lettersaddresses00inlinc",
@@ -1423,7 +1495,9 @@
         "1832",
         "1836",
         "1837",
-        "1908",
+        "1908"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1448,7 +1522,8 @@
         "1836",
         "1837",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lettersaddresses02linc",
@@ -1473,7 +1548,9 @@
         "1903",
         "1904",
         "1905",
-        "1907",
+        "1907"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1510,7 +1587,8 @@
         "1848",
         "1849",
         "1850"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeworks03lincuoft",
@@ -1544,7 +1622,8 @@
         "1858",
         "1865",
         "1907"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeworksofab1136linc",
@@ -1580,6 +1659,9 @@
         "1848",
         "1849",
         "1850"
+      ],
+      "digitization_years": [
+        "2010"
       ]
     },
     {
@@ -1614,7 +1696,9 @@
         "1857",
         "1858",
         "1865",
-        "1907",
+        "1907"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1648,7 +1732,8 @@
         "1862",
         "1872",
         "1922"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lincstoriesspeech00lincrich",
@@ -1682,7 +1767,8 @@
         "1836",
         "1837",
         "1842"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingslincoln04lincrich",
@@ -1710,7 +1796,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1858"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingslincoln05lincrich",
@@ -1741,7 +1828,8 @@
         "1860",
         "1861",
         "1906"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsofabraha0000linc",
@@ -1762,7 +1850,9 @@
       "titlepage_years": [
         "1856",
         "1862",
-        "1888",
+        "1888"
+      ],
+      "digitization_years": [
         "2019"
       ]
     },
@@ -1783,7 +1873,9 @@
       "ia_title": "The writings of Abraham Lincoln",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1858",
+        "1858"
+      ],
+      "digitization_years": [
         "2019"
       ]
     },
@@ -1808,7 +1900,9 @@
         "1859",
         "1861",
         "1862",
-        "1906",
+        "1906"
+      ],
+      "digitization_years": [
         "2019"
       ]
     },
@@ -1847,7 +1941,8 @@
         "1852",
         "1853",
         "1854"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsofabraha03lincuoft",
@@ -1876,7 +1971,8 @@
         "1858",
         "1901",
         "1905"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsofabraha05lincuoft",
@@ -1905,7 +2001,8 @@
         "1859",
         "1862",
         "1906"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsofabraha07lincuoft",
@@ -1935,7 +2032,8 @@
         "1865",
         "1901",
         "1906"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "wsb18f36_images",
@@ -1956,7 +2054,8 @@
       "titlepage_years": [
         "1863",
         "1865"
-      ]
+      ],
+      "digitization_years": []
     }
   ]
 }

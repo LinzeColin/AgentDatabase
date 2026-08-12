@@ -24,7 +24,8 @@
       "ia_creator": "Marshall, John, 1755-1835",
       "ia_title": "A history of the colonies planted by the English on the continent of North America, from their settlement to the commencement of that war which terminated in their independence",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "ahm3974.0001.001.umich.edu",
@@ -48,7 +49,8 @@
         "1865",
         "1901",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_speech-of-the-hon-john-_marshall-john-chief-ju_1800",
@@ -69,7 +71,8 @@
       "titlepage_years": [
         "1580",
         "1793"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_F4c8AAAAIAAJ",
@@ -92,7 +95,8 @@
         "1901",
         "1903",
         "1909"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_QSAFAAAAYAAJ",
@@ -119,7 +123,8 @@
         "1749",
         "1753",
         "1836"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bwb_S0-BPV-382_2",
@@ -140,7 +145,9 @@
       "titlepage_years": [
         "1789",
         "1801",
-        "1916",
+        "1916"
+      ],
+      "digitization_years": [
         "2025"
       ]
     },
@@ -165,7 +172,8 @@
         "1801",
         "1916",
         "1968"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "centennialanniv00schogoog",
@@ -190,7 +198,9 @@
       "ia_title": "The centennial anniversary of the elevation of John Marshall to the office of chief justice of the Supreme court of the United States of America, Monday, February fourth, 1901; celebration in the city of Philadelphia under the auspices of the Law association of Philadelphia, the Lawyers' club of Philadelphia, the Pennsylvania bar association, the Law school of the University of Pennsylvania",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1880",
+        "1880"
+      ],
+      "digitization_years": [
         "1900",
         "1901"
       ]
@@ -219,7 +229,9 @@
         "1861",
         "1865",
         "1901",
-        "1903",
+        "1903"
+      ],
+      "digitization_years": [
         "2007"
       ]
     },
@@ -250,7 +262,8 @@
         "1901",
         "1903",
         "1905"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "constitutionalde01marsuoft",
@@ -284,6 +297,9 @@
         "1801",
         "1835",
         "1901"
+      ],
+      "digitization_years": [
+        "2007"
       ]
     },
     {
@@ -311,7 +327,9 @@
         "1775",
         "1823",
         "1875",
-        "1905",
+        "1905"
+      ],
+      "digitization_years": [
         "2007"
       ]
     },
@@ -339,7 +357,8 @@
         "1801",
         "1891",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924020889543",
@@ -367,7 +386,8 @@
         "1901",
         "1903",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924024323069",
@@ -395,7 +415,8 @@
         "1901",
         "1903",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924032751632",
@@ -424,7 +445,8 @@
         "1908",
         "1914",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924052204165",
@@ -450,7 +472,8 @@
         "1788",
         "1916",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924052204173",
@@ -472,7 +495,8 @@
         "1789",
         "1801",
         "1916"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924052204207",
@@ -496,7 +520,8 @@
         "1788",
         "1801",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924059112304",
@@ -519,7 +544,8 @@
         "1801",
         "1916",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924059112312",
@@ -544,7 +570,8 @@
         "1802",
         "1815",
         "1919"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924059112320",
@@ -571,7 +598,8 @@
         "1919",
         "1924",
         "1956"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "eulogyonlifechar00binn",
@@ -591,7 +619,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1835"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "historyofcolonie00mars",
@@ -615,7 +644,8 @@
         "1758",
         "1759",
         "1824"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "historyofcolonie01mars",
@@ -639,7 +669,8 @@
         "1758",
         "1759",
         "1824"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "india.history.resource.17702",
@@ -662,7 +693,8 @@
         "1783",
         "1807",
         "2015"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johnmarshalland01corwgoog",
@@ -682,7 +714,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1919"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johnmarshallcom00dillgoog",
@@ -705,7 +738,9 @@
         "1861",
         "1866",
         "1901",
-        "1903",
+        "1903"
+      ],
+      "digitization_years": [
         "1908"
       ]
     },
@@ -735,7 +770,8 @@
         "1866",
         "1901",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johnmarshallcom01marsgoog",
@@ -762,7 +798,8 @@
         "1865",
         "1901",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johnmarshallcons00corwuoft",
@@ -785,7 +822,8 @@
         "1781",
         "1787",
         "1919"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johnmarshalllif03dillgoog",
@@ -812,7 +850,8 @@
         "1898",
         "1901",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johnmarshalllif04dillgoog",
@@ -841,7 +880,8 @@
         "1901",
         "1903",
         "1908"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johnmarshalllif07dillgoog",
@@ -868,7 +908,8 @@
         "1901",
         "1903",
         "1909"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johnmarshalllife01dillrich",
@@ -896,7 +937,8 @@
         "1831",
         "1901",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johnmarshalllife02dilluoft",
@@ -923,7 +965,8 @@
         "1893",
         "1901",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johnmarshallnewintro00marsrich",
@@ -957,7 +1000,8 @@
         "1807",
         "1828",
         "1865"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi00marsgoog",
@@ -977,7 +1021,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1804"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi00washgoog",
@@ -998,7 +1043,8 @@
       "titlepage_years": [
         "1781",
         "1832"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi01marsgoog",
@@ -1021,7 +1067,8 @@
         "1732",
         "1753",
         "1804"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi01washgoog",
@@ -1047,7 +1094,8 @@
         "1743",
         "1749",
         "1832"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi02marsgoog",
@@ -1073,7 +1121,8 @@
         "1657",
         "1732",
         "1804"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi02washgoog",
@@ -1093,7 +1142,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1793"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi03marsgoog",
@@ -1115,7 +1165,8 @@
         "1776",
         "1793",
         "1807"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi03washgoog",
@@ -1135,7 +1186,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1753"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi04washgoog",
@@ -1153,7 +1205,8 @@
       "ia_creator": "Marshall, John, 1755-1835",
       "ia_title": "The life of George Washington, commander in chief of the American forces, during the war which established the independence of his country, and first President of the United States. Compiled under the under the inspection of the Honourable Bushrod Washington, from original papers bequeathed to him by his deceased relative",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi05washgoog",
@@ -1178,7 +1231,8 @@
         "1732",
         "1743",
         "1930"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi06washgoog",
@@ -1203,7 +1257,8 @@
         "1732",
         "1743",
         "1836"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi07washgoog",
@@ -1221,7 +1276,8 @@
       "ia_creator": "Marshall, John, 1755-1835",
       "ia_title": "The life of George Washington,: Commander in Chief of the American forces, during the war which established the independence of his country, and the first president of the United States. Compiled under the inspection of the Honourable Bushrod Washington, from original papers ... to which is prefixed an introduction, containing a compendious view of the colonies planted by the English on the continent of North America, from their settlement to the commencement of that war which terminated in their independence",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "lifegeorgewashi08washgoog",
@@ -1239,7 +1295,8 @@
       "ia_creator": "Marshall, John, 1755-1835",
       "ia_title": "The life of George Washington : commander in chief of the American forces during the war which established the independence of his country, and first President of the United States. Compiled under the inspection of the Hon. Bushrod Washington from original papers ... to which is prefixed, an introduction containing a compendious view of the colonies planted by the English on the continent of North America",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "lifeof01georgewashmars",
@@ -1261,7 +1318,8 @@
         "1622",
         "1804",
         "1926"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeof03georgewashmars",
@@ -1282,7 +1340,9 @@
       "titlepage_years": [
         "1778",
         "1795",
-        "1926",
+        "1926"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1308,7 +1368,8 @@
         "1793",
         "1852",
         "1926"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgew02marsiala",
@@ -1331,7 +1392,8 @@
         "1732",
         "1753",
         "1804"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash0000mars",
@@ -1355,7 +1417,9 @@
         "1730",
         "1732",
         "1743",
-        "1753",
+        "1753"
+      ],
+      "digitization_years": [
         "2019"
       ]
     },
@@ -1376,7 +1440,9 @@
       "ia_title": "The life of George Washington : commander in chief of the American forces, during the war which established the Independence of his Country, and first President of the United States; compiled under the inspection of the Honourable Bushrod Washington, from original papers bequeathed to hi by his deceased relative",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1781",
+        "1781"
+      ],
+      "digitization_years": [
         "2019"
       ]
     },
@@ -1402,7 +1468,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1805"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash002mars",
@@ -1429,7 +1496,8 @@
         "1732",
         "1753",
         "1805"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash003mars",
@@ -1453,7 +1521,9 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1776",
-        "1805",
+        "1805"
+      ],
+      "digitization_years": [
         "2012"
       ]
     },
@@ -1481,7 +1551,8 @@
         "1779",
         "1781",
         "1805"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash005mars",
@@ -1508,7 +1579,8 @@
         "1787",
         "1793",
         "1807"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash00mars",
@@ -1530,7 +1602,8 @@
         "1804",
         "1838",
         "1950"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash00marsuoft",
@@ -1554,7 +1627,8 @@
         "1839",
         "1840",
         "1844"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash01mars2",
@@ -1581,7 +1655,8 @@
         "1749",
         "1753",
         "1930"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash01mars_0",
@@ -1609,7 +1684,9 @@
         "1751",
         "1753",
         "1780",
-        "1840",
+        "1840"
+      ],
+      "digitization_years": [
         "2023"
       ]
     },
@@ -1638,7 +1715,8 @@
         "1832",
         "1848",
         "1929"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash01marsiala",
@@ -1667,7 +1745,8 @@
         "1743",
         "1753",
         "1840"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash01marsuoft",
@@ -1692,7 +1771,8 @@
         "1732",
         "1743",
         "1832"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash02mars",
@@ -1715,7 +1795,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1804"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash02mars_0",
@@ -1736,7 +1817,8 @@
       "titlepage_years": [
         "1781",
         "1840"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash02mars_1",
@@ -1756,7 +1838,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1781"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash02marsiala",
@@ -1780,7 +1863,8 @@
       "titlepage_years": [
         "1781",
         "1840"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash02marsuoft",
@@ -1801,7 +1885,8 @@
       "titlepage_years": [
         "1781",
         "1832"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash04marsiala",
@@ -1823,7 +1908,8 @@
         "1779",
         "1781",
         "1805"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash05marsiala",
@@ -1846,7 +1932,8 @@
         "1783",
         "1793",
         "1807"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash06mars",
@@ -1869,7 +1956,8 @@
         "1830",
         "1838",
         "1839"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash1860mars",
@@ -1895,7 +1983,8 @@
         "1804",
         "1839",
         "1860"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lifeofgeorgewash1926mars",
@@ -1918,7 +2007,9 @@
         "1792",
         "1793",
         "1852",
-        "1926",
+        "1926"
+      ],
+      "digitization_years": [
         "2011"
       ]
     },
@@ -1944,7 +2035,8 @@
         "1818",
         "1819",
         "1835"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "marshallchiefjust00marsrich",
@@ -1976,7 +2068,8 @@
         "1836",
         "1908",
         "1914"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "opinionofthesupr29513gut",
@@ -2007,7 +2100,8 @@
         "1817",
         "1819",
         "1831"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "opinionsoflatech00mars",
@@ -2028,7 +2122,8 @@
       "titlepage_years": [
         "1833",
         "1840"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "plantedcolonies00marsrich",
@@ -2055,7 +2150,8 @@
         "1758",
         "1759",
         "1824"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "politicalandeco02ostegoog",
@@ -2083,7 +2179,8 @@
         "1908",
         "1914",
         "1932"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "politicaleconomi00mars",
@@ -2114,7 +2211,9 @@
         "1795",
         "1836",
         "1908",
-        "1914",
+        "1914"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -2148,7 +2247,8 @@
         "1836",
         "1908",
         "1914"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "proceedingsloui00assogoog",
@@ -2171,7 +2271,8 @@
         "1801",
         "1835",
         "1901"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "proceedingsofbar00unit",
@@ -2190,7 +2291,9 @@
       "ia_title": "Proceedings of the Bar and Officers of the Supreme Court of the United States in memory of John Marshall Harlan, December 16, 1911",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1911",
+        "1911"
+      ],
+      "digitization_years": [
         "2014"
       ]
     },
@@ -2214,7 +2317,8 @@
         "1804",
         "1926",
         "2006"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "thelifeofgeorgew18592gut",
@@ -2243,7 +2347,8 @@
         "1754",
         "1926",
         "2006"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "thelifeofgeorgew18593gut",
@@ -2267,7 +2372,8 @@
         "1795",
         "1926",
         "2006"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "thelifeofgeorgew18594gut",
@@ -2289,7 +2395,8 @@
         "1781",
         "1926",
         "2006"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "thelifeofgeorgew18595gut",
@@ -2314,7 +2421,8 @@
         "1852",
         "1926",
         "2006"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "thelifeofgeorgew28859gut",
@@ -2345,7 +2453,8 @@
         "1759",
         "1835",
         "2009"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "writingsjohnmar01marsgoog",
@@ -2369,7 +2478,8 @@
         "1811",
         "1816",
         "1839"
-      ]
+      ],
+      "digitization_years": []
     }
   ]
 }

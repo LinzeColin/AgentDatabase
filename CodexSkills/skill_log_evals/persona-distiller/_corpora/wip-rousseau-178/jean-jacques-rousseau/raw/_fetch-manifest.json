@@ -27,7 +27,8 @@
       "titlepage_years": [
         "1756",
         "1790"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10097325bsb",
@@ -48,7 +49,8 @@
       "titlepage_years": [
         "1752",
         "1938"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10599347bsb",
@@ -68,7 +70,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1822"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10713049bsb",
@@ -91,7 +94,8 @@
         "1788",
         "1794",
         "1803"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10762426bsb",
@@ -111,7 +115,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1789"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10762427bsb",
@@ -131,7 +136,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1790"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10764054bsb",
@@ -151,7 +157,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1762"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11258220bsb",
@@ -169,7 +176,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "Mélanges. 1",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "11718256bsb",
@@ -189,7 +197,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1826"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11918930bsb",
@@ -207,7 +216,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "Die Neue Heloise oder Briefe zweyer Liebenden, aus einer kleinen Stadt am Fusse der Alpen. 5",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "11919281bsb",
@@ -225,7 +235,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "Oeuvres complettes. 27",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "11919322bsb",
@@ -246,7 +257,8 @@
       "titlepage_years": [
         "1788",
         "1804"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "1766jjacquesrous00rous",
@@ -264,7 +276,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "J. Jacques Rousseau, citoyen de Généve, a Christophe de Beaumont, Archevêque de Paris ... Avec sa lettre au Conseil de Généve",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -289,7 +302,8 @@
       ],
       "ia_title": "Collection complete des oeuvres de J.J. Rousseau, citoyen de Geneve",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -314,7 +328,8 @@
       ],
       "ia_title": "Collection complete des oeuvres de J.J. Rousseau, citoyen de Geneve",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "1791emileoudel02rous",
@@ -332,7 +347,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Emile; ou, De l'éducation",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -352,7 +368,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Emile; ou, De l'éducation",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -374,7 +391,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1801"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "1911lettresind00rous",
@@ -411,6 +429,9 @@
         "1771",
         "1772",
         "1778"
+      ],
+      "digitization_years": [
+        "2010"
       ]
     },
     {
@@ -429,7 +450,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Emilius and Sophia; or, A new system of education",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "A029103",
@@ -451,7 +473,8 @@
       ],
       "ia_title": "Contrat Social, ou Principes du droit politique : avec les considérations sur le Gouvernement de Pologne, et sur sa réformation projectée",
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "BIUSante_07891x01",
@@ -472,7 +495,8 @@
       "titlepage_years": [
         "1712",
         "1719"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "Emile2livresIvEtV",
@@ -503,7 +527,8 @@
       ],
       "ia_title": "J.J. Rousseau citoyen de Genève dans le VIIme. volume de l'Encyclopédie, et particulierement, sur le projet d'établir un thétre de comédie en cette ville",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -526,7 +551,8 @@
       ],
       "ia_title": "J.J. Rousseau citoyen de Genève, a Mr. d'Alembert ... Sur son article Genève dans le VIIme. volume de l'Encyclopédie, et particulierement, sur le projet d'établir un théatre de comédie en cette ville",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -547,7 +573,9 @@
       "ia_title": "Émile, ou De l'éducation",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1926",
+        "1926"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -567,7 +595,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Émile, ou De l'éducation",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -587,7 +616,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Émile, ou De l'éducation",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -607,7 +637,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Émile, ou De l'éducation",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -632,7 +663,8 @@
       ],
       "ia_title": "Avis aux gens de lettres",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bekenntnisseunv00hardgoog",
@@ -654,7 +686,8 @@
         "1736",
         "1750",
         "1752"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_a-dialogue-between-a-man_rousseau-jean-jacques_1761",
@@ -672,7 +705,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "A dialogue between a man of letters and Mr. J. J. Rousseau, on the subject of romances. Published since his Eloisa, and intended as a preface to that work. Translated from the French.  1761",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_an-inquiry-into-the-natu_rousseau-jean-jacques_1791_0",
@@ -690,7 +724,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "An inquiry into the nature of the social contract; or principles of political right. Translated from the French of John James Rousseau.  1791",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_anecdotes-of-the-last-tw_corancez-olivier-de_1798",
@@ -710,7 +745,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1798"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1787",
@@ -730,7 +766,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1782"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1796",
@@ -748,7 +785,8 @@
       "ia_creator": "Rousseau, Jean-Jacques.",
       "ia_title": "[Botanique. English]. Letters on the elements of botany, addressed to a lady, by the celebrated J. J. Rousseau. Translated into English, with notes, and twenty-four additional letters, fully explaining the system of Linnæus, by Thomas Martyn, ...  1796",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_considrations-sur-le-go_rousseau-jean-jacques_1782",
@@ -766,7 +804,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "Considérations sur le gouvernement de Pologne, et sur sa réformation projettée. Par J. J. Rousseau.  1782",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782",
@@ -784,7 +823,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "Discours sur l'origine et les fondemens de l'inégalité parmi les hommes, par J.J. Rousseau, ...  1782",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782_0",
@@ -802,7 +842,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "Discours sur l'origine et les fondemens de l'inégalité parmi les hommes, par J. J. Rousseau, ...  1782",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_1",
@@ -820,7 +861,8 @@
       "ia_creator": "Rousseau, Jean Jacques",
       "ia_title": "Eloisa: ...  1784: Vol 1",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_2",
@@ -838,7 +880,8 @@
       "ia_creator": "Rousseau, Jean Jacques",
       "ia_title": "Eloisa: ...  1784: Vol 2",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_1",
@@ -856,7 +899,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "Eloisa: or, a series of original letters collected and published by J. J. Rousseau. Translated from the French. In four volumes. ...  1761: Vol 1",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_3_0",
@@ -874,7 +918,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "Eloisa: or, a series of original letters collected and published by J. J. Rousseau. Translated from the French. In four volumes. ...  1761: Vol 3",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1764_1",
@@ -892,7 +937,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "Eloisa: or, a series of original letters collected and published by J. J. Rousseau. Translated from the French. In four volumes. ...  1764: Vol 1",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-o_rousseau-jean-jacques_1769_1",
@@ -912,7 +958,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1509"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_emile-english-emilius_rousseau-jean-jacques_1767_3",
@@ -930,7 +977,8 @@
       "ia_creator": "Rousseau, Jean Jacques",
       "ia_title": "[Emile. English] Emilius and Sophia: or, a new system of education. Translated from the French of Mr. J. J. Rousseau. By the translator of Eloisa. In four volumes. - A new edition.  1767: Vol 3",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_emilius-and-sophia-or-_rousseau-jean-jacques_1783",
@@ -948,7 +996,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "Emilius and Sophia; or, a new system of education. Translated from the French of Mr. J. J. Rousseau, ... By the translator of Eloisa.  1783",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_3DbL7IDH2jIC",
@@ -966,7 +1015,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Petits chefs-d'oeuvre",
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_OXcpAAAAYAAJ",
@@ -994,7 +1044,8 @@
         "1880",
         "1896",
         "1905"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_yN1MAAAAcAAJ",
@@ -1018,7 +1069,8 @@
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
       "titlepage_years": [
         "1789"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_zN1MAAAAcAAJ",
@@ -1042,7 +1094,8 @@
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
       "titlepage_years": [
         "1789"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "ceuvrescomplete00troigoog",
@@ -1065,7 +1118,8 @@
         "1733",
         "1772",
         "1863"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "chepfl-lipr-AXA226",
@@ -1083,7 +1137,8 @@
       "ia_creator": "Rousseau, Jean-Jacques",
       "ia_title": "Projet concernant de nouveaux signes pour la musique",
       "ia_licenseurl": "Public Domain Mark 1.0",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "collectioncompl31rousgoog",
@@ -1103,7 +1158,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1902"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "collectioncompl41rousgoog",
@@ -1121,7 +1177,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Collection complette des oeuvres de J.J. Rousseau",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "collectioncompl76rousgoog",
@@ -1139,7 +1196,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Collection complete des œuvres de J.J. Rousseau",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "collectioncompl78rousgoog",
@@ -1159,7 +1217,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1755"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "confessionsjean06rousgoog",
@@ -1185,7 +1244,8 @@
       "titlepage_years": [
         "1903",
         "2004"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "confessionsofjjr03905gut",
@@ -1208,7 +1268,8 @@
         "1741",
         "1903",
         "2004"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "confessionsofjjr03906gut",
@@ -1230,7 +1291,8 @@
         "1764",
         "1903",
         "2004"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "confessionsofjjr03912gut",
@@ -1251,7 +1313,8 @@
       "titlepage_years": [
         "1903",
         "2004"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "confessionsofjjr03913gut",
@@ -1280,7 +1343,8 @@
         "1896",
         "1903",
         "2006"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "contratsocialou00rous",
@@ -1299,7 +1363,9 @@
       "ia_title": "Contrat social, ou, Principes du droit politique, précédé de discours, Lettre a d'Alembert sur les spectacles, et suivi de Considérations sur le gouvernement de Pologne et la réforme projetée en Avril 1772; Lettre a M. de Beaumont, archeveque de Paris, etc., etc.",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1712",
+        "1712"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1337,7 +1403,8 @@
         "1656",
         "1672",
         "1752"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924027383284",
@@ -1368,7 +1435,8 @@
         "1905",
         "1907",
         "1908"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cu31924027386915",
@@ -1395,7 +1463,8 @@
         "1778",
         "1903",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "ddiscourssurlori00rous",
@@ -1413,7 +1482,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Discours sur l'origine et les fondemens de l'inégalité parmi les hommes",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "dictionnairedemu02rous",
@@ -1434,7 +1504,8 @@
       ],
       "ia_title": "Dictionnaire de musique",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "discourssurlor00rous",
@@ -1452,7 +1523,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Discours sur l'origine & les fondements de l'inégalité parmi les hommes",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1472,7 +1544,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Discours sur l'origine, et les fondemens de l'inégalité parmi les hommes",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1492,7 +1565,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Discours sur l'origine & les fondements de l'inégalité parmi les hommes:",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "discourssurlorig0000rous_m0u7",
@@ -1523,7 +1597,8 @@
         "1732",
         "1741",
         "1745"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "discourssurlorig00rous_0",
@@ -1541,7 +1616,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Discours sur l'origine et les fondemens de l'inegalité parmi les hommes.",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "ducontractsocia00rousgoog",
@@ -1562,7 +1638,8 @@
       "titlepage_years": [
         "1762",
         "1987"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "ducontratsocialo02rous",
@@ -1584,7 +1661,8 @@
       ],
       "ia_title": "Du contrat social, ou, Principes du droit politique, suivi des Considérations sur le gouvernement de Pologne, et sur sa réformation projettée",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "eloisaendshabil00mattgoog",
@@ -1622,7 +1700,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1913"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "emile1",
@@ -1648,7 +1727,8 @@
       "titlepage_years": [
         "1708",
         "1752"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "extraitduprojet00sain",
@@ -1669,7 +1749,8 @@
       ],
       "ia_title": "Extrait du Projet de paix perpétuelle de Monsieur l'abbé de Saint-Pierre",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1693,7 +1774,9 @@
       "ia_title": "Extrait du Projet de paix perpétuelle de Monsieur l'abbé de Saint-Pierre",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1760",
+        "1760"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1728,7 +1811,8 @@
         "1650",
         "1889",
         "1910"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "honneurspublicsr00pari",
@@ -1759,7 +1843,8 @@
         "1794",
         "1798",
         "1800"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "india.history.resource.111524",
@@ -1783,7 +1868,8 @@
       "titlepage_years": [
         "1798",
         "2020"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "india.history.resource.94272",
@@ -1810,7 +1896,8 @@
         "1762",
         "1789",
         "2019"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "jeanjacquesrous00text",
@@ -1835,7 +1922,9 @@
         "1789",
         "1879",
         "1894",
-        "1895",
+        "1895"
+      ],
+      "digitization_years": [
         "2011"
       ]
     },
@@ -1858,7 +1947,8 @@
       ],
       "ia_title": "J.J. Rousseau citoyen de Genève, a Mr. d'Alembert ... Sur son article Genève dans le VIIme. volume de l'Encyclopédie, et particulierement, sur le projet d'établir un théatre de comédie en cette ville",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1886,7 +1976,9 @@
       "titlepage_years": [
         "1702",
         "1801",
-        "1819",
+        "1819"
+      ],
+      "digitization_years": [
         "2014"
       ]
     },
@@ -1911,7 +2003,9 @@
       "ia_title": "Ninon Lenclos a Mr. SuarD, de l'Académie Française, auteur d'un mémoire signé Lenoir, & d'un mémoire encore pour la dame Kornmann",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1787",
+        "1787"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1932,7 +2026,9 @@
       "ia_title": "Observations de Jean-Jacques Rousseau de Geneve. Sur la réponse qui a été faite à son Discours",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1752",
+        "1752"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1957,7 +2053,8 @@
       ],
       "ia_title": "Oeuvres complètes de J. J. Rousseau ; avec des éclaircissements et des notes historiques par P.R. Auguis",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1977,7 +2074,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Oeuvres de J.J. Rousseau citoyen de Genève",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -1998,7 +2096,9 @@
       "ia_title": "Oeuvres de J.J. Rousseau citoyen de Genève",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1742",
+        "1742"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -2019,7 +2119,9 @@
       "ia_title": "Oeuvres de J.J. Rousseau citoyen de Genève",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1765",
+        "1765"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -2040,7 +2142,9 @@
       "ia_title": "Oeuvres de J.J. Rousseau",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1750",
+        "1750"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -2060,7 +2164,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Oeuvres de J.J. Rousseau",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -2080,7 +2185,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Oeuvres de J.J. Rousseau",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -2100,7 +2206,8 @@
       "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
       "ia_title": "Oeuvres de J.J. Rousseau",
       "ia_licenseurl": "",
-      "titlepage_years": [
+      "titlepage_years": [],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -2130,7 +2237,9 @@
         "1762",
         "1778",
         "1919",
-        "1921",
+        "1921"
+      ],
+      "digitization_years": [
         "2015"
       ]
     },
@@ -2158,7 +2267,8 @@
         "1762",
         "1778",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "rousseaunaturali0000unse_c8a6",
@@ -2184,7 +2294,9 @@
         "1762",
         "1778",
         "1781",
-        "1903",
+        "1903"
+      ],
+      "digitization_years": [
         "2026"
       ]
     },
@@ -2210,7 +2322,8 @@
         "1840",
         "1847",
         "1851"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "tudesurltatm00bouguoft",
@@ -2233,7 +2346,8 @@
         "1770",
         "1772",
         "1883"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "uvrescompltesd02rous",
@@ -2255,7 +2369,9 @@
       "ia_title": "uvres complètes de J. J.Rousseau : mises dans un nouvel ordre",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1824",
+        "1824"
+      ],
+      "digitization_years": [
         "2011"
       ]
     },
@@ -2285,7 +2401,8 @@
         "1982",
         "1984",
         "1997"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "uvrescompltesde07rousgoog",
@@ -2309,7 +2426,8 @@
         "1965",
         "1987",
         "1992"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "yhteiskuntasopim53593gut",
@@ -2340,7 +2458,8 @@
         "1778",
         "1898",
         "1905"
-      ]
+      ],
+      "digitization_years": []
     }
   ],
   "★同名剔除": "2 份（见 _blocked-namesake.txt，记录保留）"

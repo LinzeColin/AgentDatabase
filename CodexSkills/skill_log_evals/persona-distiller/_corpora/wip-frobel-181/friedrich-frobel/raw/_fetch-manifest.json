@@ -30,7 +30,8 @@
         "1862",
         "1863",
         "1996"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "FroebelEducazioneUomo",
@@ -50,7 +51,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1886"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "aidstofamilygove00meyeuoft",
@@ -76,7 +78,9 @@
         "1876",
         "1878",
         "1879",
-        "1976",
+        "1976"
+      ],
+      "digitization_years": [
         "2008"
       ]
     },
@@ -105,7 +109,9 @@
         "1896",
         "1901",
         "1906",
-        "1908",
+        "1908"
+      ],
+      "digitization_years": [
         "2007"
       ]
     },
@@ -139,7 +145,8 @@
         "1885",
         "1886",
         "1889"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "autobiographyoff00frbe",
@@ -174,7 +181,8 @@
         "1862",
         "1882",
         "1886"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "autobiographyoff00frob",
@@ -205,7 +213,8 @@
         "1885",
         "1886",
         "1889"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "autobiographyoff00froeiala",
@@ -240,6 +249,9 @@
         "1852",
         "1862",
         "1882"
+      ],
+      "digitization_years": [
+        "2007"
       ]
     },
     {
@@ -275,7 +287,8 @@
         "1851",
         "1852",
         "1862"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "autobiooffriedri00froeiala",
@@ -310,6 +323,9 @@
         "1851",
         "1852",
         "1862"
+      ],
+      "digitization_years": [
+        "2007"
       ]
     },
     {
@@ -333,7 +349,8 @@
         "1836",
         "1862",
         "1863"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_kmc0AQAAMAAJ",
@@ -363,7 +380,8 @@
         "1852",
         "1861",
         "1862"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_xhwBAAAAYAAJ",
@@ -386,7 +404,8 @@
         "1836",
         "1862",
         "1863"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "educationofman00f",
@@ -407,7 +426,8 @@
       ],
       "ia_title": "The education of man",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "educationofman00fr",
@@ -437,7 +457,8 @@
         "1840",
         "1887",
         "1901"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "educationofman00fr2",
@@ -461,7 +482,8 @@
       "titlepage_years": [
         "1840",
         "1887"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "educationofman00frbe",
@@ -487,7 +509,8 @@
         "1887",
         "1890",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "educationofman00froe",
@@ -513,7 +536,8 @@
         "1839",
         "1884",
         "1885"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "educationofman00frrich",
@@ -543,7 +567,8 @@
         "1840",
         "1887",
         "1895"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "educationofman00fruoft",
@@ -573,7 +598,8 @@
         "1840",
         "1887",
         "1908"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "friedrichfroebe00frgoog",
@@ -597,7 +623,8 @@
       "titlepage_years": [
         "1890",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "friedrichfroebe01jarvgoog",
@@ -623,7 +650,8 @@
         "1890",
         "1893",
         "1895"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "friedrichfroebe02jarvgoog",
@@ -646,7 +674,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1899"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "friedrichfroebe03jarvgoog",
@@ -671,7 +700,8 @@
         "1861",
         "1893",
         "1895"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "friedrichfroebel00fr",
@@ -695,7 +725,8 @@
       "titlepage_years": [
         "1890",
         "1899"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "friedrichfroebel00froe",
@@ -720,7 +751,8 @@
         "1890",
         "1899",
         "1902"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "friedrichfroebel00frrich",
@@ -742,7 +774,9 @@
       "ia_title": "Friedrich Froebel's Education by development, the second part of the Pedagogics of the kindergarten;",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1899",
+        "1899"
+      ],
+      "digitization_years": [
         "2007"
       ]
     },
@@ -767,7 +801,9 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1899",
-        "1903",
+        "1903"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -795,7 +831,8 @@
         "1899",
         "1902",
         "1909"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "friedrichfroebel03fr",
@@ -822,7 +859,8 @@
         "1893",
         "1895",
         "1904"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "froebelletters00friala",
@@ -847,7 +885,9 @@
         "1782",
         "1850",
         "1852",
-        "1893",
+        "1893"
+      ],
+      "digitization_years": [
         "2007"
       ]
     },
@@ -874,7 +914,9 @@
       "titlepage_years": [
         "1862",
         "1883",
-        "1912",
+        "1912"
+      ],
+      "digitization_years": [
         "2008"
       ]
     },
@@ -901,7 +943,8 @@
       "titlepage_years": [
         "1862",
         "1912"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "froebelsletterso00fr",
@@ -937,7 +980,8 @@
         "1851",
         "1854",
         "1887"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "froebelsletterso00froe",
@@ -973,7 +1017,8 @@
         "1845",
         "1846",
         "1847"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "laeducacindelh00fr",
@@ -998,7 +1043,8 @@
       "titlepage_years": [
         "1885",
         "1888"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "laeducacindelh01fr",
@@ -1021,7 +1067,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1885"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lettersonkinderg00friala",
@@ -1056,7 +1103,8 @@
         "1844",
         "1845",
         "1846"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "motherplaynurser00froe",
@@ -1082,7 +1130,8 @@
       "titlepage_years": [
         "1878",
         "1906"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "motherssongsgame00fruoft",
@@ -1105,7 +1154,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1968"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "mottoesandcomme00unkngoog",
@@ -1129,7 +1179,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1895"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "mottoescommentar00fr",
@@ -1155,7 +1206,8 @@
         "1890",
         "1895",
         "1902"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "mottoescommentar00frrich",
@@ -1179,7 +1231,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1895"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "richfroebelfried00frrich",
@@ -1202,7 +1255,8 @@
         "1893",
         "1895",
         "1909"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "songsandmusicfr00compgoog",
@@ -1224,7 +1278,8 @@
         "1890",
         "1895",
         "1896"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "songsmusicoffrie00fr",
@@ -1250,7 +1305,8 @@
         "1895",
         "1901",
         "1931"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "songsmusicoffrie00fruoft",
@@ -1273,7 +1329,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1895"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "songsmusicoffrie01fr",
@@ -1296,7 +1353,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1895"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "studentsfroebel01herfgoog",
@@ -1323,7 +1381,8 @@
         "1886",
         "1888",
         "1896"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "studentsfroebela00froeiala",
@@ -1357,7 +1416,8 @@
         "1818",
         "1826",
         "1829"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "studentsfroebela00fruoft",
@@ -1385,7 +1445,8 @@
         "1911",
         "1916",
         "1958"
-      ]
+      ],
+      "digitization_years": []
     }
   ]
 }

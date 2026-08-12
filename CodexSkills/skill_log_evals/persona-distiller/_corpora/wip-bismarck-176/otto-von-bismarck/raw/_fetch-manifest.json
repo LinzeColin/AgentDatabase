@@ -24,7 +24,8 @@
       "ia_creator": "Bismarck, Otto von",
       "ia_title": "Bismarck-Briefe: I. Familien-Briefe ; II. Politische Briefe",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "10558638bsb",
@@ -44,7 +45,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1867"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10558639bsb",
@@ -65,7 +67,8 @@
       "titlepage_years": [
         "1867",
         "1869"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10629304bsb",
@@ -86,7 +89,8 @@
       "titlepage_years": [
         "1869",
         "1870"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11166432bsb",
@@ -108,7 +112,8 @@
         "1570",
         "1874",
         "1878"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11281959bsb",
@@ -133,7 +138,8 @@
         "1864",
         "1866",
         "1870"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11281960bsb",
@@ -154,7 +160,8 @@
       "titlepage_years": [
         "1867",
         "1869"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11281961bsb",
@@ -175,7 +182,8 @@
       "titlepage_years": [
         "1869",
         "1870"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11332890bsb",
@@ -201,7 +209,8 @@
         "1866",
         "1870",
         "1876"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11358069bsb",
@@ -231,7 +240,8 @@
         "1870",
         "1876",
         "1877"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11358070bsb",
@@ -257,7 +267,8 @@
         "1871",
         "1880",
         "1881"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11358071bsb",
@@ -282,7 +293,8 @@
         "1877",
         "1878",
         "1881"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11358072bsb",
@@ -313,7 +325,8 @@
         "1877",
         "1881",
         "1882"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "30081009592969",
@@ -333,7 +346,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1928"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "30081009592977",
@@ -361,7 +375,8 @@
         "1864",
         "1866",
         "1928"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "30081009592993",
@@ -388,7 +403,8 @@
         "1914",
         "1922",
         "1927"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "30081009593009",
@@ -412,7 +428,8 @@
         "1859",
         "1862",
         "1925"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "30081009593033",
@@ -436,7 +453,8 @@
         "1878",
         "1929",
         "1985"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "30081009593041",
@@ -464,7 +482,8 @@
         "1717",
         "1775",
         "1929"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "30081009593074",
@@ -486,7 +505,8 @@
         "1855",
         "1859",
         "1924"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "30081009593090",
@@ -508,7 +528,8 @@
         "1785",
         "1878",
         "1930"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "30081009593108",
@@ -538,7 +559,8 @@
         "1885",
         "1888",
         "1929"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "30081009593132",
@@ -565,7 +587,8 @@
         "1851",
         "1852",
         "1901"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "anhangzudengeda01schlgoog",
@@ -598,7 +621,9 @@
         "1852",
         "1862",
         "1863",
-        "1887",
+        "1887"
+      ],
+      "digitization_years": [
         "1901",
         "1931"
       ]
@@ -624,7 +649,8 @@
         "1851",
         "1852",
         "1901"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bismarckbrief00bism",
@@ -658,7 +684,8 @@
         "1869",
         "1875",
         "1882"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bismarckbriefe00bism",
@@ -692,7 +719,8 @@
         "1869",
         "1873",
         "1875"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bismarckbriefe00kohlgoog",
@@ -723,6 +751,9 @@
         "1891",
         "1892",
         "1893"
+      ],
+      "digitization_years": [
+        "1907"
       ]
     },
     {
@@ -752,7 +783,8 @@
         "1865",
         "1870",
         "1877"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bismarckforsilve00bism",
@@ -775,7 +807,8 @@
         "1873",
         "1896",
         "1997"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bismarckmanands00vongoog",
@@ -798,7 +831,8 @@
         "1893",
         "1898",
         "1899"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bismarckmanstat03butlgoog",
@@ -822,7 +856,8 @@
       "titlepage_years": [
         "1864",
         "1865"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bismarckmanstate01bism",
@@ -843,7 +878,9 @@
       "titlepage_years": [
         "1893",
         "1898",
-        "1899",
+        "1899"
+      ],
+      "digitization_years": [
         "2010"
       ]
     },
@@ -873,7 +910,9 @@
         "1872",
         "1873",
         "1902",
-        "1903",
+        "1903"
+      ],
+      "digitization_years": [
         "2007"
       ]
     },
@@ -898,7 +937,9 @@
         "1890",
         "1893",
         "1898",
-        "1899",
+        "1899"
+      ],
+      "digitization_years": [
         "2007"
       ]
     },
@@ -924,7 +965,8 @@
         "1865",
         "1866",
         "1870"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bismarckreden18400bismuoft",
@@ -958,7 +1000,8 @@
         "1867",
         "1868",
         "1869"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bismarcksbriefes00bism",
@@ -981,7 +1024,9 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1843",
-        "1844",
+        "1844"
+      ],
+      "digitization_years": [
         "2009"
       ]
     },
@@ -1013,7 +1058,8 @@
         "1902",
         "1903",
         "1906"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bismarcksstaats00rogoog",
@@ -1037,7 +1083,8 @@
         "1882",
         "1902",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bismarckstableta01bism_0",
@@ -1068,7 +1115,9 @@
         "1871",
         "1885",
         "1890",
-        "1895",
+        "1895"
+      ],
+      "digitization_years": [
         "2018"
       ]
     },
@@ -1097,7 +1146,8 @@
         "1866",
         "1870",
         "1876"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "briefeottosvonbi00bismuoft",
@@ -1131,7 +1181,8 @@
         "1853",
         "1854",
         "1857"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "briefeseinebarau00bismuoft",
@@ -1160,7 +1211,8 @@
         "1873",
         "1900",
         "1906"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_-a0PAAAAQAAJ",
@@ -1188,7 +1240,8 @@
         "1868",
         "1869",
         "1893"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_BbIPAAAAQAAJ",
@@ -1222,7 +1275,8 @@
         "1880",
         "1882",
         "1884"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_BkIPAAAAYAAJ",
@@ -1254,7 +1308,8 @@
         "1904",
         "1905",
         "1909"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_CWAPAAAAYAAJ",
@@ -1282,7 +1337,8 @@
         "1885",
         "1887",
         "1896"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_KsNVAAAAYAAJ",
@@ -1311,7 +1367,8 @@
         "1859",
         "1864",
         "1884"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_NjNDAQAAMAAJ",
@@ -1345,7 +1402,8 @@
         "1883",
         "1884",
         "1885"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_akpzLZLxvP4C",
@@ -1374,7 +1432,8 @@
         "1882",
         "1888",
         "1899"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "cihm_77460",
@@ -1398,7 +1457,8 @@
         "1883",
         "1885",
         "1894"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "correspondancedi01bism",
@@ -1431,7 +1491,9 @@
         "1859",
         "1866",
         "1870",
-        "1883",
+        "1883"
+      ],
+      "digitization_years": [
         "2012"
       ]
     },
@@ -1458,7 +1520,8 @@
       "titlepage_years": [
         "1761",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "correspondenceof02bismuoft",
@@ -1481,7 +1544,9 @@
       "ia_title": "The correspondence of William I. and Bismarck : with other letters from and to Prince Bismarck",
       "ia_licenseurl": "",
       "titlepage_years": [
-        "1903",
+        "1903"
+      ],
+      "digitization_years": [
         "2007"
       ]
     },
@@ -1507,7 +1572,8 @@
         "1847",
         "1852",
         "1892"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "diepolitischenre02bismuoft",
@@ -1536,7 +1602,8 @@
         "1865",
         "1868",
         "1903"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "dieredendesgraf00bismgoog",
@@ -1560,7 +1627,8 @@
         "1864",
         "1866",
         "1870"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "erinnerungundged00bism",
@@ -1587,7 +1655,8 @@
         "1890",
         "1919",
         "1921"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "frstbismarcksei01bismgoog",
@@ -1617,7 +1686,8 @@
         "1866",
         "1870",
         "1878"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "furstbismarckna02penz",
@@ -1644,7 +1714,8 @@
         "1890",
         "1891",
         "1897"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "furstbismarckna03penz",
@@ -1670,7 +1741,8 @@
         "1891",
         "1892",
         "1897"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "gedankenunderin00bism",
@@ -1701,7 +1773,8 @@
         "1890",
         "1893",
         "1898"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "gedankenunderinn01bism",
@@ -1732,7 +1805,8 @@
         "1869",
         "1893",
         "1898"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "gedankenunderinn03bism",
@@ -1760,7 +1834,8 @@
         "1890",
         "1919",
         "1922"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "india.history.resource.85205",
@@ -1793,7 +1868,8 @@
         "1870",
         "1879",
         "2018"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lovelettersofbis00bismiala",
@@ -1828,7 +1904,8 @@
         "1888",
         "1889",
         "1900"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "preussenimbunde00poscgoog",
@@ -1853,7 +1930,8 @@
         "1866",
         "1869",
         "1882"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "professionalrec00liargoog",
@@ -1873,7 +1951,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1849"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "vierredenzurus00bismiala",
@@ -1893,7 +1972,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1874"
-      ]
+      ],
+      "digitization_years": []
     }
   ]
 }

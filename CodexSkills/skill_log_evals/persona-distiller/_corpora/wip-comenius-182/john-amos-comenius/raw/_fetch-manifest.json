@@ -26,7 +26,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1890"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10026103bsb",
@@ -47,7 +48,8 @@
       "titlepage_years": [
         "1632",
         "1742"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10261284bsb",
@@ -67,7 +69,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1623"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10270188bsb",
@@ -88,7 +91,8 @@
       "titlepage_years": [
         "1623",
         "1663"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10448790bsb",
@@ -106,7 +110,8 @@
       "ia_creator": "Comenius, Johann Amos",
       "ia_title": "Kurzgefaßte Kirchen-Historie der Böhmischen Brüder",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "10448791bsb",
@@ -126,7 +131,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1743"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10584856bsb",
@@ -146,7 +152,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1806"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10585771bsb",
@@ -166,7 +173,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1657"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10779570bsb",
@@ -197,7 +205,8 @@
         "1672",
         "1702",
         "1739"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "10912059bsb",
@@ -217,7 +226,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1671"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11092509bsb",
@@ -237,7 +247,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1729"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "11104945bsb",
@@ -255,7 +266,8 @@
       "ia_creator": "Comenius, Johann Amos",
       "ia_title": "Joh. Amos Comenii Orbis Sensualium Picti Pars ...: Hoc est: Omnium fundamentalium in mundo rerum, & in vita actionum, Pictura & Nomenclatura. 2",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "ComeniusDidatticaMagna",
@@ -273,7 +285,8 @@
       "ia_creator": "Komenský, Jan Amos",
       "ia_title": "Didattica Magna",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "MN41594ucmf_2",
@@ -303,7 +316,8 @@
         "1644",
         "1801",
         "1819"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "asomrnpekladyal00jiregoog",
@@ -340,7 +354,8 @@
         "1852",
         "1853",
         "1857"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "b21782386",
@@ -374,7 +389,8 @@
         "1654",
         "1656",
         "1896"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "b32990431",
@@ -392,7 +408,8 @@
       "ia_creator": "Comenius, Johann Amos, 1592-1670",
       "ia_title": "I.A. Comenii Ianua linguarum reserata aurea; : sive seminarium linguarum & scientiarum omnium: h. e. compendiosa latinam (& quamlibet aliam) linguam, unà cum scientiarum, artiumque omnium fundamentis, perdiscendi methodus, sub titulis C. periodis M. comprehensa. Dat is, De guldene ontslootene deure der talen; ofte Het Plant-hof aller Talen ende wetenschappen: D.i. Een kozte wyse om de Latijnsche (ende ais oock eenigh andere) Tale, mitsgaders de Gzonden aller wetenschappen ende kunsten te leeren, in Hondert Hoost-tijtels ende Duysent voltogerie Spreucken vervat",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_conatuum-comenianorum-pr_komensk-jan-amos_1637",
@@ -410,7 +427,8 @@
       "ia_creator": "Komenský, Jan Amos",
       "ia_title": "Conatuum Comenianorum praeludia ...  1637",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_janua-linguarum-reserata_komensky-jan-amos_1636",
@@ -432,7 +450,8 @@
         "1615",
         "1629",
         "1636"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_joh-amos-comenii-vestib_comenius-johann-amos_1647",
@@ -452,7 +471,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1647"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1631",
@@ -472,7 +492,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1637"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1631_0",
@@ -492,7 +513,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1637"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1633",
@@ -512,7 +534,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1633"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1637",
@@ -532,7 +555,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1811"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1639",
@@ -552,7 +576,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1639"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1639_0",
@@ -572,7 +597,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1640"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensky-jan-amos_1631",
@@ -594,7 +620,8 @@
         "1615",
         "1629",
         "1631"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_porta-sapienti-reserata_komensky-jan-amos_1637",
@@ -612,7 +639,8 @@
       "ia_creator": "Komensky, Jan Amos",
       "ia_title": "Porta Sapientiæ reserata: sive Pansophiae Christianae Seminarium.  1637",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_reverendi-et-clarissimi-_komensk-jan-amos_1638",
@@ -632,7 +660,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1639"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1475-1640_the-gate-of-tongues-unlo_komensky-jan-amos_1633",
@@ -652,7 +681,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1633"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1641-1700_a-continuation-of-mr-jo_comenius-johann-amos_1648",
@@ -672,7 +702,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "2000"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_early-english-books-1641-1700_a-generall-table-of-euro_comenius-johann-amos_1670",
@@ -692,7 +723,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1670"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bim_eighteenth-century_joh-amos-commenii-orbis_comenius-johann-amos_1705",
@@ -710,7 +742,8 @@
       "ia_creator": "Comenius, Johann Amos",
       "ia_title": "Joh. Amos Commenii orbis sensualium pictus: hoc est, omnium principalium in mundo rerum, & in vita actionum, pictura & nomenclatura = Joh. Amos Commenius's visible world: or, a nomenclature, and pictures of all the chief things that are in the world, ... in above an 150 copper cuts written by the author in Latin and High-Dutch. ... Translated into English by Charles Hoole, ... for the use of young Latin scholars.  1705",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_2x85AQAAMAAJ",
@@ -730,7 +763,8 @@
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
       "titlepage_years": [
         "1648"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_34RCAQAAMAAJ",
@@ -761,7 +795,8 @@
         "1617",
         "1627",
         "1638"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_34ZDAQAAMAAJ",
@@ -792,7 +827,8 @@
         "1648",
         "1650",
         "1655"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_3nVBAQAAMAAJ",
@@ -816,7 +852,8 @@
       "titlepage_years": [
         "1888",
         "1913"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_64syAQAAMAAJ",
@@ -834,7 +871,8 @@
       "ia_creator": "Comenius, Johann Amos, 1592-1670",
       "ia_title": "[Orbis pictus] graeco-latinus, usui studiosae juventutis accommodatus",
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_6LOgAAAAMAAJ",
@@ -865,7 +903,8 @@
         "1632",
         "1633",
         "1635"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_AakZAAAAYAAJ",
@@ -893,7 +932,8 @@
         "1648",
         "1655",
         "1672"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_DD1KAAAAYAAJ",
@@ -924,7 +964,8 @@
         "1633",
         "1638",
         "1656"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_FTtFAAAAYAAJ",
@@ -949,7 +990,8 @@
         "1667",
         "1841",
         "1849"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_Fx1BAAAAcAAJ",
@@ -969,7 +1011,8 @@
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
       "titlepage_years": [
         "1739"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_GoAWAAAAIAAJ",
@@ -994,7 +1037,8 @@
         "1833",
         "1835",
         "1842"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_GyAoAAAAYAAJ",
@@ -1016,7 +1060,8 @@
         "1503",
         "1623",
         "1809"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_HAI2AAAAIAAJ",
@@ -1047,7 +1092,8 @@
         "1887",
         "1888",
         "1889"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_HiRbAAAAcAAJ",
@@ -1065,7 +1111,8 @@
       "ia_creator": "Comenius, Johann Amos",
       "ia_title": "[Orbis sensualium pictus]",
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_JvJCAQAAMAAJ",
@@ -1090,7 +1137,9 @@
         "1657",
         "1853",
         "1854",
-        "1861",
+        "1861"
+      ],
+      "digitization_years": [
         "1913"
       ]
     },
@@ -1115,7 +1164,8 @@
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
       "titlepage_years": [
         "1770"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_MWcM-4kItEAC",
@@ -1146,7 +1196,8 @@
         "1665",
         "1666",
         "1670"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_MrNBAAAAYAAJ",
@@ -1174,7 +1225,8 @@
         "1657",
         "1841",
         "1849"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_SLlKAAAAYAAJ",
@@ -1204,7 +1256,8 @@
         "1892",
         "1893",
         "1895"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_Up_239je-xMC",
@@ -1224,7 +1277,8 @@
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
       "titlepage_years": [
         "1892"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_WGNcAAAAcAAJ",
@@ -1247,7 +1301,8 @@
       ],
       "ia_title": "Jo. Amos Comenii Janua linguarum aurea reserata in linguam graecam",
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb__A5WAAAAcAAJ",
@@ -1267,7 +1322,8 @@
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
       "titlepage_years": [
         "1739"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_gzBQAAAAcAAJ",
@@ -1289,7 +1345,8 @@
         "1615",
         "1629",
         "1716"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_iaoPAAAAQAAJ",
@@ -1319,7 +1376,8 @@
         "1654",
         "1657",
         "1815"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_sqpdAAAAcAAJ",
@@ -1339,7 +1397,8 @@
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
       "titlepage_years": [
         "1756"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_uhBcAAAAcAAJ",
@@ -1366,7 +1425,8 @@
         "1636",
         "1863",
         "1864"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_yp8AAAAAYAAJ",
@@ -1392,7 +1452,8 @@
       "titlepage_years": [
         "1657",
         "1810"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "bub_gb_zYpUAAAAcAAJ",
@@ -1410,7 +1471,8 @@
       "ia_creator": "Comenius, Johann Amos",
       "ia_title": "Unum necessarium scire, quid sibi sit necessarium in vita, et morte, et post mortem... : Nunc vero recusum",
       "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "dbc.wroc.pl.BOss_XVII_3922",
@@ -1430,7 +1492,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1677"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "dbc.wroc.pl.BOss_XVII_3923",
@@ -1448,7 +1511,8 @@
       "ia_creator": "Komenský, Jan Amos",
       "ia_title": "Artium Rudiorum, Subtiliorum, Subtilissimarum : seu Actionum Humanae Industriae. Orchestra. Ex Januae LL. Comenianae [...]",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "derrheinalsschic00paqu",
@@ -1472,7 +1536,8 @@
       "titlepage_years": [
         "1919",
         "1920"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "didaktikanawren00comeuoft",
@@ -1496,7 +1561,8 @@
         "1638",
         "1841",
         "1849"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "grosseunterricht00comeuoft",
@@ -1531,7 +1597,8 @@
         "1605",
         "1611",
         "1612"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "jbc.bj.uj.edu.pl.DIGSTDR000361",
@@ -1553,7 +1620,8 @@
         "1570",
         "1649",
         "1905"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johamoscommeniio00come",
@@ -1574,7 +1642,8 @@
       ],
       "ia_title": "Joh. Amos Commenii Orbis sensualium pictus: : hoc est, Omnium principalium in mundo rerum, & in vita actionum, pictura & nomenclatura.",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "johannamoscomen00kerrgoog",
@@ -1594,7 +1663,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1906"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johannamoscomen00kvagoog",
@@ -1615,7 +1685,8 @@
       "titlepage_years": [
         "1592",
         "1892"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johannamoscomen01kerrgoog",
@@ -1641,7 +1712,8 @@
         "1627",
         "1634",
         "1905"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johannamoscomen02kerrgoog",
@@ -1672,7 +1744,8 @@
         "1656",
         "1657",
         "1665"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "johannamoscomen03kerrgoog",
@@ -1692,7 +1765,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1905"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "labyrinthofworld00comeuoft",
@@ -1714,7 +1788,8 @@
         "1623",
         "1631",
         "1905"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "lebenundschicks00vrbkgoog",
@@ -1736,7 +1811,8 @@
         "1592",
         "1671",
         "1892"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "ned-kbn-all-00004319-002",
@@ -1754,7 +1830,8 @@
       "ia_creator": "Comenius, J. A. (Johann Amos)",
       "ia_title": "Unum necessarium, scire quid sibi sit necessarium, in vita, et morte et post mortem ... J.A. Comenius",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "obrazjednotyesko00lasi",
@@ -1788,7 +1865,8 @@
         "1583",
         "1599",
         "1605"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "orbispictusofjoh00comeiala",
@@ -1815,7 +1893,8 @@
         "1886",
         "1887",
         "1944"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "orbispictusswtwo0000come",
@@ -1833,7 +1912,8 @@
       "ia_creator": "Comenius, Johann Amos, 1592-1670",
       "ia_title": "Orbis pictus = Swět w obrazćh. Die Welt in Bildern. Le monde en tableaux",
       "ia_licenseurl": "",
-      "titlepage_years": []
+      "titlepage_years": [],
+      "digitization_years": []
     },
     {
       "identifier": "rulesoflife00come",
@@ -1855,7 +1935,8 @@
         "1542",
         "1644",
         "1865"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "schoolofinfancye00comeiala",
@@ -1886,7 +1967,8 @@
         "1828",
         "1830",
         "1845"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "thelabyrinthofth00comeuoft",
@@ -1906,7 +1988,8 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1901"
-      ]
+      ],
+      "digitization_years": []
     },
     {
       "identifier": "theorbispictus28299gut",
@@ -1941,7 +2024,8 @@
         "1812",
         "1842",
         "1860"
-      ]
+      ],
+      "digitization_years": []
     }
   ]
 }
