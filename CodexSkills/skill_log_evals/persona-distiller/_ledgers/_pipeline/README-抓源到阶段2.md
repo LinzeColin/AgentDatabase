@@ -1,6 +1,6 @@
-# 抓源 → 阶段 2 的**七件**工具（2026-08-12 新建，第 1 批 10 人跑通）
+# 抓源 → 研究阶段的**九件**工具（2026-08-12 新建，第 1 批 10 人跑通）
 
-**这七件不是判据**（判据在 `registry/codex/persona-distiller/scripts/`，91 件，本轮一件没动）。
+**这九件不是判据**（判据在 `registry/codex/persona-distiller/scripts/`，91 件，本轮一件没动）。
 它们是把「一个人名」变成「判据能吃的四个数」的流水线。
 
 ## 一条命令跑完一个人
@@ -8,7 +8,8 @@
 ```bash
 cd CodexSkills/skill_log_evals/persona-distiller/_corpora
 PL=../_ledgers/_pipeline
-W=wip-<name>-<n>/<workspace>/raw
+WS=wip-<name>-<n>/workspaces/<slug>      # ★ 布局：语料在 $WS/raw（存量 42 个工作区就是这个）
+W=$WS/raw
 
 python3 $PL/probe_ia.py   --query 'creator:"<姓, 名>"' --rows 200 --out wip-<name>-<n>/04-探源.tsv
 python3 $PL/curate_ia.py  --tsv wip-<name>-<n>/04-探源.tsv --person <key> --out $W/_ids.txt --cap 70
@@ -18,7 +19,10 @@ python3 $PL/dedup_corpus.py     --raw $W
 python3 $PL/assign_lanes.py     --raw $W
 python3 $PL/scan_copyright.py   --raw $W          # ★ PD 最后一道，**逐条读命中**
 python3 $PL/measure_voice.py    --raw $W --samples 8
-python3 $PL/emit_source_ledger.py --raw $W --workspace wip-<name>-<n>/workspaces/<slug>
+python3 $PL/emit_source_ledger.py --raw $W --workspace $WS
+python3 $PL/assign_holdout.py    --workspace $WS --raw $W        # 先不加 --apply 看方案
+python3 $PL/pull_quotes.py --raw $W --ledger $WS/evidence/source-ledger.jsonl \
+        --lane writings --exclude-third-party --first-person     # ★ 取回来要**逐条人判说话人**
 python3 ../../../registry/codex/persona-distiller/scripts/emit_lane_scope.py \
         wip-<name>-<n>/workspaces/<slug>          # Scope 节由台账现算，**别手打**
 ```
@@ -47,11 +51,13 @@ python3 ../../../registry/codex/persona-distiller/scripts/check_corpus_ceiling.p
 | `assign_lanes.py` | 分六条研究道 | 道语义**取自 35 个存量 `source-ledger.jsonl` 实测**，不按字面猜 |
 | `scan_copyright.py` | **PD 的最后一道，唯一读正文的一道** | 元数据挡不住在版权期内的重印／译本——**实测 6 份混进来**；决定性信号只有 ISBN 与「© 年份 >1930」，`All rights reserved` 是老书的套话不算 |
 | `emit_source_ledger.py` | → `evidence/source-ledger.jsonl` | `derived_from` 由查重簇填；`title` 用真题名；`split` 全 train，**holdout 由人另指** |
+| `pull_quotes.py` | 取**可复算定位**的逐字引文 | `norm_offset` 自带 `text[off:off+len]==quote` 断言；四道筛（悼词署名行/目录行/词中起头/题名页）；★ **它判不了说话人** |
+| `assign_holdout.py` | 分盲判密封面 | 用**判据自己那把尺子**量重合；**已引用过的不密封**；**不抽空任何一道**；★ k 词片**按哈希值抽不按位置抽** |
 | `measure_voice.py` | 声口密度 | **先修 OCR 折行断字**（一份文件里 77.8% 的命中是断字）；**先打印命中原句再报率**；主语脱落语另看动词 |
 
 ---
 
-## ★★ 五个最容易踩的坑（第 1 批全踩过一遍）
+## ★★ 七个最容易踩的坑（第 1 批全踩过一遍）
 
 ### ① 「我跑了判据」不等于结论可靠
 
@@ -96,7 +102,28 @@ Jefferson Davis、Thomas Jefferson Lamar、Thomas Paine 的传记、
   首扫 21 条红，读完只有 6 条成立，其余 12 条是 1882–1903 年老书上的
   `All rights reserved`（当年的套话，版权早已到期）、3 条是数字化年/OCR 噪声。
 
-### ⑤ 声口要单独量，而且要先读命中
+### ⑤ ★★★ 抽样要**按哈希值**抽，不要按位置抽
+
+`assign_holdout.py` 首版的 k 词片是 `for i in range(0, n, 5)` —— **每 5 个位置取一个**。
+两份文档若在共享段上的**起始偏移模 5 不同**，抽到的片**一个都不会重合**，
+哪怕那一段逐字相同。**漏报概率 4/5。**
+
+正对照（同一段 **3096 词逐字相同**，两边偏移错开 3 vs 7）：
+
+    按位置抽样：A 616 片 / B 616 片，**重合 0 片** → 报 **0.0%**
+    按哈希抽样：A 614 片 / B 615 片，**重合 613 片** → 报 **99.8%**
+
+⇒ 改成 `h[0] % SAMPLE == 0`。**同一段文字无论落在哪个偏移上，被抽中的片都一样。**
+★ 全库核过：`dedup_corpus.py` 用的是 min-hash（全部 k-gram 取最小的 keep 个），
+  **按值选，不受影响**（对上面那段报 99.5%）；再无第二处按位置抽样。
+
+### ⑥ **换尺子之后要给新尺子做正对照**
+
+我先写了「代理指标会骗人，用判据自己的量」并照做 —— **换来的是另一把坏尺子**（上一条）。
+⇒ 造一段**答案已知**的输入喂给新量具，看它报什么。
+  不做这一步，就是**用一个没验过的量具去否定一个验过的结论**。
+
+### ⑦ 声口要单独量，而且要先读命中
 
 门数的是**来源**不是**声口**。Coffin #130 三道门全过、17 万字里实质的话只有 8 句。
 量之前先修折行断字，量完先读 8 条原句 —— 第 1 批实测：

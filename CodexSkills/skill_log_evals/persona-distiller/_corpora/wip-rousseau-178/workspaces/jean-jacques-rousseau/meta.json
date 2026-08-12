@@ -77,5 +77,11 @@
   "subject_origin": "historical",
   "target_id": "tgt-254bd1b610ae",
   "time_scope": "1712-1778",
-  "updated_at": "2026-08-12T00:04:00Z"
+  "updated_at": "2026-08-12T00:04:00Z",
+  "attribution_basis": {
+    "authority": "主干编本的题名页逐字（`src-1ef4f4ebbc04`）：`OEUVRES COMPLÈTES DE J. J. ROUSSEAU AVEC DES NOTES HISTORIQUES … PARIS, FURNE ET Cie, LIBRAIRES-ÉDITEURS … M DCCC XLVI`（1846）。★ 该卷内《新爱洛伊丝》的题名页印 `RECUEILLIES ET PUBLIÉES PAR JEAN-JACQUES ROUSSEAU` ——**那是小说本身的虚构框架（「书信由卢梭收集刊行」），不是归属证据**，在此写明以免被后来的人当成署名。",
+    "citation": "archive.org item（`src-1ef4f4ebbc04` 的 locator 见 source-ledger）",
+    "disputed_policy": "① **已剔除 1 份在版权期内的材料**：`discourssurlorig0000rous_m0u7`（`© 2007, Les Éditions…`，ISBN 978-2-7617-2525-5，而 IA 编目年记 1922），见 `raw/_blocked-copyright.txt`。\n② **已剔除 2 份同名污染**：`cu31924032526596`（**Thomas Paine 的传记**）与 `memorial00unit`（**Rousseau O. Crump**，美国众议员 1843–1901），见 `_blocked-namesake.txt`。★ 它们是我**补研究道时把检索式从 `creator:` 换成 `title:` 才漏进来的**。\n③ ★ **译本不进声口那一栏**：103 份里**译本 21 份**（元数据 ∪ 题名页）。\n④ 《Extrait du Projet de paix perpétuelle》两份记一手——**那是卢梭自己写的摘要**，IA 把被摘的 Saint-Pierre 排第一。\n⑤ 本轮**没有**发现托名篇目。",
+    "disputed_works": []
+  }
 }

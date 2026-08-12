@@ -71,5 +71,11 @@
   "subject_origin": "historical",
   "target_id": "tgt-870f05ee408d",
   "time_scope": "1782-1852",
-  "updated_at": "2026-08-12T00:08:37Z"
+  "updated_at": "2026-08-12T00:08:37Z",
+  "attribution_basis": {
+    "authority": "主干德文编本的题名页（`src-78c284144dcf`，**Fraktur 排印，OCR 严重讹变**）。逐字原样：`?erau«gcgeben i?on Dr. ll^idjarlr ^Taitge` —— ★ **我的读法是 `Herausgegeben von Dr. Richard Lange`**（编者：Richard Lange 博士），**这是读法不是原文**，写在这里以便后来的人复核；同页可辨的还有 `1863` 与出版者 `Enslin`。★★ **不要把我的读法当逐字引文用**（[[verbatim-is-not-understood]]）。",
+    "citation": "archive.org item（`src-78c284144dcf` 的 locator 见 source-ledger）",
+    "disputed_policy": "① ★★ **译本占比是本人物最大的问题**：51 份里**译本 29 份（57%）**（元数据 ∪ 题名页）。他的声口实测 2.44/千词，**而其中相当一部分量的是译者的英文**。⇒ 声口只能用德文原文量，德文原文实测只有 4 份。\n② 语料里 **7 份是同一部自传的扫描件、6 份是同一部《Die Menschenerziehung》**（题名归并后 51→24），**不可当成 13 处独立证据**。\n③ ★ 同名门点名的侄子 **Karl Friedrich Fröbel 的姓名完整含目标全名**，收紧到全名也挡不住，只能按生卒年与「Karl」排（见 `02-探源分析` 第二刀）。\n④ 本轮**没有**发现托名篇目。",
+    "disputed_works": []
+  }
 }

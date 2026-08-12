@@ -77,5 +77,13 @@
   "subject_origin": "historical",
   "target_id": "tgt-be5dab79b83a",
   "time_scope": "1469-1527",
-  "updated_at": "2026-08-12T00:06:34Z"
+  "updated_at": "2026-08-12T00:06:34Z",
+  "attribution_basis": {
+    "authority": "主干编本的题名页与编者序逐字（`src-ab73327e1fed`）：`OPERE COMPLETE DI NICCOLÒ MACHIAVELLI CON MOLTE CORREZIONI E GIUNTE RINVENUTE SUI MANOSCRITTI ORIGINALI … Palermo, FRATELLI PEDONE LAURIEL EDITORI … 1868`；编者序自述校勘依据：`La presente edizione é condotta sulla edizione fiorentina del Parenti (1843), che abbiamo preferito ad ogni altra siccome quella che oltre all'essere stata esattamente riscontrata cogli autografi, contiene quattro lettere inedite` ——**据 1843 年 Parenti 佛罗伦萨本，且该本已与手稿原件逐一核对**。★ 这是本批语料里**唯一一条编者自述的校勘依据**，比「扉页印着他的名字」硬一档。",
+    "citation": "archive.org item（`src-ab73327e1fed` 的 locator 见 source-ledger）",
+    "disputed_policy": "① ★★ **托名伪作是这个人物的主要风险**（见 `02-探源分析-第五种污染-托名伪作.md`）：首轮探源 40 条里目标本人只占 **12.5%**，最晚的一件比他卒年晚 **164 年**。⇒ **不能用「出版年 > 卒年」筛**——正典本来就大半是身后出版的（君主论 1532、论李维 1531）；只能靠**作品目录**挡。本轮按 creator 收窄检索，**尚未逐份对照权威作品目录**。**这是缺口。**\n② ★ **声口只能用意大利原文量，译本一律不算**（他的 `00-抓源前必读.md` 写死这条）。实测：79 份里**译本 21 份**（元数据 ∪ 题名页）；意大利文 30 份，代词密度 0.99/千词而**第一人称动词 6.14/千词**——**代词那把尺子在主语脱落语上量不出声口**。\n③ `threeprosewriter00moor` 是三人合集（前有 Boccaccio），已判二手。",
+    "disputed_works": [
+      "**未逐份对照权威作品目录**——托名伪作只能靠目录挡，出版年筛无效（正典大半身后出版）"
+    ]
+  }
 }
