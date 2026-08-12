@@ -39,6 +39,35 @@ Kant 原判 deep 是**靠三条题名词误配出来的假道**顶上去的（`c
    ★ **本会话不能派子代理**（harness：`Do not call the AgentTool unless the user requested it`）
      ⇒ 第 3 件要么由你授权派子代理，要么由接手的人做。**这是真正的停点。**
 
+### 阶段 4（合成）的起跑线——**接手的人可以直接开工**
+
+十份产物在每个工作区都还是**模板骨架**（11–17 行），`evidence/claims.jsonl` **全是 0 条**。
+合成先建断言层，再由断言写产物。
+
+**每人的最低断言数**（`check_fact_density.py`：`min_facts = ceil(可用train / 5)`，下限 5，**现算**）：
+
+| 人 | 台账 | holdout | 可用 train | **min_facts** |
+|---|---:|---:|---:|---:|
+| #173 Marshall | 95 | 1 | 94 | **19** |
+| #178 Rousseau | 103 | 0 | 103 | **21** |
+| #177 Machiavelli | 79 | 0 | 79 | **16** |
+| #174 Lincoln | 70 | 3 | 67 | **14** |
+| #175 Jefferson | 73 | 8 | 65 | **13** |
+| #176 Bismarck | 70 | 10 | 60 | **12** |
+| #180 Pestalozzi | 70 | 10 | 60 | **12** |
+| #179 Kant | 65 | 10 | 55 | **11** |
+| #181 Fröbel | 51 | 0 | 51 | **11** |
+
+合计 **129 条**。★ **Machiavelli／Rousseau／Fröbel 的 holdout 还是 0，
+而 `quality_check --phase synthesis` 没有 holdout 直接报错**——所以那三人**先分 holdout 再合成**。
+
+★★ **断言层最容易犯的一个错，我今天在 Marshall 身上差点犯**：
+想用「整卷里 `we` 1.30/千词 > `I` 1.04/千词」去断言「他的判决意见回避第一人称」。
+**那一卷里还有编者注、辩护词、其他大法官的意见**——
+量的是整卷，断的是他一个人，**语域错了**
+（同 [[measured-voice-in-the-wrong-register]]：拿合著论文的第一人称去判「有没有声口」）。
+⇒ **要断言他的语域，必须先把他的意见从编辑体例里切出来再量。** 本轮没切，故**不写这条断言**。
+
 ★ **写研究道时必用的两件**（都在 `_ledgers/_pipeline/`，坑写在 README 第 8–10 条）：
 `pull_quotes.py --pick median`（**默认已改，别用 first——它把候选钉在卷首**）
 → `flag_borrowed_voice.py`（标出「这句的第一人称可能不是本人」，**只给理由，说话人由人判**）。
