@@ -71,6 +71,48 @@
 >   （121 份源 × 引文逐条回原文），4 个工作区就是一个多小时。
 >   ⇒ **要判某一条到底是不是「没语料」造成的，就对着那一个人物跑一次有语料的对照**，
 >     别照搬 `lane_quotes` 的结论。
+>
+> ### ★★★★★ Koch 的对照跑完了——**结论有三档，第三档最要紧**
+>
+> 同一个 `wip-koch-107`，移交树 vs 有语料的工作树：
+>
+> | | 移交树（无语料） | 有语料 |
+> |---|---:|---:|
+> | rc | 1 | 1 |
+> | error | 4 | **5** |
+> | warning | 4 | **7** |
+>
+> **① 只在无语料时出现 ⇒ 取回语料后消失，不是缺陷**
+>
+>     research.ledger-file-missing
+>     research.lane_quotes
+>
+> **② 两边都有 ⇒ 真的，与语料无关（别当成「没语料造成的」）**
+>
+>     source.primary-ratio
+>     corpus.holdout-mentioned-in-artifacts
+>     corpus.holdout-work-named-in-artifacts
+>     corpus.no-viable-holdout-split
+>     corpus.title-is-just-the-filename
+>     eval.rubric-demands-frame-break
+>
+> **③ ★★ 只在有语料时出现 ⇒ 移交树上「看不见」的真问题**
+>
+>     corpus.holdout-overlap
+>     corpus.undeclared-duplicate-sources
+>     corpus.longs-corruption
+>     corpus.fraktur-mojibake
+>     corpus.unexamined-band
+>     research.catalogue-entry
+>
+> ⇒ **第 ③ 档是这次对照最要紧的收获，而它不是我原本要问的问题。**
+>   我只想问「哪些码是没语料造成的假警报」，
+>   实际发现的是**反方向：移交树会「少报」——六种真问题在那棵树上根本触发不了**。
+>   **接手方在移交树上跑出的「干净」是假的干净**：
+>   取回语料之后才会看见 holdout 重叠、未声明重复源、长 s 讹字、Fraktur 乱码…
+>
+> ★ **这一档只在 Koch 一个人身上验过**（另三个工作区仍在跑，各需 20 分钟以上）。
+>   别把 Koch 的清单当成全库的清单——**去对着你要动的那个人物跑一次**。
 
 ### 要跑需要语料的判据（引文核验、OCR、塌缩、覆盖）时怎么办
 
