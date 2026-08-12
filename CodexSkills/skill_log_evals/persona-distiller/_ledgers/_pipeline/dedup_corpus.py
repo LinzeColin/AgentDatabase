@@ -24,6 +24,7 @@ Fröbel #181 一次抓回 30 份，其中 `autobiographyoff00frob`／`autobiogra
 ★ 退出码：0=跑完；2=参数错；3=raw 目录里没有可读文件。
 """
 import argparse
+import collections
 import hashlib
 import json
 import pathlib
@@ -31,6 +32,25 @@ import re
 import sys
 
 WS = re.compile(r"\s+")
+
+
+def work_key(title: str) -> str:
+    """把「同一套书的不同卷」归成一个键。**只用于报第二个口径，不参与去重。**
+
+    ★ 为什么要有：`deep` 要 45 个来源，而 Marshall 的 95 份里
+      **38 份是《The Life of George Washington》的不同卷／不同版**，
+      Lincoln 的 70 份里 **26 份是《Complete works》**。
+      按行数报「95 个来源」不算错（Bessemer #132 的先例：同一部书的不同卷各自独立），
+      **但只报这一个数，等于替读者选了最宽松那档**
+      （[[counts-need-their-cutoff-stated]]）。
+    ⇒ 两个数一起给：**台账行数**（门用的）与**按题名归并后的独立作品数**。
+    """
+    s = title.lower()
+    s = re.sub(r"[^a-z0-9äöüßàâçéèêëîïôùûñáíóúãõ ]+", " ", s)
+    s = re.sub(r"\b(vol|volume|band|tome|part|bd|v)\b\s*[ivxlcdm0-9]*", " ", s)
+    s = re.sub(r"\b[ivxlcdm]{1,6}\b", " ", s)
+    s = re.sub(r"\b\d{1,4}\b", " ", s)
+    return re.sub(r"\s+", " ", s).strip()[:60]
 
 
 def sketch(text: str, k: int = 8, keep: int = 3000) -> set:
@@ -107,14 +127,24 @@ def main() -> int:
         for i in sorted(v, key=lambda z: -meta[z][1]):
             t, w, c = meta[i]
             print(f"    {i[:46]:<48}{w:>9,} 词  {t}")
+    # ★ 第二个口径：按题名归并（同一套书的各卷合并）
+    keys = collections.Counter(work_key(meta[i][0]) for i in ids if meta[i][0])
+    biggest = "；".join(f"{k[:30]}×{v}" for k, v in keys.most_common(3) if v > 1)
+
     singles = len(ids) - sum(len(v) for v in dup.values())
     print(f"\n**独立文献数上界 = {singles + len(dup)}**"
           f"（{singles} 份无重合 + {len(dup)} 个簇各算 1）")
     print(f"  ★ 这是**上界**：簇内若其实是不同卷，数应更高；"
           f"低于 0.55 的部分重合本工具不合并，需人看。")
+    print(f"**按题名归并后的独立作品数 = {len(keys)}**"
+          f"（同一套书的各卷合并）" + (f"｜最大的几组：{biggest}" if biggest else ""))
+    print(f"  ★ **两个数都要报**：门用台账行数，而「这个人有多少部不同的作品」是另一个问题。")
     (raw / "_dedup.json").write_text(json.dumps({
         "文件数": len(ids), "阈值": a.threshold, "重复簇": list(dup.values()),
         "独立文献数上界": singles + len(dup),
+        "按题名归并的独立作品数": len(keys),
+        "★ 两个口径": "门用台账行数（同一套书的不同卷各自独立，Bessemer #132 先例）；"
+                     "按题名归并的数回答「他有多少部不同的作品」。**只报一个等于替读者选口径**",
         "★口径": "min-hash Jaccard；同卷多扫描与同书不同卷需人判",
     }, ensure_ascii=False, indent=2), encoding="utf-8")
     return 0
