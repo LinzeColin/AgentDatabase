@@ -67,6 +67,11 @@ K = 25          # k 词片；overlap 门看 ≥50 词的连续段，25 足以侦
 SAMPLE = 5      # 抽样率 1/5，**按哈希值抽**（见 shingles 的注释：按位置抽会漏 4/5）
 
 
+def _flat(s: str) -> str:
+    """归一到「小写 + 去标点 + 单空格」——与 check_holdout_mention 量文本重叠时同一口径。"""
+    return re.sub(r"\s+", " ", re.sub(r"[^\w\s]", " ", s.lower())).strip()
+
+
 def shingles(text: str) -> set:
     """k 词片的**按哈希值抽样**（不是按位置）。
 
@@ -149,11 +154,66 @@ def main() -> int:
     def ident(r):
         return r["locator"].split()[-1]
 
+    # ★★ ④b 2026-08-12 补：**排除 id 不够，要排除「正文里含有研究稿引文」的源**。
+    #   实测两例，都是**同一部书的另一个印本**：
+    #     Rousseau  密封了 `src-2173747b3a01`（1755 Discours），
+    #               而我在 01-writings.md 引的上下文 `avoir vu ce qui me paroit fi difficile`
+    #               在那一本里也逐字存在（他有 8 个印本，我引的是另一本）
+    #     Pestalozzi 密封了 `src-978bbac09ab9`，其题名页印着的书名串
+    #               正是 Scope 表里另一本 train 源的题名
+    #   ⇒ 规则④按 **source_id** 排除，挡不住「文本相同而 id 不同」。
+    #     `check_holdout_mention` 量的是**文本重叠**，所以这里也要用文本量。
+    #     ★ 同 [[a-gate-that-says-independent-may-not-be]]：口径要和被验的那道门对齐。
+    quoted = []
+    if rd.is_dir():
+        for f in rd.glob("*.md"):
+            body = f.read_text(encoding="utf-8", errors="replace")
+            k = body.find("## Source-linked observations")
+            if k < 0:
+                continue
+            # ★ 第一版只取 `> …` 引文块，**漏掉了 ★ 说明行里的行内反引号**——
+            #   Rousseau 的漏网就是这么来的：上下文引文写在 ★ 那一行里。
+            # ★★ 第二版改用 `` regex 取「反引号之间的内容」，**它匹配的是两条引文之间的夹缝**：
+            #   正则从头开始成对，取到的全是中文叙述（"定位可复算 三条已现场验过…"），
+            #   于是那份该排除的源照样进了拟密封。
+            #   ⇒ 反引号本来就是成对的：**按反引号切开，取奇数段**才是引文本身。
+            spans = body[k:].split("`")
+            for seg in spans[1::2]:
+                if len(seg) >= 40:
+                    quoted.append(_flat(seg))
+
+    # ★★★ 第三版才对：**要按片段匹配，不能按整句包含**。
+    #   `check_holdout_mention` 报的是「3 个片段」——它做的是 n 元词窗比对。
+    #   同一部书的不同印本会有细微差别（长 s 读成 fi/si、断词、页眉插入），
+    #   **整句对不上而片段对得上**：Rousseau 那份用整句包含查是 False，
+    #   而门实际命中的是 `avoir vu ce qui me paroit fi difficile` 这一段。
+    #   ⇒ 口径必须和被验的那道门一致：**任一 8 词窗命中即排除**。
+    NG = 8
+
+    def _windows(flat: str):
+        w = flat.split()
+        for i in range(max(0, len(w) - NG + 1)):
+            yield " ".join(w[i:i + NG])
+
+    q_windows = set()
+    for q in quoted:
+        q_windows.update(_windows(q))
+
+    def carries_quote(rec) -> bool:
+        if not q_windows:
+            return False
+        f = raw / pathlib.Path(rec["local_path"]).name
+        if not f.is_file():
+            return False
+        flat = _flat(f.read_text(encoding="utf-8", errors="replace"))
+        return any(win in flat for win in q_windows)
+
     base = [r for r in recs
             if not r.get("derived_from")
             and ident(r) not in in_cluster
             and r.get("tier") in (("P1", "P2", "S1", "S2") if a.allow_secondary else ("P1", "P2"))
-            and r["source_id"] not in cited]              # ④
+            and r["source_id"] not in cited                # ④  id
+            and not carries_quote(r)]                      # ④b 正文
     if not base:
         print("**一份合格候选都没有**", file=sys.stderr)
         return 3

@@ -2,11 +2,12 @@
 
 ## Scope and assigned sources
 
-**本道分到 60 份（train split）**：
+**本道分到 61 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
 | `src-e21555d11891` | 1751 | P1 | Observations de Jean-Jacques Rousseau de Geneve. Sur la ré…ui a été faite à son Discours |
+| `src-2173747b3a01` | 1755 | P1 | Discours sur l'origine et les fondemens de l'inegalité parmi les hommes. |
 | `src-429979edb42e` | 1755 | P1 | Discours sur l'origine & les fondements de l'inégalité parmi les hommes: |
 | `src-78d329fb5da1` | 1755 | P1 | Discours sur l'origine & les fondements de l'inégalité parmi les hommes |
 | `src-7de63f6c8842` | 1755 | P1 | Discours sur l'origine, et les fondemens de l'inégalité parmi les hommes |

@@ -77,8 +77,8 @@ which I lay down` ——**「我知道，常常能举出与我所立规则相反
 
 - 一条是**法文的数字化公有领域声明**（`Nous encourageons … l'utilisation des ouvrages
   et documents appartenant au domaine public`）——**图书馆的样板，不是他的话**，
-  而它出现在一份 `tier=P1` 的源里。★ 这类样板**能被 `check_holdout_overlap` 的
-  df 过滤当作样板剔掉，却挡不住引文摘取**。
+  而它出现在一份 `tier=P1` 的源里。★ 这类样板**能被重合类判据的 df 过滤
+  当成样板剔掉，却挡不住引文摘取**。
 - 一条 `They are now offered to the public in their original form and language.`
   ——语气像编者说明，**归属存疑，不引**。
 ## Candidate Claims
