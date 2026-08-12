@@ -102,6 +102,12 @@ def main() -> int:
     ap.add_argument("--min-len", type=int, default=70)
     ap.add_argument("--max-len", type=int, default=200)
     ap.add_argument("--exclude-third-party", action="store_true")
+    ap.add_argument("--pick", default="median", choices=("first", "median", "spread"),
+                    help="每份文件里取第几个命中。★ **默认 median，不是 first**："
+                         "first 会把候选恒定钉在卷首（Lincoln 实测 8 条偏移全部 < 12000，"
+                         "而文件有几十万字符），而卷首正是编者序、献词、数字化声明住的地方；"
+                         "本批 5 次「第一人称属于别人」有 4 次是这么捡回来的。"
+                         "first 只为复现旧结果保留。")
     ap.add_argument("--first-person", action="store_true",
                     help="只要含第一人称的句子")
     ap.add_argument("--lang", default="en", choices=sorted(FP.keys()),
@@ -124,11 +130,12 @@ def main() -> int:
         return 3
 
     out = []
-    for r in sorted(pool, key=lambda x: str(x.get("published_at") or "")):
+    for idx, r in enumerate(sorted(pool, key=lambda x: str(x.get("published_at") or ""))):
         f = raw / pathlib.Path(r["local_path"]).name
         if not f.exists():
             continue
         norm = WS.sub(" ", dehyphenate(f.read_text(encoding="utf-8", errors="replace")))
+        cands = []
         for m in re.finditer(r"[^.?!]{%d,%d}[.?!]" % (a.min_len, a.max_len), norm):
             s = m.group(0).strip()
             if len(BAD_CHARS.findall(s)) > 1 or BAD_RUN.search(s):
@@ -141,13 +148,28 @@ def main() -> int:
                 continue
             if a.first_person and not re.search(FP[a.lang], s, 0 if a.lang == "en" else re.I):
                 continue
-            off = norm.find(s)
-            if off < 0 or norm[off:off + len(s)] != s:      # ★ 自校验，不过不输出
+            # ★ 偏移必须是**刚匹配到的那一处**，不能用 norm.find(s)。
+            #   norm.find 返回全文**首次**出现的位置——同一句重复出现时（重印全集里常见），
+            #   它指向另一处；而 flag_borrowed_voice 正是按这个偏移读上下文的，
+            #   于是它会去读**错的那一处**的上下文。自校验查不出来：两处文本本来就一样。
+            off = m.start() + (len(m.group(0)) - len(m.group(0).lstrip()))
+            if norm[off:off + len(s)] != s:                 # ★ 自校验，不过不输出
                 continue
-            out.append({"source_id": r["source_id"], "published_at": r.get("published_at", ""),
-                        "title": r.get("title", "")[:60], "norm_offset": off,
-                        "len": len(s), "quote": s})
-            break                                           # 每份只取一条，保多样性
+            cands.append({"source_id": r["source_id"], "published_at": r.get("published_at", ""),
+                          "title": r.get("title", "")[:60], "norm_offset": off,
+                          "len": len(s), "quote": s})
+        if not cands:
+            continue
+        # ★ 每份只取一条（保源的多样性），但**取哪一条**决定了深度上的偏置。
+        #   第一版恒取 cands[0]，于是 Lincoln 8 条候选偏移**全部 < 12000**（最大 11506），
+        #   而那些文件有几十万字符——**卷首正是编者序、献词、数字化声明住的地方**，
+        #   本批 5 次「第一人称属于别人」里有 4 次就是这么捡回来的。
+        k = {"first": 0, "median": len(cands) // 2,
+             "spread": (idx * 7 + len(cands) // 3) % len(cands)}[a.pick]
+        pick = dict(cands[k])
+        pick["该源命中数"] = len(cands)
+        pick["取第几条"] = f"{k + 1}/{len(cands)}（--pick {a.pick}）"
+        out.append(pick)
     if not out:
         print("**一条都没取到** —— 不是「没有引文」，是筛太紧（长度/坏行/第一人称）",
               file=sys.stderr)
