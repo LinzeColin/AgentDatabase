@@ -111,8 +111,52 @@
 >   **接手方在移交树上跑出的「干净」是假的干净**：
 >   取回语料之后才会看见 holdout 重叠、未声明重复源、长 s 讹字、Fraktur 乱码…
 >
-> ★ **这一档只在 Koch 一个人身上验过**（另三个工作区仍在跑，各需 20 分钟以上）。
->   别把 Koch 的清单当成全库的清单——**去对着你要动的那个人物跑一次**。
+> ### ★★ 四个人全跑完了——**其中一条把我上面写的话推翻了**
+>
+> | 人物 | 有语料 rc | err | warn |
+> |---|---:|---:|---:|
+> | robert-koch | 1 | 5 | 7 |
+> | florence-nightingale | 1 | 4 | 5 |
+> | george-washington-carver | 1 | 2 | 1 |
+> | **oliver-wendell-holmes-jr** | **0** | **0** | **0** |
+>
+> ★ **Holmes 有语料时完全干净**（rc=0、零错零警）——
+>   而在移交树上他 err=1 warn=1。**对他，那两条全是「没语料」造成的。**
+>
+> **三档按四人合并**（括号是几人身上出现）：
+>
+>     ① 只在无语料时出现 ⇒ 取回后消失
+>          research.ledger-file-missing           (4/4)
+>          research.lane_quotes                   (3/4)
+>
+>     ② 两边都有 ⇒ 真的，与语料无关
+>          corpus.holdout-mentioned-in-artifacts  (3/4)
+>          corpus.title-is-just-the-filename      (3/4)
+>          eval.rubric-demands-frame-break        (2/4)
+>          corpus.holdout-work-named-in-artifacts (2/4)
+>          source.primary-ratio                   (1/4)
+>          corpus.no-viable-holdout-split         (1/4)
+>          **research.lane_quotes                 (1/4)** ← 见下
+>
+>     ③ 只在有语料时出现 ⇒ 移交树看不见的真问题
+>          corpus.undeclared-duplicate-sources    (3/4)
+>          corpus.longs-corruption                (2/4)
+>          corpus.holdout-overlap                 (2/4)
+>          corpus.unexamined-band                 (2/4)
+>          research.catalogue-entry               (1/4)
+>          corpus.fraktur-mojibake                (1/4)
+>
+> ### ★★★ 更正：**「lane_quotes 取回语料后会自己消失」这句话不总成立**
+>
+> 上面那段（只跑了 Grotius 一个对照时写的）说得太满。四人实测：
+> **3/4 人取回语料后确实消失**，而 **Nightingale 有语料时仍报 1 条**：
+>
+>     research.lane_quotes：**1 条**逐字引文回原文对不上
+>
+> ⇒ **数量是判准，不是有无**：移交树上报的是几十条（52/65/72/73/77…），
+>   那是「原文不在」；**有语料时若仍剩个位数，那是真的对不上，要逐条读**。
+> ★ 这正是本项目最常犯的一种——**拿一个样本的结论去说全部**
+>   （[[samples-cannot-support-universal-claims]]）。**我当天又犯了一次，四人对照才抓到。**
 
 ### 要跑需要语料的判据（引文核验、OCR、塌缩、覆盖）时怎么办
 
