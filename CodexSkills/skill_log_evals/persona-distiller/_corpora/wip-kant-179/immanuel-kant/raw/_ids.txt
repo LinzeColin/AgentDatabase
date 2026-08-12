@@ -1,0 +1,32 @@
+# kant：探源 200 条 → 留 30 条（上限 30，截掉 147）
+# 丢：访问受限 19；版次年>1930 4；同名者 0；目标不在creator 0
+00074230bsb
+265433882.1678.emory.edu
+FilosofaDeLaHistoriaEmmanuelKant
+briefwechselvoni01kant
+KantAntropologiaPrammatica
+bim_eighteenth-century_essays-and-treatises-on-_kant-immanuel_1798_2
+metaphysicofethi00kantiala
+dli.ministry.13241
+india.history.resource.90167
+10040686bsb
+265433882.1682.emory.edu
+Kant-polmica-CRP
+briefwechselvoni02kant
+ProlegomeniKantMartinetti
+bim_eighteenth-century_the-metaphysic-of-morals_kant-immanuel_1799_1
+textbooktokantcr00kant
+10040687bsb
+265433882.1713.emory.edu
+educationaltheor0000kant
+briefwechselvoni03kant
+b24885046
+10042413bsb
+ImmanuelKantsKritikDerReinenVernunftMitEinerEinleitungUnd
+ikuiseenrauhaanv53461gut
+critiqueofjudgem00kantuoft
+b28738615
+10043581bsb
+TheMetaphysicOfEthicsByImmanuelKantTranslatedByJ.w.SempleEdited
+immanuelkantpap00kant
+educationaltheor00kantuoft

@@ -1,0 +1,525 @@
+{
+  "总数": 64,
+  "计数": {
+    "一手": 64,
+    "二手": 0,
+    "需人判": 0
+  },
+  "一手占比下界": 1.0,
+  "一手占比上界": 1.0,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "10066336bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "J. J. Rousseau's Bekenntnisse: Geschichte seines männlichen Alters. Aus dem Fran",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 68441
+    },
+    {
+      "identifier": "10599347bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "J. J. Rousseau's Brief über die Musik: ein Wort, noch gültig für unsere Zeit",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 14432
+    },
+    {
+      "identifier": "10713049bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「correspondance」",
+      "title": "Correspondance. 1",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 49030
+    },
+    {
+      "identifier": "10762426bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Emil oder über die Erziehung. 2",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 100585
+    },
+    {
+      "identifier": "10762427bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Emil oder über die Erziehung. 3",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 100820
+    },
+    {
+      "identifier": "10764054bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Herrn Johann Jacob Rousseaus, Bürgers zu Genf, Aemil oder Von der Erziehung. 3",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 69305
+    },
+    {
+      "identifier": "11258220bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Mélanges. 1",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 64755
+    },
+    {
+      "identifier": "11718256bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Julie oder die neue Heloise: in Briefen zweyer Liebenden, Bewohner einer kleinen",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 38796
+    },
+    {
+      "identifier": "11918930bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Die Neue Heloise oder Briefe zweyer Liebenden, aus einer kleinen Stadt am Fusse ",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 53588
+    },
+    {
+      "identifier": "11919281bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres complettes. 27",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 71738
+    },
+    {
+      "identifier": "11919322bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefwechsel」",
+      "title": "Ungedruckter Briefwechsel mit Mme Latour de Franqueville und Herrn du Peyrou. 1",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 43115
+    },
+    {
+      "identifier": "1766jjacquesrous00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "J. Jacques Rousseau, citoyen de Généve, a Christophe de Beaumont, Archevêque de ",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 45896
+    },
+    {
+      "identifier": "1782collectionco10rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Collection complete des oeuvres de J.J. Rousseau, citoyen de Geneve",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778; Du Peyrou, Pierre Alexandre, 1729-1794; Moult",
+      "words": 160032
+    },
+    {
+      "identifier": "1782collectionco17rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Collection complete des oeuvres de J.J. Rousseau, citoyen de Geneve",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778; Du Peyrou, Pierre Alexandre, 1729-1794; Moult",
+      "words": 122181
+    },
+    {
+      "identifier": "1791emileoudel02rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Emile; ou, De l'éducation",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 69457
+    },
+    {
+      "identifier": "1791emileoudel03rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Emile; ou, De l'éducation",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 67219
+    },
+    {
+      "identifier": "1846oeuvrescom02rousuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres complètes. Avec des notes historiques",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 655426
+    },
+    {
+      "identifier": "1911lettresind00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lettres inédites de Jean-Jacques Rousseau, à Mmes Boy de La Tour et Delessert, c",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778; Boy de La Tour, Julie Anne Marie, 1715-1780; ",
+      "words": 69265
+    },
+    {
+      "identifier": "31383026610652",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Emilius and Sophia; or, A new system of education",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 81485
+    },
+    {
+      "identifier": "BIUSante_07891x01",
+      "档": "一手",
+      "依据": "题名含自述体标记「confessions」且目标为第一作者",
+      "title": "Collections complètes des oeuvres de J.J. Rousseau, Citoyen de Genève / Vol. X c",
+      "creator": "ROUSSEAU, Jean-Jacques",
+      "words": 110729
+    },
+    {
+      "identifier": "a1758jjrousseauci00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "J.J. Rousseau citoyen de Genève dans le VIIme. volume de l'Encyclopédie, et part",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778; Alembert, Jean Le Rond d', 1717-1783",
+      "words": 56637
+    },
+    {
+      "identifier": "amileoudeldu01rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Émile, ou De l'éducation",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 85111
+    },
+    {
+      "identifier": "amileoudeldu02rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Émile, ou De l'éducation",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 68943
+    },
+    {
+      "identifier": "amileoudeldu03rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Émile, ou De l'éducation",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 66986
+    },
+    {
+      "identifier": "amileoudeldu04rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Émile, ou De l'éducation",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 80040
+    },
+    {
+      "identifier": "avisauxgensdelet00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Avis aux gens de lettres",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778. Selections. 1781; Hardoin, libraire; Guyot, l",
+      "words": 263
+    },
+    {
+      "identifier": "bekenntnisseunv00hardgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Bekenntnisse. Unverkürzt aus dem französischen",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 1726
+    },
+    {
+      "identifier": "bim_eighteenth-century_a-dialogue-between-a-man_rousseau-jean-jacques_1761",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "A dialogue between a man of letters and Mr. J. J. Rousseau, on the subject of ro",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 8426
+    },
+    {
+      "identifier": "bim_eighteenth-century_an-inquiry-into-the-natu_rousseau-jean-jacques_1791_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "An inquiry into the nature of the social contract; or principles of political ri",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 55898
+    },
+    {
+      "identifier": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1787",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "[Botanique. English]. Letters on the elements of botany.  1787",
+      "creator": "Rousseau, Jean Jacques.",
+      "words": 138746
+    },
+    {
+      "identifier": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1796",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "[Botanique. English]. Letters on the elements of botany, addressed to a lady, by",
+      "creator": "Rousseau, Jean-Jacques.",
+      "words": 154248
+    },
+    {
+      "identifier": "bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Eloisa: ...  1784: Vol 1",
+      "creator": "Rousseau, Jean Jacques",
+      "words": 92252
+    },
+    {
+      "identifier": "bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_2",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Eloisa: ...  1784: Vol 2",
+      "creator": "Rousseau, Jean Jacques",
+      "words": 84895
+    },
+    {
+      "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Eloisa: or, a series of original letters collected and published by J. J. Rousse",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 83400
+    },
+    {
+      "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_3_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Eloisa: or, a series of original letters collected and published by J. J. Rousse",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 95692
+    },
+    {
+      "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1764_1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Eloisa: or, a series of original letters collected and published by J. J. Rousse",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 105354
+    },
+    {
+      "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-o_rousseau-jean-jacques_1769_1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Eloisa: or a series of original letters collected and published by J.J. Rousseau",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 96441
+    },
+    {
+      "identifier": "bim_eighteenth-century_emile-english-emilius_rousseau-jean-jacques_1767_3",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "[Emile. English] Emilius and Sophia: or, a new system of education. Translated f",
+      "creator": "Rousseau, Jean Jacques",
+      "words": 69097
+    },
+    {
+      "identifier": "bim_eighteenth-century_emilius-and-sophia-or-_rousseau-jean-jacques_1783",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Emilius and Sophia; or, a new system of education. Translated from the French of",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 6215
+    },
+    {
+      "identifier": "bub_gb_3DbL7IDH2jIC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Petits chefs-d'oeuvre",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 229793
+    },
+    {
+      "identifier": "bub_gb_OXcpAAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Emil, oder Über die erziehung;",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 36560
+    },
+    {
+      "identifier": "bub_gb_yN1MAAAAcAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Emil oder über die Erziehung",
+      "creator": "Rousseau, Jean-Jacques; Cramer, Carl Friedrich; Campe, Joachim Heinrich",
+      "words": 168177
+    },
+    {
+      "identifier": "bub_gb_zN1MAAAAcAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Emil oder über die Erziehung",
+      "creator": "Rousseau, Jean-Jacques; Cramer, Carl Friedrich; Campe, Joachim Heinrich",
+      "words": 99690
+    },
+    {
+      "identifier": "ceuvrescomplete00troigoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「[oœ]uvres」",
+      "title": "Œuvres complètes",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 402847
+    },
+    {
+      "identifier": "collectioncompl31rousgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「[oœ]uvres」",
+      "title": "Collection complète des œuvres de J.J. Rousseau",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 93864
+    },
+    {
+      "identifier": "collectioncompl41rousgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Collection complette des oeuvres de J.J. Rousseau",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 215704
+    },
+    {
+      "identifier": "collectioncompl76rousgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「[oœ]uvres」",
+      "title": "Collection complete des œuvres de J.J. Rousseau",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 94191
+    },
+    {
+      "identifier": "collectioncompl78rousgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Collection complete des oeuvres de J. J. Rousseau ..",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 82072
+    },
+    {
+      "identifier": "confessionsofjjr03904gut",
+      "档": "一手",
+      "依据": "题名含自述体标记「confessions」且目标为第一作者",
+      "title": "Confessions of J. J. Rousseau, the - Volume 04",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 20034
+    },
+    {
+      "identifier": "confessionsofjjr03905gut",
+      "档": "一手",
+      "依据": "题名含自述体标记「confessions」且目标为第一作者",
+      "title": "Confessions of J. J. Rousseau, the - Volume 05",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 23559
+    },
+    {
+      "identifier": "confessionsofjjr03906gut",
+      "档": "一手",
+      "依据": "题名含自述体标记「confessions」且目标为第一作者",
+      "title": "Confessions of J. J. Rousseau, the - Volume 06",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 22736
+    },
+    {
+      "identifier": "confessionsofjjr03912gut",
+      "档": "一手",
+      "依据": "题名含自述体标记「confessions」且目标为第一作者",
+      "title": "Confessions of J. J. Rousseau, the - Volume 12",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 32864
+    },
+    {
+      "identifier": "confessionsofjjr03913gut",
+      "档": "一手",
+      "依据": "题名含自述体标记「confessions」且目标为第一作者",
+      "title": "Confessions of J. J. Rousseau, the - Complete",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 278347
+    },
+    {
+      "identifier": "cu31924014398154",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Famous Utopias; being the complete text of Rousseau's social contract; More's Ut",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778. Du contrat social. English; More, Thomas, Sir",
+      "words": 125701
+    },
+    {
+      "identifier": "cu31924027383284",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Selections from the works of Jean-Jacques Rousseau",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 65025
+    },
+    {
+      "identifier": "dictionnairedemu02rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Dictionnaire de musique",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778; Rousseau, Jean-Jacques, 1712-1778. Devin du v",
+      "words": 97360
+    },
+    {
+      "identifier": "ducontractsocia00rousgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Du contract social, ou, Principes du droit politique",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 47210
+    },
+    {
+      "identifier": "eloisaoraseries01rousgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Eloisa, or, A series of original letters ",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778; American Imprint Collection (Library of Congr",
+      "words": 82093
+    },
+    {
+      "identifier": "espritmaximesetp00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Esprit, maximes, et principes /",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 93559
+    },
+    {
+      "identifier": "india.history.resource.94272",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Social Contract or Principles of Political Right",
+      "creator": "Rousseau, Jean Jacques; Tozer, Henry J. (Tr.); Eosanquet, Bernard",
+      "words": 75145
+    },
+    {
+      "identifier": "mileoudelducatio00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Émile, ou, De l'éducation",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 334178
+    },
+    {
+      "identifier": "uvrescompltesde04rousgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「[oœ]uvres」",
+      "title": "Œuvres complètes de J.-J. Rousseau",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 354052
+    },
+    {
+      "identifier": "uvrescompltesde07rousgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「[oœ]uvres」",
+      "title": "Œuvres complètes de J.-J. Rousseau",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 333915
+    },
+    {
+      "identifier": "yhteiskuntasopim53593gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Yhteiskuntasopimuksestaeli Valtio-oikeuden johtavat aatteet",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 43057
+    }
+  ]
+}

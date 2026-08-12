@@ -1,0 +1,63 @@
+{
+  "文件数": 73,
+  "阈值": 0.55,
+  "重复簇": [
+    [
+      "ahm3974.0001.001.umich.edu",
+      "completeconstitu00marsuoft",
+      "cu31924024323069",
+      "johnmarshallcom00marsgoog",
+      "johnmarshallcom01marsgoog"
+    ],
+    [
+      "bub_gb_QSAFAAAAYAAJ",
+      "lifegeorgewashi05washgoog",
+      "lifeofgeorgewash0000mars",
+      "lifeofgeorgewash01mars2",
+      "lifeofgeorgewash01mars_0",
+      "lifeofgeorgewash01marsiala",
+      "lifeofgeorgewash01marsuoft"
+    ],
+    [
+      "constitutionald00cottgoog",
+      "constitutionalde01marsuoft"
+    ],
+    [
+      "cu31924032751632",
+      "marshallchiefjust00marsrich",
+      "politicalandeco02ostegoog",
+      "politicaleconomi00mars",
+      "politicaleconomi00marsrich"
+    ],
+    [
+      "historyofcolonie00mars",
+      "historyofcolonie01mars"
+    ],
+    [
+      "lifeof05georgewashmars",
+      "lifeofgeorgewash1926mars"
+    ],
+    [
+      "lifeofgeorgewash0002mars",
+      "lifeofgeorgewash02mars_0",
+      "lifeofgeorgewash02marsiala",
+      "lifeofgeorgewash02marsuoft"
+    ],
+    [
+      "lifeofgeorgewash004mars",
+      "lifeofgeorgewash04marsiala"
+    ],
+    [
+      "lifeofgeorgewash005mars",
+      "lifeofgeorgewash05marsiala"
+    ],
+    [
+      "lifeofgeorgewash00mars",
+      "lifeofgeorgewash00marsuoft",
+      "lifeofgeorgewash06mars",
+      "lifeofgeorgewash1860mars"
+    ]
+  ],
+  "独立文献数上界": 48,
+  "★口径": "min-hash Jaccard；同卷多扫描与同书不同卷需人判"
+}

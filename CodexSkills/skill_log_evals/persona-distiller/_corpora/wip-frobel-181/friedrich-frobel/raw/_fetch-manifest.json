@@ -1,0 +1,1391 @@
+{
+  "生成时刻": "2026-08-12T13:27:05",
+  "请求数": 2,
+  "已取回": 51,
+  "skipped_access_restricted": 0,
+  "失败": 0,
+  "并发降级": "无（全程并发 4）",
+  "总词数": 4619699,
+  "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
+  "记录": [
+    {
+      "identifier": "10762804bsb",
+      "status": "已取回",
+      "note": "",
+      "file": "10762804bsb.txt",
+      "source_url": "https://archive.org/download/10762804bsb/10762804bsb_djvu.txt",
+      "sha256": "18b6090f5f15371d9006f81a8dcc9ff9407af4609b573f06bc83ee5c1dbbc2e9",
+      "bytes": 1218995,
+      "words": 177155,
+      "fetched_at": "2026-08-12T13:14:24",
+      "ia_date": "1863",
+      "ia_year": "",
+      "ia_publicdate": "2026-03-20 08:14:16",
+      "ia_creator": "Fröbel, Friedrich",
+      "ia_title": "Friedrich Fröbel's gesammelte pädagogische Schriften. 1,2",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1826",
+        "1836",
+        "1862",
+        "1863",
+        "1996"
+      ]
+    },
+    {
+      "identifier": "FroebelEducazioneUomo",
+      "status": "已取回",
+      "note": "",
+      "file": "FroebelEducazioneUomo.txt",
+      "source_url": "https://archive.org/download/FroebelEducazioneUomo/FroebelEducazioneUomo_djvu.txt",
+      "sha256": "ea158b847c59b40dacf207f077774431d079fa2a914e6b4c85f909261eaa58f8",
+      "bytes": 633144,
+      "words": 90505,
+      "fetched_at": "2026-08-12T13:14:24",
+      "ia_date": "1889",
+      "ia_year": "",
+      "ia_publicdate": "2018-05-10 15:33:39",
+      "ia_creator": "Fröbel, Friedrich",
+      "ia_title": "L Educazione Dell Uomo",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1886"
+      ]
+    },
+    {
+      "identifier": "aidstofamilygove00meyeuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "aidstofamilygove00meyeuoft.txt",
+      "source_url": "https://archive.org/download/aidstofamilygove00meyeuoft/aidstofamilygove00meyeuoft_djvu.txt",
+      "sha256": "6efe0d112ef5dd0928fb0de48e23fe75b8bf76de52fc7d40d890bdc035d37482",
+      "bytes": 433644,
+      "words": 65722,
+      "fetched_at": "2026-08-12T13:14:25",
+      "ia_date": "1879",
+      "ia_year": "",
+      "ia_publicdate": "2008-04-11 23:56:01",
+      "ia_creator": [
+        "Meyer, Bertha, 1822-1896",
+        "Fröbel, Friedrich, 1782-1852",
+        "Spencer, Herbert, 1820-1903"
+      ],
+      "ia_title": "Aids to family government, or, From the cradle to the school, according to Froebel [microform]",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1876",
+        "1878",
+        "1879",
+        "1976",
+        "2008"
+      ]
+    },
+    {
+      "identifier": "autobiography00fruoft",
+      "status": "已取回",
+      "note": "",
+      "file": "autobiography00fruoft.txt",
+      "source_url": "https://archive.org/download/autobiography00fruoft/autobiography00fruoft_djvu.txt",
+      "sha256": "d4b9a6e4246fd39e018530501d505a2e9dd666582ac7c4a96fa06b9030583e09",
+      "bytes": 407696,
+      "words": 69508,
+      "fetched_at": "2026-08-12T13:14:23",
+      "ia_date": "1908",
+      "ia_year": "",
+      "ia_publicdate": "2007-10-18 15:51:16",
+      "ia_creator": "Fröbel, Friedrich, 1782-1852",
+      "ia_title": "Autobiography;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1886",
+        "1888",
+        "1892",
+        "1893",
+        "1894",
+        "1896",
+        "1901",
+        "1906",
+        "1908",
+        "2007"
+      ]
+    },
+    {
+      "identifier": "autobiographyoff00fr",
+      "status": "已取回",
+      "note": "",
+      "file": "autobiographyoff00fr.txt",
+      "source_url": "https://archive.org/download/autobiographyoff00fr/autobiographyoff00fr_djvu.txt",
+      "sha256": "d57796f8101f41bad5f90c06f23a2c604331c1af5ef6e4c2e90f01e1f5a8c955",
+      "bytes": 447378,
+      "words": 66191,
+      "fetched_at": "2026-08-12T13:14:26",
+      "ia_date": "1889",
+      "ia_year": "",
+      "ia_publicdate": "2009-08-17 17:07:51",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Michaelis, Emilie",
+        "Moore, Henry Keatley, b. 1846"
+      ],
+      "ia_title": "Autobiography of Friedrich Froebel",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1715",
+        "1771",
+        "1849",
+        "1862",
+        "1879",
+        "1880",
+        "1885",
+        "1886",
+        "1889"
+      ]
+    },
+    {
+      "identifier": "autobiographyoff00frbe",
+      "status": "已取回",
+      "note": "",
+      "file": "autobiographyoff00frbe.txt",
+      "source_url": "https://archive.org/download/autobiographyoff00frbe/autobiographyoff00frbe_djvu.txt",
+      "sha256": "acbb866a32d5b92eb0abdf1f7f3caa94dbdf06a05915c65e87d4a98e9c6f89e8",
+      "bytes": 461388,
+      "words": 68906,
+      "fetched_at": "2026-08-12T13:14:27",
+      "ia_date": "1908",
+      "ia_year": "",
+      "ia_publicdate": "2014-08-13 13:19:46",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Michaelis, Emilie",
+        "Moore, Henry Keatley, 1846-"
+      ],
+      "ia_title": "Autobiography of Friedrich Froebel",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1770",
+        "1782",
+        "1786",
+        "1802",
+        "1816",
+        "1820",
+        "1824",
+        "1827",
+        "1852",
+        "1862",
+        "1882",
+        "1886"
+      ]
+    },
+    {
+      "identifier": "autobiographyoff00frob",
+      "status": "已取回",
+      "note": "",
+      "file": "autobiographyoff00frob.txt",
+      "source_url": "https://archive.org/download/autobiographyoff00frob/autobiographyoff00frob_djvu.txt",
+      "sha256": "ccca8dba7834eb7cd31a329e247760a16947af830b7437598429d201f3d2c5ba",
+      "bytes": 447332,
+      "words": 66304,
+      "fetched_at": "2026-08-12T13:14:28",
+      "ia_date": "1889",
+      "ia_year": "",
+      "ia_publicdate": "2008-08-22 18:43:09",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Michaelis, Emilie",
+        "Moore, H. Keatley, b. 1846"
+      ],
+      "ia_title": "Autobiography of Friedrich Froebel",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1771",
+        "1849",
+        "1862",
+        "1879",
+        "1880",
+        "1885",
+        "1886",
+        "1889"
+      ]
+    },
+    {
+      "identifier": "autobiographyoff00froeiala",
+      "status": "已取回",
+      "note": "",
+      "file": "autobiographyoff00froeiala.txt",
+      "source_url": "https://archive.org/download/autobiographyoff00froeiala/autobiographyoff00froeiala_djvu.txt",
+      "sha256": "9e1a03fec2e7b4128a101f553ee2a982cf97be3e6b896fb8b59b5a28d0306a06",
+      "bytes": 462615,
+      "words": 69003,
+      "fetched_at": "2026-08-12T13:14:29",
+      "ia_date": "1891",
+      "ia_year": "",
+      "ia_publicdate": "2007-08-30 17:44:30",
+      "ia_creator": [
+        "Froebel, Friedrich, 1782-1852",
+        "Michaelis, Emilie",
+        "Moore, H. Keatley, b. 1846"
+      ],
+      "ia_title": "Autobiography of Friedrich Froebel",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1770",
+        "1782",
+        "1786",
+        "1802",
+        "1816",
+        "1820",
+        "1824",
+        "1827",
+        "1851",
+        "1852",
+        "1862",
+        "1882"
+      ]
+    },
+    {
+      "identifier": "autobiographyoff00fruoft",
+      "status": "已取回",
+      "note": "",
+      "file": "autobiographyoff00fruoft.txt",
+      "source_url": "https://archive.org/download/autobiographyoff00fruoft/autobiographyoff00fruoft_djvu.txt",
+      "sha256": "9a599af464268e97e052870db4b5a40cea18ec71cbde3b76f48ba333eb03b829",
+      "bytes": 462341,
+      "words": 68964,
+      "fetched_at": "2026-08-12T13:14:30",
+      "ia_date": "1906",
+      "ia_year": "",
+      "ia_publicdate": "2007-06-20 17:24:25",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Michaelis, Emilie",
+        "Moore, Henry Keatley, 1846-"
+      ],
+      "ia_title": "Autobiography of Friedrich Froebel",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1770",
+        "1782",
+        "1786",
+        "1802",
+        "1813",
+        "1816",
+        "1820",
+        "1824",
+        "1827",
+        "1851",
+        "1852",
+        "1862"
+      ]
+    },
+    {
+      "identifier": "autobiooffriedri00froeiala",
+      "status": "已取回",
+      "note": "",
+      "file": "autobiooffriedri00froeiala.txt",
+      "source_url": "https://archive.org/download/autobiooffriedri00froeiala/autobiooffriedri00froeiala_djvu.txt",
+      "sha256": "17bb2d882bebd2a7f7fe036a1448383258c1fd773fe817dbb14393e90464461e",
+      "bytes": 397328,
+      "words": 59343,
+      "fetched_at": "2026-08-12T13:14:31",
+      "ia_date": "1886",
+      "ia_year": "",
+      "ia_publicdate": "2007-08-30 17:46:22",
+      "ia_creator": [
+        "Froebel, Friedrich, 1782-1852",
+        "Moore, H. Keatley, b. 1846",
+        "Michaelis, Emilie"
+      ],
+      "ia_title": "Autobiography of Friedrich Froebel",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1770",
+        "1782",
+        "1786",
+        "1802",
+        "1813",
+        "1816",
+        "1820",
+        "1824",
+        "1827",
+        "1851",
+        "1852",
+        "1862"
+      ]
+    },
+    {
+      "identifier": "bub_gb_SMoJAQAAIAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_SMoJAQAAIAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_SMoJAQAAIAAJ/bub_gb_SMoJAQAAIAAJ_djvu.txt",
+      "sha256": "0e9685ee5c802d787279bce0b046b84979b4146a6d282e39fe2f9e44e37f8fe1",
+      "bytes": 1195819,
+      "words": 174759,
+      "fetched_at": "2026-08-12T13:27:05",
+      "ia_date": "1863",
+      "ia_year": "1863",
+      "ia_publicdate": "2014-12-08 09:31:57",
+      "ia_creator": "Friedrich Fröbel",
+      "ia_title": "Die Menschenerziehung und Kussäke verschiedenen Inhalts",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1826",
+        "1836",
+        "1862",
+        "1863"
+      ]
+    },
+    {
+      "identifier": "bub_gb_kmc0AQAAMAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_kmc0AQAAMAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_kmc0AQAAMAAJ/bub_gb_kmc0AQAAMAAJ_djvu.txt",
+      "sha256": "6846b75256663d9bc53aa5879052ef956011a6efb3b1df209973b95743f850c8",
+      "bytes": 1287130,
+      "words": 187721,
+      "fetched_at": "2026-08-12T13:14:32",
+      "ia_date": "1862",
+      "ia_year": "1862",
+      "ia_publicdate": "2015-02-25 16:50:37",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Lange, Wichard, 1826-1884"
+      ],
+      "ia_title": "Friedrich Fröbel's Gesammelte pädogogische schriften",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1780",
+        "1813",
+        "1814",
+        "1825",
+        "1849",
+        "1852",
+        "1861",
+        "1862"
+      ]
+    },
+    {
+      "identifier": "bub_gb_xhwBAAAAYAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_xhwBAAAAYAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_xhwBAAAAYAAJ/bub_gb_xhwBAAAAYAAJ_djvu.txt",
+      "sha256": "78c284144dcfbf1f2502e43831a1cb3cb0898dd47607d91329e81e472a4c967d",
+      "bytes": 1393456,
+      "words": 174743,
+      "fetched_at": "2026-08-12T13:14:34",
+      "ia_date": "1862",
+      "ia_year": "1863",
+      "ia_publicdate": "2016-09-05 09:49:42",
+      "ia_creator": "Fröbel, Friedrich, 1782-1852",
+      "ia_title": "Gesammelte pädagogische Schriften",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1826",
+        "1836",
+        "1862",
+        "1863"
+      ]
+    },
+    {
+      "identifier": "educationofman00f",
+      "status": "已取回",
+      "note": "",
+      "file": "educationofman00f.txt",
+      "source_url": "https://archive.org/download/educationofman00f/educationofman00f_djvu.txt",
+      "sha256": "c5b1c845ca63204b76dfb5b7e3f6ae56ec1bec868c5d39f5a41201c159e65c54",
+      "bytes": 744291,
+      "words": 110754,
+      "fetched_at": "2026-08-12T13:14:35",
+      "ia_date": "1890",
+      "ia_year": "",
+      "ia_publicdate": "2009-11-30 11:49:45",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Hailmann, William Nicholas, 1836- [from old catalog] tr"
+      ],
+      "ia_title": "The education of man",
+      "ia_licenseurl": "",
+      "titlepage_years": []
+    },
+    {
+      "identifier": "educationofman00fr",
+      "status": "已取回",
+      "note": "",
+      "file": "educationofman00fr.txt",
+      "source_url": "https://archive.org/download/educationofman00fr/educationofman00fr_djvu.txt",
+      "sha256": "5a7b788a774a1c4f87f8e8f57595b6359841a10d9f50ae25562ffeeaae4b77d4",
+      "bytes": 741022,
+      "words": 110279,
+      "fetched_at": "2026-08-12T13:14:35",
+      "ia_date": "1901",
+      "ia_year": "",
+      "ia_publicdate": "2009-06-03 19:58:07",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Hailmann, W. N. (William Nicholas), 1836-1920"
+      ],
+      "ia_title": "The education of man",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1817",
+        "1823",
+        "1826",
+        "1831",
+        "1833",
+        "1840",
+        "1887",
+        "1901"
+      ]
+    },
+    {
+      "identifier": "educationofman00fr2",
+      "status": "已取回",
+      "note": "",
+      "file": "educationofman00fr2.txt",
+      "source_url": "https://archive.org/download/educationofman00fr2/educationofman00fr2_djvu.txt",
+      "sha256": "3bab9a30dc87da69917337fd1c3ef79ce669d19950850d5cfa2e462797be9465",
+      "bytes": 714268,
+      "words": 106544,
+      "fetched_at": "2026-08-12T13:14:36",
+      "ia_date": "1887",
+      "ia_year": "",
+      "ia_publicdate": "2009-11-30 11:54:11",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Hailmann, William Nicholas, 1836- [from old catalog] tr"
+      ],
+      "ia_title": "The education of man",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1840",
+        "1887"
+      ]
+    },
+    {
+      "identifier": "educationofman00frbe",
+      "status": "已取回",
+      "note": "",
+      "file": "educationofman00frbe.txt",
+      "source_url": "https://archive.org/download/educationofman00frbe/educationofman00frbe_djvu.txt",
+      "sha256": "020c6b6233013285362c26ae52482846823a64de3f2e51584e520ae87194b166",
+      "bytes": 728890,
+      "words": 108584,
+      "fetched_at": "2026-08-12T13:14:41",
+      "ia_date": "1903",
+      "ia_year": "",
+      "ia_publicdate": "2012-01-11 19:23:50",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Hailmann, W. N. (William Nicholas), 1836-1920, tr"
+      ],
+      "ia_title": "The education of man",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1840",
+        "1887",
+        "1890",
+        "1903"
+      ]
+    },
+    {
+      "identifier": "educationofman00froe",
+      "status": "已取回",
+      "note": "",
+      "file": "educationofman00froe.txt",
+      "source_url": "https://archive.org/download/educationofman00froe/educationofman00froe_djvu.txt",
+      "sha256": "e6dc985703e6177ec5227ffa8cf897a3b06f1edac9af2157f36fdb3d9303c38c",
+      "bytes": 749000,
+      "words": 111928,
+      "fetched_at": "2026-08-12T13:14:38",
+      "ia_date": "1885",
+      "ia_year": "",
+      "ia_publicdate": "2009-03-10 13:52:34",
+      "ia_creator": [
+        "Froebel, Friedrich [Wilhelm August], 1782-1852. [from old catalog]",
+        "Jarvis, Josephine, [from old catalog] tr"
+      ],
+      "ia_title": "The education of man",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1827",
+        "1839",
+        "1884",
+        "1885"
+      ]
+    },
+    {
+      "identifier": "educationofman00frrich",
+      "status": "已取回",
+      "note": "",
+      "file": "educationofman00frrich.txt",
+      "source_url": "https://archive.org/download/educationofman00frrich/educationofman00frrich_djvu.txt",
+      "sha256": "36349185b8d93a137562d4deae10858d813c2ba87a6b74b6527469391cd99465",
+      "bytes": 711610,
+      "words": 106172,
+      "fetched_at": "2026-08-12T13:14:40",
+      "ia_date": "1896",
+      "ia_year": "",
+      "ia_publicdate": "2007-09-10 18:50:18",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Hailmann, William Nicholas, 1836-1920, tr"
+      ],
+      "ia_title": "The education of man ;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1817",
+        "1823",
+        "1826",
+        "1831",
+        "1833",
+        "1840",
+        "1887",
+        "1895"
+      ]
+    },
+    {
+      "identifier": "educationofman00fruoft",
+      "status": "已取回",
+      "note": "",
+      "file": "educationofman00fruoft.txt",
+      "source_url": "https://archive.org/download/educationofman00fruoft/educationofman00fruoft_djvu.txt",
+      "sha256": "dd6af8da94b3d6cc362d9abb7c0dea17ee1dcec8bf957779a1e7726b48ce5be6",
+      "bytes": 722523,
+      "words": 107790,
+      "fetched_at": "2026-08-12T13:14:42",
+      "ia_date": "1887",
+      "ia_year": "",
+      "ia_publicdate": "2006-09-27 13:47:45",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Hailmann, William Nicholas, 1836-1920"
+      ],
+      "ia_title": "The education of man",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1817",
+        "1823",
+        "1826",
+        "1831",
+        "1833",
+        "1840",
+        "1887",
+        "1908"
+      ]
+    },
+    {
+      "identifier": "friedrichfroebe00frgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "friedrichfroebe00frgoog.txt",
+      "source_url": "https://archive.org/download/friedrichfroebe00frgoog/friedrichfroebe00frgoog_djvu.txt",
+      "sha256": "0ee0bb0ac3f76b86f5456f8a1b2f935900e783779a659aaac2245b10d595938f",
+      "bytes": 552502,
+      "words": 94422,
+      "fetched_at": "2026-08-12T13:14:40",
+      "ia_date": "1899",
+      "ia_year": "1899",
+      "ia_publicdate": "2008-03-10 03:49:55",
+      "ia_creator": [
+        "Froebel, Friedrich Wilhelm August, 1782-1852. [from old catalog]",
+        "Jarvis, Josephine, [from old catalog] tr"
+      ],
+      "ia_title": "Friedrich Froebel's Education by development",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1890",
+        "1903"
+      ]
+    },
+    {
+      "identifier": "friedrichfroebe01jarvgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "friedrichfroebe01jarvgoog.txt",
+      "source_url": "https://archive.org/download/friedrichfroebe01jarvgoog/friedrichfroebe01jarvgoog_djvu.txt",
+      "sha256": "393062b3c22a4f483350fd3d56bc85b93d86665a67ab1b676ac9e121b6b1a738",
+      "bytes": 686611,
+      "words": 121847,
+      "fetched_at": "2026-08-12T13:14:41",
+      "ia_date": "1895",
+      "ia_year": "1895",
+      "ia_publicdate": "2008-02-03 21:55:22",
+      "ia_creator": [
+        "Froebel, Friedrich Wilhelm August, 1782-1852. [from old catalog]",
+        "Jarvis, Josephine., [from old catalog] tr"
+      ],
+      "ia_title": "Friedrich Froebel's pedagogics of the kindergarten",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1861",
+        "1890",
+        "1893",
+        "1895"
+      ]
+    },
+    {
+      "identifier": "friedrichfroebe02jarvgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "friedrichfroebe02jarvgoog.txt",
+      "source_url": "https://archive.org/download/friedrichfroebe02jarvgoog/friedrichfroebe02jarvgoog_djvu.txt",
+      "sha256": "2ca0e80439a5fb13d06885257edbbbcb1ac31de65a02c55e67c02e92592d473e",
+      "bytes": 535839,
+      "words": 91833,
+      "fetched_at": "2026-08-12T13:14:42",
+      "ia_date": "1899",
+      "ia_year": "1899",
+      "ia_publicdate": "2008-09-09 14:47:00",
+      "ia_creator": [
+        "Froebel, Friedrich Wilhelm August, 1782-1852. [from old catalog]",
+        "Jarvis, Josephine, [from old catalog] tr"
+      ],
+      "ia_title": "Friedrich Froebel's Education by development",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1899"
+      ]
+    },
+    {
+      "identifier": "friedrichfroebe03jarvgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "friedrichfroebe03jarvgoog.txt",
+      "source_url": "https://archive.org/download/friedrichfroebe03jarvgoog/friedrichfroebe03jarvgoog_djvu.txt",
+      "sha256": "b74213b6501aa35ab2ecbbd918c4b748f372ed736c6385e9219c3836bec2a3c8",
+      "bytes": 663756,
+      "words": 118022,
+      "fetched_at": "2026-08-12T13:14:43",
+      "ia_date": "1895",
+      "ia_year": "1895",
+      "ia_publicdate": "2009-07-24 01:15:52",
+      "ia_creator": [
+        "Froebel, Friedrich Wilhelm August, 1782-1852. [from old catalog]",
+        "Jarvis, Josephine., [from old catalog] tr"
+      ],
+      "ia_title": "Friedrich Froebel's pedagogics of the kindergarten",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1861",
+        "1893",
+        "1895"
+      ]
+    },
+    {
+      "identifier": "friedrichfroebel00fr",
+      "status": "已取回",
+      "note": "",
+      "file": "friedrichfroebel00fr.txt",
+      "source_url": "https://archive.org/download/friedrichfroebel00fr/friedrichfroebel00fr_djvu.txt",
+      "sha256": "f32e3228c157e6cf37a7fa08ef49c00d9b0fd87bdd699f600b41333580c7b5f6",
+      "bytes": 643296,
+      "words": 95668,
+      "fetched_at": "2026-08-12T13:14:45",
+      "ia_date": "1899",
+      "ia_year": "",
+      "ia_publicdate": "2009-11-30 12:12:58",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Jarvis, Josephine, [from old catalog] tr"
+      ],
+      "ia_title": "Friedrich Froebel's Education by development",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1890",
+        "1899"
+      ]
+    },
+    {
+      "identifier": "friedrichfroebel00froe",
+      "status": "已取回",
+      "note": "",
+      "file": "friedrichfroebel00froe.txt",
+      "source_url": "https://archive.org/download/friedrichfroebel00froe/friedrichfroebel00froe_djvu.txt",
+      "sha256": "a7db55db365f322f3f4f86c2c49e77460ff71f29007f8a0a23c1441158b503e5",
+      "bytes": 637187,
+      "words": 95027,
+      "fetched_at": "2026-08-12T13:14:46",
+      "ia_date": "1902",
+      "ia_year": "",
+      "ia_publicdate": "2009-03-10 13:49:51",
+      "ia_creator": [
+        "Froebel, Friedrich Wilhelm August, 1782-1852. [from old catalog]",
+        "Jarvis, Josephine, [from old catalog] tr"
+      ],
+      "ia_title": "Friedrich Froebel's Education by development, the second part of the Pedagogics of the kindergarten;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1890",
+        "1899",
+        "1902"
+      ]
+    },
+    {
+      "identifier": "friedrichfroebel00frrich",
+      "status": "已取回",
+      "note": "",
+      "file": "friedrichfroebel00frrich.txt",
+      "source_url": "https://archive.org/download/friedrichfroebel00frrich/friedrichfroebel00frrich_djvu.txt",
+      "sha256": "206610b152265fffd5408f826339c1b8fc0ea84947d1c534d0080dc7ba6ddae1",
+      "bytes": 611377,
+      "words": 91428,
+      "fetched_at": "2026-08-12T13:14:47",
+      "ia_date": "1899",
+      "ia_year": "",
+      "ia_publicdate": "2007-09-27 17:40:22",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Jarvis, Josephine"
+      ],
+      "ia_title": "Friedrich Froebel's Education by development, the second part of the Pedagogics of the kindergarten;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1899",
+        "2007"
+      ]
+    },
+    {
+      "identifier": "friedrichfroebel01fr",
+      "status": "已取回",
+      "note": "",
+      "file": "friedrichfroebel01fr.txt",
+      "source_url": "https://archive.org/download/friedrichfroebel01fr/friedrichfroebel01fr_djvu.txt",
+      "sha256": "265b964e514294453d5a86af96b920704e7a8a01f449882f4f41f7a5ee106aea",
+      "bytes": 634722,
+      "words": 94575,
+      "fetched_at": "2026-08-12T13:14:48",
+      "ia_date": "1903",
+      "ia_year": "",
+      "ia_publicdate": "2010-12-14 18:20:39",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Jarvis, Josephine, [from old catalog] tr"
+      ],
+      "ia_title": "Friedrich Froebel's Education by development, the second part of the Pedagogics of the kindergarten;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1899",
+        "1903",
+        "2010"
+      ]
+    },
+    {
+      "identifier": "friedrichfroebel02fr",
+      "status": "已取回",
+      "note": "",
+      "file": "friedrichfroebel02fr.txt",
+      "source_url": "https://archive.org/download/friedrichfroebel02fr/friedrichfroebel02fr_djvu.txt",
+      "sha256": "82d4f0e78a25d5d7b8cd647518366b6b6bc260e35bd2bb4754558d0f2aefb5b8",
+      "bytes": 636294,
+      "words": 95032,
+      "fetched_at": "2026-08-12T13:14:49",
+      "ia_date": "1902",
+      "ia_year": "",
+      "ia_publicdate": "2010-12-14 19:46:04",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Jarvis, Josephine, [from old catalog] tr"
+      ],
+      "ia_title": "Friedrich Froebel's Education by development",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1890",
+        "1899",
+        "1902",
+        "1909"
+      ]
+    },
+    {
+      "identifier": "friedrichfroebel03fr",
+      "status": "已取回",
+      "note": "",
+      "file": "friedrichfroebel03fr.txt",
+      "source_url": "https://archive.org/download/friedrichfroebel03fr/friedrichfroebel03fr_djvu.txt",
+      "sha256": "4f056938f63eee1c9b9b464bc1871eafcb5b84b58e3bfd9762829bf7bf0919c5",
+      "bytes": 787025,
+      "words": 121603,
+      "fetched_at": "2026-08-12T13:14:51",
+      "ia_date": "1895",
+      "ia_year": "",
+      "ia_publicdate": "2010-12-14 19:47:00",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Jarvis, Josephine, [from old catalog] tr"
+      ],
+      "ia_title": "Friedrich Froebel's pedagogics of the kindergarten",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1861",
+        "1890",
+        "1893",
+        "1895",
+        "1904"
+      ]
+    },
+    {
+      "identifier": "froebelletters00friala",
+      "status": "已取回",
+      "note": "",
+      "file": "froebelletters00friala.txt",
+      "source_url": "https://archive.org/download/froebelletters00friala/froebelletters00friala_djvu.txt",
+      "sha256": "83b59276db9248b39af8fed90858626624c9be13617fb2c7a3c219ad6c483f79",
+      "bytes": 354084,
+      "words": 52795,
+      "fetched_at": "2026-08-12T13:14:51",
+      "ia_date": "1893",
+      "ia_year": "",
+      "ia_publicdate": "2007-09-05 23:07:34",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Heinemann, Arnold H"
+      ],
+      "ia_title": "Froebel letters;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1782",
+        "1850",
+        "1852",
+        "1893",
+        "2007"
+      ]
+    },
+    {
+      "identifier": "froebelschiefwri00frrich",
+      "status": "已取回",
+      "note": "",
+      "file": "froebelschiefwri00frrich.txt",
+      "source_url": "https://archive.org/download/froebelschiefwri00frrich/froebelschiefwri00frrich_djvu.txt",
+      "sha256": "b9e8ee0a133a211482a8e00bf4380be4957c8fe33077f82f6db612bbd642cd33",
+      "bytes": 532413,
+      "words": 79366,
+      "fetched_at": "2026-08-12T13:14:52",
+      "ia_date": "1912",
+      "ia_year": "",
+      "ia_publicdate": "2008-01-28 23:22:32",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Fletcher, Samuel Sigmund Fechheimer",
+        "Welton, James, 1854-1942"
+      ],
+      "ia_title": "Froebel's chief writings on education",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1862",
+        "1883",
+        "1912",
+        "2008"
+      ]
+    },
+    {
+      "identifier": "froebelschiefwri00fruoft",
+      "status": "已取回",
+      "note": "",
+      "file": "froebelschiefwri00fruoft.txt",
+      "source_url": "https://archive.org/download/froebelschiefwri00fruoft/froebelschiefwri00fruoft_djvu.txt",
+      "sha256": "42ae0c161d4fb08ed8fcc3010d17293fcbb0fe8d3fff2f8aea274a366fd56a92",
+      "bytes": 534880,
+      "words": 79840,
+      "fetched_at": "2026-08-12T13:14:53",
+      "ia_date": "[1912?]",
+      "ia_year": "",
+      "ia_publicdate": "2008-02-11 23:11:29",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Fletcher, S. S. F. (Samuel Sigmund Fechheimer)",
+        "Welton, James, 1854-"
+      ],
+      "ia_title": "Froebel's chief writings on education",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1862",
+        "1912"
+      ]
+    },
+    {
+      "identifier": "froebelsletterso00fr",
+      "status": "已取回",
+      "note": "",
+      "file": "froebelsletterso00fr.txt",
+      "source_url": "https://archive.org/download/froebelsletterso00fr/froebelsletterso00fr_djvu.txt",
+      "sha256": "b094fd4fe0b768fd7a433db73c002d18cf31a545200f227533cda2f5cae7ad8c",
+      "bytes": 911415,
+      "words": 134865,
+      "fetched_at": "2026-08-12T13:14:54",
+      "ia_date": "1896",
+      "ia_year": "",
+      "ia_publicdate": "2010-07-27 17:52:30",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Poesche, Hermann, 1826- [from old catalog] tr",
+        "Michaelis, Emilie, [from old catalog] ed",
+        "Moore, H. Keatley, [from old catalog] joint ed"
+      ],
+      "ia_title": "Froebel's letters on the kindergarten;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1834",
+        "1839",
+        "1840",
+        "1842",
+        "1843",
+        "1845",
+        "1847",
+        "1849",
+        "1850",
+        "1851",
+        "1854",
+        "1887"
+      ]
+    },
+    {
+      "identifier": "froebelsletterso00froe",
+      "status": "已取回",
+      "note": "",
+      "file": "froebelsletterso00froe.txt",
+      "source_url": "https://archive.org/download/froebelsletterso00froe/froebelsletterso00froe_djvu.txt",
+      "sha256": "10e3aa4dc12d8a0a12f21eb043ac8e252cfea6f2c331eca7552dfce0b0c39763",
+      "bytes": 876719,
+      "words": 129498,
+      "fetched_at": "2026-08-12T13:14:55",
+      "ia_date": "1891",
+      "ia_year": "",
+      "ia_publicdate": "2009-03-10 14:09:51",
+      "ia_creator": [
+        "Froebel, Friedrich [Wilhelm August], 1782-1852. [from old catalog]",
+        "Poesche, Hermann, 1826- [from old catalog] tr",
+        "Michaelis, Emilie, [from old catalog] ed",
+        "Moore, H. Keatley, [from old catalog] joint ed"
+      ],
+      "ia_title": "Froebel's letters on the kindergarten;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1815",
+        "1834",
+        "1838",
+        "1839",
+        "1840",
+        "1841",
+        "1842",
+        "1843",
+        "1844",
+        "1845",
+        "1846",
+        "1847"
+      ]
+    },
+    {
+      "identifier": "laeducacindelh00fr",
+      "status": "已取回",
+      "note": "",
+      "file": "laeducacindelh00fr.txt",
+      "source_url": "https://archive.org/download/laeducacindelh00fr/laeducacindelh00fr_djvu.txt",
+      "sha256": "cc7abad9b0a2655ed6937c03bca5bc0da823c5228042def49ec86270b13fddaf",
+      "bytes": 688595,
+      "words": 102164,
+      "fetched_at": "2026-08-12T13:14:56",
+      "ia_date": "1888",
+      "ia_year": "",
+      "ia_publicdate": "2011-06-01 13:22:23",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Núñez, José Abelardo, 1840- [from old catalog] tr",
+        "Hailmann, William Nicholas, 1836- [from old catalog] ed"
+      ],
+      "ia_title": "La educación del hombre",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1885",
+        "1888"
+      ]
+    },
+    {
+      "identifier": "laeducacindelh01fr",
+      "status": "已取回",
+      "note": "",
+      "file": "laeducacindelh01fr.txt",
+      "source_url": "https://archive.org/download/laeducacindelh01fr/laeducacindelh01fr_djvu.txt",
+      "sha256": "e2268900dcc410b9f7480ce4ca1a9a225d3602184c52b4b5b89ae386678f8b25",
+      "bytes": 608976,
+      "words": 90558,
+      "fetched_at": "2026-08-12T13:14:57",
+      "ia_date": "1885",
+      "ia_year": "",
+      "ia_publicdate": "2011-06-01 13:23:56",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Núñez, José Abelardo, 1840- [from old catalog] tr"
+      ],
+      "ia_title": "La educación del hombre",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1885"
+      ]
+    },
+    {
+      "identifier": "lettersonkinderg00friala",
+      "status": "已取回",
+      "note": "",
+      "file": "lettersonkinderg00friala.txt",
+      "source_url": "https://archive.org/download/lettersonkinderg00friala/lettersonkinderg00friala_djvu.txt",
+      "sha256": "38ba9f2011f4ab5d45c5398e56475b6b9a0f8b8f1a9ac4384d7b97349c26af61",
+      "bytes": 876352,
+      "words": 129620,
+      "fetched_at": "2026-08-12T13:14:58",
+      "ia_date": "1891",
+      "ia_year": "",
+      "ia_publicdate": "2007-09-05 23:04:10",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Michaelis, Emilie",
+        "Moore, H. Keatley, b. 1846"
+      ],
+      "ia_title": "Letters on the kindergarten",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1811",
+        "1815",
+        "1834",
+        "1838",
+        "1839",
+        "1840",
+        "1841",
+        "1842",
+        "1843",
+        "1844",
+        "1845",
+        "1846"
+      ]
+    },
+    {
+      "identifier": "motherplaynurser00froe",
+      "status": "已取回",
+      "note": "",
+      "file": "motherplaynurser00froe.txt",
+      "source_url": "https://archive.org/download/motherplaynurser00froe/motherplaynurser00froe_djvu.txt",
+      "sha256": "feed4b6efc60dfadc01292cc69264f09a9ec3bd77dff2f9a11897950f0d46981",
+      "bytes": 331387,
+      "words": 50708,
+      "fetched_at": "2026-08-12T13:14:59",
+      "ia_date": "1906",
+      "ia_year": "",
+      "ia_publicdate": "2009-08-18 13:50:10",
+      "ia_creator": [
+        "Froebel, Friedrich Wilhelm August, 1782-1852. [from old catalog]",
+        "Peabody, Elizabeth Palmer, 1804-1894, [from old catalog] ed",
+        "Dwight, Fannie E., [from old catalog] tr",
+        "Jarvis, Josephine, [from old catalog] tr"
+      ],
+      "ia_title": "Mother-play and nursery songs;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1878",
+        "1906"
+      ]
+    },
+    {
+      "identifier": "motherssongsgame00fruoft",
+      "status": "已取回",
+      "note": "",
+      "file": "motherssongsgame00fruoft.txt",
+      "source_url": "https://archive.org/download/motherssongsgame00fruoft/motherssongsgame00fruoft_djvu.txt",
+      "sha256": "d044478e84a8c8edb418fc1be73bb8be822d8140264f9685b4a499a4e51c89da",
+      "bytes": 523211,
+      "words": 81471,
+      "fetched_at": "2026-08-12T13:15:00",
+      "ia_date": "1888",
+      "ia_year": "",
+      "ia_publicdate": "2008-02-11 14:17:12",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Fröbel, Friedrich, 1782-1852"
+      ],
+      "ia_title": "Mother's songs, games and stories : Fröbel's \"Mutter- und Kose-Lieder\"",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1968"
+      ]
+    },
+    {
+      "identifier": "mottoesandcomme00unkngoog",
+      "status": "已取回",
+      "note": "",
+      "file": "mottoesandcomme00unkngoog.txt",
+      "source_url": "https://archive.org/download/mottoesandcomme00unkngoog/mottoesandcomme00unkngoog_djvu.txt",
+      "sha256": "fb6c24863e56f8c61256961b1b56aba326718dce37f4f447b655d3c236bf39fb",
+      "bytes": 379233,
+      "words": 66208,
+      "fetched_at": "2026-08-12T13:15:00",
+      "ia_date": "1895",
+      "ia_year": "",
+      "ia_publicdate": "2009-04-27 23:30:34",
+      "ia_creator": [
+        "Froebel, Friedrich [Wilhelm August], 1782-1852. [from old catalog]",
+        "Eliot, Henrietta Robins (Mack), Mrs., 1845- [from old catalog] tr",
+        "Blow, Susan Elizabeth, [from old catalog] tr"
+      ],
+      "ia_title": "The mottoes and commentaries of Friedrich Froebel's Mother play",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1895"
+      ]
+    },
+    {
+      "identifier": "mottoescommentar00fr",
+      "status": "已取回",
+      "note": "",
+      "file": "mottoescommentar00fr.txt",
+      "source_url": "https://archive.org/download/mottoescommentar00fr/mottoescommentar00fr_djvu.txt",
+      "sha256": "8691d5260829b37e895da8064667757ba088772892bca06eaac8eb4df208643e",
+      "bytes": 461243,
+      "words": 69894,
+      "fetched_at": "2026-08-12T13:15:02",
+      "ia_date": "1902",
+      "ia_year": "",
+      "ia_publicdate": "2009-11-30 12:10:22",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Eliot, Henrietta Robins (Mack), Mrs., 1845- [from old catalog] tr",
+        "Blow, Susan Elizabeth, [from old catalog] tr"
+      ],
+      "ia_title": "The mottoes and commentaries of Friedrich Froebel's Mother play",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1890",
+        "1895",
+        "1902"
+      ]
+    },
+    {
+      "identifier": "mottoescommentar00frrich",
+      "status": "已取回",
+      "note": "",
+      "file": "mottoescommentar00frrich.txt",
+      "source_url": "https://archive.org/download/mottoescommentar00frrich/mottoescommentar00frrich_djvu.txt",
+      "sha256": "5f4c85ec8d34de42bfbbf9bff202eb17a09c8083a1a5083d3327feaa27e45c3b",
+      "bytes": 432102,
+      "words": 66046,
+      "fetched_at": "2026-08-12T13:15:07",
+      "ia_date": "1898 [c1895]",
+      "ia_year": "",
+      "ia_publicdate": "2007-08-21 23:57:42",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Eliot, Henrietta R. (Henrietta Robins Mack), b. 1845",
+        "Blow, Susan E. (Susan Elizabeth), 1843-1916"
+      ],
+      "ia_title": "The mottoes and commentaries of Friedrich Froebel's Mother play",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1895"
+      ]
+    },
+    {
+      "identifier": "richfroebelfried00frrich",
+      "status": "已取回",
+      "note": "",
+      "file": "richfroebelfried00frrich.txt",
+      "source_url": "https://archive.org/download/richfroebelfried00frrich/richfroebelfried00frrich_djvu.txt",
+      "sha256": "5d88b1d62eccef8fa361da1e9c170172b0d269f9049bcf12752e09dca2138af3",
+      "bytes": 761460,
+      "words": 118000,
+      "fetched_at": "2026-08-12T13:15:04",
+      "ia_date": "1909",
+      "ia_year": "",
+      "ia_publicdate": "2008-05-08 20:52:30",
+      "ia_creator": "Fröbel, Friedrich, 1782-1852",
+      "ia_title": "Friedrich Froebel's pedagogics of the kindergarten, or, His ideas concerning the play and playthings of the child;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1861",
+        "1893",
+        "1895",
+        "1909"
+      ]
+    },
+    {
+      "identifier": "songsandmusicfr00compgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "songsandmusicfr00compgoog.txt",
+      "source_url": "https://archive.org/download/songsandmusicfr00compgoog/songsandmusicfr00compgoog_djvu.txt",
+      "sha256": "7c304edace7305ad3d747876c99dc7dfdef9ba5283e8b4c3e4ae4ec4ebf766dc",
+      "bytes": 141349,
+      "words": 25504,
+      "fetched_at": "2026-08-12T13:27:05",
+      "ia_date": "1895",
+      "ia_year": "1895",
+      "ia_publicdate": "2009-08-11 05:39:45",
+      "ia_creator": "Friedrich Fröbel ,  Friedrich Wilhelm August Froebel,  Susan Elizabeth Blow,  D . Appleton and Company",
+      "ia_title": "The Songs and Music of Friedrich Froebel's Mother Play (Mutter und Kose Lieder)",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1890",
+        "1895",
+        "1896"
+      ]
+    },
+    {
+      "identifier": "songsmusicoffrie00fr",
+      "status": "已取回",
+      "note": "",
+      "file": "songsmusicoffrie00fr.txt",
+      "source_url": "https://archive.org/download/songsmusicoffrie00fr/songsmusicoffrie00fr_djvu.txt",
+      "sha256": "8de5e1862b8502acfe9ef741452de1b363e45f6b34c29255650acaa73367b446",
+      "bytes": 181091,
+      "words": 27293,
+      "fetched_at": "2026-08-12T13:15:05",
+      "ia_date": "1901",
+      "ia_year": "",
+      "ia_publicdate": "2009-11-30 12:10:01",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Blow, Susan E. (Susan Elizabeth), 1843-1916, ed"
+      ],
+      "ia_title": "The songs and music of Friedrich Froebel's Mother play (Mutter und kose lieder)",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1890",
+        "1895",
+        "1901",
+        "1931"
+      ]
+    },
+    {
+      "identifier": "songsmusicoffrie00fruoft",
+      "status": "已取回",
+      "note": "",
+      "file": "songsmusicoffrie00fruoft.txt",
+      "source_url": "https://archive.org/download/songsmusicoffrie00fruoft/songsmusicoffrie00fruoft_djvu.txt",
+      "sha256": "241b755ba6c2efb1bb765c4de68e7639889a8a5ce4c1eac7c2675c6de328b293",
+      "bytes": 201932,
+      "words": 31072,
+      "fetched_at": "2026-08-12T13:15:06",
+      "ia_date": "1895",
+      "ia_year": "",
+      "ia_publicdate": "2008-02-11 19:24:43",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Blow, Susan Elizabeth, 1843-1916"
+      ],
+      "ia_title": "The Songs and music of Friedrich Froebel's Mother play : (Mutter und kose lieder) : songs newly translated and furnished with new music",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1895"
+      ]
+    },
+    {
+      "identifier": "songsmusicoffrie01fr",
+      "status": "已取回",
+      "note": "",
+      "file": "songsmusicoffrie01fr.txt",
+      "source_url": "https://archive.org/download/songsmusicoffrie01fr/songsmusicoffrie01fr_djvu.txt",
+      "sha256": "ec642a55bf995051e7029a9e7d36a540aedf8c5986b1fcec7f99842d83d35847",
+      "bytes": 184683,
+      "words": 29018,
+      "fetched_at": "2026-08-12T13:15:07",
+      "ia_date": "1895",
+      "ia_year": "",
+      "ia_publicdate": "2010-12-14 18:20:46",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Blow, Susan E. (Susan Elizabeth), 1843-1916"
+      ],
+      "ia_title": "The songs and music of Friedrich Froebel's Mother play (Mutter und kose Lieder)",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1895"
+      ]
+    },
+    {
+      "identifier": "studentsfroebel01herfgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "studentsfroebel01herfgoog.txt",
+      "source_url": "https://archive.org/download/studentsfroebel01herfgoog/studentsfroebel01herfgoog_djvu.txt",
+      "sha256": "464c59771f2d74b10c18282fbbcac1a7bd87357a06db390a5d231dd0b06989f6",
+      "bytes": 251225,
+      "words": 43117,
+      "fetched_at": "2026-08-12T13:15:07",
+      "ia_date": "1896",
+      "ia_year": "1896",
+      "ia_publicdate": "2009-08-11 16:54:42",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Herford, W. H. (William Henry), 1820-1908"
+      ],
+      "ia_title": "The student's Froebel adapted from Die erziehung der menschheit of F. Froebel",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1826",
+        "1883",
+        "1886",
+        "1888",
+        "1896"
+      ]
+    },
+    {
+      "identifier": "studentsfroebela00froeiala",
+      "status": "已取回",
+      "note": "",
+      "file": "studentsfroebela00froeiala.txt",
+      "source_url": "https://archive.org/download/studentsfroebela00froeiala/studentsfroebela00froeiala_djvu.txt",
+      "sha256": "3b1d8669e74019959efa96bc98fc580e440cbb4093e1f2b340bb5af44396fd40",
+      "bytes": 285411,
+      "words": 42297,
+      "fetched_at": "2026-08-12T13:15:09",
+      "ia_date": "1896",
+      "ia_year": "",
+      "ia_publicdate": "2007-09-05 21:10:16",
+      "ia_creator": [
+        "Froebel, Friedrich, 1782-1852",
+        "Herford, William Henry, 1820-1908"
+      ],
+      "ia_title": "The student's Froebel adapted from Die erziehung der menschheit of F. Froebel",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1782",
+        "1799",
+        "1802",
+        "1805",
+        "1808",
+        "1811",
+        "1813",
+        "1814",
+        "1816",
+        "1818",
+        "1826",
+        "1829"
+      ]
+    },
+    {
+      "identifier": "studentsfroebela00fruoft",
+      "status": "已取回",
+      "note": "",
+      "file": "studentsfroebela00fruoft.txt",
+      "source_url": "https://archive.org/download/studentsfroebela00fruoft/studentsfroebela00fruoft_djvu.txt",
+      "sha256": "f9b18fc33e9932b8cc11507a9f650f65b79d1fe7e889b813ef4ae07d226b7321",
+      "bytes": 342058,
+      "words": 50033,
+      "fetched_at": "2026-08-12T13:15:10",
+      "ia_date": "1916",
+      "ia_year": "",
+      "ia_publicdate": "2008-02-11 22:29:46",
+      "ia_creator": [
+        "Fröbel, Friedrich, 1782-1852",
+        "Herford, William Henry"
+      ],
+      "ia_title": "The student's Froebel : adapted from Die Menschenerziehung of F. Froebel",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1822",
+        "1893",
+        "1908",
+        "1911",
+        "1916",
+        "1958"
+      ]
+    }
+  ]
+}

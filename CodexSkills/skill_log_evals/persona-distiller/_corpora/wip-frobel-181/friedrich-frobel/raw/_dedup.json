@@ -1,0 +1,58 @@
+{
+  "文件数": 51,
+  "阈值": 0.55,
+  "重复簇": [
+    [
+      "autobiography00fruoft",
+      "autobiographyoff00fr",
+      "autobiographyoff00frbe",
+      "autobiographyoff00frob",
+      "autobiographyoff00froeiala",
+      "autobiographyoff00fruoft",
+      "autobiooffriedri00froeiala"
+    ],
+    [
+      "educationofman00f",
+      "educationofman00fr",
+      "educationofman00fr2",
+      "educationofman00frbe",
+      "educationofman00frrich",
+      "educationofman00fruoft"
+    ],
+    [
+      "friedrichfroebe00frgoog",
+      "friedrichfroebe02jarvgoog",
+      "friedrichfroebel00fr",
+      "friedrichfroebel00froe",
+      "friedrichfroebel00frrich",
+      "friedrichfroebel01fr",
+      "friedrichfroebel02fr"
+    ],
+    [
+      "friedrichfroebe01jarvgoog",
+      "friedrichfroebe03jarvgoog",
+      "friedrichfroebel03fr",
+      "richfroebelfried00frrich"
+    ],
+    [
+      "froebelschiefwri00frrich",
+      "froebelschiefwri00fruoft"
+    ],
+    [
+      "froebelsletterso00fr",
+      "froebelsletterso00froe",
+      "lettersonkinderg00friala"
+    ],
+    [
+      "laeducacindelh00fr",
+      "laeducacindelh01fr"
+    ],
+    [
+      "mottoesandcomme00unkngoog",
+      "mottoescommentar00fr",
+      "mottoescommentar00frrich"
+    ]
+  ],
+  "独立文献数上界": 25,
+  "★口径": "min-hash Jaccard；同卷多扫描与同书不同卷需人判"
+}

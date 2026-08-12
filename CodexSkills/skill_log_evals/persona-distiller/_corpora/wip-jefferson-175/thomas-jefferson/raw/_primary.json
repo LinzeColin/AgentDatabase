@@ -1,0 +1,557 @@
+{
+  "总数": 68,
+  "计数": {
+    "一手": 67,
+    "二手": 1,
+    "需人判": 0
+  },
+  "一手占比下界": 0.9853,
+  "一手占比上界": 0.9853,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "10064095bsb",
+      "档": "一手",
+      "依据": "题名含自述体标记「memoirs?\\b」且目标为第一作者",
+      "title": "Memoirs, Correspondence and Private Papers of Thomas Jefferson, late President o",
+      "creator": "Jefferson, Thomas",
+      "words": 223738
+    },
+    {
+      "identifier": "10069010bsb",
+      "档": "一手",
+      "依据": "题名含自述体标记「memoirs?\\b」且目标为第一作者",
+      "title": "Memoir, correspondence and miscellanies from the papers of Thomas Jefferson. 2",
+      "creator": "Jefferson, Thomas",
+      "words": 224274
+    },
+    {
+      "identifier": "americanpolitica00jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The american political classics : Jefferson, Washington and Lincoln",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, George, 1732-1799; Lincoln, Abraham, 1",
+      "words": 9849
+    },
+    {
+      "identifier": "anessaytowardsf00jeffgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "An essay towards facilitating instruction in the Anglo-Saxon and modern dialects",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 12659
+    },
+    {
+      "identifier": "annualregistervi00jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Annual register, and Virginian repository for the year 1800",
+      "creator": "Jefferson, Thomas, 1743-1826; Ross & Douglas. booksellers; Blandford Press",
+      "words": 87462
+    },
+    {
+      "identifier": "bim_eighteenth-century_notes-on-the-state-of-vi_jefferson-thomas_1787",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Notes on the state of Virginia. Written by Thomas Jefferson. Illustrated with a ",
+      "creator": "Jefferson, Thomas",
+      "words": 98967
+    },
+    {
+      "identifier": "bub_gb_LlJBAAAAcAAJ",
+      "档": "二手",
+      "依据": "creator 里目标的角色是 **former owner（藏书主）**，不是作者",
+      "title": "Histoire des promesses illusoires depuis la Paix des Pirenees",
+      "creator": "Courtilz de Sandras, Gatien, 1644-1712; Jefferson, Thomas, 1743-1826, former own",
+      "words": 34269
+    },
+    {
+      "identifier": "correspondencebe0000jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「correspondence」",
+      "title": "Correspondence between Thomas Jefferson and Pierre Samuel du Pont de Nemours, 17",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 93689
+    },
+    {
+      "identifier": "cu31924026091581",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson : being his autobiography, correspondence, repo",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 225147
+    },
+    {
+      "identifier": "cu31924027055718",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Thomas Jefferson:",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 205683
+    },
+    {
+      "identifier": "cu31924071238426",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson: being his autobiography, correspondence, repor",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, H. A. (Henry Augustine), 1820-1858",
+      "words": 223248
+    },
+    {
+      "identifier": "cu31924071238442",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson: being his autobiography, correspondence, repor",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, H. A. (Henry Augustine), 1820-1858",
+      "words": 233518
+    },
+    {
+      "identifier": "cu31924071238467",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson: being his autobiography, correspondence, repor",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, H. A. (Henry Augustine), 1820-1858",
+      "words": 237186
+    },
+    {
+      "identifier": "cu31924092892011",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "The works of Thomas Jefferson;",
+      "creator": "Jefferson, Thomas, 1743-1826; Ford, Paul Leicester, 1865-1902, ed",
+      "words": 150550
+    },
+    {
+      "identifier": "cu31924092892037",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "The works of Thomas Jefferson;",
+      "creator": "Jefferson, Thomas, 1743-1826; Ford, Paul Leicester, 1865-1902, ed",
+      "words": 146331
+    },
+    {
+      "identifier": "gpl_1600362",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The memorial of the merchants & traders of the city of Baltimore",
+      "creator": "Jefferson, Thomas",
+      "words": 18932
+    },
+    {
+      "identifier": "jeffersonsgerman01jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Jefferson's Germantown letters, together with other papers relating to his stay ",
+      "creator": "Jefferson, Thomas, 1743-1826; Jenkins, Charles Francis, 1865-1951, ed",
+      "words": 40263
+    },
+    {
+      "identifier": "jeffersonthomas09lipsrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Thomas Jefferson",
+      "creator": "Jefferson, Thomas, 1743-1826; Thomas Jefferson Memorial Association of the Unite",
+      "words": 119065
+    },
+    {
+      "identifier": "jeffersonthomas18lipsrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Thomas Jefferson",
+      "creator": "Jefferson, Thomas, 1743-1826; Thomas Jefferson Memorial Association of the Unite",
+      "words": 136720
+    },
+    {
+      "identifier": "jstor-1005111",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Description of a Mould-Board of the Least Resistence, and of the Easiest and",
+      "creator": "Jefferson, Thomas",
+      "words": 3744
+    },
+    {
+      "identifier": "jstor-1921491",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Two Unpublished Letters of Thomas Jefferson",
+      "creator": "Jefferson, Thomas",
+      "words": 1214
+    },
+    {
+      "identifier": "lettersaddresses00jeffiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters and addresses of Thomas Jefferson",
+      "creator": "Jefferson, Thomas, 1743-1826; Parker, W. B. (William B.); Viles, Jonas",
+      "words": 98614
+    },
+    {
+      "identifier": "lettersandaddres00jeffiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters and addresses;",
+      "creator": "Jefferson, Thomas, 1743-1826; Parker, William D., 1871-1934; Viles, Jonas, 1875-",
+      "words": 98595
+    },
+    {
+      "identifier": "lettersandaddres00jeffuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters and addresses of Thomas Jefferson",
+      "creator": "Jefferson, Thomas, 1743-1826; Parker, William B; Viles, Jonas",
+      "words": 98733
+    },
+    {
+      "identifier": "lifemoralsjesusnaz00jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The life and morals of Jesus of Nazareth : extracted textually from the Gospels,",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 30028
+    },
+    {
+      "identifier": "lifemoralsof00jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The life and morals of Jesus of Nazareth : extracted textually from the Gospels ",
+      "creator": "Jefferson, Thomas, 1743-1826. comp; Adler, Cyrus, 1863-1940. ed",
+      "words": 116461
+    },
+    {
+      "identifier": "manualofparliame00jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A manual of parliamentary practice: composed originally for the use of the Senat",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 57526
+    },
+    {
+      "identifier": "masterthoughtsof00jeffiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Master thoughts of Thomas Jefferson",
+      "creator": "Jefferson, Thomas, 1743-1826; Catchings, Benjamin S",
+      "words": 63483
+    },
+    {
+      "identifier": "masterthoughtst00jeffgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Master thoughts of Thomas Jefferson",
+      "creator": "Jefferson, Thomas, 1743-1826; Catchings, Benjamin Silas, 1880- ed",
+      "words": 64191
+    },
+    {
+      "identifier": "memoircorrespond16781gut",
+      "档": "一手",
+      "依据": "题名含自述体标记「memoirs?\\b」且目标为第一作者",
+      "title": "Memoir, Correspondence, And Miscellanies, From The Papers Of Thomas Jefferson, V",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 204704
+    },
+    {
+      "identifier": "memoirscorrespo00jeffgoog",
+      "档": "一手",
+      "依据": "题名含自述体标记「memoirs?\\b」且目标为第一作者",
+      "title": "Memoirs, correspondence, and private papers of Thomas Jefferson : late president",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 215304
+    },
+    {
+      "identifier": "memoirscorrespo01jeffgoog",
+      "档": "一手",
+      "依据": "题名含自述体标记「memoirs?\\b」且目标为第一作者",
+      "title": "Memoirs, correspondence, and private papers of Thomas Jefferson : late president",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 223528
+    },
+    {
+      "identifier": "notesonstateofvir00jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Notes on the state of Virginia",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 96958
+    },
+    {
+      "identifier": "notesonstateofvirg00jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Notes on the state of Virginia",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 97230
+    },
+    {
+      "identifier": "summaryviewofrig00jeff_1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A summary view of the rights of British America. : Set forth in some resolutions",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 7794
+    },
+    {
+      "identifier": "tudesconomiques00fovigoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Draught of a fundamental constitution for the commonwealth of Virginia",
+      "creator": "Jefferson, Thomas, 1743-1826; Thomas Jefferson Library Collection (Library of Co",
+      "words": 75954
+    },
+    {
+      "identifier": "version-final-de-la-declaracion-de-la-independencia",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Versión Final De La Declaración De La Independencia",
+      "creator": "Jefferson Thomas (1743-1826)",
+      "words": 0
+    },
+    {
+      "identifier": "virginiakentucky00jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Virginia and Kentucky resolutions of 1798 and '99; with Jefferson's original",
+      "creator": "Jefferson, Thomas, 1743-1826; Madison, James, 1751-1836; Calhoun, John C. (John ",
+      "words": 137748
+    },
+    {
+      "identifier": "workofjeffer02jeffuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Works;",
+      "creator": "Jefferson, Thomas, 1743-1826; Ford, Paul Leicester, 1865-1902",
+      "words": 148186
+    },
+    {
+      "identifier": "workofjeffer03jeffuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Works;",
+      "creator": "Jefferson, Thomas, 1743-1826; Ford, Paul Leicester, 1865-1902",
+      "words": 149761
+    },
+    {
+      "identifier": "workofjeffer07jeffuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Works;",
+      "creator": "Jefferson, Thomas, 1743-1826; Ford, Paul Leicester, 1865-1902",
+      "words": 149359
+    },
+    {
+      "identifier": "worksofjefferson02jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson : being his autobiography, correspondence, repo",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, H. A. (Henry Augustine), 1820-1858",
+      "words": 228505
+    },
+    {
+      "identifier": "worksofjefferson06jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson : being his autobiography, correspondence, repo",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, H. A. (Henry Augustine), 1820-1858",
+      "words": 233488
+    },
+    {
+      "identifier": "worksofjefferson07jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson : being his autobiography, correspondence, repo",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, H. A. (Henry Augustine), 1820-1858",
+      "words": 249100
+    },
+    {
+      "identifier": "worksofjefferson09jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson : being his autobiography, correspondence, repo",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, H. A. (Henry Augustine), 1820-1858",
+      "words": 223940
+    },
+    {
+      "identifier": "worksthomasjeff01fordgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "The works of Thomas Jefferson;",
+      "creator": "Jefferson, Thomas, 1743-1826; Ford, Paul Leicester, 1865-1902, ed",
+      "words": 146200
+    },
+    {
+      "identifier": "writingsbeinghis06jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Writings, being his autobiography, correspondence, reports, messages, addresses,",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, H. A. (Henry Augustine), 1820-1858",
+      "words": 233614
+    },
+    {
+      "identifier": "writingsbeinghis07jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Writings, being his autobiography, correspondence, reports, messages, addresses,",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, H. A. (Henry Augustine), 1820-1858",
+      "words": 249193
+    },
+    {
+      "identifier": "writingslibrary03jeff",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Writings. Library ed., containing his autobiography, notes on Virginia, parliame",
+      "creator": "Jefferson, Thomas, 1743-1826; Bergh, Albert Ellery, 1861-1919; Lipscomb, Andrew ",
+      "words": 127648
+    },
+    {
+      "identifier": "writingslibrarye00jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Writings. Library ed., containing his autobiography, notes on Virginia, parliame",
+      "creator": "Jefferson, Thomas, 1743-1826; Bergh, Albert Ellery, 1861-1919; Lipscomb, Andrew ",
+      "words": 118229
+    },
+    {
+      "identifier": "writingslibrarye01jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Writings. Library ed., containing his autobiography, notes on Virginia, parliame",
+      "creator": "Jefferson, Thomas, 1743-1826; Bergh, Albert Ellery, 1861-1919; Lipscomb, Andrew ",
+      "words": 151924
+    },
+    {
+      "identifier": "writingslibrarye02jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Writings. Library ed., containing his autobiography, notes on Virginia, parliame",
+      "creator": "Jefferson, Thomas, 1743-1826; Bergh, Albert Ellery, 1861-1919; Lipscomb, Andrew ",
+      "words": 137679
+    },
+    {
+      "identifier": "writingslibrarye05jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Writings. Library ed., containing his autobiography, notes on Virginia, parliame",
+      "creator": "Jefferson, Thomas, 1743-1826; Bergh, Albert Ellery, 1861-1919; Lipscomb, Andrew ",
+      "words": 128098
+    },
+    {
+      "identifier": "writingslibrarye07jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Writings. Library ed., containing his autobiography, notes on Virginia, parliame",
+      "creator": "Jefferson, Thomas, 1743-1826; Bergh, Albert Ellery, 1861-1919; Lipscomb, Andrew ",
+      "words": 134879
+    },
+    {
+      "identifier": "writingslibrarye10jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Writings. Library ed., containing his autobiography, notes on Virginia, parliame",
+      "creator": "Jefferson, Thomas, 1743-1826; Bergh, Albert Ellery, 1861-1919; Lipscomb, Andrew ",
+      "words": 120608
+    },
+    {
+      "identifier": "writingslibrarye13jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Writings. Library ed., containing his autobiography, notes on Virginia, parliame",
+      "creator": "Jefferson, Thomas, 1743-1826; Bergh, Albert Ellery, 1861-1919; Lipscomb, Andrew ",
+      "words": 130697
+    },
+    {
+      "identifier": "writingslibrarye16jeffuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Writings. Library ed., containing his autobiography, notes on Virginia, parliame",
+      "creator": "Jefferson, Thomas, 1743-1826; Bergh, Albert Ellery, 1861-1919; Lipscomb, Andrew ",
+      "words": 125638
+    },
+    {
+      "identifier": "writingsoft04jeffiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Thomas Jefferson;",
+      "creator": "Jefferson, Thomas, 1743-1826; Ford, Paul Leicester, 1865-1902",
+      "words": 154755
+    },
+    {
+      "identifier": "writingsoft06jeffiala",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson: being his autobiography, correspondence, repor",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, Henry Augustin, 1820-1858",
+      "words": 233715
+    },
+    {
+      "identifier": "writingsoft09jeffiala",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson: being his autobiography, correspondence, repor",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, Henry Augustin, 1820-1858",
+      "words": 223853
+    },
+    {
+      "identifier": "writingsofthom02jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Thomas Jefferson;",
+      "creator": "Jefferson, Thomas, 1743-1826; Ford, Paul Leicester, 1865-1902",
+      "words": 173205
+    },
+    {
+      "identifier": "writingsofthoma09jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Thomas Jefferson",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 224117
+    },
+    {
+      "identifier": "writingsofthomas0000vari_j3j9",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The Writings of Thomas Jefferson",
+      "creator": "Jefferson, Thomas",
+      "words": 123904
+    },
+    {
+      "identifier": "writingsofthomas04jeffiala",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson: being his autobiography, correspondence, repor",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, Henry Augustin, 1820-1858",
+      "words": 223102
+    },
+    {
+      "identifier": "writingsthomas13jeffrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Thomas Jefferson",
+      "creator": "Jefferson, Thomas, 1743-1826; Thomas Jefferson Memorial Association of the Unite",
+      "words": 265127
+    },
+    {
+      "identifier": "writingsthomas17jeffrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Thomas Jefferson",
+      "creator": "Jefferson, Thomas, 1743-1826; Thomas Jefferson Memorial Association of the Unite",
+      "words": 263327
+    },
+    {
+      "identifier": "writingsthomasj00editgoog",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson : being his autobiography, correspondence, repo",
+      "creator": "Jefferson, Thomas, 1743-1826; Washington, H. A. (Henry Augustine), 1820-1858",
+      "words": 236606
+    },
+    {
+      "identifier": "writingsthomasj00washgoog",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The writings of Thomas Jefferson : being his autobiography, correspondence, repo",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 223435
+    }
+  ]
+}

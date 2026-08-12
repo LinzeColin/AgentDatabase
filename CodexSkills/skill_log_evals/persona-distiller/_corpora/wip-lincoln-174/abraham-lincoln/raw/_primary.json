@@ -1,0 +1,573 @@
+{
+  "总数": 70,
+  "计数": {
+    "一手": 68,
+    "二手": 2,
+    "需人判": 0
+  },
+  "一手占比下界": 0.9714,
+  "一手占比上界": 0.9714,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "LapsleyLincWritLifeofLinc",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The writings of Abraham Lincoln, Life of Lincoln",
+      "creator": "Lapsley, Arthur Brooks, Lincoln, Abraham, Brooks, Noah, Roosevelt, Theodore, Dou",
+      "words": 129533
+    },
+    {
+      "identifier": "LapsleyLincWritsLincDoug1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Abraham Lincoln, The Lincoln-Douglas Debates-I",
+      "creator": "Lapsley, Arthur Brooks, Lincoln, Abraham, Brooks, Noah, Roosevelt, Theodore, Dou",
+      "words": 110079
+    },
+    {
+      "identifier": "LincLastSpeech2",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lincoln's Last Speech in Springfield in the Campaign of 1858",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 3173
+    },
+    {
+      "identifier": "anecdotesofabrah03linc",
+      "档": "二手",
+      "依据": "题名含「anecdotes? of」且含目标姓名",
+      "title": "Anecdotes of Abraham Lincoln and Lincoln's stories : including early life storie",
+      "creator": "Lincoln, Abraham, 1809-1865; McClure, J. B. (James Baird), 1832-1895",
+      "words": 53220
+    },
+    {
+      "identifier": "bestoflincolnear00linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「speeches」",
+      "title": "The best of Lincoln : early speeches, Springfield speech, Cooper Union speech, e",
+      "creator": "Lincoln, Abraham, 1809-1865; Perry, Bliss, 1860-1954, ed",
+      "words": 39807
+    },
+    {
+      "identifier": "completeprojectg03253gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "Complete Project Gutenberg Abraham Lincoln Writings",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 549375
+    },
+    {
+      "identifier": "completeworksab09fishgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901, ed; Hay,",
+      "words": 99450
+    },
+    {
+      "identifier": "completeworksab11fishgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901, ed; Hay,",
+      "words": 100358
+    },
+    {
+      "identifier": "completeworkscov1linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works : comprising his speeches, letters, state papers, and miscellaneo",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 407598
+    },
+    {
+      "identifier": "completeworkso2127linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901, ed; Hay,",
+      "words": 89093
+    },
+    {
+      "identifier": "completeworkso2129linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901, ed; Hay,",
+      "words": 98331
+    },
+    {
+      "identifier": "completeworksof03linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901, ed; Hay,",
+      "words": 99415
+    },
+    {
+      "identifier": "completeworksof05linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901, ed; Hay,",
+      "words": 97331
+    },
+    {
+      "identifier": "completeworksof07linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901, ed; Hay,",
+      "words": 75462
+    },
+    {
+      "identifier": "completeworksofa04linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 98372
+    },
+    {
+      "identifier": "completeworksofa06linco",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 75235
+    },
+    {
+      "identifier": "completeworksofa08linco",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 79563
+    },
+    {
+      "identifier": "completeworksofa09linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 92564
+    },
+    {
+      "identifier": "completeworksofa11linco",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 82650
+    },
+    {
+      "identifier": "completeworksofa13linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 80857
+    },
+    {
+      "identifier": "completeworksofa16linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 98774
+    },
+    {
+      "identifier": "completeworksofav12linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901, ed; Hay,",
+      "words": 99121
+    },
+    {
+      "identifier": "completeworksofv1linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 89898
+    },
+    {
+      "identifier": "completeworksofv3linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 99451
+    },
+    {
+      "identifier": "completeworksofv4linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 98181
+    },
+    {
+      "identifier": "completeworksov7linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901, ed; Hay,",
+      "words": 75400
+    },
+    {
+      "identifier": "completeworksov9linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901, ed; Hay,",
+      "words": 79071
+    },
+    {
+      "identifier": "completeworkv1linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 89881
+    },
+    {
+      "identifier": "completewov10linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 79737
+    },
+    {
+      "identifier": "completewov4linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 98151
+    },
+    {
+      "identifier": "completewv10linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 79836
+    },
+    {
+      "identifier": "completewv1linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 89958
+    },
+    {
+      "identifier": "completewv2linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works :",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 404679
+    },
+    {
+      "identifier": "completewv4linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Complete works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Nicolay, John G. (John George), 1832-1901; Hay, Joh",
+      "words": 98309
+    },
+    {
+      "identifier": "crossofgettysbur5050linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The cross of Gettysburg : Lincoln's immortal address in cruciform arrangement",
+      "creator": "Lincoln, Abraham, 1809-1865; Phillips, Leon; Risdon, F. Ray, 1888-",
+      "words": 340
+    },
+    {
+      "identifier": "cu31924103069070",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Abraham Lincoln; complete works, comprising his speeches, letters, state papers,",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 405564
+    },
+    {
+      "identifier": "earlyspeechesofa1858linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「speeches」",
+      "title": "Early speeches of Abraham Lincoln, 1830-1860",
+      "creator": "Lincoln, Abraham, 1809-1865; Lincoln Financial Foundation Collection",
+      "words": 1746
+    },
+    {
+      "identifier": "earlyspeechesofatslinc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「speeches」",
+      "title": "Early speeches of Abraham Lincoln, 1830-1860",
+      "creator": "Lincoln, Abraham, 1809-1865; Lincoln Financial Foundation Collection",
+      "words": 3709
+    },
+    {
+      "identifier": "earlyspeechesspr00linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "...Early speeches, Springfield speech, Cooper union speech, inaugural addresses,",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 39896
+    },
+    {
+      "identifier": "emancipationproc00linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Emancipation proclamation of January 1st, 1864 [sic]",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 932
+    },
+    {
+      "identifier": "firstsecondinaug01link",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「addresses」",
+      "title": "...First and second inaugural addresses, message, July 5, 1861;",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 11917
+    },
+    {
+      "identifier": "firstsecondinaug02link",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「addresses」",
+      "title": "...First and second inaugural addresses, message, July 5, 1861;",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 11909
+    },
+    {
+      "identifier": "gemsfromabrahaml00linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Gems from Abraham Lincoln : born February 11th, 1809, in Hardin County, Ky., die",
+      "creator": "Lincoln, Abraham, 1809-1865; Knox, William, 1789-1825. O why should the spirit o",
+      "words": 5447
+    },
+    {
+      "identifier": "generalordersno14149linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "General orders. No. 1. War department, adjutant general's office, Washington, Ja",
+      "creator": "Lincoln, Abraham, 1809-1865; United States. War Dept",
+      "words": 784
+    },
+    {
+      "identifier": "gettysburgaddres02linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Gettysburg address : delivered at the dedication of the National Cemetery at Get",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 321
+    },
+    {
+      "identifier": "gettysburghspeech00lincrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「papers」",
+      "title": "The Gettysburg speech, and other papers",
+      "creator": "Lincoln, Abraham, 1809-1865; Lowell, James Russell, 1819-1891; Whitman, Walt, 18",
+      "words": 30360
+    },
+    {
+      "identifier": "gettysburgspeec3835linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「papers」",
+      "title": "The Gettysburg speech and other papers",
+      "creator": "Lincoln, Abraham, 1809-1865; Lowell, James Russell, 1819-1891. Abraham Lincoln",
+      "words": 24072
+    },
+    {
+      "identifier": "inauguraladdress00linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Inaugural address of the President of the United States on the fourth of March, ",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 3856
+    },
+    {
+      "identifier": "india.history.resource.111513",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Abraham Lincoln: Complete Works, comprising his Speeches, Letters, State Papers ",
+      "creator": "Lincoln, Abraham; Nicolay, John G. (Ed.); Hay, John (Ed.)",
+      "words": 398742
+    },
+    {
+      "identifier": "insurgentprivate00linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Insurgent privateers in foreign ports : message from the President of the United",
+      "creator": "Lincoln, Abraham, 1809-1865; United States. Congress (37th, 2nd session : 1861-1",
+      "words": 107373
+    },
+    {
+      "identifier": "jstor-20086068",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Unpublished Letters of Abraham Lincoln",
+      "creator": "Lincoln, Abraham",
+      "words": 975
+    },
+    {
+      "identifier": "lettersaddresses00inlinc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters and addresses : with a brief biography, the story of the book, notes on ",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 125944
+    },
+    {
+      "identifier": "lettersaddresses00link",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters and addresses of Abraham Lincoln ..",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 128601
+    },
+    {
+      "identifier": "lettersaddresses02linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters and addresses of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 128785
+    },
+    {
+      "identifier": "lifeworks02lincuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Life and works;",
+      "creator": "Lincoln, Abraham, 1809-1865; Miller, Marion Mills, 1864-; Whitney, Henry Clay, b",
+      "words": 95284
+    },
+    {
+      "identifier": "lifeworks03lincuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Life and works;",
+      "creator": "Lincoln, Abraham, 1809-1865; Miller, Marion Mills, 1864-; Whitney, Henry Clay, b",
+      "words": 113195
+    },
+    {
+      "identifier": "lifeworksofab1136linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Life and works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Miller, Marion Mills, 1864-1949, ed; Whitney, Henry",
+      "words": 95162
+    },
+    {
+      "identifier": "lifeworksofab1137linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Life and works of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Miller, Marion Mills, 1864-1949, ed; Whitney, Henry",
+      "words": 113049
+    },
+    {
+      "identifier": "lincolnowenletters00lincrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Abraham Lincoln and Mary Owen : three letters, Lincoln to Mrs. O.H. Browning, I.",
+      "creator": "Lincoln, Abraham, 1809-1865; Browning, Orville Hickman, 1806-1881; Arnold, Isaac",
+      "words": 3567
+    },
+    {
+      "identifier": "lincstoriesspeech00lincrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「speeches」",
+      "title": "Lincoln's stories and speeches",
+      "creator": "Lincoln, Abraham, 1809-1865; Allen, Edward Frank",
+      "words": 69493
+    },
+    {
+      "identifier": "writingslincoln04lincrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Douglas, Stephen Arnold, 1813-1861; Brooks, Noah, 1",
+      "words": 90458
+    },
+    {
+      "identifier": "writingslincoln05lincrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865; Douglas, Stephen Arnold, 1813-1861; Brooks, Noah, 1",
+      "words": 124730
+    },
+    {
+      "identifier": "writingsofabraha0000linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 130762
+    },
+    {
+      "identifier": "writingsofabraha0004linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 90737
+    },
+    {
+      "identifier": "writingsofabraha0005linc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Abraham Lincoln",
+      "creator": "Lincoln, Abraham, 1809-1865",
+      "words": 124687
+    },
+    {
+      "identifier": "writingsofabraha02lincuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Abraham Lincoln;",
+      "creator": "Lincoln, Abraham, 1809-1865; Lapsley, Arthur Brooks; Brooks, Noah, 1830-1903; Ch",
+      "words": 91941
+    },
+    {
+      "identifier": "writingsofabraha03lincuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Abraham Lincoln;",
+      "creator": "Lincoln, Abraham, 1809-1865; Lapsley, Arthur Brooks; Brooks, Noah, 1830-1903; Ch",
+      "words": 110797
+    },
+    {
+      "identifier": "writingsofabraha05lincuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Abraham Lincoln;",
+      "creator": "Lincoln, Abraham, 1809-1865; Lapsley, Arthur Brooks; Brooks, Noah, 1830-1903; Ch",
+      "words": 127901
+    },
+    {
+      "identifier": "writingsofabraha07lincuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The writings of Abraham Lincoln;",
+      "creator": "Lincoln, Abraham, 1809-1865; Lapsley, Arthur Brooks; Brooks, Noah, 1830-1903; Ch",
+      "words": 115776
+    },
+    {
+      "identifier": "wsb18f36_images",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "In Memoriam to Abraham Lincoln",
+      "creator": "Lincoln, Abraham 1809-1865",
+      "words": 2724
+    }
+  ]
+}

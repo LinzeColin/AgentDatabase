@@ -1,0 +1,565 @@
+{
+  "总数": 69,
+  "计数": {
+    "一手": 67,
+    "二手": 2,
+    "需人判": 0
+  },
+  "一手占比下界": 0.971,
+  "一手占比上界": 0.971,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "10078626bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Des Nikolaus Machiavelli's Florentinische Geschichten. 1",
+      "creator": "Machiavelli, Niccolò",
+      "words": 83401
+    },
+    {
+      "identifier": "10078627bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Des Nikolaus Machiavelli's Florentinische Geschichten. 2",
+      "creator": "Machiavelli, Niccolò",
+      "words": 86601
+    },
+    {
+      "identifier": "10078631bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Nicolò Macchiavelli's Geschichte des Castruccio Castracani von Lucca",
+      "creator": "Machiavelli, Niccolò",
+      "words": 20933
+    },
+    {
+      "identifier": "10602820bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Niccolo Machiavelli's sämmtliche Werke. 3",
+      "creator": "Machiavelli, Niccolò",
+      "words": 118542
+    },
+    {
+      "identifier": "10602821bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Niccolo Machiavelli's sämmtliche Werke. 4",
+      "creator": "Machiavelli, Niccolò",
+      "words": 149462
+    },
+    {
+      "identifier": "10602822bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Niccolo Machiavelli's sämmtliche Werke. 5",
+      "creator": "Machiavelli, Niccolò",
+      "words": 118292
+    },
+    {
+      "identifier": "10602824bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Niccolo Machiavelli's sämmtliche Werke. 7",
+      "creator": "Machiavelli, Niccolò",
+      "words": 93592
+    },
+    {
+      "identifier": "10769804bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Das Buch vom Fürsten",
+      "creator": "Machiavelli, Niccolò",
+      "words": 54527
+    },
+    {
+      "identifier": "10769805bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Der Fürst des Niccolo Macchiavelli. 1.",
+      "creator": "Machiavelli, Niccolò",
+      "words": 47293
+    },
+    {
+      "identifier": "A1090181",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "El príncipe de Nicolás Maquiavelo",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 43781
+    },
+    {
+      "identifier": "BRes092067",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": " Opere di Niccolò Machiavelli T.1",
+      "creator": "Machiavelli, Niccolò, 1469-1527.",
+      "words": 115419
+    },
+    {
+      "identifier": "BRes092068",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": " Opere di Niccolò Machiavelli T. 2",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 131653
+    },
+    {
+      "identifier": "BRes092069",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere di Niccolò Machiavelli T. 3",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 139697
+    },
+    {
+      "identifier": "BRes092070",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere di Niccolò Machiavelli T. 5",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 113340
+    },
+    {
+      "identifier": "BRes092071",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": " Opere di Niccolò Machiavelli T. 6",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 171866
+    },
+    {
+      "identifier": "BRes092072",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere di Niccolò Machiavelli T. 7",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 148007
+    },
+    {
+      "identifier": "BRes092073",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere di Niccolò Machiavelli T. 8",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 79230
+    },
+    {
+      "identifier": "MarriageOfBelfagor",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Marriage Of Belfagor",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 3867
+    },
+    {
+      "identifier": "TO01040218",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "La mente di un uomo di Stato: raccolta di massime estratte dalle opere di Nicolò",
+      "creator": "Machiavelli, Niccolò",
+      "words": 9282
+    },
+    {
+      "identifier": "a591295400machuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Il principe",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Acton, John Emerich Edward Dalberg Acton, Baron",
+      "words": 198708
+    },
+    {
+      "identifier": "b30335073",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Florentine historie",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 136679
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_a-caveat-for-wives_machiavelli-niccolo_1660",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A caveat for wives...  1660",
+      "creator": "Machiavelli, Niccolo",
+      "words": 3847
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_a-true-copy-of-a-letter-_machiavelli-niccol_1691",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A true copy of a letter written by ...  1691",
+      "creator": "Machiavelli, Niccolò.",
+      "words": 11752
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machiavels-discourses-u_machiavelli-niccolo_1674",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Machiavel's discourses upon the first decade...  1674",
+      "creator": "Machiavelli, Niccolo",
+      "words": 209068
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machiavels-vindication-_machiavelli-niccolo_1691",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Machiavel's vindication of himself...  1691",
+      "creator": "Machiavelli, Niccolo",
+      "words": 7376
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machiavils-advice-to-hi_machiavelli-niccolo_1681",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Machiavil's advice to his son. ...  1681",
+      "creator": "Machiavelli, Niccolo.",
+      "words": 3141
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1663",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Machivael's discourses, ...  1663",
+      "creator": "Machiavelli, Niccolo.",
+      "words": 204760
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1663_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Machivael's discourses ...  1663",
+      "creator": "Machiavelli, Niccolo.",
+      "words": 108193
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1674",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Machivael's discourses ...  1674",
+      "creator": "Machiavelli, Niccolo.",
+      "words": 180731
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machivaels-discourses_machiavelli-niccolo_1663",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Machivael's discourses...  1663",
+      "creator": "Machiavelli, Niccolo",
+      "words": 232865
+    },
+    {
+      "identifier": "bub_gb_EbbqmRdN78cC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Gosudarʹ (Il principe) i Razsuzhdenii͡a na pervyi͡a tri knigi Tita Livii͡a",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Kurochkin, N. (Nikolaĭ), 1830-1884",
+      "words": 143115
+    },
+    {
+      "identifier": "bub_gb_Ibk8AAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Gosudarʹ (Il principe) i Razsuzhdenii͡a na pervyi͡a tri knigi Tita Livii͡a",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Kurochkin, N. (Nikolaĭ), 1830-1884",
+      "words": 142697
+    },
+    {
+      "identifier": "bub_gb_OLtLAAAAcAAJ",
+      "档": "二手",
+      "依据": "【人裁】Paul Deltuf 著《Essai sur les oeuvres et la doctrine de Machiavel》——**论他的作品与学说的评论集**，Deltuf 排第一。",
+      "title": "Essai sur les oeuvres et la doctrine de Machiavel",
+      "creator": "Deltuf, Paul; Machiavelli, Niccolò, 1469-1527",
+      "words": 135974
+    },
+    {
+      "identifier": "bub_gb_PTYaAQAAMAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere complete di Niccolò Machiavelli con molte correzioni e giunte rinvenute su",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Macaulay, Thomas Babington Macaulay, Baron, 180",
+      "words": 1050509
+    },
+    {
+      "identifier": "bub_gb_dCVvnsDWyJ0C",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Scritta inediti di Niccolò Machiavelli risguardanti la storia e la milizia (1499",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Canestrini, Giuseppe, 1807-1870",
+      "words": 130653
+    },
+    {
+      "identifier": "bub_gb_hepDAAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Le istorie fiorentine di Niccolò Machiavelli ; ridotte alla miglior lezione con ",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 169427
+    },
+    {
+      "identifier": "bub_gb_jzPjhqlQI24C",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Le istorie fiorentine",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Niccolini, Giovanni Battista, 1782-1861",
+      "words": 172432
+    },
+    {
+      "identifier": "bub_gb_l2pd8wG-VCoC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Le istorie fiorentine",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Niccolini, Giovanni Battista, 1782-1861",
+      "words": 164327
+    },
+    {
+      "identifier": "bub_gb_sm_ojzpYQkAC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discorsi」",
+      "title": "Discorsi sopra la prima deca de Tito Livio, di Nicolò Machiavelli ..",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 128245
+    },
+    {
+      "identifier": "carteggiodisplom00mach",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Carteggio displomatico e familiare",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Cavagna Sangiuliani di Gualdana, Antonio, conte",
+      "words": 172765
+    },
+    {
+      "identifier": "carteggiodisplom2mach",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Carteggio displomatico e familiare",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Cavagna Sangiuliani di Gualdana, Antonio, conte",
+      "words": 148862
+    },
+    {
+      "identifier": "carteggiodisplom3mach",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Carteggio displomatico e familiare",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Cavagna Sangiuliani di Gualdana, Antonio, conte",
+      "words": 79255
+    },
+    {
+      "identifier": "commedie00mach",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Commedie [microform]",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Bicchi, Dante, ed",
+      "words": 67190
+    },
+    {
+      "identifier": "diplomaticwritin01machuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The historical, political, and diplomatic writings",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Detmold, Christian Edward, 1810-1887",
+      "words": 195359
+    },
+    {
+      "identifier": "diplomaticwritin02machuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The historical, political, and diplomatic writings",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Detmold, Christian Edward, 1810-1887",
+      "words": 188297
+    },
+    {
+      "identifier": "diplomaticwritin03machuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The historical, political, and diplomatic writings",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Detmold, Christian Edward, 1810-1887",
+      "words": 201963
+    },
+    {
+      "identifier": "diplomaticwritin04machuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "The historical, political, and diplomatic writings",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Detmold, Christian Edward, 1810-1887",
+      "words": 193182
+    },
+    {
+      "identifier": "discorsisullapri00machuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discorsi」",
+      "title": "Discorsi sulla prima deca di T. Livio. Scelti e commentati da Giuseppe Piergili",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Piergili, Giuseppe, 1843-",
+      "words": 164059
+    },
+    {
+      "identifier": "discoursesonthef02machuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Discourses on the first decade of Titus Levius;",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Thomson, Ninian Hill",
+      "words": 146649
+    },
+    {
+      "identifier": "discoursesonthef03machuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Discourses on the first decade of Titus Levius;",
+      "creator": "Machiavelli, Niccolò, 1469-1527; Thomson, Ninian Hill",
+      "words": 146484
+    },
+    {
+      "identifier": "dli.bengal.10689.19369",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "THE HISTORY OF FLORENCE AND OF THE AFFAIRS OF ITALY",
+      "creator": "MACHIAVELLI, NICCOLO",
+      "words": 224028
+    },
+    {
+      "identifier": "dli.ministry.02746",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The history of florence, and of the affairs of Italy, from the earliest times to",
+      "creator": "Machiavelli, Niccolo",
+      "words": 222677
+    },
+    {
+      "identifier": "dli.ministry.05369",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Prince",
+      "creator": "Machiavelli, Niccolò; Thomson, Ninian Hill",
+      "words": 33538
+    },
+    {
+      "identifier": "dli.ministry.14051",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "History of Florence and of the affairs of Italy : from the earliest times to the",
+      "creator": "Machiavelli, Niccolò",
+      "words": 222606
+    },
+    {
+      "identifier": "dli.ministry.16183",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Legazioni e commissioni",
+      "creator": "Machiavelli, Niccolo",
+      "words": 156820
+    },
+    {
+      "identifier": "dli.ministry.18162",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere",
+      "creator": "Machiavelli, Niccolo",
+      "words": 84862
+    },
+    {
+      "identifier": "dli.ministry.18163",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere",
+      "creator": "Machiavelli, Niccolo",
+      "words": 66947
+    },
+    {
+      "identifier": "dli.ministry.18164",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere",
+      "creator": "Machiavelli, Niccolo",
+      "words": 70817
+    },
+    {
+      "identifier": "dli.ministry.18165",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere",
+      "creator": "Machiavelli, Niccolo",
+      "words": 76893
+    },
+    {
+      "identifier": "florentinehistor00machuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Florentine history. Translated by W.K. Marriott",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 168610
+    },
+    {
+      "identifier": "florentinehistor01machuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Florentine history...",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 88877
+    },
+    {
+      "identifier": "florentinischege00mach",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Florentinische Geschichten des Nikolaus Machiavelli",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 167109
+    },
+    {
+      "identifier": "india.history.resource.72474",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere di Niccolo Machiavelli, Vol. I",
+      "creator": "Machiavelli, Niccolo",
+      "words": 93919
+    },
+    {
+      "identifier": "india.history.resource.72475",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere di Niccolo Machiavelli, Vol. III",
+      "creator": "Machiavelli, Niccolo",
+      "words": 68045
+    },
+    {
+      "identifier": "india.history.resource.72476",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere di Niccolo Machiavelli, Vol. V",
+      "creator": "Machiavelli, Niccolo",
+      "words": 84071
+    },
+    {
+      "identifier": "india.history.resource.72477",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere di Niccolo Machiavelli, Vol. VI",
+      "creator": "Machiavelli, Niccolo",
+      "words": 72890
+    },
+    {
+      "identifier": "india.history.resource.72478",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere di Niccolo Machiavelli, Vol. IV",
+      "creator": "Machiavelli, Niccolo",
+      "words": 78003
+    },
+    {
+      "identifier": "operediniccolm02mach",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere di Niccolò Machiavelli : con giunta di un nuova indice generale delle cose",
+      "creator": "Machiavelli, Niccolò, 1469-1527",
+      "words": 118672
+    },
+    {
+      "identifier": "threeprosewriter00moor",
+      "档": "二手",
+      "依据": "【人裁】Clarence King Moore 编的文艺复兴散文选，Machiavelli 排第 3（前有 Boccaccio）。选本里他只占一部分，**整册不能记成他的一手**（同 Bismarck 的编者层教训）。",
+      "title": "Three prose writers of the Italian renaissance",
+      "creator": "Moore, Clarence King, b. 1873; Boccaccio, Giovanni, 1313-1375; Machiavelli, Nicc",
+      "words": 41047
+    }
+  ]
+}

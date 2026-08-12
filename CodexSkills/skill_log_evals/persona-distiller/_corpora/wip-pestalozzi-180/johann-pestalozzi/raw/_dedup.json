@@ -1,0 +1,24 @@
+{
+  "文件数": 70,
+  "阈值": 0.55,
+  "重复簇": [
+    [
+      "howgertrudeteach00pestiala",
+      "howgertrudeteach00pestuoft"
+    ],
+    [
+      "leonardgertrude00pestiala",
+      "pestalozzisleona00pestuoft"
+    ],
+    [
+      "lettersonearlye03pestgoog",
+      "lettersonearlyed00pest"
+    ],
+    [
+      "pestalozzissmmt02seyfgoog",
+      "pestalozzissmmt03seyfgoog"
+    ]
+  ],
+  "独立文献数上界": 66,
+  "★口径": "min-hash Jaccard；同卷多扫描与同书不同卷需人判"
+}

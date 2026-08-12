@@ -1,0 +1,421 @@
+{
+  "总数": 51,
+  "计数": {
+    "一手": 50,
+    "二手": 1,
+    "需人判": 0
+  },
+  "一手占比下界": 0.9804,
+  "一手占比上界": 0.9804,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "10762804bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Friedrich Fröbel's gesammelte pädagogische Schriften. 1,2",
+      "creator": "Fröbel, Friedrich",
+      "words": 177155
+    },
+    {
+      "identifier": "FroebelEducazioneUomo",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "L Educazione Dell Uomo",
+      "creator": "Fröbel, Friedrich",
+      "words": 90505
+    },
+    {
+      "identifier": "aidstofamilygove00meyeuoft",
+      "档": "二手",
+      "依据": "【人裁】Bertha Meyer 著，题名作 `according to Fröbel`——**按他的方法写的**，不是他写的。同 [[related-to-him-is-not-written-by-him]]。",
+      "title": "Aids to family government, or, From the cradle to the school, according to Froeb",
+      "creator": "Meyer, Bertha, 1822-1896; Fröbel, Friedrich, 1782-1852; Spencer, Herbert, 1820-1",
+      "words": 65722
+    },
+    {
+      "identifier": "autobiography00fruoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Autobiography;",
+      "creator": "Fröbel, Friedrich, 1782-1852",
+      "words": 69508
+    },
+    {
+      "identifier": "autobiographyoff00fr",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Autobiography of Friedrich Froebel",
+      "creator": "Fröbel, Friedrich, 1782-1852; Michaelis, Emilie; Moore, Henry Keatley, b. 1846",
+      "words": 66191
+    },
+    {
+      "identifier": "autobiographyoff00frbe",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Autobiography of Friedrich Froebel",
+      "creator": "Fröbel, Friedrich, 1782-1852; Michaelis, Emilie; Moore, Henry Keatley, 1846-",
+      "words": 68906
+    },
+    {
+      "identifier": "autobiographyoff00frob",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Autobiography of Friedrich Froebel",
+      "creator": "Fröbel, Friedrich, 1782-1852; Michaelis, Emilie; Moore, H. Keatley, b. 1846",
+      "words": 66304
+    },
+    {
+      "identifier": "autobiographyoff00froeiala",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Autobiography of Friedrich Froebel",
+      "creator": "Froebel, Friedrich, 1782-1852; Michaelis, Emilie; Moore, H. Keatley, b. 1846",
+      "words": 69003
+    },
+    {
+      "identifier": "autobiographyoff00fruoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Autobiography of Friedrich Froebel",
+      "creator": "Fröbel, Friedrich, 1782-1852; Michaelis, Emilie; Moore, Henry Keatley, 1846-",
+      "words": 68964
+    },
+    {
+      "identifier": "autobiooffriedri00froeiala",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Autobiography of Friedrich Froebel",
+      "creator": "Froebel, Friedrich, 1782-1852; Moore, H. Keatley, b. 1846; Michaelis, Emilie",
+      "words": 59343
+    },
+    {
+      "identifier": "bub_gb_SMoJAQAAIAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die Menschenerziehung und Kussäke verschiedenen Inhalts",
+      "creator": "Friedrich Fröbel",
+      "words": 174759
+    },
+    {
+      "identifier": "bub_gb_kmc0AQAAMAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Friedrich Fröbel's Gesammelte pädogogische schriften",
+      "creator": "Fröbel, Friedrich, 1782-1852; Lange, Wichard, 1826-1884",
+      "words": 187721
+    },
+    {
+      "identifier": "bub_gb_xhwBAAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Gesammelte pädagogische Schriften",
+      "creator": "Fröbel, Friedrich, 1782-1852",
+      "words": 174743
+    },
+    {
+      "identifier": "educationofman00f",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The education of man",
+      "creator": "Fröbel, Friedrich, 1782-1852; Hailmann, William Nicholas, 1836- [from old catalo",
+      "words": 110754
+    },
+    {
+      "identifier": "educationofman00fr",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The education of man",
+      "creator": "Fröbel, Friedrich, 1782-1852; Hailmann, W. N. (William Nicholas), 1836-1920",
+      "words": 110279
+    },
+    {
+      "identifier": "educationofman00fr2",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The education of man",
+      "creator": "Fröbel, Friedrich, 1782-1852; Hailmann, William Nicholas, 1836- [from old catalo",
+      "words": 106544
+    },
+    {
+      "identifier": "educationofman00frbe",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The education of man",
+      "creator": "Fröbel, Friedrich, 1782-1852; Hailmann, W. N. (William Nicholas), 1836-1920, tr",
+      "words": 108584
+    },
+    {
+      "identifier": "educationofman00froe",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The education of man",
+      "creator": "Froebel, Friedrich [Wilhelm August], 1782-1852. [from old catalog]; Jarvis, Jose",
+      "words": 111928
+    },
+    {
+      "identifier": "educationofman00frrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The education of man ;",
+      "creator": "Fröbel, Friedrich, 1782-1852; Hailmann, William Nicholas, 1836-1920, tr",
+      "words": 106172
+    },
+    {
+      "identifier": "educationofman00fruoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The education of man",
+      "creator": "Fröbel, Friedrich, 1782-1852; Hailmann, William Nicholas, 1836-1920",
+      "words": 107790
+    },
+    {
+      "identifier": "friedrichfroebe00frgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Friedrich Froebel's Education by development",
+      "creator": "Froebel, Friedrich Wilhelm August, 1782-1852. [from old catalog]; Jarvis, Joseph",
+      "words": 94422
+    },
+    {
+      "identifier": "friedrichfroebe01jarvgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Friedrich Froebel's pedagogics of the kindergarten",
+      "creator": "Froebel, Friedrich Wilhelm August, 1782-1852. [from old catalog]; Jarvis, Joseph",
+      "words": 121847
+    },
+    {
+      "identifier": "friedrichfroebe02jarvgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Friedrich Froebel's Education by development",
+      "creator": "Froebel, Friedrich Wilhelm August, 1782-1852. [from old catalog]; Jarvis, Joseph",
+      "words": 91833
+    },
+    {
+      "identifier": "friedrichfroebe03jarvgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Friedrich Froebel's pedagogics of the kindergarten",
+      "creator": "Froebel, Friedrich Wilhelm August, 1782-1852. [from old catalog]; Jarvis, Joseph",
+      "words": 118022
+    },
+    {
+      "identifier": "friedrichfroebel00fr",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Friedrich Froebel's Education by development",
+      "creator": "Fröbel, Friedrich, 1782-1852; Jarvis, Josephine, [from old catalog] tr",
+      "words": 95668
+    },
+    {
+      "identifier": "friedrichfroebel00froe",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Friedrich Froebel's Education by development, the second part of the Pedagogics ",
+      "creator": "Froebel, Friedrich Wilhelm August, 1782-1852. [from old catalog]; Jarvis, Joseph",
+      "words": 95027
+    },
+    {
+      "identifier": "friedrichfroebel00frrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Friedrich Froebel's Education by development, the second part of the Pedagogics ",
+      "creator": "Fröbel, Friedrich, 1782-1852; Jarvis, Josephine",
+      "words": 91428
+    },
+    {
+      "identifier": "friedrichfroebel01fr",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Friedrich Froebel's Education by development, the second part of the Pedagogics ",
+      "creator": "Fröbel, Friedrich, 1782-1852; Jarvis, Josephine, [from old catalog] tr",
+      "words": 94575
+    },
+    {
+      "identifier": "friedrichfroebel02fr",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Friedrich Froebel's Education by development",
+      "creator": "Fröbel, Friedrich, 1782-1852; Jarvis, Josephine, [from old catalog] tr",
+      "words": 95032
+    },
+    {
+      "identifier": "friedrichfroebel03fr",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Friedrich Froebel's pedagogics of the kindergarten",
+      "creator": "Fröbel, Friedrich, 1782-1852; Jarvis, Josephine, [from old catalog] tr",
+      "words": 121603
+    },
+    {
+      "identifier": "froebelletters00friala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Froebel letters;",
+      "creator": "Fröbel, Friedrich, 1782-1852; Heinemann, Arnold H",
+      "words": 52795
+    },
+    {
+      "identifier": "froebelschiefwri00frrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "Froebel's chief writings on education",
+      "creator": "Fröbel, Friedrich, 1782-1852; Fletcher, Samuel Sigmund Fechheimer; Welton, James",
+      "words": 79366
+    },
+    {
+      "identifier": "froebelschiefwri00fruoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "Froebel's chief writings on education",
+      "creator": "Fröbel, Friedrich, 1782-1852; Fletcher, S. S. F. (Samuel Sigmund Fechheimer); We",
+      "words": 79840
+    },
+    {
+      "identifier": "froebelsletterso00fr",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Froebel's letters on the kindergarten;",
+      "creator": "Fröbel, Friedrich, 1782-1852; Poesche, Hermann, 1826- [from old catalog] tr; Mic",
+      "words": 134865
+    },
+    {
+      "identifier": "froebelsletterso00froe",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Froebel's letters on the kindergarten;",
+      "creator": "Froebel, Friedrich [Wilhelm August], 1782-1852. [from old catalog]; Poesche, Her",
+      "words": 129498
+    },
+    {
+      "identifier": "laeducacindelh00fr",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "La educación del hombre",
+      "creator": "Fröbel, Friedrich, 1782-1852; Núñez, José Abelardo, 1840- [from old catalog] tr;",
+      "words": 102164
+    },
+    {
+      "identifier": "laeducacindelh01fr",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "La educación del hombre",
+      "creator": "Fröbel, Friedrich, 1782-1852; Núñez, José Abelardo, 1840- [from old catalog] tr",
+      "words": 90558
+    },
+    {
+      "identifier": "lettersonkinderg00friala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters on the kindergarten",
+      "creator": "Fröbel, Friedrich, 1782-1852; Michaelis, Emilie; Moore, H. Keatley, b. 1846",
+      "words": 129620
+    },
+    {
+      "identifier": "motherplaynurser00froe",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Mother-play and nursery songs;",
+      "creator": "Froebel, Friedrich Wilhelm August, 1782-1852. [from old catalog]; Peabody, Eliza",
+      "words": 50708
+    },
+    {
+      "identifier": "motherssongsgame00fruoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Mother's songs, games and stories : Fröbel's \"Mutter- und Kose-Lieder\"",
+      "creator": "Fröbel, Friedrich, 1782-1852; Fröbel, Friedrich, 1782-1852",
+      "words": 81471
+    },
+    {
+      "identifier": "mottoesandcomme00unkngoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The mottoes and commentaries of Friedrich Froebel's Mother play",
+      "creator": "Froebel, Friedrich [Wilhelm August], 1782-1852. [from old catalog]; Eliot, Henri",
+      "words": 66208
+    },
+    {
+      "identifier": "mottoescommentar00fr",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The mottoes and commentaries of Friedrich Froebel's Mother play",
+      "creator": "Fröbel, Friedrich, 1782-1852; Eliot, Henrietta Robins (Mack), Mrs., 1845- [from ",
+      "words": 69894
+    },
+    {
+      "identifier": "mottoescommentar00frrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The mottoes and commentaries of Friedrich Froebel's Mother play",
+      "creator": "Fröbel, Friedrich, 1782-1852; Eliot, Henrietta R. (Henrietta Robins Mack), b. 18",
+      "words": 66046
+    },
+    {
+      "identifier": "richfroebelfried00frrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Friedrich Froebel's pedagogics of the kindergarten, or, His ideas concerning the",
+      "creator": "Fröbel, Friedrich, 1782-1852",
+      "words": 118000
+    },
+    {
+      "identifier": "songsandmusicfr00compgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Songs and Music of Friedrich Froebel's Mother Play (Mutter und Kose Lieder)",
+      "creator": "Friedrich Fröbel ,  Friedrich Wilhelm August Froebel,  Susan Elizabeth Blow,  D ",
+      "words": 25504
+    },
+    {
+      "identifier": "songsmusicoffrie00fr",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The songs and music of Friedrich Froebel's Mother play (Mutter und kose lieder)",
+      "creator": "Fröbel, Friedrich, 1782-1852; Blow, Susan E. (Susan Elizabeth), 1843-1916, ed",
+      "words": 27293
+    },
+    {
+      "identifier": "songsmusicoffrie00fruoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Songs and music of Friedrich Froebel's Mother play : (Mutter und kose lieder",
+      "creator": "Fröbel, Friedrich, 1782-1852; Blow, Susan Elizabeth, 1843-1916",
+      "words": 31072
+    },
+    {
+      "identifier": "songsmusicoffrie01fr",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The songs and music of Friedrich Froebel's Mother play (Mutter und kose Lieder)",
+      "creator": "Fröbel, Friedrich, 1782-1852; Blow, Susan E. (Susan Elizabeth), 1843-1916",
+      "words": 29018
+    },
+    {
+      "identifier": "studentsfroebel01herfgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The student's Froebel adapted from Die erziehung der menschheit of F. Froebel",
+      "creator": "Fröbel, Friedrich, 1782-1852; Herford, W. H. (William Henry), 1820-1908",
+      "words": 43117
+    },
+    {
+      "identifier": "studentsfroebela00froeiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The student's Froebel adapted from Die erziehung der menschheit of F. Froebel",
+      "creator": "Froebel, Friedrich, 1782-1852; Herford, William Henry, 1820-1908",
+      "words": 42297
+    },
+    {
+      "identifier": "studentsfroebela00fruoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The student's Froebel : adapted from Die Menschenerziehung of F. Froebel",
+      "creator": "Fröbel, Friedrich, 1782-1852; Herford, William Henry",
+      "words": 50033
+    }
+  ]
+}

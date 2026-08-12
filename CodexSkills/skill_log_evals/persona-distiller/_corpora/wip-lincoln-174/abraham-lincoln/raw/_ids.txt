@@ -1,0 +1,32 @@
+# lincoln：探源 200 条 → 留 30 条（上限 30，截掉 138）
+# 丢：访问受限 17；版次年>1930 14；同名者 0；目标不在creator 1
+LincLastSpeech2
+lifeworks02lincuoft
+gettysburghspeech00lincrich
+completeprojectg03253gut
+india.history.resource.111513
+anecdotesofabrah03linc
+lifeworks03lincuoft
+lincolnowenletters00lincrich
+jstor-20086068
+bestoflincolnear00linc
+writingsofabraha02lincuoft
+lincstoriesspeech00lincrich
+writingsofabraha0000linc
+completeworksab09fishgoog
+writingsofabraha03lincuoft
+writingslincoln04lincrich
+writingsofabraha0004linc
+completeworksab11fishgoog
+writingsofabraha05lincuoft
+writingslincoln05lincrich
+writingsofabraha0005linc
+completeworkscov1linc
+writingsofabraha07lincuoft
+completeworkso2127linc
+completeworkso2129linc
+completeworksof03linc
+completeworksof05linc
+completeworksof07linc
+completeworksofa04linc
+completeworksofa06linco

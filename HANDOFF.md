@@ -1,5 +1,20 @@
 # HANDOFF —— 接手这个仓要知道的全部
 
+## ★ 2026-08-12 常设授权变更（用户原话：「下载不需要授权，全部同意」）
+
+**下载不再需要逐次授权。** 保留给人的从三件减为**两件**：
+
+1. **推送**（对外动作）
+2. **删受保护资产**
+
+★ 授权的是**下载**，不是「什么都能下」——公有领域、不碰付费墙、
+  **不绕任何访问控制**（archive.org 的 `access-restricted-item` 一律硬跳过）这几条不变。
+★ 第 1 批 10 人抓源已完成：**670 份 / 572 份独立文献 / 8,076 万词**，
+  见 `_ledgers/_第1批抓源完成-670份-2026-08-12.md`。
+  **语料不进 git，仓里只放指针**（`_ids*.txt` + 带 sha256 的 `_fetch-manifest.json`），
+  重建命令写在 `_corpora/.gitignore` 里。
+
+
 > 这份文件是**唯一入口**。一句话 prompt 只需把你指到这里。
 > 写于 2026-08-10；每次移交前更新「现在做到哪」一节。
 
@@ -1231,7 +1246,7 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/check_disposition_e
 ### ★★★★ 给用户的一句话 prompt（**合并到 main 之后才成立**）
 
 ```
-接手我的人物蒸馏项目：cd ~/Documents/Codex/GithubProject/AgentDatabase && git pull，读 HANDOFF.md 按它继续做，只有三件停下来问我：推送、下载授权、删受保护资产。
+接手我的人物蒸馏项目：cd ~/Documents/Codex/GithubProject/AgentDatabase && git pull，读 HANDOFF.md 按它继续做，只有两件停下来问我：推送、删受保护资产。
 ```
 
 **不需要任何设置**：路径是本机已有的主树，`git pull` 之后 `HANDOFF.md` 就在仓根。

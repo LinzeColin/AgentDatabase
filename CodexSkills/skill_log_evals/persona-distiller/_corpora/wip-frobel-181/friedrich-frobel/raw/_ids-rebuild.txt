@@ -1,0 +1,55 @@
+# ★ **重建用的权威清单** —— 从 _fetch-manifest.json 的「已取回」现生成。
+# 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
+#   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
+# 重建后逐份比对 manifest 里的 sha256 才算通过。
+10762804bsb
+FroebelEducazioneUomo
+aidstofamilygove00meyeuoft
+autobiography00fruoft
+autobiographyoff00fr
+autobiographyoff00frbe
+autobiographyoff00frob
+autobiographyoff00froeiala
+autobiographyoff00fruoft
+autobiooffriedri00froeiala
+bub_gb_SMoJAQAAIAAJ
+bub_gb_kmc0AQAAMAAJ
+bub_gb_xhwBAAAAYAAJ
+educationofman00f
+educationofman00fr
+educationofman00fr2
+educationofman00frbe
+educationofman00froe
+educationofman00frrich
+educationofman00fruoft
+friedrichfroebe00frgoog
+friedrichfroebe01jarvgoog
+friedrichfroebe02jarvgoog
+friedrichfroebe03jarvgoog
+friedrichfroebel00fr
+friedrichfroebel00froe
+friedrichfroebel00frrich
+friedrichfroebel01fr
+friedrichfroebel02fr
+friedrichfroebel03fr
+froebelletters00friala
+froebelschiefwri00frrich
+froebelschiefwri00fruoft
+froebelsletterso00fr
+froebelsletterso00froe
+laeducacindelh00fr
+laeducacindelh01fr
+lettersonkinderg00friala
+motherplaynurser00froe
+motherssongsgame00fruoft
+mottoesandcomme00unkngoog
+mottoescommentar00fr
+mottoescommentar00frrich
+richfroebelfried00frrich
+songsandmusicfr00compgoog
+songsmusicoffrie00fr
+songsmusicoffrie00fruoft
+songsmusicoffrie01fr
+studentsfroebel01herfgoog
+studentsfroebela00froeiala
+studentsfroebela00fruoft

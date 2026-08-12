@@ -1,0 +1,573 @@
+{
+  "总数": 70,
+  "计数": {
+    "一手": 69,
+    "二手": 1,
+    "需人判": 0
+  },
+  "一手占比下界": 0.9857,
+  "一手占比上界": 0.9857,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "10041514bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Meine Nachforschungen über den Gang der Natur in der Entwiklung des Menschengesc",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 56100
+    },
+    {
+      "identifier": "10050004bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Pestalozzi's Leben und Ansichten: in einem wortgetreuen Auszuge aus sämmtlichen ",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 314454
+    },
+    {
+      "identifier": "10065771bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Meine Lebensschicksale als Vorsteher meiner Erziehungsinstitute in Burgdorf und ",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 45393
+    },
+    {
+      "identifier": "10082563bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "ABC der Anschauung oder Anschauungs-Lehre der Maßverhältnisse. 1",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 24241
+    },
+    {
+      "identifier": "10082564bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "ABC der Anschauung oder Anschauungs-Lehre der Maßverhältnisse. 2",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 40343
+    },
+    {
+      "identifier": "10116094bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu vereinfach",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 62312
+    },
+    {
+      "identifier": "10116095bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu vereinfach",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 58169
+    },
+    {
+      "identifier": "10116096bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu vereinfach",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 57815
+    },
+    {
+      "identifier": "10116099bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Figuren zu meinem ABC Buch oder zu den Anfangsgründen meines Denkens",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 35823
+    },
+    {
+      "identifier": "10128423bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Pestalozzi's Lienhard und Gertrud: ein Buch für das Volk ; Die zwei ersten Theil",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 142740
+    },
+    {
+      "identifier": "10129401bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lienhard und Gertrud: ein Buch für das Volk. 1",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 76621
+    },
+    {
+      "identifier": "10129403bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lienhard und Gertrud: ein Buch für das Volk. 3",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 84376
+    },
+    {
+      "identifier": "10311310bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu vereinfach",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 58205
+    },
+    {
+      "identifier": "10311311bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu vereinfach",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 57741
+    },
+    {
+      "identifier": "10721192bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Rede von Pestalozzi an sein Haus: an seinem vier und siebenzigsten Geburtstage d",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 38626
+    },
+    {
+      "identifier": "10724505bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Pestalozzi's sämmtliche Schriften. 1",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 91943
+    },
+    {
+      "identifier": "10724506bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Pestalozzi's sämmtliche Schriften. 3",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 109387
+    },
+    {
+      "identifier": "10724507bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Pestalozzi's sämmtliche Schriften. 4",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 98269
+    },
+    {
+      "identifier": "10724508bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Pestalozzi's sämmtliche Schriften. 5",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 70139
+    },
+    {
+      "identifier": "10724509bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Pestalozzi's sämmtliche Schriften. 6",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 94301
+    },
+    {
+      "identifier": "10724510bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Pestalozzi's sämmtliche Schriften. 7",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 95641
+    },
+    {
+      "identifier": "PestalozziMieIndagini",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Mie Indagini",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 70326
+    },
+    {
+      "identifier": "bim_eighteenth-century_leonard-gertrude-a-po_pestalozzi-johann-heinr_1800",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Leonard & Gertrude. A popular story, written originally in German; translated in",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 84270
+    },
+    {
+      "identifier": "bub_gb_H-I_AAAAcAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Pestalozzi's Leben und Ansichten : in einem wortgetreuen Auszuge aus sämmtliche",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 343965
+    },
+    {
+      "identifier": "bub_gb_tLQ7AAAAcAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lienhard und Gertrud : Ein Buch f. d. Volk",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 67887
+    },
+    {
+      "identifier": "buchdermtter00pest",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Buch der mütter;",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 35965
+    },
+    {
+      "identifier": "cmoeducajertrud00pestgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Cómo educa Jertrudis á sus hijos",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 144094
+    },
+    {
+      "identifier": "diepdagogikjoh00pest",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die Pädagogik Johann Heinrich Pestalozzi's in wortgetreuen Auszügen aus seinen W",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827; Vogel, August, 1842- comp",
+      "words": 61942
+    },
+    {
+      "identifier": "gpl_1902807",
+      "档": "一手",
+      "依据": "题名含自述体标记「memoirs?\\b」且目标为第一作者",
+      "title": "Letters on early education, Addressed to J. P. Greaves, esq., by Pestalozzi. Tra",
+      "creator": "Pestalozzi, Johann Heinrich",
+      "words": 47948
+    },
+    {
+      "identifier": "howgertrudeteach00pest",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "How Gertrude teaches her children; an attempt to help mothers to teach their own",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827; Holland, Lucy E; Turner, Francis C; Cook",
+      "words": 94647
+    },
+    {
+      "identifier": "howgertrudeteach00pest_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "How Gertrude teaches her children: an attempt to help mothers to teach their own",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 106510
+    },
+    {
+      "identifier": "howgertrudeteach00pestiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "How Gertrude teaches her children; an attempt to help mothers to teach their own",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827; Holland, Lucy E; Turner, Francis C; Cook",
+      "words": 107955
+    },
+    {
+      "identifier": "howgertrudeteach00pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "How Gertrude teaches her children : an attempt to help mothers to teach their ow",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827; Cooke, Ebenezer",
+      "words": 108389
+    },
+    {
+      "identifier": "leonardgertrude00pestiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Leonard and Gertrude",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 59602
+    },
+    {
+      "identifier": "leonardgertrudep00pest",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Leonard and Gertrude. A popular story",
+      "creator": "[Pestalozzi, Johann Heinrich], 1746-1827",
+      "words": 78619
+    },
+    {
+      "identifier": "lettersonearlye03pestgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters on early education; addressed to J. P. Greaves, esq.",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 42417
+    },
+    {
+      "identifier": "lettersonearlyed00pest",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters on early education; addressed to J. P. Greaves, esq.",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 41941
+    },
+    {
+      "identifier": "lettersonearlyed00pestiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters on early education. Addressed to J. P. Greaves, esq.",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 50060
+    },
+    {
+      "identifier": "lienhardundgert00pestgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lienhard und Gertrud",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 167894
+    },
+    {
+      "identifier": "lienhardundgert01pestgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lienhard und Gertrud",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 201750
+    },
+    {
+      "identifier": "lienhardundgert02pestgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lienhard und Gertrud. Ein Buch für das Volk ..",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 171809
+    },
+    {
+      "identifier": "meinelebensschi01pestgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Meine Lebensschicksale als Vorsteher meiner Erziehungsinstitute in Burgdorf und ",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 95118
+    },
+    {
+      "identifier": "pestalozzipestal00barnrich",
+      "档": "二手",
+      "依据": "题名含「(?<!auto)biograph」且含目标姓名",
+      "title": "Pestalozzi and Pestalozzianism : life, educational principles, and methods of Jo",
+      "creator": "Barnard, Henry, 1811-1900; Making of America Project; Pestalozzi, Johann Heinric",
+      "words": 255437
+    },
+    {
+      "identifier": "pestalozzisleben00pest",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Pestalozzi's leben und ansichten in einem wortgetreuen auszuge aus sämmtlichen v",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827; Christoffel, Raget, 1810-1875. [from old",
+      "words": 350755
+    },
+    {
+      "identifier": "pestalozzisleona00pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Pestalozzi's Leonard and Gertrude. --",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 60599
+    },
+    {
+      "identifier": "pestalozzislienh00pest",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Pestalozzi's Lienhard und Gertrud. Ein buch für das volk",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 154618
+    },
+    {
+      "identifier": "pestalozzissamtl04pest",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Pestalozzi's sämtliche Werke",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 317341
+    },
+    {
+      "identifier": "pestalozzissmmt00seyfgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit erläuternde",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 4873
+    },
+    {
+      "identifier": "pestalozzissmmt01seyfgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit erläuternde",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 1187
+    },
+    {
+      "identifier": "pestalozzissmmt02seyfgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit erläuternde",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 1155
+    },
+    {
+      "identifier": "pestalozzissmmt03seyfgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit erläuternde",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 1130
+    },
+    {
+      "identifier": "pestalozzissmmt04seyfgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit erläuternde",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 7502
+    },
+    {
+      "identifier": "smmtlicheschr02pest",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 91385
+    },
+    {
+      "identifier": "smmtlicheschr10pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 78119
+    },
+    {
+      "identifier": "smmtlicheschri01pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 89156
+    },
+    {
+      "identifier": "smmtlicheschri03pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 106751
+    },
+    {
+      "identifier": "smmtlicheschri04pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 96044
+    },
+    {
+      "identifier": "smmtlicheschri05pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 68296
+    },
+    {
+      "identifier": "smmtlicheschri06pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 93576
+    },
+    {
+      "identifier": "smmtlicheschri07pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 92874
+    },
+    {
+      "identifier": "smmtlicheschri08pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 89686
+    },
+    {
+      "identifier": "smmtlicheschri09pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 70880
+    },
+    {
+      "identifier": "smmtlicheschri11pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 89772
+    },
+    {
+      "identifier": "smmtlicheschri12pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 120235
+    },
+    {
+      "identifier": "smmtlicheschri13pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 82586
+    },
+    {
+      "identifier": "smmtlicheschri14pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 83421
+    },
+    {
+      "identifier": "smmtlicheschri15pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Sämmtliche Schriften",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 94265
+    },
+    {
+      "identifier": "smtlichewerke01pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「s[äa]mtliche」",
+      "title": "Sämtliche Werke;",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 299021
+    },
+    {
+      "identifier": "smtlichewerke02pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「s[äa]mtliche」",
+      "title": "Sämtliche Werke;",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 190719
+    },
+    {
+      "identifier": "smtlichewerke03pestuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「s[äa]mtliche」",
+      "title": "Sämtliche Werke;",
+      "creator": "Pestalozzi, Johann Heinrich, 1746-1827",
+      "words": 156554
+    }
+  ]
+}

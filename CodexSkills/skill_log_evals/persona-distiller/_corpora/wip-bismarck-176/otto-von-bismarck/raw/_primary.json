@@ -1,0 +1,549 @@
+{
+  "总数": 67,
+  "计数": {
+    "一手": 60,
+    "二手": 7,
+    "需人判": 0
+  },
+  "一手占比下界": 0.8955,
+  "一手占比上界": 0.8955,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "00078127bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Bismarck-Briefe: I. Familien-Briefe ; II. Politische Briefe",
+      "creator": "Bismarck, Otto von",
+      "words": 99629
+    },
+    {
+      "identifier": "10558638bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. 1",
+      "creator": "Bismarck, Otto von",
+      "words": 46885
+    },
+    {
+      "identifier": "10558639bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. 2",
+      "creator": "Bismarck, Otto von",
+      "words": 91241
+    },
+    {
+      "identifier": "10629304bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. 3",
+      "creator": "Bismarck, Otto von",
+      "words": 21401
+    },
+    {
+      "identifier": "11166432bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Vier Reden zur äußeren Politik. 4",
+      "creator": "Bismarck, Otto von",
+      "words": 23378
+    },
+    {
+      "identifier": "11281959bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. 1",
+      "creator": "Bismarck, Otto von",
+      "words": 120275
+    },
+    {
+      "identifier": "11281960bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. 2",
+      "creator": "Bismarck, Otto von",
+      "words": 91615
+    },
+    {
+      "identifier": "11281961bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. 3",
+      "creator": "Bismarck, Otto von",
+      "words": 33711
+    },
+    {
+      "identifier": "11332890bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Bismarckbriefe: 1844-1870 ; Originalbriefe Bismarcks an seine Gemahlin, seine Sc",
+      "creator": "Bismarck, Otto von",
+      "words": 44425
+    },
+    {
+      "identifier": "11358069bsb",
+      "档": "二手",
+      "依据": "题名含「(?<!auto)biograph」且含目标姓名",
+      "title": "Ausgewählte Reden des Fürsten von Bismarck: mit einer biographischen Skizze, erl",
+      "creator": "Bismarck, Otto von",
+      "words": 185769
+    },
+    {
+      "identifier": "11358070bsb",
+      "档": "二手",
+      "依据": "题名含「(?<!auto)biograph」且含目标姓名",
+      "title": "Ausgewählte Reden des Fürsten von Bismarck: mit einer biographischen Skizze, erl",
+      "creator": "Bismarck, Otto von",
+      "words": 193830
+    },
+    {
+      "identifier": "11358071bsb",
+      "档": "二手",
+      "依据": "题名含「(?<!auto)biograph」且含目标姓名",
+      "title": "Ausgewählte Reden des Fürsten von Bismarck: mit einer biographischen Skizze, erl",
+      "creator": "Bismarck, Otto von",
+      "words": 279845
+    },
+    {
+      "identifier": "11358072bsb",
+      "档": "二手",
+      "依据": "题名含「(?<!auto)biograph」且含目标姓名",
+      "title": "Ausgewählte Reden des Fürsten von Bismarck: mit einer biographischen Skizze, erl",
+      "creator": "Bismarck, Otto von",
+      "words": 144108
+    },
+    {
+      "identifier": "30081009592969",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die gesammelten Werke",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 244435
+    },
+    {
+      "identifier": "30081009592985",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die gesammelten Werke",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 296214
+    },
+    {
+      "identifier": "30081009592993",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die gesammelten Werke",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 296535
+    },
+    {
+      "identifier": "30081009593009",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die gesammelten Werke",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 207081
+    },
+    {
+      "identifier": "30081009593033",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die gesammelten Werke",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 319053
+    },
+    {
+      "identifier": "30081009593066",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die gesammelten Werke",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 243940
+    },
+    {
+      "identifier": "30081009593074",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die gesammelten Werke",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 217607
+    },
+    {
+      "identifier": "30081009593090",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die gesammelten Werke",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 326020
+    },
+    {
+      "identifier": "30081009593108",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die gesammelten Werke",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 340661
+    },
+    {
+      "identifier": "anhangzudengeda01bismgoog",
+      "档": "一手",
+      "依据": "题名含自述体标记「erinnerungen」且目标为第一作者",
+      "title": "Anhang zu den Gedanken und Erinnerungen",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 6726
+    },
+    {
+      "identifier": "anhangzudengeda01schlgoog",
+      "档": "一手",
+      "依据": "题名含自述体标记「erinnerungen」且目标为第一作者",
+      "title": "Anhang zu den Gedanken und Erinnerungen von Otto Fürst von Bismarck",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Kohl, Horst Ernst Arminius, 1855-1917 ed; ",
+      "words": 107455
+    },
+    {
+      "identifier": "anhangzudengedan02bism",
+      "档": "一手",
+      "依据": "题名含自述体标记「erinnerungen」且目标为第一作者",
+      "title": "Anhang zu den Gedanken und Erinnerungen",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 152052
+    },
+    {
+      "identifier": "bismarckbrief00bism",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Bismarckbriefe 1836-1873",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Kohl, Horst, 1855-1917",
+      "words": 180993
+    },
+    {
+      "identifier": "bismarckbriefe00bism",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Bismarckbriefe 1836-1873",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Kohl, Horst, 1855-1917",
+      "words": 180967
+    },
+    {
+      "identifier": "bismarckbriefe00kohlgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Bismarckbriefe 1836-1873",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 183921
+    },
+    {
+      "identifier": "bismarckbriefeo00bismgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Bismarckbriefe, 1844-1870: Originalbriefe Bismarcks an seine Gemahlin, seine ...",
+      "creator": "Fürst von Otto Bismarck,  Otto Bismarck",
+      "words": 45572
+    },
+    {
+      "identifier": "bismarckforsilve00bism",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Bismarck for silver [microform] : he says independent free coinage would bring a",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 3965
+    },
+    {
+      "identifier": "bismarckmanands00vongoog",
+      "档": "一手",
+      "依据": "题名含自述体标记「reminiscence」且目标为第一作者",
+      "title": "Bismarck, the man and the statesman; being the reflections and reminiscences of ",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 133446
+    },
+    {
+      "identifier": "bismarckmanstat03butlgoog",
+      "档": "一手",
+      "依据": "题名含自述体标记「reminiscence」且目标为第一作者",
+      "title": "Bismarck, the man & the statesman; being the reflections and reminiscences of Ot",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Butler, Arthur John, 1844-1910",
+      "words": 118168
+    },
+    {
+      "identifier": "bismarckmanstate01bism",
+      "档": "一手",
+      "依据": "题名含自述体标记「reminiscence」且目标为第一作者",
+      "title": "Bismarck, the man & the statesman; being the reflections and reminiscences of Ot",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 131281
+    },
+    {
+      "identifier": "bismarckmanstate01bismiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Bismarck's letters to his wife from the seat of war, 1870-1871;",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Harder, Armin",
+      "words": 24976
+    },
+    {
+      "identifier": "bismarckmanstate01bismuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「reminiscence」且目标为第一作者",
+      "title": "Bismarck, the man and the statesman; being the reflections and reminiscences of ",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 130867
+    },
+    {
+      "identifier": "bismarckmanstate02bismuoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「reminiscence」且目标为第一作者",
+      "title": "Bismarck, the man and the statesman; being the reflections and reminiscences of ",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 119691
+    },
+    {
+      "identifier": "bismarckreden18400bismuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Bismarckreden, 1847-1895. Hrsg. von Horst Kohl",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Kohl, Horst Ernst Arminius, 1855-1917",
+      "words": 176895
+    },
+    {
+      "identifier": "bismarcksbriefes00bism",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "(Bismarcks) Briefe an Schwester und Schwager;",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Brandenburg, Erich, 1868-",
+      "words": 27512
+    },
+    {
+      "identifier": "bismarcksletter00bismgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Bismarck's letters to his wife, from the seat of war, 1870-1871. Translated by A",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Bismarck, Johanna, Fürstin von, 1824-189",
+      "words": 25566
+    },
+    {
+      "identifier": "bismarcksstaats00rogoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Bismarcks staatsrecht : die stellungnahme des fürsten Otto von Bismarck zu den ",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 140000
+    },
+    {
+      "identifier": "bismarckstableta01bism_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Bismarck's table-talk",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Lowe, Charles, 1848-1931",
+      "words": 108927
+    },
+    {
+      "identifier": "bismarckundste00bism",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Bismarck und Österreich",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Freybruck, Franz",
+      "words": 30597
+    },
+    {
+      "identifier": "briefeottosvonbi00bismuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Briefe Ottos von Bismarck an Schwester und Schwager: Malwine von Arnim, geb. Bis",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Kohl, Horst Ernst Arminius, 1855-1917",
+      "words": 43050
+    },
+    {
+      "identifier": "briefeseinebarau00bismuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Briefe an seine Baraut und Gattin;",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 231676
+    },
+    {
+      "identifier": "bub_gb_-a0PAAAAQAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Bismarck-Portefeuille",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Poschinger, Heinrich, Ritter von, 1845-191",
+      "words": 134332
+    },
+    {
+      "identifier": "bub_gb_BbIPAAAAQAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Bismarck-Portefeuille",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Poschinger, Heinrich, Ritter von, 1845-191",
+      "words": 69997
+    },
+    {
+      "identifier": "bub_gb_BkIPAAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Die politischen reden des fürsten Bismarck [microform]. Historischkritische gesa",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Kohl, Horst Ernst Arminius, 1855-1911, ed",
+      "words": 294816
+    },
+    {
+      "identifier": "bub_gb_CWAPAAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lettres politiques confidentielles de M. de Bismarck, 1851-1858",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Poschinger, Heinrich, Ritter von, 1845-191",
+      "words": 98409
+    },
+    {
+      "identifier": "bub_gb_NjNDAQAAMAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Bismarck-Portefeuille",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Poschinger, Heinrich, Ritter von, 1845-191",
+      "words": 197523
+    },
+    {
+      "identifier": "cihm_77460",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Bismarck's letters to his wife from the seat of war, 1870-1871 [microform]",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 19977
+    },
+    {
+      "identifier": "correspondancedi01bism",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「correspondance」",
+      "title": "Correspondance diplomatique de m. de Bismarck (1851-1859)",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Funck-Brentano, Theophile, 1830-1906. ed; ",
+      "words": 177363
+    },
+    {
+      "identifier": "correspondenceof00bismuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "The correspondence of William I. and Bismarck : with other letters from and to P",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Ford, J. A; William I, German Emperor, 179",
+      "words": 70882
+    },
+    {
+      "identifier": "correspondenceof02bismuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "The correspondence of William I. and Bismarck : with other letters from and to P",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Ford, J. A; William I, German Emperor, 179",
+      "words": 71051
+    },
+    {
+      "identifier": "diepolitischenre01bismuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Die politischen Reden;",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 147091
+    },
+    {
+      "identifier": "diepolitischenre02bismuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Die politischen Reden;",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 160804
+    },
+    {
+      "identifier": "dieredendesgraf00bismgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. Dritte Sammlung, 1869-1870",
+      "creator": "Bismarck, Otto von",
+      "words": 256033
+    },
+    {
+      "identifier": "erinnerungundged00bism",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Erinnerung und Gedanke",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 62223
+    },
+    {
+      "identifier": "frstbismarcksei01bismgoog",
+      "档": "二手",
+      "依据": "【人裁】Ludwig Ernst Hahn 编著的《Fürst Bismarck: sein politisches Leben und Wirken urkundlich in Thatsachen》，Hahn 排第一。**这正是 00-抓源前必读 点名的「编者层」**：册中确有他的文件，但**要按篇取，不按整册记一手**。",
+      "title": "Fürst Bismarck : sein politisches Leben und Wirken urkundlich in Thatsachen und",
+      "creator": "Hahn, Ludwig Ernst; Bismarck, Otto von",
+      "words": 419373
+    },
+    {
+      "identifier": "furstbismarckna02penz",
+      "档": "二手",
+      "依据": "【人裁】Johannes Penzler（1850–1909）著《Fürst Bismarck nach seiner Entlassung》，Penzler 排第一、是作者。",
+      "title": "Fürst Bismarck nach seiner Entlassung : Leben und Politik des Fürsten seit seine",
+      "creator": "Penzler, Johannes, 1850-1909; Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 149645
+    },
+    {
+      "identifier": "furstbismarckna03penz",
+      "档": "二手",
+      "依据": "【人裁】同上，Penzler 著作的另一卷。",
+      "title": "Fürst Bismarck nach seiner Entlassung : Leben und Politik des Fürsten seit seine",
+      "creator": "Penzler, Johannes, 1850-1909; Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 143957
+    },
+    {
+      "identifier": "gedankenunderin00bism",
+      "档": "一手",
+      "依据": "题名含自述体标记「erinnerungen」且目标为第一作者",
+      "title": "Gedanken und erinnerungen;",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Kohl, Horst, 1855-1917",
+      "words": 210836
+    },
+    {
+      "identifier": "gedankenunderinn01bism",
+      "档": "一手",
+      "依据": "题名含自述体标记「erinnerungen」且目标为第一作者",
+      "title": "Gedanken und Erinnerungen",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Kohl, Horst, 1855-1917",
+      "words": 114648
+    },
+    {
+      "identifier": "gedankenunderinn03bism",
+      "档": "一手",
+      "依据": "题名含自述体标记「erinnerungen」且目标为第一作者",
+      "title": "Gedanken und Erinnerungen",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 61608
+    },
+    {
+      "identifier": "india.history.resource.85205",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Prince Bismarck’s Letters to his Wife, his Sister and others, from 1844 to 1870;",
+      "creator": "Bismarck, Otto von; Maxse, Fitzh. (Tr.)",
+      "words": 51342
+    },
+    {
+      "identifier": "lovelettersofbis00bismiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "The love letters of Bismarck; being letters to his fiancée and wife, 1846-1889;",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Bismarck, Johanna von Puttkamer, Fürstin v",
+      "words": 138416
+    },
+    {
+      "identifier": "professionalrec00liargoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Die politischen Reden des Fürsten Bismarck. Historisch-kritische Gesamtausg.",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 107145
+    },
+    {
+      "identifier": "vierredenzurus00bismiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「reden」",
+      "title": "Vier Reden zur äusseren Politik",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 22697
+    }
+  ]
+}

@@ -1,0 +1,565 @@
+{
+  "总数": 69,
+  "计数": {
+    "一手": 67,
+    "二手": 2,
+    "需人判": 0
+  },
+  "一手占比下界": 0.971,
+  "一手占比上界": 0.971,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "00074230bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「gedanken」",
+      "title": "Gedanken von der wahren Schätzung der lebendigen Kräfte und Beurtheilung der Bew",
+      "creator": "Kant, Immanuel",
+      "words": 65344
+    },
+    {
+      "identifier": "10040686bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Iman. Kant zwo Abhandlungen über moralische und politische Gegenstände",
+      "creator": "Kant, Immanuel",
+      "words": 22618
+    },
+    {
+      "identifier": "10040687bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Neue kleine Schriften",
+      "creator": "Kant, Immanuel",
+      "words": 26269
+    },
+    {
+      "identifier": "10042413bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die Religion innerhalb der Grenzen der bloßen Vernunft",
+      "creator": "Kant, Immanuel",
+      "words": 70939
+    },
+    {
+      "identifier": "10043581bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Critik der Urtheilskraft",
+      "creator": "Kant, Immanuel",
+      "words": 120182
+    },
+    {
+      "identifier": "10044864bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Critik der reinen Vernunft. 2",
+      "creator": "Kant, Immanuel",
+      "words": 49116
+    },
+    {
+      "identifier": "10045002bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Critik der Urtheilskraft",
+      "creator": "Kant, Immanuel",
+      "words": 115637
+    },
+    {
+      "identifier": "10046171bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Immanuel Kant's vorzügliche kleine Schriften und Aufsätze: nebst Betrachtungen ü",
+      "creator": "Kant, Immanuel",
+      "words": 93996
+    },
+    {
+      "identifier": "10046172bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Immanuel Kant's vorzügliche kleine Schriften und Aufsätze: nebst Betrachtungen ü",
+      "creator": "Kant, Immanuel",
+      "words": 101024
+    },
+    {
+      "identifier": "10046183bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's Werke. 9",
+      "creator": "Kant, Immanuel",
+      "words": 141181
+    },
+    {
+      "identifier": "10046188bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's sämmtliche Werke. 4",
+      "creator": "Kant, Immanuel",
+      "words": 138779
+    },
+    {
+      "identifier": "10046192bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's sämmtliche Werke. 8",
+      "creator": "Kant, Immanuel",
+      "words": 92605
+    },
+    {
+      "identifier": "10046194bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's sämmtliche Werke. 9",
+      "creator": "Kant, Immanuel",
+      "words": 120956
+    },
+    {
+      "identifier": "265433882.1678.emory.edu",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge",
+      "creator": "Kant, Immanuel, 1724-1804; Hartenstein, G. (Gustav), 1808-1890",
+      "words": 158252
+    },
+    {
+      "identifier": "265433882.1682.emory.edu",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge",
+      "creator": "Kant, Immanuel, 1724-1804; Hartenstein, G. (Gustav), 1808-1890",
+      "words": 177431
+    },
+    {
+      "identifier": "265433882.1713.emory.edu",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge",
+      "creator": "Kant, Immanuel, 1724-1804; Hartenstein, G. (Gustav), 1808-1890",
+      "words": 183781
+    },
+    {
+      "identifier": "FilosofaDeLaHistoriaEmmanuelKant",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Filosofía De La Historia Emmanuel Kant",
+      "creator": "Kant, Immanuel",
+      "words": 31406
+    },
+    {
+      "identifier": "ImmanuelKantsKritikDerReinenVernunftMitEinerEinleitungUnd",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's Kritik der reinen Vernunft: mit einer Einleitung und Anmerkungen",
+      "creator": "Kant, Immanuel",
+      "words": 278342
+    },
+    {
+      "identifier": "Kant-polmica-CRP",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant - La polémica sobre la Crítica de la Razón Pura (respuesta a Eberh",
+      "creator": "Kant, Immanuel",
+      "words": 55767
+    },
+    {
+      "identifier": "KantAntropologiaPrammatica",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Antropologia Prammatica",
+      "creator": "Kant, Immanuel",
+      "words": 82163
+    },
+    {
+      "identifier": "ProlegomeniKantMartinetti",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Prolegomeni ad ogni metafisica futura che vorrà presentarsi come scienza",
+      "creator": "Kant, Immanuel",
+      "words": 108525
+    },
+    {
+      "identifier": "TheMetaphysicOfEthicsByImmanuelKantTranslatedByJ.w.SempleEdited",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Metaphysic of Ethics by Immanuel Kant; translated by J.W. Semple; edited, with i",
+      "creator": "Kant, Immanuel",
+      "words": 99840
+    },
+    {
+      "identifier": "aje7738.0003.001.umich.edu",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「s[äa]mtliche」",
+      "title": "Sämtliche werke ..",
+      "creator": "Kant, Immanuel, 1724-1804; Cohen, Hermann, 1842-1918; Valentiner, Theodor, ed; V",
+      "words": 238358
+    },
+    {
+      "identifier": "anthropologiesu00kantgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Anthropologie, suivie des divers fragments du même auteur, relatifs aux rapport",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 133472
+    },
+    {
+      "identifier": "b24885046",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Anthropologie in pragmatischer Hinsicht",
+      "creator": "Kant, Immanuel, 1724-1804. n 79021614; Vorländer, Karl, 1860-1928. n 87896699",
+      "words": 129003
+    },
+    {
+      "identifier": "b28738615",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Metaphysische Anfangsgründe der Naturwissenschaft",
+      "creator": "Kant, Immanuel, 1724-1804. n 79021614",
+      "words": 40140
+    },
+    {
+      "identifier": "b28764523",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Anthropologie in pragmatischer Hinsicht abgefasst",
+      "creator": "Kant, Immanuel, 1724-1804. n 79021614",
+      "words": 79252
+    },
+    {
+      "identifier": "bim_eighteenth-century_essays-and-treatises-on-_kant-immanuel_1798_2",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Essays and treatises on moral, political, and various philosophical subjects. By",
+      "creator": "Kant, Immanuel",
+      "words": 138906
+    },
+    {
+      "identifier": "bim_eighteenth-century_the-metaphysic-of-morals_kant-immanuel_1799_1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The metaphysic of morals, divided into metaphysical elements of law and of ethic",
+      "creator": "Kant, Immanuel",
+      "words": 60020
+    },
+    {
+      "identifier": "briefwechselvoni01kant",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefwechsel」",
+      "title": "Briefwechsel von Imm. Kant",
+      "creator": "Kant, Immanuel, 1724-1804; Fischer, H. E. (H. Ernst), 1881-",
+      "words": 118325
+    },
+    {
+      "identifier": "briefwechselvoni02kant",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefwechsel」",
+      "title": "Briefwechsel von Imm. Kant",
+      "creator": "Kant, Immanuel, 1724-1804; Fischer, H. E. (H. Ernst), 1881-",
+      "words": 120589
+    },
+    {
+      "identifier": "briefwechselvoni03kant",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefwechsel」",
+      "title": "Briefwechsel von Imm. Kant",
+      "creator": "Kant, Immanuel, 1724-1804; Fischer, H. E. (H. Ernst), 1881-",
+      "words": 109685
+    },
+    {
+      "identifier": "bub_gb_7rI_AAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's physische Geographie",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 64872
+    },
+    {
+      "identifier": "bub_gb_F31ZAAAAcAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Prolégomènes a toute métaphysique future qui aura le droit de se présenter comme",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 123923
+    },
+    {
+      "identifier": "bub_gb_F7gA_JUh5EYC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Prolégomènes a toute métaphysique future qui aura le droit de se présenter comme",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 123250
+    },
+    {
+      "identifier": "bub_gb_Oc0AAAAAcAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Metaphysische Anfangsgründe der Naturwissenschaft",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 40579
+    },
+    {
+      "identifier": "bub_gb_PiRNAAAAMAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's Kritik der reinen vernunft",
+      "creator": "Kant, Immanuel, 1724-1804; Hartenstein, G. (Gustav), 1808-1890",
+      "words": 231076
+    },
+    {
+      "identifier": "bub_gb_Wiw-AAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Kant's Sämmtliche kleine Schriften, nach der Zeitfolge Geordnet ..",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 126239
+    },
+    {
+      "identifier": "bub_gb_mIdQAAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's Werke, sorgfaltig revidirte Gesammtausgabe in zehn Bänden",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 184879
+    },
+    {
+      "identifier": "bub_gb_nsALAAAAIAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Gesammelte Schriften",
+      "creator": "Kant, Immanuel, 1724-1804; Holger, Katharina; Gerreshelm, Eduard; Heidemann, Ing",
+      "words": 170673
+    },
+    {
+      "identifier": "bub_gb_pbI_AAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's physische Geographie",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 47721
+    },
+    {
+      "identifier": "bub_gb_tawUAAAAQAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Anthropologie in pragmatischer Hinsicht abgefasst, [Immanuel Kant]",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 83763
+    },
+    {
+      "identifier": "critiquedelarai02tissgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Critique de la raison pure",
+      "creator": "Kant, Immanuel, 1724-1804; Tissot, J. (Joseph), 1801-1876. tr",
+      "words": 133889
+    },
+    {
+      "identifier": "critiqueofjudgem00kantuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Critique of judgment",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 141997
+    },
+    {
+      "identifier": "dli.ministry.13241",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Fundamental principles of the metaphysics of ethics",
+      "creator": "Kant, Immanuel; Abbott, Thomas Kingsmill",
+      "words": 32467
+    },
+    {
+      "identifier": "educationaltheor0000kant",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Educational theory of Immanual Kant ",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 89940
+    },
+    {
+      "identifier": "educationaltheor00kantuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Educational theory;",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 85075
+    },
+    {
+      "identifier": "ikuiseenrauhaanv53461gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Ikuiseen rauhaanValtio-oikeudellinen tutkielma",
+      "creator": "Kant, Immanuel",
+      "words": 22928
+    },
+    {
+      "identifier": "immanuelkantpap00kant",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「papers」",
+      "title": "Immanuel Kant papers, 1744-1905?",
+      "creator": "Kant, Immanuel, 1724-1804, author",
+      "words": 144
+    },
+    {
+      "identifier": "immanuelkantscri0000kant_c7p6",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's Critique of pure reason",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 260542
+    },
+    {
+      "identifier": "immanuelkantscri02kantuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's Critique of pure reason : in commemoration of the centenary of i",
+      "creator": "Kant, Immanuel, 1724-1804; Noiré, Ludwig, 1829-1889; Müller, F. Max (Friedrich M",
+      "words": 202318
+    },
+    {
+      "identifier": "immanuelkantskr03kantgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's Kritik der reinen Vernunft",
+      "creator": "Kant, Immanuel (1724-1804). Autor",
+      "words": 231159
+    },
+    {
+      "identifier": "india.history.resource.90167",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant’s Critique of Pure Reason, in Commemoration of the Centenary of it",
+      "creator": "Kant, Immanuel; Muller, F. Max (Tr.); Noire, Ludwig",
+      "words": 163465
+    },
+    {
+      "identifier": "kant-della-forza-dell-animo",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Della Forza Dell'Animo",
+      "creator": "Kant, Immanuel",
+      "words": 13931
+    },
+    {
+      "identifier": "kantchoixdetexte00kant",
+      "档": "二手",
+      "依据": "题名含「(?<!auto)biograph」且含目标姓名",
+      "title": "Kant. Choix de textes avec étude du systeme philosophique et notices biographiqu",
+      "creator": "Kant, Immanuel, 1724-1804; Gillouin, René, 1881- ed",
+      "words": 79410
+    },
+    {
+      "identifier": "kantlobelloylosublime1919",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lo bello y lo sublime: ensayo de estética y moral",
+      "creator": "Kant, Immanuel; Sánchez Rivero, Ángel",
+      "words": 21306
+    },
+    {
+      "identifier": "kantscritique01kantuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Immanuel Kant's Critique of pure reason : in commemoration of the centenary of i",
+      "creator": "Kant, Immanuel, 1724-1804; Noiré, Ludwig, 1829-1889; Müller, F. Max (Friedrich M",
+      "words": 165013
+    },
+    {
+      "identifier": "kantsgesammeltes0000kant_l9l8",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Kant's Gesammelte Schriften ",
+      "creator": "Kant, Immanuel, 1724-1804, author",
+      "words": 285392
+    },
+    {
+      "identifier": "kantsgesammeltes0010kant",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Kant's gesammelte Schriften",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 189648
+    },
+    {
+      "identifier": "kantsgesammeltes0027kant",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Kant's gesammelte Schriften",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 205868
+    },
+    {
+      "identifier": "kantsgesammeltes12kant",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Kant's gesammelte Schriften",
+      "creator": "Kant, Immanuel, 1724-1804; Deutsche Akademie der Wissenschaften zu Berlin",
+      "words": 136536
+    },
+    {
+      "identifier": "kantsgesammeltes13kant",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Kant's gesammelte Schriften",
+      "creator": "Kant, Immanuel, 1724-1804; Deutsche Akademie der Wissenschaften zu Berlin",
+      "words": 252713
+    },
+    {
+      "identifier": "kantsgesammeltes55925gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Kant's gesammelte SchriftenBand V. Kritik der Urtheilskraft.",
+      "creator": "Kant, Immanuel",
+      "words": 132711
+    },
+    {
+      "identifier": "kantsprolegomen00kantuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Kant's Prolegomena, and Metaphysical foundations of natural science",
+      "creator": "Kant, Immanuel, 1724-1804; Kant, Immanuel, 1724-1804; Bax, Ernest Belfort, 1854-",
+      "words": 138382
+    },
+    {
+      "identifier": "kantsprolegomena00kantuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Kant's Prolegomena to any future metaphysics",
+      "creator": "Kant, Immanuel, 1724-1804; Carus, Paul, 1852-1919",
+      "words": 92541
+    },
+    {
+      "identifier": "metaphysicofethi00kantiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The metaphysic of ethics",
+      "creator": "Kant, Immanuel, 1724-1804; Semple, John William, d. 1842; Calderwood, Henry, 183",
+      "words": 109129
+    },
+    {
+      "identifier": "philosophyoflawe0000kant",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The philosophy of law : an exposition of the fundamental principles of jurisprud",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 84037
+    },
+    {
+      "identifier": "saemmtlichewerke0004kant",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Saemmtliche werke",
+      "creator": "Kant, Immanuel, 1724-1804",
+      "words": 177176
+    },
+    {
+      "identifier": "textbooktokantcr00kant",
+      "档": "二手",
+      "依据": "题名含「(?<!auto)biograph」且含目标姓名",
+      "title": "Text-book to Kant. The critique of pure reason; aesthetic categories, schematism",
+      "creator": "Kant, Immanuel, 1724-1804; Stirling, James Hutchison, 1820-1909",
+      "words": 188030
+    }
+  ]
+}

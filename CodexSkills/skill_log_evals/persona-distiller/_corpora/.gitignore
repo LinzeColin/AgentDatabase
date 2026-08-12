@@ -1,0 +1,20 @@
+# ★ 语料正文**不进 git** —— 用户 2026-08-13 移交前已裁定：
+#   「语料另存 Release／私有仓，**仓里只放指针**」。
+#
+# 进仓的是**指针**，够任何人逐字节重建：
+#   _ids-rebuild.txt      —— ★ **重建用的权威清单**（从 manifest 的「已取回」生成）
+#   _ids-*.txt            —— 探源/增量/上限各轮的清单（是「打算抓的」，**不是「抓到的」**）
+#   _fetch-manifest.json  —— 每份的 source_url + **sha256** + 字节数 + 词数 + 取回时刻
+#   重建命令：python3 _ledgers/_pipeline/fetch_ia.py --ids-file <raw>/_ids-rebuild.txt --out <raw>
+#   ★ 重建后必须逐份比对 manifest 里的 sha256——**跑完不等于跑对**。
+#
+# ★ 与 Livermore #100 的区别：那次是**只有语料没有指针**（台账 536 行、git 里 raw 为 0），
+#   所以「可重抓」是推断的；这次 sha256 逐份在仓，可重抓是**可验证的**。
+*/*/raw/*.txt
+*/*/raw/*.xml
+*/*/raw/*.pdf
+# ★ 通配要写 `_ids*.txt` 不是 `_ids.txt`：后者只放行首轮那份 30 条的清单，
+#   而**真正可复现的是 `_ids-final.txt`**（第三轮扩容后的 70 条）。
+#   写成精确名 = 仓里留着一份**过时且更短**的清单，重建出来的语料比实际少一半。
+!*/*/raw/_ids*.txt
+!*/*/raw/_fetch-manifest.json

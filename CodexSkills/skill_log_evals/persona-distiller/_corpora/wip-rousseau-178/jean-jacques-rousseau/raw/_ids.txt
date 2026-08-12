@@ -1,0 +1,32 @@
+# rousseau：探源 200 条 → 留 30 条（上限 30，截掉 132）
+# 丢：访问受限 20；版次年>1930 5；同名者 0；目标不在creator 13
+1766jjacquesrous00rous
+bim_eighteenth-century_a-dialogue-between-a-man_rousseau-jean-jacques_1761
+avisauxgensdelet00rous
+10066336bsb
+bub_gb_3DbL7IDH2jIC
+confessionsofjjr03904gut
+1782collectionco10rous
+bim_eighteenth-century_an-inquiry-into-the-natu_rousseau-jean-jacques_1791_0
+bekenntnisseunv00hardgoog
+10599347bsb
+bub_gb_OXcpAAAAYAAJ
+confessionsofjjr03905gut
+1782collectionco17rous
+bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1796
+collectioncompl31rousgoog
+10713049bsb
+bub_gb_yN1MAAAAcAAJ
+confessionsofjjr03906gut
+1791emileoudel02rous
+bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_1
+collectioncompl78rousgoog
+10762426bsb
+bub_gb_zN1MAAAAcAAJ
+confessionsofjjr03912gut
+1791emileoudel03rous
+bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_3_0
+confessionsjean06rousgoog
+10762427bsb
+ceuvrescomplete00troigoog
+confessionsofjjr03913gut

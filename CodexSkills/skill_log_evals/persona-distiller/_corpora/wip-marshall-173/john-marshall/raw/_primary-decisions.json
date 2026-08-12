@@ -1,0 +1,44 @@
+{
+  "lifeofgeorgewash01mars_0": {
+    "档": "一手",
+    "理由": "《The Life of George Washington》五卷是**他自著**（维基条目：自著，前两卷 1804）。IA 把他编目成 comp/compiler 是编目习惯，不是「别人写他」；题名里的 life of 指向的是华盛顿不是他自己。"
+  },
+  "lifeofgeorgewash005mars": {
+    "档": "一手",
+    "理由": "《The Life of George Washington》五卷是**他自著**（维基条目：自著，前两卷 1804）。IA 把他编目成 comp/compiler 是编目习惯，不是「别人写他」；题名里的 life of 指向的是华盛顿不是他自己。"
+  },
+  "lifeofgeorgewash05marsiala": {
+    "档": "一手",
+    "理由": "《The Life of George Washington》五卷是**他自著**（维基条目：自著，前两卷 1804）。IA 把他编目成 comp/compiler 是编目习惯，不是「别人写他」；题名里的 life of 指向的是华盛顿不是他自己。"
+  },
+  "india.history.resource.17702": {
+    "档": "一手",
+    "理由": "《The Life of George Washington》五卷是**他自著**（维基条目：自著，前两卷 1804）。IA 把他编目成 comp/compiler 是编目习惯，不是「别人写他」；题名里的 life of 指向的是华盛顿不是他自己。"
+  },
+  "lifeofgeorgewash002mars": {
+    "档": "一手",
+    "理由": "《The Life of George Washington》五卷是**他自著**（维基条目：自著，前两卷 1804）。IA 把他编目成 comp/compiler 是编目习惯，不是「别人写他」；题名里的 life of 指向的是华盛顿不是他自己。"
+  },
+  "lifegeorgewashi01marsgoog": {
+    "档": "一手",
+    "理由": "《The Life of George Washington》五卷是**他自著**（维基条目：自著，前两卷 1804）。IA 把他编目成 comp/compiler 是编目习惯，不是「别人写他」；题名里的 life of 指向的是华盛顿不是他自己。"
+  },
+  "lifegeorgewashi00marsgoog": {
+    "档": "一手",
+    "理由": "《The Life of George Washington》五卷是**他自著**（维基条目：自著，前两卷 1804）。IA 把他编目成 comp/compiler 是编目习惯，不是「别人写他」；题名里的 life of 指向的是华盛顿不是他自己。"
+  },
+  "_rules": [
+    {
+      "当题名含": "life of george washington",
+      "且creator首位含": "Marshall, John",
+      "理由": "《The Life of George Washington》五卷是**他自著**（维基条目：自著，前两卷 1804 年出版）。IA 把他编目成 comp/compiler 是编目习惯。题名里的 `life of` 指向华盛顿，不是他自己——这正是本分类器 ① 规则要求「标记词**与目标姓名同现**」的原因。",
+      "档": "一手"
+    },
+    {
+      "当题名含": "history of the colonies",
+      "且creator首位含": "Marshall, John",
+      "理由": "《A History of the Colonies Planted by the English》是他自著（《华盛顿传》第一卷的改写单行本）。",
+      "档": "一手"
+    }
+  ]
+}

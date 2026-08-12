@@ -1,0 +1,32 @@
+# bismarck：探源 200 条 → 留 30 条（上限 30，截掉 159）
+# 丢：访问受限 7；版次年>1930 2；同名者 2；目标不在creator 0
+00078127bsb
+anhangzudengeda01bismgoog
+anhangzudengedan02bism
+30081009592969
+bismarckbrief00bism
+bub_gb_-a0PAAAAQAAJ
+india.history.resource.85205
+10558638bsb
+anhangzudengeda01schlgoog
+bismarckmanstate01bismuoft
+30081009592977
+bismarckbriefe00bism
+bub_gb_BbIPAAAAQAAJ
+10558639bsb
+bismarckbriefe00kohlgoog
+bismarckmanstate02bismuoft
+30081009592985
+bismarckmanstate01bismiala
+bub_gb_CWAPAAAAYAAJ
+10629304bsb
+bismarckforsilve00bism
+bismarckreden18400bismuoft
+30081009592993
+bismarckundste00bism
+dieredendesgraf00bismgoog
+11166432bsb
+bismarckmanands00vongoog
+bismarcksbriefes00bism
+30081009593009
+erinnerungundged00bism
