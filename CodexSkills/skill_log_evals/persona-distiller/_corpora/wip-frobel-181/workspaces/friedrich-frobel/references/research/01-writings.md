@@ -2,20 +2,17 @@
 
 ## Scope and assigned sources
 
-**本道分到 33 份（train split）**：
+**本道分到 30 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
-| `src-6846b7525666` | 1862 | P1 | Friedrich Fröbel's Gesammelte pädogogische schriften |
 | `src-78c284144dcf` | 1862 | P1 | Gesammelte pädagogische Schriften |
 | `src-0e9685ee5c80` | 1863 | P1 | Die Menschenerziehung und Kussäke verschiedenen Inhalts |
 | `src-18b6090f5f15` | 1863 | P1 | Friedrich Fröbel's gesammelte pädagogische Schriften. 1,2 |
 | `src-e2268900dcc4` | 1885 | P1 | La educación del hombre |
-| `src-e6dc985703e6` | 1885 | P1 | The education of man |
 | `src-3bab9a30dc87` | 1887 | P1 | The education of man |
 | `src-dd6af8da94b3` | 1887 | P1 | The education of man |
 | `src-cc7abad9b0a2` | 1888 | P1 | La educación del hombre |
-| `src-ea158b847c59` | 1889 | P1 | L Educazione Dell Uomo |
 | `src-c5b1c845ca63` | 1890 | P1 | The education of man |
 | `src-393062b3c22a` | 1895 | P1 | Friedrich Froebel's pedagogics of the kindergarten |
 | `src-4f056938f63e` | 1895 | P1 | Friedrich Froebel's pedagogics of the kindergarten |

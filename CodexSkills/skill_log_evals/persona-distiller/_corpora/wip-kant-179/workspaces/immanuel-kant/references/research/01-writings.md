@@ -2,7 +2,7 @@
 
 ## Scope and assigned sources
 
-**本道分到 45 份（train split）**：
+**本道分到 51 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
@@ -33,10 +33,15 @@
 | `src-811017be508d` | 1865 | P1 | Prolégomènes a toute métaphysique future qui aura le droit…la Critique de la raison pure |
 | `src-e8b8978bb63b` | 1865 | P1 | Prolégomènes a toute métaphysique future qui aura le droit…la Critique de la raison pure |
 | `src-21c82472024f` | 1867 | P1 | Saemmtliche werke |
+| `src-4ec8e58d3909` | 1867 | P1 | Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge |
+| `src-602d11e03dce` | 1867 | P1 | Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge |
 | `src-c90e1301fe6c` | 1868 | P1 | Immanuel Kant's Kritik der reinen vernunft |
 | `src-4058bbdfafa4` | 1871 | P1 | The metaphysic of ethics |
 | `src-f264e93c21bf` | 1871 | P1 | Metaphysic of Ethics by Immanuel Kant; translated by J.W. …roduction by Henry Calderwood |
 | `src-2311e9d43ba5` | 1873 | P1 | Sämtliche werke .. |
+| `src-86b26ba6469e` | 1881 | P1 | Immanuel Kant's Critique of pure reason : in commemoration…nary of its first publication |
+| `src-8ea90f250530` | 1881 | P1 | Immanuel Kant’s Critique of Pure Reason, in Commemoration …nary of its first publication |
+| `src-a33dcbcfacb0` | 1881 | P1 | Immanuel Kant's Critique of pure reason : in commemoration…nary of its first publication |
 | `src-2757219ba6a5` | 1883 | P1 | Kant's Prolegomena, and Metaphysical foundations of natural science |
 | `src-64ab9f79bfb5` | 1889 | P1 | Immanuel Kant's Kritik der reinen Vernunft: mit einer Einl…ungen hrsg. von Erich Adickes |
 | `src-9021c46737e7` | 1896 | P1 | Immanuel Kant's Critique of pure reason |
@@ -48,6 +53,7 @@
 | `src-d58c8adb13b0` | 1910 | P1 | Kant's gesammelte Schriften |
 | `src-e75627a6abc8` | 1912 | P1 | Anthropologie in pragmatischer Hinsicht |
 | `src-fa5013c12207` | 1913 | P1 | Kant's gesammelte SchriftenBand V. Kritik der Urtheilskraft. |
+| `src-c7cddf7d7774` | 1914 | P1 | Critique of judgment |
 | `src-cb0bedef8e59` | 1919 | P1 | Lo bello y lo sublime: ensayo de estética y moral |
 | `src-9f952fc1b4f9` | 1921 | P1 | Antropologia Prammatica |
 | `src-e4025e372da2` | 1926 | P1 | Fundamental principles of the metaphysics of ethics |

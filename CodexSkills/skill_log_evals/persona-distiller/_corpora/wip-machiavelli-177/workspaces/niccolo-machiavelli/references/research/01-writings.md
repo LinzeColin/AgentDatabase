@@ -6,8 +6,11 @@
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
-| `src-03a8b0f68c9e` | 1595 | P1 | The Florentine historie |
-| `src-1fe9f6e5a6f8` | 1660 | P1 | A caveat for wives...  1660 |
+| `src-5deb53be8eb3` | 1663 | P1 | Machivael's discourses ...  1663 |
+| `src-6c075ad39d35` | 1663 | P1 | Machivael's discourses, ...  1663 |
+| `src-ca55f85a835b` | 1663 | P1 | Machivael's discourses...  1663 |
+| `src-4f4d806207d5` | 1674 | P1 | Machiavel's discourses upon the first decade...  1674 |
+| `src-7daa94568cae` | 1674 | P1 | Machivael's discourses ...  1674 |
 | `src-85705eb7600a` | 1681 | P1 | Machiavil's advice to his son. ...  1681 |
 | `src-bd3e638d3612` | 1691 | P1 | Machiavel's vindication of himself...  1691 |
 | `src-dda96083bec1` | 1719 | P1 | Marriage Of Belfagor |
@@ -27,7 +30,6 @@
 | `src-46247817a37a` | 1813 | P1 |  Opere di Niccolò Machiavelli T. 2 |
 | `src-d0aed8c13344` | 1813 | P1 | Opere di Niccolò Machiavelli T. 5 |
 | `src-d9697c904daf` | 1813 | P1 |  Opere di Niccolò Machiavelli T.1 |
-| `src-29668eaffa16` | 1816 | P1 | Nicolò Macchiavelli's Geschichte des Castruccio Castracani von Lucca |
 | `src-4049f36a6764` | 1817 | P1 | Des Nikolaus Machiavelli's Florentinische Geschichten. 2 |
 | `src-b55ae3897fc3` | 1817 | P1 | Des Nikolaus Machiavelli's Florentinische Geschichten. 1 |
 | `src-a64b55ffb644` | 1820 | P1 | Opere di Niccolò Machiavelli : con giunta di un nuova indi… generale delle cose notabili |
@@ -36,10 +38,7 @@
 | `src-b3a444c96490` | 1826 | P1 | Opere |
 | `src-e84bc7f2ee1b` | 1826 | P1 | Opere |
 | `src-f268293359ed` | 1833 | P1 | Niccolo Machiavelli's sämmtliche Werke. 3 |
-| `src-281a0059403d` | 1834 | P1 | Niccolo Machiavelli's sämmtliche Werke. 4 |
 | `src-1b36bba7f3aa` | 1836 | P1 | Opere |
-| `src-03d0625a5881` | 1838 | P1 | Niccolo Machiavelli's sämmtliche Werke. 5 |
-| `src-411f7d502510` | 1838 | P1 | Niccolo Machiavelli's sämmtliche Werke. 7 |
 | `src-f5f9f13ea0f3` | 1841 | P1 | Der Fürst des Niccolo Macchiavelli. 1. |
 | `src-8fc1ca17653a` | 1847 | P1 | History of Florence and of the affairs of Italy : from the…th of Lorenzo the Magnificent |
 | `src-644bdbe0ab36` | 1851 | P1 | Le istorie fiorentine |
@@ -55,10 +54,11 @@
 | `src-97742d71c132` | 1882 | P1 | The historical, political, and diplomatic writings |
 | `src-989e18fd9ccd` | 1882 | P1 | The historical, political, and diplomatic writings |
 | `src-a5798839b4de` | 1882 | P1 | The historical, political, and diplomatic writings |
+| `src-b117d884ad80` | 1883 | P1 | Discourses on the first decade of Titus Levius; |
+| `src-c0544cf6ca89` | 1883 | P1 | Discourses on the first decade of Titus Levius; |
+| `src-c05b43017052` | 1886 | P1 | Discorsi sopra la prima deca de Tito Livio, di Nicolò Machiavelli .. |
 | `src-62a70771b546` | 1891 | P1 | Il principe |
-| `src-28d09bc3bd8e` | 1897 | P1 | The Prince |
-| `src-14995a470083` | 1906 | P1 | The Florentine history... |
-| `src-4007f9b9cb97` | 1912 | P1 | Florentine history. Translated by W.K. Marriott |
+| `src-cb5329dc766f` | 1892 | P1 | Discorsi sulla prima deca di T. Livio. Scelti e commentati da Giuseppe Piergili |
 
 ★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 

@@ -2,13 +2,9 @@
 
 ## Scope and assigned sources
 
-**本道分到 1 份（train split）**：
+**本道分到 0 份（train split）**。
 
-| source_id | 出版年 | tier | 题名 |
-|---|---|---|---|
-| `src-c7cddf7d7774` | 1914 | P1 | Critique of judgment |
-
-★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**。
 
 ## Source-linked observations
 
