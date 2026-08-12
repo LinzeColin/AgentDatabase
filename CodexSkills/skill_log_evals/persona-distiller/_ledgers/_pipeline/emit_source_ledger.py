@@ -51,6 +51,24 @@ LATEST_PD_YEAR = PD_CUTOFF - 1        # 2026 → 1930（可用的最晚出版年
 #     `Berlin Druck und Verlag von Georg Reimer 1913`
 #     `Copyright, 1919, by Yale University Press`
 #   ——先前只取「题名页年份最大值」，把这类确切线索白白丢掉了。
+# ★★ 「全集」里常常装着**第三方的东西**。实例：
+#   `completeworksofa11linco` 题名页写
+#   `With a General Introduction by Richard Watson Gilder, and Special Articles
+#    by Other Eminent Persons`，**开篇就是林肯身后别人的一篇布道**
+#   （`WHILE I speak to you to-day, the body of the President … is lying honored and loved`）。
+#   ⇒ 那一层里的第一人称**是编者/悼念者的，不是他的**。
+#   全库实测：**611 份一手里 89 份（15%）前置页含第三方**，Lincoln 高达 51%。
+#   本字段**不改 tier**（编者本整册仍是他的文集），只把这件事**标出来**，
+#   供研究道取引文时逐条核说话人（[[gates-count-sources-not-voice]]）。
+# ★ 匹配前必须**归一空白**：OCR 的词间是双空格＋换行
+#   （`Special  Articles \n\nby  Other  Eminent  Persons`），
+#   按单空格写的正则**一份都匹配不到**——我第一版就这样，报出「只有 2 份」。
+THIRD_PARTY_RE = re.compile(
+    r"(special articles by other eminent persons|general introduction by|"
+    r"with an introduction by|edited,? with|introduction and notes by|"
+    r"herausgegeben von|mit einer einleitung von|avec une introduction de|"
+    r"con introduzione di|a cura di)")
+
 IMPRINT_RE = [
     re.compile(r"[Cc]opyright,?\s+(?:by\s+[^\n,]{0,40},?\s*)?((?:1[5-9]|20)\d{2})"),
     re.compile(r"(?:Verlag|Druck und Verlag|Press|PRESS|& Co\.|Sons|Company)[^\n]{0,60}?"
@@ -117,6 +135,12 @@ def main() -> int:
             if m:
                 cat = m.group(1)
                 break
+        third = False
+        f_all = raw / r["file"]
+        if f_all.exists():
+            h8 = re.sub(r"\s+", " ",
+                        f_all.read_text(encoding="utf-8", errors="replace")[:8000]).lower()
+            third = bool(THIRD_PARTY_RE.search(h8))
         imp = ""
         if not cat:
             f = raw / r["file"]
@@ -156,6 +180,8 @@ def main() -> int:
                                   "evidence": (p.get("依据") or "")[:200]},
             "rights": f"pre{PD_CUTOFF}",            # ④ 随年份滚动；= pre1931
             "published_at_basis": basis,
+            # ★ 前置页里有第三方编者/导言/文章 —— **不改 tier，只标出来**
+            "front_matter_third_party": third,
             "titlepage_years": [str(y) for y in yrs],
             "rights_basis": (f"公有领域 = 出版于 ≤{LATEST_PD_YEAR}"
                              f"（分界 {PD_CUTOFF} = {THIS_YEAR} − 95）；"
