@@ -12,7 +12,10 @@
 ★ 第 1 批 10 人抓源与阶段 2 已完成：**775 份 / 661 份独立文献**，**6 人达 deep**（Marshall/Lincoln/Jefferson/Bismarck/Kant/Pestalozzi）、3 人 quick（Machiavelli/Rousseau/Fröbel）、**Comenius #182 够不着 quick 建议记延后**，
   见 `_ledgers/_第1批抓源完成-670份-2026-08-12.md`。
   **语料不进 git，仓里只放指针**（`_ids*.txt` + 带 sha256 的 `_fetch-manifest.json`），
-  重建命令写在 `_corpora/.gitignore` 里。
+  重建用 `<raw>/_ids-rebuild.txt`（**不是 `_ids-final.txt`**，后者是「打算抓的」不是「抓到的」）。
+★ **抓源到阶段 2 的五件新工具，跑法与四个大坑见**
+  `_ledgers/_pipeline/README-抓源到阶段2.md`。**档位一律由 `check_corpus_ceiling.py` 判，不要自己算**——
+  同一个问题我手算/半跑判据得出过四个不同答案。
 
 
 > 这份文件是**唯一入口**。一句话 prompt 只需把你指到这里。
