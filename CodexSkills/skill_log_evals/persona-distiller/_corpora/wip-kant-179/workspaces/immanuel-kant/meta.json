@@ -73,5 +73,11 @@
   "subject_origin": "historical",
   "target_id": "tgt-54667af78772",
   "time_scope": "1724-1804",
-  "updated_at": "2026-08-12T00:05:04Z"
+  "updated_at": "2026-08-12T00:05:04Z",
+  "attribution_basis": {
+    "authority": "主干书简卷的扫描件自印定位（`src-88e3670ea28b`）：`Digitized by the Internet Archive in 2010 with funding from University of Toronto http://www.archive.org/details/briefwechselvoni01kant` —— 逐字照录。★ 该卷题名页本身 OCR 崩坏（Fraktur），故以此条可复核的 item 标识作为定位依据。",
+    "citation": "archive.org item `briefwechselvoni01kant`（其余 source_id 的 locator 与 sha256 记于 source-ledger.jsonl）",
+    "disputed_policy": "① ★★ **书简集里两个方向的信都有**：`src-c9c95efc5799` 一处第一人称句读上去完全像康德，而其后紧跟呼语 `mein lieber Kant` —— **说话人是写信给他的人**。⇒ `conversations` 道的第一人称**约一半不属于他**，逐条必须读上下文定说话人。\n② ★ **三条道是题名词误配出来的，已改归 writings**：`in chronologischer Reihenfolge`（版本编排方式）被判成 timeline ×3；`Critique of judgment`（著作）被判成 decisions ×1；`in commemoration`（`oration` ⊂ `commemoration`，纯子串误配）被判成 expression ×3。**修正后道数 6→3，档位由 deep 落到 quick**（台账见 `_题名词造出来的假道-Kant从deep掉到quick-2026-08-12.md`）。\n③ **译本不作声口证据**：语料含英译（Max Müller 1881 版《Critique of pure reason》3 份、1914 版《Critique of judgment》1 份）与法文选集 1 份；声口只用德文原文量。★ 其中法文选集《Kant. Choix de textes》里取到的一条法文第一人称，前文写着 `ce reproche fait à ma théorie` —— **那是康德本人的文字被选进选集**，既不能当外部视角也不能当声口。\n④ 65 份题名归并后 **51 种**（最大三组各 3 份），**冗余度是本批最低的之一**。\n⑤ 本轮**没有**发现托名篇目；语料里不含学生笔记整理的《Vorlesungen》类，故未触及该类归属问题。",
+    "disputed_works": []
+  }
 }

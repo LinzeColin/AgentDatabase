@@ -73,5 +73,11 @@
   "subject_origin": "historical",
   "target_id": "tgt-b7e8f518a25a",
   "time_scope": "1746-1827",
-  "updated_at": "2026-08-12T00:08:37Z"
+  "updated_at": "2026-08-12T00:08:37Z",
+  "attribution_basis": {
+    "authority": "主干德文编本题名页逐字（`src-413dab629c0f`，1819，Fraktur）：`Peſtalozzi's ſaͤmmtliche Schriften.` 及同页的特权声明 `Mit den allergnädigften Privilegien Ihrer Majeftäten des Kaiſers aller Reußen und Königs von Polen, des Königs von Preußen, des Königs von Bayern, des Königs von Wuͤrtemberg` —— ★ `allergnädigften`／`Majeftäten`／`Reußen` 是长 s 与 OCR 讹形，**已逐字照录未改**。",
+    "citation": "archive.org item（各 source_id 的 locator 与 sha256 记于 source-ledger.jsonl）",
+    "disputed_policy": "① ★★ **语料的四分之一是小说**：70 份里 **17 份属《Lienhard und Gertrud》系**（题名归并后最大组之一 5 份）。那是他写的**小说**，其中的第一人称是**他虚构的人物**——一条候选的前文是台词标记 `Schulmeiſter.`、后文紧跟 `erwiedert Michel`。⇒ **小说对白不得当作他的声口**；`01-writings.md` 已按此剔除 6 条机械候选。\n② **译本不作声口证据**：《Letters on early education, addressed to J. P. Greaves》与《Leonard & Gertrude》均为英译；`02-conversations.md` 用其作**事实证据**并已写明是英译。\n③ **同一页上同一句有两个版次**：`src-413dab629c0f` 献词处先印 `durch eure Handlung`、数行后改印 `durch eure Gaben`，**逐字引用必须挑定其一**（已写进 `01-writings.md` O-2）。\n④ 70 份题名归并后 **34 种**，最大一组《sämmtliche Schriften》**15 份**，**不可当成 70 处独立证据**。\n⑤ 本轮**没有**发现托名篇目；检索按 creator 收窄并排除同名者。",
+    "disputed_works": []
+  }
 }
