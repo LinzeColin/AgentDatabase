@@ -73,8 +73,55 @@
 
 ## Source-linked observations
 
-Pending.
+**口径**：每条带 `source_id` 与 `norm_offset`，定位可复算（三条已现场验过）。
 
+★★ **18 世纪法文印本用长 s（ſ），OCR 一律读成 `f`** ——
+  `fur`＝`sur`、`c'eft`＝`c'est`、`fi`＝`si`、`Monfieur`＝`Monsieur`、`fujet`＝`sujet`。
+  **下面的引文逐字照录，那些 `f` 一个都没改**（[[verbatim-is-not-understood]]）。
+  ★ 这不是 OCR 坏了，是**那个年代的字形**；改回去就不是逐字引文了。
+
+★ 本道只用**法文原文**：103 份里译本 21 份，合格的法文一手 train 源 **29 份**。
+
+### O-1 · 他给自己定的位置是「写我自己的想法」，而不是「综述别人的」
+
+> `Ce n'ell: pas fur les idées d'autrui que j'écris; c'eftfur les miennes.`
+> —— `src-6d01d4bdbb5a` @4150（《爱弥儿》）
+
+★ 一句里两个分句对举：**否定在前（不是别人的），肯定在后（是我自己的）**。
+这与 Machiavelli 的 O-1（先立条件再下判断）是两种不同的开口方式：
+**卢梭先划清「这是谁的」，马基雅维利先划清「在什么条件下」。**
+
+### O-2 · 他在正文里给读者报进度
+
+> `Voilà le troifiéme état dé l'enfance & celui dont j'ai maintenante parler.`
+> —— `src-fa889e6e1723` @1327（《爱弥儿》）
+
+★ `Voilà le troisième état … dont j'ai maintenant à parler` ——
+**「这是第三个阶段，也是我现在要讲的那个」**：把结构说出来，而不是让读者自己去数。
+
+### O-3 · 献词里他把「我送你什么」与「你是什么人」绑在一起
+
+> `Je vous envoyé, Monfieur, le premier de ces extraits, comme un fujet inaugural pour
+>  vous qui aimez la paix , & dont ks: écrits la refpirent.`
+> —— `src-212bd671b070` @1397（《圣皮埃尔神父永久和平计划摘要》）
+
+★ 「献给爱好和平的您，而您的著作也散发着和平」——**理由挂在收信人身上，不在自己身上**。
+★★ 这一份正是 `attribution_basis` 里记过的那件：**IA 把被摘的 Saint-Pierre 排第一作者**，
+  而摘要与评注是卢梭写的，已由人裁为一手。
+
+---
+
+## ★ 两件要写下来的
+
+① **一句话，三个 source_id**：`Il auroit dû l'en faire tomber, fi j'afpirois à l'honneur
+   de bien écrire …` 同时出现在 `src-dfd6a6c5f7bb` @1683、`src-e7ebbb5f86d6` @1689、
+   `src-8f93e51a9549` @1723 三处（同一篇《论科学与艺术》序言的三个版次）。
+   **三个 id，实质一处证据**——本道**一条都没引它**，正是为了不制造塌缩
+   （[[two-source-ids-is-not-two-evidences]]）。
+
+② 机械摘取 8 条里，**前三条就是上面那同一句**。
+   `pull_quotes.py` 每份只取一条，**但挡不住「不同份收的是同一篇」**——
+   这一层要人看。
 ## Candidate Claims
 
 Pending.
