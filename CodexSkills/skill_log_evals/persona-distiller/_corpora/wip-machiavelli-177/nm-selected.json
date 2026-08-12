@@ -1,0 +1,19 @@
+{
+  "_note": "★★ 本人物**没有阻断步**，与 #173–#176 不同：en.wikipedia「Machiavelli (disambiguation)」**除他本人外一个人都没有列**（页面只另指向 `Machiavelli (surname)` 与说唱歌手 Tupac Shakur 的化名 Makaveli，都不是同名的人）。所以候选集只有 1 名，门直接 ready。★ **这不是「没查」——查了，结果是空的**（对照 namesake_gate 的 v0.0.0.150 记录：0 候选才是「没查」，1 候选是查过且唯一）。",
+  "★ 残留缺口（抓源时要补的一步）": "`Machiavelli (surname)` 那一页本轮**没有逐条读过**。姓氏页可能列出同姓不同名者（如家族成员）。抓源命中「Machiavelli」而非「Niccolò Machiavelli」全名时，须回到那一页核对。",
+  "selected_from": 1,
+  "selection_rule": "消歧页除本人外无同名者；生卒年 1469–1527 与队列条目逐位相同",
+  "candidates": [
+    {"canonical_name": "Niccolò Machiavelli", "subject_uid": "niccolo-machiavelli-1469-1527",
+     "identity_category": "政治法律师",
+     "occupation_or_role": "佛罗伦萨共和国第二国务厅秘书、外交使节、民兵组建者",
+     "professional_background": "1469-05-03 生于佛罗伦萨共和国佛罗伦萨，1527-06-21 卒于同地（胃疾）。1498–1512 任第二国务厅秘书；索德里尼任正义旗手期间任「自由与和平十人委员会」秘书；1499 年起出使皮翁比诺、弗利、法国、罗马等地；组建公民民兵，1509 年攻下比萨。★★ **著作绝大多数是身后出版**：《君主论》约 1513 年写成、**1532 年出版（身后）**；《论李维》约 1515–1517 写成、**1531 年出版（身后）**；《战争的艺术》1520 年前写成，**是他生前出版的唯一一部**；《佛罗伦萨史》1520 年起写、1527 年后出版；《曼陀罗》《克莉齐娅》均流放期写成、1527 年后出版。",
+     "application_scenarios": ["共和国的外交出使与情势判断", "以历史事例推出治理原则", "民兵与雇佣兵的取舍", "失势之后的著述"],
+     "key_capabilities": ["出使报告与情势分析", "以史论政的写法", "军事组织", "戏剧写作"],
+     "distinguishing_basis": "生卒年 1469–1527 与队列条目逐位相同；消歧页除他本人外无同名者",
+     "authoritative_sources": [
+       {"locator": "https://en.wikipedia.org/wiki/Niccol%C3%B2_Machiavelli", "note": "生卒、任职、著作写成年与首版年取自此页"},
+       {"locator": "https://en.wikipedia.org/wiki/Machiavelli_(disambiguation)", "note": "该页除本人外未列任何同名者——**这是「查过且为空」的凭据**"}],
+     "evidence_level": "high"}
+  ]
+}

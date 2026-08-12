@@ -1,0 +1,81 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "niccolo-machiavelli-1469-1527",
+  "consent_authority": null,
+  "created_at": "2026-08-12T00:02:02Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "political-legal",
+    "display": "政治法律师",
+    "mode": "single",
+    "primary": "political-legal",
+    "weights": {
+      "political-legal": 1.0
+    }
+  },
+  "language": "it",
+  "model_version": "0.1.0-draft",
+  "name": "Niccolò Machiavelli",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "共和国的外交出使与情势判断",
+        "以历史事例推出治理原则",
+        "民兵与雇佣兵的取舍",
+        "失势之后的著述"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Niccol%C3%B2_Machiavelli",
+          "note": "生卒、任职、著作写成年与首版年取自此页"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Machiavelli_(disambiguation)",
+          "note": "该页除本人外未列任何同名者——**这是「查过且为空」的凭据**"
+        }
+      ],
+      "canonical_name": "Niccolò Machiavelli",
+      "distinguishing_basis": "生卒年 1469–1527 与队列条目逐位相同；消歧页除他本人外无同名者",
+      "evidence_level": "high",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "出使报告与情势分析",
+        "以史论政的写法",
+        "军事组织",
+        "戏剧写作"
+      ],
+      "label": "A",
+      "occupation_or_role": "佛罗伦萨共和国第二国务厅秘书、外交使节、民兵组建者",
+      "professional_background": "1469-05-03 生于佛罗伦萨共和国佛罗伦萨，1527-06-21 卒于同地（胃疾）。1498–1512 任第二国务厅秘书；索德里尼任正义旗手期间任「自由与和平十人委员会」秘书；1499 年起出使皮翁比诺、弗利、法国、罗马等地；组建公民民兵，1509 年攻下比萨。★★ **著作绝大多数是身后出版**：《君主论》约 1513 年写成、**1532 年出版（身后）**；《论李维》约 1515–1517 写成、**1531 年出版（身后）**；《战争的艺术》1520 年前写成，**是他生前出版的唯一一部**；《佛罗伦萨史》1520 年起写、1527 年后出版；《曼陀罗》《克莉齐娅》均流放期写成、1527 年后出版。",
+      "subject_uid": "niccolo-machiavelli-1469-1527"
+    },
+    "chosen_subject_uid": "niccolo-machiavelli-1469-1527",
+    "normalized_name": "niccolòmachiavelli",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "niccolòmachiavelli",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "niccolo-machiavelli",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-8c473fb5e9b8",
+  "time_scope": "1469-1527",
+  "updated_at": "2026-08-12T00:02:02Z"
+}

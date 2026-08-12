@@ -1,0 +1,114 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Otto von Bismarck；政治法律师；普鲁士首相、北德意志邦联联邦宰相、德意志帝国首任宰相。\n   专业背景：1815-04-01 生于普鲁士 Altmark 的 Schönhausen，1898-07-30 卒于 Friedrichsruh。驻俄公使（1857-10–1862-05）、驻法公使（1862-05 起）；普鲁士首相（1862-09-23–1873-01-01、1873-11-09–1890-03-18）；普鲁士外交大臣（1862-11-23–1890-03-18）；北德意志邦联联邦宰相（1867-07-01–1871-03-21）；德意志帝国宰相（1871-03-21–1890-03-18）。★ **自著**：维基条目只写他「retired to write his memoirs」，**没有给书名、也没有给出版年**——本项目**不替它补**，抓源时按实物题名页确认。。\n   应用价值：场景：多国间的同盟与制衡安排；议会与君主之间的斡旋；以外交文书推进国家目标；关键能力：外交谈判；议会政治操作；长篇公文与私信写作。\n   区分依据：生卒年 1815–1898 与队列条目逐位相同；持有独立基础词条，不在姓氏页明细内。",
+    "B. 人物与身份：Otto Christian Archibald von Bismarck；政治法律师；宰相俾斯麦之孙，政治人物与外交官，俾斯麦亲王。\n   专业背景：1897–1975。姓氏页描述为「grandson of Chancellor Otto von Bismarck, politician and diplomat, Prince of Bismarck」。★★ **他的名字里同样是「Otto ... von Bismarck」，且同为政治人物与外交官**——按「Otto von Bismarck」检索会直接命中；且**卒于 1975，其文书不在公有领域**。。\n   应用价值：场景：外交事务；关键能力：外交。\n   区分依据：生卒 1897–1975；**同名同族同职业，是本门最危险的一名**；作品不在 PD，误取同时违反 PD 规则。",
+    "C. 人物与身份：Herbert von Bismarck；政治法律师；国务秘书，俾斯麦之子。\n   专业背景：1849–1904。姓氏页描述为「Secretary of State, son of Otto von Bismarck」。**同期在同一批外交文书上署名**，父子往还书信两侧都有；作品同为公有领域。。\n   应用价值：场景：外交公文；关键能力：外交。\n   区分依据：名 Herbert 可区分，**但父子共署的公文与往还书信按姓氏检索必同时命中**。",
+    "D. 人物与身份：Gottfried Graf von Bismarck-Schönhausen；政治法律师；纳粹时期议会代表，俾斯麦之孙。\n   专业背景：1901–1949。姓氏页描述为「Nazi parliamentary representative, grandson of Otto von Bismarck」。**卒于 1949，作品不在公有领域**。。\n   应用价值：场景：议会活动；关键能力：—。\n   区分依据：生卒 1901–1949；作品不在 PD。"
+  ],
+  "candidate_count": 4,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "多国间的同盟与制衡安排",
+        "议会与君主之间的斡旋",
+        "以外交文书推进国家目标"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Otto_von_Bismarck",
+          "note": "生卒、任职取自此页；★ 该页未给回忆录书名与年份"
+        }
+      ],
+      "canonical_name": "Otto von Bismarck",
+      "distinguishing_basis": "生卒年 1815–1898 与队列条目逐位相同；持有独立基础词条，不在姓氏页明细内",
+      "evidence_level": "high",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "外交谈判",
+        "议会政治操作",
+        "长篇公文与私信写作"
+      ],
+      "label": "A",
+      "occupation_or_role": "普鲁士首相、北德意志邦联联邦宰相、德意志帝国首任宰相",
+      "professional_background": "1815-04-01 生于普鲁士 Altmark 的 Schönhausen，1898-07-30 卒于 Friedrichsruh。驻俄公使（1857-10–1862-05）、驻法公使（1862-05 起）；普鲁士首相（1862-09-23–1873-01-01、1873-11-09–1890-03-18）；普鲁士外交大臣（1862-11-23–1890-03-18）；北德意志邦联联邦宰相（1867-07-01–1871-03-21）；德意志帝国宰相（1871-03-21–1890-03-18）。★ **自著**：维基条目只写他「retired to write his memoirs」，**没有给书名、也没有给出版年**——本项目**不替它补**，抓源时按实物题名页确认。",
+      "subject_uid": "otto-von-bismarck-1815-1898"
+    },
+    {
+      "application_scenarios": [
+        "外交事务"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Bismarck_(surname)",
+          "note": "该页 Otto 条"
+        }
+      ],
+      "canonical_name": "Otto Christian Archibald von Bismarck",
+      "distinguishing_basis": "生卒 1897–1975；**同名同族同职业，是本门最危险的一名**；作品不在 PD，误取同时违反 PD 规则",
+      "evidence_level": "medium",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "外交"
+      ],
+      "label": "B",
+      "occupation_or_role": "宰相俾斯麦之孙，政治人物与外交官，俾斯麦亲王",
+      "professional_background": "1897–1975。姓氏页描述为「grandson of Chancellor Otto von Bismarck, politician and diplomat, Prince of Bismarck」。★★ **他的名字里同样是「Otto ... von Bismarck」，且同为政治人物与外交官**——按「Otto von Bismarck」检索会直接命中；且**卒于 1975，其文书不在公有领域**。",
+      "subject_uid": "otto-christian-archibald-von-bismarck-1897-1975"
+    },
+    {
+      "application_scenarios": [
+        "外交公文"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Bismarck_(surname)",
+          "note": "该页 Herbert 条"
+        }
+      ],
+      "canonical_name": "Herbert von Bismarck",
+      "distinguishing_basis": "名 Herbert 可区分，**但父子共署的公文与往还书信按姓氏检索必同时命中**",
+      "evidence_level": "medium",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "外交"
+      ],
+      "label": "C",
+      "occupation_or_role": "国务秘书，俾斯麦之子",
+      "professional_background": "1849–1904。姓氏页描述为「Secretary of State, son of Otto von Bismarck」。**同期在同一批外交文书上署名**，父子往还书信两侧都有；作品同为公有领域。",
+      "subject_uid": "herbert-von-bismarck-1849-1904"
+    },
+    {
+      "application_scenarios": [
+        "议会活动"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Bismarck_(surname)",
+          "note": "该页 Gottfried 条"
+        }
+      ],
+      "canonical_name": "Gottfried Graf von Bismarck-Schönhausen",
+      "distinguishing_basis": "生卒 1901–1949；作品不在 PD",
+      "evidence_level": "medium",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "—"
+      ],
+      "label": "D",
+      "occupation_or_role": "纳粹时期议会代表，俾斯麦之孙",
+      "professional_background": "1901–1949。姓氏页描述为「Nazi parliamentary representative, grandson of Otto von Bismarck」。**卒于 1949，作品不在公有领域**。",
+      "subject_uid": "gottfried-von-bismarck-schoenhausen-1901-1949"
+    }
+  ],
+  "generated_at": "2026-08-12T00:00:55Z",
+  "normalized_name": "ottovonbismarck",
+  "resolution": "multiple",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "blocked",
+  "target_name": "Otto von Bismarck"
+}

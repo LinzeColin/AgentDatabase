@@ -1,0 +1,38 @@
+{
+ "_note": "从 4 名候选中选定。判准：队列生卒年 1815–1898，唯一命中。阻断记录 ob_gate.BLOCKED.json。",
+ "selected_from": 4,
+ "selection_rule": "queue.生卒 == candidate.life_dates，唯一命中",
+ "blocked_record": "ob_gate.BLOCKED.json",
+ "★ 抓源时必须逐份排除": [
+  "Otto Christian Archibald von Bismarck（1897–1975）—— **同名同族同职业**，按「Otto von Bismarck」检索直接命中；且作品不在 PD",
+  "Herbert von Bismarck（1849–1904）—— 其子，父子共署公文与往还书信按姓氏检索必同时命中",
+  "Gottfried von Bismarck-Schönhausen（1901–1949）—— 其孙，作品不在 PD"
+ ],
+ "candidates": [
+  {
+   "canonical_name": "Otto von Bismarck",
+   "subject_uid": "otto-von-bismarck-1815-1898",
+   "identity_category": "政治法律师",
+   "occupation_or_role": "普鲁士首相、北德意志邦联联邦宰相、德意志帝国首任宰相",
+   "professional_background": "1815-04-01 生于普鲁士 Altmark 的 Schönhausen，1898-07-30 卒于 Friedrichsruh。驻俄公使（1857-10–1862-05）、驻法公使（1862-05 起）；普鲁士首相（1862-09-23–1873-01-01、1873-11-09–1890-03-18）；普鲁士外交大臣（1862-11-23–1890-03-18）；北德意志邦联联邦宰相（1867-07-01–1871-03-21）；德意志帝国宰相（1871-03-21–1890-03-18）。★ **自著**：维基条目只写他「retired to write his memoirs」，**没有给书名、也没有给出版年**——本项目**不替它补**，抓源时按实物题名页确认。",
+   "application_scenarios": [
+    "多国间的同盟与制衡安排",
+    "议会与君主之间的斡旋",
+    "以外交文书推进国家目标"
+   ],
+   "key_capabilities": [
+    "外交谈判",
+    "议会政治操作",
+    "长篇公文与私信写作"
+   ],
+   "distinguishing_basis": "生卒年 1815–1898 与队列条目逐位相同；持有独立基础词条，不在姓氏页明细内",
+   "authoritative_sources": [
+    {
+     "locator": "https://en.wikipedia.org/wiki/Otto_von_Bismarck",
+     "note": "生卒、任职取自此页；★ 该页未给回忆录书名与年份"
+    }
+   ],
+   "evidence_level": "high"
+  }
+ ]
+}

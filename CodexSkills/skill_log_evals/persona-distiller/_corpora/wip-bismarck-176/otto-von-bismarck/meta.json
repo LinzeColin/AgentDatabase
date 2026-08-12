@@ -1,0 +1,75 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "otto-von-bismarck-1815-1898",
+  "consent_authority": null,
+  "created_at": "2026-08-12T00:00:56Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "political-legal",
+    "display": "政治法律师",
+    "mode": "single",
+    "primary": "political-legal",
+    "weights": {
+      "political-legal": 1.0
+    }
+  },
+  "language": "de",
+  "model_version": "0.1.0-draft",
+  "name": "Otto von Bismarck",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "多国间的同盟与制衡安排",
+        "议会与君主之间的斡旋",
+        "以外交文书推进国家目标"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Otto_von_Bismarck",
+          "note": "生卒、任职取自此页；★ 该页未给回忆录书名与年份"
+        }
+      ],
+      "canonical_name": "Otto von Bismarck",
+      "distinguishing_basis": "生卒年 1815–1898 与队列条目逐位相同；持有独立基础词条，不在姓氏页明细内",
+      "evidence_level": "high",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "外交谈判",
+        "议会政治操作",
+        "长篇公文与私信写作"
+      ],
+      "label": "A",
+      "occupation_or_role": "普鲁士首相、北德意志邦联联邦宰相、德意志帝国首任宰相",
+      "professional_background": "1815-04-01 生于普鲁士 Altmark 的 Schönhausen，1898-07-30 卒于 Friedrichsruh。驻俄公使（1857-10–1862-05）、驻法公使（1862-05 起）；普鲁士首相（1862-09-23–1873-01-01、1873-11-09–1890-03-18）；普鲁士外交大臣（1862-11-23–1890-03-18）；北德意志邦联联邦宰相（1867-07-01–1871-03-21）；德意志帝国宰相（1871-03-21–1890-03-18）。★ **自著**：维基条目只写他「retired to write his memoirs」，**没有给书名、也没有给出版年**——本项目**不替它补**，抓源时按实物题名页确认。",
+      "subject_uid": "otto-von-bismarck-1815-1898"
+    },
+    "chosen_subject_uid": "otto-von-bismarck-1815-1898",
+    "normalized_name": "ottovonbismarck",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "ottovonbismarck",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "otto-von-bismarck",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-6abecb8d2449",
+  "time_scope": "1815-1898",
+  "updated_at": "2026-08-12T00:00:56Z"
+}
