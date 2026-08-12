@@ -23,8 +23,16 @@
 
 ## Source-linked observations
 
-Pending.
+### O-1 · 他把「有人不想成事」说破，同时声明这不针对任何人
 
+> `Daß es deren unter uns giebt, die das nicht wollen, haben wir von der Tribüne gehört; ich verletze dadurch Niemand.`
+> —— `src-8fee88c1082b` @133388（《Die Reden》1867，帝国议会）
+
+★ 前一句他先划出自己要对话的对象：`Ich wende mich vorzugsweiſe an Diejenigen unter uns,
+die … den ernſten Willen haben, auf der Baſis der Vorlage etwas zu Stande zu bringen`——
+**只对愿意在这份草案基础上做成事的人说话**；
+紧接着承认另一部分人存在，并当场加一句 `ich verletze dadurch Niemand`。
+⇒ 点破 + 免责**同一句话里完成**，与 `01-writings.md` 的 O-3（下指令时连温度一起指定）一致。
 ## Candidate Claims
 
 Pending.

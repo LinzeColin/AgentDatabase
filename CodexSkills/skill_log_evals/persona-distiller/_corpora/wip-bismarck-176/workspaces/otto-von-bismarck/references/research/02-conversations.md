@@ -27,8 +27,14 @@
 
 ## Source-linked observations
 
-Pending.
+### O-1 · 他说自己消息不灵，理由是**只看得到公文**
 
+> `Der heimischen Politik bin ich ganz entrückt, da ich außer Zeitungen faſt nur amtliche Nachrichten erhalte, die den Untergrund der Dinge nicht bloßlegen.`
+> —— `src-0c3daab5fdcf` @110384（《Bismarck-Briefe》1891，彼得堡 1860-08-22）
+
+★ 「除报纸外几乎只收到公文，而公文**不把事情的底面掀开**」。
+⇒ 他判断自己知不知情，靠的是**渠道的性质**，不是消息的多少。
+与 `01-writings.md` 的 O-1（用通信史记一段关系）同一路：**先看材料是从哪条路来的**。
 ## Candidate Claims
 
 Pending.

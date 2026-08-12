@@ -21,8 +21,15 @@
 
 ## Source-linked observations
 
-Pending.
+### O-1 · 他先说这件事**查不出确数**，再给出自己的估计并附上理由
 
+> `Perchè io credo ne dessino più o manco, secondo i luoghi dove e’ mandavano le colonie.`
+> —— `src-c05b43017052` @351468（《Discorsi》1886 版）
+
+★ 前一句是他对本章问题的判断：罗马人给每个殖民者分多少地，
+`credo sia molto difficile trovarne la verità`（我认为很难找到真相）。
+然后才是这一句：**我认为多少不等，随殖民地所在的地方而定**。
+⇒ 先申明不可知的程度，再在那个程度内给结论——**结论的精度不超过材料的精度**。
 ## Candidate Claims
 
 Pending.

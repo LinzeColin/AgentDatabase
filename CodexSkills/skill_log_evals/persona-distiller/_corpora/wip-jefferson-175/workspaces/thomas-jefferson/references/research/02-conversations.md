@@ -35,8 +35,15 @@
 
 ## Source-linked observations
 
-Pending.
+### O-1 · 他为国家高兴，同时说明自己**没有权限**替国家出价
 
+> `But I am not authorised to avail my country of it, by making any offer for its communication.`
+> —— `src-a473ad91bd99` @540009（《Memoir, correspondence and miscellanies》1829）
+
+★ 前文是他对一项面粉保存法表示欣喜（`must be a matter of joy to every friend to humanity`），
+紧接着这一句划清权限，再往下解释理由：`Their policy is, to leave their citizens free,
+neither restraining nor aiding them in their pursuits.`
+⇒ 三步：**先认可价值 → 再声明我没有权限 → 再说这不是推托而是制度选择**。
 ## Candidate Claims
 
 Pending.

@@ -25,8 +25,16 @@
 
 ## Source-linked observations
 
-Pending.
+**口径**：法文原文（`Eloisa` 等英译本不采）。
 
+### O-1 · 他向友人报告近况，用的是**别的事被挤掉了多少**
+
+> `Mon travail journalier a fait depuis quelques mois et fera vraisemblablement tout l'hiver une grande diversion à la botanique.`
+> —— `src-247577f8640a` @212871（《Lettres inédites》1911）
+
+★ 他不说「我在写一本书」，而说日常工作**几个月来、并且很可能整个冬天**
+都在把他从植物学那边拉开（`une grande diversion à la botanique`）。
+⇒ 描述投入，他量的是**被挤占的那一头**。
 ## Candidate Claims
 
 Pending.
