@@ -1,0 +1,45 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Friedrich Frobel；思想教育师；德国教育家，幼儿园（Kindergarten）一词与制度的创立者。\n   专业背景：1782-04-21 生于施瓦茨堡-鲁多尔施塔特的 Oberweißbach，1852-06-21 卒于 Schweina（旧称 Marienthal）。1816 年在阿恩施塔特附近的 Griesheim 创办「德意志普通教育所」，1817 年迁至鲁多尔施塔特附近的 Keilhau；1831 年在瑞士 Wartensee 办学，1833 年迁 Willisau；1835–1836 年主持瑞士布尔格多夫的一所孤儿院；1837 年在巴特布兰肯堡设「幼儿看护、游戏与活动所」；**1840 年为这所 1837 年创办的机构造出 `Kindergarten` 一词**。**自著**：《人的教育》（Die Menschenerziehung）1826。★ 条目**未给《母亲之歌、游戏与故事》等其余书目的首版年**——本项目不替它补。。\n   应用价值：场景：为学龄前儿童设计活动与教具；把一套教育主张变成可复制的机构；在多国间迁移办学；关键能力：教具与游戏的设计；教育论著写作；办学。\n   区分依据：生卒年 1782–1852 与队列条目逐位相同。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "为学龄前儿童设计活动与教具",
+        "把一套教育主张变成可复制的机构",
+        "在多国间迁移办学"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Friedrich_Fröbel",
+          "note": "生卒、办学年份、《人的教育》1826 取自此页；★ 该页未给其余书目首版年"
+        }
+      ],
+      "canonical_name": "Friedrich Frobel",
+      "distinguishing_basis": "生卒年 1782–1852 与队列条目逐位相同",
+      "evidence_level": "high",
+      "identity_category": "思想教育师",
+      "key_capabilities": [
+        "教具与游戏的设计",
+        "教育论著写作",
+        "办学"
+      ],
+      "label": "A",
+      "occupation_or_role": "德国教育家，幼儿园（Kindergarten）一词与制度的创立者",
+      "professional_background": "1782-04-21 生于施瓦茨堡-鲁多尔施塔特的 Oberweißbach，1852-06-21 卒于 Schweina（旧称 Marienthal）。1816 年在阿恩施塔特附近的 Griesheim 创办「德意志普通教育所」，1817 年迁至鲁多尔施塔特附近的 Keilhau；1831 年在瑞士 Wartensee 办学，1833 年迁 Willisau；1835–1836 年主持瑞士布尔格多夫的一所孤儿院；1837 年在巴特布兰肯堡设「幼儿看护、游戏与活动所」；**1840 年为这所 1837 年创办的机构造出 `Kindergarten` 一词**。**自著**：《人的教育》（Die Menschenerziehung）1826。★ 条目**未给《母亲之歌、游戏与故事》等其余书目的首版年**——本项目不替它补。",
+      "subject_uid": "friedrich-frobel-1782-1852"
+    }
+  ],
+  "generated_at": "2026-08-12T00:08:37Z",
+  "normalized_name": "friedrichfrobel",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "friedrich-frobel-1782-1852",
+  "status": "ready",
+  "target_name": "Friedrich Frobel"
+}

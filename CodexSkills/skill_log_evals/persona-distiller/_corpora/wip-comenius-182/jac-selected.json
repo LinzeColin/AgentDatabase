@@ -1,0 +1,17 @@
+{
+  "_note": "★ 无阻断步：维基条目**未提及任何其他知名的 Comenius／Komenský**。候选 1 名，门 ready。",
+  "★ 命名口径": "登记名用**队列写法 `John Amos Comenius`（拉丁化名）**。捷克本名 `Jan Amos Komenský` 与拉丁名 `Comenius` 是同一人，但 normalize_name 把它们当两个串（`johnamoscomenius` ≠ `janamoskomenský`）。**检索两种写法都要试**，且捷克语料多以 Komenský 署名。",
+  "★ 残留缺口（抓源时补）": "本轮未单独访问 Comenius／Komenský 的消歧页（若存在）。",
+  "selected_from": 1,
+  "selection_rule": "条目内未见其他同名者；生卒年 1592–1670 与队列条目逐位相同",
+  "candidates": [
+    {"canonical_name": "John Amos Comenius", "subject_uid": "john-amos-comenius-1592-1670",
+     "identity_category": "思想教育师",
+     "occupation_or_role": "捷克兄弟会末任主教；教育家、教科书作者、流亡中的教育顾问",
+     "professional_background": "1592-03-28 生于波希米亚王冠领地摩拉维亚边区侯国，**出生地不确定**——墓碑（在纳尔登）记 Uherský Brod，另有 Nivnice 与 Komňa 两说；1670-11-15 卒于荷兰共和国阿姆斯特丹。曾任 Přerov 与 Fulnek 学校校长，主持波兰莱什诺的文科中学；三十年战争期间因宗教迫害长期流亡，在新教欧洲各地任教育顾问。**自著（首版年）**：《语言之门开启》（Janua linguarum reserata）1631；《世界图解》（Orbis Pictus）1658；《大教学论》（Didactica magna）**1633–1638**；《世界迷宫与心灵天堂》（Labyrint světa a ráj srdce）1631。",
+     "application_scenarios": ["为学语言的人编一本能自学的书", "把整套学制写成一部论著", "以图配文的教科书设计", "流亡中维持一个宗派与其学校"],
+     "key_capabilities": ["教科书编纂", "学制的体系化论述", "图文并置的教学设计", "多语写作（拉丁语与捷克语）"],
+     "distinguishing_basis": "生卒年 1592–1670 与队列条目逐位相同",
+     "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/John_Amos_Comenius", "note": "生卒、职位、著作首版年取自此页；★ 该页明记出生地不确定，且未提其他同名者"}],
+     "evidence_level": "high"}]
+}

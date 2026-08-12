@@ -1,0 +1,77 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "john-amos-comenius-1592-1670",
+  "consent_authority": null,
+  "created_at": "2026-08-12T00:09:22Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "thinker-educator",
+    "display": "思想教育师",
+    "mode": "single",
+    "primary": "thinker-educator",
+    "weights": {
+      "thinker-educator": 1.0
+    }
+  },
+  "language": "la",
+  "model_version": "0.1.0-draft",
+  "name": "John Amos Comenius",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "为学语言的人编一本能自学的书",
+        "把整套学制写成一部论著",
+        "以图配文的教科书设计",
+        "流亡中维持一个宗派与其学校"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/John_Amos_Comenius",
+          "note": "生卒、职位、著作首版年取自此页；★ 该页明记出生地不确定，且未提其他同名者"
+        }
+      ],
+      "canonical_name": "John Amos Comenius",
+      "distinguishing_basis": "生卒年 1592–1670 与队列条目逐位相同",
+      "evidence_level": "high",
+      "identity_category": "思想教育师",
+      "key_capabilities": [
+        "教科书编纂",
+        "学制的体系化论述",
+        "图文并置的教学设计",
+        "多语写作（拉丁语与捷克语）"
+      ],
+      "label": "A",
+      "occupation_or_role": "捷克兄弟会末任主教；教育家、教科书作者、流亡中的教育顾问",
+      "professional_background": "1592-03-28 生于波希米亚王冠领地摩拉维亚边区侯国，**出生地不确定**——墓碑（在纳尔登）记 Uherský Brod，另有 Nivnice 与 Komňa 两说；1670-11-15 卒于荷兰共和国阿姆斯特丹。曾任 Přerov 与 Fulnek 学校校长，主持波兰莱什诺的文科中学；三十年战争期间因宗教迫害长期流亡，在新教欧洲各地任教育顾问。**自著（首版年）**：《语言之门开启》（Janua linguarum reserata）1631；《世界图解》（Orbis Pictus）1658；《大教学论》（Didactica magna）**1633–1638**；《世界迷宫与心灵天堂》（Labyrint světa a ráj srdce）1631。",
+      "subject_uid": "john-amos-comenius-1592-1670"
+    },
+    "chosen_subject_uid": "john-amos-comenius-1592-1670",
+    "normalized_name": "johnamoscomenius",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "johnamoscomenius",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "john-amos-comenius",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-40b59125ceb9",
+  "time_scope": "1592-1670",
+  "updated_at": "2026-08-12T00:09:22Z"
+}

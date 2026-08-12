@@ -1,0 +1,17 @@
+{
+  "_note": "★ 无阻断步：维基 Johann Heinrich Pestalozzi 条目**未提及任何其他知名同名者**。候选 1 名，门 ready。",
+  "★ 命名口径": "登记名用**队列写法 `Johann Pestalozzi`（无中名）**，不用维基的 `Johann Heinrich Pestalozzi`。实测 normalize_name 不做中名归一：`johannpestalozzi` ≠ `johannheinrichpestalozzi`。维基写法为别名，**检索时两种写法都要试**。",
+  "★ 残留缺口（抓源时补）": "本轮未单独访问 Pestalozzi 的消歧页（若存在）；姓氏 Pestalozzi 在瑞士为望族，抓源命中姓氏而非全名时须回查。",
+  "selected_from": 1,
+  "selection_rule": "条目内未见其他同名者；生卒年 1746–1827 与队列条目逐位相同",
+  "candidates": [
+    {"canonical_name": "Johann Pestalozzi", "subject_uid": "johann-pestalozzi-1746-1827",
+     "identity_category": "思想教育师",
+     "occupation_or_role": "瑞士教育家，Neuhof／Stans／Burgdorf／Yverdon 四所学园的创办或主持者",
+     "professional_background": "1746-01-12 生于苏黎世，1827-02-17 卒于布鲁格。Neuhof（1769–1779，苏黎世附近的农场改为工读学校）；Stans（1799，法军入侵后设的孤儿院）；Burgdorf（1800–1804，设于城堡的「中等阶层子弟教育所」）；Yverdon（1805–1825，办得最久的一所）。**自著（首版年）**：《隐士的黄昏》1780；《林哈德与葛笃德》1781、1783、1785、1787（四卷）；《克里斯托弗与伊丽莎白》1782；《人类发展中自然进程的探究》1797；《葛笃德如何教育她的子女》1801；《天鹅之歌》1826（与《生命的归宿》合刊）。",
+     "application_scenarios": ["把一间学园从零办起来并维持下去", "对贫童与孤儿的教养安排", "把教学法写成可传授的东西", "在战乱与经费断绝下的应变"],
+     "key_capabilities": ["教学法的具体化", "小说体的教育论述（《林哈德与葛笃德》）", "办学与筹措", "长期观察儿童并据以调整做法"],
+     "distinguishing_basis": "生卒年 1746–1827 与队列条目逐位相同",
+     "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/Johann_Heinrich_Pestalozzi", "note": "生卒、学园年份、著作首版年取自此页；该页未提其他同名者"}],
+     "evidence_level": "high"}]
+}

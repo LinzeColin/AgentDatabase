@@ -1,0 +1,77 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "johann-pestalozzi-1746-1827",
+  "consent_authority": null,
+  "created_at": "2026-08-12T00:08:37Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "thinker-educator",
+    "display": "思想教育师",
+    "mode": "single",
+    "primary": "thinker-educator",
+    "weights": {
+      "thinker-educator": 1.0
+    }
+  },
+  "language": "de",
+  "model_version": "0.1.0-draft",
+  "name": "Johann Pestalozzi",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "把一间学园从零办起来并维持下去",
+        "对贫童与孤儿的教养安排",
+        "把教学法写成可传授的东西",
+        "在战乱与经费断绝下的应变"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Johann_Heinrich_Pestalozzi",
+          "note": "生卒、学园年份、著作首版年取自此页；该页未提其他同名者"
+        }
+      ],
+      "canonical_name": "Johann Pestalozzi",
+      "distinguishing_basis": "生卒年 1746–1827 与队列条目逐位相同",
+      "evidence_level": "high",
+      "identity_category": "思想教育师",
+      "key_capabilities": [
+        "教学法的具体化",
+        "小说体的教育论述（《林哈德与葛笃德》）",
+        "办学与筹措",
+        "长期观察儿童并据以调整做法"
+      ],
+      "label": "A",
+      "occupation_or_role": "瑞士教育家，Neuhof／Stans／Burgdorf／Yverdon 四所学园的创办或主持者",
+      "professional_background": "1746-01-12 生于苏黎世，1827-02-17 卒于布鲁格。Neuhof（1769–1779，苏黎世附近的农场改为工读学校）；Stans（1799，法军入侵后设的孤儿院）；Burgdorf（1800–1804，设于城堡的「中等阶层子弟教育所」）；Yverdon（1805–1825，办得最久的一所）。**自著（首版年）**：《隐士的黄昏》1780；《林哈德与葛笃德》1781、1783、1785、1787（四卷）；《克里斯托弗与伊丽莎白》1782；《人类发展中自然进程的探究》1797；《葛笃德如何教育她的子女》1801；《天鹅之歌》1826（与《生命的归宿》合刊）。",
+      "subject_uid": "johann-pestalozzi-1746-1827"
+    },
+    "chosen_subject_uid": "johann-pestalozzi-1746-1827",
+    "normalized_name": "johannpestalozzi",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "johannpestalozzi",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "johann-pestalozzi",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-b7e8f518a25a",
+  "time_scope": "1746-1827",
+  "updated_at": "2026-08-12T00:08:37Z"
+}
