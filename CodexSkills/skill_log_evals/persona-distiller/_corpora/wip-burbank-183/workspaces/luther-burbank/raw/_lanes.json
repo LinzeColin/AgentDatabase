@@ -1,0 +1,361 @@
+{
+  "lanes": 2,
+  "去掉纸面道后": 1,
+  "逐道份数": {
+    "writings": 68,
+    "conversations": 1,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 0,
+    "external": 0
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "Burbankseedbook00Burb",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbA",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbB",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbC",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbD",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbE",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbF",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbH",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbI",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbJ",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbK",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbL",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbM",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbN",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbO",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbP",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbQ",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "CAT31282609",
+      "道": "writings",
+      "title": "Surplus stock and a few novelties : all the best of their kind"
+    },
+    {
+      "identifier": "CAT31282611",
+      "道": "writings",
+      "title": "Price list of seeds"
+    },
+    {
+      "identifier": "CAT31283605",
+      "道": "writings",
+      "title": "The 1899 supplement to new creations in fruits and flowers"
+    },
+    {
+      "identifier": "CAT31283606",
+      "道": "writings",
+      "title": "Price list for season of 1899 and 1900"
+    },
+    {
+      "identifier": "CAT31284146",
+      "道": "writings",
+      "title": "The 1901 supplement to new creations in fruits and flowers"
+    },
+    {
+      "identifier": "CAT31284148",
+      "道": "writings",
+      "title": "The latest floral wonder : shasta daisies (chrysanthemum leucanthemum "
+    },
+    {
+      "identifier": "CAT31284149",
+      "道": "writings",
+      "title": "Special wholesale prices"
+    },
+    {
+      "identifier": "CAT31285747",
+      "道": "writings",
+      "title": "Prospectus of the Maynard Plum catalogue"
+    },
+    {
+      "identifier": "CAT31286076",
+      "道": "writings",
+      "title": "Maynard plum catalogue"
+    },
+    {
+      "identifier": "CAT31286479",
+      "道": "writings",
+      "title": "The new Shasta daisies : \"Alaska\", \"California\", \"Westralia.\""
+    },
+    {
+      "identifier": "CAT31287101",
+      "道": "writings",
+      "title": "Some valuable novelties for 1905 : improved Shasta daisy"
+    },
+    {
+      "identifier": "CAT31287725",
+      "道": "writings",
+      "title": "Novelties seeds [catalog]"
+    },
+    {
+      "identifier": "CAT31287728",
+      "道": "writings",
+      "title": "Burbank's latest collection : the stoneless plum miracle"
+    },
+    {
+      "identifier": "CAT31288306",
+      "道": "writings",
+      "title": "The new agricultural-horticultural opuntias : plant creations for arid"
+    },
+    {
+      "identifier": "CAT31288308",
+      "道": "writings",
+      "title": "A brief descriptive list of the new Burbank Giant Amaryllis"
+    },
+    {
+      "identifier": "CAT31289769",
+      "道": "writings",
+      "title": "Improved French prune originated by Luther Burbank"
+    },
+    {
+      "identifier": "CAT31291676",
+      "道": "writings",
+      "title": "The 1898 supplement to new creations in fruits and flowers"
+    },
+    {
+      "identifier": "burbankseedbook00burbr",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "burbankseedbook00burbs",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "burbankseedbook00burbt",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "burbankseedbook00burbu",
+      "道": "writings",
+      "title": "The Burbank seed book"
+    },
+    {
+      "identifier": "burbankseedbookl1893burb",
+      "道": "writings",
+      "title": "The Burbank seed book / Luther Burbank Company."
+    },
+    {
+      "identifier": "burbanksexperime1895burb",
+      "道": "writings",
+      "title": "Burbank's Experiment Farms : seeds ... bulbs, etc. ... plants ... clim"
+    },
+    {
+      "identifier": "carpssu_000040",
+      "道": "conversations",
+      "title": "Letter signed by Luther Burbank to Mr. A. B. Swain"
+    },
+    {
+      "identifier": "catalogueoffruit1886burb",
+      "道": "writings",
+      "title": "Catalogue of fruit and shade trees, ornamental plants and roses"
+    },
+    {
+      "identifier": "clemantisjackman1893burb",
+      "道": "writings",
+      "title": "Clemantis jackmanni ..."
+    },
+    {
+      "identifier": "cu31924000329320",
+      "道": "writings",
+      "title": "Twentieth century fruits .."
+    },
+    {
+      "identifier": "cu31924000727549",
+      "道": "writings",
+      "title": "Half-hour experiments with plants"
+    },
+    {
+      "identifier": "cu31924031221082",
+      "道": "writings",
+      "title": "The training of the human plant"
+    },
+    {
+      "identifier": "giantprunewickso1895burb",
+      "道": "writings",
+      "title": "\"Giant\" prune and \"Wickson\" Japan plum"
+    },
+    {
+      "identifier": "halfhourexperime00burb",
+      "道": "writings",
+      "title": "Half-hour experiments with plants"
+    },
+    {
+      "identifier": "harvestofyears00burb_0",
+      "道": "writings",
+      "title": "The harvest of the years"
+    },
+    {
+      "identifier": "howplantsaretra00burbgoog",
+      "道": "writings",
+      "title": "How plants are trained to work for man"
+    },
+    {
+      "identifier": "howplantsaretrai01burb",
+      "道": "writings",
+      "title": "How plants are trained to work for man"
+    },
+    {
+      "identifier": "howplantsaretrai01burbrich",
+      "道": "writings",
+      "title": "How plants are trained to work for man"
+    },
+    {
+      "identifier": "howplantsaretrai03burbrich",
+      "道": "writings",
+      "title": "How plants are trained to work for man"
+    },
+    {
+      "identifier": "howplantsaretrai06burbrich",
+      "道": "writings",
+      "title": "How plants are trained to work for man"
+    },
+    {
+      "identifier": "jstor-992550",
+      "道": "writings",
+      "title": "Cultivate Children like Flowers"
+    },
+    {
+      "identifier": "lutherburbankhi05socigoog",
+      "道": "writings",
+      "title": "Luther Burbank : his methods and discoveries and their practical appli"
+    },
+    {
+      "identifier": "lutherburbankhis02burbrich",
+      "道": "writings",
+      "title": "Luther Burbank : his methods and discoveries and their practical appli"
+    },
+    {
+      "identifier": "lutherburbankhis03burbrich",
+      "道": "writings",
+      "title": "Luther Burbank : his methods and discoveries and their practical appli"
+    },
+    {
+      "identifier": "lutherburbankhis04burbrich",
+      "道": "writings",
+      "title": "Luther Burbank : his methods and discoveries and their practical appli"
+    },
+    {
+      "identifier": "lutherburbankhis05burb",
+      "道": "writings",
+      "title": "Luther Burbank, his methods and discoveries and their practical applic"
+    },
+    {
+      "identifier": "newcreationsinfr1894burb",
+      "道": "writings",
+      "title": "New creations in fruits and flowers : June, 1894"
+    },
+    {
+      "identifier": "newgladiolilittl00burb",
+      "道": "writings",
+      "title": "New gladioli : little gem calla clematis, shade trees, Japan walnuts, "
+    },
+    {
+      "identifier": "santarosanurseri1887burb",
+      "道": "writings",
+      "title": "Santa Rosa Nurseries prices list for 1887 and 88 : fruit and nut trees"
+    },
+    {
+      "identifier": "specialtradelist1894burb",
+      "道": "writings",
+      "title": "Special trade list"
+    },
+    {
+      "identifier": "traininghumanpl00burbgoog",
+      "道": "writings",
+      "title": "The training of the human plant"
+    },
+    {
+      "identifier": "traininghumanpl03burbgoog",
+      "道": "writings",
+      "title": "The training of the human plant"
+    },
+    {
+      "identifier": "trainingofhumanp00burb",
+      "道": "writings",
+      "title": "The training of the human plant"
+    },
+    {
+      "identifier": "trainingofhumanp00burbiala",
+      "道": "writings",
+      "title": "The training of the human plant"
+    },
+    {
+      "identifier": "whyiaminfidel1020burb",
+      "道": "writings",
+      "title": "Why I am an infidel"
+    }
+  ]
+}

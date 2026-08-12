@@ -1,0 +1,1738 @@
+{
+  "生成时刻": "2026-08-13T09:24:05",
+  "请求数": 70,
+  "已取回": 69,
+  "skipped_access_restricted": 0,
+  "失败": 1,
+  "并发降级": "无（全程并发 4）",
+  "总词数": 1084396,
+  "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
+  "记录": [
+    {
+      "identifier": "Burbankseedbook00Burb",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00Burb.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00Burb/Burbankseedbook00Burb_djvu.txt",
+      "sha256": "aab594edb7c1f2e96d06ae153cd82ba611c2aba3970efb7b21981f2207f0d8ab",
+      "bytes": 39152,
+      "words": 6353,
+      "fetched_at": "2026-08-13T09:23:53",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-04 21:59:22",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbA",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbA.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbA/Burbankseedbook00BurbA_djvu.txt",
+      "sha256": "bcaef72b5b443b32f25d1236cb6828fc15289646feee799f52f753f957d9e7eb",
+      "bytes": 6718,
+      "words": 1015,
+      "fetched_at": "2026-08-13T09:22:58",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-04 22:01:30",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1910"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbB",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbB.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbB/Burbankseedbook00BurbB_djvu.txt",
+      "sha256": "00344975a1007224db31677460a98e292b6fe70b3e5c9bfc1621c1ad954ec15b",
+      "bytes": 5601,
+      "words": 823,
+      "fetched_at": "2026-08-13T09:23:03",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-04 22:03:54",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1920"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbC",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbC.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbC/Burbankseedbook00BurbC_djvu.txt",
+      "sha256": "bfae2024858e320e097cb3a2902e4013a2aafb9b4d44cfceabc2d9f99943044f",
+      "bytes": 40695,
+      "words": 6508,
+      "fetched_at": "2026-08-13T09:23:11",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-04 22:09:30",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1919",
+        "1920"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbD",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbD.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbD/Burbankseedbook00BurbD_djvu.txt",
+      "sha256": "027e81af15efc273db230fe4b69a09e87c23d2362d55fcbc48752a824b0505a3",
+      "bytes": 72522,
+      "words": 11778,
+      "fetched_at": "2026-08-13T09:23:13",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-04 22:23:17",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1913"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbE",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbE.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbE/Burbankseedbook00BurbE_djvu.txt",
+      "sha256": "65bcedc2f5bab8fed02f3139ff9948ef0b76b5744312e7b0e9610ad951366b95",
+      "bytes": 59415,
+      "words": 9984,
+      "fetched_at": "2026-08-13T09:23:25",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-04 22:32:34",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1873",
+        "1876",
+        "1890",
+        "1893",
+        "1894",
+        "1899",
+        "1908",
+        "1909",
+        "1910",
+        "1911"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbF",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbF.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbF/Burbankseedbook00BurbF_djvu.txt",
+      "sha256": "35f9ac076cb157395b73850e3c079f58c31eee2d5481b343d70534ee0c5af143",
+      "bytes": 10901,
+      "words": 1653,
+      "fetched_at": "2026-08-13T09:23:41",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-04 22:36:11",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1893"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbG",
+      "status": "正文取不到",
+      "note": "HTTP 500 on Burbankseedbook00BurbG_djvu.txt"
+    },
+    {
+      "identifier": "Burbankseedbook00BurbH",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbH.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbH/Burbankseedbook00BurbH_djvu.txt",
+      "sha256": "9fbb13d214a99a7fcc417d7b9609c117953a3292de2a50d67ea96c4e17936da2",
+      "bytes": 67991,
+      "words": 11225,
+      "fetched_at": "2026-08-13T09:23:07",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-04 22:49:33",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1899"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbI",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbI.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbI/Burbankseedbook00BurbI_djvu.txt",
+      "sha256": "efac8142d90f46d0a590eb4b5eaf4f4a0181317417949d9fc0afcea31822e9b4",
+      "bytes": 26518,
+      "words": 4654,
+      "fetched_at": "2026-08-13T09:23:35",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-04 22:52:54",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1906",
+        "1917",
+        "1918"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbJ",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbJ.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbJ/Burbankseedbook00BurbJ_djvu.txt",
+      "sha256": "85ef70c92ca32e47b53d4ea9a4821c3e917d032c8eae71dfe64d3e504af13046",
+      "bytes": 25991,
+      "words": 4063,
+      "fetched_at": "2026-08-13T09:23:25",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-04 22:59:38",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbK",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbK.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbK/Burbankseedbook00BurbK_djvu.txt",
+      "sha256": "f509a0a183615e2e4293b764a4d516d773fcba507cb74f905e624d9d860254a3",
+      "bytes": 27313,
+      "words": 4412,
+      "fetched_at": "2026-08-13T09:23:37",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-04 23:04:56",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1898",
+        "1908",
+        "1909",
+        "1916"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbL",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbL.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbL/Burbankseedbook00BurbL_djvu.txt",
+      "sha256": "ab5d1f9ce6a5857a413a44598fe6198a1000a13efe0bcbf22ebf45ac39fddb76",
+      "bytes": 34388,
+      "words": 5453,
+      "fetched_at": "2026-08-13T09:22:51",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-04 23:10:19",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1917",
+        "1918",
+        "1919"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbM",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbM.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbM/Burbankseedbook00BurbM_djvu.txt",
+      "sha256": "767314249db26b14ca224219ce3ffd9bb9595a25913c8f45c0636247166a02a3",
+      "bytes": 44444,
+      "words": 7057,
+      "fetched_at": "2026-08-13T09:23:42",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-19 23:33:47",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1629",
+        "1909",
+        "1916",
+        "1917",
+        "1918"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbN",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbN.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbN/Burbankseedbook00BurbN_djvu.txt",
+      "sha256": "5307bfae2fd16852d01e3a36e205b9a0139d065ea707f4144e9cb317dccf644a",
+      "bytes": 18663,
+      "words": 2985,
+      "fetched_at": "2026-08-13T09:23:47",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-20 01:04:04",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1909",
+        "1916",
+        "1917"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbO",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbO.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbO/Burbankseedbook00BurbO_djvu.txt",
+      "sha256": "46b71d51be79172bc599557a479c5a02b6b07cc4643c03e58875eb2361a74345",
+      "bytes": 79433,
+      "words": 12973,
+      "fetched_at": "2026-08-13T09:23:03",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-24 17:24:20",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1917",
+        "1918",
+        "1919",
+        "1920"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbP",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbP.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbP/Burbankseedbook00BurbP_djvu.txt",
+      "sha256": "b96be92dd6e31a9e1db2c66387c6b790d36f199ac1c40a02e7423c6af0294e52",
+      "bytes": 111640,
+      "words": 18355,
+      "fetched_at": "2026-08-13T09:23:21",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-26 23:58:42",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1918",
+        "1919",
+        "1920",
+        "1921"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "Burbankseedbook00BurbQ",
+      "status": "已取回",
+      "note": "",
+      "file": "Burbankseedbook00BurbQ.txt",
+      "source_url": "https://archive.org/download/Burbankseedbook00BurbQ/Burbankseedbook00BurbQ_djvu.txt",
+      "sha256": "ca9130dd0e22b644cccefdd3e8650b992ca6e7d1ca3159c3961fb6463366f3c9",
+      "bytes": 128441,
+      "words": 21160,
+      "fetched_at": "2026-08-13T09:22:57",
+      "ia_date": "18uu",
+      "ia_year": "18uu",
+      "ia_publicdate": "2014-12-27 00:14:07",
+      "ia_creator": [
+        "Burbank, Luther Company",
+        "Burbank, Luther,1849-1926"
+      ],
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1909",
+        "1918",
+        "1919",
+        "1920",
+        "1921"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31282609",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31282609.txt",
+      "source_url": "https://archive.org/download/CAT31282609/CAT31282609_djvu.txt",
+      "sha256": "7149e12253a76f1e49c86fe7cc4d4c1f435f65857242da7fff3a17a7498c78ea",
+      "bytes": 8384,
+      "words": 1233,
+      "fetched_at": "2026-08-13T09:23:13",
+      "ia_date": "1897",
+      "ia_year": "",
+      "ia_publicdate": "2014-09-04 15:37:11",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Surplus stock and a few novelties : all the best of their kind",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31282611",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31282611.txt",
+      "source_url": "https://archive.org/download/CAT31282611/CAT31282611_djvu.txt",
+      "sha256": "3325a689d3d2344af56d7d14017eb663e1dbaa4bf08b266870e2c255b5022fa5",
+      "bytes": 2463,
+      "words": 391,
+      "fetched_at": "2026-08-13T09:23:13",
+      "ia_date": "1897",
+      "ia_year": "",
+      "ia_publicdate": "2014-09-04 15:36:50",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Price list of seeds",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1897"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31283605",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31283605.txt",
+      "source_url": "https://archive.org/download/CAT31283605/cat31283605_djvu.txt",
+      "sha256": "bbd243d1a86bfbc28f7391d4d0ca4285d7040f95f56997a1132ff67058a886e3",
+      "bytes": 69115,
+      "words": 11779,
+      "fetched_at": "2026-08-13T09:22:52",
+      "ia_date": "1899",
+      "ia_year": "",
+      "ia_publicdate": "2016-02-01 17:01:39",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "The 1899 supplement to new creations in fruits and flowers",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1899"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31283606",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31283606.txt",
+      "source_url": "https://archive.org/download/CAT31283606/CAT31283606_djvu.txt",
+      "sha256": "0640a11ec99a71dad33b0672fd117a5e8badd1f8d3a7875ec41ca4f7ffebc080",
+      "bytes": 6728,
+      "words": 1037,
+      "fetched_at": "2026-08-13T09:23:18",
+      "ia_date": "1899",
+      "ia_year": "1899",
+      "ia_publicdate": "2016-05-05 13:13:28",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Price list for season of 1899 and 1900",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1899",
+        "1900"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31284146",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31284146.txt",
+      "source_url": "https://archive.org/download/CAT31284146/CAT31284146_djvu.txt",
+      "sha256": "8ac3389bdf0cbf75378d4fd38addf357871e040d5f99bf87c3b5988c509879ef",
+      "bytes": 43508,
+      "words": 6417,
+      "fetched_at": "2026-08-13T09:23:31",
+      "ia_date": "1901",
+      "ia_year": "",
+      "ia_publicdate": "2015-10-22 12:30:07",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "The 1901 supplement to new creations in fruits and flowers",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1898",
+        "1899",
+        "1901"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31284148",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31284148.txt",
+      "source_url": "https://archive.org/download/CAT31284148/CAT31284148_djvu.txt",
+      "sha256": "34b1ce012e99560a561068c205c2e915cebdf50928d08648b22bdcdc0fe64a80",
+      "bytes": 7293,
+      "words": 1064,
+      "fetched_at": "2026-08-13T09:23:17",
+      "ia_date": "1901",
+      "ia_year": "",
+      "ia_publicdate": "2015-10-22 12:30:38",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "The latest floral wonder : shasta daisies (chrysanthemum leucanthemum hybridum)",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1901"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31284149",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31284149.txt",
+      "source_url": "https://archive.org/download/CAT31284149/CAT31284149_djvu.txt",
+      "sha256": "3a63d0195d94c096e42ef9d2fd46bb5dca380a8398260d97d9b4e6b7cc154362",
+      "bytes": 6847,
+      "words": 970,
+      "fetched_at": "2026-08-13T09:23:23",
+      "ia_date": "1901",
+      "ia_year": "",
+      "ia_publicdate": "2015-10-22 12:30:06",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Special wholesale prices",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1899",
+        "1901"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31285747",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31285747.txt",
+      "source_url": "https://archive.org/download/CAT31285747/CAT31285747_djvu.txt",
+      "sha256": "e76fb2f7e6abc95b8514451e81ead81e8a24dc83fc9510fcfab04b1005cf01bc",
+      "bytes": 20895,
+      "words": 3480,
+      "fetched_at": "2026-08-13T09:23:36",
+      "ia_date": "1902",
+      "ia_year": "",
+      "ia_publicdate": "2014-11-13 15:20:23",
+      "ia_creator": [
+        "Oregon Nursery Company",
+        "Burbank, Luther",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Prospectus of the Maynard Plum catalogue",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1902"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31286076",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31286076.txt",
+      "source_url": "https://archive.org/download/CAT31286076/CAT31286076_djvu.txt",
+      "sha256": "9605c44c053510f8f741b437ab6751e1d3701512b84ac680af54ed995abe52cc",
+      "bytes": 64727,
+      "words": 10773,
+      "fetched_at": "2026-08-13T09:23:40",
+      "ia_date": "1903",
+      "ia_year": "",
+      "ia_publicdate": "2014-12-01 14:43:21",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Maynard plum catalogue",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1849",
+        "1875",
+        "1899",
+        "1900",
+        "1903"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31286479",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31286479.txt",
+      "source_url": "https://archive.org/download/CAT31286479/CAT31286479_djvu.txt",
+      "sha256": "3a6b993197d7b67dfdfe2844fcbf3e51c5dd30f2e14786ded16ae485b580b56b",
+      "bytes": 16437,
+      "words": 2659,
+      "fetched_at": "2026-08-13T09:23:43",
+      "ia_date": "1904",
+      "ia_year": "",
+      "ia_publicdate": "2014-12-11 13:03:26",
+      "ia_creator": [
+        "Burbank, Luther, 1849-1926",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "The new Shasta daisies : \"Alaska\", \"California\", \"Westralia.\"",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1901",
+        "1902",
+        "1903",
+        "1904"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31287101",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31287101.txt",
+      "source_url": "https://archive.org/download/CAT31287101/CAT31287101_djvu.txt",
+      "sha256": "141a2d818dbeca56fa76bcea7b94171e6a787f63a8ef878d323825fa98fdf730",
+      "bytes": 5539,
+      "words": 954,
+      "fetched_at": "2026-08-13T09:23:45",
+      "ia_date": "1904",
+      "ia_year": "1904",
+      "ia_publicdate": "2015-01-14 14:00:11",
+      "ia_creator": [
+        "Burbank, Luther, 1849-1926",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Some valuable novelties for 1905 : improved Shasta daisy",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1904",
+        "1905"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31287725",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31287725.txt",
+      "source_url": "https://archive.org/download/CAT31287725/CAT31287725_djvu.txt",
+      "sha256": "671ba19d927e424784e7e25038e0904eb09c3fdd34e4f193952741c76c1d8349",
+      "bytes": 9858,
+      "words": 1501,
+      "fetched_at": "2026-08-13T09:23:54",
+      "ia_date": "1906",
+      "ia_year": "",
+      "ia_publicdate": "2015-01-29 16:13:38",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Novelties seeds [catalog]",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1894",
+        "1906",
+        "1923"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31287728",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31287728.txt",
+      "source_url": "https://archive.org/download/CAT31287728/CAT31287728_djvu.txt",
+      "sha256": "08d7a91fe082cac99020c75a1106cdc92c6577aae0bfbb0df3c60d84c1e3e6e0",
+      "bytes": 36632,
+      "words": 6052,
+      "fetched_at": "2026-08-13T09:23:53",
+      "ia_date": "1906",
+      "ia_year": "",
+      "ia_publicdate": "2015-01-29 16:13:37",
+      "ia_creator": [
+        "Washington Nursery Company",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Burbank's latest collection : the stoneless plum miracle",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1903",
+        "1906"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31288306",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31288306.txt",
+      "source_url": "https://archive.org/download/CAT31288306/CAT31288306_djvu.txt",
+      "sha256": "701f11799fbb6f7d3a7d8be97127417df5c4e9f0ee144daa0bb9e51250227d69",
+      "bytes": 96171,
+      "words": 15990,
+      "fetched_at": "2026-08-13T09:23:59",
+      "ia_date": "1907",
+      "ia_year": "",
+      "ia_publicdate": "2015-02-13 16:13:24",
+      "ia_creator": [
+        "Burbank, Luther, 1849-1926",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "The new agricultural-horticultural opuntias : plant creations for arid regions",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1906",
+        "1907"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31288308",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31288308.txt",
+      "source_url": "https://archive.org/download/CAT31288308/CAT31288308_djvu.txt",
+      "sha256": "e5146562a59783f8e47dfe376c45086609128aff95678b624fd28570063c3e3a",
+      "bytes": 29967,
+      "words": 4978,
+      "fetched_at": "2026-08-13T09:24:00",
+      "ia_date": "1907",
+      "ia_year": "",
+      "ia_publicdate": "2015-02-13 16:13:25",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther, 1849-1926",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "A brief descriptive list of the new Burbank Giant Amaryllis",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1909"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31289769",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31289769.txt",
+      "source_url": "https://archive.org/download/CAT31289769/CAT31289769_djvu.txt",
+      "sha256": "221b63a79d157551bef04610c9991b175ecc870e8302c8606ab4ebce25679a0c",
+      "bytes": 1897,
+      "words": 316,
+      "fetched_at": "2026-08-13T09:24:05",
+      "ia_date": "1909",
+      "ia_year": "",
+      "ia_publicdate": "2015-04-28 16:20:24",
+      "ia_creator": [
+        "Leonard Coates Nursery Co",
+        "Burbank, Luther",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Improved French prune originated by Luther Burbank",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31291676",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31291676.txt",
+      "source_url": "https://archive.org/download/CAT31291676/cat31291676_djvu.txt",
+      "sha256": "edcb50f07e916199e8450088ae9b90c1770f0dc873729b2b9507db0c261bd257",
+      "bytes": 39123,
+      "words": 6522,
+      "fetched_at": "2026-08-13T09:22:50",
+      "ia_date": "1898",
+      "ia_year": "",
+      "ia_publicdate": "2016-02-01 17:13:16",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "The 1898 supplement to new creations in fruits and flowers",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "burbankseedbook00burbr",
+      "status": "已取回",
+      "note": "",
+      "file": "burbankseedbook00burbr.txt",
+      "source_url": "https://archive.org/download/burbankseedbook00burbr/burbankseedbook00burbr_djvu.txt",
+      "sha256": "76d14fe913989fca12d8637880561940f92965bdb3819c33263b1fd1e9adf12a",
+      "bytes": 16250,
+      "words": 2640,
+      "fetched_at": "2026-08-13T09:23:59",
+      "ia_date": "1904",
+      "ia_year": "1904",
+      "ia_publicdate": "2019-08-14 16:27:28",
+      "ia_creator": "Burbank, Luther Company",
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1901",
+        "1902",
+        "1903",
+        "1904"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "burbankseedbook00burbs",
+      "status": "已取回",
+      "note": "",
+      "file": "burbankseedbook00burbs.txt",
+      "source_url": "https://archive.org/download/burbankseedbook00burbs/burbankseedbook00burbs_djvu.txt",
+      "sha256": "b8139b7bef5bb32f2d59e422800bd3a771baf5399883e54224caad03eafe791e",
+      "bytes": 91704,
+      "words": 15266,
+      "fetched_at": "2026-08-13T09:24:03",
+      "ia_date": "1907",
+      "ia_year": "1907",
+      "ia_publicdate": "2019-08-14 16:30:01",
+      "ia_creator": "Burbank, Luther Company",
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1906",
+        "1907"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "burbankseedbook00burbt",
+      "status": "已取回",
+      "note": "",
+      "file": "burbankseedbook00burbt.txt",
+      "source_url": "https://archive.org/download/burbankseedbook00burbt/burbankseedbook00burbt_djvu.txt",
+      "sha256": "66832bed2643b95a9218df586b1eefbdf6cf4135308814eb98d0b5d14eddbef9",
+      "bytes": 29881,
+      "words": 5015,
+      "fetched_at": "2026-08-13T09:24:04",
+      "ia_date": "1909",
+      "ia_year": "1909",
+      "ia_publicdate": "2019-08-14 16:32:14",
+      "ia_creator": "Burbank, Luther Company",
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1909"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "burbankseedbook00burbu",
+      "status": "已取回",
+      "note": "",
+      "file": "burbankseedbook00burbu.txt",
+      "source_url": "https://archive.org/download/burbankseedbook00burbu/burbankseedbook00burbu_djvu.txt",
+      "sha256": "2c310736049285807368f123412ac9358423655766391d4033861680966fac47",
+      "bytes": 5591,
+      "words": 999,
+      "fetched_at": "2026-08-13T09:23:50",
+      "ia_date": "1899-1900",
+      "ia_year": "1899-1900",
+      "ia_publicdate": "2019-08-16 12:19:11",
+      "ia_creator": "Burbank, Luther Company",
+      "ia_title": "The Burbank seed book",
+      "ia_licenseurl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "titlepage_years": [
+        "1899",
+        "1900"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "burbankseedbookl1893burb",
+      "status": "已取回",
+      "note": "",
+      "file": "burbankseedbookl1893burb.txt",
+      "source_url": "https://archive.org/download/burbankseedbookl1893burb/burbankseedbookl1893burb_djvu.txt",
+      "sha256": "2d07a01be0b8a4355b2083e4e6a60392a963d39e16879d9b1fe9f6446119dac7",
+      "bytes": 329488,
+      "words": 54430,
+      "fetched_at": "2026-08-13T09:22:46",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2014-06-09 18:20:13",
+      "ia_creator": "Burbank, Luther Company.",
+      "ia_title": "The Burbank seed book / Luther Burbank Company.",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1873",
+        "1893",
+        "1901"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "burbanksexperime1895burb",
+      "status": "已取回",
+      "note": "",
+      "file": "burbanksexperime1895burb.txt",
+      "source_url": "https://archive.org/download/burbanksexperime1895burb/burbanksexperime1895burb_djvu.txt",
+      "sha256": "ddded8cb2abef7ae9b40b17b620b7dfece904cc1846cc7b9ae66135ac7b2a24a",
+      "bytes": 7350,
+      "words": 1294,
+      "fetched_at": "2026-08-13T09:23:04",
+      "ia_date": "1895",
+      "ia_year": "",
+      "ia_publicdate": "2014-08-06 16:20:18",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Burbank's Experiment Farms : seeds ... bulbs, etc. ... plants ... climbers ... cuttings",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1895"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "carpssu_000040",
+      "status": "已取回",
+      "note": "",
+      "file": "carpssu_000040.txt",
+      "source_url": "https://archive.org/download/carpssu_000040/carpssu_000040_access_djvu.txt",
+      "sha256": "3f84ac89f78ba39d355c9323d2f31a0e376c0427eeb89631552ae3c908a7dc45",
+      "bytes": 3768,
+      "words": 625,
+      "fetched_at": "2026-08-13T09:22:36",
+      "ia_date": "1908-05-09",
+      "ia_year": "1908",
+      "ia_publicdate": "2019-08-06 18:47:08",
+      "ia_creator": "Burbank, Luther",
+      "ia_title": "Letter signed by Luther Burbank to Mr. A. B. Swain",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1900"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "catalogueoffruit1886burb",
+      "status": "已取回",
+      "note": "",
+      "file": "catalogueoffruit1886burb.txt",
+      "source_url": "https://archive.org/download/catalogueoffruit1886burb/catalogueoffruit1886burb_djvu.txt",
+      "sha256": "02cac02933773421bde9afb823a04fcdd46ac3f2dda1df691757cee4f44d58cb",
+      "bytes": 60649,
+      "words": 9200,
+      "fetched_at": "2026-08-13T09:22:41",
+      "ia_date": "1886",
+      "ia_year": "",
+      "ia_publicdate": "2014-06-19 14:43:22",
+      "ia_creator": [
+        "Burbank, Luther, 1849-1926",
+        "Santa Rosa Nurseries",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Catalogue of fruit and shade trees, ornamental plants and roses",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "clemantisjackman1893burb",
+      "status": "已取回",
+      "note": "",
+      "file": "clemantisjackman1893burb.txt",
+      "source_url": "https://archive.org/download/clemantisjackman1893burb/clemantisjackman1893burb_djvu.txt",
+      "sha256": "d241df5b60e45fa583ec0f24f28e6aa47cfb32e016e3451e7f1b02f1d1c2f003",
+      "bytes": 1513,
+      "words": 248,
+      "fetched_at": "2026-08-13T09:22:57",
+      "ia_date": "1893",
+      "ia_year": "",
+      "ia_publicdate": "2014-07-11 13:57:01",
+      "ia_creator": [
+        "Burbank, Luther",
+        "Burbank's Experiment Grounds",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Clemantis jackmanni ...",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "cu31924000329320",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924000329320.txt",
+      "source_url": "https://archive.org/download/cu31924000329320/cu31924000329320_djvu.txt",
+      "sha256": "73bb44c9d213eb53c32f3e8395db23897dcbbbebabc010a29c28b4fc20aec74a",
+      "bytes": 30174,
+      "words": 4802,
+      "fetched_at": "2026-08-13T09:22:45",
+      "ia_date": "1911",
+      "ia_year": "",
+      "ia_publicdate": "2009-10-25 20:06:30",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "Twentieth century fruits ..",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1898",
+        "1908",
+        "1909",
+        "1910",
+        "1911",
+        "1912"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "cu31924000727549",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924000727549.txt",
+      "source_url": "https://archive.org/download/cu31924000727549/cu31924000727549_djvu.txt",
+      "sha256": "72200a81ef02b566d9e3b383b08090d0d5c84dd8dec87cd8d9074c4e1a71dd53",
+      "bytes": 54379,
+      "words": 9013,
+      "fetched_at": "2026-08-13T09:22:34",
+      "ia_date": "1922",
+      "ia_year": "",
+      "ia_publicdate": "2009-10-26 06:59:19",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "Half-hour experiments with plants",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1922",
+        "1924"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "cu31924031221082",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924031221082.txt",
+      "source_url": "https://archive.org/download/cu31924031221082/cu31924031221082_djvu.txt",
+      "sha256": "d862c987f0c5c155346f3321d41847ab86e6f498a7575271e7aa602536865739",
+      "bytes": 72614,
+      "words": 12416,
+      "fetched_at": "2026-08-13T09:22:16",
+      "ia_date": "1907",
+      "ia_year": "",
+      "ia_publicdate": "2009-11-16 15:07:21",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "The training of the human plant",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1904",
+        "1906",
+        "1907",
+        "1924"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "giantprunewickso1895burb",
+      "status": "已取回",
+      "note": "",
+      "file": "giantprunewickso1895burb.txt",
+      "source_url": "https://archive.org/download/giantprunewickso1895burb/giantprunewickso1895burb_djvu.txt",
+      "sha256": "effb66143789aad49dc9024b686000856687ea2cf9003efe43ab51f26a1b44c5",
+      "bytes": 28859,
+      "words": 4833,
+      "fetched_at": "2026-08-13T09:23:08",
+      "ia_date": "1895",
+      "ia_year": "",
+      "ia_publicdate": "2014-08-06 16:20:17",
+      "ia_creator": [
+        "Burbank's Experiment Farms",
+        "Burbank, Luther",
+        "Luther Burbank (Firm)",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "\"Giant\" prune and \"Wickson\" Japan plum",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1893",
+        "1894"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "halfhourexperime00burb",
+      "status": "已取回",
+      "note": "",
+      "file": "halfhourexperime00burb.txt",
+      "source_url": "https://archive.org/download/halfhourexperime00burb/halfhourexperime00burb_djvu.txt",
+      "sha256": "d3b4f9afb1ee0e73f008286e83a8312ffe20e86fe762e3394a9a0e2c613dce12",
+      "bytes": 56124,
+      "words": 9331,
+      "fetched_at": "2026-08-13T09:22:35",
+      "ia_date": "1922",
+      "ia_year": "",
+      "ia_publicdate": "2013-09-13 13:32:19",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "Half-hour experiments with plants",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1922"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "harvestofyears00burb_0",
+      "status": "已取回",
+      "note": "",
+      "file": "harvestofyears00burb_0.txt",
+      "source_url": "https://archive.org/download/harvestofyears00burb_0/harvestofyears00burb_0_djvu.txt",
+      "sha256": "b29afdfce75a320c17c251e1c2306a0b2011779ed21b0849de6c6dfc1b61b0d4",
+      "bytes": 529004,
+      "words": 94512,
+      "fetched_at": "2026-08-13T09:22:15",
+      "ia_date": "1927",
+      "ia_year": "",
+      "ia_publicdate": "2021-01-26 15:05:15",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "The harvest of the years",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1906",
+        "1909",
+        "1911",
+        "1922",
+        "1926",
+        "1927"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "howplantsaretra00burbgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "howplantsaretra00burbgoog.txt",
+      "source_url": "https://archive.org/download/howplantsaretra00burbgoog/howplantsaretra00burbgoog_djvu.txt",
+      "sha256": "8f020a8215cc921f5f3373dce65d3551c563f1f6b5b5ba7fe933b67de02be59a",
+      "bytes": 572006,
+      "words": 82721,
+      "fetched_at": "2026-08-13T09:22:20",
+      "ia_date": "1921",
+      "ia_year": "1921",
+      "ia_publicdate": "2008-02-10 14:05:17",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "How plants are trained to work for man",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914",
+        "1915"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "howplantsaretrai01burb",
+      "status": "已取回",
+      "note": "",
+      "file": "howplantsaretrai01burb.txt",
+      "source_url": "https://archive.org/download/howplantsaretrai01burb/howplantsaretrai01burb_djvu.txt",
+      "sha256": "423f85326198520ca6b319068249e73429e53fa0324d26ffb6e9b8cea2dc971d",
+      "bytes": 432501,
+      "words": 63954,
+      "fetched_at": "2026-08-13T09:22:13",
+      "ia_date": "1921",
+      "ia_year": "",
+      "ia_publicdate": "2009-10-08 23:25:19",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "How plants are trained to work for man",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914",
+        "1915",
+        "1921",
+        "1964",
+        "1965"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "howplantsaretrai01burbrich",
+      "status": "已取回",
+      "note": "",
+      "file": "howplantsaretrai01burbrich.txt",
+      "source_url": "https://archive.org/download/howplantsaretrai01burbrich/howplantsaretrai01burbrich_djvu.txt",
+      "sha256": "a554e43a84772ba24ef208beeb01daa125dbba266c34ee9944d015cadba9350d",
+      "bytes": 424175,
+      "words": 62767,
+      "fetched_at": "2026-08-13T09:22:22",
+      "ia_date": "[c1921]",
+      "ia_year": "",
+      "ia_publicdate": "2007-04-25 21:28:37",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "How plants are trained to work for man",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914",
+        "1915",
+        "1921",
+        "1999"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "howplantsaretrai03burbrich",
+      "status": "已取回",
+      "note": "",
+      "file": "howplantsaretrai03burbrich.txt",
+      "source_url": "https://archive.org/download/howplantsaretrai03burbrich/howplantsaretrai03burbrich_djvu.txt",
+      "sha256": "eea08c487f8784e53fa4eed60e20fdf48b13f1a84a8802b0395b36a3701dbda6",
+      "bytes": 443198,
+      "words": 65294,
+      "fetched_at": "2026-08-13T09:22:21",
+      "ia_date": "[c1921]",
+      "ia_year": "",
+      "ia_publicdate": "2007-04-25 21:30:51",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "How plants are trained to work for man",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914",
+        "1915",
+        "1921",
+        "1999"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "howplantsaretrai06burbrich",
+      "status": "已取回",
+      "note": "",
+      "file": "howplantsaretrai06burbrich.txt",
+      "source_url": "https://archive.org/download/howplantsaretrai06burbrich/howplantsaretrai06burbrich_djvu.txt",
+      "sha256": "a150e70b35af02ff540bad1f50d0c560ae02b0e43104e28c4e76fdf955a6254e",
+      "bytes": 441861,
+      "words": 64450,
+      "fetched_at": "2026-08-13T09:22:24",
+      "ia_date": "[c1921]",
+      "ia_year": "",
+      "ia_publicdate": "2007-04-25 21:46:16",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "How plants are trained to work for man",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914",
+        "1915",
+        "1921",
+        "1999"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "jstor-992550",
+      "status": "已取回",
+      "note": "",
+      "file": "jstor-992550.txt",
+      "source_url": "https://archive.org/download/jstor-992550/992550_djvu.txt",
+      "sha256": "9643a3d2ec245e994b882dc47b17757e3735ab70205db6821a1ea9a4936d37a5",
+      "bytes": 8095,
+      "words": 1349,
+      "fetched_at": "2026-08-13T09:22:41",
+      "ia_date": "1906-05-01",
+      "ia_year": "",
+      "ia_publicdate": "2013-03-19 09:12:22",
+      "ia_creator": "Burbank, Luther",
+      "ia_title": "Cultivate Children like Flowers",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "lutherburbankhi05socigoog",
+      "status": "已取回",
+      "note": "",
+      "file": "lutherburbankhi05socigoog.txt",
+      "source_url": "https://archive.org/download/lutherburbankhi05socigoog/lutherburbankhi05socigoog_djvu.txt",
+      "sha256": "6ba83b5d4ffb2d41e02c11835b0f2b64f8a0163eac07f4423b6334ecd383ce1f",
+      "bytes": 288812,
+      "words": 47917,
+      "fetched_at": "2026-08-13T09:22:30",
+      "ia_date": "1914",
+      "ia_year": "1914",
+      "ia_publicdate": "2009-02-01 19:39:37",
+      "ia_creator": [
+        "Burbank, Luther, 1849-1926",
+        "Whitson, John",
+        "John, Robert",
+        "Williams, Henry Smith, 1863-1943",
+        "Luther Burbank Society"
+      ],
+      "ia_title": "Luther Burbank : his methods and discoveries and their practical application ",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "lutherburbankhis02burbrich",
+      "status": "已取回",
+      "note": "",
+      "file": "lutherburbankhis02burbrich.txt",
+      "source_url": "https://archive.org/download/lutherburbankhis02burbrich/lutherburbankhis02burbrich_djvu.txt",
+      "sha256": "81aa08133d11c3d904e6d73bb788ac6fb3b321a50821a1753a9fd5ed5b632e05",
+      "bytes": 326015,
+      "words": 47372,
+      "fetched_at": "2026-08-13T09:22:26",
+      "ia_date": "1914-15",
+      "ia_year": "",
+      "ia_publicdate": "2007-03-28 13:07:21",
+      "ia_creator": [
+        "Burbank, Luther, 1849-1926",
+        "Luther Burbank Society",
+        "Whitson, John",
+        "John, Robert",
+        "Williams, Henry Smith, 1863-1943"
+      ],
+      "ia_title": "Luther Burbank : his methods and discoveries and their practical application",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1875",
+        "1914"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "lutherburbankhis03burbrich",
+      "status": "已取回",
+      "note": "",
+      "file": "lutherburbankhis03burbrich.txt",
+      "source_url": "https://archive.org/download/lutherburbankhis03burbrich/lutherburbankhis03burbrich_djvu.txt",
+      "sha256": "7eedc22b3e25bcb7add05f6c6408bcedda8f1a1e80a3a641bf48003f84ecf5ac",
+      "bytes": 335692,
+      "words": 49000,
+      "fetched_at": "2026-08-13T09:22:28",
+      "ia_date": "1914-15",
+      "ia_year": "",
+      "ia_publicdate": "2007-03-28 13:08:07",
+      "ia_creator": [
+        "Burbank, Luther, 1849-1926",
+        "Luther Burbank Society",
+        "Whitson, John",
+        "John, Robert",
+        "Williams, Henry Smith, 1863-1943"
+      ],
+      "ia_title": "Luther Burbank : his methods and discoveries and their practical application",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "lutherburbankhis04burbrich",
+      "status": "已取回",
+      "note": "",
+      "file": "lutherburbankhis04burbrich.txt",
+      "source_url": "https://archive.org/download/lutherburbankhis04burbrich/lutherburbankhis04burbrich_djvu.txt",
+      "sha256": "3f89445b78211f27e8d9780f02ea03aebc5a36cef673488910a69c34210fe317",
+      "bytes": 316187,
+      "words": 46461,
+      "fetched_at": "2026-08-13T09:22:27",
+      "ia_date": "1914-15",
+      "ia_year": "",
+      "ia_publicdate": "2007-03-28 13:08:48",
+      "ia_creator": [
+        "Burbank, Luther, 1849-1926",
+        "Luther Burbank Society",
+        "Whitson, John",
+        "John, Robert",
+        "Williams, Henry Smith, 1863-1943"
+      ],
+      "ia_title": "Luther Burbank : his methods and discoveries and their practical application",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "lutherburbankhis05burb",
+      "status": "已取回",
+      "note": "",
+      "file": "lutherburbankhis05burb.txt",
+      "source_url": "https://archive.org/download/lutherburbankhis05burb/lutherburbankhis05burb_djvu.txt",
+      "sha256": "6d380285f79219f21de0127f7f1cc9471f16ac62da46a12252f1f0471ac4dbab",
+      "bytes": 328303,
+      "words": 49493,
+      "fetched_at": "2026-08-13T09:22:31",
+      "ia_date": "1914",
+      "ia_year": "",
+      "ia_publicdate": "2009-10-09 22:21:40",
+      "ia_creator": [
+        "Burbank, Luther, 1849-1926",
+        "Whitson, John",
+        "John, Robert",
+        "Williams, Henry Smith, 1863-1943",
+        "Luther Burbank Society"
+      ],
+      "ia_title": "Luther Burbank, his methods and discoveries and their practical application; prepared from his original field notes covering more than 100,000 experiments made during forty years devoted to plant improvement",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "newcreationsinfr1894burb",
+      "status": "已取回",
+      "note": "",
+      "file": "newcreationsinfr1894burb.txt",
+      "source_url": "https://archive.org/download/newcreationsinfr1894burb/newcreationsinfr1894burb_djvu.txt",
+      "sha256": "75c993829a4bd536f59fe7d9aca47819561b193ed32e94fa45e1d70ebc165be7",
+      "bytes": 66138,
+      "words": 10907,
+      "fetched_at": "2026-08-13T09:23:06",
+      "ia_date": "1894",
+      "ia_year": "",
+      "ia_publicdate": "2014-07-23 14:00:32",
+      "ia_creator": [
+        "Burbank's Experiment Grounds",
+        "Burbank, Luther",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "New creations in fruits and flowers : June, 1894",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1893",
+        "1894"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "newgladiolilittl00burb",
+      "status": "已取回",
+      "note": "",
+      "file": "newgladiolilittl00burb.txt",
+      "source_url": "https://archive.org/download/newgladiolilittl00burb/newgladiolilittl00burb_djvu.txt",
+      "sha256": "ab6fb71ff5660c3b37e992a019b0849f33424fe93527b2b852799344011e5be4",
+      "bytes": 11302,
+      "words": 1767,
+      "fetched_at": "2026-08-13T09:22:52",
+      "ia_date": "1892",
+      "ia_year": "",
+      "ia_publicdate": "2014-07-10 14:37:04",
+      "ia_creator": [
+        "Burbank, Luther, 1849-1926",
+        "Santa Rosa Nurseries",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "New gladioli : little gem calla clematis, shade trees, Japan walnuts, bulbs, etc. etc.",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1692",
+        "1775",
+        "1893"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "santarosanurseri1887burb",
+      "status": "已取回",
+      "note": "",
+      "file": "santarosanurseri1887burb.txt",
+      "source_url": "https://archive.org/download/santarosanurseri1887burb/santarosanurseri1887burb_djvu.txt",
+      "sha256": "8a9c08ed936bcbb255f173c770743885354bfdeb4babff512481affe037b01d3",
+      "bytes": 9792,
+      "words": 1493,
+      "fetched_at": "2026-08-13T09:22:47",
+      "ia_date": "1887",
+      "ia_year": "",
+      "ia_publicdate": "2014-06-19 14:43:33",
+      "ia_creator": [
+        "Burbank, Luther, 1849-1926",
+        "Santa Rosa Nurseries",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Santa Rosa Nurseries prices list for 1887 and 88 : fruit and nut trees, and plants",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "specialtradelist1894burb",
+      "status": "已取回",
+      "note": "",
+      "file": "specialtradelist1894burb.txt",
+      "source_url": "https://archive.org/download/specialtradelist1894burb/specialtradelist1894burb_djvu.txt",
+      "sha256": "677fcc40c94825dfe2d3a206bfb936a38a74b6261b06311869e809bb2a109176",
+      "bytes": 5405,
+      "words": 874,
+      "fetched_at": "2026-08-13T09:22:57",
+      "ia_date": "1894",
+      "ia_year": "",
+      "ia_publicdate": "2014-07-23 14:00:33",
+      "ia_creator": [
+        "Burbank's Experiment Grounds",
+        "Burbank, Luther",
+        "Henry G. Gilbert Nursery and Seed Trade Catalog Collection"
+      ],
+      "ia_title": "Special trade list",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1894"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "traininghumanpl00burbgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "traininghumanpl00burbgoog.txt",
+      "source_url": "https://archive.org/download/traininghumanpl00burbgoog/traininghumanpl00burbgoog_djvu.txt",
+      "sha256": "0fbe358c0f237d7a95d76727f56e456063cb5ab8b6c251ea894baa2869e9fcd0",
+      "bytes": 75423,
+      "words": 12833,
+      "fetched_at": "2026-08-13T09:22:06",
+      "ia_date": "1907",
+      "ia_year": "1907",
+      "ia_publicdate": "2008-09-17 14:52:34",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "The training of the human plant",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1904",
+        "1906",
+        "1907"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "traininghumanpl03burbgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "traininghumanpl03burbgoog.txt",
+      "source_url": "https://archive.org/download/traininghumanpl03burbgoog/traininghumanpl03burbgoog_djvu.txt",
+      "sha256": "e60a7bd9ba946111e55ac3f8f9e7a3719536076c68874ed4d206f791af503d61",
+      "bytes": 76056,
+      "words": 12718,
+      "fetched_at": "2026-08-13T09:22:08",
+      "ia_date": "1907",
+      "ia_year": "1907",
+      "ia_publicdate": "2008-10-27 23:00:05",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "The training of the human plant",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1904",
+        "1907"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "trainingofhumanp00burb",
+      "status": "已取回",
+      "note": "",
+      "file": "trainingofhumanp00burb.txt",
+      "source_url": "https://archive.org/download/trainingofhumanp00burb/trainingofhumanp00burb_djvu.txt",
+      "sha256": "7a112a9b183f886d16675782c3b8c942ac823bdd11d1473f3dfe84e13a160c8a",
+      "bytes": 78909,
+      "words": 11855,
+      "fetched_at": "2026-08-13T09:22:07",
+      "ia_date": "1907",
+      "ia_year": "",
+      "ia_publicdate": "2009-07-10 17:08:27",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "The training of the human plant",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1904",
+        "1906",
+        "1907"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "trainingofhumanp00burbiala",
+      "status": "已取回",
+      "note": "",
+      "file": "trainingofhumanp00burbiala.txt",
+      "source_url": "https://archive.org/download/trainingofhumanp00burbiala/trainingofhumanp00burbiala_djvu.txt",
+      "sha256": "f082af0730467aeb91fbd98e4af67f64886431da30a90897a715747dcf53d468",
+      "bytes": 81262,
+      "words": 12228,
+      "fetched_at": "2026-08-13T09:22:13",
+      "ia_date": "1907",
+      "ia_year": "",
+      "ia_publicdate": "2007-11-20 18:08:30",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "The training of the human plant",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1904",
+        "1906",
+        "1907"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "whyiaminfidel1020burb",
+      "status": "已取回",
+      "note": "",
+      "file": "whyiaminfidel1020burb.txt",
+      "source_url": "https://archive.org/download/whyiaminfidel1020burb/whyiaminfidel1020burb_djvu.txt",
+      "sha256": "aec420bc2b17faa7a8fbbfe8348681aca71111c3e091ef143afd8e87bcfe3bcb",
+      "bytes": 51366,
+      "words": 7752,
+      "fetched_at": "2026-08-13T09:22:32",
+      "ia_date": "1926",
+      "ia_year": "",
+      "ia_publicdate": "2010-02-19 23:25:35",
+      "ia_creator": "Burbank, Luther, 1849-1926",
+      "ia_title": "Why I am an infidel",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1849",
+        "1875",
+        "1926"
+      ],
+      "digitization_years": []
+    }
+  ]
+}

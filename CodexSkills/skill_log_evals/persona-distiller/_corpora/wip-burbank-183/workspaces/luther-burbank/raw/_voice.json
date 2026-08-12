@@ -1,0 +1,671 @@
+{
+  "量了": 66,
+  "按语种中位": {
+    "en": 1.89,
+    "?": 0.0
+  },
+  "疑似译本": 0,
+  "★口径": "只量一手；无歧义词与有歧义词分列；**本工具不给通过/不通过**",
+  "明细": [
+    {
+      "id": "Burbankseedbook00Burb",
+      "lang": "en",
+      "words": 6295,
+      "无歧义每千词": 1.43,
+      "有歧义每千词": 1.91,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbA",
+      "lang": "en",
+      "words": 1000,
+      "无歧义每千词": 1.0,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbB",
+      "lang": "en",
+      "words": 816,
+      "无歧义每千词": 2.45,
+      "有歧义每千词": 1.23,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbC",
+      "lang": "en",
+      "words": 6461,
+      "无歧义每千词": 4.33,
+      "有歧义每千词": 4.8,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbD",
+      "lang": "en",
+      "words": 11542,
+      "无歧义每千词": 0.35,
+      "有歧义每千词": 0.26,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbE",
+      "lang": "en",
+      "words": 9918,
+      "无歧义每千词": 5.04,
+      "有歧义每千词": 7.76,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbF",
+      "lang": "en",
+      "words": 1641,
+      "无歧义每千词": 5.48,
+      "有歧义每千词": 6.09,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbH",
+      "lang": "en",
+      "words": 11183,
+      "无歧义每千词": 1.7,
+      "有歧义每千词": 4.02,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbI",
+      "lang": "en",
+      "words": 4637,
+      "无歧义每千词": 5.18,
+      "有歧义每千词": 10.14,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbJ",
+      "lang": "en",
+      "words": 4020,
+      "无歧义每千词": 4.48,
+      "有歧义每千词": 2.49,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbK",
+      "lang": "en",
+      "words": 4382,
+      "无歧义每千词": 2.97,
+      "有歧义每千词": 3.88,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbL",
+      "lang": "en",
+      "words": 5402,
+      "无歧义每千词": 3.7,
+      "有歧义每千词": 3.33,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbM",
+      "lang": "en",
+      "words": 7022,
+      "无歧义每千词": 2.42,
+      "有歧义每千词": 2.85,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbN",
+      "lang": "en",
+      "words": 2965,
+      "无歧义每千词": 1.69,
+      "有歧义每千词": 2.36,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbO",
+      "lang": "en",
+      "words": 12890,
+      "无歧义每千词": 3.34,
+      "有歧义每千词": 7.53,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbP",
+      "lang": "en",
+      "words": 18220,
+      "无歧义每千词": 4.56,
+      "有歧义每千词": 10.1,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Burbankseedbook00BurbQ",
+      "lang": "en",
+      "words": 21045,
+      "无歧义每千词": 4.7,
+      "有歧义每千词": 11.83,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31282609",
+      "lang": "?",
+      "words": 1233,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 6.49,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31283605",
+      "lang": "en",
+      "words": 11737,
+      "无歧义每千词": 1.62,
+      "有歧义每千词": 5.03,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31283606",
+      "lang": "en",
+      "words": 1030,
+      "无歧义每千词": 0.97,
+      "有歧义每千词": 1.94,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31284146",
+      "lang": "en",
+      "words": 6363,
+      "无歧义每千词": 2.04,
+      "有歧义每千词": 3.46,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31284148",
+      "lang": "en",
+      "words": 1057,
+      "无歧义每千词": 1.89,
+      "有歧义每千词": 3.78,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31284149",
+      "lang": "en",
+      "words": 953,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 1.05,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31285747",
+      "lang": "en",
+      "words": 3445,
+      "无歧义每千词": 1.74,
+      "有歧义每千词": 4.64,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31286076",
+      "lang": "en",
+      "words": 10712,
+      "无歧义每千词": 2.43,
+      "有歧义每千词": 4.2,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31286479",
+      "lang": "en",
+      "words": 2654,
+      "无歧义每千词": 1.51,
+      "有歧义每千词": 1.88,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31287101",
+      "lang": "en",
+      "words": 943,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31287725",
+      "lang": "en",
+      "words": 1493,
+      "无歧义每千词": 2.68,
+      "有歧义每千词": 3.35,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31287728",
+      "lang": "en",
+      "words": 5983,
+      "无歧义每千词": 1.17,
+      "有歧义每千词": 2.67,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31288306",
+      "lang": "en",
+      "words": 15869,
+      "无歧义每千词": 1.7,
+      "有歧义每千词": 1.39,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31288308",
+      "lang": "en",
+      "words": 4971,
+      "无歧义每千词": 1.41,
+      "有歧义每千词": 0.8,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "CAT31291676",
+      "lang": "en",
+      "words": 6463,
+      "无歧义每千词": 1.39,
+      "有歧义每千词": 2.48,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "burbankseedbook00burbr",
+      "lang": "en",
+      "words": 2639,
+      "无歧义每千词": 1.89,
+      "有歧义每千词": 2.27,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "burbankseedbook00burbs",
+      "lang": "en",
+      "words": 15249,
+      "无歧义每千词": 1.71,
+      "有歧义每千词": 1.57,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "burbankseedbook00burbt",
+      "lang": "en",
+      "words": 5013,
+      "无歧义每千词": 1.6,
+      "有歧义每千词": 0.8,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "burbankseedbook00burbu",
+      "lang": "en",
+      "words": 999,
+      "无歧义每千词": 1.0,
+      "有歧义每千词": 3.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "burbankseedbookl1893burb",
+      "lang": "en",
+      "words": 54110,
+      "无歧义每千词": 2.46,
+      "有歧义每千词": 5.25,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "burbanksexperime1895burb",
+      "lang": "?",
+      "words": 1292,
+      "无歧义每千词": 3.87,
+      "有歧义每千词": 5.42,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "carpssu_000040",
+      "lang": "en",
+      "words": 623,
+      "无歧义每千词": 1.61,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "catalogueoffruit1886burb",
+      "lang": "en",
+      "words": 9172,
+      "无歧义每千词": 2.94,
+      "有歧义每千词": 2.4,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924000329320",
+      "lang": "en",
+      "words": 4778,
+      "无歧义每千词": 2.72,
+      "有歧义每千词": 5.02,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924000727549",
+      "lang": "en",
+      "words": 8892,
+      "无歧义每千词": 1.01,
+      "有歧义每千词": 2.59,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924031221082",
+      "lang": "en",
+      "words": 12087,
+      "无歧义每千词": 0.91,
+      "有歧义每千词": 4.88,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "giantprunewickso1895burb",
+      "lang": "en",
+      "words": 4813,
+      "无歧义每千词": 2.7,
+      "有歧义每千词": 7.06,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "halfhourexperime00burb",
+      "lang": "en",
+      "words": 9215,
+      "无歧义每千词": 0.98,
+      "有歧义每千词": 2.39,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "harvestofyears00burb_0",
+      "lang": "en",
+      "words": 93103,
+      "无歧义每千词": 13.73,
+      "有歧义每千词": 18.86,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "howplantsaretra00burbgoog",
+      "lang": "en",
+      "words": 81440,
+      "无歧义每千词": 2.85,
+      "有歧义每千词": 6.29,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "howplantsaretrai01burb",
+      "lang": "en",
+      "words": 62890,
+      "无歧义每千词": 1.56,
+      "有歧义每千词": 1.8,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "howplantsaretrai01burbrich",
+      "lang": "en",
+      "words": 61724,
+      "无歧义每千词": 1.57,
+      "有歧义每千词": 1.77,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "howplantsaretrai03burbrich",
+      "lang": "en",
+      "words": 64169,
+      "无歧义每千词": 2.95,
+      "有歧义每千词": 4.02,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "howplantsaretrai06burbrich",
+      "lang": "en",
+      "words": 63423,
+      "无歧义每千词": 2.16,
+      "有歧义每千词": 3.58,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "jstor-992550",
+      "lang": "en",
+      "words": 1337,
+      "无歧义每千词": 1.5,
+      "有歧义每千词": 2.99,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lutherburbankhi05socigoog",
+      "lang": "en",
+      "words": 47230,
+      "无歧义每千词": 1.8,
+      "有歧义每千词": 4.51,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lutherburbankhis02burbrich",
+      "lang": "en",
+      "words": 47013,
+      "无歧义每千词": 3.55,
+      "有歧义每千词": 4.64,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lutherburbankhis03burbrich",
+      "lang": "en",
+      "words": 48718,
+      "无歧义每千词": 2.38,
+      "有歧义每千词": 3.49,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lutherburbankhis04burbrich",
+      "lang": "en",
+      "words": 45631,
+      "无歧义每千词": 1.82,
+      "有歧义每千词": 4.19,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lutherburbankhis05burb",
+      "lang": "en",
+      "words": 48755,
+      "无歧义每千词": 3.59,
+      "有歧义每千词": 5.23,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "newcreationsinfr1894burb",
+      "lang": "en",
+      "words": 10867,
+      "无歧义每千词": 3.13,
+      "有歧义每千词": 9.02,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "newgladiolilittl00burb",
+      "lang": "en",
+      "words": 1754,
+      "无歧义每千词": 5.7,
+      "有歧义每千词": 5.7,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "santarosanurseri1887burb",
+      "lang": "en",
+      "words": 1491,
+      "无歧义每千词": 6.04,
+      "有歧义每千词": 1.34,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "specialtradelist1894burb",
+      "lang": "?",
+      "words": 870,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 5.75,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "traininghumanpl00burbgoog",
+      "lang": "en",
+      "words": 12507,
+      "无歧义每千词": 0.88,
+      "有歧义每千词": 5.04,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "traininghumanpl03burbgoog",
+      "lang": "en",
+      "words": 12388,
+      "无歧义每千词": 0.81,
+      "有歧义每千词": 5.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "trainingofhumanp00burb",
+      "lang": "en",
+      "words": 11535,
+      "无歧义每千词": 0.87,
+      "有歧义每千词": 4.77,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "trainingofhumanp00burbiala",
+      "lang": "en",
+      "words": 11901,
+      "无歧义每千词": 0.84,
+      "有歧义每千词": 4.54,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "whyiaminfidel1020burb",
+      "lang": "en",
+      "words": 7579,
+      "无歧义每千词": 4.22,
+      "有歧义每千词": 13.85,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    }
+  ]
+}
