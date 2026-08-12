@@ -7,7 +7,7 @@
     "expression": 10,
     "decisions": 0,
     "timeline": 0,
-    "external": 2
+    "external": 12
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -323,6 +323,11 @@
       "title": "Florentinische Geschichten des Nikolaus Machiavelli"
     },
     {
+      "identifier": "in.ernet.dli.2015.553355",
+      "道": "external",
+      "title": "Life And Times Of Niccolo Machiavelli"
+    },
+    {
       "identifier": "india.history.resource.72474",
       "道": "writings",
       "title": "Opere di Niccolo Machiavelli, Vol. I"
@@ -348,6 +353,41 @@
       "title": "Opere di Niccolo Machiavelli, Vol. IV"
     },
     {
+      "identifier": "india.history.resource.85209",
+      "道": "external",
+      "title": "Niccolo Machiavelli and his Times, Vol. I"
+    },
+    {
+      "identifier": "lifeandtimesnic00villgoog",
+      "道": "external",
+      "title": "The life and times of Niccolò Machiavelli"
+    },
+    {
+      "identifier": "niccolmachiavel00villgoog",
+      "道": "external",
+      "title": "Niccolò Machiavelli and his times"
+    },
+    {
+      "identifier": "niccolmachiavel01villgoog",
+      "道": "external",
+      "title": "Niccolò Machiavelli and His Times"
+    },
+    {
+      "identifier": "niccolmachiavel05villgoog",
+      "道": "external",
+      "title": "Niccolò Machiavelli and His Times"
+    },
+    {
+      "identifier": "niccolmachiavel10villgoog",
+      "道": "external",
+      "title": "Niccolò Machiavelli and His Times"
+    },
+    {
+      "identifier": "niccolmachiavel12villgoog",
+      "道": "external",
+      "title": "Niccolò Machiavelli and his times"
+    },
+    {
       "identifier": "operediniccolm02mach",
       "道": "writings",
       "title": "Opere di Niccolò Machiavelli : con giunta di un nuova indice generale "
@@ -356,6 +396,16 @@
       "identifier": "threeprosewriter00moor",
       "道": "external",
       "title": "Three prose writers of the Italian renaissance"
+    },
+    {
+      "identifier": "villari-the-life-and-times-of-niccolo-machiavelli-v-1",
+      "道": "external",
+      "title": "The life and times of Niccolo Machiavelli v 1"
+    },
+    {
+      "identifier": "villari-the-life-and-times-of-niccolo-machiavelli-v-2",
+      "道": "external",
+      "title": "The life and times of Niccolo Machiavelli v 2"
     }
   ]
 }

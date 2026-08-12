@@ -1,12 +1,12 @@
 {
-  "总数": 85,
+  "总数": 95,
   "计数": {
     "一手": 73,
-    "二手": 12,
+    "二手": 22,
     "需人判": 0
   },
-  "一手占比下界": 0.8588,
-  "一手占比上界": 0.8588,
+  "一手占比下界": 0.7684,
+  "一手占比上界": 0.7684,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -66,6 +66,14 @@
       "words": 173703
     },
     {
+      "identifier": "centennialanniv00schogoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "The centennial anniversary of the elevation of John Marshall to the office of ch",
+      "creator": "Philadelphia bar association; Lawyers' Club of Philadelphia; Pennsylvania bar as",
+      "words": 22868
+    },
+    {
       "identifier": "completeconstitu00marsuoft",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
@@ -104,6 +112,14 @@
       "title": "The life of John Marshall ",
       "creator": "Beveridge, Albert Jeremiah, 1862-1927",
       "words": 327019
+    },
+    {
+      "identifier": "cu31924020889543",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "John Marshall : life, character and judicial services as portrayed in the centen",
+      "creator": "Dillon, John Forrest, 1831-1914",
+      "words": 167723
     },
     {
       "identifier": "cu31924024323069",
@@ -202,6 +218,14 @@
       "words": 205426
     },
     {
+      "identifier": "johnmarshalland01corwgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "John Marshall and the Constitution; a chronicle of the Supreme court",
+      "creator": "Corwin, Edward Samuel, 1878-1963",
+      "words": 56508
+    },
+    {
       "identifier": "johnmarshallcom00dillgoog",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
@@ -226,12 +250,52 @@
       "words": 249217
     },
     {
+      "identifier": "johnmarshallcons00corwuoft",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "John Marshall and the Constitution : a chronicle of the Supreme Court",
+      "creator": "Corwin, Edward Samuel, 1878-1963",
+      "words": 55034
+    },
+    {
       "identifier": "johnmarshalllif03dillgoog",
       "档": "二手",
       "依据": "目标不在 creator 字段里",
       "title": "John Marshall; life, character and judicial services as portrayed in the centena",
       "creator": "Dillon, John Forrest, 1831-1914, [from old catalog] ed",
       "words": 173833
+    },
+    {
+      "identifier": "johnmarshalllif04dillgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "John Marshall; life, character and judicial services as portrayed in the centena",
+      "creator": "Dillon, John Forrest, 1831-1914, [from old catalog] ed",
+      "words": 180916
+    },
+    {
+      "identifier": "johnmarshalllif07dillgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "John Marshall; life, character and judicial services as portrayed in the centena",
+      "creator": "Dillon, John Forrest, 1831-1914, [from old catalog] ed",
+      "words": 172876
+    },
+    {
+      "identifier": "johnmarshalllife01dillrich",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "John Marshall : life, character and judicial services as portrayed in the centen",
+      "creator": "Dillon, John Forrest, 1831-1914, ed",
+      "words": 180133
+    },
+    {
+      "identifier": "johnmarshalllife02dilluoft",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "John Marshall, life, character and judicial services, as portrayed in the centen",
+      "creator": "Dillon, John Forrest, 1831-1914",
+      "words": 173264
     },
     {
       "identifier": "johnmarshallnewintro00marsrich",
@@ -632,6 +696,22 @@
       "title": "The political and economic doctrines of John Marshall, who for thirty-four years",
       "creator": "Marshall, John, 1755-1835; Oster, John Edward",
       "words": 140593
+    },
+    {
+      "identifier": "proceedingsloui00assogoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Proceedings of the Louisville Bar Association, John Marshall day, Louisville, Fe",
+      "creator": "Louisville Bar Association",
+      "words": 23509
+    },
+    {
+      "identifier": "proceedingsofbar00unit",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Proceedings of the Bar and Officers of the Supreme Court of the United States in",
+      "creator": "United States. Supreme Court",
+      "words": 15853
     },
     {
       "identifier": "thelifeofgeorgew18591gut",

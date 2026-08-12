@@ -1,12 +1,12 @@
 {
-  "lanes": 5,
-  "去掉纸面道后": 4,
+  "lanes": 6,
+  "去掉纸面道后": 5,
   "逐道份数": {
-    "writings": 60,
+    "writings": 57,
     "conversations": 3,
     "expression": 3,
     "decisions": 1,
-    "timeline": 0,
+    "timeline": 3,
     "external": 2
   },
   "未分道": 0,
@@ -79,17 +79,17 @@
     },
     {
       "identifier": "265433882.1678.emory.edu",
-      "道": "writings",
+      "道": "timeline",
       "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
     },
     {
       "identifier": "265433882.1682.emory.edu",
-      "道": "writings",
+      "道": "timeline",
       "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
     },
     {
       "identifier": "265433882.1713.emory.edu",
-      "道": "writings",
+      "道": "timeline",
       "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
     },
     {

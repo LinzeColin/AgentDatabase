@@ -1,11 +1,11 @@
 {
-  "生成时刻": "2026-08-12T13:52:38",
-  "请求数": 12,
-  "已取回": 85,
+  "生成时刻": "2026-08-12T13:58:59",
+  "请求数": 10,
+  "已取回": 95,
   "skipped_access_restricted": 0,
   "失败": 0,
   "并发降级": "无（全程并发 4）",
-  "总词数": 14862425,
+  "总词数": 15911109,
   "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
   "记录": [
     {
@@ -168,6 +168,34 @@
       ]
     },
     {
+      "identifier": "centennialanniv00schogoog",
+      "status": "已取回",
+      "note": "",
+      "file": "centennialanniv00schogoog.txt",
+      "source_url": "https://archive.org/download/centennialanniv00schogoog/centennialanniv00schogoog_djvu.txt",
+      "sha256": "d7999e6378b20496ddeafd1939532e46a29a52d21689c0e7c835d3f1574fa07c",
+      "bytes": 136460,
+      "words": 22868,
+      "fetched_at": "2026-08-12T13:58:44",
+      "ia_date": "1901",
+      "ia_year": "",
+      "ia_publicdate": "2009-12-05 20:42:09",
+      "ia_creator": [
+        "Philadelphia bar association",
+        "Lawyers' Club of Philadelphia",
+        "Pennsylvania bar association",
+        "University of Pennsylvania. Law School",
+        "Mitchell, James T. (James Tyndale), 1834-1915"
+      ],
+      "ia_title": "The centennial anniversary of the elevation of John Marshall to the office of chief justice of the Supreme court of the United States of America, Monday, February fourth, 1901; celebration in the city of Philadelphia under the auspices of the Law association of Philadelphia, the Lawyers' club of Philadelphia, the Pennsylvania bar association, the Law school of the University of Pennsylvania",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1880",
+        "1900",
+        "1901"
+      ]
+    },
+    {
       "identifier": "completeconstitu00marsuoft",
       "status": "已取回",
       "note": "",
@@ -310,6 +338,34 @@
         "1788",
         "1801",
         "1891",
+        "1924"
+      ]
+    },
+    {
+      "identifier": "cu31924020889543",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924020889543.txt",
+      "source_url": "https://archive.org/download/cu31924020889543/cu31924020889543_djvu.txt",
+      "sha256": "f99984117957308ab0a5b3da6c7da85c43fb9748e9805600fb1b35841c884170",
+      "bytes": 1133763,
+      "words": 167723,
+      "fetched_at": "2026-08-12T13:58:46",
+      "ia_date": "1903",
+      "ia_year": "",
+      "ia_publicdate": "2009-10-23 02:44:01",
+      "ia_creator": "Dillon, John Forrest, 1831-1914",
+      "ia_title": "John Marshall : life, character and judicial services as portrayed in the centenary and memorial addresses and proceedings throughout the United States on Marshall Day, 1901, and in the classic orations of Binney, Story, Phelps, Waite and Rawle ",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1800",
+        "1801",
+        "1831",
+        "1833",
+        "1835",
+        "1884",
+        "1901",
+        "1903",
         "1924"
       ]
     },
@@ -609,6 +665,26 @@
       ]
     },
     {
+      "identifier": "johnmarshalland01corwgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "johnmarshalland01corwgoog.txt",
+      "source_url": "https://archive.org/download/johnmarshalland01corwgoog/johnmarshalland01corwgoog_djvu.txt",
+      "sha256": "2a86155623593422597519c36ded47eac041d27d51c5dc95eaa991dadd7e184b",
+      "bytes": 339990,
+      "words": 56508,
+      "fetched_at": "2026-08-12T13:58:43",
+      "ia_date": "1919",
+      "ia_year": "1919",
+      "ia_publicdate": "2008-04-01 22:11:21",
+      "ia_creator": "Corwin, Edward Samuel, 1878-1963",
+      "ia_title": "John Marshall and the Constitution; a chronicle of the Supreme court",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1919"
+      ]
+    },
+    {
       "identifier": "johnmarshallcom00dillgoog",
       "status": "已取回",
       "note": "",
@@ -689,6 +765,29 @@
       ]
     },
     {
+      "identifier": "johnmarshallcons00corwuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "johnmarshallcons00corwuoft.txt",
+      "source_url": "https://archive.org/download/johnmarshallcons00corwuoft/johnmarshallcons00corwuoft_djvu.txt",
+      "sha256": "af32254dd538da2e453d6ce2a3c0cb791423f4d3cfe5cce84982d4ba3eca2e26",
+      "bytes": 380014,
+      "words": 55034,
+      "fetched_at": "2026-08-12T13:58:45",
+      "ia_date": "[c1919]",
+      "ia_year": "",
+      "ia_publicdate": "2007-08-14 13:19:09",
+      "ia_creator": "Corwin, Edward Samuel, 1878-1963",
+      "ia_title": "John Marshall and the Constitution : a chronicle of the Supreme Court",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1779",
+        "1781",
+        "1787",
+        "1919"
+      ]
+    },
+    {
       "identifier": "johnmarshalllif03dillgoog",
       "status": "已取回",
       "note": "",
@@ -711,6 +810,117 @@
         "1831",
         "1891",
         "1898",
+        "1901",
+        "1903"
+      ]
+    },
+    {
+      "identifier": "johnmarshalllif04dillgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "johnmarshalllif04dillgoog.txt",
+      "source_url": "https://archive.org/download/johnmarshalllif04dillgoog/johnmarshalllif04dillgoog_djvu.txt",
+      "sha256": "d6daf4b6e7d91ca9ac71dba4c4d6b1550327ee7702f329675c5010e9f5e19484",
+      "bytes": 1225782,
+      "words": 180916,
+      "fetched_at": "2026-08-12T13:58:51",
+      "ia_date": "1903",
+      "ia_year": "1903",
+      "ia_publicdate": "2008-01-29 09:51:30",
+      "ia_creator": "Dillon, John Forrest, 1831-1914, [from old catalog] ed",
+      "ia_title": "John Marshall; life, character and judicial services as portrayed in the centenary and memorial addresses and proceedings throughout the United States on Marshall day, 1901",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1766",
+        "1778",
+        "1786",
+        "1800",
+        "1808",
+        "1821",
+        "1881",
+        "1901",
+        "1903",
+        "1908"
+      ]
+    },
+    {
+      "identifier": "johnmarshalllif07dillgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "johnmarshalllif07dillgoog.txt",
+      "source_url": "https://archive.org/download/johnmarshalllif07dillgoog/johnmarshalllif07dillgoog_djvu.txt",
+      "sha256": "c620243bc2fc99c3271586244df828496e81ea35995934cb4a615e73bb95784e",
+      "bytes": 1178609,
+      "words": 172876,
+      "fetched_at": "2026-08-12T13:58:52",
+      "ia_date": "1903",
+      "ia_year": "1903",
+      "ia_publicdate": "2009-03-11 22:25:07",
+      "ia_creator": "Dillon, John Forrest, 1831-1914, [from old catalog] ed",
+      "ia_title": "John Marshall; life, character and judicial services as portrayed in the centenary and memorial addresses and proceedings throughout the United States on Marshall day, 1901",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1707",
+        "1765",
+        "1801",
+        "1808",
+        "1881",
+        "1901",
+        "1903",
+        "1909"
+      ]
+    },
+    {
+      "identifier": "johnmarshalllife01dillrich",
+      "status": "已取回",
+      "note": "",
+      "file": "johnmarshalllife01dillrich.txt",
+      "source_url": "https://archive.org/download/johnmarshalllife01dillrich/johnmarshalllife01dillrich_djvu.txt",
+      "sha256": "68b5927add858afa66f86d38d277c9c712c45088847922f3ca036250a0620f69",
+      "bytes": 1221688,
+      "words": 180133,
+      "fetched_at": "2026-08-12T13:58:59",
+      "ia_date": "1903",
+      "ia_year": "",
+      "ia_publicdate": "2006-08-13 00:41:05",
+      "ia_creator": "Dillon, John Forrest, 1831-1914, ed",
+      "ia_title": "John Marshall : life, character and judicial services as portrayed in the centenary and memorial addresses and proceedings throughout the United States on Marshall day, 1901, and in the classic orations of Binney, Story, Phelps, Waite and Rawle",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1765",
+        "1773",
+        "1786",
+        "1800",
+        "1808",
+        "1821",
+        "1831",
+        "1901",
+        "1903"
+      ]
+    },
+    {
+      "identifier": "johnmarshalllife02dilluoft",
+      "status": "已取回",
+      "note": "",
+      "file": "johnmarshalllife02dilluoft.txt",
+      "source_url": "https://archive.org/download/johnmarshalllife02dilluoft/johnmarshalllife02dilluoft_djvu.txt",
+      "sha256": "45b27fdfbda9471ef35fba046fe60e2c7ef2e487f9a0f94823f4160927e5ed52",
+      "bytes": 1182215,
+      "words": 173264,
+      "fetched_at": "2026-08-12T13:58:52",
+      "ia_date": "1903",
+      "ia_year": "",
+      "ia_publicdate": "2008-05-16 21:41:54",
+      "ia_creator": "Dillon, John Forrest, 1831-1914",
+      "ia_title": "John Marshall, life, character and judicial services, as portrayed in the centenary and memorial addresses and proceedings throughout the United States on Marshall Day, 1901, and in the classic orations of Binney, Story, Phelps, Waite and Rawle",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1755",
+        "1797",
+        "1829",
+        "1831",
+        "1891",
+        "1893",
         "1901",
         "1903"
       ]
@@ -1938,6 +2148,50 @@
         "1836",
         "1908",
         "1914"
+      ]
+    },
+    {
+      "identifier": "proceedingsloui00assogoog",
+      "status": "已取回",
+      "note": "",
+      "file": "proceedingsloui00assogoog.txt",
+      "source_url": "https://archive.org/download/proceedingsloui00assogoog/proceedingsloui00assogoog_djvu.txt",
+      "sha256": "db8ad8a75d7c007c778d02d1a9902d8196dbe05c979e093b6efc084f028a37ef",
+      "bytes": 138415,
+      "words": 23509,
+      "fetched_at": "2026-08-12T13:58:56",
+      "ia_date": "1901",
+      "ia_year": "",
+      "ia_publicdate": "2009-12-31 21:27:04",
+      "ia_creator": "Louisville Bar Association",
+      "ia_title": "Proceedings of the Louisville Bar Association, John Marshall day, Louisville, February 4, 1901",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1755",
+        "1801",
+        "1835",
+        "1901"
+      ]
+    },
+    {
+      "identifier": "proceedingsofbar00unit",
+      "status": "已取回",
+      "note": "",
+      "file": "proceedingsofbar00unit.txt",
+      "source_url": "https://archive.org/download/proceedingsofbar00unit/proceedingsofbar00unit_djvu.txt",
+      "sha256": "04f73d57798946e5fd000d90794f23477f2278aed9830dd8fde0c8bc6cd9a93c",
+      "bytes": 106113,
+      "words": 15853,
+      "fetched_at": "2026-08-12T13:58:56",
+      "ia_date": "1912",
+      "ia_year": "",
+      "ia_publicdate": "2014-01-14 15:35:29",
+      "ia_creator": "United States. Supreme Court",
+      "ia_title": "Proceedings of the Bar and Officers of the Supreme Court of the United States in memory of John Marshall Harlan, December 16, 1911",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1911",
+        "2014"
       ]
     },
     {

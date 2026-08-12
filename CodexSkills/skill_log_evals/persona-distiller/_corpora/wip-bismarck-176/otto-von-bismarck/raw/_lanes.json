@@ -1,11 +1,11 @@
 {
-  "lanes": 5,
+  "lanes": 6,
   "去掉纸面道后": 5,
   "逐道份数": {
-    "writings": 16,
+    "writings": 18,
     "conversations": 19,
     "expression": 14,
-    "decisions": 0,
+    "decisions": 1,
     "timeline": 11,
     "external": 7
   },
@@ -253,9 +253,19 @@
       "title": "Lettres politiques confidentielles de M. de Bismarck, 1851-1858"
     },
     {
+      "identifier": "bub_gb_KsNVAAAAYAAJ",
+      "道": "writings",
+      "title": "Preussen im Bundestag, 1851 bis 1859 : Dokumente der K. Preuss. Bundes"
+    },
+    {
       "identifier": "bub_gb_NjNDAQAAMAAJ",
       "道": "writings",
       "title": "Bismarck-Portefeuille"
+    },
+    {
+      "identifier": "bub_gb_akpzLZLxvP4C",
+      "道": "decisions",
+      "title": "Rede des reichskanzlers fürsten Bismarck über das bündniss zwischen De"
     },
     {
       "identifier": "cihm_77460",
@@ -336,6 +346,11 @@
       "identifier": "lovelettersofbis00bismiala",
       "道": "conversations",
       "title": "The love letters of Bismarck; being letters to his fiancée and wife, 1"
+    },
+    {
+      "identifier": "preussenimbunde00poscgoog",
+      "道": "writings",
+      "title": "Preussen im Bundestag, 1851 bis 1859 : Dokumente der K. Preuss. Bundes"
     },
     {
       "identifier": "professionalrec00liargoog",

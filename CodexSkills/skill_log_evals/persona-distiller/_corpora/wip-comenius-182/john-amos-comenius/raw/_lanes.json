@@ -2,12 +2,12 @@
   "lanes": 2,
   "去掉纸面道后": 2,
   "逐道份数": {
-    "writings": 71,
+    "writings": 72,
     "conversations": 0,
     "expression": 0,
     "decisions": 0,
     "timeline": 0,
-    "external": 2
+    "external": 11
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -238,6 +238,11 @@
       "title": "Labirynt swěta a rág srdce : to gest swětlé wymalowanj, kterak w tom s"
     },
     {
+      "identifier": "bub_gb_HAI2AAAAIAAJ",
+      "道": "external",
+      "title": "Johann Amos Comenius, sein Leben und Wirken"
+    },
+    {
       "identifier": "bub_gb_HiRbAAAAcAAJ",
       "道": "writings",
       "title": "[Orbis sensualium pictus]"
@@ -253,6 +258,11 @@
       "title": "Neuer Orbis Pictus für die Jugend, oder Schauplatz der Natur, der Kuns"
     },
     {
+      "identifier": "bub_gb_MWcM-4kItEAC",
+      "道": "external",
+      "title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und s"
+    },
+    {
       "identifier": "bub_gb_MrNBAAAAYAAJ",
       "道": "writings",
       "title": "Didaktika Jana Amosa Komenského. Téhož 1. Nawržení krátké o obnowení š"
@@ -261,6 +271,11 @@
       "identifier": "bub_gb_SLlKAAAAYAAJ",
       "道": "writings",
       "title": "Korrespondence. Listy Komenského a vrstevníků jeho"
+    },
+    {
+      "identifier": "bub_gb_Up_239je-xMC",
+      "道": "external",
+      "title": "Johann Amos Comenius. Sein Leben und seine Schriften"
     },
     {
       "identifier": "bub_gb_WGNcAAAAcAAJ",
@@ -338,9 +353,44 @@
       "title": "Joh. Amos Commenii Orbis sensualium pictus: : hoc est, Omnium principa"
     },
     {
+      "identifier": "johannamoscomen00kerrgoog",
+      "道": "external",
+      "title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und s"
+    },
+    {
+      "identifier": "johannamoscomen00kvagoog",
+      "道": "external",
+      "title": "Johann Amos Comenius. Sein Leben und seine Schriften"
+    },
+    {
+      "identifier": "johannamoscomen01kerrgoog",
+      "道": "external",
+      "title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und s"
+    },
+    {
+      "identifier": "johannamoscomen02kerrgoog",
+      "道": "external",
+      "title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und s"
+    },
+    {
+      "identifier": "johannamoscomen03kerrgoog",
+      "道": "external",
+      "title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und s"
+    },
+    {
       "identifier": "labyrinthofworld00comeuoft",
       "道": "writings",
       "title": "The labyrinth of the world and the paradise of the heart"
+    },
+    {
+      "identifier": "lebenundschicks00vrbkgoog",
+      "道": "external",
+      "title": "Leben und Schicksale des Johann Amos Comenius"
+    },
+    {
+      "identifier": "ned-kbn-all-00004319-002",
+      "道": "writings",
+      "title": "Unum necessarium, scire quid sibi sit necessarium, in vita, et morte e"
     },
     {
       "identifier": "obrazjednotyesko00lasi",

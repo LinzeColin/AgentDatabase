@@ -1,11 +1,11 @@
 {
-  "生成时刻": "2026-08-12T13:23:27",
-  "请求数": 40,
-  "已取回": 69,
+  "生成时刻": "2026-08-12T13:59:59",
+  "请求数": 10,
+  "已取回": 79,
   "skipped_access_restricted": 0,
   "失败": 1,
   "并发降级": "无（全程并发 4）",
-  "总词数": 9107780,
+  "总词数": 11138432,
   "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
   "记录": [
     {
@@ -1397,6 +1397,36 @@
       ]
     },
     {
+      "identifier": "in.ernet.dli.2015.553355",
+      "status": "已取回",
+      "note": "",
+      "file": "in.ernet.dli.2015.553355.txt",
+      "source_url": "https://archive.org/download/in.ernet.dli.2015.553355/2015.553355.Life-And_djvu.txt",
+      "sha256": "213511a1f84ae1894bbbbc71c3479d404cf801fc8ce82a431066b26916a75cd3",
+      "bytes": 5026853,
+      "words": 523460,
+      "fetched_at": "2026-08-12T13:59:46",
+      "ia_date": "1892",
+      "ia_year": "",
+      "ia_publicdate": "2017-01-22 07:23:40",
+      "ia_creator": "Villari Pasquale",
+      "ia_title": "Life And Times Of Niccolo Machiavelli",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1617",
+        "1650",
+        "1651",
+        "1655",
+        "1656",
+        "1705",
+        "1707",
+        "1718",
+        "1866",
+        "18६९",
+        "1956"
+      ]
+    },
+    {
       "identifier": "india.history.resource.72474",
       "status": "已取回",
       "note": "",
@@ -1499,6 +1529,189 @@
       ]
     },
     {
+      "identifier": "india.history.resource.85209",
+      "status": "已取回",
+      "note": "",
+      "file": "india.history.resource.85209.txt",
+      "source_url": "https://archive.org/download/india.history.resource.85209/85209_djvu.txt",
+      "sha256": "4bf15fe30dbb71e7f3bf62818f3243675aac12506b0065a1a675681f1848af92",
+      "bytes": 729156,
+      "words": 119746,
+      "fetched_at": "2026-08-12T13:59:41",
+      "ia_date": "1878",
+      "ia_year": "",
+      "ia_publicdate": "2026-07-22 12:58:13",
+      "ia_creator": [
+        "Villari, Pasquale Prof.",
+        "Villari, Linda (Tr.)"
+      ],
+      "ia_title": "Niccolo Machiavelli and his Times, Vol. I",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1859",
+        "1873",
+        "1875",
+        "1878",
+        "2018"
+      ]
+    },
+    {
+      "identifier": "lifeandtimesnic00villgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "lifeandtimesnic00villgoog.txt",
+      "source_url": "https://archive.org/download/lifeandtimesnic00villgoog/lifeandtimesnic00villgoog_djvu.txt",
+      "sha256": "71d023632e39ec4a1a8db729cab00bf6d8f2b361b246ebb129a67bda38fce957",
+      "bytes": 1726534,
+      "words": 254538,
+      "fetched_at": "2026-08-12T13:59:45",
+      "ia_date": "1892",
+      "ia_year": "1892",
+      "ia_publicdate": "2008-03-24 21:34:11",
+      "ia_creator": [
+        "Villari, Pasquale, 1827-1917. [from old catalog]",
+        "Villari, Linda (White) Mazini, 1836-1915, [from old catalog] tr"
+      ],
+      "ia_title": "The life and times of Niccolò Machiavelli",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1859",
+        "1878"
+      ]
+    },
+    {
+      "identifier": "niccolmachiavel00villgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "niccolmachiavel00villgoog.txt",
+      "source_url": "https://archive.org/download/niccolmachiavel00villgoog/niccolmachiavel00villgoog_djvu.txt",
+      "sha256": "402c44d1a4a189d470fc8df83c785cdbb189af645ba5fea26accaa1a57e5d097",
+      "bytes": 745008,
+      "words": 128666,
+      "fetched_at": "2026-08-12T13:59:41",
+      "ia_date": "1878",
+      "ia_year": "1878",
+      "ia_publicdate": "2014-03-18 08:07:26",
+      "ia_creator": [
+        "Villari, Pasquale, 1827-1917",
+        "Villari, Linda White Mazini, 1836-1915, tr"
+      ],
+      "ia_title": "Niccolò Machiavelli and his times",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1500",
+        "1501",
+        "1502",
+        "1503",
+        "1504",
+        "1505",
+        "1507",
+        "1512",
+        "1878"
+      ]
+    },
+    {
+      "identifier": "niccolmachiavel01villgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "niccolmachiavel01villgoog.txt",
+      "source_url": "https://archive.org/download/niccolmachiavel01villgoog/niccolmachiavel01villgoog_djvu.txt",
+      "sha256": "385f5ba4714f2fc53b41deaaec18498607b02689f675267023cbb3446c05ab84",
+      "bytes": 789790,
+      "words": 135224,
+      "fetched_at": "2026-08-12T13:59:48",
+      "ia_date": "1883",
+      "ia_year": "1883",
+      "ia_publicdate": "2008-05-25 01:28:27",
+      "ia_creator": "Pasquale Villari",
+      "ia_title": "Niccolò Machiavelli and His Times",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1508",
+        "1511",
+        "1513",
+        "1521",
+        "1523",
+        "1525",
+        "1526",
+        "1527",
+        "1883"
+      ]
+    },
+    {
+      "identifier": "niccolmachiavel05villgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "niccolmachiavel05villgoog.txt",
+      "source_url": "https://archive.org/download/niccolmachiavel05villgoog/niccolmachiavel05villgoog_djvu.txt",
+      "sha256": "adc11f95eade60199502b892854c4cde34346438519de2d4354030fa638e3cb6",
+      "bytes": 741982,
+      "words": 126664,
+      "fetched_at": "2026-08-12T13:59:51",
+      "ia_date": "1883",
+      "ia_year": "1883",
+      "ia_publicdate": "2008-05-12 22:47:54",
+      "ia_creator": "Pasquale Villari",
+      "ia_title": "Niccolò Machiavelli and His Times",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1507",
+        "1508",
+        "1510",
+        "1511",
+        "1512",
+        "1513",
+        "1514",
+        "1527",
+        "1883"
+      ]
+    },
+    {
+      "identifier": "niccolmachiavel10villgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "niccolmachiavel10villgoog.txt",
+      "source_url": "https://archive.org/download/niccolmachiavel10villgoog/niccolmachiavel10villgoog_djvu.txt",
+      "sha256": "6f8aba6067cebfd5e8c20e26444a0c5860871fe41f27bbabbfd928185d444569",
+      "bytes": 714278,
+      "words": 119163,
+      "fetched_at": "2026-08-12T13:59:53",
+      "ia_date": "1878",
+      "ia_year": "1878",
+      "ia_publicdate": "2008-04-01 14:51:57",
+      "ia_creator": "Pasquale Villari",
+      "ia_title": "Niccolò Machiavelli and His Times",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1859",
+        "1873",
+        "1878"
+      ]
+    },
+    {
+      "identifier": "niccolmachiavel12villgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "niccolmachiavel12villgoog.txt",
+      "source_url": "https://archive.org/download/niccolmachiavel12villgoog/niccolmachiavel12villgoog_djvu.txt",
+      "sha256": "28b88a9e7e14590a9a991842b1e0f209f91f07101151a3d5d691c45def65f96f",
+      "bytes": 639431,
+      "words": 106357,
+      "fetched_at": "2026-08-12T13:59:53",
+      "ia_date": "1878",
+      "ia_year": "1878",
+      "ia_publicdate": "2008-03-20 12:51:55",
+      "ia_creator": "Villari, Pasquale, 1827-1917",
+      "ia_title": "Niccolò Machiavelli and his times",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1859",
+        "1873",
+        "1875",
+        "1878"
+      ]
+    },
+    {
       "identifier": "operediniccolm02mach",
       "status": "已取回",
       "note": "",
@@ -1546,6 +1759,55 @@
         "1898",
         "1902",
         "1916"
+      ]
+    },
+    {
+      "identifier": "villari-the-life-and-times-of-niccolo-machiavelli-v-1",
+      "status": "已取回",
+      "note": "",
+      "file": "villari-the-life-and-times-of-niccolo-machiavelli-v-1.txt",
+      "source_url": "https://archive.org/download/villari-the-life-and-times-of-niccolo-machiavelli-v-1/Villari The life and times of Niccolo Machiavelli  v 1_djvu.txt",
+      "sha256": "bd9990100dd4413c74c024bf7f5e5c5647b05fab3317b51db2306959d0e414d6",
+      "bytes": 1501018,
+      "words": 250008,
+      "fetched_at": "2026-08-12T13:59:58",
+      "ia_date": "1891",
+      "ia_year": "",
+      "ia_publicdate": "2022-09-24 13:36:05",
+      "ia_creator": "Pasquale Villari",
+      "ia_title": "The life and times of Niccolo Machiavelli v 1",
+      "ia_licenseurl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1859",
+        "1878",
+        "1891",
+        "1912"
+      ]
+    },
+    {
+      "identifier": "villari-the-life-and-times-of-niccolo-machiavelli-v-2",
+      "status": "已取回",
+      "note": "",
+      "file": "villari-the-life-and-times-of-niccolo-machiavelli-v-2.txt",
+      "source_url": "https://archive.org/download/villari-the-life-and-times-of-niccolo-machiavelli-v-2/Villari The life and times of Niccolo Machiavelli  v 2_djvu.txt",
+      "sha256": "bf853d07951ec46c1c08180e8411fa154e3d0821931cf9cb9a81942969a7d02f",
+      "bytes": 1599393,
+      "words": 266826,
+      "fetched_at": "2026-08-12T13:59:59",
+      "ia_date": "1891",
+      "ia_year": "",
+      "ia_publicdate": "2022-09-24 13:38:23",
+      "ia_creator": "Pasquale Villari",
+      "ia_title": "The life and times of Niccolo Machiavelli v 2",
+      "ia_licenseurl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1507",
+        "1510",
+        "1512",
+        "1513",
+        "1514",
+        "1530",
+        "1891"
       ]
     }
   ]

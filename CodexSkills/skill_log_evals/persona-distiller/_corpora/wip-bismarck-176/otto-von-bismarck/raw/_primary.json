@@ -1,12 +1,12 @@
 {
-  "总数": 67,
+  "总数": 70,
   "计数": {
-    "一手": 60,
+    "一手": 63,
     "二手": 7,
     "需人判": 0
   },
-  "一手占比下界": 0.8955,
-  "一手占比上界": 0.8955,
+  "一手占比下界": 0.9,
+  "一手占比上界": 0.9,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -394,12 +394,28 @@
       "words": 98409
     },
     {
+      "identifier": "bub_gb_KsNVAAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Preussen im Bundestag, 1851 bis 1859 : Dokumente der K. Preuss. Bundestags-Gesan",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898; Poschinger, Heinrich, Ritter von, 1845-191",
+      "words": 81177
+    },
+    {
       "identifier": "bub_gb_NjNDAQAAMAAJ",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
       "title": "Bismarck-Portefeuille",
       "creator": "Bismarck, Otto, Fürst von, 1815-1898; Poschinger, Heinrich, Ritter von, 1845-191",
       "words": 197523
+    },
+    {
+      "identifier": "bub_gb_akpzLZLxvP4C",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Rede des reichskanzlers fürsten Bismarck über das bündniss zwischen Deutschland ",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 12223
     },
     {
       "identifier": "cihm_77460",
@@ -528,6 +544,14 @@
       "title": "The love letters of Bismarck; being letters to his fiancée and wife, 1846-1889;",
       "creator": "Bismarck, Otto, Fürst von, 1815-1898; Bismarck, Johanna von Puttkamer, Fürstin v",
       "words": 138416
+    },
+    {
+      "identifier": "preussenimbunde00poscgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Preussen im Bundestag, 1851 bis 1859 : Dokumente der K. Preuss. Bundestags-Gesan",
+      "creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "words": 249177
     },
     {
       "identifier": "professionalrec00liargoog",

@@ -1,13 +1,13 @@
 {
-  "lanes": 4,
-  "去掉纸面道后": 4,
+  "lanes": 5,
+  "去掉纸面道后": 5,
   "逐道份数": {
-    "writings": 53,
+    "writings": 62,
     "conversations": 14,
-    "expression": 0,
+    "expression": 10,
     "decisions": 0,
     "timeline": 6,
-    "external": 13
+    "external": 14
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -16,6 +16,11 @@
       "identifier": "10066336bsb",
       "道": "writings",
       "title": "J. J. Rousseau's Bekenntnisse: Geschichte seines männlichen Alters. Au"
+    },
+    {
+      "identifier": "10097325bsb",
+      "道": "writings",
+      "title": "Oeuvres complettes: [Theatre et Poésies]"
     },
     {
       "identifier": "10599347bsb",
@@ -108,6 +113,11 @@
       "title": "Emilius and Sophia; or, A new system of education"
     },
     {
+      "identifier": "A029103",
+      "道": "writings",
+      "title": "Contrat Social, ou Principes du droit politique : avec les considérati"
+    },
+    {
       "identifier": "BIUSante_07891x01",
       "道": "timeline",
       "title": "Collections complètes des oeuvres de J.J. Rousseau, Citoyen de Genève "
@@ -116,6 +126,11 @@
       "identifier": "a1758jjrousseauci00rous",
       "道": "writings",
       "title": "J.J. Rousseau citoyen de Genève dans le VIIme. volume de l'Encyclopédi"
+    },
+    {
+      "identifier": "aa1758jjrousseau00rous",
+      "道": "writings",
+      "title": "J.J. Rousseau citoyen de Genève, a Mr. d'Alembert ... Sur son article "
     },
     {
       "identifier": "amileoudeldu01rous",
@@ -171,6 +186,21 @@
       "identifier": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1796",
       "道": "conversations",
       "title": "[Botanique. English]. Letters on the elements of botany, addressed to "
+    },
+    {
+      "identifier": "bim_eighteenth-century_considrations-sur-le-go_rousseau-jean-jacques_1782",
+      "道": "writings",
+      "title": "Considérations sur le gouvernement de Pologne, et sur sa réformation p"
+    },
+    {
+      "identifier": "bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782",
+      "道": "expression",
+      "title": "Discours sur l'origine et les fondemens de l'inégalité parmi les homme"
+    },
+    {
+      "identifier": "bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782_0",
+      "道": "expression",
+      "title": "Discours sur l'origine et les fondemens de l'inégalité parmi les homme"
     },
     {
       "identifier": "bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_1",
@@ -238,6 +268,11 @@
       "title": "Œuvres complètes"
     },
     {
+      "identifier": "chepfl-lipr-AXA226",
+      "道": "writings",
+      "title": "Projet concernant de nouveaux signes pour la musique"
+    },
+    {
       "identifier": "collectioncompl31rousgoog",
       "道": "writings",
       "title": "Collection complète des œuvres de J.J. Rousseau"
@@ -283,6 +318,11 @@
       "title": "Confessions of J. J. Rousseau, the - Complete"
     },
     {
+      "identifier": "contratsocialou00rous",
+      "道": "expression",
+      "title": "Contrat social, ou, Principes du droit politique, précédé de discours,"
+    },
+    {
       "identifier": "cu31924014398154",
       "道": "writings",
       "title": "Famous Utopias; being the complete text of Rousseau's social contract;"
@@ -303,14 +343,49 @@
       "title": "The life of Thomas Paine; mover of the \"Declaration of independence;\" "
     },
     {
+      "identifier": "ddiscourssurlori00rous",
+      "道": "expression",
+      "title": "Discours sur l'origine et les fondemens de l'inégalité parmi les homme"
+    },
+    {
       "identifier": "dictionnairedemu02rous",
       "道": "writings",
       "title": "Dictionnaire de musique"
     },
     {
+      "identifier": "discourssurlor00rous",
+      "道": "expression",
+      "title": "Discours sur l'origine & les fondements de l'inégalité parmi les homme"
+    },
+    {
+      "identifier": "discourssurlori00rous",
+      "道": "expression",
+      "title": "Discours sur l'origine, et les fondemens de l'inégalité parmi les homm"
+    },
+    {
+      "identifier": "discourssurlori01rousgoog",
+      "道": "expression",
+      "title": "Discours sur l'origine & les fondements de l'inégalité parmi les hom"
+    },
+    {
+      "identifier": "discourssurlorig0000rous_m0u7",
+      "道": "expression",
+      "title": "Discours sur l'origine et les fondements de l'inégalité parmi les ho"
+    },
+    {
+      "identifier": "discourssurlorig00rous_0",
+      "道": "expression",
+      "title": "Discours sur l'origine et les fondemens de l'inegalité parmi les homme"
+    },
+    {
       "identifier": "ducontractsocia00rousgoog",
       "道": "writings",
       "title": "Du contract social, ou, Principes du droit politique"
+    },
+    {
+      "identifier": "ducontratsocialo02rous",
+      "道": "writings",
+      "title": "Du contrat social, ou, Principes du droit politique, suivi des Considé"
     },
     {
       "identifier": "eloisaoraseries01rousgoog",
@@ -321,6 +396,16 @@
       "identifier": "espritmaximesetp00rous",
       "道": "writings",
       "title": "Esprit, maximes, et principes /"
+    },
+    {
+      "identifier": "extraitduprojet00sain",
+      "道": "writings",
+      "title": "Extrait du Projet de paix perpétuelle de Monsieur l'abbé de Saint-Pier"
+    },
+    {
+      "identifier": "extraitduprojetd00sain",
+      "道": "writings",
+      "title": "Extrait du Projet de paix perpétuelle de Monsieur l'abbé de Saint-Pier"
     },
     {
       "identifier": "frenchenglishphi34desc",
@@ -348,6 +433,11 @@
       "title": "Jean-Jacques Rousseau et les origines du cosmopolitisme littéraire : é"
     },
     {
+      "identifier": "jjrousseaucitoy00rous",
+      "道": "writings",
+      "title": "J.J. Rousseau citoyen de Genève, a Mr. d'Alembert ... Sur son article "
+    },
+    {
       "identifier": "memorial00unit",
       "道": "external",
       "title": "Memorial addresses on the life and character of Rousseau O. Crump (lat"
@@ -356,6 +446,16 @@
       "identifier": "mileoudelducatio00rous",
       "道": "writings",
       "title": "Émile, ou, De l'éducation"
+    },
+    {
+      "identifier": "ninonlenclosmrsu00lenc",
+      "道": "external",
+      "title": "Ninon Lenclos a Mr. SuarD, de l'Académie Française, auteur d'un mémoir"
+    },
+    {
+      "identifier": "observationsdeje00rous",
+      "道": "expression",
+      "title": "Observations de Jean-Jacques Rousseau de Geneve. Sur la réponse qui a "
     },
     {
       "identifier": "oeuvrescomplt05rous",

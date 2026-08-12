@@ -1,12 +1,12 @@
 {
-  "总数": 86,
+  "总数": 106,
   "计数": {
-    "一手": 73,
-    "二手": 13,
+    "一手": 92,
+    "二手": 14,
     "需人判": 0
   },
-  "一手占比下界": 0.8488,
-  "一手占比上界": 0.8488,
+  "一手占比下界": 0.8679,
+  "一手占比上界": 0.8679,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -16,6 +16,14 @@
       "title": "J. J. Rousseau's Bekenntnisse: Geschichte seines männlichen Alters. Aus dem Fran",
       "creator": "Rousseau, Jean-Jacques",
       "words": 68441
+    },
+    {
+      "identifier": "10097325bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres complettes: [Theatre et Poésies]",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 60671
     },
     {
       "identifier": "10599347bsb",
@@ -162,6 +170,14 @@
       "words": 81485
     },
     {
+      "identifier": "A029103",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Contrat Social, ou Principes du droit politique : avec les considérations sur le",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778; Degault, J. m.; Dumesnil, Pierre, Veuve",
+      "words": 88115
+    },
+    {
       "identifier": "BIUSante_07891x01",
       "档": "一手",
       "依据": "题名含自述体标记「confessions」且目标为第一作者",
@@ -176,6 +192,14 @@
       "title": "J.J. Rousseau citoyen de Genève dans le VIIme. volume de l'Encyclopédie, et part",
       "creator": "Rousseau, Jean-Jacques, 1712-1778; Alembert, Jean Le Rond d', 1717-1783",
       "words": 56637
+    },
+    {
+      "identifier": "aa1758jjrousseau00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "J.J. Rousseau citoyen de Genève, a Mr. d'Alembert ... Sur son article Genève dan",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778; Alembert, Jean Le Rond d', 1717-1783",
+      "words": 58414
     },
     {
       "identifier": "amileoudeldu01rous",
@@ -264,6 +288,30 @@
       "title": "[Botanique. English]. Letters on the elements of botany, addressed to a lady, by",
       "creator": "Rousseau, Jean-Jacques.",
       "words": 154248
+    },
+    {
+      "identifier": "bim_eighteenth-century_considrations-sur-le-go_rousseau-jean-jacques_1782",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Considérations sur le gouvernement de Pologne, et sur sa réformation projettée. ",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 53600
+    },
+    {
+      "identifier": "bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Discours sur l'origine et les fondemens de l'inégalité parmi les hommes, par J.J",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 55746
+    },
+    {
+      "identifier": "bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Discours sur l'origine et les fondemens de l'inégalité parmi les hommes, par J. ",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 52418
     },
     {
       "identifier": "bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_1",
@@ -370,6 +418,14 @@
       "words": 402847
     },
     {
+      "identifier": "chepfl-lipr-AXA226",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Projet concernant de nouveaux signes pour la musique",
+      "creator": "Rousseau, Jean-Jacques",
+      "words": 124441
+    },
+    {
       "identifier": "collectioncompl31rousgoog",
       "档": "一手",
       "依据": "目标为第一作者，题名含「[oœ]uvres」",
@@ -442,6 +498,14 @@
       "words": 278347
     },
     {
+      "identifier": "contratsocialou00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Contrat social, ou, Principes du droit politique, précédé de discours, Lettre a ",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 231989
+    },
+    {
       "identifier": "cu31924014398154",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
@@ -474,6 +538,14 @@
       "words": 47260
     },
     {
+      "identifier": "ddiscourssurlori00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Discours sur l'origine et les fondemens de l'inégalité parmi les hommes",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 50071
+    },
+    {
       "identifier": "dictionnairedemu02rous",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
@@ -482,12 +554,60 @@
       "words": 97360
     },
     {
+      "identifier": "discourssurlor00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Discours sur l'origine & les fondements de l'inégalité parmi les hommes",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 51355
+    },
+    {
+      "identifier": "discourssurlori00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Discours sur l'origine, et les fondemens de l'inégalité parmi les hommes",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 50491
+    },
+    {
+      "identifier": "discourssurlori01rousgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Discours sur l'origine & les fondements de l'inégalité parmi les hommes:",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 50838
+    },
+    {
+      "identifier": "discourssurlorig0000rous_m0u7",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Discours sur l'origine et les fondements de l'inégalité parmi les hommes",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 63641
+    },
+    {
+      "identifier": "discourssurlorig00rous_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Discours sur l'origine et les fondemens de l'inegalité parmi les hommes.",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 50577
+    },
+    {
       "identifier": "ducontractsocia00rousgoog",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
       "title": "Du contract social, ou, Principes du droit politique",
       "creator": "Rousseau, Jean-Jacques, 1712-1778",
       "words": 47210
+    },
+    {
+      "identifier": "ducontratsocialo02rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Du contrat social, ou, Principes du droit politique, suivi des Considérations su",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778; Rousseau, Jean-Jacques, 1712-1778. Considérat",
+      "words": 85600
     },
     {
       "identifier": "eloisaoraseries01rousgoog",
@@ -504,6 +624,22 @@
       "title": "Esprit, maximes, et principes /",
       "creator": "Rousseau, Jean-Jacques, 1712-1778",
       "words": 93559
+    },
+    {
+      "identifier": "extraitduprojet00sain",
+      "档": "一手",
+      "依据": "【人裁】《Extrait du Projet de paix perpétuelle de M. l'abbé de Saint-Pierre》(1761) **是卢梭自己写的摘要与评注**，收在他的全集里。IA 把 Saint-Pierre 排第一，是因为被摘的原著是他的——**这与「藏书主」「传主」不同**：这份文本的作者是卢梭。",
+      "title": "Extrait du Projet de paix perpétuelle de Monsieur l'abbé de Saint-Pierre",
+      "creator": "Saint-Pierre, Charles Irénée Castel de, 1658-1743; Rousseau, Jean-Jacques, 1712-",
+      "words": 12639
+    },
+    {
+      "identifier": "extraitduprojetd00sain",
+      "档": "一手",
+      "依据": "【人裁】《Extrait du Projet de paix perpétuelle de M. l'abbé de Saint-Pierre》(1761) **是卢梭自己写的摘要与评注**，收在他的全集里。IA 把 Saint-Pierre 排第一，是因为被摘的原著是他的——**这与「藏书主」「传主」不同**：这份文本的作者是卢梭。",
+      "title": "Extrait du Projet de paix perpétuelle de Monsieur l'abbé de Saint-Pierre",
+      "creator": "Saint-Pierre, Charles Irénée Castel de, 1658-1743; Rousseau, Jean-Jacques, 1712-",
+      "words": 11717
     },
     {
       "identifier": "frenchenglishphi34desc",
@@ -546,6 +682,14 @@
       "words": 148049
     },
     {
+      "identifier": "jjrousseaucitoy00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "J.J. Rousseau citoyen de Genève, a Mr. d'Alembert ... Sur son article Genève dan",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778; Alembert, Jean Le Rond d', 1717-1783",
+      "words": 71873
+    },
+    {
       "identifier": "memorial00unit",
       "档": "二手",
       "依据": "目标不在 creator 字段里",
@@ -560,6 +704,22 @@
       "title": "Émile, ou, De l'éducation",
       "creator": "Rousseau, Jean-Jacques, 1712-1778",
       "words": 334178
+    },
+    {
+      "identifier": "ninonlenclosmrsu00lenc",
+      "档": "二手",
+      "依据": "【人裁】Ninon de Lenclos（**1620–1705，卒于卢梭出生前 7 年**）名下的讽刺文，卢梭排第 2。年代上他不可能是作者。",
+      "title": "Ninon Lenclos a Mr. SuarD, de l'Académie Française, auteur d'un mémoire signé Le",
+      "creator": "Lenclos, Ninon de, 1620-1705; Rousseau, Jean-Jacques, 1712-1778; Suard, J. B. A.",
+      "words": 4764
+    },
+    {
+      "identifier": "observationsdeje00rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「discours」",
+      "title": "Observations de Jean-Jacques Rousseau de Geneve. Sur la réponse qui a été faite ",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 10020
     },
     {
       "identifier": "oeuvrescomplt05rous",

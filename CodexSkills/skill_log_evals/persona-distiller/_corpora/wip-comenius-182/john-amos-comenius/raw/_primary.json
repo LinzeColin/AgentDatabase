@@ -1,12 +1,12 @@
 {
-  "总数": 73,
+  "总数": 83,
   "计数": {
-    "一手": 71,
-    "二手": 2,
+    "一手": 72,
+    "二手": 11,
     "需人判": 0
   },
-  "一手占比下界": 0.9726,
-  "一手占比上界": 0.9726,
+  "一手占比下界": 0.8675,
+  "一手占比上界": 0.8675,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -370,6 +370,14 @@
       "words": 45904
     },
     {
+      "identifier": "bub_gb_HAI2AAAAIAAJ",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Johann Amos Comenius, sein Leben und Wirken",
+      "creator": "Gustav Adolf Lindner",
+      "words": 38804
+    },
+    {
       "identifier": "bub_gb_HiRbAAAAcAAJ",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
@@ -394,6 +402,14 @@
       "words": 213312
     },
     {
+      "identifier": "bub_gb_MWcM-4kItEAC",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und seine bedeu",
+      "creator": "Kerrl, Th",
+      "words": 30401
+    },
+    {
       "identifier": "bub_gb_MrNBAAAAYAAJ",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
@@ -408,6 +424,14 @@
       "title": "Korrespondence. Listy Komenského a vrstevníků jeho",
       "creator": "Comenius, Johann Amos, 1592-1670; Kvačala, Jan, 1862-1934",
       "words": 107207
+    },
+    {
+      "identifier": "bub_gb_Up_239je-xMC",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Johann Amos Comenius. Sein Leben und seine Schriften",
+      "creator": "Kvačala, Jan, 1862-1934",
+      "words": 199936
     },
     {
       "identifier": "bub_gb_WGNcAAAAcAAJ",
@@ -530,12 +554,68 @@
       "words": 34505
     },
     {
+      "identifier": "johannamoscomen00kerrgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und seine bedeu",
+      "creator": "Kerrl, Th",
+      "words": 32179
+    },
+    {
+      "identifier": "johannamoscomen00kvagoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Johann Amos Comenius. Sein Leben und seine Schriften",
+      "creator": "Kvačala, Jan, 1862-1934",
+      "words": 209595
+    },
+    {
+      "identifier": "johannamoscomen01kerrgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und seine bedeu",
+      "creator": "Kerrl, Th",
+      "words": 29346
+    },
+    {
+      "identifier": "johannamoscomen02kerrgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und seine bedeu",
+      "creator": "Kerrl, Th",
+      "words": 30911
+    },
+    {
+      "identifier": "johannamoscomen03kerrgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und seine bedeu",
+      "creator": "Kerrl, Th",
+      "words": 26240
+    },
+    {
       "identifier": "labyrinthofworld00comeuoft",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
       "title": "The labyrinth of the world and the paradise of the heart",
       "creator": "Comenius, Johann Amos, 1592-1670",
       "words": 80959
+    },
+    {
+      "identifier": "lebenundschicks00vrbkgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Leben und Schicksale des Johann Amos Comenius",
+      "creator": "Antonín Vrbka",
+      "words": 57177
+    },
+    {
+      "identifier": "ned-kbn-all-00004319-002",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Unum necessarium, scire quid sibi sit necessarium, in vita, et morte et post mor",
+      "creator": "Comenius, J. A. (Johann Amos)",
+      "words": 25160
     },
     {
       "identifier": "obrazjednotyesko00lasi",

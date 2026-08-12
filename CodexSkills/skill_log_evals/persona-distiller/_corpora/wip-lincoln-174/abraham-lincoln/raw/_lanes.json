@@ -1,12 +1,12 @@
 {
-  "lanes": 5,
+  "lanes": 6,
   "去掉纸面道后": 5,
   "逐道份数": {
-    "writings": 45,
-    "conversations": 10,
+    "writings": 44,
+    "conversations": 7,
     "expression": 11,
-    "decisions": 2,
-    "timeline": 0,
+    "decisions": 5,
+    "timeline": 1,
     "external": 2
   },
   "未分道": 0,
@@ -54,7 +54,7 @@
     },
     {
       "identifier": "completeworkscov1linc",
-      "道": "conversations",
+      "道": "decisions",
       "title": "Complete works : comprising his speeches, letters, state papers, and m"
     },
     {
@@ -189,7 +189,7 @@
     },
     {
       "identifier": "cu31924103069070",
-      "道": "conversations",
+      "道": "decisions",
       "title": "Abraham Lincoln; complete works, comprising his speeches, letters, sta"
     },
     {
@@ -254,7 +254,7 @@
     },
     {
       "identifier": "india.history.resource.111513",
-      "道": "conversations",
+      "道": "decisions",
       "title": "Abraham Lincoln: Complete Works, comprising his Speeches, Letters, Sta"
     },
     {
@@ -359,7 +359,7 @@
     },
     {
       "identifier": "wsb18f36_images",
-      "道": "writings",
+      "道": "timeline",
       "title": "In Memoriam to Abraham Lincoln"
     }
   ]

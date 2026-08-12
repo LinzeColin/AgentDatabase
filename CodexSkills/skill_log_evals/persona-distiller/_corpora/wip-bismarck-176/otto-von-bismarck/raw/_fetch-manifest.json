@@ -1,11 +1,11 @@
 {
-  "生成时刻": "2026-08-12T13:22:16",
-  "请求数": 41,
-  "已取回": 67,
+  "生成时刻": "2026-08-12T13:59:33",
+  "请求数": 3,
+  "已取回": 70,
   "skipped_access_restricted": 0,
   "失败": 3,
   "并发降级": "无（全程并发 4）",
-  "总词数": 9352129,
+  "总词数": 9694706,
   "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
   "记录": [
     {
@@ -1285,6 +1285,35 @@
       ]
     },
     {
+      "identifier": "bub_gb_KsNVAAAAYAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_KsNVAAAAYAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_KsNVAAAAYAAJ/bub_gb_KsNVAAAAYAAJ_djvu.txt",
+      "sha256": "4e9f21cba8c8b814ae64fa8e5ec84a04a89652d457de732fb929a7ec6de6ea3f",
+      "bytes": 608419,
+      "words": 81177,
+      "fetched_at": "2026-08-12T13:59:31",
+      "ia_date": "1882",
+      "ia_year": "1884",
+      "ia_publicdate": "2015-01-30 23:45:01",
+      "ia_creator": [
+        "Bismarck, Otto, Fürst von, 1815-1898",
+        "Poschinger, Heinrich, Ritter von, 1845-1911"
+      ],
+      "ia_title": "Preussen im Bundestag, 1851 bis 1859 : Dokumente der K. Preuss. Bundestags-Gesandtschaft",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1850",
+        "1851",
+        "1853",
+        "1854",
+        "1859",
+        "1864",
+        "1884"
+      ]
+    },
+    {
       "identifier": "bub_gb_NjNDAQAAMAAJ",
       "status": "已取回",
       "note": "",
@@ -1316,6 +1345,35 @@
         "1883",
         "1884",
         "1885"
+      ]
+    },
+    {
+      "identifier": "bub_gb_akpzLZLxvP4C",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_akpzLZLxvP4C.txt",
+      "source_url": "https://archive.org/download/bub_gb_akpzLZLxvP4C/bub_gb_akpzLZLxvP4C_djvu.txt",
+      "sha256": "df2392e49517bd8332bac60379fe4401eb3fcdf86690768742f78822825bba62",
+      "bytes": 86237,
+      "words": 12223,
+      "fetched_at": "2026-08-12T13:59:30",
+      "ia_date": "1888",
+      "ia_year": "1888",
+      "ia_publicdate": "2015-02-05 07:23:11",
+      "ia_creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "ia_title": "Rede des reichskanzlers fürsten Bismarck über das bündniss zwischen Deutschland und Oesterreich-Ungara vom 7. Oktober 1879. (Nach dem amtlichen stenographischen bericht über die Reichstags-verhandlung am 6. Februar 1888.) Mit einem anhange, den text des vertrages enthaltend. (Nach dem \"Reichs- und staats-anzeiger\" vom 3. Februar 1888.)",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1809",
+        "1828",
+        "1830",
+        "1854",
+        "1867",
+        "1877",
+        "1879",
+        "1882",
+        "1888",
+        "1899"
       ]
     },
     {
@@ -1770,6 +1828,31 @@
         "1888",
         "1889",
         "1900"
+      ]
+    },
+    {
+      "identifier": "preussenimbunde00poscgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "preussenimbunde00poscgoog.txt",
+      "source_url": "https://archive.org/download/preussenimbunde00poscgoog/preussenimbunde00poscgoog_djvu.txt",
+      "sha256": "2f8b247e4d1123e72c1750edee70d4047fdd73b520ff1c177d38e67b9d1ec518",
+      "bytes": 2116766,
+      "words": 249177,
+      "fetched_at": "2026-08-12T13:59:33",
+      "ia_date": "1882",
+      "ia_year": "1882",
+      "ia_publicdate": "2009-07-06 16:48:42",
+      "ia_creator": "Bismarck, Otto, Fürst von, 1815-1898",
+      "ia_title": "Preussen im Bundestag, 1851 bis 1859 : Dokumente der K. Preuss. Bundestags-Gesandtschaft",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1851",
+        "1856",
+        "1859",
+        "1866",
+        "1869",
+        "1882"
       ]
     },
     {

@@ -7,7 +7,7 @@
     "expression": 1,
     "decisions": 12,
     "timeline": 0,
-    "external": 12
+    "external": 22
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -48,6 +48,11 @@
       "title": "The life of John Marshall"
     },
     {
+      "identifier": "centennialanniv00schogoog",
+      "道": "external",
+      "title": "The centennial anniversary of the elevation of John Marshall to the of"
+    },
+    {
       "identifier": "completeconstitu00marsuoft",
       "道": "decisions",
       "title": "Complete constitutional decisions;"
@@ -71,6 +76,11 @@
       "identifier": "cu31924019413545",
       "道": "external",
       "title": "The life of John Marshall "
+    },
+    {
+      "identifier": "cu31924020889543",
+      "道": "external",
+      "title": "John Marshall : life, character and judicial services as portrayed in "
     },
     {
       "identifier": "cu31924024323069",
@@ -133,6 +143,11 @@
       "title": "The Life of George Washington, in Five Volumes, Vol. V"
     },
     {
+      "identifier": "johnmarshalland01corwgoog",
+      "道": "external",
+      "title": "John Marshall and the Constitution; a chronicle of the Supreme court"
+    },
+    {
       "identifier": "johnmarshallcom00dillgoog",
       "道": "decisions",
       "title": "John Marshall, complete constitutional decisions, ed. with annotations"
@@ -148,9 +163,34 @@
       "title": "John Marshall, complete constitutional decisions"
     },
     {
+      "identifier": "johnmarshallcons00corwuoft",
+      "道": "external",
+      "title": "John Marshall and the Constitution : a chronicle of the Supreme Court"
+    },
+    {
       "identifier": "johnmarshalllif03dillgoog",
       "道": "external",
       "title": "John Marshall; life, character and judicial services as portrayed in t"
+    },
+    {
+      "identifier": "johnmarshalllif04dillgoog",
+      "道": "external",
+      "title": "John Marshall; life, character and judicial services as portrayed in t"
+    },
+    {
+      "identifier": "johnmarshalllif07dillgoog",
+      "道": "external",
+      "title": "John Marshall; life, character and judicial services as portrayed in t"
+    },
+    {
+      "identifier": "johnmarshalllife01dillrich",
+      "道": "external",
+      "title": "John Marshall : life, character and judicial services as portrayed in "
+    },
+    {
+      "identifier": "johnmarshalllife02dilluoft",
+      "道": "external",
+      "title": "John Marshall, life, character and judicial services, as portrayed in "
     },
     {
       "identifier": "johnmarshallnewintro00marsrich",
@@ -401,6 +441,16 @@
       "identifier": "politicaleconomi00marsrich",
       "道": "conversations",
       "title": "The political and economic doctrines of John Marshall, who for thirty-"
+    },
+    {
+      "identifier": "proceedingsloui00assogoog",
+      "道": "external",
+      "title": "Proceedings of the Louisville Bar Association, John Marshall day, Loui"
+    },
+    {
+      "identifier": "proceedingsofbar00unit",
+      "道": "external",
+      "title": "Proceedings of the Bar and Officers of the Supreme Court of the United"
     },
     {
       "identifier": "thelifeofgeorgew18591gut",

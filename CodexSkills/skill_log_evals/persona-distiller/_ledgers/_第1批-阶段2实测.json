@@ -1,21 +1,23 @@
 [
   {
     "人": "#173 Marshall",
-    "文件": 85,
-    "独立文献": 57,
-    "一手": 49,
+    "文件": 95,
+    "独立文献": 65,
+    "一手": 50,
     "需人判": 0,
     "道": 5,
-    "去纸面道": 4,
     "逐道": {
       "writings": 56,
       "conversations": 4,
       "expression": 1,
       "decisions": 12,
       "timeline": 0,
-      "external": 12
+      "external": 22
     },
-    "判据给的档": "quick"
+    "判据给的档": "quick",
+    "仍空": [
+      "timeline"
+    ]
   },
   {
     "人": "#174 Lincoln",
@@ -23,89 +25,96 @@
     "独立文献": 47,
     "一手": 46,
     "需人判": 0,
-    "道": 5,
-    "去纸面道": 5,
+    "道": 6,
     "逐道": {
-      "writings": 45,
-      "conversations": 10,
+      "writings": 44,
+      "conversations": 7,
       "expression": 11,
-      "decisions": 2,
-      "timeline": 0,
+      "decisions": 5,
+      "timeline": 1,
       "external": 2
     },
-    "判据给的档": "quick"
+    "判据给的档": "deep",
+    "仍空": []
   },
   {
     "人": "#175 Jefferson",
-    "文件": 68,
-    "独立文献": 54,
-    "一手": 53,
+    "文件": 78,
+    "独立文献": 62,
+    "一手": 55,
     "需人判": 0,
-    "道": 4,
-    "去纸面道": 3,
+    "道": 5,
     "逐道": {
-      "writings": 30,
-      "conversations": 27,
-      "expression": 10,
-      "decisions": 0,
+      "writings": 31,
+      "conversations": 28,
+      "expression": 9,
+      "decisions": 1,
       "timeline": 0,
-      "external": 1
+      "external": 9
     },
-    "判据给的档": "quick"
+    "判据给的档": "quick",
+    "仍空": [
+      "timeline"
+    ]
   },
   {
     "人": "#176 Bismarck",
-    "文件": 67,
-    "独立文献": 63,
-    "一手": 56,
+    "文件": 70,
+    "独立文献": 66,
+    "一手": 59,
     "需人判": 0,
-    "道": 5,
-    "去纸面道": 5,
+    "道": 6,
     "逐道": {
-      "writings": 16,
+      "writings": 18,
       "conversations": 19,
       "expression": 14,
-      "decisions": 0,
+      "decisions": 1,
       "timeline": 11,
       "external": 7
     },
-    "判据给的档": "quick"
+    "判据给的档": "deep",
+    "仍空": []
   },
   {
     "人": "#177 Machiavelli",
-    "文件": 69,
-    "独立文献": 68,
+    "文件": 79,
+    "独立文献": 78,
     "一手": 66,
     "需人判": 0,
     "道": 4,
-    "去纸面道": 4,
     "逐道": {
       "writings": 53,
       "conversations": 4,
       "expression": 10,
       "decisions": 0,
       "timeline": 0,
-      "external": 2
+      "external": 12
     },
-    "判据给的档": "quick"
+    "判据给的档": "quick",
+    "仍空": [
+      "decisions",
+      "timeline"
+    ]
   },
   {
     "人": "#178 Rousseau",
-    "文件": 86,
-    "独立文献": 86,
-    "一手": 73,
-    "需人判": 0,
-    "道": 4,
-    "去纸面道": 4,
+    "文件": 106,
+    "独立文献": 106,
+    "一手": 90,
+    "需人判": 3,
+    "道": 5,
     "逐道": {
-      "writings": 53,
+      "writings": 63,
       "conversations": 14,
-      "expression": 0,
+      "expression": 10,
       "decisions": 0,
       "timeline": 6,
       "external": 13
     },
-    "判据给的档": "quick"
+    "判据给的档": "quick",
+    "仍空": [
+      "decisions"
+    ]
   },
   {
     "人": "#179 Kant",
@@ -113,17 +122,17 @@
     "独立文献": 68,
     "一手": 66,
     "需人判": 0,
-    "道": 5,
-    "去纸面道": 4,
+    "道": 6,
     "逐道": {
-      "writings": 60,
+      "writings": 57,
       "conversations": 3,
       "expression": 3,
       "decisions": 1,
-      "timeline": 0,
+      "timeline": 3,
       "external": 2
     },
-    "判据给的档": "quick"
+    "判据给的档": "deep",
+    "仍空": []
   },
   {
     "人": "#180 Pestalozzi",
@@ -131,17 +140,17 @@
     "独立文献": 66,
     "一手": 65,
     "需人判": 0,
-    "道": 5,
-    "去纸面道": 3,
+    "道": 6,
     "逐道": {
-      "writings": 62,
+      "writings": 61,
       "conversations": 4,
       "expression": 1,
-      "decisions": 0,
+      "decisions": 1,
       "timeline": 2,
       "external": 1
     },
-    "判据给的档": "quick"
+    "判据给的档": "deep",
+    "仍空": []
   },
   {
     "人": "#181 Fröbel",
@@ -150,7 +159,6 @@
     "一手": 25,
     "需人判": 0,
     "道": 5,
-    "去纸面道": 4,
     "逐道": {
       "writings": 33,
       "conversations": 4,
@@ -159,24 +167,32 @@
       "timeline": 7,
       "external": 1
     },
-    "判据给的档": "quick"
+    "判据给的档": "quick",
+    "仍空": [
+      "decisions"
+    ]
   },
   {
     "人": "#182 Comenius",
-    "文件": 73,
-    "独立文献": 73,
-    "一手": 71,
+    "文件": 83,
+    "独立文献": 83,
+    "一手": 72,
     "需人判": 0,
     "道": 2,
-    "去纸面道": 2,
     "逐道": {
-      "writings": 71,
+      "writings": 72,
       "conversations": 0,
       "expression": 0,
       "decisions": 0,
       "timeline": 0,
-      "external": 2
+      "external": 11
     },
-    "判据给的档": "够不着quick"
+    "判据给的档": "够不着quick",
+    "仍空": [
+      "conversations",
+      "expression",
+      "decisions",
+      "timeline"
+    ]
   }
 ]

@@ -1,11 +1,11 @@
 {
-  "lanes": 5,
+  "lanes": 6,
   "去掉纸面道后": 3,
   "逐道份数": {
-    "writings": 62,
+    "writings": 61,
     "conversations": 4,
     "expression": 1,
-    "decisions": 0,
+    "decisions": 1,
     "timeline": 2,
     "external": 1
   },
@@ -174,7 +174,7 @@
     },
     {
       "identifier": "howgertrudeteach00pestuoft",
-      "道": "writings",
+      "道": "decisions",
       "title": "How Gertrude teaches her children : an attempt to help mothers to teac"
     },
     {

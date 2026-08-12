@@ -1,11 +1,11 @@
 {
-  "生成时刻": "2026-08-12T13:53:23",
-  "请求数": 24,
-  "已取回": 86,
+  "生成时刻": "2026-08-12T14:00:38",
+  "请求数": 20,
+  "已取回": 106,
   "skipped_access_restricted": 0,
   "失败": 8,
   "并发降级": "无（全程并发 4）",
-  "总词数": 8556273,
+  "总词数": 9795253,
   "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
   "记录": [
     {
@@ -27,6 +27,27 @@
       "titlepage_years": [
         "1756",
         "1790"
+      ]
+    },
+    {
+      "identifier": "10097325bsb",
+      "status": "已取回",
+      "note": "",
+      "file": "10097325bsb.txt",
+      "source_url": "https://archive.org/download/10097325bsb/10097325bsb_djvu.txt",
+      "sha256": "0614303d6af45dd9eaa96f15ba4ebad630b2deb40fa8a3a087abb7d5a2f98de0",
+      "bytes": 363956,
+      "words": 60671,
+      "fetched_at": "2026-08-12T14:00:04",
+      "ia_date": "1782",
+      "ia_year": "",
+      "ia_publicdate": "2026-02-10 13:39:21",
+      "ia_creator": "Rousseau, Jean-Jacques",
+      "ia_title": "Oeuvres complettes: [Theatre et Poésies]",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1752",
+        "1938"
       ]
     },
     {
@@ -411,6 +432,28 @@
       "titlepage_years": []
     },
     {
+      "identifier": "A029103",
+      "status": "已取回",
+      "note": "",
+      "file": "A029103.txt",
+      "source_url": "https://archive.org/download/A029103/A029103_djvu.txt",
+      "sha256": "b6f6c2257a8b794f330bfa76a95fe7082c7fefb9ce16f6532e23c2b11307552b",
+      "bytes": 594097,
+      "words": 88115,
+      "fetched_at": "2026-08-12T14:00:07",
+      "ia_date": "1792",
+      "ia_year": "",
+      "ia_publicdate": "2017-10-17 13:25:28",
+      "ia_creator": [
+        "Rousseau, Jean-Jacques, 1712-1778",
+        "Degault, J. m.",
+        "Dumesnil, Pierre, Veuve"
+      ],
+      "ia_title": "Contrat Social, ou Principes du droit politique : avec les considérations sur le Gouvernement de Pologne, et sur sa réformation projectée",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": []
+    },
+    {
       "identifier": "BIUSante_07891x01",
       "status": "已取回",
       "note": "",
@@ -459,6 +502,29 @@
         "Alembert, Jean Le Rond d', 1717-1783"
       ],
       "ia_title": "J.J. Rousseau citoyen de Genève dans le VIIme. volume de l'Encyclopédie, et particulierement, sur le projet d'établir un thétre de comédie en cette ville",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "aa1758jjrousseau00rous",
+      "status": "已取回",
+      "note": "",
+      "file": "aa1758jjrousseau00rous.txt",
+      "source_url": "https://archive.org/download/aa1758jjrousseau00rous/aa1758jjrousseau00rous_djvu.txt",
+      "sha256": "e7ebbb5f86d61b964cc43ccc50fcf6cb94c97a9a8ab3e1bbbb39c9811948d169",
+      "bytes": 387443,
+      "words": 58414,
+      "fetched_at": "2026-08-12T14:00:04",
+      "ia_date": "1758",
+      "ia_year": "",
+      "ia_publicdate": "2010-05-17 17:06:07",
+      "ia_creator": [
+        "Rousseau, Jean-Jacques, 1712-1778",
+        "Alembert, Jean Le Rond d', 1717-1783"
+      ],
+      "ia_title": "J.J. Rousseau citoyen de Genève, a Mr. d'Alembert ... Sur son article Genève dans le VIIme. volume de l'Encyclopédie, et particulierement, sur le projet d'établir un théatre de comédie en cette ville",
       "ia_licenseurl": "",
       "titlepage_years": [
         "2010"
@@ -681,6 +747,60 @@
       "ia_publicdate": "2023-09-28 18:00:53",
       "ia_creator": "Rousseau, Jean-Jacques.",
       "ia_title": "[Botanique. English]. Letters on the elements of botany, addressed to a lady, by the celebrated J. J. Rousseau. Translated into English, with notes, and twenty-four additional letters, fully explaining the system of Linnæus, by Thomas Martyn, ...  1796",
+      "ia_licenseurl": "",
+      "titlepage_years": []
+    },
+    {
+      "identifier": "bim_eighteenth-century_considrations-sur-le-go_rousseau-jean-jacques_1782",
+      "status": "已取回",
+      "note": "",
+      "file": "bim_eighteenth-century_considrations-sur-le-go_rousseau-jean-jacques_1782.txt",
+      "source_url": "https://archive.org/download/bim_eighteenth-century_considrations-sur-le-go_rousseau-jean-jacques_1782/bim_eighteenth-century_considrations-sur-le-go_rousseau-jean-jacques_1782_djvu.txt",
+      "sha256": "d7edf5a0f615eafabef73d09a778fba04ed0e8f812334866a0ccfe0b315f8ec9",
+      "bytes": 316806,
+      "words": 53600,
+      "fetched_at": "2026-08-12T14:00:04",
+      "ia_date": "1782",
+      "ia_year": "",
+      "ia_publicdate": "2023-10-21 14:35:53",
+      "ia_creator": "Rousseau, Jean-Jacques",
+      "ia_title": "Considérations sur le gouvernement de Pologne, et sur sa réformation projettée. Par J. J. Rousseau.  1782",
+      "ia_licenseurl": "",
+      "titlepage_years": []
+    },
+    {
+      "identifier": "bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782",
+      "status": "已取回",
+      "note": "",
+      "file": "bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782.txt",
+      "source_url": "https://archive.org/download/bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782/bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782_djvu.txt",
+      "sha256": "e0f9ae7515b8cc2cccb5cd20c2b43020db90b13c22d4b63419a5262d71e3eef1",
+      "bytes": 326947,
+      "words": 55746,
+      "fetched_at": "2026-08-12T14:00:09",
+      "ia_date": "1782",
+      "ia_year": "",
+      "ia_publicdate": "2023-10-16 03:42:28",
+      "ia_creator": "Rousseau, Jean-Jacques",
+      "ia_title": "Discours sur l'origine et les fondemens de l'inégalité parmi les hommes, par J.J. Rousseau, ...  1782",
+      "ia_licenseurl": "",
+      "titlepage_years": []
+    },
+    {
+      "identifier": "bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782_0",
+      "status": "已取回",
+      "note": "",
+      "file": "bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782_0.txt",
+      "source_url": "https://archive.org/download/bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782_0/bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782_0_djvu.txt",
+      "sha256": "1b21ee175a9805fbb3f2330955ca79c0819a00dab7b21bec7e74f9a9e09dade4",
+      "bytes": 304623,
+      "words": 52418,
+      "fetched_at": "2026-08-12T14:00:09",
+      "ia_date": "1782",
+      "ia_year": "",
+      "ia_publicdate": "2023-10-19 06:25:15",
+      "ia_creator": "Rousseau, Jean-Jacques",
+      "ia_title": "Discours sur l'origine et les fondemens de l'inégalité parmi les hommes, par J. J. Rousseau, ...  1782",
       "ia_licenseurl": "",
       "titlepage_years": []
     },
@@ -948,6 +1068,24 @@
       ]
     },
     {
+      "identifier": "chepfl-lipr-AXA226",
+      "status": "已取回",
+      "note": "",
+      "file": "chepfl-lipr-AXA226.txt",
+      "source_url": "https://archive.org/download/chepfl-lipr-AXA226/CHEPFL_LIPR_AXA226_djvu.txt",
+      "sha256": "a1dccf5726b4b2a51fc4880fa4d10f69d12a6d0cba722de4587e93c1bc92b60b",
+      "bytes": 645222,
+      "words": 124441,
+      "fetched_at": "2026-08-12T14:00:09",
+      "ia_date": "1781",
+      "ia_year": "",
+      "ia_publicdate": "2021-04-22 12:53:04",
+      "ia_creator": "Rousseau, Jean-Jacques",
+      "ia_title": "Projet concernant de nouveaux signes pour la musique",
+      "ia_licenseurl": "Public Domain Mark 1.0",
+      "titlepage_years": []
+    },
+    {
       "identifier": "collectioncompl31rousgoog",
       "status": "已取回",
       "note": "",
@@ -1145,6 +1283,27 @@
       ]
     },
     {
+      "identifier": "contratsocialou00rous",
+      "status": "已取回",
+      "note": "",
+      "file": "contratsocialou00rous.txt",
+      "source_url": "https://archive.org/download/contratsocialou00rous/contratsocialou00rous_djvu.txt",
+      "sha256": "9cb87f8a87daee6bf96f262600aa1918e24d49e3bdb4c5c1cb6720f584af54dc",
+      "bytes": 1617989,
+      "words": 231989,
+      "fetched_at": "2026-08-12T14:00:12",
+      "ia_date": "1867",
+      "ia_year": "",
+      "ia_publicdate": "2010-08-10 18:47:41",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Contrat social, ou, Principes du droit politique, précédé de discours, Lettre a d'Alembert sur les spectacles, et suivi de Considérations sur le gouvernement de Pologne et la réforme projetée en Avril 1772; Lettre a M. de Beaumont, archeveque de Paris, etc., etc.",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1712",
+        "2010"
+      ]
+    },
+    {
       "identifier": "cu31924014398154",
       "status": "已取回",
       "note": "",
@@ -1270,6 +1429,24 @@
       ]
     },
     {
+      "identifier": "ddiscourssurlori00rous",
+      "status": "已取回",
+      "note": "",
+      "file": "ddiscourssurlori00rous.txt",
+      "source_url": "https://archive.org/download/ddiscourssurlori00rous/ddiscourssurlori00rous_djvu.txt",
+      "sha256": "aaf22cfd258fb985c05e2c9f840c7ba8d9851cdc1d633860e4015bca639c4906",
+      "bytes": 328696,
+      "words": 50071,
+      "fetched_at": "2026-08-12T14:00:14",
+      "ia_date": "1755",
+      "ia_year": "",
+      "ia_publicdate": "2010-08-10 18:15:36",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Discours sur l'origine et les fondemens de l'inégalité parmi les hommes",
+      "ia_licenseurl": "",
+      "titlepage_years": []
+    },
+    {
       "identifier": "dictionnairedemu02rous",
       "status": "已取回",
       "note": "",
@@ -1287,6 +1464,113 @@
         "Rousseau, Jean-Jacques, 1712-1778. Devin du village. Selections"
       ],
       "ia_title": "Dictionnaire de musique",
+      "ia_licenseurl": "",
+      "titlepage_years": []
+    },
+    {
+      "identifier": "discourssurlor00rous",
+      "status": "已取回",
+      "note": "",
+      "file": "discourssurlor00rous.txt",
+      "source_url": "https://archive.org/download/discourssurlor00rous/discourssurlor00rous_djvu.txt",
+      "sha256": "78d329fb5da126f64afcaf80cfc0cb45a4b45508fde843470bb14acfddb42069",
+      "bytes": 335520,
+      "words": 51355,
+      "fetched_at": "2026-08-12T14:00:15",
+      "ia_date": "1755",
+      "ia_year": "",
+      "ia_publicdate": "2010-08-10 18:05:37",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Discours sur l'origine & les fondements de l'inégalité parmi les hommes",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "discourssurlori00rous",
+      "status": "已取回",
+      "note": "",
+      "file": "discourssurlori00rous.txt",
+      "source_url": "https://archive.org/download/discourssurlori00rous/discourssurlori00rous_djvu.txt",
+      "sha256": "7de63f6c8842240607bf2a74dcd54b94fef53eb0b2b69ecb8ac54c1f15afe970",
+      "bytes": 332893,
+      "words": 50491,
+      "fetched_at": "2026-08-12T14:00:17",
+      "ia_date": "1755",
+      "ia_year": "",
+      "ia_publicdate": "2010-08-10 17:58:53",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Discours sur l'origine, et les fondemens de l'inégalité parmi les hommes",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "discourssurlori01rousgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "discourssurlori01rousgoog.txt",
+      "source_url": "https://archive.org/download/discourssurlori01rousgoog/discourssurlori01rousgoog_djvu.txt",
+      "sha256": "429979edb42ee9b6504cb8cdad5dff2ecdf51a467d967b07e26786a8fc591b2f",
+      "bytes": 344767,
+      "words": 50838,
+      "fetched_at": "2026-08-12T14:00:23",
+      "ia_date": "1755",
+      "ia_year": "1755",
+      "ia_publicdate": "2009-02-09 02:12:39",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Discours sur l'origine & les fondements de l'inégalité parmi les hommes:",
+      "ia_licenseurl": "",
+      "titlepage_years": []
+    },
+    {
+      "identifier": "discourssurlorig0000rous_m0u7",
+      "status": "已取回",
+      "note": "",
+      "file": "discourssurlorig0000rous_m0u7.txt",
+      "source_url": "https://archive.org/download/discourssurlorig0000rous_m0u7/discourssurlorig0000rous_m0u7_djvu.txt",
+      "sha256": "b906684c3a8f546db2f636cbf26b2d58a32955a163098792f6b066325ba6b18a",
+      "bytes": 398291,
+      "words": 63641,
+      "fetched_at": "2026-08-12T14:00:19",
+      "ia_date": "1922",
+      "ia_year": "",
+      "ia_publicdate": "2026-06-01 09:17:52",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Discours sur l'origine et les fondements de l'inégalité parmi les hommes",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1672",
+        "1673",
+        "1700",
+        "1711",
+        "1712",
+        "1713",
+        "1717",
+        "1722",
+        "1728",
+        "1732",
+        "1741",
+        "1745"
+      ]
+    },
+    {
+      "identifier": "discourssurlorig00rous_0",
+      "status": "已取回",
+      "note": "",
+      "file": "discourssurlorig00rous_0.txt",
+      "source_url": "https://archive.org/download/discourssurlorig00rous_0/discourssurlorig00rous_0_djvu.txt",
+      "sha256": "2173747b3a01f74defe807faf447ba0193566fb856278342d356a96f8a29f1f6",
+      "bytes": 342664,
+      "words": 50577,
+      "fetched_at": "2026-08-12T14:00:26",
+      "ia_date": "1755",
+      "ia_year": "",
+      "ia_publicdate": "2017-11-03 14:23:41",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Discours sur l'origine et les fondemens de l'inegalité parmi les hommes.",
       "ia_licenseurl": "",
       "titlepage_years": []
     },
@@ -1310,6 +1594,28 @@
         "1762",
         "1987"
       ]
+    },
+    {
+      "identifier": "ducontratsocialo02rous",
+      "status": "已取回",
+      "note": "",
+      "file": "ducontratsocialo02rous.txt",
+      "source_url": "https://archive.org/download/ducontratsocialo02rous/ducontratsocialo02rous_djvu.txt",
+      "sha256": "813765779d1f4ecccc5ff4974af08bcb255fd6dfc076a87ee0aefcef5d039288",
+      "bytes": 579211,
+      "words": 85600,
+      "fetched_at": "2026-08-12T14:00:22",
+      "ia_date": "1791",
+      "ia_year": "",
+      "ia_publicdate": "2010-08-10 14:51:00",
+      "ia_creator": [
+        "Rousseau, Jean-Jacques, 1712-1778",
+        "Rousseau, Jean-Jacques, 1712-1778. Considérations sur le gouvernement de Pologne",
+        "Dagassan, H. (bookplate)"
+      ],
+      "ia_title": "Du contrat social, ou, Principes du droit politique, suivi des Considérations sur le gouvernement de Pologne, et sur sa réformation projettée",
+      "ia_licenseurl": "",
+      "titlepage_years": []
     },
     {
       "identifier": "eloisaendshabil00mattgoog",
@@ -1373,6 +1679,53 @@
       "titlepage_years": [
         "1708",
         "1752"
+      ]
+    },
+    {
+      "identifier": "extraitduprojet00sain",
+      "status": "已取回",
+      "note": "",
+      "file": "extraitduprojet00sain.txt",
+      "source_url": "https://archive.org/download/extraitduprojet00sain/extraitduprojet00sain_djvu.txt",
+      "sha256": "959e8b14de187abd559b5ca6bc916dd99e05bbf4534087e6c5655c0273cf9971",
+      "bytes": 83929,
+      "words": 12639,
+      "fetched_at": "2026-08-12T14:00:24",
+      "ia_date": "1761",
+      "ia_year": "",
+      "ia_publicdate": "2010-08-24 15:57:42",
+      "ia_creator": [
+        "Saint-Pierre, Charles Irénée Castel de, 1658-1743",
+        "Rousseau, Jean-Jacques, 1712-1778"
+      ],
+      "ia_title": "Extrait du Projet de paix perpétuelle de Monsieur l'abbé de Saint-Pierre",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "extraitduprojetd00sain",
+      "status": "已取回",
+      "note": "",
+      "file": "extraitduprojetd00sain.txt",
+      "source_url": "https://archive.org/download/extraitduprojetd00sain/extraitduprojetd00sain_djvu.txt",
+      "sha256": "212bd671b070f63b810c1ac541f6dd194da466a1e8048022e57891593e3cc6ba",
+      "bytes": 80419,
+      "words": 11717,
+      "fetched_at": "2026-08-12T14:00:27",
+      "ia_date": "1761",
+      "ia_year": "",
+      "ia_publicdate": "2010-08-24 15:20:07",
+      "ia_creator": [
+        "Saint-Pierre, Charles Irénée Castel de, 1658-1743",
+        "Rousseau, Jean-Jacques, 1712-1778"
+      ],
+      "ia_title": "Extrait du Projet de paix perpétuelle de Monsieur l'abbé de Saint-Pierre",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1760",
+        "2010"
       ]
     },
     {
@@ -1518,6 +1871,29 @@
       ]
     },
     {
+      "identifier": "jjrousseaucitoy00rous",
+      "status": "已取回",
+      "note": "",
+      "file": "jjrousseaucitoy00rous.txt",
+      "source_url": "https://archive.org/download/jjrousseaucitoy00rous/jjrousseaucitoy00rous_djvu.txt",
+      "sha256": "8f93e51a954901108a84814016e6a1c6950902effa46d03ecf5eb751ef862bdd",
+      "bytes": 476723,
+      "words": 71873,
+      "fetched_at": "2026-08-12T14:00:31",
+      "ia_date": "1758",
+      "ia_year": "",
+      "ia_publicdate": "2010-05-17 16:55:52",
+      "ia_creator": [
+        "Rousseau, Jean-Jacques, 1712-1778",
+        "Alembert, Jean Le Rond d', 1717-1783"
+      ],
+      "ia_title": "J.J. Rousseau citoyen de Genève, a Mr. d'Alembert ... Sur son article Genève dans le VIIme. volume de l'Encyclopédie, et particulierement, sur le projet d'établir un théatre de comédie en cette ville",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "2010"
+      ]
+    },
+    {
       "identifier": "lesconfessionsd04rousgoog",
       "status": "无文本层",
       "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
@@ -1570,6 +1946,52 @@
         "1801",
         "1819",
         "2014"
+      ]
+    },
+    {
+      "identifier": "ninonlenclosmrsu00lenc",
+      "status": "已取回",
+      "note": "",
+      "file": "ninonlenclosmrsu00lenc.txt",
+      "source_url": "https://archive.org/download/ninonlenclosmrsu00lenc/ninonlenclosmrsu00lenc_djvu.txt",
+      "sha256": "1f30bc1c539014ca49439887da9277e84981ff8632a00a80dd5e271b5407d9ad",
+      "bytes": 31183,
+      "words": 4764,
+      "fetched_at": "2026-08-12T14:00:31",
+      "ia_date": "1787",
+      "ia_year": "",
+      "ia_publicdate": "2010-07-16 17:21:42",
+      "ia_creator": [
+        "Lenclos, Ninon de, 1620-1705",
+        "Rousseau, Jean-Jacques, 1712-1778",
+        "Suard, J. B. A. (Jean Baptiste Antoine), 1734-1817"
+      ],
+      "ia_title": "Ninon Lenclos a Mr. SuarD, de l'Académie Française, auteur d'un mémoire signé Lenoir, & d'un mémoire encore pour la dame Kornmann",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1787",
+        "2010"
+      ]
+    },
+    {
+      "identifier": "observationsdeje00rous",
+      "status": "已取回",
+      "note": "",
+      "file": "observationsdeje00rous.txt",
+      "source_url": "https://archive.org/download/observationsdeje00rous/observationsdeje00rous_djvu.txt",
+      "sha256": "e21555d118919ae1dc12b2ccac2d43eeaabb81f22b1c824316eae5741b095b25",
+      "bytes": 66374,
+      "words": 10020,
+      "fetched_at": "2026-08-12T14:00:38",
+      "ia_date": "1751",
+      "ia_year": "",
+      "ia_publicdate": "2010-08-10 18:35:32",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Observations de Jean-Jacques Rousseau de Geneve. Sur la réponse qui a été faite à son Discours",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1752",
+        "2010"
       ]
     },
     {

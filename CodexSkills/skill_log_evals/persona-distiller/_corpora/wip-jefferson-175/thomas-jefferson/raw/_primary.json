@@ -1,12 +1,12 @@
 {
-  "总数": 68,
+  "总数": 78,
   "计数": {
-    "一手": 67,
-    "二手": 1,
+    "一手": 69,
+    "二手": 9,
     "需人判": 0
   },
-  "一手占比下界": 0.9853,
-  "一手占比上界": 0.9853,
+  "一手占比下界": 0.8846,
+  "一手占比上界": 0.8846,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -66,6 +66,14 @@
       "words": 34269
     },
     {
+      "identifier": "centennialcelebr00jeff",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Centennial celebration of the town of Jefferson, Lincoln County, Maine, U.S.A., ",
+      "creator": "Jefferson, Me",
+      "words": 28748
+    },
+    {
       "identifier": "correspondencebe0000jeff",
       "档": "一手",
       "依据": "目标为第一作者，题名含「correspondence」",
@@ -88,6 +96,14 @@
       "title": "The writings of Thomas Jefferson:",
       "creator": "Jefferson, Thomas, 1743-1826",
       "words": 205683
+    },
+    {
+      "identifier": "cu31924028751760",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Jefferson and his colleagues : a chronicle of the Virginia dynasty ",
+      "creator": "Johnson, Allen, 1870-1931",
+      "words": 74428
     },
     {
       "identifier": "cu31924071238426",
@@ -114,6 +130,14 @@
       "words": 237186
     },
     {
+      "identifier": "cu31924092528631",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Calendar of the correspondence of Thomas Jefferson. Part. I. Letters from Jeffer",
+      "creator": "Jefferson, Thomas, 1743-1826",
+      "words": 265500
+    },
+    {
       "identifier": "cu31924092892011",
       "档": "一手",
       "依据": "目标为第一作者，题名含「works」",
@@ -128,6 +152,22 @@
       "title": "The works of Thomas Jefferson;",
       "creator": "Jefferson, Thomas, 1743-1826; Ford, Paul Leicester, 1865-1902, ed",
       "words": 146331
+    },
+    {
+      "identifier": "davismemorialvol00jone",
+      "档": "二手",
+      "依据": "题名含「tribute to」且含目标姓名",
+      "title": "The Davis memorial volume; or, Our dead president, Jefferson Davis, and the worl",
+      "creator": "Jones, J. William (John William), 1836-1909",
+      "words": 263574
+    },
+    {
+      "identifier": "davismemorialvol00joneiala",
+      "档": "二手",
+      "依据": "题名含「tribute to」且含目标姓名",
+      "title": "The Davis memorial volume; or, Our dead president, Jefferson Davis, and the worl",
+      "creator": "Jones, J. William (John William), 1836-1909",
+      "words": 262567
     },
     {
       "identifier": "gpl_1600362",
@@ -282,12 +322,28 @@
       "words": 97230
     },
     {
+      "identifier": "orationoncentenn00dall",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Oration on the centennial anniversary of the birth of Thomas Jefferson, delivere",
+      "creator": "Dallas, George Mifflin, 1792-1864",
+      "words": 3480
+    },
+    {
       "identifier": "summaryviewofrig00jeff_1",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
       "title": "A summary view of the rights of British America. : Set forth in some resolutions",
       "creator": "Jefferson, Thomas, 1743-1826",
       "words": 7794
+    },
+    {
+      "identifier": "thomasjeffersonl00wils",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Thomas Jefferson Lamar : a memorial sketch",
+      "creator": "Wilson, Samuel Tyndale, 1858-1944",
+      "words": 25697
     },
     {
       "identifier": "tudesconomiques00fovigoog",
@@ -304,6 +360,14 @@
       "title": "Versión Final De La Declaración De La Independencia",
       "creator": "Jefferson Thomas (1743-1826)",
       "words": 0
+    },
+    {
+      "identifier": "virginiadynasty00johnrich",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Jefferson and his colleagues; a chronicle of the Virginia dynasty",
+      "creator": "Johnson, Allen, 1870-1931",
+      "words": 75412
     },
     {
       "identifier": "virginiakentucky00jeff",
@@ -552,6 +616,22 @@
       "title": "The writings of Thomas Jefferson : being his autobiography, correspondence, repo",
       "creator": "Jefferson, Thomas, 1743-1826",
       "words": 223435
+    },
+    {
+      "identifier": "youthofjefferson00cookiala",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "The youth of Jefferson, or, A chronicle of college scrapes at Williamsburg, in V",
+      "creator": "Cooke, John Esten, 1830-1886",
+      "words": 69501
+    },
+    {
+      "identifier": "youthofjefferson00cookrich",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "The youth of Jefferson, or, A chronicle of college scrapes at Williamsburg, in V",
+      "creator": "Cooke, John Esten, 1830-1886; Tubbs, Nesmith & Teall. (1854) bkp CU-BANC",
+      "words": 71053
     }
   ]
 }

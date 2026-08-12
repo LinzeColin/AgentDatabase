@@ -1,11 +1,11 @@
 {
-  "生成时刻": "2026-08-12T13:52:14",
-  "请求数": 4,
-  "已取回": 73,
+  "生成时刻": "2026-08-12T14:00:58",
+  "请求数": 10,
+  "已取回": 83,
   "skipped_access_restricted": 0,
   "失败": 1,
   "并发降级": "无（全程并发 4）",
-  "总词数": 6495551,
+  "总词数": 7175300,
   "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
   "记录": [
     {
@@ -1019,6 +1019,37 @@
       ]
     },
     {
+      "identifier": "bub_gb_HAI2AAAAIAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_HAI2AAAAIAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_HAI2AAAAIAAJ/bub_gb_HAI2AAAAIAAJ_djvu.txt",
+      "sha256": "0e8f5a68d4b2fd60a7638be865ba2c4b789041b27127c2c3ce0341f56c8b8eae",
+      "bytes": 279848,
+      "words": 38804,
+      "fetched_at": "2026-08-12T14:00:43",
+      "ia_date": "1892",
+      "ia_year": "1892",
+      "ia_publicdate": "2015-01-29 06:34:04",
+      "ia_creator": "Gustav Adolf Lindner",
+      "ia_title": "Johann Amos Comenius, sein Leben und Wirken",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1525",
+        "1543",
+        "1561",
+        "1564",
+        "1571",
+        "1626",
+        "1630",
+        "1642",
+        "1880",
+        "1887",
+        "1888",
+        "1889"
+      ]
+    },
+    {
       "identifier": "bub_gb_HiRbAAAAcAAJ",
       "status": "已取回",
       "note": "",
@@ -1087,6 +1118,37 @@
       ]
     },
     {
+      "identifier": "bub_gb_MWcM-4kItEAC",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_MWcM-4kItEAC.txt",
+      "source_url": "https://archive.org/download/bub_gb_MWcM-4kItEAC/bub_gb_MWcM-4kItEAC_djvu.txt",
+      "sha256": "2d3d8316537583fec197d7c39ac9fcb953ce07dd3c31c983e3db9b33c38f6a9f",
+      "bytes": 232820,
+      "words": 30401,
+      "fetched_at": "2026-08-12T14:00:43",
+      "ia_date": "1904",
+      "ia_year": "1904",
+      "ia_publicdate": "2015-01-31 11:06:29",
+      "ia_creator": "Kerrl, Th",
+      "ia_title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und seine bedeutung",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1592",
+        "1614",
+        "1621",
+        "1628",
+        "1641",
+        "1648",
+        "1656",
+        "1657",
+        "1660",
+        "1665",
+        "1666",
+        "1670"
+      ]
+    },
+    {
       "identifier": "bub_gb_MrNBAAAAYAAJ",
       "status": "已取回",
       "note": "",
@@ -1142,6 +1204,26 @@
         "1892",
         "1893",
         "1895"
+      ]
+    },
+    {
+      "identifier": "bub_gb_Up_239je-xMC",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_Up_239je-xMC.txt",
+      "source_url": "https://archive.org/download/bub_gb_Up_239je-xMC/bub_gb_Up_239je-xMC_djvu.txt",
+      "sha256": "50d0026dd45953b6af5af09c61f33a586254d63c41a9f903ca745d2472997dd2",
+      "bytes": 1365532,
+      "words": 199936,
+      "fetched_at": "2026-08-12T14:00:48",
+      "ia_date": "1892",
+      "ia_year": "1892",
+      "ia_publicdate": "2014-12-18 02:40:49",
+      "ia_creator": "Kvačala, Jan, 1862-1934",
+      "ia_title": "Johann Amos Comenius. Sein Leben und seine Schriften",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1892"
       ]
     },
     {
@@ -1495,6 +1577,124 @@
       "titlepage_years": []
     },
     {
+      "identifier": "johannamoscomen00kerrgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "johannamoscomen00kerrgoog.txt",
+      "source_url": "https://archive.org/download/johannamoscomen00kerrgoog/johannamoscomen00kerrgoog_djvu.txt",
+      "sha256": "af3be0a7e20d2d9928a158b7c21fa994364ad4a30fca0cd0aa22912ed332cd18",
+      "bytes": 237001,
+      "words": 32179,
+      "fetched_at": "2026-08-12T14:00:49",
+      "ia_date": "1904",
+      "ia_year": "1906",
+      "ia_publicdate": "2009-03-11 09:15:27",
+      "ia_creator": "Kerrl, Th",
+      "ia_title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und seine bedeutung",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1906"
+      ]
+    },
+    {
+      "identifier": "johannamoscomen00kvagoog",
+      "status": "已取回",
+      "note": "",
+      "file": "johannamoscomen00kvagoog.txt",
+      "source_url": "https://archive.org/download/johannamoscomen00kvagoog/johannamoscomen00kvagoog_djvu.txt",
+      "sha256": "d2cefc4ca2e2542b41a832c9cfdea8a0cc9afb37ea905ca07f9094395a27aa57",
+      "bytes": 1637128,
+      "words": 209595,
+      "fetched_at": "2026-08-12T14:00:50",
+      "ia_date": "1892",
+      "ia_year": "1892",
+      "ia_publicdate": "2008-09-01 07:47:11",
+      "ia_creator": "Kvačala, Jan, 1862-1934",
+      "ia_title": "Johann Amos Comenius. Sein Leben und seine Schriften",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1592",
+        "1892"
+      ]
+    },
+    {
+      "identifier": "johannamoscomen01kerrgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "johannamoscomen01kerrgoog.txt",
+      "source_url": "https://archive.org/download/johannamoscomen01kerrgoog/johannamoscomen01kerrgoog_djvu.txt",
+      "sha256": "f3915d74323bc637849b364699859a1c83c6e16b979df9951cda6e740e3f7313",
+      "bytes": 203844,
+      "words": 29346,
+      "fetched_at": "2026-08-12T14:00:51",
+      "ia_date": "1904",
+      "ia_year": "1905",
+      "ia_publicdate": "2008-10-23 07:41:46",
+      "ia_creator": "Kerrl, Th",
+      "ia_title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und seine bedeutung",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1612",
+        "1614",
+        "1616",
+        "1618",
+        "1627",
+        "1634",
+        "1905"
+      ]
+    },
+    {
+      "identifier": "johannamoscomen02kerrgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "johannamoscomen02kerrgoog.txt",
+      "source_url": "https://archive.org/download/johannamoscomen02kerrgoog/johannamoscomen02kerrgoog_djvu.txt",
+      "sha256": "179871314a747dace9a7b5cce2c6b08ec277a5dab21c70b5250d74283fd9cfa3",
+      "bytes": 223470,
+      "words": 30911,
+      "fetched_at": "2026-08-12T14:00:53",
+      "ia_date": "1904",
+      "ia_year": "1904",
+      "ia_publicdate": "2009-03-11 08:11:34",
+      "ia_creator": "Kerrl, Th",
+      "ia_title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und seine bedeutung",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1592",
+        "1613",
+        "1614",
+        "1621",
+        "1628",
+        "1641",
+        "1642",
+        "1648",
+        "1650",
+        "1656",
+        "1657",
+        "1665"
+      ]
+    },
+    {
+      "identifier": "johannamoscomen03kerrgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "johannamoscomen03kerrgoog.txt",
+      "source_url": "https://archive.org/download/johannamoscomen03kerrgoog/johannamoscomen03kerrgoog_djvu.txt",
+      "sha256": "056c8f9a43bba48ef4262a443325d846c907ff0604a044ff8ea1ce5e5838eca1",
+      "bytes": 188749,
+      "words": 26240,
+      "fetched_at": "2026-08-12T14:00:56",
+      "ia_date": "1904",
+      "ia_year": "1905",
+      "ia_publicdate": "2008-10-23 07:42:13",
+      "ia_creator": "Kerrl, Th",
+      "ia_title": "Johann Amos Comenius. Sein leben, seine pädagogischen schriften und seine bedeutung",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1905"
+      ]
+    },
+    {
       "identifier": "labyrinthofworld00comeuoft",
       "status": "已取回",
       "note": "",
@@ -1515,6 +1715,46 @@
         "1631",
         "1905"
       ]
+    },
+    {
+      "identifier": "lebenundschicks00vrbkgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "lebenundschicks00vrbkgoog.txt",
+      "source_url": "https://archive.org/download/lebenundschicks00vrbkgoog/lebenundschicks00vrbkgoog_djvu.txt",
+      "sha256": "ed8705a21c0409b64848b319e5d274137bad1cb72a65a64ad087cac569756087",
+      "bytes": 397669,
+      "words": 57177,
+      "fetched_at": "2026-08-12T14:00:55",
+      "ia_date": "1892",
+      "ia_year": "1892",
+      "ia_publicdate": "2008-02-09 17:31:24",
+      "ia_creator": "Antonín Vrbka",
+      "ia_title": "Leben und Schicksale des Johann Amos Comenius",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1592",
+        "1671",
+        "1892"
+      ]
+    },
+    {
+      "identifier": "ned-kbn-all-00004319-002",
+      "status": "已取回",
+      "note": "",
+      "file": "ned-kbn-all-00004319-002.txt",
+      "source_url": "https://archive.org/download/ned-kbn-all-00004319-002/ned-kbn-all-00004319-002_djvu.txt",
+      "sha256": "33f495d651191d32b6c8f9a9ffa0a74df64c1fa98c6921d9b885b5d857ad96b8",
+      "bytes": 190074,
+      "words": 25160,
+      "fetched_at": "2026-08-12T14:00:58",
+      "ia_date": "1668",
+      "ia_year": "",
+      "ia_publicdate": "2014-10-26 07:43:43",
+      "ia_creator": "Comenius, J. A. (Johann Amos)",
+      "ia_title": "Unum necessarium, scire quid sibi sit necessarium, in vita, et morte et post mortem ... J.A. Comenius",
+      "ia_licenseurl": "",
+      "titlepage_years": []
     },
     {
       "identifier": "obrazjednotyesko00lasi",

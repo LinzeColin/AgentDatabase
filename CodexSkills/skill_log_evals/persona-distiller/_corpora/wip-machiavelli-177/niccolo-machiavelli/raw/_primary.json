@@ -1,12 +1,12 @@
 {
-  "总数": 69,
+  "总数": 79,
   "计数": {
     "一手": 67,
-    "二手": 2,
+    "二手": 12,
     "需人判": 0
   },
-  "一手占比下界": 0.971,
-  "一手占比上界": 0.971,
+  "一手占比下界": 0.8481,
+  "一手占比上界": 0.8481,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -506,6 +506,14 @@
       "words": 167109
     },
     {
+      "identifier": "in.ernet.dli.2015.553355",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Life And Times Of Niccolo Machiavelli",
+      "creator": "Villari Pasquale",
+      "words": 523460
+    },
+    {
       "identifier": "india.history.resource.72474",
       "档": "一手",
       "依据": "目标为第一作者，题名含「opere」",
@@ -546,6 +554,62 @@
       "words": 78003
     },
     {
+      "identifier": "india.history.resource.85209",
+      "档": "二手",
+      "依据": "题名含「and his (time|work|life|educational)」且含目标姓名",
+      "title": "Niccolo Machiavelli and his Times, Vol. I",
+      "creator": "Villari, Pasquale Prof.; Villari, Linda (Tr.)",
+      "words": 119746
+    },
+    {
+      "identifier": "lifeandtimesnic00villgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "The life and times of Niccolò Machiavelli",
+      "creator": "Villari, Pasquale, 1827-1917. [from old catalog]; Villari, Linda (White) Mazini,",
+      "words": 254538
+    },
+    {
+      "identifier": "niccolmachiavel00villgoog",
+      "档": "二手",
+      "依据": "题名含「and his (time|work|life|educational)」且含目标姓名",
+      "title": "Niccolò Machiavelli and his times",
+      "creator": "Villari, Pasquale, 1827-1917; Villari, Linda White Mazini, 1836-1915, tr",
+      "words": 128666
+    },
+    {
+      "identifier": "niccolmachiavel01villgoog",
+      "档": "二手",
+      "依据": "题名含「and his (time|work|life|educational)」且含目标姓名",
+      "title": "Niccolò Machiavelli and His Times",
+      "creator": "Pasquale Villari",
+      "words": 135224
+    },
+    {
+      "identifier": "niccolmachiavel05villgoog",
+      "档": "二手",
+      "依据": "题名含「and his (time|work|life|educational)」且含目标姓名",
+      "title": "Niccolò Machiavelli and His Times",
+      "creator": "Pasquale Villari",
+      "words": 126664
+    },
+    {
+      "identifier": "niccolmachiavel10villgoog",
+      "档": "二手",
+      "依据": "题名含「and his (time|work|life|educational)」且含目标姓名",
+      "title": "Niccolò Machiavelli and His Times",
+      "creator": "Pasquale Villari",
+      "words": 119163
+    },
+    {
+      "identifier": "niccolmachiavel12villgoog",
+      "档": "二手",
+      "依据": "题名含「and his (time|work|life|educational)」且含目标姓名",
+      "title": "Niccolò Machiavelli and his times",
+      "creator": "Villari, Pasquale, 1827-1917",
+      "words": 106357
+    },
+    {
       "identifier": "operediniccolm02mach",
       "档": "一手",
       "依据": "目标为第一作者，题名含「opere」",
@@ -560,6 +624,22 @@
       "title": "Three prose writers of the Italian renaissance",
       "creator": "Moore, Clarence King, b. 1873; Boccaccio, Giovanni, 1313-1375; Machiavelli, Nicc",
       "words": 41047
+    },
+    {
+      "identifier": "villari-the-life-and-times-of-niccolo-machiavelli-v-1",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "The life and times of Niccolo Machiavelli v 1",
+      "creator": "Pasquale Villari",
+      "words": 250008
+    },
+    {
+      "identifier": "villari-the-life-and-times-of-niccolo-machiavelli-v-2",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "The life and times of Niccolo Machiavelli v 2",
+      "creator": "Pasquale Villari",
+      "words": 266826
     }
   ]
 }

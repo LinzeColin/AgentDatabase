@@ -1,13 +1,13 @@
 {
-  "lanes": 4,
-  "去掉纸面道后": 3,
+  "lanes": 5,
+  "去掉纸面道后": 4,
   "逐道份数": {
-    "writings": 30,
-    "conversations": 27,
-    "expression": 10,
-    "decisions": 0,
+    "writings": 31,
+    "conversations": 28,
+    "expression": 9,
+    "decisions": 1,
     "timeline": 0,
-    "external": 1
+    "external": 9
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -48,6 +48,11 @@
       "title": "Histoire des promesses illusoires depuis la Paix des Pirenees"
     },
     {
+      "identifier": "centennialcelebr00jeff",
+      "道": "writings",
+      "title": "Centennial celebration of the town of Jefferson, Lincoln County, Maine"
+    },
+    {
       "identifier": "correspondencebe0000jeff",
       "道": "conversations",
       "title": "Correspondence between Thomas Jefferson and Pierre Samuel du Pont de N"
@@ -61,6 +66,11 @@
       "identifier": "cu31924027055718",
       "道": "writings",
       "title": "The writings of Thomas Jefferson:"
+    },
+    {
+      "identifier": "cu31924028751760",
+      "道": "external",
+      "title": "Jefferson and his colleagues : a chronicle of the Virginia dynasty "
     },
     {
       "identifier": "cu31924071238426",
@@ -78,6 +88,11 @@
       "title": "The writings of Thomas Jefferson: being his autobiography, corresponde"
     },
     {
+      "identifier": "cu31924092528631",
+      "道": "conversations",
+      "title": "Calendar of the correspondence of Thomas Jefferson. Part. I. Letters f"
+    },
+    {
       "identifier": "cu31924092892011",
       "道": "writings",
       "title": "The works of Thomas Jefferson;"
@@ -86,6 +101,16 @@
       "identifier": "cu31924092892037",
       "道": "writings",
       "title": "The works of Thomas Jefferson;"
+    },
+    {
+      "identifier": "davismemorialvol00jone",
+      "道": "external",
+      "title": "The Davis memorial volume; or, Our dead president, Jefferson Davis, an"
+    },
+    {
+      "identifier": "davismemorialvol00joneiala",
+      "道": "external",
+      "title": "The Davis memorial volume; or, Our dead president, Jefferson Davis, an"
     },
     {
       "identifier": "gpl_1600362",
@@ -183,9 +208,19 @@
       "title": "Notes on the state of Virginia"
     },
     {
+      "identifier": "orationoncentenn00dall",
+      "道": "external",
+      "title": "Oration on the centennial anniversary of the birth of Thomas Jefferson"
+    },
+    {
       "identifier": "summaryviewofrig00jeff_1",
       "道": "writings",
       "title": "A summary view of the rights of British America. : Set forth in some r"
+    },
+    {
+      "identifier": "thomasjeffersonl00wils",
+      "道": "external",
+      "title": "Thomas Jefferson Lamar : a memorial sketch"
     },
     {
       "identifier": "tudesconomiques00fovigoog",
@@ -198,8 +233,13 @@
       "title": "Versión Final De La Declaración De La Independencia"
     },
     {
+      "identifier": "virginiadynasty00johnrich",
+      "道": "external",
+      "title": "Jefferson and his colleagues; a chronicle of the Virginia dynasty"
+    },
+    {
       "identifier": "virginiakentucky00jeff",
-      "道": "expression",
+      "道": "decisions",
       "title": "The Virginia and Kentucky resolutions of 1798 and '99; with Jefferson'"
     },
     {
@@ -351,6 +391,16 @@
       "identifier": "writingsthomasj00washgoog",
       "道": "conversations",
       "title": "The writings of Thomas Jefferson : being his autobiography, correspond"
+    },
+    {
+      "identifier": "youthofjefferson00cookiala",
+      "道": "external",
+      "title": "The youth of Jefferson, or, A chronicle of college scrapes at Williams"
+    },
+    {
+      "identifier": "youthofjefferson00cookrich",
+      "道": "external",
+      "title": "The youth of Jefferson, or, A chronicle of college scrapes at Williams"
     }
   ]
 }

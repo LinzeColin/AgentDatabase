@@ -7,14 +7,21 @@
 
 六条道取自 `check_corpus_ceiling.py` 的 `LANES`（**去仓里读的，不是我定的**）：
 
-| 道 | 装什么 |
-|---|---|
-| `writings` | 他写的书、论著、文集 |
-| `conversations` | 书信、往还、对话 |
-| `expression` | 演说、致辞、布道、诗 |
-| `decisions` | 判决意见、法令、公文、宣言 |
-| `timeline` | 自传、日记、年表 |
-| `external` | 别人写他的（即分类器判为「二手」的） |
+**道的语义是从 35 个存量工作区的 `source-ledger.jsonl` 里实测出来的，不是我按字面猜的。**
+（首版按字面猜，把 `timeline` 定成「自传/日记」、`decisions` 定成「判决书」，
+ 于是十个人里九个的 timeline 与 decisions 都是空的 —— 那是我的定义太窄。）
+
+| 道 | **存量里实际装的** | 实例（存量原文件名） |
+|---|---|---|
+| `writings` | 书、论著、文集 | `11756487bsb` |
+| `conversations` | 书信往还 | `briefwechselzwis00liebuoft`、`berzeliusundlieb00berzuoft` |
+| `expression` | **对外的短篇表达**：期刊短文、讲词 | Roberts-Austen 的 6 篇 Nature 短文 |
+| `decisions` | **他做判断的记录**：技术报告、专利、官方报告——**不只是判决书** | `imeche1895-alloys-research-third-report`、`03-slide-principle-1841` |
+| `timeline` | **生平年表类，可以是第三方**：大学校史、ADB／DNB 传记条目、讣告、自传 | `chronikderunive00giesgoog`、`de_ADB_Liebig`、`06b-dibner-obituaries-clippings-NOT-HIS` |
+| `external` | 别人写他的（分类器判为「二手」的） | `erklrungveranl00buffuoft` |
+
+★ **`timeline` 与 `external` 都可以是第三方，区别在于**：
+  `timeline` 回答「什么时候发生了什么」，`external` 回答「别人怎么看他」。
 
 **两条硬规矩：**
 
@@ -46,18 +53,24 @@ LANES = ["writings", "conversations", "expression", "decisions", "timeline", "ex
 
 # 题名模式，按**优先级从高到低**匹配（一份只进一道——道数要能被门直接用）
 PATTERNS = [
+    # ★ 按存量实测放宽：**他做判断的记录**，含技术报告/专利/官方报告
     ("decisions", r"opinion|judgment|judgement|decision|decree|ordinance|statute|"
                   r"proclamation|message of the president|verordnung|erlass|"
-                  r"legge|editto|leges|constitutiones|justice of the peace"),
+                  r"legge|editto|leges|constitutiones|justice of the peace|"
+                  r"\breport\b|bericht|gutachten|patent|specification|"
+                  r"state paper|staatsschrift|denkschrift|minutes of|protokoll"),
     ("conversations", r"letter|correspond|briefe|briefwechsel|epistol|lettres|lettere|"
                       r"carteggio|dialogue|dialog|conversation|tischgespr|tabletalk|"
                       r"table.?talk|kolloqui|colloqui"),
     ("expression", r"speech|speeches|address|oration|discourse|sermon|rede|reden|"
                    r"discours|discorsi|orazioni|poem|poesie|songs|lieder|"
                    r"predigt|vortrag|commedie|comed"),
+    # ★ 按存量实测放宽：年表类**可以是第三方**（校史、传记辞典条目、讣告）
     ("timeline", r"autobiograph|selbstbiograph|diary|journal intime|tagebuch|"
                  r"lebensbild|lebensschick|meine? leben|erinnerungen|reminiscence|"
-                 r"memoir|confession|vita propria"),
+                 r"memoir|confession|vita propria|chronik|chronicle|chronolog|"
+                 r"obituary|nachruf|in memoriam|annals|annalen|jahrbuch|"
+                 r"biographical dictionary|dictionary of national|allgemeine deutsche bio"),
 ]
 DEFAULT_WRITINGS = r"work|works|writing|schriften|s[äa]mtliche|opere|scritti|" \
                    r"[oœ]uvres|treatise|essay|abhandlung|didactic|didakt|magna|" \
