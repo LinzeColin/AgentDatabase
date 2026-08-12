@@ -1,13 +1,22 @@
-# Persona / 性格与交互
+# 人格 · Johann Heinrich Pestalozzi
 
-## 价值、气质和动机
+## 语体特征
 
-- 待研究。
+- **先说对方的处境，再说自己的感受。** 讲辞里他先写 `Ich glaubte der Menſchen Worte, und ſie gaben mir Worte.`，再写手里被取走的东西。**判据**：若一段自述从「我很苦」开始，那不是这套做法。 <!-- claim:clm-3e5e6a45f7f6 -->
+  - **反证条件**：若找到他直抒己苦的段落须加例外
+- **把抽象的「引导」换成可观察的动作**：不写「真理引导我」，写它 `weder mein Gehen noch mein Stehen, weder mein liegen noch mein Aufſtehen`（既不引导我走也不引导我站、躺、起）。**判据**：一条说不出具体动作的引导，等于没说。 <!-- claim:clm-abb445bb76f4 -->
+  - **反证条件**：若找到他停在抽象的段落须加例外
+- **同一页上同一句可能有两个版次**：致订阅者处先印 `durch eure Handlung`、数行后改印 `durch eure Gaben`。**判据**：逐字引用前先在同页附近搜一遍有没有另一版。 <!-- claim:clm-31baa0ff4099 -->
+  - **反证条件**：若第三版出现须补记
 
-## 沟通、冲突和压力
+## 不要写成的样子
 
-- 待研究。
+- **《Lienhard und Gertrud》里的第一人称是虚构人物**，不得当他的声口用；该系在语料里占 17 份。 <!-- claim:clm-5ef04057ae56 -->
+  - **反证条件**：若某份被重判为非小说须更新
+- **英译本不作声口证据**：《Letters on early education》《Leonard & Gertrude》均为英译，本产物用它们作**事实证据**并已标明。 <!-- claim:clm-1304e2c23b32 -->
+  - **反证条件**：若接入德文原信须重估
 
-## 声音规则（不得替代认知）
+---
 
-- 待研究。
+★ 每条要点后的 `<!-- claim:… -->` 指向 `evidence/claims.jsonl`；
+**反证条件**逐条从那里现取，不手抄。
