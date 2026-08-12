@@ -24,7 +24,7 @@
 ## 第一步：把工作树恢复出来（**必做，否则你看到的仓是残缺的**）
 
 `origin/main` 上**没有**最近这一批工作。截至 2026-08-12，
-分支 `claude/character-distillation-skill-reorganize-d57595`（1388 个提交、约 2.3 GB）
+分支 `claude/character-distillation-skill-reorganize-d57595`（1390 个提交、约 2.3 GB）
 **只存在于一个 git bundle 里**：
 
 ```
@@ -40,10 +40,18 @@ gh release download agentdb-handover-20260812 \
   --repo LinzeColin/Private-Database \
   --pattern 'agentdb-persona-distiller-full.bundle' --dir /tmp
 
-git bundle verify /tmp/agentdb-persona-distiller-full.bundle     # 应报 "records a complete history"
 git clone /tmp/agentdb-persona-distiller-full.bundle agentdb-restored
-cd agentdb-restored && git checkout claude/character-distillation-skill-reorganize-d57595
+cd agentdb-restored
+git checkout claude/character-distillation-skill-reorganize-d57595
+
+# 想额外确认包本身完整（可选）—— 注意必须在一个 git 仓里跑，空目录会报
+# "need a repository to verify a bundle"（这条是演练时踩到的）
+git bundle verify /tmp/agentdb-persona-distiller-full.bundle   # 应报 "records a complete history"
 ```
+
+**这套命令已从 GitHub 真跑过一遍**（2026-08-12）：下载回来的 sha256 与本机原件逐字节一致，
+clone 出的分支领先 `main` **1390** 个提交，三本台账、`_每次开工必读.md`、
+`team-index.json`（102 products）、`_教训库/`（132 份）全部到位。
 
 **为什么是 bundle 不是分支**：这一支里含 `_ledgers/_教训库/`（agent 教训库，涉及基础设施细节），
 按移交规则「任何 private-only 资产一个字节都不许进 AgentDatabase」，不能推公开仓；
