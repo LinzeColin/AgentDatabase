@@ -39,27 +39,82 @@ Kant 原判 deep 是**靠三条题名词误配出来的假道**顶上去的（`c
    ★ **本会话不能派子代理**（harness：`Do not call the AgentTool unless the user requested it`）
      ⇒ 第 3 件要么由你授权派子代理，要么由接手的人做。**这是真正的停点。**
 
-### 阶段 4（合成）的起跑线——**接手的人可以直接开工**
+### 阶段 4（合成）—— **2026-08-13 已做完，九人合成门全部 passed=True**
 
-十份产物在每个工作区都还是**模板骨架**（11–17 行），`evidence/claims.jsonl` **全是 0 条**。
-合成先建断言层，再由断言写产物。
+断言层 239 条、十份产物正文、盲判用例全部落盘。下面这几条是**踩过坑才知道的**，
+接手的人照着做能省掉一整轮返工：
 
-**每人的最低断言数**（`check_fact_density.py`：`min_facts = ceil(可用train / 5)`，下限 5，**现算**）：
+#### ① 盲判用例是 **16 类，不是 7 类**；文件在 `evals/cases.jsonl`
 
-| 人 | 台账 | holdout | 可用 train | **min_facts** |
-|---|---:|---:|---:|---:|
-| #173 Marshall | 95 | 1 | 94 | **19** |
-| #178 Rousseau | 103 | 0 | 103 | **21** |
-| #177 Machiavelli | 79 | 0 | 79 | **16** |
-| #174 Lincoln | 70 | 3 | 67 | **14** |
-| #175 Jefferson | 73 | 8 | 65 | **13** |
-| #176 Bismarck | 70 | 10 | 60 | **12** |
-| #180 Pestalozzi | 70 | 10 | 60 | **12** |
-| #179 Kant | 65 | 10 | 55 | **11** |
-| #181 Fröbel | 51 | 0 | 51 | **11** |
+```python
+from common import SUITES, PROFILE_THRESHOLDS   # registry/codex/persona-distiller/scripts/
+len(SUITES) == 16
+```
 
-合计 **129 条**。★ **Machiavelli／Rousseau／Fröbel 的 holdout 还是 0，
-而 `quality_check --phase synthesis` 没有 holdout 直接报错**——所以那三人**先分 holdout 再合成**。
+`known / boundary / voice / trajectory / contrast / fact-preservation / style-decoy /
+task-completion / planning-fidelity / tool-use / capability-calibration / refusal-stop /
+long-horizon / identity-routing / anonymous-fidelity / token-efficiency`
+
+`min_suite_cases`：**quick 1｜standard 1｜deep 2** ⇒ **deep 档要 32 题，quick 档要 16 题**。
+
+★★ **路径要写对**：门读的是 `<工作区>/evals/cases.jsonl`。
+我第一次把题写在工作区根目录的 `cases.jsonl`，**门读到 0 条、16 类全报 `suite-minimum`**，
+看上去像「一题都没写」而不是「文件放错地方」——又一次空默认值吞掉「不知道」。
+
+★ 后 9 类（task-completion 起）是**能力题**，`holdout_source_ids` 留空 `[]`；
+前 7 类才要挂密封源。可照 `wip-pasteur-106` 那份已交付的 32 题看格式。
+
+#### ② rubric 不许把「谈资料库／扫描件／未收录」写成得分条件
+
+合成门有 `eval.rubric-demands-frame-break`。本批**六条**被它抓到（Lincoln 2／Pestalozzi 2／
+Bismarck 2）。**人物说那种话就是出戏，而同一份盲判指令又要评委扣出戏。**
+改法：换成人物自己站得住的说法——**哪一次排印、谁经手、有没有可出示的凭据**。
+
+#### ③ 密封源 OCR 坏到取不出逐字引文时，rubric 一律叙述式
+
+本批实测：Jefferson 的《拿撒勒人耶稣的生平与道德》1904 GPO 本**整本被识别成希腊字母**；
+1800 年《弗吉尼亚年鉴》长 s 讹字率 **0.9505**；Bismarck 50 份、Pestalozzi 54 份德文源
+讹字率 >20%；连 1925 年那部林肯演说印本，**正文那几页是影印页、OCR 全毁**。
+⇒ **不加反引号冒充逐字引文**；讹字既不修补也不当原文用。
+
+#### ④ ★★ **`check_fact_density` 的结论被合成门吞掉了——不要只看 `passed`**
+
+`quality_check.py` 里 `run_fact_density()` 把结果写进 `report.metrics['fact_density']`，
+未达标时只在里面塞一个 `**未达**` 键——**既不 `report.error` 也不 `report.warn`**。
+⇒ **合成门会报 `passed=True, errors 0`，而 `check_fact_density.py` 单独跑是 ✗。**
+
+实测：Jefferson 改判掉一份错源后可用源 65→66、要求 13→14，而他只有 13 条 ——
+**合成门照样绿**，是我单独跑判据才看见的。（已补一条可核事实，现 14/14。）
+
+```bash
+# 每个工作区都要单独跑这一句，不能只看合成门
+python3 registry/codex/persona-distiller/scripts/check_fact_density.py <工作区>
+```
+
+同族风险：`run_case_self_sufficiency`、`run_suite_single_drag` 等也走 `metrics` 通道。
+**凡是只写 metrics 的判据，`passed=True` 都不覆盖它们。**
+
+#### ⑤ 各人现状（**下表由脚本现算，不是手写**）
+
+| 人 | 台账 | holdout | 可用 train | min_facts | 事实密度 | 断言 | 用例/类 | 档 |
+|---|---:|---:|---:|---:|:--|---:|---:|---|
+| #173 Marshall | 95 | **0** | 95 | 19 | ✓ 21/19 | 34 | **未出题** | deep |
+| #174 Lincoln | 70 | 3 | 67 | 14 | ✓ **14/14 压线** | 25 | 32 / 16 | deep |
+| #175 Jefferson | 73 | 7 | 66 | 14 | ✓ **14/14 压线**（补过一条） | 25 | 32 / 16 | deep |
+| #176 Bismarck | 70 | 10 | 60 | 12 | ✓ 13/12 | 25 | 32 / 16 | deep |
+| #177 Machiavelli | 79 | 10 | 69 | 14 | ✓ 15/14 | 27 | 16 / 16 | quick |
+| #178 Rousseau | 103 | 12 | 91 | 19 | ✓ 20/19 | 34 | 16 / 16 | quick |
+| #179 Kant | 65 | 10 | 55 | 11 | ✓ 12/11 | 23 | 17 / 16 | quick |
+| #180 Pestalozzi | 70 | 9 | 61 | 13 | ✓ **13/13 压线** | 24 | 32 / 16 | deep |
+| #181 Fröbel | 51 | 4 | 47 | 10 | ✓ 11/10 | 23 | 16 / 16 | quick |
+| **合计** | **676** | **65** | **611** | | | **240** | **193** | |
+
+★ **三人是压线过的**（Lincoln、Jefferson、Pestalozzi）：
+**只要有一份源的 split 改动，min_facts 就会 +1 而他们立刻掉下去**，而合成门不会告诉你。
+
+★ **Marshall 没有密封面**：唯一低重合的候选是**另一位大法官（John Marshall Harlan）的纪念集**，
+已退回 train。⇒ 他过不了合成门、也做不了判分，与 Paton #162／Kelsen #171 同类。
+**三条路留给用户定**，见 `_ledgers/_Marshall的密封面是别人的纪念集-2026-08-13.md`。
 
 ★★ **断言层最容易犯的一个错，我今天在 Marshall 身上差点犯**：
 想用「整卷里 `we` 1.30/千词 > `I` 1.04/千词」去断言「他的判决意见回避第一人称」。
