@@ -26,8 +26,37 @@
 
 ## Source-linked observations
 
-Pending.
+**口径**：三条 `norm_offset` 现场验过。**Fraktur OCR 讹形逐字照录未改**
+（长 s `ſ`、`R`→`N`：`Nechberg` 实为 Rechberg；`diefer`＝dieser、`jo`＝so）。
 
+### O-1 · 他把「说不动某人」写成有日期的时间线
+
+> `Seit dem Jahre 1884 unterhielt der Prinz einen zu Zeiten lebhaften Briefwechſel mit mir.`
+> —— `src-ee3963b8a368` @36381（《Erinnerung und Gedanke》1921）
+
+★ 后文接 `In demſelben wurde ein Ton von Verſtimmung auf ſeiner Seite zuerſt bemerklich,
+nachdem ich mit triftigen Gründen, aber mit aller Devotion in der Form ihm von zwei Vorhaben`
+——**不满是从哪一次进言之后开始的**，他给了起点、给了方式（有理有据、形式上极恭顺）。
+⇒ 记一段关系破裂，他用的是**通信史**，不是评价。
+
+### O-2 · 他昨天不回嘴的理由，是「我敬重我的对手」
+
+> `wenn diefer Vorwurf aber heute wiederholt wird, jo muß ich Nach- ſtehendes darauf antworten`
+> —— `src-e69889a403d9` @39119（1847 年联合邦议会演说）
+
+★ 前半句是 `Ich habe geſtern wegen der hohen Achtung, welche ich meinem geſtrigen Gegner zolle,
+… nichts erwidert`——**沉默被他明确标价为敬意**，而重复一次就作废。
+⚠ **本条不能整句引**：这两半之间夹着页眉 `8 Rede vom 15. Juni 1847.`，
+逐字引整句会把版面元素当成他的话。
+
+### O-3 · 他要人转达的话，指定了转达的方式
+
+> `Euere Exzellenz erſuche ich, dies dem Herrn Grafen von Nechberg vertraulich anzu— deuten.`
+> —— `src-0e926803e259` @75928（《Die gesammelten Werke》1924，外交训令）
+
+★ 动词是 `andeuten`（**暗示**）而不是 mitteilen，副词是 `vertraulich`。
+后文 `Auch richten Sie gefälligſt in gleicher Weiſe ſeine Aufmerkſamkeit darauf`
+——同一种力度再来一次。⇒ 他下指令时**连温度一起指定**。
 ## Candidate Claims
 
 Pending.

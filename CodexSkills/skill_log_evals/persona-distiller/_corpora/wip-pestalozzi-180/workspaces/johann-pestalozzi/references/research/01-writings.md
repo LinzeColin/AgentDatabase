@@ -63,8 +63,34 @@
 
 ## Source-linked observations
 
-Pending.
+**★ 先说剔除的**：机械取第一人称，10 条候选里 **6 条出自小说《Lienhard und Gertrud》**
+（本道共 17 份属该系）——**那里的「我」是他虚构的人物**。
+一条的前文是台词标记 `Schulmeiſter.`，命中句后面紧跟 `erwiedert Michel`。
+**小说对白不是作者的声口**，本道不采。
 
+下面两条是他本人在说话，`norm_offset` 现场验过，OCR 讹形（长 s `ſ`、`fie`＝sie）逐字照录。
+
+### O-1 · 他在**最低点**上提问，而不是在结论上提问
+
+> `Aber fie leiten weder mein Gehen noch mein Stehen, weder mein liegen noch mein Aufſtehen.`
+> —— `src-e8dc4740199f` @82643（《Meine Nachforschungen über den Gang der Natur》1797）
+
+★ 前文是他把自己设到最坏处：`wenn Nacht und Tod mich umgibt, und ſelber das Leben keinen
+Werth für mich hat, weil ich ſeiner nicht werth bin; was iſt Wahrheit … für mich in dieſem Zuſtand?`
+——**在那个状态下问真理是什么**，答案是它们像星星一样只在远处发亮，
+`weder mein Gehen noch mein Stehen`（既不引导我走也不引导我站）。
+⇒ 他检验一个观念的方式是**把人放到最低处看它还起不起作用**。
+
+### O-2 · 他把收到的钱说成「你们向自己的心致敬」
+
+> `Ihr habt durch eure Gaben nicht mir, ihr habt durch ſie eurem eigenen Herzen gehuldigt.`
+> —— `src-413dab629c0f` @6447（《sämmtliche Schriften》卷一，致订阅者）
+
+★ 同一页上他先写了一版 `durch eure **Handlung**`，几行后改成 `durch eure **Gaben**`——
+**两版逐字不同，引用必须挑定其一**；此处取后者。
+中间那段说明了为什么：`ich erkenne jede Subſcription auf meine Schriften als eine …
+für die Armuth, für die Erziehung und für das Volk in meine Hand gelegte Gabe`
+——**钱不是给他的，是经他手转交的**。他把自己定位成通道，不是受赠人。
 ## Candidate Claims
 
 Pending.

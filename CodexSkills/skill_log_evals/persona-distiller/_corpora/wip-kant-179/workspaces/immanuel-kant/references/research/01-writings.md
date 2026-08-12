@@ -56,8 +56,43 @@
 
 ## Source-linked observations
 
-Pending.
+**★ 先说剔除的**：机械取第一人称，**三条落在校勘者的序言上**——
+1867/1868/1889 三个编本里的「我」是**校订者**（`in dem einen der von mir verglichenen
+zwei Exemplare vom Jahre 1783`、`bei der wiederholten Vergleichung des Originaltextes`），
+**不是康德**。另有多条是 Fraktur OCR 崩坏（`gemäsiat fenn Tonne`）与英译本，均不采。
 
+下面三条 `norm_offset` 现场验过，讹形（`ſ`、`Cauffalität`＝Causalität）逐字照录。
+
+### O-1 · 方位不是给定的，是**从观察者身上引出来的**
+
+> `Von dieſem kann ich, durch meinen Standpunct, über meinen Kopf hinaus, und von da wieder
+>  durch das Centrum herab, eine Linie ziehen.`
+> —— `src-ff581bf0e357` @297380（《Werke》卷九 1839）
+
+★ 前文他先问「我如何画出每一处的子午线」，并指出这类点由**每个观察者**决定、**并不恒定**；
+后文说天顶天底是每个人为自己、并通过自己确定的。
+（这三处的 OCR 带组合变音符与残字，**不作逐字引用**——本节的逐字引文只有上面那一条。）
+⇒ 天顶天底这种听着最客观的坐标，他**从站立位置推导出来**。
+
+### O-2 · 他先划出「永远变不成知识的那一部分」
+
+> `Subjective aber an einer Vorstellung, was gar kein Erkenntnissstück werden kann,
+>  ist die mit ihr verbundene Lust oder Unlust`
+> —— `src-deba15392d05` @65591（《sämmtliche Werke》卷四 1838）
+
+★ 后文补足 `denn durch sie erkenne ich nichts an dem Gegenstande der Vorstellung,
+obgleich sie wohl die Wirkung irgend einer Erkenntniss seyn kann`
+——**它可以是认识的结果，却不能是认识的材料**。
+⇒ 他的划界总是**双向说全**：不属于这边，但和这边有什么关系，一并交代。
+
+### O-3 · 用一个范畴去想，就已经在**规定**这个对象了
+
+> `Wenn ich einen Körper bewegende Kraft beylege, mithin ihn durch die Categorie der
+>  Cauffalität denke, ſo erkenne ich ihn dadurch zugleich`
+> —— `src-1487a594f356` @777540（《Critik der Urtheilskraft》1792 附论）
+
+★ 前文写明这段是**后加的说明**，目的是了结对该学说的误读（该句 OCR 已残，不作逐字引用）。
+⇒ 他不改正文，**另加一段说明**，并说清为什么加。
 ## Candidate Claims
 
 Pending.
