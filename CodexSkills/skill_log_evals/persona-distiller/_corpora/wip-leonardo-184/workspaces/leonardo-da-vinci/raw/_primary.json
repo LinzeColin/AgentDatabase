@@ -1,0 +1,509 @@
+{
+  "总数": 62,
+  "计数": {
+    "一手": 55,
+    "二手": 7,
+    "需人判": 0
+  },
+  "一手占比下界": 0.8871,
+  "一手占比上界": 0.8871,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "8ldv1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Notebooks of Leonardo Da Vinci, Volume 1",
+      "creator": "Leonardo Da Vinci",
+      "words": 109760
+    },
+    {
+      "identifier": "8ldvc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Notebooks of Leonardo Da Vinci, Complete",
+      "creator": "Leonardo Da Vinci",
+      "words": 251356
+    },
+    {
+      "identifier": "IManoscrittiDiLeonardoDaVinci",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「scritti」",
+      "title": "I Manoscritti di Leonardo Da Vinci: Codice Sul Volo Degli Uccelli e Varie Altre ",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 44836
+    },
+    {
+      "identifier": "LeonardoFrammenti",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Frammenti letterari e filosofici",
+      "creator": "Leonardo Da Vinci",
+      "words": 87436
+    },
+    {
+      "identifier": "MSR.084",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Libro di pittura",
+      "creator": "Leonardo da Vinci",
+      "words": 36678
+    },
+    {
+      "identifier": "McGillLibrary-osl_tabula-anatomica-leonardo-da-vinci_V777t1830-19112",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Tabula anatomica Leonardo da Vinci summi quondam pictoris e bibliotheca Augustis",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 1602
+    },
+    {
+      "identifier": "atreatiseonpaint00leon",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A treatise on painting",
+      "creator": "Leonardo, da Vinci, 1452-1519; Rigaud, J. F. (John Francis), 1742-1810; Hawkins,",
+      "words": 75780
+    },
+    {
+      "identifier": "b22031698",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Trattato della pittura",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 102740
+    },
+    {
+      "identifier": "b22385162",
+      "档": "二手",
+      "依据": "【人裁】creator 首位 Bonomi, Joseph（1856 年伦敦印）；他在第 3 位、与维特鲁威并列 ⇒ 是 Bonomi 论人体比例的书",
+      "title": "The proportions of the human figure",
+      "creator": "Bonomi, Joseph, 1796-1878; Vitruvius Pollio; Leonardo Da Vinci, 1452-1519; Royal",
+      "words": 3751
+    },
+    {
+      "identifier": "b28755376",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Trattato della pittura",
+      "creator": "Leonardo, da Vinci, 1452-1519. n 79034525; Fontani, Francesco, 1748-1818. n 8682",
+      "words": 88605
+    },
+    {
+      "identifier": "b28755959_0001",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Characaturas [sic]",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 491
+    },
+    {
+      "identifier": "b29288769",
+      "档": "二手",
+      "依据": "【人裁】creator 首位 Walker, Alexander；他在 creator 第 7 位；书是 Walker 论「美」的专著",
+      "title": "Beauty: illustrated chiefly by an analysis and classification of beauty in women",
+      "creator": "Walker, Alexander. n 79126963; Hume; Hogarth. nb2006006103; Burke; Knight. n 950",
+      "words": 93541
+    },
+    {
+      "identifier": "b30417880",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Recueil de testes de caractère et de charges",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 11375
+    },
+    {
+      "identifier": "b30448621",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvre de principes de dessin dessinés et gravés",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 985
+    },
+    {
+      "identifier": "b30459370",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Tabula anatomica e bibliotheca augustissimi Magnae Britanniae Hannoveraeque regi",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 744
+    },
+    {
+      "identifier": "b33543380",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Disegni di Leonardo da Vinci",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 32844
+    },
+    {
+      "identifier": "bim_eighteenth-century_a-treatise-on-painting-_leonardo-da-vinci_1796",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A treatise on painting, by Leonardo da Vinci. Translated from the original Itali",
+      "creator": "Leonardo, da Vinci",
+      "words": 75353
+    },
+    {
+      "identifier": "bub_gb_IAtAAAAAIAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Leonardo Da Vinci",
+      "creator": "Leonardo (da Vinci)",
+      "words": 10285
+    },
+    {
+      "identifier": "bub_gb_KPwGAAAAQAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Das Buch von der Malerei, nach dem Codex Vaticanus 1270 herausg., übers. und erl",
+      "creator": "Leonardo da Vinci",
+      "words": 127944
+    },
+    {
+      "identifier": "bub_gb_VdyPjBYNlX8C",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Das buch von der malerei Deutsche ausg. Nach dem codex vaticanus 1270 Übers",
+      "creator": "Leonardo (da Vinci)",
+      "words": 141278
+    },
+    {
+      "identifier": "bub_gb_awzMHbVJXdcC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Trattato della pittura di Lionardo da Vinci nuovamente dato in luce, colla vita ",
+      "creator": "Leonardo : da Vinci",
+      "words": 95732
+    },
+    {
+      "identifier": "bub_gb_hP0GAAAAQAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Das Buch von der Malerei. Deutsche Ausg. nach dem Codex Vaticanus 1270 übers. un",
+      "creator": "Leonardo da Vinci",
+      "words": 141955
+    },
+    {
+      "identifier": "bub_gb_kjk_wi189ZEC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Trattato della pittura di Lionardo da Vinci",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 106273
+    },
+    {
+      "identifier": "bub_gb_q7wDAAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Das Buch von der Malerei",
+      "creator": "Leonardo, da Vinci, 1452-1519; Ludwig, Heinrich, 1829-1897",
+      "words": 244009
+    },
+    {
+      "identifier": "dasbuchvondermal00leonuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Das Buch von der Malerei. Deutsche Ausg. Nach dem codex vaticanus 1270 übers. un",
+      "creator": "Leonardo, da Vinci, 1452-1519; Biblioteca apostolica vaticana. MSS. (Urb. lat. 1",
+      "words": 139557
+    },
+    {
+      "identifier": "dasbuchvondermal01leon",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Das Buch von der Malerei nach dem Codex Vaticanus (Urbinas) 1270",
+      "creator": "Leonardo, da Vinci, 1452-1519; Ludwig, Heinrich, 1829-1897",
+      "words": 161413
+    },
+    {
+      "identifier": "dasbuchvondermal01leonuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Das Buch von der Malerei. Nach dem Codex vaticanus (Urbinas) 1270, hrsg., übers.",
+      "creator": "Leonardo, da Vinci, 1452-1519; Biblioteca apostolica vaticana. MSS. (Urb. lat. 1",
+      "words": 160771
+    },
+    {
+      "identifier": "davincitrattatop00leon",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Trattato della pittura di Lionardo da Vinci",
+      "creator": "Leonardo, da Vinci, 1452-1519; Amoretti, Carlo, 1741-1816",
+      "words": 104231
+    },
+    {
+      "identifier": "dellapitturadili00leon",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Trattato della pittura",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 86343
+    },
+    {
+      "identifier": "delmotoemisurad00leongoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Del moto e misura dell'acqua",
+      "creator": "Leonardo da Vinci ,  Leonardo",
+      "words": 56928
+    },
+    {
+      "identifier": "desvortreflichen00leon",
+      "档": "二手",
+      "依据": "题名含「leben (des|von)」且含目标姓名",
+      "title": "Des vortreflichen Florentinischen Mahlers Lionardo da Vinci höchst-nützlicher Tr",
+      "creator": "Leonardo, da Vinci, 1452-1519; Böhm, Johann Georg, 1672 or 3-1746",
+      "words": 70852
+    },
+    {
+      "identifier": "drawingsofleonar00leonuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Drawings of Leonardo da Vinci [by Charles Lewis Hind]",
+      "creator": "Leonardo, da Vinci, 1452-1519; Hind, C. Lewis (Charles Lewis), 1862-1927",
+      "words": 6637
+    },
+    {
+      "identifier": "gri_33125008484301",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Trattato della pittvra di Lionardo da Vinci, nouamente dato in luce, con la vita",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 88319
+    },
+    {
+      "identifier": "gri_33125011130263",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Trattato della pittura di Lionardo da Vinci : nuovamente date in luce, colla vit",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 92397
+    },
+    {
+      "identifier": "gri_33125015154343",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Frammenti letterari e filosofici",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 88977
+    },
+    {
+      "identifier": "gri_33125017557493",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Esquisses et études de têtes. Feuillets inédits, reproduits d'apres les origi",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 1480
+    },
+    {
+      "identifier": "gri_33125017557733",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Notes et croquis sur l'anatomie du cheval : feuillets inédits, reproduits d'apr",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 3314
+    },
+    {
+      "identifier": "ilcodicedileonar00leonuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Il codice di Leonardo da Vinci nella biblioteca del principe Trivulzio in Milano",
+      "creator": "Leonardo, da Vinci, 1452-1519; Beltrami, Luca, 1854-1933; Trivulzio, Giovanni Gi",
+      "words": 25451
+    },
+    {
+      "identifier": "imanoscrittidile00leon",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「scritti」",
+      "title": "I manoscritti di Leonardo da Vinci della Reale biblioteca di Windsor: Dell'anato",
+      "creator": "Leonardo, da Vinci, 1452-1519; Sabashnikov, Ḟedor Vasilʹevich; Piumati, Giovann",
+      "words": 77889
+    },
+    {
+      "identifier": "imanoscrittidile00leon_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「scritti」",
+      "title": "I manoscritti di Leonardo da Vinci della Reale biblioteca di Windsor: Dell'anato",
+      "creator": "Leonardo, da Vinci, 1452-1519",
+      "words": 80625
+    },
+    {
+      "identifier": "in.ernet.dli.2015.82680",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A Treatise On Painting",
+      "creator": "Leonardo Da Vinci",
+      "words": 109349
+    },
+    {
+      "identifier": "lefinezzedepenne00scar",
+      "档": "二手",
+      "依据": "【人裁】creator 首位 Scaramuccia, Luigi Pellegrini；他在第 3 位",
+      "title": "Le finezze de pennelli italiani, ammirate, e studiate da Girupeno sotto la scort",
+      "creator": "Scaramuccia, Luigi Pellegrini, 1616-1680; Magri, Giovanni Andrea, fl. 1640-1674,",
+      "words": 87341
+    },
+    {
+      "identifier": "leonardo-da-vinci-quote-nothing-strenghtens-authority-so-much-as-silence.-www.-etoile.-app",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Leonardo Da Vinci (Quote) - Nothing Strenghtens Authority So Much As Silence.",
+      "creator": "leonardo da vinci",
+      "words": 18
+    },
+    {
+      "identifier": "leonardodavincic00soci",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Leonardo da Vinci, conferenze fiorentine",
+      "creator": "Società \"Leonardo da Vinci\"",
+      "words": 87313
+    },
+    {
+      "identifier": "leonardodavincic00sociuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Leonardo da Vinci: Conferenze fiorentine. [Per] Edmondo Solmi [et al.]",
+      "creator": "Società \"Leonardo da Vinci\" di Firenze; Solmi, Edmondo, 1874-1912",
+      "words": 87483
+    },
+    {
+      "identifier": "leonardodavincid00leon",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「schriften」",
+      "title": "Leonardo da Vinci, der Denker, Forscher und Poet, nach den veroeffentilichten Ha",
+      "creator": "Leonardo, da Vinci, 1452-1519; Herzfeld, Marie",
+      "words": 142307
+    },
+    {
+      "identifier": "leonardoprosator00leonuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「scritti」",
+      "title": "Leonardo Prosatore, scelta di scritti Vinciani;",
+      "creator": "Leonardo, da Vinci, 1452-1519; Fumagalli, Giuseppina",
+      "words": 74138
+    },
+    {
+      "identifier": "lesdessinsdelo00leonuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Les dessins de Léonard de Vinci",
+      "creator": "Leonardo, da Vinci, 1452-1519; Musée du Louvre; Demonts, Louis",
+      "words": 5021
+    },
+    {
+      "identifier": "lesmanuscritsdel00leonuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Les manuscrits de Léonard de Vinci : les 14 manuscrits de l'Institut de France",
+      "creator": "Leonardo, da Vinci, 1452-1519; Institut de France; Péladan, Joséphin, 1859-1918",
+      "words": 51521
+    },
+    {
+      "identifier": "literaryworksofl01leon",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "The literary works of Leonardo da Vinci",
+      "creator": "Leonardo, da Vinci, 1452-1519; Richter, Jean Paul, 1847-1937",
+      "words": 239501
+    },
+    {
+      "identifier": "literaryworksofl01leonuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "The literary works of Leonardo da Vinci;",
+      "creator": "Leonardo, da Vinci, 1452-1519; Richter, Jean Paul, 1847-1937",
+      "words": 238849
+    },
+    {
+      "identifier": "literaryworksofl02leon",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "The literary works of Leonardo da Vinci",
+      "creator": "Leonardo, da Vinci, 1452-1519; Richter, Jean Paul, 1847-1937",
+      "words": 305513
+    },
+    {
+      "identifier": "literaryworksofl02leonuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "The literary works of Leonardo da Vinci;",
+      "creator": "Leonardo, da Vinci, 1452-1519; Richter, Jean Paul, 1847-1937",
+      "words": 304506
+    },
+    {
+      "identifier": "natuurlykenschil00goer",
+      "档": "二手",
+      "依据": "【人裁】creator 首位 Goeree, Willem；这是 Goeree 论画家人体学的荷兰文著作，**附了《绘画论》**——书是 Goeree 的",
+      "title": "Natuurlyk en schilderkonstig ontwerp der menschkunde : leerende niet alleen de k",
+      "creator": "Goeree, Willem, 1635-1711; Leonardo, da Vinci, 1452-1519. Trattato della pittura",
+      "words": 139052
+    },
+    {
+      "identifier": "quattrodipintidi00colb",
+      "档": "二手",
+      "依据": "【人裁】creator 首位 Colbacchini, Giuseppe；这是**四位大师四幅画的图说**，他与提香并列 ⇒ 写他的画，不是他写的",
+      "title": "Quattro dipinti di sommi maestri : illustrati con note critiche",
+      "creator": "Colbacchini, Giuseppe; Leonardo, da Vinci, 1452-1519; Titian, ca. 1488-1576; Rap",
+      "words": 66635
+    },
+    {
+      "identifier": "raccoltadautorii10card",
+      "档": "二手",
+      "依据": "【人裁】creator 首位 Cardinali, Francesco；这是**多位意大利作者论水流的选集**，他的《水的运动与测量》只是其中一篇 ⇒ 书是编者的。★ 其中他那部分是他的文字，若要引用须按**辑本**处理（同 Pestalozzi 的 Vogel 辑本）",
+      "title": "Raccolta d'autori italiani che trattano del moto dell' acque",
+      "creator": "Cardinali, Francesco; Leonardo, da Vinci, 1452-1519. Del moto e misura dell'acqu",
+      "words": 186151
+    },
+    {
+      "identifier": "trattatodellapit00leon_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Trattato della pittura di Leonardo da Vinci, condotto sul cod. Vaticano Urbinate",
+      "creator": "Leonardo, da Vinci, 1452-1519; Tabarrini, Marco; Vasari, Giorgio, 1511-1574; Mil",
+      "words": 168051
+    },
+    {
+      "identifier": "trattatodellapit01leon",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Trattato della pittura : nuovamente dato in luce con note, e supplementi, e con ",
+      "creator": "Leonardo, da Vinci, 1452-1519; Orsini, Baldassarre, 1732-1810; Trichet du Fresne",
+      "words": 37471
+    },
+    {
+      "identifier": "trattatodellapit02leon",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Trattato della pittura : nuovamente dato in luce con note, e supplementi, e con ",
+      "creator": "Leonardo, da Vinci, 1452-1519; Orsini, Baldassarre, 1732-1810; Trichet du Fresne",
+      "words": 44127
+    },
+    {
+      "identifier": "trattatopittura02leon",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Trattato della pittura",
+      "creator": "Leonardo, da Vinci, 1452-1519; Manzi, Guglielmo, 1734-1821; De Rossi, Giovanni G",
+      "words": 1054
+    },
+    {
+      "identifier": "treatiseonpainti00leon_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A treatise on painting",
+      "creator": "Leonardo, da Vinci, 1452-1519; Rigaud, J. F. (John Francis), 1742-1810; Brown, J",
+      "words": 82756
+    },
+    {
+      "identifier": "treatiseonpainti00leon_1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A treatise on painting",
+      "creator": "Leonardo, da Vinci, 1452-1519; Rigaud, J. F. (John Francis), 1742-1810; Brown, J",
+      "words": 112081
+    }
+  ]
+}

@@ -59,6 +59,12 @@ EXCLUDE = {
     #     其余去重只剩 **11 种题名**。这是「语料够份数而声口不够」的高风险面
     #     （同 Coffin #130／Sellers #154），**抓完必须先量声口再往下走**。
     "burbank": [],
+    # ★ Leonardo 与 Burbank **正好相反**：这里的「同现」本身就是污染。
+    #   实测 337 条里 50 条同时列着 Hollar／Dürer 与 Leonardo——那是**照他的画刻的版画**
+    #   （Met 的 `mma_*` 图像记录），其中 **49 条首位就是刻工**。
+    #   ⇒ 排掉是对的；而 Burbank 那次「按商号排会砍掉 67% 的自著」，所以那边留空。
+    #   **同一个字段，两个人物要相反的处置——不能照抄。**
+    "leonardo": ["Hollar", "Dürer", "Durer"],
 }
 # 目标必须出现在 creator 里的**姓名词元**（同一个 creator 段里全部出现即命中）。
 # ★★ 曾写成 `["Fröbel, Friedrich"]` 这种「姓, 名」定串，于是
@@ -79,6 +85,7 @@ REQUIRE = {
     "frobel": [["fröbel", "friedrich"], ["froebel", "friedrich"], ["frobel", "friedrich"]],
     "comenius": [["comenius"], ["komensk"]],
     "burbank": [["burbank", "luther"]],
+    "leonardo": [["leonardo", "vinci"], ["leonardo"]],
 }
 
 

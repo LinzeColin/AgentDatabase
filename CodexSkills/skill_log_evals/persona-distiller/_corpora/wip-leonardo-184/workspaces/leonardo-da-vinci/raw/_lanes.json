@@ -1,0 +1,326 @@
+{
+  "lanes": 3,
+  "去掉纸面道后": 2,
+  "逐道份数": {
+    "writings": 59,
+    "conversations": 2,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 0,
+    "external": 1
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "8ldv1",
+      "道": "writings",
+      "title": "The Notebooks of Leonardo Da Vinci, Volume 1"
+    },
+    {
+      "identifier": "8ldvc",
+      "道": "writings",
+      "title": "The Notebooks of Leonardo Da Vinci, Complete"
+    },
+    {
+      "identifier": "IManoscrittiDiLeonardoDaVinci",
+      "道": "writings",
+      "title": "I Manoscritti di Leonardo Da Vinci: Codice Sul Volo Degli Uccelli e Va"
+    },
+    {
+      "identifier": "LeonardoFrammenti",
+      "道": "conversations",
+      "title": "Frammenti letterari e filosofici"
+    },
+    {
+      "identifier": "MSR.084",
+      "道": "writings",
+      "title": "Libro di pittura"
+    },
+    {
+      "identifier": "McGillLibrary-osl_tabula-anatomica-leonardo-da-vinci_V777t1830-19112",
+      "道": "writings",
+      "title": "Tabula anatomica Leonardo da Vinci summi quondam pictoris e bibliothec"
+    },
+    {
+      "identifier": "atreatiseonpaint00leon",
+      "道": "writings",
+      "title": "A treatise on painting"
+    },
+    {
+      "identifier": "b22031698",
+      "道": "writings",
+      "title": "Trattato della pittura"
+    },
+    {
+      "identifier": "b22385162",
+      "道": "writings",
+      "title": "The proportions of the human figure"
+    },
+    {
+      "identifier": "b28755376",
+      "道": "writings",
+      "title": "Trattato della pittura"
+    },
+    {
+      "identifier": "b28755959_0001",
+      "道": "writings",
+      "title": "Characaturas [sic]"
+    },
+    {
+      "identifier": "b29288769",
+      "道": "writings",
+      "title": "Beauty: illustrated chiefly by an analysis and classification of beaut"
+    },
+    {
+      "identifier": "b30417880",
+      "道": "writings",
+      "title": "Recueil de testes de caractère et de charges"
+    },
+    {
+      "identifier": "b30448621",
+      "道": "writings",
+      "title": "Oeuvre de principes de dessin dessinés et gravés"
+    },
+    {
+      "identifier": "b30459370",
+      "道": "writings",
+      "title": "Tabula anatomica e bibliotheca augustissimi Magnae Britanniae Hannover"
+    },
+    {
+      "identifier": "b33543380",
+      "道": "writings",
+      "title": "Disegni di Leonardo da Vinci"
+    },
+    {
+      "identifier": "bim_eighteenth-century_a-treatise-on-painting-_leonardo-da-vinci_1796",
+      "道": "writings",
+      "title": "A treatise on painting, by Leonardo da Vinci. Translated from the orig"
+    },
+    {
+      "identifier": "bub_gb_IAtAAAAAIAAJ",
+      "道": "writings",
+      "title": "Leonardo Da Vinci"
+    },
+    {
+      "identifier": "bub_gb_KPwGAAAAQAAJ",
+      "道": "writings",
+      "title": "Das Buch von der Malerei, nach dem Codex Vaticanus 1270 herausg., über"
+    },
+    {
+      "identifier": "bub_gb_VdyPjBYNlX8C",
+      "道": "writings",
+      "title": "Das buch von der malerei Deutsche ausg. Nach dem codex vaticanus 1270 "
+    },
+    {
+      "identifier": "bub_gb_awzMHbVJXdcC",
+      "道": "writings",
+      "title": "Trattato della pittura di Lionardo da Vinci nuovamente dato in luce, c"
+    },
+    {
+      "identifier": "bub_gb_hP0GAAAAQAAJ",
+      "道": "writings",
+      "title": "Das Buch von der Malerei. Deutsche Ausg. nach dem Codex Vaticanus 1270"
+    },
+    {
+      "identifier": "bub_gb_kjk_wi189ZEC",
+      "道": "writings",
+      "title": "Trattato della pittura di Lionardo da Vinci"
+    },
+    {
+      "identifier": "bub_gb_q7wDAAAAYAAJ",
+      "道": "writings",
+      "title": "Das Buch von der Malerei"
+    },
+    {
+      "identifier": "dasbuchvondermal00leonuoft",
+      "道": "writings",
+      "title": "Das Buch von der Malerei. Deutsche Ausg. Nach dem codex vaticanus 1270"
+    },
+    {
+      "identifier": "dasbuchvondermal01leon",
+      "道": "writings",
+      "title": "Das Buch von der Malerei nach dem Codex Vaticanus (Urbinas) 1270"
+    },
+    {
+      "identifier": "dasbuchvondermal01leonuoft",
+      "道": "writings",
+      "title": "Das Buch von der Malerei. Nach dem Codex vaticanus (Urbinas) 1270, hrs"
+    },
+    {
+      "identifier": "davincitrattatop00leon",
+      "道": "writings",
+      "title": "Trattato della pittura di Lionardo da Vinci"
+    },
+    {
+      "identifier": "dellapitturadili00leon",
+      "道": "writings",
+      "title": "Trattato della pittura"
+    },
+    {
+      "identifier": "delmotoemisurad00leongoog",
+      "道": "writings",
+      "title": "Del moto e misura dell'acqua"
+    },
+    {
+      "identifier": "desvortreflichen00leon",
+      "道": "external",
+      "title": "Des vortreflichen Florentinischen Mahlers Lionardo da Vinci höchst-nüt"
+    },
+    {
+      "identifier": "drawingsofleonar00leonuoft",
+      "道": "writings",
+      "title": "Drawings of Leonardo da Vinci [by Charles Lewis Hind]"
+    },
+    {
+      "identifier": "gri_33125008484301",
+      "道": "writings",
+      "title": "Trattato della pittvra di Lionardo da Vinci, nouamente dato in luce, c"
+    },
+    {
+      "identifier": "gri_33125011130263",
+      "道": "writings",
+      "title": "Trattato della pittura di Lionardo da Vinci : nuovamente date in luce,"
+    },
+    {
+      "identifier": "gri_33125015154343",
+      "道": "conversations",
+      "title": "Frammenti letterari e filosofici"
+    },
+    {
+      "identifier": "gri_33125017557493",
+      "道": "writings",
+      "title": "Esquisses et études de têtes. Feuillets inédits, reproduits d'apres"
+    },
+    {
+      "identifier": "gri_33125017557733",
+      "道": "writings",
+      "title": "Notes et croquis sur l'anatomie du cheval : feuillets inédits, reprod"
+    },
+    {
+      "identifier": "ilcodicedileonar00leonuoft",
+      "道": "writings",
+      "title": "Il codice di Leonardo da Vinci nella biblioteca del principe Trivulzio"
+    },
+    {
+      "identifier": "imanoscrittidile00leon",
+      "道": "writings",
+      "title": "I manoscritti di Leonardo da Vinci della Reale biblioteca di Windsor: "
+    },
+    {
+      "identifier": "imanoscrittidile00leon_0",
+      "道": "writings",
+      "title": "I manoscritti di Leonardo da Vinci della Reale biblioteca di Windsor: "
+    },
+    {
+      "identifier": "in.ernet.dli.2015.82680",
+      "道": "writings",
+      "title": "A Treatise On Painting"
+    },
+    {
+      "identifier": "lefinezzedepenne00scar",
+      "道": "writings",
+      "title": "Le finezze de pennelli italiani, ammirate, e studiate da Girupeno sott"
+    },
+    {
+      "identifier": "leonardo-da-vinci-quote-nothing-strenghtens-authority-so-much-as-silence.-www.-etoile.-app",
+      "道": "writings",
+      "title": "Leonardo Da Vinci (Quote) - Nothing Strenghtens Authority So Much As S"
+    },
+    {
+      "identifier": "leonardodavincic00soci",
+      "道": "writings",
+      "title": "Leonardo da Vinci, conferenze fiorentine"
+    },
+    {
+      "identifier": "leonardodavincic00sociuoft",
+      "道": "writings",
+      "title": "Leonardo da Vinci: Conferenze fiorentine. [Per] Edmondo Solmi [et al.]"
+    },
+    {
+      "identifier": "leonardodavincid00leon",
+      "道": "writings",
+      "title": "Leonardo da Vinci, der Denker, Forscher und Poet, nach den veroeffenti"
+    },
+    {
+      "identifier": "leonardoprosator00leonuoft",
+      "道": "writings",
+      "title": "Leonardo Prosatore, scelta di scritti Vinciani;"
+    },
+    {
+      "identifier": "lesdessinsdelo00leonuoft",
+      "道": "writings",
+      "title": "Les dessins de Léonard de Vinci"
+    },
+    {
+      "identifier": "lesmanuscritsdel00leonuoft",
+      "道": "writings",
+      "title": "Les manuscrits de Léonard de Vinci : les 14 manuscrits de l'Institut d"
+    },
+    {
+      "identifier": "literaryworksofl01leon",
+      "道": "writings",
+      "title": "The literary works of Leonardo da Vinci"
+    },
+    {
+      "identifier": "literaryworksofl01leonuoft",
+      "道": "writings",
+      "title": "The literary works of Leonardo da Vinci;"
+    },
+    {
+      "identifier": "literaryworksofl02leon",
+      "道": "writings",
+      "title": "The literary works of Leonardo da Vinci"
+    },
+    {
+      "identifier": "literaryworksofl02leonuoft",
+      "道": "writings",
+      "title": "The literary works of Leonardo da Vinci;"
+    },
+    {
+      "identifier": "natuurlykenschil00goer",
+      "道": "writings",
+      "title": "Natuurlyk en schilderkonstig ontwerp der menschkunde : leerende niet a"
+    },
+    {
+      "identifier": "quattrodipintidi00colb",
+      "道": "writings",
+      "title": "Quattro dipinti di sommi maestri : illustrati con note critiche"
+    },
+    {
+      "identifier": "raccoltadautorii10card",
+      "道": "writings",
+      "title": "Raccolta d'autori italiani che trattano del moto dell' acque"
+    },
+    {
+      "identifier": "trattatodellapit00leon_0",
+      "道": "writings",
+      "title": "Trattato della pittura di Leonardo da Vinci, condotto sul cod. Vatican"
+    },
+    {
+      "identifier": "trattatodellapit01leon",
+      "道": "writings",
+      "title": "Trattato della pittura : nuovamente dato in luce con note, e supplemen"
+    },
+    {
+      "identifier": "trattatodellapit02leon",
+      "道": "writings",
+      "title": "Trattato della pittura : nuovamente dato in luce con note, e supplemen"
+    },
+    {
+      "identifier": "trattatopittura02leon",
+      "道": "writings",
+      "title": "Trattato della pittura"
+    },
+    {
+      "identifier": "treatiseonpainti00leon_0",
+      "道": "writings",
+      "title": "A treatise on painting"
+    },
+    {
+      "identifier": "treatiseonpainti00leon_1",
+      "道": "writings",
+      "title": "A treatise on painting"
+    }
+  ]
+}

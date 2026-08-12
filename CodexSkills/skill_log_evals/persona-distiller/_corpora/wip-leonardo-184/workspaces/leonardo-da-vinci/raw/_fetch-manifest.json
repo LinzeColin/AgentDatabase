@@ -1,0 +1,1635 @@
+{
+  "生成时刻": "2026-08-13T09:40:03",
+  "请求数": 70,
+  "已取回": 62,
+  "skipped_access_restricted": 0,
+  "失败": 8,
+  "并发降级": "无（全程并发 4）",
+  "总词数": 5700775,
+  "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
+  "记录": [
+    {
+      "identifier": "8ldv1",
+      "status": "已取回",
+      "note": "",
+      "file": "8ldv1.txt",
+      "source_url": "https://archive.org/download/8ldv1/8ldv110.txt",
+      "sha256": "c8e6466f320bf9043deda8560e60e93afeb4084f7b1d88ab43670c959e896c6f",
+      "bytes": 618282,
+      "words": 109760,
+      "fetched_at": "2026-08-13T09:39:25",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2015-03-05 01:15:17",
+      "ia_creator": "Leonardo Da Vinci",
+      "ia_title": "The Notebooks of Leonardo Da Vinci, Volume 1",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1566",
+        "1651",
+        "1817",
+        "1880",
+        "1882",
+        "1883",
+        "1888",
+        "1971",
+        "2002"
+      ],
+      "digitization_years": [
+        "2004"
+      ]
+    },
+    {
+      "identifier": "8ldvc",
+      "status": "已取回",
+      "note": "",
+      "file": "8ldvc.txt",
+      "source_url": "https://archive.org/download/8ldvc/8ldvc10.txt",
+      "sha256": "fd852af01cbd344a546a346e46ae915e427d6fd7210f059145a0c4b0fdea5373",
+      "bytes": 1427642,
+      "words": 251356,
+      "fetched_at": "2026-08-13T09:39:21",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2015-03-05 01:15:17",
+      "ia_creator": "Leonardo Da Vinci",
+      "ia_title": "The Notebooks of Leonardo Da Vinci, Complete",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1566",
+        "1651",
+        "1817",
+        "1880",
+        "1882",
+        "1883",
+        "1888",
+        "1971",
+        "2002"
+      ],
+      "digitization_years": [
+        "2004"
+      ]
+    },
+    {
+      "identifier": "IManoscrittiDiLeonardoDaVinci",
+      "status": "已取回",
+      "note": "",
+      "file": "IManoscrittiDiLeonardoDaVinci.txt",
+      "source_url": "https://archive.org/download/IManoscrittiDiLeonardoDaVinci/I_manoscritti_di_Leonardo_da_Vinci_djvu.txt",
+      "sha256": "1e13c03c804a9a942f7263d1b24f88092213c5801152fb3f0a7b931f99e053d0",
+      "bytes": 297057,
+      "words": 44836,
+      "fetched_at": "2026-08-13T09:39:05",
+      "ia_date": "1893",
+      "ia_year": "",
+      "ia_publicdate": "2017-03-21 22:36:56",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "I Manoscritti di Leonardo Da Vinci: Codice Sul Volo Degli Uccelli e Varie Altre Materie",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "LeonardoFrammenti",
+      "status": "已取回",
+      "note": "",
+      "file": "LeonardoFrammenti.txt",
+      "source_url": "https://archive.org/download/LeonardoFrammenti/LeonardoFrammenti_djvu.txt",
+      "sha256": "b7ba908f82c04be996a058c9c62ef2377a536453887c92518a85d3d4ea3e17ba",
+      "bytes": 580576,
+      "words": 87436,
+      "fetched_at": "2026-08-13T09:38:26",
+      "ia_date": "1908",
+      "ia_year": "",
+      "ia_publicdate": "2017-09-12 19:46:19",
+      "ia_creator": "Leonardo Da Vinci",
+      "ia_title": "Frammenti letterari e filosofici",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1500",
+        "1501",
+        "1502",
+        "1504",
+        "1509",
+        "1872",
+        "1896",
+        "1907"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "MSR.084",
+      "status": "已取回",
+      "note": "",
+      "file": "MSR.084.txt",
+      "source_url": "https://archive.org/download/MSR.084/MSR. 084_djvu.txt",
+      "sha256": "e647b47131e442272c054f2b5880967d7884388b209578f6a53eb0c159f13e61",
+      "bytes": 166964,
+      "words": 36678,
+      "fetched_at": "2026-08-13T09:38:57",
+      "ia_date": "1550",
+      "ia_year": "",
+      "ia_publicdate": "2024-09-09 08:05:42",
+      "ia_creator": "Leonardo da Vinci",
+      "ia_title": "Libro di pittura",
+      "ia_licenseurl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "McGillLibrary-osl_tabula-anatomica-leonardo-da-vinci_V777t1830-19112",
+      "status": "已取回",
+      "note": "",
+      "file": "McGillLibrary-osl_tabula-anatomica-leonardo-da-vinci_V777t1830-19112.txt",
+      "source_url": "https://archive.org/download/McGillLibrary-osl_tabula-anatomica-leonardo-da-vinci_V777t1830-19112/osl_tabula-anatomica-leonardo-da-vinci_V777t1830_djvu.txt",
+      "sha256": "6bb9e95ee27e0dcd52782877a8a377222e151ee64fbf37ce8c3221847bdbb590",
+      "bytes": 10251,
+      "words": 1602,
+      "fetched_at": "2026-08-13T09:39:39",
+      "ia_date": "1830",
+      "ia_year": "",
+      "ia_publicdate": "2019-06-12 20:00:14",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Tabula anatomica Leonardo da Vinci summi quondam pictoris e bibliotheca Augustissimi Magnae Britanniae Hannoveraeque Regis depromta, venerem obversam e legibus naturae hominibus solam convenire, Ostendens",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1519",
+        "1830"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "anghiari",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "atreatiseonpaint00leon",
+      "status": "已取回",
+      "note": "",
+      "file": "atreatiseonpaint00leon.txt",
+      "source_url": "https://archive.org/download/atreatiseonpaint00leon/atreatiseonpaint00leon_djvu.txt",
+      "sha256": "a967a6c066d2e7082123df78c6ad5a055c23040155e76a1acec8532b90ff6754",
+      "bytes": 494631,
+      "words": 75780,
+      "fetched_at": "2026-08-13T09:39:29",
+      "ia_date": "1802",
+      "ia_year": "",
+      "ia_publicdate": "2008-11-25 16:43:59",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Rigaud, J. F. (John Francis), 1742-1810",
+        "Hawkins, John Sidney, 1758-1842"
+      ],
+      "ia_title": "A treatise on painting",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1721",
+        "1796",
+        "1961"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "b22031698",
+      "status": "已取回",
+      "note": "",
+      "file": "b22031698.txt",
+      "source_url": "https://archive.org/download/b22031698/b22031698_djvu.txt",
+      "sha256": "9407fa395329a7d011634585a3a662441977ee6ab5014118251cde376cfd27cf",
+      "bytes": 608340,
+      "words": 102740,
+      "fetched_at": "2026-08-13T09:38:51",
+      "ia_date": "1804",
+      "ia_year": "",
+      "ia_publicdate": "2024-03-19 11:25:33",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Trattato della pittura",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1651",
+        "1702",
+        "1784",
+        "1796"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "b22385162",
+      "status": "已取回",
+      "note": "",
+      "file": "b22385162.txt",
+      "source_url": "https://archive.org/download/b22385162/b22385162_djvu.txt",
+      "sha256": "a05aef2b534e26f567d30dc87df409951f9cc91223a3d5684e0e5f038ac947f1",
+      "bytes": 23775,
+      "words": 3751,
+      "fetched_at": "2026-08-13T09:39:24",
+      "ia_date": "1856",
+      "ia_year": "",
+      "ia_publicdate": "2015-09-29 08:54:46",
+      "ia_creator": [
+        "Bonomi, Joseph, 1796-1878",
+        "Vitruvius Pollio",
+        "Leonardo Da Vinci, 1452-1519",
+        "Royal College of Surgeons of England"
+      ],
+      "ia_title": "The proportions of the human figure",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1812",
+        "1830",
+        "1842",
+        "1849",
+        "1853",
+        "1855"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "b28755376",
+      "status": "已取回",
+      "note": "",
+      "file": "b28755376.txt",
+      "source_url": "https://archive.org/download/b28755376/b28755376_djvu.txt",
+      "sha256": "5a1ca962b0dcd98d1e16776689b53d8ed8fe56b4cde4b9f61aeaaa28a1791dbd",
+      "bytes": 560225,
+      "words": 88605,
+      "fetched_at": "2026-08-13T09:38:48",
+      "ia_date": "1792",
+      "ia_year": "",
+      "ia_publicdate": "2017-04-24 10:17:29",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519. n 79034525",
+        "Fontani, Francesco, 1748-1818. n 86821731"
+      ],
+      "ia_title": "Trattato della pittura",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": [
+        "2017"
+      ]
+    },
+    {
+      "identifier": "b28755959_0001",
+      "status": "已取回",
+      "note": "",
+      "file": "b28755959_0001.txt",
+      "source_url": "https://archive.org/download/b28755959_0001/b28755959_0001_djvu.txt",
+      "sha256": "9fe14c7e2ce644e04bfa0f92c7e5cc8e10710e10cab634ca67543d66c99f6a57",
+      "bytes": 2085,
+      "words": 491,
+      "fetched_at": "2026-08-13T09:39:34",
+      "ia_date": "1786",
+      "ia_year": "",
+      "ia_publicdate": "2026-06-23 12:34:12",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Characaturas [sic]",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "b29288769",
+      "status": "已取回",
+      "note": "",
+      "file": "b29288769.txt",
+      "source_url": "https://archive.org/download/b29288769/b29288769_djvu.txt",
+      "sha256": "46427c057b7dca3db88b90b103ee0ad1d05348c4c3e01169ad5e6aa31bc33558",
+      "bytes": 638411,
+      "words": 93541,
+      "fetched_at": "2026-08-13T09:39:15",
+      "ia_date": "1846",
+      "ia_year": "",
+      "ia_publicdate": "2018-04-23 08:43:53",
+      "ia_creator": [
+        "Walker, Alexander. n 79126963",
+        "Hume",
+        "Hogarth. nb2006006103",
+        "Burke",
+        "Knight. n 95096599",
+        "Alison. nb2003053556",
+        "Leonardo, da Vinci, 1452-1519. n 79034525",
+        "Holting, Gustav. nr 92019802",
+        "Mengs",
+        "Bossi",
+        "Howard, Henry, 1769-1847. n 86021532"
+      ],
+      "ia_title": "Beauty: illustrated chiefly by an analysis and classification of beauty in women",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1830"
+      ],
+      "digitization_years": [
+        "2018"
+      ]
+    },
+    {
+      "identifier": "b30417880",
+      "status": "已取回",
+      "note": "",
+      "file": "b30417880.txt",
+      "source_url": "https://archive.org/download/b30417880/b30417880_djvu.txt",
+      "sha256": "8cceb4fc647eec2c54af98fc03f09dc19cd6914ac8308b08a6a3e21781edb34d",
+      "bytes": 75680,
+      "words": 11375,
+      "fetched_at": "2026-08-13T09:39:44",
+      "ia_date": "1730",
+      "ia_year": "",
+      "ia_publicdate": "2018-08-30 12:45:12",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Recueil de testes de caractère et de charges",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1646",
+        "1750"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "b30448621",
+      "status": "已取回",
+      "note": "",
+      "file": "b30448621.txt",
+      "source_url": "https://archive.org/download/b30448621/b30448621_djvu.txt",
+      "sha256": "22387b75ebebf79f554e3b2c7c4881d6eca7cf7983956a272970101954b8318c",
+      "bytes": 6299,
+      "words": 985,
+      "fetched_at": "2026-08-13T09:39:40",
+      "ia_date": "1790",
+      "ia_year": "",
+      "ia_publicdate": "2018-12-06 16:19:48",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Oeuvre de principes de dessin dessinés et gravés",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1784",
+        "1785",
+        "1787",
+        "1830",
+        "1862",
+        "1868"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "b30459370",
+      "status": "已取回",
+      "note": "",
+      "file": "b30459370.txt",
+      "source_url": "https://archive.org/download/b30459370/b30459370_djvu.txt",
+      "sha256": "9ae41bb3b1b9259caa1cd7ce64deaf7466a21b0a1b4e287cb40320d232dec405",
+      "bytes": 5262,
+      "words": 744,
+      "fetched_at": "2026-08-13T09:39:29",
+      "ia_date": "1830",
+      "ia_year": "",
+      "ia_publicdate": "2018-12-06 16:19:49",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Tabula anatomica e bibliotheca augustissimi Magnae Britanniae Hannoveraeque regis depromta, venerem obversam e legibus naturae hominibus solam convenire, ostendens",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1512",
+        "1571",
+        "1786"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "b33543380",
+      "status": "已取回",
+      "note": "",
+      "file": "b33543380.txt",
+      "source_url": "https://archive.org/download/b33543380/b33543380_djvu.txt",
+      "sha256": "947d72c8b074d002de1a55c613aa6fd7ad065d3eb0c61bceb56e88db363021b8",
+      "bytes": 158974,
+      "words": 32844,
+      "fetched_at": "2026-08-13T09:38:33",
+      "ia_date": "1830",
+      "ia_year": "",
+      "ia_publicdate": "2025-12-09 12:21:40",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Disegni di Leonardo da Vinci",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1764",
+        "1796",
+        "1804",
+        "1819"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "bim_eighteenth-century_a-treatise-on-painting-_leonardo-da-vinci_1796",
+      "status": "已取回",
+      "note": "",
+      "file": "bim_eighteenth-century_a-treatise-on-painting-_leonardo-da-vinci_1796.txt",
+      "source_url": "https://archive.org/download/bim_eighteenth-century_a-treatise-on-painting-_leonardo-da-vinci_1796/bim_eighteenth-century_a-treatise-on-painting-_leonardo-da-vinci_1796_djvu.txt",
+      "sha256": "e597cb745673ca21a136d0fd19e6cc1299c0c1e066611b91b2df1db3d24f239a",
+      "bytes": 409127,
+      "words": 75353,
+      "fetched_at": "2026-08-13T09:39:20",
+      "ia_date": "1796",
+      "ia_year": "",
+      "ia_publicdate": "2024-03-20 22:59:01",
+      "ia_creator": "Leonardo, da Vinci",
+      "ia_title": "A treatise on painting, by Leonardo da Vinci. Translated from the original Italian. Illustrated with a great number of cuts. ...  1796",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1796"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "bub_gb_IAtAAAAAIAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_IAtAAAAAIAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_IAtAAAAAIAAJ/bub_gb_IAtAAAAAIAAJ_djvu.txt",
+      "sha256": "791b858dd14829e0497cbaead6cb84525602ccdf0720ac867c479e27e6d8ea1b",
+      "bytes": 73296,
+      "words": 10285,
+      "fetched_at": "2026-08-13T09:39:20",
+      "ia_date": "1920",
+      "ia_year": "1920",
+      "ia_publicdate": "2015-01-29 13:32:01",
+      "ia_creator": "Leonardo (da Vinci)",
+      "ia_title": "Leonardo Da Vinci",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1893"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "bub_gb_KPwGAAAAQAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_KPwGAAAAQAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_KPwGAAAAQAAJ/bub_gb_KPwGAAAAQAAJ_djvu.txt",
+      "sha256": "a229befdf309a213ecc60c49a730fe71bf95634a71613ba2005b60b88ea6d343",
+      "bytes": 796038,
+      "words": 127944,
+      "fetched_at": "2026-08-13T09:39:52",
+      "ia_date": "1882",
+      "ia_year": "1882",
+      "ia_publicdate": "2015-01-30 19:38:00",
+      "ia_creator": "Leonardo da Vinci",
+      "ia_title": "Das Buch von der Malerei, nach dem Codex Vaticanus 1270 herausg., übers. und erläutert von H. Ludwig",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1847",
+        "1879",
+        "1882"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "bub_gb_VdyPjBYNlX8C",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_VdyPjBYNlX8C.txt",
+      "source_url": "https://archive.org/download/bub_gb_VdyPjBYNlX8C/bub_gb_VdyPjBYNlX8C_djvu.txt",
+      "sha256": "1fe443f461bf3a435e52026187897586978533454b4892d076d97341610f02e7",
+      "bytes": 916335,
+      "words": 141278,
+      "fetched_at": "2026-08-13T09:39:53",
+      "ia_date": "1882",
+      "ia_year": "1882",
+      "ia_publicdate": "2014-12-21 04:01:23",
+      "ia_creator": "Leonardo (da Vinci)",
+      "ia_title": "Das buch von der malerei Deutsche ausg. Nach dem codex vaticanus 1270 Übers",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1882"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "bub_gb_awzMHbVJXdcC",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_awzMHbVJXdcC.txt",
+      "source_url": "https://archive.org/download/bub_gb_awzMHbVJXdcC/bub_gb_awzMHbVJXdcC_djvu.txt",
+      "sha256": "8bf5e04cd9a4f211b2fac9f31227badc074e890a9f46e6d2c51943f30a9899b7",
+      "bytes": 543538,
+      "words": 95732,
+      "fetched_at": "2026-08-13T09:38:29",
+      "ia_date": "1733",
+      "ia_year": "1733",
+      "ia_publicdate": "2016-07-17 15:44:25",
+      "ia_creator": "Leonardo : da Vinci",
+      "ia_title": "Trattato della pittura di Lionardo da Vinci nuovamente dato in luce, colla vita dell'istesso autore, scritta da Rafaelle Du Fresne. Si sono giunti i tre libr i della Pittura, ed il trattato della Statua di Leon Battista Alberti, colla Vi ta del medesimo ",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "bub_gb_hP0GAAAAQAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_hP0GAAAAQAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_hP0GAAAAQAAJ/bub_gb_hP0GAAAAQAAJ_djvu.txt",
+      "sha256": "5d7b1aa45856ee96467d3034244b1a7c05a60af803af63fe59b4137fc638df94",
+      "bytes": 920775,
+      "words": 141955,
+      "fetched_at": "2026-08-13T09:40:03",
+      "ia_date": "1882",
+      "ia_year": "1882",
+      "ia_publicdate": "2015-02-21 19:10:26",
+      "ia_creator": "Leonardo da Vinci",
+      "ia_title": "Das Buch von der Malerei. Deutsche Ausg. nach dem Codex Vaticanus 1270 übers. und geordnet von H. Ludwig",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1549",
+        "1871",
+        "1872",
+        "1873",
+        "1874",
+        "1882"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "bub_gb_kjk_wi189ZEC",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_kjk_wi189ZEC.txt",
+      "source_url": "https://archive.org/download/bub_gb_kjk_wi189ZEC/bub_gb_kjk_wi189ZEC_djvu.txt",
+      "sha256": "053a2a55009f995b745ec048df00ac50758f80cc9131739de5af9a2641d91816",
+      "bytes": 668084,
+      "words": 106273,
+      "fetched_at": "2026-08-13T09:38:31",
+      "ia_date": "1804",
+      "ia_year": "1804",
+      "ia_publicdate": "2016-04-18 14:15:11",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Trattato della pittura di Lionardo da Vinci",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1784",
+        "1792",
+        "1796",
+        "1797",
+        "1804"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "bub_gb_q7wDAAAAYAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_q7wDAAAAYAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_q7wDAAAAYAAJ/bub_gb_q7wDAAAAYAAJ_djvu.txt",
+      "sha256": "5009dd024a7d67549207db5914a12ebce2899ad59aa18703584c079445c55edb",
+      "bytes": 1832157,
+      "words": 244009,
+      "fetched_at": "2026-08-13T09:39:16",
+      "ia_date": "1882",
+      "ia_year": "1882",
+      "ia_publicdate": "2015-04-12 18:34:32",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Ludwig, Heinrich, 1829-1897"
+      ],
+      "ia_title": "Das Buch von der Malerei",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1830",
+        "1882"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "clevelandart-1923.328-la-belle-ferronniere",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "clevelandart-1923.348-beatrice-d-este",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "da-vinci-hidden-sketch-virgin-on-the-rocks",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "dasbuchvondermal00leonuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "dasbuchvondermal00leonuoft.txt",
+      "source_url": "https://archive.org/download/dasbuchvondermal00leonuoft/dasbuchvondermal00leonuoft_djvu.txt",
+      "sha256": "7af29b5a5b0e31c37a8fa25dcaf4399611823ca26b65653ad4d39bed64430fce",
+      "bytes": 1038362,
+      "words": 139557,
+      "fetched_at": "2026-08-13T09:39:46",
+      "ia_date": "1882",
+      "ia_year": "",
+      "ia_publicdate": "2008-08-05 14:46:46",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Biblioteca apostolica vaticana. MSS. (Urb. lat. 1270)",
+        "Ludwig, Heinrich, 1829-1897"
+      ],
+      "ia_title": "Das Buch von der Malerei. Deutsche Ausg. Nach dem codex vaticanus 1270 übers. und unter Beibehalt der Haupteintheilung übersichtlicher geordnet von Heinrich Ludwig. Mit 268 Holzschnitten",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1882"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "dasbuchvondermal01leon",
+      "status": "已取回",
+      "note": "",
+      "file": "dasbuchvondermal01leon.txt",
+      "source_url": "https://archive.org/download/dasbuchvondermal01leon/dasbuchvondermal01leon_djvu.txt",
+      "sha256": "7d185c91eb8ff6ff00efe876461c075aff2a0387d02ac82a1b49b49c1993a7cc",
+      "bytes": 1132475,
+      "words": 161413,
+      "fetched_at": "2026-08-13T09:39:46",
+      "ia_date": "1882",
+      "ia_year": "",
+      "ia_publicdate": "2016-02-16 14:30:31",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Ludwig, Heinrich, 1829-1897"
+      ],
+      "ia_title": "Das Buch von der Malerei nach dem Codex Vaticanus (Urbinas) 1270",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1882"
+      ],
+      "digitization_years": [
+        "2016"
+      ]
+    },
+    {
+      "identifier": "dasbuchvondermal01leonuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "dasbuchvondermal01leonuoft.txt",
+      "source_url": "https://archive.org/download/dasbuchvondermal01leonuoft/dasbuchvondermal01leonuoft_djvu.txt",
+      "sha256": "c022f3967fb47cd03293cd54e03c74aff63b6b1205c2068d21f8ead8a47f4064",
+      "bytes": 1143153,
+      "words": 160771,
+      "fetched_at": "2026-08-13T09:39:16",
+      "ia_date": "1882",
+      "ia_year": "",
+      "ia_publicdate": "2008-08-05 14:43:54",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Biblioteca apostolica vaticana. MSS. (Urb. lat. 1270)",
+        "Ludwig, Heinrich, 1829-1897"
+      ],
+      "ia_title": "Das Buch von der Malerei. Nach dem Codex vaticanus (Urbinas) 1270, hrsg., übers. und erläutert von Heinrich Ludwig",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1882"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "davincitrattatop00leon",
+      "status": "已取回",
+      "note": "",
+      "file": "davincitrattatop00leon.txt",
+      "source_url": "https://archive.org/download/davincitrattatop00leon/davincitrattatop00leon_djvu.txt",
+      "sha256": "f4d97288d2f49e2b429f43a07d28fee5b45db4c6b098d8ab4203ec45dc6ca588",
+      "bytes": 673582,
+      "words": 104231,
+      "fetched_at": "2026-08-13T09:38:21",
+      "ia_date": "1804",
+      "ia_year": "",
+      "ia_publicdate": "2008-11-25 16:48:53",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Amoretti, Carlo, 1741-1816"
+      ],
+      "ia_title": "Trattato della pittura di Lionardo da Vinci",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1784",
+        "1796",
+        "1797",
+        "1804",
+        "1961"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "dellapitturadili00leon",
+      "status": "已取回",
+      "note": "",
+      "file": "dellapitturadili00leon.txt",
+      "source_url": "https://archive.org/download/dellapitturadili00leon/dellapitturadili00leon_djvu.txt",
+      "sha256": "dc78e0660cdd97d2b91df77144f5274af7ed0c9f0dc2c6938b66f907f30d70ac",
+      "bytes": 572287,
+      "words": 86343,
+      "fetched_at": "2026-08-13T09:38:45",
+      "ia_date": "1792",
+      "ia_year": "",
+      "ia_publicdate": "2010-02-09 23:21:38",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Trattato della pittura",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1792"
+      ],
+      "digitization_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "delmotoemisurad00leongoog",
+      "status": "已取回",
+      "note": "",
+      "file": "delmotoemisurad00leongoog.txt",
+      "source_url": "https://archive.org/download/delmotoemisurad00leongoog/delmotoemisurad00leongoog_djvu.txt",
+      "sha256": "bb3a5f5b66f8032b987a495d5e86efba0750e3a584996fbe6f6898aa27836c42",
+      "bytes": 326136,
+      "words": 56928,
+      "fetched_at": "2026-08-13T09:39:08",
+      "ia_date": "1828",
+      "ia_year": "1828",
+      "ia_publicdate": "2008-03-27 12:29:19",
+      "ia_creator": "Leonardo da Vinci ,  Leonardo",
+      "ia_title": "Del moto e misura dell'acqua",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1899"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "desvortreflichen00leon",
+      "status": "已取回",
+      "note": "",
+      "file": "desvortreflichen00leon.txt",
+      "source_url": "https://archive.org/download/desvortreflichen00leon/desvortreflichen00leon_djvu.txt",
+      "sha256": "0611c286ebc13bd7bd19ce846c3225edd101322e07f4b291ab86682cc4de6bad",
+      "bytes": 457623,
+      "words": 70852,
+      "fetched_at": "2026-08-13T09:39:49",
+      "ia_date": "1747",
+      "ia_year": "",
+      "ia_publicdate": "2008-11-25 16:30:20",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Böhm, Johann Georg, 1672 or 3-1746"
+      ],
+      "ia_title": "Des vortreflichen Florentinischen Mahlers Lionardo da Vinci höchst-nützlicher Tractat von der Mahlerey : aus dem Italiänischen und Frantzöischen in das Teutsche übersetzet : auch nach dem Original mit vielen Kupfern und saubern Holtzschnitten versehen : und mit beygefügten Leben des Auctoris zum Druck befördert",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1640",
+        "1651",
+        "1716",
+        "1747",
+        "1961"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "drawingsofleonar00leonuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "drawingsofleonar00leonuoft.txt",
+      "source_url": "https://archive.org/download/drawingsofleonar00leonuoft/drawingsofleonar00leonuoft_djvu.txt",
+      "sha256": "4b5f04bd6a83dd962426289fd591c65dbafc82b9bc03dd608b24c71c5fd33925",
+      "bytes": 45004,
+      "words": 6637,
+      "fetched_at": "2026-08-13T09:39:32",
+      "ia_date": "[1907]",
+      "ia_year": "",
+      "ia_publicdate": "2006-10-24 12:11:18",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Hind, C. Lewis (Charles Lewis), 1862-1927"
+      ],
+      "ia_title": "Drawings of Leonardo da Vinci [by Charles Lewis Hind]",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1828"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "gri_33125008484301",
+      "status": "已取回",
+      "note": "",
+      "file": "gri_33125008484301.txt",
+      "source_url": "https://archive.org/download/gri_33125008484301/gri_33125008484301_djvu.txt",
+      "sha256": "99fecb618e711b5cc9ffa8d93b8498c09dec57522978f6c6cdd26c3d7386de88",
+      "bytes": 529037,
+      "words": 88319,
+      "fetched_at": "2026-08-13T09:38:46",
+      "ia_date": "1651",
+      "ia_year": "",
+      "ia_publicdate": "2014-10-08 23:29:49",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Trattato della pittvra di Lionardo da Vinci, nouamente dato in luce, con la vita dell'istesso autore, scritta da Rafaelle dv Fresne. Si sono giunti i tre libri della pittura, & il trattato della statua di Leon Battista Alberti, con la vita del medesimo",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "gri_33125011130263",
+      "status": "已取回",
+      "note": "",
+      "file": "gri_33125011130263.txt",
+      "source_url": "https://archive.org/download/gri_33125011130263/gri_33125011130263_djvu.txt",
+      "sha256": "ed54867500341db478f25df94fd590b61883fe485fa11632349c2700631725bd",
+      "bytes": 539759,
+      "words": 92397,
+      "fetched_at": "2026-08-13T09:38:25",
+      "ia_date": "1733",
+      "ia_year": "",
+      "ia_publicdate": "2014-09-02 18:16:16",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Trattato della pittura di Lionardo da Vinci : nuovamente date in luce, colla vita dell'istesso autore",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1733"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "gri_33125015154343",
+      "status": "已取回",
+      "note": "",
+      "file": "gri_33125015154343.txt",
+      "source_url": "https://archive.org/download/gri_33125015154343/gri_33125015154343_djvu.txt",
+      "sha256": "bc1085755aa9501bcae4c67592a3ca4c1b00ecbf2d7fec3a469dd98d8620ea77",
+      "bytes": 602437,
+      "words": 88977,
+      "fetched_at": "2026-08-13T09:38:21",
+      "ia_date": "1904",
+      "ia_year": "",
+      "ia_publicdate": "2018-08-01 01:40:05",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Frammenti letterari e filosofici",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1500",
+        "1501",
+        "1502",
+        "1504",
+        "1509",
+        "1583",
+        "1872",
+        "1879",
+        "1896",
+        "1904"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "gri_33125017557493",
+      "status": "已取回",
+      "note": "",
+      "file": "gri_33125017557493.txt",
+      "source_url": "https://archive.org/download/gri_33125017557493/gri_33125017557493_djvu.txt",
+      "sha256": "347a76c09de760e5a9c3d842b0eef939d915a0cb651832529ca90cbe9fb24258",
+      "bytes": 8238,
+      "words": 1480,
+      "fetched_at": "2026-08-13T09:39:39",
+      "ia_date": "1901",
+      "ia_year": "",
+      "ia_publicdate": "2022-04-23 01:02:44",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Esquisses et études de têtes. Feuillets inédits, reproduits d'apres les originaux conservés a la Bibliothèque du Chateau de Windsor. Publication honorée de la souscription du Ministère de l'institution publique et des beaux-arts",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "gri_33125017557733",
+      "status": "已取回",
+      "note": "",
+      "file": "gri_33125017557733.txt",
+      "source_url": "https://archive.org/download/gri_33125017557733/gri_33125017557733_djvu.txt",
+      "sha256": "1da590e0a21d5ec52576474dd1748b9ea1ce548d54d537512d53104600a9f425",
+      "bytes": 17962,
+      "words": 3314,
+      "fetched_at": "2026-08-13T09:39:39",
+      "ia_date": "1901",
+      "ia_year": "",
+      "ia_publicdate": "2022-04-27 16:45:16",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "Notes et croquis sur l'anatomie du cheval : feuillets inédits, reproduits d'après les originaux conservés a la Bibliothèque du Chateau de Windsor",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "ilcodicedileonar00leonuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "ilcodicedileonar00leonuoft.txt",
+      "source_url": "https://archive.org/download/ilcodicedileonar00leonuoft/ilcodicedileonar00leonuoft_djvu.txt",
+      "sha256": "024665719385ffbeb6c67dd1f53a10a7932b76f9800c71f61e17aca3c64fa7c5",
+      "bytes": 215801,
+      "words": 25451,
+      "fetched_at": "2026-08-13T09:38:53",
+      "ia_date": "1891",
+      "ia_year": "",
+      "ia_publicdate": "2009-09-09 02:07:17",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Beltrami, Luca, 1854-1933",
+        "Trivulzio, Giovanni Giacomo, principe di Musocco, 1839-1902"
+      ],
+      "ia_title": "Il codice di Leonardo da Vinci nella biblioteca del principe Trivulzio in Milano, trascritto ed annotato da Luca Beltrami. Tiprodotto in 94 tavole eliografiche da Angelo della Croce",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1637",
+        "1750",
+        "1782",
+        "1784",
+        "1872"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "imanoscrittidile00leon",
+      "status": "已取回",
+      "note": "",
+      "file": "imanoscrittidile00leon.txt",
+      "source_url": "https://archive.org/download/imanoscrittidile00leon/imanoscrittidile00leon_djvu.txt",
+      "sha256": "503df895e98d813fe748c2481f14a214f9788281993d2154d5d6d21fe5c8b512",
+      "bytes": 526139,
+      "words": 77889,
+      "fetched_at": "2026-08-13T09:38:36",
+      "ia_date": "1901",
+      "ia_year": "",
+      "ia_publicdate": "2013-11-21 18:03:23",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Sabashnikov, Ḟedor Vasilʹevich",
+        "Piumati, Giovanni, d. 1915",
+        "Windsor Castle. Royal Library"
+      ],
+      "ia_title": "I manoscritti di Leonardo da Vinci della Reale biblioteca di Windsor: Dell'anatomia, fogli B",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1500",
+        "1901"
+      ],
+      "digitization_years": [
+        "2013"
+      ]
+    },
+    {
+      "identifier": "imanoscrittidile00leon_0",
+      "status": "已取回",
+      "note": "",
+      "file": "imanoscrittidile00leon_0.txt",
+      "source_url": "https://archive.org/download/imanoscrittidile00leon_0/imanoscrittidile00leon_0_djvu.txt",
+      "sha256": "1c82dd66f7170929dcb22a94272905eed0e81e9ba5c324003b08fc5487eb0e4f",
+      "bytes": 531305,
+      "words": 80625,
+      "fetched_at": "2026-08-13T09:38:38",
+      "ia_date": "1898",
+      "ia_year": "",
+      "ia_publicdate": "2018-10-01 15:00:02",
+      "ia_creator": "Leonardo, da Vinci, 1452-1519",
+      "ia_title": "I manoscritti di Leonardo da Vinci della Reale biblioteca di Windsor: Dell'anatomia, fogli A",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1897"
+      ],
+      "digitization_years": [
+        "2018"
+      ]
+    },
+    {
+      "identifier": "in.ernet.dli.2015.82680",
+      "status": "已取回",
+      "note": "",
+      "file": "in.ernet.dli.2015.82680.txt",
+      "source_url": "https://archive.org/download/in.ernet.dli.2015.82680/2015.82680.A-Treatise-On-Painting_djvu.txt",
+      "sha256": "ed42a3669a002acc0de1a86cfff6dda8157857a17c9df04b97cc3752e43dd0c9",
+      "bytes": 726166,
+      "words": 109349,
+      "fetched_at": "2026-08-13T09:39:18",
+      "ia_date": "1877",
+      "ia_year": "",
+      "ia_publicdate": "2017-01-17 05:34:10",
+      "ia_creator": "Leonardo Da Vinci",
+      "ia_title": "A Treatise On Painting",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1742",
+        "1760",
+        "1772",
+        "1810",
+        "1835",
+        "1877"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "it_20251218",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "lefinezzedepenne00scar",
+      "status": "已取回",
+      "note": "",
+      "file": "lefinezzedepenne00scar.txt",
+      "source_url": "https://archive.org/download/lefinezzedepenne00scar/lefinezzedepenne00scar_djvu.txt",
+      "sha256": "9a19719f5dfb01115a67653b37792fa57d9111fef58ef5994dceb46e1c1c4db6",
+      "bytes": 609187,
+      "words": 87341,
+      "fetched_at": "2026-08-13T09:39:04",
+      "ia_date": "1674",
+      "ia_year": "",
+      "ia_publicdate": "2008-11-25 16:24:11",
+      "ia_creator": [
+        "Scaramuccia, Luigi Pellegrini, 1616-1680",
+        "Magri, Giovanni Andrea, fl. 1640-1674, printer",
+        "Leonardo, da Vinci, 1452-1519. Trattato della pittura. Selections"
+      ],
+      "ia_title": "Le finezze de pennelli italiani, ammirate, e studiate da Girupeno sotto la scorta, e disciplina del genio di Raffaello d'Vrbino : con vna curiosa, ed'attentissima osseruatione di tutto ciò, che facilmente possa riuscire d'vtile, e di diletto à chi desidera rendersi perfetto nella teorica, e prattica della nobil'arte della pittura",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1671",
+        "1961"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "leonardo-da-vinci-quote-nothing-strenghtens-authority-so-much-as-silence.-www.-etoile.-app",
+      "status": "已取回",
+      "note": "",
+      "file": "leonardo-da-vinci-quote-nothing-strenghtens-authority-so-much-as-silence.-www.-etoile.-app.txt",
+      "source_url": "https://archive.org/download/leonardo-da-vinci-quote-nothing-strenghtens-authority-so-much-as-silence.-www.-etoile.-app/Leonardo da Vinci - Nothing strengthens Authority so much As silence [WWW.ETOILE.APP].txt",
+      "sha256": "a481f69dbb908d407b7014feaced2b768fa5904fa84b46dc28b8fb27038a14fb",
+      "bytes": 140,
+      "words": 18,
+      "fetched_at": "2026-08-13T09:39:54",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2022-08-07 01:25:34",
+      "ia_creator": "leonardo da vinci",
+      "ia_title": "Leonardo Da Vinci (Quote) - Nothing Strenghtens Authority So Much As Silence.",
+      "ia_licenseurl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "leonardodavincic00soci",
+      "status": "已取回",
+      "note": "",
+      "file": "leonardodavincic00soci.txt",
+      "source_url": "https://archive.org/download/leonardodavincic00soci/leonardodavincic00soci_djvu.txt",
+      "sha256": "5e913700c0f27bd5378c29e1577a5b1b1dc5772c9684a61b27e91bc8d905a2c8",
+      "bytes": 615047,
+      "words": 87313,
+      "fetched_at": "2026-08-13T09:38:34",
+      "ia_date": "1910",
+      "ia_year": "",
+      "ia_publicdate": "2016-02-19 22:13:49",
+      "ia_creator": "Società \"Leonardo da Vinci\"",
+      "ia_title": "Leonardo da Vinci, conferenze fiorentine",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1519",
+        "1905",
+        "1906",
+        "1909"
+      ],
+      "digitization_years": [
+        "2016"
+      ]
+    },
+    {
+      "identifier": "leonardodavincic00sociuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "leonardodavincic00sociuoft.txt",
+      "source_url": "https://archive.org/download/leonardodavincic00sociuoft/leonardodavincic00sociuoft_djvu.txt",
+      "sha256": "b5447ca92a042ff9affb286569908c870bcbc3dcc2387b0f88b05774a71886f4",
+      "bytes": 616397,
+      "words": 87483,
+      "fetched_at": "2026-08-13T09:38:29",
+      "ia_date": "1910",
+      "ia_year": "",
+      "ia_publicdate": "2008-08-06 17:17:28",
+      "ia_creator": [
+        "Società \"Leonardo da Vinci\" di Firenze",
+        "Solmi, Edmondo, 1874-1912"
+      ],
+      "ia_title": "Leonardo da Vinci: Conferenze fiorentine. [Per] Edmondo Solmi [et al.]",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1519",
+        "1905",
+        "1906",
+        "1909"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "leonardodavincid00leon",
+      "status": "已取回",
+      "note": "",
+      "file": "leonardodavincid00leon.txt",
+      "source_url": "https://archive.org/download/leonardodavincid00leon/leonardodavincid00leon_djvu.txt",
+      "sha256": "3f25041943bf85ed5e048b34fcc7c666224275fdcb3c7a4532bf9b2315ed01f8",
+      "bytes": 1037499,
+      "words": 142307,
+      "fetched_at": "2026-08-13T09:39:03",
+      "ia_date": "1906",
+      "ia_year": "",
+      "ia_publicdate": "2010-10-21 22:23:41",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Herzfeld, Marie"
+      ],
+      "ia_title": "Leonardo da Vinci, der Denker, Forscher und Poet, nach den veroeffentilichten Handschriften Auswahl;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1500",
+        "1906"
+      ],
+      "digitization_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "leonardoprosator00leonuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "leonardoprosator00leonuoft.txt",
+      "source_url": "https://archive.org/download/leonardoprosator00leonuoft/leonardoprosator00leonuoft_djvu.txt",
+      "sha256": "bec2ad3be7c9c0c37a237747ad40f3cabdb118b7979e86d922364b88f0e2d8d8",
+      "bytes": 510854,
+      "words": 74138,
+      "fetched_at": "2026-08-13T09:38:33",
+      "ia_date": "1915",
+      "ia_year": "",
+      "ia_publicdate": "2008-08-06 17:20:20",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Fumagalli, Giuseppina"
+      ],
+      "ia_title": "Leonardo Prosatore, scelta di scritti Vinciani;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1915"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "lesdessinsdelo00leonuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "lesdessinsdelo00leonuoft.txt",
+      "source_url": "https://archive.org/download/lesdessinsdelo00leonuoft/lesdessinsdelo00leonuoft_djvu.txt",
+      "sha256": "ae60a449d867fc0afe4bae1bd64f7c9e4eab0eb907111838466af46a36970e70",
+      "bytes": 36333,
+      "words": 5021,
+      "fetched_at": "2026-08-13T09:39:56",
+      "ia_date": "[c1921]",
+      "ia_year": "",
+      "ia_publicdate": "2008-09-03 17:44:25",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Musée du Louvre",
+        "Demonts, Louis"
+      ],
+      "ia_title": "Les dessins de Léonard de Vinci",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1641",
+        "1860",
+        "1878",
+        "1881",
+        "1882",
+        "1884",
+        "1887",
+        "1888",
+        "1889",
+        "1890",
+        "1894",
+        "1905"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "lesmanuscritsdel00leonuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "lesmanuscritsdel00leonuoft.txt",
+      "source_url": "https://archive.org/download/lesmanuscritsdel00leonuoft/lesmanuscritsdel00leonuoft_djvu.txt",
+      "sha256": "1b886772289d906229cf0bf67471b34db081603fa9aa36bc8810eeb065412275",
+      "bytes": 353267,
+      "words": 51521,
+      "fetched_at": "2026-08-13T09:39:36",
+      "ia_date": "1910",
+      "ia_year": "",
+      "ia_publicdate": "2008-08-08 23:04:54",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Institut de France",
+        "Péladan, Joséphin, 1859-1918"
+      ],
+      "ia_title": "Les manuscrits de Léonard de Vinci : les 14 manuscrits de l'Institut de France",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1880",
+        "1882",
+        "1884",
+        "1885",
+        "1886",
+        "1887",
+        "1888",
+        "1891",
+        "1892",
+        "1893",
+        "1894",
+        "1895"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "literaryworksofl01leon",
+      "status": "已取回",
+      "note": "",
+      "file": "literaryworksofl01leon.txt",
+      "source_url": "https://archive.org/download/literaryworksofl01leon/literaryworksofl01leon_djvu.txt",
+      "sha256": "6d465ee0797fdd8da7ddd4fd9aebcbb982cc507e4a5ea7f52d57e7828f85c58c",
+      "bytes": 1534738,
+      "words": 239501,
+      "fetched_at": "2026-08-13T09:38:40",
+      "ia_date": "1883",
+      "ia_year": "",
+      "ia_publicdate": "2014-10-21 18:43:34",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Richter, Jean Paul, 1847-1937"
+      ],
+      "ia_title": "The literary works of Leonardo da Vinci",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1883"
+      ],
+      "digitization_years": [
+        "2014"
+      ]
+    },
+    {
+      "identifier": "literaryworksofl01leonuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "literaryworksofl01leonuoft.txt",
+      "source_url": "https://archive.org/download/literaryworksofl01leonuoft/literaryworksofl01leonuoft_djvu.txt",
+      "sha256": "438817d719bbb9283281927ab3c1292e2c7d02481e04400f72538d63e968dab3",
+      "bytes": 1544927,
+      "words": 238849,
+      "fetched_at": "2026-08-13T09:39:52",
+      "ia_date": "1883",
+      "ia_year": "",
+      "ia_publicdate": "2006-10-25 07:23:05",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Richter, Jean Paul, 1847-1937"
+      ],
+      "ia_title": "The literary works of Leonardo da Vinci;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1883"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "literaryworksofl02leon",
+      "status": "已取回",
+      "note": "",
+      "file": "literaryworksofl02leon.txt",
+      "source_url": "https://archive.org/download/literaryworksofl02leon/literaryworksofl02leon_djvu.txt",
+      "sha256": "3edecb0455709bb7fc8426587834c781e15aa5317f115842ad9a0b0f89bd38c0",
+      "bytes": 1962298,
+      "words": 305513,
+      "fetched_at": "2026-08-13T09:38:39",
+      "ia_date": "1883",
+      "ia_year": "",
+      "ia_publicdate": "2014-10-21 18:43:35",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Richter, Jean Paul, 1847-1937"
+      ],
+      "ia_title": "The literary works of Leonardo da Vinci",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1500",
+        "1502",
+        "1508",
+        "1509",
+        "1545",
+        "1546",
+        "1565",
+        "1566",
+        "1883"
+      ],
+      "digitization_years": [
+        "2014"
+      ]
+    },
+    {
+      "identifier": "literaryworksofl02leonuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "literaryworksofl02leonuoft.txt",
+      "source_url": "https://archive.org/download/literaryworksofl02leonuoft/literaryworksofl02leonuoft_djvu.txt",
+      "sha256": "b362e3783a8ae326adae5b07ee6c09cf5782d5983d2f10ac0e0b6c08c71f95b5",
+      "bytes": 1976623,
+      "words": 304506,
+      "fetched_at": "2026-08-13T09:39:27",
+      "ia_date": "1883",
+      "ia_year": "",
+      "ia_publicdate": "2006-10-25 07:19:59",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Richter, Jean Paul, 1847-1937"
+      ],
+      "ia_title": "The literary works of Leonardo da Vinci;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1500",
+        "1502",
+        "1508",
+        "1509",
+        "1545",
+        "1546",
+        "1565",
+        "1566",
+        "1883"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "mma_battle_of_naked_men_372174",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "mma_the_head_of_a_grotesque_man_in_profile_facing_right_338125",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "mona-lisa-by-leonardo-da-vinci-from-c-2-rmf-retouched_202406",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "natuurlykenschil00goer",
+      "status": "已取回",
+      "note": "",
+      "file": "natuurlykenschil00goer.txt",
+      "source_url": "https://archive.org/download/natuurlykenschil00goer/natuurlykenschil00goer_djvu.txt",
+      "sha256": "78ff3b172a256aecde51310275b3a416c1a80f2dfc4303f5f35bada7d08b5587",
+      "bytes": 928647,
+      "words": 139052,
+      "fetched_at": "2026-08-13T09:40:00",
+      "ia_date": "1683",
+      "ia_year": "1683",
+      "ia_publicdate": "2008-11-25 16:26:20",
+      "ia_creator": [
+        "Goeree, Willem, 1635-1711",
+        "Leonardo, da Vinci, 1452-1519. Trattato della pittura. Selections"
+      ],
+      "ia_title": "Natuurlyk en schilderkonstig ontwerp der menschkunde : leerende niet alleen de kennis van de gestalte, proportie, schoonheyd, muskelen, bewegingen, actien, passien, en welstand der menschbeelden : tot de teykenkunde, schilderkunde, beeldhouwery, bootseer en giet-oeffening toepassen : maar ook hoe sich een mensch na deselve regelen, in allerhande doeningh van gaan, staan, loopen, torssen, dragen, arbeyden, spreken en andere gebeerden : bevallig en verstandilijk aastellen zal",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1682",
+        "1961"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "quattrodipintidi00colb",
+      "status": "已取回",
+      "note": "",
+      "file": "quattrodipintidi00colb.txt",
+      "source_url": "https://archive.org/download/quattrodipintidi00colb/quattrodipintidi00colb_djvu.txt",
+      "sha256": "b47a07a8f7d311f20afc5d1a79a20ca5f275b2596f4cae2b2fded3a3f85a9a08",
+      "bytes": 475114,
+      "words": 66635,
+      "fetched_at": "2026-08-13T09:38:44",
+      "ia_date": "1887",
+      "ia_year": "",
+      "ia_publicdate": "2014-08-13 17:13:44",
+      "ia_creator": [
+        "Colbacchini, Giuseppe",
+        "Leonardo, da Vinci, 1452-1519",
+        "Titian, ca. 1488-1576",
+        "Raphael, 1483-1520",
+        "Sarto, Andrea del, 1486-1530"
+      ],
+      "ia_title": "Quattro dipinti di sommi maestri : illustrati con note critiche",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1508",
+        "1509",
+        "1528",
+        "1887"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "raccoltadautorii10card",
+      "status": "已取回",
+      "note": "",
+      "file": "raccoltadautorii10card.txt",
+      "source_url": "https://archive.org/download/raccoltadautorii10card/raccoltadautorii10card_djvu.txt",
+      "sha256": "e254434b8bcc6e78434c75c9d0c9c4d87b5c53b31f57bbf2ed6efda788150612",
+      "bytes": 1240133,
+      "words": 186151,
+      "fetched_at": "2026-08-13T09:38:58",
+      "ia_date": "1821",
+      "ia_year": "",
+      "ia_publicdate": "2008-11-25 16:53:33",
+      "ia_creator": [
+        "Cardinali, Francesco",
+        "Leonardo, da Vinci, 1452-1519. Del moto e misura dell'acque"
+      ],
+      "ia_title": "Raccolta d'autori italiani che trattano del moto dell' acque",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1826",
+        "1961"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "trattatodellapit00leon_0",
+      "status": "已取回",
+      "note": "",
+      "file": "trattatodellapit00leon_0.txt",
+      "source_url": "https://archive.org/download/trattatodellapit00leon_0/trattatodellapit00leon_0_djvu.txt",
+      "sha256": "68ff593267f24b9f997a50a9f6214717682d2f24d549ded89a479750b92b4432",
+      "bytes": 1130633,
+      "words": 168051,
+      "fetched_at": "2026-08-13T09:38:43",
+      "ia_date": "1890",
+      "ia_year": "",
+      "ia_publicdate": "2014-03-17 20:26:50",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Tabarrini, Marco",
+        "Vasari, Giorgio, 1511-1574",
+        "Milanesi, Gaetano",
+        "Biblioteca apostolica vaticana. Manuscript. Urb. Lat. 1270"
+      ],
+      "ia_title": "Trattato della pittura di Leonardo da Vinci, condotto sul cod. Vaticano Urbinate 1270, con prefazione",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1817",
+        "1882"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "trattatodellapit01leon",
+      "status": "已取回",
+      "note": "",
+      "file": "trattatodellapit01leon.txt",
+      "source_url": "https://archive.org/download/trattatodellapit01leon/trattatodellapit01leon_djvu.txt",
+      "sha256": "7d098160c6e26efe6c4159aa06f454787bb2e435ff5f03190b671e55fff0c949",
+      "bytes": 242525,
+      "words": 37471,
+      "fetched_at": "2026-08-13T09:38:56",
+      "ia_date": "1805",
+      "ia_year": "",
+      "ia_publicdate": "2008-11-25 16:50:23",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Orsini, Baldassarre, 1732-1810",
+        "Trichet du Fresne, Raphael, 1611-1661"
+      ],
+      "ia_title": "Trattato della pittura : nuovamente dato in luce con note, e supplementi, e con le memorie dell'autore",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1791",
+        "1805",
+        "1961"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "trattatodellapit02leon",
+      "status": "已取回",
+      "note": "",
+      "file": "trattatodellapit02leon.txt",
+      "source_url": "https://archive.org/download/trattatodellapit02leon/trattatodellapit02leon_djvu.txt",
+      "sha256": "2ea23a4d4103ed2e6303000c2fe65e1945bd9bd09addce56b43842cc229b0950",
+      "bytes": 286603,
+      "words": 44127,
+      "fetched_at": "2026-08-13T09:38:56",
+      "ia_date": "1805",
+      "ia_year": "",
+      "ia_publicdate": "2008-11-25 16:51:20",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Orsini, Baldassarre, 1732-1810",
+        "Trichet du Fresne, Raphael, 1611-1661"
+      ],
+      "ia_title": "Trattato della pittura : nuovamente dato in luce con note, e supplementi, e con le memorie dell'autore",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "trattatopittura02leon",
+      "status": "已取回",
+      "note": "",
+      "file": "trattatopittura02leon.txt",
+      "source_url": "https://archive.org/download/trattatopittura02leon/trattatopittura02leon_djvu.txt",
+      "sha256": "3d96edb1e9b0652daa3f56e9454f6ec53e2a0a59d450c14e4cf474191f5039af",
+      "bytes": 5003,
+      "words": 1054,
+      "fetched_at": "2026-08-13T09:38:49",
+      "ia_date": "1817",
+      "ia_year": "",
+      "ia_publicdate": "2008-11-26 21:10:45",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Manzi, Guglielmo, 1734-1821",
+        "De Rossi, Giovanni Gherardo, 1754-1827"
+      ],
+      "ia_title": "Trattato della pittura",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1961"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "treatiseonpainti00leon_0",
+      "status": "已取回",
+      "note": "",
+      "file": "treatiseonpainti00leon_0.txt",
+      "source_url": "https://archive.org/download/treatiseonpainti00leon_0/treatiseonpainti00leon_0_djvu.txt",
+      "sha256": "9a8887c173ffd2a89440eff3ee289c25dc4c04359f28cbb93229a684f611d9ad",
+      "bytes": 542209,
+      "words": 82756,
+      "fetched_at": "2026-08-13T09:39:08",
+      "ia_date": "1835",
+      "ia_year": "",
+      "ia_publicdate": "2014-01-29 15:07:14",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Rigaud, J. F. (John Francis), 1742-1810",
+        "Brown, John W. (John William), 1949-"
+      ],
+      "ia_title": "A treatise on painting",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1519",
+        "1651",
+        "1721",
+        "1796",
+        "1804",
+        "1828",
+        "1835"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "treatiseonpainti00leon_1",
+      "status": "已取回",
+      "note": "",
+      "file": "treatiseonpainti00leon_1.txt",
+      "source_url": "https://archive.org/download/treatiseonpainti00leon_1/treatiseonpainti00leon_1_djvu.txt",
+      "sha256": "6b7c611bd688c2cac86da8060af491c2d1e39de38d9014407bed8d1e303cae17",
+      "bytes": 747796,
+      "words": 112081,
+      "fetched_at": "2026-08-13T09:39:10",
+      "ia_date": "1877",
+      "ia_year": "",
+      "ia_publicdate": "2014-05-28 13:00:47",
+      "ia_creator": [
+        "Leonardo, da Vinci, 1452-1519",
+        "Rigaud, J. F. (John Francis), 1742-1810",
+        "Brown, John W. (John William), 1949-"
+      ],
+      "ia_title": "A treatise on painting",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1576",
+        "1828",
+        "1840",
+        "1847",
+        "1864",
+        "1869",
+        "1873"
+      ],
+      "digitization_years": []
+    }
+  ]
+}
