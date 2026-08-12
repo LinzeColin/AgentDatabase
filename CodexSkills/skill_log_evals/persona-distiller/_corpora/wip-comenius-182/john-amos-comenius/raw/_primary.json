@@ -1,12 +1,12 @@
 {
-  "总数": 69,
+  "总数": 73,
   "计数": {
-    "一手": 67,
+    "一手": 71,
     "二手": 2,
     "需人判": 0
   },
-  "一手占比下界": 0.971,
-  "一手占比上界": 0.971,
+  "一手占比下界": 0.9726,
+  "一手占比上界": 0.9726,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -266,6 +266,14 @@
       "words": 107817
     },
     {
+      "identifier": "bim_eighteenth-century_joh-amos-commenii-orbis_comenius-johann-amos_1705",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Joh. Amos Commenii orbis sensualium pictus: hoc est, omnium principalium in mund",
+      "creator": "Comenius, Johann Amos",
+      "words": 63012
+    },
+    {
       "identifier": "bub_gb_2x85AQAAMAAJ",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
@@ -394,6 +402,14 @@
       "words": 96607
     },
     {
+      "identifier": "bub_gb_SLlKAAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Korrespondence. Listy Komenského a vrstevníků jeho",
+      "creator": "Comenius, Johann Amos, 1592-1670; Kvačala, Jan, 1862-1934",
+      "words": 107207
+    },
+    {
       "identifier": "bub_gb_WGNcAAAAcAAJ",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
@@ -440,6 +456,14 @@
       "title": "Ausgewählte Schriften (Comenius Werke 2. Band)",
       "creator": "Comenius, Johann Amos aut; Beeger, Julius Übers. trl",
       "words": 149094
+    },
+    {
+      "identifier": "bub_gb_yp8AAAAAYAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Joh. Amos Comenii Orbis sensualium pictus, hoc est, Omnium principalium in mundo",
+      "creator": "Comenius, Johann Amos, 1592-1670; Hoole, Charles, 1610-1667, translator; Anderso",
+      "words": 42243
     },
     {
       "identifier": "bub_gb_zYpUAAAAcAAJ",
@@ -496,6 +520,14 @@
       "title": "Johannis Lasitii [...] Historiæ De Origine Et Rebus gestis Fratrum Bohemicorum L",
       "creator": "Komenský Jan Amos (1592-1670)",
       "words": 77538
+    },
+    {
+      "identifier": "johamoscommeniio00come",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Joh. Amos Commenii Orbis sensualium pictus: : hoc est, Omnium principalium in mu",
+      "creator": "Comenius, Johann Amos, 1592-1670; Hoole, Charles, 1610-1667",
+      "words": 34505
     },
     {
       "identifier": "labyrinthofworld00comeuoft",

@@ -1,11 +1,11 @@
 {
-  "生成时刻": "2026-08-12T13:24:29",
-  "请求数": 41,
-  "已取回": 64,
+  "生成时刻": "2026-08-12T13:53:23",
+  "请求数": 24,
+  "已取回": 86,
   "skipped_access_restricted": 0,
-  "失败": 6,
+  "失败": 8,
   "并发降级": "无（全程并发 4）",
-  "总词数": 6858398,
+  "总词数": 8556273,
   "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
   "记录": [
     {
@@ -627,6 +627,26 @@
       "titlepage_years": []
     },
     {
+      "identifier": "bim_eighteenth-century_anecdotes-of-the-last-tw_corancez-olivier-de_1798",
+      "status": "已取回",
+      "note": "",
+      "file": "bim_eighteenth-century_anecdotes-of-the-last-tw_corancez-olivier-de_1798.txt",
+      "source_url": "https://archive.org/download/bim_eighteenth-century_anecdotes-of-the-last-tw_corancez-olivier-de_1798/bim_eighteenth-century_anecdotes-of-the-last-tw_corancez-olivier-de_1798_djvu.txt",
+      "sha256": "fdc170192febf23488c77cfda8f926c4002d4fd77ce00298cbd8bf5d3ea24489",
+      "bytes": 119170,
+      "words": 21127,
+      "fetched_at": "2026-08-12T13:52:43",
+      "ia_date": "1798",
+      "ia_year": "",
+      "ia_publicdate": "2023-10-15 19:32:46",
+      "ia_creator": "Corancez, Olivier de",
+      "ia_title": "Anecdotes of the last twelve years of the life of J.J. Rousseau, originally published in the Journal de Paris, by Citizen Corancez, one of the editors of that paper. Translated from the French.  1798",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1798"
+      ]
+    },
+    {
       "identifier": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1787",
       "status": "已取回",
       "note": "",
@@ -1192,6 +1212,64 @@
       ]
     },
     {
+      "identifier": "cu31924027386915",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924027386915.txt",
+      "source_url": "https://archive.org/download/cu31924027386915/cu31924027386915_djvu.txt",
+      "sha256": "63c27e7d3e0f5cfa48ebd7502a88735463b30b3f2e47946858c4a5d8fe4bf3d0",
+      "bytes": 491216,
+      "words": 83041,
+      "fetched_at": "2026-08-12T13:52:43",
+      "ia_date": "1903",
+      "ia_year": "",
+      "ia_publicdate": "2009-11-11 17:48:09",
+      "ia_creator": "Hudson, William Henry, 1862-1918",
+      "ia_title": "Rousseau and naturalism in life and thought",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1712",
+        "1731",
+        "1741",
+        "1756",
+        "1762",
+        "1778",
+        "1903",
+        "1924"
+      ]
+    },
+    {
+      "identifier": "cu31924032526596",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924032526596.txt",
+      "source_url": "https://archive.org/download/cu31924032526596/cu31924032526596_djvu.txt",
+      "sha256": "1bb09c57aa296a877f1d9b1351e32587ff9c0b53f8b839c21b2a88396f4e3791",
+      "bytes": 274337,
+      "words": 47260,
+      "fetched_at": "2026-08-12T13:52:43",
+      "ia_date": "1860",
+      "ia_year": "",
+      "ia_publicdate": "2009-11-17 17:15:58",
+      "ia_creator": "Blanchard, Calvin, 1808-1868",
+      "ia_title": "The life of Thomas Paine; mover of the \"Declaration of independence;\" secretary of foreign affairs under the first American Congress; members of the National convention of France: author of \"Common sense,\" \"The crisis,\" \"Rights of man,\" \"Age of reason,\" &amp;c., &amp;c.: the man, whose motto was, \"The world is my country; to do good, my religion.\" Embracing practical considerations on human rights; demonstrating that man tends irrepressibly to actual freedom; and showing a liberty-aim connection in the action of the world's three great author-heroes,--Rousseau, Paine, and Comte",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1737",
+        "1759",
+        "1760",
+        "1763",
+        "1768",
+        "1771",
+        "1772",
+        "1774",
+        "1854",
+        "1860",
+        "1919",
+        "1924"
+      ]
+    },
+    {
       "identifier": "dictionnairedemu02rous",
       "status": "已取回",
       "note": "",
@@ -1234,7 +1312,17 @@
       ]
     },
     {
+      "identifier": "eloisaendshabil00mattgoog",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
       "identifier": "eloisaendshabil01mattgoog",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "eloisaendshabil02mattgoog",
       "status": "无文本层",
       "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
     },
@@ -1288,6 +1376,94 @@
       ]
     },
     {
+      "identifier": "frenchenglishphi34desc",
+      "status": "已取回",
+      "note": "",
+      "file": "frenchenglishphi34desc.txt",
+      "source_url": "https://archive.org/download/frenchenglishphi34desc/frenchenglishphi34desc_djvu.txt",
+      "sha256": "7bca5a65617d3ac7d78e00d7ee4b2e437b2568301baf5c23bda551f880247db0",
+      "bytes": 1110720,
+      "words": 169114,
+      "fetched_at": "2026-08-12T13:52:58",
+      "ia_date": "1910",
+      "ia_year": "",
+      "ia_publicdate": "2011-09-28 17:00:50",
+      "ia_creator": [
+        "Descartes, René. aut",
+        "Voltaire. aut",
+        "Rousseau, Jean-Jacques. aut",
+        "Hobbes, Thomas, 1588-1679. aut",
+        "Descartes, René. Discourse on the method of rightly conducting the reason and seeking the truthin the sciences",
+        "Voltaire. Leters on the English",
+        "Rousseau, Jean-Jacques. A discourse upon the origin and the foundation of the inequality among mankind",
+        "Hobbes, Thomas. Of man, being the first part of Leviathan"
+      ],
+      "ia_title": "French and English philosophers : Descartes, Rousseau, Voltaire, Hobbes",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1596",
+        "1637",
+        "1650",
+        "1889",
+        "1910"
+      ]
+    },
+    {
+      "identifier": "honneurspublicsr00pari",
+      "status": "已取回",
+      "note": "",
+      "file": "honneurspublicsr00pari.txt",
+      "source_url": "https://archive.org/download/honneurspublicsr00pari/honneurspublicsr00pari_djvu.txt",
+      "sha256": "b34d6a25206b9aebc132c0e92f58781f23ce633d9a6a1852c22fdc5fe0719284",
+      "bytes": 245478,
+      "words": 34753,
+      "fetched_at": "2026-08-12T13:52:48",
+      "ia_date": "1878",
+      "ia_year": "",
+      "ia_publicdate": "2015-05-19 18:27:52",
+      "ia_creator": "Paris, Jean Moïse, 1818-",
+      "ia_title": "Honneurs publics rendus à la mémoire de J̌.J. Rousseau; étude historique",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1705",
+        "1712",
+        "1762",
+        "1763",
+        "1765",
+        "1778",
+        "1789",
+        "1790",
+        "1791",
+        "1794",
+        "1798",
+        "1800"
+      ]
+    },
+    {
+      "identifier": "india.history.resource.111524",
+      "status": "已取回",
+      "note": "",
+      "file": "india.history.resource.111524.txt",
+      "source_url": "https://archive.org/download/india.history.resource.111524/111524_djvu.txt",
+      "sha256": "a71c47686b3e3057608eea13bdb7881aa88a60d18949a2e4c9ca014aa81ddc95",
+      "bytes": 116348,
+      "words": 19538,
+      "fetched_at": "2026-08-12T13:52:47",
+      "ia_date": "1798",
+      "ia_year": "",
+      "ia_publicdate": "2026-07-25 23:53:22",
+      "ia_creator": [
+        "Rousseau, J. J.",
+        "Corancez, Citizen"
+      ],
+      "ia_title": "Anecdotes of the Last Twelve Years of the Life of J. J. Rousseau; orginally published in the Journal de Paris; translated from the French",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1798",
+        "2020"
+      ]
+    },
+    {
       "identifier": "india.history.resource.94272",
       "status": "已取回",
       "note": "",
@@ -1315,9 +1491,63 @@
       ]
     },
     {
+      "identifier": "jeanjacquesrous00text",
+      "status": "已取回",
+      "note": "",
+      "file": "jeanjacquesrous00text.txt",
+      "source_url": "https://archive.org/download/jeanjacquesrous00text/jeanjacquesrous00text_djvu.txt",
+      "sha256": "9ab8e7a7e0e04bc57e3488280c34eeacb08b42a2bb199926a6340b254ace69f6",
+      "bytes": 1035189,
+      "words": 148049,
+      "fetched_at": "2026-08-12T13:52:52",
+      "ia_date": "1895",
+      "ia_year": "",
+      "ia_publicdate": "2011-03-11 16:59:44",
+      "ia_creator": "Texte, Joseph, 1865-1900",
+      "ia_title": "Jean-Jacques Rousseau et les origines du cosmopolitisme littéraire : étude sur les relations littéraires de la France et de l'Angleterre au XVIIIe siècle",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1758",
+        "1760",
+        "1761",
+        "1789",
+        "1879",
+        "1894",
+        "1895",
+        "2011"
+      ]
+    },
+    {
       "identifier": "lesconfessionsd04rousgoog",
       "status": "无文本层",
       "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "memorial00unit",
+      "status": "已取回",
+      "note": "",
+      "file": "memorial00unit.txt",
+      "source_url": "https://archive.org/download/memorial00unit/memorial00unit_djvu.txt",
+      "sha256": "34da19963f444ecb20eb313d00f4e9c007398e6fc24b61e3ec1b0bc2ea741ec4",
+      "bytes": 72765,
+      "words": 10911,
+      "fetched_at": "2026-08-12T13:52:54",
+      "ia_date": "1903",
+      "ia_year": "",
+      "ia_publicdate": "2008-05-14 13:25:55",
+      "ia_creator": [
+        "United States. 57th Congress, 2d session, 1902-1903. [from old catalog]",
+        "United States. Congress. Memorial addresses. [from old catalog]"
+      ],
+      "ia_title": "Memorial addresses on the life and character of Rousseau O. Crump (late a representative from Michigan), delivered in the House of representatives and Senate, Fifty-seventh Congress",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1842",
+        "1894",
+        "1901",
+        "1902",
+        "1903"
+      ]
     },
     {
       "identifier": "mileoudelducatio00rous",
@@ -1340,6 +1570,329 @@
         "1801",
         "1819",
         "2014"
+      ]
+    },
+    {
+      "identifier": "oeuvrescomplt05rous",
+      "status": "已取回",
+      "note": "",
+      "file": "oeuvrescomplt05rous.txt",
+      "source_url": "https://archive.org/download/oeuvrescomplt05rous/oeuvrescomplt05rous_djvu.txt",
+      "sha256": "e03eef32a4bf8a0aecc95481544ce7de208aa40ca27e7f1c581a43d40e24036e",
+      "bytes": 622430,
+      "words": 92253,
+      "fetched_at": "2026-08-12T13:52:58",
+      "ia_date": "1824",
+      "ia_year": "",
+      "ia_publicdate": "2010-05-07 15:53:11",
+      "ia_creator": [
+        "Rousseau, Jean-Jacques, 1712-1778",
+        "Auguis, P. R. (Pierre René), 1786-1846",
+        "Barbier, Antoine-Alexandre, 1718-1776",
+        "Sarpy, John R. (bookplate)"
+      ],
+      "ia_title": "Oeuvres complètes de J. J. Rousseau ; avec des éclaircissements et des notes historiques par P.R. Auguis",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "oeuvresdejjrous08rous",
+      "status": "已取回",
+      "note": "",
+      "file": "oeuvresdejjrous08rous.txt",
+      "source_url": "https://archive.org/download/oeuvresdejjrous08rous/oeuvresdejjrous08rous_djvu.txt",
+      "sha256": "7138b8135cc0f9d803878552614026c93afd9891fcf82ff86c517ce474f83aa5",
+      "bytes": 785557,
+      "words": 115126,
+      "fetched_at": "2026-08-12T13:53:01",
+      "ia_date": "1817",
+      "ia_year": "",
+      "ia_publicdate": "2010-05-07 18:11:12",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Oeuvres de J.J. Rousseau citoyen de Genève",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "oeuvresdejjrous09rous",
+      "status": "已取回",
+      "note": "",
+      "file": "oeuvresdejjrous09rous.txt",
+      "source_url": "https://archive.org/download/oeuvresdejjrous09rous/oeuvresdejjrous09rous_djvu.txt",
+      "sha256": "6a19a301ae96fbf1dfac8cc033d1bb2ee9a26e19a2438aa94f0522676e763704",
+      "bytes": 682280,
+      "words": 101566,
+      "fetched_at": "2026-08-12T13:52:59",
+      "ia_date": "1817",
+      "ia_year": "",
+      "ia_publicdate": "2010-05-07 18:11:01",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Oeuvres de J.J. Rousseau citoyen de Genève",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1742",
+        "2010"
+      ]
+    },
+    {
+      "identifier": "oeuvresdejjrous10rous",
+      "status": "已取回",
+      "note": "",
+      "file": "oeuvresdejjrous10rous.txt",
+      "source_url": "https://archive.org/download/oeuvresdejjrous10rous/oeuvresdejjrous10rous_djvu.txt",
+      "sha256": "2fbcf83a481796defae773ae0c0425cb660a0db900d5da9ca92d0690d1206857",
+      "bytes": 836743,
+      "words": 124083,
+      "fetched_at": "2026-08-12T13:53:16",
+      "ia_date": "1817",
+      "ia_year": "",
+      "ia_publicdate": "2010-05-07 18:10:24",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Oeuvres de J.J. Rousseau citoyen de Genève",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1765",
+        "2010"
+      ]
+    },
+    {
+      "identifier": "oeuvresdejjrouss01rous",
+      "status": "已取回",
+      "note": "",
+      "file": "oeuvresdejjrouss01rous.txt",
+      "source_url": "https://archive.org/download/oeuvresdejjrouss01rous/oeuvresdejjrouss01rous_djvu.txt",
+      "sha256": "295c799edb98787da642ed03731120c49a05f64faa067763ac206fb0f675f3c3",
+      "bytes": 580680,
+      "words": 88043,
+      "fetched_at": "2026-08-12T13:53:03",
+      "ia_date": "1791",
+      "ia_year": "",
+      "ia_publicdate": "2010-04-26 13:19:15",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Oeuvres de J.J. Rousseau",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1750",
+        "2010"
+      ]
+    },
+    {
+      "identifier": "oeuvresdejjrouss12rous",
+      "status": "已取回",
+      "note": "",
+      "file": "oeuvresdejjrouss12rous.txt",
+      "source_url": "https://archive.org/download/oeuvresdejjrouss12rous/oeuvresdejjrouss12rous_djvu.txt",
+      "sha256": "11f37d429b7af8d1f41e64fba81730dea5711c7a81632782720400c8a6a78a35",
+      "bytes": 550907,
+      "words": 86057,
+      "fetched_at": "2026-08-12T13:53:05",
+      "ia_date": "1791",
+      "ia_year": "",
+      "ia_publicdate": "2010-04-26 13:52:24",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Oeuvres de J.J. Rousseau",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "oeuvresdejjrouss15rous",
+      "status": "已取回",
+      "note": "",
+      "file": "oeuvresdejjrouss15rous.txt",
+      "source_url": "https://archive.org/download/oeuvresdejjrouss15rous/oeuvresdejjrouss15rous_djvu.txt",
+      "sha256": "ad7e88b8ec101e84034efdbce4ad9f7cc10ff50b65ebb72ee8e9fe2f45ad8adf",
+      "bytes": 551396,
+      "words": 84348,
+      "fetched_at": "2026-08-12T13:53:18",
+      "ia_date": "1791",
+      "ia_year": "",
+      "ia_publicdate": "2010-04-26 13:56:48",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Oeuvres de J.J. Rousseau",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "oeuvresdejjrouss22rous",
+      "status": "已取回",
+      "note": "",
+      "file": "oeuvresdejjrouss22rous.txt",
+      "source_url": "https://archive.org/download/oeuvresdejjrouss22rous/oeuvresdejjrouss22rous_djvu.txt",
+      "sha256": "7274d87d1f72c29a168ff0290774c7ccc668e6c6d2ec57c2235dcdb554197204",
+      "bytes": 596055,
+      "words": 89145,
+      "fetched_at": "2026-08-12T13:53:09",
+      "ia_date": "1791",
+      "ia_year": "",
+      "ia_publicdate": "2010-04-26 14:18:34",
+      "ia_creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "ia_title": "Oeuvres de J.J. Rousseau",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "romanticelements00fole",
+      "status": "已取回",
+      "note": "",
+      "file": "romanticelements00fole.txt",
+      "source_url": "https://archive.org/download/romanticelements00fole/romanticelements00fole_djvu.txt",
+      "sha256": "1ae5867e8c44c6404b388449ed10032402d928bd77aded992f5447e19d76ca05",
+      "bytes": 110433,
+      "words": 16852,
+      "fetched_at": "2026-08-12T13:53:12",
+      "ia_date": "1921",
+      "ia_year": "",
+      "ia_publicdate": "2015-12-16 11:58:17",
+      "ia_creator": "Foley, Margaret Ebert",
+      "ia_title": "The romantic elements in the life and works of Jean Jacques Rousseau",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1674",
+        "1712",
+        "1728",
+        "1732",
+        "1741",
+        "1756",
+        "1762",
+        "1778",
+        "1919",
+        "1921",
+        "2015"
+      ]
+    },
+    {
+      "identifier": "rousseauandnatu00hudsgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "rousseauandnatu00hudsgoog.txt",
+      "source_url": "https://archive.org/download/rousseauandnatu00hudsgoog/rousseauandnatu00hudsgoog_djvu.txt",
+      "sha256": "7c62154cfa3616190a76d8c66676418823e22b0c1f806aae5b85902da42b594c",
+      "bytes": 473082,
+      "words": 80754,
+      "fetched_at": "2026-08-12T13:53:17",
+      "ia_date": "1903",
+      "ia_year": "1903",
+      "ia_publicdate": "2009-05-14 01:34:51",
+      "ia_creator": "Hudson, William Henry, 1862-1918",
+      "ia_title": "Rousseau and the naturalism in life and thought",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1712",
+        "1731",
+        "1741",
+        "1756",
+        "1762",
+        "1778",
+        "1903"
+      ]
+    },
+    {
+      "identifier": "rousseaunaturali0000unse_c8a6",
+      "status": "已取回",
+      "note": "",
+      "file": "rousseaunaturali0000unse_c8a6.txt",
+      "source_url": "https://archive.org/download/rousseaunaturali0000unse_c8a6/rousseaunaturali0000unse_c8a6_djvu.txt",
+      "sha256": "0f7f9723eb9e86fad99a724162d115888f8c777f263eb111e361e1482becd935",
+      "bytes": 473894,
+      "words": 78235,
+      "fetched_at": "2026-08-12T13:53:16",
+      "ia_date": "1903",
+      "ia_year": "",
+      "ia_publicdate": "2026-07-09 04:33:25",
+      "ia_creator": "william henry hudson",
+      "ia_title": "rousseau and naturalism in life and thought",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1712",
+        "1731",
+        "1741",
+        "1756",
+        "1762",
+        "1778",
+        "1781",
+        "1903",
+        "2026"
+      ]
+    },
+    {
+      "identifier": "tudesurjjrousse00giragoog",
+      "status": "已取回",
+      "note": "",
+      "file": "tudesurjjrousse00giragoog.txt",
+      "source_url": "https://archive.org/download/tudesurjjrousse00giragoog/tudesurjjrousse00giragoog_djvu.txt",
+      "sha256": "fd437884f0e0bb9ec3b9ba155bf69adaace7873a60338cfa4c291c40fbb7b258",
+      "bytes": 179355,
+      "words": 30426,
+      "fetched_at": "2026-08-12T13:53:23",
+      "ia_date": "1851",
+      "ia_year": "1851",
+      "ia_publicdate": "2009-02-06 04:34:12",
+      "ia_creator": "Eugène Chatel,  Saint Marc Girardin",
+      "ia_title": "Étude sur J. -J. Rousseau",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1754",
+        "1762",
+        "1840",
+        "1847",
+        "1851"
+      ]
+    },
+    {
+      "identifier": "tudesurltatm00bouguoft",
+      "status": "已取回",
+      "note": "",
+      "file": "tudesurltatm00bouguoft.txt",
+      "source_url": "https://archive.org/download/tudesurltatm00bouguoft/tudesurltatm00bouguoft_djvu.txt",
+      "sha256": "e671a5bcdd69e3037a12607981142dfff8926690ebb9ac8e9b2ec1958d6a521e",
+      "bytes": 267423,
+      "words": 38669,
+      "fetched_at": "2026-08-12T13:53:23",
+      "ia_date": "1883",
+      "ia_year": "",
+      "ia_publicdate": "2008-10-08 23:33:39",
+      "ia_creator": "Bougeault, Alfred, 1817-",
+      "ia_title": "Étude sur l'état mental de J.J. Rousseau et sa mort à Ermenonville",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1741",
+        "1770",
+        "1772",
+        "1883"
+      ]
+    },
+    {
+      "identifier": "uvrescompltesd02rous",
+      "status": "已取回",
+      "note": "",
+      "file": "uvrescompltesd02rous.txt",
+      "source_url": "https://archive.org/download/uvrescompltesd02rous/uvrescompltesd02rous_djvu.txt",
+      "sha256": "5a6c67b00ba55f1649b32ff113d529c3ccc2911e4b8ed04cbcb00a47b4797cf6",
+      "bytes": 934542,
+      "words": 138525,
+      "fetched_at": "2026-08-12T13:53:23",
+      "ia_date": "1823",
+      "ia_year": "",
+      "ia_publicdate": "2011-03-24 02:05:56",
+      "ia_creator": [
+        "Rousseau, Jean-Jacques, 1712-1778",
+        "Musset-Pathay, V.-D. (Victor-Donatien), 1768-1832"
+      ],
+      "ia_title": "uvres complètes de J. J.Rousseau : mises dans un nouvel ordre",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1824",
+        "2011"
       ]
     },
     {

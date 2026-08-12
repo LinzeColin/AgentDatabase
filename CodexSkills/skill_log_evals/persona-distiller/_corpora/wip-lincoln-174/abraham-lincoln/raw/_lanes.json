@@ -1,0 +1,366 @@
+{
+  "lanes": 5,
+  "去掉纸面道后": 5,
+  "逐道份数": {
+    "writings": 45,
+    "conversations": 10,
+    "expression": 11,
+    "decisions": 2,
+    "timeline": 0,
+    "external": 2
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "LapsleyLincWritLifeofLinc",
+      "道": "external",
+      "title": "The writings of Abraham Lincoln, Life of Lincoln"
+    },
+    {
+      "identifier": "LapsleyLincWritsLincDoug1",
+      "道": "writings",
+      "title": "The writings of Abraham Lincoln, The Lincoln-Douglas Debates-I"
+    },
+    {
+      "identifier": "LincLastSpeech2",
+      "道": "expression",
+      "title": "Lincoln's Last Speech in Springfield in the Campaign of 1858"
+    },
+    {
+      "identifier": "anecdotesofabrah03linc",
+      "道": "external",
+      "title": "Anecdotes of Abraham Lincoln and Lincoln's stories : including early l"
+    },
+    {
+      "identifier": "bestoflincolnear00linc",
+      "道": "expression",
+      "title": "The best of Lincoln : early speeches, Springfield speech, Cooper Union"
+    },
+    {
+      "identifier": "completeprojectg03253gut",
+      "道": "writings",
+      "title": "Complete Project Gutenberg Abraham Lincoln Writings"
+    },
+    {
+      "identifier": "completeworksab09fishgoog",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksab11fishgoog",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworkscov1linc",
+      "道": "conversations",
+      "title": "Complete works : comprising his speeches, letters, state papers, and m"
+    },
+    {
+      "identifier": "completeworkso2127linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworkso2129linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksof03linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksof05linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksof07linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksofa04linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksofa06linco",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksofa08linco",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksofa09linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksofa11linco",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksofa13linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksofa16linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksofav12linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksofv1linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksofv3linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksofv4linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksov7linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworksov9linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completeworkv1linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completewov10linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completewov4linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completewv10linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completewv1linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "completewv2linc",
+      "道": "writings",
+      "title": "Complete works :"
+    },
+    {
+      "identifier": "completewv4linc",
+      "道": "writings",
+      "title": "Complete works of Abraham Lincoln"
+    },
+    {
+      "identifier": "crossofgettysbur5050linc",
+      "道": "expression",
+      "title": "The cross of Gettysburg : Lincoln's immortal address in cruciform arra"
+    },
+    {
+      "identifier": "cu31924103069070",
+      "道": "conversations",
+      "title": "Abraham Lincoln; complete works, comprising his speeches, letters, sta"
+    },
+    {
+      "identifier": "earlyspeechesofa1858linc",
+      "道": "expression",
+      "title": "Early speeches of Abraham Lincoln, 1830-1860"
+    },
+    {
+      "identifier": "earlyspeechesofatslinc",
+      "道": "expression",
+      "title": "Early speeches of Abraham Lincoln, 1830-1860"
+    },
+    {
+      "identifier": "earlyspeechesspr00linc",
+      "道": "conversations",
+      "title": "...Early speeches, Springfield speech, Cooper union speech, inaugural "
+    },
+    {
+      "identifier": "emancipationproc00linc",
+      "道": "decisions",
+      "title": "Emancipation proclamation of January 1st, 1864 [sic]"
+    },
+    {
+      "identifier": "firstsecondinaug01link",
+      "道": "expression",
+      "title": "...First and second inaugural addresses, message, July 5, 1861;"
+    },
+    {
+      "identifier": "firstsecondinaug02link",
+      "道": "expression",
+      "title": "...First and second inaugural addresses, message, July 5, 1861;"
+    },
+    {
+      "identifier": "gemsfromabrahaml00linc",
+      "道": "writings",
+      "title": "Gems from Abraham Lincoln : born February 11th, 1809, in Hardin County"
+    },
+    {
+      "identifier": "generalordersno14149linc",
+      "道": "decisions",
+      "title": "General orders. No. 1. War department, adjutant general's office, Wash"
+    },
+    {
+      "identifier": "gettysburgaddres02linc",
+      "道": "conversations",
+      "title": "Gettysburg address : delivered at the dedication of the National Cemet"
+    },
+    {
+      "identifier": "gettysburghspeech00lincrich",
+      "道": "expression",
+      "title": "The Gettysburg speech, and other papers"
+    },
+    {
+      "identifier": "gettysburgspeec3835linc",
+      "道": "expression",
+      "title": "The Gettysburg speech and other papers"
+    },
+    {
+      "identifier": "inauguraladdress00linc",
+      "道": "expression",
+      "title": "Inaugural address of the President of the United States on the fourth "
+    },
+    {
+      "identifier": "india.history.resource.111513",
+      "道": "conversations",
+      "title": "Abraham Lincoln: Complete Works, comprising his Speeches, Letters, Sta"
+    },
+    {
+      "identifier": "insurgentprivate00linc",
+      "道": "writings",
+      "title": "Insurgent privateers in foreign ports : message from the President of "
+    },
+    {
+      "identifier": "jstor-20086068",
+      "道": "conversations",
+      "title": "Unpublished Letters of Abraham Lincoln"
+    },
+    {
+      "identifier": "lettersaddresses00inlinc",
+      "道": "conversations",
+      "title": "Letters and addresses : with a brief biography, the story of the book,"
+    },
+    {
+      "identifier": "lettersaddresses00link",
+      "道": "conversations",
+      "title": "Letters and addresses of Abraham Lincoln .."
+    },
+    {
+      "identifier": "lettersaddresses02linc",
+      "道": "conversations",
+      "title": "Letters and addresses of Abraham Lincoln"
+    },
+    {
+      "identifier": "lifeworks02lincuoft",
+      "道": "writings",
+      "title": "Life and works;"
+    },
+    {
+      "identifier": "lifeworks03lincuoft",
+      "道": "writings",
+      "title": "Life and works;"
+    },
+    {
+      "identifier": "lifeworksofab1136linc",
+      "道": "writings",
+      "title": "Life and works of Abraham Lincoln"
+    },
+    {
+      "identifier": "lifeworksofab1137linc",
+      "道": "writings",
+      "title": "Life and works of Abraham Lincoln"
+    },
+    {
+      "identifier": "lincolnowenletters00lincrich",
+      "道": "conversations",
+      "title": "Abraham Lincoln and Mary Owen : three letters, Lincoln to Mrs. O.H. Br"
+    },
+    {
+      "identifier": "lincstoriesspeech00lincrich",
+      "道": "expression",
+      "title": "Lincoln's stories and speeches"
+    },
+    {
+      "identifier": "writingslincoln04lincrich",
+      "道": "writings",
+      "title": "The writings of Abraham Lincoln"
+    },
+    {
+      "identifier": "writingslincoln05lincrich",
+      "道": "writings",
+      "title": "The writings of Abraham Lincoln"
+    },
+    {
+      "identifier": "writingsofabraha0000linc",
+      "道": "writings",
+      "title": "The writings of Abraham Lincoln"
+    },
+    {
+      "identifier": "writingsofabraha0004linc",
+      "道": "writings",
+      "title": "The writings of Abraham Lincoln"
+    },
+    {
+      "identifier": "writingsofabraha0005linc",
+      "道": "writings",
+      "title": "The writings of Abraham Lincoln"
+    },
+    {
+      "identifier": "writingsofabraha02lincuoft",
+      "道": "writings",
+      "title": "The writings of Abraham Lincoln;"
+    },
+    {
+      "identifier": "writingsofabraha03lincuoft",
+      "道": "writings",
+      "title": "The writings of Abraham Lincoln;"
+    },
+    {
+      "identifier": "writingsofabraha05lincuoft",
+      "道": "writings",
+      "title": "The writings of Abraham Lincoln;"
+    },
+    {
+      "identifier": "writingsofabraha07lincuoft",
+      "道": "writings",
+      "title": "The writings of Abraham Lincoln;"
+    },
+    {
+      "identifier": "wsb18f36_images",
+      "道": "writings",
+      "title": "In Memoriam to Abraham Lincoln"
+    }
+  ]
+}

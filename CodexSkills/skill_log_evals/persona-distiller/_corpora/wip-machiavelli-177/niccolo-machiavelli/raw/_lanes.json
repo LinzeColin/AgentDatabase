@@ -1,0 +1,361 @@
+{
+  "lanes": 4,
+  "去掉纸面道后": 4,
+  "逐道份数": {
+    "writings": 53,
+    "conversations": 4,
+    "expression": 10,
+    "decisions": 0,
+    "timeline": 0,
+    "external": 2
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "10078626bsb",
+      "道": "writings",
+      "title": "Des Nikolaus Machiavelli's Florentinische Geschichten. 1"
+    },
+    {
+      "identifier": "10078627bsb",
+      "道": "writings",
+      "title": "Des Nikolaus Machiavelli's Florentinische Geschichten. 2"
+    },
+    {
+      "identifier": "10078631bsb",
+      "道": "writings",
+      "title": "Nicolò Macchiavelli's Geschichte des Castruccio Castracani von Lucca"
+    },
+    {
+      "identifier": "10602820bsb",
+      "道": "writings",
+      "title": "Niccolo Machiavelli's sämmtliche Werke. 3"
+    },
+    {
+      "identifier": "10602821bsb",
+      "道": "writings",
+      "title": "Niccolo Machiavelli's sämmtliche Werke. 4"
+    },
+    {
+      "identifier": "10602822bsb",
+      "道": "writings",
+      "title": "Niccolo Machiavelli's sämmtliche Werke. 5"
+    },
+    {
+      "identifier": "10602824bsb",
+      "道": "writings",
+      "title": "Niccolo Machiavelli's sämmtliche Werke. 7"
+    },
+    {
+      "identifier": "10769804bsb",
+      "道": "writings",
+      "title": "Das Buch vom Fürsten"
+    },
+    {
+      "identifier": "10769805bsb",
+      "道": "writings",
+      "title": "Der Fürst des Niccolo Macchiavelli. 1."
+    },
+    {
+      "identifier": "A1090181",
+      "道": "writings",
+      "title": "El príncipe de Nicolás Maquiavelo"
+    },
+    {
+      "identifier": "BRes092067",
+      "道": "writings",
+      "title": " Opere di Niccolò Machiavelli T.1"
+    },
+    {
+      "identifier": "BRes092068",
+      "道": "writings",
+      "title": " Opere di Niccolò Machiavelli T. 2"
+    },
+    {
+      "identifier": "BRes092069",
+      "道": "writings",
+      "title": "Opere di Niccolò Machiavelli T. 3"
+    },
+    {
+      "identifier": "BRes092070",
+      "道": "writings",
+      "title": "Opere di Niccolò Machiavelli T. 5"
+    },
+    {
+      "identifier": "BRes092071",
+      "道": "writings",
+      "title": " Opere di Niccolò Machiavelli T. 6"
+    },
+    {
+      "identifier": "BRes092072",
+      "道": "writings",
+      "title": "Opere di Niccolò Machiavelli T. 7"
+    },
+    {
+      "identifier": "BRes092073",
+      "道": "writings",
+      "title": "Opere di Niccolò Machiavelli T. 8"
+    },
+    {
+      "identifier": "MarriageOfBelfagor",
+      "道": "writings",
+      "title": "Marriage Of Belfagor"
+    },
+    {
+      "identifier": "TO01040218",
+      "道": "writings",
+      "title": "La mente di un uomo di Stato: raccolta di massime estratte dalle opere"
+    },
+    {
+      "identifier": "a591295400machuoft",
+      "道": "writings",
+      "title": "Il principe"
+    },
+    {
+      "identifier": "b30335073",
+      "道": "writings",
+      "title": "The Florentine historie"
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_a-caveat-for-wives_machiavelli-niccolo_1660",
+      "道": "writings",
+      "title": "A caveat for wives...  1660"
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_a-true-copy-of-a-letter-_machiavelli-niccol_1691",
+      "道": "conversations",
+      "title": "A true copy of a letter written by ...  1691"
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machiavels-discourses-u_machiavelli-niccolo_1674",
+      "道": "expression",
+      "title": "Machiavel's discourses upon the first decade...  1674"
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machiavels-vindication-_machiavelli-niccolo_1691",
+      "道": "writings",
+      "title": "Machiavel's vindication of himself...  1691"
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machiavils-advice-to-hi_machiavelli-niccolo_1681",
+      "道": "writings",
+      "title": "Machiavil's advice to his son. ...  1681"
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1663",
+      "道": "expression",
+      "title": "Machivael's discourses, ...  1663"
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1663_0",
+      "道": "expression",
+      "title": "Machivael's discourses ...  1663"
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1674",
+      "道": "expression",
+      "title": "Machivael's discourses ...  1674"
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_machivaels-discourses_machiavelli-niccolo_1663",
+      "道": "expression",
+      "title": "Machivael's discourses...  1663"
+    },
+    {
+      "identifier": "bub_gb_EbbqmRdN78cC",
+      "道": "writings",
+      "title": "Gosudarʹ (Il principe) i Razsuzhdenii͡a na pervyi͡a tri knigi Tita Liv"
+    },
+    {
+      "identifier": "bub_gb_Ibk8AAAAYAAJ",
+      "道": "writings",
+      "title": "Gosudarʹ (Il principe) i Razsuzhdenii͡a na pervyi͡a tri knigi Tita Liv"
+    },
+    {
+      "identifier": "bub_gb_OLtLAAAAcAAJ",
+      "道": "external",
+      "title": "Essai sur les oeuvres et la doctrine de Machiavel"
+    },
+    {
+      "identifier": "bub_gb_PTYaAQAAMAAJ",
+      "道": "writings",
+      "title": "Opere complete di Niccolò Machiavelli con molte correzioni e giunte ri"
+    },
+    {
+      "identifier": "bub_gb_dCVvnsDWyJ0C",
+      "道": "writings",
+      "title": "Scritta inediti di Niccolò Machiavelli risguardanti la storia e la mil"
+    },
+    {
+      "identifier": "bub_gb_hepDAAAAYAAJ",
+      "道": "writings",
+      "title": "Le istorie fiorentine di Niccolò Machiavelli ; ridotte alla miglior le"
+    },
+    {
+      "identifier": "bub_gb_jzPjhqlQI24C",
+      "道": "writings",
+      "title": "Le istorie fiorentine"
+    },
+    {
+      "identifier": "bub_gb_l2pd8wG-VCoC",
+      "道": "writings",
+      "title": "Le istorie fiorentine"
+    },
+    {
+      "identifier": "bub_gb_sm_ojzpYQkAC",
+      "道": "expression",
+      "title": "Discorsi sopra la prima deca de Tito Livio, di Nicolò Machiavelli .."
+    },
+    {
+      "identifier": "carteggiodisplom00mach",
+      "道": "conversations",
+      "title": "Carteggio displomatico e familiare"
+    },
+    {
+      "identifier": "carteggiodisplom2mach",
+      "道": "conversations",
+      "title": "Carteggio displomatico e familiare"
+    },
+    {
+      "identifier": "carteggiodisplom3mach",
+      "道": "conversations",
+      "title": "Carteggio displomatico e familiare"
+    },
+    {
+      "identifier": "commedie00mach",
+      "道": "expression",
+      "title": "Commedie [microform]"
+    },
+    {
+      "identifier": "diplomaticwritin01machuoft",
+      "道": "writings",
+      "title": "The historical, political, and diplomatic writings"
+    },
+    {
+      "identifier": "diplomaticwritin02machuoft",
+      "道": "writings",
+      "title": "The historical, political, and diplomatic writings"
+    },
+    {
+      "identifier": "diplomaticwritin03machuoft",
+      "道": "writings",
+      "title": "The historical, political, and diplomatic writings"
+    },
+    {
+      "identifier": "diplomaticwritin04machuoft",
+      "道": "writings",
+      "title": "The historical, political, and diplomatic writings"
+    },
+    {
+      "identifier": "discorsisullapri00machuoft",
+      "道": "expression",
+      "title": "Discorsi sulla prima deca di T. Livio. Scelti e commentati da Giuseppe"
+    },
+    {
+      "identifier": "discoursesonthef02machuoft",
+      "道": "expression",
+      "title": "Discourses on the first decade of Titus Levius;"
+    },
+    {
+      "identifier": "discoursesonthef03machuoft",
+      "道": "expression",
+      "title": "Discourses on the first decade of Titus Levius;"
+    },
+    {
+      "identifier": "dli.bengal.10689.19369",
+      "道": "writings",
+      "title": "THE HISTORY OF FLORENCE AND OF THE AFFAIRS OF ITALY"
+    },
+    {
+      "identifier": "dli.ministry.02746",
+      "道": "writings",
+      "title": "The history of florence, and of the affairs of Italy, from the earlies"
+    },
+    {
+      "identifier": "dli.ministry.05369",
+      "道": "writings",
+      "title": "The Prince"
+    },
+    {
+      "identifier": "dli.ministry.14051",
+      "道": "writings",
+      "title": "History of Florence and of the affairs of Italy : from the earliest ti"
+    },
+    {
+      "identifier": "dli.ministry.16183",
+      "道": "writings",
+      "title": "Legazioni e commissioni"
+    },
+    {
+      "identifier": "dli.ministry.18162",
+      "道": "writings",
+      "title": "Opere"
+    },
+    {
+      "identifier": "dli.ministry.18163",
+      "道": "writings",
+      "title": "Opere"
+    },
+    {
+      "identifier": "dli.ministry.18164",
+      "道": "writings",
+      "title": "Opere"
+    },
+    {
+      "identifier": "dli.ministry.18165",
+      "道": "writings",
+      "title": "Opere"
+    },
+    {
+      "identifier": "florentinehistor00machuoft",
+      "道": "writings",
+      "title": "Florentine history. Translated by W.K. Marriott"
+    },
+    {
+      "identifier": "florentinehistor01machuoft",
+      "道": "writings",
+      "title": "The Florentine history..."
+    },
+    {
+      "identifier": "florentinischege00mach",
+      "道": "writings",
+      "title": "Florentinische Geschichten des Nikolaus Machiavelli"
+    },
+    {
+      "identifier": "india.history.resource.72474",
+      "道": "writings",
+      "title": "Opere di Niccolo Machiavelli, Vol. I"
+    },
+    {
+      "identifier": "india.history.resource.72475",
+      "道": "writings",
+      "title": "Opere di Niccolo Machiavelli, Vol. III"
+    },
+    {
+      "identifier": "india.history.resource.72476",
+      "道": "writings",
+      "title": "Opere di Niccolo Machiavelli, Vol. V"
+    },
+    {
+      "identifier": "india.history.resource.72477",
+      "道": "writings",
+      "title": "Opere di Niccolo Machiavelli, Vol. VI"
+    },
+    {
+      "identifier": "india.history.resource.72478",
+      "道": "writings",
+      "title": "Opere di Niccolo Machiavelli, Vol. IV"
+    },
+    {
+      "identifier": "operediniccolm02mach",
+      "道": "writings",
+      "title": "Opere di Niccolò Machiavelli : con giunta di un nuova indice generale "
+    },
+    {
+      "identifier": "threeprosewriter00moor",
+      "道": "external",
+      "title": "Three prose writers of the Italian renaissance"
+    }
+  ]
+}

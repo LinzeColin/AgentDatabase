@@ -1,11 +1,11 @@
 {
-  "生成时刻": "2026-08-12T13:28:24",
-  "请求数": 42,
-  "已取回": 69,
+  "生成时刻": "2026-08-12T13:52:14",
+  "请求数": 4,
+  "已取回": 73,
   "skipped_access_restricted": 0,
   "失败": 1,
   "并发降级": "无（全程并发 4）",
-  "总词数": 6248584,
+  "总词数": 6495551,
   "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
   "记录": [
     {
@@ -695,6 +695,24 @@
       ]
     },
     {
+      "identifier": "bim_eighteenth-century_joh-amos-commenii-orbis_comenius-johann-amos_1705",
+      "status": "已取回",
+      "note": "",
+      "file": "bim_eighteenth-century_joh-amos-commenii-orbis_comenius-johann-amos_1705.txt",
+      "source_url": "https://archive.org/download/bim_eighteenth-century_joh-amos-commenii-orbis_comenius-johann-amos_1705/bim_eighteenth-century_joh-amos-commenii-orbis_comenius-johann-amos_1705_djvu.txt",
+      "sha256": "8037c68229c6f2cade23fa240ae4605d2d9c102e62eb0f6e8acce54c45850b4a",
+      "bytes": 283995,
+      "words": 63012,
+      "fetched_at": "2026-08-12T13:52:13",
+      "ia_date": "1705",
+      "ia_year": "",
+      "ia_publicdate": "2023-09-29 23:00:51",
+      "ia_creator": "Comenius, Johann Amos",
+      "ia_title": "Joh. Amos Commenii orbis sensualium pictus: hoc est, omnium principalium in mundo rerum, & in vita actionum, pictura & nomenclatura = Joh. Amos Commenius's visible world: or, a nomenclature, and pictures of all the chief things that are in the world, ... in above an 150 copper cuts written by the author in Latin and High-Dutch. ... Translated into English by Charles Hoole, ... for the use of young Latin scholars.  1705",
+      "ia_licenseurl": "",
+      "titlepage_years": []
+    },
+    {
       "identifier": "bub_gb_2x85AQAAMAAJ",
       "status": "已取回",
       "note": "",
@@ -1097,6 +1115,36 @@
       ]
     },
     {
+      "identifier": "bub_gb_SLlKAAAAYAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_SLlKAAAAYAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_SLlKAAAAYAAJ/bub_gb_SLlKAAAAYAAJ_djvu.txt",
+      "sha256": "89c48a97ec8fae65db1f3d1952564db105aa2c0c9981d6560afd81e9db75acc4",
+      "bytes": 736082,
+      "words": 107207,
+      "fetched_at": "2026-08-12T13:52:12",
+      "ia_date": "1897",
+      "ia_year": "1898",
+      "ia_publicdate": "2015-02-02 07:49:21",
+      "ia_creator": [
+        "Comenius, Johann Amos, 1592-1670",
+        "Kvačala, Jan, 1862-1934"
+      ],
+      "ia_title": "Korrespondence. Listy Komenského a vrstevníků jeho",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1621",
+        "1656",
+        "1661",
+        "1702",
+        "1717",
+        "1892",
+        "1893",
+        "1895"
+      ]
+    },
+    {
       "identifier": "bub_gb_WGNcAAAAcAAJ",
       "status": "已取回",
       "note": "",
@@ -1236,6 +1284,32 @@
         "1636",
         "1863",
         "1864"
+      ]
+    },
+    {
+      "identifier": "bub_gb_yp8AAAAAYAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_yp8AAAAAYAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_yp8AAAAAYAAJ/bub_gb_yp8AAAAAYAAJ_djvu.txt",
+      "sha256": "914cf0b083a4fd8ad129d1dad392dce864b1dbe434af6bf63b902350572c7e2a",
+      "bytes": 243069,
+      "words": 42243,
+      "fetched_at": "2026-08-12T13:52:14",
+      "ia_date": "1810",
+      "ia_year": "1810",
+      "ia_publicdate": "2016-09-07 19:35:05",
+      "ia_creator": [
+        "Comenius, Johann Amos, 1592-1670",
+        "Hoole, Charles, 1610-1667, translator",
+        "Anderson, Alexander, 1775-1870, engraver",
+        "T. & J. Swords (Firm), publisher"
+      ],
+      "ia_title": "Joh. Amos Comenii Orbis sensualium pictus, hoc est, Omnium principalium in mundo rerum, et in vita actionum, pictura & nomenclatura. = Joh. Amos Comenius's Visible world, or, A nomenclature, and pictures of all the chief things that are in the world, and of men's employments therein; : in above 150 cuts.",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1657",
+        "1810"
       ]
     },
     {
@@ -1398,6 +1472,27 @@
         "1649",
         "1905"
       ]
+    },
+    {
+      "identifier": "johamoscommeniio00come",
+      "status": "已取回",
+      "note": "",
+      "file": "johamoscommeniio00come.txt",
+      "source_url": "https://archive.org/download/johamoscommeniio00come/johamoscommeniio00come_djvu.txt",
+      "sha256": "e4b848b700b5ca3cb4efa3607d4d1b9b8cee8e816cb62facb14140da4d744ab8",
+      "bytes": 239210,
+      "words": 34505,
+      "fetched_at": "2026-08-12T13:52:11",
+      "ia_date": "1705",
+      "ia_year": "",
+      "ia_publicdate": "2009-04-01 21:09:53",
+      "ia_creator": [
+        "Comenius, Johann Amos, 1592-1670",
+        "Hoole, Charles, 1610-1667"
+      ],
+      "ia_title": "Joh. Amos Commenii Orbis sensualium pictus: : hoc est, Omnium principalium in mundo rerum, & in vita actionum, pictura & nomenclatura.",
+      "ia_licenseurl": "",
+      "titlepage_years": []
     },
     {
       "identifier": "labyrinthofworld00comeuoft",

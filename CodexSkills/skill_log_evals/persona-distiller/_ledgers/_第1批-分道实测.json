@@ -1,0 +1,3512 @@
+{
+  "#173 Marshall": {
+    "lanes": 4,
+    "去掉纸面道后": 3,
+    "逐道份数": {
+      "writings": 56,
+      "conversations": 4,
+      "expression": 1,
+      "decisions": 12,
+      "timeline": 0,
+      "external": 0
+    },
+    "未分道": 0,
+    "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；**未分道不默认成 writings**",
+    "明细": [
+      {
+        "identifier": "ahistorycolonie00marsgoog",
+        "道": "writings",
+        "title": "A history of the colonies planted by the English on the continent of N"
+      },
+      {
+        "identifier": "ahm3974.0001.001.umich.edu",
+        "道": "decisions",
+        "title": "John Marshall, complete constitutional decisions, ed. with annotations"
+      },
+      {
+        "identifier": "bim_eighteenth-century_speech-of-the-hon-john-_marshall-john-chief-ju_1800",
+        "道": "expression",
+        "title": "Speech of the Hon. John Marshall, delivered in the House of Representa"
+      },
+      {
+        "identifier": "bub_gb_F4c8AAAAIAAJ",
+        "道": "decisions",
+        "title": "John Marshall, complete constitutional decisions, ed. with annotations"
+      },
+      {
+        "identifier": "bub_gb_QSAFAAAAYAAJ",
+        "道": "writings",
+        "title": "The life of George Washington : commander in chief of the American for"
+      },
+      {
+        "identifier": "completeconstitu00marsuoft",
+        "道": "decisions",
+        "title": "Complete constitutional decisions;"
+      },
+      {
+        "identifier": "constitutionald00cottgoog",
+        "道": "decisions",
+        "title": "The constitutional decisions of John Marshall"
+      },
+      {
+        "identifier": "constitutionalde01marsuoft",
+        "道": "decisions",
+        "title": "The constitutional decisions;"
+      },
+      {
+        "identifier": "constitutionalde02marsuoft",
+        "道": "decisions",
+        "title": "The constitutional decisions;"
+      },
+      {
+        "identifier": "cu31924024323069",
+        "道": "decisions",
+        "title": "John Marshall : complete constitutional decisions, ed. with annotation"
+      },
+      {
+        "identifier": "cu31924032751632",
+        "道": "conversations",
+        "title": "The political and economic doctrines of John Marshall, who for thirty-"
+      },
+      {
+        "identifier": "historyofcolonie00mars",
+        "道": "writings",
+        "title": "A history of the colonies planted by the English on the continent of N"
+      },
+      {
+        "identifier": "historyofcolonie01mars",
+        "道": "writings",
+        "title": "A history of the colonies planted by the English on the continent of N"
+      },
+      {
+        "identifier": "india.history.resource.17702",
+        "道": "writings",
+        "title": "The Life of George Washington, in Five Volumes, Vol. V"
+      },
+      {
+        "identifier": "johnmarshallcom00dillgoog",
+        "道": "decisions",
+        "title": "John Marshall, complete constitutional decisions, ed. with annotations"
+      },
+      {
+        "identifier": "johnmarshallcom00marsgoog",
+        "道": "decisions",
+        "title": "John Marshall, complete constitutional decisions"
+      },
+      {
+        "identifier": "johnmarshallcom01marsgoog",
+        "道": "decisions",
+        "title": "John Marshall, complete constitutional decisions"
+      },
+      {
+        "identifier": "johnmarshallnewintro00marsrich",
+        "道": "writings",
+        "title": "John Marshall"
+      },
+      {
+        "identifier": "lifegeorgewashi00marsgoog",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifegeorgewashi00washgoog",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifegeorgewashi01marsgoog",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifegeorgewashi01washgoog",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifegeorgewashi02marsgoog",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifegeorgewashi02washgoog",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifegeorgewashi03marsgoog",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifegeorgewashi03washgoog",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifegeorgewashi04washgoog",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifegeorgewashi05washgoog",
+        "道": "writings",
+        "title": "The life of George Washington : commander in chief of the American for"
+      },
+      {
+        "identifier": "lifegeorgewashi06washgoog",
+        "道": "writings",
+        "title": "The life of George Washington : commander in chief of the American for"
+      },
+      {
+        "identifier": "lifegeorgewashi07washgoog",
+        "道": "writings",
+        "title": "The life of George Washington,: Commander in Chief of the American for"
+      },
+      {
+        "identifier": "lifegeorgewashi08washgoog",
+        "道": "writings",
+        "title": "The life of George Washington : commander in chief of the American for"
+      },
+      {
+        "identifier": "lifeof01georgewashmars",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifeof03georgewashmars",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifeof05georgewashmars",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifeofgeorgew02marsiala",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifeofgeorgewash0000mars",
+        "道": "writings",
+        "title": "The life of George Washington : commander in chief of the American for"
+      },
+      {
+        "identifier": "lifeofgeorgewash0002mars",
+        "道": "writings",
+        "title": "The life of George Washington : commander in chief of the American for"
+      },
+      {
+        "identifier": "lifeofgeorgewash001mars",
+        "道": "writings",
+        "title": "The life of George Washington : Commander in Chief of the American for"
+      },
+      {
+        "identifier": "lifeofgeorgewash002mars",
+        "道": "writings",
+        "title": "The life of George Washington : Commander in Chief of the American for"
+      },
+      {
+        "identifier": "lifeofgeorgewash003mars",
+        "道": "writings",
+        "title": "The life of George Washington : Commander in Chief of the American for"
+      },
+      {
+        "identifier": "lifeofgeorgewash004mars",
+        "道": "writings",
+        "title": "The life of George Washington : Commander in Chief of the American for"
+      },
+      {
+        "identifier": "lifeofgeorgewash005mars",
+        "道": "writings",
+        "title": "The life of George Washington : Commander in Chief of the American for"
+      },
+      {
+        "identifier": "lifeofgeorgewash00mars",
+        "道": "writings",
+        "title": "The life of George Washington"
+      },
+      {
+        "identifier": "lifeofgeorgewash00marsuoft",
+        "道": "writings",
+        "title": "The life of George Washington, written for the use of schools"
+      },
+      {
+        "identifier": "lifeofgeorgewash01mars2",
+        "道": "writings",
+        "title": "The life of George Washington : commander in chief of the American for"
+      },
+      {
+        "identifier": "lifeofgeorgewash01mars_0",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifeofgeorgewash01mars_1",
+        "道": "writings",
+        "title": "The life of George Washington : commander in chief of the American for"
+      },
+      {
+        "identifier": "lifeofgeorgewash01marsiala",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifeofgeorgewash01marsuoft",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifeofgeorgewash02mars",
+        "道": "writings",
+        "title": "The life of George Washington : commander in chief of the American for"
+      },
+      {
+        "identifier": "lifeofgeorgewash02mars_0",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifeofgeorgewash02mars_1",
+        "道": "writings",
+        "title": "The life of George Washington : commander in chief of the American for"
+      },
+      {
+        "identifier": "lifeofgeorgewash02marsiala",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifeofgeorgewash02marsuoft",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifeofgeorgewash04marsiala",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifeofgeorgewash05marsiala",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "lifeofgeorgewash06mars",
+        "道": "writings",
+        "title": "The life of George Washington"
+      },
+      {
+        "identifier": "lifeofgeorgewash1860mars",
+        "道": "writings",
+        "title": "The life of George Washington"
+      },
+      {
+        "identifier": "lifeofgeorgewash1926mars",
+        "道": "writings",
+        "title": "The life of George Washington, commander in chief of the American forc"
+      },
+      {
+        "identifier": "marshallchiefjust00marsrich",
+        "道": "conversations",
+        "title": "The political and economic doctrines of John Marshall, who for thirty-"
+      },
+      {
+        "identifier": "opinionofthesupr29513gut",
+        "道": "decisions",
+        "title": "Opinion of the Supreme Court of the United States, at January Term, 18"
+      },
+      {
+        "identifier": "opinionsoflatech00mars",
+        "道": "decisions",
+        "title": "Opinions of the late chief justice of the United States, John Marshall"
+      },
+      {
+        "identifier": "plantedcolonies00marsrich",
+        "道": "writings",
+        "title": "A history of the colonies planted by the English on the continent of N"
+      },
+      {
+        "identifier": "politicalandeco02ostegoog",
+        "道": "conversations",
+        "title": "The political and economic doctrines of John Marshall, who for thirty-"
+      },
+      {
+        "identifier": "politicaleconomi00mars",
+        "道": "writings",
+        "title": "The political and economic doctrines"
+      },
+      {
+        "identifier": "politicaleconomi00marsrich",
+        "道": "conversations",
+        "title": "The political and economic doctrines of John Marshall, who for thirty-"
+      },
+      {
+        "identifier": "thelifeofgeorgew18591gut",
+        "道": "writings",
+        "title": "The Life of George Washington, Vol. 1 (of 5): Commander in Chief of th"
+      },
+      {
+        "identifier": "thelifeofgeorgew18592gut",
+        "道": "writings",
+        "title": "The Life of George Washington, Vol. 2 (of 5): Commander in Chief of th"
+      },
+      {
+        "identifier": "thelifeofgeorgew18593gut",
+        "道": "writings",
+        "title": "The Life of George Washington, Vol. 3 (of 5): Commander in Chief of th"
+      },
+      {
+        "identifier": "thelifeofgeorgew18594gut",
+        "道": "writings",
+        "title": "The Life of George Washington, Vol. 4 (of 5): Commander in Chief of th"
+      },
+      {
+        "identifier": "thelifeofgeorgew18595gut",
+        "道": "writings",
+        "title": "The Life of George Washington, Vol. 5 (of 5): Commander in Chief of th"
+      },
+      {
+        "identifier": "thelifeofgeorgew28859gut",
+        "道": "writings",
+        "title": "The Life Of George Washington A Linked Index to the Project Gutenberg "
+      },
+      {
+        "identifier": "writingsjohnmar01marsgoog",
+        "道": "writings",
+        "title": "The writings of John Marshall, late chief justice of the United States"
+      }
+    ]
+  },
+  "#174 Lincoln": {
+    "lanes": 5,
+    "去掉纸面道后": 5,
+    "逐道份数": {
+      "writings": 45,
+      "conversations": 10,
+      "expression": 11,
+      "decisions": 2,
+      "timeline": 0,
+      "external": 2
+    },
+    "未分道": 0,
+    "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；**未分道不默认成 writings**",
+    "明细": [
+      {
+        "identifier": "LapsleyLincWritLifeofLinc",
+        "道": "external",
+        "title": "The writings of Abraham Lincoln, Life of Lincoln"
+      },
+      {
+        "identifier": "LapsleyLincWritsLincDoug1",
+        "道": "writings",
+        "title": "The writings of Abraham Lincoln, The Lincoln-Douglas Debates-I"
+      },
+      {
+        "identifier": "LincLastSpeech2",
+        "道": "expression",
+        "title": "Lincoln's Last Speech in Springfield in the Campaign of 1858"
+      },
+      {
+        "identifier": "anecdotesofabrah03linc",
+        "道": "external",
+        "title": "Anecdotes of Abraham Lincoln and Lincoln's stories : including early l"
+      },
+      {
+        "identifier": "bestoflincolnear00linc",
+        "道": "expression",
+        "title": "The best of Lincoln : early speeches, Springfield speech, Cooper Union"
+      },
+      {
+        "identifier": "completeprojectg03253gut",
+        "道": "writings",
+        "title": "Complete Project Gutenberg Abraham Lincoln Writings"
+      },
+      {
+        "identifier": "completeworksab09fishgoog",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksab11fishgoog",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworkscov1linc",
+        "道": "conversations",
+        "title": "Complete works : comprising his speeches, letters, state papers, and m"
+      },
+      {
+        "identifier": "completeworkso2127linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworkso2129linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksof03linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksof05linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksof07linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksofa04linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksofa06linco",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksofa08linco",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksofa09linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksofa11linco",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksofa13linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksofa16linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksofav12linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksofv1linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksofv3linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksofv4linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksov7linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworksov9linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completeworkv1linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completewov10linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completewov4linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completewv10linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completewv1linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "completewv2linc",
+        "道": "writings",
+        "title": "Complete works :"
+      },
+      {
+        "identifier": "completewv4linc",
+        "道": "writings",
+        "title": "Complete works of Abraham Lincoln"
+      },
+      {
+        "identifier": "crossofgettysbur5050linc",
+        "道": "expression",
+        "title": "The cross of Gettysburg : Lincoln's immortal address in cruciform arra"
+      },
+      {
+        "identifier": "cu31924103069070",
+        "道": "conversations",
+        "title": "Abraham Lincoln; complete works, comprising his speeches, letters, sta"
+      },
+      {
+        "identifier": "earlyspeechesofa1858linc",
+        "道": "expression",
+        "title": "Early speeches of Abraham Lincoln, 1830-1860"
+      },
+      {
+        "identifier": "earlyspeechesofatslinc",
+        "道": "expression",
+        "title": "Early speeches of Abraham Lincoln, 1830-1860"
+      },
+      {
+        "identifier": "earlyspeechesspr00linc",
+        "道": "conversations",
+        "title": "...Early speeches, Springfield speech, Cooper union speech, inaugural "
+      },
+      {
+        "identifier": "emancipationproc00linc",
+        "道": "decisions",
+        "title": "Emancipation proclamation of January 1st, 1864 [sic]"
+      },
+      {
+        "identifier": "firstsecondinaug01link",
+        "道": "expression",
+        "title": "...First and second inaugural addresses, message, July 5, 1861;"
+      },
+      {
+        "identifier": "firstsecondinaug02link",
+        "道": "expression",
+        "title": "...First and second inaugural addresses, message, July 5, 1861;"
+      },
+      {
+        "identifier": "gemsfromabrahaml00linc",
+        "道": "writings",
+        "title": "Gems from Abraham Lincoln : born February 11th, 1809, in Hardin County"
+      },
+      {
+        "identifier": "generalordersno14149linc",
+        "道": "decisions",
+        "title": "General orders. No. 1. War department, adjutant general's office, Wash"
+      },
+      {
+        "identifier": "gettysburgaddres02linc",
+        "道": "conversations",
+        "title": "Gettysburg address : delivered at the dedication of the National Cemet"
+      },
+      {
+        "identifier": "gettysburghspeech00lincrich",
+        "道": "expression",
+        "title": "The Gettysburg speech, and other papers"
+      },
+      {
+        "identifier": "gettysburgspeec3835linc",
+        "道": "expression",
+        "title": "The Gettysburg speech and other papers"
+      },
+      {
+        "identifier": "inauguraladdress00linc",
+        "道": "expression",
+        "title": "Inaugural address of the President of the United States on the fourth "
+      },
+      {
+        "identifier": "india.history.resource.111513",
+        "道": "conversations",
+        "title": "Abraham Lincoln: Complete Works, comprising his Speeches, Letters, Sta"
+      },
+      {
+        "identifier": "insurgentprivate00linc",
+        "道": "writings",
+        "title": "Insurgent privateers in foreign ports : message from the President of "
+      },
+      {
+        "identifier": "jstor-20086068",
+        "道": "conversations",
+        "title": "Unpublished Letters of Abraham Lincoln"
+      },
+      {
+        "identifier": "lettersaddresses00inlinc",
+        "道": "conversations",
+        "title": "Letters and addresses : with a brief biography, the story of the book,"
+      },
+      {
+        "identifier": "lettersaddresses00link",
+        "道": "conversations",
+        "title": "Letters and addresses of Abraham Lincoln .."
+      },
+      {
+        "identifier": "lettersaddresses02linc",
+        "道": "conversations",
+        "title": "Letters and addresses of Abraham Lincoln"
+      },
+      {
+        "identifier": "lifeworks02lincuoft",
+        "道": "writings",
+        "title": "Life and works;"
+      },
+      {
+        "identifier": "lifeworks03lincuoft",
+        "道": "writings",
+        "title": "Life and works;"
+      },
+      {
+        "identifier": "lifeworksofab1136linc",
+        "道": "writings",
+        "title": "Life and works of Abraham Lincoln"
+      },
+      {
+        "identifier": "lifeworksofab1137linc",
+        "道": "writings",
+        "title": "Life and works of Abraham Lincoln"
+      },
+      {
+        "identifier": "lincolnowenletters00lincrich",
+        "道": "conversations",
+        "title": "Abraham Lincoln and Mary Owen : three letters, Lincoln to Mrs. O.H. Br"
+      },
+      {
+        "identifier": "lincstoriesspeech00lincrich",
+        "道": "expression",
+        "title": "Lincoln's stories and speeches"
+      },
+      {
+        "identifier": "writingslincoln04lincrich",
+        "道": "writings",
+        "title": "The writings of Abraham Lincoln"
+      },
+      {
+        "identifier": "writingslincoln05lincrich",
+        "道": "writings",
+        "title": "The writings of Abraham Lincoln"
+      },
+      {
+        "identifier": "writingsofabraha0000linc",
+        "道": "writings",
+        "title": "The writings of Abraham Lincoln"
+      },
+      {
+        "identifier": "writingsofabraha0004linc",
+        "道": "writings",
+        "title": "The writings of Abraham Lincoln"
+      },
+      {
+        "identifier": "writingsofabraha0005linc",
+        "道": "writings",
+        "title": "The writings of Abraham Lincoln"
+      },
+      {
+        "identifier": "writingsofabraha02lincuoft",
+        "道": "writings",
+        "title": "The writings of Abraham Lincoln;"
+      },
+      {
+        "identifier": "writingsofabraha03lincuoft",
+        "道": "writings",
+        "title": "The writings of Abraham Lincoln;"
+      },
+      {
+        "identifier": "writingsofabraha05lincuoft",
+        "道": "writings",
+        "title": "The writings of Abraham Lincoln;"
+      },
+      {
+        "identifier": "writingsofabraha07lincuoft",
+        "道": "writings",
+        "title": "The writings of Abraham Lincoln;"
+      },
+      {
+        "identifier": "wsb18f36_images",
+        "道": "writings",
+        "title": "In Memoriam to Abraham Lincoln"
+      }
+    ]
+  },
+  "#175 Jefferson": {
+    "lanes": 4,
+    "去掉纸面道后": 3,
+    "逐道份数": {
+      "writings": 30,
+      "conversations": 27,
+      "expression": 10,
+      "decisions": 0,
+      "timeline": 0,
+      "external": 1
+    },
+    "未分道": 0,
+    "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；**未分道不默认成 writings**",
+    "明细": [
+      {
+        "identifier": "10064095bsb",
+        "道": "conversations",
+        "title": "Memoirs, Correspondence and Private Papers of Thomas Jefferson, late P"
+      },
+      {
+        "identifier": "10069010bsb",
+        "道": "conversations",
+        "title": "Memoir, correspondence and miscellanies from the papers of Thomas Jeff"
+      },
+      {
+        "identifier": "americanpolitica00jeff",
+        "道": "writings",
+        "title": "The american political classics : Jefferson, Washington and Lincoln"
+      },
+      {
+        "identifier": "anessaytowardsf00jeffgoog",
+        "道": "writings",
+        "title": "An essay towards facilitating instruction in the Anglo-Saxon and moder"
+      },
+      {
+        "identifier": "annualregistervi00jeff",
+        "道": "writings",
+        "title": "The Annual register, and Virginian repository for the year 1800"
+      },
+      {
+        "identifier": "bim_eighteenth-century_notes-on-the-state-of-vi_jefferson-thomas_1787",
+        "道": "writings",
+        "title": "Notes on the state of Virginia. Written by Thomas Jefferson. Illustrat"
+      },
+      {
+        "identifier": "bub_gb_LlJBAAAAcAAJ",
+        "道": "external",
+        "title": "Histoire des promesses illusoires depuis la Paix des Pirenees"
+      },
+      {
+        "identifier": "correspondencebe0000jeff",
+        "道": "conversations",
+        "title": "Correspondence between Thomas Jefferson and Pierre Samuel du Pont de N"
+      },
+      {
+        "identifier": "cu31924026091581",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson : being his autobiography, correspond"
+      },
+      {
+        "identifier": "cu31924027055718",
+        "道": "writings",
+        "title": "The writings of Thomas Jefferson:"
+      },
+      {
+        "identifier": "cu31924071238426",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson: being his autobiography, corresponde"
+      },
+      {
+        "identifier": "cu31924071238442",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson: being his autobiography, corresponde"
+      },
+      {
+        "identifier": "cu31924071238467",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson: being his autobiography, corresponde"
+      },
+      {
+        "identifier": "cu31924092892011",
+        "道": "writings",
+        "title": "The works of Thomas Jefferson;"
+      },
+      {
+        "identifier": "cu31924092892037",
+        "道": "writings",
+        "title": "The works of Thomas Jefferson;"
+      },
+      {
+        "identifier": "gpl_1600362",
+        "道": "writings",
+        "title": "The memorial of the merchants & traders of the city of Baltimore"
+      },
+      {
+        "identifier": "jeffersonsgerman01jeff",
+        "道": "conversations",
+        "title": "Jefferson's Germantown letters, together with other papers relating to"
+      },
+      {
+        "identifier": "jeffersonthomas09lipsrich",
+        "道": "writings",
+        "title": "The writings of Thomas Jefferson"
+      },
+      {
+        "identifier": "jeffersonthomas18lipsrich",
+        "道": "writings",
+        "title": "The writings of Thomas Jefferson"
+      },
+      {
+        "identifier": "jstor-1005111",
+        "道": "conversations",
+        "title": "The Description of a Mould-Board of the Least Resistence, and of the E"
+      },
+      {
+        "identifier": "jstor-1921491",
+        "道": "conversations",
+        "title": "Two Unpublished Letters of Thomas Jefferson"
+      },
+      {
+        "identifier": "lettersaddresses00jeffiala",
+        "道": "conversations",
+        "title": "Letters and addresses of Thomas Jefferson"
+      },
+      {
+        "identifier": "lettersandaddres00jeffiala",
+        "道": "conversations",
+        "title": "Letters and addresses;"
+      },
+      {
+        "identifier": "lettersandaddres00jeffuoft",
+        "道": "conversations",
+        "title": "Letters and addresses of Thomas Jefferson"
+      },
+      {
+        "identifier": "lifemoralsjesusnaz00jeff",
+        "道": "writings",
+        "title": "The life and morals of Jesus of Nazareth : extracted textually from th"
+      },
+      {
+        "identifier": "lifemoralsof00jeff",
+        "道": "writings",
+        "title": "The life and morals of Jesus of Nazareth : extracted textually from th"
+      },
+      {
+        "identifier": "manualofparliame00jeff",
+        "道": "writings",
+        "title": "A manual of parliamentary practice: composed originally for the use of"
+      },
+      {
+        "identifier": "masterthoughtsof00jeffiala",
+        "道": "writings",
+        "title": "Master thoughts of Thomas Jefferson"
+      },
+      {
+        "identifier": "masterthoughtst00jeffgoog",
+        "道": "writings",
+        "title": "Master thoughts of Thomas Jefferson"
+      },
+      {
+        "identifier": "memoircorrespond16781gut",
+        "道": "conversations",
+        "title": "Memoir, Correspondence, And Miscellanies, From The Papers Of Thomas Je"
+      },
+      {
+        "identifier": "memoirscorrespo00jeffgoog",
+        "道": "conversations",
+        "title": "Memoirs, correspondence, and private papers of Thomas Jefferson : late"
+      },
+      {
+        "identifier": "memoirscorrespo01jeffgoog",
+        "道": "conversations",
+        "title": "Memoirs, correspondence, and private papers of Thomas Jefferson : late"
+      },
+      {
+        "identifier": "notesonstateofvir00jeff",
+        "道": "writings",
+        "title": "Notes on the state of Virginia"
+      },
+      {
+        "identifier": "notesonstateofvirg00jeff",
+        "道": "writings",
+        "title": "Notes on the state of Virginia"
+      },
+      {
+        "identifier": "summaryviewofrig00jeff_1",
+        "道": "writings",
+        "title": "A summary view of the rights of British America. : Set forth in some r"
+      },
+      {
+        "identifier": "tudesconomiques00fovigoog",
+        "道": "writings",
+        "title": "Draught of a fundamental constitution for the commonwealth of Virginia"
+      },
+      {
+        "identifier": "version-final-de-la-declaracion-de-la-independencia",
+        "道": "writings",
+        "title": "Versión Final De La Declaración De La Independencia"
+      },
+      {
+        "identifier": "virginiakentucky00jeff",
+        "道": "expression",
+        "title": "The Virginia and Kentucky resolutions of 1798 and '99; with Jefferson'"
+      },
+      {
+        "identifier": "workofjeffer02jeffuoft",
+        "道": "writings",
+        "title": "Works;"
+      },
+      {
+        "identifier": "workofjeffer03jeffuoft",
+        "道": "writings",
+        "title": "Works;"
+      },
+      {
+        "identifier": "workofjeffer07jeffuoft",
+        "道": "writings",
+        "title": "Works;"
+      },
+      {
+        "identifier": "worksofjefferson02jeffuoft",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson : being his autobiography, correspond"
+      },
+      {
+        "identifier": "worksofjefferson06jeffuoft",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson : being his autobiography, correspond"
+      },
+      {
+        "identifier": "worksofjefferson07jeffuoft",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson : being his autobiography, correspond"
+      },
+      {
+        "identifier": "worksofjefferson09jeffuoft",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson : being his autobiography, correspond"
+      },
+      {
+        "identifier": "worksthomasjeff01fordgoog",
+        "道": "writings",
+        "title": "The works of Thomas Jefferson;"
+      },
+      {
+        "identifier": "writingsbeinghis06jeffuoft",
+        "道": "conversations",
+        "title": "Writings, being his autobiography, correspondence, reports, messages, "
+      },
+      {
+        "identifier": "writingsbeinghis07jeffuoft",
+        "道": "conversations",
+        "title": "Writings, being his autobiography, correspondence, reports, messages, "
+      },
+      {
+        "identifier": "writingslibrary03jeff",
+        "道": "expression",
+        "title": "Writings. Library ed., containing his autobiography, notes on Virginia"
+      },
+      {
+        "identifier": "writingslibrarye00jeffuoft",
+        "道": "expression",
+        "title": "Writings. Library ed., containing his autobiography, notes on Virginia"
+      },
+      {
+        "identifier": "writingslibrarye01jeffuoft",
+        "道": "expression",
+        "title": "Writings. Library ed., containing his autobiography, notes on Virginia"
+      },
+      {
+        "identifier": "writingslibrarye02jeffuoft",
+        "道": "expression",
+        "title": "Writings. Library ed., containing his autobiography, notes on Virginia"
+      },
+      {
+        "identifier": "writingslibrarye05jeffuoft",
+        "道": "expression",
+        "title": "Writings. Library ed., containing his autobiography, notes on Virginia"
+      },
+      {
+        "identifier": "writingslibrarye07jeffuoft",
+        "道": "expression",
+        "title": "Writings. Library ed., containing his autobiography, notes on Virginia"
+      },
+      {
+        "identifier": "writingslibrarye10jeffuoft",
+        "道": "expression",
+        "title": "Writings. Library ed., containing his autobiography, notes on Virginia"
+      },
+      {
+        "identifier": "writingslibrarye13jeffuoft",
+        "道": "expression",
+        "title": "Writings. Library ed., containing his autobiography, notes on Virginia"
+      },
+      {
+        "identifier": "writingslibrarye16jeffuoft",
+        "道": "expression",
+        "title": "Writings. Library ed., containing his autobiography, notes on Virginia"
+      },
+      {
+        "identifier": "writingsoft04jeffiala",
+        "道": "writings",
+        "title": "The writings of Thomas Jefferson;"
+      },
+      {
+        "identifier": "writingsoft06jeffiala",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson: being his autobiography, corresponde"
+      },
+      {
+        "identifier": "writingsoft09jeffiala",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson: being his autobiography, corresponde"
+      },
+      {
+        "identifier": "writingsofthom02jeff",
+        "道": "writings",
+        "title": "The writings of Thomas Jefferson;"
+      },
+      {
+        "identifier": "writingsofthoma09jeff",
+        "道": "writings",
+        "title": "The writings of Thomas Jefferson"
+      },
+      {
+        "identifier": "writingsofthomas0000vari_j3j9",
+        "道": "writings",
+        "title": "The Writings of Thomas Jefferson"
+      },
+      {
+        "identifier": "writingsofthomas04jeffiala",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson: being his autobiography, corresponde"
+      },
+      {
+        "identifier": "writingsthomas13jeffrich",
+        "道": "writings",
+        "title": "The writings of Thomas Jefferson"
+      },
+      {
+        "identifier": "writingsthomas17jeffrich",
+        "道": "writings",
+        "title": "The writings of Thomas Jefferson"
+      },
+      {
+        "identifier": "writingsthomasj00editgoog",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson : being his autobiography, correspond"
+      },
+      {
+        "identifier": "writingsthomasj00washgoog",
+        "道": "conversations",
+        "title": "The writings of Thomas Jefferson : being his autobiography, correspond"
+      }
+    ]
+  },
+  "#176 Bismarck": {
+    "lanes": 5,
+    "去掉纸面道后": 5,
+    "逐道份数": {
+      "writings": 16,
+      "conversations": 19,
+      "expression": 14,
+      "decisions": 0,
+      "timeline": 11,
+      "external": 7
+    },
+    "未分道": 0,
+    "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；**未分道不默认成 writings**",
+    "明细": [
+      {
+        "identifier": "00078127bsb",
+        "道": "conversations",
+        "title": "Bismarck-Briefe: I. Familien-Briefe ; II. Politische Briefe"
+      },
+      {
+        "identifier": "10558638bsb",
+        "道": "expression",
+        "title": "Die Reden des Grafen von Bismarck-Schönhausen. 1"
+      },
+      {
+        "identifier": "10558639bsb",
+        "道": "expression",
+        "title": "Die Reden des Grafen von Bismarck-Schönhausen. 2"
+      },
+      {
+        "identifier": "10629304bsb",
+        "道": "expression",
+        "title": "Die Reden des Grafen von Bismarck-Schönhausen. 3"
+      },
+      {
+        "identifier": "11166432bsb",
+        "道": "expression",
+        "title": "Vier Reden zur äußeren Politik. 4"
+      },
+      {
+        "identifier": "11281959bsb",
+        "道": "expression",
+        "title": "Die Reden des Grafen von Bismarck-Schönhausen. 1"
+      },
+      {
+        "identifier": "11281960bsb",
+        "道": "expression",
+        "title": "Die Reden des Grafen von Bismarck-Schönhausen. 2"
+      },
+      {
+        "identifier": "11281961bsb",
+        "道": "expression",
+        "title": "Die Reden des Grafen von Bismarck-Schönhausen. 3"
+      },
+      {
+        "identifier": "11332890bsb",
+        "道": "conversations",
+        "title": "Bismarckbriefe: 1844-1870 ; Originalbriefe Bismarcks an seine Gemahlin"
+      },
+      {
+        "identifier": "11358069bsb",
+        "道": "external",
+        "title": "Ausgewählte Reden des Fürsten von Bismarck: mit einer biographischen S"
+      },
+      {
+        "identifier": "11358070bsb",
+        "道": "external",
+        "title": "Ausgewählte Reden des Fürsten von Bismarck: mit einer biographischen S"
+      },
+      {
+        "identifier": "11358071bsb",
+        "道": "external",
+        "title": "Ausgewählte Reden des Fürsten von Bismarck: mit einer biographischen S"
+      },
+      {
+        "identifier": "11358072bsb",
+        "道": "external",
+        "title": "Ausgewählte Reden des Fürsten von Bismarck: mit einer biographischen S"
+      },
+      {
+        "identifier": "30081009592969",
+        "道": "writings",
+        "title": "Die gesammelten Werke"
+      },
+      {
+        "identifier": "30081009592985",
+        "道": "writings",
+        "title": "Die gesammelten Werke"
+      },
+      {
+        "identifier": "30081009592993",
+        "道": "writings",
+        "title": "Die gesammelten Werke"
+      },
+      {
+        "identifier": "30081009593009",
+        "道": "writings",
+        "title": "Die gesammelten Werke"
+      },
+      {
+        "identifier": "30081009593033",
+        "道": "writings",
+        "title": "Die gesammelten Werke"
+      },
+      {
+        "identifier": "30081009593066",
+        "道": "writings",
+        "title": "Die gesammelten Werke"
+      },
+      {
+        "identifier": "30081009593074",
+        "道": "writings",
+        "title": "Die gesammelten Werke"
+      },
+      {
+        "identifier": "30081009593090",
+        "道": "writings",
+        "title": "Die gesammelten Werke"
+      },
+      {
+        "identifier": "30081009593108",
+        "道": "writings",
+        "title": "Die gesammelten Werke"
+      },
+      {
+        "identifier": "anhangzudengeda01bismgoog",
+        "道": "timeline",
+        "title": "Anhang zu den Gedanken und Erinnerungen"
+      },
+      {
+        "identifier": "anhangzudengeda01schlgoog",
+        "道": "timeline",
+        "title": "Anhang zu den Gedanken und Erinnerungen von Otto Fürst von Bismarck"
+      },
+      {
+        "identifier": "anhangzudengedan02bism",
+        "道": "timeline",
+        "title": "Anhang zu den Gedanken und Erinnerungen"
+      },
+      {
+        "identifier": "bismarckbrief00bism",
+        "道": "conversations",
+        "title": "Bismarckbriefe 1836-1873"
+      },
+      {
+        "identifier": "bismarckbriefe00bism",
+        "道": "conversations",
+        "title": "Bismarckbriefe 1836-1873"
+      },
+      {
+        "identifier": "bismarckbriefe00kohlgoog",
+        "道": "conversations",
+        "title": "Bismarckbriefe 1836-1873"
+      },
+      {
+        "identifier": "bismarckbriefeo00bismgoog",
+        "道": "conversations",
+        "title": "Bismarckbriefe, 1844-1870: Originalbriefe Bismarcks an seine Gemahlin,"
+      },
+      {
+        "identifier": "bismarckforsilve00bism",
+        "道": "writings",
+        "title": "Bismarck for silver [microform] : he says independent free coinage wou"
+      },
+      {
+        "identifier": "bismarckmanands00vongoog",
+        "道": "timeline",
+        "title": "Bismarck, the man and the statesman; being the reflections and reminis"
+      },
+      {
+        "identifier": "bismarckmanstat03butlgoog",
+        "道": "timeline",
+        "title": "Bismarck, the man & the statesman; being the reflections and reminisce"
+      },
+      {
+        "identifier": "bismarckmanstate01bism",
+        "道": "timeline",
+        "title": "Bismarck, the man & the statesman; being the reflections and reminisce"
+      },
+      {
+        "identifier": "bismarckmanstate01bismiala",
+        "道": "conversations",
+        "title": "Bismarck's letters to his wife from the seat of war, 1870-1871;"
+      },
+      {
+        "identifier": "bismarckmanstate01bismuoft",
+        "道": "timeline",
+        "title": "Bismarck, the man and the statesman; being the reflections and reminis"
+      },
+      {
+        "identifier": "bismarckmanstate02bismuoft",
+        "道": "timeline",
+        "title": "Bismarck, the man and the statesman; being the reflections and reminis"
+      },
+      {
+        "identifier": "bismarckreden18400bismuoft",
+        "道": "expression",
+        "title": "Bismarckreden, 1847-1895. Hrsg. von Horst Kohl"
+      },
+      {
+        "identifier": "bismarcksbriefes00bism",
+        "道": "conversations",
+        "title": "(Bismarcks) Briefe an Schwester und Schwager;"
+      },
+      {
+        "identifier": "bismarcksletter00bismgoog",
+        "道": "conversations",
+        "title": "Bismarck's letters to his wife, from the seat of war, 1870-1871. Trans"
+      },
+      {
+        "identifier": "bismarcksstaats00rogoog",
+        "道": "writings",
+        "title": "Bismarcks staatsrecht : die stellungnahme des fürsten Otto von Bismar"
+      },
+      {
+        "identifier": "bismarckstableta01bism_0",
+        "道": "conversations",
+        "title": "Bismarck's table-talk"
+      },
+      {
+        "identifier": "bismarckundste00bism",
+        "道": "writings",
+        "title": "Bismarck und Österreich"
+      },
+      {
+        "identifier": "briefeottosvonbi00bismuoft",
+        "道": "conversations",
+        "title": "Briefe Ottos von Bismarck an Schwester und Schwager: Malwine von Arnim"
+      },
+      {
+        "identifier": "briefeseinebarau00bismuoft",
+        "道": "conversations",
+        "title": "Briefe an seine Baraut und Gattin;"
+      },
+      {
+        "identifier": "bub_gb_-a0PAAAAQAAJ",
+        "道": "writings",
+        "title": "Bismarck-Portefeuille"
+      },
+      {
+        "identifier": "bub_gb_BbIPAAAAQAAJ",
+        "道": "writings",
+        "title": "Bismarck-Portefeuille"
+      },
+      {
+        "identifier": "bub_gb_BkIPAAAAYAAJ",
+        "道": "expression",
+        "title": "Die politischen reden des fürsten Bismarck [microform]. Historischkrit"
+      },
+      {
+        "identifier": "bub_gb_CWAPAAAAYAAJ",
+        "道": "conversations",
+        "title": "Lettres politiques confidentielles de M. de Bismarck, 1851-1858"
+      },
+      {
+        "identifier": "bub_gb_NjNDAQAAMAAJ",
+        "道": "writings",
+        "title": "Bismarck-Portefeuille"
+      },
+      {
+        "identifier": "cihm_77460",
+        "道": "conversations",
+        "title": "Bismarck's letters to his wife from the seat of war, 1870-1871 [microf"
+      },
+      {
+        "identifier": "correspondancedi01bism",
+        "道": "conversations",
+        "title": "Correspondance diplomatique de m. de Bismarck (1851-1859)"
+      },
+      {
+        "identifier": "correspondenceof00bismuoft",
+        "道": "conversations",
+        "title": "The correspondence of William I. and Bismarck : with other letters fro"
+      },
+      {
+        "identifier": "correspondenceof02bismuoft",
+        "道": "conversations",
+        "title": "The correspondence of William I. and Bismarck : with other letters fro"
+      },
+      {
+        "identifier": "diepolitischenre01bismuoft",
+        "道": "expression",
+        "title": "Die politischen Reden;"
+      },
+      {
+        "identifier": "diepolitischenre02bismuoft",
+        "道": "expression",
+        "title": "Die politischen Reden;"
+      },
+      {
+        "identifier": "dieredendesgraf00bismgoog",
+        "道": "expression",
+        "title": "Die Reden des Grafen von Bismarck-Schönhausen. Dritte Sammlung, 1869-"
+      },
+      {
+        "identifier": "erinnerungundged00bism",
+        "道": "writings",
+        "title": "Erinnerung und Gedanke"
+      },
+      {
+        "identifier": "frstbismarcksei01bismgoog",
+        "道": "external",
+        "title": "Fürst Bismarck : sein politisches Leben und Wirken urkundlich in That"
+      },
+      {
+        "identifier": "furstbismarckna02penz",
+        "道": "external",
+        "title": "Fürst Bismarck nach seiner Entlassung : Leben und Politik des Fürsten "
+      },
+      {
+        "identifier": "furstbismarckna03penz",
+        "道": "external",
+        "title": "Fürst Bismarck nach seiner Entlassung : Leben und Politik des Fürsten "
+      },
+      {
+        "identifier": "gedankenunderin00bism",
+        "道": "timeline",
+        "title": "Gedanken und erinnerungen;"
+      },
+      {
+        "identifier": "gedankenunderinn01bism",
+        "道": "timeline",
+        "title": "Gedanken und Erinnerungen"
+      },
+      {
+        "identifier": "gedankenunderinn03bism",
+        "道": "timeline",
+        "title": "Gedanken und Erinnerungen"
+      },
+      {
+        "identifier": "india.history.resource.85205",
+        "道": "conversations",
+        "title": "Prince Bismarck’s Letters to his Wife, his Sister and others, from 184"
+      },
+      {
+        "identifier": "lovelettersofbis00bismiala",
+        "道": "conversations",
+        "title": "The love letters of Bismarck; being letters to his fiancée and wife, 1"
+      },
+      {
+        "identifier": "professionalrec00liargoog",
+        "道": "expression",
+        "title": "Die politischen Reden des Fürsten Bismarck. Historisch-kritische Gesa"
+      },
+      {
+        "identifier": "vierredenzurus00bismiala",
+        "道": "expression",
+        "title": "Vier Reden zur äusseren Politik"
+      }
+    ]
+  },
+  "#177 Machiavelli": {
+    "lanes": 4,
+    "去掉纸面道后": 4,
+    "逐道份数": {
+      "writings": 53,
+      "conversations": 4,
+      "expression": 10,
+      "decisions": 0,
+      "timeline": 0,
+      "external": 2
+    },
+    "未分道": 0,
+    "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；**未分道不默认成 writings**",
+    "明细": [
+      {
+        "identifier": "10078626bsb",
+        "道": "writings",
+        "title": "Des Nikolaus Machiavelli's Florentinische Geschichten. 1"
+      },
+      {
+        "identifier": "10078627bsb",
+        "道": "writings",
+        "title": "Des Nikolaus Machiavelli's Florentinische Geschichten. 2"
+      },
+      {
+        "identifier": "10078631bsb",
+        "道": "writings",
+        "title": "Nicolò Macchiavelli's Geschichte des Castruccio Castracani von Lucca"
+      },
+      {
+        "identifier": "10602820bsb",
+        "道": "writings",
+        "title": "Niccolo Machiavelli's sämmtliche Werke. 3"
+      },
+      {
+        "identifier": "10602821bsb",
+        "道": "writings",
+        "title": "Niccolo Machiavelli's sämmtliche Werke. 4"
+      },
+      {
+        "identifier": "10602822bsb",
+        "道": "writings",
+        "title": "Niccolo Machiavelli's sämmtliche Werke. 5"
+      },
+      {
+        "identifier": "10602824bsb",
+        "道": "writings",
+        "title": "Niccolo Machiavelli's sämmtliche Werke. 7"
+      },
+      {
+        "identifier": "10769804bsb",
+        "道": "writings",
+        "title": "Das Buch vom Fürsten"
+      },
+      {
+        "identifier": "10769805bsb",
+        "道": "writings",
+        "title": "Der Fürst des Niccolo Macchiavelli. 1."
+      },
+      {
+        "identifier": "A1090181",
+        "道": "writings",
+        "title": "El príncipe de Nicolás Maquiavelo"
+      },
+      {
+        "identifier": "BRes092067",
+        "道": "writings",
+        "title": " Opere di Niccolò Machiavelli T.1"
+      },
+      {
+        "identifier": "BRes092068",
+        "道": "writings",
+        "title": " Opere di Niccolò Machiavelli T. 2"
+      },
+      {
+        "identifier": "BRes092069",
+        "道": "writings",
+        "title": "Opere di Niccolò Machiavelli T. 3"
+      },
+      {
+        "identifier": "BRes092070",
+        "道": "writings",
+        "title": "Opere di Niccolò Machiavelli T. 5"
+      },
+      {
+        "identifier": "BRes092071",
+        "道": "writings",
+        "title": " Opere di Niccolò Machiavelli T. 6"
+      },
+      {
+        "identifier": "BRes092072",
+        "道": "writings",
+        "title": "Opere di Niccolò Machiavelli T. 7"
+      },
+      {
+        "identifier": "BRes092073",
+        "道": "writings",
+        "title": "Opere di Niccolò Machiavelli T. 8"
+      },
+      {
+        "identifier": "MarriageOfBelfagor",
+        "道": "writings",
+        "title": "Marriage Of Belfagor"
+      },
+      {
+        "identifier": "TO01040218",
+        "道": "writings",
+        "title": "La mente di un uomo di Stato: raccolta di massime estratte dalle opere"
+      },
+      {
+        "identifier": "a591295400machuoft",
+        "道": "writings",
+        "title": "Il principe"
+      },
+      {
+        "identifier": "b30335073",
+        "道": "writings",
+        "title": "The Florentine historie"
+      },
+      {
+        "identifier": "bim_early-english-books-1641-1700_a-caveat-for-wives_machiavelli-niccolo_1660",
+        "道": "writings",
+        "title": "A caveat for wives...  1660"
+      },
+      {
+        "identifier": "bim_early-english-books-1641-1700_a-true-copy-of-a-letter-_machiavelli-niccol_1691",
+        "道": "conversations",
+        "title": "A true copy of a letter written by ...  1691"
+      },
+      {
+        "identifier": "bim_early-english-books-1641-1700_machiavels-discourses-u_machiavelli-niccolo_1674",
+        "道": "expression",
+        "title": "Machiavel's discourses upon the first decade...  1674"
+      },
+      {
+        "identifier": "bim_early-english-books-1641-1700_machiavels-vindication-_machiavelli-niccolo_1691",
+        "道": "writings",
+        "title": "Machiavel's vindication of himself...  1691"
+      },
+      {
+        "identifier": "bim_early-english-books-1641-1700_machiavils-advice-to-hi_machiavelli-niccolo_1681",
+        "道": "writings",
+        "title": "Machiavil's advice to his son. ...  1681"
+      },
+      {
+        "identifier": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1663",
+        "道": "expression",
+        "title": "Machivael's discourses, ...  1663"
+      },
+      {
+        "identifier": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1663_0",
+        "道": "expression",
+        "title": "Machivael's discourses ...  1663"
+      },
+      {
+        "identifier": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1674",
+        "道": "expression",
+        "title": "Machivael's discourses ...  1674"
+      },
+      {
+        "identifier": "bim_early-english-books-1641-1700_machivaels-discourses_machiavelli-niccolo_1663",
+        "道": "expression",
+        "title": "Machivael's discourses...  1663"
+      },
+      {
+        "identifier": "bub_gb_EbbqmRdN78cC",
+        "道": "writings",
+        "title": "Gosudarʹ (Il principe) i Razsuzhdenii͡a na pervyi͡a tri knigi Tita Liv"
+      },
+      {
+        "identifier": "bub_gb_Ibk8AAAAYAAJ",
+        "道": "writings",
+        "title": "Gosudarʹ (Il principe) i Razsuzhdenii͡a na pervyi͡a tri knigi Tita Liv"
+      },
+      {
+        "identifier": "bub_gb_OLtLAAAAcAAJ",
+        "道": "external",
+        "title": "Essai sur les oeuvres et la doctrine de Machiavel"
+      },
+      {
+        "identifier": "bub_gb_PTYaAQAAMAAJ",
+        "道": "writings",
+        "title": "Opere complete di Niccolò Machiavelli con molte correzioni e giunte ri"
+      },
+      {
+        "identifier": "bub_gb_dCVvnsDWyJ0C",
+        "道": "writings",
+        "title": "Scritta inediti di Niccolò Machiavelli risguardanti la storia e la mil"
+      },
+      {
+        "identifier": "bub_gb_hepDAAAAYAAJ",
+        "道": "writings",
+        "title": "Le istorie fiorentine di Niccolò Machiavelli ; ridotte alla miglior le"
+      },
+      {
+        "identifier": "bub_gb_jzPjhqlQI24C",
+        "道": "writings",
+        "title": "Le istorie fiorentine"
+      },
+      {
+        "identifier": "bub_gb_l2pd8wG-VCoC",
+        "道": "writings",
+        "title": "Le istorie fiorentine"
+      },
+      {
+        "identifier": "bub_gb_sm_ojzpYQkAC",
+        "道": "expression",
+        "title": "Discorsi sopra la prima deca de Tito Livio, di Nicolò Machiavelli .."
+      },
+      {
+        "identifier": "carteggiodisplom00mach",
+        "道": "conversations",
+        "title": "Carteggio displomatico e familiare"
+      },
+      {
+        "identifier": "carteggiodisplom2mach",
+        "道": "conversations",
+        "title": "Carteggio displomatico e familiare"
+      },
+      {
+        "identifier": "carteggiodisplom3mach",
+        "道": "conversations",
+        "title": "Carteggio displomatico e familiare"
+      },
+      {
+        "identifier": "commedie00mach",
+        "道": "expression",
+        "title": "Commedie [microform]"
+      },
+      {
+        "identifier": "diplomaticwritin01machuoft",
+        "道": "writings",
+        "title": "The historical, political, and diplomatic writings"
+      },
+      {
+        "identifier": "diplomaticwritin02machuoft",
+        "道": "writings",
+        "title": "The historical, political, and diplomatic writings"
+      },
+      {
+        "identifier": "diplomaticwritin03machuoft",
+        "道": "writings",
+        "title": "The historical, political, and diplomatic writings"
+      },
+      {
+        "identifier": "diplomaticwritin04machuoft",
+        "道": "writings",
+        "title": "The historical, political, and diplomatic writings"
+      },
+      {
+        "identifier": "discorsisullapri00machuoft",
+        "道": "expression",
+        "title": "Discorsi sulla prima deca di T. Livio. Scelti e commentati da Giuseppe"
+      },
+      {
+        "identifier": "discoursesonthef02machuoft",
+        "道": "expression",
+        "title": "Discourses on the first decade of Titus Levius;"
+      },
+      {
+        "identifier": "discoursesonthef03machuoft",
+        "道": "expression",
+        "title": "Discourses on the first decade of Titus Levius;"
+      },
+      {
+        "identifier": "dli.bengal.10689.19369",
+        "道": "writings",
+        "title": "THE HISTORY OF FLORENCE AND OF THE AFFAIRS OF ITALY"
+      },
+      {
+        "identifier": "dli.ministry.02746",
+        "道": "writings",
+        "title": "The history of florence, and of the affairs of Italy, from the earlies"
+      },
+      {
+        "identifier": "dli.ministry.05369",
+        "道": "writings",
+        "title": "The Prince"
+      },
+      {
+        "identifier": "dli.ministry.14051",
+        "道": "writings",
+        "title": "History of Florence and of the affairs of Italy : from the earliest ti"
+      },
+      {
+        "identifier": "dli.ministry.16183",
+        "道": "writings",
+        "title": "Legazioni e commissioni"
+      },
+      {
+        "identifier": "dli.ministry.18162",
+        "道": "writings",
+        "title": "Opere"
+      },
+      {
+        "identifier": "dli.ministry.18163",
+        "道": "writings",
+        "title": "Opere"
+      },
+      {
+        "identifier": "dli.ministry.18164",
+        "道": "writings",
+        "title": "Opere"
+      },
+      {
+        "identifier": "dli.ministry.18165",
+        "道": "writings",
+        "title": "Opere"
+      },
+      {
+        "identifier": "florentinehistor00machuoft",
+        "道": "writings",
+        "title": "Florentine history. Translated by W.K. Marriott"
+      },
+      {
+        "identifier": "florentinehistor01machuoft",
+        "道": "writings",
+        "title": "The Florentine history..."
+      },
+      {
+        "identifier": "florentinischege00mach",
+        "道": "writings",
+        "title": "Florentinische Geschichten des Nikolaus Machiavelli"
+      },
+      {
+        "identifier": "india.history.resource.72474",
+        "道": "writings",
+        "title": "Opere di Niccolo Machiavelli, Vol. I"
+      },
+      {
+        "identifier": "india.history.resource.72475",
+        "道": "writings",
+        "title": "Opere di Niccolo Machiavelli, Vol. III"
+      },
+      {
+        "identifier": "india.history.resource.72476",
+        "道": "writings",
+        "title": "Opere di Niccolo Machiavelli, Vol. V"
+      },
+      {
+        "identifier": "india.history.resource.72477",
+        "道": "writings",
+        "title": "Opere di Niccolo Machiavelli, Vol. VI"
+      },
+      {
+        "identifier": "india.history.resource.72478",
+        "道": "writings",
+        "title": "Opere di Niccolo Machiavelli, Vol. IV"
+      },
+      {
+        "identifier": "operediniccolm02mach",
+        "道": "writings",
+        "title": "Opere di Niccolò Machiavelli : con giunta di un nuova indice generale "
+      },
+      {
+        "identifier": "threeprosewriter00moor",
+        "道": "external",
+        "title": "Three prose writers of the Italian renaissance"
+      }
+    ]
+  },
+  "#178 Rousseau": {
+    "lanes": 3,
+    "去掉纸面道后": 3,
+    "逐道份数": {
+      "writings": 44,
+      "conversations": 14,
+      "expression": 0,
+      "decisions": 0,
+      "timeline": 6,
+      "external": 0
+    },
+    "未分道": 0,
+    "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；**未分道不默认成 writings**",
+    "明细": [
+      {
+        "identifier": "10066336bsb",
+        "道": "writings",
+        "title": "J. J. Rousseau's Bekenntnisse: Geschichte seines männlichen Alters. Au"
+      },
+      {
+        "identifier": "10599347bsb",
+        "道": "writings",
+        "title": "J. J. Rousseau's Brief über die Musik: ein Wort, noch gültig für unser"
+      },
+      {
+        "identifier": "10713049bsb",
+        "道": "conversations",
+        "title": "Correspondance. 1"
+      },
+      {
+        "identifier": "10762426bsb",
+        "道": "writings",
+        "title": "Emil oder über die Erziehung. 2"
+      },
+      {
+        "identifier": "10762427bsb",
+        "道": "writings",
+        "title": "Emil oder über die Erziehung. 3"
+      },
+      {
+        "identifier": "10764054bsb",
+        "道": "writings",
+        "title": "Herrn Johann Jacob Rousseaus, Bürgers zu Genf, Aemil oder Von der Erzi"
+      },
+      {
+        "identifier": "11258220bsb",
+        "道": "writings",
+        "title": "Mélanges. 1"
+      },
+      {
+        "identifier": "11718256bsb",
+        "道": "conversations",
+        "title": "Julie oder die neue Heloise: in Briefen zweyer Liebenden, Bewohner ein"
+      },
+      {
+        "identifier": "11918930bsb",
+        "道": "conversations",
+        "title": "Die Neue Heloise oder Briefe zweyer Liebenden, aus einer kleinen Stadt"
+      },
+      {
+        "identifier": "11919281bsb",
+        "道": "writings",
+        "title": "Oeuvres complettes. 27"
+      },
+      {
+        "identifier": "11919322bsb",
+        "道": "conversations",
+        "title": "Ungedruckter Briefwechsel mit Mme Latour de Franqueville und Herrn du "
+      },
+      {
+        "identifier": "1766jjacquesrous00rous",
+        "道": "writings",
+        "title": "J. Jacques Rousseau, citoyen de Généve, a Christophe de Beaumont, Arch"
+      },
+      {
+        "identifier": "1782collectionco10rous",
+        "道": "writings",
+        "title": "Collection complete des oeuvres de J.J. Rousseau, citoyen de Geneve"
+      },
+      {
+        "identifier": "1782collectionco17rous",
+        "道": "writings",
+        "title": "Collection complete des oeuvres de J.J. Rousseau, citoyen de Geneve"
+      },
+      {
+        "identifier": "1791emileoudel02rous",
+        "道": "writings",
+        "title": "Emile; ou, De l'éducation"
+      },
+      {
+        "identifier": "1791emileoudel03rous",
+        "道": "writings",
+        "title": "Emile; ou, De l'éducation"
+      },
+      {
+        "identifier": "1846oeuvrescom02rousuoft",
+        "道": "writings",
+        "title": "Oeuvres complètes. Avec des notes historiques"
+      },
+      {
+        "identifier": "1911lettresind00rous",
+        "道": "conversations",
+        "title": "Lettres inédites de Jean-Jacques Rousseau, à Mmes Boy de La Tour et De"
+      },
+      {
+        "identifier": "31383026610652",
+        "道": "writings",
+        "title": "Emilius and Sophia; or, A new system of education"
+      },
+      {
+        "identifier": "BIUSante_07891x01",
+        "道": "timeline",
+        "title": "Collections complètes des oeuvres de J.J. Rousseau, Citoyen de Genève "
+      },
+      {
+        "identifier": "a1758jjrousseauci00rous",
+        "道": "writings",
+        "title": "J.J. Rousseau citoyen de Genève dans le VIIme. volume de l'Encyclopédi"
+      },
+      {
+        "identifier": "amileoudeldu01rous",
+        "道": "writings",
+        "title": "Émile, ou De l'éducation"
+      },
+      {
+        "identifier": "amileoudeldu02rous",
+        "道": "writings",
+        "title": "Émile, ou De l'éducation"
+      },
+      {
+        "identifier": "amileoudeldu03rous",
+        "道": "writings",
+        "title": "Émile, ou De l'éducation"
+      },
+      {
+        "identifier": "amileoudeldu04rous",
+        "道": "writings",
+        "title": "Émile, ou De l'éducation"
+      },
+      {
+        "identifier": "avisauxgensdelet00rous",
+        "道": "conversations",
+        "title": "Avis aux gens de lettres"
+      },
+      {
+        "identifier": "bekenntnisseunv00hardgoog",
+        "道": "writings",
+        "title": "Bekenntnisse. Unverkürzt aus dem französischen"
+      },
+      {
+        "identifier": "bim_eighteenth-century_a-dialogue-between-a-man_rousseau-jean-jacques_1761",
+        "道": "conversations",
+        "title": "A dialogue between a man of letters and Mr. J. J. Rousseau, on the sub"
+      },
+      {
+        "identifier": "bim_eighteenth-century_an-inquiry-into-the-natu_rousseau-jean-jacques_1791_0",
+        "道": "writings",
+        "title": "An inquiry into the nature of the social contract; or principles of po"
+      },
+      {
+        "identifier": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1787",
+        "道": "conversations",
+        "title": "[Botanique. English]. Letters on the elements of botany.  1787"
+      },
+      {
+        "identifier": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1796",
+        "道": "conversations",
+        "title": "[Botanique. English]. Letters on the elements of botany, addressed to "
+      },
+      {
+        "identifier": "bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_1",
+        "道": "writings",
+        "title": "Eloisa: ...  1784: Vol 1"
+      },
+      {
+        "identifier": "bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_2",
+        "道": "writings",
+        "title": "Eloisa: ...  1784: Vol 2"
+      },
+      {
+        "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_1",
+        "道": "conversations",
+        "title": "Eloisa: or, a series of original letters collected and published by J."
+      },
+      {
+        "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_3_0",
+        "道": "conversations",
+        "title": "Eloisa: or, a series of original letters collected and published by J."
+      },
+      {
+        "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1764_1",
+        "道": "conversations",
+        "title": "Eloisa: or, a series of original letters collected and published by J."
+      },
+      {
+        "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-o_rousseau-jean-jacques_1769_1",
+        "道": "conversations",
+        "title": "Eloisa: or a series of original letters collected and published by J.J"
+      },
+      {
+        "identifier": "bim_eighteenth-century_emile-english-emilius_rousseau-jean-jacques_1767_3",
+        "道": "writings",
+        "title": "[Emile. English] Emilius and Sophia: or, a new system of education. Tr"
+      },
+      {
+        "identifier": "bim_eighteenth-century_emilius-and-sophia-or-_rousseau-jean-jacques_1783",
+        "道": "writings",
+        "title": "Emilius and Sophia; or, a new system of education. Translated from the"
+      },
+      {
+        "identifier": "bub_gb_3DbL7IDH2jIC",
+        "道": "writings",
+        "title": "Petits chefs-d'oeuvre"
+      },
+      {
+        "identifier": "bub_gb_OXcpAAAAYAAJ",
+        "道": "writings",
+        "title": "Emil, oder Über die erziehung;"
+      },
+      {
+        "identifier": "bub_gb_yN1MAAAAcAAJ",
+        "道": "writings",
+        "title": "Emil oder über die Erziehung"
+      },
+      {
+        "identifier": "bub_gb_zN1MAAAAcAAJ",
+        "道": "writings",
+        "title": "Emil oder über die Erziehung"
+      },
+      {
+        "identifier": "ceuvrescomplete00troigoog",
+        "道": "writings",
+        "title": "Œuvres complètes"
+      },
+      {
+        "identifier": "collectioncompl31rousgoog",
+        "道": "writings",
+        "title": "Collection complète des œuvres de J.J. Rousseau"
+      },
+      {
+        "identifier": "collectioncompl41rousgoog",
+        "道": "writings",
+        "title": "Collection complette des oeuvres de J.J. Rousseau"
+      },
+      {
+        "identifier": "collectioncompl76rousgoog",
+        "道": "writings",
+        "title": "Collection complete des œuvres de J.J. Rousseau"
+      },
+      {
+        "identifier": "collectioncompl78rousgoog",
+        "道": "writings",
+        "title": "Collection complete des oeuvres de J. J. Rousseau .."
+      },
+      {
+        "identifier": "confessionsofjjr03904gut",
+        "道": "timeline",
+        "title": "Confessions of J. J. Rousseau, the - Volume 04"
+      },
+      {
+        "identifier": "confessionsofjjr03905gut",
+        "道": "timeline",
+        "title": "Confessions of J. J. Rousseau, the - Volume 05"
+      },
+      {
+        "identifier": "confessionsofjjr03906gut",
+        "道": "timeline",
+        "title": "Confessions of J. J. Rousseau, the - Volume 06"
+      },
+      {
+        "identifier": "confessionsofjjr03912gut",
+        "道": "timeline",
+        "title": "Confessions of J. J. Rousseau, the - Volume 12"
+      },
+      {
+        "identifier": "confessionsofjjr03913gut",
+        "道": "timeline",
+        "title": "Confessions of J. J. Rousseau, the - Complete"
+      },
+      {
+        "identifier": "cu31924014398154",
+        "道": "writings",
+        "title": "Famous Utopias; being the complete text of Rousseau's social contract;"
+      },
+      {
+        "identifier": "cu31924027383284",
+        "道": "writings",
+        "title": "Selections from the works of Jean-Jacques Rousseau"
+      },
+      {
+        "identifier": "dictionnairedemu02rous",
+        "道": "writings",
+        "title": "Dictionnaire de musique"
+      },
+      {
+        "identifier": "ducontractsocia00rousgoog",
+        "道": "writings",
+        "title": "Du contract social, ou, Principes du droit politique"
+      },
+      {
+        "identifier": "eloisaoraseries01rousgoog",
+        "道": "conversations",
+        "title": "Eloisa, or, A series of original letters "
+      },
+      {
+        "identifier": "espritmaximesetp00rous",
+        "道": "writings",
+        "title": "Esprit, maximes, et principes /"
+      },
+      {
+        "identifier": "india.history.resource.94272",
+        "道": "writings",
+        "title": "The Social Contract or Principles of Political Right"
+      },
+      {
+        "identifier": "mileoudelducatio00rous",
+        "道": "writings",
+        "title": "Émile, ou, De l'éducation"
+      },
+      {
+        "identifier": "uvrescompltesde04rousgoog",
+        "道": "writings",
+        "title": "Œuvres complètes de J.-J. Rousseau"
+      },
+      {
+        "identifier": "uvrescompltesde07rousgoog",
+        "道": "writings",
+        "title": "Œuvres complètes de J.-J. Rousseau"
+      },
+      {
+        "identifier": "yhteiskuntasopim53593gut",
+        "道": "writings",
+        "title": "Yhteiskuntasopimuksestaeli Valtio-oikeuden johtavat aatteet"
+      }
+    ]
+  },
+  "#179 Kant": {
+    "lanes": 5,
+    "去掉纸面道后": 4,
+    "逐道份数": {
+      "writings": 60,
+      "conversations": 3,
+      "expression": 3,
+      "decisions": 1,
+      "timeline": 0,
+      "external": 2
+    },
+    "未分道": 0,
+    "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；**未分道不默认成 writings**",
+    "明细": [
+      {
+        "identifier": "00074230bsb",
+        "道": "writings",
+        "title": "Gedanken von der wahren Schätzung der lebendigen Kräfte und Beurtheilu"
+      },
+      {
+        "identifier": "10040686bsb",
+        "道": "writings",
+        "title": "Iman. Kant zwo Abhandlungen über moralische und politische Gegenstände"
+      },
+      {
+        "identifier": "10040687bsb",
+        "道": "writings",
+        "title": "Neue kleine Schriften"
+      },
+      {
+        "identifier": "10042413bsb",
+        "道": "writings",
+        "title": "Die Religion innerhalb der Grenzen der bloßen Vernunft"
+      },
+      {
+        "identifier": "10043581bsb",
+        "道": "writings",
+        "title": "Critik der Urtheilskraft"
+      },
+      {
+        "identifier": "10044864bsb",
+        "道": "writings",
+        "title": "Critik der reinen Vernunft. 2"
+      },
+      {
+        "identifier": "10045002bsb",
+        "道": "writings",
+        "title": "Critik der Urtheilskraft"
+      },
+      {
+        "identifier": "10046171bsb",
+        "道": "writings",
+        "title": "Immanuel Kant's vorzügliche kleine Schriften und Aufsätze: nebst Betra"
+      },
+      {
+        "identifier": "10046172bsb",
+        "道": "writings",
+        "title": "Immanuel Kant's vorzügliche kleine Schriften und Aufsätze: nebst Betra"
+      },
+      {
+        "identifier": "10046183bsb",
+        "道": "writings",
+        "title": "Immanuel Kant's Werke. 9"
+      },
+      {
+        "identifier": "10046188bsb",
+        "道": "writings",
+        "title": "Immanuel Kant's sämmtliche Werke. 4"
+      },
+      {
+        "identifier": "10046192bsb",
+        "道": "writings",
+        "title": "Immanuel Kant's sämmtliche Werke. 8"
+      },
+      {
+        "identifier": "10046194bsb",
+        "道": "writings",
+        "title": "Immanuel Kant's sämmtliche Werke. 9"
+      },
+      {
+        "identifier": "265433882.1678.emory.edu",
+        "道": "writings",
+        "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
+      },
+      {
+        "identifier": "265433882.1682.emory.edu",
+        "道": "writings",
+        "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
+      },
+      {
+        "identifier": "265433882.1713.emory.edu",
+        "道": "writings",
+        "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
+      },
+      {
+        "identifier": "FilosofaDeLaHistoriaEmmanuelKant",
+        "道": "writings",
+        "title": "Filosofía De La Historia Emmanuel Kant"
+      },
+      {
+        "identifier": "ImmanuelKantsKritikDerReinenVernunftMitEinerEinleitungUnd",
+        "道": "writings",
+        "title": "Immanuel Kant's Kritik der reinen Vernunft: mit einer Einleitung und A"
+      },
+      {
+        "identifier": "Kant-polmica-CRP",
+        "道": "writings",
+        "title": "Immanuel Kant - La polémica sobre la Crítica de la Razón Pura (respues"
+      },
+      {
+        "identifier": "KantAntropologiaPrammatica",
+        "道": "writings",
+        "title": "Antropologia Prammatica"
+      },
+      {
+        "identifier": "ProlegomeniKantMartinetti",
+        "道": "writings",
+        "title": "Prolegomeni ad ogni metafisica futura che vorrà presentarsi come scien"
+      },
+      {
+        "identifier": "TheMetaphysicOfEthicsByImmanuelKantTranslatedByJ.w.SempleEdited",
+        "道": "writings",
+        "title": "Metaphysic of Ethics by Immanuel Kant; translated by J.W. Semple; edit"
+      },
+      {
+        "identifier": "aje7738.0003.001.umich.edu",
+        "道": "writings",
+        "title": "Sämtliche werke .."
+      },
+      {
+        "identifier": "anthropologiesu00kantgoog",
+        "道": "writings",
+        "title": "Anthropologie, suivie des divers fragments du même auteur, relatifs a"
+      },
+      {
+        "identifier": "b24885046",
+        "道": "writings",
+        "title": "Anthropologie in pragmatischer Hinsicht"
+      },
+      {
+        "identifier": "b28738615",
+        "道": "writings",
+        "title": "Metaphysische Anfangsgründe der Naturwissenschaft"
+      },
+      {
+        "identifier": "b28764523",
+        "道": "writings",
+        "title": "Anthropologie in pragmatischer Hinsicht abgefasst"
+      },
+      {
+        "identifier": "bim_eighteenth-century_essays-and-treatises-on-_kant-immanuel_1798_2",
+        "道": "writings",
+        "title": "Essays and treatises on moral, political, and various philosophical su"
+      },
+      {
+        "identifier": "bim_eighteenth-century_the-metaphysic-of-morals_kant-immanuel_1799_1",
+        "道": "writings",
+        "title": "The metaphysic of morals, divided into metaphysical elements of law an"
+      },
+      {
+        "identifier": "briefwechselvoni01kant",
+        "道": "conversations",
+        "title": "Briefwechsel von Imm. Kant"
+      },
+      {
+        "identifier": "briefwechselvoni02kant",
+        "道": "conversations",
+        "title": "Briefwechsel von Imm. Kant"
+      },
+      {
+        "identifier": "briefwechselvoni03kant",
+        "道": "conversations",
+        "title": "Briefwechsel von Imm. Kant"
+      },
+      {
+        "identifier": "bub_gb_7rI_AAAAYAAJ",
+        "道": "writings",
+        "title": "Immanuel Kant's physische Geographie"
+      },
+      {
+        "identifier": "bub_gb_F31ZAAAAcAAJ",
+        "道": "writings",
+        "title": "Prolégomènes a toute métaphysique future qui aura le droit de se prése"
+      },
+      {
+        "identifier": "bub_gb_F7gA_JUh5EYC",
+        "道": "writings",
+        "title": "Prolégomènes a toute métaphysique future qui aura le droit de se prése"
+      },
+      {
+        "identifier": "bub_gb_Oc0AAAAAcAAJ",
+        "道": "writings",
+        "title": "Metaphysische Anfangsgründe der Naturwissenschaft"
+      },
+      {
+        "identifier": "bub_gb_PiRNAAAAMAAJ",
+        "道": "writings",
+        "title": "Immanuel Kant's Kritik der reinen vernunft"
+      },
+      {
+        "identifier": "bub_gb_Wiw-AAAAYAAJ",
+        "道": "writings",
+        "title": "Kant's Sämmtliche kleine Schriften, nach der Zeitfolge Geordnet .."
+      },
+      {
+        "identifier": "bub_gb_mIdQAAAAYAAJ",
+        "道": "writings",
+        "title": "Immanuel Kant's Werke, sorgfaltig revidirte Gesammtausgabe in zehn Bä"
+      },
+      {
+        "identifier": "bub_gb_nsALAAAAIAAJ",
+        "道": "writings",
+        "title": "Gesammelte Schriften"
+      },
+      {
+        "identifier": "bub_gb_pbI_AAAAYAAJ",
+        "道": "writings",
+        "title": "Immanuel Kant's physische Geographie"
+      },
+      {
+        "identifier": "bub_gb_tawUAAAAQAAJ",
+        "道": "writings",
+        "title": "Anthropologie in pragmatischer Hinsicht abgefasst, [Immanuel Kant]"
+      },
+      {
+        "identifier": "critiquedelarai02tissgoog",
+        "道": "writings",
+        "title": "Critique de la raison pure"
+      },
+      {
+        "identifier": "critiqueofjudgem00kantuoft",
+        "道": "decisions",
+        "title": "Critique of judgment"
+      },
+      {
+        "identifier": "dli.ministry.13241",
+        "道": "writings",
+        "title": "Fundamental principles of the metaphysics of ethics"
+      },
+      {
+        "identifier": "educationaltheor0000kant",
+        "道": "writings",
+        "title": "The Educational theory of Immanual Kant "
+      },
+      {
+        "identifier": "educationaltheor00kantuoft",
+        "道": "writings",
+        "title": "Educational theory;"
+      },
+      {
+        "identifier": "ikuiseenrauhaanv53461gut",
+        "道": "writings",
+        "title": "Ikuiseen rauhaanValtio-oikeudellinen tutkielma"
+      },
+      {
+        "identifier": "immanuelkantpap00kant",
+        "道": "writings",
+        "title": "Immanuel Kant papers, 1744-1905?"
+      },
+      {
+        "identifier": "immanuelkantscri0000kant_c7p6",
+        "道": "writings",
+        "title": "Immanuel Kant's Critique of pure reason"
+      },
+      {
+        "identifier": "immanuelkantscri02kantuoft",
+        "道": "expression",
+        "title": "Immanuel Kant's Critique of pure reason : in commemoration of the cent"
+      },
+      {
+        "identifier": "immanuelkantskr03kantgoog",
+        "道": "writings",
+        "title": "Immanuel Kant's Kritik der reinen Vernunft"
+      },
+      {
+        "identifier": "india.history.resource.90167",
+        "道": "expression",
+        "title": "Immanuel Kant’s Critique of Pure Reason, in Commemoration of the Cente"
+      },
+      {
+        "identifier": "kant-della-forza-dell-animo",
+        "道": "writings",
+        "title": "Della Forza Dell'Animo"
+      },
+      {
+        "identifier": "kantchoixdetexte00kant",
+        "道": "external",
+        "title": "Kant. Choix de textes avec étude du systeme philosophique et notices b"
+      },
+      {
+        "identifier": "kantlobelloylosublime1919",
+        "道": "writings",
+        "title": "Lo bello y lo sublime: ensayo de estética y moral"
+      },
+      {
+        "identifier": "kantscritique01kantuoft",
+        "道": "expression",
+        "title": "Immanuel Kant's Critique of pure reason : in commemoration of the cent"
+      },
+      {
+        "identifier": "kantsgesammeltes0000kant_l9l8",
+        "道": "writings",
+        "title": "Kant's Gesammelte Schriften "
+      },
+      {
+        "identifier": "kantsgesammeltes0010kant",
+        "道": "writings",
+        "title": "Kant's gesammelte Schriften"
+      },
+      {
+        "identifier": "kantsgesammeltes0027kant",
+        "道": "writings",
+        "title": "Kant's gesammelte Schriften"
+      },
+      {
+        "identifier": "kantsgesammeltes12kant",
+        "道": "writings",
+        "title": "Kant's gesammelte Schriften"
+      },
+      {
+        "identifier": "kantsgesammeltes13kant",
+        "道": "writings",
+        "title": "Kant's gesammelte Schriften"
+      },
+      {
+        "identifier": "kantsgesammeltes55925gut",
+        "道": "writings",
+        "title": "Kant's gesammelte SchriftenBand V. Kritik der Urtheilskraft."
+      },
+      {
+        "identifier": "kantsprolegomen00kantuoft",
+        "道": "writings",
+        "title": "Kant's Prolegomena, and Metaphysical foundations of natural science"
+      },
+      {
+        "identifier": "kantsprolegomena00kantuoft",
+        "道": "writings",
+        "title": "Kant's Prolegomena to any future metaphysics"
+      },
+      {
+        "identifier": "metaphysicofethi00kantiala",
+        "道": "writings",
+        "title": "The metaphysic of ethics"
+      },
+      {
+        "identifier": "philosophyoflawe0000kant",
+        "道": "writings",
+        "title": "The philosophy of law : an exposition of the fundamental principles of"
+      },
+      {
+        "identifier": "saemmtlichewerke0004kant",
+        "道": "writings",
+        "title": "Saemmtliche werke"
+      },
+      {
+        "identifier": "textbooktokantcr00kant",
+        "道": "external",
+        "title": "Text-book to Kant. The critique of pure reason; aesthetic categories, "
+      }
+    ]
+  },
+  "#180 Pestalozzi": {
+    "lanes": 5,
+    "去掉纸面道后": 3,
+    "逐道份数": {
+      "writings": 62,
+      "conversations": 4,
+      "expression": 1,
+      "decisions": 0,
+      "timeline": 2,
+      "external": 1
+    },
+    "未分道": 0,
+    "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；**未分道不默认成 writings**",
+    "明细": [
+      {
+        "identifier": "10041514bsb",
+        "道": "writings",
+        "title": "Meine Nachforschungen über den Gang der Natur in der Entwiklung des Me"
+      },
+      {
+        "identifier": "10050004bsb",
+        "道": "writings",
+        "title": "Pestalozzi's Leben und Ansichten: in einem wortgetreuen Auszuge aus sä"
+      },
+      {
+        "identifier": "10065771bsb",
+        "道": "timeline",
+        "title": "Meine Lebensschicksale als Vorsteher meiner Erziehungsinstitute in Bur"
+      },
+      {
+        "identifier": "10082563bsb",
+        "道": "writings",
+        "title": "ABC der Anschauung oder Anschauungs-Lehre der Maßverhältnisse. 1"
+      },
+      {
+        "identifier": "10082564bsb",
+        "道": "writings",
+        "title": "ABC der Anschauung oder Anschauungs-Lehre der Maßverhältnisse. 2"
+      },
+      {
+        "identifier": "10116094bsb",
+        "道": "writings",
+        "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu "
+      },
+      {
+        "identifier": "10116095bsb",
+        "道": "writings",
+        "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu "
+      },
+      {
+        "identifier": "10116096bsb",
+        "道": "writings",
+        "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu "
+      },
+      {
+        "identifier": "10116099bsb",
+        "道": "writings",
+        "title": "Figuren zu meinem ABC Buch oder zu den Anfangsgründen meines Denkens"
+      },
+      {
+        "identifier": "10128423bsb",
+        "道": "writings",
+        "title": "Pestalozzi's Lienhard und Gertrud: ein Buch für das Volk ; Die zwei er"
+      },
+      {
+        "identifier": "10129401bsb",
+        "道": "writings",
+        "title": "Lienhard und Gertrud: ein Buch für das Volk. 1"
+      },
+      {
+        "identifier": "10129403bsb",
+        "道": "writings",
+        "title": "Lienhard und Gertrud: ein Buch für das Volk. 3"
+      },
+      {
+        "identifier": "10311310bsb",
+        "道": "writings",
+        "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu "
+      },
+      {
+        "identifier": "10311311bsb",
+        "道": "writings",
+        "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu "
+      },
+      {
+        "identifier": "10721192bsb",
+        "道": "expression",
+        "title": "Rede von Pestalozzi an sein Haus: an seinem vier und siebenzigsten Geb"
+      },
+      {
+        "identifier": "10724505bsb",
+        "道": "writings",
+        "title": "Pestalozzi's sämmtliche Schriften. 1"
+      },
+      {
+        "identifier": "10724506bsb",
+        "道": "writings",
+        "title": "Pestalozzi's sämmtliche Schriften. 3"
+      },
+      {
+        "identifier": "10724507bsb",
+        "道": "writings",
+        "title": "Pestalozzi's sämmtliche Schriften. 4"
+      },
+      {
+        "identifier": "10724508bsb",
+        "道": "writings",
+        "title": "Pestalozzi's sämmtliche Schriften. 5"
+      },
+      {
+        "identifier": "10724509bsb",
+        "道": "writings",
+        "title": "Pestalozzi's sämmtliche Schriften. 6"
+      },
+      {
+        "identifier": "10724510bsb",
+        "道": "writings",
+        "title": "Pestalozzi's sämmtliche Schriften. 7"
+      },
+      {
+        "identifier": "PestalozziMieIndagini",
+        "道": "writings",
+        "title": "Mie Indagini"
+      },
+      {
+        "identifier": "bim_eighteenth-century_leonard-gertrude-a-po_pestalozzi-johann-heinr_1800",
+        "道": "writings",
+        "title": "Leonard & Gertrude. A popular story, written originally in German; tra"
+      },
+      {
+        "identifier": "bub_gb_H-I_AAAAcAAJ",
+        "道": "writings",
+        "title": "Pestalozzi's Leben und Ansichten : in einem wortgetreuen Auszuge aus s"
+      },
+      {
+        "identifier": "bub_gb_tLQ7AAAAcAAJ",
+        "道": "writings",
+        "title": "Lienhard und Gertrud : Ein Buch f. d. Volk"
+      },
+      {
+        "identifier": "buchdermtter00pest",
+        "道": "writings",
+        "title": "Buch der mütter;"
+      },
+      {
+        "identifier": "cmoeducajertrud00pestgoog",
+        "道": "writings",
+        "title": "Cómo educa Jertrudis á sus hijos"
+      },
+      {
+        "identifier": "diepdagogikjoh00pest",
+        "道": "writings",
+        "title": "Die Pädagogik Johann Heinrich Pestalozzi's in wortgetreuen Auszügen au"
+      },
+      {
+        "identifier": "gpl_1902807",
+        "道": "conversations",
+        "title": "Letters on early education, Addressed to J. P. Greaves, esq., by Pesta"
+      },
+      {
+        "identifier": "howgertrudeteach00pest",
+        "道": "writings",
+        "title": "How Gertrude teaches her children; an attempt to help mothers to teach"
+      },
+      {
+        "identifier": "howgertrudeteach00pest_0",
+        "道": "writings",
+        "title": "How Gertrude teaches her children: an attempt to help mothers to teach"
+      },
+      {
+        "identifier": "howgertrudeteach00pestiala",
+        "道": "writings",
+        "title": "How Gertrude teaches her children; an attempt to help mothers to teach"
+      },
+      {
+        "identifier": "howgertrudeteach00pestuoft",
+        "道": "writings",
+        "title": "How Gertrude teaches her children : an attempt to help mothers to teac"
+      },
+      {
+        "identifier": "leonardgertrude00pestiala",
+        "道": "writings",
+        "title": "Leonard and Gertrude"
+      },
+      {
+        "identifier": "leonardgertrudep00pest",
+        "道": "writings",
+        "title": "Leonard and Gertrude. A popular story"
+      },
+      {
+        "identifier": "lettersonearlye03pestgoog",
+        "道": "conversations",
+        "title": "Letters on early education; addressed to J. P. Greaves, esq."
+      },
+      {
+        "identifier": "lettersonearlyed00pest",
+        "道": "conversations",
+        "title": "Letters on early education; addressed to J. P. Greaves, esq."
+      },
+      {
+        "identifier": "lettersonearlyed00pestiala",
+        "道": "conversations",
+        "title": "Letters on early education. Addressed to J. P. Greaves, esq."
+      },
+      {
+        "identifier": "lienhardundgert00pestgoog",
+        "道": "writings",
+        "title": "Lienhard und Gertrud"
+      },
+      {
+        "identifier": "lienhardundgert01pestgoog",
+        "道": "writings",
+        "title": "Lienhard und Gertrud"
+      },
+      {
+        "identifier": "lienhardundgert02pestgoog",
+        "道": "writings",
+        "title": "Lienhard und Gertrud. Ein Buch für das Volk .."
+      },
+      {
+        "identifier": "meinelebensschi01pestgoog",
+        "道": "timeline",
+        "title": "Meine Lebensschicksale als Vorsteher meiner Erziehungsinstitute in Bur"
+      },
+      {
+        "identifier": "pestalozzipestal00barnrich",
+        "道": "external",
+        "title": "Pestalozzi and Pestalozzianism : life, educational principles, and met"
+      },
+      {
+        "identifier": "pestalozzisleben00pest",
+        "道": "writings",
+        "title": "Pestalozzi's leben und ansichten in einem wortgetreuen auszuge aus säm"
+      },
+      {
+        "identifier": "pestalozzisleona00pestuoft",
+        "道": "writings",
+        "title": "Pestalozzi's Leonard and Gertrude. --"
+      },
+      {
+        "identifier": "pestalozzislienh00pest",
+        "道": "writings",
+        "title": "Pestalozzi's Lienhard und Gertrud. Ein buch für das volk"
+      },
+      {
+        "identifier": "pestalozzissamtl04pest",
+        "道": "writings",
+        "title": "Pestalozzi's sämtliche Werke"
+      },
+      {
+        "identifier": "pestalozzissmmt00seyfgoog",
+        "道": "writings",
+        "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit er"
+      },
+      {
+        "identifier": "pestalozzissmmt01seyfgoog",
+        "道": "writings",
+        "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit er"
+      },
+      {
+        "identifier": "pestalozzissmmt02seyfgoog",
+        "道": "writings",
+        "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit er"
+      },
+      {
+        "identifier": "pestalozzissmmt03seyfgoog",
+        "道": "writings",
+        "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit er"
+      },
+      {
+        "identifier": "pestalozzissmmt04seyfgoog",
+        "道": "writings",
+        "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit er"
+      },
+      {
+        "identifier": "smmtlicheschr02pest",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschr10pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri01pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri03pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri04pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri05pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri06pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri07pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri08pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri09pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri11pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri12pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri13pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri14pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smmtlicheschri15pestuoft",
+        "道": "writings",
+        "title": "Sämmtliche Schriften"
+      },
+      {
+        "identifier": "smtlichewerke01pestuoft",
+        "道": "writings",
+        "title": "Sämtliche Werke;"
+      },
+      {
+        "identifier": "smtlichewerke02pestuoft",
+        "道": "writings",
+        "title": "Sämtliche Werke;"
+      },
+      {
+        "identifier": "smtlichewerke03pestuoft",
+        "道": "writings",
+        "title": "Sämtliche Werke;"
+      }
+    ]
+  },
+  "#181 Fröbel": {
+    "lanes": 5,
+    "去掉纸面道后": 4,
+    "逐道份数": {
+      "writings": 33,
+      "conversations": 4,
+      "expression": 6,
+      "decisions": 0,
+      "timeline": 7,
+      "external": 1
+    },
+    "未分道": 0,
+    "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；**未分道不默认成 writings**",
+    "明细": [
+      {
+        "identifier": "10762804bsb",
+        "道": "writings",
+        "title": "Friedrich Fröbel's gesammelte pädagogische Schriften. 1,2"
+      },
+      {
+        "identifier": "FroebelEducazioneUomo",
+        "道": "writings",
+        "title": "L Educazione Dell Uomo"
+      },
+      {
+        "identifier": "aidstofamilygove00meyeuoft",
+        "道": "external",
+        "title": "Aids to family government, or, From the cradle to the school, accordin"
+      },
+      {
+        "identifier": "autobiography00fruoft",
+        "道": "timeline",
+        "title": "Autobiography;"
+      },
+      {
+        "identifier": "autobiographyoff00fr",
+        "道": "timeline",
+        "title": "Autobiography of Friedrich Froebel"
+      },
+      {
+        "identifier": "autobiographyoff00frbe",
+        "道": "timeline",
+        "title": "Autobiography of Friedrich Froebel"
+      },
+      {
+        "identifier": "autobiographyoff00frob",
+        "道": "timeline",
+        "title": "Autobiography of Friedrich Froebel"
+      },
+      {
+        "identifier": "autobiographyoff00froeiala",
+        "道": "timeline",
+        "title": "Autobiography of Friedrich Froebel"
+      },
+      {
+        "identifier": "autobiographyoff00fruoft",
+        "道": "timeline",
+        "title": "Autobiography of Friedrich Froebel"
+      },
+      {
+        "identifier": "autobiooffriedri00froeiala",
+        "道": "timeline",
+        "title": "Autobiography of Friedrich Froebel"
+      },
+      {
+        "identifier": "bub_gb_SMoJAQAAIAAJ",
+        "道": "writings",
+        "title": "Die Menschenerziehung und Kussäke verschiedenen Inhalts"
+      },
+      {
+        "identifier": "bub_gb_kmc0AQAAMAAJ",
+        "道": "writings",
+        "title": "Friedrich Fröbel's Gesammelte pädogogische schriften"
+      },
+      {
+        "identifier": "bub_gb_xhwBAAAAYAAJ",
+        "道": "writings",
+        "title": "Gesammelte pädagogische Schriften"
+      },
+      {
+        "identifier": "educationofman00f",
+        "道": "writings",
+        "title": "The education of man"
+      },
+      {
+        "identifier": "educationofman00fr",
+        "道": "writings",
+        "title": "The education of man"
+      },
+      {
+        "identifier": "educationofman00fr2",
+        "道": "writings",
+        "title": "The education of man"
+      },
+      {
+        "identifier": "educationofman00frbe",
+        "道": "writings",
+        "title": "The education of man"
+      },
+      {
+        "identifier": "educationofman00froe",
+        "道": "writings",
+        "title": "The education of man"
+      },
+      {
+        "identifier": "educationofman00frrich",
+        "道": "writings",
+        "title": "The education of man ;"
+      },
+      {
+        "identifier": "educationofman00fruoft",
+        "道": "writings",
+        "title": "The education of man"
+      },
+      {
+        "identifier": "friedrichfroebe00frgoog",
+        "道": "writings",
+        "title": "Friedrich Froebel's Education by development"
+      },
+      {
+        "identifier": "friedrichfroebe01jarvgoog",
+        "道": "writings",
+        "title": "Friedrich Froebel's pedagogics of the kindergarten"
+      },
+      {
+        "identifier": "friedrichfroebe02jarvgoog",
+        "道": "writings",
+        "title": "Friedrich Froebel's Education by development"
+      },
+      {
+        "identifier": "friedrichfroebe03jarvgoog",
+        "道": "writings",
+        "title": "Friedrich Froebel's pedagogics of the kindergarten"
+      },
+      {
+        "identifier": "friedrichfroebel00fr",
+        "道": "writings",
+        "title": "Friedrich Froebel's Education by development"
+      },
+      {
+        "identifier": "friedrichfroebel00froe",
+        "道": "writings",
+        "title": "Friedrich Froebel's Education by development, the second part of the P"
+      },
+      {
+        "identifier": "friedrichfroebel00frrich",
+        "道": "writings",
+        "title": "Friedrich Froebel's Education by development, the second part of the P"
+      },
+      {
+        "identifier": "friedrichfroebel01fr",
+        "道": "writings",
+        "title": "Friedrich Froebel's Education by development, the second part of the P"
+      },
+      {
+        "identifier": "friedrichfroebel02fr",
+        "道": "writings",
+        "title": "Friedrich Froebel's Education by development"
+      },
+      {
+        "identifier": "friedrichfroebel03fr",
+        "道": "writings",
+        "title": "Friedrich Froebel's pedagogics of the kindergarten"
+      },
+      {
+        "identifier": "froebelletters00friala",
+        "道": "conversations",
+        "title": "Froebel letters;"
+      },
+      {
+        "identifier": "froebelschiefwri00frrich",
+        "道": "writings",
+        "title": "Froebel's chief writings on education"
+      },
+      {
+        "identifier": "froebelschiefwri00fruoft",
+        "道": "writings",
+        "title": "Froebel's chief writings on education"
+      },
+      {
+        "identifier": "froebelsletterso00fr",
+        "道": "conversations",
+        "title": "Froebel's letters on the kindergarten;"
+      },
+      {
+        "identifier": "froebelsletterso00froe",
+        "道": "conversations",
+        "title": "Froebel's letters on the kindergarten;"
+      },
+      {
+        "identifier": "laeducacindelh00fr",
+        "道": "writings",
+        "title": "La educación del hombre"
+      },
+      {
+        "identifier": "laeducacindelh01fr",
+        "道": "writings",
+        "title": "La educación del hombre"
+      },
+      {
+        "identifier": "lettersonkinderg00friala",
+        "道": "conversations",
+        "title": "Letters on the kindergarten"
+      },
+      {
+        "identifier": "motherplaynurser00froe",
+        "道": "expression",
+        "title": "Mother-play and nursery songs;"
+      },
+      {
+        "identifier": "motherssongsgame00fruoft",
+        "道": "expression",
+        "title": "Mother's songs, games and stories : Fröbel's \"Mutter- und Kose-Lieder\""
+      },
+      {
+        "identifier": "mottoesandcomme00unkngoog",
+        "道": "writings",
+        "title": "The mottoes and commentaries of Friedrich Froebel's Mother play"
+      },
+      {
+        "identifier": "mottoescommentar00fr",
+        "道": "writings",
+        "title": "The mottoes and commentaries of Friedrich Froebel's Mother play"
+      },
+      {
+        "identifier": "mottoescommentar00frrich",
+        "道": "writings",
+        "title": "The mottoes and commentaries of Friedrich Froebel's Mother play"
+      },
+      {
+        "identifier": "richfroebelfried00frrich",
+        "道": "writings",
+        "title": "Friedrich Froebel's pedagogics of the kindergarten, or, His ideas conc"
+      },
+      {
+        "identifier": "songsandmusicfr00compgoog",
+        "道": "expression",
+        "title": "The Songs and Music of Friedrich Froebel's Mother Play (Mutter und Kos"
+      },
+      {
+        "identifier": "songsmusicoffrie00fr",
+        "道": "expression",
+        "title": "The songs and music of Friedrich Froebel's Mother play (Mutter und kos"
+      },
+      {
+        "identifier": "songsmusicoffrie00fruoft",
+        "道": "expression",
+        "title": "The Songs and music of Friedrich Froebel's Mother play : (Mutter und k"
+      },
+      {
+        "identifier": "songsmusicoffrie01fr",
+        "道": "expression",
+        "title": "The songs and music of Friedrich Froebel's Mother play (Mutter und kos"
+      },
+      {
+        "identifier": "studentsfroebel01herfgoog",
+        "道": "writings",
+        "title": "The student's Froebel adapted from Die erziehung der menschheit of F. "
+      },
+      {
+        "identifier": "studentsfroebela00froeiala",
+        "道": "writings",
+        "title": "The student's Froebel adapted from Die erziehung der menschheit of F. "
+      },
+      {
+        "identifier": "studentsfroebela00fruoft",
+        "道": "writings",
+        "title": "The student's Froebel : adapted from Die Menschenerziehung of F. Froeb"
+      }
+    ]
+  },
+  "#182 Comenius": {
+    "lanes": 2,
+    "去掉纸面道后": 2,
+    "逐道份数": {
+      "writings": 67,
+      "conversations": 0,
+      "expression": 0,
+      "decisions": 0,
+      "timeline": 0,
+      "external": 2
+    },
+    "未分道": 0,
+    "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；**未分道不默认成 writings**",
+    "明细": [
+      {
+        "identifier": "00140496bsb",
+        "道": "writings",
+        "title": "Зрѣлище вселенныя: на латинскомъ, россїйскомъ и нѣмецкомъ языкахъ, изд"
+      },
+      {
+        "identifier": "10026103bsb",
+        "道": "writings",
+        "title": "Martyrologium Bohemicum oder die Böhmische Verfolgungs-Geschichte vom "
+      },
+      {
+        "identifier": "10261284bsb",
+        "道": "writings",
+        "title": "Das wiedergefundene Paradies"
+      },
+      {
+        "identifier": "10270188bsb",
+        "道": "writings",
+        "title": "Übergang aus dem Labyrinth der Welt in das Paradis des Hertzens, So eh"
+      },
+      {
+        "identifier": "10448790bsb",
+        "道": "writings",
+        "title": "Kurzgefaßte Kirchen-Historie der Böhmischen Brüder"
+      },
+      {
+        "identifier": "10448791bsb",
+        "道": "writings",
+        "title": "Erste Liebe"
+      },
+      {
+        "identifier": "10584856bsb",
+        "道": "writings",
+        "title": "Onomastikon peri tu pantos Iōannu Amōsu Komeniu"
+      },
+      {
+        "identifier": "10585771bsb",
+        "道": "writings",
+        "title": "Lexicon Atriale latino-latinum"
+      },
+      {
+        "identifier": "10779570bsb",
+        "道": "writings",
+        "title": "Janua linguarum reserata aurea: = Zlatá brána gazykůw otewřená = Neu e"
+      },
+      {
+        "identifier": "10912059bsb",
+        "道": "writings",
+        "title": "Joh. Amos Comenii Orbis Sensualium Picti Pars ...: Hoc est: Omnium. 1:"
+      },
+      {
+        "identifier": "11092509bsb",
+        "道": "writings",
+        "title": "Kurz-gefaßte Kirchen-Historie Der Böhmischen Brüder"
+      },
+      {
+        "identifier": "11104945bsb",
+        "道": "writings",
+        "title": "Joh. Amos Comenii Orbis Sensualium Picti Pars ...: Hoc est: Omnium fun"
+      },
+      {
+        "identifier": "ComeniusDidatticaMagna",
+        "道": "writings",
+        "title": "Didattica Magna"
+      },
+      {
+        "identifier": "OrbisPictusGraeco-latinus",
+        "道": "writings",
+        "title": "Orbis Pictus Graeco-Latinus"
+      },
+      {
+        "identifier": "asomrnpekladyal00jiregoog",
+        "道": "writings",
+        "title": "Časoměrné překlady žalmův Jana Amosa Komenského, pak Jana Blaho"
+      },
+      {
+        "identifier": "b21782386",
+        "道": "writings",
+        "title": "Des Johann Amos Comenius Entwurf der nach dem Gottlichen Lichte umgest"
+      },
+      {
+        "identifier": "b32990431",
+        "道": "writings",
+        "title": "I.A. Comenii Ianua linguarum reserata aurea; : sive seminarium linguar"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_conatuum-comenianorum-pr_komensk-jan-amos_1637",
+        "道": "writings",
+        "title": "Conatuum Comenianorum praeludia ...  1637"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_janua-linguarum-reserata_komensky-jan-amos_1636",
+        "道": "writings",
+        "title": "Janua linguarum reserata: or a seed-plot of all languages ...  1636"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_joh-amos-comenii-vestib_comenius-johann-amos_1647",
+        "道": "writings",
+        "title": "Joh. Amos Comenii Vestibulum ...  1647"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1631",
+        "道": "writings",
+        "title": "Porta linguarum trilinguis reserata ...  1631"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1631_0",
+        "道": "writings",
+        "title": "Porta linguarum trilinguis reserata...  1631"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1633",
+        "道": "writings",
+        "title": "Porta linguarum trilinguis, reserata et aperta.  1633"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1637",
+        "道": "writings",
+        "title": "Porta linguarum trilinguis, Reserata & Aperta: ...  1637"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1639",
+        "道": "writings",
+        "title": "Porta linguarum trilinguis, Reserata & Aperta: ...  1639"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1639_0",
+        "道": "writings",
+        "title": "Porta linguarum trilinguis reserata & aperata:...  1639"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensky-jan-amos_1631",
+        "道": "writings",
+        "title": "Porta linguarum trilinguis reserata et aperta.  1631"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_porta-sapienti-reserata_komensky-jan-amos_1637",
+        "道": "writings",
+        "title": "Porta Sapientiæ reserata: sive Pansophiae Christianae Seminarium.  163"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_reverendi-et-clarissimi-_komensk-jan-amos_1638",
+        "道": "writings",
+        "title": "Reverendi et clarissimi viri Johannis Amos Comenii Pansophiæ prodromus"
+      },
+      {
+        "identifier": "bim_early-english-books-1475-1640_the-gate-of-tongues-unlo_komensky-jan-amos_1633",
+        "道": "writings",
+        "title": "The gate of tongues unlocked, ...  1633"
+      },
+      {
+        "identifier": "bim_early-english-books-1641-1700_a-continuation-of-mr-jo_comenius-johann-amos_1648",
+        "道": "writings",
+        "title": "A continuation of mr. john-amos-comenius school endeavours, ...  1648"
+      },
+      {
+        "identifier": "bim_early-english-books-1641-1700_a-generall-table-of-euro_comenius-johann-amos_1670",
+        "道": "writings",
+        "title": "A generall table of Europe,...  1670"
+      },
+      {
+        "identifier": "bub_gb_2x85AQAAMAAJ",
+        "道": "writings",
+        "title": "Jana A. Komenského Nejnovější metoda jazyků, na základech didakt"
+      },
+      {
+        "identifier": "bub_gb_34RCAQAAMAAJ",
+        "道": "writings",
+        "title": "Padagogische Schriften"
+      },
+      {
+        "identifier": "bub_gb_34ZDAQAAMAAJ",
+        "道": "writings",
+        "title": "Jana Amosa Komenského Uměmí kazatelské"
+      },
+      {
+        "identifier": "bub_gb_3nVBAQAAMAAJ",
+        "道": "writings",
+        "title": "Des Johann Amos Comenius Schola Ludus : d.i. Die Schule als Spiel."
+      },
+      {
+        "identifier": "bub_gb_64syAQAAMAAJ",
+        "道": "writings",
+        "title": "[Orbis pictus] graeco-latinus, usui studiosae juventutis accommodatus"
+      },
+      {
+        "identifier": "bub_gb_6LOgAAAAMAAJ",
+        "道": "writings",
+        "title": "Spisy Jana Amosa Komenského"
+      },
+      {
+        "identifier": "bub_gb_AakZAAAAYAAJ",
+        "道": "writings",
+        "title": "Hystoria o těžkých Protiwenstwjch Cýrkwe České : hned od počátku gegjh"
+      },
+      {
+        "identifier": "bub_gb_DD1KAAAAYAAJ",
+        "道": "writings",
+        "title": "Spisy Jana Amosa Komenského"
+      },
+      {
+        "identifier": "bub_gb_FTtFAAAAYAAJ",
+        "道": "writings",
+        "title": "Jana Amosa Komenského Didaktika"
+      },
+      {
+        "identifier": "bub_gb_Fx1BAAAAcAAJ",
+        "道": "writings",
+        "title": "Kurzgefaßte Kirchen-Historie der Böhmischen Brüder"
+      },
+      {
+        "identifier": "bub_gb_GoAWAAAAIAAJ",
+        "道": "writings",
+        "title": "Neuer Orbis pictus für die Jugend : oder Schauplatz der Natur, der Ku"
+      },
+      {
+        "identifier": "bub_gb_GyAoAAAAYAAJ",
+        "道": "writings",
+        "title": "Labirynt swěta a rág srdce : to gest swětlé wymalowanj, kterak w tom s"
+      },
+      {
+        "identifier": "bub_gb_HiRbAAAAcAAJ",
+        "道": "writings",
+        "title": "[Orbis sensualium pictus]"
+      },
+      {
+        "identifier": "bub_gb_JvJCAQAAMAAJ",
+        "道": "writings",
+        "title": "Johann Amos Comnenius lehrkunst"
+      },
+      {
+        "identifier": "bub_gb_MAITAAAAIAAJ",
+        "道": "writings",
+        "title": "Neuer Orbis Pictus für die Jugend, oder Schauplatz der Natur, der Kuns"
+      },
+      {
+        "identifier": "bub_gb_MrNBAAAAYAAJ",
+        "道": "writings",
+        "title": "Didaktika Jana Amosa Komenského. Téhož 1. Nawržení krátké o obnowení š"
+      },
+      {
+        "identifier": "bub_gb_WGNcAAAAcAAJ",
+        "道": "writings",
+        "title": "Jo. Amos Comenii Janua linguarum aurea reserata in linguam graecam"
+      },
+      {
+        "identifier": "bub_gb__A5WAAAAcAAJ",
+        "道": "writings",
+        "title": "Kurz-gefaßte Kirchen-Historie Der Böhmischen Brüder"
+      },
+      {
+        "identifier": "bub_gb_gzBQAAAAcAAJ",
+        "道": "writings",
+        "title": "Ianua aurea"
+      },
+      {
+        "identifier": "bub_gb_iaoPAAAAQAAJ",
+        "道": "writings",
+        "title": "La Porte des langues ouverte, pour apprendre la langue latine, la lang"
+      },
+      {
+        "identifier": "bub_gb_sqpdAAAAcAAJ",
+        "道": "writings",
+        "title": "J.A. Comenii Orbis Pictus, etc. Lat. and Germ"
+      },
+      {
+        "identifier": "bub_gb_uhBcAAAAcAAJ",
+        "道": "writings",
+        "title": "Ausgewählte Schriften (Comenius Werke 2. Band)"
+      },
+      {
+        "identifier": "bub_gb_zYpUAAAAcAAJ",
+        "道": "writings",
+        "title": "Unum necessarium scire, quid sibi sit necessarium in vita, et morte, e"
+      },
+      {
+        "identifier": "dbc.wroc.pl.BOss_XVII_3922",
+        "道": "writings",
+        "title": "Januae LL. Comenianae : Ex Decem (à L ad LX) Capitibus Mathematicam ex"
+      },
+      {
+        "identifier": "dbc.wroc.pl.BOss_XVII_3923",
+        "道": "writings",
+        "title": "Artium Rudiorum, Subtiliorum, Subtilissimarum : seu Actionum Humanae I"
+      },
+      {
+        "identifier": "derrheinalsschic00paqu",
+        "道": "external",
+        "title": "Der Rhein als Schicksal : oder, Das Problem der Völker"
+      },
+      {
+        "identifier": "didaktikanawren00comeuoft",
+        "道": "writings",
+        "title": "Didaktika. Nawrení krátké o obnowení kol w Králowstwí eském. Píslowí i"
+      },
+      {
+        "identifier": "grosseunterricht00comeuoft",
+        "道": "writings",
+        "title": "Grosse Unterrichtslehre"
+      },
+      {
+        "identifier": "jbc.bj.uj.edu.pl.DIGSTDR000361",
+        "道": "writings",
+        "title": "Johannis Lasitii [...] Historiæ De Origine Et Rebus gestis Fratrum Boh"
+      },
+      {
+        "identifier": "labyrinthofworld00comeuoft",
+        "道": "writings",
+        "title": "The labyrinth of the world and the paradise of the heart"
+      },
+      {
+        "identifier": "obrazjednotyesko00lasi",
+        "道": "external",
+        "title": "Obraz Jednoty eskobratrské ili Jana Lasitského Historie o puvodu a ine"
+      },
+      {
+        "identifier": "orbispictusofjoh00comeiala",
+        "道": "writings",
+        "title": "The Orbis pictus of John Amos Comenius"
+      },
+      {
+        "identifier": "orbispictusswtwo0000come",
+        "道": "writings",
+        "title": "Orbis pictus = Swět w obrazćh. Die Welt in Bildern. Le monde en tablea"
+      },
+      {
+        "identifier": "rulesoflife00come",
+        "道": "writings",
+        "title": "Rules of life"
+      },
+      {
+        "identifier": "schoolofinfancye00comeiala",
+        "道": "writings",
+        "title": "The school of infancy : an essay on the education of youth, during the"
+      },
+      {
+        "identifier": "thelabyrinthofth00comeuoft",
+        "道": "writings",
+        "title": "The labyrinth of the world and the paradise of the heart"
+      },
+      {
+        "identifier": "theorbispictus28299gut",
+        "道": "writings",
+        "title": "The Orbis Pictus"
+      }
+    ]
+  }
+}

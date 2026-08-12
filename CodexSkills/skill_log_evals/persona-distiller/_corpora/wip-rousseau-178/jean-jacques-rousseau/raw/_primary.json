@@ -1,12 +1,12 @@
 {
-  "总数": 64,
+  "总数": 86,
   "计数": {
-    "一手": 64,
-    "二手": 0,
+    "一手": 73,
+    "二手": 13,
     "需人判": 0
   },
-  "一手占比下界": 1.0,
-  "一手占比上界": 1.0,
+  "一手占比下界": 0.8488,
+  "一手占比上界": 0.8488,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -242,6 +242,14 @@
       "words": 55898
     },
     {
+      "identifier": "bim_eighteenth-century_anecdotes-of-the-last-tw_corancez-olivier-de_1798",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "Anecdotes of the last twelve years of the life of J.J. Rousseau, originally publ",
+      "creator": "Corancez, Olivier de",
+      "words": 21127
+    },
+    {
       "identifier": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1787",
       "档": "一手",
       "依据": "目标为第一作者，题名含「letters」",
@@ -450,6 +458,22 @@
       "words": 65025
     },
     {
+      "identifier": "cu31924027386915",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Rousseau and naturalism in life and thought",
+      "creator": "Hudson, William Henry, 1862-1918",
+      "words": 83041
+    },
+    {
+      "identifier": "cu31924032526596",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The life of Thomas Paine; mover of the \"Declaration of independence;\" secretary ",
+      "creator": "Blanchard, Calvin, 1808-1868",
+      "words": 47260
+    },
+    {
       "identifier": "dictionnairedemu02rous",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
@@ -482,6 +506,30 @@
       "words": 93559
     },
     {
+      "identifier": "frenchenglishphi34desc",
+      "档": "二手",
+      "依据": "【人裁】《French and English philosophers: Descartes, Rousseau, Voltaire, Hobbes》是**四人合集**，Rousseau 排第 3。整册里他只占一部分，**按整册记一手就是把笛卡尔与霍布斯的文字算成他的**——同 Machiavelli 那本文艺复兴散文选（threeprosewriter00moor）。",
+      "title": "French and English philosophers : Descartes, Rousseau, Voltaire, Hobbes",
+      "creator": "Descartes, René. aut; Voltaire. aut; Rousseau, Jean-Jacques. aut; Hobbes, Thoma",
+      "words": 169114
+    },
+    {
+      "identifier": "honneurspublicsr00pari",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Honneurs publics rendus à la mémoire de J̌.J. Rousseau; étude historique",
+      "creator": "Paris, Jean Moïse, 1818-",
+      "words": 34753
+    },
+    {
+      "identifier": "india.history.resource.111524",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "Anecdotes of the Last Twelve Years of the Life of J. J. Rousseau; orginally publ",
+      "creator": "Rousseau, J. J.; Corancez, Citizen",
+      "words": 19538
+    },
+    {
       "identifier": "india.history.resource.94272",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
@@ -490,12 +538,140 @@
       "words": 75145
     },
     {
+      "identifier": "jeanjacquesrous00text",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Jean-Jacques Rousseau et les origines du cosmopolitisme littéraire : étude sur l",
+      "creator": "Texte, Joseph, 1865-1900",
+      "words": 148049
+    },
+    {
+      "identifier": "memorial00unit",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Memorial addresses on the life and character of Rousseau O. Crump (late a repres",
+      "creator": "United States. 57th Congress, 2d session, 1902-1903. [from old catalog]; United ",
+      "words": 10911
+    },
+    {
       "identifier": "mileoudelducatio00rous",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
       "title": "Émile, ou, De l'éducation",
       "creator": "Rousseau, Jean-Jacques, 1712-1778",
       "words": 334178
+    },
+    {
+      "identifier": "oeuvrescomplt05rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres complètes de J. J. Rousseau ; avec des éclaircissements et des notes his",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778; Auguis, P. R. (Pierre René), 1786-1846; Barbi",
+      "words": 92253
+    },
+    {
+      "identifier": "oeuvresdejjrous08rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres de J.J. Rousseau citoyen de Genève",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 115126
+    },
+    {
+      "identifier": "oeuvresdejjrous09rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres de J.J. Rousseau citoyen de Genève",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 101566
+    },
+    {
+      "identifier": "oeuvresdejjrous10rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres de J.J. Rousseau citoyen de Genève",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 124083
+    },
+    {
+      "identifier": "oeuvresdejjrouss01rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres de J.J. Rousseau",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 88043
+    },
+    {
+      "identifier": "oeuvresdejjrouss12rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres de J.J. Rousseau",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 86057
+    },
+    {
+      "identifier": "oeuvresdejjrouss15rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres de J.J. Rousseau",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 84348
+    },
+    {
+      "identifier": "oeuvresdejjrouss22rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres de J.J. Rousseau",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778",
+      "words": 89145
+    },
+    {
+      "identifier": "romanticelements00fole",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "The romantic elements in the life and works of Jean Jacques Rousseau",
+      "creator": "Foley, Margaret Ebert",
+      "words": 16852
+    },
+    {
+      "identifier": "rousseauandnatu00hudsgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Rousseau and the naturalism in life and thought",
+      "creator": "Hudson, William Henry, 1862-1918",
+      "words": 80754
+    },
+    {
+      "identifier": "rousseaunaturali0000unse_c8a6",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "rousseau and naturalism in life and thought",
+      "creator": "william henry hudson",
+      "words": 78235
+    },
+    {
+      "identifier": "tudesurjjrousse00giragoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Étude sur J. -J. Rousseau",
+      "creator": "Eugène Chatel,  Saint Marc Girardin",
+      "words": 30426
+    },
+    {
+      "identifier": "tudesurltatm00bouguoft",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Étude sur l'état mental de J.J. Rousseau et sa mort à Ermenonville",
+      "creator": "Bougeault, Alfred, 1817-",
+      "words": 38669
+    },
+    {
+      "identifier": "uvrescompltesd02rous",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "uvres complètes de J. J.Rousseau : mises dans un nouvel ordre",
+      "creator": "Rousseau, Jean-Jacques, 1712-1778; Musset-Pathay, V.-D. (Victor-Donatien), 1768-",
+      "words": 138525
     },
     {
       "identifier": "uvrescompltesde04rousgoog",

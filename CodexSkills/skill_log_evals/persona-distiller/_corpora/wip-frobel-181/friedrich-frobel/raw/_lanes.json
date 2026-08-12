@@ -1,0 +1,271 @@
+{
+  "lanes": 5,
+  "去掉纸面道后": 4,
+  "逐道份数": {
+    "writings": 33,
+    "conversations": 4,
+    "expression": 6,
+    "decisions": 0,
+    "timeline": 7,
+    "external": 1
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "10762804bsb",
+      "道": "writings",
+      "title": "Friedrich Fröbel's gesammelte pädagogische Schriften. 1,2"
+    },
+    {
+      "identifier": "FroebelEducazioneUomo",
+      "道": "writings",
+      "title": "L Educazione Dell Uomo"
+    },
+    {
+      "identifier": "aidstofamilygove00meyeuoft",
+      "道": "external",
+      "title": "Aids to family government, or, From the cradle to the school, accordin"
+    },
+    {
+      "identifier": "autobiography00fruoft",
+      "道": "timeline",
+      "title": "Autobiography;"
+    },
+    {
+      "identifier": "autobiographyoff00fr",
+      "道": "timeline",
+      "title": "Autobiography of Friedrich Froebel"
+    },
+    {
+      "identifier": "autobiographyoff00frbe",
+      "道": "timeline",
+      "title": "Autobiography of Friedrich Froebel"
+    },
+    {
+      "identifier": "autobiographyoff00frob",
+      "道": "timeline",
+      "title": "Autobiography of Friedrich Froebel"
+    },
+    {
+      "identifier": "autobiographyoff00froeiala",
+      "道": "timeline",
+      "title": "Autobiography of Friedrich Froebel"
+    },
+    {
+      "identifier": "autobiographyoff00fruoft",
+      "道": "timeline",
+      "title": "Autobiography of Friedrich Froebel"
+    },
+    {
+      "identifier": "autobiooffriedri00froeiala",
+      "道": "timeline",
+      "title": "Autobiography of Friedrich Froebel"
+    },
+    {
+      "identifier": "bub_gb_SMoJAQAAIAAJ",
+      "道": "writings",
+      "title": "Die Menschenerziehung und Kussäke verschiedenen Inhalts"
+    },
+    {
+      "identifier": "bub_gb_kmc0AQAAMAAJ",
+      "道": "writings",
+      "title": "Friedrich Fröbel's Gesammelte pädogogische schriften"
+    },
+    {
+      "identifier": "bub_gb_xhwBAAAAYAAJ",
+      "道": "writings",
+      "title": "Gesammelte pädagogische Schriften"
+    },
+    {
+      "identifier": "educationofman00f",
+      "道": "writings",
+      "title": "The education of man"
+    },
+    {
+      "identifier": "educationofman00fr",
+      "道": "writings",
+      "title": "The education of man"
+    },
+    {
+      "identifier": "educationofman00fr2",
+      "道": "writings",
+      "title": "The education of man"
+    },
+    {
+      "identifier": "educationofman00frbe",
+      "道": "writings",
+      "title": "The education of man"
+    },
+    {
+      "identifier": "educationofman00froe",
+      "道": "writings",
+      "title": "The education of man"
+    },
+    {
+      "identifier": "educationofman00frrich",
+      "道": "writings",
+      "title": "The education of man ;"
+    },
+    {
+      "identifier": "educationofman00fruoft",
+      "道": "writings",
+      "title": "The education of man"
+    },
+    {
+      "identifier": "friedrichfroebe00frgoog",
+      "道": "writings",
+      "title": "Friedrich Froebel's Education by development"
+    },
+    {
+      "identifier": "friedrichfroebe01jarvgoog",
+      "道": "writings",
+      "title": "Friedrich Froebel's pedagogics of the kindergarten"
+    },
+    {
+      "identifier": "friedrichfroebe02jarvgoog",
+      "道": "writings",
+      "title": "Friedrich Froebel's Education by development"
+    },
+    {
+      "identifier": "friedrichfroebe03jarvgoog",
+      "道": "writings",
+      "title": "Friedrich Froebel's pedagogics of the kindergarten"
+    },
+    {
+      "identifier": "friedrichfroebel00fr",
+      "道": "writings",
+      "title": "Friedrich Froebel's Education by development"
+    },
+    {
+      "identifier": "friedrichfroebel00froe",
+      "道": "writings",
+      "title": "Friedrich Froebel's Education by development, the second part of the P"
+    },
+    {
+      "identifier": "friedrichfroebel00frrich",
+      "道": "writings",
+      "title": "Friedrich Froebel's Education by development, the second part of the P"
+    },
+    {
+      "identifier": "friedrichfroebel01fr",
+      "道": "writings",
+      "title": "Friedrich Froebel's Education by development, the second part of the P"
+    },
+    {
+      "identifier": "friedrichfroebel02fr",
+      "道": "writings",
+      "title": "Friedrich Froebel's Education by development"
+    },
+    {
+      "identifier": "friedrichfroebel03fr",
+      "道": "writings",
+      "title": "Friedrich Froebel's pedagogics of the kindergarten"
+    },
+    {
+      "identifier": "froebelletters00friala",
+      "道": "conversations",
+      "title": "Froebel letters;"
+    },
+    {
+      "identifier": "froebelschiefwri00frrich",
+      "道": "writings",
+      "title": "Froebel's chief writings on education"
+    },
+    {
+      "identifier": "froebelschiefwri00fruoft",
+      "道": "writings",
+      "title": "Froebel's chief writings on education"
+    },
+    {
+      "identifier": "froebelsletterso00fr",
+      "道": "conversations",
+      "title": "Froebel's letters on the kindergarten;"
+    },
+    {
+      "identifier": "froebelsletterso00froe",
+      "道": "conversations",
+      "title": "Froebel's letters on the kindergarten;"
+    },
+    {
+      "identifier": "laeducacindelh00fr",
+      "道": "writings",
+      "title": "La educación del hombre"
+    },
+    {
+      "identifier": "laeducacindelh01fr",
+      "道": "writings",
+      "title": "La educación del hombre"
+    },
+    {
+      "identifier": "lettersonkinderg00friala",
+      "道": "conversations",
+      "title": "Letters on the kindergarten"
+    },
+    {
+      "identifier": "motherplaynurser00froe",
+      "道": "expression",
+      "title": "Mother-play and nursery songs;"
+    },
+    {
+      "identifier": "motherssongsgame00fruoft",
+      "道": "expression",
+      "title": "Mother's songs, games and stories : Fröbel's \"Mutter- und Kose-Lieder\""
+    },
+    {
+      "identifier": "mottoesandcomme00unkngoog",
+      "道": "writings",
+      "title": "The mottoes and commentaries of Friedrich Froebel's Mother play"
+    },
+    {
+      "identifier": "mottoescommentar00fr",
+      "道": "writings",
+      "title": "The mottoes and commentaries of Friedrich Froebel's Mother play"
+    },
+    {
+      "identifier": "mottoescommentar00frrich",
+      "道": "writings",
+      "title": "The mottoes and commentaries of Friedrich Froebel's Mother play"
+    },
+    {
+      "identifier": "richfroebelfried00frrich",
+      "道": "writings",
+      "title": "Friedrich Froebel's pedagogics of the kindergarten, or, His ideas conc"
+    },
+    {
+      "identifier": "songsandmusicfr00compgoog",
+      "道": "expression",
+      "title": "The Songs and Music of Friedrich Froebel's Mother Play (Mutter und Kos"
+    },
+    {
+      "identifier": "songsmusicoffrie00fr",
+      "道": "expression",
+      "title": "The songs and music of Friedrich Froebel's Mother play (Mutter und kos"
+    },
+    {
+      "identifier": "songsmusicoffrie00fruoft",
+      "道": "expression",
+      "title": "The Songs and music of Friedrich Froebel's Mother play : (Mutter und k"
+    },
+    {
+      "identifier": "songsmusicoffrie01fr",
+      "道": "expression",
+      "title": "The songs and music of Friedrich Froebel's Mother play (Mutter und kos"
+    },
+    {
+      "identifier": "studentsfroebel01herfgoog",
+      "道": "writings",
+      "title": "The student's Froebel adapted from Die erziehung der menschheit of F. "
+    },
+    {
+      "identifier": "studentsfroebela00froeiala",
+      "道": "writings",
+      "title": "The student's Froebel adapted from Die erziehung der menschheit of F. "
+    },
+    {
+      "identifier": "studentsfroebela00fruoft",
+      "道": "writings",
+      "title": "The student's Froebel : adapted from Die Menschenerziehung of F. Froeb"
+    }
+  ]
+}

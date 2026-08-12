@@ -1,11 +1,11 @@
 {
-  "生成时刻": "2026-08-12T13:19:16",
-  "请求数": 9,
-  "已取回": 73,
+  "生成时刻": "2026-08-12T13:52:38",
+  "请求数": 12,
+  "已取回": 85,
   "skipped_access_restricted": 0,
   "失败": 0,
   "并发降级": "无（全程并发 4）",
-  "总词数": 12481669,
+  "总词数": 14862425,
   "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
   "记录": [
     {
@@ -119,6 +119,52 @@
         "1749",
         "1753",
         "1836"
+      ]
+    },
+    {
+      "identifier": "bwb_S0-BPV-382_2",
+      "status": "已取回",
+      "note": "",
+      "file": "bwb_S0-BPV-382_2.txt",
+      "source_url": "https://archive.org/download/bwb_S0-BPV-382_2/bwb_S0-BPV-382_2_djvu.txt",
+      "sha256": "bf80050e74a1f9f041fa2a4d08c56ef1f58d06afc9f7eab5e786a5cc16596e5d",
+      "bytes": 1074472,
+      "words": 173035,
+      "fetched_at": "2026-08-12T13:52:20",
+      "ia_date": "1916",
+      "ia_year": "",
+      "ia_publicdate": "2025-09-10 08:04:52",
+      "ia_creator": "Albert J. Beveridge",
+      "ia_title": "The Life of John Marshall",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1789",
+        "1801",
+        "1916",
+        "2025"
+      ]
+    },
+    {
+      "identifier": "bwb_S0-CBR-236_2",
+      "status": "已取回",
+      "note": "",
+      "file": "bwb_S0-CBR-236_2.txt",
+      "source_url": "https://archive.org/download/bwb_S0-CBR-236_2/bwb_S0-CBR-236_2_djvu.txt",
+      "sha256": "419e7c52a2353865a75c1391cbd117fea91de5dbb67b3152bb3d459e5a13d46a",
+      "bytes": 1078368,
+      "words": 173703,
+      "fetched_at": "2026-08-12T13:52:20",
+      "ia_date": "1916",
+      "ia_year": "",
+      "ia_publicdate": "2025-03-03 10:42:22",
+      "ia_creator": "Albert J. Beveridge",
+      "ia_title": "The life of John Marshall",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1789",
+        "1801",
+        "1916",
+        "1968"
       ]
     },
     {
@@ -242,6 +288,32 @@
       ]
     },
     {
+      "identifier": "cu31924019413545",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924019413545.txt",
+      "source_url": "https://archive.org/download/cu31924019413545/cu31924019413545_djvu.txt",
+      "sha256": "2cd1b096e7cdbfd171b30866b34992787f2887122d7f1e6b0c48a570ee21c909",
+      "bytes": 2259141,
+      "words": 327019,
+      "fetched_at": "2026-08-12T13:52:23",
+      "ia_date": "1916",
+      "ia_year": "",
+      "ia_publicdate": "2009-10-23 02:22:17",
+      "ia_creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "ia_title": "The life of John Marshall ",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1755",
+        "1775",
+        "1777",
+        "1788",
+        "1801",
+        "1891",
+        "1924"
+      ]
+    },
+    {
       "identifier": "cu31924024323069",
       "status": "已取回",
       "note": "",
@@ -296,6 +368,173 @@
         "1908",
         "1914",
         "1924"
+      ]
+    },
+    {
+      "identifier": "cu31924052204165",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924052204165.txt",
+      "source_url": "https://archive.org/download/cu31924052204165/cu31924052204165_djvu.txt",
+      "sha256": "fd8d4e3daa191dc01c1f3cf66da85e0c9a6ef1e0291c42ea5a375cbe91b86503",
+      "bytes": 1060245,
+      "words": 153572,
+      "fetched_at": "2026-08-12T13:52:21",
+      "ia_date": "1916",
+      "ia_year": "",
+      "ia_publicdate": "2009-11-05 13:46:07",
+      "ia_creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "ia_title": "The life of John Marshall ",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1755",
+        "1775",
+        "1777",
+        "1778",
+        "1788",
+        "1916",
+        "1924"
+      ]
+    },
+    {
+      "identifier": "cu31924052204173",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924052204173.txt",
+      "source_url": "https://archive.org/download/cu31924052204173/cu31924052204173_djvu.txt",
+      "sha256": "4553e777d7410e86817dfa704abf78e6e3bd8da3274cd99d03b6098b3094ee33",
+      "bytes": 1345739,
+      "words": 193776,
+      "fetched_at": "2026-08-12T13:52:26",
+      "ia_date": "1916",
+      "ia_year": "",
+      "ia_publicdate": "2009-11-05 14:34:14",
+      "ia_creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "ia_title": "The life of John Marshall ",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1789",
+        "1801",
+        "1916"
+      ]
+    },
+    {
+      "identifier": "cu31924052204207",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924052204207.txt",
+      "source_url": "https://archive.org/download/cu31924052204207/cu31924052204207_djvu.txt",
+      "sha256": "6369b3f08a8ed71907035d0bc54d62e6d8e83360eae564a60db8cc65c826c505",
+      "bytes": 2258478,
+      "words": 326915,
+      "fetched_at": "2026-08-12T13:52:31",
+      "ia_date": "1916",
+      "ia_year": "",
+      "ia_publicdate": "2009-11-05 18:29:29",
+      "ia_creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "ia_title": "The life of John Marshall ",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1755",
+        "1777",
+        "1788",
+        "1801",
+        "1924"
+      ]
+    },
+    {
+      "identifier": "cu31924059112304",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924059112304.txt",
+      "source_url": "https://archive.org/download/cu31924059112304/cu31924059112304_djvu.txt",
+      "sha256": "8776c1e4d6dec524b5889388c2a5624504429452f213f6a717a90a177ff00300",
+      "bytes": 1345618,
+      "words": 193713,
+      "fetched_at": "2026-08-12T13:52:30",
+      "ia_date": "1916",
+      "ia_year": "",
+      "ia_publicdate": "2012-08-22 00:33:48",
+      "ia_creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "ia_title": "The life of John Marshall",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1789",
+        "1801",
+        "1916",
+        "1924"
+      ]
+    },
+    {
+      "identifier": "cu31924059112312",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924059112312.txt",
+      "source_url": "https://archive.org/download/cu31924059112312/cu31924059112312_djvu.txt",
+      "sha256": "9c1141cb8455f0b28e1f24ee549722eeef69db14fa8a0575c9c40ef4cdc41255",
+      "bytes": 1332584,
+      "words": 193473,
+      "fetched_at": "2026-08-12T13:52:31",
+      "ia_date": "1916",
+      "ia_year": "",
+      "ia_publicdate": "2012-08-22 00:34:05",
+      "ia_creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "ia_title": "The life of John Marshall",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1789",
+        "1800",
+        "1801",
+        "1802",
+        "1815",
+        "1919"
+      ]
+    },
+    {
+      "identifier": "cu31924059112320",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924059112320.txt",
+      "source_url": "https://archive.org/download/cu31924059112320/cu31924059112320_djvu.txt",
+      "sha256": "c02bdbf87ae8bacb1098d9a66c3845791c9d92a529f97b15bba1e6a585552e06",
+      "bytes": 1570885,
+      "words": 226729,
+      "fetched_at": "2026-08-12T13:52:32",
+      "ia_date": "1916",
+      "ia_year": "",
+      "ia_publicdate": "2009-11-18 19:52:34",
+      "ia_creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "ia_title": "The life of John Marshall ",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1812",
+        "1815",
+        "1818",
+        "1819",
+        "1835",
+        "1919",
+        "1924",
+        "1956"
+      ]
+    },
+    {
+      "identifier": "eulogyonlifechar00binn",
+      "status": "已取回",
+      "note": "",
+      "file": "eulogyonlifechar00binn.txt",
+      "source_url": "https://archive.org/download/eulogyonlifechar00binn/eulogyonlifechar00binn_djvu.txt",
+      "sha256": "36bca2ef1de636ffbe6ca21eb70ae0688a75e49e205a99176fbb256d1bea66f7",
+      "bytes": 132234,
+      "words": 19675,
+      "fetched_at": "2026-08-12T13:52:37",
+      "ia_date": "1835",
+      "ia_year": "",
+      "ia_publicdate": "2009-05-21 16:55:50",
+      "ia_creator": "Binney, Horace, 1780-1875. [from old catalog]",
+      "ia_title": "An eulogy on the life character of John Marshall",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1835"
       ]
     },
     {
@@ -445,6 +684,33 @@
         "1790",
         "1861",
         "1865",
+        "1901",
+        "1903"
+      ]
+    },
+    {
+      "identifier": "johnmarshalllif03dillgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "johnmarshalllif03dillgoog.txt",
+      "source_url": "https://archive.org/download/johnmarshalllif03dillgoog/johnmarshalllif03dillgoog_djvu.txt",
+      "sha256": "913644fdb1b8774b31926bdcafd002f4b75ee246de7805f523f412620879eede",
+      "bytes": 1183893,
+      "words": 173833,
+      "fetched_at": "2026-08-12T13:52:38",
+      "ia_date": "1903",
+      "ia_year": "1903",
+      "ia_publicdate": "2009-05-02 17:14:43",
+      "ia_creator": "Dillon, John Forrest, 1831-1914, [from old catalog] ed",
+      "ia_title": "John Marshall; life, character and judicial services as portrayed in the centenary and memorial addresses and proceedings throughout the United States on Marshall day, 1901",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1755",
+        "1797",
+        "1829",
+        "1831",
+        "1891",
+        "1898",
         "1901",
         "1903"
       ]
@@ -1444,6 +1710,30 @@
         "1852",
         "1926",
         "2011"
+      ]
+    },
+    {
+      "identifier": "lifeofjohnmarsha0004albe_n7d4",
+      "status": "已取回",
+      "note": "",
+      "file": "lifeofjohnmarsha0004albe_n7d4.txt",
+      "source_url": "https://archive.org/download/lifeofjohnmarsha0004albe_n7d4/lifeofjohnmarsha0004albe_n7d4_djvu.txt",
+      "sha256": "814caec6dca799a77f25e3a48f7d3d126f8eb79a1edffcc843d27d3c4d55b2ac",
+      "bytes": 1392444,
+      "words": 225313,
+      "fetched_at": "2026-08-12T13:52:36",
+      "ia_date": "1919",
+      "ia_year": "",
+      "ia_publicdate": "2026-06-27 23:01:44",
+      "ia_creator": "Albert J. Beveridge",
+      "ia_title": "The Life of John Marshall",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1812",
+        "1815",
+        "1818",
+        "1819",
+        "1835"
       ]
     },
     {

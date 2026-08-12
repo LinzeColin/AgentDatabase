@@ -1,0 +1,441 @@
+{
+  "lanes": 5,
+  "去掉纸面道后": 4,
+  "逐道份数": {
+    "writings": 56,
+    "conversations": 4,
+    "expression": 1,
+    "decisions": 12,
+    "timeline": 0,
+    "external": 12
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "ahistorycolonie00marsgoog",
+      "道": "writings",
+      "title": "A history of the colonies planted by the English on the continent of N"
+    },
+    {
+      "identifier": "ahm3974.0001.001.umich.edu",
+      "道": "decisions",
+      "title": "John Marshall, complete constitutional decisions, ed. with annotations"
+    },
+    {
+      "identifier": "bim_eighteenth-century_speech-of-the-hon-john-_marshall-john-chief-ju_1800",
+      "道": "expression",
+      "title": "Speech of the Hon. John Marshall, delivered in the House of Representa"
+    },
+    {
+      "identifier": "bub_gb_F4c8AAAAIAAJ",
+      "道": "decisions",
+      "title": "John Marshall, complete constitutional decisions, ed. with annotations"
+    },
+    {
+      "identifier": "bub_gb_QSAFAAAAYAAJ",
+      "道": "writings",
+      "title": "The life of George Washington : commander in chief of the American for"
+    },
+    {
+      "identifier": "bwb_S0-BPV-382_2",
+      "道": "external",
+      "title": "The Life of John Marshall"
+    },
+    {
+      "identifier": "bwb_S0-CBR-236_2",
+      "道": "external",
+      "title": "The life of John Marshall"
+    },
+    {
+      "identifier": "completeconstitu00marsuoft",
+      "道": "decisions",
+      "title": "Complete constitutional decisions;"
+    },
+    {
+      "identifier": "constitutionald00cottgoog",
+      "道": "decisions",
+      "title": "The constitutional decisions of John Marshall"
+    },
+    {
+      "identifier": "constitutionalde01marsuoft",
+      "道": "decisions",
+      "title": "The constitutional decisions;"
+    },
+    {
+      "identifier": "constitutionalde02marsuoft",
+      "道": "decisions",
+      "title": "The constitutional decisions;"
+    },
+    {
+      "identifier": "cu31924019413545",
+      "道": "external",
+      "title": "The life of John Marshall "
+    },
+    {
+      "identifier": "cu31924024323069",
+      "道": "decisions",
+      "title": "John Marshall : complete constitutional decisions, ed. with annotation"
+    },
+    {
+      "identifier": "cu31924032751632",
+      "道": "conversations",
+      "title": "The political and economic doctrines of John Marshall, who for thirty-"
+    },
+    {
+      "identifier": "cu31924052204165",
+      "道": "external",
+      "title": "The life of John Marshall "
+    },
+    {
+      "identifier": "cu31924052204173",
+      "道": "external",
+      "title": "The life of John Marshall "
+    },
+    {
+      "identifier": "cu31924052204207",
+      "道": "external",
+      "title": "The life of John Marshall "
+    },
+    {
+      "identifier": "cu31924059112304",
+      "道": "external",
+      "title": "The life of John Marshall"
+    },
+    {
+      "identifier": "cu31924059112312",
+      "道": "external",
+      "title": "The life of John Marshall"
+    },
+    {
+      "identifier": "cu31924059112320",
+      "道": "external",
+      "title": "The life of John Marshall "
+    },
+    {
+      "identifier": "eulogyonlifechar00binn",
+      "道": "external",
+      "title": "An eulogy on the life character of John Marshall"
+    },
+    {
+      "identifier": "historyofcolonie00mars",
+      "道": "writings",
+      "title": "A history of the colonies planted by the English on the continent of N"
+    },
+    {
+      "identifier": "historyofcolonie01mars",
+      "道": "writings",
+      "title": "A history of the colonies planted by the English on the continent of N"
+    },
+    {
+      "identifier": "india.history.resource.17702",
+      "道": "writings",
+      "title": "The Life of George Washington, in Five Volumes, Vol. V"
+    },
+    {
+      "identifier": "johnmarshallcom00dillgoog",
+      "道": "decisions",
+      "title": "John Marshall, complete constitutional decisions, ed. with annotations"
+    },
+    {
+      "identifier": "johnmarshallcom00marsgoog",
+      "道": "decisions",
+      "title": "John Marshall, complete constitutional decisions"
+    },
+    {
+      "identifier": "johnmarshallcom01marsgoog",
+      "道": "decisions",
+      "title": "John Marshall, complete constitutional decisions"
+    },
+    {
+      "identifier": "johnmarshalllif03dillgoog",
+      "道": "external",
+      "title": "John Marshall; life, character and judicial services as portrayed in t"
+    },
+    {
+      "identifier": "johnmarshallnewintro00marsrich",
+      "道": "writings",
+      "title": "John Marshall"
+    },
+    {
+      "identifier": "lifegeorgewashi00marsgoog",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifegeorgewashi00washgoog",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifegeorgewashi01marsgoog",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifegeorgewashi01washgoog",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifegeorgewashi02marsgoog",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifegeorgewashi02washgoog",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifegeorgewashi03marsgoog",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifegeorgewashi03washgoog",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifegeorgewashi04washgoog",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifegeorgewashi05washgoog",
+      "道": "writings",
+      "title": "The life of George Washington : commander in chief of the American for"
+    },
+    {
+      "identifier": "lifegeorgewashi06washgoog",
+      "道": "writings",
+      "title": "The life of George Washington : commander in chief of the American for"
+    },
+    {
+      "identifier": "lifegeorgewashi07washgoog",
+      "道": "writings",
+      "title": "The life of George Washington,: Commander in Chief of the American for"
+    },
+    {
+      "identifier": "lifegeorgewashi08washgoog",
+      "道": "writings",
+      "title": "The life of George Washington : commander in chief of the American for"
+    },
+    {
+      "identifier": "lifeof01georgewashmars",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeof03georgewashmars",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeof05georgewashmars",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeofgeorgew02marsiala",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeofgeorgewash0000mars",
+      "道": "writings",
+      "title": "The life of George Washington : commander in chief of the American for"
+    },
+    {
+      "identifier": "lifeofgeorgewash0002mars",
+      "道": "writings",
+      "title": "The life of George Washington : commander in chief of the American for"
+    },
+    {
+      "identifier": "lifeofgeorgewash001mars",
+      "道": "writings",
+      "title": "The life of George Washington : Commander in Chief of the American for"
+    },
+    {
+      "identifier": "lifeofgeorgewash002mars",
+      "道": "writings",
+      "title": "The life of George Washington : Commander in Chief of the American for"
+    },
+    {
+      "identifier": "lifeofgeorgewash003mars",
+      "道": "writings",
+      "title": "The life of George Washington : Commander in Chief of the American for"
+    },
+    {
+      "identifier": "lifeofgeorgewash004mars",
+      "道": "writings",
+      "title": "The life of George Washington : Commander in Chief of the American for"
+    },
+    {
+      "identifier": "lifeofgeorgewash005mars",
+      "道": "writings",
+      "title": "The life of George Washington : Commander in Chief of the American for"
+    },
+    {
+      "identifier": "lifeofgeorgewash00mars",
+      "道": "writings",
+      "title": "The life of George Washington"
+    },
+    {
+      "identifier": "lifeofgeorgewash00marsuoft",
+      "道": "writings",
+      "title": "The life of George Washington, written for the use of schools"
+    },
+    {
+      "identifier": "lifeofgeorgewash01mars2",
+      "道": "writings",
+      "title": "The life of George Washington : commander in chief of the American for"
+    },
+    {
+      "identifier": "lifeofgeorgewash01mars_0",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeofgeorgewash01mars_1",
+      "道": "writings",
+      "title": "The life of George Washington : commander in chief of the American for"
+    },
+    {
+      "identifier": "lifeofgeorgewash01marsiala",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeofgeorgewash01marsuoft",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeofgeorgewash02mars",
+      "道": "writings",
+      "title": "The life of George Washington : commander in chief of the American for"
+    },
+    {
+      "identifier": "lifeofgeorgewash02mars_0",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeofgeorgewash02mars_1",
+      "道": "writings",
+      "title": "The life of George Washington : commander in chief of the American for"
+    },
+    {
+      "identifier": "lifeofgeorgewash02marsiala",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeofgeorgewash02marsuoft",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeofgeorgewash04marsiala",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeofgeorgewash05marsiala",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeofgeorgewash06mars",
+      "道": "writings",
+      "title": "The life of George Washington"
+    },
+    {
+      "identifier": "lifeofgeorgewash1860mars",
+      "道": "writings",
+      "title": "The life of George Washington"
+    },
+    {
+      "identifier": "lifeofgeorgewash1926mars",
+      "道": "writings",
+      "title": "The life of George Washington, commander in chief of the American forc"
+    },
+    {
+      "identifier": "lifeofjohnmarsha0004albe_n7d4",
+      "道": "external",
+      "title": "The Life of John Marshall"
+    },
+    {
+      "identifier": "marshallchiefjust00marsrich",
+      "道": "conversations",
+      "title": "The political and economic doctrines of John Marshall, who for thirty-"
+    },
+    {
+      "identifier": "opinionofthesupr29513gut",
+      "道": "decisions",
+      "title": "Opinion of the Supreme Court of the United States, at January Term, 18"
+    },
+    {
+      "identifier": "opinionsoflatech00mars",
+      "道": "decisions",
+      "title": "Opinions of the late chief justice of the United States, John Marshall"
+    },
+    {
+      "identifier": "plantedcolonies00marsrich",
+      "道": "writings",
+      "title": "A history of the colonies planted by the English on the continent of N"
+    },
+    {
+      "identifier": "politicalandeco02ostegoog",
+      "道": "conversations",
+      "title": "The political and economic doctrines of John Marshall, who for thirty-"
+    },
+    {
+      "identifier": "politicaleconomi00mars",
+      "道": "writings",
+      "title": "The political and economic doctrines"
+    },
+    {
+      "identifier": "politicaleconomi00marsrich",
+      "道": "conversations",
+      "title": "The political and economic doctrines of John Marshall, who for thirty-"
+    },
+    {
+      "identifier": "thelifeofgeorgew18591gut",
+      "道": "writings",
+      "title": "The Life of George Washington, Vol. 1 (of 5): Commander in Chief of th"
+    },
+    {
+      "identifier": "thelifeofgeorgew18592gut",
+      "道": "writings",
+      "title": "The Life of George Washington, Vol. 2 (of 5): Commander in Chief of th"
+    },
+    {
+      "identifier": "thelifeofgeorgew18593gut",
+      "道": "writings",
+      "title": "The Life of George Washington, Vol. 3 (of 5): Commander in Chief of th"
+    },
+    {
+      "identifier": "thelifeofgeorgew18594gut",
+      "道": "writings",
+      "title": "The Life of George Washington, Vol. 4 (of 5): Commander in Chief of th"
+    },
+    {
+      "identifier": "thelifeofgeorgew18595gut",
+      "道": "writings",
+      "title": "The Life of George Washington, Vol. 5 (of 5): Commander in Chief of th"
+    },
+    {
+      "identifier": "thelifeofgeorgew28859gut",
+      "道": "writings",
+      "title": "The Life Of George Washington A Linked Index to the Project Gutenberg "
+    },
+    {
+      "identifier": "writingsjohnmar01marsgoog",
+      "道": "writings",
+      "title": "The writings of John Marshall, late chief justice of the United States"
+    }
+  ]
+}

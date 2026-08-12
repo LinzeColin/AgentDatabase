@@ -1,0 +1,381 @@
+{
+  "lanes": 2,
+  "去掉纸面道后": 2,
+  "逐道份数": {
+    "writings": 71,
+    "conversations": 0,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 0,
+    "external": 2
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "00140496bsb",
+      "道": "writings",
+      "title": "Зрѣлище вселенныя: на латинскомъ, россїйскомъ и нѣмецкомъ языкахъ, изд"
+    },
+    {
+      "identifier": "10026103bsb",
+      "道": "writings",
+      "title": "Martyrologium Bohemicum oder die Böhmische Verfolgungs-Geschichte vom "
+    },
+    {
+      "identifier": "10261284bsb",
+      "道": "writings",
+      "title": "Das wiedergefundene Paradies"
+    },
+    {
+      "identifier": "10270188bsb",
+      "道": "writings",
+      "title": "Übergang aus dem Labyrinth der Welt in das Paradis des Hertzens, So eh"
+    },
+    {
+      "identifier": "10448790bsb",
+      "道": "writings",
+      "title": "Kurzgefaßte Kirchen-Historie der Böhmischen Brüder"
+    },
+    {
+      "identifier": "10448791bsb",
+      "道": "writings",
+      "title": "Erste Liebe"
+    },
+    {
+      "identifier": "10584856bsb",
+      "道": "writings",
+      "title": "Onomastikon peri tu pantos Iōannu Amōsu Komeniu"
+    },
+    {
+      "identifier": "10585771bsb",
+      "道": "writings",
+      "title": "Lexicon Atriale latino-latinum"
+    },
+    {
+      "identifier": "10779570bsb",
+      "道": "writings",
+      "title": "Janua linguarum reserata aurea: = Zlatá brána gazykůw otewřená = Neu e"
+    },
+    {
+      "identifier": "10912059bsb",
+      "道": "writings",
+      "title": "Joh. Amos Comenii Orbis Sensualium Picti Pars ...: Hoc est: Omnium. 1:"
+    },
+    {
+      "identifier": "11092509bsb",
+      "道": "writings",
+      "title": "Kurz-gefaßte Kirchen-Historie Der Böhmischen Brüder"
+    },
+    {
+      "identifier": "11104945bsb",
+      "道": "writings",
+      "title": "Joh. Amos Comenii Orbis Sensualium Picti Pars ...: Hoc est: Omnium fun"
+    },
+    {
+      "identifier": "ComeniusDidatticaMagna",
+      "道": "writings",
+      "title": "Didattica Magna"
+    },
+    {
+      "identifier": "OrbisPictusGraeco-latinus",
+      "道": "writings",
+      "title": "Orbis Pictus Graeco-Latinus"
+    },
+    {
+      "identifier": "asomrnpekladyal00jiregoog",
+      "道": "writings",
+      "title": "Časoměrné překlady žalmův Jana Amosa Komenského, pak Jana Blaho"
+    },
+    {
+      "identifier": "b21782386",
+      "道": "writings",
+      "title": "Des Johann Amos Comenius Entwurf der nach dem Gottlichen Lichte umgest"
+    },
+    {
+      "identifier": "b32990431",
+      "道": "writings",
+      "title": "I.A. Comenii Ianua linguarum reserata aurea; : sive seminarium linguar"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_conatuum-comenianorum-pr_komensk-jan-amos_1637",
+      "道": "writings",
+      "title": "Conatuum Comenianorum praeludia ...  1637"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_janua-linguarum-reserata_komensky-jan-amos_1636",
+      "道": "writings",
+      "title": "Janua linguarum reserata: or a seed-plot of all languages ...  1636"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_joh-amos-comenii-vestib_comenius-johann-amos_1647",
+      "道": "writings",
+      "title": "Joh. Amos Comenii Vestibulum ...  1647"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1631",
+      "道": "writings",
+      "title": "Porta linguarum trilinguis reserata ...  1631"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1631_0",
+      "道": "writings",
+      "title": "Porta linguarum trilinguis reserata...  1631"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1633",
+      "道": "writings",
+      "title": "Porta linguarum trilinguis, reserata et aperta.  1633"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1637",
+      "道": "writings",
+      "title": "Porta linguarum trilinguis, Reserata & Aperta: ...  1637"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1639",
+      "道": "writings",
+      "title": "Porta linguarum trilinguis, Reserata & Aperta: ...  1639"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1639_0",
+      "道": "writings",
+      "title": "Porta linguarum trilinguis reserata & aperata:...  1639"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensky-jan-amos_1631",
+      "道": "writings",
+      "title": "Porta linguarum trilinguis reserata et aperta.  1631"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_porta-sapienti-reserata_komensky-jan-amos_1637",
+      "道": "writings",
+      "title": "Porta Sapientiæ reserata: sive Pansophiae Christianae Seminarium.  163"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_reverendi-et-clarissimi-_komensk-jan-amos_1638",
+      "道": "writings",
+      "title": "Reverendi et clarissimi viri Johannis Amos Comenii Pansophiæ prodromus"
+    },
+    {
+      "identifier": "bim_early-english-books-1475-1640_the-gate-of-tongues-unlo_komensky-jan-amos_1633",
+      "道": "writings",
+      "title": "The gate of tongues unlocked, ...  1633"
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_a-continuation-of-mr-jo_comenius-johann-amos_1648",
+      "道": "writings",
+      "title": "A continuation of mr. john-amos-comenius school endeavours, ...  1648"
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_a-generall-table-of-euro_comenius-johann-amos_1670",
+      "道": "writings",
+      "title": "A generall table of Europe,...  1670"
+    },
+    {
+      "identifier": "bim_eighteenth-century_joh-amos-commenii-orbis_comenius-johann-amos_1705",
+      "道": "writings",
+      "title": "Joh. Amos Commenii orbis sensualium pictus: hoc est, omnium principali"
+    },
+    {
+      "identifier": "bub_gb_2x85AQAAMAAJ",
+      "道": "writings",
+      "title": "Jana A. Komenského Nejnovější metoda jazyků, na základech didakt"
+    },
+    {
+      "identifier": "bub_gb_34RCAQAAMAAJ",
+      "道": "writings",
+      "title": "Padagogische Schriften"
+    },
+    {
+      "identifier": "bub_gb_34ZDAQAAMAAJ",
+      "道": "writings",
+      "title": "Jana Amosa Komenského Uměmí kazatelské"
+    },
+    {
+      "identifier": "bub_gb_3nVBAQAAMAAJ",
+      "道": "writings",
+      "title": "Des Johann Amos Comenius Schola Ludus : d.i. Die Schule als Spiel."
+    },
+    {
+      "identifier": "bub_gb_64syAQAAMAAJ",
+      "道": "writings",
+      "title": "[Orbis pictus] graeco-latinus, usui studiosae juventutis accommodatus"
+    },
+    {
+      "identifier": "bub_gb_6LOgAAAAMAAJ",
+      "道": "writings",
+      "title": "Spisy Jana Amosa Komenského"
+    },
+    {
+      "identifier": "bub_gb_AakZAAAAYAAJ",
+      "道": "writings",
+      "title": "Hystoria o těžkých Protiwenstwjch Cýrkwe České : hned od počátku gegjh"
+    },
+    {
+      "identifier": "bub_gb_DD1KAAAAYAAJ",
+      "道": "writings",
+      "title": "Spisy Jana Amosa Komenského"
+    },
+    {
+      "identifier": "bub_gb_FTtFAAAAYAAJ",
+      "道": "writings",
+      "title": "Jana Amosa Komenského Didaktika"
+    },
+    {
+      "identifier": "bub_gb_Fx1BAAAAcAAJ",
+      "道": "writings",
+      "title": "Kurzgefaßte Kirchen-Historie der Böhmischen Brüder"
+    },
+    {
+      "identifier": "bub_gb_GoAWAAAAIAAJ",
+      "道": "writings",
+      "title": "Neuer Orbis pictus für die Jugend : oder Schauplatz der Natur, der Ku"
+    },
+    {
+      "identifier": "bub_gb_GyAoAAAAYAAJ",
+      "道": "writings",
+      "title": "Labirynt swěta a rág srdce : to gest swětlé wymalowanj, kterak w tom s"
+    },
+    {
+      "identifier": "bub_gb_HiRbAAAAcAAJ",
+      "道": "writings",
+      "title": "[Orbis sensualium pictus]"
+    },
+    {
+      "identifier": "bub_gb_JvJCAQAAMAAJ",
+      "道": "writings",
+      "title": "Johann Amos Comnenius lehrkunst"
+    },
+    {
+      "identifier": "bub_gb_MAITAAAAIAAJ",
+      "道": "writings",
+      "title": "Neuer Orbis Pictus für die Jugend, oder Schauplatz der Natur, der Kuns"
+    },
+    {
+      "identifier": "bub_gb_MrNBAAAAYAAJ",
+      "道": "writings",
+      "title": "Didaktika Jana Amosa Komenského. Téhož 1. Nawržení krátké o obnowení š"
+    },
+    {
+      "identifier": "bub_gb_SLlKAAAAYAAJ",
+      "道": "writings",
+      "title": "Korrespondence. Listy Komenského a vrstevníků jeho"
+    },
+    {
+      "identifier": "bub_gb_WGNcAAAAcAAJ",
+      "道": "writings",
+      "title": "Jo. Amos Comenii Janua linguarum aurea reserata in linguam graecam"
+    },
+    {
+      "identifier": "bub_gb__A5WAAAAcAAJ",
+      "道": "writings",
+      "title": "Kurz-gefaßte Kirchen-Historie Der Böhmischen Brüder"
+    },
+    {
+      "identifier": "bub_gb_gzBQAAAAcAAJ",
+      "道": "writings",
+      "title": "Ianua aurea"
+    },
+    {
+      "identifier": "bub_gb_iaoPAAAAQAAJ",
+      "道": "writings",
+      "title": "La Porte des langues ouverte, pour apprendre la langue latine, la lang"
+    },
+    {
+      "identifier": "bub_gb_sqpdAAAAcAAJ",
+      "道": "writings",
+      "title": "J.A. Comenii Orbis Pictus, etc. Lat. and Germ"
+    },
+    {
+      "identifier": "bub_gb_uhBcAAAAcAAJ",
+      "道": "writings",
+      "title": "Ausgewählte Schriften (Comenius Werke 2. Band)"
+    },
+    {
+      "identifier": "bub_gb_yp8AAAAAYAAJ",
+      "道": "writings",
+      "title": "Joh. Amos Comenii Orbis sensualium pictus, hoc est, Omnium principaliu"
+    },
+    {
+      "identifier": "bub_gb_zYpUAAAAcAAJ",
+      "道": "writings",
+      "title": "Unum necessarium scire, quid sibi sit necessarium in vita, et morte, e"
+    },
+    {
+      "identifier": "dbc.wroc.pl.BOss_XVII_3922",
+      "道": "writings",
+      "title": "Januae LL. Comenianae : Ex Decem (à L ad LX) Capitibus Mathematicam ex"
+    },
+    {
+      "identifier": "dbc.wroc.pl.BOss_XVII_3923",
+      "道": "writings",
+      "title": "Artium Rudiorum, Subtiliorum, Subtilissimarum : seu Actionum Humanae I"
+    },
+    {
+      "identifier": "derrheinalsschic00paqu",
+      "道": "external",
+      "title": "Der Rhein als Schicksal : oder, Das Problem der Völker"
+    },
+    {
+      "identifier": "didaktikanawren00comeuoft",
+      "道": "writings",
+      "title": "Didaktika. Nawrení krátké o obnowení kol w Králowstwí eském. Píslowí i"
+    },
+    {
+      "identifier": "grosseunterricht00comeuoft",
+      "道": "writings",
+      "title": "Grosse Unterrichtslehre"
+    },
+    {
+      "identifier": "jbc.bj.uj.edu.pl.DIGSTDR000361",
+      "道": "writings",
+      "title": "Johannis Lasitii [...] Historiæ De Origine Et Rebus gestis Fratrum Boh"
+    },
+    {
+      "identifier": "johamoscommeniio00come",
+      "道": "writings",
+      "title": "Joh. Amos Commenii Orbis sensualium pictus: : hoc est, Omnium principa"
+    },
+    {
+      "identifier": "labyrinthofworld00comeuoft",
+      "道": "writings",
+      "title": "The labyrinth of the world and the paradise of the heart"
+    },
+    {
+      "identifier": "obrazjednotyesko00lasi",
+      "道": "external",
+      "title": "Obraz Jednoty eskobratrské ili Jana Lasitského Historie o puvodu a ine"
+    },
+    {
+      "identifier": "orbispictusofjoh00comeiala",
+      "道": "writings",
+      "title": "The Orbis pictus of John Amos Comenius"
+    },
+    {
+      "identifier": "orbispictusswtwo0000come",
+      "道": "writings",
+      "title": "Orbis pictus = Swět w obrazćh. Die Welt in Bildern. Le monde en tablea"
+    },
+    {
+      "identifier": "rulesoflife00come",
+      "道": "writings",
+      "title": "Rules of life"
+    },
+    {
+      "identifier": "schoolofinfancye00comeiala",
+      "道": "writings",
+      "title": "The school of infancy : an essay on the education of youth, during the"
+    },
+    {
+      "identifier": "thelabyrinthofth00comeuoft",
+      "道": "writings",
+      "title": "The labyrinth of the world and the paradise of the heart"
+    },
+    {
+      "identifier": "theorbispictus28299gut",
+      "道": "writings",
+      "title": "The Orbis Pictus"
+    }
+  ]
+}

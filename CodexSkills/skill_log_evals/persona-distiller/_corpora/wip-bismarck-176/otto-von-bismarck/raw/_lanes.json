@@ -1,0 +1,351 @@
+{
+  "lanes": 5,
+  "去掉纸面道后": 5,
+  "逐道份数": {
+    "writings": 16,
+    "conversations": 19,
+    "expression": 14,
+    "decisions": 0,
+    "timeline": 11,
+    "external": 7
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "00078127bsb",
+      "道": "conversations",
+      "title": "Bismarck-Briefe: I. Familien-Briefe ; II. Politische Briefe"
+    },
+    {
+      "identifier": "10558638bsb",
+      "道": "expression",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. 1"
+    },
+    {
+      "identifier": "10558639bsb",
+      "道": "expression",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. 2"
+    },
+    {
+      "identifier": "10629304bsb",
+      "道": "expression",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. 3"
+    },
+    {
+      "identifier": "11166432bsb",
+      "道": "expression",
+      "title": "Vier Reden zur äußeren Politik. 4"
+    },
+    {
+      "identifier": "11281959bsb",
+      "道": "expression",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. 1"
+    },
+    {
+      "identifier": "11281960bsb",
+      "道": "expression",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. 2"
+    },
+    {
+      "identifier": "11281961bsb",
+      "道": "expression",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. 3"
+    },
+    {
+      "identifier": "11332890bsb",
+      "道": "conversations",
+      "title": "Bismarckbriefe: 1844-1870 ; Originalbriefe Bismarcks an seine Gemahlin"
+    },
+    {
+      "identifier": "11358069bsb",
+      "道": "external",
+      "title": "Ausgewählte Reden des Fürsten von Bismarck: mit einer biographischen S"
+    },
+    {
+      "identifier": "11358070bsb",
+      "道": "external",
+      "title": "Ausgewählte Reden des Fürsten von Bismarck: mit einer biographischen S"
+    },
+    {
+      "identifier": "11358071bsb",
+      "道": "external",
+      "title": "Ausgewählte Reden des Fürsten von Bismarck: mit einer biographischen S"
+    },
+    {
+      "identifier": "11358072bsb",
+      "道": "external",
+      "title": "Ausgewählte Reden des Fürsten von Bismarck: mit einer biographischen S"
+    },
+    {
+      "identifier": "30081009592969",
+      "道": "writings",
+      "title": "Die gesammelten Werke"
+    },
+    {
+      "identifier": "30081009592985",
+      "道": "writings",
+      "title": "Die gesammelten Werke"
+    },
+    {
+      "identifier": "30081009592993",
+      "道": "writings",
+      "title": "Die gesammelten Werke"
+    },
+    {
+      "identifier": "30081009593009",
+      "道": "writings",
+      "title": "Die gesammelten Werke"
+    },
+    {
+      "identifier": "30081009593033",
+      "道": "writings",
+      "title": "Die gesammelten Werke"
+    },
+    {
+      "identifier": "30081009593066",
+      "道": "writings",
+      "title": "Die gesammelten Werke"
+    },
+    {
+      "identifier": "30081009593074",
+      "道": "writings",
+      "title": "Die gesammelten Werke"
+    },
+    {
+      "identifier": "30081009593090",
+      "道": "writings",
+      "title": "Die gesammelten Werke"
+    },
+    {
+      "identifier": "30081009593108",
+      "道": "writings",
+      "title": "Die gesammelten Werke"
+    },
+    {
+      "identifier": "anhangzudengeda01bismgoog",
+      "道": "timeline",
+      "title": "Anhang zu den Gedanken und Erinnerungen"
+    },
+    {
+      "identifier": "anhangzudengeda01schlgoog",
+      "道": "timeline",
+      "title": "Anhang zu den Gedanken und Erinnerungen von Otto Fürst von Bismarck"
+    },
+    {
+      "identifier": "anhangzudengedan02bism",
+      "道": "timeline",
+      "title": "Anhang zu den Gedanken und Erinnerungen"
+    },
+    {
+      "identifier": "bismarckbrief00bism",
+      "道": "conversations",
+      "title": "Bismarckbriefe 1836-1873"
+    },
+    {
+      "identifier": "bismarckbriefe00bism",
+      "道": "conversations",
+      "title": "Bismarckbriefe 1836-1873"
+    },
+    {
+      "identifier": "bismarckbriefe00kohlgoog",
+      "道": "conversations",
+      "title": "Bismarckbriefe 1836-1873"
+    },
+    {
+      "identifier": "bismarckbriefeo00bismgoog",
+      "道": "conversations",
+      "title": "Bismarckbriefe, 1844-1870: Originalbriefe Bismarcks an seine Gemahlin,"
+    },
+    {
+      "identifier": "bismarckforsilve00bism",
+      "道": "writings",
+      "title": "Bismarck for silver [microform] : he says independent free coinage wou"
+    },
+    {
+      "identifier": "bismarckmanands00vongoog",
+      "道": "timeline",
+      "title": "Bismarck, the man and the statesman; being the reflections and reminis"
+    },
+    {
+      "identifier": "bismarckmanstat03butlgoog",
+      "道": "timeline",
+      "title": "Bismarck, the man & the statesman; being the reflections and reminisce"
+    },
+    {
+      "identifier": "bismarckmanstate01bism",
+      "道": "timeline",
+      "title": "Bismarck, the man & the statesman; being the reflections and reminisce"
+    },
+    {
+      "identifier": "bismarckmanstate01bismiala",
+      "道": "conversations",
+      "title": "Bismarck's letters to his wife from the seat of war, 1870-1871;"
+    },
+    {
+      "identifier": "bismarckmanstate01bismuoft",
+      "道": "timeline",
+      "title": "Bismarck, the man and the statesman; being the reflections and reminis"
+    },
+    {
+      "identifier": "bismarckmanstate02bismuoft",
+      "道": "timeline",
+      "title": "Bismarck, the man and the statesman; being the reflections and reminis"
+    },
+    {
+      "identifier": "bismarckreden18400bismuoft",
+      "道": "expression",
+      "title": "Bismarckreden, 1847-1895. Hrsg. von Horst Kohl"
+    },
+    {
+      "identifier": "bismarcksbriefes00bism",
+      "道": "conversations",
+      "title": "(Bismarcks) Briefe an Schwester und Schwager;"
+    },
+    {
+      "identifier": "bismarcksletter00bismgoog",
+      "道": "conversations",
+      "title": "Bismarck's letters to his wife, from the seat of war, 1870-1871. Trans"
+    },
+    {
+      "identifier": "bismarcksstaats00rogoog",
+      "道": "writings",
+      "title": "Bismarcks staatsrecht : die stellungnahme des fürsten Otto von Bismar"
+    },
+    {
+      "identifier": "bismarckstableta01bism_0",
+      "道": "conversations",
+      "title": "Bismarck's table-talk"
+    },
+    {
+      "identifier": "bismarckundste00bism",
+      "道": "writings",
+      "title": "Bismarck und Österreich"
+    },
+    {
+      "identifier": "briefeottosvonbi00bismuoft",
+      "道": "conversations",
+      "title": "Briefe Ottos von Bismarck an Schwester und Schwager: Malwine von Arnim"
+    },
+    {
+      "identifier": "briefeseinebarau00bismuoft",
+      "道": "conversations",
+      "title": "Briefe an seine Baraut und Gattin;"
+    },
+    {
+      "identifier": "bub_gb_-a0PAAAAQAAJ",
+      "道": "writings",
+      "title": "Bismarck-Portefeuille"
+    },
+    {
+      "identifier": "bub_gb_BbIPAAAAQAAJ",
+      "道": "writings",
+      "title": "Bismarck-Portefeuille"
+    },
+    {
+      "identifier": "bub_gb_BkIPAAAAYAAJ",
+      "道": "expression",
+      "title": "Die politischen reden des fürsten Bismarck [microform]. Historischkrit"
+    },
+    {
+      "identifier": "bub_gb_CWAPAAAAYAAJ",
+      "道": "conversations",
+      "title": "Lettres politiques confidentielles de M. de Bismarck, 1851-1858"
+    },
+    {
+      "identifier": "bub_gb_NjNDAQAAMAAJ",
+      "道": "writings",
+      "title": "Bismarck-Portefeuille"
+    },
+    {
+      "identifier": "cihm_77460",
+      "道": "conversations",
+      "title": "Bismarck's letters to his wife from the seat of war, 1870-1871 [microf"
+    },
+    {
+      "identifier": "correspondancedi01bism",
+      "道": "conversations",
+      "title": "Correspondance diplomatique de m. de Bismarck (1851-1859)"
+    },
+    {
+      "identifier": "correspondenceof00bismuoft",
+      "道": "conversations",
+      "title": "The correspondence of William I. and Bismarck : with other letters fro"
+    },
+    {
+      "identifier": "correspondenceof02bismuoft",
+      "道": "conversations",
+      "title": "The correspondence of William I. and Bismarck : with other letters fro"
+    },
+    {
+      "identifier": "diepolitischenre01bismuoft",
+      "道": "expression",
+      "title": "Die politischen Reden;"
+    },
+    {
+      "identifier": "diepolitischenre02bismuoft",
+      "道": "expression",
+      "title": "Die politischen Reden;"
+    },
+    {
+      "identifier": "dieredendesgraf00bismgoog",
+      "道": "expression",
+      "title": "Die Reden des Grafen von Bismarck-Schönhausen. Dritte Sammlung, 1869-"
+    },
+    {
+      "identifier": "erinnerungundged00bism",
+      "道": "writings",
+      "title": "Erinnerung und Gedanke"
+    },
+    {
+      "identifier": "frstbismarcksei01bismgoog",
+      "道": "external",
+      "title": "Fürst Bismarck : sein politisches Leben und Wirken urkundlich in That"
+    },
+    {
+      "identifier": "furstbismarckna02penz",
+      "道": "external",
+      "title": "Fürst Bismarck nach seiner Entlassung : Leben und Politik des Fürsten "
+    },
+    {
+      "identifier": "furstbismarckna03penz",
+      "道": "external",
+      "title": "Fürst Bismarck nach seiner Entlassung : Leben und Politik des Fürsten "
+    },
+    {
+      "identifier": "gedankenunderin00bism",
+      "道": "timeline",
+      "title": "Gedanken und erinnerungen;"
+    },
+    {
+      "identifier": "gedankenunderinn01bism",
+      "道": "timeline",
+      "title": "Gedanken und Erinnerungen"
+    },
+    {
+      "identifier": "gedankenunderinn03bism",
+      "道": "timeline",
+      "title": "Gedanken und Erinnerungen"
+    },
+    {
+      "identifier": "india.history.resource.85205",
+      "道": "conversations",
+      "title": "Prince Bismarck’s Letters to his Wife, his Sister and others, from 184"
+    },
+    {
+      "identifier": "lovelettersofbis00bismiala",
+      "道": "conversations",
+      "title": "The love letters of Bismarck; being letters to his fiancée and wife, 1"
+    },
+    {
+      "identifier": "professionalrec00liargoog",
+      "道": "expression",
+      "title": "Die politischen Reden des Fürsten Bismarck. Historisch-kritische Gesa"
+    },
+    {
+      "identifier": "vierredenzurus00bismiala",
+      "道": "expression",
+      "title": "Vier Reden zur äusseren Politik"
+    }
+  ]
+}

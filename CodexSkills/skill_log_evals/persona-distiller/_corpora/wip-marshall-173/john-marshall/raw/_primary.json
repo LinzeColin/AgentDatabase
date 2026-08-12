@@ -1,12 +1,12 @@
 {
-  "总数": 73,
+  "总数": 85,
   "计数": {
     "一手": 73,
-    "二手": 0,
+    "二手": 12,
     "需人判": 0
   },
-  "一手占比下界": 1.0,
-  "一手占比上界": 1.0,
+  "一手占比下界": 0.8588,
+  "一手占比上界": 0.8588,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -50,6 +50,22 @@
       "words": 240975
     },
     {
+      "identifier": "bwb_S0-BPV-382_2",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The Life of John Marshall",
+      "creator": "Albert J. Beveridge",
+      "words": 173035
+    },
+    {
+      "identifier": "bwb_S0-CBR-236_2",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The life of John Marshall",
+      "creator": "Albert J. Beveridge",
+      "words": 173703
+    },
+    {
       "identifier": "completeconstitu00marsuoft",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
@@ -82,6 +98,14 @@
       "words": 133273
     },
     {
+      "identifier": "cu31924019413545",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The life of John Marshall ",
+      "creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "words": 327019
+    },
+    {
       "identifier": "cu31924024323069",
       "档": "一手",
       "依据": "目标为第一作者，题名无「写他」的标记",
@@ -96,6 +120,62 @@
       "title": "The political and economic doctrines of John Marshall, who for thirty-four years",
       "creator": "Marshall, John, 1755-1835; Oster, John Edward, ed",
       "words": 140450
+    },
+    {
+      "identifier": "cu31924052204165",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The life of John Marshall ",
+      "creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "words": 153572
+    },
+    {
+      "identifier": "cu31924052204173",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The life of John Marshall ",
+      "creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "words": 193776
+    },
+    {
+      "identifier": "cu31924052204207",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The life of John Marshall ",
+      "creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "words": 326915
+    },
+    {
+      "identifier": "cu31924059112304",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The life of John Marshall",
+      "creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "words": 193713
+    },
+    {
+      "identifier": "cu31924059112312",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The life of John Marshall",
+      "creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "words": 193473
+    },
+    {
+      "identifier": "cu31924059112320",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The life of John Marshall ",
+      "creator": "Beveridge, Albert Jeremiah, 1862-1927",
+      "words": 226729
+    },
+    {
+      "identifier": "eulogyonlifechar00binn",
+      "档": "二手",
+      "依据": "题名含「eulog」且含目标姓名",
+      "title": "An eulogy on the life character of John Marshall",
+      "creator": "Binney, Horace, 1780-1875. [from old catalog]",
+      "words": 19675
     },
     {
       "identifier": "historyofcolonie00mars",
@@ -144,6 +224,14 @@
       "title": "John Marshall, complete constitutional decisions",
       "creator": "Marshall, John, 1755-1835; Dillon, John Milton, 1868-1911",
       "words": 249217
+    },
+    {
+      "identifier": "johnmarshalllif03dillgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "John Marshall; life, character and judicial services as portrayed in the centena",
+      "creator": "Dillon, John Forrest, 1831-1914, [from old catalog] ed",
+      "words": 173833
     },
     {
       "identifier": "johnmarshallnewintro00marsrich",
@@ -480,6 +568,14 @@
       "title": "The life of George Washington, commander in chief of the American forces, during",
       "creator": "Marshall, John, 1755-1835",
       "words": 126136
+    },
+    {
+      "identifier": "lifeofjohnmarsha0004albe_n7d4",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The Life of John Marshall",
+      "creator": "Albert J. Beveridge",
+      "words": 225313
     },
     {
       "identifier": "marshallchiefjust00marsrich",

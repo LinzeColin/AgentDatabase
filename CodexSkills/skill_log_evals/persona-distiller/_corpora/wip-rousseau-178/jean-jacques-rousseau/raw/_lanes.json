@@ -1,0 +1,446 @@
+{
+  "lanes": 4,
+  "去掉纸面道后": 4,
+  "逐道份数": {
+    "writings": 53,
+    "conversations": 14,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 6,
+    "external": 13
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "10066336bsb",
+      "道": "writings",
+      "title": "J. J. Rousseau's Bekenntnisse: Geschichte seines männlichen Alters. Au"
+    },
+    {
+      "identifier": "10599347bsb",
+      "道": "writings",
+      "title": "J. J. Rousseau's Brief über die Musik: ein Wort, noch gültig für unser"
+    },
+    {
+      "identifier": "10713049bsb",
+      "道": "conversations",
+      "title": "Correspondance. 1"
+    },
+    {
+      "identifier": "10762426bsb",
+      "道": "writings",
+      "title": "Emil oder über die Erziehung. 2"
+    },
+    {
+      "identifier": "10762427bsb",
+      "道": "writings",
+      "title": "Emil oder über die Erziehung. 3"
+    },
+    {
+      "identifier": "10764054bsb",
+      "道": "writings",
+      "title": "Herrn Johann Jacob Rousseaus, Bürgers zu Genf, Aemil oder Von der Erzi"
+    },
+    {
+      "identifier": "11258220bsb",
+      "道": "writings",
+      "title": "Mélanges. 1"
+    },
+    {
+      "identifier": "11718256bsb",
+      "道": "conversations",
+      "title": "Julie oder die neue Heloise: in Briefen zweyer Liebenden, Bewohner ein"
+    },
+    {
+      "identifier": "11918930bsb",
+      "道": "conversations",
+      "title": "Die Neue Heloise oder Briefe zweyer Liebenden, aus einer kleinen Stadt"
+    },
+    {
+      "identifier": "11919281bsb",
+      "道": "writings",
+      "title": "Oeuvres complettes. 27"
+    },
+    {
+      "identifier": "11919322bsb",
+      "道": "conversations",
+      "title": "Ungedruckter Briefwechsel mit Mme Latour de Franqueville und Herrn du "
+    },
+    {
+      "identifier": "1766jjacquesrous00rous",
+      "道": "writings",
+      "title": "J. Jacques Rousseau, citoyen de Généve, a Christophe de Beaumont, Arch"
+    },
+    {
+      "identifier": "1782collectionco10rous",
+      "道": "writings",
+      "title": "Collection complete des oeuvres de J.J. Rousseau, citoyen de Geneve"
+    },
+    {
+      "identifier": "1782collectionco17rous",
+      "道": "writings",
+      "title": "Collection complete des oeuvres de J.J. Rousseau, citoyen de Geneve"
+    },
+    {
+      "identifier": "1791emileoudel02rous",
+      "道": "writings",
+      "title": "Emile; ou, De l'éducation"
+    },
+    {
+      "identifier": "1791emileoudel03rous",
+      "道": "writings",
+      "title": "Emile; ou, De l'éducation"
+    },
+    {
+      "identifier": "1846oeuvrescom02rousuoft",
+      "道": "writings",
+      "title": "Oeuvres complètes. Avec des notes historiques"
+    },
+    {
+      "identifier": "1911lettresind00rous",
+      "道": "conversations",
+      "title": "Lettres inédites de Jean-Jacques Rousseau, à Mmes Boy de La Tour et De"
+    },
+    {
+      "identifier": "31383026610652",
+      "道": "writings",
+      "title": "Emilius and Sophia; or, A new system of education"
+    },
+    {
+      "identifier": "BIUSante_07891x01",
+      "道": "timeline",
+      "title": "Collections complètes des oeuvres de J.J. Rousseau, Citoyen de Genève "
+    },
+    {
+      "identifier": "a1758jjrousseauci00rous",
+      "道": "writings",
+      "title": "J.J. Rousseau citoyen de Genève dans le VIIme. volume de l'Encyclopédi"
+    },
+    {
+      "identifier": "amileoudeldu01rous",
+      "道": "writings",
+      "title": "Émile, ou De l'éducation"
+    },
+    {
+      "identifier": "amileoudeldu02rous",
+      "道": "writings",
+      "title": "Émile, ou De l'éducation"
+    },
+    {
+      "identifier": "amileoudeldu03rous",
+      "道": "writings",
+      "title": "Émile, ou De l'éducation"
+    },
+    {
+      "identifier": "amileoudeldu04rous",
+      "道": "writings",
+      "title": "Émile, ou De l'éducation"
+    },
+    {
+      "identifier": "avisauxgensdelet00rous",
+      "道": "conversations",
+      "title": "Avis aux gens de lettres"
+    },
+    {
+      "identifier": "bekenntnisseunv00hardgoog",
+      "道": "writings",
+      "title": "Bekenntnisse. Unverkürzt aus dem französischen"
+    },
+    {
+      "identifier": "bim_eighteenth-century_a-dialogue-between-a-man_rousseau-jean-jacques_1761",
+      "道": "conversations",
+      "title": "A dialogue between a man of letters and Mr. J. J. Rousseau, on the sub"
+    },
+    {
+      "identifier": "bim_eighteenth-century_an-inquiry-into-the-natu_rousseau-jean-jacques_1791_0",
+      "道": "writings",
+      "title": "An inquiry into the nature of the social contract; or principles of po"
+    },
+    {
+      "identifier": "bim_eighteenth-century_anecdotes-of-the-last-tw_corancez-olivier-de_1798",
+      "道": "external",
+      "title": "Anecdotes of the last twelve years of the life of J.J. Rousseau, origi"
+    },
+    {
+      "identifier": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1787",
+      "道": "conversations",
+      "title": "[Botanique. English]. Letters on the elements of botany.  1787"
+    },
+    {
+      "identifier": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1796",
+      "道": "conversations",
+      "title": "[Botanique. English]. Letters on the elements of botany, addressed to "
+    },
+    {
+      "identifier": "bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_1",
+      "道": "writings",
+      "title": "Eloisa: ...  1784: Vol 1"
+    },
+    {
+      "identifier": "bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_2",
+      "道": "writings",
+      "title": "Eloisa: ...  1784: Vol 2"
+    },
+    {
+      "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_1",
+      "道": "conversations",
+      "title": "Eloisa: or, a series of original letters collected and published by J."
+    },
+    {
+      "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_3_0",
+      "道": "conversations",
+      "title": "Eloisa: or, a series of original letters collected and published by J."
+    },
+    {
+      "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1764_1",
+      "道": "conversations",
+      "title": "Eloisa: or, a series of original letters collected and published by J."
+    },
+    {
+      "identifier": "bim_eighteenth-century_eloisa-or-a-series-of-o_rousseau-jean-jacques_1769_1",
+      "道": "conversations",
+      "title": "Eloisa: or a series of original letters collected and published by J.J"
+    },
+    {
+      "identifier": "bim_eighteenth-century_emile-english-emilius_rousseau-jean-jacques_1767_3",
+      "道": "writings",
+      "title": "[Emile. English] Emilius and Sophia: or, a new system of education. Tr"
+    },
+    {
+      "identifier": "bim_eighteenth-century_emilius-and-sophia-or-_rousseau-jean-jacques_1783",
+      "道": "writings",
+      "title": "Emilius and Sophia; or, a new system of education. Translated from the"
+    },
+    {
+      "identifier": "bub_gb_3DbL7IDH2jIC",
+      "道": "writings",
+      "title": "Petits chefs-d'oeuvre"
+    },
+    {
+      "identifier": "bub_gb_OXcpAAAAYAAJ",
+      "道": "writings",
+      "title": "Emil, oder Über die erziehung;"
+    },
+    {
+      "identifier": "bub_gb_yN1MAAAAcAAJ",
+      "道": "writings",
+      "title": "Emil oder über die Erziehung"
+    },
+    {
+      "identifier": "bub_gb_zN1MAAAAcAAJ",
+      "道": "writings",
+      "title": "Emil oder über die Erziehung"
+    },
+    {
+      "identifier": "ceuvrescomplete00troigoog",
+      "道": "writings",
+      "title": "Œuvres complètes"
+    },
+    {
+      "identifier": "collectioncompl31rousgoog",
+      "道": "writings",
+      "title": "Collection complète des œuvres de J.J. Rousseau"
+    },
+    {
+      "identifier": "collectioncompl41rousgoog",
+      "道": "writings",
+      "title": "Collection complette des oeuvres de J.J. Rousseau"
+    },
+    {
+      "identifier": "collectioncompl76rousgoog",
+      "道": "writings",
+      "title": "Collection complete des œuvres de J.J. Rousseau"
+    },
+    {
+      "identifier": "collectioncompl78rousgoog",
+      "道": "writings",
+      "title": "Collection complete des oeuvres de J. J. Rousseau .."
+    },
+    {
+      "identifier": "confessionsofjjr03904gut",
+      "道": "timeline",
+      "title": "Confessions of J. J. Rousseau, the - Volume 04"
+    },
+    {
+      "identifier": "confessionsofjjr03905gut",
+      "道": "timeline",
+      "title": "Confessions of J. J. Rousseau, the - Volume 05"
+    },
+    {
+      "identifier": "confessionsofjjr03906gut",
+      "道": "timeline",
+      "title": "Confessions of J. J. Rousseau, the - Volume 06"
+    },
+    {
+      "identifier": "confessionsofjjr03912gut",
+      "道": "timeline",
+      "title": "Confessions of J. J. Rousseau, the - Volume 12"
+    },
+    {
+      "identifier": "confessionsofjjr03913gut",
+      "道": "timeline",
+      "title": "Confessions of J. J. Rousseau, the - Complete"
+    },
+    {
+      "identifier": "cu31924014398154",
+      "道": "writings",
+      "title": "Famous Utopias; being the complete text of Rousseau's social contract;"
+    },
+    {
+      "identifier": "cu31924027383284",
+      "道": "writings",
+      "title": "Selections from the works of Jean-Jacques Rousseau"
+    },
+    {
+      "identifier": "cu31924027386915",
+      "道": "external",
+      "title": "Rousseau and naturalism in life and thought"
+    },
+    {
+      "identifier": "cu31924032526596",
+      "道": "external",
+      "title": "The life of Thomas Paine; mover of the \"Declaration of independence;\" "
+    },
+    {
+      "identifier": "dictionnairedemu02rous",
+      "道": "writings",
+      "title": "Dictionnaire de musique"
+    },
+    {
+      "identifier": "ducontractsocia00rousgoog",
+      "道": "writings",
+      "title": "Du contract social, ou, Principes du droit politique"
+    },
+    {
+      "identifier": "eloisaoraseries01rousgoog",
+      "道": "conversations",
+      "title": "Eloisa, or, A series of original letters "
+    },
+    {
+      "identifier": "espritmaximesetp00rous",
+      "道": "writings",
+      "title": "Esprit, maximes, et principes /"
+    },
+    {
+      "identifier": "frenchenglishphi34desc",
+      "道": "external",
+      "title": "French and English philosophers : Descartes, Rousseau, Voltaire, Hobbe"
+    },
+    {
+      "identifier": "honneurspublicsr00pari",
+      "道": "external",
+      "title": "Honneurs publics rendus à la mémoire de J̌.J. Rousseau; étude historiq"
+    },
+    {
+      "identifier": "india.history.resource.111524",
+      "道": "external",
+      "title": "Anecdotes of the Last Twelve Years of the Life of J. J. Rousseau; orgi"
+    },
+    {
+      "identifier": "india.history.resource.94272",
+      "道": "writings",
+      "title": "The Social Contract or Principles of Political Right"
+    },
+    {
+      "identifier": "jeanjacquesrous00text",
+      "道": "external",
+      "title": "Jean-Jacques Rousseau et les origines du cosmopolitisme littéraire : é"
+    },
+    {
+      "identifier": "memorial00unit",
+      "道": "external",
+      "title": "Memorial addresses on the life and character of Rousseau O. Crump (lat"
+    },
+    {
+      "identifier": "mileoudelducatio00rous",
+      "道": "writings",
+      "title": "Émile, ou, De l'éducation"
+    },
+    {
+      "identifier": "oeuvrescomplt05rous",
+      "道": "writings",
+      "title": "Oeuvres complètes de J. J. Rousseau ; avec des éclaircissements et des"
+    },
+    {
+      "identifier": "oeuvresdejjrous08rous",
+      "道": "writings",
+      "title": "Oeuvres de J.J. Rousseau citoyen de Genève"
+    },
+    {
+      "identifier": "oeuvresdejjrous09rous",
+      "道": "writings",
+      "title": "Oeuvres de J.J. Rousseau citoyen de Genève"
+    },
+    {
+      "identifier": "oeuvresdejjrous10rous",
+      "道": "writings",
+      "title": "Oeuvres de J.J. Rousseau citoyen de Genève"
+    },
+    {
+      "identifier": "oeuvresdejjrouss01rous",
+      "道": "writings",
+      "title": "Oeuvres de J.J. Rousseau"
+    },
+    {
+      "identifier": "oeuvresdejjrouss12rous",
+      "道": "writings",
+      "title": "Oeuvres de J.J. Rousseau"
+    },
+    {
+      "identifier": "oeuvresdejjrouss15rous",
+      "道": "writings",
+      "title": "Oeuvres de J.J. Rousseau"
+    },
+    {
+      "identifier": "oeuvresdejjrouss22rous",
+      "道": "writings",
+      "title": "Oeuvres de J.J. Rousseau"
+    },
+    {
+      "identifier": "romanticelements00fole",
+      "道": "external",
+      "title": "The romantic elements in the life and works of Jean Jacques Rousseau"
+    },
+    {
+      "identifier": "rousseauandnatu00hudsgoog",
+      "道": "external",
+      "title": "Rousseau and the naturalism in life and thought"
+    },
+    {
+      "identifier": "rousseaunaturali0000unse_c8a6",
+      "道": "external",
+      "title": "rousseau and naturalism in life and thought"
+    },
+    {
+      "identifier": "tudesurjjrousse00giragoog",
+      "道": "external",
+      "title": "Étude sur J. -J. Rousseau"
+    },
+    {
+      "identifier": "tudesurltatm00bouguoft",
+      "道": "external",
+      "title": "Étude sur l'état mental de J.J. Rousseau et sa mort à Ermenonville"
+    },
+    {
+      "identifier": "uvrescompltesd02rous",
+      "道": "writings",
+      "title": "uvres complètes de J. J.Rousseau : mises dans un nouvel ordre"
+    },
+    {
+      "identifier": "uvrescompltesde04rousgoog",
+      "道": "writings",
+      "title": "Œuvres complètes de J.-J. Rousseau"
+    },
+    {
+      "identifier": "uvrescompltesde07rousgoog",
+      "道": "writings",
+      "title": "Œuvres complètes de J.-J. Rousseau"
+    },
+    {
+      "identifier": "yhteiskuntasopim53593gut",
+      "道": "writings",
+      "title": "Yhteiskuntasopimuksestaeli Valtio-oikeuden johtavat aatteet"
+    }
+  ]
+}

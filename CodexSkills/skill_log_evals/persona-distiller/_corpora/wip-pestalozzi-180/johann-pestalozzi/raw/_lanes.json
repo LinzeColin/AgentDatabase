@@ -1,0 +1,366 @@
+{
+  "lanes": 5,
+  "去掉纸面道后": 3,
+  "逐道份数": {
+    "writings": 62,
+    "conversations": 4,
+    "expression": 1,
+    "decisions": 0,
+    "timeline": 2,
+    "external": 1
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "10041514bsb",
+      "道": "writings",
+      "title": "Meine Nachforschungen über den Gang der Natur in der Entwiklung des Me"
+    },
+    {
+      "identifier": "10050004bsb",
+      "道": "writings",
+      "title": "Pestalozzi's Leben und Ansichten: in einem wortgetreuen Auszuge aus sä"
+    },
+    {
+      "identifier": "10065771bsb",
+      "道": "timeline",
+      "title": "Meine Lebensschicksale als Vorsteher meiner Erziehungsinstitute in Bur"
+    },
+    {
+      "identifier": "10082563bsb",
+      "道": "writings",
+      "title": "ABC der Anschauung oder Anschauungs-Lehre der Maßverhältnisse. 1"
+    },
+    {
+      "identifier": "10082564bsb",
+      "道": "writings",
+      "title": "ABC der Anschauung oder Anschauungs-Lehre der Maßverhältnisse. 2"
+    },
+    {
+      "identifier": "10116094bsb",
+      "道": "writings",
+      "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu "
+    },
+    {
+      "identifier": "10116095bsb",
+      "道": "writings",
+      "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu "
+    },
+    {
+      "identifier": "10116096bsb",
+      "道": "writings",
+      "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu "
+    },
+    {
+      "identifier": "10116099bsb",
+      "道": "writings",
+      "title": "Figuren zu meinem ABC Buch oder zu den Anfangsgründen meines Denkens"
+    },
+    {
+      "identifier": "10128423bsb",
+      "道": "writings",
+      "title": "Pestalozzi's Lienhard und Gertrud: ein Buch für das Volk ; Die zwei er"
+    },
+    {
+      "identifier": "10129401bsb",
+      "道": "writings",
+      "title": "Lienhard und Gertrud: ein Buch für das Volk. 1"
+    },
+    {
+      "identifier": "10129403bsb",
+      "道": "writings",
+      "title": "Lienhard und Gertrud: ein Buch für das Volk. 3"
+    },
+    {
+      "identifier": "10311310bsb",
+      "道": "writings",
+      "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu "
+    },
+    {
+      "identifier": "10311311bsb",
+      "道": "writings",
+      "title": "Lienhard und Gertrud: Ein Versuch, die Grundsätze der Volksbildung zu "
+    },
+    {
+      "identifier": "10721192bsb",
+      "道": "expression",
+      "title": "Rede von Pestalozzi an sein Haus: an seinem vier und siebenzigsten Geb"
+    },
+    {
+      "identifier": "10724505bsb",
+      "道": "writings",
+      "title": "Pestalozzi's sämmtliche Schriften. 1"
+    },
+    {
+      "identifier": "10724506bsb",
+      "道": "writings",
+      "title": "Pestalozzi's sämmtliche Schriften. 3"
+    },
+    {
+      "identifier": "10724507bsb",
+      "道": "writings",
+      "title": "Pestalozzi's sämmtliche Schriften. 4"
+    },
+    {
+      "identifier": "10724508bsb",
+      "道": "writings",
+      "title": "Pestalozzi's sämmtliche Schriften. 5"
+    },
+    {
+      "identifier": "10724509bsb",
+      "道": "writings",
+      "title": "Pestalozzi's sämmtliche Schriften. 6"
+    },
+    {
+      "identifier": "10724510bsb",
+      "道": "writings",
+      "title": "Pestalozzi's sämmtliche Schriften. 7"
+    },
+    {
+      "identifier": "PestalozziMieIndagini",
+      "道": "writings",
+      "title": "Mie Indagini"
+    },
+    {
+      "identifier": "bim_eighteenth-century_leonard-gertrude-a-po_pestalozzi-johann-heinr_1800",
+      "道": "writings",
+      "title": "Leonard & Gertrude. A popular story, written originally in German; tra"
+    },
+    {
+      "identifier": "bub_gb_H-I_AAAAcAAJ",
+      "道": "writings",
+      "title": "Pestalozzi's Leben und Ansichten : in einem wortgetreuen Auszuge aus s"
+    },
+    {
+      "identifier": "bub_gb_tLQ7AAAAcAAJ",
+      "道": "writings",
+      "title": "Lienhard und Gertrud : Ein Buch f. d. Volk"
+    },
+    {
+      "identifier": "buchdermtter00pest",
+      "道": "writings",
+      "title": "Buch der mütter;"
+    },
+    {
+      "identifier": "cmoeducajertrud00pestgoog",
+      "道": "writings",
+      "title": "Cómo educa Jertrudis á sus hijos"
+    },
+    {
+      "identifier": "diepdagogikjoh00pest",
+      "道": "writings",
+      "title": "Die Pädagogik Johann Heinrich Pestalozzi's in wortgetreuen Auszügen au"
+    },
+    {
+      "identifier": "gpl_1902807",
+      "道": "conversations",
+      "title": "Letters on early education, Addressed to J. P. Greaves, esq., by Pesta"
+    },
+    {
+      "identifier": "howgertrudeteach00pest",
+      "道": "writings",
+      "title": "How Gertrude teaches her children; an attempt to help mothers to teach"
+    },
+    {
+      "identifier": "howgertrudeteach00pest_0",
+      "道": "writings",
+      "title": "How Gertrude teaches her children: an attempt to help mothers to teach"
+    },
+    {
+      "identifier": "howgertrudeteach00pestiala",
+      "道": "writings",
+      "title": "How Gertrude teaches her children; an attempt to help mothers to teach"
+    },
+    {
+      "identifier": "howgertrudeteach00pestuoft",
+      "道": "writings",
+      "title": "How Gertrude teaches her children : an attempt to help mothers to teac"
+    },
+    {
+      "identifier": "leonardgertrude00pestiala",
+      "道": "writings",
+      "title": "Leonard and Gertrude"
+    },
+    {
+      "identifier": "leonardgertrudep00pest",
+      "道": "writings",
+      "title": "Leonard and Gertrude. A popular story"
+    },
+    {
+      "identifier": "lettersonearlye03pestgoog",
+      "道": "conversations",
+      "title": "Letters on early education; addressed to J. P. Greaves, esq."
+    },
+    {
+      "identifier": "lettersonearlyed00pest",
+      "道": "conversations",
+      "title": "Letters on early education; addressed to J. P. Greaves, esq."
+    },
+    {
+      "identifier": "lettersonearlyed00pestiala",
+      "道": "conversations",
+      "title": "Letters on early education. Addressed to J. P. Greaves, esq."
+    },
+    {
+      "identifier": "lienhardundgert00pestgoog",
+      "道": "writings",
+      "title": "Lienhard und Gertrud"
+    },
+    {
+      "identifier": "lienhardundgert01pestgoog",
+      "道": "writings",
+      "title": "Lienhard und Gertrud"
+    },
+    {
+      "identifier": "lienhardundgert02pestgoog",
+      "道": "writings",
+      "title": "Lienhard und Gertrud. Ein Buch für das Volk .."
+    },
+    {
+      "identifier": "meinelebensschi01pestgoog",
+      "道": "timeline",
+      "title": "Meine Lebensschicksale als Vorsteher meiner Erziehungsinstitute in Bur"
+    },
+    {
+      "identifier": "pestalozzipestal00barnrich",
+      "道": "external",
+      "title": "Pestalozzi and Pestalozzianism : life, educational principles, and met"
+    },
+    {
+      "identifier": "pestalozzisleben00pest",
+      "道": "writings",
+      "title": "Pestalozzi's leben und ansichten in einem wortgetreuen auszuge aus säm"
+    },
+    {
+      "identifier": "pestalozzisleona00pestuoft",
+      "道": "writings",
+      "title": "Pestalozzi's Leonard and Gertrude. --"
+    },
+    {
+      "identifier": "pestalozzislienh00pest",
+      "道": "writings",
+      "title": "Pestalozzi's Lienhard und Gertrud. Ein buch für das volk"
+    },
+    {
+      "identifier": "pestalozzissamtl04pest",
+      "道": "writings",
+      "title": "Pestalozzi's sämtliche Werke"
+    },
+    {
+      "identifier": "pestalozzissmmt00seyfgoog",
+      "道": "writings",
+      "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit er"
+    },
+    {
+      "identifier": "pestalozzissmmt01seyfgoog",
+      "道": "writings",
+      "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit er"
+    },
+    {
+      "identifier": "pestalozzissmmt02seyfgoog",
+      "道": "writings",
+      "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit er"
+    },
+    {
+      "identifier": "pestalozzissmmt03seyfgoog",
+      "道": "writings",
+      "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit er"
+    },
+    {
+      "identifier": "pestalozzissmmt04seyfgoog",
+      "道": "writings",
+      "title": "Pestalozzi's sämmtliche werke. Gesichtet, vervollständigt und mit er"
+    },
+    {
+      "identifier": "smmtlicheschr02pest",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschr10pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri01pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri03pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri04pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri05pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri06pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri07pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri08pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri09pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri11pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri12pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri13pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri14pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smmtlicheschri15pestuoft",
+      "道": "writings",
+      "title": "Sämmtliche Schriften"
+    },
+    {
+      "identifier": "smtlichewerke01pestuoft",
+      "道": "writings",
+      "title": "Sämtliche Werke;"
+    },
+    {
+      "identifier": "smtlichewerke02pestuoft",
+      "道": "writings",
+      "title": "Sämtliche Werke;"
+    },
+    {
+      "identifier": "smtlichewerke03pestuoft",
+      "道": "writings",
+      "title": "Sämtliche Werke;"
+    }
+  ]
+}

@@ -1,0 +1,361 @@
+{
+  "lanes": 5,
+  "去掉纸面道后": 4,
+  "逐道份数": {
+    "writings": 60,
+    "conversations": 3,
+    "expression": 3,
+    "decisions": 1,
+    "timeline": 0,
+    "external": 2
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "00074230bsb",
+      "道": "writings",
+      "title": "Gedanken von der wahren Schätzung der lebendigen Kräfte und Beurtheilu"
+    },
+    {
+      "identifier": "10040686bsb",
+      "道": "writings",
+      "title": "Iman. Kant zwo Abhandlungen über moralische und politische Gegenstände"
+    },
+    {
+      "identifier": "10040687bsb",
+      "道": "writings",
+      "title": "Neue kleine Schriften"
+    },
+    {
+      "identifier": "10042413bsb",
+      "道": "writings",
+      "title": "Die Religion innerhalb der Grenzen der bloßen Vernunft"
+    },
+    {
+      "identifier": "10043581bsb",
+      "道": "writings",
+      "title": "Critik der Urtheilskraft"
+    },
+    {
+      "identifier": "10044864bsb",
+      "道": "writings",
+      "title": "Critik der reinen Vernunft. 2"
+    },
+    {
+      "identifier": "10045002bsb",
+      "道": "writings",
+      "title": "Critik der Urtheilskraft"
+    },
+    {
+      "identifier": "10046171bsb",
+      "道": "writings",
+      "title": "Immanuel Kant's vorzügliche kleine Schriften und Aufsätze: nebst Betra"
+    },
+    {
+      "identifier": "10046172bsb",
+      "道": "writings",
+      "title": "Immanuel Kant's vorzügliche kleine Schriften und Aufsätze: nebst Betra"
+    },
+    {
+      "identifier": "10046183bsb",
+      "道": "writings",
+      "title": "Immanuel Kant's Werke. 9"
+    },
+    {
+      "identifier": "10046188bsb",
+      "道": "writings",
+      "title": "Immanuel Kant's sämmtliche Werke. 4"
+    },
+    {
+      "identifier": "10046192bsb",
+      "道": "writings",
+      "title": "Immanuel Kant's sämmtliche Werke. 8"
+    },
+    {
+      "identifier": "10046194bsb",
+      "道": "writings",
+      "title": "Immanuel Kant's sämmtliche Werke. 9"
+    },
+    {
+      "identifier": "265433882.1678.emory.edu",
+      "道": "writings",
+      "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
+    },
+    {
+      "identifier": "265433882.1682.emory.edu",
+      "道": "writings",
+      "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
+    },
+    {
+      "identifier": "265433882.1713.emory.edu",
+      "道": "writings",
+      "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
+    },
+    {
+      "identifier": "FilosofaDeLaHistoriaEmmanuelKant",
+      "道": "writings",
+      "title": "Filosofía De La Historia Emmanuel Kant"
+    },
+    {
+      "identifier": "ImmanuelKantsKritikDerReinenVernunftMitEinerEinleitungUnd",
+      "道": "writings",
+      "title": "Immanuel Kant's Kritik der reinen Vernunft: mit einer Einleitung und A"
+    },
+    {
+      "identifier": "Kant-polmica-CRP",
+      "道": "writings",
+      "title": "Immanuel Kant - La polémica sobre la Crítica de la Razón Pura (respues"
+    },
+    {
+      "identifier": "KantAntropologiaPrammatica",
+      "道": "writings",
+      "title": "Antropologia Prammatica"
+    },
+    {
+      "identifier": "ProlegomeniKantMartinetti",
+      "道": "writings",
+      "title": "Prolegomeni ad ogni metafisica futura che vorrà presentarsi come scien"
+    },
+    {
+      "identifier": "TheMetaphysicOfEthicsByImmanuelKantTranslatedByJ.w.SempleEdited",
+      "道": "writings",
+      "title": "Metaphysic of Ethics by Immanuel Kant; translated by J.W. Semple; edit"
+    },
+    {
+      "identifier": "aje7738.0003.001.umich.edu",
+      "道": "writings",
+      "title": "Sämtliche werke .."
+    },
+    {
+      "identifier": "anthropologiesu00kantgoog",
+      "道": "writings",
+      "title": "Anthropologie, suivie des divers fragments du même auteur, relatifs a"
+    },
+    {
+      "identifier": "b24885046",
+      "道": "writings",
+      "title": "Anthropologie in pragmatischer Hinsicht"
+    },
+    {
+      "identifier": "b28738615",
+      "道": "writings",
+      "title": "Metaphysische Anfangsgründe der Naturwissenschaft"
+    },
+    {
+      "identifier": "b28764523",
+      "道": "writings",
+      "title": "Anthropologie in pragmatischer Hinsicht abgefasst"
+    },
+    {
+      "identifier": "bim_eighteenth-century_essays-and-treatises-on-_kant-immanuel_1798_2",
+      "道": "writings",
+      "title": "Essays and treatises on moral, political, and various philosophical su"
+    },
+    {
+      "identifier": "bim_eighteenth-century_the-metaphysic-of-morals_kant-immanuel_1799_1",
+      "道": "writings",
+      "title": "The metaphysic of morals, divided into metaphysical elements of law an"
+    },
+    {
+      "identifier": "briefwechselvoni01kant",
+      "道": "conversations",
+      "title": "Briefwechsel von Imm. Kant"
+    },
+    {
+      "identifier": "briefwechselvoni02kant",
+      "道": "conversations",
+      "title": "Briefwechsel von Imm. Kant"
+    },
+    {
+      "identifier": "briefwechselvoni03kant",
+      "道": "conversations",
+      "title": "Briefwechsel von Imm. Kant"
+    },
+    {
+      "identifier": "bub_gb_7rI_AAAAYAAJ",
+      "道": "writings",
+      "title": "Immanuel Kant's physische Geographie"
+    },
+    {
+      "identifier": "bub_gb_F31ZAAAAcAAJ",
+      "道": "writings",
+      "title": "Prolégomènes a toute métaphysique future qui aura le droit de se prése"
+    },
+    {
+      "identifier": "bub_gb_F7gA_JUh5EYC",
+      "道": "writings",
+      "title": "Prolégomènes a toute métaphysique future qui aura le droit de se prése"
+    },
+    {
+      "identifier": "bub_gb_Oc0AAAAAcAAJ",
+      "道": "writings",
+      "title": "Metaphysische Anfangsgründe der Naturwissenschaft"
+    },
+    {
+      "identifier": "bub_gb_PiRNAAAAMAAJ",
+      "道": "writings",
+      "title": "Immanuel Kant's Kritik der reinen vernunft"
+    },
+    {
+      "identifier": "bub_gb_Wiw-AAAAYAAJ",
+      "道": "writings",
+      "title": "Kant's Sämmtliche kleine Schriften, nach der Zeitfolge Geordnet .."
+    },
+    {
+      "identifier": "bub_gb_mIdQAAAAYAAJ",
+      "道": "writings",
+      "title": "Immanuel Kant's Werke, sorgfaltig revidirte Gesammtausgabe in zehn Bä"
+    },
+    {
+      "identifier": "bub_gb_nsALAAAAIAAJ",
+      "道": "writings",
+      "title": "Gesammelte Schriften"
+    },
+    {
+      "identifier": "bub_gb_pbI_AAAAYAAJ",
+      "道": "writings",
+      "title": "Immanuel Kant's physische Geographie"
+    },
+    {
+      "identifier": "bub_gb_tawUAAAAQAAJ",
+      "道": "writings",
+      "title": "Anthropologie in pragmatischer Hinsicht abgefasst, [Immanuel Kant]"
+    },
+    {
+      "identifier": "critiquedelarai02tissgoog",
+      "道": "writings",
+      "title": "Critique de la raison pure"
+    },
+    {
+      "identifier": "critiqueofjudgem00kantuoft",
+      "道": "decisions",
+      "title": "Critique of judgment"
+    },
+    {
+      "identifier": "dli.ministry.13241",
+      "道": "writings",
+      "title": "Fundamental principles of the metaphysics of ethics"
+    },
+    {
+      "identifier": "educationaltheor0000kant",
+      "道": "writings",
+      "title": "The Educational theory of Immanual Kant "
+    },
+    {
+      "identifier": "educationaltheor00kantuoft",
+      "道": "writings",
+      "title": "Educational theory;"
+    },
+    {
+      "identifier": "ikuiseenrauhaanv53461gut",
+      "道": "writings",
+      "title": "Ikuiseen rauhaanValtio-oikeudellinen tutkielma"
+    },
+    {
+      "identifier": "immanuelkantpap00kant",
+      "道": "writings",
+      "title": "Immanuel Kant papers, 1744-1905?"
+    },
+    {
+      "identifier": "immanuelkantscri0000kant_c7p6",
+      "道": "writings",
+      "title": "Immanuel Kant's Critique of pure reason"
+    },
+    {
+      "identifier": "immanuelkantscri02kantuoft",
+      "道": "expression",
+      "title": "Immanuel Kant's Critique of pure reason : in commemoration of the cent"
+    },
+    {
+      "identifier": "immanuelkantskr03kantgoog",
+      "道": "writings",
+      "title": "Immanuel Kant's Kritik der reinen Vernunft"
+    },
+    {
+      "identifier": "india.history.resource.90167",
+      "道": "expression",
+      "title": "Immanuel Kant’s Critique of Pure Reason, in Commemoration of the Cente"
+    },
+    {
+      "identifier": "kant-della-forza-dell-animo",
+      "道": "writings",
+      "title": "Della Forza Dell'Animo"
+    },
+    {
+      "identifier": "kantchoixdetexte00kant",
+      "道": "external",
+      "title": "Kant. Choix de textes avec étude du systeme philosophique et notices b"
+    },
+    {
+      "identifier": "kantlobelloylosublime1919",
+      "道": "writings",
+      "title": "Lo bello y lo sublime: ensayo de estética y moral"
+    },
+    {
+      "identifier": "kantscritique01kantuoft",
+      "道": "expression",
+      "title": "Immanuel Kant's Critique of pure reason : in commemoration of the cent"
+    },
+    {
+      "identifier": "kantsgesammeltes0000kant_l9l8",
+      "道": "writings",
+      "title": "Kant's Gesammelte Schriften "
+    },
+    {
+      "identifier": "kantsgesammeltes0010kant",
+      "道": "writings",
+      "title": "Kant's gesammelte Schriften"
+    },
+    {
+      "identifier": "kantsgesammeltes0027kant",
+      "道": "writings",
+      "title": "Kant's gesammelte Schriften"
+    },
+    {
+      "identifier": "kantsgesammeltes12kant",
+      "道": "writings",
+      "title": "Kant's gesammelte Schriften"
+    },
+    {
+      "identifier": "kantsgesammeltes13kant",
+      "道": "writings",
+      "title": "Kant's gesammelte Schriften"
+    },
+    {
+      "identifier": "kantsgesammeltes55925gut",
+      "道": "writings",
+      "title": "Kant's gesammelte SchriftenBand V. Kritik der Urtheilskraft."
+    },
+    {
+      "identifier": "kantsprolegomen00kantuoft",
+      "道": "writings",
+      "title": "Kant's Prolegomena, and Metaphysical foundations of natural science"
+    },
+    {
+      "identifier": "kantsprolegomena00kantuoft",
+      "道": "writings",
+      "title": "Kant's Prolegomena to any future metaphysics"
+    },
+    {
+      "identifier": "metaphysicofethi00kantiala",
+      "道": "writings",
+      "title": "The metaphysic of ethics"
+    },
+    {
+      "identifier": "philosophyoflawe0000kant",
+      "道": "writings",
+      "title": "The philosophy of law : an exposition of the fundamental principles of"
+    },
+    {
+      "identifier": "saemmtlichewerke0004kant",
+      "道": "writings",
+      "title": "Saemmtliche werke"
+    },
+    {
+      "identifier": "textbooktokantcr00kant",
+      "道": "external",
+      "title": "Text-book to Kant. The critique of pure reason; aesthetic categories, "
+    }
+  ]
+}
