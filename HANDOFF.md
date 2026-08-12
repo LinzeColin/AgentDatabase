@@ -1,43 +1,42 @@
 # HANDOFF —— 接手这个仓要知道的全部
 
 
-### 第 1 批做到哪了（**2026-08-12 17:55 现算**），以及**为什么停在这里**
+## 接手的人先看这里 —— 第 1 批做到哪了（**2026-08-13 现算**）
 
-> 下面每个数都是当场跑出来的，不是抄的。口径：`source-ledger.jsonl` 行数。
+**阶段 1～4 全部做完。停点只有一个：阶段 5 判分要 2 席独立子代理。**
 
-| 人 | 台账 | 道 | 一手占比 | 档 | holdout | 有观察节的道 | 逐字引文 |
-|---|---:|---:|---:|---|---:|---:|---:|
-| #173 Marshall | 95 | 6 | 0.7684 | **deep** | 1 | 3（writings 是**否定结论**） | 5 |
-| #174 Lincoln | 70 | 6 | 0.9714 | **deep** | 3 | 4 | 7 |
-| #175 Jefferson | 73 | 6 | 0.9178 | **deep** | 8 | 3 | 6 |
-| #176 Bismarck | 70 | 6 | 0.9000 | **deep** | 10 | 3 | 5 |
-| #180 Pestalozzi | 70 | 6 | 0.9857 | **deep** | 10 | 3 | 5 |
-| #177 Machiavelli | 79 | 4 | 0.8481 | quick | **0** | 3 | 6 |
-| #178 Rousseau | 103 | 4 | 0.8835 | quick | **0** | 3 | 8 |
-| #179 Kant | 65 | 3 | 0.9692 | quick | 10 | 3 | 5 |
-| #181 Fröbel | 51 | 5 | 0.9804 | quick | **0** | 3（writings 是**否定结论**） | 5 |
-| #182 Comenius | — | — | — | **记延后** | — | — | — |
+| 人 | 台账 | 档 | holdout | 断言 | 盲判用例 | 合成门 |
+|---|---:|---|---:|---:|---:|:--|
+| #174 Lincoln | 70 | deep | 3 | 25 | **32 题 / 16 类** | ✅ passed |
+| #175 Jefferson | 73 | deep | 7 | 25 | **32 / 16** | ✅ passed |
+| #176 Bismarck | 70 | deep | 10 | 25 | **32 / 16** | ✅ passed |
+| #180 Pestalozzi | 70 | deep | 9 | 24 | **32 / 16** | ✅ passed |
+| #177 Machiavelli | 79 | quick | 10 | 27 | **16 / 16** | ✅ passed |
+| #178 Rousseau | 103 | quick | 12 | 34 | **16 / 16** | ✅ passed |
+| #179 Kant | 65 | quick | 10 | 23 | **17 / 16** | 跑完补记 |
+| #181 Fröbel | 51 | quick | 4 | 23 | **16 / 16** | 跑完补记 |
+| #173 Marshall | 95 | deep | **0** | 34 | **未出题** | **装置不成立** |
+| #182 Comenius | — | — | — | — | — | **记延后**（通道受限） |
 
-**合计 676 份，一手 611（0.9038）。台账里的每一份在盘上都在（「台账有盘无」= 0，九人全查过）。**
+**合计 676 份语料、一手 611（0.9038）、断言 240 条、盲判用例 193 题。**
 
-★ **档位是 5 deep / 4 quick，不是先前记的 6 deep / 3 quick**：
-Kant 原判 deep 是**靠三条题名词误配出来的假道**顶上去的（`chronolog` 命中《全集·按年代编次》、
-`judgment` 命中《判断力批判》、`oration` ⊂ `commemoration`），修正后 6 道→3 道。
-详见 `_ledgers/_题名词造出来的假道-Kant从deep掉到quick-2026-08-12.md`。
+★ **档位是 5 deep / 4 quick**：Kant 原判 deep 是**靠三条题名词误配出来的假道**顶上去的
+（`chronolog` 命中《全集·按年代编次》、`judgment` 命中《判断力批判》、`oration` ⊂ `commemoration`），
+修正后 6 道→3 道。详见 `_ledgers/_题名词造出来的假道-Kant从deep掉到quick-2026-08-12.md`。
 
-**已完成（阶段 3 的可做部分）**：
-- 九人研究道各 **≥3 条**写了 source-linked 观察节，`check_lane_quotes_verbatim` **九人全绿、对不上 0 条**
-- 九人 `attribution_basis` 齐全，`check_attribution_basis` **rc=0**
-- holdout 已分 6 人并过 overlap 门；★ **Machiavelli／Rousseau／Fröbel 还没分**（下一步第 1 件）
+★★ **Marshall 没有密封面**：唯一低重合候选是**另一位大法官 John Marshall Harlan 的纪念集**
+（正文 Harlan 63 次 / Marshall 19 次），已退回 train 并加 `namesake_note`。
+⇒ 他过不了合成门也做不了判分，与 Paton #162／Kelsen #171 同类。**三条路只能由人定**，
+见 `_ledgers/_Marshall的密封面是别人的纪念集-2026-08-13.md`。
 
-**下一步三件，前两件不需要子代理**：
+### 下一步只剩一件
 
-1. **给 Machiavelli／Rousseau／Fröbel 分 holdout**（`assign_holdout.py`，
-   **率与绝对数双卡**：`--max-overlap 0.05` 且 `--max-abs 40`），再跑 `check_holdout_overlap`。
-2. **合成人物包**。
-3. **判分**：恒 2 席、**必须是独立子代理**、按人物冻结指令、每人上限 3 轮。
-   ★ **本会话不能派子代理**（harness：`Do not call the AgentTool unless the user requested it`）
-     ⇒ 第 3 件要么由你授权派子代理，要么由接手的人做。**这是真正的停点。**
+**阶段 5 判分**：恒 2 席、**必须是独立子代理**、按人物冻结指令、每人上限 3 轮，
+**第 1 轮 delta < −0.011 直接结案不跑二三轮**。
+基线用 `_ledgers/_pipeline/BASELINE-PROMPT-FROZEN-v1.md` 那份**逐字冻结**的 prompt。
+
+★ 上一手的 harness 有 `Do not call the AgentTool unless the user requested it`，
+所以这一步一直没做。**接手方若能派子代理，直接从这里开始。**
 
 ### 阶段 4（合成）—— **2026-08-13 已做完，九人合成门全部 passed=True**
 
