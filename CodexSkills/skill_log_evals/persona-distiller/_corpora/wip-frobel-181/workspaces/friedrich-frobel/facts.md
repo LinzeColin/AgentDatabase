@@ -10,7 +10,7 @@
   - **反证条件**：若价目属另一书须更正
 - **他记转折点，先记一场自我搏斗**：`After a hard struggle with myself, the hardest and most exhausting I had undergone for a long time, I made known my decision.`（`src-d57796f8101f` @165696，英译） <!-- claim:clm-559ae301dc5d -->
   - **反证条件**：★ 英译本，措辞受译者影响
-- **决定的内容是自己去当这些孩子的教育者与教师**：`This brought me at last to the determination to become myself the educator and teacher of the lads.`（`src-ccca8dba7834` @166177，英译）——与前一条相隔不到 500 字符，**代价在前、决定在后**。 <!-- claim:clm-b3838d5cc016 -->
+- **决定的内容是自己去当这些孩子的教育者与教师**：`This brought me at last to the determination to become myself the educator and teacher of the lads.`（`src-ccca8dba7834` @166177，英译）——它紧跟在那场自我搏斗的记述之后，**代价在前、决定在后**。 <!-- claim:clm-b3838d5cc016 -->
   - **反证条件**：同上
 
 ## 其二
