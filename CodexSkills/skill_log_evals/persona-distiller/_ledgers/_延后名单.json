@@ -2792,9 +2792,26 @@
    "★ 谁裁的": "2026-08-12 由我裁定（用户当天授权 40 条自裁）。",
    "★ 别名": "Marcus Tullius Cicero（工作区 slug `marcus-tullius-cicero`）",
    "★ 命名教训": "我先按全名 `Marcus Tullius Cicero` 写进名单，而**队列写的是 `Cicero`**，于是 `next_person.py` 认不出他已处置，仍把他列在「已做但未出货」里。\n**这是 2026-08-12 当天第三次撞同一个坑**：#177 用维基的 `Niccolò` 而队列是 `Niccolo`（重音）；#180/#181/#182 的中名／变音／拉丁名三则；现在是**全名 vs 简名**。\n⇒ **写进任何台账的人名，一律先用 `_蒸馏队列.json` 里的那个串**，别的写法进 `★ 别名`。"
+  },
+  {
+   "name": "John Amos Comenius",
+   "family_zh": "思想教育师",
+   "deferred_at": "2026-08-12",
+   "seq": 182,
+   "disposition": "延后",
+   "class": "通道受限（deferral-class-channel-blocked-not-availability）",
+   "reason": "**六条研究道只占 2 道（writings、external），quick 门要 3 道。** archive.org 上定向检索实测：`conversations`（书信）**numFound=1**、`expression`（布道/讲词）**numFound=0**；`timeline` 抓了 3 份仍没进道。★ 语料本身不缺——83 份、7,155 万字符级、一手 72 份、独立文献 83；**缺的是道，而空着的道抓再多别的也补不上**（判据原话）。★★ 第二项独立证据同向：**声口实测也是十人最低**——拉丁文代词 0.79/千词、第一人称动词 **0.48/千词**，两把尺子都低（对照 Machiavelli 代词 0.99 而动词 6.14，那是量具错）；拉丁文里的第一人称几乎只有说理性的 `Dico autem…`／`Non dico…`／`Viam dico…`，**是论述体的「我说」，不是他这个人在说话**。",
+   "unblock_todo": [
+    "**换通道**：捷克的数字图书馆（`jbc.bj.uj.edu.pl`、`dbc.wroc.pl` 已在本轮语料里出现过）有 Komenský 的捷克文书信与布道，archive.org 没有。**换台机器/换通道能续。**",
+    "补上 conversations 与 expression 两道即可过 quick（3 道）；要过 standard/deep 需六道全满。",
+    "语料与指针完好：`_corpora/wip-comenius-182/john-amos-comenius/raw/`（83 份、`_ids-rebuild.txt` + 逐份 sha256），**重启不必重抓源**。",
+    "★ 声口那一项即使补齐了道也仍是风险，处置参照 Coffin #130。"
+   ],
+   "★ 谁裁的": "agent（用户 2026-08-12 授权：40 条待裁定自己定；只留推送/删受保护资产）",
+   "★ 别名": "Jan Amos Komenský（捷克本名）、Comenius（拉丁名）——`normalize_name` 把它们当两个串，检索两种写法都要试"
   }
  ],
- "total": 148,
+ "total": 149,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
