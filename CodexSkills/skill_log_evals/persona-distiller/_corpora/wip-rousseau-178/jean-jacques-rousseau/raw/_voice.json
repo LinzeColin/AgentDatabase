@@ -1,0 +1,643 @@
+{
+  "量了": 63,
+  "按语种中位": {
+    "de": 11.41,
+    "fr": 6.99,
+    "en": 21.25,
+    "?": 3.97
+  },
+  "疑似译本": 11,
+  "★口径": "只量一手；无歧义词与有歧义词分列；**本工具不给通过/不通过**",
+  "明细": [
+    {
+      "id": "10066336bsb",
+      "lang": "de",
+      "words": 68430,
+      "无歧义每千词": 37.22,
+      "有歧义每千词": 35.07,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10599347bsb",
+      "lang": "de",
+      "words": 14429,
+      "无歧义每千词": 2.63,
+      "有歧义每千词": 4.85,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10713049bsb",
+      "lang": "fr",
+      "words": 48008,
+      "无歧义每千词": 19.33,
+      "有歧义每千词": 25.56,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10762426bsb",
+      "lang": "de",
+      "words": 100545,
+      "无歧义每千词": 3.69,
+      "有歧义每千词": 6.89,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10762427bsb",
+      "lang": "de",
+      "words": 100783,
+      "无歧义每千词": 11.41,
+      "有歧义每千词": 13.52,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10764054bsb",
+      "lang": "de",
+      "words": 69291,
+      "无歧义每千词": 14.55,
+      "有歧义每千词": 19.05,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "11258220bsb",
+      "lang": "fr",
+      "words": 63987,
+      "无歧义每千词": 7.63,
+      "有歧义每千词": 9.97,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "11718256bsb",
+      "lang": "de",
+      "words": 38732,
+      "无歧义每千词": 18.77,
+      "有歧义每千词": 20.5,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "11918930bsb",
+      "lang": "de",
+      "words": 53572,
+      "无歧义每千词": 14.58,
+      "有歧义每千词": 17.73,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "11919281bsb",
+      "lang": "fr",
+      "words": 70308,
+      "无歧义每千词": 8.69,
+      "有歧义每千词": 13.31,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "11919322bsb",
+      "lang": "de",
+      "words": 43104,
+      "无歧义每千词": 37.42,
+      "有歧义每千词": 30.28,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "1766jjacquesrous00rous",
+      "lang": "fr",
+      "words": 44660,
+      "无歧义每千词": 6.99,
+      "有歧义每千词": 9.2,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "1782collectionco10rous",
+      "lang": "fr",
+      "words": 157450,
+      "无歧义每千词": 21.09,
+      "有歧义每千词": 23.61,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "1782collectionco17rous",
+      "lang": "fr",
+      "words": 120907,
+      "无歧义每千词": 18.9,
+      "有歧义每千词": 25.53,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "1791emileoudel02rous",
+      "lang": "fr",
+      "words": 67652,
+      "无歧义每千词": 2.42,
+      "有歧义每千词": 5.48,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "1791emileoudel03rous",
+      "lang": "fr",
+      "words": 65542,
+      "无歧义每千词": 9.49,
+      "有歧义每千词": 13.03,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "1846oeuvrescom02rousuoft",
+      "lang": "fr",
+      "words": 640956,
+      "无歧义每千词": 9.8,
+      "有歧义每千词": 13.45,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "1911lettresind00rous",
+      "lang": "fr",
+      "words": 68466,
+      "无歧义每千词": 10.11,
+      "有歧义每千词": 14.33,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "31383026610652",
+      "lang": "en",
+      "words": 80101,
+      "无歧义每千词": 5.97,
+      "有歧义每千词": 9.01,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "BIUSante_07891x01",
+      "lang": "fr",
+      "words": 109946,
+      "无歧义每千词": 20.55,
+      "有歧义每千词": 24.39,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "a1758jjrousseauci00rous",
+      "lang": "fr",
+      "words": 54851,
+      "无歧义每千词": 2.81,
+      "有歧义每千词": 6.96,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "amileoudeldu01rous",
+      "lang": "fr",
+      "words": 82388,
+      "无歧义每千词": 3.05,
+      "有歧义每千词": 7.1,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "amileoudeldu02rous",
+      "lang": "fr",
+      "words": 66972,
+      "无歧义每千词": 2.43,
+      "有歧义每千词": 5.38,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "amileoudeldu03rous",
+      "lang": "fr",
+      "words": 65168,
+      "无歧义每千词": 9.74,
+      "有歧义每千词": 13.07,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "amileoudeldu04rous",
+      "lang": "fr",
+      "words": 77829,
+      "无歧义每千词": 3.67,
+      "有歧义每千词": 6.5,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bekenntnisseunv00hardgoog",
+      "lang": "de",
+      "words": 1703,
+      "无歧义每千词": 11.16,
+      "有歧义每千词": 16.44,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_eighteenth-century_a-dialogue-between-a-man_rousseau-jean-jacques_1761",
+      "lang": "en",
+      "words": 8304,
+      "无歧义每千词": 5.9,
+      "有歧义每千词": 11.92,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bim_eighteenth-century_an-inquiry-into-the-natu_rousseau-jean-jacques_1791_0",
+      "lang": "en",
+      "words": 54686,
+      "无歧义每千词": 1.33,
+      "有歧义每千词": 3.71,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1787",
+      "lang": "en",
+      "words": 136663,
+      "无歧义每千词": 1.07,
+      "有歧义每千词": 3.65,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1796",
+      "lang": "en",
+      "words": 152318,
+      "无歧义每千词": 1.2,
+      "有歧义每千词": 3.6,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_1",
+      "lang": "en",
+      "words": 90937,
+      "无歧义每千词": 27.15,
+      "有歧义每千词": 23.42,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_2",
+      "lang": "en",
+      "words": 83674,
+      "无歧义每千词": 21.49,
+      "有歧义每千词": 18.68,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_1",
+      "lang": "en",
+      "words": 82012,
+      "无歧义每千词": 29.13,
+      "有歧义每千词": 25.55,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_3_0",
+      "lang": "en",
+      "words": 94078,
+      "无歧义每千词": 15.94,
+      "有歧义每千词": 17.4,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1764_1",
+      "lang": "en",
+      "words": 104159,
+      "无歧义每千词": 21.27,
+      "有歧义每千词": 18.24,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bim_eighteenth-century_eloisa-or-a-series-of-o_rousseau-jean-jacques_1769_1",
+      "lang": "en",
+      "words": 94883,
+      "无歧义每千词": 25.98,
+      "有歧义每千词": 21.39,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bim_eighteenth-century_emile-english-emilius_rousseau-jean-jacques_1767_3",
+      "lang": "en",
+      "words": 68058,
+      "无歧义每千词": 14.19,
+      "有歧义每千词": 15.59,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bim_eighteenth-century_emilius-and-sophia-or-_rousseau-jean-jacques_1783",
+      "lang": "en",
+      "words": 6213,
+      "无歧义每千词": 21.25,
+      "有歧义每千词": 14.97,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bub_gb_3DbL7IDH2jIC",
+      "lang": "fr",
+      "words": 226229,
+      "无歧义每千词": 3.92,
+      "有歧义每千词": 6.19,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_OXcpAAAAYAAJ",
+      "lang": "de",
+      "words": 36146,
+      "无歧义每千词": 4.51,
+      "有歧义每千词": 6.86,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_yN1MAAAAcAAJ",
+      "lang": "de",
+      "words": 168066,
+      "无歧义每千词": 4.0,
+      "有歧义每千词": 5.29,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_zN1MAAAAcAAJ",
+      "lang": "de",
+      "words": 99662,
+      "无歧义每千词": 3.86,
+      "有歧义每千词": 7.13,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "ceuvrescomplete00troigoog",
+      "lang": "fr",
+      "words": 398227,
+      "无歧义每千词": 10.97,
+      "有歧义每千词": 14.87,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "collectioncompl31rousgoog",
+      "lang": "fr",
+      "words": 91744,
+      "无歧义每千词": 1.96,
+      "有歧义每千词": 3.37,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "collectioncompl41rousgoog",
+      "lang": "fr",
+      "words": 213042,
+      "无歧义每千词": 0.54,
+      "有歧义每千词": 1.48,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "collectioncompl76rousgoog",
+      "lang": "fr",
+      "words": 91738,
+      "无歧义每千词": 1.93,
+      "有歧义每千词": 3.47,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "collectioncompl78rousgoog",
+      "lang": "fr",
+      "words": 81150,
+      "无歧义每千词": 14.98,
+      "有歧义每千词": 22.59,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "confessionsofjjr03904gut",
+      "lang": "en",
+      "words": 20034,
+      "无歧义每千词": 31.35,
+      "有歧义每千词": 34.99,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "confessionsofjjr03905gut",
+      "lang": "en",
+      "words": 23559,
+      "无歧义每千词": 22.75,
+      "有歧义每千词": 25.43,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "confessionsofjjr03906gut",
+      "lang": "en",
+      "words": 22736,
+      "无歧义每千词": 31.14,
+      "有歧义每千词": 33.43,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "confessionsofjjr03912gut",
+      "lang": "en",
+      "words": 32864,
+      "无歧义每千词": 37.49,
+      "有歧义每千词": 30.76,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "confessionsofjjr03913gut",
+      "lang": "en",
+      "words": 278347,
+      "无歧义每千词": 35.31,
+      "有歧义每千词": 34.18,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924014398154",
+      "lang": "en",
+      "words": 124269,
+      "无歧义每千词": 1.46,
+      "有歧义每千词": 4.37,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "cu31924027383284",
+      "lang": "fr",
+      "words": 64158,
+      "无歧义每千词": 7.45,
+      "有歧义每千词": 8.74,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "dictionnairedemu02rous",
+      "lang": "fr",
+      "words": 94562,
+      "无歧义每千词": 0.27,
+      "有歧义每千词": 1.36,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "ducontractsocia00rousgoog",
+      "lang": "fr",
+      "words": 46037,
+      "无歧义每千词": 0.93,
+      "有歧义每千词": 2.8,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "eloisaoraseries01rousgoog",
+      "lang": "en",
+      "words": 80944,
+      "无歧义每千词": 18.73,
+      "有歧义每千词": 25.26,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "espritmaximesetp00rous",
+      "lang": "fr",
+      "words": 90735,
+      "无歧义每千词": 1.74,
+      "有歧义每千词": 2.78,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "india.history.resource.94272",
+      "lang": "en",
+      "words": 74603,
+      "无歧义每千词": 0.92,
+      "有歧义每千词": 2.92,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "mileoudelducatio00rous",
+      "lang": "fr",
+      "words": 327000,
+      "无歧义每千词": 6.46,
+      "有歧义每千词": 9.74,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "uvrescompltesde04rousgoog",
+      "lang": "fr",
+      "words": 349759,
+      "无歧义每千词": 2.6,
+      "有歧义每千词": 6.26,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "uvrescompltesde07rousgoog",
+      "lang": "fr",
+      "words": 329983,
+      "无歧义每千词": 10.28,
+      "有歧义每千词": 12.66,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "yhteiskuntasopim53593gut",
+      "lang": "?",
+      "words": 43051,
+      "无歧义每千词": 3.97,
+      "有歧义每千词": 0.19,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    }
+  ]
+}

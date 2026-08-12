@@ -1,0 +1,670 @@
+{
+  "量了": 66,
+  "按语种中位": {
+    "en": 6.79
+  },
+  "疑似译本": 0,
+  "★口径": "只量一手；无歧义词与有歧义词分列；**本工具不给通过/不通过**",
+  "明细": [
+    {
+      "id": "LapsleyLincWritsLincDoug1",
+      "lang": "en",
+      "words": 109290,
+      "无歧义每千词": 7.51,
+      "有歧义每千词": 20.41,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "LincLastSpeech2",
+      "lang": "en",
+      "words": 3125,
+      "无歧义每千词": 3.2,
+      "有歧义每千词": 12.8,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bestoflincolnear00linc",
+      "lang": "en",
+      "words": 38952,
+      "无歧义每千词": 3.18,
+      "有歧义每千词": 8.47,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeprojectg03253gut",
+      "lang": "en",
+      "words": 549375,
+      "无歧义每千词": 6.79,
+      "有歧义每千词": 16.57,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksab09fishgoog",
+      "lang": "en",
+      "words": 97420,
+      "无歧义每千词": 7.33,
+      "有歧义每千词": 19.74,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksab11fishgoog",
+      "lang": "en",
+      "words": 98409,
+      "无歧义每千词": 7.27,
+      "有歧义每千词": 19.55,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworkscov1linc",
+      "lang": "en",
+      "words": 403145,
+      "无歧义每千词": 7.42,
+      "有歧义每千词": 18.74,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworkso2127linc",
+      "lang": "en",
+      "words": 87326,
+      "无歧义每千词": 6.1,
+      "有歧义每千词": 14.31,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworkso2129linc",
+      "lang": "en",
+      "words": 96360,
+      "无歧义每千词": 7.46,
+      "有歧义每千词": 19.59,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksof03linc",
+      "lang": "en",
+      "words": 97460,
+      "无歧义每千词": 7.3,
+      "有歧义每千词": 21.01,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksof05linc",
+      "lang": "en",
+      "words": 95435,
+      "无歧义每千词": 4.7,
+      "有歧义每千词": 14.36,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksof07linc",
+      "lang": "en",
+      "words": 73926,
+      "无歧义每千词": 5.76,
+      "有歧义每千词": 11.97,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksofa04linc",
+      "lang": "en",
+      "words": 96406,
+      "无歧义每千词": 7.44,
+      "有歧义每千词": 19.69,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksofa06linco",
+      "lang": "en",
+      "words": 73711,
+      "无歧义每千词": 5.77,
+      "有歧义每千词": 11.92,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksofa08linco",
+      "lang": "en",
+      "words": 78000,
+      "无歧义每千词": 8.31,
+      "有歧义每千词": 15.05,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksofa09linc",
+      "lang": "en",
+      "words": 90695,
+      "无歧义每千词": 2.95,
+      "有歧义每千词": 6.2,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksofa11linco",
+      "lang": "en",
+      "words": 81099,
+      "无歧义每千词": 11.25,
+      "有歧义每千词": 18.64,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksofa13linc",
+      "lang": "en",
+      "words": 79096,
+      "无歧义每千词": 6.37,
+      "有歧义每千词": 13.98,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksofa16linc",
+      "lang": "en",
+      "words": 97228,
+      "无歧义每千词": 0.79,
+      "有歧义每千词": 8.61,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksofav12linc",
+      "lang": "en",
+      "words": 97566,
+      "无歧义每千词": 0.78,
+      "有歧义每千词": 8.47,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksofv1linc",
+      "lang": "en",
+      "words": 88269,
+      "无歧义每千词": 6.8,
+      "有歧义每千词": 16.82,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksofv3linc",
+      "lang": "en",
+      "words": 97493,
+      "无歧义每千词": 7.32,
+      "有歧义每千词": 20.86,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksofv4linc",
+      "lang": "en",
+      "words": 96219,
+      "无歧义每千词": 7.47,
+      "有歧义每千词": 19.62,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksov7linc",
+      "lang": "en",
+      "words": 73870,
+      "无歧义每千词": 5.73,
+      "有歧义每千词": 11.86,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworksov9linc",
+      "lang": "en",
+      "words": 77394,
+      "无歧义每千词": 6.91,
+      "有歧义每千词": 13.77,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeworkv1linc",
+      "lang": "en",
+      "words": 88254,
+      "无歧义每千词": 6.79,
+      "有歧义每千词": 16.87,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completewov10linc",
+      "lang": "en",
+      "words": 78173,
+      "无歧义每千词": 8.29,
+      "有歧义每千词": 15.02,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completewov4linc",
+      "lang": "en",
+      "words": 96184,
+      "无歧义每千词": 7.48,
+      "有歧义每千词": 19.62,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completewv10linc",
+      "lang": "en",
+      "words": 78269,
+      "无歧义每千词": 8.27,
+      "有歧义每千词": 15.04,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completewv1linc",
+      "lang": "en",
+      "words": 88328,
+      "无歧义每千词": 6.79,
+      "有歧义每千词": 16.93,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completewv2linc",
+      "lang": "en",
+      "words": 398186,
+      "无歧义每千词": 5.55,
+      "有歧义每千词": 14.08,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completewv4linc",
+      "lang": "en",
+      "words": 96344,
+      "无歧义每千词": 7.46,
+      "有歧义每千词": 19.64,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924103069070",
+      "lang": "en",
+      "words": 399185,
+      "无歧义每千词": 5.53,
+      "有歧义每千词": 13.53,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "earlyspeechesofa1858linc",
+      "lang": "en",
+      "words": 1712,
+      "无歧义每千词": 18.11,
+      "有歧义每千词": 42.64,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "earlyspeechesofatslinc",
+      "lang": "en",
+      "words": 3632,
+      "无歧义每千词": 0.55,
+      "有歧义每千词": 3.58,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "earlyspeechesspr00linc",
+      "lang": "en",
+      "words": 39050,
+      "无歧义每千词": 3.12,
+      "有歧义每千词": 8.5,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "emancipationproc00linc",
+      "lang": "en",
+      "words": 900,
+      "无歧义每千词": 3.33,
+      "有歧义每千词": 7.78,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "firstsecondinaug01link",
+      "lang": "en",
+      "words": 11812,
+      "无歧义每千词": 1.61,
+      "有歧义每千词": 4.66,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "firstsecondinaug02link",
+      "lang": "en",
+      "words": 11803,
+      "无歧义每千词": 1.61,
+      "有歧义每千词": 4.58,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "gemsfromabrahaml00linc",
+      "lang": "en",
+      "words": 5403,
+      "无歧义每千词": 10.18,
+      "有歧义每千词": 24.99,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "generalordersno14149linc",
+      "lang": "en",
+      "words": 776,
+      "无歧义每千词": 2.58,
+      "有歧义每千词": 9.02,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "gettysburghspeech00lincrich",
+      "lang": "en",
+      "words": 30345,
+      "无歧义每千词": 4.51,
+      "有歧义每千词": 10.58,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "gettysburgspeec3835linc",
+      "lang": "en",
+      "words": 23682,
+      "无歧义每千词": 3.59,
+      "有歧义每千词": 7.56,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "inauguraladdress00linc",
+      "lang": "en",
+      "words": 3810,
+      "无歧义每千词": 3.94,
+      "有歧义每千词": 11.81,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "india.history.resource.111513",
+      "lang": "en",
+      "words": 394567,
+      "无歧义每千词": 7.43,
+      "有歧义每千词": 17.27,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "insurgentprivate00linc",
+      "lang": "en",
+      "words": 106467,
+      "无歧义每千词": 4.96,
+      "有歧义每千词": 11.25,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "jstor-20086068",
+      "lang": "en",
+      "words": 973,
+      "无歧义每千词": 22.61,
+      "有歧义每千词": 26.72,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lettersaddresses00inlinc",
+      "lang": "en",
+      "words": 124169,
+      "无歧义每千词": 7.11,
+      "有歧义每千词": 17.94,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lettersaddresses00link",
+      "lang": "en",
+      "words": 126797,
+      "无歧义每千词": 6.99,
+      "有歧义每千词": 17.71,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lettersaddresses02linc",
+      "lang": "en",
+      "words": 126984,
+      "无歧义每千词": 6.98,
+      "有歧义每千词": 17.73,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeworks02lincuoft",
+      "lang": "en",
+      "words": 93348,
+      "无歧义每千词": 2.4,
+      "有歧义每千词": 7.9,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeworks03lincuoft",
+      "lang": "en",
+      "words": 111379,
+      "无歧义每千词": 6.43,
+      "有歧义每千词": 20.02,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeworksofab1136linc",
+      "lang": "en",
+      "words": 93227,
+      "无歧义每千词": 2.36,
+      "有歧义每千词": 8.02,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeworksofab1137linc",
+      "lang": "en",
+      "words": 111222,
+      "无歧义每千词": 6.4,
+      "有歧义每千词": 20.06,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lincolnowenletters00lincrich",
+      "lang": "en",
+      "words": 3564,
+      "无歧义每千词": 18.8,
+      "有歧义每千词": 37.04,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lincstoriesspeech00lincrich",
+      "lang": "en",
+      "words": 69457,
+      "无歧义每千词": 6.55,
+      "有歧义每千词": 17.51,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingslincoln04lincrich",
+      "lang": "en",
+      "words": 90419,
+      "无歧义每千词": 6.99,
+      "有歧义每千词": 19.6,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingslincoln05lincrich",
+      "lang": "en",
+      "words": 124668,
+      "无歧义每千词": 7.48,
+      "有歧义每千词": 16.44,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsofabraha0000linc",
+      "lang": "en",
+      "words": 130668,
+      "无歧义每千词": 1.58,
+      "有歧义每千词": 3.96,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsofabraha0004linc",
+      "lang": "en",
+      "words": 90704,
+      "无歧义每千词": 6.96,
+      "有歧义每千词": 19.68,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsofabraha0005linc",
+      "lang": "en",
+      "words": 124642,
+      "无歧义每千词": 7.47,
+      "有歧义每千词": 16.08,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsofabraha02lincuoft",
+      "lang": "en",
+      "words": 90976,
+      "无歧义每千词": 4.73,
+      "有歧义每千词": 13.62,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsofabraha03lincuoft",
+      "lang": "en",
+      "words": 109643,
+      "无歧义每千词": 7.79,
+      "有歧义每千词": 21.75,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsofabraha05lincuoft",
+      "lang": "en",
+      "words": 126358,
+      "无歧义每千词": 7.51,
+      "有歧义每千词": 16.33,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsofabraha07lincuoft",
+      "lang": "en",
+      "words": 114667,
+      "无歧义每千词": 5.57,
+      "有歧义每千词": 10.8,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "wsb18f36_images",
+      "lang": "en",
+      "words": 2707,
+      "无歧义每千词": 7.39,
+      "有歧义每千词": 11.82,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    }
+  ]
+}

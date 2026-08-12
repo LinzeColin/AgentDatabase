@@ -1,0 +1,703 @@
+{
+  "量了": 69,
+  "按语种中位": {
+    "de": 7.23,
+    "it": 12.12,
+    "en": 6.8,
+    "fr": 0.19
+  },
+  "疑似译本": 3,
+  "★口径": "只量一手；无歧义词与有歧义词分列；**本工具不给通过/不通过**",
+  "明细": [
+    {
+      "id": "10041514bsb",
+      "lang": "de",
+      "words": 56084,
+      "无歧义每千词": 19.9,
+      "有歧义每千词": 11.09,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10050004bsb",
+      "lang": "de",
+      "words": 313891,
+      "无歧义每千词": 10.12,
+      "有歧义每千词": 9.74,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10065771bsb",
+      "lang": "de",
+      "words": 45315,
+      "无歧义每千词": 23.48,
+      "有歧义每千词": 12.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10082563bsb",
+      "lang": "de",
+      "words": 24235,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 3.01,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10082564bsb",
+      "lang": "de",
+      "words": 40336,
+      "无歧义每千词": 0.02,
+      "有歧义每千词": 0.07,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10116094bsb",
+      "lang": "de",
+      "words": 62297,
+      "无歧义每千词": 10.42,
+      "有歧义每千词": 13.69,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10116095bsb",
+      "lang": "de",
+      "words": 58149,
+      "无歧义每千词": 5.21,
+      "有歧义每千词": 6.07,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10116096bsb",
+      "lang": "de",
+      "words": 57789,
+      "无歧义每千词": 2.99,
+      "有歧义每千词": 4.29,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10116099bsb",
+      "lang": "de",
+      "words": 35810,
+      "无歧义每千词": 8.21,
+      "有歧义每千词": 10.5,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10128423bsb",
+      "lang": "de",
+      "words": 142609,
+      "无歧义每千词": 9.74,
+      "有歧义每千词": 15.07,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10129401bsb",
+      "lang": "de",
+      "words": 76606,
+      "无歧义每千词": 12.9,
+      "有歧义每千词": 18.73,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10129403bsb",
+      "lang": "de",
+      "words": 84355,
+      "无歧义每千词": 5.88,
+      "有歧义每千词": 7.8,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10311310bsb",
+      "lang": "de",
+      "words": 58195,
+      "无歧义每千词": 5.26,
+      "有歧义每千词": 6.2,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10311311bsb",
+      "lang": "de",
+      "words": 57718,
+      "无歧义每千词": 3.07,
+      "有歧义每千词": 4.38,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10721192bsb",
+      "lang": "de",
+      "words": 38564,
+      "无歧义每千词": 22.33,
+      "有歧义每千词": 16.21,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10724505bsb",
+      "lang": "de",
+      "words": 91879,
+      "无歧义每千词": 10.74,
+      "有歧义每千词": 15.23,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10724506bsb",
+      "lang": "de",
+      "words": 109294,
+      "无歧义每千词": 5.58,
+      "有歧义每千词": 7.84,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10724507bsb",
+      "lang": "de",
+      "words": 98144,
+      "无歧义每千词": 5.86,
+      "有歧义每千词": 6.93,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10724508bsb",
+      "lang": "de",
+      "words": 70047,
+      "无歧义每千词": 16.33,
+      "有歧义每千词": 14.75,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10724509bsb",
+      "lang": "de",
+      "words": 94116,
+      "无歧义每千词": 2.18,
+      "有歧义每千词": 3.25,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10724510bsb",
+      "lang": "de",
+      "words": 95542,
+      "无歧义每千词": 13.69,
+      "有歧义每千词": 8.89,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "PestalozziMieIndagini",
+      "lang": "it",
+      "words": 70209,
+      "无歧义每千词": 12.12,
+      "有歧义每千词": 6.62,
+      "第一人称动词每千词": 4.8,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_eighteenth-century_leonard-gertrude-a-po_pestalozzi-johann-heinr_1800",
+      "lang": "en",
+      "words": 83284,
+      "无歧义每千词": 12.01,
+      "有歧义每千词": 15.3,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bub_gb_H-I_AAAAcAAJ",
+      "lang": "de",
+      "words": 342039,
+      "无歧义每千词": 9.92,
+      "有歧义每千词": 7.88,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_tLQ7AAAAcAAJ",
+      "lang": "de",
+      "words": 67867,
+      "无歧义每千词": 5.69,
+      "有歧义每千词": 3.54,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "buchdermtter00pest",
+      "lang": "de",
+      "words": 35959,
+      "无歧义每千词": 2.22,
+      "有歧义每千词": 1.42,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cmoeducajertrud00pestgoog",
+      "lang": "fr",
+      "words": 140168,
+      "无歧义每千词": 0.19,
+      "有歧义每千词": 0.14,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "diepdagogikjoh00pest",
+      "lang": "de",
+      "words": 61842,
+      "无歧义每千词": 5.56,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "gpl_1902807",
+      "lang": "en",
+      "words": 47626,
+      "无歧义每千词": 2.98,
+      "有歧义每千词": 5.71,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "howgertrudeteach00pest",
+      "lang": "en",
+      "words": 93393,
+      "无歧义每千词": 13.1,
+      "有歧义每千词": 14.65,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "howgertrudeteach00pest_0",
+      "lang": "en",
+      "words": 105470,
+      "无歧义每千词": 12.02,
+      "有歧义每千词": 12.69,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "howgertrudeteach00pestiala",
+      "lang": "en",
+      "words": 106874,
+      "无歧义每千词": 11.93,
+      "有歧义每千词": 13.15,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "howgertrudeteach00pestuoft",
+      "lang": "en",
+      "words": 108245,
+      "无歧义每千词": 11.79,
+      "有歧义每千词": 12.99,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "leonardgertrude00pestiala",
+      "lang": "en",
+      "words": 59175,
+      "无歧义每千词": 7.03,
+      "有歧义每千词": 11.78,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "leonardgertrudep00pest",
+      "lang": "en",
+      "words": 77653,
+      "无歧义每千词": 14.28,
+      "有歧义每千词": 23.55,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lettersonearlye03pestgoog",
+      "lang": "en",
+      "words": 41840,
+      "无歧义每千词": 3.25,
+      "有歧义每千词": 7.96,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lettersonearlyed00pest",
+      "lang": "en",
+      "words": 41358,
+      "无歧义每千词": 3.24,
+      "有歧义每千词": 8.12,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lettersonearlyed00pestiala",
+      "lang": "en",
+      "words": 49684,
+      "无歧义每千词": 2.66,
+      "有歧义每千词": 6.34,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lienhardundgert00pestgoog",
+      "lang": "de",
+      "words": 167498,
+      "无歧义每千词": 8.61,
+      "有歧义每千词": 11.25,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lienhardundgert01pestgoog",
+      "lang": "de",
+      "words": 201112,
+      "无歧义每千词": 5.18,
+      "有歧义每千词": 6.2,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lienhardundgert02pestgoog",
+      "lang": "de",
+      "words": 171400,
+      "无歧义每千词": 8.33,
+      "有歧义每千词": 11.37,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "meinelebensschi01pestgoog",
+      "lang": "de",
+      "words": 95009,
+      "无歧义每千词": 21.98,
+      "有歧义每千词": 9.65,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "pestalozzisleben00pest",
+      "lang": "de",
+      "words": 349911,
+      "无歧义每千词": 9.06,
+      "有歧义每千词": 0.34,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "pestalozzisleona00pestuoft",
+      "lang": "en",
+      "words": 60570,
+      "无歧义每千词": 6.8,
+      "有歧义每千词": 11.42,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "pestalozzislienh00pest",
+      "lang": "de",
+      "words": 154525,
+      "无歧义每千词": 7.13,
+      "有歧义每千词": 0.07,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "pestalozzissamtl04pest",
+      "lang": "de",
+      "words": 317121,
+      "无歧义每千词": 6.83,
+      "有歧义每千词": 0.86,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "pestalozzissmmt00seyfgoog",
+      "lang": "de",
+      "words": 4868,
+      "无歧义每千词": 3.49,
+      "有歧义每千词": 3.08,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "pestalozzissmmt01seyfgoog",
+      "lang": "en",
+      "words": 1185,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 1.69,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "pestalozzissmmt02seyfgoog",
+      "lang": "en",
+      "words": 1154,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "pestalozzissmmt03seyfgoog",
+      "lang": "en",
+      "words": 1129,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "pestalozzissmmt04seyfgoog",
+      "lang": "de",
+      "words": 7499,
+      "无歧义每千词": 10.8,
+      "有歧义每千词": 6.4,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschr02pest",
+      "lang": "de",
+      "words": 91122,
+      "无歧义每千词": 5.4,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschr10pestuoft",
+      "lang": "de",
+      "words": 78010,
+      "无歧义每千词": 7.23,
+      "有歧义每千词": 8.74,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri01pestuoft",
+      "lang": "de",
+      "words": 88917,
+      "无歧义每千词": 8.79,
+      "有歧义每千词": 0.58,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri03pestuoft",
+      "lang": "de",
+      "words": 106571,
+      "无歧义每千词": 5.99,
+      "有歧义每千词": 8.23,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri04pestuoft",
+      "lang": "de",
+      "words": 95869,
+      "无歧义每千词": 6.07,
+      "有歧义每千词": 7.2,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri05pestuoft",
+      "lang": "de",
+      "words": 68147,
+      "无歧义每千词": 16.93,
+      "有歧义每千词": 15.45,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri06pestuoft",
+      "lang": "de",
+      "words": 93317,
+      "无歧义每千词": 2.34,
+      "有歧义每千词": 3.29,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri07pestuoft",
+      "lang": "de",
+      "words": 92718,
+      "无歧义每千词": 14.68,
+      "有歧义每千词": 9.88,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri08pestuoft",
+      "lang": "de",
+      "words": 89517,
+      "无歧义每千词": 4.1,
+      "有歧义每千词": 3.79,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri09pestuoft",
+      "lang": "de",
+      "words": 70714,
+      "无歧义每千词": 15.15,
+      "有歧义每千词": 12.68,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri11pestuoft",
+      "lang": "de",
+      "words": 89615,
+      "无歧义每千词": 14.21,
+      "有歧义每千词": 10.28,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri12pestuoft",
+      "lang": "de",
+      "words": 119889,
+      "无歧义每千词": 3.94,
+      "有歧义每千词": 0.15,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri13pestuoft",
+      "lang": "de",
+      "words": 82288,
+      "无歧义每千词": 10.82,
+      "有歧义每千词": 7.4,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri14pestuoft",
+      "lang": "de",
+      "words": 83375,
+      "无歧义每千词": 0.97,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smmtlicheschri15pestuoft",
+      "lang": "de",
+      "words": 94064,
+      "无歧义每千词": 0.92,
+      "有歧义每千词": 2.38,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smtlichewerke01pestuoft",
+      "lang": "de",
+      "words": 298541,
+      "无歧义每千词": 6.1,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smtlichewerke02pestuoft",
+      "lang": "de",
+      "words": 190573,
+      "无歧义每千词": 28.82,
+      "有歧义每千词": 1.09,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "smtlichewerke03pestuoft",
+      "lang": "de",
+      "words": 156287,
+      "无歧义每千词": 16.82,
+      "有歧义每千词": 0.06,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    }
+  ]
+}

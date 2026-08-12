@@ -1,0 +1,673 @@
+{
+  "量了": 66,
+  "按语种中位": {
+    "de": 2.25,
+    "fr": 1.53,
+    "it": 2.46,
+    "en": 2.2
+  },
+  "疑似译本": 5,
+  "★口径": "只量一手；无歧义词与有歧义词分列；**本工具不给通过/不通过**",
+  "明细": [
+    {
+      "id": "00074230bsb",
+      "lang": "de",
+      "words": 65231,
+      "无歧义每千词": 2.31,
+      "有歧义每千词": 5.04,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10040686bsb",
+      "lang": "de",
+      "words": 22595,
+      "无歧义每千词": 2.08,
+      "有歧义每千词": 2.66,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10040687bsb",
+      "lang": "de",
+      "words": 26258,
+      "无歧义每千词": 2.02,
+      "有歧义每千词": 2.06,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10042413bsb",
+      "lang": "de",
+      "words": 70903,
+      "无歧义每千词": 0.49,
+      "有歧义每千词": 0.78,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10043581bsb",
+      "lang": "de",
+      "words": 120045,
+      "无歧义每千词": 0.8,
+      "有歧义每千词": 1.43,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10044864bsb",
+      "lang": "de",
+      "words": 49090,
+      "无歧义每千词": 1.34,
+      "有歧义每千词": 3.75,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10045002bsb",
+      "lang": "de",
+      "words": 115492,
+      "无歧义每千词": 0.78,
+      "有歧义每千词": 1.49,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10046171bsb",
+      "lang": "de",
+      "words": 93917,
+      "无歧义每千词": 1.76,
+      "有歧义每千词": 2.95,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10046172bsb",
+      "lang": "de",
+      "words": 100982,
+      "无歧义每千词": 2.13,
+      "有歧义每千词": 3.2,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10046183bsb",
+      "lang": "de",
+      "words": 141077,
+      "无歧义每千词": 0.54,
+      "有歧义每千词": 1.14,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10046188bsb",
+      "lang": "de",
+      "words": 134442,
+      "无歧义每千词": 1.01,
+      "有歧义每千词": 1.77,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10046192bsb",
+      "lang": "de",
+      "words": 89903,
+      "无歧义每千词": 2.25,
+      "有歧义每千词": 2.8,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10046194bsb",
+      "lang": "de",
+      "words": 117635,
+      "无歧义每千词": 3.52,
+      "有歧义每千词": 2.6,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "265433882.1678.emory.edu",
+      "lang": "de",
+      "words": 154706,
+      "无歧义每千词": 3.07,
+      "有歧义每千词": 6.13,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "265433882.1682.emory.edu",
+      "lang": "de",
+      "words": 173532,
+      "无歧义每千词": 2.5,
+      "有歧义每千词": 3.88,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "265433882.1713.emory.edu",
+      "lang": "de",
+      "words": 179507,
+      "无歧义每千词": 1.11,
+      "有歧义每千词": 1.76,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "FilosofaDeLaHistoriaEmmanuelKant",
+      "lang": "fr",
+      "words": 31406,
+      "无歧义每千词": 0.03,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "ImmanuelKantsKritikDerReinenVernunftMitEinerEinleitungUnd",
+      "lang": "de",
+      "words": 271360,
+      "无歧义每千词": 2.35,
+      "有歧义每千词": 4.42,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "Kant-polmica-CRP",
+      "lang": "fr",
+      "words": 55700,
+      "无歧义每千词": 0.11,
+      "有歧义每千词": 0.02,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "KantAntropologiaPrammatica",
+      "lang": "it",
+      "words": 80532,
+      "无歧义每千词": 0.61,
+      "有歧义每千词": 1.02,
+      "第一人称动词每千词": 3.74,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "ProlegomeniKantMartinetti",
+      "lang": "it",
+      "words": 106302,
+      "无歧义每千词": 2.46,
+      "有歧义每千词": 3.84,
+      "第一人称动词每千词": 6.49,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "TheMetaphysicOfEthicsByImmanuelKantTranslatedByJ.w.SempleEdited",
+      "lang": "en",
+      "words": 98778,
+      "无歧义每千词": 2.07,
+      "有歧义每千词": 2.36,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "aje7738.0003.001.umich.edu",
+      "lang": "de",
+      "words": 232011,
+      "无歧义每千词": 4.15,
+      "有歧义每千词": 4.08,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "anthropologiesu00kantgoog",
+      "lang": "fr",
+      "words": 130543,
+      "无歧义每千词": 1.67,
+      "有歧义每千词": 2.83,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "b24885046",
+      "lang": "de",
+      "words": 126073,
+      "无歧义每千词": 1.21,
+      "有歧义每千词": 1.46,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "b28738615",
+      "lang": "de",
+      "words": 40110,
+      "无歧义每千词": 0.6,
+      "有歧义每千词": 2.27,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "b28764523",
+      "lang": "de",
+      "words": 79090,
+      "无歧义每千词": 1.1,
+      "有歧义每千词": 1.53,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_eighteenth-century_essays-and-treatises-on-_kant-immanuel_1798_2",
+      "lang": "en",
+      "words": 136884,
+      "无歧义每千词": 1.15,
+      "有歧义每千词": 3.15,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bim_eighteenth-century_the-metaphysic-of-morals_kant-immanuel_1799_1",
+      "lang": "en",
+      "words": 59286,
+      "无歧义每千词": 4.3,
+      "有歧义每千词": 3.41,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "briefwechselvoni01kant",
+      "lang": "de",
+      "words": 114592,
+      "无歧义每千词": 21.28,
+      "有歧义每千词": 22.05,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "briefwechselvoni02kant",
+      "lang": "de",
+      "words": 116855,
+      "无歧义每千词": 23.17,
+      "有歧义每千词": 24.18,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "briefwechselvoni03kant",
+      "lang": "de",
+      "words": 106217,
+      "无歧义每千词": 21.11,
+      "有歧义每千词": 19.9,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_7rI_AAAAYAAJ",
+      "lang": "de",
+      "words": 64839,
+      "无歧义每千词": 0.71,
+      "有歧义每千词": 0.03,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_F31ZAAAAcAAJ",
+      "lang": "fr",
+      "words": 120592,
+      "无歧义每千词": 1.53,
+      "有歧义每千词": 2.9,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_F7gA_JUh5EYC",
+      "lang": "fr",
+      "words": 119943,
+      "无歧义每千词": 1.53,
+      "有歧义每千词": 2.91,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_Oc0AAAAAcAAJ",
+      "lang": "de",
+      "words": 40558,
+      "无歧义每千词": 0.57,
+      "有歧义每千词": 2.02,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_PiRNAAAAMAAJ",
+      "lang": "de",
+      "words": 226492,
+      "无歧义每千词": 2.35,
+      "有歧义每千词": 4.64,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_Wiw-AAAAYAAJ",
+      "lang": "de",
+      "words": 126110,
+      "无歧义每千词": 2.65,
+      "有歧义每千词": 4.62,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_mIdQAAAAYAAJ",
+      "lang": "de",
+      "words": 184602,
+      "无歧义每千词": 3.77,
+      "有歧义每千词": 1.38,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_nsALAAAAIAAJ",
+      "lang": "de",
+      "words": 170056,
+      "无歧义每千词": 20.11,
+      "有歧义每千词": 14.68,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_pbI_AAAAYAAJ",
+      "lang": "de",
+      "words": 47623,
+      "无歧义每千词": 0.78,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_tawUAAAAQAAJ",
+      "lang": "de",
+      "words": 83670,
+      "无歧义每千词": 1.12,
+      "有歧义每千词": 1.28,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "critiquedelarai02tissgoog",
+      "lang": "fr",
+      "words": 130793,
+      "无歧义每千词": 1.8,
+      "有歧义每千词": 3.46,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "critiqueofjudgem00kantuoft",
+      "lang": "en",
+      "words": 141880,
+      "无歧义每千词": 0.66,
+      "有歧义每千词": 2.7,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "dli.ministry.13241",
+      "lang": "en",
+      "words": 32211,
+      "无歧义每千词": 2.67,
+      "有歧义每千词": 3.76,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "educationaltheor0000kant",
+      "lang": "en",
+      "words": 88753,
+      "无歧义每千词": 0.86,
+      "有歧义每千词": 1.3,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "educationaltheor00kantuoft",
+      "lang": "en",
+      "words": 84907,
+      "无歧义每千词": 0.61,
+      "有歧义每千词": 1.44,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "ikuiseenrauhaanv53461gut",
+      "lang": "en",
+      "words": 22917,
+      "无歧义每千词": 3.58,
+      "有歧义每千词": 0.17,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "immanuelkantscri0000kant_c7p6",
+      "lang": "en",
+      "words": 256718,
+      "无歧义每千词": 2.33,
+      "有歧义每千词": 5.06,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "immanuelkantscri02kantuoft",
+      "lang": "en",
+      "words": 199454,
+      "无歧义每千词": 1.54,
+      "有歧义每千词": 4.89,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "immanuelkantskr03kantgoog",
+      "lang": "de",
+      "words": 225326,
+      "无歧义每千词": 2.25,
+      "有歧义每千词": 4.9,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "india.history.resource.90167",
+      "lang": "en",
+      "words": 161120,
+      "无歧义每千词": 2.2,
+      "有歧义每千词": 3.67,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "kant-della-forza-dell-animo",
+      "lang": "it",
+      "words": 13633,
+      "无歧义每千词": 6.16,
+      "有歧义每千词": 0.88,
+      "第一人称动词每千词": 5.65,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "kantlobelloylosublime1919",
+      "lang": "fr",
+      "words": 20534,
+      "无歧义每千词": 0.05,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "kantscritique01kantuoft",
+      "lang": "en",
+      "words": 164792,
+      "无歧义每千词": 2.23,
+      "有歧义每千词": 3.93,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "kantsgesammeltes0000kant_l9l8",
+      "lang": "de",
+      "words": 282127,
+      "无歧义每千词": 3.1,
+      "有歧义每千词": 5.08,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "kantsgesammeltes0010kant",
+      "lang": "de",
+      "words": 189507,
+      "无歧义每千词": 18.69,
+      "有歧义每千词": 7.02,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "kantsgesammeltes0027kant",
+      "lang": "de",
+      "words": 204776,
+      "无歧义每千词": 0.88,
+      "有歧义每千词": 0.46,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "kantsgesammeltes12kant",
+      "lang": "de",
+      "words": 136357,
+      "无歧义每千词": 15.18,
+      "有歧义每千词": 0.07,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "kantsgesammeltes13kant",
+      "lang": "de",
+      "words": 250149,
+      "无歧义每千词": 3.75,
+      "有歧义每千词": 1.5,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "kantsgesammeltes55925gut",
+      "lang": "de",
+      "words": 132688,
+      "无歧义每千词": 0.83,
+      "有歧义每千词": 1.42,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "kantsprolegomen00kantuoft",
+      "lang": "en",
+      "words": 136851,
+      "无歧义每千词": 2.18,
+      "有歧义每千词": 3.36,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "kantsprolegomena00kantuoft",
+      "lang": "en",
+      "words": 92377,
+      "无歧义每千词": 2.46,
+      "有歧义每千词": 3.82,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "metaphysicofethi00kantiala",
+      "lang": "en",
+      "words": 108043,
+      "无歧义每千词": 2.05,
+      "有歧义每千词": 2.55,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "philosophyoflawe0000kant",
+      "lang": "en",
+      "words": 83972,
+      "无歧义每千词": 4.01,
+      "有歧义每千词": 2.87,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "saemmtlichewerke0004kant",
+      "lang": "de",
+      "words": 173322,
+      "无歧义每千词": 2.49,
+      "有歧义每千词": 3.88,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    }
+  ]
+}

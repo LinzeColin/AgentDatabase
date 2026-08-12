@@ -1,0 +1,686 @@
+{
+  "量了": 67,
+  "按语种中位": {
+    "de": 2.17,
+    "la": 0.79,
+    "it": 0.84,
+    "cs": 0.4,
+    "fr": 0.44,
+    "en": 1.05,
+    "?": 0.57
+  },
+  "疑似译本": 2,
+  "★口径": "只量一手；无歧义词与有歧义词分列；**本工具不给通过/不通过**",
+  "明细": [
+    {
+      "id": "00140496bsb",
+      "lang": "de",
+      "words": 26683,
+      "无歧义每千词": 0.26,
+      "有歧义每千词": 0.22,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10026103bsb",
+      "lang": "de",
+      "words": 133379,
+      "无歧义每千词": 2.86,
+      "有歧义每千词": 2.74,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10261284bsb",
+      "lang": "de",
+      "words": 24632,
+      "无歧义每千词": 8.08,
+      "有歧义每千词": 10.88,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10270188bsb",
+      "lang": "de",
+      "words": 18914,
+      "无歧义每千词": 10.15,
+      "有歧义每千词": 12.27,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10448790bsb",
+      "lang": "de",
+      "words": 118162,
+      "无歧义每千词": 2.17,
+      "有歧义每千词": 3.2,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10448791bsb",
+      "lang": "de",
+      "words": 26775,
+      "无歧义每千词": 2.17,
+      "有歧义每千词": 2.65,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10584856bsb",
+      "lang": "de",
+      "words": 29992,
+      "无歧义每千词": 0.2,
+      "有歧义每千词": 0.2,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10585771bsb",
+      "lang": "la",
+      "words": 186690,
+      "无歧义每千词": 1.73,
+      "有歧义每千词": 0.19,
+      "第一人称动词每千词": 0.2,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "10779570bsb",
+      "lang": "de",
+      "words": 79361,
+      "无歧义每千词": 0.14,
+      "有歧义每千词": 0.15,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10912059bsb",
+      "lang": "de",
+      "words": 87421,
+      "无歧义每千词": 0.1,
+      "有歧义每千词": 0.21,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "11092509bsb",
+      "lang": "de",
+      "words": 131619,
+      "无歧义每千词": 2.37,
+      "有歧义每千词": 3.42,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "11104945bsb",
+      "lang": "de",
+      "words": 89308,
+      "无歧义每千词": 0.24,
+      "有歧义每千词": 0.15,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "ComeniusDidatticaMagna",
+      "lang": "it",
+      "words": 134418,
+      "无歧义每千词": 0.84,
+      "有歧义每千词": 0.45,
+      "第一人称动词每千词": 3.53,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "OrbisPictusGraeco-latinus",
+      "lang": "la",
+      "words": 25526,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 0.08,
+      "第一人称动词每千词": 0.67,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "asomrnpekladyal00jiregoog",
+      "lang": "cs",
+      "words": 30704,
+      "无歧义每千词": 13.22,
+      "有歧义每千词": 3.45,
+      "第一人称动词每千词": 2.9,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "b21782386",
+      "lang": "de",
+      "words": 239285,
+      "无歧义每千词": 0.97,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "b32990431",
+      "lang": "fr",
+      "words": 141011,
+      "无歧义每千词": 0.44,
+      "有歧义每千词": 0.38,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_conatuum-comenianorum-pr_komensk-jan-amos_1637",
+      "lang": "la",
+      "words": 16462,
+      "无歧义每千词": 0.79,
+      "有歧义每千词": 0.49,
+      "第一人称动词每千词": 0.49,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_janua-linguarum-reserata_komensky-jan-amos_1636",
+      "lang": "en",
+      "words": 99593,
+      "无歧义每千词": 0.79,
+      "有歧义每千词": 1.88,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_joh-amos-comenii-vestib_comenius-johann-amos_1647",
+      "lang": "en",
+      "words": 49696,
+      "无歧义每千词": 1.15,
+      "有歧义每千词": 5.45,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1631",
+      "lang": "en",
+      "words": 73407,
+      "无歧义每千词": 1.05,
+      "有歧义每千词": 1.72,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1631_0",
+      "lang": "en",
+      "words": 72676,
+      "无歧义每千词": 0.77,
+      "有歧义每千词": 1.66,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1633",
+      "lang": "en",
+      "words": 56685,
+      "无歧义每千词": 1.34,
+      "有歧义每千词": 2.7,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1637",
+      "lang": "en",
+      "words": 122952,
+      "无歧义每千词": 0.72,
+      "有歧义每千词": 3.32,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1639",
+      "lang": "en",
+      "words": 121958,
+      "无歧义每千词": 0.73,
+      "有歧义每千词": 3.17,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensk-jan-amos_1639_0",
+      "lang": "en",
+      "words": 84239,
+      "无歧义每千词": 0.62,
+      "有歧义每千词": 1.23,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_porta-linguarum-trilingu_komensky-jan-amos_1631",
+      "lang": "en",
+      "words": 65158,
+      "无歧义每千词": 1.21,
+      "有歧义每千词": 1.75,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_porta-sapienti-reserata_komensky-jan-amos_1637",
+      "lang": "la",
+      "words": 17844,
+      "无歧义每千词": 1.18,
+      "有歧义每千词": 0.39,
+      "第一人称动词每千词": 0.84,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_reverendi-et-clarissimi-_komensk-jan-amos_1638",
+      "lang": "la",
+      "words": 55675,
+      "无歧义每千词": 0.65,
+      "有歧义每千词": 0.32,
+      "第一人称动词每千词": 0.48,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1475-1640_the-gate-of-tongues-unlo_komensky-jan-amos_1633",
+      "lang": "en",
+      "words": 75320,
+      "无歧义每千词": 0.97,
+      "有歧义每千词": 1.62,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1641-1700_a-continuation-of-mr-jo_comenius-johann-amos_1648",
+      "lang": "en",
+      "words": 5726,
+      "无歧义每千词": 3.67,
+      "有歧义每千词": 7.16,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_early-english-books-1641-1700_a-generall-table-of-euro_comenius-johann-amos_1670",
+      "lang": "en",
+      "words": 106682,
+      "无歧义每千词": 3.61,
+      "有歧义每千词": 2.44,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_2x85AQAAMAAJ",
+      "lang": "cs",
+      "words": 184207,
+      "无歧义每千词": 0.4,
+      "有歧义每千词": 0.28,
+      "第一人称动词每千词": 0.97,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_34RCAQAAMAAJ",
+      "lang": "de",
+      "words": 146938,
+      "无歧义每千词": 3.46,
+      "有歧义每千词": 0.52,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_34ZDAQAAMAAJ",
+      "lang": "cs",
+      "words": 34823,
+      "无歧义每千词": 1.23,
+      "有歧义每千词": 0.06,
+      "第一人称动词每千词": 0.0,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_3nVBAQAAMAAJ",
+      "lang": "de",
+      "words": 143260,
+      "无歧义每千词": 7.41,
+      "有歧义每千词": 1.26,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_64syAQAAMAAJ",
+      "lang": "en",
+      "words": 26526,
+      "无歧义每千词": 0.08,
+      "有歧义每千词": 4.34,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_6LOgAAAAMAAJ",
+      "lang": "cs",
+      "words": 117687,
+      "无歧义每千词": 0.31,
+      "有歧义每千词": 0.23,
+      "第一人称动词每千词": 0.08,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_AakZAAAAYAAJ",
+      "lang": "cs",
+      "words": 103798,
+      "无歧义每千词": 1.67,
+      "有歧义每千词": 0.03,
+      "第一人称动词每千词": 0.01,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_DD1KAAAAYAAJ",
+      "lang": "cs",
+      "words": 160964,
+      "无歧义每千词": 0.55,
+      "有歧义每千词": 0.32,
+      "第一人称动词每千词": 0.34,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_FTtFAAAAYAAJ",
+      "lang": "cs",
+      "words": 88954,
+      "无歧义每千词": 0.27,
+      "有歧义每千词": 0.37,
+      "第一人称动词每千词": 0.37,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_Fx1BAAAAcAAJ",
+      "lang": "de",
+      "words": 119881,
+      "无歧义每千词": 2.34,
+      "有歧义每千词": 2.94,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_GoAWAAAAIAAJ",
+      "lang": "en",
+      "words": 371450,
+      "无歧义每千词": 0.38,
+      "有歧义每千词": 1.2,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_GyAoAAAAYAAJ",
+      "lang": "?",
+      "words": 45841,
+      "无歧义每千词": 0.57,
+      "有歧义每千词": 36.74,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_HiRbAAAAcAAJ",
+      "lang": "de",
+      "words": 103369,
+      "无歧义每千词": 0.29,
+      "有歧义每千词": 0.08,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_JvJCAQAAMAAJ",
+      "lang": "de",
+      "words": 51469,
+      "无歧义每千词": 1.19,
+      "有歧义每千词": 0.29,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_MAITAAAAIAAJ",
+      "lang": "fr",
+      "words": 203813,
+      "无歧义每千词": 0.6,
+      "有歧义每千词": 0.32,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_MrNBAAAAYAAJ",
+      "lang": "cs",
+      "words": 95192,
+      "无歧义每千词": 0.33,
+      "有歧义每千词": 0.34,
+      "第一人称动词每千词": 0.37,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_WGNcAAAAcAAJ",
+      "lang": "?",
+      "words": 80797,
+      "无歧义每千词": 0.36,
+      "有歧义每千词": 14.78,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb__A5WAAAAcAAJ",
+      "lang": "de",
+      "words": 123455,
+      "无歧义每千词": 2.26,
+      "有歧义每千词": 2.84,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_gzBQAAAAcAAJ",
+      "lang": "de",
+      "words": 233689,
+      "无歧义每千词": 0.1,
+      "有歧义每千词": 0.08,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_iaoPAAAAQAAJ",
+      "lang": "fr",
+      "words": 79201,
+      "无歧义每千词": 0.27,
+      "有歧义每千词": 0.37,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_sqpdAAAAcAAJ",
+      "lang": "de",
+      "words": 24758,
+      "无歧义每千词": 0.04,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_uhBcAAAAcAAJ",
+      "lang": "de",
+      "words": 148798,
+      "无歧义每千词": 2.57,
+      "有歧义每千词": 0.55,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bub_gb_zYpUAAAAcAAJ",
+      "lang": "la",
+      "words": 39482,
+      "无歧义每千词": 1.85,
+      "有歧义每千词": 0.48,
+      "第一人称动词每千词": 0.48,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "dbc.wroc.pl.BOss_XVII_3922",
+      "lang": "la",
+      "words": 12106,
+      "无歧义每千词": 0.83,
+      "有歧义每千词": 0.58,
+      "第一人称动词每千词": 0.83,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "dbc.wroc.pl.BOss_XVII_3923",
+      "lang": "la",
+      "words": 13379,
+      "无歧义每千词": 0.37,
+      "有歧义每千词": 0.75,
+      "第一人称动词每千词": 0.6,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "didaktikanawren00comeuoft",
+      "lang": "cs",
+      "words": 93763,
+      "无歧义每千词": 0.38,
+      "有歧义每千词": 0.38,
+      "第一人称动词每千词": 0.42,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "grosseunterricht00comeuoft",
+      "lang": "de",
+      "words": 179446,
+      "无歧义每千词": 2.96,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "jbc.bj.uj.edu.pl.DIGSTDR000361",
+      "lang": "la",
+      "words": 76095,
+      "无歧义每千词": 0.58,
+      "有歧义每千词": 0.62,
+      "第一人称动词每千词": 0.43,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "labyrinthofworld00comeuoft",
+      "lang": "en",
+      "words": 80444,
+      "无歧义每千词": 9.67,
+      "有歧义每千词": 16.98,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "orbispictusofjoh00comeiala",
+      "lang": "en",
+      "words": 38365,
+      "无歧义每千词": 0.5,
+      "有歧义每千词": 2.27,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "orbispictusswtwo0000come",
+      "lang": "de",
+      "words": 83768,
+      "无歧义每千词": 0.08,
+      "有歧义每千词": 0.04,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "rulesoflife00come",
+      "lang": "en",
+      "words": 4647,
+      "无歧义每千词": 2.8,
+      "有歧义每千词": 3.44,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "schoolofinfancye00comeiala",
+      "lang": "en",
+      "words": 83617,
+      "无歧义每千词": 4.26,
+      "有歧义每千词": 4.65,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "thelabyrinthofth00comeuoft",
+      "lang": "en",
+      "words": 77456,
+      "无歧义每千词": 10.41,
+      "有歧义每千词": 18.77,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "theorbispictus28299gut",
+      "lang": "en",
+      "words": 40886,
+      "无歧义每千词": 0.34,
+      "有歧义每千词": 1.3,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    }
+  ]
+}

@@ -1,0 +1,672 @@
+{
+  "量了": 66,
+  "按语种中位": {
+    "en": 6.31,
+    "?": 0.0,
+    "fr": 0.31
+  },
+  "疑似译本": 0,
+  "★口径": "只量一手；无歧义词与有歧义词分列；**本工具不给通过/不通过**",
+  "明细": [
+    {
+      "id": "10064095bsb",
+      "lang": "en",
+      "words": 221097,
+      "无歧义每千词": 7.2,
+      "有歧义每千词": 13.9,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "10069010bsb",
+      "lang": "en",
+      "words": 221471,
+      "无歧义每千词": 7.23,
+      "有歧义每千词": 13.07,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "americanpolitica00jeff",
+      "lang": "en",
+      "words": 9599,
+      "无歧义每千词": 6.46,
+      "有歧义每千词": 4.27,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "anessaytowardsf00jeffgoog",
+      "lang": "en",
+      "words": 12563,
+      "无歧义每千词": 1.51,
+      "有歧义每千词": 6.45,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "annualregistervi00jeff",
+      "lang": "en",
+      "words": 85839,
+      "无歧义每千词": 1.54,
+      "有歧义每千词": 4.37,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_eighteenth-century_notes-on-the-state-of-vi_jefferson-thomas_1787",
+      "lang": "en",
+      "words": 97521,
+      "无歧义每千词": 0.91,
+      "有歧义每千词": 3.44,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "correspondencebe0000jeff",
+      "lang": "en",
+      "words": 92594,
+      "无歧义每千词": 6.86,
+      "有歧义每千词": 9.77,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924026091581",
+      "lang": "en",
+      "words": 221597,
+      "无歧义每千词": 6.13,
+      "有歧义每千词": 11.92,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924027055718",
+      "lang": "en",
+      "words": 202754,
+      "无歧义每千词": 9.0,
+      "有歧义每千词": 15.88,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924071238426",
+      "lang": "en",
+      "words": 220037,
+      "无歧义每千词": 8.32,
+      "有歧义每千词": 14.54,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924071238442",
+      "lang": "en",
+      "words": 229877,
+      "无歧义每千词": 7.85,
+      "有歧义每千词": 14.24,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924071238467",
+      "lang": "en",
+      "words": 233683,
+      "无歧义每千词": 3.63,
+      "有歧义每千词": 6.04,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924092892011",
+      "lang": "en",
+      "words": 148792,
+      "无歧义每千词": 3.95,
+      "有歧义每千词": 11.04,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924092892037",
+      "lang": "en",
+      "words": 144308,
+      "无歧义每千词": 9.0,
+      "有歧义每千词": 16.8,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "gpl_1600362",
+      "lang": "en",
+      "words": 18622,
+      "无歧义每千词": 1.18,
+      "有歧义每千词": 0.16,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "jeffersonsgerman01jeff",
+      "lang": "en",
+      "words": 39862,
+      "无歧义每千词": 5.85,
+      "有歧义每千词": 10.74,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "jeffersonthomas09lipsrich",
+      "lang": "en",
+      "words": 118996,
+      "无歧义每千词": 7.46,
+      "有歧义每千词": 13.4,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "jeffersonthomas18lipsrich",
+      "lang": "en",
+      "words": 136430,
+      "无歧义每千词": 5.53,
+      "有歧义每千词": 9.2,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "jstor-1005111",
+      "lang": "en",
+      "words": 3694,
+      "无歧义每千词": 3.25,
+      "有歧义每千词": 8.12,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "jstor-1921491",
+      "lang": "en",
+      "words": 1205,
+      "无歧义每千词": 5.81,
+      "有歧义每千词": 15.77,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lettersaddresses00jeffiala",
+      "lang": "en",
+      "words": 96955,
+      "无歧义每千词": 7.71,
+      "有歧义每千词": 12.39,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lettersandaddres00jeffiala",
+      "lang": "en",
+      "words": 96939,
+      "无歧义每千词": 7.71,
+      "有歧义每千词": 12.39,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lettersandaddres00jeffuoft",
+      "lang": "en",
+      "words": 98677,
+      "无歧义每千词": 7.58,
+      "有歧义每千词": 12.19,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifemoralsjesusnaz00jeff",
+      "lang": "en",
+      "words": 29770,
+      "无歧义每千词": 7.26,
+      "有歧义每千词": 9.37,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifemoralsof00jeff",
+      "lang": "?",
+      "words": 116461,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "manualofparliame00jeff",
+      "lang": "en",
+      "words": 56926,
+      "无歧义每千词": 0.09,
+      "有歧义每千词": 1.11,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "masterthoughtsof00jeffiala",
+      "lang": "en",
+      "words": 62474,
+      "无歧义每千词": 5.17,
+      "有歧义每千词": 9.27,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "masterthoughtst00jeffgoog",
+      "lang": "en",
+      "words": 63189,
+      "无歧义每千词": 5.11,
+      "有歧义每千词": 9.37,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "memoircorrespond16781gut",
+      "lang": "en",
+      "words": 204696,
+      "无歧义每千词": 5.53,
+      "有歧义每千词": 12.5,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "memoirscorrespo00jeffgoog",
+      "lang": "en",
+      "words": 212581,
+      "无歧义每千词": 5.38,
+      "有歧义每千词": 12.36,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "memoirscorrespo01jeffgoog",
+      "lang": "en",
+      "words": 220817,
+      "无歧义每千词": 7.21,
+      "有歧义每千词": 14.48,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "notesonstateofvir00jeff",
+      "lang": "en",
+      "words": 95069,
+      "无歧义每千词": 1.53,
+      "有歧义每千词": 3.99,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "notesonstateofvirg00jeff",
+      "lang": "en",
+      "words": 95348,
+      "无歧义每千词": 1.47,
+      "有歧义每千词": 5.24,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "summaryviewofrig00jeff_1",
+      "lang": "en",
+      "words": 7681,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "tudesconomiques00fovigoog",
+      "lang": "fr",
+      "words": 74692,
+      "无歧义每千词": 0.31,
+      "有歧义每千词": 0.13,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "virginiakentucky00jeff",
+      "lang": "en",
+      "words": 135482,
+      "无歧义每千词": 0.5,
+      "有歧义每千词": 1.42,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "workofjeffer02jeffuoft",
+      "lang": "en",
+      "words": 147971,
+      "无歧义每千词": 2.24,
+      "有歧义每千词": 5.33,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "workofjeffer03jeffuoft",
+      "lang": "en",
+      "words": 149610,
+      "无歧义每千词": 3.95,
+      "有歧义每千词": 10.53,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "workofjeffer07jeffuoft",
+      "lang": "en",
+      "words": 149275,
+      "无歧义每千词": 4.09,
+      "有歧义每千词": 8.23,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "worksofjefferson02jeffuoft",
+      "lang": "en",
+      "words": 228343,
+      "无歧义每千词": 7.96,
+      "有歧义每千词": 16.26,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "worksofjefferson06jeffuoft",
+      "lang": "en",
+      "words": 233308,
+      "无歧义每千词": 7.74,
+      "有歧义每千词": 13.92,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "worksofjefferson07jeffuoft",
+      "lang": "en",
+      "words": 248900,
+      "无歧义每千词": 6.31,
+      "有歧义每千词": 11.22,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "worksofjefferson09jeffuoft",
+      "lang": "en",
+      "words": 223777,
+      "无歧义每千词": 3.1,
+      "有歧义每千词": 5.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "worksthomasjeff01fordgoog",
+      "lang": "en",
+      "words": 144271,
+      "无歧义每千词": 7.67,
+      "有歧义每千词": 14.76,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsbeinghis06jeffuoft",
+      "lang": "en",
+      "words": 230005,
+      "无歧义每千词": 7.8,
+      "有歧义每千词": 14.17,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsbeinghis07jeffuoft",
+      "lang": "en",
+      "words": 245245,
+      "无歧义每千词": 6.37,
+      "有歧义每千词": 11.47,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingslibrary03jeff",
+      "lang": "en",
+      "words": 126119,
+      "无歧义每千词": 1.17,
+      "有歧义每千词": 4.58,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingslibrarye00jeffuoft",
+      "lang": "en",
+      "words": 117085,
+      "无歧义每千词": 7.6,
+      "有歧义每千词": 13.81,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingslibrarye01jeffuoft",
+      "lang": "en",
+      "words": 149814,
+      "无歧义每千词": 5.63,
+      "有歧义每千词": 12.7,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingslibrarye02jeffuoft",
+      "lang": "en",
+      "words": 135982,
+      "无歧义每千词": 1.23,
+      "有歧义每千词": 4.47,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingslibrarye05jeffuoft",
+      "lang": "en",
+      "words": 126888,
+      "无歧义每千词": 8.57,
+      "有歧义每千词": 18.07,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingslibrarye07jeffuoft",
+      "lang": "en",
+      "words": 133175,
+      "无歧义每千词": 6.04,
+      "有歧义每千词": 12.42,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingslibrarye10jeffuoft",
+      "lang": "en",
+      "words": 119291,
+      "无歧义每千词": 7.54,
+      "有歧义每千词": 14.1,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingslibrarye13jeffuoft",
+      "lang": "en",
+      "words": 129224,
+      "无歧义每千词": 8.54,
+      "有歧义每千词": 13.77,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingslibrarye16jeffuoft",
+      "lang": "en",
+      "words": 123988,
+      "无歧义每千词": 7.76,
+      "有歧义每千词": 10.9,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsoft04jeffiala",
+      "lang": "en",
+      "words": 152916,
+      "无歧义每千词": 8.27,
+      "有歧义每千词": 15.84,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsoft06jeffiala",
+      "lang": "en",
+      "words": 230128,
+      "无歧义每千词": 7.81,
+      "有歧义每千词": 14.13,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsoft09jeffiala",
+      "lang": "en",
+      "words": 221144,
+      "无歧义每千词": 3.12,
+      "有歧义每千词": 5.06,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsofthom02jeff",
+      "lang": "en",
+      "words": 170774,
+      "无歧义每千词": 2.68,
+      "有歧义每千词": 8.22,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsofthoma09jeff",
+      "lang": "en",
+      "words": 221394,
+      "无歧义每千词": 3.1,
+      "有歧义每千词": 5.14,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsofthomas0000vari_j3j9",
+      "lang": "en",
+      "words": 122283,
+      "无歧义每千词": 7.88,
+      "有歧义每千词": 10.79,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsofthomas04jeffiala",
+      "lang": "en",
+      "words": 219926,
+      "无歧义每千词": 8.33,
+      "有歧义每千词": 14.45,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsthomas13jeffrich",
+      "lang": "en",
+      "words": 264897,
+      "无歧义每千词": 7.71,
+      "有歧义每千词": 13.6,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsthomas17jeffrich",
+      "lang": "en",
+      "words": 262892,
+      "无歧义每千词": 3.98,
+      "有歧义每千词": 7.06,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsthomasj00editgoog",
+      "lang": "en",
+      "words": 233472,
+      "无歧义每千词": 7.33,
+      "有歧义每千词": 15.11,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsthomasj00washgoog",
+      "lang": "en",
+      "words": 220315,
+      "无歧义每千词": 8.28,
+      "有歧义每千词": 14.45,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    }
+  ]
+}

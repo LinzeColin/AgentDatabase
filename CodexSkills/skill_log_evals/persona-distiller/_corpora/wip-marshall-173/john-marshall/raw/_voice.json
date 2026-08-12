@@ -1,0 +1,740 @@
+{
+  "量了": 73,
+  "按语种中位": {
+    "en": 1.66
+  },
+  "疑似译本": 1,
+  "★口径": "只量一手；无歧义词与有歧义词分列；**本工具不给通过/不通过**",
+  "明细": [
+    {
+      "id": "ahistorycolonie00marsgoog",
+      "lang": "en",
+      "words": 123552,
+      "无歧义每千词": 0.02,
+      "有歧义每千词": 0.35,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "ahm3974.0001.001.umich.edu",
+      "lang": "en",
+      "words": 245964,
+      "无歧义每千词": 0.21,
+      "有歧义每千词": 1.04,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bim_eighteenth-century_speech-of-the-hon-john-_marshall-john-chief-ju_1800",
+      "lang": "en",
+      "words": 13440,
+      "无歧义每千词": 0.37,
+      "有歧义每千词": 1.19,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_F4c8AAAAIAAJ",
+      "lang": "en",
+      "words": 242693,
+      "无歧义每千词": 0.18,
+      "有歧义每千词": 1.36,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_QSAFAAAAYAAJ",
+      "lang": "en",
+      "words": 237396,
+      "无歧义每千词": 1.92,
+      "有歧义每千词": 2.96,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "completeconstitu00marsuoft",
+      "lang": "en",
+      "words": 246471,
+      "无歧义每千词": 0.2,
+      "有歧义每千词": 1.16,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "constitutionald00cottgoog",
+      "lang": "en",
+      "words": 132084,
+      "无歧义每千词": 0.93,
+      "有歧义每千词": 1.97,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "constitutionalde01marsuoft",
+      "lang": "en",
+      "words": 131741,
+      "无歧义每千词": 0.93,
+      "有歧义每千词": 1.69,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "constitutionalde02marsuoft",
+      "lang": "en",
+      "words": 131209,
+      "无歧义每千词": 0.21,
+      "有歧义每千词": 2.37,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924024323069",
+      "lang": "en",
+      "words": 246406,
+      "无歧义每千词": 0.2,
+      "有歧义每千词": 1.16,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924032751632",
+      "lang": "en",
+      "words": 138322,
+      "无歧义每千词": 4.89,
+      "有歧义每千词": 10.81,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "historyofcolonie00mars",
+      "lang": "en",
+      "words": 123354,
+      "无歧义每千词": 0.02,
+      "有歧义每千词": 0.39,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "historyofcolonie01mars",
+      "lang": "en",
+      "words": 123381,
+      "无歧义每千词": 0.01,
+      "有歧义每千词": 0.42,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "india.history.resource.17702",
+      "lang": "en",
+      "words": 200892,
+      "无歧义每千词": 3.24,
+      "有歧义每千词": 2.61,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "johnmarshallcom00dillgoog",
+      "lang": "en",
+      "words": 231579,
+      "无歧义每千词": 0.22,
+      "有歧义每千词": 0.98,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "johnmarshallcom00marsgoog",
+      "lang": "en",
+      "words": 247131,
+      "无歧义每千词": 0.21,
+      "有歧义每千词": 1.16,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "johnmarshallcom01marsgoog",
+      "lang": "en",
+      "words": 244994,
+      "无歧义每千词": 0.21,
+      "有歧义每千词": 1.1,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "johnmarshallnewintro00marsrich",
+      "lang": "en",
+      "words": 30107,
+      "无歧义每千词": 2.49,
+      "有歧义每千词": 4.65,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi00marsgoog",
+      "lang": "en",
+      "words": 148701,
+      "无歧义每千词": 1.34,
+      "有歧义每千词": 2.68,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi00washgoog",
+      "lang": "en",
+      "words": 227463,
+      "无歧义每千词": 3.4,
+      "有歧义每千词": 3.78,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi01marsgoog",
+      "lang": "en",
+      "words": 157199,
+      "无歧义每千词": 1.69,
+      "有歧义每千词": 3.38,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi01washgoog",
+      "lang": "en",
+      "words": 236126,
+      "无歧义每千词": 1.83,
+      "有歧义每千词": 3.27,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi02marsgoog",
+      "lang": "en",
+      "words": 153960,
+      "无歧义每千词": 1.69,
+      "有歧义每千词": 2.92,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi02washgoog",
+      "lang": "en",
+      "words": 222347,
+      "无歧义每千词": 3.25,
+      "有歧义每千词": 3.53,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi03marsgoog",
+      "lang": "en",
+      "words": 219179,
+      "无歧义每千词": 3.24,
+      "有歧义每千词": 4.52,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi03washgoog",
+      "lang": "en",
+      "words": 156102,
+      "无歧义每千词": 1.62,
+      "有歧义每千词": 3.32,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi04washgoog",
+      "lang": "en",
+      "words": 151648,
+      "无歧义每千词": 1.02,
+      "有歧义每千词": 2.28,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi05washgoog",
+      "lang": "en",
+      "words": 238526,
+      "无歧义每千词": 1.92,
+      "有歧义每千词": 2.96,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi06washgoog",
+      "lang": "en",
+      "words": 237154,
+      "无歧义每千词": 1.93,
+      "有歧义每千词": 3.24,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi07washgoog",
+      "lang": "en",
+      "words": 134518,
+      "无歧义每千词": 0.49,
+      "有歧义每千词": 1.41,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifegeorgewashi08washgoog",
+      "lang": "en",
+      "words": 150698,
+      "无歧义每千词": 1.35,
+      "有歧义每千词": 2.45,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeof01georgewashmars",
+      "lang": "en",
+      "words": 123287,
+      "无歧义每千词": 0.01,
+      "有歧义每千词": 0.53,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeof03georgewashmars",
+      "lang": "en",
+      "words": 108135,
+      "无歧义每千词": 0.75,
+      "有歧义每千词": 2.06,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeof05georgewashmars",
+      "lang": "en",
+      "words": 121458,
+      "无歧义每千词": 2.53,
+      "有歧义每千词": 3.33,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgew02marsiala",
+      "lang": "en",
+      "words": 157984,
+      "无歧义每千词": 1.66,
+      "有歧义每千词": 2.93,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash0000mars",
+      "lang": "en",
+      "words": 240353,
+      "无歧义每千词": 1.94,
+      "有歧义每千词": 3.03,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash0002mars",
+      "lang": "en",
+      "words": 229994,
+      "无歧义每千词": 3.49,
+      "有歧义每千词": 3.59,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash001mars",
+      "lang": "en",
+      "words": 135180,
+      "无歧义每千词": 0.44,
+      "有歧义每千词": 0.98,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash002mars",
+      "lang": "en",
+      "words": 159177,
+      "无歧义每千词": 1.72,
+      "有歧义每千词": 2.93,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash003mars",
+      "lang": "en",
+      "words": 146892,
+      "无歧义每千词": 1.43,
+      "有歧义每千词": 2.21,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash004mars",
+      "lang": "en",
+      "words": 153661,
+      "无歧义每千词": 1.07,
+      "有歧义每千词": 1.72,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash005mars",
+      "lang": "en",
+      "words": 221845,
+      "无歧义每千词": 3.32,
+      "有歧义每千词": 3.45,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash00mars",
+      "lang": "en",
+      "words": 174884,
+      "无歧义每千词": 0.58,
+      "有歧义每千词": 0.78,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash00marsuoft",
+      "lang": "en",
+      "words": 174291,
+      "无歧义每千词": 0.61,
+      "有歧义每千词": 0.77,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash01mars2",
+      "lang": "en",
+      "words": 237404,
+      "无歧义每千词": 1.92,
+      "有歧义每千词": 3.11,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash01mars_0",
+      "lang": "en",
+      "words": 236137,
+      "无歧义每千词": 1.99,
+      "有歧义每千词": 3.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash01mars_1",
+      "lang": "en",
+      "words": 233590,
+      "无歧义每千词": 2.03,
+      "有歧义每千词": 3.19,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash01marsiala",
+      "lang": "en",
+      "words": 236857,
+      "无歧义每千词": 1.93,
+      "有歧义每千词": 3.04,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash01marsuoft",
+      "lang": "en",
+      "words": 236286,
+      "无歧义每千词": 1.94,
+      "有歧义每千词": 3.03,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash02mars",
+      "lang": "en",
+      "words": 135026,
+      "无歧义每千词": 0.46,
+      "有歧义每千词": 0.89,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash02mars_0",
+      "lang": "en",
+      "words": 226074,
+      "无歧义每千词": 3.56,
+      "有歧义每千词": 3.37,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash02mars_1",
+      "lang": "en",
+      "words": 225505,
+      "无歧义每千词": 3.56,
+      "有歧义每千词": 5.24,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash02marsiala",
+      "lang": "en",
+      "words": 226443,
+      "无歧义每千词": 3.55,
+      "有歧义每千词": 3.65,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash02marsuoft",
+      "lang": "en",
+      "words": 226373,
+      "无歧义每千词": 3.55,
+      "有歧义每千词": 3.66,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash04marsiala",
+      "lang": "en",
+      "words": 153336,
+      "无歧义每千词": 1.09,
+      "有歧义每千词": 1.68,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash05marsiala",
+      "lang": "en",
+      "words": 221411,
+      "无歧义每千词": 3.33,
+      "有歧义每千词": 3.45,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash06mars",
+      "lang": "en",
+      "words": 174828,
+      "无歧义每千词": 0.61,
+      "有歧义每千词": 0.96,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "lifeofgeorgewash1860mars",
+      "lang": "en",
+      "words": 173361,
+      "无歧义每千词": 0.61,
+      "有歧义每千词": 0.69,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "lifeofgeorgewash1926mars",
+      "lang": "en",
+      "words": 122825,
+      "无歧义每千词": 2.5,
+      "有歧义每千词": 2.75,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "marshallchiefjust00marsrich",
+      "lang": "en",
+      "words": 140353,
+      "无歧义每千词": 4.84,
+      "有歧义每千词": 10.62,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "opinionofthesupr29513gut",
+      "lang": "en",
+      "words": 16068,
+      "无歧义每千词": 0.06,
+      "有歧义每千词": 0.12,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "opinionsoflatech00mars",
+      "lang": "en",
+      "words": 926,
+      "无歧义每千词": 11.88,
+      "有歧义每千词": 20.52,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "plantedcolonies00marsrich",
+      "lang": "en",
+      "words": 125538,
+      "无歧义每千词": 0.1,
+      "有歧义每千词": 0.23,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "politicalandeco02ostegoog",
+      "lang": "en",
+      "words": 137581,
+      "无歧义每千词": 4.89,
+      "有歧义每千词": 10.82,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "politicaleconomi00mars",
+      "lang": "en",
+      "words": 138244,
+      "无歧义每千词": 4.89,
+      "有歧义每千词": 10.65,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "politicaleconomi00marsrich",
+      "lang": "en",
+      "words": 138471,
+      "无歧义每千词": 4.88,
+      "有歧义每千词": 10.8,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "thelifeofgeorgew18591gut",
+      "lang": "en",
+      "words": 124134,
+      "无歧义每千词": 0.01,
+      "有歧义每千词": 0.18,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "thelifeofgeorgew18592gut",
+      "lang": "en",
+      "words": 132769,
+      "无歧义每千词": 2.84,
+      "有歧义每千词": 4.19,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "thelifeofgeorgew18593gut",
+      "lang": "en",
+      "words": 108218,
+      "无歧义每千词": 0.73,
+      "有歧义每千词": 1.63,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "thelifeofgeorgew18594gut",
+      "lang": "en",
+      "words": 125864,
+      "无歧义每千词": 4.02,
+      "有歧义每千词": 4.34,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "thelifeofgeorgew18595gut",
+      "lang": "en",
+      "words": 104818,
+      "无歧义每千词": 2.94,
+      "有歧义每千词": 2.97,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "thelifeofgeorgew28859gut",
+      "lang": "en",
+      "words": 7946,
+      "无歧义每千词": 0.13,
+      "有歧义每千词": 0.88,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "writingsjohnmar01marsgoog",
+      "lang": "en",
+      "words": 263203,
+      "无歧义每千词": 0.31,
+      "有歧义每千词": 1.41,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    }
+  ]
+}

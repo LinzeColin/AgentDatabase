@@ -1,0 +1,513 @@
+{
+  "量了": 50,
+  "按语种中位": {
+    "de": 3.07,
+    "it": 0.53,
+    "en": 2.5,
+    "fr": 0.02
+  },
+  "疑似译本": 22,
+  "★口径": "只量一手；无歧义词与有歧义词分列；**本工具不给通过/不通过**",
+  "明细": [
+    {
+      "id": "10762804bsb",
+      "lang": "de",
+      "words": 176355,
+      "无歧义每千词": 1.66,
+      "有歧义每千词": 1.49,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "FroebelEducazioneUomo",
+      "lang": "it",
+      "words": 90401,
+      "无歧义每千词": 0.53,
+      "有歧义每千词": 0.6,
+      "第一人称动词每千词": 5.18,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "autobiography00fruoft",
+      "lang": "en",
+      "words": 69155,
+      "无歧义每千词": 29.86,
+      "有歧义每千词": 20.53,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "autobiographyoff00fr",
+      "lang": "en",
+      "words": 65782,
+      "无歧义每千词": 29.4,
+      "有歧义每千词": 20.39,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "autobiographyoff00frbe",
+      "lang": "en",
+      "words": 68513,
+      "无歧义每千词": 30.18,
+      "有歧义每千词": 21.4,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "autobiographyoff00frob",
+      "lang": "en",
+      "words": 65894,
+      "无歧义每千词": 29.29,
+      "有歧义每千词": 20.4,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "autobiographyoff00froeiala",
+      "lang": "en",
+      "words": 68610,
+      "无歧义每千词": 30.04,
+      "有歧义每千词": 21.48,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "autobiographyoff00fruoft",
+      "lang": "en",
+      "words": 68566,
+      "无歧义每千词": 30.09,
+      "有歧义每千词": 21.63,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "autobiooffriedri00froeiala",
+      "lang": "en",
+      "words": 59004,
+      "无歧义每千词": 32.85,
+      "有歧义每千词": 22.66,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_SMoJAQAAIAAJ",
+      "lang": "de",
+      "words": 172214,
+      "无歧义每千词": 1.72,
+      "有歧义每千词": 1.42,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_kmc0AQAAMAAJ",
+      "lang": "de",
+      "words": 185202,
+      "无歧义每千词": 13.0,
+      "有歧义每千词": 8.3,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_xhwBAAAAYAAJ",
+      "lang": "de",
+      "words": 174493,
+      "无歧义每千词": 3.07,
+      "有歧义每千词": 0.32,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "educationofman00f",
+      "lang": "en",
+      "words": 108838,
+      "无歧义每千词": 0.72,
+      "有歧义每千词": 1.48,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "educationofman00fr",
+      "lang": "en",
+      "words": 108362,
+      "无歧义每千词": 0.71,
+      "有歧义每千词": 1.51,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "educationofman00fr2",
+      "lang": "en",
+      "words": 104682,
+      "无歧义每千词": 0.71,
+      "有歧义每千词": 1.6,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "educationofman00frbe",
+      "lang": "en",
+      "words": 106700,
+      "无歧义每千词": 0.73,
+      "有歧义每千词": 1.58,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "educationofman00froe",
+      "lang": "en",
+      "words": 110986,
+      "无歧义每千词": 0.7,
+      "有歧义每千词": 1.86,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "educationofman00frrich",
+      "lang": "en",
+      "words": 104322,
+      "无歧义每千词": 0.75,
+      "有歧义每千词": 1.56,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "educationofman00fruoft",
+      "lang": "en",
+      "words": 107685,
+      "无歧义每千词": 0.73,
+      "有歧义每千词": 1.3,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "friedrichfroebe00frgoog",
+      "lang": "en",
+      "words": 92488,
+      "无歧义每千词": 1.74,
+      "有歧义每千词": 3.23,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "friedrichfroebe01jarvgoog",
+      "lang": "en",
+      "words": 120305,
+      "无歧义每千词": 2.44,
+      "有歧义每千词": 3.42,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "friedrichfroebe02jarvgoog",
+      "lang": "en",
+      "words": 89907,
+      "无歧义每千词": 1.86,
+      "有歧义每千词": 3.01,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "friedrichfroebe03jarvgoog",
+      "lang": "en",
+      "words": 116552,
+      "无歧义每千词": 2.5,
+      "有歧义每千词": 3.23,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "friedrichfroebel00fr",
+      "lang": "en",
+      "words": 93671,
+      "无歧义每千词": 1.79,
+      "有歧义每千词": 3.14,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "friedrichfroebel00froe",
+      "lang": "en",
+      "words": 93053,
+      "无歧义每千词": 1.81,
+      "有歧义每千词": 3.14,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "friedrichfroebel00frrich",
+      "lang": "en",
+      "words": 89483,
+      "无歧义每千词": 1.84,
+      "有歧义每千词": 3.1,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "friedrichfroebel01fr",
+      "lang": "en",
+      "words": 92604,
+      "无歧义每千词": 1.84,
+      "有歧义每千词": 3.41,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "friedrichfroebel02fr",
+      "lang": "en",
+      "words": 93047,
+      "无歧义每千词": 1.79,
+      "有歧义每千词": 2.96,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "friedrichfroebel03fr",
+      "lang": "en",
+      "words": 120067,
+      "无歧义每千词": 2.43,
+      "有歧义每千词": 3.17,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "froebelletters00friala",
+      "lang": "en",
+      "words": 52050,
+      "无歧义每千词": 4.25,
+      "有歧义每千词": 5.9,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "froebelschiefwri00frrich",
+      "lang": "en",
+      "words": 78731,
+      "无歧义每千词": 0.64,
+      "有歧义每千词": 0.93,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "froebelschiefwri00fruoft",
+      "lang": "en",
+      "words": 79208,
+      "无歧义每千词": 0.63,
+      "有歧义每千词": 0.98,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "froebelsletterso00fr",
+      "lang": "en",
+      "words": 133727,
+      "无歧义每千词": 9.38,
+      "有歧义每千词": 10.29,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "froebelsletterso00froe",
+      "lang": "en",
+      "words": 128400,
+      "无歧义每千词": 9.74,
+      "有歧义每千词": 10.67,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "laeducacindelh00fr",
+      "lang": "fr",
+      "words": 99671,
+      "无歧义每千词": 0.02,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "laeducacindelh01fr",
+      "lang": "fr",
+      "words": 88373,
+      "无歧义每千词": 0.01,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "lettersonkinderg00friala",
+      "lang": "en",
+      "words": 128522,
+      "无歧义每千词": 9.75,
+      "有歧义每千词": 10.7,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "motherplaynurser00froe",
+      "lang": "en",
+      "words": 50238,
+      "无歧义每千词": 5.41,
+      "有歧义每千词": 6.49,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "motherssongsgame00fruoft",
+      "lang": "en",
+      "words": 81151,
+      "无歧义每千词": 4.2,
+      "有歧义每千词": 8.23,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "mottoesandcomme00unkngoog",
+      "lang": "en",
+      "words": 65296,
+      "无歧义每千词": 3.95,
+      "有歧义每千词": 4.9,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "mottoescommentar00fr",
+      "lang": "en",
+      "words": 68931,
+      "无歧义每千词": 3.71,
+      "有歧义每千词": 4.51,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "mottoescommentar00frrich",
+      "lang": "en",
+      "words": 65135,
+      "无歧义每千词": 3.93,
+      "有歧义每千词": 4.28,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "richfroebelfried00frrich",
+      "lang": "en",
+      "words": 116497,
+      "无歧义每千词": 2.5,
+      "有歧义每千词": 3.32,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "songsandmusicfr00compgoog",
+      "lang": "en",
+      "words": 25431,
+      "无歧义每千词": 5.58,
+      "有歧义每千词": 7.39,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "songsmusicoffrie00fr",
+      "lang": "en",
+      "words": 27175,
+      "无歧义每千词": 4.78,
+      "有歧义每千词": 10.01,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "songsmusicoffrie00fruoft",
+      "lang": "en",
+      "words": 30912,
+      "无歧义每千词": 4.33,
+      "有歧义每千词": 14.3,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "songsmusicoffrie01fr",
+      "lang": "en",
+      "words": 28899,
+      "无歧义每千词": 4.88,
+      "有歧义每千词": 8.41,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "studentsfroebel01herfgoog",
+      "lang": "en",
+      "words": 42657,
+      "无歧义每千词": 0.52,
+      "有歧义每千词": 1.62,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "studentsfroebela00froeiala",
+      "lang": "en",
+      "words": 41837,
+      "无歧义每千词": 0.6,
+      "有歧义每千词": 1.17,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    },
+    {
+      "id": "studentsfroebela00fruoft",
+      "lang": "en",
+      "words": 49747,
+      "无歧义每千词": 0.6,
+      "有歧义每千词": 1.45,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": false
+    }
+  ]
+}
