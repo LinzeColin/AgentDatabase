@@ -105,6 +105,21 @@
 >     corpus.unexamined-band
 >     research.catalogue-entry
 >
+> ### ★ 第 ③ 档那 6 种，**没有一个是无人管的新火**——逐个查过了
+>
+> | 码 | 有判据吗 | 既有记录在哪 |
+> |---|---|---|
+> | `corpus.undeclared-duplicate-sources` | ✓ | **㊵-④**：全库 624 对，601 对集中在 barton/osler/virchow/nightingale 四人 |
+> | `corpus.holdout-overlap` | ✓ | **㊲**：7 个硬失败，registry 里 0 个；已发布的只有 Carver 3 段 |
+> | `corpus.fraktur-mojibake` | ✓ | 全仓 7 份文件提过（Kelsen 探测那次最详） |
+> | `corpus.longs-corruption` | ✓ `check_longs_corruption.py` | `_判重分辨力全库实测-2026-08-11.md` |
+> | `corpus.unexamined-band` | ✓ | Adams #131 的记录里（32/69 份落在两道门之间） |
+> | `research.catalogue-entry` | ✓ `check_source_is_catalogue_entry.py` | **只有判据，没进过台账**——Koch 有 1 份 P1 像是著录方描述 |
+>
+> ⇒ **它们不是「新发现的六处问题」，是「已知问题在移交树上看不见」。**
+>   唯一没进过台账的是 `research.catalogue-entry`（判据自己写着「只报不拦，改分档是人的判断」），
+>   而它命中的 Koch **正是 7 个待重估人物之一**，其数本来就不引用 ⇒ **不动，记档即可**。
+>
 > ⇒ **第 ③ 档是这次对照最要紧的收获，而它不是我原本要问的问题。**
 >   我只想问「哪些码是没语料造成的假警报」，
 >   实际发现的是**反方向：移交树会「少报」——六种真问题在那棵树上根本触发不了**。
