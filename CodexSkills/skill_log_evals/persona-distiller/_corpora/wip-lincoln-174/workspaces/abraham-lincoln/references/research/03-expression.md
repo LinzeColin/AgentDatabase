@@ -22,8 +22,32 @@
 
 ## Source-linked observations
 
-Pending.
+### O-1 · 自撰小传的第一句是户籍式的，没有一个形容词
 
+> `I was born, February 12, 1809, in Hardin County, Kentucky.`
+> —— `src-32716caed453` @862
+
+★ 这是他应人之请写的自述开头。**没有铺垫、没有自评**，
+先给可核的三项：日期、县、州。与 01-writings 的 O-3（先缩小主张射程）同一路数。
+★ 引文起点特意从 `I was born` 起算——原文此前是编者的 `Here is the letter:`，
+  **那是编者的话，不属于他**。
+
+---
+
+## ★ 跨道重复：第一次就职演说那句在三道里都出现
+
+    01-writings   src-c80788c2eea1 @1492
+    03-expression src-aa53d1f400e4 / src-db8fa016fda1
+    05-decisions  src-7e649f429905
+
+**同一段文字被不同编本收进不同体裁的册子里**，于是分道时落到三条道。
+⇒ **道数不因此变多，证据也不因此变三份。** 断言层只署 01-writings 那一处。
+
+## ★ 本道剔除的两条
+
+- `He forgets himself so entirely in his object…` —— **第三人称评论他**，不是他的话
+- `The body of the pamphlet is occupied with a few of the most striking speeches…`
+  —— 编者对这本小册子的说明
 ## Candidate Claims
 
 Pending.
