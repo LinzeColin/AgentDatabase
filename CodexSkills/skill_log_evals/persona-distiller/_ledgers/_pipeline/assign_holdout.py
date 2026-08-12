@@ -26,7 +26,14 @@
 ② **逐道按比例取，不许集中在一道。**
    一道全被密封会让那条道在研究阶段直接消失。
 
-③ **一手（P1/P2）优先。** 二手密封起来测不出「他会不会说这些」。
+③ **一手（P1/P2）优先**——二手密封起来测不出「他会不会说这些」。
+   ★ **但「优先」不是「唯一」**：`--allow-secondary` 打开后，
+   在**没有任何一手候选能不抽空某条道**时，允许用二手。
+   实测（Marshall #173）：95 份里同时过「率 ≤5%」与「绝对 ≤40 片」的**只有 1 份**，
+   而它是 `expression` 道**唯一的一份**——密封它就抽空那条道、六道降五道、掉一档。
+   唯一不损道的干净源是 `src-04f73d577989`（**绝对 0 片**，`external` 道 20 份之一），**而它是二手**。
+   ⇒ 用它，**并在台账里写明：这个 holdout 只能测「关于他的事实」，
+     测不了「他会怎么说」**。假装它能测声口，才是真的坏。
 
 ④ ★★ **已经在研究稿里引用过的源，一份都不能密封。**
    研究稿会印出它的 `source_id` 与引文正文——密封它等于把 holdout 正文
@@ -91,7 +98,16 @@ def main() -> int:
     ap.add_argument("--raw", required=True)
     ap.add_argument("--frac", type=float, default=0.15)
     ap.add_argument("--max-overlap", type=float, default=0.05,
-                    help="允许的逐字片重合率上限（默认 5%%）")
+                    help="允许的逐字片重合**率**上限（默认 5%%）")
+    ap.add_argument("--allow-secondary", action="store_true",
+                    help="没有一手候选时允许用二手（见规则 ③）。**用了要在台账里写明射程**")
+    ap.add_argument("--max-abs", type=int, default=40,
+                    help="允许的逐字片重合**绝对片数**上限（默认 40）。"
+                         "★★ **比率挡不住大文件**：Marshall 的 src-28e76c782511 比率只有 "
+                         "3.43%%，而它有 205,426 词，**绝对命中 1422 片**——"
+                         "送进 check_holdout_overlap 就是 341 处 ≥50 词。"
+                         "门自己的文档写着「覆盖率那一栏看不见这件事：分母是整份 holdout，"
+                         "**绝对量再大也压不动比值**」。⇒ **两个上限都要卡。**")
     ap.add_argument("--apply", action="store_true")
     a = ap.parse_args()
     ws, raw = pathlib.Path(a.workspace), pathlib.Path(a.raw)
@@ -124,7 +140,7 @@ def main() -> int:
     base = [r for r in recs
             if not r.get("derived_from")
             and ident(r) not in in_cluster
-            and r.get("tier") in ("P1", "P2")
+            and r.get("tier") in (("P1", "P2", "S1", "S2") if a.allow_secondary else ("P1", "P2"))
             and r["source_id"] not in cited]              # ④
     if not base:
         print("**一份合格候选都没有**", file=sys.stderr)
@@ -136,23 +152,34 @@ def main() -> int:
         f = raw / pathlib.Path(r["local_path"]).name
         if f.is_file():
             sk[r["source_id"]] = shingles(f.read_text(encoding="utf-8", errors="replace"))
-    overlap = {}
+    overlap, absn = {}, {}
     for r in base:
         mine = sk.get(r["source_id"]) or set()
         if not mine:
             overlap[r["source_id"]] = 1.0
+            absn[r["source_id"]] = 10 ** 9
             continue
         others = set()
         for o in recs:
             if o["source_id"] != r["source_id"]:
                 others |= sk.get(o["source_id"], set())
-        overlap[r["source_id"]] = len(mine & others) / len(mine)
-    cand = [r for r in base if overlap[r["source_id"]] <= a.max_overlap]
-    print(f"★ 逐字片重合率：候选 {len(base)} 份里 ≤{a.max_overlap:.0%} 的有 **{len(cand)}** 份"
-          f"（中位 {sorted(overlap.values())[len(overlap) // 2]:.1%}）")
+        n_hit = len(mine & others)
+        overlap[r["source_id"]] = n_hit / len(mine)
+        absn[r["source_id"]] = n_hit
+    cand = [r for r in base
+            if overlap[r["source_id"]] <= a.max_overlap
+            and absn[r["source_id"]] <= a.max_abs]
+    print(f"★ 逐字片重合：候选 {len(base)} 份里同时满足"
+          f"「率 ≤{a.max_overlap:.0%}」与「**绝对 ≤{a.max_abs} 片**」的有 **{len(cand)}** 份"
+          f"（率中位 {sorted(overlap.values())[len(overlap) // 2]:.1%}、"
+          f"绝对中位 {sorted(absn.values())[len(absn) // 2]}）")
+    only_ratio = [r for r in base if overlap[r["source_id"]] <= a.max_overlap]
+    if len(only_ratio) > len(cand):
+        print(f"  ★ 其中 **{len(only_ratio) - len(cand)} 份只过了率、没过绝对数**"
+              f"——那都是大文件（比率被大分母压低了）")
     if not cand:
-        lo = min(overlap.values())
-        print(f"**没有一份的逐字片重合率 ≤{a.max_overlap:.0%}**（最低 {lo:.1%}）——"
+        lo = min(absn.values())
+        print(f"**没有一份同时过两个上限**（绝对最低 {lo} 片）——"
               "这批语料出不了干净的 holdout，**正解是换源，不是调这里的阈值**。",
               file=sys.stderr)
         return 3
@@ -173,7 +200,7 @@ def main() -> int:
         if want <= 0:
             gaps.append(f"**{lane} 只有 {lane_total[lane]} 份，全部留 train**（不抽空任何一道）")
             continue
-        rows.sort(key=lambda r: (overlap[r["source_id"]], r["source_id"]))  # 重合最低的优先
+        rows.sort(key=lambda r: (absn[r["source_id"]], r["source_id"]))  # ★ 按绝对片数排
         take = rows[:want]
         picked += take
         if len(take) < want:
