@@ -2863,9 +2863,30 @@
         "**换通道**：他的通信集中在 Library of Congress 与 Luther Burbank Home & Gardens，不在 IA。★ 判据自己写着「它判不了再抓能不能抓到，只算手上这批的上限」——本条只说这一轮的池子补不上，不说永远不可能"
       ],
       "处置类": "**min_lanes 硬卡点**（同 Vavilov #126）——但本例是**材料极多而道单一**，不是材料总量少"
+    },
+    {
+      "name": "Leonardo da Vinci",
+      "family_zh": "艺术设计师",
+      "deferred_at": "2026-08-13",
+      "reason": "**min_lanes 硬卡点——而卡点是我自己的正则变出来的。** 实测一手 **55 份**、总计 62 份、占比 **0.8871**（quick 门 0.40，远超）、570 万词，**而有材料的道只有 2 条**（writings 55、external 7），quick 要 3。`check_corpus_ceiling` 三档 rc 全 = 1。★★ **修正前它报的是 3 道、quick rc=0 过门**：第 3 道 `conversations` 的全部 2 份是《Frammenti **letterari** e filosofici》的两个印本（1904／1907-8，Solmi 编），而 `assign_lanes` 的书信正则里 `letter` **没有词边界**，命中了意大利语 `letterari`（＝「文学的」）。该书副题自印 FAVOLE-ALLEGORIE-PENSIERI-PAESI-FIGURE-PROFEZIE-FACEZIE（寓言/寄意/随想/风景/人物/预言/谐谈），**是文学残篇选，不是书信**；正文里 17 处 `lettere` 逐条读过，15 处是「学问/文字」义（含名句 *omo sanza lettere*），只有 2 处属真书信（夹在选集里的 LETTERA III 一小节）。⇒ 正则已加词边界并配 12 正例／3 反例自测；**全库射程实测只有本人一个受影响**。",
+      "probed_and_failed": [
+        "IA `creator:\"Leonardo, da Vinci\"` numFound 337 全部取回；五道筛后 70 条清单、抓回 62（8 份失败全是无文本层的图像记录：蒙娜丽莎、Cleveland Art 画作、MMA 版画）",
+        "conversations/expression/decisions/timeline 四道在该 creator 下**实测为零**：去掉误配的 2 份后 conversations = 0；他的书信本就极少存世",
+        "50 条 Hollar/Dürer 版画集已排除（**同现即污染**：49 条首位是刻工，照他的画所刻）"
+      ],
+      "already_confirmed_fetchable": [
+        "62/70 已取回、570 万词；意大利文原文 35 份（池里 40 条能进的全进了）",
+        "《绘画论》《笔记》《文学作品集》《马体解剖笔记》《Del moto e misura dell'acqua》等",
+        "★ 声口成立：意大利文**第一人称动词中位 3.61/千词**（代词中位 0.82 是量具错——意大利语是主语脱落语，量代词会低估）；抽样命中确是他本人的笔"
+      ],
+      "unblock_todo": [
+        "**换通道**：他的书信/手稿散在 Codex Atlanticus（Ambrosiana）、Windsor、Institut de France，**不在 IA**；要补 conversations/decisions/timeline 得换馆。★ 判据自己写着「它判不了再抓能不能抓到，只算手上这批的上限」——本条只说这一轮的池子补不上。",
+        "★★ **补上第 3 道之前不要重开**：占比与规模都远超 quick，唯一缺的是道。"
+      ],
+      "处置类": "**min_lanes 硬卡点**（同 Vavilov #126／Burbank #183）——★ 但本例的成因是**新的**：不是「材料总量少」也不是「料多而道单一」，而是**第 3 道根本不存在，是题名正则误配变出来的虚道**。[[regex-must-clear-the-corpus-language]]"
     }
   ],
-  "total": 153,
+  "total": 154,
   "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。",
   "★ schema 说明": {
     "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",

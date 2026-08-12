@@ -66,7 +66,19 @@ PATTERNS = [
                   r"legge|editto|leges|constitutiones|justice of the peace|"
                   r"\breport\b|bericht|gutachten|patent|specification|"
                   r"state paper|staatsschrift|denkschrift|minutes of|protokoll"),
-    ("conversations", r"letter|correspond|briefe|briefwechsel|epistol|lettres|lettere|"
+    # ★★ 2026-08-13 `letter` 加词边界：`letter` ⊂ 意大利语 **`letterari`**（＝「文学的」），
+    #    于是 Leonardo 的《Frammenti **letterari** e filosofici》（文学与哲学残篇选，
+    #    副题自印 FAVOLE-ALLEGORIE-PENSIERI-PAESI-FIGURE-PROFEZIE-FACEZIE）被判成书信。
+    #    **后果不是分错一个格子**：那 2 份（同一部书的两个印本）是他 conversations 道的**全部**，
+    #    lanes 因此从真值 2 虚报成 3 —— **正好压在 quick 的下限**，一个够不着的人被判成过门。
+    #    同类先例就在下面三行：`oration` ⊂ `commemoration`。[[regex-must-clear-the-corpus-language]]
+    #    ★ `briefe` **必须保持无词边界**：`bismarckbriefe`(×5)、`bismarck-briefe`(×1) 靠它命中。
+    #    射程是穷举出来的，不是抽样：全库 92 份命中拆成**所嵌整词 14 类**，
+    #    只有 `letterari`(×2) 是误配，其余 12 类（letters 38／correspondence 23／
+    #    bismarckbriefe 5／briefe 4／briefwechsel 4／letter 4／carteggio 3／lettres 3／
+    #    correspondance 2／briefen 1／dialogue 1／table-talk 1）全是真书信词汇。
+    ("conversations", r"\bletters?\b|correspond|briefe|briefwechsel|epistol|"
+                      r"\blettres?\b|\blettere\b|"
                       r"carteggio|dialogue|dialog|conversation|tischgespr|tabletalk|"
                       r"table.?talk|kolloqui|colloqui"),
     # ★★ 2026-08-12 移除 `discourse|discours|discorsi`：**这个词分不出讲辞和专著**。
@@ -191,5 +203,60 @@ def main() -> int:
     return 0
 
 
+def selftest() -> int:
+    """★ 夹具**全部取自全库真 manifest 的 ia_title 原文**，不是我照着正则编的。
+    （夹具比原文干净就等于没测——本项目已犯八次。）
+
+    正例 12 条 = 2026-08-13 穷举全库 92 份 conversations 命中、
+    拆出「命中词所嵌整词」得到的 14 类里，**判定为真书信的那 12 类各取 1 条**；
+    反例是那 14 类里的误配类 `letterari`，**再加两条同族反例**
+    （`letteratura`／`letterarie` 是我按同一构词法补的，标注清楚）。
+
+    ★★ 反例红了可能是红得凑巧 ⇒ **正例必须同时是绿的**：只要有一条真书信被误伤，
+    这次「修好」就等于把 12 类里的一类换成了另一类错误。
+    """
+    POS = [  # (题名原文, 来源工作区) —— 全部逐字取自 manifest
+        ("Bismarck's letters to his wife from the seat of war, 1870-1871;", "bismarck-176"),
+        ("The correspondence of William I. and Bismarck : with other letters", "bismarck-176"),
+        ("Bismarckbriefe: 1844-1870 ; Originalbriefe Bismarcks an seine Gemahlin", "bismarck-176"),
+        ("(Bismarcks) Briefe an Schwester und Schwager;", "bismarck-176"),
+        ("Bismarck-Briefe: I. Familien-Briefe ; II. Politische Briefe", "bismarck-176"),
+        ("Briefwechsel von Imm. Kant", "kant-179"),
+        ("Letter signed by Luther Burbank to Mr. A. B. Swain", "burbank-183"),
+        ("Carteggio displomatico e familiare", "machiavelli-177"),
+        ("Lettres politiques confidentielles de M. de Bismarck, 1851-1858", "bismarck-176"),
+        ("Correspondance diplomatique de m. de Bismarck (1851-1859)", "bismarck-176"),
+        ("Julie oder die neue Heloise: in Briefen zweyer Liebenden", "rousseau-178"),
+        ("Bismarck's table-talk", "bismarck-176"),
+    ]
+    NEG = [  # 必须**不**判成 conversations
+        ("Frammenti letterari e filosofici", "leonardo-184（真误配，本次的起因）"),
+        ("Storia della letteratura italiana", "同族反例，按同一构词法补"),
+        ("Opere letterarie e scientifiche", "同族反例，按同一构词法补"),
+    ]
+    pat = dict((l, p) for l, p in PATTERNS)["conversations"]
+    rx = pat if hasattr(pat, "search") else re.compile(pat, re.I)
+    bad = 0
+    print("正例（必须仍判 conversations）：")
+    for ti, ws in POS:
+        m = rx.search(ti.lower())
+        ok = m is not None
+        bad += 0 if ok else 1
+        print("  %s %-62s [%s]%s" % ("✅" if ok else "❌ 误伤", ti[:62], ws,
+                                     "" if ok else "  ← 真书信被这次收紧挡住了"))
+    print("\n反例（必须**不**判 conversations）：")
+    for ti, why in NEG:
+        m = rx.search(ti.lower())
+        ok = m is None
+        bad += 0 if ok else 1
+        print("  %s %-62s %s%s" % ("✅" if ok else "❌ 仍误配", ti[:62], why,
+                                   "" if ok else "  ← 命中 %r" % (m.group(0),)))
+    print("\n" + ("自测通过：正 %d／反 %d 全绿" % (len(POS), len(NEG))
+                  if not bad else "★ 自测有 %d 条不通过" % bad))
+    return 0 if not bad else 1
+
+
 if __name__ == "__main__":
+    if "--selftest" in sys.argv:
+        sys.exit(selftest())
     sys.exit(main())

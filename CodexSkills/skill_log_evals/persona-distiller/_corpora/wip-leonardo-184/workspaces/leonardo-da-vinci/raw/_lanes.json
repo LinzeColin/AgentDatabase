@@ -1,13 +1,13 @@
 {
-  "lanes": 3,
+  "lanes": 2,
   "去掉纸面道后": 2,
   "逐道份数": {
-    "writings": 59,
-    "conversations": 2,
+    "writings": 55,
+    "conversations": 0,
     "expression": 0,
     "decisions": 0,
     "timeline": 0,
-    "external": 1
+    "external": 7
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -29,7 +29,7 @@
     },
     {
       "identifier": "LeonardoFrammenti",
-      "道": "conversations",
+      "道": "writings",
       "title": "Frammenti letterari e filosofici"
     },
     {
@@ -54,7 +54,7 @@
     },
     {
       "identifier": "b22385162",
-      "道": "writings",
+      "道": "external",
       "title": "The proportions of the human figure"
     },
     {
@@ -69,7 +69,7 @@
     },
     {
       "identifier": "b29288769",
-      "道": "writings",
+      "道": "external",
       "title": "Beauty: illustrated chiefly by an analysis and classification of beaut"
     },
     {
@@ -184,7 +184,7 @@
     },
     {
       "identifier": "gri_33125015154343",
-      "道": "conversations",
+      "道": "writings",
       "title": "Frammenti letterari e filosofici"
     },
     {
@@ -219,7 +219,7 @@
     },
     {
       "identifier": "lefinezzedepenne00scar",
-      "道": "writings",
+      "道": "external",
       "title": "Le finezze de pennelli italiani, ammirate, e studiate da Girupeno sott"
     },
     {
@@ -279,17 +279,17 @@
     },
     {
       "identifier": "natuurlykenschil00goer",
-      "道": "writings",
+      "道": "external",
       "title": "Natuurlyk en schilderkonstig ontwerp der menschkunde : leerende niet a"
     },
     {
       "identifier": "quattrodipintidi00colb",
-      "道": "writings",
+      "道": "external",
       "title": "Quattro dipinti di sommi maestri : illustrati con note critiche"
     },
     {
       "identifier": "raccoltadautorii10card",
-      "道": "writings",
+      "道": "external",
       "title": "Raccolta d'autori italiani che trattano del moto dell' acque"
     },
     {

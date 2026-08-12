@@ -1,13 +1,13 @@
 {
-  "lanes": 2,
-  "去掉纸面道后": 1,
+  "lanes": 3,
+  "去掉纸面道后": 2,
   "逐道份数": {
-    "writings": 68,
+    "writings": 65,
     "conversations": 1,
     "expression": 0,
     "decisions": 0,
     "timeline": 0,
-    "external": 0
+    "external": 3
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -134,7 +134,7 @@
     },
     {
       "identifier": "CAT31285747",
-      "道": "writings",
+      "道": "external",
       "title": "Prospectus of the Maynard Plum catalogue"
     },
     {
@@ -159,7 +159,7 @@
     },
     {
       "identifier": "CAT31287728",
-      "道": "writings",
+      "道": "external",
       "title": "Burbank's latest collection : the stoneless plum miracle"
     },
     {
@@ -174,7 +174,7 @@
     },
     {
       "identifier": "CAT31289769",
-      "道": "writings",
+      "道": "external",
       "title": "Improved French prune originated by Luther Burbank"
     },
     {

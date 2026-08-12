@@ -7,7 +7,7 @@
     "en": 1.12,
     "?": 0.0
   },
-  "疑似译本": 2,
+  "疑似译本": 35,
   "★口径": "只量一手；无歧义词与有歧义词分列；**本工具不给通过/不通过**",
   "明细": [
     {
@@ -18,7 +18,7 @@
       "有歧义每千词": 0.9,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "10078627bsb",
@@ -28,7 +28,7 @@
       "有歧义每千词": 0.89,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "10078631bsb",
@@ -38,7 +38,7 @@
       "有歧义每千词": 2.8,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "10602820bsb",
@@ -48,7 +48,7 @@
       "有歧义每千词": 6.49,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "10602821bsb",
@@ -58,7 +58,7 @@
       "有歧义每千词": 1.78,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "10602822bsb",
@@ -68,7 +68,7 @@
       "有歧义每千词": 8.73,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "10602824bsb",
@@ -78,7 +78,7 @@
       "有歧义每千词": 23.32,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "10769804bsb",
@@ -88,7 +88,7 @@
       "有歧义每千词": 2.39,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "10769805bsb",
@@ -98,7 +98,7 @@
       "有歧义每千词": 4.85,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "A1090181",
@@ -108,7 +108,7 @@
       "有歧义每千词": 0.0,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "BRes092067",
@@ -188,7 +188,7 @@
       "有歧义每千词": 6.27,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "TO01040218",
@@ -208,7 +208,7 @@
       "有歧义每千词": 2.91,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "b30335073",
@@ -218,7 +218,7 @@
       "有歧义每千词": 2.05,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "bim_early-english-books-1641-1700_a-caveat-for-wives_machiavelli-niccolo_1660",
@@ -228,7 +228,7 @@
       "有歧义每千词": 4.72,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "bim_early-english-books-1641-1700_a-true-copy-of-a-letter-_machiavelli-niccol_1691",
@@ -238,7 +238,7 @@
       "有歧义每千词": 13.61,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "bim_early-english-books-1641-1700_machiavels-discourses-u_machiavelli-niccolo_1674",
@@ -248,7 +248,7 @@
       "有歧义每千词": 3.69,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "bim_early-english-books-1641-1700_machiavels-vindication-_machiavelli-niccolo_1691",
@@ -258,7 +258,7 @@
       "有歧义每千词": 10.24,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "bim_early-english-books-1641-1700_machiavils-advice-to-hi_machiavelli-niccolo_1681",
@@ -268,7 +268,7 @@
       "有歧义每千词": 1.27,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1663",
@@ -278,7 +278,7 @@
       "有歧义每千词": 2.69,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1663_0",
@@ -288,7 +288,7 @@
       "有歧义每千词": 2.86,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1674",
@@ -298,7 +298,7 @@
       "有歧义每千词": 2.85,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "bim_early-english-books-1641-1700_machivaels-discourses_machiavelli-niccolo_1663",
@@ -308,7 +308,7 @@
       "有歧义每千词": 3.6,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "bub_gb_EbbqmRdN78cC",
@@ -348,7 +348,7 @@
       "有歧义每千词": 0.25,
       "第一人称动词每千词": 2.79,
       "主语脱落语": true,
-      "疑似译本": true
+      "疑似译本": false
     },
     {
       "id": "bub_gb_hepDAAAAYAAJ",
@@ -438,7 +438,7 @@
       "有歧义每千词": 1.27,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "diplomaticwritin02machuoft",
@@ -448,7 +448,7 @@
       "有歧义每千词": 3.25,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "diplomaticwritin03machuoft",
@@ -458,7 +458,7 @@
       "有歧义每千词": 13.56,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "diplomaticwritin04machuoft",
@@ -468,7 +468,7 @@
       "有歧义每千词": 19.85,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "discorsisullapri00machuoft",
@@ -488,7 +488,7 @@
       "有歧义每千词": 3.97,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "discoursesonthef03machuoft",
@@ -498,7 +498,7 @@
       "有歧义每千词": 3.98,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "dli.bengal.10689.19369",
@@ -508,7 +508,7 @@
       "有歧义每千词": 1.63,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "dli.ministry.02746",
@@ -518,7 +518,7 @@
       "有歧义每千词": 1.53,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "dli.ministry.05369",
@@ -528,7 +528,7 @@
       "有歧义每千词": 4.21,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "dli.ministry.14051",
@@ -538,7 +538,7 @@
       "有歧义每千词": 1.6,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "dli.ministry.16183",
@@ -608,7 +608,7 @@
       "有歧义每千词": 2.32,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "florentinischege00mach",
@@ -618,7 +618,7 @@
       "有歧义每千词": 0.74,
       "第一人称动词每千词": null,
       "主语脱落语": false,
-      "疑似译本": false
+      "疑似译本": true
     },
     {
       "id": "india.history.resource.72474",
