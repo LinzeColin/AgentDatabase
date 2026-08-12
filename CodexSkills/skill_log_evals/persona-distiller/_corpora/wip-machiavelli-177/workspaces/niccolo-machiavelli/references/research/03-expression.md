@@ -21,15 +21,17 @@
 
 ## Source-linked observations
 
-### O-1 · 他先说这件事**查不出确数**，再给出自己的估计并附上理由
+## ★ 本道原有 10 份，9 份是《论李维》——已改归 writings
 
-> `Perchè io credo ne dessino più o manco, secondo i luoghi dove e’ mandavano le colonie.`
-> —— `src-c05b43017052` @351468（《Discorsi》1886 版）
+《Discorsi sopra la prima deca de Tito Livio》／《Discourses on the first decade》
+是他的**政治专著**，不是短篇讲辞；分派器把它放进来只因题名里有 discorsi 这个词。
+（同一个词在卢梭那里是《论人类不平等》，也是专著。）
 
-★ 前一句是他对本章问题的判断：罗马人给每个殖民者分多少地，
-`credo sia molto difficile trovarne la verità`（我认为很难找到真相）。
-然后才是这一句：**我认为多少不等，随殖民地所在的地方而定**。
-⇒ 先申明不可知的程度，再在那个程度内给结论——**结论的精度不超过材料的精度**。
+本道现只剩 1 份《Commedie》（1902）——**他的喜剧**。
+其中的第一人称是**剧中人物**，与 Pestalozzi 的《Lienhard und Gertrud》同类，
+**不能当他的声口用**，故本道不出引文。
+
+原先写在本道的观察节已移至 `01-writings.md` 的 O-4。
 ## Candidate Claims
 
 Pending.

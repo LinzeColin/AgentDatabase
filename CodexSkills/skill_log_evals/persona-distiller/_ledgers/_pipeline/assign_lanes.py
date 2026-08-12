@@ -69,8 +69,14 @@ PATTERNS = [
     ("conversations", r"letter|correspond|briefe|briefwechsel|epistol|lettres|lettere|"
                       r"carteggio|dialogue|dialog|conversation|tischgespr|tabletalk|"
                       r"table.?talk|kolloqui|colloqui"),
-    ("expression", r"speech|speeches|address|oration|discourse|sermon|rede|reden|"
-                   r"discours|discorsi|orazioni|poem|poesie|songs|lieder|"
+    # ★★ 2026-08-12 移除 `discourse|discours|discorsi`：**这个词分不出讲辞和专著**。
+    #    17–18 世纪它就是「论」——实测本批两个人的 expression 道几乎全是专著：
+    #      Rousseau  9 份里 8 份是《Discours sur l'origine … de l'inégalité》（论著，非讲辞）
+    #      Machiavelli 10 份里 9 份是《论李维》（Discorsi / Discourses on the first decade）
+    #    移除后它们落进 residual ⇒ writings，**道数不虚增**（见文件末尾 lane_of 的注释）。
+    #    `oration` 加了词边界：`oration` ⊂ `commemoration`，把 Kant 的 KrV 英译本判成了讲辞。
+    ("expression", r"speech|speeches|address|\borations?\b|sermon|rede|reden|"
+                   r"orazioni|poem|poesie|songs|lieder|"
                    r"predigt|vortrag|commedie|comed"),
     # ★ 按存量实测放宽：年表类**可以是第三方**（校史、传记辞典条目、讣告）
     ("timeline", r"autobiograph|selbstbiograph|diary|journal intime|tagebuch|"
@@ -87,6 +93,31 @@ DEFAULT_WRITINGS = r"work|works|writing|schriften|s[äa]mtliche|opere|scritti|" 
 
 TIMELINE_PAT = next(p for l, p in PATTERNS if l == "timeline")
 
+# ★★ 覆盖规则：题名命中了某道的词，**而那本书其实是他的著作**。
+#    2026-08-12 实测，676 份里 10 份中招，全落在两个人身上，
+#    且**把 Kant 的道数从 6 顶到了 6**——deep 档要求 6 道，他是靠这三条假道够到的。
+#
+#    | 误配 | 实例 | 真相 |
+#    |---|---|---|
+#    | `chronolog` | `sämmtliche Werke : in chronologischer Reihenfolge` | **版本的编排方式**，不是生平年表 |
+#    | `judgment`  | `Critique of judgment` | 《判断力批判》是著作，不是判决记录 |
+#    | `oration` ⊂ `commemoration` | `Critique of pure reason : in commemoration of the centenary` | **子串误配**，同 `lister` ⊂ `callister` |
+#    | `discourse` | `Discourses on the first decade of Titus Livius` | 《论李维》是专著，不是短篇讲辞 |
+#
+#    ★ 只对 conversations/expression/decisions/timeline 生效；命中即归 writings。
+WORKS_OVERRIDE = [
+    ("版本编排词不是体裁",
+     re.compile(r"(?:s[äa]mmtliche|s[äa]mtliche|collected|complete)\s+werke"
+                r"|werke\s*:?\s*in\s+chronolog", re.I)),
+    ("critique/kritik 是他的著作",
+     re.compile(r"\b(?:critique|critik|kritik)\b", re.I)),
+    ("discorsi/discourses 论某部史书是专著",
+     # ★ 意大利语是 discorsi（无 u），英语是 discourses——第一版只写了英语那一支，
+     #   正对照当场抓到：`Discorsi sopra la prima deca de Tito Livio` 没被覆盖。
+     re.compile(r"(?:discours?e?s?|discorsi)\b[^,;]{0,24}\b(?:upon|on|sopra|sulla)\b[^,;]{0,20}"
+                r"\b(?:first|prima|deca|decade)\b", re.I)),
+]
+
 
 def lane_of(title: str, is_secondary: bool) -> str:
     t = (title or "").lower()
@@ -95,6 +126,10 @@ def lane_of(title: str, is_secondary: bool) -> str:
         return "timeline" if re.search(TIMELINE_PAT, t) else "external"
     for lane, pat in PATTERNS:
         if re.search(pat, t):
+            if lane != "writings":
+                for _why, ov in WORKS_OVERRIDE:
+                    if ov.search(t):
+                        return "writings"
             return lane
     if re.search(DEFAULT_WRITINGS, t):
         return "writings"

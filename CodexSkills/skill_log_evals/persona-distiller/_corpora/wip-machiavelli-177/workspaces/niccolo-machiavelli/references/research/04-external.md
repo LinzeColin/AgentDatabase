@@ -23,8 +23,20 @@
 
 ## Source-linked observations
 
-Pending.
+**★ 说话人不是他**：本道 12 份全是二手（`tier=S1`），
+下面这条的说话人是传记作者 **Villari**（《Niccolò Machiavelli and his Times》1878）。
 
+### O-1 · 后世传记为他的师承**改错**，靠的是生卒年相减
+
+> `The origin of this mistake is, because after Marsigli’s death, Vangelista da Pisa and Girolamo da Napoli taught at St Spirito, and Manetti studied under them.`
+> —— `src-4bf15fe30dbb` @218785
+
+★ 前文 Villari 摆出两个日期：Luigi Marsigli 生约 1330、卒 1394-08-21；
+Manetti 生 1396——`belongs to a later generation`，**两人不可能是师生**。
+然后才解释误传怎么来的：Marsigli 死后，另两人在同一处任教，Manetti 从的是他们。
+⇒ **关于他的记载里，最先被订正的是年代，不是评价。**
+这也说明本项目引用二手时的口径：`external` 那一道回答「别人怎么看他」，
+**说话人必须写明**。
 ## Candidate Claims
 
 Pending.

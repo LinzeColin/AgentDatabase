@@ -20,29 +20,18 @@
 
 ## Source-linked observations
 
-**口径**：1755 年原印本，长 s 与 OCR 讹形逐字照录未改
-（`raifonnemens`＝raisonnemens、`Pétac`＝l'état、`6c`＝&、`efl`＝est）。
+## ★ 本道已不存在——原来的 9 份全是专著，已改归 writings
 
-### O-1 · 他把自己这篇文章的**目标降到「弄清问题」**，不是解决它
+`expression` 的定义是**对外的短篇表达**。这一道原有 9 份，其中 **8 份是《Discours sur l'origine
+et les fondemens de l'inégalité》**——那是一篇论著，
+不是讲辞；分派器把它放进来，只因为题名里有 discours 这个词。
 
-> `J'ai commencé quelques raifonnemens ; J'ai bazardé quelques conjedures,moins dans l'elpoir de réfoudre la queftion que dans l'intention de l'éclaircir & de la réduire à fon véritable état.`
-> —— `src-7de63f6c8842` @27187（《论人类不平等的起源》）
+★ 17–18 世纪 discourse／discours／discorsi 指的就是「论」。
+同一个词在马基雅维利那里指《论李维》（专著），在林肯那里才指演说。
+**这个词分不出讲辞和专著**，已从 `expression` 的题名表里移除。
 
-★ 前一句先堵住读者的高估：`Que mes Lecteurs ne s'imaginent donc pas que j'oie me flatter
-d'avoir vu ce qui me paroit fi difficile à voir`。
-然后：我开了几段推理、冒险作了几个猜想，**与其说指望解决问题，不如说想把它讲清楚、
-还原成它本来的样子**（`la réduire à fon véritable état`）。
-⇒ 与马基雅维利 O-1 同形（结论精度不超过材料精度），**而卢梭是对整篇文章说的**。
-
-### O-2 · 他把结论下成一句会得罪所有人的话，前面却先给了条件
-
-> `Si elle nous a deflinés à être fains , j'ofe prefque affurer que Pétac de réflexion eft un état contre nature , 6c que l'homme qui médite efl un animal dépravé.`
-> —— `src-78d329fb5da1` @54794
-
-★ 前文是条件句的前半：如果自然把我们**造得简单、齐一、独居**，
-那么——`j'ofe prefque affurer`（我几乎敢断言）——**沉思的状态是违反自然的状态，
-而沉思的人是一种败坏了的动物**。
-⇒ 极端判断外面裹着两层限定：`Si elle nous a deflinés`（若……）与 `prefque`（几乎）。
+原先写在本道的两条观察节，已移至 `01-writings.md` 的 O-4 / O-5。
+本道**不出引文**。
 ## Candidate Claims
 
 Pending.

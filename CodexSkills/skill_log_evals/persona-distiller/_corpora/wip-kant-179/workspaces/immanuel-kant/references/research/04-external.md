@@ -13,8 +13,25 @@
 
 ## Source-linked observations
 
-Pending.
+**★ 说话人不是他**：本道 2 份均为二手（`tier=S1`）。
+下面这条的说话人是《Text-book to Kant》（1882）的编述者。
 
+### O-1 · 读者认为他**用错了词**，并替他把区分补全
+
+> `In the same way, the object in itself, as necessary to and in experience, is, though transcendent in cognition, a constitutively transcendental element.`
+> —— `src-75b42fcb7fbd` @326470
+
+★ 前文写道：既然我们根本不认识物自身，`we may be apt to think that Kant ought to
+have called it, not transcendental, but transcendent` ——**该叫「超验的」而不是「先验的」**。
+接着他自己给出化解：那些理念**作为认识是超验的，在经验中却是范导性地先验的**。
+⇒ 对他最常见的一种外部反应，不是反驳结论，而是**争他的用词**；
+而争到最后往往要把他的区分再说一遍。
+
+## ★ 本道剔除的一条
+
+另一份《Kant. Choix de textes》（1910）里取到的法文第一人称句，
+前文写着 `ce reproche fait à **ma** théorie`——**那是康德本人的文字被选进这本选集**，
+既不是「别人怎么看他」，也不能当他的声口（是法译）。不采。
 ## Candidate Claims
 
 Pending.

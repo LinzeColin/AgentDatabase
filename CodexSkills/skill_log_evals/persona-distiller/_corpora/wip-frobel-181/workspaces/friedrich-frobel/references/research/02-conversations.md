@@ -15,8 +15,20 @@
 
 ## Source-linked observations
 
-Pending.
+**口径**：《Froebel letters》——**英译本**，同 `06-timeline.md`，只作事实证据。
 
+## ★ 先说剔除的
+
+本道另外三条候选是同一句 `Froebel writes his autobiographical Letter to the Duke of
+Meiningen, never completed.`——**第三人称，是编者编的年表条目**，不是他的话。
+
+### O-1 · 他记一天的工作，把**教师站在哪个位置**也记进去
+
+> `After this, I again performed games with my schoolchildren, assigning the teachers to their places in the ranks.`
+> —— `src-83b59276db92` @151709
+
+★ 他又和学童做了游戏，**并把教师们一一安排到队列里的位置上**。
+⇒ 记录活动时他连**成人站位**一起记——教师在他这里是游戏的一部分，不是旁观者。
 ## Candidate Claims
 
 Pending.

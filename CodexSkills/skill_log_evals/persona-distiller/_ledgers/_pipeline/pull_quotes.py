@@ -102,6 +102,8 @@ def main() -> int:
     ap.add_argument("--min-len", type=int, default=70)
     ap.add_argument("--max-len", type=int, default=200)
     ap.add_argument("--exclude-third-party", action="store_true")
+    ap.add_argument("--allow-secondary", action="store_true",
+                    help="把 S1/S2 也纳入。**只给 external 那一道用**——它的定义就是别人怎么看他。")
     ap.add_argument("--pick", default="median", choices=("first", "median", "spread"),
                     help="每份文件里取第几个命中。★ **默认 median，不是 first**："
                          "first 会把候选恒定钉在卷首（Lincoln 实测 8 条偏移全部 < 12000，"
@@ -119,8 +121,12 @@ def main() -> int:
     raw = pathlib.Path(a.raw)
     recs = [json.loads(l) for l in pathlib.Path(a.ledger).read_text(encoding="utf-8").splitlines()
             if l.strip()]
+    # ★ `external` 那一道**本来就该是二手**（别人怎么看他），只收一手会永远取空。
+    #   2026-08-12 实测：Kant 与 Machiavelli 的 external 全是 S1，工具报「没有可取的一手源」，
+    #   而那正是这条道的定义。用 --allow-secondary 打开，**并在观察节里写明说话人是谁**。
+    tiers = ("P1", "P2", "S1", "S2") if a.allow_secondary else ("P1", "P2")
     pool = [r for r in recs if a.lane in (r.get("dimensions") or [])
-            and r.get("tier") in ("P1", "P2") and r.get("split") == "train"]
+            and r.get("tier") in tiers and r.get("split") == "train"]
     if a.exclude_third_party:
         before = len(pool)
         pool = [r for r in pool if not r.get("front_matter_third_party")]
