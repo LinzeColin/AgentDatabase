@@ -1,0 +1,17 @@
+{
+  "_note": "★ 无阻断步：维基 Immanuel Kant 条目**只讲这一个 Immanuel Kant**，未提及任何其他知名同名者；本项目未发现需要区分的对象。候选 1 名，门直接 ready。",
+  "★ 残留缺口（抓源时补）": "本轮**未单独访问** `Immanuel Kant (disambiguation)`（若存在）。检索一律用全名并核题名页；德语语料的 OCR 要过语种关。",
+  "selected_from": 1,
+  "selection_rule": "条目内未见其他同名者；生卒年 1724–1804 与队列条目逐位相同",
+  "candidates": [
+    {"canonical_name": "Immanuel Kant", "subject_uid": "immanuel-kant-1724-1804",
+     "identity_category": "思想教育师",
+     "occupation_or_role": "柯尼斯堡大学逻辑学与形而上学正教授",
+     "professional_background": "1724-04-22 生于普鲁士柯尼斯堡，1804-02-12 卒于同地。1755 年取得柯尼斯堡大学讲课资格；1770 年任逻辑学与形而上学正教授。★ 条目**未给这两个职位的终止年，也未提校长任期**——本项目不替它补。**自著（首版年）**：《纯粹理性批判》1781／1787（修订版）；《导论》1783；《道德形而上学奠基》1785；《实践理性批判》1788；《判断力批判》1790；《纯然理性界限内的宗教》1792（四篇合为一书出版）；《道德形而上学》1797。★ 《永久和平论》条目**提到但没给出版年**——同样不补。",
+     "application_scenarios": ["把一个概念的适用界限划清楚", "对既有学说做体系性重审", "以原则回应具体的道德争议", "长期讲授同一门课的组织方式"],
+     "key_capabilities": ["体系性论著写作", "区分与界限的划法", "对反对意见的预先处理", "讲义式的分层展开"],
+     "distinguishing_basis": "生卒年 1724–1804 与队列条目逐位相同",
+     "authoritative_sources": [{"locator": "https://en.wikipedia.org/wiki/Immanuel_Kant", "note": "生卒、教职、著作首版年取自此页；★ 该页未给《永久和平论》出版年，也未给教职终止年"}],
+     "evidence_level": "high"}
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Jean-Jacques Rousseau；思想教育师；日内瓦哲学家、philosophe、作家与作曲家；亦以抄谱为生。\n   专业背景：1712-06-28 生于日内瓦共和国日内瓦，1778-07-02 卒于法兰西王国皮卡第 Ermenonville。**自著（首版年）**：《论科学与艺术》1750；《论不平等》1755；《朱丽，或新爱洛伊丝》1761；《社会契约论》1762；《爱弥儿，或论教育》1762；歌剧《乡村卜师》1752。**身后出版**：《忏悔录》1782；《一个孤独漫步者的遐想》1776–1778 年间写成、身后出版。★ 维基条目**未把《音乐辞典》列入其主要著作**——本项目**不替它补**。。\n   应用价值：场景：以论著介入公共争论；教育安排的原则化（《爱弥儿》）；政治正当性的推理（《社会契约论》）；第一人称自述与自我辩解（《忏悔录》）；关键能力：长篇论说文写作；书信体小说；作曲与抄谱；把制度问题还原到人性假设上。\n   区分依据：生卒年 1712–1778 与队列条目逐位相同；消歧页上同名者唯一。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "以论著介入公共争论",
+        "教育安排的原则化（《爱弥儿》）",
+        "政治正当性的推理（《社会契约论》）",
+        "第一人称自述与自我辩解（《忏悔录》）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Jean-Jacques_Rousseau",
+          "note": "生卒、职业、著作首版年取自此页"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Rousseau_(disambiguation)",
+          "note": "以 Jean/Jean-Jacques/Jean-Baptiste 为名者仅他一人——「查过且唯一」的凭据"
+        }
+      ],
+      "canonical_name": "Jean-Jacques Rousseau",
+      "distinguishing_basis": "生卒年 1712–1778 与队列条目逐位相同；消歧页上同名者唯一",
+      "evidence_level": "high",
+      "identity_category": "思想教育师",
+      "key_capabilities": [
+        "长篇论说文写作",
+        "书信体小说",
+        "作曲与抄谱",
+        "把制度问题还原到人性假设上"
+      ],
+      "label": "A",
+      "occupation_or_role": "日内瓦哲学家、philosophe、作家与作曲家；亦以抄谱为生",
+      "professional_background": "1712-06-28 生于日内瓦共和国日内瓦，1778-07-02 卒于法兰西王国皮卡第 Ermenonville。**自著（首版年）**：《论科学与艺术》1750；《论不平等》1755；《朱丽，或新爱洛伊丝》1761；《社会契约论》1762；《爱弥儿，或论教育》1762；歌剧《乡村卜师》1752。**身后出版**：《忏悔录》1782；《一个孤独漫步者的遐想》1776–1778 年间写成、身后出版。★ 维基条目**未把《音乐辞典》列入其主要著作**——本项目**不替它补**。",
+      "subject_uid": "jean-jacques-rousseau-1712-1778"
+    }
+  ],
+  "generated_at": "2026-08-12T00:04:00Z",
+  "normalized_name": "jeanjacquesrousseau",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "jean-jacques-rousseau-1712-1778",
+  "status": "ready",
+  "target_name": "Jean-Jacques Rousseau"
+}

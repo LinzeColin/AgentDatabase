@@ -1,0 +1,110 @@
+{
+  "build_depth": {
+    "art-designer": "screening",
+    "entrepreneur-operator": "screening",
+    "investor-capital-allocator": "screening",
+    "software-developer": "screening",
+    "technical-engineer": "screening",
+    "thinker-educator": "deep"
+  },
+  "generated_at": "2026-08-12T00:05:04Z",
+  "identity_selection": {
+    "canonical": "thinker-educator",
+    "display": "思想教育师",
+    "mode": "single",
+    "primary": "thinker-educator",
+    "weights": {
+      "thinker-educator": 1.0
+    }
+  },
+  "product_release_versioning": {
+    "consumed_on": "successful-registration",
+    "format": "0.0.0.N",
+    "maximum": "0.0.0.999",
+    "minimum": "0.0.0.1",
+    "scope": "per-canonical-person"
+  },
+  "provided_scenario": null,
+  "research": {
+    "base_lanes": [
+      "writings",
+      "conversations",
+      "expression",
+      "external",
+      "decisions",
+      "timeline"
+    ],
+    "completeness_method": [
+      "source-universe",
+      "coverage-cube",
+      "origin-clustering",
+      "gap-expansion",
+      "two-round-saturation"
+    ],
+    "primary_identity_focus": [
+      "概念体系与思想谱系",
+      "教学诊断与反馈",
+      "训练和竞技策略",
+      "叙事与传播",
+      "公开辩论与修正",
+      "长期价值和人生判断"
+    ],
+    "scenario_priors": [
+      "学习指导",
+      "思想分析",
+      "写作表达",
+      "训练复盘",
+      "内容判断",
+      "长期决策"
+    ],
+    "source_priorities": [
+      "books",
+      "essays",
+      "letters",
+      "courses",
+      "coaching-records",
+      "competitions",
+      "interviews",
+      "editorial-decisions",
+      "debates"
+    ]
+  },
+  "runtime_identity_routing": {
+    "mode": "automatic",
+    "source": "distilled-identity-selection",
+    "task_reweighting": true,
+    "user_selection_required": false
+  },
+  "runtime_invocation_versioning": {
+    "audit_records": "optional-unnumbered",
+    "enabled": false,
+    "user_visible_version": false,
+    "versioned_output_names": false
+  },
+  "runtime_model_load_order": [
+    "boundaries.md",
+    "corrections/ACTIVE.md",
+    "facts.md",
+    "identity-facets/<selection>.md",
+    "cognitive-os.md",
+    "decision-policy.md",
+    "strategy.md",
+    "capabilities.md",
+    "work.md",
+    "persona.md",
+    "scenario-adapters/<inferred>.md",
+    "divergence-map.md"
+  ],
+  "runtime_readiness": {
+    "art-designer": "provisional-until-evidenced",
+    "entrepreneur-operator": "provisional-until-evidenced",
+    "investor-capital-allocator": "provisional-until-evidenced",
+    "software-developer": "provisional-until-evidenced",
+    "technical-engineer": "provisional-until-evidenced",
+    "thinker-educator": "building"
+  },
+  "scenario_policy": "infer-per-task",
+  "schema_version": "1.0",
+  "subject_origin": "historical",
+  "target_name": "Immanuel Kant"
+}
