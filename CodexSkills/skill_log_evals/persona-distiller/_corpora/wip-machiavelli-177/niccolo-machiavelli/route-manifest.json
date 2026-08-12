@@ -7,7 +7,7 @@
     "technical-engineer": "screening",
     "thinker-educator": "screening"
   },
-  "generated_at": "2026-08-12T00:02:02Z",
+  "generated_at": "2026-08-12T00:06:34Z",
   "identity_selection": {
     "canonical": "political-legal",
     "display": "政治法律师",
@@ -105,5 +105,5 @@
   "scenario_policy": "infer-per-task",
   "schema_version": "1.0",
   "subject_origin": "historical",
-  "target_name": "Niccolò Machiavelli"
+  "target_name": "Niccolo Machiavelli"
 }

@@ -2,7 +2,7 @@
   "builder_version": "v0.0.0.5",
   "chosen_subject_uid": "niccolo-machiavelli-1469-1527",
   "consent_authority": null,
-  "created_at": "2026-08-12T00:02:02Z",
+  "created_at": "2026-08-12T00:06:34Z",
   "current_version": null,
   "existential_hypotheses_enabled": false,
   "identity_selection": {
@@ -16,7 +16,7 @@
   },
   "language": "it",
   "model_version": "0.1.0-draft",
-  "name": "Niccolò Machiavelli",
+  "name": "Niccolo Machiavelli",
   "namesake_gate": {
     "candidate_count": 1,
     "chosen_candidate": {
@@ -36,8 +36,8 @@
           "note": "该页除本人外未列任何同名者——**这是「查过且为空」的凭据**"
         }
       ],
-      "canonical_name": "Niccolò Machiavelli",
-      "distinguishing_basis": "生卒年 1469–1527 与队列条目逐位相同；消歧页除他本人外无同名者",
+      "canonical_name": "Niccolo Machiavelli",
+      "distinguishing_basis": "生卒年 1469–1527 与队列条目逐位相同；消歧页除他本人外无同名者；★ 登记名用队列写法（无重音），维基写法 `Niccolò Machiavelli` 为别名",
       "evidence_level": "high",
       "identity_category": "政治法律师",
       "key_capabilities": [
@@ -52,11 +52,11 @@
       "subject_uid": "niccolo-machiavelli-1469-1527"
     },
     "chosen_subject_uid": "niccolo-machiavelli-1469-1527",
-    "normalized_name": "niccolòmachiavelli",
+    "normalized_name": "niccolomachiavelli",
     "resolution": "single",
     "schema_version": "1.0"
   },
-  "normalized_name": "niccolòmachiavelli",
+  "normalized_name": "niccolomachiavelli",
   "origin_review_required": false,
   "product_version": null,
   "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
@@ -75,7 +75,7 @@
   "slug": "niccolo-machiavelli",
   "status": "draft",
   "subject_origin": "historical",
-  "target_id": "tgt-8c473fb5e9b8",
+  "target_id": "tgt-be5dab79b83a",
   "time_scope": "1469-1527",
-  "updated_at": "2026-08-12T00:02:02Z"
+  "updated_at": "2026-08-12T00:06:34Z"
 }

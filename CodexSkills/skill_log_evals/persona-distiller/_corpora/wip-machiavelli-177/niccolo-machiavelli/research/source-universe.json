@@ -98,7 +98,7 @@
       "priority": "conditional"
     }
   ],
-  "generated_at": "2026-08-12T00:02:02Z",
+  "generated_at": "2026-08-12T00:06:34Z",
   "identity_priorities": [
     "laws",
     "judgments",
@@ -112,5 +112,5 @@
   "non_claim": "This protocol targets evidence saturation, not a logically impossible guarantee that every public or private source has been found.",
   "schema_version": "1.0",
   "stop_rule": "Stop only after two consecutive gap-driven rounds add no high-impact Claim and all critical coverage cells are either evidenced or explicitly unresolved.",
-  "target_name": "Niccolò Machiavelli"
+  "target_name": "Niccolo Machiavelli"
 }

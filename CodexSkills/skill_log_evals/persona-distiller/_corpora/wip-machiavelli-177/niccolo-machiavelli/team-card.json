@@ -2,7 +2,7 @@
   "application_scenarios": [
     "replace-with-evidence-supported-scenario"
   ],
-  "canonical_name": "Niccolò Machiavelli",
+  "canonical_name": "Niccolo Machiavelli",
   "distillation_traits": [
     "replace-with-distinctive-evidence-supported-trait"
   ],
@@ -21,7 +21,7 @@
     "replace-with-task-independent-selection-reason"
   ],
   "subject_slug": "niccolo-machiavelli",
-  "subject_uid": "person-c79914448fcabb2e",
+  "subject_uid": "person-6f141a9ea75886c1",
   "user_value": [
     "replace-with-concrete-user-value"
   ]

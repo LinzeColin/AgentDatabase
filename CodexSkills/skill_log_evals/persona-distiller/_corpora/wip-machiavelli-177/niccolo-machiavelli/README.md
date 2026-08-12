@@ -1,4 +1,4 @@
-# Niccolò Machiavelli 人物 Skill
+# Niccolo Machiavelli 人物 Skill
 
 - 构建器：Persona Distiller `v0.0.0.5`
 - 目录/Skill 名：`niccolo-machiavelli`
@@ -9,7 +9,7 @@
 - 研究档位：`quick`
 - 内部模型快照：`0.1.0-draft`
 - 人物产物版本：打包并成功登记时按该人物独立分配 `0.0.0.1` 至 `0.0.0.999`
-- 创建时间：2026-08-12T00:02:02Z
+- 创建时间：2026-08-12T00:06:34Z
 
 安装后直接调用本人物 Skill 并给出任务。身份分面和场景由 Skill 内部自动路由，用户不需要选择身份、编号或权重。例如：
 
