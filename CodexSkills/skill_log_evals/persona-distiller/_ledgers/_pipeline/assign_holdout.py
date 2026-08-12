@@ -121,7 +121,7 @@ def main() -> int:
     clusters = json.loads(ded.read_text(encoding="utf-8")).get("重复簇", [])
     in_cluster = {i for cl in clusters for i in cl}
 
-    # ④ 研究稿里已经出现过的 source_id —— 一份都不能密封
+    # ④ **建模者读得到的文件**里出现过的 source_id —— 一份都不能密封
     cited = set()
     rd = ws / "references" / "research"
     if rd.is_dir():
@@ -133,6 +133,18 @@ def main() -> int:
                 for r in recs:
                     if r["source_id"] in body[k:]:
                         cited.add(r["source_id"])
+    # ★ 2026-08-12 补：**`meta.json` 也是建模者读得到的**，第一版只看了研究稿。
+    #   实测后果：Lincoln #174 的 `src-187a0d34e657` 被密封，
+    #   而它同时被 `attribution_basis.disputed_policy` 点名列在「无正文署名的单行本 6 份」里
+    #   ——**密封了，却在建模者读得到的文件里写着它的 id**。
+    #   ★ 这一条与 [[a-checker-nothing-calls-is-not-a-checker]] 同型：
+    #     规则写的是「已引用过的不密封」，而我只在一个目录里找「引用」。
+    meta_f = ws / "meta.json"
+    if meta_f.is_file():
+        meta_body = meta_f.read_text(encoding="utf-8", errors="replace")
+        for r in recs:
+            if r["source_id"] in meta_body:
+                cited.add(r["source_id"])
 
     def ident(r):
         return r["locator"].split()[-1]
