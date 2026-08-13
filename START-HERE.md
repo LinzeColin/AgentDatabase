@@ -122,8 +122,23 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/fetch_i
 
 ## 四、★ 唯一的停点：阶段 5 判分
 
-八个人（Lincoln／Jefferson／Bismarck／Pestalozzi／Machiavelli／Rousseau／Kant／Fröbel）
-的**产物与题目都做完了**，就差判分。判分要**两名互相独立的评委**。
+**11 个人**的产物与题目都做完了，就差判分。判分要**两名互相独立的评委**。
+
+    Lincoln  Jefferson  Bismarck  Pestalozzi  Machiavelli  Rousseau  Kant  Fröbel
+    Brandeis #172   Michelangelo #185   Dewey #190
+
+这个 11 是**现算的**，不是手数的：
+
+```bash
+python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_scoring_ready.py
+```
+
+它列「有盲判用例 ＋ 还没有判分结果」的人，**并把已结案的标成矛盾而不是过滤掉**
+（过滤会让人从表里整个消失——Churchill 就这样差点被漏掉）。
+
+★ **Churchill #191 不在这 11 人里**：他产物齐全，**但语料没过门**——
+`timeline` 那条道的 2 份是同一部书的两个印本，`min_lanes` 实质 2 < 门 3。
+详见 `HANDOFF.md` 的「Churchill #191」一节。
 
 「独立」在这里的意思**与任何特定产品无关**，只有三条：
 
@@ -143,13 +158,19 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/fetch_i
 
 按优先级：
 
-1. **跑阶段 5 判分**（上面第四节）——这是唯一卡住的一步。
-2. **Brandeis #172 与 Michelangelo #185 判分**：这两人的阶段 1–4 也做完了，见
-   `…/_corpora/wip-brandeis-172/05-阶段4完成.md`。
-3. **Dewey #190 进阶段 3**：阶段 2 已走通（档位 **quick**：台账 39 行、一手占比 1.0000、
-   道 3）。读 `…/_ledgers/_Dewey190阶段2完成-第3批唯一走通的-2026-08-13.md`。
-4. **Churchill #191 进阶段 1a**：探源做完了，两道同名守卫已接线，见
-   `…/_corpora/wip-churchill-191/04-探源.md`。**Ford #188** 同样可直接开工。
+1. **跑阶段 5 判分**（上面第四节）——这是唯一卡住的一步，**11 个人一起**，
+   开箱即跑清单里第一至六节是那八人、**第七节是 Brandeis／Michelangelo／Dewey** 三人。
+2. ★ **判分之前先跑一次就绪度**，它会把缺件、矛盾、压线一次列清：
+
+   ```bash
+   python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_scoring_ready.py
+   ```
+
+3. ★ **Dewey #190 是压线的那一个**（lanes 3 = 门 3），撑起第三条道的只有一份
+   与妻子共同署名的《Letters from China and Japan》。**按现有裁定登记不挡**，
+   但判他的分时要知道这件事——写在开箱即跑清单第七之二节。
+4. **不要再开 Churchill #191／Ford #188**：两人都已记延后，理由与解锁条件在
+   `_ledgers/_延后名单.json`。Churchill 的产物做完了但**语料没过门**（见第四节 ★）。
 5. ★ **不要重开已记延后的人**：第 2 批十人**九人出局**，死因与判法写在
    `…/_ledgers/_第2批结算-十人九出局-2026-08-13.md`；
    压倒性的第一死因是 `min_lanes`（六条研究道里有材料的不足 3 条），

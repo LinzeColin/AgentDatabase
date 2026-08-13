@@ -231,6 +231,44 @@ else:
     for l in sh.stdout.splitlines():
         if l.strip().startswith(("✗","？","       表里")): print("     "+l.strip())
 
+# ★★ 空心道：某条道的源去重后同属**一部作品**（`check_lane_distinct_works.py`）。
+#   2026-08-13 抓到 Churchill #191——他的 `timeline` 2 份是同一部书的两个印本，
+#   `min_lanes 3` 是一部作品数了两遍换来的，而我当天已在这份语料上做完阶段 3、4。
+#   ★ **这一条不做成「有命中就红」**：Churchill 与 Marshall 是已查清、已落纸的两例，
+#     且本机补不了（语料不进 git）⇒ 做成硬红就是一个**永远变不绿的红**，那不是信号。
+#   ⇒ 判据改成**比对基线名单**：挡住的人 == 已记录的那两个 → 绿；
+#     **多出一个新的人就红**（那才是回归）。
+EXPECT_BLOCKED={"winston-churchill","john-marshall"}
+lw=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                      "/_ledgers/_pipeline/check_lane_distinct_works.py")],
+                  capture_output=True, text=True)
+got={l.split("：")[0].strip(" ·") for l in lw.stdout.splitlines()
+     if l.strip().startswith("·")}
+if lw.returncode in (0,1) and got==EXPECT_BLOCKED:
+    print("✅ 空心道：挡住的正是已记录的 %d 人（%s）——无新增回归"
+          %(len(got), "／".join(sorted(got))))
+elif lw.returncode not in (0,1):
+    print("★ 空心道：**未判**（判据 rc=%d）"%lw.returncode)
+else:
+    ok=False
+    print("❌ 空心道名单与基线不符（基线 %s，实测 %s）："
+          %("／".join(sorted(EXPECT_BLOCKED)) or "空", "／".join(sorted(got)) or "空"))
+    for l in lw.stdout.splitlines():
+        if l.strip().startswith("·"): print("     "+l.strip())
+# ★ 覆盖面同时印出来：**「没红」不等于「都查过」**
+for l in lw.stdout.splitlines():
+    if l.startswith("扫过"): print("     "+l.strip())
+
+# ★★ 判分就绪度：等着判分的人，装置齐不齐、判得出判不出（`check_scoring_ready.py`）。
+#   它**不判该不该发**，也不代替授权——判分要两名互相独立的评委，只能由人起。
+#   ⇒ 这里只印现状，**不参与红绿**：缺预登记/有矛盾是要人看的信息，不是构建失败。
+sr=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                      "/_ledgers/_pipeline/check_scoring_ready.py")],
+                  capture_output=True, text=True)
+for l in sr.stdout.splitlines():
+    if l.startswith("真正等着判分的") or "矛盾" in l or "空心道 " in l:
+        print("     ★ "+l.strip()[:150])
+
 # ★ 踩坑库被 START-HERE 列为「开工前必读」，而它的条数/索引/文件三者一度对不上：
 #   README 说 153（把 README 与 00-索引自己也数了进去），实际 151，另有 3 条没搬进仓。
 ll=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
