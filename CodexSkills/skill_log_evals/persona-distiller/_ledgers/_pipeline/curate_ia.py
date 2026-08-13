@@ -65,6 +65,46 @@ EXCLUDE = {
     #   ⇒ 排掉是对的；而 Burbank 那次「按商号排会砍掉 67% 的自著」，所以那边留空。
     #   **同一个字段，两个人物要相反的处置——不能照抄。**
     "leonardo": ["Hollar", "Dürer", "Durer"],
+    # ★★★ Michelangelo #185：**同一个字段，第三种处置**。
+    # burbank  → EXCLUDE 空（按商号排会砍掉 67% 的自著）
+    # leonardo → 按同现排（50 条 Hollar/Dürer **全部**同时列着 Leonardo，同现即污染）
+    # michelangelo → **只能按名逐个排**：池 287 条里首位 creator 不是他的有 **68 条**，
+    #   而这 68 条**全部**同时列着他 —— 若照 leonardo 的「同现即污染」一刀切，
+    #   会连带砍掉**正好是补道用的那几份**：
+    #     · Milanesi 编《Le lettere di Michelangelo Buonarroti》 ← conversations 道的核心
+    #     · Hollanda《Quatro diálogos da pintura antiga》         ← 与他的对话录
+    #     · Symonds 12（传记＋十四行诗英译）／Gotti 2《Vita di Michelangelo》／
+    #       Rolland 4《Das leben Michelangelos》＋《Michel-Ange poète》／
+    #       Knapp 5／Holroyd 4                                    ← external 道
+    #   ⇒ 排掉的只有两类，**逐条读过题名**：
+    #     ① 别人自己的著作（与他无关）：Vignola 6《Regola delli cinque ordini d'architettura》、
+    #        Aviler 4《Cours d'architecture》、Speroni 9《Teatro italiano antico》、
+    #        Dante 1《La vita nuova》
+    #     ② 照他的作品刻/画的复制品（同 leonardo 的 Hollar/Dürer）：
+    #        Sargent 3《Night》《Dawn》、Timothy Cole 2《Old Italian Masters》、
+    #        Enea Vico 1、Raimondi 2《The Climbers》、Melchior Lorck 2《Crucified Man》
+    "michelangelo": ["Vignola", "Aviler", "Speroni", "Dante Alighieri",
+                     "Sargent", "Timothy Cole", "Enea Vico", "Raimondi", "Lorck",
+                     # ★★ **侄孙 Michelangelo Buonarroti il Giovane（1568–1646）**——
+                     #   同姓同名，写喜剧的，与雕刻家不是一个人。
+                     "1568-1646", "il Giovane", "il giovane"],
+}
+
+# ★★★ 2026-08-13 新增：**按题名排除**。
+# 起因：`EXCLUDE` 只比 creator 串，而侄孙有一条 `bub_gb_az-3FvsPFwYC`
+# 《La Tancia commedia rusticale》的 creator **只写「Michelangelo Buonarroti」**——
+# 没有年份、没有 il Giovane、没有任何可比的标记 ⇒ **按 creator 永远挡不住**。
+# 实测：上一版清单 85 条里混进 **8 条侄孙的作品**（La Tancia 3、La Fiera 5），
+# 其中 5 条 creator 明写 `1568-1646` 也照样放行了，因为那时排除名单里没写这一条。
+# [[test-the-guard-against-this-persons-namesake]]：**护栏要拿这个人物的同名者重测一遍。**
+# ★ 只排他侄孙**自己写的**那几部；侄孙 1623 年**编**的伯祖父《Rime》不在此列（那是雕刻家的诗）。
+EXCLUDE_TITLE = {
+    "michelangelo": [
+        "La Tancia", "La Fiera", "Il Giulè", "La Dote",
+        "Il giudizio di Paride", "Frottole della peste",
+        "Quaderno delle rime burlesche",
+        "Epistola al Signor Niccolò Arrighetti",
+    ],
 }
 # 目标必须出现在 creator 里的**姓名词元**（同一个 creator 段里全部出现即命中）。
 # ★★ 曾写成 `["Fröbel, Friedrich"]` 这种「姓, 名」定串，于是
@@ -86,6 +126,10 @@ REQUIRE = {
     "comenius": [["comenius"], ["komensk"]],
     "burbank": [["burbank", "luther"]],
     "leonardo": [["leonardo", "vinci"], ["leonardo"]],
+    # ★ 三种拼法都要收：IA 里同时存在 `Michelangelo Buonarroti`、
+    #   `Buonarroti, Michelangelo`（22 条，与前式**零重叠**）与古体 `Michelagniolo`
+    #   （1907 年那本 *Die Briefe des Michelagniolo Buonarroti*）。
+    "michelangelo": [["michelangelo"], ["michelagniolo"], ["buonarroti"]],
 }
 
 
@@ -156,7 +200,8 @@ def main() -> int:
     hdr = lines[0].split("\t")
     rows = [dict(zip(hdr, l.split("\t"))) for l in lines[1:]]
 
-    drop = {"访问受限": [], "版次年>%d" % a.pd_cutoff: [], "同名者": [], "目标不在creator": []}
+    drop = {"访问受限": [], "版次年>%d" % a.pd_cutoff: [], "同名者": [],
+            "同名者·按题名": [], "目标不在creator": []}
     keep = []
     for r in rows:
         ident = r.get("identifier", "")
@@ -169,6 +214,9 @@ def main() -> int:
             drop["版次年>%d" % a.pd_cutoff].append(ident); continue
         if any(x in cre for x in EXCLUDE[a.person]):
             drop["同名者"].append(ident); continue
+        ti_raw = r.get("title", "") or ""
+        if any(x.lower() in ti_raw.lower() for x in EXCLUDE_TITLE.get(a.person, [])):
+            drop["同名者·按题名"].append(ident); continue
         tp = target_pos(cre, a.person)
         if tp < 0:
             drop["目标不在creator"].append(ident); continue
