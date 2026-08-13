@@ -20,6 +20,15 @@ NAME="agentdb-persona-distiller-full.bundle"
 mkdir -p "$OUT"
 B="$OUT/$NAME"
 
+# ★★ 打包**之前**先问一句：写在 `~/.claude/` 里的教训有没有漏在包外。
+#   2026-08-14 实测漏了 5 条 —— 而包本身 8 项验收全过，因为**没有一项在问这个**。
+#   `~/.claude/` 不在任何 git 仓里，随本机、随套餐消失；移交的全部价值就是这些教训。
+#   报告制：别的机器上那个目录压根不存在，硬拦会造出永远变不绿的红。
+echo "== 0/4 教训库覆盖面（报告制；漏在包外的要先带进仓再打包）=="
+python3 "$(dirname "$0")/check_lessons_reach_the_bundle.py"
+_les_rc=$?
+[ $_les_rc -ne 0 ] && echo "★ 教训覆盖面检查非零退出 rc=$_les_rc（不拦打包，但这个数没量到）"
+
 echo "== 1/4 打包（--all）=="
 git -C "$REPO" bundle create "$B" --all
 rc=$?; [ $rc -ne 0 ] && { echo "★ 打包失败 rc=$rc"; exit $rc; }
