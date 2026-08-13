@@ -603,6 +603,41 @@ if R2:
             if m:
                 t = re.sub(rf"({re.escape(label)} \*\*)[\d,]+", rf"\g<1>{m.group(1)}", t)
 cover.write_text(t, encoding="utf-8")
+# ★★ 2026-08-14：封面信原来只教两条裸命令（shasum ／ bundle verify）。
+#   问题是**两条都过 ≠ 拿的是最新那个包** —— 旧包自己也全绿，只是少 43 个提交。
+#   换成 verify_handover_bundle.sh，并把**期望的 tip 写进命令**，这样「拿了旧包」会红。
+_cmd = """对方拿到之后可以自己核（**一条命令，退出码说话**）：
+
+```bash
+bash CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/verify_handover_bundle.sh . --expect-tip %s
+```
+
+★ 那个脚本在**包里**（clone 出来就有），自测 8/8，含反例：sha256／tip／提交数
+对不上、包是空的、sidecar 不在、**以及「包自洽但不是期望的那个 tip」**——
+最后一条正是「拿了旧包」那一种，只有 `--expect-tip` 判得出来。
+
+★ 还没 clone 出来时，先跑这两条也行（但**判不了新旧**）：
+
+```bash
+shasum -a 256 agentdb-persona-distiller-full.bundle
+git bundle verify agentdb-persona-distiller-full.bundle
+```
+""" % tip
+_old = """对方拿到之后可以自己核：
+
+```bash
+shasum -a 256 agentdb-persona-distiller-full.bundle
+git bundle verify agentdb-persona-distiller-full.bundle
+```
+"""
+if _old in t:
+    t = t.replace(_old, _cmd, 1)
+elif "verify_handover_bundle.sh . --expect-tip" in t:
+    t = re.sub(r"verify_handover_bundle\.sh \. --expect-tip [0-9a-f]{40}",
+               "verify_handover_bundle.sh . --expect-tip " + tip, t)
+else:
+    print("！ 封面信里没找到验包段 —— **未替换，不是通过**")
+
 print("✅ 封面信身份证：已从 sidecar 现读回填" + ("（无变化）" if t == old else ""))
 COVEOF
 else
