@@ -2944,9 +2944,42 @@
     "★ 即便补上它也才 2 部作品／约 3–4 个扫描件，**仍够不着 quick 的 8 份**——除非把行业期刊上他署名的广告文案与短文一并算进来（那要另跑检索式，且要逐条核署名）。"
    ],
    "处置类": "**一手规模不够**（同 Mendel #125／Slavyanov #115）——★ 但比他们更极端：**PD 内只有 1 部作品、2 个扫描件**，而 quick 门要 8 份。★★ 且掺了一半**通道受限**：代表作《Scientific advertising》按出版年是 PD，IA 上却只有现代重排本。"
+  },
+  {
+   "name": "Alfred P. Sloan",
+   "family_zh": "创业经营师",
+   "deferred_at": "2026-08-13",
+   "reason": "**结构性不可能：PD 内 0 条。** `creator:\"Sloan, Alfred P.\"` numFound **3**，三条全是 **1964**《My years with General Motors》的扫描件。他卒 1966，**唯一的著作出版于 1964**，距 PD 分界（≤1930）**34 年**。⇒ 与 Nowlan #155 同型（1960 vs 1931），不是「材料难找」，是**他的作品根本不在公有领域射程内**。",
+   "probed_and_failed": [
+    "creator:\"Sloan, Alfred P.\" → 3 条，PD 内 **0**"
+   ],
+   "already_confirmed_fetchable": [],
+   "unblock_todo": [
+    "★ **建议永久划掉**（同 Nowlan #155）：1964 年的作品要到 2060 年才进入公有领域，不是「等得到」的那一类。"
+   ],
+   "处置类": "**结构性不可能**（同 F. Stanley Nowlan #155）——代表作出版年距 PD 分界数十年，**不是可得性问题**。"
+  },
+  {
+   "name": "Edward Bernays",
+   "family_zh": "客户营销师",
+   "deferred_at": "2026-08-13",
+   "reason": "**min_lanes 硬卡点：份数刚够而道只有 1 条。** 三路检索交叉：`creator:\"Bernays, Edward L.\"` 11 条（PD 内 3）／`creator:\"Bernays, Edward\"` 11 条（PD 内 3）／`title:\"Propaganda\" AND creator:\"Bernays\"` **25 条（PD 内 6）**。PD 内合计 **8 个扫描件**（刚好够 quick 的 8 份），**而它们只有 2 部作品**：1928《Propaganda》（含德译、法译，6 个扫描件）＋ 1917《The Broadway anthology》（合编诗集，2 个扫描件）。题名估分道 **1 条**（writings），quick 要 3。★★ 另一部代表作《Crystallizing Public Opinion》(1923) **按出版年是公有领域**，而 `title:\"Crystallizing public opinion\"` numFound 9、**PD 内 0**——只有现代重排本，**与 Hopkins #189 完全同型**。",
+   "probed_and_failed": [
+    "title:\"Crystallizing public opinion\" → 9 条，**PD 内 0**（只有现代重排本）",
+    "conversations / expression / decisions / timeline / external 五道在本轮检索式下**实测为零**"
+   ],
+   "already_confirmed_fetchable": [
+    "1928《Propaganda》6 个扫描件（含德译 `Propaganda die Kunst der Pu…`、法译 `Propaganda comment manipuler l opinion…`）",
+    "1917《The Broadway anthology》2 个扫描件——**合编诗集，声口密度存疑**，开工前要先量"
+   ],
+   "unblock_todo": [
+    "**要补的是道**：他 1920 年代给报刊写的短文与访谈（expression／conversations）要另跑检索式。",
+    "**以及换通道找 1923 年《Crystallizing Public Opinion》的原书扫描件**（同 Hopkins #189）。"
+   ],
+   "处置类": "**min_lanes 硬卡点**——★ 本例的形态与前四个不同：**份数刚够门（8/8）而作品只有 2 部、道只有 1 条**，属于「扫描件数虚高、实质来源极少」。★★ 且与 Hopkins #189 共享一个成因：**代表作按出版年是 PD，而 IA 上只有现代重排本**。"
   }
  ],
- "total": 157,
+ "total": 159,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
