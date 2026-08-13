@@ -2924,9 +2924,29 @@
     "★ 若将来开工：先把「讲义体的声口怎么定义」答出来——同 Plato 的前置问题，答不出别开工。"
    ],
    "处置类": "**min_lanes 硬卡点**（同 Vavilov #126／Burbank #183／Leonardo #184／Plato #186）——★ 与 Leonardo、Plato 同样带「虚道」成分：修正前那 3 条道里有 3 条是正则误配变出来的。**这是同一个成因的第三次**，已落成右边界 + 8 例自测。"
+  },
+  {
+   "name": "Claude C. Hopkins",
+   "family_zh": "客户营销师",
+   "deferred_at": "2026-08-13",
+   "reason": "**一手规模结构性不够：PD 内只有 1 部作品**（quick 门要 8 份）。三种检索式交叉确认，不是一次没查到：`creator:\"Hopkins, Claude C.\"` numFound **3**（PD 内 1）／`creator:\"Hopkins, Claude\"` **4**（PD 内 1）／`title:\"My life in advertising\"` **4**（PD 内 **2**，是同一部书的两个扫描件）。⇒ **PD 内的全部 = 1927《My life in advertising》，2 个扫描件**。题名估分道：**1 条道**（writings），也够不着 quick 的 3。★★ 他的另一部代表作《Scientific advertising》(1923) **按出版年是公有领域**（≤1930），而 `title:\"Scientific advertising\"` numFound 5、**PD 内 0**——IA 上只有 1966／1998／2010 的现代重排本，**没有 1923 原书的扫描件**。⇒ 这一半是**通道**问题不是权利问题。",
+   "probed_and_failed": [
+    "creator:\"Hopkins, Claude C.\" → 3 条，其中 2 条是 1998／2010 现代重排本",
+    "creator:\"Hopkins, Claude\" → 4 条，PD 内仍只有那 1 部",
+    "title:\"Scientific advertising\" → 5 条，**PD 内 0**：IA 没有 1923 原书的扫描件"
+   ],
+   "already_confirmed_fetchable": [
+    "1927《My life in advertising》——**2 个扫描件，是他仅有的可取一手**",
+    "★ 他卒 1932，是该族六人里卒年最早的；**权利这一侧没有问题**，卡的是可得性"
+   ],
+   "unblock_todo": [
+    "**换通道找 1923 年《Scientific advertising》的原书扫描件**（HathiTrust／Google Books／各馆数字化）。★ 它按出版年确属公有领域，缺的只是一份可核的扫描件。",
+    "★ 即便补上它也才 2 部作品／约 3–4 个扫描件，**仍够不着 quick 的 8 份**——除非把行业期刊上他署名的广告文案与短文一并算进来（那要另跑检索式，且要逐条核署名）。"
+   ],
+   "处置类": "**一手规模不够**（同 Mendel #125／Slavyanov #115）——★ 但比他们更极端：**PD 内只有 1 部作品、2 个扫描件**，而 quick 门要 8 份。★★ 且掺了一半**通道受限**：代表作《Scientific advertising》按出版年是 PD，IA 上却只有现代重排本。"
   }
  ],
- "total": 156,
+ "total": 157,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
