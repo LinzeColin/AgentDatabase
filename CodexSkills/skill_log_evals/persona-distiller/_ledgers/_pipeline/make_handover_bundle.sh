@@ -522,5 +522,21 @@ rm -rf "$TMP"
 [ $rc -ne 0 ] && { echo "★ 回读自验证失败"; exit $rc; }
 echo
 echo "包在：$B"
+# ★★★ 2026-08-14 00:11 实测：输出目录名带**当天日期**（第 18 行），跨零点就换一个目录。
+#   当晚 build29 落在 `…-20260813/`，build30 落在 `…-20260814/`，
+#   而**移交封面信连同上传命令还留在旧目录里**——照它跑就是把旧包（少 3 个提交）传出去。
+#   脚本自己 rc=0、完成标记也印了，**日志一个字都没错**，是我去核产物才发现的。
+#   ⇒ 收尾时把**同级的其它 handover 目录**点名列出来，标成旧的。
+_par="$(dirname "$B")"; _par="$(dirname "$_par")"
+_stale=$(find "$_par" -maxdepth 2 -name 'agentdb-persona-distiller-full.bundle' \
+         ! -path "$B" 2>/dev/null | sort)
+if [ -n "$_stale" ]; then
+  echo
+  echo "⚠️  同级还有**别的日期**的交付包 —— 它们是旧的，**别传错**："
+  echo "$_stale" | while read -r f; do
+    echo "     旧: $f  （$(stat -f%z "$f" 2>/dev/null) 字节）"
+  done
+  echo "     ★ 要传的是上面那一个：$B"
+fi
 echo "上传（**由人按**，一条命令，公开仓不用改）："
 echo "  gh release upload agentdb-handover-20260812 \"$B\" --repo LinzeColin/Private-Database --clobber"
