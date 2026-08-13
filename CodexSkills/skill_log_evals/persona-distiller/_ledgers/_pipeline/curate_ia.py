@@ -83,6 +83,25 @@ EXCLUDE = {
     #     ② 照他的作品刻/画的复制品（同 leonardo 的 Hollar/Dürer）：
     #        Sargent 3《Night》《Dawn》、Timothy Cole 2《Old Italian Masters》、
     #        Enea Vico 1、Raimondi 2《The Climbers》、Melchior Lorck 2《Crucified Man》
+    # ★★★ Brandeis #172：**14 个同名候选，2026-08-13 逐条补裁定后才接的线**。
+    #   原来只裁定了 1 个（目标本人），另 13 个没处置，而 `namesake_gate.json` 的 `ready`
+    #   是从**只有 1 个候选**的那次搜索建的 —— 它没见过另外 13 个。
+    #   ★ 判定不是靠时间戳，是**靠覆盖率**：裁定覆盖 1/14 ⇒ 更晚那次广搜（14 候选、
+    #     resolution=multiple、status=blocked）才是有效判定。
+    #   三个最危险的：
+    #     ① **Brandeis University 及其约 20 个下属机构** —— 候选文件实测
+    #        「检索 `Brandeis` 首屏 25 条里 **20 条属此族**」。**以他命名，但不是他**，
+    #        与 Michelangelo 的画册同型（题名里全是他，作者不是他）。
+    #     ② **Louis Brandeis Wehle（1880–1959），目标的侄子，也是律师** ——
+    #        他的全名**整个包含**目标的全名（同 Gantt #156 的 `Mrs. H. L. Gantt` 形态）。
+    #     ③ **另一个 Louis Brandeis（1902–1945）** —— 姓名完全相同、年代重叠，**只能靠生卒年分**。
+    "brandeis": ["Wehle", "1902-1945", "1902–1945",
+                 "Brandeis University", "Brandeis Univ", "Brandeis Press",
+                 "Brandeis law journal", "Brandeis Medal",
+                 "Alfred Brandeis", "1854-1928",
+                 "Madeline Brandeis", "Irma Brandeis", "Antonietta Brandeis",
+                 "Eugen Brandeis", "Antoine Brandeis", "Friedrich Brandeis",
+                 "Jan Adolf Brandeis", "Adele Brandeis"],
     # ★★★ Plato #186：**四类同名，全在抓源前实测过**（池 2617 条）。
     #   ① `PLATO Learning, Inc.`（1990s–2000s 教学软件公司，前身是 PLATO 计算机教学系统）32 条
     #      —— Foshay／Hannafin／Quinn／Sherman 的 "PLATO Evaluation Series"、"PLATO Courseware"。
@@ -146,6 +165,10 @@ REQUIRE = {
     #   `Buonarroti, Michelangelo`（22 条，与前式**零重叠**）与古体 `Michelagniolo`
     #   （1907 年那本 *Die Briefe des Michelagniolo Buonarroti*）。
     "michelangelo": [["michelangelo"], ["michelagniolo"], ["buonarroti"]],
+    # ★ Brandeis：只收「brandeis ＋ louis」同段。
+    #   ★★ 这**挡不住侄子 `Louis Brandeis Wehle`**（他同段里也含 brandeis 与 louis）——
+    #   靠 EXCLUDE 的 `Wehle` 挡。**REQUIRE 与 EXCLUDE 要一起看，单看一侧会以为漏了。**
+    "brandeis": [["brandeis", "louis"]],
     # ★ Plato 的著录有多种拼法：`Plato`／`PLATO`／`Plato, 427? BC-347? BC`／`Plato, Curt. Red.`，
     #   还有希腊文题名直接落在 creator 字段（`Πολιτεια του Πλατωνα`、`Ἀπολογία Σωκράτους`）。
     "plato": [["plato"], ["platon"], ["πλάτ"], ["πλατ"]],
