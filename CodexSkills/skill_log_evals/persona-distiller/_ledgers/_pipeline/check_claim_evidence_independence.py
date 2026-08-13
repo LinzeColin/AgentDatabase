@@ -104,9 +104,33 @@ STOPWORDS = {
 _WORD = re.compile(r"[a-zàâäçèéêëìíîïñòóôöùúûüß]+")
 
 
+# ★★ 2026-08-14：先按**字符集**分流。原来只有拉丁虚词表，于是 Brandeis 那份 1917 年的
+#   俄文《Война и еврейская проблема》被判成 `?`，他的工作区**被当成单语种**报了出去——
+#   而他 train 里同时有英文《The Jewish problem, how to solve it》(1915/1919)。
+#   正是本项要防的那种假绿，却出在本项自己身上。[[a-gates-scan-set-is-smaller-than-reality]]
+_SCRIPTS = (
+    ("ru", (0x0400, 0x04FF)),      # 西里尔
+    ("el", (0x0370, 0x03FF)),      # 希腊
+    ("he", (0x0590, 0x05FF)),      # 希伯来
+    ("ar", (0x0600, 0x06FF)),      # 阿拉伯
+    ("zh", (0x4E00, 0x9FFF)),      # 汉字
+    ("ja", (0x3040, 0x30FF)),      # 假名
+)
+
+
 def guess_lang(text: str, cap: int = 20000) -> str:
-    """正文 → 语种码。**纯函数**，自测不碰磁盘。判不出来返回 `?`。"""
-    w = _WORD.findall(text.lower())[:cap]
+    """正文 → 语种码。**纯函数**，自测不碰磁盘。判不出来返回 `?`。
+
+    ★ 先看字符集（非拉丁文字整块判），再用拉丁虚词表分英/意/德/拉/法。
+    """
+    s = text[:cap]
+    letters = sum(1 for c in s if c.isalpha())
+    if letters:
+        for code, (lo, hi) in _SCRIPTS:
+            n = sum(1 for c in s if lo <= ord(c) <= hi)
+            if n / letters >= 0.20:      # 混排也认得出来（书名页常有拉丁转写）
+                return code
+    w = _WORD.findall(s.lower())
     if not w:
         return "?"
     sc = {k: sum(1 for x in w if x in v) / len(w) for k, v in STOPWORDS.items()}
@@ -241,6 +265,12 @@ def self_test() -> int:
     chk(f"★ 判语种：英文段 → en（实得 {guess_lang(EN)}）", guess_lang(EN) == "en")
     chk(f"★ 判语种：意大利文段 → it（实得 {guess_lang(IT)}）", guess_lang(IT) == "it")
     chk(f"★ 反例：空文本 → `?`，不许瞎猜（实得 {guess_lang('')}）", guess_lang("") == "?")
+    RU = "Война и Еврейская Проблема статьи Луи Д Брандейса и других авторов " * 20
+    chk(f"★★ **西里尔 → ru，不是 `?`**（Brandeis 那份 1917 俄文集就栽在这里）"
+        f"（实得 {guess_lang(RU)}）", guess_lang(RU) == "ru")
+    chk(f"★ 书名页混排拉丁转写仍判 ru（实得 {guess_lang('Voina 1917 ' + RU)}）",
+        guess_lang("Voina 1917 " + RU) == "ru")
+    chk(f"★ 反例：纯英文不许被字符集分流误判（实得 {guess_lang(EN)}）", guess_lang(EN) == "en")
     chk(f"★ 反例：全是数字/符号 → `?`（实得 {guess_lang('123 456 %%% 789')}）",
         guess_lang("123 456 %%% 789") == "?")
     chk("★★ **同一次话语跨语言，重叠为零** —— 本件看不见，所以要靠语种警告兜底",
