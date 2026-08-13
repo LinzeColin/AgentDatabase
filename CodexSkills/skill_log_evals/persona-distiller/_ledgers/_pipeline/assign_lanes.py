@@ -61,10 +61,19 @@ LANES = ["writings", "conversations", "expression", "decisions", "timeline", "ex
 # 题名模式，按**优先级从高到低**匹配（一份只进一道——道数要能被门直接用）
 PATTERNS = [
     # ★ 按存量实测放宽：**他做判断的记录**，含技术报告/专利/官方报告
-    ("decisions", r"opinion|judgment|judgement|decision|decree|ordinance|statute|"
+    # ★★★ 2026-08-13 三处子串误配，**只加右边界不加左边界**——
+    #   德语复合词把中心词放在末尾（`Bismarck+reden`、`Jahres+bericht`），
+    #   加左边界会把它们一起误杀（文件里那条「`briefe` 必须无词边界」写的就是这个）。
+    #     `opinion`  ⊂ 拉丁语 `opinionem`（Aristotle《De natura partus…adversus vulgatam opinionem》）
+    #     `bericht`  ⊂ 德语 `berichtigter`（＝「校订过的」，Aristotle《kritisch-berichtigter Text》）
+    #     `rede`     ⊂ 英语 `p-rede-cessors`（Aristotle《on his predecessors》）
+    #   ⇒ 这三条把 Aristotle 的道数从真值 **1** 虚报成 **3**——正好压在 quick 的下限上，
+    #     与 Leonardo #184（`letter` ⊂ `letterari`）、Plato #186（`dialogue`）同一类，这是**第三次**。
+    #   ★ 全库前后实测：**0 个工作区受影响**（右边界保住了 `Bismarckreden` 等 18 份真演说集）。
+    ("decisions", r"opinions?\b|judgment|judgement|decision|decree|ordinance|statute|"
                   r"proclamation|message of the president|verordnung|erlass|"
                   r"legge|editto|leges|constitutiones|justice of the peace|"
-                  r"\breport\b|bericht|gutachten|patent|specification|"
+                  r"\breport\b|bericht(?:e|en|s)?\b|gutachten|patent|specification|"
                   r"state paper|staatsschrift|denkschrift|minutes of|protokoll"),
     # ★★ 2026-08-13 `letter` 加词边界：`letter` ⊂ 意大利语 **`letterari`**（＝「文学的」），
     #    于是 Leonardo 的《Frammenti **letterari** e filosofici》（文学与哲学残篇选，
@@ -99,7 +108,7 @@ PATTERNS = [
     #      Machiavelli 10 份里 9 份是《论李维》（Discorsi / Discourses on the first decade）
     #    移除后它们落进 residual ⇒ writings，**道数不虚增**（见文件末尾 lane_of 的注释）。
     #    `oration` 加了词边界：`oration` ⊂ `commemoration`，把 Kant 的 KrV 英译本判成了讲辞。
-    ("expression", r"speech|speeches|address|\borations?\b|sermon|rede|reden|"
+    ("expression", r"speech|speeches|address|\borations?\b|sermon|reden?\b|"
                    r"orazioni|poem|poesie|songs|lieder|"
                    r"predigt|vortrag|commedie|comed"),
     # ★ 按存量实测放宽：年表类**可以是第三方**（校史、传记辞典条目、讣告）
@@ -319,6 +328,36 @@ def selftest() -> int:
         print("  %s %-62s %s%s" % ("✅" if ok else "❌ 仍误配", ti[:62], why,
                                    "" if ok else "  ← 实判 %s" % got))
     # ===== 第二组：decisions 不许吃画名（Michelangelo #185）=====
+    # ===== 第三组：子串误配（Aristotle #187 探源池，逐字）=====
+    SUB_NEG = [
+        ("De natura partus octomestris adversus vulgatam opinionem libri decem",
+         "decisions", "`opinion` ⊂ 拉丁语 `opinionem`"),
+        ("Istoriai peri zoon / kritisch-berichtigter Text / Aristoteles ; mit deutscher Übersetzung",
+         "decisions", "`bericht` ⊂ 德语 `berichtigter`（校订过的）"),
+        ("Aristotle on his predecessors, being the first book of his Metaphysics",
+         "expression", "`rede` ⊂ 英语 `p-rede-cessors`"),
+    ]
+    SUB_POS = [   # ★ 右边界必须**保住**这些德语复合词与真报告
+        ("Bismarckreden, 1847-1895. Hrsg. von Horst Kohl", "expression"),
+        ("Die Reden des Grafen von Bismarck-Schönhausen. 1", "expression"),
+        ("Jahresbericht über die Fortschritte", "decisions"),
+        ("Opinion of the Court delivered by Chief Justice Marshall", "decisions"),
+        ("Alloys research third report", "decisions"),
+    ]
+    print("\n子串误配（反例，逐字取自 Aristotle 探源池）：")
+    for ti, wrong, why in SUB_NEG:
+        got = _judge(ti)
+        ok = got != wrong
+        bad += 0 if ok else 1
+        print("  %s %-62s %s%s" % ("✅" if ok else "❌ 仍误配", ti[:62], why,
+                                   "" if ok else "  ← 实判 %s" % got))
+    print("\n★ 右边界不许误杀的（正例；德语复合词把中心词放在末尾）：")
+    for ti, want in SUB_POS:
+        got = _judge(ti)
+        ok = got == want
+        bad += 0 if ok else 1
+        print("  %s %-52s → %-12s（应为 %s）" % ("✅" if ok else "❌ 被误杀", ti[:52], got, want))
+
     ART_NEG = [  # 必须**不**判 decisions —— 逐字取自 Michelangelo 探源池
         "Michelangelo: the Last Judgment",
         "Christ as Judge Surrounded by Saints (upper central section of the Last Judgment)",
