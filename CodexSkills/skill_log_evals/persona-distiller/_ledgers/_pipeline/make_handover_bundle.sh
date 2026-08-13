@@ -36,6 +36,20 @@ python3 "$(dirname "$0")/check_namesake_epithet_in_title.py" | grep -E "分母|�
 _ns_rc=${PIPESTATUS[0]}
 [ "${_ns_rc:-0}" -ne 0 ] && echo "★ 同名区分符检查非零退出 rc=$_ns_rc（不拦打包，但这个数没量到）"
 
+# ★★ 这一条是**硬门**（上面两条是报告制）。理由：规矩本身是绝对的——
+#   没有出版年就判不了公有领域，不存在「大概可以」。全库实测已是 0 行，
+#   所以它不会变成一道永远变不绿的红。真去改坏一次验过：rc 从 0 翻到 1，复原后回 0。
+echo "== 0/4c 公有领域断言必须有出版年（**硬门**，红了就不打包）=="
+python3 "$(dirname "$0")/check_pd_claim_has_a_year.py"
+_pd_rc=$?
+if [ $_pd_rc -ne 0 ]; then
+  echo "❌ 有源在**没有出版年**的情况下断言了公有领域（rc=$_pd_rc）——**不打包**。"
+  echo "   要么补年份并写明出处，要么把 rights 改成「未定」并标 tier=U。"
+  printf '本目录没有新包：0/4c 公有领域硬门未过（rc=%s）。\n修好之后重跑 make_handover_bundle.sh。\n' \
+    "$_pd_rc" > "$OUT/BUILD-FAILED.txt"
+  exit $_pd_rc
+fi
+
 echo "== 1/4 打包（--all）=="
 git -C "$REPO" bundle create "$B" --all
 rc=$?; [ $rc -ne 0 ] && { echo "★ 打包失败 rc=$rc"; exit $rc; }
