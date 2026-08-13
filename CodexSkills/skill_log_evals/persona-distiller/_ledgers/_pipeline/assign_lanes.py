@@ -131,6 +131,22 @@ WORKS_OVERRIDE = [
 ]
 
 
+# ★★ 2026-08-13：**画名不是判决记录。**
+# Michelangelo #185 探源池 287 条里，`decisions` 判出 11 条——**11 条全是《最后的审判》**
+# （西斯廷壁画）：`Michelangelo: the Last Judgment`、`Christ as Judge Surrounded by Saints
+# (upper central section of the Last Judgment)`、`Study of Figures from Michelangelo's
+# Last Judgment, Sistine Chapel`…… 命中的是 `judgment`。
+# 与 Leonardo 的 `letter` ⊂ `letterari` 同一类，**区别是这次在抓源之前就抓到了**
+# ——道分布是按题名先估的，没有先抓 60 份再发现。
+# 射程实测：全库**已抓**语料里 `judgment|judgement` 只命中 1 条，
+# 是 Kant 的 *Critique of judgment*，而它已被 WORKS_OVERRIDE 的 `critique` 一支救回 writings
+# ⇒ **本次修改对存量 37 个工作区一条都不动**（已跑全库对比确认）。
+# 命中后落进 residual ⇒ writings；按 lane_of 末尾的注释，residual **不会虚增道数**。
+ARTWORK_NOT_DECISION = re.compile(
+    r"last\s+judg[e]?ment|giudizio\s+universale|j[üu]ngste[sn]?\s+gericht|jugement\s+dernier",
+    re.I)
+
+
 def lane_of(title: str, is_secondary: bool) -> str:
     t = (title or "").lower()
     if is_secondary:
@@ -138,6 +154,8 @@ def lane_of(title: str, is_secondary: bool) -> str:
         return "timeline" if re.search(TIMELINE_PAT, t) else "external"
     for lane, pat in PATTERNS:
         if re.search(pat, t):
+            if lane == "decisions" and ARTWORK_NOT_DECISION.search(t):
+                continue          # 画名，不是判决记录 —— 让它继续往后试别的道
             if lane != "writings":
                 for _why, ov in WORKS_OVERRIDE:
                     if ov.search(t):
@@ -251,7 +269,39 @@ def selftest() -> int:
         bad += 0 if ok else 1
         print("  %s %-62s %s%s" % ("✅" if ok else "❌ 仍误配", ti[:62], why,
                                    "" if ok else "  ← 命中 %r" % (m.group(0),)))
-    print("\n" + ("自测通过：正 %d／反 %d 全绿" % (len(POS), len(NEG))
+    # ===== 第二组：decisions 不许吃画名（Michelangelo #185）=====
+    ART_NEG = [  # 必须**不**判 decisions —— 逐字取自 Michelangelo 探源池
+        "Michelangelo: the Last Judgment",
+        "Christ as Judge Surrounded by Saints (upper central section of the Last Judgment)",
+        "Study of Figures from Michelangelo's Last Judgment, Sistine Chapel",
+        "Trumpeting Angels and Damned Souls Being Pulled Down by Devils (lower center a",
+        "The Last Judgment",
+    ]
+    DEC_POS = [  # 必须**仍**判 decisions —— 前三条逐字取自真 manifest，第四条标注为构造
+        ("The Virginia and Kentucky resolutions of 1798 and '99; with Jefferson's original "
+         "draught thereof. Also, Madison's report", "jefferson-175 真题名"),
+        ("Rede des reichskanzlers fürsten Bismarck über das bündniss … (Nach dem amtlichen "
+         "stenographischen bericht über die Reichstags-verhandlung", "bismarck-176 真题名"),
+        ("Alloys research third report", "roberts-austen-135 同型（技术报告）"),
+        ("Opinion of the Court delivered by Chief Justice Marshall",
+         "★ **构造**：全库已抓语料里没有 judgment 命中的真判决书，"
+         "这条用 `opinion` 一支，证明本次改动没碰别的分支"),
+    ]
+    print("\n画名不许判 decisions（反例，全部逐字取自 Michelangelo 探源池）：")
+    for ti in ART_NEG:
+        L = lane_of(ti, False)
+        ok = L != "decisions"
+        bad += 0 if ok else 1
+        print("  %s %-72s → %s" % ("✅" if ok else "❌ 仍判 decisions", ti[:72], L))
+    print("\n真决策记录必须仍判 decisions（正例）：")
+    for ti, src in DEC_POS:
+        L = lane_of(ti, False)
+        ok = L == "decisions"
+        bad += 0 if ok else 1
+        print("  %s %-58s → %-12s [%s]" % ("✅" if ok else "❌ 误伤", ti[:58], L, src[:40]))
+
+    print("\n" + ("自测通过：书信 正 %d／反 %d ＋ 画名 反 %d／正 %d，全绿"
+                  % (len(POS), len(NEG), len(ART_NEG), len(DEC_POS))
                   if not bad else "★ 自测有 %d 条不通过" % bad))
     return 0 if not bad else 1
 
