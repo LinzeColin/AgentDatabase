@@ -32,7 +32,21 @@ Jaccard ≥ 0.05 **或** 包含率 ≥ 0.25。
 
 ## 它判不了什么（**必须一起念**）
 
-1. **跨语言判不了**（原文 vs 译文恒 0.0000）⇒ 只会**少报**。
+1. ★★ **跨语言判不了**（原文 vs 译文恒 0.0000）⇒ 在**多语种工作区**它会**少报塌缩**。
+   2026-08-14 在 Michelangelo #185 上实测到了这件事的活样本：
+
+       src-34bb6d56038a《Le lettere di Michelangelo Buonarroti》 意大利文 202,781 词
+       src-8539ad71569a《A record of his life…》(Carden 1913)    英译本   97,224 词
+       两者 Jaccard 0.0000／包含率 0.0001 ⇒ 本件判「两部不同的作品」
+
+   而**同一封信在两份里都在**：意大利本 `A BUONARROTO SUO FRATELLO … mai conosciuto,
+   e non mi conosciete. Idio ve lo perdoni!`；英译本 `But ye have never understood me
+   in the past… May God forgive you!`。**同一次话语，两个语种，重叠为零。**
+   ⇒ 一条 claim 同时引这两份，本件会放行，而证据只有一处。
+   [[original-and-translation-are-one-utterance-with-zero-overlap]]
+
+   ★ 所以本件**按正文判语种**并在多语种工作区印警告。**不能用台账的 `language` 字段**：
+   Michelangelo 那 47 行**全是 `null`**，照字段判会报「单语种」——正是要防的那种假绿。
 2. **读不到正文的源跳过**，跳过多少要印出来 —— 「跳过」不是「通过」。
 3. **只有一个 `source_id` 的 claim 不归本件管** —— 那是 `insufficient-support`
    自己就会报的，本件只管「看起来有两处、其实是一处」。
@@ -48,9 +62,11 @@ Jaccard ≥ 0.05 **或** 包含率 ≥ 0.25。
 """
 import argparse
 import glob
+import collections
 import itertools
 import json
 import pathlib
+import re
 import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -62,6 +78,26 @@ PD = HERE.parent.parent
 CORPORA = PD / "_corpora"
 # 与 quality_check.evaluate_claims 同一份名单
 NEEDS_TWO = {"mental-model", "heuristic", "value", "work-method", "blind-spot", "contradiction"}
+
+# ★ 虚词剖面判语种。够用就行——只要能回答「这个工作区是不是混着两种语言」。
+STOPWORDS = {
+    "en": {"the", "and", "of", "to", "in", "that", "it", "is", "was", "for", "with", "as", "his"},
+    "it": {"che", "non", "di", "il", "la", "per", "con", "del", "una", "sono", "questo", "io", "mi"},
+    "de": {"der", "die", "und", "den", "von", "zu", "das", "ist", "nicht", "ein", "mit", "auf"},
+    "la": {"est", "non", "cum", "quod", "sed", "qui", "ad", "ex", "atque", "enim"},
+    "fr": {"les", "des", "est", "une", "dans", "pour", "que", "qui", "pas", "sur", "avec"},
+}
+_WORD = re.compile(r"[a-zàâäçèéêëìíîïñòóôöùúûüß]+")
+
+
+def guess_lang(text: str, cap: int = 20000) -> str:
+    """正文 → 语种码。**纯函数**，自测不碰磁盘。判不出来返回 `?`。"""
+    w = _WORD.findall(text.lower())[:cap]
+    if not w:
+        return "?"
+    sc = {k: sum(1 for x in w if x in v) / len(w) for k, v in STOPWORDS.items()}
+    best = max(sc, key=sc.get)
+    return best if sc[best] >= 0.02 else "?"
 
 
 def same_work(sig_a: set, sig_b: set, t: float = DEFAULT_T, c: float = CONTAIN_T) -> bool:
@@ -143,6 +179,15 @@ def self_test() -> int:
     chk("★★★ 两栏必须同一个口径：**引了那一对但另有第三部作品** ⇒ 不算塌"
         "（Koch 的 29 vs 26 就差在这 5 条上）",
         judge_claim(["a", "b", "c"], S)[0] == "ok")
+    EN = ("the letters of a man to his brother about money and the debts of the house " * 30)
+    IT = ("che non mi conosciete e non mi avete mai conosciuto io vi perdono per il denaro " * 30)
+    chk(f"★ 判语种：英文段 → en（实得 {guess_lang(EN)}）", guess_lang(EN) == "en")
+    chk(f"★ 判语种：意大利文段 → it（实得 {guess_lang(IT)}）", guess_lang(IT) == "it")
+    chk(f"★ 反例：空文本 → `?`，不许瞎猜（实得 {guess_lang('')}）", guess_lang("") == "?")
+    chk(f"★ 反例：全是数字/符号 → `?`（实得 {guess_lang('123 456 %%% 789')}）",
+        guess_lang("123 456 %%% 789") == "?")
+    chk("★★ **同一次话语跨语言，重叠为零** —— 本件看不见，所以要靠语种警告兜底",
+        judge_claim(["en", "it"], {"en": signature(EN), "it": signature(IT)})[0] == "ok")
     chk("★ 与 quality_check 的类目名单逐字一致",
         NEEDS_TWO == {"mental-model", "heuristic", "value", "work-method",
                       "blind-spot", "contradiction"})
@@ -166,12 +211,15 @@ def scan(ws: pathlib.Path):
     need = [c for c in claims if c.get("category") in NEEDS_TWO]
     want = {s for c in need for s in c.get("source_ids", [])}
     sigs = {}
+    langs = collections.Counter()
     for s in want:
         p = paths.get(s)
         if p and p.is_file():
-            sigs[s] = signature(p.read_text(encoding="utf-8", errors="replace"))
+            txt = p.read_text(encoding="utf-8", errors="replace")
+            sigs[s] = signature(txt)
+            langs[guess_lang(txt)] += 1
     out = {"collapsed": [], "unmeasurable": [], "ok": 0, "skip": 0, "claims": len(need),
-           "射程外同样引了塌缩对的": []}
+           "射程外同样引了塌缩对的": [], "语种": dict(langs)}
     collapsed_pairs = set()
     for c in need:
         v, n, w = judge_claim(c.get("source_ids", []), sigs)
@@ -221,6 +269,11 @@ def report(ws: pathlib.Path) -> int:
     for cid, cat, n, nc in r["collapsed"]:
         print(f"    ❌ {cid}  [{cat}]  {n} 个 source_id **是同一部作品**"
               f"；而 evidence_clusters 写了 {nc} 条 ⇒ 两道门都会放它过")
+    real = {k: v for k, v in r["语种"].items() if k != "?"}
+    if len(real) > 1:
+        print(f"    ★★ **本工作区混着 {len(real)} 种语言**（按正文判：{real}）——"
+              f"原文与译文的重叠恒为 0，本件**看不见**它们是同一次话语 ⇒ "
+              f"上面的「实测两处」在这里可能是**少报**，不是干净")
     if r["射程外同样引了塌缩对的"]:
         print(f"    ★ **射程**：另有 {len(r['射程外同样引了塌缩对的'])} 条断言引了同一对塌缩源，"
               f"但类目不在那 6 个里（fact／boundary／epistemic…）**所以本件不报**"
