@@ -137,22 +137,41 @@ def _deferred_names():
 
 
 def scan():
+    """→ (逐人的行, 分桶计数)。
+
+    ★★ 2026-08-14 补分桶：本件原来只印「真正等着判分的 N 人」，
+      **不印被跳过的那些**。三条 `continue` 各吃掉一批：没有 cases 文件的、
+      cases 空的、已经判过分的。于是「17 人」看不出是从多少里筛出来的，
+      而「做到阶段 3 没做阶段 4」那一批**一个字都不出现**。
+      [[a-continue-hid-the-worst-case]]、[[filters-make-rows-vanish]]
+    """
     pre = PRELOG.read_text(encoding="utf-8") if PRELOG.is_file() else ""
     closed = _deferred_names()
     out = []
+    tally = {"扫到的工作区": 0, "没有 cases 文件": 0, "cases 是空的": 0,
+             "已经判过分": 0, "留下的": 0, "★ 有 claims 却没有 cases": []}
     for d in [str(_w) for _w in iter_workspaces(CORPORA)]:
         ws = pathlib.Path(d)
+        tally["扫到的工作区"] += 1
         cases = ws / "evals/cases.jsonl"
+        _cl = ws / "evidence/claims.jsonl"
+        _nc = sum(1 for l in _cl.read_text(encoding="utf-8").splitlines()
+                  if l.strip()) if _cl.is_file() else 0
         if not cases.is_file():
+            tally["没有 cases 文件"] += 1
+            if _nc:                        # ★ 做到阶段 3、没做阶段 4 —— 原先整个看不见
+                tally["★ 有 claims 却没有 cases"].append(f"{ws.name}({_nc})")
             continue
         rows = [json.loads(l) for l in cases.read_text(encoding="utf-8").splitlines() if l.strip()]
         if not rows:
+            tally["cases 是空的"] += 1
             continue                       # 空用例 = 还没做到阶段 4，不在本件射程
         # ★★ 射程：**有用例 ≠ 等着判分**。第一版把 30 个有用例的工作区全算成
         #   「等着判分」，而其中 14 个**早就判过分**（已入库或记拒发），
         #   还有几个是**已结案不判**（装置不成立）。
         #   ⇒ 真集合 = 有用例 ＋ **没有判分结果** ＋ **不在延后名单里**。
         if [q for q in ws.glob("evals/**/results*.jsonl") if q.stat().st_size > 2]:
+            tally["已经判过分"] += 1
             continue                       # 已经判过分
         claims = ws / "evidence/claims.jsonl"
         n_claims = sum(1 for l in claims.read_text(encoding="utf-8").splitlines()
@@ -184,7 +203,8 @@ def scan():
             "空心道": hollow, "se_mean": se_mean, "2SE": two_se, "门是几个SE": gate_se,
             "已预登记": registered,
         })
-    return out
+    tally["留下的"] = len(out)
+    return out, tally
 
 
 def self_test() -> int:
@@ -224,7 +244,7 @@ def main() -> int:
     if a.self_test:
         return self_test()
 
-    rows = scan()
+    rows, tally = scan()
     if not rows:
         print(f"★★ **未判，不是通过**：{CORPORA} 下没有带非空 evals/cases.jsonl 的工作区")
         return 4
@@ -232,7 +252,16 @@ def main() -> int:
         print(json.dumps(rows, ensure_ascii=False, indent=1))
 
     print("★ 射程：有用例 ＋ **没有判分结果**。"
-          "已结案的人**不过滤掉**，改成报矛盾——过滤会让人整个消失。\n")
+          "已结案的人**不过滤掉**，改成报矛盾——过滤会让人整个消失。")
+    # ★★ 分母：三条 continue 各吃掉一批，不印出来就看不出「17」是从多少里筛的
+    print(f"★★ **分母**：扫到工作区 **{tally['扫到的工作区']}** ＝ "
+          f"没有 cases 文件 {tally['没有 cases 文件']} ＋ cases 是空的 {tally['cases 是空的']} ＋ "
+          f"**已经判过分 {tally['已经判过分']}** ＋ 留下的 {tally['留下的']}")
+    _s3 = tally["★ 有 claims 却没有 cases"]
+    if _s3:
+        print(f"   ★ 其中 **{len(_s3)} 个做到阶段 3、没做阶段 4**（有 claims 无用例）—— "
+              f"**本件射程之外，不是通过**：{'、'.join(_s3)}")
+    print()
     print(f"真正等着判分的 **{len(rows)} 人**　"
           f"（sd={SD_BORROWED} 借自 Mendel #125；se_case = sd/√2 = {SE_CASE:.4f}）\n")
     print(f"{'工作区':30s} {'档':9s} {'题':>4s} {'类':>3s} {'断言':>4s} "
