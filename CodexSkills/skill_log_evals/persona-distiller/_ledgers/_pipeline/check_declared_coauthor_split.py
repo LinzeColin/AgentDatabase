@@ -157,6 +157,32 @@ def _lead_name(span: str) -> str:
 
 BYLINE_WINDOW = 4000        # 只在最前面这一段里找——题名页就在那儿
 
+# ★★★ 形态③：**「与某人合作」式署名**（2026-08-13 Ford #188）。
+#   Ford 的 19 份语料里 **12 份**题名页写着
+#     IN COLLABORATION WITH SAMUEL CROWTHER      （英）
+#     UNTER MITWIRKUNG VON SAMUEL CROWTHER       （德，《Mein Leben und Werk》）
+#     IN COLLABORAZIONE CON SAMUELE CROWTHER     （意，《La mia vita e la mia opera》）
+#   而形态②只认 `BY … AND …` 这一种构式，**一条都没抓到**。
+#   ⇒ 这是**射程漏了构式，也漏了语种**（[[regex-must-clear-the-corpus-language]]）。
+#   ★ 这条构式**歧义极小**：它字面就在说「这本书是我和某人一起做的」，
+#     所以它与形态①一样**判红**，不像形态②只当线索。
+COLLAB = re.compile(
+    r"\b(?:in\s+collaboration\s+with"
+    r"|unter\s+mitwirkung\s+von"
+    r"|in\s+collaborazione\s+con"
+    r"|en\s+collaboration\s+avec"
+    r"|with\s+the\s+(?:collaboration|assistance)\s+of"
+    r"|as\s+told\s+to)\s+"
+    # ★ 头衔要先跳过：Koch 那 6 条实测被截成 `Prof. Dr`——
+    #   捕到的是称谓不是人名，报出来没法用。
+    r"(?:(?:Prof|Dr|Mr|Mrs|Miss|Herr|Frau|Sir|Ing|Med)\.?\s+){0,3}"
+    # ★ 允许首字母缩写打头：Koch 的是 `Prof. Dr. **G. GAFFKY**`，
+    #   跳过头衔之后名字以 `G.` 起头——只有 2 个字符，第一版当场丢掉，
+    #   **6 条真阳静默消失**（而 Koch #107 是已入库的）。
+    r"(?P<who>(?:[A-Z]\.\s*){0,3}[A-Z][A-Za-z.'\-]{2,}"
+    r"(?:\s+[A-Z][A-Za-z.'\-]{2,}){0,2})",
+    re.I)
+
 # ★★ 题名页附近**不只有作者**：出版社、印厂、版权行、译者、编者都长成
 #   「BY X AND Y」。收紧到 49 条之后逐条读，剩下的假阳全是这几类，
 #   逐条钉成反例（每条都逐字取自全库真实命中）：
@@ -189,6 +215,24 @@ def declarations(text: str):
         if not TOPIC.search(ctx):
             continue                       # 不是分工声明，多半是在引用别人的书
         out.append((ctx[-300:], m.group("who").strip()))
+    return out
+
+
+def collaborators(text: str, subject: str):
+    """→ [(署名原句, 合作者)]。**「与某人合作」式署名**，只在最前 4000 字里找。
+
+    ★ 与形态②不同，这条构式**字面就在说合作**，歧义极小 ⇒ 与形态① 一样判红。
+    """
+    front = " ".join(text[:BYLINE_WINDOW].split())
+    out, seen = [], set()
+    for m in COLLAB.finditer(front):
+        who = m.group("who").strip(" ,.")
+        if not who or _is_subject(who, subject) or not _looks_like_person(who):
+            continue
+        if who.lower() in seen:
+            continue
+        seen.add(who.lower())
+        out.append((" ".join(front[max(0, m.start() - 80):m.end() + 30].split()), who))
     return out
 
 
@@ -346,6 +390,30 @@ def self_test() -> int:
         not joint_byline("THE WORKS OF DEWEY edited by Jo Ann Boydston and others",
                          "Dewey"))
 
+    # ★★ 形态③：「与某人合作」式署名（三条逐字取自 Ford #188 的题名页）
+    for txt, why in [
+        ("MY LIFE & WORK HENRY FORD In collaboration with SAMUEL CROWTHER "
+         "London : WILLIAM HEINEMANN LTD.", "英"),
+        ("FORD MEIN LEBEN UND WERK UNTER MITWIRKUNG VON SAMUEL CROWTHER "
+         "PAUL LIST VERLAG LEIPZIG", "德"),
+        ("ENRICO FORD LA MIA VITA E LA MIA OPERA IN COLLABORAZIONE CON "
+         "SAMUELE CROWTHER CASA EDITRICE APOLLO BOLOGNA", "意"),
+    ]:
+        got = collaborators(txt, "Henry Ford")
+        chk(f"★★ 形态③（{why}）必须报出 Crowther：{txt[:38]}…",
+            bool(got) and "crowther" in got[0][1].lower())
+    chk("★ 形态③ 不许把主体自己报成合作者",
+        not any("ford" in w.lower()
+                for _, w in collaborators("HENRY FORD in collaboration with HENRY FORD", "Henry Ford")))
+    # ★★ 逐字取自 Koch #107 的真实题名页（**已入库**的产物）
+    kk = collaborators("Unter Mitwirkung von Prof. Dr. G. GAFFKY und Prof. Dr. E. PFUHL "
+                       "Geh. Ober-Med.-Rat in Berlin", "Robert Koch")
+    chk("★★ 头衔要跳过、且**首字母缩写打头的名字**要认得："
+        "`Prof. Dr. G. GAFFKY` 必须报出 GAFFKY，不是 `Prof. Dr`",
+        bool(kk) and "gaffky" in kk[0][1].lower())
+    chk("★ 形态③：没有合作声明的题名页不许报",
+        not collaborators("HOW WE THINK BY JOHN DEWEY Professor of Philosophy", "John Dewey"))
+
     # ★ 负例①：引用别人的书，**不是**分工声明
     cite = ("For a fuller account see Chapter IV by Mr. Smith in the volume "
             "edited by the Society, and compare the bibliography below.")
@@ -382,8 +450,15 @@ def scan_ws(ws: pathlib.Path, subject: str):
         txt = p.read_text(encoding="utf-8", errors="replace")
         d = declarations(txt)
         fo = foreign(d, subject) if d else []
+        cb = collaborators(txt, subject)
         jb = joint_byline(txt, subject)
-        if fo:
+        if cb:
+            hits.append({"source_id": r.get("source_id"), "tier": r.get("tier"),
+                         "split": r.get("split"), "title": (r.get("title") or "")[:52],
+                         "形态": "③ **「与某人合作」式署名**（判红）",
+                         "归给他人": [w for _, w in cb][:3],
+                         "声明原句": cb[0][0][-220:]})
+        elif fo:
             hits.append({"source_id": r.get("source_id"), "tier": r.get("tier"),
                          "split": r.get("split"), "title": (r.get("title") or "")[:52],
                          "形态": "① 声明了分工", "归给他人": fo,
@@ -450,8 +525,8 @@ def main() -> int:
     print("\n★ 射程：只报**书自己说了什么**。没找到声明**不等于**没有合著"
           "——那只是没证据，本件对它不置一词。"
           "\n★ 分部边界能定位时才算词数占比；定位不到就说未判，**不许猜**。")
-    hard = [x for x in bad if x.get("形态", "").startswith("①")]
-    print(f"\n★★ **只有 ① 判红**（{len(hard)} 份）。② 是**线索，不是判决**："
+    hard = [x for x in bad if x.get("形态", "").startswith(("①", "③"))]
+    print(f"\n★★ **① 与 ③ 判红**（{len(hard)} 份）。② 是**线索，不是判决**："
           "\n  它靠版式识别题名页署名，而题献行／形容词短语在版式上跟署名一模一样"
           "（实测「BY HIS OLD COMRADE AND FRIEND」「AND HIS DECEASED RELATIVE」×19）。"
           "\n  ⇒ ② 逐条要人读一眼；把它算进红会变成一道永远红的门。")
