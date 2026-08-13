@@ -113,6 +113,27 @@ if chk.returncode!=0:
     for l in chk.stdout.splitlines():
         if l.startswith("❌"): print("     "+l)
 
+# ★★★ 量测产物是不是**当前这版工具**出的。2026-08-13 实测 4 个工作区不是
+#   （Kant 道 6→3，而工具的注释里早就写着那个修正）——**修好判据不等于修好数据**。
+#   接在这里而不是接进 quality_check：那件会改变门的判决，属用户裁定范围；
+#   **本处只是回读报告，不改任何人的过门与否**。
+fresh=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                          "/_ledgers/_pipeline/check_measurements_fresh.py")],
+                     capture_output=True, text=True)
+ftail=[l for l in fresh.stdout.strip().splitlines() if l.strip()]
+head=ftail[0] if ftail else "(无输出)"
+if fresh.returncode==0:
+    print("✅ 量测产物与当前工具一致：%s"%head)
+elif fresh.returncode==4:
+    # 语料不在这棵树里 ⇒ **未判**，不是通过，也不判整包失败
+    print("★ 量测产物一致性：**未判**（语料不在本树，一份都没比对成）")
+else:
+    ok=False
+    print("❌ 量测产物与当前工具**不一致**——产物落后于工具：")
+    for l in fresh.stdout.splitlines():
+        if l.strip().startswith(("·","✗")) or ":" in l and "→" in l:
+            print("     "+l.strip())
+
 # ★★ 盲判用例要**正面数出来**，不能只在出错时才打印——沉默不等于通过。
 #    ★ 期望值**不写死题数**：写死过一次（16/16/17/16），quick 四人补题到 32 之后
 #      它当场变红，而产物其实是对的。改成**按档位判下限 + 类数必须 16**，总数只打印。
