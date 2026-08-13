@@ -116,6 +116,17 @@ def self_test() -> int:
         classify({"profile": "ultra"}) == "invalid")
     chk("★ 反例：空字符串也不算声明", classify({"profile": ""}) == "invalid")
     chk("★ 两个默认值确实不同（本件存在的理由）", CHECKER_DEFAULT != BUILDER_DEFAULT)
+    # ★ meta 缺字段那两项的判定逻辑（与 main 里逐字一致）
+    _so = lambda m: str(m.get("subject_origin") or "")
+    _ok = lambda m: _so(m) == "historical" and bool((m.get("attribution_basis") or {}).get("citation"))
+    chk("★ historical ＋ 有 citation → 不报", _ok({"subject_origin": "historical",
+                                              "attribution_basis": {"citation": "archive.org item x"}}))
+    chk("★★ 反例：historical ＋ **没有** citation → 要报（Comenius 就是这个）",
+        not _ok({"subject_origin": "historical", "attribution_basis": {}}))
+    chk("★ 反例：public 没有 citation **不报**（豁免只在 historical 路上存在）",
+        _so({"subject_origin": "public"}) != "historical")
+    chk("★ 反例：`subject_origin` 缺失 → 空串，拿不到 historical 豁免",
+        _so({"name": "x"}) == "" and _so({"subject_origin": None}) == "")
 
     # ── 第二项：声明的档 vs 由材料现算的档 ──
     R = lambda dims, tier="P1": {"split": "train", "dimensions": dims, "tier": tier}
@@ -162,6 +173,14 @@ def main() -> int:
 
     buckets = {"declared": [], "absent": [], "null": [], "invalid": []}
     mism = []
+    # ★★ 2026-08-14 加：`profile` 不是唯一会缺的 meta 字段。
+    #   `subject_origin` 缺失 ⇒ 拿不到 historical 豁免（这一点是对的），
+    #   但它同时说明这个 meta 是**缺字段的**——实测就是同一批人
+    #   （burbank／churchill／ford／leonardo）。
+    #   `attribution_basis.citation` 缺失更险：historical 豁免把「A-* 证据结构上不存在」
+    #   换成了「要一个具名外部权威」，**没有 citation 就是两头都空**
+    #   （Comenius 实测 34 条 research.authorship-unproven）。
+    no_origin, no_basis = [], []
     for d in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
         ws = pathlib.Path(d)
         mp = ws / "meta.json"
@@ -173,6 +192,12 @@ def main() -> int:
             continue
         wip = next((s for s in ws.parts if s.startswith("wip-")), ws.name)
         buckets[classify(meta)].append(f"{wip}／{ws.name}")
+        so = str(meta.get("subject_origin") or "")
+        if not so:
+            no_origin.append(f"{wip}／{ws.name}")
+        ab = meta.get("attribution_basis") or {}
+        if so == "historical" and not (isinstance(ab, dict) and ab.get("citation")):
+            no_basis.append(f"{wip}／{ws.name}")
         # ★ 第二项：声明的 vs 现算的
         led = ws / "evidence/source-ledger.jsonl"
         if classify(meta) == "declared" and led.is_file():
@@ -205,7 +230,19 @@ def main() -> int:
             print(f"       {wip:24s} 声明 {dec:9s} 现算 {com}{mark}")
         print("     ★ 本件**不改任何 meta**——选档是 ㉞「按可得性选档 ＋ 退档写明理由」的事，"
               "要人写理由。判分之前先定一句用哪个。")
+    if no_origin:
+        print(f"  ！ **{len(no_origin)} 个没有 `subject_origin`** —— 拿不到 historical 豁免"
+              f"（这一点是对的），但说明这几个 meta 是缺字段的：")
+        for x in no_origin:
+            print(f"       {x}")
     rc = 0
+    if no_basis:
+        rc = 2
+        print(f"  ❌ **{len(no_basis)} 个是 historical 却没有 `attribution_basis.citation`** —— "
+              f"historical 豁免把「A-* 证据结构上不存在」换成「要一个具名外部权威」，"
+              f"**没 citation 就是两头都空**：")
+        for x in no_basis:
+            print(f"       {x}")
     for k, note in (("null", "判据会 `ERROR: invalid profile None` **拒检整个工作区**"),
                     ("invalid", "值不在 quick/standard/deep 里，同样会拒检")):
         if buckets[k]:
