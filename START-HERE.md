@@ -208,6 +208,20 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/fetch_i
 python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_scoring_ready.py
 ```
 
+★★ **它会印「真正等着判分的 17 人」并以 rc=1 退出 —— 那个红就是这个停点本身，不是坏了。**
+上面写 8、判据印 17，**是两个口径，不是矛盾**：
+
+| | 人数 | 谁 |
+|---|---:|---|
+| **第 1 批：预登记清单点了名的** | **8** | 就是上面那八个（lincoln-174／jefferson-175／bismarck-176／machiavelli-177／rousseau-178／kant-179／pestalozzi-180／frobel-181） |
+| 有题、没分，但**不在第 1 批** | 9 | blackstone／blackwell／brandeis／churchill／cicero／dewey／kelsen／michelangelo／paton |
+| **判据印的合计** | **17** | 它的口径是「**有用例 ＋ 没有判分结果**」，不问在不在第 1 批 |
+
+**要判的是那 8 个**——分辨力、压线复核、逐人风险都**预登记过**（见开箱即跑清单）。
+另外 9 人判据会在「缺件」栏逐条写明卡在哪（未预登记／缺 `SKILL.md`／延后名单里已结案
+而产物齐全……）。**别顺手把他们一起判了**：判完再补口径就不是预登记了，
+而本项目的规矩是「装置先落纸，判完只补实测数」。
+
 合成门要逐人真跑（每人几分钟）：
 
 ```bash
