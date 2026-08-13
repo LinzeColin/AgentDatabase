@@ -602,7 +602,6 @@ if R2:
             m = re.search(rf"^\| {re.escape(label)} \| \*\*([\d,]+)", src, re.M)
             if m:
                 t = re.sub(rf"({re.escape(label)} \*\*)[\d,]+", rf"\g<1>{m.group(1)}", t)
-cover.write_text(t, encoding="utf-8")
 # ★★ 2026-08-14：封面信原来只教两条裸命令（shasum ／ bundle verify）。
 #   问题是**两条都过 ≠ 拿的是最新那个包** —— 旧包自己也全绿，只是少 43 个提交。
 #   换成 verify_handover_bundle.sh，并把**期望的 tip 写进命令**，这样「拿了旧包」会红。
@@ -637,6 +636,16 @@ elif "verify_handover_bundle.sh . --expect-tip" in t:
                "verify_handover_bundle.sh . --expect-tip " + tip, t)
 else:
     print("！ 封面信里没找到验包段 —— **未替换，不是通过**")
+
+cover.write_text(t, encoding="utf-8")
+# ★★ 回读断言：上面那段替换曾经**跑了但没写进去**（我把它放在 write_text 之后，
+#   于是改的是内存里的字符串，文件一个字没动，而且什么都没报）。
+#   ⇒ 从**磁盘**读回来确认，不确认就不许说「已回填」。[[a-checker-nothing-calls-is-not-a-checker]]
+_back = cover.read_text(encoding="utf-8")
+if ("--expect-tip " + tip) not in _back:
+    print("❌ 封面信：验包命令**没写进文件**（回读没找到 `--expect-tip %s`）" % tip)
+    raise SystemExit(1)
+print("✅ 封面信：验包命令已写入并回读确认（--expect-tip %s）" % tip[:12])
 
 print("✅ 封面信身份证：已从 sidecar 现读回填" + ("（无变化）" if t == old else ""))
 COVEOF
