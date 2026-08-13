@@ -91,8 +91,12 @@ for ws in NEW:
     rowN+=len(rs)
     noloc+=sum(1 for r in rs if not (r.get("locator") or r.get("url")))
     nosum+=sum(1 for r in rs if not (r.get("checksum") or r.get("normalized_checksum")))
-print(("✅" if not nosum else "❌")+" 台账 %d 行：缺校验和 %d 行｜缺定位（locator 或 url）%d 行"
-      %(rowN,nosum,noloc)+("　★ 缺定位的那些语料**重抓不回来**" if noloc else ""))
+print(("✅" if not nosum else "❌")+" 台账 %d 行：缺校验和 %d 行"%(rowN,nosum))
+# ★ 缺定位**不许挂在上一行的 ✅ 下面**——绿勾旁边写着「重抓不回来」是自相矛盾的报告。
+#   这一条是已知缺口，不是通过：那 72 行的正文在仓里（所以不影响交付），
+#   但**一旦丢了就重抓不回来**，必须单独一行、单独的记号。
+print(("✅" if not noloc else "！")+" 台账定位（locator 或 url）：缺 %d 行"%noloc
+      + ("　—— **已知缺口，不是通过**：正文在仓里可用，但丢了就重抓不回来" if noloc else ""))
 
 # ★★★ 重建清单：语料不进 git 之后，`_ids-rebuild.txt` 是收件人重建语料的**唯一入口**。
 #   它一直是手打的 ⇒ 实测 13 个里 **10 个是坏的**（Rousseau 少 39 条、Marshall 少 22、
