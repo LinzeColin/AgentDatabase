@@ -1,12 +1,12 @@
 {
   "总数": 56,
   "计数": {
-    "一手": 53,
-    "二手": 3,
+    "一手": 47,
+    "二手": 9,
     "需人判": 0
   },
-  "一手占比下界": 0.9464,
-  "一手占比上界": 0.9464,
+  "一手占比下界": 0.8393,
+  "一手占比上界": 0.8393,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -35,8 +35,8 @@
     },
     {
       "identifier": "artistmerchanta00bottgoog",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
+      "档": "二手",
+      "依据": "【人裁】《The Artist, the Merchant, and the Statesman, of the Age of the Medici》(1845) 是 **Charles Edwards Lester** 写的书，`author` 里那一串是**书里写到的人**不是作者。★ 决定性证据：其中一段第一人称说「一尊我接了 **300 美元**的胸像……」——**米开朗基罗不用美元计价**，说话的是该书写的 19 世纪美国雕塑家。工具因为 creator 里有他的名字而判成一手。[[related-to-him-is-not-written-by-him]]",
       "title": "The Artist, the Merchant, and the Statesman, of the Age of the Medici, and ...",
       "creator": "Charles Edwards Lester, Michelangelo Buonarroti, Amerigo Vespucci, Botta",
       "words": 68085
@@ -171,32 +171,32 @@
     },
     {
       "identifier": "eightyfouretche00raphgoog",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
+      "档": "二手",
+      "依据": "【人裁】★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In presenting to the public these etchings, from the designs of Raffaelle and Michael Angelo…」）。**图是照他的素描刻的，文字是 Fisher 与出版者的**（正文主体是尺寸与递藏著录：「Size, 11 in. by 8. From the Collections of M. Buonaroti…」）。⇒ 二手。与 Leonardo #184 排掉 Hollar/Dürer 版画集同理。",
       "title": "Eighty-four Etched Fac-similes: On a Reduced Scale After the Original Studies by",
       "creator": "Joseph Fisher ,  Michelangelo Buonarroti,  Raphael",
       "words": 3265
     },
     {
       "identifier": "eightyfouretched00michuoft",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
+      "档": "二手",
+      "依据": "【人裁】★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In presenting to the public these etchings, from the designs of Raffaelle and Michael Angelo…」）。**图是照他的素描刻的，文字是 Fisher 与出版者的**（正文主体是尺寸与递藏著录：「Size, 11 in. by 8. From the Collections of M. Buonaroti…」）。⇒ 二手。与 Leonardo #184 排掉 Hollar/Dürer 版画集同理。",
       "title": "Eighty-four etched fac-similes, on a reduced scale, after the original studies b",
       "creator": "Michelangelo Buonarroti, 1475-1564; University of Oxford. Galleries; Raphael, 14",
       "words": 2862
     },
     {
       "identifier": "facsimilesorigi01fishgoog",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
+      "档": "二手",
+      "依据": "【人裁】★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In presenting to the public these etchings, from the designs of Raffaelle and Michael Angelo…」）。**图是照他的素描刻的，文字是 Fisher 与出版者的**（正文主体是尺寸与递藏著录：「Size, 11 in. by 8. From the Collections of M. Buonaroti…」）。⇒ 二手。与 Leonardo #184 排掉 Hollar/Dürer 版画集同理。",
       "title": "Facsimiles of Original Studies by Michael Angelo in the University Galleries, Ox",
       "creator": "Michelangelo Buonarroti,  University of Oxford University Galleries,  Joseph Fis",
       "words": 5601
     },
     {
       "identifier": "facsimilesorigi02fishgoog",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
+      "档": "二手",
+      "依据": "【人裁】★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In presenting to the public these etchings, from the designs of Raffaelle and Michael Angelo…」）。**图是照他的素描刻的，文字是 Fisher 与出版者的**（正文主体是尺寸与递藏著录：「Size, 11 in. by 8. From the Collections of M. Buonaroti…」）。⇒ 二手。与 Leonardo #184 排掉 Hollar/Dürer 版画集同理。",
       "title": "Facsimiles of Original Studies by Michael Angelo in the University Galleries, Ox",
       "creator": "Michelangelo Buonarroti,  University of Oxford University Galleries,  Joseph Fis",
       "words": 5535
@@ -419,8 +419,8 @@
     },
     {
       "identifier": "seventyetchedfa00fishgoog",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
+      "档": "二手",
+      "依据": "【人裁】★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In presenting to the public these etchings, from the designs of Raffaelle and Michael Angelo…」）。**图是照他的素描刻的，文字是 Fisher 与出版者的**（正文主体是尺寸与递藏著录：「Size, 11 in. by 8. From the Collections of M. Buonaroti…」）。⇒ 二手。与 Leonardo #184 排掉 Hollar/Dürer 版画集同理。 本册 Raphael 挂头位，仅 2,255 词。",
       "title": "Seventy Etched Facsimiles: On a Reduced Scale, After the Original Studies by Mic",
       "creator": "Raphael ,  Michelangelo Buonarroti,  Joseph Fisher",
       "words": 2255

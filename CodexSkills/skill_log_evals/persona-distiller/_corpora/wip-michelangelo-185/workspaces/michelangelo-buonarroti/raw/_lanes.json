@@ -2,12 +2,12 @@
   "lanes": 4,
   "去掉纸面道后": 4,
   "逐道份数": {
-    "writings": 44,
+    "writings": 38,
     "conversations": 7,
     "expression": 2,
     "decisions": 0,
     "timeline": 0,
-    "external": 3
+    "external": 9
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -29,7 +29,7 @@
     },
     {
       "identifier": "artistmerchanta00bottgoog",
-      "道": "writings",
+      "道": "external",
       "title": "The Artist, the Merchant, and the Statesman, of the Age of the Medici,"
     },
     {
@@ -114,22 +114,22 @@
     },
     {
       "identifier": "eightyfouretche00raphgoog",
-      "道": "writings",
+      "道": "external",
       "title": "Eighty-four Etched Fac-similes: On a Reduced Scale After the Original "
     },
     {
       "identifier": "eightyfouretched00michuoft",
-      "道": "writings",
+      "道": "external",
       "title": "Eighty-four etched fac-similes, on a reduced scale, after the original"
     },
     {
       "identifier": "facsimilesorigi01fishgoog",
-      "道": "writings",
+      "道": "external",
       "title": "Facsimiles of Original Studies by Michael Angelo in the University Gal"
     },
     {
       "identifier": "facsimilesorigi02fishgoog",
-      "道": "writings",
+      "道": "external",
       "title": "Facsimiles of Original Studies by Michael Angelo in the University Gal"
     },
     {
@@ -269,7 +269,7 @@
     },
     {
       "identifier": "seventyetchedfa00fishgoog",
-      "道": "writings",
+      "道": "external",
       "title": "Seventy Etched Facsimiles: On a Reduced Scale, After the Original Stud"
     },
     {

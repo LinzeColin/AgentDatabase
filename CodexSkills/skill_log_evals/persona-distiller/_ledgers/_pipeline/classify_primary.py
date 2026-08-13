@@ -146,10 +146,38 @@ def main() -> int:
                 return r["档"], "【人裁·规则】" + r["理由"]
         return None
 
+    # ★★★ 2026-08-13：**裁定的 key 对不上任何记录 ⇒ 直接报错，不许静默忽略。**
+    #   起因：我给 Fisher 那本摹本册写裁定时，identifier 是**照题名编的**
+    #   （`eightyfouretched00fishgoog`），真值是 `eightyfouretche00raphgoog`。
+    #   工具照旧跑完、照旧印「需人判 0」，**那条裁定一个字也没生效**，
+    #   而我是靠「改动 2 条而我写了 3 条」这个对不上的数才发现的。
+    #   ⇒ 一条不生效的裁定 = [[a-checker-nothing-calls-is-not-a-checker]] 的人工版。
+    known = {r["identifier"] for r in recs}
+    ghost = sorted(set(dec) - known)
+    if ghost:
+        print("✗ **裁定文件里有 %d 个 identifier 在本轮语料里不存在**——"
+              "本次未分类（不是通过）：" % len(ghost), file=sys.stderr)
+        for g in ghost:
+            near = [k for k in known if k[:14] == g[:14]]
+            print("    %s%s" % (g, ("　← 是不是想写 %s ？" % near[0]) if near else ""),
+                  file=sys.stderr)
+        return 4
+
     out, tally = [], {"一手": 0, "二手": 0, "需人判": 0}
     for r in recs:
         k, why = classify(r.get("ia_title", ""), r.get("ia_creator", ""), a.surname)
-        if k == "需人判" and r["identifier"] in dec:
+        # ★★ 2026-08-13：裁定对**任何** identifier 优先，不再只在「需人判」时生效。
+        #   原来只有 `k == "需人判"` 才看裁定文件 ⇒ **人读了正文发现那是别人写的，也推翻不了工具**。
+        #   Michelangelo #185 实测三例：
+        #     · `artistmerchanta00bottgoog` 是 Charles Edwards Lester 1845 年的书，
+        #       工具按 creator 里有他的名字判成一手；而那段第一人称说的是
+        #       「一尊我接了 **300 美元**的胸像」——**他不用美元计价**，说话的是书里写的美国雕塑家。
+        #     · Joseph Fisher 的两本 *Etched Fac-similes*，正文自印
+        #       "ETCHED AND PUBLISHED BY JOSEPH FISHER" ＋ "A CATALOGUE OF EIGHTY-FOUR PRINTS"，
+        #       是**照他的素描刻的复制品加目录**，不是他的文字。
+        #   ⇒ 与 [[related-to-him-is-not-written-by-him]] 同型；
+        #     而「人的判断没有回写到工具读的那份数据里」是本项目反复出现的形态。
+        if r["identifier"] in dec:
             d = dec[r["identifier"]]
             k, why = d["档"], "【人裁】" + d["理由"]
         elif k == "需人判":
