@@ -6,6 +6,9 @@ Usage:
   python3 next_person.py --registry-root <current-worktree>/CodexSkills/registry/codex/persona-distiller-group
 (Defaults point at the worktree used for the calibration; pass --registry-root for a fresh worktree.)"""
 import argparse, json, os, re, sys, glob, pathlib
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 # ★★★★ 2026-08-10：**默认路径写死在另一个 worktree 上，实测已经失效。**
 #   旧默认 `…/AgentDatabase/character-distillation-skill-reorganize-d57595/…` **不存在**，
@@ -128,7 +131,7 @@ def main():
     #     `marcus-tullius-cicero`，只比 slug 会漏掉当天刚做完的人。
     worked = {}
     _corp = os.path.join(os.path.dirname(os.path.dirname(a.queue)), "_corpora")
-    for ws in glob.glob(os.path.join(_corp, "wip-*", "workspaces", "*")):
+    for ws in [str(_w) for _w in iter_workspaces(_pl.Path(_corp))]:
         if not os.path.isdir(ws):
             continue
         tag = os.path.basename(os.path.dirname(os.path.dirname(ws)))

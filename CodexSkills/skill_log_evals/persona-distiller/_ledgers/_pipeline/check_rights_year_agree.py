@@ -56,6 +56,9 @@ import os
 import pathlib
 import re
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve().parent
 CORPORA = HERE.parent.parent / "_corpora"
@@ -120,8 +123,9 @@ def classify(rights, published_at):
 def ledgers(one=None):
     if one:
         return [one] if os.path.isfile(one) else []
-    return sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*" /
-                                "evidence" / "source-ledger.jsonl")))
+    return sorted(str(_w / "evidence" / "source-ledger.jsonl")
+                  for _w in iter_workspaces(CORPORA)
+                  if (_w / "evidence" / "source-ledger.jsonl").is_file())
 
 
 def scan(paths):

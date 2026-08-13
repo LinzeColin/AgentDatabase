@@ -39,6 +39,9 @@ import argparse
 import json
 import pathlib
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 HEAD = """# ★ **重建用的权威清单** —— 从 _fetch-manifest.json 的「已取回」现生成。
 # 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
@@ -114,7 +117,7 @@ def main() -> int:
     root = pathlib.Path(a.scan)
     bad = 0
     n_ok = n_no_mf = 0
-    for raw in sorted(root.glob("wip-*/workspaces/*/raw")):
+    for raw in sorted(_w / "raw" for _w in iter_workspaces(root) if (_w / "raw").is_dir()):
         st, msg = one(raw, write=a.apply)
         ws = raw.parts[-4]
         if st == "missing-manifest":

@@ -48,6 +48,9 @@ import json
 import pathlib
 import re
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 YEAR = re.compile(r"(1[0-9]\d\d|20\d\d)")
 
@@ -195,7 +198,9 @@ def scan_all():
     #     ① 生年表里**有这个人但 born 是 null** —— 生年本来就未知（Carver、Pacioli）
     #     ② 生年表里**根本没有这个人** —— 该补表
     real, noted, no_born, no_person, scanned = [], [], [], [], 0
-    for led in sorted(CORPORA.glob("wip-*/workspaces/*/evidence/source-ledger.jsonl")):
+    for led in sorted(_w / "evidence" / "source-ledger.jsonl"
+                      for _w in iter_workspaces(CORPORA)
+                      if (_w / "evidence" / "source-ledger.jsonl").is_file()):
         slug = led.parent.parent.name
         key = _norm(slug)
         cand = [v for k, v in BY.items() if k == key or key in k or k in key]

@@ -52,6 +52,9 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve().parent
 CORPORA = HERE.parents[1] / "_corpora"
@@ -64,7 +67,7 @@ TOOLS = [
 
 
 def workspaces(base: pathlib.Path):
-    return sorted(p for p in base.glob("wip-*/workspaces/*/") if (p / "raw").is_dir())
+    return sorted(p for p in iter_workspaces(base) if (p / "raw").is_dir())
 
 
 def rerun(ws: pathlib.Path, artifact: str, tool: str, argtpl: list):

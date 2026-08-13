@@ -43,6 +43,9 @@ import glob
 import json
 import pathlib
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve().parent
 PD = HERE.parent.parent
@@ -168,7 +171,7 @@ def suspects() -> int:
           "真判定要等语料能取到时跑 min-hash。\n")
     n_ws = n_hit = 0
     blind = []          # ★ 题名栏不可用 ⇒ 连嫌疑都筛不出来的工作区
-    for d in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
+    for d in [str(_w) for _w in iter_workspaces(CORPORA)]:
         ws = pathlib.Path(d)
         led = ws / "evidence/source-ledger.jsonl"
         if not led.is_file() or (ws / "raw/_dedup.json").is_file():
@@ -234,7 +237,7 @@ def main() -> int:
     bad = []
     zero = []      # ★ 跑过去重而 0 个簇的（见下面的注释）
     print(f"{'工作区':26s} {'档':9s} {'道':>3s} {'空心道':>5s} {'去掉后':>5s} {'门':>3s}  明细")
-    for d in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
+    for d in [str(_w) for _w in iter_workspaces(CORPORA)]:
         ws = pathlib.Path(d)
         led, dj = ws / "evidence/source-ledger.jsonl", ws / "raw/_dedup.json"
         if not led.is_file():

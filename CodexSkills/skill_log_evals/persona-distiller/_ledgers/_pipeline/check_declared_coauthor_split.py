@@ -60,6 +60,9 @@ import os
 import pathlib
 import re
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve().parent
 CORPORA = HERE.parent.parent / "_corpora"
@@ -588,7 +591,7 @@ def main() -> int:
 
     targets = []
     if a.scan:
-        for d in sorted(glob.glob(os.path.join(a.scan, "wip-*", "workspaces", "*"))):
+        for d in [str(_w) for _w in iter_workspaces(_pl.Path(a.scan))]:
             if os.path.isdir(d):
                 targets.append(pathlib.Path(d))
     elif a.workspace:
