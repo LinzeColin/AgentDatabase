@@ -1,0 +1,25 @@
+# ★ **重建用的权威清单** —— 从 _fetch-manifest.json 的「已取回」现生成。
+# 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
+#   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
+# 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：19
+365ofhenryfordss00ford
+caseagainstlittl00ford
+derinternational11inte
+derinternational21inte
+dli.ernet.527298
+dli.ministry.17618
+fordidealsbeing00fordgoog
+fordidealsbeings00fordiala
+henryfordletter00ford
+in.ernet.dli.2015.525241
+india.history.resource.92942
+meinlebenundwerk00forduoft
+mylifeandwork07213gut
+mylifework0000unse
+mylifework00ford
+mylifework00ford_0
+mylifework01ford
+todaytomorrow0000ford_t6y5
+vitaopera_fordA
