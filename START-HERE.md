@@ -130,23 +130,27 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/fetch_i
 
 ## 四、★ 唯一的停点：阶段 5 判分
 
-**11 个人**的产物与题目都做完了，就差判分。判分要**两名互相独立的评委**。
+**8 个人**的产物与题目都做完了、**且合成门全过**，就差判分。判分要**两名互相独立的评委**。
 
     Lincoln  Jefferson  Bismarck  Pestalozzi  Machiavelli  Rousseau  Kant  Fröbel
-    Brandeis #172   Michelangelo #185   Dewey #190
 
-这个 11 是**现算的**，不是手数的：
+★★ **8-13 当晚撤回过一次「11 人」**：Brandeis #172／Michelangelo #185／Dewey #190
+当天被我登记成「等着判分」，而真跑合成门是 **22／46／36 条硬错**——
+**产物齐 ≠ 过门**。他们要回阶段 3／4 返工，不是判分。
+（其中两人当时连门都没开机：缺 `SKILL.md`，`quality_check` 直接报 `target.invalid` 拒检。）
+详见开箱即跑清单开头那节「撤回」。
+
+判分之前先跑一次就绪度（它**不覆盖合成门**，会明写要你另跑）：
 
 ```bash
 python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_scoring_ready.py
 ```
 
-它列「有盲判用例 ＋ 还没有判分结果」的人，**并把已结案的标成矛盾而不是过滤掉**
-（过滤会让人从表里整个消失——Churchill 就这样差点被漏掉）。
+合成门要逐人真跑（每人几分钟）：
 
-★ **Churchill #191 不在这 11 人里**：他产物齐全，**但语料没过门**——
-`timeline` 那条道的 2 份是同一部书的两个印本，`min_lanes` 实质 2 < 门 3。
-详见 `HANDOFF.md` 的「Churchill #191」一节。
+```bash
+python3 CodexSkills/registry/codex/persona-distiller/scripts/quality_check.py <工作区> --phase synthesis
+```
 
 「独立」在这里的意思**与任何特定产品无关**，只有三条：
 
@@ -166,8 +170,8 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_s
 
 按优先级：
 
-1. **跑阶段 5 判分**（上面第四节）——这是唯一卡住的一步，**11 个人一起**，
-   开箱即跑清单里第一至六节是那八人、**第七节是 Brandeis／Michelangelo／Dewey** 三人。
+1. **跑阶段 5 判分**（上面第四节）——这是唯一卡住的一步，**8 个人**，
+   开箱即跑清单第一至六节。（第七节那三人已在开头「撤回」一节里排除。）
 2. ★ **判分之前先跑一次就绪度**，它会把缺件、矛盾、压线一次列清：
 
    ```bash
@@ -178,9 +182,10 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_s
    这些正是要给人看的东西（比如 5 个人产物齐全却已在延后名单里）。
    `rc=0` 才表示 11 人全部就绪且无矛盾。**判分该不该跑由人定，这件判据不代替授权。**
 
-3. ★ **Dewey #190 是压线的那一个**（lanes 3 = 门 3），撑起第三条道的只有一份
-   与妻子共同署名的《Letters from China and Japan》。**按现有裁定登记不挡**，
-   但判他的分时要知道这件事——写在开箱即跑清单第七之二节。
+3. ★ **Brandeis／Michelangelo／Dewey 回阶段 3／4 返工**（22／46／36 条硬错，
+   逐条列在开箱即跑清单开头的「撤回」一节）。**不要送去判分。**
+   ★ Dewey 另有一件判他分时要知道的：lanes 压线 3=3，撑起第三条道的只有一份
+   与妻子共同署名的《Letters from China and Japan》（第七之二节）。
 4. **不要再开 Churchill #191／Ford #188**：两人都已记延后，理由与解锁条件在
    `_ledgers/_延后名单.json`。Churchill 的产物做完了但**语料没过门**（见第四节 ★）。
 5. ★ **不要重开已记延后的人**：第 2 批十人**九人出局**，死因与判法写在

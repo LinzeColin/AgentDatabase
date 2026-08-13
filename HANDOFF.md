@@ -68,17 +68,29 @@
 
 ★ Brandeis #172 预备已完成，可直接进阶段 1a 的下一步。
 
-### ★★ 2026-08-13 晚补：**等着判分的不是 8 人，是 11 人**（现算，不手数）
+### ★★★ 2026-08-13 深夜订正：**等着判分的就是那 8 人**（当晚我先写成 11 人，错了）
 
-判据 `_ledgers/_pipeline/check_scoring_ready.py` 现算「有盲判用例 ＋ 还没有判分结果」＝ **16 人**，
-其中 **5 人在延后名单里已结案**（Blackwell #118／Cicero #166／Kelsen #171／Paton #162／**Churchill #191**）
-⇒ **真正等着判分的 11 人** ＝ 上表八人 ＋ **Brandeis #172／Michelangelo #185／Dewey #190**。
+当晚把 11 个人的**合成门**逐个真跑了一遍（`quality_check.py --phase synthesis`）：
+第 1 批八人**全部 passed=True、硬错 0**；而我当天补进队列的三人**全部不过**——
 
-三个新人的分辨力／压线复核／逐人风险已补进开箱即跑清单**第七节**（判分之前写的）。
-三人都是 quick、32 题、2 SE = 0.0232、门 = **2.59 个 SE**。
+| 人 | 硬错 | 主要形态 |
+|---|---:|---|
+| **Brandeis #172** | **22** | `ledger.invalid` 8（`status` 被填成类别值）／支撑不足＋不独立 8／**mental models 0<2、heuristics 0<3**／authorship-unproven 2／namesake-unseparable 2 |
+| **Dewey #190** | **36** | structure.missing 10／ledger.invalid 7／支撑不足 5／不独立 5／lane-coverage 1／lane-completion 1 |
+| **Michelangelo #185** | **46** | structure.missing 10／ledger.invalid 9／支撑不足 7／不独立 7／source-unclaimed 6／attribution-basis 3 |
 
-★ 判据**不过滤已结案的人，改成报矛盾**——第一版用过滤，Churchill 从表里整个消失，
-我差点据此以为他不在队列。**被判据吃掉的人比报错的人危险。**
+**⇒ 判分只跑那 8 个人。这三人回阶段 3／4 返工，不是判分，也不进延后名单**
+（他们不是「够不着门的材料」，是**产物本身要修**）。
+
+★★ **为什么当天没发现：门根本没开机。** `ensure_target()` 要求工作区同时有
+`meta.json` **和 `SKILL.md`**，缺一个就**拒绝检查整个工作区**、只报一条 `target.invalid`。
+而 **Michelangelo／Dewey／Churchill 三人都缺 `SKILL.md`** ⇒ 合成门从没真跑过，
+而那条 `target.invalid` 长得像小毛病。补上 SKILL.md（67 行模板，除 `name:` 与人名外与 Kant 逐字相同）
+之后：**1 条 → 46 条／36 条**。这是「一道红门挡住它后面全部」的又一例。
+
+★★ **我的预检为什么放行：** `check_scoring_ready.py` 只看产物/断言/用例/分辨力/空心道，
+**一次都没问「合成门过没过」**。已补：查 `meta.json`＋`SKILL.md`，
+并明写本件**不覆盖合成门**、给出必须另跑的命令。
 
 ### ★★★ Churchill #191：产物齐全，**但不许送去判分**
 
