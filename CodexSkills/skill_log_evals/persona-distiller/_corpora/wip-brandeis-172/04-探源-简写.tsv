@@ -1,0 +1,12 @@
+# numFound=9 rows=9 query=creator:"Brandeis, Louis D."
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+jstor-1321781	1888-12-15T00:00:00Z	1888	Brandeis, Louis D.	The Watuppa Pond Cases	eng	jstor_harvardlawreview; jstor_ejc; journals
+jstor-2276262	1909-03-01T00:00:00Z	1909	Brandeis, Louis D.	Massachusetts Savings-Bank Insurance and Pension System	eng	jstor_publamerstatasso; jstor_ejc; journals
+jstor-1321350	1890-10-15T00:00:00Z	1890	Brandeis, Louis D.	Notes	eng	jstor_harvardlawreview; jstor_ejc; journals
+jstor-1013266	1915-01-01T00:00:00Z	1915	Brandeis, Louis D.	Interlocking Directorates	eng	jstor_annaameracadpoli; jstor_ejc; journals
+JewishRightsCongress	1916-01-24T00:00:00Z	1916	Brandeis, Louis D.	Jewish Rights and the Congress	eng	universityoflouisville; americana
+jstor-1321160	1890-12-15T00:00:00Z	1890	Brandeis, Louis D.	The Right to Privacy	eng	jstor_harvardlawreview; jstor_ejc; journals; fav-archiveuser5641bxtp; fav-browhyyoutakemyname; fav-bryan_moore; fav-davidli1990; fav-gstrengh; fav-harpocrates887; fav-heckenfan11; 
+jstor-1321695	1889-04-15T00:00:00Z	1889	Brandeis, Louis D.	The Law of Ponds	eng	jstor_harvardlawreview; jstor_ejc; journals
+jstor-1321339	1887-12-15T00:00:00Z	1887	Brandeis, Louis D.	Notes	eng	jstor_harvardlawreview; jstor_ejc; journals
+OrationTrueAmericanism	1915-01-01T00:00:00Z	1915	Brandeis, Louis D.	Oration	eng	universityoflouisville; americana; fav-adam_rosen
