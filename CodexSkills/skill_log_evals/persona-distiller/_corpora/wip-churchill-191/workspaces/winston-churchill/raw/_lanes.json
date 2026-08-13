@@ -1,131 +1,121 @@
 {
-  "lanes": 3,
-  "去掉纸面道后": 3,
-  "逐道份数": {
-    "writings": 17,
-    "conversations": 0,
-    "expression": 0,
-    "decisions": 0,
-    "timeline": 2,
-    "external": 4
+ "lanes": 3,
+ "去掉纸面道后": 3,
+ "逐道份数": {
+  "writings": 15,
+  "conversations": 0,
+  "expression": 0,
+  "decisions": 0,
+  "timeline": 2,
+  "external": 4
+ },
+ "未分道": 0,
+ "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+ "明细": [
+  {
+   "identifier": "1914frenuoft",
+   "道": "external",
+   "title": "1914"
   },
-  "未分道": 0,
-  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
-  "明细": [
-    {
-      "identifier": "1914frenuoft",
-      "道": "external",
-      "title": "1914"
-    },
-    {
-      "identifier": "churchill_winston_1874_1965_river_war",
-      "道": "writings",
-      "title": "The River War"
-    },
-    {
-      "identifier": "cu31924026407597",
-      "道": "writings",
-      "title": "Lord Randolph Churchill"
-    },
-    {
-      "identifier": "dli.ministry.04026",
-      "道": "writings",
-      "title": "London to Ladysmith via Pretoria"
-    },
-    {
-      "identifier": "dli.ministry.17592",
-      "道": "timeline",
-      "title": "My early life a Roving Commission"
-    },
-    {
-      "identifier": "greatspeechesofw00greyuoft",
-      "道": "external",
-      "title": "Great speeches of the war"
-    },
-    {
-      "identifier": "in.ernet.dli.2015.148729",
-      "道": "writings",
-      "title": "My African Journey"
-    },
-    {
-      "identifier": "in.ernet.dli.2015.206774",
-      "道": "writings",
-      "title": "The World Crisis (1916-1918) Part- Ii"
-    },
-    {
-      "identifier": "in.ernet.dli.2015.209887",
-      "道": "writings",
-      "title": "The Story Of The Malakand Field Force"
-    },
-    {
-      "identifier": "in.ernet.dli.2015.41900",
-      "道": "writings",
-      "title": "The World Crisis 1911-1918"
-    },
-    {
-      "identifier": "in.ernet.dli.2015.81282",
-      "道": "writings",
-      "title": "The River War Vol I"
-    },
-    {
-      "identifier": "in.ernet.dli.2015.81283",
-      "道": "writings",
-      "title": "The River War Vol Ii"
-    },
-    {
-      "identifier": "india.history.resource.106285",
-      "道": "writings",
-      "title": "The River War: An Historical Account of the Reconquest of the Soudan, "
-    },
-    {
-      "identifier": "lordrandolphchur0002chur",
-      "道": "writings",
-      "title": "Lord Randolph Churchill"
-    },
-    {
-      "identifier": "marksykeshislife00lesluoft",
-      "道": "external",
-      "title": "Mark Sykes : his life and letters"
-    },
-    {
-      "identifier": "myearlyliferovin0000chur_b7k8",
-      "道": "timeline",
-      "title": "My early life; a roving commission"
-    },
-    {
-      "identifier": "reportofproceed00macd",
-      "道": "external",
-      "title": "Report of the proceedings of the International Free Trade Congress, Lo"
-    },
-    {
-      "identifier": "savrolaatalerev00churgoog",
-      "道": "writings",
-      "title": "Savrola; a tale of the revolution in Laurania"
-    },
-    {
-      "identifier": "savrolataleofrev0000chur",
-      "道": "writings",
-      "title": "Savrola : a tale of the revolution in Laurania"
-    },
-    {
-      "identifier": "theriverwar04943gut",
-      "道": "writings",
-      "title": "The River War: An Account of the Reconquest of the Sudan"
-    },
-    {
-      "identifier": "thestoryofthemal09404gut",
-      "道": "writings",
-      "title": "The Story of the Malakand Field Force: An Episode of Frontier War"
-    },
-    {
-      "identifier": "worldcrisis0004unse",
-      "道": "writings",
-      "title": "The world crisis .."
-    },
-    {
-      "identifier": "worldcrisis00chur",
-      "道": "writings",
-      "title": "The world crisis"
-    }
-  ]
+  {
+   "identifier": "churchill_winston_1874_1965_river_war",
+   "道": "writings",
+   "title": "The River War"
+  },
+  {
+   "identifier": "cu31924026407597",
+   "道": "writings",
+   "title": "Lord Randolph Churchill"
+  },
+  {
+   "identifier": "dli.ministry.04026",
+   "道": "writings",
+   "title": "London to Ladysmith via Pretoria"
+  },
+  {
+   "identifier": "dli.ministry.17592",
+   "道": "timeline",
+   "title": "My early life a Roving Commission"
+  },
+  {
+   "identifier": "greatspeechesofw00greyuoft",
+   "道": "external",
+   "title": "Great speeches of the war"
+  },
+  {
+   "identifier": "in.ernet.dli.2015.148729",
+   "道": "writings",
+   "title": "My African Journey"
+  },
+  {
+   "identifier": "in.ernet.dli.2015.206774",
+   "道": "writings",
+   "title": "The World Crisis (1916-1918) Part- Ii"
+  },
+  {
+   "identifier": "in.ernet.dli.2015.209887",
+   "道": "writings",
+   "title": "The Story Of The Malakand Field Force"
+  },
+  {
+   "identifier": "in.ernet.dli.2015.41900",
+   "道": "writings",
+   "title": "The World Crisis 1911-1918"
+  },
+  {
+   "identifier": "in.ernet.dli.2015.81282",
+   "道": "writings",
+   "title": "The River War Vol I"
+  },
+  {
+   "identifier": "in.ernet.dli.2015.81283",
+   "道": "writings",
+   "title": "The River War Vol Ii"
+  },
+  {
+   "identifier": "india.history.resource.106285",
+   "道": "writings",
+   "title": "The River War: An Historical Account of the Reconquest of the Soudan, "
+  },
+  {
+   "identifier": "lordrandolphchur0002chur",
+   "道": "writings",
+   "title": "Lord Randolph Churchill"
+  },
+  {
+   "identifier": "marksykeshislife00lesluoft",
+   "道": "external",
+   "title": "Mark Sykes : his life and letters"
+  },
+  {
+   "identifier": "myearlyliferovin0000chur_b7k8",
+   "道": "timeline",
+   "title": "My early life; a roving commission"
+  },
+  {
+   "identifier": "reportofproceed00macd",
+   "道": "external",
+   "title": "Report of the proceedings of the International Free Trade Congress, Lo"
+  },
+  {
+   "identifier": "savrolaatalerev00churgoog",
+   "道": "writings",
+   "title": "Savrola; a tale of the revolution in Laurania"
+  },
+  {
+   "identifier": "savrolataleofrev0000chur",
+   "道": "writings",
+   "title": "Savrola : a tale of the revolution in Laurania"
+  },
+  {
+   "identifier": "worldcrisis0004unse",
+   "道": "writings",
+   "title": "The world crisis .."
+  },
+  {
+   "identifier": "worldcrisis00chur",
+   "道": "writings",
+   "title": "The world crisis"
+  }
+ ]
 }

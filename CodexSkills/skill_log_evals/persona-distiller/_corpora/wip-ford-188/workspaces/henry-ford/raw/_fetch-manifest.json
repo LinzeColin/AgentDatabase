@@ -1,7 +1,7 @@
 {
  "生成时刻": "2026-08-13T14:20:37",
- "请求数": 27,
- "已取回": 27,
+ "请求数": 19,
+ "已取回": 18,
  "skipped_access_restricted": 0,
  "失败": 0,
  "并发降级": "无（全程并发 4）",
@@ -292,7 +292,7 @@
   },
   {
    "identifier": "mylifeandwork07213gut",
-   "status": "已取回",
+   "status": "剔除",
    "note": "",
    "file": "mylifeandwork07213gut.txt",
    "source_url": "https://archive.org/download/mylifeandwork07213gut/hnfrd10.txt",
@@ -313,7 +313,9 @@
    ],
    "digitization_years": [
     "2005"
-   ]
+   ],
+   "原 status": "已取回",
+   "剔除理由": "Project Gutenberg 电子本：published_at 取自 PG 页眉的 2003，与 rights=pre1931 自相矛盾（check_rights_year_agree ①a）。《My Life and Work》语料里另有 7 个非 PG 印本，剔掉零信息损失。2026-08-13 由 agent 依「40 条待裁定自己定」裁定。"
   },
   {
    "identifier": "mylifework0000unse",
@@ -461,5 +463,6 @@
    ],
    "digitization_years": []
   }
- ]
+ ],
+ "剔除": 1
 }
