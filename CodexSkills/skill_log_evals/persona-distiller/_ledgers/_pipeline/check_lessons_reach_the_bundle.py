@@ -61,8 +61,14 @@ HERE = pathlib.Path(__file__).resolve().parent
 REPO_LESSONS = HERE.parents[4] / "文档/踩坑库"
 HOME_LESSONS = (pathlib.Path.home() / ".claude/projects"
                 / "-Users-linzezhang-Documents-Codex-GithubProject-AgentDatabase/memory")
-# 索引/汇总类，不是教训本身
-NOT_A_LESSON = {"MEMORY.md", "00-索引.md"}
+# 索引/汇总类，不是教训本身。
+# ★★ `README.md` 一开始漏在这里，于是本件报「仓里 179 条」而
+#    `check_lessons_library.py` 报「178 个」——**同一个目录、两件判据、两个口径**，
+#    而且这个 179 已经被我写进过提交说明。[[two-checkers-same-text-different-rules]]
+#    差额只在分母上（README 只在仓侧，落进「只在仓里的」那一格，
+#    「只在本机的 0 条」这个结论不受影响）——**但错的数照样是错的**。
+#    这里的三个名字必须与 check_lessons_library.py 的 META 一致。
+NOT_A_LESSON = {"MEMORY.md", "00-索引.md", "README.md"}
 
 
 def names(d: pathlib.Path) -> set:
@@ -96,7 +102,17 @@ def self_test() -> int:
         (D / "x.md").write_text("x", encoding="utf-8")
         (D / "MEMORY.md").write_text("i", encoding="utf-8")
         (D / "00-索引.md").write_text("i", encoding="utf-8")
+        (D / "README.md").write_text("i", encoding="utf-8")
         chk(f"★★ 索引类不算教训（实得 {names(D)}）", names(D) == {"x.md"})
+        # ★★ 口径必须与 check_lessons_library.py 的 META 逐字一致，否则两件判据
+        #    对同一个目录会报出两个数（真发生过：179 vs 178）
+        try:
+            sys.path.insert(0, str(HERE))
+            from check_lessons_library import META as _M
+            chk(f"★★ **与 check_lessons_library 的口径逐字一致**（对方 {sorted(_M)}）",
+                NOT_A_LESSON == _M | {"MEMORY.md"})
+        except Exception as e:                                    # noqa: BLE001
+            chk(f"★★ 口径对齐**未判**（导入不了对方：{e}）—— 未量，不是通过", False)
         chk("★★ **目录不存在返回 None，不是空集** —— 空集会被读成「两边一致」",
             names(D / "没有这个目录") is None)
     print(f"\n{'✓ 全过' if ok == t else f'✗ {t - ok}/{t} 项不符'}")
