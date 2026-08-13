@@ -1,0 +1,444 @@
+{
+ "源数": 38,
+ "测出正文起点": 8,
+ "★ 测不出的": 30,
+ "★ null 的含义": "**没测出来**，不是「没有导言」——调用方必须分开处理",
+ "读不到正文": [],
+ "逐条": [
+  {
+   "source_id": "src-cc33bc7e060b",
+   "title": "Business--a profession,",
+   "字符数": 535533,
+   "正文起点": 73433,
+   "诊断": {
+    "书眉词": "Business profession",
+    "命中总数": 188,
+    "跳过的扉页命中": [
+     2736,
+     3833,
+     4916
+    ],
+    "正文起点": 73433,
+    "窗内命中": 22,
+    "中位间隔": 1302,
+    "规整度": 0.9,
+    "占全文": 13.71
+   }
+  },
+  {
+   "source_id": "src-3d16531d4151",
+   "title": "Business--a profession ",
+   "字符数": 460497,
+   "正文起点": 64956,
+   "诊断": {
+    "书眉词": "Business profession",
+    "命中总数": 149,
+    "跳过的扉页命中": [
+     2984,
+     4251,
+     5104
+    ],
+    "正文起点": 64956,
+    "窗内命中": 18,
+    "中位间隔": 2119,
+    "规整度": 0.88,
+    "占全文": 14.11
+   }
+  },
+  {
+   "source_id": "src-f262a6c0fb76",
+   "title": "Business--a profession",
+   "字符数": 457545,
+   "正文起点": 62094,
+   "诊断": {
+    "书眉词": "Business profession",
+    "命中总数": 163,
+    "跳过的扉页命中": [
+     423,
+     446,
+     1447,
+     2281
+    ],
+    "正文起点": 62094,
+    "窗内命中": 22,
+    "中位间隔": 1306,
+    "规整度": 0.9,
+    "占全文": 13.57
+   }
+  },
+  {
+   "source_id": "src-3c993289f67b",
+   "title": "Interstate Trade Commission. Hearings ... Sixty-thir",
+   "字符数": 1573589,
+   "正文起点": 37598,
+   "诊断": {
+    "书眉词": "Interstate Trade Commission",
+    "命中总数": 249,
+    "跳过的扉页命中": [
+     800,
+     2738,
+     3304,
+     5292
+    ],
+    "正文起点": 37598,
+    "窗内命中": 12,
+    "中位间隔": 3404,
+    "规整度": 0.91,
+    "占全文": 2.39
+   }
+  },
+  {
+   "source_id": "src-652aa149475b",
+   "title": "Other people's money : and how the bankers use it ",
+   "字符数": 280524,
+   "正文起点": 3064,
+   "诊断": {
+    "书眉词": "Other people's money",
+    "命中总数": 113,
+    "跳过的扉页命中": [],
+    "正文起点": 3064,
+    "窗内命中": 16,
+    "中位间隔": 2504,
+    "规整度": 0.87,
+    "占全文": 1.09
+   }
+  },
+  {
+   "source_id": "src-e6750d32440f",
+   "title": "The Right to Privacy",
+   "字符数": 83622,
+   "正文起点": 1258,
+   "诊断": {
+    "书眉词": "Right Privacy",
+    "命中总数": 29,
+    "跳过的扉页命中": [],
+    "正文起点": 1258,
+    "窗内命中": 9,
+    "中位间隔": 4260,
+    "规整度": 1.0,
+    "占全文": 1.5
+   }
+  },
+  {
+   "source_id": "src-0a5e23fd4921",
+   "title": "Interlocking Directorates",
+   "字符数": 11878,
+   "正文起点": 1198,
+   "诊断": {
+    "书眉词": "Interlocking Directorates",
+    "命中总数": 9,
+    "跳过的扉页命中": [],
+    "正文起点": 1198,
+    "窗内命中": 9,
+    "中位间隔": 1003,
+    "规整度": 0.75,
+    "占全文": 10.09
+   }
+  },
+  {
+   "source_id": "src-776733bc0204",
+   "title": "Fatigue efficiency;",
+   "字符数": 2029171,
+   "正文起点": 53,
+   "诊断": {
+    "书眉词": "Fatigue efficiency",
+    "命中总数": 420,
+    "跳过的扉页命中": [],
+    "正文起点": 53,
+    "窗内命中": 9,
+    "中位间隔": 4169,
+    "规整度": 0.88,
+    "占全文": 0.0
+   }
+  },
+  {
+   "source_id": "src-d00beb5a8a24",
+   "title": "Jewish Rights and the Congress",
+   "字符数": 22424,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-2a9bd62fe97c",
+   "title": "Oration",
+   "字符数": 23799,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "题名实词不足 2 个，做不出书眉正则"
+   }
+  },
+  {
+   "source_id": "src-97496344c973",
+   "title": "Fatigue and efficiency; a study in industry",
+   "字符数": 2033759,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-a5ba8daf0013",
+   "title": "The case for the shorter work day ... Franklin O. Bu",
+   "字符数": 1936029,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-591ccafd61d9",
+   "title": "The case for the shorter work day ... Franklin O. Bu",
+   "字符数": 142561,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-94baf0d4e64a",
+   "title": "The people of the State of New York, respondent, aga",
+   "字符数": 830392,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-dc08306e597b",
+   "title": "Scientific management and railroads; being part of a",
+   "字符数": 197574,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-0b710810f1f3",
+   "title": "Women in industry; decision of the United States Sup",
+   "字符数": 243568,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-26a41d751b61",
+   "title": "Other people's money : and how the bankers use it ",
+   "字符数": 275337,
+   "正文起点": 0,
+   "诊断": {
+    "书眉词": "Other people's money",
+    "命中总数": 120,
+    "跳过的扉页命中": [],
+    "正文起点": 0,
+    "窗内命中": 17,
+    "中位间隔": 2296,
+    "规整度": 0.75,
+    "占全文": 0.0
+   }
+  },
+  {
+   "source_id": "src-c63a1189ad85",
+   "title": "Fatigue and efficiency; a study in industry",
+   "字符数": 673915,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-ce753b30deb4",
+   "title": "Fatigue and efficiency; a study in industry",
+   "字符数": 2034129,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-a6d1ce913f10",
+   "title": "Fatigue and efficiency; a study in industry",
+   "字符数": 2032210,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-2e8456e43798",
+   "title": "The Jewish problem, how to solve it",
+   "字符数": 35588,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-2ef164245cdd",
+   "title": "The Jewish problem; how to solve it",
+   "字符数": 35438,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-663cb6829ba6",
+   "title": "Notes",
+   "字符数": 16811,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "题名实词不足 2 个，做不出书眉正则"
+   }
+  },
+  {
+   "source_id": "src-26dbd660239a",
+   "title": "Notes",
+   "字符数": 16431,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "题名实词不足 2 个，做不出书眉正则"
+   }
+  },
+  {
+   "source_id": "src-7c7b306a7231",
+   "title": "The Law of Ponds",
+   "字符数": 59310,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-5a062aafa02a",
+   "title": "The Watuppa Pond Cases",
+   "字符数": 43368,
+   "正文起点": null,
+   "诊断": {
+    "书眉词": "Watuppa Pond Cases",
+    "命中总数": 15,
+    "为什么": "扎堆但不周期（规整度 0.69 < 0.7）",
+    "窗内命中": 14,
+    "中位间隔": 4023,
+    "规整度": 0.69
+   }
+  },
+  {
+   "source_id": "src-76811a9c2362",
+   "title": "Massachusetts Savings-Bank Insurance and Pension Sys",
+   "字符数": 16429,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-7ca5e8f31c88",
+   "title": "Life insurance, the abuses and the remedies: an addr",
+   "字符数": 54183,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-ea2c7920700d",
+   "title": "Life insurance: the abuses and the remedies",
+   "字符数": 57086,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-75ebbbaa5e10",
+   "title": "Other people's money, and how the bankers use it",
+   "字符数": 275191,
+   "正文起点": 0,
+   "诊断": {
+    "书眉词": "Other people's money",
+    "命中总数": 121,
+    "跳过的扉页命中": [],
+    "正文起点": 0,
+    "窗内命中": 17,
+    "中位间隔": 2297,
+    "规整度": 0.75,
+    "占全文": 0.0
+   }
+  },
+  {
+   "source_id": "src-f63fe9659143",
+   "title": "Preliminary report on efficiency in the administrati",
+   "字符数": 62119,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-5aaf9a59012e",
+   "title": "Savings insurance",
+   "字符数": 34748,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-04857426d8e2",
+   "title": "Scientific management and railroads [microform] : be",
+   "字符数": 194896,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-696d2c185f7d",
+   "title": "Scientific management and railroads; being part of a",
+   "字符数": 194038,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-f713f255ca3e",
+   "title": "To the Jews of America : The Jewish Congress versus ",
+   "字符数": 70219,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-5f84f3dc1244",
+   "title": "Война и еврейская проблема",
+   "字符数": 169253,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "题名实词不足 2 个，做不出书眉正则"
+   }
+  },
+  {
+   "source_id": "src-2a272f2eaf96",
+   "title": "The Washington Street subway : comments on the finan",
+   "字符数": 24230,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  },
+  {
+   "source_id": "src-e6c93e0f739a",
+   "title": "Zionism and patriotism",
+   "字符数": 22480,
+   "正文起点": null,
+   "诊断": {
+    "为什么": "书眉命中 < 9 次，判不出页眉区"
+   }
+  }
+ ]
+}
