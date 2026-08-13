@@ -3006,13 +3006,15 @@
     "★ 一手占比很高，**量不是问题**"
    ],
    "unblock_todo": [
+    "★★ **先探「亨利·福特亲笔文献」的可得性**——他名下的出版物再抓也解决不了归属问题。",
     "**要补的是道**：他的书信、公司内部备忘、听证证词都不在 IA 的 `creator` 索引下；Benson Ford Research Center 有档案，**要换通道**。",
     "★ 若将来开工：**先核那 19 份里的实质作品数**——8 个扫描件是同一部《My Life and Work》的三种语言版本，**份数门数的是扫描件不是作品**（同 Bernays #190 记的那个口子）。"
    ],
-   "处置类": "**min_lanes 硬卡点**（第六人）——★ 新子形态：**不是误配、不是料单一，是那一条道的唯一一份 OCR 文本层是空的**（7 词）。★★ 另附一条流水线缺口：`assign_lanes` 数的是文件数，**不问那份文件里有没有字**。",
+   "处置类": "**一手材料几乎全部由他人执笔或汇编**（新类别）＋ 原记的 min_lanes 硬卡点",
    "aliases": [
     "Ford, Henry"
-   ]
+   ],
+   "reason2_authorship": "**一手材料几乎全部由他人执笔或汇编**（2026-08-13 新增，比 min_lanes 更根本）：\n逐份看**源自身的题名页/序言**——11 份（958,992 词 = 61.5%）写着 `IN COLLABORATION WITH SAMUEL CROWTHER`（德译 `UNTER MITWIRKUNG VON`、意译 `IN COLLABORAZIONE CON`）；2 份是 Dearborn Independent「Mr. Ford's page」专栏结集（题名自己写着 being a selection from）；2 份 creator 第 2 位且是德译本；1 份是 P. M. Martin 的他人汇编（序言：compiled from his and Crowther's）；1 份是 `A SERIES OF AUTHORIZED INTERVIEWS WRITTEN BY FAY LEONE FAUROTE`；1 份只有 7 个词。\n**⇒ 题名页未见他人署名的只有 1 份 / 25,279 词 = 1.6%**，而 quick 门要 8 份。\n★ 这条比 min_lanes 更根本：**即便道数够了，那些词也不是他写的**。\n★ 不随年份滚动（不是权利问题）。解锁只有一条：找到确属他本人执笔的材料（亲笔信、手稿、亲签备忘录）——重启前先探「亲笔文献」的可得性，不要再抓一轮他名下的出版物。\n证据逐条见 `_corpora/wip-ford-188/05-记延后-代笔与汇编.md`。"
   },
   {
    "name": "Winston Churchill",

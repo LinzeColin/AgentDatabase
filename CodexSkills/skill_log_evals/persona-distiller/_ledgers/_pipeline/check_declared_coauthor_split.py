@@ -172,7 +172,12 @@ COLLAB = re.compile(
     r"|in\s+collaborazione\s+con"
     r"|en\s+collaboration\s+avec"
     r"|with\s+the\s+(?:collaboration|assistance)\s+of"
-    r"|as\s+told\s+to)\s+"
+    r"|as\s+told\s+to"
+    # ★ 「授权访谈，由 X 执笔」——Ford 的《My Philosophy of Industry》(1929)
+    #   题名页逐字：A SERIES OF AUTHORIZED INTERVIEWS **WRITTEN BY** FAY LEONE FAUROTE。
+    #   这同样是「不是他写的」，而且说得比 collaboration 还直白。
+    r"|(?:authorized\s+)?interviews?\s+written\s+by"
+    r"|(?:recorded|set\s+down|transcribed)\s+by)\s+"
     # ★ 头衔要先跳过：Koch 那 6 条实测被截成 `Prof. Dr`——
     #   捕到的是称谓不是人名，报出来没法用。
     r"(?:(?:Prof|Dr|Mr|Mrs|Miss|Herr|Frau|Sir|Ing|Med)\.?\s+){0,3}"
@@ -411,6 +416,10 @@ def self_test() -> int:
     chk("★★ 头衔要跳过、且**首字母缩写打头的名字**要认得："
         "`Prof. Dr. G. GAFFKY` 必须报出 GAFFKY，不是 `Prof. Dr`",
         bool(kk) and "gaffky" in kk[0][1].lower())
+    fa = collaborators("MY PHILOSOPHY OF INDUSTRY BY HENRY FORD A SERIES OF "
+                       "AUTHORIZED INTERVIEWS WRITTEN BY FAY LEONE FAUROTE", "Henry Ford")
+    chk("★★ 「授权访谈，由 X 执笔」也要报（Ford 1929 年那本，逐字取自题名页）",
+        bool(fa) and "faurote" in fa[0][1].lower())
     chk("★ 形态③：没有合作声明的题名页不许报",
         not collaborators("HOW WE THINK BY JOHN DEWEY Professor of Philosophy", "John Dewey"))
 
