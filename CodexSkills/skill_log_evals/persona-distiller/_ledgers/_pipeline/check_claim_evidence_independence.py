@@ -355,16 +355,20 @@ def scan(ws: pathlib.Path):
             out["collapsed"].append((cid, c.get("category"), n,
                                      len(set(c.get("evidence_clusters", [])))))
             collapsed_pairs.add(frozenset(set(c.get("source_ids", []))))
-        # ★★ 证据层单独判：作品层说「两部不同」也可能是同一封信被两本书都收了
+        elif v == "unmeasurable":
+            out["unmeasurable"].append(cid)
+        else:
+            out[v if v == "skip" else "ok"] += 1
+        # ★★ 证据层**单独一支**，与上面那条 if/elif/else 链**互不影响**。
+        #   2026-08-14 我第一次把它插在中间，`elif` 于是挂到了它头上——
+        #   凡是有 ≥2 个 source_id 的 claim 都走进证据层这一支，**再也走不到 `ok` 那一格**，
+        #   于是「实测两处」在全库报成 0。四格加起来不等于总数就是它在报警：
+        #   Dewey 8 条报成 0+0+2+0=2。**分支加进已有链条时，先数一遍四格和对不对得上。**
         if len(set(c.get("source_ids", []))) >= 2:
             q, hit = shared_quote(c.get("claim"), {s: body[s] for s in set(c.get("source_ids", []))
                                                    if s in body})
             if q:
                 out["同一段引文落在两份源里"].append((cid, hit, q[:70]))
-        elif v == "unmeasurable":
-            out["unmeasurable"].append(cid)
-        else:
-            out[v if v == "skip" else "ok"] += 1
     # ★★ 射程：本件只报 NEEDS_TWO 那 6 个类目（与 quality_check 同名单），
     #   但**问题的规模比射程大**。Koch #107 的旧台账已量过一次：报 15 条，
     #   而只引那一对源的断言共 41 条，其余 26 条是 fact／boundary／epistemic。
@@ -396,6 +400,13 @@ def report(ws: pathlib.Path) -> int:
     tag = ws.name
     if not r["claims"]:
         return 0
+    # ★ 四格之和必须等于总数——2026-08-14 那个分支 bug 就是靠它抓出来的：
+    #   证据层的 if 插进了原来的 if/elif/else 链，凡有 ≥2 个 source_id 的 claim
+    #   都走不到 `ok` 那一格，「实测两处」全库报成 0，而四格和 2 ≠ 总数 8。
+    _sum = r["ok"] + len(r["collapsed"]) + r["skip"] + len(r["unmeasurable"])
+    if _sum != r["claims"]:
+        print(f"❌ {tag}：**四格加起来 {_sum} ≠ 总数 {r['claims']}** —— "
+              f"计数分支漏了一格，下面的数不许用")
     print(f"{tag}：需要 ≥2 处支撑的 claim {r['claims']} 条 → "
           f"实测两处 {r['ok']}｜**塌成一处 {len(r['collapsed'])}**｜"
           f"只有一个 id {r['skip']}｜读不到正文 {len(r['unmeasurable'])}")
