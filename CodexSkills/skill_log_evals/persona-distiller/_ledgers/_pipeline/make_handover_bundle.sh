@@ -29,6 +29,13 @@ python3 "$(dirname "$0")/check_lessons_reach_the_bundle.py"
 _les_rc=$?
 [ $_les_rc -ne 0 ] && echo "★ 教训覆盖面检查非零退出 rc=$_les_rc（不拦打包，但这个数没量到）"
 
+# ★★ 同名后裔：判据写完要有人调它，否则等于没写。[[a-checker-nothing-calls-is-not-a-checker]]
+#   报告制——「长辈」那一组是本人、不用动，硬拦会天天红。
+echo "== 0/4b 同名区分符（报告制；仍挂在他名下的「后辈」才要处置）=="
+python3 "$(dirname "$0")/check_namesake_epithet_in_title.py" | grep -E "分母|仍挂在他名下|❗"
+_ns_rc=${PIPESTATUS[0]}
+[ "${_ns_rc:-0}" -ne 0 ] && echo "★ 同名区分符检查非零退出 rc=$_ns_rc（不拦打包，但这个数没量到）"
+
 echo "== 1/4 打包（--all）=="
 git -C "$REPO" bundle create "$B" --all
 rc=$?; [ $rc -ne 0 ] && { echo "★ 打包失败 rc=$rc"; exit $rc; }
