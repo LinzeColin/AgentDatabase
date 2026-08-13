@@ -351,13 +351,21 @@ def check(ws: pathlib.Path, cache: list[pathlib.Path]) -> int:
         passages[s] = [{"words": r[0], "train_source": ts,
                         "text_head": " ".join(tr_w[ts][r[1]:r[1] + 20])}
                        for mx, cnt, ts, rs in rows for r in rs]
+    # ★★ 报告**每次都写**，哪怕是空的。
+    #   原来写成 `if passages:`——2026-08-13 Dewey #190 当场撞上：
+    #   修好样板识别之后本轮判定是「无内容重合」，而磁盘上**还留着上一轮那条 72 词**，
+    #   一份写着「出题必须避开这些段」的清单与当前判定互相矛盾，
+    #   读的人无从知道该信哪个。[[stale-artifacts-from-my-machine-leak-into-the-build]]
+    out = ws / "reports/holdout-contaminated-passages.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(passages, ensure_ascii=False, indent=2),
+                   encoding="utf-8")
     if passages:
-        out = ws / "reports/holdout-contaminated-passages.json"
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(json.dumps(passages, ensure_ascii=False, indent=2),
-                       encoding="utf-8")
         print(f"\n  ★ 受污染段已逐段落盘：{out.relative_to(ws)}"
               f"——**出评测题时必须避开这些段**")
+    else:
+        print(f"\n  ★ 无受污染段；{out.relative_to(ws)} 已**写成空**"
+              f"（不留上一轮的旧清单）")
 
     print(f"\n硬失败 {hard} / 待人工核 {soft}")
     if n_pass >= RUN_HARD_COUNT:
