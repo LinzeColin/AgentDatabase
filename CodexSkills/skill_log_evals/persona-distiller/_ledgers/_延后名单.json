@@ -2977,9 +2977,29 @@
     "**以及换通道找 1923 年《Crystallizing Public Opinion》的原书扫描件**（同 Hopkins #189）。"
    ],
    "处置类": "**min_lanes 硬卡点**——★ 本例的形态与前四个不同：**份数刚够门（8/8）而作品只有 2 部、道只有 1 条**，属于「扫描件数虚高、实质来源极少」。★★ 且与 Hopkins #189 共享一个成因：**代表作按出版年是 PD，而 IA 上只有现代重排本**。"
+  },
+  {
+   "name": "Henry Ford",
+   "family_zh": "创业经营师",
+   "deferred_at": "2026-08-13",
+   "reason": "**min_lanes 硬卡点，真值 2 条道**——★ 这是这一类里的**新子形态**：第 3 条道的唯一一份是 **OCR 空壳**。`conversations` 道只有 1 份《Henry Ford letter to Judge R.A. Parker, 1923》，是手写信的扫描件，**文本层只有 7 个词、42 字节**（全文：`Yea born, Mick af GPS Conry Jord`）。⇒ `assign_lanes` 数它一条道，而它一个字都用不了。清理后逐道：writings 9／timeline 10／conversations 1（空壳）⇒ **可用的道 = 2**，quick 要 3。★★ 同名污染极重：`creator:\"Ford, Henry\"` 的池子里**至少五个人**（历史学家 Henry Jones Ford 占 PD 内 70.6%、童话插画家 Henry Justice Ford、编县志的 Henry A. Ford、语文学家 Henry Clinton Ford、Worthington Chauncey Ford），**年代全部重叠且同样在公有领域**；curate 的排除名单改了三轮才干净（165 → 30 → 21 → 19）。",
+   "probed_and_failed": [
+    "creator:\"Ford, Henry\" → 165 条，PD 内 136；**按 creator 原样统计，历史学家一系占 96 条（70.6%），工业家只有 10 条（7.4%）**",
+    "creator:\"Ford, Henry, 1863-1947\" → 19 条，PD 内 9",
+    "conversations 道**只此一份且是空壳**；expression / decisions / external 三道实测为零"
+   ],
+   "already_confirmed_fetchable": [
+    "19 份已取回：《My Life and Work》(1922) 含英/德/意三语共 8 个扫描件、《Ford ideals》2、《Der internationale Jude》2、《Today and Tomorrow》《365 of Henry Ford's sayings》《The case against the little white slaver》《My Philosophy of Industry》各 1",
+    "★ 一手占比很高，**量不是问题**"
+   ],
+   "unblock_todo": [
+    "**要补的是道**：他的书信、公司内部备忘、听证证词都不在 IA 的 `creator` 索引下；Benson Ford Research Center 有档案，**要换通道**。",
+    "★ 若将来开工：**先核那 19 份里的实质作品数**——8 个扫描件是同一部《My Life and Work》的三种语言版本，**份数门数的是扫描件不是作品**（同 Bernays #190 记的那个口子）。"
+   ],
+   "处置类": "**min_lanes 硬卡点**（第六人）——★ 新子形态：**不是误配、不是料单一，是那一条道的唯一一份 OCR 文本层是空的**（7 词）。★★ 另附一条流水线缺口：`assign_lanes` 数的是文件数，**不问那份文件里有没有字**。"
   }
  ],
- "total": 159,
+ "total": 160,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",

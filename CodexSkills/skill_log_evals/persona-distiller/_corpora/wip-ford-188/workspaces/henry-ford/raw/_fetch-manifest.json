@@ -1,0 +1,465 @@
+{
+ "生成时刻": "2026-08-13T14:20:37",
+ "请求数": 27,
+ "已取回": 27,
+ "skipped_access_restricted": 0,
+ "失败": 0,
+ "并发降级": "无（全程并发 4）",
+ "总词数": 2048776,
+ "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
+ "记录": [
+  {
+   "identifier": "365ofhenryfordss00ford",
+   "status": "已取回",
+   "note": "",
+   "file": "365ofhenryfordss00ford.txt",
+   "source_url": "https://archive.org/download/365ofhenryfordss00ford/365ofhenryfordss00ford_djvu.txt",
+   "sha256": "e2ae08f02760622d3760a5bfc5aa4773b4450bb74eb2d3acc14dc54618807786",
+   "bytes": 93400,
+   "words": 14410,
+   "fetched_at": "2026-08-13T14:19:51",
+   "ia_date": "1923",
+   "ia_year": "",
+   "ia_publicdate": "2018-12-06 19:20:28",
+   "ia_creator": "Ford, Henry, 1863-1947",
+   "ia_title": "365 of Henry Ford's sayings",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1863",
+    "1923"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "caseagainstlittl00ford",
+   "status": "已取回",
+   "note": "",
+   "file": "caseagainstlittl00ford.txt",
+   "source_url": "https://archive.org/download/caseagainstlittl00ford/caseagainstlittl00ford_djvu.txt",
+   "sha256": "eecb2f625b199ecc92bdb059bd63bbfc5889111ade1c16bf5ece6e28bef66cf2",
+   "bytes": 170384,
+   "words": 25279,
+   "fetched_at": "2026-08-13T14:19:58",
+   "ia_date": "1916",
+   "ia_year": "",
+   "ia_publicdate": "2015-04-29 23:21:26",
+   "ia_creator": "Ford, Henry, 1863-1947",
+   "ia_title": "The case against the little white slaver [microform], volumes I, II, III and IV",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1853",
+    "1863",
+    "1914",
+    "1915",
+    "1916"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "derinternational11inte",
+   "status": "已取回",
+   "note": "",
+   "file": "derinternational11inte.txt",
+   "source_url": "https://archive.org/download/derinternational11inte/derinternational11inte_djvu.txt",
+   "sha256": "00066f39b3632df45958afb2e0880fe8aefb65edbc3edec3a16280ab1449eb2f",
+   "bytes": 545758,
+   "words": 76287,
+   "fetched_at": "2026-08-13T14:20:33",
+   "ia_date": "1922",
+   "ia_year": "1922",
+   "ia_publicdate": "2019-04-02 17:26:48",
+   "ia_creator": [
+    "International Jew",
+    "Ford, Henry"
+   ],
+   "ia_title": "Der internationale Jude",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1864",
+    "1905",
+    "1920",
+    "1921",
+    "1922"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "derinternational21inte",
+   "status": "已取回",
+   "note": "",
+   "file": "derinternational21inte.txt",
+   "source_url": "https://archive.org/download/derinternational21inte/derinternational21inte_djvu.txt",
+   "sha256": "0318eb58a63376ffabf0054d01a4a756233b96ab4b42ca787672af6cf1e09f64",
+   "bytes": 507469,
+   "words": 62556,
+   "fetched_at": "2026-08-13T14:20:35",
+   "ia_date": "1922",
+   "ia_year": "1922",
+   "ia_publicdate": "2019-04-02 17:26:49",
+   "ia_creator": [
+    "International Jew",
+    "Ford, Henry"
+   ],
+   "ia_title": "Der internationale Jude",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1902",
+    "1922"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "dli.ernet.527298",
+   "status": "已取回",
+   "note": "",
+   "file": "dli.ernet.527298.txt",
+   "source_url": "https://archive.org/download/dli.ernet.527298/527298-My Life & Work(1922)_djvu.txt",
+   "sha256": "bd94f127c5fb955e341a6e7ed7515ad5c65debe7fa996dde56590751eed14b6b",
+   "bytes": 618794,
+   "words": 95350,
+   "fetched_at": "2026-08-13T14:19:51",
+   "ia_date": "1922",
+   "ia_year": "",
+   "ia_publicdate": "2020-10-27 01:22:19",
+   "ia_creator": "Ford Henry",
+   "ia_title": "My Life and Work(1922)",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1914"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "dli.ministry.17618",
+   "status": "已取回",
+   "note": "",
+   "file": "dli.ministry.17618.txt",
+   "source_url": "https://archive.org/download/dli.ministry.17618/E02273_My_Philosophy_Industry_djvu.txt",
+   "sha256": "4449ff70d741581c6e1855ee2c32d3caef586c68451b99e33020f5aeb895a04d",
+   "bytes": 74577,
+   "words": 12903,
+   "fetched_at": "2026-08-13T14:20:03",
+   "ia_date": "1929",
+   "ia_year": "",
+   "ia_publicdate": "2021-03-06 12:25:25",
+   "ia_creator": "Ford, Henry",
+   "ia_title": "My Philosophy Industry",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1929"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "fordidealsbeing00fordgoog",
+   "status": "已取回",
+   "note": "",
+   "file": "fordidealsbeing00fordgoog.txt",
+   "source_url": "https://archive.org/download/fordidealsbeing00fordgoog/fordidealsbeing00fordgoog_djvu.txt",
+   "sha256": "6a3974727c42438b4bc6367cef2e1aadc845d8a35b86802a477cfbec6c453c51",
+   "bytes": 880710,
+   "words": 156738,
+   "fetched_at": "2026-08-13T14:20:14",
+   "ia_date": "1926",
+   "ia_year": "1922",
+   "ia_publicdate": "2008-09-07 09:07:29",
+   "ia_creator": "Ford, Henry, 1863-1947",
+   "ia_title": "Ford ideals",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1922"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "fordidealsbeings00fordiala",
+   "status": "已取回",
+   "note": "",
+   "file": "fordidealsbeings00fordiala.txt",
+   "source_url": "https://archive.org/download/fordidealsbeings00fordiala/fordidealsbeings00fordiala_djvu.txt",
+   "sha256": "3af317711420286c094d52e389814623de815a4583a9f65f6b1411ae48697065",
+   "bytes": 1016571,
+   "words": 156377,
+   "fetched_at": "2026-08-13T14:19:54",
+   "ia_date": "1922",
+   "ia_year": "",
+   "ia_publicdate": "2007-10-12 18:44:09",
+   "ia_creator": "Ford, Henry, 1863-1947",
+   "ia_title": "Ford ideals : being a selection from \"Mr. Ford's page\" in The Dearborn Independent",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1922"
+   ],
+   "digitization_years": [
+    "2007"
+   ]
+  },
+  {
+   "identifier": "henryfordletter00ford",
+   "status": "已取回",
+   "note": "",
+   "file": "henryfordletter00ford.txt",
+   "source_url": "https://archive.org/download/henryfordletter00ford/henryfordletter00ford_djvu.txt",
+   "sha256": "94e94b4f1b60e3dbabd496081b436c3c1567099a3f9736b3a59051940fc5fd69",
+   "bytes": 42,
+   "words": 7,
+   "fetched_at": "2026-08-13T14:19:51",
+   "ia_date": "1923",
+   "ia_year": "1923",
+   "ia_publicdate": "2024-09-24 20:46:41",
+   "ia_creator": "Ford, Henry, 1863-1947, author, correspondent",
+   "ia_title": "Henry Ford letter to Judge R.A. Parker, dated Dearborn, Mich., 14 July 1923",
+   "ia_licenseurl": "",
+   "titlepage_years": [],
+   "digitization_years": []
+  },
+  {
+   "identifier": "in.ernet.dli.2015.525241",
+   "status": "已取回",
+   "note": "",
+   "file": "in.ernet.dli.2015.525241.txt",
+   "source_url": "https://archive.org/download/in.ernet.dli.2015.525241/2015.525241.My-Life_djvu.txt",
+   "sha256": "bb80548640068f4ef552e7299e9846203fa8f6422b166e0293e2a206a3154147",
+   "bytes": 533164,
+   "words": 95504,
+   "fetched_at": "2026-08-13T14:20:22",
+   "ia_date": "1922",
+   "ia_year": "",
+   "ia_publicdate": "2017-01-19 14:42:40",
+   "ia_creator": "Ford Henry",
+   "ia_title": "My Life And Work(1922)",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1914"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "india.history.resource.92942",
+   "status": "已取回",
+   "note": "",
+   "file": "india.history.resource.92942.txt",
+   "source_url": "https://archive.org/download/india.history.resource.92942/92942_djvu.txt",
+   "sha256": "94ee441bc929263cd0065e4fa3ff8426c5065ab670f72733d66ab3530dd9445f",
+   "bytes": 530771,
+   "words": 93640,
+   "fetched_at": "2026-08-13T14:19:56",
+   "ia_date": "1928",
+   "ia_year": "",
+   "ia_publicdate": "2026-07-24 07:28:39",
+   "ia_creator": [
+    "Ford, Henry",
+    "Crowther, Samuel"
+   ],
+   "ia_title": "My Life and Work by Henry Ford",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1914",
+    "1922",
+    "1923",
+    "1924",
+    "1925",
+    "1926",
+    "1928",
+    "1931",
+    "1936",
+    "1937"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "meinlebenundwerk00forduoft",
+   "status": "已取回",
+   "note": "",
+   "file": "meinlebenundwerk00forduoft.txt",
+   "source_url": "https://archive.org/download/meinlebenundwerk00forduoft/meinlebenundwerk00forduoft_djvu.txt",
+   "sha256": "986b21be1d9c4164c151390e588ad897aac5ec7158c7aa83dd7f6422c3d91516",
+   "bytes": 723591,
+   "words": 93787,
+   "fetched_at": "2026-08-13T14:20:03",
+   "ia_date": "[Vorwort 1923]",
+   "ia_year": "",
+   "ia_publicdate": "2008-05-22 22:30:47",
+   "ia_creator": "Ford, Henry, 1863-1947",
+   "ia_title": "Mein Leben und Werk. Unter Mitwirkung von Samuel Crowther",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1909",
+    "1920",
+    "1928"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "mylifeandwork07213gut",
+   "status": "已取回",
+   "note": "",
+   "file": "mylifeandwork07213gut.txt",
+   "source_url": "https://archive.org/download/mylifeandwork07213gut/hnfrd10.txt",
+   "sha256": "3cd880b3e4911241fd955c33ceb368b99ee6c8e6e9da0e3b93cc6b3639c2bea0",
+   "bytes": 546387,
+   "words": 95680,
+   "fetched_at": "2026-08-13T14:20:01",
+   "ia_date": "",
+   "ia_year": "",
+   "ia_publicdate": "2016-04-29 22:04:57",
+   "ia_creator": "Ford, Henry, 1863-1947",
+   "ia_title": "My Life and Work",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1914",
+    "1971",
+    "2003"
+   ],
+   "digitization_years": [
+    "2005"
+   ]
+  },
+  {
+   "identifier": "mylifework0000unse",
+   "status": "已取回",
+   "note": "",
+   "file": "mylifework0000unse.txt",
+   "source_url": "https://archive.org/download/mylifework0000unse/mylifework0000unse_djvu.txt",
+   "sha256": "edb4e803843047b5ac406c942601b74f33129066a94b589243f6ba330c918a2f",
+   "bytes": 634261,
+   "words": 97701,
+   "fetched_at": "2026-08-13T14:20:11",
+   "ia_date": "1922",
+   "ia_year": "",
+   "ia_publicdate": "2019-06-08 10:03:56",
+   "ia_creator": "Ford, Henry, 1863-1947",
+   "ia_title": "My life and work",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1914",
+    "1922"
+   ],
+   "digitization_years": [
+    "2019"
+   ]
+  },
+  {
+   "identifier": "mylifework00ford",
+   "status": "已取回",
+   "note": "",
+   "file": "mylifework00ford.txt",
+   "source_url": "https://archive.org/download/mylifework00ford/mylifework00ford_djvu.txt",
+   "sha256": "bbff35e1436b82dd9104f2219f382adde6e0ea63282eb5b490e97388b75b42d8",
+   "bytes": 629980,
+   "words": 97378,
+   "fetched_at": "2026-08-13T14:20:27",
+   "ia_date": "1922",
+   "ia_year": "",
+   "ia_publicdate": "2010-01-13 19:09:22",
+   "ia_creator": "Ford, Henry, 1863-1947",
+   "ia_title": "My life and work",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1914",
+    "1922"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "mylifework00ford_0",
+   "status": "已取回",
+   "note": "",
+   "file": "mylifework00ford_0.txt",
+   "source_url": "https://archive.org/download/mylifework00ford_0/mylifework00ford_0_djvu.txt",
+   "sha256": "232035658d97da05960d5b485d940b14ee403d0403cee1cebc160c5bb52d1ae3",
+   "bytes": 548378,
+   "words": 96709,
+   "fetched_at": "2026-08-13T14:20:27",
+   "ia_date": "1922",
+   "ia_year": "",
+   "ia_publicdate": "2023-11-27 19:01:25",
+   "ia_creator": "Ford, Henry, 1863-1947",
+   "ia_title": "My life and work",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1863",
+    "1922",
+    "1947",
+    "1958"
+   ],
+   "digitization_years": [
+    "2023"
+   ]
+  },
+  {
+   "identifier": "mylifework01ford",
+   "status": "已取回",
+   "note": "",
+   "file": "mylifework01ford.txt",
+   "source_url": "https://archive.org/download/mylifework01ford/mylifework01ford_djvu.txt",
+   "sha256": "a37c5e55dcf97c7ae699cf333a45f5abf20b353ecc16be89cc8074326b8169fa",
+   "bytes": 630608,
+   "words": 97530,
+   "fetched_at": "2026-08-13T14:20:27",
+   "ia_date": "1922",
+   "ia_year": "",
+   "ia_publicdate": "2011-12-07 19:26:53",
+   "ia_creator": [
+    "Ford, Henry, 1863- [from old catalog]",
+    "Crowther, Samuel, 1880- [from old catalog]"
+   ],
+   "ia_title": "My life and work",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1872",
+    "1914",
+    "1922"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "todaytomorrow0000ford_t6y5",
+   "status": "已取回",
+   "note": "",
+   "file": "todaytomorrow0000ford_t6y5.txt",
+   "source_url": "https://archive.org/download/todaytomorrow0000ford_t6y5/todaytomorrow0000ford_t6y5_djvu.txt",
+   "sha256": "6a3141c4a42e2787154500fd0d0c8de1a7673377b49ed6891b79beb818724141",
+   "bytes": 522003,
+   "words": 90982,
+   "fetched_at": "2026-08-13T14:20:15",
+   "ia_date": "1926-01-01",
+   "ia_year": "",
+   "ia_publicdate": "2024-09-18 13:36:39",
+   "ia_creator": "Ford, Henry; Crowther, Samuel",
+   "ia_title": "Today and Tomorrow",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1863",
+    "1908",
+    "1917",
+    "1924",
+    "1926"
+   ],
+   "digitization_years": [
+    "2024"
+   ]
+  },
+  {
+   "identifier": "vitaopera_fordA",
+   "status": "已取回",
+   "note": "",
+   "file": "vitaopera_fordA.txt",
+   "source_url": "https://archive.org/download/vitaopera_fordA/vitaopera_fordA_djvu.txt",
+   "sha256": "b58a85dade3a6f142bdf9069c1547c40ee5185cc16a852a1232ed330385c0c4a",
+   "bytes": 631864,
+   "words": 100081,
+   "fetched_at": "2026-08-13T14:20:20",
+   "ia_date": "1925",
+   "ia_year": "1925",
+   "ia_publicdate": "2018-03-19 19:47:51",
+   "ia_creator": "Ford, Henry <1863-1947>",
+   "ia_title": "La mia vita e la mia opera ",
+   "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "titlepage_years": [
+    "1914"
+   ],
+   "digitization_years": []
+  }
+ ]
+}

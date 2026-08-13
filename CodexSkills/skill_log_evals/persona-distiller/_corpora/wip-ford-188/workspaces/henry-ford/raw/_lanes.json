@@ -1,0 +1,111 @@
+{
+  "lanes": 3,
+  "去掉纸面道后": 2,
+  "逐道份数": {
+    "writings": 8,
+    "conversations": 1,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 10,
+    "external": 0
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "365ofhenryfordss00ford",
+      "道": "writings",
+      "title": "365 of Henry Ford's sayings"
+    },
+    {
+      "identifier": "caseagainstlittl00ford",
+      "道": "writings",
+      "title": "The case against the little white slaver [microform], volumes I, II, I"
+    },
+    {
+      "identifier": "derinternational11inte",
+      "道": "writings",
+      "title": "Der internationale Jude"
+    },
+    {
+      "identifier": "derinternational21inte",
+      "道": "writings",
+      "title": "Der internationale Jude"
+    },
+    {
+      "identifier": "dli.ernet.527298",
+      "道": "timeline",
+      "title": "My Life and Work(1922)"
+    },
+    {
+      "identifier": "dli.ministry.17618",
+      "道": "writings",
+      "title": "My Philosophy Industry"
+    },
+    {
+      "identifier": "fordidealsbeing00fordgoog",
+      "道": "writings",
+      "title": "Ford ideals"
+    },
+    {
+      "identifier": "fordidealsbeings00fordiala",
+      "道": "writings",
+      "title": "Ford ideals : being a selection from \"Mr. Ford's page\" in The Dearborn"
+    },
+    {
+      "identifier": "henryfordletter00ford",
+      "道": "conversations",
+      "title": "Henry Ford letter to Judge R.A. Parker, dated Dearborn, Mich., 14 July"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.525241",
+      "道": "timeline",
+      "title": "My Life And Work(1922)"
+    },
+    {
+      "identifier": "india.history.resource.92942",
+      "道": "timeline",
+      "title": "My Life and Work by Henry Ford"
+    },
+    {
+      "identifier": "meinlebenundwerk00forduoft",
+      "道": "timeline",
+      "title": "Mein Leben und Werk. Unter Mitwirkung von Samuel Crowther"
+    },
+    {
+      "identifier": "mylifeandwork07213gut",
+      "道": "timeline",
+      "title": "My Life and Work"
+    },
+    {
+      "identifier": "mylifework0000unse",
+      "道": "timeline",
+      "title": "My life and work"
+    },
+    {
+      "identifier": "mylifework00ford",
+      "道": "timeline",
+      "title": "My life and work"
+    },
+    {
+      "identifier": "mylifework00ford_0",
+      "道": "timeline",
+      "title": "My life and work"
+    },
+    {
+      "identifier": "mylifework01ford",
+      "道": "timeline",
+      "title": "My life and work"
+    },
+    {
+      "identifier": "todaytomorrow0000ford_t6y5",
+      "道": "writings",
+      "title": "Today and Tomorrow"
+    },
+    {
+      "identifier": "vitaopera_fordA",
+      "道": "timeline",
+      "title": "La mia vita e la mia opera "
+    }
+  ]
+}

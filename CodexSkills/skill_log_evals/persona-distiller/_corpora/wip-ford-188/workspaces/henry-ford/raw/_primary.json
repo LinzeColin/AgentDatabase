@@ -1,0 +1,165 @@
+{
+  "总数": 19,
+  "计数": {
+    "一手": 17,
+    "二手": 0,
+    "需人判": 2
+  },
+  "一手占比下界": 0.8947,
+  "一手占比上界": 1.0,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "365ofhenryfordss00ford",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "365 of Henry Ford's sayings",
+      "creator": "Ford, Henry, 1863-1947",
+      "words": 14410
+    },
+    {
+      "identifier": "caseagainstlittl00ford",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The case against the little white slaver [microform], volumes I, II, III and IV",
+      "creator": "Ford, Henry, 1863-1947",
+      "words": 25279
+    },
+    {
+      "identifier": "derinternational11inte",
+      "档": "需人判",
+      "依据": "creator 第 2 位；无自著标记",
+      "title": "Der internationale Jude",
+      "creator": "International Jew; Ford, Henry",
+      "words": 76287
+    },
+    {
+      "identifier": "derinternational21inte",
+      "档": "需人判",
+      "依据": "creator 第 2 位；无自著标记",
+      "title": "Der internationale Jude",
+      "creator": "International Jew; Ford, Henry",
+      "words": 62556
+    },
+    {
+      "identifier": "dli.ernet.527298",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "My Life and Work(1922)",
+      "creator": "Ford Henry",
+      "words": 95350
+    },
+    {
+      "identifier": "dli.ministry.17618",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "My Philosophy Industry",
+      "creator": "Ford, Henry",
+      "words": 12903
+    },
+    {
+      "identifier": "fordidealsbeing00fordgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Ford ideals",
+      "creator": "Ford, Henry, 1863-1947",
+      "words": 156738
+    },
+    {
+      "identifier": "fordidealsbeings00fordiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Ford ideals : being a selection from \"Mr. Ford's page\" in The Dearborn Independe",
+      "creator": "Ford, Henry, 1863-1947",
+      "words": 156377
+    },
+    {
+      "identifier": "henryfordletter00ford",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Henry Ford letter to Judge R.A. Parker, dated Dearborn, Mich., 14 July 1923",
+      "creator": "Ford, Henry, 1863-1947, author, correspondent",
+      "words": 7
+    },
+    {
+      "identifier": "in.ernet.dli.2015.525241",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "My Life And Work(1922)",
+      "creator": "Ford Henry",
+      "words": 95504
+    },
+    {
+      "identifier": "india.history.resource.92942",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "My Life and Work by Henry Ford",
+      "creator": "Ford, Henry; Crowther, Samuel",
+      "words": 93640
+    },
+    {
+      "identifier": "meinlebenundwerk00forduoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Mein Leben und Werk. Unter Mitwirkung von Samuel Crowther",
+      "creator": "Ford, Henry, 1863-1947",
+      "words": 93787
+    },
+    {
+      "identifier": "mylifeandwork07213gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "My Life and Work",
+      "creator": "Ford, Henry, 1863-1947",
+      "words": 95680
+    },
+    {
+      "identifier": "mylifework0000unse",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "My life and work",
+      "creator": "Ford, Henry, 1863-1947",
+      "words": 97701
+    },
+    {
+      "identifier": "mylifework00ford",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "My life and work",
+      "creator": "Ford, Henry, 1863-1947",
+      "words": 97378
+    },
+    {
+      "identifier": "mylifework00ford_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "My life and work",
+      "creator": "Ford, Henry, 1863-1947",
+      "words": 96709
+    },
+    {
+      "identifier": "mylifework01ford",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "My life and work",
+      "creator": "Ford, Henry, 1863- [from old catalog]; Crowther, Samuel, 1880- [from old catalog",
+      "words": 97530
+    },
+    {
+      "identifier": "todaytomorrow0000ford_t6y5",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Today and Tomorrow",
+      "creator": "Ford, Henry; Crowther, Samuel",
+      "words": 90982
+    },
+    {
+      "identifier": "vitaopera_fordA",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "La mia vita e la mia opera ",
+      "creator": "Ford, Henry <1863-1947>",
+      "words": 100081
+    }
+  ]
+}

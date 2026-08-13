@@ -125,8 +125,14 @@ EXCLUDE = {
              "Worthington Chauncey", "Henry A., comp", "Kate B.",
              "Ford, Henry Neville",
              "Henry Justice", "1860-1941", "1860–1941",
-             "fairy book", "saints and heroes", "golden mermaid",
-             "putnam and marshall", "hamilton county"],
+             # ★ 题名词**不能写在这里**：本表只比 creator。
+             #   我第一版把 `saints and heroes` 一类写了进来，于是童话集照样被抓
+             #   —— 已挪到 EXCLUDE_TITLE。**两张表比的字段不同，别放错。**
+             "Henry Clinton", "1867-1936",
+             # ★ 第三轮才现出的写法：`Ford, Henry A. [from old catalog]`
+             #   （《Michigan》1891）——我原来只写了 `Henry A., comp`。
+             #   **枚举永远不全**，这正是 check_impossible_by_lifespan 存在的理由。
+             "Ford, Henry A"],
     # ★★★ Plato #186：**四类同名，全在抓源前实测过**（池 2617 条）。
     #   ① `PLATO Learning, Inc.`（1990s–2000s 教学软件公司，前身是 PLATO 计算机教学系统）32 条
     #      —— Foshay／Hannafin／Quinn／Sherman 的 "PLATO Evaluation Series"、"PLATO Courseware"。
@@ -159,6 +165,12 @@ EXCLUDE = {
 # [[test-the-guard-against-this-persons-namesake]]：**护栏要拿这个人物的同名者重测一遍。**
 # ★ 只排他侄孙**自己写的**那几部；侄孙 1623 年**编**的伯祖父《Rime》不在此列（那是雕刻家的诗）。
 EXCLUDE_TITLE = {
+    # ★ Ford #188：这些是**题名**词，属于另外四个同名者（插画家／编县志的／语文学家）。
+    #   逐条实测：`bookofsaintshe00lang` 的 creator 是 `Lang, Mrs; Lang, Andrew; Fo…`，
+    #   creator 那一侧根本比不着，**只能按题名排**。
+    "ford": ["saints and heroes", "golden mermaid", "fairy book",
+             "putnam and marshall", "hamilton county", "poems of history",
+             "language of chaucer", "dance manual"],
     "michelangelo": [
         "La Tancia", "La Fiera", "Il Giulè", "La Dote",
         "Il giudizio di Paride", "Frottole della peste",
@@ -282,7 +294,13 @@ def main() -> int:
         m = YEAR_RE.match(r.get("year", "") or "")
         if m and int(m.group(1)) > a.pd_cutoff:
             drop["版次年>%d" % a.pd_cutoff].append(ident); continue
-        if any(x in cre for x in EXCLUDE[a.person]):
+        # ★★★ 2026-08-13 改成**大小写不敏感**。原来是原样比串，
+        #   而 IA 的 creator 字段大小写乱七八糟：`Ford,henry Jones`、
+        #   `Washington, George) Ford, Henry jones` —— 我写的排除词是 `Henry Jones`，
+        #   **三条 Henry Jones Ford 的书就这么被抓了回来**（fetch 之后逐条核才看见）。
+        #   全库前后实测：只多丢 **4 条**（Ford 3、Plato 1），且都是真该丢的。
+        cre_l = cre.lower()
+        if any(x.lower() in cre_l for x in EXCLUDE[a.person]):
             drop["同名者"].append(ident); continue
         ti_raw = r.get("title", "") or ""
         if any(x.lower() in ti_raw.lower() for x in EXCLUDE_TITLE.get(a.person, [])):

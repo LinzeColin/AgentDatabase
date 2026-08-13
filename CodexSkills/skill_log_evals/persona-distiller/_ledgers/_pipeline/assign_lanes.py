@@ -112,8 +112,19 @@ PATTERNS = [
                    r"orazioni|poem|poesie|songs|lieder|"
                    r"predigt|vortrag|commedie|comed"),
     # ★ 按存量实测放宽：年表类**可以是第三方**（校史、传记辞典条目、讣告）
+    # ★★★ 2026-08-13 语种对称：自传词表**只有德语**，于是**同一部书按译本分道**。
+    #   Ford #188 实测：《My Life and Work》的
+    #     英文原本   → writings（`my life` 不在表里）
+    #     德译本     → timeline（`mein leben` 在表里）
+    #     意译本     → writings（`la mia vita` 不在表里）
+    #   **一部书的道不该取决于你手上是哪个译本。** 道的定义里写着 timeline 含「自传」，
+    #   所以补齐英/意/法/西，而不是把德语那条删掉。
+    #   全库前后实测：**只有 Ford 一人受影响**（道数不变，逐道从 18/1/1 变成 9/10/1
+    #   —— 反而消掉了两条只有 1 份的纸面道）。
     ("timeline", r"autobiograph|selbstbiograph|diary|journal intime|tagebuch|"
-                 r"lebensbild|lebensschick|meine? leben|erinnerungen|reminiscence|"
+                 r"lebensbild|lebensschick|meine? leben|"
+                 r"my life(?: and| in|,|$)|la mia vita|ma vie|mi vida|"
+                 r"erinnerungen|reminiscence|"
                  r"memoir|confession|vita propria|chronik|chronicle|chronolog|"
                  r"obituary|nachruf|in memoriam|annals|annalen|jahrbuch|"
                  r"biographical dictionary|dictionary of national|allgemeine deutsche bio"),
@@ -244,10 +255,30 @@ def main() -> int:
         print(f"  {l:<15}{n:>4}{mark}")
     print(f"  {'未分道':<15}{unassigned:>4}"
           + ("  ← **这些没有被塞进任何一道**（不许默认成 writings）" if unassigned else ""))
+    # ★★★ 2026-08-13 Ford #188：**一道只有 1 份，而那 1 份的文本层是空的。**
+    #   他的 `conversations` 道全部支撑是《Henry Ford letter to Judge R.A. Parker, 1923》
+    #   —— 手写信的扫描件，OCR 只出了 **7 个词、42 字节**
+    #   （全文：`Yea born, Mick af GPS Conry Jord`）。
+    #   本工具原来只数文件个数，**不问那份文件里有没有字**，于是把它算成一条道。
+    #   `check_paper_lanes.py` 抓的是另一种（一条源同时挂多道），够不到这一种。
+    #   ⇒ 单份道逐份量词数；少于 EMPTY_WORDS 就明说**文本层空壳**。
+    EMPTY_WORDS = 100
+    empty = []
+    for l in thin:
+        ident = next((r["identifier"] for r in detail if r["道"] == l), None)
+        f = raw / f"{ident}.txt" if ident else None
+        if f and f.exists():
+            n_w = len(re.findall(r"[A-Za-zÀ-ɏ\u0370-\u03ff]+", f.read_text(encoding="utf-8", errors="replace")))
+            if n_w < EMPTY_WORDS:
+                empty.append((l, ident, n_w))
+
     print(f"\n**lanes = {len(filled)}**（quick 要 3、standard/deep 要 6）")
     if thin:
         print(f"★ 其中 {len(thin)} 道只有 1 份：{'、'.join(thin)}"
               f" —— 去掉纸面道就只剩 **{len(filled) - len(thin)}** 道")
+    for l, ident, n_w in empty:
+        print(f"★★ **`{l}` 那唯一一份的文本层是空的**：{ident} 只有 **{n_w} 个词**"
+              f"（下限 {EMPTY_WORDS}）—— 数得出一条道，**一个字都用不了**。")
 
     (raw / "_lanes.json").write_text(json.dumps(
         {"lanes": len(filled), "去掉纸面道后": len(filled) - len(thin),
@@ -328,6 +359,20 @@ def selftest() -> int:
         print("  %s %-62s %s%s" % ("✅" if ok else "❌ 仍误配", ti[:62], why,
                                    "" if ok else "  ← 实判 %s" % got))
     # ===== 第二组：decisions 不许吃画名（Michelangelo #185）=====
+    # ===== 第四组：语种对称（Ford #188，同一部自传的四个版本必须同道）=====
+    SYM = [("My life and work", "英文原本"),
+           ("Mein Leben und Werk. Unter Mitwirkung von Samuel Crowther", "德译本"),
+           ("La mia vita e la mia opera", "意译本"),
+           ("My Life and Work by Henry Ford", "英文另一印本")]
+    got = {ti: _judge(ti) for ti, _ in SYM}
+    same = len(set(got.values())) == 1
+    bad += 0 if same else 1
+    print("\n语种对称：同一部自传的四个版本必须落在**同一条道**")
+    for ti, note in SYM:
+        print(f"  {'✅' if same else '❌'} {note:<10} → {got[ti]:<12} {ti[:44]}")
+    if not same:
+        print(f"      ← 实得 {sorted(set(got.values()))}，**一部书的道不该取决于哪个译本**")
+
     # ===== 第三组：子串误配（Aristotle #187 探源池，逐字）=====
     SUB_NEG = [
         ("De natura partus octomestris adversus vulgatam opinionem libri decem",
