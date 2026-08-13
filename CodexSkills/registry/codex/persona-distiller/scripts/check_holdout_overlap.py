@@ -182,6 +182,41 @@ def runs(hold_words: list, train_words: list, n: int = N, cap: int = 64) -> list
 
 BOILER_RUN_FRAC = 0.5
 
+# ★★★ 2026-08-13 Dewey #190：**df 判样板在「只有两三份带它」时失效。**
+#   JSTOR 的开卷声明（"Early Journal Content on JSTOR, Free to Anyone in the World"）
+#   出现在全库 **148 份**语料的开头、跨 13 个工作区；但 Dewey 的 train 里只有 2 份带它，
+#   df=2 太低 ⇒ 判成「内容重合」，报出 194 词的假重合。
+#   ⇒ 补一层**字面识别**：数字化供方的固定声明，不管 df 多少一律算样板。
+#   ★ 这是往**开脱侧**放松（[[loosen-only-the-exonerating-side]]），所以加一道约束：
+#     声明本身必须**占到这一段的 BOILER_RUN_FRAC 以上**，
+#     否则一段真内容里夹一句声明就会被整段放过。
+PROVIDER_NOTICE = re.compile(
+    r"early journal content on jstor"                      # JSTOR
+    # ★ 连续段可能**从声明中间切起**（Dewey 实测两处 85 词就是这样），
+    #   所以同一份声明的中段短语也要各写一条，不能只认开头那句。
+    r"|known as the early journal content"
+    r"|scholarly works digitized and made freely available"
+    r"|jstor is a (?:digital library|not-for-profit)"        # JSTOR 机构简介（页脚那段）
+    r"|this book is a digital copy of a work"              # Google 图书
+    r"|digitized by (?:google|the internet archive)"
+    r"|about google book search"
+    r"|the project gutenberg (?:etext|ebook)"              # Project Gutenberg
+    r"|produced by the online distributed proofreading"
+    r"|this work is in the public domain in the united states",
+    re.I)
+
+
+def _provider_notice_share(text: str) -> float:
+    """→ 供方声明在这段文字里占的字符比例（0..1）。**只认整段被声明淹没的情形。**"""
+    if not text:
+        return 0.0
+    hit = sum(m.end() - m.start() for m in PROVIDER_NOTICE.finditer(text))
+    if not hit:
+        return 0.0
+    # 声明是**整块**出现的：一旦命中，把命中点前后各 600 字符算进去更贴近实际，
+    # 但**上限就是这一段本身**——不许算出 >1。
+    return min(1.0, (hit + 600 * len(PROVIDER_NOTICE.findall(text))) / len(text))
+
 
 def _is_boiler_run(train_words: list, run, boiler: set, n: int = N) -> bool:
     """这一段连续文字是**样板**还是**内容**？
@@ -209,6 +244,10 @@ def _is_boiler_run(train_words: list, run, boiler: set, n: int = N) -> bool:
     上表里 496／82／66 三段全被放过。改成**按比例**：
     整段的 n 元组里有 ≥`BOILER_RUN_FRAC` 落在样板集里，判为样板。
     """
+    seg = " ".join(train_words[run[1]:run[1] + run[0]])
+    # ★ 先看字面：命中已知供方声明且声明占了这一段的多数 ⇒ 样板（不依赖 df）
+    if _provider_notice_share(seg) >= BOILER_RUN_FRAC:
+        return True
     grams = [" ".join(train_words[run[1] + k:run[1] + k + n])
              for k in range(0, run[0] - n + 1)]
     if not grams:
@@ -411,6 +450,39 @@ def self_test() -> int:
     #     我第一版把这条的预期写成「判为样板」，红的是预期不是实现。
     chk("⑥c 样板占少数 → 不许判成样板",
         _is_boiler_run(long_boiler[:24] + para, (24 + len(para), 0, 0), boiler_set), False)
+
+    # ── ★★ 供方声明：df 太低时字面识别必须顶上（2026-08-13 Dewey #190 真例）──
+    #   那段逐字取自 raw/…/Knowledge and Speech Reaction 的开头，
+    #   全库 148 份语料带它，而 Dewey 的 train 里只有 2 份 ⇒ df=2，df 法判不出来。
+    jstor = ("stop early journal content on jstor free to anyone in the world this "
+             "article is one of nearly 500000 scholarly works digitized and made "
+             "freely available to everyone in the world by jstor known as the early "
+             "journal content this set of works include research articles news "
+             "letters and other writings published in more than 200 of the oldest "
+             "leading academic journals").split()
+    chk("★ JSTOR 开卷声明必须判成样板——**即使 df 只有 2**（df 法在这里失效）",
+        _is_boiler_run(jstor, (len(jstor), 0, 0), set()), True)
+    chk("★ 反向：真内容不许因为「没命中声明」以外的理由被放过",
+        _is_boiler_run(para, (len(para), 0, 0), set()), False)
+    # ★ 开脱侧放松要有约束：一段真内容里**夹一句**声明，不许整段被放过
+    mixed = jstor[:12] + para * 3
+    chk("★★ 真内容里夹一句声明：**不许**整段判成样板（声明占比不到一半）",
+        _is_boiler_run(mixed, (len(mixed), 0, 0), set()), False)
+    mid = ("known as the early journal content this set of works include research "
+           "articles news letters and other writings published in more than 200 of "
+           "the oldest leading academic journals the content covers a range of "
+           "areas including business history political science").split()
+    chk("★ 从声明**中间**切起的段（Dewey 实测 85 词那两处）也必须判成样板",
+        _is_boiler_run(mid, (len(mid), 0, 0), set()), True)
+    foot = ("individuals early journal content jstor is a digital library of academic "
+            "journals books and primary source objects jstor helps people discover use "
+            "and build upon a wide range of content through a powerful research and "
+            "teaching platform and preserves this content for future generations").split()
+    chk("★ JSTOR **页脚机构简介**（Dewey 剩下那处 72 词）也必须判成样板",
+        _is_boiler_run(foot, (len(foot), 0, 0), set()), True)
+    chk("Google 图书扫描声明同样认得",
+        _is_boiler_run("this book is a digital copy of a work that has been preserved".split(),
+                       (11, 0, 0), set()), True)
 
     # ══════════════════════════════════════════════════════════════════════
     # ⑦ ★★★ `check()` 本身 —— **在 2026-08-12 之前，这个函数从没被自测进入过**
