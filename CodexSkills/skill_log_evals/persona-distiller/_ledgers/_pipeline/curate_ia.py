@@ -121,6 +121,14 @@ EXCLUDE = {
     #     《The book of saints and heroes》(1912)，同样在公有领域、年代重叠。
     #     以及编县志那位的另一种写法（《The history of Putnam and Marshall counties》1860）。
     #   ⇒ 这个姓名下**至少五个人**。[[namesakes-whose-works-are-also-public-domain]]
+    # ★★★ Churchill #189：同名同姓、年代重叠、同样在公有领域的**另一个人**——
+    #   美国小说家 Winston Churchill（1871–1947），《Richard Carvel》《Coniston》
+    #   《The Inside of the Cup》《A Far Country》的作者。
+    #   实测：PD 内 96 条里**他占 59 条（61.5%）**，英国首相只有 19 条（19.8%）。
+    #   ★ 分辨依据是**中间名**：小说家署 `Winston Churchill`，
+    #     政治家署 `Winston S. Churchill` / `Winston Spencer Churchill`。
+    #     但 EXCLUDE 只能排、不能挑，所以这里排生卒年，中间名那一侧交给 REQUIRE。
+    "churchill": ["1871-1947", "1871–1947"],
     "ford": ["Henry Jones", "Ford, Henry J.", "1851-1925", "1851–1925",
              "Worthington Chauncey", "Henry A., comp", "Kate B.",
              "Ford, Henry Neville",
@@ -165,6 +173,38 @@ EXCLUDE = {
 # [[test-the-guard-against-this-persons-namesake]]：**护栏要拿这个人物的同名者重测一遍。**
 # ★ 只排他侄孙**自己写的**那几部；侄孙 1623 年**编**的伯祖父《Rime》不在此列（那是雕刻家的诗）。
 EXCLUDE_TITLE = {
+    # ★★★ Churchill #189：**编目年份错到跨越 PD 分界**。
+    #   四条标着 **1922** 的条目，实为《A History of the English-Speaking Peoples》四卷
+    #   ——该书 **1956–58 年出版**，距 PD 分界（≤1930）二十六年以上：
+    #     dli.bengal.10689.12836   A HISTORY OF THE ENGLISH SPEAKING PEOPLES
+    #     in.ernet.dli.2015.99540  The Birth Of Britain Vol. 1
+    #     in.ernet.dli.2015.99964  The New World Vol. 2
+    #     dli.bengal.10689.12391   THE GREAT DEMOCRACIES VOL.4
+    #   ★ 四条**全部来自同一个馆**（印度数字图书馆 dli.*）——是可归因的模式，不是随机噪声。
+    #   ⇒ 按题名拦，**不靠年份**：年份正是坏掉的那个字段。
+    # ★★★ 第二层：**IA 的 creator 字段本身是错的**。
+    #   `Churchill, Winston, Sir, 1874-1965`（首相的生卒年 ＋ Sir）挂在**小说家的书**上：
+    #   《Coniston》《A far country》《The crossing》《The inside of the cup》
+    #   《The dwelling-place of light》《A traveller in war-time》。
+    #   ⇒ **生卒年不是可靠的分辨依据**（[[catalog-says-one-person-bytes-are-another]]）。
+    #   只能按**题名**排：下面这批是美国小说家 Winston Churchill(1871–1947) 的作品。
+    #   ★ `The Crisis`(1901) 是小说家的，而 `The World Crisis` 是首相的一战回忆录——
+    #     **不能只写 `crisis`**，要写全。我自己审计时就用 `crisis` 误判过那 4 条。
+    "churchill": ["richard carvel", "the crossing", "coniston",
+                  "inside of the cup", "a far country", "dwelling-place of light",
+                  "dwelling place of light", "mr. crewe", "modern chronicle",
+                  "traveller in war-time", "traveller in war time",
+                  "the celebrity", "the title mart", "dr. jonathan",
+                  # ★ 1930 年后的作品，**编目年份靠不住时按题名拦**：
+                  #   《Great Contemporaries》1937（探源池里那条**根本没有年份**）
+                  "great contemporaries", "step by step", "into battle",
+                  "the unrelenting struggle", "the end of the beginning",
+                  "onwards to victory", "the dawn of liberation", "victory",
+                  "english speaking peoples", "english-speaking peoples",
+                  "birth of britain", "the new world vol", "great democracies",
+                  "age of revolution", "second world war", "marlborough",
+                  "triumph and tragedy", "hinge of fate", "gathering storm",
+                  "grand alliance", "their finest hour", "closing the ring"],
     # ★ Ford #188：这些是**题名**词，属于另外四个同名者（插画家／编县志的／语文学家）。
     #   逐条实测：`bookofsaintshe00lang` 的 creator 是 `Lang, Mrs; Lang, Andrew; Fo…`，
     #   creator 那一侧根本比不着，**只能按题名排**。
@@ -207,6 +247,10 @@ REQUIRE = {
     #   靠 EXCLUDE 的 `Wehle` 挡。**REQUIRE 与 EXCLUDE 要一起看，单看一侧会以为漏了。**
     # ★ 只加 EXCLUDE 不够：工业家有 2 条 creator 只写 `Ford, Henry`（无生卒年），
     #   靠 REQUIRE 把「必须同时出现的词」钉住。**两侧要一起看**，单看一侧会以为漏了。
+    # ★ 政治家的署名一定带中间名首字母或全名，小说家一定不带。
+    #   两侧要一起看：EXCLUDE 排掉标了生卒年的小说家，REQUIRE 钉住带中间名的那一批。
+    "churchill": [["churchill", "winston s"], ["churchill", "winston spencer"],
+                  ["churchill", "1874-1965"], ["churchill", "1874–1965"]],
     "ford": [["ford", "henry"]],
     "brandeis": [["brandeis", "louis"]],
     # ★ Plato 的著录有多种拼法：`Plato`／`PLATO`／`Plato, 427? BC-347? BC`／`Plato, Curt. Red.`，
