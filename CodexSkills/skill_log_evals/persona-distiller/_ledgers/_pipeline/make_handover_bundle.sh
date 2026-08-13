@@ -116,18 +116,25 @@ if chk.returncode!=0:
 # ★★ 盲判用例要**正面数出来**，不能只在出错时才打印——沉默不等于通过。
 #    ★ 期望值**不写死题数**：写死过一次（16/16/17/16），quick 四人补题到 32 之后
 #      它当场变红，而产物其实是对的。改成**按档位判下限 + 类数必须 16**，总数只打印。
+# ★★ 2026-08-13：用例清单也改成**从包里现扫**（与上面工作区清单同一个毛病）。
+#   原来写死第 1 批那 8 个 slug；当天新做的 Michelangelo #185 有 32 题，
+#   **一条都没被验到，而自验证照样打印「回读自验证通过」**。
 DEEP={"abraham-lincoln","thomas-jefferson","otto-von-bismarck","johann-pestalozzi"}
-QUICK={"niccolo-machiavelli","jean-jacques-rousseau","immanuel-kant","friedrich-frobel"}
-tot=0
-for slug in sorted(DEEP|QUICK):
-    lo = 32 if slug in DEEP else 16
-    f=next(iter(C.glob("wip-*/workspaces/%s/evals/cases.jsonl"%slug)),None)
-    rows=[json.loads(l) for l in f.read_text(encoding="utf-8").splitlines() if l.strip()] if f else []
+tot=0; nfile=0
+CASES=sorted(C.glob("wip-*/workspaces/*/evals/cases.jsonl"))
+print("\n扫到 %d 份 evals/cases.jsonl（**现扫，不是写死的 8 个**）"%len(CASES))
+for f in CASES:
+    slug=f.parts[-3]
+    lo = 32 if slug in DEEP else 16          # deep 档下限 32，其余 16
+    rows=[json.loads(l) for l in f.read_text(encoding="utf-8").splitlines() if l.strip()]
     su=len({r["suite"] for r in rows})
     good = len(rows)>=lo and su==16
-    ok &= good; tot+=len(rows)
-    print(("✅" if good else "❌")+" %-22s %2d 题 / %2d 类（下限 %d / 16 类）"%(slug,len(rows),su,lo))
-print(("✅" if tot>=8*16 else "❌")+" 盲判用例合计 **%d** 题（下限 128）"%tot); ok &= tot>=8*16
+    ok &= good; tot+=len(rows); nfile+=1
+    print(("✅" if good else "❌")+" %-24s %2d 题 / %2d 类（下限 %d / 16 类）"%(slug,len(rows),su,lo))
+if nfile<8:
+    print("❌ 只扫到 %d 份用例，少于第 1 批的 8 份 —— 包可能不全"%nfile); ok=False
+print(("✅" if tot>=nfile*16 else "❌")+" 盲判用例合计 **%d** 题（%d 份 × 下限 16 = %d）"
+      %(tot,nfile,nfile*16)); ok &= tot>=nfile*16
 
 h=(R/"HANDOFF.md").read_text(encoding="utf-8")
 for k in ["16 类，不是 7 类","evals/cases.jsonl"]:
