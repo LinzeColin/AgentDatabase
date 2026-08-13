@@ -1,0 +1,1038 @@
+{
+  "生成时刻": "2026-08-13T11:31:58",
+  "请求数": 40,
+  "已取回": 38,
+  "skipped_access_restricted": 0,
+  "失败": 2,
+  "并发降级": "无（全程并发 4）",
+  "总词数": 7177766,
+  "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
+  "记录": [
+    {
+      "identifier": "09248238.1478.emory.edu",
+      "status": "已取回",
+      "note": "",
+      "file": "09248238.1478.emory.edu.txt",
+      "source_url": "https://archive.org/download/09248238.1478.emory.edu/09248238_1478_djvu.txt",
+      "sha256": "de9728a7a035e8e931dafe70a8994fbb8e411229c0416ae8ef8e5d1fd3c9048c",
+      "bytes": 8029472,
+      "words": 732678,
+      "fetched_at": "2026-08-13T11:30:47",
+      "ia_date": "1881",
+      "ia_year": "",
+      "ia_publicdate": "2014-09-28 00:24:02",
+      "ia_creator": [
+        "Plato",
+        "Stallbaum, Gottfried, 1793-1861"
+      ],
+      "ia_title": "Platonis opera omnia : uno volumine comprehensa ad fidem optimorum librorum denuo recognovit et una cum scholiis Graecis",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1820",
+        "1881"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "30081007092699",
+      "status": "已取回",
+      "note": "",
+      "file": "30081007092699.txt",
+      "source_url": "https://archive.org/download/30081007092699/00000001.txt",
+      "sha256": "de233dd4309dbe08bfbf47736b61afcc0fcad8a58e56f99804604b14d7326d3c",
+      "bytes": 6,
+      "words": 2,
+      "fetched_at": "2026-08-13T11:30:42",
+      "ia_date": "1900",
+      "ia_year": "",
+      "ia_publicdate": "2026-07-05 19:25:40",
+      "ia_creator": "Plato",
+      "ia_title": "Platonis opera",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "30081007092707",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "30081007094463",
+      "status": "已取回",
+      "note": "",
+      "file": "30081007094463.txt",
+      "source_url": "https://archive.org/download/30081007094463/30081007094463_djvu.txt",
+      "sha256": "469eb58f3e2db817c085f332b3072c9e8f0244102a5429da5caa27f91310e87a",
+      "bytes": 2365480,
+      "words": 250750,
+      "fetched_at": "2026-08-13T11:31:07",
+      "ia_date": "1900",
+      "ia_year": "",
+      "ia_publicdate": "2026-07-07 21:27:33",
+      "ia_creator": "Plato",
+      "ia_title": "Platonis opera",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1551",
+        "1807",
+        "1903",
+        "1928",
+        "1937",
+        "1950",
+        "1952"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "30081007094471",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "ApologiaDiSocrate1885",
+      "status": "已取回",
+      "note": "",
+      "file": "ApologiaDiSocrate1885.txt",
+      "source_url": "https://archive.org/download/ApologiaDiSocrate1885/Apologia_di_Socrate_1885_djvu.txt",
+      "sha256": "385062cf165bf3f3a5357811bad511d096371191b7701d5340eb8373a8243ce9",
+      "bytes": 435303,
+      "words": 56661,
+      "fetched_at": "2026-08-13T11:31:27",
+      "ia_date": "1885",
+      "ia_year": "",
+      "ia_publicdate": "2015-11-08 21:20:03",
+      "ia_creator": "Plato",
+      "ia_title": "L' apologia di Socrate, dichiarata da Eugenio Ferrai",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1872",
+        "1884",
+        "1885",
+        "1894"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CratiloPlatoneBonghi",
+      "status": "已取回",
+      "note": "",
+      "file": "CratiloPlatoneBonghi.txt",
+      "source_url": "https://archive.org/download/CratiloPlatoneBonghi/CratiloPlatoneBonghi_djvu.txt",
+      "sha256": "3e510958447a4045e0599efe5c5e21fa3150da7ca2974b55a210be5645fd5d77",
+      "bytes": 686544,
+      "words": 108428,
+      "fetched_at": "2026-08-13T11:30:48",
+      "ia_date": "1885",
+      "ia_year": "1885",
+      "ia_publicdate": "2017-06-17 12:56:36",
+      "ia_creator": "Plato",
+      "ia_title": "Cratilo",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1880",
+        "1885"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "FileboPlatoneBonghi",
+      "status": "已取回",
+      "note": "",
+      "file": "FileboPlatoneBonghi.txt",
+      "source_url": "https://archive.org/download/FileboPlatoneBonghi/FileboPlatoneBonghi_djvu.txt",
+      "sha256": "1ced813e69ea2c7dcc4a5eee3115778422c84fd0eb7529f62fabfe320d0be25b",
+      "bytes": 934445,
+      "words": 148162,
+      "fetched_at": "2026-08-13T11:30:56",
+      "ia_date": "1895",
+      "ia_year": "1895",
+      "ia_publicdate": "2017-06-17 11:42:06",
+      "ia_creator": "Plato",
+      "ia_title": "Filebo",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1878",
+        "1895"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "GorgiasOfPlato",
+      "status": "已取回",
+      "note": "",
+      "file": "GorgiasOfPlato.txt",
+      "source_url": "https://archive.org/download/GorgiasOfPlato/GorgiasOfPlato_djvu.txt",
+      "sha256": "b69aa64a5946fde0240cfd369b641d24b2529bc780c1c140d12a37766e2a6d5a",
+      "bytes": 928943,
+      "words": 119426,
+      "fetched_at": "2026-08-13T11:30:58",
+      "ia_date": "1871",
+      "ia_year": "",
+      "ia_publicdate": "2014-02-19 20:00:40",
+      "ia_creator": "Plato",
+      "ia_title": "Gorgias Of Plato: With English Notes, Introduction, and Appendix by W.H. Thompson",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1859",
+        "1870",
+        "1871"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "PhaedoOfPlato",
+      "status": "已取回",
+      "note": "",
+      "file": "PhaedoOfPlato.txt",
+      "source_url": "https://archive.org/download/PhaedoOfPlato/PhaedoPlato_Archer_228pgs51320376_djvu.txt",
+      "sha256": "8c1ba2a49aea2508595b2cd72e559e81bbe175bcae1e35b6442a637aeacfcfd1",
+      "bytes": 1115198,
+      "words": 112822,
+      "fetched_at": "2026-08-13T11:31:06",
+      "ia_date": "1894",
+      "ia_year": "1894",
+      "ia_publicdate": "2012-11-14 01:00:36",
+      "ia_creator": "Plato",
+      "ia_title": "Phaedo of Plato",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "titlepage_years": [
+        "1558",
+        "1655",
+        "1668",
+        "1685",
+        "1701",
+        "1707",
+        "1815",
+        "1868",
+        "1888",
+        "1894"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "PlatoneTimeoFraccaroli",
+      "status": "已取回",
+      "note": "",
+      "file": "PlatoneTimeoFraccaroli.txt",
+      "source_url": "https://archive.org/download/PlatoneTimeoFraccaroli/PlatoneTimeoFraccaroli_djvu.txt",
+      "sha256": "09d8926e2987b9e1b597a11fcfdbb40ee650a8c75386c07897a4fba62fd0387b",
+      "bytes": 842508,
+      "words": 131745,
+      "fetched_at": "2026-08-13T11:31:11",
+      "ia_date": "1906",
+      "ia_year": "",
+      "ia_publicdate": "2018-12-10 07:41:37",
+      "ia_creator": "Plato",
+      "ia_title": "Timeo",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1906"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "PlatosEuthyphroWithIntroductionAndNotesByWilliamArthurHeidel",
+      "status": "已取回",
+      "note": "",
+      "file": "PlatosEuthyphroWithIntroductionAndNotesByWilliamArthurHeidel.txt",
+      "source_url": "https://archive.org/download/PlatosEuthyphroWithIntroductionAndNotesByWilliamArthurHeidel/PlatosEuthyphro_Heidel_128pgs51254752_djvu.txt",
+      "sha256": "3d241accf208aa4e1bcda0a58bc450ea714ce052a7fb3024fc3e62153cee7d76",
+      "bytes": 333023,
+      "words": 49415,
+      "fetched_at": "2026-08-13T11:31:25",
+      "ia_date": "1902",
+      "ia_year": "1902",
+      "ia_publicdate": "2012-12-13 20:51:19",
+      "ia_creator": "Plato",
+      "ia_title": "Plato's Euthyphro, with introduction and notes by William Arthur Heidel",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "titlepage_years": [
+        "1902"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "WorksOfPlatoV4",
+      "status": "已取回",
+      "note": "",
+      "file": "WorksOfPlatoV4.txt",
+      "source_url": "https://archive.org/download/WorksOfPlatoV4/WorksOfPlato_v4_djvu.txt",
+      "sha256": "b98ed25e97f7457ed52e15f33dc16962468360097f2ac484a8fcd624c3f218d5",
+      "bytes": 1406700,
+      "words": 241645,
+      "fetched_at": "2026-08-13T11:31:23",
+      "ia_date": "1855",
+      "ia_year": "",
+      "ia_publicdate": "2014-02-28 14:31:05",
+      "ia_creator": "Plato",
+      "ia_title": "Works of Plato: A New and Literal Version, Chiefly from the Text of Stallbaum V 4",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1792",
+        "1848"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "WorksOfPlatoV6",
+      "status": "已取回",
+      "note": "",
+      "file": "WorksOfPlatoV6.txt",
+      "source_url": "https://archive.org/download/WorksOfPlatoV6/WorksOfPlato_v6_djvu.txt",
+      "sha256": "4ec538aeaa7bcc95d79ca793f0c5181c83823df667372901c54d0abede9495db",
+      "bytes": 1516202,
+      "words": 252520,
+      "fetched_at": "2026-08-13T11:31:31",
+      "ia_date": "1854",
+      "ia_year": "",
+      "ia_publicdate": "2014-02-28 14:31:44",
+      "ia_creator": "Plato",
+      "ia_title": "Works of Plato: A New and Literal Version, Chiefly from the Text of Stallbaum V 6",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "afe8163.0001.001.umich.edu",
+      "status": "已取回",
+      "note": "",
+      "file": "afe8163.0001.001.umich.edu.txt",
+      "source_url": "https://archive.org/download/afe8163.0001.001.umich.edu/afe8163.0001.001.umich.edu_djvu.txt",
+      "sha256": "16a00eae35577683b43528d8c3353b5127886d708b6750c8d1449f1dcafbaf78",
+      "bytes": 2812257,
+      "words": 288131,
+      "fetched_at": "2026-08-13T11:31:49",
+      "ia_date": "1921",
+      "ia_year": "",
+      "ia_publicdate": "2011-12-21 19:59:43",
+      "ia_creator": "Plato",
+      "ia_title": "The laws of Plato",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1591",
+        "1678",
+        "1685",
+        "1688",
+        "1814",
+        "1817",
+        "1852",
+        "1860",
+        "1869",
+        "1877",
+        "1878",
+        "1879"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "afe8163.0002.001.umich.edu",
+      "status": "已取回",
+      "note": "",
+      "file": "afe8163.0002.001.umich.edu.txt",
+      "source_url": "https://archive.org/download/afe8163.0002.001.umich.edu/afe8163.0002.001.umich.edu_djvu.txt",
+      "sha256": "6abafe242e5a9a1df0fc82d39c971803eb051c4be951a1b3c5020c2b7aa2db1f",
+      "bytes": 2876637,
+      "words": 297546,
+      "fetched_at": "2026-08-13T11:31:58",
+      "ia_date": "1921",
+      "ia_year": "",
+      "ia_publicdate": "2011-12-21 19:59:50",
+      "ia_creator": "Plato",
+      "ia_title": "The laws of Plato",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1698",
+        "1861"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "aliteralversion05platuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "aliteralversion05platuoft.txt",
+      "source_url": "https://archive.org/download/aliteralversion05platuoft/aliteralversion05platuoft_djvu.txt",
+      "sha256": "f47a03fbf8602e18f19ab71a81467e0151d151f0e6cf92a6cf59d7e77ccf7789",
+      "bytes": 1586215,
+      "words": 264706,
+      "fetched_at": "2026-08-13T11:30:48",
+      "ia_date": "1854",
+      "ia_year": "",
+      "ia_publicdate": "2006-07-25 05:59:42",
+      "ia_creator": [
+        "Plato",
+        "Cary, Henry, 1804-1870",
+        "Davis, Henry, 1866-1952",
+        "Burges, George, 1786?-1864"
+      ],
+      "ia_title": "Works; a new and literal version, chiefly from the text of Stallbaum",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1792",
+        "1848"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "apology00platuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "apology00platuoft.txt",
+      "source_url": "https://archive.org/download/apology00platuoft/apology00platuoft_djvu.txt",
+      "sha256": "b40b251a110e670285ff0eb8eb49ce7c6069de4793e9e3475989def8ebd111f5",
+      "bytes": 371341,
+      "words": 53353,
+      "fetched_at": "2026-08-13T11:30:53",
+      "ia_date": "1887",
+      "ia_year": "",
+      "ia_publicdate": "2009-03-03 19:44:13",
+      "ia_creator": [
+        "Plato",
+        "Stock, St. George William Joseph, 1850-"
+      ],
+      "ia_title": "Apology",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1887"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "apologyofplat00platuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "apologyofplat00platuoft.txt",
+      "source_url": "https://archive.org/download/apologyofplat00platuoft/apologyofplat00platuoft_djvu.txt",
+      "sha256": "fa6743158338630506053ee089df7edbe7a24e14d4ee261be97cfb85b36aa43b",
+      "bytes": 759541,
+      "words": 99903,
+      "fetched_at": "2026-08-13T11:31:04",
+      "ia_date": "1877",
+      "ia_year": "",
+      "ia_publicdate": "2006-08-29 00:04:07",
+      "ia_creator": "Plato",
+      "ia_title": "The Apology of Plato",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1860",
+        "1866"
+      ],
+      "digitization_years": [
+        "2006"
+      ]
+    },
+    {
+      "identifier": "apologyofplato00platuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "apologyofplato00platuoft.txt",
+      "source_url": "https://archive.org/download/apologyofplato00platuoft/apologyofplato00platuoft_djvu.txt",
+      "sha256": "79e16c45c05f021b724b33154d1c200edf7dee83205de0fbbde477e477932514",
+      "bytes": 1076580,
+      "words": 106418,
+      "fetched_at": "2026-08-13T11:31:15",
+      "ia_date": "1877",
+      "ia_year": "",
+      "ia_publicdate": "2009-03-03 00:54:00",
+      "ia_creator": [
+        "Plato",
+        "Riddell, James, 1823-1866"
+      ],
+      "ia_title": "The Apology of Plato",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1500",
+        "1688",
+        "1860",
+        "1866",
+        "1867",
+        "1880"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "apologyofplatowi00platuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "apologyofplatowi00platuoft.txt",
+      "source_url": "https://archive.org/download/apologyofplatowi00platuoft/apologyofplatowi00platuoft_djvu.txt",
+      "sha256": "8f1e0a3270885fa0424a9ad45356f71b29e930985534fae7a30efacc481ce074",
+      "bytes": 827680,
+      "words": 110249,
+      "fetched_at": "2026-08-13T11:31:20",
+      "ia_date": "1867",
+      "ia_year": "",
+      "ia_publicdate": "2008-02-01 23:42:29",
+      "ia_creator": [
+        "Plato",
+        "Palmer, Edwin, 1824-1895",
+        "Riddell, James, 1823-1866"
+      ],
+      "ia_title": "The Apology of Plato, with a revised text and English notes, and a digest of Platonic idioms",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1830",
+        "1860",
+        "1866",
+        "1867"
+      ],
+      "digitization_years": [
+        "2008"
+      ]
+    },
+    {
+      "identifier": "apologyofsocrat00plat",
+      "status": "已取回",
+      "note": "",
+      "file": "apologyofsocrat00plat.txt",
+      "source_url": "https://archive.org/download/apologyofsocrat00plat/apologyofsocrat00plat_djvu.txt",
+      "sha256": "3a8cd18b3964046011aba37242bbfcdacbc6dcd513552890d6ac26ccc9fe6755",
+      "bytes": 920836,
+      "words": 130025,
+      "fetched_at": "2026-08-13T11:31:51",
+      "ia_date": "1852",
+      "ia_year": "",
+      "ia_publicdate": "2010-11-16 16:07:00",
+      "ia_creator": [
+        "Plato",
+        "Smith, William, Sir, 1813-1893",
+        "Schleiermacher, Friedrich, 1768-1834",
+        "Stallbaum, Gottfried, 1793-1861",
+        "Plato. Apology",
+        "Plato. Phaedo",
+        "Plato. Crito"
+      ],
+      "ia_title": "The Apology of Socrates, the Crito, and part of the Phaedo; with notes from Stallbaum, Schleiermacher's introductions, a life of Socrates, and Schleiermacher's essay on the worth of Socrates as a philosopher",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "apologyofsocrate00platiala",
+      "status": "已取回",
+      "note": "",
+      "file": "apologyofsocrate00platiala.txt",
+      "source_url": "https://archive.org/download/apologyofsocrate00platiala/apologyofsocrate00platiala_djvu.txt",
+      "sha256": "253efcbfbc661bfc8dea601444bfc0742ab365bc6847407c85c8812cca6491f6",
+      "bytes": 918566,
+      "words": 127569,
+      "fetched_at": "2026-08-13T11:30:49",
+      "ia_date": "1852",
+      "ia_year": "",
+      "ia_publicdate": "2007-05-05 04:08:15",
+      "ia_creator": "Plato",
+      "ia_title": "The apology of Socrates : the Crito and part of the Phædo",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1853"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "apologyphaedocri0000plat",
+      "status": "已取回",
+      "note": "",
+      "file": "apologyphaedocri0000plat.txt",
+      "source_url": "https://archive.org/download/apologyphaedocri0000plat/apologyphaedocri0000plat_djvu.txt",
+      "sha256": "d608a6562a92307100370b4c420f0d533f7dd76e2b5603935ecf265114f926f5",
+      "bytes": 759025,
+      "words": 137870,
+      "fetched_at": "2026-08-13T11:31:38",
+      "ia_date": "1909",
+      "ia_year": "",
+      "ia_publicdate": "2019-04-15 06:29:38",
+      "ia_creator": "Plato",
+      "ia_title": "The Apology, Phaedo, and Crito of Plato, tr. by Benjamin Jowett; The golden sayings of Epictetus, tr. by Hastings Crossley; the meditations of Marcus Aurelius, tr. by George Long, with introduction, notes and illustrations",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1900"
+      ],
+      "digitization_years": [
+        "2019"
+      ]
+    },
+    {
+      "identifier": "apolsocrate00platuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "apolsocrate00platuoft.txt",
+      "source_url": "https://archive.org/download/apolsocrate00platuoft/apolsocrate00platuoft_djvu.txt",
+      "sha256": "57d00c5b6d66a085b6ab9045b282e55c514fe7700d092cf37e2b1d03c095458e",
+      "bytes": 814412,
+      "words": 111326,
+      "fetched_at": "2026-08-13T11:31:40",
+      "ia_date": "c1908",
+      "ia_year": "",
+      "ia_publicdate": "2006-08-28 04:50:52",
+      "ia_creator": [
+        "Plato",
+        "Dyer, Louis, 1851-1908",
+        "Seymour, Thomas D. (Thomas Day), 1848-1907",
+        "Xenophon"
+      ],
+      "ia_title": "Apology of Socrates and Crito, with extracts from the Phaedo and Symposium and from Xenophon's Memorabilia. Edited by Louis Dyer. Rev. by Thomas Day Seymour. With a vocabulary",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1876",
+        "1881",
+        "1885",
+        "1893",
+        "1898",
+        "1903",
+        "1907",
+        "1908"
+      ],
+      "digitization_years": [
+        "2006"
+      ]
+    },
+    {
+      "identifier": "ausgewhltedial01plat",
+      "status": "已取回",
+      "note": "",
+      "file": "ausgewhltedial01plat.txt",
+      "source_url": "https://archive.org/download/ausgewhltedial01plat/ausgewhltedial01plat_djvu.txt",
+      "sha256": "75c3324a38d6276bf1c0008e07844f3717f73b98890238983ac06e5d05d98dc5",
+      "bytes": 2088496,
+      "words": 238102,
+      "fetched_at": "2026-08-13T11:31:52",
+      "ia_date": "1883",
+      "ia_year": "",
+      "ia_publicdate": "2011-06-30 16:31:05",
+      "ia_creator": [
+        "Plato",
+        "Schmelzer, Carl"
+      ],
+      "ia_title": "Ausgewählte Dialoge;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1882"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "b2900049x_0006",
+      "status": "已取回",
+      "note": "",
+      "file": "b2900049x_0006.txt",
+      "source_url": "https://archive.org/download/b2900049x_0006/b2900049x_0006_djvu.txt",
+      "sha256": "a3ca4cb291e7bee1a323f32b2f5bbc596e9ef45ff70c9ee416565190abafb031",
+      "bytes": 1411997,
+      "words": 205708,
+      "fetched_at": "2026-08-13T11:31:16",
+      "ia_date": "1914",
+      "ia_year": "",
+      "ia_publicdate": "2017-05-19 11:23:24",
+      "ia_creator": [
+        "Plato. n 79139459",
+        "Fowler, Harold North, 1859-1955. n 89623884",
+        "Lamb, W. R. M. (Walter Rangeley Maitland), 1882- n 88635997",
+        "Bury, Robert Gregg, 1869- nr 87000721",
+        "Shorey, Paul, 1857-1934. n 80080289"
+      ],
+      "ia_title": "Plato : with an English translation",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1578",
+        "1935",
+        "1942",
+        "1948",
+        "1956",
+        "1963",
+        "1970",
+        "1980"
+      ],
+      "digitization_years": [
+        "2017"
+      ]
+    },
+    {
+      "identifier": "b2900049x_0007",
+      "status": "已取回",
+      "note": "",
+      "file": "b2900049x_0007.txt",
+      "source_url": "https://archive.org/download/b2900049x_0007/b2900049x_0007_djvu.txt",
+      "sha256": "c5bed1521a65621aae8dfa5d7d4500cb5e13b9894a29c232e38ffce1e5a5bfcf",
+      "bytes": 901021,
+      "words": 123151,
+      "fetched_at": "2026-08-13T11:31:23",
+      "ia_date": "1914",
+      "ia_year": "",
+      "ia_publicdate": "2017-05-19 11:23:25",
+      "ia_creator": [
+        "Plato. n 79139459",
+        "Fowler, Harold North, 1859-1955. n 89623884",
+        "Lamb, W. R. M. (Walter Rangeley Maitland), 1882- n 88635997",
+        "Bury, Robert Gregg, 1869- nr 87000721",
+        "Shorey, Paul, 1857-1934. n 80080289"
+      ],
+      "ia_title": "Plato : with an English translation",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1578",
+        "1861",
+        "1883",
+        "1921",
+        "1928",
+        "1942",
+        "1952",
+        "1961",
+        "1967",
+        "1977"
+      ],
+      "digitization_years": [
+        "2017"
+      ]
+    },
+    {
+      "identifier": "b2900049x_0008",
+      "status": "已取回",
+      "note": "",
+      "file": "b2900049x_0008.txt",
+      "source_url": "https://archive.org/download/b2900049x_0008/b2900049x_0008_djvu.txt",
+      "sha256": "5d8cce6d60bf1673ec2ddad14fc5a00bf34c12317e6e2af94fc91af2c40d3ab1",
+      "bytes": 892548,
+      "words": 118848,
+      "fetched_at": "2026-08-13T11:31:35",
+      "ia_date": "1914",
+      "ia_year": "",
+      "ia_publicdate": "2017-05-19 11:23:26",
+      "ia_creator": [
+        "Plato. n 79139459",
+        "Fowler, Harold North, 1859-1955. n 89623884",
+        "Lamb, W. R. M. (Walter Rangeley Maitland), 1882- n 88635997",
+        "Bury, Robert Gregg, 1869- nr 87000721",
+        "Shorey, Paul, 1857-1934. n 80080289"
+      ],
+      "ia_title": "Plato : with an English translation",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1578",
+        "1925",
+        "1939",
+        "1942",
+        "1952",
+        "1962",
+        "1975"
+      ],
+      "digitization_years": [
+        "2017"
+      ]
+    },
+    {
+      "identifier": "b2900049x_0009",
+      "status": "已取回",
+      "note": "",
+      "file": "b2900049x_0009.txt",
+      "source_url": "https://archive.org/download/b2900049x_0009/b2900049x_0009_djvu.txt",
+      "sha256": "78a447330ab8566e78f1d718d72c7f86a681dc96f75788aeb9078c89de884956",
+      "bytes": 1312704,
+      "words": 178604,
+      "fetched_at": "2026-08-13T11:31:47",
+      "ia_date": "1914",
+      "ia_year": "",
+      "ia_publicdate": "2017-05-19 11:23:27",
+      "ia_creator": [
+        "Plato. n 79139459",
+        "Fowler, Harold North, 1859-1955. n 89623884",
+        "Lamb, W. R. M. (Walter Rangeley Maitland), 1882- n 88635997",
+        "Bury, Robert Gregg, 1869- nr 87000721",
+        "Shorey, Paul, 1857-1934. n 80080289"
+      ],
+      "ia_title": "Plato : with an English translation",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1578",
+        "1929",
+        "1942",
+        "1952",
+        "1961",
+        "1966",
+        "1976",
+        "1981"
+      ],
+      "digitization_years": [
+        "2017"
+      ]
+    },
+    {
+      "identifier": "b2900049x_0010",
+      "status": "已取回",
+      "note": "",
+      "file": "b2900049x_0010.txt",
+      "source_url": "https://archive.org/download/b2900049x_0010/b2900049x_0010_djvu.txt",
+      "sha256": "5babdcf179b757d87bcbb4efe6f21e970814c10e00e9ebde41f599e45dbac36c",
+      "bytes": 1079417,
+      "words": 138123,
+      "fetched_at": "2026-08-13T11:31:58",
+      "ia_date": "1914",
+      "ia_year": "",
+      "ia_publicdate": "2017-05-19 11:23:21",
+      "ia_creator": [
+        "Plato. n 79139459",
+        "Fowler, Harold North, 1859-1955. n 89623884",
+        "Lamb, W. R. M. (Walter Rangeley Maitland), 1882- n 88635997",
+        "Bury, Robert Gregg, 1869- nr 87000721",
+        "Shorey, Paul, 1857-1934. n 80080289"
+      ],
+      "ia_title": "Plato : with an English translation",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1926",
+        "1942",
+        "1952",
+        "1961",
+        "1967"
+      ],
+      "digitization_years": [
+        "2017"
+      ]
+    },
+    {
+      "identifier": "bwb_KR-689-823",
+      "status": "已取回",
+      "note": "",
+      "file": "bwb_KR-689-823.txt",
+      "source_url": "https://archive.org/download/bwb_KR-689-823/bwb_KR-689-823_djvu.txt",
+      "sha256": "7e4db50a9cde5f10dbc28cbe4a06a57b7c3610c8bf56dc61ef58243f873fd7c4",
+      "bytes": 541461,
+      "words": 55378,
+      "fetched_at": "2026-08-13T11:31:45",
+      "ia_date": "1823",
+      "ia_year": "",
+      "ia_publicdate": "2023-10-26 12:40:24",
+      "ia_creator": "Plato",
+      "ia_title": "Platonis Euthyphro : prolegomenis et commentariis",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1561",
+        "1655",
+        "1800",
+        "1887",
+        "1910",
+        "1926"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "charmideslachesl00platrich",
+      "status": "已取回",
+      "note": "",
+      "file": "charmideslachesl00platrich.txt",
+      "source_url": "https://archive.org/download/charmideslachesl00platrich/charmideslachesl00platrich_djvu.txt",
+      "sha256": "4006b13866788898f6edbdaa229b1e74434c7dd365c2f829d1d7abff96b3f880",
+      "bytes": 537869,
+      "words": 72578,
+      "fetched_at": "2026-08-13T11:31:01",
+      "ia_date": "[c1900]",
+      "ia_year": "",
+      "ia_publicdate": "2007-05-03 15:48:16",
+      "ia_creator": [
+        "Plato",
+        "Newhall, Barker, 1867-1924"
+      ],
+      "ia_title": "The Charmides, Laches, and Lysis of Plato;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1893",
+        "1899",
+        "1900"
+      ],
+      "digitization_years": [
+        "2007"
+      ]
+    },
+    {
+      "identifier": "euthyphroofplato00platrich",
+      "status": "已取回",
+      "note": "",
+      "file": "euthyphroofplato00platrich.txt",
+      "source_url": "https://archive.org/download/euthyphroofplato00platrich/euthyphroofplato00platrich_djvu.txt",
+      "sha256": "cf60590b47e78c259c859ef8f3bbacc1f69a782d8529fcfd0e369bad55bc9958",
+      "bytes": 205737,
+      "words": 28982,
+      "fetched_at": "2026-08-13T11:31:11",
+      "ia_date": "1881",
+      "ia_year": "",
+      "ia_publicdate": "2008-07-11 22:03:34",
+      "ia_creator": [
+        "Plato",
+        "Wells, George Henry"
+      ],
+      "ia_title": "The Euthyphro of Plato; with an introduction and notes",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1879",
+        "1881"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "gorgiasofplato00plat",
+      "status": "已取回",
+      "note": "",
+      "file": "gorgiasofplato00plat.txt",
+      "source_url": "https://archive.org/download/gorgiasofplato00plat/gorgiasofplato00plat_djvu.txt",
+      "sha256": "19c3172c006d9de82b5498e60b1f4d973780a4acdb0105e95d5011459974db1b",
+      "bytes": 697086,
+      "words": 92763,
+      "fetched_at": "2026-08-13T11:31:17",
+      "ia_date": "1856",
+      "ia_year": "",
+      "ia_publicdate": "2008-08-05 17:25:13",
+      "ia_creator": [
+        "Plato",
+        "Woolsey, Theodore Dwight, 1801-1889",
+        "Stallbaum, Gottfried, 1793-1861"
+      ],
+      "ia_title": "The Gorgias of Plato",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1784",
+        "1796",
+        "1825",
+        "1828",
+        "1829",
+        "1832",
+        "1840",
+        "1842",
+        "1848",
+        "1856"
+      ],
+      "digitization_years": [
+        "2008"
+      ]
+    },
+    {
+      "identifier": "india.history.resource.100073",
+      "status": "已取回",
+      "note": "",
+      "file": "india.history.resource.100073.txt",
+      "source_url": "https://archive.org/download/india.history.resource.100073/100073_djvu.txt",
+      "sha256": "153d3ecbec48dda4a356cb9910257114bcacf1699501945886e4ca832375c238",
+      "bytes": 9747293,
+      "words": 1301580,
+      "fetched_at": "2026-08-13T11:30:53",
+      "ia_date": "1534",
+      "ia_year": "",
+      "ia_publicdate": "2026-07-24 15:57:34",
+      "ia_creator": "Plato",
+      "ia_title": "Platonis Omnia Opera, cum Commentariis Procli in Timaeum and Politica, thesauro ueteris Philosophiae maximo",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1811",
+        "2019"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "india.history.resource.92890",
+      "status": "已取回",
+      "note": "",
+      "file": "india.history.resource.92890.txt",
+      "source_url": "https://archive.org/download/india.history.resource.92890/92890_djvu.txt",
+      "sha256": "6c251caf547d487e316f7882f484513ba5d9ff9cd61158f5aa472c6dffb3d62d",
+      "bytes": 3041905,
+      "words": 284499,
+      "fetched_at": "2026-08-13T11:31:03",
+      "ia_date": "1877",
+      "ia_year": "",
+      "ia_publicdate": "2026-07-24 07:11:59",
+      "ia_creator": [
+        "Plato",
+        "Hermanni, Carl Friderici"
+      ],
+      "ia_title": "Platonis Dialogi secundum Thrasylli Tetralogias Dispositi, Vol. V",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1700",
+        "1708",
+        "1822",
+        "1842",
+        "1844",
+        "1848",
+        "2019"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "mythsofplato00platrich",
+      "status": "已取回",
+      "note": "",
+      "file": "mythsofplato00platrich.txt",
+      "source_url": "https://archive.org/download/mythsofplato00platrich/mythsofplato00platrich_djvu.txt",
+      "sha256": "e00ef0d33059dfd40e6912b0998deb9162d432a3a443437afb46acaf1646911f",
+      "bytes": 1448201,
+      "words": 226926,
+      "fetched_at": "2026-08-13T11:31:30",
+      "ia_date": "1905",
+      "ia_year": "",
+      "ia_publicdate": "2008-07-11 22:15:17",
+      "ia_creator": "Plato",
+      "ia_title": "The Myths of Plato [extracted from the Dialogues]. Translated with introductory and other observations by J. A. Stewart",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1867",
+        "1904",
+        "1905"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "parmenidesofplat00platiala",
+      "status": "已取回",
+      "note": "",
+      "file": "parmenidesofplat00platiala.txt",
+      "source_url": "https://archive.org/download/parmenidesofplat00platiala/parmenidesofplat00platiala_djvu.txt",
+      "sha256": "9093a0e1831fac3da2357d69c3e33d36bd75b5ed0189221ce95beb6d6a34cba8",
+      "bytes": 306307,
+      "words": 43364,
+      "fetched_at": "2026-08-13T11:31:36",
+      "ia_date": "1882",
+      "ia_year": "1882",
+      "ia_publicdate": "2007-07-09 16:23:33",
+      "ia_creator": [
+        "Plato",
+        "Maguire, Thomas, 1831-1889"
+      ],
+      "ia_title": "The Parmenides of Plato",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1822",
+        "1882",
+        "1996",
+        "2000"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "platocontraatheo00platrich",
+      "status": "已取回",
+      "note": "",
+      "file": "platocontraatheo00platrich.txt",
+      "source_url": "https://archive.org/download/platocontraatheo00platrich/platocontraatheo00platrich_djvu.txt",
+      "sha256": "c7c2add2cb2554826e3c02df5387bbfcb881f4ed1ac2af0041d8f7d67ed9074e",
+      "bytes": 926127,
+      "words": 137810,
+      "fetched_at": "2026-08-13T11:31:50",
+      "ia_date": "1845",
+      "ia_year": "",
+      "ia_publicdate": "2008-07-14 16:20:06",
+      "ia_creator": [
+        "Plato",
+        "Lewis, Tayler, 1802-1877"
+      ],
+      "ia_title": "Plato contra atheos = Plato against the atheists ; or, The tenth book of the dialogue on laws, accompanied with critical notes, and followed by extended dissertations on some of the main points of the Platonic philosophy and theology, especially as compared with the Holy Scriptures",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1845"
+      ],
+      "digitization_years": [
+        "2008"
+      ]
+    }
+  ]
+}
