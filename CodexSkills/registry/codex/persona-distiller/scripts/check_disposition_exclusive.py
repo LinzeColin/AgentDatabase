@@ -61,6 +61,30 @@ def norm(name: str) -> str:
     return re.sub(r"[^a-z0-9一-鿿]+", "", s)
 
 
+def scripts(name: str) -> set:
+    """→ 这个名字的**同一串的两种投影**：拉丁部分、汉字部分（都归一后）。
+
+    ★★ 2026-08-13 补：名册里有 **12 个双语名**
+      （`田口玄一 Genichi Taguchi`、`John Carmack（约翰·卡马克）`、
+        `Reed Hastings / 里德·哈斯廷斯` …），而延后名单写的是单语。
+      按全名规范化一比，`田口玄一genichitaguchi` ≠ `genichitaguchi`，
+      **本件对这 12 人全盲** —— 实测漏掉了 Taguchi 与 Carmack 两条真重复，
+      而它们正是 2026-08-10 给 Steinhardt／Godin 修过的同一个分类错。
+    ★ 这**不是猜**：投影只是把同一个串里另一种文字去掉，没有引入任何外部知识。
+    ★ 只有投影长度 ≥4 才算（太短会把 `Li Lu` 这种和别人撞上）。
+    """
+    lat = re.sub(r"[^a-z0-9]+", "", unicodedata.normalize("NFKC", str(name or "")).lower())
+    cjk = re.sub(r"[^\u4e00-\u9fff]+", "", str(name or ""))
+    return {x for x in (lat, cjk) if len(x) >= 4}
+
+
+def same_person(a_raw: str, b_raw: str) -> bool:
+    """两个原名是不是同一个人。全名相等，**或**任一种文字的投影相等。"""
+    if norm(a_raw) == norm(b_raw):
+        return True
+    return bool(scripts(a_raw) & scripts(b_raw))
+
+
 def load_three(group: pathlib.Path, ledgers: pathlib.Path) -> tuple[dict, list[str]]:
     """→ ({状态: {规范名: 原名}}, 读不到的文件说明)。**读不到的记下来，不当空集。**"""
     out: dict[str, dict[str, str]] = {}
@@ -147,7 +171,15 @@ def check(group: pathlib.Path, ledgers: pathlib.Path, corpora: pathlib.Path
     for i in range(len(states)):
         for j in range(i + 1, len(states)):
             a, b = states[i], states[j]
+            # ★ 先按规范名求交，再补一轮**跨文字投影**（双语名，见 scripts()）
             both = set(three[a]) & set(three[b])
+            for ka, ra in three[a].items():
+                if ka in both:
+                    continue
+                for kb, rb in three[b].items():
+                    if kb not in both and same_person(ra, rb):
+                        both.add(ka)
+                        break
             for k in sorted(both):
                 errors += 1
                 lines.append(
@@ -172,7 +204,9 @@ def check(group: pathlib.Path, ledgers: pathlib.Path, corpora: pathlib.Path
     else:
         lines.append("工作区孤儿 0 人")
     lines.append("★ 盲区：名字形式不同的（`W. A. Paton` vs `William Andrew Paton`）本件认不出来，"
-                 "**不许当成「没有重复」**")
+                 "**不许当成「没有重复」**"
+                 "\n★ **双语名已不在盲区**（2026-08-13 补）：`田口玄一 Genichi Taguchi` 与 "
+                 "`Genichi Taguchi` 现在按拉丁投影认得出来。")
     return errors, lines
 
 
@@ -187,6 +221,23 @@ def self_test() -> int:
         ("★ 反例：名字带空格/大小写差异也要认出来",
          ["Clara Barton"], ["clara  barton"], [], 1),
         ("正例：同姓不同人 → 不该报", ["William Paton"], ["William Agnew Paton"], [], 0),
+        # ★★ 双语名（2026-08-13 补）：名册写双语、延后名单写单语，
+        #   按全名规范化一比 `田口玄一genichitaguchi` ≠ `genichitaguchi`，本件曾对 12 人全盲，
+        #   实测漏掉 Taguchi 与 Carmack 两条**真重复**。
+        ("★★ 双语名：名册双语、延后单语 → 必须报",
+         ["田口玄一 Genichi Taguchi"], ["Genichi Taguchi"], [], 1),
+        ("★★ 双语名：括号形式 → 必须报",
+         ["John Carmack（约翰·卡马克）"], ["John Carmack"], [], 1),
+        ("★★ 双语名：斜杠形式 → 必须报",
+         ["Reed Hastings / 里德·哈斯廷斯"], ["Reed Hastings"], [], 1),
+        ("★★ 双语名：只给中文那半也要认出来",
+         ["大野耐一 / Taiichi Ohno"], ["大野耐一"], [], 1),
+        # ★ 反例：投影不许把不同的人并起来
+        ("★ 反例：双语名 vs 另一个人 → 不该报",
+         ["John Carmack（约翰·卡马克）"], ["John Maeda"], [], 0),
+        ("★ 反例：两个中文名不同 → 不该报",
+         ["大野耐一 / Taiichi Ohno"], ["新乡重夫"], [], 0),
+        ("★ 反例：拉丁投影太短不算（`Li Lu`）", ["李录 Li Lu"], ["Lu Xun"], [], 0),
     ]
     for name, prods, defer, block, want in CASES:
         with tempfile.TemporaryDirectory() as d:
