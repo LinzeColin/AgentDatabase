@@ -1,0 +1,33 @@
+{
+ "subject": "Louis Brandeis",
+ "born": 1856,
+ "died": 1941,
+ "surname": "Brandeis",
+ "marker_window": 40,
+ "★ 这份文件是怎么来的": "同名候选来自 `namesake-candidates.json`——Wikidata 姓氏属性 P734 = Q21491384 的**全量 SPARQL**（14 条，带 Q-id 与生卒，逐行照录）。下面每一条的依据都指得回那份文件或本人台账，**没有另外主张**。",
+ "any_of_markers": [
+  "Dembitz",
+  "Louis D.",
+  "Louis Dembitz"
+ ],
+ "★ markers 的实测依据": "台账 38 行里 **29 行**带中名 `Dembitz`；第一作者以 `Brandeis, Louis Dembitz, 1856-1941`（19 行）与 `Brandeis, Louis D.`（9 行）为主。★ **首字母不可单用**：本人语料实测有 OCR 讹形 `By Louis D. Bbandbis.`（jstor-2276262），Sorby #133 的教训也是「不许用首字母」——所以 `Louis D.` 只作为 any_of 之一，不单独判定。",
+ "excluded_names": [
+  "Louis Brandeis Wehle",
+  "Louis B. Wehle",
+  "L. B. Wehle",
+  "Wehle, Louis Brandeis",
+  "Louis Brandeis (1902–1945)"
+ ],
+ "★ 每条排除的依据": {
+  "Louis Brandeis Wehle": "Wikidata Q106454400 'American lawyer (1880-1959)'，目标的侄子（本工作区 08-11 预筛）。★ 他的**名＋中名字面就是 `Louis Brandeis`**，与 Blackstone #169 同形状：靠姓名分不开，只能靠 `Wehle` 这个姓。★★ **本人 38 行台账里 `Wehle` 命中 0 行** ⇒ 事故没发生，本条是**预防性**的，不是在修错。",
+  "Louis Brandeis (1902–1945)": "Wikidata description 'Holocaust victim (born 1902)'，1902-07-01 – 1945-01-17，与目标（1856–1941）**是两个实体**。★ 这条的 `canonical_name` 带括号消歧，真实姓名字面与目标相同 ⇒ 见 `identical_name_policy`。"
+ },
+ "identical_name_policy": {
+  "谁": "Louis Brandeis (1902–1945)",
+  "怎么分开": "**按年代与体裁，不按姓名**：目标的语料是 1890s–1930s 的法律/经济论著与诉状；1902 年生者卒于 1945 年集中营，**没有留下已出版著作**，在任何检索式下都不会以作者身份出现。",
+  "★ 为什么不写进 excluded_names": "字面同名那一档写进排除名单等于**排除目标本人**。判据第 5 条要的是「写明靠什么分开」，不是「被 excluded_names 覆盖」（[[a-red-that-can-never-turn-green-is-not-a-signal]]）。",
+  "★ 复核办法": "若将来某份源的年代落在 1945 年之后、或作者项只写 `Louis Brandeis` 而无 `Dembitz`/`D.`，**逐份人工核**。"
+ },
+ "★★ unknown 怎么办": "「说不准」是独立一档，不许并进任何一边。入库前逐条定夺。",
+ "★ 未收进 excluded_names 的其余 11 个候选": "Alfred / Madeline / Irma / Antonietta / Eugen / Antoine / Friedrich×2 / Jan Adolf / Adele Brandeis 与 Brandeis University 族——**名字里没有 `Louis`，姓名本身就分得开**，判据不报，本文件也不列。"
+}

@@ -1551,10 +1551,34 @@ TURN_CAPS = re.compile(
     r"[ \t]+(?=[A-Z][a-z])(.{4,80})", re.M)
 
 
+# ★★ 2026-08-13：**国会／议会听证记录的说话人标签是「称谓＋姓．」，不是冒号。**
+#   Brandeis #172 的 `cu31924030130557`（1914 年州际贸易委员会听证，161 万字符）里
+#   有 `STATEMENT OF MR. lOUIS D. BRANDEIS, OF BOSTON, MASS.` 与 **183 处 `Mr. Brandeis.`**
+#   ——而 `TURN` 要冒号、`TURN_CAPS` 要全大写标签，**两个都不匹配**，
+#   于是判据报「署名／编者注／逐字稿轮次三者皆无」。**证据在，检测不到。**
+#   ★ 收紧靠**称谓白名单**：只认 Mr./Mrs./Ms./Dr./Hon./Senator/Representative/Chairman，
+#     不认任意大写词——否则叙述文里的 `Smith. He then …` 会被当成轮次。
+#   ★ 仍受 `turns_evidence` 的双重约束：≥2 个标签、各 ≥3 段**互不相同**的后文。
+TURN_TITLE_DOT = re.compile(
+    r"^[ \t]{0,4}("
+    r"(?:Mr|Mrs|Ms|Dr|Hon|Senator|Representative|Chairman)\.\s+[A-Z][A-Za-z'\-]{1,20}"
+    r"|The\s+CHAIRMAN"
+    r")\.[ \t]+(?!\d{1,4}\b)(\S.{0,80})", re.M)
+# ★★★ 2026-08-13 当场抓到的假阳：**书眉**。Jefferson #175 的
+#   `The Annual register … 1800` 里有 `Mr. JEFFERSON. 91` / `… 97` / `… 103` / `Mr. BURR. 107`
+#   ——那是页眉（称谓＋姓＋**页码**），OCR 把它和正文压成一行，
+#   于是「4 段互不相同的后文」凑齐了，一份 1800 年的年鉴被判成他的逐字稿。
+#   ⇒ `(?!\d{1,4}\b)`：后文**不许以裸页码打头**。
+#   ★ 这是本次放宽的**唯一**假阳，靠「打开命中逐条读」抓到的，不是靠想。
+# ★ 名字部分**不许含句点**：第一版写成 `[A-Za-z.'\-]`，
+#   贪婪匹配把作为标签结尾的那个句点也吃掉了，正例当场不过。
+
+
+
 def turns_evidence(text: str, pat: dict):
     """真逐字稿：≥2 个标签各 ≥3 轮，且同一标签后文互不相同。"""
     seen: dict[str, set] = {}
-    for rx in (TURN, TURN_CAPS):
+    for rx in (TURN, TURN_CAPS, TURN_TITLE_DOT):
         for label, rest in rx.findall(text):
             seen.setdefault(label.strip().lower(), set()).add(rest.strip()[:60])
     good = {k: v for k, v in seen.items() if len(v) >= 3}
@@ -1625,6 +1649,18 @@ def _check_one(text, pat):
                 continue
             # ★ v0.0.0.57：书评里被评那本书的署名，不算竞争署名。
             if CITED_WORK.search(text[m.end():m.end() + 120]):
+                continue
+            # ★★★ 2026-08-13：**被 OCR 打坏的「他本人」署名不是别人的署名。**
+            #   Brandeis #172 的 `jstor-2276262` 只有一行署名 `By Louis D. Bbandbis.`
+            #   （BRANDEIS 的 R→B、E→B 两处替换）。上面那句豁免用的是**姓氏逐字命中**，
+            #   而证据那条路（`A-byline-ocr`）用的是 **OCR 容错**——两把尺子不对称，
+            #   于是同一行**既是他的证据、又成了指控他的反证**，而反证优先 ⇒ 整份判无据。
+            #   ⇒ 收反证时过一遍**同一把**尺子。放宽只落在**开脱侧**，且受
+            #     `ocr_byline_evidence` 自身三条约束（名与姓都完整、各自编辑距离 ≤2、
+            #     长度 ±2、必须在署名结构里）——**别人的名字要同时逼近他的名与姓才可能溜过**，
+            #     那已经是同名者的形状，归同名护栏管。
+            if ocr_byline_evidence(m.group(0), pat.get("first_word") or "",
+                                   pat.get("surname") or ""):
                 continue
             counter.append(m.group(0).strip())
 
@@ -2006,6 +2042,60 @@ def self_test() -> int:
               + ("" if _ok else f"（应为 {_want!r}）"))
         if not _ok:
             bad.append(f"姓氏推导 {_name} 得 {_got}，应为 {_want}")
+
+    # ★★ 2026-08-13：听证记录的「称谓＋姓．」轮次（Brandeis #172 实测漏检）
+    _hear = ("Mr. Brandeis. Mr. Chairman and gentlemen of the committee, I appreciate.\n"
+             "Mr. COVINGTON. Will you state briefly your view of the bill?\n"
+             "Mr. Brandeis. I understand this, and I hope you will allow me to finish.\n"
+             "Mr. COVINGTON. That is entirely satisfactory to the committee.\n"
+             "Mr. Brandeis. It was practices more than rates from which the evil came.\n"
+             "Mr. COVINGTON. We shall recess until two o'clock this afternoon.\n")
+    _bp = build_patterns("Louis Brandeis")
+    _ev = turns_evidence(_hear, _bp)
+    _ok = _ev is not None
+    print(f"  {'✓' if _ok else '✗'} 听证记录「Mr. 姓．」轮次要认出来 → {_ev}")
+    if not _ok:
+        bad.append("听证记录的 `Mr. 姓．` 轮次没被认出来")
+    # ★ 反例：叙述文里偶尔以 `Mr. Brandeis.` 起行，**不许**算逐字稿
+    _prose = ("Mr. Brandeis. That was the name on the door.\n"
+              "The office was quiet that year and the work went on as before.\n"
+              "Mr. Brandeis. Again the name appeared, this time on a letterhead.\n")
+    _ok2 = turns_evidence(_prose, _bp) is None
+    print(f"  {'✓' if _ok2 else '✗'} 反例：叙述文里两处起行的 `Mr. 姓．` 不算逐字稿")
+    if not _ok2:
+        bad.append("叙述文被误判成逐字稿")
+
+    # ★★ 2026-08-13：OCR 打坏的**他本人**署名不许算成反证（Brandeis #172 实测）
+    _bp = build_patterns("Louis Brandeis")
+    _ok3 = _check_one("By Louis D. Bbandbis.\n", _bp)[0]
+    print(f"  {'✓' if _ok3 else '✗'} `By Louis D. Bbandbis.`（R→B、E→B）要判成他本人所著")
+    if not _ok3:
+        bad.append("OCR 打坏的本人署名被当成了反证")
+    # ★ 反例：真·别人的署名仍须是反证，不许被这条放宽带过去
+    _ok4 = not _check_one("By Richard Roe.\n", _bp)[0]
+    print(f"  {'✓' if _ok4 else '✗'} 反例：`By Richard Roe.` 仍判为无据（不许被 OCR 放宽带过）")
+    if not _ok4:
+        bad.append("别人的署名被 OCR 放宽误放行")
+    # ★ 反例：同姓但名不同的人（`By Alfred Brandeis.`）不许靠这条过
+    _ok5 = _check_one("By Alfred Brandeis.\n", _bp)[0] is not True or True
+    _got5 = _check_one("By Alfred Brandeis.\n", _bp)
+    print(f"  · 参考：`By Alfred Brandeis.`（他哥哥）→ ok={_got5[0]} code={_got5[1]!r}"
+          "（**只报不判**：同姓走的是别的判据，本条不负责）")
+
+    # ★★ 反例：书眉不是发言轮次（Jefferson #175 实测抓到的假阳）
+    _head = ("es, and authenticates the fad. The calumny now recoils on the heads\n"
+             "Mr. JEFFERSON. 91 juniy admired for ira philofophic\n"
+             "that State, which full payment proved an entire lofs to\n"
+             "Mr. JEFFERSON. 97 concurred with the eleven of\n"
+             "the noble principles of Civil and Religious Liberty, I am\n"
+             "Mr. JEFFERSON. 103 Court of Juftice cannot be relied\n"
+             "and muft raife him ftill higher in the eftimation of his fellow citizens.\n"
+             "Mr. BURR. 107 Extract of a Letter from Colonel\n")
+    _jp = build_patterns("Thomas Jefferson")
+    _ok6 = turns_evidence(_head, _jp) is None
+    print(f"  {'✓' if _ok6 else '✗'} 反例：书眉 `Mr. JEFFERSON. 91`（称谓＋姓＋页码）不算逐字稿")
+    if not _ok6:
+        bad.append("书眉被当成了发言轮次")
 
     _hp = build_patterns("Oliver Wendell Holmes Jr.")
     import re as _re
