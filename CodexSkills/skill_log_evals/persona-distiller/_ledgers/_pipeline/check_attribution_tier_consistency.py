@@ -68,13 +68,26 @@ CORPORA = PD / "_corpora"
 PRIMARY = {"P1", "P2"}
 SECONDARY = {"S1", "S2", "U"}
 
+# ★★★ 2026-08-14：`clash()` 原来只认 `HIS-OWN`／`OTHER` 两个值，而
+#   `build_source_ledger.py:61` 声明的合法值是**五个**：
+#       HIS-OWN / CO-AUTHORED / THIRD-PARTY / ATTRIBUTION-UNCLEAR / OTHER-INVENTOR
+#   **`OTHER` 根本不在 builder 的词表里**（数据里却有 108 行），
+#   而 builder 声明的 `THIRD-PARTY`(4)／`CO-AUTHORED`(5)／`ATTRIBUTION-UNCLEAR`(1)
+#   **我一条都没在判**——其中 `THIRD-PARTY` ＋ P1 正是本件要抓的那一种。
+#   ⇒ 两套词表**取并集**，并把「他的话」与「不是他的话」分清。
+OWN_VALUES = {"HIS-OWN"}
+NOT_OWN_VALUES = {"OTHER", "THIRD-PARTY", "OTHER-INVENTOR"}
+# CO-AUTHORED／ATTRIBUTION-UNCLEAR 是**中间态**：合著与存疑都可能配任一 tier，
+# 本件对它们**不下判断**（下判断要读书名页，是人的事），但会单独计数印出来。
+AMBIGUOUS_VALUES = {"CO-AUTHORED", "ATTRIBUTION-UNCLEAR"}
+
 
 def clash(attribution, tier):
     """一行的两个字段是不是互相否定。→ 说明字符串或 None。**纯函数**。"""
-    if attribution == "HIS-OWN" and tier in SECONDARY:
+    if attribution in OWN_VALUES and tier in SECONDARY:
         return f"标着「他的话」却记二手（tier={tier}）"
-    if attribution == "OTHER" and tier in PRIMARY:
-        return f"标着「别人的话」却记一手（tier={tier}）"
+    if attribution in NOT_OWN_VALUES and tier in PRIMARY:
+        return f"标着「不是他的话」（{attribution}）却记一手（tier={tier}）"
     return None
 
 
@@ -100,6 +113,14 @@ def self_test() -> int:
         clash("HIS-OWN", "S1") is not None)
     chk("★ HIS-OWN ＋ U → 打架", clash("HIS-OWN", "U") is not None)
     chk("★ OTHER ＋ P1 → 打架（反方向）", clash("OTHER", "P1") is not None)
+    chk("★★★ **THIRD-PARTY ＋ P1 → 打架** —— builder 声明的合法值，我原来一条都没判",
+        clash("THIRD-PARTY", "P1") is not None)
+    chk("★★ OTHER-INVENTOR ＋ P2 → 打架（同上，builder 词表里的）",
+        clash("OTHER-INVENTOR", "P2") is not None)
+    chk("★★ 反例：**CO-AUTHORED 是中间态，不下判断**（合著配任一 tier 都讲得通）",
+        clash("CO-AUTHORED", "P1") is None and clash("CO-AUTHORED", "S1") is None)
+    chk("★★ 反例：ATTRIBUTION-UNCLEAR 同样不下判断", clash("ATTRIBUTION-UNCLEAR", "P1") is None)
+    chk("★ THIRD-PARTY ＋ S1 → 不报（这本来就是自洽的）", clash("THIRD-PARTY", "S1") is None)
     chk("★ 反例：HIS-OWN ＋ P1 → 不报", clash("HIS-OWN", "P1") is None)
     chk("★ 反例：OTHER ＋ S1 → 不报", clash("OTHER", "S1") is None)
     chk("★★ 反例：两个字段一致**不代表两个都对** —— OTHER＋S1 自洽，"
@@ -136,6 +157,7 @@ def main() -> int:
     enum_ws = prose_ws = 0
     hits = []
     ENUM = {"HIS-OWN", "OTHER", "UNKNOWN", None, ""}
+    judged = [0, 0, 0]   # [能判, 中间态, 缺失/不认识]
     for d in [str(_w) for _w in iter_workspaces(CORPORA)]:
         ws = pathlib.Path(d)
         led = ws / "evidence/source-ledger.jsonl"
@@ -158,6 +180,12 @@ def main() -> int:
             _a = r.get("attribution")
             if isinstance(_a, str) and _a not in ENUM and len(_a) > 24:
                 _prose += 1          # ★ 散文型：本件对它一言不发
+            elif _a in OWN_VALUES or _a in NOT_OWN_VALUES:
+                judged[0] += 1       # ★ 真正能判的
+            elif _a in AMBIGUOUS_VALUES:
+                judged[1] += 1       # 中间态：认得出但有意不判
+            else:
+                judged[2] += 1       # 缺失／不认识
             why = clash(_a, r.get("tier"))
             if why:
                 pos, n = creator_position(r.get("author"), surname)
@@ -174,6 +202,11 @@ def main() -> int:
     print(f"★★ **`attribution` 两代 schema**：枚举型 {enum_ws} 个工作区｜"
           f"**散文型 {prose_ws} 个（{prose_rows} 行，占 {100*prose_rows/total:.1f}%）** —— "
           f"散文那一半 `clash()` 恒返回 None，**下面这个数只覆盖枚举那一半**")
+    print(f"★★ **本件真正判得了多少行**：能判 **{judged[0]}**（{100*judged[0]/total:.1f}%）"
+          f"｜中间态有意不判 {judged[1]}（CO-AUTHORED／ATTRIBUTION-UNCLEAR）"
+          f"｜散文型 {prose_rows}｜缺失或不认识 {judged[2]}")
+    print(f"   ⇒ 下面那个「N 行打架」的**分母是 {judged[0]}，不是 {total}**。"
+          f"「只有 N 行」**不等于**「全库只有 N 个问题」。")
     print(f"全库台账 **{total}** 行；`attribution` 与 `tier` 互相否定的："
           f"**{sum(len(b) for _, b in hits)} 行**，分布在 **{len(hits)}** 个工作区")
     print("★ 本件**不判哪个字段是对的**（那要读书名页、看 creator 位次，是人的事），"
