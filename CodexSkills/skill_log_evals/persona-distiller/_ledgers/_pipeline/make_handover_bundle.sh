@@ -64,6 +64,26 @@ print("扫到 %d 个 wip 工作区（**从包里现扫，不是写死的名单**
       % (len(NEW), "、".join(NEW)))
 if len(NEW) < 10:
     print("❌ 只扫到 %d 个，少于第 1 批的 10 个 —— 包可能不全"%len(NEW)); ok=False
+# ★★★ 2026-08-13 晚：`NEW` 要求 `wip-*/workspaces/` 存在且非空，
+#   于是**扁平布局**（账本直接在 `wip-*/` 下，早期那几个人）整个落在下面四道门之外：
+#   语料指针 sha256／台账校验和／台账定位／重建清单 —— 一条都扫不到它们，
+#   而那四行印的是「**%d 个工作区**逐条核」，读起来像全的。实测落在门外的有 22 个，
+#   其中 15 个连账本都没有（探测桩，本来就没东西可查），**7 个有真账本共 993 行**。
+#   [[a-gates-scan-set-is-smaller-than-reality]]：**判据扫的集合比实况小**，第八种形状。
+#   这里不改 `NEW` 的定义（四道门的读法都按 `workspaces/` 布局写死，改它要连着改四处，
+#   不是移交当晚该动的），而是**把差集印出来并标「未检查，不是通过」**——
+#   空默认值吞掉「不知道」是另一条踩过的坑。
+OUT=[p.name for p in sorted(C.glob("wip-*")) if p.is_dir() and p.name not in NEW]
+out_led=[(w, sorted((C/w).rglob("source-ledger.jsonl"))) for w in OUT]
+out_has=[(w,l) for w,l in out_led if l]
+if OUT:
+    n_rows=sum(sum(1 for x in l[0].read_text(encoding="utf-8",errors="replace").splitlines()
+                   if x.strip()) for _,l in out_has)
+    print("！ 另有 %d 个 wip 目录不在上面这 %d 个里（没有 `workspaces/` 布局）："
+          "其中 %d 个无账本（探测桩，无可查），**%d 个有账本共 %d 行 —— 未检查，不是通过**"
+          % (len(OUT), len(NEW), len(OUT)-len(out_has), len(out_has), n_rows))
+    if out_has:
+        print("     " + "、".join(w for w,_ in out_has))
 # ★★★ 2026-08-13：定深路径**够不着第三种布局**。
 #   实测有 8 个工作区多套了一层：`wip-osler-110/workspaces/william-osler/william-osler/…`，
 #   于是 `d/slug/evidence/…` 一律落空，它们被报成「没有台账」并跳过；

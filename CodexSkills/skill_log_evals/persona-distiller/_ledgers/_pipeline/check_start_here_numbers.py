@@ -204,6 +204,73 @@ def measure_layout(files):
     return tot, has, ptr, none_
 
 
+def measure_resolvable(files, root=None):
+    """→ dict：**账本的每一条，正文是不是真在仓里**。口径同六格：**`git ls-files`**。
+
+    为什么要单量：`measure_layout()` 的「正文就在仓里」是**只要有一份 `.txt` 就算**
+    （`d["txt"] = True`）。收件人读到「32 个正文就在仓里」会理解成**这 32 个是全的**，
+    而 2026-08-13 实测 Cicero 19 条只有 17 份、Mendel 20 条只有 17 份——
+    **算在那 32 里，却是残的。** 计数要连口径一起给。
+
+    ★ 归组按**账本所在目录**（去掉 `evidence/` `_corpus/` 这一层），不按 `/workspaces/<人>`：
+      Blackstone #169 与 Holmes #170 的目录多套了一层（`workspaces/<人>/<人>/`）**且各有两份账本**
+      （`_corpus/` 一份、`evidence/` 一份）。按 `/workspaces/` 切会切到外层，
+      `local_path` 一条都解析不到；而 `check_corpus_presence.scan()` 把「一个目录多份账本」
+      判成容器往下沉，于是**工作区整行消失**、换成两条半行，其中 `evidence` 那条报「缺 15」——
+      **那是假红**：正文在 `_corpus/raw/` 下，一份没少。
+
+    ★ 判「在不在」一律查 `git ls-files` 的集合，**不查磁盘**：
+      磁盘上有而 git 里没有，收件人 clone 完就是拿不到。自测第 6 条守着这一点。
+    """
+    tracked_set = set(files)
+    root = pathlib.Path(root) if root else ROOT
+    per = {}
+    for f in files:
+        if os.path.basename(f) != "source-ledger.jsonl":
+            continue
+        d = os.path.dirname(f)
+        if os.path.basename(d) in ("evidence", "_corpus"):
+            d = os.path.dirname(d)
+        slot = per.setdefault(d, {"rows": 0, "miss": 0, "nopath": 0})
+        try:
+            body = (root / f).read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        for line in body.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                row = json.loads(line)
+            except ValueError:
+                continue
+            slot["rows"] += 1
+            lp = row.get("local_path")
+            if not lp:
+                slot["nopath"] += 1
+                slot["miss"] += 1
+                continue
+            if f"{d}/{lp}" not in tracked_set:
+                slot["miss"] += 1
+    ptr_dirs = {os.path.dirname(os.path.dirname(f)) if os.path.basename(os.path.dirname(f)) == "raw"
+                else os.path.dirname(f)
+                for f in files if os.path.basename(f) == "_ids-rebuild.txt"}
+    full = sum(1 for v in per.values() if v["rows"] and v["miss"] == 0)
+    part = sum(1 for v in per.values() if v["rows"] and 0 < v["miss"] < v["rows"])
+    none_ = sum(1 for v in per.values() if v["rows"] and v["miss"] == v["rows"])
+    # ★ 「一条都取不到」里还要再分一刀：**有没有重建指针**。
+    #   有指针 = 收件人跑一次抓源就回来了（这是 Owner 定的「仓里只放指针」）；
+    #   没指针 = **真的取不回来**。2026-08-13 实测 wip-livermore-100 就是后者（536 条）。
+    lost = sorted(d for d, v in per.items()
+                  if v["rows"] and v["miss"] == v["rows"] and d not in ptr_dirs)
+    return {"工作区": len(per), "全取得到": full, "部分": part, "一条都取不到": none_,
+            "取不到的条数": sum(v["miss"] for v in per.values()),
+            "账本条数": sum(v["rows"] for v in per.values()),
+            "无 local_path": sum(v["nopath"] for v in per.values()),
+            "空账本": sum(1 for v in per.values() if not v["rows"]),
+            "取不回来": lost, "_per": per}
+
+
 def check_layout(text, files):
     """→ [不符项]。**空列表 = 过**；表里找不到那几行也算不符（不许静默放行）。"""
     tot, has, ptr, none_ = measure_layout(files)
@@ -284,6 +351,67 @@ def self_test() -> int:
     chk("不是表格的行不许混进来", not any("不是表的一行" in k for k in tbl))
     chk("★ 没有粗体数字的行不认（避免把说明行当成数据行）",
         not parse_table("| 已入库人物档案 | 七十一 |"))
+
+    # ── measure_resolvable：账本每条正文在不在仓里 ──────────────────
+    import tempfile
+
+    def mkled(base, rel, paths):
+        """在 base 下写一份账本，返回它的仓内相对路径。"""
+        p = base / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text("\n".join(json.dumps({"source_id": f"s{i}", "local_path": lp}
+                                          if lp is not None else {"source_id": f"s{i}"})
+                               for i, lp in enumerate(paths)) + "\n", encoding="utf-8")
+        return rel
+
+    with tempfile.TemporaryDirectory() as td:
+        base = pathlib.Path(td)
+        W = "_corpora/wip-x/workspaces/p"
+        led = mkled(base, f"{W}/evidence/source-ledger.jsonl",
+                    ["raw/a.txt", "raw/b.txt"])
+        r = measure_resolvable([led, f"{W}/raw/a.txt", f"{W}/raw/b.txt"], root=base)
+        chk("① 两条都在仓里 → 全取得到",
+            (r["工作区"], r["全取得到"], r["部分"], r["一条都取不到"]) == (1, 1, 0, 0))
+
+        r = measure_resolvable([led, f"{W}/raw/a.txt"], root=base)
+        chk("② 少一条 → 记「部分」，且取不到的条数 = 1",
+            (r["全取得到"], r["部分"], r["取不到的条数"]) == (0, 1, 1))
+
+        r = measure_resolvable([led], root=base)
+        chk("③ 一条都不在 → 记「一条都取不到」（不是「部分」）",
+            (r["部分"], r["一条都取不到"]) == (0, 1))
+
+        # ★ 反例：磁盘上确实有，但 git 没跟踪 —— 收件人 clone 完拿不到
+        (base / W / "raw").mkdir(parents=True, exist_ok=True)
+        (base / W / "raw" / "b.txt").write_text("在磁盘上", encoding="utf-8")
+        r = measure_resolvable([led, f"{W}/raw/a.txt"], root=base)
+        chk("★④ 反例：磁盘有而 `git ls-files` 没有 → 仍算取不到（口径是 git，不是磁盘）",
+            r["取不到的条数"] == 1)
+
+        # ★ 今晚的真实形状：同一个工作区两份账本（_corpus/ 与 evidence/）
+        led2 = mkled(base, f"{W}/_corpus/source-ledger.jsonl", ["_corpus/raw/c.txt"])
+        r = measure_resolvable([led, led2, f"{W}/raw/a.txt", f"{W}/raw/b.txt",
+                                f"{W}/_corpus/raw/c.txt"], root=base)
+        chk("★⑤ `_corpus/` 与 `evidence/` 两份账本 → 合成**一个**工作区（不是两个）",
+            (r["工作区"], r["账本条数"], r["全取得到"]) == (1, 3, 1))
+
+        # ★ 反例：没有 local_path 的行不许当成「取得到」
+        led3 = mkled(base, "_corpora/wip-y/workspaces/q/evidence/source-ledger.jsonl",
+                     [None, "raw/z.txt"])
+        r = measure_resolvable([led3, "_corpora/wip-y/workspaces/q/raw/z.txt"], root=base)
+        chk("★⑥ 反例：账本行没有 `local_path` → 算取不到并单独计数（不许静默算过）",
+            (r["部分"], r["无 local_path"], r["取不到的条数"]) == (1, 1, 1))
+
+        # ★⑦⑧ 「取不回来」＝ 全缺**且没有重建指针**。有指针的不算丢。
+        led4 = mkled(base, "_corpora/wip-z/workspaces/r/evidence/source-ledger.jsonl",
+                     ["raw/only.txt"])
+        r = measure_resolvable([led4], root=base)
+        chk("★⑦ 全缺且**没有**指针 → 记进「取不回来」",
+            [d.split("/")[1] for d in r["取不回来"]] == ["wip-z"])
+        r = measure_resolvable([led4, "_corpora/wip-z/workspaces/r/raw/_ids-rebuild.txt"],
+                               root=base)
+        chk("★⑧ 反例：同样全缺，但**有**指针 → 不算取不回来（这是 Owner 定的「仓里只放指针」）",
+            r["取不回来"] == [] and r["一条都取不到"] == 1)
     print(f"\n{'✓ 全过' if ok == t else f'✗ {t - ok}/{t} 项不符'}"
           "（表样逐字取自 2026-08-13 的 START-HERE.md）")
     return 0 if ok == t else 1
@@ -352,6 +480,27 @@ def main() -> int:
               "——要人改，判据会一直红着提醒")
     else:
         print("  ✓ 与实测一致")
+
+    # ★ 第 8 项：**账本逐条取不取得到**（2026-08-13 晚加）
+    #   上面第 7 项那句「取不回来 0」的射程只是 `workspaces/` 布局的那 53 个目录；
+    #   **扁平布局的（账本直接在 `wip-*/` 下）整个不在它的宇宙里**，
+    #   而 wip-livermore-100 恰好就在外面：536 条账本、正文 0 份、连指针都没有。
+    #   射程说不清的「0」比没有这个 0 更糟。
+    rv = measure_resolvable(tracked() or [])
+    print(f"\n账本逐条可取（口径同上 `git ls-files`）：{rv['工作区']} 个有账本的目录"
+          f" ＝ 全取得到 {rv['全取得到']} ＋ 部分 {rv['部分']}"
+          f" ＋ 一条都取不到 {rv['一条都取不到']} ＋ 空账本 {rv['空账本']}"
+          f"；账本 {rv['账本条数']:,} 行，其中 {rv['取不到的条数']:,} 行的正文不在仓里")
+    if rv["取不回来"]:
+        for d in rv["取不回来"]:
+            n = rv["_per"][d]["rows"]
+            print(f"  ！ **取不回来**：{d.split('/_corpora/')[-1]} —— "
+                  f"账本 {n} 条、正文 0 份、**也没有 `_ids-rebuild.txt`**"
+                  "（有指针的不算丢；这一个是真丢）")
+        print("  ★ 上面第 7 项的「取不回来 0」只覆盖 `workspaces/` 布局那 53 个，"
+              "**这一条在它射程之外** —— 不是矛盾，是两套宇宙，口径要一起念")
+    else:
+        print("  ✓ 取不到的都有 `_ids-rebuild.txt`，跑一次抓源就回来")
 
     if bad or miss or lay_bad:
         print(f"\n✗ 首屏六格 **{len(bad)} 个数不一致**"
