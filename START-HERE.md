@@ -62,8 +62,17 @@ python3 --version && git --version && echo OK
 
 在没有放语料的工作区上：
 
-    check_quote_speaker  → rc=4「**未判**，不是通过」（train 语料 0 份）
-    gen_claims.py        → rc=1（逐字引文回不了语料，**故意不写文件**）
+    check_quote_speaker           → rc=4「**未判**，不是通过」（train 语料 0 份）
+    gen_claims.py                 → rc=1（逐字引文回不了语料，**故意不写文件**）
+    flag_borrowed_voice --self-test → rc=5「**未跑**，不是通过」（自测的 36 个例子全建在真语料上）
+    detect_front_matter --self-test → rc=5「**未跑**」（自测要的 3 份语料不在本树）
+
+不需要语料的那些**现在就该是绿的**，可以立刻验：
+
+```bash
+python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/assign_lanes.py --selftest
+```
+（应当打印「自测通过：书信 正 12／反 11 ＋ 画名 反 5／正 4」并 rc=0）
 
 **这两条恰恰是对的行为**——旧版本在这种情况下会打 ✓ 并 rc=0，
 全库实测有 11 个工作区、264 条引文就是那样绿的。已修。
