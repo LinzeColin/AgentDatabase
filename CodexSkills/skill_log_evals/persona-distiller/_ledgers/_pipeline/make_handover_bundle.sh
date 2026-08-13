@@ -359,6 +359,25 @@ else:
     for l in mw.stdout.splitlines():
         if l.strip().startswith("✗"): print("     "+l.strip())
 
+# ★★ 台账两个字段打架（`check_attribution_tier_consistency.py`）：
+#   2026-08-14 给 Brandeis 找 heuristic 时撞见——他 `attribution=HIS-OWN` 的池子里
+#   **32.0% 的词 tier 是 S1**（1916 那份 Bunting v. Oregon 辩护状，creator 里他排第 3/5）。
+#   两个字段互相否定，而我按 attribution 过滤找「他的话」，就把 35.9 万词别人汇编的
+#   材料当成了他的声口。⇒ 只报不判（存量按㊵ 冻结），给新人物用。
+at=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                      "/_ledgers/_pipeline/check_attribution_tier_consistency.py"),
+                   "--self-test"], capture_output=True, text=True)
+if at.returncode != 0:
+    ok=False
+    print("❌ attribution/tier 一致性工具自测不过（rc=%d）"%at.returncode)
+else:
+    a2=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                          "/_ledgers/_pipeline/check_attribution_tier_consistency.py")],
+                      capture_output=True, text=True)
+    _n=[l for l in a2.stdout.splitlines() if l.startswith("全库台账")]
+    print("　" + (_n[0] if _n else "（无输出）"))
+    print("　　★ **存量按㊵ 冻结、只报不判**；新人物在阶段 2 收尾要跑一次")
+
 # ★★ 找第二处证据（`find_second_evidence.py`）：2026-08-14 Dewey 上，三条我判过
 #   「补不到第二处」的 claim 里有 **3 条其实补得到** —— 我按 Brandeis 的样本推的结论是错的。
 #   把那套动作固化成工具（正对照先跑／排除同一部作品／候选之间也归组／只交候选不下结论）。
