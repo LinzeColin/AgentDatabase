@@ -288,13 +288,18 @@ def load_texts(ws: pathlib.Path):
 
 
 def report(ws: pathlib.Path, threshold: float, top: int = 8,
-           contain_t: float = CONTAIN_T) -> int:
+           contain_t: float = CONTAIN_T, tally=None) -> int:
     texts, titles, miss = load_texts(ws)
     if not texts:
+        if tally is not None:
+            tally[3] += 1
         print(f"★ {ws.name}：**未量，不是通过** —— 读不到任何 train 正文"
               f"（台账指到的文件 {miss} 份不在本机；语料按裁定不进 git）")
         return 4
     r = measure(texts, threshold, contain_t)
+    if tally is not None:
+        tally[1] += 1
+        tally[2] += r["份数"]
     old = ws / "raw/_dedup.json"
     o = json.loads(old.read_text(encoding="utf-8")) if old.is_file() else {}
     n, mh, bt = o.get("文件数"), o.get("独立文献数上界"), o.get("按题名归并的独立作品数")
@@ -338,13 +343,24 @@ def main() -> int:
         return report(pathlib.Path(a.workspace), a.threshold, contain_t=a.contain_threshold)
     if a.all:
         rc = 0
+        _seen = [0, 0, 0, 0]   # [找到, 量到, train 份数, 未量]
         # ★★ 2026-08-14：原来这里是 `glob(CORPORA/"wip-*"/"workspaces"/"*")`，
         #   **漏掉 8 个「名字重复一层」的工作区（train 778 份，占全库 28.5%）**，
         #   而且它们的正文一份不缺。当天我据此发的「全库 1950 份」是少算的。
         #   改成按台账定位（workspace_roots），三种布局都收得到。
         for d in iter_workspaces(CORPORA):
-            r = report(pathlib.Path(d), a.threshold, contain_t=a.contain_threshold)
+            _seen[0] += 1
+            r = report(pathlib.Path(d), a.threshold, contain_t=a.contain_threshold,
+                       tally=_seen)
             rc = rc or (0 if r in (0, 4) else r)
+        # ★★ 2026-08-14：**印分母，不只印命中**。今天四次栽在「集合比实况小」，
+        #   而每一次屏幕上都只有一个看着正常的数。这里把「量到多少／没量到多少」
+        #   摆在最后一行，读的人才知道上面那些数是从多大的集合里出来的。
+        print(f"\n★★ **覆盖面**：按台账找到工作区 **{_seen[0]}** 个｜"
+              f"量到 **{_seen[1]}** 个（train **{_seen[2]:,}** 份）｜"
+              f"**未量 {_seen[3]} 个**（读不到 train 正文——语料按裁定不进 git）")
+        print("   ⇒ 上面每一行的「独立作品／塌缩」**只覆盖量到的那部分**；"
+              "未量的不是「干净」，是**没被问到**。")
         return rc
     ap.error("要 --workspace 或 --all 或 --self-test")
 

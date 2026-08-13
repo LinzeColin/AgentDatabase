@@ -163,6 +163,15 @@ def main() -> int:
         groups.setdefault(g, []).append(s)
 
     langs = {meta[s][2] for s in txt if meta[s][2] != "?"}
+    # ★★ 印分母：候选是从多大的集合里挑的。没有这一行，「候选 0 部」会被读成
+    #   「这个人没有第二处」，而它也可能是「能搜的作品本来就只有一两部」。
+    _works = {}
+    for s in txt:
+        g = next((k for k in _works if same_work(sig[k], sig[s])), s)
+        _works.setdefault(g, []).append(s)
+    _ex = sum(1 for s in txt if s in cited or any(same_work(sig[s], sig[c]) for c in cited))
+    print(f"★★ **搜索面**：本工作区 train 有正文的 {len(txt)} 份 → **{len(_works)} 部独立作品**；"
+          f"其中 {_ex} 份是已引源或与之同一部（已排除）")
     print(f"候选：{sum(len(v) for v in cands.values())} 处，落在 **{len(groups)} 部不同作品**"
           f"（已排除已引源本身及其同一部作品、已排除 holdout）")
     if len(langs) > 1:
