@@ -1,8 +1,8 @@
 {
  "builder_version": "v0.0.0.5",
- "chosen_subject_uid": "person-6752688d800cdfb0",
+ "chosen_subject_uid": "john-dewey-1859-1952",
  "consent_authority": null,
- "created_at": "2026-08-13T14:31:43Z",
+ "created_at": "2026-08-13T14:36:56Z",
  "current_version": null,
  "existential_hypotheses_enabled": false,
  "identity_selection": {
@@ -48,9 +48,9 @@
    "label": "A",
    "occupation_or_role": "美国哲学家、教育学家",
    "professional_background": "1859–1952。芝加哥大学实验学校 1896–1904；哥伦比亚大学哲学教授；1915 年 AAUP 创始会议主持人、首任会长。",
-   "subject_uid": "person-6752688d800cdfb0"
+   "subject_uid": "john-dewey-1859-1952"
   },
-  "chosen_subject_uid": "person-6752688d800cdfb0",
+  "chosen_subject_uid": "john-dewey-1859-1952",
   "normalized_name": "johndewey",
   "resolution": "single",
   "schema_version": "1.0"
@@ -74,12 +74,13 @@
  "slug": "john-dewey",
  "status": "draft",
  "subject_origin": "public",
- "target_id": "tgt-57ef0953ec6f",
+ "target_id": "tgt-4f9946b63a6d",
  "time_scope": "all available periods, separated by role and material drift",
- "updated_at": "2026-08-13T14:31:43Z",
+ "updated_at": "2026-08-13T14:36:56Z",
  "aliases": [
   "Dewey, John",
   "Dewey, John, 1859-1952"
  ],
- "★ 脚手架补齐": "2026-08-14 01:0x：本工作区此前只有一份手写的最小 meta.json（5 个键），内容产物（persona/work/cognitive-os/decision-policy/strategy/capabilities/boundaries/divergence-map/facts/hypotheses、evidence/*、evals/cases.jsonl、references/research/*）早已做好，缺的是建器脚手架。处置：在临时目录跑 init_target.py 生成一套，**只拷贝本工作区没有的文件，一个已存在的文件都没有覆盖**；本 meta 换成建器版并并回原 aliases。profile=quick 是按㉞「按可得性选档+退档写明理由」定的：39 条源够 standard 的 24，但 standard 要 6 条道而实测只有 3 ⇒ 退档，与同批的 Brandeis #172、Michelangelo #185 同档。"
+ "★ 脚手架补齐": "2026-08-14 01:0x：本工作区此前只有一份手写的最小 meta.json（5 个键），内容产物（persona/work/cognitive-os/decision-policy/strategy/capabilities/boundaries/divergence-map/facts/hypotheses、evidence/*、evals/cases.jsonl、references/research/*）早已做好，缺的是建器脚手架。处置：在临时目录跑 init_target.py 生成一套，**只拷贝本工作区没有的文件，一个已存在的文件都没有覆盖**；本 meta 换成建器版并并回原 aliases。profile=quick 是按㉞「按可得性选档+退档写明理由」定的：39 条源够 standard 的 24，但 standard 要 6 条道而实测只有 3 ⇒ 退档，与同批的 Brandeis #172、Michelangelo #185 同档。",
+ "★ uid 约定": "`chosen_subject_uid` 用**可读 slug 式**（`john-dewey-1859-1952`），与全库 30 个存量工作区一致。★ 第一次我写成了 `subject_uid()` 现算的 `person-6752688d800cdfb0` —— 那会让本工作区成为**全库唯一**用 hex 式的一个；`init_target.py` 是把这个值**直接从同名护栏抄过来**的，所以约定由护栏作者定，不是由那个函数定。"
 }
