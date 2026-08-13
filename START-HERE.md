@@ -238,6 +238,24 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/quality_check.py <�
    压倒性的第一死因是 `min_lanes`（六条研究道里有材料的不足 3 条），
    而这类人**语料量与一手占比往往远超门**——只看份数会以为可以做。
 
+## 五之一、★★★ **判分之前必须先定的一句**（2026-08-14 发现）
+
+**八人里五人的档位，`meta.json` 与两份阶段台账不一致。**
+
+| | 阶段 2 台账「判据给的档」 | 阶段 3 收尾表 | `meta.json` |
+|---|---|---|---|
+| Lincoln／Jefferson／Bismarck／Pestalozzi | **deep** | **deep** | `quick` |
+| Kant | **deep** | —— | `quick` |
+| Machiavelli／Rousseau／Fröbel | quick | —— | `quick` ✓ |
+
+`quality_check` 与判分读的是 **`meta.json`** ⇒ **照现在跑，那五人按 `quick` 判**：
+`min_baseline_delta` **0.03**，而台账说的 deep 是 **0.07**——**差 2.33 倍**
+（`min_overall` 0.65 vs 0.80、`min_fact` 0.80 vs 0.93 同理）。
+
+★ **我没有碰那 5 份 `meta.json`。** 改成 deep 会让他们更难过（方向上不利于我），
+**但那仍然是「量之前动尺子」**，而判分清单的全部意义就是判读规则先落纸。
+⇒ **判分之前先定一句：按 `quick` 还是按 `deep`。** 详见判分清单末节。
+
 ## 五之二、★ 新出现的一件「只能你定」（2026-08-14）
 
 **「档位（profile）该按台账份数算，还是按去重后的独立作品数算？」**
