@@ -123,6 +123,11 @@ def guess_lang(text: str, cap: int = 20000) -> str:
 
     ★ 先看字符集（非拉丁文字整块判），再用拉丁虚词表分英/意/德/拉/法。
     """
+    # ★★ 取样单位：字符集那一步按**字符**切，虚词剖面那一步仍按**词**切。
+    #   改字符集分流时我把整段改成了 text[:cap]（字符），样本从 2 万词缩到约 3 千词，
+    #   全库被标的工作区**换了一批**（Cicero／Liebig／Martens 掉出，Frobel／Machiavelli／
+    #   Mendel／Pestalozzi 进来）——我却在提交里写成「5 → 6」，像是只多了一个。
+    #   **换了取样单位就是换了尺子，不许当成同一把尺子的增量。**
     s = text[:cap]
     letters = sum(1 for c in s if c.isalpha())
     if letters:
@@ -130,7 +135,7 @@ def guess_lang(text: str, cap: int = 20000) -> str:
             n = sum(1 for c in s if lo <= ord(c) <= hi)
             if n / letters >= 0.20:      # 混排也认得出来（书名页常有拉丁转写）
                 return code
-    w = _WORD.findall(s.lower())
+    w = _WORD.findall(text.lower())[:cap]
     if not w:
         return "?"
     sc = {k: sum(1 for x in w if x in v) / len(w) for k, v in STOPWORDS.items()}
@@ -403,7 +408,8 @@ def report(ws: pathlib.Path) -> int:
               f"（选集把同一封信收进两本）")
     real = {k: v for k, v in r["语种"].items() if k != "?"}
     if len(real) > 1:
-        print(f"    ★★ **本工作区混着 {len(real)} 种语言**（按正文判：{real}）——"
+        print(f"    ★★ **被引的源里混着 {len(real)} 种语言**（按正文判：{real}；"
+              f"**只统计被这些 claim 引到的源**，不是整个工作区）——"
               f"原文与译文的重叠恒为 0，本件**看不见**它们是同一次话语 ⇒ "
               f"上面的「实测两处」在这里可能是**少报**，不是干净")
     if r["射程外同样引了塌缩对的"]:
