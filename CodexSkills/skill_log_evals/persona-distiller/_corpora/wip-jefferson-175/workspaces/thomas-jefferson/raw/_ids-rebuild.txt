@@ -2,6 +2,8 @@
 # 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
 #   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
 # 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：73
 10064095bsb
 10069010bsb
 americanpolitica00jeff
@@ -9,12 +11,13 @@ anessaytowardsf00jeffgoog
 annualregistervi00jeff
 bim_eighteenth-century_notes-on-the-state-of-vi_jefferson-thomas_1787
 bub_gb_LlJBAAAAcAAJ
-correspondencebe0000jeff
 cu31924026091581
 cu31924027055718
+cu31924028751760
 cu31924071238426
 cu31924071238442
 cu31924071238467
+cu31924092528631
 cu31924092892011
 cu31924092892037
 gpl_1600362
@@ -36,9 +39,11 @@ memoirscorrespo00jeffgoog
 memoirscorrespo01jeffgoog
 notesonstateofvir00jeff
 notesonstateofvirg00jeff
+orationoncentenn00dall
 summaryviewofrig00jeff_1
 tudesconomiques00fovigoog
 version-final-de-la-declaracion-de-la-independencia
+virginiadynasty00johnrich
 virginiakentucky00jeff
 workofjeffer02jeffuoft
 workofjeffer03jeffuoft
@@ -70,3 +75,5 @@ writingsthomas13jeffrich
 writingsthomas17jeffrich
 writingsthomasj00editgoog
 writingsthomasj00washgoog
+youthofjefferson00cookiala
+youthofjefferson00cookrich

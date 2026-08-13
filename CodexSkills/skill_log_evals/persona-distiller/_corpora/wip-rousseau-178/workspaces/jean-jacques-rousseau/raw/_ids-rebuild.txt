@@ -2,7 +2,10 @@
 # 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
 #   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
 # 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：103
 10066336bsb
+10097325bsb
 10599347bsb
 10713049bsb
 10762426bsb
@@ -21,8 +24,10 @@
 1846oeuvrescom02rousuoft
 1911lettresind00rous
 31383026610652
+A029103
 BIUSante_07891x01
 a1758jjrousseauci00rous
+aa1758jjrousseau00rous
 amileoudeldu01rous
 amileoudeldu02rous
 amileoudeldu03rous
@@ -31,8 +36,12 @@ avisauxgensdelet00rous
 bekenntnisseunv00hardgoog
 bim_eighteenth-century_a-dialogue-between-a-man_rousseau-jean-jacques_1761
 bim_eighteenth-century_an-inquiry-into-the-natu_rousseau-jean-jacques_1791_0
+bim_eighteenth-century_anecdotes-of-the-last-tw_corancez-olivier-de_1798
 bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1787
 bim_eighteenth-century_botanique-english-le_rousseau-jean-jacques_1796
+bim_eighteenth-century_considrations-sur-le-go_rousseau-jean-jacques_1782
+bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782
+bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782_0
 bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_1
 bim_eighteenth-century_eloisa-_rousseau-jean-jacques_1784_2
 bim_eighteenth-century_eloisa-or-a-series-of-_rousseau-jean-jacques_1761_1
@@ -46,6 +55,7 @@ bub_gb_OXcpAAAAYAAJ
 bub_gb_yN1MAAAAcAAJ
 bub_gb_zN1MAAAAcAAJ
 ceuvrescomplete00troigoog
+chepfl-lipr-AXA226
 collectioncompl31rousgoog
 collectioncompl41rousgoog
 collectioncompl76rousgoog
@@ -55,14 +65,45 @@ confessionsofjjr03905gut
 confessionsofjjr03906gut
 confessionsofjjr03912gut
 confessionsofjjr03913gut
+contratsocialou00rous
 cu31924014398154
 cu31924027383284
+cu31924027386915
+ddiscourssurlori00rous
 dictionnairedemu02rous
+discourssurlor00rous
+discourssurlori00rous
+discourssurlori01rousgoog
+discourssurlorig00rous_0
 ducontractsocia00rousgoog
+ducontratsocialo02rous
 eloisaoraseries01rousgoog
 espritmaximesetp00rous
+extraitduprojet00sain
+extraitduprojetd00sain
+frenchenglishphi34desc
+honneurspublicsr00pari
+india.history.resource.111524
 india.history.resource.94272
+jeanjacquesrous00text
+jjrousseaucitoy00rous
 mileoudelducatio00rous
+ninonlenclosmrsu00lenc
+observationsdeje00rous
+oeuvrescomplt05rous
+oeuvresdejjrous08rous
+oeuvresdejjrous09rous
+oeuvresdejjrous10rous
+oeuvresdejjrouss01rous
+oeuvresdejjrouss12rous
+oeuvresdejjrouss15rous
+oeuvresdejjrouss22rous
+romanticelements00fole
+rousseauandnatu00hudsgoog
+rousseaunaturali0000unse_c8a6
+tudesurjjrousse00giragoog
+tudesurltatm00bouguoft
+uvrescompltesd02rous
 uvrescompltesde04rousgoog
 uvrescompltesde07rousgoog
 yhteiskuntasopim53593gut

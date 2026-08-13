@@ -2,6 +2,8 @@
 # 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
 #   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
 # 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：65
 00074230bsb
 10040686bsb
 10040687bsb
@@ -18,9 +20,7 @@
 265433882.1678.emory.edu
 265433882.1682.emory.edu
 265433882.1713.emory.edu
-FilosofaDeLaHistoriaEmmanuelKant
 ImmanuelKantsKritikDerReinenVernunftMitEinerEinleitungUnd
-Kant-polmica-CRP
 KantAntropologiaPrammatica
 ProlegomeniKantMartinetti
 TheMetaphysicOfEthicsByImmanuelKantTranslatedByJ.w.SempleEdited
@@ -59,9 +59,7 @@ kant-della-forza-dell-animo
 kantchoixdetexte00kant
 kantlobelloylosublime1919
 kantscritique01kantuoft
-kantsgesammeltes0000kant_l9l8
 kantsgesammeltes0010kant
-kantsgesammeltes0027kant
 kantsgesammeltes12kant
 kantsgesammeltes13kant
 kantsgesammeltes55925gut

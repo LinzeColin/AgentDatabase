@@ -80,6 +80,35 @@ for ws in NEW:
 print(("✅" if not miss else "❌")+" 语料指针：**%d 个工作区**逐条核 sha256，查不到的 = %d"
       %(len(NEW)-nolg,miss)+("　（另有 %d 个未检查）"%nolg if nolg else ""))
 
+# ★★ 台账的**定位字段**：老工作区用 `locator`，新的用 `url`——
+#   我一度只查 `url`，于是把 939 行报成「缺指针」。**两个都认，缺的才是真缺。**
+noloc=0; nosum=0; rowN=0
+for ws in NEW:
+    d=C/ws/"workspaces"; slug=[p.name for p in d.iterdir() if p.is_dir()][0]
+    lg=d/slug/"evidence"/"source-ledger.jsonl"
+    if not lg.exists(): continue
+    rs=[json.loads(l) for l in lg.read_text(encoding="utf-8").splitlines() if l.strip()]
+    rowN+=len(rs)
+    noloc+=sum(1 for r in rs if not (r.get("locator") or r.get("url")))
+    nosum+=sum(1 for r in rs if not (r.get("checksum") or r.get("normalized_checksum")))
+print(("✅" if not nosum else "❌")+" 台账 %d 行：缺校验和 %d 行｜缺定位（locator 或 url）%d 行"
+      %(rowN,nosum,noloc)+("　★ 缺定位的那些语料**重抓不回来**" if noloc else ""))
+
+# ★★★ 重建清单：语料不进 git 之后，`_ids-rebuild.txt` 是收件人重建语料的**唯一入口**。
+#   它一直是手打的 ⇒ 实测 13 个里 **10 个是坏的**（Rousseau 少 39 条、Marshall 少 22、
+#   Kant 反向多出 4 条从没抓成功的），而没有任何东西会提醒。已做成 emit_ids_rebuild.py，
+#   这里接上它的 --scan（只查不写），**不许再靠人记得跑**。
+import subprocess
+chk=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                        "/_ledgers/_pipeline/emit_ids_rebuild.py"),
+                    "--scan", str(C)], capture_output=True, text=True)
+tail=[l for l in chk.stdout.strip().splitlines() if l.strip()][-1:] or ["(无输出)"]
+print(("✅" if chk.returncode==0 else "❌")+" 重建清单 _ids-rebuild.txt：%s"%tail[0])
+if chk.returncode!=0:
+    ok=False
+    for l in chk.stdout.splitlines():
+        if l.startswith("❌"): print("     "+l)
+
 # ★★ 盲判用例要**正面数出来**，不能只在出错时才打印——沉默不等于通过。
 #    ★ 期望值**不写死题数**：写死过一次（16/16/17/16），quick 四人补题到 32 之后
 #      它当场变红，而产物其实是对的。改成**按档位判下限 + 类数必须 16**，总数只打印。

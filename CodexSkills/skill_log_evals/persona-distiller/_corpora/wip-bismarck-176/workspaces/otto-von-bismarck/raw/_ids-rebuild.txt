@@ -2,6 +2,8 @@
 # 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
 #   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
 # 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：70
 00078127bsb
 10558638bsb
 10558639bsb
@@ -50,7 +52,9 @@ bub_gb_-a0PAAAAQAAJ
 bub_gb_BbIPAAAAQAAJ
 bub_gb_BkIPAAAAYAAJ
 bub_gb_CWAPAAAAYAAJ
+bub_gb_KsNVAAAAYAAJ
 bub_gb_NjNDAQAAMAAJ
+bub_gb_akpzLZLxvP4C
 cihm_77460
 correspondancedi01bism
 correspondenceof00bismuoft
@@ -67,5 +71,6 @@ gedankenunderinn01bism
 gedankenunderinn03bism
 india.history.resource.85205
 lovelettersofbis00bismiala
+preussenimbunde00poscgoog
 professionalrec00liargoog
 vierredenzurus00bismiala

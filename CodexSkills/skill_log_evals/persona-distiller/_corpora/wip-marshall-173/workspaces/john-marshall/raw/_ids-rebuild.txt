@@ -2,23 +2,44 @@
 # 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
 #   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
 # 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：95
 ahistorycolonie00marsgoog
 ahm3974.0001.001.umich.edu
 bim_eighteenth-century_speech-of-the-hon-john-_marshall-john-chief-ju_1800
 bub_gb_F4c8AAAAIAAJ
 bub_gb_QSAFAAAAYAAJ
+bwb_S0-BPV-382_2
+bwb_S0-CBR-236_2
+centennialanniv00schogoog
 completeconstitu00marsuoft
 constitutionald00cottgoog
 constitutionalde01marsuoft
 constitutionalde02marsuoft
+cu31924019413545
+cu31924020889543
 cu31924024323069
 cu31924032751632
+cu31924052204165
+cu31924052204173
+cu31924052204207
+cu31924059112304
+cu31924059112312
+cu31924059112320
+eulogyonlifechar00binn
 historyofcolonie00mars
 historyofcolonie01mars
 india.history.resource.17702
+johnmarshalland01corwgoog
 johnmarshallcom00dillgoog
 johnmarshallcom00marsgoog
 johnmarshallcom01marsgoog
+johnmarshallcons00corwuoft
+johnmarshalllif03dillgoog
+johnmarshalllif04dillgoog
+johnmarshalllif07dillgoog
+johnmarshalllife01dillrich
+johnmarshalllife02dilluoft
 johnmarshallnewintro00marsrich
 lifegeorgewashi00marsgoog
 lifegeorgewashi00washgoog
@@ -61,6 +82,7 @@ lifeofgeorgewash05marsiala
 lifeofgeorgewash06mars
 lifeofgeorgewash1860mars
 lifeofgeorgewash1926mars
+lifeofjohnmarsha0004albe_n7d4
 marshallchiefjust00marsrich
 opinionofthesupr29513gut
 opinionsoflatech00mars
@@ -68,6 +90,8 @@ plantedcolonies00marsrich
 politicalandeco02ostegoog
 politicaleconomi00mars
 politicaleconomi00marsrich
+proceedingsloui00assogoog
+proceedingsofbar00unit
 thelifeofgeorgew18591gut
 thelifeofgeorgew18592gut
 thelifeofgeorgew18593gut

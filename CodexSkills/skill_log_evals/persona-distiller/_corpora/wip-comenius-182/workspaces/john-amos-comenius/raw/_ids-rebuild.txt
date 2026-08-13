@@ -2,6 +2,8 @@
 # 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
 #   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
 # 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：83
 00140496bsb
 10026103bsb
 10261284bsb
@@ -34,6 +36,7 @@ bim_early-english-books-1475-1640_reverendi-et-clarissimi-_komensk-jan-amos_1638
 bim_early-english-books-1475-1640_the-gate-of-tongues-unlo_komensky-jan-amos_1633
 bim_early-english-books-1641-1700_a-continuation-of-mr-jo_comenius-johann-amos_1648
 bim_early-english-books-1641-1700_a-generall-table-of-euro_comenius-johann-amos_1670
+bim_eighteenth-century_joh-amos-commenii-orbis_comenius-johann-amos_1705
 bub_gb_2x85AQAAMAAJ
 bub_gb_34RCAQAAMAAJ
 bub_gb_34ZDAQAAMAAJ
@@ -46,16 +49,21 @@ bub_gb_FTtFAAAAYAAJ
 bub_gb_Fx1BAAAAcAAJ
 bub_gb_GoAWAAAAIAAJ
 bub_gb_GyAoAAAAYAAJ
+bub_gb_HAI2AAAAIAAJ
 bub_gb_HiRbAAAAcAAJ
 bub_gb_JvJCAQAAMAAJ
 bub_gb_MAITAAAAIAAJ
+bub_gb_MWcM-4kItEAC
 bub_gb_MrNBAAAAYAAJ
+bub_gb_SLlKAAAAYAAJ
+bub_gb_Up_239je-xMC
 bub_gb_WGNcAAAAcAAJ
 bub_gb__A5WAAAAcAAJ
 bub_gb_gzBQAAAAcAAJ
 bub_gb_iaoPAAAAQAAJ
 bub_gb_sqpdAAAAcAAJ
 bub_gb_uhBcAAAAcAAJ
+bub_gb_yp8AAAAAYAAJ
 bub_gb_zYpUAAAAcAAJ
 dbc.wroc.pl.BOss_XVII_3922
 dbc.wroc.pl.BOss_XVII_3923
@@ -63,7 +71,15 @@ derrheinalsschic00paqu
 didaktikanawren00comeuoft
 grosseunterricht00comeuoft
 jbc.bj.uj.edu.pl.DIGSTDR000361
+johamoscommeniio00come
+johannamoscomen00kerrgoog
+johannamoscomen00kvagoog
+johannamoscomen01kerrgoog
+johannamoscomen02kerrgoog
+johannamoscomen03kerrgoog
 labyrinthofworld00comeuoft
+lebenundschicks00vrbkgoog
+ned-kbn-all-00004319-002
 obrazjednotyesko00lasi
 orbispictusofjoh00comeiala
 orbispictusswtwo0000come

@@ -1,0 +1,68 @@
+# ★ **重建用的权威清单** —— 从 _fetch-manifest.json 的「已取回」现生成。
+# 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
+#   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
+# 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：62
+8ldv1
+8ldvc
+IManoscrittiDiLeonardoDaVinci
+LeonardoFrammenti
+MSR.084
+McGillLibrary-osl_tabula-anatomica-leonardo-da-vinci_V777t1830-19112
+atreatiseonpaint00leon
+b22031698
+b22385162
+b28755376
+b28755959_0001
+b29288769
+b30417880
+b30448621
+b30459370
+b33543380
+bim_eighteenth-century_a-treatise-on-painting-_leonardo-da-vinci_1796
+bub_gb_IAtAAAAAIAAJ
+bub_gb_KPwGAAAAQAAJ
+bub_gb_VdyPjBYNlX8C
+bub_gb_awzMHbVJXdcC
+bub_gb_hP0GAAAAQAAJ
+bub_gb_kjk_wi189ZEC
+bub_gb_q7wDAAAAYAAJ
+dasbuchvondermal00leonuoft
+dasbuchvondermal01leon
+dasbuchvondermal01leonuoft
+davincitrattatop00leon
+dellapitturadili00leon
+delmotoemisurad00leongoog
+desvortreflichen00leon
+drawingsofleonar00leonuoft
+gri_33125008484301
+gri_33125011130263
+gri_33125015154343
+gri_33125017557493
+gri_33125017557733
+ilcodicedileonar00leonuoft
+imanoscrittidile00leon
+imanoscrittidile00leon_0
+in.ernet.dli.2015.82680
+lefinezzedepenne00scar
+leonardo-da-vinci-quote-nothing-strenghtens-authority-so-much-as-silence.-www.-etoile.-app
+leonardodavincic00soci
+leonardodavincic00sociuoft
+leonardodavincid00leon
+leonardoprosator00leonuoft
+lesdessinsdelo00leonuoft
+lesmanuscritsdel00leonuoft
+literaryworksofl01leon
+literaryworksofl01leonuoft
+literaryworksofl02leon
+literaryworksofl02leonuoft
+natuurlykenschil00goer
+quattrodipintidi00colb
+raccoltadautorii10card
+trattatodellapit00leon_0
+trattatodellapit01leon
+trattatodellapit02leon
+trattatopittura02leon
+treatiseonpainti00leon_0
+treatiseonpainti00leon_1

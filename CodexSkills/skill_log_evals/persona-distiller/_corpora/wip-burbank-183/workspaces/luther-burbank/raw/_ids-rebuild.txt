@@ -1,0 +1,75 @@
+# ★ **重建用的权威清单** —— 从 _fetch-manifest.json 的「已取回」现生成。
+# 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
+#   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
+# 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：69
+Burbankseedbook00Burb
+Burbankseedbook00BurbA
+Burbankseedbook00BurbB
+Burbankseedbook00BurbC
+Burbankseedbook00BurbD
+Burbankseedbook00BurbE
+Burbankseedbook00BurbF
+Burbankseedbook00BurbH
+Burbankseedbook00BurbI
+Burbankseedbook00BurbJ
+Burbankseedbook00BurbK
+Burbankseedbook00BurbL
+Burbankseedbook00BurbM
+Burbankseedbook00BurbN
+Burbankseedbook00BurbO
+Burbankseedbook00BurbP
+Burbankseedbook00BurbQ
+CAT31282609
+CAT31282611
+CAT31283605
+CAT31283606
+CAT31284146
+CAT31284148
+CAT31284149
+CAT31285747
+CAT31286076
+CAT31286479
+CAT31287101
+CAT31287725
+CAT31287728
+CAT31288306
+CAT31288308
+CAT31289769
+CAT31291676
+burbankseedbook00burbr
+burbankseedbook00burbs
+burbankseedbook00burbt
+burbankseedbook00burbu
+burbankseedbookl1893burb
+burbanksexperime1895burb
+carpssu_000040
+catalogueoffruit1886burb
+clemantisjackman1893burb
+cu31924000329320
+cu31924000727549
+cu31924031221082
+giantprunewickso1895burb
+halfhourexperime00burb
+harvestofyears00burb_0
+howplantsaretra00burbgoog
+howplantsaretrai01burb
+howplantsaretrai01burbrich
+howplantsaretrai03burbrich
+howplantsaretrai06burbrich
+jstor-992550
+lutherburbankhi05socigoog
+lutherburbankhis02burbrich
+lutherburbankhis03burbrich
+lutherburbankhis04burbrich
+lutherburbankhis05burb
+newcreationsinfr1894burb
+newgladiolilittl00burb
+santarosanurseri1887burb
+specialtradelist1894burb
+traininghumanpl00burbgoog
+traininghumanpl03burbgoog
+trainingofhumanp00burb
+trainingofhumanp00burbiala
+whyiaminfidel1020burb

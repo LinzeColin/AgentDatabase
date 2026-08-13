@@ -1,0 +1,62 @@
+# ★ **重建用的权威清单** —— 从 _fetch-manifest.json 的「已取回」现生成。
+# 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
+#   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
+# 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：56
+10542478bsb
+10754532bsb
+MICHELANGELO_753
+artistmerchanta00bottgoog
+bub_gb_-Ex3yhDSSTcC
+bub_gb_4srIAdQY3UsC
+bub_gb_A4VTAAAAcAAJ
+bub_gb_FplWAAAAcAAJ
+bub_gb_VogLAQAAIAAJ
+bub_gb_eyp5Is6AwlcC
+bub_gb_g9rj_o_cnSAC
+bub_gb_rHu4_709T2oC
+buonarroti_le_lettere_di_michelangelo_buonarroti
+cu31924008756847
+cu31924014269975
+cu31924032174173
+dervonmichelang00vatigoog
+diebriefedesmich00mich
+diedichtungendes00mich
+diegedichte00michuoft
+eightyfouretche00raphgoog
+eightyfouretched00michuoft
+facsimilesorigi01fishgoog
+facsimilesorigi02fishgoog
+gri_33125004476533
+gri_33125016373926
+gri_33125016448520
+ilritrattomiglio00mich
+laletteredimich00buongoog
+laletteredimich00milagoog
+ldpd_9355154_000
+leletteredimiche00mich
+lerimedimichela00magggoog
+lerimedimichelag00mich
+lerimedimichelag00mich_1
+lifemichaelange02buongoog
+loeuvrelittrai00michuoft
+michaelangelo00michrich
+michaelangelobuo0000unse_y1s3
+michaelangelobuo00holrrich
+michelangeloaspa00michrich
+michelangelodesm00michuoft
+michelangeloeine00hild
+michelangelogedi15813gut
+oeuvrescomplte00mich
+operevarieinver01fanfgoog
+poesiemic00michuoft
+recordofhislifea00michuoft
+rimedimichelagn00biaggoog
+saemmtlichegedic00michuoft
+selectedpoemsfro00michrich
+seventyetchedfa00fishgoog
+sonnetsmadrigals00michrich
+sonnetsofmichael00michrich
+sonnetsofmichela00michrich
+workofmichelange00mich

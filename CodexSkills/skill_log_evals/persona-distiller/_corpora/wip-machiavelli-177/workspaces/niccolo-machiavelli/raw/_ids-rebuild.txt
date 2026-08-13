@@ -2,6 +2,8 @@
 # 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
 #   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
 # 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：79
 10078626bsb
 10078627bsb
 10078631bsb
@@ -64,10 +66,20 @@ dli.ministry.18165
 florentinehistor00machuoft
 florentinehistor01machuoft
 florentinischege00mach
+in.ernet.dli.2015.553355
 india.history.resource.72474
 india.history.resource.72475
 india.history.resource.72476
 india.history.resource.72477
 india.history.resource.72478
+india.history.resource.85209
+lifeandtimesnic00villgoog
+niccolmachiavel00villgoog
+niccolmachiavel01villgoog
+niccolmachiavel05villgoog
+niccolmachiavel10villgoog
+niccolmachiavel12villgoog
 operediniccolm02mach
 threeprosewriter00moor
+villari-the-life-and-times-of-niccolo-machiavelli-v-1
+villari-the-life-and-times-of-niccolo-machiavelli-v-2
