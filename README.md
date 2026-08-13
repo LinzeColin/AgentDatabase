@@ -14,6 +14,37 @@ Agent 数据仓。三个活动范围：
 用各仓内 `private_db_client.py` 免 clone 读写（`ingest/get/list/verify`）；Private-Database 禁止 `git clone`；派生/临时物走 `.gitignore`。
 > ⛔ 唯一待闭环：`OpenAIDatabase/data/` 仍是活运行记忆、尚未迁走，详见 [`OpenAIDatabase/MIGRATION_MANDATE.md`](OpenAIDatabase/MIGRATION_MANDATE.md)（SDK cutover 完成前不得删）。
 
+### 外部产品蒸馏成果（**内容只在私有仓，本仓只放指针**）
+
+**本仓是 PUBLIC。** 外部商业闭源产品的蒸馏产物一律 `private-only`，一个字节都不进本仓。
+
+| 对象 | 交付包（私有仓路径） | 状态 |
+|---|---|---|
+| Kimi Code **v0.34.0** | `Private-AgentDatabase/kimi-code-distillation/kimi-code-hub-install-v1.0.0.zip` | 单位数 / 工具数 / 门数 **见包内现算的 `README.md`**（此处曾写死「21 工具、17/17 门」，两个数都早已过期） |
+
+取包与验收（免 clone，复用 `gh` 登录态）：
+
+```bash
+python3 OpenAIDatabase/scripts/private_db_client.py get Private-AgentDatabase \
+  kimi-code-distillation/kimi-code-hub-install-v1.0.0.zip /tmp/kc.zip
+unzip -q /tmp/kc.zip -d /tmp/kc && python3 /tmp/kc/kimi-code-hub/tools/kc_verify.py /tmp/kc/kimi-code-hub
+```
+
+> ⚠️ 版本号曾长期写成 **v2.38.5** —— 那是 bundle 里第三方 rive 库的版本。
+> 真值 **0.34.0**，两条独立证据：`main.cjs` 的构建注入点 + 本机更新通道自报。
+
+**依赖如实说清**（这一段我先写成「接手方只需要 python3」，那是**错的** ——上面第一条命令要用本仓的脚本，而它内部调 `gh api`）：
+
+| 步骤 | 需要什么 |
+|---|---|
+| 取包（第一条命令） | 本仓 + `gh` 已登录。**或者**直接在 GitHub 网页上从私有仓下载那个 zip —— 那样不需要本仓、也不需要 gh |
+| 验收与读全部内容（第二条命令起） | **只要 `python3`** —— 零第三方 import、零外部工具链调用，包内 G92 逐条判这件事 |
+
+**全程不需要任何 AI 工具链**：不需要 Claude、不需要任何模型 API。
+
+交接说明同在私有仓 `kimi-code-distillation/HANDOFF.md`（含待 Owner 裁定的 KSEC-001）。
+冻结快照 236 MB 留在本机 `_protected/kimi-code-distillation/phase0/`，**不入任何仓**。
+
 ## Contents
 
 Large archives are stored as **release assets** (not in git), because GitHub
