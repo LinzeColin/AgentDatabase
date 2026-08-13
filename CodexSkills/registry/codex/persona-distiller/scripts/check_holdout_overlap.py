@@ -202,7 +202,20 @@ PROVIDER_NOTICE = re.compile(
     r"|about google book search"
     r"|the project gutenberg (?:etext|ebook)"              # Project Gutenberg
     r"|produced by the online distributed proofreading"
-    r"|this work is in the public domain in the united states",
+    r"|this work is in the public domain in the united states"
+    # ★★★ 2026-08-13：**Google「使用条款」那一段里有 `machine translation`。**
+    #   量 Michelangelo #185 的语料里译本占多少时，扫「翻译」字样得 23/47=49%，
+    #   而 13 处扉页命中里 **8 处是这一句**——每份 Google 扫描件都有，
+    #   与这本书是不是译本毫无关系。真值 11/47=23%。
+    #   ★ 它特别难防：不是 OCR 噪声，是干净的整句；每份都有；
+    #     且用的就是领域词（translation / text / access / research）。
+    r"|conducting research on machine translation"
+    r"|optical character recognition or other areas"
+    r"|access to a large amount of text is helpful"
+    r"|please do not remove it|refrain from automated querying"
+    # ★ 版权/权利套话里也有 `traduction`（法文书常见）
+    r"|tous droits de (?:reproduction|traduction)"
+    r"|all rights of (?:reproduction|translation) reserved",
     re.I)
 
 

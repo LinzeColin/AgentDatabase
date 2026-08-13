@@ -551,8 +551,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_authorship.py",
-      "sha256": "1480b1d4990b64e95a0d53d84a68e79c2aba729c390ee0b522f84e290f5c2f32",
-      "size_bytes": 179761
+      "sha256": "c4a465dbac93a9d50f73c9783c05f3f92b4b07ac013ba4bd78d79c98e285c67a",
+      "size_bytes": 189714
     },
     {
       "path": "references/pipeline/checkers/check_baseline_in_persona.py",
@@ -641,8 +641,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_disposition_exclusive.py",
-      "sha256": "89b3b7528494f2f84d2c868780101a184449df9e830ee211d8fc77bff5fdfa52",
-      "size_bytes": 10934
+      "sha256": "602718fdfbb800cd45c2ff28416cbc513924f7494a3d394083f52d9be106fb48",
+      "size_bytes": 14079
     },
     {
       "path": "references/pipeline/checkers/check_distillation_freshness.py",
@@ -701,8 +701,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_holdout_overlap.py",
-      "sha256": "5c0f160ee63342be5a0366a1dafec5aadf1d3652aef5c7a6bdc75c37ed877afe",
-      "size_bytes": 28997
+      "sha256": "45e18caba9a5ea1efdb3c5033e48068705b63494077789825923743243630557",
+      "size_bytes": 35514
     },
     {
       "path": "references/pipeline/checkers/check_judge_prompt_matches_payload.py",
@@ -806,8 +806,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_quote_speaker.py",
-      "sha256": "4f7a4f90c8cda6204755ac13ac25102994b54fdbe1465fa5b9f5de840c7f7fbc",
-      "size_bytes": 38267
+      "sha256": "0863734997aadd5c556395c48899eddbc11d8ade661f75823d992b0acafd56c3",
+      "size_bytes": 46675
     },
     {
       "path": "references/pipeline/checkers/check_quoted_arithmetic.py",
@@ -1351,8 +1351,8 @@
     },
     {
       "path": "scripts/check_authorship.py",
-      "sha256": "1480b1d4990b64e95a0d53d84a68e79c2aba729c390ee0b522f84e290f5c2f32",
-      "size_bytes": 179761
+      "sha256": "c4a465dbac93a9d50f73c9783c05f3f92b4b07ac013ba4bd78d79c98e285c67a",
+      "size_bytes": 189714
     },
     {
       "path": "scripts/check_baseline_in_persona.py",
@@ -1441,8 +1441,8 @@
     },
     {
       "path": "scripts/check_disposition_exclusive.py",
-      "sha256": "89b3b7528494f2f84d2c868780101a184449df9e830ee211d8fc77bff5fdfa52",
-      "size_bytes": 10934
+      "sha256": "602718fdfbb800cd45c2ff28416cbc513924f7494a3d394083f52d9be106fb48",
+      "size_bytes": 14079
     },
     {
       "path": "scripts/check_distillation_freshness.py",
@@ -1501,8 +1501,8 @@
     },
     {
       "path": "scripts/check_holdout_overlap.py",
-      "sha256": "5c0f160ee63342be5a0366a1dafec5aadf1d3652aef5c7a6bdc75c37ed877afe",
-      "size_bytes": 28997
+      "sha256": "45e18caba9a5ea1efdb3c5033e48068705b63494077789825923743243630557",
+      "size_bytes": 35514
     },
     {
       "path": "scripts/check_judge_prompt_matches_payload.py",
@@ -1606,8 +1606,8 @@
     },
     {
       "path": "scripts/check_quote_speaker.py",
-      "sha256": "4f7a4f90c8cda6204755ac13ac25102994b54fdbe1465fa5b9f5de840c7f7fbc",
-      "size_bytes": 38267
+      "sha256": "0863734997aadd5c556395c48899eddbc11d8ade661f75823d992b0acafd56c3",
+      "size_bytes": 46675
     },
     {
       "path": "scripts/check_quoted_arithmetic.py",

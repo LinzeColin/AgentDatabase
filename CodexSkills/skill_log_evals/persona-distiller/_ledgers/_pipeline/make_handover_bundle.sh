@@ -278,6 +278,23 @@ else:
 for l in lw.stdout.splitlines():
     if l.startswith("扫过"): print("     "+l.strip())
 
+# ★★★ 合同漂移（`check_contract_drift.py`）：版本三轴单一真源、检查器两处镜像一致、
+#   **发布清单 checksums.sha256 与磁盘对得上**。
+#   ★ 2026-08-13 实测：它**有**调用方（quality_check 等），但**不在本脚本里**
+#     ⇒ 交付包连着 5 版（build21–25）带着「checksums.sha256 与磁盘对不上 6 个文件」发了出去，
+#       而回读自验证一路绿。**改了随包分发的文件却没重算清单，包里就是错的。**
+#   ⇒ 做**硬门**：它现在是干净的，且修法明确（跑 build_manifest.py、把 scripts/ 同步到 references/）。
+cd_=subprocess.run([sys.executable, str(R/"CodexSkills/registry/codex/persona-distiller"
+                                      "/scripts/check_contract_drift.py")],
+                   capture_output=True, text=True)
+if cd_.returncode==0:
+    print("✅ 合同漂移：无（版本三轴单一真源／镜像一致／发布清单与磁盘对得上）")
+else:
+    ok=False
+    print("❌ 合同漂移：")
+    for l in cd_.stdout.splitlines():
+        if l.strip().startswith("- ["): print("     "+l.strip()[:150])
+
 # ★★ 一个人只能有**一种**处置（`check_disposition_exclusive.py`）。
 #   这是**硬门**——它不像上面两件那样有「本机修不了的既成事实」，
 #   两处并存永远是错，且改起来就是移出一条。当前实测 0 错。
