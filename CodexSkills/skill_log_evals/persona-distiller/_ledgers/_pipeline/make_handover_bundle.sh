@@ -123,16 +123,31 @@ DEEP={"abraham-lincoln","thomas-jefferson","otto-von-bismarck","johann-pestalozz
 tot=0; nfile=0
 CASES=sorted(C.glob("wip-*/workspaces/*/evals/cases.jsonl"))
 print("\n扫到 %d 份 evals/cases.jsonl（**现扫，不是写死的 8 个**）"%len(CASES))
+# ★★★ 空的 cases.jsonl **不一律算失败**：已延后/拒发的人物本来就没有题。
+#   分界是**这个工作区有没有产物**（persona.md）：
+#     有产物而没题 ⇒ ❌ 真失败（产物做出来了却没有尺子）
+#     没产物也没题 ⇒ ！ 记「未生成（该人物无产物）」，**不计入合计、不判失败**
+#   第一版把 10 份空文件全判成 ❌，自验证整包失败 —— 而那 10 个全是延后/拒发的人。
+nempty=0
 for f in CASES:
     slug=f.parts[-3]
     lo = 32 if slug in DEEP else 16          # deep 档下限 32，其余 16
     rows=[json.loads(l) for l in f.read_text(encoding="utf-8").splitlines() if l.strip()]
     su=len({r["suite"] for r in rows})
+    has_products=(f.parent.parent/"persona.md").exists()
+    if not rows:
+        if has_products:
+            print("❌ %-24s **有产物却 0 题**（产物做出来了却没有尺子）"%slug); ok=False
+        else:
+            print("！ %-24s 未生成（该人物无产物，多半已延后/拒发）—— **本条未检查，不是通过**"%slug)
+            nempty+=1
+        continue
     good = len(rows)>=lo and su==16
     ok &= good; tot+=len(rows); nfile+=1
     print(("✅" if good else "❌")+" %-24s %2d 题 / %2d 类（下限 %d / 16 类）"%(slug,len(rows),su,lo))
 if nfile<8:
-    print("❌ 只扫到 %d 份用例，少于第 1 批的 8 份 —— 包可能不全"%nfile); ok=False
+    print("❌ 只扫到 %d 份**有题的**用例，少于第 1 批的 8 份 —— 包可能不全"%nfile); ok=False
+if nempty: print("　（另有 %d 份空用例未检查，见上）"%nempty)
 print(("✅" if tot>=nfile*16 else "❌")+" 盲判用例合计 **%d** 题（%d 份 × 下限 16 = %d）"
       %(tot,nfile,nfile*16)); ok &= tot>=nfile*16
 
