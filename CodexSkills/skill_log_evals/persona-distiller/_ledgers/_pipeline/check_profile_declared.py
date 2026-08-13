@@ -65,15 +65,23 @@ TH = {"quick": (8, 3, 0.40), "standard": (24, 6, 0.50), "deep": (45, 6, 0.65)}
 def computed(rows) -> str:
     """台账 → **材料够得着的最高一档**。纯函数。
 
-    ★ 与 `_第1批-阶段2实测.json` 里那个「判据给的档」同一个算法——
-      本件**不读那份批次专用的 JSON**（它只覆盖第 1 批），改成从台账现算，
-      这样每一批都盖得到。
+    ★★ **口径必须与 `quality_check.evaluate_sources()` 逐字一致**，否则报出来的
+      「不一致」是我自己算错的。2026-08-14 第一版就错了三处，被 Liebig #124 撞出来：
+      他的延后记录写「一手占比 0.6094」，而我算出 0.4688 —— 因为
+
+        ① `primary` 是 **`{'P1','P2'}`**，不是只有 P1（他 P1 30 ＋ P2 9 ＝ 39，39/64＝0.6094）；
+        ② 分母是 **usable**：train 里去掉 `tier == 'U'` 与 `extraction_status == 'failed'`；
+        ③ `min_sources` 比的是 **len(usable)**，`min_lanes` 数的也是 usable 的 `dimensions`。
+
+      [[baseline-must-be-the-same-kind-as-what-you-compare]]：**别重实现判据的度量。**
     """
-    tr = [r for r in rows if r.get("split") == "train"] or rows
-    n = len(tr)
-    lanes = len({x for r in tr for x in (r.get("dimensions") or [])})
-    p1 = sum(1 for r in tr if r.get("tier") == "P1")
-    ratio = p1 / n if n else 0.0
+    train = [r for r in rows if r.get("split") == "train"]
+    usable = [r for r in train
+              if r.get("tier") != "U" and r.get("extraction_status") != "failed"]
+    n = len(usable)
+    lanes = len({x for r in usable for x in (r.get("dimensions") or [])})
+    primary = sum(1 for r in usable if r.get("tier") in {"P1", "P2"})
+    ratio = primary / n if n else 0.0
     for k in reversed(ORDER):
         a, b, c = TH[k]
         if n >= a and lanes >= b and ratio >= c:
@@ -124,6 +132,23 @@ def self_test() -> int:
     half = [R([six[i % 6]], "P1" if i % 2 else "S1") for i in range(50)]   # 一手比 0.50
     chk(f"★ 一手比 0.50 → standard 而不是 deep（deep 要 0.65）（实得 {computed(half)}）",
         computed(half) == "standard")
+    # ★★ Liebig #124 撞出来的三处口径（第一版全错）
+    p2 = [R([six[i % 6]], "P1" if i % 10 < 5 else ("P2" if i % 10 < 7 else "S1"))
+          for i in range(50)]                       # P1 25 ＋ P2 10 ＝ 35/50 = 0.70
+    chk(f"★★ **P2 也算一手**（P1 25＋P2 10＝0.70 → deep）（实得 {computed(p2)}）",
+        computed(p2) == "deep")
+    with_u = [R([six[i % 6]]) for i in range(50)] + [R(["writings"], "U") for _ in range(40)]
+    chk(f"★★ **`tier == 'U'` 不进分母**（50 好 ＋ 40 个 U → 仍 deep）（实得 {computed(with_u)}）",
+        computed(with_u) == "deep")
+    failed = [R([six[i % 6]]) for i in range(50)]
+    for r in failed[:40]:
+        r["extraction_status"] = "failed"           # 只剩 10 份可用 ⇒ 掉到 quick
+    chk(f"★★ **`extraction_status == 'failed'` 不进分母**（50 份里 40 份抽取失败 → quick）"
+        f"（实得 {computed(failed)}）", computed(failed) == "quick")
+    ho = [R([six[i % 6]]) for i in range(50)] + [
+        {"split": "holdout", "dimensions": ["decisions"], "tier": "P1"} for _ in range(20)]
+    chk(f"★ 反例：holdout 不算进来（50 train ＋ 20 holdout → 仍按 50 判）（实得 {computed(ho)}）",
+        computed(ho) == "deep")
     print(f"\n{'✓ 全过' if ok == t else f'✗ {t - ok}/{t} 项不符'}")
     return 0 if ok == t else 1
 

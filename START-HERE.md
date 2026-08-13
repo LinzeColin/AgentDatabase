@@ -283,7 +283,7 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/quality_check.py <�
 
 ## 六、★★ 开工前必读的两份
 
-1. **`文档/踩坑库/README.md`** —— **164 条**实测教训（条数由判据核：
+1. **`文档/踩坑库/README.md`** —— **165 条**实测教训（条数由判据核：
    `python3 …/_ledgers/_pipeline/check_lessons_library.py`，现测 rc=0）。
    **不是风格指南**，每一条都是一次真实的错判 + 可复算的数字 + 怎么提前发现。
    开工前至少读它列的那 10 条，能省掉一整轮返工。
