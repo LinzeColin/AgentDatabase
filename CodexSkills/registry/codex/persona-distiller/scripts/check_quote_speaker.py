@@ -270,10 +270,45 @@ _ELISION_RE = re.compile(r"\s*(?:\.\.\.|…)\s*")
 
 
 def load_corpus(ws: pathlib.Path) -> list:
-    """**只读 train**（`references/sources/`），holdout 一律不进来。"""
+    """**只读 train**，holdout 一律不进来。两条路，先 `references/sources/`，回落 `raw/`。
+
+    ★★★ 2026-08-13 实测：**全库 48 个工作区里 24 个的 `references/sources/` 是空的**，
+    而本件对空语料照样打印「✓ 没有引到别人的话」并 **rc=0**。
+    逐个跑完，**11 个工作区、共 264 条引文**就是这样得的绿灯：
+
+        marshall-173 **44 条**｜jefferson-175 29｜rousseau-178 28｜brandeis-172 27
+        bismarck-176 26｜lincoln-174 22｜kant-179 21｜michelangelo-185 19
+        pestalozzi-180 18｜machiavelli-177 17｜frobel-181 13
+
+    —— 这 11 个恰好就是**人工查出借用声口的那一批**：Marshall 的 writings 道
+    10 条候选 10 条是华盛顿的话，而本件对他报的是「✓ 没有引到别人的话」。
+    [[empty-default-swallows-unknown]]：`0 个文件` 被读成了「没问题」。
+
+    ⇒ 回落到 `raw/`，**按台账 `split == train` 过滤**——holdout 纪律一点不放松，
+      只是承认语料本来就在 `raw/` 里（那 24 个工作区各有 40–111 份）。
+      两条路都空才是真的没有语料，那时**必须报「未判」并 rc≠0**，不许再打 ✓。
+    """
     out = []
     for f in sorted(glob.glob(str(ws / "references/sources/**/*.txt"), recursive=True)):
         out.append((f, pathlib.Path(f).read_text(encoding="utf-8", errors="replace")))
+    if out:
+        return out
+    led = ws / "evidence" / "source-ledger.jsonl"
+    if not led.exists():
+        return out
+    train = set()
+    for line in led.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        try:
+            r = json.loads(line)
+        except ValueError:
+            continue
+        if r.get("split") == "train" and r.get("local_path"):
+            train.add(pathlib.Path(r["local_path"]).name)
+    for f in sorted(glob.glob(str(ws / "raw/**/*.txt"), recursive=True)):
+        if pathlib.Path(f).name in train:
+            out.append((f, pathlib.Path(f).read_text(encoding="utf-8", errors="replace")))
     return out
 
 
@@ -360,11 +395,103 @@ def speaker_before(corpus_text: str, at: int) -> str:
     return m.group(1)
 
 
+# ══════════ 本件够不着的三种，2026-08-13 Brandeis #172 实测补 ══════════
+# 变异测试：把**三条已确证不是他说的**逐字引文塞进 facts.md，本件**三条全绿**：
+#   · `In arranging for the 'popular sales' I announced in the papers…`
+#       → 尤蒂卡审计官 Fred G. Reusswig，引导语在 386 字之外
+#   · `I do not see that the railroads have awakened…`
+#       → ICC 听证证人 Henry R. Towne，说话人标记在 2528 字之外
+#   · `In my opinion the case of the photographer comes within…`
+#       → Mr. Justice North 的判词，落在脚注的一段未闭合引语里
+# 三条全部超出本件的射程（`LOOKBACK = 260`、只认「<姓名> <转引动词> :「引号」」）。
+#
+# ★ 本件**不据此判红**：判红的口径属于门，改它要人裁定。这里只把它们**报出来**，
+#   因为「报不出来」和「没有」在报告上长得一模一样。
+QMARK_B = re.compile(r'["„“”]')
+QUOTE_OPEN_MAX = 2000
+SPEAKER_TURN_B = re.compile(
+    r"(?:^|[.;!?]\s)("
+    r"(?:Mr|Mrs|Ms|Dr|Prof|Senator|Representative|Commissioner|Chairman|Judge|Justice"
+    r"|Gen|Col|Capt|Hon)\.\s+[A-Z][A-Za-z'\-]{1,20}"
+    r"|The\s+CHAIRMAN|The\s+WITNESS|[A-Z][A-Z'\-]{3,20}"
+    r")\.\s+(?=[A-Z])")
+# ★★ 全大写那一支会捞到两类**不是人**的东西。**去读命中才看见的**，不是想出来的：
+#   ① **罗马数字信件编号** —— Michelangelo #185 的 4 条全部如此
+#      （`CCLXVII.` `CLXII.` `CCLXIY.` `CLVII.`，Milanesi 编本每封信一个编号）。
+#      ★ `CCLXIY` 不是合法罗马数字（OCR 把 V 读成 Y），所以**不能只查合法性**，
+#        要连「只由罗马数字字母组成」一起查。
+#   ② **全大写栏目标签** —— Marshall #173 的 `NOTE.`。
+_ROMANISH = re.compile(r"^[IVXLCDMY']+$")     # Y：OCR 常把 V 读成 Y
+_LABELS = {"NOTE", "NOTES", "CHAPTER", "BOOK", "PART", "SECTION", "APPENDIX", "INDEX",
+           "PREFACE", "CONTENTS", "FIG", "PLATE", "TABLE", "ART", "SEC", "NO", "VOL",
+           "ERRATA", "ADDENDA", "SUMMARY", "CONCLUSION", "INTRODUCTION"}
+
+
+def _is_person_tag(tag: str) -> bool:
+    """说话人标记看着像不像**一个人**。"""
+    core = tag.strip().rstrip(".").strip()
+    if " " in core:                      # `Mr. Towne` 这种带称谓的，一律算人
+        return True
+    if _ROMANISH.match(core):
+        return False
+    return core.upper() not in _LABELS
+CITE_HEADER_B = re.compile(
+    r"(?:^|[.)]\s)"
+    r"((?:Sir|Dr|Mr|Mrs|Miss|Prof|Professor|Hon|Judge|Justice|Lord|Rev|Col|Gen)\.?\s+"
+    r"[A-Z][\w.'\-]+(?:\s+[A-Z][\w.'\-]+){0,3}"
+    r"|[A-Z][\w.'\-]+(?:\s+[A-Z][\w.'\-]+){1,3})\s*,\s*"
+    r"([^:.]{0,90}?\b(?:President|Secretary|Commissioner|Inspector|Superintendent|Chief|"
+    r"Director|Surgeon|Physician|Professor|Chairman|Warden|Registrar|Officer|Delegate|"
+    r"Controller|Comptroller|Manager|Agent|Engineer|Editor)\b[^:.]{0,90})\s*:\s")
+
+
+def wider_mechanisms(t: str, at: int, subject_surname: str = "") -> list:
+    """→ [(机制, 证据原文)]。三条都只看**定位点之前**的正文，不看产物。
+
+    ★★ `subject_surname` 不是可选的装饰：Carver #127 实测 **26 条命中全部是
+    `Mr. Carver.`** —— 机制判对了体裁（那确实是国会听证转录），
+    而**作证的正是他本人**。不比姓的话，这 26 条噪声会把真信号埋掉。
+    """
+    out = []
+    w = t[max(0, at - 12000):at]
+    ms = list(QMARK_B.finditer(w))
+    if ms:
+        m = ms[-1]
+        i, ch = m.start(), m.group()
+        nxt = w[i + 1:i + 2]
+        german = t.count("„") >= 3
+        opener = (ch == "„") if german else (
+            re.match(r"[A-Za-zÀ-ɏſ]", nxt or "") and ch != "”" and ch != "„"
+            and not (ch != "“" and re.search(r"[.,;!?]\s?$", w[max(0, i - 2):i])))
+        if german:
+            opener = opener and bool(re.match(r"[A-Za-zÀ-ɏſ]", nxt or ""))
+        if opener and (len(w) - i) <= QUOTE_OPEN_MAX:
+            out.append(("⑤未闭合引语", "…" + w[max(0, i - 150):i + 40].strip() + "…"))
+    a, b = max(0, at - 10000), min(len(t), at + 10000)
+    turns = [m for m in SPEAKER_TURN_B.finditer(t[a:b]) if _is_person_tag(m.group(1))]
+    before = [m for m in turns if a + m.start() < at]
+    if len(turns) >= 3 and before:
+        m = before[-1]
+        who = m.group(1).rstrip(".").split()[-1].lower().strip(".'-")
+        dist = at - (a + m.end())
+        # ★ 距离要有上限。实测最远那条是 **6503 字**（而且标记 `GOPPIN.` 本身是 OCR 噪声）——
+        #   隔了六千多字的一个标记，说明不了这一句归谁。真听证里实测是 1357/2528/1359。
+        if dist <= 3000 and not (subject_surname and who == subject_surname):
+            out.append(("⑥听证/庭审转录",
+                        f"最近说话人标记「{m.group(1)}.」在命中前 {dist} 字"))
+    w2 = t[max(0, at - 2500):at]
+    hs = list(CITE_HEADER_B.finditer(w2))
+    if hs:
+        out.append(("⑦引证抬头（整段不打引号）", f"下面这段归「{hs[-1].group(1)}」"))
+    return out
+
+
 def check(quotes, corpus, subject: str) -> dict:
     """→ {引文数, 引到别人的话[], 定位不到[]}"""
     sub_sur = surname_of(subject)
     normed = [(f, norm(t)) for f, t in corpus]
     wrong, unlocated, declared, by_projection = [], [], [], []
+    wider = []       # 三条更宽的机制标出的（**只报数，不据此判红**）
     elided_ok = []   # 带省略号、分段都在同一源里、但首段太短判不了说话人
     for item in quotes:
         src, q = item[0], item[1]
@@ -445,6 +572,9 @@ def check(quotes, corpus, subject: str) -> dict:
                 unlocated.append({"出处": src, "引文": q})
             continue
         f, t, i = where
+        for mech, ev in wider_mechanisms(t, i, sub_sur):
+            wider.append({"出处": src, "机制": mech, "证据": ev, "引文": q,
+                          "语料": pathlib.Path(f).name})
         who = speaker_before(t, i)
         if who and surname_of(who) != sub_sur:
             rec = {"出处": src, "转引自": norm(who), "引文": q,
@@ -464,6 +594,7 @@ def check(quotes, corpus, subject: str) -> dict:
                 wrong.append(rec)
     return {"引文数": len(quotes),
             "**引到别人的话**": wrong,
+            "★ 更宽的三条机制标出的（**本件不据此判红，只报数**）": wider,
             "★ 只在投影/长s折叠后才定位到的（在语料里，但本件判不了说话人）": by_projection,
             "★ 正文已注明出自他人的（不判为误引，但列出来）": declared,
             "★ 带省略号、分段都在同一源里（在语料里，但首段太短，说话人判不了）": elided_ok,
@@ -622,13 +753,27 @@ def main() -> int:
     quotes = collect_quotes(ws)
     r = check(quotes, corpus, subject)
 
+    # ★★★ 空语料**不许打 ✓**。本件的整个判断都建在 corpus 上，
+    #   corpus 为空时它必然「一条也没抓到」，而那与「都对」是两回事。
+    #   实测代价：11 个工作区、264 条引文就是这样绿的（见 load_corpus 的注释）。
+    no_corpus = not corpus and r["引文数"] > 0
+    if no_corpus:
+        r["★★ 未判（不是通过）"] = (
+            f"train 语料 0 份，而待查引文 {r['引文数']} 条 —— "
+            "`references/sources/` 与 `raw/`(split==train) 两条路都空，本件**没有判过任何一条**")
+
     if a.json:
         # ★ `--json` 只印 JSON。混印散文会让调用方的 json.loads 抛，
         #   而抛出来的后果是「这项检查静默变成 0 条」——同一个坑今天已经踩过一次。
         print(json.dumps(r, ensure_ascii=False))
-        return 1 if r["**引到别人的话**"] else 0
+        return 4 if no_corpus else (1 if r["**引到别人的话**"] else 0)
 
     print(f"人物 {subject}；train 语料 {len(corpus)} 份；长逐字引文 {r['引文数']} 条")
+    if no_corpus:
+        print(f"\n✗✗ **未判，不是通过**：train 语料 0 份，而待查引文 {r['引文数']} 条。")
+        print("   `references/sources/` 空，`raw/` 里也没有台账标为 train 的文件。")
+        print("   ⇒ 本件对这个工作区**一条都没查过**；此前它在这种情况下打的是 ✓。")
+        return 4
     if r["**引到别人的话**"]:
         print(f"\n✗ **{len(r['**引到别人的话**'])} 条引文是别人说的**（逐字在语料里，但转引自他人）：")
         for x in r["**引到别人的话**"]:
