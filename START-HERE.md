@@ -165,7 +165,8 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/fetch_i
     Lincoln  Jefferson  Bismarck  Pestalozzi  Machiavelli  Rousseau  Kant  Fröbel
 
 ★★ **8-13 当晚撤回过一次「11 人」**：Brandeis #172／Michelangelo #185／Dewey #190
-当天被我登记成「等着判分」，而真跑合成门是 **22／46／36 条硬错**——
+当天被我登记成「等着判分」，而真跑合成门是 **22／46／36 条硬错**
+（★ 8-14 凌晨已做掉一部分，现测 **8／31／30**，逐条见诊断书）——
 **产物齐 ≠ 过门**。他们要回阶段 3／4 返工，不是判分。
 （其中两人当时连门都没开机：缺 `SKILL.md`，`quality_check` 直接报 `target.invalid` 拒检。）
 详见开箱即跑清单开头那节「撤回」。
@@ -212,7 +213,7 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/quality_check.py <�
    这些正是要给人看的东西（比如 5 个人产物齐全却已在延后名单里）。
    `rc=0` 才表示 11 人全部就绪且无矛盾。**判分该不该跑由人定，这件判据不代替授权。**
 
-3. ★ **Brandeis／Michelangelo／Dewey 回阶段 3／4 返工**（22／46／36 条硬错，
+3. ★ **Brandeis／Michelangelo／Dewey 回阶段 3／4 返工**（现测 **8／31／30** 条硬错，
    逐条列在开箱即跑清单开头的「撤回」一节）。**不要送去判分。**
    ★ Dewey 另有一件判他分时要知道的：lanes 压线 3=3，撑起第三条道的只有一份
    与妻子共同署名的《Letters from China and Japan》（第七之二节）。
