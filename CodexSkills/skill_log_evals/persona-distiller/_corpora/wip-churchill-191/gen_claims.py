@@ -20,6 +20,17 @@ BANNED = {"src-c53e1c37f040", "src-0af00d0f0365", "src-cd511a154ee0"}
 _T = {}
 
 
+
+# ★★ `status` 与 `category` 是**两套词表**，2026-08-13 之前这里把它们混成了一个
+#   （`"status": cat`）⇒ `ledger.invalid` 每人 6–8 条，而合成门因此不过。
+#   下面的映射**读自全库 570 条已有断言的实际用法**，零发明：
+#     fact→fact｜boundary→fact｜heuristic/mental-model/work-method/value/epistemic→pattern
+#     blind-spot→hypothesis
+#   合法 status 只有 fact/pattern/hypothesis/unknown/superseded（见 ledger.CLAIM_STATUSES）。
+CLAIM_STATUS = {"fact": "fact", "boundary": "fact", "heuristic": "pattern",
+                "mental-model": "pattern", "work-method": "pattern", "value": "pattern",
+                "epistemic": "pattern", "blind-spot": "hypothesis"}
+
 def norm(sid):
     if sid not in _T:
         _T[sid] = fbv.dehyphen((W / ROWS[sid]["local_path"]).read_text(encoding="utf-8", errors="replace"))
@@ -36,7 +47,7 @@ def Q(sid, a, b):
 
 def C(cat, body, sids, ev, fal, ctx, conf, scope):
     return {"claim_id": "clm-" + hashlib.sha256(body.encode()).hexdigest()[:12],
-            "category": cat, "status": cat, "claim": body, "source_ids": sids,
+            "category": cat, "status": CLAIM_STATUS[cat], "claim": body, "source_ids": sids,
             "evidence_clusters": ev, "falsifiers": fal, "contexts": ctx,
             "confidence": conf, "time_scope": scope, "author_role": "distiller",
             "created_at": "2026-08-13T00:00:00Z",

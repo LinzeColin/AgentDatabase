@@ -39,6 +39,17 @@ BODY_START = {
 }
 
 
+
+# ★★ `status` 与 `category` 是**两套词表**，2026-08-13 之前这里把它们混成了一个
+#   （`"status": cat`）⇒ `ledger.invalid` 每人 6–8 条，而合成门因此不过。
+#   下面的映射**读自全库 570 条已有断言的实际用法**，零发明：
+#     fact→fact｜boundary→fact｜heuristic/mental-model/work-method/value/epistemic→pattern
+#     blind-spot→hypothesis
+#   合法 status 只有 fact/pattern/hypothesis/unknown/superseded（见 ledger.CLAIM_STATUSES）。
+CLAIM_STATUS = {"fact": "fact", "boundary": "fact", "heuristic": "pattern",
+                "mental-model": "pattern", "work-method": "pattern", "value": "pattern",
+                "epistemic": "pattern", "blind-spot": "hypothesis"}
+
 def dehyphen(t):
     t = re.sub(r"(\w)[-‐‑]\s*\n\s*([a-z])", r"\1\2", t)
     return re.sub(r"(\w)[-‐‑]\s+([a-z])", r"\1\2", t)
@@ -104,7 +115,7 @@ def C(cat, claim, sids, contexts, falsifiers, clusters, conf, scope,
       alts=None, counters=None):
     return {
         "claim_id": cid(claim), "category": cat, "claim": claim,
-        "status": "fact" if cat == "fact" else cat,
+        "status": CLAIM_STATUS[cat],
         "confidence": conf, "time_scope": scope,
         "source_ids": sids, "counter_source_ids": counters or [],
         "contexts": contexts, "falsifiers": falsifiers,
