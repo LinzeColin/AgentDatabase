@@ -1,0 +1,44 @@
+# ★ **重建用的权威清单** —— 从 _fetch-manifest.json 的「已取回」现生成。
+# 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
+#   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
+# 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：38
+JewishRightsCongress
+OrationTrueAmericanism
+agc3261.0001.001.umich.edu
+businessaprofes02poolgoog
+businessaprofess00bran
+caseforshorterwo00franuoft
+caseforshorterwo01franuoft
+cu31924000556336
+cu31924002234387
+cu31924002677114
+cu31924017572391
+cu31924030130557
+cu31924082456439
+fatigueandeffic03goldgoog
+fatigueefficie00gold
+fatigueefficien00gold
+fatigueefficiency00gold
+jewishproblemhow00bran
+jewishproblemhow00branrich
+jstor-1013266
+jstor-1321160
+jstor-1321339
+jstor-1321350
+jstor-1321695
+jstor-1321781
+jstor-2276262
+lifeinsuranceabu00branrich
+lifeinsuranceabu9582bran
+otherpeoplesmon00brangoog
+otherpeoplesmone00bran
+preliminaryrepor00nati
+savingsinsurance00branrich
+scientificmanag00brangoog
+scientificmanage00branuoft
+tojewsofamericaj00braniala
+voina_i_evreiskaia_problema
+washingtonstreet00braniala
+zionismpatriotis00bran
