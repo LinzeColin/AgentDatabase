@@ -139,12 +139,96 @@ def self_test() -> int:
     return 0 if ok == t else 1
 
 
+def norm_title(s: str) -> str:
+    """题名归一：小写、去标点、折叠空白。**只用于筛嫌疑，不用于判定。**"""
+    import re as _re
+    s = _re.sub(r"[^a-z0-9 ]+", " ", str(s).lower())
+    return " ".join(s.split())
+
+
+def _title_is_filename(row) -> bool:
+    """title 栏是不是被填成了文件名。**筛子读的字段先自检，再报数。**"""
+    import re as _re
+    t = str(row.get("title") or "")
+    stem = pathlib.Path(str(row.get("local_path") or "")).name
+    return (not t) or t == stem or t == stem.rsplit(".txt", 1)[0] \
+        or bool(_re.fullmatch(r"[\w.\-]+", t))     # 无空格的连写串
+
+
+def suspects() -> int:
+    """量不了的那些人：按题名筛出**待复核清单**。
+
+    ★★ **这不是判定。** 本项目吃过亏：用书目代理（「同年才算同一部作品」）
+      顶替直接量重叠，结论是错的。所以这里只回答一个问题——
+      **「等语料能取到的时候，先复核谁」**，输出是清单，不是红绿。
+    ★ 之所以只能这样：这 14 个人**既没有 `raw/_dedup.json`、本地也没有 `raw/*.txt`**
+      （语料按 Owner 裁定不进 git），**本机跑不出 min-hash**。
+    """
+    print("★★ **以下是待复核清单，不是判定**——按题名筛的嫌疑，"
+          "真判定要等语料能取到时跑 min-hash。\n")
+    n_ws = n_hit = 0
+    blind = []          # ★ 题名栏不可用 ⇒ 连嫌疑都筛不出来的工作区
+    for d in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
+        ws = pathlib.Path(d)
+        led = ws / "evidence/source-ledger.jsonl"
+        if not led.is_file() or (ws / "raw/_dedup.json").is_file():
+            continue                       # 有实测的走 main()，不进本清单
+        rows = [json.loads(l) for l in led.read_text(encoding="utf-8").splitlines() if l.strip()]
+        tr = [r for r in rows if r.get("split") == "train"]
+        if not tr:
+            continue
+        n_ws += 1
+        # ★★ **先问筛子读的那个字段有没有内容。**
+        #   实测这批工作区 92.5% 的 `title` 就是文件名（`0001-conv-1907-vxxvi.txt`），
+        #   于是「题名归一后相同」永远不成立，**本函数会稳定地报 0 个嫌疑**——
+        #   而那个 0 是**筛子瞎了**，不是语料干净。空结果不许当成通过。
+        fnish = sum(1 for r in tr if _title_is_filename(r))
+        if tr and fnish / len(tr) >= 0.5:
+            blind.append((ws.name, fnish, len(tr)))
+            continue
+        per = collections.defaultdict(list)
+        for r in tr:
+            for dim in (r.get("dimensions") or []):
+                per[dim].append(r)
+        lanes = len(per)
+        prof = profile_of(tr)
+        gate = PROFILES[prof]["min_lanes"]
+        sus = {l: rs for l, rs in per.items()
+               if len(rs) >= 2 and len({norm_title(r.get("title")) for r in rs}) == 1}
+        if not sus:
+            continue
+        n_hit += 1
+        left = lanes - len(sus)
+        mark = "  ★★ **若坐实就够不着门**" if left < gate else ""
+        print(f"  {ws.name}（{prof}，{lanes} 道，门 {gate}）{mark}")
+        for l, rs in sus.items():
+            print(f"      {l}：{len(rs)} 行，题名归一后**同一个**"
+                  f"　「{(rs[0].get('title') or '')[:58]}」")
+    print(f"\n扫过 **{n_ws} 个**没有实测去重的工作区："
+          f"**{len(blind)} 个连嫌疑都筛不出**（题名栏是文件名），"
+          f"其余 {n_ws - len(blind)} 个里 **{n_hit} 个**有嫌疑。")
+    if blind:
+        print("\n★★ **下面这些是「筛不了」，不是「干净」**——"
+              "`title` 栏填的是文件名，题名比对无从谈起：")
+        for n, f, a in blind:
+            print(f"    {n:30s} {f}/{a} 行的 title 是文件名（{f / a:.0%}）")
+        print("  ⇒ 要么补真题名（`_fetch-manifest.json` 的 `ia_title` 有），"
+              "要么等语料可取时直接跑 min-hash。**两条都没做之前，它们是「未检查」。**")
+    print("\n★ 处置：等语料可取时对这些人跑 `_dedup.json`，再用本文件的 main() 判。"
+          "**在那之前，这些人的 `min_lanes` 属于「未检查」，不是「通过」。**")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--self-test", action="store_true")
+    ap.add_argument("--suspects", action="store_true",
+                    help="量不了的那些人：按题名筛待复核清单（**不是判定**）")
     a = ap.parse_args()
     if a.self_test:
         return self_test()
+    if a.suspects:
+        return suspects()
 
     checked = unchecked = 0
     bad = []
