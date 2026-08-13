@@ -1532,7 +1532,7 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/check_disposition_e
 
 | 位置 | 版本 | 判据件数 |
 |---|---|---|
-| 工作分支（推送的就是它） | **v0.0.0.154** | **92** |
+| 工作分支（推送的就是它） | **v0.0.0.154** | **93**（另有 `_ledgers/_pipeline/` 下 **13** 件流水线判据，合计 **106**；2026-08-14 现数，此前写的 92 只数了 `scripts/` 那一层） |
 | 主树 `AgentDatabase`（`git pull` 拿到的） | v0.0.0.22 | —— |
 | **本机安装** `~/.codex/skills/persona-distiller` | **v0.0.0.13** | **9** |
 
@@ -1549,7 +1549,7 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/check_disposition_e
   未合并的分支不是发布物。这一条本来就记在任务清单里
   （「本机 skill 副本落后：**先合 main 再装，别装未合并的分支**」）。
 
-★★ **落后 141 个版本、少 82 件判据**意味着：按名字调用会拿到一个
+★★ **落后 141 个版本、少 84 件判据**（93 − 9；连 `_pipeline` 那 13 件一起算是少 97 件）意味着：按名字调用会拿到一个
   **没有今天全部判据**的流水线——holdout 隔离、纸面道、自测射程、自报数字四道门全都不在里面。
 
 ### ★★★★ 移交怎么做（**2026-08-11 已实测通过，旧做法已作废**）
