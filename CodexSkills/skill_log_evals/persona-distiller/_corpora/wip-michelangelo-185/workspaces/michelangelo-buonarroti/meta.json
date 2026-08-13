@@ -1,0 +1,82 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "michelangelo-buonarroti-1475-1564",
+  "consent_authority": null,
+  "created_at": "2026-08-13T00:00:00Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "art-design",
+    "display": "艺术设计师",
+    "mode": "single",
+    "primary": "art-design",
+    "weights": {
+      "art-design": 1.0
+    }
+  },
+  "language": "it",
+  "model_version": "0.1.0-draft",
+  "name": "Michelangelo Buonarroti",
+  "namesake_gate": {
+    "candidate_count": 2,
+    "★ 本轮实测": "抓取清单出来后逐条查过，**不是照抄上一个人物的自测**",
+    "chosen_candidate": {
+      "name": "Michelangelo Buonarroti",
+      "dates": "1475-1564",
+      "disambiguator": "il vecchio（＝「老」）——1821/1826 年的《Rime》印本题名里就这么印",
+      "note": "★ 正是本人。**排除规则里不许排 `il`**，否则会把他自己排掉。"
+    },
+    "excluded": [
+      {
+        "name": "Michelangelo Buonarroti il Giovane",
+        "dates": "1568-1646",
+        "relation": "侄孙（great-nephew）",
+        "genre": "喜剧与韵文",
+        "why": "同姓同名。第一版抓取清单 85 条里**混进 8 条他的作品**（La Tancia 3、La Fiera 5）。",
+        "how_blocked": "① creator 排除 `1568-1646`／`il Giovane`；② ★★ **按题名排除**（新增 EXCLUDE_TITLE）——因为 `bub_gb_az-3FvsPFwYC`《La Tancia commedia rusticale》的 creator **只写「Michelangelo Buonarroti」**，没有年份、没有 il Giovane、**没有任何可比的标记**，按 creator 永远挡不住。",
+        "titles_blocked": [
+          "La Tancia",
+          "La Fiera",
+          "Il Giulè",
+          "La Dote",
+          "Il giudizio di Paride",
+          "Frottole della peste",
+          "Quaderno delle rime burlesche",
+          "Epistola al Signor Niccolò Arrighetti"
+        ],
+        "boundary": "★ 侄孙 **1623 年编的**伯祖父《Rime》**不排** —— 编者不是作者。",
+        "verified": "正对照：侄孙 9 条 → 最终清单里 **0 条**；负对照：题名含 lettere/briefe/rime/sonnet/poesie/diálogo 且非侄孙的 43 条 → **17 条进清单、一条没误伤**。"
+      }
+    ]
+  },
+  "normalized_name": "michelangelobuonarroti",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "michelangelo-buonarroti",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": null,
+  "time_scope": "1475-1564",
+  "updated_at": "2026-08-13T00:00:00Z",
+  "attribution_basis": {
+    "authority": "主干编本的题名页逐字（`src-34bb6d56038a`，1875）：`LE LETTERE DI MICHELANGELO BUONARROTI PUBBLICATE COI RICORDI ED I CONTRATTI ARTISTICI PER CURA GAETANO MILANESI. IN FIRENZE , COI TIPI DEI SUCCESSORI LE MONNIER. M. DCCC. LXXV.` —— 信是他的，**编者是 Gaetano Milanesi**。",
+    "★ 题名页自证两个数": "同页 `EDIZIONE ORDINATA DAL COMITATO FIORENTINO PER LE FESTE DEL **IV CENTENARIO DALLA NASCITA DI MICHELANGELO**` ⇒ 1875 是他诞生四百周年 ⇒ **生年 1475**；`M. DCCC. LXXV` 独立复核了出版年 1875。**两个数都不是我推的。**",
+    "covered_sources": [
+      "src-34bb6d56038a（1875 Milanesi 编本，题名页如上）"
+    ],
+    "★ 未覆盖": "1623 年《Rime》（`src-d3a820576752`）的题名页 OCR 严重损坏，只能读出 `Raccolte da Michelagno IN FIRENZE APPRESSO I GIVNTI CON LICSNZIA DE' SVPERWKL`（=「由米开朗基罗[小]辑，佛罗伦萨 Giunti 书坊，奉上峰许可」）——**辨认得出是辑本，但不足以当逐字署名证据**，故不列入 covered_sources。"
+  }
+}
