@@ -278,6 +278,26 @@ else:
 for l in lw.stdout.splitlines():
     if l.startswith("扫过"): print("     "+l.strip())
 
+# ★★ 一个人只能有**一种**处置（`check_disposition_exclusive.py`）。
+#   这是**硬门**——它不像上面两件那样有「本机修不了的既成事实」，
+#   两处并存永远是错，且改起来就是移出一条。当前实测 0 错。
+#   ★ 它 2026-08-10 抓到过 Steinhardt／Godin，而**此后一直没有任何代码在调它**；
+#     8-13 手跑一次又抓到 Taguchi／Carmack ——「没有调用方的判据等于不存在」。
+de=subprocess.run([sys.executable, str(R/"CodexSkills/registry/codex/persona-distiller"
+                                      "/scripts/check_disposition_exclusive.py"),
+                   "--group", str(R/"CodexSkills/registry/codex/persona-distiller-group/team-index.json"),
+                   "--ledgers", str(R/"CodexSkills/skill_log_evals/persona-distiller/_ledgers"),
+                   "--corpora", str(R/"CodexSkills/skill_log_evals/persona-distiller/_corpora")],
+                  capture_output=True, text=True)
+dtail=[l for l in de.stdout.strip().splitlines() if l.startswith("三份台账合计")]
+if de.returncode==0:
+    print("✅ 一人一种处置：%s"%(dtail[0] if dtail else "错 0"))
+else:
+    ok=False
+    print("❌ 有人同时出现在两份台账里：")
+    for l in de.stdout.splitlines():
+        if l.startswith("✗"): print("     "+l.strip()[:140])
+
 # ★★ 序言里声明了分工 / 「与某人合作」式署名（`check_declared_coauthor_split.py`）。
 #   同样**按基线比**，不做成「有命中就红」：这 14 条都已查清并落纸
 #   （Dewey 3 ＝《Ethics》1908 三个印本，序言明写 Part I 是 Tufts 写的；
