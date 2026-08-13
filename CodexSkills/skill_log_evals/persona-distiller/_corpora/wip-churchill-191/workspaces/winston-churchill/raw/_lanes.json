@@ -1,12 +1,12 @@
 {
-  "lanes": 2,
-  "去掉纸面道后": 2,
+  "lanes": 3,
+  "去掉纸面道后": 3,
   "逐道份数": {
-    "writings": 19,
+    "writings": 17,
     "conversations": 0,
     "expression": 0,
     "decisions": 0,
-    "timeline": 0,
+    "timeline": 2,
     "external": 4
   },
   "未分道": 0,
@@ -34,7 +34,7 @@
     },
     {
       "identifier": "dli.ministry.17592",
-      "道": "writings",
+      "道": "timeline",
       "title": "My early life a Roving Commission"
     },
     {
@@ -89,7 +89,7 @@
     },
     {
       "identifier": "myearlyliferovin0000chur_b7k8",
-      "道": "writings",
+      "道": "timeline",
       "title": "My early life; a roving commission"
     },
     {

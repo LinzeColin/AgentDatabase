@@ -127,6 +127,14 @@ PATTERNS = [
     ("timeline", r"autobiograph|selbstbiograph|diary|journal intime|tagebuch|"
                  r"lebensbild|lebensschick|meine? leben|"
                  r"my life(?: and| in|,|$)|la mia vita|ma vie|mi vida|"
+                 # ★★ 2026-08-13 Churchill #191：`my life` 那条**只认「my life」紧跟**，
+                 #   而《My Early Life: A Roving Commission》(1930) 中间插了一个 early，
+                 #   两个印本都掉进 writings ⇒ 道数 3 变 2、**quick 门当场判他出局**。
+                 #   逐字读过原文确认是自传：Harrow 26 次、Sandhurst 27 次、"I was born"。
+                 #   ⇒ 允许 my 与 life 之间夹一个修饰词，并单收「a roving commission」。
+                 #   ★ **不许放宽成「凡 life 皆自传」**：他写他父亲的
+                 #     《Lord Randolph Churchill》是传记、不是自传，必须留在 writings。
+                 r"my (?:early |own |later |long )?life\b|a roving commission|"
                  r"erinnerungen|reminiscence|"
                  r"memoir|confession|vita propria|chronik|chronicle|chronolog|"
                  r"obituary|nachruf|in memoriam|annals|annalen|jahrbuch|"
@@ -454,6 +462,32 @@ def selftest() -> int:
         ok = L != "decisions"
         bad += 0 if ok else 1
         print("  %s %-72s → %s" % ("✅" if ok else "❌ 仍判 decisions", ti[:72], L))
+    # ★★ 2026-08-13 Churchill #191：自传题名中间夹修饰词
+    #    正例必须判 timeline；反例（他写**别人**的传记）必须留在 writings。
+    print("\n自传题名（正例必须 timeline／反例必须不是 timeline）：")
+    AUTO_POS = [
+        "My early life a Roving Commission",
+        "My early life; a roving commission",
+        "A Roving Commission: My Early Life",
+        "My Life and Work",
+    ]
+    AUTO_NEG = [
+        ("Lord Randolph Churchill", "他写**他父亲**的传记，不是自传"),
+        ("The Life of Abraham Lincoln", "写别人的传记"),
+        ("Life insurance: the abuses and the remedies", "`life` 在这里是「人寿保险」"),
+        ("The River War: An Historical Account of the Reconquest of the Sudan", "战史"),
+    ]
+    for ti in AUTO_POS:
+        L = lane_of(ti, False)
+        ok = L == "timeline"
+        bad += 0 if ok else 1
+        print("  %s %-58s → %s" % ("✅" if ok else "❌ 该判 timeline", ti[:58], L))
+    for ti, why in AUTO_NEG:
+        L = lane_of(ti, False)
+        ok = L != "timeline"
+        bad += 0 if ok else 1
+        print("  %s %-58s → %-10s （%s）" % ("✅" if ok else "❌ 误判 timeline", ti[:58], L, why))
+
     print("\n真决策记录必须仍判 decisions（正例）：")
     for ti, src in DEC_POS:
         L = lane_of(ti, False)
@@ -461,7 +495,7 @@ def selftest() -> int:
         bad += 0 if ok else 1
         print("  %s %-58s → %-12s [%s]" % ("✅" if ok else "❌ 误伤", ti[:58], L, src[:40]))
 
-    print("\n" + ("自测通过：书信 正 %d／反 %d ＋ 画名 反 %d／正 %d，全绿"
+    print("\n" + ("自测通过：书信 正 %d／反 %d ＋ 画名 反 %d／正 %d ＋ 自传 正 4／反 4，全绿"
                   % (len(POS), len(NEG), len(ART_NEG), len(DEC_POS))
                   if not bad else "★ 自测有 %d 条不通过" % bad))
     return 0 if not bad else 1

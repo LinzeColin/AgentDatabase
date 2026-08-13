@@ -3,7 +3,7 @@
 #   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
 # 重建后逐份比对 manifest 里的 sha256 才算通过。
 # 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
-# 份数：23
+# 份数：21
 1914frenuoft
 churchill_winston_1874_1965_river_war
 cu31924026407597
@@ -23,7 +23,5 @@ myearlyliferovin0000chur_b7k8
 reportofproceed00macd
 savrolaatalerev00churgoog
 savrolataleofrev0000chur
-theriverwar04943gut
-thestoryofthemal09404gut
 worldcrisis0004unse
 worldcrisis00chur
