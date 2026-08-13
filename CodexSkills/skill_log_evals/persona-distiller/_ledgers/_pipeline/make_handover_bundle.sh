@@ -165,6 +165,60 @@ else:
     for l in q.stdout.splitlines():
         if l.strip().startswith("·"): print("     "+l.strip())
 
+# ★★ 台账里 rights 主张公有领域，而它自己写下的出版年接不接得住。
+#   2026-08-13 Dewey #190 实测：published_at=2003 而 rights=pre1931，**同一行自相矛盾**，
+#   而从抓源到建台账没有任何一件判据看这两个字段。scan_copyright 只扫正文，看不到台账字段。
+#   ★ 只把 ①a（按**今天**的分界也够不着）算失败；①b 分界陈旧、② 无本地凭据只打印——
+#     它们权利上没问题，混进来会让这道门永远红。
+ry=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                       "/_ledgers/_pipeline/check_rights_year_agree.py")],
+                  capture_output=True, text=True)
+rlines=[l for l in ry.stdout.splitlines() if l.strip().startswith(("①","②","③","  ①","  ②","  ③"))]
+if ry.returncode==0:
+    print("✅ rights 主张与出版年互相印证（无自相矛盾行）")
+    for l in rlines: print("     "+l.strip())
+elif ry.returncode==4:
+    print("★ rights／年份印证：**未判**（一个台账都没找到）")
+else:
+    ok=False
+    print("❌ 台账里有 rights 主张 PD 而出版年按今天的分界也够不着的行：")
+    for l in ry.stdout.splitlines():
+        if l.strip().startswith("·"): print("     "+l.strip())
+
+# ★ wip-<人>-<号> 的号有没有撞。2026-08-13 实测 hopkins-189 与 churchill-189 同号；
+#   根因是这个号**没有真源**（延后名单没有编号字段，next_person 看目录不看号）。
+wn=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                       "/_ledgers/_pipeline/check_workspace_numbers.py")],
+                  capture_output=True, text=True)
+wtail=[l for l in wn.stdout.strip().splitlines() if l.strip()]
+if wn.returncode==0:
+    print("✅ 工作区编号唯一：%s"%(wtail[0] if wtail else "(无输出)"))
+elif wn.returncode==4:
+    print("★ 工作区编号：**未判**（一个 wip-* 都没有）")
+else:
+    ok=False
+    print("❌ 工作区编号撞了：")
+    for l in wn.stdout.splitlines():
+        if l.strip().startswith("·"): print("     "+l.strip())
+
+# ★★★ START-HERE.md 首屏那张表——**收件人第一眼看的六个数**。
+#   2026-08-13 实测：六格里六格与实测不一致，其中「已入库人物档案 71」
+#   数的是 registry/codex/ 下的**技能目录**，根本不是人物（真值 102）。
+#   表头写着「数字由脚本现算」，而**并没有任何脚本在算**。
+#   ⇒ 这一条必须在打包**之前**红：一份首屏就写错数的交付包，比不交更糟。
+sh=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                       "/_ledgers/_pipeline/check_start_here_numbers.py")],
+                  capture_output=True, text=True)
+if sh.returncode==0:
+    print("✅ START-HERE.md 首屏那张表：六格全部与实测一致")
+elif sh.returncode==4:
+    print("★ START-HERE 数字：**未判**（找不到 START-HERE.md 或不在 git 树里）")
+else:
+    ok=False
+    print("❌ START-HERE.md 首屏那张表与实测不一致（跑 --apply 整格重写）：")
+    for l in sh.stdout.splitlines():
+        if l.strip().startswith(("✗","？","       表里")): print("     "+l.strip())
+
 # ★★ 盲判用例要**正面数出来**，不能只在出错时才打印——沉默不等于通过。
 #    ★ 期望值**不写死题数**：写死过一次（16/16/17/16），quick 四人补题到 32 之后
 #      它当场变红，而产物其实是对的。改成**按档位判下限 + 类数必须 16**，总数只打印。
