@@ -119,6 +119,13 @@ if chk.returncode!=0:
 # ★★ 2026-08-13：用例清单也改成**从包里现扫**（与上面工作区清单同一个毛病）。
 #   原来写死第 1 批那 8 个 slug；当天新做的 Michelangelo #185 有 32 题，
 #   **一条都没被验到，而自验证照样打印「回读自验证通过」**。
+# ★ **例外表：有产物而有意没有尺子的**。只许写已记档的，且必须带理由与出处。
+#   不写成例外就会让整包自验证红在一件**已经查清并等用户裁定**的事上。
+KNOWN_NO_RULER = {
+ "john-marshall": "Marshall #173——34 条断言、十份产物都做出来了，"
+   "而唯一过双卡的密封候选是纪念 John Marshall **Harlan** 的册子（同名者），"
+   "holdout 归零 ⇒ **盲判装置不成立**（同 Paton #162／Kelsen #171）。三条路待用户裁定。",
+}
 DEEP={"abraham-lincoln","thomas-jefferson","otto-von-bismarck","johann-pestalozzi"}
 tot=0; nfile=0
 CASES=sorted(C.glob("wip-*/workspaces/*/evals/cases.jsonl"))
@@ -134,12 +141,18 @@ for f in CASES:
     lo = 32 if slug in DEEP else 16          # deep 档下限 32，其余 16
     rows=[json.loads(l) for l in f.read_text(encoding="utf-8").splitlines() if l.strip()]
     su=len({r["suite"] for r in rows})
-    has_products=(f.parent.parent/"persona.md").exists()
+    # ★★ 「有没有产物」不能看 persona.md 存不存在——**脚手架会造 175 字节的空壳**，
+    #   实测 9 个报「有产物却 0 题」里 **8 个是空壳**。判别改成**正文里有没有 claim 标记**。
+    pf=f.parent.parent/"persona.md"
+    has_products = pf.exists() and "<!-- claim:" in pf.read_text(encoding="utf-8")
     if not rows:
-        if has_products:
+        if has_products and slug in KNOWN_NO_RULER:
+            print("！ %-24s **有产物却 0 题 —— 已知且已记档**：%s"%(slug,KNOWN_NO_RULER[slug]))
+            nempty+=1
+        elif has_products:
             print("❌ %-24s **有产物却 0 题**（产物做出来了却没有尺子）"%slug); ok=False
         else:
-            print("！ %-24s 未生成（该人物无产物，多半已延后/拒发）—— **本条未检查，不是通过**"%slug)
+            print("！ %-24s 未生成（persona.md 是空壳，该人物无产物）—— **本条未检查，不是通过**"%slug)
             nempty+=1
         continue
     good = len(rows)>=lo and su==16
