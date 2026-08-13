@@ -1,10 +1,10 @@
 {
-  "lanes": 5,
-  "去掉纸面道后": 5,
+  "lanes": 4,
+  "去掉纸面道后": 4,
   "逐道份数": {
-    "writings": 62,
-    "conversations": 14,
-    "expression": 9,
+    "writings": 70,
+    "conversations": 15,
+    "expression": 0,
     "decisions": 0,
     "timeline": 6,
     "external": 12
@@ -74,7 +74,7 @@
     },
     {
       "identifier": "1766jjacquesrous00rous",
-      "道": "writings",
+      "道": "conversations",
       "title": "J. Jacques Rousseau, citoyen de Généve, a Christophe de Beaumont, Arch"
     },
     {
@@ -164,7 +164,7 @@
     },
     {
       "identifier": "bim_eighteenth-century_a-dialogue-between-a-man_rousseau-jean-jacques_1761",
-      "道": "conversations",
+      "道": "writings",
       "title": "A dialogue between a man of letters and Mr. J. J. Rousseau, on the sub"
     },
     {
@@ -194,12 +194,12 @@
     },
     {
       "identifier": "bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782",
-      "道": "expression",
+      "道": "writings",
       "title": "Discours sur l'origine et les fondemens de l'inégalité parmi les homme"
     },
     {
       "identifier": "bim_eighteenth-century_discours-sur-lorigine-e_rousseau-jean-jacques_1782_0",
-      "道": "expression",
+      "道": "writings",
       "title": "Discours sur l'origine et les fondemens de l'inégalité parmi les homme"
     },
     {
@@ -319,7 +319,7 @@
     },
     {
       "identifier": "contratsocialou00rous",
-      "道": "expression",
+      "道": "conversations",
       "title": "Contrat social, ou, Principes du droit politique, précédé de discours,"
     },
     {
@@ -339,7 +339,7 @@
     },
     {
       "identifier": "ddiscourssurlori00rous",
-      "道": "expression",
+      "道": "writings",
       "title": "Discours sur l'origine et les fondemens de l'inégalité parmi les homme"
     },
     {
@@ -349,22 +349,22 @@
     },
     {
       "identifier": "discourssurlor00rous",
-      "道": "expression",
+      "道": "writings",
       "title": "Discours sur l'origine & les fondements de l'inégalité parmi les homme"
     },
     {
       "identifier": "discourssurlori00rous",
-      "道": "expression",
+      "道": "writings",
       "title": "Discours sur l'origine, et les fondemens de l'inégalité parmi les homm"
     },
     {
       "identifier": "discourssurlori01rousgoog",
-      "道": "expression",
+      "道": "writings",
       "title": "Discours sur l'origine & les fondements de l'inégalité parmi les hom"
     },
     {
       "identifier": "discourssurlorig00rous_0",
-      "道": "expression",
+      "道": "writings",
       "title": "Discours sur l'origine et les fondemens de l'inegalité parmi les homme"
     },
     {
@@ -439,7 +439,7 @@
     },
     {
       "identifier": "observationsdeje00rous",
-      "道": "expression",
+      "道": "writings",
       "title": "Observations de Jean-Jacques Rousseau de Geneve. Sur la réponse qui a "
     },
     {

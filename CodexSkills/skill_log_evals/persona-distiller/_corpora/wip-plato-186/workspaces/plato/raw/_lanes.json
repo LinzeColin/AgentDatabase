@@ -1,9 +1,9 @@
 {
-  "lanes": 2,
-  "去掉纸面道后": 2,
+  "lanes": 1,
+  "去掉纸面道后": 1,
   "逐道份数": {
-    "writings": 47,
-    "conversations": 7,
+    "writings": 54,
+    "conversations": 0,
     "expression": 0,
     "decisions": 0,
     "timeline": 0,
@@ -134,7 +134,7 @@
     },
     {
       "identifier": "ausgewhltedial01plat",
-      "道": "conversations",
+      "道": "writings",
       "title": "Ausgewählte Dialoge;"
     },
     {
@@ -214,7 +214,7 @@
     },
     {
       "identifier": "india.history.resource.92890",
-      "道": "conversations",
+      "道": "writings",
       "title": "Platonis Dialogi secundum Thrasylli Tetralogias Dispositi, Vol. V"
     },
     {
@@ -224,7 +224,7 @@
     },
     {
       "identifier": "mythsofplato00platrich",
-      "道": "conversations",
+      "道": "writings",
       "title": "The Myths of Plato [extracted from the Dialogues]. Translated with int"
     },
     {
@@ -234,12 +234,12 @@
     },
     {
       "identifier": "philebuswirevenl00platuoft",
-      "道": "conversations",
+      "道": "writings",
       "title": "Philebus; with introd., notes, and appendix; together with a critical "
     },
     {
       "identifier": "philebuswithint00platgoog",
-      "道": "conversations",
+      "道": "writings",
       "title": "The philebus of Plato : with introduction, notes and appendix ; togeth"
     },
     {
@@ -254,12 +254,12 @@
     },
     {
       "identifier": "platocontraatheo00platrich",
-      "道": "conversations",
+      "道": "writings",
       "title": "Plato contra atheos = Plato against the atheists ; or, The tenth book "
     },
     {
       "identifier": "platonisconvivi00platgoog",
-      "道": "conversations",
+      "道": "writings",
       "title": "Platonis Convivium : cum epistola ad Thompsonum"
     },
     {

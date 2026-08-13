@@ -1,10 +1,10 @@
 {
   "lanes": 4,
-  "去掉纸面道后": 4,
+  "去掉纸面道后": 3,
   "逐道份数": {
-    "writings": 53,
+    "writings": 62,
     "conversations": 4,
-    "expression": 10,
+    "expression": 1,
     "decisions": 0,
     "timeline": 0,
     "external": 12
@@ -129,7 +129,7 @@
     },
     {
       "identifier": "bim_early-english-books-1641-1700_machiavels-discourses-u_machiavelli-niccolo_1674",
-      "道": "expression",
+      "道": "writings",
       "title": "Machiavel's discourses upon the first decade...  1674"
     },
     {
@@ -144,22 +144,22 @@
     },
     {
       "identifier": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1663",
-      "道": "expression",
+      "道": "writings",
       "title": "Machivael's discourses, ...  1663"
     },
     {
       "identifier": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1663_0",
-      "道": "expression",
+      "道": "writings",
       "title": "Machivael's discourses ...  1663"
     },
     {
       "identifier": "bim_early-english-books-1641-1700_machivaels-discourses-_machiavelli-niccolo_1674",
-      "道": "expression",
+      "道": "writings",
       "title": "Machivael's discourses ...  1674"
     },
     {
       "identifier": "bim_early-english-books-1641-1700_machivaels-discourses_machiavelli-niccolo_1663",
-      "道": "expression",
+      "道": "writings",
       "title": "Machivael's discourses...  1663"
     },
     {
@@ -204,7 +204,7 @@
     },
     {
       "identifier": "bub_gb_sm_ojzpYQkAC",
-      "道": "expression",
+      "道": "writings",
       "title": "Discorsi sopra la prima deca de Tito Livio, di Nicolò Machiavelli .."
     },
     {
@@ -249,17 +249,17 @@
     },
     {
       "identifier": "discorsisullapri00machuoft",
-      "道": "expression",
+      "道": "writings",
       "title": "Discorsi sulla prima deca di T. Livio. Scelti e commentati da Giuseppe"
     },
     {
       "identifier": "discoursesonthef02machuoft",
-      "道": "expression",
+      "道": "writings",
       "title": "Discourses on the first decade of Titus Levius;"
     },
     {
       "identifier": "discoursesonthef03machuoft",
-      "道": "expression",
+      "道": "writings",
       "title": "Discourses on the first decade of Titus Levius;"
     },
     {

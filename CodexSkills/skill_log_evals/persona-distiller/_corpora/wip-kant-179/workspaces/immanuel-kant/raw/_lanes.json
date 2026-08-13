@@ -1,12 +1,12 @@
 {
-  "lanes": 6,
-  "去掉纸面道后": 5,
+  "lanes": 3,
+  "去掉纸面道后": 3,
   "逐道份数": {
-    "writings": 53,
+    "writings": 60,
     "conversations": 3,
-    "expression": 3,
-    "decisions": 1,
-    "timeline": 3,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 0,
     "external": 2
   },
   "未分道": 0,
@@ -79,17 +79,17 @@
     },
     {
       "identifier": "265433882.1678.emory.edu",
-      "道": "timeline",
+      "道": "writings",
       "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
     },
     {
       "identifier": "265433882.1682.emory.edu",
-      "道": "timeline",
+      "道": "writings",
       "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
     },
     {
       "identifier": "265433882.1713.emory.edu",
-      "道": "timeline",
+      "道": "writings",
       "title": "Immanuel Kant's sämmtliche Werke : in chronologischer Reihenfolge"
     },
     {
@@ -219,7 +219,7 @@
     },
     {
       "identifier": "critiqueofjudgem00kantuoft",
-      "道": "decisions",
+      "道": "writings",
       "title": "Critique of judgment"
     },
     {
@@ -254,7 +254,7 @@
     },
     {
       "identifier": "immanuelkantscri02kantuoft",
-      "道": "expression",
+      "道": "writings",
       "title": "Immanuel Kant's Critique of pure reason : in commemoration of the cent"
     },
     {
@@ -264,7 +264,7 @@
     },
     {
       "identifier": "india.history.resource.90167",
-      "道": "expression",
+      "道": "writings",
       "title": "Immanuel Kant’s Critique of Pure Reason, in Commemoration of the Cente"
     },
     {
@@ -284,7 +284,7 @@
     },
     {
       "identifier": "kantscritique01kantuoft",
-      "道": "expression",
+      "道": "writings",
       "title": "Immanuel Kant's Critique of pure reason : in commemoration of the cent"
     },
     {

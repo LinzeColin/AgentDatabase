@@ -77,9 +77,21 @@ PATTERNS = [
     #    只有 `letterari`(×2) 是误配，其余 12 类（letters 38／correspondence 23／
     #    bismarckbriefe 5／briefe 4／briefwechsel 4／letter 4／carteggio 3／lettres 3／
     #    correspondance 2／briefen 1／dialogue 1／table-talk 1）全是真书信词汇。
+    # ★★★ 2026-08-13 移除 `dialogue|dialog`：**自撰的对话体作品是著作，不是往来记录。**
+    #   Plato #186 实测：conversations 报 7 份，**7 份全错**——
+    #     4 份靠 `Dialog`／`Dialogue`（《Ausgewählte Dialoge》《Platonis Dialogi》
+    #       《The Myths of Plato [extracted from the Dialogues]》《Dialogue on Laws》第十卷）
+    #     2 份靠 `letter`（`together with a critical letter` —— **编者附的评论信**）
+    #     1 份靠 `epistol`（`Platonis Convivium : cum epistola ad Thompsonum` —— **编者致 Thompson**）
+    #   ⇒ 他的真值是 **1 条道**，而工具报 2 —— 与 Leonardo #184 同型
+    #     （那次是 `letter` ⊂ 意大利语 `letterari`）。
+    #   ★ `conversation`／`tischgespr`／`table talk`／`kolloqui`／`colloqui` **保留**：
+    #     那些是**别人记下来的谈话**，本来就属这一道；`dialogue` 指的是作者写的体裁。
+    #   ★★ 全库前后对比：只有 **Plato（4 份）** 与 **Rousseau（1 份，14 份里的 1 份）** 受影响，
+    #     Rousseau 的道数不变 ⇒ **没有任何已交付人物的档位因此改变**。
     ("conversations", r"\bletters?\b|correspond|briefe|briefwechsel|epistol|"
                       r"\blettres?\b|\blettere\b|"
-                      r"carteggio|dialogue|dialog|conversation|tischgespr|tabletalk|"
+                      r"carteggio|conversation|tischgespr|tabletalk|"
                       r"table.?talk|kolloqui|colloqui"),
     # ★★ 2026-08-12 移除 `discourse|discours|discorsi`：**这个词分不出讲辞和专著**。
     #    17–18 世纪它就是「论」——实测本批两个人的 expression 道几乎全是专著：
@@ -142,6 +154,20 @@ WORKS_OVERRIDE = [
 # 是 Kant 的 *Critique of judgment*，而它已被 WORKS_OVERRIDE 的 `critique` 一支救回 writings
 # ⇒ **本次修改对存量 37 个工作区一条都不动**（已跑全库对比确认）。
 # 命中后落进 residual ⇒ writings；按 lane_of 末尾的注释，residual **不会虚增道数**。
+# ★ 编者附在版本后面的信，不是他的往来书信。
+#   Plato #186 实测三份：`Philebus … together with a critical letter`（两个印本，Badham 致 Thompson）、
+#   `Platonis Convivium : cum epistola ad Thompsonum`。
+#   判法看**「随本版附上」这个结构**（`together with` / `cum` / `with a … letter`），
+#   不是看有没有 `letter` —— 真正的书信集题名是「Letters of X」「Briefwechsel」那种。
+EDITOR_APPENDED_LETTER = re.compile(
+    r"(?:together\s+with|cum|with)\s+(?:an?\s+|the\s+)?(?:critical\s+|introductory\s+|prefatory\s+)?"
+    r"(?:letters?|epistola[me]?)\b"
+    # ★ `man of letters` 是成语「文人」，与书信无关。Rousseau #178 实测那 1 份
+    #   《A dialogue between **a man of letters** and Mr. J. J. Rousseau》靠它进的 conversations。
+    #   与 `letterari` 同族：**同一个词根，两种意思**。
+    r"|\b(?:m[ae]n|wom[ae]n|people)\s+of\s+letters\b"
+    r"|\brepublic\s+of\s+letters\b", re.I)
+
 ARTWORK_NOT_DECISION = re.compile(
     r"last\s+judg[e]?ment|giudizio\s+universale|j[üu]ngste[sn]?\s+gericht|jugement\s+dernier",
     re.I)
@@ -154,6 +180,8 @@ def lane_of(title: str, is_secondary: bool) -> str:
         return "timeline" if re.search(TIMELINE_PAT, t) else "external"
     for lane, pat in PATTERNS:
         if re.search(pat, t):
+            if lane == "conversations" and EDITOR_APPENDED_LETTER.search(t):
+                continue          # 编者随本版附上的信，不是他的往来 —— 继续试别的道
             if lane == "decisions" and ARTWORK_NOT_DECISION.search(t):
                 continue          # 画名，不是判决记录 —— 让它继续往后试别的道
             if lane != "writings":
@@ -251,24 +279,45 @@ def selftest() -> int:
         ("Frammenti letterari e filosofici", "leonardo-184（真误配，本次的起因）"),
         ("Storia della letteratura italiana", "同族反例，按同一构词法补"),
         ("Opere letterarie e scientifiche", "同族反例，按同一构词法补"),
+        # ★★ 2026-08-13 Plato #186：conversations 报 7 份**全错**，下面逐字取自他的探源池
+        ("Ausgewählte Dialoge;", "自撰的对话体作品是著作，不是往来记录"),
+        ("Platonis Dialogi secundum Thrasylli Tetralogias Dispositi, Vol. V", "同上"),
+        ("The Myths of Plato [extracted from the Dialogues]. Translated with introduction",
+         "同上——`Dialogues` 指的是他写的体裁"),
+        ("Plato contra atheos = Plato against the atheists ; or, The tenth book of the Dialogue on Laws",
+         "同上"),
+        ("Philebus; with introd., notes, and appendix; together with a critical letter",
+         "`together with a critical letter` 是**编者附的评论信**，不是他的往来"),
+        ("The philebus of Plato : with introduction, notes and appendix ; together with a critical letter",
+         "同上（另一印本）"),
+        ("Platonis Convivium : cum epistola ad Thompsonum",
+         "`cum epistola ad …` 是**编者致某人**，不是他的往来"),
+        ("A dialogue between a man of letters and Mr. J. J. Rousseau",
+         "Rousseau #178 实测的那 1 份——同样是对话体作品"),
     ]
-    pat = dict((l, p) for l, p in PATTERNS)["conversations"]
-    rx = pat if hasattr(pat, "search") else re.compile(pat, re.I)
+    # ★★★ 2026-08-13：自测原来直接拿 conversations 那条正则去比，
+    #   **而真正做决定的是 `lane_of()`**（排除规则、WORKS_OVERRIDE 都在那里面）。
+    #   于是我新加的三条排除写完之后，自测报「仍误配」——
+    #   不是排除没生效，是**自测没经过被保证的那段代码**。
+    #   [[a-checker-nothing-calls-is-not-a-checker]] 的第五种形态：检查不经过被保证之物。
+    #   ⇒ 一律改走 `lane_of(title, is_secondary=False)`。
+    def _judge(title):
+        return lane_of(title, False)
+
     bad = 0
     print("正例（必须仍判 conversations）：")
     for ti, ws in POS:
-        m = rx.search(ti.lower())
-        ok = m is not None
+        ok = _judge(ti) == "conversations"
         bad += 0 if ok else 1
         print("  %s %-62s [%s]%s" % ("✅" if ok else "❌ 误伤", ti[:62], ws,
                                      "" if ok else "  ← 真书信被这次收紧挡住了"))
     print("\n反例（必须**不**判 conversations）：")
     for ti, why in NEG:
-        m = rx.search(ti.lower())
-        ok = m is None
+        got = _judge(ti)
+        ok = got != "conversations"
         bad += 0 if ok else 1
         print("  %s %-62s %s%s" % ("✅" if ok else "❌ 仍误配", ti[:62], why,
-                                   "" if ok else "  ← 命中 %r" % (m.group(0),)))
+                                   "" if ok else "  ← 实判 %s" % got))
     # ===== 第二组：decisions 不许吃画名（Michelangelo #185）=====
     ART_NEG = [  # 必须**不**判 decisions —— 逐字取自 Michelangelo 探源池
         "Michelangelo: the Last Judgment",
