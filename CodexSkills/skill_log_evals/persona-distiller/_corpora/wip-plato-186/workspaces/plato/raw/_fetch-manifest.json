@@ -1,11 +1,11 @@
 {
-  "生成时刻": "2026-08-13T11:31:58",
-  "请求数": 40,
-  "已取回": 38,
+  "生成时刻": "2026-08-13T11:39:13",
+  "请求数": 21,
+  "已取回": 54,
   "skipped_access_restricted": 0,
-  "失败": 2,
+  "失败": 7,
   "并发降级": "无（全程并发 4）",
-  "总词数": 7177766,
+  "总词数": 9330105,
   "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
   "记录": [
     {
@@ -348,6 +348,36 @@
       "digitization_years": []
     },
     {
+      "identifier": "afx0245.0003.001.umich.edu",
+      "status": "已取回",
+      "note": "",
+      "file": "afx0245.0003.001.umich.edu.txt",
+      "source_url": "https://archive.org/download/afx0245.0003.001.umich.edu/afx0245.0003.001.umich.edu_djvu.txt",
+      "sha256": "18c38752dfadf3ae8db16379bad50000be682b4355d7b9af11e16f2b25632f96",
+      "bytes": 2184086,
+      "words": 225250,
+      "fetched_at": "2026-08-13T11:38:49",
+      "ia_date": "1894",
+      "ia_year": "",
+      "ia_publicdate": "2011-12-22 00:46:05",
+      "ia_creator": [
+        "Plato",
+        "Jowett, Benjamin, 1817-1893",
+        "Campbell, Lewis, 1830-1908"
+      ],
+      "ia_title": "Plato's Republic : the Greek text",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1655",
+        "1658",
+        "1770",
+        "1776",
+        "1894",
+        "2007"
+      ],
+      "digitization_years": []
+    },
+    {
       "identifier": "aliteralversion05platuoft",
       "status": "已取回",
       "note": "",
@@ -555,6 +585,11 @@
       ]
     },
     {
+      "identifier": "apologysocrates00platgoog",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
       "identifier": "apolsocrate00platuoft",
       "status": "已取回",
       "note": "",
@@ -610,6 +645,35 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1882"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "auswahlausplato00nohlgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "auswahlausplato00nohlgoog.txt",
+      "source_url": "https://archive.org/download/auswahlausplato00nohlgoog/auswahlausplato00nohlgoog_djvu.txt",
+      "sha256": "36e9d4d06fff72e111734c7617e6206fc55ee592ae2be45b62a67c050520a436",
+      "bytes": 509974,
+      "words": 54019,
+      "fetched_at": "2026-08-13T11:38:50",
+      "ia_date": "1898",
+      "ia_year": "1898",
+      "ia_publicdate": "2009-07-16 08:15:22",
+      "ia_creator": "Plato",
+      "ia_title": "Auswahl aus Platons Politeia",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1880",
+        "1881",
+        "1889",
+        "1892",
+        "1894",
+        "1896",
+        "1897",
+        "1898",
+        "1899"
       ],
       "digitization_years": []
     },
@@ -792,6 +856,46 @@
       ]
     },
     {
+      "identifier": "bub_gb_IaZXAAAAcAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_IaZXAAAAcAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_IaZXAAAAcAAJ/bub_gb_IaZXAAAAcAAJ_djvu.txt",
+      "sha256": "4de107723ab5978e7756fda9ac232e8e26f0c4fd1d4f7d4ef39bd3bb48582231",
+      "bytes": 842487,
+      "words": 148067,
+      "fetched_at": "2026-08-13T11:38:50",
+      "ia_date": "1866",
+      "ia_year": "1866",
+      "ia_publicdate": "2016-07-28 10:51:50",
+      "ia_creator": "Plato",
+      "ia_title": "The Republic of Plato : translatd into English, with an analysis and notes",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1866"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "bub_gb__cER8cw_ue4C",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb__cER8cw_ue4C.txt",
+      "source_url": "https://archive.org/download/bub_gb__cER8cw_ue4C/bub_gb__cER8cw_ue4C_djvu.txt",
+      "sha256": "446eefad9c36262b613c3e5de39a5268be497a3f0a29d9376af604f1edc79e5a",
+      "bytes": 1498542,
+      "words": 187805,
+      "fetched_at": "2026-08-13T11:39:07",
+      "ia_date": "1834",
+      "ia_year": "1834",
+      "ia_publicdate": "2016-07-19 11:17:54",
+      "ia_creator": "Plato",
+      "ia_title": "Platonis Convivium recensuit, emendavit, illustravit Alexander Hommel ",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
       "identifier": "bwb_KR-689-823",
       "status": "已取回",
       "note": "",
@@ -816,6 +920,53 @@
         "1926"
       ],
       "digitization_years": []
+    },
+    {
+      "identifier": "charmidesalcibia0000plat",
+      "status": "已取回",
+      "note": "",
+      "file": "charmidesalcibia0000plat.txt",
+      "source_url": "https://archive.org/download/charmidesalcibia0000plat/charmidesalcibia0000plat_djvu.txt",
+      "sha256": "c0fa8c6cf3f97a02d87927040735066e9b1f409df0399cc33e4322932de03e9d",
+      "bytes": 921713,
+      "words": 125804,
+      "fetched_at": "2026-08-13T11:38:57",
+      "ia_date": "1927",
+      "ia_year": "",
+      "ia_publicdate": "2021-03-15 03:22:18",
+      "ia_creator": "Plato",
+      "ia_title": "Charmides ; Alcibiades I and II ; Hipparchus ; The lovers ; Theages ; Minos ; Epinomis",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "charmidesalcibia00platuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "charmidesalcibia00platuoft.txt",
+      "source_url": "https://archive.org/download/charmidesalcibia00platuoft/charmidesalcibia00platuoft_djvu.txt",
+      "sha256": "bcc01139144a660052a44c1b6d932aaf5be0aaebd79bae90a18529e23ff0af00",
+      "bytes": 918107,
+      "words": 122885,
+      "fetched_at": "2026-08-13T11:38:59",
+      "ia_date": "1927",
+      "ia_year": "",
+      "ia_publicdate": "2008-10-17 17:43:08",
+      "ia_creator": [
+        "Plato",
+        "Lamb, W. R. M. (Walter Rangeley Maitland), b. 1882"
+      ],
+      "ia_title": "Charmides, Alcibiades 1 and 2, Hipparchus, The lovers, Theages, Minos, Epinomis. With an English translation by W.R.M. Lamb",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1927",
+        "1955",
+        "1964"
+      ],
+      "digitization_years": [
+        "2008"
+      ]
     },
     {
       "identifier": "charmideslachesl00platrich",
@@ -907,6 +1058,16 @@
       ]
     },
     {
+      "identifier": "gpltwnosfadwnph00platgoog",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "gpltwnossumpsio01platgoog",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
       "identifier": "india.history.resource.100073",
       "status": "已取回",
       "note": "",
@@ -955,6 +1116,32 @@
         "1844",
         "1848",
         "2019"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "lysissymposiumgo00plat",
+      "status": "已取回",
+      "note": "",
+      "file": "lysissymposiumgo00plat.txt",
+      "source_url": "https://archive.org/download/lysissymposiumgo00plat/lysissymposiumgo00plat_djvu.txt",
+      "sha256": "a64932b3809e04fef1281a7326ddbf9b050f6b59fd932cae2230834b59a84ebd",
+      "bytes": 1546726,
+      "words": 160905,
+      "fetched_at": "2026-08-13T11:38:59",
+      "ia_date": "1925",
+      "ia_year": "",
+      "ia_publicdate": "2012-07-06 13:18:09",
+      "ia_creator": [
+        "Plato",
+        "Lamb, W. R. M. (Walter Rangeley Maitland), b. 1882"
+      ],
+      "ia_title": "Lysis ; Symposium ; Gorgias",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1911",
+        "1925",
+        "2012"
       ],
       "digitization_years": []
     },
@@ -1009,6 +1196,104 @@
       "digitization_years": []
     },
     {
+      "identifier": "phaedoplato00archgoog",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "phaedoplato00unkngoog",
+      "status": "无文本层",
+      "note": "该 item 没有 _djvu.txt 或任何正文 .txt（可能只有图像）"
+    },
+    {
+      "identifier": "philebuswirevenl00platuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "philebuswirevenl00platuoft.txt",
+      "source_url": "https://archive.org/download/philebuswirevenl00platuoft/philebuswirevenl00platuoft_djvu.txt",
+      "sha256": "a04df3579c2a8a02fa8977b70cc307ebcf876b496632d1f22609171f999b29f2",
+      "bytes": 706627,
+      "words": 92897,
+      "fetched_at": "2026-08-13T11:39:07",
+      "ia_date": "1878",
+      "ia_year": "",
+      "ia_publicdate": "2008-02-04 20:30:01",
+      "ia_creator": [
+        "Plato",
+        "Badham, Charles, 1813-1889"
+      ],
+      "ia_title": "Philebus; with introd., notes, and appendix; together with a critical letter on the laws of Plato, and a chapter of paleographical remarks by Charles Badham",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1878"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "philebuswithint00platgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "philebuswithint00platgoog.txt",
+      "source_url": "https://archive.org/download/philebuswithint00platgoog/philebuswithint00platgoog_djvu.txt",
+      "sha256": "901d1705011694216c36840e980cae61dedcf69cb8a34d7d59ba8c8a6bef3115",
+      "bytes": 941741,
+      "words": 92435,
+      "fetched_at": "2026-08-13T11:39:02",
+      "ia_date": "1878",
+      "ia_year": "1878",
+      "ia_publicdate": "2008-04-01 08:33:30",
+      "ia_creator": [
+        "Plato",
+        "Badham, Charles, 1813-1884"
+      ],
+      "ia_title": "The philebus of Plato : with introduction, notes and appendix ; together with a critical letter on the laws of Plato, and a chapter of palaeographical remarks",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1818",
+        "1891",
+        "1935"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "plato0005unse",
+      "status": "已取回",
+      "note": "",
+      "file": "plato0005unse.txt",
+      "source_url": "https://archive.org/download/plato0005unse/plato0005unse_djvu.txt",
+      "sha256": "d9cb63f4dc48719b4775bbedc70e32d32003471cc341814c6857bedbffce0976",
+      "bytes": 1126888,
+      "words": 156040,
+      "fetched_at": "2026-08-13T11:38:59",
+      "ia_date": "1925",
+      "ia_year": "",
+      "ia_publicdate": "2020-03-24 00:22:34",
+      "ia_creator": "Plato",
+      "ia_title": "Lysis ; Symposium ; Gorgias",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "plato0008unse",
+      "status": "已取回",
+      "note": "",
+      "file": "plato0008unse.txt",
+      "source_url": "https://archive.org/download/plato0008unse/plato0008unse_djvu.txt",
+      "sha256": "4595f740a89e8cf3553c561ca954a0471a8dc7c8627752fa71c91f0697c2a9d2",
+      "bytes": 919125,
+      "words": 125124,
+      "fetched_at": "2026-08-13T11:38:54",
+      "ia_date": "1927",
+      "ia_year": "",
+      "ia_publicdate": "2020-03-23 13:00:13",
+      "ia_creator": "Plato",
+      "ia_title": "Charmides; Alcibiades I and II; Hipparchus; The lovers; Theages; Minos; Epinomis",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
       "identifier": "platocontraatheo00platrich",
       "status": "已取回",
       "note": "",
@@ -1033,6 +1318,130 @@
       "digitization_years": [
         "2008"
       ]
+    },
+    {
+      "identifier": "platonisconvivi00platgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "platonisconvivi00platgoog.txt",
+      "source_url": "https://archive.org/download/platonisconvivi00platgoog/platonisconvivi00platgoog_djvu.txt",
+      "sha256": "6dba82a181e0a3f18ed6aedd06850a5b5f603627a3a17714a7219b1380649bdf",
+      "bytes": 327229,
+      "words": 35331,
+      "fetched_at": "2026-08-13T11:39:06",
+      "ia_date": "1866",
+      "ia_year": "1866",
+      "ia_publicdate": "2009-05-06 16:01:43",
+      "ia_creator": "Plato",
+      "ia_title": "Platonis Convivium : cum epistola ad Thompsonum",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1817"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "platonisconvivi01hermgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "platonisconvivi01hermgoog.txt",
+      "source_url": "https://archive.org/download/platonisconvivi01hermgoog/platonisconvivi01hermgoog_djvu.txt",
+      "sha256": "9226c6e70f8c19063588c3a0063ef7f8c875ae6b41fcf2a5015979d725f69c89",
+      "bytes": 442295,
+      "words": 39419,
+      "fetched_at": "2026-08-13T11:39:13",
+      "ia_date": "1901",
+      "ia_year": "1901",
+      "ia_publicdate": "2009-07-06 00:25:48",
+      "ia_creator": "Plato",
+      "ia_title": "Platonis Convivium. Phaedrus",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1566"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "platonissymposi01platgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "platonissymposi01platgoog.txt",
+      "source_url": "https://archive.org/download/platonissymposi01platgoog/platonissymposi01platgoog_djvu.txt",
+      "sha256": "ba9579d6d1ae05c67675b47e18df03e35854c45b9ef89e90f470f7d7eaeb383c",
+      "bytes": 672247,
+      "words": 66567,
+      "fetched_at": "2026-08-13T11:39:13",
+      "ia_date": "1875",
+      "ia_year": "1875",
+      "ia_publicdate": "2008-05-15 14:53:55",
+      "ia_creator": "Plato",
+      "ia_title": "Platonis symposium, in usum scholarum",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1565",
+        "1566",
+        "1588",
+        "1611",
+        "1664",
+        "1668",
+        "1798",
+        "1800",
+        "1811",
+        "1812",
+        "1820",
+        "1828"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "republicplat02plat",
+      "status": "已取回",
+      "note": "",
+      "file": "republicplat02plat.txt",
+      "source_url": "https://archive.org/download/republicplat02plat/republicplat02plat_djvu.txt",
+      "sha256": "8b4d625244462e897bc1ee21146202714586e7e5c693496086ede89cbb92fbaf",
+      "bytes": 2476161,
+      "words": 347605,
+      "fetched_at": "2026-08-13T11:38:47",
+      "ia_date": "1909",
+      "ia_year": "",
+      "ia_publicdate": "2011-06-07 20:42:06",
+      "ia_creator": [
+        "Plato. Republic",
+        "Adam, James, 1860-1907"
+      ],
+      "ia_title": "The Republic",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1902",
+        "1907"
+      ],
+      "digitization_years": [
+        "2011"
+      ]
+    },
+    {
+      "identifier": "timaeuscritiascl0000plat",
+      "status": "已取回",
+      "note": "",
+      "file": "timaeuscritiascl0000plat.txt",
+      "source_url": "https://archive.org/download/timaeuscritiascl0000plat/timaeuscritiascl0000plat_djvu.txt",
+      "sha256": "f1e94b0c69ec15a1adea02a7a56e08f894ea2ed24b8ee35674283eebaae38cd3",
+      "bytes": 1290308,
+      "words": 172186,
+      "fetched_at": "2026-08-13T11:39:05",
+      "ia_date": "1929",
+      "ia_year": "",
+      "ia_publicdate": "2026-01-08 04:13:08",
+      "ia_creator": "Plato",
+      "ia_title": "Timaeus ; Critias ; Cleitophon ; Menexenus ; Epistles",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1578",
+        "1911",
+        "1929"
+      ],
+      "digitization_years": []
     }
   ]
 }
