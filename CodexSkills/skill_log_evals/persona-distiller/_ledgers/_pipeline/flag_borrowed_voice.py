@@ -43,7 +43,7 @@
 
     python3 flag_borrowed_voice.py --self-test        # 正负对照，跑真语料
 
-退出码：0＝没有「高」级标记；3＝有「高」级标记（需人判）；4＝读不到正文
+退出码：0＝没有「高」级标记；3＝有「高」级标记（需人判）；4＝读不到正文；**5＝自测跳过（语料不在本树）**
 """
 import argparse
 import json
@@ -353,7 +353,19 @@ def _sentence_at(norm, off):
     return norm[off:(e + 1) if e > 0 else off + 150]
 
 
+SKIP_NO_CORPUS = 5      # 语料不在本树 ⇒ **未跑**，不是不过
+
+
 def self_test() -> int:
+    # ★★ 同 detect_front_matter：自测的正负例**全部取自真语料**，而语料不进 git。
+    #   在干净 clone 里第一版逐条打印「✗ 读不到正文」并 rc=1 ——
+    #   那读起来像「判据坏了」，其实是**语料不在**。两件事必须分开报。
+    probe = BASE / POS[0][0]
+    if not (probe / "evidence" / "source-ledger.jsonl").exists() or not any((probe / "raw").glob("*.txt")):
+        print("★★ **未跑，不是通过**：本件自测的正负例全部取自真语料，而语料不在这棵树里。")
+        print(f"   需要：{probe / 'raw'}/*.txt（见仓根 START-HERE.md「语料在哪」一节）")
+        print(f"   退出码 {SKIP_NO_CORPUS} = 跳过；0 = 正负对照全过；1 = 有不符。")
+        return SKIP_NO_CORPUS
     bad = 0
     for label, cases, want_high in (("正对照（必须标红）", POS, True), ("负对照（必须不红）", NEG, False)):
         print(f"\n### {label}")

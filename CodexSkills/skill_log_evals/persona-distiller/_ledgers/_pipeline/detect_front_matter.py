@@ -42,7 +42,7 @@ industrial insurance…"` ——**一本他自己的书里，不会有人用第�
     python3 detect_front_matter.py --raw <raw> --ledger <source-ledger.jsonl> [--json]
     python3 detect_front_matter.py --self-test     # 跑真语料的三个已知边界
 
-退出码：0＝跑完（无论测没测出）；2＝参数不对；4＝读不到语料
+退出码：0＝跑完（无论测没测出）；2＝参数不对；4＝读不到语料；**5＝自测跳过（语料不在本树）**
 """
 import argparse
 import json
@@ -155,8 +155,22 @@ KNOWN = [
 TOL = 200
 
 
+SKIP_NO_CORPUS = 5      # 语料不在本树 ⇒ **未跑**，不是不过
+
+
 def self_test() -> int:
     W = BASE / WS_BRANDEIS
+    # ★★ 自测建在**真语料**上，而语料按裁定不进 git。
+    #   在别人 clone 出来的树里，第一版**直接抛异常**——
+    #   [[untested-fallback-branches-only-fire-on-their-machine]]：
+    #   「没装就跳过」那条路我从没走过。
+    #   ⇒ 语料不在就**明说未跑并给独立退出码 5**，不许崩，也不许打 ✓。
+    led = W / "evidence" / "source-ledger.jsonl"
+    if not led.exists() or not any((W / "raw").glob("*.txt")):
+        print("★★ **未跑，不是通过**：本件自测建在真语料上，而语料不在这棵树里。")
+        print(f"   需要：{W / 'raw'}/*.txt（见仓根 START-HERE.md「语料在哪」一节）")
+        print(f"   退出码 {SKIP_NO_CORPUS} = 跳过；0 = 全过；1 = 有不符。")
+        return SKIP_NO_CORPUS
     recs = {r["source_id"]: r for r in
             (json.loads(l) for l in (W / "evidence" / "source-ledger.jsonl")
              .read_text(encoding="utf-8").splitlines() if l.strip())}
