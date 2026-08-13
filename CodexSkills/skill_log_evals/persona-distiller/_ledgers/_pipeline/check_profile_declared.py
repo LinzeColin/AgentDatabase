@@ -57,6 +57,28 @@ CORPORA = PD / "_corpora"
 CHECKER_DEFAULT = "standard"     # quality_check.py:4325
 BUILDER_DEFAULT = "deep"         # init_target.py:83
 VALID = ("quick", "standard", "deep")
+ORDER = ("quick", "standard", "deep")
+# (min_sources, min_lanes, min_primary_ratio) —— 与 common.PROFILE_THRESHOLDS 同源
+TH = {"quick": (8, 3, 0.40), "standard": (24, 6, 0.50), "deep": (45, 6, 0.65)}
+
+
+def computed(rows) -> str:
+    """台账 → **材料够得着的最高一档**。纯函数。
+
+    ★ 与 `_第1批-阶段2实测.json` 里那个「判据给的档」同一个算法——
+      本件**不读那份批次专用的 JSON**（它只覆盖第 1 批），改成从台账现算，
+      这样每一批都盖得到。
+    """
+    tr = [r for r in rows if r.get("split") == "train"] or rows
+    n = len(tr)
+    lanes = len({x for r in tr for x in (r.get("dimensions") or [])})
+    p1 = sum(1 for r in tr if r.get("tier") == "P1")
+    ratio = p1 / n if n else 0.0
+    for k in reversed(ORDER):
+        a, b, c = TH[k]
+        if n >= a and lanes >= b and ratio >= c:
+            return k
+    return "（够不着 quick）"
 
 
 def classify(meta: dict) -> str:
@@ -86,6 +108,22 @@ def self_test() -> int:
         classify({"profile": "ultra"}) == "invalid")
     chk("★ 反例：空字符串也不算声明", classify({"profile": ""}) == "invalid")
     chk("★ 两个默认值确实不同（本件存在的理由）", CHECKER_DEFAULT != BUILDER_DEFAULT)
+
+    # ── 第二项：声明的档 vs 由材料现算的档 ──
+    R = lambda dims, tier="P1": {"split": "train", "dimensions": dims, "tier": tier}
+    six = ["writings", "conversations", "expression", "decisions", "timeline", "external"]
+    deep_rows = [R([six[i % 6]]) for i in range(50)]          # 50 源 / 6 道 / 一手 1.00
+    chk(f"★ 50 源 6 道 一手 1.00 → 现算 deep（实得 {computed(deep_rows)}）",
+        computed(deep_rows) == "deep")
+    thin = [R(["writings"]) for _ in range(50)]               # 50 源但只有 1 道
+    chk(f"★ 反例：50 源而只有 1 道 → 够不着 quick（实得 {computed(thin)}）",
+        computed(thin) == "（够不着 quick）")
+    mid = [R([six[i % 3]]) for i in range(30)]                # 30 源 / 3 道
+    chk(f"★ 30 源 3 道 → quick（standard 要 6 道）（实得 {computed(mid)}）",
+        computed(mid) == "quick")
+    half = [R([six[i % 6]], "P1" if i % 2 else "S1") for i in range(50)]   # 一手比 0.50
+    chk(f"★ 一手比 0.50 → standard 而不是 deep（deep 要 0.65）（实得 {computed(half)}）",
+        computed(half) == "standard")
     print(f"\n{'✓ 全过' if ok == t else f'✗ {t - ok}/{t} 项不符'}")
     return 0 if ok == t else 1
 
@@ -98,6 +136,7 @@ def main() -> int:
         return self_test()
 
     buckets = {"declared": [], "absent": [], "null": [], "invalid": []}
+    mism = []
     for d in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
         ws = pathlib.Path(d)
         mp = ws / "meta.json"
@@ -109,6 +148,17 @@ def main() -> int:
             continue
         wip = next((s for s in ws.parts if s.startswith("wip-")), ws.name)
         buckets[classify(meta)].append(f"{wip}／{ws.name}")
+        # ★ 第二项：声明的 vs 现算的
+        led = ws / "evidence/source-ledger.jsonl"
+        if classify(meta) == "declared" and led.is_file():
+            try:
+                rows = [json.loads(x) for x in led.read_text(encoding="utf-8").splitlines() if x.strip()]
+            except ValueError:
+                rows = []
+            if rows:
+                c = computed(rows)
+                if c != meta["profile"]:
+                    mism.append((wip, ws.name, meta["profile"], c))
 
     print(f"档位声明：{len(buckets['declared'])} 个已声明"
           f"｜**{len(buckets['absent'])} 个没有 `profile` 键**"
@@ -119,6 +169,17 @@ def main() -> int:
         print(f"  ！ 下面这些**正在被 `{CHECKER_DEFAULT}` 的尺子量着**（不是错，但要知道）：")
         for x in buckets["absent"]:
             print(f"       {x}")
+    if mism:
+        lower = [m for m in mism if m[3] in ORDER and m[2] in ORDER
+                 and ORDER.index(m[3]) > ORDER.index(m[2])]
+        print(f"  ！ **{len(mism)} 个工作区声明的档与由材料现算的不一致**"
+              f"（其中 **{len(lower)} 个声明得比材料低** ⇒ 门被放松）：")
+        for wip, nm, dec, com in sorted(mism, key=lambda x: x[2]):
+            mark = "  ← **门被放松**" if (com in ORDER and dec in ORDER
+                                     and ORDER.index(com) > ORDER.index(dec)) else ""
+            print(f"       {wip:24s} 声明 {dec:9s} 现算 {com}{mark}")
+        print("     ★ 本件**不改任何 meta**——选档是 ㉞「按可得性选档 ＋ 退档写明理由」的事，"
+              "要人写理由。判分之前先定一句用哪个。")
     rc = 0
     for k, note in (("null", "判据会 `ERROR: invalid profile None` **拒检整个工作区**"),
                     ("invalid", "值不在 quick/standard/deep 里，同样会拒检")):

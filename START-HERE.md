@@ -240,19 +240,23 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/quality_check.py <�
 
 ## 五之一、★★★ **判分之前必须先定的一句**（2026-08-14 发现）
 
-**八人里五人的档位，`meta.json` 与两份阶段台账不一致。**
+**八人里四人的档位，`meta.json` 与「由材料现算」的结果不一致。**
 
 | | 阶段 2 台账「判据给的档」 | 阶段 3 收尾表 | `meta.json` |
 |---|---|---|---|
 | Lincoln／Jefferson／Bismarck／Pestalozzi | **deep** | **deep** | `quick` |
-| Kant | **deep** | —— | `quick` |
-| Machiavelli／Rousseau／Fröbel | quick | —— | `quick` ✓ |
+| Machiavelli／Rousseau／Fröbel／**Kant** | quick | —— | `quick` ✓ |
 
-`quality_check` 与判分读的是 **`meta.json`** ⇒ **照现在跑，那五人按 `quick` 判**：
+★ **订正**：先写成「五人」并把 Kant 算了进去，**那是错的**——阶段 2 给他记「道 6」，
+而 `_lanes.json`／台账／研究道**三处现测一致地说他只有 3 道**（阶段 2 那个数陈旧，
+分道后来重测修正过）。**Kant 的 `quick` 站得住。是四人。**
+那四人的 6 道也是三处交叉核过的，不是只看一处。
+
+`quality_check` 与判分读的是 **`meta.json`** ⇒ **照现在跑，那四人按 `quick` 判**：
 `min_baseline_delta` **0.03**，而台账说的 deep 是 **0.07**——**差 2.33 倍**
 （`min_overall` 0.65 vs 0.80、`min_fact` 0.80 vs 0.93 同理）。
 
-★ **我没有碰那 5 份 `meta.json`。** 改成 deep 会让他们更难过（方向上不利于我），
+★ **我没有碰那 4 份 `meta.json`。** 改成 deep 会让他们更难过（方向上不利于我），
 **但那仍然是「量之前动尺子」**，而判分清单的全部意义就是判读规则先落纸。
 ⇒ **判分之前先定一句：按 `quick` 还是按 `deep`。** 详见判分清单末节。
 
