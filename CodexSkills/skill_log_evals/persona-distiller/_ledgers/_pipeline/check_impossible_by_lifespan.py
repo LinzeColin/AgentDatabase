@@ -175,8 +175,13 @@ CORPORA = pathlib.Path(__file__).resolve().parents[2] / "_corpora"
 
 
 def _norm(s: str) -> str:
+    """归一姓名用于比对。★ **去掉单字母中间名**：工作区 slug 写 `walter-a-shewhart`，
+    而生年表写 `Walter Shewhart` —— 第一版因此把他报成「对不上生年」，
+    而那不是数据缺，是我的匹配太窄。"""
     import unicodedata
-    return re.sub(r"[^a-z]", "", unicodedata.normalize("NFKD", s.lower()))
+    s = unicodedata.normalize("NFKD", s.lower()).replace("-", " ")
+    toks = [w for w in re.split(r"[^a-z]+", s) if w and len(w) > 1]
+    return "".join(toks)
 
 
 def scan_all():
@@ -185,13 +190,20 @@ def scan_all():
         return 5
     born = json.loads(BORN_FILE.read_text(encoding="utf-8"))
     BY = {_norm(v["name"]): v for v in born.values() if isinstance(v, dict) and v.get("born")}
-    real, noted, unmatched, scanned = [], [], [], 0
+    # ★ 两种「判不了」必须分开报，它们的处置完全不同
+    #   （[[empty-default-swallows-unknown]]：混成一句就都成了「未判」）：
+    #     ① 生年表里**有这个人但 born 是 null** —— 生年本来就未知（Carver、Pacioli）
+    #     ② 生年表里**根本没有这个人** —— 该补表
+    real, noted, no_born, no_person, scanned = [], [], [], [], 0
     for led in sorted(CORPORA.glob("wip-*/workspaces/*/evidence/source-ledger.jsonl")):
         slug = led.parent.parent.name
         key = _norm(slug)
         cand = [v for k, v in BY.items() if k == key or key in k or k in key]
         if not cand:
-            unmatched.append(slug)
+            # 分辨「表里有人但没生年」与「表里根本没这个人」
+            allp = {_norm(v["name"]): v for v in born.values() if isinstance(v, dict)}
+            hit = [v for k, v in allp.items() if k == key or key in k or k in key]
+            (no_born if hit else no_person).append(slug)
             continue
         rows = [json.loads(l) for l in led.read_text(encoding="utf-8").splitlines() if l.strip()]
         r = evaluate(rows, cand[0]["born"])
@@ -200,7 +212,8 @@ def scan_all():
             real.append((slug, cand[0]["born"], r))
         if r["★ 已判二手/非作者（只是提示，不算缺陷）"]:
             noted.append((slug, cand[0]["born"], r))
-    print(f"扫过 {scanned} 个工作区｜**对不上生年的 {len(unmatched)} 个（未判，不是通过）**")
+    print(f"扫过 {scanned} 个工作区｜"
+          f"**生年未知 {len(no_born)} 个｜生年表里没有 {len(no_person)} 个**（都是未判，不是通过）")
     if real:
         print(f"\n✗ **{len(real)} 个工作区有「早于出生且仍判成他的」条目**：")
         for slug, b, r in real:
@@ -214,8 +227,12 @@ def scan_all():
         for slug, b, r in noted:
             for x in r["★ 逐条·已处置"][:2]:
                 print(f"  · {slug}　{x['年']}　{x['title'][:52]}　[{x['已有处置']}]")
-    if unmatched:
-        print(f"\n⚠ 对不上生年（**本件对它们未判**）：{unmatched}")
+    if no_born:
+        print(f"\n⚠ **生年本来就未知**（生年表里有这个人，`born` 是 null）：{no_born}")
+        print("   ⇒ 这一类**补不了**，本件对它们永远判不了；不是缺陷，也不是通过。")
+    if no_person:
+        print(f"\n⚠ **生年表里没有这个人**：{no_person}")
+        print("   ⇒ 这一类**补得了**：往 `_ledgers/_卒年.json` 加一条（要带出处）。")
     return 1 if real else 0
 
 
