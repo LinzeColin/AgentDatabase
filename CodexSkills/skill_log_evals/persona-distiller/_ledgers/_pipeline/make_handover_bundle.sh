@@ -219,6 +219,22 @@ else:
     for l in sh.stdout.splitlines():
         if l.strip().startswith(("✗","？","       表里")): print("     "+l.strip())
 
+# ★ 踩坑库被 START-HERE 列为「开工前必读」，而它的条数/索引/文件三者一度对不上：
+#   README 说 153（把 README 与 00-索引自己也数了进去），实际 151，另有 3 条没搬进仓。
+ll=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                       "/_ledgers/_pipeline/check_lessons_library.py")],
+                  capture_output=True, text=True)
+lt=[l for l in ll.stdout.strip().splitlines() if l.strip()]
+if ll.returncode==0:
+    print("✅ 踩坑库条数/索引/文件三者一致：%s"%(lt[0] if lt else "(无输出)"))
+elif ll.returncode==4:
+    print("★ 踩坑库：**未判**（找不到 文档/踩坑库/）")
+else:
+    ok=False
+    print("❌ 踩坑库三者对不上：")
+    for l in ll.stdout.splitlines():
+        if l.strip().startswith("✗"): print("     "+l.strip())
+
 # ★★ 盲判用例要**正面数出来**，不能只在出错时才打印——沉默不等于通过。
 #    ★ 期望值**不写死题数**：写死过一次（16/16/17/16），quick 四人补题到 32 之后
 #      它当场变红，而产物其实是对的。改成**按档位判下限 + 类数必须 16**，总数只打印。

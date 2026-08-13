@@ -80,12 +80,20 @@ REL = "CodexSkills/skill_log_evals/persona-distiller/_corpora"
 
 
 def tracked():
-    """→ `_corpora/` 下**被 git 跟踪**的全部路径。这是「clone 之后拿得到的」。"""
-    r = subprocess.run(["git", "-C", str(ROOT), "ls-files", REL + "/"],
+    """→ `_corpora/` 下**被 git 跟踪**的全部路径。这是「clone 之后拿得到的」。
+
+    ★★ 必须用 `-z`（NUL 分隔）。默认输出会把**含非 ASCII 的路径整条加引号**
+       （`"CodexSkills/…/研究/x.txt"`），于是：
+         · 按前缀切目录时，同一个工作区被数成 `X` 与 `"X` **两个** ——
+           「在制工作区」当场从 51 虚高到 **77**，而我已经把 77 写进首屏了；
+         · 拿这种带引号的路径去 `open()` 一律失败，claims/cases 的行数**少数**。
+       `-z` 不做任何转义，一次修掉这两处。
+    """
+    r = subprocess.run(["git", "-C", str(ROOT), "ls-files", "-z", REL + "/"],
                        capture_output=True, text=True)
     if r.returncode != 0:
         return None
-    return [l for l in r.stdout.splitlines() if l.strip()]
+    return [l for l in r.stdout.split("\0") if l.strip()]
 
 
 def _lines(paths):
@@ -137,12 +145,16 @@ def measure():
 
     # ④ 断言
     cl = [p for p in files if p.endswith("evidence/claims.jsonl")]
-    n4, _ = _lines(cl)
+    n4, miss4 = _lines(cl)
+    if miss4:                                    # ★ 读不到就吭声，不许当成 0
+        print(f"  ！ 断言：{len(miss4)} 份 claims.jsonl 打不开，例 {miss4[0]}")
     out.append(("断言", f"**{n4:,} 条**", f"被跟踪的 {len(cl)} 份 `evidence/claims.jsonl` 非空行合计"))
 
     # ⑤ 盲判用例（★ 只数 cases.jsonl，results.jsonl 不是题）
     cs = [p for p in files if p.endswith("evals/cases.jsonl")]
-    n5, _ = _lines(cs)
+    n5, miss5 = _lines(cs)
+    if miss5:
+        print(f"  ！ 盲判用例：{len(miss5)} 份 cases.jsonl 打不开，例 {miss5[0]}")
     out.append(("盲判用例", f"**{n5:,} 题**（{len(cs)} 个工作区）",
                 f"被跟踪的 {len(cs)} 份 `evals/cases.jsonl` 非空行合计"
                 "（★ **只数 cases，不数 results** —— 一起数会翻一倍）"))

@@ -23,8 +23,8 @@
 | | |
 |---|---:|
 | 已入库人物档案 | **102** |
-| 在制工作区 | **77** |
-| 语料（★ 两处布局，口径见下） | **6,453 份** ＝ `raw/` 3,756 ＋ `references/sources/` 1,986 ＋ 其它布局 711 |
+| 在制工作区 | **51** |
+| 语料（★ 两处布局，口径见下） | **6,494 份** ＝ `raw/` 3,780 ＋ `references/sources/` 1,999 ＋ 其它布局 715 |
 | 断言 | **976 条** |
 | 盲判用例 | **982 题**（48 个工作区） |
 | 记延后/拒发 | **168 条**（都写明了理由与解锁条件） |
@@ -43,9 +43,9 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_s
 
 | 放哪 | 份数 | 说明 |
 |---|---:|---|
-| `references/sources/<src-id>/*.normalized.txt` | 1,986 | 老工作区 |
-| `**/raw/*.txt` | 3,756 | 早期提交进去的 |
-| 其它布局 | 711 | 更早的扁平目录 |
+| `references/sources/<src-id>/*.normalized.txt` | 1,999 | 老工作区 |
+| `**/raw/*.txt` | 3,780 | 早期提交进去的 |
+| 其它布局 | 715 | 更早的扁平目录 |
 
 ★ **新工作区的 `raw/*.txt` 已被 `.gitignore` 挡在仓外**，所以不在上表里：
 它们靠每个工作区的 `raw/_ids-rebuild.txt` ＋ `_fetch-manifest.json` 的 sha256 重建。
@@ -144,18 +144,24 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/fetch_i
 按优先级：
 
 1. **跑阶段 5 判分**（上面第四节）——这是唯一卡住的一步。
-2. **Brandeis #172 判分**：他的阶段 1–4 也做完了，见
-   `CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-brandeis-172/05-阶段4完成.md`。
-3. **第 2 批继续开工**：名单与规则在
-   `CodexSkills/skill_log_evals/persona-distiller/_ledgers/_第2批值得开工名单-2026-08-13.md`。
-   ★ 名单里已经标了谁出局、为什么出局 —— **不要重开已记延后的人**。
+2. **Brandeis #172 与 Michelangelo #185 判分**：这两人的阶段 1–4 也做完了，见
+   `…/_corpora/wip-brandeis-172/05-阶段4完成.md`。
+3. **Dewey #190 进阶段 3**：阶段 2 已走通（档位 **quick**：台账 39 行、一手占比 1.0000、
+   道 3）。读 `…/_ledgers/_Dewey190阶段2完成-第3批唯一走通的-2026-08-13.md`。
+4. **Churchill #191 进阶段 1a**：探源做完了，两道同名守卫已接线，见
+   `…/_corpora/wip-churchill-191/04-探源.md`。**Ford #188** 同样可直接开工。
+5. ★ **不要重开已记延后的人**：第 2 批十人**九人出局**，死因与判法写在
+   `…/_ledgers/_第2批结算-十人九出局-2026-08-13.md`；
+   压倒性的第一死因是 `min_lanes`（六条研究道里有材料的不足 3 条），
+   而这类人**语料量与一手占比往往远超门**——只看份数会以为可以做。
 
 ## 六、★★ 开工前必读的两份
 
-1. **`文档/踩坑库/README.md`** —— 153 条实测教训。
+1. **`文档/踩坑库/README.md`** —— 154 条实测教训（条数由判据核：
+   `python3 …/_ledgers/_pipeline/check_lessons_library.py`，现测 rc=0）。
    **不是风格指南**，每一条都是一次真实的错判 + 可复算的数字 + 怎么提前发现。
    开工前至少读它列的那 10 条，能省掉一整轮返工。
-2. **`HANDOFF.md`** —— 全部细节（很长，119KB，**按需检索，不要通读**）。
+2. **`HANDOFF.md`** —— 全部细节（很长，120KB，**按需检索，不要通读**）。
 
 ## 七、几条不许破的规矩
 
