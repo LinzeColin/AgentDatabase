@@ -102,6 +102,31 @@ EXCLUDE = {
                  "Madeline Brandeis", "Irma Brandeis", "Antonietta Brandeis",
                  "Eugen Brandeis", "Antoine Brandeis", "Friedrich Brandeis",
                  "Jan Adolf Brandeis", "Adele Brandeis"],
+    # ★★★ Henry Ford #188：`creator:"Ford, Henry"` 的池子里**绝大多数不是他**。
+    #   PD（≤1930）136 条按 creator 原样统计：
+    #     Ford, Henry Jones            49   ← **历史学家 Henry Jones Ford（1851–1925）**
+    #     Ford, Henry Jones, 1851-1925 47   ← 同上
+    #     Ford, Henry, 1863-1947        8   ← ★ 工业家本人
+    #     Worthington Chauncey Ford…    2   ← 第三个人
+    #     Ford, Henry A., comp…         3   ← 第四个人（编县志的）
+    #   ⇒ **历史学家一系占 70.6%，工业家只占 7.4%。**
+    #   ★★ 年代筛不掉他：Henry Jones Ford 卒 **1925**，同期、同样在公有领域。
+    #     [[namesakes-whose-works-are-also-public-domain]]
+    #   ★ 而且他会**凭空造出一条道**：那 96 条里 27 条被 assign_lanes 判进 timeline
+    #     （`chronicle` 命中《…a chronicle of the rise and fall of federalism》），
+    #     **那条道里一份都不是工业家的**。
+    #   ★★★ 排除跑完再看剩下的，又现出**第五个人**：
+    #     `Ford, Henry Justice`（1860–1941）—— 安德鲁·朗童话集的**插画家**，
+    #     《The Golden mermaid, and other stories from the fairy books》(1906)、
+    #     《The book of saints and heroes》(1912)，同样在公有领域、年代重叠。
+    #     以及编县志那位的另一种写法（《The history of Putnam and Marshall counties》1860）。
+    #   ⇒ 这个姓名下**至少五个人**。[[namesakes-whose-works-are-also-public-domain]]
+    "ford": ["Henry Jones", "Ford, Henry J.", "1851-1925", "1851–1925",
+             "Worthington Chauncey", "Henry A., comp", "Kate B.",
+             "Ford, Henry Neville",
+             "Henry Justice", "1860-1941", "1860–1941",
+             "fairy book", "saints and heroes", "golden mermaid",
+             "putnam and marshall", "hamilton county"],
     # ★★★ Plato #186：**四类同名，全在抓源前实测过**（池 2617 条）。
     #   ① `PLATO Learning, Inc.`（1990s–2000s 教学软件公司，前身是 PLATO 计算机教学系统）32 条
     #      —— Foshay／Hannafin／Quinn／Sherman 的 "PLATO Evaluation Series"、"PLATO Courseware"。
@@ -168,6 +193,9 @@ REQUIRE = {
     # ★ Brandeis：只收「brandeis ＋ louis」同段。
     #   ★★ 这**挡不住侄子 `Louis Brandeis Wehle`**（他同段里也含 brandeis 与 louis）——
     #   靠 EXCLUDE 的 `Wehle` 挡。**REQUIRE 与 EXCLUDE 要一起看，单看一侧会以为漏了。**
+    # ★ 只加 EXCLUDE 不够：工业家有 2 条 creator 只写 `Ford, Henry`（无生卒年），
+    #   靠 REQUIRE 把「必须同时出现的词」钉住。**两侧要一起看**，单看一侧会以为漏了。
+    "ford": [["ford", "henry"]],
     "brandeis": [["brandeis", "louis"]],
     # ★ Plato 的著录有多种拼法：`Plato`／`PLATO`／`Plato, 427? BC-347? BC`／`Plato, Curt. Red.`，
     #   还有希腊文题名直接落在 creator 字段（`Πολιτεια του Πλατωνα`、`Ἀπολογία Σωκράτους`）。
