@@ -56,6 +56,7 @@
 退出码：0＝表与实测一致；1＝不一致；4＝找不到 START-HERE.md 或不在 git 树里（**未判**）
 """
 import argparse
+import collections
 import json
 import os
 import pathlib
@@ -65,6 +66,8 @@ import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 PD = HERE.parent.parent                      # …/persona-distiller
+_skipped = collections.Counter()
+
 def _root():
     """仓根：**用 git 问，不用 parents[N] 数层数**（数错过，见踩坑库）。"""
     r = subprocess.run(["git", "-C", str(PD), "rev-parse", "--show-toplevel"],
@@ -235,6 +238,7 @@ def measure_resolvable(files, root=None):
         try:
             body = (root / f).read_text(encoding="utf-8", errors="replace")
         except OSError:
+            _skipped["读不动的台账文件"] += 1     # ★ 原来是静默 continue
             continue
         for line in body.splitlines():
             line = line.strip()
@@ -243,6 +247,11 @@ def measure_resolvable(files, root=None):
             try:
                 row = json.loads(line)
             except ValueError:
+                # ★★ 原来也是静默 continue。这道门守的是**移交文档里那六个数**，
+                #   一行 JSON 坏掉就少算一行，而屏幕上照样印「✓ 每个数都与实测一致」。
+                #   实测现在是 0 行坏的（3,212 非空行全解析得了）——**先把计数摆上去，
+                #   免得将来坏了没人知道**。[[a-continue-hid-the-worst-case]]
+                _skipped["JSON 解析不了的行"] += 1
                 continue
             slot["rows"] += 1
             lp = row.get("local_path")
@@ -508,6 +517,17 @@ def main() -> int:
               f"；语料分布表 **{len(lay_bad)} 项不符**"
               "　—— 六格跑 `--apply` 改；分布表与表外散文要人另行核")
         return 1
+    # ★★ 静默跳过的那些要跟结论一起印 —— 「每个数都对」建在「每一行都读过」上面
+    if _skipped:
+        print("\n❗ **下面这些行/文件在算数时被跳过了**（原先是静默 continue）：")
+        for k, v in sorted(_skipped.items()):
+            print(f"     {k}：{v}")
+        print("   ⇒ 上面那句「与实测一致」**只覆盖没被跳过的部分** ⇒ **判红**。")
+        print("\n✗ **不给「与实测一致」这个结论** —— 先把跳过的那些修好或说明。")
+        return 1
+    else:
+        print("\n★ 算数时**一行都没跳过**（读不动的台账 0、JSON 解析不了的行 0）"
+              "—— 下面这句才站得住。")
     print("\n✓ 表里每个数都与实测一致（六格 ＋ 语料分布表）")
     return 0
 
