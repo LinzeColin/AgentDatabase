@@ -85,9 +85,15 @@ def main() -> int:
         return 3
 
     sk, meta = {}, {}
+    # ★★ 2026-08-14：`missing` 是当天补的。原来这里只有 `if not p.exists(): continue`，
+    #   于是在移交包的裸 clone 里（语料按裁定不进 git）它印
+    #   「文件数 0｜重复簇 0」并宣告「**独立文献数上界 = 0**」，**退出码 0**。
+    #   那个 0 不是测量结果，是一份都没读到。[[green-in-the-repo-dead-in-the-package]]
+    missing = 0
     for r in recs:
         p = raw / r["file"]
         if not p.exists():
+            missing += 1
             continue
         sk[r["identifier"]] = sketch(p.read_text(encoding="utf-8", errors="replace"))
         meta[r["identifier"]] = (r.get("ia_title", "")[:56], r.get("words", 0),
@@ -121,6 +127,12 @@ def main() -> int:
     dup = {k: v for k, v in clusters.items() if len(v) > 1}
 
     print(f"目录 {raw}")
+    if not ids:
+        print(f"❌ **未量，不是 0** —— 清单里 {len(recs)} 份，**一份也读不到**"
+              f"（`raw/` 里缺 {missing} 份；语料按裁定不进 git，裸 clone 里就是这样）。"
+              "\n   「独立文献数上界 = 0」在这里不是结论，是**没读到**。", file=sys.stderr)
+        return 3
+    print(f"清单 {len(recs)} 份 → **真读到 {len(ids)} 份**｜**读不到 {missing} 份**")
     print(f"文件数 {len(ids)}｜重合 ≥{a.threshold:.2f} 的对 {len(pairs)}｜重复簇 {len(dup)}")
     for k, v in sorted(dup.items(), key=lambda kv: -len(kv[1])):
         print(f"\n  簇（{len(v)} 份）—— **同卷多扫描 还是 同书不同卷？看题名，工具不替你判**")
