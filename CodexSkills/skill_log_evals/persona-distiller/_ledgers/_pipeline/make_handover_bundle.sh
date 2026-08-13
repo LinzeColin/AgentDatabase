@@ -304,6 +304,28 @@ else:
 # ★ 覆盖面同时印出来：**「没红」不等于「都查过」**
 for l in lw.stdout.splitlines():
     if l.startswith("扫过"): print("     "+l.strip())
+# ★ 两把尺子对不上的那一档也印出来（上面那件判据自己声明：在这些人身上它是**下界不是定论**）
+for l in lw.stdout.splitlines():
+    if "两把尺子对不上" in l: print("     "+l.strip().split("——")[0])
+
+# ★★★ `measure_distinct_works.py`：重量「这些源里有几部是同一本书」的工具。
+#   2026-08-14 实测：现行 `_dedup.json` 的 min-hash 算在**原样文本**上，门 0.55，
+#   而同一部书的四次数字化实测只有 0.1521–0.2462 ⇒ **一对都过不了**；
+#   狠归一化之后同书 0.2155–0.4254、不同书 ≤0.0018（差 120 倍）。
+#   ★ 对全库真跑要几分钟（8 人就跑了 ~5 分钟），**不适合每次打包都跑**；
+#     这里只跑它的**自测**（含两条反例、一条传递性对照、一条「跨语言判不了」），
+#     保证工具本身没烂；八人的实测表已落在判分清单里，判分前必读那一节。
+mw=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                      "/_ledgers/_pipeline/measure_distinct_works.py"), "--self-test"],
+                  capture_output=True, text=True)
+if mw.returncode == 0:
+    print("✅ 独立作品重量工具（measure_distinct_works）：自测全过"
+          "　—— 八人实测表见 `_ledgers/_第1批阶段5判分-开箱即跑清单-2026-08-13.md` 末节")
+else:
+    ok=False
+    print("❌ 独立作品重量工具自测不过（rc=%d）："%mw.returncode)
+    for l in mw.stdout.splitlines():
+        if l.strip().startswith("✗"): print("     "+l.strip())
 
 # ★★ 负空间泄题（`check_negative_space_leak.py`）：**按体裁描述「我手边缺什么」，
 #   等于把 holdout 的题目说出来**。Grotius #168 一天撞两次，而三道现有门全绿。

@@ -290,7 +290,8 @@ def main() -> int:
               "     Michelangelo #185 实测：56 份，min-hash 只塌缩 2、按题名塌缩 5；"
               "而 1875 Milanesi 书信集在他台账里占 4 个 `source_id`（逐对 Jaccard 0.1510–0.2412），"
               "min-hash 一个都没聚。\n"
-              "     ⇒ 这些人要**拿一句本人原文当探针**逐份搜，才判得了「是不是同一部书」。")
+              "     ⇒ 这些人要重量：`python3 _ledgers/_pipeline/measure_distinct_works.py --workspace <工作区>`\n"
+              "       （狠归一化后同书 0.2155–0.4254／不同书 ≤0.0018；判分队列八人的实测表在判分清单末节）")
         for nm, nf, a, b in sorted(zero):
             print(f"     {nm:30s} {nf:>3d} 份　min-hash 塌缩 {a}　按题名塌缩 {b}")
     if not bad:
