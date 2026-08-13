@@ -315,6 +315,25 @@ for l in lw.stdout.splitlines():
 #   ★ 对全库真跑要几分钟（8 人就跑了 ~5 分钟），**不适合每次打包都跑**；
 #     这里只跑它的**自测**（含两条反例、一条传递性对照、一条「跨语言判不了」），
 #     保证工具本身没烂；八人的实测表已落在判分清单里，判分前必读那一节。
+# ★★★ 档位声明（`check_profile_declared.py`）：**没声明 `profile` 的工作区正在被另一把尺子量。**
+#   2026-08-14 抓到 Dewey #190——他的 `min_lanes 3 < 6` 看着像「材料结构性不够」
+#   （那正是第 2 批九人出局的第一死因），真因是 `meta.json` 里**根本没有 `profile` 键**，
+#   于是 `quality_check.py:4325` 的 `meta.get('profile','standard')` 静默按 standard 判他，
+#   而同批另两人都是 quick。★ 同一个概念两个默认值：**建器 `--profile` 默认 `deep`**。
+#   ⇒ 这里**只报不判**（老工作区没声明是历史，不是回归）；但 `profile: null` 那一种要红——
+#     那会让 `PROFILE_THRESHOLDS.get(None)` 返回 None、判据直接拒检整个工作区。
+pf=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                      "/_ledgers/_pipeline/check_profile_declared.py")],
+                  capture_output=True, text=True)
+if pf.returncode == 0:
+    for l in pf.stdout.splitlines():
+        if l.startswith("档位声明") or l.strip().startswith("！"): print("　" + l.strip())
+else:
+    ok=False
+    print("❌ 档位声明：有 `profile: null`／值不认识 —— 判据会拒检整个工作区：")
+    for l in pf.stdout.splitlines():
+        if l.strip().startswith("❌") or l.strip().startswith("wip-"): print("     "+l.strip())
+
 mw=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
                                       "/_ledgers/_pipeline/measure_distinct_works.py"), "--self-test"],
                   capture_output=True, text=True)
