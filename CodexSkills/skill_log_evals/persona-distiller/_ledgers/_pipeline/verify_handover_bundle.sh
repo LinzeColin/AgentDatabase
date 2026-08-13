@@ -76,6 +76,15 @@ self_test() {
   ( verify "$T/d" >/dev/null 2>&1 ); [ $? -ne 0 ] && say "✓" "★ 反例：包是空的 → 红" || { say "✗" "空包却绿"; bad=1; }
   rm -f "$B.sha256"
   ( verify "$T/d" >/dev/null 2>&1 ); [ $? -ne 0 ] && say "✓" "★ 反例：sidecar 不在 → 红（**不许当成没问题**）" || { say "✗" "缺 sidecar 却绿"; bad=1; }
+  # ★★★ 审计没过的那次构建：包自洽、8 项本会全绿，只有这张标记拦得住
+  git -C "$T/src" bundle create "$B" --all >/dev/null 2>&1
+  w "$(shasum -a 256 "$B" | awk '{print $1}')" "$TIP" "$N"
+  echo x > "$T/d/BUILD-FAILED.txt"
+  ( verify "$T/d" >/dev/null 2>&1 ); [ $? -ne 0 ] \
+    && say "✓" "★★★ **反例：包完全自洽，但旁边有 BUILD-FAILED.txt → 红**（审计没过的包不许上传）" \
+    || { say "✗" "审计没过的包却绿"; bad=1; }
+  rm -f "$T/d/BUILD-FAILED.txt"
+  ( verify "$T/d" >/dev/null 2>&1 ); [ $? -eq 0 ] && say "✓" "★ 正对照：标记删掉后又是绿的" || { say "✗" "标记删了仍红"; bad=1; }
   # ★★ --expect-tip：对的放行、错的判红（这是唯一能分辨「旧包」的一项）
   git -C "$T/src" bundle create "$B" --all >/dev/null 2>&1
   w "$(shasum -a 256 "$B" | awk '{print $1}')" "$TIP" "$N"
@@ -92,6 +101,13 @@ verify() {
   B="$D/agentdb-persona-distiller-full.bundle"
   S="$B.sha256"
   echo "验：$D"
+  # ★★ 先看有没有「这次构建审计没过」的标记。包是在审计**之前**写好的，
+  #   审计失败时它照样自洽，下面 8 项会全绿——这一项是唯一能拦住它的。
+  if [ -f "$D/BUILD-FAILED.txt" ]; then
+    fail "**这个包来自审计没过的那次构建**（旁边有 BUILD-FAILED.txt）——不要上传"
+    while IFS= read -r _l; do say " " "   $_l"; done < "$D/BUILD-FAILED.txt"
+    echo; echo "❌ $BAD 项不通过"; return 1
+  fi
   [ -s "$B" ] || { fail "包不存在或是空的：$B"; echo; echo "✗ $BAD 项不通过"; return 1; }
   pass "包在（$(wc -c < "$B" | tr -d ' ') 字节）"
   [ -s "$S" ] || { fail "sidecar 不在：$S —— **没有可比对的记录，不是「没问题」**"; echo; echo "✗ $BAD 项不通过"; return 1; }

@@ -626,7 +626,21 @@ sys.exit(0 if ok else 1)
 PYEOF
 rc=$?
 rm -rf "$TMP"
-[ $rc -ne 0 ] && { echo "★ 回读自验证失败"; exit $rc; }
+# ★★★ 2026-08-14：**包是在自验证之前就写好的**，自验证失败时它照样躺在那儿、
+#   而且自洽——`verify_handover_bundle.sh` 会给它 8 项全过。一个不知情的人完全可能把
+#   **审计没过的包**传上去（[[pipe-to-tail-hides-the-exit-code]] 的第五次：
+#   「退出了」≠「成功了」，「产物存在且自洽」更不是）。
+#   ⇒ 失败时在包旁边落一张 `BUILD-FAILED.txt`，验包脚本见到它一律判红。
+if [ $rc -ne 0 ]; then
+  {
+    echo "本目录的包是**审计没过**的那一次构建留下的，**不要上传**。"
+    echo "构建退出码：$rc"
+    echo "修好之后重跑 make_handover_bundle.sh；成功时这张文件会被自动删掉。"
+  } > "$(dirname "$B")/BUILD-FAILED.txt"
+  echo "★ 回读自验证失败 —— 已在包旁边落下 BUILD-FAILED.txt（验包脚本会判红）"
+  exit $rc
+fi
+rm -f "$(dirname "$B")/BUILD-FAILED.txt"
 echo
 # ★★★ 移交封面信里那张「包的身份证」原先是**每次打完包我手工抄进去的**。
 #   2026-08-14 一晚同步了 5 次，其中一次的「打包」时间是我手打的（写成 01:35，真值 00:44）——
