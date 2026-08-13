@@ -57,6 +57,15 @@ CORPORA = HERE.parent.parent / "_corpora"
 BATCH1 = ["lincoln-174", "jefferson-175", "bismarck-176", "machiavelli-177",
           "rousseau-178", "kant-179", "pestalozzi-180", "frobel-181"]
 
+# ★★ 较短一侧至少这么多 shingle，否则不算命中。
+#   第一版没有这条，全库报 **218 对** —— 其中 Adams 一个人占 120 对。
+#   打开读：他的 holdout 2,277 词 vs train **394 词**，包含率 0.6182 却只共有 **34 个 shingle**
+#   —— 是 AIEE 会议录的**版面样板**（刊头 ＋ 作者栏）撑起来的，不是同一篇文章。
+#   命中对里「较短一侧 shingle 数」的中位数：Adams **74**，而真命中的
+#   Machiavelli 957、Rousseau 1,464、Nightingale 5,597。**门放 200，余量 4.8 倍。**
+#   加上这条之后 218 → 92 对、11 个工作区。[[read-the-hits-before-reporting-the-rate]]
+MIN_SHINGLE = 200
+
 
 def load_split(ws: pathlib.Path, split: str):
     """→ {source_id: (签名, 题名, 年, 语种)}。**读不到正文的不进来**，由调用方计未量。"""
@@ -79,10 +88,15 @@ def load_split(ws: pathlib.Path, split: str):
     return out
 
 
-def pairs(ho: dict, tr: dict):
-    """→ [(holdout_id, train_id)]，**纯函数**（签名已经算好）。"""
+def pairs(ho: dict, tr: dict, min_sh: int = MIN_SHINGLE):
+    """→ [(holdout_id, train_id)]，**纯函数**（签名已经算好）。
+
+    ★ `min_sh`：较短一侧的 shingle 数下限。低于它的一律不算命中 ——
+      短文件靠版面样板就能把包含率顶到 0.6 以上（实测 34 个共有 shingle）。
+    """
     return [(h, t) for h, (hs, *_) in ho.items()
-            for t, (ts, *_) in tr.items() if same_work(hs, ts)]
+            for t, (ts, *_) in tr.items()
+            if min(len(hs), len(ts)) >= min_sh and same_work(hs, ts)]
 
 
 def self_test() -> int:
@@ -94,9 +108,13 @@ def self_test() -> int:
         ok += 1 if c else 0
         print(f"  {'✓' if c else '✗'} {d}")
 
-    A = "the quick brown fox jumps over the lazy dog and then some more words here to make it long enough"
-    B = A + " plus a tail that differs a bit at the end of the text"
-    C = "completely unrelated sentence about numbers and machines with no shared phrasing whatsoever ok"
+    # ★★ 夹具必须**够长**：门是「较短一侧 ≥200 shingle」，用我随手编的一句话做正对照
+    #   会被门拦掉——第一版正是如此，正对照当场判红。[[fixtures-cleaner-than-the-real-thing]]
+    #   这里造 4,000 个互不相同的词，签名规模与真实一手源同量级。
+    A = " ".join(f"w{i}x{i*7%1013}" for i in range(4000))
+    B = A + " " + " ".join(f"tail{i}" for i in range(300))      # 同一部作品的另一印本
+    C = " ".join(f"z{i}q{i*3%997}" for i in range(4000))        # 完全不同的作品
+    SHORT = "the quick brown fox jumps over the lazy dog and then some more words here ok"
     ho = {"h1": (signature(A), "t", "1900", "en")}
     tr = {"t1": (signature(B), "t", "1900", "en"), "t2": (signature(C), "u", "1900", "en")}
     got = pairs(ho, tr)
@@ -105,6 +123,13 @@ def self_test() -> int:
     chk("★ 两边都空 ⇒ 0 对", pairs({}, {}) == [])
     chk("★★ **holdout 读不到正文时是 0 对 —— 调用方必须另计未量，不许当成干净**",
         pairs({}, tr) == [])
+    # ★★ 短文件反例：签名很小的两份，即使 same_work 说是，也不许算命中
+    tiny_h = {"h9": (signature(SHORT), "t", "1900", "en")}
+    tiny_t = {"t9": (signature(SHORT + " and a little more"), "t", "1900", "en")}
+    chk(f"★★ **反例：较短一侧只有 {len(signature(SHORT))} 个 shingle（< {MIN_SHINGLE}）⇒ 不算命中**"
+        "　——Adams 那 120 对就是这么来的", pairs(tiny_h, tiny_t) == [])
+    chk("★ 把门降到 1 时同一对又出现（证明是**门**在起作用，不是这两份本来就不像）",
+        pairs(tiny_h, tiny_t, min_sh=1) == [("h9", "t9")])
     print(f"\n{'✓ 全过' if ok == n else f'✗ {n - ok}/{n} 项不符'}")
     return 0 if ok == n else 1
 
@@ -150,6 +175,9 @@ def main() -> int:
     if no_text:
         print(f"     未量：{', '.join(no_text)}")
     print(f"⇒ **同一部作品同时在 holdout 与 train 的：{total} 对**")
+    print(f"★ 前提：**较短一侧 ≥{MIN_SHINGLE} 个 shingle** 才算命中 —— "
+          f"不加这条，短文件的版面样板会把包含率顶上去（**全库实测 218 → 92 对**，"
+          f"其中 Adams 一个人 120 对全是这么来的）")
     print("\n★★ 这个数是**下界**：`same_work` 靠 n-gram，**跨语种恒为 0** —— "
           "原文在 train、译本在 holdout 时本件一声不吭。**「0 对」不等于「没有泄漏」。**")
     print("★ 报出来的每一对都要人读：要么重划 split，要么在判决书里写明这一对的存在。")
