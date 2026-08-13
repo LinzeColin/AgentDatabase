@@ -12,10 +12,24 @@
 | ② 小说角色对白 | Pestalozzi《Lienhard und Gertrud》 | 他**虚构的人物** |
 | ③ 校勘者／编者序言 | Kant 1867/1868/1889 编本 | **校订者** |
 | ④ 图书馆数字化声明 | Jefferson 一份 P1 源 | **图书馆** |
+| ⑤ **落在一段未闭合的引语里** | Brandeis《Other people's money》 | **尤蒂卡审计官 Reusswig** |
+| ⑥ **听证／庭审转录里的证人** | Brandeis《Scientific management and railroads》 | **证人 Henry R. Towne** |
 
 ★ Marshall 最严重：`writings` 道 **10 条候选 10 条**都是华盛顿的话，
 而**三道现有的门（来源数／道数／一手占比）一道都不会因此变红**——
 门数的是来源，不问那些第一人称属于谁。
+
+★★ ⑤⑥ 是 2026-08-13 Brandeis #172 实测补的，**代价已量清**：
+本工具对他 `writings` 道 14 条候选**只标出 1 条**，而逐条读前 700 字核出
+**9 条不是他**（Reusswig 3、Towne 3、North 法官 1、Fisher 1、工厂主 1）——
+**漏检 8/9**。两条新机制补上后：命中 9/9、**误伤本人 0/5**。
+
+⑥ 这一条尤其是 [[a-checker-nothing-calls-is-not-a-checker]] 的形态：
+听证体的说话人标记检测**早就写在 `measure_voice.py` 里**（`SPEAKER_TAG`），
+只是从没接进这里。而 ② 原有的 `SPEAKER_LABEL` 够不到它，有两个原因，
+**两个都得改**：正则要求「首字母大写、其余小写」而 OCR 出来是 `Mr. TowNE.`；
+窗口只看命中前 90 字，而听证里一个人的一段回答动辄两三千字
+（实测最近的标记在命中前 **1357／2528／1359** 字）。
 
 ## 本工具**不判断**
 
@@ -79,6 +93,64 @@ DIGITIZE = re.compile(
 # 序言区：正文开头这一段里的第一人称，默认可疑（多半是序、献词、编者说明）。
 FRONT_MATTER_CHARS = 12000
 
+# ---- ⑤ 未闭合的引语：命中落在别人一段长引语的内部。
+# ★ 第一版用**奇偶校验**（往前 4000 字数引号，奇数＝在引语内），实测就废了：
+#   Reusswig 那段漏 2 条（引语外还有 `"over-subscribed."`／`"over-the-counter"`
+#   两对把奇偶数凑回了偶），同时把 Brandeis 自己的一句打红
+#   （开引号落在 4000 窗口之外，只剩一个关引号）。**窗口一变，结论就变。**
+# ⇒ 改成不数个数，只判**最近那一个引号是开还是关**：
+#   开 ⇒ 命中与它之间没有关引号 ⇒ 在引语内。这个判断不依赖窗口多大。
+QMARK = re.compile(r'["„“”]')
+QUOTE_LOOKBACK = 12000
+# ★★ 语种关：**德语的 `“` 是关引号**（`„Botſchafters“`），英语的 `“` 是开引号。
+#   第一版按英语一套判，Bismarck 2 条、Kant 1 条本人原话当场被打红 ——
+#   与 [[regex-must-clear-the-corpus-language]] 同一形态（`A.L.S` 匹配德语 `als`）。
+#   ⇒ 按**这一份文件自己的用法**定约定：出现 ≥3 个 `„` 就按德语读。
+GERMAN_OPEN_MIN = 3
+# ★ 开引号到命中的最大距离。**这个数是量出来的，不是挑出来的**（2026-08-13，33 例真语料）：
+#   ⑤ 单独撑起的正例最远 **1247**（North 法官脚注；Reusswig 三条是 260/386/1067），
+#   而误伤的负例在 **3750**（Pestalozzi 献词——OCR 把那段引语的关引号丢了）。
+#   取 2000：正例侧留 1.6 倍余量，负例侧留 1.9 倍余量。
+#   依据不只是这两个数——**跑掉几千字还没闭合的引语，多半是 OCR 丢了关引号**：
+#   真有那么长的引文，排版上会用缩进整段引，不会用行内引号。
+QUOTE_OPEN_MAX_DIST = 2000
+# 引导语落在**引文自身**里的形态：`In Mr. Fisher's own words, — "…`
+OWN_WORDS = re.compile(r"""(?:own\s+words|as\s+stated\s+by|in\s+the\s+words\s+of)"""
+                       r"""[^"“]{0,40}["“]""", re.I)
+
+# ---- ⑥ 听证／庭审转录：第一人称属于**作证的那个人**。
+# 标记形态取自真语料（OCR 大小写混乱，`Mr. TowNE.`／`Mr. TOWNE.`／`Mr. Towne.` 三种都出现过）。
+SPEAKER_TURN = re.compile(
+    r"(?:^|[.;!?]\s)("
+    r"(?:Mr|Mrs|Ms|Dr|Prof|Senator|Representative|Commissioner|Chairman|Judge|Justice"
+    r"|Gen|Col|Capt|Hon)\.\s+[A-Z][A-Za-z'\-]{1,20}"
+    r"|The\s+CHAIRMAN|The\s+WITNESS"
+    r"|[A-Z][A-Z'\-]{3,20}"          # 全大写姓氏单独成标记
+    r")\.\s+(?=[A-Z])")
+# ★ 单个 `Mr. Smith.` 在任何叙述文里都可能出现 —— 靠**密度**分辨体裁，不靠单次命中：
+#   ±10000 字窗口里 ≥3 个说话人标记才算转录体。
+SPEAKER_TURN_WINDOW = 10000
+SPEAKER_TURN_MIN = 3
+
+# ---- ⑦ 引证抬头：**不打引号**，靠一行「姓名，职衔：」把下面整段归给别人。
+# 「Brandeis Brief」的标志写法——用大量他人的社会事实与医学证词立论，
+# 每一段前面一行出处，段落本身不加引号。⑤ 因此完全够不到。
+# 实测：Muller v. Oregon 那一卷里
+#   `Report of the Committee on the Early Closing of Shops Bill, British House of Lords, 1901.`
+#   `Sir W. MacCormac, President of the Royal College of Surgeons :`
+# 之后整段第一人称都是 MacCormac 的。
+CITE_HEADER = re.compile(
+    r"(?:^|[.)]\s)"
+    r"((?:Sir|Dr|Mr|Mrs|Miss|Prof|Professor|Hon|Judge|Justice|Lord|Rev|Col|Gen)\.?\s+"
+    r"[A-Z][\w.'\-]+(?:\s+[A-Z][\w.'\-]+){0,3}"
+    r"|[A-Z][\w.'\-]+(?:\s+[A-Z][\w.'\-]+){1,3})"
+    r"\s*,\s*"
+    r"([^:.]{0,90}?\b(?:President|Secretary|Commissioner|Inspector|Superintendent|Chief|"
+    r"Director|Surgeon|Physician|Professor|Chairman|Warden|Registrar|Officer|Delegate|"
+    r"Controller|Comptroller|Manager|Agent|Engineer|Editor)\b[^:.]{0,90})"
+    r"\s*:\s")
+CITE_HEADER_MAX_DIST = 2500
+
 
 def dehyphen(t: str) -> str:
     t = re.sub(r"(\w)[-‐‑]\s*\n\s*([a-z])", r"\1\2", t)
@@ -98,6 +170,54 @@ def evidence(text: str, m: re.Match, pad: int = 34) -> str:
     a = max(0, m.start() - pad)
     b = min(len(text), m.end() + pad)
     return ("…" if a > 0 else "") + text[a:b].strip() + ("…" if b < len(text) else "")
+
+
+def inside_open_quote(norm: str, off: int):
+    """⑤ 命中是否落在一段**未闭合**的引语里 → (是否, 开引号处的原文)。
+
+    只判**最近那一个引号是开还是关**——命中与它之间按定义没有别的引号，
+    所以「它是开的」等价于「引语到命中处还没闭」。**不数个数，因此不吃窗口大小。**
+    """
+    w = norm[max(0, off - QUOTE_LOOKBACK):off]
+    marks = list(QMARK.finditer(w))
+    if not marks:
+        return False, ""
+    m = marks[-1]
+    i, ch = m.start(), m.group()
+    nxt = w[i + 1:i + 2]
+    # ★ 无论哪种约定，**开引号后面都紧跟字母**。OCR 里满地的 `„ . . . ..`／`„ 18 1 38`
+    #   全靠这一条挡掉（Marshall、Jefferson 各一条本人原话曾被它们打红）。
+    if not re.match(r"[A-Za-zÀ-ɏſ]", nxt or ""):
+        return False, ""
+    if len(w) - i > QUOTE_OPEN_MAX_DIST:
+        return False, ""
+    german = norm.count("„") >= GERMAN_OPEN_MIN
+    if german:
+        # 德语：只有 `„` 是开；`“`／`”`／`"` 一律当关。
+        return (True, "…" + w[max(0, i - 175):i + 45].strip() + "…") if ch == "„" else (False, "")
+    if ch in "”„":
+        return False, ""
+    if ch != "“":
+        # 关引号：前面是句末标点 —— `future." Our Duty`（后面跟字母的已在上面挡掉）
+        if re.search(r"[.,;!?]\s?$", w[max(0, i - 2):i]):
+            return False, ""
+    return True, "…" + w[max(0, i - 175):i + 45].strip() + "…"
+
+
+def nearest_speaker_turn(norm: str, off: int):
+    """⑥ 命中是否落在听证／庭审转录里 → (是否, 最近的说话人标记及距离)。"""
+    a = max(0, off - SPEAKER_TURN_WINDOW)
+    b = min(len(norm), off + SPEAKER_TURN_WINDOW)
+    turns = list(SPEAKER_TURN.finditer(norm[a:b]))
+    if len(turns) < SPEAKER_TURN_MIN:
+        return False, ""
+    before = [m for m in turns if a + m.start() < off]
+    if not before:
+        return False, ""
+    m = before[-1]
+    d = off - (a + m.end())
+    return True, (f"最近说话人标记「{m.group(1)}.」在命中前 {d} 字（本窗口共 {len(turns)} 个标记）："
+                  f"…{norm[a + m.start():a + m.start() + 130].strip()}…")
 
 
 def judge(norm: str, off: int, quote: str):
@@ -132,6 +252,25 @@ def judge(norm: str, off: int, quote: str):
     elif off < FRONT_MATTER_CHARS:
         out.append(("中", f"③序言区：偏移 {off} < {FRONT_MATTER_CHARS}，多半是序/献词/编者说明",
                     evidence(head, re.search(re.escape(quote[:40]), head) or re.compile(r"^").match(head))))
+
+    hit, ev = inside_open_quote(norm, off)
+    if hit:
+        out.append(("高", "⑤未闭合引语：命中落在别人一段长引语的内部，开引号处通常就写着是谁", ev))
+    else:
+        m = OWN_WORDS.search(quote)
+        if m:
+            out.append(("高", "⑤引导语落在**引文自身**里：`…own words / as stated by…` 之后就是引号", evidence(quote, m)))
+
+    hit, ev = nearest_speaker_turn(norm, off)
+    if hit:
+        out.append(("高", "⑥听证/庭审转录：第一人称属于作证的那个人，不是编者也不是本人", ev))
+
+    w = norm[max(0, off - CITE_HEADER_MAX_DIST):off]
+    hs = list(CITE_HEADER.finditer(w))
+    if hs:
+        m = hs[-1]
+        out.append(("高", f"⑦引证抬头（辩状/报告体，**整段不打引号**）：下面这段归「{m.group(1)}」，"
+                          f"抬头在命中前 {len(w) - m.end()} 字", evidence(w, m, pad=20)))
     return out
 
 
@@ -170,6 +309,18 @@ POS = [
     ("wip-kant-179/workspaces/immanuel-kant", "src-c90e1301fe6c", 9299, "③校勘"),
     ("wip-kant-179/workspaces/immanuel-kant", "src-64ab9f79bfb5", 2242, "③校勘"),
     ("wip-jefferson-175/workspaces/thomas-jefferson", "src-843f7cba4fcc", 5568, "④数字化"),
+    # ★ 2026-08-13 Brandeis #172：本工具原来对这 9 条只标出 1 条（漏 8）
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-26a41d751b61", 154114, "⑤Reusswig"),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-652aa149475b", 157119, "⑤Reusswig"),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-75ebbbaa5e10", 154277, "⑤Reusswig"),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-e6750d32440f", 50020, "⑤North法官脚注"),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-26dbd660239a", 6445, "⑤b Fisher"),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-04857426d8e2", 144742, "⑥Towne 证人"),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-dc08306e597b", 142268, "⑥Towne 证人"),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-696d2c185f7d", 141645, "⑥Towne 证人"),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-94baf0d4e64a", 446915, "①工厂主转述"),
+    # ⑦「Brandeis Brief」体：MacCormac 在上议院委员会作证，整段不打引号
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-0b710810f1f3", 106161, "⑦引证抬头"),
 ]
 # 必须**没有**「高」的：已逐条核过、确属本人的
 NEG = [
@@ -185,6 +336,15 @@ NEG = [
     ("wip-kant-179/workspaces/immanuel-kant", "src-1487a594f356", 777540),
     ("wip-jefferson-175/workspaces/thomas-jefferson", "src-29b9a8e05249", 60368),
     ("wip-jefferson-175/workspaces/thomas-jefferson", "src-ac2df69c6c36", 5495),
+    # ★ 2026-08-13 Brandeis #172：与上面 9 条同一批抽出、**逐条读前 700 字核过确属他本人**。
+    #   ⑤ 的第一版（奇偶校验）把 `src-2ef164245cdd` 打红过 —— 它留在这里防那一版回来。
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-ea2c7920700d", 50928),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-3d16531d4151", 175321),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-f262a6c0fb76", 171201),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-2ef164245cdd", 32653),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-0a5e23fd4921", 9847),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-f713f255ca3e", 54040),
+    ("wip-brandeis-172/workspaces/louis-brandeis", "src-7ca5e8f31c88", 29933),
 ]
 
 
