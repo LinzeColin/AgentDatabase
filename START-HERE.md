@@ -62,6 +62,20 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_s
 **只需要 `python3`（3.9+）和 `git`。**
 全部工具实测只用 Python **标准库**，`pip install` 一个都不用。
 
+★ **这句话 2026-08-14 在一个真 clone 里逐个 import 核过**（`ast` 解析 + 按模块 origin
+是否落在标准库目录判）：persona-distiller 两棵下 **669 个 `.py`**，非标准库的顶层 import
+**只有 3 个**，逐个查清：
+
+| | 处数 | 实况 |
+|---|---:|---|
+| `msvcrt` | 50 | **Windows 的标准库**，且写成 `try: import msvcrt / except ImportError: msvcrt = None`——非 Windows 上降级，不是依赖 |
+| `registry_core` | 3 | 住在**同仓的兄弟技能** `registry/codex/persona-distiller-group/scripts/`；`check_contract_drift.py` 自己文档写明「按设计如此」。**同一个包里，不用装** |
+| `pypdf` | 1 | **唯一一个真第三方**，只在 `_corpora/wip-steinhardt-98/ms_contact2.py` 这个**工作区内的一次性脚本**里，**不是流水线工具**——不跑它就不需要它 |
+
+★★ 但**整个包不止 persona-distiller**：`git clone` 会拿到 `CodexSkills` 下别的技能
+（graphify 要 networkx／tree-sitter／neo4j，book-to-skill 要 docling／bs4，dws 要 openpyxl…）
+与 `OpenAIDatabase`。**那些跑起来是要装东西的**，只是本页说的这条流水线不用。
+
 验证一下（三条命令都应当立刻返回）：
 
 ```bash
