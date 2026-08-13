@@ -144,6 +144,23 @@ python3 --version && git --version && echo OK
     flag_borrowed_voice --self-test → rc=5「**未跑**，不是通过」（自测的 36 个例子全建在真语料上）
     detect_front_matter --self-test → rc=5「**未跑**」（自测要的 3 份语料不在本树）
 
+★★ **还有两件「按设计就返回 1」的**，别当成坏了（2026-08-14 在一个真 clone 里逐条跑过）：
+
+    check_lane_distinct_works.py  → rc=1（空心道：Churchill／Marshall 是已查清、已落纸的
+                                    两例，做成硬绿就永远变不绿——它比对基线名单，**多出新的人才是回归**）
+    check_scoring_ready.py        → rc=1（见第五节：1 的意思是「有人缺件、矛盾或压线」）
+
+★ 另有两件**只报数、不是门**的（本轮新做，跑起来不需要判读经验）：
+
+```bash
+python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_profile_declared.py
+python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/measure_distinct_works.py --self-test
+```
+
+前者答「谁没声明档位、谁声明的档与材料对不上」；后者是判重的正确尺子（`--workspace <工作区>`
+真跑要几分钟，全库 `--all` 要几十分钟，结果已存在
+`_ledgers/_全库独立作品数重量-2026-08-14.md`）。
+
 不需要语料的那些**现在就该是绿的**，可以立刻验：
 
 ```bash
