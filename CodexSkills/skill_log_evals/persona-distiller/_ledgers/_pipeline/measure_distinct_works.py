@@ -51,6 +51,9 @@ import re
 import sys
 import zlib
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces, layout_of  # noqa: E402
+
 HERE = pathlib.Path(__file__).resolve().parent
 PD = HERE.parent.parent
 CORPORA = PD / "_corpora"
@@ -335,7 +338,11 @@ def main() -> int:
         return report(pathlib.Path(a.workspace), a.threshold, contain_t=a.contain_threshold)
     if a.all:
         rc = 0
-        for d in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
+        # ★★ 2026-08-14：原来这里是 `glob(CORPORA/"wip-*"/"workspaces"/"*")`，
+        #   **漏掉 8 个「名字重复一层」的工作区（train 778 份，占全库 28.5%）**，
+        #   而且它们的正文一份不缺。当天我据此发的「全库 1950 份」是少算的。
+        #   改成按台账定位（workspace_roots），三种布局都收得到。
+        for d in iter_workspaces(CORPORA):
             r = report(pathlib.Path(d), a.threshold, contain_t=a.contain_threshold)
             rc = rc or (0 if r in (0, 4) else r)
         return rc
