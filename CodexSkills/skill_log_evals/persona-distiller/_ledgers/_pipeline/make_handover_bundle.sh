@@ -568,7 +568,7 @@ echo
 #   去掉手工环节；封面信不在就跳过（只印一行，不报错）。
 _COVER="$(dirname "$B")/00-你要做的两件事.md"
 if [ -f "$_COVER" ]; then
-  python3 - "$_COVER" "$B.sha256" <<'COVEOF'
+  HANDOFF_REPO="$REPO" python3 - "$_COVER" "$B.sha256" <<'COVEOF'
 import pathlib, re, sys
 cover, side = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2])
 s = side.read_text(encoding="utf-8")
@@ -584,6 +584,24 @@ if sha:  t = re.sub(r"\| sha256 \| `[0-9a-f]{64}` \|", f"| sha256 | `{sha}` |", 
 if tip:  t = re.sub(r"\| tip \| `[0-9a-f]{40}`", f"| tip | `{tip}`", t)
 if n:    t = re.sub(r"\| 提交数 \| \*\*[\d,]+\*\* \|", f"| 提交数 | **{int(n):,}** |", t)
 if when: t = re.sub(r"\| 打包 \| [\d\-]+ [\d:]+ \|", f"| 打包 | {when} |", t)
+# ★★ 封面信里那几个**散文数字**也回填。它们没有判据管，我手工同步过三次、错过一次
+#   （踩坑库写 162 而真值 164、三人返工写 42 而真值 40）。真源：
+#     · 踩坑库条数 —— `文档/踩坑库/*.md` 去掉 README 与 00-索引（与 check_lessons_library 同口径）
+#     · 六格主数 —— **抄 START-HERE 首屏那张表**（那张表由 check_start_here_numbers 管着）
+import os
+R2 = os.environ.get("HANDOFF_REPO") or ""
+if R2:
+    lessons = pathlib.Path(R2) / "文档/踩坑库"
+    if lessons.is_dir():
+        n = len([f for f in lessons.glob("*.md") if f.name not in ("README.md", "00-索引.md")])
+        t = re.sub(r"- 踩坑库 \*\*\d+ 条\*\*", f"- 踩坑库 **{n} 条**", t)
+    sh = pathlib.Path(R2) / "START-HERE.md"
+    if sh.is_file():
+        src = sh.read_text(encoding="utf-8")
+        for label in ("已入库人物档案", "在制工作区", "断言", "盲判用例", "记延后/拒发"):
+            m = re.search(rf"^\| {re.escape(label)} \| \*\*([\d,]+)", src, re.M)
+            if m:
+                t = re.sub(rf"({re.escape(label)} \*\*)[\d,]+", rf"\g<1>{m.group(1)}", t)
 cover.write_text(t, encoding="utf-8")
 print("✅ 封面信身份证：已从 sidecar 现读回填" + ("（无变化）" if t == old else ""))
 COVEOF
