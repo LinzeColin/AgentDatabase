@@ -50,6 +50,9 @@ import re
 import subprocess
 import sys
 import unicodedata
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve().parent
 LEDGERS = HERE.parent
@@ -78,7 +81,7 @@ def deferred_keys():
 def worked_keys():
     """→ {归一名: 工作区路径}。slug ＋ meta.json 声明的 name/normalized_name/aliases。"""
     out = {}
-    for ws in glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*")):
+    for ws in [str(_w) for _w in iter_workspaces(CORPORA)]:
         if not os.path.isdir(ws):
             continue
         out[norm(os.path.basename(ws))] = ws

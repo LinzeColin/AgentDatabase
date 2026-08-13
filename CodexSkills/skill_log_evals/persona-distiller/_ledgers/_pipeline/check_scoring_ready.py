@@ -53,6 +53,9 @@ import pathlib
 import re
 import subprocess
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve().parent
 PD = HERE.parent.parent
@@ -137,7 +140,7 @@ def scan():
     pre = PRELOG.read_text(encoding="utf-8") if PRELOG.is_file() else ""
     closed = _deferred_names()
     out = []
-    for d in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
+    for d in [str(_w) for _w in iter_workspaces(CORPORA)]:
         ws = pathlib.Path(d)
         cases = ws / "evals/cases.jsonl"
         if not cases.is_file():

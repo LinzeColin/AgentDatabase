@@ -50,6 +50,9 @@ import glob
 import json
 import pathlib
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve().parent
 PD = HERE.parent.parent
@@ -181,7 +184,7 @@ def main() -> int:
     #   换成了「要一个具名外部权威」，**没有 citation 就是两头都空**
     #   （Comenius 实测 34 条 research.authorship-unproven）。
     no_origin, no_basis = [], []
-    for d in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
+    for d in [str(_w) for _w in iter_workspaces(CORPORA)]:
         ws = pathlib.Path(d)
         mp = ws / "meta.json"
         if not mp.is_file():

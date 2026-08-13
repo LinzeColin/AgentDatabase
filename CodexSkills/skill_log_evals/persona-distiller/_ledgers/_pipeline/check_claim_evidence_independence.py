@@ -87,6 +87,9 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from measure_distinct_works import (CONTAIN_T, DEFAULT_T, containment,  # noqa: E402
                                     jaccard, signature)
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 PD = HERE.parent.parent
 CORPORA = PD / "_corpora"
@@ -448,7 +451,7 @@ def main() -> int:
     if a.all:
         rc = 0
         tot = col = out_of_range = shared = 0
-        for d in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
+        for d in [str(_w) for _w in iter_workspaces(CORPORA)]:
             ws = pathlib.Path(d)
             r = scan(ws)
             if r and r["claims"]:

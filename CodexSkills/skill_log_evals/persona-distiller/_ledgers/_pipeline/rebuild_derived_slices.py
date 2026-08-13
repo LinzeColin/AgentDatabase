@@ -42,6 +42,9 @@ import hashlib
 import json
 import pathlib
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve().parent
 PD = HERE.parent.parent
@@ -166,7 +169,7 @@ def main() -> int:
     if a.all:
         rc = 0
         n = 0
-        for p in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
+        for p in [str(_w) for _w in iter_workspaces(CORPORA)]:
             ws = pathlib.Path(p)
             if (ws / "evidence/_derived-slices.json").is_file():
                 n += 1

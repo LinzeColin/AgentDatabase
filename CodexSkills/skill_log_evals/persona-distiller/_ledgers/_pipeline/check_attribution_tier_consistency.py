@@ -48,6 +48,9 @@ import argparse
 import glob
 import json
 import pathlib
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from workspace_roots import iter_workspaces  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve().parent
 PD = HERE.parent.parent
@@ -113,7 +116,7 @@ def main() -> int:
 
     total = 0
     hits = []
-    for d in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
+    for d in [str(_w) for _w in iter_workspaces(CORPORA)]:
         ws = pathlib.Path(d)
         led = ws / "evidence/source-ledger.jsonl"
         if not led.is_file():
