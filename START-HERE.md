@@ -42,6 +42,41 @@
 python3 --version && git --version && echo OK
 ```
 
+## 三之二、★★ 语料在哪（**第一次跑之前先读这段**）
+
+**语料不全在 git 里**，这是有意的裁定（仓里只放指针，正文另存）。
+在一个**干净 clone** 里实测过 48 个工作区，分三种：
+
+| 情形 | 个数 | 语料在哪 |
+|---|---:|---|
+| 正文就在仓里 | **24** | `…/references/sources/`（**只放建模侧那一半**，密封集按设计不在里面） |
+| 有重建指针 | **14** | `…/raw/_ids-rebuild.txt`（每行一个 Internet Archive identifier） |
+| 空工作区（没开工） | 10 | — |
+| **取不回来** | **0** | — |
+
+★ 密封集不在 `references/sources/` 里**是对的**：那一半按设计不许建模侧读到。
+  实测 24 个里 23 个**精确吻合**（缺的份数 = 密封件份数），第 24 个（Rosenhain）
+  用的是另一套文件命名，我的匹配器对不上——**不是缺文件**，逐份查过漏出 0 份。
+
+### 所以你第一次跑判据会看到这个，**那不是坏了**
+
+在没有放语料的工作区上：
+
+    check_quote_speaker  → rc=4「**未判**，不是通过」（train 语料 0 份）
+    gen_claims.py        → rc=1（逐字引文回不了语料，**故意不写文件**）
+
+**这两条恰恰是对的行为**——旧版本在这种情况下会打 ✓ 并 rc=0，
+全库实测有 11 个工作区、264 条引文就是那样绿的。已修。
+
+要跑起来，先把语料放回去（任选其一）：
+
+```bash
+python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/fetch_ia.py \
+  --ids-file <工作区>/raw/_ids-rebuild.txt --out <工作区>/raw --skip-existing
+```
+
+或把另存的正文拷回 `<工作区>/raw/`（文件名要与台账 `local_path` 对得上）。
+
 ## 四、★ 唯一的停点：阶段 5 判分
 
 八个人（Lincoln／Jefferson／Bismarck／Pestalozzi／Machiavelli／Rousseau／Kant／Fröbel）
