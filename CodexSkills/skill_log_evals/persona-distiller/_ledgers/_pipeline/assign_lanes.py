@@ -72,7 +72,10 @@ PATTERNS = [
     #   ★ 全库前后实测：**0 个工作区受影响**（右边界保住了 `Bismarckreden` 等 18 份真演说集）。
     ("decisions", r"opinions?\b|judgment|judgement|decision|decree|ordinance|statute|"
                   r"proclamation|message of the president|verordnung|erlass|"
-                  r"legge|editto|leges|constitutiones|justice of the peace|"
+                  # ★ `leges`（拉丁语「法律」）加词边界：`leges` ⊂ 英语 **`colleges`**。
+                  #   Dewey #190 实测：《Inventory of Philosophy Taught in American Col-leges》
+                  #   被判成判决记录。与 `opinion`⊂`opinionem` 同族，**这是第四次子串误配**。
+                  r"legge|editto|\bleges\b|constitutiones|justice of the peace|"
                   r"\breport\b|bericht(?:e|en|s)?\b|gutachten|patent|specification|"
                   r"state paper|staatsschrift|denkschrift|minutes of|protokoll"),
     # ★★ 2026-08-13 `letter` 加词边界：`letter` ⊂ 意大利语 **`letterari`**（＝「文学的」），
@@ -153,6 +156,11 @@ WORKS_OVERRIDE = [
     ("版本编排词不是体裁",
      re.compile(r"(?:s[äa]mmtliche|s[äa]mtliche|collected|complete)\s+werke"
                 r"|werke\s*:?\s*in\s+chronolog", re.I)),
+    ("`logic of judgments` 是哲学论文不是判决记录",
+     # Dewey #190：《The Logic of Judgments of Practise》(1915) 靠 `judgment` 进 decisions。
+     # 与 Kant《判断力批判》同型——**judgment 在哲学语域里是「判断」不是「判决」**。
+     re.compile(r"logic\s+of\s+judgments?|judgments?\s+of\s+practi[cs]e"
+                r"|theory\s+of\s+judgment|judgment\s+and\s+reasoning", re.I)),
     ("critique/kritik 是他的著作",
      re.compile(r"\b(?:critique|critik|kritik)\b", re.I)),
     ("discorsi/discourses 论某部史书是专著",
@@ -359,6 +367,26 @@ def selftest() -> int:
         print("  %s %-62s %s%s" % ("✅" if ok else "❌ 仍误配", ti[:62], why,
                                    "" if ok else "  ← 实判 %s" % got))
     # ===== 第二组：decisions 不许吃画名（Michelangelo #185）=====
+    # ===== 第五组：Dewey #190 实测的两条 =====
+    DEWEY_NEG = [
+        ("Inventory of Philosophy Taught in American Colleges", "decisions",
+         "`leges`（拉丁语法律）⊂ 英语 `col-leges`"),
+        ("The Logic of Judgments of Practise", "decisions",
+         "`judgment` 在哲学语域里是「判断」不是「判决」"),
+    ]
+    DEWEY_POS = [("Letters from China and Japan", "conversations"),
+                 ("Address of the President: Delivered at the Annual Meeting", "expression")]
+    print("\nDewey #190 实测（反例必须不判该道，正例必须判该道）：")
+    for ti, wrong, why in DEWEY_NEG:
+        got = _judge(ti); ok = got != wrong
+        bad += 0 if ok else 1
+        print("  %s %-56s %s%s" % ("✅" if ok else "❌ 仍误配", ti[:56], why,
+                                   "" if ok else "  ← 实判 %s" % got))
+    for ti, want in DEWEY_POS:
+        got = _judge(ti); ok = got == want
+        bad += 0 if ok else 1
+        print("  %s %-56s → %-13s（应为 %s）" % ("✅" if ok else "❌ 被误杀", ti[:56], got, want))
+
     # ===== 第四组：语种对称（Ford #188，同一部自传的四个版本必须同道）=====
     SYM = [("My life and work", "英文原本"),
            ("Mein Leben und Werk. Unter Mitwirkung von Samuel Crowther", "德译本"),

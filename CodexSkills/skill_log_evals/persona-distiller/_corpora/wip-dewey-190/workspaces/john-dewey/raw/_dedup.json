@@ -1,0 +1,40 @@
+{
+  "文件数": 39,
+  "阈值": 0.55,
+  "重复簇": [
+    [
+      "HumanNatureAndConduct",
+      "dli.ernet.237179"
+    ],
+    [
+      "b28102253",
+      "in.ernet.dli.2015.209505"
+    ],
+    [
+      "chinajapanandthe28393gut",
+      "chinajapanusapre00dewe"
+    ],
+    [
+      "creativeintelli01kallgoog",
+      "essaysinthepragm00unknuoft"
+    ],
+    [
+      "democracyandeduc00deweuoft",
+      "democracyeducati00deweiala",
+      "democracyeducati00deweuoft"
+    ],
+    [
+      "deweyethics00dewerich",
+      "ethics0000dewe",
+      "ethicsdew00deweuoft"
+    ],
+    [
+      "howwethink0000dewe",
+      "in.ernet.dli.2015.213956"
+    ]
+  ],
+  "独立文献数上界": 30,
+  "按题名归并的独立作品数": 27,
+  "★ 两个口径": "门用台账行数（同一套书的不同卷各自独立，Bessemer #132 先例）；按题名归并的数回答「他有多少部不同的作品」。**只报一个等于替读者选口径**",
+  "★口径": "min-hash Jaccard；同卷多扫描与同书不同卷需人判"
+}

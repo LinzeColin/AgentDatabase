@@ -129,6 +129,11 @@ EXCLUDE = {
     #     政治家署 `Winston S. Churchill` / `Winston Spencer Churchill`。
     #     但 EXCLUDE 只能排、不能挑，所以这里排生卒年，中间名那一侧交给 REQUIRE。
     "churchill": ["1871-1947", "1871–1947"],
+    # ★ John Dewey #190：同名者 `Dewey, John Hamlin`（基督教灵性/新思想作者）
+    #   PD 内 **7 条**：《The way, the truth and the life》(1888, 3 印本)、
+    #   《Pentecost; the opening of a new school of inspiration》(1898)。
+    #   ★ 与哲学家 Dewey(1859–1952) **年代重叠、同样在公有领域** —— 年份筛不掉。
+    "dewey": ["Hamlin", "Dewey, John H."],
     "ford": ["Henry Jones", "Ford, Henry J.", "1851-1925", "1851–1925",
              "Worthington Chauncey", "Henry A., comp", "Kate B.",
              "Ford, Henry Neville",
@@ -251,6 +256,7 @@ REQUIRE = {
     #   两侧要一起看：EXCLUDE 排掉标了生卒年的小说家，REQUIRE 钉住带中间名的那一批。
     "churchill": [["churchill", "winston s"], ["churchill", "winston spencer"],
                   ["churchill", "1874-1965"], ["churchill", "1874–1965"]],
+    "dewey": [["dewey", "john"]],
     "ford": [["ford", "henry"]],
     "brandeis": [["brandeis", "louis"]],
     # ★ Plato 的著录有多种拼法：`Plato`／`PLATO`／`Plato, 427? BC-347? BC`／`Plato, Curt. Red.`，

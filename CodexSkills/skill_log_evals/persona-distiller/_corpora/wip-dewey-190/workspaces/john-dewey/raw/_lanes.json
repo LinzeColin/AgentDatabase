@@ -1,0 +1,216 @@
+{
+  "lanes": 3,
+  "去掉纸面道后": 2,
+  "逐道份数": {
+    "writings": 36,
+    "conversations": 1,
+    "expression": 3,
+    "decisions": 0,
+    "timeline": 0,
+    "external": 0
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "1902DeweySavageMind",
+      "道": "writings",
+      "title": "1902 Dewey Savage Mind"
+    },
+    {
+      "identifier": "HumanNatureAndConduct",
+      "道": "writings",
+      "title": "Human Nature And Conduct"
+    },
+    {
+      "identifier": "aqr1372.0001.001.umich.edu",
+      "道": "writings",
+      "title": "The school and the child; being selections from the educational essays"
+    },
+    {
+      "identifier": "b28102253",
+      "道": "writings",
+      "title": "Psychology"
+    },
+    {
+      "identifier": "childandcurricul00deweuoft",
+      "道": "writings",
+      "title": "The child and the curriculum"
+    },
+    {
+      "identifier": "childcurriculum00dewe",
+      "道": "writings",
+      "title": "The child and the curriculum,"
+    },
+    {
+      "identifier": "childcurriculum00dewe_0",
+      "道": "writings",
+      "title": "The child and the curriculum"
+    },
+    {
+      "identifier": "childcurriculum00dewerich",
+      "道": "writings",
+      "title": "The child and the curriculum"
+    },
+    {
+      "identifier": "chinajapanandthe28393gut",
+      "道": "writings",
+      "title": "China, Japan and the U.S.A.  Present-Day Conditions in the Far East an"
+    },
+    {
+      "identifier": "chinajapanusapre00dewe",
+      "道": "writings",
+      "title": "China, Japan and the U.S.A. : present-day conditions in the Far East a"
+    },
+    {
+      "identifier": "creativeintelli01kallgoog",
+      "道": "writings",
+      "title": "Creative intelligence;"
+    },
+    {
+      "identifier": "cu31924012634246",
+      "道": "writings",
+      "title": "Studies in logical theory"
+    },
+    {
+      "identifier": "cu31924012730820",
+      "道": "writings",
+      "title": "The influence of Darwin on philosophy, and other essays in contemporar"
+    },
+    {
+      "identifier": "cu31924012904177",
+      "道": "conversations",
+      "title": "Letters from China and Japan"
+    },
+    {
+      "identifier": "curriculum00dechildwerich",
+      "道": "writings",
+      "title": "The child and the curriculum"
+    },
+    {
+      "identifier": "democracyandeduc00852gut",
+      "道": "writings",
+      "title": "Democracy and Education: an introduction to the philosophy of educatio"
+    },
+    {
+      "identifier": "democracyandeduc00deweuoft",
+      "道": "writings",
+      "title": "Democracy and education : an introduction to the philosophy of educati"
+    },
+    {
+      "identifier": "democracyeducati00deweiala",
+      "道": "writings",
+      "title": "Democracy and education; an introduction to the philosophy of educatio"
+    },
+    {
+      "identifier": "democracyeducati00deweuoft",
+      "道": "writings",
+      "title": "Democracy and education : an introduction to the philosophy of educati"
+    },
+    {
+      "identifier": "deweyethics00dewerich",
+      "道": "writings",
+      "title": "Ethics"
+    },
+    {
+      "identifier": "deweyspsychology00deweuoft",
+      "道": "writings",
+      "title": "Psychology"
+    },
+    {
+      "identifier": "dli.bengal.10689.5397",
+      "道": "writings",
+      "title": "Leibniz’s New Essays Concerning The Human Understanding"
+    },
+    {
+      "identifier": "dli.ernet.237179",
+      "道": "writings",
+      "title": "Human Nature and Conduct (1922)"
+    },
+    {
+      "identifier": "dli.ernet.503933",
+      "道": "writings",
+      "title": "Democracy and Education"
+    },
+    {
+      "identifier": "essaysinexperime0000dewe_c6f7",
+      "道": "writings",
+      "title": "Essays in experimental logic"
+    },
+    {
+      "identifier": "essaysinthepragm00unknuoft",
+      "道": "writings",
+      "title": "Creative intelligence; essays in the pragmatic attitude"
+    },
+    {
+      "identifier": "ethics0000dewe",
+      "道": "writings",
+      "title": "Ethics"
+    },
+    {
+      "identifier": "ethicsdew00deweuoft",
+      "道": "writings",
+      "title": "Ethics"
+    },
+    {
+      "identifier": "howwethink0000dewe",
+      "道": "writings",
+      "title": "How we think"
+    },
+    {
+      "identifier": "impressions_of_soviet_russia",
+      "道": "writings",
+      "title": "Impressions of Soviet Russia and the revolutionary world"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.209505",
+      "道": "writings",
+      "title": "Psychology"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.213861",
+      "道": "writings",
+      "title": "The Quest For Certainty"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.213956",
+      "道": "writings",
+      "title": "How We Think"
+    },
+    {
+      "identifier": "jstor-1640600",
+      "道": "expression",
+      "title": "Introductory Address"
+    },
+    {
+      "identifier": "jstor-2939301",
+      "道": "expression",
+      "title": "Knowledge and Speech Reaction"
+    },
+    {
+      "identifier": "jstor-40216730",
+      "道": "expression",
+      "title": "Address of the President: Delivered at the Annual Meeting of the Assoc"
+    },
+    {
+      "identifier": "leibnizsnewessa00deweuoft",
+      "道": "writings",
+      "title": "Leibniz's new essays concerning the human understanding : a critical e"
+    },
+    {
+      "identifier": "psychologyofdraw00dewerich",
+      "道": "writings",
+      "title": "The psychology of drawing= Imagination and expression=Culture and indu"
+    },
+    {
+      "identifier": "psychologysocial00dewerich",
+      "道": "writings",
+      "title": "Psychology and social practice"
+    },
+    {
+      "identifier": "schoolsociety00deweiala",
+      "道": "writings",
+      "title": "The school and society;"
+    }
+  ]
+}

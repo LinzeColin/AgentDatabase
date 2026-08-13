@@ -1,0 +1,7 @@
+{
+ "name": "John Dewey",
+ "normalized_name": "johndewey",
+ "slug": "john-dewey",
+ "aliases": ["Dewey, John", "Dewey, John, 1859-1952"],
+ "★": "最小 meta.json：让 next_person 认出「这个人已经开过工」。名字取自 _蒸馏队列.json 与 IA creator 字段里已有的写法，不做推断。"
+}

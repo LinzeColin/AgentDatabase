@@ -1,0 +1,45 @@
+# ★ **重建用的权威清单** —— 从 _fetch-manifest.json 的「已取回」现生成。
+# 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
+#   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
+# 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：39
+1902DeweySavageMind
+HumanNatureAndConduct
+aqr1372.0001.001.umich.edu
+b28102253
+childandcurricul00deweuoft
+childcurriculum00dewe
+childcurriculum00dewe_0
+childcurriculum00dewerich
+chinajapanandthe28393gut
+chinajapanusapre00dewe
+creativeintelli01kallgoog
+cu31924012634246
+cu31924012730820
+cu31924012904177
+curriculum00dechildwerich
+democracyandeduc00deweuoft
+democracyeducati00deweiala
+democracyeducati00deweuoft
+deweyethics00dewerich
+deweyspsychology00deweuoft
+dli.bengal.10689.5397
+dli.ernet.237179
+dli.ernet.503933
+essaysinexperime0000dewe_c6f7
+essaysinthepragm00unknuoft
+ethics0000dewe
+ethicsdew00deweuoft
+howwethink0000dewe
+impressions_of_soviet_russia
+in.ernet.dli.2015.209505
+in.ernet.dli.2015.213861
+in.ernet.dli.2015.213956
+jstor-1640600
+jstor-2939301
+jstor-40216730
+leibnizsnewessa00deweuoft
+psychologyofdraw00dewerich
+psychologysocial00dewerich
+schoolsociety00deweiala

@@ -1,0 +1,333 @@
+{
+  "总数": 40,
+  "计数": {
+    "一手": 40,
+    "二手": 0,
+    "需人判": 0
+  },
+  "一手占比下界": 1.0,
+  "一手占比上界": 1.0,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "1902DeweySavageMind",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "1902 Dewey Savage Mind",
+      "creator": "Dewey, John",
+      "words": 5128
+    },
+    {
+      "identifier": "HumanNatureAndConduct",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Human Nature And Conduct",
+      "creator": "Dewey, John",
+      "words": 89409
+    },
+    {
+      "identifier": "aqr1372.0001.001.umich.edu",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The school and the child; being selections from the educational essays of John D",
+      "creator": "Dewey, John, 1859-1952; Findlay, J. J. (Joseph John), b. 1860",
+      "words": 28948
+    },
+    {
+      "identifier": "b28102253",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Psychology",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 129052
+    },
+    {
+      "identifier": "childandcurricul00deweuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The child and the curriculum",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 7660
+    },
+    {
+      "identifier": "childcurriculum00dewe",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The child and the curriculum,",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 7860
+    },
+    {
+      "identifier": "childcurriculum00dewe_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The child and the curriculum",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 7961
+    },
+    {
+      "identifier": "childcurriculum00dewerich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The child and the curriculum",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 7972
+    },
+    {
+      "identifier": "chinajapanandthe28393gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "China, Japan and the U.S.A.  Present-Day Conditions in the Far East and Their Be",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 27431
+    },
+    {
+      "identifier": "chinajapanusapre00dewe",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "China, Japan and the U.S.A. : present-day conditions in the Far East and their b",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 25173
+    },
+    {
+      "identifier": "creativeintelli01kallgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Creative intelligence;",
+      "creator": "Dewey, John, 1859-1952; Moore, Addison Webster, 1866-1930. [from old catalog]; B",
+      "words": 134197
+    },
+    {
+      "identifier": "cu31924012634246",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Studies in logical theory",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 138580
+    },
+    {
+      "identifier": "cu31924012730820",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The influence of Darwin on philosophy, and other essays in contemporary thought",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 76154
+    },
+    {
+      "identifier": "cu31924012904177",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters from China and Japan",
+      "creator": "Dewey, John, 1859-1952; Dewey, Harriet Alice (Chipman); Dewey, Evelyn, 1889-",
+      "words": 51605
+    },
+    {
+      "identifier": "curriculum00dechildwerich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The child and the curriculum",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 7925
+    },
+    {
+      "identifier": "democracyandeduc00852gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Democracy and Education: an introduction to the philosophy of education",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 138063
+    },
+    {
+      "identifier": "democracyandeduc00deweuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Democracy and education : an introduction to the philosophy of education",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 151575
+    },
+    {
+      "identifier": "democracyeducati00deweiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Democracy and education; an introduction to the philosophy of education",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 151572
+    },
+    {
+      "identifier": "democracyeducati00deweuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Democracy and education : an introduction to the philosophy of education",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 151617
+    },
+    {
+      "identifier": "deweyethics00dewerich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Ethics",
+      "creator": "Dewey, John, 1859-1952; Tufts, James Hayden, 1862-1942",
+      "words": 214652
+    },
+    {
+      "identifier": "deweyspsychology00deweuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Psychology",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 130088
+    },
+    {
+      "identifier": "dli.bengal.10689.5397",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Leibniz’s New Essays Concerning The Human Understanding",
+      "creator": "Dewey, John",
+      "words": 78527
+    },
+    {
+      "identifier": "dli.ernet.237179",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Human Nature and Conduct (1922)",
+      "creator": "Dewey John",
+      "words": 89126
+    },
+    {
+      "identifier": "dli.ernet.503933",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Democracy and Education",
+      "creator": "Dewey John",
+      "words": 145426
+    },
+    {
+      "identifier": "essaysinexperime0000dewe_c6f7",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Essays in experimental logic",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 113260
+    },
+    {
+      "identifier": "essaysinthepragm00unknuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Creative intelligence; essays in the pragmatic attitude",
+      "creator": "Dewey, John, 1859-1952; Brown, Harold Chapman, 1879-; Mead, George Herbert, 1863",
+      "words": 132678
+    },
+    {
+      "identifier": "ethics0000dewe",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Ethics",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 215246
+    },
+    {
+      "identifier": "ethicsdew00deweuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Ethics",
+      "creator": "Dewey, John, 1859-1952; Tufts, James Hayden, 1862-1942",
+      "words": 214668
+    },
+    {
+      "identifier": "howwethink0000dewe",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "How we think",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 66763
+    },
+    {
+      "identifier": "impressions_of_soviet_russia",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Impressions of Soviet Russia and the revolutionary world",
+      "creator": "Dewey John, 1859-1952",
+      "words": 39702
+    },
+    {
+      "identifier": "in.ernet.dli.2015.209505",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Psychology",
+      "creator": "Dewey,john.",
+      "words": 130372
+    },
+    {
+      "identifier": "in.ernet.dli.2015.213861",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Quest For Certainty",
+      "creator": "Dewey,john.",
+      "words": 101916
+    },
+    {
+      "identifier": "in.ernet.dli.2015.213956",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "How We Think",
+      "creator": "Dewey John",
+      "words": 66784
+    },
+    {
+      "identifier": "jstor-1640600",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Introductory Address",
+      "creator": "Dewey, John",
+      "words": 3199
+    },
+    {
+      "identifier": "jstor-2939301",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Knowledge and Speech Reaction",
+      "creator": "Dewey, John",
+      "words": 4805
+    },
+    {
+      "identifier": "jstor-40216730",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Address of the President: Delivered at the Annual Meeting of the Association: De",
+      "creator": "Dewey, John",
+      "words": 1762
+    },
+    {
+      "identifier": "leibnizsnewessa00deweuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Leibniz's new essays concerning the human understanding : a critical exposition",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 74343
+    },
+    {
+      "identifier": "psychologyofdraw00dewerich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The psychology of drawing= Imagination and expression=Culture and industry in ed",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 6438
+    },
+    {
+      "identifier": "psychologysocial00dewerich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Psychology and social practice",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 8103
+    },
+    {
+      "identifier": "schoolsociety00deweiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The school and society;",
+      "creator": "Dewey, John, 1859-1952",
+      "words": 23859
+    }
+  ]
+}
