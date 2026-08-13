@@ -2904,9 +2904,29 @@
     "★ 若将来开工：产物的 `boundaries.md` **必须写明《书信集》真伪历来有争议**——他唯一的第一人称落在一批有争议的文本上。"
    ],
    "处置类": "**min_lanes 硬卡点**（同 Vavilov #126／Burbank #183／Leonardo #184）——★ 本例是这一类里最极端的：**料极多（933 万词、占比 0.98）而道只有 1 条**。且与 Leonardo 同样有「虚道」成分：修正前那 2 道里的第 2 道是正则误配变出来的。"
+  },
+  {
+   "name": "Aristotle",
+   "family_zh": "思想教育师",
+   "deferred_at": "2026-08-13",
+   "reason": "**min_lanes 硬卡点，真值 1 条道**——与 Plato #186 同型，且**在抓源之前就量出来了**（没有花掉一整轮）。IA 池 `creator:\"Aristotle\"` numFound **1872**，本窗取回 400、其中 ≤1930 的 **250 条**，含希腊原文 **76 条**（grc 14 ＋ eng;grc 31 ＋ grc;lat 15 …）。拿这 250 条题名跑 `assign_lanes` 估分道：writings 247、decisions 2、expression 1 ⇒ 报「3 条道，正好够 quick」。★★ **逐条打开看，那 3 条非 writings 全是子串误配**：`opinion` ⊂ 拉丁语 `opinionem`（《De natura partus…adversus vulgatam opinionem》）、`bericht` ⊂ 德语 `berichtigter`（＝校订过的，《kritisch-berichtigter Text》）、`rede` ⊂ 英语 `p-rede-cessors`（《Aristotle on his predecessors》）。三条已加**右**边界修好并配 3 反例／5 正例自测（左边界会误杀德语复合词 `Bismarckreden`），全库前后 **0 个工作区受影响**。",
+   "probed_and_failed": [
+    "`creator:\"Aristotle\" AND title:letter` → **numFound = 0**：他没有书信传世，`conversations` 道**结构性为空**，不是检索式的问题",
+    "`creator:\"Aristotle\" AND title:(life OR biography)` → 13 条，**逐条看全不是传记**：是题名里含 `life` 的他自己的著作（`De anima`＝「生命的原理」、《论青年与老年、生与死》），另 1 条是培根传里提到他 ⇒ `timeline` 道仍为空",
+    "expression / decisions / timeline / external 四道在本轮检索式下**实测为零**"
+   ],
+   "already_confirmed_fetchable": [
+    "PD 内 250 条（本窗 400 条里），希腊原文 76 条——**量与可得性都不是问题**",
+    "★ 名单里那条开工前的提醒仍然成立：他**只存约三分之一且全是讲义体**，量声口读的是**讲课语域**，不要与面向读者写作的人比密度"
+   ],
+   "unblock_todo": [
+    "**要补的是道，不是量**。可能的第 2、3 道：Diogenes Laertius 一类的古代传记（timeline／external，第三方也算）、中世纪注疏（external）。**都要另跑检索式**，本轮的 `creator` 精确式够不到。",
+    "★ 若将来开工：先把「讲义体的声口怎么定义」答出来——同 Plato 的前置问题，答不出别开工。"
+   ],
+   "处置类": "**min_lanes 硬卡点**（同 Vavilov #126／Burbank #183／Leonardo #184／Plato #186）——★ 与 Leonardo、Plato 同样带「虚道」成分：修正前那 3 条道里有 3 条是正则误配变出来的。**这是同一个成因的第三次**，已落成右边界 + 8 例自测。"
   }
  ],
- "total": 155,
+ "total": 156,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
