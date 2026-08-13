@@ -223,6 +223,22 @@ def declarations(text: str):
     return out
 
 
+# ★★★ **编务协助 ≠ 合著**（2026-08-13 Koch #107，**已入库的产物**）。
+#   他那 6 份扉页写的是：
+#     `Gesammelte Werke von Robert Koch  Unter Mitwirkung von Prof. Dr. G. GAFFKY
+#      und Prof. Dr. E. PFUHL  herausgegeben von Prof. Dr. J. SCHWALBE`（1912）
+#   ——Koch **1910 年已故**，这是身后全集：Gaffky／Pfuhl 是**编务协助**，
+#   Schwalbe 是编者，**正文仍是他自己的**。
+#   ⇒ 若同一段里出现「全集／文集」或「herausgegeben von／edited by」，
+#     判为**编务**，不算合著。
+#   ★ 这一条是**读了原文才敢加的**：把它当成合著会直接把一份已入库产物
+#     报成「被污染」——[[checker-blindspot-read-as-defect]]。
+EDITORIAL = re.compile(
+    r"gesammelte\s+werke|s[äa]mtliche\s+werke|collected\s+works|complete\s+works|"
+    r"herausgegeben\s+von|hrsg\.|edited\s+by|edition\s+by|oeuvres\s+compl",
+    re.I)
+
+
 def collaborators(text: str, subject: str):
     """→ [(署名原句, 合作者)]。**「与某人合作」式署名**，只在最前 4000 字里找。
 
@@ -233,6 +249,10 @@ def collaborators(text: str, subject: str):
     for m in COLLAB.finditer(front):
         who = m.group("who").strip(" ,.")
         if not who or _is_subject(who, subject) or not _looks_like_person(who):
+            continue
+        # ★ 编务协助不算合著（见上面 EDITORIAL 的注释）：看这条声明前后 240 字
+        around = front[max(0, m.start() - 240):m.end() + 240]
+        if EDITORIAL.search(around):
             continue
         if who.lower() in seen:
             continue
@@ -420,6 +440,17 @@ def self_test() -> int:
                        "AUTHORIZED INTERVIEWS WRITTEN BY FAY LEONE FAUROTE", "Henry Ford")
     chk("★★ 「授权访谈，由 X 执笔」也要报（Ford 1929 年那本，逐字取自题名页）",
         bool(fa) and "faurote" in fa[0][1].lower())
+    # ★★ 逐字取自 Koch #107（已入库）——**编务协助不算合著**
+    koch_real = ("Gesammelte Werke von Robert Koch Unter Mitwirkung von Prof. Dr. G. GAFFKY "
+                 "und Prof. Dr. E. PFUHL Geh. Ober-Med.-Rat in Berlin General-Ober-Arzt a. D. "
+                 "in Berlin herausgegeben von Prof. Dr. J. SCHWALBE Geh. San.-Rat in Berlin "
+                 "ERSTER BAND LEIPZIG 1912")
+    chk("★★ **编务协助不算合著**：Koch 身后全集的 `Unter Mitwirkung von` **不许**报"
+        "（同段里有 Gesammelte Werke 与 herausgegeben von）",
+        not collaborators(koch_real, "Robert Koch"))
+    chk("★ 而没有编务标记时，同样的 `Unter Mitwirkung von` **必须**报（Ford 的德译本）",
+        bool(collaborators("FORD MEIN LEBEN UND WERK UNTER MITWIRKUNG VON SAMUEL CROWTHER "
+                           "PAUL LIST VERLAG LEIPZIG", "Henry Ford")))
     chk("★ 形态③：没有合作声明的题名页不许报",
         not collaborators("HOW WE THINK BY JOHN DEWEY Professor of Philosophy", "John Dewey"))
 
