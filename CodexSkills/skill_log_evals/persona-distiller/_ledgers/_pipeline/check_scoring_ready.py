@@ -23,11 +23,19 @@ Brandeis #172／Michelangelo #185／Dewey #190／Churchill #191 四人
 | 盲判用例 | `evals/cases.jsonl` ≥16 题、≥16 类 |
 | **分辨力** | `se_mean = 0.0656/√n`，`2 SE` 与档位门比——**门是几个 SE** |
 | 装置件 | 冻结基线 prompt、两席评委指令、载荷生成器**都在** |
+| **能不能被门检查** | `meta.json` ＋ **`SKILL.md`** 都在（`ensure_target()` 的硬要求） |
 | **预登记** | 那份开箱即跑清单里**点到这个人的名字了吗** |
 
 ★ `sd = 0.0928` 是**借来的**（Mendel #125 同装置实测），`se_case = sd/√2 = 0.0656`。
   两轮之差的方差是单轮的 2 倍，**漏掉这一步会把 SE 少算 40%**。
 ★ 本件**不判「该不该发」**，只判「装置齐不齐、判得出判不出」。
+
+★★★ **本件不覆盖合成门。** 2026-08-13 我拿它放行了三个人
+（Brandeis／Michelangelo／Dewey），而真跑 `quality_check --phase synthesis`
+是 **22／46／36 条硬错**。**「产物齐」不等于「过门」。**
+其中两人当时连门都没开机——缺 `SKILL.md`，`ensure_target()` 直接拒检、
+只报一条 `target.invalid`（长得像小毛病，实际后面 46 条全被挡住）。
+⇒ 本件现在查 `SKILL.md`，**并在报告末尾印出必须另跑的命令**。
 
 ## 用法
 
@@ -147,6 +155,8 @@ def scan():
         n_claims = sum(1 for l in claims.read_text(encoding="utf-8").splitlines()
                        if l.strip()) if claims.is_file() else 0
         miss = [f for f in PRODUCTS if not (ws / f).is_file()]
+        # ★★ `quality_check.ensure_target()` 的硬要求：两个都在，否则**整个工作区拒检**
+        no_target = [f for f in ("meta.json", "SKILL.md") if not (ws / f).is_file()]
         persona = ws / "persona.md"
         anchored = persona.is_file() and "<!-- claim:" in persona.read_text(encoding="utf-8")
         prof, n_src, lanes = profile_of(ws)
@@ -167,6 +177,7 @@ def scan():
             "工作区": slug, "档": prof, "train 源": n_src, "道": lanes,
             "断言": n_claims, "题数": len(rows), "类数": suites,
             "缺产物": miss, "claim 标记": anchored, "已结案": closed_as,
+            "门开不了": no_target,
             "空心道": hollow, "se_mean": se_mean, "2SE": two_se, "门是几个SE": gate_se,
             "已预登记": registered,
         })
@@ -236,6 +247,9 @@ def main() -> int:
             gaps.append("断言层为空")
         if not r["已预登记"]:
             gaps.append("**未预登记**")
+        if r["门开不了"]:
+            gaps.append(f"★★ **缺 {'／'.join(r['门开不了'])} ⇒ 合成门拒检整个工作区**"
+                        "（只会报一条 target.invalid）")
         if r["已结案"]:
             gaps.append(f"★★ **矛盾：延后名单里已结案**（{r['已结案']}）而产物齐全")
         h = r["空心道"]
@@ -264,6 +278,10 @@ def main() -> int:
               "分辨力、压线复核、逐人风险都没写。"
               "\n  等授权到了再补，就成了**判完之后补口径**，"
               "而本项目的规矩是「装置先落纸，判完只补实测数」。")
+    print("\n★★★ **本件不覆盖合成门**——它是判分的**前一道**，必须逐人另跑（每人几分钟）：")
+    print("      python3 CodexSkills/registry/codex/persona-distiller/scripts/quality_check.py \\")
+    print("        <工作区> --phase synthesis          # 要 \"passed\": true 且 errors 为空")
+    print("  2026-08-13 实测：第 1 批八人全过；而只按本件放行的三人是 **22／46／36 条硬错**。")
     print("\n★ 射程：本件只判**装置齐不齐、判得出判不出**，"
           "**不判该不该发**，也不代替授权——判分要两名互相独立的评委，**只能由人起**。")
     return 1 if (bad or not rig_ok) else 0
