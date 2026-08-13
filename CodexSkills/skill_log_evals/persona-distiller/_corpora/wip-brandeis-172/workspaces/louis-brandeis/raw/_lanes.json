@@ -2,12 +2,12 @@
   "lanes": 5,
   "去掉纸面道后": 3,
   "逐道份数": {
-    "writings": 27,
+    "writings": 25,
     "conversations": 1,
     "expression": 2,
     "decisions": 1,
     "timeline": 0,
-    "external": 7
+    "external": 9
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -39,12 +39,12 @@
     },
     {
       "identifier": "caseforshorterwo00franuoft",
-      "道": "writings",
+      "道": "external",
       "title": "The case for the shorter work day ... Franklin O. Bunting, plaintiff i"
     },
     {
       "identifier": "caseforshorterwo01franuoft",
-      "道": "writings",
+      "道": "external",
       "title": "The case for the shorter work day ... Franklin O. Bunting, plaintiff i"
     },
     {

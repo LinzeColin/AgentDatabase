@@ -20,12 +20,12 @@
     "理由": "**Josephine Goldmark 写的书**（《Fatigue and Efficiency: A Study in Industry》）。creator 首位是她，Brandeis 排第 2。★ 她是「Brandeis Brief」背后做实证研究的人，也是他的妻妹；这本书是**那份辩状的经验基础**，不是他的文字。⇒ 记二手，**归 external 道正合适**（别人做的、支撑他论证的研究）。★★ 语料里有 **6 个扫描件**，`dedup` 已按题名归并——引用时**算一处证据**。"
   },
   "caseforshorterwo00franuoft": {
-    "档": "一手",
-    "理由": "《The case for the shorter work day》——**Bunting v. Oregon 的辩状**，Frankfurter 与 Brandeis 共同署名（creator 里 `Oregon, defendant` 表明这是诉讼文书）。★ 这是**他的职业工作产物**（同「Brandeis Brief」一类），不是别人写他 ⇒ 一手。★★ 射程：**与 Frankfurter 合著**，引用时不得把整份当成他一人的笔；取引文要挑能定到他名下的段落。"
+    "档": "二手",
+    "理由": "★★ **2026-08-13 改判（原判一手是错的）**。《The case for the shorter work day》（Bunting v. Oregon, 1916）题名页逐字：**`Felix Frankfurter, Of Counsel for the State of Oregon, Assisted by Josephine Goldmark`** —— **没有 Brandeis**。正文自己给了原因：`the case was re-argued and revised brief submitted by Mr. Felix Frankfurter, January, 1917, **Mr. Brandeis having meanwhile been appointed a member of the Court**`——1916 年他已就任最高法院大法官、退出此案。⇒ 这是 **Frankfurter 与 Goldmark 的辩状**，不是他的工作产物。★ 我原来只看 IA 的 `creator` 里有他就判成一手，**没看题名页**。"
   },
   "caseforshorterwo01franuoft": {
-    "档": "一手",
-    "理由": "《The case for the shorter work day》——**Bunting v. Oregon 的辩状**，Frankfurter 与 Brandeis 共同署名（creator 里 `Oregon, defendant` 表明这是诉讼文书）。★ 这是**他的职业工作产物**（同「Brandeis Brief」一类），不是别人写他 ⇒ 一手。★★ 射程：**与 Frankfurter 合著**，引用时不得把整份当成他一人的笔；取引文要挑能定到他名下的段落。"
+    "档": "二手",
+    "理由": "★★ **2026-08-13 改判（原判一手是错的）**。《The case for the shorter work day》（Bunting v. Oregon, 1916）题名页逐字：**`Felix Frankfurter, Of Counsel for the State of Oregon, Assisted by Josephine Goldmark`** —— **没有 Brandeis**。正文自己给了原因：`the case was re-argued and revised brief submitted by Mr. Felix Frankfurter, January, 1917, **Mr. Brandeis having meanwhile been appointed a member of the Court**`——1916 年他已就任最高法院大法官、退出此案。⇒ 这是 **Frankfurter 与 Goldmark 的辩状**，不是他的工作产物。★ 我原来只看 IA 的 `creator` 里有他就判成一手，**没看题名页**。"
   },
   "cu31924030130557": {
     "档": "一手",
@@ -38,5 +38,9 @@
   "voina_i_evreiskaia_problema": {
     "档": "二手",
     "理由": "《Война и еврейская проблема》（俄文）——**多人合集**（Nordau／Pasmanik／Brandeis／Yaffe／Gruenbaum…），他只是其中一位撰稿人，且是**俄译**。⇒ 按 Holroyd 那卷的先例，**整卷记二手**；他那一篇若要用，须单独取原文。"
+  },
+  "cu31924000556336": {
+    "档": "一手",
+    "理由": "《The people of the State of New York … against Charles Schweinler Press》(1918) —— 题名页逐字：**`Submitted on Behalf of the People. Prepared April, 1914 BY LOUIS D. BRANDEIS AND JOSEPHINE GOLDMARK, National Consumers' League`**。**1914 年准备，在他就任大法官之前，署名有他** ⇒ 一手。★ 射程：**与 Goldmark 合著**，且辩状体裁决定了正文大量引证他人（实测第一人称里有『Although I have not determined photometrically the intensity of light』一类被引研究者的话）——取引文必须逐条判说话人。"
   }
 }

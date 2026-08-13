@@ -6,10 +6,9 @@
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
-| `src-0b710810f1f3` | 1908 | P1 | Women in industry; decision of the United States Supreme Court in Curt Muller vs |
+| `src-0b710810f1f3` | 1908 | P1 | Women in industry; decision of the United States Supreme C…brief for the State of Oregon |
 
-★★ **本道只有 1 份**：《Women in industry; decision of the United States Supreme Court》
-——**Muller v. Oregon (1908) 的判决书**，正是「Brandeis Brief」那一案。
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 
 ## ★ 本道**不产生逐字引文**
 

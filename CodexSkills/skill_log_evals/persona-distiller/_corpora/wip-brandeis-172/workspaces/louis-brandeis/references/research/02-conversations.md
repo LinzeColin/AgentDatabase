@@ -6,12 +6,9 @@
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
-| `src-f713f255ca3e` | 1915 | P1 | To the Jews of America : The Jewish Congress versus The American Jewish Committe |
+| `src-f713f255ca3e` | 1915 | P1 | To the Jews of America : The Jewish Congress versus The Am…s D. Brandeis and Cyrus Adler |
 
-★★ **本道只有 1 份**（`To the Jews of America`，1915），去掉纸面道 lanes 就从 5 掉到 4。
-按压线复核的规矩打开读过：全题名写着
-「…**with the correspondence between Louis D. Brandeis and Cyrus Adler**」
-——**该卷确实收了往还书信**，不是误配。
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 
 ## Source-linked observations
 
