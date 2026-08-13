@@ -244,17 +244,36 @@ lw=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-di
                   capture_output=True, text=True)
 got={l.split("：")[0].strip(" ·") for l in lw.stdout.splitlines()
      if l.strip().startswith("·")}
-if lw.returncode in (0,1) and got==EXPECT_BLOCKED:
-    print("✅ 空心道：挡住的正是已记录的 %d 人（%s）——无新增回归"
-          %(len(got), "／".join(sorted(got))))
-elif lw.returncode not in (0,1):
+# ★★ **子集比 ＋ 覆盖面下限**，不是相等比。
+#   相等比会在「Churchill 真被补出第三条道」这种**好事**上误红
+#   （合著那道门当天已因同类问题把整个包判失败一次）。
+#   而「少了」真正危险的那一种是**判据扫不到东西了**——那个用覆盖面直接守：
+#   有实测去重的工作区数掉下基线 18 就红。
+MIN_MEASURED=18
+n_measured=0
+for l in lw.stdout.splitlines():
+    m=re.search(r"扫过 \*\*(\d+) 个\*\*工作区", l)
+    if m: n_measured=int(m.group(1))
+new_blocked=sorted(got-EXPECT_BLOCKED)
+if lw.returncode not in (0,1):
     print("★ 空心道：**未判**（判据 rc=%d）"%lw.returncode)
-else:
+elif new_blocked or n_measured < MIN_MEASURED:
     ok=False
-    print("❌ 空心道名单与基线不符（基线 %s，实测 %s）："
-          %("／".join(sorted(EXPECT_BLOCKED)) or "空", "／".join(sorted(got)) or "空"))
+    if new_blocked:
+        print("❌ 空心道出现**新增**被挡的人：%s（基线 %s）"
+              %("／".join(new_blocked), "／".join(sorted(EXPECT_BLOCKED))))
+    if n_measured < MIN_MEASURED:
+        print("❌ 空心道**覆盖面缩了**：实测只量到 %d 个工作区，基线 %d"
+              %(n_measured, MIN_MEASURED))
     for l in lw.stdout.splitlines():
         if l.strip().startswith("·"): print("     "+l.strip())
+else:
+    print("✅ 空心道：挡住的 %d 人未超出基线（%s）；量到 %d 个工作区 ≥ 基线 %d"
+          %(len(got), "／".join(sorted(got)) or "无", n_measured, MIN_MEASURED))
+    gone=sorted(EXPECT_BLOCKED-got)
+    if gone:
+        print("     ★ 基线里 %s 这次**没被挡住**——是补好了道，还是判据够不着？**要人看一眼**"
+              %("／".join(gone)))
 # ★ 覆盖面同时印出来：**「没红」不等于「都查过」**
 for l in lw.stdout.splitlines():
     if l.startswith("扫过"): print("     "+l.strip())
