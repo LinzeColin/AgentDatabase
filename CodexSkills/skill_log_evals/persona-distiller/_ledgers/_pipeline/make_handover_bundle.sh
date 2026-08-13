@@ -53,19 +53,32 @@ python3 - "$TMP/r" <<'PYEOF'
 import sys,pathlib,json
 R=pathlib.Path(sys.argv[1]); C=R/"CodexSkills/skill_log_evals/persona-distiller/_corpora"
 ok=True
-NEW=["wip-marshall-173","wip-lincoln-174","wip-jefferson-175","wip-bismarck-176","wip-machiavelli-177",
-     "wip-rousseau-178","wip-kant-179","wip-pestalozzi-180","wip-frobel-181","wip-comenius-182"]
-miss=0
+# ★★ 2026-08-13：清单**从包里现扫**，不再写死。
+#   原先写死的是第 1 批那 10 个；当天新增了 wip-burbank-183／wip-leonardo-184／
+#   wip-michelangelo-185 三个工作区，**一个都没被验到，而自验证照样打印「通过」**。
+#   写死的名单只保证「我列出来的那些是好的」，不保证「包里的都是好的」——
+#   而移交方拿到的是包里的全部。[[a-checker-nothing-calls-is-not-a-checker]]
+NEW=sorted(p.name for p in C.glob("wip-*")
+           if (p/"workspaces").is_dir() and any((p/"workspaces").iterdir()))
+print("扫到 %d 个 wip 工作区（**从包里现扫，不是写死的名单**）：%s\n"
+      % (len(NEW), "、".join(NEW)))
+if len(NEW) < 10:
+    print("❌ 只扫到 %d 个，少于第 1 批的 10 个 —— 包可能不全"%len(NEW)); ok=False
+miss=0; nolg=0
 for ws in NEW:
     d=C/ws/"workspaces"
-    if not d.exists(): print("❌ %s 不在包里"%ws); ok=False; continue
     slug=[p.name for p in d.iterdir() if p.is_dir()][0]
-    rows=[json.loads(l) for l in (d/slug/"evidence"/"source-ledger.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
-    man=json.loads((d/slug/"raw"/"_fetch-manifest.json").read_text(encoding="utf-8"))
+    lg=d/slug/"evidence"/"source-ledger.jsonl"; mf=d/slug/"raw"/"_fetch-manifest.json"
+    if not lg.exists() or not mf.exists():
+        # ★ 缺文件要**单独报**，不许混进「0 条查不到」里当成通过
+        print("！ %s 没有台账或 manifest —— **本条未检查（不是通过）**"%ws); nolg+=1; continue
+    rows=[json.loads(l) for l in lg.read_text(encoding="utf-8").splitlines() if l.strip()]
+    man=json.loads(mf.read_text(encoding="utf-8"))
     shas={e.get("sha256") for e in man.get("記錄",man.get("记录",[])) if isinstance(e,dict)}
     m=sum(1 for r in rows if r.get("checksum") not in shas); miss+=m
     if m: print("❌ %s 有 %d 条台账在 manifest 里查不到 sha256"%(ws,m)); ok=False
-print(("✅" if not miss else "❌")+" 语料指针：台账 sha256 查不到的 = %d"%miss)
+print(("✅" if not miss else "❌")+" 语料指针：**%d 个工作区**逐条核 sha256，查不到的 = %d"
+      %(len(NEW)-nolg,miss)+("　（另有 %d 个未检查）"%nolg if nolg else ""))
 
 # ★★ 盲判用例要**正面数出来**，不能只在出错时才打印——沉默不等于通过。
 #    ★ 期望值**不写死题数**：写死过一次（16/16/17/16），quick 四人补题到 32 之后
