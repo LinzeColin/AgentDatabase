@@ -1,0 +1,445 @@
+{
+  "总数": 54,
+  "计数": {
+    "一手": 53,
+    "二手": 0,
+    "需人判": 1
+  },
+  "一手占比下界": 0.9815,
+  "一手占比上界": 1.0,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "09248238.1478.emory.edu",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Platonis opera omnia : uno volumine comprehensa ad fidem optimorum librorum denu",
+      "creator": "Plato; Stallbaum, Gottfried, 1793-1861",
+      "words": 732678
+    },
+    {
+      "identifier": "30081007092699",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Platonis opera",
+      "creator": "Plato",
+      "words": 2
+    },
+    {
+      "identifier": "30081007094463",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Platonis opera",
+      "creator": "Plato",
+      "words": 250750
+    },
+    {
+      "identifier": "ApologiaDiSocrate1885",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "L' apologia di Socrate, dichiarata da Eugenio Ferrai",
+      "creator": "Plato",
+      "words": 56661
+    },
+    {
+      "identifier": "CratiloPlatoneBonghi",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Cratilo",
+      "creator": "Plato",
+      "words": 108428
+    },
+    {
+      "identifier": "FileboPlatoneBonghi",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Filebo",
+      "creator": "Plato",
+      "words": 148162
+    },
+    {
+      "identifier": "GorgiasOfPlato",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Gorgias Of Plato: With English Notes, Introduction, and Appendix by W.H. Thompso",
+      "creator": "Plato",
+      "words": 119426
+    },
+    {
+      "identifier": "PhaedoOfPlato",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Phaedo of Plato",
+      "creator": "Plato",
+      "words": 112822
+    },
+    {
+      "identifier": "PlatoneTimeoFraccaroli",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Timeo",
+      "creator": "Plato",
+      "words": 131745
+    },
+    {
+      "identifier": "PlatosEuthyphroWithIntroductionAndNotesByWilliamArthurHeidel",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Plato's Euthyphro, with introduction and notes by William Arthur Heidel",
+      "creator": "Plato",
+      "words": 49415
+    },
+    {
+      "identifier": "WorksOfPlatoV4",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Works of Plato: A New and Literal Version, Chiefly from the Text of Stallbaum V ",
+      "creator": "Plato",
+      "words": 241645
+    },
+    {
+      "identifier": "WorksOfPlatoV6",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Works of Plato: A New and Literal Version, Chiefly from the Text of Stallbaum V ",
+      "creator": "Plato",
+      "words": 252520
+    },
+    {
+      "identifier": "afe8163.0001.001.umich.edu",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The laws of Plato",
+      "creator": "Plato",
+      "words": 288131
+    },
+    {
+      "identifier": "afe8163.0002.001.umich.edu",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The laws of Plato",
+      "creator": "Plato",
+      "words": 297546
+    },
+    {
+      "identifier": "afx0245.0003.001.umich.edu",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Plato's Republic : the Greek text",
+      "creator": "Plato; Jowett, Benjamin, 1817-1893; Campbell, Lewis, 1830-1908",
+      "words": 225250
+    },
+    {
+      "identifier": "aliteralversion05platuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Works; a new and literal version, chiefly from the text of Stallbaum",
+      "creator": "Plato; Cary, Henry, 1804-1870; Davis, Henry, 1866-1952; Burges, George, 1786?-18",
+      "words": 264706
+    },
+    {
+      "identifier": "apology00platuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Apology",
+      "creator": "Plato; Stock, St. George William Joseph, 1850-",
+      "words": 53353
+    },
+    {
+      "identifier": "apologyofplat00platuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Apology of Plato",
+      "creator": "Plato",
+      "words": 99903
+    },
+    {
+      "identifier": "apologyofplato00platuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Apology of Plato",
+      "creator": "Plato; Riddell, James, 1823-1866",
+      "words": 106418
+    },
+    {
+      "identifier": "apologyofplatowi00platuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Apology of Plato, with a revised text and English notes, and a digest of Pla",
+      "creator": "Plato; Palmer, Edwin, 1824-1895; Riddell, James, 1823-1866",
+      "words": 110249
+    },
+    {
+      "identifier": "apologyofsocrat00plat",
+      "档": "需人判",
+      "依据": "creator 第 1 位；题名含「life of」但**不含目标姓名**；无自著标记",
+      "title": "The Apology of Socrates, the Crito, and part of the Phaedo; with notes from Stal",
+      "creator": "Plato; Smith, William, Sir, 1813-1893; Schleiermacher, Friedrich, 1768-1834; Sta",
+      "words": 130025
+    },
+    {
+      "identifier": "apologyofsocrate00platiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The apology of Socrates : the Crito and part of the Phædo",
+      "creator": "Plato",
+      "words": 127569
+    },
+    {
+      "identifier": "apologyphaedocri0000plat",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Apology, Phaedo, and Crito of Plato, tr. by Benjamin Jowett; The golden sayi",
+      "creator": "Plato",
+      "words": 137870
+    },
+    {
+      "identifier": "apolsocrate00platuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Apology of Socrates and Crito, with extracts from the Phaedo and Symposium and f",
+      "creator": "Plato; Dyer, Louis, 1851-1908; Seymour, Thomas D. (Thomas Day), 1848-1907; Xenop",
+      "words": 111326
+    },
+    {
+      "identifier": "ausgewhltedial01plat",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Ausgewählte Dialoge;",
+      "creator": "Plato; Schmelzer, Carl",
+      "words": 238102
+    },
+    {
+      "identifier": "auswahlausplato00nohlgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Auswahl aus Platons Politeia",
+      "creator": "Plato",
+      "words": 54019
+    },
+    {
+      "identifier": "b2900049x_0006",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Plato : with an English translation",
+      "creator": "Plato. n 79139459; Fowler, Harold North, 1859-1955. n 89623884; Lamb, W. R. M. (",
+      "words": 205708
+    },
+    {
+      "identifier": "b2900049x_0007",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Plato : with an English translation",
+      "creator": "Plato. n 79139459; Fowler, Harold North, 1859-1955. n 89623884; Lamb, W. R. M. (",
+      "words": 123151
+    },
+    {
+      "identifier": "b2900049x_0008",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Plato : with an English translation",
+      "creator": "Plato. n 79139459; Fowler, Harold North, 1859-1955. n 89623884; Lamb, W. R. M. (",
+      "words": 118848
+    },
+    {
+      "identifier": "b2900049x_0009",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Plato : with an English translation",
+      "creator": "Plato. n 79139459; Fowler, Harold North, 1859-1955. n 89623884; Lamb, W. R. M. (",
+      "words": 178604
+    },
+    {
+      "identifier": "b2900049x_0010",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Plato : with an English translation",
+      "creator": "Plato. n 79139459; Fowler, Harold North, 1859-1955. n 89623884; Lamb, W. R. M. (",
+      "words": 138123
+    },
+    {
+      "identifier": "bub_gb_IaZXAAAAcAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Republic of Plato : translatd into English, with an analysis and notes",
+      "creator": "Plato",
+      "words": 148067
+    },
+    {
+      "identifier": "bub_gb__cER8cw_ue4C",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Platonis Convivium recensuit, emendavit, illustravit Alexander Hommel ",
+      "creator": "Plato",
+      "words": 187805
+    },
+    {
+      "identifier": "bwb_KR-689-823",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Platonis Euthyphro : prolegomenis et commentariis",
+      "creator": "Plato",
+      "words": 55378
+    },
+    {
+      "identifier": "charmidesalcibia0000plat",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Charmides ; Alcibiades I and II ; Hipparchus ; The lovers ; Theages ; Minos ; Ep",
+      "creator": "Plato",
+      "words": 125804
+    },
+    {
+      "identifier": "charmidesalcibia00platuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Charmides, Alcibiades 1 and 2, Hipparchus, The lovers, Theages, Minos, Epinomis.",
+      "creator": "Plato; Lamb, W. R. M. (Walter Rangeley Maitland), b. 1882",
+      "words": 122885
+    },
+    {
+      "identifier": "charmideslachesl00platrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Charmides, Laches, and Lysis of Plato;",
+      "creator": "Plato; Newhall, Barker, 1867-1924",
+      "words": 72578
+    },
+    {
+      "identifier": "euthyphroofplato00platrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Euthyphro of Plato; with an introduction and notes",
+      "creator": "Plato; Wells, George Henry",
+      "words": 28982
+    },
+    {
+      "identifier": "gorgiasofplato00plat",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Gorgias of Plato",
+      "creator": "Plato; Woolsey, Theodore Dwight, 1801-1889; Stallbaum, Gottfried, 1793-1861",
+      "words": 92763
+    },
+    {
+      "identifier": "india.history.resource.100073",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Platonis Omnia Opera, cum Commentariis Procli in Timaeum and Politica, thesauro ",
+      "creator": "Plato",
+      "words": 1301580
+    },
+    {
+      "identifier": "india.history.resource.92890",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Platonis Dialogi secundum Thrasylli Tetralogias Dispositi, Vol. V",
+      "creator": "Plato; Hermanni, Carl Friderici",
+      "words": 284499
+    },
+    {
+      "identifier": "lysissymposiumgo00plat",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lysis ; Symposium ; Gorgias",
+      "creator": "Plato; Lamb, W. R. M. (Walter Rangeley Maitland), b. 1882",
+      "words": 160905
+    },
+    {
+      "identifier": "mythsofplato00platrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Myths of Plato [extracted from the Dialogues]. Translated with introductory ",
+      "creator": "Plato",
+      "words": 226926
+    },
+    {
+      "identifier": "parmenidesofplat00platiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Parmenides of Plato",
+      "creator": "Plato; Maguire, Thomas, 1831-1889",
+      "words": 43364
+    },
+    {
+      "identifier": "philebuswirevenl00platuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Philebus; with introd., notes, and appendix; together with a critical letter on ",
+      "creator": "Plato; Badham, Charles, 1813-1889",
+      "words": 92897
+    },
+    {
+      "identifier": "philebuswithint00platgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The philebus of Plato : with introduction, notes and appendix ; together with a ",
+      "creator": "Plato; Badham, Charles, 1813-1884",
+      "words": 92435
+    },
+    {
+      "identifier": "plato0005unse",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lysis ; Symposium ; Gorgias",
+      "creator": "Plato",
+      "words": 156040
+    },
+    {
+      "identifier": "plato0008unse",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Charmides; Alcibiades I and II; Hipparchus; The lovers; Theages; Minos; Epinomis",
+      "creator": "Plato",
+      "words": 125124
+    },
+    {
+      "identifier": "platocontraatheo00platrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Plato contra atheos = Plato against the atheists ; or, The tenth book of the dia",
+      "creator": "Plato; Lewis, Tayler, 1802-1877",
+      "words": 137810
+    },
+    {
+      "identifier": "platonisconvivi00platgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Platonis Convivium : cum epistola ad Thompsonum",
+      "creator": "Plato",
+      "words": 35331
+    },
+    {
+      "identifier": "platonisconvivi01hermgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Platonis Convivium. Phaedrus",
+      "creator": "Plato",
+      "words": 39419
+    },
+    {
+      "identifier": "platonissymposi01platgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Platonis symposium, in usum scholarum",
+      "creator": "Plato",
+      "words": 66567
+    },
+    {
+      "identifier": "republicplat02plat",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Republic",
+      "creator": "Plato. Republic; Adam, James, 1860-1907",
+      "words": 347605
+    },
+    {
+      "identifier": "timaeuscritiascl0000plat",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Timaeus ; Critias ; Cleitophon ; Menexenus ; Epistles",
+      "creator": "Plato",
+      "words": 172186
+    }
+  ]
+}
