@@ -150,6 +150,21 @@ else:
     for l in life.stdout.splitlines():
         if l.strip().startswith("·") or l.strip().startswith("✗"): print("     "+l.strip())
 
+# ★ 队列有没有把已结案的人排回去（同一个病 2026-08-13 犯了两次）。
+q=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                      "/_ledgers/_pipeline/check_queue_reflects_reality.py")],
+                 capture_output=True, text=True)
+qtail=[l for l in q.stdout.strip().splitlines() if l.strip()]
+if q.returncode==0:
+    print("✅ 队列与已落纸的结论一致：%s"%(qtail[0] if qtail else "(无输出)"))
+elif q.returncode==4:
+    print("★ 队列一致性：**未判**（跑不了 next_person）")
+else:
+    ok=False
+    print("❌ 队列还在派工已结案的人：")
+    for l in q.stdout.splitlines():
+        if l.strip().startswith("·"): print("     "+l.strip())
+
 # ★★ 盲判用例要**正面数出来**，不能只在出错时才打印——沉默不等于通过。
 #    ★ 期望值**不写死题数**：写死过一次（16/16/17/16），quick 四人补题到 32 之后
 #      它当场变红，而产物其实是对的。改成**按档位判下限 + 类数必须 16**，总数只打印。
