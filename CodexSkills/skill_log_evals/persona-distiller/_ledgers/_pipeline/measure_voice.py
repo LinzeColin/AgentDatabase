@@ -35,6 +35,22 @@ import random
 import re
 import sys
 
+# ★★★ 2026-08-13 新增：**多人对话体检测**（Brandeis #172 实测）。
+# 起因：他的语料里有一卷 28.2 万词的国会听证记录，第一人称 16.8/千词——**看着声口最好**，
+# 而抽样一读，「`Mr. Catchings. My point would be that the Carnegie Steel …`」**根本不是他说的**。
+# 实测把 31 份分成两类：
+#   多人对话体 4 份（听证/庭审）：第一人称 8.41/千词，**说话人标记 10.8–13.8/千词**
+#   单一作者文本 27 份：第一人称中位 1.21/千词，**说话人标记 0.02–0.09/千词**
+# ⇒ 两类差**两个数量级**，用「说话人标记密度」分得开。
+# ★ **只报不拦**：判断哪一句是他说的要人来做，本件只负责**指出这一份是多人对话体**，
+#   免得「第一人称密度高」被读成「他的声口好」。
+#   [[measured-voice-in-the-wrong-register]]：量声口先问「这是谁的语域」。
+SPEAKER_TAG = re.compile(
+    r"\b(?:Mr|Mrs|Ms|Dr|Senator|Representative|Commissioner|Chairman|The\s+CHAIRMAN|"
+    r"Q|A)\.\s+[A-Z][A-Za-z]+\.|\b(?:SOC|Socrates|ΣΩ)\.")
+MULTI_SPEAKER_PER_K = 0.5   # 说话人标记 ≥0.5/千词 ⇒ 判为多人对话体（实测两类差两个数量级）
+
+
 # ★★ 译者标记：**必须按词边界匹配**。
 #   2026-08-13 实测：原来写的是 `"tr" in creator.lower()`，
 #   于是 `Henry G. Gilbert Nursery and Seed Trade Catalog Collection` 里的 **`Trade`**
@@ -173,7 +189,8 @@ def main() -> int:
                      "有歧义每千词": round(b / n * 1000, 2),
                      # ★ 主语脱落语言里**这一栏才是主信号**
                      "第一人称动词每千词": (round(vb / n * 1000, 2) if vb is not None else None),
-                     "主语脱落语": lang in PRO_DROP, "疑似译本": tr})
+                     "主语脱落语": lang in PRO_DROP, "疑似译本": tr,
+                     "说话人标记每千词": round(len(SPEAKER_TAG.findall(text)) / n * 1000, 2)})
         by_lang.setdefault(lang, []).append(c / n * 1000)
         for m in re.finditer(clean, text, re.I):
             s = max(0, m.start() - 70)
@@ -196,6 +213,18 @@ def main() -> int:
         print(f"★ **主语脱落语 {len(pd_rows)} 份**：代词中位 {pv[len(pv) // 2]:.2f}"
               f"，而**第一人称动词中位 {vv[len(vv) // 2]:.2f}**/千词"
               f" —— 这两个数差很多时，**低的那个是量具错，不是没声口**")
+    # ★ 多人对话体：只报不拦
+    multi = [x for x in rows if x.get("说话人标记每千词", 0) >= MULTI_SPEAKER_PER_K]
+    if multi:
+        print(f"\n★★ **多人对话体 {len(multi)}／{len(rows)} 份**（说话人标记 ≥{MULTI_SPEAKER_PER_K}/千词）"
+              f" —— **这些份里的第一人称大量不是他说的**，别把它们的密度读成他的声口：")
+        for x in sorted(multi, key=lambda z: -z["说话人标记每千词"])[:6]:
+            print(f"     {x['id'][:34]:<34} 说话人标记 {x['说话人标记每千词']:5.2f}/千词")
+        solo = [x for x in rows if x.get("说话人标记每千词", 0) < MULTI_SPEAKER_PER_K]
+        if solo:
+            sv = sorted(x["无歧义每千词"] for x in solo)
+            print(f"     ⇒ **去掉这些之后**，单一作者文本 {len(solo)} 份的无歧义第一人称"
+                  f"中位 **{sv[len(sv) // 2]:.2f}**/千词")
     tr_n = sum(1 for x in rows if x["疑似译本"])
     print(f"疑似译本 {tr_n}／{len(rows)} 份 —— **译本量到的是译者的文风，不是他的声口**")
     print("  口径：" + ("语种 ≠ %s（高召回）＋ 元数据标记" % NATIVE if NATIVE else
