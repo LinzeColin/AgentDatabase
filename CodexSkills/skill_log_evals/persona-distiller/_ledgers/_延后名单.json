@@ -3368,6 +3368,23 @@
     "54 份已取回、105.6 万词、失败 0；池里还有 114 条本轮没抓（上限截断，不是取不到）"
    ],
    "evidence": "_corpora/wip-pinchot-192/05-记延后-料极多而道只有二.md"
+  },
+  {
+   "name": "Albert Howard",
+   "aliases": [
+    "Howard, Albert",
+    "Howard Albert",
+    "Howard, Sir Albert"
+   ],
+   "family_zh": "农林牧渔师",
+   "deferred_at": "2026-08-13",
+   "处置类": "**min_lanes 硬卡点（lanes=1）＋ 池里混着三个人**——抓源前出局，零成本",
+   "reason": "`creator:\"Howard, Albert\"` → 47 条，其中**混着三个人**：哈佛拉丁语教授 Albert Andrew Howard(1858–1925) 13 条、拉丁语法合编者 Allen 9 条、Johnson, Howard Albert(1915–) 4 条、农学家 13 条。★ **生卒年筛不掉**——拉丁语教授与农学家都在 PD 内、年代重叠，只能按题名的学科排。\n排掉同名者后 ≤1930 的 **12 条，按 lane_of 逐条判全是 writings ⇒ lanes = 1**（quick 要 3），且归并同一部书后只剩约 5 部作品。",
+   "unblock_todo": "**随年份滚动**：方法论自述《An Agricultural Testament》1940 年首版，要到 **2036 年**才进入 PD。在那之前他名下可用的只有印度农业试验报告，道数补不上来。",
+   "probed_and_failed": [
+    "题名估道在**抓源之前**做的，零抓源成本"
+   ],
+   "evidence": "_corpora/wip-howard-193/05-记延后-抓源前出局.md"
   }
  ],
  "total": 168,
