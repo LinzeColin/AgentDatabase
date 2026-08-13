@@ -17,6 +17,10 @@ python3 $PL/fetch_ia.py   --ids-file $W/_ids.txt --out $W
 python3 $PL/classify_primary.py --raw $W --surname <姓> [--surname 别拼法]
 python3 $PL/dedup_corpus.py     --raw $W
 python3 $PL/assign_lanes.py     --raw $W
+
+# ★ 改过 classify_primary / assign_lanes 之后**必须跑这一件**（默认只查不改）
+python3 $PL/check_measurements_fresh.py          # 有不一致就 rc=1 并逐项列出
+python3 $PL/check_measurements_fresh.py --apply  # 确认之后再重出
 python3 $PL/scan_copyright.py   --raw $W          # ★ PD 最后一道，**逐条读命中**
 python3 $PL/measure_voice.py    --raw $W --samples 8
 python3 $PL/emit_source_ledger.py --raw $W --workspace $WS
@@ -49,6 +53,7 @@ python3 ../../../registry/codex/persona-distiller/scripts/check_corpus_ceiling.p
 | `classify_primary.py` | 一手／二手 | **`需人判` 不默认成一手**，只能由 `_primary-decisions.json` 显式裁掉；`(?<!auto)biograph`；`former owner` = 藏书主不是作者 |
 | `dedup_corpus.py` | 文件数 → 独立文献数 | 用 token shingle 的 min-hash，**不用 `difflib`**；**只报簇不替人判**「同卷多扫描」还是「同书不同卷」 |
 | `assign_lanes.py` | 分六条研究道 | 道语义**取自 35 个存量 `source-ledger.jsonl` 实测**，不按字面猜 |
+| `check_measurements_fresh.py` | **量测产物是不是这版工具出的** | ★ **改了上面两件之后必须跑**——2026-08-13 实测 4 个工作区的产物是旧版留下的（Kant 道 6→3），而工具的注释里早就写着那个修正。**修好判据不等于修好数据。** |
 | `scan_copyright.py` | **PD 的最后一道，唯一读正文的一道** | 元数据挡不住在版权期内的重印／译本——**实测 6 份混进来**；决定性信号只有 ISBN 与「© 年份 >1930」，`All rights reserved` 是老书的套话不算 |
 | `emit_source_ledger.py` | → `evidence/source-ledger.jsonl` | `derived_from` 由查重簇填；`title` 用真题名；`split` 全 train，**holdout 由人另指** |
 | `pull_quotes.py` | 取**可复算定位**的逐字引文 | `norm_offset` 自带 `text[off:off+len]==quote` 断言；四道筛（悼词署名行/目录行/词中起头/题名页）；★ **它判不了说话人** |

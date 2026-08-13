@@ -74,6 +74,14 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/assign_
 ```
 （应当打印「自测通过：书信 正 12／反 11 ＋ 画名 反 5／正 4」并 rc=0）
 
+★ 另一条也不需要语料，且**每次改过量测工具之后都该跑**：
+
+```bash
+python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_measurements_fresh.py
+```
+它把分道/分档工具在临时目录里重跑一遍，与仓里存着的产物逐字比对。
+**修好工具不等于修好数据**——2026-08-13 实测有 4 个工作区的产物是旧版工具留下的。
+
 **这两条恰恰是对的行为**——旧版本在这种情况下会打 ✓ 并 rc=0，
 全库实测有 11 个工作区、264 条引文就是那样绿的。已修。
 
