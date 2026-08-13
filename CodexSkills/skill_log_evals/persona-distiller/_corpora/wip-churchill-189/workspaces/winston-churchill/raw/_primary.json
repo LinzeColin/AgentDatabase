@@ -1,0 +1,197 @@
+{
+  "总数": 23,
+  "计数": {
+    "一手": 19,
+    "二手": 4,
+    "需人判": 0
+  },
+  "一手占比下界": 0.8261,
+  "一手占比上界": 0.8261,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "1914frenuoft",
+      "档": "二手",
+      "依据": "【人裁】**John Denton Pinkstone French（第一代伊普尔伯爵）写的《1914》**——英国远征军总司令自己的回忆录。Churchill 在 creator 第 2 位、无自著标记。**这是别人的书**。",
+      "title": "1914",
+      "creator": "French, John Denton Pinkstone, Earl of Ypres, 1852-1925; Churchill, Winston, Sir",
+      "words": 126706
+    },
+    {
+      "identifier": "churchill_winston_1874_1965_river_war",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The River War",
+      "creator": "Churchill, Winston, 1874-1965",
+      "words": 133094
+    },
+    {
+      "identifier": "cu31924026407597",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lord Randolph Churchill",
+      "creator": "Churchill, Winston, Sir, 1874-1965",
+      "words": 162119
+    },
+    {
+      "identifier": "dli.ministry.04026",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "London to Ladysmith via Pretoria",
+      "creator": "Churchill, Winston Spencer",
+      "words": 105520
+    },
+    {
+      "identifier": "dli.ministry.17592",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "My early life a Roving Commission",
+      "creator": "Churchill, Winston S.",
+      "words": 126058
+    },
+    {
+      "identifier": "greatspeechesofw00greyuoft",
+      "档": "二手",
+      "依据": "【人裁】**《Great speeches of the war》是战时演说合集**（Grey of Fallodon 等多人），Churchill 只是其中一位讲者，creator 第 2 位。⇒ 二手；他那几篇讲辞若要单取，须切段并逐段署名（同 Martens #134 的裁定）。",
+      "title": "Great speeches of the war",
+      "creator": "Grey of Fallodon, Edward Grey, Viscount, 1862-1933; Churchill, Winston, Sir, 187",
+      "words": 132429
+    },
+    {
+      "identifier": "in.ernet.dli.2015.148729",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "My African Journey",
+      "creator": "Churchill, Winston S",
+      "words": 46348
+    },
+    {
+      "identifier": "in.ernet.dli.2015.206774",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The World Crisis (1916-1918) Part- Ii",
+      "creator": "Churchill Winston S.",
+      "words": 112348
+    },
+    {
+      "identifier": "in.ernet.dli.2015.209887",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Story Of The Malakand Field Force",
+      "creator": "Churchill Winston Spencer",
+      "words": 92535
+    },
+    {
+      "identifier": "in.ernet.dli.2015.41900",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The World Crisis 1911-1918",
+      "creator": "Churchill, Winston S.",
+      "words": 381971
+    },
+    {
+      "identifier": "in.ernet.dli.2015.81282",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The River War Vol I",
+      "creator": "Churchill Winston Spencer",
+      "words": 125858
+    },
+    {
+      "identifier": "in.ernet.dli.2015.81283",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The River War Vol Ii",
+      "creator": "Churchill Winston Spencer",
+      "words": 136313
+    },
+    {
+      "identifier": "india.history.resource.106285",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The River War: An Historical Account of the Reconquest of the Soudan, in Two Vol",
+      "creator": "Churchill, Winston Spencer; Rhodes, F. Col. (Ed.)",
+      "words": 133677
+    },
+    {
+      "identifier": "lordrandolphchur0002chur",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lord Randolph Churchill",
+      "creator": "Churchill, Winston, Sir, 1874-1965",
+      "words": 155158
+    },
+    {
+      "identifier": "marksykeshislife00lesluoft",
+      "档": "二手",
+      "依据": "【人裁】**Shane Leslie 写 Mark Sykes 的传记**（《Mark Sykes: his life and letters》）——传主是 Sykes，不是 Churchill；他在 creator 第 3 位。★ 题名里的 `his life and` 指的是 Sykes。",
+      "title": "Mark Sykes : his life and letters",
+      "creator": "Leslie, Shane, 1885-1971; Sykes, Mark, 1879-1919; Churchill, Winston, Sir, 1874-",
+      "words": 92548
+    },
+    {
+      "identifier": "myearlyliferovin0000chur_b7k8",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "My early life; a roving commission",
+      "creator": "Churchill, Winston, Sir, 1874-1965",
+      "words": 127962
+    },
+    {
+      "identifier": "reportofproceed00macd",
+      "档": "二手",
+      "依据": "【人裁】**国际自由贸易大会的会议记录**，creator 第 4 位、无自著标记。他是与会者之一，**不是这本书的作者**。",
+      "title": "Report of the proceedings of the International Free Trade Congress, London, Augu",
+      "creator": "International Free Trade Congress (1st : 1908 : London); Macdonald, J. A. Murray",
+      "words": 220129
+    },
+    {
+      "identifier": "savrolaatalerev00churgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Savrola; a tale of the revolution in Laurania",
+      "creator": "Churchill, Winston, 1874-1965",
+      "words": 64694
+    },
+    {
+      "identifier": "savrolataleofrev0000chur",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Savrola : a tale of the revolution in Laurania",
+      "creator": "Churchill, Winston, Sir, 1874-1965",
+      "words": 62748
+    },
+    {
+      "identifier": "theriverwar04943gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The River War: An Account of the Reconquest of the Sudan",
+      "creator": "Churchill, Winston S., Sir, 1874-1965",
+      "words": 128672
+    },
+    {
+      "identifier": "thestoryofthemal09404gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Story of the Malakand Field Force: An Episode of Frontier War",
+      "creator": "Churchill, Winston S., Sir, 1874-1965",
+      "words": 89568
+    },
+    {
+      "identifier": "worldcrisis0004unse",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The world crisis ..",
+      "creator": "Churchill, Winston, 1874-1965",
+      "words": 110356
+    },
+    {
+      "identifier": "worldcrisis00chur",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The world crisis",
+      "creator": "Churchill, Winston, 1874-1965",
+      "words": 210055
+    }
+  ]
+}

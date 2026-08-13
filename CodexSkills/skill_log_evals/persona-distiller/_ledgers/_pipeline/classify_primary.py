@@ -204,7 +204,22 @@ def main() -> int:
         #     而「人的判断没有回写到工具读的那份数据里」是本项目反复出现的形态。
         if r["identifier"] in dec:
             d = dec[r["identifier"]]
-            k, why = d["档"], "【人裁】" + d["理由"]
+            # ★★ 2026-08-13：原来是 `d["理由"]` 直取，字段名写错就**抛栈**。
+            #   Churchill #189 我写成了 `依据`，屏幕上只有一段 KeyError traceback，
+            #   没有一个字说「字段名不对、应当叫什么」。
+            #   [[error-message-points-at-an-exit-that-isnt-there]] 的近亲：
+            #   **报错要指出怎么改，而不是把内部键名的 KeyError 甩给人看。**
+            if "档" not in d:
+                print(f"✗ 裁定 `{ident}` 缺 **`档`** 字段（应为「一手」/「二手」/「需人判」）",
+                      file=sys.stderr)
+                return 4
+            _why = d.get("理由") or d.get("依据") or d.get("说明")
+            if not _why:
+                print(f"✗ 裁定 `{ident}` 缺**理由**字段。"
+                      f"本工具认 `理由`（也接受 `依据`／`说明`）；实得字段：{sorted(d)}",
+                      file=sys.stderr)
+                return 4
+            k, why = d["档"], "【人裁】" + _why
         elif k == "需人判":
             hit = by_rule(r)
             if hit:

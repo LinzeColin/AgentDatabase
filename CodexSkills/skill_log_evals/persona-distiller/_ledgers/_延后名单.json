@@ -3013,9 +3013,35 @@
    "aliases": [
     "Ford, Henry"
    ]
+  },
+  {
+   "name": "Winston Churchill",
+   "family_zh": "政治法律师",
+   "deferred_at": "2026-08-13",
+   "aliases": [
+    "Churchill, Winston",
+    "Winston S. Churchill",
+    "Winston Spencer Churchill"
+   ],
+   "reason": "**min_lanes 硬卡点：真值 2 条道**（writings 19 ＋ external 4），quick 要 3。★★ 关键在于**那 4 条「需人判」正好是撑起另外三条道的全部**：`Great speeches of the war`（战时演说合集，他只是讲者之一，creator 第 2 位）撑着 expression；`Mark Sykes: his life and letters`（Shane Leslie 写 **Sykes** 的传记，他 creator 第 3 位）撑着 conversations；`Report of the proceedings of the International Free Trade Congress`（会议记录，creator 第 4 位）撑着 decisions。逐份打开读过后**四条全裁二手** ⇒ 三条道同时归零，lanes 4 → **2**。一手 19／二手 4／占比 **0.8261**、308 万词——**量与占比都不是问题**。",
+   "probed_and_failed": [
+    "★★★ 同名者：`creator:\"Churchill, Winston\"` PD 内 96 条里，**美国小说家 Winston Churchill(1871–1947) 占 59 条（61.5%）**，政治家只有 19 条；小说家 1947 年卒，作品同样在公有领域，**年代一条都筛不掉**",
+    "★★★ **IA 的 creator 字段本身是错的**：`Churchill, Winston, Sir, 1874-1965`（政治家的生卒年＋Sir）挂在小说家的《Coniston》《A far country》《The crossing》等书上 ⇒ **生卒年不可靠，只能按题名排**",
+    "★★★ **PD 陷阱**：四条标着 1922 的条目实为《A History of the English-Speaking Peoples》四卷（**1956–58 年出版**），且**全部来自印度数字图书馆 dli.***——按题名拦，不靠年份",
+    "conversations / expression / decisions / timeline 四道**裁定之后全部归零**"
+   ],
+   "already_confirmed_fetchable": [
+    "23 份已取回、**308 万词**：《The River War》(1899, 3 印本＋1 Gutenberg)、《Malakand Field Force》(1899, 2)、《London to Ladysmith via Pretoria》(1900)、《Savrola》(1900, 2)、《Lord Randolph Churchill》(1906, 2)、《My African Journey》(1922)、《The World Crisis》(1923/1927, 4)、《My Early Life》(1930, 2)",
+    "★ 声口很好：`measure_voice` 报**疑似译本 0/23**，全是英文原著"
+   ],
+   "unblock_todo": [
+    "**要补的是道**：他的书信（Randolph Churchill 编的官方传记附卷）、议会演说（Hansard）、内阁文件都在 IA 的 `creator` 索引之外，**要换通道**。",
+    "★ 注意 PD 分界：1930 年之后的《The Second World War》《Great Contemporaries》《Step by Step》等**一律不能取**，已写进 `EXCLUDE_TITLE`。"
+   ],
+   "处置类": "**min_lanes 硬卡点**（第七人）——★ 本例形态：**另外三条道各由一份「他只是供稿人/被引者之一」的第三方书撑着**，逐份裁二手之后三条同时归零。与 `check_paper_lanes` 抓的「一条源挂多道」不同，这是「一条道只有一份，而那一份不是他的」。"
   }
  ],
- "total": 160,
+ "total": 161,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",

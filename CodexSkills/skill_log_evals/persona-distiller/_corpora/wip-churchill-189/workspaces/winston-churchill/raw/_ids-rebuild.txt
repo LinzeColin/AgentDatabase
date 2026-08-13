@@ -1,0 +1,29 @@
+# ★ **重建用的权威清单** —— 从 _fetch-manifest.json 的「已取回」现生成。
+# 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
+#   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
+# 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：23
+1914frenuoft
+churchill_winston_1874_1965_river_war
+cu31924026407597
+dli.ministry.04026
+dli.ministry.17592
+greatspeechesofw00greyuoft
+in.ernet.dli.2015.148729
+in.ernet.dli.2015.206774
+in.ernet.dli.2015.209887
+in.ernet.dli.2015.41900
+in.ernet.dli.2015.81282
+in.ernet.dli.2015.81283
+india.history.resource.106285
+lordrandolphchur0002chur
+marksykeshislife00lesluoft
+myearlyliferovin0000chur_b7k8
+reportofproceed00macd
+savrolaatalerev00churgoog
+savrolataleofrev0000chur
+theriverwar04943gut
+thestoryofthemal09404gut
+worldcrisis0004unse
+worldcrisis00chur
