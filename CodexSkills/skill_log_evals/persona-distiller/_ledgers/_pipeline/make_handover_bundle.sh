@@ -717,6 +717,29 @@ elif "verify_handover_bundle.sh . --expect-tip" in t:
 else:
     print("！ 封面信里没找到验包段 —— **未替换，不是通过**")
 
+# ★★ 旧包那句「缺今晚最后 N 个提交」是**手写的**，写完当天就开始漂：
+#   2026-08-14 05:25 实测新旧相差 **77** 个提交，而文里还写着「三个」。
+#   ⇒ 从两个 sidecar 现读提交数，把差额算出来回填。[[self-reported-numbers-must-be-computed]]
+import glob as _glob, re as _re2
+_sib = [d for d in sorted(_glob.glob(str(cover.parent.parent / "agentdb-handover-*")))
+        if pathlib.Path(d) != cover.parent]
+for _d in _sib:
+    _sc = pathlib.Path(_d) / "agentdb-persona-distiller-full.bundle.sha256"
+    if not _sc.is_file():
+        continue
+    # ★ 不复用 `n`：它在上文已被改写成「踩坑库条数」的 int，
+    #   `n.isdigit()` 直接抛 AttributeError，**把整段封面信回填一起打死**
+    #   （身份证回填本来是好的，被我这一改连坐）。从本包 sidecar 现读。
+    _new = _re2.search(r"^提交数\s+(\d+)", side.read_text(encoding="utf-8"), _re2.M)
+    _o = _re2.search(r"^提交数\s+(\d+)", _sc.read_text(encoding="utf-8"), _re2.M)
+    if not (_o and _new):
+        continue
+    _gap = int(_new.group(1)) - int(_o.group(1))
+    t = _re2.sub(r"它缺今晚最后[^个]{0,6}个提交", f"它比这一份少 **{_gap}** 个提交", t)
+    t = _re2.sub(r"它比这一份少 \*\*\d+\*\* 个提交", f"它比这一份少 **{_gap}** 个提交", t)
+    t = _re2.sub(r"（tip `[0-9a-f]{8}`、[\d,]+ 提交）",
+                 f"（tip `{_o.string.split('tip')[1].split()[0][:8]}`、{int(_o.group(1)):,} 提交）", t)
+
 cover.write_text(t, encoding="utf-8")
 # ★★ 回读断言：上面那段替换曾经**跑了但没写进去**（我把它放在 write_text 之后，
 #   于是改的是内存里的字符串，文件一个字没动，而且什么都没报）。
@@ -726,9 +749,21 @@ if ("--expect-tip " + tip) not in _back:
     print("❌ 封面信：验包命令**没写进文件**（回读没找到 `--expect-tip %s`）" % tip)
     raise SystemExit(1)
 print("✅ 封面信：验包命令已写入并回读确认（--expect-tip %s）" % tip[:12])
+if "缺今晚最后" in _back:
+    print("❌ 封面信：旧包差额那句**没被回填**（回读仍见「缺今晚最后…」）")
+    raise SystemExit(1)
 
 print("✅ 封面信身份证：已从 sidecar 现读回填" + ("（无变化）" if t == old else ""))
 COVEOF
+  _cov_rc=$?
+  # ★★ 这一段的退出码原来**没人看**：2026-08-14 我在里面写了个 `n.isdigit()`（n 已被改写成 int），
+  #   整段当场 AttributeError 死掉——**连带身份证回填也没跑**——而构建照样 rc=0、日志里
+  #   一句「封面信…」都没有，看起来像这一步根本不存在。[[pipe-to-tail-hides-the-exit-code]]
+  if [ $_cov_rc -ne 0 ]; then
+    ok=false 2>/dev/null || true
+    echo "❌ 封面信回填脚本非零退出（rc=$_cov_rc）—— 身份证/验包命令/旧包差额**都可能没写进去**"
+    HO_COVER_FAILED=1
+  fi
 else
   echo "！ 本目录没有 00-你要做的两件事.md —— 身份证**未回填**（不是通过）"
 fi
