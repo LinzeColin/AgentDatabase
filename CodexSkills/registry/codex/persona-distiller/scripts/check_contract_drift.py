@@ -435,9 +435,18 @@ def _checksums_fresh(root: pathlib.Path) -> tuple[list[str], list[str]]:
             bad.append(rel)
     out = []
     if bad:
-        out.append("[发布清单] **checksums.sha256 与磁盘对不上 %d 个文件**："
-                   "%s —— 改了随包分发的文件却没重算清单。"
-                   "**跑 `scripts/build_manifest.py`，不要手写校验和。**"
+        # ★★ 2026-08-14：这句原先只说「跑 build_manifest.py」，而**成因有两种**——
+        #   我当天踩的是第二种：`build_manifest.py` 跑了，但它改的 `checksums.sha256`
+        #   落在工作区没进提交（我在跑它**之前**就 `git add` 了）。照原提示去重跑
+        #   毫无变化，人会卡在那里。[[error-message-points-at-an-exit-that-isnt-there]]
+        out.append("[发布清单] **checksums.sha256 与磁盘对不上 %d 个文件**：%s\n"
+                   "     成因有两种，**先分清是哪一种**：\n"
+                   "       ① 改了随包分发的文件却**没重算清单** ⇒ 跑 "
+                   "`python3 scripts/build_manifest.py`，**不要手写校验和**；\n"
+                   "       ② 重算了、但 `checksums.sha256` 与 `PACKAGE_MANIFEST.json` "
+                   "**没跟着提交** ⇒ `git add checksums.sha256 PACKAGE_MANIFEST.json`。\n"
+                   "     ★ 分辨法：`git status --porcelain checksums.sha256` —— "
+                   "有输出就是第 ② 种。"
                    % (len(bad), bad[:5]))
     if missing:
         out.append("[发布清单] 清单里有而磁盘上没有 %d 个：%s" % (len(missing), missing[:5]))

@@ -601,8 +601,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_contract_drift.py",
-      "sha256": "041b5513d3bdb36750928ce80969413a6ee77a7bd1cae6d5ea4011743437baba",
-      "size_bytes": 47304
+      "sha256": "e621e9c24a8129263efaa378616c0c49cd90b7ffc034a6c1c8e73011dafc24b4",
+      "size_bytes": 48157
     },
     {
       "path": "references/pipeline/checkers/check_corpus_ceiling.py",
@@ -1401,8 +1401,8 @@
     },
     {
       "path": "scripts/check_contract_drift.py",
-      "sha256": "041b5513d3bdb36750928ce80969413a6ee77a7bd1cae6d5ea4011743437baba",
-      "size_bytes": 47304
+      "sha256": "e621e9c24a8129263efaa378616c0c49cd90b7ffc034a6c1c8e73011dafc24b4",
+      "size_bytes": 48157
     },
     {
       "path": "scripts/check_corpus_ceiling.py",
