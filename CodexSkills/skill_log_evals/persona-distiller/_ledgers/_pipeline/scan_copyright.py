@@ -95,9 +95,17 @@ def main() -> int:
         return 3
 
     out = {"红": [], "黄": [], "绿": 0, "PG发布日": 0}
+    # ★★ 2026-08-14：`missing` 是当天补的。原来这里只有 `if not p.exists(): continue`，
+    #   而标题行印的是 `扫 {len(recs)} 份` —— **len(recs) 是台账里的条数，不是读到的份数**。
+    #   在移交包的裸 clone 里实测：`扫 103 份`，而 `红 0｜黄 0｜绿 0`（合计 0）。
+    #   103 ≠ 0，**它一份都没读到，却印出「红 0」并 rc=0**。
+    #   「红 0」会被读成「没有版权问题」——而这是**版权**结论，是本项目最贵的那一种。
+    #   [[green-in-the-repo-dead-in-the-package]]、[[empty-default-swallows-unknown]]
+    missing = 0
     for r in recs:
         p = raw / r["file"]
         if not p.exists():
+            missing += 1
             continue
         head = "\n".join(p.read_text(encoding="utf-8", errors="replace").splitlines()[:a.head])
         v, why, pg = judge(head)
@@ -108,15 +116,29 @@ def main() -> int:
             ti = r.get("ia_title"); ti = "; ".join(ti) if isinstance(ti, list) else str(ti or "")
             out[v].append({"identifier": r["identifier"], "title": ti[:70], "理由": why})
 
-    print(f"{raw}｜扫 {len(recs)} 份（头 {a.head} 行）")
+    read_n = len(recs) - missing
+    print(f"{raw}｜台账 {len(recs)} 份 → **真读到 {read_n} 份**"
+          f"｜**读不到 {missing} 份**（头 {a.head} 行）")
+    if missing:
+        print(f"  ★★ **读不到的 {missing} 份没有被判过** —— 语料按裁定不进 git，"
+              f"在裸 clone 里就是这个样子。**下面的「红 N」只覆盖真读到的那 {read_n} 份。**")
+    if read_n == 0:
+        print("  ❌ **一份都没读到 ⇒ 本次没有任何版权结论**。"
+              "「红 0」在这里不是「没有版权问题」，是**没读到**。")
+        (raw / "_copyright-scan.json").write_text(
+            json.dumps({"未量": True, "台账份数": len(recs), "读到": 0},
+                       ensure_ascii=False, indent=2), encoding="utf-8")
+        return 3
     print(f"  **红 {len(out['红'])}**｜黄 {len(out['黄'])}｜绿 {out['绿']}"
-          f"｜其中 PG 发布日样板 {out['PG发布日']} 份（**不算红**）")
+          f"｜其中 PG 发布日样板 {out['PG发布日']} 份（**不算红**）"
+          f"　（红＋黄＋绿 = {len(out['红'])+len(out['黄'])+out['绿']}，应等于真读到的 {read_n}）")
     for v in ("红", "黄"):
         for o in out[v]:
             print(f"  [{v}] {o['identifier'][:38]:<40}{o['title']}")
             for w in o["理由"][:2]:
                 print(f"        ↳ {w}")
     print("  ★ **绿不等于已确认 PD**，只等于「正文头里没写版权声明」")
+    out["_覆盖面"] = {"台账份数": len(recs), "真读到": read_n, "读不到": missing}
     (raw / "_copyright-scan.json").write_text(
         json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
     return 0
