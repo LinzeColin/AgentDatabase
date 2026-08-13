@@ -50,7 +50,7 @@ TMP="$(mktemp -d)"
 git clone -q "$B" "$TMP/r" && git -C "$TMP/r" checkout -q \
   claude/character-distillation-skill-reorganize-d57595
 python3 - "$TMP/r" <<'PYEOF'
-import sys,pathlib,json
+import sys,pathlib,json,re
 R=pathlib.Path(sys.argv[1]); C=R/"CodexSkills/skill_log_evals/persona-distiller/_corpora"
 ok=True
 # ★★ 2026-08-13：清单**从包里现扫**，不再写死。
@@ -274,25 +274,40 @@ cs=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-di
                                       "/_ledgers/_pipeline/check_declared_coauthor_split.py"),
                    "--scan", str(R/"CodexSkills/skill_log_evals/persona-distiller/_corpora")],
                   capture_output=True, text=True)
-got_split={}
+got_split={}; unread=[]
 for l in cs.stdout.splitlines():
     s=l.strip()
     if s.startswith("·") and ("① " in s or "③ " in s):
-        got_split[s.split("／")[0].strip(" ·")]=got_split.get(s.split("／")[0].strip(" ·"),0)+1
-if cs.returncode in (0,1) and got_split==EXPECT_SPLIT:
-    print("✅ 合著分工：①③ 共 %d 条，正是已记录的那几人（%s）——无新增"
-          %(sum(got_split.values()), "／".join(f"{k} {v}" for k,v in sorted(got_split.items()))))
-elif cs.returncode not in (0,1):
+        w=s.split("／")[0].strip(" ·"); got_split[w]=got_split.get(w,0)+1
+    m=re.match(r"^(\S+)\s+读不到 (\d+) 份", s)
+    if m: unread.append(m.group(1))
+# ★★ **子集比，不是相等比。** 第一版用相等，当场把整个包判失败：
+#   基线是在**工作树**量的（那里语料齐），而 clone 里新工作区的 `raw/*.txt`
+#   被 `.gitignore` 挡在仓外 ⇒ Dewey 与 Ford 各报 0 命中。
+#   **那是没东西可读，不是没问题**——[[green-in-the-repo-dead-in-the-package]]。
+#   ⇒ 少报不算回归（可能是修好了、也可能是读不到，判据自己会说哪一种）；
+#     **多出一个新人、或某人比基线更多，才是回归**。
+new=[w for w in got_split if w not in EXPECT_SPLIT]
+more=[w for w,n in got_split.items() if w in EXPECT_SPLIT and n>EXPECT_SPLIT[w]]
+if cs.returncode not in (0,1):
     print("★ 合著分工：**未判**（判据 rc=%d）"%cs.returncode)
-else:
+elif new or more:
     ok=False
-    print("❌ 合著分工①③与基线不符（基线 %s，实测 %s）"
-          %(EXPECT_SPLIT, got_split or "空"))
+    print("❌ 合著分工①③出现新增：新人物 %s；比基线更多 %s（基线 %s，实测 %s）"
+          %(new or "无", more or "无", EXPECT_SPLIT, got_split))
     for l in cs.stdout.splitlines():
         s=l.strip()
         if s.startswith("·") and ("① " in s or "③ " in s): print("     "+s[:120])
-for l in cs.stdout.splitlines():
-    if "② 是**线索" in l or l.startswith("✗ **"): print("     ★ "+l.strip()[:130])
+else:
+    miss={w:n for w,n in EXPECT_SPLIT.items() if got_split.get(w,0)<n}
+    print("✅ 合著分工：①③ 实测 %d 条，未超出基线（基线 %d 条）"
+          %(sum(got_split.values()), sum(EXPECT_SPLIT.values())))
+    if miss:
+        print("     ★ 基线里有 %s 在本包内**没量到**——%s"
+              %("／".join(miss), "语料不在包里（未判，不是通过）" if unread
+                else "语料在而未命中，请人看一眼"))
+if unread:
+    print("     ★ 本包内读不到语料的工作区 %d 个（未判，不是通过）"%len(unread))
 
 # ★★ 判分就绪度：等着判分的人，装置齐不齐、判得出判不出（`check_scoring_ready.py`）。
 #   它**不判该不该发**，也不代替授权——判分要两名互相独立的评委，只能由人起。

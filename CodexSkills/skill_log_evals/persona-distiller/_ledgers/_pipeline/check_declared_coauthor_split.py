@@ -526,17 +526,27 @@ def self_test() -> int:
 
 
 def scan_ws(ws: pathlib.Path, subject: str):
+    """→ (命中, 读到几份, **读不到几份**)。台账都没有则 → None。
+
+    ★★ 2026-08-13：第三个返回值是当天补的。原来 `if not p.is_file(): continue`
+      **静默跳过读不到的语料**，于是在移交包的 clone 里（新工作区的 `raw/*.txt`
+      被 `.gitignore` 挡在仓外）它对 Dewey 与 Ford 各报「0 命中」——
+      **那是没东西可读，不是没问题**，而基线比对当场把整个包判失败。
+      「读不到」必须与「没命中」分开报。
+    """
     led = ws / "evidence/source-ledger.jsonl"
     if not led.is_file():
         return None
-    hits = []
+    hits, seen, missing = [], 0, 0
     for line in led.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         r = json.loads(line)
         p = ws / (r.get("local_path") or "")
         if not p.is_file():
+            missing += 1                   # ★ 读不到 ≠ 没问题
             continue
+        seen += 1
         txt = p.read_text(encoding="utf-8", errors="replace")
         d = declarations(txt)
         fo = foreign(d, subject) if d else []
@@ -559,7 +569,7 @@ def scan_ws(ws: pathlib.Path, subject: str):
                          "形态": "② **共同署名而没有分工声明** ⇒ 逐篇归属要另做",
                          "归给他人": [w for _, w in jb][:3],
                          "声明原句": jb[0][0][-220:]})
-    return hits
+    return hits, seen, missing
 
 
 def main() -> int:
@@ -587,13 +597,16 @@ def main() -> int:
         print("★★ **未判**：要给 --workspace 或 --scan")
         return 4
 
-    total, bad, nolead = 0, [], 0
+    total, bad, nolead, unread = 0, [], 0, []
     for ws in targets:
         subj = a.subject or ws.name.replace("-", " ")
-        h = scan_ws(ws, subj)
-        if h is None:
+        got = scan_ws(ws, subj)
+        if got is None:
             nolead += 1
             continue
+        h, seen_n, miss_n = got
+        if miss_n:
+            unread.append((ws.name, miss_n, seen_n))
         total += 1
         for x in h:
             x["工作区"] = ws.name
@@ -602,6 +615,13 @@ def main() -> int:
 
     print(f"扫了 {total} 个有台账的工作区"
           f"{f'（另有 {nolead} 个没有台账，**未判**）' if nolead else ''}\n")
+    if unread:
+        tot_miss = sum(m for _, m, _ in unread)
+        print(f"★★ **{len(unread)} 个工作区共 {tot_miss} 份语料本机读不到 —— 未判，不是通过**"
+              "（新工作区的 `raw/*.txt` 按裁定不进 git；在移交包的 clone 里尤其如此）：")
+        for n, m, s in unread:
+            print(f"    {n:32s} 读不到 {m} 份／读到 {s} 份")
+        print()
     if bad:
         print(f"✗ **{len(bad)} 份语料在序言里声明了分工，且有部分明确归给他人**：")
         for x in bad:
