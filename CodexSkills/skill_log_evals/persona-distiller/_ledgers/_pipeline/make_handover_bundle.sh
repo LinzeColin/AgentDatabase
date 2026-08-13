@@ -517,7 +517,11 @@ else:
 #     ② 而那道排除第一版按邻近词一刀切，**当场杀掉一条真阳**——Ford 的 IA 扫描件
 #        把「Digitized by the Internet Archive」插在题名与署名之间。
 #        ⇒ 排除只绑在「转写类」构式上，`in collaboration with` 一律不压。
-EXPECT_SPLIT={"john-dewey":3,"henry-ford":10,"hugo-grotius":1}
+# ★★ 2026-08-14 更新基线：判据换成按台账定位后，多看见 11 个此前不可见的工作区
+#   （`wip-*/workspaces/Y/Y/` 这类布局）。**新增的两人是「本来就在、判据看不见」，
+#   不是回归**——逐项比过：ford 10／dewey 3／grotius 1 三项**一个没变**，
+#   只多出 william-osler 2 与 clara-barton 1。基线是在旧的、少 11 个工作区的集合上定的。
+EXPECT_SPLIT={"john-dewey":3,"henry-ford":10,"hugo-grotius":1,"william-osler":2,"clara-barton":1}
 cs=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
                                       "/_ledgers/_pipeline/check_declared_coauthor_split.py"),
                    "--scan", str(R/"CodexSkills/skill_log_evals/persona-distiller/_corpora")],
