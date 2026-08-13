@@ -259,6 +259,41 @@ else:
 for l in lw.stdout.splitlines():
     if l.startswith("扫过"): print("     "+l.strip())
 
+# ★★ 序言里声明了分工 / 「与某人合作」式署名（`check_declared_coauthor_split.py`）。
+#   同样**按基线比**，不做成「有命中就红」：这 14 条都已查清并落纸
+#   （Dewey 3 ＝《Ethics》1908 三个印本，序言明写 Part I 是 Tufts 写的；
+#     Ford 10 ＝ IN COLLABORATION WITH SAMUEL CROWTHER；Grotius 1）。
+#   ★ 这件判据 2026-08-13 修过两处，两处都钉了自测：
+#     ① DocSouth 的「transcribed by Apex Data Services, Inc.」是**转写外包**不是合著
+#        （误报挂在 Carver #127 这个**已入库**的人身上）；
+#     ② 而那道排除第一版按邻近词一刀切，**当场杀掉一条真阳**——Ford 的 IA 扫描件
+#        把「Digitized by the Internet Archive」插在题名与署名之间。
+#        ⇒ 排除只绑在「转写类」构式上，`in collaboration with` 一律不压。
+EXPECT_SPLIT={"john-dewey":3,"henry-ford":10,"hugo-grotius":1}
+cs=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                      "/_ledgers/_pipeline/check_declared_coauthor_split.py"),
+                   "--scan", str(R/"CodexSkills/skill_log_evals/persona-distiller/_corpora")],
+                  capture_output=True, text=True)
+got_split={}
+for l in cs.stdout.splitlines():
+    s=l.strip()
+    if s.startswith("·") and ("① " in s or "③ " in s):
+        got_split[s.split("／")[0].strip(" ·")]=got_split.get(s.split("／")[0].strip(" ·"),0)+1
+if cs.returncode in (0,1) and got_split==EXPECT_SPLIT:
+    print("✅ 合著分工：①③ 共 %d 条，正是已记录的那几人（%s）——无新增"
+          %(sum(got_split.values()), "／".join(f"{k} {v}" for k,v in sorted(got_split.items()))))
+elif cs.returncode not in (0,1):
+    print("★ 合著分工：**未判**（判据 rc=%d）"%cs.returncode)
+else:
+    ok=False
+    print("❌ 合著分工①③与基线不符（基线 %s，实测 %s）"
+          %(EXPECT_SPLIT, got_split or "空"))
+    for l in cs.stdout.splitlines():
+        s=l.strip()
+        if s.startswith("·") and ("① " in s or "③ " in s): print("     "+s[:120])
+for l in cs.stdout.splitlines():
+    if "② 是**线索" in l or l.startswith("✗ **"): print("     ★ "+l.strip()[:130])
+
 # ★★ 判分就绪度：等着判分的人，装置齐不齐、判得出判不出（`check_scoring_ready.py`）。
 #   它**不判该不该发**，也不代替授权——判分要两名互相独立的评委，只能由人起。
 #   ⇒ 这里只印现状，**不参与红绿**：缺预登记/有矛盾是要人看的信息，不是构建失败。

@@ -239,6 +239,27 @@ EDITORIAL = re.compile(
     re.I)
 
 
+# ★★ 2026-08-13：**数字化/转写工作说明不是合著。**
+#   Carver #127（**已交付的产物**）被报了一条 ③，打开一看是 DocSouth 的著录：
+#     「…supported the electronic publication of this title.
+#       Text transcribed by **Apex Data Services, Inc.** Images scanned by Lee A…」
+#   `transcribed by` 本来是为「口述-代笔」留的（as told to / recorded by），
+#   而扫描站把**转写外包公司**也写成这个句式。两件事字面一样、性质相反。
+#   ⇒ 两道排除：① 合作者名字看起来是**机构**；② 前后文出现**数字化用语**。
+#   ★ 这条误报的代价特别高：它挂在一个**已经判过分、已入库**的人身上，
+#     报出去等于说那份产物的语料有合著污染——而真相是一句转写署名。
+DIGITIZATION = re.compile(
+    r"electronic\s+(?:publication|edition|text)|images?\s+scanned|scanned\s+by|"
+    r"digiti[sz]ed|ocr|documenting\s+the\s+american\s+south|"
+    r"academic\s+affairs\s+library|first\s+edition\s+scanned|"
+    r"produced\s+by.{0,40}(?:distributed\s+proofread|online\s+distributed)", re.I)
+SOFT_VERB = re.compile(r"(?:recorded|set\s+down|transcribed|scanned)\s+by", re.I)
+ORG = re.compile(
+    r"(?:inc|ltd|llc|co|corp|company|services|systems|press|university|college|"
+    r"library|libraries|foundation|institute|society|association|project|"
+    r"gutenberg|archive)\.?", re.I)
+
+
 def collaborators(text: str, subject: str):
     """→ [(署名原句, 合作者)]。**「与某人合作」式署名**，只在最前 4000 字里找。
 
@@ -253,6 +274,16 @@ def collaborators(text: str, subject: str):
         # ★ 编务协助不算合著（见上面 EDITORIAL 的注释）：看这条声明前后 240 字
         around = front[max(0, m.start() - 240):m.end() + 240]
         if EDITORIAL.search(around):
+            continue
+        # ★★ 数字化/转写说明的排除**只许作用在「转写类」构式上**。
+        #   第一版按邻近词一刀切，**当场杀掉一条真阳**：Ford《My Life and Work》的
+        #   IA 扫描件在题名与「IN COLLABORATION WITH SAMUEL CROWTHER」**之间**
+        #   插了一句「Digitized by the Internet Archive in 2019…」，
+        #   ±240 字的窗口正好罩住，10 条真阳变 9 条而摘要只显示数字变小。
+        #   ⇒ `in collaboration with` 这类**字面就是合著**的构式，附近有扫描声明也不压；
+        #     只有 `transcribed/scanned/recorded/set down by` 这类**两义**构式才看排除。
+        soft = SOFT_VERB.search(m.group(0)) is not None
+        if soft and (ORG.search(who) or DIGITIZATION.search(around)):
             continue
         if who.lower() in seen:
             continue
@@ -470,6 +501,25 @@ def self_test() -> int:
     chk("★ 只看序言区（前 10%／上限 15 万字符）——同句落在正文深处不许报",
         not declarations(tail))
 
+    # ★★ 反例：数字化/转写说明**不许**报成合著（Carver #127 实测，逐字取自语料）
+    CARVER = ("An Endowment from the National Endowment for the Humanities supported "
+              "the electronic publication of this title. Text transcribed by Apex Data "
+              "Services, Inc. Images scanned by Lee Ann Morawski.")
+    chk("★★ 反例：DocSouth 的「transcribed by Apex Data Services, Inc.」不是合著",
+        collaborators(CARVER, "george washington carver") == [])
+    chk("★★ 反例：只有「Images scanned by Lee Ann Morawski」也不算（数字化用语在场）",
+        collaborators("Images scanned by Lee Ann Morawski for the electronic edition.",
+                      "george washington carver") == [])
+    # ★ 正例仍须打响：Ford／Crowther 那条不能被新排除误伤
+    # ★★ 反例（第一版栽在这）：扫描声明**插在题名与署名之间**时，真阳必须仍打响
+    FORD_IA = ("MY LIFE AND WORK r Digitized by the Internet Archive in 2019 with "
+               "funding from Kahle/Austin Foundation https://archive.org/details/x "
+               "IN COLLABORATION WITH SAMUEL CROWTHER GARDEN CITY NEW YORK")
+    chk("★★ 反例：IA 的「Digitized by…」夹在中间，Ford／Crowther 仍须判红",
+        len(collaborators(FORD_IA, "henry ford")) == 1)
+    chk("★ 正例未被误伤：Ford「IN COLLABORATION WITH SAMUEL CROWTHER」仍判红",
+        len(collaborators("MY LIFE AND WORK BY HENRY FORD IN COLLABORATION WITH "
+                          "SAMUEL CROWTHER GARDEN CITY NEW YORK", "henry ford")) == 1)
     print(f"\n{'✓ 全过' if ok == t else f'✗ {t - ok}/{t} 项不符'}"
           "（真例逐字取自《Ethics》(1908) 的序言）")
     return 0 if ok == t else 1
