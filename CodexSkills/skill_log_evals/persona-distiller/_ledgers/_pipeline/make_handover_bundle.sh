@@ -134,6 +134,22 @@ else:
         if l.strip().startswith(("·","✗")) or ":" in l and "→" in l:
             print("     "+l.strip())
 
+# ★ 出版年早于人物出生 ⇒ 不可能是他（同名者的最后一道，枚举挡不住的那部分）。
+#   Ford #188 实测：同一个姓名下**至少五个人**，删到只剩 22 条时里面还有 1856／1860 两本。
+life=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                         "/_ledgers/_pipeline/check_impossible_by_lifespan.py"),
+                     "--scan-all"], capture_output=True, text=True)
+ltail=[l for l in life.stdout.strip().splitlines() if l.strip()]
+if life.returncode==0:
+    print("✅ 生卒年可能性：%s"%(ltail[0] if ltail else "(无输出)"))
+elif life.returncode==5:
+    print("★ 生卒年可能性：**未判**（读不到生年表）")
+else:
+    ok=False
+    print("❌ 有「出版年早于出生、且仍判成他的」条目：")
+    for l in life.stdout.splitlines():
+        if l.strip().startswith("·") or l.strip().startswith("✗"): print("     "+l.strip())
+
 # ★★ 盲判用例要**正面数出来**，不能只在出错时才打印——沉默不等于通过。
 #    ★ 期望值**不写死题数**：写死过一次（16/16/17/16），quick 四人补题到 32 之后
 #      它当场变红，而产物其实是对的。改成**按档位判下限 + 类数必须 16**，总数只打印。

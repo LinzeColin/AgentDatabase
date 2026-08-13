@@ -36,6 +36,7 @@ Henry Ford #188 探源，`creator:"Ford, Henry"` 的池子里**至少五个人**
 
     python3 check_impossible_by_lifespan.py --ledger <source-ledger.jsonl> --born 1863
     python3 check_impossible_by_lifespan.py --tsv <探源.tsv> --born 1863     # 抓源之前就能用
+    python3 check_impossible_by_lifespan.py --scan-all      # 全库回扫（生年取自 _卒年.json）
     python3 check_impossible_by_lifespan.py --self-test
 
 退出码：0＝没有不可能项；1＝有；2＝参数不对；5＝没有年份可判（**未判，不是通过**）
@@ -69,16 +70,52 @@ def load(ledger=None, tsv=None):
     return list(csv.DictReader(io.StringIO("".join(lines)), delimiter="\t"))
 
 
+# ★★★ 「出版早于出生」是**事实**，不一定是**缺陷**。
+# Jefferson #175 实测：台账里有一本 **1684** 年的书（他生于 1743，早 59 年），
+# 而那一条**早就判对了**——`tier: S1`、`attribution: OTHER`、
+# 归属依据写着 `creator 里目标的角色是 former owner`：
+# **那是他藏书室里的书，不是他写的**。
+# ⇒ 若不分开这两种，本件就会把「判据已经做对的事」报成缺陷
+#   （[[checker-blindspot-read-as-defect]]：判据的盲区被我当成缺陷）。
+SECONDARY_TIERS = {"S1", "S2", "secondary", "二手"}
+NOT_AUTHOR_MARKS = ("other", "former owner", "藏书", "旧主", "collector")
+
+
+def already_handled(rec: dict) -> str:
+    """这一条是不是**已经被判成不是他写的**？→ 说明，或空串。"""
+    if str(rec.get("tier") or "").strip() in SECONDARY_TIERS:
+        blob = (str(rec.get("attribution") or "") + " " +
+                str(rec.get("authorship_detail") or "") + " " +
+                str(rec.get("author") or "")).lower()
+        for m in NOT_AUTHOR_MARKS:
+            if m in blob:
+                return f"已判二手且归属标「{m}」"
+        return "已判二手"
+    return ""
+
+
 def evaluate(rows, born: int):
     dated = [(r, y) for r in rows if (y := year_of(r)) is not None]
-    bad = [(r, y) for r, y in dated if y < born]
+    early = [(r, y) for r, y in dated if y < born]
+    real, noted = [], []
+    for r, y in early:
+        (noted if already_handled(r) else real).append((r, y))
+
+    def fmt(pairs):
+        return [{"年": y, "identifier": r.get("identifier") or r.get("source_id") or "?",
+                 "creator": (r.get("creator") or r.get("author") or "")[:60],
+                 "title": (r.get("title") or "")[:78],
+                 "已有处置": already_handled(r)}
+                for r, y in sorted(pairs, key=lambda x: x[1])]
+
     return {
         "条数": len(rows), "有年份": len(dated), "无年份": len(rows) - len(dated),
         "出生年": born,
-        "**出版年早于出生年**": len(bad),
-        "逐条": [{"年": y, "identifier": r.get("identifier") or r.get("source_id") or "?",
-                  "creator": (r.get("creator") or "")[:60],
-                  "title": (r.get("title") or "")[:78]} for r, y in sorted(bad, key=lambda x: x[1])],
+        "出版年早于出生年": len(early),
+        "**仍判成他的（真缺陷）**": len(real),
+        "★ 已判二手/非作者（只是提示，不算缺陷）": len(noted),
+        "逐条": fmt(real),
+        "★ 逐条·已处置": fmt(noted),
     }
 
 
@@ -97,9 +134,9 @@ def self_test() -> int:
     ]
     r = evaluate(rows, 1863)
     bad = 0
-    ok1 = r["**出版年早于出生年**"] == 2
+    ok1 = r["**仍判成他的（真缺陷）**"] == 2
     bad += 0 if ok1 else 1
-    print(f"  {'✓' if ok1 else '✗'} 反例：1856／1860 两条必须报出（实得 {r['**出版年早于出生年**']}）")
+    print(f"  {'✓' if ok1 else '✗'} 反例：1856／1860 两条必须报出（实得 {r['**仍判成他的（真缺陷）**']}）")
     got = {x["identifier"] for x in r["逐条"]}
     ok2 = got == {"a", "b"}
     bad += 0 if ok2 else 1
@@ -108,18 +145,83 @@ def self_test() -> int:
     bad += 0 if ok3 else 1
     print(f"  {'✓' if ok3 else '✗'} 无年份的单列为「无年份」，**不算通过**（实得 {r['无年份']}）")
 
+    # ★★ Jefferson #175 那条真记录：早于出生 **59 年**，而**判据早就判对了**
+    #   （tier S1 + former owner）⇒ 必须落进「已处置」，**不许报成缺陷**。
+    jeff = [{"source_id": "src-96915834ac95", "published_at": "1684", "tier": "S1",
+             "attribution": "OTHER",
+             "author": "Courtilz de Sandras, Gatien, 1644-1712; Jefferson, Thomas, 1743-1826, former owner",
+             "title": "Histoire des promesses illusoires depuis la Paix des Pirenees"}]
+    rj = evaluate(jeff, 1743)
+    ok5 = rj["**仍判成他的（真缺陷）**"] == 0 and rj["★ 已判二手/非作者（只是提示，不算缺陷）"] == 1
+    bad += 0 if ok5 else 1
+    print(f"  {'✓' if ok5 else '✗'} Jefferson 那本 1684 年的藏书：**已判二手 + former owner** ⇒ "
+          f"只算提示不算缺陷（实得 真缺陷 {rj['**仍判成他的（真缺陷）**']}／已处置 "
+          f"{rj['★ 已判二手/非作者（只是提示，不算缺陷）']}）")
+
     # ★ 反方向：把出生年改早，两条反例必须变绿——否则说明它报的不是「早于出生」
     r2 = evaluate(rows, 1800)
-    ok4 = r2["**出版年早于出生年**"] == 0
+    ok4 = r2["**仍判成他的（真缺陷）**"] == 0
     bad += 0 if ok4 else 1
     print(f"  {'✓' if ok4 else '✗'} 把出生年改成 1800 之后必须一条都不报"
-          f"（实得 {r2['**出版年早于出生年**']}）——防止它其实是在报别的东西")
+          f"（实得 {r2['**仍判成他的（真缺陷）**']}）——防止它其实是在报别的东西")
     print(f"\n{'✓ 正负对照全过' if bad == 0 else f'✗ {bad} 项不符'}（反例逐字取自 Ford #188 探源池）")
     return 0 if bad == 0 else 1
 
 
+# ★ 全库回扫：生年取自 `_ledgers/_卒年.json`（204 人、每条带出处与置信度）。
+#   没有调用方的判据不算做完 —— 这就是它的调用方。
+BORN_FILE = pathlib.Path(__file__).resolve().parents[1] / "_卒年.json"
+CORPORA = pathlib.Path(__file__).resolve().parents[2] / "_corpora"
+
+
+def _norm(s: str) -> str:
+    import unicodedata
+    return re.sub(r"[^a-z]", "", unicodedata.normalize("NFKD", s.lower()))
+
+
+def scan_all():
+    if not BORN_FILE.exists():
+        print(f"★★ **未跑，不是通过**：读不到生年表 {BORN_FILE}")
+        return 5
+    born = json.loads(BORN_FILE.read_text(encoding="utf-8"))
+    BY = {_norm(v["name"]): v for v in born.values() if isinstance(v, dict) and v.get("born")}
+    real, noted, unmatched, scanned = [], [], [], 0
+    for led in sorted(CORPORA.glob("wip-*/workspaces/*/evidence/source-ledger.jsonl")):
+        slug = led.parent.parent.name
+        key = _norm(slug)
+        cand = [v for k, v in BY.items() if k == key or key in k or k in key]
+        if not cand:
+            unmatched.append(slug)
+            continue
+        rows = [json.loads(l) for l in led.read_text(encoding="utf-8").splitlines() if l.strip()]
+        r = evaluate(rows, cand[0]["born"])
+        scanned += 1
+        if r["**仍判成他的（真缺陷）**"]:
+            real.append((slug, cand[0]["born"], r))
+        if r["★ 已判二手/非作者（只是提示，不算缺陷）"]:
+            noted.append((slug, cand[0]["born"], r))
+    print(f"扫过 {scanned} 个工作区｜**对不上生年的 {len(unmatched)} 个（未判，不是通过）**")
+    if real:
+        print(f"\n✗ **{len(real)} 个工作区有「早于出生且仍判成他的」条目**：")
+        for slug, b, r in real:
+            print(f"  · {slug}（生 {b}）：{r['**仍判成他的（真缺陷）**']} 条")
+            for x in r["逐条"][:4]:
+                print(f"      {x['年']}  {x['title'][:62]}")
+    else:
+        print("\n✓ 没有「早于出生且仍判成他的」条目")
+    if noted:
+        print(f"\n★ 早于出生但**判据已经判对**的（不算缺陷，列出来让人看见）：{len(noted)} 个工作区")
+        for slug, b, r in noted:
+            for x in r["★ 逐条·已处置"][:2]:
+                print(f"  · {slug}　{x['年']}　{x['title'][:52]}　[{x['已有处置']}]")
+    if unmatched:
+        print(f"\n⚠ 对不上生年（**本件对它们未判**）：{unmatched}")
+    return 1 if real else 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
+    ap.add_argument("--scan-all", action="store_true", help="全库回扫，生年取自 _卒年.json")
     ap.add_argument("--ledger")
     ap.add_argument("--tsv")
     ap.add_argument("--born", type=int)
@@ -128,6 +230,8 @@ def main() -> int:
     a = ap.parse_args()
     if a.self_test:
         return self_test()
+    if a.scan_all:
+        return scan_all()
     if not (a.ledger or a.tsv) or a.born is None:
         print("要么 --self-test，要么给 --born 加上 --ledger 或 --tsv", file=sys.stderr)
         return 2
@@ -137,18 +241,23 @@ def main() -> int:
         print(json.dumps(r, ensure_ascii=False, indent=1))
     else:
         print(f"条数 {r['条数']}｜有年份 {r['有年份']}｜**无年份 {r['无年份']}**（那一批本件判不了）")
-        if r["**出版年早于出生年**"]:
-            print(f"\n✗ **{r['**出版年早于出生年**']} 条出版年早于他出生（{a.born}）——不可能是他**：")
+        if r["**仍判成他的（真缺陷）**"]:
+            print(f"\n✗ **{r['**仍判成他的（真缺陷）**']} 条出版年早于他出生（{a.born}）、且仍判成他的——不可能是他**：")
             for x in r["逐条"]:
                 print(f"  · {x['年']}  {x['identifier']}")
                 print(f"      {x['creator']} ｜ {x['title']}")
         else:
-            print(f"\n✓ 没有出版年早于 {a.born} 的条目")
+            print(f"\n✓ 没有「早于 {a.born} 且仍判成他的」条目")
+        if r["★ 已判二手/非作者（只是提示，不算缺陷）"]:
+            print(f"\n★ 早于出生但**已判二手/非作者**的：{r['★ 已判二手/非作者（只是提示，不算缺陷）']} 条"
+                  "（**不算缺陷**——判据已经做对了，这里只列出来让人看见）")
+            for x in r["★ 逐条·已处置"]:
+                print(f"  · {x['年']}  {x['title'][:62]}　[{x['已有处置']}]")
         print("\n★ 射程：**只管出生这一侧**。身后出版是常态（文集/遗稿/译本/重印），"
               "卒年那一侧不能用同样的力度判。无年份的那一批**未判，不是通过**。")
     if r["有年份"] == 0:
         return 5
-    return 1 if r["**出版年早于出生年**"] else 0
+    return 1 if r["**仍判成他的（真缺陷）**"] else 0
 
 
 if __name__ == "__main__":
