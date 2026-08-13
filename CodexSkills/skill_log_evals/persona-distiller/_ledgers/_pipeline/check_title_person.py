@@ -63,6 +63,22 @@ PATTERNS = [
 ]
 BIO_RE = re.compile(r"\b(?:%s)\b\s*(?:OF|ON)\b" % BIO, re.I)
 
+# ★★ 2026-08-13：**卷首的出版社广告页**是这件判据的一类假阳源。
+#   Michelangelo #185 的 src-dc47a809071f（Symonds 1878 年英译《十四行诗》扫描件）：
+#   第一页是出版社给 Symonds 打的书目广告——
+#     「WORKS BY JOHN ADDINGTON SYMONDS, M.A. STUDIES OF THE GREEK POETS.
+#       First Series. Second Edition. Crown 8vo. 10s. 6d. … London: SMITH, ELDER, & CO.」
+#   `WORKS BY <人>` 是标准的作者集构式，大写率也够，于是判成「题名印的是别人」。
+#   而真正的题名页在它后面：`THE SONNETS OF MICHAEL ANGELO BUONARROTI AND
+#   TOMMASO CAMPANELLA`——`SONNETS` 不在关键词表里，所以不算「自称」。
+#   ⇒ **只跳过落在广告区里的那一个构式实例**，不放过整份文件：
+#     同一本书若另有一个真的错题名页，那一个照样要报。
+#   ★ 广告页的破绽是**书业开本与价格**（Crown 8vo／Demy 8vo／10s. 6d.），
+#     这些字样在真题名页上不会出现。
+AD_RE = re.compile(r"\b(?:crown|demy|fcap|royal|imperial)\s+\d*\s*(?:8vo|4to|12mo|16mo)\b|"
+                   r"\b\d{1,3}s\.\s*\d{1,2}d\.|\b\d{1,3}s\.\s|\bnet\s+price\b|"
+                   r"\buniform\s+with\b|\bsecond\s+edition\.\s+crown\b", re.I)
+
 # ★★ 排版门：题名页是**排成大写的**，正文和目录不是。
 #   实测把真阳性和噪声完全分开——`THE WRITINGS OF JAMES MONROE` 大写率 94%，
 #   而 11 条噪声全落在 2–11%（`Letters of general Washington to the governors`、
@@ -130,6 +146,9 @@ def scan(text: str, target: re.Pattern) -> dict:
             # 传记式构式跳过：LIFE OF X 的 X 是传主不是作者
             if BIO_RE.search(head[max(0, m.start() - 24):m.start() + 24]):
                 continue
+            # ★ 出版社广告页：只跳过这一个构式实例（窗口取前后 300 字）
+            if AD_RE.search(head[max(0, m.start() - 300):m.start() + 300]):
+                continue
             if target.search(m.group(0)):
                 continue
             if kind in CAPS_GATED and caps_ratio(m.group(0)[:56]) < MIN_CAPS:
@@ -191,6 +210,11 @@ SELF_TESTS = [
 # ★★ 真语料夹具：上面十条是我手打的，**干净得不像 OCR**，
 #    十条全绿的那一版在真文件上报了 3 条误报。这四条读真文件，不许再手打。
 REAL_CASES = [
+    # ★★ 卷首广告页（2026-08-13 抓到的假阳）：Symonds 1878 年英译本，
+    #   第一页是出版社给 Symonds 打的书目广告，真题名页在后面。
+    ("no-title", "wip-michelangelo-185/workspaces/michelangelo-buonarroti",
+     "src-dc47a809071f", r"Buonarroti",
+     "卷首是 SMITH, ELDER & CO. 给 Symonds 打的广告页（Crown 8vo. 10s. 6d.）"),
     ("MISMATCH", "wip-jefferson-175/workspaces/thomas-jefferson", "src-106864c12dfa",
      r"Jefferson", "台账说杰斐逊，正文印的是《门罗文集》第一卷"),
     ("ok", "wip-jefferson-175/workspaces/thomas-jefferson", "src-7e5b59c7c6af",
