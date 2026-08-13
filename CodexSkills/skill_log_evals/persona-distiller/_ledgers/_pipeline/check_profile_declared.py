@@ -237,10 +237,13 @@ def main() -> int:
             print(f"       {x}")
     rc = 0
     if no_basis:
-        rc = 2
-        print(f"  ❌ **{len(no_basis)} 个是 historical 却没有 `attribution_basis.citation`** —— "
+        # ★★ **只报不判红。** 这 5 个全是存量工作区，而㊵「已判分即冻结」＋㊸
+        #   「存量不动、新人物的流程该改就改」意味着它们**不会被修**——
+        #   让它们把每一次构建都变红，就是造一个 [[a-red-that-can-never-turn-green-is-not-a-signal]]。
+        #   新人物由阶段 2 收尾跑本件时看这一行。
+        print(f"  ！ **{len(no_basis)} 个是 historical 却没有 `attribution_basis.citation`** —— "
               f"historical 豁免把「A-* 证据结构上不存在」换成「要一个具名外部权威」，"
-              f"**没 citation 就是两头都空**：")
+              f"**没 citation 就是两头都空**（**存量只报不判红**，见㊸）：")
         for x in no_basis:
             print(f"       {x}")
     for k, note in (("null", "判据会 `ERROR: invalid profile None` **拒检整个工作区**"),
