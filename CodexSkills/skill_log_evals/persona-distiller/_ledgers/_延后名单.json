@@ -3352,6 +3352,22 @@
    "reason": "`creator` 池 5 条，出版年 ≤1930 的 0 条 ⇒ **0 条**。quick 门要 8 份。",
    "unblock_todo": "生 1896、卒 1982，《Animal Breeding Plans》**1937 年**首版——结构性不可能：他成名时 PD 分界已经过去。\n★ 要等到 2033 年之后，实际等于永久划掉。",
    "evidence": "_ledgers/_第4批预筛-农林牧渔师四人-2026-08-13.md"
+  },
+  {
+   "name": "Gifford Pinchot",
+   "aliases": [
+    "Pinchot, Gifford",
+    "Pinchot, Gifford, 1865-1946"
+   ],
+   "family_zh": "农林牧渔师",
+   "deferred_at": "2026-08-13",
+   "处置类": "**min_lanes 硬卡点——料极多而道只有二**（同类第 8 人）",
+   "reason": "抓回 **54 份 / 105.6 万词**，一手 49（占比 **0.9074**），抓源失败 0，独立作品 29 部。**有材料的道只有 2**（writings 50／decisions 4），quick 要 3。\n★★ 这个 2 是**全池量过的真上限**：第一轮抓 50 份得 lanes=1，把全池 192 条里「≤1930 且 creator 含 Pinchot」的 180 条逐条过 lane_of ⇒ writings 176／decisions 4／其余四道 0；那 4 条 decisions（《Report of the Forester for 1900/1901/1902/1909》）**正好被 --cap 50 截掉**，补抓回来后 lanes 1 → 2。**不查全池就会把截断错报成真值。**\n★ 逐条排除过的「可能是别的道」：《To the South Seas》(1930, 9.8 万词) 是航海游记、**0 处日期条目**不是日记；《Government forestry abroad》(1891) 发在美国经济学会刊物上、不是政府报告。",
+   "unblock_todo": "**不随年份滚动到位**——1931 年后的作品补的仍是 writings 那一道。解锁必须**换通道**：国会图书馆 Pinchot 文库（书信、日记）数字化程度未探，属新一轮可得性探测。",
+   "already_confirmed_fetchable": [
+    "54 份已取回、105.6 万词、失败 0；池里还有 114 条本轮没抓（上限截断，不是取不到）"
+   ],
+   "evidence": "_corpora/wip-pinchot-192/05-记延后-料极多而道只有二.md"
   }
  ],
  "total": 168,

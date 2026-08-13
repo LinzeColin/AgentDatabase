@@ -1,0 +1,60 @@
+# ★ **重建用的权威清单** —— 从 _fetch-manifest.json 的「已取回」现生成。
+# 任何 _ids-*.txt（探源/增量/上限）都**重建不出这批**：
+#   清单是「打算抓的」，manifest 是「真抓到的」，两者差在无文本层/取不到的那些。
+# 重建后逐份比对 manifest 里的 sha256 才算通过。
+# 本文件由 _ledgers/_pipeline/emit_ids_rebuild.py 生成，**不要手改**。
+# 份数：54
+1governmentfores00pincuoft
+1primerofforestry00pincrich
+CAT31300582
+CAT31418506
+CAT31436722
+CAT85816575
+CAT87201876
+CAT87201893
+CAT87202674
+adirondackspruc00pinc
+adirondackspruce00pinc
+aprimerforestry06pincgoog
+aprimerforestry07pincgoog
+aprimerforestry10pincgoog
+arbordaybirddayo00penn
+conservationaspr00pincrich
+countrychurchdec00gilluoft
+cu31924002881187
+cu31924003228529
+fightforconserva0000pinc_v6p5
+fightforconserva0000pinc_z4m3
+fightforconserva00pinc
+fightforconserva00pincuoft
+fightforconserva11pinc
+forestplantingin37pinc
+igovernmentfore00ferngoog
+igovernmentfore01ferngoog
+jstor-1010832
+jstor-1011668
+jstor-1014102
+jstor-1014265
+jstor-2485580
+jstor-25106242
+jstor-25120675
+jstor-2560469
+p2primerofforest00pincuoft
+practicalassista00pincrich
+practicalassista21pinc
+practicalassista21pinc_0
+practicalassista21pinc_1
+primerofforestry0000unse
+primerofforestry00pinc
+primerofforestry00pincuoft
+reportofforester00pinc
+reportofforester00pinc_0
+reportofforester00pinc_1
+reportofforester00pinc_2
+sixthousandcount00gillrich
+thefightforconse11238gut
+thetrainingofafo31367gut
+timbertreesfores01pinc
+tosouthseascruis0000pinc
+trainingoffores00pinc
+whitepinestudywi00pincuoft

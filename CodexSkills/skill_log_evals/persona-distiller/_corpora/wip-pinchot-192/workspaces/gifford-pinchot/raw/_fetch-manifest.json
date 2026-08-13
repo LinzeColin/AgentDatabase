@@ -1,0 +1,1322 @@
+{
+  "生成时刻": "2026-08-13T17:17:17",
+  "请求数": 4,
+  "已取回": 54,
+  "skipped_access_restricted": 0,
+  "失败": 0,
+  "并发降级": "无（全程并发 4）",
+  "总词数": 1055824,
+  "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
+  "记录": [
+    {
+      "identifier": "1governmentfores00pincuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "1governmentfores00pincuoft.txt",
+      "source_url": "https://archive.org/download/1governmentfores00pincuoft/1governmentfores00pincuoft_djvu.txt",
+      "sha256": "322d8f9a39192dc11a4f34c99b890a368ca5e70a631ff6932f006622c254f300",
+      "bytes": 191462,
+      "words": 31420,
+      "fetched_at": "2026-08-13T17:13:04",
+      "ia_date": "1891",
+      "ia_year": "",
+      "ia_publicdate": "2007-11-20 14:53:18",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "Bowers, Edward A",
+        "Fernow, B. E. (Bernhard Eduard), 1851-1923"
+      ],
+      "ia_title": "1. Government forestry abroad",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1831",
+        "1889",
+        "1890",
+        "1891",
+        "1966"
+      ],
+      "digitization_years": [
+        "2007"
+      ]
+    },
+    {
+      "identifier": "1primerofforestry00pincrich",
+      "status": "已取回",
+      "note": "",
+      "file": "1primerofforestry00pincrich.txt",
+      "source_url": "https://archive.org/download/1primerofforestry00pincrich/1primerofforestry00pincrich_djvu.txt",
+      "sha256": "6595128fdbfc14dfaa8f920a4a07a82e195e203ec2f71f91913b2474cd932bb8",
+      "bytes": 121241,
+      "words": 18251,
+      "fetched_at": "2026-08-13T17:13:04",
+      "ia_date": "1899-1905",
+      "ia_year": "",
+      "ia_publicdate": "2006-11-09 13:54:54",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "Pinchot, Gifford, 1865-1946",
+        "Pinchot, Gifford, 1865-1946"
+      ],
+      "ia_title": "A primer of forestry",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1699",
+        "1899"
+      ],
+      "digitization_years": [
+        "2006"
+      ]
+    },
+    {
+      "identifier": "CAT31300582",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31300582.txt",
+      "source_url": "https://archive.org/download/CAT31300582/cat31300582_djvu.txt",
+      "sha256": "5bdad7feca59e8866aadabcac0363745676b5e8d1e56ed118ba88b2898383ce3",
+      "bytes": 10649,
+      "words": 1721,
+      "fetched_at": "2026-08-13T17:13:02",
+      "ia_date": "1907",
+      "ia_year": "1907",
+      "ia_publicdate": "2016-05-20 16:09:23",
+      "ia_creator": [
+        "Pinchot, Gifford.",
+        "Meekham.H. S."
+      ],
+      "ia_title": "Forest atlas of the national forests of the United States. Sawtooth folio",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31418506",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31418506.txt",
+      "source_url": "https://archive.org/download/CAT31418506/CAT31418506_djvu.txt",
+      "sha256": "a17ac6e132775c40aa2cdea21cfb5b19d9906489528b460b298fcdbc536ae0a5",
+      "bytes": 10315,
+      "words": 1578,
+      "fetched_at": "2026-08-13T17:13:13",
+      "ia_date": "1907",
+      "ia_year": "",
+      "ia_publicdate": "2020-08-10 11:39:43",
+      "ia_creator": "Pinchot, Gifford, 1865-1946, author",
+      "ia_title": "Preparation of the forest atlas",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1907"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT31436722",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT31436722.txt",
+      "source_url": "https://archive.org/download/CAT31436722/CAT31436722_djvu.txt",
+      "sha256": "a64106640b6ac2ba7fe0e25c3362b138e783e62915872d8f04c74c97f89c3757",
+      "bytes": 10844,
+      "words": 1558,
+      "fetched_at": "2026-08-13T17:13:18",
+      "ia_date": "1909",
+      "ia_year": "",
+      "ia_publicdate": "2020-10-30 12:17:32",
+      "ia_creator": "Pinchot, Gifford, 1865-1946, author",
+      "ia_title": "Instructions regarding grazing trespass",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1908",
+        "1909"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT85816575",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT85816575.txt",
+      "source_url": "https://archive.org/download/CAT85816575/farmbul0173_djvu.txt",
+      "sha256": "d31da653aa342b24e0b65a1de24af9609c1914ab1a98238f4868633822f65c0e",
+      "bytes": 90639,
+      "words": 15928,
+      "fetched_at": "2026-08-13T17:13:10",
+      "ia_date": "1903",
+      "ia_year": "1903",
+      "ia_publicdate": "2014-05-07 20:04:08",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "A primer of forestry",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1903"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT87201876",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT87201876.txt",
+      "source_url": "https://archive.org/download/CAT87201876/farmbul0327_djvu.txt",
+      "sha256": "d1ab2aab28896ee844d428c5323dd4161153ea73092b1801456f002592a8071f",
+      "bytes": 24110,
+      "words": 4290,
+      "fetched_at": "2026-08-13T17:13:14",
+      "ia_date": "1908",
+      "ia_year": "",
+      "ia_publicdate": "2014-05-14 20:02:08",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "The conservation of natural resources",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1908"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT87201893",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT87201893.txt",
+      "source_url": "https://archive.org/download/CAT87201893/farmbul0358_djvu.txt",
+      "sha256": "bb4b26df15219effc65eedc7af956d7780f87f16ad0d52f7dbea810716a15b43",
+      "bytes": 94474,
+      "words": 16302,
+      "fetched_at": "2026-08-13T17:13:21",
+      "ia_date": "1909",
+      "ia_year": "",
+      "ia_publicdate": "2014-05-14 20:06:11",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "A primer of forestry : part II : practical forestry",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1895",
+        "1905",
+        "1909"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "CAT87202674",
+      "status": "已取回",
+      "note": "",
+      "file": "CAT87202674.txt",
+      "source_url": "https://archive.org/download/CAT87202674/CAT87202674_djvu.txt",
+      "sha256": "94f551e7b090c7e5c026b062ee5dfa9aa9f0b4c868962de9d4a769c17516d68e",
+      "bytes": 98003,
+      "words": 14906,
+      "fetched_at": "2026-08-13T17:13:22",
+      "ia_date": "1909",
+      "ia_year": "",
+      "ia_publicdate": "2014-10-14 17:33:29",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "A primer of forestry : part I, the forest",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1903",
+        "1909"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "adirondackspruc00pinc",
+      "status": "已取回",
+      "note": "",
+      "file": "adirondackspruc00pinc.txt",
+      "source_url": "https://archive.org/download/adirondackspruc00pinc/adirondackspruc00pinc_djvu.txt",
+      "sha256": "b229afb3b09577c924a03251932de9627122ebf861c0b3e05f0a0438ba84f0c7",
+      "bytes": 182140,
+      "words": 32218,
+      "fetched_at": "2026-08-13T17:13:09",
+      "ia_date": "1898",
+      "ia_year": "",
+      "ia_publicdate": "2012-01-19 02:56:57",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "The Adirondack spruce; a study of the forest in Ne-ha-sa-ne park, with tables of volume and yield and a working plan for conservative lumbering;",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1896",
+        "1898"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "adirondackspruce00pinc",
+      "status": "已取回",
+      "note": "",
+      "file": "adirondackspruce00pinc.txt",
+      "source_url": "https://archive.org/download/adirondackspruce00pinc/adirondackspruce00pinc_djvu.txt",
+      "sha256": "b483f8c580068002d53aa49ab14a8e0fbef12dbf6bc4f2e8fa5962e610e1615a",
+      "bytes": 178435,
+      "words": 31124,
+      "fetched_at": "2026-08-13T17:13:34",
+      "ia_date": "1898",
+      "ia_year": "1898",
+      "ia_publicdate": "2009-07-23 15:11:32",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "The Adirondack spruce; a study of the forest in Ne-Ha-Sa-Ne Park. With tables of volume and yield and a working-plan for conservative lumbering",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1808",
+        "1898"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "aprimerforestry06pincgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "aprimerforestry06pincgoog.txt",
+      "source_url": "https://archive.org/download/aprimerforestry06pincgoog/aprimerforestry06pincgoog_djvu.txt",
+      "sha256": "30219f4fb85d13f94db92cb321f251b0587458c73f93b8703395348be6ba7395",
+      "bytes": 107219,
+      "words": 18351,
+      "fetched_at": "2026-08-13T17:13:39",
+      "ia_date": "1899",
+      "ia_year": "1905",
+      "ia_publicdate": "2009-05-31 12:49:04",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "Pinchot, Gifford, 1865-1946. Forest. 1899",
+        "Pinchot, Gifford, 1865-1946. Practical forestry. 1905"
+      ],
+      "ia_title": "A primer of forestry ",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1895",
+        "1903",
+        "1905"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "aprimerforestry07pincgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "aprimerforestry07pincgoog.txt",
+      "source_url": "https://archive.org/download/aprimerforestry07pincgoog/aprimerforestry07pincgoog_djvu.txt",
+      "sha256": "46b4ae016829d7a463a83e35e69b80502afedfa6f7c2063ba82298ad8467178e",
+      "bytes": 108752,
+      "words": 18957,
+      "fetched_at": "2026-08-13T17:13:46",
+      "ia_date": "1899",
+      "ia_year": "1900",
+      "ia_publicdate": "2009-05-31 13:04:08",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "Pinchot, Gifford, 1865-1946. Forest. 1899",
+        "Pinchot, Gifford, 1865-1946. Practical forestry. 1905"
+      ],
+      "ia_title": "A primer of forestry ",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1900"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "aprimerforestry10pincgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "aprimerforestry10pincgoog.txt",
+      "source_url": "https://archive.org/download/aprimerforestry10pincgoog/aprimerforestry10pincgoog_djvu.txt",
+      "sha256": "05c2071b9c08d504f741c51c1b552b54c8259949ec3648cb9ee6c78d283ed976",
+      "bytes": 112984,
+      "words": 19352,
+      "fetched_at": "2026-08-13T17:13:52",
+      "ia_date": "1899",
+      "ia_year": "1899",
+      "ia_publicdate": "2009-06-21 23:51:47",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "Pinchot, Gifford, 1865-1946. Forest. 1899",
+        "Pinchot, Gifford, 1865-1946. Practical forestry. 1905"
+      ],
+      "ia_title": "A primer of forestry ",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1899"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "arbordaybirddayo00penn",
+      "status": "已取回",
+      "note": "",
+      "file": "arbordaybirddayo00penn.txt",
+      "source_url": "https://archive.org/download/arbordaybirddayo00penn/arbordaybirddayo00penn_djvu.txt",
+      "sha256": "10e9fbdffd21efb293ce560ca2345796190839d38ca10db2e7a4df8e9039495b",
+      "bytes": 75364,
+      "words": 12374,
+      "fetched_at": "2026-08-13T17:13:32",
+      "ia_date": "1922",
+      "ia_year": "",
+      "ia_publicdate": "2010-04-01 12:12:38",
+      "ia_creator": [
+        "Pennsylvania. Dept. of public instruction. [from old catalog]",
+        "Sproul, William Cameron, 1870- [from old catalog]",
+        "Finegan, Thomas Edward, 1866- [from old catalog]",
+        "Pinchot, Gifford, 1865-1946",
+        "Shoemaker, Henry Wharton, 1880- [from old catalog]",
+        "MacFarland, John Horace, 1859- [from old catalog]",
+        "Stuart, Robert Young, 1883- [from old catalog]",
+        "Ashley, George Hall, 1866- [from old catalog]",
+        "Crabtree, Fred. [from old catalog]",
+        "Watts, Ralph L. (Ralph Levi), 1869-1949"
+      ],
+      "ia_title": "Arbor day and bird day ... October 27, 1922",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1913",
+        "1922",
+        "1923",
+        "1924",
+        "1925",
+        "1926",
+        "1927",
+        "1928"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "conservationaspr00pincrich",
+      "status": "已取回",
+      "note": "",
+      "file": "conservationaspr00pincrich.txt",
+      "source_url": "https://archive.org/download/conservationaspr00pincrich/conservationaspr00pincrich_djvu.txt",
+      "sha256": "cf534e3fbf13127d78fce80e8f71f9ae43fcca979c6f0f2fed954fa02512a594",
+      "bytes": 72019,
+      "words": 10633,
+      "fetched_at": "2026-08-13T17:13:04",
+      "ia_date": "1913",
+      "ia_year": "",
+      "ia_publicdate": "2007-07-30 17:45:20",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "Thomas, Ed. H"
+      ],
+      "ia_title": "Conservation as practised : a specific answer to a specific attack, with a few words on the alleged Western discontent with conservation",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1891",
+        "1892",
+        "1908",
+        "1910",
+        "1912",
+        "1913"
+      ],
+      "digitization_years": [
+        "2007"
+      ]
+    },
+    {
+      "identifier": "countrychurchdec00gilluoft",
+      "status": "已取回",
+      "note": "",
+      "file": "countrychurchdec00gilluoft.txt",
+      "source_url": "https://archive.org/download/countrychurchdec00gilluoft/countrychurchdec00gilluoft_djvu.txt",
+      "sha256": "b511b4b5280cc10c9f798231cb1fc2c00c6e230a146f8a48a8dfa74914b2f524",
+      "bytes": 299323,
+      "words": 43476,
+      "fetched_at": "2026-08-13T17:13:45",
+      "ia_date": "1913",
+      "ia_year": "",
+      "ia_publicdate": "2007-10-31 14:44:19",
+      "ia_creator": [
+        "Gill, Charles Otis, 1868-1937?",
+        "Federal Council of the Churches of Christ in America",
+        "Pinchot, Gifford, 1865-1946"
+      ],
+      "ia_title": "The country church : the decline of its influence and the remedy",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1909",
+        "1913"
+      ],
+      "digitization_years": [
+        "2007"
+      ]
+    },
+    {
+      "identifier": "cu31924002881187",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924002881187.txt",
+      "source_url": "https://archive.org/download/cu31924002881187/cu31924002881187_djvu.txt",
+      "sha256": "ce416fd66998fc793f1942c944a227b59669df5f19b9b9a964e4f3731f03a2ab",
+      "bytes": 445523,
+      "words": 73184,
+      "fetched_at": "2026-08-13T17:13:52",
+      "ia_date": "1897",
+      "ia_year": "",
+      "ia_publicdate": "2009-10-26 13:09:19",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "Ashe, W. W. (William Willard), 1872-1932"
+      ],
+      "ia_title": "Timber trees and forests of North Carolina",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1897"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "cu31924003228529",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924003228529.txt",
+      "source_url": "https://archive.org/download/cu31924003228529/cu31924003228529_djvu.txt",
+      "sha256": "f54016cd2ba0e781085cd0876a36f543b0e7e8907b5d62dfa992b98a566c50ae",
+      "bytes": 138997,
+      "words": 23350,
+      "fetched_at": "2026-08-13T17:13:55",
+      "ia_date": "1917",
+      "ia_year": "",
+      "ia_publicdate": "2009-10-19 12:34:16",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "The training of a forester",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914",
+        "1917"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "fightforconserva0000pinc_v6p5",
+      "status": "已取回",
+      "note": "",
+      "file": "fightforconserva0000pinc_v6p5.txt",
+      "source_url": "https://archive.org/download/fightforconserva0000pinc_v6p5/fightforconserva0000pinc_v6p5_djvu.txt",
+      "sha256": "34e6f14798feb823de21038f1d608976099e4805729476774debcc2d70cfaf65",
+      "bytes": 139667,
+      "words": 23670,
+      "fetched_at": "2026-08-13T17:13:30",
+      "ia_date": "1910",
+      "ia_year": "",
+      "ia_publicdate": "2022-10-07 09:23:57",
+      "ia_creator": "Pinchot, Gifford, 1865-1946, author",
+      "ia_title": "The fight for conservation ",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1896",
+        "1910"
+      ],
+      "digitization_years": [
+        "2022"
+      ]
+    },
+    {
+      "identifier": "fightforconserva0000pinc_z4m3",
+      "status": "已取回",
+      "note": "",
+      "file": "fightforconserva0000pinc_z4m3.txt",
+      "source_url": "https://archive.org/download/fightforconserva0000pinc_z4m3/fightforconserva0000pinc_z4m3_djvu.txt",
+      "sha256": "351bb80d18f27bb4dcbd6e7a9732a27880b4fc154751809b2481a0d3919d3302",
+      "bytes": 164453,
+      "words": 27873,
+      "fetched_at": "2026-08-13T17:13:37",
+      "ia_date": "1910",
+      "ia_year": "",
+      "ia_publicdate": "2024-07-27 01:07:06",
+      "ia_creator": "Pinchot, Gifford, 1865-1946, author",
+      "ia_title": "The fight for conservation ",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1865",
+        "1872",
+        "1874",
+        "1884",
+        "1890",
+        "1892",
+        "1896",
+        "1897",
+        "1901",
+        "1903",
+        "1905",
+        "1908"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "fightforconserva00pinc",
+      "status": "已取回",
+      "note": "",
+      "file": "fightforconserva00pinc.txt",
+      "source_url": "https://archive.org/download/fightforconserva00pinc/fightforconserva00pinc_djvu.txt",
+      "sha256": "85acbfc8103f2edae95aeaf716667ff8d80fb4a79be5a8e39fa25904fc1e3518",
+      "bytes": 167042,
+      "words": 24681,
+      "fetched_at": "2026-08-13T17:13:17",
+      "ia_date": "1910",
+      "ia_year": "",
+      "ia_publicdate": "2008-08-06 15:34:40",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "The fight for conservation",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1910"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "fightforconserva00pincuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "fightforconserva00pincuoft.txt",
+      "source_url": "https://archive.org/download/fightforconserva00pincuoft/fightforconserva00pincuoft_djvu.txt",
+      "sha256": "5b28c3abfc591e4ec5f674e6b05fe85e04270ac8ebcd66b5c0839291e6c7bd36",
+      "bytes": 166100,
+      "words": 24607,
+      "fetched_at": "2026-08-13T17:13:09",
+      "ia_date": "1910",
+      "ia_year": "",
+      "ia_publicdate": "2007-11-26 19:14:41",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "The fight for conservation",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1896",
+        "1910"
+      ],
+      "digitization_years": [
+        "2007"
+      ]
+    },
+    {
+      "identifier": "fightforconserva11pinc",
+      "status": "已取回",
+      "note": "",
+      "file": "fightforconserva11pinc.txt",
+      "source_url": "https://archive.org/download/fightforconserva11pinc/fightforconserva11pinc_djvu.txt",
+      "sha256": "731286d426123393401c04c7c08a208f0ca57e550621f4c2db7e01b2b69bb4f1",
+      "bytes": 165457,
+      "words": 24501,
+      "fetched_at": "2026-08-13T17:13:58",
+      "ia_date": "1911",
+      "ia_year": "",
+      "ia_publicdate": "2009-01-14 17:23:58",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "The fight for conservation",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1896",
+        "1911"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "forestplantingin37pinc",
+      "status": "已取回",
+      "note": "",
+      "file": "forestplantingin37pinc.txt",
+      "source_url": "https://archive.org/download/forestplantingin37pinc/forestplantingin37pinc_djvu.txt",
+      "sha256": "93b8f6b0df3377ffefebae85ac99b98cb97aaaa0949d1c8d69ad6cae54247c06",
+      "bytes": 10974,
+      "words": 1951,
+      "fetched_at": "2026-08-13T17:14:01",
+      "ia_date": "1909",
+      "ia_year": "",
+      "ia_publicdate": "2013-07-01 11:27:32",
+      "ia_creator": [
+        "Pinchot, Gifford",
+        "United States. Forest Service"
+      ],
+      "ia_title": "Forest planting in the sand-hill region of Nebraska",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1890",
+        "1905",
+        "1909"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "igovernmentfore00ferngoog",
+      "status": "已取回",
+      "note": "",
+      "file": "igovernmentfore00ferngoog.txt",
+      "source_url": "https://archive.org/download/igovernmentfore00ferngoog/igovernmentfore00ferngoog_djvu.txt",
+      "sha256": "684fa2bfd08e1320c78c25339bbae24bf97aad951d0b66e4975614b48c31ac13",
+      "bytes": 96940,
+      "words": 16094,
+      "fetched_at": "2026-08-13T17:14:06",
+      "ia_date": "1891",
+      "ia_year": "1891",
+      "ia_publicdate": "2008-02-08 15:38:26",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "Bowers, Edward Augustus, 1857-1924",
+        "Fernow, Bernhard Eduard, 1851-1923"
+      ],
+      "ia_title": "I. Government forestry abroad",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1889",
+        "1890",
+        "1891",
+        "1967"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "igovernmentfore01ferngoog",
+      "status": "已取回",
+      "note": "",
+      "file": "igovernmentfore01ferngoog.txt",
+      "source_url": "https://archive.org/download/igovernmentfore01ferngoog/igovernmentfore01ferngoog_djvu.txt",
+      "sha256": "db5f968850ed244a47b8bc6bcd8b7cef8e8bffe779cb1122a3ad2d459045d7ef",
+      "bytes": 192684,
+      "words": 31789,
+      "fetched_at": "2026-08-13T17:14:10",
+      "ia_date": "1891",
+      "ia_year": "1891",
+      "ia_publicdate": "2009-01-29 03:44:31",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "Bowers, Edward Augustus, 1857-1924",
+        "Fernow, Bernhard Eduard, 1851-1923"
+      ],
+      "ia_title": "I. Government forestry abroad",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1889",
+        "1890",
+        "1891"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "jstor-1010832",
+      "status": "已取回",
+      "note": "",
+      "file": "jstor-1010832.txt",
+      "source_url": "https://archive.org/download/jstor-1010832/1010832_djvu.txt",
+      "sha256": "05a622edbb4cc7054e0f57fa903bfb48cc4c570f6a0874a61d8185e695b471bb",
+      "bytes": 22043,
+      "words": 3642,
+      "fetched_at": "2026-08-13T17:13:41",
+      "ia_date": "1908-01-01",
+      "ia_year": "",
+      "ia_publicdate": "2013-03-13 21:59:20",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "The Relation of Forests to Stream Control",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1789",
+        "1842",
+        "1861",
+        "1864",
+        "1877",
+        "1896",
+        "1897",
+        "1900",
+        "1901",
+        "1902"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "jstor-1011668",
+      "status": "已取回",
+      "note": "",
+      "file": "jstor-1011668.txt",
+      "source_url": "https://archive.org/download/jstor-1011668/1011668_djvu.txt",
+      "sha256": "c16a2755907f617d3901de4c84994a5ba94428bb9d95e18b875b7309a7146551",
+      "bytes": 26336,
+      "words": 4306,
+      "fetched_at": "2026-08-13T17:13:46",
+      "ia_date": "1909-05-01",
+      "ia_year": "",
+      "ia_publicdate": "2013-03-13 21:58:00",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "Forestry on Private Lands",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1898",
+        "1899",
+        "1900",
+        "1908"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "jstor-1014102",
+      "status": "已取回",
+      "note": "",
+      "file": "jstor-1014102.txt",
+      "source_url": "https://archive.org/download/jstor-1014102/1014102_djvu.txt",
+      "sha256": "adb7489db5720c09db856719c5508c5ab686e8cb8ad07b50d1ecd0a1ba5dd0fd",
+      "bytes": 18484,
+      "words": 3251,
+      "fetched_at": "2026-08-13T17:13:50",
+      "ia_date": "1917-11-01",
+      "ia_year": "",
+      "ia_publicdate": "2013-03-13 23:15:23",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "An Agricultural Policy for the United States in War Time",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "jstor-1014265",
+      "status": "已取回",
+      "note": "",
+      "file": "jstor-1014265.txt",
+      "source_url": "https://archive.org/download/jstor-1014265/1014265_djvu.txt",
+      "sha256": "d7271c3e39194d9ef2d248c7be099ee95e9d8039eb682659b038efb109c21eed",
+      "bytes": 21483,
+      "words": 3844,
+      "fetched_at": "2026-08-13T17:13:53",
+      "ia_date": "1918-07-01",
+      "ia_year": "",
+      "ia_publicdate": "2013-03-13 23:11:25",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "Essentials to a Food Program for Next Year",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914",
+        "1915",
+        "1916",
+        "1917",
+        "1918",
+        "1919",
+        "1920"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "jstor-2485580",
+      "status": "已取回",
+      "note": "",
+      "file": "jstor-2485580.txt",
+      "source_url": "https://archive.org/download/jstor-2485580/2485580_djvu.txt",
+      "sha256": "269835e5c1cf44f0b67bd0d019ac68629e7d92e6482d300d0fae9d2143e5383c",
+      "bytes": 93442,
+      "words": 15503,
+      "fetched_at": "2026-08-13T17:13:59",
+      "ia_date": "1891-05-01",
+      "ia_year": "",
+      "ia_publicdate": "2013-03-20 06:00:14",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "Government Forestry Abroad",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1885",
+        "1889"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "jstor-25106242",
+      "status": "已取回",
+      "note": "",
+      "file": "jstor-25106242.txt",
+      "source_url": "https://archive.org/download/jstor-25106242/25106242_djvu.txt",
+      "sha256": "43c88798ac08198834852eac3ef423288934d5da978c7c7905e5b34bc944173c",
+      "bytes": 32786,
+      "words": 5813,
+      "fetched_at": "2026-08-13T17:14:04",
+      "ia_date": "1908-11-01",
+      "ia_year": "",
+      "ia_publicdate": "2013-03-12 09:29:26",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "The Foundations of Prosperityx",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "jstor-25120675",
+      "status": "已取回",
+      "note": "",
+      "file": "jstor-25120675.txt",
+      "source_url": "https://archive.org/download/jstor-25120675/25120675_djvu.txt",
+      "sha256": "ef44835eda9172d4db1875ee9dc2ab06d273a4216e9fcde4890c3a6ce9ddd2df",
+      "bytes": 25631,
+      "words": 4234,
+      "fetched_at": "2026-08-13T17:14:07",
+      "ia_date": "1921-02-01",
+      "ia_year": "",
+      "ia_publicdate": "2013-03-12 11:01:01",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "The Economic Significance of Forestry",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1920"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "jstor-2560469",
+      "status": "已取回",
+      "note": "",
+      "file": "jstor-2560469.txt",
+      "source_url": "https://archive.org/download/jstor-2560469/2560469_djvu.txt",
+      "sha256": "cd1bb39e8e5333dc1750968818cf05a341a038d7fdfba5061e638972f0939051",
+      "bytes": 9113,
+      "words": 1479,
+      "fetched_at": "2026-08-13T17:14:06",
+      "ia_date": "1891-01-01",
+      "ia_year": "",
+      "ia_publicdate": "2013-03-20 05:55:47",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "Government Forestry Abroad",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1843",
+        "1875"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "p2primerofforest00pincuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "p2primerofforest00pincuoft.txt",
+      "source_url": "https://archive.org/download/p2primerofforest00pincuoft/p2primerofforest00pincuoft_djvu.txt",
+      "sha256": "b9a79ec3c37fdb726b6602da5b5705ee094b8f75d80ab7cf212a58545b18071c",
+      "bytes": 117719,
+      "words": 17575,
+      "fetched_at": "2026-08-13T17:13:18",
+      "ia_date": "1900-05",
+      "ia_year": "",
+      "ia_publicdate": "2007-11-20 01:30:24",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "A primer of forestry",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1895",
+        "1903",
+        "1905"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "practicalassista00pincrich",
+      "status": "已取回",
+      "note": "",
+      "file": "practicalassista00pincrich.txt",
+      "source_url": "https://archive.org/download/practicalassista00pincrich/practicalassista00pincrich_djvu.txt",
+      "sha256": "6a80d697e38f82e7526c7953660da71d5710735b6b504ba01bfc43bb93e97def",
+      "bytes": 17067,
+      "words": 2530,
+      "fetched_at": "2026-08-13T17:13:23",
+      "ia_date": "1907",
+      "ia_year": "1907",
+      "ia_publicdate": "2006-11-30 16:38:50",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "Practical assistance to tree planters",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "practicalassista21pinc",
+      "status": "已取回",
+      "note": "",
+      "file": "practicalassista21pinc.txt",
+      "source_url": "https://archive.org/download/practicalassista21pinc/practicalassista21pinc_djvu.txt",
+      "sha256": "7ada4506d166c44a09b8309231e52103c85c1716418476b347ee58929aab18be",
+      "bytes": 13938,
+      "words": 2013,
+      "fetched_at": "2026-08-13T17:14:13",
+      "ia_date": "1898",
+      "ia_year": "",
+      "ia_publicdate": "2013-07-01 11:27:02",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "United States. Division of Forestry"
+      ],
+      "ia_title": "Practical assistance to farmers, lumbermen, and others in handling forest lands",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1898"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "practicalassista21pinc_0",
+      "status": "已取回",
+      "note": "",
+      "file": "practicalassista21pinc_0.txt",
+      "source_url": "https://archive.org/download/practicalassista21pinc_0/practicalassista21pinc_0_djvu.txt",
+      "sha256": "0b2c5b52a55a5ee1b985857c93ef60c471cbca668df31a095335444518a6656b",
+      "bytes": 13947,
+      "words": 2004,
+      "fetched_at": "2026-08-13T17:14:15",
+      "ia_date": "1903",
+      "ia_year": "",
+      "ia_publicdate": "2013-07-01 11:27:03",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "Practical assistance to farmers, lumbermen, and others in handling forest lands",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1898",
+        "1903"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "practicalassista21pinc_1",
+      "status": "已取回",
+      "note": "",
+      "file": "practicalassista21pinc_1.txt",
+      "source_url": "https://archive.org/download/practicalassista21pinc_1/practicalassista21pinc_1_djvu.txt",
+      "sha256": "e1e7c8cbefe67f14dd8cb7db714a25f1be685082ef2d17ebf797c50172dece5b",
+      "bytes": 13277,
+      "words": 1918,
+      "fetched_at": "2026-08-13T17:14:18",
+      "ia_date": "1907",
+      "ia_year": "",
+      "ia_publicdate": "2013-07-01 11:27:04",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "United States. Forest Service"
+      ],
+      "ia_title": "Practical assistance to farmers, lumbermen, and other owners of forest lands",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1907",
+        "2003"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "primerofforestry0000unse",
+      "status": "已取回",
+      "note": "",
+      "file": "primerofforestry0000unse.txt",
+      "source_url": "https://archive.org/download/primerofforestry0000unse/primerofforestry0000unse_djvu.txt",
+      "sha256": "f2d964ba500b366bb4664992ce75c6d0155852929a56580a66f4da793b6c67a3",
+      "bytes": 108212,
+      "words": 18864,
+      "fetched_at": "2026-08-13T17:14:10",
+      "ia_date": "1900",
+      "ia_year": "",
+      "ia_publicdate": "2024-05-28 04:31:49",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "A Primer of Forestry Part 1 The Forest",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1599",
+        "1900",
+        "1901"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "primerofforestry00pinc",
+      "status": "已取回",
+      "note": "",
+      "file": "primerofforestry00pinc.txt",
+      "source_url": "https://archive.org/download/primerofforestry00pinc/primerofforestry00pinc_djvu.txt",
+      "sha256": "81bae3396e93c6c5ddfb51f4665b58837cc2e7b77db8fd1bb95d629c7c38ca2f",
+      "bytes": 91496,
+      "words": 16048,
+      "fetched_at": "2026-08-13T17:13:13",
+      "ia_date": "1903",
+      "ia_year": "",
+      "ia_publicdate": "2009-07-22 11:44:09",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "A primer of forestry",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "primerofforestry00pincuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "primerofforestry00pincuoft.txt",
+      "source_url": "https://archive.org/download/primerofforestry00pincuoft/primerofforestry00pincuoft_djvu.txt",
+      "sha256": "3ce78471529aba29fc5118edb42ae005e0d4e69a44024b170dff3a133fc7e61a",
+      "bytes": 212811,
+      "words": 32144,
+      "fetched_at": "2026-08-13T17:13:28",
+      "ia_date": "1903-5",
+      "ia_year": "",
+      "ia_publicdate": "2007-03-15 14:16:06",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "A primer of forestry",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1903"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "reportofforester00pinc",
+      "status": "已取回",
+      "note": "",
+      "file": "reportofforester00pinc.txt",
+      "source_url": "https://archive.org/download/reportofforester00pinc/reportofforester00pinc_djvu.txt",
+      "sha256": "93bd9324f7f6bcc48329274022ed7d5e473eb814df59132a1c4504e7c5e6e9f0",
+      "bytes": 28084,
+      "words": 3941,
+      "fetched_at": "2026-08-13T17:17:14",
+      "ia_date": "1900",
+      "ia_year": "",
+      "ia_publicdate": "2013-06-19 15:00:17",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "Report of the Forester for 1900",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1604",
+        "1898",
+        "1899",
+        "1900"
+      ],
+      "digitization_years": [
+        "2013"
+      ]
+    },
+    {
+      "identifier": "reportofforester00pinc_0",
+      "status": "已取回",
+      "note": "",
+      "file": "reportofforester00pinc_0.txt",
+      "source_url": "https://archive.org/download/reportofforester00pinc_0/reportofforester00pinc_0_djvu.txt",
+      "sha256": "c4a929a95a25b6531f0c05cd9d4d25726439b8fd49b5e53eee6f90200a764d76",
+      "bytes": 53059,
+      "words": 7488,
+      "fetched_at": "2026-08-13T17:17:15",
+      "ia_date": "1901",
+      "ia_year": "",
+      "ia_publicdate": "2013-06-19 15:00:18",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "Report of the Forester for 1901",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1604",
+        "1898",
+        "1900",
+        "1901"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "reportofforester00pinc_1",
+      "status": "已取回",
+      "note": "",
+      "file": "reportofforester00pinc_1.txt",
+      "source_url": "https://archive.org/download/reportofforester00pinc_1/reportofforester00pinc_1_djvu.txt",
+      "sha256": "5183d19ee3ed9ca2e6491ef5d97847c559348c3ce5c1174e46069405f48178b7",
+      "bytes": 101637,
+      "words": 14419,
+      "fetched_at": "2026-08-13T17:17:17",
+      "ia_date": "1902",
+      "ia_year": "",
+      "ia_publicdate": "2013-06-19 15:00:19",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "Report of the Forester for 1902",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1604",
+        "1809",
+        "1902"
+      ],
+      "digitization_years": [
+        "2013"
+      ]
+    },
+    {
+      "identifier": "reportofforester00pinc_2",
+      "status": "已取回",
+      "note": "",
+      "file": "reportofforester00pinc_2.txt",
+      "source_url": "https://archive.org/download/reportofforester00pinc_2/reportofforester00pinc_2_djvu.txt",
+      "sha256": "72c41b48f08951f88ca1c35e36813735650f4a8600eadc3e95722afeb5c549ae",
+      "bytes": 161203,
+      "words": 22620,
+      "fetched_at": "2026-08-13T17:17:13",
+      "ia_date": "1909",
+      "ia_year": "",
+      "ia_publicdate": "2013-06-19 15:00:20",
+      "ia_creator": "Pinchot, Gifford",
+      "ia_title": "Report of the Forester for 1909",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1604",
+        "1908",
+        "1909",
+        "1910"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "sixthousandcount00gillrich",
+      "status": "已取回",
+      "note": "",
+      "file": "sixthousandcount00gillrich.txt",
+      "source_url": "https://archive.org/download/sixthousandcount00gillrich/sixthousandcount00gillrich_djvu.txt",
+      "sha256": "b3ea93c881b1c49dc060045aee637e4c29453063a549b1dd489406f8440545c9",
+      "bytes": 272986,
+      "words": 40618,
+      "fetched_at": "2026-08-13T17:13:27",
+      "ia_date": "1919",
+      "ia_year": "",
+      "ia_publicdate": "2007-06-12 22:53:03",
+      "ia_creator": [
+        "Gill, Charles Otis",
+        "Pinchot, Gifford, 1865-1946"
+      ],
+      "ia_title": "Six thousand country churches",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1910",
+        "1917",
+        "1919"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "thefightforconse11238gut",
+      "status": "已取回",
+      "note": "",
+      "file": "thefightforconse11238gut.txt",
+      "source_url": "https://archive.org/download/thefightforconse11238gut/11238-8.txt",
+      "sha256": "42f290f85d12b7f1d1972fa61384e1abf9a1cb2b06ffb865a200161aeba90b42",
+      "bytes": 157716,
+      "words": 26317,
+      "fetched_at": "2026-08-13T17:14:14",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2006-12-07",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "The Fight for Conservation",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1896",
+        "1910"
+      ],
+      "digitization_years": [
+        "2004"
+      ]
+    },
+    {
+      "identifier": "thetrainingofafo31367gut",
+      "status": "已取回",
+      "note": "",
+      "file": "thetrainingofafo31367gut.txt",
+      "source_url": "https://archive.org/download/thetrainingofafo31367gut/31367-8.txt",
+      "sha256": "c16a0e091f274ff7b66eca82eaeac5aa6d31e3a2b5df8ba95047b67e1bd52b0a",
+      "bytes": 145360,
+      "words": 23837,
+      "fetched_at": "2026-08-13T17:14:14",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2011-07-19 06:35:50",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "The Training of a Forester",
+      "ia_licenseurl": "http://www.gnu.org/licenses/gpl.html",
+      "titlepage_years": [
+        "1914"
+      ],
+      "digitization_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "timbertreesfores01pinc",
+      "status": "已取回",
+      "note": "",
+      "file": "timbertreesfores01pinc.txt",
+      "source_url": "https://archive.org/download/timbertreesfores01pinc/timbertreesfores01pinc_djvu.txt",
+      "sha256": "797e7c875307e49cd6ed97ddac6cac58846f919f3ca89a56f0088dbf02a8239c",
+      "bytes": 462975,
+      "words": 77441,
+      "fetched_at": "2026-08-13T17:13:25",
+      "ia_date": "1897",
+      "ia_year": "",
+      "ia_publicdate": "2010-12-16 18:44:04",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "Ashe, W. W. (William Willard), 1872-1932, joint author"
+      ],
+      "ia_title": "Timber trees and forests of North Carolina",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1800",
+        "1897"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "tosouthseascruis0000pinc",
+      "status": "已取回",
+      "note": "",
+      "file": "tosouthseascruis0000pinc.txt",
+      "source_url": "https://archive.org/download/tosouthseascruis0000pinc/tosouthseascruis0000pinc_djvu.txt",
+      "sha256": "8fd626ccafa16def894ad714152307ff3dc1e5b9c12054a83d1cf6ba6affaf28",
+      "bytes": 632555,
+      "words": 97752,
+      "fetched_at": "2026-08-13T17:14:27",
+      "ia_date": "1930",
+      "ia_year": "",
+      "ia_publicdate": "2019-07-09 09:12:14",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "To the South seas; the cruise of the schooner Mary Pinchot to the Galapagos, the Marquesas and the Tuamotu Islands and Tahiti",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1930"
+      ],
+      "digitization_years": [
+        "2019"
+      ]
+    },
+    {
+      "identifier": "trainingoffores00pinc",
+      "status": "已取回",
+      "note": "",
+      "file": "trainingoffores00pinc.txt",
+      "source_url": "https://archive.org/download/trainingoffores00pinc/trainingoffores00pinc_djvu.txt",
+      "sha256": "25ae09f51017dd1e7f5734090010c7385fbe11489acc19d4498219eaaa785da0",
+      "bytes": 157497,
+      "words": 23335,
+      "fetched_at": "2026-08-13T17:13:35",
+      "ia_date": "1917",
+      "ia_year": "",
+      "ia_publicdate": "2010-05-28 18:40:17",
+      "ia_creator": "Pinchot, Gifford, 1865-1946",
+      "ia_title": "The training of a forester",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914",
+        "1917"
+      ],
+      "digitization_years": [
+        "2010"
+      ]
+    },
+    {
+      "identifier": "whitepinestudywi00pincuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "whitepinestudywi00pincuoft.txt",
+      "source_url": "https://archive.org/download/whitepinestudywi00pincuoft/whitepinestudywi00pincuoft_djvu.txt",
+      "sha256": "dda944ec73ff94357efba0e7e60025ea1c95b6d51ef0f5ac96f6bd970750050d",
+      "bytes": 99315,
+      "words": 18749,
+      "fetched_at": "2026-08-13T17:13:50",
+      "ia_date": "1896",
+      "ia_year": "",
+      "ia_publicdate": "2009-03-17 02:15:04",
+      "ia_creator": [
+        "Pinchot, Gifford, 1865-1946",
+        "Graves, Henry S. (Henry Solon), 1871-"
+      ],
+      "ia_title": "The white pine; a study, with tables of volume and yield",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1705",
+        "1894",
+        "1896"
+      ],
+      "digitization_years": []
+    }
+  ]
+}

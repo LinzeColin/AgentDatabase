@@ -1,0 +1,445 @@
+{
+  "总数": 54,
+  "计数": {
+    "一手": 49,
+    "二手": 0,
+    "需人判": 5
+  },
+  "一手占比下界": 0.9074,
+  "一手占比上界": 1.0,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "1governmentfores00pincuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "1. Government forestry abroad",
+      "creator": "Pinchot, Gifford, 1865-1946; Bowers, Edward A; Fernow, B. E. (Bernhard Eduard), ",
+      "words": 31420
+    },
+    {
+      "identifier": "1primerofforestry00pincrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A primer of forestry",
+      "creator": "Pinchot, Gifford, 1865-1946; Pinchot, Gifford, 1865-1946; Pinchot, Gifford, 1865",
+      "words": 18251
+    },
+    {
+      "identifier": "CAT31300582",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Forest atlas of the national forests of the United States. Sawtooth folio",
+      "creator": "Pinchot, Gifford.; Meekham.H. S.",
+      "words": 1721
+    },
+    {
+      "identifier": "CAT31418506",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Preparation of the forest atlas",
+      "creator": "Pinchot, Gifford, 1865-1946, author",
+      "words": 1578
+    },
+    {
+      "identifier": "CAT31436722",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Instructions regarding grazing trespass",
+      "creator": "Pinchot, Gifford, 1865-1946, author",
+      "words": 1558
+    },
+    {
+      "identifier": "CAT85816575",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A primer of forestry",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 15928
+    },
+    {
+      "identifier": "CAT87201876",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The conservation of natural resources",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 4290
+    },
+    {
+      "identifier": "CAT87201893",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A primer of forestry : part II : practical forestry",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 16302
+    },
+    {
+      "identifier": "CAT87202674",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A primer of forestry : part I, the forest",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 14906
+    },
+    {
+      "identifier": "adirondackspruc00pinc",
+      "档": "需人判",
+      "依据": "creator 第 1 位；题名含「a study of」但**不含目标姓名**；无自著标记",
+      "title": "The Adirondack spruce; a study of the forest in Ne-ha-sa-ne park, with tables of",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 32218
+    },
+    {
+      "identifier": "adirondackspruce00pinc",
+      "档": "需人判",
+      "依据": "creator 第 1 位；题名含「a study of」但**不含目标姓名**；无自著标记",
+      "title": "The Adirondack spruce; a study of the forest in Ne-Ha-Sa-Ne Park. With tables of",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 31124
+    },
+    {
+      "identifier": "aprimerforestry06pincgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A primer of forestry ",
+      "creator": "Pinchot, Gifford, 1865-1946; Pinchot, Gifford, 1865-1946. Forest. 1899; Pinchot,",
+      "words": 18351
+    },
+    {
+      "identifier": "aprimerforestry07pincgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A primer of forestry ",
+      "creator": "Pinchot, Gifford, 1865-1946; Pinchot, Gifford, 1865-1946. Forest. 1899; Pinchot,",
+      "words": 18957
+    },
+    {
+      "identifier": "aprimerforestry10pincgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A primer of forestry ",
+      "creator": "Pinchot, Gifford, 1865-1946; Pinchot, Gifford, 1865-1946. Forest. 1899; Pinchot,",
+      "words": 19352
+    },
+    {
+      "identifier": "arbordaybirddayo00penn",
+      "档": "需人判",
+      "依据": "creator 第 4 位；无自著标记",
+      "title": "Arbor day and bird day ... October 27, 1922",
+      "creator": "Pennsylvania. Dept. of public instruction. [from old catalog]; Sproul, William C",
+      "words": 12374
+    },
+    {
+      "identifier": "conservationaspr00pincrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Conservation as practised : a specific answer to a specific attack, with a few w",
+      "creator": "Pinchot, Gifford, 1865-1946; Thomas, Ed. H",
+      "words": 10633
+    },
+    {
+      "identifier": "countrychurchdec00gilluoft",
+      "档": "需人判",
+      "依据": "creator 第 3 位；无自著标记",
+      "title": "The country church : the decline of its influence and the remedy",
+      "creator": "Gill, Charles Otis, 1868-1937?; Federal Council of the Churches of Christ in Ame",
+      "words": 43476
+    },
+    {
+      "identifier": "cu31924002881187",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Timber trees and forests of North Carolina",
+      "creator": "Pinchot, Gifford, 1865-1946; Ashe, W. W. (William Willard), 1872-1932",
+      "words": 73184
+    },
+    {
+      "identifier": "cu31924003228529",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The training of a forester",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 23350
+    },
+    {
+      "identifier": "fightforconserva0000pinc_v6p5",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The fight for conservation ",
+      "creator": "Pinchot, Gifford, 1865-1946, author",
+      "words": 23670
+    },
+    {
+      "identifier": "fightforconserva0000pinc_z4m3",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The fight for conservation ",
+      "creator": "Pinchot, Gifford, 1865-1946, author",
+      "words": 27873
+    },
+    {
+      "identifier": "fightforconserva00pinc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The fight for conservation",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 24681
+    },
+    {
+      "identifier": "fightforconserva00pincuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The fight for conservation",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 24607
+    },
+    {
+      "identifier": "fightforconserva11pinc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The fight for conservation",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 24501
+    },
+    {
+      "identifier": "forestplantingin37pinc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Forest planting in the sand-hill region of Nebraska",
+      "creator": "Pinchot, Gifford; United States. Forest Service",
+      "words": 1951
+    },
+    {
+      "identifier": "igovernmentfore00ferngoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "I. Government forestry abroad",
+      "creator": "Pinchot, Gifford, 1865-1946; Bowers, Edward Augustus, 1857-1924; Fernow, Bernhar",
+      "words": 16094
+    },
+    {
+      "identifier": "igovernmentfore01ferngoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "I. Government forestry abroad",
+      "creator": "Pinchot, Gifford, 1865-1946; Bowers, Edward Augustus, 1857-1924; Fernow, Bernhar",
+      "words": 31789
+    },
+    {
+      "identifier": "jstor-1010832",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Relation of Forests to Stream Control",
+      "creator": "Pinchot, Gifford",
+      "words": 3642
+    },
+    {
+      "identifier": "jstor-1011668",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Forestry on Private Lands",
+      "creator": "Pinchot, Gifford",
+      "words": 4306
+    },
+    {
+      "identifier": "jstor-1014102",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "An Agricultural Policy for the United States in War Time",
+      "creator": "Pinchot, Gifford",
+      "words": 3251
+    },
+    {
+      "identifier": "jstor-1014265",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Essentials to a Food Program for Next Year",
+      "creator": "Pinchot, Gifford",
+      "words": 3844
+    },
+    {
+      "identifier": "jstor-2485580",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Government Forestry Abroad",
+      "creator": "Pinchot, Gifford",
+      "words": 15503
+    },
+    {
+      "identifier": "jstor-25106242",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Foundations of Prosperityx",
+      "creator": "Pinchot, Gifford",
+      "words": 5813
+    },
+    {
+      "identifier": "jstor-25120675",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Economic Significance of Forestry",
+      "creator": "Pinchot, Gifford",
+      "words": 4234
+    },
+    {
+      "identifier": "jstor-2560469",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Government Forestry Abroad",
+      "creator": "Pinchot, Gifford",
+      "words": 1479
+    },
+    {
+      "identifier": "p2primerofforest00pincuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A primer of forestry",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 17575
+    },
+    {
+      "identifier": "practicalassista00pincrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Practical assistance to tree planters",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 2530
+    },
+    {
+      "identifier": "practicalassista21pinc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Practical assistance to farmers, lumbermen, and others in handling forest lands",
+      "creator": "Pinchot, Gifford, 1865-1946; United States. Division of Forestry",
+      "words": 2013
+    },
+    {
+      "identifier": "practicalassista21pinc_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Practical assistance to farmers, lumbermen, and others in handling forest lands",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 2004
+    },
+    {
+      "identifier": "practicalassista21pinc_1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Practical assistance to farmers, lumbermen, and other owners of forest lands",
+      "creator": "Pinchot, Gifford, 1865-1946; United States. Forest Service",
+      "words": 1918
+    },
+    {
+      "identifier": "primerofforestry0000unse",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A Primer of Forestry Part 1 The Forest",
+      "creator": "Pinchot, Gifford",
+      "words": 18864
+    },
+    {
+      "identifier": "primerofforestry00pinc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A primer of forestry",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 16048
+    },
+    {
+      "identifier": "primerofforestry00pincuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A primer of forestry",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 32144
+    },
+    {
+      "identifier": "reportofforester00pinc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Report of the Forester for 1900",
+      "creator": "Pinchot, Gifford",
+      "words": 3941
+    },
+    {
+      "identifier": "reportofforester00pinc_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Report of the Forester for 1901",
+      "creator": "Pinchot, Gifford",
+      "words": 7488
+    },
+    {
+      "identifier": "reportofforester00pinc_1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Report of the Forester for 1902",
+      "creator": "Pinchot, Gifford",
+      "words": 14419
+    },
+    {
+      "identifier": "reportofforester00pinc_2",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Report of the Forester for 1909",
+      "creator": "Pinchot, Gifford",
+      "words": 22620
+    },
+    {
+      "identifier": "sixthousandcount00gillrich",
+      "档": "需人判",
+      "依据": "creator 第 2 位；无自著标记",
+      "title": "Six thousand country churches",
+      "creator": "Gill, Charles Otis; Pinchot, Gifford, 1865-1946",
+      "words": 40618
+    },
+    {
+      "identifier": "thefightforconse11238gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Fight for Conservation",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 26317
+    },
+    {
+      "identifier": "thetrainingofafo31367gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Training of a Forester",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 23837
+    },
+    {
+      "identifier": "timbertreesfores01pinc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Timber trees and forests of North Carolina",
+      "creator": "Pinchot, Gifford, 1865-1946; Ashe, W. W. (William Willard), 1872-1932, joint aut",
+      "words": 77441
+    },
+    {
+      "identifier": "tosouthseascruis0000pinc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "To the South seas; the cruise of the schooner Mary Pinchot to the Galapagos, the",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 97752
+    },
+    {
+      "identifier": "trainingoffores00pinc",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The training of a forester",
+      "creator": "Pinchot, Gifford, 1865-1946",
+      "words": 23335
+    },
+    {
+      "identifier": "whitepinestudywi00pincuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The white pine; a study, with tables of volume and yield",
+      "creator": "Pinchot, Gifford, 1865-1946; Graves, Henry S. (Henry Solon), 1871-",
+      "words": 18749
+    }
+  ]
+}

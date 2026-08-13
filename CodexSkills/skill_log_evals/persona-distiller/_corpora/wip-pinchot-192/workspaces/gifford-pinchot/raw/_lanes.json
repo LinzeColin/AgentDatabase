@@ -1,0 +1,286 @@
+{
+  "lanes": 2,
+  "去掉纸面道后": 2,
+  "逐道份数": {
+    "writings": 50,
+    "conversations": 0,
+    "expression": 0,
+    "decisions": 4,
+    "timeline": 0,
+    "external": 0
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "1governmentfores00pincuoft",
+      "道": "writings",
+      "title": "1. Government forestry abroad"
+    },
+    {
+      "identifier": "1primerofforestry00pincrich",
+      "道": "writings",
+      "title": "A primer of forestry"
+    },
+    {
+      "identifier": "CAT31300582",
+      "道": "writings",
+      "title": "Forest atlas of the national forests of the United States. Sawtooth fo"
+    },
+    {
+      "identifier": "CAT31418506",
+      "道": "writings",
+      "title": "Preparation of the forest atlas"
+    },
+    {
+      "identifier": "CAT31436722",
+      "道": "writings",
+      "title": "Instructions regarding grazing trespass"
+    },
+    {
+      "identifier": "CAT85816575",
+      "道": "writings",
+      "title": "A primer of forestry"
+    },
+    {
+      "identifier": "CAT87201876",
+      "道": "writings",
+      "title": "The conservation of natural resources"
+    },
+    {
+      "identifier": "CAT87201893",
+      "道": "writings",
+      "title": "A primer of forestry : part II : practical forestry"
+    },
+    {
+      "identifier": "CAT87202674",
+      "道": "writings",
+      "title": "A primer of forestry : part I, the forest"
+    },
+    {
+      "identifier": "adirondackspruc00pinc",
+      "道": "writings",
+      "title": "The Adirondack spruce; a study of the forest in Ne-ha-sa-ne park, with"
+    },
+    {
+      "identifier": "adirondackspruce00pinc",
+      "道": "writings",
+      "title": "The Adirondack spruce; a study of the forest in Ne-Ha-Sa-Ne Park. With"
+    },
+    {
+      "identifier": "aprimerforestry06pincgoog",
+      "道": "writings",
+      "title": "A primer of forestry "
+    },
+    {
+      "identifier": "aprimerforestry07pincgoog",
+      "道": "writings",
+      "title": "A primer of forestry "
+    },
+    {
+      "identifier": "aprimerforestry10pincgoog",
+      "道": "writings",
+      "title": "A primer of forestry "
+    },
+    {
+      "identifier": "arbordaybirddayo00penn",
+      "道": "writings",
+      "title": "Arbor day and bird day ... October 27, 1922"
+    },
+    {
+      "identifier": "conservationaspr00pincrich",
+      "道": "writings",
+      "title": "Conservation as practised : a specific answer to a specific attack, wi"
+    },
+    {
+      "identifier": "countrychurchdec00gilluoft",
+      "道": "writings",
+      "title": "The country church : the decline of its influence and the remedy"
+    },
+    {
+      "identifier": "cu31924002881187",
+      "道": "writings",
+      "title": "Timber trees and forests of North Carolina"
+    },
+    {
+      "identifier": "cu31924003228529",
+      "道": "writings",
+      "title": "The training of a forester"
+    },
+    {
+      "identifier": "fightforconserva0000pinc_v6p5",
+      "道": "writings",
+      "title": "The fight for conservation "
+    },
+    {
+      "identifier": "fightforconserva0000pinc_z4m3",
+      "道": "writings",
+      "title": "The fight for conservation "
+    },
+    {
+      "identifier": "fightforconserva00pinc",
+      "道": "writings",
+      "title": "The fight for conservation"
+    },
+    {
+      "identifier": "fightforconserva00pincuoft",
+      "道": "writings",
+      "title": "The fight for conservation"
+    },
+    {
+      "identifier": "fightforconserva11pinc",
+      "道": "writings",
+      "title": "The fight for conservation"
+    },
+    {
+      "identifier": "forestplantingin37pinc",
+      "道": "writings",
+      "title": "Forest planting in the sand-hill region of Nebraska"
+    },
+    {
+      "identifier": "igovernmentfore00ferngoog",
+      "道": "writings",
+      "title": "I. Government forestry abroad"
+    },
+    {
+      "identifier": "igovernmentfore01ferngoog",
+      "道": "writings",
+      "title": "I. Government forestry abroad"
+    },
+    {
+      "identifier": "jstor-1010832",
+      "道": "writings",
+      "title": "The Relation of Forests to Stream Control"
+    },
+    {
+      "identifier": "jstor-1011668",
+      "道": "writings",
+      "title": "Forestry on Private Lands"
+    },
+    {
+      "identifier": "jstor-1014102",
+      "道": "writings",
+      "title": "An Agricultural Policy for the United States in War Time"
+    },
+    {
+      "identifier": "jstor-1014265",
+      "道": "writings",
+      "title": "Essentials to a Food Program for Next Year"
+    },
+    {
+      "identifier": "jstor-2485580",
+      "道": "writings",
+      "title": "Government Forestry Abroad"
+    },
+    {
+      "identifier": "jstor-25106242",
+      "道": "writings",
+      "title": "The Foundations of Prosperityx"
+    },
+    {
+      "identifier": "jstor-25120675",
+      "道": "writings",
+      "title": "The Economic Significance of Forestry"
+    },
+    {
+      "identifier": "jstor-2560469",
+      "道": "writings",
+      "title": "Government Forestry Abroad"
+    },
+    {
+      "identifier": "p2primerofforest00pincuoft",
+      "道": "writings",
+      "title": "A primer of forestry"
+    },
+    {
+      "identifier": "practicalassista00pincrich",
+      "道": "writings",
+      "title": "Practical assistance to tree planters"
+    },
+    {
+      "identifier": "practicalassista21pinc",
+      "道": "writings",
+      "title": "Practical assistance to farmers, lumbermen, and others in handling for"
+    },
+    {
+      "identifier": "practicalassista21pinc_0",
+      "道": "writings",
+      "title": "Practical assistance to farmers, lumbermen, and others in handling for"
+    },
+    {
+      "identifier": "practicalassista21pinc_1",
+      "道": "writings",
+      "title": "Practical assistance to farmers, lumbermen, and other owners of forest"
+    },
+    {
+      "identifier": "primerofforestry0000unse",
+      "道": "writings",
+      "title": "A Primer of Forestry Part 1 The Forest"
+    },
+    {
+      "identifier": "primerofforestry00pinc",
+      "道": "writings",
+      "title": "A primer of forestry"
+    },
+    {
+      "identifier": "primerofforestry00pincuoft",
+      "道": "writings",
+      "title": "A primer of forestry"
+    },
+    {
+      "identifier": "reportofforester00pinc",
+      "道": "decisions",
+      "title": "Report of the Forester for 1900"
+    },
+    {
+      "identifier": "reportofforester00pinc_0",
+      "道": "decisions",
+      "title": "Report of the Forester for 1901"
+    },
+    {
+      "identifier": "reportofforester00pinc_1",
+      "道": "decisions",
+      "title": "Report of the Forester for 1902"
+    },
+    {
+      "identifier": "reportofforester00pinc_2",
+      "道": "decisions",
+      "title": "Report of the Forester for 1909"
+    },
+    {
+      "identifier": "sixthousandcount00gillrich",
+      "道": "writings",
+      "title": "Six thousand country churches"
+    },
+    {
+      "identifier": "thefightforconse11238gut",
+      "道": "writings",
+      "title": "The Fight for Conservation"
+    },
+    {
+      "identifier": "thetrainingofafo31367gut",
+      "道": "writings",
+      "title": "The Training of a Forester"
+    },
+    {
+      "identifier": "timbertreesfores01pinc",
+      "道": "writings",
+      "title": "Timber trees and forests of North Carolina"
+    },
+    {
+      "identifier": "tosouthseascruis0000pinc",
+      "道": "writings",
+      "title": "To the South seas; the cruise of the schooner Mary Pinchot to the Gala"
+    },
+    {
+      "identifier": "trainingoffores00pinc",
+      "道": "writings",
+      "title": "The training of a forester"
+    },
+    {
+      "identifier": "whitepinestudywi00pincuoft",
+      "道": "writings",
+      "title": "The white pine; a study, with tables of volume and yield"
+    }
+  ]
+}

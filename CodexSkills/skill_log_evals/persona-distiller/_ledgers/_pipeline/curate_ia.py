@@ -134,6 +134,10 @@ EXCLUDE = {
     #   《Pentecost; the opening of a new school of inspiration》(1898)。
     #   ★ 与哲学家 Dewey(1859–1952) **年代重叠、同样在公有领域** —— 年份筛不掉。
     "dewey": ["Hamlin", "Dewey, John H."],
+    # ★ Gifford Pinchot #192：同名者是**他的后人** `Pinchot, Gifford, III`（池里 1 条）。
+    #   ★ 生卒年在这里**没用**：后人的著录不带生卒年，本人的带 1865-1946。
+    #     只能钉住那个罗马数字后缀。
+    "pinchot": ["Pinchot, Gifford, III", "Pinchot, Gifford III", "Gifford, III"],
     "ford": ["Henry Jones", "Ford, Henry J.", "1851-1925", "1851–1925",
              "Worthington Chauncey", "Henry A., comp", "Kate B.",
              "Ford, Henry Neville",
@@ -259,6 +263,10 @@ REQUIRE = {
     "dewey": [["dewey", "john"]],
     "ford": [["ford", "henry"]],
     "brandeis": [["brandeis", "louis"]],
+    # ★ Pinchot 的池里 **94/192 第一作者是 `United States. Forest Service`**（机构出版物，
+    #   他是次位创建者）。REQUIRE 只要求 creator 串里出现他的姓名，
+    #   **不要求他在第一位**——是不是一手交给 classify_primary 按位次判。
+    "pinchot": [["pinchot", "gifford"]],
     # ★ Plato 的著录有多种拼法：`Plato`／`PLATO`／`Plato, 427? BC-347? BC`／`Plato, Curt. Red.`，
     #   还有希腊文题名直接落在 creator 字段（`Πολιτεια του Πλατωνα`、`Ἀπολογία Σωκράτους`）。
     "plato": [["plato"], ["platon"], ["πλάτ"], ["πλατ"]],
