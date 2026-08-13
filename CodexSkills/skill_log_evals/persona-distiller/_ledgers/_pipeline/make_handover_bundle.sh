@@ -64,12 +64,24 @@ print("扫到 %d 个 wip 工作区（**从包里现扫，不是写死的名单**
       % (len(NEW), "、".join(NEW)))
 if len(NEW) < 10:
     print("❌ 只扫到 %d 个，少于第 1 批的 10 个 —— 包可能不全"%len(NEW)); ok=False
+# ★★★ 2026-08-13：定深路径**够不着第三种布局**。
+#   实测有 8 个工作区多套了一层：`wip-osler-110/workspaces/william-osler/william-osler/…`，
+#   于是 `d/slug/evidence/…` 一律落空，它们被报成「没有台账」并跳过；
+#   同一个毛病让 **208 道真题（8 份 cases.jsonl）打包时一次都没被验过**，
+#   而自验证照样往下走。[[a-gates-scan-set-is-smaller-than-reality]]
+#   ⇒ 台账与 manifest 一律**在这个 wip 目录下递归找**，不写死层数。
+def _find(root, rel):
+    """在 root 下递归找 rel（如 `evidence/source-ledger.jsonl`），→ 第一个命中或 None。"""
+    hits=sorted(root.rglob(rel.split("/")[-1]))
+    want=tuple(rel.split("/"))
+    for h in hits:
+        if h.parts[-len(want):]==want: return h
+    return None
 miss=0; nolg=0
 for ws in NEW:
     d=C/ws/"workspaces"
-    slug=[p.name for p in d.iterdir() if p.is_dir()][0]
-    lg=d/slug/"evidence"/"source-ledger.jsonl"; mf=d/slug/"raw"/"_fetch-manifest.json"
-    if not lg.exists() or not mf.exists():
+    lg=_find(d,"evidence/source-ledger.jsonl"); mf=_find(d,"raw/_fetch-manifest.json")
+    if lg is None or mf is None or not lg.exists() or not mf.exists():
         # ★ 缺文件要**单独报**，不许混进「0 条查不到」里当成通过
         print("！ %s 没有台账或 manifest —— **本条未检查（不是通过）**"%ws); nolg+=1; continue
     rows=[json.loads(l) for l in lg.read_text(encoding="utf-8").splitlines() if l.strip()]
@@ -84,9 +96,9 @@ print(("✅" if not miss else "❌")+" 语料指针：**%d 个工作区**逐条�
 #   我一度只查 `url`，于是把 939 行报成「缺指针」。**两个都认，缺的才是真缺。**
 noloc=0; nosum=0; rowN=0
 for ws in NEW:
-    d=C/ws/"workspaces"; slug=[p.name for p in d.iterdir() if p.is_dir()][0]
-    lg=d/slug/"evidence"/"source-ledger.jsonl"
-    if not lg.exists(): continue
+    d=C/ws/"workspaces"
+    lg=_find(d,"evidence/source-ledger.jsonl")          # ★ 同上：递归，不写死层数
+    if lg is None or not lg.exists(): continue
     rs=[json.loads(l) for l in lg.read_text(encoding="utf-8").splitlines() if l.strip()]
     rowN+=len(rs)
     noloc+=sum(1 for r in rs if not (r.get("locator") or r.get("url")))
@@ -250,8 +262,11 @@ KNOWN_NO_RULER = {
 }
 DEEP={"abraham-lincoln","thomas-jefferson","otto-von-bismarck","johann-pestalozzi"}
 tot=0; nfile=0
-CASES=sorted(C.glob("wip-*/workspaces/*/evals/cases.jsonl"))
-print("\n扫到 %d 份 evals/cases.jsonl（**现扫，不是写死的 8 个**）"%len(CASES))
+# ★★★ 用 rglob，不用定深 glob：`wip-*/workspaces/*/evals/cases.jsonl` 扫到 37 份，
+#   而仓里跟踪着 45 份 —— 差的 8 份全在多套一层的那种布局里（见上面 _find 的注释），
+#   合计 **208 道题从来没被验过**。
+CASES=sorted(p for p in C.rglob("cases.jsonl") if p.parent.name=="evals")
+print("\n扫到 %d 份 evals/cases.jsonl（**rglob 现扫，不写死层数也不写死名单**）"%len(CASES))
 # ★★★ 空的 cases.jsonl **不一律算失败**：已延后/拒发的人物本来就没有题。
 #   分界是**这个工作区有没有产物**（persona.md）：
 #     有产物而没题 ⇒ ❌ 真失败（产物做出来了却没有尺子）
