@@ -165,6 +165,70 @@ def measure():
     return out
 
 
+
+# ═══ 语料分布那张三列表（★ 2026-08-13 加）══════════════════════════════
+#   为什么单写一段：上面那六格是 `| 标签 | 值 |` 两列，而这张是三列
+#   （`| 情形 | 个数 | 语料在哪 |`），`parse_table` 一行都认不出来。
+#   **它漂过**：白天写「实测 48 个工作区，24／14／10／0」，
+#   晚上按 `git ls-files` 数是 **53 个，32／19／2／0**，
+#   而**没有任何判据在看它**。**没有调用方的口径就会烂。**
+#   ★★ 中途我还用一个临时脚本重数，得出 44／19／9 —— **那是错的**：
+#     `_ids-rebuild.txt` 自己也以 `.txt` 结尾，19 个「只有指针」的工作区被算成了「有正文」。
+#     判据里那句 `"_ids" not in base` 正是防这个的。**临时脚本别重实现判据的度量。**
+LAYOUT_ROW = re.compile(r"^\|\s*(?P<label>[^|]*?)\s*\|\s*\**\s*(?P<num>\d+)\s*\**\s*\|")
+
+
+def measure_layout(files):
+    """→ (总数, 正文在仓里, 只有重建指针, 两样都没有)。口径同六格：**`git ls-files`**。
+
+    ★★ **`_ids-rebuild.txt` 自己也以 `.txt` 结尾**——不排掉它，19 个「只有指针」的
+      工作区会被算成「有正文」（2026-08-13 我用一个临时脚本数就是这么错的，
+      差点把 44/19/9 写进收件人的文档）。**临时脚本别重实现判据的度量。**
+    """
+    per = {}
+    for f in files:
+        if "/workspaces/" not in f:
+            continue
+        ws = f.split("/workspaces/")[0] + "/workspaces/" + f.split("/workspaces/")[1].split("/")[0]
+        d = per.setdefault(ws, {"txt": False, "ids": False})
+        base = os.path.basename(f)
+        if f.endswith(".txt") and "_ids" not in base and (
+                "/raw/" in f or "/references/sources/" in f):
+            d["txt"] = True
+        if base == "_ids-rebuild.txt":
+            d["ids"] = True
+    tot = len(per)
+    has = sum(1 for v in per.values() if v["txt"])
+    ptr = sum(1 for v in per.values() if not v["txt"] and v["ids"])
+    none_ = tot - has - ptr
+    return tot, has, ptr, none_
+
+
+def check_layout(text, files):
+    """→ [不符项]。**空列表 = 过**；表里找不到那几行也算不符（不许静默放行）。"""
+    tot, has, ptr, none_ = measure_layout(files)
+    want = {"正文就在仓里": has, "有重建指针": ptr,
+            "空工作区": none_, "取不回来": 0}
+    seen, bad = {}, []
+    for line in text.splitlines():
+        m = LAYOUT_ROW.match(line)
+        if not m:
+            continue
+        lab = m.group("label").strip(" ↳*")
+        for k in want:
+            if lab.startswith(k):
+                seen[k] = int(m.group("num"))
+    for k, v in want.items():
+        if k not in seen:
+            bad.append(f"表里找不到「{k}」这一行 —— **未检查，不是通过**")
+        elif seen[k] != v:
+            bad.append(f"「{k}」表里 {seen[k]}，实测 **{v}**")
+    if f"{tot} 个工作区" not in text and f"{tot} 个" not in text:
+        bad.append(f"散文里的工作区总数与实测 **{tot}** 对不上")
+    return bad, (tot, has, ptr, none_)
+
+
+
 ROW = re.compile(r"^\|\s*(?P<label>[^|]*?)\s*\|\s*(?P<val>[^|]*?)\s*\|\s*$")
 # ★ 只认「粗体一开头那个数」：真表里写的是 `**2,064 份**`、`**160 条**`——
 #   数字后面还有字，要求紧跟 `**` 会一条都匹配不上（第一版就是这么错的）。
@@ -277,12 +341,25 @@ def main() -> int:
         print("★ 标签一个字没动；表外的散文本件够不着，**要人另行核**。")
         return 0 if wrote == len(bad) else 1
 
-    if bad or miss:
-        print(f"\n✗ **{len(bad)} 个数与实测不一致**"
+    # ★ 语料分布那张三列表（本件的第 7 项，与上面六格**同一个退出码**）
+    lay_bad, (ltot, lhas, lptr, lnone) = check_layout(text, tracked() or [])
+    print(f"\n语料分布表（三列）：实测 {ltot} 个工作区 ＝ 正文在仓里 {lhas}"
+          f" ＋ 只有指针 {lptr} ＋ 两样都没有 {lnone} ＋ 取不回来 0")
+    if lay_bad:
+        for b in lay_bad:
+            print(f"  ✗ {b}")
+        print("  ★ 这一项**不由 `--apply` 改**（三列表结构不同，且带散文）"
+              "——要人改，判据会一直红着提醒")
+    else:
+        print("  ✓ 与实测一致")
+
+    if bad or miss or lay_bad:
+        print(f"\n✗ 首屏六格 **{len(bad)} 个数不一致**"
               f"{f'，另有 {len(miss)} 行表里没有' if miss else ''}"
-              "　—— 跑 `--apply` 改（整格重写）；表外的散文要人另行核")
+              f"；语料分布表 **{len(lay_bad)} 项不符**"
+              "　—— 六格跑 `--apply` 改；分布表与表外散文要人另行核")
         return 1
-    print("\n✓ 表里每个数都与实测一致")
+    print("\n✓ 表里每个数都与实测一致（六格 ＋ 语料分布表）")
     return 0
 
 

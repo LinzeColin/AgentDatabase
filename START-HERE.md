@@ -49,7 +49,7 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_s
 
 ★ **新工作区的 `raw/*.txt` 已被 `.gitignore` 挡在仓外**，所以不在上表里：
 它们靠每个工作区的 `raw/_ids-rebuild.txt` ＋ `_fetch-manifest.json` 的 sha256 重建。
-`emit_ids_rebuild.py --scan _corpora --check` 现测 **rc=0**（一致 18／有问题 0）。
+`emit_ids_rebuild.py --scan _corpora --check` 现测 **rc=0**（一致 **19**／有问题 0／没有 manifest 的老工作区 26）。
 
 ★ 这一页早先的版本这里全是错的——「已入库 71」数的是 `registry/codex/` 下的
 **技能目录**（根本不是人物），六格里五格陈旧。表头当时也写着「由脚本现算」，
@@ -71,14 +71,21 @@ python3 --version && git --version && echo OK
 ## 三之二、★★ 语料在哪（**第一次跑之前先读这段**）
 
 **语料不全在 git 里**，这是有意的裁定（仓里只放指针，正文另存）。
-在一个**干净 clone** 里实测过 48 个工作区，分三种：
+**2026-08-13 按 `git ls-files` 口径逐个数过 53 个工作区**（＝你 clone 之后真正拿到的）：
 
 | 情形 | 个数 | 语料在哪 |
 |---|---:|---|
-| 正文就在仓里 | **24** | `…/references/sources/`（**只放建模侧那一半**，密封集按设计不在里面） |
-| 有重建指针 | **14** | `…/raw/_ids-rebuild.txt`（每行一个 Internet Archive identifier） |
-| 空工作区（没开工） | 10 | — |
-| **取不回来** | **0** | — |
+| 正文就在仓里 | **32** | `…/references/sources/` 或 `…/raw/`（**只放建模侧那一半**，密封集按设计不在里面） |
+| 有重建指针 | **19** | `…/raw/_ids-rebuild.txt`（每行一个 Internet Archive identifier；新工作区的 `raw/*.txt` 被 `.gitignore` 挡在仓外） |
+| 空工作区（没开工，台账也空） | **2** | — |
+| **取不回来** | **0** | 32 + 19 + 2 = 53，没有第四种 |
+
+★ 这张表**现在由判据管着**（`check_start_here_numbers.py` 的第 7 项），
+数字漂了它会红。8-13 白天写的是 24／14／10／0 共 48 个——**那时的结构对、数字旧了**。
+
+★★ 同一天我用一个临时脚本重数，得出 44／19／9 —— **那是错的**：
+`_ids-rebuild.txt` **自己也以 `.txt` 结尾**，于是 19 个「只有指针」的工作区被算成了「有正文」。
+判据里那句 `"_ids" not in base` 正是防这个的。**临时脚本别重实现判据的度量。**
 
 ★ 密封集不在 `references/sources/` 里**是对的**：那一半按设计不许建模侧读到。
   实测 24 个里 23 个**精确吻合**（缺的份数 = 密封件份数），第 24 个（Rosenhain）
@@ -98,7 +105,8 @@ python3 --version && git --version && echo OK
 ```bash
 python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/assign_lanes.py --selftest
 ```
-（应当打印「自测通过：书信 正 12／反 11 ＋ 画名 反 5／正 4」并 rc=0）
+（应当打印「自测通过：书信 正 12／反 11 ＋ 画名 反 5／正 4 ＋ **自传 正 4／反 4**，全绿」并 rc=0）
+★ 这一行的**预期输出是 2026-08-13 在一个真 clone 里跑出来抄的**，不是凭记忆写的。当天加自传规则时它变过一次（少了「自传」那一段），**文档里引用的输出会随工具漂**——对不上先跑一遍再判断是不是坏了。
 
 ★ 另一条也不需要语料，且**每次改过量测工具之后都该跑**：
 
@@ -165,6 +173,10 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_s
    ```bash
    python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_scoring_ready.py
    ```
+
+   ★ **它现在返回 `rc=1`，那不是坏了**——1 的意思是「有人缺件、没预登记、或存在矛盾」，
+   这些正是要给人看的东西（比如 5 个人产物齐全却已在延后名单里）。
+   `rc=0` 才表示 11 人全部就绪且无矛盾。**判分该不该跑由人定，这件判据不代替授权。**
 
 3. ★ **Dewey #190 是压线的那一个**（lanes 3 = 门 3），撑起第三条道的只有一份
    与妻子共同署名的《Letters from China and Japan》。**按现有裁定登记不挡**，
