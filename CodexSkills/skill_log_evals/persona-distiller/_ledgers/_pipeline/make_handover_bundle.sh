@@ -49,8 +49,8 @@ echo "== 4/4 回读自验证：真 clone 一次，验交付物在不在 =="
 TMP="$(mktemp -d)"
 git clone -q "$B" "$TMP/r" && git -C "$TMP/r" checkout -q \
   claude/character-distillation-skill-reorganize-d57595
-python3 - "$TMP/r" <<'PYEOF'
-import sys,pathlib,json,re
+SRC_REPO="$REPO" python3 - "$TMP/r" <<'PYEOF'
+import sys,pathlib,json,re,os
 R=pathlib.Path(sys.argv[1]); C=R/"CodexSkills/skill_log_evals/persona-distiller/_corpora"
 ok=True
 # ★★ 2026-08-13：清单**从包里现扫**，不再写死。
@@ -107,7 +107,20 @@ for ws in NEW:
     rows=[json.loads(l) for l in lg.read_text(encoding="utf-8").splitlines() if l.strip()]
     man=json.loads(mf.read_text(encoding="utf-8"))
     shas={e.get("sha256") for e in man.get("記錄",man.get("记录",[])) if isinstance(e,dict)}
+    # ★★ 2026-08-14：**派生切片没有 manifest 记录，因为它不是抓来的。**
+    #   Dewey 的 src-9fdb7da7d9d3 是从整期《Science》里切出的一篇，manifest 里只有整期原件。
+    #   它的可重建性由 `evidence/_derived-slices.json` ＋ rebuild_derived_slices.py 保证
+    #   （抓原件 → 按配方切 → sha256 对得上），**是另一条溯源路，不是缺口**。
+    #   ⇒ 把配方里记的 out_sha256 也算作「查得到」。★ 只认配方里**逐字记下的那个值**，
+    #     不是「凡是有配方的工作区都放行」——后者会把真缺口一起放过。
+    _dsf=_find(d,"evidence/_derived-slices.json")
+    _dsn=0
+    if _dsf is not None and _dsf.exists():
+        _ds=json.loads(_dsf.read_text(encoding="utf-8"))
+        _add={s.get("out_sha256") for s in _ds.get("slices",[]) if s.get("out_sha256")}
+        _dsn=len(_add); shas |= _add
     m=sum(1 for r in rows if r.get("checksum") not in shas); miss+=m
+    if _dsn: print("　 %s：另有 %d 条是**派生切片**，溯源走 _derived-slices.json（不是 manifest）"%(ws,_dsn))
     if m: print("❌ %s 有 %d 条台账在 manifest 里查不到 sha256"%(ws,m)); ok=False
 print(("✅" if not miss else "❌")+" 语料指针：**%d 个工作区**逐条核 sha256，查不到的 = %d"
       %(len(NEW)-nolg,miss)+("　（另有 %d 个未检查）"%nolg if nolg else ""))
@@ -363,7 +376,11 @@ if ds.returncode != 0:
     for l in ds.stdout.splitlines():
         if l.strip().startswith("✗"): print("     "+l.strip())
 else:
-    dc=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+    # ★★ `--check` 必须跑在**有语料的那棵树**上。R 是回读用的**新 clone**，
+    #   而 raw/*.txt 按裁定不进 git ⇒ 在 clone 里跑永远只会报「原件不在本机」，
+    #   等于这道检查从来没真跑过。用 SRC_REPO（打包源仓）跑。
+    _SRC=os.environ.get("SRC_REPO") or str(R)
+    dc=subprocess.run([sys.executable, str(pathlib.Path(_SRC)/"CodexSkills/skill_log_evals/persona-distiller"
                                           "/_ledgers/_pipeline/rebuild_derived_slices.py"),
                        "--all", "--check"], capture_output=True, text=True)
     if dc.returncode == 0:
