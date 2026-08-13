@@ -47,10 +47,24 @@ Jaccard ≥ 0.05 **或** 包含率 ≥ 0.25。
 
    ★ 所以本件**按正文判语种**并在多语种工作区印警告。**不能用台账的 `language` 字段**：
    Michelangelo 那 47 行**全是 `null`**，照字段判会报「单语种」——正是要防的那种假绿。
-2. **读不到正文的源跳过**，跳过多少要印出来 —— 「跳过」不是「通过」。
-3. **只有一个 `source_id` 的 claim 不归本件管** —— 那是 `insufficient-support`
+2. ★★★ **「两部不同的书」≠「两处独立证据」——选集会把同一封信收进两本。**
+   2026-08-14 在 Michelangelo #185 上量到：同一封写给 Vasari 的信（罗马 1550 年 9 月，
+   讲劳伦齐亚纳图书馆楼梯）**同时在**
+
+       src-43c819c03a55 1817《Le rime di Michelagnolo Buonarroti》（诗集，附书信）
+       src-6094206729a1 1875《Le lettere di Michelangelo Buonarroti》（书信集）
+
+   两本是**真的两部不同出版物**（本件判「不同作品」没判错），
+   但这条 claim 的证据是**同一封信**：`si discostino con tutta la scala dal muro circa
+   tre palmi, in modo che l'imbasamento del Ricetto non sia occupato in luogo nessuno`。
+   ⇒ **作品层面的不同，不等于证据层面的独立。** 证据的单位是**那封信**，不是那本书。
+   本件因此**另加一层按引文判**：claim 里反引号引的原话若同时出现在两份被引源里，
+   直接报「两处支撑其实是一处」——这一层比作品层更贴近「证据」。
+
+3. **读不到正文的源跳过**，跳过多少要印出来 —— 「跳过」不是「通过」。
+4. **只有一个 `source_id` 的 claim 不归本件管** —— 那是 `insufficient-support`
    自己就会报的，本件只管「看起来有两处、其实是一处」。
-4. 它**不改任何门、不改任何 claim**，只报数。要不要改是人的事。
+5. 它**不改任何门、不改任何 claim**，只报数。要不要改是人的事。
 
 ## 用法
 
@@ -103,6 +117,49 @@ def guess_lang(text: str, cap: int = 20000) -> str:
 def same_work(sig_a: set, sig_b: set, t: float = DEFAULT_T, c: float = CONTAIN_T) -> bool:
     """两份签名是不是同一部作品。**纯函数**，自测不碰磁盘。"""
     return jaccard(sig_a, sig_b) >= t or containment(sig_a, sig_b) >= c
+
+
+# ★★ 门槛别写在正则里：原来是 `{40,}`，于是 `We are not enemies, but friends.`（32 字符）
+#   **根本没被抽出来**，Lincoln 那条看起来只有一处话语 —— 我在下游加了两个词数门槛都没用，
+#   因为它压根没走到下游。抽的时候放宽，**判的时候再分档**。
+_QUOTE = re.compile(r"`([^`]{10,})`")
+
+
+def _norm(s: str) -> str:
+    s = s.replace("\u00ad", "")
+    s = re.sub(r"-\s*\n\s*", "", s)
+    return re.sub(r"\s+", " ", s)
+
+
+def shared_quote(claim_text: str, texts: dict):
+    """claim 里反引号引的原话，是不是**同时**落在两份被引源里。
+
+    → (共享的那段, [源 id…]) 或 (None, [])。**纯函数**，自测不碰磁盘。
+
+    ★ 这一层比「是不是同一部作品」更贴近「是不是同一处证据」：
+      选集把同一封信收进两本书时，作品层判「不同」，而证据只有一处。
+    """
+    raw = [_norm(m.group(1)) for m in _QUOTE.finditer(claim_text or "")]
+    # ★★ **数引文**与**匹配引文**要用两个门槛，混用会误伤：
+    #   Lincoln 的 clm-bf724593cbe6 第二处原话是 `We are not enemies, but friends.`——
+    #   只有 6 词，被 ≥8 的门槛滤掉，于是这条 claim 看起来「只有一处话语」而被误报。
+    #   数的时候用 ≥3 词并剔掉 `src-…` 这种 id；匹配的时候才要求 ≥8 词（短串会瞎撞）。
+    _ID = re.compile(r"^src-[0-9a-f]+(\s|$)")
+    counted = [q for q in raw if not _ID.match(q) and len(q.split()) >= 3]
+    qs = [q for q in counted if len(q.split()) >= 8]
+    # ★★★ 2026-08-14 收紧：**只有当这条 claim 通篇只有一处原话时才判**。
+    #   第一版会误伤 Lincoln 的 clm-bf724593cbe6：它引的是**两场不同的演说**
+    #   （分裂之家 1858 ／第一次就职 1861），而 1906《Complete works》与
+    #   1911《The best of Lincoln》两本**都收了这两场**——于是「同一段话在两本里」成立，
+    #   而 claim 的两处证据仍是**两次不同的话语**，本来就独立。
+    #   ⇒ 本层要回答的是「这条 claim 是不是只有一次话语」，不是「两本书重不重叠」。
+    if len(counted) != 1 or len(qs) != 1:
+        return None, []
+    q = qs[0]
+    rx = re.compile(r"\s+".join(re.escape(w) for w in q.split()[:14]), re.I)
+    # ★ 自己再归一一次：调用方**可能**传的是原样文本（自测就这么传的）。
+    hit = [s for s, tx in texts.items() if rx.search(_norm(tx))]
+    return (q, sorted(hit)) if len(hit) >= 2 else (None, [])
 
 
 def judge_claim(sids, sigs, t=DEFAULT_T, c=CONTAIN_T):
@@ -188,6 +245,35 @@ def self_test() -> int:
         guess_lang("123 456 %%% 789") == "?")
     chk("★★ **同一次话语跨语言，重叠为零** —— 本件看不见，所以要靠语种警告兜底",
         judge_claim(["en", "it"], {"en": signature(EN), "it": signature(IT)})[0] == "ok")
+    LET = ("si discostino con tutta la scala dal muro circa tre palmi in modo che "
+           "l imbasamento del ricetto non sia occupato in luogo nessuno")
+    BOOK_A = "poems and more poems " * 50 + LET + " and then more poems"
+    BOOK_B = "letters and more letters " * 50 + LET + " and then more letters"
+    CLAIM = "他下施工指令：先给尺寸再给判据。逐字：`" + LET + "`（src-a）。"
+    q, hit = shared_quote(CLAIM, {"a": BOOK_A, "b": BOOK_B})
+    chk(f"★★★ **同一段原话落在两本不同的书里 → 抓出来**（实得 {hit}）", hit == ["a", "b"])
+    q2, h2 = shared_quote(CLAIM, {"a": BOOK_A, "c": "wholly different text " * 60})
+    chk("★★ 反例：只有一本含这段 → 不报", h2 == [])
+    chk("★ 反例：claim 里没有反引号引文 → 不报",
+        shared_quote("没有引文的一句话", {"a": BOOK_A, "b": BOOK_B})[1] == [])
+    TWO = ("他引了两场不同的演说：`" + LET + "`，另一处是 `" +
+           "we are not enemies but friends we must not be enemies though passion may have" + "`。")
+    chk("★★★ **反例：claim 引了两处不同的话 → 不报**（Lincoln 那条：两本选集都收了两场演说，"
+        "而两处证据本来就是两次话语）",
+        shared_quote(TWO, {"a": BOOK_A + " we are not enemies but friends we must not be "
+                                        "enemies though passion may have",
+                           "b": BOOK_B + " we are not enemies but friends we must not be "
+                                        "enemies though passion may have"})[1] == [])
+    SHORT = ("`" + LET + "`（`src-aaaa1111`）与另一处 `We are not enemies, but friends.`"
+             "（`src-bbbb2222`）在同一个模型里。")
+    chk("★★★ **反例：第二处原话只有 6 词，仍算「两处话语」→ 不报**"
+        "（Lincoln clm-bf724593cbe6 就栽在这里；且 `src-…` 不算引文）",
+        shared_quote(SHORT, {"a": BOOK_A, "b": BOOK_B})[1] == [])
+    chk("★ 反例：引文太短（<8 词）→ 不报，免得误撞",
+        shared_quote("逐字：`short quote here`", {"a": BOOK_A, "b": BOOK_B})[1] == [])
+    chk("★ 归一：断字/换行不影响命中",
+        shared_quote("`" + LET + "`", {"a": BOOK_A.replace("discostino", "discos-\ntino"),
+                                       "b": BOOK_B})[1] == ["a", "b"])
     chk("★ 与 quality_check 的类目名单逐字一致",
         NEEDS_TWO == {"mental-model", "heuristic", "value", "work-method",
                       "blind-spot", "contradiction"})
@@ -219,7 +305,13 @@ def scan(ws: pathlib.Path):
             sigs[s] = signature(txt)
             langs[guess_lang(txt)] += 1
     out = {"collapsed": [], "unmeasurable": [], "ok": 0, "skip": 0, "claims": len(need),
-           "射程外同样引了塌缩对的": [], "语种": dict(langs)}
+           "射程外同样引了塌缩对的": [], "语种": dict(langs), "同一段引文落在两份源里": []}
+    # ★★ 证据层：把被引源的正文归一后留着，供 shared_quote 用
+    body = {}
+    for s in want:
+        p2 = paths.get(s)
+        if p2 and p2.is_file():
+            body[s] = _norm(p2.read_text(encoding="utf-8", errors="replace"))
     collapsed_pairs = set()
     for c in need:
         v, n, w = judge_claim(c.get("source_ids", []), sigs)
@@ -228,6 +320,12 @@ def scan(ws: pathlib.Path):
             out["collapsed"].append((cid, c.get("category"), n,
                                      len(set(c.get("evidence_clusters", [])))))
             collapsed_pairs.add(frozenset(set(c.get("source_ids", []))))
+        # ★★ 证据层单独判：作品层说「两部不同」也可能是同一封信被两本书都收了
+        if len(set(c.get("source_ids", []))) >= 2:
+            q, hit = shared_quote(c.get("claim"), {s: body[s] for s in set(c.get("source_ids", []))
+                                                   if s in body})
+            if q:
+                out["同一段引文落在两份源里"].append((cid, hit, q[:70]))
         elif v == "unmeasurable":
             out["unmeasurable"].append(cid)
         else:
@@ -269,6 +367,10 @@ def report(ws: pathlib.Path) -> int:
     for cid, cat, n, nc in r["collapsed"]:
         print(f"    ❌ {cid}  [{cat}]  {n} 个 source_id **是同一部作品**"
               f"；而 evidence_clusters 写了 {nc} 条 ⇒ 两道门都会放它过")
+    for cid, hit, q in r["同一段引文落在两份源里"]:
+        print(f"    ❌ {cid}：**同一段原话同时落在 {len(hit)} 份被引源里** {hit}")
+        print(f"       「{q}…」 ⇒ 作品层可能判「两部不同的书」，而证据只有一处"
+              f"（选集把同一封信收进两本）")
     real = {k: v for k, v in r["语种"].items() if k != "?"}
     if len(real) > 1:
         print(f"    ★★ **本工作区混着 {len(real)} 种语言**（按正文判：{real}）——"
@@ -281,7 +383,7 @@ def report(ws: pathlib.Path) -> int:
     if r["unmeasurable"]:
         print(f"    ！ 读不到正文、**未判**（不是通过）：{', '.join(r['unmeasurable'][:6])}"
               + (" …" if len(r["unmeasurable"]) > 6 else ""))
-    return 2 if r["collapsed"] else 0
+    return 2 if (r["collapsed"] or r["同一段引文落在两份源里"]) else 0
 
 
 def main() -> int:
@@ -298,7 +400,7 @@ def main() -> int:
         return report(pathlib.Path(a.workspace))
     if a.all:
         rc = 0
-        tot = col = out_of_range = 0
+        tot = col = out_of_range = shared = 0
         for d in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
             ws = pathlib.Path(d)
             r = scan(ws)
@@ -306,11 +408,15 @@ def main() -> int:
                 tot += r["claims"]
                 col += len(r["collapsed"])
                 out_of_range += len(r["射程外同样引了塌缩对的"])
+                shared += len(r["同一段引文落在两份源里"])
                 if report(ws) == 2:
                     rc = 2
         print(f"\n合计：需要 ≥2 处支撑的 claim **{tot}** 条，"
               f"其中 **{col}** 条的支撑实际只有一部作品；"
-              f"★ 另有 **{out_of_range}** 条断言引了同一批塌缩源而类目不在射程内")
+              f"★ 另有 **{out_of_range}** 条断言引了同一批塌缩源而类目不在射程内\n"
+              f"★ 证据层（同一段原话落在两份被引源里）：**{shared}** 条"
+              + ("　—— 0 不代表这条路安全：它是**给「补第二处」那条修法用的护栏**，"
+                 "选集把同一封信收进两本时才会响" if shared == 0 else ""))
         return rc
     ap.error("要 --workspace 或 --all 或 --self-test")
 
