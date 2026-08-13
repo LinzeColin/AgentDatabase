@@ -142,6 +142,14 @@ def check(root: pathlib.Path, doc: pathlib.Path) -> int:
     sibling = root.parent / "persona-distiller-group"
     if sibling.is_dir():
         roots.append(sibling)
+    # ★★★ 2026-08-14 第三处同形：START-HERE 给收件人的重建命令是
+    #   `fetch_ia.py --ids-file … --out … --skip-existing`，而 `fetch_ia.py` 住在
+    #   `skill_log_evals/persona-distiller/_ledgers/_pipeline/`——**不在本技能目录下**。
+    #   只扫技能目录会把它报成「找不到脚本」，**而文档是对的**（三个参数手工核过都在）。
+    #   与上面那条兄弟技能同一个病：**判据扫的集合比实况小**。
+    pipeline = root.parent.parent.parent / "skill_log_evals/persona-distiller/_ledgers/_pipeline"
+    if pipeline.is_dir():
+        roots.append(pipeline)
     sources = {}
     for r in roots:
         for f in sorted(r.rglob("*.py")):
@@ -254,10 +262,13 @@ def main() -> int:
         return self_test()
     if a.doc:
         return check(a.root, a.doc)
-    # ★ 默认扫**两份**：HANDOFF 与 `_每次开工必读.md`——
-    #   接手方读的就是这两份，只核一份等于半条防线。
+    # ★ 默认扫**三份**：START-HERE、HANDOFF 与 `_每次开工必读.md`——
+    #   接手方读的是这三份（START-HERE 是入口），只核一份等于三分之一条防线。
     wt = ROOT_DEFAULT.parent.parent.parent.parent
-    docs = [wt / "HANDOFF.md",
+    # ★★ 2026-08-14 加上 START-HERE.md：**它才是收件人最先读的那一份**（移交入口）。
+    #   原注释写「接手方读的就是这两份」——那句话在 START-HERE 存在之后就不成立了。
+    docs = [wt / "START-HERE.md",
+            wt / "HANDOFF.md",
             (ROOT_DEFAULT.parent.parent.parent
              / "skill_log_evals/persona-distiller/_ledgers/_每次开工必读.md")]
     rc = 0
