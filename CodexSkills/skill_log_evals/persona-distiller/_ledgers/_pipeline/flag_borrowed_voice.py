@@ -357,16 +357,16 @@ SKIP_NO_CORPUS = 5      # 语料不在本树 ⇒ **未跑**，不是不过
 
 
 def self_test() -> int:
-    # ★★ 同 detect_front_matter：自测的正负例**全部取自真语料**，而语料不进 git。
+    # ★★ 自测的正负例**全部取自真语料**，而语料按裁定不进 git。
     #   在干净 clone 里第一版逐条打印「✗ 读不到正文」并 rc=1 ——
     #   那读起来像「判据坏了」，其实是**语料不在**。两件事必须分开报。
-    probe = BASE / POS[0][0]
-    if not (probe / "evidence" / "source-ledger.jsonl").exists() or not any((probe / "raw").glob("*.txt")):
-        print("★★ **未跑，不是通过**：本件自测的正负例全部取自真语料，而语料不在这棵树里。")
-        print(f"   需要：{probe / 'raw'}/*.txt（见仓根 START-HERE.md「语料在哪」一节）")
-        print(f"   退出码 {SKIP_NO_CORPUS} = 跳过；0 = 正负对照全过；1 = 有不符。")
-        return SKIP_NO_CORPUS
+    #
+    #   ★ 第二版我加了个探测点（「raw 里有没有 txt」），**也是错的**：
+    #     Marshall 在 clone 里有 11 份 txt，只是**不是自测要的那几份**。
+    #     代理指标看不见「部分缺」。⇒ 改成**按结果判**：
+    #     读不到的例子单独计数，全部读不到才叫跳过，读得到的照常判。
     bad = 0
+    unread = 0
     for label, cases, want_high in (("正对照（必须标红）", POS, True), ("负对照（必须不红）", NEG, False)):
         print(f"\n### {label}")
         for case in cases:
@@ -377,8 +377,8 @@ def self_test() -> int:
                      .read_text(encoding="utf-8").splitlines() if l.strip())}
             norm = load_norm(W / "raw", recs[sid])
             if norm is None:
-                print(f"  ✗ 读不到正文 {sid}")
-                bad += 1
+                print(f"  — 读不到正文 {sid}（**未跑，不是不过**：这份语料不在本树里）")
+                unread += 1
                 continue
             q = _sentence_at(norm, off)
             fl = judge(norm, off, q)
@@ -393,8 +393,16 @@ def self_test() -> int:
                 print(f"      句: {q[:110]}")
                 for lv, mech, ev in fl:
                     print(f"      [{lv}] {mech}\n          {ev}")
+    total = len(POS) + len(NEG)
+    if unread == total:
+        print(f"\n★★ **未跑，不是通过**：{total} 个例子的语料**一份都不在这棵树里**。")
+        print("   语料按裁定不进 git —— 见仓根 `START-HERE.md`「语料在哪」一节。")
+        print(f"   退出码 {SKIP_NO_CORPUS} = 跳过；0 = 全过；1 = 有不符。")
+        return SKIP_NO_CORPUS
     print(f"\n{'✓ 正负对照全过' if bad == 0 else f'✗ {bad} 项不符'}"
           f"（正 {len(POS)} 例全部取自真语料、负 {len(NEG)} 例是已逐条核过的本人原话）")
+    if unread:
+        print(f"★ 其中 **{unread}/{total} 个例子读不到语料，未跑**（不是通过，也不是不过）。")
     return 0 if bad == 0 else 1
 
 

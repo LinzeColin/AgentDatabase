@@ -165,16 +165,26 @@ def self_test() -> int:
     #   [[untested-fallback-branches-only-fire-on-their-machine]]：
     #   「没装就跳过」那条路我从没走过。
     #   ⇒ 语料不在就**明说未跑并给独立退出码 5**，不许崩，也不许打 ✓。
+    # ★ 不用「raw 里有没有 txt」这种代理指标——实测 Marshall 在干净 clone 里
+    #   有 11 份 txt，只是**不是自测要的那几份**；代理指标看不见「部分缺」。
+    #   ⇒ 直接看**这三份**在不在。
     led = W / "evidence" / "source-ledger.jsonl"
-    if not led.exists() or not any((W / "raw").glob("*.txt")):
-        print("★★ **未跑，不是通过**：本件自测建在真语料上，而语料不在这棵树里。")
-        print(f"   需要：{W / 'raw'}/*.txt（见仓根 START-HERE.md「语料在哪」一节）")
-        print(f"   退出码 {SKIP_NO_CORPUS} = 跳过；0 = 全过；1 = 有不符。")
+    if not led.exists():
+        print("★★ **未跑，不是通过**：读不到台账，语料不在这棵树里。")
+        print(f"   需要：{led}（见仓根 START-HERE.md「语料在哪」一节）")
         return SKIP_NO_CORPUS
     recs = {r["source_id"]: r for r in
             (json.loads(l) for l in (W / "evidence" / "source-ledger.jsonl")
              .read_text(encoding="utf-8").splitlines() if l.strip())}
     bad = 0
+    files = [W / "raw" / pathlib.Path(recs[sid]["local_path"]).name for sid, _, _ in KNOWN]
+    if not all(f.exists() for f in files):
+        miss = [f.name for f in files if not f.exists()]
+        print(f"★★ **未跑，不是通过**：自测要的 {len(miss)}/{len(files)} 份语料不在这棵树里。")
+        print(f"   缺：{miss}")
+        print("   语料按裁定不进 git —— 见仓根 `START-HERE.md`「语料在哪」一节。")
+        print(f"   退出码 {SKIP_NO_CORPUS} = 跳过；0 = 全过；1 = 有不符。")
+        return SKIP_NO_CORPUS
     print("### 正对照：三个**人读出来的**导言边界")
     for sid, want, ev in KNOWN:
         t = norm_text(W / "raw" / pathlib.Path(recs[sid]["local_path"]).name)
