@@ -1,7 +1,85 @@
 {
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "person-6752688d800cdfb0",
+ "consent_authority": null,
+ "created_at": "2026-08-13T14:31:43Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "thinker-educator",
+  "display": "思想教育师",
+  "mode": "single",
+  "primary": "thinker-educator",
+  "weights": {
+   "thinker-educator": 1.0
+  }
+ },
+ "language": "zh-CN",
+ "model_version": "0.1.0-draft",
  "name": "John Dewey",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "把「做中学」落成课程与学校组织",
+    "用探究五步法拆一个没有现成答案的问题",
+    "在专业团体里为学术自由立规矩"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "How We Think (1909) 题名页：HOW WE THINK BY JOHN DEWEY PROFESSOR OF PHILOSOPHY IN COLUMBIA UNIVERSITY"
+    },
+    {
+     "locator": "Democracy and Education (1916) 题名页：BY JOHN DEWEY，THE MACMILLAN COMPANY"
+    },
+    {
+     "locator": "Address of the President, AAUP, December 31, 1915（jstor-40216730）：PROFESSOR JOHN DEWEY, Ph.D., LL.D."
+    }
+   ],
+   "canonical_name": "John Dewey",
+   "distinguishing_basis": "生卒 1859–1952（台账 creator 栏逐字：`Dewey, John, 1859-1952`）。本人署名逐字取自本工作区语料的题名页：《How We Think》(1909) `HOW WE THINK BY JOHN DEWEY PROFESSOR OF PHILOSOPHY IN COLUMBIA UNIVERSITY`；《The School and Society》(1900) `…BEING THREE LECTURES JOHN DEWEY … THE UNIVERSITY OF CHICAGO PRESS`；《Democracy and Education》(1916) `…AN INTRODUCTION TO THE PHILOS-OPHY OF EDUCATION BY JOHN DEWEY XHE MACMILLAN COMPANY`（`XHE` 是 OCR 的 `THE`）；1915-12-31 美国大学教授联合会年会 `ADDRESS OF THE PRESIDENT PROFESSOR JOHN DEWEY, Ph.D., LL.D.`。★ 需与之区分的同名/近名者：**Melvil Dewey**（1851–1931，十进制图书分类法）——本工作区评测集里已有一道专问此事的身份路由题（`jd-identity-routing-02`）；抓源阶段按同名者丢弃 7 条（记在 `raw/_ids.txt` 第 2 行）。抓源实测：台账 39 条、全部 P1／HIS-OWN，有源的研究道 3 条（writings 4／conversations 1／expression 2）。",
+   "evidence_level": "high",
+   "identity_category": "思想教育师",
+   "key_capabilities": [
+    "从经验里抽出可教的方法",
+    "把哲学命题改写成教育实践",
+    "在没有先例时为专业团体立规矩"
+   ],
+   "label": "A",
+   "occupation_or_role": "美国哲学家、教育学家",
+   "professional_background": "1859–1952。芝加哥大学实验学校 1896–1904；哥伦比亚大学哲学教授；1915 年 AAUP 创始会议主持人、首任会长。",
+   "subject_uid": "person-6752688d800cdfb0"
+  },
+  "chosen_subject_uid": "person-6752688d800cdfb0",
+  "normalized_name": "johndewey",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
  "normalized_name": "johndewey",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
  "slug": "john-dewey",
- "aliases": ["Dewey, John", "Dewey, John, 1859-1952"],
- "★": "最小 meta.json：让 next_person 认出「这个人已经开过工」。名字取自 _蒸馏队列.json 与 IA creator 字段里已有的写法，不做推断。"
+ "status": "draft",
+ "subject_origin": "public",
+ "target_id": "tgt-57ef0953ec6f",
+ "time_scope": "all available periods, separated by role and material drift",
+ "updated_at": "2026-08-13T14:31:43Z",
+ "aliases": [
+  "Dewey, John",
+  "Dewey, John, 1859-1952"
+ ],
+ "★ 脚手架补齐": "2026-08-14 01:0x：本工作区此前只有一份手写的最小 meta.json（5 个键），内容产物（persona/work/cognitive-os/decision-policy/strategy/capabilities/boundaries/divergence-map/facts/hypotheses、evidence/*、evals/cases.jsonl、references/research/*）早已做好，缺的是建器脚手架。处置：在临时目录跑 init_target.py 生成一套，**只拷贝本工作区没有的文件，一个已存在的文件都没有覆盖**；本 meta 换成建器版并并回原 aliases。profile=quick 是按㉞「按可得性选档+退档写明理由」定的：39 条源够 standard 的 24，但 standard 要 6 条道而实测只有 3 ⇒ 退档，与同批的 Brandeis #172、Michelangelo #185 同档。"
 }
