@@ -243,6 +243,13 @@ sh=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-di
                   capture_output=True, text=True)
 if sh.returncode==0:
     print("✅ START-HERE.md 首屏那张表：六格全部与实测一致")
+    # ★★ rc=0 时也要把**第 8 项**捞出来印。它算的是「台账每条正文在不在仓里」，
+    #   有真发现（wip-livermore-100：536 条、正文 0 份、连指针都没有）。
+    #   原先只在 rc≠0 时印细节 ⇒ **判据算对了，交付日志把它咽下去了**。
+    #   一道判据的产出不该由「它这次是不是红的」决定给不给人看。
+    for l in sh.stdout.splitlines():
+        if l.startswith("账本逐条可取") or l.strip().startswith("！ **取不回来**"):
+            print("     " + l.strip())
 elif sh.returncode==4:
     print("★ START-HERE 数字：**未判**（找不到 START-HERE.md 或不在 git 树里）")
 else:
