@@ -521,6 +521,34 @@ rc=$?
 rm -rf "$TMP"
 [ $rc -ne 0 ] && { echo "★ 回读自验证失败"; exit $rc; }
 echo
+# ★★★ 移交封面信里那张「包的身份证」原先是**每次打完包我手工抄进去的**。
+#   2026-08-14 一晚同步了 5 次，其中一次的「打包」时间是我手打的（写成 01:35，真值 00:44）——
+#   [[self-reported-numbers-must-be-computed]]。这里把那 5 行**从 sidecar 现读回填**，
+#   去掉手工环节；封面信不在就跳过（只印一行，不报错）。
+_COVER="$(dirname "$B")/00-你要做的两件事.md"
+if [ -f "$_COVER" ]; then
+  python3 - "$_COVER" "$B.sha256" <<'COVEOF'
+import pathlib, re, sys
+cover, side = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2])
+s = side.read_text(encoding="utf-8")
+def g(k, pat=r"(\S.*?)\s*$"):
+    m = re.search(rf"^{k}\s+{pat}", s, re.M)
+    return m.group(1).strip() if m else None
+size = (g("大小") or "").replace(" 字节", "")
+sha, tip, n, when = g("sha256"), (g("tip") or "").split()[0], g("提交数"), g("打包")
+t = old = cover.read_text(encoding="utf-8")
+if size and size.isdigit():
+    t = re.sub(r"\| 大小 \| \*\*[\d,]+ 字节\*\* \|", f"| 大小 | **{int(size):,} 字节** |", t)
+if sha:  t = re.sub(r"\| sha256 \| `[0-9a-f]{64}` \|", f"| sha256 | `{sha}` |", t)
+if tip:  t = re.sub(r"\| tip \| `[0-9a-f]{40}`", f"| tip | `{tip}`", t)
+if n:    t = re.sub(r"\| 提交数 \| \*\*[\d,]+\*\* \|", f"| 提交数 | **{int(n):,}** |", t)
+if when: t = re.sub(r"\| 打包 \| [\d\-]+ [\d:]+ \|", f"| 打包 | {when} |", t)
+cover.write_text(t, encoding="utf-8")
+print("✅ 封面信身份证：已从 sidecar 现读回填" + ("（无变化）" if t == old else ""))
+COVEOF
+else
+  echo "！ 本目录没有 00-你要做的两件事.md —— 身份证**未回填**（不是通过）"
+fi
 echo "包在：$B"
 # ★★★ 2026-08-14 00:11 实测：输出目录名带**当天日期**（第 18 行），跨零点就换一个目录。
 #   当晚 build29 落在 `…-20260813/`，build30 落在 `…-20260814/`，
