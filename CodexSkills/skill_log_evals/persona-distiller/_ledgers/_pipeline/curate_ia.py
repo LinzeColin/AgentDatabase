@@ -83,6 +83,22 @@ EXCLUDE = {
     #     ② 照他的作品刻/画的复制品（同 leonardo 的 Hollar/Dürer）：
     #        Sargent 3《Night》《Dawn》、Timothy Cole 2《Old Italian Masters》、
     #        Enea Vico 1、Raimondi 2《The Climbers》、Melchior Lorck 2《Crucified Man》
+    # ★★★ Plato #186：**四类同名，全在抓源前实测过**（池 2617 条）。
+    #   ① `PLATO Learning, Inc.`（1990s–2000s 教学软件公司，前身是 PLATO 计算机教学系统）32 条
+    #      —— Foshay／Hannafin／Quinn／Sherman 的 "PLATO Evaluation Series"、"PLATO Courseware"。
+    #      ★ 这一类**全部 >1930，PD 筛就挡住了**，写在这里是为了让下一个人知道它存在。
+    #   ② `Shaw, P. E. (Plato Ernest), 1883-1947` 5 条 —— **中名叫 Plato 的人**。
+    #      ★★ 其中 **1930 年那本《The early tractarians and the Eastern church》会穿过 PD 筛**，
+    #      是四类里唯一靠年份挡不住的实体。
+    #   ③ `Sinclair y el plato lleno de espantapájaros`（乐队）8 条 —— 西语 `plato` ＝**盘子**。
+    #      ★★ **全部无年份 ⇒ 年份筛一条也挡不住**，只能按名排。
+    #   ④ `Giovanni De Plato`（意大利作者，姓氏含 Plato）2 条。
+    #   ★★★ **负对照做过**：题名含 `de Platon` 的 **26 条是他著作的法译本**
+    #   （《Oeuvres de Platon》《La Republique de Platon》），**不许排**。
+    #   我第一版写 `De Plato` 没加词边界，把这 26 条全误判成同名者
+    #   —— 与 `letter` ⊂ `letterari` 同型（[[regex-must-clear-the-corpus-language]]）。
+    "plato": ["PLATO Learning", "PLATO Evaluation", "PLATO Courseware", "PLATO Technical",
+              "(Plato Ernest)", "plato lleno", "Espantap", "Giovanni De Plato"],
     "michelangelo": ["Vignola", "Aviler", "Speroni", "Dante Alighieri",
                      "Sargent", "Timothy Cole", "Enea Vico", "Raimondi", "Lorck",
                      # ★★ **侄孙 Michelangelo Buonarroti il Giovane（1568–1646）**——
@@ -130,6 +146,9 @@ REQUIRE = {
     #   `Buonarroti, Michelangelo`（22 条，与前式**零重叠**）与古体 `Michelagniolo`
     #   （1907 年那本 *Die Briefe des Michelagniolo Buonarroti*）。
     "michelangelo": [["michelangelo"], ["michelagniolo"], ["buonarroti"]],
+    # ★ Plato 的著录有多种拼法：`Plato`／`PLATO`／`Plato, 427? BC-347? BC`／`Plato, Curt. Red.`，
+    #   还有希腊文题名直接落在 creator 字段（`Πολιτεια του Πλατωνα`、`Ἀπολογία Σωκράτους`）。
+    "plato": [["plato"], ["platon"], ["πλάτ"], ["πλατ"]],
 }
 
 
