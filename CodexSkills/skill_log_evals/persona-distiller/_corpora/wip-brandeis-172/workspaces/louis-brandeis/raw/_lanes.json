@@ -1,0 +1,206 @@
+{
+  "lanes": 5,
+  "去掉纸面道后": 3,
+  "逐道份数": {
+    "writings": 27,
+    "conversations": 1,
+    "expression": 2,
+    "decisions": 1,
+    "timeline": 0,
+    "external": 7
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "JewishRightsCongress",
+      "道": "writings",
+      "title": "Jewish Rights and the Congress"
+    },
+    {
+      "identifier": "OrationTrueAmericanism",
+      "道": "expression",
+      "title": "Oration"
+    },
+    {
+      "identifier": "agc3261.0001.001.umich.edu",
+      "道": "external",
+      "title": "Fatigue and efficiency; a study in industry"
+    },
+    {
+      "identifier": "businessaprofes02poolgoog",
+      "道": "writings",
+      "title": "Business--a profession "
+    },
+    {
+      "identifier": "businessaprofess00bran",
+      "道": "writings",
+      "title": "Business--a profession,"
+    },
+    {
+      "identifier": "caseforshorterwo00franuoft",
+      "道": "writings",
+      "title": "The case for the shorter work day ... Franklin O. Bunting, plaintiff i"
+    },
+    {
+      "identifier": "caseforshorterwo01franuoft",
+      "道": "writings",
+      "title": "The case for the shorter work day ... Franklin O. Bunting, plaintiff i"
+    },
+    {
+      "identifier": "cu31924000556336",
+      "道": "writings",
+      "title": "The people of the State of New York, respondent, against Charles Schwe"
+    },
+    {
+      "identifier": "cu31924002234387",
+      "道": "writings",
+      "title": "Business--a profession"
+    },
+    {
+      "identifier": "cu31924002677114",
+      "道": "writings",
+      "title": "Scientific management and railroads; being part of a brief submitted t"
+    },
+    {
+      "identifier": "cu31924017572391",
+      "道": "decisions",
+      "title": "Women in industry; decision of the United States Supreme Court in Curt"
+    },
+    {
+      "identifier": "cu31924030130557",
+      "道": "writings",
+      "title": "Interstate Trade Commission. Hearings ... Sixty-third Congress, second"
+    },
+    {
+      "identifier": "cu31924082456439",
+      "道": "writings",
+      "title": "Other people's money : and how the bankers use it "
+    },
+    {
+      "identifier": "fatigueandeffic03goldgoog",
+      "道": "external",
+      "title": "Fatigue and efficiency; a study in industry"
+    },
+    {
+      "identifier": "fatigueefficie00gold",
+      "道": "external",
+      "title": "Fatigue efficiency;"
+    },
+    {
+      "identifier": "fatigueefficien00gold",
+      "道": "external",
+      "title": "Fatigue and efficiency; a study in industry"
+    },
+    {
+      "identifier": "fatigueefficiency00gold",
+      "道": "external",
+      "title": "Fatigue and efficiency; a study in industry"
+    },
+    {
+      "identifier": "jewishproblemhow00bran",
+      "道": "writings",
+      "title": "The Jewish problem, how to solve it"
+    },
+    {
+      "identifier": "jewishproblemhow00branrich",
+      "道": "writings",
+      "title": "The Jewish problem; how to solve it"
+    },
+    {
+      "identifier": "jstor-1013266",
+      "道": "writings",
+      "title": "Interlocking Directorates"
+    },
+    {
+      "identifier": "jstor-1321160",
+      "道": "writings",
+      "title": "The Right to Privacy"
+    },
+    {
+      "identifier": "jstor-1321339",
+      "道": "writings",
+      "title": "Notes"
+    },
+    {
+      "identifier": "jstor-1321350",
+      "道": "writings",
+      "title": "Notes"
+    },
+    {
+      "identifier": "jstor-1321695",
+      "道": "writings",
+      "title": "The Law of Ponds"
+    },
+    {
+      "identifier": "jstor-1321781",
+      "道": "writings",
+      "title": "The Watuppa Pond Cases"
+    },
+    {
+      "identifier": "jstor-2276262",
+      "道": "writings",
+      "title": "Massachusetts Savings-Bank Insurance and Pension System"
+    },
+    {
+      "identifier": "lifeinsuranceabu00branrich",
+      "道": "expression",
+      "title": "Life insurance, the abuses and the remedies: an address delivered befo"
+    },
+    {
+      "identifier": "lifeinsuranceabu9582bran",
+      "道": "writings",
+      "title": "Life insurance: the abuses and the remedies"
+    },
+    {
+      "identifier": "otherpeoplesmon00brangoog",
+      "道": "writings",
+      "title": "Other people's money : and how the bankers use it "
+    },
+    {
+      "identifier": "otherpeoplesmone00bran",
+      "道": "writings",
+      "title": "Other people's money, and how the bankers use it"
+    },
+    {
+      "identifier": "preliminaryrepor00nati",
+      "道": "external",
+      "title": "Preliminary report on efficiency in the administration of justice"
+    },
+    {
+      "identifier": "savingsinsurance00branrich",
+      "道": "writings",
+      "title": "Savings insurance"
+    },
+    {
+      "identifier": "scientificmanag00brangoog",
+      "道": "writings",
+      "title": "Scientific management and railroads [microform] : being part of a brie"
+    },
+    {
+      "identifier": "scientificmanage00branuoft",
+      "道": "writings",
+      "title": "Scientific management and railroads; being part of a brief submitted t"
+    },
+    {
+      "identifier": "tojewsofamericaj00braniala",
+      "道": "conversations",
+      "title": "To the Jews of America : The Jewish Congress versus The American Jewis"
+    },
+    {
+      "identifier": "voina_i_evreiskaia_problema",
+      "道": "external",
+      "title": "Война и еврейская проблема"
+    },
+    {
+      "identifier": "washingtonstreet00braniala",
+      "道": "writings",
+      "title": "The Washington Street subway : comments on the financial condition of "
+    },
+    {
+      "identifier": "zionismpatriotis00bran",
+      "道": "writings",
+      "title": "Zionism and patriotism"
+    }
+  ]
+}

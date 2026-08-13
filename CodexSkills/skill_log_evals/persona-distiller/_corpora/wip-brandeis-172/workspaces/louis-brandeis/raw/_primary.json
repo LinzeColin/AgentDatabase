@@ -1,0 +1,317 @@
+{
+  "总数": 38,
+  "计数": {
+    "一手": 31,
+    "二手": 7,
+    "需人判": 0
+  },
+  "一手占比下界": 0.8158,
+  "一手占比上界": 0.8158,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "JewishRightsCongress",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Jewish Rights and the Congress",
+      "creator": "Brandeis, Louis D.",
+      "words": 3903
+    },
+    {
+      "identifier": "OrationTrueAmericanism",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oration",
+      "creator": "Brandeis, Louis D.",
+      "words": 3911
+    },
+    {
+      "identifier": "agc3261.0001.001.umich.edu",
+      "档": "二手",
+      "依据": "【人裁】**Josephine Goldmark 写的书**（《Fatigue and Efficiency: A Study in Industry》）。creator 首位是她，Brandeis 排第 2。★ 她是「Brandeis Brief」背后做实证研究的人，也是他的妻妹；这本书是**那份辩状的经验基础**，不是他的文字。⇒ 记二手，**归 external 道正合适**（别人做的、支撑他论证的研究）。★★ 语料里有 **6 个扫描件**，`dedup` 已按题名归并——引用时**算一处证据**。",
+      "title": "Fatigue and efficiency; a study in industry",
+      "creator": "Goldmark, Josephine, 1877-1950; Brandeis, Louis Dembitz, 1856-1941",
+      "words": 343032
+    },
+    {
+      "identifier": "businessaprofes02poolgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Business--a profession ",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941; Poole, Ernest, 1880-1950",
+      "words": 78097
+    },
+    {
+      "identifier": "businessaprofess00bran",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Business--a profession,",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 90993
+    },
+    {
+      "identifier": "caseforshorterwo00franuoft",
+      "档": "一手",
+      "依据": "【人裁】《The case for the shorter work day》——**Bunting v. Oregon 的辩状**，Frankfurter 与 Brandeis 共同署名（creator 里 `Oregon, defendant` 表明这是诉讼文书）。★ 这是**他的职业工作产物**（同「Brandeis Brief」一类），不是别人写他 ⇒ 一手。★★ 射程：**与 Frankfurter 合著**，引用时不得把整份当成他一人的笔；取引文要挑能定到他名下的段落。",
+      "title": "The case for the shorter work day ... Franklin O. Bunting, plaintiff in error, v",
+      "creator": "Frankfurter, Felix, 1882-1965; Oregon, defendant; Brandeis, Louis Dembitz, 1856-",
+      "words": 334045
+    },
+    {
+      "identifier": "caseforshorterwo01franuoft",
+      "档": "一手",
+      "依据": "【人裁】《The case for the shorter work day》——**Bunting v. Oregon 的辩状**，Frankfurter 与 Brandeis 共同署名（creator 里 `Oregon, defendant` 表明这是诉讼文书）。★ 这是**他的职业工作产物**（同「Brandeis Brief」一类），不是别人写他 ⇒ 一手。★★ 射程：**与 Frankfurter 合著**，引用时不得把整份当成他一人的笔；取引文要挑能定到他名下的段落。",
+      "title": "The case for the shorter work day ... Franklin O. Bunting, plaintiff in error, v",
+      "creator": "Frankfurter, Felix, 1882-1965; Oregon, defendant; Brandeis, Louis Dembitz, 1856-",
+      "words": 24942
+    },
+    {
+      "identifier": "cu31924000556336",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The people of the State of New York, respondent, against Charles Schweinler Pres",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941; Goldmark, Josephine Clara, 1877-1950; New Yo",
+      "words": 143183
+    },
+    {
+      "identifier": "cu31924002234387",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Business--a profession",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941; Poole, Ernest, 1880-1950",
+      "words": 77553
+    },
+    {
+      "identifier": "cu31924002677114",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Scientific management and railroads; being part of a brief submitted to the Inte",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 34605
+    },
+    {
+      "identifier": "cu31924017572391",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Women in industry; decision of the United States Supreme Court in Curt Muller vs",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941; Goldmark, Josephine Clara, 1877-1950; Muller",
+      "words": 42576
+    },
+    {
+      "identifier": "cu31924030130557",
+      "档": "一手",
+      "依据": "【人裁】《Interstate Trade Commission Hearings, 63rd Congress》——**国会听证记录**，creator 首位是众议院委员会而他排在后面。★ 但听证记录里**他的证词是逐字速记的他本人的话** ⇒ 记一手，**射程写明：卷里绝大部分不是他说的，取引文必须逐条判说话人**（同 Coffin #130 的教训）。",
+      "title": "Interstate Trade Commission. Hearings ... Sixty-third Congress, second session",
+      "creator": "United States. Congress. House. Committee on Interstate and Foreign Commerce; Br",
+      "words": 282018
+    },
+    {
+      "identifier": "cu31924082456439",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Other people's money : and how the bankers use it ",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 45568
+    },
+    {
+      "identifier": "fatigueandeffic03goldgoog",
+      "档": "二手",
+      "依据": "【人裁】**Josephine Goldmark 写的书**（《Fatigue and Efficiency: A Study in Industry》）。creator 首位是她，Brandeis 排第 2。★ 她是「Brandeis Brief」背后做实证研究的人，也是他的妻妹；这本书是**那份辩状的经验基础**，不是他的文字。⇒ 记二手，**归 external 道正合适**（别人做的、支撑他论证的研究）。★★ 语料里有 **6 个扫描件**，`dedup` 已按题名归并——引用时**算一处证据**。",
+      "title": "Fatigue and efficiency; a study in industry",
+      "creator": "Goldmark, Josephine Clara, 1877-1950; Brandeis, Louis Dembitz, 1856-1941",
+      "words": 113748
+    },
+    {
+      "identifier": "fatigueefficie00gold",
+      "档": "二手",
+      "依据": "【人裁】**Josephine Goldmark 写的书**（《Fatigue and Efficiency: A Study in Industry》）。creator 首位是她，Brandeis 排第 2。★ 她是「Brandeis Brief」背后做实证研究的人，也是他的妻妹；这本书是**那份辩状的经验基础**，不是他的文字。⇒ 记二手，**归 external 道正合适**（别人做的、支撑他论证的研究）。★★ 语料里有 **6 个扫描件**，`dedup` 已按题名归并——引用时**算一处证据**。",
+      "title": "Fatigue efficiency;",
+      "creator": "Goldmark, Josephine, 1877-1950; Brandeis, Louis Dembitz, 1856-1941",
+      "words": 342296
+    },
+    {
+      "identifier": "fatigueefficien00gold",
+      "档": "二手",
+      "依据": "【人裁】**Josephine Goldmark 写的书**（《Fatigue and Efficiency: A Study in Industry》）。creator 首位是她，Brandeis 排第 2。★ 她是「Brandeis Brief」背后做实证研究的人，也是他的妻妹；这本书是**那份辩状的经验基础**，不是他的文字。⇒ 记二手，**归 external 道正合适**（别人做的、支撑他论证的研究）。★★ 语料里有 **6 个扫描件**，`dedup` 已按题名归并——引用时**算一处证据**。",
+      "title": "Fatigue and efficiency; a study in industry",
+      "creator": "Goldmark, Josephine Clara, 1877-1950; Brandeis, Louis Dembitz, 1856-1941",
+      "words": 342992
+    },
+    {
+      "identifier": "fatigueefficiency00gold",
+      "档": "二手",
+      "依据": "【人裁】**Josephine Goldmark 写的书**（《Fatigue and Efficiency: A Study in Industry》）。creator 首位是她，Brandeis 排第 2。★ 她是「Brandeis Brief」背后做实证研究的人，也是他的妻妹；这本书是**那份辩状的经验基础**，不是他的文字。⇒ 记二手，**归 external 道正合适**（别人做的、支撑他论证的研究）。★★ 语料里有 **6 个扫描件**，`dedup` 已按题名归并——引用时**算一处证据**。",
+      "title": "Fatigue and efficiency; a study in industry",
+      "creator": "Goldmark, Josephine Clara, 1877-1950; Brandeis, Louis Dembitz, 1856-1941",
+      "words": 342576
+    },
+    {
+      "identifier": "jewishproblemhow00bran",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Jewish problem, how to solve it",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 6008
+    },
+    {
+      "identifier": "jewishproblemhow00branrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Jewish problem; how to solve it",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 6072
+    },
+    {
+      "identifier": "jstor-1013266",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Interlocking Directorates",
+      "creator": "Brandeis, Louis D.",
+      "words": 1934
+    },
+    {
+      "identifier": "jstor-1321160",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Right to Privacy",
+      "creator": "Brandeis, Louis D.",
+      "words": 14636
+    },
+    {
+      "identifier": "jstor-1321339",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Notes",
+      "creator": "Brandeis, Louis D.",
+      "words": 2945
+    },
+    {
+      "identifier": "jstor-1321350",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Notes",
+      "creator": "Brandeis, Louis D.",
+      "words": 2902
+    },
+    {
+      "identifier": "jstor-1321695",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Law of Ponds",
+      "creator": "Brandeis, Louis D.",
+      "words": 10857
+    },
+    {
+      "identifier": "jstor-1321781",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Watuppa Pond Cases",
+      "creator": "Brandeis, Louis D.",
+      "words": 7825
+    },
+    {
+      "identifier": "jstor-2276262",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Massachusetts Savings-Bank Insurance and Pension System",
+      "creator": "Brandeis, Louis D.",
+      "words": 2804
+    },
+    {
+      "identifier": "lifeinsuranceabu00branrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Life insurance, the abuses and the remedies: an address delivered before the Com",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941; Commercial Club of Boston (Mass.)",
+      "words": 9026
+    },
+    {
+      "identifier": "lifeinsuranceabu9582bran",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Life insurance: the abuses and the remedies",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 9529
+    },
+    {
+      "identifier": "otherpeoplesmon00brangoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Other people's money : and how the bankers use it ",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 46057
+    },
+    {
+      "identifier": "otherpeoplesmone00bran",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Other people's money, and how the bankers use it",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 45499
+    },
+    {
+      "identifier": "preliminaryrepor00nati",
+      "档": "二手",
+      "依据": "【人裁】National Economic League《Preliminary report on efficiency in the administration of justice》——creator 首位是该联盟与 Eliot／Storey，**是一份委员会报告**，他是署名人之一。⇒ 二手。",
+      "title": "Preliminary report on efficiency in the administration of justice",
+      "creator": "National Economic League, Boston; Eliot, Charles William, 1834-1926; Storey, Moo",
+      "words": 10883
+    },
+    {
+      "identifier": "savingsinsurance00branrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Savings insurance",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 5848
+    },
+    {
+      "identifier": "scientificmanag00brangoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Scientific management and railroads [microform] : being part of a brief submitte",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 34291
+    },
+    {
+      "identifier": "scientificmanage00branuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Scientific management and railroads; being part of a brief submitted to the Inte",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 34168
+    },
+    {
+      "identifier": "tojewsofamericaj00braniala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「correspondence」",
+      "title": "To the Jews of America : The Jewish Congress versus The American Jewish Committe",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 11581
+    },
+    {
+      "identifier": "voina_i_evreiskaia_problema",
+      "档": "二手",
+      "依据": "【人裁】《Война и еврейская проблема》（俄文）——**多人合集**（Nordau／Pasmanik／Brandeis／Yaffe／Gruenbaum…），他只是其中一位撰稿人，且是**俄译**。⇒ 按 Holroyd 那卷的先例，**整卷记二手**；他那一篇若要用，须单独取原文。",
+      "title": "Война и еврейская проблема",
+      "creator": "Nordau, Max; Pasmanik, Daniel; Brandeis, Louis Dembitz ; Yaffe, Leib; Gruenbaum,",
+      "words": 23120
+    },
+    {
+      "identifier": "washingtonstreet00braniala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Washington Street subway : comments on the financial condition of the Boston",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941; Boston Associated Board of Trade; Massachuse",
+      "words": 4217
+    },
+    {
+      "identifier": "zionismpatriotis00bran",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Zionism and patriotism",
+      "creator": "Brandeis, Louis Dembitz, 1856-1941",
+      "words": 3807
+    }
+  ]
+}

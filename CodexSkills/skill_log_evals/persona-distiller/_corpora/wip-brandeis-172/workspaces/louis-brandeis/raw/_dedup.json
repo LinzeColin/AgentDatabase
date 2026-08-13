@@ -1,0 +1,29 @@
+{
+  "文件数": 38,
+  "阈值": 0.55,
+  "重复簇": [
+    [
+      "agc3261.0001.001.umich.edu",
+      "fatigueefficie00gold",
+      "fatigueefficien00gold",
+      "fatigueefficiency00gold"
+    ],
+    [
+      "businessaprofes02poolgoog",
+      "cu31924002234387"
+    ],
+    [
+      "cu31924002677114",
+      "scientificmanag00brangoog",
+      "scientificmanage00branuoft"
+    ],
+    [
+      "cu31924082456439",
+      "otherpeoplesmone00bran"
+    ]
+  ],
+  "独立文献数上界": 31,
+  "按题名归并的独立作品数": 27,
+  "★ 两个口径": "门用台账行数（同一套书的不同卷各自独立，Bessemer #132 先例）；按题名归并的数回答「他有多少部不同的作品」。**只报一个等于替读者选口径**",
+  "★口径": "min-hash Jaccard；同卷多扫描与同书不同卷需人判"
+}
