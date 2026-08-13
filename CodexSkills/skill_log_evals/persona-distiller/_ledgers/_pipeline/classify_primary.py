@@ -42,6 +42,27 @@ ABOUT = [
     r"leben (des|von)", r"erinnerungen an",
     r"vita di", r"la vie de",
 ]
+
+# ★★★ 2026-08-13 Michelangelo #185 新增：**画册／图版集**。
+# 起因：他一轮里查出 **10 份**「不是他写的」被判成一手，其中 9 份是同一形态——
+# **关于艺术家的画册，IA 的 creator 首位就是那位艺术家**，于是位次、姓名同现全都判不出来。
+#   · Fisher 的 5 本蚀刻摹本册（`ETCHED BY JOSEPH FISHER` ＋ 出版者 `INTRODUCTION`）
+#   · Knapp《reproduced in one hundred and sixty-nine illustrations》（第三人称叙事）
+#   · 《Sixty outlines from the principal works of…》（图版说明目录）
+#   · 《Michelangelo as a painter》（Masters in Art 丛书）
+#   · 《Oeuvres complètes …et choix de Baccio Bandinelli et de Daniel de Volterre》（版画集）
+#
+# ★★ **归「需人判」，不直接判二手。** 理由：`Opere`／`Oeuvres complètes` 这类题名
+# 既可能是画册也可能是他的文集，**判据分不出来，人读一眼正文就分得出**。
+# 直接判二手会误伤真文集（Machiavelli 的《Opere》就是他的著作）。
+# [[empty-default-swallows-unknown]]：说不准的要进独立的一档，不许并进任何一边。
+PLATE_ALBUM = [
+    r"etched fac[- ]?similes?", r"facsimiles of original studies",
+    r"\boutlines from\b", r"reproduced in .{0,20}illustrations",
+    r"\bin \d+ (illustrations|abbildungen|plates)\b", r"des meisters werke",
+    r"\bas a painter\b", r"\bas a sculptor\b",
+    r"\bplates?\b.{0,20}\bafter\b", r"\bafter the original (studies|drawings)\b",
+]
 # 「**他自己在回忆**」的标记词 —— 这些词单看像「写他」，实为自述体。
 # ★ 判法：SELF_NARRATIVE ＋ 目标是第一作者 ⇒ **一手**，不进 ABOUT。
 SELF_NARRATIVE = [
@@ -85,6 +106,10 @@ def classify(title, creator, surnames: list) -> tuple:
     #    又有 reminiscence，按 ① 会判成二手，而它是他本人的回忆录。
     if self_narr and pos == 0:
         return "一手", f"题名含自述体标记「{self_narr}」且目标为第一作者"
+    # ①b ★ 画册／图版集 ⇒ **需人判**（不直接判二手，见 PLATE_ALBUM 的注释）
+    plate = next((q for q in PLATE_ALBUM if re.search(q, t)), "")
+    if plate:
+        return "需人判", f"题名像**画册/图版集**（命中「{plate}」）——关于艺术家的画册，creator 首位常就是他本人，位次与姓名同现都判不出来。**去读一眼正文再定**"
     # ① 标记词 + 目标姓名同现 ⇒ 二手（这是唯一的强判据）
     if about_hit and has_name_in_title:
         return "二手", f"题名含「{about_hit}」且含目标姓名"

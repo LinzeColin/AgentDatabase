@@ -38,5 +38,33 @@
   "facsimilesorigi02fishgoog": {
     "档": "二手",
     "理由": "★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In presenting to the public these etchings, from the designs of Raffaelle and Michael Angelo…」）。**图是照他的素描刻的，文字是 Fisher 与出版者的**（正文主体是尺寸与递藏著录：「Size, 11 in. by 8. From the Collections of M. Buonaroti…」）。⇒ 二手。与 Leonardo #184 排掉 Hollar/Dürer 版画集同理。"
+  },
+  "workofmichelange00mich": {
+    "档": "二手",
+    "理由": "Fritz Knapp《The work of Michelangelo, reproduced in one hundred and sixty-nine illustrations》——**画册＋第三人称叙事**：`He received his first wound while studying in the Brancacci chapel, where a young sculptor, Torrigiani by name, became so enraged that he broke Michelangelo's nose`。★ `flag_borrowed_voice` 把它标成「高·几乎肯定不是本人」，理由是命中句前有引导语`this pride in a letter he wrote in 1548: \" Tell the priest not to…`——**传记在转录他的信**。"
+  },
+  "michelangeloaspa00michrich": {
+    "档": "二手",
+    "理由": "《Michelangelo as a painter》——Bates & Guild「Masters in Art」丛书的一册（正文前有整页丛书广告：MILLET／VAN DYCK／TITIAN／VELASQUEZ／HOLBEIN／BOTTICELLI…）。**是评介，不是他的文字。**"
+  },
+  "cu31924032174173": {
+    "档": "二手",
+    "理由": "《Sixty outlines from the principal works of Michel Angelo Buonarotti》——**图版说明目录**：`Placed between two statues of St. Cosimo and Damiano, by Angelo Montorsoli and Raffaello di Montelupo`。同 Fisher 那五本摹本册。"
+  },
+  "oeuvrescomplte00mich": {
+    "档": "二手",
+    "理由": "《Oeuvres complètes de Michel-Ange, **et choix de Baccio Bandinelli et de Daniel de Volterre**》——版画集，另两位是别的艺术家；正文是法文传记叙事（`jeunes années, eut à combattre la résistance de ses parents…`）。"
+  },
+  "cu31924008756847": {
+    "档": "二手",
+    "理由": "Fisher《Facsimiles of original studies》的又一印本。正文是**递藏著录**：`Count Zanetti, of Florence… was the owner of another. Seven of them came from M. de Legoy, quoted by Landon in his Life and Works of Raffaelle`。同前五本摹本册。"
+  },
+  "gri_33125004476533": {
+    "档": "二手",
+    "理由": "Fritz Knapp《Michelangelo, des Meisters Werke in 166 Abbildungen》——德文艺术评介：`sind sie die beiden Sonnen am Firmament der bildenden Kunst, neben denen selbst Geister wie Leonardo, Raffael, Dürer erbleichen. Die Kunst ist ihnen Religion.`**是评论者在说话。**"
+  },
+  "michelangelodesm00michuoft": {
+    "档": "二手",
+    "理由": "《Michelangelo; des Meisters Werke und seine Lebensgeschichte》，**Hrsg. von Alfred Mera…**——画册＋生平，正文是第三方论述（`erblicken wir im Geist Michelangelos Statue… Herman Grimm hat das schön und treffend gesagt`）。★ 该卷里**夹着他的诗的德译**（measure_voice 抽样命中过 `Nacht ist es, wo kein holdes Angesicht Wie deines leuchtet`）——按 Holroyd 那卷的先例：**卷的编者是第三方 ⇒ 整卷二手**；要用他的诗就去 `Rime` 各印本取原文，别拿这一卷冒充。"
   }
 }

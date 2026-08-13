@@ -2,12 +2,12 @@
   "lanes": 4,
   "去掉纸面道后": 4,
   "逐道份数": {
-    "writings": 38,
+    "writings": 31,
     "conversations": 7,
     "expression": 2,
     "decisions": 0,
     "timeline": 0,
-    "external": 9
+    "external": 16
   },
   "未分道": 0,
   "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
@@ -79,7 +79,7 @@
     },
     {
       "identifier": "cu31924008756847",
-      "道": "writings",
+      "道": "external",
       "title": "Facsimiles of original studies by Michael Angelo in the University Gal"
     },
     {
@@ -89,7 +89,7 @@
     },
     {
       "identifier": "cu31924032174173",
-      "道": "writings",
+      "道": "external",
       "title": "Sixty outlines from the principal works of Michel Angelo Buonarotti, i"
     },
     {
@@ -134,7 +134,7 @@
     },
     {
       "identifier": "gri_33125004476533",
-      "道": "writings",
+      "道": "external",
       "title": "Michelangelo, des Meisters Werke in 166 Abbildungen"
     },
     {
@@ -214,12 +214,12 @@
     },
     {
       "identifier": "michelangeloaspa00michrich",
-      "道": "writings",
+      "道": "external",
       "title": "Michelangelo as a painter"
     },
     {
       "identifier": "michelangelodesm00michuoft",
-      "道": "writings",
+      "道": "external",
       "title": "Michelangelo; des Meisters Werke und seine Lebensgeschichte. Hrsg. von"
     },
     {
@@ -234,7 +234,7 @@
     },
     {
       "identifier": "oeuvrescomplte00mich",
-      "道": "writings",
+      "道": "external",
       "title": "Oeuvres complètes de Michel-Ange, et choix de Baccio Bandinelli et de "
     },
     {
@@ -289,7 +289,7 @@
     },
     {
       "identifier": "workofmichelange00mich",
-      "道": "writings",
+      "道": "external",
       "title": "The work of Michelangelo, reproduced in one hundred and sixty-nine ill"
     }
   ]

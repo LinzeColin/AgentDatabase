@@ -2,7 +2,7 @@
 
 ## Scope and assigned sources
 
-**本道分到 31 份（train split）**：
+**本道分到 24 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
@@ -15,13 +15,10 @@
 | `src-0f90e46d5f7b` | 1842 | P1 | Michel Angelo Buonarrotti des Aelteren sämmtliche Gedichte italiänisch und deutsch |
 | `src-60cd9a49f915` | 1842 | P1 | Michel Angelo Buonarrotti's des Aelteren sämmtliche Gedichte italiänisch und deuts |
 | `src-f547bc4a71ad` | 1850 | P1 | Michel-Ange poète : première traduction complète de ses poésies, précédée d |
-| `src-e578ad29a2aa` | 1855 | P1 | Oeuvres complètes de Michel-Ange, et choix de Baccio Bandinelli et de Daniel de Vo |
 | `src-a774edeb44f1` | 1860 | P1 | MichelAnge poëte. Première traduction complète de ses poésies, précédée d'une étud |
 | `src-3863a0005b65` | 1863 | P1 | Opere varie in versi ed in prosa di Michelangelo Buonarroti il giovane, alcune del |
 | `src-d89e65b8002f` | 1863 | P1 | Opere varie in versi ed in prosa |
-| `src-dff6d04bdd38` | 1863 | P1 | Sixty outlines from the principal works of Michel Angelo Buonarotti, in sculpture, |
 | `src-f3ac5691f1e3` | 1863 | P1 | Opere varie in versi ed in prosa di Michelangelo Buonarroti il giovane, alcune del |
-| `src-ff3f7006072b` | 1865 | P1 | Facsimiles of original studies by Michael Angelo in the University Galleries, Oxfo |
 | `src-6094206729a1` | 1875 | P1 | buonarroti_le_lettere_di_michelangelo_buonarroti |
 | `src-dc47a809071f` | 1878 | P1 | The sonnets of Michael Angelo Buonarroti and Tommaso Campanella : now for the firs |
 | `src-20b35d40dc1d` | 1895 | P1 | Michael Angelo Buonarroti : his sonnets now for the first time translated into rhy |
@@ -30,13 +27,9 @@
 | `src-1ba2ff2c67ee` | 1897 | P1 | Der von Michel Angelo Buonarroti eigenhändig geschriebene Augentractat (XVI Jahrhu |
 | `src-9c282d5b3385` | 1897 | P1 | Die Dichtungen des Michelangelo Buonarroti |
 | `src-85c5b7662cb5` | 1900 | P1 | Sonnets and madrigals of Michelangelo Buonarroti; |
-| `src-e010372f95e3` | 1901 | P1 | Michelangelo as a painter |
 | `src-05d67ff7e9df` | 1904 | P1 | Sonnets. now for the first time translated into rhymed English |
-| `src-172dcf3de9b2` | 1906 | P1 | Michelangelo, des Meisters Werke in 166 Abbildungen |
 | `src-53e19db4cba0` | 1911 | P1 | L'oeuvre littéraire de Michel-Ange, d'après les archives Buonarroti, etc. Traduite |
-| `src-3e9fd617a136` | 1913 | P1 | The work of Michelangelo, reproduced in one hundred and sixty-nine illustrations; |
 | `src-4b92a7f08408` | 1913 | P1 | MICHELANGELO |
-| `src-f06a8e0a2268` | 1918 | P1 | Michelangelo; des Meisters Werke und seine Lebensgeschichte. Hrsg. von Alfred Mera |
 
 ## Source-linked observations
 

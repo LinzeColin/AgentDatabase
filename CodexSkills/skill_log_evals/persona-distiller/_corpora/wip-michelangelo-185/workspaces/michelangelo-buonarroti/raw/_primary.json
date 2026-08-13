@@ -1,12 +1,12 @@
 {
   "总数": 56,
   "计数": {
-    "一手": 47,
-    "二手": 9,
+    "一手": 40,
+    "二手": 16,
     "需人判": 0
   },
-  "一手占比下界": 0.8393,
-  "一手占比上界": 0.8393,
+  "一手占比下界": 0.7143,
+  "一手占比上界": 0.7143,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
   "明细": [
     {
@@ -115,8 +115,8 @@
     },
     {
       "identifier": "cu31924008756847",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
+      "档": "二手",
+      "依据": "【人裁】Fisher《Facsimiles of original studies》的又一印本。正文是**递藏著录**：`Count Zanetti, of Florence… was the owner of another. Seven of them came from M. de Legoy, quoted by Landon in his Life and Works of Raffaelle`。同前五本摹本册。",
       "title": "Facsimiles of original studies by Michael Angelo in the University Galleries, Ox",
       "creator": "Michelangelo Buonarroti, 1475-1564",
       "words": 5581
@@ -131,8 +131,8 @@
     },
     {
       "identifier": "cu31924032174173",
-      "档": "一手",
-      "依据": "目标为第一作者，题名含「works」",
+      "档": "二手",
+      "依据": "【人裁】《Sixty outlines from the principal works of Michel Angelo Buonarotti》——**图版说明目录**：`Placed between two statues of St. Cosimo and Damiano, by Angelo Montorsoli and Raffaello di Montelupo`。同 Fisher 那五本摹本册。",
       "title": "Sixty outlines from the principal works of Michel Angelo Buonarotti, in sculptur",
       "creator": "Michelangelo Buonarroti, 1475-1564",
       "words": 4892
@@ -203,8 +203,8 @@
     },
     {
       "identifier": "gri_33125004476533",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
+      "档": "二手",
+      "依据": "【人裁】Fritz Knapp《Michelangelo, des Meisters Werke in 166 Abbildungen》——德文艺术评介：`sind sie die beiden Sonnen am Firmament der bildenden Kunst, neben denen selbst Geister wie Leonardo, Raffael, Dürer erbleichen. Die Kunst ist ihnen Religion.`**是评论者在说话。**",
       "title": "Michelangelo, des Meisters Werke in 166 Abbildungen",
       "creator": "Michelangelo Buonarroti, 1475-1564; Knapp, Fritz, 1870-1938",
       "words": 25412
@@ -331,16 +331,16 @@
     },
     {
       "identifier": "michelangeloaspa00michrich",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
+      "档": "二手",
+      "依据": "【人裁】《Michelangelo as a painter》——Bates & Guild「Masters in Art」丛书的一册（正文前有整页丛书广告：MILLET／VAN DYCK／TITIAN／VELASQUEZ／HOLBEIN／BOTTICELLI…）。**是评介，不是他的文字。**",
       "title": "Michelangelo as a painter",
       "creator": "Michelangelo Buonarroti, 1475-1564",
       "words": 14376
     },
     {
       "identifier": "michelangelodesm00michuoft",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
+      "档": "二手",
+      "依据": "【人裁】《Michelangelo; des Meisters Werke und seine Lebensgeschichte》，**Hrsg. von Alfred Mera…**——画册＋生平，正文是第三方论述（`erblicken wir im Geist Michelangelos Statue… Herman Grimm hat das schön und treffend gesagt`）。★ 该卷里**夹着他的诗的德译**（measure_voice 抽样命中过 `Nacht ist es, wo kein holdes Angesicht Wie deines leuchtet`）——按 Holroyd 那卷的先例：**卷的编者是第三方 ⇒ 整卷二手**；要用他的诗就去 `Rime` 各印本取原文，别拿这一卷冒充。",
       "title": "Michelangelo; des Meisters Werke und seine Lebensgeschichte. Hrsg. von Alfred Me",
       "creator": "Michelangelo Buonarroti, 1475-1564; Condivi, Ascanio, b. ca. 1520; Semerau, Alfr",
       "words": 91062
@@ -363,8 +363,8 @@
     },
     {
       "identifier": "oeuvrescomplte00mich",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
+      "档": "二手",
+      "依据": "【人裁】《Oeuvres complètes de Michel-Ange, **et choix de Baccio Bandinelli et de Daniel de Volterre**》——版画集，另两位是别的艺术家；正文是法文传记叙事（`jeunes années, eut à combattre la résistance de ses parents…`）。",
       "title": "Oeuvres complètes de Michel-Ange, et choix de Baccio Bandinelli et de Daniel de ",
       "creator": "Michelangelo Buonarroti, 1475-1564; Bandinelli, Baccio, 1493-1560; Volterre, Dan",
       "words": 12450
@@ -451,8 +451,8 @@
     },
     {
       "identifier": "workofmichelange00mich",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
+      "档": "二手",
+      "依据": "【人裁】Fritz Knapp《The work of Michelangelo, reproduced in one hundred and sixty-nine illustrations》——**画册＋第三人称叙事**：`He received his first wound while studying in the Brancacci chapel, where a young sculptor, Torrigiani by name, became so enraged that he broke Michelangelo's nose`。★ `flag_borrowed_voice` 把它标成「高·几乎肯定不是本人」，理由是命中句前有引导语`this pride in a letter he wrote in 1548: \" Tell the priest not to…`——**传记在转录他的信**。",
       "title": "The work of Michelangelo, reproduced in one hundred and sixty-nine illustrations",
       "creator": "Michelangelo Buonarroti, 1475-1564; Knapp, Fritz, 1870-",
       "words": 9033
