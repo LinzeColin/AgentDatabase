@@ -3040,7 +3040,8 @@
     "**要补的是道**：他的书信（Randolph Churchill 编的官方传记附卷）、议会演说（Hansard）、内阁文件都在 IA 的 `creator` 索引之外，**要换通道**。",
     "★ 注意 PD 分界：1930 年之后的《The Second World War》《Great Contemporaries》《Step by Step》等**一律不能取**，已写进 `EXCLUDE_TITLE`。"
    ],
-   "处置类": "**min_lanes 硬卡点**（第七人）——★ 本例形态：**另外三条道各由一份「他只是供稿人/被引者之一」的第三方书撑着**，逐份裁二手之后三条同时归零。与 `check_paper_lanes` 抓的「一条源挂多道」不同，这是「一条道只有一份，而那一份不是他的」。"
+   "处置类": "**min_lanes 硬卡点**（第七人）——★ 本例形态：**另外三条道各由一份「他只是供稿人/被引者之一」的第三方书撑着**，逐份裁二手之后三条同时归零。与 `check_paper_lanes` 抓的「一条源挂多道」不同，这是「一条道只有一份，而那一份不是他的」。",
+   "★★ 2026-08-13 复核（分道压线是假的）": "★★ 2026-08-13 复核：**分道改成 3 道之后仍然不过，且理由更硬**。当天我给 `assign_lanes.py` 的 timeline 规则补了自传题名（`my early life` / `a roving commission`），他的《My Early Life》从 writings 移到 timeline，**现算 3 条道，正好等于 quick 的门**。\n  ★ 压线那一道逐份打开了：timeline 的 2 份是 `My early life a Roving Commission`（dli.ministry.17592）与 `My early life; a roving commission`（myearlyliferovin0000chur_b7k8）——**同一部书的两个印本**。不是我看题名猜的：**流水线自己的去重实测**（`raw/_dedup.json`，min-hash Jaccard 阈值 0.55）把这两份归成了**他语料里唯一的一个重复簇**。\n  ⇒ 那条道的独立作品数 = **1**。3 道是**一部作品数了两遍**换来的，`min_lanes` 实质仍是 **2**。\n  ★★ **当天已经在这份语料上做完了阶段 3、4**（十份产物＋13 条断言＋32 题盲判用例，在 `_corpora/wip-churchill-191/`）。**产物留着，但不许送去判分**——在过不了门的语料上出分数，等于用「凑出来的第三条道」换一个数。\n  ★ 规则本身**不撤**：它在 Ford #188 的《My Life and Work》上同样打响（全库 4355 条题名扫过，散在 2 个人），且带反例守着（《Lord Randolph Churchill》是他写**父亲**的传记，必须留在 writings）。**错的不是规则，是我拿规则的产出当成了「门过了」而没打开压线那一道。**\n  ★ 落成判据：`_ledgers/_pipeline/check_lane_distinct_works.py`（6 条自测，含两条反例）。现有的 `check_paper_lanes` 抓不到这形状——它判「该道有没有专属的源」，而这两份**都独占 timeline**，在它眼里这道结结实实。"
   },
   {
    "name": "Konosuke Matsushita",
@@ -3387,8 +3388,8 @@
    "evidence": "_corpora/wip-howard-193/05-记延后-抓源前出局.md"
   }
  ],
- "total": 168,
- "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。",
+ "total": 187,
+ "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。　★ 2026-08-13 实测又漂了：写着 168、实有 187（差 19 条），**注释写明「不手写」并不能阻止它漂**——已落成判据 `check_deferred_list.py` 每次现算。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
   "unblock_todo": "已把 `unblock_todos` 全部并入（12 条）。**同义键只留这一个拼法。**",
