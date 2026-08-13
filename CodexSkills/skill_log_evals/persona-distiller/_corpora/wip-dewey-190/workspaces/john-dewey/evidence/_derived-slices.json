@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "为什么要有这个文件": "语料按裁定不进 git，重建靠 raw/_ids-rebuild.txt 重新抓 IA。而**切片是派生的**——重抓只会拿回整期原件，拿不回切片。本文件记录从原件到切片的确定性配方，配 rebuild_derived_slices.py 执行并核对 sha256。",
+  "slices": [
+    {
+      "source_id": "src-9fdb7da7d9d3",
+      "from_file": "raw/jstor-1640600.txt",
+      "from_sha256": "9fdb7da7d9d30c78db1079c92de23e4fef62e92b5e2630b3240ea8f8371cef56",
+      "from_words": 3199,
+      "start_anchor": "INTSODUCTOBY ADDBESS",
+      "end_anchor": "\nJohn Dewey \n",
+      "end_anchor_inclusive": true,
+      "out_file": "raw/jstor-1640600-dewey-address.txt",
+      "out_sha256": "2717df63945d9d3ed0ac186b841b36f241753b60748fcf34ee2cd4e7a23eb58b",
+      "out_words": 2394,
+      "reason": "原件是《Science》1915-01-29 整期，多作者。切掉前 368 词（JSTOR 告示＋整期目录）与后 437 词（Lovejoy《Organization of the AAUP》）。署名判据三次实测：整期 ✗／切片 ✓ [A-byline-ocr] John Dewey／尾部 ✗。裁定㉕。",
+      "两个锚在原件中各出现": {
+        "start": 1,
+        "end": 1
+      }
+    }
+  ]
+}
