@@ -359,6 +359,22 @@ else:
     for l in mw.stdout.splitlines():
         if l.strip().startswith("✗"): print("     "+l.strip())
 
+# ★★ 找第二处证据（`find_second_evidence.py`）：2026-08-14 Dewey 上，三条我判过
+#   「补不到第二处」的 claim 里有 **3 条其实补得到** —— 我按 Brandeis 的样本推的结论是错的。
+#   把那套动作固化成工具（正对照先跑／排除同一部作品／候选之间也归组／只交候选不下结论）。
+#   这里只跑自测（它要 --claim/--pattern，不能无参跑）。
+fs=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                      "/_ledgers/_pipeline/find_second_evidence.py"), "--self-test"],
+                  capture_output=True, text=True)
+if fs.returncode == 0:
+    print("✅ 找第二处证据工具（find_second_evidence）：自测全过"
+          "　—— 用法见该文件首屏「那套动作（四步）」")
+else:
+    ok=False
+    print("❌ 找第二处证据工具自测不过（rc=%d）："%fs.returncode)
+    for l in fs.stdout.splitlines():
+        if l.strip().startswith("✗"): print("     "+l.strip())
+
 # ★★★ 派生切片（`rebuild_derived_slices.py`）：**重抓拿不回切片。**
 #   2026-08-14 给 Dewey 的 `src-9fdb7da7d9d3` 切了段（原件是《Science》1915-01-29
 #   **整期**，多作者，只有 74.8% 是他的）。语料按裁定不进 git、重建靠重抓 IA，
