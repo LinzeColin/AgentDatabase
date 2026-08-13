@@ -278,6 +278,45 @@ else:
 for l in lw.stdout.splitlines():
     if l.startswith("扫过"): print("     "+l.strip())
 
+# ★★ 负空间泄题（`check_negative_space_leak.py`）：**按体裁描述「我手边缺什么」，
+#   等于把 holdout 的题目说出来**。Grotius #168 一天撞两次，而三道现有门全绿。
+#   ★ 2026-08-13 实测：39 个有产物的工作区里 **6 个红**。修好 Dewey 之后剩 5 个，
+#     **全是已判分/已结案的人**（Gantt／Nasmyth／Pasteur／Roberts-Austen／Whitworth）
+#     ⇒ 按㊵「已判分即冻结」不动它们。
+#   ⇒ 按**基线**比：新增一个才红。
+EXPECT_LEAK={"henry-gantt","james-nasmyth","louis-pasteur",
+             "william-chandler-roberts-austen","joseph-whitworth"}
+leak=set(); leak_n=0
+for _ws in sorted((R/"CodexSkills/skill_log_evals/persona-distiller/_corpora").glob("wip-*/workspaces/*")):
+    if not (_ws/"persona.md").is_file(): continue
+    leak_n+=1
+    _r=subprocess.run([sys.executable, str(R/"CodexSkills/registry/codex/persona-distiller"
+                                          "/scripts/check_negative_space_leak.py"), str(_ws)],
+                      capture_output=True, text=True)
+    if _r.returncode!=0: leak.add(_ws.name)
+_new_leak=sorted(leak-EXPECT_LEAK)
+if _new_leak:
+    ok=False
+    print("❌ 负空间泄题**新增**：%s（基线 %d 个都是已结案冻结的）"
+          %("／".join(_new_leak), len(EXPECT_LEAK)))
+else:
+    print("✅ 负空间泄题：扫 %d 个有产物的工作区，%d 个红且**都在基线内**（已判分冻结）"
+          %(leak_n, len(leak)))
+    _gone=sorted(EXPECT_LEAK-leak)
+    if _gone: print("     ★ 基线里 %s 这次没红——是修好了还是判据够不着？**要人看一眼**"%("／".join(_gone)))
+
+# ★ 可得性探测前置（`check_probe_precondition.py`）：卒于 1930 年后的人排期前要先探。
+#   ★ **只印现状，不参与红绿**：队列里 215 人卒年未知或在 1930 后，
+#     它按设计 rc=1；做成硬门就是一道**永远红的门**。
+pp=subprocess.run([sys.executable, str(R/"CodexSkills/registry/codex/persona-distiller"
+                                      "/scripts/check_probe_precondition.py"),
+                   "--queue", str(R/"CodexSkills/skill_log_evals/persona-distiller/_ledgers/_蒸馏队列.json"),
+                   "--corpora", str(R/"CodexSkills/skill_log_evals/persona-distiller/_corpora")],
+                  capture_output=True, text=True)
+for l in pp.stdout.splitlines():
+    if l.startswith("✗ ") or l.startswith("✓ "):
+        print("     ★ 可得性探测前置：%s"%l.strip()[:110]); break
+
 # ★★★ 合同漂移（`check_contract_drift.py`）：版本三轴单一真源、检查器两处镜像一致、
 #   **发布清单 checksums.sha256 与磁盘对得上**。
 #   ★ 2026-08-13 实测：它**有**调用方（quality_check 等），但**不在本脚本里**

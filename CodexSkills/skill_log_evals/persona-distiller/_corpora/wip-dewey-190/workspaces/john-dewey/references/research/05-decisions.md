@@ -2,9 +2,7 @@
 
 ## Scope and assigned sources
 
-**本道分到 0 份（train split）**。
-
-★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**。
+（本节由 `emit_lane_scope.py` 机械填入，不要手改）
 
 ## Source-linked observations
 
