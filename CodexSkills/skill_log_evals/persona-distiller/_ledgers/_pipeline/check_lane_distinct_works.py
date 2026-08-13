@@ -232,6 +232,7 @@ def main() -> int:
 
     checked = unchecked = 0
     bad = []
+    zero = []      # ★ 跑过去重而 0 个簇的（见下面的注释）
     print(f"{'工作区':26s} {'档':9s} {'道':>3s} {'空心道':>5s} {'去掉后':>5s} {'门':>3s}  明细")
     for d in sorted(glob.glob(str(CORPORA / "wip-*" / "workspaces" / "*"))):
         ws = pathlib.Path(d)
@@ -247,6 +248,25 @@ def main() -> int:
             continue
         checked += 1
         clusters = json.loads(dj.read_text(encoding="utf-8")).get("重复簇") or []
+        # ★★★ 2026-08-14 实测新增的第三档：**这份 `_dedup.json` 自己带着两个口径，
+        #   而本件只读了其中较松的那个。** 文件里同时记着：
+        #     `独立文献数上界`   —— min-hash（阈值 0.55）归并后的数
+        #     `按题名归并的独立作品数` —— 另一把尺子
+        #   Michelangelo #185 实测：文件数 56，min-hash 上界 **54**（只塌缩 2），
+        #   按题名归并 **51**（塌缩 5）。**两个口径差 3。**
+        #   而他台账里 1875 年 Milanesi 书信集占了 **4 个 source_id**
+        #   （`leletteredimiche00mich`／`laletteredimich00milagoog`／
+        #    `laletteredimich00buongoog`／`buonarroti_le_lettere_…`），
+        #   逐对 8-gram Jaccard 只有 0.1510–0.2412 ⇒ **min-hash 一个都没聚起来**，
+        #   而 min-hash 真正聚出的 2 个簇是别的东西（英译对、Fisher 两册）。
+        #   拿一句本人原文当探针（`non è bene spronar quello cavallo che corre quanto e' può`）
+        #   四份全中——**探针逐字，不受 OCR 讹形与语种影响；重叠分数两样都受。**
+        #   ⇒ 两个口径对不上就单列一档：本件的结论在这些人身上**是下界，不是定论**。
+        n_files = json.loads(dj.read_text(encoding="utf-8")).get("文件数")
+        _d = json.loads(dj.read_text(encoding="utf-8"))
+        mh, bt = _d.get("独立文献数上界"), _d.get("按题名归并的独立作品数")
+        if isinstance(n_files, int) and isinstance(mh, int) and isinstance(bt, int) and mh != bt:
+            zero.append((ws.name, n_files, n_files - mh, n_files - bt))
         res = analyse(tr, clusters)
         prof = profile_of(tr)
         gate = PROFILES[prof]["min_lanes"]
@@ -263,6 +283,16 @@ def main() -> int:
 
     print(f"\n扫过 **{checked} 个**工作区（有实测去重的）；"
           f"**{unchecked} 个未检查**——没有 `raw/_dedup.json`，**不是通过**")
+    if zero:
+        print(f"\n！ 其中 **{len(zero)} 个的两把尺子对不上** —— `_dedup.json` 里 min-hash 与"
+              "按题名归并给出的塌缩数不同，**本件只读 min-hash 那个**，所以这些人的结论是"
+              "**下界不是定论**：\n"
+              "     Michelangelo #185 实测：56 份，min-hash 只塌缩 2、按题名塌缩 5；"
+              "而 1875 Milanesi 书信集在他台账里占 4 个 `source_id`（逐对 Jaccard 0.1510–0.2412），"
+              "min-hash 一个都没聚。\n"
+              "     ⇒ 这些人要**拿一句本人原文当探针**逐份搜，才判得了「是不是同一部书」。")
+        for nm, nf, a, b in sorted(zero):
+            print(f"     {nm:30s} {nf:>3d} 份　min-hash 塌缩 {a}　按题名塌缩 {b}")
     if not bad:
         print("✓ 没有「去掉空心道就够不着门」的人")
         return 0
