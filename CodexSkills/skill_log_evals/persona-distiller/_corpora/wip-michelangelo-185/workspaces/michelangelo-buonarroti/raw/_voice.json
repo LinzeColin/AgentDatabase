@@ -1,0 +1,543 @@
+{
+  "量了": 53,
+  "按语种中位": {
+    "de": 13.83,
+    "en": 1.85,
+    "it": 6.64,
+    "fr": 8.73
+  },
+  "疑似译本": 36,
+  "★口径": "只量一手；无歧义词与有歧义词分列；**本工具不给通过/不通过**",
+  "明细": [
+    {
+      "id": "10542478bsb",
+      "lang": "de",
+      "words": 42888,
+      "无歧义每千词": 15.58,
+      "有歧义每千词": 10.1,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "10754532bsb",
+      "lang": "de",
+      "words": 40953,
+      "无歧义每千词": 16.46,
+      "有歧义每千词": 10.43,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "MICHELANGELO_753",
+      "lang": "en",
+      "words": 97397,
+      "无歧义每千词": 17.03,
+      "有歧义每千词": 34.32,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "artistmerchanta00bottgoog",
+      "lang": "en",
+      "words": 67234,
+      "无歧义每千词": 7.88,
+      "有歧义每千词": 16.67,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bub_gb_-Ex3yhDSSTcC",
+      "lang": "it",
+      "words": 15617,
+      "无歧义每千词": 11.97,
+      "有歧义每千词": 4.99,
+      "第一人称动词每千词": 2.5,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_4srIAdQY3UsC",
+      "lang": "it",
+      "words": 20182,
+      "无歧义每千词": 2.38,
+      "有歧义每千词": 5.15,
+      "第一人称动词每千词": 3.77,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_A4VTAAAAcAAJ",
+      "lang": "fr",
+      "words": 87197,
+      "无歧义每千词": 8.74,
+      "有歧义每千词": 6.61,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bub_gb_FplWAAAAcAAJ",
+      "lang": "fr",
+      "words": 87293,
+      "无歧义每千词": 8.73,
+      "有歧义每千词": 6.75,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bub_gb_VogLAQAAIAAJ",
+      "lang": "de",
+      "words": 70741,
+      "无歧义每千词": 11.58,
+      "有歧义每千词": 0.28,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "bub_gb_eyp5Is6AwlcC",
+      "lang": "it",
+      "words": 168277,
+      "无歧义每千词": 4.15,
+      "有歧义每千词": 4.96,
+      "第一人称动词每千词": 3.21,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_g9rj_o_cnSAC",
+      "lang": "it",
+      "words": 167188,
+      "无歧义每千词": 4.23,
+      "有歧义每千词": 5.22,
+      "第一人称动词每千词": 3.36,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "bub_gb_rHu4_709T2oC",
+      "lang": "it",
+      "words": 101463,
+      "无歧义每千词": 7.39,
+      "有歧义每千词": 3.97,
+      "第一人称动词每千词": 4.08,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "buonarroti_le_lettere_di_michelangelo_buonarroti",
+      "lang": "it",
+      "words": 186828,
+      "无歧义每千词": 6.87,
+      "有歧义每千词": 13.75,
+      "第一人称动词每千词": 6.51,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "cu31924008756847",
+      "lang": "en",
+      "words": 5555,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 4.32,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "cu31924014269975",
+      "lang": "en",
+      "words": 25693,
+      "无歧义每千词": 14.21,
+      "有歧义每千词": 12.3,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "cu31924032174173",
+      "lang": "en",
+      "words": 4869,
+      "无歧义每千词": 1.85,
+      "有歧义每千词": 7.6,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "dervonmichelang00vatigoog",
+      "lang": "de",
+      "words": 3152,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "diebriefedesmich00mich",
+      "lang": "de",
+      "words": 68491,
+      "无歧义每千词": 22.89,
+      "有歧义每千词": 34.47,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "diedichtungendes00mich",
+      "lang": "de",
+      "words": 226708,
+      "无歧义每千词": 0.84,
+      "有歧义每千词": 1.5,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "diegedichte00michuoft",
+      "lang": "it",
+      "words": 68649,
+      "无歧义每千词": 8.26,
+      "有歧义每千词": 3.13,
+      "第一人称动词每千词": 3.63,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "eightyfouretche00raphgoog",
+      "lang": "en",
+      "words": 3248,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 3.69,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "eightyfouretched00michuoft",
+      "lang": "en",
+      "words": 2846,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 2.11,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "facsimilesorigi01fishgoog",
+      "lang": "en",
+      "words": 5572,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 1.44,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "facsimilesorigi02fishgoog",
+      "lang": "en",
+      "words": 5514,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 1.27,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "gri_33125004476533",
+      "lang": "de",
+      "words": 25064,
+      "无歧义每千词": 0.56,
+      "有歧义每千词": 0.56,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "gri_33125016373926",
+      "lang": "fr",
+      "words": 8009,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 0.0,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "gri_33125016448520",
+      "lang": "de",
+      "words": 3467,
+      "无歧义每千词": 2.6,
+      "有歧义每千词": 4.61,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "ilritrattomiglio00mich",
+      "lang": "it",
+      "words": 11023,
+      "无歧义每千词": 1.27,
+      "有歧义每千词": 1.72,
+      "第一人称动词每千词": 2.99,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "laletteredimich00buongoog",
+      "lang": "it",
+      "words": 167974,
+      "无歧义每千词": 5.95,
+      "有歧义每千词": 12.83,
+      "第一人称动词每千词": 5.53,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "laletteredimich00milagoog",
+      "lang": "it",
+      "words": 197227,
+      "无歧义每千词": 6.36,
+      "有歧义每千词": 13.68,
+      "第一人称动词每千词": 6.05,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "ldpd_9355154_000",
+      "lang": "fr",
+      "words": 5149,
+      "无歧义每千词": 0.97,
+      "有歧义每千词": 0.78,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "leletteredimiche00mich",
+      "lang": "it",
+      "words": 202796,
+      "无歧义每千词": 6.34,
+      "有歧义每千词": 13.4,
+      "第一人称动词每千词": 6.04,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "lerimedimichela00magggoog",
+      "lang": "it",
+      "words": 88112,
+      "无歧义每千词": 6.64,
+      "有歧义每千词": 4.93,
+      "第一人称动词每千词": 3.73,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "lerimedimichelag00mich",
+      "lang": "it",
+      "words": 88359,
+      "无歧义每千词": 7.58,
+      "有歧义每千词": 5.42,
+      "第一人称动词每千词": 4.21,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "lerimedimichelag00mich_1",
+      "lang": "it",
+      "words": 91932,
+      "无歧义每千词": 7.63,
+      "有歧义每千词": 5.16,
+      "第一人称动词每千词": 4.34,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "loeuvrelittrai00michuoft",
+      "lang": "fr",
+      "words": 98544,
+      "无歧义每千词": 10.05,
+      "有歧义每千词": 18.15,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "michaelangelo00michrich",
+      "lang": "en",
+      "words": 7518,
+      "无歧义每千词": 0.27,
+      "有歧义每千词": 1.33,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "michaelangelobuo0000unse_y1s3",
+      "lang": "en",
+      "words": 111223,
+      "无歧义每千词": 5.16,
+      "有歧义每千词": 9.16,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "michelangeloaspa00michrich",
+      "lang": "en",
+      "words": 14224,
+      "无歧义每千词": 0.49,
+      "有歧义每千词": 1.97,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "michelangelodesm00michuoft",
+      "lang": "de",
+      "words": 90889,
+      "无歧义每千词": 17.93,
+      "有歧义每千词": 23.71,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "michelangelogedi15813gut",
+      "lang": "de",
+      "words": 29440,
+      "无歧义每千词": 19.4,
+      "有歧义每千词": 20.45,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "oeuvrescomplte00mich",
+      "lang": "fr",
+      "words": 12334,
+      "无歧义每千词": 1.05,
+      "有歧义每千词": 0.49,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "operevarieinver01fanfgoog",
+      "lang": "it",
+      "words": 171503,
+      "无歧义每千词": 4.0,
+      "有歧义每千词": 5.55,
+      "第一人称动词每千词": 3.37,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "poesiemic00michuoft",
+      "lang": "it",
+      "words": 35004,
+      "无歧义每千词": 13.77,
+      "有歧义每千词": 4.43,
+      "第一人称动词每千词": 3.89,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "recordofhislifea00michuoft",
+      "lang": "en",
+      "words": 97225,
+      "无歧义每千词": 17.04,
+      "有歧义每千词": 34.71,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "rimedimichelagn00biaggoog",
+      "lang": "it",
+      "words": 97219,
+      "无歧义每千词": 6.69,
+      "有歧义每千词": 4.36,
+      "第一人称动词每千词": 3.99,
+      "主语脱落语": true,
+      "疑似译本": false
+    },
+    {
+      "id": "saemmtlichegedic00michuoft",
+      "lang": "de",
+      "words": 61155,
+      "无歧义每千词": 13.83,
+      "有歧义每千词": 9.75,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "selectedpoemsfro00michrich",
+      "lang": "en",
+      "words": 24351,
+      "无歧义每千词": 13.22,
+      "有歧义每千词": 9.73,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "seventyetchedfa00fishgoog",
+      "lang": "en",
+      "words": 2253,
+      "无歧义每千词": 0.0,
+      "有歧义每千词": 5.33,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "sonnetsmadrigals00michrich",
+      "lang": "en",
+      "words": 24485,
+      "无歧义每千词": 8.58,
+      "有歧义每千词": 8.21,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "sonnetsofmichael00michrich",
+      "lang": "en",
+      "words": 33733,
+      "无歧义每千词": 12.72,
+      "有歧义每千词": 11.65,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "sonnetsofmichela00michrich",
+      "lang": "en",
+      "words": 38199,
+      "无歧义每千词": 9.29,
+      "有歧义每千词": 8.14,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    },
+    {
+      "id": "workofmichelange00mich",
+      "lang": "en",
+      "words": 8961,
+      "无歧义每千词": 0.56,
+      "有歧义每千词": 3.35,
+      "第一人称动词每千词": null,
+      "主语脱落语": false,
+      "疑似译本": true
+    }
+  ]
+}

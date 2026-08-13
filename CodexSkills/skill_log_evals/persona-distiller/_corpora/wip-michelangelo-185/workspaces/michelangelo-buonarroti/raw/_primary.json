@@ -1,0 +1,461 @@
+{
+  "总数": 56,
+  "计数": {
+    "一手": 53,
+    "二手": 3,
+    "需人判": 0
+  },
+  "一手占比下界": 0.9464,
+  "一手占比上界": 0.9464,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "明细": [
+    {
+      "identifier": "10542478bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Michel Angelo Buonarrotti des Aelteren sämmtliche Gedichte italiänisch und deuts",
+      "creator": "Michelangelo, Buonarroti",
+      "words": 42931
+    },
+    {
+      "identifier": "10754532bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Michel Angelo Buonarrotti's des Aelteren sämmtliche Gedichte italiänisch und deu",
+      "creator": "Michelangelo, Buonarroti",
+      "words": 40990
+    },
+    {
+      "identifier": "MICHELANGELO_753",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "MICHELANGELO",
+      "creator": "Michelangelo Buonarroti",
+      "words": 97694
+    },
+    {
+      "identifier": "artistmerchanta00bottgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Artist, the Merchant, and the Statesman, of the Age of the Medici, and ...",
+      "creator": "Charles Edwards Lester, Michelangelo Buonarroti, Amerigo Vespucci, Botta",
+      "words": 68085
+    },
+    {
+      "identifier": "bub_gb_-Ex3yhDSSTcC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Rime di Michelagnolo Buonarroti. Raccolte da Michelagnolo suo nipote",
+      "creator": "Michelangelo Buonarroti",
+      "words": 15631
+    },
+    {
+      "identifier": "bub_gb_4srIAdQY3UsC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lettera di Michelangiolo Bonarroti per giustificarsi contro le calunnie degli em",
+      "creator": "Michelangelo Buonarroti",
+      "words": 20803
+    },
+    {
+      "identifier": "bub_gb_A4VTAAAAcAAJ",
+      "档": "一手",
+      "依据": "【人裁】《Michel-Ange poète: première traduction complète de ses poésies》——**正文主体是他的诗**，A. Lannau-Rolland 做的是法译＋一篇导论。与 Leonardo #184 的 Richter 英译同样处置：**译本仍是一手，但不能用来量声口**（量到的是译者的文风）。★ 卷首那篇 étude 是二手成分，取引文时要避开导论部分。",
+      "title": "Michel-Ange poète : première traduction complète de ses poésies, précédée",
+      "creator": "Lannau-Rolland, A; Buonarroti, Michelangelo; Colonna, Vittoria",
+      "words": 88357
+    },
+    {
+      "identifier": "bub_gb_FplWAAAAcAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "MichelAnge poëte. Première traduction complète de ses poésies, précédée d'une ét",
+      "creator": "Michelangelo Buonarroti",
+      "words": 88462
+    },
+    {
+      "identifier": "bub_gb_VogLAQAAIAAJ",
+      "档": "一手",
+      "依据": "【人裁】《Die Gedichte des Michelangelo Buonarroti, übersetzt und biographisch geordnet von Walter Robert-tornow》——他的诗的德译本，creator 首位就是他本人。同上：**一手（译本）**，不得用于声口测量。题名里的 `biographisch` 只是编排方式（按生平次序排诗），不是传记。",
+      "title": "Gedichte, übers. und biographisch geordnet von Walter Roberttornow",
+      "creator": "Michelangelo Buonarroti",
+      "words": 70770
+    },
+    {
+      "identifier": "bub_gb_eyp5Is6AwlcC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere varie in versi ed in prosa di Michelangelo Buonarroti il giovane, alcune d",
+      "creator": "Michelangelo Buonarroti 1475-1564 Verfasser",
+      "words": 170306
+    },
+    {
+      "identifier": "bub_gb_g9rj_o_cnSAC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere varie in versi ed in prosa di Michelangelo Buonarroti il giovane, alcune d",
+      "creator": "Michelangelo Buonarroti 1475-1564 Verfasser",
+      "words": 169299
+    },
+    {
+      "identifier": "bub_gb_rHu4_709T2oC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Rime di Michelagnolo Buonarroti il vecchio, col comento di G. Biagioli ",
+      "creator": "Michelangelo Buonarroti",
+      "words": 102745
+    },
+    {
+      "identifier": "buonarroti_le_lettere_di_michelangelo_buonarroti",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「lettere」",
+      "title": "buonarroti_le_lettere_di_michelangelo_buonarroti",
+      "creator": "_michelangelo_buonarroti",
+      "words": 189800
+    },
+    {
+      "identifier": "cu31924008756847",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Facsimiles of original studies by Michael Angelo in the University Galleries, Ox",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 5581
+    },
+    {
+      "identifier": "cu31924014269975",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Sonnets. now for the first time translated into rhymed English",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 25725
+    },
+    {
+      "identifier": "cu31924032174173",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Sixty outlines from the principal works of Michel Angelo Buonarotti, in sculptur",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 4892
+    },
+    {
+      "identifier": "dervonmichelang00vatigoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Der von Michel Angelo Buonarroti eigenhändig geschriebene Augentractat (XVI Jahr",
+      "creator": "Albrecht Maria Berger ,  Michelangelo Buonarroti,  Biblioteca apostolica vatican",
+      "words": 3169
+    },
+    {
+      "identifier": "diebriefedesmich00mich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Die Briefe des Michelagniolo Buonarroti",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Frey, Karl, 1857-1917",
+      "words": 69635
+    },
+    {
+      "identifier": "diedichtungendes00mich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die Dichtungen des Michelangelo Buonarroti",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Frey, Karl, 1857-1917",
+      "words": 228355
+    },
+    {
+      "identifier": "diegedichte00michuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die Gedichte",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Robert-tornow, Walter, d. 1895; Thouret, Geo",
+      "words": 68705
+    },
+    {
+      "identifier": "eightyfouretche00raphgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Eighty-four Etched Fac-similes: On a Reduced Scale After the Original Studies by",
+      "creator": "Joseph Fisher ,  Michelangelo Buonarroti,  Raphael",
+      "words": 3265
+    },
+    {
+      "identifier": "eightyfouretched00michuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Eighty-four etched fac-similes, on a reduced scale, after the original studies b",
+      "creator": "Michelangelo Buonarroti, 1475-1564; University of Oxford. Galleries; Raphael, 14",
+      "words": 2862
+    },
+    {
+      "identifier": "facsimilesorigi01fishgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Facsimiles of Original Studies by Michael Angelo in the University Galleries, Ox",
+      "creator": "Michelangelo Buonarroti,  University of Oxford University Galleries,  Joseph Fis",
+      "words": 5601
+    },
+    {
+      "identifier": "facsimilesorigi02fishgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Facsimiles of Original Studies by Michael Angelo in the University Galleries, Ox",
+      "creator": "Michelangelo Buonarroti,  University of Oxford University Galleries,  Joseph Fis",
+      "words": 5535
+    },
+    {
+      "identifier": "gri_33125004476533",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Michelangelo, des Meisters Werke in 166 Abbildungen",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Knapp, Fritz, 1870-1938",
+      "words": 25412
+    },
+    {
+      "identifier": "gri_33125016373926",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Dessins inconnus de Michel-Ange récemment découverts aux Offices de Florence",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 8019
+    },
+    {
+      "identifier": "gri_33125016448520",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die Zeichnungen Michelangelos im Museum Teyler zu Haarlem",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 3478
+    },
+    {
+      "identifier": "ilritrattomiglio00mich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Il ritratto migliore e autentico di M. Buonarroti",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Guasti, Gaetano, 1835-1910",
+      "words": 11309
+    },
+    {
+      "identifier": "laletteredimich00buongoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「lettere」",
+      "title": "La lettere di Michelangelo Buonarroti",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 167998
+    },
+    {
+      "identifier": "laletteredimich00milagoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「lettere」",
+      "title": "La lettere di Michelangelo Buonarroti",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 197244
+    },
+    {
+      "identifier": "ldpd_9355154_000",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lettre adressée à Madame la comtesse de*** à l'occasion d'un crucifix en ivoi",
+      "creator": "Michelangelo Buonarroti,",
+      "words": 5260
+    },
+    {
+      "identifier": "leletteredimiche00mich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「lettere」",
+      "title": "Le lettere di Michelangelo Buonarroti",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 202816
+    },
+    {
+      "identifier": "lerimedimichela00magggoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Le rime di Michelagnolo Buonarroti ...",
+      "creator": "Michelangelo Buonarroti,  Benedetto Varchi,  Mario Guiducci ,  Alessandro Maggio",
+      "words": 88714
+    },
+    {
+      "identifier": "lerimedimichelag00mich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Le rime di Michelagnolo Buonarroti ..",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Guiducci, Mario, 1584-1646; Varchi, Benedett",
+      "words": 89936
+    },
+    {
+      "identifier": "lerimedimichelag00mich_1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Le rime di Michelagnolo Buonarroti : pittore, scultore, architetto, e poeta fior",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 92110
+    },
+    {
+      "identifier": "lifemichaelange02buongoog",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The Life of Michael Angelo Buonarroti: With Translations of Many of His ...",
+      "creator": "John Scandrett Harford,  Michelangelo Buonarroti",
+      "words": 103857
+    },
+    {
+      "identifier": "loeuvrelittrai00michuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "L'oeuvre littéraire de Michel-Ange, d'après les archives Buonarroti, etc. Tradui",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Boyer d'Agen, Augustin, 1857-1945",
+      "words": 99317
+    },
+    {
+      "identifier": "michaelangelo00michrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Michael Angelo",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Gronau, Georg, 1868-1938",
+      "words": 7558
+    },
+    {
+      "identifier": "michaelangelobuo0000unse_y1s3",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Michael Angelo Buonarroti : his sonnets now for the first time translated into r",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 111680
+    },
+    {
+      "identifier": "michaelangelobuo00holrrich",
+      "档": "二手",
+      "依据": "【人裁】Charles Holroyd 爵士（1861–1917）写的专著《Michael Angelo Buonarroti》。★ 该卷附有 Holroyd 英译的 **Francisco de Hollanda〈与米开朗基罗的四篇对话〉**——附录里有一手成分，但**这一卷的作者是 Holroyd**，整卷记二手。若日后要用那篇对话录，应单独取 `Quatro diálogos da pintura antiga` 的原本，不要拿这一卷冒充。",
+      "title": "Michael Angelo Buonarroti",
+      "creator": "Holroyd, Charles, Sir, 1861-1917; Michelangelo Buonarroti, 1475-1564; Hollanda, ",
+      "words": 111670
+    },
+    {
+      "identifier": "michelangeloaspa00michrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Michelangelo as a painter",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 14376
+    },
+    {
+      "identifier": "michelangelodesm00michuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Michelangelo; des Meisters Werke und seine Lebensgeschichte. Hrsg. von Alfred Me",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Condivi, Ascanio, b. ca. 1520; Semerau, Alfr",
+      "words": 91062
+    },
+    {
+      "identifier": "michelangeloeine00hild",
+      "档": "二手",
+      "依据": "【人裁】Edmund Hildebrandt（1872–1939）《Michelangelo: eine Einführung in das Verständnis seiner Werke》——理解其作品的**导论**，通篇是他人的论述。",
+      "title": "Michelangelo : eine Einführung in das Verständnis seiner Werke",
+      "creator": "Hildebrandt, Edmund, 1872-1939; Michelangelo Buonarroti, 1475-1564",
+      "words": 46467
+    },
+    {
+      "identifier": "michelangelogedi15813gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Michelangelo Gedichte und Briefe: In Auswahl herausgegeben von R. A. Guardini",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 29441
+    },
+    {
+      "identifier": "oeuvrescomplte00mich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres complètes de Michel-Ange, et choix de Baccio Bandinelli et de Daniel de ",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Bandinelli, Baccio, 1493-1560; Volterre, Dan",
+      "words": 12450
+    },
+    {
+      "identifier": "operevarieinver01fanfgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「opere」",
+      "title": "Opere varie in versi ed in prosa",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 173603
+    },
+    {
+      "identifier": "poesiemic00michuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Poesie;",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 35165
+    },
+    {
+      "identifier": "recordofhislifea00michuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "A record of his life as told in his own letters and papers;",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Carden, Robert Walter",
+      "words": 97523
+    },
+    {
+      "identifier": "rimedimichelagn00biaggoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Rime di Michelagnolo Buonarroti, il vecchio",
+      "creator": "Michelangelo Buonarroti,  Nicolà Giosafatte Biagioli",
+      "words": 98204
+    },
+    {
+      "identifier": "saemmtlichegedic00michuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Saemmtliche Gedichte Michelangelo's. In Guasti's Text, mit deutscher Uebersetzun",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Guasti, Cesare, 1822-1889",
+      "words": 61218
+    },
+    {
+      "identifier": "selectedpoemsfro00michrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Selected poems from Michelangelo Buonarroti, with translations from various sour",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Cheney, Ednah Dow Littlehale, 1824-1904",
+      "words": 24422
+    },
+    {
+      "identifier": "seventyetchedfa00fishgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Seventy Etched Facsimiles: On a Reduced Scale, After the Original Studies by Mic",
+      "creator": "Raphael ,  Michelangelo Buonarroti,  Joseph Fisher",
+      "words": 2255
+    },
+    {
+      "identifier": "sonnetsmadrigals00michrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Sonnets and madrigals of Michelangelo Buonarroti;",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Newell, William Wells, 1839-1907; Rogers, Br",
+      "words": 24800
+    },
+    {
+      "identifier": "sonnetsofmichael00michrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The sonnets of Michael Angelo Buonarroti and Tommaso Campanella : now for the fi",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Campanella, Tommaso, 1568-1639; Symonds, Joh",
+      "words": 33837
+    },
+    {
+      "identifier": "sonnetsofmichela00michrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The sonnets of Michelangelo Buonarroti",
+      "creator": "Michelangelo Buonarroti, 1475-1564",
+      "words": 38383
+    },
+    {
+      "identifier": "workofmichelange00mich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The work of Michelangelo, reproduced in one hundred and sixty-nine illustrations",
+      "creator": "Michelangelo Buonarroti, 1475-1564; Knapp, Fritz, 1870-",
+      "words": 9033
+    }
+  ]
+}

@@ -1,0 +1,296 @@
+{
+  "lanes": 4,
+  "去掉纸面道后": 4,
+  "逐道份数": {
+    "writings": 44,
+    "conversations": 7,
+    "expression": 2,
+    "decisions": 0,
+    "timeline": 0,
+    "external": 3
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "10542478bsb",
+      "道": "writings",
+      "title": "Michel Angelo Buonarrotti des Aelteren sämmtliche Gedichte italiänisch"
+    },
+    {
+      "identifier": "10754532bsb",
+      "道": "writings",
+      "title": "Michel Angelo Buonarrotti's des Aelteren sämmtliche Gedichte italiänis"
+    },
+    {
+      "identifier": "MICHELANGELO_753",
+      "道": "writings",
+      "title": "MICHELANGELO"
+    },
+    {
+      "identifier": "artistmerchanta00bottgoog",
+      "道": "writings",
+      "title": "The Artist, the Merchant, and the Statesman, of the Age of the Medici,"
+    },
+    {
+      "identifier": "bub_gb_-Ex3yhDSSTcC",
+      "道": "writings",
+      "title": "Rime di Michelagnolo Buonarroti. Raccolte da Michelagnolo suo nipote"
+    },
+    {
+      "identifier": "bub_gb_4srIAdQY3UsC",
+      "道": "writings",
+      "title": "Lettera di Michelangiolo Bonarroti per giustificarsi contro le calunni"
+    },
+    {
+      "identifier": "bub_gb_A4VTAAAAcAAJ",
+      "道": "writings",
+      "title": "Michel-Ange poète : première traduction complète de ses poésies, p"
+    },
+    {
+      "identifier": "bub_gb_FplWAAAAcAAJ",
+      "道": "writings",
+      "title": "MichelAnge poëte. Première traduction complète de ses poésies, précédé"
+    },
+    {
+      "identifier": "bub_gb_VogLAQAAIAAJ",
+      "道": "writings",
+      "title": "Gedichte, übers. und biographisch geordnet von Walter Roberttornow"
+    },
+    {
+      "identifier": "bub_gb_eyp5Is6AwlcC",
+      "道": "writings",
+      "title": "Opere varie in versi ed in prosa di Michelangelo Buonarroti il giovane"
+    },
+    {
+      "identifier": "bub_gb_g9rj_o_cnSAC",
+      "道": "writings",
+      "title": "Opere varie in versi ed in prosa di Michelangelo Buonarroti il giovane"
+    },
+    {
+      "identifier": "bub_gb_rHu4_709T2oC",
+      "道": "writings",
+      "title": "Rime di Michelagnolo Buonarroti il vecchio, col comento di G. Biagioli"
+    },
+    {
+      "identifier": "buonarroti_le_lettere_di_michelangelo_buonarroti",
+      "道": "writings",
+      "title": "buonarroti_le_lettere_di_michelangelo_buonarroti"
+    },
+    {
+      "identifier": "cu31924008756847",
+      "道": "writings",
+      "title": "Facsimiles of original studies by Michael Angelo in the University Gal"
+    },
+    {
+      "identifier": "cu31924014269975",
+      "道": "writings",
+      "title": "Sonnets. now for the first time translated into rhymed English"
+    },
+    {
+      "identifier": "cu31924032174173",
+      "道": "writings",
+      "title": "Sixty outlines from the principal works of Michel Angelo Buonarotti, i"
+    },
+    {
+      "identifier": "dervonmichelang00vatigoog",
+      "道": "writings",
+      "title": "Der von Michel Angelo Buonarroti eigenhändig geschriebene Augentractat"
+    },
+    {
+      "identifier": "diebriefedesmich00mich",
+      "道": "conversations",
+      "title": "Die Briefe des Michelagniolo Buonarroti"
+    },
+    {
+      "identifier": "diedichtungendes00mich",
+      "道": "writings",
+      "title": "Die Dichtungen des Michelangelo Buonarroti"
+    },
+    {
+      "identifier": "diegedichte00michuoft",
+      "道": "writings",
+      "title": "Die Gedichte"
+    },
+    {
+      "identifier": "eightyfouretche00raphgoog",
+      "道": "writings",
+      "title": "Eighty-four Etched Fac-similes: On a Reduced Scale After the Original "
+    },
+    {
+      "identifier": "eightyfouretched00michuoft",
+      "道": "writings",
+      "title": "Eighty-four etched fac-similes, on a reduced scale, after the original"
+    },
+    {
+      "identifier": "facsimilesorigi01fishgoog",
+      "道": "writings",
+      "title": "Facsimiles of Original Studies by Michael Angelo in the University Gal"
+    },
+    {
+      "identifier": "facsimilesorigi02fishgoog",
+      "道": "writings",
+      "title": "Facsimiles of Original Studies by Michael Angelo in the University Gal"
+    },
+    {
+      "identifier": "gri_33125004476533",
+      "道": "writings",
+      "title": "Michelangelo, des Meisters Werke in 166 Abbildungen"
+    },
+    {
+      "identifier": "gri_33125016373926",
+      "道": "writings",
+      "title": "Dessins inconnus de Michel-Ange récemment découverts aux Offices de "
+    },
+    {
+      "identifier": "gri_33125016448520",
+      "道": "writings",
+      "title": "Die Zeichnungen Michelangelos im Museum Teyler zu Haarlem"
+    },
+    {
+      "identifier": "ilritrattomiglio00mich",
+      "道": "writings",
+      "title": "Il ritratto migliore e autentico di M. Buonarroti"
+    },
+    {
+      "identifier": "laletteredimich00buongoog",
+      "道": "conversations",
+      "title": "La lettere di Michelangelo Buonarroti"
+    },
+    {
+      "identifier": "laletteredimich00milagoog",
+      "道": "conversations",
+      "title": "La lettere di Michelangelo Buonarroti"
+    },
+    {
+      "identifier": "ldpd_9355154_000",
+      "道": "conversations",
+      "title": "Lettre adressée à Madame la comtesse de*** à l'occasion d'un crucif"
+    },
+    {
+      "identifier": "leletteredimiche00mich",
+      "道": "conversations",
+      "title": "Le lettere di Michelangelo Buonarroti"
+    },
+    {
+      "identifier": "lerimedimichela00magggoog",
+      "道": "writings",
+      "title": "Le rime di Michelagnolo Buonarroti ..."
+    },
+    {
+      "identifier": "lerimedimichelag00mich",
+      "道": "writings",
+      "title": "Le rime di Michelagnolo Buonarroti .."
+    },
+    {
+      "identifier": "lerimedimichelag00mich_1",
+      "道": "writings",
+      "title": "Le rime di Michelagnolo Buonarroti : pittore, scultore, architetto, e "
+    },
+    {
+      "identifier": "lifemichaelange02buongoog",
+      "道": "external",
+      "title": "The Life of Michael Angelo Buonarroti: With Translations of Many of Hi"
+    },
+    {
+      "identifier": "loeuvrelittrai00michuoft",
+      "道": "writings",
+      "title": "L'oeuvre littéraire de Michel-Ange, d'après les archives Buonarroti, e"
+    },
+    {
+      "identifier": "michaelangelo00michrich",
+      "道": "writings",
+      "title": "Michael Angelo"
+    },
+    {
+      "identifier": "michaelangelobuo0000unse_y1s3",
+      "道": "writings",
+      "title": "Michael Angelo Buonarroti : his sonnets now for the first time transla"
+    },
+    {
+      "identifier": "michaelangelobuo00holrrich",
+      "道": "external",
+      "title": "Michael Angelo Buonarroti"
+    },
+    {
+      "identifier": "michelangeloaspa00michrich",
+      "道": "writings",
+      "title": "Michelangelo as a painter"
+    },
+    {
+      "identifier": "michelangelodesm00michuoft",
+      "道": "writings",
+      "title": "Michelangelo; des Meisters Werke und seine Lebensgeschichte. Hrsg. von"
+    },
+    {
+      "identifier": "michelangeloeine00hild",
+      "道": "external",
+      "title": "Michelangelo : eine Einführung in das Verständnis seiner Werke"
+    },
+    {
+      "identifier": "michelangelogedi15813gut",
+      "道": "conversations",
+      "title": "Michelangelo Gedichte und Briefe: In Auswahl herausgegeben von R. A. G"
+    },
+    {
+      "identifier": "oeuvrescomplte00mich",
+      "道": "writings",
+      "title": "Oeuvres complètes de Michel-Ange, et choix de Baccio Bandinelli et de "
+    },
+    {
+      "identifier": "operevarieinver01fanfgoog",
+      "道": "writings",
+      "title": "Opere varie in versi ed in prosa"
+    },
+    {
+      "identifier": "poesiemic00michuoft",
+      "道": "expression",
+      "title": "Poesie;"
+    },
+    {
+      "identifier": "recordofhislifea00michuoft",
+      "道": "conversations",
+      "title": "A record of his life as told in his own letters and papers;"
+    },
+    {
+      "identifier": "rimedimichelagn00biaggoog",
+      "道": "writings",
+      "title": "Rime di Michelagnolo Buonarroti, il vecchio"
+    },
+    {
+      "identifier": "saemmtlichegedic00michuoft",
+      "道": "writings",
+      "title": "Saemmtliche Gedichte Michelangelo's. In Guasti's Text, mit deutscher U"
+    },
+    {
+      "identifier": "selectedpoemsfro00michrich",
+      "道": "expression",
+      "title": "Selected poems from Michelangelo Buonarroti, with translations from va"
+    },
+    {
+      "identifier": "seventyetchedfa00fishgoog",
+      "道": "writings",
+      "title": "Seventy Etched Facsimiles: On a Reduced Scale, After the Original Stud"
+    },
+    {
+      "identifier": "sonnetsmadrigals00michrich",
+      "道": "writings",
+      "title": "Sonnets and madrigals of Michelangelo Buonarroti;"
+    },
+    {
+      "identifier": "sonnetsofmichael00michrich",
+      "道": "writings",
+      "title": "The sonnets of Michael Angelo Buonarroti and Tommaso Campanella : now "
+    },
+    {
+      "identifier": "sonnetsofmichela00michrich",
+      "道": "writings",
+      "title": "The sonnets of Michelangelo Buonarroti"
+    },
+    {
+      "identifier": "workofmichelange00mich",
+      "道": "writings",
+      "title": "The work of Michelangelo, reproduced in one hundred and sixty-nine ill"
+    }
+  ]
+}

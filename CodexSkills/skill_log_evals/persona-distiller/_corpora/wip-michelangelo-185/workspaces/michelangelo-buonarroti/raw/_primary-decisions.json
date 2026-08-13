@@ -1,0 +1,18 @@
+{
+  "bub_gb_A4VTAAAAcAAJ": {
+    "档": "一手",
+    "理由": "《Michel-Ange poète: première traduction complète de ses poésies》——**正文主体是他的诗**，A. Lannau-Rolland 做的是法译＋一篇导论。与 Leonardo #184 的 Richter 英译同样处置：**译本仍是一手，但不能用来量声口**（量到的是译者的文风）。★ 卷首那篇 étude 是二手成分，取引文时要避开导论部分。"
+  },
+  "bub_gb_VogLAQAAIAAJ": {
+    "档": "一手",
+    "理由": "《Die Gedichte des Michelangelo Buonarroti, übersetzt und biographisch geordnet von Walter Robert-tornow》——他的诗的德译本，creator 首位就是他本人。同上：**一手（译本）**，不得用于声口测量。题名里的 `biographisch` 只是编排方式（按生平次序排诗），不是传记。"
+  },
+  "michaelangelobuo00holrrich": {
+    "档": "二手",
+    "理由": "Charles Holroyd 爵士（1861–1917）写的专著《Michael Angelo Buonarroti》。★ 该卷附有 Holroyd 英译的 **Francisco de Hollanda〈与米开朗基罗的四篇对话〉**——附录里有一手成分，但**这一卷的作者是 Holroyd**，整卷记二手。若日后要用那篇对话录，应单独取 `Quatro diálogos da pintura antiga` 的原本，不要拿这一卷冒充。"
+  },
+  "michelangeloeine00hild": {
+    "档": "二手",
+    "理由": "Edmund Hildebrandt（1872–1939）《Michelangelo: eine Einführung in das Verständnis seiner Werke》——理解其作品的**导论**，通篇是他人的论述。"
+  }
+}
