@@ -184,14 +184,27 @@ def main() -> int:
     #   换成了「要一个具名外部权威」，**没有 citation 就是两头都空**
     #   （Comenius 实测 34 条 research.authorship-unproven）。
     no_origin, no_basis = [], []
+    # ★★ 2026-08-14：`no_meta` 原先是 `continue` 掉的 —— 于是本件的标题行
+    #   「49 个已声明 ＋ 4 个没有 profile 键」＝ **53**，而扫描集是 **54**。
+    #   差的那一个是 `wip-pinchot-192/gifford-pinchot`：**它连 meta.json 都没有**，
+    #   54 行台账、56 份 raw 就那么躺着，而任何按 `meta.json` 取人名/档位的判据
+    #   都**看不见它**。「没有 profile 键」和「没有 meta.json」是两件事，
+    #   后者更严重，却因为 continue 掉而一个字都不印。
+    #   [[a-gates-scan-set-is-smaller-than-reality]]
+    no_meta = []
+    _scanned = 0
     for d in [str(_w) for _w in iter_workspaces(CORPORA)]:
         ws = pathlib.Path(d)
+        _scanned += 1
         mp = ws / "meta.json"
+        wip0 = next((s for s in ws.parts if s.startswith("wip-")), ws.name)
         if not mp.is_file():
+            no_meta.append(f"{wip0}／{ws.name}")
             continue
         try:
             meta = json.loads(mp.read_text(encoding="utf-8"))
         except (OSError, ValueError):
+            no_meta.append(f"{wip0}／{ws.name}（meta.json 读不动）")
             continue
         wip = next((s for s in ws.parts if s.startswith("wip-")), ws.name)
         buckets[classify(meta)].append(f"{wip}／{ws.name}")
@@ -213,7 +226,15 @@ def main() -> int:
                 if c != meta["profile"]:
                     mism.append((wip, ws.name, meta["profile"], c))
 
-    print(f"档位声明：{len(buckets['declared'])} 个已声明"
+    print(f"★★ **分母**：按台账找到工作区 **{_scanned}** 个 ＝ "
+          f"读得到 meta.json 的 {_scanned - len(no_meta)} ＋ **没有 meta.json 的 {len(no_meta)}**")
+    if no_meta:
+        print("  ❌ **下面这些连 `meta.json` 都没有** —— 不是「没声明档位」，是"
+              "**任何按 meta 取人名/档位的判据都看不见它**：")
+        for x in no_meta:
+            print(f"       {x}")
+    print(f"档位声明（只算读得到 meta 的那 {_scanned - len(no_meta)} 个）："
+          f"{len(buckets['declared'])} 个已声明"
           f"｜**{len(buckets['absent'])} 个没有 `profile` 键**"
           f"｜{len(buckets['null'])} 个是 null｜{len(buckets['invalid'])} 个值不认识")
     print(f"  ★ 两个默认值不同：判据 `meta.get('profile', '{CHECKER_DEFAULT}')`，"
