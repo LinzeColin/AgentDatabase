@@ -161,6 +161,27 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/measure
 真跑要几分钟，全库 `--all` 要几十分钟，结果已存在
 `_ledgers/_全库独立作品数重量-2026-08-14.md`）。
 
+### ★ 2026-08-14 上午新加的四件，**打包脚本会自动跑前三件**，你也可以单独跑
+
+```bash
+P=CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline
+python3 $P/check_pd_claim_has_a_year.py            # 硬门 rc=1：断言公有领域却没有出版年
+python3 $P/check_lessons_reach_the_bundle.py       # 报告：写在 ~/.claude/ 里、进不了包的教训
+python3 $P/check_namesake_epithet_in_title.py      # 报告：题名里的 il giovane／der Jüngere
+python3 $P/check_inflected_byline_candidates.py <工作区> --alias <他在别的语言里的姓>
+```
+
+| | 它答什么 | 你会看到 |
+|---|---|---|
+| `check_pd_claim_has_a_year` | 有没有源在**没有出版年**的情况下断言 `pre1931` | 现在 **0 行**（分母：断言 PD 的 1,379 行）。**红了 `make_handover_bundle.sh` 直接不打包** |
+| `check_lessons_reach_the_bundle` | 教训有没有漏在包外 | 在**别人的机器上**会印「**未量，不是通过**」——`~/.claude/…` 那个目录只在原作者机上 |
+| `check_namesake_epithet_in_title` | 编目用称谓区分了同名的两个人吗 | 6 行全在 Michelangelo；「仍挂在他名下的**后辈** 0 行」 |
+| `check_inflected_byline_candidates` | 「查无署名证据」里，哪些其实扉页上有名字（拉丁属格 `COMENII`、捷克 `KOMENSKÉHO`） | **只交候选**、rc 恒 0。Comenius 22/48、Rousseau 39/45、Bismarck 26/39 |
+
+★★ **最后一件的结果现在不许回填台账** —— rousseau／bismarck／pestalozzi 是
+第 1 批**预登记等着判分**的人，预登记之后、判分之前改语料就是中途换被测物。
+理由与逐份候选写在 `_ledgers/_署名证据的两个层次-2026-08-14.md` 末节。
+
 不需要语料的那些**现在就该是绿的**，可以立刻验：
 
 ```bash
