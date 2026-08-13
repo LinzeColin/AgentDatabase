@@ -346,6 +346,39 @@ else:
     for l in mw.stdout.splitlines():
         if l.strip().startswith("✗"): print("     "+l.strip())
 
+# ★★★ 派生切片（`rebuild_derived_slices.py`）：**重抓拿不回切片。**
+#   2026-08-14 给 Dewey 的 `src-9fdb7da7d9d3` 切了段（原件是《Science》1915-01-29
+#   **整期**，多作者，只有 74.8% 是他的）。语料按裁定不进 git、重建靠重抓 IA，
+#   而重抓只会拿回**整期原件** ⇒ 接手方那台机器上台账 checksum 永远对不上，
+#   且没有任何判据会说这是为什么，只会报「校验和不符」。
+#   ⇒ 这里两件事都做：① 跑它的自测（含「锚点不唯一就拒绝切」等 4 条反例）；
+#     ② `--check` 对全库真比一遍 —— **配方能不能从原件复现出台账记的那个 sha256**。
+#     ②失败要红：那意味着**交付出去的语料重建不出来**。
+ds=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                      "/_ledgers/_pipeline/rebuild_derived_slices.py"), "--self-test"],
+                  capture_output=True, text=True)
+if ds.returncode != 0:
+    ok=False
+    print("❌ 派生切片工具自测不过（rc=%d）："%ds.returncode)
+    for l in ds.stdout.splitlines():
+        if l.strip().startswith("✗"): print("     "+l.strip())
+else:
+    dc=subprocess.run([sys.executable, str(R/"CodexSkills/skill_log_evals/persona-distiller"
+                                          "/_ledgers/_pipeline/rebuild_derived_slices.py"),
+                       "--all", "--check"], capture_output=True, text=True)
+    if dc.returncode == 0:
+        print("✅ 派生切片：自测全过，且配方能从原件复现出台账记的 sha256")
+        for l in dc.stdout.splitlines():
+            if l.strip().startswith("✓") or "配方的工作区" in l: print("　　"+l.strip())
+    elif dc.returncode == 4:
+        print("！ 派生切片：**原件不在本机，未比对**（不是通过）——"
+              "换一台有语料的机器再跑 `rebuild_derived_slices.py --all --check`")
+    else:
+        ok=False
+        print("❌ 派生切片：**配方复现不出台账记的 sha256 —— 交付出去的语料重建不出来**：")
+        for l in dc.stdout.splitlines():
+            if l.strip().startswith("❌"): print("     "+l.strip())
+
 # ★★ 负空间泄题（`check_negative_space_leak.py`）：**按体裁描述「我手边缺什么」，
 #   等于把 holdout 的题目说出来**。Grotius #168 一天撞两次，而三道现有门全绿。
 #   ★ 2026-08-13 实测：39 个有产物的工作区里 **6 个红**。修好 Dewey 之后剩 5 个，
