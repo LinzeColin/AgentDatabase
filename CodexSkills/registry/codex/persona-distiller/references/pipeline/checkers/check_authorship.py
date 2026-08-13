@@ -701,13 +701,36 @@ def ocr_byline_evidence(text, first, last):
        散文中间碰巧出现的近似词不算。
     """
     first_l, last_l = first.lower(), last.lower()
+    # ★ 与上面 `body_n` 同一次归一（**对称**，见那里的注释）
+    _apo = lambda s: re.sub(r"(?<=[a-z])['\u2019\u2018\u00b4`](?=[a-z])", "", s)
+    first_l, last_l = _apo(first_l), _apo(last_l)
     # ★ 复姓专用的**行尾署名**（Nature 来信体例 `地点, 日期. 名字.`），见 `_compound_signoff`
     _p = [p for p in re.split(r"[^A-Za-z]+", last_l) if p]
     if len(_p) >= 2:
         _hit = _compound_signoff(text, first_l, _p)
         if _hit:
             return _hit
-    for line in text.split("\n"):
+    # ★★★ 2026-08-13：**署名前缀独占一行时，把它和下一行接起来再判。**
+    #   Dewey #190《Psychology》1886 的扉页逐字是：
+    #       PSYCHOLOGY / BY / JOHN DJEW'EY, Pn.D. / ASSISTANT PROFESSOR OF PHILOSOPHY …
+    #   （DJEW'EY = DEWEY 插了个 J）。本函数逐行扫：`BY` 那行没名字、
+    #   `JOHN DJEW'EY, Pn.D.` 那行既不以 By 打头也不是纯大写（`Pn.D.` 有小写 n）
+    #   ⇒ **两行各自都不成立**，而证据就印在扉页上。
+    #   ★★ 为什么不用 `check_text` 里那个 `join_short_lines`：它按设计**只救说话人标记**，
+    #     因为整体并行会把版权页上下两行并起来、让「版权归 Richard Roe」被误放行。
+    #   ⇒ 这里的并行**只做一件事**：某行 strip 之后**恰好等于**署名前缀（`BY`/`Von`/…）时，
+    #     才与下一非空行拼一次。版权行不会「恰好只有一个 by」，所以碰不到那条反例；
+    #     且拼出来的候选仍要过本函数三条设防（名与姓都完整、各自编辑距离 ≤2、长度 ±2）。
+    _lines = text.split("\n")
+    _joined = []
+    _pref = re.compile(r"^(?:By|Von|Par|Di|Av|Af|Door|De)$", re.I)
+    for _i, _l in enumerate(_lines):
+        if _pref.match(_l.strip()):
+            for _n in _lines[_i + 1:_i + 4]:
+                if _n.strip():
+                    _joined.append(_l.strip() + " " + _n.strip())
+                    break
+    for line in list(_lines) + _joined:
         # ★★★ **`#` 开头的是我们自己写进文件的头，不是语料。**
         #   `standalone_ocr` 一直挡着（`s.startswith("#")`），本函数原来不用挡——
         #   它只看 `By …` 与整行大写，而 `# title: …` 两条都不像。
@@ -771,7 +794,14 @@ def ocr_byline_evidence(text, first, last):
             body = re.sub(r"^B[rvj7u]\.?[ \t]+", "", body)
         body = re.sub(r"^(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?[ \t]+)*",
                       "", body, flags=re.I)
-        toks = [t for t in re.split(r"[^A-Za-z]+", body) if t][:5]
+        # ★★★ 2026-08-13：**词内的撇号是 OCR 杂讯，先对称地去掉再切词。**
+        #   Dewey #190《Psychology》1886 扉页印的是 `JOHN DJEW'EY, Pn.D.`——
+        #   `[^A-Za-z]+` 把它切成 `DJEW` + `EY`，两段与 `dewey` 都对不上，
+        #   而去掉那个撇号之后是 `djewey`，与 `dewey` 编辑距离 1。
+        #   ★ **对称**：目标姓名也做同一次归一（见下面 `first_l`/`last_l` 的处理），
+        #     否则 `O'Brien` 这类真带撇号的姓会被弄坏——文本归一了而目标没有，就永远配不上。
+        body_n = re.sub(r"(?<=[A-Za-z])['\u2019\u2018\u00b4`](?=[A-Za-z])", "", body)
+        toks = [t for t in re.split(r"[^A-Za-z]+", body_n) if t][:5]
         if len(toks) < 2:
             continue
         # ★★★ 复姓（`Roberts-Austen` 这一类）**必须单独走一条**，见 `_compound_hit`。
@@ -2096,6 +2126,24 @@ def self_test() -> int:
     print(f"  {'✓' if _ok6 else '✗'} 反例：书眉 `Mr. JEFFERSON. 91`（称谓＋姓＋页码）不算逐字稿")
     if not _ok6:
         bad.append("书眉被当成了发言轮次")
+
+    # ★★ 2026-08-13：署名前缀独占一行 ＋ 词内撇号（Dewey #190《Psychology》1886 实测）
+    for _s, _f, _l, _want, _why in (
+            ("PSYCHOLOGY\n\nBY\n\nJOHN DJEW'EY, Pn.D.\n", "John", "Dewey", True,
+             "扉页：`BY` 独占一行、名字在下一行，且 DEWEY 被插了个 J 与撇号"),
+            ("Copyright 1998\nby\nRichard Roe\n", "John", "Dewey", False,
+             "反例：版权归别人——并行不许把它变成他的署名"),
+            ("Copyright 1886\nby\nHarper & Brothers.\n", "John", "Dewey", False,
+             "反例：出版社不是人"),
+            ("By Conan O'Brien", "Conan", "O'Brien", True,
+             "对称性：真带撇号的姓，文本也带撇号"),
+            ("By Conan OBrien", "Conan", "O'Brien", True,
+             "对称性：真带撇号的姓，文本被 OCR 吃掉了撇号")):
+        _got = bool(ocr_byline_evidence(_s, _f, _l))
+        _ok7 = _got == _want
+        print(f"  {'✓' if _ok7 else '✗'} 跨行署名/撇号：{_why}")
+        if not _ok7:
+            bad.append(f"跨行署名/撇号：{_why}（得 {_got}，应 {_want}）")
 
     _hp = build_patterns("Oliver Wendell Holmes Jr.")
     import re as _re
