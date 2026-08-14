@@ -152,3 +152,100 @@ python3 "$Q" "$W" --phase synthesis      # rc=1，errors 19 条
 ★ 本轮**两把尺子都坏了**，一把（n-gram）跨语言恒 0，一把（年月对）在年表上乱配。
 **两次都是「先量再搜」这条纪律拦住了假发现** —— 如果直接开搜，
 我会在一个 29 部的虚假搜索面上、拿一堆年表日期当「新信」报上去。
+
+---
+
+# 续二：**证据有两处，但装不进去** —— 问题不在语料，在证据模型
+
+按上一节写的做法走完了。结论比预想的清楚，而且**不是「找不到」**。
+
+## 第一步：英文那段是意文那封的译文（证伪了自己上一节的猜测）
+
+`A record of his life…`（`src-8539ad71569a`）里那段
+
+> It is already fifteen days since I sent certain moneys to Lodovico in Florence
+> with certain instructions, and I have never had a reply… **Tell Lodovico, therefore,
+> to let me know if he has received them, and if he has done as I asked**
+
+拿意文对应词回搜，**四部意文书信集全部命中同一封**：
+
+> LIII. A Buonarroto… Bologna, 24 di febbraio (1507).
+> `Io mandai cierti danari costà a Lodovico con cierta comessione già quindici dì sono
+> e mai non ò avuto risposta. Somi molto maravigliato: però di' a Lodovico, che m'avisi
+> se gli à ricevuti, e se à fatto quello gli comessi: m'avisi a ogni modo`
+
+⇒ **英文那部是译本，不是独立材料。** 上一节「papers 部分可能是可取面」这个猜测，
+在这一条上**被自己的实测证伪**。（`Michelangelo has received` 全书只 1 处、`Ricordo` 9 处，
+papers 的量本来也撑不起来。）
+
+## 第二步：★★ 但真的搜出了第二处 —— 另一封信，隔 48 年
+
+同一次搜索命中了**另一封完全不同的信**：
+
+> CCLXXVII. A Lionardo di Buonarroto Simoni in Firenze. **A dì dieci di maggio 1555.**
+> `Io ti scrissi circa un mese fa che tu dessi dua scudi d'oro alla madre di Masino da Macìa…
+> **Non ò mai avuto risposta. Àrei caro m'avisassi se avesti la lettera e se gli à' dati o sì o no.**`
+
+与 1507 那封对照：
+
+| | 1507-02-24 | 1555-05-10 |
+|---|---|---|
+| 收信人 | 弟弟 Buonarroto | 侄子 Lionardo |
+| 事由 | 寄钱给父亲 Lodovico ＋ 一项交代 | 让侄子代付 2 金斯库多给一个工人的母亲 |
+| 动作 | 没回音 → 要求确认**收到没有**＋**照办没有** | 没回音 → 要求确认**收到信没有**＋**给了没有，是或否** |
+
+**隔 48 年、不同收信人、不同笔钱、同一套动作。** 这是两次独立的行为，不是一处证据数两遍。
+
+## 第三步：装不进去 —— 两封信在同一部作品里
+
+含 1555 那封的四个 source_id，两两 6-gram 包含率：
+
+    src-34bb6d56038a ⇄ src-6094206729a1   0.6866
+    src-34bb6d56038a ⇄ src-8999a5688bea   0.5930
+    src-34bb6d56038a ⇄ src-14161091ddb3   0.5394
+    src-6094206729a1 ⇄ src-8999a5688bea   0.5234
+    src-14161091ddb3 ⇄ src-8999a5688bea   0.5593
+    src-6094206729a1 ⇄ src-14161091ddb3   0.4663
+
+**四个全是同一部书信集的不同扫描件**（其中两个题名一模一样）。
+
+而判据是**纯结构**的（`quality_check.py` 372–381 行，现读）：
+
+    insufficient-support  ← len(set(claim['source_ids'])) < 2
+    insufficient-contexts ← len(set(claim['contexts'])) < 2
+    non-independent       ← len(set(claim['evidence_clusters'])) < 2
+
+它数的是**去重后的字符串个数**，不验这些 id 是不是同一部书。
+⇒ 只要把两个 id 填进去，门就绿了 —— **而那正是 ㊸ 判过的「两处证据其实一部作品」。不做。**
+
+## ⇒ Michelangelo 的形状，与 Brandeis **不是同一件事**
+
+| | Brandeis #172 | Michelangelo #185 |
+|---|---|---|
+| 搜过之后 | **确实没有第二处**（6 轮，逐条读完全是别的题材） | **有第二处**，且是独立行为（隔 48 年） |
+| 卡在哪 | 语料里没有 | **证据模型装不下**：一封信不是一个 source |
+
+**根因：证据的单位是「卷」，而书信的自然单位是「封」。**
+一部书信集 = 一个 source_id = 一个簇，于是「1507 那封」和「1555 那封」
+在模型里塌成同一处。这是**用书目代理独立性**的老毛病。
+[[bibliographic-proxy-instead-of-the-measurement]]｜[[two-source-ids-is-not-two-evidences]]
+
+## 我的处置（自裁，不上交）
+
+**不重切语料。** 把书信集按「封」重新入库会改变每个人物的
+源计数 / 一手占比 / 道数 / 各档阈值 —— 全库有书信的人物都要重算，
+而 ㊵ 已裁「已判分即冻结」。**为一个人改全库的证据模型，代价远大于收益。**
+
+⇒ **Michelangelo 记延后类⑦「方法证据全部汇到一部作品」**（同 Pacioli #161），
+但**理由与 Pacioli 不同，必须写清楚**：Pacioli 是证据真的只有一部书；
+Michelangelo 是**证据有多处而模型只有一个格子**。
+
+★ 这条差别不写清楚，下一个人会以为「Michelangelo 的语料不够」而重新去抓源 ——
+**语料是够的，3,516,622 词、56 份全读得到。不够的是格子。**
+
+## 还没做完的（下一轮从这里起）
+
+本轮只把 `clm-a928f1063ac7` 一条查到底。**另 7 条还没逐条走这个流程**，
+其中 4 条（`clm-57132310d198`／`584dece9bffe`／`2a3b37136bc9` 同挂 `src-34bb6d56038a`，
+`clm-7cee3cb6b511` 挂 `src-8999a5688bea`）**大概率是同一形状**，
+但 **「大概率」不是实测**，不许照抄结论。另 3 条挂在诗集与英译本上，形状可能不同。
