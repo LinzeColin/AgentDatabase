@@ -49,7 +49,18 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_s
 
 ★ **新工作区的 `raw/*.txt` 已被 `.gitignore` 挡在仓外**，所以不在上表里：
 它们靠每个工作区的 `raw/_ids-rebuild.txt` ＋ `_fetch-manifest.json` 的 sha256 重建。
-`emit_ids_rebuild.py --scan _corpora --check` 现测 **rc=0**（一致 **19**／有问题 0／没有 manifest 的老工作区 26）。
+`emit_ids_rebuild.py --scan _corpora --check` 现测 **rc=0**
+（**2026-08-14 实测：一致 18／有问题 0／没有 manifest 的老工作区 36**）。
+
+> ★ 这一行原来写「一致 19／…／26」，**两个数都漂了**（真值 18／36）。要现算就跑那条命令。
+>
+> ★★ 它的分母 **18＋36 ＝ 54**，而 `wip-*/workspaces/*` 数出来是 **53**；
+> 另按 `rglob raw/_fetch-manifest.json` 独立数，有 manifest 的是 **19** 而不是 18。
+> **两个口径差 1**，方向指向已知的那件事：**9 个工作区的路径套了两层**
+> （`workspaces/<slug>/<slug>/`，见 HANDOFF 开头第 ② 条）——
+> 判据按 `iter_workspaces` 走，会把外层那个空 `raw/` 也算一个。
+> **本轮没有改判据**（动它要先改台账 `local_path`），只把这个差记在这里，
+> 免得下一个人拿两个数对不上又查一遍。
 
 ★ 这一页早先的版本这里全是错的——「已入库 71」数的是 `registry/codex/` 下的
 **技能目录**（根本不是人物），六格里五格陈旧。表头当时也写着「由脚本现算」，
