@@ -125,6 +125,39 @@ def selftest() -> int:
     by = suite_cases(rs)
     chk("baseline 那条不进均分", abs(by["boundary"]["a"] - 0.70) < 1e-9)
 
+    print("── ★★ 反向对照 ⑦：**空但合法的输入不许打成绿**（端到端跑 main）──")
+    import contextlib
+    import io
+    import tempfile
+
+    def run_main(rs):
+        with tempfile.NamedTemporaryFile("w", suffix=".jsonl", delete=False,
+                                         encoding="utf-8") as fh:
+            for r in rs:
+                fh.write(json.dumps(r, ensure_ascii=False) + "\n")
+            path = fh.name
+        buf = io.StringIO()
+        argv = sys.argv
+        try:
+            sys.argv = ["x", "--results", path]
+            with contextlib.redirect_stdout(buf):
+                rc = main()
+        finally:
+            sys.argv = argv
+            pathlib.Path(path).unlink(missing_ok=True)
+        return rc, buf.getvalue()
+
+    # ① 有行、但一个带阈值的套组都没有 —— 原来这里印「✓ 都过了」，是假绿
+    rc, out = run_main(rows([("a", 0.10), ("b", 0.10)], suite="voice"))
+    chk("**没有带阈值的套组 → 明说「不构成通过」**", "不构成通过" in out)
+    chk("   同一情形**不许**印成「都过了」", "都过了" not in out)
+    chk("   分母印出来了（带阈值的套组 0 个）", "带阈值的套组 0 个" in out)
+
+    # ② 真有带阈值的套组且都过了 —— 这一支必须仍然是「过了」，且带分母
+    rc, out = run_main(rows([("a", 0.90), ("b", 0.92)]))
+    chk("**真通过那一支照旧说「都过了」**", "都过了" in out and "不构成通过" not in out)
+    chk("   而且带上了分母（1 个套组、2 题）", "1 个套组、2 题" in out)
+
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
 
@@ -154,8 +187,27 @@ def main() -> int:
     by = suite_cases(rows)
     d = diagnose(by, thresholds)
 
+    # ★★ 分母必须印出来。原来这里只有一句「✓ 有阈值的套组都过了」，
+    #   而 `d` 为空有**两种**情形：
+    #     ① 有带阈值的套组、且都过了     → 真通过
+    #     ② **一个带阈值的套组都没有**   → 什么也没查
+    #   两种印同一句话，于是「绿」分不出「查过且干净」和「根本没得查」。
+    #   2026-08-14 用空但合法的输入实测坐实为假绿，与
+    #   `check_ocr_homoglyphs`、`emit_lane_scope --check` 同批。
+    #   写法照抄 `check_quote_in_span`：**印分母 + 明说「空」意味着什么**。
+    #   [[zero-hit-gates-must-prove-they-can-hit]]｜[[empty-default-swallows-unknown]]
+    scored = {s: c for s, c in by.items() if s in thresholds}
+    n_cases = sum(len(c) for c in scored.values())
+    print("带阈值的套组 %d 个（%s），合计 %d 题；判分记录共 %d 行、%d 个套组"
+          % (len(scored), "、".join(sorted(scored)) or "无", n_cases,
+             len(rows), len(by)))
+    if not scored:
+        print("  ⚠ **一个带阈值的套组都没有**——本判据这一轮什么也没查到，不构成通过")
+        print("     （套组名：%s；有阈值的是：%s）"
+              % ("、".join(sorted(by)) or "无", "、".join(sorted(thresholds))))
+        return 0
     if not d:
-        print("  ✓ 有阈值的套组都过了——无需诊断")
+        print("  ✓ 这 %d 个套组、%d 题都过了阈值——无需诊断" % (len(scored), n_cases))
         return 0
 
     print(f"未过阈值的套组 {len(d)} 个：\n")

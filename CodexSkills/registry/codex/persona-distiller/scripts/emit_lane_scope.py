@@ -180,6 +180,31 @@ def process(ws: pathlib.Path, check: bool) -> tuple:
     return changed, len(files), len(rows), dropped
 
 
+def lanes_with_scope_section(ws: pathlib.Path) -> tuple:
+    """→ (有 Scope 节的道文件数, 道文件总数)。**只为把分母印出来，不参与判定。**
+
+    ★★ 2026-08-14 坐实的假绿就在这里：`splice()` 找不到 `## Scope and assigned
+      sources` 时**原样返回**（见它的 docstring），于是**根本没有那一节**的
+      研究稿永远「无差异」，`--check` 对着不存在的东西说「与台账一致」。
+      全库实测 39 个有六道研究稿的工作区里：六份全有 27 个、**一份都没有 4 个**
+      （Koch／Pasteur／Blackwell／Lister）、部分有 8 个。
+
+    ★ **本轮只印分母，不改判定、不改退出码**：改判定会让 12 个工作区从「绿」
+      变成「未检查」，其中四人已入库或已判分，而用户 8-12 的批次指令写着
+      「门、席位一概不动」。诚实由**话**承载，绿不绿仍照旧。
+      [[empty-default-swallows-unknown]]｜[[zero-hit-gates-must-prove-they-can-hit]]
+    """
+    files = lane_files(ws)
+    have = 0
+    for p in files.values():
+        try:
+            if HEAD in p.read_text(encoding="utf-8"):
+                have += 1
+        except OSError:
+            pass
+    return have, len(files)
+
+
 def self_test() -> int:
     import tempfile
     ok = True
@@ -329,9 +354,21 @@ def main() -> int:
         ap.error("要么给 workspace，要么用 --self-test")
     ws = pathlib.Path(a.workspace)
     changed, nf, nr, dropped = process(ws, a.check)
-    print("台账 %d 行；道文件 %d 份" % (nr, nf))
+    have, _tot = lanes_with_scope_section(ws)
+    print("台账 %d 行；道文件 %d 份，其中**带 Scope 节的 %d 份**" % (nr, nf, have))
     if not changed:
-        print("Scope 节与台账一致，无需改动")
+        if not have:
+            # ★ 没有那一节就无从比对 —— 不许说成「一致」。判定与 rc 都不变（见
+            #   `lanes_with_scope_section` 的注释：本轮只让它说实话）。
+            print("⚠ **%d 份研究稿里 0 份有 `%s` 节 ⇒ 本判据什么也没比，"
+                  "「未检查」不是「一致」**" % (nf, HEAD))
+            print("   （要真比对，先给研究稿加上这一节，再跑一次）")
+            return 0
+        if have < nf:
+            print("Scope 节与台账一致（**只比了带该节的 %d/%d 份，"
+                  "另 %d 份没有这一节、未比对**）" % (have, nf, nf - have))
+            return 0
+        print("Scope 节与台账一致，无需改动（%d/%d 份都比过）" % (have, nf))
         return 0
     print(("**过期 %d 份**：" if a.check else "已重出 %d 份：") % len(changed) + ", ".join(changed))
     if dropped:

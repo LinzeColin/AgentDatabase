@@ -746,8 +746,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_ocr_homoglyphs.py",
-      "sha256": "229ad01f4b507781898113c2f918d4d5a111561570571a04a762dd7bba95ede1",
-      "size_bytes": 33237
+      "sha256": "b9a045da60a62725851edb19d06136b7ccd3669185f389bbca1fa808c850c1a5",
+      "size_bytes": 35713
     },
     {
       "path": "references/pipeline/checkers/check_ocr_language_death.py",
@@ -911,8 +911,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_suite_single_drag.py",
-      "sha256": "1e0d551080c450e790949fa737eb174b55608740508550f964a6b8c110f05200",
-      "size_bytes": 8208
+      "sha256": "d2711d3f8b1a2a9c61b94442538a279c2e421a4a609e9bb0a11f15bd5735c164",
+      "size_bytes": 11200
     },
     {
       "path": "references/pipeline/checkers/check_threshold_doc_drift.py",
@@ -996,8 +996,8 @@
     },
     {
       "path": "references/pipeline/checkers/emit_lane_scope.py",
-      "sha256": "b3bfbadba43b84b0cabfefb4136a23d66a355cbeb44709b1269a3fcc5282d2f1",
-      "size_bytes": 17692
+      "sha256": "e58a3169e42bd95a4951bf9dbaa865c88fbe08d7400975cb70ffaf2ff996cb58",
+      "size_bytes": 19796
     },
     {
       "path": "references/pipeline/checkers/finalize_release.py",
@@ -1551,8 +1551,8 @@
     },
     {
       "path": "scripts/check_ocr_homoglyphs.py",
-      "sha256": "229ad01f4b507781898113c2f918d4d5a111561570571a04a762dd7bba95ede1",
-      "size_bytes": 33237
+      "sha256": "b9a045da60a62725851edb19d06136b7ccd3669185f389bbca1fa808c850c1a5",
+      "size_bytes": 35713
     },
     {
       "path": "scripts/check_ocr_language_death.py",
@@ -1716,8 +1716,8 @@
     },
     {
       "path": "scripts/check_suite_single_drag.py",
-      "sha256": "1e0d551080c450e790949fa737eb174b55608740508550f964a6b8c110f05200",
-      "size_bytes": 8208
+      "sha256": "d2711d3f8b1a2a9c61b94442538a279c2e421a4a609e9bb0a11f15bd5735c164",
+      "size_bytes": 11200
     },
     {
       "path": "scripts/check_threshold_doc_drift.py",
@@ -1806,8 +1806,8 @@
     },
     {
       "path": "scripts/emit_lane_scope.py",
-      "sha256": "b3bfbadba43b84b0cabfefb4136a23d66a355cbeb44709b1269a3fcc5282d2f1",
-      "size_bytes": 17692
+      "sha256": "e58a3169e42bd95a4951bf9dbaa865c88fbe08d7400975cb70ffaf2ff996cb58",
+      "size_bytes": 19796
     },
     {
       "path": "scripts/eval_runner.py",

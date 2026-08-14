@@ -257,15 +257,26 @@ def check_corpus(paths: list[pathlib.Path]) -> list[dict]:
     return reports
 
 
-def check_quotes(paths: list[pathlib.Path]) -> list[str]:
-    problems = []
+def check_quotes_counted(paths):
+    """→ (problems, 读到的文件数, 扫到的引文条数)。
+
+    ★ 分母必须能取到。原来只返回 `problems`，于是 `if not quote_problems:`
+      对**两种**情形印同一句「✓ 引文层干净」：
+        ① 有引文、且一条都不含同形字   → 真通过
+        ② **一条引文都没扫到**         → 什么也没查
+      2026-08-14 用空但合法的输入实测坐实为假绿。
+      [[zero-hit-gates-must-prove-they-can-hit]]
+    """
+    problems, n_files, n_quotes = [], 0, 0
     for path in paths:
         try:
             text = corpus_body(path.read_text(encoding="utf-8", errors="replace"))
         except OSError as exc:
             problems.append(f"{path}: 读不到：{exc}")
             continue
+        n_files += 1
         for quote in extract_quotes(text):
+            n_quotes += 1
             result = scan_text(quote)
             bad = result["all_homoglyph"] + result["mixed"]
             if bad:
@@ -273,7 +284,12 @@ def check_quotes(paths: list[pathlib.Path]) -> list[str]:
                 problems.append(
                     f"{path}: 引文含 OCR 同形字 {shown}——"
                     f"读者拿这句去原件里搜是搜不到的｜{quote[:60]}…")
-    return problems
+    return problems, n_files, n_quotes
+
+
+def check_quotes(paths: list[pathlib.Path]) -> list[str]:
+    """只要 problems 的老口径（既有调用方照用）。要分母请用 `check_quotes_counted`。"""
+    return check_quotes_counted(paths)[0]
 
 
 # --------------------------------------------------------------------------
@@ -372,6 +388,20 @@ def self_test() -> int:
         zh.write_text("他写道「投机者最大的敌人来自内部」。\n", encoding="utf-8")
         if check_quotes([zh]):
             failures.append("正对照·中文直角引号内的干净内容被误报")
+
+        # ★★ 负对照 D：**分母**。一条引文都没扫到时不许打成绿。
+        #   2026-08-14 实测坐实的假绿就在这里 —— `quote_problems` 为空，
+        #   而「没得查」与「查过且干净」印同一句话。
+        none = tmp / "noquote.txt"
+        none.write_text("no quotes here at all, just prose.\n", encoding="utf-8")
+        _p, _f, n_none = check_quotes_counted([none])
+        if n_none != 0 or _p:
+            failures.append(f"负对照 D：无引文文件应得 0 条引文/0 问题，实得 {n_none}/{len(_p)}")
+        _p2, _f2, n_clean = check_quotes_counted([ok])
+        if n_clean < 1:
+            failures.append(f"负对照 D：干净引文文件应扫出 ≥1 条，实得 {n_clean}")
+        if n_none == n_clean:
+            failures.append("负对照 D：**有引文与没引文的分母一样**——分母没起作用")
 
     # 反向对照：拉丁不占多数时 B 判据必须失效（否则整篇俄文会被全量误杀）。
     r = scan_text("тор рот сор мот кот" * 5 + " ok")
@@ -514,7 +544,10 @@ def main() -> int:
             print(f"用法错误：{p} 不存在", file=sys.stderr)
             return 3
 
-    quote_problems = check_quotes(files) if args.mode in {"quotes", "both"} else []
+    if args.mode in {"quotes", "both"}:
+        quote_problems, n_qfiles, n_quotes = check_quotes_counted(files)
+    else:
+        quote_problems, n_qfiles, n_quotes = [], 0, 0
     corpus_reports = check_corpus(files) if args.mode in {"corpus", "both"} else []
 
     if args.json:
@@ -568,8 +601,17 @@ def main() -> int:
             print("         两个区间重叠，**曾想拿这个占比做判别式，实测否掉了**。"
                   "**这一栏要人去读原文。**")
 
+    # ★★ 分母印出来。原来只有一句「✓ 引文层干净」，而 quote_problems 为空
+    #   有**两种**情形：①有引文、一条都不含同形字 → 真通过；
+    #   ②**一条引文都没扫到** → 什么也没查。两种印同一句话就是假绿。
+    #   写法照抄 `check_quote_in_span`。[[zero-hit-gates-must-prove-they-can-hit]]
+    print("引文层：读到 %d 个文件，扫出 %d 条引文" % (n_qfiles, n_quotes))
+    if not n_quotes:
+        print("  ⚠ **一条引文都没扫到**（%d 个候选文件里 %d 个读得到）——"
+              "本判据这一轮什么也没查到，不构成通过" % (len(files), n_qfiles))
+        return 0
     if not quote_problems:
-        print("✓ 引文层干净：没有引文含冒充拉丁字母的西里尔／希腊字符")
+        print("✓ 引文层干净：这 %d 条引文都不含冒充拉丁字母的西里尔／希腊字符" % n_quotes)
         return 0
     print(f"\n✗ 引文层 {len(quote_problems)} 条含同形字：\n")
     for p in quote_problems:
