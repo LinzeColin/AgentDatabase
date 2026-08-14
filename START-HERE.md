@@ -329,7 +329,7 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/slice_l
 
 ★★ **8-13 当晚撤回过一次「11 人」**：Brandeis #172／Michelangelo #185／Dewey #190
 当天被我登记成「等着判分」，而真跑合成门是 **22／46／36 条硬错**
-（★ 8-14 凌晨已做掉一大半，现测 **8／19／13**，合计 104 → 40，逐条见诊断书）——
+（★ 8-14 凌晨已做掉一大半，当时现测 **8／19／13**，合计 104 → 40；**8-14 傍晚再测：Brandeis 8→5、Michelangelo 19、Dewey 13→2，合计 26**，逐条见诊断书）——
 **产物齐 ≠ 过门**。他们要回阶段 3／4 返工，不是判分。
 （其中两人当时连门都没开机：缺 `SKILL.md`，`quality_check` 直接报 `target.invalid` 拒检。）
 详见开箱即跑清单开头那节「撤回」。
@@ -413,7 +413,7 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/quality_check.py <�
    > ★ 这两个数原来写的是「5 个人」「11 人全部就绪」，**都是旧的**（真值 6 与 17）。
    > 上面第四节那张表里的 8／9／17 才是当前口径。要现算就直接跑上面那条命令看它自己印的分母。
 
-3. ★ **Brandeis／Michelangelo／Dewey 回阶段 3／4 返工**（现测 **8／19／13** 条硬错，
+3. ★ **Brandeis／Michelangelo／Dewey 回阶段 3／4 返工**（**2026-08-14 傍晚现测 5／19／2 条硬错，合计 26**；此前写的 8／19／13 是当天凌晨的数 —— Brandeis 当晚补了 1 条证据＋1 条 heuristic＋1 条 mental-model，Dewey 另有人做过。现算：`python3 CodexSkills/registry/codex/persona-distiller/scripts/quality_check.py <工作区> --phase synthesis`，
    逐条列在开箱即跑清单开头的「撤回」一节）。**不要送去判分。**
    ★ Dewey 另有一件判他分时要知道的：lanes 压线 3=3，撑起第三条道的只有一份
    与妻子共同署名的《Letters from China and Japan》（第七之二节）。
