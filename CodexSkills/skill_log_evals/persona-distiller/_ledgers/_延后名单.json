@@ -1138,7 +1138,8 @@
    "verdict_file": "skill_log_evals/persona-distiller/_corpora/wip-liebig-124/VERDICT.md",
    "处置类": "★ 新的一类成因：**一手占比够不着，而原因不是他写得少**——他著述极多，但数字化下来可取的那批里译本／多作者辞书／期刊卷占了绝大多数，他自己的原著占比就只有这么高。与 Semmelweis／Slavyanov 的「一生只出版几部作品」不同类。",
    "★ 处置类的原键": "class",
-   "★ disposition 未记": "处置写在 `reason` 散文里，未结构化。**不由 agent 推断填入**：有 delta 的可能是拒发、缺一手的可能是延后，但两者在本名单里并存，逐条要人核。"
+   "★ disposition 未记": "处置写在 `reason` 散文里，未结构化。**不由 agent 推断填入**：有 delta 的可能是拒发、缺一手的可能是延后，但两者在本名单里并存，逐条要人核。",
+   "★ 2026-08-14 复核：二手那 25 份逐条读过，翻不动": "拿「是不是已经在库里、只是被判错了格子」这一问复核过：**一手 39／可用 64 = 0.6094**，要过 standard 门 0.65 需要**再翻 3 份**（42/64 = 0.6562；翻 1 份 0.6250、翻 2 份 0.6406，**都不过**）。逐条读了 25 份二手的归属更正说明：**24 份判得对** —— 百科条目（ADB／Britannica 1911 与第九版／Americana／MKL1888／New International）、讣文（The Chemical News）、传记文章（Popular Science Monthly 三篇、Biographies of Scientific Men）、大学编年史、Grauvogl 的顺势疗法论战，**全是写他的，不是他写的**；`anleitungzurqua00liebgoog` 的 creator 是 **Fresenius, C. Remigius**，**Liebig 只作序** —— 正是「与他有关 ≠ 他写的」。**唯一标着「待确认」的只有 1 份**：`principlesagric01liebgoog`（1855），台账原话「正文是第三人称转述 `as Baron Liebig somewhere has said`，疑为评注本；确认前不计一手」—— 保守方向是对的，**而且就算确认后改判也只到 0.6250，离门还差 0.0250**。⇒ **本轮翻不动，维持延后。** 详见 `_ledgers/_用别名词形复核归属类延后-什么也没查出来-2026-08-14.md` 同批复核。"
   },
   {
    "name": "Gregor Mendel",
