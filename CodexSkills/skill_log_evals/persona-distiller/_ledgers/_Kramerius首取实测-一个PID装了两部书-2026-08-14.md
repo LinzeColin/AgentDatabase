@@ -106,3 +106,46 @@ python3 _ledgers/_pipeline/fetch_kramerius.py --host kramerius5.nkp.cz \
 - 因此 quick 的 3 道只能是 **writings ＋ external ＋ conversations**，
   而 conversations 要靠 1892 那卷切片后与 1898 那卷凑成 **2 部独立作品**。
 - ⇒ 解冻条件不变，仍是「切片 ＋ 逐段核归属 ＋ 落 sha256」。
+
+## ★★★ 归属实测：**这卷里有一大半不是他写的，而编者的脚注正好能判**
+
+拉丁段（5–70%，**616,306 字／92,056 词**）逐项数：
+
+| 信号 | 数量 | 说明 |
+|---|---:|---|
+| 独立成行的署名 `Comenius.` | **7** | 他签的信 |
+| 结尾套语（`observantissimus` 等） | 23 | 书信体，不分方向 |
+| `Ad <某人>.` 式抬头 | 9 | `Ad Patronum.`×6、`Ad Mochingerum.`、`Ad Niclassium.`、`Ad Maecenatem.` |
+
+通信对方在拉丁段的出现次数（**对方 ≠ 作者**）：
+`de Geer` **44**、`Hartlib` **43**（另 `Hartlibius` 6）、`Wolzogen` **23**、
+`Figulus` 9、`Mochinger` 4、`Ravius` 3、`Rulitius` 1
+—— 全是 Comenius 真实的通信人（Samuel Hartlib、他的赞助人 Louis de Geer、
+Ludwig von Wolzogen、女婿 Petr Figulus），**这卷确实是他的往还**。
+
+### ★★ 决定性证据在 Patera 的**捷克文脚注**里
+
+拉丁段含 `Komensk*` 的行 **62** 行，全是编者脚注，原样例如：
+
+    * Psáno rukou Komenského.                          ← 此信为他手书
+    * Koncept vlastnoruční Komenského na ⅔ listu…      ← 他的亲笔草稿
+    * Po straně připsal Komenský: Finspongam.          ← **他在别人来信的页边批注**
+    * Po straně od Komenského připsáno: Obtuli Januam R.
+    ** Atrium intimum quid? (Rovněž připsáno od Komenského.)
+
+「**Po straně připsal Komenský**」（他在页边批注）反复出现
+⇒ 这一批是**他收到的信**，他只在边上批了几个字。
+把整卷判成 `HIS-OWN` 就是 [[related-to-him-is-not-written-by-him]]
+（Liebig 那次混进 9 份，一手占比 0.7419 → 0.5192），
+也正是 [[gates-count-sources-not-voice]] 的形状：
+三道门全过，而 17 万字里他自己的话只有 15 句。
+
+### 因此解冻条件再细化一格（**可执行，不是态度**）
+
+不是「把 5–70% 整段切下来」，而是：
+**按 Patera 的脚注逐信定方向** —— `Psáno rukou Komenského` / `Koncept vlastnoruční`
+判 `HIS-OWN`；`Po straně připsal Komenský` 判**他收到的信**（对方是作者，
+只有那几个批注词是他的）。切片配方要能从原件复现出台账记的 sha256。
+
+★ 本会话**没有做这一步**，因为它需要逐信读脚注、不是正则能收干净的
+（62 行脚注对应的信数还没数清）。**明说未做，不写成「已核」。**
