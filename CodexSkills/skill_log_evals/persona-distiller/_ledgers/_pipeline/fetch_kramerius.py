@@ -69,6 +69,9 @@ import urllib.request
 
 UA = "persona-distiller/1.0 (public-domain corpus collection; no access-control bypass)"
 YEAR = re.compile(r"\b(1[4-9]\d\d|20[0-2]\d)\b")
+# ★★ 「能不能用」的门槛。实测两份把区间量出来了：**好的 0.926／坏的 0.0000**，
+#   中间是空的 —— 门放 0.50，两侧余量都极大（不是我拍的，是量出来的）。
+OCR_MIN_RATIO = 0.50
 
 
 def api(host, path, params=None, timeout=40):
@@ -91,6 +94,29 @@ def is_public(doc: dict) -> bool:
       缺失时必须判 False（[[empty-default-swallows-unknown]]）。
     """
     return str(doc.get("dostupnost") or "").strip().lower() == "public"
+
+
+def letter_run_ratio(text: str) -> float:
+    """**「≥2 个连续字母的词」占全部 token 的比例。** 纯函数，用来抓「取回了，但是乱码」。
+
+    ★★★ 2026-08-14 实测两份，同一天同一个 host：
+
+        1892 Korrespondence   token 143,711｜**92.6%**｜U+FFFD 0
+        1882 Modlitby         token  57,182｜ **0.0%**｜U+FFFD 17,136
+
+    后者 OCR 是**逐字母加空格 ＋ 变音符全坏**（`M O D L I T B Y  K XE S dA N S K �`），
+    一个字都用不了 —— 而我的 manifest 把它报成 **240 页有字／0 页空／57,182 词**，
+    看上去比前者还健康。[[aggregator-ocr-can-be-silently-broken]]
+
+    ★★ **我第一个想用的判别式是「平均 token 长度」，方向是反的**：
+      坏的那份 **8.61**、好的那份 **5.60** —— 坏的看起来「词更长＝更像正文」。
+      两份都跑了才看见。**判别式要拿正例和反例各跑一次，只跑一份必然自洽。**
+      [[my-diagnostics-manufacture-false-leads]]
+    """
+    toks = text.split()
+    if not toks:
+        return 0.0
+    return len(re.findall(r"[A-Za-zÀ-ɏͰ-Ͽ]{2,}", text)) / len(toks)
 
 
 def years_in(text: str, head_chars: int = 20000) -> list:
@@ -125,6 +151,19 @@ def self_test() -> int:
     chk(f"★★ **空页单独计数**（实得 有字 {kept}／空 {empty}）", (kept, empty) == (2, 2))
     chk("★ 拼接只保留有字的页", txt == "hello world\nx")
     chk("★ 全空时有字页数为 0，不报错", join_pages([("a", ""), ("b", None)]) == ("", 0, 2))
+    # ★★ OCR 可用性：正反例都取自 2026-08-14 真取回的两份
+    GOOD = "Přítomná sbírka jest první pokus vydání rozsáhlé a velice rozptýlené korrespondence"
+    BAD  = "M O D L I T B Y   K XE S dA N S K \ufffd ,   t o t i ~   m o d l i t b y"
+    rg, rb = letter_run_ratio(GOOD), letter_run_ratio(BAD)
+    chk(f"★★ **正例：真正文（实得 {rg:.2f}）≥ 门 {OCR_MIN_RATIO}**", rg >= OCR_MIN_RATIO)
+    chk(f"★★ **反例：逐字母加空格的乱码（实得 {rb:.2f}）< 门**", rb < OCR_MIN_RATIO)
+    chk("★ 空文本不炸，判 0", letter_run_ratio("") == 0.0)
+    # ★★ 「平均 token 长度方向是反的」这条**故意不写成断言**：
+    #   那是**整份文件**的统计（坏 8.61 > 好 5.60），而这里只有一小段摘录 ——
+    #   摘录里坏的那份全是单字母，均长反而更小，**复现不出真文件的形状**。
+    #   我先写成了断言，当场判红；把夹具改到能过就等于编一个假现象。
+    #   ⇒ 结论留在 `letter_run_ratio` 的 docstring 里（附两份真文件的数），
+    #     自测只断言它**断言得了**的那一条。[[fixtures-cleaner-than-the-real-thing]]
     chk("★ 年份只认 1400–2029（`3409` 不算）", years_in("p. 3409 anno 1892") == [1892])
     chk("★ 年份去重排序", years_in("1902 1892 1902") == [1892, 1902])
     print(f"\n{'✓ 全过' if ok == n else f'✗ {n - ok}/{n} 项不符'}")
@@ -174,12 +213,17 @@ def fetch_one(host, pid, out: pathlib.Path, sleep=0.3):
     dest = out / (pid.replace(":", "_") + ".txt")
     blob = text.encode("utf-8")
     dest.write_bytes(blob)
+    ratio = letter_run_ratio(text)
     rec.update({
         "status": "已取回", "local_path": dest.name,
         "pages_total": len(pages), "pages_with_text": kept, "pages_empty": empty,
         "bytes": len(blob), "words": len(text.split()),
         "sha256": hashlib.sha256(blob).hexdigest(),
         "titlepage_years": years_in(text),
+        # ★★ 这两个字段是「取回了 ≠ 取回了能用的字」的证据，**别只看 words**
+        "letter_run_ratio": round(ratio, 4),
+        "replacement_chars": text.count("�"),
+        "ocr_verdict": "可用" if ratio >= OCR_MIN_RATIO else "**乱码，不许落账**",
         "fetched_at": datetime.datetime.now().isoformat(timespec="seconds"),
     })
     return rec, dest
@@ -219,7 +263,9 @@ def main() -> int:
         recs.append(rec)
         mark = "✓" if rec["status"] == "已取回" else "✗"
         extra = (f'{rec.get("words",0):>7,} 词｜有字 {rec.get("pages_with_text")}／'
-                 f'空 {rec.get("pages_empty")} 页' if rec["status"] == "已取回" else rec.get("note", ""))
+                 f'空 {rec.get("pages_empty")} 页｜连续字母词占比 '
+                 f'{rec.get("letter_run_ratio")}｜**{rec.get("ocr_verdict")}**'
+                 if rec["status"] == "已取回" else rec.get("note", ""))
         print(f"  {mark} {pid}  {rec['status']}  {extra}", flush=True)
     mf = out / "_fetch-manifest-kramerius.json"
     old = json.loads(mf.read_text(encoding="utf-8")) if mf.is_file() else {"记录": []}

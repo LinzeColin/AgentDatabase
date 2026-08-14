@@ -65,3 +65,44 @@ python3 _ledgers/_pipeline/fetch_kramerius.py --host kramerius5.nkp.cz \
   --query 'dc.creator:Komensk* AND fedora.model:monograph AND datum_begin:[* TO 1930] AND dostupnost:public' \
   --rows 10 --list
 ```
+
+## ★★ 第二部取回了，**但一个字都用不了**
+
+    PID     uuid:0a2b2630-894d-11dd-9988-000d606f5dc6
+    题名    J.A. Komenského Modlitby křesťanské（1882）  ← expression 道的候选
+    页      **240 页全部有字、0 页空**｜57,182 词｜584,217 字节
+
+看计数比第一部还健康。打开一读是**逐字母加空格 ＋ 变音符全坏**：
+
+    J .   A .   K O M E N S K � H O
+    M O D L I T B Y   K XE S dA N S K � ,   t o t i ~
+
+全文 **U+FFFD 17,136 个**（每千字 31.2），四位年份 **一个都找不到**
+（`1882` 被 OCR 成 `i S S a`）。[[aggregator-ocr-can-be-silently-broken]]
+
+### 判别式：**「≥2 个连续字母的词」占 token 的比例**
+
+| | token | 连续字母词占比 | U+FFFD |
+|---|---:|---:|---:|
+| 1892 Korrespondence | 143,711 | **0.9256** | 0 |
+| 1882 Modlitby | 57,182 | **0.0000** | 17,136 |
+
+两侧之间是空的 ⇒ 门放 **0.50**，余量都极大。已写进 `fetch_kramerius.py`：
+每份 manifest 记 `letter_run_ratio` / `replacement_chars` / `ocr_verdict`，
+打印时直接标「**乱码，不许落账**」。自测 12 条全绿（正反例逐字取自这两份）。
+
+### ★★★ 我第一个想用的判别式，方向是反的
+
+「平均 token 长度」：**坏的 8.61 > 好的 5.60** —— 坏的看上去「词更长＝更像正文」。
+**两份都跑了才看见。** 只跑一份，任何判别式都会自洽。
+[[my-diagnostics-manufacture-false-leads]]
+★ 这条**没有写成自测断言**：它是整份文件的统计，而自测里只有一小段摘录，
+  摘录复现不出那个形状；把夹具改到能过就等于编一个假现象。
+  [[fixtures-cleaner-than-the-real-thing]]
+
+## 对 Comenius 的净影响（更新）
+
+- `expression` 道：**仍然是空的** —— 唯一候选的 OCR 坏了，本机换不出好版本。
+- 因此 quick 的 3 道只能是 **writings ＋ external ＋ conversations**，
+  而 conversations 要靠 1892 那卷切片后与 1898 那卷凑成 **2 部独立作品**。
+- ⇒ 解冻条件不变，仍是「切片 ＋ 逐段核归属 ＋ 落 sha256」。
