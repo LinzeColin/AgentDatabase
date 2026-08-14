@@ -207,3 +207,48 @@ Ludwig von Wolzogen、女婿 Petr Figulus），**这卷确实是他的往还**�
 ⇒ **抬头 67 判得出、署名只有 31**，且署名那一侧还带正文误报。
 **同一批信、两把尺子、两个答案 —— 用抬头，不用署名。**
 [[two-checkers-same-text-different-rules]]
+
+## ★★★ 切段器写完并跑通了：**121 封，他自己占 81.7%**
+
+`_ledgers/_pipeline/slice_letter_volume.py`（自测 **35 条全绿**，正反例逐字取自本卷真抬头）。
+
+    取全文 5%–70% 段（616,306 字）→ **切出 121 封**
+      HIS-OWN  **88** 封｜**75,065 词（81.7%）**
+      OTHER     16 封｜ 6,416 词（ 7.0%）
+      **?（要人读）17** 封｜10,361 词（11.3%）
+    产物：121 个 `<罗马数字>.txt` ＋ `_slices.json`（逐封 sha256 ＋ 配方）
+
+**OTHER 16 封逐条列出来读过**，无一误判：`Mr. Hartlib to Mr. Pell.` ×6、
+`MR Pell to Mr. Hartlib.`、`Epistola M. Mersenni ad J. A. Comenium.`、
+`Fragmentum epistolae Joh. Bythneri ad J. Comenium.`、
+`Ex literis P. Figuli ad Nicolaum Arnoldům`、`Ex responso S. Maresii Nikolao Arnoldo`、
+`Literae Seniorum ad Susanna Lorántfy`、Lorántfy 自己署名的文书 ×3、
+`…clarissime Domine Comeni…`（抬头在称呼他）。
+
+⇒ **就算 17 封 `?` 全不是他**，仍有 **75,065 词**他自己的书信 —— `conversations` 道
+够得着，且与 1898 那卷是两部独立作品（Jaccard 0.0004）。
+
+### ★★ 订正：不是 117 封，是 **121 封**
+
+前一节写「117 封」，用的是 `[IVXLC]{1,7}`；切段器用 `[IVXLCDM]{1,8}`，
+多认出 `CLXXVIII` 这类**八位罗马数字**。**同一份文件，两个数，以 121 为准。**
+★ 今天这是**第四次**同一个病：抬头正则 9 → 35 → 67，编号正则 117 → 121。
+[[the-comment-states-the-rule-the-code-narrows-it]]
+
+### 自测里当场红掉的两条（**没让它跑到数据上**）
+
+- `Nobüissimo et strenuo domino Johanni a Wolzogen.` —— OCR 把 `Nobilissimo` 出成
+  **`Nobüissimo`**（i→ü），我写死的 `Nobi{1,2}lissim\w+` 落空。
+  **锚点里的每一个字母都可能被 OCR 打坏** ⇒ 改成「开头 40 字内出现与格 `domino`」。
+- `Fragmentum epistolae Joh. Bythneri ad J. Comenium.` —— 我把首字母缩写写死成
+  `(?:J\.?\s*A\.?\s*)?`，遇到只有 `J.` 的当场判不出 ⇒ 改成 `(?:[A-Z]\.?\s*){0,3}`。
+
+★ 另有一条是**读那 17 条 `?` 时逐条看出来的**，不是又想了一遍正则：
+`Copia epistolae ad r. d. Ernestům Andreae` 是「致某某的信的抄件」，仍是他发出的
+⇒ 补进规则后 `?` 18 → 17、HIS-OWN 87 → 88。
+
+### 还没做的（**明说未做**）
+
+- 那 **17 封 `?`** 没有逐封读（只有问候语开头，抬头判不出方向）；
+- **一份都没有进工作区** —— 落账要连 manifest 指针、`rights_basis`、`locator` 一起做，
+  且语料不进 git（[[corpus-lives-outside-git-verify-the-pointers]]）。
