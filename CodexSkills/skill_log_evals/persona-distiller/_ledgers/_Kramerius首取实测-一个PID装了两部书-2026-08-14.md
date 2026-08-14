@@ -149,3 +149,48 @@ Ludwig von Wolzogen、女婿 Petr Figulus），**这卷确实是他的往还**�
 
 ★ 本会话**没有做这一步**，因为它需要逐信读脚注、不是正则能收干净的
 （62 行脚注对应的信数还没数清）。**明说未做，不写成「已核」。**
+
+## ★★★ 逐封信数完了：**117 封，其中至少 10 封连他都不在场**
+
+拉丁段里独立成行的罗马数字编号 ＝ 一封信，共 **117** 封。
+逐封取紧随其后的抬头行，归类：
+
+| | 封数 | 判据 |
+|---|---:|---|
+| **他发出** | **67** | `Ad <人名>`（`Ad eundem.`／`Ad D. Mochingerum`／`Ad illustrissimum D D. Palatinum Belzensem` …） |
+| 别人写给他 | 1 | `Epistola M. Mersenni ad J. A. Comenium.` |
+| 方向不明（已全部原样列出） | 49 | 见下 |
+
+### 那 49 条读下来，**三类**
+
+① **仍是他发出的**（抬头换了写法）：`Ex literis ad dominum Hottonum.`（×3）、
+   `Ex literis ad dominum Joh. Loccenium`、`Ex epistola ad d. d. Zb. Goray`、
+   `Domino Ludovico de Geer.`、`Domino Joh. Wolzogen.`、`D. d. Baroni Sadovio.`、
+   `Bratru Chodniciovi.`、`Ex literis J. Comenii ad N. Arnoldům.`、
+   `Responsum ad Susannam Lorántfy.`、`Já, Jan A. Komenský, zanechávám po sobě…`
+② **★★ 他根本不是当事人的**（收信人与写信人**都不是他**）：
+   `MR Pell to Mr. Hartlib.` ＋ `Mr. Hartlib to Mr. Pell.` **×5**、
+   `Ex literis P. Figuli ad Nicolaum Arnoldům`、
+   `Ex responso S. Maresii Nikolao Arnoldo`、
+   `Literae Seniorum ad Susanna Lorántfy`、`Susanna Lorántfy, …` ×3（她署名的文书）
+   ⇒ **至少 10 封**，收录理由是「谈到了他」。
+③ 只有问候语开头、抬头判不出方向的：`Gratiam et pacem !`、`Salutem et observantiam !`、
+   `Reverende Vir!`、`Pacem Jesu Christi!` 等。
+
+### 结论
+
+**这一卷整卷判 `HIS-OWN` 是错的** —— 里面既有他收到的信，也有
+**Hartlib 与 Pell 之间的往来**（两头都不是他）。
+[[related-to-him-is-not-written-by-him]]｜[[creator-field-is-not-authorship]]
+
+**可执行的解冻路径（已量到可以照做的粒度）**：按 117 个罗马数字编号切段 →
+抬头形如 `Ad …`／`Ex literis ad …`／`Domino …`／`Ex literis J. Comenii ad …` 的判 `HIS-OWN`（**67 ＋ ①**）→
+`X to Y`／`Epistola X ad Comenium`／`Literae … ad …` 的判 `OTHER`（**②**）→
+剩下只有问候语的**逐封打开读**（**③**）→ 每段落 sha256 与配方。
+
+### ★ 顺带：同一个正则我今天写窄了**三次**
+
+`^Ad\s+[A-Z][a-zé]+\.?$` → 漏掉 `Ad eundem.`（小写）与 `Ad.`（带点）与多词抬头；
+第一次报 9 条、第二次 35 条、第三次 67 条 —— **同一份文件，三个数**。
+[[the-comment-states-the-rule-the-code-narrows-it]]｜[[my-checkers-are-mis-cut-six-times-in-one-day]]
+★ 报数之前先把命中**全部原样打出来读**，是这三次里唯一每次都救了我的动作。
