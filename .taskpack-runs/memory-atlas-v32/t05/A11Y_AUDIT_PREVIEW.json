@@ -1,0 +1,195 @@
+{
+  "schema_version": "memory_atlas.reality_panel_audit.v1",
+  "captured_at": "2026-08-03T23:00:06.417Z",
+  "page_url": "http://127.0.0.1:4173/",
+  "verdict": "PASS",
+  "failure_count": 0,
+  "checks": [
+    {
+      "id": "first_screen_above_fold",
+      "pass": true,
+      "evidence": {
+        "top": 509,
+        "viewport_height": 900
+      }
+    },
+    {
+      "id": "four_answers_fully_above_fold",
+      "pass": true,
+      "evidence": {
+        "matrix": [
+          {
+            "viewport": "1920x1080",
+            "top": 651,
+            "bottom": 801,
+            "viewport_height": 1080,
+            "fits": true
+          },
+          {
+            "viewport": "1512x945",
+            "top": 651,
+            "bottom": 818,
+            "viewport_height": 945,
+            "fits": true
+          },
+          {
+            "viewport": "1440x900",
+            "top": 650,
+            "bottom": 814,
+            "viewport_height": 900,
+            "fits": true
+          },
+          {
+            "viewport": "1280x800",
+            "top": 638,
+            "bottom": 798,
+            "viewport_height": 800,
+            "fits": true
+          },
+          {
+            "viewport": "1366x768",
+            "top": 634,
+            "bottom": 796,
+            "viewport_height": 768,
+            "fits": false
+          }
+        ],
+        "gated_viewports": [
+          "1920x1080",
+          "1512x945",
+          "1440x900",
+          "1280x800"
+        ]
+      }
+    },
+    {
+      "id": "four_answers_present",
+      "pass": true,
+      "evidence": {
+        "count": 4
+      }
+    },
+    {
+      "id": "three_visuals_present",
+      "pass": true,
+      "evidence": {
+        "count": 3
+      }
+    },
+    {
+      "id": "truth_ribbon_present",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "live_panel_precedes_historical_views",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "first_screen_is_chinese",
+      "pass": true,
+      "evidence": {
+        "cjk_chars": 69,
+        "latin_words": []
+      }
+    },
+    {
+      "id": "refresh_is_keyboard_reachable",
+      "pass": true,
+      "evidence": {
+        "tab_presses": 40
+      }
+    },
+    {
+      "id": "focus_ring_is_visible",
+      "pass": true,
+      "evidence": {
+        "outlineStyle": "solid",
+        "outlineWidth": "3px"
+      }
+    },
+    {
+      "id": "touch_targets_at_least_44px",
+      "pass": true,
+      "evidence": {
+        "violations": []
+      }
+    },
+    {
+      "id": "auto_revalidates_within_60s",
+      "pass": true,
+      "evidence": {
+        "requests_before": 1,
+        "requests_after": 2
+      }
+    },
+    {
+      "id": "online_event_revalidates_immediately",
+      "pass": true,
+      "evidence": {
+        "requests_before": 2,
+        "requests_after": 3
+      }
+    },
+    {
+      "id": "older_run_is_refused",
+      "pass": true,
+      "evidence": {
+        "held": "synthetic-run-20260803T101500Z",
+        "offered": "regression-run-19700101T000000Z"
+      }
+    },
+    {
+      "id": "refusal_is_surfaced_to_the_reader",
+      "pass": true,
+      "evidence": {
+        "warning": "当前为降级读取：云端链可用，但一个或多个本机独有来源未更新。；服务器返回更旧快照，已拒绝时间倒退"
+      }
+    },
+    {
+      "id": "reload_reads_back_same_run",
+      "pass": true,
+      "evidence": {
+        "run_id": "synthetic-run-20260803T101500Z"
+      }
+    },
+    {
+      "id": "mobile_has_no_horizontal_overflow",
+      "pass": true,
+      "evidence": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "offenders": []
+      }
+    },
+    {
+      "id": "reduced_motion_is_honoured",
+      "pass": true,
+      "evidence": {
+        "durations": [
+          "1e-05s",
+          "1e-05s",
+          "1e-05s",
+          "1e-05s",
+          "1e-05s",
+          "1e-05s"
+        ]
+      }
+    },
+    {
+      "id": "no_console_errors",
+      "pass": true,
+      "evidence": {
+        "errors": []
+      }
+    },
+    {
+      "id": "no_failed_requests",
+      "pass": true,
+      "evidence": {
+        "errors": []
+      }
+    }
+  ]
+}

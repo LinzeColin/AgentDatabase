@@ -1,0 +1,24 @@
+{
+  "schema_version": "memory_atlas.privacy_dependency_scan.v1",
+  "verdict": "PASS",
+  "scanned_payloads": [
+    "OpenAIDatabase/fixtures/live_snapshot.synthetic.json",
+    "/private/tmp/claude-501/-Users-linzezhang-Documents-Codex-GithubProject-AgentDatabase/5fec6b66-a10f-4ef0-ba52-b08c49a28f0b/scratchpad/preview-web/live-snapshot/current.json",
+    "OpenAIDatabase/fixtures/private_analytics.synthetic.json",
+    "OpenAIDatabase/fixtures/visual_analytics.synthetic.json"
+  ],
+  "scanned_modules": [
+    "OpenAIDatabase/scripts/memory_atlas_private/live_snapshot_adapter.py",
+    "OpenAIDatabase/scripts/memory_atlas_private/live_snapshot_store.py",
+    "OpenAIDatabase/scripts/memory_atlas_private/api_live_snapshot.py",
+    "OpenAIDatabase/scripts/memory_atlas_private/api_server.py",
+    "OpenAIDatabase/scripts/memory_atlas_private/visual_analytics.py",
+    "OpenAIDatabase/scripts/memory_atlas_private/benchmark_comparator.py",
+    "OpenAIDatabase/scripts/memory_atlas_private/status_projection.py"
+  ],
+  "privacy_findings": [],
+  "model_dependency_findings": [],
+  "forbidden_key_count": 18,
+  "forbidden_value_pattern_count": 4,
+  "model_module_count": 17
+}

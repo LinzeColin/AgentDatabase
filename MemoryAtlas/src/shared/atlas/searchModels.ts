@@ -1,3 +1,4 @@
+import { humanizeMachineText } from "./machineTokenHuman";
 import { getMemoryNodes, normalizeMemoryTier } from "../../data/atlas";
 import type { AtlasNode, MemoryAtlas } from "../../types";
 import { Search2Filters, Search2Result, Search2SessionSummary } from "./contracts";
@@ -177,13 +178,14 @@ export function buildSearch2SessionSummary(results: Search2Result[], query: stri
 
 
 export function search2FilterStateLabel(filters: Search2Filters): string {
+  const any = (value: string) => (value === "all" ? "全部" : humanizeMachineText(value));
   return [
-    `query=${filters.query || "all"}`,
-    `tier=${filters.tier}`,
-    `topic=${filters.topic}`,
-    `recency=${filters.recency}`,
-    `importance=${filters.importance}`,
-    `evidence=${filters.evidenceOnly ? "required" : "optional"}`,
+    `关键词 ${filters.query || "全部"}`,
+    `层级 ${any(filters.tier)}`,
+    `主题 ${any(filters.topic)}`,
+    `新近度 ${any(filters.recency)}`,
+    `重要度 ${any(filters.importance)}`,
+    `证据 ${filters.evidenceOnly ? "必须有" : "可选"}`,
   ].join(" / ");
 }
 

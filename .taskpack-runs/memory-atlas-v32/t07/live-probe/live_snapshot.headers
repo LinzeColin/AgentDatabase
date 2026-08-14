@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+x-content-type-options: nosniff
+referrer-policy: no-referrer
+Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+server: MemoryAtlasPrivateAPI/0.0.0.31 Python/3.9.6
+date: Mon, 03 Aug 2026 23:26:19 GMT
+content-type: application/json; charset=utf-8
+cache-control: private, no-store, max-age=0
+pragma: no-cache
+vary: Cookie, Cf-Access-Jwt-Assertion
+etag: "0d6ed5abdfe9e3f27afcca5e9e64224bfe6e68bca683d49a076d76f228a76d25"
+x-memory-atlas-run-id: marun-20260803T101500Z-scenario
+x-memory-atlas-trace-id: marun-20260803T101500Z-scenario
+x-memory-atlas-release-id: 20260803T101000Z-scenario
+x-memory-atlas-deployment-revision: memory-atlas-blue-scenario
+content-length: 11048
+Connection: keep-alive
+Keep-Alive: timeout=5
+

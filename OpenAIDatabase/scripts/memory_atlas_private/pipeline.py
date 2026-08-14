@@ -2,21 +2,30 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import socket
+import sys
 import tempfile
 from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Mapping
 
 from .analytics import build_behavior_analytics, build_habit_recommendations
+from .canonical_source import (
+    CanonicalResolution,
+    GitHubCanonicalPublisher,
+    GitHubCanonicalSource,
+    resolve_canonical,
+    verify_backup_coverage,
+)
 from .config import RuntimeConfig
 from .failure_compound import FailureCompoundStore
 from .fact_backup import backup_private_facts
 from .hashing import sha256_file, stable_id
 from .inventory import cleanup_snapshots, discover_inventory, load_source_registry
 from .manifest import manifest_digest, run_fact_paths, utc_now, write_json_atomic
-from .models import NormalizedEvent, RunManifest, RunState, SourceState
+from .models import NormalizedEvent, ObjectReceipt, RunManifest, RunState, SourceState
 from .normalization import normalize_record
 from .object_store import ObjectStore, R2ObjectStore
 from .private_db import FactOutbox, GhPrivateDatabase, PrivateDatabase
@@ -36,8 +45,43 @@ def _object_key(sha256: str) -> str:
     return f"private-agentdatabase/sha256/{sha256[:2]}/{sha256}"
 
 
-def _normalized_key(run_id: str) -> str:
-    return f"private-agentdatabase/normalized/{run_id}/events.jsonl"
+# The normalized rollup used to be one whole ~350 MB events.jsonl per run under
+# private-agentdatabase/normalized/<run_id>/. Because each run captures whatever
+# the source currently holds, consecutive runs overlap heavily but are never
+# byte-identical, so content addressing could not dedupe them: ten runs in two
+# days cost 3.579 GB for a 122,080-event union. Measured new events per run were
+# 4 to 7,748 — under 7% of each upload was actually new.
+#
+# The rollup is now a base plus per-run deltas. The base carries the union to
+# date; each run uploads only events whose id it has not published before. Union
+# = base + every delta, so nothing is superseded and nothing is re-uploaded.
+CANONICAL_BASE_KEY = "private-agentdatabase/normalized/canonical/events.jsonl"
+
+
+def _normalized_delta_key(run_id: str) -> str:
+    return f"private-agentdatabase/normalized/canonical/delta/{run_id}.jsonl"
+
+
+def _published_index_path(runtime_dir: Path) -> Path:
+    return runtime_dir / "published-event-ids.txt"
+
+
+def _load_published_ids(runtime_dir: Path) -> set[str]:
+    path = _published_index_path(runtime_dir)
+    if not path.is_file():
+        return set()
+    return {line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()}
+
+
+def _extend_published_ids(runtime_dir: Path, new_ids: Iterable[str]) -> int:
+    path = _published_index_path(runtime_dir)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    added = 0
+    with path.open("a", encoding="utf-8", newline="\n") as handle:
+        for value in new_ids:
+            handle.write(f"{value}\n")
+            added += 1
+    return added
 
 
 def _write_jsonl(path: Path, events: Iterable[NormalizedEvent]) -> int:
@@ -79,7 +123,546 @@ def _normalized_batch_fact(normalized_key: str | None, objects: Iterable[object]
     raise PipelineError("manifest 对象清单中缺少规范化事件批次")
 
 
-class CapturePipeline:
+def _repo_file(*parts: str) -> Path:
+    return Path(__file__).resolve().parents[2].joinpath(*parts)
+
+
+DEFAULT_SOURCE_REGISTRY = (
+    Path(__file__).resolve().parents[3] / "ops" / "memory-atlas" / "source-registry.json"
+)
+
+
+def _as_row(item: object) -> dict[str, Any]:
+    return item if isinstance(item, dict) else asdict(item)  # type: ignore[arg-type]
+
+
+def _object_readback_ok(objects: Iterable[object]) -> bool:
+    rows = [_as_row(item) for item in objects]
+    return bool(rows) and all(
+        row.get("readback_verified") is True and row.get("readback_sha256") == row.get("sha256")
+        for row in rows
+    )
+
+
+def _is_r2_receipt(item: object) -> bool:
+    row = _as_row(item)
+    provider = str(row.get("provider_version") or "").lower()
+    if not provider:
+        return True
+    return provider in {"r2", "local-test-v1"} or provider.startswith("cloudflare-r2")
+
+
+def _authority_tiers(registry_path: Path | None) -> dict[str, dict[str, Any]]:
+    """Tier facts live in the registry so availability is data, not a hard-coded guess."""
+    path = registry_path or DEFAULT_SOURCE_REGISTRY
+    if not Path(path).is_file():
+        return {}
+    payload = json.loads(Path(path).read_text(encoding="utf-8"))
+    return {
+        str(row["source_id"]): row
+        for row in payload.get("cloud_native_authorities", [])
+        if isinstance(row, dict) and row.get("source_id")
+    }
+
+
+def merge_event_streams(batch_path: Path, union_path: Path) -> dict[str, Any]:
+    """Union this run's batch with the all-time canonical stream, by event id.
+
+    `batch_path` is rewritten in place with the merged stream. Both sides are
+    counted and reported, so a merge that silently dropped one side would show
+    as a count that does not add up rather than as a smaller number nobody
+    questions.
+    """
+    seen: set[str] = set()
+    batch_count = 0
+    added = 0
+    merged = batch_path.with_suffix(batch_path.suffix + ".merged")
+    with merged.open("w", encoding="utf-8", newline="\n") as out:
+        for path, is_batch in ((batch_path, True), (union_path, False)):
+            with path.open("r", encoding="utf-8") as handle:
+                for line in handle:
+                    if not line.strip():
+                        continue
+                    try:
+                        event_id = str(json.loads(line).get("event_id") or "")
+                    except json.JSONDecodeError:
+                        continue
+                    if is_batch:
+                        batch_count += 1
+                    if not event_id or event_id in seen:
+                        continue
+                    seen.add(event_id)
+                    if not is_batch:
+                        added += 1
+                    out.write(line if line.endswith("\n") else line + "\n")
+    merged.replace(batch_path)
+    return {
+        "mode": "BATCH_UNION_CANONICAL",
+        "batch_events": batch_count,
+        "canonical_only_events": added,
+        "union_events": len(seen),
+        "reason": "新一跑的批次尚未并入 canonical union；两侧按 event_id 求并，避免只读最新一跑而丢掉历史事件。",
+    }
+
+
+def capture_overdue(source_completed_at: str | None, now: str, target_seconds: int) -> dict[str, Any] | None:
+    """Has the scheduled capture failed to arrive?
+
+    The freshness state already says STALE on the page, but only to whoever
+    happens to look. The capture missed 2026-08-04 and 08-05 and nothing said
+    so — it surfaced because the Owner asked. This turns the same measurement
+    into an entry in the incident ledger the product already shows.
+
+    Age is measured from the last *successful* source run, so a capture that is
+    currently in flight does not suppress the alert and does not trigger one
+    either; when it lands, the age resets on its own.
+    """
+    if not source_completed_at:
+        return None
+    try:
+        completed = datetime.fromisoformat(str(source_completed_at).replace("Z", "+00:00"))
+        evaluated = datetime.fromisoformat(str(now).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    age = int((evaluated - completed).total_seconds())
+    if age <= target_seconds:
+        return None
+    return {
+        "age_seconds": age,
+        "target_seconds": target_seconds,
+        "overdue_seconds": age - target_seconds,
+        "last_success_at": str(source_completed_at),
+        "evaluated_at": str(now),
+    }
+
+
+def capture_freshness_target(registry_path: Path | None = None, *, default: int = 1800) -> int:
+    """How long the data may be old before that is worth reporting.
+
+    It used to be a hard-coded 1800 seconds against a pipeline that captures
+    once a day, so STALE was the permanent state and the signal said nothing.
+    The cadence is declared in the registry from the automation that actually
+    runs the capture, and the target is cadence plus grace. Missing or malformed
+    declaration falls back to the old default rather than inventing a wider one.
+    """
+    path = registry_path or DEFAULT_SOURCE_REGISTRY
+    try:
+        payload = json.loads(Path(path).read_text(encoding="utf-8"))
+        cadence = payload.get("source_capture_cadence") or {}
+        target = int(cadence.get("freshness_target_seconds") or 0)
+        return target if target > 0 else default
+    except Exception:
+        return default
+
+
+def _release_backup_health(record: Mapping[str, Any] | None) -> tuple[bool, bool, int, int]:
+    """Measure the encrypted backup by the fields its producer actually writes."""
+    if not isinstance(record, Mapping):
+        return (False, False, 0, 0)
+    restore = record.get("isolated_restore")
+    restore = restore if isinstance(restore, Mapping) else {}
+    parts = record.get("parts")
+    count = len(parts) if isinstance(parts, list) else int(record.get("ciphertext_part_count") or 0)
+    healthy = (
+        str(record.get("state") or "") == "PASS"
+        and record.get("remote_readback_verified") is True
+        and str(restore.get("state") or "") == "PASS"
+        and restore.get("all_hashes_match") is True
+    )
+    return (True, healthy, count, int(record.get("ciphertext_size_bytes") or 0))
+
+
+def cloud_native_authorities(
+    *,
+    objects: Iterable[object],
+    normalized_batch_key: str | None,
+    private_database_paths: Iterable[str],
+    github_release: Mapping[str, Any] | None,
+    observed_at: str,
+    registry_path: Path | None = None,
+    canonical: Mapping[str, Any] | None = None,
+    migration: Mapping[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Tier A rows, every state derived from something this run actually read.
+
+    `required_for_product` comes from the registry. Since the 2026-08-04
+    migration the required event authority is `github_canonical_events` — the
+    canonical union in the private repository's releases — and the two R2 rows
+    report honestly on a bucket that was drained without failing the product.
+    """
+    rows = [_as_row(item) for item in objects]
+    r2_rows = [row for row in rows if _is_r2_receipt(row)]
+    tiers = _authority_tiers(registry_path)
+    paths = list(private_database_paths)
+    delta = [
+        row for row in r2_rows if row.get("object_key") == normalized_batch_key
+    ] if normalized_batch_key else []
+    canonical = canonical or {}
+    canonical_ready = str(canonical.get("state", "")) in {"READY", "PASS"}
+    # An R2 row may be reported as MIGRATED rather than FAILED only when this
+    # run proved every one of its objects is covered elsewhere: the canonical
+    # union for the event stream, and the encrypted per-run backup for the
+    # source store. Without that proof a drained bucket is still a failure —
+    # otherwise "we moved it" becomes an excuse for data that simply vanished.
+    migration = migration or {}
+    covered = int(migration.get("migrated_to_github_objects") or 0) + int(migration.get("canonical_covered_objects") or 0)
+    declared = int(migration.get("manifest_object_count") or 0)
+    r2_migrated = bool(
+        canonical_ready
+        and declared
+        and covered >= declared
+        and str((migration.get("github_backup_coverage") or {}).get("state")) == "COVERED"
+    )
+
+    measured = {
+        "r2_primary_objects": (bool(r2_rows), _object_readback_ok(r2_rows), len(r2_rows), sum(int(row.get("size_bytes", 0) or 0) for row in r2_rows)),
+        "r2_normalized_events": (bool(delta), _object_readback_ok(delta), len(delta), sum(int(row.get("size_bytes", 0) or 0) for row in delta)),
+        "private_database_facts": (bool(paths), bool(paths), len(paths), 0),
+        "github_canonical_events": (
+            bool(canonical),
+            canonical_ready,
+            int(canonical.get("unique_events") or 0) if canonical_ready else 0,
+            int(canonical.get("bytes") or 0) if canonical_ready else 0,
+        ),
+        "github_private_release": _release_backup_health(github_release),
+    }
+
+    out: list[dict[str, Any]] = []
+    for source_id, (present, healthy, count, size) in measured.items():
+        spec = tiers.get(source_id, {})
+        state = "READY" if present and healthy else ("FAILED" if present else "MISSING")
+        if state in {"FAILED", "MISSING"} and r2_migrated and source_id.startswith("r2_"):
+            state = "MIGRATED"
+        out.append(
+            {
+                "source_id": source_id,
+                "label_zh": str(spec.get("label_zh", source_id)),
+                "tier": "A_CLOUD_NATIVE",
+                "required_for_capture": bool(spec.get("required_for_capture", True)),
+                "required_for_product": bool(spec.get("required_for_product", True)),
+                "state": state,
+                "object_count": count,
+                "size_bytes": size,
+                "last_observed_at": observed_at,
+            }
+        )
+    return out
+
+
+def same_run_evidence_rows(
+    *,
+    run_id: str,
+    trace_id: str,
+    r2_readback: bool | None,
+    private_database_readback: bool | None,
+    ovh_reconcile: bool | None,
+    status_projection: bool | None,
+    ref: str | None = None,
+    canonical_source_readback: bool | None = None,
+) -> dict[str, dict[str, Any]]:
+    """None means the caller never ran that check — NOT_RUN, never a silent PASS.
+
+    `canonical_source_readback` is the provider-neutral proof that this run
+    hashed the event bytes it analysed against a declared digest. `r2_readback`
+    keeps reporting on R2 alone, which after the migration is honestly NOT_RUN.
+    """
+
+    def row(value: bool | None) -> dict[str, Any]:
+        if value is None:
+            return {"state": "NOT_RUN", "run_id": None, "trace_id": None, "ref": None}
+        return {
+            "state": "PASS" if value else "FAIL",
+            "run_id": run_id if value else None,
+            "trace_id": trace_id if value else None,
+            "ref": ref if value else None,
+        }
+
+    return {
+        "r2_readback": row(r2_readback),
+        "private_database_readback": row(private_database_readback),
+        "ovh_reconcile": row(ovh_reconcile),
+        "status_projection": row(status_projection),
+        "canonical_source_readback": row(canonical_source_readback),
+    }
+
+
+CANONICAL_MANIFEST_KEY = "private-agentdatabase/normalized/canonical/MANIFEST.json"
+
+
+def load_supersession(object_store, work_dir: Path) -> dict[str, Any]:
+    """Which normalized objects were folded into the canonical union, and proof.
+
+    The R2 dedup replaced ten whole-history rollups with one canonical union and
+    deleted the originals. Any source manifest written before that still names a
+    deleted key, so the reconcile has to be able to tell "superseded" from
+    "lost" — and it may only do that from the record written at deletion time,
+    never by assuming.
+    """
+    target = Path(work_dir) / "canonical-supersession.json"
+    try:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        object_store.get_file(CANONICAL_MANIFEST_KEY, target)
+        value = json.loads(target.read_text(encoding="utf-8"))
+    except Exception:
+        return {"available": False, "canonical_object": None, "sha256": None, "superseded": set()}
+    finally:
+        if target.exists():
+            target.unlink()
+    superseded = {str(row) for row in value.get("supersedes", []) if isinstance(row, str)}
+    return {
+        "available": bool(superseded and value.get("object") and value.get("sha256")),
+        "canonical_object": value.get("object"),
+        "sha256": value.get("sha256"),
+        "unique_events": value.get("unique_events"),
+        "superseded": superseded,
+    }
+
+
+def visual_event(event: Mapping[str, Any]) -> dict[str, Any]:
+    """Project a NormalizedEvent onto the fields visual analytics contracts on.
+
+    The repository's event model predates the v0.0.0.32 visual contract and uses
+    `activity` where the contract says `activity_type`, and has no `model_tool`
+    at all. Mapping explicitly — rather than handing over the whole record —
+    also keeps `object_sha256`, `relative_path` and `payload` out of anything
+    that can reach a browser.
+    """
+    row = dict(event)
+    effort = row.get("effort_minutes")
+    return {
+        "event_id": str(row.get("event_id", "")),
+        "occurred_at": str(row.get("occurred_at", "")),
+        "activity_type": str(row.get("activity") or row.get("activity_type") or "unknown"),
+        "outcome_state": str(row.get("outcome_state") or "unknown"),
+        # Which agent/tool produced the event is not captured per event today;
+        # the source is the closest honest stand-in and is never invented.
+        "model_tool": str(row.get("model_tool") or row.get("source_id") or "unknown"),
+        "work_time_minutes": float(effort) if isinstance(effort, (int, float)) else None,
+        "outcome_evidence": bool(str(row.get("evidence_ref") or "").strip()),
+        "verified_at": row.get("verified_at") if isinstance(row.get("verified_at"), str) else None,
+    }
+
+
+def _link_or_copy(src: str, dst: str) -> None:
+    """Hardlink when the filesystem allows it, copy when it does not.
+
+    The release tree and the work directory are on different filesystems on the
+    production host, and a hardlink cannot cross devices.
+    """
+    try:
+        os.link(src, dst)
+    except OSError:
+        shutil.copy2(src, dst)
+
+
+def regenerate_atlas_snapshot(
+    events: Iterable[Mapping[str, Any]],
+    *,
+    database_dir: Path,
+    work_dir: Path,
+    output: Path,
+    runner=None,
+) -> dict[str, Any]:
+    """Rebuild the ten original views' snapshot from the live event plane.
+
+    `data/processed/codex/*` froze when its local writer stopped on 2026-07-17,
+    so the ten views showed 128 sessions ending in mid-July while the capture
+    plane held 505 through today. The two files are regenerated from the events
+    and the repository's own builder is run over them, unchanged — the graph
+    model is not reimplemented, only its stale input is replaced.
+
+    The rest of the data tree is symlinked, not copied: it is ~576 MB and the
+    host runs this every fifteen minutes.
+    """
+    import subprocess
+
+    from .codex_activity_adapter import build_daily_rows, build_session_rows
+
+    sessions = build_session_rows(events)
+    daily = build_daily_rows(sessions)
+    if not sessions:
+        return {"state": "SKIPPED", "reason": "no session events in this run", "session_count": 0}
+
+    # The builder's own safe_repo_path rejects symlinks outright, so the tree it
+    # is pointed at must be real files. Hardlinks are indistinguishable from
+    # regular files, cost no space and copy instantly. Everything is linked
+    # except data/public_raw, which is 433 MB the builder never opens — it needs
+    # config/ and the derived trees as well as data/, so an allowlist of two or
+    # three directories keeps breaking on the next thing it reads.
+    root = Path(work_dir) / "atlas-build"
+    if root.exists():
+        shutil.rmtree(root)
+    root.mkdir(parents=True)
+    source = Path(database_dir)
+    # Exactly what the builder reads, and nothing else. Linking the whole tree
+    # took minutes per run on tens of thousands of files, and this executes
+    # every fifteen minutes. If the builder ever needs another path it fails
+    # loudly on that path rather than being masked by copying everything.
+    for relative in ("config", "data/memory", "data/processed", "data/derived"):
+        child = source / relative
+        if not child.is_dir():
+            continue
+        target = root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(child, target, copy_function=_link_or_copy, dirs_exist_ok=True)
+
+    def _write(path: Path, rows: list[dict[str, Any]]) -> None:
+        # The destination is a hardlink to the repository's own copy; writing
+        # through it would rewrite the source. Break the link first.
+        path.unlink(missing_ok=True)
+        with path.open("w", encoding="utf-8", newline="\n") as handle:
+            for row in rows:
+                handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+
+    codex = root / "data" / "processed" / "codex"
+    codex.mkdir(parents=True, exist_ok=True)
+    _write(codex / "codex_session_manifest.jsonl", sessions)
+    _write(codex / "codex_daily_activity.jsonl", daily)
+
+    builder = Path(database_dir) / "scripts" / "build_memory_atlas_data.py"
+    staged = root / "memory_atlas.json"
+    command = [sys.executable, "-B", str(builder), "--database-dir", str(root), "--output", str(staged)]
+    result = (runner or subprocess.run)(command, capture_output=True, text=True)
+    if result.returncode != 0 or not staged.is_file():
+        return {
+            "state": "FAILED",
+            "session_count": len(sessions),
+            "reason": (result.stderr or result.stdout or "builder produced no output")[-400:],
+        }
+    # Only replace the served snapshot once the builder has produced a whole one.
+    destination = Path(output)
+    write_json_atomic(destination, json.loads(staged.read_text(encoding="utf-8")))
+    # nginx runs unprivileged inside the container and reads this through a
+    # read-only mount. The pipeline's umask writes 0600, so the container got
+    # "Permission denied" and silently fell back to the snapshot baked into the
+    # release — the browser kept seeing July while the join was already correct
+    # on disk. Only this file is widened; the private analytics beside it stays
+    # 0600 and no nginx location serves it.
+    os.chmod(destination, 0o644)
+    for directory in (destination.parent, destination.parent.parent):
+        try:
+            os.chmod(directory, os.stat(directory).st_mode | 0o005)
+        except OSError:
+            pass
+    # The staged tree is ~100 MB and this runs every fifteen minutes; leaving it
+    # for the next run to delete filled a 38 GB disk twice.
+    shutil.rmtree(root, ignore_errors=True)
+    return {
+        "state": "PUBLISHED",
+        "session_count": len(sessions),
+        "day_count": len(daily),
+        "first_day": daily[0]["date"],
+        "last_day": daily[-1]["date"],
+    }
+
+
+def _release_identity() -> dict[str, Any]:
+    """What the running process can actually observe about its own release.
+
+    Blank environment means UNVERIFIED, never a fabricated identity: the browser
+    cross-checks these against the API headers and would rather show 未验证 than
+    a value nobody proved.
+    """
+    commit = os.environ.get("MEMORY_ATLAS_REPOSITORY_COMMIT", "").strip() or None
+    release_id = os.environ.get("MEMORY_ATLAS_RELEASE_ID", "").strip() or None
+    digest = os.environ.get("MEMORY_ATLAS_ARTIFACT_DIGEST", "").strip() or None
+    revision = os.environ.get("MEMORY_ATLAS_DEPLOYMENT_REVISION", "").strip() or None
+    observed = any((commit, release_id, digest, revision))
+    return {
+        "identity_state": "OBSERVED" if observed else "UNVERIFIED",
+        "repository_commit": commit,
+        "release_id": release_id,
+        "artifact_digest": digest,
+        "deployment_revision": revision,
+    }
+
+
+def normalize_live_run_block(
+    run: Mapping[str, Any],
+    *,
+    run_id: str,
+    trace_id: str,
+    state: str,
+    started_at: str | None,
+    completed_at: str | None,
+    reconciled_at: str | None = None,
+) -> dict[str, Any]:
+    """The private analytics run block predates LiveSnapshot and lacks its identity fields."""
+    block = dict(run)
+    block["run_id"] = run_id
+    block["trace_id"] = trace_id
+    block["state"] = state
+    block["source_started_at"] = started_at
+    block["source_completed_at"] = completed_at
+    block["reconciled_at"] = reconciled_at
+    return block
+
+
+class LiveSnapshotPublisherMixin:
+    """Both hosts publish through exactly one adapter and one store.
+
+    The caller supplies the evidence because only the caller knows what it
+    actually read. The capture host has no OVH reconcile read-back, so it
+    declines here rather than claiming an authority it never touched; the
+    reconcile host verified all four and publishes.
+
+    Rollback is flag-off: with MEMORY_ATLAS_LIVE_SNAPSHOT disabled nothing is
+    published and every existing path behaves exactly as before.
+    """
+
+    def _publish_live_snapshot(
+        self,
+        private_snapshot: dict[str, Any],
+        runtime_evidence: dict[str, Any],
+        events: Iterable[Mapping[str, Any]] | None = None,
+    ) -> dict[str, Any] | None:
+        if os.environ.get("MEMORY_ATLAS_LIVE_SNAPSHOT", "1") == "0":
+            self._live_snapshot_error = "feature flag off"
+            return None
+        schema = _repo_file("schema", "memory_atlas.live_snapshot.v1.schema.json")
+        if not schema.is_file():
+            self._live_snapshot_error = f"schema not found: {schema}"
+            return None
+        try:
+            from .benchmark_comparator import compare
+            from .live_snapshot_adapter import build_live_snapshot
+            from .live_snapshot_store import LiveSnapshotStore
+            from .visual_analytics import build_visual_analytics
+
+            # build_behavior_analytics deliberately does not retain raw event
+            # payloads, so behavior_economics carries none. Reading them from
+            # there produced a snapshot whose analysis was over zero events
+            # while the run had just counted 122,080 — a zero presented as the
+            # current reading, which is the one thing the contract forbids.
+            rows = list(events) if events is not None else list(
+                private_snapshot.get("behavior_economics", {}).get("events") or []
+            )
+            declared = int(private_snapshot.get("behavior_economics", {}).get("event_count", 0) or 0)
+            if declared and not rows:
+                raise PipelineError(
+                    f"run reports {declared} events but none were handed to the live snapshot; refusing to publish zeros"
+                )
+            visual = build_visual_analytics(visual_event(row) for row in rows)
+            registry_path = _repo_file("benchmark", "registry.v1.json")
+            benchmark = (
+                compare({}, json.loads(registry_path.read_text(encoding="utf-8")))
+                if registry_path.is_file()
+                else {"benchmarks": [], "comparable": False}
+            )
+            snapshot = build_live_snapshot(
+                private_snapshot, visual, runtime_evidence, benchmark, evaluated_at=self.clock(),
+                freshness_target_seconds=capture_freshness_target(self.config.source_registry),
+            )
+            store = LiveSnapshotStore(self.config.web_data_dir / "live-snapshot", schema)
+            published = store.publish(snapshot)
+            self._live_snapshot_error = ""
+            return published
+        except Exception as exc:  # never let the live snapshot break the existing product
+            self._live_snapshot_error = f"{type(exc).__name__}: {exc}"
+            return None
+
+
+class CapturePipeline(LiveSnapshotPublisherMixin):
     """Source-side lossless capture.
 
     This component is designed for the Mac/Codex Automation because the sources
@@ -93,6 +676,8 @@ class CapturePipeline:
         private_db: PrivateDatabase | None = None,
         clock=utc_now,
         private_release_backup: PrivateReleaseBackup | None = None,
+        canonical_publisher: GitHubCanonicalPublisher | None = None,
+        r2_fact_backup_required: bool = True,
     ):
         self.config = config
         self.config.ensure_runtime_dirs()
@@ -101,6 +686,9 @@ class CapturePipeline:
         self.clock = clock
         self.outbox = FactOutbox(config.runtime_dir / "fact-outbox.sqlite3")
         self.failures = FailureCompoundStore(config.runtime_dir / "failure-compound.sqlite3")
+        self._live_snapshot_error = ""
+        self.canonical_publisher = canonical_publisher
+        self.r2_fact_backup_required = r2_fact_backup_required
         if private_release_backup is not None:
             self.private_release_backup = private_release_backup
         elif config.private_release_backup_enabled:
@@ -130,7 +718,7 @@ class CapturePipeline:
         try:
             preflight = self.object_store.preflight()
             if preflight.get("state") != "PASS" or preflight.get("bucket_creation_attempted") is not False:
-                raise PipelineError("R2 精确范围 preflight 未通过")
+                raise PipelineError("对象暂存 preflight 未通过")
             registry = load_source_registry(self.config.source_registry)
             records, coverages = discover_inventory(registry, snapshots)
             manifest.source_coverages = coverages
@@ -153,12 +741,45 @@ class CapturePipeline:
                 manifest.objects_repaired += 1 if receipt.operation == "repaired" else 0
                 manifest.objects_unchanged += 1 if receipt.operation == "unchanged" else 0
                 all_events.extend(normalize_record(record))
+            # Publish only events this host has not published before. The union
+            # stays complete because the base object plus every delta is the
+            # union; re-uploading the whole rollup each run is what produced
+            # 3.579 GB of overlapping snapshots for a 122,080-event union.
+            published_ids = _load_published_ids(self.config.runtime_dir)
+            delta_events = [event for event in all_events if event.event_id not in published_ids]
             normalized_path = work / "events.jsonl"
-            event_count = _write_jsonl(normalized_path, all_events)
+            # event_count keeps its meaning: everything normalized this run.
+            # published_event_count is what actually left the host.
+            published_event_count = _write_jsonl(normalized_path, delta_events)
+            event_count = len(all_events)
             normalized_sha = sha256_file(normalized_path)
-            normalized_receipt = self.object_store.put_file(_normalized_key(run_id), normalized_path, normalized_sha)
+            if self.canonical_publisher is not None:
+                conventional_delta_key = self.config.r2_primary_prefix + _normalized_delta_key(run_id)
+                canonical_object_key = self.config.r2_primary_prefix + CANONICAL_BASE_KEY
+                manifest.github_canonical_backup = self.canonical_publisher.run(
+                    delta_path=normalized_path,
+                    normalized_object_key=conventional_delta_key,
+                    canonical_object_key=canonical_object_key,
+                    run_id=run_id,
+                    created_at=started_at,
+                    work_root=work,
+                )
+                normalized_receipt = ObjectReceipt(
+                    sha256=str(manifest.github_canonical_backup["sha256"]),
+                    object_key=str(manifest.github_canonical_backup["object"]),
+                    size_bytes=int(manifest.github_canonical_backup["bytes"]),
+                    operation="verified_remote",
+                    readback_sha256=str(manifest.github_canonical_backup["sha256"]),
+                    readback_verified=True,
+                    provider_version="github-private-release-canonical-v1",
+                )
+            else:
+                normalized_receipt = self.object_store.put_file(
+                    _normalized_delta_key(run_id), normalized_path, normalized_sha
+                )
             manifest.objects.append(normalized_receipt)
             manifest.normalized_batch_key = normalized_receipt.object_key
+            _extend_published_ids(self.config.runtime_dir, (event.event_id for event in delta_events))
             manifest.state = RunState.VERIFYING_OBJECTS
             if not all(item.readback_verified and item.readback_sha256 == item.sha256 for item in manifest.objects):
                 raise PipelineError("至少一个对象缺少完整读回证明")
@@ -179,22 +800,92 @@ class CapturePipeline:
             failure_snapshot = self.failures.export_snapshot(self.clock())
             analytics["recommendations"] = build_habit_recommendations(analytics, failure_snapshot)
             manifest.state = RunState.REFRESHING_ATLAS
-            self._write_web_snapshots(analytics, failure_snapshot, manifest)
+            private_snapshot = self._write_web_snapshots(analytics, failure_snapshot, manifest)
             manifest.state = RunState.SUCCEEDED
             manifest.completed_at = self.clock()
+            # Same adapter as the OVH reconcile path, with this host's own
+            # evidence. The capture host never runs the OVH reconcile, so that
+            # row is NOT_RUN and the adapter declines rather than inventing an
+            # authority read-back. What is published on OVH is published there.
+            live_snapshot = self._publish_live_snapshot(
+                {
+                    **private_snapshot,
+                    "run": normalize_live_run_block(
+                        private_snapshot["run"],
+                        run_id=manifest.run_id,
+                        trace_id=manifest.run_id,
+                        state=manifest.state.value,
+                        started_at=manifest.started_at,
+                        completed_at=manifest.completed_at,
+                    ),
+                },
+                {
+                    "schema_version": "memory_atlas.runtime_evidence.v1",
+                    "generated_at": self.clock(),
+                    "run_id": manifest.run_id,
+                    "trace_id": manifest.run_id,
+                    "release": _release_identity(),
+                    "cloud_native_sources": cloud_native_authorities(
+                        objects=manifest.objects,
+                        normalized_batch_key=manifest.normalized_batch_key,
+                        private_database_paths=manifest.private_database_paths,
+                        github_release=manifest.github_private_release_backup,
+                        observed_at=manifest.completed_at,
+                        registry_path=self.config.source_registry,
+                        canonical=manifest.github_canonical_backup,
+                    ),
+                    "same_run_evidence": same_run_evidence_rows(
+                        run_id=manifest.run_id,
+                        trace_id=manifest.run_id,
+                        r2_readback=(
+                            _object_readback_ok(
+                                item for item in manifest.objects if _is_r2_receipt(item)
+                            )
+                            if any(_is_r2_receipt(item) for item in manifest.objects)
+                            else None
+                        ),
+                        private_database_readback=None,
+                        ovh_reconcile=None,
+                        status_projection=None,
+                    ),
+                },
+                events=[asdict(event) for event in all_events],
+            )
             result = self._publish_terminal(manifest, events=all_events, message="源端全量对账完成")
+            result["live_snapshot"] = live_snapshot or {
+                "state": "NOT_PUBLISHED",
+                "reason": self._live_snapshot_error or "capture host has no OVH reconcile evidence",
+            }
             if self.private_release_backup is not None:
                 fact_backup = backup_private_facts(
                     self.config,
                     self.private_db,
                     self.object_store,
                     generated_at=self.clock(),
+                    r2_required=self.r2_fact_backup_required,
                 )
                 if fact_backup.get("state") != "PASS":
-                    raise PipelineError("事实备份包未完成 R2 与 Private-Database 双读回")
+                    raise PipelineError("事实备份包未完成 Private-Database 远端读回")
                 result["private_fact_backup"] = fact_backup
                 result["github_private_release_backup"] = manifest.github_private_release_backup
+            if manifest.github_canonical_backup is not None:
+                result["github_canonical_backup"] = manifest.github_canonical_backup
+            result["r2"] = {
+                "state": "PASS" if any(_is_r2_receipt(item) for item in manifest.objects) else "SKIPPED_ZERO_CHARGE",
+                "verified_objects": sum(
+                    1 for item in manifest.objects
+                    if _is_r2_receipt(item) and _as_row(item).get("readback_verified") is True
+                ),
+                "billable_requests": 0 if not any(_is_r2_receipt(item) for item in manifest.objects) else None,
+            }
             result["event_count"] = event_count
+            result["published_event_count"] = published_event_count
+            result["incremental_upload"] = {
+                "mode": "base_plus_delta",
+                "base_object": CANONICAL_BASE_KEY,
+                "delta_object": manifest.normalized_batch_key,
+                "skipped_already_published": event_count - published_event_count,
+            }
             return result
         except Exception as exc:
             manifest.state = RunState.FAILED
@@ -224,7 +915,7 @@ class CapturePipeline:
         analytics: dict[str, Any],
         failure_snapshot: dict[str, Any],
         manifest: RunManifest,
-    ) -> None:
+    ) -> dict[str, Any]:
         private_snapshot = {
             "schema_version": "memory_atlas.private_analytics.v1",
             "generated_at": self.clock(),
@@ -261,6 +952,7 @@ class CapturePipeline:
             source_contract["private_analytics_snapshot"] = "/memory_atlas_private_analytics.json"
             private_atlas["source_contract"] = source_contract
             write_json_atomic(self.config.web_data_dir / "memory_atlas.json", private_atlas)
+        return private_snapshot
 
     def _publish_terminal(
         self,
@@ -292,6 +984,7 @@ class CapturePipeline:
             "normalized_batch_key": manifest.normalized_batch_key,
             "event_count": len(events),
         }
+        r2_receipts = [item for item in manifest.objects if _is_r2_receipt(item)]
         runtime = {
             "schema_version": "memory_atlas.runtime_projection.v1",
             "run_id": manifest.run_id,
@@ -299,7 +992,12 @@ class CapturePipeline:
             "source_host": manifest.source_capture_host,
             "generated_at": self.clock(),
             "facts_authority": "Private-Database",
-            "object_authority": "Cloudflare R2 primary-objects/",
+            "object_authority": (
+                "Cloudflare R2 primary-objects/"
+                if r2_receipts
+                else "GitHub private Releases (encrypted source archive + canonical events)"
+            ),
+            "r2_capture_mode": "STANDARD" if r2_receipts else "SKIPPED_ZERO_CHARGE",
             "runtime_journal": "local SQLite, rebuildable",
         }
         now = self.clock()
@@ -337,10 +1035,14 @@ class CapturePipeline:
             "readback_verified_objects": sum(1 for item in manifest.objects if item.readback_verified),
             "bytes_discovered": manifest.bytes_discovered,
             "bytes_uploaded": manifest.bytes_uploaded,
+            "r2_verified_objects": sum(
+                1 for item in r2_receipts
+                if item.readback_verified and item.readback_sha256 == item.sha256
+            ),
         }
 
 
-class RemoteReconcilePipeline:
+class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
     """OVH-side rebuild and verification. It never scans Mac source paths."""
 
     def __init__(
@@ -349,14 +1051,20 @@ class RemoteReconcilePipeline:
         object_store: ObjectStore | None = None,
         private_db: PrivateDatabase | None = None,
         clock=utc_now,
+        canonical_source: GitHubCanonicalSource | None = None,
     ):
         self.config = config
         self.config.ensure_runtime_dirs()
         self.object_store = object_store or R2ObjectStore(config)
         self.private_db = private_db or GhPrivateDatabase(config.private_db_client)
+        self.canonical_source = canonical_source if canonical_source is not None else GitHubCanonicalSource(
+            repo=config.github_repo,
+            cache_dir=config.work_dir / "canonical-cache",
+        )
         self.clock = clock
         self.failures = FailureCompoundStore(config.runtime_dir / "failure-compound.sqlite3")
         self.outbox = FactOutbox(config.runtime_dir / "remote-fact-outbox.sqlite3")
+        self._live_snapshot_error = ""
 
     def _publish_failure_snapshot(self, snapshot: dict[str, Any], now: str) -> dict[str, int]:
         self.outbox.enqueue(
@@ -369,6 +1077,18 @@ class RemoteReconcilePipeline:
         if flush["failed"] or flush["remaining"]:
             raise PipelineError("Failure Compound 事实未完整进入 Private-Database")
         return flush
+
+    def _r2_holds(self, key: str, digest: str) -> bool:
+        """Does R2 still hold these exact bytes?
+
+        After the migration the bucket answers 404 for the whole memory-atlas
+        tree, and a drained bucket is a fact about R2, not a reason to abort the
+        run before the canonical source has been consulted.
+        """
+        try:
+            return bool(self.object_store.exists_with_hash(key, digest))
+        except Exception:
+            return False
 
     def run(self) -> dict[str, Any]:
         latest = self.private_db.get_json("memory-atlas/runs/latest.json")
@@ -383,25 +1103,62 @@ class RemoteReconcilePipeline:
         manifest_path = str(latest["manifest_path"])
         manifest = self.private_db.get_json(manifest_path)
         objects = manifest.get("objects", [])
+        # Which side holds the canonical union is measured, not assumed: R2 when
+        # it still verifies, otherwise the private repository's canonical
+        # release, which became the primary when the bucket was drained.
+        canonical = resolve_canonical(
+            object_store=self.object_store,
+            github=self.canonical_source,
+            work_dir=self.config.work_dir,
+            r2_manifest_loader=load_supersession,
+        )
         missing: list[str] = []
+        superseded: list[str] = []
+        r2_verified = 0
         for row in objects:
             if not isinstance(row, dict):
                 continue
             key = str(row.get("object_key", ""))
             digest = str(row.get("sha256", ""))
-            if not key or not digest or not self.object_store.exists_with_hash(key, digest):
-                missing.append(key or "<missing-key>")
+            if _is_r2_receipt(row) and key and digest and self._r2_holds(key, digest):
+                r2_verified += 1
+                continue
+            # Superseded is not lost — but only when the canonical union that
+            # replaced it verifies, and only when that union provably contains
+            # this object's events.
+            if key and canonical.covers(key):
+                superseded.append(key)
+                continue
+            missing.append(key or "<missing-key>")
+        # The content-addressed source store moved to the encrypted per-run
+        # backup releases with the rest of the tree. Those objects are accounted
+        # for only when this run's own backup record passed, still exists, and
+        # the file count actually covers the manifest.
+        backup_coverage = verify_backup_coverage(
+            self.canonical_source,
+            manifest.get("github_private_release_backup"),
+            run_id=str(latest.get("run_id") or ""),
+            manifest_object_count=len([row for row in objects if isinstance(row, dict)]),
+            canonical_covered=len(superseded) + r2_verified,
+        )
+        migrated: list[str] = []
+        if missing and backup_coverage.covered:
+            migrated, missing = missing, []
         if missing:
             incident = self.failures.record_failure(
                 component="memory-atlas-remote-reconcile",
                 category="data_integrity",
                 severity="P0",
                 error_code="OBJECT_READBACK_MISMATCH",
-                title="远端对象清单与 R2 字节不一致",
+                title="对象清单在 R2 与 GitHub 权威源里都找不到",
                 occurred_at=self.clock(),
                 evidence_ref=f"private-db://{manifest_path}",
                 environment=socket.gethostname(),
-                details={"missing": missing[:100]},
+                details={
+                    "missing": missing[:100],
+                    "canonical": canonical.to_fact(),
+                    "github_backup_coverage": backup_coverage.to_fact(),
+                },
             )
             now = self.clock()
             failure_snapshot = self.failures.export_snapshot(now)
@@ -411,21 +1168,115 @@ class RemoteReconcilePipeline:
                 "state": "FAILED",
                 "run_id": latest.get("run_id"),
                 "missing_or_corrupt_objects": missing,
+                "canonical_source": canonical.to_fact(),
+                "github_backup_coverage": backup_coverage.to_fact(),
                 "incident_id": incident.incident_id,
             }
         normalized_key = manifest.get("normalized_batch_key")
         if not isinstance(normalized_key, str) or not normalized_key:
             raise PipelineError("源端 manifest 缺少 normalized_batch_key")
+        event_source = normalized_key
+        live_events: list[dict[str, Any]] = []
         with tempfile.NamedTemporaryFile(prefix="memory-atlas-events-", suffix=".jsonl", delete=False) as handle:
             temporary = Path(handle.name)
         try:
-            self.object_store.get_file(normalized_key, temporary)
+            if normalized_key in superseded:
+                # The canonical union is a proven superset of every rollup it
+                # replaced (122,080 events against a largest single run of
+                # 112,036), so reading it loses nothing this manifest named.
+                canonical_receipt = canonical.fetch(temporary)
+                event_source = str(canonical.canonical_object)
+                merge = {"mode": "CANONICAL_ONLY", "reason": "本次批次已被 canonical union 收录"}
+            else:
+                # A fresh run's batch is not in the union yet. Reading only the
+                # batch is what "全量全时" must never mean: this run carried
+                # 114,024 events while the union carried 122,080, and the
+                # manifest's own loss_check says keeping only the newest run
+                # drops 10,044. Both are read and unioned by event id.
+                self.object_store.get_file(event_source, temporary)
+                batch_receipt = {
+                    "state": "READY", "provider": "r2", "cache": "MISS",
+                    # Proven by exists_with_hash in the accounting loop above.
+                    "sha256": next(
+                        (str(row.get("sha256")) for row in objects
+                         if isinstance(row, dict) and row.get("object_key") == normalized_key),
+                        None,
+                    ),
+                    "bytes": temporary.stat().st_size,
+                }
+                merge = {"mode": "BATCH_ONLY", "reason": "canonical union 不可用"}
+                canonical_receipt = batch_receipt
+                if canonical.available:
+                    with tempfile.NamedTemporaryFile(
+                        prefix="memory-atlas-union-", suffix=".jsonl", delete=False
+                    ) as union_handle:
+                        union_path = Path(union_handle.name)
+                    try:
+                        union_receipt = canonical.fetch(union_path)
+                        merge = merge_event_streams(temporary, union_path)
+                        merge["batch_receipt"] = batch_receipt
+                        merge["canonical_receipt"] = union_receipt
+                        canonical_receipt = union_receipt
+                        event_source = f"{normalized_key}+{canonical.canonical_object}"
+                    finally:
+                        union_path.unlink(missing_ok=True)
             analytics = build_behavior_analytics(_iter_events(temporary), generated_at=self.clock())
+            live_events = [asdict(event) for event in _iter_events(temporary)]
+            # The ten original views read a snapshot built from
+            # data/processed/codex, whose local writer stopped on 2026-07-17.
+            # Regenerating it here is what actually joins the two planes.
+            try:
+                atlas_rebuild = regenerate_atlas_snapshot(
+                    live_events,
+                    database_dir=Path(__file__).resolve().parents[2],
+                    work_dir=self.config.work_dir,
+                    # A directory that holds only this file. shared/data also
+                    # holds the private analytics at 0600, and the deploy resets
+                    # that directory to 0750 on every promotion, so widening it
+                    # was both leaky and undone every deploy.
+                    output=self.config.web_data_dir / "public" / "memory_atlas.json",
+                )
+            except Exception as exc:
+                # A cross-device link error took the whole reconcile down and the
+                # deployment auto-rolled back. This run also publishes the live
+                # snapshot and the status projection; a failed graph rebuild must
+                # degrade to the last good snapshot, never cancel the rest.
+                atlas_rebuild = {"state": "FAILED", "reason": f"{type(exc).__name__}: {exc}"[:400]}
         finally:
             temporary.unlink(missing_ok=True)
         event_count = int(analytics["event_count"])
         analytics["normalized_event_batch"] = _normalized_batch_fact(normalized_key, objects)
+        if superseded:
+            analytics["normalized_event_batch"]["superseded_by_canonical"] = {
+                "event_source": event_source,
+                "canonical_sha256": canonical.sha256,
+                "canonical_provider": canonical.provider,
+                "superseded_keys": sorted(superseded),
+            }
         registry_import: dict[str, Any] | None = None
+        # The scheduled capture not arriving is a real incident, not just a
+        # colour on a panel. Recorded through the existing ledger so it shows up
+        # where failures already show up, and deduplicated by signature so a
+        # fifteen-minute timer increments a recurrence instead of spamming.
+        overdue = capture_overdue(
+            str(latest.get("completed_at") or ""),
+            reconciled_at_probe := self.clock(),
+            capture_freshness_target(self.config.source_registry),
+        )
+        capture_alert: dict[str, Any] = {"state": "ON_TIME"}
+        if overdue is not None:
+            incident = self.failures.record_failure(
+                component="memory-atlas-source-capture",
+                category="scheduled_capture_overdue",
+                severity="P2",
+                error_code="SOURCE_CAPTURE_OVERDUE",
+                title="按计划的源端采集没有按时到达",
+                occurred_at=reconciled_at_probe,
+                evidence_ref=f"private-db://{manifest_path}",
+                environment=socket.gethostname(),
+                details=overdue,
+            )
+            capture_alert = {"state": "OVERDUE", "incident_id": incident.incident_id, **overdue}
         if self.config.failure_asset_registry is not None:
             registry_import = self.failures.import_asset_registry(self.config.failure_asset_registry)
         failure_generated_at = self.clock()
@@ -446,6 +1297,13 @@ class RemoteReconcilePipeline:
                 "source_completed_at": latest.get("completed_at"),
                 "source_coverages": manifest.get("source_coverages", []),
                 "objects": objects,
+                "storage_migration": {
+                    "primary": "GITHUB_PRIVATE_REPOSITORY",
+                    "r2_verified_objects": r2_verified,
+                    "canonical_covered_objects": len(superseded),
+                    "migrated_to_github_objects": len(migrated),
+                    "github_backup_coverage": backup_coverage.to_fact(),
+                },
             },
             "behavior_economics": analytics,
             "failure_compound": failure_snapshot,
@@ -464,15 +1322,79 @@ class RemoteReconcilePipeline:
                 self.config.status_projection_target,
                 status_projection,
             )
+        # This host is the one the browser reads from, and it is the only host
+        # that can honestly claim these read-backs: it hashed the canonical event
+        # bytes against their declared digest, read the run facts back out of
+        # Private-Database, is itself the OVH reconcile, and just wrote the
+        # status projection. `r2_readback` reports only on R2, so after the
+        # migration it is PASS only when R2 actually still held an object.
+        run_id = str(latest.get("run_id") or "")
+        reconciled_at = self.clock()
+        live_snapshot = self._publish_live_snapshot(
+            {
+                **private_snapshot,
+                "run": normalize_live_run_block(
+                    private_snapshot["run"],
+                    run_id=run_id,
+                    trace_id=run_id,
+                    state="REBUILT_FROM_AUTHORITIES",
+                    started_at=latest.get("started_at"),
+                    completed_at=latest.get("completed_at"),
+                    reconciled_at=reconciled_at,
+                ),
+            },
+            {
+                "schema_version": "memory_atlas.runtime_evidence.v1",
+                "generated_at": reconciled_at,
+                "run_id": run_id,
+                "trace_id": run_id,
+                "release": _release_identity(),
+                "cloud_native_sources": cloud_native_authorities(
+                    objects=objects,
+                    normalized_batch_key=normalized_key,
+                    private_database_paths=[manifest_path],
+                    github_release=manifest.get("github_private_release_backup"),
+                    observed_at=str(latest.get("completed_at") or reconciled_at),
+                    registry_path=self.config.source_registry,
+                    canonical=canonical.to_fact(),
+                    migration={
+                        "manifest_object_count": len([row for row in objects if isinstance(row, dict)]),
+                        "canonical_covered_objects": len(superseded) + r2_verified,
+                        "migrated_to_github_objects": len(migrated),
+                        "github_backup_coverage": backup_coverage.to_fact(),
+                    },
+                ),
+                "same_run_evidence": same_run_evidence_rows(
+                    run_id=run_id,
+                    trace_id=run_id,
+                    r2_readback=True if r2_verified else None,
+                    private_database_readback=True,
+                    ovh_reconcile=True,
+                    status_projection=True,
+                    ref=f"private-db://{manifest_path}",
+                    canonical_source_readback=str(canonical_receipt.get("state")) == "READY",
+                ),
+            },
+            events=live_events,
+        )
         return {
             "schema_version": "memory_atlas.remote_reconcile.v1",
             "state": "PASS",
             "run_id": latest.get("run_id"),
             "verified_objects": len(objects),
+            "r2_verified_objects": r2_verified,
+            "migrated_to_github_objects": len(migrated),
+            "canonical_source": {**canonical.to_fact(), "receipt": canonical_receipt},
+            "event_merge": merge,
+            "github_backup_coverage": backup_coverage.to_fact(),
+            "capture_alert": capture_alert,
             "events": event_count,
             "snapshot": str(self.config.web_data_dir / "memory_atlas_private_analytics.json"),
             "status_projection": str(status_path),
             "status_registration": status_registration,
             "failure_asset_import": registry_import,
             "failure_outbox": failure_outbox,
+            "live_snapshot": live_snapshot
+            or {"state": "NOT_PUBLISHED", "reason": self._live_snapshot_error or "live snapshot disabled"},
+            "atlas_snapshot": atlas_rebuild,
         }

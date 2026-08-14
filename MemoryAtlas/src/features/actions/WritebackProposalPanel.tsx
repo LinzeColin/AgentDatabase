@@ -11,6 +11,14 @@ import { writebackActionLabels } from "../../shared/atlas/runtimeConfig";
 
 
 
+/** The rollback unit is a policy value shown to the reader, so it is Chinese. */
+const rollbackUnitLabel = (value: string | undefined): string =>
+  ({
+    per_memory_version: "按记忆版本",
+    git_commit_or_memory_version: "按 Git 提交或记忆版本",
+    per_proposal: "按提案",
+  } as Record<string, string>)[value || "per_memory_version"] ?? value!;
+
 export function WritebackProposalPanel({ atlas, node }: { atlas: MemoryAtlas; node: AtlasNode }) {
   const [action, setAction] = useState<WritebackAction>("update_statement");
   const [draftText, setDraftText] = useState(node.statement ?? node.label);
@@ -196,7 +204,7 @@ export function WritebackProposalPanel({ atlas, node }: { atlas: MemoryAtlas; no
       <div className="writeback-diff-grid" aria-label="当前草稿差异">
         <div><span>{uiCopy.proposal.diffLength}</span><strong>{draftDiff.length_delta > 0 ? "+" : ""}{draftDiff.length_delta}</strong></div>
         <div><span>{uiCopy.proposal.diffSegments}</span><strong>{draftDiff.changed_segments}</strong></div>
-        <div><span>{uiCopy.proposal.rollbackUnit}</span><strong>{policy.rollback_unit || "per_memory_version"}</strong></div>
+        <div><span>{uiCopy.proposal.rollbackUnit}</span><strong>{rollbackUnitLabel(policy.rollback_unit)}</strong></div>
       </div>
       <label>
         {uiCopy.proposal.actionLabel}

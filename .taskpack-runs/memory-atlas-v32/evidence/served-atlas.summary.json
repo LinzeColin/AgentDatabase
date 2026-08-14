@@ -1,0 +1,11 @@
+{
+  "readable": true,
+  "bytes": 1993253,
+  "sha256": "690fd7bf77d08909fdf82b5e5823e53c48f55dda027a67297cd59acd810ef15a",
+  "overview": {
+    "generated_at": "2026-08-05T02:41:35.797Z",
+    "codex_session_count": 514
+  },
+  "nodes": 552,
+  "edges": 1723
+}

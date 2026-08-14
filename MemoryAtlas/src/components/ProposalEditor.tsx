@@ -15,7 +15,7 @@ import {
   type ProposalDraft,
   type ProposalDraftChange,
 } from "../state/proposalDraftStore";
-import { ProposalDiffPreview, type ProposalDiffPreviewChange } from "./ProposalDiffPreview";
+import { ProposalDiffPreview, proposalFieldLabel, type ProposalDiffPreviewChange } from "./ProposalDiffPreview";
 
 const EXPORT_SCHEMA_VERSION = "memory_atlas_proposal_export.v1" as const;
 const IMPORTANCE_VALUES = ["低", "中", "高"] as const;
@@ -156,7 +156,7 @@ export function ProposalEditor({ node, parentSnapshotId, sourceSurface }: Propos
 
   return (
     <section
-      aria-label="Proposal UI"
+      aria-label="提案界面"
       className="proposal-editor"
       data-active-memory-mutation="false"
       data-proposal-editor={draftId}
@@ -164,15 +164,15 @@ export function ProposalEditor({ node, parentSnapshotId, sourceSurface }: Propos
       data-proposal-store-key={PROPOSAL_DRAFT_STORE_KEY}
     >
       <div className="panel-title-row">
-        <h4>Proposal UI</h4>
-        <span>{PROPOSAL_DRAFT_SCHEMA_VERSION}</span>
+        <h4>提案界面</h4>
+        <span data-machine-fields="true">{PROPOSAL_DRAFT_SCHEMA_VERSION}</span>
       </div>
 
       {warning ? <p className="proposal-editor-warning">{warning}</p> : null}
 
       <div className="proposal-editor-grid">
         <FieldRange
-          ariaLabel="调整 importance"
+          ariaLabel="调整重要度"
           field="importance"
           originalValue={baseImportance}
           proposedValue={proposedImportance}
@@ -181,7 +181,7 @@ export function ProposalEditor({ node, parentSnapshotId, sourceSurface }: Propos
           onChange={setImportanceIndex}
         />
         <FieldRange
-          ariaLabel="调整 priority"
+          ariaLabel="调整优先级"
           field="priority"
           originalValue={basePriority}
           proposedValue={proposedPriority}
@@ -192,11 +192,11 @@ export function ProposalEditor({ node, parentSnapshotId, sourceSurface }: Propos
       </div>
 
       <label className="proposal-field-control">
-        <span>note</span>
+        <span>备注</span>
         <textarea
-          aria-label="proposal note"
+          aria-label="提案备注"
           onChange={(event) => setNote(event.target.value)}
-          placeholder="说明为什么要调整；不要粘贴 raw/private 内容。"
+          placeholder="说明为什么要调整；不要粘贴原始内容或私密内容。"
           rows={3}
           value={note}
         />
@@ -207,11 +207,11 @@ export function ProposalEditor({ node, parentSnapshotId, sourceSurface }: Propos
       <div className="proposal-editor-actions">
         <button disabled={!unsavedChanges.length} onClick={persistDraft} type="button">
           <Save size={15} />
-          保存本地 draft
+          保存本地草稿
         </button>
         <button disabled={!unsavedChanges.length} onClick={downloadProposalJson} type="button">
           <Download size={15} />
-          导出 proposal JSON
+          导出提案 JSON
         </button>
         <button disabled={!unsavedChanges.length && !drafts.some((item) => item.draft_id === draftId)} onClick={resetLocalChanges} type="button">
           <RotateCcw size={15} />
@@ -245,10 +245,10 @@ function FieldRange({
 }) {
   return (
     <label className="proposal-field-control">
-      <span>{field}</span>
+      <span>{proposalFieldLabel(field)}</span>
       <div className="proposal-range-row">
-        <strong>original_value: {originalValue}</strong>
-        <strong>proposed_value: {proposedValue}</strong>
+        <strong>原值：{originalValue}</strong>
+        <strong>建议值：{proposedValue}</strong>
       </div>
       <input
         aria-label={ariaLabel}
@@ -303,7 +303,7 @@ function buildChange(
     proposal_only: true,
     requires_conflict_check: true,
     requires_agent_or_human_apply: true,
-    rollback_hint: `撤销 ${field} 本地调整，恢复 original_value=${oldValue || "empty"}。`,
+    rollback_hint: `撤销${proposalFieldLabel(field)}本地调整，恢复原值 ${oldValue || "空"}。`,
   };
 }
 

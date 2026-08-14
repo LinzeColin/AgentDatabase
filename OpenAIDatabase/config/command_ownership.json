@@ -9,7 +9,7 @@
   "inventory": {
     "top_level_script_entrypoints_before": 54,
     "top_level_script_entrypoints_after": 53,
-    "top_level_script_entrypoints_current": 92,
+    "top_level_script_entrypoints_current": 93,
     "referenced_entrypoints_preserved": 52,
     "dead_entrypoints_before": 2,
     "dead_entrypoints_after": 0,
@@ -23,70 +23,335 @@
     "atlasctl_subcommands_after": 12
   },
   "canonical_commands": [
-    {"capability": "command-inventory", "invocation": "python3 scripts/atlasctl.py commands", "implementation": "scripts/atlasctl.py", "mode": "read_only"},
-    {"capability": "memory-unified-read", "invocation": "python3 scripts/memory.py validate|build|query [--as-of <valid-time> --recorded-as-of <audit-time>] (active-only with retrieval_decision)|export|doctor|benchmark", "implementation": "scripts/memory.py", "mode": "read_only"},
-    {"capability": "memory-security-audit", "invocation": "python3 scripts/memory_security.py audit --repo-root .. --json", "implementation": "scripts/memory_security.py", "mode": "read_only"},
-    {"capability": "memory-generated-views", "invocation": "python3 scripts/memory.py build --agent-views [--check|--apply --base-sha <sha> --idempotency-key <key>]", "implementation": "scripts/memory.py", "mode": "write_explicit"},
-    {"capability": "memory-migration-profile", "invocation": "python3 scripts/build_memory_migration_profile.py --dry-run|--write", "implementation": "scripts/build_memory_migration_profile.py", "mode": "write_ci_generated"},
-    {"capability": "memory-canonical-apply", "invocation": "python3 scripts/memory.py apply --input <repository-jsonl> [--apply --base-sha <sha> --idempotency-key <key>]", "implementation": "scripts/memory.py", "mode": "write_explicit"},
-    {"capability": "memory-governed-mutation", "invocation": "python3 scripts/memory.py mutate --envelope <repository-json> [--apply --base-sha <sha> --idempotency-key <key>]", "implementation": "scripts/memory.py", "mode": "write_explicit"},
-    {"capability": "raw-evidence-import", "invocation": "python3 scripts/memory.py import --source-root <path> --source <relative> --authorization <json> [--apply --base-sha <sha> --idempotency-key <key>]", "implementation": "scripts/memory.py", "mode": "write_explicit"},
-    {"capability": "owner-daily", "invocation": "python3 scripts/atlasctl.py run --profile owner-daily --dry-run", "implementation": "scripts/memory_atlas_owner_daily.py", "mode": "read_only"},
-    {"capability": "sync-chatgpt", "invocation": "python3 scripts/atlasctl.py sync --source chatgpt --dry-run|--apply", "implementation": "scripts/sync_chatgpt_memory_data.py", "mode": "write_explicit"},
-    {"capability": "sync-codex", "invocation": "python3 scripts/atlasctl.py sync --source codex --dry-run|--apply", "implementation": "scripts/sync_codex_memory_data.py", "mode": "write_explicit"},
-    {"capability": "sync-future-agent", "invocation": "python3 scripts/atlasctl.py sync --source future-agent --dry-run|--apply", "implementation": "scripts/sync_future_agent_data.py", "mode": "write_explicit"},
-    {"capability": "build-atlas", "invocation": "python3 scripts/atlasctl.py build-atlas --dry-run|--apply", "implementation": "scripts/build_memory_atlas_data.py", "mode": "write_explicit"},
-    {"capability": "analyze", "invocation": "python3 scripts/atlasctl.py analyze --stage <stage> --dry-run|--apply", "implementation": "scripts/atlasctl.py", "mode": "write_explicit"},
-    {"capability": "audit-release", "invocation": "python3 scripts/atlasctl.py audit --check release", "implementation": "scripts/audit_memory_atlas_release.py", "mode": "read_only"},
-    {"capability": "audit-visual-acceptance", "invocation": "python3 scripts/atlasctl.py audit --check visual-acceptance", "implementation": "scripts/audit_memory_atlas_visual_acceptance.py", "mode": "read_only"},
-    {"capability": "audit-acceptance", "invocation": "python3 scripts/atlasctl.py audit --check acceptance", "implementation": "scripts/audit_memory_atlas_acceptance.py", "mode": "read_only"},
-    {"capability": "audit-goal-completion", "invocation": "python3 scripts/atlasctl.py audit --check goal-completion", "implementation": "scripts/audit_memory_atlas_goal_completion.py", "mode": "read_only"},
-    {"capability": "backup", "invocation": "python3 scripts/atlasctl.py push --dry-run|--apply", "implementation": "scripts/github_backup.py", "mode": "write_explicit"},
-    {"capability": "personalization-build", "invocation": "python3 scripts/atlasctl.py generate-personalization-prompt --dry-run|--apply", "implementation": "scripts/build_personalization_exports.py", "mode": "write_explicit"},
-    {"capability": "deep-explore", "invocation": "python3 scripts/atlasctl.py chatgpt-deep-explore --dry-run|--apply", "implementation": "scripts/build_chatgpt_deep_explore_prompt.py", "mode": "write_explicit"},
-    {"capability": "proposal-review", "invocation": "python3 scripts/atlasctl.py proposals --dry-run|--apply", "implementation": "scripts/build_memory_atlas_proposal_state_machine.py", "mode": "write_explicit"},
-    {"capability": "proposal-apply", "invocation": "python3 scripts/atlasctl.py apply --proposal <id> --dry-run|--apply", "implementation": "scripts/build_memory_atlas_proposal_apply.py", "mode": "write_explicit"},
-    {"capability": "resource-route", "invocation": "python3 scripts/route_agent_resources.py --intent <intent>", "implementation": "scripts/route_agent_resources.py", "mode": "read_only"},
-    {"capability": "personalization-evaluate", "invocation": "python3 scripts/evaluate_personalization_context.py", "implementation": "scripts/evaluate_personalization_context.py", "mode": "read_only"},
-    {"capability": "agent-context-build", "invocation": "python3 scripts/build_agent_context_pack.py", "implementation": "scripts/build_agent_context_pack.py", "mode": "write_ci_generated"},
-    {"capability": "cloudflare-preflight", "invocation": "python3 scripts/preflight_cloudflare_pages_access.py", "implementation": "scripts/preflight_cloudflare_pages_access.py", "mode": "read_only"},
-    {"capability": "agent-transport-compatibility", "invocation": "python3 scripts/validate_agent_transport_compatibility.py --database-dir . [--record-id <id>] [--artifact-ref <commit>]", "implementation": "scripts/validate_agent_transport_compatibility.py", "mode": "read_only"},
-    {"capability": "memory-gold-curate", "invocation": "python3 scripts/build_memory_gold_benchmark.py --check|--write", "implementation": "scripts/build_memory_gold_benchmark.py", "mode": "write_explicit"},
-    {"capability": "memory-gold-validate", "invocation": "python3 scripts/validate_memory_gold_benchmark.py", "implementation": "scripts/validate_memory_gold_benchmark.py", "mode": "read_only"},
-    {"capability": "memory-gold-evaluate", "invocation": "python3 scripts/evaluate_memory_gold_benchmark.py --suite fast|full --check|--write", "implementation": "scripts/evaluate_memory_gold_benchmark.py", "mode": "write_explicit"},
-    {"capability": "memory-retrieval-performance", "invocation": "python3 scripts/evaluate_memory_retrieval_performance.py --check|--write", "implementation": "scripts/evaluate_memory_retrieval_performance.py", "mode": "write_explicit"},
-    {"capability": "memory-fault-reliability", "invocation": "python3 scripts/evaluate_memory_fault_reliability.py --check|--write", "implementation": "scripts/evaluate_memory_fault_reliability.py", "mode": "write_explicit"},
-    {"capability": "memory-automation-c-e2e", "invocation": "python3 scripts/evaluate_memory_automation_c_e2e.py --check|--write", "implementation": "scripts/evaluate_memory_automation_c_e2e.py", "mode": "write_explicit"},
-    {"capability": "memory-snapshot-recovery", "invocation": "python3 scripts/evaluate_memory_snapshot_recovery.py --check|--write", "implementation": "scripts/evaluate_memory_snapshot_recovery.py", "mode": "write_explicit"},
-    {"capability": "memory-production-acceptance", "invocation": "python3 scripts/evaluate_memory_production_acceptance.py --phase candidate|published --check|--write", "implementation": "scripts/evaluate_memory_production_acceptance.py", "mode": "write_explicit"}
+    {
+      "capability": "command-inventory",
+      "invocation": "python3 scripts/atlasctl.py commands",
+      "implementation": "scripts/atlasctl.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "memory-unified-read",
+      "invocation": "python3 scripts/memory.py validate|build|query [--as-of <valid-time> --recorded-as-of <audit-time>] (active-only with retrieval_decision)|export|doctor|benchmark",
+      "implementation": "scripts/memory.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "memory-security-audit",
+      "invocation": "python3 scripts/memory_security.py audit --repo-root .. --json",
+      "implementation": "scripts/memory_security.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "memory-generated-views",
+      "invocation": "python3 scripts/memory.py build --agent-views [--check|--apply --base-sha <sha> --idempotency-key <key>]",
+      "implementation": "scripts/memory.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "memory-migration-profile",
+      "invocation": "python3 scripts/build_memory_migration_profile.py --dry-run|--write",
+      "implementation": "scripts/build_memory_migration_profile.py",
+      "mode": "write_ci_generated"
+    },
+    {
+      "capability": "memory-canonical-apply",
+      "invocation": "python3 scripts/memory.py apply --input <repository-jsonl> [--apply --base-sha <sha> --idempotency-key <key>]",
+      "implementation": "scripts/memory.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "memory-governed-mutation",
+      "invocation": "python3 scripts/memory.py mutate --envelope <repository-json> [--apply --base-sha <sha> --idempotency-key <key>]",
+      "implementation": "scripts/memory.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "raw-evidence-import",
+      "invocation": "python3 scripts/memory.py import --source-root <path> --source <relative> --authorization <json> [--apply --base-sha <sha> --idempotency-key <key>]",
+      "implementation": "scripts/memory.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "owner-daily",
+      "invocation": "python3 scripts/atlasctl.py run --profile owner-daily --dry-run",
+      "implementation": "scripts/memory_atlas_owner_daily.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "sync-chatgpt",
+      "invocation": "python3 scripts/atlasctl.py sync --source chatgpt --dry-run|--apply",
+      "implementation": "scripts/sync_chatgpt_memory_data.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "sync-codex",
+      "invocation": "python3 scripts/atlasctl.py sync --source codex --dry-run|--apply",
+      "implementation": "scripts/sync_codex_memory_data.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "sync-future-agent",
+      "invocation": "python3 scripts/atlasctl.py sync --source future-agent --dry-run|--apply",
+      "implementation": "scripts/sync_future_agent_data.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "build-atlas",
+      "invocation": "python3 scripts/atlasctl.py build-atlas --dry-run|--apply",
+      "implementation": "scripts/build_memory_atlas_data.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "analyze",
+      "invocation": "python3 scripts/atlasctl.py analyze --stage <stage> --dry-run|--apply",
+      "implementation": "scripts/atlasctl.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "audit-release",
+      "invocation": "python3 scripts/atlasctl.py audit --check release",
+      "implementation": "scripts/audit_memory_atlas_release.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "audit-visual-acceptance",
+      "invocation": "python3 scripts/atlasctl.py audit --check visual-acceptance",
+      "implementation": "scripts/audit_memory_atlas_visual_acceptance.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "audit-acceptance",
+      "invocation": "python3 scripts/atlasctl.py audit --check acceptance",
+      "implementation": "scripts/audit_memory_atlas_acceptance.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "audit-goal-completion",
+      "invocation": "python3 scripts/atlasctl.py audit --check goal-completion",
+      "implementation": "scripts/audit_memory_atlas_goal_completion.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "backup",
+      "invocation": "python3 scripts/atlasctl.py push --dry-run|--apply",
+      "implementation": "scripts/github_backup.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "personalization-build",
+      "invocation": "python3 scripts/atlasctl.py generate-personalization-prompt --dry-run|--apply",
+      "implementation": "scripts/build_personalization_exports.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "deep-explore",
+      "invocation": "python3 scripts/atlasctl.py chatgpt-deep-explore --dry-run|--apply",
+      "implementation": "scripts/build_chatgpt_deep_explore_prompt.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "proposal-review",
+      "invocation": "python3 scripts/atlasctl.py proposals --dry-run|--apply",
+      "implementation": "scripts/build_memory_atlas_proposal_state_machine.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "proposal-apply",
+      "invocation": "python3 scripts/atlasctl.py apply --proposal <id> --dry-run|--apply",
+      "implementation": "scripts/build_memory_atlas_proposal_apply.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "resource-route",
+      "invocation": "python3 scripts/route_agent_resources.py --intent <intent>",
+      "implementation": "scripts/route_agent_resources.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "personalization-evaluate",
+      "invocation": "python3 scripts/evaluate_personalization_context.py",
+      "implementation": "scripts/evaluate_personalization_context.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "agent-context-build",
+      "invocation": "python3 scripts/build_agent_context_pack.py",
+      "implementation": "scripts/build_agent_context_pack.py",
+      "mode": "write_ci_generated"
+    },
+    {
+      "capability": "cloudflare-preflight",
+      "invocation": "python3 scripts/preflight_cloudflare_pages_access.py",
+      "implementation": "scripts/preflight_cloudflare_pages_access.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "agent-transport-compatibility",
+      "invocation": "python3 scripts/validate_agent_transport_compatibility.py --database-dir . [--record-id <id>] [--artifact-ref <commit>]",
+      "implementation": "scripts/validate_agent_transport_compatibility.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "memory-gold-curate",
+      "invocation": "python3 scripts/build_memory_gold_benchmark.py --check|--write",
+      "implementation": "scripts/build_memory_gold_benchmark.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "memory-gold-validate",
+      "invocation": "python3 scripts/validate_memory_gold_benchmark.py",
+      "implementation": "scripts/validate_memory_gold_benchmark.py",
+      "mode": "read_only"
+    },
+    {
+      "capability": "memory-gold-evaluate",
+      "invocation": "python3 scripts/evaluate_memory_gold_benchmark.py --suite fast|full --check|--write",
+      "implementation": "scripts/evaluate_memory_gold_benchmark.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "memory-retrieval-performance",
+      "invocation": "python3 scripts/evaluate_memory_retrieval_performance.py --check|--write",
+      "implementation": "scripts/evaluate_memory_retrieval_performance.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "memory-fault-reliability",
+      "invocation": "python3 scripts/evaluate_memory_fault_reliability.py --check|--write",
+      "implementation": "scripts/evaluate_memory_fault_reliability.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "memory-automation-c-e2e",
+      "invocation": "python3 scripts/evaluate_memory_automation_c_e2e.py --check|--write",
+      "implementation": "scripts/evaluate_memory_automation_c_e2e.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "memory-snapshot-recovery",
+      "invocation": "python3 scripts/evaluate_memory_snapshot_recovery.py --check|--write",
+      "implementation": "scripts/evaluate_memory_snapshot_recovery.py",
+      "mode": "write_explicit"
+    },
+    {
+      "capability": "memory-production-acceptance",
+      "invocation": "python3 scripts/evaluate_memory_production_acceptance.py --phase candidate|published --check|--write",
+      "implementation": "scripts/evaluate_memory_production_acceptance.py",
+      "mode": "write_explicit"
+    }
   ],
   "write_commands": [
-    {"subcommand": "sync", "required_modes": ["--dry-run", "--apply"]},
-    {"subcommand": "build-atlas", "required_modes": ["--dry-run", "--apply"]},
-    {"subcommand": "analyze", "required_modes": ["--dry-run", "--apply"]},
-    {"subcommand": "push", "required_modes": ["--dry-run", "--apply"]},
-    {"subcommand": "generate-personalization-prompt", "required_modes": ["--dry-run", "--apply"]},
-    {"subcommand": "chatgpt-deep-explore", "required_modes": ["--dry-run", "--apply"]},
-    {"subcommand": "deep-explore", "required_modes": ["--dry-run", "--apply"]},
-    {"subcommand": "proposals", "required_modes": ["--dry-run", "--apply"]},
-    {"subcommand": "apply", "required_modes": ["--dry-run", "--apply"]}
+    {
+      "subcommand": "sync",
+      "required_modes": [
+        "--dry-run",
+        "--apply"
+      ]
+    },
+    {
+      "subcommand": "build-atlas",
+      "required_modes": [
+        "--dry-run",
+        "--apply"
+      ]
+    },
+    {
+      "subcommand": "analyze",
+      "required_modes": [
+        "--dry-run",
+        "--apply"
+      ]
+    },
+    {
+      "subcommand": "push",
+      "required_modes": [
+        "--dry-run",
+        "--apply"
+      ]
+    },
+    {
+      "subcommand": "generate-personalization-prompt",
+      "required_modes": [
+        "--dry-run",
+        "--apply"
+      ]
+    },
+    {
+      "subcommand": "chatgpt-deep-explore",
+      "required_modes": [
+        "--dry-run",
+        "--apply"
+      ]
+    },
+    {
+      "subcommand": "deep-explore",
+      "required_modes": [
+        "--dry-run",
+        "--apply"
+      ]
+    },
+    {
+      "subcommand": "proposals",
+      "required_modes": [
+        "--dry-run",
+        "--apply"
+      ]
+    },
+    {
+      "subcommand": "apply",
+      "required_modes": [
+        "--dry-run",
+        "--apply"
+      ]
+    }
   ],
   "memory_cli": {
     "implementation": "scripts/memory.py",
-    "subcommands": ["validate", "build", "query", "import", "export", "doctor", "benchmark", "apply", "mutate"],
+    "subcommands": [
+      "validate",
+      "build",
+      "query",
+      "import",
+      "export",
+      "doctor",
+      "benchmark",
+      "apply",
+      "mutate"
+    ],
     "default_mode": "read_only",
-    "write_commands": ["import", "apply", "mutate", "build --agent-views --apply"],
-    "write_guards": ["--apply", "--base-sha", "--idempotency-key", "deterministic_plan_first"],
-    "generated_views": ["data/memory/AGENT_MEMORY.md", "data/memory/agent-memory.json"],
+    "write_commands": [
+      "import",
+      "apply",
+      "mutate",
+      "build --agent-views --apply"
+    ],
+    "write_guards": [
+      "--apply",
+      "--base-sha",
+      "--idempotency-key",
+      "deterministic_plan_first"
+    ],
+    "generated_views": [
+      "data/memory/AGENT_MEMORY.md",
+      "data/memory/agent-memory.json"
+    ],
     "legacy_independent_writer_count": 0,
-    "compatibility_wrappers": ["scripts/import_public_raw_evidence.py"],
-    "retired_writers": ["scripts/migrate_memory_records.py"],
+    "compatibility_wrappers": [
+      "scripts/import_public_raw_evidence.py"
+    ],
+    "retired_writers": [
+      "scripts/migrate_memory_records.py"
+    ],
     "lifecycle": {
       "policy": "config/memory-lifecycle-policy.json",
       "implementation": "scripts/memory_lifecycle.py",
       "instructions": "docs/MEMORY_LIFECYCLE_QUERIES.md",
       "acceptance_id": "ACC.OpenAIDatabase.PAM1.0010",
-      "query_modes": ["current", "valid_as_of", "bitemporal_as_of"],
+      "query_modes": [
+        "current",
+        "valid_as_of",
+        "bitemporal_as_of"
+      ],
       "embedding_as_unique_decision": false
     },
     "forgetting": {
@@ -94,7 +359,9 @@
       "implementation": "scripts/memory_forgetting.py",
       "instructions": "docs/MEMORY_FORGETTING_AND_REFUSAL.md",
       "acceptance_id": "ACC.OpenAIDatabase.PAM1.0011",
-      "current_answer_statuses": ["active"],
+      "current_answer_statuses": [
+        "active"
+      ],
       "inactive_mode": "audit_only_never_answer",
       "fama_min": 0.95,
       "abstention_precision_min": 0.9,
@@ -107,7 +374,12 @@
       "implementation": "scripts/memory_security.py",
       "threat_model": "docs/MEMORY_SECURITY_THREAT_MODEL.md",
       "acceptance_id": "ACC.OpenAIDatabase.PAM1.0012",
-      "untrusted_boundaries": ["raw_evidence", "pull_request_title", "pull_request_body", "external_document"],
+      "untrusted_boundaries": [
+        "raw_evidence",
+        "pull_request_title",
+        "pull_request_body",
+        "external_document"
+      ],
       "instruction_obedience_max": 0,
       "credential_block_rate_min": 1.0,
       "suspected_value_echo_max": 0,
@@ -117,8 +389,15 @@
       "config": "config/evaluation/memory_gold_evaluation_v1.json",
       "implementation": "scripts/evaluate_memory_gold_benchmark.py",
       "acceptance_id": "ACC.OpenAIDatabase.PAM1.0014",
-      "suites": ["fast", "full"],
-      "prediction_input_fields": ["state", "query", "as_of"],
+      "suites": [
+        "fast",
+        "full"
+      ],
+      "prediction_input_fields": [
+        "state",
+        "query",
+        "as_of"
+      ],
       "gold_label_dependency_count": 0,
       "llm_judge": null,
       "required_ci_soft_failure_allowed": false
@@ -146,7 +425,11 @@
       "report": "data/derived/evaluation/memory_gold/reports/fault_reliability_v1.json",
       "acceptance_id": "ACC.OpenAIDatabase.PAM1.0016",
       "fault_case_count": 37,
-      "writer_counts": [2, 5, 10],
+      "writer_counts": [
+        2,
+        5,
+        10
+      ],
       "partial_canonical_write_count_max": 0,
       "duplicate_record_count_max": 0,
       "duplicate_settlement_write_count_max": 0,

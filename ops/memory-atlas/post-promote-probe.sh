@@ -56,7 +56,36 @@ if [[ -n "${CF_ACCESS_CLIENT_ID:-}" && -n "${CF_ACCESS_CLIENT_SECRET:-}" ]]; the
     exit 4
   fi
 fi
-printf '{"schema_version":"memory_atlas.post_promote_probe.v2","release_id":"%s","state":"%s","internal_api_health":%s,"internal_api_private":%s,"internal_proxy_api_health":%s,"internal_proxy_private":%s,"internal_web":%s,"internal_static_private":%s,"unauthenticated_public_health":%s,"unauthenticated_public_private":%s,"authenticated_public_health":"%s","authenticated_public_private":"%s","checked_at":"%s"}\n' \
+# v0.0.0.32 T08: the container must be serving the release that was just
+# promoted, not the one it happened to start on. Compare the asset names on
+# disk with the asset names the container answers with.
+released_assets=$(ls "/srv/linze/apps/memory-atlas/current/dist/assets" 2>/dev/null | sort | tr '\n' ' ')
+served_assets=$(docker exec memory-atlas-web ls /usr/share/nginx/html/assets 2>/dev/null | sort | tr '\n' ' ')
+if [[ -z "$served_assets" || "$released_assets" != "$served_assets" ]]; then
+  echo "SERVED_ARTIFACT_IS_NOT_THE_PROMOTED_RELEASE"
+  echo "  released: $released_assets"
+  echo "  served:   $served_assets"
+  exit 7
+fi
+
+# v0.0.0.32 T07: the checks above prove the surface is up and fails closed. They
+# say nothing about whether the numbers on the page came from this release. The
+# live probe compares API headers against the API body, requires no-store, and
+# pins the release and deployment identity. Without an Access service token it
+# reports NOT_RUN, which is recorded rather than treated as a pass.
+live_probe_state="NOT_RUN"
+if [[ -n "${CF_ACCESS_CLIENT_ID:-}" && -n "${CF_ACCESS_CLIENT_SECRET:-}" ]]; then
+  live_dir="/srv/linze/apps/memory-atlas/shared/post-promote-live"
+  if "$(dirname "$0")/post-promote-live-probe.sh" "$origin" "$release_id" \
+      "${MEMORY_ATLAS_DEPLOYMENT_REVISION:-UNVERIFIED}" "$live_dir" >/dev/null; then
+    live_probe_state="PASS"
+  else
+    echo "LIVE_SNAPSHOT_PROBE_FAIL"
+    exit 6
+  fi
+fi
+
+printf '{"schema_version":"memory_atlas.post_promote_probe.v3","live_snapshot_probe":"'"$live_probe_state"'","release_id":"%s","state":"%s","internal_api_health":%s,"internal_api_private":%s,"internal_proxy_api_health":%s,"internal_proxy_private":%s,"internal_web":%s,"internal_static_private":%s,"unauthenticated_public_health":%s,"unauthenticated_public_private":%s,"authenticated_public_health":"%s","authenticated_public_private":"%s","checked_at":"%s"}\n' \
   "$release_id" "$state" "$internal_api_health" "$internal_api_private" "$internal_proxy_api_health" "$internal_proxy_private" "$internal_web" "$internal_static_private" "$public_health" "$public_private" "$auth_health" "$auth_private" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
   | tee /srv/linze/apps/memory-atlas/shared/post-promote-probe.json
 [[ "$state" == "POST_PROMOTION_AUTHENTICATED_PATH_VERIFIED" ]] || exit 5

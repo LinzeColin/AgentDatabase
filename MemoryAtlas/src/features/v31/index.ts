@@ -4,5 +4,8 @@ export { FailureCompoundView } from "./FailureCompoundView";
 export { RuntimeView } from "./RuntimeView";
 export { PrivateAnalyticsProvider, usePrivateAnalytics } from "./PrivateAnalyticsProvider";
 export { MemoryAtlasThemeProvider, useMemoryAtlasTheme } from "./MemoryAtlasThemeProvider";
+export { LiveSnapshotProvider, useLiveSnapshot } from "./LiveSnapshotProvider";
+export { RealityCalibrationPanel } from "./RealityCalibrationPanel";
+export { LiveSnapshotBoundary, RealityCalibrationSection, liveSnapshotEnabled } from "./liveSnapshotFeature";
 export { ThemeControls } from "./ThemeControls";
 export type * from "./contracts";

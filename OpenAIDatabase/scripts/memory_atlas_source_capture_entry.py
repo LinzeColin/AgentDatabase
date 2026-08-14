@@ -174,6 +174,7 @@ def main() -> None:
             str(repo / "OpenAIDatabase" / "data"),
         ),
         "MEMORY_ATLAS_PRIVATE_RELEASE_BACKUP_ENABLED": "1",
+        "MEMORY_ATLAS_CAPTURE_STORAGE_MODE": "GITHUB_RELEASE_ONLY",
         "MEMORY_ATLAS_PRIVATE_RELEASE_POLICY": str(
             repo / "OpenAIDatabase" / "config" / "storage" / "private_encrypted_backup_policy.json"
         ),
@@ -203,6 +204,7 @@ def main() -> None:
         "MEMORY_ATLAS_WORK_DIR": str(run_root / "work"),
         "MEMORY_ATLAS_WEB_DATA_DIR": str(run_root / "web"),
         "MEMORY_ATLAS_PRIVATE_RELEASE_BACKUP_ENABLED": "1",
+        "MEMORY_ATLAS_CAPTURE_STORAGE_MODE": "GITHUB_RELEASE_ONLY",
         "MEMORY_ATLAS_PRIVATE_RELEASE_POLICY": str(
             repo / "OpenAIDatabase" / "config" / "storage" / "private_encrypted_backup_policy.json"
         ),
@@ -246,6 +248,8 @@ def main() -> None:
         "source_coverage": _public_safe_source_coverage(child.get("source_coverage")),
         "github_private_release_backup": child.get("github_private_release_backup"),
         "private_fact_backup": child.get("private_fact_backup"),
+        "github_canonical_backup": child.get("github_canonical_backup"),
+        "r2": child.get("r2"),
         "local_cleanup": {
             "state": "PASS" if cleanup_pass else "FAIL",
             "current_run_temp_removed": cleanup_pass,

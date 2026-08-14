@@ -1,0 +1,64 @@
+{
+  "schema_version": "memory_atlas.benchmark_result.v1",
+  "state": "DIRECTION_ONLY",
+  "comparisons": [
+    {
+      "benchmark_id": "openai_2025_doing_share",
+      "label_zh": "ChatGPT 执行型消息占比",
+      "metric_key": "doing_share",
+      "personal_value": 0.4444444444444444,
+      "benchmark_value": 0.4,
+      "unit": "share_of_messages",
+      "comparability_state": "DIRECTION_ONLY",
+      "delta": null,
+      "percentile": null,
+      "reason_zh": "口径不一致：taxonomy_id、unit、window_definition、population_scope、inclusion_rule。",
+      "source": {
+        "publisher": "OpenAI",
+        "title": "How people are using ChatGPT",
+        "source_url": "https://openai.com/index/how-people-are-using-chatgpt/",
+        "published_at": "2025-09-15"
+      }
+    },
+    {
+      "benchmark_id": "openai_2026_task_breadth_ratio",
+      "label_zh": "注册六个月后的任务广度倍数",
+      "metric_key": "task_breadth_ratio",
+      "personal_value": 1.4,
+      "benchmark_value": 2.0,
+      "unit": "ratio_to_initial_month",
+      "comparability_state": "DIRECTION_ONLY",
+      "delta": null,
+      "percentile": null,
+      "reason_zh": "口径不一致：taxonomy_id、unit、window_definition、population_scope、inclusion_rule。",
+      "source": {
+        "publisher": "OpenAI",
+        "title": "How ChatGPT adoption has expanded",
+        "source_url": "https://openai.com/index/how-chatgpt-adoption-has-expanded/",
+        "published_at": "2026-06-30"
+      }
+    },
+    {
+      "benchmark_id": "anthropic_2026_success_association",
+      "label_zh": "高使用经验与任务成功率的关联",
+      "metric_key": "success_rate_association",
+      "personal_value": null,
+      "benchmark_value": 0.04,
+      "unit": "percentage_point_share_as_decimal",
+      "comparability_state": "INSUFFICIENT_DATA",
+      "delta": null,
+      "percentile": null,
+      "reason_zh": "个人指标或样本不足。",
+      "source": {
+        "publisher": "Anthropic",
+        "title": "Economic Index: Learning curves",
+        "source_url": "https://www.anthropic.com/research/anthropic-economic-index-march-2026-report",
+        "published_at": "2026-03-24"
+      }
+    }
+  ],
+  "limitations": [
+    "公开研究不是个人随机对照组。",
+    "不生成个人全球百分位、排名或优劣结论。"
+  ]
+}

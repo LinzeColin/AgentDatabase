@@ -1,0 +1,505 @@
+{
+  "schema_version": "memory_atlas.chinese_ui_audit.v1",
+  "captured_at": "2026-08-04T09:39:22.839Z",
+  "page_url": "http://127.0.0.1:4174/",
+  "verdict": "FAIL",
+  "finding_count": 97,
+  "by_view": {
+    "home": 27,
+    "galaxy": 6,
+    "notion": 17,
+    "roi": 1,
+    "timeline": 4,
+    "wordcloud": 7,
+    "search": 23,
+    "summary": 9,
+    "runtime": 3
+  },
+  "findings": [
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "GPT"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "Claude Code"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "DIRECTION_ONLY"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "INSUFFICIENT_DATA"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "formal-engineering-delivery"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "delta +492 / latest 2026-08-04"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "118 proto-star vs 385 black-hole"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "codex / Memory Atlas / design / mixed"
+    },
+    {
+      "view": "home",
+      "kind": "machine_identifier",
+      "text": "core_profile"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "high"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "current"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "keep"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "workflow"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "consolidate"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "opportunity"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "validate"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "knowledge"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "stale"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "low"
+    },
+    {
+      "view": "home",
+      "kind": "machine_identifier",
+      "text": "lower_priority"
+    },
+    {
+      "view": "home",
+      "kind": "machine_identifier",
+      "text": "black_hole"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "up"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "rising"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "dominant"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "stable"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "declining"
+    },
+    {
+      "view": "home",
+      "kind": "untranslated",
+      "text": "down"
+    },
+    {
+      "view": "galaxy",
+      "kind": "untranslated",
+      "text": "Flow Field"
+    },
+    {
+      "view": "galaxy",
+      "kind": "untranslated",
+      "text": "Legacy"
+    },
+    {
+      "view": "galaxy",
+      "kind": "untranslated",
+      "text": "Auto"
+    },
+    {
+      "view": "galaxy",
+      "kind": "untranslated",
+      "text": "Present"
+    },
+    {
+      "view": "galaxy",
+      "kind": "untranslated",
+      "text": "Analysis"
+    },
+    {
+      "view": "galaxy",
+      "kind": "machine_identifier",
+      "text": "answering_rule"
+    },
+    {
+      "view": "notion",
+      "kind": "untranslated",
+      "text": "No Phase 6.2 editing · proposalWrite: false · directActiveMemoryWriteback: false · rawPriv"
+    },
+    {
+      "view": "notion",
+      "kind": "machine_identifier",
+      "text": "data_map_detail_panel.v1_1_7_stage6_phase2"
+    },
+    {
+      "view": "notion",
+      "kind": "machine_identifier",
+      "text": "has_tier · weight=1.00"
+    },
+    {
+      "view": "notion",
+      "kind": "machine_identifier",
+      "text": "project_membership · weight=0.32"
+    },
+    {
+      "view": "notion",
+      "kind": "machine_identifier",
+      "text": "data_map_proposal_entry.v1_1_7_stage6_phase2"
+    },
+    {
+      "view": "notion",
+      "kind": "untranslated",
+      "text": "Proposal UI"
+    },
+    {
+      "view": "notion",
+      "kind": "machine_identifier",
+      "text": "memory_atlas_proposal_draft.v1"
+    },
+    {
+      "view": "notion",
+      "kind": "untranslated",
+      "text": "importance"
+    },
+    {
+      "view": "notion",
+      "kind": "machine_identifier",
+      "text": "original_value:"
+    },
+    {
+      "view": "notion",
+      "kind": "machine_identifier",
+      "text": "proposed_value:"
+    },
+    {
+      "view": "notion",
+      "kind": "untranslated",
+      "text": "priority"
+    },
+    {
+      "view": "notion",
+      "kind": "untranslated",
+      "text": "note"
+    },
+    {
+      "view": "notion",
+      "kind": "untranslated",
+      "text": "Proposal Diff Preview"
+    },
+    {
+      "view": "notion",
+      "kind": "untranslated",
+      "text": "changes"
+    },
+    {
+      "view": "notion",
+      "kind": "machine_identifier",
+      "text": "requires_conflict_check: true"
+    },
+    {
+      "view": "notion",
+      "kind": "machine_identifier",
+      "text": "requires_agent_or_human_apply: true"
+    },
+    {
+      "view": "notion",
+      "kind": "untranslated",
+      "text": "active memory mutation: false"
+    },
+    {
+      "view": "roi",
+      "kind": "machine_identifier",
+      "text": "codex_usage_record"
+    },
+    {
+      "view": "timeline",
+      "kind": "untranslated",
+      "text": "Macro"
+    },
+    {
+      "view": "timeline",
+      "kind": "untranslated",
+      "text": "Meso"
+    },
+    {
+      "view": "timeline",
+      "kind": "untranslated",
+      "text": "Micro"
+    },
+    {
+      "view": "timeline",
+      "kind": "untranslated",
+      "text": "UTC"
+    },
+    {
+      "view": "wordcloud",
+      "kind": "untranslated",
+      "text": "Codex /…"
+    },
+    {
+      "view": "wordcloud",
+      "kind": "untranslated",
+      "text": "EVA …"
+    },
+    {
+      "view": "wordcloud",
+      "kind": "untranslated",
+      "text": "Token ROI"
+    },
+    {
+      "view": "wordcloud",
+      "kind": "untranslated",
+      "text": "legacy"
+    },
+    {
+      "view": "wordcloud",
+      "kind": "machine_identifier",
+      "text": "answering_rule"
+    },
+    {
+      "view": "wordcloud",
+      "kind": "untranslated",
+      "text": "RAG"
+    },
+    {
+      "view": "wordcloud",
+      "kind": "untranslated",
+      "text": "DS_Store"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "query=all / tier=all / topic=all / recency=all / importance=all / evidence=required"
+    },
+    {
+      "view": "search",
+      "kind": "machine_identifier",
+      "text": "core_profile"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "high"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "opportunity"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "EVA OS"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "Task Pack"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "tier=1.00, importance=1.00, confidence=1.00"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "ROI Leverage"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "wordcloud · r40"
+    },
+    {
+      "view": "search",
+      "kind": "machine_identifier",
+      "text": "node=memory:mem_0021f45ff99acd80, cluster=formal-engineering-delivery"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "Proposal UI"
+    },
+    {
+      "view": "search",
+      "kind": "machine_identifier",
+      "text": "memory_atlas_proposal_draft.v1"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "importance"
+    },
+    {
+      "view": "search",
+      "kind": "machine_identifier",
+      "text": "original_value:"
+    },
+    {
+      "view": "search",
+      "kind": "machine_identifier",
+      "text": "proposed_value:"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "priority"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "note"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "Proposal Diff Preview"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "changes"
+    },
+    {
+      "view": "search",
+      "kind": "machine_identifier",
+      "text": "requires_conflict_check: true"
+    },
+    {
+      "view": "search",
+      "kind": "machine_identifier",
+      "text": "requires_agent_or_human_apply: true"
+    },
+    {
+      "view": "search",
+      "kind": "untranslated",
+      "text": "active memory mutation: false"
+    },
+    {
+      "view": "search",
+      "kind": "machine_identifier",
+      "text": "git_commit_or_memory_version"
+    },
+    {
+      "view": "summary",
+      "kind": "untranslated",
+      "text": "high"
+    },
+    {
+      "view": "summary",
+      "kind": "machine_identifier",
+      "text": "memory_update_candidate"
+    },
+    {
+      "view": "summary",
+      "kind": "untranslated",
+      "text": "stale"
+    },
+    {
+      "view": "summary",
+      "kind": "untranslated",
+      "text": "conflict"
+    },
+    {
+      "view": "summary",
+      "kind": "untranslated",
+      "text": "low"
+    },
+    {
+      "view": "summary",
+      "kind": "untranslated",
+      "text": "Memory / Personalization"
+    },
+    {
+      "view": "summary",
+      "kind": "untranslated",
+      "text": "config.toml / Memory"
+    },
+    {
+      "view": "summary",
+      "kind": "untranslated",
+      "text": "config.toml"
+    },
+    {
+      "view": "summary",
+      "kind": "untranslated",
+      "text": "Memory"
+    },
+    {
+      "view": "runtime",
+      "kind": "untranslated",
+      "text": "Private-Database"
+    },
+    {
+      "view": "runtime",
+      "kind": "untranslated",
+      "text": "Cloudflare R2 `primary-objects/`"
+    },
+    {
+      "view": "runtime",
+      "kind": "untranslated",
+      "text": "Private-Database / Private-AgentDatabase"
+    }
+  ]
+}

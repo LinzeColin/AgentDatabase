@@ -108,7 +108,48 @@ sudo install -d -m 0750 -o "$deploy_user" -g "$deploy_group" \
   "$APP_ROOT/shared/public-baseline" \
   "$AGENT_ROOT" \
   "$AGENT_ROOT/releases"
-release_id="$(date -u +%Y%m%dT%H%M%SZ)-$(git rev-parse --short=12 HEAD)"
+# The release must name the exact commit it was built from. A full git
+# checkout on the production host is one way to know that, but not the only
+# one: a tree staged from a verified commit has no history to ask. In that case
+# the caller states the commit explicitly and it is validated here, rather than
+# the deploy inventing an identity or the host carrying 765 MB of history it
+# never reads.
+if [[ -n "${MEMORY_ATLAS_RELEASE_COMMIT:-}" ]]; then
+  release_commit="$MEMORY_ATLAS_RELEASE_COMMIT"
+  [[ "$release_commit" =~ ^[0-9a-f]{40}$ ]] || { echo "MEMORY_ATLAS_RELEASE_COMMIT must be a full 40-hex commit sha"; exit 64; }
+elif git rev-parse HEAD >/dev/null 2>&1; then
+  release_commit="$(git rev-parse HEAD)"
+else
+  echo "no git HEAD and no MEMORY_ATLAS_RELEASE_COMMIT: refusing to deploy an unidentified tree"
+  exit 64
+fi
+release_id="$(date -u +%Y%m%dT%H%M%SZ)-${release_commit:0:12}"
+# nginx runs unprivileged inside the container and reads the regenerated atlas
+# through a read-only mount. shared/data stays 0750 because it also holds the
+# private analytics; only this directory, which holds nothing else, is
+# traversable by the container.
+sudo install -d -m 0755 -o "$deploy_user" -g "$deploy_group" "$APP_ROOT/shared/data/public"
+
+# Each agent release is a ~770 MB copy of the tree and nothing pruned them, so
+# four promotions in one evening filled a 38 GB disk and the fifth died
+# mid-rsync. Blue-green only ever needs current and previous; everything older
+# is unreachable by the rollback contract. Pruned before the copy, so the space
+# is free when it is needed.
+prune_superseded_releases() {
+  local root=${1:?root required}
+  local keep_current keep_previous name
+  keep_current=$(basename "$(readlink -f "$root/current" 2>/dev/null || true)")
+  keep_previous=$(basename "$(readlink -f "$root/previous" 2>/dev/null || true)")
+  [[ -d "$root/releases" ]] || return 0
+  for path in "$root/releases"/*; do
+    [[ -d "$path" ]] || continue
+    name=$(basename "$path")
+    [[ "$name" == "$keep_current" || "$name" == "$keep_previous" ]] && continue
+    rm -rf "$path"
+  done
+}
+prune_superseded_releases "$AGENT_ROOT"
+prune_superseded_releases "$APP_ROOT"
 release="$APP_ROOT/releases/$release_id"
 agent_release="$AGENT_ROOT/releases/$release_id"
 mkdir -p "$release" "$APP_ROOT/shared/data" "$APP_ROOT/shared/public-baseline" "$agent_release"
@@ -126,21 +167,50 @@ export MEMORY_ATLAS_WEB_DATA_DIR=${MEMORY_ATLAS_WEB_DATA_DIR:-$APP_ROOT/shared/d
 export MEMORY_ATLAS_PUBLIC_SNAPSHOT=${MEMORY_ATLAS_PUBLIC_SNAPSHOT:-$APP_ROOT/shared/public-baseline/memory_atlas.json}
 sudo "$agent_release/ops/memory-atlas/install-systemd.sh" "$agent_release"
 /srv/linze/venvs/memory-atlas/bin/python -B -m OpenAIDatabase.scripts.memory_atlas_private doctor >/dev/null
-/srv/linze/venvs/memory-atlas/bin/python -B -m OpenAIDatabase.scripts.memory_atlas_private preflight >/dev/null
+/srv/linze/venvs/memory-atlas/bin/python -B "$MEMORY_ATLAS_PRIVATE_DB_CLIENT" verify Private-AgentDatabase >/dev/null
+printf '%s\n' 'MEMORY_ATLAS_R2_PREFLIGHT_SKIPPED_ZERO_CHARGE'
 old_app=''; old_agent=''
 if [[ -L "$APP_ROOT/current" ]]; then old_app=$(readlink -f "$APP_ROOT/current"); ln -sfn "$old_app" "$APP_ROOT/previous"; fi
 if [[ -L "$AGENT_ROOT/current" ]]; then old_agent=$(readlink -f "$AGENT_ROOT/current"); ln -sfn "$old_agent" "$AGENT_ROOT/previous"; fi
 ln -sfn "$release" "$APP_ROOT/current"
 ln -sfn "$agent_release" "$AGENT_ROOT/current"
 trap post_promotion_error ERR
+# Written before anything restarts. It used to be written after, so every
+# service the promotion started read the previous release and the published
+# snapshot named a release one promotion behind — permanently.
+# The reconcile reads these so the published snapshot can name the release and
+# deployment it was produced under; without them the same-run oracle has nothing
+# to bind and the panel honestly shows 未验证.
+# The artifact digest has to be the bytes a viewer actually receives, so it is
+# computed over the promoted bundle rather than passed in and left empty — which
+# is what it was, leaving `artifact_digest` null in every published snapshot.
+artifact_digest=${MEMORY_ATLAS_ARTIFACT_DIGEST:-}
+if [[ -z "$artifact_digest" && -d "$release/dist" ]]; then
+  artifact_digest=$(cd "$release/dist" && find . -type f -print0 | LC_ALL=C sort -z \
+    | xargs -0 sha256sum | sha256sum | cut -d' ' -f1)
+fi
+printf 'MEMORY_ATLAS_RELEASE_ID=%s\nMEMORY_ATLAS_REPOSITORY_COMMIT=%s\nMEMORY_ATLAS_DEPLOYMENT_REVISION=%s\nMEMORY_ATLAS_ARTIFACT_DIGEST=%s\n' \
+  "$release_id" "$release_commit" "$release_id" "$artifact_digest" > "$APP_ROOT/shared/release-identity.env"
+chmod 0644 "$APP_ROOT/shared/release-identity.env"
 sudo systemctl restart memory-atlas-api.service
 sudo systemctl enable --now memory-atlas-api-proxy.socket memory-atlas-reconcile.timer memory-atlas-selfheal.timer memory-atlas-action-worker.timer
-docker compose -f "$AGENT_ROOT/current/ops/memory-atlas/docker-compose.yml" up -d --remove-orphans
-sudo systemctl restart memory-atlas-reconcile.service memory-atlas-action-worker.service
+# --force-recreate is not optional. The web container bind-mounts
+# $APP_ROOT/current/dist, and Docker resolves that symlink to an inode when the
+# container starts. Without recreation the container keeps serving the release
+# it was started on: every promotion between 2026-08-03T20:16 and 2026-08-04T01
+# was correct at the origin and invisible in the browser for exactly this
+# reason.
+docker compose -f "$AGENT_ROOT/current/ops/memory-atlas/docker-compose.yml" up -d --remove-orphans --force-recreate
+# --no-block on the reconcile: it is a oneshot that now streams 389 MB,
+# materialises 122k events and rebuilds the atlas, so `restart` blocked the
+# deployment for ten minutes and a promotion looked hung. The promotion does not
+# depend on this run finishing — the timer runs it every fifteen minutes anyway.
+sudo systemctl restart memory-atlas-action-worker.service
+sudo systemctl restart --no-block memory-atlas-reconcile.service
 printf '%s
 ' "$release_id" > "$APP_ROOT/shared/LAST_PROMOTED_RELEASE"
 printf '{"schema_version":"memory_atlas.promotion.v1","release_id":"%s","git_commit":"%s","promoted_at":"%s"}
-' "$release_id" "$(git rev-parse HEAD)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$APP_ROOT/shared/promotion.json"
+' "$release_id" "$release_commit" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$APP_ROOT/shared/promotion.json"
 trap - ERR
 set +e
 "$agent_release/ops/memory-atlas/post-promote-probe.sh" "$release_id"

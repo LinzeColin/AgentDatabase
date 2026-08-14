@@ -1,0 +1,88 @@
+[
+  {
+    "event_id": "evt-001",
+    "occurred_at": "2026-07-27T02:00:00Z",
+    "activity_type": "research_diagnosis",
+    "outcome_state": "unknown",
+    "outcome_evidence": false,
+    "work_time_minutes": 35,
+    "model_tool": "GPT"
+  },
+  {
+    "event_id": "evt-002",
+    "occurred_at": "2026-07-28T03:00:00Z",
+    "activity_type": "product_planning",
+    "outcome_state": "adopted_verified",
+    "outcome_evidence": true,
+    "work_time_minutes": 60,
+    "model_tool": "GPT",
+    "verified_at": "2026-07-28T15:00:00Z"
+  },
+  {
+    "event_id": "evt-003",
+    "occurred_at": "2026-07-29T04:00:00Z",
+    "activity_type": "development_deployment",
+    "outcome_state": "deployed_verified",
+    "outcome_evidence": true,
+    "work_time_minutes": 180,
+    "model_tool": "Codex",
+    "verified_at": "2026-07-30T04:00:00Z"
+  },
+  {
+    "event_id": "evt-004",
+    "occurred_at": "2026-07-30T05:00:00Z",
+    "activity_type": "verification_repair",
+    "outcome_state": "recovery_verified",
+    "outcome_evidence": true,
+    "work_time_minutes": 90,
+    "model_tool": "Verifier",
+    "verified_at": "2026-07-30T11:00:00Z"
+  },
+  {
+    "event_id": "evt-005",
+    "occurred_at": "2026-07-31T06:00:00Z",
+    "activity_type": "research_diagnosis",
+    "outcome_state": "draft_only",
+    "outcome_evidence": false,
+    "work_time_minutes": 40,
+    "model_tool": "GPT"
+  },
+  {
+    "event_id": "evt-006",
+    "occurred_at": "2026-08-01T07:00:00Z",
+    "activity_type": "development_deployment",
+    "outcome_state": "failed",
+    "outcome_evidence": true,
+    "work_time_minutes": 120,
+    "model_tool": "Claude Code"
+  },
+  {
+    "event_id": "evt-007",
+    "occurred_at": "2026-08-02T08:00:00Z",
+    "activity_type": "verification_repair",
+    "outcome_state": "accepted_verified",
+    "outcome_evidence": true,
+    "work_time_minutes": 75,
+    "model_tool": "Codex",
+    "verified_at": "2026-08-02T16:00:00Z"
+  },
+  {
+    "event_id": "evt-008",
+    "occurred_at": "2026-08-03T09:00:00Z",
+    "activity_type": "decision_execution",
+    "outcome_state": "decision_impact_verified",
+    "outcome_evidence": true,
+    "work_time_minutes": null,
+    "model_tool": "GPT",
+    "verified_at": "2026-08-03T11:00:00Z"
+  },
+  {
+    "event_id": "evt-009",
+    "occurred_at": "2026-08-03T10:00:00Z",
+    "activity_type": "verification_repair",
+    "outcome_state": "unknown",
+    "outcome_evidence": false,
+    "work_time_minutes": 30,
+    "model_tool": "Verifier"
+  }
+]

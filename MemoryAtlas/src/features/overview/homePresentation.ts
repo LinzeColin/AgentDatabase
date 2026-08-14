@@ -1,5 +1,6 @@
 import { HOME_LEVEL_ASSET_GROUPS, HOME_THEME_CATEGORY_STATES } from "../../shared/atlas/constants";
 import { HomeAction, HomeActionDetail, HomeTierAsset, HomeTopicDetail, TierAssetDetail, TopicClassificationDetail } from "../../shared/atlas/contracts";
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 
 
 
@@ -8,7 +9,7 @@ export function buildHomeActionStatusChips(actions: HomeAction[]): Array<{ id: H
   return statuses.map((status) => ({
     count: actions.filter((action) => action.status === status).length,
     id: status,
-    label: humanActionStatusLabel(status),
+    label: humanizeMachineText(humanActionStatusLabel(status)),
   }));
 }
 
@@ -49,7 +50,7 @@ export function buildLevelAssetGroupChips(assets: HomeTierAsset[]): Array<{ id: 
   return HOME_LEVEL_ASSET_GROUPS.map((group) => ({
     count: assets.filter((asset) => homeLevelAssetGroupFor(asset) === group.id).length,
     id: group.id,
-    label: group.label,
+    label: humanizeMachineText(group.label),
   }));
 }
 
@@ -69,7 +70,7 @@ export function buildThemeCategoryChips(topics: HomeTopicDetail[]): Array<{ id: 
   return HOME_THEME_CATEGORY_STATES.map((state) => ({
     count: topics.filter((topic) => homeThemeCategoryFor(topic) === state.id).length,
     id: state.id,
-    label: state.label,
+    label: humanizeMachineText(state.label),
   }));
 }
 

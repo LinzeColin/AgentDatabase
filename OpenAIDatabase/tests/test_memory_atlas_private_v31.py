@@ -46,7 +46,10 @@ from OpenAIDatabase.scripts.memory_atlas_private.inventory import (
 )
 from OpenAIDatabase.scripts.memory_atlas_private.models import InventoryRecord, NormalizedEvent, SourceState
 from OpenAIDatabase.scripts.memory_atlas_private.normalization import normalize_record
-from OpenAIDatabase.scripts.memory_atlas_private.object_store import LocalObjectStore
+from OpenAIDatabase.scripts.memory_atlas_private.object_store import (
+    EphemeralVerificationObjectStore,
+    LocalObjectStore,
+)
 from OpenAIDatabase.scripts.memory_atlas_private.pipeline import CapturePipeline, RemoteReconcilePipeline
 from OpenAIDatabase.scripts.memory_atlas_private.private_db import (
     FactOutbox,
@@ -224,11 +227,34 @@ def test_local_object_preflight_never_creates_bucket(tmp_path: Path) -> None:
     assert result == {"state": "PASS", "readback_equal": True, "bucket_creation_attempted": False}
 
 
+def test_ephemeral_verification_store_makes_no_cloud_or_persistent_copy(tmp_path: Path) -> None:
+    source = tmp_path / "source.bin"
+    source.write_bytes(b"daily-backup-source")
+    store = EphemeralVerificationObjectStore()
+    preflight = store.preflight()
+    receipt = store.put_file("private-agentdatabase/sha256/fixture", source, sha256_file(source))
+    assert preflight["cloud_requests"] == 0
+    assert receipt.provider_version == "ephemeral-verification-v1"
+    assert receipt.operation == "verified_local" and receipt.readback_verified is True
+    assert list(tmp_path.iterdir()) == [source]
+
+
 def test_r2_adapter_source_contains_no_create_bucket() -> None:
     import OpenAIDatabase.scripts.memory_atlas_private.object_store as module
     source = Path(module.__file__).read_text(encoding="utf-8")
     forbidden = "create" + "_bucket"
     assert forbidden not in source
+
+
+def test_r2_writes_pin_standard_storage_class() -> None:
+    repo = Path(__file__).resolve().parents[2]
+    object_store = (repo / "OpenAIDatabase/scripts/memory_atlas_private/object_store.py").read_text(encoding="utf-8")
+    fact_backup = (repo / "OpenAIDatabase/scripts/memory_atlas_private/fact_backup.py").read_text(encoding="utf-8")
+    bootstrap = (repo / "ops/memory-atlas/bootstrap_protected_env.py").read_text(encoding="utf-8")
+    assert "StorageClass=R2_STANDARD_STORAGE_CLASS" in object_store
+    assert '\"StorageClass\": R2_STANDARD_STORAGE_CLASS' in object_store
+    assert '\"StorageClass\": \"STANDARD\"' in fact_backup
+    assert 'StorageClass=\"STANDARD\"' in bootstrap
 
 
 def test_sqlite_snapshot_is_consistent(tmp_path: Path) -> None:
@@ -306,7 +332,12 @@ def test_inventory_recursive_glob_includes_root_files_and_skips_only_denied_sibl
         load_source_registry(registry, {"SOURCE_PATH": str(root)}),
         tmp_path / "snapshots",
     )
-    assert coverages[0].state == SourceState.UNREADABLE
+    # The denied sibling is still excluded — that part never changes. What
+    # changed is that the denylist doing its job no longer reports the whole
+    # source as unreadable: one note named "…token-policy.md" took out all
+    # 1,074 Codex memories in production this way.
+    assert coverages[0].state == SourceState.READY
+    assert "按凭据形态策略排除 1 个文件" in coverages[0].message_zh
     assert {row.relative_path for row in records} == {"root.json", "nested/child.json"}
     assert all("token.txt" not in row.relative_path for row in records)
 
@@ -322,7 +353,10 @@ def test_inventory_rejects_standalone_credential_but_not_embedded_text(tmp_path:
     }])
     resolved = load_source_registry(registry, {"SOURCE_PATH": str(root)})
     records, coverages = discover_inventory(resolved, tmp_path / "snapshots")
-    assert coverages[0].state == SourceState.UNREADABLE
+    # Rejected, counted, and not confused with a read failure.
+    assert coverages[0].state == SourceState.READY
+    assert "按凭据形态策略排除" in coverages[0].message_zh
+    assert all("token.txt" not in row.relative_path for row in records)
     # Narrowly selecting the conversation proves embedded bytes are preserved.
     registry = write_registry(tmp_path / "registry2.json", [{
         "source_id": "x", "label_zh": "x", "kind": "text", "required": True,
@@ -366,6 +400,58 @@ def test_incident_deduplicates_and_counts_recurrence(tmp_path: Path) -> None:
     assert one.created is True
     assert same_occurrence.recurrence_count == 1
     assert recurrence.incident_id == one.incident_id and recurrence.recurrence_count == 2
+
+
+def test_closed_incident_carries_rollback_reference(tmp_path: Path) -> None:
+    """AC-015 lists rollback among the elements a closed incident must carry.
+
+    The live ledger had 29/29 closed incidents with evidence, signature, fixture,
+    oracle, red proof, green proof, fix reference and monitoring, but 0/29 with a
+    rollback reference, because the column did not exist. It is additive with an
+    empty default, so this pins both halves: a rollback survives closure, and the
+    snapshot counts the ones that still lack one instead of reading as satisfied.
+    """
+    store = FailureCompoundStore(tmp_path / "failure.sqlite3")
+    with_rb = store.record_failure(component="deploy", category="release", severity="P0", error_code="E9", title="promotion left origin stale", occurred_at=FIXED_TIME, evidence_ref="e://rb", environment="ovh")
+    store.promote_regression_asset(
+        incident_id=with_rb.incident_id, fixture_path="fixtures/deploy.json", oracle="origin must serve the promoted release",
+        test_path="tests/deploy.py", red_evidence_ref="red://rb", green_evidence_ref="green://rb",
+        fixed_by="sha:deadbeef", rollback_ref="ops/memory-atlas/rollback.sh#previous-symlink",
+    )
+    without_rb = store.record_failure(component="ui", category="frontend", severity="P1", error_code="E8", title="theme lost on reload", occurred_at=FIXED_TIME, evidence_ref="e://no", environment="test")
+    store.promote_regression_asset(
+        incident_id=without_rb.incident_id, fixture_path="fixtures/theme.json", oracle="theme persists",
+        test_path="tests/theme.py", red_evidence_ref="red://no", green_evidence_ref="green://no", fixed_by="sha:cafe",
+    )
+
+    snapshot = store.export_snapshot(FIXED_TIME)
+    rows = {row["incident_id"]: row for row in snapshot["incidents"]}
+    assert rows[with_rb.incident_id]["rollback_ref"] == "ops/memory-atlas/rollback.sh#previous-symlink"
+    assert rows[without_rb.incident_id]["rollback_ref"] == ""
+    metrics = snapshot["metrics"]
+    assert metrics["closed_incident_count"] == 2
+    assert metrics["closed_incidents_with_rollback"] == 1
+    assert metrics["closed_incidents_missing_rollback"] == 1
+
+
+def test_recurrence_of_a_closed_signature_reopens_and_increments(tmp_path: Path) -> None:
+    """The increment path exists in code but has never fired in production: all 29
+    live incidents sit at recurrence_count 1. Pin it so a real recurrence cannot
+    silently fail to reopen the incident."""
+    store = FailureCompoundStore(tmp_path / "failure.sqlite3")
+    first = store.record_failure(component="capture", category="source", severity="P0", error_code="E7", title="upload timed out after 30 seconds", occurred_at="2026-08-01T00:00:00Z", evidence_ref="e://1", environment="mac")
+    store.promote_regression_asset(
+        incident_id=first.incident_id, fixture_path="fixtures/capture.json", oracle="upload retries",
+        test_path="tests/capture.py", red_evidence_ref="red://1", green_evidence_ref="green://1",
+        fixed_by="sha:1", rollback_ref="revert sha:1",
+    )
+    again = store.record_failure(component="capture", category="source", severity="P0", error_code="E7", title="upload timed out after 90 seconds", occurred_at="2026-08-05T00:00:00Z", evidence_ref="e://2", environment="mac")
+
+    assert again.incident_id == first.incident_id, "same normalized signature must reuse the incident"
+    assert again.recurrence_count == 2
+    row = next(r for r in store.export_snapshot(FIXED_TIME)["incidents"] if r["incident_id"] == first.incident_id)
+    assert row["status"] == "REOPENED"
+    assert row["rollback_ref"] == "revert sha:1", "reopening must not discard the rollback reference"
 
 
 def test_failure_store_migrates_live_v1_schema_without_losing_incidents(tmp_path: Path) -> None:
@@ -439,6 +525,11 @@ def test_fault_injection_and_registry_import_are_idempotent(tmp_path: Path) -> N
         "asset_coverage": 1.0,
         "last_pass_rate": 1.0,
         "nonrecurrence_ratio": 1.0,
+        # AC-015 rollback coverage: this fixture registry carries no rollback_ref,
+        # so the shortfall has to be visible rather than absent.
+        "closed_incident_count": 1,
+        "closed_incidents_with_rollback": 0,
+        "closed_incidents_missing_rollback": 1,
     }
     assert snapshot["incidents"][0]["error_code"] == "FIXTURE_ONE"
     assert snapshot["incidents"][0]["root_cause"] == "fixture root cause"
@@ -570,7 +661,7 @@ def test_remote_reconcile_streams_normalized_event_batch() -> None:
     assert "def _iter_events(path: Path)" in pipeline
     assert 'with path.open("r", encoding="utf-8") as handle:' in pipeline
     assert "build_behavior_analytics(_iter_events(temporary)" in pipeline
-    remote_section = pipeline.split("class RemoteReconcilePipeline:", maxsplit=1)[1]
+    remote_section = pipeline.split("class RemoteReconcilePipeline", maxsplit=1)[1]
     assert "_load_events(temporary)" not in remote_section
 
 
@@ -780,6 +871,10 @@ def test_status_projection_excludes_raw_private_content() -> None:
     assert projection["state"] == "PASS"
     assert projection["object_count"] == 1
     assert projection["private_content_included"] is False
+    assert projection["authority"]["object_bytes"] == (
+        "GitHub private Releases (encrypted source archive + canonical events)"
+    )
+    assert "R2" not in projection["authority"]["object_bytes"]
     for forbidden in ("private conversation bytes", "private incident title", "private/secret", "raw_text", "sha256"):
         assert forbidden not in encoded
 
@@ -981,8 +1076,16 @@ def test_memory_atlas_uses_dedicated_non_conflicting_api_port() -> None:
 
     unit = (repo / "ops/memory-atlas/systemd/memory-atlas-api.service").read_text(encoding="utf-8")
     unit_section, service_section = unit.split("[Service]", maxsplit=1)
-    assert "StartLimitIntervalSec=60" in unit_section
-    assert "StartLimitBurst=5" in unit_section
+    # The rate limit lives in [Unit], not [Service] — that placement is the
+    # property this pins. The numbers were 5-per-60s until a T10 drill hit them:
+    # a promotion, the self-heal timer and an operator restart can coincide, and
+    # once systemd refuses the unit it stays down until `reset-failed` is run by
+    # hand. A restart that ends in a dead API is worse than the crash loop the
+    # limit guards against, so the budget is wider and still bounded.
+    interval = int(re.search(r"StartLimitIntervalSec=(\d+)", unit_section).group(1))
+    burst = int(re.search(r"StartLimitBurst=(\d+)", unit_section).group(1))
+    assert interval >= 60 and burst >= 5, (interval, burst)
+    assert burst <= 50, "an unbounded budget would stop catching a real crash loop"
     assert "StartLimitIntervalSec" not in service_section
     assert "StartLimitBurst" not in service_section
 
@@ -1054,11 +1157,31 @@ def test_deploy_preflights_candidate_and_rolls_back_blocking_probe() -> None:
     assert 'rollback_promoted_release "$probe_rc" || true' in text
     assert "trap post_promotion_error ERR" in text
     assert text.index("trap post_promotion_error ERR") < text.index("sudo systemctl restart memory-atlas-api.service")
-    assert "sudo systemctl restart memory-atlas-reconcile.service memory-atlas-action-worker.service" in text
+    # Both are restarted after promotion; the reconcile is --no-block because it
+    # is a oneshot that streams 389 MB and rebuilding blocked the deploy for ten
+    # minutes. The intent is "both restart", not one particular line of text.
+    assert "sudo systemctl restart memory-atlas-action-worker.service" in text
+    assert "sudo systemctl restart --no-block memory-atlas-reconcile.service" in text
     assert "sudo systemctl start memory-atlas-reconcile.service memory-atlas-action-worker.service" not in text
     assert text.index("trap - ERR") < text.index('"$agent_release/ops/memory-atlas/post-promote-probe.sh" "$release_id"')
     assert text.index('"$agent_release/ops/memory-atlas/post-promote-probe.sh" "$release_id"') < text.index('case "$probe_rc" in')
     assert "POST_PROMOTION_STEP_FAILED_AND_ROLLED_BACK" in text
+
+
+def test_deploy_preflight_is_zero_charge_and_never_calls_r2() -> None:
+    repo = Path(__file__).resolve().parents[2]
+    text = (repo / "ops/memory-atlas/deploy-blue-green.sh").read_text(encoding="utf-8")
+    executable = [
+        line.strip()
+        for line in text.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    assert not any(
+        "OpenAIDatabase.scripts.memory_atlas_private preflight" in line
+        for line in executable
+    )
+    assert '"$MEMORY_ATLAS_PRIVATE_DB_CLIENT" verify Private-AgentDatabase' in text
+    assert "MEMORY_ATLAS_R2_PREFLIGHT_SKIPPED_ZERO_CHARGE" in text
 
 
 def test_deploy_first_release_rolls_back_to_absent_state() -> None:
@@ -1173,6 +1296,86 @@ def test_private_fact_backup_requires_successful_source_and_readback(tmp_path: P
     assert result["github_private_database"]["readback_verified"] is True
     assert private.get_json(result["github_private_database"]["relpath"])["source_run_id"] == "run-1"
     assert private.get_json("memory-atlas/backups/latest.json")["state"] == "PASS"
+
+
+def test_private_fact_backup_can_use_zero_charge_github_only_mode(tmp_path: Path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.fact_backup import backup_private_facts
+
+    registry = write_registry(tmp_path / "registry.json", [])
+    config = make_config(tmp_path, registry)
+    private = LocalPrivateDatabase(tmp_path / "private")
+    manifest_path = "memory-atlas/runs/20260801/run-free/manifest.json"
+    private.put_json(
+        "memory-atlas/runs/latest.json",
+        {"state": "SUCCEEDED", "run_id": "run-free", "manifest_path": manifest_path},
+        "x",
+    )
+    private.put_json(manifest_path, {"run_id": "run-free", "state": "SUCCEEDED"}, "x")
+    result = backup_private_facts(
+        config,
+        private,
+        EphemeralVerificationObjectStore(),
+        generated_at="2026-08-01T00:00:00+00:00",
+        r2_required=False,
+    )
+    assert result["state"] == "PASS"
+    assert result["receipt"]["state"] == "SKIPPED_ZERO_CHARGE"
+    assert result["receipt"]["billable_requests"] == 0
+    assert result["github_private_database"]["readback_verified"] is True
+
+
+def test_capture_release_only_mode_keeps_r2_at_zero_requests(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = tmp_path / "source"
+    source.mkdir()
+    (source / "event.json").write_text(json.dumps(verified_payload()), encoding="utf-8")
+    registry = write_registry(tmp_path / "registry.json", [{
+        "source_id": "source",
+        "label_zh": "来源",
+        "kind": "evidence_adapter",
+        "required": True,
+        "env_var": "SOURCE_PATH",
+        "include_globs": ["*"],
+    }])
+    monkeypatch.setenv("SOURCE_PATH", str(source))
+    config = make_config(tmp_path, registry)
+
+    class Publisher:
+        def run(self, **kwargs: object) -> dict[str, object]:
+            delta = Path(str(kwargs["delta_path"]))
+            return {
+                "state": "PASS",
+                "object": kwargs["canonical_object_key"],
+                "sha256": sha256_file(delta),
+                "bytes": delta.stat().st_size,
+                "unique_events": 1,
+                "remote_readback_verified": True,
+                "release_url": "https://github.example.test/canonical",
+            }
+
+    private = LocalPrivateDatabase(tmp_path / "private")
+    result = CapturePipeline(
+        config,
+        EphemeralVerificationObjectStore(),
+        private,
+        clock=lambda: FIXED_TIME,
+        canonical_publisher=Publisher(),  # type: ignore[arg-type]
+        r2_fact_backup_required=False,
+    ).run()
+    assert result["state"] == "SUCCEEDED"
+    assert result["r2"] == {
+        "state": "SKIPPED_ZERO_CHARGE",
+        "verified_objects": 0,
+        "billable_requests": 0,
+    }
+    latest = private.get_json("memory-atlas/runs/latest.json")
+    manifest = private.get_json(str(latest["manifest_path"]))
+    assert {row["provider_version"] for row in manifest["objects"]} == {
+        "ephemeral-verification-v1",
+        "github-private-release-canonical-v1",
+    }
 
 
 def test_private_release_archive_is_split_and_restores_exact_bytes(tmp_path: Path) -> None:
@@ -1467,6 +1670,7 @@ def test_source_capture_entry_forces_ephemeral_local_paths(
     assert Path(observed["TMPDIR"]).parent == ephemeral
     assert not ephemeral.exists()
     assert observed["MEMORY_ATLAS_PRIVATE_RELEASE_BACKUP_ENABLED"] == "1"
+    assert observed["MEMORY_ATLAS_CAPTURE_STORAGE_MODE"] == "GITHUB_RELEASE_ONLY"
 
 
 def test_source_capture_entry_symlink_keeps_evidence_binding_but_uses_ephemeral_runtime(
@@ -1681,3 +1885,46 @@ def test_bootstrap_env_contains_complete_ovh_runtime_defaults() -> None:
         "MEMORY_ATLAS_STATUS_PROJECTION_TARGET=/srv/linze/apps/status/data/memory_atlas_status_projection.json",
     ):
         assert token in text
+
+
+def test_incremental_upload_publishes_only_unseen_events(tmp_path: Path) -> None:
+    """R2 held ten whole-history rollups (3.579 GB) for a 122,080-event union
+    because every run re-uploaded everything it could see. Measured new events
+    per run were 4 to 7,748, so under 7% of each upload was new. These are the
+    primitives that make a run publish only what it has not published before."""
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import (
+        CANONICAL_BASE_KEY,
+        _extend_published_ids,
+        _load_published_ids,
+        _normalized_delta_key,
+        _published_index_path,
+    )
+
+    runtime = tmp_path / "runtime"
+    runtime.mkdir()
+    assert _load_published_ids(runtime) == set(), "a fresh host has published nothing"
+
+    first = ["evt_a", "evt_b", "evt_c"]
+    assert _extend_published_ids(runtime, first) == 3
+    assert _load_published_ids(runtime) == set(first)
+
+    # Second run sees the same three plus two new ones; only the two are new.
+    seen = _load_published_ids(runtime)
+    second_batch = ["evt_b", "evt_c", "evt_d", "evt_e"]
+    delta = [e for e in second_batch if e not in seen]
+    assert delta == ["evt_d", "evt_e"], "already-published events must not be re-uploaded"
+    _extend_published_ids(runtime, delta)
+    assert _load_published_ids(runtime) == {"evt_a", "evt_b", "evt_c", "evt_d", "evt_e"}
+
+    # Union is preserved: nothing that was ever published is dropped from the index.
+    assert {"evt_a"} <= _load_published_ids(runtime), "base events survive later runs"
+
+    # Delta keys are per-run and live beside the base, so base + deltas = union.
+    assert _normalized_delta_key("marun_x") != _normalized_delta_key("marun_y")
+    assert _normalized_delta_key("marun_x").startswith("private-agentdatabase/normalized/canonical/delta/")
+    assert CANONICAL_BASE_KEY == "private-agentdatabase/normalized/canonical/events.jsonl"
+    assert "/normalized/marun_" not in _normalized_delta_key("marun_x"), "no more per-run whole-history rollups"
+
+    # The index is durable across processes.
+    assert _published_index_path(runtime).is_file()
+    assert _load_published_ids(runtime) == set(_published_index_path(runtime).read_text(encoding="utf-8").split())

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import type { AtlasNode } from "../../types";
 import { DeltaStats } from "../../shared/atlas/contracts";
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 import { buildSemanticInsights, selectRepresentativeNode, semanticColor, semanticHeatStyle, wordCloudStyle } from "../../shared/atlas/semanticHuman";
 import { isActivationKey, stableUnit, truncate } from "../../shared/atlas/utils";
 import { DeltaStrip } from "../../shared/ui/primitives";
@@ -76,7 +77,7 @@ export function WordCloudView({
 
         <section className="semantic-panel semantic-bubbles" aria-label="主题气泡图">
           <div className="panel-title-row">
-            <h3>Bubble Chart</h3>
+            <h3>气泡图</h3>
             <span>横轴 ROI / 纵轴近期增量</span>
           </div>
           <svg className="semantic-bubble-canvas" viewBox="0 0 520 330" role="img" aria-label="主题 ROI 与近期增量气泡图">
@@ -102,7 +103,7 @@ export function WordCloudView({
                 >
                   <title>{`${topic.label} · ${topic.count} 条 · ROI ${topic.roiScore.toFixed(2)} · 近期 ${topic.recentCount}`}</title>
                   <circle cx={x} cy={y} r={radius} fill={color} />
-                  <text x={x} y={y + 3} textAnchor="middle">{truncate(topic.label, radius > 28 ? 8 : 5)}</text>
+                  <text data-user-content="true" x={x} y={y + 3} textAnchor="middle">{truncate(topic.label, radius > 28 ? 8 : 5)}</text>
                 </g>
               );
             })}
@@ -111,20 +112,21 @@ export function WordCloudView({
 
         <section className="semantic-panel semantic-cloud" aria-label="词云">
           <div className="panel-title-row">
-            <h3>Word Cloud</h3>
+            <h3>词云</h3>
             <span>点击词条跳转代表记忆</span>
           </div>
           <div className="word-cloud-field">
             {semantic.wordCloud.map((item) => (
               <button
                 className="word-cloud-token"
+                data-user-content="true"
                 key={item.label}
                 onClick={() => jumpToBestNode(item.nodes)}
                 style={wordCloudStyle(item, maxWordScore)}
                 title={`${item.label} · ${item.count} 条`}
                 type="button"
               >
-                {item.label}
+                {humanizeMachineText(item.label)}
               </button>
             ))}
           </div>

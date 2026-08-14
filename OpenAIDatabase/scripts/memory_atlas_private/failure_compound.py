@@ -107,6 +107,15 @@ class FailureCompoundStore:
                 db.execute(
                     "ALTER TABLE incidents ADD COLUMN error_code TEXT NOT NULL DEFAULT ''"
                 )
+            # AC-015 requires a closed incident to carry a rollback reference
+            # alongside its evidence, fixture, oracle, red/green proof and
+            # monitoring. Added additively with an empty default so incidents
+            # closed before this column existed stay readable; the projection
+            # reports how many still lack one instead of hiding the gap.
+            if "rollback_ref" not in incident_columns:
+                db.execute(
+                    "ALTER TABLE incidents ADD COLUMN rollback_ref TEXT NOT NULL DEFAULT ''"
+                )
 
     def _connect(self) -> sqlite3.Connection:
         db = sqlite3.connect(self.path)
@@ -195,6 +204,7 @@ class FailureCompoundStore:
         green_evidence_ref: str,
         fixed_by: str,
         root_cause: str = "",
+        rollback_ref: str = "",
     ) -> str:
         required = [fixture_path, oracle, test_path, red_evidence_ref, green_evidence_ref, fixed_by]
         if any(not value.strip() for value in required):
@@ -223,6 +233,7 @@ class FailureCompoundStore:
                 """
                 UPDATE incidents SET regression_asset_id=?, fixed_by=?, status='CLOSED',
                     root_cause=CASE WHEN ?='' THEN root_cause ELSE ? END,
+                    rollback_ref=CASE WHEN ?='' THEN rollback_ref ELSE ? END,
                     closure_evidence_json=? WHERE incident_id=?
                 """,
                 (
@@ -230,6 +241,8 @@ class FailureCompoundStore:
                     fixed_by,
                     root_cause,
                     root_cause,
+                    rollback_ref,
+                    rollback_ref,
                     json.dumps([red_evidence_ref, green_evidence_ref]),
                     incident_id,
                 ),
@@ -377,6 +390,9 @@ class FailureCompoundStore:
                 green_evidence_ref=values["green_evidence_ref"],
                 fixed_by=values["fixed_by"],
                 root_cause=values["root_cause"],
+                # Optional so registries written before AC-015's rollback element
+                # keep ingesting; the snapshot counts what is still missing.
+                rollback_ref=str(raw.get("rollback_ref") or "").strip(),
             )
             result = self.record_fault_injection(
                 asset_id=asset_id,
@@ -420,6 +436,11 @@ class FailureCompoundStore:
         pass_rate = len(passing_assets) / len(active_assets) if active_assets else 0.0
         nonrecurrence = blocked / (blocked + total_recurrences) if (blocked + total_recurrences) else 0.0
         score = round(100 * (0.4 * asset_coverage + 0.3 * pass_rate + 0.3 * nonrecurrence))
+        # AC-015 counts a rollback reference among the elements a closed or
+        # blocked incident must carry. Surface the shortfall as a number rather
+        # than letting an absent field read as satisfied.
+        closed = [row for row in incidents if str(row.get("status", "")).upper() in {"CLOSED", "BLOCKED"}]
+        with_rollback = [row for row in closed if str(row.get("rollback_ref") or "").strip()]
         return {
             "schema_version": "memory_atlas.failure_compound.v1",
             "generated_at": generated_at,
@@ -433,6 +454,9 @@ class FailureCompoundStore:
                 "asset_coverage": round(asset_coverage, 4),
                 "last_pass_rate": round(pass_rate, 4),
                 "nonrecurrence_ratio": round(nonrecurrence, 4),
+                "closed_incident_count": len(closed),
+                "closed_incidents_with_rollback": len(with_rollback),
+                "closed_incidents_missing_rollback": len(closed) - len(with_rollback),
             },
             "incidents": incidents,
             "regression_assets": assets,

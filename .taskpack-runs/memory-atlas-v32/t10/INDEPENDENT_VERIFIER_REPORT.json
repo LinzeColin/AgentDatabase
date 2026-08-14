@@ -1,0 +1,103 @@
+{
+  "schema_version": "memory_atlas.independent_verifier.v1",
+  "verdict": "PASS",
+  "subject": {
+    "frozen_candidate": "/srv/linze/work/memory-atlas/t10-current/FROZEN_CANDIDATE.json",
+    "release_id": "20260805T012031Z-41f16fb68ea6",
+    "durability_report": "/srv/linze/work/memory-atlas/t10-current/DURABILITY_RECOVERY_REPORT.json",
+    "snapshot_store_root": "/srv/linze/apps/memory-atlas/shared/data/live-snapshot",
+    "live_snapshot_schema": "/srv/linze/apps/agentdatabase/current/OpenAIDatabase/schema/memory_atlas.live_snapshot.v1.schema.json"
+  },
+  "independence": {
+    "class": "SEPARATE_PROCESS_FROZEN_RULES_READ_ONLY",
+    "written_by": "the builder",
+    "run_as": "its own process against frozen inputs",
+    "weaker_than_zh": "这不等于第二方独立验收：判据是构建者写的。它买到的是——判定来自按运行前就固定的规则重新读世界，而不是构建者自己宣称结果；证据缺失一律 BLOCKED，不能转 PASS。",
+    "writes_performed": 0
+  },
+  "checks": [
+    {
+      "acceptance_id": "MA-LIVE-AC-007",
+      "title_zh": "自动重验证、刷新与重登读回",
+      "verdict": "PASS",
+      "reason": "3 receipts, one run, no regression",
+      "evidence": {
+        "rows": [
+          {
+            "file": "AC007_AUTO_REVALIDATION_RECEIPT.json",
+            "verdict": "PASS",
+            "run_id": "marun_d8019f85ea1cda749470ece6",
+            "source_completed_at": "2026-08-04T22:34:36+00:00",
+            "auto_revalidated": true
+          },
+          {
+            "file": "AC007_REFRESH_RECEIPT.json",
+            "verdict": "PASS",
+            "run_id": "marun_d8019f85ea1cda749470ece6",
+            "source_completed_at": "2026-08-04T22:34:36+00:00",
+            "auto_revalidated": null
+          },
+          {
+            "file": "AC007_RELOGIN_RECEIPT.json",
+            "verdict": "PASS",
+            "run_id": "marun_d8019f85ea1cda749470ece6",
+            "source_completed_at": "2026-08-04T22:34:36+00:00",
+            "auto_revalidated": null
+          }
+        ]
+      }
+    },
+    {
+      "acceptance_id": "MA-LIVE-AC-008",
+      "title_zh": "失败保留最近成功快照",
+      "verdict": "PASS",
+      "reason": "current only moved forward, last-good preserved, fault injection passed",
+      "evidence": {
+        "frozen_current": "ea3b639770cdb9e351e60c896580560755e40e3c88a9baf8f9e49a672a761d0f",
+        "observed_current": "ea3b639770cdb9e351e60c896580560755e40e3c88a9baf8f9e49a672a761d0f",
+        "across_drill_steps": [
+          "ea3b639770cdb9e351e60c896580560755e40e3c88a9baf8f9e49a672a761d0f"
+        ],
+        "previous_sha256": "35f16ddb2362ff6b947e09723a07768765a18947b8a6ba0899cd36cf382f2515",
+        "fault_injection": {
+          "case_count": 11,
+          "failed": [],
+          "exit_code": 0
+        }
+      }
+    },
+    {
+      "acceptance_id": "MA-LIVE-AC-011",
+      "title_zh": "原子 current/previous/history",
+      "verdict": "PASS",
+      "reason": "history holds this run, current and previous agree",
+      "evidence": {
+        "run_id": "marun_d8019f85ea1cda749470ece6",
+        "current_sha256": "ea3b639770cdb9e351e60c896580560755e40e3c88a9baf8f9e49a672a761d0f",
+        "history_sha256": "95028137a05b85f69b6418da75ae63b4dde3de09e238debb7e704446cc1905f9",
+        "previous_sha256": "35f16ddb2362ff6b947e09723a07768765a18947b8a6ba0899cd36cf382f2515",
+        "history_object_count": 5
+      }
+    },
+    {
+      "acceptance_id": "MA-LIVE-AC-016",
+      "title_zh": "重启、回滚与隔离恢复",
+      "verdict": "PASS",
+      "reason": "restart, rollback, roll-forward and restore all held the frozen identity",
+      "evidence": {
+        "frozen_identity": {
+          "run_id": "marun_d8019f85ea1cda749470ece6",
+          "trace_id": "marun_d8019f85ea1cda749470ece6",
+          "release_id": "20260805T012031Z-41f16fb68ea6",
+          "deployment_revision": "20260805T012031Z-41f16fb68ea6"
+        },
+        "rolled_back_to": "20260805T010704Z-3cc3f46eaecf",
+        "rolled_forward_to": "20260805T012031Z-41f16fb68ea6",
+        "rollback_exit_code": 0,
+        "roll_forward_exit_code": 0,
+        "isolated_restore_state": "PASS",
+        "unhealthy_steps": []
+      }
+    }
+  ]
+}

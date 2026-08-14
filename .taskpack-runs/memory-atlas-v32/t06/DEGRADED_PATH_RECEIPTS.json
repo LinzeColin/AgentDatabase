@@ -1,0 +1,201 @@
+{
+  "schema_version": "memory_atlas.degraded_path_receipt.v1",
+  "captured_at": "2026-08-03T23:20:49.586Z",
+  "page_url": "http://127.0.0.1:4173/",
+  "verdict": "PASS",
+  "failure_count": 0,
+  "receipts": [
+    {
+      "scenario": "01-healthy",
+      "expected_product_state": "PASS",
+      "actual_product_state": "PASS",
+      "expected_freshness_state": "FRESH",
+      "actual_freshness_state": "FRESH",
+      "reason_zh": "云端权威和本批来源均在新鲜度目标内。",
+      "degraded_banner_shown": false,
+      "four_answers_still_rendered": true,
+      "seen": {
+        "run_id": "marun-20260803T101500Z-scenario",
+        "warning": "",
+        "tier_a": "Tier A\n4/4",
+        "tier_b": "Tier B\n2/2",
+        "event_count": "9",
+        "answers": [
+          "验证与修复",
+          "5 个已验证结果",
+          "结果状态不完整",
+          "先为当前开发任务补齐一条可读回的生产结果证据。"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "02-tier-b-local-source-missing",
+      "expected_product_state": "DEGRADED",
+      "actual_product_state": "DEGRADED",
+      "expected_freshness_state": "DEGRADED",
+      "actual_freshness_state": "DEGRADED",
+      "reason_zh": "云端必需权威可用，但以下来源未更新：ChatGPT 导出；相关指标按陈旧处理。",
+      "degraded_banner_shown": true,
+      "four_answers_still_rendered": true,
+      "seen": {
+        "run_id": "marun-20260803T101500Z-scenario",
+        "warning": "当前为降级读取：云端必需权威可用，但以下来源未更新：ChatGPT 导出；相关指标按陈旧处理。",
+        "tier_a": "Tier A\n4/4",
+        "tier_b": "Tier B\n2/3",
+        "event_count": "9",
+        "answers": [
+          "验证与修复",
+          "5 个已验证结果",
+          "结果状态不完整",
+          "先为当前开发任务补齐一条可读回的生产结果证据。"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "03-optional-cloud-backup-missing",
+      "expected_product_state": "DEGRADED",
+      "actual_product_state": "DEGRADED",
+      "expected_freshness_state": "DEGRADED",
+      "actual_freshness_state": "DEGRADED",
+      "reason_zh": "云端必需权威可用，但以下来源未更新：GitHub 私有仓全量备份；相关指标按陈旧处理。",
+      "degraded_banner_shown": true,
+      "four_answers_still_rendered": true,
+      "seen": {
+        "run_id": "marun-20260803T101500Z-scenario",
+        "warning": "当前为降级读取：云端必需权威可用，但以下来源未更新：GitHub 私有仓全量备份；相关指标按陈旧处理。",
+        "tier_a": "Tier A\n3/4",
+        "tier_b": "Tier B\n2/2",
+        "event_count": "9",
+        "answers": [
+          "验证与修复",
+          "5 个已验证结果",
+          "结果状态不完整",
+          "先为当前开发任务补齐一条可读回的生产结果证据。"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "04-stale-but-healthy",
+      "expected_product_state": "DEGRADED",
+      "actual_product_state": "DEGRADED",
+      "expected_freshness_state": "STALE",
+      "actual_freshness_state": "STALE",
+      "reason_zh": "最近成功源运行已超过 1800 秒新鲜度目标。",
+      "degraded_banner_shown": true,
+      "four_answers_still_rendered": true,
+      "seen": {
+        "run_id": "marun-20260803T101500Z-scenario",
+        "warning": "当前为降级读取：最近成功源运行已超过 1800 秒新鲜度目标。",
+        "tier_a": "Tier A\n4/4",
+        "tier_b": "Tier B\n2/2",
+        "event_count": "9",
+        "answers": [
+          "验证与修复",
+          "5 个已验证结果",
+          "结果状态不完整",
+          "先为当前开发任务补齐一条可读回的生产结果证据。"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "05-required-cloud-authority-failed",
+      "expected_product_state": "FAILED",
+      "actual_product_state": "FAILED",
+      "expected_freshness_state": "DEGRADED",
+      "actual_freshness_state": "DEGRADED",
+      "reason_zh": "至少一个产品必需的云端权威不可用：R2 主对象字节、R2 归一化事件流；系统不能宣称最新。",
+      "degraded_banner_shown": true,
+      "four_answers_still_rendered": true,
+      "seen": {
+        "run_id": "marun-20260803T101500Z-scenario",
+        "warning": "当前为降级读取：至少一个产品必需的云端权威不可用：R2 主对象字节、R2 归一化事件流；系统不能宣称最新。",
+        "tier_a": "Tier A\n2/4",
+        "tier_b": "Tier B\n2/2",
+        "event_count": "9",
+        "answers": [
+          "验证与修复",
+          "5 个已验证结果",
+          "结果状态不完整",
+          "先为当前开发任务补齐一条可读回的生产结果证据。"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "06-recovered",
+      "expected_product_state": "PASS",
+      "actual_product_state": "PASS",
+      "expected_freshness_state": "FRESH",
+      "actual_freshness_state": "FRESH",
+      "reason_zh": "云端权威和本批来源均在新鲜度目标内。",
+      "degraded_banner_shown": false,
+      "four_answers_still_rendered": true,
+      "seen": {
+        "run_id": "marun-20260803T101500Z-scenario",
+        "warning": "",
+        "tier_a": "Tier A\n4/4",
+        "tier_b": "Tier B\n2/2",
+        "event_count": "9",
+        "answers": [
+          "验证与修复",
+          "5 个已验证结果",
+          "结果状态不完整",
+          "先为当前开发任务补齐一条可读回的生产结果证据。"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "07-authority-readback-failure-keeps-last-good",
+      "api_status": 503,
+      "pass": true,
+      "seen": {
+        "run_id": "marun-20260803T101500Z-scenario",
+        "warning": "当前为降级读取：云端权威和本批来源均在新鲜度目标内。；实时快照读取失败（HTTP 503）",
+        "tier_a": "Tier A\n4/4",
+        "tier_b": "Tier B\n2/2",
+        "event_count": "9",
+        "answers": [
+          "验证与修复",
+          "5 个已验证结果",
+          "结果状态不完整",
+          "先为当前开发任务补齐一条可读回的生产结果证据。"
+        ]
+      },
+      "last_good": {
+        "run_id": "marun-20260803T101500Z-scenario",
+        "warning": "",
+        "tier_a": "Tier A\n4/4",
+        "tier_b": "Tier B\n2/2",
+        "event_count": "9",
+        "answers": [
+          "验证与修复",
+          "5 个已验证结果",
+          "结果状态不完整",
+          "先为当前开发任务补齐一条可读回的生产结果证据。"
+        ]
+      }
+    },
+    {
+      "scenario": "08-recovers-after-the-authority-returns",
+      "pass": true,
+      "seen": {
+        "run_id": "marun-20260803T101500Z-scenario",
+        "warning": "",
+        "tier_a": "Tier A\n4/4",
+        "tier_b": "Tier B\n2/2",
+        "event_count": "9",
+        "answers": [
+          "验证与修复",
+          "5 个已验证结果",
+          "结果状态不完整",
+          "先为当前开发任务补齐一条可读回的生产结果证据。"
+        ]
+      }
+    }
+  ]
+}

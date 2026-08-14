@@ -91,7 +91,7 @@ export function NodeInspector({
           <strong>{uiCopy.inspector.relatedTopicsTitle}</strong>
           <div className="human-node-topics">
             {humanNode.topics.map((topic, index) => (
-              <span key={`topic-${index}-${topic}`}>{topic}</span>
+              <span data-user-content="true" key={`topic-${index}-${topic}`}>{topic}</span>
             ))}
           </div>
         </div>
@@ -181,7 +181,7 @@ export function InspectorExplanationPanel({ explanation }: { explanation: Inspec
             <span>{row.label}</span>
             <strong>{row.value}</strong>
             <code>{row.formula}</code>
-            <small>{row.parameters}</small>
+            <small data-machine-fields="true">{row.parameters}</small>
           </article>
         ))}
       </div>

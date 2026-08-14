@@ -9,7 +9,8 @@ import sys
 from pathlib import Path
 
 from .config import ConfigurationError, RuntimeConfig
-from .object_store import R2ObjectStore
+from .canonical_source import GitHubCanonicalPublisher, GitHubCanonicalSource
+from .object_store import EphemeralVerificationObjectStore, R2ObjectStore
 from .pipeline import CapturePipeline, RemoteReconcilePipeline
 from .private_db import GhPrivateDatabase
 from .restore import isolated_restore
@@ -40,7 +41,29 @@ def cmd_preflight(_: argparse.Namespace) -> None:
 
 
 def cmd_capture(_: argparse.Namespace) -> None:
-    _print(CapturePipeline(_config()).run())
+    config = _config()
+    mode = os.environ.get(
+        "MEMORY_ATLAS_CAPTURE_STORAGE_MODE", "GITHUB_RELEASE_ONLY"
+    ).strip().upper()
+    if mode != "GITHUB_RELEASE_ONLY":
+        raise ConfigurationError(
+            "源端 capture 的 R2 写入已按零付费合同关闭；仅允许 GITHUB_RELEASE_ONLY"
+        )
+    if not config.private_release_backup_enabled:
+        raise ConfigurationError("GITHUB_RELEASE_ONLY 必须绑定完整加密私有 Release 备份")
+    canonical_source = GitHubCanonicalSource(
+        repo=config.github_repo,
+        cache_dir=config.work_dir / "canonical-cache",
+    )
+    _print(CapturePipeline(
+        config,
+        object_store=EphemeralVerificationObjectStore(),
+        canonical_publisher=GitHubCanonicalPublisher(
+            repo=config.github_repo,
+            source=canonical_source,
+        ),
+        r2_fact_backup_required=False,
+    ).run())
 
 
 def cmd_reconcile(_: argparse.Namespace) -> None:

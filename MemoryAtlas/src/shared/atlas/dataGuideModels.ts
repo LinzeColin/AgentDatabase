@@ -303,11 +303,27 @@ export function dataMapPriorityForNode(node: AtlasNode): "watch" | "p3" | "p2" |
 
 
 
+const RELATION_KIND_LABELS: Record<string, string> = {
+  has_tier: "所属层级",
+  project_membership: "项目归属",
+  belongs_to_theme: "归属主题",
+  has_category: "所属分类",
+  relates_to: "相关联",
+  derived_from: "派生自",
+  supports: "支撑",
+  related: "相关",
+};
+
+const relationKindLabel = (kind: string | undefined): string =>
+  RELATION_KIND_LABELS[kind || "related"] ?? RELATION_KIND_LABELS.related;
+
 export function dataMapEvidenceRefsForNode(node: AtlasNode, edges: AtlasEdge[]): string[] {
   const refs = edges
     .filter((edge) => edge.source === node.id || edge.target === node.id)
     .sort((a, b) => b.weight - a.weight || a.id.localeCompare(b.id))
     .slice(0, 6)
-    .map((edge) => `${edge.kind || "related"}:${edge.id}:weight=${edge.weight.toFixed(2)}`);
-  return refs.length ? refs : [`node:${node.id}:derived_snapshot`];
+    // Rendered as visible text in the detail panel, so the relation kind and
+    // the weight label are Chinese; the raw edge id stays in the element title.
+    .map((edge) => `${relationKindLabel(edge.kind)} · 权重 ${edge.weight.toFixed(2)}`);
+  return refs.length ? refs : ["由快照推导，没有直接关系边"];
 }

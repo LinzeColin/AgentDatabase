@@ -1,0 +1,20 @@
+{
+  "doing_share": {
+    "value": 0.4444444444444444,
+    "sample_size": 9,
+    "taxonomy_id": "memory_atlas_activity_v1",
+    "unit": "share_of_events",
+    "window_definition": "last_8_days",
+    "population_scope": "single_owner_authorized_events",
+    "inclusion_rule": "normalized_events_with_task_type"
+  },
+  "task_breadth_ratio": {
+    "value": 1.4,
+    "sample_size": 9,
+    "taxonomy_id": "memory_atlas_activity_v1",
+    "unit": "ratio_to_previous_window",
+    "window_definition": "rolling_30_day",
+    "population_scope": "single_owner_authorized_events",
+    "inclusion_rule": "normalized_events"
+  }
+}

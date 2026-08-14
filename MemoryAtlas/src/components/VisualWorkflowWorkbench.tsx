@@ -39,6 +39,8 @@ interface VisualWorkflowWorkbenchProps {
 interface R6ChartDatum {
   id: string;
   label: string;
+  /** True when the label is a name the user chose, not a taxonomy key. */
+  userContent?: boolean;
   secondary: string;
   value: number;
   events: VisualFacetEvent[];
@@ -167,7 +169,7 @@ export function VisualWorkflowWorkbench({ atlas, onSwitchView }: VisualWorkflowW
           <span>来源</span>
           <select data-r6-filter="source" data-r6-visual-filter="source" value={filters.source} onChange={(event) => updateFilter("source", event.target.value)}>
             <option value="all">全部来源</option>
-            {options.sources.map((source) => <option key={source} value={source}>{source}</option>)}
+            {options.sources.map((source) => <option key={source} value={source}>{humanFacetLabel(source)}</option>)}
           </select>
         </label>
         <label>
@@ -180,7 +182,7 @@ export function VisualWorkflowWorkbench({ atlas, onSwitchView }: VisualWorkflowW
           <span>项目</span>
           <select data-r6-filter="project" data-r6-visual-filter="project" value={filters.project} onChange={(event) => updateFilter("project", event.target.value)}>
             <option value="all">全部项目</option>
-            {options.projects.map((project) => <option key={project} value={project}>{project}</option>)}
+            {options.projects.map((project) => <option data-user-content="true" key={project} value={project}>{project}</option>)}
           </select>
         </label>
         <label>
@@ -278,9 +280,9 @@ export function VisualWorkflowWorkbench({ atlas, onSwitchView }: VisualWorkflowW
           <div className="r6-evidence-list" aria-label="选中数据的证据">
             {selection.events.length ? selection.events.map((event) => (
               <article data-r6-evidence-ref data-r6-event-id={event.event_id} key={event.event_id}>
-                <span>{event.source_id} · {humanDate(event.occurred_at)}</span>
-                <strong>{event.topic || "未命名主题"}</strong>
-                <small>{event.project} · {humanFacetLabel(event.task_type)} · {humanFacetLabel(event.evidence_refs[0]?.evidence_level || "派生证据")}</small>
+                <span>{humanFacetLabel(event.source_id)} · {humanDate(event.occurred_at)}</span>
+                <strong data-user-content="true">{event.topic || "未命名主题"}</strong>
+                <small><span data-user-content="true">{event.project}</span> · {humanFacetLabel(event.task_type)} · {humanFacetLabel(event.evidence_refs[0]?.evidence_level || "派生证据")}</small>
                 <details>
                   <summary>证据引用</summary>
                   {event.evidence_refs.map((ref) => <code key={ref.ref_id}>{ref.ref_id} · {ref.ref_type || "reference"} · {ref.path || "无公开路径"}</code>)}
@@ -355,8 +357,8 @@ function EventVisualCard({
           >
             <span className="r6-chart-mark" aria-hidden="true" />
             <span className="r6-chart-copy">
-              <strong>{datum.label}</strong>
-              <small>{datum.secondary}</small>
+              <strong data-user-content={datum.userContent ? "true" : undefined}>{humanFacetLabel(datum.label)}</strong>
+              <small>{humanFacetLabel(datum.secondary)}</small>
             </span>
             <b>{datum.value.toLocaleString()}</b>
           </button>
@@ -518,12 +520,12 @@ function OpportunityDetail({ opportunity }: { opportunity: OpportunitySummary | 
       <dl>
         <div><dt>下一步</dt><dd data-r6-opportunity-next-step>{productActionValue(opportunity.next_step_zh || "先补充最小证据。")}</dd></div>
         <div><dt>机会半衰期</dt><dd data-r6-opportunity-half-life>{opportunity.opportunity_half_life_days ?? 0} 天</dd></div>
-        <div><dt>Why Not Now</dt><dd data-r6-opportunity-defer-reason>{reason}</dd></div>
+        <div><dt>为什么现在不做</dt><dd data-r6-opportunity-defer-reason>{reason}</dd></div>
         <div><dt>压力边界</dt><dd data-r6-opportunity-not-pressure>{opportunity.why_not_now_card?.not_pressure_list ? "不进入压力清单；等触发信号后再评估。" : "由人工确认是否进入行动清单。"}</dd></div>
       </dl>
       <div className="r6-opportunity-evidence-list" aria-label="机会证据">
         {opportunity.evidence_refs.map((ref) => (
-          <span data-r6-opportunity-evidence key={ref.ref_id}>{ref.source_id || "derived"} · {ref.evidence_level || ref.ref_type || "evidence"}</span>
+          <span data-r6-opportunity-evidence key={ref.ref_id}>{humanFacetLabel(ref.source_id || "derived")} · {humanFacetLabel(ref.evidence_level || ref.ref_type || "evidence")}</span>
         ))}
       </div>
     </section>
@@ -546,6 +548,8 @@ function buildVisualData(visualId: string, events: VisualFacetEvent[]): R6ChartD
     return timeline.length ? timeline : emptyDatum();
   }
 
+  // These group by names the user chose. The rest group by taxonomy keys.
+  const rendersUserContent = ["cluster_tree", "topic_cluster_explorer", "bubble_map", "roi_scatter"].includes(visualId);
   const labelsForEvent = (event: VisualFacetEvent): string[] => {
     if (visualId === "cluster_tree" || visualId === "topic_cluster_explorer") return [compactLabel(event.topic)];
     if (visualId === "bubble_map" || visualId === "roi_scatter") return [event.project];
@@ -553,7 +557,7 @@ function buildVisualData(visualId: string, events: VisualFacetEvent[]): R6ChartD
     if (visualId === "automation_vs_augmentation" || visualId === "latent_radar") {
       return event.value_signal.length ? event.value_signal.map(humanFacetLabel) : ["待识别价值"];
     }
-    if (visualId === "agent_decision_sankey") return [`${event.source_id} → ${humanFacetLabel(event.intent)}`];
+    if (visualId === "agent_decision_sankey") return [`${humanFacetLabel(event.source_id)} → ${humanFacetLabel(event.intent)}`];
     if (visualId === "friction_heatmap") return event.friction.length ? event.friction.map(humanFacetLabel) : ["无显著摩擦"];
     return [event.project];
   };
@@ -566,6 +570,7 @@ function buildVisualData(visualId: string, events: VisualFacetEvent[]): R6ChartD
   const rows = Array.from(groups, ([label, groupedEvents]) => ({
     id: `${safeCssToken(label)}-${groupedEvents[0]?.event_id ?? "empty"}`,
     label,
+    userContent: rendersUserContent,
     secondary: visualDatumSecondary(visualId, groupedEvents),
     value: groupedEvents.length,
     events: groupedEvents,
@@ -668,6 +673,29 @@ function humanFacetLabel(value: string): string {
     time_saved: "节省时间",
     unknown: "未标注",
     writing: "写作",
+    // Added after a browser scan found these rendered raw on the home page.
+    // They come from the atlas data, so they are translated where they are
+    // shown rather than rewritten in the data.
+    augmentation: "增强协作",
+    "durable memory": "长期记忆沉淀",
+    "risk reduction": "风险降低",
+    verifiability: "可验证性",
+    personalization: "个性化",
+    "aborted or interrupted": "中断或放弃",
+    "debugging or rework": "调试或返工",
+    "long tail": "长尾",
+    raw: "原始记录",
+    derived: "派生",
+    evidence: "证据",
+    write: "撰写",
+    build: "构建",
+    review: "复核",
+    plan: "规划",
+    debug: "调试",
+    refactor: "重构",
+    codex: "Codex",
+    chatgpt: "ChatGPT",
+    "future-agent": "未来代理",
   };
   return labels[value] ?? value.replaceAll("_", " ");
 }

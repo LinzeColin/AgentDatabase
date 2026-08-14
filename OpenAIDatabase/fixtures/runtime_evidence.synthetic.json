@@ -1,0 +1,71 @@
+{
+  "schema_version": "memory_atlas.runtime_evidence.v1",
+  "generated_at": "2026-08-03T10:17:00Z",
+  "run_id": "synthetic-run-20260803T101500Z",
+  "trace_id": "synthetic-trace-20260803T101500Z",
+  "release": {
+    "identity_state": "OBSERVED",
+    "repository_commit": "d8e343c7590ed41344522abb4f63a9bf32c67f62",
+    "release_id": "20260803T101000Z-d8e343c7590e",
+    "artifact_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "deployment_revision": "memory-atlas-blue-synthetic"
+  },
+  "cloud_native_sources": [
+    {
+      "source_id": "github",
+      "label_zh": "GitHub main 与 Actions",
+      "state": "READY",
+      "last_observed_at": "2026-08-03T10:17:00Z"
+    },
+    {
+      "source_id": "r2",
+      "label_zh": "Cloudflare R2 对象读回",
+      "state": "READY",
+      "last_observed_at": "2026-08-03T10:16:30Z"
+    },
+    {
+      "source_id": "private_database",
+      "label_zh": "Private-Database 完成态事实",
+      "state": "READY",
+      "last_observed_at": "2026-08-03T10:16:40Z"
+    },
+    {
+      "source_id": "ovh",
+      "label_zh": "OVH reconcile",
+      "state": "READY",
+      "last_observed_at": "2026-08-03T10:16:50Z"
+    },
+    {
+      "source_id": "cloudflare",
+      "label_zh": "Cloudflare Access 与生产入口",
+      "state": "READY",
+      "last_observed_at": "2026-08-03T10:17:00Z"
+    }
+  ],
+  "same_run_evidence": {
+    "r2_readback": {
+      "state": "PASS",
+      "run_id": "synthetic-run-20260803T101500Z",
+      "trace_id": "synthetic-trace-20260803T101500Z",
+      "ref": "receipt:r2_readback:synthetic"
+    },
+    "private_database_readback": {
+      "state": "PASS",
+      "run_id": "synthetic-run-20260803T101500Z",
+      "trace_id": "synthetic-trace-20260803T101500Z",
+      "ref": "receipt:private_database_readback:synthetic"
+    },
+    "ovh_reconcile": {
+      "state": "PASS",
+      "run_id": "synthetic-run-20260803T101500Z",
+      "trace_id": "synthetic-trace-20260803T101500Z",
+      "ref": "receipt:ovh_reconcile:synthetic"
+    },
+    "status_projection": {
+      "state": "NOT_RUN",
+      "run_id": null,
+      "trace_id": null,
+      "ref": null
+    }
+  }
+}

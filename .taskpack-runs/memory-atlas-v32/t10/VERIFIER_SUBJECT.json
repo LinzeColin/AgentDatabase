@@ -1,0 +1,13 @@
+{
+  "schema_version": "memory_atlas.verifier_subject.v1",
+  "frozen_candidate_path": "/srv/linze/work/memory-atlas/t10-current/FROZEN_CANDIDATE.json",
+  "durability_report_path": "/srv/linze/work/memory-atlas/t10-current/DURABILITY_RECOVERY_REPORT.json",
+  "fault_injection_report_path": "/srv/linze/work/memory-atlas/t10-current/FAULT_INJECTION.json",
+  "snapshot_store_root": "/srv/linze/apps/memory-atlas/shared/data/live-snapshot",
+  "live_snapshot_schema_path": "/srv/linze/apps/agentdatabase/current/OpenAIDatabase/schema/memory_atlas.live_snapshot.v1.schema.json",
+  "browser_receipt_paths": [
+    "/srv/linze/work/memory-atlas/t10-current/AC007_AUTO_REVALIDATION_RECEIPT.json",
+    "/srv/linze/work/memory-atlas/t10-current/AC007_REFRESH_RECEIPT.json",
+    "/srv/linze/work/memory-atlas/t10-current/AC007_RELOGIN_RECEIPT.json"
+  ]
+}

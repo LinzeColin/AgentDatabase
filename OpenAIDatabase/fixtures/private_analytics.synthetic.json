@@ -1,0 +1,100 @@
+{
+  "schema_version": "memory_atlas.private_analytics.v1",
+  "run": {
+    "run_id": "synthetic-run-20260803T101500Z",
+    "trace_id": "synthetic-trace-20260803T101500Z",
+    "state": "REBUILT_FROM_AUTHORITIES",
+    "source_started_at": "2026-08-03T10:10:00Z",
+    "source_completed_at": "2026-08-03T10:15:00Z",
+    "reconciled_at": "2026-08-03T10:16:00Z",
+    "source_coverages": [
+      {
+        "source_id": "codex_state",
+        "label_zh": "Codex 状态数据库",
+        "required": true,
+        "state": "READY",
+        "object_count": 1,
+        "size_bytes": 4096
+      },
+      {
+        "source_id": "codex_sessions",
+        "label_zh": "Codex 活跃会话",
+        "required": true,
+        "state": "READY",
+        "object_count": 9,
+        "size_bytes": 1048576
+      },
+      {
+        "source_id": "codex_automations",
+        "label_zh": "Codex Automation",
+        "required": true,
+        "state": "READY",
+        "object_count": 4,
+        "size_bytes": 8192
+      },
+      {
+        "source_id": "chatgpt_exports",
+        "label_zh": "ChatGPT 官方导出",
+        "required": false,
+        "state": "MISSING_OPTIONAL",
+        "object_count": 0,
+        "size_bytes": 0
+      }
+    ]
+  },
+  "behavior_economics": {
+    "schema_version": "memory_atlas.behavior_economics.v1",
+    "event_count": 9,
+    "activity_distribution": {
+      "decision_execution": {
+        "count": 1,
+        "share": 0.111111
+      },
+      "development_deployment": {
+        "count": 2,
+        "share": 0.222222
+      },
+      "product_planning": {
+        "count": 1,
+        "share": 0.111111
+      },
+      "research_diagnosis": {
+        "count": 2,
+        "share": 0.222222
+      },
+      "verification_repair": {
+        "count": 3,
+        "share": 0.333333
+      }
+    },
+    "outcome_distribution": {
+      "accepted_verified": 1,
+      "adopted_verified": 1,
+      "decision_impact_verified": 1,
+      "deployed_verified": 1,
+      "draft_only": 1,
+      "failed": 1,
+      "recovery_verified": 1,
+      "unknown": 2
+    },
+    "verified_outcome_rate": 0.73,
+    "verified_outcome_rate_basis": "legacy_mixed_unknown",
+    "recommendations": [
+      {
+        "recommendation_id": "rec-verification-first",
+        "action": "先为当前开发任务补齐一条可读回的生产结果证据。",
+        "fact": "历史样本中仍有未验证或未知结果。",
+        "success_metric": "下一次运行新增至少一条 deployed/adopted/recovery/decision 结果，并在刷新后仍可读回。",
+        "confidence": 0.78
+      }
+    ]
+  },
+  "failure_compound": {
+    "compound_score": 0.31,
+    "metrics": {
+      "incident_count": 2,
+      "historical_recurrences": 1,
+      "blocked_recurrences": 1
+    }
+  }
+}

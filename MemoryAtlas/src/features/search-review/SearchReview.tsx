@@ -8,6 +8,7 @@ import { buildSearch2Results, buildSearch2SessionSummary, search2FilterStateLabe
 import { buildSearchVisualRows, humanThemeLabel } from "../../shared/atlas/semanticHuman";
 import { MachineFieldDetails } from "../../shared/ui/display";
 import { DeltaStrip, HumanOverviewPanel, MiniBarList } from "../../shared/ui/primitives";
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 
 
 
@@ -91,7 +92,7 @@ export function SearchReview({
       <HumanOverviewPanel nodes={nodes} deltaStats={deltaStats} />
       <section className="search-2-controls" aria-label="Search 2.0 query_input">
         <label className="search-2-query">
-          <span>query_input</span>
+          <span>查询输入</span>
           <div className="search-2-input-frame">
             <Search size={16} />
             <input
@@ -104,22 +105,22 @@ export function SearchReview({
         </label>
         <div className="search-2-filter-grid">
           <label>
-            <span>tier</span>
+            <span>层级</span>
             <select value={searchFilters.tier} onChange={(event) => updateSearchFilter({ tier: event.target.value as Search2TierFilter })}>
-              <option value="all">all</option>
-              <option value="core_profile">core_profile</option>
-              <option value="project">project</option>
-              <option value="decision">decision</option>
-              <option value="workflow">workflow</option>
-              <option value="knowledge">knowledge</option>
-              <option value="opportunity">opportunity</option>
-              <option value="stale">stale</option>
+              <option value="all">{humanizeMachineText("all")}</option>
+              <option value="core_profile">{humanizeMachineText("core_profile")}</option>
+              <option value="project">{humanizeMachineText("project")}</option>
+              <option value="decision">{humanizeMachineText("decision")}</option>
+              <option value="workflow">{humanizeMachineText("workflow")}</option>
+              <option value="knowledge">{humanizeMachineText("knowledge")}</option>
+              <option value="opportunity">{humanizeMachineText("opportunity")}</option>
+              <option value="stale">{humanizeMachineText("stale")}</option>
             </select>
           </label>
           <label>
-            <span>topic</span>
+            <span>主题</span>
             <select value={searchFilters.topic} onChange={(event) => updateSearchFilter({ topic: event.target.value })}>
-              <option value="all">all</option>
+              <option value="all">{humanizeMachineText("all")}</option>
               {topicOptions.map((topic) => (
                 <option key={topic} value={topic}>{topic}</option>
               ))}
@@ -225,12 +226,12 @@ export function SearchReview({
             >
               <header>
                 <div>
-                  <strong>{result.title}</strong>
-                  <span>{result.source} / {result.tier} / {result.topic}</span>
+                  <strong data-user-content="true">{result.title}</strong>
+                  <span>{humanizeMachineText(result.source)} / {humanizeMachineText(result.tier)} / <span data-user-content="true">{result.topic}</span></span>
                 </div>
-                <b>{result.importance}</b>
+                <b>{humanizeMachineText(result.importance)}</b>
               </header>
-              <p>{result.summary}</p>
+              <p data-user-content="true">{result.summary}</p>
               <MachineFieldDetails title="高级详情：结果字段" className="search-2-result-schema inline-machine-field-details">
                 <dl>
                   <div><dt>matched_reason / 匹配原因</dt><dd>{result.matched_reason}</dd></div>

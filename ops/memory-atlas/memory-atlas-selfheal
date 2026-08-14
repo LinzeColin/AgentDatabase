@@ -12,6 +12,10 @@ action="none"
 reason="healthy"
 if ! systemctl is-active --quiet memory-atlas-api.service; then
   action="restart-api"
+  # A unit in start-limit-hit refuses every further start until the failed
+  # state is cleared, so restarting it without this does nothing but burn the
+  # next window's budget and report FAILED.
+  systemctl reset-failed memory-atlas-api.service 2>/dev/null || true
   systemctl restart memory-atlas-api.service
   sleep 2
   if ! systemctl is-active --quiet memory-atlas-api.service; then

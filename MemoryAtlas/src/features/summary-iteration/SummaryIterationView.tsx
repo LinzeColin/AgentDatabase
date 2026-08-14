@@ -10,6 +10,14 @@ import { DeltaStrip, HumanOverviewPanel } from "../../shared/ui/primitives";
 
 
 
+/** Severity, confidence and signal kinds are UI vocabulary, not user data. */
+const levelLabel = (value: string): string =>
+  ({ high: "高", medium: "中", low: "低", critical: "极高" } as Record<string, string>)[value] ?? value;
+const signalTypeLabel = (value: string): string =>
+  ({ stale: "已陈旧", conflict: "冲突", duplicate: "重复" } as Record<string, string>)[value] ?? value;
+const targetTypeLabel = (value: string): string =>
+  ({ memory_update_candidate: "记忆更新候选", review_only_note: "仅复核备注" } as Record<string, string>)[value] ?? value;
+
 export function SummaryIterationView({
   atlas,
   nodes,
@@ -108,7 +116,7 @@ export function SummaryIterationView({
       >
         <div className="panel-title-row">
           <h3>复盘会话输出</h3>
-          <span>置信度：{reviewSummary.confidence}</span>
+          <span>置信度：{levelLabel(reviewSummary.confidence)}</span>
         </div>
         <p>默认层只回答八个复盘问题；schema、panel id 和 evidence refs 已收进高级详情。</p>
         <MachineFieldDetails title="高级详情：复盘 schema 与字段" className="review-machine-details">
@@ -173,11 +181,11 @@ export function SummaryIterationView({
           <EvidenceRefsDetails refs={proposalAnswer.evidence_refs} />
         </article>
       </section>
-      <section className="review-runtime-panels" aria-label="Review / Summary / Iteration 运行面板">
+      <section className="review-runtime-panels" aria-label="复盘、总结与迭代运行面板">
         <article className="proposal-decision-panel" data-review-panel="proposal_decision_panel">
           <div className="panel-title-row">
             <h3>提案判断</h3>
-            <span>{reviewSummary.proposal_candidate.target_type}</span>
+            <span>{targetTypeLabel(reviewSummary.proposal_candidate.target_type)}</span>
           </div>
           <strong>{reviewSummary.proposal_candidate.should_generate ? "建议生成提案" : "暂不生成提案"}</strong>
           <p>{reviewSummary.proposal_candidate.reason}</p>
@@ -242,7 +250,7 @@ export function SummaryIterationView({
             <ol>
               {summaryClosure.stale_conflict_signals.map((item) => (
                 <li key={item.signal_id} data-summary-signal-type={item.signal_type}>
-                  <strong>{item.signal_type}:{item.severity} · {item.title}</strong>
+                  <strong>{signalTypeLabel(item.signal_type)} · {levelLabel(item.severity)} · {item.title}</strong>
                   <p>{item.summary}</p>
                   <small>{item.proposal_hint} · {item.rollback_hint}</small>
                 </li>
@@ -309,11 +317,11 @@ export function AgentRecommendationsPanel({ atlas }: { atlas: MemoryAtlas }) {
   return (
     <section className="agent-recommendations" aria-label="建议写入 ChatGPT 与 Codex 的内容">
       <div className="panel-title-row">
-        <h3>Personalization / Agents.md 建议</h3>
+        <h3>个性化与 Agents.md 建议</h3>
         <span>{formatUpdatedAt(recommendations.generated_at)}</span>
       </div>
       <div className="recommendation-columns">
-        <RecommendationBucket title="Memory / Personalization" section={recommendations.memory} />
+        <RecommendationBucket title="记忆与个性化" section={recommendations.memory} />
         <RecommendationBucket title="Agents.md / 执行规则" section={recommendations.meta_data} />
       </div>
     </section>
@@ -333,20 +341,20 @@ export function ConfigMemoryPanel({ atlas, updatedAt }: { atlas: MemoryAtlas; up
       count: metaCurrent.length,
     },
     {
-      title: "Memory",
+      title: "记忆",
       statement: "优先装载核心画像、长期偏好、项目历史、决策日志和回答规则；短期信息保留但低权重召回。",
       count: memoryCurrent.length,
     },
     {
       title: "新增/删除/修改",
-      statement: `新增 ${recommendations?.memory.added.length ?? 0} / 修改 ${recommendations?.memory.modified.length ?? 0} / 降权 ${recommendations?.memory.deleted.length ?? 0}；Meta 同步显示在上方。`,
+      statement: `新增 ${recommendations?.memory.added.length ?? 0} / 修改 ${recommendations?.memory.modified.length ?? 0} / 降权 ${recommendations?.memory.deleted.length ?? 0}；元数据同步显示在上方。`,
       count: (recommendations?.memory.added.length ?? 0) + (recommendations?.memory.modified.length ?? 0) + (recommendations?.memory.deleted.length ?? 0),
     },
   ];
   return (
-    <section className="config-memory-panel" aria-label="config.toml 和 Memory 建议">
+    <section className="config-memory-panel" aria-label="config.toml 和记忆建议">
       <div className="panel-title-row">
-        <h3>config.toml / Memory</h3>
+        <h3>config.toml 与记忆建议</h3>
         <span>更新时间：{updatedAt}</span>
       </div>
       <div className="config-memory-grid">

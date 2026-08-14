@@ -1,0 +1,541 @@
+{
+  "schema_version": "memory_atlas.live_snapshot.v1",
+  "generated_at": "2026-08-03T10:18:00Z",
+  "run": {
+    "run_id": "synthetic-run-20260803T101500Z",
+    "trace_id": "synthetic-trace-20260803T101500Z",
+    "source_state": "REBUILT_FROM_AUTHORITIES",
+    "source_started_at": "2026-08-03T10:10:00Z",
+    "source_completed_at": "2026-08-03T10:15:00Z",
+    "reconciled_at": "2026-08-03T10:16:00Z"
+  },
+  "release": {
+    "identity_state": "OBSERVED",
+    "repository_commit": "d8e343c7590ed41344522abb4f63a9bf32c67f62",
+    "release_id": "20260803T101000Z-d8e343c7590e",
+    "artifact_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "deployment_revision": "memory-atlas-blue-synthetic"
+  },
+  "freshness": {
+    "state": "DEGRADED",
+    "evaluated_at": "2026-08-03T10:18:00Z",
+    "age_seconds": 180,
+    "target_seconds": 1800,
+    "reason_zh": "云端链可用，但一个或多个本机独有来源未更新。"
+  },
+  "coverage": {
+    "product_state": "DEGRADED",
+    "tier_a_cloud_native": {
+      "ready": 5,
+      "total": 5,
+      "stale": 0,
+      "missing": 0,
+      "failed": 0,
+      "unknown": 0
+    },
+    "tier_b_local_optional": {
+      "ready": 3,
+      "total": 4,
+      "stale": 0,
+      "missing": 1,
+      "failed": 0,
+      "unknown": 0
+    },
+    "sources": [
+      {
+        "source_id": "github",
+        "label_zh": "GitHub main 与 Actions",
+        "tier": "A_CLOUD_NATIVE",
+        "required_for_capture": true,
+        "required_for_product": true,
+        "state": "READY",
+        "object_count": 0,
+        "size_bytes": 0,
+        "last_observed_at": "2026-08-03T10:17:00Z"
+      },
+      {
+        "source_id": "r2",
+        "label_zh": "Cloudflare R2 对象读回",
+        "tier": "A_CLOUD_NATIVE",
+        "required_for_capture": true,
+        "required_for_product": true,
+        "state": "READY",
+        "object_count": 0,
+        "size_bytes": 0,
+        "last_observed_at": "2026-08-03T10:16:30Z"
+      },
+      {
+        "source_id": "private_database",
+        "label_zh": "Private-Database 完成态事实",
+        "tier": "A_CLOUD_NATIVE",
+        "required_for_capture": true,
+        "required_for_product": true,
+        "state": "READY",
+        "object_count": 0,
+        "size_bytes": 0,
+        "last_observed_at": "2026-08-03T10:16:40Z"
+      },
+      {
+        "source_id": "ovh",
+        "label_zh": "OVH reconcile",
+        "tier": "A_CLOUD_NATIVE",
+        "required_for_capture": true,
+        "required_for_product": true,
+        "state": "READY",
+        "object_count": 0,
+        "size_bytes": 0,
+        "last_observed_at": "2026-08-03T10:16:50Z"
+      },
+      {
+        "source_id": "cloudflare",
+        "label_zh": "Cloudflare Access 与生产入口",
+        "tier": "A_CLOUD_NATIVE",
+        "required_for_capture": true,
+        "required_for_product": true,
+        "state": "READY",
+        "object_count": 0,
+        "size_bytes": 0,
+        "last_observed_at": "2026-08-03T10:17:00Z"
+      },
+      {
+        "source_id": "codex_state",
+        "label_zh": "Codex 状态数据库",
+        "tier": "B_LOCAL_OPTIONAL",
+        "required_for_capture": true,
+        "required_for_product": false,
+        "state": "READY",
+        "object_count": 1,
+        "size_bytes": 4096,
+        "last_observed_at": "2026-08-03T10:15:00Z"
+      },
+      {
+        "source_id": "codex_sessions",
+        "label_zh": "Codex 活跃会话",
+        "tier": "B_LOCAL_OPTIONAL",
+        "required_for_capture": true,
+        "required_for_product": false,
+        "state": "READY",
+        "object_count": 9,
+        "size_bytes": 1048576,
+        "last_observed_at": "2026-08-03T10:15:00Z"
+      },
+      {
+        "source_id": "codex_automations",
+        "label_zh": "Codex Automation",
+        "tier": "B_LOCAL_OPTIONAL",
+        "required_for_capture": true,
+        "required_for_product": false,
+        "state": "READY",
+        "object_count": 4,
+        "size_bytes": 8192,
+        "last_observed_at": "2026-08-03T10:15:00Z"
+      },
+      {
+        "source_id": "chatgpt_exports",
+        "label_zh": "ChatGPT 官方导出",
+        "tier": "B_LOCAL_OPTIONAL",
+        "required_for_capture": false,
+        "required_for_product": false,
+        "state": "MISSING",
+        "object_count": 0,
+        "size_bytes": 0,
+        "last_observed_at": "2026-08-03T10:15:00Z"
+      }
+    ]
+  },
+  "analysis": {
+    "event_count": 9,
+    "event_window": {
+      "start_at": "2026-07-27T02:00:00Z",
+      "end_at": "2026-08-03T10:00:00Z"
+    },
+    "activity_distribution": [
+      {
+        "key": "decision_execution",
+        "label_zh": "决策与执行",
+        "count": 1,
+        "share": 0.111111
+      },
+      {
+        "key": "development_deployment",
+        "label_zh": "开发与部署",
+        "count": 2,
+        "share": 0.222222
+      },
+      {
+        "key": "product_planning",
+        "label_zh": "产品与规划",
+        "count": 1,
+        "share": 0.111111
+      },
+      {
+        "key": "research_diagnosis",
+        "label_zh": "研究与诊断",
+        "count": 2,
+        "share": 0.222222
+      },
+      {
+        "key": "verification_repair",
+        "label_zh": "验证与修复",
+        "count": 3,
+        "share": 0.333333
+      }
+    ],
+    "outcome_distribution": {
+      "accepted_verified": 1,
+      "adopted_verified": 1,
+      "decision_impact_verified": 1,
+      "deployed_verified": 1,
+      "draft_only": 1,
+      "failed": 1,
+      "recovery_verified": 1,
+      "unknown": 2
+    },
+    "verified_outcome_rate_event": {
+      "value": 0.555556,
+      "numerator": 5,
+      "denominator": 9,
+      "denominator_basis": "event_count",
+      "label_zh": "事件口径已验证结果率",
+      "proxy": false
+    },
+    "verified_outcome_rate_work_time": {
+      "value": 0.642857,
+      "numerator": 405.0,
+      "denominator": 630.0,
+      "denominator_basis": "known_work_time_minutes",
+      "label_zh": "工时加权已验证结果率",
+      "proxy": false
+    },
+    "work_time_coverage_rate": {
+      "value": 0.888889,
+      "numerator": 8,
+      "denominator": 9,
+      "denominator_basis": "events_with_known_work_time/event_count",
+      "label_zh": "工时覆盖率",
+      "proxy": false
+    },
+    "outcome_evidence_coverage_rate": {
+      "value": 0.666667,
+      "numerator": 6,
+      "denominator": 9,
+      "denominator_basis": "events_with_outcome_evidence/event_count",
+      "label_zh": "结果证据覆盖率",
+      "proxy": false
+    },
+    "verification_debt_proxy_event": {
+      "value": 0.444444,
+      "numerator": 4,
+      "denominator": 9,
+      "denominator_basis": "unverified_events/event_count",
+      "label_zh": "事件验证债务代理",
+      "proxy": true
+    },
+    "legacy_verified_outcome_rate": {
+      "value": 0.73,
+      "denominator_basis": "legacy_mixed_unknown",
+      "compatibility_only": true
+    },
+    "failure_compound": {
+      "compound_score": 0.31,
+      "incident_count": 2,
+      "historical_recurrences": 1,
+      "blocked_recurrences": 1
+    }
+  },
+  "decision": {
+    "primary_use": {
+      "title_zh": "验证与修复",
+      "detail_zh": "3 个事件，占当前样本 33.3%。"
+    },
+    "verified_results": {
+      "title_zh": "5 个已验证结果",
+      "detail_zh": "事件口径 55.6%，分母 9 个事件。"
+    },
+    "low_value_loop": {
+      "title_zh": "结果状态不完整",
+      "detail_zh": "2 个事件缺少可验证结果状态。 验证债务代理为 44.4%。"
+    },
+    "top_action": {
+      "title_zh": "先为当前开发任务补齐一条可读回的生产结果证据。",
+      "detail_zh": "下一次运行新增至少一条 deployed/adopted/recovery/decision 结果，并在刷新后仍可读回。",
+      "recommendation_id": "rec-verification-first",
+      "confidence": 0.78
+    }
+  },
+  "visuals": [
+    {
+      "id": "quality_contribution_grid",
+      "title_zh": "质量加权结果贡献网格",
+      "kind": "GRID",
+      "rows": [
+        {
+          "activity_type": "decision_execution",
+          "event_count": 1,
+          "verified_count": 1,
+          "quality_score": 1.0
+        },
+        {
+          "activity_type": "development_deployment",
+          "event_count": 2,
+          "verified_count": 1,
+          "quality_score": 0.5
+        },
+        {
+          "activity_type": "product_planning",
+          "event_count": 1,
+          "verified_count": 1,
+          "quality_score": 1.0
+        },
+        {
+          "activity_type": "research_diagnosis",
+          "event_count": 2,
+          "verified_count": 0,
+          "quality_score": 0.0
+        },
+        {
+          "activity_type": "verification_repair",
+          "event_count": 3,
+          "verified_count": 2,
+          "quality_score": 0.666667
+        }
+      ]
+    },
+    {
+      "id": "verification_debt_trend",
+      "title_zh": "验证债务与 Time-to-Truth 趋势",
+      "kind": "TREND",
+      "rows": [
+        {
+          "date": "2026-07-27",
+          "event_count": 1,
+          "verified_count": 0,
+          "verification_debt_proxy_event": 1.0,
+          "time_to_truth_hours": null,
+          "time_to_truth_sample_count": 0
+        },
+        {
+          "date": "2026-07-28",
+          "event_count": 1,
+          "verified_count": 1,
+          "verification_debt_proxy_event": 0.5,
+          "time_to_truth_hours": 12.0,
+          "time_to_truth_sample_count": 1
+        },
+        {
+          "date": "2026-07-29",
+          "event_count": 1,
+          "verified_count": 1,
+          "verification_debt_proxy_event": 0.333333,
+          "time_to_truth_hours": 24.0,
+          "time_to_truth_sample_count": 1
+        },
+        {
+          "date": "2026-07-30",
+          "event_count": 1,
+          "verified_count": 1,
+          "verification_debt_proxy_event": 0.25,
+          "time_to_truth_hours": 6.0,
+          "time_to_truth_sample_count": 1
+        },
+        {
+          "date": "2026-07-31",
+          "event_count": 1,
+          "verified_count": 0,
+          "verification_debt_proxy_event": 0.4,
+          "time_to_truth_hours": null,
+          "time_to_truth_sample_count": 0
+        },
+        {
+          "date": "2026-08-01",
+          "event_count": 1,
+          "verified_count": 0,
+          "verification_debt_proxy_event": 0.5,
+          "time_to_truth_hours": null,
+          "time_to_truth_sample_count": 0
+        },
+        {
+          "date": "2026-08-02",
+          "event_count": 1,
+          "verified_count": 1,
+          "verification_debt_proxy_event": 0.428571,
+          "time_to_truth_hours": 8.0,
+          "time_to_truth_sample_count": 1
+        },
+        {
+          "date": "2026-08-03",
+          "event_count": 2,
+          "verified_count": 1,
+          "verification_debt_proxy_event": 0.444444,
+          "time_to_truth_hours": 2.0,
+          "time_to_truth_sample_count": 1
+        }
+      ]
+    },
+    {
+      "id": "task_tool_outcome_heatmap",
+      "title_zh": "任务 × 模型／工具 × 结果热力图",
+      "kind": "HEATMAP",
+      "rows": [
+        {
+          "activity_type": "decision_execution",
+          "model_tool": "GPT",
+          "outcome_state": "decision_impact_verified",
+          "count": 1
+        },
+        {
+          "activity_type": "development_deployment",
+          "model_tool": "Claude Code",
+          "outcome_state": "failed",
+          "count": 1
+        },
+        {
+          "activity_type": "development_deployment",
+          "model_tool": "Codex",
+          "outcome_state": "deployed_verified",
+          "count": 1
+        },
+        {
+          "activity_type": "product_planning",
+          "model_tool": "GPT",
+          "outcome_state": "adopted_verified",
+          "count": 1
+        },
+        {
+          "activity_type": "research_diagnosis",
+          "model_tool": "GPT",
+          "outcome_state": "draft_only",
+          "count": 1
+        },
+        {
+          "activity_type": "research_diagnosis",
+          "model_tool": "GPT",
+          "outcome_state": "unknown",
+          "count": 1
+        },
+        {
+          "activity_type": "verification_repair",
+          "model_tool": "Codex",
+          "outcome_state": "accepted_verified",
+          "count": 1
+        },
+        {
+          "activity_type": "verification_repair",
+          "model_tool": "Verifier",
+          "outcome_state": "recovery_verified",
+          "count": 1
+        },
+        {
+          "activity_type": "verification_repair",
+          "model_tool": "Verifier",
+          "outcome_state": "unknown",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "benchmarks": {
+    "state": "DIRECTION_ONLY",
+    "comparisons": [
+      {
+        "benchmark_id": "openai_2025_doing_share",
+        "label_zh": "ChatGPT 执行型消息占比",
+        "metric_key": "doing_share",
+        "personal_value": 0.4444444444444444,
+        "benchmark_value": 0.4,
+        "unit": "share_of_messages",
+        "comparability_state": "DIRECTION_ONLY",
+        "delta": null,
+        "percentile": null,
+        "reason_zh": "口径不一致：taxonomy_id、unit、window_definition、population_scope、inclusion_rule。",
+        "source": {
+          "publisher": "OpenAI",
+          "title": "How people are using ChatGPT",
+          "source_url": "https://openai.com/index/how-people-are-using-chatgpt/",
+          "published_at": "2025-09-15"
+        }
+      },
+      {
+        "benchmark_id": "openai_2026_task_breadth_ratio",
+        "label_zh": "注册六个月后的任务广度倍数",
+        "metric_key": "task_breadth_ratio",
+        "personal_value": 1.4,
+        "benchmark_value": 2.0,
+        "unit": "ratio_to_initial_month",
+        "comparability_state": "DIRECTION_ONLY",
+        "delta": null,
+        "percentile": null,
+        "reason_zh": "口径不一致：taxonomy_id、unit、window_definition、population_scope、inclusion_rule。",
+        "source": {
+          "publisher": "OpenAI",
+          "title": "How ChatGPT adoption has expanded",
+          "source_url": "https://openai.com/index/how-chatgpt-adoption-has-expanded/",
+          "published_at": "2026-06-30"
+        }
+      },
+      {
+        "benchmark_id": "anthropic_2026_success_association",
+        "label_zh": "高使用经验与任务成功率的关联",
+        "metric_key": "success_rate_association",
+        "personal_value": null,
+        "benchmark_value": 0.04,
+        "unit": "percentage_point_share_as_decimal",
+        "comparability_state": "INSUFFICIENT_DATA",
+        "delta": null,
+        "percentile": null,
+        "reason_zh": "个人指标或样本不足。",
+        "source": {
+          "publisher": "Anthropic",
+          "title": "Economic Index: Learning curves",
+          "source_url": "https://www.anthropic.com/research/anthropic-economic-index-march-2026-report",
+          "published_at": "2026-03-24"
+        }
+      }
+    ],
+    "limitations": [
+      "公开研究不是个人随机对照组。",
+      "不生成个人全球百分位、排名或优劣结论。"
+    ]
+  },
+  "truth": {
+    "metric_contract_version": "memory_atlas.metric_contract.v1",
+    "same_run_evidence": {
+      "r2_readback": {
+        "state": "PASS",
+        "run_id": "synthetic-run-20260803T101500Z",
+        "trace_id": "synthetic-trace-20260803T101500Z",
+        "ref": "receipt:r2_readback:synthetic"
+      },
+      "private_database_readback": {
+        "state": "PASS",
+        "run_id": "synthetic-run-20260803T101500Z",
+        "trace_id": "synthetic-trace-20260803T101500Z",
+        "ref": "receipt:private_database_readback:synthetic"
+      },
+      "ovh_reconcile": {
+        "state": "PASS",
+        "run_id": "synthetic-run-20260803T101500Z",
+        "trace_id": "synthetic-trace-20260803T101500Z",
+        "ref": "receipt:ovh_reconcile:synthetic"
+      },
+      "status_projection": {
+        "state": "NOT_RUN",
+        "run_id": null,
+        "trace_id": null,
+        "ref": null
+      }
+    },
+    "historical_snapshot_role": "HISTORICAL_ATLAS_ONLY_NOT_LIVE_TRUTH",
+    "limitations": [
+      "验证债务是代理指标，不是错误率或个人正确率。",
+      "公开 Benchmark 只有完全同口径时才允许直接差值。",
+      "浏览器收到时间不等于数据生成时间。"
+    ]
+  },
+  "privacy": {
+    "raw_content_included": false,
+    "secret_values_included": false,
+    "private_paths_included": false,
+    "object_keys_included": false
+  }
+}

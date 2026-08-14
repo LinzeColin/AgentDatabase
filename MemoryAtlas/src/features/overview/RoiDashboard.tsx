@@ -1,3 +1,4 @@
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 import { metricValues } from "../../data/atlas";
 import type { AtlasNode, MemoryAtlas } from "../../types";
 import { DeltaStats } from "../../shared/atlas/contracts";
@@ -48,7 +49,7 @@ export function RoiDashboard({
       <section className="wide-panel">
         <div className="panel-title-row">
           <h2>优先观察的高杠杆记忆</h2>
-          <span>当前分类热点：{topEntry(categoryValues)?.[0] ?? "暂无"}</span>
+          <span>当前分类热点：{humanizeMachineText(topEntry(categoryValues)?.[0] ?? "暂无")}</span>
         </div>
         <ol>
           {highLeverage.map((node) => (

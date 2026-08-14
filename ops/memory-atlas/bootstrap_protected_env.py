@@ -102,7 +102,13 @@ def validate_candidate(candidate: Candidate, primary_prefix: str) -> dict[str, o
     payload = b'{"memory_atlas":"bootstrap"}\n'
     try:
         client.head_bucket(Bucket=candidate.bucket)
-        client.put_object(Bucket=candidate.bucket, Key=key, Body=payload, Metadata={"purpose": "memory-atlas-preflight"})
+        client.put_object(
+            Bucket=candidate.bucket,
+            Key=key,
+            Body=payload,
+            Metadata={"purpose": "memory-atlas-preflight"},
+            StorageClass="STANDARD",
+        )
         observed = client.get_object(Bucket=candidate.bucket, Key=key)["Body"].read()
         if observed != payload:
             return {"state": "FAIL", "source": candidate.source.name, "reason": "readback_mismatch"}

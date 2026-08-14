@@ -1,0 +1,19 @@
+{
+  "schema_version": "memory_atlas.preservation_browser.v1",
+  "base": "http://127.0.0.1:8090",
+  "pass": false,
+  "rows": [
+    {
+      "id": "BROWSER-execution",
+      "pass": false,
+      "evidence": "page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"http://127.0.0.1:8090/\", waiting until \"networkidle\"\n\n    at /Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/MemoryAtlas/scripts/validate_existing_memory_atlas_preservation_browser.cjs:13:16"
+    }
+  ],
+  "failed": [
+    {
+      "id": "BROWSER-execution",
+      "pass": false,
+      "evidence": "page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"http://127.0.0.1:8090/\", waiting until \"networkidle\"\n\n    at /Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/MemoryAtlas/scripts/validate_existing_memory_atlas_preservation_browser.cjs:13:16"
+    }
+  ]
+}

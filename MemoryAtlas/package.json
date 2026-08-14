@@ -192,7 +192,12 @@
     "validate:v31:typescript": "node scripts/validate_memory_atlas_v31_typescript.cjs",
     "validate:v31:browser": "node scripts/validate_memory_atlas_v31_incremental_browser.cjs",
     "validate:preservation": "node scripts/validate_existing_memory_atlas_preservation.cjs",
-    "validate:preservation:browser": "node scripts/validate_existing_memory_atlas_preservation_browser.cjs"
+    "validate:preservation:browser": "node scripts/validate_existing_memory_atlas_preservation_browser.cjs",
+    "validate:v32:a11y": "node scripts/audit_reality_panel_v32.mjs",
+    "validate:v32:rollback": "node scripts/verify_live_snapshot_rollback_v32.mjs",
+    "validate:v32:browser-receipt": "node scripts/capture_browser_receipt.mjs",
+    "validate:v32:degraded": "node scripts/capture_degraded_receipts_v32.mjs",
+    "validate:v32:chinese": "node scripts/audit_chinese_ui_v32.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.1",

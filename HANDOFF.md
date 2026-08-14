@@ -1857,3 +1857,88 @@ To github.com:LinzeColin/AgentDatabase.git
    ★★ 若移交前还有新会话，**收工时按上面那两条命令再导一次**即可。
    ★ 顺带核清：`README.md` 未被索引覆盖是**对的**（索引是「一行一条教训」，
    README 是说明），别拿「文件数 vs 索引数差 1」当问题查。
+
+
+---
+
+# 附：仓根接手入口（原 `HANDOFF.md`，2026-08-12 由 PR #9 合入 main）
+
+> ★★ **2026-08-14 合并说明。** 本文件与 `origin/main` 上那份同名文件在合并时冲突
+> （两边各自新建）。处置：**以本文件为准，把 main 那份独有的五节接在下面**，
+> 并改掉其中**已经不成立**的两节：
+>
+> | main 那份写的 | 2026-08-14 实况 |
+> |---|---|
+> | 「分支只存在于一个 git bundle 里，先 `gh release download` 恢复工作树」 | **已作废** —— 分支就在 `origin/claude/character-distillation-skill-reorganize-d57595`，直接 `git fetch` 即可 |
+> | 「现在做到哪：延后名单 5 条」 | **已作废** —— 现测 **185 条**；当前实况见本文件第 2 节 |
+>
+> ★ 为什么当初推不上去、现在能推：那份文档给的理由是「含 `_教训库/`，
+> 且 2.3 GB 会被 200 MB 体积闸拒绝」。**两条都已处理**：
+> 语料 1,993 MB 与教训库 338 份都已从历史里剥掉
+> （`_pipeline/check_corpus_not_in_git.py`、`check_private_assets_not_public.py`
+> 是执行这两条规则的判据，推之前各跑一次）。
+> **教训库仍然不在本仓** —— 它在 `Private-AgentDatabase/claude-memory/`。
+
+## 三本台账在哪（决定"下一个做谁"，缺了就断线）
+
+**单独存了一份**，直接取：
+
+```bash
+python3 <任一源仓>/private_db_client.py get Private-AgentDatabase \
+  persona-distiller-ledgers/_蒸馏队列.json ./_蒸馏队列.json
+# 另两份：persona-distiller-ledgers/_延后名单.json、persona-distiller-ledgers/_卒年.json
+```
+
+## 别人踩过的坑（开工前扫一眼，省得重踩）
+
+```bash
+python3 <任一源仓>/private_db_client.py get Private-AgentDatabase \
+  claude-memory/README.md ./lessons.md
+```
+
+`Private-AgentDatabase/claude-memory/` 有 129 条实际踩过的教训，`README.md` 是「最贵的十条」，一屏读完。
+入口也写在 `LinzeColin/Governance` 的 `AGENTS.md` 里。
+
+## 规矩在哪（按优先级，冲突时上面的赢）
+
+1. **本机七条铁律** —— `~/Documents/Codex/GithubProject/README.md`
+   （按需 clone / **主树只读、开发一律在 worktree** / 谁开的谁收 / 不跨仓 /
+   `_protected/` 永不删永不传 / `_scratch/` 放临时物 / 云端零付费）
+2. **跨仓治理** —— `LinzeColin/Governance`（私有）：双平面七文件、三道门、数据落地铁律
+3. **部署事实与已知事故** —— `LinzeColin/Private-Database` 的 `OPS/AGENT_ONBOARDING.md`
+4. **本项目锁定项** —— `_ledgers/_决策台账.md`（恢复工作树后可见）
+
+## 判据怎么跑
+
+```bash
+# 受保护资产完好性（每次开工第零步，必做）
+python3 CodexSkills/registry/codex/persona-distiller-group/scripts/validate_group.py \
+  --registry-root CodexSkills/registry/codex/persona-distiller-group
+```
+
+`passed=true` 且 `products` **不少于** `_决策台账.md` 末尾记录的数字才继续。
+少了就是事故 —— **停下先恢复**，且方向永远是「仓库 → 本机」，绝不用本机副本覆盖仓库。
+（2026-07-26 出过一次：例行同步反向覆盖，`team-index.json` 从 70 人掉到 3 人。）
+
+## 云端三个站点怎么部署（2026-08-12 起统一）
+
+`LinzeColin/MetaDatabase` 里三个 Cloudflare Worker **各有认可的部署入口，不要裸跑 `wrangler deploy`**：
+
+| 站点 | 入口 |
+|---|---|
+| `adp.linzezhang.com` | `arxiv-daily-push/deploy/cloudflare/deploy.py` |
+| `eei.linzezhang.com` | `EEI/scripts/deploy_cloud.sh` |
+| `weread.linzezhang.com` | `WeReadPort` 里 `npm run deploy:cloudflare` |
+
+三个脚本都会：部署前取回线上变量（缺一个就拒绝部署）→ 部署 → 回读线上确认 → 不过自动回滚。
+**裸跑 `wrangler deploy` 会用配置文件替换线上 vars**（secret 保留、plain_text 不保留）——
+2026-08-12 真发生过一次，站点断了 3 分钟。
+
+## 还悬着的三件事
+
+1. **jobhunt 验收停在「不确定」** —— 核心链路在注册＋邮箱验证之后，验收方不能替 Owner 创建账户。
+   解法写在 `MetaDatabase/JobHuntBotOnline/OWNER_WALKTHROUGH_20260811.md`：先给 Owner 一条不用邮箱的入口。
+2. **`real-arxiv-30-day-backfill` 那道门过不去** —— 要求 30 天里每天都有排队行，实测只有 11 天有；
+   是阈值设错还是重放逻辑该产出而没产出，要写它的人判。详见 MetaDatabase PR #182 的评论。
+3. **ADP 的 `arxiv:TimeoutError` 根因未查** —— 33 天里 5 次，那 5 天主源整个缺席。
+   现在至少不会再被静默算成「正常」（PR #184）。

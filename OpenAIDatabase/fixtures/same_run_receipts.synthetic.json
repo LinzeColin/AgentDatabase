@@ -1,0 +1,62 @@
+{
+  "schema_version": "memory_atlas.same_run_receipts.v1",
+  "fixture_kind": "SYNTHETIC_NO_PRODUCTION_CLAIM",
+  "receipts": {
+    "r2_readback": {
+      "state": "PASS",
+      "run_id": "synthetic-run-20260803T101500Z",
+      "trace_id": "synthetic-trace-20260803T101500Z",
+      "release_id": null,
+      "ref": "synthetic:r2_readback",
+      "deployment_revision": null
+    },
+    "private_database_readback": {
+      "state": "PASS",
+      "run_id": "synthetic-run-20260803T101500Z",
+      "trace_id": "synthetic-trace-20260803T101500Z",
+      "release_id": null,
+      "ref": "synthetic:private_database_readback",
+      "deployment_revision": null
+    },
+    "ovh_reconcile": {
+      "state": "PASS",
+      "run_id": "synthetic-run-20260803T101500Z",
+      "trace_id": "synthetic-trace-20260803T101500Z",
+      "release_id": null,
+      "ref": "synthetic:ovh_reconcile",
+      "deployment_revision": null
+    },
+    "api_snapshot": {
+      "state": "PASS",
+      "run_id": "synthetic-run-20260803T101500Z",
+      "trace_id": "synthetic-trace-20260803T101500Z",
+      "release_id": "20260803T101000Z-d8e343c7590e",
+      "ref": "synthetic:api_snapshot",
+      "deployment_revision": "memory-atlas-blue-synthetic"
+    },
+    "browser_receipt": {
+      "state": "PASS",
+      "run_id": "synthetic-run-20260803T101500Z",
+      "trace_id": "synthetic-trace-20260803T101500Z",
+      "release_id": "20260803T101000Z-d8e343c7590e",
+      "ref": "synthetic:browser_receipt",
+      "deployment_revision": "memory-atlas-blue-synthetic"
+    },
+    "status_projection": {
+      "state": "PASS",
+      "run_id": "synthetic-run-20260803T101500Z",
+      "trace_id": "synthetic-trace-20260803T101500Z",
+      "release_id": "20260803T101000Z-d8e343c7590e",
+      "ref": "synthetic:status_projection",
+      "deployment_revision": "memory-atlas-blue-synthetic"
+    },
+    "restore_receipt": {
+      "state": "PASS",
+      "run_id": "synthetic-run-20260803T101500Z",
+      "trace_id": "synthetic-trace-20260803T101500Z",
+      "release_id": "20260803T101000Z-d8e343c7590e",
+      "ref": "synthetic:restore_receipt",
+      "deployment_revision": "memory-atlas-blue-synthetic"
+    }
+  }
+}

@@ -9,6 +9,13 @@ import { formatScore, translateAction, translateStaleness } from "./utils";
 
 
 
+const VIEW_NAMES: Record<string, string> = {
+  home: "首页", galaxy: "语义银河", notion: "数据导图", roi: "价值面板",
+  obsidian: "关系图", timeline: "时间河", contribution: "贡献网格",
+  wordcloud: "词云", search: "搜索复核", summary: "总结迭代", inspector: "检视台",
+};
+const viewNameLabel = (value: string): string => VIEW_NAMES[value] ?? value;
+
 export function buildInspectorExplanation(node: AtlasNode, edgeCount: number, sharedState: SharedAtlasState): InspectorExplanation {
   const tierScore = modelTierScore(node.memory_tier);
   const importanceScore = modelImportanceScore(node.importance);
@@ -33,14 +40,14 @@ export function buildInspectorExplanation(node: AtlasNode, edgeCount: number, sh
         parameters: `tier=${tierScore.toFixed(2)}, importance=${importanceScore.toFixed(2)}, confidence=${confidenceScore.toFixed(2)}`,
       },
       {
-        label: "ROI Leverage",
+        label: "价值杠杆",
         value: `${formatScore(leverageValue)} · ${translateAction(node.metrics?.roi?.recommended_action)}`,
         formula: "leverage_score = max(0, memory_weight + decision_impact*0.15 - sensitivity_penalty)",
         parameters: `decision_impact=${decisionImpact}, sensitivity_penalty=${sensitivityPenalty.toFixed(2)}, stale=${translateStaleness(node.metrics?.roi?.staleness_status)}`,
       },
       {
         label: "共享焦点",
-        value: `${sharedState.sync.updatedBy} · r${sharedState.sync.revision}`,
+        value: `${viewNameLabel(sharedState.sync.updatedBy)} · 第 ${sharedState.sync.revision} 次同步`,
         formula: "sharedAtlasReducer -> focus(inspector/home/galaxy/timeline/roi)",
         parameters: `node=${focusNode}, cluster=${sharedState.focus.inspector.clusterId ?? "none"}`,
       },

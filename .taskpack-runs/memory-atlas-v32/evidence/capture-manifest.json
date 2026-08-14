@@ -1,0 +1,10 @@
+{
+  "schema_version": "memory_atlas.evidence_capture.v1",
+  "captured_at": "2026-08-05T02:41:58Z",
+  "finished_at": "2026-08-05T02:43:17Z",
+  "head_commit": "4a24a0feeb9a36ad9e88ce00170546025f67b048",
+  "last_code_commit": "4a24a0feeb9a36ad9e88ce00170546025f67b048",
+  "deployed_release": "20260805T023349Z-4a24a0feeb9a",
+  "gate_exit_code": 0,
+  "read_only": true
+}

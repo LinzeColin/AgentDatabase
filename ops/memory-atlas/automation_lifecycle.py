@@ -8,7 +8,37 @@ import os
 import shutil
 import sys
 import tempfile
-import tomllib
+try:  # 3.11+
+    import tomllib
+except ModuleNotFoundError:  # 3.9/3.10 — the Owner's system interpreter is 3.9.6
+    try:
+        import tomli as tomllib  # type: ignore[no-redef]
+    except ModuleNotFoundError:  # pragma: no cover - exercised only without tomli
+        import re as _re
+
+        class tomllib:  # type: ignore[no-redef]
+            """Minimal reader for the flat `key = "value"` automation.toml only.
+
+            Not a TOML implementation: it exists so the repository's own gate is
+            runnable on the interpreter the Owner actually has. Anything with a
+            table header, an array or a multiline string raises rather than
+            silently returning a wrong parse.
+            """
+
+            _PAIR = _re.compile(r'^([A-Za-z0-9_.-]+)\s*=\s*"([^"]*)"$')
+
+            @staticmethod
+            def load(handle: Any) -> dict[str, Any]:
+                value: dict[str, Any] = {}
+                for raw in handle.read().decode("utf-8").splitlines():
+                    line = raw.strip()
+                    if not line or line.startswith("#"):
+                        continue
+                    match = tomllib._PAIR.match(line)
+                    if not match:
+                        raise ValueError(f"unsupported TOML line for the fallback reader: {line!r}")
+                    value[match.group(1)] = match.group(2)
+                return value
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any

@@ -1,0 +1,47 @@
+{
+  "schema_version": "memory_atlas.degraded_scenarios.v1",
+  "scenarios": [
+    {
+      "scenario": "01-healthy",
+      "file": "01-healthy.json",
+      "expected_product_state": "PASS",
+      "expected_freshness_state": "FRESH",
+      "reason_zh": "云端权威和本批来源均在新鲜度目标内。"
+    },
+    {
+      "scenario": "02-tier-b-local-source-missing",
+      "file": "02-tier-b-local-source-missing.json",
+      "expected_product_state": "DEGRADED",
+      "expected_freshness_state": "DEGRADED",
+      "reason_zh": "云端必需权威可用，但以下来源未更新：ChatGPT 导出；相关指标按陈旧处理。"
+    },
+    {
+      "scenario": "03-optional-cloud-backup-missing",
+      "file": "03-optional-cloud-backup-missing.json",
+      "expected_product_state": "DEGRADED",
+      "expected_freshness_state": "DEGRADED",
+      "reason_zh": "云端必需权威可用，但以下来源未更新：GitHub 私有仓全量备份；相关指标按陈旧处理。"
+    },
+    {
+      "scenario": "04-stale-but-healthy",
+      "file": "04-stale-but-healthy.json",
+      "expected_product_state": "DEGRADED",
+      "expected_freshness_state": "STALE",
+      "reason_zh": "最近成功源运行已超过 1800 秒新鲜度目标。"
+    },
+    {
+      "scenario": "05-required-cloud-authority-failed",
+      "file": "05-required-cloud-authority-failed.json",
+      "expected_product_state": "FAILED",
+      "expected_freshness_state": "DEGRADED",
+      "reason_zh": "至少一个产品必需的云端权威不可用：R2 主对象字节、R2 归一化事件流；系统不能宣称最新。"
+    },
+    {
+      "scenario": "06-recovered",
+      "file": "06-recovered.json",
+      "expected_product_state": "PASS",
+      "expected_freshness_state": "FRESH",
+      "reason_zh": "云端权威和本批来源均在新鲜度目标内。"
+    }
+  ]
+}

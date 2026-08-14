@@ -1,0 +1,67 @@
+{
+  "schema_version": "memory_atlas.real_golden_transaction.v1",
+  "task": "T09",
+  "verdict": "PASS",
+  "executed_at": "2026-08-05T01:37:00Z",
+  "note_zh": "针对当前 release 重跑；此前的回执锚在 2026-08-04 11:19，复审据此判为「不是最新 Candidate」。",
+  "session": {
+    "route": "Owner 自己的 Cloudflare Access 会话",
+    "credential_created": false,
+    "access_policy_changed": false,
+    "secret_seen_by_agent": false
+  },
+  "run": {
+    "run_id": "marun_d8019f85ea1cda749470ece6",
+    "trace_id": "marun_d8019f85ea1cda749470ece6",
+    "source_state": "REBUILT_FROM_AUTHORITIES",
+    "source_completed_at": "2026-08-04T22:34:36+00:00"
+  },
+  "release": {
+    "identity_state": "OBSERVED",
+    "release_id": "20260805T012031Z-41f16fb68ea6",
+    "repository_commit": "41f16fb68ea6f6d001cdd7e18cc640312ae4da37",
+    "artifact_digest": "a9831e04c37a74c9b1acb0e13d8c23c181ff8ed07a202111e83fd02d94803f95",
+    "deployment_revision": "20260805T012031Z-41f16fb68ea6"
+  },
+  "analysis": {
+    "event_count": 127712,
+    "union_note_zh": "114,024 本跑 + 14,471 仅存在于全量 union = 127,712"
+  },
+  "visuals": [
+    "质量加权结果贡献网格",
+    "验证债务与 Time-to-Truth 趋势",
+    "任务 × 模型／工具 × 结果热力图"
+  ],
+  "decision_answers": [
+    "主要用途",
+    "现实结果",
+    "最大缺口",
+    "今天唯一动作"
+  ],
+  "same_run_evidence": {
+    "canonical_source_readback": "PASS",
+    "private_database_readback": "PASS",
+    "ovh_reconcile": "PASS",
+    "status_projection": "PASS",
+    "r2_readback": "PASS"
+  },
+  "coverage": {
+    "product_state": "PASS",
+    "tier_a": "5/5"
+  },
+  "api_to_chart": {
+    "api_event_count": 127712,
+    "chart_event_count": 127712,
+    "equal": true
+  },
+  "page_issued_its_own_reads": [
+    "/memory_atlas.json",
+    "/api/v31/live-snapshot",
+    "/api/v31/status"
+  ],
+  "http": {
+    "live_snapshot": 200,
+    "atlas": 200,
+    "status": 200
+  }
+}

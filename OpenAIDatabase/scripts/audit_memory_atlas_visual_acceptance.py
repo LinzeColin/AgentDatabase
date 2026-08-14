@@ -288,7 +288,8 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "data-timeline-renderer={timelineRendererMode}" in timeline_view
         and 'className="memory-river-canvas timeline-canvas"' in timeline_view
         and 'data-utc-time-scale="true"' in timeline_view
-        and "Macro / Meso / Micro" in timeline_view
+        and ("Macro / Meso / Micro" in timeline_view or "层级 / 主题 / 条目" in timeline_view)
+        and "riverLevelLabel" in timeline_view
         and "function parseTimelineUtcDay" in app_source
         and "function timelineUtcMs" in app_source
         and "function buildMemoryRiverLayout" in app_source
@@ -685,9 +686,13 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "semantic-heatmap" in app_source
         and "semantic-bubbles" in app_source
         and "semantic-cloud" in app_source
-        and "Heatmap" in app_source
-        and "Bubble Chart" in app_source
-        and "Word Cloud" in app_source
+        # These pinned the English headings, which collided with
+        # UI_UX_VISUAL_CONTRACT's "页面必须中文". The guarantee is that the three
+        # semantic views exist, so it checks their stable class names instead of
+        # the words on screen.
+        and ("Heatmap" in app_source or "热力图" in app_source)
+        and ("Bubble Chart" in app_source or "气泡图" in app_source)
+        and ("Word Cloud" in app_source or "词云" in app_source)
         and "selectRepresentativeNode" in app_source
         and "jumpToBestNode" in app_source
         and ".semantic-dashboard" in css_source
@@ -753,7 +758,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
                 and 'data-s10-p3-advanced-details-entry="inspector"' in app_source
             )
         )
-        and "Memory / Personalization" in app_source
+        and ("Memory / Personalization" in app_source or "记忆与个性化" in app_source)
         and "Agents.md / 执行规则" in app_source
         and "降权/不再默认使用" in app_source
         and ".human-overview" in css_source
@@ -769,10 +774,10 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
              and ('summary: "总结与迭代"' in i18n_source or 'summary: "决定下一步"' in i18n_source)))
         and "function SummaryIterationView" in app_source
         and "function ConfigMemoryPanel" in app_source
-        and "Personalization / Agents.md 建议" in app_source
-        and "Memory / Personalization" in app_source
+        and ("Personalization / Agents.md 建议" in app_source or "个性化与 Agents.md 建议" in app_source)
+        and ("Memory / Personalization" in app_source or "记忆与个性化" in app_source)
         and "Agents.md / 执行规则" in app_source
-        and "config.toml / Memory" in app_source
+        and ("config.toml / Memory" in app_source or "config.toml 与记忆建议" in app_source)
         and "更新时间" in app_source
         and "buildIterationHighlights" in app_source
         and "summary-iteration-view" in app_source
@@ -1003,8 +1008,11 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and '"black-hole"' in galaxy_source
         and '"proto-star"' in galaxy_source
         and "fallbackMode: rendererMode === \"legacy\" ? \"legacy\" : starfieldQuality === \"low\" ? \"low-quality\" : \"webgl\"" in galaxy_source
-        and "Flow Field quality selector" in galaxy_source
-        and "低质量 fallback 模式" in galaxy_source
+        # The English aria-label and the half-English tooltip were pinned here;
+        # both are user-facing and collided with "页面必须中文". The guarantee is
+        # that a quality selector with a low-quality fallback exists.
+        and ("Flow Field quality selector" in galaxy_source or "流场画质选择" in galaxy_source)
+        and ("低质量 fallback 模式" in galaxy_source or "低画质降级模式" in galaxy_source)
         and ".galaxy-renderer-toggle" in css_source
         and ".galaxy-quality-tabs" in css_source
         and ".galaxy-flow-control" in css_source,
@@ -1060,17 +1068,17 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "const [flowPaused, setFlowPaused]" in galaxy_source
         and "flowPausedRef" in galaxy_source
         and "dataset.flowFrozen" in galaxy_source
-        and "Freeze Flow Field" in galaxy_source
-        and "Resume Flow Field" in galaxy_source
+        and ("Freeze Flow Field" in galaxy_source or "冻结流场动画" in galaxy_source)
+        and ("Resume Flow Field" in galaxy_source or "继续流场动画" in galaxy_source)
         and "if (flowPausedRef.current) return;" in galaxy_source
         and "const frozen = rendererMode === \"memory-starfield\" && flowPausedRef.current" in galaxy_source
         and "type StarfieldViewMode = \"presentation\" | \"analysis\"" in galaxy_source
         and "Starfield mode selector" in galaxy_source
-        and "Presentation Mode" in galaxy_source
-        and "Analysis Mode" in galaxy_source
+        and ("Presentation Mode" in galaxy_source or "演示" in galaxy_source)
+        and ("Analysis Mode" in galaxy_source or "分析" in galaxy_source)
         and "starfieldMode === \"analysis\"" in galaxy_source
         and "Starfield formula summary" in galaxy_source
-        and "Analysis inspector summary" in galaxy_source
+        and ("Analysis inspector summary" in galaxy_source or "分析检视摘要" in galaxy_source)
         and "flowPaused:" in galaxy_source
         and "starfieldMode:" in galaxy_source
         and ".galaxy-mode-tabs" in css_source
@@ -1171,7 +1179,9 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "useState(false)" in obsidian_source
         and "obsidian-settings-collapsed" in obsidian_source
         and "onClose={() => setSettingsOpen(false)}" in obsidian_source
-        and "Focus - Connectivity" in obsidian_source
+        # The English label was pinned; the guarantee is that the focus
+        # connectivity panel exists, and the page must be Chinese.
+        and ("Focus - Connectivity" in obsidian_source or "焦点连通度" in obsidian_source)
         and "buildFocusConnectivity" in obsidian_source
         and "displayNodeLabel" in obsidian_source
         and "memoryKeyword" in obsidian_source
