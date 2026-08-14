@@ -252,3 +252,49 @@ Ludwig von Wolzogen、女婿 Petr Figulus），**这卷确实是他的往还**�
 - 那 **17 封 `?`** 没有逐封读（只有问候语开头，抬头判不出方向）；
 - **一份都没有进工作区** —— 落账要连 manifest 指针、`rights_basis`、`locator` 一起做，
   且语料不进 git（[[corpus-lives-outside-git-verify-the-pointers]]）。
+
+## ★★★ 17 封 `?` 逐封读完了：**121 封里他自己的 96 封／81,320 词（88.5%）**
+
+    切出 121 封｜**机器判出 104 封、人读定案 17 封**
+      HIS-OWN  **96** 封｜**81,320 词（88.5%）**
+      OTHER     24 封｜10,378 词（11.3%）
+      ?          1 封｜   144 词（ 0.2%）
+
+人读的依据是**信末署名与第四页的收信人地址**，逐条原文写进
+`_ledgers/_decisions/comenius-1892-korrespondence.json`（**没有证据原文的裁定不许生效**，
+工具会 raise）。判成 OTHER 的那 8 封，署名分别是
+`Joh. Duraeus`（John Dury）、`Petrus Kochlewski`、`Joh. Tolnai`（两封）、`Rákóczy`、
+`Geo. Sadovius`、`Stephan Metis`，以及一封波兰文的**长老团集体文书**
+（后人批注 `uczyniona a Senioribus Unitatis 1650`）。
+
+★ **`CXXXVI` 读过仍判不出**（144 词，致但泽 Clemens Colmer 等人的呼吁，OCR 里没有署名）
+  —— 留 `?`，**不许当成他的**。[[empty-default-swallows-unknown]]
+
+### 为什么裁定走单独文件、不塞进正则
+
+依据是署名，而署名那把尺子在本卷只判得出 **31/121** 且带正文误报
+（`dominus Wolzogen, cum generosis…` 是正文里提到）。
+**它不能当规则，只能当人读时的证据。** 塞进正则就等于让一把已知不可靠的尺子去判全库。
+[[two-checkers-same-text-different-rules]]
+
+## 已落盘：121 份切片进了 `raw/`，**台账一个字没动**
+
+    raw/kram1892-<罗马数字>.txt         ×121（**平铺**，见下）
+    raw/_kram1892-slices.json           逐封 sha256 ＋ 方向 ＋ 判据 ＋ 配方 ＋ 权利依据
+    逐份回读哈希不符：**0**
+
+★★ **必须平铺在 `raw/` 下**：`.gitignore` 的规则是 `*/workspaces/*/raw/*.txt`，**只盖一层**。
+放进 `raw/<子目录>/` 就不会被忽略，121 份语料会直接进 git。
+落盘后实测 `git status --untracked-files=all`：**未跟踪的 `.txt` 数 = 0**，
+只有那个 manifest 露出来（它本来就该进 git —— 语料不进、指针进）。
+[[git-status-folds-untracked-dirs]]｜[[corpus-lives-outside-git-verify-the-pointers]]
+
+## ★ 还差最后一趟（**明说未做**）
+
+接进 `source-ledger.jsonl` 要**连同重跑 `classify_primary` / `assign_lanes` /
+`assign_holdout` 一起做，是完整一趟，不是补 96 行**。本会话没起这一趟：
+起到一半停下会让台账与各项测量互相矛盾，比不起更糟。
+[[batch-changes-then-verify-once]]
+
+材料已经全部就位且可复现：切片在 `raw/`、哈希在 manifest、裁定在 `_decisions/`、
+工具在 `_ledgers/_pipeline/slice_letter_volume.py`（自测 35 条）。

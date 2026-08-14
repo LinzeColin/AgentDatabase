@@ -112,6 +112,27 @@ def split_by_marker(text: str):
     return out
 
 
+def apply_decisions(rows, decisions):
+    """把**人读过之后的裁定**盖到机器判定上。**纯函数**，返回新列表。
+
+    ★★ 为什么单独走一个文件、不写进正则：
+      裁定的依据是**信末署名**（`Tuus totus J. Tolnai.`／`devotus cliens Comenius`），
+      而署名那把尺子[[two-checkers-same-text-different-rules]]在本卷上只判得出 31/121、
+      还带正文误报 —— **它不能当规则，只能当人读时的证据**。
+      把人读出来的结论塞回正则，就等于让一把已知不可靠的尺子去判全库。
+    ★ 每条裁定必须带 `证据` 原文；没有证据的裁定不许生效（下面会 raise）。
+    """
+    out = []
+    for r in rows:
+        d = decisions.get(r["编号"])
+        if d and r["方向"] == "?":
+            if not str(d.get("证据") or "").strip():
+                raise ValueError(f"{r['编号']} 的裁定没有写证据原文 —— 不许生效")
+            r = dict(r, 方向=d["方向"], 判据=f"**人读定案**：{d['证据'][:88]}")
+        out.append(r)
+    return out
+
+
 def direction(head: str):
     """抬头 → (`HIS-OWN` / `OTHER` / `?`, 命中的理由)。**纯函数**。
 
@@ -210,6 +231,8 @@ def main() -> int:
     ap.add_argument("--from", dest="lo", type=float, default=0.0, help="只看全文的这个起点比例")
     ap.add_argument("--to", dest="hi", type=float, default=1.0)
     ap.add_argument("--out", help="给了才切片落盘；不给只报")
+    ap.add_argument("--decisions", help="人读过 `?` 之后的裁定 JSON"
+                    "（{编号: {方向, 证据}}）——**每条必须带证据原文**")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
     if a.self_test:
@@ -233,10 +256,20 @@ def main() -> int:
                      "词数": len(body.split()),
                      "sha256": hashlib.sha256(body.encode("utf-8")).hexdigest()})
 
+    n_auto = sum(1 for r in rows if r["方向"] == "?")
+    if a.decisions:
+        dec = json.loads(pathlib.Path(a.decisions).read_text(encoding="utf-8"))
+        rows = apply_decisions(rows, dec.get("裁定", dec))
+        tally = {k: sum(1 for r in rows if r["方向"] == k) for k in ("HIS-OWN", "OTHER", "?")}
+
     print(f"★★ **分母**：{a.text}｜取全文 {a.lo:.0%}–{a.hi:.0%} 段（{len(seg_txt):,} 字）"
           f" → **切出 {len(segs)} 封**\n")
     print(f"   HIS-OWN **{tally['HIS-OWN']}**｜OTHER **{tally['OTHER']}**"
           f"｜**?（要人读）{tally['?']}**")
+    if a.decisions:
+        n_hand = sum(1 for r in rows if str(r["判据"]).startswith("**人读定案**"))
+        print(f"   ★ 其中**机器判出 {len(rows) - n_auto} 封、人读定案 {n_hand} 封**"
+              f"（机器原本判不出 {n_auto} 封）")
     w = {k: sum(r["词数"] for r in rows if r["方向"] == k) for k in tally}
     tot = sum(w.values()) or 1
     print(f"   按词数：HIS-OWN {w['HIS-OWN']:,}（{w['HIS-OWN']/tot:.1%}）"

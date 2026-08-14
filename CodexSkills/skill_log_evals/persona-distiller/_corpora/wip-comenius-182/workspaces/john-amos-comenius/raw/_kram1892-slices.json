@@ -1,0 +1,1099 @@
+{
+ "★ 状态": "**已落盘、未进台账**。source-ledger.jsonl 一个字都没动 —— 接进台账要连同重跑 classify_primary / assign_lanes / assign_holdout 一起做，是完整一趟，不是补一行。",
+ "源": "kramerius5.nkp.cz uuid:32d4d830-bcc0-11e4-9541-005056827e51（1892，A. Patera 编《Korrespondence》）",
+ "配方": "取全文 0.05–0.7 段，按 `^[IVXLCDM]+\\.$` 独立成行切；再按 `_ledgers/_decisions/comenius-1892-korrespondence.json` 盖上人读定案",
+ "★ 权利依据": "出版年 1892 ≤ PD 分界；dostupnost=public，未绕任何访问控制",
+ "★ 口径": "`方向=HIS-OWN` 才可作一手；`OTHER` 是他收到的信或第三方之间的信；`?` **不许当成他的**",
+ "封数": 121,
+ "逐封": [
+  {
+   "编号": "IV",
+   "local_path": "raw/kram1892-IV.txt",
+   "抬头": "Ad M. Abrahamům Mencelium.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 419,
+   "sha256": "dc032cb78c9a0f8c4b8e93d7c1b09c26bc639ce622ff0dccf9e1e1cb391f38ef"
+  },
+  {
+   "编号": "V",
+   "local_path": "raw/kram1892-V.txt",
+   "抬头": "Ad eundem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 265,
+   "sha256": "52b297528d14b23e2c85c8664188467ad2150ff25f3fb4b9af9b216f77ac6a19"
+  },
+  {
+   "编号": "VI",
+   "local_path": "raw/kram1892-VI.txt",
+   "抬头": "Ad Henricum Dobrzikovium.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 712,
+   "sha256": "ba6e142d8f4071ef8bed00f2ed21cce3324db822e13b257f40130e9a4fba26dd"
+  },
+  {
+   "编号": "VII",
+   "local_path": "raw/kram1892-VII.txt",
+   "抬头": "Ad illustrissimum D D. Palatinum Belzensem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 663,
+   "sha256": "fe05c1414347a43bda981d5abd5f561b662b581323f560ceb126d2d0b83b0684"
+  },
+  {
+   "编号": "VIII",
+   "local_path": "raw/kram1892-VIII.txt",
+   "抬头": "Ad D. Seniorem Paliurum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 245,
+   "sha256": "738e20178e4ae1867c305502984ff8afbdabb7dcdcb8430a69518ca2dfce466c"
+  },
+  {
+   "编号": "IX",
+   "local_path": "raw/kram1892-IX.txt",
+   "抬头": "Ad D. Jonstonum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 49,
+   "sha256": "ed864d6e05f659e95c01c1de58e7349dd80e1bba40b913baf8df7830aa08f67b"
+  },
+  {
+   "编号": "X",
+   "local_path": "raw/kram1892-X.txt",
+   "抬头": "Ad D. Joh. Mochingerum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 611,
+   "sha256": "71846559739c84a59449e05af82ff45f0c5b038a1278a9d939017d13357777c9"
+  },
+  {
+   "编号": "XI",
+   "local_path": "raw/kram1892-XI.txt",
+   "抬头": "Ad Joh. Docemium.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 352,
+   "sha256": "541dc6ae7d1a3b8b42f3b769fa8b5795d3d7242b4aa53a32c2115d4ccc357c42"
+  },
+  {
+   "编号": "XII",
+   "local_path": "raw/kram1892-XII.txt",
+   "抬头": "Ad Georg. Winklerum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 326,
+   "sha256": "84f808eb3be1d0a241d893571c7d72c20a183aa394a6599935022303dd62a039"
+  },
+  {
+   "编号": "XIII",
+   "local_path": "raw/kram1892-XIII.txt",
+   "抬头": "Ad eundem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 649,
+   "sha256": "12c429709132a21a53de1cb278e7d0e17410a381a546f056f211c53c441992ac"
+  },
+  {
+   "编号": "XIV",
+   "local_path": "raw/kram1892-XIV.txt",
+   "抬头": "Ad D. Martinům Moserum juniorem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 421,
+   "sha256": "2fd43dc412665a235501fc39711f4c2d3b3a281f455f610077d4fb9037879837"
+  },
+  {
+   "编号": "XV",
+   "local_path": "raw/kram1892-XV.txt",
+   "抬头": "Ad D. Docemium.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 471,
+   "sha256": "74660f88715f4b16ccee00040de9d7826135b0130a20dd0c3ea5874aa050f2bc"
+  },
+  {
+   "编号": "XVI",
+   "local_path": "raw/kram1892-XVI.txt",
+   "抬头": "Ad Mochingerum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 158,
+   "sha256": "3676aa4f35c8633f81c1211f8f073905decae2e4a6f48140aabbc2e05e745e9b"
+  },
+  {
+   "编号": "XVII",
+   "local_path": "raw/kram1892-XVII.txt",
+   "抬头": "Ad D. J. H. Alstedium in Transylvaniam.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 347,
+   "sha256": "246653c598ca63eb7a239fdadbf02488da0fae1bc889ba186e1c6ac60df2e843"
+  },
+  {
+   "编号": "XVIII",
+   "local_path": "raw/kram1892-XVIII.txt",
+   "抬头": "Ad D. Docemium.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 124,
+   "sha256": "a5984a1671a1fd474f1bc3a7ad56637a1861ac5c3d12e46dadc993329ba215dc"
+  },
+  {
+   "编号": "XIX",
+   "local_path": "raw/kram1892-XIX.txt",
+   "抬头": "Ad D. Mochingerum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 202,
+   "sha256": "ec57a56dc232e5efa390befab2d456d33b694c9bcc4f8e69a3e4a83f6361ef43"
+  },
+  {
+   "编号": "XX",
+   "local_path": "raw/kram1892-XX.txt",
+   "抬头": "Ad Niclassium.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 264,
+   "sha256": "b762fe82190e0a52b29d681b32e335d884570f1e82f292f598713a3b6a74333c"
+  },
+  {
+   "编号": "XXII",
+   "local_path": "raw/kram1892-XXII.txt",
+   "抬头": "Ad S. Hartlib. *",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 748,
+   "sha256": "80513ed6f110255984cae18d7784c3f1302304e45bc718c471bdb10d61be924b"
+  },
+  {
+   "编号": "XXIII",
+   "local_path": "raw/kram1892-XXIII.txt",
+   "抬头": "Ad D. J. Bai.*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 152,
+   "sha256": "71de00d7356509e1fdab50e52af965212ee2b5caeca2a4578e3c7cce6cae9417"
+  },
+  {
+   "编号": "XXIV",
+   "local_path": "raw/kram1892-XXIV.txt",
+   "抬头": "Ad D. J. Gorzisky.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 428,
+   "sha256": "2112a1cd3640a8d97853ebc7eb868b6af6b3d3e122e974def81b0ff1c7103a22"
+  },
+  {
+   "编号": "XXV",
+   "local_path": "raw/kram1892-XXV.txt",
+   "抬头": "Ad D. Christophorum Pandelium.*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 3121,
+   "sha256": "09d32c7bc3cbcab59681246d2c492cb5e9dc10b201be8ef35609d797c2b32024"
+  },
+  {
+   "编号": "XXVII",
+   "local_path": "raw/kram1892-XXVII.txt",
+   "抬头": "Ad illustrem D. Johannem Bal de Hoczew etc.*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 355,
+   "sha256": "742efadf1ae97b5b20cd02e1020809268c34f5cc20733f867d2d78bb54b192c0"
+  },
+  {
+   "编号": "XXVIII",
+   "local_path": "raw/kram1892-XXVIII.txt",
+   "抬头": "Ad Johannem Laurentium Bohémům Wilnam.*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 227,
+   "sha256": "0dd7cb82e6754e6555a94bf5e07b50e1cf9f3a54497b85390f8128d2608fb438"
+  },
+  {
+   "编号": "XXIX",
+   "local_path": "raw/kram1892-XXIX.txt",
+   "抬头": "Epistola M. Mersenni ad J. A. Comenium.**",
+   "方向": "OTHER",
+   "判据": "别人写给他",
+   "词数": 1009,
+   "sha256": "ae2a510cb18d01035c005d34209cb0a229cf82b668416cf7b75c4a6e62198e5b"
+  },
+  {
+   "编号": "XXX",
+   "local_path": "raw/kram1892-XXX.txt",
+   "抬头": "Ad Patronum.**",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 1252,
+   "sha256": "b44d35ad887ed906d7e186c965072ad5e202676bb33445c34f0aab3b6bc8d3bc"
+  },
+  {
+   "编号": "XXXI",
+   "local_path": "raw/kram1892-XXXI.txt",
+   "抬头": "Ad eundem.*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 922,
+   "sha256": "e14329a8bf2a4375e6c3bf65ee5a1bb85abe43894bb82a73d4e783ab23254d31"
+  },
+  {
+   "编号": "XXXII",
+   "local_path": "raw/kram1892-XXXII.txt",
+   "抬头": "Ad amicos Lesznae in Polonia agentes.*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 1644,
+   "sha256": "c756bfa29e114f1e547dc1ebbf6b1a8e8fe44adbc7da44900ca7b1a55a60a40a"
+  },
+  {
+   "编号": "XXXIII",
+   "local_path": "raw/kram1892-XXXIII.txt",
+   "抬头": "Ad reverendum Virum, Dominum Godefridum Hottonum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 1703,
+   "sha256": "3de3d74b52dde2e3ace6f04c7f26c76ea4feeb56b66ea41a6e9524ed2de4f345"
+  },
+  {
+   "编号": "XXXVII",
+   "local_path": "raw/kram1892-XXXVII.txt",
+   "抬头": "Ad. Dominum Hottonum.*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 740,
+   "sha256": "35fc4577572a6b53dc7afafbb233140c3eb3d9583f109ca96689e84cc2775b94"
+  },
+  {
+   "编号": "XXXVIII",
+   "local_path": "raw/kram1892-XXXVIII.txt",
+   "抬头": "Ad eundem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 919,
+   "sha256": "cf82966327c51c38cc3d05f3ec347c7229b32a605dd76c2337789fa265dd66c6"
+  },
+  {
+   "编号": "XXXIX",
+   "local_path": "raw/kram1892-XXXIX.txt",
+   "抬头": "Ad eundem.*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 1143,
+   "sha256": "a5a738cebf2368d69ab4094a1bb9fe6bb2d9989685208db42bc752df55f08254"
+  },
+  {
+   "编号": "XL",
+   "local_path": "raw/kram1892-XL.txt",
+   "抬头": "Ad eundem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 89,
+   "sha256": "8897c09891e28f892d26e5d49d57636aac7c8163ec25ecdff529b1ed20200e34"
+  },
+  {
+   "编号": "XLI",
+   "local_path": "raw/kram1892-XLI.txt",
+   "抬头": "Ad eundem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 1265,
+   "sha256": "f866762769b7c612058b12bebf9e9b8bea4f3c307c9f63bbf013f321e1e95d56"
+  },
+  {
+   "编号": "XLII",
+   "local_path": "raw/kram1892-XLII.txt",
+   "抬头": "Ad eundem.*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 1128,
+   "sha256": "787f35bd58504ab682f70eeffa68b1600f8223e853cb4afdf4eeb3ecf17726fc"
+  },
+  {
+   "编号": "XLIV",
+   "local_path": "raw/kram1892-XLIV.txt",
+   "抬头": "Gratiam et pacem !",
+   "方向": "OTHER",
+   "判据": "人读定案：R. D. Vestrae studiosissimus Joh. Duraeus.（John Dury 署名；段尾另有 Johan Skytte 的信）",
+   "词数": 1129,
+   "sha256": "14c10218348819713025bc4dcc1b1b70350646d6524699b481f97b9d673afdfd"
+  },
+  {
+   "编号": "L",
+   "local_path": "raw/kram1892-L.txt",
+   "抬头": "Ex literis ad dominum Joh. Loccenium JUDr., quibus commen-",
+   "方向": "HIS-OWN",
+   "判据": "`Ex literis ad <某人>`",
+   "词数": 138,
+   "sha256": "3cad9b7c9febfec71d0cef0190abb42eccdd5ce4fc51b366996b5665c5f437ea"
+  },
+  {
+   "编号": "LI",
+   "local_path": "raw/kram1892-LI.txt",
+   "抬头": "Ex literis ad dominum Freinsheimium.",
+   "方向": "HIS-OWN",
+   "判据": "`Ex literis ad <某人>`",
+   "词数": 462,
+   "sha256": "0c347c4a7619b17deb7ac826ca81c8ee383f931d8e2f3c61f9aecc4877c0a094"
+  },
+  {
+   "编号": "LIII",
+   "local_path": "raw/kram1892-LIII.txt",
+   "抬头": "Domino Ludovico de Geer.",
+   "方向": "HIS-OWN",
+   "判据": "拉丁与格抬头 `Domino …`",
+   "词数": 797,
+   "sha256": "b2d9ade4164e652291fb74f60585a91ed86f59bf39d62dbbd36e21c9a1fe1cae"
+  },
+  {
+   "编号": "LV",
+   "local_path": "raw/kram1892-LV.txt",
+   "抬头": "Ad dominum Ludovicum de Geer.*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 380,
+   "sha256": "2a4c35e61de02ab922579d1b18b99d966a601e5cc061f6658b26583f1d326571"
+  },
+  {
+   "编号": "LVI",
+   "local_path": "raw/kram1892-LVI.txt",
+   "抬头": "Ad dominum Johannem Wolzogenium.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 214,
+   "sha256": "02e3f4e0b5d0a437caad81f9b865ec395b81df6acd0bc07a739bff70c89f3a1e"
+  },
+  {
+   "编号": "LVII",
+   "local_path": "raw/kram1892-LVII.txt",
+   "抬头": "Ad dominum Laurentium de Geer et dominum Hottonum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 227,
+   "sha256": "13ef9e136089a983887ddcf88df0bacb75f43992309e5defbe3dc9c69daa12da"
+  },
+  {
+   "编号": "LVIII",
+   "local_path": "raw/kram1892-LVIII.txt",
+   "抬头": "Domino Joh. Wolzogen.",
+   "方向": "HIS-OWN",
+   "判据": "拉丁与格抬头 `Domino …`",
+   "词数": 646,
+   "sha256": "9cd891f5ad74ebeef6e8d27b367cd1003caa4e39ba496f6b0dd96e1fa1e5d20a"
+  },
+  {
+   "编号": "LIX",
+   "local_path": "raw/kram1892-LIX.txt",
+   "抬头": "Ad eundem Norcopiam.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 591,
+   "sha256": "e2beb44d7b8cc9139c6cf149de6f5c8744e3dc579b87d31b7df6432463d3292f"
+  },
+  {
+   "编号": "LX",
+   "local_path": "raw/kram1892-LX.txt",
+   "抬头": "Excerpta! ex literis clariss. Comenii,",
+   "方向": "HIS-OWN",
+   "判据": "`… ex literis Comenii`",
+   "词数": 1092,
+   "sha256": "40797da40ce57b4aa924ba67006058efa67fcfdbcab2e52538fe4fb90b897f6f"
+  },
+  {
+   "编号": "LXII",
+   "local_path": "raw/kram1892-LXII.txt",
+   "抬头": "Ad Patronum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 3879,
+   "sha256": "4a5ea12e0cbb928ecd511f81597bfaa7f8168ec8d2e1879508d8570e63681e76"
+  },
+  {
+   "编号": "LXVIII",
+   "local_path": "raw/kram1892-LXVIII.txt",
+   "抬头": "Ad eundem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 171,
+   "sha256": "ac0e57241a9f97fafd2da334d7e254b0b04b62c70c84ef615b48d9c4a57d6157"
+  },
+  {
+   "编号": "LXIX",
+   "local_path": "raw/kram1892-LXIX.txt",
+   "抬头": "Ex literis ad dominum Tobiam Andreae, historiarum et Graecae",
+   "方向": "HIS-OWN",
+   "判据": "`Ex literis ad <某人>`",
+   "词数": 147,
+   "sha256": "00db5e3985b24260b7541acc494d7806967672ea72c28f1c9d1ca2424515e6e9"
+  },
+  {
+   "编号": "LXX",
+   "local_path": "raw/kram1892-LXX.txt",
+   "抬头": "Ad dominum Ludovicum de Geer.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 316,
+   "sha256": "8bdbba0b1ecdcb8ecb2f96c291416306672a8f6669a44c0ef52b05594d75b5ae"
+  },
+  {
+   "编号": "LXXI",
+   "local_path": "raw/kram1892-LXXI.txt",
+   "抬头": "Ex literis ad dominum Hottonum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ex literis ad <某人>`",
+   "词数": 103,
+   "sha256": "4dd5036f04eb297fdc1a0f64f9edf63dbd8beee8a93a1ada68eec1e87230eecd"
+  },
+  {
+   "编号": "LXXII",
+   "local_path": "raw/kram1892-LXXII.txt",
+   "抬头": "Nobilissimi et amplissimi Domini Proconsules,",
+   "方向": "OTHER",
+   "判据": "人读定案：Nurcii, 27 Junii 1644. Petrus Kochlewski, judex regius tunc Brestensis.",
+   "词数": 623,
+   "sha256": "4ccd40af641b384c459ee872fbd83c6b37f21ce20f88154ac2c80be88025b47b"
+  },
+  {
+   "编号": "LXXIII",
+   "local_path": "raw/kram1892-LXXIII.txt",
+   "抬头": "Ad dominum Tobiam Andreae.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 512,
+   "sha256": "15975103e3bf3d8e38e7d65bcdf9a020e2b0491e0c1ffa8431a88535a37f0dfc"
+  },
+  {
+   "编号": "LXXIV",
+   "local_path": "raw/kram1892-LXXIV.txt",
+   "抬头": "Ex literis ad dominum Hottonum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ex literis ad <某人>`",
+   "词数": 1424,
+   "sha256": "44f9abe64c681abf327969e56bc92f00614b7ab9c42e304319c8317c49082a5d"
+  },
+  {
+   "编号": "LXXV",
+   "local_path": "raw/kram1892-LXXV.txt",
+   "抬头": "Ad Patronum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 791,
+   "sha256": "51f1fc911af005b932041debf02f4e9994b685dcb19d9a065f1905bf14ca6d19"
+  },
+  {
+   "编号": "LXXVII",
+   "local_path": "raw/kram1892-LXXVII.txt",
+   "抬头": "Ad dominum Hottonum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 473,
+   "sha256": "b4691a30e8afd214e0d7358b506e572181d5265884b30ca2418b55d7e3878d76"
+  },
+  {
+   "编号": "LXXVIII",
+   "local_path": "raw/kram1892-LXXVIII.txt",
+   "抬头": "Ad ili. castellanum Chelmensem d. Zbygneum de Goray etc.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 506,
+   "sha256": "06ff6b9564f788096e9dee1fae220366dda83d0d0940a7fbf074dee26f4a8696"
+  },
+  {
+   "编号": "LXXIX",
+   "local_path": "raw/kram1892-LXXIX.txt",
+   "抬头": "Ad Patronum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 591,
+   "sha256": "45e335c09cb8cfb778c67563ff4a47f0f8fe1903ab7ff4d15cc20006547f5411"
+  },
+  {
+   "编号": "LXXX",
+   "local_path": "raw/kram1892-LXXX.txt",
+   "抬头": "Ad eundem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 695,
+   "sha256": "12fa05103277f713156a4d553a247969251e5097acca1618e0abe143c9cbd2d7"
+  },
+  {
+   "编号": "LXXXI",
+   "local_path": "raw/kram1892-LXXXI.txt",
+   "抬头": "Ex epistola ad d. d. Zb. Goray, castellanum Chelmensem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ex literis ad <某人>`",
+   "词数": 748,
+   "sha256": "d371eeee29b091db04a913960637b09f4a5a223b8f61c0142f3c186ced70bfee"
+  },
+  {
+   "编号": "LXXXII",
+   "local_path": "raw/kram1892-LXXXII.txt",
+   "抬头": "Ad d. d. Zb. Goray, castellanum Chelmensem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 1528,
+   "sha256": "15e6e10487cd353770a19b2afe3c2a32233393661274d9b7134932b048b0adb8"
+  },
+  {
+   "编号": "LXXXIV",
+   "local_path": "raw/kram1892-LXXXIV.txt",
+   "抬头": "Ex literis ad dominum Hottonum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ex literis ad <某人>`",
+   "词数": 615,
+   "sha256": "5bf1389bea3db61ea67203cbf3feca9b77d60600bf7e23b421e487fe3a5db2b3"
+  },
+  {
+   "编号": "LXXXVI",
+   "local_path": "raw/kram1892-LXXXVI.txt",
+   "抬头": "Ad Dominum Hottonum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 1259,
+   "sha256": "b687281adb9f1b0ddc1fa670a8ee2875cd42909452e8465a9bd90031a0d345ad"
+  },
+  {
+   "编号": "LXXXVIII",
+   "local_path": "raw/kram1892-LXXXVIII.txt",
+   "抬头": "Ad dominum Wolzogen.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 2718,
+   "sha256": "d406c27da54a975ac86d59df4c77c8b61c052ec269112a30d83acae11674bc43"
+  },
+  {
+   "编号": "LXXXIX",
+   "local_path": "raw/kram1892-LXXXIX.txt",
+   "抬头": "Ad dominum Hottonum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 375,
+   "sha256": "64c5be9a772d4a0f7014fda54fb8191593eccee9637ecf9dea74428ca38f3db9"
+  },
+  {
+   "编号": "XC",
+   "local_path": "raw/kram1892-XC.txt",
+   "抬头": "Ad Patronum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 424,
+   "sha256": "d9b753da63d24824c9f55e0cbb5d0cfa308ba98969dae0b48c060b6075832b98"
+  },
+  {
+   "编号": "XCI",
+   "local_path": "raw/kram1892-XCI.txt",
+   "抬头": "Ad dominum d. Johannem Matthiae.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 592,
+   "sha256": "afb50c6383e367a5e813ba2a24307e72f5d5327c01fbf93d5d6aabac9fb8252b"
+  },
+  {
+   "编号": "XCII",
+   "local_path": "raw/kram1892-XCII.txt",
+   "抬头": "Ad eundem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 1378,
+   "sha256": "0e95a7ae9742626e38b14df2ad82439afe0fd0f190cb8717d8bf650ef5fa4e7a"
+  },
+  {
+   "编号": "XCIV",
+   "local_path": "raw/kram1892-XCIV.txt",
+   "抬头": "Ad dominum Hottonum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 1836,
+   "sha256": "e7c4fe19dd042e92942ba2fcd937c168949c2ac3ba472c5873390c9838a31953"
+  },
+  {
+   "编号": "XCVII",
+   "local_path": "raw/kram1892-XCVII.txt",
+   "抬头": "Ad Patronum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 2462,
+   "sha256": "422fc3368f2b83f56b695cbd1195c1fece6b991ea5ea77ceb7ddec6bbea26768"
+  },
+  {
+   "编号": "CV",
+   "local_path": "raw/kram1892-CV.txt",
+   "抬头": "Ad G. Ritschelium.*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 1012,
+   "sha256": "56bc86c37749f053c98c24444f8640ec9d5f7bf71a766a5bc9f5b0ebd7e5ca0e"
+  },
+  {
+   "编号": "CVI",
+   "local_path": "raw/kram1892-CVI.txt",
+   "抬头": "Ad. Pastores Belg. ecclesiae Caladrinum et Optebekium.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 1887,
+   "sha256": "30022f99a04ce1d32fe060969ccaeb21149fa5cc9891966846c592221a2e2c87"
+  },
+  {
+   "编号": "CVIII",
+   "local_path": "raw/kram1892-CVIII.txt",
+   "抬头": "Ritschelio eadem die*",
+   "方向": "HIS-OWN",
+   "判据": "人读定案：抬头 `Ritschelio eadem die`（与格致 Ritschel）；正文 `Addo ipse 50, quos ad Hartlibium mitto`，第一人称寄件人",
+   "词数": 152,
+   "sha256": "bcb27fab4741793ab730ceb9c2b5a32267fd0a0b6b55584a7e3de3ae1c4a450a"
+  },
+  {
+   "编号": "CIX",
+   "local_path": "raw/kram1892-CIX.txt",
+   "抬头": "Salutem et observantiam !",
+   "方向": "HIS-OWN",
+   "判据": "人读定案：正文 `missa sunt ultima Methodi capita`（寄出他自己《Methodus》的末章）；第四页地址 `Nobilissimo Viro, Domino Johanni Wolzogen` ⇒ 他是寄件人",
+   "词数": 879,
+   "sha256": "f102c8b06575b244f9b91c038f3216c9c9e7490b5e9707620b9298fe30ca7235"
+  },
+  {
+   "编号": "CX",
+   "local_path": "raw/kram1892-CX.txt",
+   "抬头": "Illustrissime atque nobilissime Baro, Domine honorande!",
+   "方向": "HIS-OWN",
+   "判据": "人读定案：`Nactus ego … excellens illud Tuum DE VERITATE opus`（致《De Veritate》作者）＋ `Legat vel ante alios Methodum LL. novissimam`（推荐他自己的书）",
+   "词数": 3260,
+   "sha256": "376f8c7bc925f1e9c1495e55353cb1517416f017b3b10a26772c0328e6f263e1"
+  },
+  {
+   "编号": "CXII",
+   "local_path": "raw/kram1892-CXII.txt",
+   "抬头": "Ad G. Ritschelium.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 351,
+   "sha256": "db5a861e2a15e66aac5162cfb8026af8c65dece1b01500b16367bc24676e166e"
+  },
+  {
+   "编号": "CXIII",
+   "local_path": "raw/kram1892-CXIII.txt",
+   "抬头": "Nobüissimo et strenuo domino Johanni a Wolzogen.",
+   "方向": "HIS-OWN",
+   "判据": "拉丁与格抬头 `Domino …`",
+   "词数": 694,
+   "sha256": "038b987420913f13fbcc4aacf8f9bd100707162677ccf80dfe9c3737d41939ce"
+  },
+  {
+   "编号": "CXIV",
+   "local_path": "raw/kram1892-CXIV.txt",
+   "抬头": "Vota et observantiam!",
+   "方向": "HIS-OWN",
+   "判据": "人读定案：observans У. Com(enius).",
+   "词数": 476,
+   "sha256": "19325e4309fe1b38054873c677d44739ac7d698bb9bf7daf045f8e07c6d8b926"
+  },
+  {
+   "编号": "CXV",
+   "local_path": "raw/kram1892-CXV.txt",
+   "抬头": "Grata nobis omnia Tua, reverende, clarissime Domine Comeni, gratus ad Vestros",
+   "方向": "OTHER",
+   "判据": "抬头在称呼他 ⇒ 他是收信人",
+   "词数": 250,
+   "sha256": "06ac6f6e798b7ae5ce6e5d4a0e4414d36c6147967359e39b4247302f387b08f9"
+  },
+  {
+   "编号": "CXVI",
+   "local_path": "raw/kram1892-CXVI.txt",
+   "抬头": "Ad dominum Wolzogen, 10 Sept. 1648*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 3129,
+   "sha256": "a98af7a9cb5e3286117b70ceef18249e04a4105e0711c4826e178eecef44e7d0"
+  },
+  {
+   "编号": "CXXI",
+   "local_path": "raw/kram1892-CXXI.txt",
+   "抬头": "Ad dominum J. Efronium po Janu Molitorovi.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 988,
+   "sha256": "9f973bae46fc349bf15cb16623e636b59fd1216f997d09182b1f814aa86fac18"
+  },
+  {
+   "编号": "CXXIII",
+   "local_path": "raw/kram1892-CXXIII.txt",
+   "抬头": "Bratru Chodniciovi.",
+   "方向": "HIS-OWN",
+   "判据": "捷克与格 `Bratru …`",
+   "词数": 1716,
+   "sha256": "2e8755c5921274e22c07b626aea04104b9547926a5f16da8ceb09557c50146f3"
+  },
+  {
+   "编号": "CXXVII",
+   "local_path": "raw/kram1892-CXXVII.txt",
+   "抬头": "Copia epistolae ad r. d. Ernestům Andreae (et clarissimum",
+   "方向": "HIS-OWN",
+   "判据": "`Copia epistolae ad <某人>`",
+   "词数": 1037,
+   "sha256": "a005fec09c5adef06d355142e50827e8f201d561a925dc65dd1840a0a4a82b07"
+  },
+  {
+   "编号": "CXXIX",
+   "local_path": "raw/kram1892-CXXIX.txt",
+   "抬头": "Ad dominum Patronum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 199,
+   "sha256": "b6997a0fa2c43a2dd873a4cb1de8fef30c800f09b01af14c1a4b1828275d873f"
+  },
+  {
+   "编号": "CXXX",
+   "local_path": "raw/kram1892-CXXX.txt",
+   "抬头": "Milošciwi Panowie Patronowie Zboru Orzeszkowskiego,",
+   "方向": "OTHER",
+   "判据": "人读定案：波兰文；后人批注 `Recommendacya … uczyniona a Senioribus Unitatis 1650`（弟兄会长老团的集体文书，不是他个人）",
+   "词数": 381,
+   "sha256": "007007087be7da97626a240f5b30b55cd77e4fc0e1c8f6272844dfc420ec8c1a"
+  },
+  {
+   "编号": "CXXXI",
+   "local_path": "raw/kram1892-CXXXI.txt",
+   "抬头": "Qui dixit: Ecce facio пота omnia! faxit nobis quoque novo cum anno",
+   "方向": "HIS-OWN",
+   "判据": "人读定案：第四页地址 `Nobilissimo ac strenuo Viro, Domino Johanni Wolzogen` ⇒ 他是寄件人；第一人称 `Muto igitur mihi quoque esse non expedire judicavi`",
+   "词数": 375,
+   "sha256": "ff5d998ee4f37bb0bf05e971499bf3a417269826dddeea3a2869d2794e1a7b23"
+  },
+  {
+   "编号": "CXXXII",
+   "local_path": "raw/kram1892-CXXXII.txt",
+   "抬头": "Susanna Lorántfy, celsissimi quondam Principis Domini Georgi! Rákóczy,",
+   "方向": "OTHER",
+   "判据": "她自己署名的文书",
+   "词数": 392,
+   "sha256": "9979429feca627f16236bd0409aa1130fe56f7d57503f9c1e2ff2d67885a81eb"
+  },
+  {
+   "编号": "CXXXIII",
+   "local_path": "raw/kram1892-CXXXIII.txt",
+   "抬头": "Nos Susanna Lorántfy, celsissimi quondam Principis, Domini Georgii Rákóczy,",
+   "方向": "OTHER",
+   "判据": "她自己署名的文书",
+   "词数": 367,
+   "sha256": "f29eb69f269df40f2303bf1c3ef807ca9cf1a0bfd550f998730d18623e4b1892"
+  },
+  {
+   "编号": "CXXXIV",
+   "local_path": "raw/kram1892-CXXXIV.txt",
+   "抬头": "Responsum ad Susannam Lorántfy.",
+   "方向": "HIS-OWN",
+   "判据": "`Responsum ad <某人>`",
+   "词数": 643,
+   "sha256": "8e2ae0aa16254452e3019ac4244c57198789a3fa46c6d1995bf67d5c3cea49f7"
+  },
+  {
+   "编号": "CXXXVI",
+   "local_path": "raw/kram1892-CXXXVI.txt",
+   "抬头": "Magnifici, nobilissimi, eximii!",
+   "方向": "?",
+   "判据": "人读定案：**读过仍判不出**：只有致但泽教会 Clemens Colmer 等人的呼吁，OCR 里没有署名。留 `?`，不许当成他的。",
+   "词数": 144,
+   "sha256": "1b9e1f7d5a0e78560ae9ad076943f817dabae337d21f20b7adf3681067ffe7a7"
+  },
+  {
+   "编号": "CXXXVII",
+   "local_path": "raw/kram1892-CXXXVII.txt",
+   "抬头": "Susanna Lorántfy, serenissimi quondam Principis, Domini Georgi! Rákóczy,",
+   "方向": "OTHER",
+   "判据": "她自己署名的文书",
+   "词数": 282,
+   "sha256": "68ae55682095c7142a33d5ca5d2aa96e8439016b4a205fa87f6237c2239d5636"
+  },
+  {
+   "编号": "CXXXVIII",
+   "local_path": "raw/kram1892-CXXXVIII.txt",
+   "抬头": "Zelum pro Christo!",
+   "方向": "OTHER",
+   "判据": "人读定案：Tuus totus in Christo S. Patach. Joh. Tolnai.；抬头 `Clarissime Domine Comeni`",
+   "词数": 386,
+   "sha256": "d54643945d09a5d34b6cc0a23f1a99e39ff1030bd5713fca97b07fad5770c78a"
+  },
+  {
+   "编号": "CXXXIX",
+   "local_path": "raw/kram1892-CXXXIX.txt",
+   "抬头": "Reverende et clarissime Domine!",
+   "方向": "OTHER",
+   "判据": "人读定案：Reverendae et clarissimae Dominationis Vestrae benevolus Rdkoc\\y.（Rákóczy 署名，写给他）",
+   "词数": 87,
+   "sha256": "e871d2a0e197c604ba291bffb25abef314060e3d74c6c472476a2704ade62f1d"
+  },
+  {
+   "编号": "CXL",
+   "local_path": "raw/kram1892-CXL.txt",
+   "抬头": "Pacem Jesu Christi!",
+   "方向": "OTHER",
+   "判据": "人读定案：Tuus totus J. Tolnai.；抬头 `Amicorum maxime, clarissime Domine Comeni`",
+   "词数": 176,
+   "sha256": "ef9f657236c0c1cf3a0db62433f618a6dddf3fecdc0a6be4b94bd7dcff95030e"
+  },
+  {
+   "编号": "CXLI",
+   "local_path": "raw/kram1892-CXLI.txt",
+   "抬头": "Ad d. Adriánům von der Linde, praesidem.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 424,
+   "sha256": "7eeb175a1f930648633b5c8e78a8bc3a04acb70f6a2c7351a8006994de784ec0"
+  },
+  {
+   "编号": "CXLII",
+   "local_path": "raw/kram1892-CXLII.txt",
+   "抬头": "Literae Seniorum ad Susanna Lorántfy.",
+   "方向": "OTHER",
+   "判据": "某某等人致某某",
+   "词数": 311,
+   "sha256": "40d41ee8c6f66d09f6ecf5a34822adf19e706de816f2f1e5ae512875e47353b1"
+  },
+  {
+   "编号": "CXLIII",
+   "local_path": "raw/kram1892-CXLIII.txt",
+   "抬头": "Excellentissime Domine, Domine et Maecenas gratiosissime!",
+   "方向": "HIS-OWN",
+   "判据": "人读定案：Illustrissimae Celsitudinis Vestrae devotus cliens Co(m)enius.",
+   "词数": 193,
+   "sha256": "66961f3b2ad6e3fc7168ef4d6eda6838dc58988003eb74cddb8f451451bfab8b"
+  },
+  {
+   "编号": "CXLIV",
+   "local_path": "raw/kram1892-CXLIV.txt",
+   "抬头": "Ad d. Tolnai.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 3074,
+   "sha256": "ac2a8eb3c86cc5b5696718e3d5da07790ca215ffc85ad28408af2ab285afa845"
+  },
+  {
+   "编号": "CXLVIII",
+   "local_path": "raw/kram1892-CXLVIII.txt",
+   "抬头": "Já, Jan A. Komenský, zanechávám po sobě poznamenání, za bratrem a",
+   "方向": "HIS-OWN",
+   "判据": "他自述『我，Jan A. Komenský』",
+   "词数": 4971,
+   "sha256": "c500b4b0f562377101a1321a7ef479f7a1dc2293cbc31910dde125e739150474"
+  },
+  {
+   "编号": "CLIX",
+   "local_path": "raw/kram1892-CLIX.txt",
+   "抬头": "MR Pell to Mr. Hartlib.*",
+   "方向": "OTHER",
+   "判据": "英文『甲致乙』",
+   "词数": 509,
+   "sha256": "385daa0df340d5ce405f258f9b42148e20fef1bdb442a01be7e6ac41928e9761"
+  },
+  {
+   "编号": "CLX",
+   "local_path": "raw/kram1892-CLX.txt",
+   "抬头": "Ex literis P. Figuli ad Nicolaum Arnoldům *",
+   "方向": "OTHER",
+   "判据": "第三方之间的信",
+   "词数": 139,
+   "sha256": "1268b25ffe42f58c8a841f8e537aebfc012ffd0a6822d6865b4b285acd26bb41"
+  },
+  {
+   "编号": "CLXI",
+   "local_path": "raw/kram1892-CLXI.txt",
+   "抬头": "Mr. Hartlib to Mr. Pell.*",
+   "方向": "OTHER",
+   "判据": "英文『甲致乙』",
+   "词数": 180,
+   "sha256": "a2e1c6c6c9ea46d908967fdd2d6af5ff33824b17c340cd9c815dee6360568342"
+  },
+  {
+   "编号": "CLXII",
+   "local_path": "raw/kram1892-CLXII.txt",
+   "抬头": "Ad dominum G F. Harsdörfferum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 680,
+   "sha256": "45b7dc71299f4b24021fe3f7e4f60ff544a2a2ce9025a1f83daf61eaafecb36d"
+  },
+  {
+   "编号": "CLXIII",
+   "local_path": "raw/kram1892-CLXIII.txt",
+   "抬头": "Ad. d. Hessenthalerum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 627,
+   "sha256": "9801feca80b1155b5a21a21dc47d12eb2e54f9a35ae5e762d869177fda00d453"
+  },
+  {
+   "编号": "CLXIV",
+   "local_path": "raw/kram1892-CLXIV.txt",
+   "抬头": "Reverende Vir!",
+   "方向": "OTHER",
+   "判据": "人读定案：Reverentiae Tuae humillimus servus Geo. Sadovius.；地址 `Reverendo Viro. Domino Johanni Comenio … Amsterodami`",
+   "词数": 270,
+   "sha256": "08d40a50bf510d4fd61980cafdd6b16eb1cfa4627a1bfbef0f21556a391ba250"
+  },
+  {
+   "编号": "CLXV",
+   "local_path": "raw/kram1892-CLXV.txt",
+   "抬头": "Ad dorainum Harsdörfferum.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 456,
+   "sha256": "e9c73b4cf79b99c323dceaee610dc40361faeff37ce64a63572340e0776b489a"
+  },
+  {
+   "编号": "CLXVI",
+   "local_path": "raw/kram1892-CLXVI.txt",
+   "抬头": "Salutem a Christo Jesu, Domino nostro!",
+   "方向": "HIS-OWN",
+   "判据": "拉丁与格抬头 `Domino …`",
+   "词数": 537,
+   "sha256": "ee084888465ad2c5d8b9c3e8fd9278b52be886496d188b651d8a73a091181c20"
+  },
+  {
+   "编号": "CLXVII",
+   "local_path": "raw/kram1892-CLXVII.txt",
+   "抬头": "Dvojíctihodný v Kristu Pánu milý Otče, nám vzácně a velice milý pane Kmotře!",
+   "方向": "OTHER",
+   "判据": "人读定案：捷克文；`upřímný … kmotr, sluha Stephan Metis`；Titul: `An Herrn Johann Amos Comenio … zu Händen`",
+   "词数": 910,
+   "sha256": "c1e04f8f19370156879e97c1069d24281726d50d5d4f3b757e1c7e0861235485"
+  },
+  {
+   "编号": "CLXVIII",
+   "local_path": "raw/kram1892-CLXVIII.txt",
+   "抬头": "Vivit, vincit, regnat Christus!*",
+   "方向": "HIS-OWN",
+   "判据": "人读定案：Vester in Domino confrater et conservus У. A. C. dispersae Boh. Eccl. superattendens.（J. A. C.＝分散的波希米亚教会总监，即他）",
+   "词数": 296,
+   "sha256": "3ac5c29f6c805738de1eb2a475efded9c08cebdc184143ac97458b5400264528"
+  },
+  {
+   "编号": "CLXIX",
+   "local_path": "raw/kram1892-CLXIX.txt",
+   "抬头": "Ad Ulricum Tigurium.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 375,
+   "sha256": "98a096831906f62c3fe88f26dc51470841f02e4c3a80b8dae07e1b53c9a24f7b"
+  },
+  {
+   "编号": "CLXX",
+   "local_path": "raw/kram1892-CLXX.txt",
+   "抬头": "Ex literis J. Comenii ad N. Arnoldům.*",
+   "方向": "HIS-OWN",
+   "判据": "`… ex literis Comenii`",
+   "词数": 46,
+   "sha256": "b7711c039f4b79aa04be2cda9c4f99fff5edd1e9231378fe87652b5ed49ed97e"
+  },
+  {
+   "编号": "CLXXI",
+   "local_path": "raw/kram1892-CLXXI.txt",
+   "抬头": "Ad sapientissimum senatum civitatis Amsterdamensis.",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 426,
+   "sha256": "7e5ebc2a2fdff76363e18c18d0febdf9c16ec0105a1c210351c708e9f0d8d4ab"
+  },
+  {
+   "编号": "CLXXII",
+   "local_path": "raw/kram1892-CLXXII.txt",
+   "抬头": "Fragmentum epistolae Joh. Bythneri ad J. Comenium.",
+   "方向": "OTHER",
+   "判据": "别人写给他",
+   "词数": 383,
+   "sha256": "9fa29dcbb8a38c812cf7153d2b40f08c628e22a2d1894b484bbb81ab43fbd5cf"
+  },
+  {
+   "编号": "CLXXIV",
+   "local_path": "raw/kram1892-CLXXIV.txt",
+   "抬头": "Nobilissimi et potentes Domini!",
+   "方向": "HIS-OWN",
+   "判据": "人读定案：humiliter commendat У. Comenius m./p.（m.p.＝manu propria，亲笔）",
+   "词数": 624,
+   "sha256": "1b9b7576872486360c4cb073337be2b5a580fab887e6da86d2365fbd01705478"
+  },
+  {
+   "编号": "CLXXV",
+   "local_path": "raw/kram1892-CLXXV.txt",
+   "抬头": "D. d. Baroni Sadovio.",
+   "方向": "HIS-OWN",
+   "判据": "`D. d. <某人>`（与格缩写）",
+   "词数": 474,
+   "sha256": "9fd8adbb4d9b4a07a67c18d9515e81f81e41c104448fde9813457dda717daacd"
+  },
+  {
+   "编号": "CLXXVI",
+   "local_path": "raw/kram1892-CLXXVI.txt",
+   "抬头": "Mr. Hartlib to Mr. Pell.*",
+   "方向": "OTHER",
+   "判据": "英文『甲致乙』",
+   "词数": 211,
+   "sha256": "0313c0a2074437941961439538a12927bbed56b8b237203225ae69307b910c23"
+  },
+  {
+   "编号": "CLXXVII",
+   "local_path": "raw/kram1892-CLXXVII.txt",
+   "抬头": "Mr. Hartlib to Mr. Pell.**",
+   "方向": "OTHER",
+   "判据": "英文『甲致乙』",
+   "词数": 82,
+   "sha256": "23a8f73f0109e2a7c4ea7ccb3c09fe988f847e2b5f8eb3c146684e9aade105f0"
+  },
+  {
+   "编号": "CLXXVIII",
+   "local_path": "raw/kram1892-CLXXVIII.txt",
+   "抬头": "Mr. Hartlib to Mr. Pell.***",
+   "方向": "OTHER",
+   "判据": "英文『甲致乙』",
+   "词数": 232,
+   "sha256": "309cc2287b5a7c6d197c60bbf45f418e00aa471ec164c555e07598b9453fafa0"
+  },
+  {
+   "编号": "CLXXIX",
+   "local_path": "raw/kram1892-CLXXIX.txt",
+   "抬头": "Mr. Hartlib to Mr. Pell.*",
+   "方向": "OTHER",
+   "判据": "英文『甲致乙』",
+   "词数": 149,
+   "sha256": "d019e2d5d28bc376b1c230a3748391ee67df6bfdf23ce1f24f4b57f0a71554c4"
+  },
+  {
+   "编号": "CLXXX",
+   "local_path": "raw/kram1892-CLXXX.txt",
+   "抬头": "Mr. Hartlib to Mr. Pell.**",
+   "方向": "OTHER",
+   "判据": "英文『甲致乙』",
+   "词数": 466,
+   "sha256": "ebd7932be4c678520aa02fc8ba59dbb9c792c8580c281b4f15560da01d5cea67"
+  },
+  {
+   "编号": "CLXXXII",
+   "local_path": "raw/kram1892-CLXXXII.txt",
+   "抬头": "Fragmentum responsi J. Comenii ad epistolam Joh. By timeri.",
+   "方向": "HIS-OWN",
+   "判据": "`… ex literis Comenii`",
+   "词数": 925,
+   "sha256": "47d5a0ba77b448db9e9e9636fce7731b6777c5180b5aa265e46e393627cfd378"
+  },
+  {
+   "编号": "CLXXXIII",
+   "local_path": "raw/kram1892-CLXXXIII.txt",
+   "抬头": "Ad d. N. Arnoldům.*",
+   "方向": "HIS-OWN",
+   "判据": "`Ad <某人>`",
+   "词数": 190,
+   "sha256": "ec34d289ead7b886cd0d48e556b65a070f152a72cd23936e7f8d147ea53301f8"
+  },
+  {
+   "编号": "CLXXXIV",
+   "local_path": "raw/kram1892-CLXXXIV.txt",
+   "抬头": "Ex responso S. Maresii Nikolao Arnoldo.**",
+   "方向": "OTHER",
+   "判据": "第三方的回信",
+   "词数": 1454,
+   "sha256": "199d2ef6702a2d674ca833bdf1669472782a0d370ba87fd7c23cde7d60cf9299"
+  }
+ ]
+}

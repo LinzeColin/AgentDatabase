@@ -1,0 +1,24 @@
+{
+ "★ 这是什么": "1892 Patera 编《Korrespondence》(uuid:32d4d830-bcc0-11e4-9541-005056827e51) 里，slice_letter_volume.py 按抬头判不出方向的那 17 封，2026-08-14 逐封打开读过之后的定案。",
+ "★ 依据": "信末署名与第四页的收信人地址。**署名这把尺子在全卷只判得出 31/121 且带正文误报，所以它不能当规则，只能当人读时的证据** —— 因此写在这里，不写进正则。",
+ "★ 谁裁的": "agent（用户 2026-08-12 授权：待裁定自己定；只留推送与删受保护资产）",
+ "裁定": {
+  "XLIV":     {"方向": "OTHER",   "证据": "R. D. Vestrae studiosissimus Joh. Duraeus.（John Dury 署名；段尾另有 Johan Skytte 的信）"},
+  "LXXII":    {"方向": "OTHER",   "证据": "Nurcii, 27 Junii 1644. Petrus Kochlewski, judex regius tunc Brestensis."},
+  "CVIII":    {"方向": "HIS-OWN", "证据": "抬头 `Ritschelio eadem die`（与格致 Ritschel）；正文 `Addo ipse 50, quos ad Hartlibium mitto`，第一人称寄件人"},
+  "CIX":      {"方向": "HIS-OWN", "证据": "正文 `missa sunt ultima Methodi capita`（寄出他自己《Methodus》的末章）；第四页地址 `Nobilissimo Viro, Domino Johanni Wolzogen` ⇒ 他是寄件人"},
+  "CX":       {"方向": "HIS-OWN", "证据": "`Nactus ego … excellens illud Tuum DE VERITATE opus`（致《De Veritate》作者）＋ `Legat vel ante alios Methodum LL. novissimam`（推荐他自己的书）"},
+  "CXIV":     {"方向": "HIS-OWN", "证据": "observans У. Com(enius)."},
+  "CXXX":     {"方向": "OTHER",   "证据": "波兰文；后人批注 `Recommendacya … uczyniona a Senioribus Unitatis 1650`（弟兄会长老团的集体文书，不是他个人）"},
+  "CXXXI":    {"方向": "HIS-OWN", "证据": "第四页地址 `Nobilissimo ac strenuo Viro, Domino Johanni Wolzogen` ⇒ 他是寄件人；第一人称 `Muto igitur mihi quoque esse non expedire judicavi`"},
+  "CXXXVI":   {"方向": "?",       "证据": "**读过仍判不出**：只有致但泽教会 Clemens Colmer 等人的呼吁，OCR 里没有署名。留 `?`，不许当成他的。"},
+  "CXXXVIII": {"方向": "OTHER",   "证据": "Tuus totus in Christo S. Patach. Joh. Tolnai.；抬头 `Clarissime Domine Comeni`"},
+  "CXXXIX":   {"方向": "OTHER",   "证据": "Reverendae et clarissimae Dominationis Vestrae benevolus Rdkoc\\y.（Rákóczy 署名，写给他）"},
+  "CXL":      {"方向": "OTHER",   "证据": "Tuus totus J. Tolnai.；抬头 `Amicorum maxime, clarissime Domine Comeni`"},
+  "CXLIII":   {"方向": "HIS-OWN", "证据": "Illustrissimae Celsitudinis Vestrae devotus cliens Co(m)enius."},
+  "CLXIV":    {"方向": "OTHER",   "证据": "Reverentiae Tuae humillimus servus Geo. Sadovius.；地址 `Reverendo Viro. Domino Johanni Comenio … Amsterodami`"},
+  "CLXVII":   {"方向": "OTHER",   "证据": "捷克文；`upřímný … kmotr, sluha Stephan Metis`；Titul: `An Herrn Johann Amos Comenio … zu Händen`"},
+  "CLXVIII":  {"方向": "HIS-OWN", "证据": "Vester in Domino confrater et conservus У. A. C. dispersae Boh. Eccl. superattendens.（J. A. C.＝分散的波希米亚教会总监，即他）"},
+  "CLXXIV":   {"方向": "HIS-OWN", "证据": "humiliter commendat У. Comenius m./p.（m.p.＝manu propria，亲笔）"}
+ }
+}
