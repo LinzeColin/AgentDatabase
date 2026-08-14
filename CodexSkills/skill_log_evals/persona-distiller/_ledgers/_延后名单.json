@@ -2874,7 +2874,8 @@
         "★ 声口那一项即使补齐了道也仍是风险，处置参照 Coffin #130。"
       ],
       "★ 谁裁的": "agent（用户 2026-08-12 授权：40 条待裁定自己定；只留推送/删受保护资产）",
-      "★ 别名": "Jan Amos Komenský（捷克本名）、Comenius（拉丁名）——`normalize_name` 把它们当两个串，检索两种写法都要试"
+      "★ 别名": "Jan Amos Komenský（捷克本名）、Comenius（拉丁名）——`normalize_name` 把它们当两个串，检索两种写法都要试",
+      "★ 2026-08-14 通道复测": "★★★ 2026-08-14 实测：**通道找到了，而且原条目指错了国家。** 条目点的 `jbc.bj.uj.edu.pl`／`dbc.wroc.pl` 都是**波兰**库——后者 OAI 全枚举 51 集合、首页合计 908 条、**0 命中**，前者 OAI 连不上。正确的是**捷克国家图书馆 Kramerius**（`kramerius5.nkp.cz` / `ndk.cz`）：`q=dc.creator:Komensk* AND fedora.model:monograph AND datum_begin:[* TO 1930] AND dostupnost:public` → **numFound = 164**（公开可读、≤1930 即 PD、不绕任何访问控制）；其中含 **三卷书信集**（1892／1898／1902，正是缺的 conversations 道）与《Modlitby křesťanské》1882（expression 道）。**OCR 全文实测取得到**：`item/<PID>/children` 列页（1892 卷 322 页）→ `item/<pagePID>/streams/TEXT_OCR`，第 41 页得 2,595 字符／380 词拉丁文正文。★ 扉页几页 TEXT_OCR 返回 0 字节，**别拿第一页试完就说取不到**。★★ 未做：一页都没抓进工作区（要先给 Kramerius 写取源器并按 checksum/locator/rights_basis 落账）；**未核归属**（164 部里不少是 Kvačala、Novák 等人编的，编者的书不是他的话）。详见 `_ledgers/_Comenius通道找到了-2026-08-14.md`。"
     },
     {
       "name": "Socrates",
