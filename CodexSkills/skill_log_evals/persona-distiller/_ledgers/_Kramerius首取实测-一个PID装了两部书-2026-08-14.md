@@ -194,3 +194,16 @@ Ludwig von Wolzogen、女婿 Petr Figulus），**这卷确实是他的往还**�
 第一次报 9 条、第二次 35 条、第三次 67 条 —— **同一份文件，三个数**。
 [[the-comment-states-the-rule-the-code-narrows-it]]｜[[my-checkers-are-mis-cut-six-times-in-one-day]]
 ★ 报数之前先把命中**全部原样打出来读**，是这三次里唯一每次都救了我的动作。
+
+### ★ 试过第二把尺子（信末署名），**比抬头差，记下来省下一次重试**
+
+按同样的 117 段切，取每封**末 14 行**找署名：
+
+    末尾无署名（要读）   **69**    ← Patera 大量收的是**摘录**，结尾就是 `etc. Vale.`
+    末尾有他的署名         31
+    末尾有别人的名字       12    ← 其中有误报：`dominus Wolzogen, cum generosis…` 是**正文里提到**，不是署名
+    两者都有（要读）        5
+
+⇒ **抬头 67 判得出、署名只有 31**，且署名那一侧还带正文误报。
+**同一批信、两把尺子、两个答案 —— 用抬头，不用署名。**
+[[two-checkers-same-text-different-rules]]
