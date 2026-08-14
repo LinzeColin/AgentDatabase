@@ -2,7 +2,7 @@
 
 ## Scope and assigned sources
 
-**本道分到 72 份（train split）**：
+**本道分到 71 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
@@ -74,7 +74,6 @@
 | `src-7eccaaa8551e` | 1896 | P1 | Des Johann Amos Comenius Entwurf der nach dem Gottlichen L…vinum reformatae synopsis ... |
 | `src-1dc1c3d773d5` | 1897 | P1 | Spisy Jana Amosa Komenského |
 | `src-8396e37aa18f` | 1897 | P1 | Spisy Jana Amosa Komenského |
-| `src-89c48a97ec8f` | 1897 | P1 | Korrespondence. Listy Komenského a vrstevníků jeho |
 | `src-478e09f0b2f6` | 1901 | P1 | The labyrinth of the world and the paradise of the heart |
 | `src-345e7cf736f2` | 1905 | P1 | The labyrinth of the world and the paradise of the heart |
 | `src-3dc60c2445aa` | 1911 | P1 | Didattica Magna |
