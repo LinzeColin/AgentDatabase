@@ -1,33 +1,8 @@
-# ★ 语料正文**不进 git** —— 用户 2026-08-13 移交前已裁定：
-#   「语料另存 Release／私有仓，**仓里只放指针**」。
+# ★ 语料规则**不在这里**，在上一层：`persona-distiller/.gitignore`。
 #
-# 进仓的是**指针**，够任何人逐字节重建：
-#   _ids-rebuild.txt      —— ★ **重建用的权威清单**（从 manifest 的「已取回」生成）
-#   _ids-*.txt            —— 探源/增量/上限各轮的清单（是「打算抓的」，**不是「抓到的」**）
-#   _fetch-manifest.json  —— 每份的 source_url + **sha256** + 字节数 + 词数 + 取回时刻
-#   重建命令：python3 _ledgers/_pipeline/fetch_ia.py --ids-file <raw>/_ids-rebuild.txt --out <raw>
-#   ★ 重建后必须逐份比对 manifest 里的 sha256——**跑完不等于跑对**。
+# 2026-08-14 搬上去的，原因写在那份文件的抬头：规则留在本目录时**够不到
+# `_ledgers/_corpora/`**（那棵树同名，装着 Livermore #100 的 536 份报纸正文），
+# 于是 pre-push 钩子拦下 2,250 MB。两棵树的共同祖先只有 `persona-distiller/`。
 #
-# ★ 与 Livermore #100 的区别：那次是**只有语料没有指针**（台账 536 行、git 里 raw 为 0），
-#   所以「可重抓」是推断的；这次 sha256 逐份在仓，可重抓是**可验证的**。
-*/*/raw/*.txt
-*/*/raw/*.xml
-*/*/raw/*.pdf
-# ★ 通配要写 `_ids*.txt` 不是 `_ids.txt`：后者只放行首轮那份 30 条的清单，
-#   而**真正可复现的是 `_ids-final.txt`**（第三轮扩容后的 70 条）。
-#   写成精确名 = 仓里留着一份**过时且更短**的清单，重建出来的语料比实际少一半。
-!*/*/raw/_ids*.txt
-!*/*/raw/_fetch-manifest.json
-
-# ★★ 2026-08-12：语料从 `wip-X/<slug>/raw/` 搬到 `wip-X/workspaces/<slug>/raw/`
-#   （存量 42 个工作区就是后者；前者是我发明的，导致判据报「读不到正文」）。
-#   **搬完必须补这一层规则** —— 上面 `*/*/raw/*.txt` 只盖两层，盖不住三层，
-#   于是 **764 份正文一次性进了暂存区**。
-# ★ 验证只能用 `git check-ignore -v <文件>` 或 `git status --porcelain -uall`：
-#   `git status --porcelain`（不带 -uall）**把未跟踪目录折叠成一行**，
-#   逐文件 grep 会数出 0，我就是这样被自己的检查骗过去的。
-*/workspaces/*/raw/*.txt
-*/workspaces/*/raw/*.xml
-*/workspaces/*/raw/*.pdf
-!*/workspaces/*/raw/_ids*.txt
-!*/workspaces/*/raw/_fetch-manifest.json
+# **不要在本文件里再写语料规则** —— 两把尺子迟早对不上。
+# [[i-built-a-second-ruler-while-the-authoritative-one-sat-in-scripts]]

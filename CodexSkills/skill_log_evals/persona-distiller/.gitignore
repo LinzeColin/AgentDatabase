@@ -1,0 +1,89 @@
+# ★★★ 语料正文**不进 git** —— 全 skill 唯一一份规则，2026-08-14 重写。
+#
+# 进仓的是**指针**，够任何人逐字节重建：
+#   _ids-rebuild.txt      —— ★ **重建用的权威清单**（从 manifest 的「已取回」生成）
+#   _ids-*.txt            —— 探源/增量/上限各轮的清单（是「打算抓的」，**不是「抓到的」**）
+#   _fetch-manifest.json  —— 每份的 source_url + **sha256** + 字节数 + 词数 + 取回时刻
+#   重建命令：python3 _ledgers/_pipeline/fetch_ia.py --ids-file <raw>/_ids-rebuild.txt --out <raw>
+#   ★ 重建后必须逐份比对 manifest 里的 sha256——**跑完不等于跑对**。
+#
+# ─────────────────────────────────────────────────────────────────────────
+# 为什么规则搬到这一层，而不是留在 `_corpora/.gitignore`
+# ─────────────────────────────────────────────────────────────────────────
+# 2026-08-14 pre-push 钩子拦下 **2,250 MB**，其中 **1,993 MB 是语料正文**。
+# 逐条查完，之前那份规则**错了两个维度**：
+#
+#   ① 按层数写 —— 先写 `*/*/raw/*.txt`（两层），语料搬家后补 `*/workspaces/*/raw/*.txt`
+#      （三层），**两条都盖不住一层的 `wip-koch-107/raw/`，也盖不住 raw/ 下还有一层
+#      `src-XXXX/` 子目录的 Adams #131（3,773 份）**。
+#      ⇒ 一律 `**/…/**/`，与层数无关。
+#
+#   ② 放错了树 —— 规则在 `_corpora/.gitignore`，而语料还落在 **`_ledgers/_corpora/`**
+#      （Livermore #100 的 536 份报纸正文 + 一个 6.9 MB 的 .tar.gz）。
+#      两棵树同名，我核对时被骗过一次。⇒ 规则必须放在两者**共同的祖先**上，就是这里。
+#
+# 实测四类，**只有第一类被旧规则盖到过**：
+#      raw/ 正文                    1,060 MB
+#      references/sources/ 归一化      845 MB   ← 整类没有规则
+#      _fetch-staging*/ 抓取暂存        ~60 MB   ← 整类没有规则
+#      references/holdout/ 归一化       ~28 MB   ← 整类没有规则
+#
+# [[the-comment-states-the-rule-the-code-narrows-it]]｜[[a-gates-scan-set-is-smaller-than-reality]]
+#
+# ★ 验证只能用 `git check-ignore -v -z --stdin` 或 `git status --porcelain -uall`：
+#   `git status --porcelain`（不带 -uall）**把未跟踪目录折叠成一行**，逐文件 grep 会数出 0。
+#   取路径必须 `-z`：`git ls-tree`/`ls-files` 给非 ASCII 路径**加引号**，
+#   不带 `-z` 时结尾多一个 `"`，按扩展名判会整批漏掉（我第一版就是这样多报了 154 个误挡）。
+#   [[git-status-folds-untracked-dirs]]｜[[git-ls-files-quotes-non-ascii-paths]]
+
+# ① raw/ 下的正文（任意层数，raw/ 自身也可再套子目录）
+**/raw/**/*.txt
+**/raw/**/*.xml
+**/raw/**/*.pdf
+**/raw/**/*.djvu
+**/raw/**/*.html
+**/raw/**/*.htm
+# ★ 通配要写 `_ids*.txt` 不是 `_ids.txt`：后者只放行首轮那份 30 条的清单，
+#   而**真正可复现的是 `_ids-final.txt`**（第三轮扩容后的 70 条）。
+#   写成精确名 = 仓里留着一份**过时且更短**的清单，重建出来的语料比实际少一半。
+!**/raw/**/_ids*.txt
+!**/raw/**/_fetch-manifest.json
+
+# ② 归一化正文：references/sources/ 与 references/holdout/
+#   —— 它们是 raw 的派生副本，**体量与 raw 同级**。.json/.jsonl 是台账与指针，必须留下。
+**/references/sources/**/*.txt
+**/references/sources/**/*.xml
+**/references/sources/**/*.pdf
+**/references/sources/**/*.djvu
+**/references/sources/**/*.html
+**/references/sources/**/*.htm
+**/references/holdout/**/*.txt
+**/references/holdout/**/*.xml
+**/references/holdout/**/*.pdf
+**/references/holdout/**/*.djvu
+**/references/holdout/**/*.html
+**/references/holdout/**/*.htm
+
+# ③ 抓取暂存区（`_fetch-staging`、`_fetch-staging-2`、`_fetch-staging/probe/...`）
+**/_fetch-staging*/**/*.txt
+**/_fetch-staging*/**/*.xml
+**/_fetch-staging*/**/*.pdf
+**/_fetch-staging*/**/*.djvu
+**/_fetch-staging*/**/*.html
+**/_fetch-staging*/**/*.htm
+
+# ④ 复算出来的语料副本（校验和对不上那批，Galen #101 有 ~10 MB）
+#   ★ 只挡正文，**不许写成 `**/_rederived_checksum_mismatch/**`** ——
+#     那样会把同目录下的 `README.md` 一起挡掉，而那份 README 正是
+#     「这 55 份 sha256 与账本无一相同」的**唯一记录**。第一版就是这么写的。
+**/_rederived_checksum_mismatch/**/*.txt
+**/_rederived_checksum_mismatch/**/*.xml
+**/_rederived_checksum_mismatch/**/*.pdf
+**/_rederived_checksum_mismatch/**/*.djvu
+**/_rederived_checksum_mismatch/**/*.html
+**/_rederived_checksum_mismatch/**/*.htm
+
+# ⑤ 打包好的语料归档 —— 一个 .tar.gz 就是几百份正文
+**/*.tar.gz
+**/*.tgz
+**/*.zip
