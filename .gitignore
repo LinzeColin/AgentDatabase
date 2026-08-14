@@ -13,3 +13,19 @@ data/private_imports/
 #   主树 checkout 会因「未跟踪文件会被覆盖」直接失败。
 #   跟踪的那份叫 .githooks/pre-push.worktree，装法：cp 它过来。
 .githooks/pre-push
+
+# ★★★ 2026-08-14 —— agent 教训库不进本仓。
+#
+# 本仓是 **PUBLIC**（`gh repo view LinzeColin/AgentDatabase --json isPrivate` → false）。
+# 教训库涉及基础设施细节（内部域名 / OVH / R2 / systemd / ssh），
+# 按 `HANDOFF.md` 的移交规则「任何 private-only 资产一个字节都不许进 AgentDatabase」。
+# 它该在的地方是 `Private-AgentDatabase/claude-memory/`。
+#
+# 这条规则本来只写在文档里，没有东西执行它 —— 于是 2026-08-14 我把 338 份推了上去，
+# 公开暴露约 12 分钟。现在有两道执行：这条 ignore，加
+# `_ledgers/_pipeline/check_private_assets_not_public.py`（推之前跑 --check）。
+#
+# ★ **两处副本都要盖** —— HANDOFF 只点了 `_教训库/`，我照它扫完以为清了，
+#   实际 `文档/踩坑库/` 还有 197 份，比第一份还多。
+文档/踩坑库/
+**/_ledgers/_教训库/
