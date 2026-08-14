@@ -73,15 +73,47 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_s
 **只需要 `python3`（3.9+）和 `git`。**
 全部工具实测只用 Python **标准库**，`pip install` 一个都不用。
 
-★ **这句话 2026-08-14 在一个真 clone 里逐个 import 核过**（`ast` 解析 + 按模块 origin
-是否落在标准库目录判）：persona-distiller 两棵下 **669 个 `.py`**，非标准库的顶层 import
-**只有 3 个**，逐个查清：
+★ **这句话 2026-08-14 逐个 import 核过**（`ast` 解析 + 按模块 origin 是否落在标准库目录判）：
+persona-distiller 两棵下 **682 个 `.py`**（当日**再测**；早先写的 669 是加今天两件工具之前的数），
+非标准库的顶层 import **只有 3 个** —— **这个 3 没变**，逐个查清：
 
 | | 处数 | 实况 |
 |---|---:|---|
 | `msvcrt` | 50 | **Windows 的标准库**，且写成 `try: import msvcrt / except ImportError: msvcrt = None`——非 Windows 上降级，不是依赖 |
 | `registry_core` | 3 | 住在**同仓的兄弟技能** `registry/codex/persona-distiller-group/scripts/`；`check_contract_drift.py` 自己文档写明「按设计如此」。**同一个包里，不用装** |
 | `pypdf` | 1 | **唯一一个真第三方**，只在 `_corpora/wip-steinhardt-98/ms_contact2.py` 这个**工作区内的一次性脚本**里，**不是流水线工具**——不跑它就不需要它 |
+
+★ 2026-08-14 新加的两件工具（`fetch_kramerius.py`／`slice_letter_volume.py`）
+**逐个查过 import，非标准库 0 个**：
+`argparse datetime hashlib json pathlib re sys time urllib` ／ `argparse hashlib json pathlib re sys`。
+要现算就跑（本机 py3.9 没有 `sys.stdlib_module_names`，要按 origin 判）：
+
+```bash
+python3 - <<'EOF'
+import ast, pathlib, sys, sysconfig, importlib.util
+STD = pathlib.Path(sysconfig.get_paths()["stdlib"]).resolve()
+def std(n):
+    if n in sys.builtin_module_names: return True
+    try: s = importlib.util.find_spec(n)
+    except Exception: return False
+    o = (s.origin or "") if s else ""
+    return o in ("built-in", "frozen") or (bool(o) and STD in pathlib.Path(o).resolve().parents)
+R = [pathlib.Path("CodexSkills/skill_log_evals/persona-distiller"),
+     pathlib.Path("CodexSkills/registry/codex/persona-distiller")]
+ps = sorted({p for r in R for p in r.rglob("*.py")}); loc = {p.stem for p in ps}
+tops = {}
+for p in ps:
+    try: t = ast.parse(p.read_text(encoding="utf-8", errors="replace"))
+    except SyntaxError: continue
+    for n in ast.walk(t):
+        if isinstance(n, ast.Import):
+            for a in n.names: tops.setdefault(a.name.split(".")[0], []).append(p)
+        elif isinstance(n, ast.ImportFrom) and n.level == 0 and n.module:
+            tops.setdefault(n.module.split(".")[0], []).append(p)
+bad = {k: v for k, v in tops.items() if k not in loc and not std(k)}
+print(len(ps), "个 .py｜非标准库", len(bad), "个：", {k: len(v) for k, v in bad.items()})
+EOF
+```
 
 ★★ 但**整个包不止 persona-distiller**：`git clone` 会拿到 `CodexSkills` 下别的技能
 （graphify 要 networkx／tree-sitter／neo4j，book-to-skill 要 docling／bs4，dws 要 openpyxl…）
@@ -115,6 +147,14 @@ python3 --version && git --version && echo OK
 > **58 个有账本的目录 ＝ 全取得到 38 ＋ 部分 0 ＋ 一条都取不到 19 ＋ 空账本 1**；
 > 账本共 **3,901 行**，其中 **1,652 行**的正文不在仓里 ——
 > 这 1,652 行里 **1,116 行有 `_ids-rebuild.txt`**（跑一次抓源就回来），**536 行没有**。
+
+★ 2026-08-14 复核：**行数 3,901 对得上，目录数对不上** ——
+`rglob source-ledger.jsonl` 独立数得 **60** 个（其中空账本 **1** 个，
+`wip-benardos-128/…/nikolai-benardos`），而判据第 8 项报 **58**。**差 2**，
+方向与上面「判据分母 54 而 `wip-*/workspaces/*` 是 53」同源（**路径套两层**）。
+行数一致说明那 2 个目录里没有额外的账本行，**不影响任何结论**；
+**这一格以判据为准**（改它会让门红），差记在这里。
+现算：`python3 -c "import pathlib;L=list(pathlib.Path('CodexSkills/skill_log_evals/persona-distiller/_corpora').rglob('source-ledger.jsonl'));print(len(L))"`
 
 **唯一的例外，也是全库唯一真丢的一个：`wip-livermore-100`（Livermore #100，已入库）
 —— 账本 536 条、正文 0 份、`_ids-rebuild.txt` 也没有。** 它落在上表 53 个之外，所以那个「0」不算错，
