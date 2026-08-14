@@ -33,13 +33,32 @@
 | #179 Kant | 65 | quick | 10 | 23 | **33 / 16** | ✅ passed |
 | #181 Fröbel | 51 | quick | 4 | 23 | **32 / 16** | ✅ passed |
 | #173 Marshall | 95 | deep | **0** | 34 | **未出题** | **装置不成立** |
-| #182 Comenius | — | — | — | — | — | **记延后**（通道受限） |
+| #182 Comenius | 83 | quick | — | — | — | **记延后**（★ 理由已订正，见下） |
 
 **合计 676 份语料、一手 611（0.9038）、断言 240 条、盲判用例 193 题。**
 
 ★ **档位是 5 deep / 4 quick**：Kant 原判 deep 是**靠三条题名词误配出来的假道**顶上去的
 （`chronolog` 命中《全集·按年代编次》、`judgment` 命中《判断力批判》、`oration` ⊂ `commemoration`），
 修正后 6 道→3 道。详见 `_ledgers/_题名词造出来的假道-Kant从deep掉到quick-2026-08-12.md`。
+
+★★★ **Comenius #182 的延后理由是错的，2026-08-14 订正。**
+原写「通道受限，换台机器/换通道能续」。真因是 `assign_lanes.py` 的词表**没有捷克语** ——
+`correspond` 这十个字母在 `Korrespondence` 里根本不存在（捷克语 `K-` ＋ 双 `r`），
+于是他那份 **103,951 词**的书信集（1898，train/P1/HIS-OWN）**从第一天起就在语料里**，
+却被判成 `writings`，`conversations` 道空着。补一个词，全库 43 个可算工作区
+**只有他 1 个受影响**，`lanes` 2 → 3。
+> **记「外部办不到」之前，先问自己的尺子看不看得见已经有的东西。**
+> 延后会让一个人几个月不被碰，而下一个人会照着那条理由去做大动作
+> （我就照它写了一整个 Kramerius 取源器）。
+
+**仍维持延后**，因为 3 正好压在 quick 门上而那道只有 1 份。已把第二部（1892 Patera 卷，
+143,711 词）取回并按封切开：**121 封里他自己 96 封／81,320 词（88.5%）**，
+其余 24 封是他收到的信或**连他都不在场的第三方往来**（`Mr. Hartlib to Mr. Pell.` ×6）。
+切片、逐封 sha256、人读裁定（每条带证据原文）都已落库。
+**解冻只差一趟**：接进 `source-ledger.jsonl` ＋ 重跑
+`classify_primary`／`assign_lanes`／`assign_holdout`，**要一趟做完**。
+详见 `_ledgers/_Comenius缺的那条道一直在语料里-2026-08-14.md`
+与 `_ledgers/_Kramerius首取实测-一个PID装了两部书-2026-08-14.md`。
 
 ★★ **Marshall 没有密封面**：唯一低重合候选是**另一位大法官 John Marshall Harlan 的纪念集**
 （正文 Harlan 63 次 / Marshall 19 次），已退回 train 并加 `namesake_note`。

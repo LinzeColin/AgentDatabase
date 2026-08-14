@@ -210,6 +210,38 @@ python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/fetch_i
 
 或把另存的正文拷回 `<工作区>/raw/`（文件名要与台账 `local_path` 对得上）。
 
+### ★ archive.org 不是唯一的通道（2026-08-14 新增）
+
+`fetch_ia.py` 只走 archive.org。**捷克/中欧的材料它一份都看不到** ——
+Comenius #182 因此被记成「通道受限」整整两天，而真相是词表漏了一个语种（见下）。
+
+```bash
+# 列（只列不下，不绕任何访问控制：只取 dostupnost=public）
+python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/fetch_kramerius.py \
+  --host kramerius5.nkp.cz \
+  --query 'dc.creator:Komensk* AND fedora.model:monograph AND datum_begin:[* TO 1930] AND dostupnost:public' \
+  --rows 10 --list
+```
+
+**取回来先看两个字段再决定用不用**：`fetch_kramerius.py` 每份记
+`letter_run_ratio`（≥2 连续字母的词占 token 比）与 `ocr_verdict`。
+实测同一天同一个馆：1892 那卷 **0.9256**（可用）／1882 那卷 **0.0000**（乱码），
+而后者的 `words`／`pages_with_text` 看上去**比前者还健康**。
+**「取回成功」≠「取回了能用的字」。**
+
+### ★ 书信集不许整卷判 HIS-OWN（2026-08-14 新增）
+
+```bash
+python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/slice_letter_volume.py \
+  <正文.txt> --from 0.05 --to 0.70 --decisions <裁定.json> --out <目录>
+```
+
+1892 Patera 卷实测：**121 封里他自己只有 96 封**，其余 24 封是他收到的信、
+或**连他都不在场的第三方往来**（`Mr. Hartlib to Mr. Pell.` ×6）。
+整卷当一手就是 [[related-to-him-is-not-written-by-him]]。
+判不出方向的一律留 `?`，**不许当成他的**；人读定案要走 `--decisions`
+且**每条必须带证据原文**（没有证据的裁定工具会 raise）。
+
 ## 四、★ 唯一的停点：阶段 5 判分
 
 **8 个人**的产物与题目都做完了、**且合成门全过**，就差判分。判分要**两名互相独立的评委**。
