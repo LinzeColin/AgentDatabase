@@ -423,11 +423,22 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/quality_check.py <�
 
 ## 六、★★ 开工前必读的两份
 
-1. **`文档/踩坑库/README.md`** —— **165 条**实测教训（条数由判据核：
-   `python3 …/_ledgers/_pipeline/check_lessons_library.py`，现测 rc=0）。
+1. **`文档/踩坑库/README.md`** —— **条数以它自己的首行为准**（2026-08-14 现测 **193** 条）。
+   **这里有意不再复述那个数**：它每加一条就变，而复述出来的数只会越放越旧
+   —— 这一行原来写「165 条」，实际已经是 193。要现算就跑：
+
+   ```bash
+   head -1 文档/踩坑库/README.md
+   python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/check_lessons_library.py
+   ```
+
+   那件判据核的正是「README 首行的条数 ＝ 教训文件数 ＝ 索引条目数」三者一致，
+   **且它接在移交包的回读自验证里**，所以首行那个数不会悄悄漂。
    **不是风格指南**，每一条都是一次真实的错判 + 可复算的数字 + 怎么提前发现。
    开工前至少读它列的那 10 条，能省掉一整轮返工。
-2. **`HANDOFF.md`** —— 全部细节（很长，120KB，**按需检索，不要通读**）。
+2. **`HANDOFF.md`** —— 全部细节（**很长，按需检索，不要通读**；
+   要知道多长就 `wc -c HANDOFF.md`——**别信这里写死的 KB 数**，
+   这一行原来写 120KB，现测已是 127KB）。
 
 ## 七、几条不许破的规矩
 
