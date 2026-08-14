@@ -112,11 +112,31 @@ def letter_run_ratio(text: str) -> float:
       坏的那份 **8.61**、好的那份 **5.60** —— 坏的看起来「词更长＝更像正文」。
       两份都跑了才看见。**判别式要拿正例和反例各跑一次，只跑一份必然自洽。**
       [[my-diagnostics-manufacture-false-leads]]
+
+    ★★★ **第一版用 `[A-Za-zÀ-ɏͰ-Ͽ]`，当天就自己犯了早上刚修好的那个病。**
+      拿它回扫全树 1,261 份，报出 8 份「乱码」——打开读，**3 份是俄文**
+      （Brandeis 的 `Война и Еврейская Проблема`、Machiavelli 的两卷俄译《ГОСУДАРЬ》），
+      字是好的，只是**西里尔字母不在我的字符类里**。
+      早上刚把 `assign_lanes` 的捷克语漏词修好，下午就在自己的新判据里
+      重犯同一件事。⇒ 改用 `str.isalpha()`，**跟书写系统无关**。
+      [[blamed-the-channel-my-own-wordlist-was-blind]]
     """
     toks = text.split()
     if not toks:
         return 0.0
-    return len(re.findall(r"[A-Za-zÀ-ɏͰ-Ͽ]{2,}", text)) / len(toks)
+    runs = n = 0
+    for tok in toks:
+        run = 0
+        for ch in tok:
+            if ch.isalpha():                      # ★ 任何书写系统的字母都算
+                run += 1
+                if run == 2:
+                    runs += 1
+                    break
+            else:
+                run = 0
+        n += 1
+    return runs / n
 
 
 def years_in(text: str, head_chars: int = 20000) -> list:
@@ -158,6 +178,16 @@ def self_test() -> int:
     chk(f"★★ **正例：真正文（实得 {rg:.2f}）≥ 门 {OCR_MIN_RATIO}**", rg >= OCR_MIN_RATIO)
     chk(f"★★ **反例：逐字母加空格的乱码（实得 {rb:.2f}）< 门**", rb < OCR_MIN_RATIO)
     chk("★ 空文本不炸，判 0", letter_run_ratio("") == 0.0)
+    # ★★★ **跨书写系统正对照**（俄文那句逐字取自 brandeis 工作区的真语料）：
+    #   第一版用 `[A-Za-z…]` 字符类，把这份好好的俄文报成「乱码」——
+    #   与早上刚修好的「词表没有捷克语」是同一个病，同一天、我自己的新判据里。
+    RU = "Война и Еврейская Проблема. СТАТЬИ: Луи Д. Брандейса"
+    EL = "Πλάτωνος διάλογοι καὶ ἐπιστολαί"
+    rr, rel = letter_run_ratio(RU), letter_run_ratio(EL)
+    chk(f"★★ **好的俄文不许判乱码**（实得 {rr:.2f}）", rr >= OCR_MIN_RATIO)
+    chk(f"★★ **希腊字母同理**（实得 {rel:.2f}）", rel >= OCR_MIN_RATIO)
+    chk("★★ **反例：俄文真散开了照样要判红**（证明不是「非拉丁一律放行」）",
+        letter_run_ratio("В о й н а   и   Е в р е й с к а я") < OCR_MIN_RATIO)
     # ★★ 「平均 token 长度方向是反的」这条**故意不写成断言**：
     #   那是**整份文件**的统计（坏 8.61 > 好 5.60），而这里只有一小段摘录 ——
     #   摘录里坏的那份全是单字母，均长反而更小，**复现不出真文件的形状**。
