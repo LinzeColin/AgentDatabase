@@ -101,10 +101,27 @@ PATTERNS = [
     #     那些是**别人记下来的谈话**，本来就属这一道；`dialogue` 指的是作者写的体裁。
     #   ★★ 全库前后对比：只有 **Plato（4 份）** 与 **Rousseau（1 份，14 份里的 1 份）** 受影响，
     #     Rousseau 的道数不变 ⇒ **没有任何已交付人物的档位因此改变**。
+    # ★★★ 2026-08-14 语种对称（第二次，形状与下面 timeline 那条一模一样）：
+    #   **词表里没有捷克语**，于是 Comenius #182 的一部书信集在库里躺了整个项目周期，
+    #   被判成 `writings`。实测那一份：
+    #     `Korrespondence. Listy Komenského a vrstevníků jeho`（1898）
+    #     tier P1／HIS-OWN／train／**103,951 词**，正文在，不是空壳。
+    #   `correspond` 匹配不了 `Korrespondence`——**捷克语拼 K- 且双 r**，
+    #   子串里根本没有 `correspond` 这十个字母。同 [[filename-matching-is-brittle]] 的语种版。
+    #   ⇒ 后果不是「少归一个格子」：他的 `conversations` 道**是空的**，
+    #     `lanes = 2`，而 quick 门要 3 —— 延后名单 #182 的整条理由（「缺的是道」）
+    #     建在这个漏词上。修好之后 **2 → 3**。
+    #   ★ 全库 1,170 条题名逐条扫过：`korrespondenc` 命中 **1 条**、`\blisty\b` 命中 **1 条**，
+    #     且是**同一份**——⇒ 除 Comenius 外**一个工作区都不动**（下面 --diff 有逐人对照）。
+    #   ★★ **`\blisty\b` 试过了，撤掉了。** 我先把它加了进去（那份题名里就有 `Listy`），
+    #     写反例时才想起：捷克语 `listy` 也是「页/刊」——`Národní listy` 是**报纸**，
+    #     `Květy`、`Zlaté listy` 同族。它在本库的唯一命中与 `korrespondenc` 是同一份，
+    #     **零收益、有已知误报类** ⇒ 不留。同 `letter` ⊂ `letterari`，只是这次在加之前抓到的。
     ("conversations", r"\bletters?\b|correspond|briefe|briefwechsel|epistol|"
                       r"\blettres?\b|\blettere\b|"
                       r"carteggio|conversation|tischgespr|tabletalk|"
-                      r"table.?talk|kolloqui|colloqui"),
+                      r"table.?talk|kolloqui|colloqui|"
+                      r"korrespondenc|korespondenc"),
     # ★★ 2026-08-12 移除 `discourse|discours|discorsi`：**这个词分不出讲辞和专著**。
     #    17–18 世纪它就是「论」——实测本批两个人的 expression 道几乎全是专著：
     #      Rousseau  9 份里 8 份是《Discours sur l'origine … de l'inégalité》（论著，非讲辞）
@@ -330,6 +347,8 @@ def selftest() -> int:
         ("Correspondance diplomatique de m. de Bismarck (1851-1859)", "bismarck-176"),
         ("Julie oder die neue Heloise: in Briefen zweyer Liebenden", "rousseau-178"),
         ("Bismarck's table-talk", "bismarck-176"),
+        # ★★ 2026-08-14 捷克语（逐字取自 comenius-182 的 manifest，**不是我编的**）
+        ("Korrespondence. Listy Komenského a vrstevníků jeho", "comenius-182（本次的起因）"),
     ]
     NEG = [  # 必须**不**判成 conversations
         ("Frammenti letterari e filosofici", "leonardo-184（真误配，本次的起因）"),
@@ -350,6 +369,11 @@ def selftest() -> int:
          "`cum epistola ad …` 是**编者致某人**，不是他的往来"),
         ("A dialogue between a man of letters and Mr. J. J. Rousseau",
          "Rousseau #178 实测的那 1 份——同样是对话体作品"),
+        # ★★ 2026-08-14 捷克语那条**只加 `korrespondenc`，没加 `listy`**，这三条是它的守卫：
+        #   `listy` 在捷克语里也是「页/刊」，加进去会把报刊吃成书信集。
+        ("Národní listy : ročník 1898", "捷克**报纸**（`listy`＝刊），不是书信"),
+        ("Zlaté listy : časopis pro mládež", "同上，少年**杂志**"),
+        ("Listy filologické : sborník", "同上，**语文学刊**"),
     ]
     # ★★★ 2026-08-13：自测原来直接拿 conversations 那条正则去比，
     #   **而真正做决定的是 `lane_of()`**（排除规则、WORKS_OVERRIDE 都在那里面）。

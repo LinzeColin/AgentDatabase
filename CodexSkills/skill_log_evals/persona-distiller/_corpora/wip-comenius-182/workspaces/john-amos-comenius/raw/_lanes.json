@@ -1,9 +1,9 @@
 {
-  "lanes": 2,
+  "lanes": 3,
   "去掉纸面道后": 2,
   "逐道份数": {
-    "writings": 72,
-    "conversations": 0,
+    "writings": 71,
+    "conversations": 1,
     "expression": 0,
     "decisions": 0,
     "timeline": 0,
@@ -269,7 +269,7 @@
     },
     {
       "identifier": "bub_gb_SLlKAAAAYAAJ",
-      "道": "writings",
+      "道": "conversations",
       "title": "Korrespondence. Listy Komenského a vrstevníků jeho"
     },
     {
