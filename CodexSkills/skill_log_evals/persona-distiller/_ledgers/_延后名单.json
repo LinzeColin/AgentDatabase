@@ -1513,7 +1513,8 @@
       ],
       "★ 本轮的诚实边界": "只查 archive.org 一个通道；CCE 一条没查；俄文书目没有回一手核过。",
       "处置类": "① 一手规模不够（**不是取不到，是他 1931 年前只出了这几部**）",
-      "★ 处置类的原键": "class"
+      "★ 处置类的原键": "class",
+      "★ 2026-08-14 CCE 实测": "★★ 2026-08-14 实测：**`unblock_todo` ① 已关闭，结论与预期相反** —— 把 CCE Third Series Part 1（Books）1963–1968 共 12 卷（约 128 MB）逐卷取正文、先跑正对照（Hemingway/Faulkner/Steinbeck 各卷 60–134 次）再用容错正则搜，十二卷命中 37 处并逐处读完，**查到三条续展记录**：`Theory of elastic stability` ©19Jun36 A95809 → **23Oct63 R324163**；`Engineering mechanics; statics` ©30Jun37 A107555 → **5Aug64 R342895**；`Engineering mechanics, dynamics` ©12Aug37 → **29Jan65 R355155**。⇒ **三部全部续展过，不是公有领域，这条路封死。** `unblock_todo` ② （俄文教材换通道）仍开着，本轮未试（HathiTrust 今天仍 403）。详见 `_ledgers/_Timoshenko续展实测-2026-08-14.md`。"
     },
     {
       "name": "Henry Maudslay",
