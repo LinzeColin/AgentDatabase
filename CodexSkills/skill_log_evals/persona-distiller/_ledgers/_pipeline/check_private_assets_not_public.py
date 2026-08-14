@@ -60,7 +60,18 @@ CREDENTIAL_PATTERNS = [
 ]
 # 私钥块这一条**必然**被教训文本打中，所以命中后要看上下文：
 # 同一行出现下列任一词，判为「在讲这个标记串」，不是泄漏。
-MARKER_CONTEXT = re.compile(r"标记串|占位符|判据|检测|正则|pattern|placeholder|示例")
+# ★★ 2026-08-15 又被打中一次：我写来**解释这个缺陷**的台账正文
+#   （「是一份测脱敏功能的**合成夹具**（`"private_key = " + "-----BEGIN …`」）
+#   被判成真凭据。上一版的词表里没有「夹具／合成／脱敏」这几个词 ——
+#   **说「这不是真凭据」时实际会用的词，和我当初想到的那几个不是一套。**
+#   [[my-checkers-are-mis-cut-six-times-in-one-day]]
+#
+#   ★ 这是**放松**，代价要写明：真凭据若恰好落在「夹具」二字的邻行会被放过。
+#     接受它的理由是另一侧代价更大（每写一次说明就要改一次判据），
+#     并且自测里那条负对照始终在：**没有任何排除词的真凭据必须仍被抓到**。
+MARKER_CONTEXT = re.compile(
+    r"标记串|占位符|判据|检测|正则|pattern|placeholder|示例"
+    r"|夹具|合成|假钥|脱敏|测试用|fixture|synthetic|redact")
 
 
 def repo_is_public(remote="origin"):
