@@ -77,9 +77,16 @@ def check(ledger_path, registry_path=None):
         errs.append("%d 条**一个处置键都没有**（`处置类`/class/reason_class/defer_class/disposition 全无）：%s"
                     % (len(no_any), no_any[:6]))
     mirror_cov = n - len(no_mirror)
-    print("  ★ `处置类` 覆盖 %d/%d = %.1f%% —— schema 说明写「按 `处置类` 计数不会漏」，"
-          "**实测漏 %d 条**（它们只有 class/disposition 等原键）。"
-          % (mirror_cov, n, (mirror_cov / n * 100) if n else 0.0, len(no_mirror)))
+    pct = (mirror_cov / n * 100) if n else 0.0
+    if no_mirror:
+        # ★ 只在真的有漏的时候才印解释语。第一版无论如何都印「它们只有 class/disposition
+        #   等原键」，补齐到 0 之后那句话指着一个空集合说话。**报数的话要跟着数变。**
+        print("  ★ `处置类` 覆盖 %d/%d = %.1f%% —— schema 说明写「按 `处置类` 计数不会漏」，"
+              "**实测漏 %d 条**（它们只有 class/disposition 等原键）。"
+              % (mirror_cov, n, pct, len(no_mirror)))
+    else:
+        print("  ★ `处置类` 覆盖 %d/%d = %.1f%% —— schema 说明那句「按 `处置类` 计数不会漏」"
+              "**现在才成立**（2026-08-15 补齐前是 90/185 = 48.6%%）。" % (mirror_cov, n, pct))
 
     # ④ 与已出货 registry 的交集
     overlap = []
