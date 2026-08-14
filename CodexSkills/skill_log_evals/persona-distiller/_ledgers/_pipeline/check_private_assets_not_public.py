@@ -91,23 +91,40 @@ def files_in(rng=None):
     return [p.decode("utf-8", "surrogateescape") for p in out.split(b"\0") if p]
 
 
+SELF_NAME = "check_private_assets_not_public.py"
+
+
 def scan(paths):
     by_path = [p for p in paths if any(r.search(p) for r in PRIVATE_PATH_PATTERNS)]
     infra, creds = {}, []
-    remaining = [p for p in paths if p not in set(by_path)]
+    skipped = set(by_path)
+    remaining = [p for p in paths if p not in skipped]
     for p in remaining:
+        # ★ 判据不扫自己。上面那三张模式表里就写着 `ssh -i`、`systemctl`、
+        #   `-----BEGIN … PRIVATE KEY-----`，扫自己必然自报。
+        #   第一版没写这一条，判据把自己报成「1 处真凭据 —— 不许推」。
+        #   [[my-checkers-are-mis-cut-six-times-in-one-day]]
+        if p.endswith(SELF_NAME):
+            continue
         try:
             with open(p, "r", encoding="utf-8", errors="replace") as fh:
-                text = fh.read()
+                lines = fh.read().splitlines()
         except (OSError, IsADirectoryError):
             continue
+        text = "\n".join(lines)
         for label, rx in INFRA_PATTERNS:
             if rx.search(text):
                 infra.setdefault(label, []).append(p)
         for label, rx in CREDENTIAL_PATTERNS:
-            for line in text.splitlines():
-                if rx.search(line) and not MARKER_CONTEXT.search(line):
-                    creds.append((label, p, line.strip()[:120]))
+            for i, line in enumerate(lines):
+                if not rx.search(line):
+                    continue
+                # ★ 排除词要看**邻行**，不只看本行 —— 说明性文字常把
+                #   「这是判据用的标记串」写在下一行，只看本行会误报。
+                window = "\n".join(lines[max(0, i - 2):i + 3])
+                if MARKER_CONTEXT.search(window):
+                    continue
+                creds.append((label, p, line.strip()[:120]))
     return by_path, infra, creds
 
 
@@ -125,13 +142,36 @@ def selftest():
         if got != want:
             print("  ✗ %s 期望 %s 得 %s" % (p, want, got))
             bad += 1
-    # 标记串上下文：教训文本里那一行不该报
-    line = "`-----BEGIN RSA PRIVATE KEY-----` 是判据里用的标记串"
-    hit = CREDENTIAL_PATTERNS[-1][1].search(line) and not MARKER_CONTEXT.search(line)
-    if hit:
-        print("  ✗ 标记串上下文没排除掉")
-        bad += 1
-    print("自测 %d/%d" % (len(cases) + 1 - bad, len(cases) + 1))
+    # ── 内容侧：三个正反例都在真文件上跑 scan()，不是在字符串上试正则 ──
+    import os
+    import tempfile
+    checks = []
+    with tempfile.TemporaryDirectory() as td:
+        cwd = os.getcwd()
+        os.chdir(td)
+        try:
+            # ① 真凭据、无排除词 → **必须抓到**（负对照：证明这把尺子还看得见）
+            with open("leak.md", "w", encoding="utf-8") as fh:
+                fh.write("deploy key:\nAKIAIOSFODNN7EXAMPLE\n")
+            checks.append(("真凭据要抓到", len(scan(["leak.md"])[2]) == 1))
+
+            # ② 同一个串，但邻行写明是标记串 → 不该报
+            with open("talk.md", "w", encoding="utf-8") as fh:
+                fh.write("下面这个：\n-----BEGIN RSA PRIVATE KEY-----\n它是判据里用的标记串。\n")
+            checks.append(("讲标记串不该报", len(scan(["talk.md"])[2]) == 0))
+
+            # ③ 判据自己 → 不该报（它的模式表里就写着那些串）
+            with open(SELF_NAME, "w", encoding="utf-8") as fh:
+                fh.write("AKIAIOSFODNN7EXAMPLE\nssh -i x\n")
+            checks.append(("判据不扫自己", len(scan([SELF_NAME])[2]) == 0))
+        finally:
+            os.chdir(cwd)
+    for name, ok in checks:
+        if not ok:
+            print("  ✗ %s" % name)
+            bad += 1
+    n = len(cases) + len(checks)
+    print("自测 %d/%d" % (n - bad, n))
     return 1 if bad else 0
 
 
