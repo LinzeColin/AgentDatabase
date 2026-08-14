@@ -1,0 +1,182 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""私有资产不许进公开仓 —— 推送前的判据。
+
+为什么要有这份文件
+------------------
+2026-08-14：我把 `claude/character-distillation-skill-reorganize-d57595` 推上了
+`LinzeColin/AgentDatabase`，**那是个 PUBLIC 仓**，随之上去的有
+`_ledgers/_教训库/` 141 份 ＋ `文档/踩坑库/` 197 份，共 338 份 agent 教训。
+仓自己的 `HANDOFF.md`（origin/main，来自 PR #9）早就写着这类资产不许进。
+**我推之前没读那句。** 暴露约 12 分钟，已删分支。
+
+规则本来在**文档里**，没有任何东西执行它。这份判据执行它。
+
+★ 两条从这次踩出来的纪律：
+  ① **扫描面不能只覆盖文档点名的那一个目录。** `HANDOFF.md` 只点了
+     `_ledgers/_教训库/`，我按它扫完以为清了，实际还有**第二份副本**
+     `文档/踩坑库/`（197 份，比第一份还多）。所以下面按**内容特征**兜底，
+     不只按路径。[[a-gates-scan-set-is-smaller-than-reality]]
+  ② **凭据形状会误报。** 教训文本里把 `-----BEGIN RSA PRIVATE KEY-----`
+     当成「判据用的标记串」写进正文，5 处命中全是这个，**没有一处是真凭据**。
+     报「N 处泄漏」之前必须把命中行打出来看。[[measurement-errors-all-point-the-same-way]]
+
+用法
+----
+    python3 check_private_assets_not_public.py --selftest
+    python3 check_private_assets_not_public.py --check            # 扫在册文件
+    python3 check_private_assets_not_public.py --check --range origin/main..HEAD
+"""
+import argparse
+import re
+import subprocess
+import sys
+
+# ① 按路径：明确属于 private-only 的树
+PRIVATE_PATH_PATTERNS = [
+    re.compile(r"(^|/)_教训库/"),
+    re.compile(r"(^|/)踩坑库/"),
+    re.compile(r"(^|/)claude-memory/"),
+    re.compile(r"(^|/)OPS/AGENT_ONBOARDING"),
+]
+
+# ② 按内容：基础设施细节。命中不等于必须拦，但必须**逐条打出来给人看**。
+INFRA_PATTERNS = [
+    ("内部域名", re.compile(r"[a-z0-9-]+\.linzezhang\.com")),
+    ("主机/供应商", re.compile(r"\bOVH\b|\bovh\b")),
+    ("服务器路径", re.compile(r"/usr/local/bin/[A-Za-z0-9._-]+")),
+    ("Cloudflare 部署", re.compile(r"\bwrangler\b|\bCloudflare\b")),
+    ("systemd 单元", re.compile(r"\bsystemctl\b|\.service\b")),
+    ("ssh 细节", re.compile(r"\broot@|ssh -i |IdentityFile")),
+]
+
+# ③ 真凭据（严格；宽松写法会被教训文本里的标记串打中）
+CREDENTIAL_PATTERNS = [
+    ("GitHub PAT", re.compile(r"ghp_[A-Za-z0-9]{30,}")),
+    ("GitHub fine-grained", re.compile(r"github_pat_[A-Za-z0-9_]{40,}")),
+    ("OpenAI key", re.compile(r"sk-[A-Za-z0-9]{32,}")),
+    ("AWS key id", re.compile(r"AKIA[0-9A-Z]{16}")),
+    ("私钥块", re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----")),
+]
+# 私钥块这一条**必然**被教训文本打中，所以命中后要看上下文：
+# 同一行出现下列任一词，判为「在讲这个标记串」，不是泄漏。
+MARKER_CONTEXT = re.compile(r"标记串|占位符|判据|检测|正则|pattern|placeholder|示例")
+
+
+def repo_is_public(remote="origin"):
+    """现问 GitHub，不看文档。取不到返回 None（未判，不是「不是公开的」）。"""
+    url = subprocess.run(["git", "remote", "get-url", remote],
+                         capture_output=True, text=True).stdout.strip()
+    m = re.search(r"[:/]([^/:]+/[^/]+?)(?:\.git)?$", url)
+    if not m:
+        return None, url
+    slug = m.group(1)
+    out = subprocess.run(["gh", "repo", "view", slug, "--json", "isPrivate"],
+                         capture_output=True, text=True)
+    if out.returncode != 0:
+        return None, slug
+    try:
+        import json
+        return (not json.loads(out.stdout)["isPrivate"]), slug
+    except Exception:
+        return None, slug
+
+
+def files_in(rng=None):
+    if rng:
+        cmd = ["git", "diff", "--name-only", "-z", rng]
+    else:
+        cmd = ["git", "ls-files", "-z"]
+    out = subprocess.run(cmd, capture_output=True).stdout
+    return [p.decode("utf-8", "surrogateescape") for p in out.split(b"\0") if p]
+
+
+def scan(paths):
+    by_path = [p for p in paths if any(r.search(p) for r in PRIVATE_PATH_PATTERNS)]
+    infra, creds = {}, []
+    remaining = [p for p in paths if p not in set(by_path)]
+    for p in remaining:
+        try:
+            with open(p, "r", encoding="utf-8", errors="replace") as fh:
+                text = fh.read()
+        except (OSError, IsADirectoryError):
+            continue
+        for label, rx in INFRA_PATTERNS:
+            if rx.search(text):
+                infra.setdefault(label, []).append(p)
+        for label, rx in CREDENTIAL_PATTERNS:
+            for line in text.splitlines():
+                if rx.search(line) and not MARKER_CONTEXT.search(line):
+                    creds.append((label, p, line.strip()[:120]))
+    return by_path, infra, creds
+
+
+def selftest():
+    cases = [
+        ("a/_教训库/x.md", True), ("文档/踩坑库/y.md", True),
+        ("b/claude-memory/z.md", True), ("OPS/AGENT_ONBOARDING.md", True),
+        ("CodexSkills/registry/codex/persona-distiller/SKILL.md", False),
+        ("_ledgers/_pipeline/assign_lanes.py", False),
+        ("_ledgers/_教训库改进记录.md", False),   # 不是目录，是同前缀的文件名
+    ]
+    bad = 0
+    for p, want in cases:
+        got = any(r.search(p) for r in PRIVATE_PATH_PATTERNS)
+        if got != want:
+            print("  ✗ %s 期望 %s 得 %s" % (p, want, got))
+            bad += 1
+    # 标记串上下文：教训文本里那一行不该报
+    line = "`-----BEGIN RSA PRIVATE KEY-----` 是判据里用的标记串"
+    hit = CREDENTIAL_PATTERNS[-1][1].search(line) and not MARKER_CONTEXT.search(line)
+    if hit:
+        print("  ✗ 标记串上下文没排除掉")
+        bad += 1
+    print("自测 %d/%d" % (len(cases) + 1 - bad, len(cases) + 1))
+    return 1 if bad else 0
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--check", action="store_true")
+    ap.add_argument("--range", dest="rng", default=None,
+                    help="只扫某个提交范围的改动，如 origin/main..HEAD")
+    a = ap.parse_args()
+    if not (a.selftest or a.check):
+        ap.error("至少选一个：--selftest / --check")
+    rc = 0
+    if a.selftest:
+        rc |= selftest()
+    if a.check:
+        pub, slug = repo_is_public()
+        label = {True: "**PUBLIC**", False: "private", None: "**未判**（gh 取不到）"}[pub]
+        print("  远端 %s → %s" % (slug, label))
+        paths = files_in(a.rng)
+        print("  扫描面：%d 个文件%s" % (len(paths), "（%s）" % a.rng if a.rng else "（全部在册）"))
+        by_path, infra, creds = scan(paths)
+        print("\n  ① 按路径判为 private-only：**%d 个**" % len(by_path))
+        for p in by_path[:6]:
+            print("       %s" % p)
+        if len(by_path) > 6:
+            print("       …… 另有 %d 个" % (len(by_path) - 6))
+        print("\n  ② 基础设施细节（命中≠必须拦，逐类看）")
+        for label2, ps in sorted(infra.items(), key=lambda x: -len(x[1])):
+            print("       %-16s %4d 个文件，例：%s" % (label2, len(ps), ps[0]))
+        if not infra:
+            print("       无")
+        print("\n  ③ 真凭据（已排除「在讲标记串」的行）：**%d 处**" % len(creds))
+        for label2, p, line in creds[:10]:
+            print("       ✗ %-18s %s\n         %s" % (label2, p, line))
+        if pub and by_path:
+            print("\n  ⇒ **公开仓 + private-only 资产 %d 个 —— 不许推。**" % len(by_path))
+            rc |= 1
+        elif creds:
+            print("\n  ⇒ **有 %d 处真凭据 —— 不许推。**" % len(creds))
+            rc |= 1
+        else:
+            print("\n  ⇒ 通过。")
+    return rc
+
+
+if __name__ == "__main__":
+    sys.exit(main())
