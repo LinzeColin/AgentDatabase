@@ -132,7 +132,7 @@ Date: 2026-08-05（**v0.0.0.154**）
 > 还原 → 0，文件逐字一致。（**上一次接线就是接错了分支才白接的**，所以这次必须植入验证。）
 >
 > **本版实况计数（`check_verification_counts.py` 逐项核过）**：
-> 判据 **93** 件、Python 脚本 **135** 件、checksum 全量校验 **490 files**、身份族 **12** 族、**名册 102 人**。
+> 判据 **93** 件、Python 脚本 **135** 件、checksum 全量校验 **491 files**、身份族 **12** 族、**名册 102 人**。
 > ★★★★ **2026-08-10 更新**：判据 72→82、脚本 106→117、checksum 416→431。**这三个数又漂了一轮，是 `check_checkers` 报出来的，不是我自己想起来的。** ★ 口径写死在 `check_verification_counts.PATTERNS`：判据＝`scripts/check_*.py`、脚本＝`scripts/*.py`。**我第一次改用 `find . -name '*.py'` 算出 250，范围错了**——[[counts-need-their-cutoff-stated]]。
 > ★★★★ **2026-08-11 再更新**：判据 82→**86**、脚本 117→**123**、checksum 431→**460**，并补上此前**根本没写过**的「名册人数」**102**（判据一直报「文中 None」，而「文中没写」和「文中写错」在报告里长得一样——`empty-default-swallows-unknown`）。★ 三个数都**按判据写死的那个口径独立复算过一遍**，不是抄它的输出：
 > `ls scripts/check_*.py | wc -l` = 86、`ls scripts/*.py | wc -l` = 123、`wc -l < checksums.sha256` = 460、`team-index.json` 的 products = 102。
@@ -219,7 +219,19 @@ Date: 2026-08-05（**v0.0.0.154**）
 >   全库 57 个工作区实测：**7/7 全中、0 漏、0 新误报**；8 个变异体全红、正例绿。
 > ★ 另 +1 清单是 `references/pipeline/checkers/` 里的镜像；
 >   `collect_honest_delta.py` 加了 `候选均`／`对照均` 两个字段（4 条自测 + 2 个变异体承力）。
-> ★ 现算：判据 93、脚本 135、清单 490。
+> ★ 现算：判据 93、脚本 135、清单 **491**。
+> ★★★ **2026-08-15 第十五次更新：checksum 490→491，`registry.yaml` 纳入校验。**
+>   **不升版**——依 2026-08-04 裁定「判据落地算工具改动，不动版本号；只有产物侧变化才升版」，
+>   本次改的是 `scripts/build_manifest.py` 与它产出的发布元数据，**没有任何人物产物变化**。
+>   （我一度按仪式 bump 到 v0.0.0.155，读到 CHANGELOG 那条裁定后**已全部还原**。）
+>   根因：`build_manifest.py` 的 `included()` 把 `registry.yaml` 排掉，而同一个文件第 69 行
+>   **硬写** `"excluded_from_release_checksums": []` —— **代码排除了一个文件，它自己生成的声明说「什么都没排除」**。
+>   而 `registry.yaml` 是在册的版本契约文件（134 次提交，`identity.version` 由 `bump_version.py` 写、
+>   `check_contract_drift.py` 专门校验那个字段），且 `bump_version` **先于** `build_manifest` 跑 ——
+>   算校验和时它早已定稿，**排除它没有任何顺序上的理由**。
+>   现改为：排除集合命名为 `EXCLUDED_FROM_FILES`，真正不被校验的只有 `checksums.sha256`（不能对自己算），
+>   声明由 `NOT_CHECKSUMMED` **派生**、不许手写。复验：`shasum -c` **491 OK / 0 FAILED**，
+>   `excluded_from_release_checksums` 现为 `['checksums.sha256']`。
 > ★★ **2026-08-06 更新**：判据 70→72、脚本 104→106（当日新增
 > `check_lane_quotes_verbatim` 与 `check_stance_density`）。
 > **这两个数是判据报出来的，不是我记得改的**——`check_verification_counts` 当天报

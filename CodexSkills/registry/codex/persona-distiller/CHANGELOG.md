@@ -13,6 +13,41 @@
 > **规矩不是被我忘了，是这份文件没给它留位置。**
 > 想守规矩的唯一办法是什么都不写，那又违反「每一处改动都要留痕」。
 
+### 2026-08-15：生成器排除了一个文件，它自己生成的声明说「什么都没排除」
+
+`checksums.sha256` **490 行，而 skill 目录实际 492 个文件**。逐项对完，
+排除自指的两项之后，唯一没被盖到的是 **`registry.yaml`**。
+
+而 `PACKAGE_MANIFEST.json` 的 `mutable_paths.excluded_from_release_checksums`
+写着 **`[]`** —— 「什么都没排除」。**两句话出自同一个文件**：
+`scripts/build_manifest.py` 的 `included()` 把 `registry.yaml` 排掉（第 36–41 行），
+第 69 行又硬写 `[]`。
+
+**这不该排。** `registry.yaml` 是在册的版本契约文件：134 次提交、
+`identity.version` 由 `bump_version.py` 写、`check_contract_drift.py` 专门校验那个字段。
+而且 `bump_version` **先于** `build_manifest` 跑（`finalize_release` 的注释明写
+「`bump_version.py` 不在这里面——它要先跑」），**算校验和时 `registry.yaml` 早已定稿，
+排除它没有任何顺序上的理由**。
+
+改法：排除集合命名为 `EXCLUDED_FROM_FILES`，其中 `PACKAGE_MANIFEST.json` 会在
+第 74 行被加回 `checksum_paths`（所以它是被校验的），**真正不被校验的只有
+`checksums.sha256`**（不能对自己算）；声明由 `NOT_CHECKSUMMED` **派生，不许手写**。
+
+实测：`checksums.sha256` **490 → 491**、`PACKAGE_MANIFEST.files` **489 → 490**、
+`excluded_from_release_checksums` **`[]` → `['checksums.sha256']`**、
+`shasum -c` **491 OK / 0 FAILED**、`check_verification_counts` **rc=0**、
+四件 registry 判据 `--self-test` 全 rc=0。
+
+★ **不升版**，依 2026-08-04 裁定：改的是脚本与发布元数据，**没有任何人物产物变化**。
+  我一度按仪式 `bump_version.py v0.0.0.155`，读到本节开头那条裁定后**把 6 处版本位全部还原**
+  （`VERSION`/`manifest.json`/`registry.yaml`/`README.md`/`handoff.md`/`index.json`），
+  只留下 `build_manifest.py` 的修复并在 v0.0.0.154 上重建清单。
+  **仪式跑错方向，是靠这份 CHANGELOG 自己开头那段裁定拦回来的。**
+
+★ 顺带订正一个我自己的量错：第一次统计说「清单漏 3 个、还有 1 个清单有而文件不在」——
+  真因是我用 `lstrip("./")`，那是**按字符集**剥，把 `./.gitignore` 剥成了 `gitignore`。
+  改成只剥一次前缀之后是「漏 2、多 0」。另有 5 个 `.pytest_cache/` 是我跑自测生成的，已清。
+
 ### 2026-08-12：「判据自己没被查」这一族，四层一次挖到底
 
 四个形态是同一个病，按发现顺序：

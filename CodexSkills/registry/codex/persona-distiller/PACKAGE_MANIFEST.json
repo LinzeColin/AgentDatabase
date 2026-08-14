@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "a0f4180f4a235e61024e7f16793a50ed5fe05559c2e3d7fc7df7aa58838da8c7",
-      "size_bytes": 335964
+      "sha256": "dd98824235e087502bc72efeee9e9708d9b742dc54145a16ba446942026382ee",
+      "size_bytes": 338408
     },
     {
       "path": "CONTRIBUTING.md",
@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "1aa9d940f659c9ae4e4d816e66a534959d60dc72b69b629474675a39dd1c2bf7",
-      "size_bytes": 143595
+      "sha256": "81c6694332424e59f00c2e63a94bedf2e1375f136b489ffe20e72fcf11f492c8",
+      "size_bytes": 144952
     },
     {
       "path": "VERSION",
@@ -1200,6 +1200,11 @@
       "size_bytes": 2364
     },
     {
+      "path": "registry.yaml",
+      "sha256": "b6442af3ade8ef671919d20ce446c8c9ba80517c25465add688ca1643e03144e",
+      "size_bytes": 2120
+    },
+    {
       "path": "schemas/capability.schema.json",
       "sha256": "e6abad7c452f38b35054da6bcabcff0dba7a5ce7d083648825fcafb4e70642d7",
       "size_bytes": 723
@@ -1281,8 +1286,8 @@
     },
     {
       "path": "scripts/build_manifest.py",
-      "sha256": "1c07727e260276f9b9c4fccf979cfe86f61fe99a129c61431c813c1d68ad1f56",
-      "size_bytes": 2931
+      "sha256": "72676142e3179c94d4caa59cbe0ff93806163c64c39b9ec4e9ee6bcce717950c",
+      "size_bytes": 4397
     },
     {
       "path": "scripts/build_release_bundle.py",
@@ -2457,7 +2462,9 @@
   ],
   "identity_choices": 7,
   "mutable_paths": {
-    "excluded_from_release_checksums": [],
+    "excluded_from_release_checksums": [
+      "checksums.sha256"
+    ],
     "registry_is_external": "../persona-distiller-group",
     "validation": "python3 scripts/validate_persona_registry.py"
   },

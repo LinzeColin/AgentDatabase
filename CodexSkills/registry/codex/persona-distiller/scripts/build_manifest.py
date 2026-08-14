@@ -27,17 +27,34 @@ _VER = (pathlib.Path(__file__).resolve().parent.parent / 'VERSION')\
        .read_text(encoding='utf-8').strip()
 
 
+# ★ 不进 `files` 列表的两个，各有各的理由，**都不是「被排除在校验之外」**：
+#   PACKAGE_MANIFEST.json —— 它就是这份列表本身；但下面第 74 行**会把它加回
+#                            checksum_paths**，所以它是被校验的。
+#   checksums.sha256      —— 不能对自己算校验和。这一个才是真正**不被校验**的。
+EXCLUDED_FROM_FILES = {
+    "PACKAGE_MANIFEST.json",
+    "checksums.sha256",
+}
+# ★★ 真正不被校验的只有这一个。声明必须**从这里派生**，不许再手写。
+#   2026-08-15 之前：`registry.yaml` 也在上面那个集合里被排掉，
+#   而第 69 行硬写 `"excluded_from_release_checksums": []` ——
+#   **代码排除了一个文件，它自己生成的声明说「什么都没排除」**，
+#   同一个文件里自相矛盾。而 registry.yaml 是在册的版本契约文件
+#   （134 次提交，`identity.version` 由 bump_version.py 写、
+#   `check_contract_drift.py` 专门校验它那个字段），
+#   且 bump_version **先于** build_manifest 跑 —— 算校验和时它早已定稿，
+#   **排除它没有任何顺序上的理由**。现已纳入校验。
+#   [[the-comment-states-the-rule-the-code-narrows-it]]
+NOT_CHECKSUMMED = sorted(EXCLUDED_FROM_FILES - {"PACKAGE_MANIFEST.json"})
+
+
 def included(path: Path) -> bool:
     relative = path.relative_to(ROOT)
     if any(part in EXCLUDED_DIRS for part in relative.parts):
         return False
     if path.suffix in {".pyc", ".pyo", ".zip"}:
         return False
-    if relative.as_posix() in {
-        "PACKAGE_MANIFEST.json",
-        "checksums.sha256",
-        "registry.yaml",
-    }:
+    if relative.as_posix() in EXCLUDED_FROM_FILES:
         return False
     return True
 
@@ -66,7 +83,9 @@ def main() -> int:
         "canonical_registry": "../persona-distiller-group",
     }
     manifest["mutable_paths"] = {
-        "excluded_from_release_checksums": [],
+        # ★ 从 NOT_CHECKSUMMED 派生，**不许手写**。原来硬写 `[]`，
+        #   而 `included()` 实际排掉了 registry.yaml —— 声明与代码在同一文件里打架。
+        "excluded_from_release_checksums": list(NOT_CHECKSUMMED),
         "registry_is_external": "../persona-distiller-group",
         "validation": "python3 scripts/validate_persona_registry.py",
     }
