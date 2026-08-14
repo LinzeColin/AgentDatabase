@@ -91,3 +91,64 @@ W=CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-michelangelo-185/wo
 python3 "$Q" "$W" --phase synthesis      # rc=1，errors 19 条
 # ★ 是位置参数 target，**不是 --workspace**（我第一次就写错了）
 ```
+
+---
+
+# 续：**换的那把尺子也坏了** —— 「87 个意文没有的日期」几乎全是我造出来的
+
+同日稍晚。按上面写的「抽 (年, 月) 集合比」做了，正对照先过
+（1507 年 2 月那封信：意文 `8 di febbraio 1507`、德文 `1507 i. Februar`，**两边都抽到**）。
+
+    三部意文合并后 490 个 (年,月)
+    Die Briefe（德）           自有 297｜意文没有的 **70**
+    Gedichte und Briefe（德）  自有  31｜意文没有的 **3**
+    A record of his life（英）  自有 235｜意文没有的 **14**
+    ⇒ 合计 **87**
+
+**这个 87 不能用。** 里面有 `1475-02`、`1479-03`、`1481-01` ——
+他 **1475 年 3 月才出生**，四岁六岁不会写信。按纪律抽 8 处打开读上下文：
+
+| 部 | (年,月) | 实际是什么 |
+|---|---|---|
+| Die Briefe | 1475-02 | 书末 **ZEITTAFEL（年表）** ＋ 编者序 `Berlin, 14. Februar 1907. Karl Frey` |
+| Die Briefe | 1496-03 | 同上，年表相邻行 |
+| Die Briefe | 1508-10 | 同上（`1507. 21. September` / `12./14. Oktober` 那一列） |
+| Die Briefe | 1512-02 | 同上 |
+| A record | 1479-03 | 编者注：`Giovan Simone Buonarroti was born on March 11th, 1479` |
+| A record | 1492-04 | 编者注：`Lorenzo died on April 8th, 1492` |
+| A record | 1529-06 | **窗口跨行错配**：`January 6th, 1529` 与隔壁信头 `June 26th, 1531` 撞在一起 |
+| A record | 1537-11 | 一张**收据**：`…the amount due for the two months, October and November`，年份来自隔壁 `1537` |
+
+**8 处里 0 处是「意文没有的信」。** 真因：我的 ±90 字符窗口
+在**年表**这种「一列年、一列月」的版面上，会把任意年配上任意月。
+[[a-signal-that-both-overfires-and-underfires]]｜[[regex-must-clear-the-corpus-language]]
+
+⇒ **这一轮没有证明德/英两部含有意文没有的信，也没有证伪。两把尺子都不成立。**
+
+## ★★ 但抽样顺带露出一件真的
+
+英文那部题名是 `A record of his life as told in his own **letters and papers**`。
+1537-11 那处读出来是**一张收据原文**：
+
+> Michelangelo has received from Messer Francesco Durante of Piacenza the sum of
+> ninety-one and a third crowns in gold, being the amount due for the two months,
+> October and November.
+
+**这是 ricordi（账记/收据），不是书信** —— 意文那三部是 `lettere`，按题名根本不收这类。
+而 `clm-a928f1063ac7` 要证的正是「远程付款：回执上没付款人姓名就不算付讫」。
+
+⇒ **下一轮的可取面不是「意文没有的信」，是「英文那部里的 papers 部分」。**
+判它是不是独立证据，要问的是：**这些 ricordi 在意文三部里有没有**，
+而不是比日期集合。
+
+## 下一轮的做法（比上一版收窄）
+
+1. 在 `A record…`（`src-8539ad71569a`）里定位 **papers/ricordi 段**
+   （标志：第三人称 `Michelangelo has received` / `Ricordo` 式记账句，不是书信的第二人称）。
+2. 逐段拿原文去意文三部里搜（**用意文对应词，不是英译词** ——
+   跨语言 n-gram 恒 0，这条已经栽过一次）。搜不到 ⇒ 它是独立材料。
+3. 只有到这一步才谈得上给 `clm-a928f1063ac7` 补第二处证据。
+
+★ 本轮**两把尺子都坏了**，一把（n-gram）跨语言恒 0，一把（年月对）在年表上乱配。
+**两次都是「先量再搜」这条纪律拦住了假发现** —— 如果直接开搜，
+我会在一个 29 部的虚假搜索面上、拿一堆年表日期当「新信」报上去。
