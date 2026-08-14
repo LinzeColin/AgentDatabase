@@ -1068,6 +1068,9 @@ adams-131 **141**、fleming-111 **138**（共 46 个目录）。
   **都用已完成人物的既有产物做过逐字节正对照**。
 
   - **下一步**：NEXT = **William Blackstone**（1723–1780，政治法律师；`next_person.py` 输出）。
+    > ★★ **2026-08-14 已作废，别照这行走**：Blackstone 后来记了延后（#169，
+    > 「可引面与可证面不重合」）。**现在 `next_person.py` 输出的 NEXT 是 `None`**
+    > —— `queue_pending = 0`。现算见 START-HERE 第五节开头那段。
     同名门已跑，报 `UNVERIFIED_NAMESAKE_NO_CANDIDATES`——**那不是「没有同名风险」，是「没核」**，
     候选检索已派子代理。
   ★ 开工须知全在 `_corpora/wip-grotius-168/00-同名判定.md`，

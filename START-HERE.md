@@ -376,6 +376,24 @@ python3 CodexSkills/registry/codex/persona-distiller/scripts/quality_check.py <�
 
 ## 五、接着往下做什么
 
+> ★★★ **先知道一件事：队列里没有「下一个人」了。**
+> `next_person.py` 现在输出 **`NEXT = None`**，`queue_pending = **0**`。
+> **那不是坏了**，恒等式自己闭合：
+>
+>     queue_total 237 ＝ done 40 ＋ pending 0 ＋ deferred 185 ＋ 「已做但未出货」12
+>
+> 那 12 个人是 Brandeis／Marshall／Lincoln／Bismarck／Machiavelli／Jefferson／
+> Michelangelo／Kant／Rousseau／Pestalozzi／Fröbel／Dewey ——
+> **全部卡在阶段 5 判分或返工**，不是「还没开始」。
+> ⇒ **接下来能做的事都在下面这张表里；「再挑一个新人物来蒸」不在其中**
+> （要挑新人得先补队列，而那件事用户 2026-08-12 明确暂停了）。
+>
+> 现算：
+>
+> ```bash
+> python3 CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/next_person.py
+> ```
+
 按优先级：
 
 1. **跑阶段 5 判分**（上面第四节）——这是唯一卡住的一步，**8 个人**，
