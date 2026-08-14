@@ -82,11 +82,27 @@ def repo_is_public(remote="origin"):
         return None, slug
 
 
+def repo_root():
+    """★ 锚到仓根，**不许跟着 cwd 走**。
+
+    `git ls-files` 只列 cwd 以下 —— 同一道门在子目录里跑就只看得见一小块，
+    然后安安静静地绿。同型缺陷 2026-08-15 在 `check_corpus_not_in_git.py`
+    上**实测到了**（仓根 15,251 个 / 502 语料 rc=1，`_pipeline/` 里 101 个 /
+    0 语料 rc=**0**）。本文件是同一个代码形状，按机制一并修
+    （这一处**没有单独实测**，两个 cwd 的对照跑超时了）。
+    [[a-gates-scan-set-is-smaller-than-reality]]
+    """
+    out = subprocess.run(["git", "rev-parse", "--show-toplevel"],
+                         capture_output=True, text=True)
+    return out.stdout.strip() or "."
+
+
 def files_in(rng=None):
+    root = repo_root()
     if rng:
-        cmd = ["git", "diff", "--name-only", "-z", rng]
+        cmd = ["git", "-C", root, "diff", "--name-only", "-z", rng]
     else:
-        cmd = ["git", "ls-files", "-z"]
+        cmd = ["git", "-C", root, "ls-files", "-z"]
     out = subprocess.run(cmd, capture_output=True).stdout
     return [p.decode("utf-8", "surrogateescape") for p in out.split(b"\0") if p]
 

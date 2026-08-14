@@ -125,22 +125,65 @@ def selftest():
     return 1 if bad else 0
 
 
+def repo_root():
+    """★★ 一律锚到仓根，**不许跟着 cwd 走**。
+
+    `git ls-files` 只列 cwd 以下。2026-08-15 实测同一道门两个答案：
+      · 在仓根跑     → 在册 15,251 个，判为语料 **502 个**，rc=1
+      · 在 `_pipeline/` 跑 → 在册 **101 个**，判为语料 **0 个**，rc=**0**
+    第二个是**假绿** —— 门自己没坏，是它站的位置决定了它看得见什么。
+    [[a-gates-scan-set-is-smaller-than-reality]]
+    """
+    out = subprocess.run(["git", "rev-parse", "--show-toplevel"],
+                         capture_output=True, text=True)
+    return out.stdout.strip() or "."
+
+
 def tracked_paths():
-    out = subprocess.run(["git", "ls-files", "-z"], capture_output=True).stdout
+    out = subprocess.run(["git", "-C", repo_root(), "ls-files", "-z"],
+                         capture_output=True).stdout
     return [p.decode("utf-8", "surrogateescape") for p in out.split(b"\0") if p]
 
 
-def check():
-    """仓里现在有没有语料在册。"""
-    paths = tracked_paths()
+def changed_paths(rng):
+    out = subprocess.run(["git", "-C", repo_root(), "diff", "--name-only", "-z", rng],
+                         capture_output=True).stdout
+    return [p.decode("utf-8", "surrogateescape") for p in out.split(b"\0") if p]
+
+
+def check(rng=None):
+    """有没有语料在册。
+
+    ★ 两个问题**不是同一个**，推送前要问的是第二个：
+      ① 仓里现在有没有语料在册？   → 不给 `--range`
+      ② **这次改动**加了语料没有？ → 给 `--range origin/main..HEAD`
+    2026-08-15 实测：① 红着（641 个、3.3 MB，`origin/main` 上早就有，
+    多是 Godin 的博文小文件；那次 1,993 MB 的剥离没覆盖这一档），
+    而 ② 是 0 —— 两个答案都对，混为一谈就会把「存量红」读成「我推坏了」。
+    """
+    if rng:
+        paths = changed_paths(rng)
+        scope = "改动面 %s" % rng
+        # ★ 空扫描面不叫通过。[[zero-hit-gates-must-prove-they-can-hit]]
+        if not paths:
+            print("  %s：**0 个文件** —— 扫描面是空的，**这不叫通过**"
+                  "（改动还没提交？）" % scope)
+            return 2
+    else:
+        paths = tracked_paths()
+        scope = "全部在册"
     hits = [p for p in paths if is_corpus(p)]
-    print("  在册 %d 个文件，其中判为语料 **%d 个**" % (len(paths), len(hits)))
+    print("  %s %d 个文件，其中判为语料 **%d 个**" % (scope, len(paths), len(hits)))
     for p in hits[:15]:
         print("    ✗ %s" % p)
     if len(hits) > 15:
         print("    …… 另有 %d 个" % (len(hits) - 15))
     if hits:
-        print("\n  ⇒ 语料在册。剥离办法见 `_ledgers/_语料剥离-1993MB-2026-08-14.md`。")
+        # ★ 原来这里指向 `_ledgers/_语料剥离-1993MB-2026-08-14.md`，
+        #   **那个文件根本不存在** —— 错误提示指着一个不存在的出口。
+        #   真记录是提交 18f8843f3。[[error-message-points-at-an-exit-that-isnt-there]]
+        print("\n  ⇒ 语料在册。剥离办法见提交 `18f8843f3`"
+              "（fix(gitignore): 语料规则按层写、又放错树 —— 1,993 MB 正文因此进了 git）。")
         return 1
     print("  ⇒ 0 个语料在册。")
     return 0
@@ -193,6 +236,8 @@ def main():
     ap.add_argument("--self-test", "--selftest", dest="selftest", action="store_true", help="跑正反例")
     ap.add_argument("--check", action="store_true", help="扫全仓：有没有语料在册")
     ap.add_argument("--agree", action="store_true", help="核 .gitignore 与本判据是否一致")
+    ap.add_argument("--range", dest="rng", default=None,
+                    help="只扫某个提交范围的改动（如 origin/main..HEAD）——**推送前问的是这个**")
     a = ap.parse_args()
     if not (a.selftest or a.check or a.agree):
         ap.error("至少选一个：--selftest / --check / --agree")
@@ -200,7 +245,7 @@ def main():
     if a.selftest:
         rc |= selftest()
     if a.check:
-        rc |= check()
+        rc |= check(a.rng)
     if a.agree:
         rc |= agree()
     return rc

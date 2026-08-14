@@ -39,7 +39,11 @@ PY
 rc=$?; [ $rc -ne 0 ] && { echo "★ 第 1 步失败 rc=$rc，后面不跑"; exit $rc; }
 
 echo "== 2/5 dedup =="   ; python3 "$HERE/dedup_corpus.py" --raw "$WS/raw" >/dev/null || exit 1
-echo "== 3/5 台账 =="     ; python3 "$HERE/emit_source_ledger.py" --raw "$WS/raw" --workspace "$WS" >/dev/null || exit 1
+# ★ `--preserve` 不许去掉。重出台账是**纯重生成**：`split` 无条件写回 `train`，
+#   `attribution`／`extraction_status`／`tier`／`rights` 全部按规则重算 ——
+#   没有它，剔一份语料就顺手把这个人的 holdout 标记和所有人工裁定一起抹掉。
+#   （下面第 ① 条叮嘱原本就是为这件事写的，现在由工具执行，不再靠人记得。）
+echo "== 3/5 台账 =="     ; python3 "$HERE/emit_source_ledger.py" --raw "$WS/raw" --workspace "$WS" --preserve >/dev/null || exit 1
 echo "== 4/5 分道 =="     ; python3 "$HERE/assign_lanes.py" --raw "$WS/raw" >/dev/null || exit 1
 echo "== 5/5 复原指针 ==" ; python3 "$HERE/emit_ids_rebuild.py" --raw "$WS/raw" >/dev/null || exit 1
 
@@ -49,5 +53,6 @@ python3 "$HERE/check_measurements_fresh.py" >/dev/null 2>&1; echo "  量测产�
 python3 "$HERE/emit_ids_rebuild.py" --scan "$(dirname "$(dirname "$WS")")/.." --check >/dev/null 2>&1
 python3 "$HERE/check_rights_year_agree.py" --ledger "$WS/evidence/source-ledger.jsonl" >/dev/null 2>&1; echo "  rights 与年份印证   rc=$?"
 echo
-echo "★ 还要人做的两件：① 若已切过密封集，重跑 assign_holdout 与 check_holdout_overlap；"
+echo "★ 还要人做的两件：① 若**被剔的那份本身在密封集里**，重跑 assign_holdout 与 check_holdout_overlap；"
+echo "                     （其余情况 holdout 标记已由 --preserve 接续，不必重切）"
 echo "                  ② 若首屏那张表的数会变，跑 check_start_here_numbers.py --apply"

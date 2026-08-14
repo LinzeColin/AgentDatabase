@@ -76,11 +76,183 @@ IMPRINT_RE = [
 ]
 
 
+# ★ 这几个字段本工具是**按规则重算**的，而它们同时也是人会去改的地方。
+#   重跑一次就把人的裁定覆盖回规则值 —— 所以要在写盘前拦一次。
+#   `split` 尤其要命：工具无条件写 `train`，而它自己的输出里印着
+#   「holdout 由人另行指定，本工具不猜」—— **重跑会抹掉每一个 holdout 标记**。
+def locator_for(ident, url):
+    """出处从 `source_url` **现推**，不许写死站名。
+
+    原来这里硬写 `f"archive.org item {i}"` —— 抓取侧早已不止一个通道
+    （同目录就有 `fetch_kramerius.py`，台账里已有 MZK/MDZ、Wikisource/Gutenberg
+    的源），拿它跑一份捷克 NDK 的语料就会给对方的馆藏盖上 archive.org 的出处，
+    **凭空造一个出处**。
+
+    ★ 实测：现有 19 份 manifest 的 source_url **全部**是 archive.org，
+      所以今天 0 条是错的 —— 这是**预防**，不是在修既发生的错。
+      archive.org 那一支的输出与旧版**逐字节相同**，存量台账不会churn。
+    ★ 取不到 url 时**不替它假设一个站**，明写未证实。[[empty-default-swallows-unknown]]
+    """
+    m = re.match(r"https?://([^/]+)", str(url or ""))
+    if not m:
+        return "item %s（**source_url 缺失，站点未证实**）" % ident
+    host = m.group(1).lower()
+    if host.startswith("www."):
+        host = host[4:]
+    return "%s item %s" % (host, ident)
+
+
+PROTECTED_FIELDS = (
+    "tier", "rights", "tier_reason", "extraction_status",
+    "attribution", "split", "language", "dimensions",
+)
+
+
+def human_verdicts_at_risk(existing, generated, expected_gone=()):
+    """→ [(source_id, 字段, 现值, 重跑后的值)]，空列表表示重跑不会覆盖任何人工裁定。
+
+    两类算「人工痕迹」：
+      ① `PROTECTED_FIELDS` 里现值与重算值不同的
+      ② 键名以 `★` 开头的字段（本仓记人工裁定的既定写法），重跑后会整个消失
+
+    `expected_gone`：**有人明写要剔**的 source_id（manifest 里 `status=剔除`
+    且写了 `剔除理由`）。整行消失分两种，**不能一刀切**：
+      · 有人写了理由要剔 → 这正是 `drop_source.sh` 的本意，放行
+      · 没人说过要剔却没了 → **无声丢行，照拦**
+    """
+    gen = {g.get("source_id"): g for g in generated}
+    gone_ok = set(expected_gone)
+    out = []
+    for row in existing:
+        s = row.get("source_id")
+        g = gen.get(s)
+        if g is None:
+            if s not in gone_ok:
+                out.append((s, "<整行>", "在册", "**重跑后不存在，且没人说过要剔**"))
+            continue
+        for k in PROTECTED_FIELDS:
+            if k in row and row.get(k) != g.get(k):
+                out.append((s, k, row.get(k), g.get(k)))
+        for k in row:
+            # ★ 要问「新行里还在不在」，不能见 ★ 就报 ——
+            #   否则 `--preserve` 接续完了它照样报「会被删掉」，
+            #   接续与拒跑互相打架，rc 永远是 3。自测第 19 条就是抓这个的。
+            if str(k).startswith("★") and g.get(k) != row[k]:
+                out.append((s, k, str(row[k])[:50] + "…",
+                            "**会被删掉**" if k not in g else g.get(k)))
+    return out
+
+
+def carry_forward(existing, generated):
+    """把现有台账里的人工裁定**接续**到新生成的行上（按 source_id 对齐）。
+
+    → (新的 generated, 接续明细)。已不在册的行不接（源被剔掉了，裁定随之作废）。
+
+    ★ 为什么要有它：`drop_source.sh` 剔一份语料要重出台账，
+      而它自己第 52 行写着「**若已切过密封集，重跑 assign_holdout**」——
+      作者知道 holdout 会被抹掉，处置办法却是**一句叮嘱人记得的散文**。
+      [[a-rule-in-a-doc-has-no-enforcer]]
+    """
+    old = {o.get("source_id"): o for o in existing}
+    moved = []
+    for g in generated:
+        o = old.get(g.get("source_id"))
+        if not o:
+            continue
+        for k in PROTECTED_FIELDS:
+            if k in o and o.get(k) != g.get(k):
+                moved.append((g["source_id"], k, g.get(k), o.get(k)))
+                g[k] = o[k]
+        for k, v in o.items():
+            if str(k).startswith("★"):
+                moved.append((g["source_id"], k, "<新行没有>", "接续"))
+                g[k] = v
+    return generated, moved
+
+
+def _selftest() -> int:
+    bad = 0
+    base = {"source_id": "src-a", "tier": "S1", "split": "train",
+            "attribution": "OTHER", "extraction_status": "raw"}
+    gen = [dict(base)]
+    cases = [
+        ([dict(base)], 0, "一字不差 → 不拦"),
+        ([dict(base, tier="P1")], 1, "人工改过 tier → 拦"),
+        ([dict(base, split="holdout")], 1, "**holdout 标记 → 必须拦**"),
+        ([dict(base, extraction_status="failed")], 1, "抽取失败标记 → 拦"),
+        ([dict(base, attribution="HIS-OWN")], 1, "归属订正 → 拦"),
+        ([dict(base, **{"★ 归属订正-2026-08-15": "题名页是别人"})], 1, "★ 说明字段 → 拦"),
+        ([{"source_id": "src-gone", "tier": "S1"}], 1, "整行消失、没人说过要剔 → 拦"),
+        ([], 0, "空台账（新工作区）→ 不拦"),
+    ]
+    for existing, want, label in cases:
+        got = len(human_verdicts_at_risk(existing, gen))
+        if (got > 0) != (want > 0):
+            print("  ✗ %s：期望 %s 得 %d 处" % (label, "拦" if want else "不拦", got))
+            bad += 1
+
+    # 整行消失的两面：明写要剔 → 放行；没人说过 → 拦。**两面都要测**，
+    # 只测一面会让「一刀切放行」也满分。[[zero-hit-gates-must-prove-they-can-hit]]
+    gone = [{"source_id": "src-gone", "tier": "S1"}]
+    for exp, want, label in [((), 1, "没人说要剔 → 拦"), (("src-gone",), 0, "明写要剔 → 放行")]:
+        got = len(human_verdicts_at_risk(gone, gen, exp))
+        if (got > 0) != (want > 0):
+            print("  ✗ 整行消失·%s：期望 %s 得 %d 处" % (label, "拦" if want else "放行", got))
+            bad += 1
+
+    # ── 出处不许写死 ──
+    loc_cases = [
+        ("https://archive.org/download/abc/abc_djvu.txt", "abc",
+         "archive.org item abc", "archive.org 与旧版逐字节相同"),
+        ("https://kramerius5.nkp.cz/uuid/xyz", "xyz",
+         "kramerius5.nkp.cz item xyz", "**捷克 NDK 不许盖成 archive.org**"),
+        ("https://www.gallica.bnf.fr/ark:/1/2", "g1",
+         "gallica.bnf.fr item g1", "去掉 www."),
+        ("", "n1", "item n1（**source_url 缺失，站点未证实**）", "**取不到就不许假设一个站**"),
+        (None, "n2", "item n2（**source_url 缺失，站点未证实**）", "None 同上"),
+    ]
+    for url, ident, want_s, label in loc_cases:
+        got_s = locator_for(ident, url)
+        if got_s != want_s:
+            print("  ✗ %s：期望 %r 得 %r" % (label, want_s, got_s))
+            bad += 1
+    # ── 接续：接完之后**必须已无可失**（两件互为对方的验收）──
+    cf = [
+        ([dict(base, split="holdout", extraction_status="failed",
+               **{"★ 理由": "天城文噪声"})], "holdout", 3),
+        ([dict(base)], "train", 0),
+        ([], "train", 0),
+    ]
+    for existing, want_split, want_moved in cf:
+        g2, moved = carry_forward(existing, [dict(base)])
+        if len(moved) != want_moved or g2[0].get("split") != want_split:
+            print("  ✗ 接续：期望 %d 处/split=%s，得 %d 处/split=%s"
+                  % (want_moved, want_split, len(moved), g2[0].get("split")))
+            bad += 1
+        if human_verdicts_at_risk(existing, g2):
+            print("  ✗ **接续之后仍有可失** —— 接续没接干净")
+            bad += 1
+    n = len(cases) + 2 + len(loc_cases) + 2 * len(cf)
+    print("自测 %d/%d" % (n - bad, n))
+    return 1 if bad else 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--raw", required=True)
-    ap.add_argument("--workspace", required=True)
+    ap.add_argument("--raw")
+    ap.add_argument("--workspace")
+    ap.add_argument("--preserve", action="store_true",
+                    help="按 source_id 把现有台账里的人工裁定**接续**到新行上"
+                         "（剔源重出台账时用这个，不要用 --force）。")
+    ap.add_argument("--force", action="store_true",
+                    help="**覆盖**已有台账里的人工裁定（tier/rights/split/归属/抽取状态）。"
+                         "默认拒跑。用之前先把现有台账备份出去。")
+    ap.add_argument("--self-test", "--selftest", dest="selftest", action="store_true")
     a = ap.parse_args()
+    if a.selftest:
+        return _selftest()
+    if not (a.raw and a.workspace):
+        ap.error("要 --raw 和 --workspace（或只跑 --self-test）")
     raw, ws = pathlib.Path(a.raw), pathlib.Path(a.workspace)
     need = ["_fetch-manifest.json", "_primary.json", "_lanes.json", "_dedup.json"]
     missing = [n for n in need if not (raw / n).exists()]
@@ -165,7 +337,7 @@ def main() -> int:
             "author": au,
             "published_at": pub,
             "url": r.get("source_url", ""),
-            "locator": f"archive.org item {i}",
+            "locator": locator_for(i, r.get("source_url")),
             "local_path": f"raw/{i}.txt",
             "original_name": f"{i}.txt",
             "checksum": r.get("sha256", ""),
@@ -202,7 +374,50 @@ def main() -> int:
         return 3
 
     ev = ws / "evidence"; ev.mkdir(parents=True, exist_ok=True)
-    (ev / "source-ledger.jsonl").write_text(
+    led = ev / "source-ledger.jsonl"
+
+    # ★★ 重跑前先 diff，有人工痕迹就拒跑（任务 #120）
+    #   本工具是**纯重生成**：它一个字都不读现有台账，
+    #   `split` 无条件写 `train`、`attribution`/`tier`/`rights`/`extraction_status`
+    #   全部按规则重算。于是重跑一次就**静默撤销**：
+    #     · 所有 holdout 标记（工具自己印着「holdout 由人另行指定，本工具不猜」，
+    #       却又把每一行都写回 train）
+    #     · 归属订正（HIS-OWN → OTHER）
+    #     · 抽取失败标记（raw → failed）
+    #     · 人工定的 tier / rights / tier_reason
+    #   2026-08-14 真发生过：Burbank 的 tier=U→P1、rights=未定→pre1931、
+    #   tier_reason→None 被一次重跑抹掉，靠备份逐字节还原。
+    #   [[regenerating-a-file-silently-reverts-human-decisions]]
+    existing = ([json.loads(l) for l in led.read_text(encoding="utf-8").splitlines() if l.strip()]
+                if led.exists() else [])
+
+    if a.preserve and existing:
+        out, moved = carry_forward(existing, out)
+        print("  接续人工裁定 %d 处（%d 行受影响）"
+              % (len(moved), len({m[0] for m in moved})), file=sys.stderr)
+        for m in moved[:10]:
+            print("    %s｜%s：%r → %r" % m, file=sys.stderr)
+        if len(moved) > 10:
+            print("    …… 另有 %d 处" % (len(moved) - 10), file=sys.stderr)
+
+    # 有人明写理由要剔的，整行消失是本意，不算丢裁定；没写理由的照拦。
+    dropped_ok = {"src-" + str(rec.get("sha256") or "")[:12]
+                  for rec in mf["记录"]
+                  if rec.get("status") == "剔除" and rec.get("剔除理由")}
+
+    if existing and not a.force:
+        losses = human_verdicts_at_risk(existing, out, dropped_ok)
+        if losses:
+            print(f"✗ **拒跑**：重跑会覆盖 {len(losses)} 处人工裁定。", file=sys.stderr)
+            for sidv, field, old, new in losses[:20]:
+                print(f"    {sidv}｜{field}：{old!r} → {new!r}", file=sys.stderr)
+            if len(losses) > 20:
+                print(f"    …… 另有 {len(losses) - 20} 处", file=sys.stderr)
+            print("  想留住它们：加 `--preserve`（按 source_id 接续过去）。", file=sys.stderr)
+            print("  确认要丢掉：加 `--force`（**先把现有台账备份出去**）。", file=sys.stderr)
+            return 3
+
+    led.write_text(
         "\n".join(json.dumps(o, ensure_ascii=False) for o in out) + "\n", encoding="utf-8")
 
     lane_n = len({o["dimensions"][0] for o in out})

@@ -55,7 +55,7 @@ python3 ../../../registry/codex/persona-distiller/scripts/check_corpus_ceiling.p
 | `assign_lanes.py` | 分六条研究道 | 道语义**取自 35 个存量 `source-ledger.jsonl` 实测**，不按字面猜 |
 | `check_measurements_fresh.py` | **量测产物是不是这版工具出的** | ★ **改了上面两件之后必须跑**——2026-08-13 实测 4 个工作区的产物是旧版留下的（Kant 道 6→3），而工具的注释里早就写着那个修正。**修好判据不等于修好数据。** |
 | `scan_copyright.py` | **PD 的最后一道，唯一读正文的一道** | 元数据挡不住在版权期内的重印／译本——**实测 6 份混进来**；决定性信号只有 ISBN 与「© 年份 >1930」，`All rights reserved` 是老书的套话不算 |
-| `emit_source_ledger.py` | → `evidence/source-ledger.jsonl` | `derived_from` 由查重簇填；`title` 用真题名；`split` 全 train，**holdout 由人另指** |
+| `emit_source_ledger.py` | → `evidence/source-ledger.jsonl` | `derived_from` 由查重簇填；`title` 用真题名；`split` 全 train，**holdout 由人另指**；出处从 `source_url` 现推（不再写死 archive.org）。★★ **它是纯重生成**：重跑会把 `split`／`attribution`／`extraction_status`／`tier`／`rights` 全部推回规则值 —— 已有台账时**默认拒跑 rc=3**并逐条列出会丢什么；剔源重出用 `--preserve` 接续，`--force` 才是真丢 |
 | `pull_quotes.py` | 取**可复算定位**的逐字引文 | `norm_offset` 自带 `text[off:off+len]==quote` 断言；四道筛（悼词署名行/目录行/词中起头/题名页）；★ **它判不了说话人** |
 | `assign_holdout.py` | 分盲判密封面 | 用**判据自己那把尺子**量重合；**已引用过的不密封**；**不抽空任何一道**；★ k 词片**按哈希值抽不按位置抽** |
 | `flag_borrowed_voice.py` | **标记「这句的第一人称可能不是本人」** | 四种机制①传记转录他人书信②小说角色对白③校勘者/编者序言④权利声明；★ **只给理由和原文证据，说话人由人定**；正 7 例负 12 例**全取真语料**，另做逐条拆规则的变异测试 |
