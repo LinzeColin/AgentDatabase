@@ -298,3 +298,34 @@ Ludwig von Wolzogen、女婿 Petr Figulus），**这卷确实是他的往还**�
 
 材料已经全部就位且可复现：切片在 `raw/`、哈希在 manifest、裁定在 `_decisions/`、
 工具在 `_ledgers/_pipeline/slice_letter_volume.py`（自测 35 条）。
+
+## ★★★ 落账那一步被什么挡住：**一行写死的出处字符串**
+
+先前写「接台账要连同重跑测量链一趟做完，本会话没起」——那是**工期判断**。
+2026-08-14 又往下查了一层，发现挡路的不是工期，是**零编造**：
+
+`_ledgers/_pipeline/emit_source_ledger.py:168`
+
+```python
+"locator": f"archive.org item {i}",
+```
+
+**出处是写死的。** 台账由 `_fetch-manifest.json` 生成，而那份 manifest 是
+`fetch_ia.py` 的产物；把 Kramerius 的 121 份切片塞进去再重跑，
+生成出来的每一行都会写着 **`archive.org item kram1892-IV`** ——
+而它们来自 **`kramerius5.nkp.cz`，archive.org 上没有这个东西**。
+
+⇒ **那是伪造出处**，比「台账暂时不齐」严重得多。
+[[bibliographic-proxy-instead-of-the-measurement]]｜零编造是本项目唯一的核心约束。
+
+### 所以正确的下一步是改工具，不是硬塞数据
+
+`emit_source_ledger` 需要**从 manifest 记录里读 `locator`／`url`**，
+而不是拼 `archive.org item {identifier}`；`fetch_kramerius.py` 那边则要
+在 manifest 里写出 `locator`（`kramerius5.nkp.cz item uuid:…`）与 `url`。
+改完要全库回归（现有 3,901 行台账的 locator 必须逐字不变）。
+
+**本会话不做**：它与「给 emit_source_ledger 加保留人工裁定的守卫」是同一件工具、
+同一次回归，且都要在批次之间做。已一并记在任务里。
+
+★ 这一条也把先前那句话订正了：**不是「没时间做」，是「按现在的工具做出来会是假的」。**
