@@ -23,7 +23,7 @@
 
 用法
 ----
-    python3 check_private_assets_not_public.py --selftest
+    python3 check_private_assets_not_public.py --self-test        # `--selftest` 亦可
     python3 check_private_assets_not_public.py --check            # 扫在册文件
     python3 check_private_assets_not_public.py --check --range origin/main..HEAD
 """
@@ -177,7 +177,7 @@ def selftest():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--self-test", "--selftest", dest="selftest", action="store_true")
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--range", dest="rng", default=None,
                     help="只扫某个提交范围的改动，如 origin/main..HEAD")

@@ -18,7 +18,7 @@
 
 用法
 ----
-    python3 check_corpus_not_in_git.py --selftest      # 正反例
+    python3 check_corpus_not_in_git.py --self-test     # 正反例（`--selftest` 亦可）
     python3 check_corpus_not_in_git.py --check         # 扫全仓，rc=1 表示有语料在册
     python3 check_corpus_not_in_git.py --agree         # 核 .gitignore ⇄ 本判据是否一致
 
@@ -190,7 +190,7 @@ def agree():
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--selftest", action="store_true", help="跑正反例")
+    ap.add_argument("--self-test", "--selftest", dest="selftest", action="store_true", help="跑正反例")
     ap.add_argument("--check", action="store_true", help="扫全仓：有没有语料在册")
     ap.add_argument("--agree", action="store_true", help="核 .gitignore 与本判据是否一致")
     a = ap.parse_args()
