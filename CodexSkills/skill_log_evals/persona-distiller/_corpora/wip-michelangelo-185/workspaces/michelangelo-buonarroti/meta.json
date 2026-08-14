@@ -1,110 +1,152 @@
 {
- "builder_version": "v0.0.0.5",
- "chosen_subject_uid": "michelangelo-buonarroti-1475-1564",
- "consent_authority": null,
- "created_at": "2026-08-13T00:00:00Z",
- "current_version": null,
- "existential_hypotheses_enabled": false,
- "identity_selection": {
-  "canonical": "art-design",
-  "display": "艺术设计师",
-  "mode": "single",
-  "primary": "art-design",
-  "weights": {
-   "art-design": 1.0
-  }
- },
- "language": "it",
- "model_version": "0.1.0-draft",
- "name": "Michelangelo Buonarroti",
- "namesake_gate": {
-  "candidate_count": 2,
-  "★ 本轮实测": "抓取清单出来后逐条查过，**不是照抄上一个人物的自测**",
-  "chosen_candidate": {
-   "name": "Michelangelo Buonarroti",
-   "dates": "1475-1564",
-   "disambiguator": "il vecchio（＝「老」）——1821/1826 年的《Rime》印本题名里就这么印",
-   "note": "★ 正是本人。**排除规则里不许排 `il`**，否则会把他自己排掉。"
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "michelangelo-buonarroti-1475-1564",
+  "consent_authority": null,
+  "created_at": "2026-08-13T00:00:00Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "art-design",
+    "display": "艺术设计师",
+    "mode": "single",
+    "primary": "art-design",
+    "weights": {
+      "art-design": 1.0
+    }
   },
-  "excluded": [
-   {
-    "name": "Michelangelo Buonarroti il Giovane",
-    "dates": "1568-1646",
-    "relation": "侄孙（great-nephew）",
-    "genre": "喜剧与韵文",
-    "why": "同姓同名。第一版抓取清单 85 条里**混进 8 条他的作品**（La Tancia 3、La Fiera 5）。",
-    "how_blocked": "① creator 排除 `1568-1646`／`il Giovane`；② ★★ **按题名排除**（新增 EXCLUDE_TITLE）——因为 `bub_gb_az-3FvsPFwYC`《La Tancia commedia rusticale》的 creator **只写「Michelangelo Buonarroti」**，没有年份、没有 il Giovane、**没有任何可比的标记**，按 creator 永远挡不住。",
-    "titles_blocked": [
-     "La Tancia",
-     "La Fiera",
-     "Il Giulè",
-     "La Dote",
-     "Il giudizio di Paride",
-     "Frottole della peste",
-     "Quaderno delle rime burlesche",
-     "Epistola al Signor Niccolò Arrighetti"
-    ],
-    "boundary": "★ 侄孙 **1623 年编的**伯祖父《Rime》**不排** —— 编者不是作者。",
-    "verified": "正对照：侄孙 9 条 → 最终清单里 **0 条**；负对照：题名含 lettere/briefe/rime/sonnet/poesie/diálogo 且非侄孙的 43 条 → **17 条进清单、一条没误伤**。"
-   }
-  ]
- },
- "normalized_name": "michelangelobuonarroti",
- "origin_review_required": false,
- "product_version": null,
- "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
- "profile": "quick",
- "prohibited_uses": [
-  "identity authentication or deceptive impersonation",
-  "invented endorsement, signature, consent, private memory or current opinion",
-  "unsupported psychological diagnosis",
-  "replacement of accountable high-stakes professional judgment"
- ],
- "retention_policy": null,
- "runtime_invocation_versioning": false,
- "scenario": null,
- "scenario_policy": "optional-build-hint; infer-per-runtime-task",
- "schema_version": "2.0",
- "slug": "michelangelo-buonarroti",
- "status": "draft",
- "subject_origin": "historical",
- "target_id": null,
- "time_scope": "1475-1564",
- "updated_at": "2026-08-13T00:00:00Z",
- "attribution_basis": {
-  "authority": "主干编本的题名页逐字（`src-34bb6d56038a`，1875）：`LE LETTERE DI MICHELANGELO BUONARROTI PUBBLICATE COI RICORDI ED I CONTRATTI ARTISTICI PER CURA GAETANO MILANESI. IN FIRENZE , COI TIPI DEI SUCCESSORI LE MONNIER. M. DCCC. LXXV.` —— 信是他的，**编者是 Gaetano Milanesi**。",
-  "★ 题名页自证两个数": "同页 `EDIZIONE ORDINATA DAL COMITATO FIORENTINO PER LE FESTE DEL **IV CENTENARIO DALLA NASCITA DI MICHELANGELO**` ⇒ 1875 是他诞生四百周年 ⇒ **生年 1475**；`M. DCCC. LXXV` 独立复核了出版年 1875。**两个数都不是我推的。**",
-  "covered_sources": [
-   "src-34bb6d56038a（1875 Milanesi 编本，题名页如上）",
-   "src-7bd7f20fa044 ＝ `archive.org item bub_gb_4srIAdQY3UsC`（1834，holdout）—— 题名即署名：`LETTERA DI MICHELANGIOLO BONARROTI PER GIUSTIFICARSI CONTRO LE CALUNNIE DEGLI EMULI E DE'NEMICI SUOI SUL PROPOSITO DEL SEPOLCRO DI PAPA GIULIO II` ⇒ **他自己的信**",
-   "src-28683b5f4292 ＝ `archive.org item bub_gb_rHu4_709T2oC`（1821，train）—— `Rime di Michelagnolo Buonarroti **il vecchio**, col commento…`（Biagioli 在巴黎印）⇒ **他的诗 ＋ 别人的注**；`il vecchio` 正是与侄孙 il Giovane 相区别的那个词",
-   "src-d3a820576752 ＝ `archive.org item bub_gb_-Ex3yhDSSTcC`（1623，train）—— `RIME DI MICHELAGNOLO BVONARROTI. **Raccolte da Michelagno[lo]**` ⇒ **侄孙 il Giovane 辑校的那一版**，见 `disputed_policy`",
-   "src-4b92a7f08408 ＝ `archive.org item MICHELANGELO_753`（1913，train）—— `MICHELANGELO — A RECORD OF HIS LIFE AS TOLD IN **HIS OWN LETTERS AND PAPERS**` ⇒ **他的书信，英文编本**",
-   "src-a774edeb44f1 ＝ `archive.org item bub_gb_FplWAAAAcAAJ`（1860，train）—— `MICHEL-ANGE POÈTE — **PREMIÈRE TRADUCTION COMPLÈTE** DE SES POÉSIES`（A. Lannau-Rolland）⇒ **法译本**（一手，但不量声口）",
-   "src-fc3cd1b895bb ＝ `archive.org item bub_gb_VogLAQAAIAAJ`（1896，train）—— `Die Gedichte des Michelangelo Buonarroti **übersetzt** … von Walter Robert-tornow` ⇒ **德译本**（一手，但不量声口）；★ 它同时是污染 holdout 的那一份（2 个源／14 段重合）"
+  "language": "it",
+  "model_version": "0.1.0-draft",
+  "name": "Michelangelo Buonarroti",
+  "namesake_gate": {
+    "candidate_count": 2,
+    "★ 本轮实测": "抓取清单出来后逐条查过，**不是照抄上一个人物的自测**",
+    "chosen_candidate": {
+      "name": "Michelangelo Buonarroti",
+      "dates": "1475-1564",
+      "disambiguator": "il vecchio（＝「老」）——1821/1826 年的《Rime》印本题名里就这么印",
+      "note": "★ 正是本人。**排除规则里不许排 `il`**，否则会把他自己排掉。"
+    },
+    "excluded": [
+      {
+        "name": "Michelangelo Buonarroti il Giovane",
+        "dates": "1568-1646",
+        "relation": "侄孙（great-nephew）",
+        "genre": "喜剧与韵文",
+        "why": "同姓同名。第一版抓取清单 85 条里**混进 8 条他的作品**（La Tancia 3、La Fiera 5）。",
+        "how_blocked": "① creator 排除 `1568-1646`／`il Giovane`；② ★★ **按题名排除**（新增 EXCLUDE_TITLE）——因为 `bub_gb_az-3FvsPFwYC`《La Tancia commedia rusticale》的 creator **只写「Michelangelo Buonarroti」**，没有年份、没有 il Giovane、**没有任何可比的标记**，按 creator 永远挡不住。",
+        "titles_blocked": [
+          "La Tancia",
+          "La Fiera",
+          "Il Giulè",
+          "La Dote",
+          "Il giudizio di Paride",
+          "Frottole della peste",
+          "Quaderno delle rime burlesche",
+          "Epistola al Signor Niccolò Arrighetti"
+        ],
+        "boundary": "★ 侄孙 **1623 年编的**伯祖父《Rime》**不排** —— 编者不是作者。",
+        "verified": "正对照：侄孙 9 条 → 最终清单里 **0 条**；负对照：题名含 lettere/briefe/rime/sonnet/poesie/diálogo 且非侄孙的 43 条 → **17 条进清单、一条没误伤**。"
+      }
+    ]
+  },
+  "normalized_name": "michelangelobuonarroti",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
   ],
-  "★ 未覆盖": "1623 年《Rime》（`src-d3a820576752`）的题名页 OCR 严重损坏，只能读出 `Raccolte da Michelagno IN FIRENZE APPRESSO I GIVNTI CON LICSNZIA DE' SVPERWKL`（=「由米开朗基罗[小]辑，佛罗伦萨 Giunti 书坊，奉上峰许可」）——**辨认得出是辑本，但不足以当逐字署名证据**，故不列入 covered_sources。",
-  "citation": "https://archive.org/details/leletteredimiche00mich（台账 `src-34bb6d56038a` 的 `locator`＝`archive.org item leletteredimiche00mich`；题名页逐字见 `authority`。★ 这是**可自取的数字化本**，不是二手断言。）",
-  "disputed_policy": "规则：**IA 著录把他挂在 `creator` 首位、而正文是他人所作的卷**（画册／蚀刻摹本册／传记／评介／版画集），一律**不计入 P1**，逐条列于 `disputed_works`，并改归 `external` 二手道。线索来自一句引文自曝——某段第一人称说「一尊我接了 **300 美元**的胸像」，**米开朗基罗不用美元计价**；顺着查了三轮。★★ **本项的射程只到「著录挂名 ≠ 他所著」这一类**。**我没有**普查学界对其诗作／书信的伪托之争，所以这个列表**不等于「学界公认的伪作清单」**。已知落在那一类里的只有一例，单独记在这里：1623 年《Rime》（`src-d3a820576752`）是**同名侄孙 Michelangelo il Giovane（1568–1646）辑校**的版本，学界公认他改动过原诗 —— **用它做「诗的内容」可疑，做「流传史」没问题**，本工作区未据此排除它。★ 另有两份是**译本**（1860 法译 `src-a774edeb44f1`、1896 德译 `src-fc3cd1b895bb`）：按 Leonardo #184 Richter 英译的先例**仍记一手，但不得用于量声口**（量到的是译者的文风）。「译本算不算他的」属于**选材裁定，不是判据能定的**，留给人裁。",
-  "disputed_works": [
-   "michaelangelobuo00holrrich —— Charles Holroyd 爵士（1861–1917）写的专著《Michael Angelo Buonarroti》。★ 该卷附有 Holroyd 英译的 **Francisco de Hollanda〈与米开朗基罗…",
-   "michelangeloeine00hild —— Edmund Hildebrandt（1872–1939）《Michelangelo: eine Einführung in das Verständnis seiner Werke》——理解其作品的**导论**，通篇是…",
-   "artistmerchanta00bottgoog —— 《The Artist, the Merchant, and the Statesman, of the Age of the Medici》(1845) 是 **Charles Edwards Lester** 写的书…",
-   "seventyetchedfa00fishgoog —— ★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In p…",
-   "eightyfouretche00raphgoog —— ★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In p…",
-   "eightyfouretched00michuoft —— ★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In p…",
-   "facsimilesorigi01fishgoog —— ★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In p…",
-   "facsimilesorigi02fishgoog —— ★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In p…",
-   "workofmichelange00mich —— Fritz Knapp《The work of Michelangelo, reproduced in one hundred and sixty-nine illustrations》——**画册＋第三人称叙事**：`…",
-   "michelangeloaspa00michrich —— 《Michelangelo as a painter》——Bates & Guild「Masters in Art」丛书的一册（正文前有整页丛书广告：MILLET／VAN DYCK／TITIAN／VELASQUEZ／HO…",
-   "cu31924032174173 —— 《Sixty outlines from the principal works of Michel Angelo Buonarotti》——**图版说明目录**：`Placed between two statues …",
-   "oeuvrescomplte00mich —— 《Oeuvres complètes de Michel-Ange, **et choix de Baccio Bandinelli et de Daniel de Volterre**》——版画集，另两位是别的艺术家；…",
-   "cu31924008756847 —— Fisher《Facsimiles of original studies》的又一印本。正文是**递藏著录**：`Count Zanetti, of Florence… was the owner of another.…",
-   "gri_33125004476533 —— Fritz Knapp《Michelangelo, des Meisters Werke in 166 Abbildungen》——德文艺术评介：`sind sie die beiden Sonnen am Firmam…",
-   "michelangelodesm00michuoft —— 《Michelangelo; des Meisters Werke und seine Lebensgeschichte》，**Hrsg. von Alfred Mera…**——画册＋生平，正文是第三方论述（`erbl…"
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "michelangelo-buonarroti",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": null,
+  "time_scope": "1475-1564",
+  "updated_at": "2026-08-13T00:00:00Z",
+  "attribution_basis": {
+    "authority": "主干编本的题名页逐字（`src-34bb6d56038a`，1875）：`LE LETTERE DI MICHELANGELO BUONARROTI PUBBLICATE COI RICORDI ED I CONTRATTI ARTISTICI PER CURA GAETANO MILANESI. IN FIRENZE , COI TIPI DEI SUCCESSORI LE MONNIER. M. DCCC. LXXV.` —— 信是他的，**编者是 Gaetano Milanesi**。",
+    "★ 题名页自证两个数": "同页 `EDIZIONE ORDINATA DAL COMITATO FIORENTINO PER LE FESTE DEL **IV CENTENARIO DALLA NASCITA DI MICHELANGELO**` ⇒ 1875 是他诞生四百周年 ⇒ **生年 1475**；`M. DCCC. LXXV` 独立复核了出版年 1875。**两个数都不是我推的。**",
+    "covered_sources": [
+      "src-34bb6d56038a（1875 Milanesi 编本，题名页如上）",
+      "src-7bd7f20fa044 ＝ `archive.org item bub_gb_4srIAdQY3UsC`（1834，holdout）—— 题名即署名：`LETTERA DI MICHELANGIOLO BONARROTI PER GIUSTIFICARSI CONTRO LE CALUNNIE DEGLI EMULI E DE'NEMICI SUOI SUL PROPOSITO DEL SEPOLCRO DI PAPA GIULIO II` ⇒ **他自己的信**",
+      "src-28683b5f4292 ＝ `archive.org item bub_gb_rHu4_709T2oC`（1821，train）—— `Rime di Michelagnolo Buonarroti **il vecchio**, col commento…`（Biagioli 在巴黎印）⇒ **他的诗 ＋ 别人的注**；`il vecchio` 正是与侄孙 il Giovane 相区别的那个词",
+      "src-d3a820576752 ＝ `archive.org item bub_gb_-Ex3yhDSSTcC`（1623，train）—— `RIME DI MICHELAGNOLO BVONARROTI. **Raccolte da Michelagno[lo]**` ⇒ **侄孙 il Giovane 辑校的那一版**，见 `disputed_policy`",
+      "src-4b92a7f08408 ＝ `archive.org item MICHELANGELO_753`（1913，train）—— `MICHELANGELO — A RECORD OF HIS LIFE AS TOLD IN **HIS OWN LETTERS AND PAPERS**` ⇒ **他的书信，英文编本**",
+      "src-a774edeb44f1 ＝ `archive.org item bub_gb_FplWAAAAcAAJ`（1860，train）—— `MICHEL-ANGE POÈTE — **PREMIÈRE TRADUCTION COMPLÈTE** DE SES POÉSIES`（A. Lannau-Rolland）⇒ **法译本**（一手，但不量声口）",
+      "src-fc3cd1b895bb ＝ `archive.org item bub_gb_VogLAQAAIAAJ`（1896，train）—— `Die Gedichte des Michelangelo Buonarroti **übersetzt** … von Walter Robert-tornow` ⇒ **德译本**（一手，但不量声口）；★ 它同时是污染 holdout 的那一份（2 个源／14 段重合）"
+    ],
+    "★ 未覆盖": "1623 年《Rime》（`src-d3a820576752`）的题名页 OCR 严重损坏，只能读出 `Raccolte da Michelagno IN FIRENZE APPRESSO I GIVNTI CON LICSNZIA DE' SVPERWKL`（=「由米开朗基罗[小]辑，佛罗伦萨 Giunti 书坊，奉上峰许可」）——**辨认得出是辑本，但不足以当逐字署名证据**，故不列入 covered_sources。",
+    "citation": "https://archive.org/details/leletteredimiche00mich（台账 `src-34bb6d56038a` 的 `locator`＝`archive.org item leletteredimiche00mich`；题名页逐字见 `authority`。★ 这是**可自取的数字化本**，不是二手断言。）",
+    "disputed_policy": "规则：**IA 著录把他挂在 `creator` 首位、而正文是他人所作的卷**（画册／蚀刻摹本册／传记／评介／版画集），一律**不计入 P1**，逐条列于 `disputed_works`，并改归 `external` 二手道。线索来自一句引文自曝——某段第一人称说「一尊我接了 **300 美元**的胸像」，**米开朗基罗不用美元计价**；顺着查了三轮。★★ **本项的射程只到「著录挂名 ≠ 他所著」这一类**。**我没有**普查学界对其诗作／书信的伪托之争，所以这个列表**不等于「学界公认的伪作清单」**。已知落在那一类里的只有一例，单独记在这里：1623 年《Rime》（`src-d3a820576752`）是**同名侄孙 Michelangelo il Giovane（1568–1646）辑校**的版本，学界公认他改动过原诗 —— **用它做「诗的内容」可疑，做「流传史」没问题**，本工作区未据此排除它。★ 另有两份是**译本**（1860 法译 `src-a774edeb44f1`、1896 德译 `src-fc3cd1b895bb`）：按 Leonardo #184 Richter 英译的先例**仍记一手，但不得用于量声口**（量到的是译者的文风）。「译本算不算他的」属于**选材裁定，不是判据能定的**，留给人裁。",
+    "disputed_works": [
+      "michaelangelobuo00holrrich —— Charles Holroyd 爵士（1861–1917）写的专著《Michael Angelo Buonarroti》。★ 该卷附有 Holroyd 英译的 **Francisco de Hollanda〈与米开朗基罗…",
+      "michelangeloeine00hild —— Edmund Hildebrandt（1872–1939）《Michelangelo: eine Einführung in das Verständnis seiner Werke》——理解其作品的**导论**，通篇是…",
+      "artistmerchanta00bottgoog —— 《The Artist, the Merchant, and the Statesman, of the Age of the Medici》(1845) 是 **Charles Edwards Lester** 写的书…",
+      "seventyetchedfa00fishgoog —— ★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In p…",
+      "eightyfouretche00raphgoog —— ★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In p…",
+      "eightyfouretched00michuoft —— ★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In p…",
+      "facsimilesorigi01fishgoog —— ★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In p…",
+      "facsimilesorigi02fishgoog —— ★ **摹本册**：正文自印 `ETCHED BY JOSEPH FISHER` / `ETCHED AND PUBLISHED BY JOSEPH FISHER`，并有出版者的 `INTRODUCTION`（「In p…",
+      "workofmichelange00mich —— Fritz Knapp《The work of Michelangelo, reproduced in one hundred and sixty-nine illustrations》——**画册＋第三人称叙事**：`…",
+      "michelangeloaspa00michrich —— 《Michelangelo as a painter》——Bates & Guild「Masters in Art」丛书的一册（正文前有整页丛书广告：MILLET／VAN DYCK／TITIAN／VELASQUEZ／HO…",
+      "cu31924032174173 —— 《Sixty outlines from the principal works of Michel Angelo Buonarotti》——**图版说明目录**：`Placed between two statues …",
+      "oeuvrescomplte00mich —— 《Oeuvres complètes de Michel-Ange, **et choix de Baccio Bandinelli et de Daniel de Volterre**》——版画集，另两位是别的艺术家；…",
+      "cu31924008756847 —— Fisher《Facsimiles of original studies》的又一印本。正文是**递藏著录**：`Count Zanetti, of Florence… was the owner of another.…",
+      "gri_33125004476533 —— Fritz Knapp《Michelangelo, des Meisters Werke in 166 Abbildungen》——德文艺术评介：`sind sie die beiden Sonnen am Firmam…",
+      "michelangelodesm00michuoft —— 《Michelangelo; des Meisters Werke und seine Lebensgeschichte》，**Hrsg. von Alfred Mera…**——画册＋生平，正文是第三方论述（`erbl…"
+    ],
+    "parallel_witnesses": [
+      [
+        "src-05d67ff7e9df",
+        "src-dc47a809071f"
+      ],
+      [
+        "src-0f90e46d5f7b",
+        "src-60cd9a49f915"
+      ],
+      [
+        "src-14161091ddb3",
+        "src-34bb6d56038a",
+        "src-6094206729a1",
+        "src-8999a5688bea"
+      ],
+      [
+        "src-20b35d40dc1d",
+        "src-acd20e592f1e"
+      ],
+      [
+        "src-2141d0967120",
+        "src-f800dc9a4827"
+      ],
+      [
+        "src-3863a0005b65",
+        "src-d89e65b8002f",
+        "src-f3ac5691f1e3"
+      ],
+      [
+        "src-43c819c03a55",
+        "src-b69075a7bf0b"
+      ],
+      [
+        "src-4b92a7f08408",
+        "src-8539ad71569a"
+      ],
+      [
+        "src-a774edeb44f1",
+        "src-f547bc4a71ad"
+      ]
+    ],
+    "★ parallel_witnesses 怎么来的": "2026-08-14 实测申报，**不是猜的**：抽样哈希 8 词片（1/12），包含率 `|A∩B|/min(|A|,|B|)` ≥ 0.30 判同一部。**只申报「组内每一对都直接超阈值」的团** —— 另有 1 个 4-id 分量是靠传递闭包才连起来的（Facsimiles 组里有一对只有 0.1694），**没有申报**，因为 `check_claim_source_independence` 故意不做传递闭包（并查集把 32 份源串成一个分量那次的教训）。★ 跨语言 n 元重叠恒为 0，**所以没被合并 ≠ 独立**：德/英译本不会进这些组，本申报只覆盖同语种同源，不覆盖译本同源。"
+  },
+  "aliases": [
+    "Michelangelo"
   ]
- },
- "aliases": [
-  "Michelangelo"
- ]
 }
