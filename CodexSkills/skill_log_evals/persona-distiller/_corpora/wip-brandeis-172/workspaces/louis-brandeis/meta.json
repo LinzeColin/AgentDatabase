@@ -79,5 +79,23 @@
   "subject_origin": "public",
   "target_id": "tgt-9a470815046b",
   "time_scope": "all available periods, separated by role and material drift",
-  "updated_at": "2026-08-11T16:23:35Z"
+  "updated_at": "2026-08-11T16:23:35Z",
+  "attribution_basis": {
+    "parallel_witnesses": [
+      [
+        "src-04857426d8e2",
+        "src-696d2c185f7d",
+        "src-dc08306e597b"
+      ],
+      [
+        "src-26a41d751b61",
+        "src-652aa149475b",
+        "src-75ebbbaa5e10"
+      ],
+      [
+        "src-2e8456e43798",
+        "src-2ef164245cdd"
+      ]
+    ]
+  }
 }
