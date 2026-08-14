@@ -230,7 +230,7 @@ def main() -> int:
     ap.add_argument("text", nargs="?", help="整卷正文 .txt")
     ap.add_argument("--from", dest="lo", type=float, default=0.0, help="只看全文的这个起点比例")
     ap.add_argument("--to", dest="hi", type=float, default=1.0)
-    ap.add_argument("--out", help="给了才切片落盘；不给只报")
+    ap.add_argument("--out", help="切片落盘的**目录路径**；不给就只报不写")
     ap.add_argument("--decisions", help="人读过 `?` 之后的裁定 JSON"
                     "（{编号: {方向, 证据}}）——**每条必须带证据原文**")
     ap.add_argument("--self-test", action="store_true")

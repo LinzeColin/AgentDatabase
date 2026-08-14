@@ -264,7 +264,7 @@ def main() -> int:
     ap.add_argument("--host", default="kramerius5.nkp.cz")
     ap.add_argument("--query")
     ap.add_argument("--pid", action="append", default=[])
-    ap.add_argument("--out")
+    ap.add_argument("--out", help="正文与 manifest 的落盘**目录路径**（一般是 `<工作区>/raw`）")
     ap.add_argument("--rows", type=int, default=50)
     ap.add_argument("--list", action="store_true", help="只列出检索结果，不下载")
     ap.add_argument("--self-test", action="store_true")
