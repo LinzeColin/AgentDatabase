@@ -228,9 +228,15 @@ def main():
               % (ws.name[:32], n, len(groups), sum(len(g) for g in groups),
                  len(transitive), n_claims, in_scope, collapsed, flag))
         if a.apply and groups:
+            # ★ 沿用原文件的缩进 —— 第一版写死 indent=2，把 Dewey 的 meta.json
+            #   整个重排（+129/−81 行），语义上只多了一个键，但复审时看不出来。
+            #   **写盘工具不许顺手改排版。** [[dont-measure-a-file-while-its-writer-runs]]
+            raw = metaf.read_text(encoding="utf-8")
+            m = re.search(r"\n(\s+)\"", raw)
+            indent = len(m.group(1)) if m else 2
             ab = meta.setdefault("attribution_basis", {})
             ab["parallel_witnesses"] = groups
-            metaf.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            metaf.write_text(json.dumps(meta, ensure_ascii=False, indent=indent) + "\n", encoding="utf-8")
 
     print("\n  工作区 %d 个（已申报 %d）｜团合计 %d 组 / %d 个 id"
           % (tot_ws, already, tot_groups, tot_ids))
