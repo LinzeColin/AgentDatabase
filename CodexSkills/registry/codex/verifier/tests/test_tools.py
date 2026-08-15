@@ -142,7 +142,7 @@ def refresh_v22_assurance(run_dir: Path, manifest: dict, subject_identity: str |
     for name, value in values.items():
         _write_json(run_dir / name, value)
     assurance = manifest["assurance_v22"]
-    assurance.update({"skill_version": "0.0.2.2", "enforced": True})
+    assurance.update({"skill_version": "0.0.2.3", "enforced": True})
     assurance["capability_report"].update({"status": "PASS", "sha256": _file_sha256(run_dir / "CAPABILITY_REPORT.json")})
     assurance["acceptance_plan"].update({"status": "PASS", "sha256": _file_sha256(run_dir / "ACCEPTANCE_PLAN.json")})
     assurance["command_policy"].update({

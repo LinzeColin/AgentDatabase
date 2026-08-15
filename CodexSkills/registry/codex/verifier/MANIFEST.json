@@ -2,7 +2,7 @@
   "entries": [
     {
       "path": "agents/openai.yaml",
-      "sha256": "94457b278c4721b720d819a3206f142561b000a328adb3228e5ceebb88778b7c",
+      "sha256": "0e8a98b306cc18b435cf293db215d878454324d3c6579065b54fda1a6e4ea086",
       "size": 844
     },
     {
@@ -107,7 +107,7 @@
     },
     {
       "path": "scripts/finalize_acceptance_run.py",
-      "sha256": "eff19bd84447216cc8edc274ce09deb526ec81d1ec6afa18b34fac6d74d29b76",
+      "sha256": "d9fc6a1b9fb73b880665eab9e8545816bf12a6b51927bd42816f5a474fe22226",
       "size": 123347
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "path": "scripts/init_acceptance_run.py",
-      "sha256": "0db0fb3c1ad251313f07890cf263b6ff88e80feecb313edb68f9fbc728b99535",
+      "sha256": "888cd623caba6628051e3f2e841b4d78b8b83329c0a3c175e99a3db32f39a4ad",
       "size": 7067
     },
     {
@@ -152,7 +152,7 @@
     },
     {
       "path": "scripts/validate_pack.py",
-      "sha256": "a5ec7f9021f58fd5a0050940c90815defbcce9d6d942bb5d8c8e6e015292267b",
+      "sha256": "13153c9b7632a3ec6a24183bcfc42d587caa78594c8fbf1c331d56ae6b006b4c",
       "size": 17593
     },
     {
@@ -162,8 +162,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "fa3a2bfe660676996ffc53939f528a2a6a7ad9e5c6574112f39dfedbefe7c345",
-      "size": 14152
+      "sha256": "28b18b7e495ad9a2ffec87e3a0a04ec24a344e3cde2726410426c0df9b06052a",
+      "size": 17767
     },
     {
       "path": "templates/ACCEPTANCE_PLAN.json",
@@ -252,7 +252,7 @@
     },
     {
       "path": "templates/RUN_MANIFEST.yaml",
-      "sha256": "925adcf156ad6e88f21900cd87aaa1b7aa2e80a2e4c519d0f6ccf914b33fe54b",
+      "sha256": "4f647ff1072b276af85185fb659e22964e7572ff959ae7cf8b4cccaeb3e0157a",
       "size": 6542
     },
     {
@@ -282,7 +282,7 @@
     },
     {
       "path": "tests/test_tools.py",
-      "sha256": "47386ca2749cc013835795cef9d3c3a482b89f66a1a226d22b336cc245a48a48",
+      "sha256": "6e6506f91a6a1248618985cc510c2aa40f263a6006d70f1f88d5abc70c85360a",
       "size": 65287
     },
     {
@@ -292,7 +292,7 @@
     },
     {
       "path": "VERSION",
-      "sha256": "28cb8bfb304e0d87704bc6755af0d67ae8bb539d03b07e182b03f5dfdb68f9f2",
+      "sha256": "73ef8d8009459d9002be2a69822fda68a2981e4b0a143e369d1ea28e87076492",
       "size": 8
     }
   ],
@@ -305,5 +305,5 @@
   "hash_algorithm": "sha256",
   "schema_version": "1.0",
   "skill": "verifier",
-  "skill_version": "0.0.2.2"
+  "skill_version": "0.0.2.3"
 }
