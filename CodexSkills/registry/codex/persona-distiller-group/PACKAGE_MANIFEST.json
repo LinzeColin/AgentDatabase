@@ -353,6 +353,11 @@
       "size_bytes": 4415
     },
     {
+      "path": "tests/test_scripts_refuse_wrong_documents.py",
+      "sha256": "30429f35f18c7d6a6347445dee0c8ec83fc15e2ba33e32ffc2626b258697ea79",
+      "size_bytes": 5009
+    },
+    {
       "path": "tests/test_telemetry_roundtrip.py",
       "sha256": "269a5858c1678277ebf19af0a218db1d56e92f62a73d124a600174490db778ee",
       "size_bytes": 6681
