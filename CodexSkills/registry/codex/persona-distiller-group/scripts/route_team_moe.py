@@ -337,6 +337,32 @@ def build_route(
             ranked.append(item)
     ranked.sort(key=lambda item: (-item["base_score"], str(item["card"].get("canonical_name", "")).casefold()))
 
+    # ── Domain-signal disclosure ────────────────────────────────────────────
+    # Measured 2026-08-16 over 24 pre-registered tasks: on **54%** of them
+    # `domain_match` was 0 for **every** candidate in the pool. Those tasks are
+    # not routed by domain at all -- ranking silently falls through to the next
+    # most discriminating component, `currentness` (how recent the persona is),
+    # and on that half the routing scored **-1.7 pp against a skew-preserving
+    # random draw**, i.e. *worse than picking at random*. On the half that did
+    # have a domain signal it scored +5.3 pp.
+    #
+    # The mechanism works; it is blind more than half the time. Until this
+    # commit the route plan said nothing about which half a given task landed
+    # in, so a silent degradation looked identical to a confident match.
+    #
+    # This block is **disclosure only**: it changes no score, no ranking, no
+    # selection, and no headcount. Whether a zero-signal pool should instead
+    # *refuse* to route ("nobody in this roster knows this subject") is the
+    # Owner's call and is deliberately NOT decided here.
+    def _domain_of(item: dict[str, Any]) -> float:
+        vals = (item.get("score_breakdown") or {}).get("values") or {}
+        try:
+            return float(vals.get("domain_match") or 0.0)
+        except (TypeError, ValueError):
+            return 0.0
+
+    domain_signal_candidates = sum(1 for item in ranked if _domain_of(item) > 0.0)
+
     requested_target = int(graph["persona_expert_target"])
     final_mode, final_target = downgrade_mode(graph["mode"], min(len(ranked), requested_target))
     downgrade: dict[str, Any] | None = None
@@ -422,6 +448,10 @@ def build_route(
             "excluded_candidates": len(excluded),
             "registry_products": len(index.get("products", [])),
             "telemetry_eligible_for_c": bool(telemetry.get("eligible_for_c")),
+            "domain_signal_candidates": domain_signal_candidates,
+            "domain_signal_present": domain_signal_candidates > 0,
+            "ranking_driver": ("domain_match" if domain_signal_candidates
+                               else "currentness (no candidate matched this task's domain)"),
             "target_gates": {
                 "overall_delta": 95,
                 "ux": 95,
@@ -443,7 +473,15 @@ def build_route(
         "limitations": [
             "C is used only when real outcome telemetry satisfies the calibration contract; otherwise B is explicit.",
             "Routing score is a selection signal, not proof that a persona will improve the final task result.",
-        ],
+        ] + ([] if domain_signal_candidates else [
+            "NO DOMAIN SIGNAL: domain_match is 0 for every eligible candidate, so this "
+            "team was NOT selected by subject-matter fit. Ranking fell through to "
+            "`currentness` (how recent the persona is). Measured over 24 pre-registered "
+            "tasks, zero-signal routing scored -1.7 pp against a skew-preserving random "
+            "draw (tasks WITH a domain signal scored +5.3 pp) -- i.e. on this task the "
+            "selection is not known to beat picking at random. Treat the roster below as "
+            "unranked-by-domain.",
+        ]),
     }
 
 

@@ -7,6 +7,8 @@ owner-frozen ranges. Mandatory control-plane stages are present in every mode.
 """
 from __future__ import annotations
 
+import re
+
 import argparse
 import json
 import math
@@ -127,11 +129,47 @@ DEPENDENCY = ("迁移", "修复", "重构", "兼容", "部署", "数据库", "�
 DELIVERABLE = ("压缩包", "zip", "报告", "任务包", "代码", "文件", "页面", "系统", "方案", "benchmark", "交付")
 
 
+_ASCII_WORD = re.compile(r"^[a-z0-9][a-z0-9+.#/_-]*$")
+_BOUNDARY_CACHE: dict[str, re.Pattern[str]] = {}
+
+
+def _signal_hits(signal: str, low: str) -> bool:
+    """Does this domain keyword occur in the (already case-folded) task text?
+
+    Matching rule is **per script**, because one rule cannot serve both:
+
+    * **ASCII keywords -> word-boundary match.** Plain substring matching made
+      ``ci`` (continuous integration) fire on "de*ci*de" and ``ai`` fire on
+      "av*ai*lable" / "cert*ai*n" / "det*ai*l". Measured 2026-08-17: the task
+      "Decide whether to proceed." -- which contains no technical vocabulary at
+      all -- was classified ``software-ai`` and handed 34 domain-matched
+      candidates. Two-letter keywords make substring matching untenable.
+
+    * **Non-ASCII (CJK) keywords -> substring match.** ``\b`` is defined
+      against ``\w``, and CJK characters *are* ``\w``, so ``\b软件\b`` never
+      matches inside "的软件架构并" -- both neighbours are word characters, so
+      there is no boundary to find. Chinese is written without spaces; applying
+      the ASCII rule to it silently drops **every** Chinese keyword.
+
+    Both halves cost a real error before this function existed: the ASCII half
+    let a keyword-free English sentence claim a domain, and the CJK half made a
+    check of mine report 12 correctly-classified Chinese tasks as false hits.
+    A regex has to clear the language of the corpus it runs on.
+    """
+    if _ASCII_WORD.match(signal):
+        pat = _BOUNDARY_CACHE.get(signal)
+        if pat is None:
+            pat = _BOUNDARY_CACHE[signal] = re.compile(
+                r"(?<![a-z0-9])%s(?![a-z0-9])" % re.escape(signal))
+        return bool(pat.search(low))
+    return signal in low
+
+
 def infer_domains(task: str) -> list[str]:
     low = task.casefold()
     scored = []
     for domain, signals in DOMAIN_SIGNALS.items():
-        count = sum(1 for signal in signals if signal.casefold() in low)
+        count = sum(1 for signal in signals if _signal_hits(signal, low))
         if count:
             scored.append((count, domain))
     scored.sort(key=lambda item: (-item[0], item[1]))
