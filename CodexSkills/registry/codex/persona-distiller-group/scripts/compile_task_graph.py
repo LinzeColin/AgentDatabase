@@ -23,16 +23,98 @@ from team_runtime_common import (
     write_json,
 )
 
+# ★★★ 2026-08-16 扩表 —— **原表 92 个词要给 12 个专业族分类，实测召回 42%。**
+#
+#   实测链条（判据 `_ledgers/_pipeline/measure_routing_discrimination.py`）：
+#     撞不上 → `infer_domains` 返回 ["general-decision"]
+#     而 general-decision **不在任何一个族的 CATEGORY_DOMAINS 里**
+#     ⇒ `domain_match` 对全部 101 个候选**在数学上恒为 0**
+#     ⇒ 排序落到 `currentness`（人物年代新旧）⇒ **−1.7 pp，低于随机抽人**
+#   实测兜底率 **13/24 = 54%**；有领域信号的那 9 题是 **+5.3 pp**。
+#
+#   漏的是最普通的词：`software-ai` 14 个词里**没有「测试」**（于是纯软件测试题上
+#   34 个软件开发师全部 domain_match=0）；`finance` 里没有「定价」；
+#   `engineering` 里没有「钢桥」。**词表瞎了，而系统把账记在「没有合适的人」上。**
+#   [[blamed-the-channel-my-own-wordlist-was-blind]]
+#
+#   ★ 扩表**只加词、不删词、不改任何权重与阈值**，也不碰模式/人数/控制面/95-75 门。
+#   ★ 只加**单义**的行业词；刻意不加「方案」「优化」「流程」这类跨域通用词 ——
+#     它们会把所有任务都点亮，等于另一种失效。
+#   ★ 改完必须用同一把尺子跑 24 题对比前后，**变差就回退**（负对照见台账）。
 DOMAIN_SIGNALS: dict[str, tuple[str, ...]] = {
-    "software-ai": ("软件", "代码", "架构", "api", "agent", "llm", "ai", "codex", "python", "数据库", "前端", "后端", "部署", "debug"),
-    "finance-investment": ("财务", "会计", "税", "现金流", "估值", "投资", "股票", "债券", "组合", "审计", "finance", "valuation"),
-    "legal-policy": ("法律", "合同", "诉讼", "监管", "政策", "合规", "legal", "regulation", "governance"),
-    "operations-product": ("运营", "产品", "用户", "市场", "战略", "组织", "流程", "供应链", "采购", "product", "operations", "strategy"),
-    "engineering-industry": ("工程", "机械", "材料", "焊接", "设备", "制造", "可靠性", "施工", "industrial", "engineering"),
-    "research-education": ("研究", "论文", "教学", "课程", "证据", "benchmark", "实验", "research", "study", "education"),
-    "creative-design": ("设计", "视觉", "文案", "视频", "品牌", "创意", "ui", "ux", "creative", "design"),
-    "healthcare": ("医疗", "护理", "药", "诊断", "治疗", "健康", "medical", "health"),
-    "agriculture": ("农业", "种植", "养殖", "食品", "农场", "agriculture", "farming"),
+    "software-ai": (
+        "软件", "代码", "架构", "api", "agent", "llm", "ai", "codex", "python", "数据库",
+        "前端", "后端", "部署", "debug",
+        # ↓ 2026-08-16 补
+        "测试", "单元测试", "ci", "cd", "流水线", "重构", "接口", "sdk", "函数", "命名",
+        "版本", "发布", "回滚", "微服务", "服务拆分", "缓存", "并发", "性能", "延迟",
+        "日志", "监控", "告警", "bug", "缺陷", "编译", "构建", "仓库", "分支", "评审",
+        "code review", "test", "deploy", "rollback", "microservice", "latency", "sdk",
+    ),
+    "finance-investment": (
+        "财务", "会计", "税", "现金流", "估值", "投资", "股票", "债券", "组合", "审计",
+        "finance", "valuation",
+        # ↓ 2026-08-16 补
+        "定价", "计费", "订阅", "客单价", "毛利", "成本", "预算", "回本", "回报", "回撤",
+        "收入确认", "对冲", "汇率", "利率", "股权", "融资", "摊销", "折旧", "资产", "负债",
+        "roi", "pricing", "revenue", "margin", "hedge", "budget", "payback",
+    ),
+    "legal-policy": (
+        "法律", "合同", "诉讼", "监管", "政策", "合规", "legal", "regulation", "governance",
+        # ↓ 2026-08-16 补
+        "条款", "解约", "违约", "仲裁", "复议", "规章", "越权", "授权", "责任", "赔偿",
+        "知识产权", "专利", "商标", "隐私", "反垄断", "听证", "判例", "管辖",
+        "contract", "arbitration", "liability", "patent", "privacy", "antitrust",
+    ),
+    # ★★★ `operations-product` **有意不扩**。实测：它出现在 **12 个族里的 7 个**
+    #   （创业经营／客户营销／建造采购／思想教育／投资资本／政治法律／艺术设计），
+    #   往它加词 = 把 7/12 的人一起点亮 = **稀释**，不是分辨。
+    #   第一版扩表时我给它加了 24 个词，`factory-layout` 当场从 **+10.4 → −3.0**
+    #   （最大的一处回退）。回退这一族之后重测（见台账）。
+    #   ⇒ **加词之前先看这个 domain 被几个族共用**：共用越多，加词越像噪声。
+    #   [[merging-two-signals-cancels-both]]｜[[loosen-only-the-exonerating-side]]
+    "operations-product": (
+        "运营", "产品", "用户", "市场", "战略", "组织", "流程", "供应链", "采购",
+        "product", "operations", "strategy",
+    ),
+    "engineering-industry": (
+        "工程", "机械", "材料", "焊接", "设备", "制造", "可靠性", "施工", "industrial",
+        "engineering",
+        # ↓ 2026-08-16 补
+        "钢", "桥", "钢桥", "焊缝", "裂纹", "疲劳", "腐蚀", "热处理", "硬度", "合金",
+        "铸造", "锻造", "管道", "压力容器", "阀门", "检测", "探伤", "延寿", "判废",
+        "公差", "装配", "车间", "厂房", "自动化", "分拣",
+        "weld", "fatigue", "corrosion", "alloy", "pipeline", "inspection",
+    ),
+    "research-education": (
+        "研究", "论文", "教学", "课程", "证据", "benchmark", "实验", "research", "study",
+        "education",
+        # ↓ 2026-08-16 补
+        "教材", "年级", "学生", "教师", "学习", "认知", "评估", "考试", "科学课",
+        "课堂", "培养", "探究", "教研",
+        "curriculum", "pedagogy", "classroom", "assessment",
+    ),
+    "creative-design": (
+        "设计", "视觉", "文案", "视频", "品牌", "创意", "ui", "ux", "creative", "design",
+        # ↓ 2026-08-16 补
+        "排版", "字号", "字体", "行距", "配色", "版式", "图标", "插画", "海报",
+        "规范", "组件库", "样式", "可读性", "美学",
+        "typography", "font", "layout", "palette", "icon", "readability",
+    ),
+    "healthcare": (
+        "医疗", "护理", "药", "诊断", "治疗", "健康", "medical", "health",
+        # ↓ 2026-08-16 补
+        "护士", "医生", "病人", "患者", "分诊", "急诊", "门诊", "住院", "病房",
+        "诊所", "医院", "临床", "疫苗", "手术", "康复", "流行病",
+        "nurse", "clinic", "hospital", "triage", "clinical", "patient",
+    ),
+    "agriculture": (
+        "农业", "种植", "养殖", "食品", "农场", "agriculture", "farming",
+        # ↓ 2026-08-16 补
+        "果园", "作物", "土壤", "施肥", "灌溉", "病害", "虫害", "砧木", "育种",
+        "农地", "耕地", "收成", "牲畜", "饲料", "烂根",
+        "crop", "soil", "irrigation", "orchard", "livestock", "harvest",
+    ),
 }
 
 HIGH_RISK = (

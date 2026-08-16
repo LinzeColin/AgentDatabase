@@ -1,5 +1,45 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.15 — 任务领域词表扩到 290 词（**样本内验证，未做外部集复验**）
+
+- `compile_task_graph.DOMAIN_SIGNALS` 由 **92 词扩到 290 词**（9 个领域不变）。
+  **只加词、不删词、不改任何权重与阈值**；模式／人数／控制面／95-75 门／
+  生产者-消费者边界一律未动。
+- 起因（判据 `persona-distiller/_ledgers/_pipeline/measure_routing_discrimination.py`）：
+  原表撞不上时 `infer_domains` 返回 `general-decision`，而它**不在任何族的
+  `CATEGORY_DOMAINS` 里** ⇒ `domain_match` 对全部 101 个候选恒为 0 ⇒ 排序落到
+  `currentness`（人物年代新旧）⇒ 实测**比随机抽人还差 1.7 pp**。
+  兜底率实测 **13/24 = 54%**；`software-ai` 那 14 个词里**没有「测试」**。
+- **`operations-product` 有意不扩**：它出现在 12 个族里的 **7 个**，加词等于把
+  7/12 的人一起点亮。第一版扩它之后 `factory-layout` 从 +10.4 掉到 −3.0，
+  回退该族后回到 +0.1，且总体反而更好（高于随机 16→18、低于 6→4）。
+
+### 实测（同一把尺子、24 题、随机基线 400 次、固定种子）
+
+| | v0.0.0.14（92 词） | **v0.0.0.15（290 词）** |
+|---|---:|---:|
+| 分类器兜底率 | 13/24 = **54%** | 2/24 = **8%** |
+| 团队模式 n≥5 | +1.6 pp（SE 2.2，**0.75 SE**） | **+6.3 pp**（SE 2.6，**2.38 SE**） |
+| 高于随机 / 低于随机 | 10 / 12 | **18 / 4** |
+| 逐题 vs 基线 | — | 变好 **14**、变差 **3**、不变 7 |
+
+### ★★ 这个数**不能当作泛化证据**
+
+新加的词（「测试」「定价」「钢桥」…）**是从这 24 题的失败案例里挑出来的**，
+用同一批题验证等于拿答案配尺子。**样本内**。
+- **可引用的**：兜底率 54% → 8%（分类器行为，与任务集无关）；
+  逐题变好 14 / 变差 3。
+- **不可引用的**：`+6.3 pp / 2.38 SE` **不是**「路由收益已证实」。
+  要那句话，需要一批**在扩词之前就写好、且我没看过其词汇**的任务。
+- 仍有 3 题比基线差：`factory-layout` −10.3（基线那 +10.4 是无领域信号时按年代
+  排序**恰好排对**的运气）、`typography-system` −3.1、`bridge-inspection` −2.5。
+
+### 未变
+
+功能验收 `tests/run_functional_acceptance.py` **PASS**；
+`tests/test_market_leader_candidate.py` **7 passed**。
+市场状态仍为 `MARKET_LEADER_NOT_PROVEN`；团队级 outcome 记录数仍为 **0**。
+
 ## v0.0.0.14 — Agentic Sparse MoE and end-to-end persona consumption
 
 - Fixed route-plan to dossier continuity by emitting and consuming `subject_slug` across `members`, `domain_experts`, `selected_roles`, and legacy `roster`.
