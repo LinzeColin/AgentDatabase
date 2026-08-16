@@ -322,7 +322,16 @@ def main() -> int:
               "  只记结论不记依据，事后分不出是按卒年推定、查了出版方，还是照抄了聚合器。")
         return 1
 
-    print("\n  ✓ 每一条公有领域声明都带得住的依据")
+    # ★★ **零扫描面不许印肯定句。** 2026-08-17 交叉喂测：把一份无关 JSON 当账本
+    #   传进来，本判据**照样印「✓ 每一条公有领域声明都带得住的依据」并 rc=0** ——
+    #   而它一条声明都没读到。「每一条都成立」在空集上恒真，那不是通过。
+    #   [[zero-hit-gates-must-prove-they-can-hit]]｜[[a-rights-check-said-zero-red-after-reading-nothing]]
+    claimed = len(agg) + len(nb) + len(ok)
+    if not claimed:
+        print("\n  ⚠ **账本里一条公有领域声明都没读到 —— 本次未核，不是通过。**")
+        print("    （扫描面为空时「每一条都成立」恒真；先确认传对了账本文件。）")
+        return 0
+    print("\n  ✓ 全部 **%d** 条公有领域声明都带得住依据" % claimed)
     return 0
 
 
