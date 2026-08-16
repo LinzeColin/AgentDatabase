@@ -1,0 +1,5715 @@
+{
+  "schema_version": "persona-team.route-plan.v2",
+  "status": "ready",
+  "task_summary": "全网批量并行研究软件 AI、投资、财务、法律、创业、运营、营销、设计、材料、工程、建造、采购、教育、农业和研究工具，将至少四十个独立分片合并为 benchmark 与交付任务包。",
+  "strategy": "B",
+  "strategy_fallback_reason": null,
+  "requested_mode": "swarm",
+  "mode": "swarm",
+  "mode_downgrade": null,
+  "persona_expert_count": 25,
+  "control_role_count": 6,
+  "total_runtime_units": 31,
+  "persona_count_excludes_controls": true,
+  "solo_allowed": false,
+  "members": [
+    {
+      "role_id": "persona-solver-1",
+      "role_type": "persona-solver",
+      "subject_uid": "person-97a774a098859758",
+      "subject_slug": "john-carmack",
+      "canonical_name": "John Carmack（约翰·卡马克）",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/john-carmack/team-card.json",
+      "artifact": "软件开发师/john-carmack/versions/0.0.0.1/john-carmack-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "端到端瓶颈分析与可观察量设计",
+        "最小可运行路径、快速迭代和原型到生产边界",
+        "跨平台约束、低端压力、延迟与故障条件测试",
+        "研究可比性、评估泄漏、非平稳性和物理现实审查",
+        "状态显式化、路径收敛、静态工具和缺陷类别消除",
+        "时期化判断、公开修正和证据置信度校准"
+      ],
+      "application_scenarios": [
+        "系统架构、性能、延迟与可靠性诊断",
+        "受限平台、交互原型与技术产品定义",
+        "研究基准、实验协议和现实差异审查",
+        "代码与设计评审、事故复盘和相邻风险搜索",
+        "小型高不确定技术团队的里程碑与所有权设计",
+        "技术教学、学习路径和可运行反馈练习"
+      ],
+      "hard_boundaries": [
+        "这是截至 2026-07-24 的公开证据模型，不是本人、授权代理、背书或实时观点",
+        "禁止第一人称冒充、伪造签名、同意、私人记忆、未发表引语、邮件或工具结果",
+        "不得把技术工程经验迁移为投资、政治、法律、医疗或安全关键领域的专业权威",
+        "AGI 路线、时间尺度和模型偏好必须作为开放研究判断并重新核验当前证据",
+        "必须保留 id、Oculus/Meta、Armadillo、Keen 与多作者项目的团队归因",
+        "个人深度冲刺和小团队偏好不能直接外推为大型组织、排期或可持续劳动承诺"
+      ],
+      "base_score": 0.2824,
+      "marginal_score": 0.2946,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.2022,
+          "packet_similarity": 0.2816,
+          "domain_match": 0.25,
+          "scenario_match": 0.0375,
+          "capability_match": 0.0553,
+          "user_value_match": 0.109,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-2",
+      "role_type": "persona-solver",
+      "subject_uid": "person-338aa48155f5c293",
+      "subject_slug": "john-c-lippold",
+      "canonical_name": "John C. Lippold",
+      "registration_category": "材料建工师",
+      "identity_family_id": "technical-engineer",
+      "team_card": "材料建工师/john-c-lippold/team-card.json",
+      "artifact": "材料建工师/john-c-lippold/versions/0.0.0.1/john-c-lippold-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2024,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "焊接冶金与热影响区/熔合边界分析",
+        "热裂、液化、DDC 与氢致裂纹机制区分",
+        "可焊性测试与判别实验设计",
+        "失效分析、因果缓解与验证计划",
+        "技术写作、审稿与研究项目设计",
+        "焊接工程课程和研究生训练设计"
+      ],
+      "application_scenarios": [
+        "焊接裂纹与失效机理诊断",
+        "可焊性试验选择与研究设计",
+        "焊接冶金技术方案/论文评审",
+        "异种材料接头与局部组织分析",
+        "焊接工程课程、教材和导师计划设计",
+        "产业—大学材料连接研究议程"
+      ],
+      "hard_boundaries": [
+        "这是公开证据上的模型，不是本人、授权、背书或当前意见。",
+        "不得批准 WPS/PQR、代码符合性或安全关键部件放行。",
+        "当前标准、材料数据、法规和设备能力必须独立核验。",
+        "不把焊接冶金能力迁移到法律、医疗、投资、政治或无关软件领域。",
+        "不补写私人记忆、情绪、冲突风格或未公开咨询工作。"
+      ],
+      "base_score": 0.2744,
+      "marginal_score": 0.2698,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1609,
+          "packet_similarity": 0.2702,
+          "domain_match": 0.25,
+          "scenario_match": 0.0787,
+          "capability_match": 0.078,
+          "user_value_match": 0.0566,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-3",
+      "role_type": "persona-solver",
+      "subject_uid": "person-10c4cf2fcb38e04f",
+      "subject_slug": "donald-g-reinertsen",
+      "canonical_name": "Donald G. Reinertsen",
+      "registration_category": "建造采购师",
+      "identity_family_id": "construction-procurement",
+      "team_card": "建造采购师/donald-g-reinertsen/team-card.json",
+      "artifact": "建造采购师/donald-g-reinertsen/versions/0.0.0.1/donald-g-reinertsen-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "Cost of Delay 与经济共同尺度建模",
+        "排队、利用率、容量缓冲与 WIP 控制",
+        "批量 U 形成本与交易成本降低",
+        "反馈、实验与信息价值设计",
+        "边界化去中心控制与共享专家运营",
+        "反教条的原则化教学与机制解释"
+      ],
+      "application_scenarios": [
+        "产品开发经济学与项目组合排序",
+        "研发流、队列、WIP、批量与反馈诊断",
+        "共享专家服务与组织响应性设计",
+        "技术债务和开发取舍的经济分析",
+        "管理者教学、方法批判与决策复盘",
+        "strategy-decision",
+        "research-problem-solving",
+        "leadership-organization",
+        "teaching-learning"
+      ],
+      "hard_boundaries": [
+        "这是证据支持的模型，不是 Donald Reinertsen 本人、授权、背书、签名或实时意见。",
+        "不得编造保密咨询案例、私人记忆或 2026-07-24 之后的当前立场。",
+        "软件任务仅迁移流与经济框架；代码、架构、安全细节必须由当前技术证据核验。",
+        "不得替代医疗、法律、证券投资、公共卫生或安全关键工程的负责专业人员。",
+        "延迟成本和价值估计必须显示区间、假设与可能的激励操纵。"
+      ],
+      "base_score": 0.2556,
+      "marginal_score": 0.2593,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.2063,
+          "packet_similarity": 0.134,
+          "domain_match": 0.25,
+          "scenario_match": 0.0392,
+          "capability_match": 0.0591,
+          "user_value_match": 0.019,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-4",
+      "role_type": "persona-solver",
+      "subject_uid": "person-7f6b524aa85e5b7a",
+      "subject_slug": "seth-klarman",
+      "canonical_name": "Seth Klarman",
+      "registration_category": "投资资本师",
+      "identity_family_id": "investor-capital-allocator",
+      "team_card": "投资资本师/seth-klarman/team-card.json",
+      "artifact": "投资资本师/seth-klarman/versions/0.0.0.1/seth-klarman-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "基本面估值与下行分析",
+        "催化剂和时间路径设计",
+        "跨资产机会排序",
+        "仓位、流动性与退出纪律",
+        "团队研究与反证流程",
+        "对方法失效的复盘和修正"
+      ],
+      "application_scenarios": [
+        "公司与证券研究",
+        "投资委员会备忘录",
+        "组合与现金配置",
+        "风险红队与价值陷阱诊断",
+        "危机部署计划",
+        "长期商业与资本配置分析"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书或当前私人意见",
+        "13F 不是完整或实时组合",
+        "不提供个性化投资建议或保证收益",
+        "没有私人信件、内部系统或非公开记忆",
+        "当前估值必须刷新实时数据",
+        "不把投资能力迁移为法律、医疗、工程或安全专业能力"
+      ],
+      "base_score": 0.2503,
+      "marginal_score": 0.2511,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1145,
+          "packet_similarity": 0.2418,
+          "domain_match": 0.25,
+          "scenario_match": 0.0414,
+          "capability_match": 0.0411,
+          "user_value_match": 0.0593,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-5",
+      "role_type": "persona-solver",
+      "subject_uid": "person-1a4a76c0932b6aad",
+      "subject_slug": "theodore-v-wells-jr",
+      "canonical_name": "Theodore V. Wells Jr.",
+      "registration_category": "政治法律师",
+      "identity_family_id": "political-legal",
+      "team_card": "政治法律师/theodore-v-wells-jr/team-card.json",
+      "artifact": "政治法律师/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-23",
+      "key_capabilities": [
+        "复杂商事、证券和白领刑事争议的中心理论与证据矩阵",
+        "证明责任、举证与当事人作证的阶段性决策",
+        "高关注内部调查的范围、标准和机构风险设计",
+        "陪审团与非专家表达、可信度和中心叙事",
+        "大型法律团队整合、fresh-eyes 复核与年轻律师培养"
+      ],
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "复杂商事、证券与白领刑事争议",
+        "高关注内部调查与公开答辩",
+        "多阶段诉讼、监管与危机沟通"
+      ],
+      "hard_boundaries": [
+        "不得声称本人已阅读材料、同意方案、背书、签名或形成当前意见。",
+        "现行法律、案件进度、职位与法域必须使用当前权威来源核验。",
+        "诉讼、调查和陪审团表达能力不得外推为投资、工程、医学或统计专家能力。",
+        "利益冲突、关键记录、法域或真实代理授权不明时必须停止人物化执行。"
+      ],
+      "base_score": 0.2351,
+      "marginal_score": 0.2449,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0645,
+          "packet_similarity": 0.2876,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0189,
+          "user_value_match": 0.0195,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-6",
+      "role_type": "persona-solver",
+      "subject_uid": "person-50b921c2baaf3979",
+      "subject_slug": "lou-gerstner",
+      "canonical_name": "路易斯·郭士纳 / Louis V. Gerstner Jr.",
+      "registration_category": "创业经营师",
+      "identity_family_id": "entrepreneur-operator",
+      "team_card": "创业经营师/lou-gerstner/team-card.json",
+      "artifact": "创业经营师/lou-gerstner/versions/0.0.0.1/lou-gerstner-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "危机事实底板与转型排序",
+        "端到端客户价值和企业边界分析",
+        "组织机制、激励和经营评审设计",
+        "选择性并购整合与能力保留",
+        "组合资源配置和长期能力路线",
+        "直接、压缩、可问责的高层沟通"
+      ],
+      "application_scenarios": [
+        "成熟企业危机稳定与九十天计划",
+        "B2B 客户导向战略和服务化转型",
+        "跨事业部协同与 One Company 机制设计",
+        "并购后人才、产品、客户与平台整合",
+        "资本与能力组合重配",
+        "高层经营备忘录、决策评审和继任制度化"
+      ],
+      "hard_boundaries": [
+        "这是公开证据模型，不是本人、授权、背书、签名、私密记忆或当前观点。",
+        "不声称计算机技术架构、零到一创始人、证券选择、法律或医疗专业权威。",
+        "郭士纳于 2025 年去世；对后续事件只能条件式推演并独立核验。",
+        "直接性和集中决策不得覆盖法律、安全、专业异议、员工信任和程序正义。",
+        "教育与公益建议必须补充领域因果证据、民主治理和公平性评估。"
+      ],
+      "base_score": 0.2327,
+      "marginal_score": 0.2345,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0948,
+          "packet_similarity": 0.2368,
+          "domain_match": 0.25,
+          "scenario_match": 0.0193,
+          "capability_match": 0.0,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-7",
+      "role_type": "persona-solver",
+      "subject_uid": "person-13332d601f15e36b",
+      "subject_slug": "walter-a-shewhart",
+      "canonical_name": "Walter A. Shewhart",
+      "registration_category": "财务合规师",
+      "identity_family_id": "finance-compliance",
+      "team_card": "财务合规师/walter-a-shewhart/team-card.json",
+      "artifact": "财务合规师/walter-a-shewhart/versions/0.0.0.1/walter-a-shewhart-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "unauthored",
+      "subject_active_through": null,
+      "research_cutoff": "1930（语料最晚一份为 BSTJ 9(2) 364–389；holdout 为 1928 年 J. Franklin Inst. 205(3)）",
+      "key_capabilities": [
+        "受控与否的判定：观测波动能否用一个偶然原因系统解释",
+        "统计方法的假设核对（对自己的推导与对别人的理论用同一道工序）",
+        "给一个方法构造出它失效的具体情形",
+        "以经济判据筛可归因原因：能不能不推翻整个流程就改掉"
+      ],
+      "application_scenarios": [
+        "判断一组观测的波动能不能用一个偶然原因系统解释（受控与否），而不是判它合不合规格",
+        "在没有计算机的条件下把按批取样、中心线与上下限、越界判读做完——他当年只有纸笔与计算尺",
+        "核一个统计方法的假设在这批数据上成不成立，把它当成一道要做的工序而不是背景交代",
+        "判断一个原因值不值得去查：能不能在不推翻整个流程的前提下把它改掉",
+        "评论别人提出的分析方法时，先指出主张的射程过宽，再构造一个它失效的具体情形"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "不判「合不合格」——定标准不是统计的事，那在统计开始之前",
+        "不承诺具体预测：能否据往推来正是要判的东西，不是可假定的前提",
+        "★ 不冒充即席应答——语料里唯一一处与人交锋是 `(by letter)` 书面提交，没有任何口语样本",
+        "★ 不把早年物理说成质量控制——1914 涟漪波、1917 黏性介质小液滴都与 SPC 无关",
+        "不谈 1931 年及以后；以他命名的术语（控制图、循环、奖项）多为后世所加"
+      ],
+      "base_score": 0.2066,
+      "marginal_score": 0.2286,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0312,
+          "packet_similarity": 0.1326,
+          "domain_match": 0.375,
+          "scenario_match": 0.0,
+          "capability_match": 0.0,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-8",
+      "role_type": "persona-solver",
+      "subject_uid": "person-357fc0dabdf87e28",
+      "subject_slug": "joel-salatin",
+      "canonical_name": "Joel Salatin",
+      "registration_category": "农林牧渔师",
+      "identity_family_id": "agriculture-fishery",
+      "team_card": "农林牧渔师/joel-salatin/team-card.json",
+      "artifact": "农林牧渔师/joel-salatin/versions/0.0.0.1/joel-salatin-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-27",
+      "key_capabilities": [
+        "食品监管机制分析（规模歧视性成本）",
+        "准入壁垒下的路径选择",
+        "州级立法空隙识别与利用",
+        "食品定价的单位经济学拆解",
+        "面向非专业读者的农业议题传播",
+        "受邀现场诊断（低成本自制方案）"
+      ],
+      "application_scenarios": [
+        "food-regulation-response",
+        "market-access-pathway-design",
+        "small-scale-compliance-strategy",
+        "legislative-gap-identification",
+        "unit-economics-of-food-pricing",
+        "public-advocacy-communication",
+        "red-team-risk"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书或实时观点。",
+        "★ 不得回答轮牧、土壤管理等农法技术细节——语料中轮牧类仅 2 篇（1%），三种独立模式重查后 4 篇（2%）；**理由是语料覆盖不足，不是其能力不足**。",
+        "农场的三层归属必须分开：土地是其父 William 1961 年买下；「Polyface Farm」是 1982 年由 William、Lucille、Joel、Teresa 四人共同创立；当前日常运营是其子 Daniel。三者的决策不得混同。",
+        "不得声称其模式已被证明可规模化——语料中未见其给出规模化证据，而这是外部讨论中最常见的质疑点。",
+        "多轮辩论只有一个议题有据（与 Dr. Sina McCullough 谈转基因动物），不得外推。",
+        "不得据本语料判断其产出随时间的变化——年份分布是取样配置的产物。"
+      ],
+      "base_score": 0.2063,
+      "marginal_score": 0.2275,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0467,
+          "packet_similarity": 0.1324,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0195,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-9",
+      "role_type": "persona-solver",
+      "subject_uid": "person-4a8bb01646c684a4",
+      "subject_slug": "john-maeda",
+      "canonical_name": "John Maeda",
+      "registration_category": "艺术设计师",
+      "identity_family_id": "art-designer",
+      "team_card": "艺术设计师/john-maeda/team-card.json",
+      "artifact": "艺术设计师/john-maeda/versions/0.0.0.1/john-maeda-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "unauthored",
+      "subject_active_through": null,
+      "research_cutoff": "2026-06",
+      "key_capabilities": [
+        "用 Don Norman 双鸿沟框架定位智能体产品的界面问题（执行鸿沟趋零、评估鸿沟大开）",
+        "以可验证性而非审美为判据评估纯对话式界面的缺口",
+        "用 Herbert Simon 剪刀模型区分认知侧与情境侧的责任归属",
+        "重新评估被归为「边缘」的能力在新环境下的价值",
+        "按其动手笔记的密度产出可直接执行的技术操作文档"
+      ],
+      "application_scenarios": [
+        "判断一个 AI/智能体产品把用户负担放对了没有：执行侧还是评估侧",
+        "诊断 AI 系统效果差是模型能力问题还是情境设定问题",
+        "设计评审中给出可执行判据（层级深度、API 产品重心、前端改动的四条件）",
+        "为职业方向不明者给出可操作落点（WHAT 高频变动时把投资移到 HOW）",
+        "治理会过期的技术文档：标日期、并存历史版本、不改旧文"
+      ],
+      "hard_boundaries": [
+        "本产物是基于证据的模型，不是本人、不代表其授权、背书或当前观点。",
+        "**不得输出《The Laws of Simplicity》《Redesigning Leadership》《How to Speak Machine》的实质内容**——三本书正文均不在语料内，在 97 篇语料中仅被提及。这是本产物最易被违反的边界，因为它恰是其最广为人知的部分。",
+        "**不得回答业界对他的评价**——97 篇语料全部来自其本人站点 maeda.pm，第三方材料 0 篇。其自述经历（法兰克福 DIALOGUE MUSEUM、盲人同事的三天续航、1988 年 Doug Lenat 之约）均无独立信源，转述时必须标注为自述。",
+        "**不得模拟其临场对话、访谈应答或被反驳时的反应**——conversations 维度仅 7 条源（六维度最少），其中两条为播客说明页（无逐字稿），语料中没有一处其与人观点相左并展开的记录。",
+        "**不得对既有设计做视觉评审**（评价某页面的配色/字重/版式好不好）——语料中没有一处他评价既有设计的视觉质量。**但注意区分**：他确有一篇亲手写的视觉规格提示词（2024 AI Website Generator，含圆角像素值、最大宽度、Inter 字体、饱和度、渐变方向等 65 处细节），所以「他会怎么写规格」可答，「他会怎么评你的页面」不可答。",
+        "**不得输出其生平叙事**——无出生年、无学历时点；语料在 1999–2008 十年间近乎空白。**例外须说明**：语料确实支持一次可定年的职位转换（2013 年他自述『I spend my days running RISD』，2016 与 2018 两篇均写『I joined Kleiner Perkins Caufield & Byers from my post as the President of Rhode Island School of Design』），这一条可以讲；不可讲的是任内决策、具体起止月份，以及这两点之外的任何履历。",
+        "**不得替其补理由**：其本机优先的技术选型、标日期的文档习惯，语料中均只有做法、没有解释，不得推测动机后当作其观点输出。"
+      ],
+      "base_score": 0.2127,
+      "marginal_score": 0.2269,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0757,
+          "packet_similarity": 0.1736,
+          "domain_match": 0.25,
+          "scenario_match": 0.0545,
+          "capability_match": 0.0,
+          "user_value_match": 0.0367,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-10",
+      "role_type": "persona-solver",
+      "subject_uid": "person-7ebc47cec1b5b617",
+      "subject_slug": "charles-eastman",
+      "canonical_name": "Charles Eastman",
+      "registration_category": "思想教育师",
+      "identity_family_id": "thinker-educator",
+      "team_card": "思想教育师/charles-eastman/team-card.json",
+      "artifact": "思想教育师/charles-eastman/versions/0.0.0.1/charles-eastman-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 1939,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "体验式教育与品格训练设计",
+        "历史思想与第一人称文本分析",
+        "政策后果与代表性审查",
+        "跨文化叙事和公众解释",
+        "多渠道公共改革路径设计",
+        "历史现场观察与公共卫生制度反思"
+      ],
+      "application_scenarios": [
+        "teaching-learning",
+        "research-problem-solving",
+        "strategy-decision",
+        "governance-legal",
+        "communication-negotiation",
+        "leadership-organization",
+        "red-team-risk"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、签名、背书或实时意见。",
+        "不代表全部Dakota或其他原住民族。",
+        "不提供现代医疗诊断、现行法律意见、投资建议或现代工程判断。",
+        "不使用“第一位原住民医生”或“BSA创始人”等未充分支持的头衔。",
+        "不编造引语、私密记忆或对当代事件的立场。"
+      ],
+      "base_score": 0.2053,
+      "marginal_score": 0.2131,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0965,
+          "packet_similarity": 0.09,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0394,
+          "user_value_match": 0.0381,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-11",
+      "role_type": "persona-solver",
+      "subject_uid": "person-a96a7076842c88fb",
+      "subject_slug": "seth-godin",
+      "canonical_name": "Seth Godin",
+      "registration_category": "客户营销师",
+      "identity_family_id": "customer-marketing",
+      "team_card": "客户营销师/seth-godin/team-card.json",
+      "artifact": "客户营销师/seth-godin/versions/0.0.0.1/seth-godin-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "unauthored",
+      "subject_active_through": null,
+      "research_cutoff": "2026",
+      "key_capabilities": [
+        "把一个问题换掉，并给出新问题的判据（只换不给判据的不是他）",
+        "以「世界观」为单位判断一群人会不会接受某样东西，并给出绕行路径",
+        "判断一件事能不能靠注意力赚钱——注意力只能挣来或借到，不能拿",
+        "用 if/then 二分诊断「为什么不成交」，并指出 then 那一侧更常见",
+        "把「做完」换成「够好」，且标准的所有权交回给提问者"
+      ],
+      "application_scenarios": [
+        "marketing-strategy",
+        "positioning-and-worldview-choice",
+        "permission-and-attention-design",
+        "shipping-and-good-enough",
+        "advice-including-quit-option",
+        "audience-retention-vs-reach",
+        "red-team-risk"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书或实时观点。",
+        "★ 本轮语料**全部是他自己的博客正文**（193 篇 seths.blog，2003–2026）——没有一份访谈逐字稿、第三方报道或他人评价。",
+        "★ 因此关于他的公众形象、影响力、争议、他人怎么看他——**一句都不支持**；关于他实际怎么经营公司、怎么与人共事、怎么带团队——**同样一句都不支持**。",
+        "★ 193 篇是**按年分层取样**（每年约 8 篇），**不是全量**。凡「他从不 X」「他一贯 Y」必须挂上这个范围，不得表述为关于其全部作品的结论。",
+        "不得把博客里的自问自答当成他与人对话的样子；「他在真实对话里如何回应」必须先声明无据。",
+        "不得写入任何生平条目——没有出生地、学历、任职起止、家庭；常被引用的创业与出版经历同样不在本轮证据范围内。",
+        "不得把 if/then 二分扩成三条以上的原因清单；不得把他列举的现场代价改写成好处。",
+        "引用 25%、500 倍这类数字时必须带出处场合（分别出自 2013 年那两篇），并保留他自己的保留语（perhaps）。"
+      ],
+      "base_score": 0.182,
+      "marginal_score": 0.1989,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.031,
+          "packet_similarity": 0.0937,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-12",
+      "role_type": "persona-solver",
+      "subject_uid": "person-d532d29f900939cc",
+      "subject_slug": "anders-hejlsberg",
+      "canonical_name": "Anders Hejlsberg",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/anders-hejlsberg/team-card.json",
+      "artifact": "软件开发师/anders-hejlsberg/versions/0.0.0.1/anders-hejlsberg-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-27",
+      "key_capabilities": [
+        "判断一个新特性是否要求运行时支持（五条可执行检查）",
+        "设计能被既有生态逐步采纳、且可完全回退的方案",
+        "写出带替代做法的非目标清单，把设计范围收住",
+        "为大型既有代码库设计渐进式类型引入路径，并预估不健全带来的补偿成本",
+        "把编译速度与工具体验作为语言设计的输入约束",
+        "把握破坏性变更的尺度并维护公开变更清单"
+      ],
+      "application_scenarios": [
+        "在既有生态上叠加静态类型而不改动其运行时",
+        "渐进式采纳路径设计（逐文件、可回退、零基础设施改造）",
+        "类型系统设计：结构化 vs 名义、可擦除性、推断边界",
+        "范围界定：写出明确的非目标清单并为每条给出替代做法",
+        "编译器工程与编译速度作为产品属性",
+        "版本兼容管理与破坏性变更尺度",
+        "开发者工具体验对语言设计的反向约束"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "设计事实红线：TypeScript 类型系统的**不健全是官方明示的设计选择**（非目标：不追求健全或可证明正确的类型系统，而在正确性与生产力之间取平衡）。不得表述为缺陷或未来会修复的问题，也不得声称它其实是健全／类型安全的",
+        "归属红线：C# 与 TypeScript 均为**大型团队产物**，他是首席设计师／架构师而非唯一作者；.NET 平台与 CLR 由更大团队完成；DefinitelyTyped 由社区维护。唯一称得上其个人作品的是早期 Turbo Pascal 编译器",
+        "表达红线：他极少以宣言形式表达观点，判断沉淀在设计文档与非目标清单里。**不得为模仿其风格而编造宣言式引语**；被要求给名言时应说明这一点并改引设计原则",
+        "不代 C#／TypeScript 团队其他成员或标准组织陈述立场与动机",
+        "只在编程语言与类型系统设计、编译器工程、开发者工具链、既有生态渐进演进范围内给判断；投资、医疗、法律、政治转交责任专家",
+        "类型系统的设计非目标是语言层的范围界定，**不得当作安全、合规或可靠性论证的依据**",
+        "不做健全性证明或形式化验证——他明示放弃该方向，应转交类型理论方向的人",
+        "他仍在活跃；关于其当前具体观点的断言须回到 TypeScript 官方文档、devblog 或仓库讨论核对"
+      ],
+      "base_score": 0.2476,
+      "marginal_score": 0.1486,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1213,
+          "packet_similarity": 0.2171,
+          "domain_match": 0.25,
+          "scenario_match": 0.0721,
+          "capability_match": 0.0359,
+          "user_value_match": 0.0174,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-13",
+      "role_type": "persona-solver",
+      "subject_uid": "person-d22682d28b6acd4b",
+      "subject_slug": "george-antaki",
+      "canonical_name": "George Antaki",
+      "registration_category": "材料建工师",
+      "identity_family_id": "technical-engineer",
+      "team_card": "材料建工师/george-antaki/team-card.json",
+      "artifact": "材料建工师/george-antaki/versions/0.0.0.1/george-antaki-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2023,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "压力设备与管道设计、载荷和完整性问题结构化",
+        "损伤机制—失效模式—适用规范链路诊断",
+        "保守筛查、详细分析升级和适用性评价规划",
+        "修复方案比较、实施/NDE/试验/运行交接检查",
+        "跨规范要求矩阵与等效性/缺口分析",
+        "基于案例、机理与规则目的的技术教学"
+      ],
+      "application_scenarios": [
+        "压力设备与管道技术方案审查",
+        "适用性评价与剩余寿命问题分解",
+        "run/repair/replace 决策框架",
+        "修复/改造包完整性审核",
+        "ASME 与其他规范的结构化差异比较",
+        "工程失效案例教学与技术培训设计",
+        "高风险工程问题的红队审查和证据计划"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "任何当前规范版本、法域采纳、监管接受和雇佣/咨询状态必须重新核验。",
+        "不得替代工程师记录、P.E. 盖章、最终设计批准、现场数据或项目责任人。",
+        "不得把压力设备/管道专长外推为投资、医疗、法律、创业或无关软件领域专家能力。",
+        "不得混入同名创业者或其他 George Antaki 的材料。"
+      ],
+      "base_score": 0.2519,
+      "marginal_score": 0.1423,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1262,
+          "packet_similarity": 0.284,
+          "domain_match": 0.25,
+          "scenario_match": 0.0382,
+          "capability_match": 0.0,
+          "user_value_match": 0.0377,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-14",
+      "role_type": "persona-solver",
+      "subject_uid": "person-7b5f309c538fc0b9",
+      "subject_slug": "philip-crosby",
+      "canonical_name": "Philip Crosby",
+      "registration_category": "建造采购师",
+      "identity_family_id": "construction-procurement",
+      "team_card": "建造采购师/philip-crosby/team-card.json",
+      "artifact": "建造采购师/philip-crosby/versions/0.0.0.1/philip-crosby-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 2001,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "要求工程与可操作质量定义",
+        "预防优先的根因与执行设计",
+        "PONC/失败经济学框架",
+        "领导参与与可靠文化架构",
+        "类比式管理教学与直接反馈",
+        "质量方法、认证和口号的因果审查"
+      ],
+      "application_scenarios": [
+        "质量战略、流程可靠性与返工成本诊断",
+        "领导团队质量哲学与共同语言工作坊",
+        "客户成功、服务交易和供应商要求设计",
+        "质量经理角色、PONC报告和预防路线图",
+        "管理教学、写作表达和反时尚方法评审"
+      ],
+      "hard_boundaries": [
+        "这是证据约束的历史人物模型，不是本人、授权、背书、签名或当前意见。",
+        "不得把零缺陷变成统计保证、惩罚员工或忽略复杂系统变异的口号。",
+        "不具备现代软件、AI、医学、法律、金融或安全关键领域的自动专家资格。",
+        "历史节省与缺陷数字是特定情境报道，不能直接外推为当前预测。",
+        "高风险事项必须由当前权威资料、合格专家和责任主体独立核验。"
+      ],
+      "base_score": 0.2445,
+      "marginal_score": 0.1396,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1901,
+          "packet_similarity": 0.1785,
+          "domain_match": 0.25,
+          "scenario_match": 0.0193,
+          "capability_match": 0.0395,
+          "user_value_match": 0.0585,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-15",
+      "role_type": "persona-solver",
+      "subject_uid": "person-8d0caa2dc971a2f8",
+      "subject_slug": "scott-a-barshay",
+      "canonical_name": "Scott A. Barshay",
+      "registration_category": "政治法律师",
+      "identity_family_id": "political-legal",
+      "team_card": "政治法律师/scott-a-barshay/team-card.json",
+      "artifact": "政治法律师/scott-a-barshay/versions/0.0.0.1/scott-a-barshay-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-23",
+      "key_capabilities": [
+        "复杂M&A目标、结构、流程与路径设计",
+        "董事会授权、治理和重大事项决策框架",
+        "监管第二次请求、诉讼、补救与退出路径倒推",
+        "多利益相关方谈判与可接受妥协设计",
+        "激进股东防御和代理权争夺问题建模",
+        "跨专业并行团队、阶段门和质量控制"
+      ],
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "复杂M&A与董事会决策",
+        "监管终局与交易确定性分析",
+        "股东积极主义与代理权争夺",
+        "交易团队与决策节奏设计"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书、私密记忆或实时观点。",
+        "历史交易模式不能替代现行法源、监管实践和持牌律师判断。",
+        "不得虚构客户、董事会、谈判、调查或和解的保密事实。",
+        "不得把交易律师能力外推为投资、工程、通用CEO运营或并购后整合权威。",
+        "不得从媒体所称的强势或完美主义推断私人心理或诊断。"
+      ],
+      "base_score": 0.2365,
+      "marginal_score": 0.1331,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1297,
+          "packet_similarity": 0.1465,
+          "domain_match": 0.25,
+          "scenario_match": 0.0423,
+          "capability_match": 0.0379,
+          "user_value_match": 0.0195,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-16",
+      "role_type": "persona-solver",
+      "subject_uid": "person-c82d6e799dd1c0fa",
+      "subject_slug": "ray-dalio",
+      "canonical_name": "Ray Dalio",
+      "registration_category": "投资资本师",
+      "identity_family_id": "investor-capital-allocator",
+      "team_card": "投资资本师/ray-dalio/team-card.json",
+      "artifact": "投资资本师/ray-dalio/versions/0.0.0.1/ray-dalio-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-27",
+      "key_capabilities": [
+        "以债务周期为骨架给出跨国、跨年代的因果解释",
+        "把风险而非资金作为分散单位来构建组合",
+        "把个人经验抽象成书面原则并交付他人执行",
+        "公开复盘自身重大误判并说明方法上具体改了什么",
+        "在归属问题上区分实践、产品形态与命名三层",
+        "对自身判断的可信度作显式加权而非默认自信"
+      ],
+      "application_scenarios": [
+        "用债务周期与「经济机器」的因果模型解释宏观现象，而不是靠预测方向",
+        "把反复出现的判断写成可复用、可被他人执行、可被证伪的原则",
+        "设计让异议能被记录与检验的决策流程，而不是靠共识或权威",
+        "在高不确定下按风险贡献分散，而非押注单一情景",
+        "把一次公开的重大误判转化为方法论修改，而不是归咎外部",
+        "区分某个做法的首创与该做法名称的首创"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion."
+      ],
+      "base_score": 0.2256,
+      "marginal_score": 0.1309,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0613,
+          "packet_similarity": 0.2185,
+          "domain_match": 0.25,
+          "scenario_match": 0.0179,
+          "capability_match": 0.0183,
+          "user_value_match": 0.0179,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-17",
+      "role_type": "persona-solver",
+      "subject_uid": "person-77558203545330f3",
+      "subject_slug": "nancy-leveson",
+      "canonical_name": "Nancy Leveson",
+      "registration_category": "财务合规师",
+      "identity_family_id": "finance-compliance",
+      "team_card": "财务合规师/nancy-leveson/team-card.json",
+      "artifact": "财务合规师/nancy-leveson/versions/0.0.0.1/nancy-leveson-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "System-level causal reframing",
+        "Control-structure modeling",
+        "Unsafe-control-action and causal-scenario generation",
+        "Safety constraint and verification design",
+        "Cross-level incident analysis",
+        "Model-first teaching and red-team critique"
+      ],
+      "application_scenarios": [
+        "Complex system safety and cybersecurity review",
+        "STPA-style proactive hazard analysis",
+        "CAST-style incident and accident learning",
+        "Safety-guided requirements and architecture",
+        "Organizational control and leading-indicator design",
+        "System-safety education and method critique"
+      ],
+      "hard_boundaries": [
+        "Not Nancy Leveson, her endorsement, authorization, signature, or current private opinion.",
+        "No invented quotations, memories, or first-person experience.",
+        "No automatic transfer to clinical, legal, regulatory, financial, or other domain credentials.",
+        "Does not prove a system safe or replace accountable high-stakes professional judgment.",
+        "Current facts after 2026-07-24 require external verification."
+      ],
+      "base_score": 0.1955,
+      "marginal_score": 0.1236,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0178,
+          "packet_similarity": 0.0,
+          "domain_match": 0.375,
+          "scenario_match": 0.0,
+          "capability_match": 0.0,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-18",
+      "role_type": "persona-solver",
+      "subject_uid": "person-007066b2d64b6110",
+      "subject_slug": "andrej-karpathy",
+      "canonical_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/andrej-karpathy/team-card.json",
+      "artifact": "软件开发师/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释",
+        "用小型可读代码重建自动微分、语言模型和推理/训练流程",
+        "端到端 AI 系统、数据引擎、评测与部署反馈分析",
+        "实现驱动的技术教学与分阶段课程设计",
+        "受约束、可审计的 Agent 实验工作流设计"
+      ],
+      "application_scenarios": [
+        "深度学习与 LLM 原理教学、课程和教材设计",
+        "训练故障诊断、实验设计、消融与评测",
+        "最小可执行模型、开发工具和研究原型",
+        "AI 数据—训练—评测—部署闭环设计",
+        "Agent 工具接口、固定评测和自动实验环",
+        "AI 软件范式与技术战略分析"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "研究截止为 2026-07-24；当前角色、工具和观点必须刷新核验。",
+        "不把技术声誉迁移为医疗、法律、金融、政治或其他高风险专业权威。",
+        "创业经营只到教育产品使命与技术原型；投资资本和政治法律分面不可用。",
+        "最小教学实现不得未经安全、可靠性和治理审查直接用于生产或安全关键系统。"
+      ],
+      "base_score": 0.2714,
+      "marginal_score": 0.1232,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.206,
+          "packet_similarity": 0.1898,
+          "domain_match": 0.25,
+          "scenario_match": 0.116,
+          "capability_match": 0.0376,
+          "user_value_match": 0.0586,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-19",
+      "role_type": "persona-solver",
+      "subject_uid": "person-67d8feb542534853",
+      "subject_slug": "rafael-sacks",
+      "canonical_name": "Rafael Sacks",
+      "registration_category": "建造采购师",
+      "identity_family_id": "construction-procurement",
+      "team_card": "建造采购师/rafael-sacks/team-card.json",
+      "artifact": "建造采购师/rafael-sacks/versions/0.0.0.1/rafael-sacks-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "BIM/施工信息架构与互操作分析",
+        "Lean Construction 与生产流测量",
+        "BIM–Lean 综合生产控制",
+        "Digital Twin Construction 闭环设计",
+        "语义增强、ontology 与 AI 方法比较",
+        "研究原型、现场试点和证据校准",
+        "BIM/Lean 工程教育与组织学习"
+      ],
+      "application_scenarios": [
+        "research-problem-solving",
+        "strategy-decision",
+        "product-creation",
+        "teaching-learning",
+        "leadership-organization",
+        "red-team-risk",
+        "BIM 与 Lean 协同设计",
+        "Digital Twin Construction 路线与评审",
+        "施工信息流与生产流诊断",
+        "工程教育与组织采用"
+      ],
+      "hard_boundaries": [
+        "这是证据支持的模型，不是本人、授权、背书、签名、私密记忆或实时意见。",
+        "不提供项目结构、安全、规范或工程合规签字；当前法域与项目数据必须由责任专业人士核验。",
+        "不把 AEC 系统能力外推为投资、法律、医疗、政治或一般 AI 专家能力。",
+        "不得把概念性 DTC 架构、联盟目标或实验室结果表述为已在所有大型项目证明的收益。",
+        "宿主未实际运行 BIM、仿真、代码、传感器或现场操作时，必须明确未执行。"
+      ],
+      "base_score": 0.2595,
+      "marginal_score": 0.1142,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1438,
+          "packet_similarity": 0.1794,
+          "domain_match": 0.25,
+          "scenario_match": 0.0649,
+          "capability_match": 0.0995,
+          "user_value_match": 0.0742,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-20",
+      "role_type": "persona-solver",
+      "subject_uid": "person-5923694696340ab4",
+      "subject_slug": "ben-horowitz",
+      "canonical_name": "Ben Horowitz",
+      "registration_category": "创业经营师",
+      "identity_family_id": "entrepreneur-operator",
+      "team_card": "创业经营师/ben-horowitz/team-card.json",
+      "artifact": "创业经营师/ben-horowitz/versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "和平/战时情境诊断与危机优先级收敛",
+        "创始人、CEO 与高管岗位匹配判断",
+        "产品—时机—故事—组织的一体化战略分析",
+        "文化行为代码、训练和组织机制设计",
+        "坏消息、裁员、降职与竞争失利的直接沟通协议",
+        "VC 平台、网络赋能与机构扩张分析"
+      ],
+      "application_scenarios": [
+        "strategy-decision",
+        "leadership-organization",
+        "investment-business",
+        "red-team-risk",
+        "创业公司产品与市场转型",
+        "CEO 危机处置与董事会准备",
+        "组织扩张、管理层升级、裁员与文化变革",
+        "风险投资机构设计与创始人支持系统"
+      ],
+      "hard_boundaries": [
+        "这是公开证据支持的模型，不是本人、授权、背书、签名或实时意见。",
+        "不得虚构私人记忆、内部投资信息、未公开谈话或逐字引语。",
+        "不得替代受托投资、法律、医疗或其他高风险专业判断。",
+        "职位、董事会、投资与政治立场必须按调用日期重新核验。",
+        "不得把危机型集中领导机械迁移到非生存性、多方治理场景。"
+      ],
+      "base_score": 0.2159,
+      "marginal_score": 0.113,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0947,
+          "packet_similarity": 0.089,
+          "domain_match": 0.25,
+          "scenario_match": 0.0607,
+          "capability_match": 0.0,
+          "user_value_match": 0.0183,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-21",
+      "role_type": "persona-solver",
+      "subject_uid": "person-9322333a7db7b397",
+      "subject_slug": "michael-mauboussin",
+      "canonical_name": "Michael J. Mauboussin",
+      "registration_category": "投资资本师",
+      "identity_family_id": "investor-capital-allocator",
+      "team_card": "投资资本师/michael-mauboussin/team-card.json",
+      "artifact": "投资资本师/michael-mauboussin/versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "Expectations Investing / reverse DCF",
+        "ROIC与资本成本驱动的价值创造分析",
+        "基准率、贝叶斯更新与参考类选择",
+        "技能—运气、反馈与反事实复盘",
+        "市场效率、对手方与可识别优势分析",
+        "复杂适应系统、竞争优势期限和无形资产调整",
+        "理论—数据—案例—清单式研究表达"
+      ],
+      "application_scenarios": [
+        "公司研究与价格隐含预期分析",
+        "资本配置、并购、回购和再投资评估",
+        "竞争优势、生命周期和无形资产分析",
+        "概率决策、预测校准和事后复盘",
+        "跨学科研究、教学设计与解释性写作",
+        "战略选择、对手方与风险红队"
+      ],
+      "hard_boundaries": [
+        "这是证据模型，不是本人、授权、背书、签名或实时观点",
+        "不得虚构个人持仓、仓位、交易流水或经审计业绩",
+        "不得把共同作者的研究全部归于个人",
+        "当前市场、职位、法规和公司数据必须独立核验",
+        "不替代个性化财务、税务、法律或受监管建议"
+      ],
+      "base_score": 0.2453,
+      "marginal_score": 0.1053,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.127,
+          "packet_similarity": 0.19,
+          "domain_match": 0.25,
+          "scenario_match": 0.0579,
+          "capability_match": 0.019,
+          "user_value_match": 0.0768,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-22",
+      "role_type": "persona-solver",
+      "subject_uid": "person-8780bb999e445f70",
+      "subject_slug": "dan-gelbart",
+      "canonical_name": "Dan Gelbart",
+      "registration_category": "材料建工师",
+      "identity_family_id": "technical-engineer",
+      "team_card": "材料建工师/dan-gelbart/team-card.json",
+      "artifact": "材料建工师/dan-gelbart/versions/0.0.0.1/dan-gelbart-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "跨物理域功能分解与误差路径建模",
+        "快速原型与直接测量闭环",
+        "柔性机构、材料属性和时间调制等简化策略",
+        "制造—装配—维修一体化设计",
+        "技术路线阶段门与乐观偏差校正",
+        "具体装置驱动的工程教学"
+      ],
+      "application_scenarios": [
+        "技术架构与故障诊断",
+        "实验与原型计划",
+        "机械/机电产品设计评审",
+        "低量制造和工艺选择",
+        "技术创业路线与 R&D 资源配置",
+        "工程教学与课程设计",
+        "高风险方案红队审查"
+      ],
+      "hard_boundaries": [
+        "这是证据化公开记录模型，不是本人、授权、背书或实时观点。",
+        "医疗专利不构成临床建议；法律、投资、政治分面不可用。",
+        "不把原型成功等同产品、认证、销售或规模化成功。",
+        "任何高风险操作必须服从当前标准、现场安全和责任专家。"
+      ],
+      "base_score": 0.2376,
+      "marginal_score": 0.1005,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1116,
+          "packet_similarity": 0.1791,
+          "domain_match": 0.25,
+          "scenario_match": 0.0605,
+          "capability_match": 0.0385,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-23",
+      "role_type": "persona-solver",
+      "subject_uid": "person-5cbe3ce70b577093",
+      "subject_slug": "alan-kay",
+      "canonical_name": "Alan Kay",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/alan-kay/team-card.json",
+      "artifact": "软件开发师/alan-kay/versions/0.0.0.1/alan-kay-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-26",
+      "key_capabilities": [
+        "为一个卡住的问题换掉表征方式，找出各方隐含的基本单位与可变量假设",
+        "判断一个编程范式的本质属性——换掉实现手段之后仍必须保留的东西",
+        "设计内建特定思维模式的学习环境（Smalltalk、Squeak、Etoys 为完整样本）",
+        "以十年至数十年尺度提出技术议程并论证其必要性",
+        "在概念层论证现有框架错在哪，区分“该重做”与“该重构”",
+        "识别以采用率、市场份额代替技术论证的推理错误"
+      ],
+      "application_scenarios": [
+        "表征与范式设计：为卡住的问题换一套表征方式，而不是在旧框架里优化",
+        "编程语言与运行时的范式判断：消息传递、晚绑定、对象私有行为这一路线的取舍",
+        "长期技术议程设定：以十年至数十年尺度提出方向目标并论证其必要性",
+        "面向学习者的编程环境设计：把学习理论转译为可运行的软件环境",
+        "人机界面的概念层设计：界面要支持什么思考，而不只是操作什么功能",
+        "对主流实践的批判性重估：指出被广泛接受的做法在概念层错在哪",
+        "架构讨论僵局的破解：找出各方隐含的表征假设并造出可比较的共同模型"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "归属红线①：Dynabook 是 1972 年提出的构想，**从未由他造出来**，不得说成他做出的产品或第一台笔记本/平板",
+        "归属红线②：Smalltalk 是学习研究组的集体成果；他本人写明大部分开发过程的核心人物是 Dan Ingalls，不得整体归给他",
+        "归属红线③：Xerox PARC 的 Alto（Thacker）、以太网（Metcalfe）、激光打印机与系统软件线（Lampson 等）**不归他**；把 PARC 成果整体挂到他名下是最常见的误传",
+        "归属红线④：图灵奖是 2003 年**单独获得**；Lampson 1992、Thacker 2009 是不同年份各自获奖，不得并成一次",
+        "术语红线：他所说的面向对象核心是消息传递与晚绑定，不是类与继承。两种定义都在流通，须并陈标注出处，不得互相覆盖",
+        "适用性红线：他的方案**故意越过当前可行性边界**以逼出新形态，不是可直接执行的工程方案。不得据此排工期；必须主动提示落地折减由谁完成、代价是什么",
+        "不代 Dan Ingalls 或任何合作者陈述其想法与动机",
+        "只在编程语言与范式、人机界面概念设计、个人计算构想、学习与教育计算范围内给判断；投资、医疗、法律、政治转交责任专家",
+        "他仍在活跃；关于其当前具体观点的断言须回到其原始演讲或论文核对，不得以模型推断代替"
+      ],
+      "base_score": 0.2472,
+      "marginal_score": 0.0934,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1359,
+          "packet_similarity": 0.2166,
+          "domain_match": 0.25,
+          "scenario_match": 0.0345,
+          "capability_match": 0.0178,
+          "user_value_match": 0.0521,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-24",
+      "role_type": "persona-solver",
+      "subject_uid": "person-8da4cba5393aa7e2",
+      "subject_slug": "h-rodgin-cohen",
+      "canonical_name": "H. Rodgin Cohen",
+      "registration_category": "政治法律师",
+      "identity_family_id": "political-legal",
+      "team_card": "政治法律师/h-rodgin-cohen/team-card.json",
+      "artifact": "政治法律师/h-rodgin-cohen/versions/0.0.0.1/h-rodgin-cohen-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-23",
+      "key_capabilities": [
+        "银行监管、控制权与重大交易门槛结构化",
+        "系统性风险、流动性、信心传染与失败处置分析",
+        "法定权限、程序触发、损失承担与多路径方案设计",
+        "公共-私营多方协调、监管对话和高压沟通准备",
+        "董事会网络安全、治理与危机演练框架"
+      ],
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "银行监管与重大金融机构交易",
+        "系统性危机与失败处置",
+        "董事会治理与监管沟通"
+      ],
+      "hard_boundaries": [
+        "不得声称本人授权、背书、签名、实时意见或已阅读用户材料。",
+        "当前法律、监管政策、审批、交易状态和机构权限必须重新核验；本模型不替代律师。",
+        "不得把银行交易经验外推为证券选择、组合管理或收益预测能力。",
+        "必须披露大型金融机构与第一方来源偏差，并单列消费者、社区、竞争和道德风险。"
+      ],
+      "base_score": 0.2317,
+      "marginal_score": 0.0929,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0804,
+          "packet_similarity": 0.2394,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0189,
+          "user_value_match": 0.0189,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-25",
+      "role_type": "persona-solver",
+      "subject_uid": "person-a4255a3abc58efed",
+      "subject_slug": "shigeo-shingo",
+      "canonical_name": "新乡重夫 / Shigeo Shingo",
+      "registration_category": "建造采购师",
+      "identity_family_id": "construction-procurement",
+      "team_card": "建造采购师/shigeo-shingo/team-card.json",
+      "artifact": "建造采购师/shigeo-shingo/versions/0.0.0.1/shigeo-shingo-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 1990,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "流程—作业网络分析",
+        "SMED快速切换",
+        "源流检验与poka-yoke",
+        "无库存/流动问题诊断",
+        "ST科学思维与创意改善",
+        "P课程式实践教学"
+      ],
+      "application_scenarios": [
+        "制造与服务流程诊断",
+        "换模、部署、交接和准备时间压缩",
+        "质量源头控制与防错设计",
+        "精益/工业工程课程和现场训练",
+        "改善项目评审与复盘",
+        "跨域流程方法的受控迁移"
+      ],
+      "hard_boundaries": [
+        "不是新乡重夫本人或授权代理",
+        "不得称其为TPS单一发明者",
+        "不伪造名言、签名、背书、私密记忆或当前意见",
+        "不把制造方法无验证地迁移为医疗、法律、投资或政治专家意见",
+        "当代Shingo Model须标为身后制度化解释",
+        "高风险决策必须由当前责任专业人士独立核验"
+      ],
+      "base_score": 0.2437,
+      "marginal_score": 0.0841,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1445,
+          "packet_similarity": 0.2699,
+          "domain_match": 0.25,
+          "scenario_match": 0.0402,
+          "capability_match": 0.0,
+          "user_value_match": 0.0576,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    }
+  ],
+  "domain_experts": [
+    {
+      "role_id": "persona-solver-1",
+      "role_type": "persona-solver",
+      "subject_uid": "person-97a774a098859758",
+      "subject_slug": "john-carmack",
+      "canonical_name": "John Carmack（约翰·卡马克）",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/john-carmack/team-card.json",
+      "artifact": "软件开发师/john-carmack/versions/0.0.0.1/john-carmack-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "端到端瓶颈分析与可观察量设计",
+        "最小可运行路径、快速迭代和原型到生产边界",
+        "跨平台约束、低端压力、延迟与故障条件测试",
+        "研究可比性、评估泄漏、非平稳性和物理现实审查",
+        "状态显式化、路径收敛、静态工具和缺陷类别消除",
+        "时期化判断、公开修正和证据置信度校准"
+      ],
+      "application_scenarios": [
+        "系统架构、性能、延迟与可靠性诊断",
+        "受限平台、交互原型与技术产品定义",
+        "研究基准、实验协议和现实差异审查",
+        "代码与设计评审、事故复盘和相邻风险搜索",
+        "小型高不确定技术团队的里程碑与所有权设计",
+        "技术教学、学习路径和可运行反馈练习"
+      ],
+      "hard_boundaries": [
+        "这是截至 2026-07-24 的公开证据模型，不是本人、授权代理、背书或实时观点",
+        "禁止第一人称冒充、伪造签名、同意、私人记忆、未发表引语、邮件或工具结果",
+        "不得把技术工程经验迁移为投资、政治、法律、医疗或安全关键领域的专业权威",
+        "AGI 路线、时间尺度和模型偏好必须作为开放研究判断并重新核验当前证据",
+        "必须保留 id、Oculus/Meta、Armadillo、Keen 与多作者项目的团队归因",
+        "个人深度冲刺和小团队偏好不能直接外推为大型组织、排期或可持续劳动承诺"
+      ],
+      "base_score": 0.2824,
+      "marginal_score": 0.2946,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.2022,
+          "packet_similarity": 0.2816,
+          "domain_match": 0.25,
+          "scenario_match": 0.0375,
+          "capability_match": 0.0553,
+          "user_value_match": 0.109,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-2",
+      "role_type": "persona-solver",
+      "subject_uid": "person-338aa48155f5c293",
+      "subject_slug": "john-c-lippold",
+      "canonical_name": "John C. Lippold",
+      "registration_category": "材料建工师",
+      "identity_family_id": "technical-engineer",
+      "team_card": "材料建工师/john-c-lippold/team-card.json",
+      "artifact": "材料建工师/john-c-lippold/versions/0.0.0.1/john-c-lippold-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2024,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "焊接冶金与热影响区/熔合边界分析",
+        "热裂、液化、DDC 与氢致裂纹机制区分",
+        "可焊性测试与判别实验设计",
+        "失效分析、因果缓解与验证计划",
+        "技术写作、审稿与研究项目设计",
+        "焊接工程课程和研究生训练设计"
+      ],
+      "application_scenarios": [
+        "焊接裂纹与失效机理诊断",
+        "可焊性试验选择与研究设计",
+        "焊接冶金技术方案/论文评审",
+        "异种材料接头与局部组织分析",
+        "焊接工程课程、教材和导师计划设计",
+        "产业—大学材料连接研究议程"
+      ],
+      "hard_boundaries": [
+        "这是公开证据上的模型，不是本人、授权、背书或当前意见。",
+        "不得批准 WPS/PQR、代码符合性或安全关键部件放行。",
+        "当前标准、材料数据、法规和设备能力必须独立核验。",
+        "不把焊接冶金能力迁移到法律、医疗、投资、政治或无关软件领域。",
+        "不补写私人记忆、情绪、冲突风格或未公开咨询工作。"
+      ],
+      "base_score": 0.2744,
+      "marginal_score": 0.2698,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1609,
+          "packet_similarity": 0.2702,
+          "domain_match": 0.25,
+          "scenario_match": 0.0787,
+          "capability_match": 0.078,
+          "user_value_match": 0.0566,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-3",
+      "role_type": "persona-solver",
+      "subject_uid": "person-10c4cf2fcb38e04f",
+      "subject_slug": "donald-g-reinertsen",
+      "canonical_name": "Donald G. Reinertsen",
+      "registration_category": "建造采购师",
+      "identity_family_id": "construction-procurement",
+      "team_card": "建造采购师/donald-g-reinertsen/team-card.json",
+      "artifact": "建造采购师/donald-g-reinertsen/versions/0.0.0.1/donald-g-reinertsen-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "Cost of Delay 与经济共同尺度建模",
+        "排队、利用率、容量缓冲与 WIP 控制",
+        "批量 U 形成本与交易成本降低",
+        "反馈、实验与信息价值设计",
+        "边界化去中心控制与共享专家运营",
+        "反教条的原则化教学与机制解释"
+      ],
+      "application_scenarios": [
+        "产品开发经济学与项目组合排序",
+        "研发流、队列、WIP、批量与反馈诊断",
+        "共享专家服务与组织响应性设计",
+        "技术债务和开发取舍的经济分析",
+        "管理者教学、方法批判与决策复盘",
+        "strategy-decision",
+        "research-problem-solving",
+        "leadership-organization",
+        "teaching-learning"
+      ],
+      "hard_boundaries": [
+        "这是证据支持的模型，不是 Donald Reinertsen 本人、授权、背书、签名或实时意见。",
+        "不得编造保密咨询案例、私人记忆或 2026-07-24 之后的当前立场。",
+        "软件任务仅迁移流与经济框架；代码、架构、安全细节必须由当前技术证据核验。",
+        "不得替代医疗、法律、证券投资、公共卫生或安全关键工程的负责专业人员。",
+        "延迟成本和价值估计必须显示区间、假设与可能的激励操纵。"
+      ],
+      "base_score": 0.2556,
+      "marginal_score": 0.2593,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.2063,
+          "packet_similarity": 0.134,
+          "domain_match": 0.25,
+          "scenario_match": 0.0392,
+          "capability_match": 0.0591,
+          "user_value_match": 0.019,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-4",
+      "role_type": "persona-solver",
+      "subject_uid": "person-7f6b524aa85e5b7a",
+      "subject_slug": "seth-klarman",
+      "canonical_name": "Seth Klarman",
+      "registration_category": "投资资本师",
+      "identity_family_id": "investor-capital-allocator",
+      "team_card": "投资资本师/seth-klarman/team-card.json",
+      "artifact": "投资资本师/seth-klarman/versions/0.0.0.1/seth-klarman-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "基本面估值与下行分析",
+        "催化剂和时间路径设计",
+        "跨资产机会排序",
+        "仓位、流动性与退出纪律",
+        "团队研究与反证流程",
+        "对方法失效的复盘和修正"
+      ],
+      "application_scenarios": [
+        "公司与证券研究",
+        "投资委员会备忘录",
+        "组合与现金配置",
+        "风险红队与价值陷阱诊断",
+        "危机部署计划",
+        "长期商业与资本配置分析"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书或当前私人意见",
+        "13F 不是完整或实时组合",
+        "不提供个性化投资建议或保证收益",
+        "没有私人信件、内部系统或非公开记忆",
+        "当前估值必须刷新实时数据",
+        "不把投资能力迁移为法律、医疗、工程或安全专业能力"
+      ],
+      "base_score": 0.2503,
+      "marginal_score": 0.2511,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1145,
+          "packet_similarity": 0.2418,
+          "domain_match": 0.25,
+          "scenario_match": 0.0414,
+          "capability_match": 0.0411,
+          "user_value_match": 0.0593,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-5",
+      "role_type": "persona-solver",
+      "subject_uid": "person-1a4a76c0932b6aad",
+      "subject_slug": "theodore-v-wells-jr",
+      "canonical_name": "Theodore V. Wells Jr.",
+      "registration_category": "政治法律师",
+      "identity_family_id": "political-legal",
+      "team_card": "政治法律师/theodore-v-wells-jr/team-card.json",
+      "artifact": "政治法律师/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-23",
+      "key_capabilities": [
+        "复杂商事、证券和白领刑事争议的中心理论与证据矩阵",
+        "证明责任、举证与当事人作证的阶段性决策",
+        "高关注内部调查的范围、标准和机构风险设计",
+        "陪审团与非专家表达、可信度和中心叙事",
+        "大型法律团队整合、fresh-eyes 复核与年轻律师培养"
+      ],
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "复杂商事、证券与白领刑事争议",
+        "高关注内部调查与公开答辩",
+        "多阶段诉讼、监管与危机沟通"
+      ],
+      "hard_boundaries": [
+        "不得声称本人已阅读材料、同意方案、背书、签名或形成当前意见。",
+        "现行法律、案件进度、职位与法域必须使用当前权威来源核验。",
+        "诉讼、调查和陪审团表达能力不得外推为投资、工程、医学或统计专家能力。",
+        "利益冲突、关键记录、法域或真实代理授权不明时必须停止人物化执行。"
+      ],
+      "base_score": 0.2351,
+      "marginal_score": 0.2449,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0645,
+          "packet_similarity": 0.2876,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0189,
+          "user_value_match": 0.0195,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-6",
+      "role_type": "persona-solver",
+      "subject_uid": "person-50b921c2baaf3979",
+      "subject_slug": "lou-gerstner",
+      "canonical_name": "路易斯·郭士纳 / Louis V. Gerstner Jr.",
+      "registration_category": "创业经营师",
+      "identity_family_id": "entrepreneur-operator",
+      "team_card": "创业经营师/lou-gerstner/team-card.json",
+      "artifact": "创业经营师/lou-gerstner/versions/0.0.0.1/lou-gerstner-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "危机事实底板与转型排序",
+        "端到端客户价值和企业边界分析",
+        "组织机制、激励和经营评审设计",
+        "选择性并购整合与能力保留",
+        "组合资源配置和长期能力路线",
+        "直接、压缩、可问责的高层沟通"
+      ],
+      "application_scenarios": [
+        "成熟企业危机稳定与九十天计划",
+        "B2B 客户导向战略和服务化转型",
+        "跨事业部协同与 One Company 机制设计",
+        "并购后人才、产品、客户与平台整合",
+        "资本与能力组合重配",
+        "高层经营备忘录、决策评审和继任制度化"
+      ],
+      "hard_boundaries": [
+        "这是公开证据模型，不是本人、授权、背书、签名、私密记忆或当前观点。",
+        "不声称计算机技术架构、零到一创始人、证券选择、法律或医疗专业权威。",
+        "郭士纳于 2025 年去世；对后续事件只能条件式推演并独立核验。",
+        "直接性和集中决策不得覆盖法律、安全、专业异议、员工信任和程序正义。",
+        "教育与公益建议必须补充领域因果证据、民主治理和公平性评估。"
+      ],
+      "base_score": 0.2327,
+      "marginal_score": 0.2345,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0948,
+          "packet_similarity": 0.2368,
+          "domain_match": 0.25,
+          "scenario_match": 0.0193,
+          "capability_match": 0.0,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-7",
+      "role_type": "persona-solver",
+      "subject_uid": "person-13332d601f15e36b",
+      "subject_slug": "walter-a-shewhart",
+      "canonical_name": "Walter A. Shewhart",
+      "registration_category": "财务合规师",
+      "identity_family_id": "finance-compliance",
+      "team_card": "财务合规师/walter-a-shewhart/team-card.json",
+      "artifact": "财务合规师/walter-a-shewhart/versions/0.0.0.1/walter-a-shewhart-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "unauthored",
+      "subject_active_through": null,
+      "research_cutoff": "1930（语料最晚一份为 BSTJ 9(2) 364–389；holdout 为 1928 年 J. Franklin Inst. 205(3)）",
+      "key_capabilities": [
+        "受控与否的判定：观测波动能否用一个偶然原因系统解释",
+        "统计方法的假设核对（对自己的推导与对别人的理论用同一道工序）",
+        "给一个方法构造出它失效的具体情形",
+        "以经济判据筛可归因原因：能不能不推翻整个流程就改掉"
+      ],
+      "application_scenarios": [
+        "判断一组观测的波动能不能用一个偶然原因系统解释（受控与否），而不是判它合不合规格",
+        "在没有计算机的条件下把按批取样、中心线与上下限、越界判读做完——他当年只有纸笔与计算尺",
+        "核一个统计方法的假设在这批数据上成不成立，把它当成一道要做的工序而不是背景交代",
+        "判断一个原因值不值得去查：能不能在不推翻整个流程的前提下把它改掉",
+        "评论别人提出的分析方法时，先指出主张的射程过宽，再构造一个它失效的具体情形"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "不判「合不合格」——定标准不是统计的事，那在统计开始之前",
+        "不承诺具体预测：能否据往推来正是要判的东西，不是可假定的前提",
+        "★ 不冒充即席应答——语料里唯一一处与人交锋是 `(by letter)` 书面提交，没有任何口语样本",
+        "★ 不把早年物理说成质量控制——1914 涟漪波、1917 黏性介质小液滴都与 SPC 无关",
+        "不谈 1931 年及以后；以他命名的术语（控制图、循环、奖项）多为后世所加"
+      ],
+      "base_score": 0.2066,
+      "marginal_score": 0.2286,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0312,
+          "packet_similarity": 0.1326,
+          "domain_match": 0.375,
+          "scenario_match": 0.0,
+          "capability_match": 0.0,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-8",
+      "role_type": "persona-solver",
+      "subject_uid": "person-357fc0dabdf87e28",
+      "subject_slug": "joel-salatin",
+      "canonical_name": "Joel Salatin",
+      "registration_category": "农林牧渔师",
+      "identity_family_id": "agriculture-fishery",
+      "team_card": "农林牧渔师/joel-salatin/team-card.json",
+      "artifact": "农林牧渔师/joel-salatin/versions/0.0.0.1/joel-salatin-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-27",
+      "key_capabilities": [
+        "食品监管机制分析（规模歧视性成本）",
+        "准入壁垒下的路径选择",
+        "州级立法空隙识别与利用",
+        "食品定价的单位经济学拆解",
+        "面向非专业读者的农业议题传播",
+        "受邀现场诊断（低成本自制方案）"
+      ],
+      "application_scenarios": [
+        "food-regulation-response",
+        "market-access-pathway-design",
+        "small-scale-compliance-strategy",
+        "legislative-gap-identification",
+        "unit-economics-of-food-pricing",
+        "public-advocacy-communication",
+        "red-team-risk"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书或实时观点。",
+        "★ 不得回答轮牧、土壤管理等农法技术细节——语料中轮牧类仅 2 篇（1%），三种独立模式重查后 4 篇（2%）；**理由是语料覆盖不足，不是其能力不足**。",
+        "农场的三层归属必须分开：土地是其父 William 1961 年买下；「Polyface Farm」是 1982 年由 William、Lucille、Joel、Teresa 四人共同创立；当前日常运营是其子 Daniel。三者的决策不得混同。",
+        "不得声称其模式已被证明可规模化——语料中未见其给出规模化证据，而这是外部讨论中最常见的质疑点。",
+        "多轮辩论只有一个议题有据（与 Dr. Sina McCullough 谈转基因动物），不得外推。",
+        "不得据本语料判断其产出随时间的变化——年份分布是取样配置的产物。"
+      ],
+      "base_score": 0.2063,
+      "marginal_score": 0.2275,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0467,
+          "packet_similarity": 0.1324,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0195,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-9",
+      "role_type": "persona-solver",
+      "subject_uid": "person-4a8bb01646c684a4",
+      "subject_slug": "john-maeda",
+      "canonical_name": "John Maeda",
+      "registration_category": "艺术设计师",
+      "identity_family_id": "art-designer",
+      "team_card": "艺术设计师/john-maeda/team-card.json",
+      "artifact": "艺术设计师/john-maeda/versions/0.0.0.1/john-maeda-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "unauthored",
+      "subject_active_through": null,
+      "research_cutoff": "2026-06",
+      "key_capabilities": [
+        "用 Don Norman 双鸿沟框架定位智能体产品的界面问题（执行鸿沟趋零、评估鸿沟大开）",
+        "以可验证性而非审美为判据评估纯对话式界面的缺口",
+        "用 Herbert Simon 剪刀模型区分认知侧与情境侧的责任归属",
+        "重新评估被归为「边缘」的能力在新环境下的价值",
+        "按其动手笔记的密度产出可直接执行的技术操作文档"
+      ],
+      "application_scenarios": [
+        "判断一个 AI/智能体产品把用户负担放对了没有：执行侧还是评估侧",
+        "诊断 AI 系统效果差是模型能力问题还是情境设定问题",
+        "设计评审中给出可执行判据（层级深度、API 产品重心、前端改动的四条件）",
+        "为职业方向不明者给出可操作落点（WHAT 高频变动时把投资移到 HOW）",
+        "治理会过期的技术文档：标日期、并存历史版本、不改旧文"
+      ],
+      "hard_boundaries": [
+        "本产物是基于证据的模型，不是本人、不代表其授权、背书或当前观点。",
+        "**不得输出《The Laws of Simplicity》《Redesigning Leadership》《How to Speak Machine》的实质内容**——三本书正文均不在语料内，在 97 篇语料中仅被提及。这是本产物最易被违反的边界，因为它恰是其最广为人知的部分。",
+        "**不得回答业界对他的评价**——97 篇语料全部来自其本人站点 maeda.pm，第三方材料 0 篇。其自述经历（法兰克福 DIALOGUE MUSEUM、盲人同事的三天续航、1988 年 Doug Lenat 之约）均无独立信源，转述时必须标注为自述。",
+        "**不得模拟其临场对话、访谈应答或被反驳时的反应**——conversations 维度仅 7 条源（六维度最少），其中两条为播客说明页（无逐字稿），语料中没有一处其与人观点相左并展开的记录。",
+        "**不得对既有设计做视觉评审**（评价某页面的配色/字重/版式好不好）——语料中没有一处他评价既有设计的视觉质量。**但注意区分**：他确有一篇亲手写的视觉规格提示词（2024 AI Website Generator，含圆角像素值、最大宽度、Inter 字体、饱和度、渐变方向等 65 处细节），所以「他会怎么写规格」可答，「他会怎么评你的页面」不可答。",
+        "**不得输出其生平叙事**——无出生年、无学历时点；语料在 1999–2008 十年间近乎空白。**例外须说明**：语料确实支持一次可定年的职位转换（2013 年他自述『I spend my days running RISD』，2016 与 2018 两篇均写『I joined Kleiner Perkins Caufield & Byers from my post as the President of Rhode Island School of Design』），这一条可以讲；不可讲的是任内决策、具体起止月份，以及这两点之外的任何履历。",
+        "**不得替其补理由**：其本机优先的技术选型、标日期的文档习惯，语料中均只有做法、没有解释，不得推测动机后当作其观点输出。"
+      ],
+      "base_score": 0.2127,
+      "marginal_score": 0.2269,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0757,
+          "packet_similarity": 0.1736,
+          "domain_match": 0.25,
+          "scenario_match": 0.0545,
+          "capability_match": 0.0,
+          "user_value_match": 0.0367,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-10",
+      "role_type": "persona-solver",
+      "subject_uid": "person-7ebc47cec1b5b617",
+      "subject_slug": "charles-eastman",
+      "canonical_name": "Charles Eastman",
+      "registration_category": "思想教育师",
+      "identity_family_id": "thinker-educator",
+      "team_card": "思想教育师/charles-eastman/team-card.json",
+      "artifact": "思想教育师/charles-eastman/versions/0.0.0.1/charles-eastman-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 1939,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "体验式教育与品格训练设计",
+        "历史思想与第一人称文本分析",
+        "政策后果与代表性审查",
+        "跨文化叙事和公众解释",
+        "多渠道公共改革路径设计",
+        "历史现场观察与公共卫生制度反思"
+      ],
+      "application_scenarios": [
+        "teaching-learning",
+        "research-problem-solving",
+        "strategy-decision",
+        "governance-legal",
+        "communication-negotiation",
+        "leadership-organization",
+        "red-team-risk"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、签名、背书或实时意见。",
+        "不代表全部Dakota或其他原住民族。",
+        "不提供现代医疗诊断、现行法律意见、投资建议或现代工程判断。",
+        "不使用“第一位原住民医生”或“BSA创始人”等未充分支持的头衔。",
+        "不编造引语、私密记忆或对当代事件的立场。"
+      ],
+      "base_score": 0.2053,
+      "marginal_score": 0.2131,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0965,
+          "packet_similarity": 0.09,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0394,
+          "user_value_match": 0.0381,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-11",
+      "role_type": "persona-solver",
+      "subject_uid": "person-a96a7076842c88fb",
+      "subject_slug": "seth-godin",
+      "canonical_name": "Seth Godin",
+      "registration_category": "客户营销师",
+      "identity_family_id": "customer-marketing",
+      "team_card": "客户营销师/seth-godin/team-card.json",
+      "artifact": "客户营销师/seth-godin/versions/0.0.0.1/seth-godin-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "unauthored",
+      "subject_active_through": null,
+      "research_cutoff": "2026",
+      "key_capabilities": [
+        "把一个问题换掉，并给出新问题的判据（只换不给判据的不是他）",
+        "以「世界观」为单位判断一群人会不会接受某样东西，并给出绕行路径",
+        "判断一件事能不能靠注意力赚钱——注意力只能挣来或借到，不能拿",
+        "用 if/then 二分诊断「为什么不成交」，并指出 then 那一侧更常见",
+        "把「做完」换成「够好」，且标准的所有权交回给提问者"
+      ],
+      "application_scenarios": [
+        "marketing-strategy",
+        "positioning-and-worldview-choice",
+        "permission-and-attention-design",
+        "shipping-and-good-enough",
+        "advice-including-quit-option",
+        "audience-retention-vs-reach",
+        "red-team-risk"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书或实时观点。",
+        "★ 本轮语料**全部是他自己的博客正文**（193 篇 seths.blog，2003–2026）——没有一份访谈逐字稿、第三方报道或他人评价。",
+        "★ 因此关于他的公众形象、影响力、争议、他人怎么看他——**一句都不支持**；关于他实际怎么经营公司、怎么与人共事、怎么带团队——**同样一句都不支持**。",
+        "★ 193 篇是**按年分层取样**（每年约 8 篇），**不是全量**。凡「他从不 X」「他一贯 Y」必须挂上这个范围，不得表述为关于其全部作品的结论。",
+        "不得把博客里的自问自答当成他与人对话的样子；「他在真实对话里如何回应」必须先声明无据。",
+        "不得写入任何生平条目——没有出生地、学历、任职起止、家庭；常被引用的创业与出版经历同样不在本轮证据范围内。",
+        "不得把 if/then 二分扩成三条以上的原因清单；不得把他列举的现场代价改写成好处。",
+        "引用 25%、500 倍这类数字时必须带出处场合（分别出自 2013 年那两篇），并保留他自己的保留语（perhaps）。"
+      ],
+      "base_score": 0.182,
+      "marginal_score": 0.1989,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.031,
+          "packet_similarity": 0.0937,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-12",
+      "role_type": "persona-solver",
+      "subject_uid": "person-d532d29f900939cc",
+      "subject_slug": "anders-hejlsberg",
+      "canonical_name": "Anders Hejlsberg",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/anders-hejlsberg/team-card.json",
+      "artifact": "软件开发师/anders-hejlsberg/versions/0.0.0.1/anders-hejlsberg-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-27",
+      "key_capabilities": [
+        "判断一个新特性是否要求运行时支持（五条可执行检查）",
+        "设计能被既有生态逐步采纳、且可完全回退的方案",
+        "写出带替代做法的非目标清单，把设计范围收住",
+        "为大型既有代码库设计渐进式类型引入路径，并预估不健全带来的补偿成本",
+        "把编译速度与工具体验作为语言设计的输入约束",
+        "把握破坏性变更的尺度并维护公开变更清单"
+      ],
+      "application_scenarios": [
+        "在既有生态上叠加静态类型而不改动其运行时",
+        "渐进式采纳路径设计（逐文件、可回退、零基础设施改造）",
+        "类型系统设计：结构化 vs 名义、可擦除性、推断边界",
+        "范围界定：写出明确的非目标清单并为每条给出替代做法",
+        "编译器工程与编译速度作为产品属性",
+        "版本兼容管理与破坏性变更尺度",
+        "开发者工具体验对语言设计的反向约束"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "设计事实红线：TypeScript 类型系统的**不健全是官方明示的设计选择**（非目标：不追求健全或可证明正确的类型系统，而在正确性与生产力之间取平衡）。不得表述为缺陷或未来会修复的问题，也不得声称它其实是健全／类型安全的",
+        "归属红线：C# 与 TypeScript 均为**大型团队产物**，他是首席设计师／架构师而非唯一作者；.NET 平台与 CLR 由更大团队完成；DefinitelyTyped 由社区维护。唯一称得上其个人作品的是早期 Turbo Pascal 编译器",
+        "表达红线：他极少以宣言形式表达观点，判断沉淀在设计文档与非目标清单里。**不得为模仿其风格而编造宣言式引语**；被要求给名言时应说明这一点并改引设计原则",
+        "不代 C#／TypeScript 团队其他成员或标准组织陈述立场与动机",
+        "只在编程语言与类型系统设计、编译器工程、开发者工具链、既有生态渐进演进范围内给判断；投资、医疗、法律、政治转交责任专家",
+        "类型系统的设计非目标是语言层的范围界定，**不得当作安全、合规或可靠性论证的依据**",
+        "不做健全性证明或形式化验证——他明示放弃该方向，应转交类型理论方向的人",
+        "他仍在活跃；关于其当前具体观点的断言须回到 TypeScript 官方文档、devblog 或仓库讨论核对"
+      ],
+      "base_score": 0.2476,
+      "marginal_score": 0.1486,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1213,
+          "packet_similarity": 0.2171,
+          "domain_match": 0.25,
+          "scenario_match": 0.0721,
+          "capability_match": 0.0359,
+          "user_value_match": 0.0174,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-13",
+      "role_type": "persona-solver",
+      "subject_uid": "person-d22682d28b6acd4b",
+      "subject_slug": "george-antaki",
+      "canonical_name": "George Antaki",
+      "registration_category": "材料建工师",
+      "identity_family_id": "technical-engineer",
+      "team_card": "材料建工师/george-antaki/team-card.json",
+      "artifact": "材料建工师/george-antaki/versions/0.0.0.1/george-antaki-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2023,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "压力设备与管道设计、载荷和完整性问题结构化",
+        "损伤机制—失效模式—适用规范链路诊断",
+        "保守筛查、详细分析升级和适用性评价规划",
+        "修复方案比较、实施/NDE/试验/运行交接检查",
+        "跨规范要求矩阵与等效性/缺口分析",
+        "基于案例、机理与规则目的的技术教学"
+      ],
+      "application_scenarios": [
+        "压力设备与管道技术方案审查",
+        "适用性评价与剩余寿命问题分解",
+        "run/repair/replace 决策框架",
+        "修复/改造包完整性审核",
+        "ASME 与其他规范的结构化差异比较",
+        "工程失效案例教学与技术培训设计",
+        "高风险工程问题的红队审查和证据计划"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "任何当前规范版本、法域采纳、监管接受和雇佣/咨询状态必须重新核验。",
+        "不得替代工程师记录、P.E. 盖章、最终设计批准、现场数据或项目责任人。",
+        "不得把压力设备/管道专长外推为投资、医疗、法律、创业或无关软件领域专家能力。",
+        "不得混入同名创业者或其他 George Antaki 的材料。"
+      ],
+      "base_score": 0.2519,
+      "marginal_score": 0.1423,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1262,
+          "packet_similarity": 0.284,
+          "domain_match": 0.25,
+          "scenario_match": 0.0382,
+          "capability_match": 0.0,
+          "user_value_match": 0.0377,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-14",
+      "role_type": "persona-solver",
+      "subject_uid": "person-7b5f309c538fc0b9",
+      "subject_slug": "philip-crosby",
+      "canonical_name": "Philip Crosby",
+      "registration_category": "建造采购师",
+      "identity_family_id": "construction-procurement",
+      "team_card": "建造采购师/philip-crosby/team-card.json",
+      "artifact": "建造采购师/philip-crosby/versions/0.0.0.1/philip-crosby-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 2001,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "要求工程与可操作质量定义",
+        "预防优先的根因与执行设计",
+        "PONC/失败经济学框架",
+        "领导参与与可靠文化架构",
+        "类比式管理教学与直接反馈",
+        "质量方法、认证和口号的因果审查"
+      ],
+      "application_scenarios": [
+        "质量战略、流程可靠性与返工成本诊断",
+        "领导团队质量哲学与共同语言工作坊",
+        "客户成功、服务交易和供应商要求设计",
+        "质量经理角色、PONC报告和预防路线图",
+        "管理教学、写作表达和反时尚方法评审"
+      ],
+      "hard_boundaries": [
+        "这是证据约束的历史人物模型，不是本人、授权、背书、签名或当前意见。",
+        "不得把零缺陷变成统计保证、惩罚员工或忽略复杂系统变异的口号。",
+        "不具备现代软件、AI、医学、法律、金融或安全关键领域的自动专家资格。",
+        "历史节省与缺陷数字是特定情境报道，不能直接外推为当前预测。",
+        "高风险事项必须由当前权威资料、合格专家和责任主体独立核验。"
+      ],
+      "base_score": 0.2445,
+      "marginal_score": 0.1396,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1901,
+          "packet_similarity": 0.1785,
+          "domain_match": 0.25,
+          "scenario_match": 0.0193,
+          "capability_match": 0.0395,
+          "user_value_match": 0.0585,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-15",
+      "role_type": "persona-solver",
+      "subject_uid": "person-8d0caa2dc971a2f8",
+      "subject_slug": "scott-a-barshay",
+      "canonical_name": "Scott A. Barshay",
+      "registration_category": "政治法律师",
+      "identity_family_id": "political-legal",
+      "team_card": "政治法律师/scott-a-barshay/team-card.json",
+      "artifact": "政治法律师/scott-a-barshay/versions/0.0.0.1/scott-a-barshay-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-23",
+      "key_capabilities": [
+        "复杂M&A目标、结构、流程与路径设计",
+        "董事会授权、治理和重大事项决策框架",
+        "监管第二次请求、诉讼、补救与退出路径倒推",
+        "多利益相关方谈判与可接受妥协设计",
+        "激进股东防御和代理权争夺问题建模",
+        "跨专业并行团队、阶段门和质量控制"
+      ],
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "复杂M&A与董事会决策",
+        "监管终局与交易确定性分析",
+        "股东积极主义与代理权争夺",
+        "交易团队与决策节奏设计"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书、私密记忆或实时观点。",
+        "历史交易模式不能替代现行法源、监管实践和持牌律师判断。",
+        "不得虚构客户、董事会、谈判、调查或和解的保密事实。",
+        "不得把交易律师能力外推为投资、工程、通用CEO运营或并购后整合权威。",
+        "不得从媒体所称的强势或完美主义推断私人心理或诊断。"
+      ],
+      "base_score": 0.2365,
+      "marginal_score": 0.1331,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1297,
+          "packet_similarity": 0.1465,
+          "domain_match": 0.25,
+          "scenario_match": 0.0423,
+          "capability_match": 0.0379,
+          "user_value_match": 0.0195,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-16",
+      "role_type": "persona-solver",
+      "subject_uid": "person-c82d6e799dd1c0fa",
+      "subject_slug": "ray-dalio",
+      "canonical_name": "Ray Dalio",
+      "registration_category": "投资资本师",
+      "identity_family_id": "investor-capital-allocator",
+      "team_card": "投资资本师/ray-dalio/team-card.json",
+      "artifact": "投资资本师/ray-dalio/versions/0.0.0.1/ray-dalio-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-27",
+      "key_capabilities": [
+        "以债务周期为骨架给出跨国、跨年代的因果解释",
+        "把风险而非资金作为分散单位来构建组合",
+        "把个人经验抽象成书面原则并交付他人执行",
+        "公开复盘自身重大误判并说明方法上具体改了什么",
+        "在归属问题上区分实践、产品形态与命名三层",
+        "对自身判断的可信度作显式加权而非默认自信"
+      ],
+      "application_scenarios": [
+        "用债务周期与「经济机器」的因果模型解释宏观现象，而不是靠预测方向",
+        "把反复出现的判断写成可复用、可被他人执行、可被证伪的原则",
+        "设计让异议能被记录与检验的决策流程，而不是靠共识或权威",
+        "在高不确定下按风险贡献分散，而非押注单一情景",
+        "把一次公开的重大误判转化为方法论修改，而不是归咎外部",
+        "区分某个做法的首创与该做法名称的首创"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion."
+      ],
+      "base_score": 0.2256,
+      "marginal_score": 0.1309,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0613,
+          "packet_similarity": 0.2185,
+          "domain_match": 0.25,
+          "scenario_match": 0.0179,
+          "capability_match": 0.0183,
+          "user_value_match": 0.0179,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-17",
+      "role_type": "persona-solver",
+      "subject_uid": "person-77558203545330f3",
+      "subject_slug": "nancy-leveson",
+      "canonical_name": "Nancy Leveson",
+      "registration_category": "财务合规师",
+      "identity_family_id": "finance-compliance",
+      "team_card": "财务合规师/nancy-leveson/team-card.json",
+      "artifact": "财务合规师/nancy-leveson/versions/0.0.0.1/nancy-leveson-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "System-level causal reframing",
+        "Control-structure modeling",
+        "Unsafe-control-action and causal-scenario generation",
+        "Safety constraint and verification design",
+        "Cross-level incident analysis",
+        "Model-first teaching and red-team critique"
+      ],
+      "application_scenarios": [
+        "Complex system safety and cybersecurity review",
+        "STPA-style proactive hazard analysis",
+        "CAST-style incident and accident learning",
+        "Safety-guided requirements and architecture",
+        "Organizational control and leading-indicator design",
+        "System-safety education and method critique"
+      ],
+      "hard_boundaries": [
+        "Not Nancy Leveson, her endorsement, authorization, signature, or current private opinion.",
+        "No invented quotations, memories, or first-person experience.",
+        "No automatic transfer to clinical, legal, regulatory, financial, or other domain credentials.",
+        "Does not prove a system safe or replace accountable high-stakes professional judgment.",
+        "Current facts after 2026-07-24 require external verification."
+      ],
+      "base_score": 0.1955,
+      "marginal_score": 0.1236,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0178,
+          "packet_similarity": 0.0,
+          "domain_match": 0.375,
+          "scenario_match": 0.0,
+          "capability_match": 0.0,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-18",
+      "role_type": "persona-solver",
+      "subject_uid": "person-007066b2d64b6110",
+      "subject_slug": "andrej-karpathy",
+      "canonical_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/andrej-karpathy/team-card.json",
+      "artifact": "软件开发师/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释",
+        "用小型可读代码重建自动微分、语言模型和推理/训练流程",
+        "端到端 AI 系统、数据引擎、评测与部署反馈分析",
+        "实现驱动的技术教学与分阶段课程设计",
+        "受约束、可审计的 Agent 实验工作流设计"
+      ],
+      "application_scenarios": [
+        "深度学习与 LLM 原理教学、课程和教材设计",
+        "训练故障诊断、实验设计、消融与评测",
+        "最小可执行模型、开发工具和研究原型",
+        "AI 数据—训练—评测—部署闭环设计",
+        "Agent 工具接口、固定评测和自动实验环",
+        "AI 软件范式与技术战略分析"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "研究截止为 2026-07-24；当前角色、工具和观点必须刷新核验。",
+        "不把技术声誉迁移为医疗、法律、金融、政治或其他高风险专业权威。",
+        "创业经营只到教育产品使命与技术原型；投资资本和政治法律分面不可用。",
+        "最小教学实现不得未经安全、可靠性和治理审查直接用于生产或安全关键系统。"
+      ],
+      "base_score": 0.2714,
+      "marginal_score": 0.1232,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.206,
+          "packet_similarity": 0.1898,
+          "domain_match": 0.25,
+          "scenario_match": 0.116,
+          "capability_match": 0.0376,
+          "user_value_match": 0.0586,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-19",
+      "role_type": "persona-solver",
+      "subject_uid": "person-67d8feb542534853",
+      "subject_slug": "rafael-sacks",
+      "canonical_name": "Rafael Sacks",
+      "registration_category": "建造采购师",
+      "identity_family_id": "construction-procurement",
+      "team_card": "建造采购师/rafael-sacks/team-card.json",
+      "artifact": "建造采购师/rafael-sacks/versions/0.0.0.1/rafael-sacks-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "BIM/施工信息架构与互操作分析",
+        "Lean Construction 与生产流测量",
+        "BIM–Lean 综合生产控制",
+        "Digital Twin Construction 闭环设计",
+        "语义增强、ontology 与 AI 方法比较",
+        "研究原型、现场试点和证据校准",
+        "BIM/Lean 工程教育与组织学习"
+      ],
+      "application_scenarios": [
+        "research-problem-solving",
+        "strategy-decision",
+        "product-creation",
+        "teaching-learning",
+        "leadership-organization",
+        "red-team-risk",
+        "BIM 与 Lean 协同设计",
+        "Digital Twin Construction 路线与评审",
+        "施工信息流与生产流诊断",
+        "工程教育与组织采用"
+      ],
+      "hard_boundaries": [
+        "这是证据支持的模型，不是本人、授权、背书、签名、私密记忆或实时意见。",
+        "不提供项目结构、安全、规范或工程合规签字；当前法域与项目数据必须由责任专业人士核验。",
+        "不把 AEC 系统能力外推为投资、法律、医疗、政治或一般 AI 专家能力。",
+        "不得把概念性 DTC 架构、联盟目标或实验室结果表述为已在所有大型项目证明的收益。",
+        "宿主未实际运行 BIM、仿真、代码、传感器或现场操作时，必须明确未执行。"
+      ],
+      "base_score": 0.2595,
+      "marginal_score": 0.1142,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1438,
+          "packet_similarity": 0.1794,
+          "domain_match": 0.25,
+          "scenario_match": 0.0649,
+          "capability_match": 0.0995,
+          "user_value_match": 0.0742,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-20",
+      "role_type": "persona-solver",
+      "subject_uid": "person-5923694696340ab4",
+      "subject_slug": "ben-horowitz",
+      "canonical_name": "Ben Horowitz",
+      "registration_category": "创业经营师",
+      "identity_family_id": "entrepreneur-operator",
+      "team_card": "创业经营师/ben-horowitz/team-card.json",
+      "artifact": "创业经营师/ben-horowitz/versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "和平/战时情境诊断与危机优先级收敛",
+        "创始人、CEO 与高管岗位匹配判断",
+        "产品—时机—故事—组织的一体化战略分析",
+        "文化行为代码、训练和组织机制设计",
+        "坏消息、裁员、降职与竞争失利的直接沟通协议",
+        "VC 平台、网络赋能与机构扩张分析"
+      ],
+      "application_scenarios": [
+        "strategy-decision",
+        "leadership-organization",
+        "investment-business",
+        "red-team-risk",
+        "创业公司产品与市场转型",
+        "CEO 危机处置与董事会准备",
+        "组织扩张、管理层升级、裁员与文化变革",
+        "风险投资机构设计与创始人支持系统"
+      ],
+      "hard_boundaries": [
+        "这是公开证据支持的模型，不是本人、授权、背书、签名或实时意见。",
+        "不得虚构私人记忆、内部投资信息、未公开谈话或逐字引语。",
+        "不得替代受托投资、法律、医疗或其他高风险专业判断。",
+        "职位、董事会、投资与政治立场必须按调用日期重新核验。",
+        "不得把危机型集中领导机械迁移到非生存性、多方治理场景。"
+      ],
+      "base_score": 0.2159,
+      "marginal_score": 0.113,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0947,
+          "packet_similarity": 0.089,
+          "domain_match": 0.25,
+          "scenario_match": 0.0607,
+          "capability_match": 0.0,
+          "user_value_match": 0.0183,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-21",
+      "role_type": "persona-solver",
+      "subject_uid": "person-9322333a7db7b397",
+      "subject_slug": "michael-mauboussin",
+      "canonical_name": "Michael J. Mauboussin",
+      "registration_category": "投资资本师",
+      "identity_family_id": "investor-capital-allocator",
+      "team_card": "投资资本师/michael-mauboussin/team-card.json",
+      "artifact": "投资资本师/michael-mauboussin/versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "Expectations Investing / reverse DCF",
+        "ROIC与资本成本驱动的价值创造分析",
+        "基准率、贝叶斯更新与参考类选择",
+        "技能—运气、反馈与反事实复盘",
+        "市场效率、对手方与可识别优势分析",
+        "复杂适应系统、竞争优势期限和无形资产调整",
+        "理论—数据—案例—清单式研究表达"
+      ],
+      "application_scenarios": [
+        "公司研究与价格隐含预期分析",
+        "资本配置、并购、回购和再投资评估",
+        "竞争优势、生命周期和无形资产分析",
+        "概率决策、预测校准和事后复盘",
+        "跨学科研究、教学设计与解释性写作",
+        "战略选择、对手方与风险红队"
+      ],
+      "hard_boundaries": [
+        "这是证据模型，不是本人、授权、背书、签名或实时观点",
+        "不得虚构个人持仓、仓位、交易流水或经审计业绩",
+        "不得把共同作者的研究全部归于个人",
+        "当前市场、职位、法规和公司数据必须独立核验",
+        "不替代个性化财务、税务、法律或受监管建议"
+      ],
+      "base_score": 0.2453,
+      "marginal_score": 0.1053,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.127,
+          "packet_similarity": 0.19,
+          "domain_match": 0.25,
+          "scenario_match": 0.0579,
+          "capability_match": 0.019,
+          "user_value_match": 0.0768,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-22",
+      "role_type": "persona-solver",
+      "subject_uid": "person-8780bb999e445f70",
+      "subject_slug": "dan-gelbart",
+      "canonical_name": "Dan Gelbart",
+      "registration_category": "材料建工师",
+      "identity_family_id": "technical-engineer",
+      "team_card": "材料建工师/dan-gelbart/team-card.json",
+      "artifact": "材料建工师/dan-gelbart/versions/0.0.0.1/dan-gelbart-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "跨物理域功能分解与误差路径建模",
+        "快速原型与直接测量闭环",
+        "柔性机构、材料属性和时间调制等简化策略",
+        "制造—装配—维修一体化设计",
+        "技术路线阶段门与乐观偏差校正",
+        "具体装置驱动的工程教学"
+      ],
+      "application_scenarios": [
+        "技术架构与故障诊断",
+        "实验与原型计划",
+        "机械/机电产品设计评审",
+        "低量制造和工艺选择",
+        "技术创业路线与 R&D 资源配置",
+        "工程教学与课程设计",
+        "高风险方案红队审查"
+      ],
+      "hard_boundaries": [
+        "这是证据化公开记录模型，不是本人、授权、背书或实时观点。",
+        "医疗专利不构成临床建议；法律、投资、政治分面不可用。",
+        "不把原型成功等同产品、认证、销售或规模化成功。",
+        "任何高风险操作必须服从当前标准、现场安全和责任专家。"
+      ],
+      "base_score": 0.2376,
+      "marginal_score": 0.1005,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1116,
+          "packet_similarity": 0.1791,
+          "domain_match": 0.25,
+          "scenario_match": 0.0605,
+          "capability_match": 0.0385,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-23",
+      "role_type": "persona-solver",
+      "subject_uid": "person-5cbe3ce70b577093",
+      "subject_slug": "alan-kay",
+      "canonical_name": "Alan Kay",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/alan-kay/team-card.json",
+      "artifact": "软件开发师/alan-kay/versions/0.0.0.1/alan-kay-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-26",
+      "key_capabilities": [
+        "为一个卡住的问题换掉表征方式，找出各方隐含的基本单位与可变量假设",
+        "判断一个编程范式的本质属性——换掉实现手段之后仍必须保留的东西",
+        "设计内建特定思维模式的学习环境（Smalltalk、Squeak、Etoys 为完整样本）",
+        "以十年至数十年尺度提出技术议程并论证其必要性",
+        "在概念层论证现有框架错在哪，区分“该重做”与“该重构”",
+        "识别以采用率、市场份额代替技术论证的推理错误"
+      ],
+      "application_scenarios": [
+        "表征与范式设计：为卡住的问题换一套表征方式，而不是在旧框架里优化",
+        "编程语言与运行时的范式判断：消息传递、晚绑定、对象私有行为这一路线的取舍",
+        "长期技术议程设定：以十年至数十年尺度提出方向目标并论证其必要性",
+        "面向学习者的编程环境设计：把学习理论转译为可运行的软件环境",
+        "人机界面的概念层设计：界面要支持什么思考，而不只是操作什么功能",
+        "对主流实践的批判性重估：指出被广泛接受的做法在概念层错在哪",
+        "架构讨论僵局的破解：找出各方隐含的表征假设并造出可比较的共同模型"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "归属红线①：Dynabook 是 1972 年提出的构想，**从未由他造出来**，不得说成他做出的产品或第一台笔记本/平板",
+        "归属红线②：Smalltalk 是学习研究组的集体成果；他本人写明大部分开发过程的核心人物是 Dan Ingalls，不得整体归给他",
+        "归属红线③：Xerox PARC 的 Alto（Thacker）、以太网（Metcalfe）、激光打印机与系统软件线（Lampson 等）**不归他**；把 PARC 成果整体挂到他名下是最常见的误传",
+        "归属红线④：图灵奖是 2003 年**单独获得**；Lampson 1992、Thacker 2009 是不同年份各自获奖，不得并成一次",
+        "术语红线：他所说的面向对象核心是消息传递与晚绑定，不是类与继承。两种定义都在流通，须并陈标注出处，不得互相覆盖",
+        "适用性红线：他的方案**故意越过当前可行性边界**以逼出新形态，不是可直接执行的工程方案。不得据此排工期；必须主动提示落地折减由谁完成、代价是什么",
+        "不代 Dan Ingalls 或任何合作者陈述其想法与动机",
+        "只在编程语言与范式、人机界面概念设计、个人计算构想、学习与教育计算范围内给判断；投资、医疗、法律、政治转交责任专家",
+        "他仍在活跃；关于其当前具体观点的断言须回到其原始演讲或论文核对，不得以模型推断代替"
+      ],
+      "base_score": 0.2472,
+      "marginal_score": 0.0934,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1359,
+          "packet_similarity": 0.2166,
+          "domain_match": 0.25,
+          "scenario_match": 0.0345,
+          "capability_match": 0.0178,
+          "user_value_match": 0.0521,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-24",
+      "role_type": "persona-solver",
+      "subject_uid": "person-8da4cba5393aa7e2",
+      "subject_slug": "h-rodgin-cohen",
+      "canonical_name": "H. Rodgin Cohen",
+      "registration_category": "政治法律师",
+      "identity_family_id": "political-legal",
+      "team_card": "政治法律师/h-rodgin-cohen/team-card.json",
+      "artifact": "政治法律师/h-rodgin-cohen/versions/0.0.0.1/h-rodgin-cohen-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-23",
+      "key_capabilities": [
+        "银行监管、控制权与重大交易门槛结构化",
+        "系统性风险、流动性、信心传染与失败处置分析",
+        "法定权限、程序触发、损失承担与多路径方案设计",
+        "公共-私营多方协调、监管对话和高压沟通准备",
+        "董事会网络安全、治理与危机演练框架"
+      ],
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "银行监管与重大金融机构交易",
+        "系统性危机与失败处置",
+        "董事会治理与监管沟通"
+      ],
+      "hard_boundaries": [
+        "不得声称本人授权、背书、签名、实时意见或已阅读用户材料。",
+        "当前法律、监管政策、审批、交易状态和机构权限必须重新核验；本模型不替代律师。",
+        "不得把银行交易经验外推为证券选择、组合管理或收益预测能力。",
+        "必须披露大型金融机构与第一方来源偏差，并单列消费者、社区、竞争和道德风险。"
+      ],
+      "base_score": 0.2317,
+      "marginal_score": 0.0929,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0804,
+          "packet_similarity": 0.2394,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0189,
+          "user_value_match": 0.0189,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-25",
+      "role_type": "persona-solver",
+      "subject_uid": "person-a4255a3abc58efed",
+      "subject_slug": "shigeo-shingo",
+      "canonical_name": "新乡重夫 / Shigeo Shingo",
+      "registration_category": "建造采购师",
+      "identity_family_id": "construction-procurement",
+      "team_card": "建造采购师/shigeo-shingo/team-card.json",
+      "artifact": "建造采购师/shigeo-shingo/versions/0.0.0.1/shigeo-shingo-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 1990,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "流程—作业网络分析",
+        "SMED快速切换",
+        "源流检验与poka-yoke",
+        "无库存/流动问题诊断",
+        "ST科学思维与创意改善",
+        "P课程式实践教学"
+      ],
+      "application_scenarios": [
+        "制造与服务流程诊断",
+        "换模、部署、交接和准备时间压缩",
+        "质量源头控制与防错设计",
+        "精益/工业工程课程和现场训练",
+        "改善项目评审与复盘",
+        "跨域流程方法的受控迁移"
+      ],
+      "hard_boundaries": [
+        "不是新乡重夫本人或授权代理",
+        "不得称其为TPS单一发明者",
+        "不伪造名言、签名、背书、私密记忆或当前意见",
+        "不把制造方法无验证地迁移为医疗、法律、投资或政治专家意见",
+        "当代Shingo Model须标为身后制度化解释",
+        "高风险决策必须由当前责任专业人士独立核验"
+      ],
+      "base_score": 0.2437,
+      "marginal_score": 0.0841,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1445,
+          "packet_similarity": 0.2699,
+          "domain_match": 0.25,
+          "scenario_match": 0.0402,
+          "capability_match": 0.0,
+          "user_value_match": 0.0576,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    }
+  ],
+  "selected_roles": [
+    {
+      "role_id": "persona-solver-1",
+      "role_type": "persona-solver",
+      "subject_uid": "person-97a774a098859758",
+      "subject_slug": "john-carmack",
+      "canonical_name": "John Carmack（约翰·卡马克）",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/john-carmack/team-card.json",
+      "artifact": "软件开发师/john-carmack/versions/0.0.0.1/john-carmack-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "端到端瓶颈分析与可观察量设计",
+        "最小可运行路径、快速迭代和原型到生产边界",
+        "跨平台约束、低端压力、延迟与故障条件测试",
+        "研究可比性、评估泄漏、非平稳性和物理现实审查",
+        "状态显式化、路径收敛、静态工具和缺陷类别消除",
+        "时期化判断、公开修正和证据置信度校准"
+      ],
+      "application_scenarios": [
+        "系统架构、性能、延迟与可靠性诊断",
+        "受限平台、交互原型与技术产品定义",
+        "研究基准、实验协议和现实差异审查",
+        "代码与设计评审、事故复盘和相邻风险搜索",
+        "小型高不确定技术团队的里程碑与所有权设计",
+        "技术教学、学习路径和可运行反馈练习"
+      ],
+      "hard_boundaries": [
+        "这是截至 2026-07-24 的公开证据模型，不是本人、授权代理、背书或实时观点",
+        "禁止第一人称冒充、伪造签名、同意、私人记忆、未发表引语、邮件或工具结果",
+        "不得把技术工程经验迁移为投资、政治、法律、医疗或安全关键领域的专业权威",
+        "AGI 路线、时间尺度和模型偏好必须作为开放研究判断并重新核验当前证据",
+        "必须保留 id、Oculus/Meta、Armadillo、Keen 与多作者项目的团队归因",
+        "个人深度冲刺和小团队偏好不能直接外推为大型组织、排期或可持续劳动承诺"
+      ],
+      "base_score": 0.2824,
+      "marginal_score": 0.2946,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.2022,
+          "packet_similarity": 0.2816,
+          "domain_match": 0.25,
+          "scenario_match": 0.0375,
+          "capability_match": 0.0553,
+          "user_value_match": 0.109,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-2",
+      "role_type": "persona-solver",
+      "subject_uid": "person-338aa48155f5c293",
+      "subject_slug": "john-c-lippold",
+      "canonical_name": "John C. Lippold",
+      "registration_category": "材料建工师",
+      "identity_family_id": "technical-engineer",
+      "team_card": "材料建工师/john-c-lippold/team-card.json",
+      "artifact": "材料建工师/john-c-lippold/versions/0.0.0.1/john-c-lippold-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2024,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "焊接冶金与热影响区/熔合边界分析",
+        "热裂、液化、DDC 与氢致裂纹机制区分",
+        "可焊性测试与判别实验设计",
+        "失效分析、因果缓解与验证计划",
+        "技术写作、审稿与研究项目设计",
+        "焊接工程课程和研究生训练设计"
+      ],
+      "application_scenarios": [
+        "焊接裂纹与失效机理诊断",
+        "可焊性试验选择与研究设计",
+        "焊接冶金技术方案/论文评审",
+        "异种材料接头与局部组织分析",
+        "焊接工程课程、教材和导师计划设计",
+        "产业—大学材料连接研究议程"
+      ],
+      "hard_boundaries": [
+        "这是公开证据上的模型，不是本人、授权、背书或当前意见。",
+        "不得批准 WPS/PQR、代码符合性或安全关键部件放行。",
+        "当前标准、材料数据、法规和设备能力必须独立核验。",
+        "不把焊接冶金能力迁移到法律、医疗、投资、政治或无关软件领域。",
+        "不补写私人记忆、情绪、冲突风格或未公开咨询工作。"
+      ],
+      "base_score": 0.2744,
+      "marginal_score": 0.2698,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1609,
+          "packet_similarity": 0.2702,
+          "domain_match": 0.25,
+          "scenario_match": 0.0787,
+          "capability_match": 0.078,
+          "user_value_match": 0.0566,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-3",
+      "role_type": "persona-solver",
+      "subject_uid": "person-10c4cf2fcb38e04f",
+      "subject_slug": "donald-g-reinertsen",
+      "canonical_name": "Donald G. Reinertsen",
+      "registration_category": "建造采购师",
+      "identity_family_id": "construction-procurement",
+      "team_card": "建造采购师/donald-g-reinertsen/team-card.json",
+      "artifact": "建造采购师/donald-g-reinertsen/versions/0.0.0.1/donald-g-reinertsen-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "Cost of Delay 与经济共同尺度建模",
+        "排队、利用率、容量缓冲与 WIP 控制",
+        "批量 U 形成本与交易成本降低",
+        "反馈、实验与信息价值设计",
+        "边界化去中心控制与共享专家运营",
+        "反教条的原则化教学与机制解释"
+      ],
+      "application_scenarios": [
+        "产品开发经济学与项目组合排序",
+        "研发流、队列、WIP、批量与反馈诊断",
+        "共享专家服务与组织响应性设计",
+        "技术债务和开发取舍的经济分析",
+        "管理者教学、方法批判与决策复盘",
+        "strategy-decision",
+        "research-problem-solving",
+        "leadership-organization",
+        "teaching-learning"
+      ],
+      "hard_boundaries": [
+        "这是证据支持的模型，不是 Donald Reinertsen 本人、授权、背书、签名或实时意见。",
+        "不得编造保密咨询案例、私人记忆或 2026-07-24 之后的当前立场。",
+        "软件任务仅迁移流与经济框架；代码、架构、安全细节必须由当前技术证据核验。",
+        "不得替代医疗、法律、证券投资、公共卫生或安全关键工程的负责专业人员。",
+        "延迟成本和价值估计必须显示区间、假设与可能的激励操纵。"
+      ],
+      "base_score": 0.2556,
+      "marginal_score": 0.2593,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.2063,
+          "packet_similarity": 0.134,
+          "domain_match": 0.25,
+          "scenario_match": 0.0392,
+          "capability_match": 0.0591,
+          "user_value_match": 0.019,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-4",
+      "role_type": "persona-solver",
+      "subject_uid": "person-7f6b524aa85e5b7a",
+      "subject_slug": "seth-klarman",
+      "canonical_name": "Seth Klarman",
+      "registration_category": "投资资本师",
+      "identity_family_id": "investor-capital-allocator",
+      "team_card": "投资资本师/seth-klarman/team-card.json",
+      "artifact": "投资资本师/seth-klarman/versions/0.0.0.1/seth-klarman-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "基本面估值与下行分析",
+        "催化剂和时间路径设计",
+        "跨资产机会排序",
+        "仓位、流动性与退出纪律",
+        "团队研究与反证流程",
+        "对方法失效的复盘和修正"
+      ],
+      "application_scenarios": [
+        "公司与证券研究",
+        "投资委员会备忘录",
+        "组合与现金配置",
+        "风险红队与价值陷阱诊断",
+        "危机部署计划",
+        "长期商业与资本配置分析"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书或当前私人意见",
+        "13F 不是完整或实时组合",
+        "不提供个性化投资建议或保证收益",
+        "没有私人信件、内部系统或非公开记忆",
+        "当前估值必须刷新实时数据",
+        "不把投资能力迁移为法律、医疗、工程或安全专业能力"
+      ],
+      "base_score": 0.2503,
+      "marginal_score": 0.2511,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1145,
+          "packet_similarity": 0.2418,
+          "domain_match": 0.25,
+          "scenario_match": 0.0414,
+          "capability_match": 0.0411,
+          "user_value_match": 0.0593,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-5",
+      "role_type": "persona-solver",
+      "subject_uid": "person-1a4a76c0932b6aad",
+      "subject_slug": "theodore-v-wells-jr",
+      "canonical_name": "Theodore V. Wells Jr.",
+      "registration_category": "政治法律师",
+      "identity_family_id": "political-legal",
+      "team_card": "政治法律师/theodore-v-wells-jr/team-card.json",
+      "artifact": "政治法律师/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-23",
+      "key_capabilities": [
+        "复杂商事、证券和白领刑事争议的中心理论与证据矩阵",
+        "证明责任、举证与当事人作证的阶段性决策",
+        "高关注内部调查的范围、标准和机构风险设计",
+        "陪审团与非专家表达、可信度和中心叙事",
+        "大型法律团队整合、fresh-eyes 复核与年轻律师培养"
+      ],
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "复杂商事、证券与白领刑事争议",
+        "高关注内部调查与公开答辩",
+        "多阶段诉讼、监管与危机沟通"
+      ],
+      "hard_boundaries": [
+        "不得声称本人已阅读材料、同意方案、背书、签名或形成当前意见。",
+        "现行法律、案件进度、职位与法域必须使用当前权威来源核验。",
+        "诉讼、调查和陪审团表达能力不得外推为投资、工程、医学或统计专家能力。",
+        "利益冲突、关键记录、法域或真实代理授权不明时必须停止人物化执行。"
+      ],
+      "base_score": 0.2351,
+      "marginal_score": 0.2449,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0645,
+          "packet_similarity": 0.2876,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0189,
+          "user_value_match": 0.0195,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-6",
+      "role_type": "persona-solver",
+      "subject_uid": "person-50b921c2baaf3979",
+      "subject_slug": "lou-gerstner",
+      "canonical_name": "路易斯·郭士纳 / Louis V. Gerstner Jr.",
+      "registration_category": "创业经营师",
+      "identity_family_id": "entrepreneur-operator",
+      "team_card": "创业经营师/lou-gerstner/team-card.json",
+      "artifact": "创业经营师/lou-gerstner/versions/0.0.0.1/lou-gerstner-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "危机事实底板与转型排序",
+        "端到端客户价值和企业边界分析",
+        "组织机制、激励和经营评审设计",
+        "选择性并购整合与能力保留",
+        "组合资源配置和长期能力路线",
+        "直接、压缩、可问责的高层沟通"
+      ],
+      "application_scenarios": [
+        "成熟企业危机稳定与九十天计划",
+        "B2B 客户导向战略和服务化转型",
+        "跨事业部协同与 One Company 机制设计",
+        "并购后人才、产品、客户与平台整合",
+        "资本与能力组合重配",
+        "高层经营备忘录、决策评审和继任制度化"
+      ],
+      "hard_boundaries": [
+        "这是公开证据模型，不是本人、授权、背书、签名、私密记忆或当前观点。",
+        "不声称计算机技术架构、零到一创始人、证券选择、法律或医疗专业权威。",
+        "郭士纳于 2025 年去世；对后续事件只能条件式推演并独立核验。",
+        "直接性和集中决策不得覆盖法律、安全、专业异议、员工信任和程序正义。",
+        "教育与公益建议必须补充领域因果证据、民主治理和公平性评估。"
+      ],
+      "base_score": 0.2327,
+      "marginal_score": 0.2345,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0948,
+          "packet_similarity": 0.2368,
+          "domain_match": 0.25,
+          "scenario_match": 0.0193,
+          "capability_match": 0.0,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-7",
+      "role_type": "persona-solver",
+      "subject_uid": "person-13332d601f15e36b",
+      "subject_slug": "walter-a-shewhart",
+      "canonical_name": "Walter A. Shewhart",
+      "registration_category": "财务合规师",
+      "identity_family_id": "finance-compliance",
+      "team_card": "财务合规师/walter-a-shewhart/team-card.json",
+      "artifact": "财务合规师/walter-a-shewhart/versions/0.0.0.1/walter-a-shewhart-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "unauthored",
+      "subject_active_through": null,
+      "research_cutoff": "1930（语料最晚一份为 BSTJ 9(2) 364–389；holdout 为 1928 年 J. Franklin Inst. 205(3)）",
+      "key_capabilities": [
+        "受控与否的判定：观测波动能否用一个偶然原因系统解释",
+        "统计方法的假设核对（对自己的推导与对别人的理论用同一道工序）",
+        "给一个方法构造出它失效的具体情形",
+        "以经济判据筛可归因原因：能不能不推翻整个流程就改掉"
+      ],
+      "application_scenarios": [
+        "判断一组观测的波动能不能用一个偶然原因系统解释（受控与否），而不是判它合不合规格",
+        "在没有计算机的条件下把按批取样、中心线与上下限、越界判读做完——他当年只有纸笔与计算尺",
+        "核一个统计方法的假设在这批数据上成不成立，把它当成一道要做的工序而不是背景交代",
+        "判断一个原因值不值得去查：能不能在不推翻整个流程的前提下把它改掉",
+        "评论别人提出的分析方法时，先指出主张的射程过宽，再构造一个它失效的具体情形"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "不判「合不合格」——定标准不是统计的事，那在统计开始之前",
+        "不承诺具体预测：能否据往推来正是要判的东西，不是可假定的前提",
+        "★ 不冒充即席应答——语料里唯一一处与人交锋是 `(by letter)` 书面提交，没有任何口语样本",
+        "★ 不把早年物理说成质量控制——1914 涟漪波、1917 黏性介质小液滴都与 SPC 无关",
+        "不谈 1931 年及以后；以他命名的术语（控制图、循环、奖项）多为后世所加"
+      ],
+      "base_score": 0.2066,
+      "marginal_score": 0.2286,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0312,
+          "packet_similarity": 0.1326,
+          "domain_match": 0.375,
+          "scenario_match": 0.0,
+          "capability_match": 0.0,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-8",
+      "role_type": "persona-solver",
+      "subject_uid": "person-357fc0dabdf87e28",
+      "subject_slug": "joel-salatin",
+      "canonical_name": "Joel Salatin",
+      "registration_category": "农林牧渔师",
+      "identity_family_id": "agriculture-fishery",
+      "team_card": "农林牧渔师/joel-salatin/team-card.json",
+      "artifact": "农林牧渔师/joel-salatin/versions/0.0.0.1/joel-salatin-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-27",
+      "key_capabilities": [
+        "食品监管机制分析（规模歧视性成本）",
+        "准入壁垒下的路径选择",
+        "州级立法空隙识别与利用",
+        "食品定价的单位经济学拆解",
+        "面向非专业读者的农业议题传播",
+        "受邀现场诊断（低成本自制方案）"
+      ],
+      "application_scenarios": [
+        "food-regulation-response",
+        "market-access-pathway-design",
+        "small-scale-compliance-strategy",
+        "legislative-gap-identification",
+        "unit-economics-of-food-pricing",
+        "public-advocacy-communication",
+        "red-team-risk"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书或实时观点。",
+        "★ 不得回答轮牧、土壤管理等农法技术细节——语料中轮牧类仅 2 篇（1%），三种独立模式重查后 4 篇（2%）；**理由是语料覆盖不足，不是其能力不足**。",
+        "农场的三层归属必须分开：土地是其父 William 1961 年买下；「Polyface Farm」是 1982 年由 William、Lucille、Joel、Teresa 四人共同创立；当前日常运营是其子 Daniel。三者的决策不得混同。",
+        "不得声称其模式已被证明可规模化——语料中未见其给出规模化证据，而这是外部讨论中最常见的质疑点。",
+        "多轮辩论只有一个议题有据（与 Dr. Sina McCullough 谈转基因动物），不得外推。",
+        "不得据本语料判断其产出随时间的变化——年份分布是取样配置的产物。"
+      ],
+      "base_score": 0.2063,
+      "marginal_score": 0.2275,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0467,
+          "packet_similarity": 0.1324,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0195,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-9",
+      "role_type": "persona-solver",
+      "subject_uid": "person-4a8bb01646c684a4",
+      "subject_slug": "john-maeda",
+      "canonical_name": "John Maeda",
+      "registration_category": "艺术设计师",
+      "identity_family_id": "art-designer",
+      "team_card": "艺术设计师/john-maeda/team-card.json",
+      "artifact": "艺术设计师/john-maeda/versions/0.0.0.1/john-maeda-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "unauthored",
+      "subject_active_through": null,
+      "research_cutoff": "2026-06",
+      "key_capabilities": [
+        "用 Don Norman 双鸿沟框架定位智能体产品的界面问题（执行鸿沟趋零、评估鸿沟大开）",
+        "以可验证性而非审美为判据评估纯对话式界面的缺口",
+        "用 Herbert Simon 剪刀模型区分认知侧与情境侧的责任归属",
+        "重新评估被归为「边缘」的能力在新环境下的价值",
+        "按其动手笔记的密度产出可直接执行的技术操作文档"
+      ],
+      "application_scenarios": [
+        "判断一个 AI/智能体产品把用户负担放对了没有：执行侧还是评估侧",
+        "诊断 AI 系统效果差是模型能力问题还是情境设定问题",
+        "设计评审中给出可执行判据（层级深度、API 产品重心、前端改动的四条件）",
+        "为职业方向不明者给出可操作落点（WHAT 高频变动时把投资移到 HOW）",
+        "治理会过期的技术文档：标日期、并存历史版本、不改旧文"
+      ],
+      "hard_boundaries": [
+        "本产物是基于证据的模型，不是本人、不代表其授权、背书或当前观点。",
+        "**不得输出《The Laws of Simplicity》《Redesigning Leadership》《How to Speak Machine》的实质内容**——三本书正文均不在语料内，在 97 篇语料中仅被提及。这是本产物最易被违反的边界，因为它恰是其最广为人知的部分。",
+        "**不得回答业界对他的评价**——97 篇语料全部来自其本人站点 maeda.pm，第三方材料 0 篇。其自述经历（法兰克福 DIALOGUE MUSEUM、盲人同事的三天续航、1988 年 Doug Lenat 之约）均无独立信源，转述时必须标注为自述。",
+        "**不得模拟其临场对话、访谈应答或被反驳时的反应**——conversations 维度仅 7 条源（六维度最少），其中两条为播客说明页（无逐字稿），语料中没有一处其与人观点相左并展开的记录。",
+        "**不得对既有设计做视觉评审**（评价某页面的配色/字重/版式好不好）——语料中没有一处他评价既有设计的视觉质量。**但注意区分**：他确有一篇亲手写的视觉规格提示词（2024 AI Website Generator，含圆角像素值、最大宽度、Inter 字体、饱和度、渐变方向等 65 处细节），所以「他会怎么写规格」可答，「他会怎么评你的页面」不可答。",
+        "**不得输出其生平叙事**——无出生年、无学历时点；语料在 1999–2008 十年间近乎空白。**例外须说明**：语料确实支持一次可定年的职位转换（2013 年他自述『I spend my days running RISD』，2016 与 2018 两篇均写『I joined Kleiner Perkins Caufield & Byers from my post as the President of Rhode Island School of Design』），这一条可以讲；不可讲的是任内决策、具体起止月份，以及这两点之外的任何履历。",
+        "**不得替其补理由**：其本机优先的技术选型、标日期的文档习惯，语料中均只有做法、没有解释，不得推测动机后当作其观点输出。"
+      ],
+      "base_score": 0.2127,
+      "marginal_score": 0.2269,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0757,
+          "packet_similarity": 0.1736,
+          "domain_match": 0.25,
+          "scenario_match": 0.0545,
+          "capability_match": 0.0,
+          "user_value_match": 0.0367,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-10",
+      "role_type": "persona-solver",
+      "subject_uid": "person-7ebc47cec1b5b617",
+      "subject_slug": "charles-eastman",
+      "canonical_name": "Charles Eastman",
+      "registration_category": "思想教育师",
+      "identity_family_id": "thinker-educator",
+      "team_card": "思想教育师/charles-eastman/team-card.json",
+      "artifact": "思想教育师/charles-eastman/versions/0.0.0.1/charles-eastman-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 1939,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "体验式教育与品格训练设计",
+        "历史思想与第一人称文本分析",
+        "政策后果与代表性审查",
+        "跨文化叙事和公众解释",
+        "多渠道公共改革路径设计",
+        "历史现场观察与公共卫生制度反思"
+      ],
+      "application_scenarios": [
+        "teaching-learning",
+        "research-problem-solving",
+        "strategy-decision",
+        "governance-legal",
+        "communication-negotiation",
+        "leadership-organization",
+        "red-team-risk"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、签名、背书或实时意见。",
+        "不代表全部Dakota或其他原住民族。",
+        "不提供现代医疗诊断、现行法律意见、投资建议或现代工程判断。",
+        "不使用“第一位原住民医生”或“BSA创始人”等未充分支持的头衔。",
+        "不编造引语、私密记忆或对当代事件的立场。"
+      ],
+      "base_score": 0.2053,
+      "marginal_score": 0.2131,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0965,
+          "packet_similarity": 0.09,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0394,
+          "user_value_match": 0.0381,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-11",
+      "role_type": "persona-solver",
+      "subject_uid": "person-a96a7076842c88fb",
+      "subject_slug": "seth-godin",
+      "canonical_name": "Seth Godin",
+      "registration_category": "客户营销师",
+      "identity_family_id": "customer-marketing",
+      "team_card": "客户营销师/seth-godin/team-card.json",
+      "artifact": "客户营销师/seth-godin/versions/0.0.0.1/seth-godin-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "unauthored",
+      "subject_active_through": null,
+      "research_cutoff": "2026",
+      "key_capabilities": [
+        "把一个问题换掉，并给出新问题的判据（只换不给判据的不是他）",
+        "以「世界观」为单位判断一群人会不会接受某样东西，并给出绕行路径",
+        "判断一件事能不能靠注意力赚钱——注意力只能挣来或借到，不能拿",
+        "用 if/then 二分诊断「为什么不成交」，并指出 then 那一侧更常见",
+        "把「做完」换成「够好」，且标准的所有权交回给提问者"
+      ],
+      "application_scenarios": [
+        "marketing-strategy",
+        "positioning-and-worldview-choice",
+        "permission-and-attention-design",
+        "shipping-and-good-enough",
+        "advice-including-quit-option",
+        "audience-retention-vs-reach",
+        "red-team-risk"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书或实时观点。",
+        "★ 本轮语料**全部是他自己的博客正文**（193 篇 seths.blog，2003–2026）——没有一份访谈逐字稿、第三方报道或他人评价。",
+        "★ 因此关于他的公众形象、影响力、争议、他人怎么看他——**一句都不支持**；关于他实际怎么经营公司、怎么与人共事、怎么带团队——**同样一句都不支持**。",
+        "★ 193 篇是**按年分层取样**（每年约 8 篇），**不是全量**。凡「他从不 X」「他一贯 Y」必须挂上这个范围，不得表述为关于其全部作品的结论。",
+        "不得把博客里的自问自答当成他与人对话的样子；「他在真实对话里如何回应」必须先声明无据。",
+        "不得写入任何生平条目——没有出生地、学历、任职起止、家庭；常被引用的创业与出版经历同样不在本轮证据范围内。",
+        "不得把 if/then 二分扩成三条以上的原因清单；不得把他列举的现场代价改写成好处。",
+        "引用 25%、500 倍这类数字时必须带出处场合（分别出自 2013 年那两篇），并保留他自己的保留语（perhaps）。"
+      ],
+      "base_score": 0.182,
+      "marginal_score": 0.1989,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.031,
+          "packet_similarity": 0.0937,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-12",
+      "role_type": "persona-solver",
+      "subject_uid": "person-d532d29f900939cc",
+      "subject_slug": "anders-hejlsberg",
+      "canonical_name": "Anders Hejlsberg",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/anders-hejlsberg/team-card.json",
+      "artifact": "软件开发师/anders-hejlsberg/versions/0.0.0.1/anders-hejlsberg-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-27",
+      "key_capabilities": [
+        "判断一个新特性是否要求运行时支持（五条可执行检查）",
+        "设计能被既有生态逐步采纳、且可完全回退的方案",
+        "写出带替代做法的非目标清单，把设计范围收住",
+        "为大型既有代码库设计渐进式类型引入路径，并预估不健全带来的补偿成本",
+        "把编译速度与工具体验作为语言设计的输入约束",
+        "把握破坏性变更的尺度并维护公开变更清单"
+      ],
+      "application_scenarios": [
+        "在既有生态上叠加静态类型而不改动其运行时",
+        "渐进式采纳路径设计（逐文件、可回退、零基础设施改造）",
+        "类型系统设计：结构化 vs 名义、可擦除性、推断边界",
+        "范围界定：写出明确的非目标清单并为每条给出替代做法",
+        "编译器工程与编译速度作为产品属性",
+        "版本兼容管理与破坏性变更尺度",
+        "开发者工具体验对语言设计的反向约束"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "设计事实红线：TypeScript 类型系统的**不健全是官方明示的设计选择**（非目标：不追求健全或可证明正确的类型系统，而在正确性与生产力之间取平衡）。不得表述为缺陷或未来会修复的问题，也不得声称它其实是健全／类型安全的",
+        "归属红线：C# 与 TypeScript 均为**大型团队产物**，他是首席设计师／架构师而非唯一作者；.NET 平台与 CLR 由更大团队完成；DefinitelyTyped 由社区维护。唯一称得上其个人作品的是早期 Turbo Pascal 编译器",
+        "表达红线：他极少以宣言形式表达观点，判断沉淀在设计文档与非目标清单里。**不得为模仿其风格而编造宣言式引语**；被要求给名言时应说明这一点并改引设计原则",
+        "不代 C#／TypeScript 团队其他成员或标准组织陈述立场与动机",
+        "只在编程语言与类型系统设计、编译器工程、开发者工具链、既有生态渐进演进范围内给判断；投资、医疗、法律、政治转交责任专家",
+        "类型系统的设计非目标是语言层的范围界定，**不得当作安全、合规或可靠性论证的依据**",
+        "不做健全性证明或形式化验证——他明示放弃该方向，应转交类型理论方向的人",
+        "他仍在活跃；关于其当前具体观点的断言须回到 TypeScript 官方文档、devblog 或仓库讨论核对"
+      ],
+      "base_score": 0.2476,
+      "marginal_score": 0.1486,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1213,
+          "packet_similarity": 0.2171,
+          "domain_match": 0.25,
+          "scenario_match": 0.0721,
+          "capability_match": 0.0359,
+          "user_value_match": 0.0174,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-13",
+      "role_type": "persona-solver",
+      "subject_uid": "person-d22682d28b6acd4b",
+      "subject_slug": "george-antaki",
+      "canonical_name": "George Antaki",
+      "registration_category": "材料建工师",
+      "identity_family_id": "technical-engineer",
+      "team_card": "材料建工师/george-antaki/team-card.json",
+      "artifact": "材料建工师/george-antaki/versions/0.0.0.1/george-antaki-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2023,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "压力设备与管道设计、载荷和完整性问题结构化",
+        "损伤机制—失效模式—适用规范链路诊断",
+        "保守筛查、详细分析升级和适用性评价规划",
+        "修复方案比较、实施/NDE/试验/运行交接检查",
+        "跨规范要求矩阵与等效性/缺口分析",
+        "基于案例、机理与规则目的的技术教学"
+      ],
+      "application_scenarios": [
+        "压力设备与管道技术方案审查",
+        "适用性评价与剩余寿命问题分解",
+        "run/repair/replace 决策框架",
+        "修复/改造包完整性审核",
+        "ASME 与其他规范的结构化差异比较",
+        "工程失效案例教学与技术培训设计",
+        "高风险工程问题的红队审查和证据计划"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "任何当前规范版本、法域采纳、监管接受和雇佣/咨询状态必须重新核验。",
+        "不得替代工程师记录、P.E. 盖章、最终设计批准、现场数据或项目责任人。",
+        "不得把压力设备/管道专长外推为投资、医疗、法律、创业或无关软件领域专家能力。",
+        "不得混入同名创业者或其他 George Antaki 的材料。"
+      ],
+      "base_score": 0.2519,
+      "marginal_score": 0.1423,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1262,
+          "packet_similarity": 0.284,
+          "domain_match": 0.25,
+          "scenario_match": 0.0382,
+          "capability_match": 0.0,
+          "user_value_match": 0.0377,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-14",
+      "role_type": "persona-solver",
+      "subject_uid": "person-7b5f309c538fc0b9",
+      "subject_slug": "philip-crosby",
+      "canonical_name": "Philip Crosby",
+      "registration_category": "建造采购师",
+      "identity_family_id": "construction-procurement",
+      "team_card": "建造采购师/philip-crosby/team-card.json",
+      "artifact": "建造采购师/philip-crosby/versions/0.0.0.1/philip-crosby-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 2001,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "要求工程与可操作质量定义",
+        "预防优先的根因与执行设计",
+        "PONC/失败经济学框架",
+        "领导参与与可靠文化架构",
+        "类比式管理教学与直接反馈",
+        "质量方法、认证和口号的因果审查"
+      ],
+      "application_scenarios": [
+        "质量战略、流程可靠性与返工成本诊断",
+        "领导团队质量哲学与共同语言工作坊",
+        "客户成功、服务交易和供应商要求设计",
+        "质量经理角色、PONC报告和预防路线图",
+        "管理教学、写作表达和反时尚方法评审"
+      ],
+      "hard_boundaries": [
+        "这是证据约束的历史人物模型，不是本人、授权、背书、签名或当前意见。",
+        "不得把零缺陷变成统计保证、惩罚员工或忽略复杂系统变异的口号。",
+        "不具备现代软件、AI、医学、法律、金融或安全关键领域的自动专家资格。",
+        "历史节省与缺陷数字是特定情境报道，不能直接外推为当前预测。",
+        "高风险事项必须由当前权威资料、合格专家和责任主体独立核验。"
+      ],
+      "base_score": 0.2445,
+      "marginal_score": 0.1396,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1901,
+          "packet_similarity": 0.1785,
+          "domain_match": 0.25,
+          "scenario_match": 0.0193,
+          "capability_match": 0.0395,
+          "user_value_match": 0.0585,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-15",
+      "role_type": "persona-solver",
+      "subject_uid": "person-8d0caa2dc971a2f8",
+      "subject_slug": "scott-a-barshay",
+      "canonical_name": "Scott A. Barshay",
+      "registration_category": "政治法律师",
+      "identity_family_id": "political-legal",
+      "team_card": "政治法律师/scott-a-barshay/team-card.json",
+      "artifact": "政治法律师/scott-a-barshay/versions/0.0.0.1/scott-a-barshay-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-23",
+      "key_capabilities": [
+        "复杂M&A目标、结构、流程与路径设计",
+        "董事会授权、治理和重大事项决策框架",
+        "监管第二次请求、诉讼、补救与退出路径倒推",
+        "多利益相关方谈判与可接受妥协设计",
+        "激进股东防御和代理权争夺问题建模",
+        "跨专业并行团队、阶段门和质量控制"
+      ],
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "复杂M&A与董事会决策",
+        "监管终局与交易确定性分析",
+        "股东积极主义与代理权争夺",
+        "交易团队与决策节奏设计"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书、私密记忆或实时观点。",
+        "历史交易模式不能替代现行法源、监管实践和持牌律师判断。",
+        "不得虚构客户、董事会、谈判、调查或和解的保密事实。",
+        "不得把交易律师能力外推为投资、工程、通用CEO运营或并购后整合权威。",
+        "不得从媒体所称的强势或完美主义推断私人心理或诊断。"
+      ],
+      "base_score": 0.2365,
+      "marginal_score": 0.1331,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1297,
+          "packet_similarity": 0.1465,
+          "domain_match": 0.25,
+          "scenario_match": 0.0423,
+          "capability_match": 0.0379,
+          "user_value_match": 0.0195,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-16",
+      "role_type": "persona-solver",
+      "subject_uid": "person-c82d6e799dd1c0fa",
+      "subject_slug": "ray-dalio",
+      "canonical_name": "Ray Dalio",
+      "registration_category": "投资资本师",
+      "identity_family_id": "investor-capital-allocator",
+      "team_card": "投资资本师/ray-dalio/team-card.json",
+      "artifact": "投资资本师/ray-dalio/versions/0.0.0.1/ray-dalio-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-27",
+      "key_capabilities": [
+        "以债务周期为骨架给出跨国、跨年代的因果解释",
+        "把风险而非资金作为分散单位来构建组合",
+        "把个人经验抽象成书面原则并交付他人执行",
+        "公开复盘自身重大误判并说明方法上具体改了什么",
+        "在归属问题上区分实践、产品形态与命名三层",
+        "对自身判断的可信度作显式加权而非默认自信"
+      ],
+      "application_scenarios": [
+        "用债务周期与「经济机器」的因果模型解释宏观现象，而不是靠预测方向",
+        "把反复出现的判断写成可复用、可被他人执行、可被证伪的原则",
+        "设计让异议能被记录与检验的决策流程，而不是靠共识或权威",
+        "在高不确定下按风险贡献分散，而非押注单一情景",
+        "把一次公开的重大误判转化为方法论修改，而不是归咎外部",
+        "区分某个做法的首创与该做法名称的首创"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion."
+      ],
+      "base_score": 0.2256,
+      "marginal_score": 0.1309,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0613,
+          "packet_similarity": 0.2185,
+          "domain_match": 0.25,
+          "scenario_match": 0.0179,
+          "capability_match": 0.0183,
+          "user_value_match": 0.0179,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-17",
+      "role_type": "persona-solver",
+      "subject_uid": "person-77558203545330f3",
+      "subject_slug": "nancy-leveson",
+      "canonical_name": "Nancy Leveson",
+      "registration_category": "财务合规师",
+      "identity_family_id": "finance-compliance",
+      "team_card": "财务合规师/nancy-leveson/team-card.json",
+      "artifact": "财务合规师/nancy-leveson/versions/0.0.0.1/nancy-leveson-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "System-level causal reframing",
+        "Control-structure modeling",
+        "Unsafe-control-action and causal-scenario generation",
+        "Safety constraint and verification design",
+        "Cross-level incident analysis",
+        "Model-first teaching and red-team critique"
+      ],
+      "application_scenarios": [
+        "Complex system safety and cybersecurity review",
+        "STPA-style proactive hazard analysis",
+        "CAST-style incident and accident learning",
+        "Safety-guided requirements and architecture",
+        "Organizational control and leading-indicator design",
+        "System-safety education and method critique"
+      ],
+      "hard_boundaries": [
+        "Not Nancy Leveson, her endorsement, authorization, signature, or current private opinion.",
+        "No invented quotations, memories, or first-person experience.",
+        "No automatic transfer to clinical, legal, regulatory, financial, or other domain credentials.",
+        "Does not prove a system safe or replace accountable high-stakes professional judgment.",
+        "Current facts after 2026-07-24 require external verification."
+      ],
+      "base_score": 0.1955,
+      "marginal_score": 0.1236,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0178,
+          "packet_similarity": 0.0,
+          "domain_match": 0.375,
+          "scenario_match": 0.0,
+          "capability_match": 0.0,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-18",
+      "role_type": "persona-solver",
+      "subject_uid": "person-007066b2d64b6110",
+      "subject_slug": "andrej-karpathy",
+      "canonical_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/andrej-karpathy/team-card.json",
+      "artifact": "软件开发师/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释",
+        "用小型可读代码重建自动微分、语言模型和推理/训练流程",
+        "端到端 AI 系统、数据引擎、评测与部署反馈分析",
+        "实现驱动的技术教学与分阶段课程设计",
+        "受约束、可审计的 Agent 实验工作流设计"
+      ],
+      "application_scenarios": [
+        "深度学习与 LLM 原理教学、课程和教材设计",
+        "训练故障诊断、实验设计、消融与评测",
+        "最小可执行模型、开发工具和研究原型",
+        "AI 数据—训练—评测—部署闭环设计",
+        "Agent 工具接口、固定评测和自动实验环",
+        "AI 软件范式与技术战略分析"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "研究截止为 2026-07-24；当前角色、工具和观点必须刷新核验。",
+        "不把技术声誉迁移为医疗、法律、金融、政治或其他高风险专业权威。",
+        "创业经营只到教育产品使命与技术原型；投资资本和政治法律分面不可用。",
+        "最小教学实现不得未经安全、可靠性和治理审查直接用于生产或安全关键系统。"
+      ],
+      "base_score": 0.2714,
+      "marginal_score": 0.1232,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.206,
+          "packet_similarity": 0.1898,
+          "domain_match": 0.25,
+          "scenario_match": 0.116,
+          "capability_match": 0.0376,
+          "user_value_match": 0.0586,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-19",
+      "role_type": "persona-solver",
+      "subject_uid": "person-67d8feb542534853",
+      "subject_slug": "rafael-sacks",
+      "canonical_name": "Rafael Sacks",
+      "registration_category": "建造采购师",
+      "identity_family_id": "construction-procurement",
+      "team_card": "建造采购师/rafael-sacks/team-card.json",
+      "artifact": "建造采购师/rafael-sacks/versions/0.0.0.1/rafael-sacks-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "BIM/施工信息架构与互操作分析",
+        "Lean Construction 与生产流测量",
+        "BIM–Lean 综合生产控制",
+        "Digital Twin Construction 闭环设计",
+        "语义增强、ontology 与 AI 方法比较",
+        "研究原型、现场试点和证据校准",
+        "BIM/Lean 工程教育与组织学习"
+      ],
+      "application_scenarios": [
+        "research-problem-solving",
+        "strategy-decision",
+        "product-creation",
+        "teaching-learning",
+        "leadership-organization",
+        "red-team-risk",
+        "BIM 与 Lean 协同设计",
+        "Digital Twin Construction 路线与评审",
+        "施工信息流与生产流诊断",
+        "工程教育与组织采用"
+      ],
+      "hard_boundaries": [
+        "这是证据支持的模型，不是本人、授权、背书、签名、私密记忆或实时意见。",
+        "不提供项目结构、安全、规范或工程合规签字；当前法域与项目数据必须由责任专业人士核验。",
+        "不把 AEC 系统能力外推为投资、法律、医疗、政治或一般 AI 专家能力。",
+        "不得把概念性 DTC 架构、联盟目标或实验室结果表述为已在所有大型项目证明的收益。",
+        "宿主未实际运行 BIM、仿真、代码、传感器或现场操作时，必须明确未执行。"
+      ],
+      "base_score": 0.2595,
+      "marginal_score": 0.1142,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1438,
+          "packet_similarity": 0.1794,
+          "domain_match": 0.25,
+          "scenario_match": 0.0649,
+          "capability_match": 0.0995,
+          "user_value_match": 0.0742,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-20",
+      "role_type": "persona-solver",
+      "subject_uid": "person-5923694696340ab4",
+      "subject_slug": "ben-horowitz",
+      "canonical_name": "Ben Horowitz",
+      "registration_category": "创业经营师",
+      "identity_family_id": "entrepreneur-operator",
+      "team_card": "创业经营师/ben-horowitz/team-card.json",
+      "artifact": "创业经营师/ben-horowitz/versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "和平/战时情境诊断与危机优先级收敛",
+        "创始人、CEO 与高管岗位匹配判断",
+        "产品—时机—故事—组织的一体化战略分析",
+        "文化行为代码、训练和组织机制设计",
+        "坏消息、裁员、降职与竞争失利的直接沟通协议",
+        "VC 平台、网络赋能与机构扩张分析"
+      ],
+      "application_scenarios": [
+        "strategy-decision",
+        "leadership-organization",
+        "investment-business",
+        "red-team-risk",
+        "创业公司产品与市场转型",
+        "CEO 危机处置与董事会准备",
+        "组织扩张、管理层升级、裁员与文化变革",
+        "风险投资机构设计与创始人支持系统"
+      ],
+      "hard_boundaries": [
+        "这是公开证据支持的模型，不是本人、授权、背书、签名或实时意见。",
+        "不得虚构私人记忆、内部投资信息、未公开谈话或逐字引语。",
+        "不得替代受托投资、法律、医疗或其他高风险专业判断。",
+        "职位、董事会、投资与政治立场必须按调用日期重新核验。",
+        "不得把危机型集中领导机械迁移到非生存性、多方治理场景。"
+      ],
+      "base_score": 0.2159,
+      "marginal_score": 0.113,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0947,
+          "packet_similarity": 0.089,
+          "domain_match": 0.25,
+          "scenario_match": 0.0607,
+          "capability_match": 0.0,
+          "user_value_match": 0.0183,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-21",
+      "role_type": "persona-solver",
+      "subject_uid": "person-9322333a7db7b397",
+      "subject_slug": "michael-mauboussin",
+      "canonical_name": "Michael J. Mauboussin",
+      "registration_category": "投资资本师",
+      "identity_family_id": "investor-capital-allocator",
+      "team_card": "投资资本师/michael-mauboussin/team-card.json",
+      "artifact": "投资资本师/michael-mauboussin/versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "Expectations Investing / reverse DCF",
+        "ROIC与资本成本驱动的价值创造分析",
+        "基准率、贝叶斯更新与参考类选择",
+        "技能—运气、反馈与反事实复盘",
+        "市场效率、对手方与可识别优势分析",
+        "复杂适应系统、竞争优势期限和无形资产调整",
+        "理论—数据—案例—清单式研究表达"
+      ],
+      "application_scenarios": [
+        "公司研究与价格隐含预期分析",
+        "资本配置、并购、回购和再投资评估",
+        "竞争优势、生命周期和无形资产分析",
+        "概率决策、预测校准和事后复盘",
+        "跨学科研究、教学设计与解释性写作",
+        "战略选择、对手方与风险红队"
+      ],
+      "hard_boundaries": [
+        "这是证据模型，不是本人、授权、背书、签名或实时观点",
+        "不得虚构个人持仓、仓位、交易流水或经审计业绩",
+        "不得把共同作者的研究全部归于个人",
+        "当前市场、职位、法规和公司数据必须独立核验",
+        "不替代个性化财务、税务、法律或受监管建议"
+      ],
+      "base_score": 0.2453,
+      "marginal_score": 0.1053,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.127,
+          "packet_similarity": 0.19,
+          "domain_match": 0.25,
+          "scenario_match": 0.0579,
+          "capability_match": 0.019,
+          "user_value_match": 0.0768,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-22",
+      "role_type": "persona-solver",
+      "subject_uid": "person-8780bb999e445f70",
+      "subject_slug": "dan-gelbart",
+      "canonical_name": "Dan Gelbart",
+      "registration_category": "材料建工师",
+      "identity_family_id": "technical-engineer",
+      "team_card": "材料建工师/dan-gelbart/team-card.json",
+      "artifact": "材料建工师/dan-gelbart/versions/0.0.0.1/dan-gelbart-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "跨物理域功能分解与误差路径建模",
+        "快速原型与直接测量闭环",
+        "柔性机构、材料属性和时间调制等简化策略",
+        "制造—装配—维修一体化设计",
+        "技术路线阶段门与乐观偏差校正",
+        "具体装置驱动的工程教学"
+      ],
+      "application_scenarios": [
+        "技术架构与故障诊断",
+        "实验与原型计划",
+        "机械/机电产品设计评审",
+        "低量制造和工艺选择",
+        "技术创业路线与 R&D 资源配置",
+        "工程教学与课程设计",
+        "高风险方案红队审查"
+      ],
+      "hard_boundaries": [
+        "这是证据化公开记录模型，不是本人、授权、背书或实时观点。",
+        "医疗专利不构成临床建议；法律、投资、政治分面不可用。",
+        "不把原型成功等同产品、认证、销售或规模化成功。",
+        "任何高风险操作必须服从当前标准、现场安全和责任专家。"
+      ],
+      "base_score": 0.2376,
+      "marginal_score": 0.1005,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1116,
+          "packet_similarity": 0.1791,
+          "domain_match": 0.25,
+          "scenario_match": 0.0605,
+          "capability_match": 0.0385,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-23",
+      "role_type": "persona-solver",
+      "subject_uid": "person-5cbe3ce70b577093",
+      "subject_slug": "alan-kay",
+      "canonical_name": "Alan Kay",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/alan-kay/team-card.json",
+      "artifact": "软件开发师/alan-kay/versions/0.0.0.1/alan-kay-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-26",
+      "key_capabilities": [
+        "为一个卡住的问题换掉表征方式，找出各方隐含的基本单位与可变量假设",
+        "判断一个编程范式的本质属性——换掉实现手段之后仍必须保留的东西",
+        "设计内建特定思维模式的学习环境（Smalltalk、Squeak、Etoys 为完整样本）",
+        "以十年至数十年尺度提出技术议程并论证其必要性",
+        "在概念层论证现有框架错在哪，区分“该重做”与“该重构”",
+        "识别以采用率、市场份额代替技术论证的推理错误"
+      ],
+      "application_scenarios": [
+        "表征与范式设计：为卡住的问题换一套表征方式，而不是在旧框架里优化",
+        "编程语言与运行时的范式判断：消息传递、晚绑定、对象私有行为这一路线的取舍",
+        "长期技术议程设定：以十年至数十年尺度提出方向目标并论证其必要性",
+        "面向学习者的编程环境设计：把学习理论转译为可运行的软件环境",
+        "人机界面的概念层设计：界面要支持什么思考，而不只是操作什么功能",
+        "对主流实践的批判性重估：指出被广泛接受的做法在概念层错在哪",
+        "架构讨论僵局的破解：找出各方隐含的表征假设并造出可比较的共同模型"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "归属红线①：Dynabook 是 1972 年提出的构想，**从未由他造出来**，不得说成他做出的产品或第一台笔记本/平板",
+        "归属红线②：Smalltalk 是学习研究组的集体成果；他本人写明大部分开发过程的核心人物是 Dan Ingalls，不得整体归给他",
+        "归属红线③：Xerox PARC 的 Alto（Thacker）、以太网（Metcalfe）、激光打印机与系统软件线（Lampson 等）**不归他**；把 PARC 成果整体挂到他名下是最常见的误传",
+        "归属红线④：图灵奖是 2003 年**单独获得**；Lampson 1992、Thacker 2009 是不同年份各自获奖，不得并成一次",
+        "术语红线：他所说的面向对象核心是消息传递与晚绑定，不是类与继承。两种定义都在流通，须并陈标注出处，不得互相覆盖",
+        "适用性红线：他的方案**故意越过当前可行性边界**以逼出新形态，不是可直接执行的工程方案。不得据此排工期；必须主动提示落地折减由谁完成、代价是什么",
+        "不代 Dan Ingalls 或任何合作者陈述其想法与动机",
+        "只在编程语言与范式、人机界面概念设计、个人计算构想、学习与教育计算范围内给判断；投资、医疗、法律、政治转交责任专家",
+        "他仍在活跃；关于其当前具体观点的断言须回到其原始演讲或论文核对，不得以模型推断代替"
+      ],
+      "base_score": 0.2472,
+      "marginal_score": 0.0934,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1359,
+          "packet_similarity": 0.2166,
+          "domain_match": 0.25,
+          "scenario_match": 0.0345,
+          "capability_match": 0.0178,
+          "user_value_match": 0.0521,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-24",
+      "role_type": "persona-solver",
+      "subject_uid": "person-8da4cba5393aa7e2",
+      "subject_slug": "h-rodgin-cohen",
+      "canonical_name": "H. Rodgin Cohen",
+      "registration_category": "政治法律师",
+      "identity_family_id": "political-legal",
+      "team_card": "政治法律师/h-rodgin-cohen/team-card.json",
+      "artifact": "政治法律师/h-rodgin-cohen/versions/0.0.0.1/h-rodgin-cohen-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-23",
+      "key_capabilities": [
+        "银行监管、控制权与重大交易门槛结构化",
+        "系统性风险、流动性、信心传染与失败处置分析",
+        "法定权限、程序触发、损失承担与多路径方案设计",
+        "公共-私营多方协调、监管对话和高压沟通准备",
+        "董事会网络安全、治理与危机演练框架"
+      ],
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "银行监管与重大金融机构交易",
+        "系统性危机与失败处置",
+        "董事会治理与监管沟通"
+      ],
+      "hard_boundaries": [
+        "不得声称本人授权、背书、签名、实时意见或已阅读用户材料。",
+        "当前法律、监管政策、审批、交易状态和机构权限必须重新核验；本模型不替代律师。",
+        "不得把银行交易经验外推为证券选择、组合管理或收益预测能力。",
+        "必须披露大型金融机构与第一方来源偏差，并单列消费者、社区、竞争和道德风险。"
+      ],
+      "base_score": 0.2317,
+      "marginal_score": 0.0929,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.0804,
+          "packet_similarity": 0.2394,
+          "domain_match": 0.25,
+          "scenario_match": 0.0,
+          "capability_match": 0.0189,
+          "user_value_match": 0.0189,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-25",
+      "role_type": "persona-solver",
+      "subject_uid": "person-a4255a3abc58efed",
+      "subject_slug": "shigeo-shingo",
+      "canonical_name": "新乡重夫 / Shigeo Shingo",
+      "registration_category": "建造采购师",
+      "identity_family_id": "construction-procurement",
+      "team_card": "建造采购师/shigeo-shingo/team-card.json",
+      "artifact": "建造采购师/shigeo-shingo/versions/0.0.0.1/shigeo-shingo-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 1990,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "流程—作业网络分析",
+        "SMED快速切换",
+        "源流检验与poka-yoke",
+        "无库存/流动问题诊断",
+        "ST科学思维与创意改善",
+        "P课程式实践教学"
+      ],
+      "application_scenarios": [
+        "制造与服务流程诊断",
+        "换模、部署、交接和准备时间压缩",
+        "质量源头控制与防错设计",
+        "精益/工业工程课程和现场训练",
+        "改善项目评审与复盘",
+        "跨域流程方法的受控迁移"
+      ],
+      "hard_boundaries": [
+        "不是新乡重夫本人或授权代理",
+        "不得称其为TPS单一发明者",
+        "不伪造名言、签名、背书、私密记忆或当前意见",
+        "不把制造方法无验证地迁移为医疗、法律、投资或政治专家意见",
+        "当代Shingo Model须标为身后制度化解释",
+        "高风险决策必须由当前责任专业人士独立核验"
+      ],
+      "base_score": 0.2437,
+      "marginal_score": 0.0841,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1445,
+          "packet_similarity": 0.2699,
+          "domain_match": 0.25,
+          "scenario_match": 0.0402,
+          "capability_match": 0.0,
+          "user_value_match": 0.0576,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.55
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "team-orchestrator",
+      "role_type": "control",
+      "purpose": "维护目标、依赖、权限、工作包、阶段门和失败返回路径。",
+      "isolated_from": [
+        "decision-judge"
+      ]
+    },
+    {
+      "role_id": "hypothesis-framer",
+      "role_type": "control",
+      "purpose": "在求解前列出关键假设、可证伪预测、信息缺口和改判条件。",
+      "isolated_from": [
+        "persona-solver-*"
+      ]
+    },
+    {
+      "role_id": "counterevidence-adversary",
+      "role_type": "control",
+      "purpose": "寻找反证、冲突来源、失败前提、相关性错误和替代解释。",
+      "isolated_from": [
+        "persona-solver-*",
+        "independent-reviewer"
+      ]
+    },
+    {
+      "role_id": "independent-reviewer",
+      "role_type": "control",
+      "purpose": "只读取密封候选产物和证据摘要，检查完整性、可执行性和事实风险。",
+      "isolated_from": [
+        "persona-solver-*",
+        "counterevidence-adversary"
+      ]
+    },
+    {
+      "role_id": "decision-judge",
+      "role_type": "control",
+      "purpose": "按预先冻结的判据裁决，不以多数票或折中替代证据。",
+      "isolated_from": [
+        "persona-solver-*",
+        "team-orchestrator"
+      ]
+    },
+    {
+      "role_id": "synthesis-lead",
+      "role_type": "control",
+      "purpose": "将裁决后的结论编译为单一、连贯、可直接使用的最终交付物。",
+      "isolated_from": [
+        "decision-judge"
+      ]
+    }
+  ],
+  "control_plane": [
+    {
+      "role_id": "team-orchestrator",
+      "role_type": "control",
+      "purpose": "维护目标、依赖、权限、工作包、阶段门和失败返回路径。",
+      "isolated_from": [
+        "decision-judge"
+      ]
+    },
+    {
+      "role_id": "hypothesis-framer",
+      "role_type": "control",
+      "purpose": "在求解前列出关键假设、可证伪预测、信息缺口和改判条件。",
+      "isolated_from": [
+        "persona-solver-*"
+      ]
+    },
+    {
+      "role_id": "counterevidence-adversary",
+      "role_type": "control",
+      "purpose": "寻找反证、冲突来源、失败前提、相关性错误和替代解释。",
+      "isolated_from": [
+        "persona-solver-*",
+        "independent-reviewer"
+      ]
+    },
+    {
+      "role_id": "independent-reviewer",
+      "role_type": "control",
+      "purpose": "只读取密封候选产物和证据摘要，检查完整性、可执行性和事实风险。",
+      "isolated_from": [
+        "persona-solver-*",
+        "counterevidence-adversary"
+      ]
+    },
+    {
+      "role_id": "decision-judge",
+      "role_type": "control",
+      "purpose": "按预先冻结的判据裁决，不以多数票或折中替代证据。",
+      "isolated_from": [
+        "persona-solver-*",
+        "team-orchestrator"
+      ]
+    },
+    {
+      "role_id": "synthesis-lead",
+      "role_type": "control",
+      "purpose": "将裁决后的结论编译为单一、连贯、可直接使用的最终交付物。",
+      "isolated_from": [
+        "decision-judge"
+      ]
+    }
+  ],
+  "task_graph": {
+    "schema_version": "persona-team.task-graph.v2",
+    "task": "全网批量并行研究软件 AI、投资、财务、法律、创业、运营、营销、设计、材料、工程、建造、采购、教育、农业和研究工具，将至少四十个独立分片合并为 benchmark 与交付任务包。",
+    "profile": {
+      "complexity": 1.0,
+      "risk": 0.65,
+      "currentness": 0.0,
+      "parallelizability": 0.665,
+      "coupling": 0.12,
+      "domains": [
+        "engineering-industry",
+        "finance-investment",
+        "operations-product",
+        "research-education",
+        "software-ai",
+        "agriculture",
+        "creative-design",
+        "legal-policy"
+      ],
+      "token_count_proxy": 48
+    },
+    "mode": "swarm",
+    "persona_expert_target": 25,
+    "mode_reasons": [
+      "explicit owner/runtime override"
+    ],
+    "persona_count_contract": {
+      "single_expert": "exactly 1 persona expert",
+      "small_team": "5-15 persona experts",
+      "deep_team": "10-30 persona experts",
+      "swarm": "25+ persona experts",
+      "controls_excluded_from_persona_count": true,
+      "solo_allowed": false
+    },
+    "control_plane": [
+      {
+        "role_id": "team-orchestrator",
+        "role_type": "control",
+        "purpose": "维护目标、依赖、权限、工作包、阶段门和失败返回路径。",
+        "isolated_from": [
+          "decision-judge"
+        ]
+      },
+      {
+        "role_id": "hypothesis-framer",
+        "role_type": "control",
+        "purpose": "在求解前列出关键假设、可证伪预测、信息缺口和改判条件。",
+        "isolated_from": [
+          "persona-solver-*"
+        ]
+      },
+      {
+        "role_id": "counterevidence-adversary",
+        "role_type": "control",
+        "purpose": "寻找反证、冲突来源、失败前提、相关性错误和替代解释。",
+        "isolated_from": [
+          "persona-solver-*",
+          "independent-reviewer"
+        ]
+      },
+      {
+        "role_id": "independent-reviewer",
+        "role_type": "control",
+        "purpose": "只读取密封候选产物和证据摘要，检查完整性、可执行性和事实风险。",
+        "isolated_from": [
+          "persona-solver-*",
+          "counterevidence-adversary"
+        ]
+      },
+      {
+        "role_id": "decision-judge",
+        "role_type": "control",
+        "purpose": "按预先冻结的判据裁决，不以多数票或折中替代证据。",
+        "isolated_from": [
+          "persona-solver-*",
+          "team-orchestrator"
+        ]
+      },
+      {
+        "role_id": "synthesis-lead",
+        "role_type": "control",
+        "purpose": "将裁决后的结论编译为单一、连贯、可直接使用的最终交付物。",
+        "isolated_from": [
+          "decision-judge"
+        ]
+      }
+    ],
+    "work_packets": [
+      {
+        "packet_id": "WP-001",
+        "kind": "problem-framing",
+        "objective": "把用户目标编译为交付物、约束、成功条件和停止条件。",
+        "domains": [
+          "engineering-industry",
+          "finance-investment",
+          "operations-product",
+          "research-education",
+          "software-ai",
+          "agriculture",
+          "creative-design",
+          "legal-policy"
+        ],
+        "dependencies": [],
+        "parallel_group": null,
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-002",
+        "kind": "evidence-map",
+        "objective": "建立事实、来源、未知、当前性和证据缺口地图。",
+        "domains": [
+          "engineering-industry",
+          "finance-investment",
+          "operations-product",
+          "research-education",
+          "software-ai",
+          "agriculture",
+          "creative-design",
+          "legal-policy"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": null,
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-003",
+        "kind": "solution-analysis",
+        "objective": "在人物能力与边界内形成可执行解决方案。",
+        "domains": [
+          "engineering-industry",
+          "finance-investment",
+          "operations-product",
+          "research-education",
+          "software-ai",
+          "agriculture",
+          "creative-design",
+          "legal-policy"
+        ],
+        "dependencies": [
+          "WP-001",
+          "WP-002"
+        ],
+        "parallel_group": null,
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-004",
+        "kind": "artifact-plan",
+        "objective": "把解决方案转成用户所需的最终制品或行动包。",
+        "domains": [
+          "engineering-industry",
+          "finance-investment",
+          "operations-product",
+          "research-education",
+          "software-ai",
+          "agriculture",
+          "creative-design",
+          "legal-policy"
+        ],
+        "dependencies": [
+          "WP-003"
+        ],
+        "parallel_group": null,
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-005",
+        "kind": "independent-shard",
+        "objective": "独立处理第 1 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "software-ai"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-006",
+        "kind": "independent-shard",
+        "objective": "独立处理第 2 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "agriculture"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-007",
+        "kind": "independent-shard",
+        "objective": "独立处理第 3 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "creative-design"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-008",
+        "kind": "independent-shard",
+        "objective": "独立处理第 4 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "legal-policy"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-009",
+        "kind": "independent-shard",
+        "objective": "独立处理第 5 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "engineering-industry"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-010",
+        "kind": "independent-shard",
+        "objective": "独立处理第 6 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "finance-investment"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-011",
+        "kind": "independent-shard",
+        "objective": "独立处理第 7 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "operations-product"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-012",
+        "kind": "independent-shard",
+        "objective": "独立处理第 8 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "research-education"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-013",
+        "kind": "independent-shard",
+        "objective": "独立处理第 9 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "software-ai"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-014",
+        "kind": "independent-shard",
+        "objective": "独立处理第 10 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "agriculture"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-015",
+        "kind": "independent-shard",
+        "objective": "独立处理第 11 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "creative-design"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-016",
+        "kind": "independent-shard",
+        "objective": "独立处理第 12 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "legal-policy"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-017",
+        "kind": "independent-shard",
+        "objective": "独立处理第 13 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "engineering-industry"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-018",
+        "kind": "independent-shard",
+        "objective": "独立处理第 14 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "finance-investment"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-019",
+        "kind": "independent-shard",
+        "objective": "独立处理第 15 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "operations-product"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-020",
+        "kind": "independent-shard",
+        "objective": "独立处理第 16 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "research-education"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-021",
+        "kind": "independent-shard",
+        "objective": "独立处理第 17 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "software-ai"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-022",
+        "kind": "independent-shard",
+        "objective": "独立处理第 18 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "agriculture"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-023",
+        "kind": "independent-shard",
+        "objective": "独立处理第 19 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "creative-design"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-024",
+        "kind": "independent-shard",
+        "objective": "独立处理第 20 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "legal-policy"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-025",
+        "kind": "independent-shard",
+        "objective": "独立处理第 21 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "engineering-industry"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      }
+    ],
+    "control_stages": [
+      {
+        "stage": "G0",
+        "role": "hypothesis-framer",
+        "after": [
+          "WP-001"
+        ],
+        "gate": "assumptions and falsifiers frozen"
+      },
+      {
+        "stage": "G1",
+        "role": "counterevidence-adversary",
+        "after": [
+          "WP-001",
+          "WP-002",
+          "WP-003",
+          "WP-004",
+          "WP-005",
+          "WP-006",
+          "WP-007",
+          "WP-008",
+          "WP-009",
+          "WP-010",
+          "WP-011",
+          "WP-012",
+          "WP-013",
+          "WP-014",
+          "WP-015",
+          "WP-016",
+          "WP-017",
+          "WP-018",
+          "WP-019",
+          "WP-020",
+          "WP-021",
+          "WP-022",
+          "WP-023",
+          "WP-024",
+          "WP-025"
+        ],
+        "gate": "counterevidence attached"
+      },
+      {
+        "stage": "G2",
+        "role": "independent-reviewer",
+        "after": [
+          "G1"
+        ],
+        "gate": "review findings resolved or surfaced"
+      },
+      {
+        "stage": "G3",
+        "role": "decision-judge",
+        "after": [
+          "G2"
+        ],
+        "gate": "one adjudicated decision with change triggers"
+      },
+      {
+        "stage": "G4",
+        "role": "synthesis-lead",
+        "after": [
+          "G3"
+        ],
+        "gate": "single coherent delivery produced"
+      }
+    ],
+    "merge_contract": {
+      "unit": "structured artifact, not free-form opinion",
+      "conflict_rule": "compare assumptions, evidence, predictions, failure conditions and applicability; no majority vote",
+      "final_owner": "synthesis-lead after decision-judge"
+    }
+  },
+  "packet_assignments": [
+    {
+      "packet_id": "WP-001",
+      "owner_subject_slug": "john-carmack",
+      "owner_name": "John Carmack（约翰·卡马克）",
+      "compatibility": 0.2571,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-002",
+      "owner_subject_slug": "george-antaki",
+      "owner_name": "George Antaki",
+      "compatibility": 0.3546,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-003",
+      "owner_subject_slug": "john-c-lippold",
+      "owner_name": "John C. Lippold",
+      "compatibility": 0.347,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-004",
+      "owner_subject_slug": "rafael-sacks",
+      "owner_name": "Rafael Sacks",
+      "compatibility": 0.1452,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-005",
+      "owner_subject_slug": "anders-hejlsberg",
+      "owner_name": "Anders Hejlsberg",
+      "compatibility": 0.1868,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-006",
+      "owner_subject_slug": "john-maeda",
+      "owner_name": "John Maeda",
+      "compatibility": 0.177,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-007",
+      "owner_subject_slug": "shigeo-shingo",
+      "owner_name": "新乡重夫 / Shigeo Shingo",
+      "compatibility": 0.1602,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-008",
+      "owner_subject_slug": "dan-gelbart",
+      "owner_name": "Dan Gelbart",
+      "compatibility": 0.158,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-009",
+      "owner_subject_slug": "joel-salatin",
+      "owner_name": "Joel Salatin",
+      "compatibility": 0.1476,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-010",
+      "owner_subject_slug": "michael-mauboussin",
+      "owner_name": "Michael J. Mauboussin",
+      "compatibility": 0.1295,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-011",
+      "owner_subject_slug": "philip-crosby",
+      "owner_name": "Philip Crosby",
+      "compatibility": 0.1291,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-012",
+      "owner_subject_slug": "h-rodgin-cohen",
+      "owner_name": "H. Rodgin Cohen",
+      "compatibility": 0.1262,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-013",
+      "owner_subject_slug": "lou-gerstner",
+      "owner_name": "路易斯·郭士纳 / Louis V. Gerstner Jr.",
+      "compatibility": 0.1257,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-014",
+      "owner_subject_slug": "ray-dalio",
+      "owner_name": "Ray Dalio",
+      "compatibility": 0.1201,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-015",
+      "owner_subject_slug": "seth-godin",
+      "owner_name": "Seth Godin",
+      "compatibility": 0.1084,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-016",
+      "owner_subject_slug": "andrej-karpathy",
+      "owner_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "compatibility": 0.1052,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-017",
+      "owner_subject_slug": "seth-klarman",
+      "owner_name": "Seth Klarman",
+      "compatibility": 0.1299,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-018",
+      "owner_subject_slug": "donald-g-reinertsen",
+      "owner_name": "Donald G. Reinertsen",
+      "compatibility": 0.1008,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-019",
+      "owner_subject_slug": "alan-kay",
+      "owner_name": "Alan Kay",
+      "compatibility": 0.0974,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-020",
+      "owner_subject_slug": "scott-a-barshay",
+      "owner_name": "Scott A. Barshay",
+      "compatibility": 0.0959,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-021",
+      "owner_subject_slug": "theodore-v-wells-jr",
+      "owner_name": "Theodore V. Wells Jr.",
+      "compatibility": 0.0954,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-022",
+      "owner_subject_slug": "ben-horowitz",
+      "owner_name": "Ben Horowitz",
+      "compatibility": 0.0895,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-023",
+      "owner_subject_slug": "walter-a-shewhart",
+      "owner_name": "Walter A. Shewhart",
+      "compatibility": 0.0867,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-024",
+      "owner_subject_slug": "charles-eastman",
+      "owner_name": "Charles Eastman",
+      "compatibility": 0.0575,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-025",
+      "owner_subject_slug": "nancy-leveson",
+      "owner_name": "Nancy Leveson",
+      "compatibility": 0.0547,
+      "capacity_after_assignment": 1
+    }
+  ],
+  "excluded_candidates": [],
+  "routing_observability": {
+    "eligible_candidates": 102,
+    "excluded_candidates": 0,
+    "registry_products": 102,
+    "telemetry_eligible_for_c": false,
+    "target_gates": {
+      "overall_delta": 95,
+      "ux": 95,
+      "moe": 95,
+      "routing": 95,
+      "functionality": 95,
+      "quality": 95,
+      "minimum_any_dimension": 75
+    }
+  },
+  "separation_protocol": [
+    "hypothesis-framer freezes assumptions before persona solutions",
+    "persona experts receive bounded work packets and cannot review their own work",
+    "counterevidence-adversary sees sealed candidate artifacts, not hidden reasoning",
+    "independent-reviewer is isolated from generators and adversary",
+    "decision-judge uses a predeclared rubric and cannot edit candidate evidence",
+    "synthesis-lead writes only after the judge record is frozen"
+  ],
+  "limitations": [
+    "C is used only when real outcome telemetry satisfies the calibration contract; otherwise B is explicit.",
+    "Routing score is a selection signal, not proof that a persona will improve the final task result."
+  ]
+}

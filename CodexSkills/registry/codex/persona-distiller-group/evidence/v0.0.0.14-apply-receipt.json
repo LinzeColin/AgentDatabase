@@ -1,0 +1,36 @@
+{
+  "taskpack_version": "V0.0.0.1",
+  "source_group_before": "v0.0.0.13",
+  "source_group_after": "v0.0.0.14",
+  "producer_version_unchanged": "v0.0.0.154",
+  "copied_files": [
+    "SKILL.md",
+    "VERSION",
+    "references/market-leader-acceptance.md",
+    "references/moe-routing-contract.md",
+    "references/persona-producer-consumer-contract.md",
+    "references/team-delta-scorecard.md",
+    "references/team-output-contract.md",
+    "references/team-size-control-plane.md",
+    "references/user-experience-contract.md",
+    "scripts/audit_persona_fleet_for_team.py",
+    "scripts/build_execution_contract.py",
+    "scripts/build_team_delta_card.py",
+    "scripts/build_team_dossier.py",
+    "scripts/compile_task_graph.py",
+    "scripts/record_team_outcome.py",
+    "scripts/route_team.py",
+    "scripts/route_team_moe.py",
+    "scripts/run_team_pipeline.py",
+    "scripts/score_team_delta.py",
+    "scripts/team_runtime_common.py",
+    "tests/run_functional_acceptance.py",
+    "tests/test_market_leader_candidate.py"
+  ],
+  "version_binding": {
+    "VERSION": "v0.0.0.14",
+    "manifest.version": "v0.0.0.14",
+    "team-index.generator_version": "v0.0.0.14"
+  },
+  "next_action": "Run codex-last-mile/run_repo_acceptance.py before commit."
+}

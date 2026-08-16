@@ -1,0 +1,766 @@
+{
+  "schema_version": "persona-team.route-plan.v2",
+  "status": "ready",
+  "task_summary": "使用一位证据驱动的软件 AI 专家分析一个明确的 Agent 架构问题并交付可执行结论。",
+  "strategy": "B",
+  "strategy_fallback_reason": null,
+  "requested_mode": "single_expert",
+  "mode": "single_expert",
+  "mode_downgrade": null,
+  "persona_expert_count": 1,
+  "control_role_count": 6,
+  "total_runtime_units": 7,
+  "persona_count_excludes_controls": true,
+  "solo_allowed": false,
+  "members": [
+    {
+      "role_id": "persona-solver-1",
+      "role_type": "persona-solver",
+      "subject_uid": "person-007066b2d64b6110",
+      "subject_slug": "andrej-karpathy",
+      "canonical_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/andrej-karpathy/team-card.json",
+      "artifact": "软件开发师/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释",
+        "用小型可读代码重建自动微分、语言模型和推理/训练流程",
+        "端到端 AI 系统、数据引擎、评测与部署反馈分析",
+        "实现驱动的技术教学与分阶段课程设计",
+        "受约束、可审计的 Agent 实验工作流设计"
+      ],
+      "application_scenarios": [
+        "深度学习与 LLM 原理教学、课程和教材设计",
+        "训练故障诊断、实验设计、消融与评测",
+        "最小可执行模型、开发工具和研究原型",
+        "AI 数据—训练—评测—部署闭环设计",
+        "Agent 工具接口、固定评测和自动实验环",
+        "AI 软件范式与技术战略分析"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "研究截止为 2026-07-24；当前角色、工具和观点必须刷新核验。",
+        "不把技术声誉迁移为医疗、法律、金融、政治或其他高风险专业权威。",
+        "创业经营只到教育产品使命与技术原型；投资资本和政治法律分面不可用。",
+        "最小教学实现不得未经安全、可靠性和治理审查直接用于生产或安全关键系统。"
+      ],
+      "base_score": 0.3957,
+      "marginal_score": 0.3807,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.2023,
+          "packet_similarity": 0.1898,
+          "domain_match": 1.0,
+          "scenario_match": 0.1334,
+          "capability_match": 0.0781,
+          "user_value_match": 0.1346,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    }
+  ],
+  "domain_experts": [
+    {
+      "role_id": "persona-solver-1",
+      "role_type": "persona-solver",
+      "subject_uid": "person-007066b2d64b6110",
+      "subject_slug": "andrej-karpathy",
+      "canonical_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/andrej-karpathy/team-card.json",
+      "artifact": "软件开发师/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释",
+        "用小型可读代码重建自动微分、语言模型和推理/训练流程",
+        "端到端 AI 系统、数据引擎、评测与部署反馈分析",
+        "实现驱动的技术教学与分阶段课程设计",
+        "受约束、可审计的 Agent 实验工作流设计"
+      ],
+      "application_scenarios": [
+        "深度学习与 LLM 原理教学、课程和教材设计",
+        "训练故障诊断、实验设计、消融与评测",
+        "最小可执行模型、开发工具和研究原型",
+        "AI 数据—训练—评测—部署闭环设计",
+        "Agent 工具接口、固定评测和自动实验环",
+        "AI 软件范式与技术战略分析"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "研究截止为 2026-07-24；当前角色、工具和观点必须刷新核验。",
+        "不把技术声誉迁移为医疗、法律、金融、政治或其他高风险专业权威。",
+        "创业经营只到教育产品使命与技术原型；投资资本和政治法律分面不可用。",
+        "最小教学实现不得未经安全、可靠性和治理审查直接用于生产或安全关键系统。"
+      ],
+      "base_score": 0.3957,
+      "marginal_score": 0.3807,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.2023,
+          "packet_similarity": 0.1898,
+          "domain_match": 1.0,
+          "scenario_match": 0.1334,
+          "capability_match": 0.0781,
+          "user_value_match": 0.1346,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    }
+  ],
+  "selected_roles": [
+    {
+      "role_id": "persona-solver-1",
+      "role_type": "persona-solver",
+      "subject_uid": "person-007066b2d64b6110",
+      "subject_slug": "andrej-karpathy",
+      "canonical_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/andrej-karpathy/team-card.json",
+      "artifact": "软件开发师/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释",
+        "用小型可读代码重建自动微分、语言模型和推理/训练流程",
+        "端到端 AI 系统、数据引擎、评测与部署反馈分析",
+        "实现驱动的技术教学与分阶段课程设计",
+        "受约束、可审计的 Agent 实验工作流设计"
+      ],
+      "application_scenarios": [
+        "深度学习与 LLM 原理教学、课程和教材设计",
+        "训练故障诊断、实验设计、消融与评测",
+        "最小可执行模型、开发工具和研究原型",
+        "AI 数据—训练—评测—部署闭环设计",
+        "Agent 工具接口、固定评测和自动实验环",
+        "AI 软件范式与技术战略分析"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "研究截止为 2026-07-24；当前角色、工具和观点必须刷新核验。",
+        "不把技术声誉迁移为医疗、法律、金融、政治或其他高风险专业权威。",
+        "创业经营只到教育产品使命与技术原型；投资资本和政治法律分面不可用。",
+        "最小教学实现不得未经安全、可靠性和治理审查直接用于生产或安全关键系统。"
+      ],
+      "base_score": 0.3957,
+      "marginal_score": 0.3807,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.2023,
+          "packet_similarity": 0.1898,
+          "domain_match": 1.0,
+          "scenario_match": 0.1334,
+          "capability_match": 0.0781,
+          "user_value_match": 0.1346,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "team-orchestrator",
+      "role_type": "control",
+      "purpose": "维护目标、依赖、权限、工作包、阶段门和失败返回路径。",
+      "isolated_from": [
+        "decision-judge"
+      ]
+    },
+    {
+      "role_id": "hypothesis-framer",
+      "role_type": "control",
+      "purpose": "在求解前列出关键假设、可证伪预测、信息缺口和改判条件。",
+      "isolated_from": [
+        "persona-solver-*"
+      ]
+    },
+    {
+      "role_id": "counterevidence-adversary",
+      "role_type": "control",
+      "purpose": "寻找反证、冲突来源、失败前提、相关性错误和替代解释。",
+      "isolated_from": [
+        "persona-solver-*",
+        "independent-reviewer"
+      ]
+    },
+    {
+      "role_id": "independent-reviewer",
+      "role_type": "control",
+      "purpose": "只读取密封候选产物和证据摘要，检查完整性、可执行性和事实风险。",
+      "isolated_from": [
+        "persona-solver-*",
+        "counterevidence-adversary"
+      ]
+    },
+    {
+      "role_id": "decision-judge",
+      "role_type": "control",
+      "purpose": "按预先冻结的判据裁决，不以多数票或折中替代证据。",
+      "isolated_from": [
+        "persona-solver-*",
+        "team-orchestrator"
+      ]
+    },
+    {
+      "role_id": "synthesis-lead",
+      "role_type": "control",
+      "purpose": "将裁决后的结论编译为单一、连贯、可直接使用的最终交付物。",
+      "isolated_from": [
+        "decision-judge"
+      ]
+    }
+  ],
+  "control_plane": [
+    {
+      "role_id": "team-orchestrator",
+      "role_type": "control",
+      "purpose": "维护目标、依赖、权限、工作包、阶段门和失败返回路径。",
+      "isolated_from": [
+        "decision-judge"
+      ]
+    },
+    {
+      "role_id": "hypothesis-framer",
+      "role_type": "control",
+      "purpose": "在求解前列出关键假设、可证伪预测、信息缺口和改判条件。",
+      "isolated_from": [
+        "persona-solver-*"
+      ]
+    },
+    {
+      "role_id": "counterevidence-adversary",
+      "role_type": "control",
+      "purpose": "寻找反证、冲突来源、失败前提、相关性错误和替代解释。",
+      "isolated_from": [
+        "persona-solver-*",
+        "independent-reviewer"
+      ]
+    },
+    {
+      "role_id": "independent-reviewer",
+      "role_type": "control",
+      "purpose": "只读取密封候选产物和证据摘要，检查完整性、可执行性和事实风险。",
+      "isolated_from": [
+        "persona-solver-*",
+        "counterevidence-adversary"
+      ]
+    },
+    {
+      "role_id": "decision-judge",
+      "role_type": "control",
+      "purpose": "按预先冻结的判据裁决，不以多数票或折中替代证据。",
+      "isolated_from": [
+        "persona-solver-*",
+        "team-orchestrator"
+      ]
+    },
+    {
+      "role_id": "synthesis-lead",
+      "role_type": "control",
+      "purpose": "将裁决后的结论编译为单一、连贯、可直接使用的最终交付物。",
+      "isolated_from": [
+        "decision-judge"
+      ]
+    }
+  ],
+  "task_graph": {
+    "schema_version": "persona-team.task-graph.v2",
+    "task": "使用一位证据驱动的软件 AI 专家分析一个明确的 Agent 架构问题并交付可执行结论。",
+    "profile": {
+      "complexity": 0.4772,
+      "risk": 0.08,
+      "currentness": 0.0,
+      "parallelizability": 0.08,
+      "coupling": 0.12,
+      "domains": [
+        "software-ai",
+        "research-education"
+      ],
+      "token_count_proxy": 33
+    },
+    "mode": "single_expert",
+    "persona_expert_target": 1,
+    "mode_reasons": [
+      "explicit owner/runtime override"
+    ],
+    "persona_count_contract": {
+      "single_expert": "exactly 1 persona expert",
+      "small_team": "5-15 persona experts",
+      "deep_team": "10-30 persona experts",
+      "swarm": "25+ persona experts",
+      "controls_excluded_from_persona_count": true,
+      "solo_allowed": false
+    },
+    "control_plane": [
+      {
+        "role_id": "team-orchestrator",
+        "role_type": "control",
+        "purpose": "维护目标、依赖、权限、工作包、阶段门和失败返回路径。",
+        "isolated_from": [
+          "decision-judge"
+        ]
+      },
+      {
+        "role_id": "hypothesis-framer",
+        "role_type": "control",
+        "purpose": "在求解前列出关键假设、可证伪预测、信息缺口和改判条件。",
+        "isolated_from": [
+          "persona-solver-*"
+        ]
+      },
+      {
+        "role_id": "counterevidence-adversary",
+        "role_type": "control",
+        "purpose": "寻找反证、冲突来源、失败前提、相关性错误和替代解释。",
+        "isolated_from": [
+          "persona-solver-*",
+          "independent-reviewer"
+        ]
+      },
+      {
+        "role_id": "independent-reviewer",
+        "role_type": "control",
+        "purpose": "只读取密封候选产物和证据摘要，检查完整性、可执行性和事实风险。",
+        "isolated_from": [
+          "persona-solver-*",
+          "counterevidence-adversary"
+        ]
+      },
+      {
+        "role_id": "decision-judge",
+        "role_type": "control",
+        "purpose": "按预先冻结的判据裁决，不以多数票或折中替代证据。",
+        "isolated_from": [
+          "persona-solver-*",
+          "team-orchestrator"
+        ]
+      },
+      {
+        "role_id": "synthesis-lead",
+        "role_type": "control",
+        "purpose": "将裁决后的结论编译为单一、连贯、可直接使用的最终交付物。",
+        "isolated_from": [
+          "decision-judge"
+        ]
+      }
+    ],
+    "work_packets": [
+      {
+        "packet_id": "WP-001",
+        "kind": "problem-framing",
+        "objective": "把用户目标编译为交付物、约束、成功条件和停止条件。",
+        "domains": [
+          "software-ai",
+          "research-education"
+        ],
+        "dependencies": [],
+        "parallel_group": null,
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-002",
+        "kind": "evidence-map",
+        "objective": "建立事实、来源、未知、当前性和证据缺口地图。",
+        "domains": [
+          "software-ai",
+          "research-education"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": null,
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-003",
+        "kind": "solution-analysis",
+        "objective": "在人物能力与边界内形成可执行解决方案。",
+        "domains": [
+          "software-ai",
+          "research-education"
+        ],
+        "dependencies": [
+          "WP-001",
+          "WP-002"
+        ],
+        "parallel_group": null,
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-004",
+        "kind": "artifact-plan",
+        "objective": "把解决方案转成用户所需的最终制品或行动包。",
+        "domains": [
+          "software-ai",
+          "research-education"
+        ],
+        "dependencies": [
+          "WP-003"
+        ],
+        "parallel_group": null,
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      }
+    ],
+    "control_stages": [
+      {
+        "stage": "G0",
+        "role": "hypothesis-framer",
+        "after": [
+          "WP-001"
+        ],
+        "gate": "assumptions and falsifiers frozen"
+      },
+      {
+        "stage": "G1",
+        "role": "counterevidence-adversary",
+        "after": [
+          "WP-001",
+          "WP-002",
+          "WP-003",
+          "WP-004"
+        ],
+        "gate": "counterevidence attached"
+      },
+      {
+        "stage": "G2",
+        "role": "independent-reviewer",
+        "after": [
+          "G1"
+        ],
+        "gate": "review findings resolved or surfaced"
+      },
+      {
+        "stage": "G3",
+        "role": "decision-judge",
+        "after": [
+          "G2"
+        ],
+        "gate": "one adjudicated decision with change triggers"
+      },
+      {
+        "stage": "G4",
+        "role": "synthesis-lead",
+        "after": [
+          "G3"
+        ],
+        "gate": "single coherent delivery produced"
+      }
+    ],
+    "merge_contract": {
+      "unit": "structured artifact, not free-form opinion",
+      "conflict_rule": "compare assumptions, evidence, predictions, failure conditions and applicability; no majority vote",
+      "final_owner": "synthesis-lead after decision-judge"
+    }
+  },
+  "packet_assignments": [
+    {
+      "packet_id": "WP-001",
+      "owner_subject_slug": "andrej-karpathy",
+      "owner_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "compatibility": 0.2551,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-002",
+      "owner_subject_slug": "andrej-karpathy",
+      "owner_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "compatibility": 0.2206,
+      "capacity_after_assignment": 2
+    },
+    {
+      "packet_id": "WP-003",
+      "owner_subject_slug": "andrej-karpathy",
+      "owner_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "compatibility": 0.1293,
+      "capacity_after_assignment": 3
+    },
+    {
+      "packet_id": "WP-004",
+      "owner_subject_slug": "andrej-karpathy",
+      "owner_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "compatibility": 0.0,
+      "capacity_after_assignment": 4
+    }
+  ],
+  "excluded_candidates": [
+    {
+      "subject_slug": "george-washington-carver",
+      "canonical_name": "George Washington Carver",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.0
+    },
+    {
+      "subject_slug": "joel-salatin",
+      "canonical_name": "Joel Salatin",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1746
+    },
+    {
+      "subject_slug": "anne-mulcahy",
+      "canonical_name": "Anne Mulcahy",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.135
+    },
+    {
+      "subject_slug": "ben-horowitz",
+      "canonical_name": "Ben Horowitz",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1843
+    },
+    {
+      "subject_slug": "david-packard",
+      "canonical_name": "David Packard",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1288
+    },
+    {
+      "subject_slug": "reed-hastings",
+      "canonical_name": "Reed Hastings / 里德·哈斯廷斯",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.135
+    },
+    {
+      "subject_slug": "sam-walton",
+      "canonical_name": "Sam Walton",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.123
+    },
+    {
+      "subject_slug": "tim-cook",
+      "canonical_name": "Tim Cook",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.135
+    },
+    {
+      "subject_slug": "seth-godin",
+      "canonical_name": "Seth Godin",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1744
+    },
+    {
+      "subject_slug": "david-t-hulett",
+      "canonical_name": "David T. Hulett",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.135
+    },
+    {
+      "subject_slug": "donald-g-reinertsen",
+      "canonical_name": "Donald G. Reinertsen",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1913
+    },
+    {
+      "subject_slug": "john-k-hollmann",
+      "canonical_name": "John K. Hollmann",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.141
+    },
+    {
+      "subject_slug": "lauri-koskela",
+      "canonical_name": "Lauri Koskela",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.135
+    },
+    {
+      "subject_slug": "paul-teicholz",
+      "canonical_name": "Paul Michael Teicholz",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.123
+    },
+    {
+      "subject_slug": "taiichi-ohno",
+      "canonical_name": "大野耐一 / Taiichi Ohno",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1744
+    },
+    {
+      "subject_slug": "joseph-juran",
+      "canonical_name": "约瑟夫·M·朱兰（Joseph M. Juran）",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.178
+    },
+    {
+      "subject_slug": "carl-icahn",
+      "canonical_name": "Carl Icahn",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1807
+    },
+    {
+      "subject_slug": "charlie-munger",
+      "canonical_name": "Charlie Munger",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.135
+    },
+    {
+      "subject_slug": "edward-o-thorp",
+      "canonical_name": "Edward O. Thorp（爱德华·索普）",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1906
+    },
+    {
+      "subject_slug": "george-soros",
+      "canonical_name": "George Soros",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1617
+    },
+    {
+      "subject_slug": "howard-marks",
+      "canonical_name": "Howard Marks",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1735
+    },
+    {
+      "subject_slug": "joel-greenblatt",
+      "canonical_name": "Joel Greenblatt",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1737
+    },
+    {
+      "subject_slug": "john-bogle",
+      "canonical_name": "John Bogle",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1481
+    },
+    {
+      "subject_slug": "julian-robertson",
+      "canonical_name": "Julian Robertson",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1747
+    },
+    {
+      "subject_slug": "nick-sleep",
+      "canonical_name": "Nick Sleep",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1814
+    },
+    {
+      "subject_slug": "peter-lynch",
+      "canonical_name": "Peter Lynch",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1779
+    },
+    {
+      "subject_slug": "philip-fisher",
+      "canonical_name": "Philip Fisher",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1859
+    },
+    {
+      "subject_slug": "robert-a-kindler",
+      "canonical_name": "Robert A. Kindler",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.135
+    },
+    {
+      "subject_slug": "scott-a-barshay",
+      "canonical_name": "Scott A. Barshay",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1893
+    },
+    {
+      "subject_slug": "nancy-leveson",
+      "canonical_name": "Nancy Leveson",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.135
+    },
+    {
+      "subject_slug": "walter-a-shewhart",
+      "canonical_name": "Walter A. Shewhart",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1927
+    }
+  ],
+  "routing_observability": {
+    "eligible_candidates": 71,
+    "excluded_candidates": 31,
+    "registry_products": 102,
+    "telemetry_eligible_for_c": false,
+    "target_gates": {
+      "overall_delta": 95,
+      "ux": 95,
+      "moe": 95,
+      "routing": 95,
+      "functionality": 95,
+      "quality": 95,
+      "minimum_any_dimension": 75
+    }
+  },
+  "separation_protocol": [
+    "hypothesis-framer freezes assumptions before persona solutions",
+    "persona experts receive bounded work packets and cannot review their own work",
+    "counterevidence-adversary sees sealed candidate artifacts, not hidden reasoning",
+    "independent-reviewer is isolated from generators and adversary",
+    "decision-judge uses a predeclared rubric and cannot edit candidate evidence",
+    "synthesis-lead writes only after the judge record is frozen"
+  ],
+  "limitations": [
+    "C is used only when real outcome telemetry satisfies the calibration contract; otherwise B is explicit.",
+    "Routing score is a selection signal, not proof that a persona will improve the final task result."
+  ]
+}

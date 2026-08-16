@@ -1,0 +1,30 @@
+{
+  "schema_version": "persona-team.functional-acceptance.v1",
+  "status": "PASS",
+  "command": [
+    "/Library/Developer/CommandLineTools/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/Users/linzezhang/Documents/Codex/GithubProject/_scratch/agentdb-persona-team-v14/CodexSkills/registry/codex/persona-distiller-group/tests",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "stdout": "",
+  "stderr": "test_95_and_75_scoring_contract (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\ntest_auto_never_returns_solo (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\ntest_c_requires_real_calibration_and_falls_back_to_b (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\ntest_delta_card_keeps_user_output_concise (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\ntest_four_modes_and_mandatory_controls (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\ntest_outcome_telemetry_can_unlock_c_only_with_evidence (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\ntest_route_dossier_execution_contract_is_connected (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 1.921s\n\nOK\n",
+  "returncode": 0,
+  "scope": [
+    "four owner-frozen modes and seat ranges",
+    "mandatory hypothesis/adversary/review/judge/synthesis controls",
+    "route-to-dossier subject_slug continuity",
+    "real nested runtime payload loading",
+    "C-to-B calibration fallback",
+    "95 target and 75 floor score contract"
+  ],
+  "limitations": [
+    "Synthetic registry fixtures prove candidate mechanics, not production Persona quality.",
+    "Native commercial competitor runs, production blind tasks and external verifier remain separate gates."
+  ]
+}
