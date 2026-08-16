@@ -65,6 +65,7 @@ sha256 前 16 位：`bb554b325f85d037` / `e3340b594a18567e`。
 """
 import argparse
 import collections
+import hashlib
 import json
 import statistics
 import pathlib
@@ -139,6 +140,22 @@ def main():
 
     root = pathlib.Path(a.registry_root).resolve()
     sets = ["development-48", "regression-24"] if a.which == "both" else [a.which]
+
+    # ★★ **先印扫描面：题从哪来、测的是哪个版本。**
+    #   2026-08-17 本场同一个病犯了四次，四次都是「我选了一个扫描面，
+    #   然后把它当成全世界」。规矩：**新判据第一件事是证明它扫对了地方**，
+    #   而扫描面必须印出来给人看，不能只活在我脑子里。
+    #   [[a-gates-scan-set-is-smaller-than-reality]]
+    ver = root / "VERSION"
+    print("扫描面：")
+    print("  被测路由：%s（VERSION %s）"
+          % (root, ver.read_text(encoding="utf-8").strip() if ver.is_file() else "?"))
+    for nm in sets:
+        f = BENCH / (nm + ".jsonl")
+        print("  题库：%s｜%d 行｜sha256 %s"
+              % (f, len(load_tasks(nm)), hashlib.sha256(f.read_bytes()).hexdigest()[:16]))
+    print("  ★ 这两份 jsonl **从 TaskPack 原样复制**，不是我编的；"
+          "oracle（expected_mode／persona_target／mandatory_controls）也是任务包作者写的。")
     for name in sets:
         rows = load_tasks(name)
         pairs = collections.Counter()
