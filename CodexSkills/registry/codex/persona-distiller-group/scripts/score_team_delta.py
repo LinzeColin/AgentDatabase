@@ -27,6 +27,25 @@ def score_result(data: dict[str, Any]) -> dict[str, Any]:
     baseline = data.get("baseline", {})
     paired = data.get("paired", {})
 
+    # ★★ **四个区段一个都没有 ⇒ 拒答，不是给 0 分。**
+    #   SKILL.md 的收尾三行里，`score_team_delta --result result-input.json` 与
+    #   `build_team_delta_card --result team-result.json` **两个参数同名而要的是
+    #   不同文档**（前者要 absolute/candidate/baseline/paired，后者要
+    #   work_completed/member_contributions/…）。宿主 Agent 极易把同一份传给两边。
+    #   2026-08-17 实测：喂错文档时本函数**照样印出一张完整成绩单**，
+    #   `overall_delta = 17.5` —— 那不是分数，是「所有 delta 都缺 ⇒ 都当 0 ⇒
+    #   clamp(50+0)=50」算出来的常数。**空默认值被读成了真读数。**
+    #   [[empty-default-swallows-unknown]]｜[[a-refusal-to-check-prints-one-error]]
+    #   ★ 判据只在**四个全缺**时开火 —— 放宽只放在开脱侧，
+    #     部分填写的合法输入一个都不会被误伤。[[loosen-only-the-exonerating-side]]
+    if not any(isinstance(x, dict) and x for x in (absolute, candidate, baseline, paired)):
+        raise ValueError(
+            "result 文档里 absolute / candidate / baseline / paired 四个区段一个都没有 —— "
+            "这看起来是给 build_team_delta_card 的运行叙述文档，不是判分输入。"
+            "两个脚本的参数都叫 --result 但要的是不同文档："
+            "score_team_delta 要 result-input.json，build_team_delta_card 要 team-result.json。"
+            "**不给 0 分，直接拒答** —— 全缺算出来的 overall_delta 是常数，不是测量。")
+
     absolute_scores = {key: _number(absolute, key) for key in ABSOLUTE_DIMENSIONS}
     benefit_deltas = {key: _number(candidate, key) - _number(baseline, key) for key in BENEFIT_DIMENSIONS}
     # Lower is better for these metrics.

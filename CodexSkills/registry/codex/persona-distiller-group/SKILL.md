@@ -115,7 +115,15 @@ python3 scripts/run_team_pipeline.py \
 - `execution-contract.json`
 - `run-receipt.json`
 
-宿主 Agent 按 execution contract 执行后，写回结果并执行：
+宿主 Agent 按 execution contract 执行后，写回结果并执行。
+
+> **注意：下面两个 `--result` 要的是两份不同的文档。**
+> `result-input.json` 是**判分输入**（`absolute` / `candidate` / `baseline` / `paired`）；
+> `team-result.json` 是**运行叙述**（`work_completed` / `member_contributions` /
+> `decision_changing_disagreements` / `audit_trace` / `next_action` /
+> `remaining_unknowns`）。参数同名而内容不同，别把同一份传给两边 ——
+> 传错时 `score_team_delta` 会 **`status: blocked` 并 rc=2**（不会给你一个 0 分冒充读数）。
+
 
 ```bash
 python3 scripts/score_team_delta.py --result result-input.json --output delta-score.json

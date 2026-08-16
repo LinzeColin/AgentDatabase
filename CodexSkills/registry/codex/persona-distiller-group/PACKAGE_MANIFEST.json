@@ -29,8 +29,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "11bf37a6e021b47af45ddb6663c118a572cde0eb55f0078dc6f84ef84ba0324d",
-      "size_bytes": 8410
+      "sha256": "c06ab652802cb92b80bd4258e1468d9ca045ecaf4e03ce3abf837cb740425612",
+      "size_bytes": 8945
     },
     {
       "path": "VERSION",
@@ -304,8 +304,8 @@
     },
     {
       "path": "scripts/score_team_delta.py",
-      "sha256": "07bfddbebecc5f7785e83dbbd97d3deb7221e22b78088b201aa1a7b4614d5bc5",
-      "size_bytes": 4895
+      "sha256": "9809cf8fb7a162223107f651c9cb956ff6074306ae2d926225aae0ee0728b3d3",
+      "size_bytes": 6506
     },
     {
       "path": "scripts/team_runtime_common.py",
