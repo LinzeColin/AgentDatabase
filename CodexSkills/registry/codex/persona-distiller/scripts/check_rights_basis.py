@@ -110,6 +110,14 @@ BASIS_FIELDS = ("rights_basis", "rights_source", "license_source",
                 "rights_note", "attribution")
 
 
+# 明说「判不了／未确认」的写法。**这些不是声称公有领域。**
+UNDETERMINED = re.compile(r"未定|未确认|待查|判不了|无法(确定|判定|判断)|"
+                          r"undetermined|unconfirmed|cannot\s+(be\s+)?determin", re.I)
+# 肯定性结论词。带保留的真声明（如「public-domain（…未声明底本年份）」）靠它保住。
+AFFIRMATIVE_PD = re.compile(r"public[\s-]?domain|公有领域|已过(版权|保护期)|"
+                            r"进入公(有|共)领域", re.I)
+
+
 def is_pd(value):
     """两种写法都要认：**裸结论**（`public-domain`）与**带依据的断言**（`卒年 1912，终身+70 已过`）。
 
@@ -122,6 +130,16 @@ def is_pd(value):
     s = str(value).strip()
     if s.lower().rstrip(".") in PD_VALUES:
         return True
+    # ★★ **「判不了」不是声称。** 2026-08-17 实测：本函数把
+    #   `未定——无出版年，PD 判不了` 与 `PD 状态未确认` 判成了「声称公有领域」——
+    #   两句都在明说**判不了**。上面那段 docstring 早写着「不许把『不声称公有领域』
+    #   的也认进来」，**规则写对了，代码漏了这一类**。
+    #   [[the-comment-states-the-rule-the-code-narrows-it]]
+    #   ★ 守卫必须窄：`public-domain（原作公元前 1 世纪；本转写页未声明底本年份）`
+    #     是**带保留的真声明**，不许误伤 ⇒ 只有在「有未决词 **且** 没有任何
+    #     肯定性结论词」时才判 False。
+    if UNDETERMINED.search(s) and not AFFIRMATIVE_PD.search(s):
+        return False
     return bool(PD_ASSERTIONS.search(s))
 
 
@@ -175,6 +193,15 @@ def selftest() -> int:
         print(("  ✓ " if cond else "  ✗ ") + label)
         if not cond:
             fails.append(label)
+    # ★ 「判不了」不是声称 —— 2026-08-17 实测本函数把下面两句判成了「声称公有领域」。
+    #   同时钉住**不许误伤**带保留的真声明。
+    for _text, _want in (("未定——无出版年，PD 判不了", False),
+                         ("PD 状态未确认", False),
+                         ("PD 无法判定", False),
+                         ("public-domain（原作公元前 1 世纪；本转写页未声明底本年份）", True),
+                         ("公有领域（卒年未确认，按出版年 1901 判定）", True),
+                         ("public-domain", True)):
+        chk("is_pd(%r) == %s" % (_text[:34], _want), is_pd(_text) is _want)
 
     print("── ★★ 正向：**聚合器依据必须报**（Watson #116 那条真实误判的形状）──")
     agg, nb, ok, npd = audit([{
