@@ -116,6 +116,24 @@ def main() -> int:
     if a.selftest:
         return selftest()
 
+    # ★★ **先花 16 秒问一句「清单是不是陈旧的」，再跑那 108 秒。**
+    #   2026-08-17 我两次栽在同一件事上：动了随包目录里的字节没跑 build_manifest ⇒
+    #   test_skill_contract / test_release_bundle / test_package_install_migrate
+    #   三件同时红，而红法**看起来像三个不相干的回归**，我两次都花时间去逐个诊断。
+    #   而 `check_contract_drift` 早就会一句话说清：
+    #     「[发布清单] **checksums.sha256 与磁盘对不上 1 个文件**：['scripts/xxx.py']」
+    #   ⇒ **不是缺执行者（它一直都在），是我的顺序错了。** 这里替调用方先跑一次。
+    #   ★ 只提示、不拦截：真有回归时仍要让那三件自己红出来。
+    drift = subprocess.run([sys.executable, str(HERE / "check_contract_drift.py")],
+                           capture_output=True, text=True)
+    if "checksums.sha256 与磁盘对不上" in drift.stdout:
+        line = next((l.strip() for l in drift.stdout.splitlines()
+                     if "checksums.sha256 与磁盘对不上" in l), "")
+        print("★★ **先别看下面的红**：发布清单是陈旧的 ——")
+        print("   %s" % line[:150])
+        print("   ⇒ 先跑 `python3 scripts/build_manifest.py`，"
+              "否则验清册那三件会红成「三个不相干的新回归」。\n")
+
     files = discover()
     print("扫描面：%s（**%d 件**）" % (TESTS, len(files)))
     if not files:
