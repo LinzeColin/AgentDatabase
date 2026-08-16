@@ -1286,8 +1286,8 @@
     },
     {
       "path": "scripts/build_manifest.py",
-      "sha256": "72676142e3179c94d4caa59cbe0ff93806163c64c39b9ec4e9ee6bcce717950c",
-      "size_bytes": 4397
+      "sha256": "e0565e4ffa578f5c947b1a44694e3f04ac4f567a660d39729b48587387a21c7a",
+      "size_bytes": 5656
     },
     {
       "path": "scripts/build_release_bundle.py",

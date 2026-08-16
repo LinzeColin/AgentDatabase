@@ -219,8 +219,8 @@
     },
     {
       "path": "scripts/build_manifest.py",
-      "sha256": "c3f7a09c582fd74240bd59a893830f14f9f96203d31b693b0c62f2ee6a1f917d",
-      "size_bytes": 5032
+      "sha256": "08a2ad1b1b801f6854993bad4b1d3a0761925e538c41baf5d9c62f68d32ef2e3",
+      "size_bytes": 6291
     },
     {
       "path": "scripts/build_team_delta_card.py",
