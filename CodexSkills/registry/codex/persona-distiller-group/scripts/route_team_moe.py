@@ -193,6 +193,37 @@ def score_candidate(
     base = sum(weights[key] * values[key] for key in weights)
     score = clamp(base + prior - general_delta_penalty - restriction_penalty)
 
+    # ── Contract: `restricted` means measured-only, and a penalty is not a rule ──
+    # `persona-producer-consumer-contract.md` states:
+    #
+    #     `restricted`：只允许命中已测量切片；不得外推为一般能力。
+    #
+    # Until now the only thing standing between a restricted persona and an
+    # arbitrary task was `restriction_penalty = 0.08` -- a *score* adjustment.
+    # Measured 2026-08-17: George Washington Carver (`admission: restricted`,
+    # `routing_scope: "measured-only"` in the admission ledger) was selected onto
+    # a **poetry-anthology typography** team with `domain_match = 0.0000`. Both
+    # penalties fired (0.08 + 0.16) and he was seated anyway. **A penalty ranks;
+    # it does not forbid.**
+    #
+    # The admission ledger already records the answer in a structured field --
+    # `routing_scope: "measured-only"` -- and nothing in this router ever read
+    # it. So the rule was written down, carried in the data, and unenforced.
+    #
+    # Enforcement here mirrors how `blocked` is already handled a few lines
+    # above: an exclusion with a stated reason, not a weight change. "Hits a
+    # measured slice" is expressed with the quantity already computed for this
+    # candidate -- `domain_match > 0` means the task's inferred domains
+    # intersect the family this persona was measured in.
+    #
+    # This changes **who is eligible**, not **how anyone is scored**: no weight,
+    # threshold, headcount or mode is touched.
+    if gate.get("admission") == "restricted" and gate.get("routing_scope") == "measured-only":
+        if domain_match <= 0.0:
+            return score, {"values": values, "prior": prior_meta}, (
+                "restricted persona: task is outside its measured scope "
+                "(routing_scope=measured-only, domain_match=0)")
+
     # Expert Choice: the expert declines tasks outside its demonstrated competence.
     accept_threshold = 0.13 if strategy == "A" else 0.17
     if max(task_similarity, packet_similarity, capabilities, scenarios, domain_match) < accept_threshold:

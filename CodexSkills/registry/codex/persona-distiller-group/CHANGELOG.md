@@ -1,5 +1,52 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.22 — 2026-08-17
+
+### `restricted` 终于是一条规则，而不是一次扣分
+
+`persona-producer-consumer-contract.md` 定了三档准入：
+
+    `eligible`  ：可在声明能力和边界内使用。
+    `restricted`：**只允许命中已测量切片；不得外推为一般能力。**
+    `blocked`   ：……不得路由。
+
+`blocked` 一直是硬排除。**`restricted` 从来没有被执行过** ——
+挡在一个 restricted 人物和任意任务之间的，只有
+`restriction_penalty = 0.08` 这一次**扣分**。
+
+**实测（真实名册，2026-08-17）**：George Washington Carver
+（`admission: restricted`，`routing_scope: "measured-only"`）
+被选进了**诗集排版**的 20 人队伍，他这题的 `domain_match = 0.0000`。
+两个扣分都发了火（0.08 准入 + 0.16 散文标记），**他照样入座**。
+**扣分只排名次，不设禁令。**
+
+更要紧的是：**准入账本里早就用结构化字段记着答案** ——
+`routing_scope: "measured-only"` —— 而路由**从头到尾没有读过它**。
+规则写在合同里、数据里带着、**没有任何地方在执行**。
+
+**修法**：与上面几行 `blocked` 的处理方式完全一致 —— 给出**排除**并写明理由，
+不动任何权重。「命中已测量切片」用这个候选**本来就已经算出来的量**表达：
+`domain_match > 0` 意味着任务推断出的领域与该人物被测量的族有交集。
+
+    if gate.admission == "restricted" and gate.routing_scope == "measured-only":
+        if domain_match <= 0: 排除，理由 = "task is outside its measured scope"
+
+**改的是「谁有资格」，不是「谁得几分」**：权重、阈值、人数、模式一律未动。
+
+### 收益：基准上实测又是 **0**
+
+A/B（同一把尺子）：24 题路由集与 72 题 oracle 集**逐项相同**。
+原因是全库 **102 人里只有 1 位** `restricted`，而基准题的队伍里他要么没被选中、
+要么 `domain_match>0`。**证据是探针，不是基准** ——
+规则的价值在于对**今后任何一位** restricted 人物都成立。
+
+### `tests/test_restricted_is_measured_only.py`
+
+两个方向都钉：越界任务上**必须被排除且写明理由**（沉默不算决定）；
+本行任务上**必须仍可入选**（规则不许变成永久封禁）。
+★ 名册里若一个 `restricted` 都没有，本测试**报 NO-SUBJECT 并失败** ——
+**空扫描面不算通过**。反对照已实跑：撤掉约束当场变红。
+
 ## v0.0.0.21 — 2026-08-17
 
 ### 「已测量的边界」补一行：**名册里的人物本身，98% 没测过**
