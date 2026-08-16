@@ -105,6 +105,22 @@ def main() -> int:
             if not any("cannot review their own" in x for x in sep):
                 bad.append("合同里没有「生成者不得复审自己」这一条：%r" % sep[:2])
 
+            # ★ 校准状态必须到达合同顶层。manifest 把架构写作 C-calibrated-MoE，
+            #   而 2026-08-17 实测结果遥测 **0 条** —— 路由内部对此诚实
+            #   （samples<5 → prior 0.0 并附 reason），但那句话只在每个候选的
+            #   meta 里，**没有一处到达消费者读的合同**。这里钉住它。
+            cal = contract.get("calibration_status")
+            if not isinstance(cal, dict):
+                bad.append("execution-contract 缺 calibration_status")
+            else:
+                if "calibrated" not in cal:
+                    bad.append("calibration_status 没说 calibrated 与否：%r" % cal)
+                elif cal.get("calibrated") is False and not cal.get("note"):
+                    bad.append("未校准却没有写明这意味着什么（note 为空）")
+                if cal.get("calibrated") is False and cal.get(
+                        "outcome_samples_behind_those_priors") != 0:
+                    bad.append("说未校准，样本数却非 0：%r" % cal)
+
             # A task the roster covers must not claim it was picked blind.
             if contract.get("selection_caveats"):
                 bad.append("a task WITH a domain signal must have no selection caveat, got %r"

@@ -214,8 +214,8 @@
     },
     {
       "path": "scripts/build_execution_contract.py",
-      "sha256": "16e541ea7007eb1fc3503c643fd331471ecc87ba08e7b1ec5b8ec2a39b8e2219",
-      "size_bytes": 11447
+      "sha256": "2dcf53f785a51e86d074bc71b741b92c3e53bfa66850d023396d8cc19a102124",
+      "size_bytes": 13628
     },
     {
       "path": "scripts/build_manifest.py",
@@ -334,8 +334,8 @@
     },
     {
       "path": "tests/test_disclosures_reach_the_contract.py",
-      "sha256": "23b3e4246905d30b00dacde7e9275dcbd0e76a0ca52e22d6437fc388259a80b6",
-      "size_bytes": 6378
+      "sha256": "a2645e7291643205b2352bca9764e666ea4fba98132e333d73a58c0e677c9b35",
+      "size_bytes": 7460
     },
     {
       "path": "tests/test_domain_classifier_language.py",

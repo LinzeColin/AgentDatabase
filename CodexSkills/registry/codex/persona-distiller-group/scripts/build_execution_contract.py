@@ -32,6 +32,48 @@ def _selection_caveats(route: dict[str, Any]) -> list[str]:
     return out
 
 
+def _calibration_status(route: dict[str, Any]) -> dict[str, Any]:
+    """manifest 把架构写作 **C-calibrated-MoE**，而「calibrated」有没有依据要现算。
+
+    2026-08-17 实测：`telemetry/team-outcomes.json` **不存在，结果记录 0 条**。
+    管道是齐的（record_team_outcome 写、route_team_moe 当先验读），
+    **但从没有过一个数据点** —— 于是 C 策略的校准先验对每一个候选恒为 0，
+    排序完全由静态特征驱动，不含任何历史表现信息。
+
+    路由内部对此是诚实的（`samples<5 → 0.0` 并附 reason），
+    **但这话只留在每个候选的 meta 里，没有一处到达消费者读的合同顶层**。
+    ⇒ 本函数把它现算成一行，放到 execution-contract.json 顶层。
+    [[gates-cover-json-not-the-prose-users-read]]｜[[empty-default-swallows-unknown]]
+
+    ★ 数字一律从 route 现推，不写死 —— 哪天真有了遥测，这里会自己变。
+    """
+    seated = route.get("selected") or route.get("members") or []
+    priors, samples = [], []
+    for m in seated:
+        if not isinstance(m, dict):
+            continue
+        if "telemetry_prior" in m:
+            priors.append(float(m.get("telemetry_prior") or 0.0))
+        tel = m.get("telemetry") or {}
+        if isinstance(tel, dict) and "samples" in tel:
+            samples.append(int(tel.get("samples") or 0))
+    nonzero = [p for p in priors if abs(p) > 1e-9]
+    total_samples = sum(samples)
+    out = {
+        "seated_with_prior_field": len(priors),
+        "outcome_samples_behind_those_priors": total_samples,
+        "seated_whose_prior_is_nonzero": len(nonzero),
+        "calibrated": bool(nonzero),
+    }
+    if not nonzero:
+        out["note"] = (
+            "架构名为 C-calibrated-MoE，但本次排序**未经校准**："
+            "落座候选的结果样本合计 %d，校准先验全部为 0，"
+            "名次完全由静态特征决定，不含任何历史表现信息。"
+            "任何「路由会自我优化」的说法对本次结果**不成立**。" % total_samples)
+    return out
+
+
 def _team_composition(route: dict[str, Any]) -> dict[str, Any]:
     """Family concentration of the seated personas.
 
@@ -174,6 +216,7 @@ def build_contract(route: dict[str, Any], dossier: dict[str, Any]) -> dict[str, 
         #    consensus the Owner flagged, produced at exactly this line.
         "divergence_detectability": dossier.get("divergence_detectability", {}),
         "selection_caveats": _selection_caveats(route),
+        "calibration_status": _calibration_status(route),
         # ★★ 2026-08-17 第二轮：我上午把三条披露接进合同，**并宣称这一类收干净了**。
         #    随后对合同里每一条「不得／只允许」做了一次系统扫描，
         #    在**并列的兄弟链**上又找到这一条 —— `separation_protocol` 同样只活在
