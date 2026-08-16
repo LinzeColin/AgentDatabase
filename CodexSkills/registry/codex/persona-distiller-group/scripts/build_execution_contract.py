@@ -32,6 +32,45 @@ def _selection_caveats(route: dict[str, Any]) -> list[str]:
     return out
 
 
+def _team_composition(route: dict[str, Any]) -> dict[str, Any]:
+    """Family concentration of the seated personas.
+
+    The skill contract says of the largest mode:
+
+        Swarm 只用于真实独立分片，不得用 25 份重复意见凑人数。
+
+    Nothing in this pipeline checks that. A systematic sweep of every
+    「不得／只允许」 rule against its enforcement point on 2026-08-17 found this
+    one absent from the code entirely -- not weak, **absent**.
+
+    Enforcing it properly needs a definition of "真实独立分片" that nobody has
+    written down, so this is **disclosure, not enforcement**: report how
+    concentrated the roster is by identity family and let the host see whether
+    it was handed 25 distinct viewpoints or the same one 25 times. Measured on
+    a forced 25-seat swarm the same day: largest family 4 of 25 (16%) -- the
+    rule was not being violated, but nothing was guaranteeing that either.
+    """
+    members = route.get("members") or []
+    fams: dict[str, int] = {}
+    for m in members:
+        key = str(m.get("registration_category") or m.get("identity_family_id") or "unknown")
+        fams[key] = fams.get(key, 0) + 1
+    n = len(members)
+    top = max(fams.values()) if fams else 0
+    return {
+        "persona_expert_count": n,
+        "identity_families_represented": len(fams),
+        "per_family_counts": fams,
+        "largest_family_share": round(top / n, 4) if n else 0.0,
+        "note": (
+            "Swarm must be real independent shards, not 25 copies of one view. "
+            "Nothing enforces that -- this is the denominator so a reader can judge. "
+            "A high largest_family_share on a large team is the shape to be "
+            "suspicious of."
+        ),
+    }
+
+
 def build_contract(route: dict[str, Any], dossier: dict[str, Any]) -> dict[str, Any]:
     if route.get("status") != "ready":
         raise ValueError("route plan is not ready")
@@ -135,6 +174,15 @@ def build_contract(route: dict[str, Any], dossier: dict[str, Any]) -> dict[str, 
         #    consensus the Owner flagged, produced at exactly this line.
         "divergence_detectability": dossier.get("divergence_detectability", {}),
         "selection_caveats": _selection_caveats(route),
+        # ★★ 2026-08-17 第二轮：我上午把三条披露接进合同，**并宣称这一类收干净了**。
+        #    随后对合同里每一条「不得／只允许」做了一次系统扫描，
+        #    在**并列的兄弟链**上又找到这一条 —— `separation_protocol` 同样只活在
+        #    route-plan 里，而它承载的是六条最要紧的规则：
+        #    「生成者不得复审自己」「裁判不得修改候选证据」「独立复审与生成者隔离」……
+        #    这些规则**只能由宿主执行**，所以它们不到合同里就等于没有。
+        #    [[fixed-the-symptom-kept-the-root-cause]]｜[[one-requirement-two-consumers]]
+        "separation_protocol": route.get("separation_protocol", []),
+        "team_composition": _team_composition(route),
         "stage_gates": [
             {"gate": "G0", "pass_when": "assumptions, falsifiers and evidence gaps are frozen"},
             {"gate": "G1", "pass_when": "each persona artifact is claim-linked and packet-complete"},

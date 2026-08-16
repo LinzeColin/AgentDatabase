@@ -48,6 +48,13 @@ REQUIRED = [
     ("execution-contract.json", "divergence_detectability.note"),
     ("execution-contract.json", "selection_caveats"),
     ("execution-contract.json", "user_output_contract.phrasing_rules"),
+    # ★★ 第二轮补的。上午修完前三条我宣称「这一类收干净了」，随后对合同里每一条
+    #    「不得／只允许」做系统扫描，在**并列的兄弟链**上又找到这两条：
+    #    `separation_protocol`（六条隔离规则，只能由宿主执行）同样只活在 route-plan；
+    #    `team_composition`（Swarm 不得用重复意见凑人数的分母）此前**根本不存在**。
+    #    「这一类收干净了」说之前先数出口个数 —— 我说过，又错了一次。
+    ("execution-contract.json", "separation_protocol"),
+    ("execution-contract.json", "team_composition.largest_family_share"),
 ]
 
 
@@ -89,8 +96,16 @@ def main() -> int:
                 _, ok = dig(docs[name], dotted)
                 if not ok:
                     bad.append("%s is missing %s" % (name, dotted))
-            # A task the roster covers must not claim it was picked blind.
+            # 六条隔离规则必须**逐条**到齐，不是「有这个键」就算数
             contract = docs.get("execution-contract.json", {})
+            sep = contract.get("separation_protocol") or []
+            if len(sep) != len(json.loads((wd / "route-plan.json").read_text(encoding="utf-8"))
+                              .get("separation_protocol", [])):
+                bad.append("separation_protocol 条数与 route-plan 不一致：合同 %d 条" % len(sep))
+            if not any("cannot review their own" in x for x in sep):
+                bad.append("合同里没有「生成者不得复审自己」这一条：%r" % sep[:2])
+
+            # A task the roster covers must not claim it was picked blind.
             if contract.get("selection_caveats"):
                 bad.append("a task WITH a domain signal must have no selection caveat, got %r"
                            % contract["selection_caveats"])
