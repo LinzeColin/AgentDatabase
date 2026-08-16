@@ -142,6 +142,19 @@ Date: 2026-08-05（**v0.0.0.154**）
 >   ★★ 讽刺而值得记：**它第一次运行就抓到了 3 个回归，而那 3 个正是它自己被加进来造成的**
 >   （脚本数与 checksum 数一变，三件验清册的测试立刻红）——**改判据要跑 `build_manifest`，
 >   而 `VERIFICATION.md` 里这几个自报数字也要跟着改**，两件都得做。
+>
+> ★★ **同日又被同一条咬了第二次**：只是**编辑** `run_tests.py` 的内容（没有新增文件），
+>   它的哈希一变，`checksums.sha256` 立刻陈旧，同样那三件测试立刻红。
+>   ⇒ 规则要说全：**动了随包分发目录里的任何一个字节**（新增、删除、**改内容**）
+>   都要跑 `build_manifest`。我原来记的是「改判据要跑」，**射程写窄了**。
+>
+> ★ 顺带实测两个耗时（都是真跑，不是估的）：
+>   整套**串行 333.5 秒**（这正是那件红能留很久的真原因——太慢，没人会随手跑）；
+>   `run_tests.py` 改成并行后**墙钟 108.5 秒**，约 **3.1 倍**。
+>   最慢三件：`test_package_install_migrate` 108.5s／`test_skill_contract` 82.7s／
+>   `test_checkers_actually_run` 67.3s —— 逐件耗时现在每次都印，**下次谁最慢一眼看得见**。
+>   ★ 也解释了 `install.py` 为什么必须 `--skip-tests`：那里 `timeout=120`，
+>   **串行 333.5s 必被杀掉** ⇒ 那不是遗漏，是**必需**；且带着它 self_check 仍跑另外 13 项。
 > ★★★★ **2026-08-10 更新**：判据 72→82、脚本 106→117、checksum 416→431。**这三个数又漂了一轮，是 `check_checkers` 报出来的，不是我自己想起来的。** ★ 口径写死在 `check_verification_counts.PATTERNS`：判据＝`scripts/check_*.py`、脚本＝`scripts/*.py`。**我第一次改用 `find . -name '*.py'` 算出 250，范围错了**——[[counts-need-their-cutoff-stated]]。
 > ★★★★ **2026-08-11 再更新**：判据 82→**86**、脚本 117→**123**、checksum 431→**460**，并补上此前**根本没写过**的「名册人数」**102**（判据一直报「文中 None」，而「文中没写」和「文中写错」在报告里长得一样——`empty-default-swallows-unknown`）。★ 三个数都**按判据写死的那个口径独立复算过一遍**，不是抄它的输出：
 > `ls scripts/check_*.py | wc -l` = 86、`ls scripts/*.py | wc -l` = 123、`wc -l < checksums.sha256` = 460、`team-index.json` 的 products = 102。

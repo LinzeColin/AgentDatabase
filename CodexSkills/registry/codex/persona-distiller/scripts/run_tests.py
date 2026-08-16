@@ -50,9 +50,11 @@
     python3 scripts/run_tests.py --self-test
 """
 import argparse
+import concurrent.futures
 import pathlib
 import subprocess
 import sys
+import time
 
 HERE = pathlib.Path(__file__).resolve().parent
 TESTS = HERE.parent / "tests"
@@ -74,9 +76,10 @@ def discover():
 
 
 def run_one(path):
+    t = time.time()
     r = subprocess.run([sys.executable, str(path)], capture_output=True, text=True)
     tail = [l for l in (r.stdout + r.stderr).strip().splitlines() if l.strip()]
-    return r.returncode, (tail[-1][:60] if tail else "")
+    return r.returncode, (tail[-1][:60] if tail else ""), time.time() - t
 
 
 def selftest() -> int:
@@ -119,9 +122,20 @@ def main() -> int:
         print("✗ 一件都没发现 —— **未检查，不是通过**")
         return 0
 
+    # ★★ **并行跑。** 实测串行整套要 **333.5 秒**（5 分半）——
+    #   这正是那件红能留这么久的真原因：**太慢，没人会随手跑**。
+    #   14 件互相独立（各自建临时目录、不共享状态），并行是安全的。
+    #   ★ 顺序仍按文件名排，输出可比；耗时逐件打印，**下次谁最慢一眼看得见**。
+    t0 = time.time()
+    results = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=min(8, len(files))) as ex:
+        futs = {ex.submit(run_one, f): f for f in files}
+        for fut in concurrent.futures.as_completed(futs):
+            results[futs[fut]] = fut.result()
+
     red, green, fixed = [], [], []
     for f in files:
-        rc, tail = run_one(f)
+        rc, tail, secs = results[f]
         mark = "✓" if rc == 0 else "✗"
         known = f.name in KNOWN
         note = ""
@@ -135,11 +149,12 @@ def main() -> int:
             fixed.append(f.name)
         if rc == 0:
             green.append(f.name)
-        print("  %s rc=%d  %-38s %-46s%s" % (mark, rc, f.name, tail, note))
+        print("  %s rc=%d %6.1fs  %-38s %-40s%s" % (mark, rc, secs, f.name, tail, note))
 
-    print("\n合计：绿 %d｜红 %d（其中已知未决 %d、**新回归 %d**）"
+    print("\n合计：绿 %d｜红 %d（其中已知未决 %d、**新回归 %d**）｜**墙钟 %.1fs**"
+          " —— 串行跑同一批实测 333.5s"
           % (len(green), len(files) - len(green),
-             len(files) - len(green) - len(red), len(red)))
+             len(files) - len(green) - len(red), len(red), time.time() - t0))
     if KNOWN:
         print("\n已知未决（每条都写明谁能让它变绿）：")
         for n, why in KNOWN.items():
