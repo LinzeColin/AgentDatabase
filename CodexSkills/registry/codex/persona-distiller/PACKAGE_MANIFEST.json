@@ -466,8 +466,8 @@
     },
     {
       "path": "references/pipeline/RUNBOOK.md",
-      "sha256": "9aa654485cf106a85c92a6e302140f2fa329f91ba5700367bdeed9a676e85848",
-      "size_bytes": 249898
+      "sha256": "52a3470949554f4dfbf7e32a64953635f42d0d69f311f3063e3032a9984056b1",
+      "size_bytes": 250051
     },
     {
       "path": "references/pipeline/build_queue.py",
@@ -916,8 +916,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_threshold_doc_drift.py",
-      "sha256": "5726e60fa82bfaaada8b52ff5574894ccb28a74d4aeb1d199b3766052758a4e4",
-      "size_bytes": 16042
+      "sha256": "cb9de421bb8f47b9c14c92439e7dc3677a61d2beb82ca8620db8e32053d1301c",
+      "size_bytes": 18912
     },
     {
       "path": "references/pipeline/checkers/check_title_is_not_filename.py",
@@ -1721,8 +1721,8 @@
     },
     {
       "path": "scripts/check_threshold_doc_drift.py",
-      "sha256": "5726e60fa82bfaaada8b52ff5574894ccb28a74d4aeb1d199b3766052758a4e4",
-      "size_bytes": 16042
+      "sha256": "cb9de421bb8f47b9c14c92439e7dc3677a61d2beb82ca8620db8e32053d1301c",
+      "size_bytes": 18912
     },
     {
       "path": "scripts/check_title_is_not_filename.py",

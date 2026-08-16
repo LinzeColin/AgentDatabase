@@ -115,7 +115,7 @@
 2. **初始化**：`init_target.py --name .. --identity <1-12> --namesake-gate gate.json --workspace WS --profile deep`。
 3. **来源账本**（照 `example-knuth/gen_sources.py`+`gen_more.py`）：**≥45 条 usable train，≥65% 一手(P1/P2)，覆盖全 6 lane，≥1 holdout**。每条**必须真实 curl 取内容算 SHA-256**（`checksum_basis="content"`），rights 不含 "unknown"。
 4. **六路研究**（`gen_lanes.py`）：6 个 `references/research/0X-*.md`，每篇 **≥500 字**、引用真实 `src-` ID。
-5. **claims**（`gen_claims.py`）：**≥4 mental-model + ≥6 heuristic**；刚性 claim 各需 **≥2 个不同源、≥2 情境、≥2 独立证据簇、falsifiers、time_scope**（多标签源会去重塌成 1，用兜底补齐）。再配 fact/value/work-method/boundary/blind-spot。
+5. **claims**（`gen_claims.py`）：**≥4 mental-model + ≥6 heuristic**（★ **这是 deep 档的数**——本节步骤 2 已写死 `--profile deep`；quick 是 2/3、standard 是 3/5，真源同为 `PROFILE_THRESHOLDS`）；刚性 claim 各需 **≥2 个不同源、≥2 情境、≥2 独立证据簇、falsifiers、time_scope**（多标签源会去重塌成 1，用兜底补齐）。再配 fact/value/work-method/boundary/blind-spot。
 6. **模型文档**（`gen_docs.py`）：渲染 9–10 份；**这 8 份 release 必须"非占位"**：cognitive-os / decision-policy / strategy / capabilities / work / persona / boundaries / divergence-map，各 **strip 后 ≥500 字（留到 ~700 更稳）、≥5 条非 # 有效行**。**每条 active claim 必须**以 `<!-- claim:clm-... -->` 标记渲染进某文档（release 有孤儿=报错）。
 7. **中途验收**：`quality_check.py WS --phase research --strict` 通过 → 再 `--phase synthesis --strict` 通过（便宜，先挡结构错，别等到 release）。
 8. **评测用例**（`gen_cases.py`）：**16 套件 × 每套 ≥2 = ≥32 用例**；`known` 套件的用例必须挂 holdout 源 ID。

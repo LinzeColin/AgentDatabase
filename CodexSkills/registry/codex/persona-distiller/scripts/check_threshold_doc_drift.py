@@ -92,6 +92,30 @@ def prose_rows(text: str) -> dict:
     return out
 
 
+def check_walkthrough_claims(qc_thresholds: dict, text: str) -> list:
+    """RUNBOOK 的 deep 走查里那句「≥N mental-model + ≥M heuristic」也要对上代码。
+
+    2026-08-17：`min_models` / `min_heuristics` 此前**没有任何判据看过**。
+    那句话在上下文里是对的（同节步骤 2 写死 `--profile deep`），
+    但它就是 2026-08-05 那次事故的同一形状 ——「只列 deep 那一档而没写 deep」，
+    当时我据此把 Thomson #129 的门槛记成 0.07（真值 0.03）。
+    ⇒ 文档已补档位标注，这里再把数字钉到代码上。
+    ★ 找不到那句话 = **未核，不是通过**。
+    """
+    m = re.search(r"≥\s*(\d+)\s*mental-model\s*\+\s*≥\s*(\d+)\s*heuristic", text)
+    if not m:
+        return ["✗ **文档里找不到「≥N mental-model + ≥M heuristic」那句** —— 未核，不是通过"]
+    bad = []
+    for got, key, label in ((int(m.group(1)), "min_models", "mental-model"),
+                            (int(m.group(2)), "min_heuristics", "heuristic")):
+        if key not in qc_thresholds.get("deep", {}):
+            bad.append(f"✗ 代码 deep 档里没有 `{key}` —— 无从比对，不是通过")
+        elif got != qc_thresholds["deep"][key]:
+            bad.append(f"✗ deep 走查／{label}：文档 {got}　代码 "
+                       f"{qc_thresholds['deep'][key]}")
+    return bad
+
+
 def check_prose_table(qc_thresholds: dict, text: str) -> list:
     """→ 不一致的说明列表。**找不到那张表也算问题**（空扫描面不算通过）。"""
     rows = prose_rows(text)
@@ -151,6 +175,10 @@ def check(qc: pathlib.Path, doc: pathlib.Path) -> int:
     print("  ── 散文档位表（来源／一手占比／道）：%s"
           % ("**%d 处对不上**" % len(prose_bad) if prose_bad else "逐格一致 ✓"))
     bad.extend(prose_bad)
+    wt_bad = check_walkthrough_claims(want, doc.read_text(encoding="utf-8"))
+    print("  ── deep 走查的 mental-model／heuristic：%s"
+          % ("**%d 处对不上**" % len(wt_bad) if wt_bad else "与代码一致 ✓"))
+    bad.extend(wt_bad)
     for b in bad:
         print("  " + b)
     if bad:
@@ -174,7 +202,10 @@ def self_test() -> int:
     #   **夹具的完整度要跟着判据的射程走。**[[fixtures-cleaner-than-the-real-thing]]
     PROSE = ("\ndeep      来源 ≥45 ／ 一手 ≥30 ／ 一手占比 ≥0.65 ／ 道 ≥6\n"
              "standard  来源 ≥24 ／                一手占比 ≥0.50 ／ 道 ≥6\n"
-             "quick     来源 ≥8  ／                一手占比 ≥0.40 ／ 道 ≥3\n")
+             "quick     来源 ≥8  ／                一手占比 ≥0.40 ／ 道 ≥3\n"
+             # ★ 判据射程再扩一格，夹具就要再补一句 —— 这次是**先预测再跑**：
+             #   上一轮正是漏了这一步，扩完射程 ㉛a 当场变红。
+             "5. **claims**：**≥4 mental-model + ≥6 heuristic**（deep 档）\n")
     good = ("| profile | 总分 | delta | 边界 | 事实保持 |\n"
             "|---|---|---|---|---|\n"
             "| quick    | ≥0.65 | ≥0.03 | ≥0.70 | ≥0.80 |\n"
@@ -216,17 +247,23 @@ def self_test() -> int:
 
     # ★ 夹具的键要跟着判据的射程走：2026-08-17 扩到第二张表之后，
     #   这里少了 min_sources / min_primary_ratio / min_lanes 三个键，
+    #   ★★ **同一个坑连踩三次**：第三次我明明先预测了夹具要补，
+    #     却只补了**文档侧**那句话，忘了**代码侧**的 min_models/min_heuristics。
+    #     ⇒ 判据每扩一格射程，夹具的**两侧**都要跟：文档 fixture 与 _QC。
     #   判据当场 KeyError 崩掉 —— **崩掉的判据给不出结论**（已同时改成如实报）。
     _QC = ('PROFILE_THRESHOLDS = {\n'
            '  "quick":    {"min_overall_score": 0.65, "min_baseline_delta": 0.03,\n'
            '               "min_boundary_score": 0.70, "min_fact_score": 0.80,\n'
-           '               "min_sources": 8, "min_primary_ratio": 0.40, "min_lanes": 3},\n'
+           '               "min_sources": 8, "min_primary_ratio": 0.40, "min_lanes": 3,\n'
+           '               "min_models": 2, "min_heuristics": 3},\n'
            '  "standard": {"min_overall_score": 0.72, "min_baseline_delta": 0.05,\n'
            '               "min_boundary_score": 0.78, "min_fact_score": 0.88,\n'
-           '               "min_sources": 24, "min_primary_ratio": 0.50, "min_lanes": 6},\n'
+           '               "min_sources": 24, "min_primary_ratio": 0.50, "min_lanes": 6,\n'
+           '               "min_models": 3, "min_heuristics": 5},\n'
            '  "deep":     {"min_overall_score": 0.80, "min_baseline_delta": 0.07,\n'
            '               "min_boundary_score": 0.85, "min_fact_score": 0.93,\n'
-           '               "min_sources": 45, "min_primary_ratio": 0.65, "min_lanes": 6},\n'
+           '               "min_sources": 45, "min_primary_ratio": 0.65, "min_lanes": 6,\n'
+           '               "min_models": 4, "min_heuristics": 6},\n'
            '}\n')
 
     def _run(doc_text, qc_text=_QC):
@@ -251,6 +288,12 @@ def self_test() -> int:
     rc_d, out_d = _run(good.replace("一手 ≥30", "一手 ≥20"))
     chk(f"㉛k 推导值「一手≥30」被改 → rc=1（rc={rc_d}）",
         rc_d == 1 and "一手" in out_d)
+    rc_e, out_e = _run(good.replace("≥4 mental-model", "≥5 mental-model"))
+    chk(f"㉛l deep 走查的 mental-model 被改 → rc=1 并点名（rc={rc_e}）",
+        rc_e == 1 and "mental-model" in out_e)
+    rc_f, out_f = _run(good.replace("**≥4 mental-model + ≥6 heuristic**（deep 档）", ""))
+    chk(f"㉛m 那句话整句缺失 → **未核，不是通过**（rc={rc_f}）",
+        rc_f == 1 and "找不到" in out_f)
 
     rc, out = _run(good.replace("≥0.03", "≥0.07"))
     chk(f"㉛b **quick 的 delta 被写成 0.07** → rc=1 且点名 quick"
