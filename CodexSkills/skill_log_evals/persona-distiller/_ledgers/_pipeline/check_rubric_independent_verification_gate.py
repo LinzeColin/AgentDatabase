@@ -1,15 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""SKILL.md 那道【硬门】有没有载体 —— 「至少一名评委须跳出 rubric 独立核查」。
+"""SKILL.md 那道【硬门】的**两条**有没有载体 —— 实测都没有。
 
 为什么要有这份文件
 ------------------
-`persona-distiller/SKILL.md` 从 **v0.0.0.7** 起有一节标着
-**【自 v0.0.0.7 起的硬门】rubric 本身必须被独立核查**，其第 2 条原文：
+`persona-distiller/SKILL.md` 从 **v0.0.0.7** 起有一整节标着
+**【自 v0.0.0.7 起的硬门】rubric 本身必须被独立核查**，共两条。
+2026-08-17 实测（skill 已到 **v0.0.0.154**）：**两条都没有载体。**
 
-> **至少一名评委必须被显式要求「跳出 rubric 独立联网核查其中的事实前提」**
+**第 1 条**：「rubric 里每一条『须命中』的事实性断言，必须与源账本中的一手条目
+一一对应，并记录其 `source_id`。对应不上的断言不得写进 rubric。」
 
-2026-08-17 实测，skill 已到 **v0.0.0.154**：
+    cases.jsonl 62 份｜带 rubric 的题目 **1432** 道
+    rubric 内部出现 source_id / src- 的：**0 / 1432**
+
+★★ 这一条有个**极容易被当成合规**的陷阱：数据里**确实有** `src-` 号，
+但它们在 `holdout_source_ids`（1151 道有此字段、200 道非空）——
+那回答的是「**哪些源被扣住不给人物看**」，**不是**「这条断言由哪个一手条目支撑」。
+**两个不同的问题共用一种号码。**
+
+**第 2 条**：「至少一名评委必须被显式要求『跳出 rubric 独立联网核查其中的事实前提』」
 
     评委指令模板（references/pipeline/judge_prompts/）  4 份 → 命中 **0**
     各工作区实际发出的评委指令                        30 份 → 命中 **0**
@@ -18,7 +28,7 @@
 **那句话在全仓只出现在三处：SKILL.md 和两份 RUNBOOK.md** ——
 **全是描述规则的散文，没有一处是执行它的产物。**
 
-⇒ 一道被称作「硬门」的规则，**147 个版本以来没有任何载体**。
+⇒ 一整节被称作「硬门」的规则，**147 个版本以来两条都没有任何载体**。
 [[a-rule-in-a-doc-has-no-enforcer]]｜[[a-penalty-is-not-a-rule]]｜
 [[every-requirement-needs-an-owner]]
 
@@ -49,6 +59,8 @@
         --corpora <_corpora>
 """
 import argparse
+import collections
+import json
 import pathlib
 import re
 import sys
@@ -140,6 +152,47 @@ def main() -> int:
               "（SKILL.md 与 RUNBOOK.md）。")
         print("     当前 skill 版本：%s —— 这道「硬门」自 v0.0.0.7 起**未曾有过载体**。"
               % (ver.read_text(encoding="utf-8").strip() if ver.is_file() else "?"))
+
+    # ── 同一节【硬门】的第 1 条 ────────────────────────────────────────
+    # 原文：「rubric 里每一条「须命中」的事实性断言，**必须与源账本中的一手条目
+    #        一一对应**，并记录其 `source_id`。对应不上的断言不得写进 rubric。」
+    #
+    # ★★ 这里有个**极容易被当成合规**的陷阱：数据里**确实有** `src-` 号，
+    #    但它们在 `holdout_source_ids` 字段里 —— 那回答的是
+    #    「**哪些源被扣住不给人物看**」，不是「这条断言由哪个一手条目支撑」。
+    #    **两个不同的问题，共用一种号码。** 不分开看就会把「有 src- 号」
+    #    误读成「一一对应做到了」。[[two-source-ids-is-not-two-evidences]]
+    cases = sorted(corp.rglob("cases.jsonl"))
+    total = in_rubric = with_holdout = holdout_nonempty = 0
+    fields = collections.Counter()
+    for f in cases:
+        for line in f.read_text(encoding="utf-8", errors="replace").splitlines():
+            if not line.strip():
+                continue
+            try:
+                d = json.loads(line)
+            except ValueError:
+                continue
+            if d.get("rubric") is None:
+                continue
+            total += 1
+            fields.update(d.keys())
+            blob = json.dumps(d.get("rubric"), ensure_ascii=False)
+            if "source_id" in blob or "src-" in blob:
+                in_rubric += 1
+            if "holdout_source_ids" in d:
+                with_holdout += 1
+                if d["holdout_source_ids"]:
+                    holdout_nonempty += 1
+    print("\n══ 同一节【硬门】第 1 条：rubric 的断言有没有挂上一手条目的 source_id")
+    print("   扫描面：cases.jsonl **%d** 份｜带 rubric 的题目 **%d** 道" % (len(cases), total))
+    print("   rubric **内部**出现 source_id / src- 的：**%d / %d**" % (in_rubric, total))
+    if total and in_rubric == 0:
+        print("   ⇒ **一道都没有。** 这条要求同样没有载体。")
+    print("   ★ 易被误读成合规的那个字段：`holdout_source_ids` 存在于 %d 道、非空 %d 道 ——"
+          % (with_holdout, holdout_nonempty))
+    print("     它回答的是「**哪些源被扣住不给人物看**」，**不是**「这条断言由哪个一手条目支撑」。")
+    print("     两个不同的问题共用一种号码，**不分开看就会把它当成已合规**。")
 
     print("\n   ★ 本件是**报告不是门**（永远 rc=0）：唯一的修法是改评委指令，")
     print("     而评委指令是**按人物冻结的尺子**，改了此前分数就不再可比。")
