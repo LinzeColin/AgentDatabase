@@ -58,6 +58,11 @@ ARTIFACTS = {
 AUTHORITATIVE = "evidence"          # 账本的权威位置（保留，供既有调用）
 
 
+def _sha(f: pathlib.Path) -> str:
+    import hashlib
+    return hashlib.sha256(f.read_bytes()).hexdigest()
+
+
 def scan(corp: pathlib.Path, name: str = "source-ledger.jsonl") -> dict:
     by_ws = collections.defaultdict(list)
     for f in sorted(corp.rglob(name)):
@@ -139,10 +144,19 @@ def main() -> int:
         print("   %-22s 文件 %3d｜工作区 %3d｜**多于一份 %s**%s"
               % (_name, _files, len(_b), ("%d 个" % len(_multi)) if _multi else "0 ✓",
                  ("　权威位置 `%s/`" % _auth) if _auth else ""))
-        for k in sorted(_multi)[:3]:
-            print("        · %-22s %s" % (k, "、".join(p.parent.name for p in _b[k])))
-        if len(_multi) > 3:
-            print("        · …另 %d 个" % (len(_multi) - 3))
+        # ★★ 「有重复」还不够行动 —— 要分清**逐字节相同**（删一份无风险）
+        #   与**内容不同**（只能由人定）。2026-08-17 加，因为不分开的话
+        #   这张表只能得出「有 23 处重复」，得不出「哪几处可以安全收掉」。
+        same, diverge = [], []
+        for k in sorted(_multi):
+            digests = {_sha(f) for f in _b[k]}
+            (same if len(digests) == 1 else diverge).append(k)
+        if same:
+            print("        逐字节相同（删一份无风险）：**%d** 个　%s"
+                  % (len(same), "、".join(same[:4]) + ("…" if len(same) > 4 else "")))
+        if diverge:
+            print("        **内容不同（只能由人定）：%d** 个　%s"
+                  % (len(diverge), "、".join(diverge)))
     print("\n══ 源账本逐份细看")
 
     by_ws = scan(corp)
