@@ -916,8 +916,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_threshold_doc_drift.py",
-      "sha256": "2fe46720d782e01b91ef71369b7562c8a2695fd4109133fc49d3d85c0d9e5d40",
-      "size_bytes": 10318
+      "sha256": "5726e60fa82bfaaada8b52ff5574894ccb28a74d4aeb1d199b3766052758a4e4",
+      "size_bytes": 16042
     },
     {
       "path": "references/pipeline/checkers/check_title_is_not_filename.py",
@@ -1721,8 +1721,8 @@
     },
     {
       "path": "scripts/check_threshold_doc_drift.py",
-      "sha256": "2fe46720d782e01b91ef71369b7562c8a2695fd4109133fc49d3d85c0d9e5d40",
-      "size_bytes": 10318
+      "sha256": "5726e60fa82bfaaada8b52ff5574894ccb28a74d4aeb1d199b3766052758a4e4",
+      "size_bytes": 16042
     },
     {
       "path": "scripts/check_title_is_not_filename.py",

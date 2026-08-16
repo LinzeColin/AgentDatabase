@@ -63,6 +63,73 @@ def doc_rows(text: str) -> dict:
     return out
 
 
+# ★★ **第二张表**：RUNBOOK 里还有一处「来源／一手占比／道」的档位表
+#   （形如 `quick     来源 ≥8  ／ 一手占比 ≥0.40 ／ 道 ≥3`），
+#   与上面那张四列表**不是同一张**。2026-08-17 逐格核过是同步的 ——
+#   **但此前没有任何东西保证它继续同步**，而这张表已经出过一次事故：
+#   RUNBOOK 自己记着「初稿把 standard 写成『道 ≥3』」（真值 ≥6）。
+#   [[a-gates-scan-set-is-smaller-than-reality]]｜[[every-requirement-needs-an-owner]]
+#   ★ 「deep 一手 ≥30」不在 PROFILE_THRESHOLDS 里，它是
+#     `min_sources × min_primary_ratio = 45×0.65 = 29.25 → 30` 推出来的，
+#     所以按**推导值**校验，不当成独立常量。
+PROSE_KEYS = (("min_sources", "来源"), ("min_primary_ratio", "一手占比"), ("min_lanes", "道"))
+
+
+def prose_rows(text: str) -> dict:
+    """→ {profile: {来源/一手占比/道: 数值}}，只认以档位名开头的**非表格**行。"""
+    out = {}
+    for prof in ("quick", "standard", "deep"):
+        m = re.search(rf"^{prof}\s+来源\s*≥\s*([\d.]+).*?$", text, re.M)
+        if not m:
+            continue
+        line = m.group(0)
+        row = {"来源": float(m.group(1))}
+        for label in ("一手占比", "道", "一手"):
+            mm = re.search(rf"{label}\s*≥\s*([\d.]+)", line)
+            if mm:
+                row[label] = float(mm.group(1))
+        out[prof] = row
+    return out
+
+
+def check_prose_table(qc_thresholds: dict, text: str) -> list:
+    """→ 不一致的说明列表。**找不到那张表也算问题**（空扫描面不算通过）。"""
+    rows = prose_rows(text)
+    bad = []
+    if not rows:
+        return ["✗ **文档里找不到「来源／一手占比／道」那张档位表** —— 未核，不是通过"]
+    for prof in ("quick", "standard", "deep"):
+        r = rows.get(prof)
+        if r is None:
+            bad.append(f"✗ 散文档位表里**缺 `{prof}` 那一行**")
+            continue
+        for key, label in PROSE_KEYS:
+            # ★ 代码里没有这个键时**如实报，不许崩** —— 崩掉的判据给不出结论。
+            if key not in qc_thresholds[prof]:
+                bad.append(f"✗ 代码的 `{prof}` 里没有 `{key}` —— 无从比对，不是通过")
+                continue
+            want = float(qc_thresholds[prof][key])
+            got = r.get(label)
+            if got is None:
+                bad.append(f"✗ `{prof}` 那行没写「{label}」")
+            elif got != want:
+                bad.append(f"✗ `{prof}`／{label}：文档 {got}　代码 {want}")
+        # 推导值：一手 ≥ ceil(min_sources × min_primary_ratio)
+        if "一手" in r:
+            import math
+            if not {"min_sources", "min_primary_ratio"} <= set(qc_thresholds[prof]):
+                bad.append(f"✗ 代码的 `{prof}` 缺 min_sources/min_primary_ratio，"
+                           "「一手 ≥N」无从推导 —— 不是通过")
+                continue
+            derived = math.ceil(qc_thresholds[prof]["min_sources"]
+                                * qc_thresholds[prof]["min_primary_ratio"])
+            if r["一手"] != derived:
+                bad.append(f"✗ `{prof}`／一手：文档 {r['一手']}　"
+                           f"推导 {derived}（{qc_thresholds[prof]['min_sources']}×"
+                           f"{qc_thresholds[prof]['min_primary_ratio']}）")
+    return bad
+
+
 def check(qc: pathlib.Path, doc: pathlib.Path) -> int:
     want = load_thresholds(qc)
     got = doc_rows(doc.read_text(encoding="utf-8"))
@@ -79,6 +146,11 @@ def check(qc: pathlib.Path, doc: pathlib.Path) -> int:
         if g != w:
             bad.append(f"✗ **`{prof}` 对不上**：文档 {g}　代码 {w}")
         print(f"  {prof:9} 文档 {g}　代码 {w}　{'✓' if g == w else '✗'}")
+    # ★ 第二张表（来源／一手占比／道）——**同一份文档里的另一处档位表**
+    prose_bad = check_prose_table(want, doc.read_text(encoding="utf-8"))
+    print("  ── 散文档位表（来源／一手占比／道）：%s"
+          % ("**%d 处对不上**" % len(prose_bad) if prose_bad else "逐格一致 ✓"))
+    bad.extend(prose_bad)
     for b in bad:
         print("  " + b)
     if bad:
@@ -96,11 +168,18 @@ def self_test() -> int:
         ok = ok and bool(c)
         print(("  ✓ " if c else "  ✗ ") + m)
 
+    # ★ fixture 必须**两张表都带**：2026-08-17 把判据的射程扩到第二张
+    #   （来源／一手占比／道）之后，只带第一张的 fixture 会被判成
+    #   「找不到那张表 —— 未核」，于是 ㉛a 当场变红。
+    #   **夹具的完整度要跟着判据的射程走。**[[fixtures-cleaner-than-the-real-thing]]
+    PROSE = ("\ndeep      来源 ≥45 ／ 一手 ≥30 ／ 一手占比 ≥0.65 ／ 道 ≥6\n"
+             "standard  来源 ≥24 ／                一手占比 ≥0.50 ／ 道 ≥6\n"
+             "quick     来源 ≥8  ／                一手占比 ≥0.40 ／ 道 ≥3\n")
     good = ("| profile | 总分 | delta | 边界 | 事实保持 |\n"
             "|---|---|---|---|---|\n"
             "| quick    | ≥0.65 | ≥0.03 | ≥0.70 | ≥0.80 |\n"
             "| standard | ≥0.72 | ≥0.05 | ≥0.78 | ≥0.88 |\n"
-            "| deep     | ≥0.80 | ≥0.07 | ≥0.85 | ≥0.93 |\n")
+            "| deep     | ≥0.80 | ≥0.07 | ≥0.85 | ≥0.93 |\n") + PROSE
     r = doc_rows(good)
     chk(f"三档都读到：{sorted(r)}", sorted(r) == ["deep", "quick", "standard"])
     chk(f"quick 那行读成 {r['quick']}", r["quick"] == [0.65, 0.03, 0.70, 0.80])
@@ -135,13 +214,19 @@ def self_test() -> int:
     import tempfile as _tf
     print("\n══ ㉛ check() 本体（tempdir 上造真源与文档）══")
 
+    # ★ 夹具的键要跟着判据的射程走：2026-08-17 扩到第二张表之后，
+    #   这里少了 min_sources / min_primary_ratio / min_lanes 三个键，
+    #   判据当场 KeyError 崩掉 —— **崩掉的判据给不出结论**（已同时改成如实报）。
     _QC = ('PROFILE_THRESHOLDS = {\n'
            '  "quick":    {"min_overall_score": 0.65, "min_baseline_delta": 0.03,\n'
-           '               "min_boundary_score": 0.70, "min_fact_score": 0.80},\n'
+           '               "min_boundary_score": 0.70, "min_fact_score": 0.80,\n'
+           '               "min_sources": 8, "min_primary_ratio": 0.40, "min_lanes": 3},\n'
            '  "standard": {"min_overall_score": 0.72, "min_baseline_delta": 0.05,\n'
-           '               "min_boundary_score": 0.78, "min_fact_score": 0.88},\n'
+           '               "min_boundary_score": 0.78, "min_fact_score": 0.88,\n'
+           '               "min_sources": 24, "min_primary_ratio": 0.50, "min_lanes": 6},\n'
            '  "deep":     {"min_overall_score": 0.80, "min_baseline_delta": 0.07,\n'
-           '               "min_boundary_score": 0.85, "min_fact_score": 0.93},\n'
+           '               "min_boundary_score": 0.85, "min_fact_score": 0.93,\n'
+           '               "min_sources": 45, "min_primary_ratio": 0.65, "min_lanes": 6},\n'
            '}\n')
 
     def _run(doc_text, qc_text=_QC):
@@ -155,6 +240,17 @@ def self_test() -> int:
 
     rc, out = _run(good)
     chk(f"㉛a 文档与代码逐格一致 → rc=0（rc={rc}）", rc == 0 and "逐格一致" in out)
+
+    # ★★ 第二张表的三条反向对照 —— **判据扩了射程，反例也要跟着扩**
+    rc_b, out_b = _run(good.replace("道 ≥3", "道 ≥4"))
+    chk(f"㉛i 散文表某一格被改 → rc=1 并点名（rc={rc_b}）",
+        rc_b == 1 and "quick`／道" in out_b)
+    rc_c, out_c = _run(good.replace(PROSE, "\n"))
+    chk(f"㉛j 散文表整张缺失 → **未核，不是通过**（rc={rc_c}）",
+        rc_c == 1 and "找不到" in out_c)
+    rc_d, out_d = _run(good.replace("一手 ≥30", "一手 ≥20"))
+    chk(f"㉛k 推导值「一手≥30」被改 → rc=1（rc={rc_d}）",
+        rc_d == 1 and "一手" in out_d)
 
     rc, out = _run(good.replace("≥0.03", "≥0.07"))
     chk(f"㉛b **quick 的 delta 被写成 0.07** → rc=1 且点名 quick"
