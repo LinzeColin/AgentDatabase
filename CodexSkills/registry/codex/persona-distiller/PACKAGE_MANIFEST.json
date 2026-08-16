@@ -621,8 +621,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_corpus_presence.py",
-      "sha256": "26ed896ca0739c6e06b9c9f91fb25ce6c6925a223ee3450a72a8d60ee9b3bd7d",
-      "size_bytes": 19275
+      "sha256": "7a54f50b8b3536323e741ad0ccbf7b60c041f118ab8a5575c50c7f2cf1fe76ba",
+      "size_bytes": 21486
     },
     {
       "path": "references/pipeline/checkers/check_delivery_carries_denominators.py",
@@ -1426,8 +1426,8 @@
     },
     {
       "path": "scripts/check_corpus_presence.py",
-      "sha256": "26ed896ca0739c6e06b9c9f91fb25ce6c6925a223ee3450a72a8d60ee9b3bd7d",
-      "size_bytes": 19275
+      "sha256": "7a54f50b8b3536323e741ad0ccbf7b60c041f118ab8a5575c50c7f2cf1fe76ba",
+      "size_bytes": 21486
     },
     {
       "path": "scripts/check_delivery_carries_denominators.py",

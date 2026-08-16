@@ -137,7 +137,14 @@ def scan(root):
                 if line.strip())
         t = len([p for p in d.rglob("*.txt") if "raw" in p.parts])
         resolved, bad = verify_checksums(led)
-        rows.append((d.name, n, t, t < n * RATIO, len(bad), resolved))
+        # ★★ **账本 0 条不是「通过」，是「没有可核的东西」。**
+        #   判定写的是 `t < n * RATIO`；`n = 0` 时 `t < 0` 恒为假 ⇒ **一律给 ✓**。
+        #   实测 2026-08-17：`wip-benardos-128` 账本 0 条、语料 1 份（那 1 份是
+        #   `raw/_ids.txt` 这类簿记文件）、指得到 0 —— 而它在表里是 **✓**。
+        #   **空扫描面不算通过。**
+        #   [[empty-default-swallows-unknown]]｜[[zero-hit-gates-must-prove-they-can-hit]]
+        flag = "**账本 0 条 —— 未核（不是通过）**" if n == 0 else (t < n * RATIO)
+        rows.append((d.name, n, t, flag, len(bad), resolved))
     return rows
 
 
@@ -277,6 +284,25 @@ def selftest() -> int:
         chk("下沉出两行（container/jia、container/yi），而不是合成一行",
             got == {"container/jia", "container/yi"})
 
+
+    # ── ★★ 账本 0 条：**未核，不是通过** ──────────────────────────────
+    #   判定 `t < n * RATIO` 在 n=0 时恒为假 ⇒ 一律 ✓。
+    #   实测 wip-benardos-128（账本 0 条、磁盘 1 份簿记文件、指得到 0）就是这样绿的。
+    with tempfile.TemporaryDirectory() as _td:
+        _r = pathlib.Path(_td)
+        _w = _r / "wip-empty-999"
+        (_w / "evidence").mkdir(parents=True)
+        (_w / "evidence" / "source-ledger.jsonl").write_text("", encoding="utf-8")
+        (_w / "raw").mkdir()
+        (_w / "raw" / "_ids.txt").write_text("src-aaaaaaaaaaaa\n", encoding="utf-8")
+        _rows = scan(_r)
+        _row = next((x for x in _rows if x[0] == "wip-empty-999"), None)
+        chk(f"⑨ 空账本被扫到：{_row is not None}", _row is not None)
+        if _row:
+            chk(f"⑨ 账本 0 条 → **不是通过**（flag={_row[3]!r}）",
+                isinstance(_row[3], str) and "未核" in _row[3])
+            chk("⑨ 账本 0 条 → flag 不是 False（不许当成 ✓）", _row[3] is not False)
+
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
 
@@ -338,13 +364,20 @@ def main() -> int:
             print(f"{name:24} {'—':>6} {'—':>6}  **无账本**")
             bad.append(name)
             continue
-        flag = '✓' if not miss else f'**缺 {n - t}**'
+        # ★ `miss` 现在可能是**字符串**（账本 0 条 → 「未核」）。
+        #   字符串是真值，若照旧走 `f'**缺 {n-t}**'` 会印出「缺 -1」这种荒唐数
+        #   ——实测就是这么错的。**新增一种状态，就要去看渲染层认不认它。**
+        if isinstance(miss, str):
+            flag = miss
+        else:
+            flag = '✓' if not miss else f'**缺 {n - t}**'
         if nbad:
             flag += f'　**字节对不上 {nbad}**'
         if n and t and not resolved:
             flag = '**账本一条都指不到文件**'
         print(f"{name:24} {n:6} {t:6} {resolved:6}  {flag}")
         if miss:
+            # 字符串（未核）与 True（缺份）都要进 bad —— **未核不算通过**
             bad.append(name)
 
     if mismatched:
