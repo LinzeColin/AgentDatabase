@@ -1456,13 +1456,13 @@
     },
     {
       "path": "scripts/check_doc_command_shapes.py",
-      "sha256": "06789b504220859be869e957b2a697319d1d0cb4e62119f56b5350a24182d52d",
-      "size_bytes": 14036
+      "sha256": "cc75fa85bdb9ca9afefd64141a39e908959b7542b9f67203c895ae324cbe2d71",
+      "size_bytes": 14344
     },
     {
       "path": "scripts/check_evidence_is_per_claim.py",
-      "sha256": "3e83c8510803b5dc76526fc99f51f6345adc05d2fee79206776b7073761521d7",
-      "size_bytes": 11893
+      "sha256": "b8919aab262583dd4f6f1de4e417983363f3f72199e28768b8bd94144cbaf7e8",
+      "size_bytes": 12855
     },
     {
       "path": "scripts/check_extreme_result_is_suspect.py",
@@ -1636,8 +1636,8 @@
     },
     {
       "path": "scripts/check_rights_basis.py",
-      "sha256": "4fe58a6047dc1746344e53e9151385ccd88bf2ce147b56a513414f6295c39fd1",
-      "size_bytes": 16535
+      "sha256": "7567820ad49fa883f56613d8cf8e10c84632212fdd0276a306209b0bc95f6ce6",
+      "size_bytes": 17292
     },
     {
       "path": "scripts/check_rubric_copies_answer.py",

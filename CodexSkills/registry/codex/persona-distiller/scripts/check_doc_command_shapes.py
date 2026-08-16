@@ -169,7 +169,11 @@ def check(root: pathlib.Path, doc: pathlib.Path) -> int:
         print(f"\n**{len(bad)} 条对不上**——**只报不拦**：占位符是给人读的，措辞会有出入，"
               "**逐条读了再改**。")
         return 1
-    print("\n✓ 文档命令的参数形状与脚本一致")
+    # ★★ 同上：**0 个配对时「一致」恒真**。实测喂无关文档 → 照印 ✓、rc=0。
+    if not res["检查的配对"]:
+        print("\n⚠ **一个「选项+占位符」配对都没扫到 —— 本次未核，不是通过。**")
+        return 0
+    print("\n✓ 全部 **%d** 个配对的参数形状与脚本一致" % res["检查的配对"])
     return 0
 
 
