@@ -192,6 +192,58 @@ def _one_ledger_per_workspace(root: pathlib.Path,
     return out
 
 
+def _session_paths(root: pathlib.Path) -> list[str]:
+    """随包分发的文件里**不许写死会话临时目录**。
+
+    2026-08-17 实测：`references/pipeline/example-knuth/` 下 **8 个样例脚本**
+    全都把 `TARGET` 写死成
+    `/private/tmp/claude-501/-Users-…-character-distillation-skill-reorganize-d57595/…`
+    —— **另一个会话的 scratchpad，且那条路径早已不存在**。
+    而 RUNBOOK 让操作者「照 example-knuth/ 抄」：抄到的脚本看起来像真路径、
+    不像 `<WORKSPACE>` 那样一眼可见要替换，于是会**静默写到别处或直接崩**。
+
+    ★ 这一条此前**没有任何守卫**（全仓搜不到相关判据）。
+      样例已改成从 argv/`PD_TARGET` 取、缺了就报错；本判据保证它不再退回去。
+    """
+    # ★★★ **判据别扫说明层。** 第一版用逐行正则，结果**打中了它自己**：
+    #   我写在上面 docstring 里用来解释这个缺陷的那段示例路径被扫到，报 6 处假阳。
+    #   （今天这是同一个坑的又一次。）⇒ 改用 `ast`：只看**真正的字符串常量**，
+    #   并跳过模块/类/函数的 docstring。
+    import ast as _ast
+    import re as _re
+    # ★ 拼出来，别写成一个完整字面量 —— 否则**本判据的正则会打中本判据自己**
+    #   （第二版就是这么假阳的：它自己那行 pattern 被自己扫到）。
+    _frag = "cla" + "ude-"
+    pat = _re.compile(r"/private/tmp/" + _frag + r"|/tmp/" + _frag + r"\d")
+    bad = []
+    for f in sorted(root.rglob("*.py")):
+        rel = f.relative_to(root).as_posix()
+        if rel.startswith(("build/", "dist/")):
+            continue
+        try:
+            tree = _ast.parse(f.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, SyntaxError):
+            continue
+        docs = set()
+        for node in _ast.walk(tree):
+            if isinstance(node, (_ast.Module, _ast.ClassDef, _ast.FunctionDef,
+                                 _ast.AsyncFunctionDef)):
+                body = getattr(node, "body", None) or []
+                if body and isinstance(body[0], _ast.Expr) and \
+                        isinstance(getattr(body[0], "value", None), _ast.Constant) and \
+                        isinstance(body[0].value.value, str):
+                    docs.add(id(body[0].value))
+        for node in _ast.walk(tree):
+            if isinstance(node, _ast.Constant) and isinstance(node.value, str) \
+                    and id(node) not in docs and pat.search(node.value):
+                bad.append(f"{rel}:{getattr(node, 'lineno', '?')}")
+    if bad:
+        return [f"[写死会话临时目录] **{len(bad)} 处**：{bad[:6]}"
+                "（随包发出的脚本不许带会话 scratchpad 绝对路径 —— "
+                "收件人照抄会指向一条不存在的路径）"]
+    return []
+
+
 def _selftest_reach(root: pathlib.Path) -> list[str]:
     """**判据的自测有没有走到它自己的判定函数**（`check_selftest_reach.py`）。
 
@@ -473,6 +525,7 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
     problems.extend(_one_ledger_per_workspace(root))
     problems.extend(_verification_counts(root))
     problems.extend(_selftest_reach(root))
+    problems.extend(_session_paths(root))
     problems.extend(_paper_lanes(root))
     problems.extend(_doc_command_shapes(root))
 

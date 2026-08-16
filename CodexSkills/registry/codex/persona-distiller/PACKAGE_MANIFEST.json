@@ -601,8 +601,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_contract_drift.py",
-      "sha256": "3febb3ff314f14db9e6dad9a8f1591a101d609f2c5264e4a6d5cb832f1b8b4f9",
-      "size_bytes": 48809
+      "sha256": "b111f3b42812d5d321d1c3148e5920cfcce79ca796d6824e9d32511519d8085c",
+      "size_bytes": 51751
     },
     {
       "path": "references/pipeline/checkers/check_corpus_ceiling.py",
@@ -1071,43 +1071,43 @@
     },
     {
       "path": "references/pipeline/example-knuth/gen_answers.py",
-      "sha256": "efbd8ee59594d261ce3f039f9838d7273eaa4802670347ce050f23a669a46aae",
-      "size_bytes": 6561
+      "sha256": "2ffa4b935dd04c997a1d11a3521c392ff9c42c7d2b7e8db073bb77f7906a3ac3",
+      "size_bytes": 7215
     },
     {
       "path": "references/pipeline/example-knuth/gen_cases.py",
-      "sha256": "77b45c096e2277f7be0e0382a2e2e807172a22f7044ebb194d12148000b2fd89",
-      "size_bytes": 5642
+      "sha256": "3dda99960796ea93f9ab80035c523f3269d61e73babb4b8f9d68e34f70c0f26e",
+      "size_bytes": 6270
     },
     {
       "path": "references/pipeline/example-knuth/gen_claims.py",
-      "sha256": "17271372a522af50e703c63ac33f2cc84b87b35e021a47ba08ea6ba844267d08",
-      "size_bytes": 9624
+      "sha256": "037789ccdb992bcbf00a5568bfe3506362ed8f2104a3c56d4c6a864794eae9c7",
+      "size_bytes": 10123
     },
     {
       "path": "references/pipeline/example-knuth/gen_docs.py",
-      "sha256": "fe077bb6b424ff0db17b66a07580475e0eade45826d128771825006478f4af27",
-      "size_bytes": 11716
+      "sha256": "66d5a53a0c1090854116820c96686f8b5200858520fd91e15a4cd188c0f75c34",
+      "size_bytes": 12368
     },
     {
       "path": "references/pipeline/example-knuth/gen_lanes.py",
-      "sha256": "b5752b6ba85161f9bdce448d4d58b4fb8555d62ca2cba47c7a6a628a561f92f1",
-      "size_bytes": 7439
+      "sha256": "41a47293b9c14c366887dfbf90bb0fb628110b92b93d7e76a9ae435674cf3175",
+      "size_bytes": 8067
     },
     {
       "path": "references/pipeline/example-knuth/gen_more.py",
-      "sha256": "47e5e82ff556bdab8f8461a5ab1d31871503adce2bce4ee2419a4199c9226487",
-      "size_bytes": 4807
+      "sha256": "af9f8ba231d9043d84fb437dc489102006cd77e9b098a4db9a1b76e69dfefa3b",
+      "size_bytes": 5435
     },
     {
       "path": "references/pipeline/example-knuth/gen_results.py",
-      "sha256": "c25105810d42f016ad7725a3161cec82e976ed1ce898e093f3d6e5897be40bd7",
-      "size_bytes": 4341
+      "sha256": "1050b6aa6312eb69040b0b4460598cc614600754edbfa27a0c1990aae923070f",
+      "size_bytes": 4971
     },
     {
       "path": "references/pipeline/example-knuth/gen_sources.py",
-      "sha256": "a384920de253e678b6308418787ff281a8418ebd7a0ae29337075d2b29947f6f",
-      "size_bytes": 12120
+      "sha256": "a89c355b54349b27c60f47e333e40963fcd1ed6662ee9d3f29005c177b74a52d",
+      "size_bytes": 12748
     },
     {
       "path": "references/pipeline/judge_prompts/README.md",
@@ -1406,8 +1406,8 @@
     },
     {
       "path": "scripts/check_contract_drift.py",
-      "sha256": "3febb3ff314f14db9e6dad9a8f1591a101d609f2c5264e4a6d5cb832f1b8b4f9",
-      "size_bytes": 48809
+      "sha256": "b111f3b42812d5d321d1c3148e5920cfcce79ca796d6824e9d32511519d8085c",
+      "size_bytes": 51751
     },
     {
       "path": "scripts/check_corpus_ceiling.py",
