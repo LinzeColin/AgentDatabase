@@ -13,9 +13,17 @@
   "producer_skill": "../persona-distiller",
   "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; owned by the producer skill, never minted here",
   "python": ">=3.9",
-  "released_at": "2026-08-01",
+  "released_at": "2026-08-16",
   "roster_target": 600,
   "roster_target_note": "12 identity categories x 50; team-index.json products is the only truth source for the current count",
-  "version": "v0.0.0.13",
+  "runtime_architecture": "C-calibrated-MoE / B-capability-DAG / A-compatibility",
+  "team_modes": {
+    "deep_team": "10-30 persona experts",
+    "single_expert": "1 persona expert",
+    "small_team": "5-15 persona experts",
+    "swarm": "25+ persona experts"
+  },
+  "user_entry_point": "persona-distiller-group",
+  "version": "v0.0.0.14",
   "version_binding": "VERSION == manifest.json:version == team-index.json:generator_version; enforced by scripts/check_group_version_binding.py and by validate_group.py"
 }

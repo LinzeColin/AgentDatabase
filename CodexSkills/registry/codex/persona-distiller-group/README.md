@@ -1,5 +1,9 @@
 # 人物蒸馏专家团队与 canonical registry
 
+<!-- EXPERT-TEAM-V0.0.0.14 -->
+> v0.0.0.14：用户只调用专家团队；人物蒸馏是上游质量工厂。运行模式固定为 Single Expert、Small Team（5–15）、Deep Team（10–30）和 Swarm（25+）；全部模式强制运行假设、对抗、独立复审、裁判和整合控制面。
+
+
 本目录与 `persona-distiller/` 平级，承担两件事：
 
 1. 保存人物蒸馏产物的唯一 canonical 登记与单 ZIP 完整交付备份；

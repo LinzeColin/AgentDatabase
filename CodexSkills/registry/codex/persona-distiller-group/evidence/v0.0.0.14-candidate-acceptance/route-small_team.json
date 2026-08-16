@@ -1,0 +1,1396 @@
+{
+  "schema_version": "persona-team.route-plan.v2",
+  "status": "ready",
+  "task_summary": "跨软件、研究、产品、投资和合规分析 Agent 产品路线，形成证据、对抗、复审和裁决后的任务包。",
+  "strategy": "B",
+  "strategy_fallback_reason": null,
+  "requested_mode": "small_team",
+  "mode": "small_team",
+  "mode_downgrade": null,
+  "persona_expert_count": 5,
+  "control_role_count": 6,
+  "total_runtime_units": 11,
+  "persona_count_excludes_controls": true,
+  "solo_allowed": false,
+  "members": [
+    {
+      "role_id": "persona-solver-1",
+      "role_type": "persona-solver",
+      "subject_uid": "person-9b4517590a1fca74",
+      "subject_slug": "matei-zaharia",
+      "canonical_name": "Matei Zaharia",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/matei-zaharia/team-card.json",
+      "artifact": "软件开发师/matei-zaharia/versions/0.0.0.1/matei-zaharia-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "工作负载驱动的系统抽象与架构分解",
+        "统一平台与分层/专用替代方案比较",
+        "端到端基准、强基线、可复现实验与证据校准",
+        "显式状态、事务、lineage、约束、权限和恢复设计",
+        "有界 CTO 技术路线、开放生态与少数产品深潜",
+        "例子优先的技术教学与概念分解"
+      ],
+      "application_scenarios": [
+        "分布式系统、数据库、数据平台与 AI 系统架构评审",
+        "科研选题、实验设计、基准与故障复盘",
+        "技术公司平台路线、开源接口和研究产品化",
+        "RAG、语言程序、检索和智能体可靠性设计",
+        "技术教学、课程大纲、系统写作和研究训练"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权代理、背书、签名或实时观点。",
+        "研究截止 2026-07-24；之后的职位、项目、产品和观点必须核验。",
+        "创业分面不扩展为 CEO、销售、财务、定价或全面人事专长。",
+        "投资、政治法律、医疗和私人心理分面不可用或必须独立专业核验。",
+        "不把共同作者成果、奖项评价或公司叙事转写为私人动机和人格本质。"
+      ],
+      "base_score": 0.2931,
+      "marginal_score": 0.3028,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.196,
+          "packet_similarity": 0.2226,
+          "domain_match": 0.4,
+          "scenario_match": 0.058,
+          "capability_match": 0.0567,
+          "user_value_match": 0.0561,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-2",
+      "role_type": "persona-solver",
+      "subject_uid": "person-50b921c2baaf3979",
+      "subject_slug": "lou-gerstner",
+      "canonical_name": "路易斯·郭士纳 / Louis V. Gerstner Jr.",
+      "registration_category": "创业经营师",
+      "identity_family_id": "entrepreneur-operator",
+      "team_card": "创业经营师/lou-gerstner/team-card.json",
+      "artifact": "创业经营师/lou-gerstner/versions/0.0.0.1/lou-gerstner-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "危机事实底板与转型排序",
+        "端到端客户价值和企业边界分析",
+        "组织机制、激励和经营评审设计",
+        "选择性并购整合与能力保留",
+        "组合资源配置和长期能力路线",
+        "直接、压缩、可问责的高层沟通"
+      ],
+      "application_scenarios": [
+        "成熟企业危机稳定与九十天计划",
+        "B2B 客户导向战略和服务化转型",
+        "跨事业部协同与 One Company 机制设计",
+        "并购后人才、产品、客户与平台整合",
+        "资本与能力组合重配",
+        "高层经营备忘录、决策评审和继任制度化"
+      ],
+      "hard_boundaries": [
+        "这是公开证据模型，不是本人、授权、背书、签名、私密记忆或当前观点。",
+        "不声称计算机技术架构、零到一创始人、证券选择、法律或医疗专业权威。",
+        "郭士纳于 2025 年去世；对后续事件只能条件式推演并独立核验。",
+        "直接性和集中决策不得覆盖法律、安全、专业异议、员工信任和程序正义。",
+        "教育与公益建议必须补充领域因果证据、民主治理和公平性评估。"
+      ],
+      "base_score": 0.2818,
+      "marginal_score": 0.282,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1471,
+          "packet_similarity": 0.2368,
+          "domain_match": 0.4,
+          "scenario_match": 0.058,
+          "capability_match": 0.0585,
+          "user_value_match": 0.0282,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-3",
+      "role_type": "persona-solver",
+      "subject_uid": "person-44e9da7e6fbcb15e",
+      "subject_slug": "aswath-damodaran",
+      "canonical_name": "Aswath Damodaran",
+      "registration_category": "投资资本师",
+      "identity_family_id": "investor-capital-allocator",
+      "team_card": "投资资本师/aswath-damodaran/team-card.json",
+      "artifact": "投资资本师/aswath-damodaran/versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "叙事到收入、利润、再投资、风险和终值的量化映射",
+        "透明 DCF、相对定价和风险溢价分析",
+        "公司生命周期与融资、派现、治理的联动",
+        "公司新闻与新披露后的估值更新归因",
+        "可修改课程、案例、练习和反馈系统设计"
+      ],
+      "application_scenarios": [
+        "上市与非上市公司估值",
+        "高增长、亏损或复杂公司的情景分析",
+        "公司金融与资本配置审查",
+        "投资研究、价格隐含预期与风险分析",
+        "估值和公司金融教学设计",
+        "模型红队、终值与假设一致性检查"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权、背书或实时观点",
+        "不提供本人实时持仓、保证收益或个性化受托建议",
+        "公开材料不构成经审计的投资业绩记录",
+        "研究截止日后的事实必须从当前一手来源核验",
+        "法律、技术、医学等跨域结论必须由领域专业资料或专家承担"
+      ],
+      "base_score": 0.2807,
+      "marginal_score": 0.2713,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1493,
+          "packet_similarity": 0.1916,
+          "domain_match": 0.4,
+          "scenario_match": 0.0886,
+          "capability_match": 0.0874,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-4",
+      "role_type": "persona-solver",
+      "subject_uid": "person-473d8314576afc9c",
+      "subject_slug": "beth-wilkinson",
+      "canonical_name": "Beth Wilkinson",
+      "registration_category": "政治法律师",
+      "identity_family_id": "political-legal",
+      "team_card": "政治法律师/beth-wilkinson/team-card.json",
+      "artifact": "政治法律师/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-23",
+      "key_capabilities": [
+        "复杂事实记录压缩与结果敏感争点识别",
+        "审判、调查与制度风险结构化",
+        "最强反证、替代叙事与利益冲突分析",
+        "非专家技术沟通与裁判者教学",
+        "高风险专业团队培养与质量控制"
+      ],
+      "application_scenarios": [
+        "governance-legal",
+        "communication-negotiation",
+        "red-team-risk",
+        "复杂事实型诉讼与调查",
+        "机构治理与监管行为分析",
+        "面向非专家的技术争点解释"
+      ],
+      "hard_boundaries": [
+        "不得从客户代理立场推断本人的政治、道德或政策立场。",
+        "当前法律、期限、法域和案件状态必须用权威来源重新核验。",
+        "不得把诉讼与调查能力外推为科学、投资或一般企业经营专家能力。",
+        "这是证据支持的模型，不是本人、授权、背书、签名或实时意见。"
+      ],
+      "base_score": 0.2718,
+      "marginal_score": 0.2675,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1002,
+          "packet_similarity": 0.2887,
+          "domain_match": 0.4,
+          "scenario_match": 0.0325,
+          "capability_match": 0.0295,
+          "user_value_match": 0.0293,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-5",
+      "role_type": "persona-solver",
+      "subject_uid": "person-338aa48155f5c293",
+      "subject_slug": "john-c-lippold",
+      "canonical_name": "John C. Lippold",
+      "registration_category": "材料建工师",
+      "identity_family_id": "technical-engineer",
+      "team_card": "材料建工师/john-c-lippold/team-card.json",
+      "artifact": "材料建工师/john-c-lippold/versions/0.0.0.1/john-c-lippold-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2024,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "焊接冶金与热影响区/熔合边界分析",
+        "热裂、液化、DDC 与氢致裂纹机制区分",
+        "可焊性测试与判别实验设计",
+        "失效分析、因果缓解与验证计划",
+        "技术写作、审稿与研究项目设计",
+        "焊接工程课程和研究生训练设计"
+      ],
+      "application_scenarios": [
+        "焊接裂纹与失效机理诊断",
+        "可焊性试验选择与研究设计",
+        "焊接冶金技术方案/论文评审",
+        "异种材料接头与局部组织分析",
+        "焊接工程课程、教材和导师计划设计",
+        "产业—大学材料连接研究议程"
+      ],
+      "hard_boundaries": [
+        "这是公开证据上的模型，不是本人、授权、背书或当前意见。",
+        "不得批准 WPS/PQR、代码符合性或安全关键部件放行。",
+        "当前标准、材料数据、法规和设备能力必须独立核验。",
+        "不把焊接冶金能力迁移到法律、医疗、投资、政治或无关软件领域。",
+        "不补写私人记忆、情绪、冲突风格或未公开咨询工作。"
+      ],
+      "base_score": 0.2594,
+      "marginal_score": 0.2546,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1493,
+          "packet_similarity": 0.2702,
+          "domain_match": 0.2,
+          "scenario_match": 0.0588,
+          "capability_match": 0.0584,
+          "user_value_match": 0.0568,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    }
+  ],
+  "domain_experts": [
+    {
+      "role_id": "persona-solver-1",
+      "role_type": "persona-solver",
+      "subject_uid": "person-9b4517590a1fca74",
+      "subject_slug": "matei-zaharia",
+      "canonical_name": "Matei Zaharia",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/matei-zaharia/team-card.json",
+      "artifact": "软件开发师/matei-zaharia/versions/0.0.0.1/matei-zaharia-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "工作负载驱动的系统抽象与架构分解",
+        "统一平台与分层/专用替代方案比较",
+        "端到端基准、强基线、可复现实验与证据校准",
+        "显式状态、事务、lineage、约束、权限和恢复设计",
+        "有界 CTO 技术路线、开放生态与少数产品深潜",
+        "例子优先的技术教学与概念分解"
+      ],
+      "application_scenarios": [
+        "分布式系统、数据库、数据平台与 AI 系统架构评审",
+        "科研选题、实验设计、基准与故障复盘",
+        "技术公司平台路线、开源接口和研究产品化",
+        "RAG、语言程序、检索和智能体可靠性设计",
+        "技术教学、课程大纲、系统写作和研究训练"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权代理、背书、签名或实时观点。",
+        "研究截止 2026-07-24；之后的职位、项目、产品和观点必须核验。",
+        "创业分面不扩展为 CEO、销售、财务、定价或全面人事专长。",
+        "投资、政治法律、医疗和私人心理分面不可用或必须独立专业核验。",
+        "不把共同作者成果、奖项评价或公司叙事转写为私人动机和人格本质。"
+      ],
+      "base_score": 0.2931,
+      "marginal_score": 0.3028,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.196,
+          "packet_similarity": 0.2226,
+          "domain_match": 0.4,
+          "scenario_match": 0.058,
+          "capability_match": 0.0567,
+          "user_value_match": 0.0561,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-2",
+      "role_type": "persona-solver",
+      "subject_uid": "person-50b921c2baaf3979",
+      "subject_slug": "lou-gerstner",
+      "canonical_name": "路易斯·郭士纳 / Louis V. Gerstner Jr.",
+      "registration_category": "创业经营师",
+      "identity_family_id": "entrepreneur-operator",
+      "team_card": "创业经营师/lou-gerstner/team-card.json",
+      "artifact": "创业经营师/lou-gerstner/versions/0.0.0.1/lou-gerstner-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "危机事实底板与转型排序",
+        "端到端客户价值和企业边界分析",
+        "组织机制、激励和经营评审设计",
+        "选择性并购整合与能力保留",
+        "组合资源配置和长期能力路线",
+        "直接、压缩、可问责的高层沟通"
+      ],
+      "application_scenarios": [
+        "成熟企业危机稳定与九十天计划",
+        "B2B 客户导向战略和服务化转型",
+        "跨事业部协同与 One Company 机制设计",
+        "并购后人才、产品、客户与平台整合",
+        "资本与能力组合重配",
+        "高层经营备忘录、决策评审和继任制度化"
+      ],
+      "hard_boundaries": [
+        "这是公开证据模型，不是本人、授权、背书、签名、私密记忆或当前观点。",
+        "不声称计算机技术架构、零到一创始人、证券选择、法律或医疗专业权威。",
+        "郭士纳于 2025 年去世；对后续事件只能条件式推演并独立核验。",
+        "直接性和集中决策不得覆盖法律、安全、专业异议、员工信任和程序正义。",
+        "教育与公益建议必须补充领域因果证据、民主治理和公平性评估。"
+      ],
+      "base_score": 0.2818,
+      "marginal_score": 0.282,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1471,
+          "packet_similarity": 0.2368,
+          "domain_match": 0.4,
+          "scenario_match": 0.058,
+          "capability_match": 0.0585,
+          "user_value_match": 0.0282,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-3",
+      "role_type": "persona-solver",
+      "subject_uid": "person-44e9da7e6fbcb15e",
+      "subject_slug": "aswath-damodaran",
+      "canonical_name": "Aswath Damodaran",
+      "registration_category": "投资资本师",
+      "identity_family_id": "investor-capital-allocator",
+      "team_card": "投资资本师/aswath-damodaran/team-card.json",
+      "artifact": "投资资本师/aswath-damodaran/versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "叙事到收入、利润、再投资、风险和终值的量化映射",
+        "透明 DCF、相对定价和风险溢价分析",
+        "公司生命周期与融资、派现、治理的联动",
+        "公司新闻与新披露后的估值更新归因",
+        "可修改课程、案例、练习和反馈系统设计"
+      ],
+      "application_scenarios": [
+        "上市与非上市公司估值",
+        "高增长、亏损或复杂公司的情景分析",
+        "公司金融与资本配置审查",
+        "投资研究、价格隐含预期与风险分析",
+        "估值和公司金融教学设计",
+        "模型红队、终值与假设一致性检查"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权、背书或实时观点",
+        "不提供本人实时持仓、保证收益或个性化受托建议",
+        "公开材料不构成经审计的投资业绩记录",
+        "研究截止日后的事实必须从当前一手来源核验",
+        "法律、技术、医学等跨域结论必须由领域专业资料或专家承担"
+      ],
+      "base_score": 0.2807,
+      "marginal_score": 0.2713,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1493,
+          "packet_similarity": 0.1916,
+          "domain_match": 0.4,
+          "scenario_match": 0.0886,
+          "capability_match": 0.0874,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-4",
+      "role_type": "persona-solver",
+      "subject_uid": "person-473d8314576afc9c",
+      "subject_slug": "beth-wilkinson",
+      "canonical_name": "Beth Wilkinson",
+      "registration_category": "政治法律师",
+      "identity_family_id": "political-legal",
+      "team_card": "政治法律师/beth-wilkinson/team-card.json",
+      "artifact": "政治法律师/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-23",
+      "key_capabilities": [
+        "复杂事实记录压缩与结果敏感争点识别",
+        "审判、调查与制度风险结构化",
+        "最强反证、替代叙事与利益冲突分析",
+        "非专家技术沟通与裁判者教学",
+        "高风险专业团队培养与质量控制"
+      ],
+      "application_scenarios": [
+        "governance-legal",
+        "communication-negotiation",
+        "red-team-risk",
+        "复杂事实型诉讼与调查",
+        "机构治理与监管行为分析",
+        "面向非专家的技术争点解释"
+      ],
+      "hard_boundaries": [
+        "不得从客户代理立场推断本人的政治、道德或政策立场。",
+        "当前法律、期限、法域和案件状态必须用权威来源重新核验。",
+        "不得把诉讼与调查能力外推为科学、投资或一般企业经营专家能力。",
+        "这是证据支持的模型，不是本人、授权、背书、签名或实时意见。"
+      ],
+      "base_score": 0.2718,
+      "marginal_score": 0.2675,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1002,
+          "packet_similarity": 0.2887,
+          "domain_match": 0.4,
+          "scenario_match": 0.0325,
+          "capability_match": 0.0295,
+          "user_value_match": 0.0293,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-5",
+      "role_type": "persona-solver",
+      "subject_uid": "person-338aa48155f5c293",
+      "subject_slug": "john-c-lippold",
+      "canonical_name": "John C. Lippold",
+      "registration_category": "材料建工师",
+      "identity_family_id": "technical-engineer",
+      "team_card": "材料建工师/john-c-lippold/team-card.json",
+      "artifact": "材料建工师/john-c-lippold/versions/0.0.0.1/john-c-lippold-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2024,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "焊接冶金与热影响区/熔合边界分析",
+        "热裂、液化、DDC 与氢致裂纹机制区分",
+        "可焊性测试与判别实验设计",
+        "失效分析、因果缓解与验证计划",
+        "技术写作、审稿与研究项目设计",
+        "焊接工程课程和研究生训练设计"
+      ],
+      "application_scenarios": [
+        "焊接裂纹与失效机理诊断",
+        "可焊性试验选择与研究设计",
+        "焊接冶金技术方案/论文评审",
+        "异种材料接头与局部组织分析",
+        "焊接工程课程、教材和导师计划设计",
+        "产业—大学材料连接研究议程"
+      ],
+      "hard_boundaries": [
+        "这是公开证据上的模型，不是本人、授权、背书或当前意见。",
+        "不得批准 WPS/PQR、代码符合性或安全关键部件放行。",
+        "当前标准、材料数据、法规和设备能力必须独立核验。",
+        "不把焊接冶金能力迁移到法律、医疗、投资、政治或无关软件领域。",
+        "不补写私人记忆、情绪、冲突风格或未公开咨询工作。"
+      ],
+      "base_score": 0.2594,
+      "marginal_score": 0.2546,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1493,
+          "packet_similarity": 0.2702,
+          "domain_match": 0.2,
+          "scenario_match": 0.0588,
+          "capability_match": 0.0584,
+          "user_value_match": 0.0568,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    }
+  ],
+  "selected_roles": [
+    {
+      "role_id": "persona-solver-1",
+      "role_type": "persona-solver",
+      "subject_uid": "person-9b4517590a1fca74",
+      "subject_slug": "matei-zaharia",
+      "canonical_name": "Matei Zaharia",
+      "registration_category": "软件开发师",
+      "identity_family_id": "software-developer",
+      "team_card": "软件开发师/matei-zaharia/team-card.json",
+      "artifact": "软件开发师/matei-zaharia/versions/0.0.0.1/matei-zaharia-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "工作负载驱动的系统抽象与架构分解",
+        "统一平台与分层/专用替代方案比较",
+        "端到端基准、强基线、可复现实验与证据校准",
+        "显式状态、事务、lineage、约束、权限和恢复设计",
+        "有界 CTO 技术路线、开放生态与少数产品深潜",
+        "例子优先的技术教学与概念分解"
+      ],
+      "application_scenarios": [
+        "分布式系统、数据库、数据平台与 AI 系统架构评审",
+        "科研选题、实验设计、基准与故障复盘",
+        "技术公司平台路线、开源接口和研究产品化",
+        "RAG、语言程序、检索和智能体可靠性设计",
+        "技术教学、课程大纲、系统写作和研究训练"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权代理、背书、签名或实时观点。",
+        "研究截止 2026-07-24；之后的职位、项目、产品和观点必须核验。",
+        "创业分面不扩展为 CEO、销售、财务、定价或全面人事专长。",
+        "投资、政治法律、医疗和私人心理分面不可用或必须独立专业核验。",
+        "不把共同作者成果、奖项评价或公司叙事转写为私人动机和人格本质。"
+      ],
+      "base_score": 0.2931,
+      "marginal_score": 0.3028,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.196,
+          "packet_similarity": 0.2226,
+          "domain_match": 0.4,
+          "scenario_match": 0.058,
+          "capability_match": 0.0567,
+          "user_value_match": 0.0561,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-2",
+      "role_type": "persona-solver",
+      "subject_uid": "person-50b921c2baaf3979",
+      "subject_slug": "lou-gerstner",
+      "canonical_name": "路易斯·郭士纳 / Louis V. Gerstner Jr.",
+      "registration_category": "创业经营师",
+      "identity_family_id": "entrepreneur-operator",
+      "team_card": "创业经营师/lou-gerstner/team-card.json",
+      "artifact": "创业经营师/lou-gerstner/versions/0.0.0.1/lou-gerstner-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "deceased",
+      "subject_active_through": 2025,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "危机事实底板与转型排序",
+        "端到端客户价值和企业边界分析",
+        "组织机制、激励和经营评审设计",
+        "选择性并购整合与能力保留",
+        "组合资源配置和长期能力路线",
+        "直接、压缩、可问责的高层沟通"
+      ],
+      "application_scenarios": [
+        "成熟企业危机稳定与九十天计划",
+        "B2B 客户导向战略和服务化转型",
+        "跨事业部协同与 One Company 机制设计",
+        "并购后人才、产品、客户与平台整合",
+        "资本与能力组合重配",
+        "高层经营备忘录、决策评审和继任制度化"
+      ],
+      "hard_boundaries": [
+        "这是公开证据模型，不是本人、授权、背书、签名、私密记忆或当前观点。",
+        "不声称计算机技术架构、零到一创始人、证券选择、法律或医疗专业权威。",
+        "郭士纳于 2025 年去世；对后续事件只能条件式推演并独立核验。",
+        "直接性和集中决策不得覆盖法律、安全、专业异议、员工信任和程序正义。",
+        "教育与公益建议必须补充领域因果证据、民主治理和公平性评估。"
+      ],
+      "base_score": 0.2818,
+      "marginal_score": 0.282,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1471,
+          "packet_similarity": 0.2368,
+          "domain_match": 0.4,
+          "scenario_match": 0.058,
+          "capability_match": 0.0585,
+          "user_value_match": 0.0282,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-3",
+      "role_type": "persona-solver",
+      "subject_uid": "person-44e9da7e6fbcb15e",
+      "subject_slug": "aswath-damodaran",
+      "canonical_name": "Aswath Damodaran",
+      "registration_category": "投资资本师",
+      "identity_family_id": "investor-capital-allocator",
+      "team_card": "投资资本师/aswath-damodaran/team-card.json",
+      "artifact": "投资资本师/aswath-damodaran/versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "叙事到收入、利润、再投资、风险和终值的量化映射",
+        "透明 DCF、相对定价和风险溢价分析",
+        "公司生命周期与融资、派现、治理的联动",
+        "公司新闻与新披露后的估值更新归因",
+        "可修改课程、案例、练习和反馈系统设计"
+      ],
+      "application_scenarios": [
+        "上市与非上市公司估值",
+        "高增长、亏损或复杂公司的情景分析",
+        "公司金融与资本配置审查",
+        "投资研究、价格隐含预期与风险分析",
+        "估值和公司金融教学设计",
+        "模型红队、终值与假设一致性检查"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权、背书或实时观点",
+        "不提供本人实时持仓、保证收益或个性化受托建议",
+        "公开材料不构成经审计的投资业绩记录",
+        "研究截止日后的事实必须从当前一手来源核验",
+        "法律、技术、医学等跨域结论必须由领域专业资料或专家承担"
+      ],
+      "base_score": 0.2807,
+      "marginal_score": 0.2713,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1493,
+          "packet_similarity": 0.1916,
+          "domain_match": 0.4,
+          "scenario_match": 0.0886,
+          "capability_match": 0.0874,
+          "user_value_match": 0.0,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-4",
+      "role_type": "persona-solver",
+      "subject_uid": "person-473d8314576afc9c",
+      "subject_slug": "beth-wilkinson",
+      "canonical_name": "Beth Wilkinson",
+      "registration_category": "政治法律师",
+      "identity_family_id": "political-legal",
+      "team_card": "政治法律师/beth-wilkinson/team-card.json",
+      "artifact": "政治法律师/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2026,
+      "research_cutoff": "2026-07-23",
+      "key_capabilities": [
+        "复杂事实记录压缩与结果敏感争点识别",
+        "审判、调查与制度风险结构化",
+        "最强反证、替代叙事与利益冲突分析",
+        "非专家技术沟通与裁判者教学",
+        "高风险专业团队培养与质量控制"
+      ],
+      "application_scenarios": [
+        "governance-legal",
+        "communication-negotiation",
+        "red-team-risk",
+        "复杂事实型诉讼与调查",
+        "机构治理与监管行为分析",
+        "面向非专家的技术争点解释"
+      ],
+      "hard_boundaries": [
+        "不得从客户代理立场推断本人的政治、道德或政策立场。",
+        "当前法律、期限、法域和案件状态必须用权威来源重新核验。",
+        "不得把诉讼与调查能力外推为科学、投资或一般企业经营专家能力。",
+        "这是证据支持的模型，不是本人、授权、背书、签名或实时意见。"
+      ],
+      "base_score": 0.2718,
+      "marginal_score": 0.2675,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1002,
+          "packet_similarity": 0.2887,
+          "domain_match": 0.4,
+          "scenario_match": 0.0325,
+          "capability_match": 0.0295,
+          "user_value_match": 0.0293,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "persona-solver-5",
+      "role_type": "persona-solver",
+      "subject_uid": "person-338aa48155f5c293",
+      "subject_slug": "john-c-lippold",
+      "canonical_name": "John C. Lippold",
+      "registration_category": "材料建工师",
+      "identity_family_id": "technical-engineer",
+      "team_card": "材料建工师/john-c-lippold/team-card.json",
+      "artifact": "材料建工师/john-c-lippold/versions/0.0.0.1/john-c-lippold-persona-distillation-delivery-v0.0.0.1.zip",
+      "readiness": "ready",
+      "subject_status": "living",
+      "subject_active_through": 2024,
+      "research_cutoff": "2026-07-24",
+      "key_capabilities": [
+        "焊接冶金与热影响区/熔合边界分析",
+        "热裂、液化、DDC 与氢致裂纹机制区分",
+        "可焊性测试与判别实验设计",
+        "失效分析、因果缓解与验证计划",
+        "技术写作、审稿与研究项目设计",
+        "焊接工程课程和研究生训练设计"
+      ],
+      "application_scenarios": [
+        "焊接裂纹与失效机理诊断",
+        "可焊性试验选择与研究设计",
+        "焊接冶金技术方案/论文评审",
+        "异种材料接头与局部组织分析",
+        "焊接工程课程、教材和导师计划设计",
+        "产业—大学材料连接研究议程"
+      ],
+      "hard_boundaries": [
+        "这是公开证据上的模型，不是本人、授权、背书或当前意见。",
+        "不得批准 WPS/PQR、代码符合性或安全关键部件放行。",
+        "当前标准、材料数据、法规和设备能力必须独立核验。",
+        "不把焊接冶金能力迁移到法律、医疗、投资、政治或无关软件领域。",
+        "不补写私人记忆、情绪、冲突风格或未公开咨询工作。"
+      ],
+      "base_score": 0.2594,
+      "marginal_score": 0.2546,
+      "score_breakdown": {
+        "values": {
+          "task_similarity": 0.1493,
+          "packet_similarity": 0.2702,
+          "domain_match": 0.2,
+          "scenario_match": 0.0588,
+          "capability_match": 0.0584,
+          "user_value_match": 0.0568,
+          "evidence": 1.0,
+          "boundary": 1.0,
+          "currentness": 0.75
+        },
+        "telemetry_prior": 0.0,
+        "telemetry": {
+          "reason": "not C"
+        },
+        "penalties": {
+          "measured_scope": 0.0,
+          "admission_restriction": 0.0
+        }
+      },
+      "purpose": "在被载入的真实人物 claims、方法与边界内拥有一个或多个工作包。"
+    },
+    {
+      "role_id": "team-orchestrator",
+      "role_type": "control",
+      "purpose": "维护目标、依赖、权限、工作包、阶段门和失败返回路径。",
+      "isolated_from": [
+        "decision-judge"
+      ]
+    },
+    {
+      "role_id": "hypothesis-framer",
+      "role_type": "control",
+      "purpose": "在求解前列出关键假设、可证伪预测、信息缺口和改判条件。",
+      "isolated_from": [
+        "persona-solver-*"
+      ]
+    },
+    {
+      "role_id": "counterevidence-adversary",
+      "role_type": "control",
+      "purpose": "寻找反证、冲突来源、失败前提、相关性错误和替代解释。",
+      "isolated_from": [
+        "persona-solver-*",
+        "independent-reviewer"
+      ]
+    },
+    {
+      "role_id": "independent-reviewer",
+      "role_type": "control",
+      "purpose": "只读取密封候选产物和证据摘要，检查完整性、可执行性和事实风险。",
+      "isolated_from": [
+        "persona-solver-*",
+        "counterevidence-adversary"
+      ]
+    },
+    {
+      "role_id": "decision-judge",
+      "role_type": "control",
+      "purpose": "按预先冻结的判据裁决，不以多数票或折中替代证据。",
+      "isolated_from": [
+        "persona-solver-*",
+        "team-orchestrator"
+      ]
+    },
+    {
+      "role_id": "synthesis-lead",
+      "role_type": "control",
+      "purpose": "将裁决后的结论编译为单一、连贯、可直接使用的最终交付物。",
+      "isolated_from": [
+        "decision-judge"
+      ]
+    }
+  ],
+  "control_plane": [
+    {
+      "role_id": "team-orchestrator",
+      "role_type": "control",
+      "purpose": "维护目标、依赖、权限、工作包、阶段门和失败返回路径。",
+      "isolated_from": [
+        "decision-judge"
+      ]
+    },
+    {
+      "role_id": "hypothesis-framer",
+      "role_type": "control",
+      "purpose": "在求解前列出关键假设、可证伪预测、信息缺口和改判条件。",
+      "isolated_from": [
+        "persona-solver-*"
+      ]
+    },
+    {
+      "role_id": "counterevidence-adversary",
+      "role_type": "control",
+      "purpose": "寻找反证、冲突来源、失败前提、相关性错误和替代解释。",
+      "isolated_from": [
+        "persona-solver-*",
+        "independent-reviewer"
+      ]
+    },
+    {
+      "role_id": "independent-reviewer",
+      "role_type": "control",
+      "purpose": "只读取密封候选产物和证据摘要，检查完整性、可执行性和事实风险。",
+      "isolated_from": [
+        "persona-solver-*",
+        "counterevidence-adversary"
+      ]
+    },
+    {
+      "role_id": "decision-judge",
+      "role_type": "control",
+      "purpose": "按预先冻结的判据裁决，不以多数票或折中替代证据。",
+      "isolated_from": [
+        "persona-solver-*",
+        "team-orchestrator"
+      ]
+    },
+    {
+      "role_id": "synthesis-lead",
+      "role_type": "control",
+      "purpose": "将裁决后的结论编译为单一、连贯、可直接使用的最终交付物。",
+      "isolated_from": [
+        "decision-judge"
+      ]
+    }
+  ],
+  "task_graph": {
+    "schema_version": "persona-team.task-graph.v2",
+    "task": "跨软件、研究、产品、投资和合规分析 Agent 产品路线，形成证据、对抗、复审和裁决后的任务包。",
+    "profile": {
+      "complexity": 0.7977,
+      "risk": 0.46,
+      "currentness": 0.0,
+      "parallelizability": 0.08,
+      "coupling": 0.12,
+      "domains": [
+        "research-education",
+        "software-ai",
+        "finance-investment",
+        "legal-policy",
+        "operations-product"
+      ],
+      "token_count_proxy": 30
+    },
+    "mode": "small_team",
+    "persona_expert_target": 5,
+    "mode_reasons": [
+      "explicit owner/runtime override"
+    ],
+    "persona_count_contract": {
+      "single_expert": "exactly 1 persona expert",
+      "small_team": "5-15 persona experts",
+      "deep_team": "10-30 persona experts",
+      "swarm": "25+ persona experts",
+      "controls_excluded_from_persona_count": true,
+      "solo_allowed": false
+    },
+    "control_plane": [
+      {
+        "role_id": "team-orchestrator",
+        "role_type": "control",
+        "purpose": "维护目标、依赖、权限、工作包、阶段门和失败返回路径。",
+        "isolated_from": [
+          "decision-judge"
+        ]
+      },
+      {
+        "role_id": "hypothesis-framer",
+        "role_type": "control",
+        "purpose": "在求解前列出关键假设、可证伪预测、信息缺口和改判条件。",
+        "isolated_from": [
+          "persona-solver-*"
+        ]
+      },
+      {
+        "role_id": "counterevidence-adversary",
+        "role_type": "control",
+        "purpose": "寻找反证、冲突来源、失败前提、相关性错误和替代解释。",
+        "isolated_from": [
+          "persona-solver-*",
+          "independent-reviewer"
+        ]
+      },
+      {
+        "role_id": "independent-reviewer",
+        "role_type": "control",
+        "purpose": "只读取密封候选产物和证据摘要，检查完整性、可执行性和事实风险。",
+        "isolated_from": [
+          "persona-solver-*",
+          "counterevidence-adversary"
+        ]
+      },
+      {
+        "role_id": "decision-judge",
+        "role_type": "control",
+        "purpose": "按预先冻结的判据裁决，不以多数票或折中替代证据。",
+        "isolated_from": [
+          "persona-solver-*",
+          "team-orchestrator"
+        ]
+      },
+      {
+        "role_id": "synthesis-lead",
+        "role_type": "control",
+        "purpose": "将裁决后的结论编译为单一、连贯、可直接使用的最终交付物。",
+        "isolated_from": [
+          "decision-judge"
+        ]
+      }
+    ],
+    "work_packets": [
+      {
+        "packet_id": "WP-001",
+        "kind": "problem-framing",
+        "objective": "把用户目标编译为交付物、约束、成功条件和停止条件。",
+        "domains": [
+          "research-education",
+          "software-ai",
+          "finance-investment",
+          "legal-policy",
+          "operations-product"
+        ],
+        "dependencies": [],
+        "parallel_group": null,
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-002",
+        "kind": "evidence-map",
+        "objective": "建立事实、来源、未知、当前性和证据缺口地图。",
+        "domains": [
+          "research-education",
+          "software-ai",
+          "finance-investment",
+          "legal-policy",
+          "operations-product"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": null,
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-003",
+        "kind": "solution-analysis",
+        "objective": "在人物能力与边界内形成可执行解决方案。",
+        "domains": [
+          "research-education",
+          "software-ai",
+          "finance-investment",
+          "legal-policy",
+          "operations-product"
+        ],
+        "dependencies": [
+          "WP-001",
+          "WP-002"
+        ],
+        "parallel_group": null,
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-004",
+        "kind": "artifact-plan",
+        "objective": "把解决方案转成用户所需的最终制品或行动包。",
+        "domains": [
+          "research-education",
+          "software-ai",
+          "finance-investment",
+          "legal-policy",
+          "operations-product"
+        ],
+        "dependencies": [
+          "WP-003"
+        ],
+        "parallel_group": null,
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-005",
+        "kind": "independent-shard",
+        "objective": "独立处理第 1 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "operations-product"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      },
+      {
+        "packet_id": "WP-006",
+        "kind": "independent-shard",
+        "objective": "独立处理第 2 个证据／方案／对象分片，并提交可合并的结构化产物。",
+        "domains": [
+          "research-education"
+        ],
+        "dependencies": [
+          "WP-001"
+        ],
+        "parallel_group": "DISCOVERY-A",
+        "required_output": {
+          "conclusion": "bounded conclusion",
+          "evidence": "claim/source references",
+          "assumptions": "explicit assumptions",
+          "failure_conditions": "conditions that invalidate the output",
+          "next_action": "one executable next action"
+        }
+      }
+    ],
+    "control_stages": [
+      {
+        "stage": "G0",
+        "role": "hypothesis-framer",
+        "after": [
+          "WP-001"
+        ],
+        "gate": "assumptions and falsifiers frozen"
+      },
+      {
+        "stage": "G1",
+        "role": "counterevidence-adversary",
+        "after": [
+          "WP-001",
+          "WP-002",
+          "WP-003",
+          "WP-004",
+          "WP-005",
+          "WP-006"
+        ],
+        "gate": "counterevidence attached"
+      },
+      {
+        "stage": "G2",
+        "role": "independent-reviewer",
+        "after": [
+          "G1"
+        ],
+        "gate": "review findings resolved or surfaced"
+      },
+      {
+        "stage": "G3",
+        "role": "decision-judge",
+        "after": [
+          "G2"
+        ],
+        "gate": "one adjudicated decision with change triggers"
+      },
+      {
+        "stage": "G4",
+        "role": "synthesis-lead",
+        "after": [
+          "G3"
+        ],
+        "gate": "single coherent delivery produced"
+      }
+    ],
+    "merge_contract": {
+      "unit": "structured artifact, not free-form opinion",
+      "conflict_rule": "compare assumptions, evidence, predictions, failure conditions and applicability; no majority vote",
+      "final_owner": "synthesis-lead after decision-judge"
+    }
+  },
+  "packet_assignments": [
+    {
+      "packet_id": "WP-001",
+      "owner_subject_slug": "matei-zaharia",
+      "owner_name": "Matei Zaharia",
+      "compatibility": 0.2979,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-002",
+      "owner_subject_slug": "beth-wilkinson",
+      "owner_name": "Beth Wilkinson",
+      "compatibility": 0.3648,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-003",
+      "owner_subject_slug": "john-c-lippold",
+      "owner_name": "John C. Lippold",
+      "compatibility": 0.3428,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-004",
+      "owner_subject_slug": "lou-gerstner",
+      "owner_name": "路易斯·郭士纳 / Louis V. Gerstner Jr.",
+      "compatibility": 0.0789,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-005",
+      "owner_subject_slug": "aswath-damodaran",
+      "owner_name": "Aswath Damodaran",
+      "compatibility": 0.1093,
+      "capacity_after_assignment": 1
+    },
+    {
+      "packet_id": "WP-006",
+      "owner_subject_slug": "matei-zaharia",
+      "owner_name": "Matei Zaharia",
+      "compatibility": 0.0626,
+      "capacity_after_assignment": 2
+    }
+  ],
+  "excluded_candidates": [
+    {
+      "subject_slug": "george-washington-carver",
+      "canonical_name": "George Washington Carver",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.0
+    },
+    {
+      "subject_slug": "joel-salatin",
+      "canonical_name": "Joel Salatin",
+      "reason": "expert-choice compatibility below threshold",
+      "base_score": 0.1706
+    }
+  ],
+  "routing_observability": {
+    "eligible_candidates": 100,
+    "excluded_candidates": 2,
+    "registry_products": 102,
+    "telemetry_eligible_for_c": false,
+    "target_gates": {
+      "overall_delta": 95,
+      "ux": 95,
+      "moe": 95,
+      "routing": 95,
+      "functionality": 95,
+      "quality": 95,
+      "minimum_any_dimension": 75
+    }
+  },
+  "separation_protocol": [
+    "hypothesis-framer freezes assumptions before persona solutions",
+    "persona experts receive bounded work packets and cannot review their own work",
+    "counterevidence-adversary sees sealed candidate artifacts, not hidden reasoning",
+    "independent-reviewer is isolated from generators and adversary",
+    "decision-judge uses a predeclared rubric and cannot edit candidate evidence",
+    "synthesis-lead writes only after the judge record is frozen"
+  ],
+  "limitations": [
+    "C is used only when real outcome telemetry satisfies the calibration contract; otherwise B is explicit.",
+    "Routing score is a selection signal, not proof that a persona will improve the final task result."
+  ]
+}

@@ -1,5 +1,15 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.14 — Agentic Sparse MoE and end-to-end persona consumption
+
+- Fixed route-plan to dossier continuity by emitting and consuming `subject_slug` across `members`, `domain_experts`, `selected_roles`, and legacy `roster`.
+- Replaced the single fixed 5–20 team contract with Single Expert (1), Small Team (5–15), Deep Team (10–30), and Swarm (25+); no Solo mode.
+- Added mandatory neutral hypothesis, counterevidence, independent review, judge, orchestrator, and synthesis controls to every mode; controls are excluded from persona seat counts.
+- Added C/B/A routing: calibrated sparse MoE, deterministic capability DAG, and compatibility fallback.
+- Added producer-consumer fleet admission, minimal persona capsules, capacity-aware packet ownership, execution contracts, Team Delta scoring, and 95/75 acceptance gates.
+- Voice is off by default; method, evidence, work, failure, boundary, and currentness capsules drive runtime behavior.
+- Added functional acceptance covering all modes, nested Runtime ZIP loading, route-to-dossier continuity, C-to-B fallback, and scoring gates.
+
 > **这份记录是 2026-08-01 事后从 git 重建的，不是逐版当时写的。**
 > 凡从 git 重建的条目都在末尾标 `[git 重建]`；从本版起当版写当版。
 > 重建依据一律给出可自行复现的命令，**不写"大概改了什么"**。
