@@ -132,7 +132,16 @@ Date: 2026-08-05（**v0.0.0.154**）
 > 还原 → 0，文件逐字一致。（**上一次接线就是接错了分支才白接的**，所以这次必须植入验证。）
 >
 > **本版实况计数（`check_verification_counts.py` 逐项核过）**：
-> 判据 **93** 件、Python 脚本 **135** 件、checksum 全量校验 **491 files**、身份族 **12** 族、**名册 102 人**。
+> 判据 **93** 件、Python 脚本 **136** 件、checksum 全量校验 **492 files**、身份族 **12** 族、**名册 102 人**。
+>
+> ★ **2026-08-17 第十六次更新：脚本 135→136、checksum 491→492** ——
+>   新增 `scripts/run_tests.py`。**为什么要新增**：`tests/` 下 14 件测试**没有任何 runner**，
+>   全仓没有一处会去跑它们；`test_group_contract.py` 因此对着**四个从未存在过的键**
+>   红了很久而无人发现。该件默认**只报告（rc=0）**，`--strict --allow-known` 才当门用 ——
+>   只挡**新回归**，不被两条待裁定的路由分歧卡住。
+>   ★★ 讽刺而值得记：**它第一次运行就抓到了 3 个回归，而那 3 个正是它自己被加进来造成的**
+>   （脚本数与 checksum 数一变，三件验清册的测试立刻红）——**改判据要跑 `build_manifest`，
+>   而 `VERIFICATION.md` 里这几个自报数字也要跟着改**，两件都得做。
 > ★★★★ **2026-08-10 更新**：判据 72→82、脚本 106→117、checksum 416→431。**这三个数又漂了一轮，是 `check_checkers` 报出来的，不是我自己想起来的。** ★ 口径写死在 `check_verification_counts.PATTERNS`：判据＝`scripts/check_*.py`、脚本＝`scripts/*.py`。**我第一次改用 `find . -name '*.py'` 算出 250，范围错了**——[[counts-need-their-cutoff-stated]]。
 > ★★★★ **2026-08-11 再更新**：判据 82→**86**、脚本 117→**123**、checksum 431→**460**，并补上此前**根本没写过**的「名册人数」**102**（判据一直报「文中 None」，而「文中没写」和「文中写错」在报告里长得一样——`empty-default-swallows-unknown`）。★ 三个数都**按判据写死的那个口径独立复算过一遍**，不是抄它的输出：
 > `ls scripts/check_*.py | wc -l` = 86、`ls scripts/*.py | wc -l` = 123、`wc -l < checksums.sha256` = 460、`team-index.json` 的 products = 102。

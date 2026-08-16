@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "81c6694332424e59f00c2e63a94bedf2e1375f136b489ffe20e72fcf11f492c8",
-      "size_bytes": 144952
+      "sha256": "7f2024ba8d3e11dd5fc2311b4d25e7802243dd52d9ae594bb1fd263ff0aadc1f",
+      "size_bytes": 145792
     },
     {
       "path": "VERSION",
@@ -1918,6 +1918,11 @@
       "path": "scripts/route_engine.py",
       "sha256": "8198c2d703bc5375459bf35d451631a76f411e02db3c8e35c3542d7a401b72e1",
       "size_bytes": 6769
+    },
+    {
+      "path": "scripts/run_tests.py",
+      "sha256": "69efaa20d1bfe3878ad5497305d618713b4d471c9147b4d67bf6d7bf7be9aa15",
+      "size_bytes": 6128
     },
     {
       "path": "scripts/self_check.py",
