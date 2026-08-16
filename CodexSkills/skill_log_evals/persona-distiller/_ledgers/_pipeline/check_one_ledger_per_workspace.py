@@ -36,6 +36,7 @@ import argparse
 import collections
 import json
 import pathlib
+import re
 import sys
 
 # 按工作区**只应有一份**的产物，以及各自的权威位置。
@@ -55,7 +56,36 @@ ARTIFACTS = {
     "meta.json": None,
     "team-card.json": None,
 }
+HERE = pathlib.Path(__file__).resolve().parent
+_ADJ: dict = {}
 AUTHORITATIVE = "evidence"          # 账本的权威位置（保留，供既有调用）
+
+
+def _adjudicated() -> dict:
+    """去 `check_contract_drift.py` 里读**已裁定**的豁免名单。
+
+    ★★★ 2026-08-17 的教训做成机器检查：我为「claims 6 处重复」查了半天，
+    最后发现 `check_contract_drift.py` 早有 `CLAIMS_KNOWN` 豁免名单，成员**正是那 6 个**，
+    并写着「权威的是 evidence/claims.jsonl，另一份是陈旧快照，**判决不受影响**，
+    而**人照另一份数就会得到不同的数**；已判过分，不动」。
+    —— **那句话预言了我当天的错**（我拿 rglob 数出 1432，权威口径 1174）。
+    ⇒ 与其把教训写成散文，不如让本件**自己去读那份名单**，
+      报重复时直接标「已裁定，不用再查」。
+    """
+    out = {}
+    for rel in ("registry/codex/persona-distiller/scripts/check_contract_drift.py",):
+        f = HERE.parents[3] / rel
+        if not f.is_file():
+            continue
+        txt = f.read_text(encoding="utf-8", errors="replace")
+        m = re.search(r"CLAIMS_KNOWN\s*=\s*\{(.*?)\}", txt, re.S)
+        if m:
+            for name in re.findall(r'"(wip-[a-z0-9-]+)"', m.group(1)):
+                # ★ 射程限定在它裁的那个产物上 —— `CLAIMS_KNOWN` 裁的是
+                #   `claims.jsonl`，**套到 results/cases 上就是超范围**。
+                out.setdefault(("claims.jsonl", name), []).append(
+                    "CLAIMS_KNOWN@check_contract_drift")
+    return out
 
 
 def _keys(f: pathlib.Path) -> frozenset:
@@ -158,7 +188,10 @@ def main() -> int:
         ap.error("要 --corpora，或只跑 --self-test")
 
     corp = pathlib.Path(a.corpora).resolve()
+    global _ADJ
+    _ADJ = _adjudicated()
     print("扫描面：%s" % corp)
+    print("已裁定名单：**%d** 个工作区（读自 check_contract_drift.py）" % len(_ADJ))
     print("\n══ 全部关键产物：文件数 vs 工作区数")
     for _name, _auth in ARTIFACTS.items():
         _b = scan(corp, _name)
@@ -190,11 +223,21 @@ def main() -> int:
             print("        逐字节相同（删一份无风险）：**%d** 个　%s"
                   % (len(same), "、".join(same[:4]) + ("…" if len(same) > 4 else "")))
         if diverge:
-            print("        **同 schema、内容不同（哪份算数只能由人定）：%d** 个　%s"
-                  % (len(diverge), "、".join(diverge)))
+            _open = [k for k in diverge if (_name, k) not in _ADJ]
+            # ★ 不许同一节里先说「只能由人定」再说「已有裁定」——
+            #   全部已裁定时就直接这么说。
+            print("        同 schema、内容不同：**%d** 个；其中**未裁定的 %d 个**%s"
+                  % (len(diverge), len(_open),
+                     ("：" + "、".join(_open)) if _open else " —— **全部已有裁定**"))
         if notsame:
             print("        ★ **键集合不同 ⇒ 同名不同物，不该删、该改名：%d** 个　%s"
                   % (len(notsame), "、".join(notsame[:4]) + ("…" if len(notsame) > 4 else "")))
+        _known = [k for k in _multi if (_name, k) in _ADJ]
+        if _known:
+            print("        ✓ **其中 %d 个已有裁定，不用再查**：%s"
+                  % (len(_known), "、".join("%s（%s）" % (k, _ADJ[(_name, k)][0])
+                                            for k in sorted(_known)[:3])
+                     + ("…" if len(_known) > 3 else "")))
     print("\n══ 源账本逐份细看")
 
     by_ws = scan(corp)
