@@ -27,6 +27,7 @@ description: The single user-facing entry point for evidence-grounded persona ex
 | 团队级结果遥测有多少条 | **0 条**。C 层要 ≥60 条 ⇒ **C 从未启用过，全部实跑都是 B** | `report_expert_team_state.py` |
 | 分歧检测能不能命中 | 全库可互相点名的配对 **24 / 5151 = 0.47%**，且全部同族；而路由跨族选人 ⇒ **24 个任务里含可检出对的是 0 个**。`divergences: []` 意为「**没有检出**」，**不是**「专家一致」 | 同上 |
 | 名册覆盖 | 12 个身份族中 **医疗护理师恒为 0 人**；命中该族的任务注定 0 | `audit_persona_fleet_for_team.py` |
+| 名册里的人物本身测过没有 | **102 个在册产物中只有 2 个**（2%）有干净的盲测 delta 读数（Carver +0.3791、Shewhart +0.1822）；另 3 个只有污染读数（看过 rubric 才写基线，不算证据）；**97 个什么读数都没有**。三方向交叉核一致：102 份 registration.json 与 102 份 team-card.json 含 delta 字样的都是 **0** 份 | `check_registered_products_have_delta_evidence.py` |
 | 团队 vs 裸模型的盲测增益 | **没有这个数。** 需要真跑任务并与裸模型盲比、且要互相独立的评委会话 —— 未做，**不编** | —— |
 
 **怎么用这张表**

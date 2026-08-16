@@ -79,6 +79,18 @@ def main():
     else:
         print("  ✗ 车队审计没有输出 JSON —— **未取到，不是「没问题」**")
 
+    # ── ① 已证实的决策增益：在册产物有多少人有盲测 delta ────────────────
+    section("① 已证实的决策增益 —— 在册产物里有多少人有盲测 delta 证据")
+    out = run([sys.executable, str(HERE / "check_registered_products_have_delta_evidence.py"),
+               "--registry-root", str(G), "--corpora", str(HERE.parents[1] / "_corpora")])
+    keep = ("在册 ", "有：", "无：", "★★ 另有", "registration.json", "team-card.json",
+            "不在册", "射程：")
+    for l in out.stdout.splitlines():
+        if any(k in l for k in keep):
+            print("  " + l.strip())
+    if out.returncode != 0:
+        print("  ✗ 取不到 —— **不是「没问题」**：%s" % out.stderr.strip()[:200])
+
     # ── ①④ 记录与自优化：团队级遥测 ──────────────────────────────────────
     section("①④ 团队级 outcome 记录 —— C 层校准的前提")
     # ★★ **先说清楚「该去哪儿找」——否则这个 0 是我自己造的假 0。**
