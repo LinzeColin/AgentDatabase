@@ -164,6 +164,19 @@ def main():
                                 "一次都没选中", "人数 oracle", "控制面")):
             print("  " + l.strip())
 
+    # ── 上游：人物蒸馏侧那一节【硬门】有没有载体 ────────────────────────
+    section("上游（persona-distiller）—— 一整节【硬门】的两条有没有载体")
+    D = HERE.parents[3] / "registry" / "codex" / "persona-distiller"
+    out = run([sys.executable, str(HERE / "check_rubric_independent_verification_gate.py"),
+               "--skill-root", str(D), "--corpora", str(HERE.parents[1] / "_corpora")])
+    keep = ("指令模板：", "实发指令：", "rubric **内部**", "一处都没有", "一道都没有",
+            "易被误读", "两个不同的问题", "本件是**报告不是门**", "做得到吗")
+    for l in out.stdout.splitlines():
+        if any(k in l for k in keep):
+            print("  " + l.strip())
+    if out.returncode != 0:
+        print("  ✗ 取不到 —— **不是「没问题」**：%s" % out.stderr.strip()[:200])
+
     section("这份报告不下结论")
     print("  以上全部是现算的数。**阈值、好坏、要不要改，都由 Owner 定。**")
     print("  市场状态由任务包的 `CURRENT_SCORECARD.md` 与外部 Verifier 决定，")
