@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "134edc0c46a26fd8bbd701cdfebbc765cc336f55561850f8131c66c625a61a7e",
+      "sha256": "564155ea225cf1ed872e81c797a18824e71ce0954a0efb7d248eb5f9450e584f",
       "size_bytes": 1192
     },
     {
@@ -1301,8 +1301,8 @@
     },
     {
       "path": "scripts/bump_version.py",
-      "sha256": "22d9039752d6ab2c3e13aa2ad03c404f712c9e21c84aa4a2d8a23861e6f81977",
-      "size_bytes": 6828
+      "sha256": "0c6900f0fffbe621a6d1d49578cf4c5873f809d324f32e7dbdfdf87e4fcaedcc",
+      "size_bytes": 9897
     },
     {
       "path": "scripts/check_absence_claims.py",

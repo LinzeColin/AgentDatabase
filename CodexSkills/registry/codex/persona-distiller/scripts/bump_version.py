@@ -29,6 +29,12 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 VERSION_RE = re.compile(r"^v\d+\.\d+\.\d+\.\d+$")
 
 
+def _today() -> str:
+    """发布日期取**本机当天**。放成独立函数是为了让自测能替换它。"""
+    import datetime
+    return datetime.date.today().isoformat()
+
+
 def bare(version: str) -> str:
     return version[1:] if version.startswith("v") else version
 
@@ -70,6 +76,22 @@ def main() -> int:
         print(f"用法错误：{version_file} 不存在", file=sys.stderr)
         return 3
 
+    # ★★ **动笔之前先确认下游在。** 2026-08-17 拿团队 skill 的副本实跑，
+    #   本工具**写了一半才失败**：VERSION 与 manifest.version 已盖成新号，
+    #   而末尾 `build_manifest.py` 不存在 → 报错 rc=1 退出 ——
+    #   留下一棵「版本位改了一半」的树，比完全没跑**更糟**。
+    #   [[a-step-that-runs-after-the-write-changes-nothing]] 的反面：
+    #   **为失败准备的报错，挡不住「已经写坏了才报错」。**
+    #   ⇒ 前置检查，缺一个就 rc=3 并且**一个字节都不写**。
+    missing = [n for n in ("build_manifest.py", "check_contract_drift.py")
+               if not (root / "scripts" / n).is_file()]
+    if missing:
+        print("用法错误：%s 下缺少 %s —— **本工具不在这个 root 上跑**，"
+              "一个字节都没写。" % (root, "、".join(missing)), file=sys.stderr)
+        print("  （本工具末尾要靠它们重建清单并自查；缺了就会写一半再失败。）",
+              file=sys.stderr)
+        return 3
+
     old = version_file.read_text(encoding="utf-8").strip()
     if old == new:
         print(f"版本号已经是 {new}，不重复写")
@@ -82,6 +104,18 @@ def main() -> int:
     if manifest_path.is_file():
         data = json.loads(manifest_path.read_text(encoding="utf-8"))
         data["version"] = new
+        # ★ `released_at` 此前**没有任何主人**：2026-08-17 逐版本对照 git 首次提交日，
+        #   团队 skill 的 manifest 里它是个**恒定值**（14 个版本 0 个对得上），
+        #   而 CHANGELOG 有 git 真值可比的 9 个全对。[[every-requirement-needs-an-owner]]
+        #   ⇒ 升版时一并盖新。**只在字段本来就存在时才写**，不给没有它的 root 凭空造字段。
+        #   ★★ **只在真的换号时才盖。** 我写完第一版就用它跑了一次「同号自查」
+        #   （v0.0.0.154 → v0.0.0.154），它照样把发布日盖成了当天 ——
+        #   而 v0.0.0.154 的 git 首次提交日是 **2026-08-14**，当天不是发布日。
+        #   **空升版不是发布**：一个只为自查而跑的空转，不许改写发布事实。
+        #   我因此当场造了一个假值（2026-07-23 → 2026-08-17，两个都不对），
+        #   被自己的核对抓住。[[a-step-that-runs-after-the-write-changes-nothing]]
+        if "released_at" in data and old != new:
+            data["released_at"] = _today()
         manifest_path.write_text(
             json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
             encoding="utf-8")
@@ -107,6 +141,18 @@ def main() -> int:
         index_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n",
                               encoding="utf-8")
         touched.append("registry/index.json")
+
+    # ★ 团队 skill 专有的第三个版本位。此前本工具不认识它 ——
+    #   于是拿 --root 指向团队 skill 时，VERSION 与 manifest 盖了新号
+    #   而 `generator_version` 留在旧号上，**升版反而制造漂移**。
+    team_index = root / "team-index.json"
+    if team_index.is_file():
+        data = json.loads(team_index.read_text(encoding="utf-8"))
+        if "generator_version" in data:
+            data["generator_version"] = new
+            team_index.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+                                  encoding="utf-8")
+            touched.append("team-index.json（generator_version）")
 
     # ★ **VERIFICATION.md 不在这里**，这是本工具的一条硬边界。
     #

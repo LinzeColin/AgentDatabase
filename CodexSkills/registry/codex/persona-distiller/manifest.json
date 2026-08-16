@@ -24,7 +24,7 @@
     "deep"
   ],
   "python": ">=3.10",
-  "released_at": "2026-07-23",
+  "released_at": "2026-08-14",
   "required_build_inputs": [
     "target_name",
     "identity"
