@@ -353,6 +353,11 @@
       "size_bytes": 4415
     },
     {
+      "path": "tests/test_routing_actually_discriminates.py",
+      "sha256": "d535fcf34df1131b22a44988c994b22d410471168d01ab963c9fa656b6c97923",
+      "size_bytes": 4375
+    },
+    {
       "path": "tests/test_scripts_refuse_wrong_documents.py",
       "sha256": "30429f35f18c7d6a6347445dee0c8ec83fc15e2ba33e32ffc2626b258697ea79",
       "size_bytes": 5009
