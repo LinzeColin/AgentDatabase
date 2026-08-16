@@ -129,7 +129,7 @@
     | standard | ≥0.72 | **≥0.05** | ≥0.78 | ≥0.88 |
     | deep     | ≥0.80 | **≥0.07** | ≥0.85 | ≥0.93 |
 
-    **唯一真源是 `quality_check.py` 的 `PROFILE_THRESHOLDS`**；这张表若与代码不符，以代码为准并回来改这里。
+    **唯一真源是 `PROFILE_THRESHOLDS`，它定义在 `scripts/common.py`**（`quality_check.py` 只是 import 它——2026-08-17 订正：原文写作「`quality_check.py` 的」，照着去那个文件里改是找不到的）；这张表若与代码不符，以代码为准并回来改这里。
     ★ 报门槛之前先确认**这个人物用的是哪一档**（`meta.json` 的 `profile`）。
 11. **team-card**：置 `readiness="ready"`、真实 `research_cutoff`、6 个数组字段全部填真（不留 "replace-with-"）。
 12. **打包→登记→校验**：`package_target.py WS --output dist/` → `register_persona.py dist/<slug>-...-v0.0.0.1.zip` → `validate_group.py`（必须 passed）。**把 ZIP 复制到 Downloads/蒸馏**。

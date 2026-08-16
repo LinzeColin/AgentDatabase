@@ -255,15 +255,15 @@ def self_test() -> int:
            '  "quick":    {"min_overall_score": 0.65, "min_baseline_delta": 0.03,\n'
            '               "min_boundary_score": 0.70, "min_fact_score": 0.80,\n'
            '               "min_sources": 8, "min_primary_ratio": 0.40, "min_lanes": 3,\n'
-           '               "min_models": 2, "min_heuristics": 3},\n'
+           '               "min_models": 2, "min_heuristics": 3, "min_suite_cases": 1},\n'
            '  "standard": {"min_overall_score": 0.72, "min_baseline_delta": 0.05,\n'
            '               "min_boundary_score": 0.78, "min_fact_score": 0.88,\n'
            '               "min_sources": 24, "min_primary_ratio": 0.50, "min_lanes": 6,\n'
-           '               "min_models": 3, "min_heuristics": 5},\n'
+           '               "min_models": 3, "min_heuristics": 5, "min_suite_cases": 1},\n'
            '  "deep":     {"min_overall_score": 0.80, "min_baseline_delta": 0.07,\n'
            '               "min_boundary_score": 0.85, "min_fact_score": 0.93,\n'
            '               "min_sources": 45, "min_primary_ratio": 0.65, "min_lanes": 6,\n'
-           '               "min_models": 4, "min_heuristics": 6},\n'
+           '               "min_models": 4, "min_heuristics": 6, "min_suite_cases": 2},\n'
            '}\n')
 
     def _run(doc_text, qc_text=_QC):
@@ -274,6 +274,30 @@ def self_test() -> int:
         with _ctx.redirect_stdout(buf):
             rc = check(d / "qc.py", d / "doc.md")
         return rc, buf.getvalue()
+
+    # ★★★ **把「记得更新夹具」变成机器检查。** 同一个坑今天连踩三次：
+    #   判据每扩一格射程，`_QC` 就要补对应的键，而我三次都靠「记得」——
+    #   前两次漏文档侧，第三次刚写完「先预测再跑」又漏了代码侧。
+    #   ⇒ 这里直接拿**真** `PROFILE_THRESHOLDS` 的键集合比夹具：
+    #     真源一加键，本条立刻红，不用等某条用例莫名其妙地失败。
+    #   [[every-requirement-needs-an-owner]]｜[[a-rule-in-a-doc-has-no-enforcer]]
+    _real = HERE / "quality_check.py"
+    if _real.is_file():
+        try:
+            real_keys = set(load_thresholds(_real)["deep"])
+        except Exception as exc:                                  # noqa: BLE001
+            real_keys = None
+            chk(f"㉛n 读真 PROFILE_THRESHOLDS：**读不到就不算通过**（{exc}）", False)
+        if real_keys is not None:
+            d = pathlib.Path(_tf.mkdtemp())
+            (d / "qc.py").write_text(_QC, encoding="utf-8")
+            fx_keys = set(load_thresholds(d / "qc.py")["deep"])
+            chk("㉛n 夹具 `_QC` 的键集合 == 真 PROFILE_THRESHOLDS"
+                + (f"（夹具缺 {sorted(real_keys - fx_keys)}）" if real_keys - fx_keys else "")
+                + (f"（夹具多 {sorted(fx_keys - real_keys)}）" if fx_keys - real_keys else ""),
+                fx_keys == real_keys)
+    else:
+        chk("㉛n 找不到真 quality_check.py —— **未核，不是通过**", False)
 
     rc, out = _run(good)
     chk(f"㉛a 文档与代码逐格一致 → rc=0（rc={rc}）", rc == 0 and "逐格一致" in out)
