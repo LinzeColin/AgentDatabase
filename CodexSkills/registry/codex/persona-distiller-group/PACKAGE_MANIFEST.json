@@ -249,8 +249,8 @@
     },
     {
       "path": "scripts/common.py",
-      "sha256": "51dbf80ddfd7fe4eab1a2d327b9c9bbcb461b95a5574a1faef55ccf1bf5213dc",
-      "size_bytes": 2009
+      "sha256": "f467db52a9bce91e4b747f7f23467c84f3a39d9ded504a8d7756d423bb988b51",
+      "size_bytes": 2135
     },
     {
       "path": "scripts/compile_task_graph.py",

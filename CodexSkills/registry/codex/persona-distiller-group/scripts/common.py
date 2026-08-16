@@ -6,15 +6,19 @@ install/build_manifest 的硬依赖。改动上游时这里要一起改。
 """
 from __future__ import annotations
 
-import datetime
+from __future__ import annotations
+import contextlib
 import hashlib
 import json
 import os
+import re
 import shutil
-import stat
 import tempfile
+import unicodedata
+import uuid
+from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable, Iterator
 
 
 def compact_utc() -> str:
