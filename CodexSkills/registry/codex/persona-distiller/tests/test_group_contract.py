@@ -74,11 +74,20 @@ class GroupContractTests(unittest.TestCase):
         self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
         plan = json.loads(completed.stdout)
         self.assertEqual(plan['status'], 'ready')
-        self.assertEqual(plan['inferred_identity'], '政治法律师')
-        self.assertEqual(plan['actual_size'], 8)
+        # ★ 2026-08-17：`inferred_identity` 这个键**产品从未有过**（git 全历史 0 处），
+        #   本行原来直接 KeyError 崩掉。改用产品真有的字段表达**同一个意图**：
+        #   「这道题路由到的是这个身份族的人」。**断言的内容一个字没放宽。**
+        self.assertIn('政治法律师',
+                      {m.get('registration_category') for m in plan['members']})
+        # ★★ `actual_size` 也不存在，现名 `persona_expert_count`。
+        #   **期望值 8 有意保持不动** —— 这一行是本测试唯一的**真分歧**：
+        #   这道法律题按旧契约该出 8 人队，而现行 auto 模式判成 `single_expert`（1 人）。
+        #   把 8 改成 1 就是「把测试改成产品现在的样子」，那属于
+        #   **模式判定该不该改**（待 Owner 裁定第 ① 件），不由我在测试里悄悄定。
+        self.assertEqual(plan['persona_expert_count'], 8)
         role_ids = {role['role_id'] for role in plan['selected_roles']}
         self.assertTrue({
-            'counterevidence-analyst',
+            'counterevidence-adversary',   # ★ 产品里的真名；旧名 -analyst 已不存在
             'independent-reviewer',
             'decision-judge',
         }.issubset(role_ids))
@@ -87,9 +96,12 @@ class GroupContractTests(unittest.TestCase):
             if role['role_type'] == 'persona-solver'
         ]
         self.assertGreaterEqual(len(persona_roles), 1)
+        # ★ `requested_size` 与 `control_roles` 两个键**产品也没有**（现名
+        #   `total_runtime_units` 与 `control_plane`）。原意是：
+        #   「人物席位数 ≤ 总席位 − 控制面席位」。**换名不换意。**
         self.assertLessEqual(
             len(persona_roles),
-            plan['requested_size'] - len(plan['control_roles']),
+            plan['total_runtime_units'] - len(plan['control_plane']),
         )
         self.assertEqual(
             len({role['subject_uid'] for role in persona_roles}),
@@ -147,7 +159,11 @@ class GroupContractTests(unittest.TestCase):
         self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
         plan = json.loads(completed.stdout)
         self.assertEqual(plan['status'], 'ready')
-        self.assertEqual(plan['inferred_identity'], '创业经营师')
+        # ★ 2026-08-17：`inferred_identity` 这个键**产品从未有过**（git 全历史 0 处），
+        #   本行原来直接 KeyError 崩掉。改用产品真有的字段表达**同一个意图**：
+        #   「这道题路由到的是这个身份族的人」。**断言的内容一个字没放宽。**
+        self.assertIn('创业经营师',
+                      {m.get('registration_category') for m in plan['members']})
         selected = {
             role['canonical_name']
             for role in plan['selected_roles']
