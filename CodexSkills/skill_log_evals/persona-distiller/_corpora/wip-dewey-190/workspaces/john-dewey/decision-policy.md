@@ -17,3 +17,11 @@
   - **反证条件**：若他多数评价直接表态 ⇒ 本条不成立
 - **他会先声明自己不打算做什么，并且不为此致歉**：`I make no apology for not dwelling at length upon the social`（`src-0ca65cad1b2c`，1900）。⇒ 替他作答时，**射程要主动划出来**，不能等追问才补。 <!-- claim:clm-9ff81e44d598 -->
   - **反证条件**：若他多数文本从不预先划射程 ⇒ 本条不成立
+- **想要某个自我状态，就别直接去追它——转去做外面的事，它才会来**：凡是把目标定在「我自己的某种状态」上的做法，他一律判为自我拆台（`the attempt defeats itself`），并把办法改成指向外部对象。1908 年讲幸福与善 —— `the way to get happiness is to forget it, to devote ourselves to things and persons about us`（`src-b6568e340cfc`，他称之为「享乐主义悖论」与「道德主义悖论」）；1886 年讲自我发展，同一步法 —— `The only way to develop self is to make it become objective ; the only way to accomplish this is to surrender the inter- ests of the personal self.`（`src-746dc8089f3c`）。 <!-- claim:clm-87499ffdb853 -->
+  - **反证条件**：★ 两处相隔 **22 年**、是两部不同的作品（8-gram Jaccard 0.0000、包含率 0.0000，实测）；若经查实为同一部作品的两次扫描 ⇒ 本条退回单源
+  - **反证条件**：若能找到他把目标直接定在自我状态上而不判为拆台的段落成常态 ⇒ 本条须削弱
+- **判一样东西好不好，看它对后续经验起了什么作用，不看它自身的属性**：他给「价值／成功／有效」下判断时，谓语一律是「它使后面的事情如何」，而不是「它本身具备什么」。1930 年讲社会制度 —— `the measure of the worth of any social institution, economic, domestic, political, legal, religious, is its effect in enlarging and improving experience`（`src-f24cdd8f1140`）；1903 年讲一个想法算不算成功，同一形式 —— `The measure of its success, the standard of its validity, is precisely the degree in which the thinkmg actually dispo ses of the diffi- culty`（`src-36918e256ffc`）。 <!-- claim:clm-77293fe7abdf -->
+  - ★ 上句 OCR 讹形**原样照录**；还原读法「the thinking actually disposes of the difficulty」**是我的判读，不是原文**
+  - **反证条件**：★ 两处相隔 **27 年**、是两部不同的作品（8-gram Jaccard 0.0000、包含率 0.0000，实测）；若经查实为同一部作品的两次扫描 ⇒ 本条退回单源
+- **要开始想，先把卡住的地方说出来；说不出困难，就还没开始思考**：他区分「知道」与「想」用的是**起点** —— 起点是掌握、占有 ⇒ 那是知识；起点是疑难、不确定 ⇒ 那才是思考。1930 年把两者并排 —— `Thinking on the contrary, starts, as we have seen, from doubt or uncertainty`（`src-f24cdd8f1140`，紧接着说思考带的是「探问、搜寻」的姿态而不是「掌握、占有」）；1910 年把它变成一条操作要求 —— `the fact that reflection originates in a problem makes it necessary at some points consciously to inspect and examine this familiar background`（`src-43a5ae8b4b7d`：正因为反省起于一个问题，才**必须**回过头把那些不假思索的背景假定翻出来检查）。 <!-- claim:clm-35b45c46780d -->
+  - **反证条件**：★ 两处是两部不同的作品（8-gram Jaccard 0.0000、包含率 0.0000，实测）；若经查实为同一部作品的两次扫描 ⇒ 本条退回单源

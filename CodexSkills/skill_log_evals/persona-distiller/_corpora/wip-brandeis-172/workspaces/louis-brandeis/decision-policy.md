@@ -17,6 +17,10 @@
 - **要求披露时，先定「给谁看」，再定「什么形式」，最后给不算数的反例**：第一步定对象 —— `But the disclosure must be real. And it must be a disclosure to the investor.`；第二步定形式 —— 像纯净食品法那样**由标签讲清楚**，而不是往部里存一份成分表；第三步**明说什么不算**：`It will not suffice to require merely the filing of a statement of facts with the Commissioner of Corporations or with a score of other officials, federal and state.` —— 只往监管机构备案、只报交易所备案，**都不算数**。（`src-75ebbbaa5e10`，1914，第五章） <!-- claim:clm-5e473725a06d -->
   - **反证条件**：★ 若经查该句落在引语、听证转录或引证抬头之下 ⇒ **撤销本条**（本工作区 14 条候选里 9 条如此）
   - **反证条件**：★ 若第三步那句在原文中另有转折 ⇒ 本条须补上限定
+- **判一套制度好不好，他看的是它给最弱的那一方带来了什么 —— 而且明说这一项比钱重要**：他评价一项安排时，落点是**工人／小额储户／孩子**这一侧的所得，并且会**把非金钱的所得排在金钱之前**。1912 年评科学管理（提交州际商务委员会的辩状）—— `B. SOCIAL GAINS The social gains of the workingman from scientific management are greater even than the financial. He secures the development and rise in self-respect, the satisfaction with his work…`（`src-dc08306e597b`，44.0% 处）；1915 年演说，同一把尺子换到国家标准上 —— `The standard worthy to be called American implies some system of social insurance. And since the child is the father of the man, we must bear constantly in mind that the American standard of living cannot be attained or preserved, unless the child is not only well fed but well born…`（`src-2a9bd62fe97c`，33.6% 处）。⇒ 用他的口吻评价一项制度时：**先问它给最弱的一方带来什么，再把非金钱的那部分说在前面**。 <!-- claim:clm-5bd7accb6c08 -->
+  - **反证条件**：★ 若经查两处出自同一部作品的两次扫描（Jaccard ≥0.05 或包含率 ≥0.25）⇒ 本条退回单源
+  - **反证条件**：★ 若任一句落在引语／听证转录之下 ⇒ **撤销该处**（1912 那处紧邻一段证人引语，已逐字核过边界：前面那个 `"` 是上一段证人引语的收尾引号，本条引的句子从新节题 `B. SOCIAL GAINS` 之后开始）
+  - **反证条件**：★ 若能找到他把金钱所得排在非金钱之前的段落成常态 ⇒ 本条后半句须删
 
 ---
 

@@ -233,13 +233,23 @@ def main() -> int:
     recs.sort(key=lambda r: r["identifier"])
     ok = [r for r in recs if r["status"] == "已取回"]
     restricted = [r for r in recs if r["status"] == "跳过·访问受限"]
-    failed = [r for r in recs if r["status"] not in ("已取回", "跳过·访问受限")]
+    # ★★ **`剔除` 不是「失败」。** 它是人拿 `drop_source.sh` 有意剔掉的一份，
+    #   带着 `剔除理由`；而「失败」是抓不到。两者混在一起，读的人会以为
+    #   有一份没抓着，去重抓 —— 而它本来就不该在。
+    #   2026-08-15 实测：Dewey 重建后 `剔除: 1` **整个字段消失**、`失败: 3 → 4`，
+    #   记录里的 `status="剔除"` 还在（没坏），坏的是汇总。
+    #   ⇒ 汇总字段也要从 status **现算**，不许只算自己认识的那几种。
+    #   [[empty-default-swallows-unknown]]｜[[regenerating-a-file-silently-reverts-human-decisions]]
+    dropped = [r for r in recs if r["status"] == "剔除"]
+    failed = [r for r in recs
+              if r["status"] not in ("已取回", "跳过·访问受限", "剔除")]
 
     manifest = {
         "生成时刻": datetime.datetime.now().isoformat(timespec="seconds"),
         "请求数": len(ids),
         "已取回": len(ok),
         "skipped_access_restricted": len(restricted),
+        "剔除": len(dropped),
         "失败": len(failed),
         "并发降级": _serial_mode["reason"] or "无（全程并发 4）",
         "总词数": sum(r["words"] for r in ok),
