@@ -363,6 +363,11 @@
       "size_bytes": 5009
     },
     {
+      "path": "tests/test_selfoptimization_loop_runs.py",
+      "sha256": "328cd4f5a3a2be28677ed4dfe6c2f0778dcea0bbb0acd195cf091a40583a65d9",
+      "size_bytes": 4747
+    },
+    {
       "path": "tests/test_telemetry_roundtrip.py",
       "sha256": "269a5858c1678277ebf19af0a218db1d56e92f62a73d124a600174490db778ee",
       "size_bytes": 6681
