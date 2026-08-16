@@ -117,6 +117,11 @@
 4. **六路研究**（`gen_lanes.py`）：6 个 `references/research/0X-*.md`，每篇 **≥500 字**、引用真实 `src-` ID。
 5. **claims**（`gen_claims.py`）：**≥4 mental-model + ≥6 heuristic**（★ **这是 deep 档的数**——本节步骤 2 已写死 `--profile deep`；quick 是 2/3、standard 是 3/5，真源同为 `PROFILE_THRESHOLDS`）；刚性 claim 各需 **≥2 个不同源、≥2 情境、≥2 独立证据簇、falsifiers、time_scope**（多标签源会去重塌成 1，用兜底补齐）。再配 fact/value/work-method/boundary/blind-spot。
 6. **模型文档**（`gen_docs.py`）：渲染 9–10 份；**这 8 份 release 必须"非占位"**：cognitive-os / decision-policy / strategy / capabilities / work / persona / boundaries / divergence-map，各 **strip 后 ≥500 字（留到 ~700 更稳）、≥5 条非 # 有效行**。**每条 active claim 必须**以 `<!-- claim:clm-... -->` 标记渲染进某文档（release 有孤儿=报错）。
+> **改完判据/脚本先跑这个**：`python3 scripts/run_tests.py` —— 并行跑 `tests/` 全部 14 件，
+> 逐件计时、把**已知未决**与**新回归**分开（串行 333.5s → 并行约 110–150s）。
+> 开头会先跑一次合同漂移门并转述它报的每一条 —— **清单陈旧/镜像不一致会让三件验清册的测试
+> 红成「不相干的新回归」**，先看那几行。
+
 7. **中途验收**：`quality_check.py WS --phase research --strict` 通过 → 再 `--phase synthesis --strict` 通过（便宜，先挡结构错，别等到 release）。
 8. **评测用例**（`gen_cases.py`）：**16 套件 × 每套 ≥2 = ≥32 用例**；`known` 套件的用例必须挂 holdout 源 ID。
 9. **答案 + 跑分**：写 candidate（人格化、事实正确）+ baseline（通用、较弱）短答案（`gen_answers.py`）→ **派 2 个隔离评委子代理**独立打分（`example-knuth` 的做法：只读 payload、只回 JSON，省 token）→ 组装 128 条 `results.jsonl`（`gen_results.py`）。**评委必须独立于构建者；分数必须真评，禁止编造。**

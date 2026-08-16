@@ -4,6 +4,15 @@
 > 本 RUNBOOK 由 Donald Knuth 校准跑（2026-07-25，release --strict 0 错 0 警通过）提炼；
 > 参考实现见同目录 `example-knuth/`（8 个已验证脚本，照抄结构、只换人物数据）。
 
+## 一次跑完全部判据的自测
+
+    python3 _pipeline/run_checks.py            # 有红就 rc=1
+    python3 _pipeline/run_checks.py --report   # 只报告
+
+并行跑 `_pipeline/check_*.py` 的 `--self-test`（2026-08-17 实测 **28 件、0.7 秒**）。
+★ **它只验判据自己的判定逻辑，不代跑真语料** —— 各判据的 `--corpora` /
+`--skill-root` 参数不同，本入口不代跑。**别把「自测全绿」读成「全库没问题」。**
+
 ## 索引（本节由脚本生成，勿手改）
 
 截至最近一次更新：**二级标题 95 节**；
