@@ -6,7 +6,9 @@
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
-| `src-319c5b194292` | 1885 | P1 | Selected poems from Michelangelo Buonarroti, with translations from various source |
+| `src-319c5b194292` | 1885 | P1 | Selected poems from Michelangelo Buonarroti, with translations from various sources |
+
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 
 ## ★★ 本道在 train 里**只有 1 份** —— 这是纸面道
 

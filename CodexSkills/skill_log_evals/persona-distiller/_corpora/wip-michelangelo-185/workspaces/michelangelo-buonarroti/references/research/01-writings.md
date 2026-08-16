@@ -8,28 +8,30 @@
 |---|---|---|---|
 | `src-d3a820576752` | 1623 | P1 | Rime di Michelagnolo Buonarroti. Raccolte da Michelagnolo suo nipote |
 | `src-43c819c03a55` | 1817 | P1 | Le rime di Michelagnolo Buonarroti .. |
-| `src-b69075a7bf0b` | 1817 | P1 | Le rime di Michelagnolo Buonarroti : pittore, scultore, architetto, e poeta fioren |
+| `src-b69075a7bf0b` | 1817 | P1 | Le rime di Michelagnolo Buonarroti : pittore, scultore, ar…no : testo di lingua italiana |
 | `src-e7ab3c2184e2` | 1817 | P1 | Le rime di Michelagnolo Buonarroti ... |
 | `src-28683b5f4292` | 1821 | P1 | Rime di Michelagnolo Buonarroti il vecchio, col comento di G. Biagioli  |
 | `src-7af49c8ef468` | 1821 | P1 | Rime di Michelagnolo Buonarroti, il vecchio |
-| `src-0f90e46d5f7b` | 1842 | P1 | Michel Angelo Buonarrotti des Aelteren sämmtliche Gedichte italiänisch und deutsch |
-| `src-60cd9a49f915` | 1842 | P1 | Michel Angelo Buonarrotti's des Aelteren sämmtliche Gedichte italiänisch und deuts |
-| `src-f547bc4a71ad` | 1850 | P1 | Michel-Ange poète : première traduction complète de ses poésies, précédée d |
-| `src-a774edeb44f1` | 1860 | P1 | MichelAnge poëte. Première traduction complète de ses poésies, précédée d'une étud |
-| `src-3863a0005b65` | 1863 | P1 | Opere varie in versi ed in prosa di Michelangelo Buonarroti il giovane, alcune del |
-| `src-d89e65b8002f` | 1863 | P1 | Opere varie in versi ed in prosa |
-| `src-f3ac5691f1e3` | 1863 | P1 | Opere varie in versi ed in prosa di Michelangelo Buonarroti il giovane, alcune del |
+| `src-0f90e46d5f7b` | 1842 | P1 | Michel Angelo Buonarrotti des Aelteren sämmtliche Gedichte…rausgegeben von Gottlob Regis |
+| `src-60cd9a49f915` | 1842 | P1 | Michel Angelo Buonarrotti's des Aelteren sämmtliche Gedich… deutsch ... von Gottob Begis |
+| `src-f547bc4a71ad` | 1850 | P1 | Michel-Ange poète : première traduction complète de ses…chel-Ange et Vittoria Colonna |
+| `src-a774edeb44f1` | 1860 | P1 | MichelAnge poëte. Première traduction complète de ses poés…Colonna. By A. LannauRoland.  |
+| `src-3863a0005b65` | 1863 | U | Opere varie in versi ed in prosa di Michelangelo Buonarrot… delle quali non mai stampate |
+| `src-d89e65b8002f` | 1863 | U | Opere varie in versi ed in prosa |
+| `src-f3ac5691f1e3` | 1863 | U | Opere varie in versi ed in prosa di Michelangelo Buonarrot… delle quali non mai stampate |
 | `src-6094206729a1` | 1875 | P1 | buonarroti_le_lettere_di_michelangelo_buonarroti |
-| `src-dc47a809071f` | 1878 | P1 | The sonnets of Michael Angelo Buonarroti and Tommaso Campanella : now for the firs |
-| `src-20b35d40dc1d` | 1895 | P1 | Michael Angelo Buonarroti : his sonnets now for the first time translated into rhy |
+| `src-dc47a809071f` | 1878 | P1 | The sonnets of Michael Angelo Buonarroti and Tommaso Campa…ranslated into rhymed English |
+| `src-20b35d40dc1d` | 1895 | P1 | Michael Angelo Buonarroti : his sonnets now for the first …ranslated into rhymed English |
 | `src-4d7176e3057b` | 1896 | P1 | Die Gedichte |
 | `src-fc3cd1b895bb` | 1896 | P1 | Gedichte, übers. und biographisch geordnet von Walter Roberttornow |
-| `src-1ba2ff2c67ee` | 1897 | P1 | Der von Michel Angelo Buonarroti eigenhändig geschriebene Augentractat (XVI Jahrhu |
+| `src-1ba2ff2c67ee` | 1897 | P1 | Der von Michel Angelo Buonarroti eigenhändig geschriebene Augentractat (XVI Jahrhundert) |
 | `src-9c282d5b3385` | 1897 | P1 | Die Dichtungen des Michelangelo Buonarroti |
 | `src-85c5b7662cb5` | 1900 | P1 | Sonnets and madrigals of Michelangelo Buonarroti; |
 | `src-05d67ff7e9df` | 1904 | P1 | Sonnets. now for the first time translated into rhymed English |
-| `src-53e19db4cba0` | 1911 | P1 | L'oeuvre littéraire de Michel-Ange, d'après les archives Buonarroti, etc. Traduite |
+| `src-53e19db4cba0` | 1911 | P1 | L'oeuvre littéraire de Michel-Ange, d'après les archives B…d'après la collection Alinari |
 | `src-4b92a7f08408` | 1913 | P1 | MICHELANGELO |
+
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 
 ## Source-linked observations
 

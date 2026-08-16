@@ -13,13 +13,21 @@
 | `src-6ccb3d0796b1` | 1907 | P1 | Michelangelo Gedichte und Briefe: In Auswahl herausgegeben von R. A. Guardini |
 | `src-8539ad71569a` | 1913 | P1 | A record of his life as told in his own letters and papers; |
 
-★ 本道**是这个人物最结实的一道**：1875 年 Milanesi 编《Le lettere di Michelangelo Buonarroti》
-两个印本 ＋ 1907 年德译《Die Briefe des Michelagniolo Buonarroti》＋ 1913 年英译
-《A record of his life as told in his own letters and papers》。
-★★ 探源时若照 Leonardo #184 的办法「同现即污染」一刀切，**这一道会整条消失**——
-Milanesi 是编者，creator 里他挂在米开朗基罗前面。
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
 
 ## Source-linked observations
+
+### O-0 · 本道的来源结构（**由 Scope 节搬来，不是机械导出的内容**）
+
+★ 本道**是这个人物最结实的一道**：1875 年 Milanesi 编《Le lettere di Michelangelo
+Buonarroti》两个印本 ＋ 1907 年德译《Die Briefe des Michelagniolo Buonarroti》
+＋ 1913 年英译《A record of his life as told in his own letters and papers》。
+
+★★ 探源时若照 Leonardo #184 的办法「同现即污染」一刀切，**这一道会整条消失** ——
+Milanesi 是编者，creator 里他挂在米开朗基罗前面。
+
+> 2026-08-17 从 `## Scope and assigned sources` 搬到此处：那一节由
+> `emit_lane_scope.py` 机械拥有，重生成会覆盖手写行。**判断性的话不放在机械节里。**
 
 ### O-1 · 他谈钱谈得很具体，而且**先说自己不懂行**
 

@@ -2,10 +2,9 @@
 
 ## Scope and assigned sources
 
-**本道分到 0 份（train split）**：
+**本道分到 0 份（train split）**。
 
-| source_id | 出版年 | tier | 题名 |
-|---|---|---|---|
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**。
 
 ## 本道为空 —— **不是没抓到，是探源阶段的 11 条全是误配**
 
