@@ -597,6 +597,32 @@ def self_test() -> int:
     return 0
 
 
+def _skill_root(d) -> pathlib.Path:
+    """从检查器目录**向上找** skill 根（带 VERSION + SKILL.md 的那一层）。
+
+    ★ 2026-08-17：原来三处都靠**数层数**推路径 ——
+      `parents[3] / "skill_log_evals"`、`.parent` 当 skill 根 ——
+      而检查器目录可能是 `scripts/`（深 1 层）也可能是
+      `references/pipeline/checkers/`（深 3 层）。**层数一变就全指错**，
+      实测后果：三项子检查**永远报「未核（不是通过）」**，从没真跑过。
+      **不许按层数写规则。**
+    """
+    cur = pathlib.Path(d).resolve()
+    for cand in [cur] + list(cur.parents):
+        if (cand / "VERSION").is_file() and (cand / "SKILL.md").is_file():
+            return cand
+    return cur.parent
+
+
+def _corpora_root(d) -> pathlib.Path:
+    """语料根：从 skill 根**向上找**含 `skill_log_evals/` 的那一层。"""
+    root = _skill_root(d)
+    for cand in root.parents:
+        if (cand / "skill_log_evals").is_dir():
+            return cand / "skill_log_evals" / "persona-distiller"
+    return root
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("directory", nargs="?", help="检查器目录")
@@ -749,7 +775,7 @@ def main() -> int:
     #   这份文件**自己预言过它会漂**（v0.0.0.76 的警示块），两个版本之后原样复发：
     #   判据写 51（真 54）、checksum 写 341（真 368）。**预言不是判据。**
     vc = pathlib.Path(d).resolve() / "check_verification_counts.py"
-    proot = pathlib.Path(d).resolve().parent
+    proot = _skill_root(d)
     print("\n── VERIFICATION.md 的可数项（check_verification_counts）──")
     if not vc.is_file():
         print("  ⚠ check_verification_counts.py 不在，**未核（不是通过）**")
@@ -774,7 +800,7 @@ def main() -> int:
     #   实测：7 人共 16 份没进工作区，**其中 10 份是一手**
     #   （Barton 4 本日记、Blackwell 4 本日记 + 独一份手稿 + 独一份报刊撰文）。
     sb = pathlib.Path(d).resolve() / "check_staged_but_not_ingested.py"
-    corp = pathlib.Path(d).resolve().parents[3] / "skill_log_evals" / "persona-distiller" / "_corpora"
+    corp = _corpora_root(d) / "_corpora"
     print("\n── 台账有、工作区没有（check_staged_but_not_ingested）──")
     if not sb.is_file():
         print("  ⚠ check_staged_but_not_ingested.py 不在，**未核（不是通过）**")
@@ -806,7 +832,7 @@ def main() -> int:
     # ★ 先取绝对路径：传进来的可能是相对的 `scripts/`，那样 .parent 会一路塌成 `.`
     dabs = d.resolve()
     sr = dabs / "check_scan_reach.py"
-    root = dabs.parents[3] / "skill_log_evals" / "persona-distiller"
+    root = _corpora_root(d)
     print("\n── 语料射程审计（check_scan_reach）──")
     if not sr.is_file():
         print("  ⚠ check_scan_reach.py 不在，**射程未核（不是通过）**")
