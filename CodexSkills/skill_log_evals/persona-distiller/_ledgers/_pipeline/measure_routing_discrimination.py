@@ -248,7 +248,27 @@ def run_router(registry_root, task, mode="auto"):
 
 
 def eligible_pool_categories(registry_root):
-    """真实可选池的族分布 —— 随机基线必须**带着池子的偏斜**抽。"""
+    """随机基线的池子 —— **全部车队准入者（101 人）**，带着池子本身的族偏斜。
+
+    ★★ **为什么用 101，而不用 route-plan 里那个 `eligible_candidates`？**
+
+    route-plan 每题印的 `eligible_candidates` 是**逐任务的**（实测 61 / 58 / 43），
+    因为路由在车队准入之上还加了一道 `expert-choice compatibility threshold`。
+    实测 `eligible + excluded = 102`（整个名册），二者互为补集。
+
+      · 用 **101（全部准入者）** 当 null ⇒ 问的是「路由**整条栈**
+        （准入 + 兼容阈值 + 排序）比随机抽好多少」——**这是对的问题**。
+      · 若改用「本题通过兼容阈值的那 61 人」当 null ⇒ 等于**把路由自己的
+        过滤白送给基线**，会**高估**路由。
+
+    ★★★ 而且那个窄 null **根本重建不出来**：route-plan 只列**被排除的**
+      那 41 个的名字，**没有列「eligible 但未入选」的 52 个**。
+      2026-08-17 我试过拿「入选 9 + 被排除 41 = 50 人」当窄池子，
+      得到 n≥5 **+23.8 pp / 8.25 SE** —— **那是假的**：
+      它把 9 个高相关的人混进 41 个低相关的人里当基线，
+      基线被人为压到 9.7%（宽 null 是 29.9%），差值自然虚高。**已撤回。**
+      [[a-gates-scan-set-is-smaller-than-reality]]｜[[negative-control-must-not-share-the-assumption]]
+    """
     admission = pathlib.Path(registry_root) / "expert-fleet-admission.json"
     d = json.loads(admission.read_text(encoding="utf-8"))
     rows = d if isinstance(d, list) else None
