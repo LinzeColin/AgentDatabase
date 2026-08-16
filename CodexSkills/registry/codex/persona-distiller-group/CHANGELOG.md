@@ -1,5 +1,30 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.24 — 2026-08-17
+
+### `tests/` 终于有了一个会被调用的入口
+
+在上游 `persona-distiller` 发现「14 件测试没有任何 runner，于是一件对着**四个从未
+存在过的键**的测试红了很久而无人发现」之后，按「先数出口个数」回头查本 skill ——
+**同一个缺口，而且是我自己造的**：本目录 6 件测试里 **4 件是今天我写的**
+（`disclosures-reach-the-contract` / `domain-classifier-language` /
+`restricted-is-measured-only` / `telemetry-roundtrip`），
+**写了测试，却没给它一个会被调用的入口**。
+
+新增 `scripts/run_tests.py`。**与上游那个的区别：这边默认就是门。**
+上游有 1 件待 Owner 裁定的红，所以那边默认只报告；
+本 skill 6 件**当前全绿**，没有「用未决问题卡流程」的风险 ⇒ 默认有红即 rc=1，
+`--report` 可退回只报告。
+
+★ 一条本 skill 特有的坑，已写进代码注释并配自测：
+`tests/run_functional_acceptance.py` **不叫 `test_*`** ——
+只按 `test_*.py` 找会**漏掉它，而它恰恰是最重要的那件**。
+⇒ 发现规则是 `test_*.py` **＋** `run_*.py`，自测第 1 条就钉这个
+（「漏掉 run_functional_acceptance.py」直接判失败）。
+**列文件时别只认一种命名。**
+
+实测：**6 件全绿，当门用 rc=0**；自测 2/2。
+
 ## v0.0.0.23 — 2026-08-17
 
 ### 我上午说「这一类收干净了」，系统扫一遍又找到两条
