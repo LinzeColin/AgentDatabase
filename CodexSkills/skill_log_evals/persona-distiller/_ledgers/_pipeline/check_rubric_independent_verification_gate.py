@@ -11,8 +11,8 @@
 **第 1 条**：「rubric 里每一条『须命中』的事实性断言，必须与源账本中的一手条目
 一一对应，并记录其 `source_id`。对应不上的断言不得写进 rubric。」
 
-    cases.jsonl 62 份｜带 rubric 的题目 **1432** 道
-    rubric 内部出现 source_id / src- 的：**0 / 1432**
+    cases.jsonl **54 个工作区**（62 个文件，8 个工作区有重复副本）｜带 rubric 的题目 **1174** 道
+    rubric 内部出现 source_id / src- 的：**0 / 1174**
 
 ★★ 这一条有个**极容易被当成合规**的陷阱：数据里**确实有** `src-` 号，
 但它们在 `holdout_source_ids`（1151 道有此字段、200 道非空）——
@@ -162,7 +162,19 @@ def main() -> int:
     #    「**哪些源被扣住不给人物看**」，不是「这条断言由哪个一手条目支撑」。
     #    **两个不同的问题，共用一种号码。** 不分开看就会把「有 src- 号」
     #    误读成「一一对应做到了」。[[two-source-ids-is-not-two-evidences]]
-    cases = sorted(corp.rglob("cases.jsonl"))
+    # ★★ **按工作区去重再数。** 2026-08-17：`rglob` 把同一工作区的两份
+    #   `cases.jsonl` 都算了进来 —— 全库 **62 个文件只分布在 54 个工作区**，
+    #   8 个工作区在 `<wip>/` 与 `evals/` 各有一份**行数完全相同**的副本。
+    #   我据此报过「带 rubric 的题目 **1432** 道」，**去重后是 1174**（虚高 18%）。
+    #   ★ 结论不变（rubric 内部出现 source_id 的仍是 **0**），**变的是分母**。
+    #   [[counts-need-their-cutoff-stated]]｜[[two-source-ids-is-not-two-evidences]]
+    _by_ws = {}
+    for _f in sorted(corp.rglob("cases.jsonl")):
+        _ws = str(_f.relative_to(corp)).split("/")[0]
+        # 同工作区多份时取 `evals/`（那是判分产物的位置）
+        if _ws not in _by_ws or _f.parent.name == "evals":
+            _by_ws[_ws] = _f
+    cases = sorted(_by_ws.values())
     total = in_rubric = with_holdout = holdout_nonempty = 0
     fields = collections.Counter()
     for f in cases:

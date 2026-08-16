@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""一个工作区应当只有**一份**源账本 —— 有两份时，每个 rglob 统计都会虚高。
+"""一个工作区应当只有**一份**关键产物 —— 有两份时，每个 rglob 统计都会虚高。
 
 为什么要有这份文件
 ------------------
@@ -38,12 +38,29 @@ import json
 import pathlib
 import sys
 
-AUTHORITATIVE = "evidence"          # 见上：仓里记录定的权威位置
+# 按工作区**只应有一份**的产物，以及各自的权威位置。
+# ★ 2026-08-17 把射程从「只看账本」扩到这一组之后，实测虚高远不止账本那一处：
+#       source-ledger.jsonl  60 文件 / 58 工作区 → 2 个重复
+#       results.jsonl        62 文件 / 53 工作区 → **9 个重复**
+#       cases.jsonl          62 文件 / 54 工作区 → **8 个重复**
+#       claims.jsonl         59 文件 / 53 工作区 → **6 个重复**
+#       meta.json / team-card.json                 0 个重复 ✓
+#   其中 cases.jsonl 那一处直接让我报过的「带 rubric 的题目 1432 道」
+#   虚高到 **1174** 的 122%（已订正）。
+ARTIFACTS = {
+    "source-ledger.jsonl": "evidence",   # 见文件头：仓里记录定的权威位置
+    "results.jsonl": "evals",
+    "cases.jsonl": "evals",
+    "claims.jsonl": "evidence",
+    "meta.json": None,
+    "team-card.json": None,
+}
+AUTHORITATIVE = "evidence"          # 账本的权威位置（保留，供既有调用）
 
 
-def scan(corp: pathlib.Path) -> dict:
+def scan(corp: pathlib.Path, name: str = "source-ledger.jsonl") -> dict:
     by_ws = collections.defaultdict(list)
-    for f in sorted(corp.rglob("source-ledger.jsonl")):
+    for f in sorted(corp.rglob(name)):
         ws = str(f.relative_to(corp)).split("/")[0]
         by_ws[ws].append(f)
     return dict(by_ws)
@@ -113,10 +130,24 @@ def main() -> int:
         ap.error("要 --corpora，或只跑 --self-test")
 
     corp = pathlib.Path(a.corpora).resolve()
+    print("扫描面：%s" % corp)
+    print("\n══ 全部关键产物：文件数 vs 工作区数")
+    for _name, _auth in ARTIFACTS.items():
+        _b = scan(corp, _name)
+        _files = sum(len(v) for v in _b.values())
+        _multi = [k for k, v in _b.items() if len(v) > 1]
+        print("   %-22s 文件 %3d｜工作区 %3d｜**多于一份 %s**%s"
+              % (_name, _files, len(_b), ("%d 个" % len(_multi)) if _multi else "0 ✓",
+                 ("　权威位置 `%s/`" % _auth) if _auth else ""))
+        for k in sorted(_multi)[:3]:
+            print("        · %-22s %s" % (k, "、".join(p.parent.name for p in _b[k])))
+        if len(_multi) > 3:
+            print("        · …另 %d 个" % (len(_multi) - 3))
+    print("\n══ 源账本逐份细看")
+
     by_ws = scan(corp)
     files = sum(len(v) for v in by_ws.values())
     multi = {k: v for k, v in by_ws.items() if len(v) > 1}
-    print("扫描面：%s" % corp)
     print("  账本文件 **%d** 份｜工作区 **%d** 个｜**多于一份的 %d 个**"
           % (files, len(by_ws), len(multi)))
     if not by_ws:
