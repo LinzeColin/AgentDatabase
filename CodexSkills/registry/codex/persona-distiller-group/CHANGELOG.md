@@ -1,5 +1,38 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.19 — 2026-08-17
+
+### 今天加的三条披露，一条都没走到宿主真正执行的那份合同里
+
+v0.0.0.16/.17/.18 各加了一条如实披露（无领域信号、遥测位置、分歧可检出性），
+**每一条都在产出它的那个脚本上验过**。整条链从用户入口
+`run_team_pipeline.py` 走一遍才发现：三条**全部**没有出现在
+`execution-contract.json` —— **而那是宿主 agent 实际执行的文件**。
+单步命令都验过，链条没走过。
+
+这不是好看不好看的问题。合同里 `user_output_contract.show`
+本来就写着要呈现 "material disagreements"。宿主拿到
+`documented_divergences: []` 而旁边**没有任何分母**，
+最诚实的写法就是「专家们意见一致」—— **断言了一件从没被测量过的事**。
+Owner 说的伪共识，就是在这一行被生产出来的。
+
+**补了三处（仍然只披露，不改行为）**：
+
+- `divergence_detectability`：从 dossier 原样带进合同。
+- `selection_caveats`：把 route-plan 的 `NO DOMAIN SIGNAL` 警示带进合同 ——
+  在此之前那条警示停在了**没人执行的那份产物**上。
+- `user_output_contract.phrasing_rules`：明确告诉宿主**空列表该怎么写** ——
+  「不许写成专家一致；要写没有检出分歧，并给出可检出性的分母」。
+
+### `tests/test_disclosures_reach_the_contract.py`
+
+跑**真实用户入口**，断言在**最终**产物上，不在中间产物上。两个方向都钉：
+
+- 有领域信号的题 → `selection_caveats` 必须为**空**
+- 无领域信号的题 → 必须带着 `NO DOMAIN SIGNAL` 进合同
+
+反对照已实跑：把合同里那行接线换成 `[]`，测试当场变红。
+
 ## v0.0.0.18 — 2026-08-17
 
 ### `divergences: 0` 不再冒充「共识」

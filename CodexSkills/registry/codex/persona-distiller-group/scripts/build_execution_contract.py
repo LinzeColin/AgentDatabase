@@ -14,6 +14,24 @@ def _member_map(dossier: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return {row["subject_slug"]: row for row in dossier.get("members", []) if row.get("subject_slug")}
 
 
+def _selection_caveats(route: dict[str, Any]) -> list[str]:
+    """Carry the route plan's own warnings into the contract the host reads.
+
+    `limitations` on the route plan is where routing admits it had no domain
+    signal and ranked by `currentness` instead. Nothing downstream read that
+    field, so the caveat stopped at the artifact nobody executes.
+    """
+    obs = route.get("routing_observability") or {}
+    out: list[str] = []
+    for line in route.get("limitations") or []:
+        if str(line).startswith("NO DOMAIN SIGNAL"):
+            out.append(str(line))
+    if obs.get("domain_signal_present") is False and not out:
+        out.append("Routing found no domain signal; ranking fell through to %s."
+                   % obs.get("ranking_driver", "a non-domain component"))
+    return out
+
+
 def build_contract(route: dict[str, Any], dossier: dict[str, Any]) -> dict[str, Any]:
     if route.get("status") != "ready":
         raise ValueError("route plan is not ready")
@@ -109,6 +127,14 @@ def build_contract(route: dict[str, Any], dossier: dict[str, Any]) -> dict[str, 
         "solo_allowed": False,
         "execution_units": units,
         "documented_divergences": dossier.get("divergences", []),
+        # ★★ The contract is what the HOST actually executes. Disclosures that
+        #    live only in route-plan.json and team-dossier.json never reach it,
+        #    and `user_output_contract.show` already tells the host to surface
+        #    "material disagreements" -- so an empty list with no denominator
+        #    beside it becomes "the experts agreed". That is the manufactured
+        #    consensus the Owner flagged, produced at exactly this line.
+        "divergence_detectability": dossier.get("divergence_detectability", {}),
+        "selection_caveats": _selection_caveats(route),
         "stage_gates": [
             {"gate": "G0", "pass_when": "assumptions, falsifiers and evidence gaps are frozen"},
             {"gate": "G1", "pass_when": "each persona artifact is claim-linked and packet-complete"},
@@ -119,6 +145,15 @@ def build_contract(route: dict[str, Any], dossier: dict[str, Any]) -> dict[str, 
         ],
         "user_output_contract": {
             "show": ["conclusion and next action", "work completed", "material disagreements", "risk and unknowns", "Team Delta Card"],
+            # How to phrase the empty case. Without this the host writes "no
+            # material disagreements", which asserts something never measured.
+            "phrasing_rules": [
+                "If documented_divergences is empty, do NOT write that the experts agreed. "
+                "Write that no divergence was detected, and state the detectability "
+                "denominator from divergence_detectability.",
+                "If selection_caveats is non-empty, surface it with the roster: the team "
+                "may not have been selected by subject-matter fit.",
+            ],
             "hide_by_default": ["full role transcript", "raw routing scores", "all claim ids", "internal meeting minutes"],
         },
         "target_gates": {
