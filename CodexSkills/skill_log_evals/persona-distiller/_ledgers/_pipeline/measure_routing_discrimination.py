@@ -347,6 +347,9 @@ def main():
             "relevant": t["relevant"], "picked": cats,
             "_breakdowns": [m["score_breakdown"] for m in plan.get("members", [])
                             if isinstance(m.get("score_breakdown"), dict)],
+            "_dm_all_zero": all(
+                (m.get("score_breakdown") or {}).get("values", {}).get("domain_match", 0) == 0
+                for m in plan.get("members", [])) if plan.get("members") else None,
         })
 
     print("%-20s %5s  %8s  %8s  %9s  %s" % ("任务", "人数", "路由命中", "随机命中", "差值", "模式/策略"))
@@ -424,6 +427,33 @@ def main():
     zero = next(r for r in rows if r["id"] == "clinical-triage")
     print("  ★ 族缺口（clinical-triage）：路由 %.1f%% —— 名册里医疗护理师 **0 人**，"
           "这一条注定命中 0，是名册的洞不是路由的错" % (100 * zero["routed_hit"]))
+
+    # ★★★★ **任务分类器兜底率** —— 这是「54% 没有领域信号」的上游真因。
+    #   `compile_task_graph.infer_domains()` 拿 9 个关键词表撞任务文本，
+    #   撞不上就返回 `["general-decision"]` —— 而 **`general-decision`
+    #   不在任何一个族的 CATEGORY_DOMAINS 集合里**，于是
+    #   `domain_match = |交集| / |domains| = 0`，**对全部 101 个候选恒为 0**。
+    #   实测撞不上的例子：`flaky-test-suite`（文本有「测试」，词表里没有）、
+    #   `pricing-saas`（有「定价」，词表里没有）、`bridge-inspection`
+    #   （有「钢桥」，词表里没有）。**词表是瞎的，而系统把账记在「没有合适的人」上。**
+    #   [[blamed-the-channel-my-own-wordlist-was-blind]]｜[[regex-must-clear-the-corpus-language]]
+    blind_rows = [r for r in rows if r.get("_dm_all_zero")]
+    if rows:
+        print("\n  ★★★★ 任务分类器兜底率（`domain_match` 对全队恒为 0）："
+              "**%d / %d = %.0f%%**" % (len(blind_rows), len(rows), 100 * len(blind_rows) / len(rows)))
+        if blind_rows:
+            print("     %s" % "、".join(r["id"] for r in blind_rows))
+        big = [r for r in rows if r["team_size"] > 1]
+        b1 = [r for r in big if r.get("_dm_all_zero")]
+        b0 = [r for r in big if not r.get("_dm_all_zero")]
+        for lab, grp in (("有领域信号", b0), ("失去领域信号", b1)):
+            if len(grp) >= 2:
+                ds = [r["delta"] for r in grp]
+                se_ = statistics.stdev(ds) / (len(ds) ** 0.5)
+                print("     n≥5 · %s %2d 题 → 平均 **%+.1f pp**（SE %.1f）"
+                      % (lab, len(grp), 100 * statistics.mean(ds), 100 * se_))
+        print("     ⇒ 机制**有效**（有信号时为正），但它一半以上的时间**没有信号**，"
+              "且 route-plan 的 `limitations` 里**不提这件事**。")
 
     # ★★★ 分项诊断：**哪一项在真正分辨人**。
     #   路由≈随机不是玄学，去看打分的分项就知道 —— 若唯一有极差的那一项
