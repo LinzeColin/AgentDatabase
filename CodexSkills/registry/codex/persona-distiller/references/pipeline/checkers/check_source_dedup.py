@@ -323,6 +323,19 @@ def load(target: pathlib.Path) -> tuple:
     for r in usable:
         d = target / "references/sources" / r["source_id"]
         f = next(iter(sorted(d.glob("*.txt"))), None) if d.is_dir() else None
+        # ★★ **台账已经写明正文在哪，就按它去取。**
+        #   本件原来只认 `references/sources/<id>/*.txt` —— 而那一层已被全库移出 git，
+        #   于是它在**语料确实在盘上**的工作区里也读不到东西。
+        #   实测 2026-08-17：Brandeis #172 的 `raw/` 有 **40 份 .txt、19M**，
+        #   台账每条写着 `local_path: raw/OrationTrueAmericanism.txt`，
+        #   而本件报「文件不在盘上 34」。**语料在盘上，判据看错了目录。**
+        #   ★ 全库 **19 个判据**早就按 `local_path` 定位正文 —— 本件是唯一的例外。
+        #     这不是改门，是**把偏离惯例的那一个对回惯例**（阈值与比较规则未动）。
+        #   [[gate-green-but-pointed-at-wrong-artifact]]｜[[i-built-a-second-ruler-while-the-authoritative-one-sat-in-scripts]]
+        if f is None and r.get("local_path"):
+            _lp = target / str(r["local_path"])
+            if _lp.is_file():
+                f = _lp
         if f is None:
             # ★★ **「文件不在盘上」和「文本太短」是两件事，不许合成一桶。**
             #   实测 2026-08-17：全库 **52/53** 个工作区 `distinct_works == usable`
