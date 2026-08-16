@@ -299,8 +299,8 @@
     },
     {
       "path": "scripts/run_tests.py",
-      "sha256": "2c786ab5fe47c6f8c6d4cb21845df62e21825b9e6debd8e62f2d0a6e7dc23789",
-      "size_bytes": 4455
+      "sha256": "cebba38688ec60d0da46952b5912cde9f9a8ce50d6e8f2738a941e0e298e6076",
+      "size_bytes": 5475
     },
     {
       "path": "scripts/score_team_delta.py",

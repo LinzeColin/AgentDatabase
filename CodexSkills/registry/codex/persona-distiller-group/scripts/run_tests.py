@@ -18,6 +18,25 @@ restricted-is-measured-only／telemetry-roundtrip），
 ★ 措辞要准：上游是「跑了没人修」，本 skill 是「**真的没有入口**」——
 **两处的缺口不同，别用同一句话概括。**
 
+## 这套测试到底有多大力气——2026-08-17 变异实测
+
+「8 件全绿」本身不说明任何事。**把核心函数逐个打坏，看有没有人喊**：
+
+| 打坏的东西 | 察觉 |
+|---|---|
+| `compile_task_graph._signal_hits` 恒 False（任务信号全丢） | **5/8** |
+| `build_team_dossier` 输出空档案 | 3/8 |
+| `score_team_delta` 的 win_rate 恒 50 | 2/8 |
+| `build_execution_contract` 丢掉 `separation_protocol` | 1/8 |
+| `route_team_moe` 的打分恒 0.5（排序坍成常数） | 1/8 |
+
+★★ 最后一行是这次的起点：**当时是 0/7 —— 七件测试无一察觉**。
+整套测试查的是披露、合同、拒答、遥测往返，没有一件在看「排序还成不成立」，
+而路由正是 Owner 评分里点名的那一项。已补 `test_routing_actually_discriminates.py`。
+
+⇒ 现状：**五项破坏各有至少一件测试察觉，核心函数打不成哑的**。
+★ 这张表是**实测**不是估计；重做的方法就是逐个插一行再跑本 runner。
+
 ## 与上游那个 runner 的区别：**这边默认就是门**
 
 上游有 1 件待 Owner 裁定的红，所以那边默认只报告。
