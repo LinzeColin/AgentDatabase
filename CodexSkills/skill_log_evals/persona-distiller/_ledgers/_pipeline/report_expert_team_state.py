@@ -81,18 +81,32 @@ def main():
 
     # ── ①④ 记录与自优化：团队级遥测 ──────────────────────────────────────
     section("①④ 团队级 outcome 记录 —— C 层校准的前提")
-    tel = list(G.rglob("*telemetry*.json*")) + list(G.rglob("*outcome*.json*"))
-    tel = [p for p in tel if p.suffix in (".json", ".jsonl")]
+    # ★★ **先说清楚「该去哪儿找」——否则这个 0 是我自己造的假 0。**
+    #   实测：`record_team_outcome.py --telemetry` 是**必填、无默认值**；
+    #   `route_team_moe.py` / `run_team_pipeline.py` 的 `--telemetry` 也**没有默认**。
+    #   ⇒ **遥测文件没有约定的家。** 本件只能扫 group 目录，
+    #     扫到 0 **不等于**「全局没有」——只等于「这里没有」。
+    #   ★ 而这本身很可能就是「记录一直是 0」的一个真原因：
+    #     校准层的数据没有归宿，就永远攒不起来。
+    #   [[zero-hit-gates-must-prove-they-can-hit]]｜[[empty-default-swallows-unknown]]
+    tel = [q for q in (list(G.rglob("*telemetry*.json*")) + list(G.rglob("*outcome*.json*")))
+           if q.suffix in (".json", ".jsonl")]
     n = 0
-    for p in tel:
+    for q in tel:
         try:
-            n += len([l for l in p.read_text(encoding="utf-8").splitlines() if l.strip()])
+            n += len([l for l in q.read_text(encoding="utf-8").splitlines() if l.strip()])
         except OSError:
             pass
-    print("  遥测文件 %d 个｜记录行数 **%d**" % (len(tel), n))
+    print("  **扫描面：只有 group 目录**（`--telemetry` 三处皆无默认值，")
+    print("    遥测文件没有约定路径 —— 扫到 0 不等于全局没有）")
+    print("  group 目录下：遥测文件 %d 个｜记录行数 **%d**" % (len(tel), n))
     print("  C 层校准合同要求：**>=60 条 outcome、ECE<=0.12、切片覆盖>=0.75**")
-    print("  ⇒ %s" % ("**记录数 0，C 从未激活；全部实跑为 strategy=B**" if n == 0
-                      else "有 %d 条，距 60 条还差 %d 条" % (n, max(0, 60 - n))))
+    if n == 0:
+        print("  ⇒ **此处 0 条**；路由每次自报 `telemetry_eligible_for_c: false`、")
+        print("    `strategy_fallback_reason: telemetry unavailable` —— 两者一致，")
+        print("    但**「没有约定路径」这件事本身要先解决**，否则数据无处可攒。")
+    else:
+        print("  ⇒ 有 %d 条，距 60 条还差 %d 条" % (n, max(0, 60 - n)))
     print("  ★ 这两个数补不上不是「没做」：`record_team_outcome.py` 必需")
     print("    `--actual-success`（实测任务成功率）与 `--delta-score`，")
     print("    要真跑一次任务并与裸模型盲比才有。**编一个就是造数据。**")
