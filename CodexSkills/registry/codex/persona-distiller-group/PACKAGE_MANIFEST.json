@@ -1,0 +1,1992 @@
+{
+  "default_install_root": "~/.codex/skills",
+  "display_name": "Persona Distiller Group",
+  "distribution": {
+    "canonical_registry": "../persona-distiller-group",
+    "kind": "repository-customized-v0.0.0.24",
+    "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "ece3a8866cf81b068344531f36c1a0d99b23294d273ad5d07d6da32bc9ae857a",
+      "size_bytes": 85
+    },
+    {
+      "path": "CANONICAL-ROOT-ROUTE.md",
+      "sha256": "3163fdf7c351e44772a785a817a1dc07cd5fede7cee585b0d795d32063a706cb",
+      "size_bytes": 33403
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "5c33e74d72ccbeccb39b37049181b5358485b37b3d8392493aabf0b8b6b1ab9a",
+      "size_bytes": 41997
+    },
+    {
+      "path": "README.md",
+      "sha256": "f431208b1be9b927dd0c9614a48f780dd4ecf99f252d2ab921d691a6a0e1b0f5",
+      "size_bytes": 105498
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "11bf37a6e021b47af45ddb6663c118a572cde0eb55f0078dc6f84ef84ba0324d",
+      "size_bytes": 8410
+    },
+    {
+      "path": "VERSION",
+      "sha256": "402f29138a9f4f0959845fefb5ed92bf98e71f747145c270ada5517db5ba44a6",
+      "size_bytes": 10
+    },
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "a034d2cfe5d89ff48a944c43b260a2ffacf6f781164e1be7b2dc68a160a0f3b8",
+      "size_bytes": 303
+    },
+    {
+      "path": "evidence/v0.0.0.14-apply-receipt.json",
+      "sha256": "7efe61e54a8071a185fe4e5206bcdba249024fbdedfcf3170d7bac8a1670d07c",
+      "size_bytes": 1251
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/dossier-deep_team.json",
+      "sha256": "70b13ad25ce4a165c0d14188ba3c0fa3ab166e232e14c75cbc4ec2a5ee50f634",
+      "size_bytes": 744434
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/dossier-single_expert.json",
+      "sha256": "1088ea2d117206aca068f2527606c54056c2269e5826a7a838af4b89b81a9217",
+      "size_bytes": 64638
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/dossier-small_team.json",
+      "sha256": "610aad7ae03c7f2dab9d0e8e39244c2f578b5093550c3b4f34efd7c3040342c0",
+      "size_bytes": 362505
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/dossier-swarm.json",
+      "sha256": "fe7e0a4cbd1b9e260e00193c88bd465ae4960a557c14172526441e2e3411a6c0",
+      "size_bytes": 1661231
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/execution-contract-deep_team.json",
+      "sha256": "d1ca249a937bb89ca1360f106d54777cf6721cdc45528d4c3302c58eb05844d2",
+      "size_bytes": 312636
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/execution-contract-single_expert.json",
+      "sha256": "25171912a30fe7bd94cc6937f40f6d37c4c75a4ad940a33bdcdbd49d0b8da082",
+      "size_bytes": 31606
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/execution-contract-small_team.json",
+      "sha256": "4d56c0010b00468ba34441b7452e8088d8870a0225f30fc11f574320f1a18ac3",
+      "size_bytes": 153354
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/execution-contract-swarm.json",
+      "sha256": "a864331435ee96c0752d34c3fd56b20a5435362fd35a1b1f56031127714d748c",
+      "size_bytes": 718566
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/fleet-admission.json",
+      "sha256": "9bd8f79500f163ae12b3bf4144e8cf0492e1a44d6c017a9c7fe91fbd0d65987f",
+      "size_bytes": 73633
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/repo-acceptance-result.json",
+      "sha256": "32a63eea72fdf1753be9a6460e81e73b4a8fe41fc8e1fcd2373e5e3ea47d5680",
+      "size_bytes": 3601
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/route-deep_team.json",
+      "sha256": "a369786ab08bfd27a5db9a4972afd81e7f18e2138ab8bf41cadbfcefbc2dfe4b",
+      "size_bytes": 109149
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/route-single_expert.json",
+      "sha256": "b4ad1fad0bdf0831bd8e18a2e67a8388352c3f2ea41262293cc990623785a75d",
+      "size_bytes": 26453
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/route-small_team.json",
+      "sha256": "95d38de17714adbae43340a902a1f14e7a021f5335e2f22e39f88f5e58c1e6ad",
+      "size_bytes": 53520
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/route-swarm.json",
+      "sha256": "d95efc0a8eb79f2834492375983adb36703271ca16e4685e3b3a46e054ab2e6e",
+      "size_bytes": 249557
+    },
+    {
+      "path": "evidence/v0.0.0.14-candidate-acceptance/synthetic-functional-acceptance.json",
+      "sha256": "9d1a1966dc88dd232e16089ba5a70f353c7935ad1ee2b460ebeb69dc73e1bb9a",
+      "size_bytes": 1832
+    },
+    {
+      "path": "expert-fleet-admission.json",
+      "sha256": "9bd8f79500f163ae12b3bf4144e8cf0492e1a44d6c017a9c7fe91fbd0d65987f",
+      "size_bytes": 73633
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "3b5afc5f3b8ed76ab51cee525b7930bdb7be8fac25f818d4f2d52f728ca475f7",
+      "size_bytes": 1304
+    },
+    {
+      "path": "references/delivery-package-standard.md",
+      "sha256": "8385152e7d6ab0f7846a06de4a5c9b5669c32d693fb2d85281cd5e7a24708b53",
+      "size_bytes": 4019
+    },
+    {
+      "path": "references/market-leader-acceptance.md",
+      "sha256": "d62f17e4fd56be8ad2f18a1104ab2ea4508554892f17360b8db176632a4e444e",
+      "size_bytes": 633
+    },
+    {
+      "path": "references/moe-routing-contract.md",
+      "sha256": "e1b69e5811845d29d15f110bf4639f28e5d0c106781604a9575c0767ac35e5b6",
+      "size_bytes": 1167
+    },
+    {
+      "path": "references/persona-producer-consumer-contract.md",
+      "sha256": "769134e8b2a96d86b402acb65de2e1d242beb5d0b48692056bb6f4c3e0677ca1",
+      "size_bytes": 1323
+    },
+    {
+      "path": "references/team-delta-scorecard.md",
+      "sha256": "3987fe39ba65210d1cf54938e90160f528f0455d9caa94a4578eae2a1e70b88f",
+      "size_bytes": 608
+    },
+    {
+      "path": "references/team-output-contract.md",
+      "sha256": "5bbac99ce5ba5031cb564eda0a07f3d1f478aa90b8e295d22a40b0ba8dcd977f",
+      "size_bytes": 985
+    },
+    {
+      "path": "references/team-routing-policy.md",
+      "sha256": "63149038f55ff4f74c608668121f91f0cf4a7cc3b194f1fde5e88a9b38b8d671",
+      "size_bytes": 1526
+    },
+    {
+      "path": "references/team-size-control-plane.md",
+      "sha256": "906cce911c371dd6ef9ade896cc231b1c55241e3f697bd34ddfb44be6bd9fef7",
+      "size_bytes": 737
+    },
+    {
+      "path": "references/user-experience-contract.md",
+      "sha256": "d6e938e0c0fbe97d19896f37255841d1f9ef9dd5d8177dae3916e7e291d47423",
+      "size_bytes": 636
+    },
+    {
+      "path": "schemas/delivery-manifest.schema.json",
+      "sha256": "208c4657a3d2724b1174b343d1922f14060d4b66e4a8b1bac14dc39d5e8a9498",
+      "size_bytes": 2453
+    },
+    {
+      "path": "schemas/registration.schema.json",
+      "sha256": "43b00d4472201833ac1a3a7042a7e0e47468fce8cd12a065ae599adfe3a3edc8",
+      "size_bytes": 2428
+    },
+    {
+      "path": "schemas/route-plan.schema.json",
+      "sha256": "f750abf2dacb01f9795e2991f16940b69a431031675ac1d9ac039b54b07293bc",
+      "size_bytes": 946
+    },
+    {
+      "path": "schemas/team-card.schema.json",
+      "sha256": "ba2036d447c71cfaf2b5c19da833ec3c9767fd5928d876416c846e8c1a557283",
+      "size_bytes": 2075
+    },
+    {
+      "path": "scripts/audit_persona_fleet_for_team.py",
+      "sha256": "1b6fe8b6b23ac29c629517ea7dba9ff0b92a952c359d8a47aeb70fd321f8fb96",
+      "size_bytes": 6222
+    },
+    {
+      "path": "scripts/backfill_distilled_with.py",
+      "sha256": "bc1163148004e8a3f86241476bedd90585656676f70c14e6c0260326bb8fc5c2",
+      "size_bytes": 7140
+    },
+    {
+      "path": "scripts/backfill_subject_status.py",
+      "sha256": "2c337b48161c2a3b7a167837154d1ccbc32a6ba45a7f834550f0c993e1345a63",
+      "size_bytes": 9396
+    },
+    {
+      "path": "scripts/build_execution_contract.py",
+      "sha256": "16e541ea7007eb1fc3503c643fd331471ecc87ba08e7b1ec5b8ec2a39b8e2219",
+      "size_bytes": 11447
+    },
+    {
+      "path": "scripts/build_manifest.py",
+      "sha256": "c3f7a09c582fd74240bd59a893830f14f9f96203d31b693b0c62f2ee6a1f917d",
+      "size_bytes": 5032
+    },
+    {
+      "path": "scripts/build_team_delta_card.py",
+      "sha256": "1ef872427af3086f059d4b472e0a7025afe06cff372e11636be02535099d0632",
+      "size_bytes": 2180
+    },
+    {
+      "path": "scripts/build_team_dossier.py",
+      "sha256": "3d528c1745da88ffd7e333bbcbc94a749e96124cb84354167a6b98cf20153601",
+      "size_bytes": 17950
+    },
+    {
+      "path": "scripts/check_group_version_binding.py",
+      "sha256": "4947fa907c775d3da0f0984d2608f0a53196a3ccfe55fca59c95ac810cc08173",
+      "size_bytes": 7915
+    },
+    {
+      "path": "scripts/check_roster_independence.py",
+      "sha256": "f97e887bb24b1c5091ed72dd38c2b4ee2c7fee73a2425d678357b7f6d75d3a39",
+      "size_bytes": 6397
+    },
+    {
+      "path": "scripts/check_team_attribution.py",
+      "sha256": "85be3e86c949f2e57a4a4e52687e38e3b046ee432065e9d07e17422bc7c73766",
+      "size_bytes": 11025
+    },
+    {
+      "path": "scripts/common.py",
+      "sha256": "51dbf80ddfd7fe4eab1a2d327b9c9bbcb461b95a5574a1faef55ccf1bf5213dc",
+      "size_bytes": 2009
+    },
+    {
+      "path": "scripts/compile_task_graph.py",
+      "sha256": "572e6b777a773d62bce51d9eee72ee3b88d10d555e36626a046cf07fb08115bb",
+      "size_bytes": 17492
+    },
+    {
+      "path": "scripts/install.py",
+      "sha256": "8d8991125c6760f0cef83059ee1f8af16d11a6704754d25ad172a2a1f5bbe589",
+      "size_bytes": 14254
+    },
+    {
+      "path": "scripts/rebuild_team_views.py",
+      "sha256": "742f7fd140a631129778c89e3772ff5a58d1a5d4fc229f77ace197cb6fc4f1f9",
+      "size_bytes": 6160
+    },
+    {
+      "path": "scripts/record_team_outcome.py",
+      "sha256": "d3848a328242b84fdcce81470ce8063c3c4519ae5ac60d5a875f4141ab1a054c",
+      "size_bytes": 5882
+    },
+    {
+      "path": "scripts/register_delivery.py",
+      "sha256": "cffa105d9bbc09b544b0a27b11f3de88ea41386dea429507461214475966cbd7",
+      "size_bytes": 1003
+    },
+    {
+      "path": "scripts/registry_core.py",
+      "sha256": "ce0a6fb176ada51e9339775f369d8ba97500e1993638832299c38a2db30e385a",
+      "size_bytes": 59086
+    },
+    {
+      "path": "scripts/route_team.py",
+      "sha256": "ced9ddcdc625664e5ca0f22a408b8e60a68c68ba589e60ce5135d7623608c835",
+      "size_bytes": 179
+    },
+    {
+      "path": "scripts/route_team_moe.py",
+      "sha256": "53697ea859d103fa163c224911e2df93ba213ca6c388d21c0af0582adbd41f7f",
+      "size_bytes": 26070
+    },
+    {
+      "path": "scripts/run_team_pipeline.py",
+      "sha256": "39c40342fcc5f62fca91c5750a0b01cc41034c0894cee7eae6a05d7eea44c15c",
+      "size_bytes": 3784
+    },
+    {
+      "path": "scripts/run_tests.py",
+      "sha256": "2c786ab5fe47c6f8c6d4cb21845df62e21825b9e6debd8e62f2d0a6e7dc23789",
+      "size_bytes": 4455
+    },
+    {
+      "path": "scripts/score_team_delta.py",
+      "sha256": "07bfddbebecc5f7785e83dbbd97d3deb7221e22b78088b201aa1a7b4614d5bc5",
+      "size_bytes": 4895
+    },
+    {
+      "path": "scripts/team_runtime_common.py",
+      "sha256": "adc02669262f17d8499ef37fcf8bbd2ffbe8df46569ad65bafc74426297503ac",
+      "size_bytes": 5462
+    },
+    {
+      "path": "scripts/validate_group.py",
+      "sha256": "b3913d42c44bb71b9b8d4393c2f54a7b8eee0ea85bab3ad747dbf5c4eeee2b11",
+      "size_bytes": 649
+    },
+    {
+      "path": "scripts/verify_delivery.py",
+      "sha256": "679789ed45a8a2033b476e8b7d833fcfdb4a356338e65a1aa68395c52ab73ca1",
+      "size_bytes": 907
+    },
+    {
+      "path": "team-index.json",
+      "sha256": "f2b247f14b0904657c5faee03d35998d1adf0e84627086189aa4faeaef2a446f",
+      "size_bytes": 400812
+    },
+    {
+      "path": "tests/run_functional_acceptance.py",
+      "sha256": "1530f7b164eece8cd925b0763dd0c71da15d2909106803339bc5710a5456cd9e",
+      "size_bytes": 2013
+    },
+    {
+      "path": "tests/test_disclosures_reach_the_contract.py",
+      "sha256": "23b3e4246905d30b00dacde7e9275dcbd0e76a0ca52e22d6437fc388259a80b6",
+      "size_bytes": 6378
+    },
+    {
+      "path": "tests/test_domain_classifier_language.py",
+      "sha256": "6eb48e9566be71232acc0f446fba55d99572baeca5cd0f7e060431fb53a4fa68",
+      "size_bytes": 4118
+    },
+    {
+      "path": "tests/test_market_leader_candidate.py",
+      "sha256": "5d993da25462053df41552b23f6f06f55753d760cf04accba965dfb5fd2fcff1",
+      "size_bytes": 11476
+    },
+    {
+      "path": "tests/test_restricted_is_measured_only.py",
+      "sha256": "8e49c0c220d57abf23c25e062df9aa14390d4ee44a947a878e86ba24ab2f07f3",
+      "size_bytes": 4415
+    },
+    {
+      "path": "tests/test_telemetry_roundtrip.py",
+      "sha256": "269a5858c1678277ebf19af0a218db1d56e92f62a73d124a600174490db778ee",
+      "size_bytes": 6681
+    },
+    {
+      "path": "农林牧渔师/_category.json",
+      "sha256": "e4cfa692478862ad93dba8d5008fb987c7b9ce445ed03141bb22d9caa44d5550",
+      "size_bytes": 137
+    },
+    {
+      "path": "农林牧渔师/george-washington-carver/registration.json",
+      "sha256": "4384b786a8fbfefe706d2efbfa637644eb7401c4f46df59ee6b9fb35ad97e951",
+      "size_bytes": 4190
+    },
+    {
+      "path": "农林牧渔师/george-washington-carver/team-card.json",
+      "sha256": "adeb8ebfa790a70cc62196c49a576da3154eb9d649ac7377855f510e81b117a7",
+      "size_bytes": 4155
+    },
+    {
+      "path": "农林牧渔师/george-washington-carver/versions/0.0.0.1/george-washington-carver-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "cc0738fa4fd662ed52d9bae52d4962d27f48c0c54f8fd599726564762b9f0d8f",
+      "size_bytes": 73289
+    },
+    {
+      "path": "农林牧渔师/george-washington-carver/versions/0.0.0.2/george-washington-carver-persona-distillation-delivery-v0.0.0.2.zip",
+      "sha256": "09f2d43ac122d671c3345108955ea2c503ffa5160b897ced7dc5249f3e93f102",
+      "size_bytes": 79622
+    },
+    {
+      "path": "农林牧渔师/george-washington-carver/versions/0.0.0.3/george-washington-carver-persona-distillation-delivery-v0.0.0.3.zip",
+      "sha256": "70e5848491a9d4e769571da575167ddf45cbbbc51d581f12ff43d8499f3a6d6c",
+      "size_bytes": 82352
+    },
+    {
+      "path": "农林牧渔师/george-washington-carver/versions/0.0.0.4/george-washington-carver-persona-distillation-delivery-v0.0.0.4.zip",
+      "sha256": "fb7760545f6a81523824e07785425f051a15f38d7fbda480181fb8914010c7c4",
+      "size_bytes": 82690
+    },
+    {
+      "path": "农林牧渔师/george-washington-carver/versions/0.0.0.5/george-washington-carver-persona-distillation-delivery-v0.0.0.5.zip",
+      "sha256": "6c1f75564154913f1b3de9296d41996bab8dff6d333df77841af2a85fbbb33df",
+      "size_bytes": 83259
+    },
+    {
+      "path": "农林牧渔师/joel-salatin/registration.json",
+      "sha256": "5624cc6fa49c8616d4878460e03f8a35b8731403badde3db9ab23e02555f68e4",
+      "size_bytes": 1148
+    },
+    {
+      "path": "农林牧渔师/joel-salatin/team-card.json",
+      "sha256": "1c9f2775d01fd1ba23cae20927ed0657f225d7c8fde66d8c48eeea5071dc2730",
+      "size_bytes": 3619
+    },
+    {
+      "path": "农林牧渔师/joel-salatin/versions/0.0.0.1/joel-salatin-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "c684277e0b3e1d7a53885fdeadcdb6985c0ccbe478bd84d91d323806fb72c570",
+      "size_bytes": 97668
+    },
+    {
+      "path": "创业经营师/_category.json",
+      "sha256": "78281036061306cb2a3b7579eb3b32a94bc4d18d62e5e57b7235e0d3ce908ff0",
+      "size_bytes": 139
+    },
+    {
+      "path": "创业经营师/anne-mulcahy/registration.json",
+      "sha256": "5f3d21cc973deaa6ebb4150f341c5f1f3a9be25fb4db0209dd8fe2df73dda9ec",
+      "size_bytes": 1233
+    },
+    {
+      "path": "创业经营师/anne-mulcahy/team-card.json",
+      "sha256": "74447127c1f9c7bc88309f69d660d29901e4e61072adb177a089f962a4412b66",
+      "size_bytes": 3125
+    },
+    {
+      "path": "创业经营师/anne-mulcahy/versions/0.0.0.1/anne-mulcahy-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "43c77d2398e5260a17d884cf27880508d8247c6ae5822876877d268f26344f05",
+      "size_bytes": 91069
+    },
+    {
+      "path": "创业经营师/ben-horowitz/registration.json",
+      "sha256": "e8c8ee78b27ab5200b992e57d40ec2cb092e8def194c8d81d1ea96493e4d1971",
+      "size_bytes": 1215
+    },
+    {
+      "path": "创业经营师/ben-horowitz/team-card.json",
+      "sha256": "9569795678e18eb71222ab919296bae3ba90a1b89c6fddaef281e6a19f420ea7",
+      "size_bytes": 3022
+    },
+    {
+      "path": "创业经营师/ben-horowitz/versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "4910ccf159f0504db1bfb51be77ed9b06aeba0e8176293e87194cdf738f1d4c3",
+      "size_bytes": 90053
+    },
+    {
+      "path": "创业经营师/david-packard/registration.json",
+      "sha256": "3199826c6a0e3974ad370cbc888fb78f6dd5fccf8799d09f9a32c70d28064ab2",
+      "size_bytes": 1246
+    },
+    {
+      "path": "创业经营师/david-packard/team-card.json",
+      "sha256": "f44c5bd360201e0b42ae2d3541cbd07e3ee734eb05fe108fbe5d6a4fa77e88d6",
+      "size_bytes": 2937
+    },
+    {
+      "path": "创业经营师/david-packard/versions/0.0.0.1/david-packard-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "8e0bd5516afaaf2e6aca72337baa705ad23cb9ef3a17f53f783e166f7d8b78b3",
+      "size_bytes": 88723
+    },
+    {
+      "path": "创业经营师/lou-gerstner/registration.json",
+      "sha256": "d47aa804ce3101187fbd53078ea5fdac096b53d049abde782205f985e0b7f7fc",
+      "size_bytes": 1271
+    },
+    {
+      "path": "创业经营师/lou-gerstner/team-card.json",
+      "sha256": "79f87db0b080237d33daa4be0b5ffe5c59c6aae6bd3ba493ddb3e6bad3776681",
+      "size_bytes": 2876
+    },
+    {
+      "path": "创业经营师/lou-gerstner/versions/0.0.0.1/lou-gerstner-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "08265af5685b285c550d7ba4fd2801ad9a1a60b3c0509b81a89e571ddbeffc80",
+      "size_bytes": 97714
+    },
+    {
+      "path": "创业经营师/reed-hastings/registration.json",
+      "sha256": "8ab02d3191f5ac4cf9b9220e9a925017ad197deccd81b72cd5e7b79940fb80ce",
+      "size_bytes": 1262
+    },
+    {
+      "path": "创业经营师/reed-hastings/team-card.json",
+      "sha256": "905070a1324691b02ffa6603693fa0398674337baa5b3abb040dbf0a9cb28bf6",
+      "size_bytes": 3275
+    },
+    {
+      "path": "创业经营师/reed-hastings/versions/0.0.0.1/reed-hastings-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "9deea717a645e30ba6557a5004aa16104d0035233c15cdd17d697ec3535f3f35",
+      "size_bytes": 83975
+    },
+    {
+      "path": "创业经营师/sam-walton/registration.json",
+      "sha256": "3e4f51b79ef2a634676f3c6c91b0f597c431b84c83db47a2f1ad270e40d9fee9",
+      "size_bytes": 1214
+    },
+    {
+      "path": "创业经营师/sam-walton/team-card.json",
+      "sha256": "f903bc9bebf6cb618fc2d7968a769ea5e222dd987f0cce3f3dad0005f62b1d2a",
+      "size_bytes": 2151
+    },
+    {
+      "path": "创业经营师/sam-walton/versions/0.0.0.1/sam-walton-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "87977eef99fca19becfa49c815e5aa5e26595e4ba36c94b376d5e43d470fb228",
+      "size_bytes": 440643
+    },
+    {
+      "path": "创业经营师/tim-cook/registration.json",
+      "sha256": "822c3a2693f090ca6c5229ef7eb67baa3bdfcdfb3e25b8179904592f85cb0279",
+      "size_bytes": 1195
+    },
+    {
+      "path": "创业经营师/tim-cook/team-card.json",
+      "sha256": "c9c77de725c97b3c7aeef102eb828362d4c1c9c1f3b40e992158c3d21f8afd5b",
+      "size_bytes": 2208
+    },
+    {
+      "path": "创业经营师/tim-cook/versions/0.0.0.1/tim-cook-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "0ab2ba5eafffb7d93ca4815c3fe21b51462144cc1f79e8012ce13e54969211fd",
+      "size_bytes": 83592
+    },
+    {
+      "path": "医疗护理师/_category.json",
+      "sha256": "dca77a859690c65d3ebcb8eeaadf4e1dfc7d030def7c9ead9318fbd11b6561db",
+      "size_bytes": 136
+    },
+    {
+      "path": "客户营销师/_category.json",
+      "sha256": "b72d2f086db6b029703173df7bb396b4694429b04b3665835ad69238e7bd00ba",
+      "size_bytes": 136
+    },
+    {
+      "path": "客户营销师/seth-godin/registration.json",
+      "sha256": "8fa371c2ba3bd3e0c82c79ae209277d86fe5cea5f259ec6ed2d08d69de73427e",
+      "size_bytes": 1079
+    },
+    {
+      "path": "客户营销师/seth-godin/team-card.json",
+      "sha256": "b4dd0ae7b5058f57fa6f7a9b0409e97805179bb88ed8ed3e48b0958c7b512db4",
+      "size_bytes": 3832
+    },
+    {
+      "path": "客户营销师/seth-godin/versions/0.0.0.1/seth-godin-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "71472f900532f8e3ed093965fb58a3f4bafa54c2e5ea5e5e709f3a7803e9fd3e",
+      "size_bytes": 89073
+    },
+    {
+      "path": "建造采购师/_category.json",
+      "sha256": "d81a9e29bba1e9f2410bd4e60dd14a1b3e925a6a9ca403c98d73efd81ec8fb07",
+      "size_bytes": 142
+    },
+    {
+      "path": "建造采购师/david-t-hulett/registration.json",
+      "sha256": "917639f8e48e30ab38251a9d39a90bd92add1fcf824510860d21db36032404d7",
+      "size_bytes": 1237
+    },
+    {
+      "path": "建造采购师/david-t-hulett/team-card.json",
+      "sha256": "ebdb19cb1801d8416b39989b99626d0f1a97c277d52a2091dbe3a774e4d679a0",
+      "size_bytes": 3038
+    },
+    {
+      "path": "建造采购师/david-t-hulett/versions/0.0.0.1/david-t-hulett-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "e6764927e0e3b3bb1d481428c5becd4b92353785fda8b6f09c40d47936440fb3",
+      "size_bytes": 78318
+    },
+    {
+      "path": "建造采购师/donald-g-reinertsen/registration.json",
+      "sha256": "0da55442a71156b0851cabaefc2fac228e15fe505e658205f0eff1b3dd53cda3",
+      "size_bytes": 1253
+    },
+    {
+      "path": "建造采购师/donald-g-reinertsen/team-card.json",
+      "sha256": "8a6e5d716ae7e0dc4db3ffeb768cfc8d28fcc2fbf7bd4b7efb1158264c23d2e0",
+      "size_bytes": 2835
+    },
+    {
+      "path": "建造采购师/donald-g-reinertsen/versions/0.0.0.1/donald-g-reinertsen-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "d59c88776d2e4de88d03b8b855e14ab8e82318b5a336e8d77d41d66614527925",
+      "size_bytes": 83900
+    },
+    {
+      "path": "建造采购师/genichi-taguchi/registration.json",
+      "sha256": "e67057ed9cf5b2b58ff49d7037b092a731977da30ac9c5601beaafeec040140c",
+      "size_bytes": 1284
+    },
+    {
+      "path": "建造采购师/genichi-taguchi/team-card.json",
+      "sha256": "58b760306b096e1c3ae73a9d2d6e0a34cbea3aa2bc17e7c607531ee8dbf7b80b",
+      "size_bytes": 2515
+    },
+    {
+      "path": "建造采购师/genichi-taguchi/versions/0.0.0.1/genichi-taguchi-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "6428340167a5f9b1713d88a7a4681988bd9ad39fc39a336e48033cf114274e72",
+      "size_bytes": 86354
+    },
+    {
+      "path": "建造采购师/john-k-hollmann/registration.json",
+      "sha256": "4e10cd22afe45366b3fa9780b3179884550284ae9b52dcb126761a49228a7848",
+      "size_bytes": 1233
+    },
+    {
+      "path": "建造采购师/john-k-hollmann/team-card.json",
+      "sha256": "1da2269086ca9fe550977278968c0d20c5aec234d8c4fcf01026da47616407e4",
+      "size_bytes": 2516
+    },
+    {
+      "path": "建造采购师/john-k-hollmann/versions/0.0.0.1/john-k-hollmann-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "bf35ac36b42143ecb6a63aeabf500bcaacae398047416e3c8b92aac07f2e9983",
+      "size_bytes": 79893
+    },
+    {
+      "path": "建造采购师/joseph-juran/registration.json",
+      "sha256": "55fecbac04ded7febff13e0f73966a89e4f262fa3c895ea2ed32a0bf5615bad1",
+      "size_bytes": 1274
+    },
+    {
+      "path": "建造采购师/joseph-juran/team-card.json",
+      "sha256": "6c7685458143e56c27daf8b54bdab9c78a5ee6659a2b6ca9a59ba3018210a703",
+      "size_bytes": 2150
+    },
+    {
+      "path": "建造采购师/joseph-juran/versions/0.0.0.1/joseph-juran-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "1bca5872e4af4752e4dd85e9c2398ccf2c70cf7cb87b423fbcb03e5175e33dc8",
+      "size_bytes": 79326
+    },
+    {
+      "path": "建造采购师/lauri-koskela/registration.json",
+      "sha256": "a8e5bbdb16fa30602452cab8a47148a0b6ee361aef1d642fb560f02c6942038b",
+      "size_bytes": 1223
+    },
+    {
+      "path": "建造采购师/lauri-koskela/team-card.json",
+      "sha256": "547557bd9fc76133c660005c0aa86ca8e02f2170180aaa8fb229365ebd2e18e6",
+      "size_bytes": 3017
+    },
+    {
+      "path": "建造采购师/lauri-koskela/versions/0.0.0.1/lauri-koskela-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "dcf4b320b544a8ae3e70e198641198bb460ecc3c0a05f1be7e3904a948834a25",
+      "size_bytes": 77557
+    },
+    {
+      "path": "建造采购师/martin-fischer-stanford/registration.json",
+      "sha256": "fd0ab6bcd053cde8393bf52982b6517a9869907c5c3ec999494ba99fad8ba7a2",
+      "size_bytes": 1255
+    },
+    {
+      "path": "建造采购师/martin-fischer-stanford/team-card.json",
+      "sha256": "c89806c9dd890eb9f0214d29fce3a5e6ad6092c5e4d607ba0b71188d721ad38b",
+      "size_bytes": 2268
+    },
+    {
+      "path": "建造采购师/martin-fischer-stanford/versions/0.0.0.1/martin-fischer-stanford-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "6b0be292010d741f9988d8a523f4cf4ad3688ce27e40a65a43e0a5ee895ef00f",
+      "size_bytes": 85191
+    },
+    {
+      "path": "建造采购师/paul-teicholz/registration.json",
+      "sha256": "e005755badf0d3e64da6ddfd6a2826239ebebddb844ecd03bb2893f46569ca65",
+      "size_bytes": 1246
+    },
+    {
+      "path": "建造采购师/paul-teicholz/team-card.json",
+      "sha256": "c9ec972a8915b209f86a3375107c8116a7dc539d77bee6cd96f10bc0aed8a93d",
+      "size_bytes": 3204
+    },
+    {
+      "path": "建造采购师/paul-teicholz/versions/0.0.0.1/paul-teicholz-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "c4f88eb8e5a6ee39d2e713e11c2a9c342d9738e7a533cc419a2b705a78df41b3",
+      "size_bytes": 91182
+    },
+    {
+      "path": "建造采购师/philip-crosby/registration.json",
+      "sha256": "d08f066017ffdd79a85747f9811e2d106095f9a16462329475b018506efb9be8",
+      "size_bytes": 1241
+    },
+    {
+      "path": "建造采购师/philip-crosby/team-card.json",
+      "sha256": "2a4933c390038c6b66dc3db998b56c3aa54bf451df2b8d2e271aa5d951981f9d",
+      "size_bytes": 2713
+    },
+    {
+      "path": "建造采购师/philip-crosby/versions/0.0.0.1/philip-crosby-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "228b6d38746a1cdb3febd530f11f6d7deee0654814a581c89f4445f43bcc0e1d",
+      "size_bytes": 82612
+    },
+    {
+      "path": "建造采购师/rafael-sacks/registration.json",
+      "sha256": "525958cf1489a35de8fe18f3010e9111e530f7497af4abdffb776215846ab3e1",
+      "size_bytes": 1218
+    },
+    {
+      "path": "建造采购师/rafael-sacks/team-card.json",
+      "sha256": "3184111bbd1f964e3204c87172b4aff02c2d8c22faefa4f500d2d715a1c0993f",
+      "size_bytes": 2937
+    },
+    {
+      "path": "建造采购师/rafael-sacks/versions/0.0.0.1/rafael-sacks-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "72d812a37fcab659f437625e4ddbc23586e05cc49599da59733c53faa3052c85",
+      "size_bytes": 81593
+    },
+    {
+      "path": "建造采购师/shigeo-shingo/registration.json",
+      "sha256": "8200fab19a3cea858cbd2d3b93f435f75b5019b297a89986de35e49eedcab0a4",
+      "size_bytes": 1259
+    },
+    {
+      "path": "建造采购师/shigeo-shingo/team-card.json",
+      "sha256": "1b09931966dc617e1442ac9ea7c16221459e8d10d5284c3bad3474aa15e1ae00",
+      "size_bytes": 2284
+    },
+    {
+      "path": "建造采购师/shigeo-shingo/versions/0.0.0.1/shigeo-shingo-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "4ea35dfcd03919fb4817db24bc12080e014694c3249d76ca26988afc71415819",
+      "size_bytes": 74945
+    },
+    {
+      "path": "建造采购师/taiichi-ohno/registration.json",
+      "sha256": "facf4aeda27cd1298e0a090e7266df4a56e5b04ee74be6b8dfb8c81202590b28",
+      "size_bytes": 1255
+    },
+    {
+      "path": "建造采购师/taiichi-ohno/team-card.json",
+      "sha256": "6d139c4658a714adda226919e9af233d6bf7b80baa6f7719b4129eb3d19cd125",
+      "size_bytes": 2664
+    },
+    {
+      "path": "建造采购师/taiichi-ohno/versions/0.0.0.1/taiichi-ohno-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "d4580e8558cd291e40f78a87d662e40f80c6c2cb0c5b3e1887e907bab073f678",
+      "size_bytes": 102504
+    },
+    {
+      "path": "思想教育师/_category.json",
+      "sha256": "e6e446953143afb9bb3bdab2be341b82eaa8ad53604a3180e092e526ff0b232f",
+      "size_bytes": 134
+    },
+    {
+      "path": "思想教育师/charles-eastman/registration.json",
+      "sha256": "1c56bb5cd08c34ab0e9c5869e0123647644a4b0c1f344ab54b67cfca03b86a15",
+      "size_bytes": 1233
+    },
+    {
+      "path": "思想教育师/charles-eastman/team-card.json",
+      "sha256": "e7495cdb4a27a9bb2c363c9e6479107ce6f66254845bd9166f8bddff2372bd3f",
+      "size_bytes": 2508
+    },
+    {
+      "path": "思想教育师/charles-eastman/versions/0.0.0.1/charles-eastman-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "b763dd8177efe2da6f2bed8ca5ccf4d48fa2c9dba3e79cf472cc0a60a1e07e07",
+      "size_bytes": 81154
+    },
+    {
+      "path": "思想教育师/thomas-saaty/registration.json",
+      "sha256": "6cf2c09064b76a35bc7b336a506c6b55ba9b84dfca0e4fb9b2c4c263b976fbe2",
+      "size_bytes": 1222
+    },
+    {
+      "path": "思想教育师/thomas-saaty/team-card.json",
+      "sha256": "849e3501f2712ddaa88a78670a25b0e6c551cf4b626b774f6031970f2bbffc41",
+      "size_bytes": 3017
+    },
+    {
+      "path": "思想教育师/thomas-saaty/versions/0.0.0.1/thomas-saaty-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "9ae9233cb806b7e5a30d1bc3e23eadfd3f0d6ec8c1e941c8d8a67c88618bafcc",
+      "size_bytes": 80673
+    },
+    {
+      "path": "投资资本师/_category.json",
+      "sha256": "c096aff39f1b7237dc38384245f6a1a102ab1f72018fa2e5ff5f6af82eb21643",
+      "size_bytes": 144
+    },
+    {
+      "path": "投资资本师/aswath-damodaran/registration.json",
+      "sha256": "fc44bab452a7fe4b4962d4d54fdfa5c0e1ba035cab5fb55574b7c1a0d896f020",
+      "size_bytes": 1240
+    },
+    {
+      "path": "投资资本师/aswath-damodaran/team-card.json",
+      "sha256": "7c95d48154321b53b6bb5c889e4bef864a55fe6174ea62580107b697e99bff35",
+      "size_bytes": 2321
+    },
+    {
+      "path": "投资资本师/aswath-damodaran/versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "b4773b83df60ac185221b4a02258bc5c2e345eeb00170a4ee9bf78cec3f89c81",
+      "size_bytes": 89462
+    },
+    {
+      "path": "投资资本师/benjamin-graham/registration.json",
+      "sha256": "cb9913f70ce52b5fd10c18d1f1ecc0e29707c888a1a147d16192e61e03bd3e78",
+      "size_bytes": 1170
+    },
+    {
+      "path": "投资资本师/benjamin-graham/team-card.json",
+      "sha256": "c2c28820800ca9fbaa683ce39d916e72864a21bb5698795e9776cbae3b04be36",
+      "size_bytes": 2832
+    },
+    {
+      "path": "投资资本师/benjamin-graham/versions/0.0.0.1/benjamin-graham-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "c0cde77a78187d75e2482a487d8a1e1e4a3d3c61321c5eef46ac2817b918b8e9",
+      "size_bytes": 73012
+    },
+    {
+      "path": "投资资本师/carl-icahn/registration.json",
+      "sha256": "12ecc01b37403bcaff70a804c7da8907717b8ed9519f7f6f238f78f360c2c156",
+      "size_bytes": 1932
+    },
+    {
+      "path": "投资资本师/carl-icahn/team-card.json",
+      "sha256": "a79adc8548b68a4f0a0d4b02cdb97813fb7eee049aa1c6d1767eca76e2f55df6",
+      "size_bytes": 5531
+    },
+    {
+      "path": "投资资本师/carl-icahn/versions/0.0.0.1/carl-icahn-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "51a48e4d0e386f5328faa62a23c33fd48e6540bdbd9a726e3803e120179762c9",
+      "size_bytes": 78441
+    },
+    {
+      "path": "投资资本师/carl-icahn/versions/0.0.0.2/carl-icahn-persona-distillation-delivery-v0.0.0.2.zip",
+      "sha256": "d2acab7b02026e74a750e95d53496e37d8061d228a64781bc09b9ed5b7274107",
+      "size_bytes": 78487
+    },
+    {
+      "path": "投资资本师/charlie-munger/registration.json",
+      "sha256": "92a15ce34ede8d77adb0a51b657b54442c548bbe45d87ed559a699ed46a891a9",
+      "size_bytes": 1239
+    },
+    {
+      "path": "投资资本师/charlie-munger/team-card.json",
+      "sha256": "38a10c8cc351abdf8e74914494d42edff39ca0e6ee28e9f3ac39ef5bb52fc956",
+      "size_bytes": 3069
+    },
+    {
+      "path": "投资资本师/charlie-munger/versions/0.0.0.1/charlie-munger-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "6534f026811b892f7dad20d1749876a28e9a0ea6cb922380c8b146a5b02aa40a",
+      "size_bytes": 79921
+    },
+    {
+      "path": "投资资本师/edward-o-thorp/registration.json",
+      "sha256": "a6ae482f784014348c3efc0624b64b4381f0a4eabc33d4cc3e93dc782b59dadd",
+      "size_bytes": 1270
+    },
+    {
+      "path": "投资资本师/edward-o-thorp/team-card.json",
+      "sha256": "e7db1c92c3c831c796810bd482c65187a926b6b454b4db97ed7b81c0cca3c17b",
+      "size_bytes": 2870
+    },
+    {
+      "path": "投资资本师/edward-o-thorp/versions/0.0.0.1/edward-o-thorp-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "da1f02656f03733b0802b2d7bfd8517ac8d45e4afff8c456aacddc926d199d6c",
+      "size_bytes": 79922
+    },
+    {
+      "path": "投资资本师/george-soros/registration.json",
+      "sha256": "279ad260dd73576b503782cdb4e20e5db88350991801270f85852a41bc979d85",
+      "size_bytes": 1946
+    },
+    {
+      "path": "投资资本师/george-soros/team-card.json",
+      "sha256": "8ce6a9e1f34982fb4899f00195b39e7667f26af2f15edffcb278b6e2d64161cb",
+      "size_bytes": 4475
+    },
+    {
+      "path": "投资资本师/george-soros/versions/0.0.0.1/george-soros-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "1c0b2269b89762696e3c02ded988ad703c2e521de13b0a8742ff59c0bda5992c",
+      "size_bytes": 77260
+    },
+    {
+      "path": "投资资本师/george-soros/versions/0.0.0.2/george-soros-persona-distillation-delivery-v0.0.0.2.zip",
+      "sha256": "4983dc653bc55dcd4d323ca87d52f556bf2ecce327417fcc10e474b107e7d8de",
+      "size_bytes": 77639
+    },
+    {
+      "path": "投资资本师/howard-marks/registration.json",
+      "sha256": "9873843c137f430fd1bf8c8239b518054706a357d19bef24f856217e4f001b3f",
+      "size_bytes": 1221
+    },
+    {
+      "path": "投资资本师/howard-marks/team-card.json",
+      "sha256": "b7461b585924127496a979d9a14e3c8c6f14060e479168504b25022924184a99",
+      "size_bytes": 2133
+    },
+    {
+      "path": "投资资本师/howard-marks/versions/0.0.0.1/howard-marks-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "1a1de55acfe0591698ed3a60f6a2d226dd1f28f29ccd42e37a6a5323eb9c8868",
+      "size_bytes": 338591
+    },
+    {
+      "path": "投资资本师/jesse-livermore/registration.json",
+      "sha256": "5b4b49900f4a2ae54018f15f3e036a84046ae7408df59671fc6467c361e7affa",
+      "size_bytes": 1141
+    },
+    {
+      "path": "投资资本师/jesse-livermore/team-card.json",
+      "sha256": "5ad103550d1940868d3886c9557933ad0aad83e7512eea3c1f5cb467dd1c12d3",
+      "size_bytes": 3307
+    },
+    {
+      "path": "投资资本师/jesse-livermore/versions/0.0.0.1/jesse-livermore-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "84140b0370afefeec46b32a522e1fb3e4c2bd7a8f52978ec212eae020ab2e2b8",
+      "size_bytes": 126510
+    },
+    {
+      "path": "投资资本师/joel-greenblatt/registration.json",
+      "sha256": "699d713aa10c9d8341510cb06ff29a182e0937e5ddafcc6666044844b2db91db",
+      "size_bytes": 1235
+    },
+    {
+      "path": "投资资本师/joel-greenblatt/team-card.json",
+      "sha256": "db545b2fe56dd6d1adae126061a9c811913d15ef85b4a19e15ff792ae86ddc5b",
+      "size_bytes": 2159
+    },
+    {
+      "path": "投资资本师/joel-greenblatt/versions/0.0.0.1/joel-greenblatt-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "c4fa4a409b047a2609faf536c2d7ec7a2c10cfc68db961e14cd1f3d95b5f69c3",
+      "size_bytes": 93043
+    },
+    {
+      "path": "投资资本师/john-bogle/registration.json",
+      "sha256": "e0f5c3741461e45a1adca08e9761f63cc13cc7e5beb185fecce6d3037e16bcf8",
+      "size_bytes": 1145
+    },
+    {
+      "path": "投资资本师/john-bogle/team-card.json",
+      "sha256": "014e7ae5108bfbf3fe3403bed3f0af6f2feec7c74dfa0e5363b70ac055114724",
+      "size_bytes": 4274
+    },
+    {
+      "path": "投资资本师/john-bogle/versions/0.0.0.1/john-bogle-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "2364b2f457158128b4138d8e1c30e53ce5beace1f3e030658a4f9e9cf8981145",
+      "size_bytes": 73949
+    },
+    {
+      "path": "投资资本师/julian-robertson/registration.json",
+      "sha256": "f770a452311e2f61287722a140295942ca7ef682a01b36393846a706e57cc6f2",
+      "size_bytes": 1175
+    },
+    {
+      "path": "投资资本师/julian-robertson/team-card.json",
+      "sha256": "0a66691508d0d2f38a886272f1ed026b50193dd5b4edd8a7be74ae93dfb74664",
+      "size_bytes": 6907
+    },
+    {
+      "path": "投资资本师/julian-robertson/versions/0.0.0.1/julian-robertson-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "d50c3be6892066743178970b4ba7909b271d06be27234108ecf06fd313c6902f",
+      "size_bytes": 90412
+    },
+    {
+      "path": "投资资本师/li-lu/registration.json",
+      "sha256": "ddda7a4b3315dfa54d9a1256b69e813516511eaf820a1be9f20c71f2a2c0fd80",
+      "size_bytes": 1216
+    },
+    {
+      "path": "投资资本师/li-lu/team-card.json",
+      "sha256": "2d33367ed1ba25e4f62a3311b4cec037ca02f690188c6a278f850f99f0becbe4",
+      "size_bytes": 2846
+    },
+    {
+      "path": "投资资本师/li-lu/versions/0.0.0.1/li-lu-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "80e7e028ce2e11ccd57f7db9535128ea55547d96c27d36e4fc0d50edefcbac4f",
+      "size_bytes": 80620
+    },
+    {
+      "path": "投资资本师/michael-mauboussin/registration.json",
+      "sha256": "ab564b06135a879a605fbbdb775f51fb370823cc4f9b8e0acf085eb543ceec38",
+      "size_bytes": 1254
+    },
+    {
+      "path": "投资资本师/michael-mauboussin/team-card.json",
+      "sha256": "ad0e4738f0bd2710e363873c96fcbb6277af871b7f09bda4e5c68b9f944cb0ea",
+      "size_bytes": 2700
+    },
+    {
+      "path": "投资资本师/michael-mauboussin/versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "83b444299da20221c2ccad09b5336d9ed60b13742f4c1b93e9f9e0536bc62a39",
+      "size_bytes": 79804
+    },
+    {
+      "path": "投资资本师/michael-steinhardt/registration.json",
+      "sha256": "49698a82c9410afcce0cde92b32ac9cbc01d54ff957905b6294ff3199de6ace6",
+      "size_bytes": 1127
+    },
+    {
+      "path": "投资资本师/michael-steinhardt/team-card.json",
+      "sha256": "860850123a4b2fcea4362d900f5d9b260799fd729bcf5c8d2dc3f34f7339378e",
+      "size_bytes": 4605
+    },
+    {
+      "path": "投资资本师/michael-steinhardt/versions/0.0.0.1/michael-steinhardt-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "2ed95e7cfd0132e5d172ccc0a68f670d10740a3b587224ba22dc3ed179c7963d",
+      "size_bytes": 79972
+    },
+    {
+      "path": "投资资本师/nick-sleep/registration.json",
+      "sha256": "9441b9a66548cb2b05447958c63f696f56244490b3dd220eb52df658f8aba267",
+      "size_bytes": 1210
+    },
+    {
+      "path": "投资资本师/nick-sleep/team-card.json",
+      "sha256": "445ab84d36014286612ef5d1e24ed5d3207743d40734a108c8ff346f05de76e9",
+      "size_bytes": 2246
+    },
+    {
+      "path": "投资资本师/nick-sleep/versions/0.0.0.1/nick-sleep-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "9edcda72b647646726422cba105a46bdd7130117b0a30ec61a3cad66d1ed389a",
+      "size_bytes": 87719
+    },
+    {
+      "path": "投资资本师/peter-lynch/registration.json",
+      "sha256": "73924865a2db4a2f8d8b0605713d005089aeea7442646cc3ad80ffa1d5c623b6",
+      "size_bytes": 1150
+    },
+    {
+      "path": "投资资本师/peter-lynch/team-card.json",
+      "sha256": "779f72030218210b59ed054b1c04fe012e91758ec409b379fd5819de6a484575",
+      "size_bytes": 3103
+    },
+    {
+      "path": "投资资本师/peter-lynch/versions/0.0.0.1/peter-lynch-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "b07173dc000bd81a67ebb3ea4451e9db334d0e4a80df90c10cd7baf82ca7d99d",
+      "size_bytes": 70228
+    },
+    {
+      "path": "投资资本师/philip-fisher/registration.json",
+      "sha256": "7ab5b9b6262b49e94dd04f469882010264ee4a8e4983091ac6928cebbc98f283",
+      "size_bytes": 1160
+    },
+    {
+      "path": "投资资本师/philip-fisher/team-card.json",
+      "sha256": "537a74a29e55aec9217c1b2b64955258ed4948f5131ab19fab7990bc6faf57a3",
+      "size_bytes": 2734
+    },
+    {
+      "path": "投资资本师/philip-fisher/versions/0.0.0.1/philip-fisher-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "086f223419de21d559a2b30974c3db68b40438423985a090dffca57ac07b5e7e",
+      "size_bytes": 68827
+    },
+    {
+      "path": "投资资本师/ray-dalio/registration.json",
+      "sha256": "781bf9938deea440b94e3d254716c4b1a26628d8b754eb3b2abbfc2def4719f9",
+      "size_bytes": 1140
+    },
+    {
+      "path": "投资资本师/ray-dalio/team-card.json",
+      "sha256": "17b909d0e5d716dbf4fa96d245637a972649a3d26b0385eed5e27dcd7720e9a8",
+      "size_bytes": 4440
+    },
+    {
+      "path": "投资资本师/ray-dalio/versions/0.0.0.1/ray-dalio-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "b8ba6b7f6d3161eaeb5b9cc319f1c6e84ce4405554146786f879d8621ffe4482",
+      "size_bytes": 78764
+    },
+    {
+      "path": "投资资本师/robert-a-kindler/registration.json",
+      "sha256": "798f44dbfa6123bf637651c969825ec79976fc49ec3c3458cacec1f69ded589a",
+      "size_bytes": 1241
+    },
+    {
+      "path": "投资资本师/robert-a-kindler/team-card.json",
+      "sha256": "e9f72d29bcb6f38721cb416c109bae31fb508413472d8992042e6859758e374d",
+      "size_bytes": 2755
+    },
+    {
+      "path": "投资资本师/robert-a-kindler/versions/0.0.0.1/robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "60542119a9a6fc0276209f9b6f534494ee9f86498e7be573d1af59745f227f08",
+      "size_bytes": 338081
+    },
+    {
+      "path": "投资资本师/seth-klarman/registration.json",
+      "sha256": "353054372bfbf0cf31797ac91024ee12904112398f640568677f3f5d879bee96",
+      "size_bytes": 1238
+    },
+    {
+      "path": "投资资本师/seth-klarman/team-card.json",
+      "sha256": "2e06e43906d411798f6825c9e0d08d64b174a1d6b74af6b69c35c8acfe86a23f",
+      "size_bytes": 2103
+    },
+    {
+      "path": "投资资本师/seth-klarman/versions/0.0.0.1/seth-klarman-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "8884021699820b53ba161fffed88850bb0a815d521304fd967b0b0241428ac1b",
+      "size_bytes": 84178
+    },
+    {
+      "path": "投资资本师/warren-buffett/registration.json",
+      "sha256": "c6da30d3ea0b3a835792ebfe9af456f51309e51dbab7176f526d4837e1011903",
+      "size_bytes": 1230
+    },
+    {
+      "path": "投资资本师/warren-buffett/team-card.json",
+      "sha256": "79da4381b721bd9ba273fec20da26d2c41671ad96a660f6407cf53f9439c0121",
+      "size_bytes": 2731
+    },
+    {
+      "path": "投资资本师/warren-buffett/versions/0.0.0.1/warren-buffett-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "11bd0b695c7d46cfe738c3fd55c634bd967aa9586842191082a54d9595a05d27",
+      "size_bytes": 96456
+    },
+    {
+      "path": "政治法律师/_category.json",
+      "sha256": "66ae753ae77e9e26b528c5dfb7941d805f324528c528d45d7a5c911452d25399",
+      "size_bytes": 133
+    },
+    {
+      "path": "政治法律师/beth-wilkinson/registration.json",
+      "sha256": "c99fd6243f01394a23921cf087548f27d2a982b32e7752815e1500f0a33852bd",
+      "size_bytes": 1230
+    },
+    {
+      "path": "政治法律师/beth-wilkinson/team-card.json",
+      "sha256": "76afe8e93da55ea28867666801a1932a4b571966669708a7a2a36b1744f49ab6",
+      "size_bytes": 2182
+    },
+    {
+      "path": "政治法律师/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "9f76b1bfea0bca1a0f43ffb8992985bae11a74f4184c2e95f9ef355d3152f0c3",
+      "size_bytes": 75547
+    },
+    {
+      "path": "政治法律师/evan-r-chesler/registration.json",
+      "sha256": "7e08b2c7bb66ad244913cd42074a509b245875a6a79b713a3462e5ddaf2fe177",
+      "size_bytes": 1231
+    },
+    {
+      "path": "政治法律师/evan-r-chesler/team-card.json",
+      "sha256": "ff8130558fcb375dd032fe7ad9351d2db3b337c207ba633a2e17c9c0b3cb4421",
+      "size_bytes": 2109
+    },
+    {
+      "path": "政治法律师/evan-r-chesler/versions/0.0.0.1/evan-r-chesler-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "0664462ec6358f087c7e6858309289600d2c215e47c767b79383fba46902afd7",
+      "size_bytes": 142375
+    },
+    {
+      "path": "政治法律师/h-rodgin-cohen/registration.json",
+      "sha256": "a8ce0d77fdbea86faf8feb2cc4003594c45c4b72877e67473f3db45b09e36e18",
+      "size_bytes": 1220
+    },
+    {
+      "path": "政治法律师/h-rodgin-cohen/team-card.json",
+      "sha256": "2a68ee41fdab8594d56a797a802f40266cb56ff58a26fde3a9c34b4bb332921b",
+      "size_bytes": 2480
+    },
+    {
+      "path": "政治法律师/h-rodgin-cohen/versions/0.0.0.1/h-rodgin-cohen-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "88ea8045e7f004b1d9603c4493f50a433df40e2664627685cc2a97c9629036dc",
+      "size_bytes": 570790
+    },
+    {
+      "path": "政治法律师/scott-a-barshay/registration.json",
+      "sha256": "30eeb06cfdbb13df9e28cff8d84a27c3c2c274830e4cbf02778984e7a44b231e",
+      "size_bytes": 1225
+    },
+    {
+      "path": "政治法律师/scott-a-barshay/team-card.json",
+      "sha256": "fa950ab48877bf05a136883d5ac95b295913d4f13b0dbf5af8a977458abe417a",
+      "size_bytes": 2467
+    },
+    {
+      "path": "政治法律师/scott-a-barshay/versions/0.0.0.1/scott-a-barshay-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "564f38f36fef8d5061eeb9f0c4ee74cf2fcdc034168db45d144629a2846e55fb",
+      "size_bytes": 307440
+    },
+    {
+      "path": "政治法律师/theodore-v-wells-jr/registration.json",
+      "sha256": "df6c4389ee193d4c12348e7202e2e64b290e1a1c2fefeeb640728f93009e4845",
+      "size_bytes": 1256
+    },
+    {
+      "path": "政治法律师/theodore-v-wells-jr/team-card.json",
+      "sha256": "855854737e62f95bead4e7397068d243d44bbc13e8d0f24969b28517eff9d76d",
+      "size_bytes": 2381
+    },
+    {
+      "path": "政治法律师/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "98eab70cc9a773d904a8a4b2fda8dd72f6e798d50a33c4ed59e8b532d0ed576c",
+      "size_bytes": 734887
+    },
+    {
+      "path": "材料建工师/_category.json",
+      "sha256": "88365c19651f48b76d7901d8f5dadf6a9f9aa9504116c9131f4d1e1861d6bf34",
+      "size_bytes": 136
+    },
+    {
+      "path": "材料建工师/adam-booth-abom79/registration.json",
+      "sha256": "223ff672b8917b015475117a59d72dba973e3fa4af363a4246447a160a0c436f",
+      "size_bytes": 1240
+    },
+    {
+      "path": "材料建工师/adam-booth-abom79/team-card.json",
+      "sha256": "ae8edcf888d36cd42cefd8a0c341b1d97c1382beeae27fd975925f77173baf5a",
+      "size_bytes": 2884
+    },
+    {
+      "path": "材料建工师/adam-booth-abom79/versions/0.0.0.1/adam-booth-abom79-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "3b15f1659e065066ec498df9c681b9d71c2be3b0261244c52af8041de578f43c",
+      "size_bytes": 78284
+    },
+    {
+      "path": "材料建工师/ali-erdemir/registration.json",
+      "sha256": "7e6fcf57debfad9ae51a136e233adaab793c4e7ba7d018d63d9b48212561f4f6",
+      "size_bytes": 1207
+    },
+    {
+      "path": "材料建工师/ali-erdemir/team-card.json",
+      "sha256": "4f91c64a3646e0f00f2a3c6abec6b1c48dcbb31a0527a15f76e53e3bf3567286",
+      "size_bytes": 2396
+    },
+    {
+      "path": "材料建工师/ali-erdemir/versions/0.0.0.1/ali-erdemir-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "58d76360e9d85bbb370a691f98bee20534d596dc99757f7c67b35f25aa738897",
+      "size_bytes": 81926
+    },
+    {
+      "path": "材料建工师/charles-becht-iv/registration.json",
+      "sha256": "b8d7fd21e64ea846ff5a84ca1fc98d914400b1825c01a5fa8292f39a6e396d29",
+      "size_bytes": 1231
+    },
+    {
+      "path": "材料建工师/charles-becht-iv/team-card.json",
+      "sha256": "c249595519aed78249a82a7cb01bf3b152eb3a936f78e9bd62af3b46de87b98f",
+      "size_bytes": 2408
+    },
+    {
+      "path": "材料建工师/charles-becht-iv/versions/0.0.0.1/charles-becht-iv-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "804df75d5a0ac995a356147bfab1efd961efafc501046cb2dc8efc38bfc1efb3",
+      "size_bytes": 72592
+    },
+    {
+      "path": "材料建工师/dan-gelbart/registration.json",
+      "sha256": "96062f28ba944880e6bdb8a2cd4ce5e28921b4268f0168dc35d1f2eb4bdda6fb",
+      "size_bytes": 1225
+    },
+    {
+      "path": "材料建工师/dan-gelbart/team-card.json",
+      "sha256": "cd11ac6a29a718b15a27d532900332439db198861ad3227d85e8999dfccb72e2",
+      "size_bytes": 2533
+    },
+    {
+      "path": "材料建工师/dan-gelbart/versions/0.0.0.1/dan-gelbart-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "8a53ee548c9c3fcd989f9a68d17d2cfaa45dffcafe1aec6f15a18b3578fe49dd",
+      "size_bytes": 76197
+    },
+    {
+      "path": "材料建工师/doc-palmer/registration.json",
+      "sha256": "28a236d3cff953f431d8c4d66e46596bbdc31f41b0fdc0119328f11455737318",
+      "size_bytes": 1221
+    },
+    {
+      "path": "材料建工师/doc-palmer/team-card.json",
+      "sha256": "413439f8b6cefa83b84f6271f0c46f899b8d765aef473a9d193f88bfba186485",
+      "size_bytes": 2646
+    },
+    {
+      "path": "材料建工师/doc-palmer/versions/0.0.0.1/doc-palmer-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "19895ad0f1b4e4e09498cfc85ea8de395c5d61a170949a7389b55f2aafe714da",
+      "size_bytes": 85214
+    },
+    {
+      "path": "材料建工师/ernest-rabinowicz/registration.json",
+      "sha256": "e243c60722211c099ef896d29de4cf3cf0a23b359e2433dde5dbaedca87ea084",
+      "size_bytes": 1254
+    },
+    {
+      "path": "材料建工师/ernest-rabinowicz/team-card.json",
+      "sha256": "f9229d59450b9d7b8ae6c6df3e64545cffa3a486b8793d9e7538382c2d02dc8c",
+      "size_bytes": 2892
+    },
+    {
+      "path": "材料建工师/ernest-rabinowicz/versions/0.0.0.1/ernest-rabinowicz-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "5949c9facceb4a292cd4397f57c3673d2ef41883e1dfd35acee04ec42e6f133e",
+      "size_bytes": 84447
+    },
+    {
+      "path": "材料建工师/george-antaki/registration.json",
+      "sha256": "659b4a9c4ca1462e562544ee8cd828bd7839ff03b4ac73c365999a8668add0b8",
+      "size_bytes": 1218
+    },
+    {
+      "path": "材料建工师/george-antaki/team-card.json",
+      "sha256": "343321e603752b8377280449906340d5c4c63c7eb428bf8d86e6dc80aae1f807",
+      "size_bytes": 3181
+    },
+    {
+      "path": "材料建工师/george-antaki/versions/0.0.0.1/george-antaki-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "f816327cb81e518af32f38f3958a964d1bf63e9a90e7acb03931b935a1d5ba2d",
+      "size_bytes": 531402
+    },
+    {
+      "path": "材料建工师/harry-bhadeshia/registration.json",
+      "sha256": "fef54423cd7629538f4220e81e8102aa34505fc9425460feafd965af02600fe9",
+      "size_bytes": 1227
+    },
+    {
+      "path": "材料建工师/harry-bhadeshia/team-card.json",
+      "sha256": "c3624ce5ecd50f9b1df155375e2a3effea9cf7b89a7af3be085522a9964f266a",
+      "size_bytes": 3834
+    },
+    {
+      "path": "材料建工师/harry-bhadeshia/versions/0.0.0.1/harry-bhadeshia-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "e208c7d09e4f8255d54c7be5de31fab9880ce1301092b355d87f270c92a560a6",
+      "size_bytes": 94517
+    },
+    {
+      "path": "材料建工师/heinz-p-bloch/registration.json",
+      "sha256": "989321749b0c4fd6f5485020ed8008cb4e01af32320243919747aeffc4cb0769",
+      "size_bytes": 1217
+    },
+    {
+      "path": "材料建工师/heinz-p-bloch/team-card.json",
+      "sha256": "58371e44f94b6d7d7e3e3192d69dcbd710b4cc7db19fb3532aebc972fbaf8971",
+      "size_bytes": 2610
+    },
+    {
+      "path": "材料建工师/heinz-p-bloch/versions/0.0.0.1/heinz-p-bloch-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "b1cd336f899337ae72ea1c55d8cbaa28787e1cfab087d65ad5c44dd5e651cf10",
+      "size_bytes": 81453
+    },
+    {
+      "path": "材料建工师/ian-michael-hutchings/registration.json",
+      "sha256": "d6ba04690983085e4b62cbe5df331c883f22b180d834528d6fe7bac7bf6bee69",
+      "size_bytes": 1256
+    },
+    {
+      "path": "材料建工师/ian-michael-hutchings/team-card.json",
+      "sha256": "ac74fe99ba49d080d3816d2bfd3ae6289966d0ab96b2255c685abd5b9e2ec039",
+      "size_bytes": 2683
+    },
+    {
+      "path": "材料建工师/ian-michael-hutchings/versions/0.0.0.1/ian-michael-hutchings-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "fb8899311938102ad4885e88d75ef5a69013214184e45a0c1d2aaee985698c03",
+      "size_bytes": 78989
+    },
+    {
+      "path": "材料建工师/john-c-lippold/registration.json",
+      "sha256": "34199b763826794bea9cdd89f0e04dfc96d656d567137bac887b93ef5d914c3b",
+      "size_bytes": 1222
+    },
+    {
+      "path": "材料建工师/john-c-lippold/team-card.json",
+      "sha256": "43fef1d4310ec43be43c6e77abe23094f78e357e18e44ef0f7a8236806717f02",
+      "size_bytes": 2451
+    },
+    {
+      "path": "材料建工师/john-c-lippold/versions/0.0.0.1/john-c-lippold-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "6fafbc0e7a6b028cc471b5f740dc92eb5952c46b46f961d4525af584b297d1ae",
+      "size_bytes": 80057
+    },
+    {
+      "path": "材料建工师/john-moubray/registration.json",
+      "sha256": "dd78695b21b6427f4e3d899f5e3108d8e57513beb48c90e05d1a1f897d78175d",
+      "size_bytes": 1230
+    },
+    {
+      "path": "材料建工师/john-moubray/team-card.json",
+      "sha256": "bd9fd8b38c0d0f4d9cd5c8a6117a49988bd813db1684188533fff7a9bd41f1a5",
+      "size_bytes": 3299
+    },
+    {
+      "path": "材料建工师/john-moubray/versions/0.0.0.1/john-moubray-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "8043020e0816446253d9799bdea561a7fa888a5ed175d0e8181da2510d00748f",
+      "size_bytes": 83180
+    },
+    {
+      "path": "材料建工师/r-keith-mobley/registration.json",
+      "sha256": "96725d315b9675b447323598f2f3b61031203788a887c171fcaf87f065c0f044",
+      "size_bytes": 1222
+    },
+    {
+      "path": "材料建工师/r-keith-mobley/team-card.json",
+      "sha256": "1dc37505929643f598231dd2a9b180781a9fb4d6605d1fdd078dd0560b2b81f6",
+      "size_bytes": 2446
+    },
+    {
+      "path": "材料建工师/r-keith-mobley/versions/0.0.0.1/r-keith-mobley-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "e536c0068362be572208aeb8de2ade073abecfdfc96cbd46f44327de171b02ac",
+      "size_bytes": 95627
+    },
+    {
+      "path": "材料建工师/sindo-kou/registration.json",
+      "sha256": "5acfa8587655a9448352c04dc8503ffff361fd68b09ca9a8afc4f2d9f455db83",
+      "size_bytes": 1222
+    },
+    {
+      "path": "材料建工师/sindo-kou/team-card.json",
+      "sha256": "9a9a8b55adde6053cc6b88fe11ee1f17ca30e2059dd7232daf5314ea72b0f023",
+      "size_bytes": 2571
+    },
+    {
+      "path": "材料建工师/sindo-kou/versions/0.0.0.1/sindo-kou-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "57bff4c660160c29bb262a0b2073fa0af900238caac9baa9495b5c941319c4be",
+      "size_bytes": 564518
+    },
+    {
+      "path": "材料建工师/stefan-gotteswinter/registration.json",
+      "sha256": "45695373b40a00c82869ee7ee868301a0e4e01f2bdedbbde281fa7a511c158db",
+      "size_bytes": 1265
+    },
+    {
+      "path": "材料建工师/stefan-gotteswinter/team-card.json",
+      "sha256": "734b2d91fd0287bef34e53d18ed9f0435b3bc0a2a3cd283bbcdae3fabed897fd",
+      "size_bytes": 2931
+    },
+    {
+      "path": "材料建工师/stefan-gotteswinter/versions/0.0.0.1/stefan-gotteswinter-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "73824865333d6c8a2bd58c42efc67de1c30f8afd7752481e92ec9278b6f1fc86",
+      "size_bytes": 78257
+    },
+    {
+      "path": "艺术设计师/_category.json",
+      "sha256": "15a39c22fc236d2dc9c10e2c468bc6f2885cade3b179f71026d0b329980ad734",
+      "size_bytes": 130
+    },
+    {
+      "path": "艺术设计师/john-maeda/registration.json",
+      "sha256": "57913adf7521eca6dfae41b286815baa4aae2b2dcd13c377963c8e26c93ef1d8",
+      "size_bytes": 1131
+    },
+    {
+      "path": "艺术设计师/john-maeda/team-card.json",
+      "sha256": "d68d0102753a1dc970aa12ea5ab3eb6e0cbd188d0efc80e4b950a4dcfaab4d75",
+      "size_bytes": 5063
+    },
+    {
+      "path": "艺术设计师/john-maeda/versions/0.0.0.1/john-maeda-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "4a2643c28c79fdf3f0f85b87ed906df14c053902ef586df82cd252d9ab3c1f7c",
+      "size_bytes": 91352
+    },
+    {
+      "path": "财务合规师/_category.json",
+      "sha256": "60a5f31e635ad6bccce83d5d8bb848cb226a7c289ca341195ac5cbada58083a8",
+      "size_bytes": 136
+    },
+    {
+      "path": "财务合规师/nancy-leveson/registration.json",
+      "sha256": "743231b5964d7d071d660d8d045878d0799831df56379160adb9790f010ee135",
+      "size_bytes": 1218
+    },
+    {
+      "path": "财务合规师/nancy-leveson/team-card.json",
+      "sha256": "1cf376816761805d6a7707400c037787a882621ec016bb84a3edff6cbf7a3690",
+      "size_bytes": 2626
+    },
+    {
+      "path": "财务合规师/nancy-leveson/versions/0.0.0.1/nancy-leveson-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "cbb640a7234207473cfd05f9c5e19b2d4ab059e587507b321ea493b14bece564",
+      "size_bytes": 679710
+    },
+    {
+      "path": "财务合规师/walter-a-shewhart/registration.json",
+      "sha256": "5d12bac94d316ed9ee0af505f50e9533c792f36accddffcfa2905dd45b185852",
+      "size_bytes": 1123
+    },
+    {
+      "path": "财务合规师/walter-a-shewhart/team-card.json",
+      "sha256": "5933784b6a51b57cb62aa83293649f5250b21ec5216004caf570b43eed983e1e",
+      "size_bytes": 3361
+    },
+    {
+      "path": "财务合规师/walter-a-shewhart/versions/0.0.0.1/walter-a-shewhart-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "a22925f8c326b06bdd5efe09b58ab82a24ba94c7e44f15ccec5e29d6c74e793f",
+      "size_bytes": 73467
+    },
+    {
+      "path": "软件开发师/_category.json",
+      "sha256": "94c23d319834d0f41f8c70de8dca8898f97288cd6abe3965ce900c5b4915ae09",
+      "size_bytes": 136
+    },
+    {
+      "path": "软件开发师/alan-kay/registration.json",
+      "sha256": "f4edd522833a93129155eb3d98966d82e8de6dfe81ca68d41d86881408dddd0b",
+      "size_bytes": 1127
+    },
+    {
+      "path": "软件开发师/alan-kay/team-card.json",
+      "sha256": "900e44c3557675d0bbad7a1215757142489be05e0c98d66a7a0f11a5f757a775",
+      "size_bytes": 5653
+    },
+    {
+      "path": "软件开发师/alan-kay/versions/0.0.0.1/alan-kay-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "84f50dd347c7c5988485d651758907bdb3b0612edc8d64e4c3a9d39dc4622cb3",
+      "size_bytes": 73098
+    },
+    {
+      "path": "软件开发师/anders-hejlsberg/registration.json",
+      "sha256": "b5b80007fe2633f1d49608b9fab0cda1ba9d41e9dcd35a5b069d1e4ee9824dc7",
+      "size_bytes": 1167
+    },
+    {
+      "path": "软件开发师/anders-hejlsberg/team-card.json",
+      "sha256": "748fc6c75c8a6ed01d9c0cb051e9bc28b79a666ee63cf1ea6847b595278961e8",
+      "size_bytes": 5292
+    },
+    {
+      "path": "软件开发师/anders-hejlsberg/versions/0.0.0.1/anders-hejlsberg-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "00916c0e67fdf98a482a790c3b691a02b01ffeccfbb32211e91267f0ccba7e9b",
+      "size_bytes": 69519
+    },
+    {
+      "path": "软件开发师/andrej-karpathy/registration.json",
+      "sha256": "6e6d5015dd17b756e98078316386f8c53d5f4d4fc98a2c842838b96fa25ebad6",
+      "size_bytes": 1287
+    },
+    {
+      "path": "软件开发师/andrej-karpathy/team-card.json",
+      "sha256": "a8eb20cdab6ab06fe117b673113860e389a72996a7a9bde5a3bd0f61fec7aac8",
+      "size_bytes": 2843
+    },
+    {
+      "path": "软件开发师/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "58c41ee2b3ec36eca66d0382df4d8eb1f7051075c27266fa22bc8581c6410904",
+      "size_bytes": 79711
+    },
+    {
+      "path": "软件开发师/barbara-liskov/registration.json",
+      "sha256": "d53e99b15870fe3ca35613e8413b0c81f6682bd02656b288ef4be9cc7fb15765",
+      "size_bytes": 1222
+    },
+    {
+      "path": "软件开发师/barbara-liskov/team-card.json",
+      "sha256": "b1f680dbea778076ec4795440f718db6da5de97f9da35f32a0b8a7c0e1b397c1",
+      "size_bytes": 2505
+    },
+    {
+      "path": "软件开发师/barbara-liskov/versions/0.0.0.1/barbara-liskov-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "4bcda5f33204f73d24c711a361f4e35adb5c3c1c7131748b7d737354de1ae7f8",
+      "size_bytes": 80201
+    },
+    {
+      "path": "软件开发师/bjarne-stroustrup/registration.json",
+      "sha256": "b88e602a7b28a024c2e559a2409c869750eafbc50d44b74ac495b197c054aea2",
+      "size_bytes": 1172
+    },
+    {
+      "path": "软件开发师/bjarne-stroustrup/team-card.json",
+      "sha256": "4170671586d8c76457e3dfd2a5a49c2411d4f540c77698c1ac90dd40e6a76641",
+      "size_bytes": 4711
+    },
+    {
+      "path": "软件开发师/bjarne-stroustrup/versions/0.0.0.1/bjarne-stroustrup-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "6d30e2e86a9201242a24ddbae378d47fe58e8b3e7788b76e21e2ecbcd244cb2c",
+      "size_bytes": 72636
+    },
+    {
+      "path": "软件开发师/chip-huyen/registration.json",
+      "sha256": "85d6546cc875a96f31dc7ae79ce6daa53bbe45ab9f97e859607ca2e4b91199d8",
+      "size_bytes": 1229
+    },
+    {
+      "path": "软件开发师/chip-huyen/team-card.json",
+      "sha256": "b23e652d2ae3661b838dd19cc99ad4762246ebc34c87149a23413bffee86e31b",
+      "size_bytes": 2947
+    },
+    {
+      "path": "软件开发师/chip-huyen/versions/0.0.0.1/chip-huyen-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "53ddda1fdf6d7c3b503457e77ab4b8d2946bba72e844c881f7cdba83c6610a69",
+      "size_bytes": 83734
+    },
+    {
+      "path": "软件开发师/christopher-manning/registration.json",
+      "sha256": "e9a52be735b0a0da71ff2f4cbcf6953c49083de7d63291a7e0203613c020bce5",
+      "size_bytes": 1266
+    },
+    {
+      "path": "软件开发师/christopher-manning/team-card.json",
+      "sha256": "b3b49e2326550777380984b38104bb35bd1e9efe5cfadfcdcc70244c8b6b3342",
+      "size_bytes": 3172
+    },
+    {
+      "path": "软件开发师/christopher-manning/versions/0.0.0.1/christopher-manning-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "f8118b3bc1a05bb32dc99227a6e3c135ea2ca8093497b853f84f1e10fcfb327d",
+      "size_bytes": 552115
+    },
+    {
+      "path": "软件开发师/dennis-ritchie/registration.json",
+      "sha256": "d3695e75264b78948c6299ce4b80e0ed004e92f9c0ed24f1aa3cd8e6a3506cc6",
+      "size_bytes": 1157
+    },
+    {
+      "path": "软件开发师/dennis-ritchie/team-card.json",
+      "sha256": "bb7942828ca17ad7747168d13194ac2e68da8192ead70a530bd43706d282bf17",
+      "size_bytes": 5278
+    },
+    {
+      "path": "软件开发师/dennis-ritchie/versions/0.0.0.1/dennis-ritchie-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "dc784e20aa78fe20c323da7d7c465bf73b913616e7f0687714a972f636db39fc",
+      "size_bytes": 73374
+    },
+    {
+      "path": "软件开发师/donald-knuth/registration.json",
+      "sha256": "d3f107f453f3f1142f3e47ddb6a387b6080cc1bd2461ca0cc2a493fc5ef9cdd8",
+      "size_bytes": 1147
+    },
+    {
+      "path": "软件开发师/donald-knuth/team-card.json",
+      "sha256": "ace881b6b6a80a6d993bbe9bffaa98e77b3fa151e1e83c8f8d0e7c7fd20b3aa1",
+      "size_bytes": 2479
+    },
+    {
+      "path": "软件开发师/donald-knuth/versions/0.0.0.1/donald-knuth-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "d1a3f4a5b76730670a4ff56f68569fb7deaa604c3e087bdfbbe3c6a84ccb7b87",
+      "size_bytes": 63398
+    },
+    {
+      "path": "软件开发师/douglas-engelbart/registration.json",
+      "sha256": "d5d30257c1a8385ae2845f9460a41c33d8b238d7a388ea8bf77fae7d7d4e4f55",
+      "size_bytes": 1172
+    },
+    {
+      "path": "软件开发师/douglas-engelbart/team-card.json",
+      "sha256": "0316d217144ecdbc20dc2950968f86ade5ed63a8f2ef2b191f9684418ceb2541",
+      "size_bytes": 3004
+    },
+    {
+      "path": "软件开发师/douglas-engelbart/versions/0.0.0.1/douglas-engelbart-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "cb5443588919e7527dbf0d0479a783da6946f05dc5645959f610a5199fc3c3b5",
+      "size_bytes": 69315
+    },
+    {
+      "path": "软件开发师/edsger-dijkstra/registration.json",
+      "sha256": "3adb44a476dee1405b4a48d6f4c43ab089c1b16a8177bdfa60e1297731309362",
+      "size_bytes": 1162
+    },
+    {
+      "path": "软件开发师/edsger-dijkstra/team-card.json",
+      "sha256": "c65fb093916ab13686fc58437665b93f915ce8a6756580c4eded467061d45a95",
+      "size_bytes": 3299
+    },
+    {
+      "path": "软件开发师/edsger-dijkstra/versions/0.0.0.1/edsger-dijkstra-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "a4ea2c493e5a04ace0ed7854b123e7e25be80bffda410827f0b406d43e856d31",
+      "size_bytes": 71798
+    },
+    {
+      "path": "软件开发师/guido-van-rossum/registration.json",
+      "sha256": "8364b0e4406616c24748ca3f898b484f4b697ea4bb878006945f1206996f87ff",
+      "size_bytes": 1166
+    },
+    {
+      "path": "软件开发师/guido-van-rossum/team-card.json",
+      "sha256": "31046bad3edede4afc1dd300cc707e282c8ba3395d27b92d32196a83ba1211a8",
+      "size_bytes": 5025
+    },
+    {
+      "path": "软件开发师/guido-van-rossum/versions/0.0.0.1/guido-van-rossum-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "f81329ec4625b2b4dc69b0ffec2b2e07095d2805e3bb6a943b616e00719fe4e1",
+      "size_bytes": 70028
+    },
+    {
+      "path": "软件开发师/hamel-husain/registration.json",
+      "sha256": "19fb4a96083f123084beea744a6a742c555c2b8df3d36682b1f709a33b395350",
+      "size_bytes": 1212
+    },
+    {
+      "path": "软件开发师/hamel-husain/team-card.json",
+      "sha256": "33c1c879e6a18a4e6007ecc0343e4f7db5729086d5521be05075ed44da0aac48",
+      "size_bytes": 2787
+    },
+    {
+      "path": "软件开发师/hamel-husain/versions/0.0.0.1/hamel-husain-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "8e46315e86868b8c75cb4d64c2d5c710dc3135085cfd1dac15f206d2dc66deca",
+      "size_bytes": 87797
+    },
+    {
+      "path": "软件开发师/jerry-liu-llamaindex/registration.json",
+      "sha256": "5d1c9b5493c7b0a3aa06769070ebe9639e2d0144712761570b099e51d4e4c242",
+      "size_bytes": 1230
+    },
+    {
+      "path": "软件开发师/jerry-liu-llamaindex/team-card.json",
+      "sha256": "235d92112ad4ca785f84be7d248d9b385c72e8472aec64ff698056ec2234b242",
+      "size_bytes": 2850
+    },
+    {
+      "path": "软件开发师/jerry-liu-llamaindex/versions/0.0.0.1/jerry-liu-llamaindex-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "9deeb9ce95255014c7733aafafb29ea7aa5715bad4a223135f9a152bf0d409af",
+      "size_bytes": 82102
+    },
+    {
+      "path": "软件开发师/jesse-vincent/registration.json",
+      "sha256": "e3fb2f0d77f353323ee3146c69ff1ebbe61c404c22fefc7891f72d1c915c87a3",
+      "size_bytes": 1152
+    },
+    {
+      "path": "软件开发师/jesse-vincent/team-card.json",
+      "sha256": "8837f8c3baf01d04d19014ddeff7b1cc3b244c1758c7200683e8b457e7074b18",
+      "size_bytes": 3488
+    },
+    {
+      "path": "软件开发师/jesse-vincent/versions/0.0.0.1/jesse-vincent-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "df8071f6177d6d57fff611d0c7c5da8bd30dbda2445bf45b95a098318de2aa0b",
+      "size_bytes": 76378
+    },
+    {
+      "path": "软件开发师/john-carmack/registration.json",
+      "sha256": "47b14025f6b43122da1bfc50ad49862cc696634430ffc2c7e47e5bc3ad10b8fe",
+      "size_bytes": 1252
+    },
+    {
+      "path": "软件开发师/john-carmack/team-card.json",
+      "sha256": "d9a6c635a082955916f87386d3f1313df3739740e4b7e6887a3e6b33e5bf67ca",
+      "size_bytes": 3197
+    },
+    {
+      "path": "软件开发师/john-carmack/versions/0.0.0.1/john-carmack-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "04f2db61905118435cac0adb751b3b366ea1e4e186cd20ac86db469e09af772b",
+      "size_bytes": 90332
+    },
+    {
+      "path": "软件开发师/john-mccarthy/registration.json",
+      "sha256": "b5fb4b844d6a84202bdc894a9baebf77e5c8d7c3e8a40e0d3e174b1044e33ff4",
+      "size_bytes": 1152
+    },
+    {
+      "path": "软件开发师/john-mccarthy/team-card.json",
+      "sha256": "f9ab35464593eb17faf87dec3de44887611c59e378c16bb74c6aa950631889c0",
+      "size_bytes": 2940
+    },
+    {
+      "path": "软件开发师/john-mccarthy/versions/0.0.0.1/john-mccarthy-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "a7c9fd8bd8e0f69f3db1b9809e41f773857f7abc0bcd792adf67fa83c0935753",
+      "size_bytes": 69044
+    },
+    {
+      "path": "软件开发师/karen-sparck-jones/registration.json",
+      "sha256": "8e264fcc3769e7492f735f8d96bd91d4b8c2491862a3a6af4f1bbd5a42e7fff7",
+      "size_bytes": 1251
+    },
+    {
+      "path": "软件开发师/karen-sparck-jones/team-card.json",
+      "sha256": "21e262f8c7ef24930d14986403b32e057ffa6f1b83afb3fcad1affb62675f7ea",
+      "size_bytes": 2667
+    },
+    {
+      "path": "软件开发师/karen-sparck-jones/versions/0.0.0.1/karen-sparck-jones-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "569df5f6d7b61819a3403d1f7548bf596e7b4e73c305df858c466c55d8fd6831",
+      "size_bytes": 81732
+    },
+    {
+      "path": "软件开发师/ken-thompson/registration.json",
+      "sha256": "32a6e3ff21c1b4e79adba11b6c60688fe5b433c2faef29ef35d20af0d07a2a9b",
+      "size_bytes": 1147
+    },
+    {
+      "path": "软件开发师/ken-thompson/team-card.json",
+      "sha256": "95e8abaa9f19f1baeef00d2313d7bfcddaa208493b885d9f65bd429754793e6d",
+      "size_bytes": 5411
+    },
+    {
+      "path": "软件开发师/ken-thompson/versions/0.0.0.1/ken-thompson-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "34ae47539bbdf26a10d2604e04f491efd4adc81493ce1c8d984114e722b0075e",
+      "size_bytes": 72790
+    },
+    {
+      "path": "软件开发师/kent-beck/registration.json",
+      "sha256": "96daf8675a27e536f2dd54c62706d28106194151deacb295bc8e01b3deb48405",
+      "size_bytes": 1216
+    },
+    {
+      "path": "软件开发师/kent-beck/team-card.json",
+      "sha256": "d7a66c8726202301183674708b2e9015d44d3079085c8b7b35689e4297c352f7",
+      "size_bytes": 2712
+    },
+    {
+      "path": "软件开发师/kent-beck/versions/0.0.0.1/kent-beck-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "e3f08cb631f60a4c02b01557441766396b38d63263cc7413bbc91488c991c62f",
+      "size_bytes": 89656
+    },
+    {
+      "path": "软件开发师/leslie-lamport/registration.json",
+      "sha256": "7639fe53076f8e5a06a26d7ffe1d1ee172437a820edc7300b90cf7a07a7dfad3",
+      "size_bytes": 1223
+    },
+    {
+      "path": "软件开发师/leslie-lamport/team-card.json",
+      "sha256": "ca6f28bf7c336aeb882972ff5f39773bdddc91fd11adce276699c8dc408b3048",
+      "size_bytes": 2309
+    },
+    {
+      "path": "软件开发师/leslie-lamport/versions/0.0.0.1/leslie-lamport-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "958aaabbd0922273f7b950a013fb9b91cfdcc6199b34f5853c7a373258eba1de",
+      "size_bytes": 408124
+    },
+    {
+      "path": "软件开发师/linus-torvalds/registration.json",
+      "sha256": "2892444a9e7f3ac4106e5cb58605c20d1503783d2004654544f12666928fbfa5",
+      "size_bytes": 1157
+    },
+    {
+      "path": "软件开发师/linus-torvalds/team-card.json",
+      "sha256": "27683e35f82c76839899506b15d0ec35e731c1da253ac75620c72656b031fb23",
+      "size_bytes": 5871
+    },
+    {
+      "path": "软件开发师/linus-torvalds/versions/0.0.0.1/linus-torvalds-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "eca6d3f0253e749621810b0f32657ccf356602858f68362208f85e00048351d0",
+      "size_bytes": 71529
+    },
+    {
+      "path": "软件开发师/martin-fowler/registration.json",
+      "sha256": "a716c018e5bc7724484a2e397c5f719f4329a8110b44e27c6446eec19608fd72",
+      "size_bytes": 1247
+    },
+    {
+      "path": "软件开发师/martin-fowler/team-card.json",
+      "sha256": "e4784df7bb3c8867f37897388452e3c4e3b6bdf09c64a6feb05c1e85ca9c2ac0",
+      "size_bytes": 2601
+    },
+    {
+      "path": "软件开发师/martin-fowler/versions/0.0.0.1/martin-fowler-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "e9688984620e2ad2790137bd6bc9deffc4561c9686bc7145a54a892c9273ef4b",
+      "size_bytes": 81567
+    },
+    {
+      "path": "软件开发师/matei-zaharia/registration.json",
+      "sha256": "5987118ffe5c3465856453878325af474094a79d11ae54918ab9b284b9b18471",
+      "size_bytes": 1217
+    },
+    {
+      "path": "软件开发师/matei-zaharia/team-card.json",
+      "sha256": "e53730fa8a0460ae9450358d9837a8dfe5f2c40b123ef4b22f48e6b28f10a01e",
+      "size_bytes": 2943
+    },
+    {
+      "path": "软件开发师/matei-zaharia/versions/0.0.0.1/matei-zaharia-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "f9cd9ddb8ea9115afc1073527b1884974783a54c2bed0a8efa2ec91f55ea83c3",
+      "size_bytes": 82467
+    },
+    {
+      "path": "软件开发师/omar-khattab/registration.json",
+      "sha256": "106ef0f2458089b4ce312b51a2db5b9a4dd31a1f12c8a2bbbcac3fa130cbe4d8",
+      "size_bytes": 1212
+    },
+    {
+      "path": "软件开发师/omar-khattab/team-card.json",
+      "sha256": "edd4bbeea44710536577e46be6ab6006a32e39995302220003de4a50f949bea0",
+      "size_bytes": 2372
+    },
+    {
+      "path": "软件开发师/omar-khattab/versions/0.0.0.1/omar-khattab-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "3b33129ce6eacab0b335364573bea7b192f8e698789cd8a1fab8a19c7908c18b",
+      "size_bytes": 77600
+    },
+    {
+      "path": "软件开发师/peter-steinberger/registration.json",
+      "sha256": "b5616572884430fde8d37db08470ab758088d268813489fc39feb930ef51c50d",
+      "size_bytes": 1172
+    },
+    {
+      "path": "软件开发师/peter-steinberger/team-card.json",
+      "sha256": "5f6fc10042d5721c9cfe1b838093d07df454df7b0cb261e7701f31c40ef3dd3b",
+      "size_bytes": 3557
+    },
+    {
+      "path": "软件开发师/peter-steinberger/versions/0.0.0.1/peter-steinberger-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "0d16a76d9d675f44285e8cd739203e1450172e9cb134d84e2a7ec368fbf5710a",
+      "size_bytes": 78341
+    },
+    {
+      "path": "软件开发师/rich-hickey/registration.json",
+      "sha256": "e3e096852cad442bcebf64dd7d08a22643406fc78b4b9768ff4b91a83be4b0c9",
+      "size_bytes": 1208
+    },
+    {
+      "path": "软件开发师/rich-hickey/team-card.json",
+      "sha256": "cb3f1ff39672d3b1eae4eb09aa6de2a19ee52e1e6a46581a6c5e375b6339034b",
+      "size_bytes": 2597
+    },
+    {
+      "path": "软件开发师/rich-hickey/versions/0.0.0.1/rich-hickey-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "60535a786221ece9ec4bcdc83f689374f324e3efdc54abc5a34435d872100912",
+      "size_bytes": 105540
+    },
+    {
+      "path": "软件开发师/rob-pike/registration.json",
+      "sha256": "cf6f847455b04e6d527643d986c4f77f35ed16b23613c93f8f0be3fc41b0c443",
+      "size_bytes": 1127
+    },
+    {
+      "path": "软件开发师/rob-pike/team-card.json",
+      "sha256": "bd313986f74d9e2709702113c0045aef625b636959eb0264dc8aece1718082c4",
+      "size_bytes": 3126
+    },
+    {
+      "path": "软件开发师/rob-pike/versions/0.0.0.1/rob-pike-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "3aba2f1ea4ba55edad1ff2907809526ea69231af651c7123a2f21293fda735cf",
+      "size_bytes": 72577
+    },
+    {
+      "path": "软件开发师/shreya-shankar/registration.json",
+      "sha256": "dbb9804d3dcd590194c46fef2beec2963b0a489d2c843f5c4bd6fb0d9a73feba",
+      "size_bytes": 1222
+    },
+    {
+      "path": "软件开发师/shreya-shankar/team-card.json",
+      "sha256": "56c5eed6fb0368334a8478a15bbc426a48c66a19d1496345cb4ca7a481389f76",
+      "size_bytes": 3013
+    },
+    {
+      "path": "软件开发师/shreya-shankar/versions/0.0.0.1/shreya-shankar-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "2d2b11ddcf44e4c86dd28a8f3f4af659ea614228b61dc94ec05f87a9b509a5da",
+      "size_bytes": 87525
+    },
+    {
+      "path": "软件开发师/simon-willison/registration.json",
+      "sha256": "1a08ac2ca8f2a59896cd669e56e8cefc71d1c737366e00271eef6fcfae765662",
+      "size_bytes": 1223
+    },
+    {
+      "path": "软件开发师/simon-willison/team-card.json",
+      "sha256": "36f97d3f0e29f1b851fdfd1b598b0450c8d1ca029b610a0cf4d8ad9ee9d21669",
+      "size_bytes": 2506
+    },
+    {
+      "path": "软件开发师/simon-willison/versions/0.0.0.1/simon-willison-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "1fd8e8a84c810071fcbb9445cafbbc845f181fbe89e006c191e20e929d41fc78",
+      "size_bytes": 686141
+    },
+    {
+      "path": "软件开发师/stephen-e-robertson/registration.json",
+      "sha256": "94e007dd273e5ab1513a8ef832309dd833245aca690614b9cb7972a4ad96de9d",
+      "size_bytes": 1247
+    },
+    {
+      "path": "软件开发师/stephen-e-robertson/team-card.json",
+      "sha256": "416e75f1217dcda9f22b1bb7bc21b5bf36e00bd00553394951bcde719fe6c1b8",
+      "size_bytes": 2167
+    },
+    {
+      "path": "软件开发师/stephen-e-robertson/versions/0.0.0.1/stephen-e-robertson-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "dc594c87e1f0b033de116efcdbe236ab513436d261128600259598c51887d958",
+      "size_bytes": 83992
+    },
+    {
+      "path": "软件开发师/tim-berners-lee/registration.json",
+      "sha256": "b9a0fa27c8a065070008b857373597d888fc319c0bd1823d580a9b44fae75b7d",
+      "size_bytes": 1161
+    },
+    {
+      "path": "软件开发师/tim-berners-lee/team-card.json",
+      "sha256": "c35631b379b14c210cbbc1d00a9376eecd0fe0bc23cd426e566608611032fa80",
+      "size_bytes": 5036
+    },
+    {
+      "path": "软件开发师/tim-berners-lee/versions/0.0.0.1/tim-berners-lee-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "61d7879bd1fbb094ffbb6fae57aeee9e8f49a482e45615d399323c3a22d22e48",
+      "size_bytes": 70732
+    },
+    {
+      "path": "软件开发师/tony-hoare/registration.json",
+      "sha256": "6e297db7fed766050d6382fc132895d8249c2ea52d4b2c6280c47768dbb33ffa",
+      "size_bytes": 1137
+    },
+    {
+      "path": "软件开发师/tony-hoare/team-card.json",
+      "sha256": "1c82dfcb75b27c6c057efa3ade001d3d0046eeb10b32e5a028ae90703f6cc087",
+      "size_bytes": 3423
+    },
+    {
+      "path": "软件开发师/tony-hoare/versions/0.0.0.1/tony-hoare-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "476abae45f73d685a361ed4232c0b1c91f7c9ddf53c550dc2c702629df33b8ce",
+      "size_bytes": 75677
+    },
+    {
+      "path": "软件开发师/vint-cerf/registration.json",
+      "sha256": "18df5c65d58281b8fe9f813400b75d145a0e712da06b64a504e57e3e7804ac8b",
+      "size_bytes": 1132
+    },
+    {
+      "path": "软件开发师/vint-cerf/team-card.json",
+      "sha256": "e2c17daacd78a7ac68def70adedb78c1e575eabd63d6cdceeab15d1044e271ed",
+      "size_bytes": 5087
+    },
+    {
+      "path": "软件开发师/vint-cerf/versions/0.0.0.1/vint-cerf-persona-distillation-delivery-v0.0.0.1.zip",
+      "sha256": "dd01c1d133591cb3e1651a7c2b59ea6d3c8b52d2ccfdc1e26cc8b893bdd25356",
+      "size_bytes": 69910
+    }
+  ],
+  "mutable_paths": {
+    "excluded_from_release_checksums": [
+      "checksums.sha256"
+    ],
+    "registry_is_external": "../persona-distiller-group",
+    "validation": "python3 scripts/validate_persona_registry.py"
+  },
+  "name": "persona-distiller-group",
+  "schema_version": "1.0",
+  "verification": {},
+  "version": "v0.0.0.24"
+}
