@@ -97,14 +97,19 @@ def main():
             n += len([l for l in q.read_text(encoding="utf-8").splitlines() if l.strip()])
         except OSError:
             pass
-    print("  **扫描面：只有 group 目录**（`--telemetry` 三处皆无默认值，")
-    print("    遥测文件没有约定路径 —— 扫到 0 不等于全局没有）")
+    print("  **扫描面：只有 group 目录**（历史上 `--telemetry` 三处皆无默认值 ——")
+    print("    扫到 0 不等于全局没有）")
+    print("  ★ 2026-08-17 已修（group v0.0.0.17）：约定路径")
+    print("    `<registry-root>/telemetry/team-outcomes.json`，写手读手共用；")
+    print("    route-plan 现在印 `telemetry_path` / `telemetry_file_present`，")
+    print("    「文件是空的」与「找错地方了」从此分得开。")
     print("  group 目录下：遥测文件 %d 个｜记录行数 **%d**" % (len(tel), n))
     print("  C 层校准合同要求：**>=60 条 outcome、ECE<=0.12、切片覆盖>=0.75**")
     if n == 0:
         print("  ⇒ **此处 0 条**；路由每次自报 `telemetry_eligible_for_c: false`、")
-        print("    `strategy_fallback_reason: telemetry unavailable` —— 两者一致，")
-        print("    但**「没有约定路径」这件事本身要先解决**，否则数据无处可攒。")
+        print("    `strategy_fallback_reason: telemetry unavailable` —— 两者一致。")
+        print("  ★ 「攒不起来」已修，「还没攒」照旧：路径有了，**数据仍是 0**。")
+        print("    有家不等于有数据 —— 这两件事要分开说。")
     else:
         print("  ⇒ 有 %d 条，距 60 条还差 %d 条" % (n, max(0, 60 - n)))
     print("  ★ 这两个数补不上不是「没做」：`record_team_outcome.py` 必需")

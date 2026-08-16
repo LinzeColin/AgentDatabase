@@ -107,6 +107,32 @@ def default_registry_root() -> Path:
     return Path(__file__).resolve().parents[1]
 
 
+TELEMETRY_DIRNAME = "telemetry"
+TELEMETRY_FILENAME = "team-outcomes.json"
+
+
+def default_telemetry_path(registry_root: Path) -> Path:
+    """The one agreed home for team outcome telemetry.
+
+    Before this existed, `--telemetry` was **required** on the writer
+    (`record_team_outcome.py`) and **optional with no default** on both readers
+    (`route_team_moe.py`, `run_team_pipeline.py`). Nothing named a path, so the
+    writer and the readers only ever met if a human passed the *same* path to
+    both, by hand, every single time. Measured 2026-08-16: **0 outcomes
+    recorded**, and every route plan reporting
+    `strategy_fallback_reason: "telemetry unavailable"`.
+
+    That is not "the calibration layer has not been used yet" -- it is
+    structurally unable to accumulate. Strategy C requires >=60 outcomes;
+    a counter with nowhere to live never reaches 60.
+
+    Behaviour is unchanged when the file does not exist: `load_telemetry()`
+    already degrades to `eligible_for_c: False` for a missing path, so
+    defaulting the path cannot turn a working B route into a broken one.
+    """
+    return registry_root / TELEMETRY_DIRNAME / TELEMETRY_FILENAME
+
+
 def registry_index_path(registry_root: Path) -> Path:
     return registry_root / REGISTRY_INDEX_NAME
 

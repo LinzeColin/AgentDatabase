@@ -1,5 +1,52 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.17 — 2026-08-17
+
+### 遥测终于有了家：写手与读手约定同一个路径
+
+**缺陷（结构性，不是「还没用过」）**：
+`record_team_outcome.py` 的 `--telemetry` 是**必填**，
+`route_team_moe.py` / `run_team_pipeline.py` 的 `--telemetry` 是**可选且无默认**。
+**没有任何一处命名过路径。** 写手和读手只有在人**每次手工把同一个路径传给两边**
+时才会相遇。
+
+实测 2026-08-16：**记录数 0**，每份 route-plan 都报
+`strategy_fallback_reason: "telemetry unavailable"`，策略 C **一次都没启用过**。
+
+这不是「校准层还没开始用」，是**它在结构上攒不起任何东西**：
+C 需要 >=60 条 outcome，而一个没有归宿的计数器连 1 都到不了。
+
+**修法**：`registry_core.default_telemetry_path()` 定义唯一真源
+`<registry-root>/telemetry/team-outcomes.json`，三处共用。
+`record_team_outcome.py --telemetry` 由必填改为可选。
+
+**不改任何行为**：`load_telemetry()` 对不存在的文件本来就退化成
+`eligible_for_c: False`，所以给路径加默认值**不可能**把一条本来能跑的 B 路由变红。
+它只是让写手写下的东西，下一次真的被读到。
+
+### route-plan 现在会说出它读的是哪个遥测文件
+
+`routing_observability` 增加 `telemetry_path` / `telemetry_path_source` /
+`telemetry_file_present`。在此之前，一份写着「telemetry unavailable」的方案
+**无法让人分辨「文件是空的」和「我找错地方了」**——而几个月来确实**没有**
+一个约定的地方可找。
+
+### 测试：`tests/test_telemetry_roundtrip.py`（写手 -> 文件 -> 读手）
+
+在临时目录里跑完整回路，**任何合成 outcome 都不会落进真的遥测文件**。
+两侧各有反对照，均已实跑：
+
+- 改掉写手的默认路径 -> 红（写到别处、约定位置什么也没有）
+- 改掉读手的默认路径 -> 红（读了别处）
+
+★ 第一版**只钉了写手**，删掉读手的默认它照样绿 ——
+**一个要求，两个消费者，其中一个没有守卫**。这是本项目记过多次的形状，
+补上读手断言后两侧反对照才都成立。
+
+★ 仍然不变的事实：**记录数依然是 0**。有了家不等于有了数据。
+`--actual-success` 与 `--delta-score` 要靠真跑一次任务并与裸模型盲比才有，
+**编一个就是造数据，不做**。这次解决的是「攒不起来」，不是「已经攒到了」。
+
 ## v0.0.0.16 — 2026-08-17
 
 ### 领域分类器：按语种分开匹配（`compile_task_graph.infer_domains`）

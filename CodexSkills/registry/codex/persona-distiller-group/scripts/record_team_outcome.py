@@ -8,6 +8,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from registry_core import default_registry_root, default_telemetry_path
 from team_runtime_common import clamp, read_json, write_json
 
 EXPECTED_SLICES = {
@@ -98,13 +99,21 @@ def main() -> int:
     parser.add_argument("--delta-score", type=Path, required=True)
     parser.add_argument("--task-slice", required=True)
     parser.add_argument("--actual-success", type=float, required=True, help="0..1 observed task success")
-    parser.add_argument("--telemetry", type=Path, required=True)
+    parser.add_argument("--registry-root", type=Path, default=None,
+                        help="only used to locate the default telemetry file")
+    parser.add_argument("--telemetry", type=Path, default=None,
+                        help="defaults to <registry-root>/telemetry/team-outcomes.json "
+                             "-- the same path route_team_moe.py reads")
     args = parser.parse_args()
     if not 0 <= args.actual_success <= 1:
         parser.error("actual-success must be between 0 and 1")
-    result = append_outcome(args.telemetry, read_json(args.route_plan), read_json(args.delta_score), args.task_slice, args.actual_success)
+    root = (args.registry_root or default_registry_root()).expanduser().resolve()
+    telemetry_path = args.telemetry or default_telemetry_path(root)
+    telemetry_path.parent.mkdir(parents=True, exist_ok=True)
+    result = append_outcome(telemetry_path, read_json(args.route_plan), read_json(args.delta_score), args.task_slice, args.actual_success)
     print(json.dumps({
-        "written": str(args.telemetry),
+        "written": str(telemetry_path),
+        "telemetry_path_source": "explicit --telemetry" if args.telemetry else "default (shared with route_team_moe.py)",
         "sample_count": result["sample_count"],
         "expected_calibration_error": result["expected_calibration_error"],
         "task_slice_coverage": result["task_slice_coverage"],

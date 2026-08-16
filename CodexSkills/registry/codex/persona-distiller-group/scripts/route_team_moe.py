@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import Any
 
 from compile_task_graph import compile_graph
+from registry_core import default_telemetry_path
 from team_runtime_common import (
     MODE_LIMITS,
     clamp,
@@ -305,6 +306,13 @@ def build_route(
     graph = compile_graph(task, requested_mode, requested_size)
     index = read_json(registry_root / "team-index.json")
     admission = load_admission(registry_root)
+    # ★ 没显式给路径时，落到**与写手约定的同一个家**。
+    #   `load_telemetry` 对不存在的文件已优雅退化为 eligible_for_c=False，
+    #   所以这一步不会把一条本来能跑的 B 路由变红 —— 它只是让写手写下的东西
+    #   下一次真的被读到。
+    explicit_telemetry = telemetry_path is not None
+    if telemetry_path is None:
+        telemetry_path = default_telemetry_path(registry_root)
     telemetry = load_telemetry(telemetry_path)
 
     if requested_strategy == "auto":
@@ -448,6 +456,13 @@ def build_route(
             "excluded_candidates": len(excluded),
             "registry_products": len(index.get("products", [])),
             "telemetry_eligible_for_c": bool(telemetry.get("eligible_for_c")),
+            # ★ Name the file that was actually consulted. Before this, a plan
+            #   saying "telemetry unavailable" gave the reader no way to tell
+            #   "the file is empty" from "I looked in the wrong place" -- and
+            #   for months there *was* no agreed place to look.
+            "telemetry_path": str(telemetry_path),
+            "telemetry_path_source": "explicit --telemetry" if explicit_telemetry else "default (shared with record_team_outcome.py)",
+            "telemetry_file_present": telemetry_path.is_file(),
             "domain_signal_candidates": domain_signal_candidates,
             "domain_signal_present": domain_signal_candidates > 0,
             "ranking_driver": ("domain_match" if domain_signal_candidates
@@ -492,7 +507,9 @@ def main() -> int:
     parser.add_argument("--size", type=int)
     parser.add_argument("--strategy", choices=["auto", "c", "b", "a"], default="auto")
     parser.add_argument("--registry-root", type=Path, default=default_registry_root())
-    parser.add_argument("--telemetry", type=Path)
+    parser.add_argument("--telemetry", type=Path, default=None,
+                        help="defaults to <registry-root>/telemetry/team-outcomes.json "
+                             "-- the same path record_team_outcome.py writes")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     root = args.registry_root.expanduser().resolve()

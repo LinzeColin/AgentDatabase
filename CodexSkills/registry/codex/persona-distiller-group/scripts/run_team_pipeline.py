@@ -21,7 +21,9 @@ def main() -> int:
     parser.add_argument("--size", type=int)
     parser.add_argument("--strategy", choices=["auto", "c", "b", "a"], default="auto")
     parser.add_argument("--registry-root", type=Path, default=Path(__file__).resolve().parents[1])
-    parser.add_argument("--telemetry", type=Path)
+    parser.add_argument("--telemetry", type=Path, default=None,
+                        help="defaults to <registry-root>/telemetry/team-outcomes.json "
+                             "-- the same path record_team_outcome.py writes")
     parser.add_argument("--refresh-admission", action="store_true")
     parser.add_argument("--require-artifacts", action="store_true")
     parser.add_argument("--workdir", type=Path, required=True)
