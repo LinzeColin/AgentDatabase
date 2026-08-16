@@ -237,3 +237,29 @@ Machiavelli 的《论李维》都是专著），已整个从 `expression` 移除
 ★ 顺带一次自己的错：这段新代码**语法检查绿而一跑就 NameError**
 （词数变量写成 `words`，真实名是 `n`；键名也写错两处）。
 **`ast.parse` 过不代表工具能跑 —— 必须真跑一遍。**
+
+---
+
+## ★ 专家团队那一侧：一条命令重算 Owner 评分表的现状
+
+上面那条流水线管的是**人物蒸馏**（生产者）。**专家团队**（消费者）的现状
+用这一条重算，**全部现算、不引用任何陈旧散文**：
+
+```bash
+python3 _ledgers/_pipeline/report_expert_team_state.py \
+        --registry-root CodexSkills/registry/codex/persona-distiller-group
+```
+
+它逐条回答 Owner 2026-08-16 那张评分表（覆盖／记录／独立性／路由／使用过程），
+底下调三件判据，都可以单独跑：
+
+| 判据 | 量什么 |
+|---|---|
+| `measure_routing_discrimination.py` | 路由 vs **从真实池按族偏斜随机抽**；分类器兜底率；打分分项的分辨力 |
+| `check_benchmark_mode_accuracy.py` | 任务包自带 **72 行 oracle**（模式／人数／强制控制面）—— 任务包自己的验收只数行数，**从不跑** |
+| `audit_persona_fleet_for_team.py`（在 group skill 里） | 车队准入与 **0 人身份族** |
+
+★ 三件**都只报数、不设阈值、永远 rc=0** —— 阈值与结论由 Owner 定。
+★ 三件**都不改产品代码**。本轮唯一改过的产品文件是
+  `compile_task_graph.DOMAIN_SIGNALS`（92 → 290 词，v0.0.0.15），
+  且已写明那个 +6.3 pp 是**样本内**、不能当泛化证据。
