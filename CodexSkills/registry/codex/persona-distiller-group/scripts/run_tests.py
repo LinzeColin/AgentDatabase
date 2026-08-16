@@ -4,14 +4,19 @@
 
 为什么要有这份文件
 ------------------
-2026-08-17 在上游 `persona-distiller` 发现：`tests/` 下 14 件测试**没有任何 runner**，
-于是 `test_group_contract.py` 对着**四个从未存在过的键**红了很久而无人发现。
+2026-08-17 在上游 `persona-distiller` 发现 `test_group_contract.py` 对着**四个从未
+存在过的键**红了很久。
+★★ **订正**：我当时写「没有任何 runner」是错的 —— 上游 `self_check.py` **本来就跑整套**
+（`unittest discover`，失败即 rc=1）。**它不是没人跑，是跑了没人修**，而且 `self_check`
+只给一个**聚合**的 pass/fail，说不出哪一件红、红了多久、是新回归还是待裁定。
 按「先数出口个数」回头查本 skill —— **同一个缺口，而且是我自己造的**：
 本目录 6 件测试里 **4 件是 2026-08-17 当天我写的**
 （disclosures-reach-the-contract／domain-classifier-language／
 restricted-is-measured-only／telemetry-roundtrip），
-**写了测试却没给它一个会被调用的入口**。
-[[a-checker-nothing-calls-is-not-a-checker]]
+**写了测试却没给它一个逐件可见的入口**（上游 `self_check` 那种聚合 pass/fail
+在本 skill 这边**根本没有对应物** —— 团队 skill 没有 self_check）。
+★ 措辞要准：上游是「跑了没人修」，本 skill 是「**真的没有入口**」——
+**两处的缺口不同，别用同一句话概括。**
 
 ## 与上游那个 runner 的区别：**这边默认就是门**
 

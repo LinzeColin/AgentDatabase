@@ -8,11 +8,21 @@
 `test_group_contract.py` **一直红着**（`failures=1, errors=2`），
 而且红在**四个产品从未有过的键**上（`inferred_identity` 在 git 全历史里 0 处）。
 
-追为什么没人发现：**这个目录没有 runner。**
-`scripts/` 下没有任何「跑全部测试」的入口，
-全仓提到 `tests/` 的文件全部属于不相干的 MemoryAtlas workflow。
-⇒ 15 件测试写了、能跑、会红，**而没有任何东西会去跑它们**。
-[[a-checker-nothing-calls-is-not-a-checker]] 的又一种形状。
+★★ **订正（2026-08-17 同日，写完本件之后）：我先前写的「没有任何东西会去跑它们」
+   是错的。** `self_check.py` 第 216–224 行**本来就跑整套** —— `unittest discover -s tests`，
+   失败即 `errors.append('offline unittest suite failed')` → **rc=1**。
+   那件红**并非不可见**：它会让 `self_check` 失败，并把 `test_release_bundle` 一起拖红
+   （我今天正是这么撞见的）。**它不是没人跑，是跑了没人修。**
+
+真实的缺口只有两条，都比我原来说的窄：
+
+1. **`install.py` 调的是 `self_check.py --skip-tests`** —— 安装路径**跳过**测试。
+2. `self_check` 只给**一个聚合的 pass/fail**：14 件里哪一件红、红了多久、
+   是新回归还是待裁定，**它一个字都不说**。
+
+⇒ 本件的价值因此也要说窄：**不是「补上没人跑」，是「把一个聚合结果拆成逐件，
+并把待裁定与新回归分开」**。[[a-checker-nothing-calls-is-not-a-checker]] 的说法
+在这里**不成立**，我错用了它。
 
 ## 为什么默认**不是门**
 

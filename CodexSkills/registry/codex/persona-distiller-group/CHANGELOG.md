@@ -25,6 +25,24 @@
 
 实测：**6 件全绿，当门用 rc=0**；自测 2/2。
 
+### ★★ 同日订正：上游那句「没有任何东西会去跑它们」是**错的**
+
+写完本件之后复查上游，`self_check.py` 第 216–224 行**本来就跑整套**
+（`unittest discover -s tests`，失败即 `errors.append('offline unittest suite failed')` → rc=1）。
+那件红**并非不可见** —— 它会让 `self_check` 失败并把 `test_release_bundle` 一起拖红。
+**上游不是没人跑，是跑了没人修。**
+
+**两处的缺口不是同一件事，别用同一句话概括：**
+
+| | 上游 persona-distiller | 本 skill |
+|---|---|---|
+| 有没有东西跑测试 | **有**（`self_check`，聚合 pass/fail） | **没有**（本 skill 根本没有 `self_check`） |
+| 真实缺口 | ① `install.py` 传 `--skip-tests` 跳过；② 只给聚合结果，说不出**哪一件**红、红了多久、是新回归还是待裁定 | **确实没有入口** |
+| 本次新增件的价值 | 把聚合拆成逐件 ＋ 分开待裁定与新回归 | 补上入口 |
+
+★ 我在上游那条 CHANGELOG 里错用了 `a-checker-nothing-calls-is-not-a-checker`，
+已在该文件里逐字订正。**发现一个洞时，先确认它真的是洞，再确认它是哪一种洞。**
+
 ## v0.0.0.23 — 2026-08-17
 
 ### 我上午说「这一类收干净了」，系统扫一遍又找到两条
