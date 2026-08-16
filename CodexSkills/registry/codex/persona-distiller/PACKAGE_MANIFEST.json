@@ -1040,6 +1040,11 @@
       "size_bytes": 7666
     },
     {
+      "path": "references/pipeline/checkers/run_tests.py",
+      "sha256": "903730cb62b49b37341048afb30cf4922752d1909d70f7990828059372493e4e",
+      "size_bytes": 11653
+    },
+    {
       "path": "references/pipeline/checkers/show_fetch_distance.py",
       "sha256": "3bde9feac9000575a5140e051f24884ce5a40818817f6bb060f4cbe95102ab9a",
       "size_bytes": 8845
@@ -1921,8 +1926,8 @@
     },
     {
       "path": "scripts/run_tests.py",
-      "sha256": "02a8c25903f94de971b67d6ca504fb1716ce01e25d28c8159eca2c4effc4aceb",
-      "size_bytes": 11161
+      "sha256": "903730cb62b49b37341048afb30cf4922752d1909d70f7990828059372493e4e",
+      "size_bytes": 11653
     },
     {
       "path": "scripts/self_check.py",
