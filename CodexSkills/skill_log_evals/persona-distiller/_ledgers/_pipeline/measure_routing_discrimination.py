@@ -183,6 +183,49 @@ TASKS = [
         "relevant": ["建造采购师", "创业经营师", "财务合规师"],
         "why": "供应商策略（建造采购）＋ 议价与替代方案（创业经营）＋ 成本影响（财务合规）。",
     },
+    # ── 2026-08-16 第二次补，18 → 24 ────────────────────────────────────────
+    #   18 条给出 +11.7 pp / SE 6.5 / **离零 1.80 SE**，本件算出还需约 23 个。
+    #   ★★ 这 6 条**有意偏向「相关族常见」那一侧**（软件开发师 34/101、
+    #     投资资本师 21、材料建工师 15 —— 随机基线本来就高，路由更难赢）。
+    #     分层结果已显示常见族只有 +7.5 pp，**往这边加题是把测试变难，不是变易**。
+    #     若挑稀有族题（那边 +22.5 pp）就是拿题去凑结论。
+    #   标签同样在跑任何路由之前写好。
+    {
+        "id": "flaky-test-suite",
+        "task": "CI 里有 200 个测试，每次都有三五个随机失败，重跑就过，怎么根治？",
+        "relevant": ["软件开发师"],
+        "why": "测试稳定性与工程规范，纯软件开发师题（随机基线约 34%，难赢）。",
+    },
+    {
+        "id": "hedge-currency-exposure",
+        "task": "海外收入占四成，汇率一年波动 12%，要不要做对冲、做多少？",
+        "relevant": ["投资资本师", "财务合规师"],
+        "why": "对冲比例与成本（投资资本）＋ 套保会计与披露（财务合规）；两族合计 23/101。",
+    },
+    {
+        "id": "heat-treatment-spec",
+        "task": "一批合金钢件热处理后硬度不均，是炉温、装炉方式还是材料批次问题？",
+        "relevant": ["材料建工师"],
+        "why": "热处理工艺与失效分析，纯材料建工师题（该族 15/101）。",
+    },
+    {
+        "id": "legacy-refactor-budget",
+        "task": "老系统重构要 6 个月，业务方只批 2 个月，怎么切分才不半途而废？",
+        "relevant": ["软件开发师", "创业经营师", "建造采购师"],
+        "why": "增量重构（软件开发）＋ 范围谈判（创业经营）＋ 分阶段交付（建造采购）；三族合计 53/101，**随机基线极高**。",
+    },
+    {
+        "id": "founder-equity-split",
+        "task": "三个联合创始人贡献差别很大，股权怎么分才不在第二年吵翻？",
+        "relevant": ["创业经营师", "财务合规师", "政治法律师"],
+        "why": "创始人治理（创业经营）＋ 股权与税务（财务合规）＋ 协议与争议预防（政治法律）。",
+    },
+    {
+        "id": "warehouse-automation-roi",
+        "task": "仓库要不要上自动分拣，投入 800 万，三年能不能回本？",
+        "relevant": ["建造采购师", "投资资本师", "创业经营师"],
+        "why": "设备选型与实施（建造采购）＋ 回报测算（投资资本）＋ 运营改造（创业经营）；三族合计 40/101。",
+    },
 ]
 
 DEFAULT_TRIALS = 400
@@ -335,6 +378,30 @@ def main():
         if need and n_se < 2:
             print("     要让这个效应量达到 2 SE，任务集需要约 **%d 个任务**（现有 %d 个）"
                   % (need, len(deltas)))
+
+    # ★★★ **先按队伍规模分开，再谈平均。**
+    #   `single_expert` 的队伍只有 1 人 ⇒ 命中率只能是 0% 或 100%，
+    #   一条题就能给出 +89.2 或 −39.5，**方差几乎全被这几条支配**。
+    #   把 n=1 与 n=9 混进同一个平均，是拿两把尺子当一把用。
+    #   [[changing-the-sampling-unit-changes-the-ruler]]｜[[length-confound-in-blind-eval]]
+    solo = [r for r in rows if r["team_size"] == 1 and r["delta"] is not None]
+    team = [r for r in rows if r["team_size"] > 1 and r["delta"] is not None]
+    print("\n  ★★★ 按队伍规模分开（**混着算会被 n=1 的二值命中率支配**）：")
+    for label, grp in (("single_expert（n=1，命中率只能 0% 或 100%）", solo),
+                       ("small_team 及以上（n≥5）", team)):
+        if not grp:
+            continue
+        ds = [r["delta"] for r in grp]
+        m = statistics.mean(ds)
+        line = "     %-38s %2d 题｜平均 **%+.1f pp**" % (label, len(grp), 100 * m)
+        if len(ds) >= 2:
+            se_ = statistics.stdev(ds) / (len(ds) ** 0.5)
+            line += "｜SE %.1f｜离零 %.2f SE" % (100 * se_, abs(m) / se_ if se_ else 0)
+        print(line)
+    if team:
+        ds = [r["delta"] for r in team]
+        print("     ⇒ **真正的团队模式（n≥5）才是产品的常态**，它的数是 %+.1f pp。"
+              % (100 * statistics.mean(ds)))
 
     # ★ 分层看：相关族在池子里**稀有**时路由才显出信号
     rare = [r for r in rows if r["random_hit"] is not None and 0 < r["random_hit"] < 0.15]
