@@ -35,6 +35,15 @@ def build_card(route: dict[str, Any], result: dict[str, Any], score: dict[str, A
             "build_team_delta_card 要 team-result.json，score_team_delta 要 result-input.json。"
             "**不产卡片** —— 全 null 的卡片会冒充一次真实交付。"
             % "/".join(_NARRATIVE_SECTIONS))
+    # ★ 同一形状的第三处：`--delta-score` 传错时它 **rc=0 照样出卡**。
+    #   判分产物该有 dimensions/benefit_deltas/efficiency_deltas/status，一个都没有
+    #   就不是判分产物。同样只在**全缺**时开火。
+    if not any(k in score for k in ("dimensions", "benefit_deltas",
+                                    "efficiency_deltas", "status")):
+        raise ValueError(
+            "delta-score 文档里 dimensions/benefit_deltas/efficiency_deltas/status "
+            "一个都没有 —— 这不是 score_team_delta 的产物。**不产卡片**："
+            "分数区全空的卡片会把「没测过」显示成「测了但很差」。")
     contributions = result.get("member_contributions", [])
     material = [row for row in contributions if float(row.get("decision_influence", 0)) > 0 or row.get("artifact_owned")]
     return {

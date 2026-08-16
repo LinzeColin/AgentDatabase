@@ -224,8 +224,8 @@
     },
     {
       "path": "scripts/build_team_delta_card.py",
-      "sha256": "e3786010ffa5fe4c565e9f016971c295e836f6189f9f1750a46943bfa4edb4c3",
-      "size_bytes": 4088
+      "sha256": "92e89d9fd2f27f22e0df0570fb7c791f1d5b7688eb472a20311959c207ccd1ff",
+      "size_bytes": 4783
     },
     {
       "path": "scripts/build_team_dossier.py",
@@ -269,8 +269,8 @@
     },
     {
       "path": "scripts/record_team_outcome.py",
-      "sha256": "d3848a328242b84fdcce81470ce8063c3c4519ae5ac60d5a875f4141ab1a054c",
-      "size_bytes": 5882
+      "sha256": "c0df7114e29732dd768e062d698d23d779de6407dba19fe130d14709acb65075",
+      "size_bytes": 7183
     },
     {
       "path": "scripts/register_delivery.py",

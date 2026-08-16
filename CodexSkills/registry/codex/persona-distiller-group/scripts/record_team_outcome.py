@@ -105,6 +105,25 @@ def main() -> int:
                         help="defaults to <registry-root>/telemetry/team-outcomes.json "
                              "-- the same path route_team_moe.py reads")
     args = parser.parse_args()
+
+    # ★★ **这条链写的是校准账本 —— 最不能进垃圾。** 2026-08-17 交叉喂测：
+    #   `--route-plan` 传一份无关 JSON，本脚本 **rc=0 把记录写进了遥测**。
+    #   而 route_team_moe 正是拿这个账本当 C 策略先验 ⇒
+    #   一条垃圾记录会**直接污染以后所有路由的排序**，且没有任何地方会报警。
+    #   [[empty-default-swallows-unknown]]｜[[a-gates-scan-set-is-smaller-than-reality]]
+    _rp = read_json(args.route_plan)
+    if not any(k in _rp for k in ("mode", "members", "strategy", "task_graph")):
+        print(json.dumps({"status": "blocked", "reason":
+              "route-plan 里 mode/members/strategy/task_graph 一个都没有 —— "
+              "这不是 route_team_moe 的产物。**不写遥测**：垃圾记录会污染 C 层校准。"},
+              ensure_ascii=False))
+        return 2
+    _ds = read_json(args.delta_score)
+    if not any(k in _ds for k in ("dimensions", "formal_market_pass", "minimum_dimension")):
+        print(json.dumps({"status": "blocked", "reason":
+              "delta-score 里 dimensions/formal_market_pass/minimum_dimension 一个都没有 —— "
+              "这不是 score_team_delta 的产物。**不写遥测**。"}, ensure_ascii=False))
+        return 2
     if not 0 <= args.actual_success <= 1:
         parser.error("actual-success must be between 0 and 1")
     root = (args.registry_root or default_registry_root()).expanduser().resolve()
