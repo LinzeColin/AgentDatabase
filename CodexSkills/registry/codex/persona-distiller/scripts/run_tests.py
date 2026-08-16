@@ -126,13 +126,20 @@ def main() -> int:
     #   ★ 只提示、不拦截：真有回归时仍要让那三件自己红出来。
     drift = subprocess.run([sys.executable, str(HERE / "check_contract_drift.py")],
                            capture_output=True, text=True)
-    if "checksums.sha256 与磁盘对不上" in drift.stdout:
-        line = next((l.strip() for l in drift.stdout.splitlines()
-                     if "checksums.sha256 与磁盘对不上" in l), "")
-        print("★★ **先别看下面的红**：发布清单是陈旧的 ——")
-        print("   %s" % line[:150])
-        print("   ⇒ 先跑 `python3 scripts/build_manifest.py`，"
-              "否则验清册那三件会红成「三个不相干的新回归」。\n")
+    # ★★ **别只认自己上次撞见的那一种。** 本预检第一版只 grep
+    #   「checksums.sha256 与磁盘对不上」—— 因为那是我写它时刚踩到的那个坑。
+    #   当天晚些时候换成**镜像漂移**（scripts/ 改了、references/ 的副本没跟），
+    #   同样把那三件验清册的测试拖红，而本预检**一声不吭**。
+    #   判据的形状 = 我上一次探查的形状。⇒ 改成**漂移门只要非 0 就全文转述**。
+    #   [[my-checkers-are-mis-cut-six-times-in-one-day]]｜[[fixed-the-symptom-kept-the-root-cause]]
+    if drift.returncode != 0:
+        print("★★ **先别看下面的红**：合同漂移门 rc=%d，它报的是 ——" % drift.returncode)
+        for line in drift.stdout.splitlines():
+            if line.strip().startswith("- "):
+                print("   %s" % line.strip()[:160])
+        print("   ⇒ 这几条多半会把验清册的那三件拖红成「不相干的新回归」。"
+              "清单陈旧就跑 `build_manifest.py`；镜像不一致就把 scripts/ 那份"
+              "拷到 references/pipeline/checkers/。\n")
 
     files = discover()
     print("扫描面：%s（**%d 件**）" % (TESTS, len(files)))
