@@ -681,8 +681,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_first_person_density.py",
-      "sha256": "546de35dd9ee49a611e5fdc745086eda65c2eb7dac05ab436fa396ff2e0975e2",
-      "size_bytes": 32799
+      "sha256": "8c4d6cb6191f7b7970792e181b3a34f596c4fc9c923dcd8d03952527eaec1f95",
+      "size_bytes": 36967
     },
     {
       "path": "references/pipeline/checkers/check_gate_reachability.py",
@@ -1486,8 +1486,8 @@
     },
     {
       "path": "scripts/check_first_person_density.py",
-      "sha256": "546de35dd9ee49a611e5fdc745086eda65c2eb7dac05ab436fa396ff2e0975e2",
-      "size_bytes": 32799
+      "sha256": "8c4d6cb6191f7b7970792e181b3a34f596c4fc9c923dcd8d03952527eaec1f95",
+      "size_bytes": 36967
     },
     {
       "path": "scripts/check_gate_reachability.py",

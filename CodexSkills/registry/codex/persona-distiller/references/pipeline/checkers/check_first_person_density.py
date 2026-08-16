@@ -276,7 +276,17 @@ def language_split(files: list) -> tuple:
 
 
 def scan(root: pathlib.Path) -> dict:
-    files = sorted(p for p in root.rglob("*.txt") if p.name != "_ids.txt")
+    # ★★ 排除**整族**流水线簿记文件，不是只排那一个文件名。
+    #   原写法 `p.name != "_ids.txt"` 是照**当时存在的那一个**文件名写的；
+    #   流水线后来长出了八个兄弟 —— 实测 Lincoln #174 的 `raw/` 下有
+    #   `_ids-union / _ids-round2 / _ids-round3 / _ids-delta / _ids-delta3 /
+    #    _ids-deltaF / _ids-rebuild / _ids-final`，**全部被当成语料读了进来**。
+    #   后果不是报错，是**归错成因**：那些文件的内容是 `src-xxxxxxxx` 一行行的源号，
+    #   不像英文散文，于是本件报「**这份语料多半不是英文**」——
+    #   而 Lincoln 的语料全是英文，真相是**正文根本不在盘上**（已移出 git）。
+    #   ⇒ 判据的射程 = 我上一次探查的形状。**排除清单要按「族」写，不按「那一个名字」写。**
+    #   [[a-gates-scan-set-is-smaller-than-reality]]｜[[one-requirement-two-consumers]]
+    files = sorted(p for p in root.rglob("*.txt") if not p.name.startswith("_"))
     per, tot_c, tot_raw, tot_b, tot_d, allsub = [], 0, 0, 0, 0, []
     for f in files:
         r = scan_text(corpus_body(f.read_text(encoding="utf-8", errors="replace")))
@@ -290,6 +300,28 @@ def scan(root: pathlib.Path) -> dict:
     n = len(allsub)
     en_c, other_c, other_names = language_split(files)
     lang_total = en_c + other_c
+
+    # ★★★ **0 份语料要报「不适用」，不许报 0，更不许报「可读占比 100%」。**
+    #   `readable = en_c / lang_total if lang_total else 1.0` —— 那个 `else 1.0`
+    #   把 0÷0 渲染成 **100%**，而 `实质第一人称句` 会一路算成 **0**。
+    #   **0 与「不知道」是两件事**：这一栏用来判「声口够不够」，
+    #   报 0 就等于说「他不说第一人称」，而真相是**一个字都没读到**。
+    #   实测 2026-08-17：语料已移出 git ⇒ 54 个工作区里绝大多数在这里读到 0 份。
+    #   ★ 这个假零是我今天**自己引进来的**：把簿记文件排除干净之后，
+    #     原先「多半不是英文」那条（成因写错但结论 null）不再触发，
+    #     于是掉进了 0 份这条没有守卫的路。**修一个成因，别造一个新零。**
+    #   [[empty-default-swallows-unknown]]｜[[zero-hit-gates-must-prove-they-can-hit]]
+    if not files or tot_c == 0:
+        return {"语料": str(root), "源数": len(files), "正文字符": tot_c,
+                "语种（按字符）": "**读到 0 字**（不是「全是英文」，是没读到）",
+                "**本判据不适用**": "**语料正文不在工作区里，一个字都没读到。**\n"
+                                     "★ 成因不是语种，也不是他不说第一人称 —— "
+                                     "`references/sources/` 已被全库移出 git（「语料只放指针」），"
+                                     "`raw/` 下只剩流水线簿记文件。\n"
+                                     "★★ **要量声口，先把语料取回本机**；"
+                                     "在此之前这一栏必须是 `null`，**不是 0**。",
+                "**实质第一人称句**": None, "**密度（每万字）**": None}
+
     readable = en_c / lang_total if lang_total else 1.0
     lang_line = ("可读语种（英文）%s／不可读 %s ——**可读占比 %.0f%%**"
                  % (f"{en_c:,}", f"{other_c:,}", 100 * readable))
@@ -527,6 +559,24 @@ def self_test() -> int:
     same = (r_pass.get("密度（每万字·全部字符）")
             == r_pass.get("**密度（每万字·仅可读语种）**"))
     chk("⑦ 全英文语料上，两个密度必须相等（分母同一性）", same)
+
+    # ── ⑧ ★★★ **0 份语料**：必须报不适用 ＋ null，不许报 0、不许报「可读占比 100%」 ──
+    #   2026-08-17 我把簿记文件整族排除之后，「多半不是英文」那条不再触发，
+    #   于是掉进了 0 份这条**没有守卫**的路：可读占比 0÷0 渲染成 **100%**、
+    #   实质句一路算成 **0**。**修一个成因，别造一个新零。**
+    with tempfile.TemporaryDirectory() as _td:
+        _e = pathlib.Path(_td)
+        (_e / "raw").mkdir()
+        for _n in ("_ids.txt", "_ids-final.txt", "_ids-deltaF.txt", "_ids-round3.txt"):
+            (_e / "raw" / _n).write_text("src-aaaaaaaaaaaa\nsrc-bbbbbbbbbbbb\n", encoding="utf-8")
+        _r = scan(_e)
+        chk("⑧ 簿记文件整族排除 → 源数 0（不是 4）", _r["源数"] == 0)
+        chk("⑧ 0 份语料 → 报「本判据不适用」", _r.get("**本判据不适用**") is not None)
+        chk("⑧ 0 份语料 → 实质句是 **null 不是 0**", _r["**实质第一人称句**"] is None)
+        chk("⑧ 0 份语料 → 成因写「没读到」，不写「不是英文」",
+            "没读到" in _r["语种（按字符）"])
+        chk("⑧ 0 份语料 → **不许出现「可读占比 100%」**",
+            "可读占比 100%" not in _r["语种（按字符）"])
 
     return 0 if ok else 2
 
