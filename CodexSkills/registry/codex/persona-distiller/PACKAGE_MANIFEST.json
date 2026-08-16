@@ -881,8 +881,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_source_dedup.py",
-      "sha256": "3d2857646bf053afb6b20c7071d0d400dcd53b9574e8a197c7f017ba35691bf2",
-      "size_bytes": 30369
+      "sha256": "f24cfd9d8e322b79e0b7bcae3a4dc2c6fe69328e47f9e1661075c40add076066",
+      "size_bytes": 32838
     },
     {
       "path": "references/pipeline/checkers/check_source_header_quotes.py",
@@ -996,8 +996,8 @@
     },
     {
       "path": "references/pipeline/checkers/emit_lane_scope.py",
-      "sha256": "e58a3169e42bd95a4951bf9dbaa865c88fbe08d7400975cb70ffaf2ff996cb58",
-      "size_bytes": 19796
+      "sha256": "506626a1e5fe1584be887ce267ae8ed9bf32b06acae46dfdcb662a9b4a182279",
+      "size_bytes": 23175
     },
     {
       "path": "references/pipeline/checkers/finalize_release.py",
@@ -1031,8 +1031,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "85a897504f1b215d9978ba323944ee1b7f05e9be0d76dc62e608f13cf75c47fc",
-      "size_bytes": 252516
+      "sha256": "a8b7b60d6baabe8ac06f1e65f38766e5435ccb536dbbc29890c41946a0c6752c",
+      "size_bytes": 253006
     },
     {
       "path": "references/pipeline/checkers/render_claims.py",
@@ -1686,8 +1686,8 @@
     },
     {
       "path": "scripts/check_source_dedup.py",
-      "sha256": "3d2857646bf053afb6b20c7071d0d400dcd53b9574e8a197c7f017ba35691bf2",
-      "size_bytes": 30369
+      "sha256": "f24cfd9d8e322b79e0b7bcae3a4dc2c6fe69328e47f9e1661075c40add076066",
+      "size_bytes": 32838
     },
     {
       "path": "scripts/check_source_header_quotes.py",
@@ -1806,8 +1806,8 @@
     },
     {
       "path": "scripts/emit_lane_scope.py",
-      "sha256": "e58a3169e42bd95a4951bf9dbaa865c88fbe08d7400975cb70ffaf2ff996cb58",
-      "size_bytes": 19796
+      "sha256": "506626a1e5fe1584be887ce267ae8ed9bf32b06acae46dfdcb662a9b4a182279",
+      "size_bytes": 23175
     },
     {
       "path": "scripts/eval_runner.py",
@@ -1896,8 +1896,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "85a897504f1b215d9978ba323944ee1b7f05e9be0d76dc62e608f13cf75c47fc",
-      "size_bytes": 252516
+      "sha256": "a8b7b60d6baabe8ac06f1e65f38766e5435ccb536dbbc29890c41946a0c6752c",
+      "size_bytes": 253006
     },
     {
       "path": "scripts/register_persona.py",

@@ -223,6 +223,10 @@ def analyse(records: list, texts: dict, threshold: float = DEFAULT_THRESHOLD) ->
             _decl_group[sid] = key
 
     empty = [name[s] for s in ids if not sh[s]]
+    # ★ 上层要按 source_id 把「文件不在盘上」的那批从这一桶里减掉，
+    #   而这里存的是**文件名** —— 两种键对不上就减不掉（我第一版就是这么错的）。
+    #   一并把 id→名 的映射带出去。
+    empty_ids = [s for s in ids if not sh[s]]
     # ★ 扣掉样板之后变空的，与「本来就空」要分开——前者说明**这份文件几乎全是样板**
     all_boiler = [name[s] for s in ids if sh[s] and not net[s]]
     dup_pairs, undeclared, boiler_only = [], [], []
@@ -301,6 +305,8 @@ def analyse(records: list, texts: dict, threshold: float = DEFAULT_THRESHOLD) ->
         # ★ 空集合不是「没有重复」，是「本件对这几份看不见」。
         #   `[]`／`0` 会被读成通过——[[empty-default-swallows-unknown]]。
         out["★ 本件看不见的（分词后不足 8 词，多为中日韩或纯噪声）"] = empty
+        out["_empty_ids"] = empty_ids
+        out["_empty_id_to_name"] = {s: name[s] for s in empty_ids}
     return out
 
 
@@ -313,13 +319,22 @@ def load(target: pathlib.Path) -> tuple:
               if r.get("split") == "train"
               and r.get("tier") != "U"
               and r.get("extraction_status") != "failed"]
-    texts = {}
+    texts, no_file = {}, []
     for r in usable:
         d = target / "references/sources" / r["source_id"]
         f = next(iter(sorted(d.glob("*.txt"))), None) if d.is_dir() else None
+        if f is None:
+            # ★★ **「文件不在盘上」和「文本太短」是两件事，不许合成一桶。**
+            #   实测 2026-08-17：全库 **52/53** 个工作区 `distinct_works == usable`
+            #   ——一对重复都没比出来。真因是 `references/sources/` 已被全库移出 git
+            #   （「语料只放指针」），**文件根本不在盘上**；而它们被归进了
+            #   「分词后不足 8 词，**多为中日韩或纯噪声**」那一桶 ——
+            #   **那个理由对 52/53 个工作区都是错的**（Lincoln 的源全是英文）。
+            #   [[empty-default-swallows-unknown]]｜[[corpus-lives-outside-git-verify-the-pointers]]
+            no_file.append(r["source_id"])
         texts[r["source_id"]] = (corpus_body(f.read_text(encoding="utf-8", errors="replace"))
                                  if f else "")
-    return usable, texts
+    return usable, texts, no_file
 
 
 def self_test() -> int:
@@ -518,12 +533,34 @@ def main() -> int:
         print("✗ 需要工作区目录（或只给 --self-test）", file=sys.stderr)
         return 3
     try:
-        usable, texts = load(pathlib.Path(a.target))
+        usable, texts, no_file = load(pathlib.Path(a.target))
     except (FileNotFoundError, OSError) as exc:
         print(f"✗ {exc}", file=sys.stderr)
         return 3
 
     r = analyse(usable, texts, a.threshold)
+    # ★ 把「文件不在盘上」单列，并**从那个措辞错误的桶里减掉** ——
+    #   否则读的人会以为这些源是「中日韩或纯噪声」。
+    if no_file:
+        r["★★ 文件不在盘上（**未取到，不是已核**）"] = len(no_file)
+        r["★★ 文件不在盘上（抽样）"] = sorted(no_file)[:5]
+        k = "★ 本件看不见的（分词后不足 8 词，多为中日韩或纯噪声）"
+        if k in r:
+            nf = set(no_file)
+            id2n = r.get("_empty_id_to_name") or {}
+            rest = [id2n[i] for i in (r.get("_empty_ids") or []) if i not in nf]
+            if rest:
+                r[k] = rest
+            else:
+                r.pop(k)
+        r.pop("_empty_ids", None)
+        r.pop("_empty_id_to_name", None)
+        if r.get("usable") and r.get("distinct_works") == r.get("usable"):
+            r["★★★ `distinct_works` 这个数是**零次比较**得出的"] = (
+                "%d 份里 %d 份读不到正文 ⇒ 逐对比较一次都没发生；"
+                "`inflation 1.0×` 是「没比」不是「没重复」。"
+                "**要看「有几处独立证据」请用 `distinct_works_declared`。**"
+                % (r["usable"], len(no_file)))
     if a.json:
         print(json.dumps(r, ensure_ascii=False, indent=2))
     else:

@@ -1534,8 +1534,13 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                 '虚高': dd.get('inflation'),
                 '未声明的重复对': n_un,
                 '已声明的重复对': dd.get('已声明的重复对数'),
-                '★ 本件看不见的份数（中日韩语料一律看不见，不是已核）':
+                '★ 本件看不见的份数（文本太短／中日韩，不是已核）':
                     len(dd.get('★ 本件看不见的（分词后不足 8 词，多为中日韩或纯噪声）') or []),
+                # ★★ 2026-08-17：把「文件不在盘上」与「文本太短/中日韩」**分开**抄过来。
+                #   全库 52/53 个工作区 `distinct_works == usable` —— 一对都没比出来；
+                #   真因是语料已移出 git、**正文不在盘上**，而旧标签写的是
+                #   「多为中日韩或纯噪声」，那个成因对 52/53 个工作区都是错的。
+                **{k: dd[k] for k in dd if k.startswith('★★')},
             }
             if n_un:
                 report.error(

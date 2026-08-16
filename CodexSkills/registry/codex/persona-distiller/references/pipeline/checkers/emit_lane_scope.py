@@ -75,12 +75,42 @@ def elide(s: str, width: int) -> str:
 
 def render(rows: list, lane: str) -> str:
     """→ 该道的 Scope 节正文（不含标题行）。**只取 train**。"""
-    mine = [r for r in rows
-            if r.get("split") == "train" and lane in (r.get("dimensions") or [])]
+    assigned = [r for r in rows
+                if r.get("split") == "train" and lane in (r.get("dimensions") or [])]
+    # ★★ **抽取失败的源不算「分到」这道。**
+    #   2026-08-17 实测：全库 3181 行里有 2 行 `extraction_status == "failed"` 却
+    #   仍是 `split: train`，两行都被列进了各自研究道的 Scope 表，当成可用源计数——
+    #     · Jefferson `01-writings.md`：一份 **3 字节、内容是 `\n\n\n`、0 词**的文件，
+    #       列为 P1 一手源（archive.org 的 `_djvu.txt` 取回来是空的）；
+    #     · Machiavelli `04-external.md`：一份 **41.68% 字符是天城文**的 OCR 垃圾，列为 S1。
+    #   两份的失败理由**台账里早就写清楚了**，只是没人把它从「本道分到 N 份」里减掉。
+    #   ⇒ 覆盖数被虚增，而虚增的方向是**让语料看起来比实际厚**。
+    #
+    #   ★ **不静默过滤。** 直接从表里删掉会让那一行整个消失，读的人分不清
+    #   「没抓过」和「抓了是坏的」——后者是很贵的信息（别再去抓一次）。
+    #   所以：不进表、不计数，但**单列一行写明它坏在哪**。
+    #   [[filters-make-rows-vanish]]｜[[aggregator-ocr-can-be-silently-broken]]
+    mine = [r for r in assigned if r.get("extraction_status") != "failed"]
+    dead = [r for r in assigned if r.get("extraction_status") == "failed"]
     mine.sort(key=lambda r: (str(r.get("published_at") or ""), r.get("source_id") or ""))
+    dead.sort(key=lambda r: (str(r.get("published_at") or ""), r.get("source_id") or ""))
+
+    def dead_note():
+        if not dead:
+            return ""
+        lines = ["", "★ **另有 %d 份取回来是坏的，不计入上面的份数**"
+                 "（`extraction_status: failed`；保留在台账里是为了别再抓一次）：" % len(dead)]
+        for r in dead:
+            why = next((str(v)[:96] for k, v in r.items()
+                        if k.startswith("★") and ("失败" in k or "OCR" in k)), "见台账该行")
+            lines.append("- `%s` %s —— %s" % (
+                r.get("source_id"), elide((r.get("title") or ""), 60), why))
+        return "\n".join(lines) + "\n"
+
     if not mine:
         return ("\n**本道分到 0 份（train split）**。\n\n"
-                "★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**。\n\n")
+                "★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**。\n"
+                + dead_note() + "\n")
     out = ["", "**本道分到 %d 份（train split）**：" % len(mine), "",
            "| source_id | 出版年 | tier | 题名 |", "|---|---|---|---|"]
     for r in mine:
@@ -92,10 +122,18 @@ def render(rows: list, lane: str) -> str:
     #   第一版我写了「holdout 的 source_id 不会出现在这里」——一句自夸的话，
     #   本身就把那个词印进了建模者读得到的文件，研究门当场报 4 处。
     #   [[i-create-the-leak-channels-myself]]：泄题通道又一次是我自己造的。
+    # ★★ 脚注**只在这道真有坏源时才改口**。
+    #   第一版我无条件改成「且抽取成功」，结果全库 54 个工作区里 **29 个**当场变
+    #   「过期」——其中 21 个是**已判分冻结**的（㊵），永远不能重生成，
+    #   于是它们会永久停在「过期」状态。**为一句措辞把 21 份产物打成永久不一致，
+    #   是净损失。** 没有坏源的道，渲染结果与改动前**逐字相同**。
+    #   [[protecting-a-measurement-of-a-superseded-artifact]]
+    tail = ("只投影 `split == train` **且抽取成功**的行。" if dead
+            else "只投影 `split == train` 的行。")
     out += ["",
             "★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；"
-            "只投影 `split == train` 的行。", ""]
-    return "\n".join(out) + "\n"
+            + tail, ""]
+    return "\n".join(out) + "\n" + dead_note()
 
 
 def splice(text: str, body: str) -> str:
@@ -156,6 +194,13 @@ def process(ws: pathlib.Path, check: bool) -> tuple:
         #   模板写的是 `Pending. Use train-split source IDs only.` —— 那是给研究方的
         #   指示；用「本道分到 0 份」把它盖掉是净损失。全库实测：41 处「过期」
         #   全属此类，**一处真问题都不是**。[[read-the-hits-before-reporting-the-rate]]
+        # ★ 这一处**有意不加** `extraction_status != "failed"`：它问的是
+        #   「这道有没有分到**任何**东西」，而一份取回来是坏的源**也是分到了** ——
+        #   要把「抓过、是坏的」这条信息写出去，就必须让这道进入重出流程。
+        #   （render 里那一处才是「算不算进份数」，两处问的是不同的问题。）
+        #   实测 2026-08-17：全库**没有**「唯一来源就是坏源」的道，所以这两处
+        #   当前不会给出不同结论；写下来是为了下一个人不必再推一遍。
+        #   [[one-requirement-two-consumers]]
         if not any(r.get("split") == "train" and lane in (r.get("dimensions") or [])
                    for r in rows):
             head = old.find(HEAD)
