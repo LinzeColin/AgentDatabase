@@ -95,6 +95,31 @@ def conflicting_source(args: argparse.Namespace) -> Path | None:
     return candidate if candidate.exists() or candidate.is_symlink() else None
 
 
+def backup_path(dest: Path, tag: str) -> Path:
+    """备份**不许留在 skills 目录里**。
+
+    2026-08-17 实测：`uninstall` 默认把 `~/.agents/skills/persona-distiller`
+    改名成同目录下的 `persona-distiller.uninstall-backup-<ts>` ——
+    那份副本**带着 SKILL.md，是一个完整且可被主机扫到的 skill**。
+    于是「卸载」反而在同一个目录里留下第二个可调用的同名物。
+    [[backups-inside-a-skills-dir-become-invocable-skills]]
+
+    ★ 两个出口，不是一个：`install` 覆盖前的备份（.backup-）与
+      `uninstall` 的备份（.uninstall-backup-）**都在同一个目录里造副本**。
+      只修被我撞见的那一个，等于没修。
+
+    落点：`~/.codex/backups/`（本机既定的备份处，不在任何 skills 根下）。
+    目标不在 skills 目录里时（例如 --target path 指到别处）保持原地，
+    以免跨卷移动。
+    """
+    if dest.parent.name == 'skills':
+        root = Path.home() / '.codex' / 'backups'
+        root.mkdir(parents=True, exist_ok=True)
+        host = dest.parent.parent.name.lstrip('.') or 'unknown'
+        return root / f'{host}-{dest.name}.{tag}-{compact_utc()}'
+    return dest.with_name(f'{dest.name}.{tag}-{compact_utc()}')
+
+
 def copy_skill(source: Path, dest: Path) -> None:
     ignored = {'.git', '__pycache__', '.pytest_cache', 'workspaces', 'build', 'dist', '_build'}
 
@@ -127,9 +152,23 @@ def install(args: argparse.Namespace) -> int:
     dest = destination(args)
     conflict = conflicting_source(args)
     if conflict:
+        # ★★ 2026-08-17 实测：本机 codex 与 agents 两处都装着，于是
+        #   `install --target codex` 说「agents 那份冲突」，
+        #   `install --target agents` 说「codex 那份冲突」—— **两边互指，谁都不能先动**，
+        #   而 `--force` 也不是出口（实测 rc=2）。规则本身是对的
+        #   （Codex 同时读这两个目录，装两份就有歧义），**缺的是把出口说出来**：
+        #   错误信息只写了「requirement」，没写满足它的那条命令。
+        #   [[error-message-points-at-an-exit-that-isnt-there]] 的近亲 ——
+        #   这次出口**真的存在**（uninstall 子命令），只是没被指出来。
+        other = 'agents' if args.target == 'codex' else 'codex'
         raise ValueError(
             f'conflicting source exists: {conflict}; keep exactly one persona-distiller install '
-            'and remove or migrate the other source before installing'
+            'and remove or migrate the other source before installing.\n'
+            f'  Codex reads BOTH ~/.codex/skills and ~/.agents/skills, so two copies are ambiguous.\n'
+            f'  --force does NOT bypass this (by design).\n'
+            f'  Exit (pick ONE host, then reinstall):\n'
+            f'    python3 scripts/install.py uninstall --target {other} --scope {args.scope}\n'
+            f'    python3 scripts/install.py install   --target {args.target} --scope {args.scope}'
         )
     if source == dest or source in dest.parents:
         raise ValueError('refusing to install inside the source tree')
@@ -137,15 +176,15 @@ def install(args: argparse.Namespace) -> int:
     if dest.exists() or dest.is_symlink():
         if not args.force:
             raise ValueError(f'destination exists: {dest}; pass --force to back it up and replace')
-        backup = dest.with_name(f'{dest.name}.backup-{compact_utc()}')
+        backup = backup_path(dest, 'backup')
         suffix = 1
         while backup.exists() or backup.is_symlink():
-            backup = dest.with_name(f'{dest.name}.backup-{compact_utc()}-{suffix}')
+            backup = backup_path(dest, f'backup-{suffix}')
             suffix += 1
         if args.dry_run:
             print(json.dumps({'action': 'install', 'destination': str(dest), 'backup': str(backup), 'dry_run': True, 'verification': source_verification}, indent=2))
             return 0
-        dest.rename(backup)
+        shutil.move(str(dest), str(backup))
     elif args.dry_run:
         print(json.dumps({'action': 'install', 'destination': str(dest), 'mode': 'symlink' if args.link else 'copy', 'dry_run': True, 'verification': source_verification}, indent=2))
         return 0
@@ -167,7 +206,7 @@ def install(args: argparse.Namespace) -> int:
         if dest.exists() or dest.is_symlink():
             remove_tree(dest)
         if backup and backup.exists():
-            backup.rename(dest)
+            shutil.move(str(backup), str(dest))
         raise
     print(json.dumps({
         'action': 'install', 'destination': str(dest), 'mode': 'symlink' if args.link else 'copy',
@@ -211,12 +250,12 @@ def uninstall(args: argparse.Namespace) -> int:
         return 0
     if not args.force:
         raise ValueError('--force is required to uninstall')
-    backup = None if args.no_backup else dest.with_name(f'{dest.name}.uninstall-backup-{compact_utc()}')
+    backup = None if args.no_backup else backup_path(dest, 'uninstall-backup')
     if args.dry_run:
         print(json.dumps({'action': 'uninstall', 'destination': str(dest), 'backup': str(backup) if backup else None, 'dry_run': True}, indent=2))
         return 0
     if backup:
-        dest.rename(backup)
+        shutil.move(str(dest), str(backup))
     else:
         remove_tree(dest)
     print(json.dumps({'action': 'uninstall', 'destination': str(dest), 'backup': str(backup) if backup else None}, ensure_ascii=False, indent=2))

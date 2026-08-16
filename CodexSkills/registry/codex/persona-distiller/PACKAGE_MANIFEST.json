@@ -1841,8 +1841,8 @@
     },
     {
       "path": "scripts/install.py",
-      "sha256": "1d8a29f2f19dc112dc800d8aa044a66f88654e4cbf9c6b95882053b800c10a1b",
-      "size_bytes": 11153
+      "sha256": "35b663341586fa79f0bb5a601018085057c4a99a753f11e9460807b60ab9dfa9",
+      "size_bytes": 13609
     },
     {
       "path": "scripts/install.sh",
