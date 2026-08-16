@@ -335,6 +335,50 @@ def selftest():
     return 1 if bad else 0
 
 
+SCORE_WEIGHTS = {
+    "task_similarity": 0.24, "packet_similarity": 0.15, "domain_match": 0.15,
+    "scenario_match": 0.10, "capability_match": 0.14, "user_value_match": 0.07,
+    "evidence": 0.05, "boundary": 0.04, "currentness": 0.06,
+}
+
+
+def variance_contribution(seat_values):
+    """Which component actually drives the ranking? **Weight alone is misleading.**
+
+    `task_similarity` carries the largest weight (0.24) while `domain_match`
+    carries 0.15 -- so the formula reads as if similarity dominates. It does
+    not. A component only moves the ordering to the extent it *varies* across
+    candidates, so the driver is `weight x sigma`, not `weight`.
+
+    Measured 2026-08-17 over 22 selected seats / 6 tasks:
+
+        domain_match       w=0.15  sigma=0.2989  w*sigma=0.0448  **49.0%**
+        packet_similarity  w=0.15  sigma=0.0964  w*sigma=0.0145    15.8%
+        task_similarity    w=0.24  sigma=0.0527  w*sigma=0.0126    13.8%
+
+    ★★ This matters beyond curiosity. `domain_match` is computed **entirely
+    from a hand-written keyword list** (`compile_task_graph.DOMAIN_SIGNALS`),
+    and the task pack's own `moe-routing-contract.md` says, under the A layer:
+
+        "A 保持旧类别和场景匹配，只用于兼容。人工关键词不得成为冠军路由的主要证据。"
+
+    Half the ranking signal in the B layer therefore comes from the mechanism
+    the contract designates as compatibility-only. The measured routing gain
+    (n>=5: +6.3 pp) rests on it. **Report the caveat alongside the number.**
+
+    The contract's intended champion evidence is C-layer outcome telemetry --
+    which has never accumulated a single record. Hand keywords dominate
+    *because* C never turned on, not because anyone chose them as champion.
+    """
+    rows = []
+    for key, weight in SCORE_WEIGHTS.items():
+        xs = seat_values.get(key) or [0.0]
+        sd = statistics.pstdev(xs) if len(xs) > 1 else 0.0
+        rows.append((weight * sd, key, weight, sd))
+    total = sum(r[0] for r in rows) or 1.0
+    return sorted(rows, reverse=True), total
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -505,6 +549,25 @@ def main():
         print("     ⇒ 分辨力最大的是 **%s**（极差 %.4f）" % (top[0], max(top[1]) - min(top[1])))
         if dead:
             print("     ⇒ **对所有候选恒定、一点分辨力都没有的分项：%s**" % "、".join(dead))
+
+        # ★★ 极差只说「谁在动」，不说「谁在driving排序」。
+        #    真正驱动排序的是 **权重 × σ** —— 权重最大的 task_similarity(0.24)
+        #    实际只贡献一成多，而权重 0.15 的 domain_match 占了近一半。
+        seat_values = {k.split(".")[-1]: v for k, v in flat.items() if k.startswith("values.")}
+        contrib, total = variance_contribution(seat_values)
+        print("\n  ★★★★ 谁在**驱动排序**（权重 × σ；权重本身会骗人）")
+        print("     %-24s %6s %8s %9s %7s" % ("分项", "权重", "σ", "权重×σ", "占比"))
+        for c, k, w, sd in contrib:
+            tag = "  ← **纯人工关键词表算出来的**" if k == "domain_match" else ""
+            print("     %-24s %6.2f %8.4f %9.4f %6.1f%%%s" % (k, w, sd, c, 100 * c / total, tag))
+        dm = next((c for c, k, _, _ in contrib if k == "domain_match"), 0.0)
+        print("     ⇒ `domain_match` 占 **%.1f%%** —— 它由 `DOMAIN_SIGNALS` 关键词表算出。"
+              % (100 * dm / total))
+        print("     ★ 任务包 `moe-routing-contract.md` 的 A 层一节写着：")
+        print("       **「人工关键词不得成为冠军路由的主要证据」**")
+        print("     ⇒ 本工具报出的路由增益，**主要证据正是人工关键词**；报数必须连这句一起报。")
+        print("     ★ 合同想要的冠军证据是 C 层结果遥测 —— 而遥测至今 **0 条**。")
+        print("       关键词之所以主导，是因为 **C 从来没有打开过**，不是有人选它当冠军。")
 
     if a.as_json:
         print("\n" + json.dumps({"seed": SEED, "trials": a.trials,
