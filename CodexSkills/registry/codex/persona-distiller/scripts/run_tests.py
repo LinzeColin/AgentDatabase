@@ -24,6 +24,28 @@
 并把待裁定与新回归分开」**。[[a-checker-nothing-calls-is-not-a-checker]] 的说法
 在这里**不成立**，我错用了它。
 
+## 这套测试有多大力气——2026-08-17 变异实测（**必须配空对照**）
+
+把最吃重的那个函数打坏：`quality_check.Report.error` 改成空操作
+（**所有门无条件通过**），然后跑 15 件测试 —— 红了 5 件。
+但那 5 件里能算数的只有 1 件：
+
+    红 5 件
+      − `test_group_contract`      基线就红（待 Owner 裁定），不算察觉
+      − `test_package_install_migrate` / `test_release_bundle` / `test_skill_contract`
+                                   **空对照证明是混淆**：只往同一文件加一行注释
+                                   （行为不变、清单已重算），这三件照样全红 ——
+                                   它们对**任何**改动都红
+    ⇒ **真察觉 1/14，只有 `test_quality_and_eval`**
+
+★★ 方法上的教训，比这个数更重要：**变异测试必须配空对照**。
+   不配的话，验清册那一类测试会把「我动过这个文件」报成「我察觉了这个缺陷」，
+   于是 1/14 会被读成 4/14。我第一版正是这么报的，当场订正。
+   [[a-signal-that-both-overfires-and-underfires]]｜[[negative-control-must-not-share-the-assumption]]
+
+★ 结论要说准：**不是没人看**（`quality_and_eval` 看得见），
+  是**只有一件在看**这个最吃重的出口。要不要补，属产品决策，本文件只报数。
+
 ## 为什么默认**不是门**
 
 今天还剩 **2 条真失败**（路由没选中测试点名的人物），
