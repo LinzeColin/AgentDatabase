@@ -175,6 +175,14 @@ def _one_ledger_per_workspace(root: pathlib.Path,
     for cl in corpora.rglob("claims.jsonl"):
         per.setdefault(cl.relative_to(corpora).parts[0], []).append(
             str(cl.relative_to(corpora)))
+    # ★ **名单只许缩，不许悄悄长。** 2026-08-17：这份豁免名单原先只会「跳过」，
+    #   那 6 个哪天真收拾干净了，没有任何东西提醒把它删掉 ——
+    #   陈旧的豁免名单会对这些人物**永久静默**。
+    #   （`check_paper_lanes.py` 第 147 行早有同形状的 `fixed` 计算，这里补齐。）
+    _stale = sorted(k for k in CLAIMS_KNOWN if len(per.get(k, [])) <= 1)
+    if _stale:
+        out.append(f"[豁免名单该缩了] CLAIMS_KNOWN 里 {_stale} 已不再有两份 "
+                   "claims.jsonl —— **请把它们从名单里删掉**；留着等于永久静默。")
     for person, files in sorted(per.items()):
         if len(files) > 1 and person not in CLAIMS_KNOWN:
             out.append(f"[一个人物两份 claims.jsonl] {person} —— {sorted(files)}；"
