@@ -2,11 +2,10 @@
 
 ## Scope and assigned sources
 
-**本道分到 26 份（train split）**：
+**本道分到 25 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
-| `src-6a3cf5192354` | 1776 | P1 | Versión Final De La Declaración De La Independencia |
 | `src-843f7cba4fcc` | 1786 | P1 | Draught of a fundamental constitution for the commonwealth of Virginia |
 | `src-29b9a8e05249` | 1787 | P1 | Notes on the state of Virginia. Written by Thomas Jefferso…aware and Pennsylvania.  1787 |
 | `src-b107fc414c7e` | 1801 | P1 | Notes on the state of Virginia |
@@ -33,8 +32,11 @@
 | `src-fa22311720b8` | 1907 | P1 | Master thoughts of Thomas Jefferson |
 | `src-62fdaa348a52` | 1920 | P1 | The american political classics : Jefferson, Washington and Lincoln |
 
-★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` **且抽取成功**的行。
 
+
+★ **另有 1 份取回来是坏的，不计入上面的份数**（`extraction_status: failed`；保留在台账里是为了别再抓一次）：
+- `src-6a3cf5192354` Versión Final De La Declaración De La Independencia —— 文件实测 **3 字节，内容是 `\n\n\n`，0 词**——archive.org 的 `_djvu.txt` 取回来是空的。台账原写 `extraction_status: raw`，而
 ## Source-linked observations
 
 **口径**：每条带 `source_id` 与 `norm_offset`，定位可复算（三条已现场验过）。

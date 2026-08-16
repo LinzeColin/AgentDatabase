@@ -2,7 +2,7 @@
 
 ## Scope and assigned sources
 
-**本道分到 12 份（train split）**：
+**本道分到 11 份（train split）**：
 
 | source_id | 出版年 | tier | 题名 |
 |---|---|---|---|
@@ -15,12 +15,14 @@
 | `src-adc11f95eade` | 1883 | S1 | Niccolò Machiavelli and His Times |
 | `src-bd9990100dd4` | 1891 | S1 | The life and times of Niccolo Machiavelli v 1 |
 | `src-bf853d07951e` | 1891 | S1 | The life and times of Niccolo Machiavelli v 2 |
-| `src-213511a1f84a` | 1892 | S1 | Life And Times Of Niccolo Machiavelli |
 | `src-71d023632e39` | 1892 | S1 | The life and times of Niccolò Machiavelli |
 | `src-c337cd6aef37` | 1916 | S1 | Three prose writers of the Italian renaissance |
 
-★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` 的行。
+★ 本节由台账机械导出（`emit_lane_scope.py`），**不含任何阅读判断**；只投影 `split == train` **且抽取成功**的行。
 
+
+★ **另有 1 份取回来是坏的，不计入上面的份数**（`extraction_status: failed`；保留在台账里是为了别再抓一次）：
+- `src-213511a1f84a` Life And Times Of Niccolo Machiavelli —— 两把独立的尺子都判它不可用：① **天城文字符 1,114,949 / 全文 2,674,715 = 41.68%** —— OCR 把拉丁字母误识成天城文，采样原样如 `क्न 2777 4
 ## Source-linked observations
 
 **★ 说话人不是他**：本道 12 份全是二手（`tier=S1`），
