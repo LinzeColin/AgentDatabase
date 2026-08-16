@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "6f211c8db4e632f4cb1f538bc98734c232809fb5580a88b2dce016ba69a81428",
-      "size_bytes": 146900
+      "sha256": "80efd16cd1a9c2e10bc2c6dc047a7679971c6d5e634b03d4eb70ba36fe81069e",
+      "size_bytes": 147340
     },
     {
       "path": "VERSION",
@@ -2398,6 +2398,11 @@
       "path": "tests/test_checkers_actually_run.py",
       "sha256": "047a16b33334ee6addacf8e08e2810f610cf7313a8761a00b823e676bb98e6fe",
       "size_bytes": 4552
+    },
+    {
+      "path": "tests/test_checkers_refuse_wrong_documents.py",
+      "sha256": "9ab07b85e3236a9a39a7f51abd62a9fa43d85e3b6da796c45b440e6573fbc645",
+      "size_bytes": 4773
     },
     {
       "path": "tests/test_group_contract.py",
