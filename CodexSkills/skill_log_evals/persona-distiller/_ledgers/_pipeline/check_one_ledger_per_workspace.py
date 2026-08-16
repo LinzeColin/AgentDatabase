@@ -58,6 +58,29 @@ ARTIFACTS = {
 AUTHORITATIVE = "evidence"          # 账本的权威位置（保留，供既有调用）
 
 
+def _keys(f: pathlib.Path) -> frozenset:
+    """一份 jsonl/json 的键集合 —— 用来分辨「同物两份」与「同名不同物」。"""
+    ks = set()
+    txt = f.read_text(encoding="utf-8", errors="replace")
+    for line in txt.splitlines():
+        if not line.strip():
+            continue
+        try:
+            d = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(d, dict):
+            ks |= set(d)
+    if not ks:
+        try:
+            d = json.loads(txt)
+            if isinstance(d, dict):
+                ks = set(d)
+        except ValueError:
+            pass
+    return frozenset(ks)
+
+
 def _sha(f: pathlib.Path) -> str:
     import hashlib
     return hashlib.sha256(f.read_bytes()).hexdigest()
@@ -147,16 +170,31 @@ def main() -> int:
         # ★★ 「有重复」还不够行动 —— 要分清**逐字节相同**（删一份无风险）
         #   与**内容不同**（只能由人定）。2026-08-17 加，因为不分开的话
         #   这张表只能得出「有 23 处重复」，得不出「哪几处可以安全收掉」。
-        same, diverge = [], []
+        # ★★★ **三层，不是两层。** 2026-08-17 我先按「同名 + 内容不同」就断言
+        #   「两份副本，挑一份」，**错了**：打开 schema 才发现 `results.jsonl`
+        #   那 9 处根本是**两种产物同名** ——
+        #       evals/  键 case_id/judge_id/overall_score → 逐评委原始打分（128 行）
+        #       wip-*/  键 baseline/candidate/case_id     → 成对记录（64 行）
+        #   两者不冲突也不能互替，**不该删，该改名**。
+        #   ⇒ 判「重复」之前先比**键集合**：键集合不同 = 同名不同物。
+        same, diverge, notsame = [], [], []
         for k in sorted(_multi):
-            digests = {_sha(f) for f in _b[k]}
-            (same if len(digests) == 1 else diverge).append(k)
+            fs = _b[k]
+            if len({_sha(f) for f in fs}) == 1:
+                same.append(k)
+            elif len({_keys(f) for f in fs}) > 1:
+                notsame.append(k)
+            else:
+                diverge.append(k)
         if same:
             print("        逐字节相同（删一份无风险）：**%d** 个　%s"
                   % (len(same), "、".join(same[:4]) + ("…" if len(same) > 4 else "")))
         if diverge:
-            print("        **内容不同（只能由人定）：%d** 个　%s"
+            print("        **同 schema、内容不同（哪份算数只能由人定）：%d** 个　%s"
                   % (len(diverge), "、".join(diverge)))
+        if notsame:
+            print("        ★ **键集合不同 ⇒ 同名不同物，不该删、该改名：%d** 个　%s"
+                  % (len(notsame), "、".join(notsame[:4]) + ("…" if len(notsame) > 4 else "")))
     print("\n══ 源账本逐份细看")
 
     by_ws = scan(corp)
@@ -182,7 +220,12 @@ def main() -> int:
             x, y = names[i], names[i + 1]
             only_x, only_y = sets[x] - sets[y], sets[y] - sets[x]
             if not only_x and not only_y:
-                print("      → **两份 source_id 完全相同**（纯重复）")
+                # ★ 只说 source_id 层面 —— **不许说成「纯重复」**：
+                #   blackstone 两份 source_id 一致，而键集合不同（同名不同物）。
+                #   同一个工具里两句话打架，比少说一句更糟。
+                _ks = {_keys(f) for f in fs}
+                print("      → source_id **完全相同**；键集合 %s"
+                      % ("也相同" if len(_ks) == 1 else "**不同 ⇒ 同名不同物，不是纯重复**"))
             else:
                 print("      → 只在 %s 的 %d 条、只在 %s 的 %d 条"
                       % (x, len(only_x), y, len(only_y)))
