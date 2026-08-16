@@ -40,6 +40,14 @@ sha256 前 16 位：`bb554b325f85d037` / `e3340b594a18567e`。
 ★ **与词表扩容无关** —— 92 词版与 290 词版实测都是 16/48
   （这些题是通用模板，没有领域词汇，两版都落 `general-decision`）。
 
+## 同一批题里还有两个 oracle，一起验了
+
+    `persona_target`      人数命中 **0 / 48 = 0%**，中位偏差 **+7 人**（statistics.median；−20 ~ +20）
+                          最简单那批（基准说要 1 人）实得 **10–11 人**
+    `mandatory_controls`  5 个强制控制角色 **48 条全齐、0 次缺失** ✓（D-006 真在执行）
+
+**一好一坏要一起说**：控制面这条不变量是真的；人数这条一条都没对上。
+
 ## 它答不了什么
 
 1. **不判最终答案对不对**，只判模式选得对不对。
@@ -58,6 +66,7 @@ sha256 前 16 位：`bb554b325f85d037` / `e3340b594a18567e`。
 import argparse
 import collections
 import json
+import statistics
 import pathlib
 import subprocess
 import sys
@@ -74,14 +83,14 @@ def load_tasks(name):
     return [json.loads(l) for l in p.read_text(encoding="utf-8").splitlines() if l.strip()]
 
 
-def route_mode(registry_root, task):
+def route_plan(registry_root, task):
     out = subprocess.run(
         [sys.executable, str(pathlib.Path(registry_root) / "scripts" / "route_team_moe.py"),
          "--task", task, "--registry-root", str(registry_root)],
         capture_output=True, text=True)
     if out.returncode != 0:
         return None
-    return json.loads(out.stdout[out.stdout.find("{"):]).get("mode")
+    return json.loads(out.stdout[out.stdout.find("{"):])
 
 
 def selftest():
@@ -134,12 +143,26 @@ def main():
         rows = load_tasks(name)
         pairs = collections.Counter()
         unresolved = 0
+        size_hit = 0
+        size_delta = []
+        ctl_miss = collections.Counter()
         for r in rows:
-            got = route_mode(root, r["task"])
-            if got is None:
+            plan = route_plan(root, r["task"])
+            if plan is None:
                 unresolved += 1
                 continue
-            pairs[(r["expected_mode"], got)] += 1
+            pairs[(r["expected_mode"], plan.get("mode"))] += 1
+            # ── 人数 oracle ──
+            k = plan.get("persona_expert_count")
+            if k == r.get("persona_target"):
+                size_hit += 1
+            elif isinstance(k, int) and isinstance(r.get("persona_target"), int):
+                size_delta.append(k - r["persona_target"])
+            # ── 强制控制面 oracle（D-006）──
+            got_ctl = {c.get("role_id") for c in (plan.get("control_plane") or [])}
+            for want in r.get("mandatory_controls") or []:
+                if want not in got_ctl:
+                    ctl_miss[want] += 1
         hit = sum(n for (e, g), n in pairs.items() if e == g)
         total = sum(pairs.values())
         print("\n══ %s：%d 条%s" % (name, len(rows),
@@ -148,6 +171,24 @@ def main():
         print("   %-16s %-16s %s" % ("期望", "实得", "条数"))
         for (e, g), n in pairs.most_common():
             print("   %-16s %-16s %3d %s" % (e, g, n, "✓" if e == g else ""))
+        # ── 另外两个 oracle：人数与强制控制面。**同一批题里带着，一起验** ──
+        n_ok = sum(pairs.values())
+        print("   —— 人数 oracle（`persona_target`）——")
+        print("     命中 **%d / %d = %.0f%%**" % (size_hit, n_ok, 100 * size_hit / max(n_ok, 1)))
+        if size_delta:
+            # ★ 用 statistics.median（偶数长度取中间两个的均值）。
+            #   先前我临时脚本用 `sorted[n//2]`（取上面那个），48 条时给出 +9，
+            #   而标准定义是 **+7** —— **同一批数两个中位数，必须统一到一个**。
+            #   [[counts-need-their-cutoff-stated]]
+            print("     偏差：中位 **%+.0f 人**｜最小 %+d｜最大 %+d"
+                  % (statistics.median(size_delta), min(size_delta), max(size_delta)))
+        print("   —— 强制控制面 oracle（D-006，5 个角色）——")
+        if ctl_miss:
+            for c, k in ctl_miss.most_common():
+                print("     ✗ %-28s 缺 %d 次" % (c, k))
+        else:
+            print("     ✓ **0 次缺失** —— 5 个控制角色每条都齐（这一条是真在执行的）")
+
         # ★ 逐模式召回：整体命中率会被条数多的模式带偏
         print("   —— 逐模式召回（**整体率会被条数多的模式带偏，必须分开看**）——")
         for m in MODES:
