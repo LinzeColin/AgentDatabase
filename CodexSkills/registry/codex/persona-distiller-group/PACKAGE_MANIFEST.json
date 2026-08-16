@@ -224,8 +224,8 @@
     },
     {
       "path": "scripts/build_team_delta_card.py",
-      "sha256": "1ef872427af3086f059d4b472e0a7025afe06cff372e11636be02535099d0632",
-      "size_bytes": 2180
+      "sha256": "e3786010ffa5fe4c565e9f016971c295e836f6189f9f1750a46943bfa4edb4c3",
+      "size_bytes": 4088
     },
     {
       "path": "scripts/build_team_dossier.py",
