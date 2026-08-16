@@ -217,6 +217,59 @@ def compile_capsules(payload: dict[str, Any], card: dict[str, Any]) -> dict[str,
     }
 
 
+def divergence_detectability(members: list[dict[str, Any]]) -> dict[str, Any]:
+    """How many pairs in this team could a divergence even be *detected* between?
+
+    `divergences: []` is read by every downstream consumer as "these experts
+    agree". It does not mean that. Detection requires expert A's own
+    `divergence-map.md` to name expert B by exact full name or slug -- so a
+    pair is only detectable if A shipped that file at all.
+
+    Measured across the whole roster on 2026-08-16: **24 of 5151 pairs** are
+    capable of producing a divergence (0.47%), and every one of those 24 is
+    within a single identity family -- personas only ever discuss contemporaries
+    they were distilled alongside. Routing deliberately spreads picks *across*
+    families. Result: of 24 pre-registered routing tasks, **0** produced a team
+    containing even one detectable pair.
+
+    So an empty `divergences` list is not evidence of consensus; in this system
+    it is very nearly a constant. Reporting it bare is how pseudo-consensus gets
+    manufactured -- the Owner's exact critique. This function makes the
+    denominator visible so a reader can tell "nobody disagreed" from "nobody
+    could have been observed disagreeing".
+
+    Nothing here changes selection, scoring or adjudication. It only reports.
+    """
+    total = len(members)
+    with_map = [m for m in members if str(m.get("divergence_text") or "").strip()]
+    pairs_total = total * (total - 1) // 2
+    # An ordered pair (speaker, other) is detectable only if the speaker has a map.
+    ordered_detectable = len(with_map) * (total - 1) if total > 1 else 0
+    return {
+        "persona_expert_count": total,
+        "members_carrying_divergence_map": len(with_map),
+        "unordered_pairs_in_team": pairs_total,
+        # NOTE the name: this counts pairs where the SPEAKER SHIPPED A MAP. It is
+        # an upper bound on detection, not a count of detectable pairs -- the map
+        # must also happen to name that particular teammate. Calling this field
+        # "detection_is_possible" (the first draft) overstated it: every member
+        # here carries a map, so it read 72 while the structural reality is that
+        # maps only ever name same-family contemporaries. Name a field after what
+        # it counts, not after what you hope it means.
+        "ordered_pairs_where_speaker_has_a_map": ordered_detectable,
+        "detection_rule": "speaker's own divergence-map.md must name the other by exact full name or slug",
+        "note": (
+            "An empty divergences list means no divergence was DETECTED, not that the "
+            "experts agree. Carrying a divergence-map is necessary but far from "
+            "sufficient: roster-wide only 24/5151 pairs (0.47%) actually name each "
+            "other, all 24 are within one identity family, and routing picks across "
+            "families -- measured 0 of 24 pre-registered routing tasks produced a team "
+            "containing even one naming pair. Treat 0 divergences as 'not observable "
+            "here', not as agreement."
+        ),
+    }
+
+
 def extract_divergences(members: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Extract only exact full-name or exact slug references; never surname proxies."""
     found: list[dict[str, Any]] = []
@@ -312,6 +365,9 @@ def build_dossier(root: Path, slugs: list[str], route_plan: dict[str, Any] | Non
         members.append(payload)
         cards.append(card)
 
+    # ★ 顺序要紧：`extract_divergences` 会 pop 掉 `divergence_text`，
+    #   所以可检出性必须**先**算。
+    detectability = divergence_detectability(members)
     divergences = extract_divergences(members)
     expected = len(unique_preserving_order(slugs))
     loaded = len(members)
@@ -324,12 +380,15 @@ def build_dossier(root: Path, slugs: list[str], route_plan: dict[str, Any] | Non
         "members": members,
         "missing": missing,
         "divergences": divergences,
+        "divergence_detectability": detectability,
         "roster_composition": roster_composition(cards),
         "control_plane": (route_plan or {}).get("control_plane", []),
         "usage_contract": [
             "Every substantive persona contribution cites that persona's own claim_id.",
             "Hard boundaries and refusal templates apply before generation.",
             "Documented divergences are surfaced and adjudicated; they are not averaged away.",
+            "An empty divergences list is NOT evidence of consensus -- read "
+            "divergence_detectability for how many pairs could have been observed at all.",
             "Voice is off by default; method, evidence, work and failure capsules take priority.",
             "Missing persona payload blocks execution; no substitute persona is invented.",
         ],
