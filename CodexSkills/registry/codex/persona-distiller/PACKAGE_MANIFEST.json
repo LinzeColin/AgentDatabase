@@ -831,8 +831,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_rights_basis.py",
-      "sha256": "3343f5688578c86f671983791d638ab66eb5cabd8f090bdb68eb878793cd30c4",
-      "size_bytes": 19336
+      "sha256": "0d16d5cafd67118cf55aafb96771fc2b99d495a32dd0ab1cc9069ac3c76ad163",
+      "size_bytes": 21645
     },
     {
       "path": "references/pipeline/checkers/check_rubric_copies_answer.py",
@@ -1636,8 +1636,8 @@
     },
     {
       "path": "scripts/check_rights_basis.py",
-      "sha256": "3343f5688578c86f671983791d638ab66eb5cabd8f090bdb68eb878793cd30c4",
-      "size_bytes": 19336
+      "sha256": "0d16d5cafd67118cf55aafb96771fc2b99d495a32dd0ab1cc9069ac3c76ad163",
+      "size_bytes": 21645
     },
     {
       "path": "scripts/check_rubric_copies_answer.py",

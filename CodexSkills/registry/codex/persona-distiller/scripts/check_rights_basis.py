@@ -102,7 +102,13 @@ AGGREGATORS = re.compile(
 # 能作数的依据
 AUTHORITATIVE = re.compile(
     r"crossref|出版方|publisher|版权局|copyright\s*office|\bcce\b|\bcprs\b"
-    r"|renewal|续展|卒年|death|逝世|殁|public\s*domain\s*day|扉页|title\s*page"
+    # ★ `卒于/卒於/逝于` 是**同一类的拼写变体**，2026-08-17 之前漏配 ——
+    #   证据是这份正则**自己的不一致**：`殁` 是单字（所以 `殁于` 一直能中）、
+    #   `逝世` 在而 `逝于` 不在、`卒年` 在而 `卒于` 不在。抽读 4 条命中原文
+    #   （「作者卒于 1910 亦满足生前+70」「作者卒于 1910 → 依 17 U.S.C. §303 已入…」）
+    #   全是货真价实的卒年推理。全库实测：**102 条**由此从「无依据」翻成「有据可查」。
+    #   ★ 这是**开脱侧**的放宽，所以先读命中再改，并把正反用例钉进自测。
+    r"|renewal|续展|卒年|卒于|卒於|逝于|death|逝世|殁|public\s*domain\s*day|扉页|title\s*page"
     r"|colophon|terms\s*and\s*conditions|©|\(c\)", re.I)
 
 # 依据可能写在这些字段里
@@ -202,6 +208,16 @@ def selftest() -> int:
                          ("公有领域（卒年未确认，按出版年 1901 判定）", True),
                          ("public-domain", True)):
         chk("is_pd(%r) == %s" % (_text[:34], _want), is_pd(_text) is _want)
+
+    # ★ 卒年一类的拼写变体（2026-08-17 补 `卒于/卒於/逝于`）。**正反都钉**：
+    #   放宽在开脱侧，必须同时钉住「不该认的仍然不认」。
+    for _t, _w in (("作者卒于 1910 亦满足生前+70", True), ("卒年 1912", True),
+                   ("逝于 1905", True), ("殁于 1901", True), ("逝世于 1899", True),
+                   ("Unpaywall 说是 public-domain", False),
+                   ("OpenAlex license 字段", False),
+                   ("依 17 U.S.C. §303", False)):
+        chk("AUTHORITATIVE(%r) == %s" % (_t[:30], _w),
+            bool(AUTHORITATIVE.search(_t)) is _w)
 
     print("── ★★ 正向：**聚合器依据必须报**（Watson #116 那条真实误判的形状）──")
     agg, nb, ok, npd = audit([{
@@ -339,6 +355,20 @@ def main() -> int:
               "  而同一 DOI 的 Crossref 写的是 Wiley 标准条款，**作者在世**。\n"
               "  **版权判据只能取自出版方页面、Crossref 原始记录或版权局记录。**")
         return 1
+
+    # ★★ **披露一件不由本判据裁定的事**：`17 U.S.C. §303` 这类**法条引用**
+    #   是「规则」不是「来源」，而本判据的判词写着「只能取自出版方页面、
+    #   Crossref 原始记录或版权局记录」。算不算数是**政策问题**，
+    #   我只把数报出来，**不据此改变判定**。[[only-three-things-are-his-to-decide]]
+    import re as _re
+    _STATUTE = _re.compile(r"17\s*U\.?S\.?C|§\s*\d{3}|U\.S\.C\.")
+    _cited = sum(1 for r in records
+                 if r.get("source_id") in set(nb) and _STATUTE.search(basis_of(r) or ""))
+    if _cited:
+        print(f"\n  ⓘ 另有 **{_cited}** 条：依据里**引了法条**（17 U.S.C./§）"
+              "但不含本判据认可的来源词。")
+        print("     法条是**规则**不是**来源**，本判据的判词只认「出版方页面／Crossref／"
+              "版权局记录」——\n     **算不算数由 Owner 定，本判据不据此改判定。**")
 
     if nb:
         print(f"\n！ **{len(nb)} 条只有结论、没有依据。**")
