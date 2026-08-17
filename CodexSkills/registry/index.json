@@ -24,6 +24,15 @@
       "entry": "codex/persona-distiller/registry.yaml",
       "skill_entry": "codex/persona-distiller/SKILL.md",
       "persistent_output": "CodexSkills/registry/codex/persona-distiller/"
+    },
+    {
+      "skill_id": "dingtalk-incremental-media-archive",
+      "source": "codex",
+      "version": "0.2.0",
+      "status": "candidate_for_acceptance",
+      "entry": "codex/dingtalk-incremental-media-archive/registry.yaml",
+      "skill_entry": "codex/dingtalk-incremental-media-archive/SKILL.md",
+      "persistent_output": "smb://192.168.0.1/share/03_资料库/MetaData/IDS_MetaData/KMVideo/素材登记表.csv"
     }
   ]
 }
