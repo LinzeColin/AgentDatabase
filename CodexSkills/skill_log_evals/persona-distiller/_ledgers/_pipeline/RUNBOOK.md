@@ -47,6 +47,9 @@
     # 5) 新增的语料正文不许进 git（本仓是 PUBLIC）
     python3 _pipeline/check_new_corpus_text_not_committed.py
 
+    # 6) 每件判据都要有流程调用方（**新加了判据就会红**）
+    python3 _pipeline/check_checker_has_a_procedural_caller.py
+
 ★ 第 5 道是 2026-08-18 补的，补的理由本身就是这一节存在的理由：
   它 2026-08-17 建成当天**自测就进了 `run_checks`（第 2 道）**，
   于是「它有调用方吗」这个问题看着是绿的 —— 而**真跑一次**它的调用方是 0。
