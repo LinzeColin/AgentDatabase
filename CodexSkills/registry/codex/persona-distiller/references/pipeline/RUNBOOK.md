@@ -30,7 +30,8 @@
     python3 _pipeline/sweep_phase_gate.py --phase research     # 默认只跑未判分的
     python3 _pipeline/sweep_phase_gate.py --phase synthesis
     python3 _pipeline/sweep_phase_gate.py --phase release --include-frozen
-    python3 _pipeline/sweep_phase_gate.py --self-test          # 11 条断言
+    python3 _pipeline/sweep_phase_gate.py --self-test          # 断言数以它自己印的为准
+                                                          # （此处原写 11，2026-08-17 实测 12）
 
 **为什么要用它而不是手写一段 for 循环**：2026-08-17 我手写了一次
 （32 个未判分工作区 × `--phase research`），**同一份台账一天订正五次，五次全是口径**：
