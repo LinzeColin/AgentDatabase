@@ -611,9 +611,21 @@ def markdown_report(data: dict[str, Any]) -> str:
         '## Errors',
         '',
     ]
-    lines.extend([f'- `{item["code"]}`: {item["message"]}' for item in data['errors']] or ['- None'])
+    # ★★★ 2026-08-17：**errors/warnings 里的条目不都是 dict，有的是纯字符串。**
+    #   原写法 `item["code"]` 对字符串就是 `TypeError: string indices must be integers`
+    #   ⇒ `--write-report` **写完 .json 就崩**：.md 从来没产出过，
+    #   而 rc=1 读起来像「门红了」，其实是崩溃。实测 seth-godin 的 5 条 warning 里
+    #   有 1 条是纯字符串（`research.lane_quotes：36 条逐字引文…`）。
+    #   同族：本仓早记过「errors items can be plain strings」，当时只修了读的那一侧。
+    #   [[one-requirement-two-consumers]]｜[[fixed-the-symptom-kept-the-root-cause]]
+    def _line(item):
+        if isinstance(item, dict):
+            return f'- `{item.get("code", "?")}`: {item.get("message", "")}'
+        return f'- {item}'
+
+    lines.extend([_line(i) for i in (data.get('errors') or [])] or ['- None'])
     lines.extend(['', '## Warnings', ''])
-    lines.extend([f'- `{item["code"]}`: {item["message"]}' for item in data['warnings']] or ['- None'])
+    lines.extend([_line(i) for i in (data.get('warnings') or [])] or ['- None'])
     return '\n'.join(lines).rstrip() + '\n'
 
 
