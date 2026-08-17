@@ -132,7 +132,15 @@ Date: 2026-08-05（**v0.0.0.154**）
 > 还原 → 0，文件逐字一致。（**上一次接线就是接错了分支才白接的**，所以这次必须植入验证。）
 >
 > **本版实况计数（`check_verification_counts.py` 逐项核过）**：
-> 判据 **93** 件、Python 脚本 **136** 件、checksum 全量校验 **495 files**、身份族 **12** 族、**名册 102 人**。
+> 判据 **93** 件、Python 脚本 **136** 件、checksum 全量校验 **496 files**、身份族 **12** 族、**名册 102 人**。
+>
+> ★ **2026-08-17 第二十次更新：checksum 495→496** —— 新增
+> `tests/test_profile_fallback_is_disclosed.py`。
+> 它钉住的是：`meta.json` 缺 `profile` 时，`quality_check` 回退 **standard**
+> （min_sources 24／min_lanes 6），而 `check_corpus_feasibility` 回退 **quick**
+> （min_sources 8／min_lanes 3）—— **同一个工作区两个工具按 3 倍不同的门槛判**。
+> 实测受影响 **4 个**（burbank／churchill／ford／leonardo，都是最小占位 meta.json）。
+> 本次**只让 quality_check 把回退印出来，不动判定**（改默认值会移动这 4 个的门，那是决定）。
 >
 > ★ **2026-08-17 第十九次更新：checksum 494→495** —— 新增
 > `tests/test_selftests_outside_check_prefix.py`。

@@ -4438,12 +4438,32 @@ def main() -> int:
                           'errors': [{'code': 'target.invalid', 'message': str(exc)}]},
                          ensure_ascii=False, indent=2))
         return 1
-    profile = meta.get('profile', 'standard')
+    # ★★★ 2026-08-17：**`profile` 缺席时，本件与 `check_corpus_feasibility` 回退到不同的档。**
+    #   本件：`meta.get('profile', 'standard')` ⇒ min_sources **24**、min_lanes **6**
+    #   那件：`profile = 'quick'`（第 148 行）  ⇒ min_sources  **8**、min_lanes **3**
+    #   **同一个工作区，一个按 24 判、一个按 8 判 —— 3 倍差，全来自一个缺失字段。**
+    #   实测受影响：burbank／churchill／ford／leonardo **4 个**（都是最小占位 meta.json）。
+    #   ★ 那件判据**会把回退印出来**（「profile 是 None，按 quick 算——若它本该是
+    #     deep/standard，本次结论偏松」），而本件一直是**静默**的。
+    #   ⇒ 本次**只让它说话，不动判定**：改默认值会移动 4 个工作区的门，那是决定不是清理。
+    #   [[two-checkers-same-text-different-rules]]｜[[counts-need-their-cutoff-stated]]
+    _profile_declared = meta.get('profile')
+    profile = _profile_declared or 'standard'
     thresholds = PROFILE_THRESHOLDS.get(profile)
     if thresholds is None:
         print(f'ERROR: invalid profile {profile!r}', file=sys.stderr)
         return 2
     report = Report(target, args.phase, profile)
+    if _profile_declared is None:
+        report.metrics['profile_fallback'] = (
+            '★ **meta.json 里没有 `profile`**，本件按 **%s** 判'
+            '（min_sources %s、min_lanes %s）。'
+            '★★ 而 `check_corpus_feasibility.py` 对同一情形回退到 **quick**'
+            '（min_sources %s、min_lanes %s）—— **两件判据会给出不同结论**，'
+            '差的不是数据，是这个缺失字段。要定档就把 `profile` 写进 meta.json。'
+            % (profile, thresholds['min_sources'], thresholds['min_lanes'],
+               PROFILE_THRESHOLDS['quick']['min_sources'],
+               PROFILE_THRESHOLDS['quick']['min_lanes']))
 
     for rel in REQUIRED_FILES:
         if not (target / rel).exists():
