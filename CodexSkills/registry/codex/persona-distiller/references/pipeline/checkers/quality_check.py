@@ -1390,11 +1390,24 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                          f'**{n_bad} 条来源的署名照录，在它自己的载体文件里搜不到**——'
                          '要么记录指错了文件，要么那段引文不是从这份文件里来的。'
                          f'　{[x.get("original_name") for x in info.get("对不上的", [])][:5]}')
-        review['byline_in_carrier'] = (
-            f"核过 {info.get('核过', 0)} 条，指错 {n_bad} 条"
-            + (f"，**没核 {len(info.get('★ 没核的') or [])} 条（不是通过）**"
-               if info.get('★ 没核的') else "")
-            if info else '**未核（不是通过）**')
+        # ★★★ 2026-08-18（工具改动，不升版）：原来的守卫是 `… if info else '未核'`，
+        #   **它只挡得住空字典**。而判据在两条路上回的是**非空**字典（见其 :103、:108）：
+        #       {"状态": "meta.json 或 source-ledger.jsonl 不在——**未核（不是通过）**"}
+        #       {"状态": "`attribution_basis.covered_sources` 为空——**未核（不是通过）**"}
+        #   非空 ⇒ 走计数分支 ⇒ 记成「**核过 0 条，指错 0 条**」。实测复现过。
+        # ★★ 「守卫在」不等于「守住了」——它守的条件（字典空不空）和判据表达
+        #   未核的方式（放一个 `状态` 键、不放计数键）**对不上**。
+        #   改为 key 在**计数键在不在**上：这是判据表达「我量过了」的唯一方式。
+        #   [[empty-default-swallows-unknown]]｜[[a-comment-claiming-a-guard-is-not-a-guard]]
+        if '核过' not in info:
+            review['byline_in_carrier'] = (
+                '**未核（不是通过）**：判据没有给出「核过」计数（%s）'
+                % (str(info.get('状态') or info or '输出解析不了')[:70]))
+        else:
+            review['byline_in_carrier'] = (
+                f"核过 {info.get('核过', 0)} 条，指错 {n_bad} 条"
+                + (f"，**没核 {len(info.get('★ 没核的') or [])} 条（不是通过）**"
+                   if info.get('★ 没核的') else ""))
 
     # ── 2026-08-07：**引文逐字在语料里，可它是别人说的**（候选子代理抓出来的） ──
     #   Whitworth #152 的 `clm-e120a051a8ad` 初稿引 General Lefroy 的话当他本人的推测语气，
