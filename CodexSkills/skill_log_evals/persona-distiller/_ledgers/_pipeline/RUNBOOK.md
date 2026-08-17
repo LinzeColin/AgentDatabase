@@ -9,9 +9,35 @@
     python3 _pipeline/run_checks.py            # 有红就 rc=1
     python3 _pipeline/run_checks.py --report   # 只报告
 
-并行跑 `_pipeline/check_*.py` 的 `--self-test`（2026-08-17 实测 **28 件、0.7 秒**）。
+并行跑 `_pipeline/` 下**凡声明了 `--self-test` 的**脚本
+（2026-08-17 由「只 glob `check_*.py`」改为**按能力发现**，当场多收进 12 件：
+**28 → 40 件、0.8 秒**）。
 ★ **它只验判据自己的判定逻辑，不代跑真语料** —— 各判据的 `--corpora` /
 `--skill-root` 参数不同，本入口不代跑。**别把「自测全绿」读成「全库没问题」。**
+
+## 把某一道门跑遍一批工作区（口径由工具保证）
+
+    python3 _pipeline/sweep_phase_gate.py --phase research     # 默认只跑未判分的
+    python3 _pipeline/sweep_phase_gate.py --phase synthesis
+    python3 _pipeline/sweep_phase_gate.py --phase release --include-frozen
+    python3 _pipeline/sweep_phase_gate.py --self-test          # 11 条断言
+
+**为什么要用它而不是手写一段 for 循环**：2026-08-17 我手写了一次
+（32 个未判分工作区 × `--phase research`），**同一份台账一天订正五次，五次全是口径**：
+出现次数当工作区数（`source-unclaimed` 报 22，真值 4）／分母混进 7 个**被拒检**的
+（据此发布「32/32 不通过」）／把「未核」当成「违规」／`warnings` 混进「错误码分布」。
+
+本工具把那四条写进代码，每次都保证：
+
+* **单位** —— 按工作区去重，**同时并列出现次数**（两个数一起印，看得见差别）；
+* **分母** —— 拒检的按产品给的 `refused` 位剔出分母，**单列并印出是谁**；
+* **严重度** —— `errors` / `warnings` 两张表，绝不合并；
+* **冻结** —— `results.jsonl` 非空按 ㊵ 跳过并计数（`--include-frozen` 才连它们一起跑）；
+* **只读** —— 跑完自查 `git status --porcelain -- <语料目录>`，有写盘就 rc=2 报红
+  （射程只圈语料目录：仓里别处的改动不算它的账）。
+
+★ 全库跑一次十几分钟，**逐个往 stderr 打进度**（表格走 stdout，重定向到文件互不污染）；
+  `--quiet` 可关。
 
 ## 索引（本节由脚本生成，勿手改）
 
