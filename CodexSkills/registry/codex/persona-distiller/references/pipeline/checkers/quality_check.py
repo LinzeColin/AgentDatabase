@@ -1705,13 +1705,34 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
     else:
         try:
             _h = json.loads(out)
-            _n, _bad = _h.get('头部里的引文', 0), _h.get('**正文里找不到的**', 0)
-            review['source_header_quotes'] = (
-                f"头部引文 {_n} 条，**正文里找不到 {_bad} 条**"
-                + ("　★ 逐条：" + "｜".join(f"{b['文件']}: {b['头部引的'][:60]}"
-                                            for b in _h.get('逐条', [])[:4]) if _bad else "")
-                + ("　★★ 覆盖面窄：头部不引原文的文件本件看不见，**这个数不是全库体检**"
-                   if not _bad else ""))
+            # ★★★ 2026-08-18（**工具改动，不升版**——2026-08-04 裁定：判据落地不动版本号）：
+            #   **空默认值吞掉了「不知道」。** `raw/` 是空的时候，
+            #   判据回的是 `{"状态": "**未核（不是通过）**：没有找到任何 .txt"}` 且 **rc=0**，
+            #   而这里两个 `.get(..., 0)` 把它变成「头部引文 0 条，正文里找不到 0 条」——
+            #   **判据说未核，review 记成体检合格。** 上面第 1701 行我自己写着
+            #   「报 0 时必须连覆盖面一起报」，可 0 的两种来源（真的 0 条 vs 一份没读到）
+            #   在这里长得一模一样。实测：空 `raw/` ⇒ 「0 条，找不到 0 条」。
+            # ★★ 判定 key 在**闭集合**上（两个键在不在），不 key 在「未核」这个措辞上——
+            #   措辞归判据作者，键归数据结构；追措辞的判据永远慢一步。
+            #   [[empty-default-swallows-unknown]]｜[[checkers-must-key-on-a-closed-set-not-on-wording]]
+            _MISSING = object()
+            _n = _h.get('头部里的引文', _MISSING)
+            _bad = _h.get('**正文里找不到的**', _MISSING)
+            # ★ 用 if/else，**不许用 `return`**：本函数后面还有别的检查，
+            #   一个提前 return 会把它们全部静默跳过。[[a-red-gate-hides-every-gate-behind-it]]
+            if _n is _MISSING or _bad is _MISSING:
+                review['source_header_quotes'] = (
+                    '**未核（不是通过）**：判据没有给出计数（%s）——'
+                    '最常见成因是 `raw/` 下一份 .txt 都没有（语料不在本机）。'
+                    '★ 这一栏**不是 0 条问题**，是**没量过**。'
+                    % (str(_h.get('状态') or _h)[:80]))
+            else:
+                review['source_header_quotes'] = (
+                    f"头部引文 {_n} 条，**正文里找不到 {_bad} 条**"
+                    + ("　★ 逐条：" + "｜".join(f"{b['文件']}: {b['头部引的'][:60]}"
+                                                for b in _h.get('逐条', [])[:4]) if _bad else "")
+                    + ("　★★ 覆盖面窄：头部不引原文的文件本件看不见，**这个数不是全库体检**"
+                       if not _bad else ""))
         except (json.JSONDecodeError, TypeError):
             review['source_header_quotes'] = '**未核（不是通过）**：输出解析不了'
 
