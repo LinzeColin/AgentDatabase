@@ -34,7 +34,34 @@ HERE = pathlib.Path(__file__).resolve().parent
 
 
 def discover():
-    return sorted(HERE.glob("check_*.py"))
+    """★ **按能力发现，不按文件名前缀。**
+
+    原写法是 `HERE.glob("check_*.py")` —— 于是 2026-08-17 新建的
+    `sweep_phase_gate.py`（有 `--self-test`、9 条断言）**一条也不会被跑到**，
+    只因为它不叫 `check_*`。判据扫的集合比实况小，是本仓记过十二种的老病。
+    [[a-gates-scan-set-is-smaller-than-reality]]
+
+    改为：`_pipeline/*.py` 里**凡是把 `--self-test` 注册成命令行参数的**，都跑。
+    判据用的是 `add_argument("--self-test"` 这个字面事实，不是文档里提没提。
+    """
+    named = set(HERE.glob("check_*.py"))
+    capable = set()
+    marker = 'add_argument("--self-test"'
+    marker2 = "add_argument('--self-test'"
+    for p in HERE.glob("*.py"):
+        if p.name == pathlib.Path(__file__).name:
+            continue
+        try:
+            src = p.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        if marker in src or marker2 in src:
+            capable.add(p)
+    extra = sorted(capable - named)
+    if extra:
+        print("★ 按能力多收进 %d 件（有 --self-test 但不叫 check_*）：%s"
+              % (len(extra), "、".join(p.name for p in extra)))
+    return sorted(named | capable)
 
 
 def run_one(p):
