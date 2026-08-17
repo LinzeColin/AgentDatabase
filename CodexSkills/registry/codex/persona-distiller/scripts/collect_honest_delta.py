@@ -203,10 +203,19 @@ def collect(root: pathlib.Path) -> dict:
             h = hashlib.sha256(p.read_bytes()).hexdigest()
         except OSError:
             h = str(p)
-        if h in seen:
-            continue
-        seen.add(h)
         who = next((q.name for q in p.parents if q.name.startswith("wip-")), p.parent.name)
+        # ★★★ 2026-08-18：去重键从**内容哈希**改成 **(人物, 内容哈希)**。
+        #   原来只按内容去重，本意是「同一人物的镜像副本只算一次」——**跨人物时就成了灾**：
+        #   **所有空文件的 sha256 都是同一个**（`e3b0c442…`）。
+        #   全库实测 **25 份 0 行的 `results.jsonl`**，原实现只报出第一个
+        #   （`wip-benardos-128`），**另外 24 个人物整个不出现** ——
+        #   读的人会以为它们「没有 results.jsonl」或「没什么可说的」，
+        #   而实际上它们有一模一样的问题。**过滤让那一行整个消失。**
+        # ★★ 不是取消去重：同一人物 + 同内容照样只算一次（镜像副本的本意保住）。
+        #   [[filters-make-rows-vanish]]｜[[empty-default-swallows-unknown]]
+        if (who, h) in seen:
+            continue
+        seen.add((who, h))
         rec = read_one(p)
         if rec:
             out.setdefault(who, []).append(rec)
@@ -345,6 +354,31 @@ def self_test() -> int:
         sum(len(v) for v in got.values()) == 1)
     chk("⑨ 污染名单是**名单不是判据**：每条都带出处",
         all(isinstance(v, str) and v for v in TAINTED.values()))
+
+    # ★★★ ⑫⑬ 2026-08-18：去重键曾经只有内容哈希 —— **所有空文件哈希相同**，
+    #   于是全库 25 份 0 行的 `results.jsonl` 只报出第一个，**24 个人物整个消失**。
+    #   这两条把那次反例钉死：跨人物不许互吞，同人物仍要去重。
+    _t = pathlib.Path(tempfile.mkdtemp())
+    for _who, _body in (("wip-x-1", ""), ("wip-y-2", ""),
+                        ("wip-z-3", '{"seat":"seat-D-score-v1","case_id":"c",'
+                                    '"suite":"s","candidate":0.8,"baseline":0.7}\n')):
+        _d = _t / _who / "evals"
+        _d.mkdir(parents=True)
+        (_d / "results.jsonl").write_text(_body, encoding="utf-8")
+    _g = collect(_t)
+    chk("⑫ **两个人物各有一个空 `results.jsonl` ⇒ 两个都要出现**"
+        "（去重键只有内容哈希时，第二个会被吞掉）",
+        sorted(_g) == ["wip-x-1", "wip-y-2", "wip-z-3"])
+
+    _t2 = pathlib.Path(tempfile.mkdtemp())
+    _b = ('{"seat":"seat-D-score-v1","case_id":"c","suite":"s",'
+          '"candidate":0.8,"baseline":0.7}\n')
+    for _sub in ("evals", "references/evals"):
+        _d = _t2 / "wip-w-4" / _sub
+        _d.mkdir(parents=True)
+        (_d / "results.jsonl").write_text(_b, encoding="utf-8")
+    chk("⑬ **同一人物两处镜像副本、内容相同 ⇒ 仍然只算一次**（去重的本意要保住）",
+        all(len(v) == 1 for v in collect(_t2).values()))
 
     print("\n" + ("✓ 自测全过" if not fails else f"✗ **{len(fails)} 条不合**"))
     return 0 if not fails else 1

@@ -976,8 +976,8 @@
     },
     {
       "path": "references/pipeline/checkers/collect_honest_delta.py",
-      "sha256": "6a7de3f53fed2fe22e4c24509319e0c1e8dd8a38859e135643f3fce7aff75441",
-      "size_bytes": 22316
+      "sha256": "508d08825a0fcffa8525d8524fcff2c97e444d2ac4ef241524d19de2c9595d8f",
+      "size_bytes": 24648
     },
     {
       "path": "references/pipeline/checkers/common.py",
@@ -1786,8 +1786,8 @@
     },
     {
       "path": "scripts/collect_honest_delta.py",
-      "sha256": "6a7de3f53fed2fe22e4c24509319e0c1e8dd8a38859e135643f3fce7aff75441",
-      "size_bytes": 22316
+      "sha256": "508d08825a0fcffa8525d8524fcff2c97e444d2ac4ef241524d19de2c9595d8f",
+      "size_bytes": 24648
     },
     {
       "path": "scripts/common.py",
