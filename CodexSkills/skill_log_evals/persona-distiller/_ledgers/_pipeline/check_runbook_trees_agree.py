@@ -63,10 +63,29 @@ SHIPPED = HERE.parents[2] / "registry/codex/persona-distiller/references/pipelin
 SHIPPED = HERE.parents[3] / "registry/codex/persona-distiller/references/pipeline"
 
 
-def compare(a_dir: pathlib.Path, b_dir: pathlib.Path, pattern: str = "*.md"):
-    """→ (同名不一致的, 同名一致的, 只在 a 的, 只在 b 的)。纯函数式，不写盘。"""
+# ★★★ 射程按**实测**定：递归比两棵树，同名 38 份里 22 一致、16 不同，
+#   而不同的**几乎全在 `checkers/`（13 份）** —— 那是**另一套工具**，
+#   12 个同名文件做的是不同的事，**本就不该相同**，不能拿来当漂移。
+#   一致的分布：example-knuth 8、scaffold 6、顶层 5、judge_prompts 1 …
+#   ⇒ 只管**顶层 .md** 与下面这三个**确认过是真镜像**的子目录。
+MIRROR_SUBDIRS = ("judge_prompts", "example-knuth", "scaffold")
+NOT_MIRROR = ("checkers",)          # 同名不同事，实测 13/15 不同
+
+
+def compare(a_dir: pathlib.Path, b_dir: pathlib.Path, pattern: str = "*.md",
+            subdirs: tuple = MIRROR_SUBDIRS):
+    """→ (同名不一致的, 同名一致的, 只在 a 的, 只在 b 的)。纯函数式，不写盘。
+
+    ★ 顶层只比 `pattern`；`subdirs` 里的**所有文件**都比（那三个目录是真镜像）。
+    """
     a = {p.name: p for p in a_dir.glob(pattern)}
     b = {p.name: p for p in b_dir.glob(pattern)}
+    for d in subdirs:
+        for src, dst in ((a_dir / d, a), (b_dir / d, b)):
+            if src.is_dir():
+                for f in src.rglob("*"):
+                    if f.is_file():
+                        dst[d + "/" + f.relative_to(src).as_posix()] = f
     same, diff = [], []
     for n in sorted(set(a) & set(b)):
         (same if a[n].read_bytes() == b[n].read_bytes() else diff).append(n)
@@ -92,18 +111,30 @@ def self_test() -> int:
         (B / "drift.md").write_text("x\ny\n", encoding="utf-8")
         (A / "only-a.md").write_text("q\n", encoding="utf-8")
         (B / "only-b.md").write_text("q\n", encoding="utf-8")
+        for d in ("judge_prompts", "checkers"):
+            (A / d).mkdir(); (B / d).mkdir()
+        (A / "judge_prompts" / "seat.md").write_text("v1\n", encoding="utf-8")
+        (B / "judge_prompts" / "seat.md").write_text("v2\n", encoding="utf-8")   # 真镜像，要报
+        (A / "checkers" / "x.py").write_text("v1\n", encoding="utf-8")
+        (B / "checkers" / "x.py").write_text("v2\n", encoding="utf-8")           # 另一套工具，不报
         d, s, oa, ob = compare(A, B)
-        chk("★★★ 正例：同名而内容不同 ⇒ 报出来", d == ["drift.md"])
+        # ★ 断言用**包含**不用全等 —— 加了镜像子目录后 diff 里不止一项；
+        #   第一版写死 `== ["drift.md"]`，扩展射程后三条断言当场全红（**是断言写死了，不是代码错**）。
+        chk("★★★ 正例：同名而内容不同 ⇒ 报出来", "drift.md" in d)
         chk("★★ 负例：同名且逐字节一致 ⇒ 不报", s == ["same.md"])
         chk("★★ 单边文件分别归到两侧，**不进 diff**",
             oa == ["only-a.md"] and ob == ["only-b.md"] and "only-a.md" not in d)
         chk("★ 差一个字节就算不同（不做「差不多」判断）",
-            compare(A, B)[0] == ["drift.md"])
+            "drift.md" in compare(A, B)[0])
         (B / "drift.md").write_text("x\n", encoding="utf-8")
         chk("★★★ 改一致之后就不报了（**反例实验**：判据能从红转绿）",
-            compare(A, B)[0] == [])
+            "drift.md" not in compare(A, B)[0])
+        chk("★★★ **`judge_prompts/` 是真镜像 ⇒ 不同就报**（评委指令，v0.0.0.137 那次就是它漂了）",
+            "judge_prompts/seat.md" in compare(A, B)[0])
+        chk("★★★ **`checkers/` 不是镜像 ⇒ 同名不同事，不许报**（实测 13/15 本就不同）",
+            not any(k.startswith("checkers/") for k in compare(A, B)[0]))
         chk("★ 两侧都空 ⇒ 四个列表都空（由调用方判未量，不在这里当通过）",
-            compare(pathlib.Path(td), pathlib.Path(td), "*.nope") == ([], [], [], []))
+            compare(pathlib.Path(td), pathlib.Path(td), "*.nope", ()) == ([], [], [], []))
     print("\n自测 %d 项，不符 %d 项" % (n[0], len(bad)))
     return 1 if bad else 0
 
