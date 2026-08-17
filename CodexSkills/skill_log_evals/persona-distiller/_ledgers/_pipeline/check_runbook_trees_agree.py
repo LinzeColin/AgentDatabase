@@ -62,6 +62,19 @@ SHIPPED = HERE.parents[2] / "registry/codex/persona-distiller/references/pipelin
 #   靠下面「树不存在 ⇒ rc=4 未量」的守卫当场接住，没有变成一次假绿。
 SHIPPED = HERE.parents[3] / "registry/codex/persona-distiller/references/pipeline"
 
+#: ★★★★★ 2026-08-18 扩射程：**`_ledgers/` ↔ `references/ledgers/` 这一对此前无人管**。
+#   实测那天：`_每次开工必读.md` —— **每个 agent 被要求首先读的那份** ——
+#   两份**真分叉**：评测侧 815 行 / 随包 1037 行，标题层面
+#   **评测侧独有 18 节、随包独有 46 节、共有 35 节**。
+#   而本地流程让人读的是**评测侧**那份 ⇒ 照必读做事的人看不到那 46 节。
+#   同族还有 3 对：`_决策台账.md`（真分叉，且随包那份写着**已被推翻**的「并发恒为 1」）、
+#   `_额度台账.md`、`_迭代输入_下一轮.md`（后两者随包是严格超集）。
+#   四对已全部合并（每次都做「严格超集：两份原文的每一非空行都还在」验证，0 行丢失）。
+#   ⇒ 接进本件，**下次分叉当场红**。
+#   [[the-tree-and-the-zip-can-both-be-self-consistent-and-differ]]
+LEDGER_EVAL = HERE.parent
+LEDGER_SHIP = HERE.parents[3] / "registry/codex/persona-distiller/references/ledgers"
+
 
 # ★★★ 射程按**实测**定：递归比两棵树，同名 38 份里 22 一致、16 不同，
 #   而不同的**几乎全在 `checkers/`（13 份）** —— 那是**另一套工具**，
@@ -164,6 +177,21 @@ def main() -> int:
             return 4
 
     diff, same, only_a, only_b = compare(EVAL_SIDE, SHIPPED)
+    # ★ 第二对：`_ledgers/` ↔ `references/ledgers/`（只比同名，单边只印不拦）
+    if LEDGER_EVAL.is_dir() and LEDGER_SHIP.is_dir():
+        d2, s2, _oa2, ob2 = compare(LEDGER_EVAL, LEDGER_SHIP, ("*.md",), ())
+        print("\n第二对（台账）：`%s` ↔ `%s`" % (LEDGER_EVAL.name, LEDGER_SHIP.name))
+        print("  同名 **%d** 份：一致 %d｜**不一致 %d**" % (len(d2) + len(s2), len(s2), len(d2)))
+        for n_ in s2:
+            print("   ✓ %s" % n_)
+        if ob2:
+            print("  · 只在**随包**（只印不拦）：%s" % "、".join(ob2[:6]))
+            print("    ★ 提醒：必读指的是**评测侧**那棵树 —— 只在随包的，照必读做事的人看不到。")
+        diff = diff + ["（台账）" + x for x in d2]
+        same = same + s2
+    else:
+        print("\n★ 第二对（台账）**未量** —— 目录不在：%s / %s"
+              % (LEDGER_EVAL, LEDGER_SHIP))
     if not (diff or same):
         print("\n★ **未量，不是通过**（rc=4）—— 两侧没有任何同名 .md，扫描面是空的")
         return 4
