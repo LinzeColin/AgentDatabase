@@ -1926,8 +1926,8 @@
     },
     {
       "path": "scripts/run_tests.py",
-      "sha256": "0801a4f24f74844902d0ab70a1616f146f8453376b1815b9bdcc24fc2aa8f8e1",
-      "size_bytes": 15884
+      "sha256": "d7827cb65f15e06ad2fde5ed59730aca68410e2ea4abf30e2f70565e8ffbdced",
+      "size_bytes": 15995
     },
     {
       "path": "scripts/self_check.py",
