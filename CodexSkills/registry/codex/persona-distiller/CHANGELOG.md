@@ -122,6 +122,43 @@ Rousseau #178 实测：唯一那条 ✗ 是「找不到正文的源 **103** 条�
 实测：两棵树现在都 rc=0；给 `--doc /nonexistent` 仍 rc=3。
 **不许按层数写路径。**[[a-rule-in-a-doc-has-no-enforcer]]｜[[zero-hit-gates-must-prove-they-can-hit]]
 
+### 2026-08-17（同日第四处）：16 件自测**从没有任何东西跑过**
+
+`check_checkers.py` 是判据的看门人，但它三处扫描面都是 `glob("check_*.py")`
+（第 125／265／426 行）。数了一遍 `scripts/`：
+
+    带 `--self-test` 的共 **107** 件
+      · 叫 check_* 的 **91** 件 —— check_checkers.py 管着
+      · **不叫 check_* 的 16 件 —— 没有任何东西跑它们的自测**
+
+`tests/test_skill_contract.py` 只按名字点了 4 件（contract_drift／ocr_homoglyphs／
+baseline_provenance／distillation_freshness），其余 12 件靠运气。
+
+那 16 件是：assemble_judge_results、build_blind_payload、build_source_ledger、
+collect_honest_delta、emit_corpus_pointer、emit_lane_scope、finalize_release、
+make_blind_prompts、propose_title_from_titlepage、render_claims、run_tests、
+show_fetch_distance、show_gate、show_workspace_layout、stamp_authorship_evidence、
+suggest_quote_locators。
+
+★ 逐件实跑：**16 件全部 rc=0**。所以本条抓的**不是当下的红**，是
+「**这 16 件此前谁红了都不会有人知道**」——没有主人的东西不算做完。
+[[a-gates-scan-set-is-smaller-than-reality]]｜[[every-requirement-needs-an-owner]]
+
+**落成 `tests/test_selftests_outside_check_prefix.py`**，钉两条：
+
+1. 声明了 `--self-test` 的**必须 rc=0**（实跑 16 件；扫描面 <10 即报红，
+   「跑了 0 件」的全绿正是它要抓的病）；
+2. **本件扫描面与 `check_checkers.py` 必须不相交**，且两者并集覆盖全部 107 件
+   —— 免得留下第三块没人管的。
+
+反对照实跑：给 `show_gate.py` 的 `self_test()` 插一句 `return 1`
+→ **rc=1 并点名 `['show_gate.py']`**；复原后 `git diff` 为空、rc=0。
+
+★★ 同一天在评测侧 `_ledgers/_pipeline/run_checks.py` 上撞到**完全同型**的一处：
+它也只 glob `check_*.py`，改成「凡把 `--self-test` 注册成命令行参数的都跑」后
+**当场多收进 12 件**（28 → 40，全绿）。两处都是同一句话：
+**判据的扫描面是按名字切的，而实况是按能力长的。**
+
 ### 2026-08-15：生成器排除了一个文件，它自己生成的声明说「什么都没排除」
 
 `checksums.sha256` **490 行，而 skill 目录实际 492 个文件**。逐项对完，

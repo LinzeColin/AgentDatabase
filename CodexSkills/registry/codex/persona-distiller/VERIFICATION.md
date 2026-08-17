@@ -132,7 +132,23 @@ Date: 2026-08-05（**v0.0.0.154**）
 > 还原 → 0，文件逐字一致。（**上一次接线就是接错了分支才白接的**，所以这次必须植入验证。）
 >
 > **本版实况计数（`check_verification_counts.py` 逐项核过）**：
-> 判据 **93** 件、Python 脚本 **136** 件、checksum 全量校验 **494 files**、身份族 **12** 族、**名册 102 人**。
+> 判据 **93** 件、Python 脚本 **136** 件、checksum 全量校验 **495 files**、身份族 **12** 族、**名册 102 人**。
+>
+> ★ **2026-08-17 第十九次更新：checksum 494→495** —— 新增
+> `tests/test_selftests_outside_check_prefix.py`。
+> `check_checkers.py` 的扫描面是 `glob("check_*.py")`（第 125／265／426 行三处），
+> 而 `scripts/` 里带 `--self-test` 的共 **107** 件：叫 `check_*` 的 91 件有人管，
+> **另外 16 件从没有任何东西跑过它们的自测**
+> （`test_skill_contract.py` 只按名字点了 4 件）。
+> 落这件时 16 件**全部 rc=0** —— 它抓的不是当下的红，是
+> 「**这 16 件此前谁红了都不会有人知道**」。
+> ★ 判据钉两条：① 声明了 `--self-test` 就必须 rc=0（实跑 16 件，扫描面 <10 即报红）；
+> ② **本件扫描面与 `check_checkers.py` 必须不相交**，且两者并集覆盖
+> 全部 107 件 —— 免得留下第三块没人管的。
+> 反对照实跑：给 `show_gate.py` 的 `self_test()` 插一句 `return 1`
+> → **rc=1 并点名 `['show_gate.py']`**；复原后 `git diff` 为空、rc=0。
+> ★★ 同日在 `_ledgers/_pipeline/run_checks.py` 上撞到**完全同型**的一处：
+> 它也只 glob `check_*.py`，改成按能力发现后当场多收进 **12 件**（28 → 40，全绿）。
 >
 > ★ **2026-08-17 第十八次更新：checksum 493→494** —— 新增
 > `tests/test_refusal_announces_zero_checks.py`：`quality_check.py` 拿不到

@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "c77e5bc49df1eeb4ee1bbad5e2abfe9b2afd38bfcb14c379477903edc1cb7f7a",
-      "size_bytes": 345510
+      "sha256": "d31932cca264781d87ff63422d340f2757af2bc35bc735cedeb86cf645681357",
+      "size_bytes": 347635
     },
     {
       "path": "CONTRIBUTING.md",
@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "9d8350361565eede4fba0b7270f3991da5feac94fef3b9d0a139bc1dc91310f7",
-      "size_bytes": 150026
+      "sha256": "74ec7dda801d7bca0a8547875371e3052894e3316c6803acd143ccb22a9f242a",
+      "size_bytes": 151240
     },
     {
       "path": "VERSION",
@@ -2458,6 +2458,11 @@
       "path": "tests/test_runtime_recording.py",
       "sha256": "9e76323f5b7da9f913b115cb5e270a85a386c07adbd268b2e2e3276ef3eef52d",
       "size_bytes": 4310
+    },
+    {
+      "path": "tests/test_selftests_outside_check_prefix.py",
+      "sha256": "5c9ccc2831754063a5cbb5139f4c1992e530d3b706ecb127027f4ecceca3cfe3",
+      "size_bytes": 4833
     },
     {
       "path": "tests/test_skill_contract.py",
