@@ -1,0 +1,161 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""check_runbook_trees_agree.py —— **两棵 `_pipeline` 文档树里的同名文档必须逐字节一致**
+
+## 抓到它的那一次（2026-08-17）
+
+RUNBOOK 有两份，标题、目的句完全相同，而**内容差了 794 行**：
+
+    评测侧  `_ledgers/_pipeline/RUNBOOK.md`                     3434 行
+    随包    `registry/codex/persona-distiller/references/pipeline/RUNBOOK.md`  4190 行
+    行重合 Jaccard 0.806
+
+**而 `_每次开工必读.md` 第 28、365 行明写「严格走 `_pipeline/RUNBOOK.md` 的 12 步」
+—— 指的正是缺 794 行的那一份。**
+
+缺掉的都是硬换来的操作规则，逐块列：
+
+| 行数 | 内容 |
+|---:|---|
+| 245 | 排期前的第二道前置：一手规模探测（**代价三人**） |
+| 441 | 第七十种：门测的是**代理量**，而代理量可以在属性不成立时被满足 |
+|  32 | 一份材料里混着别人写的层——**已撞两次，是模式不是个案** |
+|  27 | 1b. 拿这个人物**自己的**同名者去打一遍护栏——**真的喂进去**，不是读代码判断 |
+|  25 | 第 5 问（Blackstone #169 换来的）：一手材料取不取得出可核逐字串 |
+|  11 | **阈值按 profile 分档，不是一套通用值**（Thomson #129 的门槛被记成 0.07，真值 0.03） |
+|   8 | 必读 4.1–4.4 的拆解 |
+|   5 | `run_tests.py` 并行跑 14 件 |
+
+⇒ **每个照必读做事的 agent，读到的是薄的那份。**
+两份当天（2026-08-17）都被改过，分别由不同提交 —— **漂移正在进行中**。
+
+## 为什么现有的漂移判据管不着
+
+`registry/.../scripts/check_contract_drift.py` 的镜像模型是**同一个 skill 根内**的
+`scripts/` ↔ `references/pipeline/checkers/`，它接受**一个** root，
+跨不到 `skill_log_evals/` 那棵树。⇒ 这一对**从来没有执行者**。
+[[a-rule-in-a-doc-has-no-enforcer]]｜[[one-requirement-two-consumers]]
+
+## 本件只判**同名**的，单边文件只印不拦
+
+单边是有正当理由的（实测三例）：
+
+    评测侧独有  BASELINE-PROMPT-FROZEN-v1.md   冻结的基线 prompt，天然属评测侧
+    评测侧独有  README-抓源到阶段2.md          描述 `_pipeline/` 自己那十件工具
+    随包独有    抓源坑位清单.md                284 行，**被引 6 次** —— ★ 但照必读做事的人看不到它
+
+⇒ 单边一律**只印不拦**，并把「随包独有」单独标出来提醒。
+[[a-red-that-can-never-turn-green-is-not-a-signal]]
+
+退出码：0＝同名文档全部一致；1＝有不一致；4＝有一棵树不在（未量）。
+"""
+import argparse
+import difflib
+import pathlib
+import sys
+
+HERE = pathlib.Path(__file__).resolve().parent          # …/_ledgers/_pipeline
+EVAL_SIDE = HERE
+SHIPPED = HERE.parents[2] / "registry/codex/persona-distiller/references/pipeline"
+# ★ HERE.parents: [0]=_ledgers [1]=persona-distiller [2]=skill_log_evals …
+#   实际要的是 CodexSkills/，即 parents[3]。**这一行我第一次写错了一级**，
+#   靠下面「树不存在 ⇒ rc=4 未量」的守卫当场接住，没有变成一次假绿。
+SHIPPED = HERE.parents[3] / "registry/codex/persona-distiller/references/pipeline"
+
+
+def compare(a_dir: pathlib.Path, b_dir: pathlib.Path, pattern: str = "*.md"):
+    """→ (同名不一致的, 同名一致的, 只在 a 的, 只在 b 的)。纯函数式，不写盘。"""
+    a = {p.name: p for p in a_dir.glob(pattern)}
+    b = {p.name: p for p in b_dir.glob(pattern)}
+    same, diff = [], []
+    for n in sorted(set(a) & set(b)):
+        (same if a[n].read_bytes() == b[n].read_bytes() else diff).append(n)
+    return diff, same, sorted(set(a) - set(b)), sorted(set(b) - set(a))
+
+
+def self_test() -> int:
+    import tempfile
+    bad, n = [], [0]
+
+    def chk(lbl, ok):
+        n[0] += 1
+        print(("  ✓ " if ok else "  ✗ ") + lbl)
+        if not ok:
+            bad.append(lbl)
+
+    with tempfile.TemporaryDirectory() as td:
+        A, B = pathlib.Path(td) / "a", pathlib.Path(td) / "b"
+        A.mkdir(); B.mkdir()
+        (A / "same.md").write_text("x\n", encoding="utf-8")
+        (B / "same.md").write_text("x\n", encoding="utf-8")
+        (A / "drift.md").write_text("x\n", encoding="utf-8")
+        (B / "drift.md").write_text("x\ny\n", encoding="utf-8")
+        (A / "only-a.md").write_text("q\n", encoding="utf-8")
+        (B / "only-b.md").write_text("q\n", encoding="utf-8")
+        d, s, oa, ob = compare(A, B)
+        chk("★★★ 正例：同名而内容不同 ⇒ 报出来", d == ["drift.md"])
+        chk("★★ 负例：同名且逐字节一致 ⇒ 不报", s == ["same.md"])
+        chk("★★ 单边文件分别归到两侧，**不进 diff**",
+            oa == ["only-a.md"] and ob == ["only-b.md"] and "only-a.md" not in d)
+        chk("★ 差一个字节就算不同（不做「差不多」判断）",
+            compare(A, B)[0] == ["drift.md"])
+        (B / "drift.md").write_text("x\n", encoding="utf-8")
+        chk("★★★ 改一致之后就不报了（**反例实验**：判据能从红转绿）",
+            compare(A, B)[0] == [])
+        chk("★ 两侧都空 ⇒ 四个列表都空（由调用方判未量，不在这里当通过）",
+            compare(pathlib.Path(td), pathlib.Path(td), "*.nope") == ([], [], [], []))
+    print("\n自测 %d 项，不符 %d 项" % (n[0], len(bad)))
+    return 1 if bad else 0
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--self-test", "--selftest", dest="selftest", action="store_true")
+    if ap.parse_args().selftest:
+        return self_test()
+
+    print("扫描面：")
+    print("  评测侧（必读指的就是这一棵）：%s" % EVAL_SIDE)
+    print("  随包                        ：%s" % SHIPPED)
+    for d, who in ((EVAL_SIDE, "评测侧"), (SHIPPED, "随包")):
+        if not d.is_dir():
+            print("\n★ **未量，不是通过**（rc=4）—— %s 那棵树不在：%s" % (who, d))
+            return 4
+
+    diff, same, only_a, only_b = compare(EVAL_SIDE, SHIPPED)
+    if not (diff or same):
+        print("\n★ **未量，不是通过**（rc=4）—— 两侧没有任何同名 .md，扫描面是空的")
+        return 4
+
+    print("\n同名文档 **%d** 份：一致 %d｜**不一致 %d**" % (len(diff) + len(same), len(same), len(diff)))
+    for n in same:
+        print("   ✓ %s" % n)
+    if only_a:
+        print("\n· 只在**评测侧**（只印不拦）：%s" % "、".join(only_a))
+    if only_b:
+        print("· 只在**随包**（只印不拦）：%s" % "、".join(only_b))
+        print("  ★ 提醒：`_每次开工必读.md` 指的是**评测侧**那棵树 ——")
+        print("    只在随包的文档，照必读做事的人**看不到**。")
+
+    if not diff:
+        print("\n✓ 同名文档全部逐字节一致")
+        return 0
+    print("\n✗ **同名而内容不同 %d 份**：" % len(diff))
+    for n in diff:
+        a = (EVAL_SIDE / n).read_text(encoding="utf-8", errors="replace").splitlines()
+        b = (SHIPPED / n).read_text(encoding="utf-8", errors="replace").splitlines()
+        sm = difflib.SequenceMatcher(None, a, b, autojunk=False)
+        ins = sum(j2 - j1 for t, i1, i2, j1, j2 in sm.get_opcodes() if t in ("insert", "replace"))
+        dele = sum(i2 - i1 for t, i1, i2, j1, j2 in sm.get_opcodes() if t in ("delete", "replace"))
+        print("     %-28s 评测侧 %d 行｜随包 %d 行｜随包多 %d 行、评测侧多 %d 行"
+              % (n, len(a), len(b), ins, dele))
+    print("\n  ★ 处置：**先逐块读，别直接覆盖** —— 两边都可能有对方没有的真内容。")
+    print("    2026-08-17 那次：随包多 794 行（含「代价三人」的一手规模探测 245 行），")
+    print("    而评测侧多 35 行（当天新加的 run_checks / sweep 两节）。")
+    print("    合并后要验**结果是两者的严格超集**（每一非空行都还在），有意丢弃的逐条写明理由。")
+    return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
