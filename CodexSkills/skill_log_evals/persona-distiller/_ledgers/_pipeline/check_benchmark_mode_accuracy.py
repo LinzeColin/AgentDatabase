@@ -119,9 +119,44 @@ def selftest():
         bad.append("★ 不存在的集合应当报错，实际静默通过")
     except SystemExit:
         pass
+    # ── ★★★ 2026-08-17：一条都跑不出来时，不许印「真在执行」、不许 rc=0 ──
+    #   实测触发：`--registry-root` 少传一级 ⇒ 48 条全部跑不出路由，
+    #   `ctl_miss` 为空 ⇒ 照印「✓ 0 次缺失…这一条是真在执行的」并 rc=0。
+    #   **这把尺正是用来回答「命中率」那条批评的**，它自己不能假绿。
+    import subprocess as _sp, tempfile as _tf
+    _self = str(pathlib.Path(__file__).resolve())
+    with _tf.TemporaryDirectory() as _td:
+        _r = _sp.run([sys.executable, _self, "--registry-root", _td],
+                     capture_output=True, text=True)
+        _o = _r.stdout + _r.stderr
+        if _r.returncode != 4:
+            bad.append("★★★ 0 条跑得出路由时退出码 %d，应为 **4（未量）**" % _r.returncode)
+        if "真在执行的" in _o:
+            bad.append("★★★ 0 条跑得出路由时**仍印「真在执行的」** —— 空集上恒真")
+        if "未量，不是通过" not in _o:
+            bad.append("★★★ 0 条跑得出路由时没说「未量，不是通过」")
+    # ★ 反对照：**真跑得出来的时候**必须照旧 rc=0 且印出条数。
+    #   ★★★ 这一半**不跑真 registry** —— 实测：跑真 registry 要 **139 秒**，
+    #     而 `run_checks.py` 跑全部判据的墙钟本来是 **0.9 秒**。塞进去之后
+    #     总跑变成 138.6 秒，会被超时杀掉 ⇒ 这条负对照变成「从没被真跑过」。
+    #     ★ 同一个错我在 `report_expert_team_state.py` 上刚犯过一次，**这是第二次**。
+    #   ⇒ 改成**按 AST 断言两个出口都在**：瞬时，且照样咬得住
+    #     「把 `if _ran_total == 0:` 关掉」与「空集也印真在执行」两个变异（已实测）。
+    #   [[batch-changes-then-verify-once]]｜[[a-checker-nothing-calls-is-not-a-checker]]
+    import ast as _ast
+    _tree = _ast.parse(pathlib.Path(__file__).read_text(encoding="utf-8"))
+    _main = next(n for n in _tree.body
+                 if isinstance(n, _ast.FunctionDef) and n.name == "main")
+    _rets = [n.value.value for n in _ast.walk(_main)
+             if isinstance(n, _ast.Return) and isinstance(n.value, _ast.Constant)]
+    if _rets.count(4) != 1:
+        bad.append("★★★ main() 里「未量」那档必须**恰好一个 return 4**（实得 %r）" % _rets)
+    if _rets.count(0) != 1:
+        bad.append("★★★ main() 里「量到了」那档必须**恰好一个 return 0**（实得 %r）" % _rets)
+
     for b in bad:
         print("  ✗ " + b)
-    print("自测 %d/%d" % (5 - len(bad), 5))
+    print("自测 %d/%d" % (10 - len(bad), 10))
     return 1 if bad else 0
 
 
@@ -137,6 +172,7 @@ def main():
         return selftest()
     if not a.registry_root:
         ap.error("要 --registry-root（persona-distiller-group 目录），或只跑 --self-test")
+    _ran_total = 0          # ★ 跨题库累计「真跑出来的条数」；为 0 ⇒ 未量（rc=4）
 
     root = pathlib.Path(a.registry_root).resolve()
     sets = ["development-48", "regression-24"] if a.which == "both" else [a.which]
@@ -182,6 +218,7 @@ def main():
                     ctl_miss[want] += 1
         hit = sum(n for (e, g), n in pairs.items() if e == g)
         total = sum(pairs.values())
+        _ran_total += total          # ★ 跨题库累计「真跑出来的条数」
         print("\n══ %s：%d 条%s" % (name, len(rows),
               ("｜**路由跑不出来的 %d 条**" % unresolved) if unresolved else ""))
         print("   模式命中 **%d / %d = %.0f%%**" % (hit, total, 100 * hit / max(total, 1)))
@@ -203,8 +240,17 @@ def main():
         if ctl_miss:
             for c, k in ctl_miss.most_common():
                 print("     ✗ %-28s 缺 %d 次" % (c, k))
+        elif n_ok == 0:
+            # ★★★ 2026-08-17：**零扫描面不许印「真在执行」**。
+            #   实测（把 `--registry-root` 传少一级）：48 条**全部跑不出来**，
+            #   `ctl_miss` 因此为空 ⇒ 照印「✓ 0 次缺失…这一条是真在执行的」。
+            #   「每条都齐」在空集上恒真 —— **那不是通过，是一条也没核**。
+            #   [[zero-hit-gates-must-prove-they-can-hit]]
+            print("     ⚠ **未核，不是通过** —— 这一批 **0 条**跑得出路由，"
+                  "控制面 oracle **一条也没验过**。")
         else:
-            print("     ✓ **0 次缺失** —— 5 个控制角色每条都齐（这一条是真在执行的）")
+            print("     ✓ **0 次缺失** —— 5 个控制角色每条都齐"
+                  "（**%d 条**逐条验过，这一条是真在执行的）" % n_ok)
 
         # ★ 逐模式召回：整体命中率会被条数多的模式带偏
         print("   —— 逐模式召回（**整体率会被条数多的模式带偏，必须分开看**）——")
@@ -214,7 +260,15 @@ def main():
             if want:
                 print("     %-16s %d/%d = %3.0f%% %s"
                       % (m, got, want, 100 * got / want, "**一次都没选中**" if got == 0 else ""))
-    # 只报数，不设阈值 —— 阈值要 Owner 定；本件永远 rc=0
+    # 只报数，不设阈值 —— 阈值要 Owner 定。
+    # ★★★ 但**「一条都没跑出来」不是「报了数」** —— 那种情形返回 **4（未量）**，
+    #   否则调用方读到 rc=0 会以为量过了。实测触发：`--registry-root` 少传一级。
+    #   [[zero-hit-gates-must-prove-they-can-hit]]｜[[empty-default-swallows-unknown]]
+    if _ran_total == 0:
+        print("\n★ **未量，不是通过** —— 全部题库合计 **0 条**跑得出路由（rc=4）。"
+              "\n   多半是 `--registry-root` 指错了：它要指向 "
+              "**persona-distiller-group 目录本身**。")
+        return 4
     return 0
 
 

@@ -42,18 +42,79 @@ def run(cmd):
     return subprocess.run(cmd, capture_output=True, text=True)
 
 
+# ★ 未取到数的节，攒在这里 —— 有任何一节没取到，整份报告就是「未量」（rc=4）。
+_unmeasured = []
+_current_section = [""]          # ★ 用列表存，免得各处再写 global
+
+
 def section(title):
+    _current_section[0] = title
     print("\n" + "═" * 72)
     print(title)
     print("═" * 72)
 
 
+def selftest():
+    """★★★ 2026-08-17：**「取不到」印对了话，退出码却是 0** —— 那把措辞抵消了。
+
+    实测（`--registry-root` 少传一级）：正文印着「✗ 取不到 —— 不是「没问题」」
+    外加一整段 Python 回溯，而 `rc=0` ⇒ 调用方读成通过。
+    同族已修：`check_lessons_reach_the_bundle`（未量却 return 0）。
+    """
+    import subprocess as _sp, tempfile as _tf
+    bad = []
+    _self = str(pathlib.Path(__file__).resolve())
+    with _tf.TemporaryDirectory() as _td:
+        r = _sp.run([sys.executable, _self, "--registry-root", _td, "--quick"],
+                    capture_output=True, text=True)
+        o = r.stdout + r.stderr
+        if r.returncode != 4:
+            bad.append("★★★ 有节取不到时退出码 %d，应为 **4（未量）**" % r.returncode)
+        if "未量，不是通过" not in o:
+            bad.append("★★★ 有节取不到时没在结尾说「未量，不是通过」")
+        if "一个数都没取到" not in o:
+            bad.append("★★★ 没把「是哪几节没取到」列出来")
+    # ★ 反对照：**真取得到的时候**必须回到 rc=0。
+    #   ★★★ 这一半**不跑真 registry** —— 实测耗时：
+    #        空目录（未量那半）  **1.9 秒**
+    #        真 registry（反对照那半） **206.1 秒**
+    #   `run_checks.py` 跑全部 40 件判据的墙钟是 **0.9 秒**；塞进一条 206 秒的，
+    #   它会被超时杀掉 ⇒ 这条负对照就变成「从没被真跑过」的那一类。
+    #   ⇒ 改成**按 AST 断言 `main()` 的返回值**：瞬时，且照样咬得住
+    #     「把 `if _unmeasured:` 关掉」这个变异（实测已验）。
+    #   真 registry 的那条路每次有人真跑这份报告就走一遍（今天实测 rc=0）。
+    #   [[batch-changes-then-verify-once]]｜[[a-checker-nothing-calls-is-not-a-checker]]
+    import ast as _ast
+    _tree = _ast.parse(pathlib.Path(__file__).read_text(encoding="utf-8"))
+    _main = next(n for n in _tree.body
+                 if isinstance(n, _ast.FunctionDef) and n.name == "main")
+    _rets = [n.value.value for n in _ast.walk(_main)
+             if isinstance(n, _ast.Return) and isinstance(n.value, _ast.Constant)]
+    if _rets.count(4) != 1:
+        bad.append("★★★ main() 里「未量」那档必须**恰好一个 return 4**（实得 %r）" % _rets)
+    if _rets.count(0) != 1:
+        bad.append("★★★ main() 里「真取得到」那档必须**恰好一个 return 0**（实得 %r）" % _rets)
+    for b in bad:
+        print("  ✗ " + b)
+    print("自测 %d/%d" % (5 - len(bad), 5))
+    return 1 if bad else 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--registry-root", required=True)
+    # ★ `required=True` 改成默认必填但让 `--self-test` 能独立跑 ——
+    #   负对照必须能**不依赖它本该独立于的数据**跑起来（check_checkers 把
+    #   「跑不起来的负对照」单列为 NOT-STANDALONE，因为它实际上从没被跑过）。
+    ap.add_argument("--registry-root")
     ap.add_argument("--quick", action="store_true", help="跳过路由 24 题（最慢的一项）")
+    ap.add_argument("--self-test", "--selftest", dest="selftest", action="store_true",
+                    help="只跑内置负对照（不需要 --registry-root）")
     a = ap.parse_args()
+    if a.selftest:
+        return selftest()
+    if not a.registry_root:
+        ap.error("要 --registry-root（persona-distiller-group 目录），或只跑 --self-test")
     G = pathlib.Path(a.registry_root).resolve()
 
     print("专家团队现状 —— 全部现算，无一句引用陈旧散文")
@@ -90,6 +151,7 @@ def main():
             print("  " + l.strip())
     if out.returncode != 0:
         print("  ✗ 取不到 —— **不是「没问题」**：%s" % out.stderr.strip()[:200])
+        _unmeasured.append(_current_section[0])
 
     # ── ①④ 记录与自优化：团队级遥测 ──────────────────────────────────────
     section("①④ 团队级 outcome 记录 —— C 层校准的前提")
@@ -176,11 +238,27 @@ def main():
             print("  " + l.strip())
     if out.returncode != 0:
         print("  ✗ 取不到 —— **不是「没问题」**：%s" % out.stderr.strip()[:200])
+        _unmeasured.append(_current_section[0])
 
     section("这份报告不下结论")
     print("  以上全部是现算的数。**阈值、好坏、要不要改，都由 Owner 定。**")
     print("  市场状态由任务包的 `CURRENT_SCORECARD.md` 与外部 Verifier 决定，")
     print("  本件不碰。")
+    # ★★★ 2026-08-17：**「取不到」印对了话，退出码却是 0**。
+    #   实测（`--registry-root` 少传一级）：正文里印着「✗ 取不到 —— 不是「没问题」」
+    #   外加一整段 Python 回溯，而 `rc=0` ⇒ 调用方读成通过。
+    #   措辞是对的，**退出码把它抵消了**。同族已修：check_lessons_reach_the_bundle。
+    #   ⇒ 有任何一节取不到 ⇒ **rc=4（未量）**，并把是哪几节列出来。
+    #   [[two-checkers-same-text-different-rules]]｜[[a-refusal-to-check-prints-one-error]]
+    if _unmeasured:
+        print()
+        print("★ **未量，不是通过**（rc=4）—— 下面这 %d 节一个数都没取到："
+              % len(_unmeasured))
+        for lab in _unmeasured:
+            print("     · " + lab)
+        print("   多半是 `--registry-root` 指错了：它要指向 "
+              "**persona-distiller-group 目录本身**。")
+        return 4
     return 0
 
 
