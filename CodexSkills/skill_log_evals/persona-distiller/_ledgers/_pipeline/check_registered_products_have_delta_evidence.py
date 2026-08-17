@@ -145,8 +145,23 @@ def main() -> int:
 
     prods = products(root)
     deltas, tainted = delta_readings(corp)
-    print("  在册 %d 人｜语料工作区 %d 个｜baseline 臂读数：干净 %d 个＋**污染 %d 个**"
-          % (len(prods), len(list(corp.glob("wip-*"))), len(deltas), len(tainted)))
+    # ★ 2026-08-17：这一行原写「语料工作区 %d 个」而数的是 `corp.glob("wip-*")`
+    #   —— 那是 **wip 目录数（75）**，不是**工作区数（54）**。
+    #   两者差 21：22 个 wip 目录**根本没有 workspaces/**，另有 3 个工作区
+    #   藏在 `ws-*/` 这类不叫 `workspaces` 的名字下。
+    #   **标签写的是 A，数的是 B** —— 同日已因这一族订正五次。
+    #   改法：两个数都印，各自贴对标签；工作区数走**权威发现**
+    #   `workspace_roots.iter_workspaces`（按 `evidence/source-ledger.jsonl` 认，
+    #   不按目录名），不再自己 glob。[[counts-need-their-cutoff-stated]]
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    try:
+        from workspace_roots import iter_workspaces
+        n_ws = len(iter_workspaces(corp))
+    except Exception as exc:                                    # noqa: BLE001
+        n_ws = "**未核（%s）**" % type(exc).__name__
+    print("  在册 %d 人｜wip 目录 %d 个｜**工作区 %s 个**（权威发现）｜"
+          "baseline 臂读数：干净 %d 个＋**污染 %d 个**"
+          % (len(prods), len(list(corp.glob("wip-*"))), n_ws, len(deltas), len(tainted)))
     print("  （污染＝已知「看过 rubric 才写基线」；权威口径默认只标记不剔除，本件**分开报**）")
 
     with_delta, without = [], []
