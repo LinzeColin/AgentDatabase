@@ -90,6 +90,9 @@ A. 人物与身份：姓名、身份分类、职业或主要职务。
 
 ```bash
 # 门到底过没过 —— 按真实字段名念（passed / errors），退出码与 passed 一致
+# ★ 注意：本件**不是只读的**——它起子进程跑 quality_check，会在工作区写
+#   reports/holdout-contaminated-passages.json（运行时会把绝对路径印出来）。
+#   要真只读：先把工作区复制到别处再跑。
 python3 scripts/show_gate.py <workspace> --phase release --strict
 ```
 

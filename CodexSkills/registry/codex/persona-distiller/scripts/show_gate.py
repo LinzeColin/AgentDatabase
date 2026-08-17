@@ -30,6 +30,27 @@ schema_version / target / phase / profile / generated_at
     python3 show_gate.py --self-test
 
 退出码与 `passed` 一致：**过 0，不过 1**——可以直接串进 `&&`。
+## ★★★ 本件**不是只读的** —— 2026-08-17 咬了我一次
+
+我要扫全库看哪些人的 rubric 自相矛盾，按规矩先查它写不写盘：
+
+    grep -cE "write_text|open\(...w|mkdir|json.dump" scripts/show_gate.py  →  **0**
+
+判定「只读」，挂后台跑完全库。`git status` 冒出**两个新文件**：
+`seth-godin` 与 `michael-steinhardt` 的 `reports/holdout-contaminated-passages.json`
+—— 而这两人**都已判分（各 128 行结果），按 ㊵ 是冻结的**。
+
+**链条**：本件起子进程跑 `quality_check.py`（默认**不带** `--write-report`）
+→ 它加载 `check_holdout_overlap.py` → 那里 **372–374 行无条件 `mkdir` + `write_text`**。
+
+★ 那个无条件写**是有意的、不要改**：`if passages:` 是原版，2026-08-13 Dewey #190
+  撞上过「磁盘上留着上一轮的旧清单，与当前判定互相矛盾」。见该文件注释。
+
+⇒ 要改的是**本件没说自己会写**。现在说了，并在运行时把它会碰的路径印出来。
+  **名字里有 `show_` 不代表只读。**
+
+★ 要真只读：把工作区复制到 scratchpad 再跑，或直接 import 你要的那个 checker
+  （例如只想看 rubric 就 import `check_persona_frame_break.scan_text`）。
 """
 import argparse
 import json
@@ -62,6 +83,17 @@ def render(payload: dict) -> tuple:
 
 def run(target: str, phase: str, strict: bool) -> tuple:
     here = pathlib.Path(__file__).resolve().parent
+    # ★★★ 2026-08-17：**本件会在工作区里写盘**，跑之前先说出来。
+    #   链条：本件 → quality_check.py（默认不带 --write-report）
+    #        → check_holdout_overlap.py:372 **无条件** mkdir + write_text。
+    #   那个无条件写是有意的（见该文件注释，Dewey #190 的陈旧清单事故），不要改它；
+    #   要改的是**本件不说**。名字里有 show_ 不代表只读。
+    _touch = pathlib.Path(target) / "reports" / "holdout-contaminated-passages.json"
+    # ★ 绝对路径。用户要照着去看/去清的路径印成相对的，等于报错了位置。
+    #   [[printing-relative-paths-misreports-location]]
+    print("★ **本件不是只读的**：它会在工作区写\n     %s" % _touch.resolve(),
+          file=sys.stderr)
+    print("  （成因见本文件头；要真只读，把工作区复制到别处再跑）", file=sys.stderr)
     argv = [sys.executable, str(here / "quality_check.py"), target, "--phase", phase]
     if strict:
         argv.append("--strict")
