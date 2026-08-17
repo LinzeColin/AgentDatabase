@@ -141,6 +141,36 @@ def self_test() -> int:
     chk(f"★ creator 位次：Brandeis 排第 {p}/{n}（实测那份就是 3/5）", (p, n) == (3, 5))
     p2, n2 = creator_position("Dewey, John", "Brandeis")
     chk(f"★ 反例：名字不在 creator 里 → 位次 None（实得 {p2}）", p2 is None)
+    # ── ★★★ 2026-08-17：「HIS-OWN 靠什么撑着」这一档的正反对照 ──
+    #   实测：全库 14 行打架，**14/14 的署名证据是 `['ia-creator-field']`**。
+    #   ★ 反对照要有：**有别的署名证据的行，不许被套用这条结论**（否则等于放宽）。
+    _only_cf = lambda ev: list(ev) == ["ia-creator-field"]
+    chk("★★★ 只有 `ia-creator-field` → 归入「证据只有 creator 栏」",
+        _only_cf(["ia-creator-field"]))
+    chk("★★★ 反对照：还有 `A-byline` → **不归入**（这行仍要人读书名页）",
+        not _only_cf(["ia-creator-field", "A-byline"]))
+    chk("★★★ 反对照：单独一条 `A-byline` → **不归入**",
+        not _only_cf(["A-byline"]))
+    chk("★★★ 反对照：**一条证据都没有** → 也**不归入**（那是另一类：无证据）",
+        not _only_cf([]))
+    # ★★ 真实数据兜底：这一档在全库上的实测值必须能现算出来，且**不许为 0**
+    #   （为 0 说明我把字段名读错了，而不是「问题没了」）。
+    try:
+        import subprocess as _sp, sys as _sys
+        _o = _sp.run([_sys.executable, str(pathlib.Path(__file__).resolve())],
+                     capture_output=True, text=True).stdout
+        # ★ 断言要打在**那个数**上，不是打在标签上 —— 标签在计数为 0 时照样印。
+        #   变异对照当场拆穿：把字段名改成不存在的 `evidence`，计数变 0 而标签还在，
+        #   旧写法照样绿。[[read-the-hits-before-reporting-the-rate]]
+        import re as _re
+        _m = _re.search(r"其中 \*\*(\d+)/(\d+)\*\* 行的 `attribution=HIS-OWN`", _o)
+        _n, _d = (int(_m.group(1)), int(_m.group(2))) if _m else (None, None)
+        chk(f"★★★ 真跑一次：这一档**数得出非零**（实得 {_n}/{_d}；"
+            f"读错字段名会让它变 0 而标签还在）",
+            _n is not None and _n > 0 and _d is not None and _d >= _n)
+    except Exception as _e:                                       # noqa: BLE001
+        chk(f"★★★ 真跑一次**未判**（跑不起来：{_e}）", False)
+
     print(f"\n{'✓ 全过' if ok == t else f'✗ {t - ok}/{t} 项不符'}")
     return 0 if ok == t else 1
 
@@ -189,8 +219,15 @@ def main() -> int:
             why = clash(_a, r.get("tier"))
             if why:
                 pos, n = creator_position(r.get("author"), surname)
+                # ★★★ 2026-08-17：把**这条 HIS-OWN 是靠什么撑起来的**一并带出来。
+                #   全库 14 行打架，**14 行的署名证据全是 `['ia-creator-field']`**（现算）。
+                #   而本项目已实测「**creator 栏有名字 ≠ 他写的**」——五种污染源，
+                #   Michelangelo 那一族正是「画册把艺术家挂成 creator」（实测 23%）。
+                #   ⇒ 这不是「要人去读书名页」，是**本仓早已定过的一类**。
+                #   [[creator-field-is-not-authorship]]｜[[art-books-list-the-artist-as-creator]]
+                _ev = list(r.get("authorship_evidence") or r.get("evidence_kinds") or [])
                 bad.append((r.get("source_id"), r.get("split"), why, pos, n,
-                            (r.get("title") or "")[:38]))
+                            (r.get("title") or "")[:38], _ev))
         if _prose:
             prose_ws += 1
             prose_rows += _prose
@@ -209,13 +246,28 @@ def main() -> int:
           f"「只有 N 行」**不等于**「全库只有 N 个问题」。")
     print(f"全库台账 **{total}** 行；`attribution` 与 `tier` 互相否定的："
           f"**{sum(len(b) for _, b in hits)} 行**，分布在 **{len(hits)}** 个工作区")
-    print("★ 本件**不判哪个字段是对的**（那要读书名页、看 creator 位次，是人的事），"
-          "只说这两个在同一行上不能同时成立。\n")
+    # ★★★ 打架的行里，**HIS-OWN 只靠 `ia-creator-field` 撑着**的单独数出来。
+    _all_bad = [row for _, b in hits for row in b]
+    _only_cf = [row for row in _all_bad if row[6] == ["ia-creator-field"]]
+    if _all_bad:
+        print(f"★★★ 其中 **{len(_only_cf)}/{len(_all_bad)}** 行的 `attribution=HIS-OWN` "
+              f"**只有 `ia-creator-field` 一条证据**。")
+        print("   本仓已实测：**creator 栏有名字 ≠ 他写的**（五种污染源：同名者／藏书票／"
+              "书信方向／编者层／托名伪作；画册把艺术家挂成 creator 实测 23%）。")
+        print("   ⇒ 这些行**该改的是 `attribution`，不是 `tier`** —— `tier_reason` 那一侧"
+              "写着具体理由（无出版年、名言图导出、facsimile 画册），是有依据的一侧。")
+        if len(_only_cf) < len(_all_bad):
+            print(f"   ★ 另 **{len(_all_bad) - len(_only_cf)}** 行有别的署名证据，"
+                  f"**那几行仍要人读书名页**——不适用上面这条。")
+    print("★ 本件**不替你改字段**，也不判 tier 那一侧对不对；"
+          "只把「两个不能同时成立」和「HIS-OWN 靠什么撑着」摆出来。\n")
     for name, bad in hits:
         print(f"❌ {name}（{len(bad)} 行）")
-        for sid, sp, why, pos, n, ti in bad:
+        for sid, sp, why, pos, n, ti, ev in bad:
             where = f"creator 里他排第 {pos}/{n}" if pos else (f"creator 共 {n} 位，**没有他**" if n else "无 creator")
-            print(f"     {sid} split={sp} —— {why}；{where}　《{ti}》")
+            tag = "**证据只有 creator 栏**" if ev == ["ia-creator-field"] else (
+                  "**无任何署名证据**" if not ev else "证据：%s" % "／".join(ev))
+            print(f"     {sid} split={sp} —— {why}；{where}；{tag}　《{ti}》")
     if not hits:
         print("✓ 没有互相否定的行")
     return 2 if hits else 0
