@@ -111,6 +111,68 @@ def names(d: pathlib.Path) -> set:
     return {p.name for p in d.glob("*.md") if p.name not in NOT_A_LESSON}
 
 
+# ────────────────────────────────────────────────────────────────────────
+# ★★★ 2026-08-17：**本件叫「reach the bundle」，而它从来没打开过 bundle。**
+#
+#   今天它印「一处踩坑库都找不到（rc=4）」——**对工作树是真的**：
+#   Private-Database 没 clone 到本机、本仓禁入。诚实，但答的不是它自己问的问题。
+#   真去开 `_protected/agentdb-handover-20260814/…full.bundle` 一看：
+#   **HEAD 分支带 197 份踩坑库 ＋ 140 份 _教训库**，与本机 memory 有 184 份重合。
+#   ⇒ 「进不了包」这句话是错的，真相是「**212 条里 28 条进不了**」。
+#   [[never-verified-the-final-artifact-itself]]（47 道门全在验暂存目录）
+#   [[bibliographic-proxy-instead-of-the-measurement]]｜[[a-gates-scan-set-is-smaller-than-reality]]
+_BUNDLE_GLOB = "agentdb-handover-*/agentdb-persona-distiller-full.bundle"
+
+
+def _bundle_path():
+    """→ 最新的移交包路径；没有就 None。**按文件名里的日期排**（不读 mtime，可复算）。"""
+    d = _SIBLING / "_protected"
+    if not d.is_dir():
+        return None
+    hits = sorted(d.glob(_BUNDLE_GLOB))
+    return hits[-1] if hits else None
+
+
+def bundle_names(bundle):
+    """→ (教训文件名集合, 说明)。**任何一步量不到都返回 (None, 原因)，不是空集。**
+
+    ★ 为什么可以拿本机 `.git` 去读 bundle 的内容：`git bundle verify` 说
+      「records a complete history」⇒ 包自足；git 又是内容寻址 ⇒ 同一个 sha
+      在哪读都是同一份字节。**这两个前提缺一个就必须报未量**，不许直接读本机。
+    """
+    import subprocess
+    if bundle is None or not bundle.is_file():
+        return None, "本机没有移交包"
+    if subprocess.run(["git", "bundle", "verify", str(bundle)],
+                      capture_output=True).returncode != 0:
+        return None, "`git bundle verify` 不过 —— 包不自足，本机的 sha 不能代表包里的字节"
+    heads = subprocess.run(["git", "bundle", "list-heads", str(bundle)],
+                           capture_output=True, text=True)
+    if heads.returncode != 0 or not heads.stdout.strip():
+        return None, "列不出 bundle 里的 ref"
+    out, missing, refs = set(), 0, 0
+    for line in heads.stdout.splitlines():
+        sha = line.split(" ", 1)[0]
+        refs += 1
+        if subprocess.run(["git", "-C", str(_repo_root()), "cat-file", "-e", sha],
+                          capture_output=True).returncode != 0:
+            missing += 1
+            continue
+        t = subprocess.run(["git", "-C", str(_repo_root()),
+                            "ls-tree", "-r", "--name-only", "-z", sha],
+                           capture_output=True, text=True).stdout
+        for p in t.split("\0"):
+            if ("踩坑库/" in p or "_教训库/" in p) and p.endswith(".md"):
+                n = p.rsplit("/", 1)[-1]
+                if n not in NOT_A_LESSON:
+                    out.add(n)
+    if missing:
+        # ★ 别的机器上对象不在本地 `.git` 里 ⇒ **量不到，不是 0**。
+        return None, ("bundle 有 %d 个 ref，其中 **%d 个**的对象不在本机 `.git` 里 —— "
+                      "要先 `git clone` 这个包才量得了" % (refs, missing))
+    return out, "读自移交包 %s（%d 个 ref，自足）" % (bundle.name, refs)
+
+
 def compare(home, repo):
     """→ (只在本机的, 只在仓里的)。**纯函数**，两边都必须是集合。"""
     return sorted(home - repo), sorted(repo - home)
@@ -186,6 +248,74 @@ def self_test() -> int:
         f"（成功路径）（实得 {_rets}）",
         _rets.count(4) == 2 and _rets.count(0) == 1)
 
+    # ── ★★★ 2026-08-17 第二轮：**产物本体那一面**（本件名字里的 bundle）──
+    #   三种「量不到」必须是 None，**不是空集**；空集会被读成「包里一条教训都没有」，
+    #   于是 212 条全落进「只在本机」——把一个未量报成一场大灾难。
+    #   [[empty-default-swallows-unknown]]｜[[measurement-errors-all-point-the-same-way]]
+    chk("★★★ 没有包 → **(None, 原因)**，不是空集",
+        bundle_names(None) == (None, "本机没有移交包"))
+    chk("★★★ 路径指向一个不存在的文件 → 同上",
+        bundle_names(pathlib.Path("/nonexistent-xyz.bundle"))[0] is None)
+    with tempfile.TemporaryDirectory() as td:
+        _fake = pathlib.Path(td) / "假的.bundle"
+        _fake.write_text("这不是 bundle", encoding="utf-8")
+        _r, _w = bundle_names(_fake)
+        chk(f"★★★ **不是 bundle 的文件 → verify 不过 ⇒ None**（真跑了一次 git bundle "
+            f"verify；实得说明：{_w[:28]}…）", _r is None and "verify" in _w)
+        # ★ 排序按**文件名里的日期**，不看 mtime —— 换台机器 clone 出来 mtime 全变。
+        _p = pathlib.Path(td) / "_protected"
+        for d in ("agentdb-handover-20260813", "agentdb-handover-20260814"):
+            (_p / d).mkdir(parents=True)
+            (_p / d / "agentdb-persona-distiller-full.bundle").write_text("x", encoding="utf-8")
+        _sib_saved = globals()["_SIBLING"]
+        try:
+            globals()["_SIBLING"] = pathlib.Path(td)
+            # ★★★ 这里**必须 None 安全**：第一版写成 `_bundle_path().parent.name`，
+            #   「产物本体整个断开」那个变异下 `_bundle_path()` 返回 None ⇒ AttributeError
+            #   抛栈 ⇒ **后面的正对照一条都没跑**。红是红了，可红的理由说不出话，
+            #   而且它挡住了真正该报话的那一条。[[a-red-gate-hides-every-gate-behind-it]]
+            _got = _bundle_path()
+            chk(f"★★ 多个包时取**文件名日期最大**的那个（实得 "
+                f"{'None —— 一个包都没找到' if _got is None else _got.parent.name}）",
+                _got is not None and _got.parent.name == "agentdb-handover-20260814")
+        finally:
+            globals()["_SIBLING"] = _sib_saved
+
+    # ★★★ 第四种「量不到」：**包是好的，但对象不在本机 `.git` 里**（换台机器就是这样）。
+    #   这一条最早没断言，变异「缺席时把已读到的部分当结果返回」**跑遍自测零报警**。
+    #   后果是接手方机器上跑本件 ⇒ 包里读到 0 条 ⇒ 报「212 条全进不了包」的假警。
+    #   造一个本机绝无其对象的真 bundle 来钉它。[[zero-hit-gates-must-prove-they-can-hit]]
+    import subprocess as _sp2
+    with tempfile.TemporaryDirectory() as td2:
+        _r2 = pathlib.Path(td2) / "外来仓"
+        _r2.mkdir()
+        _g = ["git", "-C", str(_r2), "-c", "user.name=t", "-c", "user.email=t@t"]
+        _sp2.run(_g[:3] + ["init", "-q"], capture_output=True)
+        (_r2 / "文档").mkdir()
+        (_r2 / "文档" / "只此一份.md").write_text("本机 .git 里不可能有这个对象", encoding="utf-8")
+        _sp2.run(_g + ["add", "-A"], capture_output=True)
+        _sp2.run(_g + ["commit", "-qm", "外来提交"], capture_output=True)
+        _fb = pathlib.Path(td2) / "外来.bundle"
+        _mk = _sp2.run(_g + ["bundle", "create", str(_fb), "--all"], capture_output=True)
+        if _mk.returncode != 0 or not _fb.is_file():
+            chk("★★★ 第四种未量**没测成**（造不出外来 bundle）—— 未量，不是通过", False)
+        else:
+            _fr, _fw = bundle_names(_fb)
+            chk(f"★★★ **包好、但对象不在本机 `.git` 里 ⇒ None（未量），不是 0**"
+                f"（实得 {'None' if _fr is None else '%d 条' % len(_fr)}；说明：{_fw[:34]}…）",
+                _fr is None and "不在本机" in _fw)
+
+    # ★★★ **正对照** —— 少了这条，上面三条「返回 None」在**恒 None** 时也全过。
+    #   [[zero-hit-gates-must-prove-they-can-hit]]
+    _real = _bundle_path()
+    if _real is None:
+        chk("★★★ 正对照**未判**：本机没有移交包，量不到「真包读得出教训」—— 未量，不是通过", False)
+    else:
+        _rn, _rw = bundle_names(_real)
+        chk(f"★★★ 正对照：**真的移交包读得出非空教训集**（{_real.parent.name} → "
+            f"{0 if _rn is None else len(_rn)} 条）—— 否则上面三条 None 是恒真",
+            _rn is not None and len(_rn) > 50)
+
     print(f"\n{'✓ 全过' if ok == t else f'✗ {t - ok}/{t} 项不符'}")
     return 0 if ok == t else 1
 
@@ -196,7 +326,14 @@ def main() -> int:
     if ap.parse_args().self_test:
         return self_test()
 
-    home, repo = names(HOME_LESSONS), names(REPO_LESSONS)
+    home = names(HOME_LESSONS)
+    # ★★★ **先问产物本体，工作树只是它的代理物。** 见上面 bundle_names 的注释。
+    repo, src = bundle_names(_bundle_path())
+    if repo is None:
+        why_bundle, repo = src, names(REPO_LESSONS)
+        src = "读自工作树 %s" % REPO_LESSONS
+    else:
+        why_bundle = None
     # ★★★ 2026-08-17：**「未量」不许 rc=0**。此前这两处印着「未量，不是通过」
     #   却 `return 0` —— 调用方（`make_handover_bundle.sh:28`，报告制）读到的是通过。
     #   姊妹判据 `check_lessons_library.py` 对同一情形早就用 **rc=4（未判）**；
@@ -205,6 +342,7 @@ def main() -> int:
     #   [[two-checkers-same-text-different-rules]]｜[[zero-hit-gates-must-prove-they-can-hit]]
     if repo is None:
         print(f"★ **未量，不是通过** —— 一处踩坑库都找不到（rc=4）。找过这几处：")
+        print(f"     无  移交包本体 —— {why_bundle}")
         for d in REPO_LESSON_CANDIDATES:
             print(f"     {'有' if d.is_dir() else '无'}  {d}")
         print("   ★ 注意：`<本仓>/文档/踩坑库` **本来就不许存在** —— "
@@ -216,8 +354,12 @@ def main() -> int:
         return 4
 
     only_h, only_r = compare(home, repo)
+    # ★ 扫描面印进输出 —— 「仓里（＝包里）」这个等号过去是**假设**，现在写明读的是哪一面。
+    print(f"扫描面：{src}")
+    if why_bundle:
+        print(f"   ⚠ **没读到产物本体** —— {why_bundle}；下面这个数是工作树的，不是包里的。")
     print(f"★★ **教训库覆盖面**：本机 `~/.claude/` **{len(home)}** 条｜"
-          f"仓里（＝包里）**{len(repo)}** 条｜两边都有 {len(home & repo)} 条")
+          f"包里 **{len(repo)}** 条｜两边都有 {len(home & repo)} 条")
     print(f"   ⇒ **只在本机、进不了包的 {len(only_h)} 条**；只在仓里的 {len(only_r)} 条（正常）")
     if only_h:
         print("\n❗ 下面这些**随本机/套餐消失**，接手方一条也看不到 —— 逐条决定要不要带进仓：")
