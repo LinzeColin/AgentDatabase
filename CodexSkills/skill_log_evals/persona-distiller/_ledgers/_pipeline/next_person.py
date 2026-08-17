@@ -52,9 +52,23 @@ DEF_DL = "/Users/linzezhang/Downloads/蒸馏"
 
 
 def _pick(in_repo, fallback):
-    """仓内优先；仓内没有才用旧路径。→ (路径, 是不是退回来的)"""
+    """仓内优先；仓内没有才用旧路径。→ (路径, 是不是退回来的)
+
+    ★★★ 2026-08-12：原来退回时**不检查旧路径存不存在**，直接把它当结果返回。
+      而 `_FALLBACK_REG` 指的是 `character-distillation-skill-reorganize-d57595`
+      ——**那个 worktree 早就不存在了**（当天实测 `_pick('/nonexistent', _FALLBACK_REG)`
+      返回的就是一个不存在的路径，只标了 `fell=True`）。
+      于是「仓内找不到」会静默变成「指向一个不存在的地方」，
+      下游要么空跑要么报一个看不懂的错。
+      ⇒ [[untested-fallback-branches-only-fire-on-their-machine]]：
+        没走过的兜底分支，只在别人机器上发作。
+      现在**退回时也验一次**，两边都没有就把这件事喊出来。
+    """
     if in_repo is not None and pathlib.Path(in_repo).exists():
         return str(in_repo), False
+    if not pathlib.Path(fallback).exists():
+        print(f"★★ 仓内找不到 {in_repo}，而旧路径 {fallback} **也不存在**"
+              f"——两边都没有，下面的结果不可信。", file=sys.stderr)
     return str(fallback), True
 
 
@@ -237,9 +251,56 @@ def main():
         # ★ 做完了但没出货、也没记延后的——**多半卡在待裁定**。
         #   它们**已经排除出 NEXT**，但必须在这里被看见，否则就成了没人管的一批。
         "★ 已做但未出货（不进 NEXT，去看它卡在哪）": worked_not_shipped,
+        # ★★★★ 2026-08-11：**把分族配重打进输出。**
+        #
+        #   `_决策台账.md` 记着一条规则：「每轮 5 人须含 1 名最少三族的人」，
+        #   理由是「按语料可取得性排期会让 12 族单向漂移」。
+        #   **本文件此前一次都没提到它** —— 规则记下来了，从没被任何代码读过。
+        #
+        #   而它要防的事已经发生，且可量：
+        #       software-developer 已入库 **34**｜art-designer 1｜customer-marketing 1
+        #       **healthcare-nursing 0**（而该族已延后/拒发 **21 人**）
+        #       最多/最少 = **34 : 1**
+        #
+        #   ★ **这里只报，不改选谁。** 「优先顺序」在决策台账里明写是用户指定的，
+        #     擅自按配重改 NEXT 等于替人改了一条锁定项。
+        #     报出来，让排期的人自己看得见。
+        "★ 分族配重（只报不覆盖，规则见 _决策台账.md）": _family_balance(idx if os.path.isfile(ti) else None, q, a),
         "NEXT": _withyears(pending[0]) if pending else None,
         "upcoming": [_withyears(x) for x in pending[:a.show]],
     }, ensure_ascii=False, indent=1))
+
+
+def _family_balance(idx, q, a):
+    """按族数已入库产物，报出「最少三族」与 NEXT 属不属于它们。
+
+    ★ 只报不覆盖：见调用处的注释。
+    ★ **不猜入库时序**：`team-index.json` 是按 (族, 名字) 排序的，
+      **没有任何入库时间字段**——所以「漂移是不是还在继续」这件事
+      用现有数据答不了，本函数**不报**那个。
+      （2026-08-11 我按数组末尾读出「最近 12 个全是 software-developer」，
+        那是排序造成的假象，差一点写进台账。）
+    """
+    import collections
+    if idx is None:
+        # ★ 注册表读不到时**不许报 0**——那正是本文件头记的那个坑
+        #   （`registry_products` 打印成 0 而真值是 101）。
+        return {"★": "**注册表读不到，本节未核（不是「各族都是 0」）**"}
+    prods = idx.get("products") or []
+    fam = collections.Counter((p.get("identity_family_id") or "?") for p in prods)
+    inq = collections.Counter(x.get("family_id") for x in q)
+    for f in inq:                      # 队列里有、却一个都没入库的族，也要出现在表里
+        fam.setdefault(f, 0)
+    ranked = sorted(fam.items(), key=lambda kv: (kv[1], kv[0]))
+    least3 = [k for k, _ in ranked[:3]]
+    return {
+        "每族已入库": dict(sorted(fam.items(), key=lambda kv: -kv[1])),
+        "**最少三族**": least3,
+        "最多/最少": ("%d / %d" % (ranked[-1][1], ranked[0][1])) if ranked else None,
+        "★ 规则": "每轮 5 人须含 1 名最少三族的人（_决策台账.md）；**本工具只报，不改 NEXT 选谁**",
+        "★ 本工具答不了的": "「漂移是不是还在继续」——team-index.json 没有入库时间字段，"
+                            "它是按 (族, 名字) 排序的，**不要拿数组末尾当最近入库**",
+    }
 
 if __name__ == "__main__":
     main()

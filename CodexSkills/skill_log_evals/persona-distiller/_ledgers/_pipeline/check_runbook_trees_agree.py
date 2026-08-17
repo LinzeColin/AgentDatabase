@@ -72,14 +72,23 @@ MIRROR_SUBDIRS = ("judge_prompts", "example-knuth", "scaffold")
 NOT_MIRROR = ("checkers",)          # 同名不同事，实测 13/15 不同
 
 
-def compare(a_dir: pathlib.Path, b_dir: pathlib.Path, pattern: str = "*.md",
+# ★ 2026-08-17 加：顶层 `*.py` 也比。随包顶层只有 **4 个** .py，
+#   全部也在评测侧且 4/4 逐字节相同（评测侧另有 75 个单边件，只印不拦）。
+#   起因：`next_person.py` 两份分叉 —— 各带对方没有的功能
+#   （评测侧 `iter_workspaces` + Shewhart 同名检测；随包兜底校验 + 分族配重），
+#   当天输出恰好一致，**数据一变就会给出不同答案**。已合并。
+TOP_PATTERNS = ("*.md", "*.py")
+
+
+def compare(a_dir: pathlib.Path, b_dir: pathlib.Path, pattern=TOP_PATTERNS,
             subdirs: tuple = MIRROR_SUBDIRS):
     """→ (同名不一致的, 同名一致的, 只在 a 的, 只在 b 的)。纯函数式，不写盘。
 
     ★ 顶层只比 `pattern`；`subdirs` 里的**所有文件**都比（那三个目录是真镜像）。
     """
-    a = {p.name: p for p in a_dir.glob(pattern)}
-    b = {p.name: p for p in b_dir.glob(pattern)}
+    pats = (pattern,) if isinstance(pattern, str) else pattern
+    a = {p.name: p for pat in pats for p in a_dir.glob(pat)}
+    b = {p.name: p for pat in pats for p in b_dir.glob(pat)}
     for d in subdirs:
         for src, dst in ((a_dir / d, a), (b_dir / d, b)):
             if src.is_dir():
@@ -134,7 +143,7 @@ def self_test() -> int:
         chk("★★★ **`checkers/` 不是镜像 ⇒ 同名不同事，不许报**（实测 13/15 本就不同）",
             not any(k.startswith("checkers/") for k in compare(A, B)[0]))
         chk("★ 两侧都空 ⇒ 四个列表都空（由调用方判未量，不在这里当通过）",
-            compare(pathlib.Path(td), pathlib.Path(td), "*.nope", ()) == ([], [], [], []))
+            compare(pathlib.Path(td), pathlib.Path(td), ("*.nope",), ()) == ([], [], [], []))
     print("\n自测 %d 项，不符 %d 项" % (n[0], len(bad)))
     return 1 if bad else 0
 

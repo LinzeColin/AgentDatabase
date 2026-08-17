@@ -1136,8 +1136,8 @@
     },
     {
       "path": "references/pipeline/next_person.py",
-      "sha256": "3c5ab3b301bf551ef296231ed2fc70b29fb1e1907317d3ea71c25d7f6c8d927e",
-      "size_bytes": 15009
+      "sha256": "be29e857b5e65242ea0085fc1322b5b9208f5753b79f2c81651d6cf5d4bf8350",
+      "size_bytes": 17278
     },
     {
       "path": "references/pipeline/scaffold/README.md",
@@ -1178,6 +1178,11 @@
       "path": "references/pipeline/scaffold/stats_template.py",
       "sha256": "41738a57a2106997f2089d898b45bc18ff52d30cbe38f7b7b5c2190fab825bbc",
       "size_bytes": 5220
+    },
+    {
+      "path": "references/pipeline/workspace_roots.py",
+      "sha256": "1361520a7094dd1712e6f4df7d5b574431c054ef02bdf70cbaf26913060d4ebf",
+      "size_bytes": 6120
     },
     {
       "path": "references/pipeline/抓源坑位清单.md",
