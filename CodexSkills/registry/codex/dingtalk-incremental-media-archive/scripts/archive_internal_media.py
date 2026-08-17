@@ -26,7 +26,17 @@ from typing import Iterable
 from zoneinfo import ZoneInfo
 
 
-ROOT = Path(__file__).resolve().parents[4]
+def _resolve_kmos_root() -> Path:
+    """KMOS 根定位：KMOS_ROOT 环境变量优先；否则回退 __file__.parents[4]（worktree 内布局）。"""
+    env = os.environ.get("KMOS_ROOT", "").strip()
+    if env:
+        p = Path(env).expanduser().resolve()
+        if p.is_dir():
+            return p
+    return Path(__file__).resolve().parents[4]
+
+
+ROOT = _resolve_kmos_root()
 PRIVATE_DB_CLIENT = ROOT / "KMDatabase" / "machine" / "tools" / "private_db_client.py"
 SMB_ROOT = Path("/Volumes/share/03_资料库/MetaData/IDS_MetaData/KMVideo")
 GITHUB_AREA = "Private-KMDatabase"

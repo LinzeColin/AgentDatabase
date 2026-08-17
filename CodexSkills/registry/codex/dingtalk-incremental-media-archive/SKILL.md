@@ -35,6 +35,8 @@ python3 scripts/kmvideo_pipeline.py all --groups-file <白名单.txt> [--workdir
 
 - `--allow-title` 白名单逐群显式传入（复用 archive_internal_media 的全部归档语义与去重规则）。
 - `--only-group 群名` 可先打样单群；`--skip-accept-upload` 可只跑本地阶段。
+- 私有仓落地依赖 `KMOS_ROOT` 环境变量（或运行于 KMOS worktree 内）定位 `private_db_client.py`；
+  两者都失效时 `upload` 阶段**报错退出**（不再静默跳过）。显式跳过私有仓用 `--no-private`。
 - 视觉字段若存在更高置信度的外部标注（如任务书打样产物），`label` 阶段以 `workdir/vision_override.jsonl`（键=文件名，值=字段）优先。
 
 ## 阶段说明
@@ -45,7 +47,20 @@ python3 scripts/kmvideo_pipeline.py all --groups-file <白名单.txt> [--workdir
 | 二 规格探测/去重/缩略图 | `probe` `dedup` `thumbs` | `specs.jsonl`、`dups.jsonl`、`workdir/thumbs/*.jpg`、SMB `KMVideo_缩略图/` |
 | 三 本地标注 | `label` | `desc.csv`（描述/功能位/画质等级/画面元素/镜头特征/工序阶段/能证明什么/脱敏风险/置信度） |
 | 四 改名 | `rename` | 磁盘幂等改名 + `改名前后对照.csv` |
-| 五 登记与落地 | `registry` `upload` | `素材登记表.csv`（+18 新列）、`原名新名映射.csv`、公开仓 md 版、私有仓 ingest、GitHub Release 资产 |
+| 五 登记与落地 | `registry` `upload` | `素材登记表.csv`（+18 新列）、`原名新名映射.csv`、视频子集、三处本机分发、公开仓、私有仓 ingest、GitHub Release 资产 |
+
+### 登记表落点（三个本机 + 一个 GitHub）
+
+| # | 位置 | 内容 | 性质 |
+|---|---|---|---|
+| 1 | `smb://192.168.0.1/.../IDS_MetaData/KMVideo/` | `素材登记表.csv`、`原名新名映射.csv` | **唯一真源**，`rsync` 写入并校验字节数 |
+| 2 | `~/Documents/KMVideo/00_治理与登记/02_登记与索引/` | 全量表、映射表、视频子集、公开脱敏版 csv/md | 输出工作区副本 |
+| 3 | `~/Downloads/` | `KMVideo素材登记表.csv`、`KMVideo素材登记表_视频子集.csv` | 便于拖给 ChatGPT 上传 |
+| 4 | KMOS 公开仓 `KMDatabase/data/KMVideo/` | **仅脱敏版**：`素材登记表_public.csv/md`、`素材登记表_视频子集_public.csv`、缩略图清单 | 公开，项目名一律泛化为「业务名+群」，且去掉「能证明什么」列 |
+
+- 分发由 `distribute_registry()` 完成，逐份校验字节数；**任一处写失败即抛错中止，不得静默跳过**——本机副本过期会让下游 agent 读到错数据。
+- `素材登记表_视频子集.csv` 只含视频、精简为 14 列，体积约 40 KB，供无本地文件权限的模型（ChatGPT 等）直接上传使用。
+- 进 KMOS 公开仓的**只能是 `_public` 后缀那几份**；含真实甲方群名与「能证明什么」的版本不得公开。
 | 六 自验收+汇总 | `accept` `report` | `accept_report.json`、产能汇总表 |
 
 ## 命名规则（照抄任务书）
