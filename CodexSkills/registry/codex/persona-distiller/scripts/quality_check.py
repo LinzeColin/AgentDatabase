@@ -1594,7 +1594,10 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
         #   ⇒ [[empty-default-swallows-unknown]]：绿章不许盖在「不知道」上。
         n_bad = None
         try:
-            n_bad = json.loads(out).get('**判为花体乱码**', 0)
+            _oc = json.loads(out)
+            n_bad = _oc.get('**判为花体乱码**', 0)
+            _n_read = _oc.get('**读到的份数**', 0)
+            _n_de = _oc.get('**测到的德文份数**', 0)
         except Exception:                                        # noqa: BLE001
             review['fraktur_mojibake'] = ('**未核（不是通过）**：'
                                           'check_ocr_legibility 的输出解析不了')
@@ -1605,7 +1608,18 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                         '份数／分档／字数三样都是真的，所以既有的门都放行了；'
                         '**从这些文件里取不出任何可核的逐字引文**。')
         if n_bad is not None:
-            review['fraktur_mojibake'] = f'{n_bad} 份' if n_bad else '✓ 没有花体乱码'
+            # ★★★ 2026-08-17：**肯定句要带它自己那个单位的计数** ——
+            #   空扫描面上「没有 X」恒真，而只印一个 ✓ 看不出核过几份。
+            #   [[zero-hit-gates-must-prove-they-can-hit]]
+            # ★ 分母用判据**自己吐出的键**（读出来的，不是猜的）：
+            #   顶层有 `**读到的份数**` 与 `**测到的德文份数**`；
+            #   本件的射程是**德文花体**，所以真正的分母是后者。
+            review['fraktur_mojibake'] = (
+                f'{n_bad} 份' if n_bad else
+                ('✓ 没有花体乱码（德文 **%s** 份逐份看过；共读到 %s 份）'
+                 % (_n_de, _n_read) if _n_de else
+                 '⚠ **德文语料 0 份 —— 未核，不是通过**'
+                 '（「没有花体乱码」在空集上恒真；共读到 %s 份）' % _n_read))
 
     # ★★★ v0.0.0.136：**台账上有、磁盘上没有的源。**
     #   Blackwell #118 实测：台账 95 行里有 6 行（4 本日记＋2 份手稿，**88,685 词，全是 P1**）
@@ -1639,6 +1653,11 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
         try:
             _s = json.loads(out[out.find('{'):])
             _me = [m for m in _s.get('明细', []) if m.get('人物') in (outer.name,)]
+            if not _me:
+                # ★ 判据的明细里**没有这个人物** ⇒ 它对本人物一行也没核过。
+                review['staged_not_ingested'] = (
+                    '⚠ **未核，不是通过** —— `check_staged_but_not_ingested` 的明细里'
+                    '没有 `%s`（本人物可能压根没走过抓源台账）' % outer.name)
             if _me:
                 m0 = _me[0]
                 n_miss = m0.get('**没进工作区**', 0)
@@ -1652,7 +1671,12 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                        if n_pri else "")
                     + "　★ 清单：" + "、".join(str(x) for x in m0.get('清单', [])[:6]))
             else:
-                review['staged_not_ingested'] = '✓ 台账与工作区一致（或本人物没走过抓源台账）'
+                # ★★★ 2026-08-17：把「真的一致」与「明细里压根没有这个人物」拆开 ——
+                #   原文案是「✓ 台账与工作区一致（**或本人物没走过抓源台账**）」，
+                #   括号里那半正是「没核过」，却与「核过且一致」共用一个 ✓。
+                #   [[zero-hit-gates-must-prove-they-can-hit]]
+                review['staged_not_ingested'] = (
+                    '✓ 台账与工作区一致（该人物在判据明细里，**没进工作区 0 份**）')
         except (json.JSONDecodeError, ValueError, TypeError):
             review['staged_not_ingested'] = '**未核（不是通过）**：输出解析不了'
 
@@ -2134,9 +2158,20 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
                      '**有被 OCR 整份毁掉的文件被记作 P1**——'
                      '你正打算从一份读不出字的文件里取逐字引文；换干净扫本或降级')
     else:
+        # ★★★ 2026-08-17：**判据自己已经说了「未检查」，别在调用点把它翻成 ✓**。
+        #   `check_ocr_language_death` 对「没有词数 ≥500 的文件」印的原话是
+        #   「**本次未检查（不是通过）**」，而这里只找含「低于下限」的行，
+        #   找不到就一律 ✓ —— 空扫描面被读成通过。
+        #   同一个形状本文件里早有记录（`check_claim_coverage` 的 code 2：
+        #   「**防线设在检查器里、在调用点被抹掉了**」）。
+        #   [[zero-hit-gates-must-prove-they-can-hit]]｜[[a-refusal-to-check-prints-one-error]]
         n = next((l for l in out.splitlines() if '低于下限' in l), '')
-        review['ocr_language_death'] = (n.strip()[:150] if n
-                                        else '✓ 没有被 OCR 整份毁掉的语料')
+        _unchecked = next((l for l in out.splitlines()
+                           if '未检查' in l or '未核' in l), '')
+        review['ocr_language_death'] = (
+            n.strip()[:150] if n else
+            ('⚠ **未核，不是通过** —— ' + _unchecked.strip()[:130]) if _unchecked
+            else '✓ 没有被 OCR 整份毁掉的语料')
 
     res = target / 'evals/results.jsonl'
     if not res.exists():
@@ -2157,7 +2192,17 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
                            '**不要因此自行放宽阈值，这是人的决定**。'
                            + ('　' + '；'.join(hit) if hit else ''))
         else:
-            review['gate_reachability'] = '✓ 各绝对分门都在两席实测可达范围内'
+            # ★★★ 2026-08-17：**同一个形状的第二处** —— `check_gate_reachability`
+            #   对空 `results.jsonl` 印的原话是「没有可用的判分数据——**本次未检查
+            #   （不是通过）**」并 rc=0，而这里一律翻成 ✓。
+            #   ★ 我在同一次里修了两处一样的：ocr_language_death 与本处。
+            #     **判据自己说了未检查，调用点就不许说通过。**
+            #   [[zero-hit-gates-must-prove-they-can-hit]]｜[[one-requirement-two-consumers]]
+            _unchecked = next((l for l in out.splitlines()
+                               if '未检查' in l or '未核' in l), '')
+            review['gate_reachability'] = (
+                ('⚠ **未核，不是通过** —— ' + _unchecked.strip()[:130]) if _unchecked
+                else '✓ 各绝对分门都在两席实测可达范围内')
 
     # ── 只列不判：写进 warnings，不拦 ────────────────────────────────
     for script, argv, key in (
