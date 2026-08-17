@@ -619,7 +619,15 @@ def main() -> int:
         parser.error(f"team-index.json not found under {root}")
     if args.mode != "auto" and args.size is not None and not valid_mode_size(args.mode, args.size):
         parser.error(f"invalid persona expert count {args.size} for {args.mode}")
-    result = build_route(args.task, root, args.mode, args.size, args.strategy, args.telemetry)
+    # ★★★ 2026-08-17：`--size 16` 原来直接抛 12 行 traceback 给用户。
+    #   报错本身是对的（small_team 是 5–15），但它**没说合法区间、也没说换个
+    #   --mode 就行**（实测 `--mode deep_team --size 20` 跑得通）。
+    #   traceback 是给写代码的人看的，不是给用它的人看的。
+    try:
+        result = build_route(args.task, root, args.mode, args.size, args.strategy, args.telemetry)
+    except ValueError as exc:                                        # noqa: BLE001
+        parser.error(str(exc))
+        return 2
     if args.output:
         write_json(args.output, result)
         print(json.dumps({

@@ -240,7 +240,22 @@ def choose_mode(profile: dict[str, Any], requested: str = "auto", requested_size
 
     if requested_size is not None:
         if not valid_mode_size(mode, requested_size):
-            raise ValueError(f"requested size {requested_size} is invalid for inferred mode {mode}")
+            # ★★★ 2026-08-17：原来只说「invalid for inferred mode small_team」，
+            #   用户拿到的是一段 12 行的 Python traceback，**看不出合法区间是多少、
+            #   也看不出换个 --mode 就能要更多人**。实测 `--mode deep_team --size 20`
+            #   是跑得通的 —— 出路一直在，只是错误信息不说。
+            #   [[error-message-points-at-an-exit-that-isnt-there]] 的反面：
+            #   出路存在，而错误信息没指。
+            lo, hi = MODE_LIMITS.get(mode, (None, None))
+            alts = [f"{m}({a}–{b if b is not None else '∞'})"
+                    for m, (a, b) in MODE_LIMITS.items()
+                    if m != mode and a <= requested_size and (b is None or requested_size <= b)]
+            raise ValueError(
+                "requested size %s is invalid for inferred mode %s (valid: %s–%s). "
+                "%s" % (requested_size, mode, lo, hi if hi is not None else "∞",
+                        ("Pass --mode to override, e.g. --mode %s."
+                         % alts[0].split("(")[0]) if alts
+                        else "No mode accepts this size; the largest is swarm(25–∞)."))
         size = requested_size
         reasons.append("explicit size accepted inside inferred mode")
     return mode, size, reasons
