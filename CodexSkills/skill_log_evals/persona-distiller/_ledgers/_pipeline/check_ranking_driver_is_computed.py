@@ -90,6 +90,20 @@ def verdict(obs: dict):
     if "selected_with_zero_task_relevance" not in obs:
         bad.append("缺 `selected_with_zero_task_relevance` —— 倒退回了旧披露")
     facts["zero_relevance"] = obs.get("selected_with_zero_task_relevance")
+
+    # ★★★ 「这把尺子看得见几个人」——2026-08-17 实测英文题只有 30%。
+    #   用 **A + B == 全集** 对补集：reachable + blind 必须正好等于合格候选数，
+    #   否则「30%」这个数就没有分母。[[a-gates-scan-set-is-smaller-than-reality]]
+    reach, blind = obs.get("task_relevance_reachable"), obs.get("task_relevance_blind")
+    if reach is None or blind is None:
+        bad.append("缺 `task_relevance_reachable`/`task_relevance_blind` —— "
+                   "「这把尺子对多少人恒为 0」这件事又变回不可见")
+    else:
+        facts["reachable"], facts["blind"] = reach, blind
+        elig = obs.get("eligible_candidates")
+        if elig is not None and reach + blind != elig:
+            bad.append("reachable(%s) + blind(%s) = %s ≠ eligible_candidates(%s)"
+                       % (reach, blind, reach + blind, elig))
     return bad, facts
 
 
@@ -104,6 +118,7 @@ def self_test() -> int:
 
     good = {"ranking_driver": "task_similarity",
             "selected_with_zero_task_relevance": [],
+            "eligible_candidates": 83, "task_relevance_reachable": 25, "task_relevance_blind": 58,
             "ranking_components": [
                 {"component": "task_similarity", "weight": .24, "sigma": .09, "weight_x_sigma": .0216, "share": .6},
                 {"component": "domain_match", "weight": .15, "sigma": .06, "weight_x_sigma": .009, "share": .4},
@@ -124,6 +139,15 @@ def self_test() -> int:
         "它只能被印出来，不能当红线", verdict(b)[0] == [])
     chk("★★ `ranking_components` 缺席 ⇒ 报「无法判定」，不是通过",
         verdict({"ranking_driver": "x"})[0] != [])
+    b = json.loads(json.dumps(good)); b.pop("task_relevance_blind")
+    chk("★★★ 缺 `task_relevance_blind` → **报**（「尺子对多少人恒为 0」不许再变回不可见）",
+        any("恒为 0" in x for x in verdict(b)[0]))
+    b = json.loads(json.dumps(good)); b["task_relevance_blind"] = 57
+    chk("★★★ **A + B ≠ 全集 → 报**（25+57≠83；「30%」没有分母就不成立）",
+        any("≠ eligible_candidates" in x for x in verdict(b)[0]))
+    b = json.loads(json.dumps(good)); b["task_relevance_reachable"] = 83; b["task_relevance_blind"] = 0
+    chk("★★ 反对照：**全都看得见（blind=0）本身不是问题**，只要加起来对得上",
+        verdict(b)[0] == [])
     print("\n自测 %d 项，不符 %d 项" % (tot[0], len(bad)))
     return 1 if bad else 0
 
@@ -152,6 +176,12 @@ def main() -> int:
           % (obs.get("eligible_candidates"), obs.get("domain_signal_candidates")))
     print("ranking_driver = **%s**（weight×σ 最大的是 %s）｜shares 之和 %s"
           % (facts.get("driver"), facts.get("top"), facts.get("share_sum")))
+    rc_, bl = facts.get("reachable"), facts.get("blind")
+    if rc_ is not None:
+        print("★★★ 这把尺子**看得见的人**：**%d / %d（%.0f%%）**｜"
+              "四项相关信号恒为 0 的 **%d 人**" % (rc_, rc_ + bl, 100.0 * rc_ / max(1, rc_ + bl), bl))
+        print("    （成因是卡片写法：自然中文 67 / 自然英文 26 / slug 式 9。"
+              "英文题只有英文卡命中，中文题只有中文卡命中，slug 两边都不命中。）")
     z = facts.get("zero_relevance")
     print("★ 四项题目相关信号**全为 0 却入选**的：**%s 人** %s"
           % ("未量" if z is None else len(z), z if z else ""))

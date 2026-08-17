@@ -549,6 +549,26 @@ def build_route(
                 if all(float(((r.get("score_breakdown") or {}).get("values") or {}).get(k, 0.0)) == 0.0
                        for k in TASK_RELEVANCE_COMPONENTS)
             ],
+            # ★★★ 2026-08-17 实测：**这四项信号看得见的人，只是名册的一部分。**
+            #   registry 里的卡片有三种写法：自然中文 67 人 / 自然英文 26 人 /
+            #   slug 式（`research-problem-solving` 这种）9 人。四项相关信号走的是
+            #   词面重合，于是：
+            #       一道英文题 → 83 个合格者里只有 **25 人（30%）** 拿得到非零相关分；
+            #       同一件事的中文题 → 59 个合格者里 **56 人（95%）**。
+            #   剩下的人**无论多合适都恒为 0**，只能靠常数地板与 currentness 排名次。
+            #   这不是「他们不合适」，是**这把尺子看不见他们**。必须印出来。
+            #   [[regex-must-clear-the-corpus-language]]｜[[zero-hit-gates-must-prove-they-can-hit]]
+            "task_relevance_reachable": sum(
+                1 for r in ranked
+                if any(float(((r.get("score_breakdown") or {}).get("values") or {}).get(k, 0.0)) > 0.0
+                       for k in TASK_RELEVANCE_COMPONENTS)),
+            "task_relevance_blind": sum(
+                1 for r in ranked
+                if all(float(((r.get("score_breakdown") or {}).get("values") or {}).get(k, 0.0)) == 0.0
+                       for k in TASK_RELEVANCE_COMPONENTS)),
+            "task_relevance_note": (
+                "四项题目相关信号走词面重合；卡片写法（中文/英文/slug）决定谁看得见。"
+                "blind 的那些人不是不合适，是这把尺子对他们恒为 0。"),
             "target_gates": {
                 "overall_delta": 95,
                 "ux": 95,
