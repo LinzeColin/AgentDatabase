@@ -68,20 +68,41 @@ def is_scored(wip: pathlib.Path) -> bool:
 
 
 def workspaces(corpora: pathlib.Path, include_frozen: bool):
-    """→ [(wip 名, 工作区目录, 是否冻结)]"""
+    """→ [(wip 名, 工作区目录, 是否冻结)]
+
+    ★★★ 2026-08-17 修：**第一版自己写了 `wip-*/workspaces/*` 这个 glob，
+    而仓里早有 `workspace_roots.iter_workspaces` 专门干这件事。**
+    实测差别（54 vs 53，且不是差一个那么简单）：
+
+      · **3 个我完全没看见** —— 它们不叫 `workspaces/`：
+          wip-godin/ws-godin/seth-godin
+          wip-jenner-104/ws-jenner/ws-jenner
+          wip-steinhardt-98/ws-steinhardt/michael-steinhardt
+      · **8 个是「名字重复一层」**（`wip-X/workspaces/Y/Y`），我指的是**外层**：
+          barton／blackstone／fleming／holmes／nightingale／osler／sorby／virchow
+
+    `iter_workspaces` 的判据是「**哪一级有 `evidence/source-ledger.jsonl`**」——
+    按**标志文件**认，不按目录名认。[[tool-existed-and-i-did-it-by-hand]]｜
+    [[a-gates-scan-set-is-smaller-than-reality]]
+    """
+    sys.path.insert(0, str(HERE))
+    from workspace_roots import iter_workspaces  # noqa: E402
+
     out = []
-    for wip in sorted(corpora.glob("wip-*")):
+    seen_wip = set()
+    for ws in iter_workspaces(corpora):
+        # wip 名 = 相对 corpora 的第一段
+        try:
+            wip_name = ws.resolve().relative_to(corpora.resolve()).parts[0]
+        except ValueError:
+            wip_name = ws.name
+        wip = corpora / wip_name
         frozen = is_scored(wip)
+        seen_wip.add(wip_name)
         if frozen and not include_frozen:
-            out.append((wip.name, None, True))
+            out.append((wip_name, None, True))
             continue
-        d = wip / "workspaces"
-        if not d.is_dir():
-            continue
-        kids = sorted(x for x in d.glob("*") if x.is_dir())
-        if not kids:
-            continue
-        out.append((wip.name, kids[0], frozen))
+        out.append((wip_name, ws, frozen))
     return out
 
 
@@ -234,7 +255,14 @@ def self_test() -> int:
         corp = base / "_corpora"
         for nm in ("wip-refuse-1", "wip-dup-2", "wip-plain-3", "wip-frozen-4"):
             ws = corp / nm / "workspaces" / "who"
-            ws.mkdir(parents=True)
+            (ws / "evidence").mkdir(parents=True)
+            # ★ 夹具必须带 `evidence/source-ledger.jsonl` —— `iter_workspaces`
+            #   正是**按这个标志文件**认工作区的（不按目录名）。
+            #   第一版夹具没有它，于是换用 iter_workspaces 之后**一个都发现不了**，
+            #   自测当场从「全过」变成「扫到 0 个」。
+            #   **夹具比实况薄，就测不出实况。**[[fixtures-cleaner-than-the-real-thing]]
+            (ws / "evidence/source-ledger.jsonl").write_text(
+                '{"source_id":"src-000000000000","split":"train"}\n', encoding="utf-8")
             if nm == "wip-frozen-4":
                 (corp / nm / "results.jsonl").write_text('{"x":1}\n', encoding="utf-8")
 
