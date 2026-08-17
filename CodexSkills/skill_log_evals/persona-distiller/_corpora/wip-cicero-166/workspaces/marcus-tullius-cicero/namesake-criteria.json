@@ -1,0 +1,26 @@
+{
+ "subject": "Marcus Tullius Cicero",
+ "surname": "Cicero",
+ "★ 这份文件是怎么来的": "2026-08-17 **逐条搬自** `namesake_gate.BLOCKED.json`（该门 status=blocked、candidate_count=5、generated_at=2026-08-10T10:49:11Z）。**名字与出处都不是我判的**：那一轮同名门已经用 wikidata／VIAF／LCCN 把这些人分开并落了盘，而 `check_namesake_separability` 读的是 `namesake-criteria.json` 的 `excluded_names` —— **证据在这个文件里，判据读的是另一个文件，中间没人接线**。本次只做接线。",
+ "★ 方向": "写进 `excluded_names` ⇒ 署这些名字的源被判「他人」⇒ **记到目标名下的源只会变少**，落在收紧侧。",
+ "excluded_names": [
+  "Marcus Tullius Tiro",
+  "Marcus Tullius Cicero Minor",
+  "Quintus Tullius Cicero",
+  "Quintus Tullius Cicero (the younger)"
+ ],
+ "★ 逐条出处": {
+  "Marcus Tullius Tiro": [
+   "探测报告 166-cicero-可得性探测.md §④"
+  ],
+  "Marcus Tullius Cicero Minor": [
+   "探测报告 166-cicero-可得性探测.md §④"
+  ],
+  "Quintus Tullius Cicero": [
+   "探测报告 166-cicero-可得性探测.md §④"
+  ],
+  "Quintus Tullius Cicero (the younger)": [
+   "探测报告 166-cicero-可得性探测.md §④"
+  ]
+ }
+}
