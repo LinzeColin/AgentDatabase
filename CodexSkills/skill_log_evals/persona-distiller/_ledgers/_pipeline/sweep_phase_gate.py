@@ -85,15 +85,30 @@ def workspaces(corpora: pathlib.Path, include_frozen: bool):
     return out
 
 
-def sweep(phase: str, corpora: pathlib.Path, include_frozen: bool, qc: pathlib.Path):
+def sweep(phase: str, corpora: pathlib.Path, include_frozen: bool, qc: pathlib.Path,
+          progress: bool = False):
+    """★ `progress=True` 时**逐个往 stderr 打一行**。
+
+    第一版跑完才一次性打印 —— `--phase release --include-frozen`
+    在本机实测**超过 12 分钟屏幕上一个字都没有**，看着像挂住了
+    （本仓刚记过「macOS 没有 timeout，rc=127 长得像挂住」——
+    我自己又造了一个「长得像挂住」的东西）。
+    进度走 **stderr**，表格走 stdout，重定向到文件时互不污染。
+    """
     frozen_skipped, refused, checked = [], [], []
     err_ws = collections.Counter(); err_occ = collections.Counter()
     warn_ws = collections.Counter(); warn_occ = collections.Counter()
 
-    for name, ws, frozen in workspaces(corpora, include_frozen):
+    todo = workspaces(corpora, include_frozen)
+    live = [x for x in todo if x[1] is not None]
+    for idx, (name, ws, frozen) in enumerate(todo, 1):
         if ws is None:
             frozen_skipped.append(name)
             continue
+        if progress:
+            print("  [%d/%d] %s …" % (len(checked) + len(refused) + 1, len(live),
+                                      name.replace("wip-", "")),
+                  file=sys.stderr, flush=True)
         p = subprocess.run([sys.executable, str(qc), str(ws), "--phase", phase],
                            capture_output=True, text=True)
         try:
@@ -132,6 +147,8 @@ def main() -> int:
     ap.add_argument("--quality-check", type=pathlib.Path, default=QC)
     ap.add_argument("--include-frozen", action="store_true",
                     help="连已判分的一起跑（默认按 ㊵ 跳过）")
+    ap.add_argument("--quiet", action="store_true",
+                    help="不往 stderr 打逐个进度（默认打 —— 全量跑一次要十几分钟）")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
     if a.self_test:
@@ -143,11 +160,21 @@ def main() -> int:
         print("用法错误：找不到 %s —— **未核，不是通过**" % a.corpora, file=sys.stderr)
         return 3
 
-    before = subprocess.run(["git", "status", "--porcelain"], cwd=str(ROOT),
-                            capture_output=True, text=True).stdout
+    # ★★ 只读自查的**射程要圈到它可能写到的地方**，不是整个仓。
+    #   第一版比对的是全仓 `git status --porcelain` —— 于是**只要有人在它跑的
+    #   十几分钟里提交一次（比如我自己在另一个窗口），它就会误报
+    #   「跑这一趟改动了工作树」rc=2**。负对照不能把别人的改动算到自己头上。
+    #   [[negative-control-must-not-share-the-assumption]]
+    #   圈到语料目录：那是本工具唯一可能被写到的地方（`quality_check` 不带
+    #   `--write-report` 时不写盘，但**「不写盘」正是这里要证明的事**）。
+    def _snapshot():
+        return subprocess.run(["git", "status", "--porcelain", "--", str(a.corpora)],
+                              cwd=str(ROOT), capture_output=True, text=True).stdout
+
+    before = _snapshot()
 
     frozen, refused, checked, errs, warns = sweep(
-        a.phase, a.corpora, a.include_frozen, a.quality_check)
+        a.phase, a.corpora, a.include_frozen, a.quality_check, progress=not a.quiet)
 
     denom = len(checked)
     print("门：`quality_check.py --phase %s`" % a.phase)
@@ -161,14 +188,15 @@ def main() -> int:
     _table("硬错 errors", *errs, denom)
     _table("警告 warnings", *warns, denom)
 
-    after = subprocess.run(["git", "status", "--porcelain"], cwd=str(ROOT),
-                           capture_output=True, text=True).stdout
+    after = _snapshot()
     if after != before:
-        print("\n✗✗ **跑这一趟改动了工作树** —— 统计器必须只读。差异：", file=sys.stderr)
+        print("\n✗✗ **跑这一趟改动了语料目录** —— 统计器必须只读。差异：", file=sys.stderr)
         for ln in set(after.splitlines()) - set(before.splitlines()):
             print("    %s" % ln, file=sys.stderr)
         return 2
-    print("\n✓ 只读自查：`git status --porcelain` 跑前跑后一致（**0 处写盘**）")
+    print("\n✓ 只读自查：`git status --porcelain -- %s` 跑前跑后一致（**0 处写盘**）\n"
+          "  ★ 射程：只圈语料目录 —— 仓里别处的改动（比如同时在提交）不算它的账。"
+          % a.corpora)
     return 0
 
 
@@ -229,6 +257,19 @@ def self_test() -> int:
                          encoding="utf-8")
         _, refused2, checked2, _, _ = sweep("research", corp, False, fake2)
         chk("反对照：无 refused 位时拒检者会落进分母", (len(refused2), len(checked2)), (0, 3))
+
+        # ★ 进度开关：正反各一。全量跑一次十几分钟，**屏幕上没有字就等于挂住**。
+        import contextlib as _c, io as _io
+        _e = _io.StringIO()
+        with _c.redirect_stderr(_e):
+            sweep("research", corp, False, fake, progress=True)
+        on = len([l for l in _e.getvalue().splitlines() if l.strip()])
+        _e2 = _io.StringIO()
+        with _c.redirect_stderr(_e2):
+            sweep("research", corp, False, fake, progress=False)
+        off = len([l for l in _e2.getvalue().splitlines() if l.strip()])
+        chk("progress=True 时逐个打进度（3 个活工作区 → 3 行）", on, 3)
+        chk("progress=False 时 stderr 一行都没有", off, 0)
 
     print("自测：%s" % ("全过" if ok else "**有失败**"))
     return 0 if ok else 1
