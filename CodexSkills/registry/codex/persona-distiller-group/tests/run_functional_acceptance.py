@@ -42,6 +42,24 @@ def main() -> int:
     #   一件判据可以同时「被调用」和「从没对现实跑过」。
     #   ★ **只披露，不改退出码** —— 「2 档不可达」是已知状态、且改门槛需要本件
     #     给不了的证据（多人是否真的更好）。不许因为过不了门而卡住流程。
+    # ★★ 版本绑定是**硬门**（今天两次抓到漏改 manifest.json.version）——
+    #   它便宜、确定，且版本漂移是真错，不该只当披露。
+    vb = test_dir.parent / "scripts" / "check_group_version_binding.py"
+    if vb.is_file():
+        vr = subprocess.run([sys.executable, str(vb)], text=True, capture_output=True)
+        result["version_binding"] = {"returncode": vr.returncode,
+                                     "verdict": "bound" if vr.returncode == 0 else "DRIFT"}
+        if vr.returncode != 0:
+            result["status"] = "FAIL"
+            print("── 版本绑定 **红** ──\n" + (vr.stdout or "")[-600:])
+    # ★ 名册独立性：它自己声明「恒为 0，只报不判」⇒ 披露，不参与 status
+    ri = test_dir.parent / "scripts" / "check_roster_independence.py"
+    if ri.is_file():
+        rr2 = subprocess.run([sys.executable, str(ri)], text=True, capture_output=True)
+        tail2 = [ln for ln in (rr2.stdout or "").splitlines() if ln.strip()]
+        result["roster_independence"] = {"returncode": rr2.returncode,
+                                         "summary": tail2[-3:] if tail2 else []}
+
     reach_script = test_dir.parent / "scripts" / "check_mode_ladder_reachable.py"
     if reach_script.is_file():
         rr = subprocess.run([sys.executable, str(reach_script)], text=True, capture_output=True)
@@ -68,6 +86,14 @@ def main() -> int:
         print(completed.stdout)
     if completed.stderr:
         print(completed.stderr, file=sys.stderr)
+    # ★★★ 2026-08-18：退出码必须**与 `status` 一致**。
+    #   原来无条件 `return completed.returncode`（只反映 unittest），
+    #   于是我新加的版本绑定硬门把 `status` 置成 FAIL、也打印了红，
+    #   而 **rc 仍是 0** —— 反例实验（故意写坏 VERSION）当场抓到：
+    #   `{"status": "FAIL", "returncode": 0}`。看 rc 的调用方会读成绿。
+    #   [[verdict-computed-before-the-corrections]]｜[[pipe-to-tail-hides-the-exit-code]]
+    if result["status"] == "FAIL" and completed.returncode == 0:
+        return 1
     return completed.returncode
 
 

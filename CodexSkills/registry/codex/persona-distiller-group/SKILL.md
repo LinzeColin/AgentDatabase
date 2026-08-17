@@ -137,12 +137,31 @@ python3 scripts/record_team_outcome.py --route-plan route-plan.json --delta-scor
 #   表外的名字会记进遥测的 `unrecognised_task_slices`；`--help` 里也印着整张表。
 ```
 
+★★★ **团队给出答案之后、记录结果之前，跑这一件**（2026-08-18 补：
+它此前**没有任何流程调用方**，只有自测被自动收编）：
+
+```bash
+python3 scripts/check_team_attribution.py team-answer.json --members-file route-plan.json
+```
+
+**合议票数门**：团队宣称的票数不得超过它实际点名的人数。
+它必须在**运行时**跑 —— 团队答案不是仓里的产物，仓里永远没有它可吃的输入。
+
 不得把“已生成合同”说成“任务已完成”。只有真实结果可以更新 C 层校准。
 
 ## 自检
 
     python3 scripts/run_tests.py            # 默认就是门：有红即 rc=1
     python3 scripts/run_tests.py --report   # 只报告
+
+★ `run_tests.py` 只跑 `tests/`，**不碰 `scripts/` 下的判据**。发布前另跑这三件：
+
+    python3 scripts/check_group_version_binding.py     # 版本三处绑定（硬门）
+    python3 scripts/check_roster_independence.py       # 名册独立性（只报不判）
+    python3 scripts/check_mode_ladder_reachable.py     # 四档模式够不够得到（披露）
+
+  这三件已接进 `tests/run_functional_acceptance.py`；单独列在此处，
+  是因为**「被自测收编」不等于「有人拿真数据跑过」**。
 
 跑 `tests/` 下**全部** `test_*.py` **＋** `run_*.py`
 （`run_functional_acceptance.py` 不叫 `test_*`，只按一种命名会漏掉它）。

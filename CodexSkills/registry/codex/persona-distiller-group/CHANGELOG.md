@@ -1,5 +1,46 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.30
+
+**本版货**：把本 skill 自己的三件判据接上**流程调用方**，并修好一个当场抓到的假绿。
+
+### 起因：兄弟链上同一个陷阱
+
+`_pipeline` 那边刚清完「判据只有自测层调用方」的 11 件孤儿，回头量本 skill 的 4 件：
+
+    check_mode_ladder_reachable   ← run_functional_acceptance.py（今天刚接，真跑）
+    check_group_version_binding   ← **只有** test_all_selftests_have_a_runner（自测层）
+    check_roster_independence     ← **只有** 自测层
+    check_team_attribution        ← **只有** 自测层
+
+而 `SKILL.md`（用户真正照着做的「六步调用」）对这 4 件的提及是 **0 次**。
+
+### 各按性质接
+
+| 判据 | 性质 | 接到哪 |
+|---|---|---|
+| `check_group_version_binding` | **硬门**（今天两次抓到漏改 `manifest.json.version`） | 功能验收，**参与 status** |
+| `check_roster_independence` | 它自己声明「恒为 0，只报不判」 | 功能验收，**披露** |
+| `check_team_attribution` | **运行时**判据（要团队答案，仓里永远没有） | `SKILL.md` 六步调用，团队给出答案之后 |
+
+`SKILL.md` 的「自检」一节也补了这三条命令，并写明**为什么单独列**：
+`run_tests.py` 只跑 `tests/`，**不碰 `scripts/` 下的判据**；
+**「被自测收编」不等于「有人拿真数据跑过」**。
+
+### ★★★ 反例实验当场抓到一个假绿
+
+故意把 `VERSION` 写成 `v0.0.0.99` 再跑验收：
+
+    ── 版本绑定 **红** ──
+    ✗ 版本绑定 2 条不一致
+    {"status": "FAIL", "returncode": **0**}     ← ★ 印了红，**退出码还是 0**
+
+`run_functional_acceptance` 无条件 `return completed.returncode`（只反映 unittest），
+我新加的硬门把 `status` 置成 FAIL 却改不动 rc —— **看 rc 的调用方会读成绿**。
+已改成「`status == FAIL` 且 rc==0 时返回 1」。
+
+实测：写坏 VERSION → rc=**1**；复原 → rc=**0**；`status` 与 rc 现在一致。
+
 ## v0.0.0.29
 
 **本版货**：`check_mode_ladder_reachable.py` 加 `--tasks <文件>` 插座 + 最小样本量守卫。
