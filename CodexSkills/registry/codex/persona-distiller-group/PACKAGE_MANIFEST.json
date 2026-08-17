@@ -19,8 +19,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "5c33e74d72ccbeccb39b37049181b5358485b37b3d8392493aabf0b8b6b1ab9a",
-      "size_bytes": 41997
+      "sha256": "f898eac27f7982151354409853f5e40c9febd0a4932eb654c7ab3bcb0f8382d6",
+      "size_bytes": 45139
     },
     {
       "path": "README.md",
@@ -29,12 +29,12 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "da15c1b23afd40dd35fc4e2c9c4f8bfb15671e190c8318cd7eaf23876c70d639",
-      "size_bytes": 9349
+      "sha256": "1d323ff207d455c940a405aa05affbd59f2238ad6cd2cd728dd901d42494c89a",
+      "size_bytes": 10187
     },
     {
       "path": "VERSION",
-      "sha256": "402f29138a9f4f0959845fefb5ed92bf98e71f747145c270ada5517db5ba44a6",
+      "sha256": "384cb4c8c96cc09d701265a73bed4135129c70ec27990b81bd089fa3ec6d1877",
       "size_bytes": 10
     },
     {
@@ -129,7 +129,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "3b5afc5f3b8ed76ab51cee525b7930bdb7be8fac25f818d4f2d52f728ca475f7",
+      "sha256": "71c14080eea92d585ab5674845df804bce8dc4a7ac44e6c3de63352ee7b9cd88",
       "size_bytes": 1304
     },
     {
@@ -254,8 +254,8 @@
     },
     {
       "path": "scripts/compile_task_graph.py",
-      "sha256": "572e6b777a773d62bce51d9eee72ee3b88d10d555e36626a046cf07fb08115bb",
-      "size_bytes": 17492
+      "sha256": "23c936a8d83233a35f5726221d5d513f93f77dea4f72b48d8ef0e82952e6e45f",
+      "size_bytes": 21050
     },
     {
       "path": "scripts/install.py",
@@ -269,8 +269,8 @@
     },
     {
       "path": "scripts/record_team_outcome.py",
-      "sha256": "c0df7114e29732dd768e062d698d23d779de6407dba19fe130d14709acb65075",
-      "size_bytes": 7183
+      "sha256": "2438c35f5eae7b8a45c30dce8ad593d8b7cba2f602bc79dac83816cd0294117f",
+      "size_bytes": 9288
     },
     {
       "path": "scripts/register_delivery.py",
@@ -289,8 +289,8 @@
     },
     {
       "path": "scripts/route_team_moe.py",
-      "sha256": "53697ea859d103fa163c224911e2df93ba213ca6c388d21c0af0582adbd41f7f",
-      "size_bytes": 26070
+      "sha256": "29bb4ccfb4479bc86ea2930d73edd30bfc706a8759b5f0cfcc9123e611da9ac2",
+      "size_bytes": 31249
     },
     {
       "path": "scripts/run_team_pipeline.py",
@@ -304,8 +304,8 @@
     },
     {
       "path": "scripts/score_team_delta.py",
-      "sha256": "9809cf8fb7a162223107f651c9cb956ff6074306ae2d926225aae0ee0728b3d3",
-      "size_bytes": 6506
+      "sha256": "9bf0f800b7f9b79a7556ee1d1f008ece695dab02ccacb71c29cd39d730eb499c",
+      "size_bytes": 9042
     },
     {
       "path": "scripts/team_runtime_common.py",
@@ -324,7 +324,7 @@
     },
     {
       "path": "team-index.json",
-      "sha256": "f2b247f14b0904657c5faee03d35998d1adf0e84627086189aa4faeaef2a446f",
+      "sha256": "286252622aa362f37863c4c6525c2a4425e1a92352201c492097a94c9252d251",
       "size_bytes": 400812
     },
     {
@@ -348,6 +348,11 @@
       "size_bytes": 4118
     },
     {
+      "path": "tests/test_generic_verbs_do_not_claim_a_domain.py",
+      "sha256": "301ce9fe1d31c0bfcde7e73af334331bbce426e1f71b5596041281e78d2c682b",
+      "size_bytes": 6812
+    },
+    {
       "path": "tests/test_market_leader_candidate.py",
       "sha256": "5d993da25462053df41552b23f6f06f55753d760cf04accba965dfb5fd2fcff1",
       "size_bytes": 11476
@@ -359,13 +364,13 @@
     },
     {
       "path": "tests/test_routing_actually_discriminates.py",
-      "sha256": "d535fcf34df1131b22a44988c994b22d410471168d01ab963c9fa656b6c97923",
-      "size_bytes": 4375
+      "sha256": "e06c5e275c6ac36cd683d5f8ac8d59998da0e38e7d36fb480d9ab3c11716de6b",
+      "size_bytes": 6504
     },
     {
       "path": "tests/test_scripts_refuse_wrong_documents.py",
-      "sha256": "30429f35f18c7d6a6347445dee0c8ec83fc15e2ba33e32ffc2626b258697ea79",
-      "size_bytes": 5009
+      "sha256": "e481628042815292529a2a03b260ba72f08f1262227e17f82b45e048a3f86316",
+      "size_bytes": 9376
     },
     {
       "path": "tests/test_selfoptimization_loop_runs.py",
@@ -376,6 +381,11 @@
       "path": "tests/test_telemetry_roundtrip.py",
       "sha256": "269a5858c1678277ebf19af0a218db1d56e92f62a73d124a600174490db778ee",
       "size_bytes": 6681
+    },
+    {
+      "path": "tests/test_unrecognised_slice_is_disclosed.py",
+      "sha256": "c02e4c648bdc0d95d1821e41b348ea94356e93b8709c30c437c11f89d175ee57",
+      "size_bytes": 5442
     },
     {
       "path": "农林牧渔师/_category.json",
