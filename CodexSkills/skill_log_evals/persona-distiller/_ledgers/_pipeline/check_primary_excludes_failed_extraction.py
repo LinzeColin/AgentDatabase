@@ -69,11 +69,33 @@ def ledger_status(ledger_text: str) -> dict:
     return out
 
 
-def offenders(primary: dict, status: dict):
-    """→ (一手总数, join 上的, [台账标 failed 却算一手的条目])。纯函数。"""
+def fetch_status(manifest: dict) -> dict:
+    """→ {identifier: status}，取自 `raw/_fetch-manifest.json` 的 `记录`。纯函数。
+
+    ★★★ **这才是正确的对照物。** 我第一版拿 `source-ledger.jsonl` 对，
+      两边键不同（`source_id` vs `identifier`），只能靠 url 里的 IA 标识搭桥，
+      命中率 994/998，还把 `wip-churchill-191`(89%) 与 `wip-plato-186`(无台账) 判成未核。
+      换成抓取清单：**1051/1051，19 个工作区全中**，包括没有台账的 Plato。
+      ⇒ 对「这份材料到底拿到没有」，权威记录是**抓取清单**，不是出处台账。
+    """
+    return {r.get("identifier"): r.get("status")
+            for r in (manifest.get("记录") or []) if r.get("identifier")}
+
+
+def offenders(primary: dict, status: dict, bad_values=None):
+    """→ (一手总数, join 上的, [算作一手但没真拿到的条目])。纯函数。
+
+    `bad_values` 为 None ⇒ 用抓取清单口径：**status 不是「已取回」就算**
+    （实测出现过 `剔除` / `无文本层` / `失败` 三种；穷举「坏值」会漏掉下一种新值，
+      所以判的是「不等于唯一那个好值」）。[[checkers-assume-a-shape-the-product-outgrows]]
+    传入集合 ⇒ 用台账口径（`{"failed"}`）。
+    """
     p1 = [r for r in (primary.get("明细") or []) if r.get("档") == "一手"]
     joined = [r for r in p1 if r.get("identifier") in status]
-    bad = [r for r in joined if status.get(r.get("identifier")) == "failed"]
+    if bad_values is None:
+        bad = [r for r in joined if status.get(r.get("identifier")) != "已取回"]
+    else:
+        bad = [r for r in joined if status.get(r.get("identifier")) in bad_values]
     return len(p1), len(joined), bad
 
 
@@ -101,16 +123,35 @@ def self_test() -> int:
         {"identifier": "writingsofthomas01jeff", "档": "一手", "words": 119065},
         {"identifier": "somebodyelse00xxxx", "档": "二手", "words": 5000},
     ]}
-    tot, jn, off = offenders(P, st)
+    tot, jn, off = offenders(P, st, {"failed"})
     chk("★★★ 正例：台账标 failed 而算一手 ⇒ 报出来", len(off) == 1)
     chk("★★ 负例：抽取成功的一手 ⇒ 不报", all(o["identifier"] != "writingsofthomas01jeff" for o in off))
     chk("★★★ 负例：**二手**不判（它不进一手占比）", tot == 2 and jn == 2)
     chk("★ join 命中率算得出（本例 2/2）", jn == tot)
     # ★★ 坏 join 的反例：identifier 与台账完全对不上 ⇒ 命中率 0，**不许报「干净」**
-    tot2, jn2, off2 = offenders({"明细": [{"identifier": "src-6a3cf5192354", "档": "一手"}]}, st)
+    tot2, jn2, off2 = offenders({"明细": [{"identifier": "src-6a3cf5192354", "档": "一手"}]}, st, {"failed"})
     chk("★★★ **坏 join 的反例**：键对不上 ⇒ join 命中 0（调用方据此判未核，不是通过）",
         tot2 == 1 and jn2 == 0 and off2 == [])
-    chk("★ 空输入不炸", offenders({}, {}) == (0, 0, []) and ledger_status("") == {})
+    chk("★ 空输入不炸", offenders({}, {}, {"failed"}) == (0, 0, []) and ledger_status("") == {})
+
+    # ── 抓取清单口径（本件的主口径）────────────────────────────────
+    # ★ 三个 status 值**逐字取自**真清单：wip-churchill-191 的 `记录`
+    FM = {"记录": [
+        {"identifier": "1914frenuoft", "status": "已取回"},
+        {"identifier": "theriverwar04943gut", "status": "剔除"},
+        {"identifier": "synapseml_gutenberg_the_river_war", "status": "无文本层"},
+    ]}
+    fs = fetch_status(FM)
+    P2 = {"明细": [{"identifier": i, "档": "一手"} for i in
+                   ("1914frenuoft", "theriverwar04943gut", "synapseml_gutenberg_the_river_war")]}
+    t3, j3, o3 = offenders(P2, fs)
+    chk("★★★ 正例：`剔除` 与 `无文本层` 都算「没真拿到」⇒ 报 2 条", len(o3) == 2 and j3 == 3)
+    chk("★★ 负例：`已取回` 不报", all(x["identifier"] != "1914frenuoft" for x in o3))
+    chk("★★★ **判「不等于已取回」而不是穷举坏值** —— 出现没见过的新 status 也要报",
+        len(offenders({"明细": [{"identifier": "x", "档": "一手"}]},
+                      {"x": "某种以后才有的状态"})[2]) == 1)
+    chk("★ `fetch_status` 跳过没有 identifier 的记录",
+        fetch_status({"记录": [{"status": "已取回"}]}) == {} and fetch_status({}) == {})
     chk("★ 台账里的坏行跳过、不中断", len(ledger_status('{"bad json\n' + LED)) == 2)
     chk("★★ `details/` 形式的 url 也认（不是只认 download/）",
         "abc123" in ledger_status('{"url": "https://archive.org/details/abc123"}\n'))
@@ -137,47 +178,64 @@ def main() -> int:
         return 4
     print("`_primary.json` **%d** 份\n" % len(files))
 
-    print("%-24s %6s %8s %7s %8s" % ("工作区", "一手", "join 上", "命中率", "★ 违规"))
-    tot = jn_tot = off_tot = 0
+    print("口径①（主）：`raw/_fetch-manifest.json` 的 `记录[].status` —— "
+          "**不等于「已取回」就是没真拿到**")
+    print("口径②（附）：`evidence/source-ledger.jsonl` 的 `extraction_status == failed`\n")
+    print("%-22s %6s %7s %7s %6s %7s %12s" % ("工作区", "一手", "①join", "①违规", "②join", "②违规", "★缺的词数"))
+    tot = j1 = j2 = o1 = o2 = 0
+    words = 0
     unchecked, rows = [], []
     for f in files:
         ws = f.parent.parent
         name = next((p for p in ws.parts if p.startswith("wip-")), ws.name)
+        prim = json.loads(f.read_text(encoding="utf-8"))
+        # 口径①
+        fm = ws / "raw" / "_fetch-manifest.json"
+        if fm.is_file():
+            fs = fetch_status(json.loads(fm.read_text(encoding="utf-8")))
+            t, ja, offa = offenders(prim, fs)
+        else:
+            t, ja, offa = len([r for r in (prim.get("明细") or []) if r.get("档") == "一手"]), None, []
+            unchecked.append((name, "没有 `raw/_fetch-manifest.json` ⇒ 口径① **未核**"))
+        # 口径②
         led = ws / "evidence" / "source-ledger.jsonl"
-        if not led.is_file():
-            unchecked.append((name, "没有 `evidence/source-ledger.jsonl`（多半停在建台账之前）"))
-            print("  %-22s %6s %8s %7s %8s  ← **未核**" % (name, "—", "—", "—", "—"))
-            continue
-        st = ledger_status(led.read_text(encoding="utf-8", errors="replace"))
-        t, j, off = offenders(json.loads(f.read_text(encoding="utf-8")), st)
-        rate = (j / t) if t else 0.0
-        tot += t; jn_tot += j; off_tot += len(off)
-        if t and rate < a.min_join:
-            unchecked.append((name, "join 命中率只有 %.0f%%（阈值 %.0f%%）—— 键对不上时"
-                                    "「0 违规」是坏 join 的假干净" % (100 * rate, 100 * a.min_join)))
-            print("  %-22s %6d %8d %6.0f%% %8s  ← **未核**" % (name, t, j, 100 * rate, "—"))
-            continue
-        print("  %-22s %6d %8d %6.0f%% %8d%s"
-              % (name, t, j, 100 * rate, len(off), "  ← ★" if off else ""))
-        for o in off:
-            rows.append((name, o.get("identifier"), (o.get("title") or "")[:44], o.get("words")))
+        if led.is_file():
+            ls = ledger_status(led.read_text(encoding="utf-8", errors="replace"))
+            _t, jb, offb = offenders(prim, ls, {"failed"})
+        else:
+            jb, offb = None, []
+            unchecked.append((name, "没有 `evidence/source-ledger.jsonl` ⇒ 口径② **未核**"))
+        for tag, off in (("①", offa), ("②", offb)):
+            for o in off:
+                w = o.get("words") or 0
+                rows.append((tag, name, o.get("identifier"), (o.get("title") or "")[:34], w))
+                if tag == "①":
+                    words += w
+        tot += t; j1 += ja or 0; j2 += jb or 0; o1 += len(offa); o2 += len(offb)
+        rate = lambda j: ("%5.0f%%" % (100.0 * j / t)) if (j is not None and t) else "  未核"
+        print("  %-20s %6d %7s %7d %6s %7d %12s%s"
+              % (name, t, rate(ja), len(offa), rate(jb), len(offb),
+                 f"{sum(o.get('words') or 0 for o in offa):,}", "  ← ★" if (offa or offb) else ""))
+        if ja is not None and t and (ja / t) < a.min_join:
+            unchecked.append((name, "口径① join 命中率只有 %.0f%%（阈值 %.0f%%）—— "
+                                    "键对不上时「0 违规」是坏 join 的假干净" % (100 * ja / t, 100 * a.min_join)))
 
-    print("\n合计一手 **%d**｜join 上 **%d**（%.1f%%）｜**违规 %d**｜未核 %d 个工作区"
-          % (tot, jn_tot, 100.0 * jn_tot / tot if tot else 0, off_tot, len(unchecked)))
+    print("\n合计一手 **%d**｜①join %d（%.1f%%）**违规 %d**｜②join %d（%.1f%%）**违规 %d**"
+          % (tot, j1, 100.0 * j1 / tot if tot else 0, o1, j2, 100.0 * j2 / tot if tot else 0, o2))
+    print("★ 口径①违规的这些材料合计 **%s 词** —— 它们**从没进过语料**，却在一手计数里。" % f"{words:,}")
     for n_, why in unchecked:
         print("   · %-20s %s" % (n_, why))
     if not rows:
-        if unchecked:
-            print("\n★ 已核的部分没有违规 —— **但上面那些是未核的，不算通过**")
-        else:
-            print("\n✓ 没有「台账标抽取失败却算进一手」的")
+        print("\n✓ 一手计数里没有「没真拿到」的材料" + ("（但上面有未核项，不算全通过）" if unchecked else ""))
         return 0
-    print("\n✗ **台账标 `extraction_status=failed`，而一手计数里还有它 —— %d 条**：" % len(rows))
+    print("\n✗ **算作一手、而实际没拿到 —— %d 条**：" % len(rows))
     for a_ in rows:
-        print("   · %-20s %-46s %-44s %s 词" % (a_[0], str(a_[1])[:46], a_[2], a_[3]))
-    print("\n  ★ 处置：**先看它是不是已判分**（㊵ 冻结的不动，记档即可）；")
-    print("    未判分的重跑 `classify_primary.py` 并把 `extraction_status` 纳入判定。")
-    print("  ★★ 影响的是**一手占比**这条分母，档位（quick/standard/deep）可能因此变。")
+        print("   %s %-20s %-30s %-34s %s 词" % (a_[0], a_[1], str(a_[2])[:30], a_[3], a_[4]))
+    print("\n  ★ 处置：**先看它是不是已判分**（`evals/results.jsonl` **非空**才算，")
+    print("    文件存在不算 —— ㊵ 冻结的不动，记档即可）；未判分的重跑 `classify_primary.py`。")
+    print("  ★★ 影响的是**一手占比**这条分母。2026-08-18 实测那 4 条：")
+    print("    churchill 19→17（0.826→0.810）、dewey 40→39、ford 17→16 ——")
+    print("    **三个人都没跨过任何门，是口径缺陷不是分数缺陷。** 报数时要一起说。")
     return 1
 
 
