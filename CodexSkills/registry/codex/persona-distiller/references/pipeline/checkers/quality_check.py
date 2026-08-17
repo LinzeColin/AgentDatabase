@@ -1861,12 +1861,21 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     if code == -1:
         report.metrics.setdefault('content_review', {})['checker_census'] = out
     else:
+        # ★★ 2026-08-18（工具改动，不升版）：解析失败时原来只往 `content_review`
+        #   写一句「未做检查器先验」，**却照样往下建 census**——而 census 落在
+        #   `metrics['checker_census']`（**另一个键**，没被那句话覆盖），
+        #   内容是 `{'负对照可用': 0}`。于是同一件事有两处记录：
+        #   一处说「未核」，一处给了个数；**只看后者就是「0 件判据有负对照」**。
+        #   与本轮 `source_header_quotes` 同一形状（未核被写成一个干净的数）。
+        #   [[empty-default-swallows-unknown]]
+        _parsed = True
         try:
             rows = json.loads(out)
         except json.JSONDecodeError:
-            rows = []
-            report.metrics.setdefault('content_review', {})['checker_census'] = \
-                '元检查器输出无法解析，**本次未做检查器先验**（不是通过）'
+            rows, _parsed = [], False
+            _msg = '元检查器输出无法解析，**本次未做检查器先验**（不是通过）'
+            report.metrics.setdefault('content_review', {})['checker_census'] = _msg
+            report.metrics['checker_census'] = _msg      # ★ 两个键给同一个答案
         tally: dict[str, list[str]] = defaultdict(list)
         for row in rows:
             tally[row['verdict']].append(row['checker'])
@@ -1878,7 +1887,8 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
             census['**无负对照**（其「全绿」不构成证据）'] = tally['NO-SELFTEST']
         if tally.get('NOT-STANDALONE'):
             census['**负对照不可独立验证**'] = tally['NOT-STANDALONE']
-        report.metrics['checker_census'] = census
+        if _parsed:                      # ★ 没解析成功就别用一个数盖掉「未核」
+            report.metrics['checker_census'] = census
 
     review: dict[str, str] = {}
     # ★★★★ 2026-08-11：**没给 --cache 时自动用 `<target>/raw`**。
