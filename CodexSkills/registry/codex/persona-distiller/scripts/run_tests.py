@@ -132,6 +132,17 @@ def discover():
 #   [[a-refusal-to-check-prints-one-error]]｜[[harness-resets-only-half-the-sandbox]]
 FAIL_TAIL_LINES = 25          # 红件保留多少行原始输出
 
+# ★★★ **必须独占跑的测试**：带**墙钟断言**的那些。
+#   2026-08-18 实测：全套 19 件里**只有一件**有 `assertLess(elapsed, …)` ——
+#   `test_checkers_actually_run.py` 的「全量扫一遍要 <90 秒」。
+#   它同时还有一个 180 秒的单件超时（全 89 件安静时实测 10.3 秒，17 倍余量）。
+#   并行跑时这两个数量的都不是判据，**是机器负载**：
+#   4 路那两次跑，一次 0 盏假超时、一次 1 盏，红的都是它。
+#   ⇒ 放到并行批之后单独跑，机器安静了它的断言才有意义。
+#   ★ 这不是「把红灯关掉」：它照样会红，只是红的时候真的代表慢。
+#   [[harness-limits-masquerade-as-product-defects]]｜[[changing-the-sampling-unit-changes-the-ruler]]
+SERIAL_ONLY = frozenset({"test_checkers_actually_run.py"})
+
 
 def run_one(path):
     t = time.time()
@@ -165,9 +176,31 @@ def selftest() -> int:
     for name, why in KNOWN.items():
         if not why or len(why) < 20:
             bad.append("%s 没有写清为什么还红着" % name)
+    checks = 3
+    # ★★★ SERIAL_ONLY 的名单必须**真实存在**，且**确实是带墙钟断言的那些**——
+    #   否则它就成了一个「把某件挪到最后」的无理由特例，下次没人知道为什么。
+    #   这里**现扫**，不写死：名单与实况对不上就报出来。
+    wallclock = set()
+    for p in files:
+        try:
+            src = p.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        if "assertLess(elapsed" in src or "assertLess(\n" in src and "elapsed" in src:
+            wallclock.add(p.name)
+    checks += 2
+    for name in SERIAL_ONLY:
+        if not (TESTS / name).is_file():
+            bad.append("SERIAL_ONLY 里的 %s 不存在 —— **名单陈旧**" % name)
+    missing = wallclock - SERIAL_ONLY
+    if missing:
+        bad.append("这些测试有墙钟断言却**没进 SERIAL_ONLY**，并行会给它们假红：%s"
+                   % "、".join(sorted(missing)))
     for b in bad:
         print("  ✗ " + b)
-    print("自测 %d/%d（发现 %d 件测试）" % (3 - len(bad), 3, len(files)))
+    print("自测 %d/%d（发现 %d 件测试；带墙钟断言 %d 件：%s；独占名单 %d 件）"
+          % (checks - len(bad), checks, len(files), len(wallclock),
+             "、".join(sorted(wallclock)) or "无", len(SERIAL_ONLY)))
     return 1 if bad else 0
 
 
@@ -179,7 +212,8 @@ def main() -> int:
                     help="配 --strict：只有**不在已知名单里**的红才 rc=1")
     ap.add_argument("--workers", type=int, default=4,
                     help="并行度（默认 **4**，2026-08-17 实测定的）。"
-                         "8 路省 ~23%% 时间但制造 1–4 盏假红；4 路 0 假红")
+                         "8 路 3 次跑出 1–4 盏假超时；4 路 2 次跑出 0 和 1 盏 —— "
+                         "**是少很多，不是没有**")
     ap.add_argument("--self-test", "--selftest", dest="selftest", action="store_true")
     a = ap.parse_args()
     if a.selftest:
@@ -224,14 +258,24 @@ def main() -> int:
     results = {}
     # ★★★ 并行度 2026-08-17 实测定为 **4**，不是拍的：
     #       workers=8 → 墙钟 256.6 / 264.1 / 242.8 秒，**假超时 1–4 件**（逐跑还不一样）
-    #       workers=4 → 墙钟 **324.7 秒**，**假超时 0、新回归 0**
+    #       workers=4 → 墙钟 324.7s（假超时 **0**）／342.9s（假超时 **1**）
     #   8 路省 ~75 秒（23%），代价是 1–4 盏假红 —— 诊断一盏假红花的时间远超 75 秒。
     #   ★ 它此前自报「串行 333.5s → 并行约 110–150s」**是陈旧的**：三次实测都在 240s 以上。
+    #
+    #   ★★★ **订正（2026-08-18）**：我按 workers=4 的**第一次**跑就写下了「4 路 0 假红」，
+    #     并把它抄进了 VERIFICATION.md 与本文件两处 —— **下一次跑就翻了号**（1 盏假超时）。
+    #     一次观测撑不起一个全称判断。[[samples-cannot-support-universal-claims]]
+    #     真正的机制在下面 SERIAL_ONLY：假超时**只出在唯一一件带墙钟断言的测试上**。
     _workers = max(1, min(a.workers, len(files)))
+    par = [f for f in files if f.name not in SERIAL_ONLY]
+    ser = [f for f in files if f.name in SERIAL_ONLY]
     with concurrent.futures.ThreadPoolExecutor(max_workers=_workers) as ex:
-        futs = {ex.submit(run_one, f): f for f in files}
+        futs = {ex.submit(run_one, f): f for f in par}
         for fut in concurrent.futures.as_completed(futs):
             results[futs[fut]] = fut.result()
+    # ★ 独占件在并行批**跑完之后**逐个跑，机器此时是安静的 —— 它们的墙钟断言才有意义
+    for f in ser:
+        results[f] = run_one(f)
 
     red, green, fixed, slow = [], [], [], []
     for f in files:

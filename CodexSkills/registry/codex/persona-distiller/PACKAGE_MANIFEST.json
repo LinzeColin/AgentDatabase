@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "d31932cca264781d87ff63422d340f2757af2bc35bc735cedeb86cf645681357",
-      "size_bytes": 347635
+      "sha256": "3a1bcaebd7e9641a770d14fe3be4775ad7e9f802896a42cabbf02abf0cab0200",
+      "size_bytes": 350945
     },
     {
       "path": "CONTRIBUTING.md",
@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "c8da291386463de9cb79adf4344d8092e23cdd0f999ca6f5d98184ed4b2b4b87",
-      "size_bytes": 152907
+      "sha256": "7e9ebf8e2a31243406fcf2e6bc42ae24ba29eff7e1876973ff71ff7480a66e4d",
+      "size_bytes": 155569
     },
     {
       "path": "VERSION",
@@ -1306,8 +1306,8 @@
     },
     {
       "path": "scripts/bump_version.py",
-      "sha256": "0c6900f0fffbe621a6d1d49578cf4c5873f809d324f32e7dbdfdf87e4fcaedcc",
-      "size_bytes": 9897
+      "sha256": "1b8a8ddce4c5e290208ce231b5cdcc2773e6081037536b181c7a8a545fa27950",
+      "size_bytes": 21337
     },
     {
       "path": "scripts/check_absence_claims.py",
@@ -1926,8 +1926,8 @@
     },
     {
       "path": "scripts/run_tests.py",
-      "sha256": "d7827cb65f15e06ad2fde5ed59730aca68410e2ea4abf30e2f70565e8ffbdced",
-      "size_bytes": 15995
+      "sha256": "0506c8be2ea94cde1b45ca966a70137847d5b890936ee0594cdb1978d7c7702e",
+      "size_bytes": 18819
     },
     {
       "path": "scripts/self_check.py",

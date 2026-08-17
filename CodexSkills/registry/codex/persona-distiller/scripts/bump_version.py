@@ -29,6 +29,87 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 VERSION_RE = re.compile(r"^v\d+\.\d+\.\d+\.\d+$")
 
 
+# ── 产物侧 / 工具侧分类 ────────────────────────────────────────────────
+# ★★★ 2026-08-04 裁定：**判据落地算工具改动，不动版本号**；只有产物侧变化才升版。
+#   理由是「兼容下限 = 当前版本末位 − 10」——每升一版，全部存量产物就往
+#   「不适配」推一格，**产物一个字没改却因为尺子在跑而变老**。
+#
+# **这条裁定此前只写在 CHANGELOG 与 VERIFICATION 的正文里，没有执行者。**
+#   两次实况，同一个版本号：
+#     2026-08-17 ①  跑 `bump_version.py v0.0.0.155` → 读到 CHANGELOG 开头那段裁定 → 还原 6 处
+#     2026-08-17 ②  又跑 `bump_version.py v0.0.0.155` → 靠漂移门报红才回头查 → 还原 8 处
+#   第一次是**碰巧读到**，第二次是**碰巧红了**。两次都不是流程接住的。
+#   [[a-rule-in-a-doc-has-no-enforcer]]｜[[my-pre-push-ritual-has-only-one-guard]]
+#
+# 下面的射程按**实测**定：那两次之间改的 90 个文件逐个分类，
+#   scripts/tests 41、references（`example-knuth/` 就在这下面）43、发布元数据 5、
+#   SKILL.md 1（内容是「这件判据会写盘」的告诫，实质也是工具侧）——**产物侧 0**。
+TOOL_SIDE_PREFIXES = ("scripts/", "tests/", "references/")
+RELEASE_META = frozenset({
+    "VERSION", "CHANGELOG.md", "VERIFICATION.md", "README.md", "handoff.md",
+    "manifest.json", "registry.yaml", "checksums.sha256", "PACKAGE_MANIFEST.json",
+    "index.json", "team-index.json",
+})
+
+
+def classify(rel_paths) -> tuple[list[str], list[str], list[str]]:
+    """→ (工具侧, 发布元数据, **可能是产物侧**)。纯函数，不碰磁盘。
+
+    ★ 第三档故意叫「**可能是**产物侧」——本函数不替人判断，
+      它只把「不在已知工具侧射程里」的挑出来交给人看。
+      把判断权收进代码，下一个没见过的目录就会被静默归成工具侧。
+    """
+    tool, meta, product = [], [], []
+    for p in rel_paths:
+        p = p.strip()
+        if not p:
+            continue
+        if p.startswith(TOOL_SIDE_PREFIXES):
+            tool.append(p)
+        elif p in RELEASE_META:          # 只认**顶层**那几个名字，不按文件名到处匹配
+            meta.append(p)
+        else:
+            product.append(p)
+    return tool, meta, product
+
+
+def changed_since(root: pathlib.Path, version: str) -> tuple[list[str], str | None]:
+    """→ (自 `version` 落版以来改过的 skill 内相对路径, 未量的理由)。
+
+    含**已提交**（落版提交..HEAD）与**未提交**（工作区）两部分——
+    升版通常是在有待提交改动时跑的，只看已提交会漏掉本次要发的东西。
+    """
+    def git(*a):
+        return subprocess.run(("git", "-C", str(root)) + a, capture_output=True, text=True)
+
+    pre = git("rev-parse", "--show-prefix")
+    if pre.returncode != 0:
+        return [], "不在 git 工作树里（%s）" % (pre.stderr.strip()[:80] or "rev-parse 失败")
+    prefix = pre.stdout.strip()                       # 形如 CodexSkills/registry/codex/persona-distiller/
+    # ★ pathspec 相对**当前目录**，而 `-C root` 已经把当前目录换成 root ——
+    #   写 `prefix + "VERSION"` 会解析成 root/CodexSkills/…/VERSION（不存在），
+    #   `git log` 安静地返回 0 行。**靠「未量 ≠ 空清单」那条守卫当场接住的**：
+    #   若失败时返回 `[]`，上层会读成「0 个改动 ⇒ 没有产物侧 ⇒ 拒绝」——
+    #   **正确的结论，错误的理由**，而且下次真有产物侧改动时同样会拒。
+    #   [[empty-default-swallows-unknown]]
+    log = git("log", "--format=%H", "-S", version, "--", "VERSION")
+    if log.returncode != 0 or not log.stdout.strip():
+        return [], "找不到 %s 的落版提交（git log -S 无结果）" % version
+    base = log.stdout.strip().splitlines()[-1]        # ★ 最后一行＝最早那个＝引入它的那次
+    out = []
+    for r in (git("diff", "--name-only", base + "..HEAD"), git("status", "--porcelain")):
+        if r.returncode != 0:
+            return [], "取不到改动清单：%s" % r.stderr.strip()[:80]
+        for line in r.stdout.splitlines():
+            p = line[3:] if len(line) > 3 and line[2] == " " else line   # porcelain 的两列状态
+            if " -> " in p:                       # 改名：只取新名
+                p = p.split(" -> ", 1)[1]
+            p = p.strip().strip('"')
+            if p.startswith(prefix):
+                out.append(p[len(prefix):])
+    return sorted(set(out)), None
+
+
 def _today() -> str:
     """发布日期取**本机当天**。放成独立函数是为了让自测能替换它。"""
     import datetime
@@ -60,11 +141,62 @@ def rewrite_title(path: pathlib.Path, new: str) -> bool:
     return True
 
 
+def self_test() -> int:
+    bad, n = [], [0]
+
+    def chk(lbl, ok):
+        n[0] += 1
+        print(("  ✓ " if ok else "  ✗ ") + lbl)
+        if not ok:
+            bad.append(lbl)
+
+    # ★★★ 用**真实那 90 个文件的形状**做正负例，不编夹具
+    #   [[fixtures-are-clean-because-i-wrote-them]]
+    t, m, p = classify([
+        "scripts/check_contract_drift.py", "tests/test_release_bundle.py",
+        "references/pipeline/RUNBOOK.md", "references/pipeline/example-knuth/facts.md",
+        "VERSION", "CHANGELOG.md", "checksums.sha256", "SKILL.md",
+    ])
+    chk("★★★ 正例：scripts/ tests/ references/ 都归工具侧（3 个）", len(t) == 4)
+    chk("★★ 正例：`example-knuth/` 在 references 下 ⇒ 工具侧，**不是产物**",
+        "references/pipeline/example-knuth/facts.md" in t)
+    chk("★★ 正例：VERSION/CHANGELOG/checksums 归发布元数据", len(m) == 3)
+    chk("★★★ 正例：`SKILL.md` 归「**可能是**产物侧」⇒ 交给人判，不替人归成工具侧",
+        p == ["SKILL.md"])
+    chk("★★★ 负例（**这一天的真实情况**）：只有工具侧+元数据 ⇒ product 为空 ⇒ 该拒绝",
+        classify(["scripts/a.py", "references/b.md", "VERSION"])[2] == [])
+    chk("★★★ 正例：真改了人物产物（`example-persona/` 这类不在射程里的）⇒ 报到产物侧 ⇒ 放行",
+        classify(["builder/families.json"])[2] == ["builder/families.json"])
+    chk("★ 空输入不炸，也不把空当成「有产物」", classify([]) == ([], [], []))
+    chk("★ 空串与空白行被跳过", classify(["", "  ", "\n"]) == ([], [], []))
+    chk("★★ `scriptsX/` 不算 scripts/（前缀要带斜杠）",
+        classify(["scriptsX/a.py"])[2] == ["scriptsX/a.py"])
+    chk("★★ 顶层同名才算元数据；深处的 `README.md` 归产物侧交给人看",
+        classify(["some/dir/README.md"])[2] == ["some/dir/README.md"])
+    # changed_since 在非 git 目录下必须报「未量」而不是报空（空会被读成「没改动」）
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        paths, why = changed_since(pathlib.Path(td), "v0.0.0.1")
+        chk("★★★ 非 git 树 ⇒ 返回**未量的理由**，不返回空清单（空会被读成「没改动」）",
+            paths == [] and bool(why))
+    print("\n自测 %d 项，不符 %d 项" % (n[0], len(bad)))
+    return 1 if bad else 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="把新发布号盖到全部对外声明位并自查")
-    ap.add_argument("new_version", help="形如 v0.0.0.15")
+    ap.add_argument("new_version", nargs="?", help="形如 v0.0.0.15")
     ap.add_argument("--root", type=pathlib.Path, default=ROOT)
+    ap.add_argument("--anyway", metavar="理由",
+                    help="跳过「配不配升版」前置。**必须写理由**——"
+                         "指明哪个文件是产物侧。理由会印进输出，请一并写进 CHANGELOG。")
+    ap.add_argument("--self-test", "--selftest", dest="selftest", action="store_true")
     args = ap.parse_args()
+    if args.selftest:
+        return self_test()
+    if not args.new_version:
+        print("用法错误：缺版本号（或用 --self-test）", file=sys.stderr)
+        return 3
 
     new = args.new_version.strip()
     if not VERSION_RE.match(new):
@@ -93,6 +225,58 @@ def main() -> int:
         return 3
 
     old = version_file.read_text(encoding="utf-8").strip()
+
+    # ★★★ 第二道前置：**这批改动配不配升版**（同样一个字节都不写）。
+    #   见文件上方 TOOL_SIDE_PREFIXES 处那段裁定与两次实况。
+    if old != new and not args.anyway:
+        changed, why = changed_since(root, old)
+        if why:
+            print("★ **未量，不是通过**（rc=4）—— 判不出这批改动是工具侧还是产物侧：%s" % why,
+                  file=sys.stderr)
+            print("  升版前必须知道这个。要绕过：--anyway '<理由>'。**一个字节都没写。**",
+                  file=sys.stderr)
+            return 4
+        tool, meta, product = classify(changed)
+        print("自 %s 落版以来改了 **%d** 个文件："
+              "工具侧 %d｜发布元数据 %d｜**可能是产物侧 %d**"
+              % (old, len(changed), len(tool), len(meta), len(product)))
+        if not product:
+            print("\n✗ **拒绝升版**：这批改动里**一个产物侧文件都没有**。", file=sys.stderr)
+            print("  2026-08-04 裁定：判据落地算工具改动，**不动版本号**——", file=sys.stderr)
+            print("  兼容下限 = 版本末位 − 10，每升一版，全部存量产物就往「不适配」推一格，",
+                  file=sys.stderr)
+            print("  **产物一个字没改却因为尺子在跑而变老**。", file=sys.stderr)
+            print("\n  ★ 这个错在 2026-08-17 一天里犯了**两次**，都是这个版本号，", file=sys.stderr)
+            print("    一次靠碰巧读到 CHANGELOG、一次靠漂移门报红才回头 —— 所以有了本道前置。",
+                  file=sys.stderr)
+            print("\n  ★★ 该做的是：在 CHANGELOG 的 `## 工具改动（不升版）` 一节里记一条。",
+                  file=sys.stderr)
+            print("  确实要升（例如改了 SKILL.md 里真正影响产出的指令）："
+                  "`--anyway '<写清哪个文件是产物侧>'`", file=sys.stderr)
+            return 5
+
+        # ★★★ 「可能是产物侧」**不等于**「是产物侧」——不许在这里替人放行。
+        #   第一版写成「product 非空 ⇒ 放行」，当场就给了错答案：
+        #   那 90 个文件里唯一落进这一档的是 `SKILL.md`，而它那次的改动是
+        #   **3 行「这件判据会写盘」的告诫**，实质是工具侧 —— 于是守卫照样放行，
+        #   等于没建。分类器判不出这个差别，**也不该假装判得出**。
+        #   ⇒ 两条路都停在人这里，只是措辞不同。[[checker-blindspot-read-as-defect]]
+        print("\n✗ **暂不升版**：有 %d 个文件不在已知工具侧射程里，"
+              "**判不出它们是不是产物侧**：" % len(product), file=sys.stderr)
+        for p in product[:12]:
+            print("     · %s" % p, file=sys.stderr)
+        if len(product) > 12:
+            print("     …另 %d 个" % (len(product) - 12), file=sys.stderr)
+        print("\n  判别问的是：**这个改动会让蒸出来的人物产物不一样吗？**", file=sys.stderr)
+        print("    会  ⇒ 产物侧，该升版：`--anyway '<哪个文件、怎么影响产出>'`", file=sys.stderr)
+        print("    不会 ⇒ 工具侧，记进 CHANGELOG 的 `## 工具改动（不升版）` 一节。",
+              file=sys.stderr)
+        print("  ★ 2026-08-17 的实况：唯一落进这一档的是 `SKILL.md`，"
+              "改的是 3 行「本判据会写盘」的告诫 ⇒ **工具侧，没升版**。", file=sys.stderr)
+        return 5
+    elif args.anyway:
+        print("★ 已用 `--anyway` 跳过「配不配升版」前置，理由：%s" % args.anyway)
+
     if old == new:
         print(f"版本号已经是 {new}，不重复写")
     touched: list[str] = []
