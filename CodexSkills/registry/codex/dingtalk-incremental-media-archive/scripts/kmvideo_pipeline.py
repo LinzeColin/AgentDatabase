@@ -21,6 +21,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta
@@ -506,11 +507,11 @@ VISION_PROMPT = (
 )
 
 
-def minimax_vision(thumb: Path) -> dict | None:
+def minimax_vision(thumb: Path, attempts: int = 3) -> dict | None:
     """单轮无状态视觉调用：一张拼图 → JSON → 结束（禁止 agent 会话）。
 
     配置来自环境变量 MINIMAX_API_BASE / MINIMAX_API_KEY / MINIMAX_MODEL。
-    未配置或调用失败返回 None（调用方回退关键词映射并把置信度标「待确认」）。
+    网络瞬断重试 attempts 次；仍未配置或全部失败返回 None（调用方回退关键词并把置信度标「待确认」）。
     """
     import base64
     import urllib.request
@@ -531,28 +532,40 @@ def minimax_vision(thumb: Path) -> dict | None:
             ],
         }],
     }
-    req = urllib.request.Request(
-        f"{base.rstrip('/')}/chat/completions",
-        data=json.dumps(payload).encode(),
-        headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"},
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=120) as resp:
-            data = json.loads(resp.read())
-    except Exception:
-        return None
-    text = data.get("choices", [{}])[0].get("message", {}).get("content") or ""
-    s, e = text.find("{"), text.rfind("}")
-    if s == -1 or e == -1:
-        return None
-    try:
-        obj = json.loads(text[s:e + 1])
-    except Exception:
-        return None
-    if not obj.get("描述"):
-        return None
-    return obj
+    for _ in range(max(1, attempts)):
+        req = urllib.request.Request(
+            f"{base.rstrip('/')}/chat/completions",
+            data=json.dumps(payload).encode(),
+            headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=120) as resp:
+                data = json.loads(resp.read())
+        except Exception:
+            time.sleep(2)
+            continue
+        text = data.get("choices", [{}])[0].get("message", {}).get("content") or ""
+        s, e = text.find("{"), text.rfind("}")
+        if s == -1 or e == -1:
+            continue
+        try:
+            obj = json.loads(text[s:e + 1])
+        except Exception:
+            continue
+        if not obj.get("描述"):
+            continue
+        return obj
+    return None
+
+
+# 泛化标签黑名单：模型把接触表格式当成画面内容时输出这类词，不能进文件名
+GENERIC_REJECT = ("多帧", "拼图", "工业场景", "设备维修画面", "工业设备维修", "工业设备维护",
+                  "现场多帧", "磨削现场", "多帧图片", "工业设备", "设备维修", "现场维修")
+
+
+def reject_generic(note: str) -> bool:
+    return any(k in note for k in GENERIC_REJECT)
 
 
 def stage_label(args, ctx) -> dict:
@@ -583,11 +596,22 @@ def stage_label(args, ctx) -> dict:
             d = json.loads(l)
             override[d["file"]] = d
     thumbs_dir = ctx["workdir"] / "thumbs"
+    # 跳过已标注（登记表已有描述且置信度高）：照片全量重跑时避免重复付费
+    reg_desc = {}
+    if REG_CSV.exists():
+        for rr in csv.DictReader(REG_CSV.open(encoding="utf-8-sig")):
+            if (rr.get("描述") or "").strip() and (rr.get("置信度") or "") != "待确认":
+                reg_desc[(rr["项目"], rr["原文件名"])] = True
     rows = []
     labeled = pending = 0
     vision_ok = vision_fail = 0
-    for m in media:
+    lock = threading.Lock()
+
+    def process_one(m):
+        nonlocal labeled, pending, vision_ok, vision_fail
         name = os.path.basename(m.get("relative_path") or "")
+        if (m["_group"], name) in reg_desc:
+            return None  # 已有标注，跳过（不重标不重付费）
         s = specs.get(name, {})
         ov = override.get(name, {})
         c = ctx_map.get((m["_group"], m.get("resource_id")), {})
@@ -595,12 +619,16 @@ def stage_label(args, ctx) -> dict:
         hit = kw_label(text)
         vision = None
         thumb = thumbs_dir / f"{os.path.splitext(name)[0]}.jpg"
-        if m.get("media_type") == "video" and thumb.exists():
+        if thumb.exists():
             vision = minimax_vision(thumb)
-            if vision is not None:
-                vision_ok += 1
-            else:
-                vision_fail += 1
+            with lock:
+                if vision is not None:
+                    vision_ok += 1
+                else:
+                    vision_fail += 1
+        if vision and (not vision.get("描述") or reject_generic(str(vision["描述"]))):
+            # 泛化标签（“多帧拼图”等）不可信，视作未标注
+            vision = None
         if ov.get("描述"):
             desc = ov["描述"]
         elif vision and vision.get("描述"):
@@ -633,10 +661,22 @@ def stage_label(args, ctx) -> dict:
                    "镜头特征": "", "能证明什么": "", "脱敏风险": desens_risk(text)}
         for k in ("功能位", "画质等级", "画面元素", "镜头特征", "工序阶段", "能证明什么", "脱敏风险"):
             row[k] = src.get(k, "")
-        if ov or vision:
-            labeled += 1
-        else:
-            pending += 1
+        # 枚举消毒：未知词丢弃；功能位/工序阶段非法→不可用/无法判断；镜头特征空→""
+        for fld in ("画面元素", "镜头特征", "脱敏风险"):
+            vals = [x.strip() for x in str(row.get(fld, "")).replace("、", ",").split(",") if x.strip()]
+            keep = [v for v in vals if v in VOCAB[fld]]
+            if not keep:
+                keep = ["无"] if fld == "画面元素" else [""]
+            row[fld] = "、".join(dict.fromkeys(keep))
+        if str(row.get("功能位", "")) not in VOCAB["功能位"]:
+            row["功能位"] = "不可用"
+        if str(row.get("工序阶段", "")) not in VOCAB["工序阶段"]:
+            row["工序阶段"] = "无法判断"
+        with lock:
+            if ov or vision:
+                labeled += 1
+            else:
+                pending += 1
         # 画质等级：分辨率硬信息
         if row.get("画质等级") not in ("可全屏", "仅可内嵌", "不可用"):
             w, h = (s.get("width") or 0), (s.get("height") or 0)
@@ -657,7 +697,14 @@ def stage_label(args, ctx) -> dict:
         else:
             row["标注执行者"] = "pipeline-local"
         row["标注日期"] = "260817"
-        rows.append(row)
+        return row
+
+    workers = int(os.environ.get("LABEL_WORKERS", "8"))
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        results = list(ex.map(process_one, media))
+    rows = [r for r in results if r is not None]
+    skipped = sum(1 for r in results if r is None)
     out = ctx["workdir"] / "desc.csv"
     with out.open("w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["项目", "原文件名", "relative_path", "media_type",
@@ -666,9 +713,9 @@ def stage_label(args, ctx) -> dict:
                                           "重复于", "标注执行者", "标注日期"])
         w.writeheader()
         w.writerows(rows)
-    log(f"label done: total={len(rows)} labeled={labeled} pending={pending} "
+    log(f"label done: total={len(rows)} skipped={skipped} labeled={labeled} pending={pending} "
         f"vision_ok={vision_ok} vision_fail={vision_fail}")
-    return {"total": len(rows), "labeled": labeled, "pending": pending,
+    return {"total": len(rows), "skipped": skipped, "labeled": labeled, "pending": pending,
             "vision_ok": vision_ok, "vision_fail": vision_fail}
 
 
@@ -778,6 +825,17 @@ def stage_registry(args, ctx) -> dict:
     fieldnames = list(fieldnames) + [c for c in NEW_COLS if c not in fieldnames]
     bykey = {(r["项目"], r["原文件名"]): r for r in reg_rows}
     updated = 0
+
+    # 目录级清单缓存（一次 listdir，避免逐文件 stat 拖垮 SMB）
+    dir_cache: dict[tuple[str, str], set[str]] = {}
+
+    def names_in(group: str, sub: str) -> set[str]:
+        key = (group, sub)
+        if key not in dir_cache:
+            d = SMB_ROOT / group / sub
+            dir_cache[key] = set(os.listdir(d)) if d.is_dir() else set()
+        return dir_cache[key]
+
     # 磁盘新名回填
     for m in load_media(ctx["groups"]):
         key = (m["_group"], os.path.basename(m.get("relative_path") or ""))
@@ -788,13 +846,30 @@ def stage_registry(args, ctx) -> dict:
         old_name = os.path.basename(rel)
         d = desc.get(key)
         note = (d.get("说明") or "").strip() if d else ""
-        # 磁盘上的当前名
-        cur = old_name
-        if d and note and note != "待确认" and (r.get("文件名") or "") != r.get("原文件名"):
-            pass  # 已改名：文件名列保持现状
+        s = specs.get(old_name, {})
+        # 文件名同步（磁盘真相）：登记表文件名列与磁盘现状对齐（目录级缓存）
+        sub = rel.split("/")[1] if len(rel.split("/")) > 1 else "photo"
+        names = names_in(m["_group"], sub)
+        cur_name = r.get("文件名") or old_name
+        if cur_name != old_name:
+            if old_name not in names and cur_name in names:
+                pass  # 磁盘确已改名，保持
+            elif old_name in names and cur_name not in names:
+                r["文件名"] = old_name  # 磁盘已回退，登记表跟随
+        elif note and note != "待确认" and old_name not in names:
+            # 登记表仍为旧名、磁盘已按 rename 规则改名时回填新名
+            stem = os.path.splitext(old_name)[0]
+            ext = os.path.splitext(old_name)[1]
+            if s.get("media_type") == "video":
+                cand = f"{BUSINESS.get(m['_group'],'')}_{note}_{stem}{ext}"
+            elif re.fullmatch(r"\d{6}_\d{3}", stem):
+                cand = f"{BUSINESS.get(m['_group'],'')}_{note}_{stem}{ext}"
+            else:
+                cand = None
+            if cand and cand in names:
+                r["文件名"] = cand
         for k in NEW_COLS:
             r.setdefault(k, "")
-        s = specs.get(old_name, {})
         if s.get("media_type") == "video":
             r["时长秒"] = str(s.get("duration") or "")
             r["分辨率"] = f'{s.get("width")}x{s.get("height")}' if s.get("width") else ""
@@ -813,9 +888,15 @@ def stage_registry(args, ctx) -> dict:
             r["标注执行者"] = d.get("标注执行者", "")
             r["标注日期"] = d.get("标注日期", "")
             r["复核状态"] = r.get("复核状态") or "未复核"
-            if note and note != "待确认":
+            if (r.get("文件名") or "") != (r.get("原文件名") or ""):
+                pass  # 已改名行（如 29 条打样）：描述保持，不覆盖重标
+            elif note and note != "待确认":
                 r["描述"] = note
                 r["置信度"] = "高"
+            elif (r.get("描述") or "").strip():
+                # 回退行（改名被撤销）：清掉旧描述，置信度待确认
+                r["描述"] = ""
+                r["置信度"] = "待确认"
             updated += 1
     # 双格式写本地 → rsync SMB（约束7）
     tmp = ctx["workdir"] / "素材登记表.new.csv"
@@ -1025,15 +1106,29 @@ def stage_accept(args, ctx) -> dict:
             if abs(cur - d["mtime"]) > 2:
                 changed.append(d["group"])
         chk(".manifest.jsonl 未修改", not changed, str(changed))
-    # 幂等：重跑改名应零操作（旧名不存在）
+    # 幂等：重跑改名应零操作（旧名不存在，目录级缓存）
     old_left = 0
+    _dir_cache: dict[tuple[str, str], set[str]] = {}
+
+    def _names(group: str, sub: str) -> set[str]:
+        k = (group, sub)
+        if k not in _dir_cache:
+            d = SMB_ROOT / group / sub
+            _dir_cache[k] = set(os.listdir(d)) if d.is_dir() else set()
+        return _dir_cache[k]
+
     for r in reg_rows:
         if r["文件名"] != r["原文件名"]:
-            p = SMB_ROOT / r["项目"] / "photo" / r["原文件名"]
-            p2 = SMB_ROOT / r["项目"] / "video" / r["原文件名"]
-            if p.exists() or p2.exists():
+            if r["原文件名"] in _names(r["项目"], "photo") or r["原文件名"] in _names(r["项目"], "video"):
                 old_left += 1
     chk("改名幂等(旧名残留0)", old_left == 0, str(old_left))
+    # 标注 vs 画面 抽样复核规则（任务书最高优先级）：脱敏非「无」100% 复核，其余抽样 ≥10%
+    if "复核状态" in (reg_rows[0].keys() if reg_rows else []):
+        n_reviewed = sum(1 for r in reg_rows if str(r.get("复核状态") or "") in ("已复核通过", "已复核修正"))
+        n_sens = sum(1 for r in reg_rows if str(r.get("脱敏风险") or "") not in ("", "无"))
+        n_lab = sum(1 for r in reg_rows if (r.get("描述") or "").strip())
+        need = n_sens + max(1, int(n_lab * 0.1))
+        chk("复核覆盖率(脱敏100%+抽样10%)", n_reviewed >= need, f"已复核 {n_reviewed}/{need} (脱敏 {n_sens} 条 100% + 抽样 10%)")
     out = ctx["workdir"] / "accept_report.json"
     out.write_text(json.dumps(checks, ensure_ascii=False, indent=1), encoding="utf-8")
     log(f"accept: pass={len(checks['pass'])} fail={len(checks['fail'])}")
