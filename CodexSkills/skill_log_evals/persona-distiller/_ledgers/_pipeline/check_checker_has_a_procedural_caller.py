@@ -44,6 +44,19 @@ HERE = pathlib.Path(__file__).resolve().parent
 RUNBOOK = HERE / "RUNBOOK.md"
 QUALITY = HERE.parents[3] / "registry/codex/persona-distiller/scripts/quality_check.py"
 
+#: ★★★ 2026-08-18 扩射程：**并列的兄弟树也要覆盖**。
+#   本件建成当天只扫 `_pipeline/`，报出 11 件孤儿并清零。
+#   两小时后**手查**团队 skill 的 4 件判据 —— 3 件同样只有自测层调用方，
+#   而它的 `SKILL.md`（用户照着做的六步调用）对这 4 件提及 **0 次**。
+#   ⇒ 同一个病在并列的树上活着，只是本件够不到。**够不到就等于没建。**
+#   [[fixed-the-symptom-kept-the-root-cause]]｜[[a-gates-scan-set-is-smaller-than-reality]]
+#
+#   每棵树声明：(判据目录, [看这些文件算「有流程调用方」])
+EXTRA_TREES = [
+    (HERE.parents[3] / "registry/codex/persona-distiller-group/scripts",
+     ["SKILL.md", "CHANGELOG.md", "tests/run_functional_acceptance.py"]),
+]
+
 # ★ 白名单：每条必须写清**为什么不需要流程调用方**，没理由的不许进。
 EXEMPT = {
     "check_checker_has_a_procedural_caller.py":
@@ -102,6 +115,14 @@ def self_test() -> int:
         and callers_of("check_z.py", None, None, None, None) == [])
     chk("★★ 白名单每条都写了理由（否则就是「把红灯关掉」）",
         all(isinstance(v, str) and len(v) > 8 for v in EXEMPT.values()))
+    # ★★★ 兄弟树分支：**声明本身**要可核，否则那条分支可能永远全绿而没人知道
+    chk("★★★ `EXTRA_TREES` 里每棵树都真实存在（不存在时 main 判未量 rc=4）",
+        all(tree.is_dir() for tree, _faces in EXTRA_TREES))
+    chk("★★★ 每棵兄弟树都**真的有 check_*.py**（0 件时这条分支恒绿，等于没建）",
+        all(any(tree.glob("check_*.py")) for tree, _f in EXTRA_TREES))
+    chk("★★ 每棵树声明的「流程面」文件至少有一个存在（全不存在 ⇒ 全判孤儿，是假红）",
+        all(any((tree.parent / rel).is_file() for rel in faces)
+            for tree, faces in EXTRA_TREES))
     print("\n自测 %d 项，不符 %d 项" % (n[0], len(bad)))
     return 1 if bad else 0
 
@@ -115,6 +136,19 @@ def main() -> int:
         return self_test()
 
     checkers = sorted(p for p in HERE.glob("check_*.py"))
+    # ★ 兄弟树的判据也收进来；它们的「流程面」是各自 skill 的文件，单独读
+    extra: list[tuple[pathlib.Path, str]] = []
+    for tree, faces in EXTRA_TREES:
+        if not tree.is_dir():
+            print("★ **未量，不是通过**（rc=4）—— 兄弟树不在：%s" % tree)
+            return 4
+        face_text = ""
+        for rel in faces:
+            fp = tree.parent / rel
+            if fp.is_file():
+                face_text += fp.read_text(encoding="utf-8", errors="replace")
+        for c in sorted(tree.glob("check_*.py")):
+            extra.append((c, face_text))
     print("扫描面：%s ｜ `check_*.py` **%d** 件" % (HERE, len(checkers)))
     if not checkers:
         print("★ **未量，不是通过**（rc=4）—— 一件判据都没发现")
@@ -142,8 +176,18 @@ def main() -> int:
         else:
             orphan.append(c.name)
 
-    print("\n有流程调用方 **%d**｜**孤儿 %d**｜白名单 %d"
-          % (ok, len(orphan), len(EXEMPT)))
+    for c, face in extra:
+        stem = c.name[:-3]
+        # ★ 自己的源码不算调用方（同上，扫描面太大也会假绿）
+        sib = {q.name: q.read_text(encoding="utf-8", errors="replace")
+               for q in c.parent.glob("*.py") if q.name != c.name}
+        if stem in face or any(stem in v for v in sib.values()):
+            ok += 1
+        else:
+            orphan.append("%s/%s" % (c.parent.parent.name, c.name))
+
+    print("\n有流程调用方 **%d**｜**孤儿 %d**｜白名单 %d｜（含兄弟树 %d 件）"
+          % (ok, len(orphan), len(EXEMPT), len(extra)))
     print("★ 「自测层被 `run_checks` 按能力收编」**不算**流程调用方 ——")
     print("  它验的是判定逻辑站不站得住，不是「今天这批数据干不干净」。")
     if not orphan:
