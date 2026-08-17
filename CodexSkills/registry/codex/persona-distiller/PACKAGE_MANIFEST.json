@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "1d419bb832274b15d6261596fae6f399f68c21806d31fbc9ecb32a0d10e8aae8",
-      "size_bytes": 151882
+      "sha256": "937d06e632029abebaaa05965341c138e18ba56fa5e11580a17e3abd764f75b3",
+      "size_bytes": 152513
     },
     {
       "path": "VERSION",
@@ -2423,6 +2423,11 @@
       "path": "tests/test_ledger_and_corrections.py",
       "sha256": "26629a7c2a832c66428f64731a899f2b26ab1fa2cb373b727cbef73c46f764ec",
       "size_bytes": 2834
+    },
+    {
+      "path": "tests/test_markdown_report_handles_string_items.py",
+      "sha256": "caf554265006e1cd216c4f86ebfa67efd41541ffc6ee1e7d4a629ad37ee61aff",
+      "size_bytes": 4655
     },
     {
       "path": "tests/test_namesake_gate.py",

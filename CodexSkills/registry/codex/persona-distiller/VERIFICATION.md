@@ -132,7 +132,15 @@ Date: 2026-08-05（**v0.0.0.154**）
 > 还原 → 0，文件逐字一致。（**上一次接线就是接错了分支才白接的**，所以这次必须植入验证。）
 >
 > **本版实况计数（`check_verification_counts.py` 逐项核过）**：
-> 判据 **93** 件、Python 脚本 **136** 件、checksum 全量校验 **496 files**、身份族 **12** 族、**名册 102 人**。
+> 判据 **93** 件、Python 脚本 **136** 件、checksum 全量校验 **497 files**、身份族 **12** 族、**名册 102 人**。
+>
+> ★ **2026-08-17 第二十一次更新：checksum 496→497** —— 新增
+> `tests/test_markdown_report_handles_string_items.py`（6 条）。
+> 起因：`--write-report` 的 `.md` 那一半**一直是崩的**——`markdown_report` 假设
+> `errors`/`warnings` 的条目都是 dict，而有的是纯字符串 ⇒ `TypeError`，
+> 写完 `.json` 就抛栈、`.md` 从来没产出过、rc=1 读起来像门红其实是崩溃。
+> 全仓**零测试**跑过它，而 `init_target.py` 给每个新人物的手册里写的正是这条命令。
+> 变异对照两种（全撤回／只修 warnings 不修 errors）各自被抓住。
 >
 > ★ **2026-08-17 第二十次更新：checksum 495→496** —— 新增
 > `tests/test_profile_fallback_is_disclosed.py`。
