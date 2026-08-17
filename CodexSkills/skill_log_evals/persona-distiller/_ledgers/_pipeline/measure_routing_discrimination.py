@@ -540,6 +540,31 @@ def main():
     print("  ★ 族缺口（clinical-triage）：路由 %.1f%% —— 名册里医疗护理师 **0 人**，"
           "这一条注定命中 0，是名册的洞不是路由的错" % (100 * zero["routed_hit"]))
 
+    # ★★★ 2026-08-17：**这把尺子够得着词表的多少？**
+    #   今天修「`设计`/`design` 一个动词就把整个 creative-design 拉进来」时，
+    #   前后跑本件只动了 +0.4 pp（0.15 SE，判不出）。查原因：
+    #   **`设计` 在这 24 道题里只命中 2 道** —— 尺子几乎没碰到那个 bug。
+    #   逐词数一遍才看清：**290 个词里只有 61 个在这 24 道题上命中过**。
+    #   ⇒ 任何基于本件的「改好了／改坏了」，对**没被碰到的那些词是未量**，
+    #     不是「没问题」。这句必须跟着数一起报。
+    #   [[a-gates-scan-set-is-smaller-than-reality]]｜[[zero-hit-gates-must-prove-they-can-hit]]
+    try:
+        # ★ 本件平时是**起子进程**跑路由的，从不 import 它 —— 所以这里要显式加路径。
+        #   （第一版没加，兜底分支如实报了「未量」而不是假装全覆盖，那一点是对的。）
+        _gs = str((pathlib.Path(a.registry_root) / "scripts").resolve())
+        if _gs not in sys.path:
+            sys.path.insert(0, _gs)
+        from compile_task_graph import DOMAIN_SIGNALS, _signal_hits
+        _all = [w for ws in DOMAIN_SIGNALS.values() for w in ws]
+        _lows = [str(t["task"]).casefold() for t in TASKS]
+        _hit = sum(1 for w in _all if any(_signal_hits(w, low) for low in _lows))
+        print("\n  ★★★ **本件够得着的词表射程**：%d 道题只命中了 %d / %d 个关键词"
+              "（**%.0f%%**）——剩下 %d 个词**本件从未验过**，"
+              "对它们的任何改动本件都判不出好坏。"
+              % (len(TASKS), _hit, len(_all), 100.0 * _hit / max(1, len(_all)), len(_all) - _hit))
+    except Exception as exc:                                  # noqa: BLE001
+        print("\n  ★ 词表射程**未量**（读不到 DOMAIN_SIGNALS：%s）—— 不是「全覆盖」" % exc)
+
     # ★★★★ **任务分类器兜底率** —— 这是「54% 没有领域信号」的上游真因。
     #   `compile_task_graph.infer_domains()` 拿 9 个关键词表撞任务文本，
     #   撞不上就返回 `["general-decision"]` —— 而 **`general-decision`
