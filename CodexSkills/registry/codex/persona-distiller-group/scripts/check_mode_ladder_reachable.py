@@ -33,6 +33,32 @@
 它的最低门槛比实测最大值高 X」。改不改由人拿别的证据决定。
 [[no-blocking-on-gate-shortfall]]｜[[a-penalty-is-not-a-rule]]
 
+## ★★★★ `risk` 够不到的真因：**它量的不是「这活风险高不高」**
+
+按本件新加的词表召回段实测（同 60 条任务）：
+
+    HIGH_RISK **18** 个词｜**有过命中的只有 5 个**
+    每条任务命中数：{0: **53**, 1: 7}   而够到最低门槛 0.36 需命中 **2** 个
+    命中过的：投资×3、production×1、财务×1、安全×1、合规×1
+    ⇒ **没有一条任务命中够 2 个** —— 结构性够不到，不是偶然
+
+再看词表本身：
+
+    compliance、financial、legal、medical、production、regulated、safety、
+    人身、医疗、合规、安全、投资、法律、生产、监管、税、诉讼、财务
+
+**这是「题材属不属受监管领域」的词表，不是「这活干起来风险高不高」的词表。**
+「把单体拆成微服务、设计灰度发布」是一件真有执行风险的活（线上变更、回滚），
+它一个词都不沾；而「设计一个投资组合」沾了 `投资`，但那是**题材**风险不是**执行**风险。
+
+⇒ 变量名叫 `risk`、被 `choose_mode` 当作「这活要不要多派人」用，
+  而它实际测的是另一个东西。**名字对了，量的语域错了。**
+  [[measured-voice-in-the-wrong-register]]｜[[the-comment-states-the-rule-the-code-narrows-it]]
+
+★ 本件**仍然不改词表**。补词会让更多任务进 small_team ——
+  在「多人是否真的更好」没有证据之前，那还是「为凑数放宽判据」。
+  本件只负责把这句话摆到台面上：**这个信号从建成起没被任何一道门用上过**。
+
 ## 任务从哪来（不许我自己编）
 
 `team-index.json` 每个产物自带 `application_scenarios` —— 那是蒸馏流程写下的
@@ -136,6 +162,37 @@ def sample_tasks(index_path: pathlib.Path, limit: int) -> list[str]:
     return list(dict.fromkeys(out))[:limit]
 
 
+#: 由**词表**驱动的画像项 —— 够不到时要能说出「是词表撞不上，还是这批任务真的不沾」。
+#: {画像键: (compile_task_graph 里的词表名, 需要命中几个才够到该项最低门槛)}
+WORDLIST_DRIVEN = {"risk": ("HIGH_RISK", 2)}
+
+
+def wordlist_recall(mod, name: str, tasks: list[str]):
+    """→ (词表大小, 有过命中的词数, {命中数: 任务条数}, [(词, 次数)])。纯函数式，不写盘。
+
+    ★ 为什么要有这一段：`risk` 在 60 条真任务上最大只有 0.270，而它的最低门槛是 0.36。
+      「够不到」有两种完全不同的成因，**处置相反**：
+        ① 这批任务真的不沾风险 ⇒ 门槛没问题，是样本如此
+        ② **词表撞不上** ⇒ 是尺子的召回问题，不是任务的问题
+      不量一遍就分不出来。[[blamed-the-channel-my-own-wordlist-was-blind]]
+    """
+    import collections
+    words = getattr(mod, name, None)
+    if not words:
+        return 0, 0, {}, []
+    hits = collections.Counter()
+    per = collections.Counter()
+    for t in tasks:
+        low = (t or "").lower()
+        n = 0
+        for w in words:
+            if str(w).lower() in low:
+                hits[w] += 1
+                n += 1
+        per[n] += 1
+    return len(words), len(hits), dict(sorted(per.items())), hits.most_common(8)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -196,6 +253,34 @@ def main() -> int:
             flag = "  ← ★ **够不到**" if hit == 0 else ""
             print("     %-18s 门槛 %-6s 实测最大 %-7.3f 命中 %d/%d%s"
                   % (key, thr, mx, hit, n, flag))
+
+    # ★ 词表驱动的项：把**词表自己的召回**印出来，分开「样本不沾」与「尺子撞不上」
+    try:
+        import importlib.util as _ilu
+        _s = _ilu.spec_from_file_location("_ctg", str(comp))
+        _m = _ilu.module_from_spec(_s)
+        sys.path.insert(0, str(comp.parent))
+        _s.loader.exec_module(_m)
+    except Exception as e:                                   # noqa: BLE001
+        _m = None
+        print("\n（词表召回未量：装不进 compile_task_graph —— %s）" % str(e)[:80])
+    if _m is not None:
+        print("\n词表驱动项的召回（分开「样本不沾」与「尺子撞不上」）：")
+        for key, (wl, need) in WORDLIST_DRIVEN.items():
+            size, used, per, top = wordlist_recall(_m, wl, tasks)
+            if not size:
+                print("  %-10s 找不到词表 `%s`（未量）" % (key, wl))
+                continue
+            print("  %-10s 词表 `%s` **%d** 个词｜**有过命中的只有 %d 个**"
+                  % (key, wl, size, used))
+            print("             每条任务命中数分布：%s（够到最低门槛需 **%d** 个）"
+                  % (per, need))
+            if top:
+                print("             命中过的：%s"
+                      % "、".join("%s×%d" % (w, n) for w, n in top))
+            if per.get(need, 0) == 0:
+                print("             ⇒ **没有一条任务命中够 %d 个** —— 这项够不到"
+                      "是**结构性的**，不是偶然。" % need)
 
     dead = unreachable(rep)
     print("\n可达 %d 档｜**不可达 %d 档**" % (len(rep) - len(dead), len(dead)))
