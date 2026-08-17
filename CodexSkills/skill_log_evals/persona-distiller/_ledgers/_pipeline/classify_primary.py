@@ -242,9 +242,21 @@ def main() -> int:
             for o in sorted(rows, key=lambda z: -z["words"]):
                 print(f"    {o['identifier'][:42]:<44}{o['words']:>8,}  {o['title'][:52]}")
                 print(f"      ↳ {o['依据']}｜creator: {o['creator'][:70]}")
+    # ★★★ 2026-08-18：把**自己的调用参数**写进产物。
+    #   起因：`check_measurements_fresh.py` 用 `--raw {raw}` 重跑本工具做「产物是否陈旧」
+    #   的比对，而本工具的 `--surname` 是 **required** ⇒ 每次都 argparse 报错 rc=2、
+    #   一个字节不写；那件判据把 raw/ 整个拷进沙箱，于是读回的是**它自己拷过去的原件**，
+    #   逐字相同 ⇒ 报「✓ 一致」。**`_primary.json` 从建成起就没被真验过。**
+    #   `--surname` 也**不能从 `meta.json` 的 name 推**（`da Vinci`/`von Bismarck` 会推错，
+    #   推错就会制造假漂移）⇒ 唯一可靠的办法是**产物自带参数**，判据照着重放。
+    #   旧产物没有这个字段 ⇒ 判据报「未核」，而不是报「一致」。
+    #   [[a-step-that-runs-after-the-write-changes-nothing]]｜[[self-consistent-is-not-latest]]
     (raw / "_primary.json").write_text(json.dumps(
         {"总数": n, "计数": tally, "一手占比下界": round(lo, 4), "一手占比上界": round(hi, 4),
-         "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完", "明细": out},
+         "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+         "★参数": {"surname": list(a.surname),
+                  "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"},
+         "明细": out},
         ensure_ascii=False, indent=2), encoding="utf-8")
     return 0
 

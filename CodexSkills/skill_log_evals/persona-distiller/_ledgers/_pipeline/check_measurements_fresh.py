@@ -65,6 +65,13 @@ TOOLS = [
     ("_primary.json", "classify_primary.py", ["--raw", "{raw}"]),
 ]
 
+# ★★★ 有些工具还有**必填参数**，光给 `--raw` 会 argparse 报错、一个字节不写。
+#   这里声明「从产物自带的 `★参数` 里取哪一项、用哪个开关重放」。
+#   {产物: (命令行开关, `★参数` 里的键名)}
+REPLAY_ARGS = {
+    "_primary.json": ("--surname", "surname"),
+}
+
 
 def workspaces(base: pathlib.Path):
     """★★★ 按**本件真正要比的那份产物**定位，不只按台账定位（2026-08-18 补）。
@@ -104,10 +111,38 @@ def rerun(ws: pathlib.Path, artifact: str, tool: str, argtpl: list):
     with tempfile.TemporaryDirectory() as td:
         tmp_raw = pathlib.Path(td) / "raw"
         shutil.copytree(ws / "raw", tmp_raw)
-        args = [a.format(raw=str(tmp_raw)) for a in argtpl]
+        # ★★★ **先把待比对的那份从沙箱里删掉**（2026-08-18 加）。
+        #   否则「重跑没产出」这道守卫**永远触发不了** —— 它看到的是
+        #   `copytree` 自己刚拷进去的那一份。实证：`classify_primary.py` 缺
+        #   `--surname` 必然 argparse 报错 rc=2、一个字节不写，而本函数照样
+        #   读回原件、与仓里那份**逐字相同** ⇒ 报「✓ 一致」。
+        #   **`_primary.json` 这一半从建成起就没被真验过。**
+        #   ⇒ 删掉之后，「存在」才等于「这次真的生成了」。
+        #   [[a-step-that-runs-after-the-write-changes-nothing]]｜[[harness-limits-masquerade-as-product-defects]]
+        (tmp_raw / artifact).unlink(missing_ok=True)
+        args = [a.format(raw=str(tmp_raw), ws=str(ws)) for a in argtpl]
+        # ★★ 产物自带的生成参数**原样重放**（不从 meta.json 猜）。
+        #   没有这个字段 ⇒ 说明它是**旧版工具**出的，本次判**未核**，不是一致。
+        try:
+            stored_meta = json.loads(src.read_text(encoding="utf-8"))
+        except ValueError:
+            stored_meta = {}
+        need = REPLAY_ARGS.get(artifact)
+        if need:
+            recorded = (stored_meta.get("★参数") or {}).get(need[1])
+            if not recorded:
+                return None, ("产物里没有 `★参数.%s` —— 它是**旧版工具**出的，"
+                              "本次判**未核**（重放参数不能从 meta.json 猜：`da Vinci`/"
+                              "`von Bismarck` 会猜错，猜错就是假漂移）" % need[1])
+            for v in (recorded if isinstance(recorded, list) else [recorded]):
+                args += [need[0], str(v)]
         r = subprocess.run([sys.executable, str(HERE / tool)] + args,
                            capture_output=True, text=True)
         out = tmp_raw / artifact
+        # ★★ 退出码非 0 ⇒ **未核**，不许再去读产物碰运气
+        if r.returncode != 0:
+            return None, ("重跑失败 rc=%d：%s" % (r.returncode,
+                          ((r.stderr or "") + (r.stdout or "")).strip().replace("\n", " ")[:150]))
         if not out.exists():
             return None, f"重跑没产出（rc={r.returncode}）：{(r.stderr or '')[:120]}"
         try:
@@ -195,6 +230,24 @@ def self_test() -> int:
         bad += 0 if ok2 else 1
         print(f"  {'✓' if ok2 else '✗'} 反对照：把 `lanes` 改成 +7 之后必须报出来"
               f"（实得 {len(drift2)} 项）")
+        # ③ ★★★ **结构性守卫**：重跑失败时不许读回沙箱里那份拷贝。
+        #   本件曾经就是这么假绿的 —— `copytree` 把待比对的产物一起拷进沙箱，
+        #   工具因缺必填参数 argparse 报错 rc=2、一字未写，而「产物存在吗」
+        #   看到的是拷贝，于是逐字相同 ⇒ 报「✓ 一致」。
+        #   这里用一个**必然失败**的假工具验：必须得到「未判」，不许得到「一致」。
+        import tempfile as _tf
+        with _tf.TemporaryDirectory() as _td:
+            fake = pathlib.Path(_td) / "always_fails.py"
+            fake.write_text("import sys; sys.exit(9)\n", encoding="utf-8")
+            shutil.copy(fake, HERE / "_selftest_always_fails.py")
+            try:
+                now, why = rerun(target, "_lanes.json", "_selftest_always_fails.py", ["--raw", "{raw}"])
+                ok3 = now is None and "rc=9" in (why or "")
+                bad += 0 if ok3 else 1
+                print(f"  {'✓' if ok3 else '✗'} ★★★ 结构对照：重跑失败(rc=9) ⇒ 必须判**未判**，"
+                      f"不许读回沙箱里的拷贝（实得：{('未判｜' + (why or ''))[:64] if now is None else '**读回了拷贝**'}）")
+            finally:
+                (HERE / "_selftest_always_fails.py").unlink(missing_ok=True)
     finally:
         p.write_text(backup, encoding="utf-8")
 
@@ -242,17 +295,32 @@ def main() -> int:
             print(f"  · {r['工作区']} / {r['产物']}")
             for k, v in r["差异"].items():
                 print(f"      {k}: {v}")
+    elif unjudged:
+        # ★★★ 2026-08-18：**结论不许算在未核之前。**
+        #   本行原来无条件写「✓ 所有量测产物都与当前这版工具一致」，
+        #   而下面紧跟着列出 19 份未核 —— 摘要与明细互相矛盾，读的人只看摘要。
+        #   [[verdict-computed-before-the-corrections]]
+        print("\n⚠ **比对成的都一致，但有 %d 份没比对成** —— 不下「全部一致」这个结论。"
+              % len(unjudged))
     else:
         print("\n✓ 所有量测产物都与当前这版工具一致")
     if unjudged:
-        print(f"\n⚠ ★ **未判（跑不了，不是通过）**：{len(unjudged)} 份")
-        for r in unjudged[:6]:
-            print(f"  · {r['工作区']} / {r['产物']}：{r['★ 未判']}")
+        # ★ 按理由归并再印：19 份同一个理由时，逐条列 6 份看不出「这是一整类」。
+        by_why = {}
+        for r in unjudged:
+            by_why.setdefault(r["★ 未判"], []).append("%s/%s" % (r["工作区"], r["产物"]))
+        print(f"\n⚠ ★ **未判（跑不了，不是通过）**：{len(unjudged)} 份，{len(by_why)} 类")
+        for why, who in sorted(by_why.items(), key=lambda x: -len(x[1])):
+            print("  · **%d 份**：%s" % (len(who), why))
+            print("      %s%s" % ("、".join(who[:4]), "…" if len(who) > 4 else ""))
     if ran == 0:
         print("\n★★ **一份都没比对成**——这不是通过。多半是语料不在本树，"
               "见仓根 `START-HERE.md`「语料在哪」。")
         return 4
-    return 1 if drift else 0
+    if drift:
+        return 1
+    # ★★ 有未核 ⇒ rc=4（未量），不是 rc=0。绿灯只留给「全都比过且都一致」。
+    return 4 if unjudged else 0
 
 
 if __name__ == "__main__":
