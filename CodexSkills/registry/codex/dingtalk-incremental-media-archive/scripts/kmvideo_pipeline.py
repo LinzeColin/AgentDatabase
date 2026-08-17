@@ -10,6 +10,8 @@
 
 硬约束见 SKILL.md。不得调用任何外部 agent（cc/codex 等）。
 """
+from __future__ import annotations
+
 import argparse
 import csv
 import hashlib
@@ -460,8 +462,101 @@ def kw_label(text: str):
     return None
 
 
+VISION_DOMAIN = (
+    "这是水泥/钢铁行业【回转窑在线车磨削检修】现场素材的多帧拼图。常见对象："
+    "回转窑筒体（大直径卧式旋转筒）、轮带（套在筒体外的厚钢环，是加工对象）、"
+    "托轮（支撑轮带的小轮）、挡块、车刀架与刀头（贴在轮带外圆切削）、"
+    "百分表（测轮带跳动与复检精度）、钢直尺（横搭在轮带面上量磨损凹陷间隙）。"
+    "画面里的大圆筒是回转窑筒体，不是管道；量具贴在轮带面上是量磨损量，不是量直径。"
+)
+
+# 脱敏必须宁可多标：漏标一次客户名 = 对外泄露；多标一次 = 人工复核 30 秒。
+# 实测教训：把规则收紧成「只有确实看见才标」后，写着企业名的 LED 屏反而不再被标出。
+VISION_DESENS = (
+    "【脱敏风险·宁可多标不可漏标】画面中只要出现任何文字牌、显示屏、横幅、水印、"
+    "证件、车辆，就必须先在「可见文字」里逐字抄出，再判断风险。"
+    "文字里含任何企业/工厂/公司名称 → 标 客户名称；"
+    "出现可辨认人物面部 → 标 人脸；出现打卡类应用浮层 → 标 打卡应用水印；"
+    "出现具体地址或经纬度 → 标 精确地理位置；出现车牌号 → 标 车牌。"
+    "拿不准时一律标出，不要因为不确定而填 无。"
+)
+
+# 功能位是叙事判断，不是画面识别。实测 gpt-4o 三轮准确率仅 33–40%，
+# 因此只作为「建议值」写入，置信度一律「待确认」，由抽样复核定案，不得直接参与改名。
+VISION_SLOTS = (
+    "【功能位·只给建议值】"
+    "开场证据=展示问题存在或损坏程度（量具贴在磨损面上露出缝隙、可见凹陷剥落）；"
+    "过程证据=正在施加加工动作且看得见作用（刀尖吃刀、切屑飞出、火花）；"
+    "关键细节=看得清工艺分界或成品特征（已加工亮面与未加工黑面的分界、整圈镜面带）；"
+    "验收闭环=用量具证明做完且合格（百分表在转动中读数稳定）；"
+    "环境铺垫=人员、厂区、标牌、班前会等非工艺画面；不可用=糊、黑、无内容。"
+)
+
+VISION_PROMPT = (
+    VISION_DOMAIN + VISION_SLOTS + VISION_DESENS +
+    "这是一张工业设备维修现场素材接触表的缩略图。"
+    "只输出一个 JSON 对象，不要任何其他文字，字段如下："
+    "{\"可见文字\":\"逐字抄出画面中所有文字，无则填 无\",\"描述\":\"2-6字中文内容描述\",\"功能位\":\"开场证据|过程证据|关键细节|验收闭环|环境铺垫|不可用\","
+    "\"画质等级\":\"可全屏|仅可内嵌|不可用\","
+    "\"画面元素\":\"火花、刀具、量具、人员、轮带、托轮、齿轮、筒体、表盘、焊接、吊装、厂区、文字牌、切屑、加工纹面、磨损面 中多选顿号分隔，无则填 无\","
+    "\"镜头特征\":\"大特写、中景、全景、运动镜头、固定机位、强对比、逆光、手持抖动 中多选顿号分隔\","
+    "\"工序阶段\":\"测量|拆解|加工|焊接|复检|收尾|无法判断\","
+    "\"能证明什么\":\"一句话，必须能接在“这段画面证明了____”后面读得通，填不出则填 无法判断\","
+    "\"脱敏风险\":\"客户名称、人脸、打卡应用水印、精确地理位置、车牌、安全告示牌 中多选顿号分隔，无则填 无\"}"
+)
+
+
+def minimax_vision(thumb: Path) -> dict | None:
+    """单轮无状态视觉调用：一张拼图 → JSON → 结束（禁止 agent 会话）。
+
+    配置来自环境变量 MINIMAX_API_BASE / MINIMAX_API_KEY / MINIMAX_MODEL。
+    未配置或调用失败返回 None（调用方回退关键词映射并把置信度标「待确认」）。
+    """
+    import base64
+    import urllib.request
+    base = os.environ.get("MINIMAX_API_BASE", "").strip()
+    key = os.environ.get("MINIMAX_API_KEY", "").strip()
+    model = os.environ.get("MINIMAX_MODEL", "").strip()
+    if not (base and key and model) or not thumb.exists():
+        return None
+    b64 = base64.b64encode(thumb.read_bytes()).decode()
+    payload = {
+        "model": model,
+        "max_tokens": 800,
+        "messages": [{
+            "role": "user",
+            "content": [
+                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64}"}},
+                {"type": "text", "text": VISION_PROMPT},
+            ],
+        }],
+    }
+    req = urllib.request.Request(
+        f"{base.rstrip('/')}/chat/completions",
+        data=json.dumps(payload).encode(),
+        headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            data = json.loads(resp.read())
+    except Exception:
+        return None
+    text = data.get("choices", [{}])[0].get("message", {}).get("content") or ""
+    s, e = text.find("{"), text.rfind("}")
+    if s == -1 or e == -1:
+        return None
+    try:
+        obj = json.loads(text[s:e + 1])
+    except Exception:
+        return None
+    if not obj.get("描述"):
+        return None
+    return obj
+
+
 def stage_label(args, ctx) -> dict:
-    """合并：外部视觉标注覆盖（如有）→ DWS 上下文关键词 → EXIF → 分辨率画质。"""
+    """合并：MiniMax 视觉（单轮 API）→ 关键词兜底 → EXIF → 分辨率画质。"""
     media = [m for m in load_media(ctx["groups"]) if m.get("smb_status") == "complete"]
     ctx_map = {}
     cf = ctx["workdir"] / "context.jsonl"
@@ -487,8 +582,10 @@ def stage_label(args, ctx) -> dict:
                 continue
             d = json.loads(l)
             override[d["file"]] = d
+    thumbs_dir = ctx["workdir"] / "thumbs"
     rows = []
     labeled = pending = 0
+    vision_ok = vision_fail = 0
     for m in media:
         name = os.path.basename(m.get("relative_path") or "")
         s = specs.get(name, {})
@@ -496,40 +593,49 @@ def stage_label(args, ctx) -> dict:
         c = ctx_map.get((m["_group"], m.get("resource_id")), {})
         text = f"{c.get('before','')} {c.get('after','')}"
         hit = kw_label(text)
+        vision = None
+        thumb = thumbs_dir / f"{os.path.splitext(name)[0]}.jpg"
+        if m.get("media_type") == "video" and thumb.exists():
+            vision = minimax_vision(thumb)
+            if vision is not None:
+                vision_ok += 1
+            else:
+                vision_fail += 1
         if ov.get("描述"):
             desc = ov["描述"]
+        elif vision and vision.get("描述"):
+            desc = str(vision["描述"]).strip()
         elif hit:
             desc = hit[0]
         else:
             desc = ""
         if not desc:
             desc = "待确认"
+        # 置信度：视觉/人工覆盖=高；关键词兜底与无信号=待确认（兜底不可信）
+        conf = "高" if (ov or vision) else "待确认"
         row = {
             "项目": m["_group"], "原文件名": name,
             "relative_path": m.get("relative_path"), "media_type": m.get("media_type"),
-            "说明": desc, "置信度": "高" if (ov or hit) else "待确认",
+            "说明": desc, "置信度": conf,
         }
         if ov:
-            for k in ("功能位", "画质等级", "画面元素", "镜头特征", "工序阶段", "能证明什么", "脱敏风险"):
-                row[k] = ov.get(k, "")
-            labeled += 1
+            src = ov
+        elif vision:
+            src = vision
         elif hit:
-            row["工序阶段"] = hit[1]
-            row["功能位"] = hit[2]
-            row["画面元素"] = hit[3]
-            row["镜头特征"] = "无法判断" if "镜头特征" in VOCAB else ""
-            row["能证明什么"] = (c.get("before") or c.get("after") or "").strip()[:60]
-            if not row["能证明什么"]:
-                row["功能位"] = "不可用"
-            row["脱敏风险"] = desens_risk(text)
+            src = {"工序阶段": hit[1], "功能位": hit[2], "画面元素": hit[3],
+                   "镜头特征": "", "能证明什么": (c.get("before") or c.get("after") or "").strip()[:60],
+                   "脱敏风险": desens_risk(text)}
+            if not src["能证明什么"]:
+                src["功能位"] = "不可用"
+        else:
+            src = {"功能位": "不可用", "工序阶段": "无法判断", "画面元素": "无",
+                   "镜头特征": "", "能证明什么": "", "脱敏风险": desens_risk(text)}
+        for k in ("功能位", "画质等级", "画面元素", "镜头特征", "工序阶段", "能证明什么", "脱敏风险"):
+            row[k] = src.get(k, "")
+        if ov or vision:
             labeled += 1
         else:
-            row["功能位"] = "不可用"
-            row["工序阶段"] = "无法判断"
-            row["画面元素"] = "无"
-            row["镜头特征"] = ""
-            row["能证明什么"] = ""
-            row["脱敏风险"] = desens_risk(text)
             pending += 1
         # 画质等级：分辨率硬信息
         if row.get("画质等级") not in ("可全屏", "仅可内嵌", "不可用"):
@@ -544,7 +650,12 @@ def stage_label(args, ctx) -> dict:
         if not row.get("脱敏风险"):
             row["脱敏风险"] = "无"
         row["重复于"] = dups.get(m.get("relative_path"), "无")
-        row["标注执行者"] = "pipeline-local" if not ov else "claude-code-cli"
+        if ov:
+            row["标注执行者"] = "claude-code-cli"
+        elif vision:
+            row["标注执行者"] = "minimax-hub"
+        else:
+            row["标注执行者"] = "pipeline-local"
         row["标注日期"] = "260817"
         rows.append(row)
     out = ctx["workdir"] / "desc.csv"
@@ -555,8 +666,10 @@ def stage_label(args, ctx) -> dict:
                                           "重复于", "标注执行者", "标注日期"])
         w.writeheader()
         w.writerows(rows)
-    log(f"label done: total={len(rows)} labeled={labeled} pending={pending}")
-    return {"total": len(rows), "labeled": labeled, "pending": pending}
+    log(f"label done: total={len(rows)} labeled={labeled} pending={pending} "
+        f"vision_ok={vision_ok} vision_fail={vision_fail}")
+    return {"total": len(rows), "labeled": labeled, "pending": pending,
+            "vision_ok": vision_ok, "vision_fail": vision_fail}
 
 
 def desens_risk(text: str) -> str:
