@@ -124,11 +124,28 @@ def discover():
     return [seen[k] for k in sorted(seen)]
 
 
+# ★★★ 2026-08-17：本件此前**只留最后一行、截到 60 字**，其余输出全丢。
+#   于是 `test_quality_and_eval.py` 报「新回归 FAILED (errors=2)」而**没有任何 traceback**，
+#   而它**单独跑是绿的**（`Ran 3 tests in 88.1s OK`）——只在并行里失败。
+#   ⇒ 被丢掉的那段输出是**唯一的证据**，丢了就无法诊断，也无法复现。
+#   **一道说「红了」却不说「红在哪」的门，几乎没用。**
+#   [[a-refusal-to-check-prints-one-error]]｜[[harness-resets-only-half-the-sandbox]]
+FAIL_TAIL_LINES = 25          # 红件保留多少行原始输出
+
+
 def run_one(path):
     t = time.time()
     r = subprocess.run([sys.executable, str(path)], capture_output=True, text=True)
-    tail = [l for l in (r.stdout + r.stderr).strip().splitlines() if l.strip()]
-    return r.returncode, (tail[-1][:60] if tail else ""), time.time() - t
+    raw = (r.stdout + r.stderr).strip()
+    tail = [l for l in raw.splitlines() if l.strip()]
+    # 绿件只回一行摘要；**红件把原始输出一起回去**，由调用方打出来
+    detail = "" if r.returncode == 0 else "\n".join(tail[-FAIL_TAIL_LINES:])
+    # ★★★ **超时不是回归。** 2026-08-17 实测：本件 8 路并行把机器压到测试自己的
+    #   `run_script` 超时（`subprocess.TimeoutExpired`），于是把**试验台自己造成的**
+    #   压力报成「新回归」——两次连跑的失败集合还不一样（1 件 vs 4 件）。
+    #   ⇒ 单独拎出来标注，不混进「新回归」。[[harness-limits-masquerade-as-product-defects]]
+    timed_out = "TimeoutExpired" in raw
+    return r.returncode, (tail[-1][:60] if tail else ""), time.time() - t, detail, timed_out
 
 
 def selftest() -> int:
@@ -207,14 +224,17 @@ def main() -> int:
         for fut in concurrent.futures.as_completed(futs):
             results[futs[fut]] = fut.result()
 
-    red, green, fixed = [], [], []
+    red, green, fixed, slow = [], [], [], []
     for f in files:
-        rc, tail, secs = results[f]
+        rc, tail, secs, detail, timed_out = results[f]
         mark = "✓" if rc == 0 else "✗"
         known = f.name in KNOWN
         note = ""
         if rc != 0 and known:
             note = "  ← **已知未决**"
+        elif rc != 0 and timed_out:
+            note = "  ← **超时（并行压力），不是回归**"
+            slow.append(f.name)
         elif rc != 0:
             note = "  ← **新回归**"
             red.append(f.name)
@@ -225,16 +245,32 @@ def main() -> int:
             green.append(f.name)
         print("  %s rc=%d %6.1fs  %-38s %-40s%s" % (mark, rc, secs, f.name, tail, note))
 
-    print("\n合计：绿 %d｜红 %d（其中已知未决 %d、**新回归 %d**）｜**墙钟 %.1fs**"
-          " —— 串行跑同一批实测 333.5s"
+    print("\n合计：绿 %d｜红 %d（已知未决 %d、**超时 %d**、**新回归 %d**）｜**墙钟 %.1fs**"
           % (len(green), len(files) - len(green),
-             len(files) - len(green) - len(red), len(red), time.time() - t0))
+             len(files) - len(green) - len(red) - len(slow), len(slow), len(red),
+             time.time() - t0))
+    if slow:
+        print("  ★ **超时的 %d 件不是回归** —— 是本件 8 路并行把机器压到测试自己的"
+              " `run_script` 超时；实测两次连跑的超时集合**不一样**。%s"
+              % (len(slow), "、".join(slow)))
+        print("    单独跑它们通常是绿的（`cd tests && python3 <名>.py`）。")
     if KNOWN:
         print("\n已知未决（每条都写明谁能让它变绿）：")
         for n, why in KNOWN.items():
             print("  · %s\n      %s" % (n, why))
     if fixed:
         print("\n★★ **下列已知项已经变绿，名单该缩了**：%s" % "、".join(fixed))
+    # ★ 把**红件的原始输出**打出来 —— 否则「红了」是个无法诊断的结论。
+    #   尤其：并行才失败的件**单独跑是绿的**，这段输出是唯一证据。
+    for _f in files:
+        _rc, _t, _s, _detail, _to = results[_f]
+        if _rc != 0 and _detail:
+            print("\n── %s 的原始输出（末 %d 行）%s" %
+                  (_f.name, FAIL_TAIL_LINES, ("  ← 已知未决" if _f.name in KNOWN else
+                    "  ← **超时（并行压力）**" if _to else "  ← **新回归**")))
+            for _l in _detail.splitlines():
+                print("   %s" % _l[:150])
+
     if red:
         print("\n✗ **新回归 %d 件**：%s" % (len(red), "、".join(red)))
 
