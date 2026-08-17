@@ -37,6 +37,31 @@
 没有台账的工作区**报「未核」，不算通过**（实测 19 个里有 1 个：`wip-plato-186`
 停在阶段 2，还没建台账 —— 而那正是判据最容易漏掉的一类）。
 
+## ★★★ 定案（2026-08-18）：**口径② 维持「只披露、不改工具」——有证据，不是偷懒**
+
+问过一遍「该不该让 `classify_primary.py` 也读出处台账的 `extraction_status`」，
+两条路都量了：
+
+**做不到**：`_primary.json` 在流水线里出现得**比台账早**。台账由
+`emit_source_ledger.py` 生成，而它的**输入之一就是 `_primary.json``。
+先有鸡还是先有蛋 —— 实测 19 个工作区里 `wip-plato-186` 就还没有台账。
+
+**也不必**：逐段追了传导链，**这个错传不下去**：
+
+    _fetch-manifest（status==已取回 过滤）─┐
+    _primary.json（只提供「档」标签）  ─┼→ source-ledger.jsonl ─→ check_profile_declared
+    _lanes / _dedup                    ─┘        ↑                    （档位在这里定）
+                                     emit_source_ledger.py:268
+                                     `recs = [r for r in mf["记录"] if r["status"] == "已取回"]`
+
+- `_primary.json` 里**多出来的「没取回」条目**：被 268 行那道过滤挡在台账之外 ⇒ 不传导。
+- **取回之后抽取失败**的（Jefferson 那条）：进得了台账，但 `check_profile_declared`
+  算档位时 `usable = train 去掉 tier=="U" 与 extraction_status=="failed"` ⇒ 也不传导。
+
+⇒ **口径② 命中的东西，对任何一次档位判定都是 0 影响。** 本件因此只报不改；
+  报的时候必须把这句一起说，否则「1 条违规」会被读成一个分数问题。
+  [[measurement-errors-all-point-the-same-way]]｜[[a-penalty-is-not-a-rule]]
+
 退出码：0＝没有；1＝有；4＝一份 `_primary.json` 都没有（未量）。
 """
 import argparse
