@@ -197,6 +197,7 @@ def scan():
         registered = bool(pre) and (surname.lower() in pre.lower())
         out.append({
             "工作区": slug, "档": prof, "train 源": n_src, "道": lanes,
+            "★ 路径": str(ws),
             "断言": n_claims, "题数": len(rows), "类数": suites,
             "缺产物": miss, "claim 标记": anchored, "已结案": closed_as,
             "门开不了": no_target,
@@ -231,6 +232,40 @@ def self_test() -> int:
     chk("★★ se_case 必须是 sd/√2 —— 漏掉这一步会把 SE 少算约 29%（门虚高 41%）",
         abs(SE_CASE - 0.0928 / math.sqrt(2)) < 1e-9)
     chk("0 题 ⇒ 不给数（不许当成 0 SE）", resolution(0, "quick") == (None, None, None))
+
+    # ── ★★★ 2026-08-17：「判完之后还查得了吗」这一档，正反各一 ──
+    #   ★ 它必须**只报不判**：走独立通道，不进 `bad`、不改退出码。
+    #     第一版直接 `gaps.append(...)`，实测**9 个人只因这一条就新进「缺件」名单**
+    #     （✗ 8 人 → 17 人），而我在注释里写着「只报信息」——**那句话当场是假的**。
+    import tempfile as _tf
+    with _tf.TemporaryDirectory() as _td:
+        _r = pathlib.Path(_td)
+
+        def _mk(name, with_rig):
+            d = _r / name / "evals"
+            d.mkdir(parents=True)
+            (d / "cases.jsonl").write_text('{"suite":"s"}\n', encoding="utf-8")
+            if with_rig:
+                (d / "baseline.v1.json").write_text("{}", encoding="utf-8")
+                (d / "judge_payload.v1.json").write_text("{}", encoding="utf-8")
+            return _r / name
+
+        def _miss(ws):
+            e = pathlib.Path(ws) / "evals"
+            out = []
+            if not (e / "baseline.v1.json").is_file():
+                out.append("baseline.v1.json")
+            if not list(e.glob("judge_payload*.json")):
+                out.append("judge_payload*.json")
+            return out
+
+        _a, _b = _mk("has-rig", True), _mk("no-rig", False)
+        chk("★ 有成对载荷 → 不报", _miss(_a) == [])
+        chk("★★ 缺成对载荷 → 两件都点名",
+            _miss(_b) == ["baseline.v1.json", "judge_payload*.json"])
+        # 反对照：只缺一件时**只点那一件**，不许一律报两件
+        (_b / "evals" / "baseline.v1.json").write_text("{}", encoding="utf-8")
+        chk("★★ 只缺 payload 时只点 payload", _miss(_b) == ["judge_payload*.json"])
     print(f"\n{'✓ 全过' if ok == t else f'✗ {t - ok}/{t} 项不符'}"
           "（前四条逐字复算 2026-08-13 那份开箱即跑清单里的表）")
     return 0 if ok == t else 1
@@ -267,6 +302,7 @@ def main() -> int:
     print(f"{'工作区':30s} {'档':9s} {'题':>4s} {'类':>3s} {'断言':>4s} "
           f"{'2SE':>7s} {'门是几个SE':>10s}  预登记  缺件")
     bad = []
+    no_rig = []          # ★ 判完之后无法复查盲判的人（**只报，不进 bad**）
     for r in rows:
         gaps = []
         if r["缺产物"]:
@@ -291,11 +327,46 @@ def main() -> int:
             gaps.append(f"★★ **空心道 {'/'.join(h[0])} 去掉后只剩 {h[1]} 道 < 门 {h[2]}**")
         elif h[0]:
             gaps.append(f"空心道 {'/'.join(h[0])}（去掉后 {h[1]} 道 ≥ 门 {h[2]}，不挡）")
+        # ★★★ 2026-08-17 新增：**判完之后，这次盲判还查得了吗**
+        #   `check_answer_surface_leak.py` 要成对载荷（`evals/baseline.v1.json`
+        #   ＋ `evals/judge_payload*.json`）才跑得动。缺了它，判完就**永远**答不出
+        #   「这次盲判到底盲不盲」——不是「盲判坏了」，是**没有留下能复查的东西**。
+        #   全库实测（2026-08-17）：22 个工作区有评测数据却缺载荷，
+        #   其中 **8 个已经判过分**（godin／jenner／koch／lister／pasteur／
+        #   rosenhain／steinhardt／virchow），他们的 delta 建立在一次无法复查的盲判上。
+        #   ⇒ **在判分之前说出来**，别等判完再发现。
+        #   ★ 本条**只报信息，不改任何门的判定** —— 它不进 `bad`，只挂在那一行上。
+        #   [[zero-hit-gates-must-prove-they-can-hit]]
+        # ★ 用**这一行自己的**路径，不用外层循环泄漏下来的 `ws`——
+        #   第一版就是那么写的，于是每一行都在查同一个工作区，命中 0。
+        _ev = pathlib.Path(r["★ 路径"]) / "evals"
+        _miss_rig = []
+        if not (_ev / "baseline.v1.json").is_file():
+            _miss_rig.append("baseline.v1.json")
+        if not list(_ev.glob("judge_payload*.json")):
+            _miss_rig.append("judge_payload*.json")
+        if _miss_rig:
+            # ★★★ **走独立通道，不进 `gaps`。**
+            #   第一版直接 `gaps.append(...)`，而 `if gaps: bad.append(...)` ——
+            #   实测**9 个人只因这一条就新进「缺件」名单**（✗ 8 人 → 17 人）。
+            #   我在注释里写着「只报信息，不改任何门的判定」，**那句话当场就是假的**。
+            #   让门对 9 个人变严是**决定**，不是清理；本件只负责说出来。
+            no_rig.append((r["工作区"], "／".join(_miss_rig)))
         if gaps:
             bad.append((r["工作区"], gaps))
         print(f"{r['工作区']:30s} {str(r['档']):9s} {r['题数']:>4d} {r['类数']:>3d} "
               f"{r['断言']:>4d} {r['2SE']:>7.4f} {r['门是几个SE']:>10.2f}  "
               f"{'✓' if r['已预登记'] else '✗':^6s}  {'；'.join(gaps) if gaps else '—'}")
+
+    if no_rig:
+        print("\n★ **判完之后无法复查这次盲判是否真盲**（缺成对载荷，泄题门跑不动）"
+              "　**%d 人**：" % len(no_rig))
+        for _n, _w in no_rig:
+            print("    · %-30s 缺 %s" % (_n, _w))
+        print("  ★ 本节**不改判定**——不进「缺件」计数，也不影响退出码。")
+        print("  ★ 为什么要现在说：全库实测 22 个工作区有评测数据却缺载荷，"
+              "其中 **8 个已经判过分**，他们的 delta 建立在一次无法复查的盲判上。"
+              "**判分之前留下载荷，成本近似为零；判完再补，做不到。**")
 
     print("\n装置件：")
     for k, p in RIG.items():
