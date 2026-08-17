@@ -4325,7 +4325,36 @@ def main() -> int:
     try:
         meta = ensure_target(target)
     except (ValueError, OSError) as exc:
-        print(json.dumps({'passed': False, 'errors': [{'code': 'target.invalid', 'message': str(exc)}]}, ensure_ascii=False, indent=2))
+        # ★★★ **拒检必须自己说自己拒检了。** 这里原本只印一条 `target.invalid`，
+        #   屏幕上「1 条错」看起来像个小毛病，实际是**零项被检查** ——
+        #   同一个坑我踩了三次：
+        #     2026-08-14 改完 Leonardo 的图版集去看效果，改前改后都是「1 条错」，
+        #               差点读成「我的改动没起作用」；
+        #     2026-08-14 Churchill 的 13 条 claim 从没被合成门看过一眼，
+        #               而他已经排在判分队列里；
+        #     2026-08-17 我拿 32 个未判分工作区跑普查，publish 出「32/32 不通过」——
+        #               其中 **7 个一条检查都没跑**，分母是错的。
+        #   [[a-refusal-to-check-prints-one-error]]（第三次）
+        #
+        #   ★ 只**加**字段、不动 `errors` 的形状：两个解析方
+        #     （`check_profile_declared.py` / `check_scoring_ready.py`）读的是
+        #     `passed` 与 `errors`，加键不会把它们弄坏。
+        #     [[one-requirement-two-consumers]]
+        _need = [n for n in ('meta.json', 'SKILL.md') if not (target / n).is_file()]
+        print("★★★ **拒检**：本次 `--phase %s` **一项检查都没跑**（checks_run=0）。\n"
+              "    这不是「只有 1 个问题」，是门根本没开机。\n"
+              "    实际路径：%s\n"
+              "    缺：%s\n"
+              "    ★ 若这是**语料阶段**的工作区（还没走 `init_target.py`），\n"
+              "      拒检是对的——但它的研究道结论也一样不存在，别记成「已检查」。"
+              % (args.phase, target, "、".join(_need) if _need else "（不是缺文件，见下方 message）"),
+              file=sys.stderr)
+        print(json.dumps({'passed': False,
+                          'refused': True,       # ★ 机器读的那一位：拒检 ≠ 检查完发现 1 个问题
+                          'checks_run': 0,
+                          'missing_required': _need,
+                          'errors': [{'code': 'target.invalid', 'message': str(exc)}]},
+                         ensure_ascii=False, indent=2))
         return 1
     profile = meta.get('profile', 'standard')
     thresholds = PROFILE_THRESHOLDS.get(profile)

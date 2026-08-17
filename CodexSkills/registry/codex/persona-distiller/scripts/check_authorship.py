@@ -126,6 +126,13 @@ def build_patterns(full_name: str) -> dict:
     这样两种写法互相都能命中（语料里写全中间名、账本里没写，反之亦然）。
     """
     tokens = [t for t in re.split(r"\s+", full_name.strip()) if t]
+    # ★ `meta.json` 的 `name` 缺失或为空串时，这里原本 `tokens[0]` 直接
+    #   IndexError —— **整个 quality_check 抛 traceback、一个 JSON 都不产出**，
+    #   解析 stdout 的调用方拿到的是空。判据可以说「判不了」，
+    #   但不许把自己炸掉让调用方读到空。[[a-refusal-to-check-prints-one-error]]
+    if not tokens:
+        raise ValueError("meta.json 的 name 为空 —— 署名判据没有可比对的姓名，"
+                         "**这是判不了，不是通过**")
 
     # ★ v0.0.0.26：**「名 + 姓」是一个西方近代假设，名册里有大量人物不满足它。**
     #

@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "dd98824235e087502bc72efeee9e9708d9b742dc54145a16ba446942026382ee",
-      "size_bytes": 338408
+      "sha256": "e5d17fa02f3bd311d0e1a935d2126b995c23ffce75bc462c3ee8c0ce774200d8",
+      "size_bytes": 341137
     },
     {
       "path": "CONTRIBUTING.md",
@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "80efd16cd1a9c2e10bc2c6dc047a7679971c6d5e634b03d4eb70ba36fe81069e",
-      "size_bytes": 147340
+      "sha256": "8fcdf8132e4d390dda0e7278f14c434dd08facc937e77139c90306882bfacbb8",
+      "size_bytes": 148843
     },
     {
       "path": "VERSION",
@@ -551,8 +551,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_authorship.py",
-      "sha256": "c4a465dbac93a9d50f73c9783c05f3f92b4b07ac013ba4bd78d79c98e285c67a",
-      "size_bytes": 189714
+      "sha256": "515af49f0d19a0fa4a2b97706a9f4d2278664b0e88fcd8937fc803a5521c2893",
+      "size_bytes": 190262
     },
     {
       "path": "references/pipeline/checkers/check_baseline_in_persona.py",
@@ -1031,8 +1031,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "a8b7b60d6baabe8ac06f1e65f38766e5435ccb536dbbc29890c41946a0c6752c",
-      "size_bytes": 253006
+      "sha256": "181a34189e600ce18a95bb96b369bf4c075db71096530ca4ceeb3d6c865b2684",
+      "size_bytes": 255097
     },
     {
       "path": "references/pipeline/checkers/render_claims.py",
@@ -1356,8 +1356,8 @@
     },
     {
       "path": "scripts/check_authorship.py",
-      "sha256": "c4a465dbac93a9d50f73c9783c05f3f92b4b07ac013ba4bd78d79c98e285c67a",
-      "size_bytes": 189714
+      "sha256": "515af49f0d19a0fa4a2b97706a9f4d2278664b0e88fcd8937fc803a5521c2893",
+      "size_bytes": 190262
     },
     {
       "path": "scripts/check_baseline_in_persona.py",
@@ -1896,8 +1896,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "a8b7b60d6baabe8ac06f1e65f38766e5435ccb536dbbc29890c41946a0c6752c",
-      "size_bytes": 253006
+      "sha256": "181a34189e600ce18a95bb96b369bf4c075db71096530ca4ceeb3d6c865b2684",
+      "size_bytes": 255097
     },
     {
       "path": "scripts/register_persona.py",
@@ -2443,6 +2443,11 @@
       "path": "tests/test_quality_and_eval.py",
       "sha256": "2d261e9a34eba048846efadc7ebc9bc522a687d68def1d875ddc9aa1a93f5241",
       "size_bytes": 2524
+    },
+    {
+      "path": "tests/test_refusal_announces_zero_checks.py",
+      "sha256": "dad3b56ef74ba536ff21f04d209e7e2e431675c39b236ad29c1b97a9670b1e8c",
+      "size_bytes": 4827
     },
     {
       "path": "tests/test_release_bundle.py",

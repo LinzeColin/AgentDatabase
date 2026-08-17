@@ -132,7 +132,25 @@ Date: 2026-08-05（**v0.0.0.154**）
 > 还原 → 0，文件逐字一致。（**上一次接线就是接错了分支才白接的**，所以这次必须植入验证。）
 >
 > **本版实况计数（`check_verification_counts.py` 逐项核过）**：
-> 判据 **93** 件、Python 脚本 **136** 件、checksum 全量校验 **493 files**、身份族 **12** 族、**名册 102 人**。
+> 判据 **93** 件、Python 脚本 **136** 件、checksum 全量校验 **494 files**、身份族 **12** 族、**名册 102 人**。
+>
+> ★ **2026-08-17 第十八次更新：checksum 493→494** —— 新增
+> `tests/test_refusal_announces_zero_checks.py`：`quality_check.py` 拿不到
+> `meta.json`／`SKILL.md` 时**拒检整个工作区**，此前只印一条 `target.invalid` ——
+> 屏幕上「1 条错」看着像小毛病，实际是**零项被检查**。同一个坑三次：
+> 08-14 改完 Leonardo 图版集看不出效果、08-14 Churchill 的 13 条 claim
+> 从没被合成门看过而人已排在判分队列、08-17 我发布「32/32 不通过」
+> 而其中 **7 个一条检查都没跑**。前两次都只写进台账，第三次照犯。
+> 修法：拒检时 stderr 明说「一项检查都没跑（checks_run=0）」并点名缺哪个文件，
+> JSON 加 `refused` / `checks_run` / `missing_required` 三个字段
+> （**只加不改**——两个解析方 `check_scoring_ready.py`／`check_profile_declared.py`
+> 读的是 `passed`＋`errors`，实跑 rc 与改动前一致）。
+> 反对照：把 `refused` 这一位拿掉，本件 **rc=1 且点名「JSON 缺 refused=true」**；
+> 正对照：可检工作区上这三个字段一个都不出现，且仍产出 37 条真错误。
+> ★ 附带修一处真崩：`meta.json` 的 `name` 为空时 `check_authorship.build_patterns`
+> 抛 `IndexError`，**整个 quality_check 抛 traceback、一个 JSON 都不产出** ——
+> 判据可以说「判不了」，不许把自己炸掉让调用方读到空。已改为 `ValueError`
+> 被上层接成一条错误码。
 >
 > ★ **2026-08-17 第十七次更新：checksum 492→493** —— 新增
 > `tests/test_checkers_refuse_wrong_documents.py`：把「给判据喂错文档，

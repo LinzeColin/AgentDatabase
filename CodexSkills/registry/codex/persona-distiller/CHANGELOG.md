@@ -13,6 +13,47 @@
 > **规矩不是被我忘了，是这份文件没给它留位置。**
 > 想守规矩的唯一办法是什么都不写，那又违反「每一处改动都要留痕」。
 
+### 2026-08-17：拒检整个工作区时只印 1 条错 —— 同一个坑第三次
+
+`quality_check.py` 拿不到 `meta.json`／`SKILL.md`，`ensure_target()` 会
+**拒检整个工作区**，此前只印一条 `target.invalid`。屏幕上「rc=1、1 条错」
+看着像个小毛病，实际是**零项被检查**。三次实况：
+
+| 日子 | 现场 | 我差点得出的错结论 |
+|---|---|---|
+| 08-14 | 改完 Leonardo 的九份图版集去跑研究门 | 改前改后都是「1 条错」⇒「我的改动什么也没改变」 |
+| 08-14 | Churchill 的 13 条 claim | 合成门一眼没看过，而他已排在判分队列里 |
+| 08-17 | 32 个未判分工作区跑研究门普查 | 我发布出「**32/32 不通过**」，其中 **7 个一条检查都没跑**，分母是错的 |
+
+前两次都只写进了台账。**写进台账的东西没有主人**，于是第三次照犯。
+[[a-refusal-to-check-prints-one-error]]｜[[every-requirement-needs-an-owner]]
+
+**改法（只加不改）**：拒检时 stderr 明说「本次一项检查都没跑（checks_run=0）」，
+点名缺的是哪个文件，并提示「若是语料阶段的工作区，拒检是对的 ——
+但它的研究道结论也一样不存在，别记成『已检查』」；
+JSON 增 `refused` / `checks_run` / `missing_required` 三个字段。
+
+★ **`errors` 的形状一个字没动**：两个解析方
+`_pipeline/check_scoring_ready.py` 与 `check_profile_declared.py` 读的是
+`passed`＋`errors`，改动后实跑 rc 与改动前一致（1／0）。[[one-requirement-two-consumers]]
+
+★ 落成 `tests/test_refusal_announces_zero_checks.py`，**正反各钉两条**：
+拒检时须有那三个字段；**可检工作区上一个都不许出现，且仍产出真错误**。
+只钉正例的话，「永远报拒检」也能全绿。
+反对照实跑：拿掉 `refused` 那一位 → **rc=1 且点名「JSON 缺 refused=true」**。
+
+★ 顺带修一处真崩：`meta.json` 的 `name` 为空时
+`check_authorship.build_patterns()` 抛 `IndexError`，
+**整个 `quality_check` 抛 traceback、一个 JSON 都不产出** ——
+判据可以说「判不了」，不许把自己炸掉让调用方读到空。改抛 `ValueError`，
+由上层已有的 `except ValueError` 接成一条错误码。
+
+★★ 讽刺而值得记（**同一形状第三次**）：新增这件测试文件本身把
+checksum 行数从 493 顶到 494，于是 `test_skill_contract` / `test_release_bundle` /
+`test_package_install_migrate` 三件一起红 —— 与 `run_tests.py` 首次加入时
+「它第一次运行就抓到 3 个回归，而那 3 个正是它自己造成的」完全同型。
+补 VERIFICATION.md 计数后：**绿 15｜红 1（已知未决）｜新回归 0**。
+
 ### 2026-08-15：生成器排除了一个文件，它自己生成的声明说「什么都没排除」
 
 `checksums.sha256` **490 行，而 skill 目录实际 492 个文件**。逐项对完，
