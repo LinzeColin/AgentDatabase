@@ -3,7 +3,7 @@
   "display_name": "Persona Distiller Group",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.26",
+    "kind": "repository-customized-v0.0.0.27",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "files": [
@@ -19,8 +19,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "f898eac27f7982151354409853f5e40c9febd0a4932eb654c7ab3bcb0f8382d6",
-      "size_bytes": 45139
+      "sha256": "73e0b8d746500c8fc0a344e223a107b6a4b76915aa217b8906de68d0df9b974f",
+      "size_bytes": 47624
     },
     {
       "path": "README.md",
@@ -34,7 +34,7 @@
     },
     {
       "path": "VERSION",
-      "sha256": "384cb4c8c96cc09d701265a73bed4135129c70ec27990b81bd089fa3ec6d1877",
+      "sha256": "0505337703e54e9015407ea2970776e6b2a28207f02f2072758b88ed4a0c2dc4",
       "size_bytes": 10
     },
     {
@@ -129,7 +129,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "71c14080eea92d585ab5674845df804bce8dc4a7ac44e6c3de63352ee7b9cd88",
+      "sha256": "c1cbaa7b2c1b35ee4c3da2170503d170db08f44f9872a03eaaafa267166e69ab",
       "size_bytes": 1304
     },
     {
@@ -238,6 +238,11 @@
       "size_bytes": 7915
     },
     {
+      "path": "scripts/check_mode_ladder_reachable.py",
+      "sha256": "195b44a7a397c71abe636bec975a10e4e46f3debf95862ecb32ce4146097c775",
+      "size_bytes": 10143
+    },
+    {
       "path": "scripts/check_roster_independence.py",
       "sha256": "f97e887bb24b1c5091ed72dd38c2b4ee2c7fee73a2425d678357b7f6d75d3a39",
       "size_bytes": 6397
@@ -324,13 +329,13 @@
     },
     {
       "path": "team-index.json",
-      "sha256": "286252622aa362f37863c4c6525c2a4425e1a92352201c492097a94c9252d251",
+      "sha256": "8da72b597e44a7583b77c45b3c3e14750d717b9f152a7d45a190a93c5de5e54a",
       "size_bytes": 400812
     },
     {
       "path": "tests/run_functional_acceptance.py",
-      "sha256": "1530f7b164eece8cd925b0763dd0c71da15d2909106803339bc5710a5456cd9e",
-      "size_bytes": 2013
+      "sha256": "e78619a90685863bf7917192b40eaf7b23e552bbbf19144f2ef4a042a971273b",
+      "size_bytes": 3869
     },
     {
       "path": "tests/test_all_selftests_have_a_runner.py",
@@ -2018,5 +2023,5 @@
   "name": "persona-distiller-group",
   "schema_version": "1.0",
   "verification": {},
-  "version": "v0.0.0.26"
+  "version": "v0.0.0.27"
 }

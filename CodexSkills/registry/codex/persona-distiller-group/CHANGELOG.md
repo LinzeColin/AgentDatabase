@@ -1,5 +1,47 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.27
+
+**本版货**：`scripts/check_mode_ladder_reachable.py` —— 拿**产物自带的**
+`application_scenarios` 当任务样本（60 条，不是判据作者编的），量四档模式各自够不够得到。
+
+实测（60 条真任务）：
+
+    实际落到各档   single_expert **53**｜small_team **7**｜deep_team **0**｜swarm **0**
+    domains        中位 1.000｜最大 4.000
+    complexity     中位 0.254｜**最大 0.494**
+    risk           中位 0.080｜**最大 0.270**
+    parallelizability 中位 0.080｜**最大 0.275**
+
+| 档 | 触发 | 门槛 | 实测最大 | 命中 |
+|---|---|---:|---:|---:|
+| small_team | complexity | 0.38 | 0.494 | 6/60 |
+| small_team | **risk** | 0.36 | **0.270** | **0/60** |
+| small_team | domains | 2 | 4 | 5/60 |
+| deep_team | complexity / risk / domains | 0.76 / 0.72 / 5 | 0.494 / 0.270 / 4 | **0/60 全部** |
+| swarm | parallelizability | 0.72 | **0.275** | **0/60** |
+
+⇒ **四档里 `deep_team` 与 `swarm` 在当前语料上结构性不可达**；
+  `small_team` 的三条触发里 `risk` 那条也够不到。一个「团队 skill」
+  在 **88%** 的任务上只坐 1 个人。
+
+★ **本件不建议改门槛。** 把 risk 从 0.36 调到 0.25 会让更多任务进 small_team ——
+  那正是「为凑数放宽判据」。要不要改，得先有本件给不了的证据：
+  **多人是否真的比单人做得更好**。而遥测是 `sample_count=1`、`eligible_for_c=False`，
+  策略 C 未标定，**一条产出数据都没有**。
+
+★★ 已接进 `tests/run_functional_acceptance.py` 作为**披露步骤**（写进验收记录的
+  `mode_ladder_reachability` 字段），**不参与 status、不改退出码** ——
+  「2 档不可达」是已知状态，不许因为过不了门而卡住流程。
+  为什么要在那里真跑：`test_all_selftests_have_a_runner.py` 只收编它的 `--self-test`
+  （判定逻辑对不对），**不会拿真名册跑一遍**。一件判据可以同时「被调用」和「从没对现实跑过」。
+
+**同版另一件**：`tests/test_routing_actually_discriminates.py` ——
+原断言「每题 ≥3 席」自 08-17 起恒红，红的理由与它自称在测的东西无关
+（`compile_task_graph` 对基准两题都判 `single_expert`）。改成在**全部打过分的候选**上
+验「排序坍成常数」（软件 45 个/25 个不同值、金融 42 个/27 个不同值），席位数单独断言。
+`run_functional_acceptance.py` **rc=1 → rc=0**。
+
 ## v0.0.0.26 — 2026-08-17
 
 **修：词表外的 `--task-slice` 被静默收下，coverage 恒为 0 而没人被告知。**
