@@ -1051,8 +1051,8 @@
     },
     {
       "path": "references/pipeline/checkers/show_workspace_layout.py",
-      "sha256": "873365c5a46aeec472858c661d5cc651fdd8bccd98e390853cf9f6b38deabc92",
-      "size_bytes": 7542
+      "sha256": "33b44be284cd03fad2a53758c4222e4eda53f2d93818f3fd2d82af8665b26bf9",
+      "size_bytes": 8652
     },
     {
       "path": "references/pipeline/checkers/stamp_authorship_evidence.py",
@@ -1941,8 +1941,8 @@
     },
     {
       "path": "scripts/show_workspace_layout.py",
-      "sha256": "873365c5a46aeec472858c661d5cc651fdd8bccd98e390853cf9f6b38deabc92",
-      "size_bytes": 7542
+      "sha256": "33b44be284cd03fad2a53758c4222e4eda53f2d93818f3fd2d82af8665b26bf9",
+      "size_bytes": 8652
     },
     {
       "path": "scripts/stamp_authorship_evidence.py",

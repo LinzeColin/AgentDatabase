@@ -84,7 +84,20 @@ def scan(corpora: pathlib.Path) -> dict:
                          "references": str(refs),
                          "txt 份数": len(list(refs.rglob("*.txt")))})
     real = {k: v for k, v in shapes.items() if k.startswith("workspaces/")}
-    out = {"工作区数": len(rows), "**不同的形状数**": len(real),
+    # ★ 2026-08-17：这个键原来叫「工作区数」，而 `rows` 是**每个 wip 目录一行** ——
+    #   全库实测 75 行里有 **22 行根本没有 `workspaces/`**（还有 6 个没有 references）。
+    #   标签写的是 A、数的是 B；同日因这一族已订正五次。
+    #   ⇒ 键名改成它真正数的东西，并**把两个数并排印**：
+    #      `wip 目录数`（分母）与 `有 references 的工作区数`（本件真正看得见的）。
+    #   ★★ 本件的标志物是 **`references/` 目录**；`_pipeline/workspace_roots.py`
+    #      用的是 **`evidence/source-ledger.jsonl`**。两把尺**答的是两个问题**，
+    #      数不一样是对的 —— 所以这里把标志物也印出来，别让读的人以为该相等。
+    #      [[counts-need-their-cutoff-stated]]
+    out = {"wip 目录数": len(rows),
+           "有 references 的工作区数": sum(real.values()),
+           "★ 本件的标志物": "references/ 目录（另一把尺 workspace_roots.py 用的是 "
+                              "evidence/source-ledger.jsonl，两者数不同是对的）",
+           "**不同的形状数**": len(real),
            "各形状计数": dict(shapes), "逐个": rows}
     if len(real) > 1:
         out["⚠⚠ 结论"] = ("**目录深度不一致**——按固定深度写的 glob 会静默漏掉一部分，"
