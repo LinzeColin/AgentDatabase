@@ -140,6 +140,27 @@
   [[evidence-must-carry-what-it-measured]]
   ⇒ 本件因此**只报它真的量过的那一面**，并在输出里把这句射程一起印出来。
 
+## ★★★★ 为什么我**不**替它造一份「用户口吻任务集」
+
+上一节说清了：现有样本是**标签**，缺的是**真实用户提问**。
+自然的下一步像是「从 `key_capabilities` 按模板生成一批用户口吻的任务」。**我不做，理由是循环：**
+
+    某个软件人的 `key_capabilities` 里必然带软件词 —— **因为他就是软件人**。
+    拿它生成的任务去问「分类器认不认得出软件任务」，
+    等于**题集与被测的分类器共用同一个措辞来源**。
+    验出来的是我的模板，不是产品在真实提问上的表现。
+    [[independent-is-not-realistic-shared-wording-source]]｜[[fixtures-are-clean-because-i-wrote-them]]
+
+⇒ 造一份出来会让这道门变绿，而那个绿**什么也不证明**。
+
+**能做的是把插座留好，不是造假数据**：本件加了 `--tasks <文件>`
+（每行一条，或 JSON 数组）。等真实提问从遥测里攒出来（或 Owner 给一份），
+直接喂进来即可；走外部任务集时，上面那句「标签不是用户提问」的射程话**自动关闭**，
+并提示使用者**自己说明这份任务集怎么来的**。
+
+★ 同时加了**最小样本量守卫**：样本 < 20 条时不许下「不可达」的结论（返回 rc=4 未量）——
+  否则拿 `--tasks` 塞两条就能得出任意结论。本件自己也要守「样本撑不起全称判断」。
+
 ## 任务从哪来（不许我自己编）
 
 `team-index.json` 每个产物自带 `application_scenarios` —— 那是蒸馏流程写下的
@@ -326,6 +347,9 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--registry-root", default=str(ROOT))
     ap.add_argument("--limit", type=int, default=60, help="取多少条任务样本（默认 60）")
+    ap.add_argument("--tasks", default=None, metavar="文件",
+                    help="改用**外部任务集**（每行一条，或 JSON 数组）。"
+                         "★ 这是留给**真实用户提问**的插座 —— 见 docstring「为什么不自己造一份」。")
     ap.add_argument("--self-test", "--selftest", dest="selftest", action="store_true")
     a = ap.parse_args()
     if a.selftest:
@@ -338,15 +362,33 @@ def main() -> int:
         print("★ **未量，不是通过**（rc=4）—— 缺 %s"
               % ("team-index.json" if not idx.is_file() else "compile_task_graph.py"))
         return 4
-    tasks = sample_tasks(idx, a.limit)
+    src = "产物自带的 `application_scenarios`"
+    if a.tasks:
+        tp = pathlib.Path(a.tasks)
+        if not tp.is_file():
+            print("★ **未量，不是通过**（rc=4）—— 任务集文件不在：%s" % tp)
+            return 4
+        raw = tp.read_text(encoding="utf-8")
+        try:
+            tasks = [str(x) for x in json.loads(raw) if str(x).strip()]
+        except ValueError:
+            tasks = [ln.strip() for ln in raw.splitlines() if ln.strip()
+                     and not ln.lstrip().startswith("#")]
+        tasks = tasks[:a.limit]
+        src = "外部任务集 `%s`" % tp.name
+    else:
+        tasks = sample_tasks(idx, a.limit)
     _avg = (sum(len(x) for x in tasks) / len(tasks)) if tasks else 0
-    print("样本：**%d** 条，取自产物自带的 `application_scenarios`（**不是判据作者编的**）"
-          % len(tasks))
-    print("  ★★ **射程**：平均 **%.0f 字**，且多为**名词短语标签**（如「表征与范式设计」），"
-          "**不是用户会打的任务**。" % _avg)
-    print("     实测对照：同样 33 字改成用户口吻（「帮我设计一个性能敏感模块的抽象层，"
-          "要求零开销，并给出测试与回滚方案」）⇒ **small_team**。")
-    print("     ⇒ 下面的「N% 只坐 1 人」说的是**标签**，**不能读成用户用起来如此** —— 那个数没量过。")
+    print("样本：**%d** 条，来自%s" % (len(tasks), src))
+    if a.tasks:
+        print("  ★ 用的是外部任务集 —— 下面的射程话（「标签不是用户提问」）**不适用于本次**；"
+              "请自行说明这份任务集是怎么来的。")
+    else:
+        print("  ★★ **射程**：平均 **%.0f 字**，且多为**名词短语标签**（如「表征与范式设计」），"
+              "**不是用户会打的任务**。" % _avg)
+        print("     实测对照：同样 33 字改成用户口吻（「帮我设计一个性能敏感模块的抽象层，"
+              "要求零开销，并给出测试与回滚方案」）⇒ **small_team**。")
+        print("     ⇒ 下面的「N% 只坐 1 人」说的是**标签**，**不能读成用户用起来如此** —— 那个数没量过。")
     if not tasks:
         print("★ **未量，不是通过**（rc=4）—— 一条样本都取不到")
         return 4
@@ -460,6 +502,17 @@ def main() -> int:
                 print("     [[blamed-the-channel-my-own-wordlist-was-blind]]")
 
     dead = unreachable(rep)
+    # ★★★ **样本撑不起全称判断**：3 条任务上「一次也没触发」说明不了「不可达」。
+    #   本件自己也得守这条 —— 否则拿 `--tasks` 塞 2 条就能得出任意结论。
+    #   门槛 20 是**下限不是目标**：它只保证「0 次触发」不是小样本的偶然。
+    MIN_N = 20
+    if len(profiles) < MIN_N and dead:
+        print("\n★ **未量，不是通过**（rc=4）—— 只有 **%d** 条样本（下限 %d）。"
+              % (len(profiles), MIN_N))
+        print("  「%s 一次也没触发」在这个样本量上**说明不了不可达** ——"
+              % "、".join(dead))
+        print("  它可能只是没抽到。[[samples-cannot-support-universal-claims]]")
+        return 4
     print("\n可达 %d 档｜**不可达 %d 档**" % (len(rep) - len(dead), len(dead)))
     if not dead:
         print("\n✓ 每一档都有任务够得到")

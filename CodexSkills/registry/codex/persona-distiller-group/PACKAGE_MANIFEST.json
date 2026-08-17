@@ -3,7 +3,7 @@
   "display_name": "Persona Distiller Group",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.28",
+    "kind": "repository-customized-v0.0.0.29",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "files": [
@@ -19,8 +19,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "7fae3668b4c906baca9c823f86f2b2fb420c6386666145cdcdb30b7be6f6d77b",
-      "size_bytes": 49459
+      "sha256": "e8da4e15c00bac8d89c323011d39798e9b21280c298b881a4a3c2bd74c6e727b",
+      "size_bytes": 50951
     },
     {
       "path": "README.md",
@@ -34,7 +34,7 @@
     },
     {
       "path": "VERSION",
-      "sha256": "83a19f8a6ad6f7b3791b03d2eabc1f28150d99530b8cd81c8d6ca4c1085c3e6a",
+      "sha256": "1b36e688e512d54a360b45e6ba5f4430eb973649f19eee036441de4ca3b7cdd8",
       "size_bytes": 10
     },
     {
@@ -129,7 +129,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "930902e34cbd542077d7358167d502d8e9cd95efca51e18c981ee5fa5c7fd2af",
+      "sha256": "e5569466103dcf058ccdb93f4b335c65ca69d4669f8a8f8607be7dff7def92b9",
       "size_bytes": 1304
     },
     {
@@ -239,8 +239,8 @@
     },
     {
       "path": "scripts/check_mode_ladder_reachable.py",
-      "sha256": "b650e7fdfd2c94a369e7c59b53b5b41c1f670dd232b8b80e98d89c4249cb6413",
-      "size_bytes": 25631
+      "sha256": "e662ad4c5d1ef0a24d46e286fb4ceb93ca020d53051f5d0851d7d6ca2b9678d9",
+      "size_bytes": 28922
     },
     {
       "path": "scripts/check_roster_independence.py",
@@ -329,7 +329,7 @@
     },
     {
       "path": "team-index.json",
-      "sha256": "f5867b24a1bbc32029ec6ad8b6fe0d93446c540bda8607731399258c888b03a0",
+      "sha256": "809fb4d95eb78a4631f107b52d6290feccd27052151ebc29a13da2378ec29802",
       "size_bytes": 400812
     },
     {
@@ -2023,5 +2023,5 @@
   "name": "persona-distiller-group",
   "schema_version": "1.0",
   "verification": {},
-  "version": "v0.0.0.28"
+  "version": "v0.0.0.29"
 }
