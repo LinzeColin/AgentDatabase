@@ -3838,7 +3838,17 @@ def run_threshold_doc_drift(report, target: Path) -> None:
     code, out = proc.returncode, (proc.stdout or '') + (proc.stderr or '')
     bad = [ln.strip() for ln in out.splitlines() if ln.strip().startswith('✗')]
     info: dict[str, Any] = {'返回码': code, '**不一致处**': len(bad)}
-    if code != 0:
+    # ★ 同日普查出来的第二处「未核被说成不合格」——**这一处退出码本身就分得清**：
+    #   `check_threshold_doc_drift.py` 找不到代码真源/文档时 **rc=3**（它自己印
+    #   「未核，不是通过」），真漂移是 **rc=2**。而这里原先只判 `code != 0`，
+    #   于是「文件找不到」会被报成「文档门槛表与 PROFILE_THRESHOLDS 不一致——
+    #   **改文档去迁就代码**」——照这句去改文档，改的是一个没被读过的文件。
+    #   ★ 与 holdout 那处不同：那处只能靠文本分辨，这处**现成的退出码没被用**。
+    if code == 3:
+        info['未核口径'] = ('找不到代码真源或文档 ⇒ **这道门没能跑起来**，'
+                            '不是「文档写错了」。别照「改文档」那句去改。')
+        report.errors.append(f'doc.threshold-unverifiable: {len(bad)} 条（**未核，不是通过**）')
+    elif code != 0:
         info['**逐条**'] = bad[:6]
         info['口径'] = ('文档门槛表与 PROFILE_THRESHOLDS 不一致——'
                         '**改文档去迁就代码，不许反过来**。'

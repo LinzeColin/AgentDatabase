@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "3980a8ed0fdb9b5abf1dd19816e82eb26914044f2bf761a658e57468fd6e3a24",
-      "size_bytes": 343083
+      "sha256": "c77e5bc49df1eeb4ee1bbad5e2abfe9b2afd38bfcb14c379477903edc1cb7f7a",
+      "size_bytes": 345510
     },
     {
       "path": "CONTRIBUTING.md",
@@ -916,8 +916,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_threshold_doc_drift.py",
-      "sha256": "97865f4b2ddf4bff7092621c1820bad54f9c2f161feea3ee1f0cc2fdea1c7dcd",
-      "size_bytes": 20494
+      "sha256": "16fb6ec06d8ae3b6df3593d64018f611c4b9ae7b5b8c909f264ef64c16364999",
+      "size_bytes": 21342
     },
     {
       "path": "references/pipeline/checkers/check_title_is_not_filename.py",
@@ -1031,8 +1031,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "80c3f5068901405469c4204c933fc2029f821cc40f0a9140c0981b4243fb6f42",
-      "size_bytes": 257279
+      "sha256": "63ce6ced7f31afd9dc250fce52de60badcf4f1e118231389ed27ae9777be2922",
+      "size_bytes": 258245
     },
     {
       "path": "references/pipeline/checkers/render_claims.py",
@@ -1721,8 +1721,8 @@
     },
     {
       "path": "scripts/check_threshold_doc_drift.py",
-      "sha256": "97865f4b2ddf4bff7092621c1820bad54f9c2f161feea3ee1f0cc2fdea1c7dcd",
-      "size_bytes": 20494
+      "sha256": "16fb6ec06d8ae3b6df3593d64018f611c4b9ae7b5b8c909f264ef64c16364999",
+      "size_bytes": 21342
     },
     {
       "path": "scripts/check_title_is_not_filename.py",
@@ -1896,8 +1896,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "80c3f5068901405469c4204c933fc2029f821cc40f0a9140c0981b4243fb6f42",
-      "size_bytes": 257279
+      "sha256": "63ce6ced7f31afd9dc250fce52de60badcf4f1e118231389ed27ae9777be2922",
+      "size_bytes": 258245
     },
     {
       "path": "scripts/register_persona.py",

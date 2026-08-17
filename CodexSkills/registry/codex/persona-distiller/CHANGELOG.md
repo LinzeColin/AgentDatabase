@@ -87,6 +87,41 @@ Rousseau #178 实测：唯一那条 ✗ 是「找不到正文的源 **103** 条�
 ★ 这条和同日上一条是**同一族**：门没能判 ≠ 门判了不合格。
 [[a-blocked-by-x-label-needs-x-rerun]]｜[[zero-hit-gates-must-prove-they-can-hit]]
 
+### 2026-08-17（同日第三处）：数出口 —— 8 个同形位点，只有 1 个是真的
+
+修完 holdout 那处不能就说「这一类收干净了」。数了 `quality_check.py` 里
+**全部 8 处**「把判据的 `✗` 行收进来当不合格」的位点，逐个追到底层判据：
+
+| 调用点 | 底层判据 | 它会不会印「判不了」型 ✗ | 结论 |
+|---|---|---|---|
+| `content.quote-out-of-span` | `check_quote_in_span` | 0 处 | 无从混淆 |
+| `eval.surface-leak` | `check_answer_surface_leak` | 0 处 | 无从混淆 |
+| `content.unsourced-name` | — | 已有区分 | 本来就对 |
+| `claim.parallel-witness-collapse` ×2 | `check_translation_witness` | 0 处 | 无从混淆 |
+| `corpus.holdout-overlap` | `check_holdout_overlap` | **有** | **已修（上一条）** |
+| `verdict.attribution-flipped` | `check_verdict_attribution` | 1 处 | **不是缺陷**：它按返回值 `n` 判，不按 ✗ 条数 |
+| `doc.threshold-drift` | `check_threshold_doc_drift` | 2 处 | **是缺陷，已修** |
+
+★ 粗扫报「5 处没区分」，追到底层只剩 **1 处**真的。
+  **代理指标不是结论** —— 「窗口里有没有出现『无法判定』」是我编的代理物，
+  真判据是「底层会不会印这种 ✗」。
+
+**`doc.threshold-drift` 这处**：`check_threshold_doc_drift.py` 找不到代码真源／文档时
+**rc=3**（自己印「未核，不是通过」），真漂移是 **rc=2**；而调用方只判 `code != 0`，
+于是「文件找不到」被报成「文档门槛表与 `PROFILE_THRESHOLDS` 不一致——
+**改文档去迁就代码**」。照这句去改，改的是一个没被读过的文件。
+★ 与 holdout 那处不同：**这处现成的退出码就分得清，只是没被用**。
+已拆出 `doc.threshold-unverifiable`。
+
+★★ 而且它**够得着**：本判据有两份副本，默认文档路径原写作
+`HERE.parent / "references/pipeline/RUNBOOK.md"` ——
+对 `scripts/` 那份对，对 `references/pipeline/checkers/` 那份就成了
+`references/pipeline/references/pipeline/RUNBOOK.md`，**不存在** ⇒
+**从镜像树跑这道门永远 rc=3、永远跑不起来**。
+改用 `_skill_root()`（找同时有 `VERSION` 与 `SKILL.md` 的那一层）。
+实测：两棵树现在都 rc=0；给 `--doc /nonexistent` 仍 rc=3。
+**不许按层数写路径。**[[a-rule-in-a-doc-has-no-enforcer]]｜[[zero-hit-gates-must-prove-they-can-hit]]
+
 ### 2026-08-15：生成器排除了一个文件，它自己生成的声明说「什么都没排除」
 
 `checksums.sha256` **490 行，而 skill 目录实际 492 个文件**。逐项对完，

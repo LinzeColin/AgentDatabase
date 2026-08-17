@@ -46,6 +46,23 @@ KEYS = (("min_overall_score", "总分"), ("min_baseline_delta", "delta"),
 HERE = pathlib.Path(__file__).resolve().parent
 
 
+def _skill_root(start: pathlib.Path) -> pathlib.Path:
+    """往上走到 skill 根（同时有 `VERSION` 与 `SKILL.md` 的那一层）。
+
+    ★ **不许按层数写路径。** 本判据有两份副本：`scripts/` 与
+    `references/pipeline/checkers/`。原先默认文档路径写作
+    `HERE.parent / "references/pipeline/RUNBOOK.md"` —— 对 `scripts/` 那份是对的，
+    对镜像那份就成了 `references/pipeline/references/pipeline/RUNBOOK.md`，
+    **不存在** ⇒ 从镜像树跑这道门**永远 rc=3、永远跑不起来**。
+    一道跑不起来的门不是门。[[zero-hit-gates-must-prove-they-can-hit]]
+    """
+    cur = start.resolve()
+    for cand in [cur] + list(cur.parents):
+        if (cand / "VERSION").is_file() and (cand / "SKILL.md").is_file():
+            return cand
+    return start.parent
+
+
 def load_thresholds(qc: pathlib.Path) -> dict:
     spec = importlib.util.spec_from_file_location("_pd_qc", qc)
     mod = importlib.util.module_from_spec(spec)
@@ -360,7 +377,7 @@ def main() -> int:
     ap.add_argument("--quality-check", type=pathlib.Path,
                     default=HERE / "quality_check.py")
     ap.add_argument("--doc", type=pathlib.Path,
-                    default=HERE.parent / "references/pipeline/RUNBOOK.md")
+                    default=_skill_root(HERE) / "references/pipeline/RUNBOOK.md")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
     if a.self_test:
