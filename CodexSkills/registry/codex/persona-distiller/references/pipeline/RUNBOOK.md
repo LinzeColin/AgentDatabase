@@ -200,11 +200,35 @@
    `own_voice` 会自动读它。**没有这份文件的人物走原路，一个数都不变。**
 2. **初始化**：`init_target.py --name .. --identity <1-12> --namesake-gate gate.json --workspace WS --profile deep`。
 3. **来源账本**（照 `example-knuth/gen_sources.py`+`gen_more.py`）：**≥45 条 usable train，≥65% 一手(P1/P2)，覆盖全 6 lane，≥1 holdout**。每条**必须真实 curl 取内容算 SHA-256**（`checksum_basis="content"`），rights 不含 "unknown"。
+
+   ★★ **账本出完立刻跑这一件**（2026-08-18 新加，此前它没有任何流程调用方）：
+
+       python3 _pipeline/check_primary_excludes_failed_extraction.py
+
+   它比对 `_primary.json` 的「一手」与 `_fetch-manifest.json` 的 `status`：
+   **凡 status 不是「已取回」却算进一手的，一律报出来**。
+   实测抓到过 **4 份 / 451,983 词**从没取回的材料躺在一手计数里（churchill×2 / dewey / ford）。
+   ★ 它会印 **join 命中率**；低于阈值判**未核**，因为键对不上时「0 违规」是坏 join 的假干净。
 4. **六路研究**（`gen_lanes.py`）：6 个 `references/research/0X-*.md`，每篇 **≥500 字**、引用真实 `src-` ID。
 5. **claims**（`gen_claims.py`）：**≥4 mental-model + ≥6 heuristic**（★ **这是 deep 档的数**——本节步骤 2 已写死 `--profile deep`；quick 是 2/3、standard 是 3/5，真源同为 `PROFILE_THRESHOLDS`）；刚性 claim 各需 **≥2 个不同源、≥2 情境、≥2 独立证据簇、falsifiers、time_scope**（多标签源会去重塌成 1，用兜底补齐）。再配 fact/value/work-method/boundary/blind-spot。
+
+   ★★ **claims 写完跑这一件**（2026-08-18 新加，此前无流程调用方）：
+
+       python3 _pipeline/check_pinned_year_from_relative_date.py
+
+   抓「断言把年月日钉死了，而它自己引的原文写的是『上一个』」。
+   Pasteur #106 实测：产物五处都写「**1881 年 12 月 10 日**」，
+   而原文是 « Le 10 décembre **dernier** » —— 年份不在那句话里，在**刊期**里，正解 1880-12-10。
+   **错了整整一年，且错在事实层**（题面是从 facts.md 抄的 ⇒ 尺子与被测物同源，三轮盲判都测不出来）。
 6. **模型文档**（`gen_docs.py`）：渲染 9–10 份；**这 8 份 release 必须"非占位"**：cognitive-os / decision-policy / strategy / capabilities / work / persona / boundaries / divergence-map，各 **strip 后 ≥500 字（留到 ~700 更稳）、≥5 条非 # 有效行**。**每条 active claim 必须**以 `<!-- claim:clm-... -->` 标记渲染进某文档（release 有孤儿=报错）。
-> **改完判据/脚本先跑这个**：`python3 scripts/run_tests.py` —— 并行跑 `tests/` 全部 14 件，
-> 逐件计时、把**已知未决**与**新回归**分开（**件数与耗时以它自己印的为准**；2026-08-17 实测：并行度 8 → 约 250s 但**制造 1–4 盏假红**，并行度 **4** → 约 325s、**假红 0**，默认已改 4）。
+> **改完判据/脚本先跑这个**：`python3 scripts/run_tests.py` —— 并行跑 `tests/` 全部件数
+> （**件数以它自己印的「扫描面」为准**；此处原写 14，2026-08-18 实测 **19**），
+> 逐件计时、把**已知未决**、**超时**与**新回归**分开。
+> ★ 耗时：并行度 8 → 约 250s 但制造 1–4 盏假超时；**4**（默认）→ 约 325–380s。
+> ★★ **此处原写「并行度 4 假红 0」，已订正：不是 0。** 四次实测里两次各有 1 盏假超时。
+>   它们**被 runner 正确标成「超时（并行压力），不是回归」**——看「新回归」那个数，别看红的总数。
+>   （唯一必须独占跑的是带**墙钟断言**的 `test_checkers_actually_run.py`，已在 `SERIAL_ONLY` 里；
+>    子进程 timeout 造成的假超时是噪声，不值得为它把整套串行化：串行 ~818s vs 并行 ~350s。）
 > 开头会先跑一次合同漂移门并转述它报的每一条 —— **清单陈旧/镜像不一致会让三件验清册的测试
 > 红成「不相干的新回归」**，先看那几行。
 
