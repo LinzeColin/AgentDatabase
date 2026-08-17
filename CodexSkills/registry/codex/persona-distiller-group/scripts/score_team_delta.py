@@ -46,6 +46,41 @@ def score_result(data: dict[str, Any]) -> dict[str, Any]:
             "score_team_delta 要 result-input.json，build_team_delta_card 要 team-result.json。"
             "**不给 0 分，直接拒答** —— 全缺算出来的 overall_delta 是常数，不是测量。")
 
+    # ★★★ 2026-08-17 第二刀：上面那道守卫查的是**容器空不空**，
+    #   而实际坏掉的是**字段名认不认识**。实测：四个区段都在、键名全是瞎猜的，
+    #   本函数照样出一张完整成绩单，`overall_delta` **恒为 17.5**
+    #   （小值 / 大值(baseline=-999) / 只填一个区段，三种输入同一个数）——
+    #   与「四个全缺」时算出的**是同一个常数**，因为路径完全相同：全部读成 0。
+    #   而 status 会印 `CANDIDATE_REJECTED_BELOW_FLOOR` ——
+    #   **把「我读不懂你的输入」报成了「你的团队不合格」**，
+    #   使用者会去返工团队，而真因是字段名拼错。
+    #
+    #   ★ 这条与上面那句「只在四个全缺时开火，不误伤部分填写」**不冲突**：
+    #     「一个可识别字段都没有」是比「四个区段全空」**更强**的证据，
+    #     且**永远不会误伤含至少一个真指标的输入**——仍然只放在开脱侧。
+    #     [[loosen-only-the-exonerating-side]]｜[[the-comment-states-the-rule-the-code-narrows-it]]
+    #
+    #   ★★ 顺带补文档缺口：仓里**没有 result-input.json 的模板或样例**，
+    #     字段名只活在本文件的三个常量里 ⇒ 拼错是常态。**报错本身就是那份模板。**
+    _PAIRED_KEYS = ("win_rate", "noninferiority_rate", "catastrophic_error_free_rate")
+    _METRIC_KEYS = tuple(dict.fromkeys(BENEFIT_DIMENSIONS + COST_DIMENSIONS))
+    _seen = (
+        [k for k in ABSOLUTE_DIMENSIONS if isinstance(absolute, dict) and k in absolute]
+        + [k for k in _METRIC_KEYS if isinstance(candidate, dict) and k in candidate]
+        + [k for k in _METRIC_KEYS if isinstance(baseline, dict) and k in baseline]
+        + [k for k in _PAIRED_KEYS if isinstance(paired, dict) and k in paired]
+    )
+    if not _seen:
+        raise ValueError(
+            "四个区段都在，但**一个可识别的字段都没有** —— 本函数会把它们全读成 0，"
+            "算出来的 overall_delta 是常数（17.5），不是测量。**拒答，不给分。**\n"
+            "  absolute 收：  %s\n"
+            "  candidate / baseline 收：%s\n"
+            "  paired 收：    %s\n"
+            "  （仓里没有 result-input.json 的模板，字段名只在 score_team_delta.py 的常量里，"
+            "所以这条错误就是那份模板。）"
+            % (" / ".join(ABSOLUTE_DIMENSIONS), " / ".join(_METRIC_KEYS), " / ".join(_PAIRED_KEYS)))
+
     absolute_scores = {key: _number(absolute, key) for key in ABSOLUTE_DIMENSIONS}
     benefit_deltas = {key: _number(candidate, key) - _number(baseline, key) for key in BENEFIT_DIMENSIONS}
     # Lower is better for these metrics.

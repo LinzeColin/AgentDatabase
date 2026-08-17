@@ -138,7 +138,11 @@ python3 scripts/record_team_outcome.py --route-plan route-plan.json --delta-scor
     python3 scripts/run_tests.py            # 默认就是门：有红即 rc=1
     python3 scripts/run_tests.py --report   # 只报告
 
-跑 `tests/` 全部 9 件（`test_*.py` **＋** `run_*.py` —— `run_functional_acceptance.py` 不叫 `test_*`，只按一种命名会漏掉它）。
+跑 `tests/` 下**全部** `test_*.py` **＋** `run_*.py`
+（`run_functional_acceptance.py` 不叫 `test_*`，只按一种命名会漏掉它）。
+**件数以 `run_tests.py` 印出的「扫描面」为准，本文不写死数字** ——
+原来这里写着「全部 9 件」，而它当天就被同一场会话里新增的测试证伪成 11 件。
+（[[claims-my-own-next-delivery-falsifies]]：会再产一份的东西，写判别式不写计数。）
 文件正文里记着一张**变异实测表**：把核心函数逐个打坏，看几件测试会喊。
 
 ## 硬门
