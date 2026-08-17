@@ -102,7 +102,26 @@ KNOWN = {
 
 
 def discover():
-    return sorted(TESTS.glob("test_*.py")) if TESTS.is_dir() else []
+    """`test_*.py` **加** `run_*.py` —— 同一个教训只落在了另一棵树上。
+
+    ★ 团队 skill 的 `scripts/run_tests.py` 早就是多模式：它的 `tests/` 里
+    最重要的一件叫 `run_functional_acceptance.py`，**不叫 `test_*`**，
+    只认一种命名就会漏掉它（那边的 CHANGELOG 与 SKILL.md 都写着，
+    自测里还专门钉了「漏掉它直接判失败」）。
+    而本 skill 这份一直只 `glob("test_*.py")` ——
+    **今天 `tests/` 里恰好没有 `run_*.py`，所以现在漏 0 件**；
+    但下一件叫 `run_` 的加进来时会被静默跳过，而「静默跳过」正是
+    本仓记过十二种的那一族。[[a-gates-scan-set-is-smaller-than-reality]]
+
+    一并印出**按哪些模式扫的**，让扫描面自己出现在输出里。
+    """
+    if not TESTS.is_dir():
+        return []
+    seen = {}
+    for pat in ("test_*.py", "run_*.py"):
+        for p in TESTS.glob(pat):
+            seen[p.name] = p
+    return [seen[k] for k in sorted(seen)]
 
 
 def run_one(path):
@@ -172,7 +191,7 @@ def main() -> int:
               "拷到 references/pipeline/checkers/。\n")
 
     files = discover()
-    print("扫描面：%s（**%d 件**）" % (TESTS, len(files)))
+    print("扫描面：%s（模式 `test_*.py` + `run_*.py`，**%d 件**）" % (TESTS, len(files)))
     if not files:
         print("✗ 一件都没发现 —— **未检查，不是通过**")
         return 0
