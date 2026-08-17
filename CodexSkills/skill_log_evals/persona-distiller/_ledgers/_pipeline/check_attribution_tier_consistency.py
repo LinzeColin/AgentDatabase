@@ -162,12 +162,26 @@ def self_test() -> int:
         # ★ 断言要打在**那个数**上，不是打在标签上 —— 标签在计数为 0 时照样印。
         #   变异对照当场拆穿：把字段名改成不存在的 `evidence`，计数变 0 而标签还在，
         #   旧写法照样绿。[[read-the-hits-before-reporting-the-rate]]
+        #
+        # ★★★ 而这条断言**不许钉死「14/14」** —— 我上一步就把那 14 行改掉了，
+        #   钉死的数会被我自己的下一次交付当场证伪。写成**判别式**：
+        #     有打架的行 ⇒ 那个数必须解析得出、且 creator-only 那档要能数出来；
+        #     一行都没有 ⇒ 本档不该出现，**那是通过，不是缺陷**。
+        #   [[claims-my-own-next-delivery-falsifies]]
         import re as _re
+        # ★ 正则按**源码里的格式串**写，别照记忆猜：那句是
+        #   f"...互相否定的：**{N} 行**，分布在 **{M}** 个工作区" —— `行` 在粗体**里面**。
+        _clash = _re.search(r"互相否定的：\*\*(\d+) 行\*\*", _o)
+        _tot = int(_clash.group(1)) if _clash else None
         _m = _re.search(r"其中 \*\*(\d+)/(\d+)\*\* 行的 `attribution=HIS-OWN`", _o)
-        _n, _d = (int(_m.group(1)), int(_m.group(2))) if _m else (None, None)
-        chk(f"★★★ 真跑一次：这一档**数得出非零**（实得 {_n}/{_d}；"
-            f"读错字段名会让它变 0 而标签还在）",
-            _n is not None and _n > 0 and _d is not None and _d >= _n)
+        if _tot == 0:
+            chk("★★★ 真跑一次：全库 **0 行打架** ⇒ 本档不出现（这是通过，不是缺陷）",
+                _m is None and "✓ 没有互相否定的行" in _o)
+        else:
+            _n, _d = (int(_m.group(1)), int(_m.group(2))) if _m else (None, None)
+            chk(f"★★★ 真跑一次：有 {_tot} 行打架 ⇒ 这一档必须数得出来"
+                f"（实得 {_n}/{_d}；读错字段名会让它变 0 而标签还在）",
+                _n is not None and _d == _tot)
     except Exception as _e:                                       # noqa: BLE001
         chk(f"★★★ 真跑一次**未判**（跑不起来：{_e}）", False)
 
