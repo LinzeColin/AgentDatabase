@@ -133,14 +133,23 @@ def discover():
 FAIL_TAIL_LINES = 25          # 红件保留多少行原始输出
 
 # ★★★ **必须独占跑的测试**：带**墙钟断言**的那些。
-#   2026-08-18 实测：全套 19 件里**只有一件**有 `assertLess(elapsed, …)` ——
+#   全套 19 件里**只有一件**有 `assertLess(elapsed, …)` ——
 #   `test_checkers_actually_run.py` 的「全量扫一遍要 <90 秒」。
-#   它同时还有一个 180 秒的单件超时（全 89 件安静时实测 10.3 秒，17 倍余量）。
-#   并行跑时这两个数量的都不是判据，**是机器负载**：
-#   4 路那两次跑，一次 0 盏假超时、一次 1 盏，红的都是它。
-#   ⇒ 放到并行批之后单独跑，机器安静了它的断言才有意义。
-#   ★ 这不是「把红灯关掉」：它照样会红，只是红的时候真的代表慢。
-#   [[harness-limits-masquerade-as-product-defects]]｜[[changing-the-sampling-unit-changes-the-ruler]]
+#   并行跑时它量到的不是判据，**是机器负载** ⇒ 放到并行批之后单独跑。
+#
+# ★★★★ **订正（2026-08-18，同日）**：我写完上面这段就断言「假超时只出在这一件上」，
+#   **下一次跑就翻了号** —— 红的是 `test_quality_and_eval.py`（它用
+#   `helpers.run_script(timeout=60)`）。这已是本会话第二次「我的话被自己的下一次实测证伪」。
+#   ⇒ 两件事必须分开，它们的**危害不同**：
+#
+#     墙钟**断言**（assertLess(elapsed)）  → 负载高时给出**错误的判定**（报「退化了」）
+#                                          → 必须独占跑，否则结论是错的
+#     子进程**超时**（timeout=60/180）      → 负载高时抛 TimeoutExpired
+#                                          → 本件**已正确归成「超时，不是回归」**（见 run_one）
+#                                          → 是可容忍的噪声，不值得为它把整套串行化
+#                                            （串行实测 ~818 秒 vs 并行 ~350 秒）
+#   所以 SERIAL_ONLY 只收第一类。**它没有、也不该消灭所有假超时。**
+#   [[harness-limits-masquerade-as-product-defects]]｜[[samples-cannot-support-universal-claims]]
 SERIAL_ONLY = frozenset({"test_checkers_actually_run.py"})
 
 
