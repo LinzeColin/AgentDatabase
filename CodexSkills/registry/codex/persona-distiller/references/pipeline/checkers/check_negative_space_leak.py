@@ -192,15 +192,25 @@ def main() -> int:
         return 3
 
     hits = []
+    _chars = 0          # ★ 真正的分母是**读到的字数**，不是文件数
     for f in files:
-        for ln, kind, line in scan_text(f.read_text(encoding="utf-8", errors="replace")):
+        _t = f.read_text(encoding="utf-8", errors="replace")
+        _chars += len(_t.strip())
+        for ln, kind, line in scan_text(_t):
             hits.append((f.name, ln, kind, line))
 
     print(f"扫了 {len(files)} 份**答题方读得到的**文件"
           f"（工作区根 `*.md` + `references/research/*.md`；"
           f"`evals/` 与 `references/holdout/` 不在射程内）")
+    if not hits and not _chars:
+        # ★★★ 2026-08-17 第二轮：**扫了 N 份文件 ≠ 读到了字**。
+        #   空工作区实测：18 份文件全是空的，照印「✓ 没有按体裁／题材描述缺口的写法」。
+        #   [[zero-hit-gates-must-prove-they-can-hit]]（第二轮：分母是文件数，单位却是文字）
+        print("  ⚠ **这 %d 份文件加起来 0 个字 —— 本次未核，不是通过。**" % len(files))
+        print("     「没有按体裁／题材描述缺口的写法」在空文本上恒真。")
+        return 0
     if not hits:
-        print("  ✓ 没有按体裁／题材描述缺口的写法")
+        print("  ✓ 没有按体裁／题材描述缺口的写法（**%d** 字逐行扫过）" % _chars)
         print("  ★ 但**这不等于没泄题**：换个说法绕过本件的形状，它就看不见。"
               "答题方的 `__incident__` 上报**仍是这条通道上最后一道防线**。")
         return 0

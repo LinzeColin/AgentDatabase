@@ -501,8 +501,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_absence_claims.py",
-      "sha256": "0234a6be91881666601d4ba0be1fedb7505ef48ad9d4eac7f5a619f0cacb6777",
-      "size_bytes": 6502
+      "sha256": "4cf3841a8d487617ad831e0ec9228dea02d9de7bbbc1a2225359ad7cab3592cf",
+      "size_bytes": 7032
     },
     {
       "path": "references/pipeline/checkers/check_activation_yield.py",
@@ -696,8 +696,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_holdout_mention.py",
-      "sha256": "f0bcb687526370c2a56d86e192f170499b178c10d2d88ec1395fd9e53bf62cd9",
-      "size_bytes": 40188
+      "sha256": "b1bcd0e0f57d22f80ce1e700eb4364984ba8178733c04098406f29a87adc4924",
+      "size_bytes": 40935
     },
     {
       "path": "references/pipeline/checkers/check_holdout_overlap.py",
@@ -741,8 +741,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_negative_space_leak.py",
-      "sha256": "b3c63dcf51611befebc8fe0a7d744e5a12db1852ca10ea9e570900d8479fe342",
-      "size_bytes": 10433
+      "sha256": "b154b351368a798ef6f1a759c80703d2f63b449b2bad859df8aa2ad2940878fe",
+      "size_bytes": 11189
     },
     {
       "path": "references/pipeline/checkers/check_ocr_homoglyphs.py",
@@ -781,8 +781,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_quote_attributed_source.py",
-      "sha256": "dccc959b7d1cba5703bbbfb35b779d74601ce470504f41de02807f0e652a455b",
-      "size_bytes": 25068
+      "sha256": "3cc7c72a0029d0791b5aaa2defd1f513cf6cbdc8b01824d75a9aebff900ecef3",
+      "size_bytes": 25879
     },
     {
       "path": "references/pipeline/checkers/check_quote_in_span.py",
@@ -816,8 +816,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_redundancy.py",
-      "sha256": "da76eca26453c58679f918046dd9a812331c4fd8cd3eaec6bc918727bcb50a4f",
-      "size_bytes": 8422
+      "sha256": "0af8cec71c3e1c182643f4fa9293716e9c4dcdb9a30fb872b39b9340b1b4bd97",
+      "size_bytes": 9097
     },
     {
       "path": "references/pipeline/checkers/check_refusal_overflow.py",
@@ -881,8 +881,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_source_dedup.py",
-      "sha256": "ec5b7643094c40db2f5b6067a8d88e642274a6614d486b982070d4855a6ea41c",
-      "size_bytes": 33873
+      "sha256": "00e8762eff37c22f45a5da1410cc87487855fca05eb3f2fa398b04e1513a7db0",
+      "size_bytes": 34658
     },
     {
       "path": "references/pipeline/checkers/check_source_header_quotes.py",
@@ -891,8 +891,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_source_is_catalogue_entry.py",
-      "sha256": "dbebc35986cb0e5447c5265dafeab20c9f4a88aa835b527c6fad8a8d55686d2a",
-      "size_bytes": 12007
+      "sha256": "8ab6df9b83f28965516a68b4b4737beca7372331e9259741f77179605b8baafa",
+      "size_bytes": 12763
     },
     {
       "path": "references/pipeline/checkers/check_source_numbering_gap.py",
@@ -1306,8 +1306,8 @@
     },
     {
       "path": "scripts/check_absence_claims.py",
-      "sha256": "0234a6be91881666601d4ba0be1fedb7505ef48ad9d4eac7f5a619f0cacb6777",
-      "size_bytes": 6502
+      "sha256": "4cf3841a8d487617ad831e0ec9228dea02d9de7bbbc1a2225359ad7cab3592cf",
+      "size_bytes": 7032
     },
     {
       "path": "scripts/check_activation_yield.py",
@@ -1501,8 +1501,8 @@
     },
     {
       "path": "scripts/check_holdout_mention.py",
-      "sha256": "f0bcb687526370c2a56d86e192f170499b178c10d2d88ec1395fd9e53bf62cd9",
-      "size_bytes": 40188
+      "sha256": "b1bcd0e0f57d22f80ce1e700eb4364984ba8178733c04098406f29a87adc4924",
+      "size_bytes": 40935
     },
     {
       "path": "scripts/check_holdout_overlap.py",
@@ -1546,8 +1546,8 @@
     },
     {
       "path": "scripts/check_negative_space_leak.py",
-      "sha256": "b3c63dcf51611befebc8fe0a7d744e5a12db1852ca10ea9e570900d8479fe342",
-      "size_bytes": 10433
+      "sha256": "b154b351368a798ef6f1a759c80703d2f63b449b2bad859df8aa2ad2940878fe",
+      "size_bytes": 11189
     },
     {
       "path": "scripts/check_ocr_homoglyphs.py",
@@ -1586,8 +1586,8 @@
     },
     {
       "path": "scripts/check_quote_attributed_source.py",
-      "sha256": "dccc959b7d1cba5703bbbfb35b779d74601ce470504f41de02807f0e652a455b",
-      "size_bytes": 25068
+      "sha256": "3cc7c72a0029d0791b5aaa2defd1f513cf6cbdc8b01824d75a9aebff900ecef3",
+      "size_bytes": 25879
     },
     {
       "path": "scripts/check_quote_in_span.py",
@@ -1621,8 +1621,8 @@
     },
     {
       "path": "scripts/check_redundancy.py",
-      "sha256": "da76eca26453c58679f918046dd9a812331c4fd8cd3eaec6bc918727bcb50a4f",
-      "size_bytes": 8422
+      "sha256": "0af8cec71c3e1c182643f4fa9293716e9c4dcdb9a30fb872b39b9340b1b4bd97",
+      "size_bytes": 9097
     },
     {
       "path": "scripts/check_refusal_overflow.py",
@@ -1686,8 +1686,8 @@
     },
     {
       "path": "scripts/check_source_dedup.py",
-      "sha256": "ec5b7643094c40db2f5b6067a8d88e642274a6614d486b982070d4855a6ea41c",
-      "size_bytes": 33873
+      "sha256": "00e8762eff37c22f45a5da1410cc87487855fca05eb3f2fa398b04e1513a7db0",
+      "size_bytes": 34658
     },
     {
       "path": "scripts/check_source_header_quotes.py",
@@ -1696,8 +1696,8 @@
     },
     {
       "path": "scripts/check_source_is_catalogue_entry.py",
-      "sha256": "dbebc35986cb0e5447c5265dafeab20c9f4a88aa835b527c6fad8a8d55686d2a",
-      "size_bytes": 12007
+      "sha256": "8ab6df9b83f28965516a68b4b4737beca7372331e9259741f77179605b8baafa",
+      "size_bytes": 12763
     },
     {
       "path": "scripts/check_source_numbering_gap.py",
