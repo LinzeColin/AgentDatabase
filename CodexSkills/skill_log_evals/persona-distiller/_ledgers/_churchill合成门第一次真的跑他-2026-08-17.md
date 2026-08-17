@@ -12,7 +12,19 @@
 
 * `templates/target/SKILL.md.tmpl` 共 67 行，**只有两个占位符**：`{{SLUG}}`、`{{TARGET_NAME}}`；
 * 全库现存 **38 份** `SKILL.md`，把 slug 与人名替换回占位符后，
-  **36 份与第一份逐字相同**（另 2 份 coffin／shewhart 各差 6 行）。
+  **38 份全部逐字相同**。
+
+★★ **这个数我报了三版，前两版的「差异」全是我自己的归一化造成的**：
+
+| 版本 | 我报的 | 「不同」的是谁 | 真因 |
+|---|---|---|---|
+| 一 | 36/38 | coffin、shewhart | 正则 `([^.]+)\.` 被中名缩写 `Charles L. Coffin` 在第一个点截断 |
+| 二 | 37/38 | henry-gantt | 我优先取 `target_name`（Henry **Laurence** Gantt），而他的 SKILL.md 用的是 `name`（Henry Gantt） |
+| **三** | **38/38** | 无 | 两个名字字段**都试**、**长的先替** |
+
+**三次都不是数据不同，是我的尺子不同。**
+同族：正则要过语料的形态关（中名缩写）、一个概念两个字段名。
+[[my-checkers-are-mis-cut-six-times-in-one-day]]｜[[eval-artifacts-have-five-schemas]]
 
 ⇒ 它是 `init_target.py` 在**第 2 步**机械渲染的脚手架，不是手写产物。
   ★ 但 08-14 那句话背后的**担心是对的**：不许靠补文件让门变绿。
