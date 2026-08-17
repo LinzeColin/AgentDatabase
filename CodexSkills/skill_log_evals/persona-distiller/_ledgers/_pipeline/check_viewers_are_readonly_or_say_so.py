@@ -106,6 +106,25 @@ def callees(src: str, resolver=None):
     return out
 
 
+def resolve_callee(name, dirs, repo):
+    """把源码里的 `*.py` 字面量解析成真路径；解析不出或**有歧义**就 None（⇒ 记未量）。
+
+    ★★★ 兜底 rglob 会撞上**同名不同物**：`_ledgers/_pipeline/checkers/` 是
+      2026-07-28 立的另一套「产物体检工具」，与 `scripts/` 有 **12 个同名文件**
+      （`check_holdout_overlap` 那对是 193 行 vs 628 行，做的根本不是一件事）。
+      随便挑第一个 = 拿另一棵树的文件回答这棵树的问题。
+      ⇒ 先按**给定目录**顺序找；找不到才 rglob，且**多于一个候选就报未量**。
+      [[filename-matching-is-brittle]]｜[[two-source-ids-is-not-two-evidences]]
+    """
+    base = pathlib.Path(name).name
+    for d in dirs:
+        q = d / base
+        if q.is_file():
+            return q
+    cands = [q for q in repo.rglob(base) if q.is_file()]
+    return cands[0] if len(cands) == 1 else None
+
+
 def verdict(name: str, src: str, resolver=None):
     """→ (可能写?, 说了?, 理由)。纯函数，便于自测。
 
@@ -189,6 +208,19 @@ def self_test() -> int:
         chk("★★★ 被调方**解析不出** ⇒ 算会写并写明「未量」，不许当成不写",
             verdict("show_x.py", src_u, res)[0] is True
             and "未量" in verdict("show_x.py", src_u, res)[2])
+    # ── ★★★ 被调方解析：同名不同物必须报未量，不许挑第一个 ──
+    with tempfile.TemporaryDirectory() as td2:
+        r = pathlib.Path(td2)
+        (r / "one").mkdir(); (r / "two").mkdir()
+        (r / "one" / "solo.py").write_text("x = 1\n", encoding="utf-8")
+        (r / "one" / "dup.py").write_text("x = 1\n", encoding="utf-8")
+        (r / "two" / "dup.py").write_text("x = 2\n", encoding="utf-8")
+        chk("★★ 唯一候选 ⇒ 解析得出", resolve_callee("solo.py", [], r) == (r / "one" / "solo.py"))
+        chk("★★★ **同名不同物（两处 dup.py）⇒ None（未量），不许挑第一个**",
+            resolve_callee("dup.py", [], r) is None)
+        chk("★ 给定目录优先于 rglob（歧义也不影响）",
+            resolve_callee("dup.py", [r / "two"], r) == (r / "two" / "dup.py"))
+
     print("\n自测 %d 项，不符 %d 项" % (tot[0], len(bad)))
     return 1 if bad else 0
 
@@ -205,17 +237,7 @@ def main() -> int:
         if not d.is_dir():
             continue
         files += [p for p in sorted(d.glob("*.py")) if p.name.startswith(VIEWER_PREFIX)]
-    def _resolve(n):
-        """把源码里的 `*.py` 字面量解析成真路径；找不到就 None（⇒ 记未量）。"""
-        base = pathlib.Path(n).name
-        for d in DIRS:
-            q = d / base
-            if q.is_file():
-                return q
-        for q in REPO.rglob(base):
-            if q.is_file():
-                return q
-        return None
+    _resolve = lambda n: resolve_callee(n, DIRS, REPO)
 
     print("扫描面：%d 个目录里名字以 %s 开头的工具 —— 共 **%d** 件"
           % (sum(1 for d in DIRS if d.is_dir()), "/".join(VIEWER_PREFIX), len(files)))
