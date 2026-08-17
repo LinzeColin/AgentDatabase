@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "e5d17fa02f3bd311d0e1a935d2126b995c23ffce75bc462c3ee8c0ce774200d8",
-      "size_bytes": 341137
+      "sha256": "3980a8ed0fdb9b5abf1dd19816e82eb26914044f2bf761a658e57468fd6e3a24",
+      "size_bytes": 343083
     },
     {
       "path": "CONTRIBUTING.md",
@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "8fcdf8132e4d390dda0e7278f14c434dd08facc937e77139c90306882bfacbb8",
-      "size_bytes": 148843
+      "sha256": "9d8350361565eede4fba0b7270f3991da5feac94fef3b9d0a139bc1dc91310f7",
+      "size_bytes": 150026
     },
     {
       "path": "VERSION",
@@ -1031,8 +1031,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "181a34189e600ce18a95bb96b369bf4c075db71096530ca4ceeb3d6c865b2684",
-      "size_bytes": 255097
+      "sha256": "80c3f5068901405469c4204c933fc2029f821cc40f0a9140c0981b4243fb6f42",
+      "size_bytes": 257279
     },
     {
       "path": "references/pipeline/checkers/render_claims.py",
@@ -1896,8 +1896,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "181a34189e600ce18a95bb96b369bf4c075db71096530ca4ceeb3d6c865b2684",
-      "size_bytes": 255097
+      "sha256": "80c3f5068901405469c4204c933fc2029f821cc40f0a9140c0981b4243fb6f42",
+      "size_bytes": 257279
     },
     {
       "path": "scripts/register_persona.py",
@@ -2446,8 +2446,8 @@
     },
     {
       "path": "tests/test_refusal_announces_zero_checks.py",
-      "sha256": "dad3b56ef74ba536ff21f04d209e7e2e431675c39b236ad29c1b97a9670b1e8c",
-      "size_bytes": 4827
+      "sha256": "6469d26f1689829e881c72d9ab17a2b8e444e0cee02a3e94ed072e05732a570e",
+      "size_bytes": 9250
     },
     {
       "path": "tests/test_release_bundle.py",

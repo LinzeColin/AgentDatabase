@@ -3508,9 +3508,35 @@ def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
         return
     out = buffer.getvalue()
     hard = [ln.strip() for ln in out.splitlines() if ln.strip().startswith('✗')]
-    info: dict[str, Any] = {'返回码': rc, '**硬失败**': len(hard)}
+    # ★★★ 2026-08-17：**「无法判定」不是「有重合」，这两句话此前被合并了。**
+    #   `check_holdout_overlap.py` 自己分得很清楚——定位不到正文时它印
+    #   「✗ 找不到正文的源 N 条 …… 无法判定，**不算通过**」并 rc=2；
+    #   而这里把**所有** ✗ 一律计进 `hard`，再报成
+    #   「holdout 与 train 有内容重合（N 条硬失败）……**现在换源还来得及**」。
+    #   Rousseau #178 实测：唯一那条 ✗ 是「找不到正文的源 **103** 条」
+    #   （语料正文本来就不进 git），零条真重合，而门印的是「有内容重合」
+    #   并建议他去换源——**换源修不了「文件不在这台机器上」**。
+    #   全库 25 个被检查的未判分工作区里，22 个撞的都是这一条。
+    #   未核 ≠ 违规 ≠ 通过，三者要各说各的。
+    #   [[a-blocked-by-x-label-needs-x-rerun]]｜[[error-message-points-at-an-exit-that-isnt-there]]
+    unverifiable = [ln for ln in hard if '无法判定' in ln]
+    contaminated = [ln for ln in hard if '无法判定' not in ln]
+    info: dict[str, Any] = {'返回码': rc, '**硬失败**': len(hard),
+                            '其中·真重合': len(contaminated),
+                            '其中·无法判定': len(unverifiable)}
     if hard:
         info['**逐条**'] = hard[:8]
+    if unverifiable:
+        info['未核口径'] = ('定位不到 holdout 的正文 ⇒ **这道门没能跑起来**，'
+                            '既不是「有重合」也不是「没重合」。语料正文不进 git，'
+                            '在没有语料缓存的机器上这是预期结果——'
+                            '给 `--cache <语料目录>` 才核得成。')
+        if report.phase == 'research':
+            report.error('corpus.holdout-unverifiable',
+                         'holdout 与 train 的重合**未能核验**（%d 条定位不到正文）——'
+                         '**未核不等于通过，也不等于有重合**；给 `--cache <语料目录>` 重跑。'
+                         '逐条见 metrics.holdout_overlap' % len(unverifiable))
+    if contaminated:
         info['口径'] = ('holdout 的内容已在 train 中出现——**用它出的 known 题不测泛化，'
                         '且一定得高分**。正解是换源，不是调阈值。')
         # ★★★ v0.0.0.154：**research 阶段改成硬拦**，其余阶段照旧只报不拦。
@@ -3523,9 +3549,10 @@ def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
         #     **那是正确行为，不是回归**。
         if report.phase == 'research':
             report.error('corpus.holdout-overlap',
-                         'holdout 与 train 有内容重合（%d 条硬失败）——**现在换源还来得及**；'
-                         '逐条见 metrics.holdout_overlap，受污染段清单见 '
-                         'reports/holdout-contaminated-passages.json' % len(hard))
+                         'holdout 与 train 有内容重合（%d 条**真重合**，另有 %d 条无法判定'
+                         '另计）——**现在换源还来得及**；逐条见 metrics.holdout_overlap，'
+                         '受污染段清单见 reports/holdout-contaminated-passages.json'
+                         % (len(contaminated), len(unverifiable)))
     report.metrics['holdout_overlap'] = info
 
 

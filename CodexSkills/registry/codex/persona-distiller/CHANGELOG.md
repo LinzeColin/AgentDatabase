@@ -54,6 +54,39 @@ checksum 行数从 493 顶到 494，于是 `test_skill_contract` / `test_release
 「它第一次运行就抓到 3 个回归，而那 3 个正是它自己造成的」完全同型。
 补 VERIFICATION.md 计数后：**绿 15｜红 1（已知未决）｜新回归 0**。
 
+### 2026-08-17（同日第二处）：判据说「无法判定」，调用方报成「有内容重合」
+
+`check_holdout_overlap.py` 分得很清楚 —— 定位不到正文时它印
+「✗ 找不到正文的源 N 条 …… **无法判定，不算通过**」并 rc=2。
+而 `quality_check.py` 把**所有** ✗ 一律计进 `hard`，再报成：
+
+    corpus.holdout-overlap: holdout 与 train 有内容重合（1 条硬失败）——**现在换源还来得及**
+
+Rousseau #178 实测：唯一那条 ✗ 是「找不到正文的源 **103** 条」
+（语料正文本来就不进 git），**零条真重合**。
+门却在劝他换源 —— **换源修不了「文件不在这台机器上」**。
+全库 25 个被检查的未判分工作区里，**22 个撞的都是这一条**。
+
+⇒ 拆成两个码，都仍在 research 阶段拦（**未核 ≠ 通过**），但说的是两件事：
+
+| 码 | 什么时候 | 怎么办 |
+|---|---|---|
+| `corpus.holdout-unverifiable` | 定位不到正文，门没跑成 | 给 `--cache <语料目录>` 重跑 |
+| `corpus.holdout-overlap` | 真的查出重合 | 换源（不是调阈值） |
+
+`metrics.holdout_overlap` 里并列「其中·真重合 / 其中·无法判定」，
+`overlap` 那条消息也改成报**真重合数**，另附无法判定数。
+
+★ 断言加进 `tests/test_refusal_announces_zero_checks.py`（该件现 4 条），
+**正反各一**：语料缺 → unverifiable 且真重合 0 且**不许出现「换源」二字**；
+造一份 holdout 逐字含 train 的工作区 → overlap（真重合 2、无法判定 0）。
+只钉一头的话「永远报未核」或「永远报重合」都能全绿。
+变异实跑：把分类改回全算重合 → **rc=1，点名
+「'corpus.holdout-unverifiable' not found in []」**。
+
+★ 这条和同日上一条是**同一族**：门没能判 ≠ 门判了不合格。
+[[a-blocked-by-x-label-needs-x-rerun]]｜[[zero-hit-gates-must-prove-they-can-hit]]
+
 ### 2026-08-15：生成器排除了一个文件，它自己生成的声明说「什么都没排除」
 
 `checksums.sha256` **490 行，而 skill 目录实际 492 个文件**。逐项对完，

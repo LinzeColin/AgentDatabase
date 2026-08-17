@@ -151,6 +151,18 @@ Date: 2026-08-05（**v0.0.0.154**）
 > 抛 `IndexError`，**整个 quality_check 抛 traceback、一个 JSON 都不产出** ——
 > 判据可以说「判不了」，不许把自己炸掉让调用方读到空。已改为 `ValueError`
 > 被上层接成一条错误码。
+> ★★ **同一天同一族的第二处**（本件已扩到 4 条断言）：holdout 门**跑起来了但
+> 定位不到正文**时，`quality_check` 把它报成「holdout 与 train 有内容重合」
+> 并劝人「现在换源还来得及」。底层 `check_holdout_overlap.py` 自己分得很清楚
+> ——它印的是「✗ 找不到正文的源 N 条 …… **无法判定，不算通过**」——
+> 错在调用方把**所有** ✗ 一律计进 `hard`。Rousseau #178 实测：唯一那条 ✗ 是
+> 「找不到正文的源 **103** 条」，**零条真重合**；全库 25 个被检查的未判分
+> 工作区里 **22 个撞的都是这一条**。已拆成 `corpus.holdout-unverifiable`
+> （未核，不劝换源）与 `corpus.holdout-overlap`（真重合），metrics 里并列
+> 「其中·真重合 / 其中·无法判定」。**换源修不了「文件不在这台机器上」。**
+> 正反对照实跑：语料缺 → unverifiable（真重合 0）；造一份 holdout 逐字含
+> train 的工作区 → overlap（真重合 2、无法判定 0）；变异（把分类改回全算重合）
+> → **rc=1 且点名「'corpus.holdout-unverifiable' not found in []」**。
 >
 > ★ **2026-08-17 第十七次更新：checksum 492→493** —— 新增
 > `tests/test_checkers_refuse_wrong_documents.py`：把「给判据喂错文档，

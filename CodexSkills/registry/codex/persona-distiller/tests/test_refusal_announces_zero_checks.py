@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""`quality_check.py` 拒检整个工作区时，必须自己说「一项都没跑」。
+"""**「门没能判」不许说成「门判了不合格」** —— 本件管两种形状。
+
+形状一：`quality_check.py` 拒检整个工作区时，必须自己说「一项都没跑」。
+形状二：holdout 门跑起来了但定位不到正文时，不许报成「有内容重合」。
 
 为什么要有这份文件
 ------------------
@@ -95,6 +98,79 @@ class RefusalAnnouncesItself(unittest.TestCase):
             #    一个「可检但零错误」的空壳会让 ③ 变得没有意义。
             self.assertTrue(data.get("errors"),
                             "空壳工作区居然 0 错误 —— 说明检查根本没落到实处")
+
+
+class UnverifiableIsNotAViolation(unittest.TestCase):
+    """holdout 门定位不到正文时，报「未核」，不许报「有重合」。
+
+    `check_holdout_overlap.py` 自己分得很清楚 —— 定位不到正文时它印
+    「✗ 找不到正文的源 N 条 …… **无法判定，不算通过**」并 rc=2。
+    而 `quality_check` 此前把**所有** ✗ 一律计进 `hard`，再报成
+    「holdout 与 train 有内容重合（N 条硬失败）—— **现在换源还来得及**」。
+
+    Rousseau #178 实测：唯一那条 ✗ 是「找不到正文的源 **103** 条」
+    （语料正文本来就不进 git），**零条真重合**，而门印的是「有内容重合」
+    并劝人换源 —— 换源修不了「文件不在这台机器上」。
+    全库 25 个被检查的未判分工作区里，**22 个撞的都是这一条**。
+
+    正反各钉一条：**语料缺 → unverifiable**；**真重合 → overlap**。
+    只钉一头的话，「永远报未核」或「永远报重合」都能全绿。
+    """
+
+    def _ws(self, tmp: pathlib.Path, contaminated: bool):
+        ws = tmp / "contam"
+        (ws / "evidence").mkdir(parents=True)
+        (ws / "raw").mkdir()
+        (ws / "meta.json").write_text(
+            json.dumps({"slug": "contam", "profile": "quick", "name": "Test Person"}),
+            encoding="utf-8")
+        (ws / "SKILL.md").write_text("---\nname: contam\n---\n\n正文\n", encoding="utf-8")
+        body = (" ".join(
+            "the quick brown fox jumps over the lazy dog near a silent river bank at dawn "
+            "while distant bells ring across the valley and the miller counts his sacks "
+            "of grain before the market opens".split()) + " ") * 6
+        led = [{"source_id": "t1", "split": "train", "local_path": "raw/t1.txt"},
+               {"source_id": "h1", "split": "holdout", "local_path": "raw/h1.txt"}]
+        (ws / "evidence/source-ledger.jsonl").write_text(
+            "\n".join(json.dumps(r) for r in led) + "\n", encoding="utf-8")
+        (ws / "raw/t1.txt").write_text(body + "\n", encoding="utf-8")
+        if contaminated:
+            # holdout 逐字含 train 的一大段 —— **真重合**
+            (ws / "raw/h1.txt").write_text("preamble words here " + body
+                                           + " trailing words here\n", encoding="utf-8")
+        # contaminated=False 时故意不落 h1.txt ⇒ 定位不到正文 ⇒ **未核**
+        return ws
+
+    def _holdout(self, ws):
+        rc, err, data = _run(ws)
+        self.assertIsNotNone(data, "须产出可解析 JSON")
+        codes = [e["code"] for e in data.get("errors", [])
+                 if e["code"].startswith("corpus.holdout")]
+        return codes, data.get("metrics", {}).get("holdout_overlap", {}), data
+
+    def test_missing_body_reports_unverifiable_not_overlap(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            ws = self._ws(pathlib.Path(td), contaminated=False)
+            codes, h, data = self._holdout(ws)
+            self.assertIn("corpus.holdout-unverifiable", codes)
+            self.assertNotIn("corpus.holdout-overlap", codes,
+                             "定位不到正文却报「有内容重合」—— 未核被说成了违规")
+            self.assertEqual(h.get("其中·真重合"), 0)
+            self.assertGreaterEqual(h.get("其中·无法判定") or 0, 1)
+            self.assertFalse(any("换源" in e["message"] for e in data.get("errors", [])),
+                             "**换源修不了「文件不在这台机器上」**，不许这么劝")
+
+    def test_real_overlap_still_reports_overlap(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            ws = self._ws(pathlib.Path(td), contaminated=True)
+            codes, h, _ = self._holdout(ws)
+            self.assertIn("corpus.holdout-overlap", codes,
+                          "真重合必须照报 —— 否则上一条测试靠「永远报未核」就能过")
+            self.assertNotIn("corpus.holdout-unverifiable", codes)
+            self.assertGreaterEqual(h.get("其中·真重合") or 0, 1)
+            self.assertEqual(h.get("其中·无法判定"), 0)
 
 
 if __name__ == "__main__":
