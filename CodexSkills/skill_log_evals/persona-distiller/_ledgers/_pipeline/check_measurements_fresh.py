@@ -63,6 +63,15 @@ CORPORA = HERE.parents[1] / "_corpora"
 TOOLS = [
     ("_lanes.json", "assign_lanes.py", ["--raw", "{raw}"]),
     ("_primary.json", "classify_primary.py", ["--raw", "{raw}"]),
+    # ★★★ 2026-08-18 补两件**并列的兄弟产物**。
+    #   起因：修完上面两件之后问了一句「raw/ 下还有几种工具生成物」——
+    #   实测 19 个工作区**每个都有** `_dedup.json` 与 `_voice.json`，
+    #   而它们**从来不在本件的名单里**。同一族的洞，只是没人撞上。
+    #   `_dedup.json` 尤其承重：它填台账的 `derived_from`，
+    #   决定「两个 source id 是不是两处独立证据」。
+    #   [[fixed-the-symptom-kept-the-root-cause]]（并列的兄弟链有同样的洞）
+    ("_dedup.json", "dedup_corpus.py", ["--raw", "{raw}"]),
+    ("_voice.json", "measure_voice.py", ["--raw", "{raw}"]),
 ]
 
 # ★★★ 有些工具还有**必填参数**，光给 `--raw` 会 argparse 报错、一个字节不写。
@@ -305,14 +314,32 @@ def main() -> int:
     else:
         print("\n✓ 所有量测产物都与当前这版工具一致")
     if unjudged:
-        # ★ 按理由归并再印：19 份同一个理由时，逐条列 6 份看不出「这是一整类」。
-        by_why = {}
-        for r in unjudged:
-            by_why.setdefault(r["★ 未判"], []).append("%s/%s" % (r["工作区"], r["产物"]))
-        print(f"\n⚠ ★ **未判（跑不了，不是通过）**：{len(unjudged)} 份，{len(by_why)} 类")
-        for why, who in sorted(by_why.items(), key=lambda x: -len(x[1])):
-            print("  · **%d 份**：%s" % (len(who), why))
-            print("      %s%s" % ("、".join(who[:4]), "…" if len(who) > 4 else ""))
+        # ★★★ 先把**结构性未核**分出来：`_dedup.json` / `_voice.json` 要**真语料在场**，
+        #   而语料按裁定不进 git —— 在任何 git 检出里它们必然复验不了。
+        #   这不是缺陷，是这棵树的射程；但**必须印出来**，否则它就变成一个隐形缺口
+        #   （本件加它们之前，这两件产物压根不在名单里，无人知道没被验过）。
+        #   逐条列 19 行近乎相同的话会淹掉真信号 ⇒ 归成一行。
+        #   [[corpus-lives-outside-git-verify-the-pointers]]｜[[a-refusal-to-check-prints-one-error]]
+        NEED_CORPUS = ("一份都没量到", "一份也读不到", "语料按裁定不进 git")
+        struct = [r for r in unjudged if any(k in (r["★ 未判"] or "") for k in NEED_CORPUS)]
+        rest = [r for r in unjudged if r not in struct]
+        if struct:
+            kinds = sorted({r["产物"] for r in struct})
+            print("\n⚠ **结构性未核（本树没有语料，不是缺陷）**：%d 份，涉及 %s"
+                  % (len(struct), "、".join(kinds)))
+            print("   语料按裁定**不进 git**，`raw/` 里只有 `_ids*.txt` 指针 ⇒ "
+                  "这两件产物在任何 git 检出里都复验不了。")
+            print("   要真验：把语料放回 `raw/` 之后再跑本件（工具自己会说「未量，不是 0」）。")
+        if rest:
+            by_why = {}
+            for r in rest:
+                by_why.setdefault(r["★ 未判"], []).append("%s/%s" % (r["工作区"], r["产物"]))
+            print(f"\n⚠ ★ **未判（跑不了，不是通过）**：{len(rest)} 份，{len(by_why)} 类")
+            for why, who in sorted(by_why.items(), key=lambda x: -len(x[1])):
+                print("  · **%d 份**：%s" % (len(who), why))
+                print("      %s%s" % ("、".join(who[:4]), "…" if len(who) > 4 else ""))
+        elif struct:
+            print("\n✓ 除结构性未核之外，**没有其他未判项**")
     if ran == 0:
         print("\n★★ **一份都没比对成**——这不是通过。多半是语料不在本树，"
               "见仓根 `START-HERE.md`「语料在哪」。")
