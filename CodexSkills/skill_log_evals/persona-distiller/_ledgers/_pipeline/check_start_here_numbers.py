@@ -283,8 +283,15 @@ def measure_resolvable(files, root=None):
 def check_layout(text, files):
     """→ [不符项]。**空列表 = 过**；表里找不到那几行也算不符（不许静默放行）。"""
     tot, has, ptr, none_ = measure_layout(files)
+    # ★★★ 2026-08-17：第三档的**标签本来就是错的**。
+    #   旧表写「空工作区（没开工，台账也空）」，而实测这 34 个大多台账满满 ——
+    #   它们只是**正文不在仓里**（`raw/*.txt` 被 `.gitignore` 挡下，
+    #   那是「语料不进 git」裁定的落地）。数字错，**标签也错**。
+    #   ⇒ 锚点跟着订正后的措辞走，并**同时认旧标签**，免得别处旧文档一改就红。
+    #   [[zero-hit-gates-must-prove-they-can-hit]]（锚点是我写的，绿不区分守住了/够不到）
     want = {"正文就在仓里": has, "有重建指针": ptr,
-            "空工作区": none_, "取不回来": 0}
+            "正文与指针": none_, "取不回来": 0}
+    ALIASES = {"正文与指针": ("正文与指针", "空工作区")}   # 新标签在前，旧标签兼容
     seen, bad = {}, []
     for line in text.splitlines():
         m = LAYOUT_ROW.match(line)
@@ -292,8 +299,10 @@ def check_layout(text, files):
             continue
         lab = m.group("label").strip(" ↳*")
         for k in want:
-            if lab.startswith(k):
-                seen[k] = int(m.group("num"))
+            for pref in ALIASES.get(k, (k,)):
+                if lab.startswith(pref):
+                    seen[k] = int(m.group("num"))
+                    break
     for k, v in want.items():
         if k not in seen:
             bad.append(f"表里找不到「{k}」这一行 —— **未检查，不是通过**")
@@ -421,6 +430,37 @@ def self_test() -> int:
                                root=base)
         chk("★⑧ 反例：同样全缺，但**有**指针 → 不算取不回来（这是 Owner 定的「仓里只放指针」）",
             r["取不回来"] == [] and r["一条都取不到"] == 1)
+    # ── ★★★ 2026-08-17：第三档改了标签（旧标签「空工作区」是错的）──
+    #   正：新标签认得出；反：旧标签仍认得出（别处旧文档不至于一改就红）；
+    #   ★★ 负对照两条：数字写错要报、那一行整个没了要报「未检查」。
+    #   ★ `check_layout` 返回的是**元组** `(不符项, 实测)` —— 我第一版拿它跟 `[]` 比，
+    #     四条断言全红，而红的原因是我没读返回形状。[[a-gates-scan-set-is-smaller-than-reality]]
+    import unittest.mock as _mock
+
+    def _tbl(lab, n34="**34**"):
+        return ("**逐个数过 53 个工作区**\n\n"          # ← 散文里的总数，判据也在核它
+                "| 情形 | 个数 | 语料在哪 |\n|---|---:|---|\n"
+                "| 正文就在仓里 | **0** | x |\n"
+                "| 有重建指针 | **19** | x |\n"
+                f"| {lab} | {n34} | x |\n"
+                "| **取不回来** | **0** | x |\n")
+
+    with _mock.patch.object(sys.modules[__name__], "measure_layout",
+                            return_value=(53, 0, 19, 34)):
+        _bad, _ = check_layout(_tbl("正文与指针**都不在仓里**"), [])
+        chk(f"★★★ 新标签「正文与指针都不在仓里」认得出（实得 {_bad}）", _bad == [])
+        _bad, _ = check_layout(_tbl("空工作区（没开工，台账也空）"), [])
+        chk(f"★★★ 旧标签「空工作区」仍兼容（实得 {_bad}）", _bad == [])
+        _bad, _ = check_layout(_tbl("正文与指针**都不在仓里**", "**2**"), [])
+        chk(f"★★★ 负对照：数字写错必须报（实得 {len(_bad)} 项）", len(_bad) == 1)
+        _bad, _ = check_layout("**逐个数过 53 个工作区**\n\n"
+                               "| 情形 | 个数 |\n|---|---:|\n"
+                               "| 正文就在仓里 | **0** |\n"
+                               "| 有重建指针 | **19** |\n"
+                               "| **取不回来** | **0** |\n", [])
+        chk(f"★★★ 负对照：那一行整个没了 → 报「未检查，不是通过」（实得 {len(_bad)} 项）",
+            len(_bad) == 1 and "未检查" in _bad[0])
+
     print(f"\n{'✓ 全过' if ok == t else f'✗ {t - ok}/{t} 项不符'}"
           "（表样逐字取自 2026-08-13 的 START-HERE.md）")
     return 0 if ok == t else 1
