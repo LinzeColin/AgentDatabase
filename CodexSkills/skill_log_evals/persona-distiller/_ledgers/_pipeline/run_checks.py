@@ -43,30 +43,69 @@ def discover():
 
     改为：`_pipeline/*.py` 里**凡是把 `--self-test` 注册成命令行参数的**，都跑。
     判据用的是 `add_argument("--self-test"` 这个字面事实，不是文档里提没提。
+
+    ★★★ 2026-08-17 第二次扩射程：**上一次只扩了「文件名前缀」，没扩「文件类型」。**
+      `_pipeline/` 下还有三个 `.sh`，其中 `verify_handover_bundle.sh` 有 12 条自测
+      **却一个调用方都没有** —— 它随移交包发给接手方，而那道「站在交付目录里
+      `git bundle verify` 会假红」的缺陷活了三天，正因为没人自动跑它。
+      判据的形状 ＝ 我上一次探查的形状。[[one-requirement-two-consumers]]
+      [[a-checker-nothing-calls-is-not-a-checker]]｜[[a-gates-scan-set-is-smaller-than-reality]]
+      shell 侧的字面事实是 `--self-test)` 这个 case 分支。
     """
     named = set(HERE.glob("check_*.py"))
     capable = set()
-    marker = 'add_argument("--self-test"'
-    marker2 = "add_argument('--self-test'"
-    for p in HERE.glob("*.py"):
+    # ★★★ 第三次扩射程（同一天）：**字面标记只是「有没有自测」的代理物。**
+    #   只认 `add_argument("--self-test"` 时，另有 **4 件**真有自测却被漏掉——
+    #   `assign_lanes.py` 拼的是 `--selftest`（无连字符），
+    #   `gen_cases_{brandeis,churchill,dewey}.py` 直接查 `sys.argv` 不走 argparse。
+    #   （这 4 件是**用绝对路径真跑一遍**测出来的，不是猜的。）
+    #   [[bibliographic-proxy-instead-of-the-measurement]]｜[[one-requirement-two-consumers]]
+    PY_MARKERS = ('add_argument("--self-test"', "add_argument('--self-test'",
+                  'add_argument("--selftest"', "add_argument('--selftest'",
+                  '"--self-test" in sys.argv', "'--self-test' in sys.argv",
+                  '"--selftest" in sys.argv', "'--selftest' in sys.argv")
+    SH_MARKERS = ("--self-test)", '--self-test")')
+    for p in list(HERE.glob("*.py")) + list(HERE.glob("*.sh")):
         if p.name == pathlib.Path(__file__).name:
             continue
         try:
             src = p.read_text(encoding="utf-8")
         except OSError:
             continue
-        if marker in src or marker2 in src:
+        marks = PY_MARKERS if p.suffix == ".py" else SH_MARKERS
+        if any(m in src for m in marks):
             capable.add(p)
     extra = sorted(capable - named)
     if extra:
         print("★ 按能力多收进 %d 件（有 --self-test 但不叫 check_*）：%s"
               % (len(extra), "、".join(p.name for p in extra)))
+    # ★ 印出**没被收进来**的，否则「射程够不够」这件事永远没人看得见。
+    skipped = sorted(p.name for p in list(HERE.glob("*.py")) + list(HERE.glob("*.sh"))
+                     if p not in capable and p not in named
+                     and p.name != pathlib.Path(__file__).name)
+    if skipped:
+        print("   （没有 --self-test、因而不跑的 %d 件：%s）"
+              % (len(skipped), "、".join(skipped[:6]) + ("…" if len(skipped) > 6 else "")))
     return sorted(named | capable)
 
 
 def run_one(p):
     t = time.time()
-    r = subprocess.run([sys.executable, str(p), "--self-test"],
+    # ★ 解释器按后缀选。写死 sys.executable 会让 .sh 一律以 SyntaxError 收场，
+    #   而那读起来像「判据坏了」，不像「我用错了解释器」。
+    argv = ([sys.executable, str(p)] if p.suffix == ".py" else ["bash", str(p)])
+    # ★ 参数拼法也按文件选：`assign_lanes.py` 只认 `--selftest`（无连字符）。
+    #   写死一种拼法 ⇒ 它会以 argparse 报错收场，读起来像「判据红了」。
+    try:
+        _src = p.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        _src = ""
+    flag = ("--selftest" if ("--selftest" in _src and "--self-test" not in _src)
+            else "--self-test")
+    r = subprocess.run(argv + [flag],
+                       # ★★ cwd 固定到仓根：判据的判定不许取决于调用者站在哪。
+                       #   （verify_handover_bundle.sh 的那个假红就是 cwd 造成的。）
+                       cwd=str(HERE.parents[4]),
                        capture_output=True, text=True)
     tail = [l for l in (r.stdout + r.stderr).strip().splitlines() if l.strip()]
     return r.returncode, (tail[-1][:56] if tail else ""), time.time() - t
