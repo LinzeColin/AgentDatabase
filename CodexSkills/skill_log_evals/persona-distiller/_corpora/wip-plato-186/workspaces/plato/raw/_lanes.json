@@ -1,286 +1,286 @@
 {
-  "lanes": 1,
-  "去掉纸面道后": 1,
-  "逐道份数": {
-    "writings": 54,
-    "conversations": 0,
-    "expression": 0,
-    "decisions": 0,
-    "timeline": 0,
-    "external": 0
+ "lanes": 2,
+ "去掉纸面道后": 1,
+ "逐道份数": {
+  "writings": 53,
+  "conversations": 1,
+  "expression": 0,
+  "decisions": 0,
+  "timeline": 0,
+  "external": 0
+ },
+ "未分道": 0,
+ "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+ "明细": [
+  {
+   "identifier": "09248238.1478.emory.edu",
+   "道": "writings",
+   "title": "Platonis opera omnia : uno volumine comprehensa ad fidem optimorum lib"
   },
-  "未分道": 0,
-  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
-  "明细": [
-    {
-      "identifier": "09248238.1478.emory.edu",
-      "道": "writings",
-      "title": "Platonis opera omnia : uno volumine comprehensa ad fidem optimorum lib"
-    },
-    {
-      "identifier": "30081007092699",
-      "道": "writings",
-      "title": "Platonis opera"
-    },
-    {
-      "identifier": "30081007094463",
-      "道": "writings",
-      "title": "Platonis opera"
-    },
-    {
-      "identifier": "ApologiaDiSocrate1885",
-      "道": "writings",
-      "title": "L' apologia di Socrate, dichiarata da Eugenio Ferrai"
-    },
-    {
-      "identifier": "CratiloPlatoneBonghi",
-      "道": "writings",
-      "title": "Cratilo"
-    },
-    {
-      "identifier": "FileboPlatoneBonghi",
-      "道": "writings",
-      "title": "Filebo"
-    },
-    {
-      "identifier": "GorgiasOfPlato",
-      "道": "writings",
-      "title": "Gorgias Of Plato: With English Notes, Introduction, and Appendix by W."
-    },
-    {
-      "identifier": "PhaedoOfPlato",
-      "道": "writings",
-      "title": "Phaedo of Plato"
-    },
-    {
-      "identifier": "PlatoneTimeoFraccaroli",
-      "道": "writings",
-      "title": "Timeo"
-    },
-    {
-      "identifier": "PlatosEuthyphroWithIntroductionAndNotesByWilliamArthurHeidel",
-      "道": "writings",
-      "title": "Plato's Euthyphro, with introduction and notes by William Arthur Heide"
-    },
-    {
-      "identifier": "WorksOfPlatoV4",
-      "道": "writings",
-      "title": "Works of Plato: A New and Literal Version, Chiefly from the Text of St"
-    },
-    {
-      "identifier": "WorksOfPlatoV6",
-      "道": "writings",
-      "title": "Works of Plato: A New and Literal Version, Chiefly from the Text of St"
-    },
-    {
-      "identifier": "afe8163.0001.001.umich.edu",
-      "道": "writings",
-      "title": "The laws of Plato"
-    },
-    {
-      "identifier": "afe8163.0002.001.umich.edu",
-      "道": "writings",
-      "title": "The laws of Plato"
-    },
-    {
-      "identifier": "afx0245.0003.001.umich.edu",
-      "道": "writings",
-      "title": "Plato's Republic : the Greek text"
-    },
-    {
-      "identifier": "aliteralversion05platuoft",
-      "道": "writings",
-      "title": "Works; a new and literal version, chiefly from the text of Stallbaum"
-    },
-    {
-      "identifier": "apology00platuoft",
-      "道": "writings",
-      "title": "Apology"
-    },
-    {
-      "identifier": "apologyofplat00platuoft",
-      "道": "writings",
-      "title": "The Apology of Plato"
-    },
-    {
-      "identifier": "apologyofplato00platuoft",
-      "道": "writings",
-      "title": "The Apology of Plato"
-    },
-    {
-      "identifier": "apologyofplatowi00platuoft",
-      "道": "writings",
-      "title": "The Apology of Plato, with a revised text and English notes, and a dig"
-    },
-    {
-      "identifier": "apologyofsocrat00plat",
-      "道": "writings",
-      "title": "The Apology of Socrates, the Crito, and part of the Phaedo; with notes"
-    },
-    {
-      "identifier": "apologyofsocrate00platiala",
-      "道": "writings",
-      "title": "The apology of Socrates : the Crito and part of the Phædo"
-    },
-    {
-      "identifier": "apologyphaedocri0000plat",
-      "道": "writings",
-      "title": "The Apology, Phaedo, and Crito of Plato, tr. by Benjamin Jowett; The g"
-    },
-    {
-      "identifier": "apolsocrate00platuoft",
-      "道": "writings",
-      "title": "Apology of Socrates and Crito, with extracts from the Phaedo and Sympo"
-    },
-    {
-      "identifier": "ausgewhltedial01plat",
-      "道": "writings",
-      "title": "Ausgewählte Dialoge;"
-    },
-    {
-      "identifier": "auswahlausplato00nohlgoog",
-      "道": "writings",
-      "title": "Auswahl aus Platons Politeia"
-    },
-    {
-      "identifier": "b2900049x_0006",
-      "道": "writings",
-      "title": "Plato : with an English translation"
-    },
-    {
-      "identifier": "b2900049x_0007",
-      "道": "writings",
-      "title": "Plato : with an English translation"
-    },
-    {
-      "identifier": "b2900049x_0008",
-      "道": "writings",
-      "title": "Plato : with an English translation"
-    },
-    {
-      "identifier": "b2900049x_0009",
-      "道": "writings",
-      "title": "Plato : with an English translation"
-    },
-    {
-      "identifier": "b2900049x_0010",
-      "道": "writings",
-      "title": "Plato : with an English translation"
-    },
-    {
-      "identifier": "bub_gb_IaZXAAAAcAAJ",
-      "道": "writings",
-      "title": "The Republic of Plato : translatd into English, with an analysis and n"
-    },
-    {
-      "identifier": "bub_gb__cER8cw_ue4C",
-      "道": "writings",
-      "title": "Platonis Convivium recensuit, emendavit, illustravit Alexander Hommel "
-    },
-    {
-      "identifier": "bwb_KR-689-823",
-      "道": "writings",
-      "title": "Platonis Euthyphro : prolegomenis et commentariis"
-    },
-    {
-      "identifier": "charmidesalcibia0000plat",
-      "道": "writings",
-      "title": "Charmides ; Alcibiades I and II ; Hipparchus ; The lovers ; Theages ; "
-    },
-    {
-      "identifier": "charmidesalcibia00platuoft",
-      "道": "writings",
-      "title": "Charmides, Alcibiades 1 and 2, Hipparchus, The lovers, Theages, Minos,"
-    },
-    {
-      "identifier": "charmideslachesl00platrich",
-      "道": "writings",
-      "title": "The Charmides, Laches, and Lysis of Plato;"
-    },
-    {
-      "identifier": "euthyphroofplato00platrich",
-      "道": "writings",
-      "title": "The Euthyphro of Plato; with an introduction and notes"
-    },
-    {
-      "identifier": "gorgiasofplato00plat",
-      "道": "writings",
-      "title": "The Gorgias of Plato"
-    },
-    {
-      "identifier": "india.history.resource.100073",
-      "道": "writings",
-      "title": "Platonis Omnia Opera, cum Commentariis Procli in Timaeum and Politica,"
-    },
-    {
-      "identifier": "india.history.resource.92890",
-      "道": "writings",
-      "title": "Platonis Dialogi secundum Thrasylli Tetralogias Dispositi, Vol. V"
-    },
-    {
-      "identifier": "lysissymposiumgo00plat",
-      "道": "writings",
-      "title": "Lysis ; Symposium ; Gorgias"
-    },
-    {
-      "identifier": "mythsofplato00platrich",
-      "道": "writings",
-      "title": "The Myths of Plato [extracted from the Dialogues]. Translated with int"
-    },
-    {
-      "identifier": "parmenidesofplat00platiala",
-      "道": "writings",
-      "title": "The Parmenides of Plato"
-    },
-    {
-      "identifier": "philebuswirevenl00platuoft",
-      "道": "writings",
-      "title": "Philebus; with introd., notes, and appendix; together with a critical "
-    },
-    {
-      "identifier": "philebuswithint00platgoog",
-      "道": "writings",
-      "title": "The philebus of Plato : with introduction, notes and appendix ; togeth"
-    },
-    {
-      "identifier": "plato0005unse",
-      "道": "writings",
-      "title": "Lysis ; Symposium ; Gorgias"
-    },
-    {
-      "identifier": "plato0008unse",
-      "道": "writings",
-      "title": "Charmides; Alcibiades I and II; Hipparchus; The lovers; Theages; Minos"
-    },
-    {
-      "identifier": "platocontraatheo00platrich",
-      "道": "writings",
-      "title": "Plato contra atheos = Plato against the atheists ; or, The tenth book "
-    },
-    {
-      "identifier": "platonisconvivi00platgoog",
-      "道": "writings",
-      "title": "Platonis Convivium : cum epistola ad Thompsonum"
-    },
-    {
-      "identifier": "platonisconvivi01hermgoog",
-      "道": "writings",
-      "title": "Platonis Convivium. Phaedrus"
-    },
-    {
-      "identifier": "platonissymposi01platgoog",
-      "道": "writings",
-      "title": "Platonis symposium, in usum scholarum"
-    },
-    {
-      "identifier": "republicplat02plat",
-      "道": "writings",
-      "title": "The Republic"
-    },
-    {
-      "identifier": "timaeuscritiascl0000plat",
-      "道": "writings",
-      "title": "Timaeus ; Critias ; Cleitophon ; Menexenus ; Epistles"
-    }
-  ]
+  {
+   "identifier": "30081007092699",
+   "道": "writings",
+   "title": "Platonis opera"
+  },
+  {
+   "identifier": "30081007094463",
+   "道": "writings",
+   "title": "Platonis opera"
+  },
+  {
+   "identifier": "ApologiaDiSocrate1885",
+   "道": "writings",
+   "title": "L' apologia di Socrate, dichiarata da Eugenio Ferrai"
+  },
+  {
+   "identifier": "CratiloPlatoneBonghi",
+   "道": "writings",
+   "title": "Cratilo"
+  },
+  {
+   "identifier": "FileboPlatoneBonghi",
+   "道": "writings",
+   "title": "Filebo"
+  },
+  {
+   "identifier": "GorgiasOfPlato",
+   "道": "writings",
+   "title": "Gorgias Of Plato: With English Notes, Introduction, and Appendix by W."
+  },
+  {
+   "identifier": "PhaedoOfPlato",
+   "道": "writings",
+   "title": "Phaedo of Plato"
+  },
+  {
+   "identifier": "PlatoneTimeoFraccaroli",
+   "道": "writings",
+   "title": "Timeo"
+  },
+  {
+   "identifier": "PlatosEuthyphroWithIntroductionAndNotesByWilliamArthurHeidel",
+   "道": "writings",
+   "title": "Plato's Euthyphro, with introduction and notes by William Arthur Heide"
+  },
+  {
+   "identifier": "WorksOfPlatoV4",
+   "道": "writings",
+   "title": "Works of Plato: A New and Literal Version, Chiefly from the Text of St"
+  },
+  {
+   "identifier": "WorksOfPlatoV6",
+   "道": "writings",
+   "title": "Works of Plato: A New and Literal Version, Chiefly from the Text of St"
+  },
+  {
+   "identifier": "afe8163.0001.001.umich.edu",
+   "道": "writings",
+   "title": "The laws of Plato"
+  },
+  {
+   "identifier": "afe8163.0002.001.umich.edu",
+   "道": "writings",
+   "title": "The laws of Plato"
+  },
+  {
+   "identifier": "afx0245.0003.001.umich.edu",
+   "道": "writings",
+   "title": "Plato's Republic : the Greek text"
+  },
+  {
+   "identifier": "aliteralversion05platuoft",
+   "道": "writings",
+   "title": "Works; a new and literal version, chiefly from the text of Stallbaum"
+  },
+  {
+   "identifier": "apology00platuoft",
+   "道": "writings",
+   "title": "Apology"
+  },
+  {
+   "identifier": "apologyofplat00platuoft",
+   "道": "writings",
+   "title": "The Apology of Plato"
+  },
+  {
+   "identifier": "apologyofplato00platuoft",
+   "道": "writings",
+   "title": "The Apology of Plato"
+  },
+  {
+   "identifier": "apologyofplatowi00platuoft",
+   "道": "writings",
+   "title": "The Apology of Plato, with a revised text and English notes, and a dig"
+  },
+  {
+   "identifier": "apologyofsocrat00plat",
+   "道": "writings",
+   "title": "The Apology of Socrates, the Crito, and part of the Phaedo; with notes"
+  },
+  {
+   "identifier": "apologyofsocrate00platiala",
+   "道": "writings",
+   "title": "The apology of Socrates : the Crito and part of the Phædo"
+  },
+  {
+   "identifier": "apologyphaedocri0000plat",
+   "道": "writings",
+   "title": "The Apology, Phaedo, and Crito of Plato, tr. by Benjamin Jowett; The g"
+  },
+  {
+   "identifier": "apolsocrate00platuoft",
+   "道": "writings",
+   "title": "Apology of Socrates and Crito, with extracts from the Phaedo and Sympo"
+  },
+  {
+   "identifier": "ausgewhltedial01plat",
+   "道": "writings",
+   "title": "Ausgewählte Dialoge;"
+  },
+  {
+   "identifier": "auswahlausplato00nohlgoog",
+   "道": "writings",
+   "title": "Auswahl aus Platons Politeia"
+  },
+  {
+   "identifier": "b2900049x_0006",
+   "道": "writings",
+   "title": "Plato : with an English translation"
+  },
+  {
+   "identifier": "b2900049x_0007",
+   "道": "writings",
+   "title": "Plato : with an English translation"
+  },
+  {
+   "identifier": "b2900049x_0008",
+   "道": "writings",
+   "title": "Plato : with an English translation"
+  },
+  {
+   "identifier": "b2900049x_0009",
+   "道": "writings",
+   "title": "Plato : with an English translation"
+  },
+  {
+   "identifier": "b2900049x_0010",
+   "道": "writings",
+   "title": "Plato : with an English translation"
+  },
+  {
+   "identifier": "bub_gb_IaZXAAAAcAAJ",
+   "道": "writings",
+   "title": "The Republic of Plato : translatd into English, with an analysis and n"
+  },
+  {
+   "identifier": "bub_gb__cER8cw_ue4C",
+   "道": "writings",
+   "title": "Platonis Convivium recensuit, emendavit, illustravit Alexander Hommel "
+  },
+  {
+   "identifier": "bwb_KR-689-823",
+   "道": "writings",
+   "title": "Platonis Euthyphro : prolegomenis et commentariis"
+  },
+  {
+   "identifier": "charmidesalcibia0000plat",
+   "道": "writings",
+   "title": "Charmides ; Alcibiades I and II ; Hipparchus ; The lovers ; Theages ; "
+  },
+  {
+   "identifier": "charmidesalcibia00platuoft",
+   "道": "writings",
+   "title": "Charmides, Alcibiades 1 and 2, Hipparchus, The lovers, Theages, Minos,"
+  },
+  {
+   "identifier": "charmideslachesl00platrich",
+   "道": "writings",
+   "title": "The Charmides, Laches, and Lysis of Plato;"
+  },
+  {
+   "identifier": "euthyphroofplato00platrich",
+   "道": "writings",
+   "title": "The Euthyphro of Plato; with an introduction and notes"
+  },
+  {
+   "identifier": "gorgiasofplato00plat",
+   "道": "writings",
+   "title": "The Gorgias of Plato"
+  },
+  {
+   "identifier": "india.history.resource.100073",
+   "道": "writings",
+   "title": "Platonis Omnia Opera, cum Commentariis Procli in Timaeum and Politica,"
+  },
+  {
+   "identifier": "india.history.resource.92890",
+   "道": "writings",
+   "title": "Platonis Dialogi secundum Thrasylli Tetralogias Dispositi, Vol. V"
+  },
+  {
+   "identifier": "lysissymposiumgo00plat",
+   "道": "writings",
+   "title": "Lysis ; Symposium ; Gorgias"
+  },
+  {
+   "identifier": "mythsofplato00platrich",
+   "道": "writings",
+   "title": "The Myths of Plato [extracted from the Dialogues]. Translated with int"
+  },
+  {
+   "identifier": "parmenidesofplat00platiala",
+   "道": "writings",
+   "title": "The Parmenides of Plato"
+  },
+  {
+   "identifier": "philebuswirevenl00platuoft",
+   "道": "writings",
+   "title": "Philebus; with introd., notes, and appendix; together with a critical "
+  },
+  {
+   "identifier": "philebuswithint00platgoog",
+   "道": "writings",
+   "title": "The philebus of Plato : with introduction, notes and appendix ; togeth"
+  },
+  {
+   "identifier": "plato0005unse",
+   "道": "writings",
+   "title": "Lysis ; Symposium ; Gorgias"
+  },
+  {
+   "identifier": "plato0008unse",
+   "道": "writings",
+   "title": "Charmides; Alcibiades I and II; Hipparchus; The lovers; Theages; Minos"
+  },
+  {
+   "identifier": "platocontraatheo00platrich",
+   "道": "writings",
+   "title": "Plato contra atheos = Plato against the atheists ; or, The tenth book "
+  },
+  {
+   "identifier": "platonisconvivi00platgoog",
+   "道": "writings",
+   "title": "Platonis Convivium : cum epistola ad Thompsonum"
+  },
+  {
+   "identifier": "platonisconvivi01hermgoog",
+   "道": "writings",
+   "title": "Platonis Convivium. Phaedrus"
+  },
+  {
+   "identifier": "platonissymposi01platgoog",
+   "道": "writings",
+   "title": "Platonis symposium, in usum scholarum"
+  },
+  {
+   "identifier": "republicplat02plat",
+   "道": "writings",
+   "title": "The Republic"
+  },
+  {
+   "identifier": "timaeuscritiascl0000plat",
+   "道": "conversations",
+   "title": "Timaeus ; Critias ; Cleitophon ; Menexenus ; Epistles"
+  }
+ ]
 }

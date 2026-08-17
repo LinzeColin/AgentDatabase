@@ -117,7 +117,17 @@ PATTERNS = [
     #     写反例时才想起：捷克语 `listy` 也是「页/刊」——`Národní listy` 是**报纸**，
     #     `Květy`、`Zlaté listy` 同族。它在本库的唯一命中与 `korrespondenc` 是同一份，
     #     **零收益、有已知误报类** ⇒ 不留。同 `letter` ⊂ `letterari`，只是这次在加之前抓到的。
+    #   ★★★ 2026-08-18 补 `epistle`：**词表里有拉丁语没有英语**。
+    #     `epistol`（无词边界）盖得住 `epistola` / `epistolae` / `epistolary`，
+    #     而英语 **`epistle` 里根本没有 "epistol" 这个串**（e-p-i-s-t-l-e）——
+    #     于是 `Letters of Plato` 认得、**`The Epistles of Plato` 认不得**。
+    #     撞见它的路径值得记：Plato #186 的延后理由是「真值只有 1 条道」，
+    #     而他第 54 份题名是 `Timaeus ; Critias ; Cleitophon ; Menexenus ; **Epistles**`。
+    #     此前对本人做过的两次校正**都只在假阳方向**（删掉误配的 conversations），
+    #     **一次也没量过召回**。[[blamed-the-channel-my-own-wordlist-was-blind]]
+    #     ⇒ 加词之后仍**不足以解锁他**（1 道 → 2 道，quick 要 3），如实记账，不当战果。
     ("conversations", r"\bletters?\b|correspond|briefe|briefwechsel|epistol|"
+                      r"\bepistles?\b|"
                       r"\blettres?\b|\blettere\b|"
                       r"carteggio|conversation|tischgespr|tabletalk|"
                       r"table.?talk|kolloqui|colloqui|"
@@ -214,7 +224,10 @@ WORKS_OVERRIDE = [
 #   不是看有没有 `letter` —— 真正的书信集题名是「Letters of X」「Briefwechsel」那种。
 EDITOR_APPENDED_LETTER = re.compile(
     r"(?:together\s+with|cum|with)\s+(?:an?\s+|the\s+)?(?:critical\s+|introductory\s+|prefatory\s+)?"
-    r"(?:letters?|epistola[me]?)\b"
+    # ★ 2026-08-18：`epistles?` 与上面 PATTERNS 的补词**必须同步加**——
+    #   只加正面词、不加排除词，会让 `together with a critical epistle` 这一类
+    #   （编者附信）从被排除变成被收录。**放宽要两侧一起看。**
+    r"(?:letters?|epistles?|epistola[me]?)\b"
     # ★ `man of letters` 是成语「文人」，与书信无关。Rousseau #178 实测那 1 份
     #   《A dialogue between **a man of letters** and Mr. J. J. Rousseau》靠它进的 conversations。
     #   与 `letterari` 同族：**同一个词根，两种意思**。
@@ -349,6 +362,11 @@ def selftest() -> int:
         ("Bismarck's table-talk", "bismarck-176"),
         # ★★ 2026-08-14 捷克语（逐字取自 comenius-182 的 manifest，**不是我编的**）
         ("Korrespondence. Listy Komenského a vrstevníků jeho", "comenius-182（本次的起因）"),
+        # ★★★ 2026-08-18 英语 `epistle`（前两条逐字取自 plato-186 的 _lanes.json 明细）
+        ("Timaeus ; Critias ; Cleitophon ; Menexenus ; Epistles",
+         "plato-186 第 54 份 —— 词表有拉丁 `epistol` 而无英语 `epistle`，本次的起因"),
+        ("The Epistles of Plato", "同上，最短形；`Letters of Plato` 此前认得、这个认不得"),
+        ("Epistolae Ho-Elianae : familiar letters", "拉丁形照旧要认（回归对照）"),
     ]
     NEG = [  # 必须**不**判成 conversations
         ("Frammenti letterari e filosofici", "leonardo-184（真误配，本次的起因）"),
@@ -363,6 +381,10 @@ def selftest() -> int:
          "同上"),
         ("Philebus; with introd., notes, and appendix; together with a critical letter",
          "`together with a critical letter` 是**编者附的评论信**，不是他的往来"),
+        # ★★★ 2026-08-18：加正面词 `epistle` 的**同一次**必须加这条反例——
+        #   只放宽收录侧、不同步放宽排除侧，编者附信会从「被排除」变成「被收录」。
+        ("Philebus ; with introduction and appendix ; together with a critical epistle",
+         "英语 `epistle` 的编者附信形（构造例，标注为构造）——排除项必须同步认它"),
         ("The philebus of Plato : with introduction, notes and appendix ; together with a critical letter",
          "同上（另一印本）"),
         ("Platonis Convivium : cum epistola ad Thompsonum",

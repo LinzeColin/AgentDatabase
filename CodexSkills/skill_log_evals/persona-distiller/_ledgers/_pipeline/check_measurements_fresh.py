@@ -67,7 +67,28 @@ TOOLS = [
 
 
 def workspaces(base: pathlib.Path):
-    return sorted(p for p in iter_workspaces(base) if (p / "raw").is_dir())
+    """★★★ 按**本件真正要比的那份产物**定位，不只按台账定位（2026-08-18 补）。
+
+    `iter_workspaces` 是按 `evidence/source-ledger.jsonl` 找工作区的 ——
+    那是「走到建台账那一步」的标志。而**本件比的是 `raw/` 下的量测产物**，
+    它在流程里出现得**早得多**。两者不是同一个集合。
+
+    实测（2026-08-18）：全库有 `raw/_lanes.json` 的 **19** 个工作区里，
+    **1 个**（`wip-plato-186`）没有台账 ⇒ 一直不在扫描面里。
+    而 Plato 的**整条延后理由**（「真值只有 1 条道」）就建在那份 `_lanes.json` 上；
+    当天我改了 `assign_lanes.py` 且**已证明会改动他那一行**，本件却照报「全部一致」。
+    —— **一盏假绿，且恰好落在唯一一个靠它下结论的人身上。**
+
+    ⇒ 取**并集**：台账定位的 ∪ 「`raw/` 下有本件任一产物的」。
+      不动 `iter_workspaces`（它被十几件判据共用，射程各不相同）。
+      [[a-gates-scan-set-is-smaller-than-reality]]｜[[zero-hit-gates-must-prove-they-can-hit]]
+    """
+    by_ledger = {p for p in iter_workspaces(base) if (p / "raw").is_dir()}
+    by_artifact = set()
+    for artifact, _tool, _a in TOOLS:
+        for f in base.glob("wip-*/**/raw/" + artifact):
+            by_artifact.add(f.parent.parent)
+    return sorted(by_ledger | by_artifact)
 
 
 def rerun(ws: pathlib.Path, artifact: str, tool: str, argtpl: list):
