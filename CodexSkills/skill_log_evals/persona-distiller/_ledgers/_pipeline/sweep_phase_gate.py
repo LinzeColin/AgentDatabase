@@ -135,11 +135,11 @@ def sweep(phase: str, corpora: pathlib.Path, include_frozen: bool, qc: pathlib.P
         try:
             data = json.loads(p.stdout)
         except Exception:
-            refused.append((name, "输出不是 JSON —— **未核，不是通过**"))
+            refused.append((name, "输出不是 JSON —— **未核，不是通过**", ws))
             continue
         # ★ 用产品自己给的 `refused` 位，不靠猜错误码
         if data.get("refused"):
-            refused.append((name, "缺 " + "／".join(data.get("missing_required") or ["?"])))
+            refused.append((name, "缺 " + "／".join(data.get("missing_required") or ["?"]), ws))
             continue
         checked.append(name)
         e = [x["code"] for x in data.get("errors", []) if isinstance(x, dict) and "code" in x]
@@ -201,9 +201,33 @@ def main() -> int:
     print("门：`quality_check.py --phase %s`" % a.phase)
     print("★ **口径**：下面所有比例的分母是「**真被检查的工作区数 = %d**」。" % denom)
     print("   冻结跳过（㊵，results.jsonl 非空）：%d 个" % len(frozen))
+    # ★★★ 2026-08-17：**拒检里混着两种完全不同的情形**，原先印同一句「缺 SKILL.md」。
+    #   实测 5 个拒检的：4 个是**语料阶段**（0 份产物，拒检当然对），
+    #   而 churchill **有 8 份产物 + 32 题 + 21 行台账**却也拒检 ——
+    #   同一句话读起来一样，处置完全不同。⇒ 把产物/题目数印出来，一眼分得开。
+    #   [[counts-need-their-cutoff-stated]]｜[[filters-make-rows-vanish]]
+    _PROD = ("persona.md", "facts.md", "work.md", "decision-policy.md", "strategy.md",
+             "capabilities.md", "boundaries.md", "cognitive-os.md")
+
+    def _shape(wsdir: pathlib.Path):
+        n_pr = sum(1 for f in _PROD if (wsdir / f).is_file())
+        cs = wsdir / "evals" / "cases.jsonl"
+        n_cs = sum(1 for l in cs.read_text(encoding="utf-8").splitlines()
+                   if l.strip()) if cs.is_file() else 0
+        return n_pr, n_cs
+
     print("   **拒检**（门没开机，一项检查都没跑）：%d 个" % len(refused))
-    for n, why in refused:
-        print("       · %-24s %s" % (n.replace("wip-", ""), why))
+    for item in refused:
+        n, why = item[0], item[1]
+        wsdir = item[2] if len(item) > 2 else None
+        tag = ""
+        if wsdir is not None:
+            n_pr, n_cs = _shape(pathlib.Path(wsdir))
+            tag = ("　产物 %d/8｜cases %d　%s"
+                   % (n_pr, n_cs,
+                      "← **语料阶段，拒检是对的**" if n_pr == 0 else
+                      "← ★★ **产物已做出来了，却连门都没开机**"))
+        print("       · %-24s %s%s" % (n.replace("wip-", ""), why, tag))
     print("   真被检查：%d 个" % denom)
 
     _table("硬错 errors", *errs, denom)
@@ -270,7 +294,12 @@ def self_test() -> int:
             "research", corp, include_frozen=False, qc=fake)
 
         chk("冻结的被跳过（㊵）", frozen, ["wip-frozen-4"])
-        chk("拒检单列、**不进分母**", [n for n, _ in refused], ["wip-refuse-1"])
+        chk("拒检单列、**不进分母**", [x[0] for x in refused], ["wip-refuse-1"])
+        # ★★★ 2026-08-17：拒检项**必须带上工作区路径** —— 没有它就印不出
+        #   「产物 0/8」还是「产物 8/8」，而这两种拒检的处置完全不同
+        #   （实测：4 个是语料阶段，churchill 是 8 份产物 + 32 题却连门都没开机）。
+        chk("★★★ 拒检项带工作区路径（否则分不出「语料阶段」与「产物已做出来了」）",
+            all(len(x) >= 3 and x[2] is not None for x in refused), True)
         chk("分母只含真被检查的", sorted(checked), ["wip-dup-2", "wip-plain-3"])
         # ★ 同一个码在一个工作区里出现 3 次 → 工作区数 2、出现次数 4
         chk("E1 的**工作区数**", ew["E1"], 2)

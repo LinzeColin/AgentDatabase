@@ -3370,6 +3370,7 @@
         "★ 声口很好：`measure_voice` 报**疑似译本 0/23**，全是英文原著"
       ],
       "unblock_todo": [
+        "【状态复量 2026-08-17 · 置顶】**产物其实做出来了**：8/8 份必写文档、32 道盲判用例、台账 21 行，全在 `wip-churchill-191/`。而工作区**没有 SKILL.md** ⇒ `quality_check` 对他**整个拒检**（一项检查都没跑，只报一条 `target.invalid`）。★ 这不与本条延后理由冲突：min_lanes 真值 2 道 < quick 门 3，**他本来就没走到打包那一步**，所以没有 SKILL.md 是一致的。★★ 但要知道：`check_scoring_ready` 把他列为 ✓（装置齐全），而合成门对他连开机都没开机 —— **两个工具看他是两种状态**，读任何一个都不完整。要动他，第一步是补 SKILL.md 让门能跑起来，**在那之前「他过没过门」这个问题没有答案**。",
         "**要补的是道**：他的书信（Randolph Churchill 编的官方传记附卷）、议会演说（Hansard）、内阁文件都在 IA 的 `creator` 索引之外，**要换通道**。",
         "★ 注意 PD 分界：1930 年之后的《The Second World War》《Great Contemporaries》《Step by Step》等**一律不能取**，已写进 `EXCLUDE_TITLE`。"
       ],
