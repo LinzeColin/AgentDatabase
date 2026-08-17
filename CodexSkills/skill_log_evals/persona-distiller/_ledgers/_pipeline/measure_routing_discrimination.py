@@ -247,6 +247,10 @@ def run_router(registry_root, task, mode="auto"):
     return cats, obs.get("eligible_candidates"), plan
 
 
+class MissingRegistry(Exception):
+    """输入缺失 —— **未量**，与「量了但不达标」分开。退出码 4。"""
+
+
 def eligible_pool_categories(registry_root):
     """随机基线的池子 —— **全部车队准入者（101 人）**，带着池子本身的族偏斜。
 
@@ -270,6 +274,21 @@ def eligible_pool_categories(registry_root):
       [[a-gates-scan-set-is-smaller-than-reality]]｜[[negative-control-must-not-share-the-assumption]]
     """
     admission = pathlib.Path(registry_root) / "expert-fleet-admission.json"
+    # ★★★ 2026-08-17：传错目录时**不许抛栈**。实测：`--registry-root` 指到
+    #   `registry/codex`（少一级）会得到一个 `FileNotFoundError` 回溯 ——
+    #   读的人看到的是 Python 栈，不是「哪里错了、该怎么办」。
+    #   这正是 Owner 说的「使用过程有显著性故障和阻碍点」。
+    #   ⇒ 换成一条能照着做的话，并用**未量码 4**（不是 0，也不是 1）。
+    #   [[error-message-points-at-an-exit-that-isnt-there]]
+    if not admission.is_file():
+        _hint = pathlib.Path(registry_root) / "persona-distiller-group"
+        raise MissingRegistry(
+            "★ **未量，不是通过** —— 找不到 %s\n"
+            "   `--registry-root` 要指向 **persona-distiller-group 目录本身**"
+            "（那里面有 `expert-fleet-admission.json` 和 `scripts/route_team_moe.py`）。\n"
+            "   %s" % (admission,
+                       ("看着你想要的是：%s" % _hint) if (_hint / "expert-fleet-admission.json").is_file()
+                       else "本机没找到候选目录；先确认这个仓里有没有 persona-distiller-group。"))
     d = json.loads(admission.read_text(encoding="utf-8"))
     rows = d if isinstance(d, list) else None
     if rows is None:
@@ -328,9 +347,34 @@ def selftest():
     if m is not None:
         bad.append("池子(3) < 队伍(5) 时应返回 None，实得 %r" % m)
 
+    # ── ★★★ 2026-08-17：输入缺失时**不许抛栈**，要给一条能照着做的话 ──
+    #   实测事故：`--registry-root` 指到 `registry/codex`（少一级）⇒ 一个
+    #   `FileNotFoundError` 回溯。读的人看到的是 Python 栈，不是「该怎么办」。
+    import tempfile as _tf, subprocess as _sp
+    _self = str(pathlib.Path(__file__).resolve())
+    with _tf.TemporaryDirectory() as _td:
+        _empty = pathlib.Path(_td)
+        try:
+            eligible_pool_categories(_empty)
+            bad.append("★★★ 目录里没有 expert-fleet-admission.json，却没有抛 MissingRegistry")
+        except MissingRegistry as _e:
+            _m = str(_e)
+            if "未量，不是通过" not in _m:
+                bad.append("★★★ 缺输入的提示里没有「未量，不是通过」")
+            if "--registry-root" not in _m:
+                bad.append("★★★ 缺输入的提示里没告诉人该改哪个参数")
+        except FileNotFoundError:
+            bad.append("★★★ **还在抛 FileNotFoundError** —— 缺输入必须变成可读的一句话")
+        # ★ 真跑一次子进程：退出码必须是 **4（未量）**，不是 0 也不是 1
+        _r = _sp.run([sys.executable, _self, "--registry-root", str(_empty)],
+                     capture_output=True, text=True)
+        if _r.returncode != 4:
+            bad.append("★★★ 缺输入时退出码 %d，应为 **4（未量）**" % _r.returncode)
+        if "Traceback" in (_r.stdout + _r.stderr):
+            bad.append("★★★ 缺输入时**仍然印出了回溯**")
     for b in bad:
         print("  ✗ " + b)
-    n = 4 + 3 + 1
+    n = 4 + 3 + 1 + 5      # ★ +5：2026-08-17「输入缺失不抛栈」那一组
     print("自测 %d/%d" % (n - len(bad), n))
     return 1 if bad else 0
 
@@ -393,7 +437,11 @@ def main():
         ap.error("要 --registry-root（persona-distiller-group 目录），或只跑 --self-test")
 
     root = pathlib.Path(a.registry_root).resolve()
-    pool = eligible_pool_categories(root)
+    try:
+        pool = eligible_pool_categories(root)
+    except MissingRegistry as exc:                                # noqa: PERF203
+        print(str(exc), file=sys.stderr)
+        return 4
     rng = random.Random(SEED)
     print("可选池 %d 人；随机基线 %d 次（seed=%d，**从真实池按其族偏斜抽**）\n"
           % (len(pool), a.trials, SEED))
