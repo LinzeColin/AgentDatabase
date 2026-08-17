@@ -89,5 +89,44 @@ class GenericVerbsDoNotClaimADomain(unittest.TestCase):
             self.assertIn(w, DOMAIN_SIGNALS["creative-design"])
 
 
+class HomonymKeywordsDoNotCrossFire(unittest.TestCase):
+    """**同音异义**：`仓库` 在词表里指 git 仓库，而中文里它也是 warehouse。
+
+    实测（2026-08-17）：基准题 `warehouse-automation-roi`
+    「仓库要不要上自动分拣，投入 800 万，三年能不能回本？」
+    —— 相关族是建造采购师/投资资本师/创业经营师，**没有软件开发师** ——
+    被判成软件题，域从 2 个变 3 个，domain_match 分母变大、人人被稀释。
+    该题正是基准里最差的几道之一（−11.5%）。
+
+    证据够不够动手：`仓库` 在 24 道题里**只命中这一道**，去掉后该题
+    software-ai 命中归 0 ⇒ **没有任何真软件题靠它**。改后该题 **−11.5% → −8.9%**，
+    24 题里**没有任何一题变差**。
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        from compile_task_graph import infer_domains
+        cls.dom = staticmethod(infer_domains)
+
+    def test_warehouse_question_is_not_software(self):
+        d = self.dom("仓库要不要上自动分拣，投入 800 万，三年能不能回本？")
+        self.assertNotIn("software-ai", d)
+        self.assertIn("engineering-industry", d)
+        self.assertIn("finance-investment", d)
+
+    def test_code_repository_still_hits_software(self):
+        """★ 负对照：git 那个意思**必须照旧命中**，否则就是把信号删了。"""
+        for t in ("代码仓库的分支策略怎么定", "repo 的 branch protection 怎么配",
+                  "monorepo repository layout review"):
+            with self.subTest(task=t):
+                self.assertIn("software-ai", self.dom(t), t)
+
+    def test_bare_warehouse_word_is_gone_from_the_list(self):
+        """★★ 钉住：裸 `仓库` 不许再回到 software-ai 词表里。"""
+        from compile_task_graph import DOMAIN_SIGNALS
+        self.assertNotIn("仓库", DOMAIN_SIGNALS["software-ai"])
+        self.assertIn("代码仓库", DOMAIN_SIGNALS["software-ai"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
