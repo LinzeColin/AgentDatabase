@@ -4013,6 +4013,26 @@ if (source / "VERSION").read_text().strip() != VERSION:
 
 ---
 
+## ★★★ 对照侧（裸模型基线）：照 `scaffold/baseline_provenance_template.md`，**在新会话里做**
+
+2026-08-18 新加。理由与下面「盲判载荷」那条一模一样 ——
+**对照侧的纪律此前只存在于一个人的副本里**（Bessemer #132 的 `BASELINE-PROVENANCE.md`，
+本仓唯一一份 90 行），下一个人看不到。
+
+**这一步为什么必须换会话**：对照侧回答的是「一个没读过这些材料的模型会答成什么样」，
+`delta = 候选 − 对照` 能读作「蒸馏增益」全靠这条。凡是读过该人物
+`rubric` / 语料 / 产物 / 既往判分的上下文，**都不合格**。
+Bessemer 那份严到把两条 `ls -la`（只看到文件名）记进「破例与灰区」。
+
+**母版里有一栏是新加的硬要求**：出处必须写明**模型是 `claude-opus-5`**。
+2026-08-18 全库实测：**这一栏只有 Bessemer 一位记了**，其余人物的 delta
+说的是「比某个没记名字的裸模型强 X」。换模型会把 delta 变成
+「蒸馏增益 ＋ 模型差异」，且与已入库产物不可比 —— 所以这一步**外部 API 也顶不上**。
+
+**当前待办（2026-08-18 实测）**：在册待判 10 位 / 321 题，**两侧答案一位都没有** ——
+Bismarck #176、Brandeis #172、Dewey #190、Frobel #181、Jefferson #175、
+Kant #179、Lincoln #174、Machiavelli #177、Pestalozzi #180、Rousseau #178。
+
 ## ★ 盲判载荷：照抄 `scaffold/blind_payload_template.py`，不要各写一遍
 
 此前没有母版，每人各写一份 `build_XX_blind.py`，

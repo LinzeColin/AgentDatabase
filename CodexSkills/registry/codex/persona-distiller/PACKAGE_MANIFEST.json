@@ -471,8 +471,8 @@
     },
     {
       "path": "references/pipeline/RUNBOOK.md",
-      "sha256": "476c0914ccd5738f23ccde715df9af35ebe66b82c54e5bf25e752966ca8c0b02",
-      "size_bytes": 261547
+      "sha256": "f91ff063611a6662b3cc40404ebcce8d77f87e7b7e94527f3407710bd6b01b94",
+      "size_bytes": 262969
     },
     {
       "path": "references/pipeline/build_queue.py",
@@ -1153,6 +1153,11 @@
       "path": "references/pipeline/scaffold/answers_template.py",
       "sha256": "d7164d3f202e31d3ee86735fc8a4c25b748d887ff79dd427e0f36522c0094835",
       "size_bytes": 8189
+    },
+    {
+      "path": "references/pipeline/scaffold/baseline_provenance_template.md",
+      "sha256": "9a008be55af68a356c9a7fd6798e0509906624fddf4bbd6d36bbcfa658360dae",
+      "size_bytes": 4418
     },
     {
       "path": "references/pipeline/scaffold/blind_payload_template.py",
