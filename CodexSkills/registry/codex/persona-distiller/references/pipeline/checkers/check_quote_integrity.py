@@ -233,8 +233,20 @@ def load_corpus(cache_dirs) -> tuple[list, list]:
     """
     texts, folded = [], []
     for d in cache_dirs:
-        # `{d}/*.txt` 不递归；本流水线语料在 `raw/<source_id>/<file>.txt`，深一层。
+        # `{d}/*.txt` 不递归；语料可能直接在 `raw/` 下，也可能在 `raw/<source_id>/` 里。
         for f in glob.glob(f"{d}/**/*.txt", recursive=True):
+            # ★★★ 2026-08-17：**`_` 开头的是记账文件，不是语料。**
+            #   comenius #182 实测：`raw/` 下只有六份 `_ids*.txt`，一份真语料都没有 ——
+            #   它们被装成「语料」之后，判据印的是「**语料读到了**，而断言与答案里
+            #   一条引文都没扫到」。那句话把「**未核**（语料读不到）」说成了
+            #   「**有可核对象却一条引文都没有**」——后者是更重的指控。
+            #   全库 **17 个**工作区处在「只有记账 .txt」这个状态。
+            #   ★ 我差点按本行原注释「语料在 raw/<source_id>/，深一层」改成只收子目录：
+            #     实测**所有**工作区的 .txt 都直接在 `raw/` 下（含真有 38–40 份语料的
+            #     brandeis／dewey），那样改会把**全部语料清零**。
+            #     **注释描述的布局与实况不符；按实测选规则，别按注释。**
+            if pathlib.Path(f).name.startswith("_"):
+                continue
             p = proj(pathlib.Path(f).read_text(encoding="utf-8", errors="replace"))
             texts.append(p)
             folded.append(fold_s(p))
@@ -465,6 +477,20 @@ def self_test(projected=None, folded=None) -> int:
     _ok = a["quotes"] == 2 and len(a["bad"]) == 1
     print(f"  {'✓' if _ok else '✗'} ⑳e 一段两条引文 → 各自判（quotes={a['quotes']} bad={len(a['bad'])}）")
     missed += not _ok
+
+    # ── ★★★ 2026-08-17：记账文件不许当语料（正反各一）──
+    import tempfile as _tf
+    with _tf.TemporaryDirectory() as _td:
+        _d = pathlib.Path(_td)
+        (_d / "_ids.txt").write_text("src-aaaaaaaaaaaa\n", encoding="utf-8")
+        (_d / "_ids-rebuild.txt").write_text("src-bbbbbbbbbbbb\n", encoding="utf-8")
+        _t0, _ = load_corpus([str(_d)])
+        print(f"  {'✓' if len(_t0)==0 else '✗'} ㉑a 只有 `_ids*.txt` → 装到 {len(_t0)} 份（须 0，不许当成语料）")
+        missed += len(_t0) != 0
+        (_d / "real-source.txt").write_text("He wrote a real sentence here.\n", encoding="utf-8")
+        _t1, _ = load_corpus([str(_d)])
+        print(f"  {'✓' if len(_t1)==1 else '✗'} ㉑b 加一份真语料 → 装到 {len(_t1)} 份（须 1，不许把真的也滤掉）")
+        missed += len(_t1) != 1
 
     print("\n  ✓ 负对照通过" if not missed else f"\n  ✗ {missed} 条不合——本检查器已失效，不得依赖其结论")
     return missed

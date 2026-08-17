@@ -791,8 +791,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_quote_integrity.py",
-      "sha256": "f3d5d904b9f81db844e7adff7333b6464da46bcb3263b78cf6b8613e5267ece3",
-      "size_bytes": 37558
+      "sha256": "d6021e35da81f9a0d6cd27de1f31fed652169e24d1c9deb375328ad7cc2f9fdd",
+      "size_bytes": 39520
     },
     {
       "path": "references/pipeline/checkers/check_quote_layer.py",
@@ -1596,8 +1596,8 @@
     },
     {
       "path": "scripts/check_quote_integrity.py",
-      "sha256": "f3d5d904b9f81db844e7adff7333b6464da46bcb3263b78cf6b8613e5267ece3",
-      "size_bytes": 37558
+      "sha256": "d6021e35da81f9a0d6cd27de1f31fed652169e24d1c9deb375328ad7cc2f9fdd",
+      "size_bytes": 39520
     },
     {
       "path": "scripts/check_quote_layer.py",
