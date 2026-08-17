@@ -132,8 +132,9 @@ Date: 2026-08-05（**v0.0.0.154**）
 > 还原 → 0，文件逐字一致。（**上一次接线就是接错了分支才白接的**，所以这次必须植入验证。）
 >
 > **本版实况计数（`check_verification_counts.py` 逐项核过）**：
-> 判据 **93** 件、Python 脚本 **136** 件、checksum 全量校验 **497 files**、身份族 **12** 族、**名册 102 人**。
+> 判据 **93** 件、Python 脚本 **136** 件、checksum 全量校验 **498 files**、身份族 **12** 族、**名册 102 人**。
 >
+> ★ **2026-08-17 第二十二次更新：checksum 497→498** —— 新增 `references/pipeline/workspace_roots.py`（`next_person.py` 两份合并后的依赖，134 行、自足、自测全过）。**只订正这一个数，没有重跑整份复验** —— 整份重跑仍欠着（见任务簿「欠一次升版 + VERIFICATION 真复验」），本文件首行版本号**因此不动**。
 > ★ **2026-08-17 第二十一次更新：checksum 496→497** —— 新增
 > `tests/test_markdown_report_handles_string_items.py`（6 条）。
 > 起因：`--write-report` 的 `.md` 那一半**一直是崩的**——`markdown_report` 假设
