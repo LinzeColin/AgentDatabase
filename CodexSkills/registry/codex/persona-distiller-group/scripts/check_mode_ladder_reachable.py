@@ -113,6 +113,33 @@
   在「多人是否真的更好」没有证据之前，那还是「为凑数放宽判据」。
   本件负责把这条链**逐环量出来摆在台面上**，让下一个人知道该从哪一环动手。
 
+## ★★★★★ 射程订正（2026-08-18，同日）：**这批样本不是用户会打的任务**
+
+上面所有数字都成立，但**它们说的是「名册场景标签」，不是「用户提问」**。必须写清：
+
+    样本平均长度 **33 字**，而且多数是**名词短语**：
+      「表征与范式设计」（7 字）、「research-problem-solving」、
+      「性能敏感场景下的抽象设计（零开销判据）」
+
+对照实验（**同样长度、改成用户口吻**）：
+
+    「性能敏感场景下的抽象设计（零开销判据）」        19 字 → software-ai      single_expert
+    「帮我设计一个性能敏感模块的抽象层，要求零开销，
+      并给出测试与回滚方案」                        33 字 → software-ai      **small_team**
+
+⇒ **同样 33 字，换成用户口吻就够到了 small_team。**
+  所以「88% 只坐 1 个人」这句的射程是**名册标签**，
+  **不能读成「用户用起来 88% 只有 1 个人」**——那个数**没有量过**。
+
+★ 我一度把它写成后者并提交了。订正在此。
+  [[samples-cannot-support-universal-claims]]｜[[a-verdict-whose-scope-exceeds-its-inputs]]
+
+★★ **仓里没有一份保存下来的、代表性的用户口吻任务集**：
+  `route_team_moe.py:420` 引的「24 pre-registered tasks / 54% 无域信号 / −1.7pp」
+  **只留了结论，没留任务**。要复算或推翻它，现在做不到。
+  [[evidence-must-carry-what-it-measured]]
+  ⇒ 本件因此**只报它真的量过的那一面**，并在输出里把这句射程一起印出来。
+
 ## 任务从哪来（不许我自己编）
 
 `team-index.json` 每个产物自带 `application_scenarios` —— 那是蒸馏流程写下的
@@ -312,8 +339,14 @@ def main() -> int:
               % ("team-index.json" if not idx.is_file() else "compile_task_graph.py"))
         return 4
     tasks = sample_tasks(idx, a.limit)
-    print("样本：**%d** 条任务，全部取自产物自带的 `application_scenarios`"
-          "（**不是判据作者编的**）" % len(tasks))
+    _avg = (sum(len(x) for x in tasks) / len(tasks)) if tasks else 0
+    print("样本：**%d** 条，取自产物自带的 `application_scenarios`（**不是判据作者编的**）"
+          % len(tasks))
+    print("  ★★ **射程**：平均 **%.0f 字**，且多为**名词短语标签**（如「表征与范式设计」），"
+          "**不是用户会打的任务**。" % _avg)
+    print("     实测对照：同样 33 字改成用户口吻（「帮我设计一个性能敏感模块的抽象层，"
+          "要求零开销，并给出测试与回滚方案」）⇒ **small_team**。")
+    print("     ⇒ 下面的「N% 只坐 1 人」说的是**标签**，**不能读成用户用起来如此** —— 那个数没量过。")
     if not tasks:
         print("★ **未量，不是通过**（rc=4）—— 一条样本都取不到")
         return 4
