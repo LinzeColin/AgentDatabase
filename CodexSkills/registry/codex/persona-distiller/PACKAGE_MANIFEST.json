@@ -731,8 +731,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_namesake_criteria.py",
-      "sha256": "17368cba96d1c55710276bad78d2dc7ec1f285aa51615a7ed94c9b1f8998fb67",
-      "size_bytes": 17594
+      "sha256": "016ab5424379a9e00ee5e1cb7a8e2a5df9f9522f6e2102a3c2640747db0a4647",
+      "size_bytes": 21131
     },
     {
       "path": "references/pipeline/checkers/check_namesake_separability.py",
@@ -1536,8 +1536,8 @@
     },
     {
       "path": "scripts/check_namesake_criteria.py",
-      "sha256": "17368cba96d1c55710276bad78d2dc7ec1f285aa51615a7ed94c9b1f8998fb67",
-      "size_bytes": 17594
+      "sha256": "016ab5424379a9e00ee5e1cb7a8e2a5df9f9522f6e2102a3c2640747db0a4647",
+      "size_bytes": 21131
     },
     {
       "path": "scripts/check_namesake_separability.py",
