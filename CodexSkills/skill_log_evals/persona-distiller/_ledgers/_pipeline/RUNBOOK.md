@@ -25,6 +25,35 @@
 ★ **它只验判据自己的判定逻辑，不代跑真语料** —— 各判据的 `--corpora` /
 `--skill-root` 参数不同，本入口不代跑。**别把「自测全绿」读成「全库没问题」。**
 
+## ★★★ 推送前必跑（**清单，不靠记忆**）
+
+2026-08-17 同一天犯两次：先是「改完 RUNBOOK 没重算 checksums 就推了」，
+接着是「**打印了 `合同漂移门 rc=1` 然后照样提交并推送**」。
+真因不是健忘 —— 是我推送前只有**一个**固定动作（公开仓那道），
+其余的门不在清单里，等于不存在。
+
+    # 1) 公开仓：别人的东西别乱放 / 我们的秘密别外泄
+    python3 _pipeline/check_private_assets_not_public.py --check --range origin/main..HEAD
+
+    # 2) 判据自身逻辑（不代跑真语料）
+    python3 _pipeline/run_checks.py
+
+    # 3) 合同漂移（版本三轴 / 镜像 / 自报数字）—— **动过 registry 里任何文件都要跑**
+    python3 <仓根>/CodexSkills/registry/codex/persona-distiller/scripts/check_contract_drift.py
+
+    # 4) 两棵 _pipeline 树的同名文件必须逐字节一致
+    python3 _pipeline/check_runbook_trees_agree.py
+
+**三条纪律：**
+
+1. **跑完守卫之后又动了东西，那次守卫就作废** —— 顺序是「改 → 跑全部 → 提交」，
+   不是「跑 → 改 → 提交」。
+2. **红了就停**，不许「打印出来然后继续」。
+3. 改了随包分发的文件 ⇒ `scripts/build_manifest.py` 重算；
+   **改 `VERIFICATION.md` 会让它自己的校验和再变一次，要再算一遍**（实测）。
+   ★ 写盘型工具是免费探针：跑一次 `build_manifest` 后看 `git status`，
+   有输出就说明**已提交的派生物是陈旧的**。
+
 ## 把某一道门跑遍一批工作区（口径由工具保证）
 
     python3 _pipeline/sweep_phase_gate.py --phase research     # 默认只跑未判分的
