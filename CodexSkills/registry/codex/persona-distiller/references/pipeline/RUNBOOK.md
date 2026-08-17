@@ -65,6 +65,31 @@
    ★ 写盘型工具是免费探针：跑一次 `build_manifest` 后看 `git status`，
    有输出就说明**已提交的派生物是陈旧的**。
 
+## 这些判据各自该在什么时候跑（**不在 12 步里，但都有时机**）
+
+2026-08-18 建 `check_checker_has_a_procedural_caller.py` 时一数：
+`_pipeline/` 39 件判据里 **11 件在 RUNBOOK / quality_check / `*.sh` 三处一次都没出现**。
+它们的自测被 `run_checks` 按能力自动收编，所以「有没有调用方」看着一直是绿的 ——
+**而自测验的是判定逻辑站不站得住，不是「今天这批数据干不干净」。**
+
+| 什么时候跑 | 判据 | 它抓什么 |
+|---|---|---|
+| **抓源之前**（定检索词时） | `check_keywords_dont_pull_unowned_domains.py` | 一个词把「没人拥有的域」拉了进来 |
+| **步骤 3 前后**（台账／著录） | `check_one_ledger_per_workspace.py` | 一个工作区两份台账 ⇒ 每个 rglob 统计都虚高 |
+| 同上 | `check_title_person.py` | 书自印的题名说这是谁的集子 ≠ 台账著录的人 |
+| 同上 | `check_inflected_byline_candidates.py` | 署名就在扉页上，只是变了格（属格/夺格） |
+| **holdout 指派之后** | `check_holdout_train_same_work.py` | 密封集那部书，train 里也有一份 |
+| **步骤 8（生成用例）之前** | `check_generators_respect_freeze.py` | `gen_cases_*.py` 会无条件重写用例（撞 ㊵ 冻结） |
+| **队列／名册维护时** | `check_roster_name_join.py` | 三张表用姓名 join，口径不同就给出不同的队列状态 |
+| 同上 | `check_ranking_driver_is_computed.py` | `ranking_driver` 曾是二值标志冒充度量 |
+| **复检延后名单时** | `check_deferred_list.py` | 名单自称有某件判据，实际不存在 |
+| 同上 | `check_unblock_premise_fresh.py` | 「在等某个裁定」的条目，那个裁定可能早就裁过了 |
+| **改完任何工具之后** | `check_viewers_are_readonly_or_say_so.py` | 名字承诺「只显示」的工具，要么别写盘，要么说出来 |
+
+★ 这一节本身就是它们的**流程调用方** —— 建了不写进流程，等于没建。
+  新加判据时，**要么进 12 步，要么进这张表，要么进推送前清单**；
+  三处都没有 ⇒ `check_checker_has_a_procedural_caller.py` 会报出来。
+
 ## 把某一道门跑遍一批工作区（口径由工具保证）
 
     python3 _pipeline/sweep_phase_gate.py --phase research     # 默认只跑未判分的
