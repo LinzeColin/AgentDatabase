@@ -177,6 +177,9 @@ def main() -> int:
     ap.add_argument("--strict", action="store_true", help="有红就 rc=1")
     ap.add_argument("--allow-known", action="store_true",
                     help="配 --strict：只有**不在已知名单里**的红才 rc=1")
+    ap.add_argument("--workers", type=int, default=4,
+                    help="并行度（默认 **4**，2026-08-17 实测定的）。"
+                         "8 路省 ~23%% 时间但制造 1–4 盏假红；4 路 0 假红")
     ap.add_argument("--self-test", "--selftest", dest="selftest", action="store_true")
     a = ap.parse_args()
     if a.selftest:
@@ -219,7 +222,13 @@ def main() -> int:
     #   ★ 顺序仍按文件名排，输出可比；耗时逐件打印，**下次谁最慢一眼看得见**。
     t0 = time.time()
     results = {}
-    with concurrent.futures.ThreadPoolExecutor(max_workers=min(8, len(files))) as ex:
+    # ★★★ 并行度 2026-08-17 实测定为 **4**，不是拍的：
+    #       workers=8 → 墙钟 256.6 / 264.1 / 242.8 秒，**假超时 1–4 件**（逐跑还不一样）
+    #       workers=4 → 墙钟 **324.7 秒**，**假超时 0、新回归 0**
+    #   8 路省 ~75 秒（23%），代价是 1–4 盏假红 —— 诊断一盏假红花的时间远超 75 秒。
+    #   ★ 它此前自报「串行 333.5s → 并行约 110–150s」**是陈旧的**：三次实测都在 240s 以上。
+    _workers = max(1, min(a.workers, len(files)))
+    with concurrent.futures.ThreadPoolExecutor(max_workers=_workers) as ex:
         futs = {ex.submit(run_one, f): f for f in files}
         for fut in concurrent.futures.as_completed(futs):
             results[futs[fut]] = fut.result()
