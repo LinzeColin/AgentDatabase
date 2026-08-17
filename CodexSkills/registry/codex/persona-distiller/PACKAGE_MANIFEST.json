@@ -2441,8 +2441,8 @@
     },
     {
       "path": "tests/test_profile_fallback_is_disclosed.py",
-      "sha256": "05b33d490dc636604abf7651dd9a958d8be85dc5a43e189aba140bf98568c72d",
-      "size_bytes": 2567
+      "sha256": "4ba871cecdb246320b7b9597476638d03feb76cd0c0732fc72880459a12b8b78",
+      "size_bytes": 4247
     },
     {
       "path": "tests/test_quality_and_eval.py",
