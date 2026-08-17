@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "51c31aaf70d57904da202f6eb6a62c74f35f70d510309d7d397a4e90b78a5e7e",
-      "size_bytes": 156976
+      "sha256": "c41598f7ef1657d9ae164f3a0816cf75b2230b8d37a7a3aece78986e5d554d40",
+      "size_bytes": 157510
     },
     {
       "path": "VERSION",
@@ -471,8 +471,8 @@
     },
     {
       "path": "references/pipeline/RUNBOOK.md",
-      "sha256": "f91ff063611a6662b3cc40404ebcce8d77f87e7b7e94527f3407710bd6b01b94",
-      "size_bytes": 262969
+      "sha256": "ba1a0b606dcd632adaedbaf89e50d9e9186042a2acfbd78b8e06cd5e1c5fd351",
+      "size_bytes": 267325
     },
     {
       "path": "references/pipeline/build_queue.py",
@@ -1153,11 +1153,6 @@
       "path": "references/pipeline/scaffold/answers_template.py",
       "sha256": "d7164d3f202e31d3ee86735fc8a4c25b748d887ff79dd427e0f36522c0094835",
       "size_bytes": 8189
-    },
-    {
-      "path": "references/pipeline/scaffold/baseline_provenance_template.md",
-      "sha256": "9a008be55af68a356c9a7fd6798e0509906624fddf4bbd6d36bbcfa658360dae",
-      "size_bytes": 4418
     },
     {
       "path": "references/pipeline/scaffold/blind_payload_template.py",
