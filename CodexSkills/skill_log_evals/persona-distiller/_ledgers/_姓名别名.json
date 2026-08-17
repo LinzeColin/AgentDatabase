@@ -1,0 +1,38 @@
+{
+  "_说明": "三张表（_蒸馏队列.json / _延后名单.json / team-index.json 的 products）用姓名互相 join，而同一个人在三处的写法可能不同。本文件是**唯一的裁决处**：每一对「姓+名首字母相同而全名不同」的疑似，都必须在这里被显式判成 same 或 different，并附判据。**判据不许自动合并** —— 同名者长得一模一样。",
+  "_为什么要有它": "2026-08-17 实测：两个同名的 next_person.py 对同一份数据给出 pending 0 / 66 两个答案，我自己现算得 13。三个数的差全部来自姓名 join 口径。逐对核完之后 pending 真值是 0，而 13 里有 11 个是「已做未出货」、2 个是拼写不同（Alfred Sloan / William Paton）。",
+  "_口径": "归一化 = NFKD 去变音符 + 非字母数字转空格 + 小写 + 折叠空白。疑似判别式 = (姓, 名首字母) 相同而归一化全名不同。",
+  "same": [
+    {
+      "canonical": "Alfred P. Sloan",
+      "aliases": ["Alfred Sloan"],
+      "见于": {"队列": "Alfred Sloan", "延后名单": "Alfred P. Sloan"},
+      "判据": "两处族别一致（创业经营师）；延后名单该条理由为「结构性不可能（同 Alfred P. Sloan／F. Stanley Nowlan）」，指的就是同一人。"
+    },
+    {
+      "canonical": "William Andrew Paton",
+      "aliases": ["William Paton"],
+      "见于": {"队列": "William Paton", "延后名单": "William Andrew Paton"},
+      "判据": "两处族别一致（财务合规师）；#162 已按「⑧ 盲判装置在本人物身上立不起来」记延后，零分数产生。"
+    },
+    {
+      "canonical": "Jesse Lauriston Livermore",
+      "aliases": ["Jesse Livermore"],
+      "见于": {"队列": "Jesse Livermore", "名册": "Jesse Lauriston Livermore"},
+      "判据": "族别一致（投资资本师）；名册 `subject_slug` 就是 `jesse-livermore`。#100 已入库。"
+    }
+  ],
+  "different": [
+    {
+      "甲": "Charles M. Eastman",
+      "乙": "Charles Eastman",
+      "见于": {"队列": "Charles M. Eastman", "延后名单": "Charles M. Eastman", "名册": "Charles Eastman"},
+      "判据": [
+        "★★★ **这是两个人，绝不许合并。**",
+        "甲（队列/延后）：**建造采购师** construction-procurement；生 1940-05-05、卒 2020-11-09（出处：Wikidata Q18630942 P569/P570，enwiki「Charles M. Eastman」）；BIM 研究者；延后理由是「版权在保护期内（结构性不可能）：生年 1940，1931 年时不满 19」。",
+        "乙（名册）：**思想教育师** thinker-educator；`subject_slug` = `charles-eastman`；`subject_status` = deceased；`subject_active_through` = **1939**；`subject_origin` = historical；入选理由写的是「保留地医疗、原住民权利倡议、采集伦理」——即 Charles Alexander Eastman（Ohiyesa），1858–1939。",
+        "⇒ 族别不同、生卒不同、题材不同。**「姓 + 名首字母相同」这个判别式对同名者恒为真**，所以它只能用来找疑似，不能用来合并。"
+      ]
+    }
+  ]
+}
