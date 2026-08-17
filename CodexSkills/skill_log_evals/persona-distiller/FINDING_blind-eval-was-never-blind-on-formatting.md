@@ -52,6 +52,45 @@ Barton 第 3 轮的长度门是干净的，判据原话：
 
 **只有这 4 个人留了成对载荷。其余 113 人查不了**——不是「没问题」，是**没有数据**。
 
+### ★★ 2026-08-17 复量：可查的从 **4** 涨到 **19**，红的从 4 涨到 **8**
+
+那句「其余 113 人查不了」当时是对的。今天现算 —— **两份载荷都在的工作区已有 19 个**：
+
+    可查 19｜**过 11**｜**红 8**
+
+**过的 11 个**：adams、carver、mendel、bessemer、sorby、gantt、grotius、
+whitworth、cicero、holmes、shewhart。
+（这一条值得记：**修法在多数人身上是有效的**，不是全库都红。）
+
+**红的 8 个**，分两种通道：
+
+| 通道 | 人 | 实测 |
+|---|---|---|
+| **粗体能指认候选** | clara-barton | **32/32 = 100%**（候选 32/32 带，基线 0/32） |
+| | florence-nightingale | 30/32 = 94% |
+| | alexander-fleming | 28/32 = 88%（基线 4/32 带） |
+| | william-osler | 26/32 = 81%（基线 6/32 带） |
+| **长度成为信号** | elizabeth-blackwell | 候选更短 25/32 = **78%**（门 ≤75%） |
+| | james-nasmyth | 候选更短 **0/16 = 0%**（门 ≥25%） |
+| | william-andrew-paton | 总体均长比 **1.77**（门 ≤1.3） |
+| | elihu-thomson | 总体均长比 **0.67**（门 ≥0.77）——**反方向的同一个问题** |
+
+★ 前 4 个正是本文件已点名的那 4 个，**三周过去没有变**（他们都属 ㊵ 已判分即冻结）。
+★ **后 4 个是新查出来的** —— 不是新发生，是**当时没有数据、现在有了**。
+  他们四个也都已判分（记拒发／卡在判分设计），同属 ㊵ 冻结。
+
+⇒ **8 个全部是冻结件，按 ㊵ 只记档不动。** 本次复量的价值不在「修」，
+  在于把「查不了」缩小了：**113 → 至少 15 个仍无成对载荷**，而可查的这 19 个里
+  **11 个是干净的**。
+
+★ 复算命令（不重实现，直接跑判据本身）：
+
+    python3 registry/codex/persona-distiller/scripts/check_answer_surface_leak.py \
+      --candidate <工作区>/evals/judge_payload*.json \
+      --baseline  <工作区>/evals/baseline.v1.json \
+      --baseline-source <按 results.jsonl 的 baseline_source 现算，混杂按最严>
+
+
 ## 四、改了什么
 
 `check_answer_length_leak.py` → **`check_answer_surface_leak.py`**（改名是因为范围变了，
