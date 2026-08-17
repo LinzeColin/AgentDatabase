@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "114b4d8f0a7f32eeac5dd81a79b2ed323ce09b7b389394caf1e8a94f6418c7c9",
-      "size_bytes": 156103
+      "sha256": "1b52f25c05e49448116e74e74f984ab6e25d9374078d613361b5c03ce6b6d83b",
+      "size_bytes": 156434
     },
     {
       "path": "VERSION",
@@ -393,6 +393,11 @@
       "path": "references/ledgers/_周报_2026-08-12.md",
       "sha256": "baba90eb89e022b1fa891f21d515cff4e1b5bfb0a26647819e6fcfa83d8c0dd1",
       "size_bytes": 17156
+    },
+    {
+      "path": "references/ledgers/_周报_2026-08-18.md",
+      "sha256": "158578f098e86143554d01dff626319a184bbf22bfdb8e4006606e9a887b5bdc",
+      "size_bytes": 9156
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
