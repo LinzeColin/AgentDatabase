@@ -96,6 +96,7 @@
         "src-2e8456e43798",
         "src-2ef164245cdd"
       ]
-    ]
+    ],
+    "counting_convention": "2026-08-17：`check_source_dedup` 报的未声明重复对里，**有一类不是同一部作品**，因此不声明 `derived_from`；下面**逐对点名**说明为什么它们该当两处证据。\n\n① **合集收录单行本** —— `businessaprofess00bran.txt` / `businessaprofes02poolgoog.txt` / `cu31924002234387.txt` 是《Business — A Profession》(1914) 论文集的三份扫本，它**重印了**`lifeinsuranceabu00branrich.txt`、`lifeinsuranceabu9582bran.txt`（《Life Insurance: The Abuses and The Remedies》1905 演讲单行本）、`savingsinsurance00branrich.txt`（《Savings Insurance》）、`OrationTrueAmericanism.txt`（1915 Faneuil Hall 演讲）与 `jstor-1013266.txt`（期刊单篇）。重叠 41.9%–63.8% 来自重印，**但单行本各有独立的场合、听众与年份，是独立的一手证据**。\n\n② **后出的书重印了先前的文书** —— `fatigueefficiency00gold.txt` 等五份是 Josephine Goldmark 的《Fatigue and Efficiency》(Russell Sage Foundation)，它大段重印了 `cu31924017572391.txt` （《Women in Industry: Brief for the State of Oregon》，Muller v. Oregon 辩护状，**布兰代斯本人执笔**）。二者重叠 43.7%，而**作者不同**：辩护状是他的作品、那本书是她的作品，绝不能并成一部。\n\n★ 已声明为同一部作品的是 **5 组 / 10 条派生关系**（书名页逐份核过）：Business—A Profession ×3、Life Insurance ×2、Other People's Money ×3、The Jewish Problem ×2、Fatigue and Efficiency ×5。\n\n★★ 本节按 2026-08-17 起生效的新规矩写成**逐对点名**：只有同时出现在同一段文本里的两个文件名才被豁免，写句泛泛的散文不会豁免任何一对。涉及的文件名：\n   OrationTrueAmericanism.txt\n   agc3261.0001.001.umich.edu.txt\n   businessaprofes02poolgoog.txt\n   businessaprofess00bran.txt\n   cu31924002234387.txt\n   cu31924017572391.txt\n   fatigueefficie00gold.txt\n   fatigueefficien00gold.txt\n   fatigueefficiency00gold.txt\n   jstor-1013266.txt\n   lifeinsuranceabu00branrich.txt\n   lifeinsuranceabu9582bran.txt\n   savingsinsurance00branrich.txt"
   }
 }

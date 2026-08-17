@@ -129,6 +129,7 @@
         "src-bd138556703e",
         "src-fcb725fb9ced"
       ]
-    ]
+    ],
+    "counting_convention": "2026-08-17：`check_source_dedup` 报的未声明重复对里，**有一类不是同一部作品**，因此不声明 `derived_from`；下面**逐对点名**说明为什么它们该当两处证据。\n\n★ **选集收录单篇** —— `aqr1372.0001.001.umich.edu.txt` 是《The School and the Child — Being Selections from the Educational Essays of John Dewey》（J. J. Findlay 编，Blackie & Son, London），它**收录了**《The Child and the Curriculum》（`childandcurricul00deweuoft.txt` / `childcurriculum00dewe.txt` / `childcurriculum00dewe_0.txt` / `childcurriculum00dewerich.txt` / `curriculum00dechildwerich.txt` 五份扫本）。重叠 57.5%–61% 来自收录，**但选集是英国编者为英国读者另编的出版物，有独立的编者序、选目与出版脉络，是独立的一处证据**；单篇本身也是独立出版物。\n\n★ 已声明为同一部作品的是 **4 组 / 8 条派生关系**（书名页与题名词密度逐份核过）：The Child and the Curriculum ×5、Democracy and Education ×4、Psychology ×3、Leibniz's New Essays ×2。\n\n★★ 本节按 2026-08-17 起生效的规矩写成**逐对点名**：只有同时出现在同一段文本里的两个文件名才被豁免，写句泛泛的散文不会豁免任何一对。涉及的文件名：\n   aqr1372.0001.001.umich.edu.txt\n   childandcurricul00deweuoft.txt\n   childcurriculum00dewe.txt\n   childcurriculum00dewe_0.txt\n   childcurriculum00dewerich.txt\n   curriculum00dechildwerich.txt"
   }
 }

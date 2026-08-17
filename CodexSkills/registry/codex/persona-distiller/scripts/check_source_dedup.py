@@ -196,7 +196,32 @@ def boilerplate(sh: dict, df_floor: float = BOILERPLATE_DF,
     return {g for g, c in df.items() if c >= need}
 
 
-def analyse(records: list, texts: dict, threshold: float = DEFAULT_THRESHOLD) -> dict:
+def convention_exempt(pair: dict, convention: str) -> bool:
+    """→ 这一对是不是**被 `counting_convention` 逐对点名说明过**。
+
+    ★★★ 2026-08-17：本件的处置文案一直写着
+        「要么补 `derived_from`，**要么**在 `attribution_basis.counting_convention`
+         里写清为什么它们该当两处证据」
+    而 `counting_convention` **在代码里一次也没被读过** —— 第二条出路根本不存在。
+    仓里早把这个形状记成 [[error-message-points-at-an-exit-that-isnt-there]]，
+    实例引的就是这句话本身。今天实测：把说明写进 `meta.json` 之后，报的对数一条没少。
+
+    ★ 实现它，但**必须逐对点名才算**：约定文本里要同时出现这一对的两个文件名
+      （去掉 `.txt`、大小写不敏感）。否则「写句散文就全免」，那是放宽不是说明。
+      [[a-penalty-is-not-a-rule]]｜[[loosen-only-the-exonerating-side]]
+    """
+    if not convention:
+        return False
+    low = convention.lower()
+    def stem(x):
+        x = str(x or "")
+        return (x[:-4] if x.lower().endswith(".txt") else x).lower()
+    a, b = stem(pair.get("甲")), stem(pair.get("乙"))
+    return bool(a) and bool(b) and a in low and b in low
+
+
+def analyse(records: list, texts: dict, threshold: float = DEFAULT_THRESHOLD,
+            convention: str = "") -> dict:
     """records 是 usable 的台账行；texts 是 {source_id: 正文}。"""
     ids = [r["source_id"] for r in records]
     name = {r["source_id"]: r.get("original_name") or r["source_id"] for r in records}
@@ -230,6 +255,7 @@ def analyse(records: list, texts: dict, threshold: float = DEFAULT_THRESHOLD) ->
     # ★ 扣掉样板之后变空的，与「本来就空」要分开——前者说明**这份文件几乎全是样板**
     all_boiler = [name[s] for s in ids if sh[s] and not net[s]]
     dup_pairs, undeclared, boiler_only = [], [], []
+    by_convention = []
     for a, b in itertools.combinations(ids, 2):
         ov_raw = containment(sh[a], sh[b])
         ov = containment(net[a], net[b])
@@ -246,7 +272,11 @@ def analyse(records: list, texts: dict, threshold: float = DEFAULT_THRESHOLD) ->
                "扣样板前": round(ov_raw, 4), "已声明 derived_from": is_declared}
         dup_pairs.append((a, b, ov, is_declared))
         if not is_declared:
-            undeclared.append(row)
+            if convention_exempt(row, convention):
+                row["★ 已按 counting_convention 逐对点名说明"] = True
+                by_convention.append(row)
+            else:
+                undeclared.append(row)
 
     comps = components(ids, dup_pairs)
     distinct = len(comps)
@@ -289,6 +319,7 @@ def analyse(records: list, texts: dict, threshold: float = DEFAULT_THRESHOLD) ->
             "只有声明连得起来。"),
         "threshold": threshold,
         "**未声明的重复对**": undeclared,
+        "★ 已按 counting_convention 逐对点名说明的": by_convention,
         "已声明的重复对数": sum(1 for *_x, d in dup_pairs if d),
         "作品分组": [[name[s] for s in g] for g in comps],
         "样板词片数": len(boiler),
@@ -528,6 +559,35 @@ def self_test() -> int:
     chk(f"单份 → 1 部作品、0 对：{r['distinct_works']}, {len(r['**未声明的重复对**'])}",
         r["distinct_works"] == 1 and not r["**未声明的重复对**"])
 
+    # ── ★★★ 2026-08-17：`counting_convention` 这条出路**以前只是句话** ──
+    #   本件的处置文案一直写「要么补 derived_from，**要么**写 counting_convention」，
+    #   而代码里从没读过它。仓里早把这形状记成
+    #   [[error-message-points-at-an-exit-that-isnt-there]]，实例引的就是这句话本身。
+    #   ★ 实现它，但**必须逐对点名**：写句泛泛的散文不许豁免任何一对。
+    print("\n── `counting_convention` 逐对点名豁免 ──")
+    _pair = {"甲": "businessaprofess00bran.txt", "乙": "lifeinsuranceabu00branrich.txt"}
+    chk("★★★ 两个文件名都点到 → 豁免",
+        convention_exempt(_pair, "合集 businessaprofess00bran 重印了 lifeinsuranceabu00branrich"))
+    chk("★★★ 反对照：**只点到一个** → 不豁免",
+        not convention_exempt(_pair, "businessaprofess00bran 是论文集"))
+    chk("★★★ 反对照：**泛泛的散文** → 一对也不豁免（否则写句话就全免）",
+        not convention_exempt(_pair, "这些重叠都是合集重印单行本造成的，属正常"))
+    chk("★★ 反对照：**空约定** → 不豁免（读不到 meta 就当没写）",
+        not convention_exempt(_pair, "") and not convention_exempt(_pair, None))
+    chk("★★ 带 .txt / 不带 .txt / 大小写 都要认",
+        convention_exempt({"甲": "A.TXT", "乙": "b.txt"}, "见 a 与 B 两份"))
+    # ★ 真接线：`analyse` 必须把豁免的那些挪出「未声明」
+    _t1 = "alpha beta gamma delta epsilon zeta eta theta iota kappa " * 40
+    _recs = [{"source_id": "x1", "original_name": "one.txt"},
+             {"source_id": "x2", "original_name": "two.txt"}]
+    _tx = {"x1": _t1, "x2": _t1}
+    _r0 = analyse(_recs, _tx)
+    _r1 = analyse(_recs, _tx, convention="one 与 two 是不同的出版物，理由如下……")
+    chk("★★★ 接线：不给约定 → 报 %d 对；逐对点名后 → 报 %d 对"
+        % (len(_r0["**未声明的重复对**"]), len(_r1["**未声明的重复对**"])),
+        len(_r0["**未声明的重复对**"]) == 1 and len(_r1["**未声明的重复对**"]) == 0
+        and len(_r1["★ 已按 counting_convention 逐对点名说明的"]) == 1)
+
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
     return 0 if ok else 2
 
@@ -551,7 +611,15 @@ def main() -> int:
         print(f"✗ {exc}", file=sys.stderr)
         return 3
 
-    r = analyse(usable, texts, a.threshold)
+    # ★ 读 `meta.json` 的 `attribution_basis.counting_convention` ——
+    #   本件的处置文案一直把它当成第二条出路，而代码里从没读过。
+    _conv = ""
+    try:
+        _m = json.loads((pathlib.Path(a.target) / "meta.json").read_text(encoding="utf-8"))
+        _conv = str((_m.get("attribution_basis") or {}).get("counting_convention") or "")
+    except Exception:                                             # noqa: BLE001
+        _conv = ""      # ★ 读不到就当没写：**不许因此放行**，只是没有豁免
+    r = analyse(usable, texts, a.threshold, convention=_conv)
     # ★ 把「文件不在盘上」单列，并**从那个措辞错误的桶里减掉** ——
     #   否则读的人会以为这些源是「中日韩或纯噪声」。
     if no_file:
@@ -589,7 +657,16 @@ def main() -> int:
             for p in r["**未声明的重复对**"]:
                 print(f"    {p['重叠']:>6.1%}  {p['甲']}  ×  {p['乙']}")
             print("  ★ 处置：要么补 `derived_from`，要么在 `attribution_basis.counting_convention` "
-                  "里写清为什么它们该当两处证据。**别只在散文里写——那是我这次犯的错。**")
+                  "里写清为什么它们该当两处证据。")
+            print("  ★★ 第二条出路**现在真的通了**（2026-08-17 之前它只是句话，代码没读过）："
+                  "约定文本里**必须同时点名这一对的两个文件名**才算，"
+                  "写句泛泛的散文不会豁免任何一对。")
+        _by = r.get("★ 已按 counting_convention 逐对点名说明的") or []
+        if _by:
+            print("\n★ 另有 **%d** 对已在 `counting_convention` 里**逐对点名**说明"
+                  "（不算未声明，但仍列出来给人看）：" % len(_by))
+            for q in _by[:8]:
+                print("    %6.1f%%  %s  ×  %s" % (100*q["重叠"], q["甲"], q["乙"]))
         elif not r["usable"]:
             # ★★★ 2026-08-17 第二轮：**零扫描面不许印肯定句**。
             #   我第一轮的探针把「印了 `0 份`」当成诚实披露而放过了本件 ——

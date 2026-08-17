@@ -881,8 +881,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_source_dedup.py",
-      "sha256": "00e8762eff37c22f45a5da1410cc87487855fca05eb3f2fa398b04e1513a7db0",
-      "size_bytes": 34658
+      "sha256": "f0e6518d657c3ff5c61add44dc5bd5631381c4355f1265a9b43b360c46f5ad04",
+      "size_bytes": 39736
     },
     {
       "path": "references/pipeline/checkers/check_source_header_quotes.py",
@@ -1031,8 +1031,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "6f2fec1884832683e301825b9ac24b671e1833116258ae926669bec28741ad51",
-      "size_bytes": 261712
+      "sha256": "14938626a99731b1cafcdfdf0430d5d89e3104ab226fa39116ae619334370977",
+      "size_bytes": 262067
     },
     {
       "path": "references/pipeline/checkers/render_claims.py",
@@ -1686,8 +1686,8 @@
     },
     {
       "path": "scripts/check_source_dedup.py",
-      "sha256": "00e8762eff37c22f45a5da1410cc87487855fca05eb3f2fa398b04e1513a7db0",
-      "size_bytes": 34658
+      "sha256": "f0e6518d657c3ff5c61add44dc5bd5631381c4355f1265a9b43b360c46f5ad04",
+      "size_bytes": 39736
     },
     {
       "path": "scripts/check_source_header_quotes.py",
@@ -1896,8 +1896,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "6f2fec1884832683e301825b9ac24b671e1833116258ae926669bec28741ad51",
-      "size_bytes": 261712
+      "sha256": "14938626a99731b1cafcdfdf0430d5d89e3104ab226fa39116ae619334370977",
+      "size_bytes": 262067
     },
     {
       "path": "scripts/register_persona.py",
