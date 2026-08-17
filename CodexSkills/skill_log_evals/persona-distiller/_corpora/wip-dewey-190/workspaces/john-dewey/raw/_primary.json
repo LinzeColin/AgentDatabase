@@ -1,13 +1,19 @@
 {
-  "总数": 40,
+  "总数": 39,
   "计数": {
-    "一手": 40,
+    "一手": 39,
     "二手": 0,
     "需人判": 0
   },
   "一手占比下界": 1.0,
   "一手占比上界": 1.0,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "Dewey"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
   "明细": [
     {
       "identifier": "1902DeweySavageMind",
@@ -128,14 +134,6 @@
       "title": "The child and the curriculum",
       "creator": "Dewey, John, 1859-1952",
       "words": 7925
-    },
-    {
-      "identifier": "democracyandeduc00852gut",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
-      "title": "Democracy and Education: an introduction to the philosophy of education",
-      "creator": "Dewey, John, 1859-1952",
-      "words": 138063
     },
     {
       "identifier": "democracyandeduc00deweuoft",

@@ -1,13 +1,19 @@
 {
-  "总数": 23,
+  "总数": 21,
   "计数": {
-    "一手": 19,
+    "一手": 17,
     "二手": 4,
     "需人判": 0
   },
-  "一手占比下界": 0.8261,
-  "一手占比上界": 0.8261,
+  "一手占比下界": 0.8095,
+  "一手占比上界": 0.8095,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "Churchill"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
   "明细": [
     {
       "identifier": "1914frenuoft",
@@ -160,22 +166,6 @@
       "title": "Savrola : a tale of the revolution in Laurania",
       "creator": "Churchill, Winston, Sir, 1874-1965",
       "words": 62748
-    },
-    {
-      "identifier": "theriverwar04943gut",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
-      "title": "The River War: An Account of the Reconquest of the Sudan",
-      "creator": "Churchill, Winston S., Sir, 1874-1965",
-      "words": 128672
-    },
-    {
-      "identifier": "thestoryofthemal09404gut",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
-      "title": "The Story of the Malakand Field Force: An Episode of Frontier War",
-      "creator": "Churchill, Winston S., Sir, 1874-1965",
-      "words": 89568
     },
     {
       "identifier": "worldcrisis0004unse",

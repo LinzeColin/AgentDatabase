@@ -1,13 +1,19 @@
 {
-  "总数": 19,
+  "总数": 18,
   "计数": {
-    "一手": 17,
+    "一手": 16,
     "二手": 0,
     "需人判": 2
   },
-  "一手占比下界": 0.8947,
+  "一手占比下界": 0.8889,
   "一手占比上界": 1.0,
   "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "Ford"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
   "明细": [
     {
       "identifier": "365ofhenryfordss00ford",
@@ -104,14 +110,6 @@
       "title": "Mein Leben und Werk. Unter Mitwirkung von Samuel Crowther",
       "creator": "Ford, Henry, 1863-1947",
       "words": 93787
-    },
-    {
-      "identifier": "mylifeandwork07213gut",
-      "档": "一手",
-      "依据": "目标为第一作者，题名无「写他」的标记",
-      "title": "My Life and Work",
-      "creator": "Ford, Henry, 1863-1947",
-      "words": 95680
     },
     {
       "identifier": "mylifework0000unse",
