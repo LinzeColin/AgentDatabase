@@ -59,6 +59,27 @@
   在「多人是否真的更好」没有证据之前，那还是「为凑数放宽判据」。
   本件只负责把这句话摆到台面上：**这个信号从建成起没被任何一道门用上过**。
 
+## ★★ `parallelizability` 更极端：4 次命中里 3 次是子串事故
+
+    PARALLEL **14** 个词｜有过命中的只有 3 个｜每条命中数 {0: **56**, 1: 4}
+    够到 swarm 门槛 0.72 需命中 **4** 个（= 整张词表全中，一条 60 字的任务里）
+
+逐条看上下文才发现（**只有计数看不出来**）：
+
+    all   …Capital [all]ocation…            ← allocation
+    all   …directional-c[all]-with-stated…  ← call
+    所有   …利益是否在[所有]权层面与客户对齐…    ← 所有权（ownership）
+    批量   …研发流、队列、WIP、[批量]与反馈诊断…  ← **唯一的真命中**
+
+⇒ 60 条任务里真正沾「可并行」的只有 **1 条**。
+  `all` 与 `所有` 是**子串匹配撞进更长的词**，本件已把它们标成「需人眼确认」并印出上下文。
+  [[hit-that-the-user-cannot-see-is-not-a-hit]]｜[[a-signal-that-both-overfires-and-underfires]]
+
+★ 这个标记本身我改了两版才对：
+  第一版按「短纯 ASCII 词」猜 ⇒ 标出 `all`、**漏掉 `所有`**；
+  放宽到中文之后又把大半张词表都标了（医疗/合规/监管…），**噪声盖过信号**；
+  现在按**实测**标：只看真命中过、且命中处紧邻同语种字的词。
+
 ## 任务从哪来（不许我自己编）
 
 `team-index.json` 每个产物自带 `application_scenarios` —— 那是蒸馏流程写下的
@@ -164,7 +185,14 @@ def sample_tasks(index_path: pathlib.Path, limit: int) -> list[str]:
 
 #: 由**词表**驱动的画像项 —— 够不到时要能说出「是词表撞不上，还是这批任务真的不沾」。
 #: {画像键: (compile_task_graph 里的词表名, 需要命中几个才够到该项最低门槛)}
-WORDLIST_DRIVEN = {"risk": ("HIGH_RISK", 2)}
+# ★★ 并列的兄弟也要覆盖 —— **画像的每一维都是词表驱动的**（compile_task_graph:216–226）：
+#   complexity ← 多个词表合成｜risk ← HIGH_RISK｜parallel ← PARALLEL
+#   coupling ← DEPENDENCY｜currentness ← CURRENTNESS
+#   这里只列**驱动了不可达触发**的那些；「需命中几个」由各自公式反解：
+#     risk     = 0.08 + n/4 × 0.76 ≥ 0.36  ⇒ n ≥ 1.47 ⇒ **2**
+#     parallel = 0.08 + n/4 × 0.78 ≥ 0.72  ⇒ n ≥ 3.28 ⇒ **4**（即整张词表全中）
+#   [[fixed-the-symptom-kept-the-root-cause]]（并列的兄弟链有同样的洞）
+WORDLIST_DRIVEN = {"risk": ("HIGH_RISK", 2), "parallelizability": ("PARALLEL", 4)}
 
 
 def wordlist_recall(mod, name: str, tasks: list[str]):
@@ -179,18 +207,58 @@ def wordlist_recall(mod, name: str, tasks: list[str]):
     import collections
     words = getattr(mod, name, None)
     if not words:
-        return 0, 0, {}, []
+        return 0, 0, {}, [], {}, []
     hits = collections.Counter()
     per = collections.Counter()
+    ctx: dict = collections.defaultdict(list)
     for t in tasks:
         low = (t or "").lower()
         n = 0
         for w in words:
-            if str(w).lower() in low:
+            ws = str(w).lower()
+            if ws in low:
                 hits[w] += 1
                 n += 1
+                # ★ 把**命中的上下文**留下来 —— 只有计数看不出误报。
+                #   实测：`all` 的 2 次命中全是 `Capital **all**ocation` 与
+                #   `directional-c**all**`，子串撞进了别的词里。
+                #   [[hit-that-the-user-cannot-see-is-not-a-hit]]
+                i = low.index(ws)
+                if len(ctx[w]) < 3:
+                    ctx[w].append("…%s[%s]%s…" % (t[max(0, i - 14):i], t[i:i + len(ws)],
+                                                  t[i + len(ws):i + len(ws) + 14]))
         per[n] += 1
-    return len(words), len(hits), dict(sorted(per.items())), hits.most_common(8)
+    # ★★★ 「哪些命中可能是子串事故」**按实测标，不按猜**。
+    #   第一版按「短词」猜：先只查纯 ASCII（漏了 `所有 ⊂ 所有权`），
+    #   放宽到 CJK 之后又把大半张词表都标了（医疗/合规/监管…），**噪声盖过信号**。
+    #   ⇒ 改成：只看**真的命中过**的词，且命中处**紧邻同语种的字**
+    #     （英文两侧是字母、中文两侧是汉字）⇒ 它嵌在一个更长的词里。
+    #     实测标出：`all`（allocation / call）、`所有`（所有权）。
+    #   ★ 中文里这条**分不出** `投资假设`（真）与 `所有权`（假）——
+    #     所以标签是「**需人眼确认**」，不是「误中」。上下文已逐条印出，人自己看。
+    #   [[regex-must-clear-the-corpus-language]]｜[[read-the-hits-before-reporting-the-rate]]
+    def _embedded(word: str, tasks_: list) -> bool:
+        ws = str(word).lower()
+        ascii_w = ws.isascii()
+        for tk in tasks_:
+            low = (tk or "").lower()
+            i = low.find(ws)
+            while i >= 0:
+                left = low[i - 1] if i > 0 else ""
+                right = low[i + len(ws)] if i + len(ws) < len(low) else ""
+                for ch in (left, right):
+                    if not ch:
+                        continue
+                    if ascii_w and ch.isalpha() and ch.isascii():
+                        return True
+                    if (not ascii_w) and "\u4e00" <= ch <= "\u9fff":
+                        return True
+                i = low.find(ws, i + 1)
+        return False
+
+    risky = sorted((str(w) for w in hits if _embedded(w, tasks)), key=str)
+    return (len(words), len(hits), dict(sorted(per.items())), hits.most_common(8),
+            dict(ctx), risky)
 
 
 def main() -> int:
@@ -267,7 +335,7 @@ def main() -> int:
     if _m is not None:
         print("\n词表驱动项的召回（分开「样本不沾」与「尺子撞不上」）：")
         for key, (wl, need) in WORDLIST_DRIVEN.items():
-            size, used, per, top = wordlist_recall(_m, wl, tasks)
+            size, used, per, top, ctx, risky = wordlist_recall(_m, wl, tasks)
             if not size:
                 print("  %-10s 找不到词表 `%s`（未量）" % (key, wl))
                 continue
@@ -278,6 +346,15 @@ def main() -> int:
             if top:
                 print("             命中过的：%s"
                       % "、".join("%s×%d" % (w, n) for w, n in top))
+                # ★ 逐条印上下文 —— 只有计数分不出「真命中」与「子串撞进别的词」
+                for w, _n in top:
+                    for c in (ctx.get(w) or []):
+                        print("               %-10s %s" % (str(w)[:10], c))
+            if risky:
+                print("             ⚠ **需人眼确认**（命中处紧邻同语种的字，可能嵌在更长的词里）：%s"
+                      % "、".join(risky))
+                print("               ⇒ **逐条看上面的上下文**，别只看计数。实测：`all` 全部来自 "
+                      "`allocation`/`call`，`所有` 来自 `所有权` —— 三次都不是真命中。")
             if per.get(need, 0) == 0:
                 print("             ⇒ **没有一条任务命中够 %d 个** —— 这项够不到"
                       "是**结构性的**，不是偶然。" % need)
