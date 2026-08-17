@@ -153,11 +153,11 @@ def criteria_gap(target_dir: pathlib.Path, diff_named: list, same_named: list):
             crit = f
             break
     if crit is None:
-        return None, list(diff_named), list(same_named)
+        return None, list(diff_named), list(same_named), []
     try:
         o = json.loads(crit.read_text(encoding="utf-8"))
     except Exception:
-        return crit, list(diff_named), list(same_named)
+        return crit, list(diff_named), list(same_named), []
     norm = {_norm(x) for x in (o.get("excluded_names") or [])}
     # ★★★ 第三档（Holmes #170 逼出来的）：**有些名字不能写进 excluded_names，
     #   因为那个字符串同时是目标本人的署名形式**。
@@ -167,12 +167,28 @@ def criteria_gap(target_dir: pathlib.Path, diff_named: list, same_named: list):
     #   与「字面完全相同」那一档同理。**不点名照样红。**
     unex = {_norm(x) for x in (o.get("unexcludable_names") or [])}
     policy0 = str(o.get("identical_name_policy") or "").strip()
+    # ★★★ 第四档（Martens #134 逼出来的）：**criteria 自己声明的 `subject` 就是目标本人**。
+    #   实例：`meta.json` 的 name 是简称 `Adolf Martens`，而 criteria 的
+    #   `"subject": "Adolf Karl Gottfried Martens"` 是他的全名。
+    #   本函数原先只读 `excluded_names`／`unexcludable_names`，**从不读 `subject`**，
+    #   于是**把目标本人的全名报成了「分不开且未被排除名单覆盖的同名者」**。
+    #   ★ 它也**不能**靠写进 `excluded_names` 解决 —— 那份 criteria 里有一整节
+    #     「★★★ 排除名单的禁区（放进去会把目标自己的材料删掉）」讲的正是这件事。
+    #   ⇒ 认这个字段，并**把豁免了谁印出来**（`本人（criteria.subject）` 一栏），
+    #     绝不静默放行。[[a-gates-scan-set-is-smaller-than-reality]]
+    #   ★★ 射程实测（2026-08-17）：全库 5 个有 criteria 的工作区里，
+    #     `subject != meta.name` 的**只有 1 个**（adolf-martens）；
+    #     其余 4 个两者逐字相同，本档对它们**一个数都不改**。
+    self_names = {_norm(x) for x in [o.get("subject")] if str(x or "").strip()}
+    exempt_self = [n for n in diff_named if _norm(n) in self_names]
     missing = [n for n in diff_named
-               if _norm(n) not in norm and not (_norm(n) in unex and policy0)]
+               if _norm(n) not in self_names
+               and _norm(n) not in norm
+               and not (_norm(n) in unex and policy0)]
     # 字面同名那一档：要的是**写明怎么分**，不是出现在排除名单里
     policy = str(o.get("identical_name_policy") or "").strip()
     unpolicied = [] if policy else list(same_named)
-    return crit, missing, unpolicied
+    return crit, missing, unpolicied, exempt_self
 
 
 def evaluate(target_dir: pathlib.Path, target_name: str, mod) -> dict:
@@ -185,7 +201,7 @@ def evaluate(target_dir: pathlib.Path, target_name: str, mod) -> dict:
         return {"状态": "ok", "候选数": len(names), "分不开": 0, "未覆盖": [],
                 "字面同名未定政策": [], "出处": str(src)}
     same, diff = split_identical(target_name, confused)
-    crit, missing, unpolicied = criteria_gap(target_dir, diff, same)
+    crit, missing, unpolicied, exempt_self = criteria_gap(target_dir, diff, same)
     # ★ 三档各自的条数要现算——**第一版把三档合报成「都靠 excluded_names」，
     #   同一个工具、同一类错误我犯了第二次**（[[gates-cover-json-not-the-prose-users-read]]）。
     _unex, _pol, _crit_unread = set(), "", None
@@ -201,12 +217,18 @@ def evaluate(target_dir: pathlib.Path, target_name: str, mod) -> dict:
             #   **同一类错误在同一个函数里，我第三次犯**——这次让它出声。
             _crit_unread = f"{type(_exc).__name__}"
     n_unex = sum(1 for n in diff if _norm(n) in _unex and _pol)
-    n_excl = len(diff) - n_unex - len(missing)
+    # ★ 四档必须加得回 len(diff)：excluded / unexcludable+政策 / 本人 / 未覆盖。
+    #   漏减 exempt_self 就会把「本人」算进「靠 excluded_names」——
+    #   本文件已为「三档合报」栽过两次，这是第四档。
+    n_self = len(exempt_self)
+    n_excl = len(diff) - n_unex - n_self - len(missing)
     bad = bool(missing) or bool(unpolicied)
     return {"状态": "fail" if bad else "ok",
             "候选数": len(names), "分不开": len(confused),
             "★ 其中字面完全相同": len(same),
             "靠 excluded_names": n_excl, "靠 unexcludable_names＋政策": n_unex,
+            "**本人（criteria.subject）**": n_self,
+            **({"★ 已按 criteria.subject 认作目标本人": exempt_self} if exempt_self else {}),
             "分不开的是": confused, "未覆盖": missing,
             "字面同名未定政策": unpolicied,
             "criteria": str(crit) if crit else None, "出处": str(src),
@@ -332,6 +354,46 @@ def self_test() -> int:
             chk("⑦ 真工作区字面同名 == 3", r["★ 其中字面完全相同"], 3)
         else:
             cases.append("⑦ 真工作区不在本机，跳过（**不算通过**）")
+
+    # ── ★★★ 第四档（Martens #134）：criteria.subject 认作目标本人 ──
+    #   正反各一：本人被豁免且**印出来**；换成真同名者时**照样红**。
+    import tempfile as _tf
+    with _tf.TemporaryDirectory() as _td:
+        _t = pathlib.Path(_td)
+        # meta.name 是简称，criteria.subject 是全名 —— 真工作区 adolf-martens 的形状
+        d1 = _t / "self-yes"
+        d1.mkdir(parents=True)
+        (d1 / "meta.json").write_text(
+            json.dumps({"name": "Adolf Martens"}, ensure_ascii=False), encoding="utf-8")
+        (d1 / "namesake_candidates.json").write_text(json.dumps(
+            {"candidates": [{"canonical_name": "Adolf Martens"},
+                            {"canonical_name": "Adolf Karl Gottfried Martens"}]},
+            ensure_ascii=False), encoding="utf-8")
+        (d1 / "namesake-criteria.json").write_text(json.dumps(
+            {"subject": "Adolf Karl Gottfried Martens", "excluded_names": []},
+            ensure_ascii=False), encoding="utf-8")
+        r1 = evaluate(d1, "Adolf Martens", mod)
+        chk("★ 全名＝criteria.subject → 认作本人，不算未覆盖", r1["未覆盖"], [])
+        chk("★ 豁免了谁必须印出来（不许静默）",
+            r1.get("★ 已按 criteria.subject 认作目标本人"),
+            ["Adolf Karl Gottfried Martens"])
+        chk("★ 本人单列一档，不并进 excluded_names",
+            (r1.get("**本人（criteria.subject）**"), r1.get("靠 excluded_names")), (1, 0))
+        # 反对照：同一形状，但那条是**真同名者**（subject 仍是简称）→ 必须照样红
+        d2 = _t / "self-no"
+        d2.mkdir(parents=True)
+        (d2 / "meta.json").write_text(
+            json.dumps({"name": "Adolf Martens"}, ensure_ascii=False), encoding="utf-8")
+        (d2 / "namesake_candidates.json").write_text(json.dumps(
+            {"candidates": [{"canonical_name": "Adolf Martens"},
+                            {"canonical_name": "Adolf Karl Gottfried Martens"}]},
+            ensure_ascii=False), encoding="utf-8")
+        (d2 / "namesake-criteria.json").write_text(json.dumps(
+            {"subject": "Adolf Martens", "excluded_names": []},
+            ensure_ascii=False), encoding="utf-8")
+        r2 = evaluate(d2, "Adolf Martens", mod)
+        chk("★★ 反对照：subject 不含那个全名 → **照样报未覆盖**",
+            r2["未覆盖"], ["Adolf Karl Gottfried Martens"])
 
     print("自测 %d/%d 通过" % (len(cases) - len(fails), len(cases)))
     for f in fails:
