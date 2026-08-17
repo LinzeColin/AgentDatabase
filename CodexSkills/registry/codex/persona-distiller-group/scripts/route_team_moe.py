@@ -65,6 +65,56 @@ NEGATIVE_SCOPE_MARKERS = (
 
 CURRENT_TERMS = {"最新", "当前", "今天", "本周", "现在", "价格", "法规", "版本", "latest", "current", "today", "price", "version"}
 
+# ★★★ 2026-08-17：权重表提到模块级，**只此一份**。
+#   `routing_observability.ranking_driver` 要现算 weight×σ，需要读到同一张表；
+#   若两处各写一份，就是本仓反复抓到的「两个真源」。
+COMPONENT_WEIGHTS: dict[str, float] = {
+    "task_similarity": 0.24,
+    "packet_similarity": 0.15,
+    "domain_match": 0.15,
+    "scenario_match": 0.10,
+    "capability_match": 0.14,
+    "user_value_match": 0.07,
+    "evidence": 0.05,
+    "boundary": 0.04,
+    "currentness": 0.06,
+}
+
+# 与题目相关性直接有关的四项。一个候选在这四项上全为 0，
+# 却仍能靠常数项（evidence/boundary）＋人物年代（currentness）挤进名单 ——
+# 这件事本身要报出来，不能只报一个名次。
+TASK_RELEVANCE_COMPONENTS = ("task_similarity", "scenario_match",
+                             "capability_match", "user_value_match")
+
+
+def ranking_drivers(ranked: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """→ 按 **weight×σ** 降序的分项清单（每项带 weight / sigma / share）。
+
+    ★★★ 为什么不能只报「有没有 domain 信号」：原实现是
+
+        "ranking_driver": ("domain_match" if domain_signal_candidates else "currentness …")
+
+    —— 一个**二值标志**冒充度量。只要有任一候选 `domain_match > 0`，它就宣称
+    「domain_match 在驱动排序」。2026-08-17 实测一道纯软件工程题：
+    67/83 候选都「有 domain 信号」（对 81% 的人都为真，谈不上区分），
+    而真正排序贡献最大的是 `task_similarity`（29.8%），domain_match 只占 20.4%。
+
+    **权重不是驱动，权重×σ 才是**：σ=0 的分项（本轮的 evidence / boundary）
+    权重非零却对名次贡献**精确为零**，只是给每个人加同一个常数。
+    """
+    import statistics
+    comps = []
+    for key, weight in COMPONENT_WEIGHTS.items():
+        xs = [float(((r.get("score_breakdown") or {}).get("values") or {}).get(key, 0.0))
+              for r in ranked]
+        sigma = statistics.pstdev(xs) if len(xs) > 1 else 0.0
+        comps.append({"component": key, "weight": weight,
+                      "sigma": round(sigma, 4), "weight_x_sigma": round(weight * sigma, 5)})
+    total = sum(c["weight_x_sigma"] for c in comps) or 1.0
+    for c in comps:
+        c["share"] = round(c["weight_x_sigma"] / total, 4)
+    return sorted(comps, key=lambda c: -c["weight_x_sigma"])
+
 
 def default_registry_root() -> Path:
     return Path(__file__).resolve().parents[1]
@@ -168,17 +218,7 @@ def score_candidate(
     restriction_penalty = 0.08 if gate.get("admission") == "restricted" else 0.0
 
     prior, prior_meta = calibration_prior(slug, domains, telemetry) if strategy == "C" else (0.0, {"reason": "not C"})
-    weights = {
-        "task_similarity": 0.24,
-        "packet_similarity": 0.15,
-        "domain_match": 0.15,
-        "scenario_match": 0.10,
-        "capability_match": 0.14,
-        "user_value_match": 0.07,
-        "evidence": 0.05,
-        "boundary": 0.04,
-        "currentness": 0.06,
-    }
+    weights = COMPONENT_WEIGHTS
     values = {
         "task_similarity": task_similarity,
         "packet_similarity": packet_similarity,
@@ -496,8 +536,19 @@ def build_route(
             "telemetry_file_present": telemetry_path.is_file(),
             "domain_signal_candidates": domain_signal_candidates,
             "domain_signal_present": domain_signal_candidates > 0,
-            "ranking_driver": ("domain_match" if domain_signal_candidates
-                               else "currentness (no candidate matched this task's domain)"),
+            # ★★★ 2026-08-17：这里原来是 `"domain_match" if domain_signal_candidates else …`
+            #   —— 一个二值标志冒充度量。现改为**现算的 weight×σ**（见 ranking_drivers）。
+            #   实测同一道软件工程题：旧写法说 domain_match，实际第一是 task_similarity。
+            "ranking_driver": (ranking_drivers(ranked)[0]["component"]
+                               if ranked else "**未量：没有可排序的候选**"),
+            "ranking_driver_basis": "weight × sigma over eligible candidates (computed, not asserted)",
+            "ranking_components": ranking_drivers(ranked),
+            # ★★ 与题目相关的四项**全为 0 却仍入选**的人 —— 只报名次看不出这件事。
+            "selected_with_zero_task_relevance": [
+                r.get("canonical_name") for r in expert_rows
+                if all(float(((r.get("score_breakdown") or {}).get("values") or {}).get(k, 0.0)) == 0.0
+                       for k in TASK_RELEVANCE_COMPONENTS)
+            ],
             "target_gates": {
                 "overall_delta": 95,
                 "ux": 95,
