@@ -1695,13 +1695,23 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                        "若仍存疑，先 `find` 一遍再下结论——⑯ 就是没 find 就升级出来的误报）"
                        if n_pri else "")
                     + "　★ 清单：" + "、".join(str(x) for x in m0.get('清单', [])[:6]))
-            else:
-                # ★★★ 2026-08-17：把「真的一致」与「明细里压根没有这个人物」拆开 ——
-                #   原文案是「✓ 台账与工作区一致（**或本人物没走过抓源台账**）」，
-                #   括号里那半正是「没核过」，却与「核过且一致」共用一个 ✓。
-                #   [[zero-hit-gates-must-prove-they-can-hit]]
-                review['staged_not_ingested'] = (
-                    '✓ 台账与工作区一致（该人物在判据明细里，**没进工作区 0 份**）')
+            # ★★★ 2026-08-17：把「真的一致」与「明细里压根没有这个人物」拆开 ——
+            #   原文案是「✓ 台账与工作区一致（**或本人物没走过抓源台账**）」，
+            #   括号里那半正是「没核过」，却与「核过且一致」共用一个 ✓。
+            #   [[zero-hit-gates-must-prove-they-can-hit]]
+            # ★★★★ 2026-08-18（工具改动，不升版）：**上面那次拆分没拆成，方向还反了。**
+            #   原来这里是一个 `else:`，配的是 `if _me:` —— 于是 `_me` 为空时：
+            #     ① `if not _me:` 刚写完「⚠ **未核，不是通过** —— 明细里没有 <人物>」；
+            #     ② 这个 `else` **立刻把它覆盖**成 `✓ 台账与工作区一致`，
+            #        而 ✓ 的正文写着「**该人物在判据明细里**」——
+            #        在这条分支上这句话恰恰是**假的**（`_me` 空正说明他不在明细里）。
+            #   ⇒ **一句「未核」被一句自称相反事实的 ✓ 盖掉。**
+            #   端到端负对照抓到的：空语料工作区跑 `--phase research`，
+            #   `content_review` 6 栏里唯一印 ✓ 的就是这一栏。
+            #   改法是**删掉这个 `else`**（不是改成 `elif`——`n_miss` 只在 `if _me:` 里有定义）：
+            #   `_me` 非空时上面的 f-string 已经把 `没进工作区 N 份` 如实写出（N 可以是 0），
+            #   `_me` 为空时就该停在 ①。**两条分支各自完整，不需要第三条。**
+            #   [[a-comment-claiming-a-guard-is-not-a-guard]]｜[[fixed-the-symptom-kept-the-root-cause]]
         except (json.JSONDecodeError, ValueError, TypeError):
             review['staged_not_ingested'] = '**未核（不是通过）**：输出解析不了'
 
