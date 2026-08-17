@@ -65,19 +65,45 @@ class RoutingDiscriminatesTests(unittest.TestCase):
             fin = route(FIN, td / "fin.json")
 
         s_seats, f_seats = seats(soft), seats(fin)
-        # ★ 空扫描面不算通过
-        self.assertGreaterEqual(len(s_seats), 3, "软件题只落座 %d 人，样本太小" % len(s_seats))
-        self.assertGreaterEqual(len(f_seats), 3, "金融题只落座 %d 人，样本太小" % len(f_seats))
+        # ★★★ 2026-08-18 改：**席位数不再当作样本量**。
+        #   原写 `assertGreaterEqual(len(seats), 3)`，而 2026-08-17 起
+        #   `compile_task_graph` 对这两题都判 `single_expert`（1 席）——
+        #   于是本件恒红，红的理由**与它自称在测的东西无关**。
+        #   真因见 `_路由团队从10席塌到1席-…-2026-08-18.md`：一次正确的收窄
+        #   （动词「设计」不该占一个域）把域数 2→1，而 `choose_mode` 第 265 行
+        #   `domains >= 2` 正是 small_team 的三个触发之一。
+        #   ⇒ 「排序坍成常数」这件事要在**全部打过分的候选**上验，
+        #     那才是广谱破坏会显形的地方；席位数是另一回事，单独断言。
+        #   [[one-flag-controlled-config-and-discipline]]｜[[changing-the-sampling-unit-changes-the-ruler]]
+        self.assertGreaterEqual(len(s_seats), 1, "软件题一个人都没落座")
+        self.assertGreaterEqual(len(f_seats), 1, "金融题一个人都没落座")
 
-        for name, rows in (("软件题", s_seats), ("金融题", f_seats)):
+        for name, plan, rows in (("软件题", soft, s_seats), ("金融题", fin, f_seats)):
             self.assertTrue(all("base_score" in m for m in rows),
                             "%s 有席位不带 `base_score` —— 键名变了就先改本件，别让它空转" % name)
+            # ★ 样本 = 落座的 + 被剔的（两者都带 base_score），不是只有落座的
+            pool = [m for m in rows] + [e for e in (plan.get("excluded_candidates") or [])
+                                        if isinstance(e, dict) and "base_score" in e]
+            self.assertGreaterEqual(len(pool), 10,
+                                    "%s 打过分的候选只有 %d 个，样本太小" % (name, len(pool)))
+            print("  %s：落座 %d｜打过分的候选 %d" % (name, len(rows), len(pool)))
+            rows = pool
             scores = {round(float(m["base_score"]), 6) for m in rows}
-            print("  %s：%d 席，分数互不相同 **%d** 个" % (name, len(rows), len(scores)))
+            print("  %s：打过分的候选 %d 个，分数互不相同 **%d** 个" % (name, len(rows), len(scores)))
             self.assertGreater(
                 len(scores), 1,
-                "%s 的 %d 个席位分数**完全一样**（%r）—— 排序已坍成常数，"
+                "%s 的 %d 个候选分数**完全一样**（%r）—— 排序已坍成常数，"
                 "这正是 2026-08-17 那次广谱破坏的形状" % (name, len(rows), scores))
+
+        # ★★ 规模塌陷单独断言：它是真实的产品变化，**要看得见，但不该借「区分度」的名义红**
+        for name, plan in (("软件题", soft), ("金融题", fin)):
+            ob = plan.get("routing_observability") or {}
+            print("  %s：mode=%s｜进池 %s 人｜有域信号 %s 人"
+                  % (name, plan.get("mode"), ob.get("eligible_candidates"),
+                     ob.get("domain_signal_candidates")))
+        self.assertTrue(all((p.get("routing_observability") or {}).get("eligible_candidates", 0) >= 10
+                            for p in (soft, fin)),
+                        "进池的候选不足 10 人 —— 那才是「样本太小」，与席位数无关")
 
         s_slugs = [m.get("subject_slug") for m in s_seats]
         f_slugs = [m.get("subject_slug") for m in f_seats]
