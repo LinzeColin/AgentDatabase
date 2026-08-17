@@ -1,5 +1,28 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.26 — 2026-08-17
+
+**修：词表外的 `--task-slice` 被静默收下，coverage 恒为 0 而没人被告知。**
+
+接着六步走查跑完第 4、5 步时撞到的。`record_team_outcome.py` 里
+`coverage = |观测 ∩ EXPECTED_SLICES| / |EXPECTED_SLICES|` —— 那是一张
+**12 个词的固定表，只活在该文件的常量里**：`--task-slice` 没有 `choices=`、
+没有 help，SKILL.md 写的是 `<slice>`，一个字不提有词表。
+实测 `--task-slice retail-expansion` ⇒ rc=0、sample_count 1、**coverage 0.0**，
+输出里没有任何一句说「你这个 slice 不在表里」。
+而 **C 层启用看的正是 coverage**（`runs>=60 and ece<=0.12 and coverage>=0.75`）。
+**不认识的值静默变成 0，与 v0.0.0.25 修的「分数被算成常数」是同一个病。**
+
+- 不用 `choices=` 硬拒（会卡住真实流程），改成**收下 + 披露**：
+  - `--help` 印出整张 12 词表；
+  - 遥测新增 `expected_task_slices` / `unrecognised_task_slices` /
+    `task_slice_coverage_note`（表外的名字带 ⚠ 标出）。
+  **证据要留在仓里，不是终端里。**
+- `SKILL.md` 第 5 步补上词表与「表外贡献恒为 0」的说明。
+- 新增 `tests/test_unrecognised_slice_is_disclosed.py`（3 负 2 正，含逐个跑完 12 个词）。
+  两次变异实验：拆掉「标出表外 slice」⇒ 1 件红；拆掉 `--help` 词表 ⇒ 另 1 件红，
+  各自只打红对应的那件，无空转。
+
 ## v0.0.0.25 — 2026-08-17
 
 **修：字段名不认识时它出成绩单并说「你的团队不合格」。**

@@ -129,6 +129,12 @@ python3 scripts/run_team_pipeline.py \
 python3 scripts/score_team_delta.py --result result-input.json --output delta-score.json
 python3 scripts/build_team_delta_card.py --route-plan route-plan.json --result team-result.json --delta-score delta-score.json --output team-delta-card.json
 python3 scripts/record_team_outcome.py --route-plan route-plan.json --delta-score delta-score.json --task-slice <slice> --actual-success <0..1> --telemetry outcome-telemetry.json
+# ★ `<slice>` **不是自由文本**：`task_slice_coverage` 的分母是一个 12 个词的固定表
+#   （creative / currentness / deep-architecture / deep-high-risk / ood-boundary /
+#    recovery / single-diagnosis / single-explanation / small-product /
+#    small-research / swarm-batch / swarm-search）。
+#   写表外的名字**照收不报错**，但对 coverage 贡献恒为 0，而 **C 层启用看的就是 coverage**。
+#   表外的名字会记进遥测的 `unrecognised_task_slices`；`--help` 里也印着整张表。
 ```
 
 不得把“已生成合同”说成“任务已完成”。只有真实结果可以更新 C 层校准。

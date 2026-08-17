@@ -55,6 +55,17 @@ def rebuild(runs: list[dict[str, Any]]) -> dict[str, Any]:
         }
     ece = calibration_error(runs)
     coverage = len(observed_slices & EXPECTED_SLICES) / len(EXPECTED_SLICES)
+    # ★★★ 2026-08-17：`--task-slice` **没有 `choices=`、没有 help、SKILL.md 也不提**
+    #   这里存在一个 12 个词的固定词表 —— 于是随手写一个名字会被**静默收下**，
+    #   它对 `task_slice_coverage` 的贡献是 **0**，而 C 层启用正是看 coverage。
+    #   实测：`--task-slice retail-expansion` ⇒ sample_count=1、coverage **0.0**，
+    #   而输出里没有任何一句告诉使用者「你这个 slice 不在词表里」。
+    #   **不认识的值静默变成 0，和分数被算成常数是同一个病。**
+    #   [[empty-default-swallows-unknown]]｜[[blamed-the-channel-my-own-wordlist-was-blind]]
+    #   ★ 不硬拒（会卡住真实流程，且「不许因为过不了门而卡住流程」），
+    #     改成**收下 + 写进产物**：证据要留在仓里，不是终端里。
+    #     [[evidence-must-live-in-the-repo-not-the-terminal]]
+    unrecognised = sorted(observed_slices - EXPECTED_SLICES)
     return {
         "schema_version": "persona-team.outcome-telemetry.v1",
         "sample_count": len(runs),
@@ -62,6 +73,15 @@ def rebuild(runs: list[dict[str, Any]]) -> dict[str, Any]:
         "task_slice_coverage": round(coverage, 4),
         "eligible_for_c": len(runs) >= 60 and ece <= 0.12 and coverage >= 0.75,
         "observed_task_slices": sorted(observed_slices),
+        "expected_task_slices": sorted(EXPECTED_SLICES),
+        "unrecognised_task_slices": unrecognised,
+        "task_slice_coverage_note": (
+            "coverage 的分母是 expected_task_slices（%d 个）。"
+            "**不在这个词表里的 slice 对 coverage 贡献恒为 0**，且不会报错。"
+            % len(EXPECTED_SLICES)
+            + ("　⚠ 本次有 %d 个 slice 不在词表里：%s"
+               % (len(unrecognised), "、".join(unrecognised)) if unrecognised else "")
+        ),
         "experts": experts,
         "runs": runs,
     }
@@ -97,7 +117,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Record one measured team outcome for C-layer calibration.")
     parser.add_argument("--route-plan", type=Path, required=True)
     parser.add_argument("--delta-score", type=Path, required=True)
-    parser.add_argument("--task-slice", required=True)
+    # ★ 不用 `choices=` 硬拒 —— 会卡住真实流程（「不许因为过不了门而卡住流程」）。
+    #   但**词表必须出现在 `--help` 里**：它此前只活在本文件的常量里，
+    #   SKILL.md 写的是 `--task-slice <slice>`，一个字都没提有词表。
+    parser.add_argument("--task-slice", required=True,
+                        help="任务切片名。**coverage 只认这 %d 个**（不在其中的照收，"
+                             "但对 task_slice_coverage 贡献恒为 0，并会在遥测里标出）：%s"
+                             % (len(EXPECTED_SLICES), " / ".join(sorted(EXPECTED_SLICES))))
     parser.add_argument("--actual-success", type=float, required=True, help="0..1 observed task success")
     parser.add_argument("--registry-root", type=Path, default=None,
                         help="only used to locate the default telemetry file")
