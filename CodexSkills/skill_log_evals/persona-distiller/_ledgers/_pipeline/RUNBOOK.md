@@ -6,6 +6,16 @@
 
 ## 一次跑完全部判据的自测
 
+> ★★ **下面这些命令用的是相对路径，必须站在 `_ledgers/` 里跑。**
+> 2026-08-17 实测：照抄到别处 **4 个 cwd 里 3 个 rc=2**（仓根 / `_pipeline/` 里 / `/tmp`
+> 全是 `can't open file`），而 RUNBOOK 此前**从头到尾没说过该站哪个目录**。
+>
+>     cd <仓根>/CodexSkills/skill_log_evals/persona-distiller/_ledgers
+>
+> **或者用绝对路径，跟 cwd 无关**（实测三个 cwd 全 rc=0）：
+>
+>     python3 <仓根>/CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/run_checks.py
+
     python3 _pipeline/run_checks.py            # 有红就 rc=1
     python3 _pipeline/run_checks.py --report   # 只报告
 
