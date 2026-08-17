@@ -65,6 +65,25 @@ self_test() {
   ( verify "$T/d" >/dev/null 2>&1 ); r=$?
   [ $r -eq 0 ] && say "✓" "★ 好包 → rc=0" || { say "✗" "★ 好包却 rc=$r"; return 1; }
   local bad=0
+  # ★★★ 2026-08-17 补：**换个 cwd 再判一次同一个好包**。
+  #   这一条缺了整整三天：自测每次都在 git 仓里跑，于是
+  #   `git bundle verify`（**它需要一个仓**）永远是绿的；而接手方按封面信
+  #   `verify_handover_bundle.sh .` 站在交付目录里跑 —— 那不是仓 ⇒ 假红一项。
+  #   [[a-checkers-verdict-must-not-depend-on-cwd]]｜[[untested-fallback-branches-only-fire-on-their-machine]]
+  ( cd "$T/d" && verify "$T/d" >/dev/null 2>&1 ); r2=$?
+  [ $r2 -eq 0 ] && say "✓" "★★★ **同一个好包，cwd 换到非 git 目录 → 仍 rc=0**（判定与 cwd 无关）" \
+                || { say "✗" "★★★ 同一个好包在非 git 目录下 rc=$r2 —— **判定依赖 cwd**"; bad=1; }
+  # ★★★ 而**封面信教的是 `verify_handover_bundle.sh .`** —— 相对目录。
+  #   上面那条传的是绝对路径，测不到它。少了这条，我修 cwd 那处时引入的
+  #   「`git -C` 切目录后相对包路径找不着」当场溜过自测。
+  #   **文档里怎么写的，自测就要照那个形态跑一遍。**
+  #   [[a-gates-scan-set-is-smaller-than-reality]]｜[[the-comment-states-the-rule-the-code-narrows-it]]
+  ( cd "$T/d" && verify . >/dev/null 2>&1 ); r3=$?
+  # ★★ 提示里**不许用反引号** —— 双引号里的反引号会被 bash 当成命令替换真跑一遍
+  #   （上一版写 “`verify .`”，输出里当场多出一行「验：.」）。
+  #   [[prose-inside-templates-hits-metacharacters]]
+  [ $r3 -eq 0 ] && say "✓" "★★★ **封面信里的那个形态「verify_handover_bundle.sh .」（相对目录）→ rc=0**" \
+                || { say "✗" "★★★ 「verify .」rc=$r3 —— **文档教的用法自己跑不通**"; bad=1; }
   # ★ 反例三连：每一项都必须**单独**能把它判红
   w "deadbeef$(printf '%056d' 0)" "$TIP" "$N"
   ( verify "$T/d" >/dev/null 2>&1 ); [ $? -ne 0 ] && say "✓" "★ 反例：sha256 对不上 → 红" || { say "✗" "sha256 错了却绿"; bad=1; }
@@ -112,7 +131,22 @@ verify() {
   pass "包在（$(wc -c < "$B" | tr -d ' ') 字节）"
   [ -s "$S" ] || { fail "sidecar 不在：$S —— **没有可比对的记录，不是「没问题」**"; echo; echo "✗ $BAD 项不通过"; return 1; }
 
-  git bundle verify "$B" >/dev/null 2>&1 && pass "git bundle verify 通过" || fail "git bundle verify 不通过"
+  # ★★★ 2026-08-17：`git bundle verify` **需要一个仓才跑得动**（`error: need a
+  #   repository to verify a bundle`）。此前直接在当前目录跑 ⇒ **判定取决于 cwd**：
+  #     仓里跑        rc=0 ✓
+  #     交付目录里跑   rc=1 ✗   ← 而封面信教接手方的正是 `verify_handover_bundle.sh .`
+  #   自测一直 8/8，只因为我每次都在仓里跑它。**接手方照着说明做，必看到假红。**
+  #   包自足（无前置提交），所以拿一个**空的临时仓**就够 —— 顺带还避免了
+  #   「借本机对象把包的缺失补上」那种假绿。[[a-checkers-verdict-must-not-depend-on-cwd]]
+  #   ★★ 而 `git -C` **会先切目录**，所以包路径必须先转成绝对路径 ——
+  #   接手方按封面信传的是 `.`，`$B` 就是 `./agentdb-…bundle`，切完目录就找不着了。
+  #   （这一条是我修上一处时**当场引入的新错**，靠同一条断言在非仓 cwd 下抓出来。）
+  VT="$(mktemp -d)"; git init -q "$VT/probe" 2>/dev/null
+  B_ABS="$(cd "$(dirname "$B")" && pwd -P)/$(basename "$B")"
+  git -C "$VT/probe" bundle verify "$B_ABS" >/dev/null 2>&1 \
+    && pass "git bundle verify 通过（在一个空临时仓里跑，判定与 cwd 无关）" \
+    || fail "git bundle verify 不通过"
+  rm -rf "$VT"
 
   R_SHA="$(awk '/^sha256/{print $2}' "$S")"
   R_TIP="$(awk '/^tip/{print $2}' "$S")"

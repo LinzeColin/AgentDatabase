@@ -662,7 +662,11 @@ adams-131 **141**、fleming-111 **138**（共 46 个目录）。
 > `check_claim_evidence_independence.py`（两处证据是不是同一部作品，28/28）／
 > `find_second_evidence.py`（给单源 claim 找第二处，正对照不过就停，5/5）／
 > `rebuild_derived_slices.py`（重抓拿不回切片，按配方算回来，9/9）／
-> `verify_handover_bundle.sh`（**接手方自己验包**，`--expect-tip` 能分辨旧包，10/10）。
+> `verify_handover_bundle.sh`（**接手方自己验包**，`--expect-tip` 能分辨旧包，12/12）。
+> ★ 2026-08-17 修一处**假红**：`git bundle verify` 需要一个仓才跑得动，此前直接在
+> 当前目录跑 ⇒ 站在交付目录里（不是仓）照说明验一个好包会看到「✗ 1 项不通过」。
+> 现在改到一个空的临时仓里跑，判定与 cwd 无关；自测补了两条 —— 换非 git cwd、
+> 以及**说明书里教的那个相对目录形态**。
 >
 > ### ② ★★★ 全库 delta 的分布**被推翻了一次**：22 个读数里 7 个的基线**不是入戏答题**
 >
