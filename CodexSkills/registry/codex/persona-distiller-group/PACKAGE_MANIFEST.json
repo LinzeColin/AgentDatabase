@@ -333,6 +333,11 @@
       "size_bytes": 2013
     },
     {
+      "path": "tests/test_all_selftests_have_a_runner.py",
+      "sha256": "a683c8fec889c5d0b6cb3fa672b0eb1f6f9c8d672fc2e5d0d8e2ee9c7b052e77",
+      "size_bytes": 4569
+    },
+    {
       "path": "tests/test_disclosures_reach_the_contract.py",
       "sha256": "a2645e7291643205b2352bca9764e666ea4fba98132e333d73a58c0e677c9b35",
       "size_bytes": 7460
