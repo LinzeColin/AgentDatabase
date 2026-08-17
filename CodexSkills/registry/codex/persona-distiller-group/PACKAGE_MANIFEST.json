@@ -239,8 +239,8 @@
     },
     {
       "path": "scripts/check_mode_ladder_reachable.py",
-      "sha256": "6b8bd7bd4016f6cac10772f9f1d0c9993859ef90cfe3bb485f3cb21683c5ab0d",
-      "size_bytes": 19660
+      "sha256": "942ed0879c63390ed3e66d2f3d2267b4ddb82ce7c69433cc8d2014a724ddae59",
+      "size_bytes": 23433
     },
     {
       "path": "scripts/check_roster_independence.py",

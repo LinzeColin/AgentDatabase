@@ -80,6 +80,39 @@
   放宽到中文之后又把大半张词表都标了（医疗/合规/监管…），**噪声盖过信号**；
   现在按**实测**标：只看真命中过、且命中处紧邻同语种字的词。
 
+## ★★★★★ 最上游：**域分类器过半时候认不出来**
+
+`domains >= 2` 是 small_team 三条触发里**唯一真正在起作用**的一条
+（`complexity` 命中 6/60、`risk` 0/60）。而「域数」来自 `task_profile` 的分类器 ——
+量它自己的召回（同 60 条任务，本件实跑印出）：
+
+    名册里的身份族 **11** 个｜认出过的域 **8** 个
+
+    general-decision      33 次（49.3%）  ← **兜底档**
+    operations-product    13 次（19.4%）
+    finance-investment     8 次（11.9%）
+    research-education     7 次（10.4%）
+    legal-policy           2 次｜healthcare 2 次
+    engineering-industry   1 次｜**software-ai 1 次**
+
+⇒ **占比最高的是兜底档，过半任务没被认成任何专业域。**
+  而 `software-ai` 只认出 **1 次** —— 名册最大的族正是 **34 人的 software-developer**，
+  这 60 条场景**就是他们自己写的**。
+
+**整条因果链（每一环都有实测）：**
+
+    分类器过半落兜底档  ⇒  域数几乎恒为 1  ⇒  `domains>=2` 不触发
+                        ⇒  另两条触发（complexity 6/60、risk 0/60）也几乎不触发
+                        ⇒  **恒 single_expert（53/60）**
+                        ⇒  一个「团队 skill」在 88% 的任务上只坐 1 个人
+
+**不是任务真的单一，是分类器认不出来。**
+[[blamed-the-channel-my-own-wordlist-was-blind]]｜[[a-corpus-that-is-huge-but-single-lane]]
+
+★ 本件**仍然不改分类器**。补词表会让更多任务被认成专业域、进而多派人 ——
+  在「多人是否真的更好」没有证据之前，那还是「为凑数放宽判据」。
+  本件负责把这条链**逐环量出来摆在台面上**，让下一个人知道该从哪一环动手。
+
 ## 任务从哪来（不许我自己编）
 
 `team-index.json` 每个产物自带 `application_scenarios` —— 那是蒸馏流程写下的
@@ -358,6 +391,40 @@ def main() -> int:
             if per.get(need, 0) == 0:
                 print("             ⇒ **没有一条任务命中够 %d 个** —— 这项够不到"
                       "是**结构性的**，不是偶然。" % need)
+
+    # ★★★★ 最上游那一环：**域分类器自己的召回**。
+    #   `domains >= 2` 是 small_team 唯一真正在起作用的触发，
+    #   而「域数」本身来自分类器 —— 它认不出来，后面全部塌。
+    if _m is not None and hasattr(_m, "task_profile"):
+        seen = collections.Counter()
+        for tk in tasks:
+            try:
+                for d in (_m.task_profile(tk).get("domains") or []):
+                    seen[d] += 1
+            except Exception:                                # noqa: BLE001
+                pass
+        if seen:
+            fams = set()
+            try:
+                fams = {p.get("identity_family_id") for p in
+                        json.loads(idx.read_text(encoding="utf-8")).get("products", [])
+                        if p.get("identity_family_id")}
+            except Exception:                                # noqa: BLE001
+                pass
+            print("\n域分类器的召回（`domains` 是 small_team 唯一在起作用的触发）：")
+            print("  名册里的身份族 **%d** 个｜60 条任务里认出过的域 **%d** 个"
+                  % (len(fams), len(seen)))
+            tot = sum(seen.values())
+            for d, c in seen.most_common():
+                mark = "  ← ★ **兜底档**" if "general" in str(d) else ""
+                print("     %-24s %3d 次（%4.1f%%）%s" % (d, c, 100.0 * c / tot, mark))
+            top, ntop = seen.most_common(1)[0]
+            if "general" in str(top):
+                print("  ⇒ ★★ **占比最高的是兜底档 `%s`（%d/%d）** —— "
+                      "过半任务没被认成任何专业域。" % (top, ntop, tot))
+                print("     这是「域数几乎恒为 1 ⇒ 恒 single_expert」的**最上游成因**：")
+                print("     不是任务真的单一，是**分类器认不出来**。")
+                print("     [[blamed-the-channel-my-own-wordlist-was-blind]]")
 
     dead = unreachable(rep)
     print("\n可达 %d 档｜**不可达 %d 档**" % (len(rep) - len(dead), len(dead)))
