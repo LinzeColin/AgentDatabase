@@ -946,8 +946,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_verbatim_quotes.py",
-      "sha256": "e05df76d1032efe2b711759f1d4994776e17eabfb102dad955a28a31c0712ad0",
-      "size_bytes": 16494
+      "sha256": "a99390d315b6015f9e5f9ea5f034e562e15fdda300cca05f19b53ef7aece9546",
+      "size_bytes": 22392
     },
     {
       "path": "references/pipeline/checkers/check_verdict_attribution.py",
@@ -1751,8 +1751,8 @@
     },
     {
       "path": "scripts/check_verbatim_quotes.py",
-      "sha256": "e05df76d1032efe2b711759f1d4994776e17eabfb102dad955a28a31c0712ad0",
-      "size_bytes": 16494
+      "sha256": "a99390d315b6015f9e5f9ea5f034e562e15fdda300cca05f19b53ef7aece9546",
+      "size_bytes": 22392
     },
     {
       "path": "scripts/check_verdict_attribution.py",

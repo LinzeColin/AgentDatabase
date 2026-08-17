@@ -152,12 +152,20 @@ def strip_page_furniture(text: str):
     return "\n".join(out), removed
 
 
-def collect(ws: pathlib.Path, extra: list) -> list:
+def collect(ws: pathlib.Path, extra: list, *, only_verbatim: bool = True) -> list:
+    """→ [(来源, 引文)]。默认只留**逐字英文**引文（`verbatim`）。
+
+    ★ `only_verbatim=False` 用来回答「0 条」的成因：产物里到底有没有长引文。
+      默认值保持 True —— 外部调用方 `quality_check.py:734` 的行为一个字不变。
+      ★ 我第一版直接调 `collect()` 去数「全部长引文」，忘了**过滤就在这个函数里**，
+        于是永远拿到 0，两条支路合并成一条。自测当场判红。
+        [[a-gates-scan-set-is-smaller-than-reality]]
+    """
     out = []
     for f in sorted(list(ws.glob("*.md")) + list(ws.glob("identity-facets/*.md"))
                     + list(ws.glob("references/research/*.md"))):
         for q in QUOTE.findall(corpus_body(f.read_text(encoding="utf-8"))):
-            if verbatim(q):
+            if verbatim(q) or not only_verbatim:
                 out.append((f.name, q))
     for p in extra:
         try:
@@ -267,6 +275,47 @@ def self_test() -> int:
             ("逐字英文引文恰好 3 条", len(texts) == 3),
             ("未命中恰好 2 条", len(missed) == 2),
         ]
+    # ── ★★★ 2026-08-17：零扫描面不许印肯定句（正反各一）──
+    #   comenius #182 实测：0 条逐字英文引文，本判据照印「✓ 全部可在语料中找到」。
+    #   ★ 断言必须打在**子进程真正印出来的那几行**上：印字逻辑在 `main()` 里，
+    #     只断言 `collect()` 返回 0 条／1 条是测不到分支的 —— 把守卫删掉照样绿。
+    #     （第一版我就是那么写的，变异对照当场拆穿。）
+    #     [[a-checker-nothing-calls-is-not-a-checker]]
+    import subprocess as _sp, sys as _sys, tempfile as _tf
+    _self = str(pathlib.Path(__file__).resolve())
+
+    def _run(md: str, corpus: str) -> str:
+        with _tf.TemporaryDirectory() as _td:
+            _r = pathlib.Path(_td); _ws = _r / "ws"; _c = _r / "c"
+            _ws.mkdir(); _c.mkdir()
+            (_ws / "persona.md").write_text(md, encoding="utf-8")
+            (_c / "corpus.txt").write_text(corpus, encoding="utf-8")
+            return _sp.run([_sys.executable, _self, "--workspace", str(_ws),
+                            "--cache", str(_c)],
+                           capture_output=True, text=True).stdout
+
+    # 正：只有中文引文 ⇒ 逐字英文引文 0 条 ⇒ 必须说「未核」，且**不许**出现肯定句
+    _out0 = _run("他说「这是一句足够长的中文引文用来占位」。\n", "nothing relevant here\n")
+    checks.append(("★ 0 条可核 → 印「未核，不是通过」",
+                   "未核，不是通过" in _out0))
+    checks.append(("★ 0 条可核 → **不许**印「都可在语料中找到」",
+                   "都可在语料中找到" not in _out0))
+    # ★★★ 「0 条」的两种成因必须分得开（这一对断言分别钉住两条支路）
+    _out_cn = _run("他说「这是一句足够长的中文引文用来占位」。\n", "irrelevant\n")
+    checks.append(("★★★ 0 条但**有中文长引文** → 说清「有 N 条、全含汉字、一条也没核过」",
+                   "全部含汉字" in _out_cn and "一条也没核过" in _out_cn))
+    _out_none = _run("这一段里根本没有任何长引文。\n", "irrelevant\n")
+    checks.append(("★★★ 0 条且**连中文引文也没有** → 说「一条长引文都没有」，不许说成含汉字",
+                   "一条长引文都没有" in _out_none and "全部含汉字" not in _out_none))
+
+    # 反：有 1 条真引文且命中 ⇒ 照旧印肯定句，且**不许**说未核
+    _out1 = _run("他写道「a real sentence here for testing」。\n",
+                 "He wrote a real sentence here for testing today.\n")
+    checks.append(("★★ 反对照：1 条且命中 → 照旧印「都可在语料中找到」",
+                   "都可在语料中找到" in _out1))
+    checks.append(("★★ 反对照：1 条且命中 → **不许**说未核",
+                   "未核" not in _out1))
+
     for label, ok in checks:
         print(f"  {'✓' if ok else '✗'} {label}")
         if not ok:
@@ -276,7 +325,9 @@ def self_test() -> int:
         for b in bad_cases:
             print(f"  · {b}")
         return 2
-    print(f"\n负对照通过（{len(checks)} 项：3 正 + 2 伪造 + 2 误判形态 + 4 版口）")
+    # ★ 分解只写大类，**不写会漂的手抄数字**：08-17 加 4 条时那串「3+2+2+4」
+    #   与 len(checks)=15 已经对不上（手抄计数必漂）。[[self-reported-numbers-must-be-computed]]
+    print(f"\n负对照通过（**{len(checks)} 项**：正例 / 伪造引文 / 误判形态 / 版口跨页 / 零扫描面）")
     return 0
 
 
@@ -316,8 +367,33 @@ def main() -> int:
         print(f"   \u2717 {w}: {q[:100]}")
     for w, q in crossed:
         print(f"   ⚠ 跨版口（引文为真，中间隔着页眉/页码）: {w}: {q[:70]}")
-    if not bad and not crossed:
-        print("   \u2713 全部可在语料中找到")
+    if not qs:
+        # ★★ **零扫描面不许印肯定句。** 2026-08-17 拿 comenius #182 实跑：
+        #   它 `raw/` 下只有六份 `_ids*.txt`（记账文件，不是语料），
+        #   逐字英文引文 **0 条**，而本判据照印「✓ 全部可在语料中找到」并 rc=0。
+        #   「全部都找得到」在空集上恒真 —— **那不是通过，是没核**。
+        #   同型先例：`check_rights_basis` 交叉喂测时也这么假绿过（同日已修）。
+        #   ★ 只改措辞、**不改退出码** —— 让它变红是收紧判定，属决定不属清理。
+        #   [[zero-hit-gates-must-prove-they-can-hit]]
+        #
+        # ★★★ 而「0 条」有**两种完全不同的成因**，必须分开说，否则读者会一律
+        #   读成「这个人没引用过」。全库 54 个实测：19 个走这条路，其中
+        #   **10 个产物里其实有长引文（合计 49 条）**，只是**全是中文** ——
+        #   `verbatim()` 的定义是「引号内无汉字且含英文词」，中文引文**根本不在
+        #   本门射程内**（它们是译文，对不上原文语料也属正常）。
+        #   最极端的 Grotius：18 条中文引文，本门此前照印「✓ 全部可在语料中找到」。
+        #   [[a-gates-scan-set-is-smaller-than-reality]]
+        all_q = [q for _, q in collect(a.workspace, a.extra, only_verbatim=False)]
+        print("   ⚠ **一条逐字英文引文都没扫到 —— 本次未核，不是通过。**")
+        if all_q:
+            print("     成因：产物里有 **%d** 条长引文，但**全部含汉字** ⇒ 不在本门射程内"
+                  "（本门只核逐字**英文**引文）。**这 %d 条本判据一条也没核过。**"
+                  % (len(all_q), len(all_q)))
+        else:
+            print("     成因：产物里**一条长引文都没有**（连中文的也没有）。")
+        print("     （另需确认：语料目录传对了没有 —— `--cache` 指向的是不是真的正文。）")
+    elif not bad and not crossed:
+        print("   \u2713 全部 **%d** 条逐字英文引文都可在语料中找到" % len(qs))
     elif not bad:
         print("   \u2713 没有对不上的；上面那些是原文横跨页面，**不是引错**")
     return 1 if bad else 0
