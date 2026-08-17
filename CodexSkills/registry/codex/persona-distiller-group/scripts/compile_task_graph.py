@@ -165,11 +165,34 @@ def _signal_hits(signal: str, low: str) -> bool:
     return signal in low
 
 
+# ★★★ 2026-08-17：**通用动词不能单独拉进一个域。**
+#   `设计` 与 `design` 在两种语言里主要都是动词（设计战略／设计实验／
+#   "design an experiment"／"type design"），而它们是 creative-design 的裸关键词，
+#   命中一个就收下整个域。实测三处误判：
+#
+#     「为零售企业**设计**…扩张战略」 → ['operations-product', **'creative-design'**]
+#         ⇒ 艺术设计师与客户营销师 domain_match **1.000**，
+#           而真正对口的创业经营师只有 0.500 ⇒ Anne Mulcahy 掉到第 38 名
+#     英文软件工程题（含 "Design a" 与 "type design"）
+#         → ['software-ai', **'creative-design'**, 'engineering-industry']
+#     "system design interview about sharding" → **纯 ['creative-design']**
+#
+#   处置：把这两个词降为**弱信号** —— 只有同域**另有强词命中**时才算数。
+#   ★ 只降这两个，且都是**实测误发过的**；不凭感觉扩大名单。
+#   ★ 负对照必须过：真·设计题（版式/字体/视觉/品牌/typography/palette）照旧命中。
+#   [[regex-must-clear-the-corpus-language]]｜[[a-signal-that-both-overfires-and-underfires]]
+WEAK_SIGNALS = {"creative-design": ("设计", "design")}
+
+
 def infer_domains(task: str) -> list[str]:
     low = task.casefold()
     scored = []
     for domain, signals in DOMAIN_SIGNALS.items():
-        count = sum(1 for signal in signals if _signal_hits(signal, low))
+        weak = WEAK_SIGNALS.get(domain, ())
+        strong_hits = sum(1 for s in signals if s not in weak and _signal_hits(s, low))
+        weak_hits = sum(1 for s in signals if s in weak and _signal_hits(s, low))
+        # 弱信号只在有强词支撑时计数；没有强词就整体不收这个域。
+        count = strong_hits + (weak_hits if strong_hits else 0)
         if count:
             scored.append((count, domain))
     scored.sort(key=lambda item: (-item[0], item[1]))
