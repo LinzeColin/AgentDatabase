@@ -196,6 +196,35 @@ def self_test() -> int:
     if len(probs) != 14:
         fails.append(f"整批免检未被堵住：14 份未点名的源只报了 {len(probs)} 份")
 
+    # ── ★★★ 2026-08-17：三条支路的措辞各自钉住（子进程断言，印字在 main() 里）──
+    #   缺陷形态：`problems` 为空就打「✓ 每一份声称亲笔的 P1 源都被逐份认领过」，
+    #   而空可以来自三种完全不同的情形：真都认领过 / 本门不适用 / 一份都没有。
+    #   全库 54 个实测：**9 个走「不适用」、jefferson 走「0 份」**。
+    import subprocess as _sp, sys as _sys, tempfile as _tf, json as _json
+    _self = str(pathlib.Path(__file__).resolve())
+
+    def _run_ws(meta: dict, srcs: list) -> str:
+        with _tf.TemporaryDirectory() as _td:
+            w = pathlib.Path(_td) / "ws"; (w / "evidence").mkdir(parents=True)
+            (w / "meta.json").write_text(_json.dumps(meta, ensure_ascii=False), encoding="utf-8")
+            (w / "evidence" / "source-ledger.jsonl").write_text(
+                "".join(_json.dumps(x, ensure_ascii=False) + "\n" for x in srcs), encoding="utf-8")
+            return _sp.run([_sys.executable, _self, str(w)], capture_output=True, text=True).stdout
+
+    _m_hist = dict(META)
+    _o_na = _run_ws({**_m_hist, "subject_origin": "public"}, [])
+    if not ("本门不适用 —— 本次未核" in _o_na and "都被逐份认领过" not in _o_na):
+        fails.append("★★★ subject_origin≠historical → 该说「不适用，未核」，不许打 ✓")
+    _o_zero = _run_ws(_m_hist, [])
+    if not ("0 份 —— 本次未核" in _o_zero and "都被逐份认领过" not in _o_zero):
+        fails.append("★★★ historical 但声称亲笔的 P1 源 0 份 → 该说「未核」，不许打 ✓")
+    # ★ META 的键是 `target_name`（不是 `name`）—— 今天第七次凭猜读键，读一眼比猜快。
+    _ok_src = {"source_id": "s1", "tier": "P1", "author": META["target_name"],
+               "authorship_evidence": ["A-1"], "original_name": "x.txt"}
+    _o_ok = _run_ws(_m_hist, [_ok_src])
+    if not ("都被逐份认领过" in _o_ok and "未核" not in _o_ok):
+        fails.append("★★★ 反对照：真有 1 份且已认领 → 必须照旧打 ✓ 且不许说未核")
+
     for f in fails:
         print(f"✗ {f}")
     if fails:
@@ -242,7 +271,28 @@ def main() -> int:
               "\n  Jenner #104 实测：一本题献给他的第三方著作以 P1 亲笔入了库，"
               "\n  被断言层引用，算进了 primary_ratio。**归属门没被骗——它压根没被问。**")
         return 1
-    print("\n✓ 每一份声称亲笔的 P1 源都被逐份认领过")
+    # ★★★ 2026-08-17：**不适用 ≠ 通过**，**0 份可查 ≠ 全都认领过**。
+    #   `evaluate()` 对 subject_origin != historical 直接返回 `[], {"状态": "本门不适用"}`，
+    #   而这里照打「✓ 每一份声称亲笔的 P1 源都被逐份认领过」并 rc=0。
+    #   全库 54 个实测：**9 个工作区**走的正是这条路
+    #   （brandeis／burbank／churchill／dewey／fleming／ford／godin／leonardo／steinhardt）。
+    #   仓里已有正确先例：`check_persona_frame_break` 对「不适用」把 `通过` 置 **None**，
+    #   并在消费点写明「**不当成通过也不当成失败**」。照它办。
+    #   ★ 只改措辞、**不改退出码**（收紧判定属决定不属清理）。
+    #   [[zero-hit-gates-must-prove-they-can-hit]]
+    if "本门不适用" in str(info.get("状态", "")):
+        print("\n⚠ **本门不适用 —— 本次未核，不是通过。**")
+        print("   免检口子只在 `subject_origin == historical` 上存在；"
+              "这个工作区是 `%s`，" % info.get("subject_origin"))
+        print("   由 `check_authorship` 的 A-* 证据路认定。**本件一份也没查过。**")
+        return 0
+    # ★ 份数直接读 `info` 里已有的字段，**不新造**（仓里有就别再造一个）。
+    claimed_n = info.get("声称本人所著的 P1 源", 0)
+    if not claimed_n:
+        print("\n⚠ **声称亲笔的 P1 源 0 份 —— 本次未核，不是通过。**")
+        print("   本件只查「声称亲笔的 P1 源有没有被逐份认领」；这个工作区一份也没有。")
+        return 0
+    print("\n✓ 全部 **%d** 份声称亲笔的 P1 源都被逐份认领过" % claimed_n)
     return 0
 
 

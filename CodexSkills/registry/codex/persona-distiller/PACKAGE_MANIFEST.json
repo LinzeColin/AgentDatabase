@@ -591,8 +591,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_claim_coverage.py",
-      "sha256": "ef5a41ec25fc1880f113cd8886b04dd6eafd040751696d0bed5b684553c7a7e2",
-      "size_bytes": 23251
+      "sha256": "e33b58d80ce288577eb668bed18f9df7b3cebea870a2c916697feb258311f18f",
+      "size_bytes": 25874
     },
     {
       "path": "references/pipeline/checkers/check_claim_source_independence.py",
@@ -711,8 +711,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_lane_quotes_verbatim.py",
-      "sha256": "5c9bfb7c8f65e5fb5594010cbff3f6bc2b88d7baaf1a4775679cc60287df5b73",
-      "size_bytes": 45793
+      "sha256": "31c43ac71bdc5d94d74e874061656389a2704962788ce15a3b165d27e33846b2",
+      "size_bytes": 49288
     },
     {
       "path": "references/pipeline/checkers/check_longs_corruption.py",
@@ -806,8 +806,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_quote_speaker.py",
-      "sha256": "0863734997aadd5c556395c48899eddbc11d8ade661f75823d992b0acafd56c3",
-      "size_bytes": 46675
+      "sha256": "32eb4d644fbc83e6ac1c597ec995f4016b7956d18f83725c1d60cccc049166e8",
+      "size_bytes": 50668
     },
     {
       "path": "references/pipeline/checkers/check_quoted_arithmetic.py",
@@ -876,8 +876,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_source_attribution.py",
-      "sha256": "29dfe1f80fa28cf09077605e098361b4f82600d750e00741857ccb2eb1e2b730",
-      "size_bytes": 12699
+      "sha256": "426f219eba65380ff40836e9387cefe8887cb63b0cea9dea19f27e9ab00915e8",
+      "size_bytes": 16500
     },
     {
       "path": "references/pipeline/checkers/check_source_dedup.py",
@@ -1396,8 +1396,8 @@
     },
     {
       "path": "scripts/check_claim_coverage.py",
-      "sha256": "ef5a41ec25fc1880f113cd8886b04dd6eafd040751696d0bed5b684553c7a7e2",
-      "size_bytes": 23251
+      "sha256": "e33b58d80ce288577eb668bed18f9df7b3cebea870a2c916697feb258311f18f",
+      "size_bytes": 25874
     },
     {
       "path": "scripts/check_claim_source_independence.py",
@@ -1516,8 +1516,8 @@
     },
     {
       "path": "scripts/check_lane_quotes_verbatim.py",
-      "sha256": "5c9bfb7c8f65e5fb5594010cbff3f6bc2b88d7baaf1a4775679cc60287df5b73",
-      "size_bytes": 45793
+      "sha256": "31c43ac71bdc5d94d74e874061656389a2704962788ce15a3b165d27e33846b2",
+      "size_bytes": 49288
     },
     {
       "path": "scripts/check_longs_corruption.py",
@@ -1611,8 +1611,8 @@
     },
     {
       "path": "scripts/check_quote_speaker.py",
-      "sha256": "0863734997aadd5c556395c48899eddbc11d8ade661f75823d992b0acafd56c3",
-      "size_bytes": 46675
+      "sha256": "32eb4d644fbc83e6ac1c597ec995f4016b7956d18f83725c1d60cccc049166e8",
+      "size_bytes": 50668
     },
     {
       "path": "scripts/check_quoted_arithmetic.py",
@@ -1681,8 +1681,8 @@
     },
     {
       "path": "scripts/check_source_attribution.py",
-      "sha256": "29dfe1f80fa28cf09077605e098361b4f82600d750e00741857ccb2eb1e2b730",
-      "size_bytes": 12699
+      "sha256": "426f219eba65380ff40836e9387cefe8887cb63b0cea9dea19f27e9ab00915e8",
+      "size_bytes": 16500
     },
     {
       "path": "scripts/check_source_dedup.py",

@@ -615,6 +615,9 @@ _REAL_BARTON = (
 # ↑ 反例：**主语自己被第三人称转引**——转引标记在，而姓与人物相同，不许报。
 
 
+_REAL_QUOTE_FOR_SELFTEST = "I think it not improbable that good cast iron would stand the test shdwn."
+
+
 def selftest() -> int:
     fails = []
 
@@ -730,6 +733,40 @@ def selftest() -> int:
         chk("RENDER_FILES 里的代码围栏同样不抓（禁跨行这一条真的在起作用）",
             len(collect_quotes(w)) == 1)
 
+    # ── ★★★ 2026-08-17：零扫描面不许印肯定句（子进程断言，正反各一）──
+    #   缺陷形态：引文 0 条时 `no_corpus` 为 False ⇒ 走 else 打「✓ 没有引到别人的话」。
+    #   全库 54 个里 **8 个**在走这条路（leonardo 实测：语料 0 份、引文 0 条、✓）。
+    #   ★ 断言必须打在**子进程真正印出来的那几行**上：印字逻辑在 `main()` 里。
+    import subprocess as _sp, sys as _sys, tempfile as _tf
+    _self = str(pathlib.Path(__file__).resolve())
+
+    def _run_ws(files: dict) -> str:
+        with _tf.TemporaryDirectory() as _td:
+            _w = pathlib.Path(_td) / "ws"; _w.mkdir()
+            (_w / "meta.json").write_text('{"name": "Joseph Whitworth"}', encoding="utf-8")
+            for rel, txt in files.items():
+                f = _w / rel; f.parent.mkdir(parents=True, exist_ok=True)
+                f.write_text(txt, encoding="utf-8")
+            return _sp.run([_sys.executable, _self, str(_w)],
+                           capture_output=True, text=True).stdout
+
+    _o0 = _run_ws({"facts.md": "这一段里没有任何长逐字引文。\n"})
+    chk("★★★ 引文 0 条 → 印「未核，不是通过」", "未核，不是通过" in _o0)
+    chk("★★★ 引文 0 条 → **不许**印「✓ 没有引到别人的话」",
+        "长逐字引文 0 条" in _o0 and "✓ 没有引到别人的话" not in _o0)
+    # ★★ 反对照的夹具必须走到**同一条 else 支路**上（引文干净、在语料里）。
+    #   我第一版把语料写成 `_REAL_LEFROY` —— 那条引文会被判成「转引自 General Lefroy」，
+    #   走的是前一个 `if` 分支，**根本到不了 elif**，于是变异②（一律说未核）没被抓住。
+    #   [[counter-example-red-can-be-red-by-coincidence]]
+    # ★★★ 而且「not in」型断言**在空输出上恒真** —— 每条都要配一个**正向锚点**，
+    #   否则子进程崩掉／夹具没建成时，断言会安静地绿。[[empty-default-swallows-unknown]]
+    _o1 = _run_ws({
+        "facts.md": '他写道「%s」。\n' % _REAL_QUOTE_FOR_SELFTEST,
+        "references/sources/src.txt": "plain corpus: %s and more.\n" % _REAL_QUOTE_FOR_SELFTEST,
+    })
+    chk("★★★ 反对照：有 1 条干净引文 → 照旧印「✓ 没有引到别人的话」，且**不许**说未核",
+        "✓ 没有引到别人的话" in _o1 and "未核，不是通过" not in _o1)
+
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
 
@@ -762,6 +799,21 @@ def main() -> int:
             f"train 语料 0 份，而待查引文 {r['引文数']} 条 —— "
             "`references/sources/` 与 `raw/`(split==train) 两条路都空，本件**没有判过任何一条**")
 
+    # ★★★ 2026-08-17：上面那半只堵了「有引文而没语料」。**另一半一直漏着**：
+    #   引文数 **也**是 0 时，`no_corpus` 为 False，于是照打「✓ 没有引到别人的话」。
+    #   全库 54 个实测：**8 个工作区**走的正是这条路
+    #   （benardos／burbank／comenius／ford／leonardo／liebig／martens／semmelweis），
+    #   其中 leonardo 的实际输出是「train 语料 **0** 份；长逐字引文 **0** 条 / ✓」。
+    #   ★ 空集上「没有引到别人的话」恒真 —— **那不是通过，是没核**。
+    #   ★ 只改措辞、**不改退出码**（收紧判定属决定不属清理），与同日
+    #     `check_verbatim_quotes` 的处置一致。
+    #   [[zero-hit-gates-must-prove-they-can-hit]]｜[[empty-default-swallows-unknown]]
+    nothing_to_check = r["引文数"] == 0
+    if nothing_to_check:
+        r["★ 未核（不是通过）"] = (
+            "长逐字引文 0 条 —— 本件**一条也没核过**；"
+            f"（train 语料 {len(corpus)} 份）")
+
     if a.json:
         # ★ `--json` 只印 JSON。混印散文会让调用方的 json.loads 抛，
         #   而抛出来的后果是「这项检查静默变成 0 条」——同一个坑今天已经踩过一次。
@@ -779,6 +831,10 @@ def main() -> int:
         for x in r["**引到别人的话**"]:
             print(f"  · {x['出处']}　转引自 **{x['转引自']}**")
             print(f"    「{x['引文'][:90]}」")
+    elif nothing_to_check:
+        print("⚠ **长逐字引文 0 条 —— 本次未核，不是通过。**")
+        print(f"   本件只判「引号内的长逐字引文是谁说的」；这个工作区一条也没有"
+              f"（train 语料 {len(corpus)} 份）。**「没有引到别人的话」在空集上恒真。**")
     else:
         print("✓ 没有引到别人的话")
     dec = r["★ 正文已注明出自他人的（不判为误引，但列出来）"]

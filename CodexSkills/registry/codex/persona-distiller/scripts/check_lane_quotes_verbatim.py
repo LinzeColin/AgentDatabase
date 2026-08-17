@@ -354,13 +354,33 @@ def check(ws: pathlib.Path):
         if from_holdout:
             res[f.name]["★★★ 引到了 holdout"] = [
                 f"{sid}：{q[:110]}" for q, sid in from_holdout]
+    _total_q = sum(v["引文数"] for v in res.values())
     out = {
         "逐道": res,
-        "合计": f"{sum(v['引文数'] for v in res.values())} 条引文，对不上 {bad} 条",
+        "合计": f"{_total_q} 条引文，对不上 {bad} 条",
         "读不到正文的来源": unread,      # ★ 读不到就说读不到
         "holdout 源数": len(held),
-        "通过": bad == 0 and leaked == 0 and not unread,
+        # ★★★ 2026-08-17：**零扫描面不许给 true**。引文 0 条时
+        #   `bad == 0 and leaked == 0` 恒真 ⇒ 本件对着「一条也没核」印 `"通过": true`。
+        #   全库 54 个实测：10 个工作区引文 0 条，其中 **2 个**（benardos、steinhardt）
+        #   就这样拿到了 true。而这是**机器可读字段**——下游读的就是它。
+        #   ★ 仓里已有正确先例：`check_persona_frame_break` 对「不适用」置 **None**，
+        #     并在消费点写明「不当成通过也不当成失败」。照它办，**不翻成 false**
+        #     （翻 false 是收紧判定，属决定不属清理；`quality_check` 也不读这个字段，
+        #      它自己从 `逐道` 数 `**对不上**`，所以本改动不动上游行为）。
+        #   [[zero-hit-gates-must-prove-they-can-hit]]
+        # ★★ 只在「否则会给 true」时才置 null —— **放松只许放在开脱侧**。
+        #   我第一版写成 `None if _total_q == 0`，把 `unread` 非空那 8 个工作区
+        #   原本的 **false** 也抹成了 null：那是**抹掉一个真失败信号**，方向反了。
+        #   靠改完的全库复量抓回来（未核数 2 → 10 对不上，一查就是这个）。
+        #   [[loosen-only-the-exonerating-side]]
+        "通过": (None if (_total_q == 0 and not unread and not leaked)
+                 else (bad == 0 and leaked == 0 and not unread)),
     }
+    if _total_q == 0 and not unread and not leaked:
+        out["★ 未核（不是通过）"] = (
+            "研究道 `references/research/0*.md` 里**一条引文都没抽到** —— "
+            "本件一条也没核过。`通过` 置 null 表示**既不算通过也不算失败**。")
     if leaked:
         out["★★★ 隔离破了"] = (
             f"**{leaked} 条引文核不到 train，却在 holdout 里找到了。**"
@@ -713,6 +733,32 @@ def self_test():
         encoding="utf-8")
     rc, out = check(root)
     chk("⑬ split 缺失按 train 处理（仍核过，rc=%d）" % rc, rc == 0)
+
+    # ── ★★★ 2026-08-17：零扫描面不许给 `通过: true`（正反各一）──
+    #   全库 54 个实测：10 个工作区研究道引文 0 条，其中 benardos、steinhardt
+    #   拿到的正是 `"通过": true` —— 而这是**机器可读字段**，下游读的就是它。
+    root = _ws(_TRAIN[:120])
+    (root / "references/research/01-writings.md").write_text(
+        "整段散文，一条引文都没有。\n", encoding="utf-8")
+    rc, out = check(root)
+    chk("★★★ 引文 0 条 → `通过` 必须是 **null**（既不算通过也不算失败），实得 %r"
+        % (out["通过"],), out["通过"] is None)
+    chk("★★★ 引文 0 条 → 要单列「未核（不是通过）」并说清一条也没核过",
+        "★ 未核（不是通过）" in out and "0 条引文" in out["合计"])
+    # ★★★ 关键反对照：引文 0 条**但有读不到的来源** ⇒ 仍必须是 **False**。
+    #   置 null 会抹掉一个真失败信号（全库 8 个工作区），方向反了。
+    root = _ws(_TRAIN[:120])
+    (root / "references/research/01-writings.md").write_text("没有引文。\n", encoding="utf-8")
+    for f in (root / "raw").rglob("*.txt"):
+        f.unlink()
+    rc3, out3 = check(root)
+    chk("★★★ 引文 0 条 **但有读不到的来源** → `通过` 仍是 False，实得 %r" % (out3["通过"],),
+        out3["通过"] is False if out3.get("读不到正文的来源") else True)
+
+    # ★ 反对照：真有 1 条且核得到 ⇒ `通过` 必须仍是 True（不许一律 null）
+    rc2, out2 = check(_ws(_TRAIN[:120]))
+    chk("★★★ 反对照：有 1 条且核过 → `通过` 仍是 True，实得 %r" % (out2["通过"],),
+        out2["通过"] is True and rc2 == 0)
 
     if bad:
         print("\n未过：")
