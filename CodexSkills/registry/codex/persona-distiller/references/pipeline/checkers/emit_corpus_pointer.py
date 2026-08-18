@@ -60,9 +60,30 @@
 
     python3 emit_corpus_pointer.py --corpora <_corpora 根> --out <清单.json>
     python3 emit_corpus_pointer.py --verify <清单.json> --corpora <_corpora 根>
+    python3 emit_corpus_pointer.py --restore <工作区目录>        # 按指针取回
     python3 emit_corpus_pointer.py --self-test
 
-退出码：0=成功　1=校验有出入　2=自测未过
+退出码：0=成功　1=校验有出入／取回失败　2=自测未过　3=能取的都取到了，**但仍有取不回的**
+
+## `--restore`：这件工具原本只会「产指针」和「验指针」，不会**用**指针
+
+2026-08-18 实测：十一个工作区在 release 门上同时报 `research.ledger-file-missing`，
+形状一模一样——语料被清掉了（本来也不进 git，`.gitignore:40 **/raw/**/*.txt`），
+账本还在、产物还在、判据还在，**只有正文没了**，于是引文核查与覆盖率全在对着虚空算。
+仓里当时有「检测」（`check_corpus_presence.py`）、有「产指针」（本件）、有「验指针」（本件
+`--verify`），**唯独没有「照着指针取回来」那一步**——那一步一直是手工的。
+
+★ 取回的两条 URL 来源，都是**仓里记过的事实**，不是猜出来的：
+  ① `raw/_fetch-manifest.json` 的 `记录[].source_url`（当初真正用过的那条链接）
+  ② 账本行里的任意 URL（`refetch_class` 已证实 73.5% 藏在 `locator` 而不是 `url`）
+优先 ①——它是原次实际取用的链接；②只在 ① 没有该文件时才用。
+**两条都取不到就如实记成「取不回」，不去按 identifier 拼下载路径**：
+拼出来的链接下到的可能是另一个版次，而校验和会因此对不上，
+届时分不清是「拼错了」还是「这份真的变了」。
+
+★★ **校验不通过的字节一律不落盘。** 留在盘上的每一份都是校验和逐份对上的原件；
+取回来对不上就删掉并计入「校验不符」——**绝不留一份「差不多的」冒充语料**
+（[[name-match-is-not-content-match-in-backup]]）。
 """
 from __future__ import annotations
 
@@ -211,6 +232,96 @@ def verify(manifest: dict, corpora: pathlib.Path) -> int:
     return 0
 
 
+
+def _urls_for(ws_dir: pathlib.Path, row: dict, fname: str) -> list:
+    """这一份能从哪些**记录过的**链接取回。顺序即优先级，不含任何拼出来的链接。"""
+    urls = []
+    man = ws_dir / "raw" / "_fetch-manifest.json"
+    if man.is_file():
+        try:
+            recs = json.loads(man.read_text(encoding="utf-8")).get("记录") or []
+        except (ValueError, OSError):
+            recs = []
+        for r in recs:
+            if str(r.get("file") or "") == fname and r.get("source_url"):
+                urls.append(str(r["source_url"]))
+    m = URL.search(json.dumps(row, ensure_ascii=False))
+    if m and m.group(0) not in urls:
+        urls.append(m.group(0))
+    return urls
+
+
+def restore(ws_dir: pathlib.Path, *, timeout: int = 180) -> int:
+    """照账本把语料取回来，逐份核校验和。**核不过不落盘。**"""
+    import urllib.request
+
+    led = ws_dir / "evidence" / "source-ledger.jsonl"
+    if not led.is_file():
+        print(f"  ✗ 没有账本：{led} —— **本次未取回（不是没东西可取）**")
+        return 1
+
+    tally = collections.Counter()
+    problems = []
+    for line in led.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        lp = str(row.get("local_path") or "")
+        want = str(row.get("checksum") or "")
+        if not lp:
+            tally["台账无 local_path"] += 1
+            continue
+        dst = ws_dir / lp
+        if dst.is_file() and want and sha256_of(dst) == want:
+            tally["已在"] += 1
+            continue
+        if not want:
+            tally["台账无校验和·不取"] += 1
+            problems.append((lp, "台账没有校验和，取回来也证不了是原件"))
+            continue
+        urls = _urls_for(ws_dir, row, pathlib.PurePosixPath(lp).name)
+        if not urls:
+            tally["取不回·无记录链接"] += 1
+            continue
+        got_ok = False
+        last = ""
+        for u in urls:
+            try:
+                req = urllib.request.Request(u, headers={"User-Agent": "persona-distiller/restore"})
+                with urllib.request.urlopen(req, timeout=timeout) as f:
+                    data = f.read()
+            except Exception as e:                      # noqa: BLE001 —— 什么错都要记下来继续下一条
+                last = f"{type(e).__name__}: {e}"[:80]
+                continue
+            if hashlib.sha256(data).hexdigest() == want:
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                dst.write_bytes(data)                   # ★ 只有校验通过才落盘
+                got_ok = True
+                break
+            last = f"校验和对不上（{len(data)} B）"
+        if got_ok:
+            tally["取回并校验通过"] += 1
+        else:
+            tally["取回失败"] += 1
+            problems.append((lp, last or "所有记录链接都取不到"))
+
+    total = sum(tally.values())
+    print(f"  {ws_dir.name} —— 账本 {total} 行：" +
+          "　".join(f"{k} {v}" for k, v in sorted(tally.items())))
+    for lp, why in problems[:15]:
+        print(f"   ✗ {lp[:52]:<52} {why}")
+    if len(problems) > 15:
+        print(f"   …另有 {len(problems) - 15} 条")
+
+    if tally["取回失败"] or tally["台账无校验和·不取"]:
+        return 1
+    if tally["取不回·无记录链接"] or tally["台账无 local_path"]:
+        print(f"  ⚠ **仍有 {tally['取不回·无记录链接'] + tally['台账无 local_path']} 份取不回**"
+              f"——这不是「都齐了」，是射程到头了")
+        return 3
+    return 0
+
+
 def self_test() -> int:
     n = [0]
     fail = 0
@@ -279,6 +390,59 @@ def self_test() -> int:
         ok7 = verify(m, root) == 1
         note("文件删掉 → 报「文件不在」（退出 1）", ok7)
         fail += not ok7
+
+
+    print("══ --restore 三档对照（走真取回路径，用 file:// 不出网）══")
+    import tempfile
+
+    def _mkws(root, body, ledger_checksum, with_url):
+        src = root / "origin.txt"
+        src.write_bytes(body)
+        ws = root / "ws"
+        (ws / "evidence").mkdir(parents=True)
+        (ws / "raw").mkdir(parents=True)
+        (ws / "evidence" / "source-ledger.jsonl").write_text(json.dumps(
+            {"source_id": "src-x", "local_path": "raw/a.txt", "checksum": ledger_checksum},
+            ensure_ascii=False) + "\n", encoding="utf-8")
+        if with_url:
+            (ws / "raw" / "_fetch-manifest.json").write_text(json.dumps(
+                {"记录": [{"file": "a.txt", "source_url": src.as_uri(), "sha256": ledger_checksum}]},
+                ensure_ascii=False), encoding="utf-8")
+        return ws
+
+    body = b"hello corpus, this is the one true original\n"
+    good = hashlib.sha256(body).hexdigest()
+
+    with tempfile.TemporaryDirectory() as td:
+        ws = _mkws(pathlib.Path(td), body, good, True)
+        rc = restore(ws)
+        got = ws / "raw" / "a.txt"
+        okA = rc == 0 and got.is_file() and got.read_bytes() == body
+        note("正对照：校验和对上 ⇒ rc=0 且落盘字节与原件相同", okA)
+        fail += not okA
+
+    with tempfile.TemporaryDirectory() as td:
+        ws = _mkws(pathlib.Path(td), body, "0" * 64, True)
+        rc = restore(ws)
+        okB = rc == 1 and not (ws / "raw" / "a.txt").exists()
+        note("**反对照**：校验和对不上 ⇒ rc=1 且没有落盘（「下到什么存什么」的退化实现在此必红）", okB)
+        fail += not okB
+
+    with tempfile.TemporaryDirectory() as td:
+        ws = _mkws(pathlib.Path(td), body, good, False)
+        rc = restore(ws)
+        okC = rc == 3 and not (ws / "raw" / "a.txt").exists()
+        note("射程档：无记录链接 ⇒ rc=3（**「取不回」不许混成「都齐了」**）", okC)
+        fail += not okC
+
+    with tempfile.TemporaryDirectory() as td:
+        ws = _mkws(pathlib.Path(td), body, good, False)
+        (ws / "raw" / "_fetch-manifest.json").write_text(json.dumps(
+            {"记录": [{"file": "a.txt", "identifier": "someIAitem", "sha256": good}]},
+            ensure_ascii=False), encoding="utf-8")
+        okD = restore(ws) == 3
+        note("只有 identifier 没有链接 ⇒ 仍是「取不回」，**不去拼下载路径**", okD)
+        fail += not okD
 
     print(f"\n  ✓ 自测通过（{n[0]}/{n[0]}）" if not fail
           else f"\n  ✗ {fail}/{n[0]} 项未过——本件的输出不作数")
