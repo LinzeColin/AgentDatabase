@@ -242,3 +242,44 @@ _ledgers/（含 usage_stats 实测 token）；达到 600 或 20% 周额度目标
 5. cron 三件套安装后，峰谷旗标与每日快照在日志里可见。
 
 （本文件由 DeepSeek V5 于 2026-08-19 复审后撰写；所有数字可复核，命令均在正文。）
+
+---
+
+# ★ v2 修订（2026-08-19 同日晚 · 用户四要点 + 联网核实）
+
+## 1. 峰谷定义纠正（联网核实，v4 移交文档的旧窗口已过时）
+
+官方 2026-08-16 16:00 UTC 起分时价：**高峰 = 北京 9:00–12:00、14:00–18:00 = 悉尼 11:00–14:00、16:00–20:00（7h）**，其余 17h 空闲。
+来源：api-docs.deepseek.com/zh-cn/quick_start/pricing（2026-08-19 抓取）。v4 文档引用的 00:30–08:30 UTC 是旧政策。
+用户定义与官方一致。价格：Pro 输出 谷 ¥13.5 / 峰 ¥27.0（每百万 tokens）；Flash 输出 谷 ¥4.5 / 峰 ¥9.0。
+本机实测（usage_stats）：4.5 亿输入 token 共 ¥76.59，缓存命中率 98.4%，93.6% 消费在谷时。
+
+## 2. 每日同步已落地（cron，已装并首跑验证）
+
+- `~/.dsh/cron/daily-sync.sh`（每日 09:00 谷时）：git fetch + ff-only/安全合并（冲突 abort）+ 白名单 commit +
+  fail-closed push（validate_group passed 才推）+ _ledgers → ~/Downloads/蒸馏 同步 + 快照日志。
+- 首次运行已完成：合并远端 15 提交（KM归档/dual_plane，零重叠无冲突）、修复 npm PATH（~/.local/bin）、
+  **已 push origin/main（canonical gate quick PASS）**；本机与 GitHub 现完全同步（ahead 0）。
+- 峰谷旗标 cron：10:55/15:55 peak.on、14:05/20:05 valley.on + OS 提醒。
+- 日志体系：GOAL-STATE.json（实时进度）、GOAL-LOG.md（每轮：时间/人物/动作/两个数/token）、
+  每日复盘 _daily-review-YYYY-MM-DD.md（谷时首轮写）、额度台账（usage_stats 实测）。
+
+## 3. goal prompt 压缩为 20–50 汉字（细节移入契约）
+
+`蒸馏至600人：每轮现算上报包内人数；连续3轮无新增只许出货；谷时全力峰时轻维护；每3-5人迭代蒸馏器、每3-5组迭代团队；细则见_ledgers/GOAL-CONTRACT-v5.md`
+（49 汉字；契约 = _ledgers/GOAL-CONTRACT-v5.md，goal 每轮开头重读。）
+
+## 4. subagent 模型路由配置（已写入，需冷启动生效）
+
+- `~/.dsh/profiles/desktop/cordis.patch.yml`（备份 .bak-260819，YAML 已验证）：
+  - tool-subagent 默认 agentOptions.model = deepseek-v4-flash（routine 批量）；
+  - 新增 tool-subagent-pro（toolName: subagent-pro，model = deepseek-v4-pro，判断性委派）。
+- 依据：dsh-tool-subagent README（每个实例一个 provider→toolName；模型不暴露 per-call 选择）；
+  agent-preset code 的 preset 格式（provider: spawn / backgroundMode: continuable）。
+- ★ 需冷启动验证（AGENTS.md §8.3）：完全退出 App 再打开；启动失败按 §8.4 看 stderr 第一行 loader entry；
+  回滚 = 恢复 .bak-260819。本会话不擅自重启。
+- 兜底通道：workflow agent() 的 per-agent provider/model 覆盖（无需改 profile，已验证工具能力）。
+
+## 5. 其余沿用 v1：P0 解锁 11 在途 → P1 补齐 600 队列 → P2 蒸馏循环 → P3 双 skill 迭代；
+模型判断维持 Pro Max 主循环 + Flash 下放；验收口径同 v1。
+
