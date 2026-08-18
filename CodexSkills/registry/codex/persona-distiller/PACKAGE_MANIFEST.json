@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "3e624c4277ba52bb9e7e7acae273b7515a975e621a0fcb085d8b1281770e5818",
-      "size_bytes": 360032
+      "sha256": "b80f43ddba4fc3e516f3810c1117238fd5f78fbffc9e439cf5566a94b750e108",
+      "size_bytes": 362166
     },
     {
       "path": "CONTRIBUTING.md",
@@ -2416,8 +2416,8 @@
     },
     {
       "path": "tests/test_group_contract.py",
-      "sha256": "d610b17a88bf15565740c54f09230556a58b94c79c22cf411dc6666c8b0ff9f9",
-      "size_bytes": 11535
+      "sha256": "4c1b6dbe6240dfe9fb3cc7a71cc61b28007e851c6cbe0a3d19f888d17075f4b8",
+      "size_bytes": 13926
     },
     {
       "path": "tests/test_identity_routing.py",

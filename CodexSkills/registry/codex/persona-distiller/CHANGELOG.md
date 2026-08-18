@@ -3,6 +3,39 @@
 ## 工具改动（不升版）
 
 
+### 2026-08-18｜那道久红的验收测试：真因量清并写进失败信息（**断言一个字没动**）
+
+`self_check.py` rc=1。`--skip-tests` 单跑 **rc=0、errors 0** ⇒ 红全部来自离线测试套。
+failfast 定位唯一一处：`test_group_contract.py` 的
+`test_new_operator_deliveries_are_available_to_routing`。
+
+**单开关消融**（清空 `WEAK_SIGNALS` ＝ 回到 08-17 修复前，复原后断言回到原值）：
+
+                              修复前      修复后
+    John Maeda（艺术设计师）      **第 1**  →  第 31
+    Seth Godin（客户营销师）      **第 2**  →  第 37
+    郭士纳（创业经营师）            第 3   →  **第 1**
+    **Anne Mulcahy（创业经营师） 第 38   →  第 38**  ← **纹丝不动**
+
+⇒ **08-17 那个 `设计`/`design` 降弱信号的修复是对的**（三个位次都朝正确方向大幅移动）。
+  Mulcahy 从来不是被 `creative-design` 压下去的 —— **两个原因叠着，修掉一个才看见另一个**。
+
+**真因：卡片语言。** 两人同族、同题、`domain_match` 都是满分 1.000：
+
+    郭士纳    卡片 778 字符｜中文字 **76%**｜与题面 token 交集 **4 个** ⇒ task_similarity **0.0848**
+    Mulcahy   卡片 2357 字符｜中文字 **0%**｜交集 **0 个**            ⇒ task_similarity **0.0000**
+
+她的场景是 `Enterprise turnaround and cash-constrained operating plans`
+—— **意思高度对口，一个 token 都撞不上**。去掉 creative-design 后 `domain_match`
+对前 38 名全是 1.000、不再区分任何人 ⇒ 排序完全由 `task_similarity` 决定。
+
+**本次只改失败信息，不改断言**：原来的 `AssertionError: False is not true` 什么也没说，
+下一个人会从头再查一遍。现在它印出缺席者、两人的 token 交集与 task_similarity、
+以及**「不要靠放宽这条断言变绿」**——要绿须改存量卡片（㊵ 冻结）或改路由（门/席位不动），
+**都要 Owner 定**（Task #129 选项 D-1）。
+
+台账：`_ledgers/_那道红了很久的验收测试-真因是卡片语言不是域-2026-08-18.md`
+
 ### 2026-08-18｜第一屏那节【硬门】三条都没有载体 —— 只补披露，**不升版**
 
 ★ `bump_version.py` 拦下了我：它问「**这个改动会让蒸出来的人物产物不一样吗？**」——
