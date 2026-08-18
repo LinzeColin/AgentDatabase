@@ -79,10 +79,10 @@ transformed**" [src-779abd622352]。
   2008 冬季刊系与 Rabbi Daniel S. Brenner **合署**（其中任何一句都不能单独归给他）、
   2004 两期切片实为封底基金会使命声明。
 
-## Proposed Holdout cases
 
-holdout-A（第三方转述的市场判断稿）（Globes 访谈转述）用于检验「他的市场判断表述方式」；
-研究阶段不读正文。
+
+只存在于密封记录里，**不在建模者读得到的任何文件中** —— 说出「存在一份关于某某的
+取不到的材料」本身就足以定位那道题。
 
 ## Handoff to adjudication
 

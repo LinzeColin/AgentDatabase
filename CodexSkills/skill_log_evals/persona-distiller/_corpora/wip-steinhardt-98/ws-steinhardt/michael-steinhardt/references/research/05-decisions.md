@@ -106,10 +106,10 @@ politicians was, for me at least, a very empiric experience. I didn't enjoy it �
 - **收购古物的决策过程**：地检事实陈述书记录了交易对手与金额
   [src-bd3d405807f7] [src-f6baa8fdbf2a]，但他本人的取舍理由无一手件。
 
-## Proposed Holdout cases
 
-holdout-A（第三方转述的市场判断稿）（2016 年市场判断转述）——检验「判断 + 仓位」这一表述模式
-是否在产物中被泛化成他从不持有的规则。研究阶段不读正文。
+
+只存在于密封记录里，**不在建模者读得到的任何文件中** —— 说出「存在一份关于某某的
+取不到的材料」本身就足以定位那道题。
 
 ## Handoff to adjudication
 

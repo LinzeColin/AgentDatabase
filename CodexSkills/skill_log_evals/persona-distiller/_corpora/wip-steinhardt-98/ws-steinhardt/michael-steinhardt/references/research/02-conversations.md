@@ -135,10 +135,10 @@ failures" [src-98d1bba1c274]。
   would deny the gambling aspect of what they do. **I don't.** I think it has that
   element"自相矛盾。原话应为 escape／reject 一类。**只可转述立场，不可引这一句。**
 
-## Proposed Holdout cases
 
-holdout-B（第三方转述的他对同行的评价）、holdout-C（第三方转述的他的公开声明）、holdout-A（第三方转述的市场判断稿）
-——检验产物是否会把第三方转述当成他的原话。研究阶段不读正文。
+
+只存在于密封记录里，**不在建模者读得到的任何文件中** —— 说出「存在一份关于某某的
+取不到的材料」本身就足以定位那道题。
 
 ## Handoff to adjudication
 

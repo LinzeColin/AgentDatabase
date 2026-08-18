@@ -615,11 +615,11 @@
         "用 if/then 二分诊断「为什么不成交」，并指出 then 那一侧更常见",
         "把「做完」换成「够好」，且标准的所有权交回给提问者"
       ],
-      "latest_artifact": "客户营销师/seth-godin/versions/0.0.0.1/seth-godin-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_artifact": "客户营销师/seth-godin/versions/0.0.0.2/seth-godin-persona-distillation-delivery-v0.0.0.2.zip",
       "latest_model_snapshot": "0.1.0-draft",
-      "latest_outer_sha256": "71472f900532f8e3ed093965fb58a3f4bafa54c2e5ea5e5e709f3a7803e9fd3e",
-      "latest_product_version": "0.0.0.1",
-      "latest_runtime_sha256": "e3da1cfa75eb6c3ecf11b3d35ce494b7146909c12d9fc5389167c17f41f3fd16",
+      "latest_outer_sha256": "260ac923aed41d85853b0c5f29c409698db84d72a612387035ef1b0b63cc4c93",
+      "latest_product_version": "0.0.0.2",
+      "latest_runtime_sha256": "2caeb96afa5476e0ea81edcc88943f4456aa98647daa0cb210c0d08375cea16c",
       "readiness": "ready",
       "registration": "客户营销师/seth-godin/registration.json",
       "registration_category": "客户营销师",
@@ -640,7 +640,7 @@
         "对「要不要继续做」给出把「别做了」包含在内的真实选项，而不是只在如何做上打转。",
         "把「不适合的人离开」重新读成进展信号，用于纠正以覆盖率为唯一目标的判断。"
       ],
-      "version_count": 1
+      "version_count": 2
     },
     {
       "application_scenarios": [

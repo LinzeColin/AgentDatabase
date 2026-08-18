@@ -23,6 +23,21 @@
       "runtime_sha256": "e3da1cfa75eb6c3ecf11b3d35ce494b7146909c12d9fc5389167c17f41f3fd16",
       "runtime_size_bytes": 81874,
       "size_bytes": 89073
+    },
+    {
+      "artifact": "versions/0.0.0.2/seth-godin-persona-distillation-delivery-v0.0.0.2.zip",
+      "artifact_created_at": "2026-08-01T11:20:26Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "260ac923aed41d85853b0c5f29c409698db84d72a612387035ef1b0b63cc4c93",
+      "product_version": "0.0.0.2",
+      "runtime_artifact": "runtime/seth-godin-persona-skill-v0.0.0.2.zip",
+      "runtime_sha256": "2caeb96afa5476e0ea81edcc88943f4456aa98647daa0cb210c0d08375cea16c",
+      "runtime_size_bytes": 84009,
+      "size_bytes": 92426
     }
   ]
 }
