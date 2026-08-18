@@ -83,13 +83,37 @@ def load(paths):
     """
     by_seat = collections.defaultdict(list)
     by_suite_seat = collections.defaultdict(lambda: collections.defaultdict(list))
+
+    # ★★★★★ 2026-08-19：**逐对格式的量纲不是恒定的 0–10，要从数据推。**
+    #   实测：Barton #117 的工作台 `results.jsonl` 是 **0–1** 制
+    #   （`candidate: 0.7966`），而 Fleming/Nightingale/Osler/Virchow 四人是 0–10
+    #   （`candidate: 8.4031`）——逐行核过，两份文件是同一批读数、比值恰好 10。
+    #   按「逐对一律 0–10」读 Barton，上限算出 **0.0895**（真值 0.8950），
+    #   quick 0.80 / standard 0.88 / deep 0.93 **三道门全部报「够不着」**——
+    #   一个永远变不绿的红。[[a-red-that-can-never-turn-green-is-not-a-signal]]
+    #   ★ 射程要说清：发布门读的是**扁平**那份，所以**正常流水线上不发生**；
+    #     把本工具单独指向工作台那份才会。[[proved-the-mechanism-never-asked-if-it-happened]]
+    _pair_vals = []
     for p in paths:
         for line in pathlib.Path(p).read_text(encoding="utf-8").splitlines():
             if not line.strip():
                 continue
             r = json.loads(line)
-            if "candidate" in r and "seat" in r:                 # 逐对格式，0–10
-                seat, score = r["seat"], float(r["candidate"])
+            if "candidate" in r and "seat" in r:
+                _pair_vals.append(float(r["candidate"]))
+    # ≥8 个读数且全部 ≤1.0 ⇒ 判为 0–1 制。样本太少不敢判，宁可按原样读。
+    _pair_scale = 10.0 if (len(_pair_vals) >= 8 and max(_pair_vals) <= 1.0) else 1.0
+    if _pair_scale != 1.0:
+        print(f"  ★ 逐对表实测最大值 {max(_pair_vals):.4f} ≤ 1.0 且有 {len(_pair_vals)} 个读数"
+              f" ⇒ 判为 **0–1 制**，按 ×10 归一（默认按 0–10 读）")
+
+    for p in paths:
+        for line in pathlib.Path(p).read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            r = json.loads(line)
+            if "candidate" in r and "seat" in r:                 # 逐对格式，量纲现推
+                seat, score = r["seat"], float(r["candidate"]) * _pair_scale
             elif r.get("system") == "candidate" and "overall_score" in r:  # 扁平，0–1
                 seat, score = r.get("judge_id", "?"), float(r["overall_score"]) * 10.0
             else:
@@ -120,6 +144,36 @@ def self_test() -> int:
     print(f"  {'✓ 抓到' if caught else '✗ 漏掉'} 上限 {c:.3f} < deep 的 "
           f"{SUITE_GATES['deep']['fact-preservation']} → 够不着")
     fail += not caught
+
+    print("\n══ 量纲现推 ══")
+    import tempfile as _tf, json as _j
+    def _mk(vals):
+        f = pathlib.Path(_tf.mkdtemp()) / "results.jsonl"
+        f.write_text("\n".join(_j.dumps({"case_id": f"q-{i:02d}", "seat": "D",
+                                          "candidate": v, "baseline": v,
+                                          "suite": "voice"}) for i, v in enumerate(vals)) + "\n",
+                     encoding="utf-8")
+        return [str(f)]
+    b1, _ = load(_mk([0.93, 0.86, 0.90, 0.88, 0.79, 0.81, 0.84, 0.77]))   # 0–1 制
+    c1, _ = ceiling(b1)
+    ok = abs(c1 - 0.93) < 1e-3
+    print(f"  {'✓' if ok else '✗'} 0–1 制的逐对表归一后上限 {c1:.4f}（不归一会是 0.0930）")
+    fail += not ok
+    b2, _ = load(_mk([9.3, 8.6, 9.0, 8.8, 7.9, 8.1, 8.4, 7.7]))          # 0–10 制
+    c2, _ = ceiling(b2)
+    ok2 = abs(c2 - 0.93) < 1e-3
+    print(f"  {'✓' if ok2 else '✗'} ★ 反对照：0–10 制**不许**被再乘 10，上限 {c2:.4f}（应 0.9300）")
+    fail += not ok2
+    # ★★ 最要紧的一条：**同一批读数换个量纲，上限必须一模一样**。
+    #    单看某一边的数值对不对，看不出「两边不等价」这件事。
+    ok23 = abs(c1 - c2) < 1e-9
+    print(f"  {'✓' if ok23 else '✗'} ★★ 同一批读数写成 0–1 与 0–10，上限必须相等：{c1:.4f} vs {c2:.4f}")
+    fail += not ok23
+    b3, _ = load(_mk([0.9, 0.8]))                                         # 样本太少
+    c3, _ = ceiling(b3)
+    ok3 = abs(c3 - 0.09) < 1e-3
+    print(f"  {'✓' if ok3 else '✗'} ★★ 反对照：只有 2 个读数**不敢判**，按原样读，上限 {c3:.4f}")
+    fail += not ok3
 
     print("\n══ 反向对照 ══")
     # ① 两席都能给到 9.5 → 上限 0.95，够得着 → **不得报**
