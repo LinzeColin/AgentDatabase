@@ -94,6 +94,10 @@ import json
 import pathlib
 import re
 import sys
+import time
+import urllib.error
+import urllib.request
+import xml.etree.ElementTree as ET
 
 URL = re.compile(r"https?://[^\s\"')]+")
 ITEM = re.compile(r"\bitem\s+[\w.\-]{6,}|\bark:/|\bdoi:|10\.\d{4,}/|hdl\.handle|\bMS\s?\d+|\bcatalog(?:ue)?\s+no")
@@ -322,6 +326,68 @@ def restore(ws_dir: pathlib.Path, *, timeout: int = 180) -> int:
     return 0
 
 
+
+GALLICA_UA = ("persona-distiller/1.0 (public-domain corpus retrieval; "
+               "https://github.com/LinzeColin/AgentDatabase)")
+
+def decode_alto(raw: bytes) -> str:
+    """★ 头里写 ISO-8859-1，字节却是 UTF-8 —— 先按 UTF-8 解，解不开才退 latin-1。"""
+    try:
+        return raw.decode("utf-8")
+    except UnicodeDecodeError:
+        return raw.decode("latin-1")
+
+def page_text(raw: bytes) -> str | None:
+    """从一页 ALTO 里抽正文；不是 ALTO 就返回 None（**不返回空串** —— 空串会被读成「这页没字」）。"""
+    text = decode_alto(raw)
+    # 去掉 XML 声明里的假编码，否则 ElementTree 会拿它再解一次
+    text = re.sub(r'^<\?xml[^>]*\?>', '<?xml version="1.0"?>', text, count=1)
+    try:
+        root = ET.fromstring(text)
+    except ET.ParseError:
+        return None
+    # ★ 光「解得开」不够：`<html>…</html>` 也是合法 XML，抽不出 String 就会返回 ''，
+    #   于是「这不是 ALTO」被读成「这页没字」。**根标签必须是 alto。**
+    #   （这一条是本件自测的反对照当场逼出来的，不是想出来的。）
+    if not root.tag.endswith("alto"):
+        return None
+    words = [el.get("CONTENT", "") for el in root.iter() if el.tag.endswith("String")]
+    return " ".join(w for w in words if w)
+
+def _http_get(url: str, timeout: int = 90) -> bytes:
+    req = urllib.request.Request(url, headers={"User-Agent": GALLICA_UA})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return resp.read()
+
+def fetch_book(ark: str, pages: range, delay: float = 4.0,
+               log=print) -> tuple[list[str], int, int]:
+    """按页取回。429 时退避 30／60／120 秒；仍失败就记这一页取不到，继续下一页。"""
+    out: list[str] = []
+    ok = bad = 0
+    for page in pages:
+        url = f"https://gallica.bnf.fr/RequestDigitalElement?O={ark}&E=ALTO&Deb={page}"
+        text = None
+        for attempt, backoff in enumerate((0, 30, 60, 120)):
+            if backoff:
+                time.sleep(backoff)
+            try:
+                text = page_text(_http_get(url))
+                break
+            except urllib.error.HTTPError as exc:
+                if exc.code != 429 or attempt == 3:
+                    log(f"   第 {page} 页 ✗ HTTP {exc.code}")
+                    break
+            except Exception as exc:                      # noqa: BLE001
+                log(f"   第 {page} 页 ✗ {type(exc).__name__}")
+                break
+        if text is None:
+            bad += 1
+        else:
+            ok += 1
+            out.append(text)
+        time.sleep(delay)
+    return out, ok, bad
+
 def self_test() -> int:
     n = [0]
     fail = 0
@@ -463,6 +529,34 @@ def self_test() -> int:
         note(f"`--restore` 从 **main() 入口**走得通（实得 {rc_main!r}）", okE)
         fail += not okE
 
+
+    print("══ Gallica ALTO 通道（.texteBrut 取不到时用它）══")
+    body = ('<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>'
+            '<alto xmlns="http://bibnum.bnf.fr/ns/alto_prod"><Layout>'
+            '<String CONTENT="RÉSISTANCE"/><String CONTENT="de"/><String CONTENT="l\'air"/>'
+            '</Layout></alto>').encode("utf-8")
+    got = page_text(body)
+    okG1 = got == "RÉSISTANCE de l'air"
+    note(f"正对照：头谎报 ISO-8859-1 而字节是 UTF-8 ⇒ 解出 'RÉSISTANCE'（实得 {got!r}）", okG1)
+    fail += not okG1
+
+    moji = body.decode("latin-1")
+    okG2 = "RÃ" in moji and "RÉSISTANCE" not in moji
+    note("**反对照**：同一批字节按声明的 latin-1 解**必然**是 mojibake（证明上一条不是碰巧）", okG2)
+    fail += not okG2
+
+    # ★★ 这一档第一次是红的：`<html>…</html>` 也是合法 XML，ET 解得开、抽出 0 个 String
+    #    ⇒ 返回 ''，于是「这不是 ALTO」被读成「这页没字」。加根标签断言才绿。
+    okG3 = page_text(b"<html><body>Acces interdit</body></html>") is None
+    note("**反对照**：网页外壳（合法 XML 但不是 ALTO）⇒ None 而不是 ''", okG3)
+    fail += not okG3
+
+    empty = ('<?xml version="1.0"?><alto xmlns="http://bibnum.bnf.fr/ns/alto_prod">'
+             '<Layout/></alto>').encode("utf-8")
+    okG4 = page_text(empty) == ""
+    note("空白页（合法 ALTO、零个 String）⇒ '' —— 与「取不到」区分得开", okG4)
+    fail += not okG4
+
     print(f"\n  ✓ 自测通过（{n[0]}/{n[0]}）" if not fail
           else f"\n  ✗ {fail}/{n[0]} 项未过——本件的输出不作数")
     return fail
@@ -473,6 +567,11 @@ def main() -> int:
     ap.add_argument("--corpora", type=pathlib.Path, help="_corpora 根目录")
     ap.add_argument("--out", type=pathlib.Path, help="清单落盘路径")
     ap.add_argument("--verify", type=pathlib.Path, help="拿这份清单去核 --corpora 那棵树")
+    ap.add_argument("--gallica-alto", metavar="ARK",
+                    help="从 Gallica 按 ALTO 逐页取一部书（.texteBrut 取不到时用这条）")
+    ap.add_argument("--pages", default="1-40", help="配合 --gallica-alto，如 1-149")
+    ap.add_argument("--out-text", type=pathlib.Path, help="--gallica-alto 的落盘路径")
+    ap.add_argument("--delay", type=float, default=4.0, help="每页间隔秒数（Gallica 连发 3 个即 429）")
     ap.add_argument("--restore", type=pathlib.Path,
                     help="按账本+仓里记过的链接把语料取回该工作区（核不过不落盘）")
     ap.add_argument("--self-test", action="store_true")
@@ -480,6 +579,19 @@ def main() -> int:
 
     if a.self_test:
         return 2 if self_test() else 0
+    if a.gallica_alto:
+        if not a.out_text:
+            ap.error("--gallica-alto 须配 --out-text")
+        lo, _, hi = a.pages.partition("-")
+        texts, ok, bad = fetch_book(a.gallica_alto, range(int(lo), int(hi or lo) + 1), a.delay)
+        body = "\n".join(texts)
+        print(f"  {a.gallica_alto}：取到 {ok} 页，取不到 {bad} 页，共 {len(body.split())} 词")
+        if not ok:
+            print("  ✗ **一页都没取到 —— 这是「未取」，不是「没有正文」**")
+            return 3
+        a.out_text.write_text(body + "\n", encoding="utf-8")
+        print(f"  ✓ 已写 {a.out_text}（{len(body.encode('utf-8'))} 字节）")
+        return 1 if bad else 0
     if a.restore:
         return restore(a.restore)
     if not a.corpora:

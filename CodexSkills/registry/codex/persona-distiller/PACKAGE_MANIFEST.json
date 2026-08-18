@@ -996,18 +996,13 @@
     },
     {
       "path": "references/pipeline/checkers/emit_corpus_pointer.py",
-      "sha256": "c4063c5f9e33d69f36278312b439857c4fbec43dca826685d7b36295c0aabefc",
-      "size_bytes": 22348
+      "sha256": "cb48110280b4820644710ff07e53e18176bf24db793588dba75f0b9085da9c43",
+      "size_bytes": 27812
     },
     {
       "path": "references/pipeline/checkers/emit_lane_scope.py",
       "sha256": "506626a1e5fe1584be887ce267ae8ed9bf32b06acae46dfdcb662a9b4a182279",
       "size_bytes": 23175
-    },
-    {
-      "path": "references/pipeline/checkers/fetch_gallica_alto.py",
-      "sha256": "5bba677f55131c5358201b7e12c548d90c952ba1fc5155d4d3a07c7440b3c833",
-      "size_bytes": 7895
     },
     {
       "path": "references/pipeline/checkers/finalize_release.py",
@@ -1816,8 +1811,8 @@
     },
     {
       "path": "scripts/emit_corpus_pointer.py",
-      "sha256": "c4063c5f9e33d69f36278312b439857c4fbec43dca826685d7b36295c0aabefc",
-      "size_bytes": 22348
+      "sha256": "cb48110280b4820644710ff07e53e18176bf24db793588dba75f0b9085da9c43",
+      "size_bytes": 27812
     },
     {
       "path": "scripts/emit_lane_scope.py",
@@ -1828,11 +1823,6 @@
       "path": "scripts/eval_runner.py",
       "sha256": "0aeb5f1cc83569d53f8a6c475bc93f9f07ee72a2c1b2766c46bfaf81336fa690",
       "size_bytes": 14056
-    },
-    {
-      "path": "scripts/fetch_gallica_alto.py",
-      "sha256": "5bba677f55131c5358201b7e12c548d90c952ba1fc5155d4d3a07c7440b3c833",
-      "size_bytes": 7895
     },
     {
       "path": "scripts/finalize_release.py",
