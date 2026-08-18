@@ -1383,12 +1383,29 @@
       "reason": "可用一手 **7 部 < quick 门 8**，**差整整 1 部**。\n7 部已全部落盘（3,419,266 B，逐份 sha256 在 `_fetch-manifest.json`）：\n  1879 Notice sur le pont du Douro／1888 Les grandes constructions métalliques／\n  1888 Notice sur le viaduc de Garabit／1889 Mémoire présenté à l'appui du projet définitif／\n  1900 Travaux scientifiques／1900 La Tour de 300 Mètres／1902 La Tour Eiffel en 1900\n★ **没有为凑数做三件事**：不把副本（Garabit ×2、Travaux ×2）算成两源；不把 226 B 读不出内容的 `letters00eiff` 算进去；**不把两部合集拆成多篇**——落盘后看结构，二者都是分章的专著（扉页 `EXÉCUTÉS A LA TOUR… DE 1889 A 1900`／`IL A ÉTÉ TIRÉ DE CET OUVRAGE 500 Exemplaires`），**章不是独立作品**。这个结论与我的利益相反。",
       "★ 四条通道全试过": "archive.org 无此条目（按书名 `title:(\"resistance de l air\")` numFound=0）／**Gallica SRU 403 Access Interdit**／**Google Books API 429 配额耗尽**／**HathiTrust 要 OCLC/LCCN 而标识符要靠前三条去查**——★ 最后这条与 Mehl #137 卡住的地方一模一样，说明是通道的性质不是运气。",
       "unblock_todo": [
-        "① 换出口走 Gallica：`gallica.bnf.fr` 作者页 `Eiffel, Gustave (1832-1923)`；目标是 1910《La résistance de l'air et l'aviation》或 1907／1911《Recherches expérimentales sur la résistance de l'air》",
-        "② **只要再取到 1 部，quick 的 8 源即成立**——语料已在仓里，不必重抓",
-        "③ 同名护栏已做好（Eiffel 65 占了检索命中的一半以上），可直接复用"
+        "★ **① 已复探（2026-08-18）**：Gallica 书目通了（403 是 UA 过滤），1907/1910/1911/1913 四部都在，**但 `.texteBrut` 取不到正文** ⇒ 仍差那 1 部。",
+        "② **只要再取到 1 部正文，quick 的 8 源即成立** —— 已有 7 部在仓里，不必重抓。",
+        "③ 同名护栏已做好（Eiffel 65 占了检索命中的一半以上），可直接复用。",
+        "④ **正文改走 IIIF / ALTO，不要再试 `.texteBrut`**（三种形式返回同一个网页外壳）。"
       ],
       "处置类": "①＋⑤ 一手规模不够 **叠加** 通道受限（差的那 1 部四条通道全不通）",
-      "★ 处置类的原键": "class"
+      "★ 处置类的原键": "class",
+      "★ 2026-08-18 复探（Gallica）": {
+        "① 403 的真因": "**不是访问控制，是 User-Agent 过滤。** 裸 curl 打 SRU 得 403；换成如实标明身份的 UA（`persona-distiller-probe/1.0 (…contact:…)`）**同一 URL 得 200、59 KB**。⇒ 记录里「Gallica SRU 403 Access Interdit」**已证伪** —— 下一个人不必再去打那个 403。",
+        "② 书目侧实测": "`dc.creator all \"Eiffel Gustave\"` → **numberOfRecords = 32**；本页 32 条里 **role=`Auteur du texte` 且出版年 ≤1930 的 14 条**（1885–1913，法文原著）。★ 未收窄的 `gallica all \"Eiffel Gustave\"` 是 9676 条，里面大量是**关于**他的（Couture 的圆舞曲、Agence Rol 的照片）—— **与他有关 ≠ 他写的**，必须按 creator+role 收窄。",
+        "③ `unblock_todo ①` 点名的那几部**都在**": [
+          "1907 Recherches expérimentales sur la résistance de l'air（ark:/12148/bpt6k5675046x）",
+          "1910 Installation d'un laboratoire d'aérodynamique（ark:/12148/bpt6k5674999v）",
+          "1911 La Résistance de l'air et l'aviation（ark:/12148/bd6t57749157）",
+          "1913 Recherches expérimentales…（ark:/12148/bd6t5403097c）"
+        ],
+        "④ ★★★ 但正文没取到 —— **仍不解锁**": "`.texteBrut` 三种形式（整册 / `/f1` / `/f7n20`）**都返回逐字节相同的 50212 B 网页外壳**：去掉 script/style 后净文本仅 2309 字符，`résistance|expériences|aérodynamique|vitesse|plaque|mètres` **一个都没命中**；对页范围不敏感本身就证明它不是正文。**书目命中 ≠ 正文取得到** —— 本条延后的解锁条件是「再取到 1 部」，书目命中不算取到。",
+        "⑤ 下一步（给下一个人）": [
+          "**不要再打 403**：带 UA 即可读 SRU。",
+          "正文改走 **IIIF**（`https://gallica.bnf.fr/iiif/{ark}/manifest.json`）或 OCR 的 ALTO 端点，而不是 `.texteBrut`；取到后**先数法文实词命中再说取到了**。",
+          "只要任意 1 部拿到正文，quick 的 8 源即成立（已有 7 部在仓里，不必重抓）。"
+        ]
+      }
     },
     {
       "name": "Fazlur Rahman Khan",
