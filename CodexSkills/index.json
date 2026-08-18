@@ -6,8 +6,8 @@
     "claude": "Claude Skill（Anthropic 侧）",
     "agents": "Agent Skill（跨工具通用目录）"
   },
-  "skill_instance_count": 103,
-  "unique_slug_count": 87,
+  "skill_instance_count": 105,
+  "unique_slug_count": 89,
   "skills": [
     {
       "slug": "agent-reach",
@@ -1038,6 +1038,26 @@
       "entry": "registry/agents/use-railway/SKILL.md",
       "file_count": 19,
       "size_bytes": 499762
+    },
+    {
+      "slug": "KMMedia-Archive",
+      "source": "agents",
+      "name": "KMMedia-Archive",
+      "description": "钉钉群聊图片/视频的全量扫描 + 增量归档一体化流水线（KMVideo）。十阶段一条命令跑完：扫描归档 → 规格探测 → 缩略图 → 感知哈希去重 → 本地标注 → 幂等改名 → 素材登记表双格式 → 四处落地（SMB/本机/KMOS 公开仓/Private-Database）→ 自验收 → 产能汇总。v0.2.1 起同时识别以「文件」形式发送的音视频（走 dws drive download）。文档类文件归 KMFile-Archive。",
+      "category": "业务流程",
+      "entry": "registry/agents/KMMedia-Archive/SKILL.md",
+      "file_count": 3,
+      "size_bytes": 119941
+    },
+    {
+      "slug": "KMFile-Archive",
+      "source": "agents",
+      "name": "KMFile-Archive",
+      "description": "钉钉群聊文件（文档）的全量扫描 + 增量归档一体化流水线（KMFile）。传输层走 dws drive download --node <fileId>，用服务端 md5 做精确去重与逐份完整性复核。十阶段：扫描归档 → 规格探测 → 正文抽取（PyMuPDF/zipfile/textutil，零新增依赖）→ md5 去重 → 本地三路标注（文件名/消息上下文/正文，不调任何外部 agent）→ 幂等改名 → 文件登记表双格式 → 四处落地 → 自验收 → 产能汇总。音视频不落地，只出待转 KMVideo 清单。",
+      "category": "业务流程",
+      "entry": "registry/agents/KMFile-Archive/SKILL.md",
+      "file_count": 3,
+      "size_bytes": 127070
     }
   ]
 }
