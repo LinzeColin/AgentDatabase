@@ -14,11 +14,13 @@
 from __future__ import annotations
 
 import argparse
+import atexit
 import csv
 import json
 import os
 import re
 import subprocess
+import tempfile
 import sys
 import threading
 import time
@@ -29,6 +31,8 @@ from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import archive_internal_files as aif  # noqa: E402
+
+ARCHIVER = aif
 
 TIMEZONE = aif.TIMEZONE
 SMB_ROOT = aif.SMB_ROOT
@@ -235,10 +239,128 @@ def load_handoffs(groups: list[str]) -> list[dict]:
     return list(out.values())
 
 
+# ---------- 运行前置：并发锁 / SMB 健康自检 / 动态群名单 ----------
+
+def acquire_workdir_lock(workdir: Path) -> None:
+    """同一 workdir 只允许一个 pipeline 实例。
+
+    实测事故：cron 每 30 分钟触发一次，而全量要跑 1 小时以上 —— 21:06 的主实例
+    （rename 阶段）和 21:30 的 cron 新实例（scan 阶段）并存过，两个进程同时写
+    同一份 manifest 与登记表。这里用 pid 文件自锁，发现活着的同伴就直接退出。
+    """
+    lock = workdir / ".pipeline.lock"
+    if lock.is_file():
+        try:
+            pid = int(lock.read_text(encoding="utf-8").split()[0])
+        except (ValueError, OSError, IndexError):
+            pid = -1
+        if pid > 0 and pid != os.getpid():
+            alive = True
+            try:
+                os.kill(pid, 0)
+            except ProcessLookupError:
+                alive = False  # 只有「查无此进程」才算残留锁
+            except PermissionError:
+                alive = True   # 进程在，只是不归我管（别把 EPERM 当成已退出）
+            except OSError:
+                alive = True
+            if alive:
+                raise SystemExit(
+                    f"另一个 pipeline 实例仍在运行（pid={pid}，锁文件 {lock}）；"
+                    "本次直接退出，绝不并发写同一份 manifest 与登记表。")
+
+    lock.write_text(f"{os.getpid()} {now_sh().isoformat()}\n", encoding="utf-8")
+    atexit.register(lambda: lock.unlink(missing_ok=True))
+
+
+SMB_SLOW_SECONDS = float(os.environ.get("SMB_SLOW_SECONDS", "10"))
+
+
+def smb_health_check(groups: list[str]) -> dict:
+    """开跑前量一次 SMB，退化就把修复命令直接打出来。
+
+    实测结论：服务端是 OpenWRT 路由器上的 Samba（USB 外接硬盘）。所谓「白天不可用」
+    不是网络也不是时段问题，而是 **SMB 会话退化 + 卡死进程占管道**。挂载健康时
+    18k 目录枚举 4s、单文件读 0.04s、写 2MB 1s；退化时同样的枚举 90s+ 跑不完。
+    """
+    if not SMB_ROOT.is_dir():
+        return {"state": "unmounted", "hint": 'open "smb://GUEST:@192.168.0.1/share"'}
+    target, best = None, -1
+    for g in groups[:40]:
+        for sub in ("file", "photo", "video"):
+            d = SMB_ROOT / g / sub
+            if d.is_dir():
+                target = d
+                break
+        if target is not None:
+            break
+    if target is None:
+        target = SMB_ROOT
+    t0 = time.time()
+    try:
+        count = len(os.listdir(target))
+    except OSError as e:
+        return {"state": "error", "detail": str(e)}
+    elapsed = round(time.time() - t0, 2)
+    result = {"state": "ok" if elapsed <= SMB_SLOW_SECONDS else "degraded",
+              "listdir_seconds": elapsed, "entries": count, "path": str(target)}
+    if result["state"] == "degraded":
+        result["hint"] = (
+            "SMB 会话退化。修复三步："
+            "1) 写 ~/Library/Preferences/nsmb.conf："
+            "[default] dir_cache_max=300 dir_cache_min=240 max_dirs_cached=512 "
+            "notify_off=yes streams=no soft=yes；"
+            "2) diskutil unmount force /Volumes/share && "
+            'open "smb://GUEST:@192.168.0.1/share" && sleep 12；'
+            "3) 用 sample 查是否有进程阻塞在 stat，有就杀掉。")
+        log(f"⚠ SMB 健康自检 degraded: listdir {count} 项耗时 {elapsed}s（阈值 {SMB_SLOW_SECONDS}s）")
+        log(f"  {result['hint']}")
+    else:
+        log(f"SMB 健康自检 ok: listdir {count} 项 {elapsed}s")
+    return result
+
+
+# Owner 明确说过「不管」的群（2026-08-16 原话：台泥贵港、生产付款、生产周例会不管）。
+# 单独列出来，动态枚举时归入「已排除」而不是「新增待确认」，避免每轮都重复问一遍。
+# 要重新纳入就把群名从这里删掉，或显式 --allow-title 传进归档器。
+DECLINED_TITLES = {
+    "台泥(贵港)",
+    "生产付款群",
+    "生产周例会工作群",
+}
+
+
+def discover_groups(existing: list[str]) -> tuple[list[str], list[str]]:
+    """dws 实时枚举 ∪ groups-file，返回 (合并名单, 新增群)。
+
+    静态白名单会漏群：实测旧名单 26 个，dws 实时 30 个 —— 台泥(贵港)、生产付款群、
+    生产周例会工作群三个新群一直没进过归档。新增群只报不自动收，
+    要显式 --include-new-groups 才纳入本轮。
+    """
+    result = ARCHIVER.dws_json(["chat", "list-all-conversations"])
+    live: list[str] = []
+    for c in result.get("conversations") or []:
+        if c.get("singleChat") is not False:
+            continue
+        title = str(c.get("title") or "").strip()
+        if not title:
+            continue
+        if c.get("groupType") == "INTERNAL_GROUP" or title in ARCHIVER.AUTHORIZED_NON_INTERNAL_TITLES:
+            live.append(title)
+    known = set(existing)
+    candidates = [t for t in dict.fromkeys(live) if t not in known]
+    declined = [t for t in candidates if t in DECLINED_TITLES]
+    new = [t for t in candidates if t not in DECLINED_TITLES]
+    if declined:
+        log(f"动态群名单：{len(declined)} 个群按 Owner 既往决定排除，不计入新增: {declined}")
+    return list(dict.fromkeys(existing + new)), new
+
+
 # ---------- 阶段一：扫描 + 增量归档 + 消息上下文 ----------
 
 def stage_scan(args, ctx) -> dict:
-    stats = {"archived": 0, "handoff_av": 0, "context_msgs": 0, "skipped_groups": []}
+    stats = {"archived": 0, "existing": 0, "unavailable": 0, "handoff_av": 0,
+             "context_msgs": 0, "skipped_groups": []}
     start = args.start or (now_sh() - timedelta(days=7)).strftime("%Y-%m-%d %H:%M:%S")
     archiver = Path(__file__).parent / "archive_internal_files.py"
     for g in ctx["groups"]:
@@ -249,12 +371,17 @@ def stage_scan(args, ctx) -> dict:
                    "--workers", "4", "--apply"]
             if args.no_private:
                 cmd.append("--smb-only")
+            if getattr(args, "since_manifest", False):
+                cmd.append("--since-manifest")
             r = subprocess.run(cmd, capture_output=True, text=True, timeout=7200)
             fin = [l for l in (r.stdout or "").splitlines() if "run_finished" in l]
             if fin:
                 try:
                     ev = json.loads(fin[-1])
                     stats["archived"] += int(ev.get("smb_saved", 0) or 0)
+                    # 幂等重跑时 smb_saved=0 是正常的（文件已在），不能当成失败。
+                    stats["existing"] += int(ev.get("skipped", 0) or 0)
+                    stats["unavailable"] += int(ev.get("unavailable", 0) or 0)
                     stats["handoff_av"] += int(ev.get("handoff_av", 0) or 0)
                     if ev.get("failures"):
                         stats["skipped_groups"].append((g, "failures>0"))
@@ -329,7 +456,8 @@ def stage_scan(args, ctx) -> dict:
                                     "time": str(ts), "before": before, "after": after},
                                    ensure_ascii=False) + "\n")
                 stats["context_msgs"] += 1
-    log(f"scan done: archived={stats['archived']} handoff_av={stats['handoff_av']} "
+    log(f"scan done: 新增={stats['archived']} 已存在={stats['existing']} "
+        f"钉钉侧已删={stats['unavailable']} handoff_av={stats['handoff_av']} "
         f"context={stats['context_msgs']} skipped={stats['skipped_groups']}")
     return stats
 
@@ -358,6 +486,68 @@ def parse_ctx_start(ctx, group: str, t_end: datetime) -> datetime:
     return t_end - timedelta(days=90)
 
 
+def reconcile_ledger(groups: list[str]) -> dict:
+    """账本自愈：磁盘已改名、账本却还记着旧名的记录，按 md5/大小认回来。
+
+    为什么必须有这条路径：改名的三道幂等闸都以「原名还在磁盘上」为前提，
+    一旦账本写丢（进程被杀、SMB 写失败、跨版本运行），rename 会因为原名已不在
+    而永远跳过，账本再也回不来 —— 表现就是 accept 的 md5 校验一直报 missing，
+    而磁盘上文件其实好好的（实测开明管理人员群 2 条正是如此）。
+    md5 存在 manifest 里，是精确判据，比按文件名猜可靠。
+    """
+    ledger = load_ledger()
+    repaired, ambiguous = [], []
+    by_group: dict[str, list[dict]] = defaultdict(list)
+    for m in load_files(groups):
+        if m.get("smb_status") == "complete":
+            by_group[m["_group"]].append(m)
+    for group, records in by_group.items():
+        directory = SMB_ROOT / group / "file"
+        if not directory.is_dir():
+            continue
+        names = [n for n in os.listdir(directory) if not n.startswith("._")]
+        claimed = {(ledger.get((group, os.path.basename(r.get("relative_path") or ""))) or {}).get("新文件名")
+                   for r in records}
+        claimed.discard(None)
+        by_size: dict[int, list[str]] = defaultdict(list)
+        for n in names:
+            try:
+                by_size[(directory / n).stat().st_size].append(n)
+            except OSError:
+                continue
+        for m in records:
+            old_name = os.path.basename(m.get("relative_path") or "")
+            if aif.resolve_current_path(m) is not None:
+                continue  # 已能定位，不用管
+            candidates = [n for n in by_size.get(int(m.get("size_bytes") or -1), [])
+                          if n != old_name and n not in claimed]
+            digest = str(m.get("md5") or "")
+            hit = None
+            if digest:
+                for n in candidates:
+                    if aif.md5_b64(directory / n) == digest:
+                        hit = n
+                        break
+            elif len(candidates) == 1:
+                hit = candidates[0]
+            if hit:
+                ledger[(group, old_name)] = {
+                    "项目": group, "原文件名": old_name, "新文件名": hit,
+                    "日期": str(m.get("message_time") or "")[2:10].replace("-", ""),
+                    "大小": str(m.get("size_bytes") or ""), "md5": digest,
+                }
+                claimed.add(hit)
+                repaired.append(f"{group}/{old_name} → {hit}")
+            elif candidates:
+                ambiguous.append(f"{group}/{old_name} ?= {candidates[:3]}")
+    if repaired:
+        save_ledger(ledger, Path(tempfile.gettempdir()))
+        log(f"账本自愈: 认回 {len(repaired)} 条 —— {repaired[:3]}")
+    if ambiguous:
+        log(f"账本自愈: {len(ambiguous)} 条大小相同但 md5 对不上，留给人工 —— {ambiguous[:3]}")
+    return {"repaired": len(repaired), "ambiguous": len(ambiguous)}
+
+
 # ---------- 阶段二：规格探测 ----------
 
 def stage_probe(args, ctx) -> dict:
@@ -366,6 +556,7 @@ def stage_probe(args, ctx) -> dict:
     这里只做磁盘核对：文件在不在、字节数对不对；缺 md5 的补算本机 md5。
     不再打一次 DWS —— 云成本红线：存在性判定不许高频轮询。
     """
+    healed = reconcile_ledger(ctx["groups"])
     specs = {}
     pf = ctx["workdir"] / "specs.jsonl"
     files = load_files(ctx["groups"])
@@ -398,8 +589,9 @@ def stage_probe(args, ctx) -> dict:
                     rec["md5"] = aif.md5_b64(p)
             specs[name] = rec
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
-    log(f"probe done: total={len(specs)} missing_on_disk={missing} size_mismatch={mismatched}")
-    return {"total": len(specs), "missing": missing, "mismatched": mismatched}
+    log(f"probe done: total={len(specs)} missing_on_disk={missing} size_mismatch={mismatched} "
+        f"账本自愈={healed}")
+    return {"total": len(specs), "missing": missing, "mismatched": mismatched, "ledger_healed": healed}
 
 
 # ---------- 阶段二续：正文抽取（零新增依赖） ----------
@@ -1070,15 +1262,19 @@ def stage_accept(args, ctx) -> dict:
     # 文件版独有：落地件 md5 必须与登记表（=服务端）一致
     md5_bad, md5_checked = [], 0
     files = {(m["_group"], os.path.basename(m.get("relative_path") or "")): m
-             for m in load_files(ctx["groups"])}
+             for m in load_files(ctx["groups"]) if m.get("smb_status") != "unavailable"}
+    gone = [m for m in load_files(ctx["groups"]) if m.get("smb_status") == "unavailable"]
     for r in reg_rows:
         m = files.get((r.get("项目"), r.get("原文件名")))
         if not m or not r.get("md5"):
             continue
         rel = m.get("relative_path") or ""
-        cur = SMB_ROOT / r.get("项目") / "file" / (r.get("文件名") or os.path.basename(rel))
+        # 三级定位：登记表现用名 → 改名账本 → manifest 原路径。
+        # 只用前两级里的一级都会在改名后误报 missing（DS 那轮 5 条 md5 fail 就是这么来的）。
+        cur = SMB_ROOT / str(r.get("项目") or "") / "file" / (r.get("文件名") or os.path.basename(rel))
         if not cur.exists():
-            cur = SMB_ROOT / rel
+            resolved = aif.resolve_current_path(m)
+            cur = resolved if resolved is not None else SMB_ROOT / rel
         if not cur.exists():
             md5_bad.append((r.get("原文件名"), "missing"))
             continue
@@ -1086,6 +1282,8 @@ def stage_accept(args, ctx) -> dict:
         if aif.md5_b64(cur) != r["md5"]:
             md5_bad.append((r.get("原文件名"), "md5 mismatch"))
     chk("落地件 md5 与服务端一致", not md5_bad, f"checked={md5_checked} bad={md5_bad[:5]}")
+    # 钉钉侧已删的是外部障碍，单列一项如实报，不混进 md5 失败里
+    chk("钉钉侧已删条目已登记待办", True, f"{len(gone)} 条（fileId 已留档，需人工在钉钉确认）")
 
     base = ctx["workdir"] / "manifest_mtime_base.jsonl"
     if base.exists():
@@ -1146,6 +1344,10 @@ def stage_report(args, ctx) -> dict:
         f"| 重复文件 | {dup_count} |",
         f"| 脱敏风险文件 | {sens} |",
         f"| 待转 KMVideo 音视频 | {len(handoffs)} |",
+        f"| 钉钉侧已删（外部障碍） | {sum(1 for m in load_files(ctx['groups']) if m.get('smb_status') == 'unavailable')} |",
+        f"| 名单外新增群 | {len(ctx.get('new_groups') or [])} {(ctx.get('new_groups') or [''])[:3]} |",
+        f"| SMB 健康自检 | {(ctx.get('smb_health') or {}).get('state', '未跑')} "
+        f"{(ctx.get('smb_health') or {}).get('listdir_seconds', '')} |",
         "", "| 扩展名 | 数量 |", "|---|---|",
     ] + [f"| {k or '(无)'} | {v} |" for k, v in by_ext.most_common()]
     txt = "\n".join(lines) + "\n"
@@ -1179,6 +1381,13 @@ def main() -> int:
     ap.add_argument("--page-size", type=int, default=100)
     ap.add_argument("--release-tag", default="", help="GitHub Release tag，空则跳过 Release 上传")
     ap.add_argument("--no-private", action="store_true")
+    ap.add_argument("--refresh-groups", action="store_true",
+                    help="跑前用 dws 实时枚举群列表，与 --groups-file 求并集；新增群只报不收。")
+    ap.add_argument("--include-new-groups", action="store_true",
+                    help="与 --refresh-groups 连用：把新发现的群纳入本轮归档（默认只报不收）。")
+    ap.add_argument("--since-manifest", action="store_true",
+                    help="每群起点改为该群 manifest 最后一个 complete 窗口的终点（增量提速）。")
+    ap.add_argument("--skip-smb-check", action="store_true", help="跳过开跑前的 SMB 健康自检。")
     args = ap.parse_args()
 
     groups = []
@@ -1191,6 +1400,26 @@ def main() -> int:
         return 2
     ctx = {"groups": groups, "workdir": Path(args.workdir)}
     ctx["workdir"].mkdir(parents=True, exist_ok=True)
+    acquire_workdir_lock(ctx["workdir"])
+
+    new_groups: list[str] = []
+    if args.refresh_groups and not args.only_group:
+        merged, new_groups = discover_groups(groups)
+        if new_groups:
+            (ctx["workdir"] / "新增群待确认.txt").write_text(
+                "\n".join(new_groups) + "\n", encoding="utf-8")
+            log(f"发现 {len(new_groups)} 个名单外的群: {new_groups}")
+            if args.include_new_groups:
+                groups = merged
+                log("  已按 --include-new-groups 纳入本轮")
+            else:
+                log("  本轮不收（要收加 --include-new-groups）；清单见 workdir/新增群待确认.txt")
+        else:
+            log("动态群名单：与实时枚举一致，无新增")
+    ctx["groups"] = groups
+    ctx["new_groups"] = new_groups
+    if not args.skip_smb_check:
+        ctx["smb_health"] = smb_health_check(groups)
 
     order = ["scan", "probe", "extract", "dedup", "label", "rename", "registry",
              "upload", "accept", "report"] if args.stage == "all" else [args.stage]

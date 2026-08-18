@@ -91,6 +91,26 @@ class PagingError(ArchiveError):
     pass
 
 
+class PermanentFileError(ArchiveError):
+    """DWS 侧已删除/已过期/返回空文件 —— 重试多少次都不会好。
+
+    窗口是从旧到新推进的，一个永久坏件按普通失败处理就会把该群后面所有窗口全堵死。
+    实测武汉开明 ~9 个文件（drive resource.notFound / 返回空文件）正是如此。
+    """
+
+
+EMPTY_FILE_MD5_B64 = "1B2M2Y8AsgTpgAmY7PhCfg=="
+PERMANENT_ERROR_MARKERS = (
+    "resource.notfound", "notfound", "not found", "404",
+    "已删除", "已过期", "已撤回", "不存在",
+)
+
+
+def is_permanent_failure(detail: str) -> bool:
+    lowered = detail.lower()
+    return any(marker in lowered for marker in PERMANENT_ERROR_MARKERS)
+
+
 @dataclass(frozen=True)
 class Group:
     title: str
@@ -134,6 +154,7 @@ class Counts:
     github_raw: int = 0
     github_index: int = 0
     skipped: int = 0
+    unavailable: int = 0
     handoff_av: int = 0
     failures: int = 0
     topic_replies: int = 0
@@ -149,6 +170,7 @@ class Counts:
         self.github_raw += other.github_raw
         self.github_index += other.github_index
         self.skipped += other.skipped
+        self.unavailable += other.unavailable
         self.handoff_av += other.handoff_av
         self.failures += other.failures
         self.topic_replies += other.topic_replies
@@ -173,7 +195,27 @@ def print_event(event: str, **fields: object) -> None:
     print(json.dumps({"event": event, **fields}, ensure_ascii=False, sort_keys=True), flush=True)
 
 
+def _resolve_binary(name: str) -> str:
+    """cron 下 PATH 被精简，`dws` 在 ~/.local/bin 会找不到（实测浪费 50 分钟重试）。"""
+    found = shutil.which(name)
+    if found:
+        return found
+    for candidate in (
+        Path.home() / ".local" / "bin" / name,
+        Path("/opt/homebrew/bin") / name,
+        Path("/usr/local/bin") / name,
+    ):
+        if candidate.is_file() and os.access(candidate, os.X_OK):
+            return str(candidate)
+    return name
+
+
+DWS_BIN = _resolve_binary("dws")
+
+
 def run_process(args: list[str]) -> subprocess.CompletedProcess[str]:
+    if args and args[0] == "dws":
+        args = [DWS_BIN, *args[1:]]
     return subprocess.run(
         args,
         cwd=ROOT if ROOT.is_dir() else Path.home(),
@@ -229,8 +271,13 @@ def extension_of(name: str) -> str:
 
 
 def read_manifest(path: Path) -> dict[str, dict]:
-    if not path.exists():
-        return {}
+    if not path.exists() or path.stat().st_size == 0:
+        backup = path.with_name(path.name + ".bak")
+        if backup.is_file() and backup.stat().st_size > 0:
+            print_event("manifest_recovered_from_backup", path=str(path))
+            path = backup
+        else:
+            return {}
     result: dict[str, dict] = {}
     lines = path.read_text(encoding="utf-8").splitlines()
     for index, line in enumerate(lines):
@@ -281,6 +328,17 @@ def manifest_text(records: dict[str, dict]) -> str:
     return "".join(json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n" for row in rows)
 
 
+MANIFEST_BACKUP_SUFFIX = ".bak"
+
+
+def manifest_partial_residue(folder: str) -> list[str]:
+    """`.partial-*` 残留 = 上一轮写 manifest 时被硬杀过，该群需要重跑核对。"""
+    directory = SMB_ROOT / folder
+    if not directory.is_dir():
+        return []
+    return sorted(p.name for p in directory.glob(f"*{MANIFEST_NAME}.partial-*"))
+
+
 def atomic_write(path: Path, content: str) -> None:
     """SMB 上的 rename 实测会随机返回 EIO（KMVideo 目录同样复现），因此不走 os.replace。
 
@@ -288,6 +346,16 @@ def atomic_write(path: Path, content: str) -> None:
     这条路径同时满足硬约束 7（禁 Python 直写与 shutil 快速路径），且不依赖 rename。
     """
     path.parent.mkdir(parents=True, exist_ok=True)
+    # 覆盖前先留一份 .bak：rsync --inplace 是直写目标，跑到一半被 SIGKILL 会留下截断文件。
+    # 媒体版实测有过「7 个群 manifest 整个消失、只能逐群重建」的事故，这里不重蹈。
+    if path.is_file() and path.stat().st_size > 0:
+        backup = path.with_name(path.name + MANIFEST_BACKUP_SUFFIX)
+        try:
+            result = run_process(["rsync", "--inplace", "--whole-file", str(path), str(backup)])
+            if result.returncode != 0:
+                print_event("manifest_backup_unavailable", path=str(path), reason=result.stderr.strip()[:200])
+        except OSError as exc:
+            print_event("manifest_backup_unavailable", path=str(path), reason=str(exc))
     data = content.encode("utf-8")
     with tempfile.NamedTemporaryFile("wb", delete=False, suffix=".jsonl") as handle:
         handle.write(data)
@@ -556,11 +624,15 @@ def download_file(file_id: str, temp_root: Path) -> Path:
     ])
     if result.returncode != 0:
         shutil.rmtree(destination, ignore_errors=True)
-        raise ArchiveError(result.stderr.strip() or result.stdout.strip() or "DWS drive download failed")
+        detail = result.stderr.strip() or result.stdout.strip() or "DWS drive download failed"
+        raise (PermanentFileError if is_permanent_failure(detail) else ArchiveError)(detail)
     files = [path for path in destination.rglob("*") if path.is_file()]
     if len(files) != 1:
         shutil.rmtree(destination, ignore_errors=True)
         raise ArchiveError(f"DWS download created {len(files)} files instead of one")
+    if not has_nonzero_header(files[0]):
+        shutil.rmtree(destination, ignore_errors=True)
+        raise PermanentFileError("DWS returned an empty file (资源已在钉钉侧删除或过期)")
     return files[0]
 
 
@@ -801,6 +873,8 @@ def handoff_record_id(group: Group, message_id: str, file_id: str) -> str:
 def is_complete(record: dict | None) -> bool:
     if not record:
         return False
+    if record.get("smb_status") == "unavailable":
+        return True  # 钉钉侧已删，永远拿不到；算已处置，进待办不进缺失
     return smb_original_usable(record) and record.get("github_file_status") in {"complete", "index_only"}
 
 
@@ -862,6 +936,9 @@ def archive_file(
     key = file_record_id(group, message_id, file_id)
     with MANIFEST_LOCK:
         existing = records.get(key)
+        if existing and existing.get("smb_status") == "unavailable":
+            counts.unavailable += 1
+            return
         if existing and smb_original_usable(existing) and (smb_only or is_complete(existing)):
             counts.skipped += 1
             return
@@ -879,7 +956,26 @@ def archive_file(
         server_size = info.get("fileSize")
         extension = str(info.get("extension") or extension_of(file_name)).lower()
 
-        downloaded = download_file(file_id, temp_root)
+        try:
+            downloaded = download_file(file_id, temp_root)
+        except PermanentFileError as exc:
+            record = dict(existing or {})
+            record.update({
+                "record_id": key, "record_type": "file",
+                "conversation_id": group.conversation_id, "folder": folder,
+                "message_id": message_id, "file_id": file_id, "file_name": file_name,
+                "extension": extension_of(file_name),
+                "message_time": str(message.get("createTime") or ""),
+                "sender": str(message.get("sender") or ""),
+                "smb_status": "unavailable", "smb_error": str(exc),
+            })
+            with MANIFEST_LOCK:
+                records[key] = record
+                append_smb_manifest_record(folder, record)
+                counts.unavailable += 1
+            print_event("file_unavailable", group=group.title, file_name=file_name,
+                        file_id=file_id, reason=str(exc))
+            return
         downloaded_size = downloaded.stat().st_size
         if isinstance(server_size, int) and server_size != downloaded_size:
             raise ArchiveError(
@@ -1066,6 +1162,7 @@ def archive_group(
                     github_raw=window_counts.github_raw,
                     github_index=window_counts.github_index,
                     handoff_av=window_counts.handoff_av,
+                    unavailable=window_counts.unavailable,
                     skipped=window_counts.skipped,
                 )
             except (ArchiveError, OSError) as exc:
@@ -1219,6 +1316,8 @@ class AuditBucket:
 def audit_file_status(record: dict | None) -> tuple[str, str | None]:
     if not record:
         return "unresolved", "manifest_record_missing"
+    if record.get("smb_status") == "unavailable":
+        return "unavailable", str(record.get("smb_error") or "dws_resource_gone")
     if not smb_original_usable(record):
         return "unresolved", "smb_original_missing_or_zero_filled"
     if record.get("github_file_status") not in {"complete", "index_only"}:
@@ -1229,8 +1328,8 @@ def audit_file_status(record: dict | None) -> tuple[str, str | None]:
 def audit_group(group: Group, windows: list[tuple[datetime, datetime]], page_size: int) -> dict:
     folder = find_existing_folder(group)
     records = read_manifest(SMB_ROOT / folder / MANIFEST_NAME)
-    buckets = {"file": {"complete": AuditBucket(), "unresolved": AuditBucket()},
-               "handoff_av": {"complete": AuditBucket(), "unresolved": AuditBucket()}}
+    buckets = {"file": {"complete": AuditBucket(), "unavailable": AuditBucket(), "unresolved": AuditBucket()},
+               "handoff_av": {"complete": AuditBucket(), "unavailable": AuditBucket(), "unresolved": AuditBucket()}}
     seen: set[str] = set()
 
     def inspect_message(message: dict) -> None:
@@ -1298,6 +1397,32 @@ def export_handoff(groups: list[Group], destination: Path) -> int:
     return len(rows)
 
 
+def manifest_window_bounds(folder: str) -> tuple[datetime | None, datetime | None]:
+    """(最早窗口起点, 最后一个 complete 窗口终点)。
+
+    起点用于「窗口覆盖前移检查」：manifest 首窗口晚于本轮 --start 的群，
+    说明更早的消息从来没扫过。终点用于增量起点 —— 直接读 manifest，
+    不依赖外部预生成的 starts 文件（预生成会在 manifest 尚未落稳时取到旧值，
+    导致整群按全量重扫）。
+    """
+    earliest: datetime | None = None
+    latest_complete: datetime | None = None
+    for record in read_manifest(SMB_ROOT / folder / MANIFEST_NAME).values():
+        if record.get("record_type") != "window":
+            continue
+        try:
+            start = parse_time(str(record.get("start") or ""))
+            end = parse_time(str(record.get("end") or ""))
+        except ValueError:
+            continue
+        if earliest is None or start < earliest:
+            earliest = start
+        if record.get("window_status") == "complete":
+            if latest_complete is None or end > latest_complete:
+                latest_complete = end
+    return earliest, latest_complete
+
+
 def make_windows(start: datetime, end: datetime, window_days: int) -> list[tuple[datetime, datetime]]:
     if start >= end:
         raise ArchiveError("start must be before end")
@@ -1329,6 +1454,8 @@ def parse_args() -> argparse.Namespace:
                         help="For SMB-complete pending records, write GitHub route manifests only; requires --apply.")
     parser.add_argument("--audit", action="store_true",
                         help="Read the specified DWS range and print per-group file completion statistics; requires --dry-run.")
+    parser.add_argument("--since-manifest", action="store_true",
+                        help="每群起点改为该群 manifest 里最后一个 complete 窗口的终点（增量提速；无记录则回退 --start）。")
     parser.add_argument("--reconcile", action="store_true",
                         help="Re-read completed windows and add only manifest-missing files; requires --apply.")
     parser.add_argument("--repair-smb", action="store_true",
@@ -1386,7 +1513,7 @@ def main() -> int:
         if args.days < 1 or args.days > 90:
             raise ArchiveError("days must be between 1 and 90 unless --start is supplied")
         start = end - timedelta(days=args.days)
-    windows = make_windows(start, end, args.window_days)
+    base_windows = make_windows(start, end, args.window_days)
     groups = select_groups(args.allow_title)
     operation = "audit" if args.audit else "sync_github_index" if args.sync_github_index else "repair_smb" if args.repair_smb else "archive"
     print_event(
@@ -1396,13 +1523,29 @@ def main() -> int:
         groups=len(groups),
         start=dws_time(start),
         end=dws_time(end),
-        windows=len(windows),
+        windows=len(base_windows),
+        since_manifest=bool(args.since_manifest),
     )
     total = Counts()
     github_budget = GitHubFileBudget(args.github_file_budget)
     with tempfile.TemporaryDirectory(prefix="kmfile-dws-") as temporary:
         temp_root = Path(temporary)
         for group in groups:
+            folder = find_existing_folder(group)
+            residue = manifest_partial_residue(folder)
+            if residue:
+                print_event("manifest_partial_residue", group=group.title, files=residue[:5])
+            earliest, latest_complete = manifest_window_bounds(folder)
+            if earliest is not None and earliest > start:
+                print_event("window_coverage_gap", group=group.title,
+                            manifest_first_window=dws_time(earliest),
+                            requested_start=dws_time(start),
+                            note="该群比请求起点更早的消息从未扫过，需补全量")
+            windows = base_windows
+            if args.since_manifest and latest_complete is not None and latest_complete < end:
+                windows = make_windows(latest_complete, end, args.window_days)
+                print_event("incremental_start", group=group.title,
+                            start=dws_time(latest_complete), windows=len(windows))
             try:
                 if args.repair_smb:
                     group_counts = repair_smb_group(group, temp_root, failed_only=args.failed_only)
@@ -1447,6 +1590,7 @@ def main() -> int:
         smb_repaired_from_dws=total.smb_repaired_from_dws,
         github_raw=total.github_raw,
         github_index=total.github_index,
+        unavailable=total.unavailable,
         handoff_av=total.handoff_av,
         skipped=total.skipped,
         failures=total.failures,

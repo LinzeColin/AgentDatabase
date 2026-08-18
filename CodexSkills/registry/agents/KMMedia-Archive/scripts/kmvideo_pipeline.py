@@ -13,6 +13,7 @@
 from __future__ import annotations
 
 import argparse
+import atexit
 import csv
 import hashlib
 import json
@@ -30,6 +31,8 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import archive_internal_media as aim  # noqa: E402
+
+ARCHIVER = aim
 
 TIMEZONE = aim.TIMEZONE
 SMB_ROOT = aim.SMB_ROOT
@@ -175,10 +178,127 @@ def load_media(groups: list[str]) -> list[dict]:
     return out
 
 
+# ---------- 运行前置：并发锁 / SMB 健康自检 / 动态群名单 ----------
+
+def acquire_workdir_lock(workdir: Path) -> None:
+    """同一 workdir 只允许一个 pipeline 实例。
+
+    实测事故：cron 每 30 分钟触发一次，而全量要跑 1 小时以上 —— 21:06 的主实例
+    （rename 阶段）和 21:30 的 cron 新实例（scan 阶段）并存过，两个进程同时写
+    同一份 manifest 与登记表。这里用 pid 文件自锁，发现活着的同伴就直接退出。
+    """
+    lock = workdir / ".pipeline.lock"
+    if lock.is_file():
+        try:
+            pid = int(lock.read_text(encoding="utf-8").split()[0])
+        except (ValueError, OSError, IndexError):
+            pid = -1
+        if pid > 0 and pid != os.getpid():
+            alive = True
+            try:
+                os.kill(pid, 0)
+            except ProcessLookupError:
+                alive = False  # 只有「查无此进程」才算残留锁
+            except PermissionError:
+                alive = True   # 进程在，只是不归我管（别把 EPERM 当成已退出）
+            except OSError:
+                alive = True
+            if alive:
+                raise SystemExit(
+                    f"另一个 pipeline 实例仍在运行（pid={pid}，锁文件 {lock}）；"
+                    "本次直接退出，绝不并发写同一份 manifest 与登记表。")
+
+    lock.write_text(f"{os.getpid()} {now_sh().isoformat()}\n", encoding="utf-8")
+    atexit.register(lambda: lock.unlink(missing_ok=True))
+
+
+SMB_SLOW_SECONDS = float(os.environ.get("SMB_SLOW_SECONDS", "10"))
+
+
+def smb_health_check(groups: list[str]) -> dict:
+    """开跑前量一次 SMB，退化就把修复命令直接打出来。
+
+    实测结论：服务端是 OpenWRT 路由器上的 Samba（USB 外接硬盘）。所谓「白天不可用」
+    不是网络也不是时段问题，而是 **SMB 会话退化 + 卡死进程占管道**。挂载健康时
+    18k 目录枚举 4s、单文件读 0.04s、写 2MB 1s；退化时同样的枚举 90s+ 跑不完。
+    """
+    if not SMB_ROOT.is_dir():
+        return {"state": "unmounted", "hint": 'open "smb://GUEST:@192.168.0.1/share"'}
+    target, best = None, -1
+    for g in groups[:40]:
+        for sub in ("file", "photo", "video"):
+            d = SMB_ROOT / g / sub
+            if d.is_dir():
+                target = d
+                break
+        if target is not None:
+            break
+    if target is None:
+        target = SMB_ROOT
+    t0 = time.time()
+    try:
+        count = len(os.listdir(target))
+    except OSError as e:
+        return {"state": "error", "detail": str(e)}
+    elapsed = round(time.time() - t0, 2)
+    result = {"state": "ok" if elapsed <= SMB_SLOW_SECONDS else "degraded",
+              "listdir_seconds": elapsed, "entries": count, "path": str(target)}
+    if result["state"] == "degraded":
+        result["hint"] = (
+            "SMB 会话退化。修复三步："
+            "1) 写 ~/Library/Preferences/nsmb.conf："
+            "[default] dir_cache_max=300 dir_cache_min=240 max_dirs_cached=512 "
+            "notify_off=yes streams=no soft=yes；"
+            "2) diskutil unmount force /Volumes/share && "
+            'open "smb://GUEST:@192.168.0.1/share" && sleep 12；'
+            "3) 用 sample 查是否有进程阻塞在 stat，有就杀掉。")
+        log(f"⚠ SMB 健康自检 degraded: listdir {count} 项耗时 {elapsed}s（阈值 {SMB_SLOW_SECONDS}s）")
+        log(f"  {result['hint']}")
+    else:
+        log(f"SMB 健康自检 ok: listdir {count} 项 {elapsed}s")
+    return result
+
+
+# Owner 明确说过「不管」的群（2026-08-16 原话：台泥贵港、生产付款、生产周例会不管）。
+# 单独列出来，动态枚举时归入「已排除」而不是「新增待确认」，避免每轮都重复问一遍。
+# 要重新纳入就把群名从这里删掉，或显式 --allow-title 传进归档器。
+DECLINED_TITLES = {
+    "台泥(贵港)",
+    "生产付款群",
+    "生产周例会工作群",
+}
+
+
+def discover_groups(existing: list[str]) -> tuple[list[str], list[str]]:
+    """dws 实时枚举 ∪ groups-file，返回 (合并名单, 新增群)。
+
+    静态白名单会漏群：实测旧名单 26 个，dws 实时 30 个 —— 台泥(贵港)、生产付款群、
+    生产周例会工作群三个新群一直没进过归档。新增群只报不自动收，
+    要显式 --include-new-groups 才纳入本轮。
+    """
+    result = ARCHIVER.dws_json(["chat", "list-all-conversations"])
+    live: list[str] = []
+    for c in result.get("conversations") or []:
+        if c.get("singleChat") is not False:
+            continue
+        title = str(c.get("title") or "").strip()
+        if not title:
+            continue
+        if c.get("groupType") == "INTERNAL_GROUP" or title in ARCHIVER.AUTHORIZED_NON_INTERNAL_TITLES:
+            live.append(title)
+    known = set(existing)
+    candidates = [t for t in dict.fromkeys(live) if t not in known]
+    declined = [t for t in candidates if t in DECLINED_TITLES]
+    new = [t for t in candidates if t not in DECLINED_TITLES]
+    if declined:
+        log(f"动态群名单：{len(declined)} 个群按 Owner 既往决定排除，不计入新增: {declined}")
+    return list(dict.fromkeys(existing + new)), new
+
+
 # ---------- 阶段一：扫描 + 增量归档 + 消息上下文 ----------
 
 def stage_scan(args, ctx) -> dict:
-    stats = {"archived": 0, "context_msgs": 0, "skipped_groups": []}
+    stats = {"archived": 0, "existing": 0, "unavailable": 0, "context_msgs": 0, "skipped_groups": []}
     start = args.start or (now_sh() - timedelta(days=7)).strftime("%Y-%m-%d %H:%M:%S")
     # 1) 增量归档：显式白名单逐个传入（复用既有语义），DWS 瞬断重试 3 次
     for g in ctx["groups"]:
@@ -186,7 +306,8 @@ def stage_scan(args, ctx) -> dict:
         for attempt in range(3):
             r = subprocess.run(
                 [sys.executable, str(Path(__file__).parent / "archive_internal_media.py"),
-                 "--allow-title", g, "--start", start, "--workers", "4", "--apply"],
+                 "--allow-title", g, "--start", start, "--workers", "4", "--apply",
+                 *(["--since-manifest"] if getattr(args, "since_manifest", False) else [])],
                 capture_output=True, text=True, timeout=7200)
             tail = (r.stdout or "").strip().splitlines()
             fin = [l for l in tail if "run_finished" in l]
@@ -194,6 +315,10 @@ def stage_scan(args, ctx) -> dict:
                 try:
                     ev = json.loads(fin[-1])
                     stats["archived"] += int(ev.get("smb_saved", 0) or 0)
+                    # 幂等重跑时 smb_saved=0 是正常的（文件已在），不能当成失败。
+                    # 分成「新增 / 已存在 / 钉钉侧已删」三个口径，避免 archived=0 被误读。
+                    stats["existing"] += int(ev.get("skipped", 0) or 0)
+                    stats["unavailable"] += int(ev.get("unavailable", 0) or 0)
                     if ev.get("failures"):
                         stats["skipped_groups"].append((g, "failures>0"))
                 except Exception:
@@ -268,7 +393,8 @@ def stage_scan(args, ctx) -> dict:
                                         "time": str(ts), "before": before, "after": after},
                                        ensure_ascii=False) + "\n")
                     stats["context_msgs"] += 1
-    log(f"scan done: archived={stats['archived']} context={stats['context_msgs']} "
+    log(f"scan done: 新增={stats['archived']} 已存在={stats['existing']} "
+        f"钉钉侧已删={stats['unavailable']} context={stats['context_msgs']} "
         f"skipped={stats['skipped_groups']}")
     return stats
 
@@ -297,10 +423,106 @@ def parse_ctx_start(ctx, group: str, t_end: datetime) -> datetime:
     return t_end - timedelta(days=90)
 
 
+MAP_COLS = ["项目", "原文件名", "新文件名", "日期", "大小"]
+
+
+def load_ledger() -> dict:
+    """读 `原名新名映射.csv` 改名账本 —— 「现用名」的唯一权威。
+
+    `.manifest.jsonl` 永远记原名（硬约束 2），登记表可能还没回填，
+    所以改名成功那一刻就必须落账；否则归档器/audit 会把已改名的素材当缺失。
+    """
+    ledger = {}
+    if not MAP_CSV.exists():
+        return ledger
+    try:
+        with MAP_CSV.open(encoding="utf-8-sig", newline="") as handle:
+            for row in csv.DictReader(handle):
+                folder = str(row.get("项目") or "").strip()
+                old = str(row.get("原文件名") or "").strip()
+                if folder and old:
+                    ledger[(folder, old)] = {k: str(row.get(k) or "") for k in MAP_COLS}
+    except (OSError, csv.Error):
+        return {}
+    return ledger
+
+
+def save_ledger(ledger: dict) -> None:
+    rows = [ledger[k] for k in sorted(ledger)]
+    tmp = Path(tempfile.gettempdir()) / "原名新名映射.ledger.csv"
+    import io
+    buf = io.StringIO()
+    w = csv.DictWriter(buf, fieldnames=MAP_COLS)
+    w.writeheader()
+    w.writerows({k: r.get(k, "") for k in MAP_COLS} for r in rows)
+    tmp.write_text("\ufeff" + buf.getvalue(), encoding="utf-8")
+    rsync_write(tmp, MAP_CSV)
+
+
+def reconcile_ledger(groups: list[str]) -> dict:
+    """账本自愈：磁盘已改名、账本却还记着旧名的记录，按「同大小且唯一」认回来。
+
+    为什么必须有这条路径：改名的幂等闸都以「原名还在磁盘上」为前提，一旦账本写丢
+    （进程被杀、SMB 写失败、跨版本运行），rename 会因为原名已不在而永远跳过，
+    账本再也回不来 —— 表现就是 audit / accept 一直报 missing，而磁盘上素材好好的。
+
+    媒体的 manifest 里没有 md5（文件版有），所以判据是「同 media_type 目录内、
+    字节数完全相同、且没有被别的记录认领」的唯一候选。有歧义就不认，留给人工。
+    """
+    ledger = load_ledger()
+    repaired, ambiguous = [], []
+    by_group = defaultdict(list)
+    for m in load_media(groups):
+        if m.get("smb_status") == "complete":
+            by_group[m["_group"]].append(m)
+    for group, records in by_group.items():
+        for media_type in ("photo", "video"):
+            directory = SMB_ROOT / group / media_type
+            if not directory.is_dir():
+                continue
+            subset = [m for m in records if m.get("media_type") == media_type]
+            if not subset:
+                continue
+            names = [n for n in os.listdir(directory) if not n.startswith("._")]
+            claimed = {(ledger.get((group, os.path.basename(r.get("relative_path") or ""))) or {}).get("新文件名")
+                       for r in subset}
+            claimed.discard(None)
+            by_size = defaultdict(list)
+            for n in names:
+                try:
+                    by_size[(directory / n).stat().st_size].append(n)
+                except OSError:
+                    continue
+            for m in subset:
+                old_name = os.path.basename(m.get("relative_path") or "")
+                if aim.resolve_current_path(m) is not None:
+                    continue
+                candidates = [n for n in by_size.get(int(m.get("size_bytes") or -1), [])
+                              if n != old_name and n not in claimed]
+                if len(candidates) == 1:
+                    hit = candidates[0]
+                    ledger[(group, old_name)] = {
+                        "项目": group, "原文件名": old_name, "新文件名": hit,
+                        "日期": str(m.get("message_time") or "")[2:10].replace("-", ""),
+                        "大小": str(m.get("size_bytes") or ""),
+                    }
+                    claimed.add(hit)
+                    repaired.append(f"{group}/{old_name} → {hit}")
+                elif candidates:
+                    ambiguous.append(f"{group}/{old_name} ?= {candidates[:3]}")
+    if repaired:
+        save_ledger(ledger)
+        log(f"账本自愈: 认回 {len(repaired)} 条 —— {repaired[:3]}")
+    if ambiguous:
+        log(f"账本自愈: {len(ambiguous)} 条同大小多候选，不猜，留给人工 —— {ambiguous[:3]}")
+    return {"repaired": len(repaired), "ambiguous": len(ambiguous)}
+
+
 # ---------- 阶段二：规格探测 ----------
 
 def stage_probe(args, ctx) -> dict:
     from concurrent.futures import ThreadPoolExecutor
+    healed = reconcile_ledger(ctx["groups"])
     specs = {}
     pf = ctx["workdir"] / "specs.jsonl"
     if pf.exists():
@@ -315,7 +537,7 @@ def stage_probe(args, ctx) -> dict:
         name = os.path.basename(rel)
         if name in specs:
             return
-        p = SMB_ROOT / rel
+        p = aim.resolve_current_path(m) or (SMB_ROOT / rel)
         if not p.exists():
             return
         if m.get("media_type") == "video":
@@ -356,8 +578,8 @@ def stage_probe(args, ctx) -> dict:
 
     with ThreadPoolExecutor(max_workers=int(os.environ.get("PROBE_WORKERS", "8"))) as ex:
         list(ex.map(probe_one, media))
-    log(f"probe done: new={done} total={len(specs)}")
-    return {"probed": done, "total": len(specs)}
+    log(f"probe done: new={done} total={len(specs)} 账本自愈={healed}")
+    return {"probed": done, "total": len(specs), "ledger_healed": healed}
 
 
 # ---------- 阶段二续：缩略图 + 感知哈希去重 ----------
@@ -792,18 +1014,51 @@ def stage_rename(args, ctx) -> dict:
     if conflicts:
         log(f"name conflicts {len(conflicts)} — 这些保持原名: {list(conflicts)[:5]}")
         ops = [o for o in ops if seen[o[1]] == 1]
+    ledger = load_ledger()
+    # 账本幂等闸：账本已记新名、且该新名确实在磁盘上 → 这份早就改过了，绝不再改一次
+    kept = []
+    for op in ops:
+        rel = op[0]
+        folder, old_name = rel.split("/")[0], os.path.basename(rel)
+        mapped = (ledger.get((folder, old_name)) or {}).get("新文件名", "")
+        if mapped and mapped != old_name and (SMB_ROOT / rel).parent.joinpath(mapped).is_file():
+            continue
+        kept.append(op)
+    ops = kept
     ok = gone = fail = 0
+    done_ops = []
     for rel, nn, _ in ops:
         old_p = SMB_ROOT / rel
         new_p = old_p.parent / nn
-        try:
-            os.rename(old_p, new_p)
-            ok += 1
-        except FileNotFoundError:
-            gone += 1
-        except OSError as e:
+        last = None
+        for attempt in range(3):
+            try:
+                os.rename(old_p, new_p)
+                ok += 1
+                done_ops.append((rel, nn))
+                last = None
+                break
+            except FileNotFoundError:
+                gone += 1
+                last = None
+                break
+            except OSError as e:
+                last = e   # SMB rename 实测会随机 EIO，重试而不是直接判失败
+                time.sleep(2 ** attempt)
+        if last is not None:
             fail += 1
-            log(f"rename fail {rel}: {e}")
+            log(f"rename fail {rel}: {last}")
+    # 改名成功即刻落账本，不等 registry —— 中途中断也不会留下「磁盘已改、账本没记」的黑洞
+    if done_ops:
+        for rel, nn in done_ops:
+            folder = rel.split("/")[0]
+            old_name = os.path.basename(rel)
+            prev = ledger.get((folder, old_name)) or {}
+            ledger[(folder, old_name)] = {
+                "项目": folder, "原文件名": old_name, "新文件名": nn,
+                "日期": prev.get("日期", ""), "大小": prev.get("大小", ""),
+            }
+        save_ledger(ledger)
     # 对照表
     cmp = ctx["workdir"] / "改名前后对照.csv"
     with cmp.open("w", encoding="utf-8-sig", newline="") as f:
@@ -923,17 +1178,25 @@ def stage_registry(args, ctx) -> dict:
         for r in reg_rows:
             w.writerow({k: r.get(k, "") for k in fieldnames})
     rsync_write(tmp, REG_CSV)
-    # 原名新名映射（由磁盘现状重建：新名=登记表文件名列）
-    map_rows = []
+    # 原名新名映射：与账本合并，**不得把已有新名覆盖回原名**
+    ledger = load_ledger()
     for r in reg_rows:
-        map_rows.append({"项目": r["项目"], "原文件名": r["原文件名"],
-                         "新文件名": r["文件名"], "日期": r.get("日期", ""), "大小": r.get("大小", "")})
-    tmp2 = ctx["workdir"] / "原名新名映射.new.csv"
-    with tmp2.open("w", encoding="utf-8-sig", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["项目", "原文件名", "新文件名", "日期", "大小"])
-        w.writeheader()
-        w.writerows(map_rows)
-    rsync_write(tmp2, MAP_CSV)
+        key = (r.get("项目", ""), r.get("原文件名", ""))
+        prev = ledger.get(key) or {}
+        current = str(r.get("文件名") or "").strip()
+        if current == r.get("原文件名", ""):
+            current = prev.get("新文件名") or current
+        ledger[key] = {"项目": key[0], "原文件名": key[1], "新文件名": current or key[1],
+                       "日期": r.get("日期", "") or prev.get("日期", ""),
+                       "大小": str(r.get("大小", "") or prev.get("大小", ""))}
+    save_ledger(ledger)
+    # 分发副本（distribute_registry 会从 workdir 取）
+    import io as _io
+    _buf = _io.StringIO()
+    _w = csv.DictWriter(_buf, fieldnames=MAP_COLS)
+    _w.writeheader()
+    _w.writerows({k: ledger[key].get(k, "") for k in MAP_COLS} for key in sorted(ledger))
+    (ctx["workdir"] / "原名新名映射.new.csv").write_text("\ufeff" + _buf.getvalue(), encoding="utf-8")
     # 公开仓脱敏 md 版（项目名 → 业务名+群）
     pub_rows = []
     for r in reg_rows:
@@ -1171,6 +1434,9 @@ def stage_report(args, ctx) -> dict:
         f"| 待确认/未标注 | {pending} |",
         f"| 重复素材 | {dup_count} |",
         f"| 脱敏风险素材 | {sens} |",
+        f"| 名单外新增群 | {len(ctx.get('new_groups') or [])} {(ctx.get('new_groups') or [''])[:3]} |",
+        f"| SMB 健康自检 | {(ctx.get('smb_health') or {}).get('state', '未跑')} "
+        f"{(ctx.get('smb_health') or {}).get('listdir_seconds', '')} |",
     ]
     txt = "\n".join(lines) + "\n"
     (ctx["workdir"] / "产能汇总.md").write_text(txt, encoding="utf-8")
@@ -1206,6 +1472,13 @@ def main() -> int:
                     help="仅处理该媒体类型（空=全部）")
     ap.add_argument("--skip-groups", default="",
                     help="逗号分隔的群名黑名单（NAS 大目录异常时跳过，夜间单独跑）")
+    ap.add_argument("--refresh-groups", action="store_true",
+                    help="跑前用 dws 实时枚举群列表，与 --groups-file 求并集；新增群只报不收。")
+    ap.add_argument("--include-new-groups", action="store_true",
+                    help="与 --refresh-groups 连用：把新发现的群纳入本轮归档（默认只报不收）。")
+    ap.add_argument("--since-manifest", action="store_true",
+                    help="每群起点改为该群 manifest 最后一个 complete 窗口的终点（增量提速）。")
+    ap.add_argument("--skip-smb-check", action="store_true", help="跳过开跑前的 SMB 健康自检。")
     args = ap.parse_args()
     global MEDIA_FILTER
     MEDIA_FILTER = args.media_type or None
@@ -1221,6 +1494,26 @@ def main() -> int:
         print("需要 --groups-file 或 --only-group"); return 2
     ctx = {"groups": groups, "workdir": Path(args.workdir)}
     ctx["workdir"].mkdir(parents=True, exist_ok=True)
+    acquire_workdir_lock(ctx["workdir"])
+
+    new_groups: list[str] = []
+    if args.refresh_groups and not args.only_group:
+        merged, new_groups = discover_groups(groups)
+        if new_groups:
+            (ctx["workdir"] / "新增群待确认.txt").write_text(
+                "\n".join(new_groups) + "\n", encoding="utf-8")
+            log(f"发现 {len(new_groups)} 个名单外的群: {new_groups}")
+            if args.include_new_groups:
+                groups = merged
+                log("  已按 --include-new-groups 纳入本轮")
+            else:
+                log("  本轮不收（要收加 --include-new-groups）；清单见 workdir/新增群待确认.txt")
+        else:
+            log("动态群名单：与实时枚举一致，无新增")
+    ctx["groups"] = groups
+    ctx["new_groups"] = new_groups
+    if not args.skip_smb_check:
+        ctx["smb_health"] = smb_health_check(groups)
 
     order = ["scan", "probe", "thumbs", "dedup", "label", "rename", "registry",
              "upload", "accept", "report"] if args.stage == "all" else [args.stage]
