@@ -3,7 +3,7 @@
   "display_name": "Persona Distiller Group",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.42",
+    "kind": "repository-customized-v0.0.0.43",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "files": [
@@ -19,8 +19,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "2da1845f2ebe51e876a3ef9e837266815ceb8ddda1da0af1c60f29f34ffecd3d",
-      "size_bytes": 88423
+      "sha256": "f1815f885fcb383e6d2dde4452dfa6ec5746ded81292fcea4541a38ae5c2d0f4",
+      "size_bytes": 89474
     },
     {
       "path": "README.md",
@@ -29,12 +29,12 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "8528ce8b9918f9389845a2ae0588c9d071465ef98775d855bde0dbb5a6a6de78",
-      "size_bytes": 27309
+      "sha256": "caf7ce04d25d68000b70874ed37e718db5cb6db154441597064ad3aba32dd9ab",
+      "size_bytes": 27574
     },
     {
       "path": "VERSION",
-      "sha256": "2ee9a8786195f2e2bcf693d7378128db87493a121a16c35987a327a74d02d5fc",
+      "sha256": "7bb7a6fa29a559792ae24b813ef2d5a2647976e59eea60e183b944b03e30e91b",
       "size_bytes": 10
     },
     {
@@ -129,7 +129,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "400be9315496a40eef8af4dbaf9e3760ba6ee4ea58bfd069e0ee645bbb21ed65",
+      "sha256": "263dbd0610b827a5218c92b78db6e3798a6670e32c74af1c78e121ba12357093",
       "size_bytes": 1304
     },
     {
@@ -369,7 +369,7 @@
     },
     {
       "path": "team-index.json",
-      "sha256": "798a99841ce7c45a50a626675ee8435ec6151a43965fd3ba746fe036dac4c187",
+      "sha256": "5b3de0fc848c46b28ab7a65a39058918605ec1dd922bb74972178c8f7f17f103",
       "size_bytes": 400812
     },
     {
@@ -2103,5 +2103,5 @@
   "name": "persona-distiller-group",
   "schema_version": "1.0",
   "verification": {},
-  "version": "v0.0.0.42"
+  "version": "v0.0.0.43"
 }
