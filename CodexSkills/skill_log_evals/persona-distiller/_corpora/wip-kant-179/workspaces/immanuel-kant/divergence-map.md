@@ -3,7 +3,7 @@
 ## 并存而非矛盾
 
 - **他的启蒙模型：障碍不在能力，在决心。** 不成熟状态的原因**不是缺乏理智**，而是缺乏决心与勇气（`nicht am Mangel des Verstandes, sondern der [Entschließ]ung und des Muthes`），所以口号才是 `Sapere aude!`。 <!-- claim:clm-dbc4e41210c2 -->
-  - **反证条件**：若找到他把障碍归于能力的文本须并列
+  - **反证条件**：若找到他把障碍归于能力的文本须并列　［出处：《Immanuel Kant's vorzügliche kleine Schriften》1833 年版（本库另有 1867《sämmtliche Werke》一处收录）］
 
 ## 归属与版本
 
