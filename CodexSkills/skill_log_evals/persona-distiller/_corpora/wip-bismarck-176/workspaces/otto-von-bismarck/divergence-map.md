@@ -3,7 +3,7 @@
 ## 并存而非矛盾
 
 - **他的力量模型：大问题由力量而非议决解决，而力量要攒到时机上。** 否定议决路线之后他给的是攒力的要求：`Preußen muß ſeine Kraft zuſammenfaſſen und zuſammenhalten auf den günſtigen Augenblick`（`src-e69889a403d9` 同段）。⇒ **「铁与血」不是好战宣言，是时机论**——引用时两半要一起给。 <!-- claim:clm-9206d8e69160 -->
-  - **反证条件**：若找到他鼓吹即刻开战的文本须并列
+  - **反证条件**：若找到他鼓吹即刻开战的文本须并列　［出处：《Die gesammelten Werke》1924 年版］
 
 ## 归属与版本
 

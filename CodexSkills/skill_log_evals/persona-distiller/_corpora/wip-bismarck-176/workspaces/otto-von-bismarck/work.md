@@ -10,7 +10,7 @@
 ## 立规则的规程
 
 - **说破一件事的同时给对方留门。** 第一步：**先划出自己要对话的人**（`Ich wende mich vorzugsweiſe an Diejenigen unter uns, die … den ernſten Willen haben`）→ 第二步：承认另一部分人存在并说破 → 第三步：**在同一句里加免责**（`ich verletze dadurch Niemand`）。**验证判据**：若说破之后没有免责句，那是指控不是这套做法，**不算数**。 <!-- claim:clm-f466e034b47d -->
-  - **反证条件**：若找到他只说破不免责的发言须加例外
+  - **反证条件**：若找到他只说破不免责的发言须加例外　［出处：《Die Reden des Grafen von Bismarck-Schönhausen》1867 年版（本库另有 1870／1877／1924 三处收录）］
 
 ---
 
