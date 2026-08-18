@@ -192,6 +192,23 @@ def main():
               % (f, len(load_tasks(nm)), hashlib.sha256(f.read_bytes()).hexdigest()[:16]))
     print("  ★ 这两份 jsonl **从 TaskPack 原样复制**，不是我编的；"
           "oracle（expected_mode／persona_target／mandatory_controls）也是任务包作者写的。")
+    # ★★★★ 2026-08-18：**这两份不是两个独立样本。**
+    #   `export_benchmark_tasks.py` 的自测实测：
+    #       development-48  48 条 ⇒ 独立题面 **12** 个（每个 ×4）
+    #       regression-24   24 条 ⇒ 独立题面 **12** 个（每个 ×2）
+    #       **两份的题面集合相等** ⇒ `regression-24` 是同一批 12 个题面的另一组变体。
+    #   ⇒ 下面把两份**分开印**，很容易被读成「两个样本互相印证」——**它们不是**。
+    #     两份的命中率历来相同（33%/33% → 25%/25%）**正是同源的表现**，不是独立复现。
+    #   ★ 本段**只披露，不改判定**：合并还是分开印属口径变更，要人定。
+    #   [[samples-cannot-support-universal-claims]]｜[[counts-need-their-cutoff-stated]]
+    if len(sets) > 1:
+        print("★★ **这两份不是两个独立样本**：各自的独立题面都是 **12** 个，"
+              "且**两份的题面集合相等**")
+        print("   （development-48 每题 ×4、regression-24 每题 ×2）⇒ "
+              "`regression-24` 是同一批题面的另一组变体。")
+        print("   **两份命中率相同不是互相印证，是同源。** "
+              "复算：`python3 export_benchmark_tasks.py --self-test`（断言 ④b）\n")
+
     for name in sets:
         rows = load_tasks(name)
         pairs = collections.Counter()
