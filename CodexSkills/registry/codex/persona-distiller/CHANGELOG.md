@@ -3,6 +3,30 @@
 ## 工具改动（不升版）
 
 
+### 2026-08-18｜第二处红也写进失败信息了：**它测的是 A 层旧路由**（断言仍未动）
+
+`test_new_software_deliveries_are_available_to_routing` 缺的**只有 Simon Willison**
+（其余四人都在并集里），而他**在册、readiness=ready、软件开发师** —— 不是「没这个人」。
+
+★ 关键：**本测试调的是 `scripts/route_team.py`（A 层旧路由，第 64/131/149/227 行）**，
+不是 `route_team_moe.py`。而 `moe-routing-contract.md` 对 A 层写着「**只用于兼容**」。
+同一道英文软件题：
+
+    route_team.py（本测试用的）  → Willison **不在 14 人里**；
+                                  名单里坐着 **Joel Salatin（农林牧渔师）**、
+                                  Harry Bhadeshia（材料）、Theodore V. Wells Jr.（律师）
+    route_team_moe.py（现行）    → Willison **第 9 名**，size=14 ⇒ **会入选**
+
+⇒ **这道红测的不是现行路由，照它去改现行路由是改错对象。**
+  但不能就此说它没用：`route_team.py` 仍在包里仍可被调用。
+  **要不要把本测试改成测 MoE 是 Owner 的决定**（改了＝宣布 A 层不再受验收保护）。
+
+★★ 反方向读数，防止把 MoE 说成全面更好：同一道题上 MoE 给
+**Fowler `task_similarity` 0.0000（第 35）**、**Liskov 0.0000（第 27）** ——
+他们能进并集靠的是**另外两道题**。**MoE 在这道题上同样看不见这两位。**
+
+失败信息现在直接印出：缺席者、两个路由的对照、以及**「不要照这道红去改现行路由」**。
+
 ### 2026-08-18｜那道久红的验收测试：真因量清并写进失败信息（**断言一个字没动**）
 
 `self_check.py` rc=1。`--skip-tests` 单跑 **rc=0、errors 0** ⇒ 红全部来自离线测试套。

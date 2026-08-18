@@ -246,13 +246,45 @@ class GroupContractTests(unittest.TestCase):
                 for role in plan['selected_roles']
                 if role['role_type'] == 'persona-solver'
             )
-        self.assertTrue({
+        # ★★★ 2026-08-18：这道红的真因也量清了，**断言一个字没动**，只把结论写进失败信息。
+        #
+        #   实测缺的**只有 Simon Willison**（其余四人都在并集里）。他**在册、readiness=ready、
+        #   软件开发师** —— 不是「没这个人」。
+        #
+        #   ★ 关键：**本测试调的是 `scripts/route_team.py`（A 层旧路由）**，不是
+        #     `route_team_moe.py`。而 `references/moe-routing-contract.md` 对 A 层写着
+        #     「A 保持旧类别和场景匹配，**只用于兼容**」。同一道英文软件题：
+        #
+        #         route_team.py（本测试用的）  → Willison **不在 14 人里**；
+        #                                       名单里坐着 Joel Salatin（农林牧渔师）、
+        #                                       Harry Bhadeshia（材料）、Wells（律师）
+        #         route_team_moe.py（现行）    → Willison **第 9 名**，size=14 ⇒ **会入选**
+        #
+        #   ⇒ **这道红测的不是现行路由，照它去改现行路由是改错对象。**
+        #     但也不能说它没用：`route_team.py` 仍在包里仍可被调用。
+        #     **要不要把本测试改成测 MoE 是 Owner 的决定**（改了＝宣布 A 层不再受验收保护）。
+        #
+        #   ★★ 反方向读数，防止把 MoE 说成全面更好：同一道题上 MoE 给
+        #      **Fowler task_similarity 0.0000（第 35）**、**Liskov 0.0000（第 27）** ——
+        #      他们能进并集靠的是另外两道题。**MoE 在这道题上同样看不见这两位。**
+        #   台账：`_ledgers/_订正-不是1处红是3处-而其中一处测的是旧路由-2026-08-18.md`
+        expected = {
             'Barbara Liskov',
             'Chip Huyen',
             'Kent Beck',
             'Martin Fowler / 马丁·福勒',
             'Simon Willison',
-        }.issubset(selected), selected)
+        }
+        self.assertTrue(
+            expected.issubset(selected),
+            "缺席：%s\n"
+            "★ 本测试调的是 **A 层旧路由 `route_team.py`**（合同：「只用于兼容」），"
+            "不是现行 `route_team_moe.py`。\n"
+            "  实测同一道英文软件题：旧路由的 14 人里没有 Willison（却有 Joel Salatin 等），"
+            "而 MoE 把他排**第 9**、会入选。\n"
+            "  ⇒ **不要照这道红去改现行路由**；要不要把本测试改成测 MoE 是 Owner 的决定。\n"
+            "  三道题的并集（%d 人）：%s" % (
+                sorted(expected - selected), len(selected), sorted(selected)))
 
     def test_human_views_register_required_card_fields(self) -> None:
         readme = (GROUP / 'README.md').read_text(encoding='utf-8')
