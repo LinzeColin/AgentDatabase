@@ -12,13 +12,28 @@
 | 1888 | Notice sur le viaduc de Garabit | `TA624282EIF` ／ `noticesurleviadu00eiff` | 43,616 ／ 46,312 |
 | 1889 | Mémoire présenté à l'appui du projet définitif | `TA62428EIF` | 324,654 |
 | 1900 | Travaux scientifiques exécutés à la tour | `travauxscientif00eiffgoog` ／ `travauxscientifi00eiff` | 525,623 ／ 576,454 |
-| 1900 | La Tour de 300 Mètres（图版与正文） | `n-0106381-pdf-1-400` | 待测 |
+| 1900 | La Tour de 300 Mètres（图版与正文） | `n-0106381-pdf-1-400` | **1,593,995 ✅ 2026-08-18 实测** |
 | 1902 | La Tour Eiffel en 1900 | `latoureiffelen1900eiff` | 790,986 |
-| 1910 | **La résistance de l'air et l'aviation** | `EiffelLaRsistanceDeLairEtLaviation19` | 待测 |
+| 1910 | **La résistance de l'air et l'aviation** | `EiffelLaRsistanceDeLairEtLaviation1910` | **429,518 ✅ 2026-08-18 已取正文** |
 
 **11 个 identifier → 9 部作品 → 可用 8 部。**
 Garabit 与 Travaux 各有两个 id，**同一部作品的多个副本只算一部**
 （「两个 source_id 不等于两处证据」）。
+
+## ★★★ 2026-08-18：**两件「优先验」都验完了，都过**
+
+本节下面那句「抓源时这两件优先验」已执行：
+
+- `n-0106381-pdf-1-400`（1900 图版本，原担心「可能无 OCR 文本」）——
+  实测 `N0106381_PDF_1_400_djvu.txt` **1,593,995 字节**，**有 OCR 正文，担心证伪**。
+  ★ 该条目还带 `…_bpt6k6542…` 文件（2,684,108 B）——是 **Gallica ARK**，说明这份 IA 副本源自 Gallica。
+- 1910《La résistance de l'air et l'aviation》——`EiffelLaRsistanceDeLairEtLaviation1910`，
+  **429,518 字节 / 77,462 词**，sha256 `72329cd0…`，过 `check_ocr_language_death`。
+  ★ 文件名是 `Eiffel_-_La_résistance_de_l'air_et_l'aviation,_1910_djvu.txt`（**带重音，不是标准 `{id}_djvu.txt`**）。
+- `letters00eiff` **226 字节** 复核一致 —— 确实读不出，不计入。
+
+⇒ **8 部可用作品全部确认有正文；quick 的 `min_sources = 8` 够得着，不会掉到 7。**
+⇒ 只读 metadata 判定，**没有整包下载**（铁律 7）。真抓源仍需 Owner 的下载授权。
 
 ★ quick 的 min_sources 是 8。**一部都不能再丢**——
 若 `n-0106381-pdf-1-400`（图版本，可能无 OCR 文本）或 1910 那本取不到全文，
