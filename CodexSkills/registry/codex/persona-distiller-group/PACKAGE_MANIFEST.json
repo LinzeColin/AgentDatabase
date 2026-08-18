@@ -19,8 +19,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "8dfea1132b50b09c3aa0afdbf4f47006ff13694c64b5634d0984f02328ba1b67",
-      "size_bytes": 64483
+      "sha256": "fbd02bb5879d794a9f9ba82f9dde80d1a0adf48e25494897960317a263a0fda9",
+      "size_bytes": 66350
     },
     {
       "path": "README.md",
@@ -29,8 +29,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "fd5b96e2e92b64924555b95bdbef1457fd2a38384ae6d932d8a512ec20a6c110",
-      "size_bytes": 17961
+      "sha256": "dda88fa997aaa11af6d044cc12367c9b8a687c00de22713f80f022d85dc44d15",
+      "size_bytes": 18423
     },
     {
       "path": "VERSION",
@@ -259,8 +259,8 @@
     },
     {
       "path": "scripts/check_mode_ladder_reachable.py",
-      "sha256": "78fa7196dfe29decbba00b818079e95037af50ed9fb8e717878f52041f5c2d06",
-      "size_bytes": 38240
+      "sha256": "26f59cf50f92340f98687a35b1517b069f86845dcc07f95282950b6568c33928",
+      "size_bytes": 40502
     },
     {
       "path": "scripts/check_roster_independence.py",
