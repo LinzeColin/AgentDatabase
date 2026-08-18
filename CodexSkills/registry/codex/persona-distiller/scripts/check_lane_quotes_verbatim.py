@@ -842,7 +842,7 @@ def self_test():
 
 
 
-def repair(ws: pathlib.Path, apply: bool = False):
+def repair(ws: pathlib.Path, apply: bool = False, include_products: bool = False):
     """把**对不上的**逐字引文换成语料里的真实字节。→ (退出码, 报告)
 
     ## ★★★★★ 2026-08-19：五条全是「我把 OCR 的伤读顺了」
@@ -886,9 +886,9 @@ def repair(ws: pathlib.Path, apply: bool = False):
         if f.is_file():
             raw[r.get("source_id")] = f.read_text(encoding="utf-8", errors="replace")
 
-    before = _count_bad(ws, corp)
+    before = _count_bad(ws, corp, include_products)
     out = {"干跑": not apply, "修前对不上": before, "改写": [], "**修不了**": []}
-    for f in sorted((ws / "references" / "research").glob("0*.md")):
+    for f in _scan_set(ws, include_products):
         lane = f.name          # ★ 与 check() 用同一条枚举，不另起扫描集
         md = f.read_text(encoding="utf-8")
         new_md = md
@@ -967,7 +967,7 @@ def repair(ws: pathlib.Path, apply: bool = False):
 
     if apply:
         corp2, _, _ = load_corpus(ws)
-        after = _count_bad(ws, corp2)
+        after = _count_bad(ws, corp2, include_products)
         out["修后对不上"] = after
         if out["改写"] and after >= before:
             out["**空操作**"] = f"改写了 {len(out['改写'])} 条，对不上数 {before} → {after}，**一条也没少**"
@@ -975,12 +975,37 @@ def repair(ws: pathlib.Path, apply: bool = False):
     return (0 if not out["**修不了**"] else 1), out
 
 
-def _count_bad(ws: pathlib.Path, corp: dict) -> int:
+def _count_bad(ws: pathlib.Path, corp: dict, include_products: bool = False) -> int:
     """当前「对不上」的引文条数（**用本模块自己的 verify**，不另造尺子）。"""
     bad = 0
-    for f in sorted((ws / "references" / "research").glob("0*.md")):
+    for f in _scan_set(ws, include_products):
         bad += sum(1 for q in extract_quotes(f.read_text(encoding="utf-8")) if not verify(q, corp))
     return bad
+
+
+def _scan_set(ws: pathlib.Path, include_products: bool = False):
+    """要核的文件。研究道恒在；产物**要显式打开**。
+
+    ## ★★★★★ 2026-08-19：核的是研究道，没人核**用户真正读的那两份**
+
+    Eiffel #142 的研究道 13 条引文清零之后，拿同一个 `verify()` 去量产物：
+    `cognitive-os.md` 6 条错 1、`decision-policy.md` 6 条错 3 ——
+    **产物 12 条里 4 条对不上，而没有任何判据在核它们**：
+
+    · 本文件只 glob `references/research/0*.md`；
+    · `check_verbatim_quotes` 只认「引号内无汉字」的**英文**引文，
+      在这个法文工作区它只数出 **1 条**（实际 12 条），于是报「全部通过」。
+
+    [[gates-cover-json-not-the-prose-users-read]] 的又一例：
+    **判据守住了中间产物，漏掉了终端读者看的那一份。**
+
+    ★ 默认**关**：打开它会让存量已判分的人物集体变红，代价要先量、由 Owner 定。
+      本轮只用 `--include-products` 单独修新人物。
+    """
+    files = sorted((ws / "references" / "research").glob("0*.md"))
+    if include_products:
+        files += [f for f in sorted(ws.glob("*.md")) if f.is_file()]
+    return files
 
 
 def main():
@@ -991,13 +1016,16 @@ def main():
     ap.add_argument("--repair", action="store_true",
                     help="把对不上的引文换回语料的真实字节（含 OCR 的伤）；默认干跑")
     ap.add_argument("--apply", action="store_true", help="与 --repair 合用才落盘")
+    ap.add_argument("--include-products", action="store_true",
+                    help="把 cognitive-os.md / decision-policy.md 等产物一并纳入（默认只核研究道）")
     a = ap.parse_args()
     if a.self_test:
         return self_test()
     if not a.workspace:
         ap.error("要么 --self-test，要么给工作区")
     if a.repair:
-        code, rep = repair(pathlib.Path(a.workspace), apply=a.apply)
+        code, rep = repair(pathlib.Path(a.workspace), apply=a.apply,
+                           include_products=a.include_products)
         print(json.dumps(rep, ensure_ascii=False, indent=2))
         return code
     code, rep = check(pathlib.Path(a.workspace))

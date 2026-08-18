@@ -22,7 +22,7 @@
 - **误差写进取点规则，不留到讨论段**：
   `Pour éviter autant que possible les erreurs qui pourraient provenir d'une déformation
   accidentelle des vibrations extrêmes, on a pris, de part et d'autre des points a et b,
-  des points c et d distants de cinq autres 20 vibrations.` <!-- claim:clm-c58051a66c67 -->
+  des points c et d distants de cinq autres 20 1 vibrations.` <!-- claim:clm-c58051a66c67 -->
   - **反证条件**：若他别处把误差处理集中在结果讨论 ⇒ 降为「1907 这一部如此」
 
 ★ 这两条扣在一起：**自证与误差都占正文位置**，不是补充说明。
