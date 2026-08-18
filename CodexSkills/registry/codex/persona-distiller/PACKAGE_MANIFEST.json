@@ -1005,6 +1005,11 @@
       "size_bytes": 23175
     },
     {
+      "path": "references/pipeline/checkers/fetch_gallica_alto.py",
+      "sha256": "5bba677f55131c5358201b7e12c548d90c952ba1fc5155d4d3a07c7440b3c833",
+      "size_bytes": 7895
+    },
+    {
       "path": "references/pipeline/checkers/finalize_release.py",
       "sha256": "ea9ea3ba32fc0bce06a5caf4f44fca10dd53c47e86b7d724ac8b524c569da30f",
       "size_bytes": 7466
@@ -1823,6 +1828,11 @@
       "path": "scripts/eval_runner.py",
       "sha256": "0aeb5f1cc83569d53f8a6c475bc93f9f07ee72a2c1b2766c46bfaf81336fa690",
       "size_bytes": 14056
+    },
+    {
+      "path": "scripts/fetch_gallica_alto.py",
+      "sha256": "5bba677f55131c5358201b7e12c548d90c952ba1fc5155d4d3a07c7440b3c833",
+      "size_bytes": 7895
     },
     {
       "path": "scripts/finalize_release.py",
