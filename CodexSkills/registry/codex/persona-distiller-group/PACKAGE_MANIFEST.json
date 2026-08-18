@@ -29,8 +29,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "ebc12053f0f32a3140778635758889936824c703a6c41490bbbe2b217a391120",
-      "size_bytes": 15901
+      "sha256": "20f33836d7f6db70160098707b32234ebe1fbcade3f56ff8d8e7be9b6599daf9",
+      "size_bytes": 16572
     },
     {
       "path": "VERSION",
@@ -124,8 +124,8 @@
     },
     {
       "path": "expert-fleet-admission.json",
-      "sha256": "9bd8f79500f163ae12b3bf4144e8cf0492e1a44d6c017a9c7fe91fbd0d65987f",
-      "size_bytes": 73633
+      "sha256": "67005bb3921ec5ba537dff1492ce9fb89e3851ab05777c9cd525b2c25f4b30a9",
+      "size_bytes": 73634
     },
     {
       "path": "manifest.json",
@@ -249,8 +249,8 @@
     },
     {
       "path": "scripts/check_keyword_table_is_not_the_main_driver.py",
-      "sha256": "9fcba913def3924958efd9a39400fd76a86b5661697e17a9cd847e48d364dd7c",
-      "size_bytes": 17401
+      "sha256": "b3b9f4bf5ea252ee88a48b4dc54ba8ec963436ac15b67a88599a9f8cfaba3476",
+      "size_bytes": 19153
     },
     {
       "path": "scripts/check_mode_ladder_reachable.py",

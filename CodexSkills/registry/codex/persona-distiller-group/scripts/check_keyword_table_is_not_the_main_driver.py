@@ -8,8 +8,33 @@
 
 > 「人工关键词不得成为冠军路由的主要证据。」
 
-**这条规则此前没有任何执行点** —— 写在文档里就等于没有。
-[[a-rule-in-a-doc-has-no-enforcer]]｜[[judge-critique-becomes-a-checker]]
+## ★★★ 先说清楚：**仓里已经有一件在量这个数了**，本件不是第二把尺子
+
+`_ledgers/_pipeline/measure_routing_discrimination.py` **已经**现算 weight×σ、
+**已经**把合同那句话逐字印在输出里（实测报 `domain_match` 占 **66.5%**）。
+本件与它**共用同一个来源**（`route_team_moe.ranking_drivers`），不是独立第二读数。
+
+那本件补的是什么：
+
+| | 那件 | 本件 |
+|---|---|---|
+| 在哪 | `_ledgers/_pipeline/`（**开发台账树，不随包分发**） | **本包 `scripts/`**，用户装了就有 |
+| 结论 | 报一个数 + 印合同原文 | **rc 判定 + 回归地板**（不许更依赖词表） |
+| 指标 | 份额 | **「当第一驱动」的任务占比**（合同问的是名次） |
+| 守卫 | — | 非退化（σ 全 0 会让份额退化成 0，**看着像合规**）＋ **基线绑定样本量** |
+
+⇒ 规则本身此前**没有 rc 级执行点，且执行不到用户手上**。
+[[a-rule-in-a-doc-has-no-enforcer]]｜[[i-built-a-second-ruler-while-the-authoritative-one-sat-in-scripts]]
+
+## ★★ 因果也要说准：不是有人选了词表当冠军
+
+那件工具的结论里写着一句本件必须照搬的话：
+
+> 「合同想要的冠军证据是 **C 层结果遥测** —— 而遥测至今 **0 条**。
+>  关键词之所以主导，是因为 **C 从来没有打开过**，不是有人选它当冠军。」
+
+⇒ 本件报的是**违约的事实**，**不是**指认谁选错了。真正的出路是 C 层拿到 ≥60 条
+  可归因结果（`route_team_moe.load_telemetry` 的门槛），那不是改词表能解决的。
 
 ## 量什么：`domain_match` 占**排序驱动**的份额
 
@@ -316,6 +341,9 @@ def main(argv=None) -> int:
     print("  （合格候选中位 %d 人｜σ>0 的分项中位 %d 个）"
           % (statistics.median(eligs), statistics.median(nonzeros)))
     print("\n★ `domain_match` 的**任务那一侧**来自 `DOMAIN_SIGNALS` —— **手工维护的关键词表**。")
+    print("★★ **因果**：合同想要的冠军证据是 **C 层结果遥测**，而遥测至今 **0 条**"
+          "（C 要 ≥60 条可归因结果）。")
+    print("   关键词之所以主导，是因为 **C 从来没有打开过** —— 不是有人选它当冠军。")
     print("  候选人那一侧是 `registration_category`（策展字段，不是词表）；本件只就任务侧下判断。")
 
     if top_rate > a.baseline_top_rate:
