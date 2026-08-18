@@ -394,6 +394,32 @@ def evaluate_claims(report: Report, target: Path, thresholds: dict[str, Any], so
             if float(claim.get('confidence', 0)) > 0.8:
                 report.warn('claim.hypothesis-overconfidence', f'{claim_id} existential hypothesis confidence exceeds 0.8')
 
+    # ★★★★★ 2026-08-19：**产物里出现未替换的格式占位符，全部判据都放行。**
+    #
+    #   Comenius #182 实测：我生成 `decision-policy.md` 时少写了 `% (...)`，
+    #   写进去的是字面 `%s`。后果是**门全绿而产物是坏的**：
+    #     · `check_lane_quotes_verbatim --include-products` 报 **0 条对不上**
+    #       —— 因为 `` `%s` `` 太短、不含字母，**根本不被当成引文抽出来**；
+    #     · `non_placeholder()` 把 `> \`%s\`` 算作实义行，长度也够；
+    #     · 合成门 errors **0**、warnings 2。
+    #   **是我 `cat` 了一遍产物才看见的，不是任何一道门看见的。**
+    #   [[read-the-artifact-as-its-actual-reader]]
+    #
+    #   ★ 这条只认**未替换**的形状，不认正文里合法出现的百分号
+    #     （`20%`、`%d 的写法` 这类不匹配，因为要求 `%` 后紧跟 s/d/r/f 且是词尾）。
+    _PLACEHOLDER = re.compile(r'%[sdrf](?![A-Za-z0-9_])|\{\}|\{\d+\}|\$\{[A-Za-z_][A-Za-z0-9_]*\}')
+    for rel in RENDER_FILES:
+        _p = target / rel
+        if not _p.is_file():
+            continue
+        _hits = _PLACEHOLDER.findall(_p.read_text(encoding='utf-8'))
+        if _hits:
+            report.error(
+                'render.unsubstituted-placeholder',
+                f'{rel} 里有 {len(_hits)} 处**未替换的格式占位符** {sorted(set(_hits))} —— '
+                f'生成产物的脚本少做了一次替换。**引文判据看不见它**（`%s` 不被当成引文），'
+                f'`non_placeholder` 也把它算作实义文本，所以门会全绿。')
+
     markers_by_file = {rel: markdown_claim_markers(target / rel) for rel in RENDER_FILES}
     all_markers = set().union(*markers_by_file.values()) if markers_by_file else set()
     active_ids = {claim.get('claim_id') for claim in active}
