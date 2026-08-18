@@ -286,6 +286,36 @@ def reachability(profiles: list[dict]):
     return out
 
 
+
+#: ★★★★★ 2026-08-18：**这道阶梯能被一段毫无内容的长串爬上去。**
+#:   `complexity` 的公式里，光「字数」一项上限就是 `min(wc,120)/170 = **0.706**`，
+#:   而 deep_team 的门是 **0.76**（减去 base 0.14 只需 0.62）。实测：
+#:
+#:       **100 个无意义词**（`zzq0 zzq1 …`，撞不上任何词表、域落兜底档）
+#:         ⇒ complexity **0.784** ⇒ **deep_team，派 21 人**
+#:       而一句真有内容的短请求「修复登录接口的空指针崩溃并补回归测试。」
+#:         ⇒ complexity **0.296** ⇒ **single_expert，1 人**
+#:
+#:   ⇒ **长度是这道阶梯的主要驱动，而长度不是复杂度。**
+#:     真任务上唯一在起作用的触发正是 `complexity`（72/72）——**它量的是字数。**
+#:   ★ 本件**只报，不改公式**：改 `complexity` 会移动每一道任务的档位，属决定。
+#:   [[length-confound-in-blind-eval]]｜[[measured-voice-in-the-wrong-register]]
+GIBBERISH_PROBE = tuple(range(20, 201, 40))
+
+
+def gibberish_ladder(mod) -> list:
+    """→ `[(词数, complexity, 档位, 人数), …]`。**纯长度**，不带任何语义信号。"""
+    out = []
+    for n in GIBBERISH_PROBE:
+        text = " ".join("zzq%d" % i for i in range(n))
+        try:
+            prof = mod.task_profile(text)
+            mode, size, _ = mod.choose_mode(prof)
+        except Exception:                                    # noqa: BLE001
+            return []
+        out.append((n, round(float(prof["complexity"]), 3), mode, size))
+    return out
+
 def evidence_arrival(ev_root) -> tuple:
     """`evidence/` 下每份 `route-*.json` 是**靠推断**到达该档，还是**被 `--mode` 指定**的。
 
@@ -347,6 +377,22 @@ def self_test() -> int:
         reachability([])["deep_team"]["risk"][1] == 0.0)
     chk("★★ 缺字段按 0 计，不抛异常（画像多一个键少一个键都不该让判据崩）",
         reachability([{"domains": 3}])["small_team"]["domains"][2] == 1)
+
+    # ── gibberish_ladder：正 + 负对照 ──
+    import importlib.util as _ilu2
+    _s2 = _ilu2.spec_from_file_location("_ctg2", str(HERE / "compile_task_graph.py"))
+    _m2 = _ilu2.module_from_spec(_s2)
+    sys.path.insert(0, str(HERE))
+    _s2.loader.exec_module(_m2)
+    _rows = gibberish_ladder(_m2)
+    chk("★ 纯长度探针跑得出（%d 档）" % len(_rows), len(_rows) == len(GIBBERISH_PROBE))
+    chk("★★ complexity **随词数单调不减**（证明它确实由长度驱动）",
+        all(_rows[i][1] <= _rows[i + 1][1] for i in range(len(_rows) - 1)))
+    chk("★★★ **负对照：够长的无意义串能爬到 deep_team**"
+        "（这正是本节要报的那件事；它若不再成立，说明公式改过了 —— 去重做推导）",
+        any(r[2] in ("deep_team", "swarm") for r in _rows))
+    chk("★ 正对照：最短的那档**不该**是 deep_team（否则探针本身有问题）",
+        _rows[0][2] not in ("deep_team", "swarm"))
 
     # ── `evidence_arrival`：正对照 + 两个负对照 ──
     import tempfile
@@ -660,6 +706,25 @@ def main() -> int:
     #   本段只做一件事：把「靠推断到达」与「被指定到达」**分开印**，
     #   免得下一个人拿 route-swarm.json 当作 swarm 可达的证据。
     #   [[self-report-is-not-evidence]]｜[[evidence-must-carry-what-it-measured]]
+    # ★★★★★ 负对照：**纯长度**能不能爬上阶梯
+    if _m is not None:
+        rows = gibberish_ladder(_m)
+        if not rows:
+            print("\n（纯长度负对照未量：装不进 compile_task_graph）")
+        else:
+            print("\n★★★ **负对照：一段毫无内容的长串能爬到哪一档**"
+                  "（`zzq0 zzq1 …`，撞不上任何词表）")
+            for n, cx, mode, size in rows:
+                mark = "  ← ★ **无内容却拿到 %d 人**" % size if mode in ("deep_team", "swarm") else ""
+                print("     %3d 个无意义词  complexity **%.3f**  ⇒ **%s**（%d 人）%s"
+                      % (n, cx, mode, size, mark))
+            worst = max(rows, key=lambda r: r[3])
+            print("     ⇒ **长度是这道阶梯的主要驱动**：`complexity` 里光字数一项上限 "
+                  "`min(wc,120)/170 = 0.706`，而 deep_team 门 0.76。")
+            print("     对照：真有内容的短请求「修复登录接口的空指针崩溃并补回归测试。」"
+                  "⇒ complexity 0.296 ⇒ **single_expert（1 人）**。")
+            print("     ★ **长度不是复杂度。** 本件只报，不改公式（改它会移动每一道任务的档位）。")
+
     ev_root = root / "evidence"
     if ev_root.is_dir():
         by_mode, n_files = evidence_arrival(ev_root)
