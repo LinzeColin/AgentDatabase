@@ -86,6 +86,8 @@ OUT_OF_PACKAGE_ACKNOWLEDGED = {
         "skill_log_evals/persona-distiller/_ledgers/_pipeline/（开发台账树，不分发）",
     "report_expert_team_state.py":
         "skill_log_evals/persona-distiller/_ledgers/_pipeline/（开发台账树，不分发）",
+    "measure_packet_assignment_ablation.py":
+        "skill_log_evals/persona-distiller/_ledgers/_pipeline/（开发台账树，不分发）",
     # ② **上游 skill 的构建工具** —— 随 persona-distiller 分发，不随本 skill
     "build_release_bundle.py": "registry/codex/persona-distiller/scripts/（上游 skill，另装）",
     "bump_version.py":         "registry/codex/persona-distiller/scripts/（上游 skill，另装）",
