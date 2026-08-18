@@ -45,7 +45,8 @@ failfast 定位到**第一处**：`test_group_contract.py` 的
 ★ **订正（同日）**：「唯一一处」是 failfast 的产物。不带 `-f` 全跑 **92 条里 3 处红**：
 另两处是 `package_target.py` 打包 **60 秒硬超时**（未定因）与
 `test_new_software_deliveries_are_available_to_routing`（缺 Simon Willison，
-**而那个测试调的是 A 层旧路由 `route_team.py`**，MoE 路由把他排第 9、会入选）。
+**真因是 `marginal_select()` 重罚同族** —— 软件评审题第 2–9 名每族各一人、第 10 名才回到第二个软件人，软件席位早被占满；见本文件上一节）。
+　★ 此处原写「测的是 A 层旧路由」，**已撤回** —— `route_team.py` 是 6 行薄壳，与 `route_team_moe.py` 是同一个路由。
 
 **单开关消融**（清空 `WEAK_SIGNALS` ＝ 回到 08-17 修复前，复原后断言回到原值）：
 
