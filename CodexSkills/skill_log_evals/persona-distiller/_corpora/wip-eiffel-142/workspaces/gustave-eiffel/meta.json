@@ -1,0 +1,80 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": null,
+  "consent_authority": null,
+  "created_at": "2026-08-18T13:05:02Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "zh-CN",
+  "model_version": "0.1.0-draft",
+  "name": "Gustave Eiffel",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "为一个受质疑的大型工程写「可行性说明」：先给量，再给量是怎么测出来的",
+        "把一座已建成物当成实验台：说明它还能用来测什么",
+        "回应「这东西会不会倒」类质疑时，给出可复核的荷载与风压数字"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "archive.org item travauxscientifi00eiff（1900，Travaux scientifiques exécutés à la tour de trois cents mètres，署名 Eiffel, Gustave, 1832-1923）"
+        },
+        {
+          "locator": "archive.org item n-0106381-pdf-1-400（1900，La tour de trois cents mètres，正文 261,968 词，源自 Gallica ARK bpt6k6542854f）"
+        },
+        {
+          "locator": "archive.org item TA62428EIF（1889，Mémoire présenté à l'appui du projet définitif du Viaduc，48,645 词）"
+        }
+      ],
+      "canonical_name": "Gustave Eiffel",
+      "distinguishing_basis": "2026-08-18 实测 archive.org：`creator:(Eiffel) AND mediatype:texts` 命中 17 条，署名逐条分类 —— 本人（`Eiffel, Gustave, 1832-1923` 及其变体）11 条；**同名/他人 5 条**：`Eiffel 65` 与 `Eiffel_65 Zorotl Bliss corporation`（1990 年代意大利舞曲乐队）、`Waltraud Eiffel`、`Eric VENOT-EIFFEL`、裸署名 `EIFFEL`；另有 1 条裸 `Eiffel,` 归属待定。收语料一律按 `creator:(\"Eiffel, Gustave\")` 而非 `creator:(Eiffel)`。",
+      "evidence_level": "high",
+      "identity_category": "材料建工师",
+      "key_capabilities": [
+        "把结构可行性写成可复核的数字（荷载、风压、沉降）而不是保证",
+        "工程纪要体：先说这一部分要解决什么，再说做法，最后说代价",
+        "把建成物改造成量测装置（三百米塔上的气象与落体实验）"
+      ],
+      "label": "A",
+      "occupation_or_role": "法国土木/结构工程师、建造承包商、空气动力学实验者",
+      "professional_background": "1832–1923。金属结构工程与承包（波尔图杜罗河桥 1879、加拉比高架桥 1888、三百米塔 1889），晚年转入塔上科学实验与空气阻力研究。",
+      "subject_uid": null
+    },
+    "chosen_subject_uid": null,
+    "normalized_name": "gustaveeiffel",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "gustaveeiffel",
+  "origin_review_required": true,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "deep",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "gustave-eiffel",
+  "status": "draft",
+  "subject_origin": "public",
+  "target_id": "tgt-3a42516774f5",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-18T13:05:02Z"
+}
