@@ -3,7 +3,7 @@
   "display_name": "Persona Distiller Group",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.40",
+    "kind": "repository-customized-v0.0.0.41",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "files": [
@@ -19,8 +19,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "039f7c3fc1aab739dd17039fc9b66dffc7a2d22fd909ee4ce9533633a3c505a0",
-      "size_bytes": 84957
+      "sha256": "3c6154bbd449e19ddae2f84a24d2fe66e77a9ac7e85d005e28df58d099d78666",
+      "size_bytes": 87093
     },
     {
       "path": "README.md",
@@ -29,12 +29,12 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "2c5bec14775c4ba0cb7f72f3427e1ec5e77c6c771728ab76ee2eecd3939539aa",
-      "size_bytes": 25485
+      "sha256": "649f8561d30ba463dee8daeedd83c2bb76bf684c2848f7bccc1baacec7a8d55d",
+      "size_bytes": 26727
     },
     {
       "path": "VERSION",
-      "sha256": "1e838702dd96b7b57b3b54a12a78204b436aab49953d4a1ef1deea100df1df46",
+      "sha256": "98f3ad19b511b901514d5db37dc25f7be8e715d57ab624f52ede44bc96b73bc1",
       "size_bytes": 10
     },
     {
@@ -129,7 +129,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "7353ed09de27fdaabd46a1e29506763c007fd4bb9a4e2d2aa243c5c595ef8c7a",
+      "sha256": "56b93399e7457dfb467d07fd9d6bca9a2b84e1f3b467f7e826f7e751e9e73368",
       "size_bytes": 1304
     },
     {
@@ -258,6 +258,11 @@
       "size_bytes": 15008
     },
     {
+      "path": "scripts/check_execution_contract_fits_a_context.py",
+      "sha256": "861dde60e23e8d1a7317e1c8a6fcbd1b6fccc022b6fe06b25e121030db580122",
+      "size_bytes": 9804
+    },
+    {
       "path": "scripts/check_group_version_binding.py",
       "sha256": "4947fa907c775d3da0f0984d2608f0a53196a3ccfe55fca59c95ac810cc08173",
       "size_bytes": 7915
@@ -364,7 +369,7 @@
     },
     {
       "path": "team-index.json",
-      "sha256": "c0029c675789e8e88b1ffa52a40b399394df53dd88d1cf85eb656dde663310b5",
+      "sha256": "c016317d6fddafe12ace1d651f42606aa8e5d5802574afbd36b1daf9bb5f251c",
       "size_bytes": 400812
     },
     {
@@ -411,6 +416,11 @@
       "path": "tests/test_domain_inference_is_language_neutral.py",
       "sha256": "7672942652be421831ab9a8aeeb147b1b542fb11f873b7e138d0bba74c56b08f",
       "size_bytes": 4056
+    },
+    {
+      "path": "tests/test_execution_contract_fits_a_context.py",
+      "sha256": "e668d6f659fe248ffb914245c465ce80e265ecb466648df00fc09c7032467e66",
+      "size_bytes": 3286
     },
     {
       "path": "tests/test_generic_verbs_do_not_claim_a_domain.py",
@@ -2093,5 +2103,5 @@
   "name": "persona-distiller-group",
   "schema_version": "1.0",
   "verification": {},
-  "version": "v0.0.0.40"
+  "version": "v0.0.0.41"
 }
