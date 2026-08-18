@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "490315b282a1a8d39cfc178496e4945644158af811f85038eecd4fd3c8152d5b",
-      "size_bytes": 157996
+      "sha256": "700c0cfc8341575c1b65571109696133a48fdb13982be0d8dee1fa94a147ec0d",
+      "size_bytes": 159370
     },
     {
       "path": "VERSION",
@@ -2436,8 +2436,8 @@
     },
     {
       "path": "tests/test_markdown_report_handles_string_items.py",
-      "sha256": "caf554265006e1cd216c4f86ebfa67efd41541ffc6ee1e7d4a629ad37ee61aff",
-      "size_bytes": 4655
+      "sha256": "8cfb59e2f682a2fcc928f6a472f5b102e53593e5d1a6e00ef01bc8c716e794c6",
+      "size_bytes": 8364
     },
     {
       "path": "tests/test_namesake_gate.py",
@@ -2483,11 +2483,6 @@
       "path": "tests/test_selftests_outside_check_prefix.py",
       "sha256": "5c9ccc2831754063a5cbb5139f4c1992e530d3b706ecb127027f4ecceca3cfe3",
       "size_bytes": 4833
-    },
-    {
-      "path": "tests/test_show_gate_survives_mixed_shapes.py",
-      "sha256": "b6ca92ac8e2d747744a7fac6a9ecf47fc42687e9b9ce0c601b9bc8da36d34b50",
-      "size_bytes": 3577
     },
     {
       "path": "tests/test_skill_contract.py",
