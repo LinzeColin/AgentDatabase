@@ -115,8 +115,16 @@ def append_outcome(telemetry_path: Path, route: dict[str, Any], delta: dict[str,
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Record one measured team outcome for C-layer calibration.")
-    parser.add_argument("--route-plan", type=Path, required=True)
-    parser.add_argument("--delta-score", type=Path, required=True)
+    # ★ 2026-08-18：这两个参数**是文件路径**，而此前 `--help` 一个字的说明都没有。
+    #   实测：第一次用的人很自然会写 `--delta-score 70`（它听起来就是个分数），
+    #   得到的是**未捕获的 FileNotFoundError traceback** —— 而本文件为「文件读得到
+    #   但形状不对」精心写了 blocked JSON。**最可能被撞到的那条错路，恰恰是没铺的那条。**
+    #   [[error-message-points-at-an-exit-that-isnt-there]]
+    parser.add_argument("--route-plan", type=Path, required=True,
+                        help="**文件路径**：`route_team_moe.py --output` 产出的 route-plan.json")
+    parser.add_argument("--delta-score", type=Path, required=True,
+                        help="**文件路径，不是分数**：`score_team_delta.py` 产出的判分 json"
+                             "（要含 dimensions / formal_market_pass / minimum_dimension 之一）")
     # ★ 不用 `choices=` 硬拒 —— 会卡住真实流程（「不许因为过不了门而卡住流程」）。
     #   但**词表必须出现在 `--help` 里**：它此前只活在本文件的常量里，
     #   SKILL.md 写的是 `--task-slice <slice>`，一个字都没提有词表。
@@ -137,14 +145,34 @@ def main() -> int:
     #   而 route_team_moe 正是拿这个账本当 C 策略先验 ⇒
     #   一条垃圾记录会**直接污染以后所有路由的排序**，且没有任何地方会报警。
     #   [[empty-default-swallows-unknown]]｜[[a-gates-scan-set-is-smaller-than-reality]]
-    _rp = read_json(args.route_plan)
+    def _load_or_block(path: Path, what: str, produced_by: str):
+        """→ (dict, None) 或 (None, rc)。**读不到也走 blocked 那条出口**，不抛 traceback。"""
+        if not path.is_file():
+            print(json.dumps({"status": "blocked", "reason":
+                  "%s 不是一个存在的文件：%s —— 这个参数要的是**文件路径**"
+                  "（由 `%s` 产出），不是数字或名字。**不写遥测**。"
+                  % (what, path, produced_by)}, ensure_ascii=False))
+            return None, 2
+        try:
+            return read_json(path), None
+        except (ValueError, OSError) as exc:
+            print(json.dumps({"status": "blocked", "reason":
+                  "%s 读不成 json：%s（%s）。**不写遥测**。"
+                  % (what, path, type(exc).__name__)}, ensure_ascii=False))
+            return None, 2
+
+    _rp, _rc = _load_or_block(args.route_plan, "--route-plan", "route_team_moe.py --output")
+    if _rc is not None:
+        return _rc
     if not any(k in _rp for k in ("mode", "members", "strategy", "task_graph")):
         print(json.dumps({"status": "blocked", "reason":
               "route-plan 里 mode/members/strategy/task_graph 一个都没有 —— "
               "这不是 route_team_moe 的产物。**不写遥测**：垃圾记录会污染 C 层校准。"},
               ensure_ascii=False))
         return 2
-    _ds = read_json(args.delta_score)
+    _ds, _rc = _load_or_block(args.delta_score, "--delta-score", "score_team_delta.py")
+    if _rc is not None:
+        return _rc
     if not any(k in _ds for k in ("dimensions", "formal_market_pass", "minimum_dimension")):
         print(json.dumps({"status": "blocked", "reason":
               "delta-score 里 dimensions/formal_market_pass/minimum_dimension 一个都没有 —— "

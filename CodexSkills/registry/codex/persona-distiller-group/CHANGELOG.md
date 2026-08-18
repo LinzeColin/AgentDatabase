@@ -1,5 +1,53 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.44
+
+**自优化那条回路能闭 —— 但它只在「产品表现得差」的时候闭得上。**
+
+Owner 五条批评里有「自优化迭代无实质收益」。已知遥测 **0 条**、C 从未启用，
+但**没人验过「写满 60 条之后 C 会不会真的开」**。这一版把它跑通了。
+
+**先把回路跑通**（**只写临时遥测文件**，默认路径 `telemetry/team-outcomes.json`
+跑完仍不存在，git 里 0 条改动）：
+
+    60 条（12 个切片 × 5，coverage 1.00）
+      actual_success = 0.2409（＝匹配排序分）⇒ ECE **0.0000** ⇒ eligible **True**  ⇒ strategy **C**
+      actual_success = 0.85（一个能用的产品）⇒ ECE **0.6091** ⇒ eligible **False** ⇒ strategy **B**
+
+**⇒ 机制是通的。坏的是「预测量」选错了对象。**
+
+`record_team_outcome:95` 把 **队伍 `marginal_score` 均值** 存成 `predicted_success`，
+而 ECE 拿它去比**观测到的成功率**。**一个排序分被当成概率用。**
+
+实测取值范围（★ **两份样本都报，不许只报对自己有利的那份**）：
+
+    72 道 oracle 的 12 个题面 ⇒ 0.1559–0.2552 ⇒ 可启用窗口 **0.04–0.38**
+    名册标签 12 条（判据默认）⇒ 0.2155–0.5160 ⇒ 可启用窗口 **0.10–0.64**
+
+**取对产品最有利的那份（上沿 0.64）**：真实成功率 70%／80%／90%
+⇒ ECE **0.1840／0.2840／0.3840** ⇒ **三档全部启用不了**。
+
+**顺手修掉一个真的阻碍点**（是「跑一遍」跑出来的）：
+`record_team_outcome.py` 的 `--route-plan` / `--delta-score` 是 `type=Path` 而
+**`--help` 里一个字的说明都没有**。第一次用的人很自然会写 `--delta-score 70`
+（它听起来就是个分数），得到的是**未捕获的 `FileNotFoundError` traceback** ——
+而本文件为「文件读得到但形状不对」精心写了 `blocked` JSON。
+**最可能被撞到的那条错路，恰恰是唯一没铺的那条。** 现在：
+
+    {"status":"blocked","reason":"--delta-score 不是一个存在的文件：70 —— 这个参数要的是**文件路径**…"}   rc=2
+
+并给两个参数补了 help（写明由哪个脚本产出）。
+
+**守卫**：新增 `scripts/check_c_layer_is_reachable_for_a_working_product.py`（7 项自测）——
+含 **★★ 正对照**（predicted==actual ⇒ ECE 0 ⇒ 必须启用，否则判 rc=4 未量）与
+**★★★ 反对照**（0.24 vs 0.85 ⇒ 必须启不了）。基线绑的是**判据自己的默认样本**
+（窗口上沿 0.6360，地板 0.63）——★ 我第一版把基线设成了 oracle 样本的 0.37，
+**换样本就是换尺子**，已订正。
+＋ 调用方 `tests/test_c_layer_is_reachable_for_a_working_product.py`（6 项，含
+**★★★「跑完之后默认遥测文件的存在性不许变」**）。
+
+**门一个都没改**（改 `predicted_success` 或 ECE 阈值会改变每次路由的策略层）⇒ Task #137。
+
 ## v0.0.0.43
 
 **把上一版自己写下的射程缺口补上：`swarm` 也跑通了 —— 30 人 / 789 KB。**
