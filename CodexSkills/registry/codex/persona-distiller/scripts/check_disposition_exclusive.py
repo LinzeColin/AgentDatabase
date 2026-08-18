@@ -160,12 +160,24 @@ def _nearest(key: str, allnames: dict[str, str], raw: str = "") -> str:
 
 
 def check(group: pathlib.Path, ledgers: pathlib.Path, corpora: pathlib.Path
-          ) -> tuple[int, list[str]]:
+          ) -> tuple[int, list[str], int]:
+    """→ (违规数, 打印行, **未量数**)。
+
+    ★ 2026-08-18：第三个返回值是新加的。此前 `errors` 把「读不到文件」和
+      「真的有人重复」加在一起，`main()` 又 `return 1 if errors else 0`
+      ⇒ **未量被报成违规**。实测触发点：本文件在
+      `references/pipeline/checkers/` 下有一份逐字节镜像，跑那一份时
+      `__file__` 往上推出来的根是错的，三份台账全部读不到 ⇒ rc=1「有重复」。
+      （全仓 93 对逐字节镜像里，实测**只有这一对**会给假红。）
+      **未量 ≠ 通过 ≠ 违规。**
+      [[a-checkers-verdict-must-not-depend-on-cwd]]｜[[empty-default-swallows-unknown]]
+    """
     three, missing = load_three(group, ledgers)
     lines = list(missing)
     if missing:
         lines.append("★ **有文件读不到时，本件的结论不完整** —— 不许读成「没有重复」")
-    errors = len(missing)
+    unmeasured = len(missing)
+    errors = 0
 
     states = list(three)
     for i in range(len(states)):
@@ -207,7 +219,7 @@ def check(group: pathlib.Path, ledgers: pathlib.Path, corpora: pathlib.Path
                  "**不许当成「没有重复」**"
                  "\n★ **双语名已不在盲区**（2026-08-13 补）：`田口玄一 Genichi Taguchi` 与 "
                  "`Genichi Taguchi` 现在按拉丁投影认得出来。")
-    return errors, lines
+    return errors, lines, unmeasured
 
 
 # ---------------------------------------------------------------- 自测
@@ -251,7 +263,7 @@ def self_test() -> int:
                 json.dumps({"deferred": [{"name": x} for x in defer]}), encoding="utf-8")
             (led / "_受阻待裁.json").write_text(
                 json.dumps({"blocked": [{"name": x} for x in block]}), encoding="utf-8")
-            err, _ = check(g, led, root / "_none")
+            err, _, unm = check(g, led, root / "_none")
             got = 1 if err else 0
             print(f"  {'✓' if got == want else '✗'} {name}｜错 {err}")
             bad += 0 if got == want else 1
@@ -260,8 +272,9 @@ def self_test() -> int:
         root = pathlib.Path(d)
         g = root / "team-index.json"
         g.write_text(json.dumps({"products": []}), encoding="utf-8")
-        err, ls = check(g, root / "_nowhere", root / "_none")
-        ok = err > 0 and any("读不到" in l for l in ls)
+        err, ls, unm = check(g, root / "_nowhere", root / "_none")
+        # ★ 口径变了：读不到现在计入 **unmeasured**，不再混进 err。
+        ok = unm > 0 and any("读不到" in l for l in ls)
         print(f"  {'✓' if ok else '✗'} 台账读不到必须报错，不当空集"
               f"（[[empty-default-swallows-unknown]]）")
         bad += 0 if ok else 1
@@ -278,10 +291,16 @@ def main() -> int:
     a = ap.parse_args()
     if a.self_test:
         return self_test()
-    errors, lines = check(pathlib.Path(a.group), pathlib.Path(a.ledgers),
-                          pathlib.Path(a.corpora))
+    errors, lines, unmeasured = check(pathlib.Path(a.group), pathlib.Path(a.ledgers),
+                                      pathlib.Path(a.corpora))
     for l in lines:
         print(l)
+    if unmeasured:
+        print(f"\n★ **未量，不是通过**（rc=4）—— {unmeasured} 份输入读不到，"
+              f"「0 重复」在这种情况下不成立。")
+        print("   ★ 若你跑的是 `references/pipeline/checkers/` 下那份镜像："
+              "它的根会往上推错，**真正的调用方是 `scripts/` 那份**。")
+        return 4
     print(f"\n错 {errors}")
     return 1 if errors else 0
 

@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "b20d859a3f0fe268bbc77fb0a26b7bf376fb9ec1d77e476ac51f43865ef5eb57",
-      "size_bytes": 367968
+      "sha256": "c61efce9d794692ddc557057e94ba0af784f7586872c4174d26ac749bd6b5313",
+      "size_bytes": 369902
     },
     {
       "path": "CONTRIBUTING.md",
@@ -646,8 +646,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_disposition_exclusive.py",
-      "sha256": "602718fdfbb800cd45c2ff28416cbc513924f7494a3d394083f52d9be106fb48",
-      "size_bytes": 14079
+      "sha256": "f0fdc57f4c6af6c328968150377295da0375ed382792d1e683bb2795472d69c4",
+      "size_bytes": 15338
     },
     {
       "path": "references/pipeline/checkers/check_distillation_freshness.py",
@@ -1456,8 +1456,8 @@
     },
     {
       "path": "scripts/check_disposition_exclusive.py",
-      "sha256": "602718fdfbb800cd45c2ff28416cbc513924f7494a3d394083f52d9be106fb48",
-      "size_bytes": 14079
+      "sha256": "f0fdc57f4c6af6c328968150377295da0375ed382792d1e683bb2795472d69c4",
+      "size_bytes": 15338
     },
     {
       "path": "scripts/check_distillation_freshness.py",

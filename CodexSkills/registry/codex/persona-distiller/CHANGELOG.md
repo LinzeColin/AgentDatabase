@@ -2,6 +2,38 @@
 
 ## 工具改动（不升版）
 
+### 2026-08-18｜同一形状**全仓扫了一遍**：静态预测 11 个，**实测只有 1 个**真给假红（工具侧，不升版）
+
+上一条修完 `check_contract_drift` 之后，先问了「**这个形状还有几处**」，
+而不是照着形状去改文件。
+
+**静态扫**（同名 + 逐字节相同 + 所在深度不同 ⇒ `__file__` 往上推出的根必然不同）：
+**11 个**判据符合。
+
+**实测扫**（把 `scripts/` 那份与 `references/pipeline/checkers/` 那份各跑一遍，比退出码）：
+**93 对**逐字节相同的 `check_*` 镜像里 ——
+
+    一致                        91 对
+    0 vs 4（本轮刚修的）         check_contract_drift.py
+    0 vs 3（rc=3 是「用法错误」，诚实） check_distillation_freshness.py
+    **0 vs 1 —— 真假红**         **check_disposition_exclusive.py**（1 个）
+
+⇒ **静态形状高估了 11 倍。** 大多数判据从镜像跑也没事：它们要么收显式参数、
+要么根解析方式不同、要么本来就是非 0。**「有这个形状」不等于「有这个毛病」。**
+[[samples-cannot-support-universal-claims]]
+
+**修的那一个**：`check_disposition_exclusive.py` 里 `errors` 把
+「读不到文件」和「真的有人重复」**加在一起**，`main()` 又 `return 1 if errors else 0`
+⇒ 从镜像跑时三份台账全读不到，报成 **rc=1「有重复」**。
+它**已经印了**「★ 有文件读不到时，本件的结论不完整」这句话，**但退出码把它出卖了**。
+
+改法：`check()` 多返回一个 `unmeasured`，`main()` 见到就 **rc=4** 并提示
+「你可能跑的是镜像那份，真正的调用方是 `scripts/`」。
+自测那条「台账读不到必须报错」跟着改口径（从 `err>0` 改成 `unm>0`）。
+★ 反向对照：把 `unmeasured` 改回并进 `errors` 的退化版，自测**确实判红**。
+
+真根下 rc=0，行为不变；镜像那份 1 → **4**。
+
 ### 2026-08-18｜`check_contract_drift` 把「我没量到」报成了「它违规」（**工具侧，不升版**）
 
 本文件**有两份**（`scripts/` 与 `references/pipeline/checkers/`，逐字节相同），
