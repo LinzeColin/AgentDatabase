@@ -1781,8 +1781,8 @@
     },
     {
       "path": "scripts/collect_honest_delta.py",
-      "sha256": "508d08825a0fcffa8525d8524fcff2c97e444d2ac4ef241524d19de2c9595d8f",
-      "size_bytes": 24648
+      "sha256": "0720c9b445ddd5f052909913777a3e7433fded876e16e4824743d57c3b78b8e3",
+      "size_bytes": 29014
     },
     {
       "path": "scripts/common.py",
