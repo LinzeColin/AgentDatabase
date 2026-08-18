@@ -1,5 +1,46 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.45
+
+**用户看的那张卡片把两条实打实的贡献静默丢掉了 —— 同一形状的第四处，而它此前没有守卫。**
+
+接着「真的去用一次」往下走：产出 Team Delta Card 并**以读者视角读一遍**。
+读到 `material_expert_contributions: []` —— 而我明明喂了两条贡献。
+
+真因在 `build_team_delta_card.build_card`：
+
+    material = [row for row in contributions
+                if float(row.get("decision_influence", 0)) > 0 or row.get("artifact_owned")]
+
+而 `decision_influence` / `artifact_owned` 在 **SKILL.md 与 references/*.md 里出现 0 次**
+（`member_contributions` 本身写在 SKILL.md:200）。
+⇒ **文档叫你填 A，代码按你没听说过的 B 来筛。**
+⇒ 卡片上的 `[]` 与「**这支队伍没有做出实质贡献**」**一模一样**。
+
+★★ 这是**同一形状的第四处**。本文件对前三处守得极好，各配一段注释：
+   result 传成判分输入 ⇒ blocked；delta-score 传错 ⇒ blocked；六区段全缺 ⇒ blocked。
+   **而「文档传对了，只是每行少了两个没人告诉过你的字段」这一处，没有守卫。**
+   前三处守的是「你拿错了文件」，第四处是「你拿对了文件但填不全你没听说过的字段」——
+   **后者才是照着文档做事的人真正会撞到的那种。**
+
+**改法：筛选规则一个字没改**（改它会改变卡片的判断）。改的是**把丢掉的说出来**：
+
+    "material_expert_contributions_note":
+      "**2 / 2 条 `member_contributions` 未计入**：每行需要 `decision_influence > 0`
+       或 `artifact_owned`，这两个字段这些行都没有。⇒ 上面的
+       `material_expert_contributions` **不能读成「团队没有实质贡献」**。
+       被丢掉的：Kent Beck、Michael Feathers"
+
+★ 只有真丢了行才出现这个键 —— 没丢时不加噪声。
+★★ SKILL.md 的「两个 `--result` 不是同一份文档」那段里补上这两个字段的说明。
+
+**守卫**：`tests/test_delta_card_discloses_dropped_contributions.py`（5 项）——
+含**反对照**（字段齐全时不许加噪声）、**部分丢弃也要披露**（「筛掉一半」比「全筛掉」更易被忽略）、
+以及 **★★★「这两个字段不许再从 SKILL.md 里消失」**（本件的根因就是它们从没在文档里出现过）。
+
+**顺带核过一处仓里做得好的**：`--result` 传成判分输入时，
+`build_team_delta_card` 的 blocked 消息**点名了两个脚本、两个文件名**。那处不动。
+
 ## v0.0.0.44
 
 **自优化那条回路能闭 —— 但它只在「产品表现得差」的时候闭得上。**

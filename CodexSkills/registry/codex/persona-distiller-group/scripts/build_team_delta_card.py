@@ -44,8 +44,28 @@ def build_card(route: dict[str, Any], result: dict[str, Any], score: dict[str, A
             "delta-score 文档里 dimensions/benefit_deltas/efficiency_deltas/status "
             "一个都没有 —— 这不是 score_team_delta 的产物。**不产卡片**："
             "分数区全空的卡片会把「没测过」显示成「测了但很差」。")
+    # ★★★ 2026-08-18：**同一形状的第四处，而它此前没有守卫** ——
+    #   前三处守的都是「文档传错了」；这一处是「文档传对了，但每行少了两个
+    #   **SKILL.md 从没提过**的字段」。实测：`member_contributions` 给两条实打实的贡献
+    #   （只有 canonical_name + contribution）⇒ 两条**全部被静默丢掉**
+    #   ⇒ 卡片上 `material_expert_contributions: []`，与「这支队伍没做出实质贡献」
+    #   **一模一样**。而 `decision_influence` / `artifact_owned` 在 SKILL.md 与
+    #   references/*.md 里出现 **0 次**（`member_contributions` 本身写在 SKILL.md:200）。
+    #   ⇒ 文档叫你填 A，代码按你没听说过的 B 来筛。**不改筛选规则**（那会改变卡片的判断），
+    #      改成**把丢掉的说出来**：静默 → 披露。
+    #   [[empty-default-swallows-unknown]]｜[[the-comment-states-the-rule-the-code-narrows-it]]
     contributions = result.get("member_contributions", [])
     material = [row for row in contributions if float(row.get("decision_influence", 0)) > 0 or row.get("artifact_owned")]
+    dropped = [row for row in contributions if row not in material]
+    dropped_note = None
+    if dropped:
+        dropped_note = (
+            "**%d / %d 条 `member_contributions` 未计入**：每行需要 "
+            "`decision_influence > 0` 或 `artifact_owned`，这两个字段这些行都没有。"
+            "⇒ 上面的 `material_expert_contributions` **不能读成「团队没有实质贡献」**。"
+            "被丢掉的：%s"
+            % (len(dropped), len(contributions),
+               "、".join(str(r.get("canonical_name") or "?") for r in dropped[:6])))
     return {
         "schema_version": "persona-team.delta-card.v1",
         "mode": route.get("mode"),
@@ -53,6 +73,8 @@ def build_card(route: dict[str, Any], result: dict[str, Any], score: dict[str, A
         "why_this_mode": route.get("task_graph", {}).get("mode_reasons", []),
         "work_completed": result.get("work_completed", []),
         "material_expert_contributions": material,
+        # ★ 只有真丢了行才出现这个键 —— 没丢时不加噪声。
+        **({"material_expert_contributions_note": dropped_note} if dropped_note else {}),
         "decision_changing_disagreements": result.get("decision_changing_disagreements", []),
         "relative_to_baseline": {
             "overall_delta": score.get("dimensions", {}).get("overall_delta"),

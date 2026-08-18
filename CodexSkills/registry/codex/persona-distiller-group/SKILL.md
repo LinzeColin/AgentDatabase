@@ -199,7 +199,15 @@ python3 scripts/run_team_pipeline.py \
 > `result-input.json` 是**判分输入**（`absolute` / `candidate` / `baseline` / `paired`）；
 > `team-result.json` 是**运行叙述**（`work_completed` / `member_contributions` /
 > `decision_changing_disagreements` / `audit_trace` / `next_action` /
-> `remaining_unknowns`）。参数同名而内容不同，别把同一份传给两边 ——
+> `remaining_unknowns`）。
+>
+> ★★★ **`member_contributions` 的每一行还需要 `decision_influence > 0` 或 `artifact_owned`**
+> （2026-08-18 补：这两个字段此前**只活在 `build_team_delta_card.py` 的代码里**，
+> SKILL.md 与 references/*.md 里出现 **0 次**）。缺了它们的行会被
+> `material_expert_contributions` **筛掉** —— 实测两条实打实的贡献全被丢掉，
+> 卡片显示 `[]`，**与「这支队伍没有实质贡献」一模一样**。
+> 现在丢行时卡片会多出一条 `material_expert_contributions_note` 把丢了几条、为什么丢说清楚，
+> **但最省事的做法是照这里把两个字段填上**。参数同名而内容不同，别把同一份传给两边 ——
 > 传错时 `score_team_delta` 会 **`status: blocked` 并 rc=2**（不会给你一个 0 分冒充读数）。
 
 
