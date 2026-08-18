@@ -161,6 +161,32 @@
 ★ 同时加了**最小样本量守卫**：样本 < 20 条时不许下「不可达」的结论（返回 rc=4 未量）——
   否则拿 `--tasks` 塞两条就能得出任意结论。本件自己也要守「样本撑不起全称判断」。
 
+## ★★★★★ 旁边那柜「四档都验收过」的证据，**全是 `--mode` 指定跑出来的**
+
+`evidence/v0.0.0.14-candidate-acceptance/` 下有 route-single_expert / small_team /
+deep_team / swarm 四份，看着正是「四档都够得到」的反证。**逐份读它自己的字段：**
+
+    四份都写着 requested_mode = 该档
+    四份的 task_graph.mode_reasons 都是 **['explicit owner/runtime override']**
+
+⇒ 它们证明的是「**每一档被指定时跑得起来**」，**不是**「自动推断够得到每一档」。
+  这是两件事，而 `route-swarm.json` 这个文件名长得像后者。
+  本件已把这两栏**分开印**，免得下一个人拿它当 swarm 可达的证据。
+  [[self-report-is-not-evidence]]｜[[evidence-must-carry-what-it-measured]]
+
+★ **我自己差点在这儿翻车。** 先拿这四条题面用 `auto` 重编译，得到「3/4 对不上它自己记的档」，
+  几乎写成「验收证据漂了」。**是我在比两个不同的东西**：证据是 `--mode` 跑的，我是 auto 跑的。
+  回查确认：profile 的每个数**当时与今天一模一样**（唯一变的是 swarm 的 domains 8→7，
+  那是 08-17 `设计/design` 降弱信号的正确结果），
+  门槛那三行 `git log -L` 只有一次提交、**从未改过**。
+  [[stopping-at-the-first-answer-that-holds-together]]｜[[self-consistent-is-not-latest]]
+
+★★ **最硬的那个数**：swarm 那条题面是**照着 swarm 的门写的** ——
+  「全网」「批量」「并行」三个 PARALLEL 词全塞进去了，还写了「至少四十个独立分片」——
+  它的 `parallelizability` 仍然只有 **0.665 < 门 0.72**。
+  **有人专门为 swarm 写了一条任务，自动推断仍然不会选 swarm。**
+  这比 60 条标签上的「0 次触发」更接近「结构性不可达」的直接证据。
+
 ## 任务从哪来（不许我自己编）
 
 `team-index.json` 每个产物自带 `application_scenarios` —— 那是蒸馏流程写下的
@@ -211,6 +237,29 @@ def reachability(profiles: list[dict]):
     return out
 
 
+def evidence_arrival(ev_root) -> tuple:
+    """`evidence/` 下每份 `route-*.json` 是**靠推断**到达该档，还是**被 `--mode` 指定**的。
+
+    → `({档: {"推断": n, "指定": n}}, 读到的文件数)`。
+    ★ 文件数单独返回：**0 份要判「未核」，不能判「没有指定的」**。
+    """
+    by_mode, n_files = {}, 0
+    for ev in sorted(pathlib.Path(ev_root).rglob("route-*.json")):
+        try:
+            d = json.loads(ev.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        if not isinstance(d, dict):
+            continue
+        n_files += 1
+        forced = (d.get("requested_mode") not in (None, "auto")) or any(
+            "override" in str(x) for x in
+            ((d.get("task_graph") or {}).get("mode_reasons") or []))
+        slot = by_mode.setdefault(d.get("mode"), {"推断": 0, "指定": 0})
+        slot["指定" if forced else "推断"] += 1
+    return by_mode, n_files
+
+
 def unreachable(report: dict) -> list[str]:
     """→ 一次都触发不了的档。纯函数。"""
     bad = []
@@ -249,6 +298,41 @@ def self_test() -> int:
         reachability([])["deep_team"]["risk"][1] == 0.0)
     chk("★★ 缺字段按 0 计，不抛异常（画像多一个键少一个键都不该让判据崩）",
         reachability([{"domains": 3}])["small_team"]["domains"][2] == 1)
+
+    # ── `evidence_arrival`：正对照 + 两个负对照 ──
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        d = pathlib.Path(td)
+        chk("★ 空目录判「读到 0 份」——由调用方印**未核**，不是「没有指定的」",
+            evidence_arrival(d) == ({}, 0))
+        # ① 被 --mode 指定：requested_mode 非 auto
+        (d / "route-swarm.json").write_text(json.dumps(
+            {"mode": "swarm", "requested_mode": "swarm",
+             "task_graph": {"mode_reasons": ["explicit owner/runtime override"]}}),
+            encoding="utf-8")
+        # ② 靠推断：requested_mode=auto 且 reasons 里没有 override
+        (d / "route-auto.json").write_text(json.dumps(
+            {"mode": "small_team", "requested_mode": "auto",
+             "task_graph": {"mode_reasons": ["multi-capability task with bounded coordination"]}}),
+            encoding="utf-8")
+        by, nf = evidence_arrival(d)   # ★ 不叫 n：外层 chk 的计数器就叫 n
+        chk("★★ 指定与推断分得开（swarm 记「指定」、small_team 记「推断」）",
+            nf == 2 and by["swarm"] == {"推断": 0, "指定": 1}
+            and by["small_team"] == {"推断": 1, "指定": 0})
+        # ③ ★★★ 负对照：**只看 requested_mode 不够** —— 有的产物 requested_mode 缺失，
+        #    但 mode_reasons 里写着 override。漏掉这一半会把「被指定」误报成「靠推断」，
+        #    而那正是本段要防的那句话。
+        (d / "route-sneaky.json").write_text(json.dumps(
+            {"mode": "deep_team",
+             "task_graph": {"mode_reasons": ["explicit owner/runtime override"]}}),
+            encoding="utf-8")
+        by, _ = evidence_arrival(d)
+        chk("★★★ 负对照：缺 requested_mode 但 reasons 写着 override 的，仍判「指定」",
+            by["deep_team"] == {"推断": 0, "指定": 1})
+        # ④ 坏 JSON 不计数也不炸
+        (d / "route-broken.json").write_text("{ not json", encoding="utf-8")
+        _, nf2 = evidence_arrival(d)
+        chk("★ 坏 JSON 跳过且不炸（读到 3 份，不是 4 份）", nf2 == 3)
     print("\n自测 %d 项，不符 %d 项" % (n[0], len(bad)))
     return 1 if bad else 0
 
@@ -500,6 +584,51 @@ def main() -> int:
                 print("     这是「域数几乎恒为 1 ⇒ 恒 single_expert」的**最上游成因**：")
                 print("     不是任务真的单一，是**分类器认不出来**。")
                 print("     [[blamed-the-channel-my-own-wordlist-was-blind]]")
+
+    # ★★★★ 2026-08-18：**旁边那一柜子「四档都验收过」的证据，全是 `--mode` 指定跑出来的。**
+    #
+    #   `evidence/v0.0.0.14-candidate-acceptance/` 下有 route-single_expert / small_team /
+    #   deep_team / swarm 四份，看起来正是「四档都够得到」的反证。逐份读它自己的字段：
+    #
+    #       四份都写着 requested_mode = 该档
+    #       四份的 task_graph.mode_reasons 都是 **['explicit owner/runtime override']**
+    #
+    #   ⇒ 它们证明的是「**每一档被指定时跑得起来**」，**不是**「自动推断够得到每一档」。
+    #     这两句话是两件事，而文件名 `route-swarm.json` 长得像后者。
+    #
+    #   ★ 我自己差点在这里翻车：先拿这四条题面用 `auto` 重编译，得到「3/4 对不上它自己记的档」，
+    #     几乎写成「验收证据漂了」。**是我在比两个不同的东西** —— 证据是 `--mode` 跑的，
+    #     我是 auto 跑的。回查确认：profile 每个数**当时与今天一模一样**
+    #     （唯一变的是 swarm 的 domains 8→7，那是 08-17 `设计/design` 降弱信号的正确结果），
+    #     门槛那三行 `git log -L` 只有一次提交、**从未改过**。
+    #     [[stopping-at-the-first-answer-that-holds-together]]
+    #
+    #   ★★ 最硬的那个数：swarm 那条题面是**照着 swarm 的门写的**
+    #     （「全网」「批量」「并行」「至少四十个独立分片」三个 PARALLEL 词全塞进去了），
+    #     它的 parallelizability 仍然只有 **0.665 < 门 0.72**。
+    #     **有人专门为 swarm 写了一条任务，自动推断仍然不会选 swarm。**
+    #
+    #   本段只做一件事：把「靠推断到达」与「被指定到达」**分开印**，
+    #   免得下一个人拿 route-swarm.json 当作 swarm 可达的证据。
+    #   [[self-report-is-not-evidence]]｜[[evidence-must-carry-what-it-measured]]
+    ev_root = root / "evidence"
+    if ev_root.is_dir():
+        by_mode, n_files = evidence_arrival(ev_root)
+        print("\n`evidence/` 里的路由产物：**靠推断到达** vs **被 `--mode` 指定到达**")
+        if not n_files:
+            print("  **未核**：`evidence/` 下一份 `route-*.json` 都没有（不是「没有指定的」）。")
+        else:
+            print("  | 档 | 靠推断到达 | 被指定到达 |")
+            print("  |---|---:|---:|")
+            for m in sorted(by_mode):
+                s = by_mode[m]
+                print("  | %s | %s | %d |"
+                      % (m, ("**%d**" % s["推断"]) if s["推断"] else "**0**", s["指定"]))
+            only_forced = [m for m, s in by_mode.items() if s["推断"] == 0 and s["指定"]]
+            if only_forced:
+                print("  ⇒ ★ **%s** 在 `evidence/` 里只有「被指定」的产物，"
+                      "**一份靠推断到达的都没有**。" % "、".join(sorted(only_forced)))
+                print("     `route-<档>.json` 这个文件名看着像「该档可达」的证据，**它不是**。")
 
     dead = unreachable(rep)
     # ★★★ **样本撑不起全称判断**：3 条任务上「一次也没触发」说明不了「不可达」。
