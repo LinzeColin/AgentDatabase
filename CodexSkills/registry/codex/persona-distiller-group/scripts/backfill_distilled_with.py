@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import pathlib
 import subprocess
 import sys
@@ -59,7 +60,11 @@ def repo_root(start: pathlib.Path) -> pathlib.Path | None:
 
 def attribute(record_path: pathlib.Path, repo: pathlib.Path) -> tuple[str | None, str, str]:
     """→ (版本, 来源, 说明)。归因不到就返回 (None, 'unknown', 原因)。"""
-    rel = record_path.relative_to(repo).as_posix()
+    # ★ 2026-08-18：两边都先 realpath。`git rev-parse --show-toplevel` 返回的是
+    #   **已解析软链**的路径（macOS 上 /var → /private/var），而 record_path 常是未解析的
+    #   ⇒ `relative_to` 直接抛 ValueError。任何路径上有软链的用户都会踩到。
+    #   [[path-prefix-checks-need-realpath]]
+    rel = record_path.resolve().relative_to(repo.resolve()).as_posix()
     proc = _git("log", "--diff-filter=A", "--format=%h", "-1", "--", rel, cwd=repo)
     commit = proc.stdout.strip()
     if not commit:
@@ -73,15 +78,35 @@ def attribute(record_path: pathlib.Path, repo: pathlib.Path) -> tuple[str | None
     return version, "git-first-commit", f"首次落盘提交 {commit}"
 
 
-def run(registry_root: pathlib.Path, apply_changes: bool) -> dict:
+# ★★★ 2026-08-18：**这条归因在本仓是退化的。**
+#   实测 `registration.json` **102 / 102 = 100%** 都被 git 判成同一个提交
+#   `bfe16379a`（2026-08-14）新增 —— 那不是「它们同一天被蒸出来」，
+#   是**整棵树那天才进的 git**（本仓有两个根提交）。
+#   ⇒ `--apply` 会把 **97 份**记录一律盖成 `v0.0.0.154`，
+#     并配上一个听起来很权威的 `source: git-first-commit`。
+#   **一个统一而错误的出处，比没有出处更坏** —— 后者是「不知道」，前者是「知道错了」。
+#   ★ 不硬拒（「不许因为过不了门而卡住流程」），改成：**印分布 + 要 `--anyway <理由>`**。
+#   [[a-zero-or-hundred-may-be-forced-by-the-definition.md]]｜[[self-consistent-is-not-latest]]
+DEGENERATE_SHARE = 0.90   # 同一个提交覆盖到这个比例 ⇒ 归因退化
+
+
+def run(registry_root: pathlib.Path, apply_changes: bool, anyway: str | None = None) -> dict:
     repo = repo_root(registry_root)
     if repo is None:
         return {"error": "不在 git 仓库内，无法重建"}
 
-    changed, skipped, failed = [], [], []
+    import collections  # noqa: PLC0415
+    commits: collections.Counter[str] = collections.Counter()
+
+    # ★ 两趟：先**只算**（顺便统计归因分布），确认不退化之后再写。
+    #   一趟边算边写的话，退化检查只能在写了一半之后才做得出来。
+    plan, skipped, failed = [], [], []
     for record_path in sorted(registry_root.glob("*/*/registration.json")):
         record = json.loads(record_path.read_text(encoding="utf-8"))
         version, source, note = attribute(record_path, repo)
+        m = re.search(r"首次落盘提交 ([0-9a-f]+)", note or "")
+        if m:
+            commits[m.group(1)] += 1
         if version is None:
             failed.append({"record": str(record_path.relative_to(registry_root)), "why": note})
             continue
@@ -99,15 +124,48 @@ def run(registry_root: pathlib.Path, apply_changes: bool) -> dict:
         if not touched:
             skipped.append(str(record_path.relative_to(registry_root)))
             continue
-        if apply_changes:
-            # 用 registry_core 自己的原子写，格式与中断安全性都与既有记录一致。
-            sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-            from registry_core import atomic_write_json  # noqa: PLC0415
+        plan.append((record_path, record, version, source))
+
+    total = sum(commits.values())
+    top_commit, top_n = (commits.most_common(1)[0] if commits else ("", 0))
+    share = (top_n / total) if total else 0.0
+    degenerate = total > 0 and share >= DEGENERATE_SHARE
+    degeneracy = {
+        "distinct_first_commits": len(commits),
+        "top_commit": top_commit,
+        "top_commit_records": top_n,
+        "top_commit_share": round(share, 4),
+        "degenerate": degenerate,
+    }
+    if degenerate:
+        degeneracy["note"] = (
+            "★ **归因退化**：%d / %d = %.0f%% 的记录被 git 判成**同一个提交** %s 新增。"
+            "那通常不是「它们同一天被蒸出来」，而是**整棵树那天才进的 git**。"
+            "⇒ 回填出来的 distilled_with 会是**一个统一而错误的值**，"
+            "并配上听起来很权威的 `source: git-first-commit`。"
+            "**一个统一而错误的出处，比没有出处更坏。**"
+            % (top_n, total, 100 * share, top_commit))
+
+    if apply_changes and degenerate and not anyway:
+        return {"status": "blocked", "applied": False, "changed": 0,
+                "would_change": len(plan), "already_current": len(skipped),
+                "failed": failed, "degeneracy": degeneracy,
+                "reason": "归因退化时不自动写盘。确认要写就加 `--anyway '<理由>'`，"
+                          "理由会一并印出，请写进 CHANGELOG。"}
+
+    if apply_changes:
+        sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+        from registry_core import atomic_write_json  # noqa: PLC0415
+        for record_path, record, _v, _s in plan:
             atomic_write_json(record_path, record)
-        changed.append({"record": str(record_path.relative_to(registry_root)),
-                        "distilled_with": version, "source": source})
-    return {"applied": apply_changes, "changed": len(changed), "already_current": len(skipped),
-            "failed": failed, "details": changed}
+
+    out = {"applied": apply_changes, "changed": len(plan), "already_current": len(skipped),
+           "failed": failed, "degeneracy": degeneracy,
+           "details": [{"record": str(rp.relative_to(registry_root)),
+                        "distilled_with": v, "source": sc} for rp, _r, v, sc in plan]}
+    if anyway:
+        out["anyway"] = anyway
+    return out
 
 
 def main() -> int:
@@ -115,6 +173,8 @@ def main() -> int:
     ap.add_argument("--registry-root", type=pathlib.Path, default=REGISTRY_ROOT)
     ap.add_argument("--apply", action="store_true", help="真的写盘；不给就是 dry-run")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--anyway", metavar="理由",
+                    help="归因退化时仍要写盘。**必须写理由** —— 理由会印进输出，请一并写进 CHANGELOG。")
     args = ap.parse_args()
 
     root = args.registry_root.resolve()
@@ -122,13 +182,17 @@ def main() -> int:
         print(f"用法错误：{root} 不是目录", file=sys.stderr)
         return 3
 
-    result = run(root, args.apply)
+    result = run(root, args.apply, args.anyway)
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     else:
         if result.get("error"):
             print(f"✗ {result['error']}", file=sys.stderr)
             return 1
+        if result.get("status") == "blocked":
+            print("✗ **未写盘**：" + result["reason"])
+            print("  " + str(result["degeneracy"].get("note", "")))
+            return 2
         mode = "已写盘" if result["applied"] else "dry-run（未写盘，加 --apply 才写）"
         print(f"{mode}：需更新 {result['changed']} 份，已是最新 {result['already_current']} 份")
         by_source: dict[tuple[str, str], int] = {}
@@ -140,6 +204,15 @@ def main() -> int:
             print(f"  {version:<12} {source:<32} {count:>3} 人{mark}")
         for item in result["failed"]:
             print(f"  ✗ 无法归因：{item['record']} —— {item['why']}")
+        # ★ 退化提示**每次都印**（不只是 --apply 时）—— 读 dry-run 的人正是要据此决定要不要写。
+        deg = result.get("degeneracy") or {}
+        print(f"  归因分布：不同的首次落盘提交 **{deg.get('distinct_first_commits')}** 个；"
+              f"最大那个覆盖 {deg.get('top_commit_records')} 份"
+              f"（{100 * (deg.get('top_commit_share') or 0):.0f}%）")
+        if deg.get("note"):
+            print("  " + deg["note"])
+        if result.get("anyway"):
+            print(f"  ★ 本次带 --anyway 写盘，理由：{result['anyway']}")
     return 1 if result.get("failed") or result.get("error") else 0
 
 

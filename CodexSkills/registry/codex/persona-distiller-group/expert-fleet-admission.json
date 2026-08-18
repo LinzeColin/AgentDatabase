@@ -2255,7 +2255,7 @@
   "generated_on": "2026-08-18",
   "require_artifacts": false,
   "schema_version": "persona-team.fleet-admission.v1",
-  "source_generator_version": "v0.0.0.47",
+  "source_generator_version": "v0.0.0.48",
   "summary": {
     "admission_counts": {
       "eligible": 101,

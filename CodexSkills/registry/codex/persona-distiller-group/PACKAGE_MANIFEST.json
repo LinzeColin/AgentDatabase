@@ -3,7 +3,7 @@
   "display_name": "Persona Distiller Group",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.47",
+    "kind": "repository-customized-v0.0.0.48",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "files": [
@@ -19,8 +19,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "12b72758004c996de5ab70288b2f4f9e333a270b4baf5f4cb13a3e8a48f8e07e",
-      "size_bytes": 99371
+      "sha256": "a000998fb9bffa585b2119e1becdd2e1abfd1b6eec0177d879c0252c3841a64d",
+      "size_bytes": 101828
     },
     {
       "path": "README.md",
@@ -34,7 +34,7 @@
     },
     {
       "path": "VERSION",
-      "sha256": "9663eca66bf625a3db9dfddd2c159d1d069ac40ca0a089b9286fcd4f561e07c3",
+      "sha256": "9d4b1ec2a318618379a8f01880764ed5e93e986ab5066a3fc6831c8ff41788e4",
       "size_bytes": 10
     },
     {
@@ -124,12 +124,12 @@
     },
     {
       "path": "expert-fleet-admission.json",
-      "sha256": "ec026d78975118f48a8c10161acdcb8aec1522a99b8742ff91fc0abaff80cb6d",
+      "sha256": "693c2193046dd8c905ec197a1af85dde4fb90c8f64b1347e22f8dcbadad511ae",
       "size_bytes": 73634
     },
     {
       "path": "manifest.json",
-      "sha256": "5af35a190cacb8f198629ac6a5d4a9c86ad9c2ccf6e0059d557cc3af8fc6c684",
+      "sha256": "54d7d32c7c92137657f560f48b1dd19d1241f2527d7bc68fd61ecdd3da798955",
       "size_bytes": 1304
     },
     {
@@ -204,8 +204,8 @@
     },
     {
       "path": "scripts/backfill_distilled_with.py",
-      "sha256": "bc1163148004e8a3f86241476bedd90585656676f70c14e6c0260326bb8fc5c2",
-      "size_bytes": 7140
+      "sha256": "25cf8bc5fcff43e7f9ac9a7b2c8dcc0165d8807bc7a282c6ce79f956fa7e7f50",
+      "size_bytes": 11354
     },
     {
       "path": "scripts/backfill_subject_status.py",
@@ -374,7 +374,7 @@
     },
     {
       "path": "team-index.json",
-      "sha256": "e78f401d5211c751e71ee8cfe743c6dfe888db772d29fff5a430f84befa9a358",
+      "sha256": "c18b6ccfba424105f601dcd8740152f616b3cc1bfd0d055aafd7c5dd1ef6ea8f",
       "size_bytes": 400812
     },
     {
@@ -391,6 +391,11 @@
       "path": "tests/test_all_selftests_have_a_runner.py",
       "sha256": "a683c8fec889c5d0b6cb3fa672b0eb1f6f9c8d672fc2e5d0d8e2ee9c7b052e77",
       "size_bytes": 4569
+    },
+    {
+      "path": "tests/test_backfill_refuses_degenerate_attribution.py",
+      "sha256": "8b3ea9fdee4d462988c9aebcb3186f256282cfa5302f6d9fa591a21c66c04ce7",
+      "size_bytes": 5492
     },
     {
       "path": "tests/test_c_layer_is_reachable_for_a_working_product.py",
@@ -2123,5 +2128,5 @@
   "name": "persona-distiller-group",
   "schema_version": "1.0",
   "verification": {},
-  "version": "v0.0.0.47"
+  "version": "v0.0.0.48"
 }
