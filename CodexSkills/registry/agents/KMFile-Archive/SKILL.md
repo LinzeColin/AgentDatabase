@@ -149,6 +149,65 @@ Owner 已明确说过「不管」的群（台泥(贵港)、生产付款群、生
 7. 改名幂等：连跑两次第二次零变更、旧名残留 0
 8. 复核覆盖率：脱敏风险非「无」100% 人工复核，其余抽样 ≥10%
 
+## 接手须知（新 agent 从这里开始）
+
+### 第一次接手先跑这三条，都不改数据
+
+```bash
+# 1) 账本自愈（只修 原名新名映射.csv，不动素材、不动 manifest）
+python3 scripts/kmfile_pipeline.py probe --workdir /tmp/km_heal
+
+# 2) 看当前健康度
+python3 scripts/kmfile_pipeline.py accept --workdir /tmp/km_heal
+
+# 3) 看有没有真缺（增量，别全量遍历）
+python3 scripts/archive_internal_files.py --allow-title "<群名>" --since-manifest --dry-run --audit
+```
+
+不传 `--groups-file` 时用内置 `BUSINESS` 映射表作基线（Owner 已授权的那批群），
+skill 包里不需要额外带白名单文件。要拿 dws 实时名单加 `--refresh-groups`。
+
+**为什么第 1 步必须先跑。** `.manifest.jsonl` 永远记原名（硬约束 2 禁改），改过名的文件
+要靠 `原名新名映射.csv` 这本账才能定位。这本账一旦写丢过一次（进程被硬杀、SMB 写失败、
+跨版本运行），改名的幂等闸就再也不会补写它 —— 表现是 audit / accept 一直报 missing，
+而磁盘上文件其实好好的。`probe` 阶段的 `reconcile_ledger()` 会自动认回：
+文件侧按 manifest 里的服务端 md5 精确匹配，
+**有歧义一律不猜**，把候选打印出来留给人工。
+
+日志里看 `账本自愈={'repaired': N, 'ambiguous': M}`：`repaired` 是自动认回的，
+`ambiguous` 那几条必须人工定夺。
+
+### 当前已知待办（截至 260819，会过期）
+
+> 实时状态以 `workdir/accept_report.json` 和 `workdir/产能汇总.md` 为准，别信这段的数字。
+
+1. **人工复核**：脱敏风险非「无」的 100% + 其余抽样 ≥10%。这是 accept 里唯一一项
+   靠人过的闸门，跑得再干净它也会挂，属正常。复核后把 `文件登记表.csv` 的
+   `复核状态` 列改成「已复核通过」或「已复核修正」。
+2. **2025 年缺口**：多数群 manifest 首窗口是 2026-01-01，更早的消息从没扫过。
+   跑任何命令时留意 `window_coverage_gap` 事件，命中的群需要一次
+   `--start "2025-01-01 00:00:00"` 的补跑。
+3. **「项目设备工具类管理群」**：DWS 分页缺陷（空页 + `hasMore=true`），只能记 skip。
+4. **武汉开明 ~9 个文件 + 商务部部分历史文件**：钉钉侧已删（`drive resource.notFound`）。
+   这类现在记 `smb_status=unavailable` 后继续，不再堵窗口，但需人工到钉钉确认是不是真没了。
+
+### 三条绝对不要做
+
+1. **不要对运行中的 pipeline 用 `pkill -9`。** 用 SIGTERM 等它写完当前 manifest。
+   历史事故：SIGKILL 打断 manifest 写入，7 个群的 `.manifest.jsonl` 整个消失，
+   逐群重建花了约 10 分钟/群。现在有 `.bak` 兜底，但兜底是最后一道，不是常规操作。
+2. **不要用「ls 超时」判断进程卡死。** SMB 慢的时候 ls 必然超时，会把还活着的批次误杀。
+   用「产物 mtime 停滞 + 进程 CPU time 不涨」判。
+3. **不要修改 `.manifest.jsonl`。** 它是归档器的durable 账本，硬约束 2。
+   要改「现用名」改 `原名新名映射.csv`。
+
+### 已排除的群
+
+`kmfile_pipeline.py` 里的 `DECLINED_TITLES` 常量列着 Owner 明确说过「不管」的群
+（台泥(贵港)、生产付款群、生产周例会工作群，2026-08-16 的决定）。
+`--refresh-groups` 会把它们归入「已排除」而不是「新增待确认」，不会每轮重复问。
+**要重新纳入就把群名从该常量里删掉**，别绕过它。
+
 ## 运行知识（实测，不是推测）
 
 ### SMB 慢：是会话退化，不是「白天不可用」
