@@ -1396,8 +1396,12 @@ def main() -> int:
     if args.only_group:
         groups = [args.only_group]
     if not groups:
-        print("需要 --groups-file 或 --only-group")
-        return 2
+        # 自举：skill 包里不带白名单文件，新 agent 拿到就该能跑。
+        # 内置的 BUSINESS 业务映射表本身就是 Owner authorized 的群名单，拿它当基线；
+        # 想拿实时名单再叠 --refresh-groups。
+        groups = sorted(BUSINESS)
+        log(f"未指定 --groups-file/--only-group，用内置 BUSINESS 映射表作基线：{len(groups)} 个群")
+        log("  要拿 dws 实时名单请加 --refresh-groups（新增群只报不收）")
     ctx = {"groups": groups, "workdir": Path(args.workdir)}
     ctx["workdir"].mkdir(parents=True, exist_ok=True)
     acquire_workdir_lock(ctx["workdir"])
