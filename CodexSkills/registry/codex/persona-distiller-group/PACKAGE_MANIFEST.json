@@ -29,8 +29,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "54be63502a8c9ddde11f363d64572613463c090c6f8643b456757a14eaf69a81",
-      "size_bytes": 17719
+      "sha256": "fd5b96e2e92b64924555b95bdbef1457fd2a38384ae6d932d8a512ec20a6c110",
+      "size_bytes": 17961
     },
     {
       "path": "VERSION",
@@ -239,8 +239,8 @@
     },
     {
       "path": "scripts/check_diversity_does_not_outweigh_fit.py",
-      "sha256": "fe0ef9a8234c14ce238972bb81e0cae0d6fe2e37cc0ab3d234ab5bbf3918cfca",
-      "size_bytes": 15652
+      "sha256": "77f56d919ac05a6852cd3eefca5c5b159fc9e443464d4947cc911efc87a73d76",
+      "size_bytes": 17613
     },
     {
       "path": "scripts/check_domain_inference_language_parity.py",
@@ -254,8 +254,8 @@
     },
     {
       "path": "scripts/check_keyword_table_is_not_the_main_driver.py",
-      "sha256": "b3b9f4bf5ea252ee88a48b4dc54ba8ec963436ac15b67a88599a9f8cfaba3476",
-      "size_bytes": 19153
+      "sha256": "482d457d130071a6c39e58ccb4c6a25863940fdfa6c91e403545ee010353ca67",
+      "size_bytes": 19788
     },
     {
       "path": "scripts/check_mode_ladder_reachable.py",

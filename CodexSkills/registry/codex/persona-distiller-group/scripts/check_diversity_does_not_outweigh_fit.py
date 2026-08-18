@@ -32,6 +32,20 @@
 
     同族第 3 人需领先 0.1711｜第 5 人 0.2368｜penalty 封顶后最大 0.2632
 
+## ★★★ **默认样本低估了这个问题** —— 两份样本一起报
+
+|  | 样本 | 换手率 |
+|---|---|---:|
+| 默认 | 名册标签 8 条（名词短语，33 字） | **中位 36%**（29–43%） |
+| **`--tasks`** | **72 道 TaskPack oracle 前 8 条**（任务口吻，平均 64 字） | **中位 61%**（57–64%） |
+
+**在更像真实提问的那份样本上，按对口度排前列的人有六成被换掉。**
+⇒ 本件默认那个 36% **不是上界，是下界**。报它必须连样本一起报。
+[[counts-need-their-cutoff-stated]]｜[[changing-the-sampling-unit-changes-the-ruler]]
+
+★ 两份都不是真实用户提问（一份产物自写的标签、一份任务包作者写的 oracle）——
+  **真实提问的分布仍然没有量过。**
+
 ## 它量的是**换手率**，不是「好不好」
 
 「多样性该不该压过对口度」是**设计取舍**，判据说了不算。本件只报一个可证伪的数：
@@ -106,6 +120,20 @@ def tipping_point(nth_of_family: int) -> float:
     """同族第 `nth`（≥2）人要胜过一个**新族**候选，`base_score` 需领先多少。"""
     penalty = min(CAP, (nth_of_family - 1) * STEP)
     return (BONUS + penalty) / BASE_WEIGHT
+
+
+def load_external(path: str, limit: int) -> tuple[list[str], str]:
+    """外部任务集（每行一条，或 JSON 数组）。★ 留这个插座是因为**默认样本低估了问题**。"""
+    tp = pathlib.Path(path)
+    if not tp.is_file():
+        return [], "任务集文件不在：%s" % tp
+    raw = tp.read_text(encoding="utf-8")
+    try:
+        tasks = [str(x) for x in json.loads(raw) if str(x).strip()]
+    except ValueError:
+        tasks = [ln.strip() for ln in raw.splitlines()
+                 if ln.strip() and not ln.lstrip().startswith("#")]
+    return tasks[:limit], "外部任务集 `%s`" % tp.name
 
 
 def sample_tasks(limit: int) -> tuple[list[str], str]:
@@ -248,6 +276,9 @@ def main(argv=None) -> int:
     ap.add_argument("--mode", default="deep_team",
                     help="必须显式给 —— auto 会把名词短语标签推成 single_expert")
     ap.add_argument("--baseline-churn", type=float, default=BASELINE_CHURN)
+    ap.add_argument("--tasks", default=None, metavar="文件",
+                    help="改用外部任务集。★ 默认样本（名册标签）**低估了问题**："
+                         "72 道 TaskPack oracle 上换手率中位 **61%%**，名册标签只有 36%%")
     ap.add_argument("--self-test", "--selftest", dest="selftest", action="store_true")
     a = ap.parse_args(argv)
     if a.selftest:
@@ -270,13 +301,17 @@ def main(argv=None) -> int:
         print("       第 %d 人  **%.4f**%s" % (n, tipping_point(n),
                                               "（penalty 已封顶）" if n >= 6 else ""))
 
-    if a.limit != BASELINE_LIMIT and a.baseline_churn == BASELINE_CHURN:
-        print("\n★ **未量，不是通过**（rc=4）—— 基线 %.2f 是在 `--limit %d` 上测的，"
-              "本次用了 `--limit %d`。" % (BASELINE_CHURN, BASELINE_LIMIT, a.limit))
-        print("  ⇒ 显式给 `--baseline-churn <0..1>`，或去掉 `--limit`。")
+    if (a.limit != BASELINE_LIMIT or a.tasks) and a.baseline_churn == BASELINE_CHURN:
+        print("\n★ **未量，不是通过**（rc=4）—— 基线 %.2f 是在**默认样本、--limit %d** 上测的，"
+              "本次%s%s。"
+              % (BASELINE_CHURN, BASELINE_LIMIT,
+                 ("换了任务集 `%s`" % a.tasks) if a.tasks else "",
+                 ("、" if a.tasks else "") + ("用了 --limit %d" % a.limit)
+                 if a.limit != BASELINE_LIMIT else ""))
+        print("  ⇒ 显式给 `--baseline-churn <0..1>`，或去掉 `--limit`／`--tasks`。")
         return 4
 
-    tasks, src = sample_tasks(a.limit)
+    tasks, src = (load_external(a.tasks, a.limit) if a.tasks else sample_tasks(a.limit))
     print("\n样本：**%d** 条，来自%s｜mode=%s size=%d" % (len(tasks), src, a.mode, a.size))
     print("  ★★ **射程**：这是**名册标签**不是用户提问；同一天实测换一份样本读数会翻。")
     if not tasks:
