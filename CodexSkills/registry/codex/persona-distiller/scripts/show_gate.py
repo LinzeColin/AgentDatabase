@@ -70,10 +70,29 @@ def render(payload: dict) -> tuple:
              f"phase={payload.get('phase')}　profile={payload.get('profile')}　"
              f"strict={payload.get('strict')}",
              f"  errors {len(errs)}　warnings {len(warns)}"]
+    # ★★★ 2026-08-18：`quality_check` **两种形状都发** —— 实测
+    #   `warnings.append({...})` 1 处、`warnings.append("...")` **4 处**；
+    #   `errors` 同样是 dict 1 处、裸字符串 3 处。
+    #   而这里原本只按 dict 处理 ⇒ 撞上字符串就
+    #   `AttributeError: 'str' object has no attribute 'get'` **抛栈**。
+    #   实测在 Rousseau 的真工作区上必炸（它的 warnings 恰好是那条裸字符串）。
+    #   ★ 同一个形状差异对**两个消费者一冷一热**：吃 JSON 的下游毫发无伤，
+    #     渲染给人看的这一个直接死。[[same-parse-bug-fatal-to-one-consumer-harmless-to-another]]
+    #   ★★ 不把裸字符串**悄悄**格式化掉 —— 那会把「生产者形状不一致」这件事藏起来。
+    #     标一个 `(无 code)`，让它在输出里看得见。
+    def _row(item, mark: str) -> str:
+        if isinstance(item, dict):
+            return f"  {mark} {item.get('code')} — {str(item.get('message', ''))[:150]}"
+        return f"  {mark} (无 code) — {str(item)[:150]}"
+
     for e in errs:
-        lines.append(f"  ✗ {e.get('code')} — {e.get('message', '')}")
+        lines.append(_row(e, "✗"))
     for w in warns:
-        lines.append(f"  ⚠ {w.get('code')} — {str(w.get('message', ''))[:150]}")
+        lines.append(_row(w, "⚠"))
+    _bare = sum(1 for x in list(errs) + list(warns) if not isinstance(x, dict))
+    if _bare:
+        lines.append(f"  ★ 其中 **{_bare}** 条没有 `code`（生产者发的是裸字符串）——"
+                     f"**按 code 做的过滤/统计会漏掉它们**")
     missing = [k for k in REAL_KEYS if k not in payload]
     if missing:
         lines.append(f"  ★ **输出里缺字段 {missing}——未核，不是通过**")

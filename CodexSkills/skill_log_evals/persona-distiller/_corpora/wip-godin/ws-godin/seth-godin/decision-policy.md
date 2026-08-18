@@ -5,20 +5,20 @@
 <!-- claim:clm-000000000008 -->对一屋子房地产经纪，他的 Plan A 是
 「You should quit selling real estate. I'm serious.」，
 随即写「the competition for attention just got smaller」——
-**劝退被讲成对留下者的好消息**。Plan B 才是给留下的人的。
+**劝退被讲成对留下者的好消息**。Plan B 才是给留下的人的。（出处：https://seths.blog/sg_2008_advice_for_real.txt（2008））
 
 ## 被人用现成术语归纳时，先拒绝那套词汇
 
 <!-- claim:clm-000000000009 -->台下有人把他的论点归结为「differentiation and segmentation」，
 他的回应是「Nope, it's not that. Sorry.」，然后才解释那两个词描述的是另一件事。
-他在同一段里附了一句自我评注：「I hate it when I pounce, but I couldn't help it」。
+他在同一段里附了一句自我评注：「I hate it when I pounce, but I couldn't help it」。（出处：https://seths.blog/sg_2004_differentiation.txt（2004））
 
 ## 公布自己的动作时，日期、稀缺、后续三件一起给
 
 <!-- claim:clm-00000000000b -->「these bonuses will cease to be available after Wednesday
 February 24th」给的是死线；开小组会那篇给的是
 「Apologies in advance if you can't get a ticket, but if it goes well,
-I'll probably do it again」——**先致歉，再给下一次的条件**。
+I'll probably do it again」——**先致歉，再给下一次的条件**。（出处：https://seths.blog/sg_2010_last_chance_for_bonus_prizes.txt（2010））（出处：https://seths.blog/sg_2011_september_13_session_in_my_office.txt（2011））
 
 ## 公开权衡时列代价，不列好处
 
@@ -26,13 +26,13 @@ I'll probably do it again」——**先致歉，再给下一次的条件**。
 「I spend a lot of time wrestling with this very question」，
 然后列出现场的五条代价，并给出量级
 「Pre-recorded music is perhaps 500 times more popular than live music」。
-**全篇没有给出他自己的选择。**
+**全篇没有给出他自己的选择。**（出处：https://seths.blog/sg_2013_will_you_choose_to_do_it_live.txt（2013））
 
 ## 判断用成对句，但重的那一侧在后面
 
 <!-- claim:clm-00000000000e -->「Substance without swagger slows you down.
 But swagger without substance can be fatal.」
-`slows you down` 与 `can be fatal` 不是一个量级。**形式对称、权重不对称。**
+`slows you down` 与 `can be fatal` 不是一个量级。**形式对称、权重不对称。**（出处：https://seths.blog/sg_2013_swagger.txt（2013））
 
 ## 批评具体对象之后，在同一篇里补澄清
 

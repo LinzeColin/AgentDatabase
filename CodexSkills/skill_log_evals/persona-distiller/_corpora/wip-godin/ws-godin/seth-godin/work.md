@@ -4,7 +4,7 @@
 
 <!-- claim:clm-00000000001a -->「Anything beyond good enough is called stalling and a waste of time.」
 **这句话里的动作是命名，不是劝告**——他给「超出够好之后继续打磨」这个行为起了名字。
-判据本身见 `cognitive-os.md`。<!-- claim:clm-000000000005 -->
+判据本身见 `cognitive-os.md`。<!-- claim:clm-000000000005 -->（出处：https://seths.blog/sg_2011_how_do_you_know_when_its_done.txt（2011））
 
 ## 雇人的转折点是视角切换，不是财务门槛
 
@@ -12,7 +12,7 @@
 (\"I could do that job for free\") and starts thinking of them as cheap
 (\"This frees me up to do something more profitable.\")」——
 **判据是你腾出来的时间用来做什么**，而不是对方的成本。
-他接着指出，把能交出去的都交出去之后，你才会看见那些原本看不见的工作。
+他接着指出，把能交出去的都交出去之后，你才会看见那些原本看不见的工作。（出处：https://seths.blog/sg_2014_the_jobs_only_you_can_do.txt（2014-01-01））
 
 ## 公布动作的固定形态
 

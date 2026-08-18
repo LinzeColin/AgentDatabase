@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "c61efce9d794692ddc557057e94ba0af784f7586872c4174d26ac749bd6b5313",
-      "size_bytes": 369902
+      "sha256": "a48f61b193601df3cc8d771b8da8166ab26996816e3bd5cd5ab3b5a6a3fc82cf",
+      "size_bytes": 371778
     },
     {
       "path": "CONTRIBUTING.md",
@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "c41598f7ef1657d9ae164f3a0816cf75b2230b8d37a7a3aece78986e5d554d40",
-      "size_bytes": 157510
+      "sha256": "490315b282a1a8d39cfc178496e4945644158af811f85038eecd4fd3c8152d5b",
+      "size_bytes": 157996
     },
     {
       "path": "VERSION",
@@ -716,8 +716,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_lane_quotes_verbatim.py",
-      "sha256": "31c43ac71bdc5d94d74e874061656389a2704962788ce15a3b165d27e33846b2",
-      "size_bytes": 49288
+      "sha256": "d165e32758973825f788507809b1335867105286ce18f01bf2a1b89e5f97ee68",
+      "size_bytes": 51768
     },
     {
       "path": "references/pipeline/checkers/check_longs_corruption.py",
@@ -1051,8 +1051,8 @@
     },
     {
       "path": "references/pipeline/checkers/show_gate.py",
-      "sha256": "0de09fe6d60ad291023569709299dfde88db9493399ea1076379ebf7b12d7cc4",
-      "size_bytes": 7894
+      "sha256": "a3b3a5fcf6f653e783c16a7935906c0ea8720e4bff06524a633e0c4db69e6868",
+      "size_bytes": 9181
     },
     {
       "path": "references/pipeline/checkers/show_workspace_layout.py",
@@ -1526,8 +1526,8 @@
     },
     {
       "path": "scripts/check_lane_quotes_verbatim.py",
-      "sha256": "31c43ac71bdc5d94d74e874061656389a2704962788ce15a3b165d27e33846b2",
-      "size_bytes": 49288
+      "sha256": "d165e32758973825f788507809b1335867105286ce18f01bf2a1b89e5f97ee68",
+      "size_bytes": 51768
     },
     {
       "path": "scripts/check_longs_corruption.py",
@@ -1946,8 +1946,8 @@
     },
     {
       "path": "scripts/show_gate.py",
-      "sha256": "0de09fe6d60ad291023569709299dfde88db9493399ea1076379ebf7b12d7cc4",
-      "size_bytes": 7894
+      "sha256": "a3b3a5fcf6f653e783c16a7935906c0ea8720e4bff06524a633e0c4db69e6868",
+      "size_bytes": 9181
     },
     {
       "path": "scripts/show_workspace_layout.py",
@@ -2483,6 +2483,11 @@
       "path": "tests/test_selftests_outside_check_prefix.py",
       "sha256": "5c9ccc2831754063a5cbb5139f4c1992e530d3b706ecb127027f4ecceca3cfe3",
       "size_bytes": 4833
+    },
+    {
+      "path": "tests/test_show_gate_survives_mixed_shapes.py",
+      "sha256": "b6ca92ac8e2d747744a7fac6a9ecf47fc42687e9b9ce0c601b9bc8da36d34b50",
+      "size_bytes": 3577
     },
     {
       "path": "tests/test_skill_contract.py",

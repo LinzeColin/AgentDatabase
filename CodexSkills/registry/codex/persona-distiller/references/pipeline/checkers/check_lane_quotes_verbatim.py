@@ -91,6 +91,25 @@ _PAGE_FURNITURE = re.compile(r"\[版口：([^\]]*)\]")
 #   修法：真 HTML 标签**既短又不跨行**。加 `\n` 排除 + 长度上限 120。
 #   ★ 上限不是拍的：本文件里最长的**真**标签是 0 个（这批语料根本没有 HTML），
 #     而误吃的 156 处最短的一处也有 74 字符——120 这个界把两侧分开还有余量。
+# ★★★★★ 2026-08-18（Seth Godin）：**出处表头被当成了逐字引文。**
+#   六道研究稿的写法是「先一行反引号的来源标识，再跟引文」：
+#
+#       `sg_2011_how_do_you_know_when_its_done [src-d35e2171afc6]`：
+#
+#       > Of course, it's not done. It's never done. …
+#
+#   上面那条「取引用块之外的反引号」把**第一行也收成了引文**，
+#   于是它去语料里找 `sg_2011_... [src-...]` 这串字面 —— 当然找不到。
+#   实测：Godin **72 条「引文」里 36 条对不上，逐条看全部是来源行**；
+#   真正的引文一条都没问题。**判据把自己造的表头当成了人物的话。**
+#   ⇒ 后果不是难看：它让一个语料、引文都干净的人物**打不了包**
+#     （strict 下 warning 亦拦），而报错文案写的是「引文对不上就是引文对不上」。
+#   [[my-provenance-header-masked-broken-corpus]]｜[[a-checkers-scan-set-is-smaller-than-reality]]
+#
+#   ★ 只排除**整条就是来源标识**的那种（`<名字> [src-十六进制]`），
+#     句中带 `[src-…]` 的真引文一个都不受影响 —— 见 `--self-test` 的正反对照。
+_IS_SOURCE_HEADER = re.compile(r"^\S+\s*\[src-[0-9a-f]+\]$")
+
 _MARKUP = re.compile(r"\*\*|\*|__|</?[A-Za-z][^>\n]{0,120}>|[«»“”\"]")
 # 显式省略号 = 作者声明「这里略去了」，与 `[版口：…]` 同类，按分段各自命中验
 _ELISION = re.compile(r"\s*(?:\.\.\.|…)\s*")
@@ -246,6 +265,8 @@ def extract_quotes(md: str):
     #     否则同一条会被数两次——同一天刚在 `check_holdout_mention` 上犯过重复计数。
     nonblk = "\n".join(l for l in md.split("\n") if not l.lstrip().startswith(">"))
     for inline in re.findall(r"`([^`\n]{25,400})`", nonblk):
+        if _IS_SOURCE_HEADER.match(inline.strip()):
+            continue
         blocks.append(inline)
 
     # ★★★★★ 2026-08-11：**同一个洞的第三次。**
@@ -766,6 +787,20 @@ def self_test():
             print("  · " + b)
         return 2
     print("\n✓ 自测全过（3 正 + 5 反 + 2 条取法 + 7 条跨行 + 6 条隔离）")
+    # ★★★ 2026-08-18 新增：出处表头不许被当成引文，**而句中带 [src-…] 的真引文必须仍被抽到**。
+    #   两个方向都要测 —— 只测「表头被排除」的话，把整条规则写成「凡含 [src- 就跳过」也能过。
+    md_hdr = "`sg_2011_how_do_you_know_when_its_done [src-d35e2171afc6]`：\n\n> " + ("x"*40) + "\n"
+    got = extract_quotes(md_hdr)
+    chk("★ 出处表头（整条就是 `<名> [src-hex]`）不算引文",
+         all("[src-" not in g for g in got))
+    #   ★ 这条要能区分「只排除整条就是表头」与「凡开头像表头就排除」——
+    #     所以测试串**以来源样式开头、后面还有正文**。第一版我写成句中带 [src-…]，
+    #     而 `.match()` 只锚开头 ⇒ 把规则放宽成 `\[src-` 它照样过，**那条断言什么也没证明**。
+    md_real = "`notes [src-d35e2171afc6] and then he kept talking for quite a while after that`\n"
+    got2 = extract_quotes(md_real)
+    chk("★★ 反对照：**以来源样式开头但后面还有正文**的真引文，仍要被抽到",
+         any("kept talking" in g for g in got2))
+
     return 0
 
 

@@ -33,3 +33,4 @@
 「[HT to Mara]」、「Allan sends over a riff」等形态。
 **扮演该人物时，凡使用他人提供的想法都要注明来处**——
 这是他文本里稳定可见的习惯，不是可选的礼貌。
+（出处：https://seths.blog/sg_2013_qa_whats_the_problem_with_weird.txt（2013））
