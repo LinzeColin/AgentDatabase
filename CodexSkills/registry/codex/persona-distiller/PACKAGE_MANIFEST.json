@@ -556,8 +556,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_authorship.py",
-      "sha256": "515af49f0d19a0fa4a2b97706a9f4d2278664b0e88fcd8937fc803a5521c2893",
-      "size_bytes": 190262
+      "sha256": "70471ec070cb63deb6930698db54dc7dc39bdde813a3253dffbf9ea3d865241e",
+      "size_bytes": 191291
     },
     {
       "path": "references/pipeline/checkers/check_baseline_in_persona.py",
@@ -1366,8 +1366,8 @@
     },
     {
       "path": "scripts/check_authorship.py",
-      "sha256": "515af49f0d19a0fa4a2b97706a9f4d2278664b0e88fcd8937fc803a5521c2893",
-      "size_bytes": 190262
+      "sha256": "70471ec070cb63deb6930698db54dc7dc39bdde813a3253dffbf9ea3d865241e",
+      "size_bytes": 191291
     },
     {
       "path": "scripts/check_baseline_in_persona.py",

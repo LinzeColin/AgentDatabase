@@ -326,8 +326,20 @@ def build_patterns(full_name: str) -> dict:
         #     而这里是 `\b`——同一份清单，锚点不同，安全性天差地别。
         #   → 撤回。**Martens 那条偏差仍然存在，作为已量的发现记着，
         #     不靠一个我验不动的放宽去掩盖它。**
+        #   ★★★★ 2026-08-19 `A-byline` 加法文 `Par`。
+        #     Eiffel #142 四份法文原著全被判「文中查无归属证据」，
+        #     而 1907 那部**第一行就写着** `PAR G. EIFFEL ANCIEN PRÉSIDENT DE LA SOCIÉTÉ…`
+        #     —— 判据认得出名字，认不出名字前面那个法文的 `Par`
+        #     （与 Rosenhain 的合著位、Martens 的德文 `Von` 同族：
+        #      [[regex-must-clear-the-corpus-language]]）。
+        #   ★ 收紧到底：法文 `par` 在正文里极常见（实测同一批语料里就有
+        #     `par le vent`、`par élément`、**`par Google dans le cadre d'un projet`**
+        #     —— 最后这句是 Google Books 的版权声明）。所以照抄 `By` 那一支的形状：
+        #     `Par` 与名字之间**只许敬称**，不许任何别的东西。
+        #     反对照见自测：报纸《La liberté》整版提到他而不是他写的，必须仍判「无据」。
         "BYLINE": re.compile(
-            rf"\bBy\s+(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?\s+)*"
+            rf"\b(?:By|Par)\s+(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady|"
+            rf"M|Mme|Mlle)\.?\s+)*"
             rf"{name_rx}\b", re.I),
         # ★★★★ v0.0.0.168 `A-byline-coauthor`：**他站在第二作者位。**
         #   Rosenhain #138 实测三份，题头都在、名字有一份一个字母都没错，全被判「无据」：
