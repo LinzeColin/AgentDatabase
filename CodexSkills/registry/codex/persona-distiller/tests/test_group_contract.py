@@ -246,28 +246,29 @@ class GroupContractTests(unittest.TestCase):
                 for role in plan['selected_roles']
                 if role['role_type'] == 'persona-solver'
             )
-        # ★★★ 2026-08-18：这道红的真因也量清了，**断言一个字没动**，只把结论写进失败信息。
+        # ★★★ 2026-08-18：真因量清了（**断言一个字没动**），而我**第一版写错了两处，此处是订正版**。
         #
-        #   实测缺的**只有 Simon Willison**（其余四人都在并集里）。他**在册、readiness=ready、
-        #   软件开发师** —— 不是「没这个人」。
+        #   ✗ 我写过「本测试调的是 A 层旧路由 `route_team.py`」——**错的**。
+        #     `scripts/route_team.py` 是 **6 行的向后兼容薄壳**：`from route_team_moe import main`。
+        #     **两者是同一个路由。**
+        #   ✗ 我写过「MoE 把 Willison 排第 9、size=14 会入选」——**也是错的**。
+        #     那是我按 `base_score` 排的名次，而**选人不是取前 N**。
         #
-        #   ★ 关键：**本测试调的是 `scripts/route_team.py`（A 层旧路由）**，不是
-        #     `route_team_moe.py`。而 `references/moe-routing-contract.md` 对 A 层写着
-        #     「A 保持旧类别和场景匹配，**只用于兼容**」。同一道英文软件题：
+        #   ✓ 真机制：`route_team_moe.marginal_select()` —— **按边际增益逐个挑，重罚同族**。
+        #     同一道英文软件题（size=14）实测 base vs marginal：
         #
-        #         route_team.py（本测试用的）  → Willison **不在 14 人里**；
-        #                                       名单里坐着 Joel Salatin（农林牧渔师）、
-        #                                       Harry Bhadeshia（材料）、Wells（律师）
-        #         route_team_moe.py（现行）    → Willison **第 9 名**，size=14 ⇒ **会入选**
+        #         1. Kent Beck      软件开发师  base 0.3616 → marginal 0.3548
+        #         2. Harry Bhadeshia 材料建工师 base 0.3076 → marginal 0.2738
+        #         5. **Joel Salatin 农林牧渔师 base 0.2299 → marginal 0.2470**（唯一的农林牧渔师）
+        #        10. Chip Huyen     软件开发师  base **0.3549**（全场第 2 高）→ marginal **0.1872**
         #
-        #   ⇒ **这道红测的不是现行路由，照它去改现行路由是改错对象。**
-        #     但也不能说它没用：`route_team.py` 仍在包里仍可被调用。
-        #     **要不要把本测试改成测 MoE 是 Owner 的决定**（改了＝宣布 A 层不再受验收保护）。
+        #     **第 2–9 名是每族各一人**；第 10 名才回到第二个软件开发师。
+        #     ⇒ 一道软件工程评审题，14 人里**只有 3 个软件开发师**，第 5 位是**农场主**。
+        #     Simon Willison（软件开发师，base 排第 9）进不来，是因为软件席位早被占满。
         #
-        #   ★★ 反方向读数，防止把 MoE 说成全面更好：同一道题上 MoE 给
-        #      **Fowler task_similarity 0.0000（第 35）**、**Liskov 0.0000（第 27）** ——
-        #      他们能进并集靠的是另外两道题。**MoE 在这道题上同样看不见这两位。**
-        #   台账：`_ledgers/_订正-不是1处红是3处-而其中一处测的是旧路由-2026-08-18.md`
+        #   ⇒ **这不是「路由坏了」，是 `marginal_select` 的多样性权重压过了对口度。**
+        #     要它绿只有调那个权重（＝改路由，撞「门、席位一概不动」）或改测试断言。
+        #     **两条都要 Owner 定。** 台账：`_marginal_select把软件题选成每族一人-2026-08-18.md`
         expected = {
             'Barbara Liskov',
             'Chip Huyen',
@@ -278,11 +279,12 @@ class GroupContractTests(unittest.TestCase):
         self.assertTrue(
             expected.issubset(selected),
             "缺席：%s\n"
-            "★ 本测试调的是 **A 层旧路由 `route_team.py`**（合同：「只用于兼容」），"
-            "不是现行 `route_team_moe.py`。\n"
-            "  实测同一道英文软件题：旧路由的 14 人里没有 Willison（却有 Joel Salatin 等），"
-            "而 MoE 把他排**第 9**、会入选。\n"
-            "  ⇒ **不要照这道红去改现行路由**；要不要把本测试改成测 MoE 是 Owner 的决定。\n"
+            "★ 真因是 `marginal_select` **重罚同族**，不是路由坏了、也不是缺人：\n"
+            "  实测同一道软件题 size=14 —— Kent Beck 第 1，**第 2–9 名每族各一人**"
+            "（材料/建造/财务/**农林牧渔**/创业/投资/法律/艺术设计），第 10 名才回到第二个软件人；\n"
+            "  Chip Huyen base **0.3549**（全场第 2 高）被压到 marginal **0.1872** ⇒ 第 10。\n"
+            "  ⇒ 软件席位早被占满，Willison（base 第 9）进不来。\n"
+            "  **要绿只有调多样性权重（＝改路由）或改断言 —— 都要 Owner 定。**\n"
             "  三道题的并集（%d 人）：%s" % (
                 sorted(expected - selected), len(selected), sorted(selected)))
 
