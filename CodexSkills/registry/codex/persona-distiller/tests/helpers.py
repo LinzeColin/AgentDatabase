@@ -12,6 +12,24 @@ sys.path.insert(0, str(SCRIPTS))
 from common import SUITES, append_jsonl, utc_now
 
 
+# ★★★ 2026-08-18：**下面这个 `timeout=60` 现在只剩 0–5% 余量，是一处会看天吃饭的红。**
+#
+#   全量跑 `unittest discover -s tests` 时，`test_package_has_single_top_level_product_
+#   version_and_unnumbered_runtime_reset` 报 `subprocess.TimeoutExpired: package_target.py
+#   … timed out after 60 seconds`。**单跑（机器空闲）三次全绿**：
+#
+#       58.903 s ｜ 56.660 s ｜ 60.012 s      ← 硬超时 **60 s**
+#
+#   ⇒ **这不是产品缺陷，是试验台的耐心不够**：`package_target.py` 的实际耗时
+#     已经贴着上限，全量跑时的并发负载就能把它推过去。
+#     红/绿取决于**机器负载**，不取决于产物。
+#     [[harness-limits-masquerade-as-product-defects]]
+#
+#   ★ **本轮不改这个数**：调大它会改变红/绿判定的边界，属决定不属清理；
+#     另一条路是让 `package_target.py` 变快，那是产物侧改动。**两条都要 Owner 定。**
+#   ★★ 复现：`cd tests && python3 -m unittest test_skill_contract.SkillContractTests.\
+#       test_package_has_single_top_level_product_version_and_unnumbered_runtime_reset`
+#       （**必须在 `tests/` 目录里跑** —— 从上级跑会 `ModuleNotFoundError: helpers`）
 def run_script(name: str, *args: object, check: bool = True, cwd: Path | None = None) -> subprocess.CompletedProcess[str]:
     completed = subprocess.run(
         [sys.executable, str(SCRIPTS / name), *[str(arg) for arg in args]],
