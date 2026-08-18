@@ -1377,52 +1377,6 @@
       "★ 2026-08-14 CCE 射程": "★★ 2026-08-14 实测：**「查 CCE 续期」这条对本人不成立。** CCE（Catalog of Copyright Entries）**本身停在 1978 年**（archive.org 上 722 卷，1983–1995 年 numFound=0）；续展在第 28 年办 ⇒ **CCE 只能回答「出版年 ≤1950」的续展**。本人的实质作品晚于这条线，或根本没有 ≤1950 的美国出版物 ⇒ 去查 CCE 等于**去找一批不存在的卷**。1978 年起的登记/续展在**美国版权局公开目录** （https://publicrecords.copyright.gov/ 今日实测 HTTP 200）——**本轮只测了可达性，没有用它查任何人，不替本条下 PD 判断。** 同批唯一可执行的是 Timoshenko（1936/1937 档），已查完且结论是封死。详见 `_ledgers/_查CCE这条待办的射程-2026-08-14.md`。"
     },
     {
-      "name": "Gustave Eiffel",
-      "family_zh": "材料建工师",
-      "deferred_at": "2026-08-06",
-      "seq": 142,
-      "disposition": "延后",
-      "class": "①＋⑤ 一手规模不够 **叠加** 通道受限（差的那 1 部四条通道全不通）",
-      "reason": "可用一手 **7 部 < quick 门 8**，**差整整 1 部**。\n7 部已全部落盘（3,419,266 B，逐份 sha256 在 `_fetch-manifest.json`）：\n  1879 Notice sur le pont du Douro／1888 Les grandes constructions métalliques／\n  1888 Notice sur le viaduc de Garabit／1889 Mémoire présenté à l'appui du projet définitif／\n  1900 Travaux scientifiques／1900 La Tour de 300 Mètres／1902 La Tour Eiffel en 1900\n★ **没有为凑数做三件事**：不把副本（Garabit ×2、Travaux ×2）算成两源；不把 226 B 读不出内容的 `letters00eiff` 算进去；**不把两部合集拆成多篇**——落盘后看结构，二者都是分章的专著（扉页 `EXÉCUTÉS A LA TOUR… DE 1889 A 1900`／`IL A ÉTÉ TIRÉ DE CET OUVRAGE 500 Exemplaires`），**章不是独立作品**。这个结论与我的利益相反。",
-      "★ 四条通道全试过": "archive.org 无此条目（按书名 `title:(\"resistance de l air\")` numFound=0）／**Gallica SRU 403 Access Interdit**／**Google Books API 429 配额耗尽**／**HathiTrust 要 OCLC/LCCN 而标识符要靠前三条去查**——★ 最后这条与 Mehl #137 卡住的地方一模一样，说明是通道的性质不是运气。",
-      "unblock_todo": [
-        "★★★ **① 与 ② 均已满足（2026-08-18）**：第 8 部一手 `EiffelLaRsistanceDeLairEtLaviation1910` 正文已取到（429,518 B / 77,462 词，sha256 72329cd0…），过 `check_ocr_language_death`，权利 1910 ≤1930。",
-        "**下一步：重新入队 + 抓源/阶段 1–3。** 已有 7 部在仓里，不必重抓。",
-        "③ 同名护栏已做好（Eiffel 65 占了检索命中的一半以上），可直接复用。",
-        "★ Gallica 那条已复探：书目通（403 是 UA 过滤）、works 明确，但正文层未暴露 —— **不必再走 Gallica**，archive.org 这条已通。"
-      ],
-      "处置类": "①＋⑤ 一手规模不够 **叠加** 通道受限（差的那 1 部四条通道全不通）",
-      "★ 处置类的原键": "class",
-      "★ 2026-08-18 复探（Gallica）": {
-        "① 403 的真因": "**不是访问控制，是 User-Agent 过滤。** 裸 curl 打 SRU 得 403；换成如实标明身份的 UA（`persona-distiller-probe/1.0 (…contact:…)`）**同一 URL 得 200、59 KB**。⇒ 记录里「Gallica SRU 403 Access Interdit」**已证伪** —— 下一个人不必再去打那个 403。",
-        "② 书目侧实测": "`dc.creator all \"Eiffel Gustave\"` → **numberOfRecords = 32**；本页 32 条里 **role=`Auteur du texte` 且出版年 ≤1930 的 14 条**（1885–1913，法文原著）。★ 未收窄的 `gallica all \"Eiffel Gustave\"` 是 9676 条，里面大量是**关于**他的（Couture 的圆舞曲、Agence Rol 的照片）—— **与他有关 ≠ 他写的**，必须按 creator+role 收窄。",
-        "③ `unblock_todo ①` 点名的那几部**都在**": [
-          "1907 Recherches expérimentales sur la résistance de l'air（ark:/12148/bpt6k5675046x）",
-          "1910 Installation d'un laboratoire d'aérodynamique（ark:/12148/bpt6k5674999v）",
-          "1911 La Résistance de l'air et l'aviation（ark:/12148/bd6t57749157）",
-          "1913 Recherches expérimentales…（ark:/12148/bd6t5403097c）"
-        ],
-        "④ ★★★ 但正文没取到 —— **仍不解锁**": "`.texteBrut` 三种形式（整册 / `/f1` / `/f7n20`）**都返回逐字节相同的 50212 B 网页外壳**：去掉 script/style 后净文本仅 2309 字符，`résistance|expériences|aérodynamique|vitesse|plaque|mètres` **一个都没命中**；对页范围不敏感本身就证明它不是正文。**书目命中 ≠ 正文取得到** —— 本条延后的解锁条件是「再取到 1 部」，书目命中不算取到。",
-        "⑤ 下一步（给下一个人）": [
-          "**不要再打 403**：带 UA 即可读 SRU。",
-          "正文改走 **IIIF**（`https://gallica.bnf.fr/iiif/{ark}/manifest.json`）或 OCR 的 ALTO 端点，而不是 `.texteBrut`；取到后**先数法文实词命中再说取到了**。",
-          "只要任意 1 部拿到正文，quick 的 8 源即成立（已有 7 部在仓里，不必重抓）。"
-        ],
-        "⑥ 正文四册全试过（同日续测）": "四部 ARK（`bpt6k5675046x` 1907／`bpt6k5674999v` 1910／`bd6t57749157` 1911／`bd6t5403097c` 1913）**各打一次 `.texteBrut`：全部 HTTP 200、逐字节相同的 50212 B**，去掉 script/style 净文本均 2309 字符、法文关键词 0 命中。★★★ **响应与册次无关 ⇒ 这不是「这几册没 OCR」的证据，是「该端点没给我文本」。**别据此断定那几本书没有 OCR。★ IIIF 侧：`manifest.json` 通（149 页、BnF Sciences et techniques FOL-V-5007），但**顶层无 `rendering`、画布无 `otherContent`／`seeAlso`**（IIIF 放 OCR 标注的地方），`RequestDigitalElement…E=ALTO` 回 **HTTP 400**。⇒ **文本层没有从这两条文档化端点暴露出来**；再往下就是猜内部 API，**停手**。",
-        "⑦ 结论": "**Eiffel #142 维持延后**。但卡点已从「Gallica 被 403 挡住」精确到「**书目通、works 明确（14 部 ≤1930 的 `Auteur du texte`，ARK 已记）、而正文层未从 texteBrut／IIIF 暴露**」。差的仍是那 1 部**正文**。"
-      },
-      "★★★ 2026-08-18 解锁条件已满足（第 8 部一手已取到正文）": {
-        "怎么找到的": "记录里写「archive.org 无此条目（按书名 `title:(\"resistance de l air\")` numFound=0）」——**那是去掉重音的书名检索，书名匹配是脆的**。改按 creator 检索：`creator:(Eiffel) AND date:[1880-01-01 TO 1930-12-31]` → **numFound 11**，其中就有 `Eiffel - La résistance de l'air et l'aviation, 1910` —— 正是 `unblock_todo ①` 点名的那一部。11 部**全部 `access-restricted-item: None`**。",
-        "标识符": "EiffelLaRsistanceDeLairEtLaviation1910",
-        "文件": "`Eiffel_-_La_résistance_de_l'air_et_l'aviation,_1910_djvu.txt`（★ 不是标准的 `{id}_djvu.txt` —— IA 保留了**带重音的原文件名**，我先猜标准名得 404。**文件名匹配是脆的**，同日第三次）",
-        "实测": "**429,518 字节 / 77,462 词**；sha256 `72329cd0626aab28…`；法文实词（résistance/expériences/aérodynamique/vitesse/plaque/mètres/avion/Eiffel）命中 **564** 次。",
-        "权利": "出版 **1910**，作者 Gustave Eiffel 1832–1923 ⇒ **≤1930 分界内，公有领域**。",
-        "OCR 质量": "`check_ocr_language_death` **通过**（1 份可判，虚词占比在 0.15 下限之上，不是被 OCR 整份毁掉的）。★ `check_ocr_legibility` **读到 0 份 ⇒ 未量，不是通过**（且它只认德文花体，射程外）。",
-        "★★★ 结论": "他的 `unblock_todo ②` 写着「**只要再取到 1 部，quick 的 8 源即成立**」——**这一部已取到正文并过了 OCR 门。解锁条件满足。**下一步是**重新入队 + 走抓源/阶段 1–3**（不需要干净上下文，普通会话即可）。★ 正文**没有**进 git（语料只放指针；本仓是 PUBLIC）——上面的标识符 + 文件名 + sha256 就是指针，照它可原样重取。",
-        "⑧ 8/8 指针当日复验": "把 `_fetch-manifest.json` 里原有 **7 个 identifier** ＋ 今天新找到的第 8 个，逐个打 `archive.org/metadata/{id}`：**8/8 全部返回完整文件清单、`access-restricted-item: None`、各含 ≥1 个 `.txt` 文本派生件**。⇒ **quick 门要 8 部一手，现在 8 部都可取且都有文本层。**★ 复验只打 metadata（不整包下载，铁律 7）。★★ 循环里那个 `HTTP 405` 是我用 `-I`（HEAD）打出来的 —— 该端点只收 GET，**同一循环的 GET 全部成功**；别把 405 读成不可用。★★★ 本机 `wip-eiffel-142` 目前 **0 份 .txt**（语料只放指针），真开工时按这 8 个 identifier 重取即可。"
-      }
-    },
-    {
       "name": "Fazlur Rahman Khan",
       "family_zh": "材料建工师",
       "deferred_at": "2026-08-06",
