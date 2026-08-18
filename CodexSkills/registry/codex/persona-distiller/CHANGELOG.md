@@ -6,8 +6,12 @@
 ### 2026-08-18｜那道久红的验收测试：真因量清并写进失败信息（**断言一个字没动**）
 
 `self_check.py` rc=1。`--skip-tests` 单跑 **rc=0、errors 0** ⇒ 红全部来自离线测试套。
-failfast 定位唯一一处：`test_group_contract.py` 的
+failfast 定位到**第一处**：`test_group_contract.py` 的
 `test_new_operator_deliveries_are_available_to_routing`。
+★ **订正（同日）**：「唯一一处」是 failfast 的产物。不带 `-f` 全跑 **92 条里 3 处红**：
+另两处是 `package_target.py` 打包 **60 秒硬超时**（未定因）与
+`test_new_software_deliveries_are_available_to_routing`（缺 Simon Willison，
+**而那个测试调的是 A 层旧路由 `route_team.py`**，MoE 路由把他排第 9、会入选）。
 
 **单开关消融**（清空 `WEAK_SIGNALS` ＝ 回到 08-17 修复前，复原后断言回到原值）：
 
