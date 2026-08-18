@@ -1,0 +1,96 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Gustave Eiffel；历史人物（1832-12-15 – 1923-12-27）；法国土木工程师、金属结构承建商；Compagnie des Établissements Eiffel 创办人。\n   专业背景：锻铁桁架桥与金属结构。加拉比高架桥（Viaduc de Garabit, 1884）、波尔图 Maria Pia 桥、自由女神像内部骨架、1889 年巴黎博览会三百米塔。1893 年巴拿马丑闻后退出承建业，转做**空气动力学实验**（Auteuil 与 Rue Boileau 风洞）。。\n   应用价值：场景：金属桁架桥的设计与施工；高耸金属结构的抗风；空气动力学风洞实验；关键能力：锻铁结构计算；大跨与高耸结构的风载处理；工地组织与预制装配；系统性实验测量。\n   区分依据：署名作 `Eiffel, Gustave, 1832-1923` 或 `G. Eiffel`；**载体是法文工程专著与公司刊行的说明书**（`Notice sur…`），以及他自费出版的空气动力学实验报告。研究对象是金属结构与空气阻力。。",
+    "B. 人物与身份：Eiffel 65；意大利电子舞曲组合（1998– ）；音乐组合（Blue (Da Ba Dee) 等）。\n   专业背景：与工程或任何科学无关。。\n   应用价值：场景：流行电子舞曲；关键能力：作曲与制作。\n   区分依据：★★★ **本轮检索里压倒性地撞上过**：65 个命中里超过一半是它——`blue-da-ba-dee_202411`、`cvcmsd`（Move Your Body）、`eiffel-65-critical`、`Eiffel65liveatFestivalbar2002` 等。**区分依据：载体是音频/视频，creator 字面就是 `Eiffel 65`（带数字 65），且年代 1998 年后。**。",
+    "C. 人物与身份：Savin Yeatman-Eiffel；法国动画创作者（当代）；《Oban Star-Racers》创作者。\n   专业背景：动画与影视。**姓氏含 Eiffel，且是法国人**——按姓 + 语种筛会与目标并在一起。。\n   应用价值：场景：电视动画创作；关键能力：动画导演与编剧。\n   区分依据：复姓 `Yeatman-Eiffel`；载体是动画影片（`oban-star-racers-*`、`DemoVoixStephanRopert`）。。"
+  ],
+  "candidate_count": 3,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "金属桁架桥的设计与施工",
+        "高耸金属结构的抗风",
+        "空气动力学风洞实验"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "archive.org `lesgrandesconstr00eiff`（1888《Les grandes constructions métalliques》，creator 逐字 `Eiffel, Gustave, 1832-19…`）"
+        },
+        {
+          "locator": "archive.org `TA624282EIF`（1888《Notice sur le viaduc de Garabit》，同一 creator 形态）"
+        },
+        {
+          "locator": "archive.org `travauxscientif00eiffgoog`（1900《Travaux scientifiques exécutés à…》，同一 creator 形态）"
+        }
+      ],
+      "canonical_name": "Gustave Eiffel",
+      "distinguishing_basis": "署名作 `Eiffel, Gustave, 1832-1923` 或 `G. Eiffel`；**载体是法文工程专著与公司刊行的说明书**（`Notice sur…`），以及他自费出版的空气动力学实验报告。研究对象是金属结构与空气阻力。",
+      "evidence_level": "high",
+      "identity_category": "历史人物（1832-12-15 – 1923-12-27）",
+      "key_capabilities": [
+        "锻铁结构计算",
+        "大跨与高耸结构的风载处理",
+        "工地组织与预制装配",
+        "系统性实验测量"
+      ],
+      "label": "A",
+      "occupation_or_role": "法国土木工程师、金属结构承建商；Compagnie des Établissements Eiffel 创办人",
+      "professional_background": "锻铁桁架桥与金属结构。加拉比高架桥（Viaduc de Garabit, 1884）、波尔图 Maria Pia 桥、自由女神像内部骨架、1889 年巴黎博览会三百米塔。1893 年巴拿马丑闻后退出承建业，转做**空气动力学实验**（Auteuil 与 Rue Boileau 风洞）。",
+      "subject_uid": "wikidata:Q1631"
+    },
+    {
+      "application_scenarios": [
+        "流行电子舞曲"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "archive.org 本轮实测命中：blue-da-ba-dee_202411 / cvcmsd / eiffel-65-critical / Eiffel65liveatFestivalbar2002"
+        }
+      ],
+      "canonical_name": "Eiffel 65",
+      "distinguishing_basis": "★★★ **本轮检索里压倒性地撞上过**：65 个命中里超过一半是它——`blue-da-ba-dee_202411`、`cvcmsd`（Move Your Body）、`eiffel-65-critical`、`Eiffel65liveatFestivalbar2002` 等。**区分依据：载体是音频/视频，creator 字面就是 `Eiffel 65`（带数字 65），且年代 1998 年后。**",
+      "evidence_level": "high",
+      "identity_category": "意大利电子舞曲组合（1998– ）",
+      "key_capabilities": [
+        "作曲与制作"
+      ],
+      "label": "B",
+      "occupation_or_role": "音乐组合（Blue (Da Ba Dee) 等）",
+      "professional_background": "与工程或任何科学无关。",
+      "subject_uid": "enwiki:Eiffel_65"
+    },
+    {
+      "application_scenarios": [
+        "电视动画创作"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "archive.org 本轮实测命中：oban-star-racers-s01-e10-12-dansk-da / poxitron-oban-star-racers-24-b-52460"
+        }
+      ],
+      "canonical_name": "Savin Yeatman-Eiffel",
+      "distinguishing_basis": "复姓 `Yeatman-Eiffel`；载体是动画影片（`oban-star-racers-*`、`DemoVoixStephanRopert`）。",
+      "evidence_level": "high",
+      "identity_category": "法国动画创作者（当代）",
+      "key_capabilities": [
+        "动画导演与编剧"
+      ],
+      "label": "C",
+      "occupation_or_role": "《Oban Star-Racers》创作者",
+      "professional_background": "动画与影视。**姓氏含 Eiffel，且是法国人**——按姓 + 语种筛会与目标并在一起。",
+      "subject_uid": "enwiki:Savin_Yeatman-Eiffel"
+    }
+  ],
+  "generated_at": "2026-08-06T05:25:23Z",
+  "normalized_name": "gustaveeiffel",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "wikidata:Q1631",
+  "status": "ready",
+  "target_name": "Gustave Eiffel",
+  "★ 选定依据": "三位候选里只有一位是人且与冶金/工程有关：**Gustave Eiffel（1832–1923）**。Eiffel 65 是 1998 年后的音乐组合、Savin Yeatman-Eiffel 是当代动画创作者，两者的载体（音频/视频/动画）与年代都与目标不重叠。★ 排除依据逐条实测于本轮 archive.org 检索，见 namesake-excluded.json。"
+}
