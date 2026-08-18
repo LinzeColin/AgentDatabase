@@ -134,10 +134,23 @@
 ★ 我一度把它写成后者并提交了。订正在此。
   [[samples-cannot-support-universal-claims]]｜[[a-verdict-whose-scope-exceeds-its-inputs]]
 
-★★ **仓里没有一份保存下来的、代表性的用户口吻任务集**：
-  `route_team_moe.py:420` 引的「24 pre-registered tasks / 54% 无域信号 / −1.7pp」
-  **只留了结论，没留任务**。要复算或推翻它，现在做不到。
-  [[evidence-must-carry-what-it-measured]]
+★★ **订正（2026-08-18 同日）：上一句我写错了射程。**
+  原话是「仓里没有一份保存下来的、代表性的用户口吻任务集」——**对 72 道 oracle 不成立**：
+  `_ledgers/_pipeline/benchmarks/development-48.jsonl`（48 条）与 `regression-24.jsonl`（24 条）
+  **一直都在**，`check_benchmark_mode_accuracy.py` 每次还会印出两份的 sha256 与
+  「从 TaskPack 原样复制，不是我编的」。本文上面那句「88% 只坐 1 人」用的是**名册标签**，
+  而那 72 条**是任务口吻的**——两者不是一回事，我把「本件没用」写成了「仓里没有」。
+
+  仍然成立的那一半：`route_team_moe.py:420` 引的
+  「24 pre-registered tasks / **54% 无域信号 / −1.7pp**」出自**另一次**运行，
+  那次的任务与逐条读数确实没留，无法复算。
+  ⇒ 射程该收窄成「**那一条**结论没留输入」，不是「仓里没有任务集」。
+  [[evidence-must-carry-what-it-measured]]｜[[claims-my-own-next-delivery-falsifies]]｜[[a-verdict-whose-scope-exceeds-its-inputs]]
+
+★★★ 那 72 条上的实测（2026-08-18 @v0.0.0.31）：模式命中 **25%**
+  （development-48 12/48、regression-24 6/24），`single_expert` 与 `swarm`
+  **一次都没被选中**——★ 注意这与本文上面「名册标签上 single_expert 占 88%」
+  **方向相反**：同一个产品，两份样本给出两幅相反的图。**报这个数必须连样本一起报。**
   ⇒ 本件因此**只报它真的量过的那一面**，并在输出里把这句射程一起印出来。
 
 ## ★★★★ 为什么我**不**替它造一份「用户口吻任务集」
