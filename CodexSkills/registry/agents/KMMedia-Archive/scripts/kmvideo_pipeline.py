@@ -459,6 +459,25 @@ def save_ledger(ledger: dict) -> None:
     rsync_write(tmp, MAP_CSV)
 
 
+def _stat_sizes(directory: Path, names: list[str]) -> dict[str, int]:
+    """并行 stat（问题记录：SMB IO 一律 >=8 worker 并行，串行会被每请求固定延迟吃死）。"""
+    from concurrent.futures import ThreadPoolExecutor
+    out: dict[str, int] = {}
+
+    def one(n: str):
+        try:
+            return n, (directory / n).stat().st_size
+        except OSError:
+            return n, None
+
+    workers = int(os.environ.get("RECONCILE_WORKERS", "8"))
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        for n, size in ex.map(one, names):
+            if size is not None:
+                out[n] = size
+    return out
+
+
 def reconcile_ledger(groups: list[str]) -> dict:
     """账本自愈：磁盘已改名、账本却还记着旧名的记录，按「同大小且唯一」认回来。
 
@@ -466,11 +485,12 @@ def reconcile_ledger(groups: list[str]) -> dict:
     （进程被杀、SMB 写失败、跨版本运行），rename 会因为原名已不在而永远跳过，
     账本再也回不来 —— 表现就是 audit / accept 一直报 missing，而磁盘上素材好好的。
 
-    媒体的 manifest 里没有 md5（文件版有），所以判据是「同 media_type 目录内、
-    字节数完全相同、且没有被别的记录认领」的唯一候选。有歧义就不认，留给人工。
+    性能约束（问题记录 P2-4）：**存在性判定只用一次 listdir + 内存比对，绝不逐文件 stat**。
+    18k 文件的群逐个 stat 会把进程钉死在 U 状态（实测 40 秒只涨 0.02s CPU，全阻塞在 stat）。
+    只有确实需要按大小配对时，才对「未被认领的候选文件」并行 stat。
     """
     ledger = load_ledger()
-    repaired, ambiguous = [], []
+    repaired, ambiguous, scanned = [], [], 0
     by_group = defaultdict(list)
     for m in load_media(groups):
         if m.get("smb_status") == "complete":
@@ -478,29 +498,35 @@ def reconcile_ledger(groups: list[str]) -> dict:
     for group, records in by_group.items():
         for media_type in ("photo", "video"):
             directory = SMB_ROOT / group / media_type
-            if not directory.is_dir():
-                continue
             subset = [m for m in records if m.get("media_type") == media_type]
-            if not subset:
+            if not subset or not directory.is_dir():
                 continue
-            names = [n for n in os.listdir(directory) if not n.startswith("._")]
-            claimed = {(ledger.get((group, os.path.basename(r.get("relative_path") or ""))) or {}).get("新文件名")
-                       for r in subset}
-            claimed.discard(None)
-            by_size = defaultdict(list)
-            for n in names:
-                try:
-                    by_size[(directory / n).stat().st_size].append(n)
-                except OSError:
-                    continue
+            names = {n for n in os.listdir(directory) if not n.startswith("._")}
+            scanned += 1
+            mapped_of = {}
             for m in subset:
+                old = os.path.basename(m.get("relative_path") or "")
+                mapped_of[old] = (ledger.get((group, old)) or {}).get("新文件名", "")
+            # 纯内存判定：原名在盘上、或账本记的新名在盘上 → 已解析
+            unresolved = [m for m in subset
+                          if os.path.basename(m.get("relative_path") or "") not in names
+                          and mapped_of.get(os.path.basename(m.get("relative_path") or ""), "") not in names]
+            if not unresolved:
+                continue  # 早退，一次 stat 都不做
+            claimed = {v for v in mapped_of.values() if v and v in names}
+            claimed |= {os.path.basename(m.get("relative_path") or "") for m in subset} & names
+            candidates = sorted(names - claimed)
+            if not candidates:
+                continue
+            sizes = _stat_sizes(directory, candidates)
+            by_size = defaultdict(list)
+            for n, size in sizes.items():
+                by_size[size].append(n)
+            for m in unresolved:
                 old_name = os.path.basename(m.get("relative_path") or "")
-                if aim.resolve_current_path(m) is not None:
-                    continue
-                candidates = [n for n in by_size.get(int(m.get("size_bytes") or -1), [])
-                              if n != old_name and n not in claimed]
-                if len(candidates) == 1:
-                    hit = candidates[0]
+                hits = [n for n in by_size.get(int(m.get("size_bytes") or -1), []) if n not in claimed]
+                if len(hits) == 1:
+                    hit = hits[0]
                     ledger[(group, old_name)] = {
                         "项目": group, "原文件名": old_name, "新文件名": hit,
                         "日期": str(m.get("message_time") or "")[2:10].replace("-", ""),
@@ -508,14 +534,14 @@ def reconcile_ledger(groups: list[str]) -> dict:
                     }
                     claimed.add(hit)
                     repaired.append(f"{group}/{old_name} → {hit}")
-                elif candidates:
-                    ambiguous.append(f"{group}/{old_name} ?= {candidates[:3]}")
+                elif hits:
+                    ambiguous.append(f"{group}/{old_name} ?= {hits[:3]}")
     if repaired:
         save_ledger(ledger)
         log(f"账本自愈: 认回 {len(repaired)} 条 —— {repaired[:3]}")
     if ambiguous:
         log(f"账本自愈: {len(ambiguous)} 条同大小多候选，不猜，留给人工 —— {ambiguous[:3]}")
-    return {"repaired": len(repaired), "ambiguous": len(ambiguous)}
+    return {"repaired": len(repaired), "ambiguous": len(ambiguous), "dirs_scanned": scanned}
 
 
 # ---------- 阶段二：规格探测 ----------

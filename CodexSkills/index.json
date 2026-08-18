@@ -1047,7 +1047,7 @@
       "category": "业务流程",
       "entry": "registry/agents/KMMedia-Archive/SKILL.md",
       "file_count": 3,
-      "size_bytes": 152740
+      "size_bytes": 154056
     },
     {
       "slug": "KMFile-Archive",
@@ -1057,7 +1057,7 @@
       "category": "业务流程",
       "entry": "registry/agents/KMFile-Archive/SKILL.md",
       "file_count": 3,
-      "size_bytes": 153865
+      "size_bytes": 155080
     }
   ]
 }
