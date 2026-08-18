@@ -874,13 +874,21 @@ def stage_registry(args, ctx) -> dict:
                         "字数", "摘要", "重复于", "标注执行者", "标注日期"):
                 r[col] = d.get(col, "")
             r["复核状态"] = r.get("复核状态") or "未复核"
-            if (r.get("文件名") or "") != (r.get("原文件名") or ""):
-                pass  # 已改名行：描述已定案，不覆盖重标
+            has_desc = bool(str(r.get("描述") or "").strip())
+            renamed = (r.get("文件名") or "") != (r.get("原文件名") or "")
+            if note and note != "待确认" and not has_desc:
+                # 首次落描述必须写，改没改名都一样。
+                # rename 跑在 registry 之前，若把「已改名」当成「已定案」直接跳过，
+                # 首轮的描述就永远写不进去 —— 登记表整列空白。
+                r["描述"] = note
+                r["置信度"] = "高"
+            elif renamed:
+                pass  # 已改名且已有描述：定案，不覆盖重标
             elif note and note != "待确认":
                 r["描述"] = note
                 r["置信度"] = "高"
-            elif (r.get("描述") or "").strip():
-                r["描述"] = ""
+            elif has_desc:
+                r["描述"] = ""  # 未改名却留着旧描述 = 改名被回退，清掉重来
                 r["置信度"] = "待确认"
             updated += 1
 
