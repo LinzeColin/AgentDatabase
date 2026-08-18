@@ -113,6 +113,7 @@ from __future__ import annotations
 import argparse
 import json
 import pathlib
+import re
 import statistics
 import subprocess
 import sys
@@ -184,6 +185,31 @@ def share_of(plan: dict, component: str = "domain_match"):
             nonzero, elig, is_top)
 
 
+
+#: ★★★★ 2026-08-18：**「取前 N 条」不等于「N 个不同的题」。**
+#:   本件用 `--tasks` 读 72 道 oracle 时取了 `tasks[:limit]`，而那份文件
+#:   **按题面聚集排列**（题面1×4、题面2×4…）⇒ 前 8 条只覆盖 **2** 个题面、
+#:   前 12 条只覆盖 **3** 个。我因此报出过一个 **100%** 和一个**窄区间**，
+#:   两者都是**同一题面的多个变体互相凑**出来的。
+#:   ⇒ 凡按 `--tasks` 取样，**必须连「覆盖几个独立题面」一起印**。
+#:   [[uniqueness-counted-on-a-thin-sample-is-manufactured]]｜[[samples-cannot-support-universal-claims]]
+_VARIANT_TAIL = re.compile(r"\s*变体\s*\d+\s*[：:].*$", re.S)
+
+
+def stem_coverage(tasks: list) -> tuple:
+    """→ `(独立题面数, 样本数)`。去掉「 变体 N：…」尾巴后按题面去重。"""
+    stems = {_VARIANT_TAIL.sub("", str(t)).strip() for t in tasks}
+    return len(stems), len(tasks)
+
+
+def print_stem_note(tasks: list) -> None:
+    n_stem, n = stem_coverage(tasks)
+    print("  ★ **覆盖 %d 个独立题面 / %d 条样本**%s"
+          % (n_stem, n, "" if n_stem == n else "（同一题面的多个变体**不带额外信息**）"))
+    if n_stem < 5:
+        print("  ★★ **独立题面只有 %d 个 —— 下面的比例与区间都撑不起结论**；"
+              "取样时请覆盖到更多题面。" % n_stem)
+
 def contract_line_present() -> bool:
     if not CONTRACT.is_file():
         return False
@@ -249,6 +275,18 @@ def self_test() -> int:
     chk("⑨ ★★★ 基线记着它自己的样本量（换了样本量不给新地板要判未量）",
         isinstance(BASELINE_LIMIT, int) and BASELINE_LIMIT > 0)
 
+
+    # ── stem_coverage：正 + 负对照 ──
+    chk("★ 正对照：全不同的题面 ⇒ 覆盖数 == 样本数",
+        stem_coverage(["甲的问题。", "乙的问题。", "丙的问题。"]) == (3, 3))
+    chk("★★ 负对照：同一题面的 4 个变体 ⇒ **覆盖数 1、样本数 4**（这正是我踩过的那一脚）",
+        stem_coverage(["某题。 变体 1：要求证据可追溯。",
+                       "某题。 变体 2：要求证据可追溯。",
+                       "某题。 变体 3：要求证据可追溯。",
+                       "某题。 变体 4：要求证据可追溯。"]) == (1, 4))
+    chk("★ 负对照：不含「变体」的题面**一个字都不许动**",
+        stem_coverage(["诊断一个单一领域问题，列出假设、证据缺口、结论和改判条件。"]) == (1, 1))
+
     print("自测：%s" % ("**全过**" if ok else "**有失败**"))
     return 0 if ok else 1
 
@@ -307,6 +345,7 @@ def main(argv=None) -> int:
         print("★ **未量，不是通过**（rc=4）—— 合同里找不到这句话了，本件无的放矢。")
         return 4
     print("样本：**%d** 条，来自%s" % (len(tasks), src))
+    print_stem_note(tasks)
     if not a.tasks:
         print("  ★★ **射程**：这是**名册标签**不是用户提问。同一天实测：换成 72 道 oracle "
               "任务集，`single_expert` 与无域信号两项的读数**与本样本相反**。"
