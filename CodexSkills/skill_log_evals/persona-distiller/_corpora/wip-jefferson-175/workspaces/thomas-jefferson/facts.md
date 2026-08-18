@@ -2,7 +2,7 @@
 
 ## 其一
 
-- **独立宣言的自明真理段——两个编本逐字不同。** `We hold these truths to be self-evident, that all men are created equal; that they are endowed by their Creator with certain unalienable rights.`（`src-62fdaa348a52`）；同一段在另一编本作 `We hold these truths to be self-evident: that all men are created equal; that they are endowed by their Creator with [inherent and] certain inalienable rights`（`src-60f178fb97d0`，该本把宣言系于 1776 年）。★ **`unalienable` vs `inalienable`、逗号 vs 冒号、以及方括号里的 `[inherent and]`** ——引用这一段必须指明编本。前一句两本相同：`a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation`——**先说明「为什么要说明」**。 <!-- claim:clm-03a799ad3834 -->
+- **独立宣言的自明真理段——两个编本逐字不同。** `We hold these truths to be self-evident, that all men are created equal; that they are endowed by their Creator with certain unalienable rights;`（`src-62fdaa348a52`）；同一段在另一编本作 `We hold these truths to be self-evident: that all men are created equal; that they are endowed by their Creator with [inherent and] certain inalienable rights`（`src-60f178fb97d0`，该本把宣言系于 1776 年）。★ **`unalienable` vs `inalienable`、逗号 vs 冒号、以及方括号里的 `[inherent and]`** ——引用这一段必须指明编本。前一句两本相同：`a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation`——**先说明「为什么要说明」**。 <!-- claim:clm-03a799ad3834 -->
   - **反证条件**：若第三个编本给出与两者都不同的措辞，本条须补记
 - **第一次就职演说里他取消阵营对立**：`We are all republicans: we are all federalists.`（`src-354b5e5d9486` @327387）；前一句 `We have called, by different names, brethren of the same principle.` <!-- claim:clm-d1c9e76e8ed1 -->
   - **反证条件**：若该段为编者概括须撤
@@ -19,7 +19,7 @@
 
 - **天生桥的记述里他给的是可复现的观察条件**：`Looking down from this height about a minute, gave me a violent head ach.`（`src-29b9a8e05249` @60368）——时间是量的，反应是身体的。 <!-- claim:clm-067388a4634d -->
   - **反证条件**：若属他人游记须撤
-- **《议事手册》里他先说出反方的依据**：`I am aware, that authorities can often De produced m opposition to the rules which I lay down as parliament[ary]`（`src-ac2df69c6c36` @5495；讹形 `De`＝be、`m`＝in） <!-- claim:clm-5026c38f1f03 -->
+- **《议事手册》里他先说出反方的依据**：`I am aware, that authorities can often De produced m opposition to the rules which I lay down as parliamentary.`（`src-ac2df69c6c36` @5495；讹形 `De`＝be、`m`＝in） <!-- claim:clm-5026c38f1f03 -->
   - **反证条件**：若属编者按语须撤
 - **他给自己的定位是编纂者不是立法者**：`I have here en deavored to collect and digest so much of these as is called for in ordi nary practice, collating the parliamentary with the senatorial rules, both where they agree and where`（`src-f3ee30d59c57` @7118）——动词是 collect／digest／collating，**没有一个是「创制」**，且明写一致处与分歧处都并列。 <!-- claim:clm-ed0bd004af72 -->
   - **反证条件**：若该序为编者代笔须撤

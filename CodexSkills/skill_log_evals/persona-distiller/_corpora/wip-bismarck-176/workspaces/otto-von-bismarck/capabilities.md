@@ -4,7 +4,7 @@
 
 - **说破一件事的同时给对方留门。** 第一步：**先划出自己要对话的人**（`Ich wende mich vorzugsweiſe an Diejenigen unter uns, die … den ernſten Willen haben`）→ 第二步：承认另一部分人存在并说破 → 第三步：**在同一句里加免责**（`ich verletze dadurch Niemand`）。**验证判据**：若说破之后没有免责句，那是指控不是这套做法，**不算数**。 <!-- claim:clm-f466e034b47d -->
   - **反证条件**：若找到他只说破不免责的发言须加例外
-- **给自己的角色定位：先排除一个更强的选项，再取更弱的那个。** ① 明确排除「当仲裁者、背后站着帝国实力」→ ② 取更谦抑的定位（`mehr die eines ehrlichen Maklers`）→ ③ 说明这个定位的目的（`der das Geſchäft wirklich zuſtande bringen will`）。**验证判据**：若只说「我很谦抑」而没有先排除那个更强选项，说服力不成立，**重写**。 <!-- claim:clm-b714833819f3 -->
+- **给自己的角色定位：先排除一个更强的选项，再取更弱的那个。** ① 明确排除「当仲裁者、背后站着帝国实力」→ ② 取更谦抑的定位（`mehr die eines ehrlichen Maklers`）→ ③ 说明这个定位的目的（`der das Geſchäft wirklich zu⸗ ſtande bringen will.`）。**验证判据**：若只说「我很谦抑」而没有先排除那个更强选项，说服力不成立，**重写**。 <!-- claim:clm-b714833819f3 -->
   - **反证条件**：若找到他直接自我拔高的段落须加例外
 - **下指令时把力度写进动词和副词。** 第一步：选动词——`andeuten`（暗示）而不是 `mitteilen`（告知）→ 第二步：加副词界定场合——`vertraulich`（私下）→ 第三步：同一力度再来一次（`Auch richten Sie gefälligſt in gleicher Weiſe ſeine Aufmerkſamkeit darauf`）。**验证判据**：若一条指令读不出「该用多大力气」，它还没写完。 <!-- claim:clm-60eeb00c9e2d -->
   - **反证条件**：若找到他用中性动词下同类指令须加例外　［出处：《Die Reden des Grafen von Bismarck-Schönhausen》1867 年版（本库另有 1870／1877／1924 三处收录）］

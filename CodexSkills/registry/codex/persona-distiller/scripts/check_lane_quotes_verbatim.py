@@ -326,6 +326,20 @@ def extract_quotes(md: str):
     return out
 
 
+_META_LINE = re.compile(r"^[a-z_]{3,30}\s*:\s*\S", re.I)
+
+
+def is_metadata_not_quote(q: str) -> bool:
+    """★ `extraction_status: failed` 这类**元数据**被抽成了引文。
+
+    2026-08-19：Machiavelli 与 Jefferson 各有 1 条「对不上」，逐条看才发现
+    它压根不是引文，是抽取失败的标记行。**报成「引文对不上」会把人引去改正文。**
+    形状：整条就是 `小写键: 值`，且不含句读性的空格断句。
+    """
+    q = q.strip()
+    return bool(_META_LINE.match(q)) and len(q.split()) <= 4
+
+
 def verify(quote: str, corpus: dict):
     """→ (命中的 source_id, 或 None)。
 
@@ -822,6 +836,47 @@ def self_test():
         chk("★★ 复量：改完之后对不上数为 0", _count_bad(r, corp3) == 0)
         chk("★★ 只动引文，周围正文原样", after.startswith("- 甲 `") and after.rstrip().endswith("`"))
         chk("★★★ 末尾词不许被截断（语料多出字时按词边界对齐）", "une balance." in after)
+    # ★★★ 起点自测：语料首词比引文长一个码位时，首字母不许被削。
+    with tempfile.TemporaryDirectory() as td:
+        r2 = pathlib.Path(td) / "ws"
+        (r2 / "references" / "research").mkdir(parents=True)
+        (r2 / "evidence").mkdir(parents=True)
+        (r2 / "raw").mkdir(parents=True)
+        (r2 / "raw" / "b.txt").write_text(
+            "Dies ist der Zenith und Nadir, die ein Jeder fuer und durch sich selbst bestimmt. Ende.\n",
+            encoding="utf-8")
+        (r2 / "evidence" / "source-ledger.jsonl").write_text(json.dumps(
+            {"source_id": "src-bbb", "local_path": "raw/b.txt", "split": "train"},
+            ensure_ascii=False) + "\n", encoding="utf-8")
+        l2 = r2 / "references" / "research" / "01-writings.md"
+        l2.write_text("- 乙 `die ein Jeder fur und durch sich selbst bestimmt.`\n", encoding="utf-8")
+        repair(r2, apply=True)
+        got = l2.read_text(encoding="utf-8")
+        chk("★★★ 起点不许被削（语料词更长时首字母仍在）", "`die ein Jeder" in got)
+        corp4, _, _ = load_corpus(r2)
+        chk("★★★ 起点场景改完也要归零", _count_bad(r2, corp4) == 0)
+    # ★★★ 反对照：语料里前面还有别的句子时，**不许把上一句的尾巴吃进引文**。
+    with tempfile.TemporaryDirectory() as td:
+        r3 = pathlib.Path(td) / "ws"
+        (r3 / "references" / "research").mkdir(parents=True)
+        (r3 / "evidence").mkdir(parents=True)
+        (r3 / "raw").mkdir(parents=True)
+        (r3 / "raw" / "c.txt").write_text(
+            "He had reached notoriety. I do but quote from one of those speeches now.\n",
+            encoding="utf-8")
+        (r3 / "evidence" / "source-ledger.jsonl").write_text(json.dumps(
+            {"source_id": "src-ccc", "local_path": "raw/c.txt", "split": "train"},
+            ensure_ascii=False) + "\n", encoding="utf-8")
+        l3 = r3 / "references" / "research" / "01-writings.md"
+        l3.write_text("- 丙 `I do but quote from one of these speeches now.`\n", encoding="utf-8")
+        repair(r3, apply=True)
+        got3 = l3.read_text(encoding="utf-8")
+        chk("★★★ 反对照：引文开头不许被塞进上一句（`notoriety.`）", "notoriety" not in got3)
+        chk("★★★ 反对照：该修的词仍要修（these→those）", "those speeches" in got3)
+        l3.write_text("- 丁 `I do but quote.`\n", encoding="utf-8")
+        repair(r3, apply=True)
+        chk("★★★ 反对照：长度暴涨的对齐一律不写",
+            "Wie Gertrud" not in l3.read_text(encoding="utf-8"))
 
     print("\n✓ 自测全过（3 正 + 5 反 + 2 条取法 + 7 条跨行 + 6 条隔离 + 5 条 repair）")
     # ★★★ 2026-08-18 新增：出处表头不许被当成引文，**而句中带 [src-…] 的真引文必须仍被抽到**。
@@ -893,19 +948,48 @@ def repair(ws: pathlib.Path, apply: bool = False, include_products: bool = False
         md = f.read_text(encoding="utf-8")
         new_md = md
         for q in extract_quotes(md):
-            if verify(q, corp):
+            if verify(q, corp) or is_metadata_not_quote(q):
+                continue
+            # ★★★★★ 含**显式省略号／版口标记**的引文不许用连续对齐来修 ——
+            #   它本身就是不连续的（verify() 也是分段验的）。Bismarck 那条
+            #   `Ich habe geſtern …` 被对齐成 `ich meinem geftrigen Gegner`，
+            #   **作者声明的那个断被抹掉了**。这类只能交给人。
+            if "…" in q or "[版口" in q or "..." in q:
+                out["**修不了**"].append({"道": lane, "引文": q[:70],
+                                       "因": "引文含显式省略号／版口标记，连续对齐会抹掉作者声明的断 —— **未改**"})
                 continue
             n = _norm(q)
-            cut = 0
-            for L in range(len(n), 15, -1):
-                if any(n[:L] in t for t in corp.values()):
-                    cut = L
+            # ★★★★★ 2026-08-19：**锚点必须能落在引文的任意位置，不能只看前缀**。
+            #   原来按「最长可命中前缀」定位，差异一旦落在**开头**就报
+            #   「连前 16 字符都命中不了」——我据此写下「语料里根本没有这句」，**是错的**：
+            #   · Rousseau 语料是 `Tout est bien, sortant des mains…`（我漏了逗号，第 13 字符）
+            #   · Kant 语料是 `fuͤr`（u+组合 e）而我写 `für`、`ſich` 而语料是 `sich`
+            #   两句都在语料里，只是分歧在开头。**再走一步就会去删掉真引文。**
+            #   [[a-blocked-by-x-label-needs-x-rerun]]：说「找不到」之前先换一种找法。
+            words = n.split()
+            sid = i = None
+            for k in (8, 6, 4):
+                for j in range(0, max(1, len(words) - k + 1)):
+                    frag = " ".join(words[j:j + k])
+                    if len(frag) < 14:
+                        continue
+                    for cand_sid, t in corp.items():
+                        pos = t.find(frag)
+                        if pos < 0 or t.find(frag, pos + 1) >= 0:
+                            continue          # 0 命中或多处命中都不算锚点
+                        # ★ 不能叫 `before` —— 外层 `before` 是「修前对不上条数」，
+                        #   被这里覆盖后，空操作守卫拿垃圾值比较，报出假的「一条也没少」。
+                        _pre_chars = len(" ".join(words[:j])) + (1 if j else 0)
+                        sid, i = cand_sid, max(0, pos - _pre_chars)
+                        break
+                    if sid:
+                        break
+                if sid:
                     break
-            if not cut:
-                out["**修不了**"].append({"道": lane, "引文": q[:70], "因": "连前 16 字符都命中不了"})
+            if sid is None:
+                out["**修不了**"].append({"道": lane, "引文": q[:70],
+                                       "因": "4/6/8 词窗口在语料里都找不到唯一锚点"})
                 continue
-            sid = next(s for s, t in corp.items() if n[:cut] in t)
-            i = corp[sid].index(n[:cut])
             # ★★★ 2026-08-19：`corp[sid][i:i+len(n)]` **会把尾巴切掉**。
             #   语料比引文多出字（游离页码 `1`、被拆成两半的 `ar gent`），
             #   按旧引文的字符数去截，末尾就短一截：
@@ -913,6 +997,30 @@ def repair(ws: pathlib.Path, apply: bool = False, include_products: bool = False
             #   而**截断的前缀照样能通过 verify()** ⇒ 判据全绿、产物更差。
             #   改法：在词边界上扫一段窗口，取与原引文最像的那个终点。
             import difflib as _dl
+            # ★★★ 起点也要对齐，**不能按引文的字符数推**。
+            #   语料 `fuͤr`（u+组合 e）比引文 `für` 多一个码位，起点就晚落一格，
+            #   把 `die` 削成 `ie`。终点那头我已经修过一次（range 开区间），
+            #   **同一个错有两头，只修一头等于没修**。[[a-signal-that-both-overfires-and-underfires]]
+            _lo = max(0, i - 45)
+            _starts = [k for k in range(_lo, min(len(corp[sid]), i + 45) + 1)
+                       if k == 0 or corp[sid][k - 1] in " \t"]
+            # ★★★ 起点必须让**首词对得上**，这是筛选条件、不是事后检查。
+            #   上一版按「整段相似度最大」选起点，打平时 `max` 取最早那个，
+            #   于是系统性偏前 —— 27 条拒改里**末词 0.86–1.00 全对、首词 0.00–0.40 全错**，
+            #   这个分布本身就说明偏差有方向。[[measurement-errors-all-point-the-same-way]]
+            _w0 = n.split()[0]
+            _i_est = i
+            _cands = [k for k in _starts
+                      if _dl.SequenceMatcher(None, _w0,
+                                             corp[sid][k:k + len(_w0) + 2].split()[0]
+                                             if corp[sid][k:k + len(_w0) + 2].split() else "").ratio() >= 0.6]
+            if _cands:
+                # 首词像的候选里，取整段最像的；打平时**取离锚点估计最近的**，不取最早的
+                i = max(_cands, key=lambda k: (round(_dl.SequenceMatcher(
+                    None, n, corp[sid][k:k + len(n) + 12]).ratio(), 3), -abs(k - _i_est)))
+            elif _starts:
+                i = max(_starts, key=lambda k: (round(_dl.SequenceMatcher(
+                    None, n, corp[sid][k:k + len(n) + 12]).ratio(), 3), -abs(k - _i_est)))
             window = corp[sid][i:i + len(n) + 80]
             # ★ `+ 1`：range 上界是开区间，不加就永远取不到 `len(window)`，
             #   于是**最后一个词必被切掉**（自测里 `balance.` 整个丢了）。
@@ -921,6 +1029,33 @@ def repair(ws: pathlib.Path, apply: bool = False, include_products: bool = False
             truth = max(ends, key=lambda k: _dl.SequenceMatcher(None, n, window[:k]).ratio(),
                         default=len(n))
             truth = window[:truth].rstrip()
+            # ★★★★★ 2026-08-19：**首尾词必须还认得出是同一个词**，否则一律不写。
+            #   上一版的起点对齐按「相似度最大」向前扩，把**上一句的尾巴吃进了引文**：
+            #     `I` → `notoriety. I`、`Tout` → `PREMIER. Tout`、
+            #     `cavalli,` → `171 i, arme,`、`die` → `und Nadir, die`
+            #   —— 引文开头多出不属于它的字，而 verify() 照样绿。
+            #   这是**同一个错第三次换头**（先截尾、再削头、现在是多吃）。
+            #   与其继续调对齐，不如加一条**失败即不写**的硬约束：
+            #   新旧引文的首词与末词相似度都要 ≥0.6，否则报「对不齐」交给人。
+            _ow0, _nw0 = n.split(), truth.split()
+            if not _nw0:
+                out["**修不了**"].append({"道": lane, "引文": q[:70], "因": "对齐结果为空"})
+                continue
+            # ★ 长度不许暴涨/暴缩：Pestalozzi 那条 `Künſt[lerinnen] …`（18 字）被对齐成
+            #   `Künft) Wie Gertrud ihre Kinder lehrt. S. 3. kerinnen für`（56 字）——
+            #   **书名与页码被塞进了引文**，而首末词各自还「像」，光靠首末词拦不住。
+            if not (len(n) * 0.7 - 6 <= len(truth) <= len(n) * 1.25 + 8):
+                out["**修不了**"].append({"道": lane, "引文": q[:70],
+                                       "因": f"长度从 {len(n)} 变成 {len(truth)}，超出 ±25% —— **未改**"})
+                continue
+            _r0 = _dl.SequenceMatcher(None, _ow0[0], _nw0[0]).ratio()
+            _r1 = _dl.SequenceMatcher(None, _ow0[-1], _nw0[-1]).ratio()
+            if _r0 < 0.6 or _r1 < 0.6:
+                out["**修不了**"].append({
+                    "道": lane, "引文": q[:70],
+                    "因": f"首/末词对不齐（首 {_ow0[0]!r}→{_nw0[0]!r} {_r0:.2f}；"
+                          f"末 {_ow0[-1]!r}→{_nw0[-1]!r} {_r1:.2f}）——**未改**"})
+                continue
             # ★ 独立复核：不经 load_corpus / corpus_body（那才是可疑的一环），
             #   直接在**原始字节**里找。折行连字符与空白按同一规则squash 掉——
             #   语料里 `water- ⏎level` 与引文 `water-level` 指的是同一串字，
@@ -936,23 +1071,40 @@ def repair(ws: pathlib.Path, apply: bool = False, include_products: bool = False
             #   [[bulk-auto-replace-damages-the-text]] 两次事故都是整段替换造成的；
             #   而研究道用的是**多行块引**，按行匹配根本落不下去。
             import difflib
+
+            def _wpat(w):
+                # 词是 `_norm` 过的（法语 `ridicule ;` 归一成 `ridicule;`），
+                # 而这里要在**未归一的正文**里找 —— 必须允许标点前有空白。
+                return "".join((r"\s*" + re.escape(c)) if c in ",.;:!?)]»" else re.escape(c) for c in w)
+
             ow, nw = n.split(), truth.split()
             edits, okall = [], True
             for tag, a1, a2, b1, b2 in difflib.SequenceMatcher(None, ow, nw).get_opcodes():
                 if tag == "equal":
                     continue
                 old_run, new_run = ow[a1:a2], nw[b1:b2]
-                # 两侧各带一个锚词，避免改到别处同形的字
-                la = ow[a1 - 1] if a1 else ""
-                ra = ow[a2] if a2 < len(ow) else ""
-                pat = r"\s+".join(re.escape(w) for w in ([la] if la else []) + old_run + ([ra] if ra else []))
-                ms = list(re.finditer(pat, new_md))
+                # ★ 锚词自适应加宽：**纯插入**（old_run 为空）时两侧锚词只有一个字，
+                #   `la\s+ra` 会在正文里命中十几次。从 1 个逐步加到 4 个，
+                #   取第一个**恰好命中 1 次**的宽度。
+                ms, la_w, ra_w = [], [], []
+                for wdt in (1, 2, 3, 4):
+                    la_w = ow[max(0, a1 - wdt):a1]
+                    ra_w = ow[a2:min(len(ow), a2 + wdt)]
+                    pat_try = r"\s+".join(_wpat(w) for w in list(la_w) + old_run + list(ra_w))
+                    ms = list(re.finditer(pat_try, new_md))
+                    if len(ms) == 1:
+                        break
+                la, ra = "", ""
+                # ★ 词是 `_norm` 过的（法语 `ridicule ;` 被归一成 `ridicule;`），
+                #   而这里要在**未归一的正文**里找 —— 必须允许标点前有空白，
+                #   否则会报「命中 0 次」而把一条修得好的引文判成修不了。
                 if len(ms) != 1:
                     out["**修不了**"].append({"道": lane, "引文": q[:70],
-                                           "因": f"词段 {' '.join(old_run)[:40]!r} 在文中命中 {len(ms)} 次（要求恰好 1 次）"})
+                                           "因": f"词段 {' '.join(old_run)[:34]!r}（锚宽已加到 4）"
+                                                 f"在文中命中 {len(ms)} 次（要求恰好 1 次）"})
                     okall = False
                     break
-                rep = " ".join(([la] if la else []) + new_run + ([ra] if ra else []))
+                rep = " ".join(list(la_w) + new_run + list(ra_w))
                 edits.append((ms[0].group(0), rep))
             if not okall:
                 continue
@@ -979,7 +1131,8 @@ def _count_bad(ws: pathlib.Path, corp: dict, include_products: bool = False) -> 
     """当前「对不上」的引文条数（**用本模块自己的 verify**，不另造尺子）。"""
     bad = 0
     for f in _scan_set(ws, include_products):
-        bad += sum(1 for q in extract_quotes(f.read_text(encoding="utf-8")) if not verify(q, corp))
+        bad += sum(1 for q in extract_quotes(f.read_text(encoding="utf-8"))
+                   if not verify(q, corp) and not is_metadata_not_quote(q))
     return bad
 
 

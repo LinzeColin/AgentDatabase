@@ -21,15 +21,15 @@
   - **反证条件**：若发现他别处用 the Nation 表述须并列
 - **告别斯普林菲尔德**：`My Friends: No one not in my position can appreciate the sadness I feel at this parting.`（`src-9e17d9796521` @4165） <!-- claim:clm-bf4f4719da47 -->　［出处：archive.org item gemsfromabrahaml00linc（1865）］
   - **反证条件**：若该篇为记者追记而非原稿须标明
-- **他在辩论里引自己旧话来自我设限**：`I do but quote from one of those speeches when I declare that "I have no purpose, directly or indirectly, to interfer[e]`（`src-c80788c2eea1` @1492）——**先声明这是引旧话，再把它当成对自己的约束**。 <!-- claim:clm-434abdcfeace -->　［出处：《Complete Works of Abraham Lincoln》1902 年版（本库另有 1906 年版一处收录）］
+- **他在辩论里引自己旧话来自我设限**：`I do but quote from one of those speeches when I declare that "I have no purpose, directly or indirectly, to interfere`（`src-c80788c2eea1` @1492）——**先声明这是引旧话，再把它当成对自己的约束**。 <!-- claim:clm-434abdcfeace -->　［出处：《Complete Works of Abraham Lincoln》1902 年版（本库另有 1906 年版一处收录）］
   - **反证条件**：若该段为对方转述须撤
-- **他把「被同胞真心看重」说成自己最大的抱负**：`Whether it be true or not, I can say, for one, that I have no other so great as that of being truly esteemed of my fe[llow men]`（`src-ad151187f39b` @1242） <!-- claim:clm-f7124caf1eb4 -->
+- **他把「被同胞真心看重」说成自己最大的抱负**：`Whether it be true or not, I can say, for one, that 'I have no other so great as that of being truly esteemed of my fe[llow men]`（`src-ad151187f39b` @1242） <!-- claim:clm-f7124caf1eb4 -->
   - **反证条件**：若该信为伪托须撤
 - **他回绝集会邀请的信是这样开头的**：`Dear Sir Yours, inviting me to attend a mass meeting on the 23rd Inst is received.`（`src-3176773929d7` @1789）——**先复述来信内容，再回应**。 <!-- claim:clm-e20bc41fb37f -->
   - **反证条件**：若该辑为伪托须撤
 - **他的自述生年月日**：`I was born, February 12, 1809, in Hardin County, Kentucky.`（`src-32716caed453` @862） <!-- claim:clm-da7330942553 -->
   - **反证条件**：若该自述为他人代笔须标明
-- **解放宣言里他同时写明被解放者可以入伍**：`And I further declare and make known that such persons, of suitable condition, will be received into th[e armed service]`（`src-81327220bc31` @3763）——**一份宣告里同时给出身份与义务**。 <!-- claim:clm-b19f23590ee0 -->
+- **解放宣言里他同时写明被解放者可以入伍**：`And I further declare and make known that such persons, of suitable condition, will be received into the armed service`（`src-81327220bc31` @3763）——**一份宣告里同时给出身份与义务**。 <!-- claim:clm-b19f23590ee0 -->
   - **反证条件**：若该条款属后续补令须更正
 - **Bixby 信在语料里以目录条目出现**（`Bixby .... 123 To Thurlow Weed 124`，`src-be0b3ab8adad` @9131），而其著者归属长期存在「林肯本人 vs 其秘书 John Hay」之争。★ 本产物**不把它当作声口或事实样本**，因为我手上没有可出示的学术来源。 <!-- claim:clm-526e461af666 -->　［出处：archive.org item bestoflincolnear00linc（1911）］
   - **反证条件**：若接入可出示的归属研究，本条须重写

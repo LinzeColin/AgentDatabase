@@ -4,7 +4,7 @@
 
 - **他的认识模型：材料与形式各司其职，缺一方就失效。** `Gedanken ohne Inhalt sind leer, Anschauungen ohne Begriffe sind blind.` ⇒ 引用他谈经验或概念时，**两侧要一起给**，只给一侧就是把他写成经验论者或唯理论者。 <!-- claim:clm-602a1a676506 -->
   - **反证条件**：若找到他偏袒一侧的文本须并列
-- **他的启蒙模型：障碍不在能力，在决心。** 不成熟状态的原因**不是缺乏理智**，而是缺乏决心与勇气（`nicht am Mangel des Verstandes, sondern der [Entschließ]ung und des Muthes`），所以口号才是 `Sapere aude!`。 <!-- claim:clm-dbc4e41210c2 -->
+- **他的启蒙模型：障碍不在能力，在决心。** 不成熟状态的原因**不是缺乏理智**，而是缺乏决心与勇气（`nicht am Mangel des Verstandes, sondern der Entschliessung und des Muthes`），所以口号才是 `Sapere aude!`。 <!-- claim:clm-dbc4e41210c2 -->
   - **反证条件**：若找到他把障碍归于能力的文本须并列　［出处：archive.org item ImmanuelKantsKritikDerReinenVernunftMitEinerEinleitungUnd（1889）］
 
 ---

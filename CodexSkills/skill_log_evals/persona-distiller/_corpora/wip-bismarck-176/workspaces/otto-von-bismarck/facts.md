@@ -19,17 +19,17 @@
 
 - **下外交指令时他连温度一起指定**：`Euere Exzellenz erſuche ich, dies dem Herrn Grafen von Nechberg vertraulich anzu— deuten.`（`src-0e926803e259`）——动词是 `andeuten`（暗示）不是 mitteilen，副词是 `vertraulich`。 <!-- claim:clm-e2a47e588eb4 -->
   - **反证条件**：若属抄件须标明
-- **他的主干自传是身后编印的。** `src-ee3963b8a368` 的题名页逐字为 `Gedanken und Erinnerungen Von Otto Fürſt von Bismarck Dritter Band` 与 `Widmung: Den Söhnen und Enkeln zum Verſtändniß der Vergang[enheit]`；台账出版年 **1921**，而他卒于 **1898**。 <!-- claim:clm-29c356b1a6d4 -->
+- **他的主干自传是身后编印的。** `src-ee3963b8a368` 的题名页逐字为 `Gedanken und Erinnerungen Von Otto Fürſt von Bismarck Dritter Band` 与 `Widmung: Den Söhnen und Enkeln zum Verſtändniß der Vergangenheit`；台账出版年 **1921**，而他卒于 **1898**。 <!-- claim:clm-29c356b1a6d4 -->
   - **反证条件**：若找到生前刊本须更新
 - **他的演说记录里夹着页眉。** 一处逐字为 `Ich habe geſtern … zolle, 8 Rede vom 15. Juni 1847. nichts erwidert`——页眉 `8 Rede vom 15. Juni 1847.` 落在句子中间。⇒ **该句不能整句逐字引。** <!-- claim:clm-23598ce6e545 -->
   - **反证条件**：若另一编本无此夹入须并记
 - **他的编本正文里夹着编者注。** 一处旁印 `2 Der Eingang des Satzes eigenhändiger Zusatz Bismarcks.`（编者说明该句开头是他亲笔增补）。⇒ 取引文会把编者注切进句子里。 <!-- claim:clm-000bb8c4854e -->
   - **反证条件**：若该注属正文须更正
-- **他的书信集由第三方编定**：`Bismarck-Brie[f]e . [I.] Familien-Briefe. II. Politifche Briefe. Herausgegeben Bruno Walden.`（题名页逐字，`Politifche` 是讹形） <!-- claim:clm-c43e2a9c9b51 -->
+- **他的书信集由第三方编定**：`Bismarck-Brielk. Kamilien-Briefe. II. Politifche Briefe. Herausgegeben Bruno Walden.`（题名页逐字，`Politifche` 是讹形） <!-- claim:clm-c43e2a9c9b51 -->
   - **反证条件**：若编者归属有误须更正
-- **他 1847 年在联合邦议会的发言是密集的，且卷末目录逐场登记了日期与会次。** 目录逐字列有 `Rede vom 17. Mai 1847 in der 15. Sitzung der Kurie der 3 Stände`、`Rede vom 7. Juni 1847 in der 9. [Sitzung] der vereinigten Kurien`、`Rede vom 8. Juni 1847 in der 10. Sitzung der vereinigten Kurien`、`Rede vom 18. Juni 1847 in der 35. Sitzung der Kurie der 3 Stände`、`Rede vom 25. Juni 1847 in der 42. [Sitzung] der Kurie der 3 Stände`。 <!-- claim:clm-0d4f3acf3e9b -->
+- **他 1847 年在联合邦议会的发言是密集的，且卷末目录逐场登记了日期与会次。** 目录逐字列有 `Rede vom 17. Mai 1847 in der 15. Sitzung der Kurie der 3 Stände`、`Rede vom 7. Juni 1847 in der 9. Stamm der vereinigten Kurien`、`Rede vom 8. Juni 1847 in der 10. Sitzung der vereinigten Kurien`、`Rede vom 18. Juni 1847 in der 35. Sitzung der Kurie der 3 Stände`、`Rede vom 25. Juni 1847 in der 42. Stell der Kurie der 3 Stände`。 <!-- claim:clm-0d4f3acf3e9b -->
   - **反证条件**：若该目录与正文场次不符须逐场核
-- **1848 年革命年他仍在联合邦议会发言**：目录列有 `Rede vom 2. April 1848 in der [ersten] Sitzung der vereinigten Kurien` 与 `Rede vom 4. April 1848 in der 2. S[itzung] der vereinigten Kurien`。 <!-- claim:clm-e233c3a60aac -->
+- **1848 年革命年他仍在联合邦议会发言**：目录列有 `Rede vom 2. April 1848 in der J. Sielna der vereinigten Kurien` 与 `Rede vom 4. April 1848 in der 2. St der vereinigten Kurien`。 <!-- claim:clm-e233c3a60aac -->
   - **反证条件**：同上
 
 ---

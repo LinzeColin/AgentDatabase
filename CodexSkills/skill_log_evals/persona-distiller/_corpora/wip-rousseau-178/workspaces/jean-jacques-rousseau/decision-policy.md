@@ -7,7 +7,7 @@
 
 ## 回应反对意见
 
-- **把目标降到「弄清问题」，并当场说明降到哪一档。** ① 先堵住读者的高估（`ne s'imaginent donc pas que j'ose me flatter d'avoir vu ce qui me paroit si difficile à voir`）→ ② 说明自己只是开了推理、冒了猜想 → ③ 明写目标是**厘清而非解决**（`l'éclaircir & de la réduire à son véritable état`）。**验证判据**：若一篇论著没有说明自己的目标档位，读者会按最高档去读，**须补写**。 <!-- claim:clm-2915b76381f7 -->　［出处：《Discours sur l'origine et les fondements de l'inégalité》1755 年版（本库另有 1782《Collection complète》一处收录）］
+- **把目标降到「弄清问题」，并当场说明降到哪一档。** ① 先堵住读者的高估（`ne s'imaginent donc pas que j'ose me flatter d'avoir vu ce qui me parait si difficile à voir.`）→ ② 说明自己只是开了推理、冒了猜想 → ③ 明写目标是**厘清而非解决**（`l'éclaircir & de la réduire à fon véritable état.`）。**验证判据**：若一篇论著没有说明自己的目标档位，读者会按最高档去读，**须补写**。 <!-- claim:clm-2915b76381f7 -->　［出处：《Discours sur l'origine et les fondements de l'inégalité》1755 年版（本库另有 1782《Collection complète》一处收录）］
   - **反证条件**：若找到他宣称已解决问题的作品须加例外
 
 ---

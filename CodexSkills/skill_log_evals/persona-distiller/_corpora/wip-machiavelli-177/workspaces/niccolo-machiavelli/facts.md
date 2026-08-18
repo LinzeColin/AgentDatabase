@@ -10,11 +10,11 @@
   - **反证条件**：若该细节属编者补注须撤
 - **他把「靠别人的军队」当成可实测的失败原因**：`avendo a fare esperienza dell’ industria e non dell’ armi proprie`（`src-d9697c904daf` @202122），并指出那五年里的后果。 <!-- claim:clm-a8953c4d8955 -->
   - **反证条件**：若该段属他人续写须标明
-- **他的献词逻辑：拿不出财货，就拿「对伟人行事的认识」当礼物。** 献词逐字含 `non ho trovalo intra la mia suppelleltile cosa, quale io aftbia più cara, o lanlu stimi, quanto la cognizione d[elle azioni degli uomini grandi]`（`src-ab73327e1fed` @1992451；讹形逐字照录（`trovalo`＝trovato、`aftbia`＝abbia））；前文列举的是 `cavalli, drappi d’oro, pietre preziose`。 <!-- claim:clm-26b63a2317ba -->
+- **他的献词逻辑：拿不出财货，就拿「对伟人行事的认识」当礼物。** 献词逐字含 `non ho trovalo intra la mia suppelleltile cosa, quale io aftbia più cara, o lanlu stimi, quanto la cognizione delle azioni degli uomini grandi,`（`src-ab73327e1fed` @1992451；讹形逐字照录（`trovalo`＝trovato、`aftbia`＝abbia））；前文列举的是 `cavalli, drappi d’oro, pietre preziose`。 <!-- claim:clm-26b63a2317ba -->
   - **反证条件**：若该献词属另一作品须更正
 - **他报告情报时把取得条件一起报**：`E questo tale fu contento , che io leggessi detti capitoli , ma non volse ne serbassi copia , onde io ne referirò a Vostre Signorie quanto se ne è riservato nella memoria .`（`src-7d02c9a9fdab` @476210）——**不许留副本**，所以只报记忆里的部分。 <!-- claim:clm-6ae5d6ceb9e5 -->
   - **反证条件**：若属他人代笔须撤
-- **他把执行权与判断权分开**：`Vostre Signorie sono prudentissime, piglieranno quel partito giudicheranno piu a proposito; ed io sono per eseguire con diligenzia ogni loro commis[sione]`（`src-d5b51baa8b4c` @31494） <!-- claim:clm-ecc3227b76d4 -->
+- **他把执行权与判断权分开**：`Vostre Signorie sono prudentissime, piglieranno quel partito giudicheranno più a proposito; ed io sono per eseguire con diligenzia ogni loro commissione:`（`src-d5b51baa8b4c` @31494） <!-- claim:clm-ecc3227b76d4 -->
   - **反证条件**：同上　［出处：archive.org item a591295400machuoft（1891）］
 
 ## 其二

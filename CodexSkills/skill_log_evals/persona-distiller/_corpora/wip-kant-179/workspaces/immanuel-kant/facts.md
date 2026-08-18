@@ -6,7 +6,7 @@
   - **反证条件**：若属编者概括须撤
 - **《实践理性批判》结论章的开头是两样东西并列**：`Zwei Dinge erfüllen das Gemüth mit immer neuer und zunehmender Bewunderung und Ehrfurcht … der bestirnte Himmel über mir, und das moralische Gesetz in mir.`（`src-1f75cd8ee674` @602860，该处前面就是章题 `Beschluss.`） <!-- claim:clm-775319aa61b6 -->
   - **反证条件**：同上
-- **定言令式的第一公式**：`Handle nur nach derjenigen Maxime, durch die du zugleich wollen kannst, daß [du wollest, es solle ein allgemeines Gesetz werden]`（`src-2311e9d43ba5` @537399）；★ 该段前有编述性过渡语 `so lautet seine erste Formel:`，**公式本身是他的，过渡语属编本体例**。 <!-- claim:clm-0f95bf3e5dcf -->
+- **定言令式的第一公式**：`„Handle nur nach derjenigen Maxime, durch die du zugleich wollen kannst, daß sie ein allgemeines Gesetz werde;`（`src-2311e9d43ba5` @537399）；★ 该段前有编述性过渡语 `so lautet seine erste Formel:`，**公式本身是他的，过渡语属编本体例**。 <!-- claim:clm-0f95bf3e5dcf -->
   - **反证条件**：若在原印本里措辞不同须并记
 - **《答「何谓启蒙」》的口号**：`Sapere aude! Habe dich deines eigenen Verſtandes zu bedienen!`（`src-f56042424327` @152640，该印本漏排了 `Mut,`）；前文正是不成熟状态的定义——原因不在缺乏理智，而在缺乏**决心与勇气**。 <!-- claim:clm-77e3955202f7 -->
   - **反证条件**：若另一印本有 `Mut,` 须并记
@@ -17,7 +17,7 @@
 
 ## 其二
 
-- **方位不是给定的，是从观察者身上引出来的**：`Von dieſem kann ich, durch meinen Standpunct, über meinen Kopf hinaus, und von da wieder durch das Centrum herab, eine Linie ziehen.`（`src-ff581bf0e357` @297380）；后文 `die ein Jeder für und durch ſich ſelbſt beſtimmt`。 <!-- claim:clm-8fea4aac0a1e -->
+- **方位不是给定的，是从观察者身上引出来的**：`Von dieſem kann ich, durch meinen Standpunct, über meinen Kopf hinaus, und von da wieder durch das Centrum herab, eine Linie ziehen.`（`src-ff581bf0e357` @297380）；后文 `die ein Jeder fuͤr und durch ſich ſelbſt beſtimmt.`。 <!-- claim:clm-8fea4aac0a1e -->
   - **反证条件**：若属他人评注须撤
 - **他先划出「永远变不成知识的那一部分」**：`Subjective aber an einer Vorstellung, was gar kein Erkenntnissstück werden kann, ist die mit ihr verbundene Lust oder Unlust`（`src-deba15392d05` @65591）；后文补足它**可以是认识的结果，却不能是认识的材料**。 <!-- claim:clm-f86bcc293567 -->
   - **反证条件**：同上

@@ -18,9 +18,9 @@
   - **反证条件**：同上
 - **《音乐词典》他自述已投入十年**：`je repris mon Dictionnaire de mufique , que dix ans de travail avoient déjà fort avancé`（`src-1ae86fb504c8` @100167）——`dix ans de travail`。 <!-- claim:clm-fa340ac6ecd3 -->　［出处：archive.org item 1782collectionco17rous（1782）］
   - **反证条件**：若与出版记录不符须标明
-- **社会契约的条款他用一个可复述的公式给出**：`Chacun de nous met en commun ses biens, sa personne, sa vie, et toute sa puissance, sous la suprême [direction de la volonté générale]`（`src-1ef4f4ebbc04` @3182785 一带）——★ 该处出自一份**含编者阐释**的全集本，引用时要标明。 <!-- claim:clm-e49f3656ebfb -->
+- **社会契约的条款他用一个可复述的公式给出**：`Chacun de nous met en commun ses biens, sa personne, sa vie et toute sa < puissance, sous la suprême direction de la volonté générale,`（`src-1ef4f4ebbc04` @3182785 一带）——★ 该处出自一份**含编者阐释**的全集本，引用时要标明。 <!-- claim:clm-e49f3656ebfb -->
   - **反证条件**：若在原印本里找到对应段须改引
-- **他的书信带地点与日期**，例如 `A l'Hermitage le 4 Avril 1757.`、`A Montmorenci le 24 Juillet 1761.`、`Paris le 15 Octobre 1754.`（`src-1ae86fb504c8` 内多处）——⇒ 引用他的信必须连地点日期一起给。 <!-- claim:clm-6a21bc58cf11 -->
+- **他的书信带地点与日期**，例如 `A l'Hcrmitage le 4 Avril 1757.`、`A Montmorenci le 24 Juillet 1761.`、`Paris le 15 Octobre 1754.`（`src-1ae86fb504c8` 内多处）——⇒ 引用他的信必须连地点日期一起给。 <!-- claim:clm-6a21bc58cf11 -->
   - **反证条件**：若某封无抬头须标明
 
 ## 其二
@@ -35,7 +35,7 @@
   - **反证条件**：同上
 - **极端判断外面裹着两层限定**：`Si elle nous a deflinés à être fains , j'ofe prefque affurer que Pétac de réflexion eft un état contre nature , 6c que l'homme qui médite efl un animal dépravé.`（`src-78d329fb5da1` @54794）——`Si`（若）与 `prefque`（几乎）。 <!-- claim:clm-fabdc8092b8a -->　［出处：archive.org item discourssurlor00rous（1755）］
   - **反证条件**：同上
-- **《爱弥儿》与《论人类不平等》的开篇是同一个动作的两次执行**：都先立一个总判断（`Tout est bien sortant des mains de l'Auteur des choses` ／ `Le premier qui ayant enclos un terrain … fut le vrai fondateur de la société civile`），再往下拆。 <!-- claim:clm-e50ec62138f4 -->　［出处：archive.org item bub_gb_3DbL7IDH2jIC（1864）］
+- **《爱弥儿》与《论人类不平等》的开篇是同一个动作的两次执行**：都先立一个总判断（`Tout est bien, sortant des mains de l'Auteur des choses,` ／ `Le premier qui ayant enclos un terrain … fut le vrai fondateur de la société civile`），再往下拆。 <!-- claim:clm-e50ec62138f4 -->　［出处：archive.org item bub_gb_3DbL7IDH2jIC（1864）］
   - **反证条件**：若第三部作品开篇不同须并记
 - **他自述由舅父 Bernard 监护，而那位舅父当时在日内瓦要塞工事任职**：`Je reliai fous la tutelle de mon oncle Bernard alors employé aux fortifications de Genève.`（`src-bba68d3e7ffe` @17471）——同段还写明舅父有一个与他同龄的儿子。 <!-- claim:clm-b0b440382f7a -->　［出处：archive.org item 1782collectionco10rous（1782）］
   - **反证条件**：若与教区记录不符须标明

@@ -2,7 +2,7 @@
 
 ## 其一
 
-- **他在最低点上检验一个观念**：`Aber fie leiten weder mein Gehen noch mein Stehen, weder mein liegen noch mein Aufſtehen.`（`src-e8dc4740199f` @82643）；前文他把自己设到 `wenn Nacht und Tod mich umgibt, und ſelber das Leben keinen Werth für mich hat` 的处境，再问真理在那个状态下是什么。 <!-- claim:clm-c9af106d1878 -->　［出处：archive.org item 10041514bsb（1797）］
+- **他在最低点上检验一个观念**：`Aber fie leiten weder mein Gehen noch mein Stehen, weder mein liegen noch mein Aufſtehen.`（`src-e8dc4740199f` @82643）；前文他把自己设到 `wenn Nacht und Tod mich umgibt, und ſelber das Leben keinen Werth fuͤr mich hat,` 的处境，再问真理在那个状态下是什么。 <!-- claim:clm-c9af106d1878 -->　［出处：archive.org item 10041514bsb（1797）］
   - **反证条件**：若属编者序须撤
 - **他把收到的捐助说成「你们向自己的心致敬」**：`Ihr habt durch eure Gaben nicht mir, ihr habt durch ſie eurem eigenen Herzen gehuldigt.`（`src-413dab629c0f` @6447）；同页前几行他先写过 `durch eure Handlung` 的另一版，**两版逐字不同，引用必须挑定其一**。 <!-- claim:clm-c7dd5c98c4cb -->　［出处：archive.org item 10724505bsb（1819）］
   - **反证条件**：若第三版措辞出现须并记
@@ -23,7 +23,7 @@
   - **反证条件**：若该句属编者概述须标明
 - **他的语料里 17 份属小说《Lienhard und Gertrud》系**，那是他写的小说；其中的第一人称是**他虚构的人物**（一处前文是台词标记 `Schulmeiſter.`，后文紧跟 `erwiedert Michel`）。 <!-- claim:clm-6ed40a53c1e9 -->
   - **反证条件**：若某份被重判为非小说须更新
-- **1819 年全集本的题名页印着各国特权**：`Mit den allergnädigften Privilegien Ihrer Majeftäten des Kaiſers aller Reußen und Königs von Polen, des Königs von Preußen, des Königs von Bayern, des Königs von Wuͤrtemberg`（`src-413dab629c0f` 题名页） <!-- claim:clm-16a35efe2e47 -->
+- **1819 年全集本的题名页印着各国特权**：`Mit den allergnädigften Privilegien Ihrer Majeftäten des Kaiſers aller Reußen und Königs von Polen, des Königs von Preußen, des Königs von Bavern, des Königs von Wuͤrtemberg,`（`src-413dab629c0f` 题名页） <!-- claim:clm-16a35efe2e47 -->
   - **反证条件**：若特权名单记错须更正
 - **他的自传体篇目题名逐字为**《Meine Lebensschicksale als Vorsteher meiner Erziehungsinstitute in Burgdorf und Iferten》（`src-9d516439f3cd`）——**Burgdorf 与 Iferten 两地并列**。 <!-- claim:clm-970c7a83e1ed -->
   - **反证条件**：若地名拼写有异须并记
