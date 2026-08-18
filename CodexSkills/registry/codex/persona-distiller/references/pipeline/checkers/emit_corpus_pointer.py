@@ -444,6 +444,25 @@ def self_test() -> int:
         note("只有 identifier 没有链接 ⇒ 仍是「取不回」，**不去拼下载路径**", okD)
         fail += not okD
 
+
+    print("══ 入口对照（**自测直接调函数会绕开 argparse**）══")
+    with tempfile.TemporaryDirectory() as td:
+        ws = _mkws(pathlib.Path(td), body, good, True)
+        import contextlib, io
+        buf = io.StringIO()
+        argv_bak = sys.argv[:]
+        sys.argv = ["emit_corpus_pointer.py", "--restore", str(ws)]
+        try:
+            with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
+                rc_main = main()
+        except SystemExit as e:               # argparse 认不出旗标就在这里退出
+            rc_main = f"argparse 拒收：{e}"
+        finally:
+            sys.argv = argv_bak
+        okE = rc_main == 0 and (ws / "raw" / "a.txt").is_file()
+        note(f"`--restore` 从 **main() 入口**走得通（实得 {rc_main!r}）", okE)
+        fail += not okE
+
     print(f"\n  ✓ 自测通过（{n[0]}/{n[0]}）" if not fail
           else f"\n  ✗ {fail}/{n[0]} 项未过——本件的输出不作数")
     return fail
@@ -454,11 +473,15 @@ def main() -> int:
     ap.add_argument("--corpora", type=pathlib.Path, help="_corpora 根目录")
     ap.add_argument("--out", type=pathlib.Path, help="清单落盘路径")
     ap.add_argument("--verify", type=pathlib.Path, help="拿这份清单去核 --corpora 那棵树")
+    ap.add_argument("--restore", type=pathlib.Path,
+                    help="按账本+仓里记过的链接把语料取回该工作区（核不过不落盘）")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
 
     if a.self_test:
         return 2 if self_test() else 0
+    if a.restore:
+        return restore(a.restore)
     if not a.corpora:
         ap.error("须给 --corpora")
 
