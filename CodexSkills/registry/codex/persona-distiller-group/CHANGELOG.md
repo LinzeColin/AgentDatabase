@@ -1,5 +1,45 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.47
+
+**跑一次编排器：四份运行产物没有一份说得出「是哪个版本跑的」。**
+
+我一整天都在**直调每一步** —— 这正是「守卫加在编排器上会被直接调那一步绕过」的那个形状。
+所以把编排器 `run_team_pipeline.py` 真跑一次。它跑得通（`prepared_for_host_execution`，
+四份文件齐），并且比直调三步**多产一份 `run-receipt.json`**。
+
+读那份收据 —— **它不带版本号**。逐份查四份产物：
+
+    route-plan.json / team-dossier.json / execution-contract.json / run-receipt.json
+    含 version 的顶层键：全都只有 `schema_version`
+    文中出现的 v0.0.0.N：只有 `v0.0.0.1` —— 那是**人物交付包**的版本，不是本 skill 的
+
+而仓内产物是有出身的：`team-index.json:generator_version`、
+`expert-fleet-admission.json:source_generator_version`（上一版刚补进版本绑定门）。
+
+⇒ **仓内产物有出身，运行产物没有。** 而运行产物才是宿主真去执行、
+用户出了问题会拿来对质的那一份 —— **收据存在的全部意义就是「这次跑了什么」。**
+
+**改法**：收据加 `generator_version`（现读 VERSION）。
+★ 读不到就写 `None`，**不写 `"unknown"`** —— `unknown` 会让下游一致性比对恒等成立。
+★ 只给**收据**加；route-plan / dossier / contract 有各自的消费者与 schema，本轮不动 ——
+  **但那三份仍然带不出版本号**，这句照实记在这里。
+
+**改的过程里连撞三次，全部当场抓到：**
+
+1. 变量名写成 `registry_root`，而那个作用域里叫 `root` ⇒ 编排器 **rc=1**。
+   （不是猜的：直接读 traceback 的 `NameError`。）
+2. 测试断言 `assertNotIn('"unknown"', src)` **被我自己写的那句注释绊倒** ——
+   注释里正写着「不写 `"unknown"`」。**判据要 key 在代码上，不要 key 在措辞上。**
+   改成先用 `tokenize` 剥掉注释。
+3. 剥完注释后 tokenize 把 token 间空白也吃了（`_gen = None` → `_gen=None`），
+   第二条断言又假红。**两边都去空白再比** —— 断言不许因为排版而红。
+
+**守卫**：`tests/test_run_receipt_carries_its_version.py`（4 项）——
+跑的是**编排器**而不是直调三步；含 **★★★「收据里的 `files` 必须真的都在」**
+（一张列着不存在文件的收据比没有更坏）。
+**反例实跑**：把 `None` 兜底换成 `"unknown"` ⇒ 测试**确实判红**，随即逐字节复原。
+
 ## v0.0.0.46
 
 **第四处版本声明位漂了 13 个版本，没有任何东西提醒过。**

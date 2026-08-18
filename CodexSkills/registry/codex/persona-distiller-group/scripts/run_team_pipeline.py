@@ -54,8 +54,23 @@ def main() -> int:
 
     contract = build_contract(route, dossier)
     write_json(workdir / "execution-contract.json", contract)
+    # ★★★ 2026-08-18：收据**此前不带生成它的 skill 版本**。
+    #   实测：一次真实运行产出的四份文件（route-plan / team-dossier /
+    #   execution-contract / run-receipt）里，**没有一份**能回答「这是哪个版本跑的」
+    #   （文中出现的 `v0.0.0.1` 是**人物交付包**的版本，不是本 skill 的）。
+    #   而仓内产物是有的：`team-index.json:generator_version`、
+    #   `expert-fleet-admission.json:source_generator_version`。
+    #   ⇒ **仓内产物有出身，运行产物没有** —— 而运行产物才是宿主真去执行、
+    #     用户出了问题会拿来对质的那一份。收据存在的全部意义就是「这次跑了什么」。
+    #   [[evidence-must-carry-what-it-measured]]｜[[a-checkers-verdict-must-not-depend-on-cwd]]
+    try:
+        _gen = (root / "VERSION").read_text(encoding="utf-8").strip() or None
+    except OSError:
+        _gen = None
     receipt = {
         "schema_version": "persona-team.run-receipt.v1",
+        # ★ 读不到就写 None，**不写 "unknown"** —— `unknown` 会让下游一致性比对恒等成立。
+        "generator_version": _gen,
         "status": "prepared_for_host_execution",
         "created_at": datetime.now(timezone.utc).isoformat(),
         "task": args.task,
