@@ -25,12 +25,10 @@
 | `src-051c716e3643` | 1651 | P1 | Artium Rudiorum, Subtiliorum, Subtilissimarum : seu Action…x Januae LL. Comenianae [...] |
 | `src-d3545d827a93` | 1651 | P1 | Januae LL. Comenianae : Ex Decem (à L ad LX) Capitibus Mat…ibentibus [...] Praxis Comica |
 | `src-b96c71939984` | 1657 | P1 | Lexicon Atriale latino-latinum |
-| `src-33f495d65119` | 1668 | P1 | Unum necessarium, scire quid sibi sit necessarium, in vita…post mortem ... J.A. Comenius |
 | `src-59069c2d5a02` | 1670 | P1 | A generall table of Europe,...  1670 |
 | `src-8037c68229c6` | 1705 | P1 | Joh. Amos Commenii orbis sensualium pictus: hoc est, omniu…f young Latin scholars.  1705 |
 | `src-e4b848b700b5` | 1705 | P1 | Joh. Amos Commenii Orbis sensualium pictus: : hoc est, Omn…onum, pictura & nomenclatura. |
 | `src-08de457a6098` | 1716 | P1 | Ianua aurea |
-| `src-02da4cf01310` | 1724 | P1 | Unum necessarium scire, quid sibi sit necessarium in vita,…mortem... : Nunc vero recusum |
 | `src-5d67b5f44ffa` | 1730 | P1 | Joh. Amos Comenii Orbis Sensualium Picti Pars ...: Hoc est…um, Pictura & Nomenclatura. 2 |
 | `src-7897030183b8` | 1730 | P1 | [Orbis sensualium pictus] |
 | `src-854a44cb3f73` | 1738 | P1 | Übergang aus dem Labyrinth der Welt in das Paradis des Her…öhmischer Sprache beschrieben |

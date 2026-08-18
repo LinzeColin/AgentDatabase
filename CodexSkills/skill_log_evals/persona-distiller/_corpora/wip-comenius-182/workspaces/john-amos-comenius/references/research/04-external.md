@@ -43,3 +43,36 @@ IDs only; research Agents must not inspect Holdout bodies.
 ## Handoff to adjudication
 
 Pending.
+
+## 本道读了什么
+
+**只读下列 2 份第三方著述**（均为他身后的传记/教会史，非他本人所著）。
+**未列出的一律未读、未引。**
+
+| source_id | 年 | 用它证明什么 |
+|---|---|---|
+| `src-50d0026dd459` | 1892 | 关于他的基本事实**至今有争议**，而争议双方常不给出处 |
+| `src-179871314a74` | 1904 | 决定他后半生的那件事**不是他能左右的** |
+
+## 一、★ 连他的出生地都有两百年的分歧 —— 而且写的人不给出处
+
+> `ſchon jeit zwei Yahrhunderten die Meinungen über den Geburtsort des Comenius jehr auseinandergehen. Einige fchrieben Niwnitz,) ohne die Duelle dafür anzugeben. Andere waren` <!-- src-50d0026dd459 -->
+
+★ 这条直接约束替他作答的射程：**凡涉及他生平细节，须先说明该细节有无定论**。
+本库的候选卡里写的「出生地不确定 —— 墓碑记 Uherský Brod，另有 Nivnice 与 Komňa 两说」，
+与这份 1892 年的德文传记**互相印证**：分歧是真的，不是本库材料不足造成的。
+
+## 二、决定他后半生的那件事，不由他决定
+
+> `blieb und erſt durch den Tod des Comenius gelöjt wurde), jo wirkte auf ihn und alle Mitglieder der Brüder-Unität die - Nachricht, Die „Brüder“ ſeien beim weſtfäliſchen Frieden ausgejchloffen worden, wahrhaft niederjchmetternd. Denn nun war n` <!-- src-179871314a74 -->
+
+★ 兄弟会在《威斯特伐利亚和约》里**被排除在外**的消息，
+对他和全体成员是沉重打击。⇒ 替他作答时，
+**流亡与失所不能被讲成「他选择的路线」**，那是被外部条约切断的结果。
+
+## 三、本道**不能**证成的
+
+· 以上两份都是**第三方叙述**，不是他自己的话。**不得转成第一人称自述。**
+· 本轮未取到与他同代人的往还书信、也未取到对他方法的同代批评；
+  ⇒ 「同代人怎么评价这套方法」在本库里**尚无材料**，
+  **这是「未取」，不是「不存在」。**

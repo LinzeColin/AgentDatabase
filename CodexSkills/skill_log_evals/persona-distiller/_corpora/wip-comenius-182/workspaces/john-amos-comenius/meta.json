@@ -73,5 +73,42 @@
   "subject_origin": "historical",
   "target_id": "tgt-40b59125ceb9",
   "time_scope": "1592-1670",
-  "updated_at": "2026-08-12T00:09:22Z"
+  "updated_at": "2026-08-12T00:09:22Z",
+  "attribution_basis": {
+    "authority": "**印刷时代的题名页署名**。他 1592–1670 在世，作品皆为印本，扉页署名可用。本库 83 份 train 源逐份跑 `check_authorship`，**33 份取得署名证据**：A-byline-ocr 18、A-byline-standalone 7、A-title-genitive 6、A-signature-block 1、A-byline 1。其中 `A-title-genitive` 是本轮新增码，认的是拉丁化姓的题名页屈折形（`JOH. AMOS COMENII` / `Auttore … Comenio`），**只在前 600 字的题名页区、且前 3000 字内无译者/编者标记时才算**。",
+    "citation": "逐份判定由 `scripts/check_authorship.py` 现算（2026-08-19 实测）；全库回扫 54 个工作区确认新码只影响本人物（6/83 份），零波及。分桶依据见 `_ledgers/_Comenius182署名门34条不是一件事-分成三类其中一类门判得对-2026-08-19.md`。",
+    "disputed_works": [
+      {
+        "source_id": "src-854a44cb3f73",
+        "题名": "Übergang aus dem Labyrinth der Welt …",
+        "为何有争议": "扉页写明 `ehemals Johann Amos Comenius … beſchrieben, Nun aber von einem Liebhaber der Comeniſchen Schriften` —— **后人改编**"
+      },
+      {
+        "source_id": "src-478e09f0b2f6",
+        "題名": "The labyrinth of the world and the paradise of the heart",
+        "为何有争议": "英译本，译笔非他所出"
+      },
+      {
+        "source_id": "src-62f8ccdddf7a",
+        "题名": "Janua linguarum reserata aurea = Zlatá brána gazykůw",
+        "为何有争议": "捷克语对照本，译文部分非他所出"
+      },
+      {
+        "source_id": "src-8037c68229c6",
+        "题名": "Joh. Amos Commenii orbis sensualium pictus",
+        "为何有争议": "含他人所加的译文与注"
+      },
+      {
+        "source_id": "src-914cf0b083a4",
+        "题名": "Joh. Amos Comenii Orbis sensualium pictus",
+        "为何有争议": "同上，另一印本"
+      },
+      {
+        "source_id": "src-ba20b23919f1",
+        "题名": "Jana A. Komenského Nejnovější metoda jazyků",
+        "为何有争议": "近代捷克语译注本"
+      }
+    ],
+    "disputed_policy": "★ **译本与改编本分开处置，不合并成一条规则**：\n① **改编本**（如 `src-854a44cb3f73`，扉页明写由『Comenius 著作的爱好者』改写）—— 内容已被他人重写，**不作他的原话来源，逐字引文一律不取**；\n② **译本**（Orbis Pictus 的德/捷译、Labyrinth 的英译）—— 内容归他、译笔归译者，**可用于事实与结构，但引逐字原文时须标明是译文、并优先改引拉丁/捷克原本**；\n③ 判据侧已落实：`A-title-genitive` 在**前 3000 字内出现译者/编者标记时一律否决**，本轮实测这 6 件**无一被该码放行**（第一版窗口只有 600 字，曾放进来 2 件，已修）。\n★ `disputed_works` 非空，因此本字段不是『查过没有争议』，而是**逐件点名的处置规则**。"
+  }
 }
