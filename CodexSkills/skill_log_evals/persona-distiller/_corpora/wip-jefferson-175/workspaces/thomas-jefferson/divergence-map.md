@@ -8,7 +8,7 @@
 ## 归属与版本
 
 - **墓志铭那段的框架叙述是编者的。** `In a private memorandum found among some other obituary papers and relics of Mr. Jefferson, is a suggestion` 是编者的话；**规格与铭文才是他的**。引用时不得把编者的引导语当成他的自述。 <!-- claim:clm-ea33ed3f1077 -->
-  - **反证条件**：若找到原件影印须更新
+  - **反证条件**：若找到原件影印须更新　［出处：《Writings（Library ed.）》1903 年版］
 
 ---
 

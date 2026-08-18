@@ -30,7 +30,7 @@
 - **宪法可由普通立法机关改动——他先摆逐年事实再下判断**：`I am safe, therefore, in the position that the constitution itself is alterable by the ordinary legislature.`（`src-ecdd50a73149` @315191）；后文他自己给结论降温 `Though this opinion seems founded on the first elements of common sense`。 <!-- claim:clm-8508ca2b8f01 -->
   - **反证条件**：若属他人评注须撤
 - **语料里混进过一条法文的数字化公有领域声明**（`Nous encourageons … documents appartenant au domaine public`），它出现在一份 `tier=P1` 的源里。⇒ **图书馆的样板不是他的话**，取引文时要挑掉。 <!-- claim:clm-27bc286c7fe8 -->
-  - **反证条件**：若该源被重判分档须更新
+  - **反证条件**：若该源被重判分档须更新　［出处：《Writings（Library ed.）》1903 年版（本库另有 1904《The works》一处收录）］
 
 ---
 
