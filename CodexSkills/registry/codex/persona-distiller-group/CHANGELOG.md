@@ -1,5 +1,48 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.36
+
+**准入门「专家拒接不在其能力范围内的任务」拦不住大部分人 —— 因为它 `max(...)` 里有一项与任务无关。**
+
+`route_team_moe.score_candidate` 末尾：
+
+    # Expert Choice: the expert declines tasks outside its demonstrated competence.
+    if max(task_similarity, packet_similarity, capabilities, scenarios, domain_match) < accept_threshold:
+
+`max(...)` ⇒ **任一项过线即可**。而 `packet_similarity` 比的是候选人卡片与
+`work_packets` 的 `objective`，那些 objective 是 `compile_task_graph` 生成的**固定套话**：
+
+    把用户目标编译为交付物、约束、成功条件和停止条件。
+    建立事实、来源、未知、当前性和证据缺口地图。
+    在人物能力与边界内形成可执行解决方案。 …
+
+**五道内容毫不相干的题**（遗留微服务重构／40 公顷农场轮作／医院灭菌安全论证／
+供应商合同谈判／一串无意义词）编出的 14 条 objective **sha256 完全相同**
+⇒ **102/102 人的 `packet_similarity` 跨题一个都不动**（对照：`task_similarity`
+只有 4/102 不动 —— 那是正对照，证明探针能看见变化）。
+
+**规模**（24 条名册标签、策略 B、门 0.17）：过准入的人里，**其余四项全部低于门、
+唯一靠这条任务无关通道过线**的 —— 均值 **62.8%**，最坏一题 **97.6%（41/42 人）**。
+即这些人**没有任何与本题有关的证据**，却被判为「能接」。
+
+★★ 发表前自己抓到的两个错（都会把数说大）：
+- **键名**：准入行用局部变量 `capabilities`/`scenarios`，而 `values` 里存的是
+  `capability_match`/`scenario_match` —— 我第一版按前者取值 ⇒ 那两项恒读 0.0
+  ⇒ **多算**占比。已落成一条测试，直接对着 `route_team_moe.py` 钉键名。
+- **精度**：接受路径 `return` 时 `round(v, 4)`、拒绝路径原样返回 ⇒ 同一个读数两种精度，
+  害我把 15 个人误判成「跨题会动」。**这是产品自身的一处不一致**（不影响判定，只坑读数的人）。
+- 更早还有一次：拿 `load_admission()` 当卡片源 ⇒ `candidate_text` 只捞到 32 字、
+  102 人读数全 0，差点写成「恒 0」。正确的取法是 `team-index.json` 的 `products`。
+
+**守卫**：新增 `scripts/check_admission_signal_depends_on_the_task.py`
+（9 项自测，含**正对照**「`task_similarity` 必须跨题变，否则判 rc=4 未量」、
+**反对照**「冻结集合置空 ⇒ 占比必须全为 0」、样本量绑定 rc=4、地板可达性）
+＋ 调用方 `tests/test_admission_signal_depends_on_the_task.py`（8 项）。
+SKILL.md「已测量的边界」表新增「**准入拦得住谁**」一行。
+
+**本轮不改 `packet_similarity`**（改它的定义或把它移出 `max(...)`，会移动每一道
+真实任务选出的人，属「门、席位一概不动」）。要 Owner 定：见 Task #135。
+
 ## v0.0.0.35
 
 **负对照：100 个无意义词拿到 21 人的 deep_team，真 bug 请求只给 1 人。**

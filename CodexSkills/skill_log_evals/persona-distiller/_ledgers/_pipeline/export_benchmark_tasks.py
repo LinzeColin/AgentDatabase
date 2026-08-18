@@ -33,7 +33,7 @@
 
     python3 export_benchmark_tasks.py                 # 打到 stdout
     python3 export_benchmark_tasks.py -o /tmp/b72.json
-    python3 export_benchmark_tasks.py --dedup         # 只导独立题面（24 条）
+    python3 export_benchmark_tasks.py --dedup         # 只导独立题面（**12** 条）
     python3 export_benchmark_tasks.py --self-test
 """
 from __future__ import annotations
