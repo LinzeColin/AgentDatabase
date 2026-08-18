@@ -19,8 +19,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "b06eb08a3d2793e6582be4fc1565e9d0e6db81dcb87790448671665eb476ebe7",
-      "size_bytes": 64363
+      "sha256": "8dfea1132b50b09c3aa0afdbf4f47006ff13694c64b5634d0984f02328ba1b67",
+      "size_bytes": 64483
     },
     {
       "path": "README.md",
@@ -29,8 +29,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "6ff25272678ba2a98ec5778f44e98fa80bbbc4cfd711c26afcfdf3513638a065",
-      "size_bytes": 16912
+      "sha256": "54be63502a8c9ddde11f363d64572613463c090c6f8643b456757a14eaf69a81",
+      "size_bytes": 17719
     },
     {
       "path": "VERSION",
