@@ -996,8 +996,8 @@
     },
     {
       "path": "references/pipeline/checkers/emit_corpus_pointer.py",
-      "sha256": "fd4871e1439c4718054169e2fd1c30a80600ca0460fef4d25e4a9d73b116be10",
-      "size_bytes": 13439
+      "sha256": "c4063c5f9e33d69f36278312b439857c4fbec43dca826685d7b36295c0aabefc",
+      "size_bytes": 22348
     },
     {
       "path": "references/pipeline/checkers/emit_lane_scope.py",
@@ -1026,8 +1026,8 @@
     },
     {
       "path": "references/pipeline/checkers/package_target.py",
-      "sha256": "547388888727336965022612ddbb6a18e58f93f00ae651620626dc1dc59e6338",
-      "size_bytes": 24705
+      "sha256": "87e9ed8014d7097d3499a71c06d5e4d8d9174444f1143978283de1b43bcf80ec",
+      "size_bytes": 27600
     },
     {
       "path": "references/pipeline/checkers/propose_title_from_titlepage.py",
@@ -1811,8 +1811,8 @@
     },
     {
       "path": "scripts/emit_corpus_pointer.py",
-      "sha256": "fd4871e1439c4718054169e2fd1c30a80600ca0460fef4d25e4a9d73b116be10",
-      "size_bytes": 13439
+      "sha256": "c4063c5f9e33d69f36278312b439857c4fbec43dca826685d7b36295c0aabefc",
+      "size_bytes": 22348
     },
     {
       "path": "scripts/emit_lane_scope.py",
@@ -1891,8 +1891,8 @@
     },
     {
       "path": "scripts/package_target.py",
-      "sha256": "547388888727336965022612ddbb6a18e58f93f00ae651620626dc1dc59e6338",
-      "size_bytes": 24705
+      "sha256": "87e9ed8014d7097d3499a71c06d5e4d8d9174444f1143978283de1b43bcf80ec",
+      "size_bytes": 27600
     },
     {
       "path": "scripts/persona_registry.py",
