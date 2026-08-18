@@ -225,7 +225,19 @@ def analyse(records: list, texts: dict, threshold: float = DEFAULT_THRESHOLD,
     """records 是 usable 的台账行；texts 是 {source_id: 正文}。"""
     ids = [r["source_id"] for r in records]
     name = {r["source_id"]: r.get("original_name") or r["source_id"] for r in records}
-    declared = {r["source_id"]: set(r.get("derived_from") or []) for r in records}
+    # ★★★★★ 2026-08-19：`derived_from` 写成**字符串**时，`set("src-abc…")`
+    #   会把它**拆成单个字符** —— 声明静默失效，未声明重复对一个不少。
+    #   Comenius #182 我就这样写了 4 条，门 **4 → 4 纹丝不动**，界面上看不出异常。
+    #   现在：字符串包成单元素集合并**高声报出**，不静默接受。
+    def _dfrom(r):
+        d = r.get("derived_from") or []
+        if isinstance(d, str):
+            print(f"  ★ 警告：{r.get('source_id')} 的 `derived_from` 是字符串不是列表，"
+                  f"已按单元素处理 —— **请改成列表**", file=sys.stderr)
+            return {d}
+        return set(d)
+
+    declared = {r["source_id"]: _dfrom(r) for r in records}
     sh = {sid: shingles(texts.get(sid, "")) for sid in ids}
 
     boiler = boilerplate(sh)
@@ -587,6 +599,21 @@ def self_test() -> int:
         % (len(_r0["**未声明的重复对**"]), len(_r1["**未声明的重复对**"])),
         len(_r0["**未声明的重复对**"]) == 1 and len(_r1["**未声明的重复对**"]) == 0
         and len(_r1["★ 已按 counting_convention 逐对点名说明的"]) == 1)
+
+    print("\n── ★★★★★ `derived_from` 写成字符串也要认 ──")
+    _sr = [{"source_id": "src-111111111111", "original_name": "a.txt"},
+           {"source_id": "src-222222222222", "original_name": "b.txt",
+            "derived_from": "src-111111111111"}]          # ← 故意写成字符串
+    _st = "alpha beta gamma delta epsilon zeta eta theta iota kappa " * 40
+    _sx = {"src-111111111111": _st, "src-222222222222": _st}
+    _sres = analyse(_sr, _sx)
+    chk(f"字符串声明也算数：未声明重复对 {len(_sres['**未声明的重复对**'])} 对（应为 0）",
+        not _sres["**未声明的重复对**"])
+    # ★ 反对照：**谁都没声明**时照报，证明上面那条不是「凡有 derived_from 键就放行」
+    _sr2 = [dict(_sr[0]), {"source_id": "src-222222222222", "original_name": "b.txt"}]
+    _sres2 = analyse(_sr2, _sx)
+    chk(f"★ 反对照：没有声明时照报 {len(_sres2['**未声明的重复对**'])} 对（应为 1）",
+        len(_sres2["**未声明的重复对**"]) == 1)
 
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
     return 0 if ok else 2

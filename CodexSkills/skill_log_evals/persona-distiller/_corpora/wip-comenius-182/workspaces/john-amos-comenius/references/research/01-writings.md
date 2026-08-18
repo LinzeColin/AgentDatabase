@@ -103,3 +103,68 @@ IDs only; research Agents must not inspect Holdout bodies.
 ## Handoff to adjudication
 
 Pending.
+
+## 本道读了什么
+
+**只读下列这 5 份**（均已过署名门，`check_authorship` 分别给出 A-byline-ocr /
+A-byline-standalone / A-title-genitive）。**未列出的一律未读、未引。**
+
+| source_id | 年 | 用它证明什么 |
+|---|---|---|
+| `src-3a547fe1c3ea` | 1631 | 方法被压成可数的结构单位 |
+| `src-a7a7082fa022` | 1637 | 先定次序，再谈内容；教义归规则、史事归例证 |
+| `src-78f5e5b22ed9` | 1633 | 公开邀请别人用同一方法接着做 |
+| `src-7eccaaa8551e` | 1896 | 写明自己受谁启发、读过谁 |
+| `src-c7c94be3fd56` | 1756 | 图配文，且图的次序沿用前一部书的次序 |
+
+## 一、他把「方法」写成**可数的结构单位**，不是一段主张
+
+1631 年那部《语言之门》的题名页就把方法的规模标了出来：
+
+> `vnd cum artium & ſcientiarum fundamentis ſeſquianni ſpatio ad ſummum docendi. & perdiſcendi methodus, fab titulis centum, perio- dis mille comprehenſa. Latinè primum, .. Nunc ver` <!-- src-3a547fe1c3ea -->
+
+★ `sub titulis centum, periodis mille comprehensa` —— **一百个标题、一千个句段**。
+他给「一套方法」附的不是形容词，是**编制表**。
+
+## 二、次序先于内容 —— 而且他说得很直白
+
+1637 年那部里，他把书的价值直接挂在次序上：
+
+> `uod cuique dorinz majorem- afferat ſplendorem & dignitatem, quam rerum., quz in ea raduntur, ordo & difpoſitio. Rerum enim difficul- ras artificiol3 txaQandi co` <!-- src-a7a7082fa022 -->
+
+同一部书里，他把**归类规则**写成一条可执行的操作：
+
+> `Omnia dogmata facrofandt codicis Dei, in Panſophiz regulas, ſuis quzque loctis, hiſtorias vers pleraſque omnes inter exempla re- ferre : id providens, ut juventus hinc-omnia maxima , & pretiofa promifla donata nob` <!-- src-a7a7082fa022 -->
+
+★ 「一切教义归入规则、几乎一切史事归入例证」——**这是一条分拣规则，不是一句主张**：
+拿到任何一段材料，它都能告诉你该放进哪一栏。
+
+## 三、他把方法交出去，请别人拿同一条路继续
+
+1633 年那部英译本的序里：
+
+> `è docti, Latinzque Linguz potentes, exorari queant, ut hac eadem vel fimili methodo, eaſdem materias plenius pertractare velint, claſſico- rumque Authorum phraſibus non jam ampli- us propriè ſolum, ſed eleganter inſupe` <!-- src-78f5e5b22ed9 -->
+
+★ `hac eadem vel fimili methodo` —— 他要的不是「照抄我的书」，是**「用同一方法把同一批材料做得更全」**。
+一个把自己方法当作可复制装置的人，才会这样写。
+
+## 四、他写明自己读过谁 —— 出处不藏
+
+> `issimam Gratiam Vestram existimo, quid ante annos — X — plus minus viginti vir industrius Wolfgangus Ratichius in studiorum methodo refox'manda tentarit, faciliorem, jucundiorem solidioremque juventutis instituendae modum ostendens. Cujus s` <!-- src-7eccaaa8551e -->
+
+★ 他点名 Ratichius（拉特克）在改革教学方法上的尝试，并说自己**早已如饥似渴地读过**
+（`Cujus scripta jam prideni ego avidissime lecta`）。**他不把方法说成从天而降。**
+
+## 五、图配文时，图的次序不另起一套
+
+> `uas & in viſibiles ſuo modo reducuntur) totius mundi Icones id- que ipſo rerum Ordine, quo in Fanua LL. deſeriptæ ſunt atque plenitudine ea, ut nihil adeò neceſſarium, & car- dinale omittat` <!-- src-c7c94be3fd56 -->
+
+★ `ipſo rerum Ordine, quo in Fanua LL`… ——
+**《世界图解》的图，按《语言之门》里已经定好的次序排。**
+同一套次序被复用到另一种介质上，而不是为新书重新发明一套。
+
+## 本道尚未证成的
+
+· 以上五条都取自**他自己的书**（train split）。
+  「别人怎么评价这套方法」不在本道射程，见 `04-external.md`；
+· 本道未涉及他的书信与会议记录 —— 那类材料本轮尚未入库，**不是「没有」，是「未取」**。
