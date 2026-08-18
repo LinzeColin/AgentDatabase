@@ -19,8 +19,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "fbd02bb5879d794a9f9ba82f9dde80d1a0adf48e25494897960317a263a0fda9",
-      "size_bytes": 66350
+      "sha256": "c9a6bb8cbb8ae1b01e28f06a8a1f9fe5e75cc673dd016a47a7b859c2a7acab2b",
+      "size_bytes": 66672
     },
     {
       "path": "README.md",
@@ -259,8 +259,8 @@
     },
     {
       "path": "scripts/check_mode_ladder_reachable.py",
-      "sha256": "26f59cf50f92340f98687a35b1517b069f86845dcc07f95282950b6568c33928",
-      "size_bytes": 40502
+      "sha256": "059db9f936e57264848321ed6892061ce4b1266f81199b3d64ddff655cfcb07a",
+      "size_bytes": 40757
     },
     {
       "path": "scripts/check_roster_independence.py",

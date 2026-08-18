@@ -67,7 +67,7 @@
 [[samples-cannot-support-universal-claims]]｜[[the-eval-covers-exactly-what-was-tuned]]｜[[we-need-X-is-a-hypothesis-until-you-fetch-an-X]]
 
 ★ 仍然要说清的射程：**这 72 条也不是真实用户提问**，是任务包作者写的 oracle
-（每条还有 3 个「变体 1/2/3」的机械复制 ⇒ 72 条里独立题面只有 24 个）。
+。★★ **订正（同日稍晚）**：**72 条 = 12 个独立题面 × 6 个变体**；且 `development-48` 与 `regression-24` **共用同一批 12 个题面** ⇒ `regression-24` **不是独立的第二份样本** —— 原文写的「3 个变体 / 24 个题面」**两个数都错**。
 **真实提问的分布依然没有量过。**
 
 ## 可复算
