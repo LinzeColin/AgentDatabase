@@ -30,6 +30,28 @@ description: The single user-facing entry point for evidence-grounded persona ex
 | 名册里的人物本身测过没有 | **102 个在册产物中只有 2 个**（2%）有干净的盲测 delta 读数（Carver +0.3791、Shewhart +0.1822）；另 3 个只有污染读数（看过 rubric 才写基线，不算证据）；**97 个什么读数都没有**。三方向交叉核一致：102 份 registration.json 与 102 份 team-card.json 含 delta 字样的都是 **0** 份 | `check_registered_products_have_delta_evidence.py` |
 | 团队 vs 裸模型的盲测增益 | **没有这个数。** 需要真跑任务并与裸模型盲比、且要互相独立的评委会话 —— 未做，**不编** | —— |
 
+> ### ★★★ 先说清楚：**这一列里有四个脚本不在你装的这个包里**（2026-08-18 实测）
+>
+> 以「装了这个 skill 的人」的视角把上表点名的脚本逐个查过去：
+>
+> | 脚本 | 在哪 |
+> |---|---|
+> | `audit_persona_fleet_for_team.py`／`record_team_outcome.py`／`run_tests.py`／`run_functional_acceptance.py` | **本包 `scripts/`、`tests/`** ✓ |
+> | `measure_routing_discrimination.py` | ✗ **不随包分发** —— `skill_log_evals/persona-distiller/_ledgers/_pipeline/`（开发台账树） |
+> | `check_benchmark_mode_accuracy.py` | ✗ 同上 |
+> | `check_registered_products_have_delta_evidence.py` | ✗ 同上 |
+> | `report_expert_team_state.py` | ✗ 同上 |
+>
+> 也就是说：**上表八行里，有四行的「怎么重跑」在你机器上不存在**，
+> 照着敲会得到 `can't open file`。那四件都在本项目的 git 仓里，
+> 但它们属于**开发侧台账**，不进 skill 包。
+> （另有 `build_release_bundle.py`／`bump_version.py`／`self_check.py` 出现在 CHANGELOG 里，
+> 它们随**上游** `persona-distiller` 分发，也不在本包。）
+>
+> **这条披露本身有判据守着**：`scripts/check_cited_scripts_ship_with_the_package.py`
+> 扫本包所有随包 `.md`，任何**新**出现的包外脚本若没进它的明码表就判红
+> （闭集合，不靠措辞匹配；零命中判 rc=4 未核而不是通过）。
+
 **怎么用这张表**
 
 1. 任务落在没有领域信号的那 8% 时，**别把队伍当成「按专业挑出来的」** ——

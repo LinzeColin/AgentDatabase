@@ -1,5 +1,85 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.31
+
+**文档里的「怎么重跑」有一半指向包外的脚本；四档「都验收过」的证据全是 `--mode` 指定跑的。**
+
+### ① 以「装了这个 skill 的人」的视角读 SKILL.md，读出一个真缺陷
+
+「已测量的边界」表八行，每行一列「怎么重跑」。逐个查那些脚本在不在本包里：
+
+    ✓ 包内   audit_persona_fleet_for_team.py｜record_team_outcome.py
+             run_tests.py｜run_functional_acceptance.py
+    ✗ 包外   measure_routing_discrimination.py
+    ✗ 包外   check_benchmark_mode_accuracy.py
+    ✗ 包外   check_registered_products_have_delta_evidence.py
+    ✗ 包外   report_expert_team_state.py
+
+四个都在 `skill_log_evals/persona-distiller/_ledgers/_pipeline/` —— **开发台账树，不随包分发**。
+⇒ **八行里四行的「怎么重跑」在用户机器上不存在**，照着敲得 `can't open file`。
+（另有 `build_release_bundle.py`／`bump_version.py`／`self_check.py` 出现在本 CHANGELOG 里，
+它们随**上游** `persona-distiller` 分发。）
+
+处置：SKILL.md 加**明码披露**（哪四个不在、去哪找）＋
+新增 `scripts/check_cited_scripts_ship_with_the_package.py`：
+扫本包指令性 `.md` 里所有反引号包着的脚本名，判「在不在包内」用 **realpath 前缀**不做子串；
+包外但已在**闭集合明码表**里的算通过（表的值是**路径**，输出直接告诉用户去哪找），
+其余判红；**零命中判 rc=4 未核**（文档改版去掉反引号会让它哑，那时必须喊）。
+自测 8 项含三个负对照（短名不因被长名包含而算「在包内」、`tests/` 下的 md 不进扫描面、
+名单里不许有「其实在包内」的条目）。
+调用方 `tests/test_cited_scripts_ship_with_the_package.py` 5 项，**单独钉住披露那段文字**
+——判据只查明码表，查不到披露在不在。反例实验：打断披露那句 ⇒ 测试红；复原 ⇒ 绿。
+
+★ 第一次查我敲 `python3 scripts/check_benchmark_mode_accuracy.py | head`，
+  得 `can't open file` 而 **`$?` 印出 0** —— 差点把「文件不存在」读成「跑通了」。
+
+★★★ **它当场抓了我一次，而那是误报。** 第一版把 CHANGELOG 也算进判定面，
+于是我在本条目里讨论自测负对照时写下的三个**举例名**被判成「未披露的包外脚本」——
+方向是逼我去改一段**正确的散文**。⇒ 拆成两栏：**指令性文档**（SKILL/README/
+CANONICAL-ROOT-ROUTE）判红，**历史文档**（CHANGELOG）只报不判，**两边都印，不藏**。
+缺陷的形状是「文档叫用户跑一个他没有的脚本」，CHANGELOG 记的是历史不是指令。
+
+### ② 「四档都验收过」是假象
+
+`evidence/v0.0.0.14-candidate-acceptance/` 四份 `route-<档>.json` 看着像「四档都够得到」的反证。
+逐份读它自己的字段：**四份都写着 `requested_mode` = 该档、
+`mode_reasons: ['explicit owner/runtime override']`** —— 全是 `--mode` **指定**跑出来的。
+它们证明「每一档被指定时跑得起来」，**不是**「自动推断够得到每一档」。
+
+`check_mode_ladder_reachable.py` 新增 `evidence_arrival()`，把两栏分开印。首跑：
+**四档「靠推断到达」全是 0**。自测 8 → **12 项**（新增两个负对照：0 份判未核不判「没有指定的」；
+缺 `requested_mode` 但 reasons 写着 override 的仍判「指定」）。
+
+★ 最硬的那个数：swarm 那条题面是**照着 swarm 的门写的**（塞了「全网」「批量」「并行」
+三个 PARALLEL 词 ＋「至少四十个独立分片」），`parallelizability` 仍只有 **0.665 < 门 0.72**。
+**有人专门为 swarm 写了一条任务，自动推断仍然不会选 swarm。**
+
+★★ 我差点写成「3/4 份验收证据漂了」—— 那是拿 `auto` 重编译去比 `--mode` 跑出来的产物，
+**比的是两个不同的东西**。真查两个成因：证据自带的 profile 每个数与今天一模一样；
+`git log -L` 显示三行阈值从未改过。顺序应当是**先问两侧是不是同一种跑法**，再问谁变了。
+
+### ③ 域推断换语言就翻号（新判据）
+
+`domain_match` 是**准入项**不是排序项：英文软件题 91 个合格者里 **83 个**靠它进来，
+task_similarity 只送进 3 人、capability **0** 人。而同一内容中译一遍，**6 对里 3 对域不同**：
+`诊断`→healthcare（英文那侧一个信号都不命中，退回 general-decision）、`评审`→software-ai。
+这与已有的 `设计`/`design` 是同一类缺陷（`WEAK_SIGNALS` 装置早就在）——
+**但加词会移动每一道真实任务的选人，属决定不属清理，本轮不加。**
+
+新增 `scripts/check_domain_inference_language_parity.py` ＋
+`tests/test_domain_inference_is_language_neutral.py`：断**关系**（同一内容两语言必须同域）
+不断绝对标准，因此不受「夹具是我编的」影响；**非退化负对照**防共用零件
+（恒空/恒单域的坏实现会让平价率满分 ⇒ 硬下限，达不到 rc=4）；**回归地板不是门**（首跑 3/6）。
+反例双向：拿掉 `诊断` ⇒ 3→4；给 software-ai 塞 `轮作` ⇒ 3→2、rc=1、调用方 2 项失败。
+
+### ④ 顺带记一个使用侧的坑
+
+`scripts/build_manifest.py` **没有 argparse** —— `--help` 不会印帮助，它**直接写盘**
+（重建 PACKAGE_MANIFEST.json 与 checksums.sha256）。本轮我就是这么误触的。
+本条只记录，不改工具（改它属产物行为变更，且它当前被验收链依赖）。
+
+全套 **绿 14 红 0**｜`validate_group` rc=0｜`check_group_version_binding` 见下。
+
 ## v0.0.0.30
 
 **本版货**：把本 skill 自己的三件判据接上**流程调用方**，并修好一个当场抓到的假绿。
