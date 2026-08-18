@@ -1,7 +1,9 @@
 # KMMedia-Archive（KMVideo 一体化流水线）
 
-> 版本 v0.2.1（260818）。素材库任务书 v0.0.2.0 的完整执行体。
-> v0.2.1 改动仅两处：skill 更名为 `KMMedia-Archive`；新增识别「以文件形式发送」的音视频（见下）。
+> 版本 v0.3.0（260819）。素材库任务书 v0.0.2.0 的完整执行体。
+> v0.3.0 按 260818 全量实跑的 12 条问题记录迭代：audit 认改名账本（误报归零）、
+> 动态群名单、增量起点直读 manifest、manifest 写入保护、永久错误不堵窗口、
+> dws 绝对路径、并发锁、SMB 健康自检。
 > 上级规则：`smb://192.168.0.1/share/03_资料库/MetaData/IDS_MetaData/KMVideo/README.md`（冲突以 README 为准）。
 
 ## 一句话
@@ -45,6 +47,19 @@ python3 scripts/kmvideo_pipeline.py all --groups-file <白名单.txt> [--workdir
   两者都失效时 `upload` 阶段**报错退出**（不再静默跳过）。显式跳过私有仓用 `--no-private`。
 - 视觉字段若存在更高置信度的外部标注（如任务书打样产物），`label` 阶段以 `workdir/vision_override.jsonl`（键=文件名，值=字段）优先。
 
+### v0.3.0 / v0.0.0.2 新增开关
+
+| 开关 | 作用 | 什么时候用 |
+|---|---|---|
+| `--since-manifest` | 每群起点改为该群 manifest 最后一个 complete 窗口的终点 | 日常增量。全量 audit 从 2025-01-01 遍历极慢（媒体侧 27 群约 50 分钟），增量只扫新窗口 |
+| `--refresh-groups` | 跑前用 dws 实时枚举群列表，与 `--groups-file` 求并集 | 静态白名单会漏群（实测旧名单 26、实时 30）。**新增群只报不收** |
+| `--include-new-groups` | 与上一条连用，把新发现的群纳入本轮 | Owner 确认要收之后 |
+| `--skip-smb-check` | 跳过开跑前的 SMB 健康自检 | 明知挂载正常、想省 1 秒时 |
+
+新增群清单写在 `workdir/新增群待确认.txt`，同时列进产能汇总。
+Owner 已明确说过「不管」的群（台泥(贵港)、生产付款群、生产周例会工作群）写在
+脚本的 `DECLINED_TITLES` 里，归入「已排除」而不是「新增待确认」，不会每轮重复问。
+
 ## 阶段说明
 
 | 阶段 | 子命令 | 产出 |
@@ -85,8 +100,60 @@ python3 scripts/kmvideo_pipeline.py all --groups-file <白名单.txt> [--workdir
 - 改名幂等：连跑两次第二次零变更
 - 三处落地校验：SMB 写后字节数相等；公开仓含脱敏版；私有仓 ingest 成功
 
+## 运行知识（实测，不是推测）
+
+### SMB 慢：是会话退化，不是「白天不可用」
+
+服务端是 OpenWRT 路由器上的 Samba（USB 外接硬盘）。症状表现为白天不可用，实测真因是
+**SMB 会话退化 + 卡死进程占管道**，与时段和网络都无关。修复三步（实测 20–100 倍提速）：
+
+```bash
+# 1) ~/Library/Preferences/nsmb.conf
+[default]
+dir_cache_max=300
+dir_cache_min=240
+max_dirs_cached=512
+notify_off=yes
+streams=no
+soft=yes
+# 2) 重挂
+diskutil unmount force /Volumes/share && open "smb://GUEST:@192.168.0.1/share" && sleep 12
+# 3) sample 查是否有进程阻塞在 stat，有就杀掉
+```
+
+| 指标 | 退化时 | 修复后 |
+|---|---|---|
+| 18k 文件目录枚举 | 90s+ 跑不完 | 4s |
+| 单文件读 | 1–2s | 0.04s |
+| 写 2MB | 8.6s | 1s |
+
+pipeline 开跑前自动跑一次健康自检（listdir 计时，超 `SMB_SLOW_SECONDS`，默认 10s
+即判 degraded 并打印修复命令）。`--skip-smb-check` 可关。
+
+### 卡死判据
+
+**不要用「ls 超时」判死** —— SMB 慢的时候 ls 必然超时，会把还活着的批次误杀。
+用「产物 mtime 停滞 + 进程 CPU time 不涨」判死。真卡死的特征：进程状态 U、
+产出零增长、CPU time 不动、worker 线程全阻塞在 stat。
+
+### 禁止对运行中的 pipeline 用 SIGKILL
+
+用 SIGTERM 并等它写完当前 manifest。历史事故：`pkill -9` 打断 manifest 写入，
+7 个群的 `.manifest.jsonl` 整个消失（媒体数据完好），只能逐群 `--smb-only` 重跑重建，
+约 10 分钟/群。现在写 manifest 前会先留 `.bak`，读不到主文件时自动回退，
+并在开跑时检测 `.partial-*` 残留。
+
+### 并发
+
+同一 workdir 只允许一个实例（`workdir/.pipeline.lock` pid 锁）。
+cron 触发间隔一定要大于单轮耗时，否则第二个实例会和第一个抢同一份 manifest 与登记表。
+
 ## 已知外部障碍（记录在案，不阻塞流水线）
 
 - 群「项目设备工具类管理群」：DWS 分页返回空页且 `hasMore=true`（DWS 侧缺陷），扫描阶段记录 skip 并进产能汇总待办。
+- 钉钉侧已删除/已过期的素材：`dws` 报 `resource.notFound`，或下载回来是空文件（md5 `1B2M2Y8AsgTpgAmY7PhCfg==`）。
+  这类是**永久错误**，记 `smb_status=unavailable` + 原因后继续，不再 window_stopped ——
+  窗口从旧到新推进，一个永久坏件会把该群后面所有窗口全堵死（实测武汉开明 ~9 个文件正是如此）。
+  这些条目进产能汇总待办，需人工到钉钉确认。
 - 「张霖泽」单聊：SINGLE_CHAT 政策拒绝，除非 Owner 显式加入 AUTHORIZED_NON_INTERNAL_TITLES。
 - 无上下文且无 EXIF/OCR 信号的素材：说明留「待确认」，保留原文件名，进待办清单，等人工终审。
