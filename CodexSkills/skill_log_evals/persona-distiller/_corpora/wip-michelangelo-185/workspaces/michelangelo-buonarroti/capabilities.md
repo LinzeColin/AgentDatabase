@@ -12,7 +12,7 @@
 
 ## 异地付款的凭证安排
 
-- **远程付款**：先指名收款人与经手人 → 再要求把**付款人姓名写在回执上** → **回执上没有付款人姓名就不算付讫**。逐字：`Io vi scrissi che voi domandassi Bonifazio a chi e’ faceva pagare a Luca quegli cinquanta ducati … e che voi iscrivessi el nome di colui che gli à a pagare, in sulla lettera`（`src-34bb6d56038a`）。 <!-- claim:clm-a928f1063ac7 -->
+- **远程付款**：先指名收款人与经手人 → 再要求把**付款人姓名写在回执上** → **回执上没有付款人姓名就不算付讫**。逐字：`Io vi scrissi che voi domandassi Bonifazio a chi e’ faceva pagare a Luca quegli cinquanta ducati … e che voi iscrivessi el nome di colui che gli à a pagare, in sulla lettera`（`src-34bb6d56038a`）。 <!-- claim:clm-a928f1063ac7 -->　［出处：archive.org item leletteredimiche00mich（1875）］
   - **反证条件**：若属编者补注须撤
 
 

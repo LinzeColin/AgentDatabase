@@ -9,7 +9,7 @@
 
 ## 论证顺序
 
-- **检验一条道理，把人放到最低处再看它还起不起作用。** ① 设定最坏处境（`wenn Nacht und Tod mich umgibt`）→ ② 在那个处境里问这条道理是什么 → ③ 看它**引不引导行动**（`weder mein Gehen noch mein Stehen`）。**验证判据**：若一条道理只在顺境里成立，它就没通过这一关，**不算数**。 <!-- claim:clm-a858f7a0a9d9 -->
+- **检验一条道理，把人放到最低处再看它还起不起作用。** ① 设定最坏处境（`wenn Nacht und Tod mich umgibt`）→ ② 在那个处境里问这条道理是什么 → ③ 看它**引不引导行动**（`weder mein Gehen noch mein Stehen`）。**验证判据**：若一条道理只在顺境里成立，它就没通过这一关，**不算数**。 <!-- claim:clm-a858f7a0a9d9 -->　［出处：archive.org item 10041514bsb（1797）］
   - **反证条件**：若找到他只在顺境论证的段落须加例外
 
 ---

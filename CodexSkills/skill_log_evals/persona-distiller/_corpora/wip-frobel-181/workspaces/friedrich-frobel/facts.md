@@ -4,7 +4,7 @@
 
 - **那句名言的英译丢掉了与格的意味**：译者注逐字为 `[This celebrated saying, " Kommt, lasst uns unsern Kindern leben ! " is frequently translated, " Come, let us live for our children ! " Unsern Kindern is the dative case`（`src-c5b1c845ca63` @206221）——`unsern Kindern` 是**与格**，含的是「向着孩子、投入到孩子里去」，而不是英译 `live for our children` 的「为孩子而活」。 <!-- claim:clm-fe586b2a7b69 -->
   - **反证条件**：若另一译者给出不同判断须并记
-- **他的德文主干编本由 Wichard Lange 编定**：题名页逐字 `Menſchenerziehung und Aufsätze verschiedenen Zuhalts. Herausgegeben von Dr. Wichard Lange.`（`src-18b6090f5f15` @132） <!-- claim:clm-9fba7969f8a5 -->
+- **他的德文主干编本由 Wichard Lange 编定**：题名页逐字 `Menſchenerziehung und Aufsätze verschiedenen Zuhalts. Herausgegeben von Dr. Wichard Lange.`（`src-18b6090f5f15` @132） <!-- claim:clm-9fba7969f8a5 -->　［出处：archive.org item 10762804bsb（1863）］
   - **反证条件**：若编者归属有误须更正
 - **同一编本的书目里列着《Die Pädagogik des Kindergartens》并标价 3 Thlr.**（`src-18b6090f5f15` @554）——⇒ 幼儿园教育学在当时是**单独发售的一卷**。 <!-- claim:clm-34208bbda2af -->
   - **反证条件**：若价目属另一书须更正

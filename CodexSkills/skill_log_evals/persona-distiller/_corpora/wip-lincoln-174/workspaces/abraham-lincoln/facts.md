@@ -19,7 +19,7 @@
 
 - **分裂之家：他自己的措辞是「政府」不是「国家」**——`I believe this Government cannot endure permanently half slave and half free.`（`src-e343dec9cc6b` @11506）。★ 语料里另有一处是**道格拉斯在引他**（`I give his exact language`），那一处的说话人是道格拉斯，不能当他的原话取。 <!-- claim:clm-fe491fa86a1d -->
   - **反证条件**：若发现他别处用 the Nation 表述须并列
-- **告别斯普林菲尔德**：`My Friends: No one not in my position can appreciate the sadness I feel at this parting.`（`src-9e17d9796521` @4165） <!-- claim:clm-bf4f4719da47 -->
+- **告别斯普林菲尔德**：`My Friends: No one not in my position can appreciate the sadness I feel at this parting.`（`src-9e17d9796521` @4165） <!-- claim:clm-bf4f4719da47 -->　［出处：archive.org item gemsfromabrahaml00linc（1865）］
   - **反证条件**：若该篇为记者追记而非原稿须标明
 - **他在辩论里引自己旧话来自我设限**：`I do but quote from one of those speeches when I declare that "I have no purpose, directly or indirectly, to interfer[e]`（`src-c80788c2eea1` @1492）——**先声明这是引旧话，再把它当成对自己的约束**。 <!-- claim:clm-434abdcfeace -->
   - **反证条件**：若该段为对方转述须撤
@@ -31,7 +31,7 @@
   - **反证条件**：若该自述为他人代笔须标明
 - **解放宣言里他同时写明被解放者可以入伍**：`And I further declare and make known that such persons, of suitable condition, will be received into th[e armed service]`（`src-81327220bc31` @3763）——**一份宣告里同时给出身份与义务**。 <!-- claim:clm-b19f23590ee0 -->
   - **反证条件**：若该条款属后续补令须更正
-- **Bixby 信在语料里以目录条目出现**（`Bixby .... 123 To Thurlow Weed 124`，`src-be0b3ab8adad` @9131），而其著者归属长期存在「林肯本人 vs 其秘书 John Hay」之争。★ 本产物**不把它当作声口或事实样本**，因为我手上没有可出示的学术来源。 <!-- claim:clm-526e461af666 -->
+- **Bixby 信在语料里以目录条目出现**（`Bixby .... 123 To Thurlow Weed 124`，`src-be0b3ab8adad` @9131），而其著者归属长期存在「林肯本人 vs 其秘书 John Hay」之争。★ 本产物**不把它当作声口或事实样本**，因为我手上没有可出示的学术来源。 <!-- claim:clm-526e461af666 -->　［出处：archive.org item bestoflincolnear00linc（1911）］
   - **反证条件**：若接入可出示的归属研究，本条须重写
 
 ---

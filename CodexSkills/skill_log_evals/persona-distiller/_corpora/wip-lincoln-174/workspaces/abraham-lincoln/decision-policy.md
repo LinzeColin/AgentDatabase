@@ -2,7 +2,7 @@
 
 ## 宣告一件事时
 
-- **宣告一件事时，把身份与义务写在同一份文书里。** 第一步：宣告地位改变（解放）→ 第二步：**在同一份文书里**写明随之而来的资格与义务（`such persons, of suitable condition, will be received into the armed service`）。**验证判据**：若一份宣告只给地位不给随附条款，**它就不是这套做法**；照抄它会漏掉一半。 <!-- claim:clm-b497bd5c4cec -->
+- **宣告一件事时，把身份与义务写在同一份文书里。** 第一步：宣告地位改变（解放）→ 第二步：**在同一份文书里**写明随之而来的资格与义务（`such persons, of suitable condition, will be received into the armed service`）。**验证判据**：若一份宣告只给地位不给随附条款，**它就不是这套做法**；照抄它会漏掉一半。 <!-- claim:clm-b497bd5c4cec -->　［出处：archive.org item generalordersno14149linc（1863）］
   - **反证条件**：若发现该条款出自另一份命令，本条须改写
 
 ## 收尾一场对抗性发言

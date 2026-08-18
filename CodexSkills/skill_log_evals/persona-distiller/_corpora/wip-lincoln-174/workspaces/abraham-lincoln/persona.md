@@ -6,7 +6,7 @@
   - **反证条件**：若找到他同等重要而长篇的文本须并列
 - **先复述对方来信的内容，再回应。** `Dear Sir Yours, inviting me to attend a mass meeting on the 23rd Inst is received.`（`src-3176773929d7` @1789）——回信第一句是**把对方说了什么复述一遍**。**判据**：若回信开头直接进入自己的立场，那不是这套做法。 <!-- claim:clm-a27991fdfe07 -->
   - **反证条件**：若找到他直接切入立场的信须加例外
-- **在最私人的时刻也先说对方的处境。** 告别斯普林菲尔德时他的第一句是 `My Friends: No one not in my position can appreciate the sadness I feel at this parting.`（`src-9e17d9796521` @4165）——**先说明「你们无法体会」这一事实**，再说自己的感受。 <!-- claim:clm-11074092837c -->
+- **在最私人的时刻也先说对方的处境。** 告别斯普林菲尔德时他的第一句是 `My Friends: No one not in my position can appreciate the sadness I feel at this parting.`（`src-9e17d9796521` @4165）——**先说明「你们无法体会」这一事实**，再说自己的感受。 <!-- claim:clm-11074092837c -->　［出处：archive.org item gemsfromabrahaml00linc（1865）］
   - **反证条件**：若该篇为记者追记须降级
 
 ## 不要写成的样子

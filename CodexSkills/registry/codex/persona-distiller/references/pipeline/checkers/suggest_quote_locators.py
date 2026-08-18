@@ -230,6 +230,15 @@ def apply_locators(ws: pathlib.Path, result: dict, *, write: bool) -> dict:
                 if y.isdigit():
                     year_of[r0.get("source_id")] = y
 
+    # ★★ 2026-08-19 实测缺陷①：本件原先**只写产物 .md，不写 claims.jsonl**，
+    #   而 `check_quote_locator` **两边都查**。Fröbel #181 缺的 21 条几乎全在断言层 ⇒
+    #   本件报「已落盘 1 处」而门 21 → 21 一动没动。
+    #   「写了」不等于「门动了」——见本函数末尾的复量守卫。
+    claims_path = ws / "evidence" / "claims.jsonl"
+    claim_rows = []
+    if claims_path.is_file():
+        claim_rows = [json.loads(x) for x in claims_path.read_text(encoding="utf-8").splitlines() if x.strip()]
+
     plan, skipped, no_year = [], 0, 0
     for row in result.get("逐条", []):
         if row.get("命中份数") != 1 or "建议坐标" not in row or "★★" in row:
@@ -249,20 +258,77 @@ def apply_locators(ws: pathlib.Path, result: dict, *, write: bool) -> dict:
         if i < 0:
             skipped += 1
             continue
-        start = text.rfind("\n\n", 0, i) + 2
-        end = text.find("\n\n", i)
-        end = end if end > 0 else len(text)
-        para = text[start:end]
-        if "［出处：" in para or YEAR_ANY.search(para):
+        # ★★★ 2026-08-19 实测缺陷②：原先按 `\n\n` 回溯到**段首**、追加到**段尾**。
+        #   而引文所在段的最后一行常常是 `- **反证条件**：…` 这种**不含引文**的子项 ⇒
+        #   坐标贴到了反证条款后面，看起来像「这条反证有出处」——**这是把正文改坏了**，
+        #   而判据一条也没少（lincoln 写 5 门不动／pestalozzi 写 7 门不动／michelangelo 写 11 门不动）。
+        #   改法：**追加到引文所在的那一行末尾**，按行还是按段判都在射程内。
+        line_start = text.rfind("\n", 0, i) + 1
+        line_end = text.find("\n", i)
+        line_end = line_end if line_end > 0 else len(text)
+        line = text[line_start:line_end]
+        if "［出处：" in line or YEAR_ANY.search(line):
             skipped += 1
             continue
         plan.append({"文件": rel, "引文": quote[:44], "将追加": f"［出处：{coord}］"})
         if write:
-            p.write_text(text[:start] + para.rstrip() + f"　［出处：{coord}］" + text[end:],
+            p.write_text(text[:line_start] + line.rstrip() + f"　［出处：{coord}］" + text[line_end:],
                          encoding="utf-8")
-    return {"将改/已改": len(plan), "跳过（同段已有坐标或定位不到）": skipped,
+    # 断言层：同一批「唯一命中」的引文，若断言正文里也有它且没坐标，一并补
+    claim_hits = 0
+    if claim_rows:
+        changed = False
+        for cr in claim_rows:
+            body = str(cr.get("claim", ""))
+            if not body or "［出处：" in body or YEAR_ANY.search(body):
+                continue
+            for row in result.get("逐条", []):
+                if row.get("命中份数") != 1 or "建议坐标" not in row or "★★" in row:
+                    continue
+                frag = row["引文"][:40]
+                if frag and frag in body:
+                    coord = row["建议坐标"]
+                    if not YEAR_ANY.search(coord):
+                        y = year_of.get((row.get("命中") or [None])[0])
+                        if not y:
+                            break
+                        coord = f"{coord}（{y}）"
+                    if write:
+                        cr["claim"] = body.rstrip() + f"　［出处：{coord}］"
+                        changed = True
+                    claim_hits += 1
+                    break
+        if write and changed:
+            claims_path.write_text(
+                "\n".join(json.dumps(r, ensure_ascii=False) for r in claim_rows) + "\n",
+                encoding="utf-8")
+
+    return {"将改/已改": len(plan), "断言层": claim_hits,
+            "跳过（同段已有坐标或定位不到）": skipped,
             "**跳过·坐标里补不出年份**": no_year,
             "明细": plan, "已落盘": write}
+
+
+
+def _missing_locators(ws: pathlib.Path) -> int | None:
+    """跑权威判据 `check_quote_locator` 数「缺坐标」条数。**不另造尺子。**"""
+    import subprocess
+    prods = sorted(str(x) for x in ws.glob("*.md"))
+    claims = ws / "evidence" / "claims.jsonl"
+    if not prods:
+        return None
+    cmd = [sys.executable, str(pathlib.Path(__file__).resolve().parent / "check_quote_locator.py"),
+           "--products", *prods]
+    if claims.is_file():
+        cmd += ["--claims", str(claims)]
+    try:
+        out = subprocess.run(cmd, capture_output=True, text=True, timeout=600).stdout
+    except Exception:                     # noqa: BLE001
+        return None
+    #   ★ 实际格式是 `**缺坐标 20 条**`（`**` 在**前**）——我第一版按 `缺坐标 **20` 写，
+    #     正则不命中 ⇒ 守卫自报「复量跑不起来」。**它没骗我，但也没算出数。**
+    m = re.search(r"缺坐标\s*(\d+)\s*条", out)
+    return int(m.group(1)) if m else None
 
 
 def self_test() -> int:
@@ -404,6 +470,7 @@ def main() -> int:
         if "状态" in r:
             print(" ", r["状态"])
             return 3
+        before = _missing_locators(ws)
         out = apply_locators(ws, r, write=not a.dry_run)
         head = "**已落盘**" if out["已落盘"] else "干跑（未落盘）"
         print(f"  {head}：{out['将改/已改']} 处；跳过 {out['跳过（同段已有坐标或定位不到）']} 处"
@@ -414,6 +481,21 @@ def main() -> int:
         if len(out["明细"]) > 20:
             print(f"   …另有 {len(out['明细']) - 20} 处")
         print("  ★ **命中多份的一处都没动** —— 选哪一版是判断，不是查表。")
+        #   ★★★ 写完必须自己复量：**「写了 N 处」不是成果，「门少了 N 条」才是。**
+        #   2026-08-19 实测：本件曾报「已落盘 1 处」而 `check_quote_locator` 21 → 21
+        #   一动没动（写在了判据不认的那一段，且当时还不写断言层）。
+        if not a.dry_run:
+            after = _missing_locators(ws)
+            wrote = out["将改/已改"] + out["断言层"]
+            if before is None or after is None:
+                print("  ⚠ **复量跑不起来 —— 本次未核（不是通过）**")
+                return 4
+            print(f"  复量（权威判据 check_quote_locator）：缺坐标 {before} → **{after}**"
+                  f"　｜写了 {wrote} 处")
+            if wrote and after >= before:
+                print("  ✗ **写了却一条都没少 —— 这次是空操作**："
+                      "坐标多半落在判据不认的那一段，或缺的根本在别处。别当成做完了。")
+                return 1
         return 0
     if a.json:
         print(json.dumps(r, ensure_ascii=False, indent=1))

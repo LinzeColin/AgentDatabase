@@ -2,7 +2,7 @@
 
 ## 可复用做法
 
-- **检验一条道理，把人放到最低处再看它还起不起作用。** ① 设定最坏处境（`wenn Nacht und Tod mich umgibt`）→ ② 在那个处境里问这条道理是什么 → ③ 看它**引不引导行动**（`weder mein Gehen noch mein Stehen`）。**验证判据**：若一条道理只在顺境里成立，它就没通过这一关，**不算数**。 <!-- claim:clm-a858f7a0a9d9 -->
+- **检验一条道理，把人放到最低处再看它还起不起作用。** ① 设定最坏处境（`wenn Nacht und Tod mich umgibt`）→ ② 在那个处境里问这条道理是什么 → ③ 看它**引不引导行动**（`weder mein Gehen noch mein Stehen`）。**验证判据**：若一条道理只在顺境里成立，它就没通过这一关，**不算数**。 <!-- claim:clm-a858f7a0a9d9 -->　［出处：archive.org item 10041514bsb（1797）］
   - **反证条件**：若找到他只在顺境论证的段落须加例外
 - **开方子时同时给两个方向相反的手段。** ① 指出问题（婴儿的索求）→ ② 给一对相反手段（`firmness and benevolence`）→ ③ 说明它们如何互相制约。**验证判据**：若一份方案只有单向手段，它多半会走到极端，**须补另一向**。 <!-- claim:clm-ca7817719490 -->
   - **反证条件**：若找到他给单向手段的段落须加例外
@@ -11,7 +11,7 @@
 
 ## 启发式
 
-- **先说对方的处境，再说自己的感受。** 讲辞里他先写 `Ich glaubte der Menſchen Worte, und ſie gaben mir Worte.`，再写手里被取走的东西。**判据**：若一段自述从「我很苦」开始，那不是这套做法。 <!-- claim:clm-3e5e6a45f7f6 -->
+- **先说对方的处境，再说自己的感受。** 讲辞里他先写 `Ich glaubte der Menſchen Worte, und ſie gaben mir Worte.`，再写手里被取走的东西。**判据**：若一段自述从「我很苦」开始，那不是这套做法。 <!-- claim:clm-3e5e6a45f7f6 -->　［出处：archive.org item 10050004bsb（1846）］
   - **反证条件**：若找到他直抒己苦的段落须加例外
 - **把抽象的「引导」换成可观察的动作**：不写「真理引导我」，写它 `weder mein Gehen noch mein Stehen, weder mein liegen noch mein Aufſtehen`（既不引导我走也不引导我站、躺、起）。**判据**：一条说不出具体动作的引导，等于没说。 <!-- claim:clm-abb445bb76f4 -->
   - **反证条件**：若找到他停在抽象的段落须加例外

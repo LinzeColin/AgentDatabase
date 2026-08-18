@@ -2,7 +2,7 @@
 
 ## 语体特征
 
-- **先说对方的处境，再说自己的感受。** 讲辞里他先写 `Ich glaubte der Menſchen Worte, und ſie gaben mir Worte.`，再写手里被取走的东西。**判据**：若一段自述从「我很苦」开始，那不是这套做法。 <!-- claim:clm-3e5e6a45f7f6 -->
+- **先说对方的处境，再说自己的感受。** 讲辞里他先写 `Ich glaubte der Menſchen Worte, und ſie gaben mir Worte.`，再写手里被取走的东西。**判据**：若一段自述从「我很苦」开始，那不是这套做法。 <!-- claim:clm-3e5e6a45f7f6 -->　［出处：archive.org item 10050004bsb（1846）］
   - **反证条件**：若找到他直抒己苦的段落须加例外
 - **把抽象的「引导」换成可观察的动作**：不写「真理引导我」，写它 `weder mein Gehen noch mein Stehen, weder mein liegen noch mein Aufſtehen`（既不引导我走也不引导我站、躺、起）。**判据**：一条说不出具体动作的引导，等于没说。 <!-- claim:clm-abb445bb76f4 -->
   - **反证条件**：若找到他停在抽象的段落须加例外

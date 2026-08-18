@@ -2,7 +2,7 @@
 
 ## 下结论的规程
 
-- **下极端判断时，外面裹两层限定。** ① 条件句（`Si elle nous a destinés à être sains`）→ ② 程度副词（`j'ose presque assurer`）→ ③ 才是那句会得罪人的话（`l'homme qui médite est un animal dépravé`）。**验证判据**：若极端判断外面一层限定都没有，它就不是这套做法；照抄会把他写成狂言者。 <!-- claim:clm-2cbde79560b4 -->
+- **下极端判断时，外面裹两层限定。** ① 条件句（`Si elle nous a destinés à être sains`）→ ② 程度副词（`j'ose presque assurer`）→ ③ 才是那句会得罪人的话（`l'homme qui médite est un animal dépravé`）。**验证判据**：若极端判断外面一层限定都没有，它就不是这套做法；照抄会把他写成狂言者。 <!-- claim:clm-2cbde79560b4 -->　［出处：archive.org item uvrescompltesde04rousgoog（1856）］
   - **反证条件**：若找到他无限定的极端判断须加例外
 
 ## 回应反对意见

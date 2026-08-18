@@ -1066,8 +1066,8 @@
     },
     {
       "path": "references/pipeline/checkers/suggest_quote_locators.py",
-      "sha256": "367fc051cc053a878282ccc0d5e36ae6338433d4167e65aa9fafcc4b37bdc0fd",
-      "size_bytes": 22955
+      "sha256": "5058f52a36199ff0bd73ab51abf8478faca9c6dc96797794d353cbb44ee72ea1",
+      "size_bytes": 27581
     },
     {
       "path": "references/pipeline/checkers/verify_product.py",
@@ -1961,8 +1961,8 @@
     },
     {
       "path": "scripts/suggest_quote_locators.py",
-      "sha256": "367fc051cc053a878282ccc0d5e36ae6338433d4167e65aa9fafcc4b37bdc0fd",
-      "size_bytes": 22955
+      "sha256": "5058f52a36199ff0bd73ab51abf8478faca9c6dc96797794d353cbb44ee72ea1",
+      "size_bytes": 27581
     },
     {
       "path": "scripts/tools/README-vision_ocr.md",
