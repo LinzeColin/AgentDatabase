@@ -1407,7 +1407,9 @@
           "**不要再打 403**：带 UA 即可读 SRU。",
           "正文改走 **IIIF**（`https://gallica.bnf.fr/iiif/{ark}/manifest.json`）或 OCR 的 ALTO 端点，而不是 `.texteBrut`；取到后**先数法文实词命中再说取到了**。",
           "只要任意 1 部拿到正文，quick 的 8 源即成立（已有 7 部在仓里，不必重抓）。"
-        ]
+        ],
+        "⑥ 正文四册全试过（同日续测）": "四部 ARK（`bpt6k5675046x` 1907／`bpt6k5674999v` 1910／`bd6t57749157` 1911／`bd6t5403097c` 1913）**各打一次 `.texteBrut`：全部 HTTP 200、逐字节相同的 50212 B**，去掉 script/style 净文本均 2309 字符、法文关键词 0 命中。★★★ **响应与册次无关 ⇒ 这不是「这几册没 OCR」的证据，是「该端点没给我文本」。**别据此断定那几本书没有 OCR。★ IIIF 侧：`manifest.json` 通（149 页、BnF Sciences et techniques FOL-V-5007），但**顶层无 `rendering`、画布无 `otherContent`／`seeAlso`**（IIIF 放 OCR 标注的地方），`RequestDigitalElement…E=ALTO` 回 **HTTP 400**。⇒ **文本层没有从这两条文档化端点暴露出来**；再往下就是猜内部 API，**停手**。",
+        "⑦ 结论": "**Eiffel #142 维持延后**。但卡点已从「Gallica 被 403 挡住」精确到「**书目通、works 明确（14 部 ≤1930 的 `Auteur du texte`，ARK 已记）、而正文层未从 texteBrut／IIIF 暴露**」。差的仍是那 1 部**正文**。"
       }
     },
     {
