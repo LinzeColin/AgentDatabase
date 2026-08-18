@@ -6,7 +6,7 @@
 
 ## 三个反复出现的动作
 
-1. **先说射程再说内容**——`only five of the ninety`／`so far as the unions have suffered`／
+1. **先说射程再说内容**——`only five of the ninety`（1905）／`so far as the unions have suffered`（1914）／
    `the details which I was given the power to modify`。
 2. **把道德问题换成可比较的量**——问「工会该不该赔」，他答「赔的回报率最高」。
 3. **明说什么不算数**——规模不算成功的证据；只往监管机构备案不算披露。
