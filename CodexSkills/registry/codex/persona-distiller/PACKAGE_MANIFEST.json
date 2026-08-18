@@ -996,8 +996,8 @@
     },
     {
       "path": "references/pipeline/checkers/emit_corpus_pointer.py",
-      "sha256": "cb48110280b4820644710ff07e53e18176bf24db793588dba75f0b9085da9c43",
-      "size_bytes": 27812
+      "sha256": "a1539224a8666a0076128d4934d6379b1b6174b17c36c32d92c4997d77de1fc4",
+      "size_bytes": 28748
     },
     {
       "path": "references/pipeline/checkers/emit_lane_scope.py",
@@ -1811,8 +1811,8 @@
     },
     {
       "path": "scripts/emit_corpus_pointer.py",
-      "sha256": "cb48110280b4820644710ff07e53e18176bf24db793588dba75f0b9085da9c43",
-      "size_bytes": 27812
+      "sha256": "a1539224a8666a0076128d4934d6379b1b6174b17c36c32d92c4997d77de1fc4",
+      "size_bytes": 28748
     },
     {
       "path": "scripts/emit_lane_scope.py",

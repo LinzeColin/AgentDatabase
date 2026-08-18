@@ -255,6 +255,27 @@ def _urls_for(ws_dir: pathlib.Path, row: dict, fname: str) -> list:
     return urls
 
 
+
+def _ascii_url(url: str) -> str:
+    """把 URL 里的非 ASCII 字符做百分号编码。
+
+    ★ 2026-08-19 实测：Jefferson #175 有一条源的 URL 里含 `ó`
+      （`…declaración…`），`urllib.request` 直接抛
+      `UnicodeEncodeError: 'ascii' codec can't encode character '\xf3'`，
+      于是那一份**永远取不回**，而 release 门一直报 `research.ledger-file-missing`。
+      —— 报错信息指向「文件不在」，真因却是**取的那一步根本没发出去**。
+    """
+    import urllib.parse
+    parts = urllib.parse.urlsplit(url)
+    return urllib.parse.urlunsplit((
+        parts.scheme,
+        parts.netloc.encode("idna").decode("ascii") if any(ord(c) > 127 for c in parts.netloc) else parts.netloc,
+        urllib.parse.quote(parts.path, safe="/%"),
+        urllib.parse.quote(parts.query, safe="=&%"),
+        urllib.parse.quote(parts.fragment, safe="%"),
+    ))
+
+
 def restore(ws_dir: pathlib.Path, *, timeout: int = 180) -> int:
     """照账本把语料取回来，逐份核校验和。**核不过不落盘。**"""
     import urllib.request
@@ -291,7 +312,7 @@ def restore(ws_dir: pathlib.Path, *, timeout: int = 180) -> int:
         last = ""
         for u in urls:
             try:
-                req = urllib.request.Request(u, headers={"User-Agent": "persona-distiller/restore"})
+                req = urllib.request.Request(_ascii_url(u), headers={"User-Agent": "persona-distiller/restore"})
                 with urllib.request.urlopen(req, timeout=timeout) as f:
                     data = f.read()
             except Exception as e:                      # noqa: BLE001 —— 什么错都要记下来继续下一条
