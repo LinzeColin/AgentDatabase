@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "f51ebd34d11432684d05b7b9148574769bb3f02ec8210e1a13b7ce11b80d4bab",
-      "size_bytes": 365183
+      "sha256": "b20d859a3f0fe268bbc77fb0a26b7bf376fb9ec1d77e476ac51f43865ef5eb57",
+      "size_bytes": 367968
     },
     {
       "path": "CONTRIBUTING.md",
@@ -606,8 +606,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_contract_drift.py",
-      "sha256": "b111f3b42812d5d321d1c3148e5920cfcce79ca796d6824e9d32511519d8085c",
-      "size_bytes": 51751
+      "sha256": "ea5cebf55553a97376ae7e8dfd17f41aa2e6b767ecf1bfc5abdef12cb1f6fc51",
+      "size_bytes": 53889
     },
     {
       "path": "references/pipeline/checkers/check_corpus_ceiling.py",
@@ -1416,8 +1416,8 @@
     },
     {
       "path": "scripts/check_contract_drift.py",
-      "sha256": "b111f3b42812d5d321d1c3148e5920cfcce79ca796d6824e9d32511519d8085c",
-      "size_bytes": 51751
+      "sha256": "ea5cebf55553a97376ae7e8dfd17f41aa2e6b767ecf1bfc5abdef12cb1f6fc51",
+      "size_bytes": 53889
     },
     {
       "path": "scripts/check_corpus_ceiling.py",

@@ -68,6 +68,14 @@ import tempfile
 
 ROOT_DEFAULT = pathlib.Path(__file__).resolve().parent.parent
 
+# ★ 2026-08-18：本文件**有两份**（`scripts/` 与 `references/pipeline/checkers/`，逐字节相同）。
+#   `ROOT_DEFAULT` 取「本脚本的上级目录」——对 `scripts/` 那份是 skill 根 ✓，
+#   对镜像那份却解析成 `references/pipeline/`，那里没有 VERSION。
+#   **此前这会报成「合同漂移 1 条」(rc=1)** —— 把「我没量到」说成了「它违规」。
+#   现在改判 **rc=4 未量**，并印出解析到的根和它是怎么来的。
+#   [[a-checkers-verdict-must-not-depend-on-cwd]]｜[[zero-hit-gates-must-prove-they-can-hit]]
+UNMEASURED_NO_VERSION = "__unmeasured_no_version__"
+
 # 历史文档：里面的旧版本号是**事实记录**，不是当前声明，一律不查。
 HISTORICAL = (
     "CHANGELOG.md",
@@ -544,7 +552,7 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
 
     ver_file = root / "VERSION"
     if not ver_file.is_file():
-        return [f"缺 VERSION 文件（真源不存在）：{ver_file}"], skipped
+        return [f"{UNMEASURED_NO_VERSION}|{ver_file}"], skipped
     skill_v = ver_file.read_text(encoding="utf-8").strip()
 
     # --- A0. CHANGELOG 的最高条目 vs VERSION（v0.0.0.94 新增的第四条轴）---
@@ -830,6 +838,13 @@ def self_test() -> int:
     with tempfile.TemporaryDirectory() as td:
         tmp = pathlib.Path(td)
 
+        # ★★★ 未量对照：一个**根本不是 skill 包**的目录，必须判「未量」而不是「漂移」。
+        empty = tmp / "not-a-package"
+        (empty / "scripts").mkdir(parents=True)
+        problems, _ = check(empty)
+        if not (len(problems) == 1 and problems[0].startswith(UNMEASURED_NO_VERSION)):
+            failures.append("未量对照：无 VERSION 的目录应当只报未量标记，实际 %r" % (problems[:2],))
+
         clean = _fixture(tmp / "a", drift=False)
         problems, _ = check(clean)
         if problems:
@@ -951,6 +966,21 @@ def main() -> int:
         return 3
 
     problems, skipped = check(root)
+
+    # ★ 「这个根本不是一个 skill 包」≠「这个包有漂移」——分开报，别把未量说成违规。
+    unmeasured = [p for p in problems if p.startswith(UNMEASURED_NO_VERSION)]
+    if unmeasured:
+        where = unmeasured[0].split("|", 1)[1]
+        mirror = "（本文件在 `references/pipeline/checkers/` 下还有一份逐字节相同的镜像；"
+        mirror += "跑那一份时根会解析成 `references/pipeline/`，那里当然没有 VERSION。"
+        mirror += "**真正的调用方是 `scripts/check_contract_drift.py`**）"
+        print("★ **未量，不是通过**（rc=4）—— 解析到的根里没有 VERSION：%s" % where)
+        print("   根是怎么来的：%s" % ("--root 显式给的" if str(root) != str(ROOT_DEFAULT.resolve())
+                                       else "默认 = 本脚本的上级目录 %s" % ROOT_DEFAULT))
+        print("   " + mirror)
+        if args.json:
+            print(json.dumps({"root": str(root), "unmeasured": where}, ensure_ascii=False, indent=2))
+        return 4
 
     if args.json:
         print(json.dumps({"root": str(root), "problems": problems, "skipped": skipped},
