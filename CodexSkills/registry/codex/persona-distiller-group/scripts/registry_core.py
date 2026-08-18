@@ -213,6 +213,32 @@ def check_version_binding(registry_root: Path) -> list[str]:
                 f"{index_path}: generator_version {stamped!r} ≠ VERSION {version!r}"
                 f"——索引是旧版本生成的，请重跑 rebuild_team_views.py"
             )
+
+    # ★★★ 2026-08-18 新增的**第四处声明位**。此前只管三处，而
+    #   `expert-fleet-admission.json:source_generator_version` **陈旧了 13 个版本**
+    #   （v0.0.0.32 vs VERSION v0.0.0.45）**没有任何东西提醒过** ——
+    #   是我把 `audit_persona_fleet_for_team.py` 真跑了一次才看见（准入数据逐字节没变，
+    #   只有那个戳变了）。**没人比对的一处声明位，就是下一个 7 版本漂移的起点。**
+    #   ★ 文件不在时**不报错**：那是「这棵树没跑过 fleet 审计」，不是版本漂移。
+    #     [[zero-hit-gates-must-prove-they-can-hit]]｜[[counts-need-their-cutoff-stated]]
+    adm_path = registry_root / "expert-fleet-admission.json"
+    if adm_path.is_file():
+        try:
+            adm = json.loads(adm_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            adm = None
+        if isinstance(adm, dict):
+            adm_stamped = adm.get("source_generator_version")
+            if adm_stamped is None:
+                errors.append(
+                    f"{adm_path}: 缺 source_generator_version——"
+                    f"准入名册没带生成它的版本号"
+                )
+            elif adm_stamped != version:
+                errors.append(
+                    f"{adm_path}: source_generator_version {adm_stamped!r} ≠ VERSION {version!r}"
+                    f"——准入名册是旧版本生成的，请重跑 audit_persona_fleet_for_team.py"
+                )
     return errors
 
 

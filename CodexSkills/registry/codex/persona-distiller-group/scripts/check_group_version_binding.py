@@ -62,6 +62,7 @@ from registry_core import check_version_binding, default_registry_root  # noqa: 
 def _fixture(root: pathlib.Path, *, version: str = "v0.0.0.9",
              manifest_version: object = "__same__",
              stamped: object = "__same__",
+             admission: object = "__absent__",
              drop_manifest: bool = False) -> pathlib.Path:
     """造一份最小 registry 根目录。三个哨兵值 `__same__` 表示「与 VERSION 一致」。"""
     root.mkdir(parents=True, exist_ok=True)
@@ -79,6 +80,15 @@ def _fixture(root: pathlib.Path, *, version: str = "v0.0.0.9",
         index["generator_version"] = sv
     (root / "team-index.json").write_text(
         json.dumps(index, ensure_ascii=False), encoding="utf-8")
+    # ★ 第四处声明位（2026-08-18 新增）。`__absent__` = 不造这个文件 ——
+    #   用来钉住「文件不在时不许报错」。
+    if admission != "__absent__":
+        av = version if admission == "__same__" else admission
+        payload: dict = {"summary": {}}
+        if av is not None:
+            payload["source_generator_version"] = av
+        (root / "expert-fleet-admission.json").write_text(
+            json.dumps(payload, ensure_ascii=False), encoding="utf-8")
     return root
 
 
@@ -98,6 +108,11 @@ def self_test() -> int:
             ("manifest 版本落后", _fixture(tmp / "b1", manifest_version="v0.0.0.8"), "manifest.json"),
             ("缺 manifest 机读声明", _fixture(tmp / "b2", drop_manifest=True), "缺机读版本声明"),
             ("manifest 无 version 字段", _fixture(tmp / "b3", manifest_version=None), "manifest.json"),
+            # ★★★ 第四处声明位的负对照（本件的由来：它实测漂了 13 个版本没人提醒）
+            ("准入名册版本落后", _fixture(tmp / "adm1", admission="v0.0.0.32"),
+             "expert-fleet-admission.json"),
+            ("准入名册无 source_generator_version", _fixture(tmp / "adm2", admission=None),
+             "缺 source_generator_version"),
             ("产物没盖版本号", _fixture(tmp / "b4", stamped=None), "缺 generator_version"),
             ("产物盖的是旧版本", _fixture(tmp / "b5", stamped="v0.0.0.7"), "generator_version"),
             ("VERSION 为空", _fixture(tmp / "b6", version=""), "VERSION 文件为空"),

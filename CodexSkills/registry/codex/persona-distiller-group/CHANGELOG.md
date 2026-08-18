@@ -1,5 +1,42 @@
 # CHANGELOG — persona-distiller-group
 
+## v0.0.0.46
+
+**第四处版本声明位漂了 13 个版本，没有任何东西提醒过。**
+
+继续「把没跑过的脚本一个个真的用一次」：跑 `audit_persona_fleet_for_team.py`。
+它**写盘**（`expert-fleet-admission.json` 是仓内产物），于是立刻查它改了什么 ——
+
+    准入数据逐字节没变，只有一行：
+    - "source_generator_version": "v0.0.0.32"
+    + "source_generator_version": "v0.0.0.45"
+
+⇒ **这个文件陈旧了 13 个版本。** 而 `check_group_version_binding` 只管三处
+（VERSION / `manifest.json:version` / `team-index.json:generator_version`），
+`expert-fleet-admission.json` 在它里面出现 **0 次**。
+
+**没人比对的一处声明位，就是下一个「7 个版本号」的起点** ——
+人物侧 v0.0.0.13 那次正是这么来的（8 处声明位只比了 2 处）。
+
+**改法**：`registry_core.check_version_binding` 加第四处。
+★ **文件不在时不报错** —— 那是「这棵树没跑过 fleet 审计」，不是版本漂移。
+四种情形逐一实跑：
+
+    不造该文件      → 0 条
+    戳与 VERSION 一致 → 0 条
+    戳落后          → 1 条（点名要重跑 audit_persona_fleet_for_team.py）
+    缺该字段        → 1 条
+
+★★★ **在真树上做过反例**：把戳手工改回 v0.0.0.32 ⇒ 这道门**确实判红**；
+   然后**用真的生成器重跑**复原（不是手工改回去）⇒ 回到 rc=0。
+   [[counter-example-red-can-be-red-by-coincidence]]
+
+自测新增两条负对照（戳落后／缺字段）＋ fixture 支持 `__absent__`。
+★ 造 fixture 时目录名 `b8` **和后面的用例撞了**，`FileExistsError` 当场炸出来 —— 已改名。
+
+**升版流程随之多一步**：`rebuild_team_views.py` 之后要跑 `audit_persona_fleet_for_team.py`，
+否则第四处会红。本版就是照这个顺序出的。
+
 ## v0.0.0.45
 
 **用户看的那张卡片把两条实打实的贡献静默丢掉了 —— 同一形状的第四处，而它此前没有守卫。**
