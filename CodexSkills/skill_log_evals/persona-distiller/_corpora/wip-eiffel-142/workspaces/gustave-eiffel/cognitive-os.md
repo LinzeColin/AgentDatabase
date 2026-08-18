@@ -49,3 +49,15 @@
   - **反证条件**：若接入能读法文的声口判据并给出读数 ⇒ 本条作废，改用实测值　［出处：《Recherches expérimentales sur la résistance de l'air》1907 年版；《Note de M. G. Eiffel sur son contrat d'entreprise des écluses du canal de Panama》1892 年版］
 
 ★ 「未量」不等于「不行」，也不等于「够」。这一格现在是空的，就写成空的。
+
+## 简化必须自带「这等于假设了什么」
+
+- **每做一次简化，立刻把它翻成一句明写的假设** —— 1889《Mémoire ... viaduc》：
+  > `ce qui revient à supposer que les membrures de cette dernière sont protégées par celles de la première. Dans cette hypothèse, les surfaces offert`
+
+  1900《三百米塔》换了假设的内容，写法没变：
+  > `Cela revient à dire que pour une même intensité du vent, si s, et s, repré- sentent les surfaces des pièces rencontrées par le vent sur la première et la deuxième face,`
+
+  ★ 两处的**假设并不相同**（1889 假定后墙被前墙完全遮蔽；1900 改成按空隙与实体之比折减风强）
+  —— 说明这是一个**习惯**，不是把同一条公式抄了两遍。 <!-- claim:clm-50e19a848d0b -->
+  - **反证条件**：在他作品里找到成段的简化而**不**附带假设说明，且不止一处 ⇒ 本条降级

@@ -41,3 +41,19 @@
   （`until it was surpassed by the viaduct of Garabit`），
   **本库没有他自己这样说的原文**，不得转成自述。 <!-- claim:clm-fadc72898565 -->
   - **反证条件**：若在他本人著作里找到同形表述 ⇒ 升格为自述并换源　［出处：《Gustave Eiffel》1889-05-24 期刊短文（第三方）］
+
+## 几份数据互相矛盾时：不取平均
+
+- **同一个系数在不同人手里差近一倍，他判定「现象本身还没被理解」，并把矛头指向装置。**
+  1907 年那部开篇就摆出分歧的幅度：
+  > `valeurs données comme coefficients de la résistance de l'air varient entre 0,07 et 0,13. De tels écarts s'expliquent autant par la diversité des méthodes employées que par les difficultés que présente l'application de certaines d'entre elles, notamment celles qui utilisent des`
+
+  随即把它归因于方法，而不是去调和数值：
+  > `Le phénomène est beaucoup plus complexe, et il est nécessaire de s'en rendre compte pour donner à la valeur de K son interprétation réelle. Cette valeur, bas`
+
+  1910 年他把同一种怀疑指向**自己的**装置，并据此改造它：
+  > `on doit toujours craindre que l’expansion de l air autour de ta plaque ne soit gênée par les parois. Nous avons évité ces inc`
+
+  ⇒ 遇到互相矛盾的读数，先问「各自是怎么测的、装置会不会污染读数」，
+  **不要先算平均**。 <!-- claim:clm-394b2ee44632 -->
+  - **反证条件**：在他作品里找到对分歧数据直接取平均、且不讨论方法来源的处理 ⇒ 本条作废
