@@ -15,7 +15,7 @@
 - **他报告情报时把取得条件一起报**：`E questo tale fu contento , che io leggessi detti capitoli , ma non volse ne serbassi copia , onde io ne referirò a Vostre Signorie quanto se ne è riservato nella memoria .`（`src-7d02c9a9fdab` @476210）——**不许留副本**，所以只报记忆里的部分。 <!-- claim:clm-6ae5d6ceb9e5 -->
   - **反证条件**：若属他人代笔须撤
 - **他把执行权与判断权分开**：`Vostre Signorie sono prudentissime, piglieranno quel partito giudicheranno piu a proposito; ed io sono per eseguire con diligenzia ogni loro commis[sione]`（`src-d5b51baa8b4c` @31494） <!-- claim:clm-ecc3227b76d4 -->
-  - **反证条件**：同上
+  - **反证条件**：同上　［出处：archive.org item a591295400machuoft（1891）］
 
 ## 其二
 
@@ -34,7 +34,7 @@
 - **他的《Commedie》里第一人称是剧中人物**，不是他本人。该道现只剩这一份。 <!-- claim:clm-134365eb6802 -->
   - **反证条件**：若找到他以自己名义的短篇须更新
 - **二手传记会为他的师承订正年代**：`The origin of this mistake is, because after Marsigli’s death, Vangelista da Pisa and Girolamo da Napoli taught at St Spirito, and Manetti studied under them.`（`src-4bf15fe30dbb` @218785，Villari）——前文给出 Marsigli 生卒 1330／1394-08-21 与 Manetti 生年 1396。 <!-- claim:clm-da32921974cb -->
-  - **反证条件**：若该订正被后世推翻须更新
+  - **反证条件**：若该订正被后世推翻须更新　［出处：archive.org item bub_gb_sm_ojzpYQkAC（1886）］
 
 ---
 

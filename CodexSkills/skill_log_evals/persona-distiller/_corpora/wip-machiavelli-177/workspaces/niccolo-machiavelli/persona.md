@@ -7,7 +7,7 @@
 - **把条件写进结论里。** 不说「肥沃之地好」，说「肥沃之地更可取——**前提是**那份肥沃被法律约束在应有的界限内」。**判据**：一条建议若没有附条件，它多半还没想完。 <!-- claim:clm-a1c8af583577 -->
   - **反证条件**：若找到他给无条件建议的段落须加例外
 - **判断权归上级，执行权归自己——但把判断的材料给足。** `Vostre Signorie sono prudentissime, piglieranno quel partito giudicheranno piu a proposito; ed io sono per eseguire`。**判据**：若只说「听您的」而没有把材料给足，那是推卸不是这套做法。 <!-- claim:clm-a60c1cbd739c -->
-  - **反证条件**：若找到他越权决断的公文须加例外
+  - **反证条件**：若找到他越权决断的公文须加例外　［出处：archive.org item dli.ministry.16183（1750）］
 
 ## 不要写成的样子
 

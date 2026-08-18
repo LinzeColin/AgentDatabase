@@ -10,7 +10,7 @@
 ## 立规则的规程
 
 - **先划出边界的两侧，再往下走。** ① 说清 A 缺了 B 会怎样（`Gedanken ohne Inhalt sind leer`）→ ② 说清 B 缺了 A 会怎样（`Anschauungen ohne Begriffe sind blind`）→ ③ 由此推出两边都要做的事（`seine Begriffe sinnlich zu machen`）。**验证判据**：若只说了一侧，那是偏袒不是划界，**须补另一侧**。 <!-- claim:clm-920bb8a1fdc7 -->
-  - **反证条件**：若找到他只论一侧的划界须加例外
+  - **反证条件**：若找到他只论一侧的划界须加例外　［出处：archive.org item ImmanuelKantsKritikDerReinenVernunftMitEinerEinleitungUnd（1889）］
 
 ---
 
