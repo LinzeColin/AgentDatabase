@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "3b4b4c17aeb1e331267e662789f6b30fb3a16b5a99b4f3b89f3552a0f8f816a4",
-      "size_bytes": 356988
+      "sha256": "3e624c4277ba52bb9e7e7acae273b7515a975e621a0fcb085d8b1281770e5818",
+      "size_bytes": 360032
     },
     {
       "path": "CONTRIBUTING.md",
@@ -46,8 +46,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "d9f62070abd2509f68d6edc33b04227eed7ea9e234ded2ce772007243f5d380a",
-      "size_bytes": 16073
+      "sha256": "e01c6ce67d7ea41669e561e9759c8f2ac82b29fc55cc0243f8f302d12c611af3",
+      "size_bytes": 18520
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
