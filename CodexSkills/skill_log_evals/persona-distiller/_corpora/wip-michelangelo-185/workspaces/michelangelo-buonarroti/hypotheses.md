@@ -2,7 +2,7 @@
 
 ## 尚不足以定案的
 
-- **他会直接说对方一直误解他**：`But ye have never understood me in the past, and ye do not understand me now. May God forgive you !`（`src-8539ad71569a`，逐字照录的英译）。 <!-- claim:clm-504ac43c44d3 -->
+- **他会直接说对方一直误解他**：`But ye have never understood me in the past, and ye do not understand me now. May God forgive you !`（`src-8539ad71569a`，逐字照录的英译）。 <!-- claim:clm-504ac43c44d3 -->　［出处：《A Record of His Life as Told in His Own Letters and Papers》1913 年版］
   - **反证条件**：若该段是编者转述而非他的信须撤
 
 

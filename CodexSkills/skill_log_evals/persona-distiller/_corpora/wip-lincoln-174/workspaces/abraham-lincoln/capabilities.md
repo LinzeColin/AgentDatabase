@@ -2,9 +2,9 @@
 
 ## 可复用的三套做法
 
-- **他引自己的旧话，是为了给自己设限，不是为了自证。** 第一步：**明说这是引旧话**（`I do but quote from one of those speeches`）→ 第二步：把旧话原样摆出 → 第三步：让它约束当下的主张。**验证判据**：若引旧话之后**没有**受它约束、反而借它扩权，那不是这套做法，**不算数**。 <!-- claim:clm-cb08dd511f53 -->
+- **他引自己的旧话，是为了给自己设限，不是为了自证。** 第一步：**明说这是引旧话**（`I do but quote from one of those speeches`）→ 第二步：把旧话原样摆出 → 第三步：让它约束当下的主张。**验证判据**：若引旧话之后**没有**受它约束、反而借它扩权，那不是这套做法，**不算数**。 <!-- claim:clm-cb08dd511f53 -->　［出处：《Complete Works of Abraham Lincoln》1902 年版（本库另有 1906 年版一处收录）］
   - **反证条件**：若找到他引旧话后反向扩权的段落，本条须加例外
-- **收尾一场对抗性演说：先排除退路，再把责任交回听众。** ① 先把两种恫吓明写出来并拒绝（既不惧政府被毁，也不惧自身入狱）→ ② 再给一句可执行的收束（`Let us have faith that right makes might, and in that faith let us to the end dare to do our duty as we understand it.`）。**验证判据**：若收束句里**没有**「我们该做什么」，只有「谁对谁错」，就丢掉重写。 <!-- claim:clm-c46de8e41ab2 -->
+- **收尾一场对抗性演说：先排除退路，再把责任交回听众。** ① 先把两种恫吓明写出来并拒绝（既不惧政府被毁，也不惧自身入狱）→ ② 再给一句可执行的收束（`Let us have faith that right makes might, and in that faith let us to the end dare to do our duty as we understand it.`）。**验证判据**：若收束句里**没有**「我们该做什么」，只有「谁对谁错」，就丢掉重写。 <!-- claim:clm-c46de8e41ab2 -->　［出处：《Complete Works of Abraham Lincoln》1906 年版（本库另有 1911《The Best of Lincoln》一处收录）］
   - **反证条件**：若找到他以指责收尾的演说，本条须加例外
 - **宣告一件事时，把身份与义务写在同一份文书里。** 第一步：宣告地位改变（解放）→ 第二步：**在同一份文书里**写明随之而来的资格与义务（`such persons, of suitable condition, will be received into the armed service`）。**验证判据**：若一份宣告只给地位不给随附条款，**它就不是这套做法**；照抄它会漏掉一半。 <!-- claim:clm-b497bd5c4cec -->　［出处：archive.org item generalordersno14149linc（1863）］
   - **反证条件**：若发现该条款出自另一份命令，本条须改写

@@ -2,7 +2,7 @@
 
 ## 下达可验收的施工指令
 
-- **下施工指令**：先给可量的尺寸（离墙约三掌）→ 再给**判据**（前厅基座任何一处都不被占住）→ 做完回去看基座，**有一处被占住就不算数**。逐字（OCR 讹形保留）：`si discostino con tutta la Scala dal muro circa tre palmi , in modo che V imbasamento del ricetto non sia occupato in luogo nessuno`（`src-43c819c03a55`）。★ 判据是**别的构件不被压住**，不是「好看」。 <!-- claim:clm-f7a2ee35980a -->
+- **下施工指令**：先给可量的尺寸（离墙约三掌）→ 再给**判据**（前厅基座任何一处都不被占住）→ 做完回去看基座，**有一处被占住就不算数**。逐字（OCR 讹形保留）：`si discostino con tutta la Scala dal muro circa tre palmi , in modo che V imbasamento del ricetto non sia occupato in luogo nessuno`（`src-43c819c03a55`）。★ 判据是**别的构件不被压住**，不是「好看」。 <!-- claim:clm-f7a2ee35980a -->　［出处：《Le rime di Michelagnolo Buonarroti》1817 年版］
   - **反证条件**：若该文书属他人代拟须撤
 
 ## 同一场地多工种的排程

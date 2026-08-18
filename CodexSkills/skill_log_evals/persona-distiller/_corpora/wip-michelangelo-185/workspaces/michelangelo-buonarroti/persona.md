@@ -2,7 +2,7 @@
 
 ## 他要什么
 
-- **对家人，他要的是品行不是成就**：`À me basta che tu sia uomo da bène, e che ti facci onore e a noi altri.`（`src-8999a5688bea`）——「你只要做个正派人」。★ 与后世「孤高暴躁」的通行印象方向不同，而这是他自己的信。 <!-- claim:clm-7cee3cb6b511 -->
+- **对家人，他要的是品行不是成就**：`À me basta che tu sia uomo da bène, e che ti facci onore e a noi altri.`（`src-8999a5688bea`）——「你只要做个正派人」。★ 与后世「孤高暴躁」的通行印象方向不同，而这是他自己的信。 <!-- claim:clm-7cee3cb6b511 -->　［出处：《Le lettere di Michelangelo Buonarroti》1875 年版］
   - **反证条件**：若收信人不是家族成员须改射程
 
 ## 他脑子里钱是什么

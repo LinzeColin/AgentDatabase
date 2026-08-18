@@ -7,7 +7,7 @@
 
 ## 不内行的那一侧，把判断权交出去
 
-- **遇到自己不内行的事**：先把「我不内行」说出来 → 再请第三方估价 → 拿估价与自己付出的价对照，**对不上就是被蒙了，交易就丢掉**。逐字：`Come gli arai, àrò caro gli facci stimare, per vedere se sono stato gabbato, perchè no' me ne intendo.`（`src-34bb6d56038a`） <!-- claim:clm-584dece9bffe -->
+- **遇到自己不内行的事**：先把「我不内行」说出来 → 再请第三方估价 → 拿估价与自己付出的价对照，**对不上就是被蒙了，交易就丢掉**。逐字：`Come gli arai, àrò caro gli facci stimare, per vedere se sono stato gabbato, perchè no' me ne intendo.`（`src-34bb6d56038a`） <!-- claim:clm-584dece9bffe -->　［出处：《Le lettere di Michelangelo Buonarroti》1875 年版］
   - **反证条件**：若属他人代笔须撤
 
 ## 支撑上面两条的实测

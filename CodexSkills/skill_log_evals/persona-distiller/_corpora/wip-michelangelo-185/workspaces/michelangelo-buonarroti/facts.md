@@ -15,7 +15,7 @@
 
 - **他知道自己写得琐碎，而把最终判断交给对方**：`lo scrivo cose da ridere , ma so ben , c#e voi troverete cosa a proposito .`（`src-43c819c03a55`，逐字照录）——紧接着上一条的施工说明。**与「这行我不内行，你找人估价」是同一个动作。** <!-- claim:clm-85415c0c4457 -->　［出处：archive.org item lerimedimichelag00mich（1817）］
   - **反证条件**：若与上一条不属同一份文书须拆开
-- **罗伦佐图书馆前厅楼梯：离墙约三掌**——`si discostino con tutta la Scala dal muro circa tre palmi , in modo che V imbasamento del ricetto non sia occupato in luogo nessuno`（`src-43c819c03a55`，逐字照录，OCR 讹形保留：`V`＝`l'`） <!-- claim:clm-73cca7fc060f -->
+- **罗伦佐图书馆前厅楼梯：离墙约三掌**——`si discostino con tutta la Scala dal muro circa tre palmi , in modo che V imbasamento del ricetto non sia occupato in luogo nessuno`（`src-43c819c03a55`，逐字照录，OCR 讹形保留：`V`＝`l'`） <!-- claim:clm-73cca7fc060f -->　［出处：《Le rime di Michelagnolo Buonarroti》1817 年版］
   - **反证条件**：若该文书属他人代拟须撤
 - **他报进度时给期限、给下一件、并列出剩余清单**：`I am working as fast as I can, and within a fortnight I shall begin work upon the other Captain ; (*) after that the only important works remaining to be done will be the four Rivers`（`src-4b92a7f08408`，逐字照录）——**两周内**动手下一尊「将军」，之后只剩**四条河**。★ 这是英译，不能用来量声口。 <!-- claim:clm-8a5e8ff45d5a -->
   - **反证条件**：若英译与意大利原文的件数不同须以原文为准

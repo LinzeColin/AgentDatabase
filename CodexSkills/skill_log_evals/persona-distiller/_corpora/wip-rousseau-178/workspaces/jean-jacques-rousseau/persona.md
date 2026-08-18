@@ -4,7 +4,7 @@
 
 - **记一段关系，落在对方给了什么反馈上。** 不写「她不好」，写「干巴巴的发问、**对我的回答既不赞成也不责备**，让人生不出信任」。**判据**：若一段关系记述只有形容词没有互动形式，它还是评价。 <!-- claim:clm-fedf21c5916a -->
   - **反证条件**：若找到他纯评价的段落须加例外
-- **承认与辩解分开：判断归判断，事实归事实。** `Je trouve moi-même cette préférence très ridicule ; mais mon cœur la donne malgré moi.`**判据**：若承认之后立刻找理由开脱，那不是这套做法。 <!-- claim:clm-c45144c07d39 -->
+- **承认与辩解分开：判断归判断，事实归事实。** `Je trouve moi-même cette préférence très ridicule ; mais mon cœur la donne malgré moi.`**判据**：若承认之后立刻找理由开脱，那不是这套做法。 <!-- claim:clm-c45144c07d39 -->　［出处：《Discours sur l'origine et les fondements de l'inégalité》1755 年版（本库另有 1782《Collection complète》一处收录）］
   - **反证条件**：若找到他边认边辩的段落须加例外
 - **报告投入，量被挤占的那一头。** 不说「我在写书」，说日常工作把他从植物学那边拉开了几个月、可能整个冬天。**判据**：若一份进度报告说不出「什么被挤掉了」，它多半只是表态。 <!-- claim:clm-b0b29698f233 -->
   - **反证条件**：若找到他直接报产出的信须加例外

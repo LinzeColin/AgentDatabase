@@ -2,7 +2,7 @@
 
 ## 可复用做法
 
-- **他把代价挂在「公开」这个动作上，不是挂在「下决心」上。** 受托教养那几个孩子时的次序是：① 换到对方（父母）的立场去看 → ② 由此得出决意（`This brought me at last to the determination to become myself the educator and teacher of the lads.`）→ ③ **然后才是那场搏斗**（`After a hard struggle with myself, the hardest and most exhausting I had undergone for a long time, I made known my decision.`）——**难的是说出去，不是想明白**。**验证判据**：若一段决定叙述把搏斗放在决意之前，那不是他这套；他这套是「想明白之后仍要熬过公开这一关」。★ 引文取自**英译本**，措辞是译者的。 <!-- claim:clm-6326f46d7ead -->
+- **他把代价挂在「公开」这个动作上，不是挂在「下决心」上。** 受托教养那几个孩子时的次序是：① 换到对方（父母）的立场去看 → ② 由此得出决意（`This brought me at last to the determination to become myself the educator and teacher of the lads.`）→ ③ **然后才是那场搏斗**（`After a hard struggle with myself, the hardest and most exhausting I had undergone for a long time, I made known my decision.`）——**难的是说出去，不是想明白**。**验证判据**：若一段决定叙述把搏斗放在决意之前，那不是他这套；他这套是「想明白之后仍要熬过公开这一关」。★ 引文取自**英译本**，措辞是译者的。 <!-- claim:clm-6326f46d7ead -->　［出处：《Autobiography of Friedrich Froebel》1889 年版］
   - **反证条件**：若在别的作品里找到「搏斗在决意之前」的同型叙述，本条的次序须重述
 - **记录一场活动，把成人的位置一起记下。** ① 记活动本身（又和学童做了游戏）→ ② **记教师被安排到队列的哪个位置** → ③ 由此说明成人不是旁观者。**验证判据**：若一份活动记录只写孩子做了什么，就漏掉了一半，**须补成人位置**。 <!-- claim:clm-987394302c3d -->
   - **反证条件**：若找到他只记孩子的记录须加例外
@@ -11,7 +11,7 @@
 
 ## 启发式
 
-- **交代一个决定时，他先把对自己不利的那一面摆出来。** 应征入伍一节先承认减损项——不是普鲁士人、身在退隐、`my enthusiasm was possibly small`——**再**给决心（`but my determination was firmly fixed as the rocks themselves`）与理由（德意志同胞之谊；他日受他教养的孩子会有一个需要保卫而自己无力保卫的祖国）。受托教养那节同型：先记下那场最难的搏斗，再记决定被怎样接受。**判据**：一段自述若读不到对自己不利的那一面，多半是事后的合理化。★ 引文取自**英译本**，措辞是译者的。 <!-- claim:clm-3f773cdc71c4 -->
+- **交代一个决定时，他先把对自己不利的那一面摆出来。** 应征入伍一节先承认减损项——不是普鲁士人、身在退隐、`my enthusiasm was possibly small`——**再**给决心（`but my determination was firmly fixed as the rocks themselves`）与理由（德意志同胞之谊；他日受他教养的孩子会有一个需要保卫而自己无力保卫的祖国）。受托教养那节同型：先记下那场最难的搏斗，再记决定被怎样接受。**判据**：一段自述若读不到对自己不利的那一面，多半是事后的合理化。★ 引文取自**英译本**，措辞是译者的。 <!-- claim:clm-3f773cdc71c4 -->　［出处：《Autobiography of Friedrich Froebel》1889 年版］
   - **反证条件**：若两处之一被证明是编者润色而非他本人所写，本条须重核
 - **把「谁在场」写清楚**：不写「做了游戏」，写「把教师一一安排到队列里的位置上」。**判据**：一份记录若说不出成人站在哪里，它还没写完。 <!-- claim:clm-06cc49cbff8c -->
   - **反证条件**：若找到他略去成人的记录须加例外

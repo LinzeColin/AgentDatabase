@@ -7,7 +7,7 @@
 
 ## 归属与版本
 
-- **他的「会话」道里有三份候选其实是编者写的年表条目**：逐字为 `Froebel writes his autobiographical Letter to the Duke of Meiningen, never completed.`——**第三人称**，不是他的话。 <!-- claim:clm-964f26285265 -->
+- **他的「会话」道里有三份候选其实是编者写的年表条目**：逐字为 `Froebel writes his autobiographical Letter to the Duke of Meiningen, never completed.`——**第三人称**，不是他的话。 <!-- claim:clm-964f26285265 -->　［出处：《Froebel's Letters on the Kindergarten》1891 年版（本库另有同年《Letters on the Kindergarten》一处收录）］
   - **反证条件**：若该条属他自述须更正
 
 ---

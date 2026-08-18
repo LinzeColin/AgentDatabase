@@ -8,9 +8,9 @@
   - **反证条件**：若第三版措辞出现须并记
 - **他讲被人取走东西，重点在「要的是手里的，不是这只手」**：`Oft wenn ich die Hand voll hatte, nahm einer, was darin war; meine Hand wollte er nicht`（`src-2037435a6370` @169743）；前文 `Ich glaubte der Menſchen Worte, und ſie gaben mir Worte.` <!-- claim:clm-8042d7313c7f -->　［出处：archive.org item 10050004bsb（1846）］
   - **反证条件**：若该讲辞为他人记录须标明
-- **同类相生是他给出的规则**：`But affection has never yet been encouraged except by affection ; and confidence has never been gained except by confidence`（`src-17b03f664ea4` @142582，英译本）——感情只能由感情培养，信任只能由信任赢得。 <!-- claim:clm-308c0abfa55e -->
+- **同类相生是他给出的规则**：`But affection has never yet been encouraged except by affection ; and confidence has never been gained except by confidence`（`src-17b03f664ea4` @142582，英译本）——感情只能由感情培养，信任只能由信任赢得。 <!-- claim:clm-308c0abfa55e -->　［出处：《Meine Nachforschungen über den Gang der Natur》1797 年版（本库另有 1827《Letters on Early Education》一处收录）］
   - **反证条件**：★ 英译本，措辞受译者影响
-- **他开的方子同时含两个方向相反的手段**：`I have already alluded to these cravings of the infant, and spoken of the necessity to counteract them by firmness and benevolence.`（`src-4b8f7b430a38` @113979）——`firmness and benevolence`（坚定与善意）并用。 <!-- claim:clm-4541b73921b2 -->
+- **他开的方子同时含两个方向相反的手段**：`I have already alluded to these cravings of the infant, and spoken of the necessity to counteract them by firmness and benevolence.`（`src-4b8f7b430a38` @113979）——`firmness and benevolence`（坚定与善意）并用。 <!-- claim:clm-4541b73921b2 -->　［出处：《Letters on Early Education》1827 年版（本库另有 1898 年版一处收录）］
   - **反证条件**：同上
 - **斯坦茨（Stanz）的经历他写成了专门一篇**，文中他把自己的教育愿望 `legte ſie vorzüglich mit dem ganzen Umfang, in dem ich fie denke, in den Schoß Legrands`——托付给当时的瑞士执政之一 **Legrand**（`src-06755f524adf` @107461）。 <!-- claim:clm-0c0f66668e0e -->　［出处：archive.org item 10050004bsb（1846）］
   - **反证条件**：若 Legrand 身份记错须更正

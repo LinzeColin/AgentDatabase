@@ -12,16 +12,16 @@
   - **反证条件**：若该本的日期与原件不符须更正
 - **致 Greeley 的信里他把优先级摆在最前**：`If I could save the Union without freeing any slave, I would do it`（`src-be0b3ab8adad` @149458）；前一句是 `My paramount object in this struggle is to save the Union, and is not either to save or to destroy slavery.` <!-- claim:clm-650be106e407 -->
   - **反证条件**：若该信为伪托须撤
-- **库珀联盟演说的收句**：`Let us have faith that right makes might, and in that faith let us to the end dare to do our duty as we understand it.`（`src-be0b3ab8adad` @100322）前文他先排除两种退路：既不被恫吓于政府毁灭，也不被恫吓于自身入狱。 <!-- claim:clm-9d23be38784d -->
+- **库珀联盟演说的收句**：`Let us have faith that right makes might, and in that faith let us to the end dare to do our duty as we understand it.`（`src-be0b3ab8adad` @100322）前文他先排除两种退路：既不被恫吓于政府毁灭，也不被恫吓于自身入狱。 <!-- claim:clm-9d23be38784d -->　［出处：《Complete Works of Abraham Lincoln》1906 年版（本库另有 1911《The Best of Lincoln》一处收录）］
   - **反证条件**：同上
 
 ## 辩论、书信与自述
 
-- **分裂之家：他自己的措辞是「政府」不是「国家」**——`I believe this Government cannot endure permanently half slave and half free.`（`src-e343dec9cc6b` @11506）。★ 语料里另有一处是**道格拉斯在引他**（`I give his exact language`），那一处的说话人是道格拉斯，不能当他的原话取。 <!-- claim:clm-fe491fa86a1d -->
+- **分裂之家：他自己的措辞是「政府」不是「国家」**——`I believe this Government cannot endure permanently half slave and half free.`（`src-e343dec9cc6b` @11506）。★ 语料里另有一处是**道格拉斯在引他**（`I give his exact language`），那一处的说话人是道格拉斯，不能当他的原话取。 <!-- claim:clm-fe491fa86a1d -->　［出处：《Complete Works of Abraham Lincoln》1906 年版（本库另有 1923《The Writings》一处收录）］
   - **反证条件**：若发现他别处用 the Nation 表述须并列
 - **告别斯普林菲尔德**：`My Friends: No one not in my position can appreciate the sadness I feel at this parting.`（`src-9e17d9796521` @4165） <!-- claim:clm-bf4f4719da47 -->　［出处：archive.org item gemsfromabrahaml00linc（1865）］
   - **反证条件**：若该篇为记者追记而非原稿须标明
-- **他在辩论里引自己旧话来自我设限**：`I do but quote from one of those speeches when I declare that "I have no purpose, directly or indirectly, to interfer[e]`（`src-c80788c2eea1` @1492）——**先声明这是引旧话，再把它当成对自己的约束**。 <!-- claim:clm-434abdcfeace -->
+- **他在辩论里引自己旧话来自我设限**：`I do but quote from one of those speeches when I declare that "I have no purpose, directly or indirectly, to interfer[e]`（`src-c80788c2eea1` @1492）——**先声明这是引旧话，再把它当成对自己的约束**。 <!-- claim:clm-434abdcfeace -->　［出处：《Complete Works of Abraham Lincoln》1902 年版（本库另有 1906 年版一处收录）］
   - **反证条件**：若该段为对方转述须撤
 - **他把「被同胞真心看重」说成自己最大的抱负**：`Whether it be true or not, I can say, for one, that I have no other so great as that of being truly esteemed of my fe[llow men]`（`src-ad151187f39b` @1242） <!-- claim:clm-f7124caf1eb4 -->
   - **反证条件**：若该信为伪托须撤

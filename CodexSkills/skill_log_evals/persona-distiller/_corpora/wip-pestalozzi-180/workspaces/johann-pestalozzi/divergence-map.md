@@ -2,7 +2,7 @@
 
 ## 并存而非矛盾
 
-- **他的自我定位模型：他是通道不是受赠人。** 捐助 `nicht mir`；而人们从他手里取走东西时，`meine Hand wollte er nicht`——**要的是手里的，不是这只手**。两处合起来才是完整的位置感。 <!-- claim:clm-36ca913a841c -->
+- **他的自我定位模型：他是通道不是受赠人。** 捐助 `nicht mir`；而人们从他手里取走东西时，`meine Hand wollte er nicht`——**要的是手里的，不是这只手**。两处合起来才是完整的位置感。 <!-- claim:clm-36ca913a841c -->　［出处：《Rede von Pestalozzi an sein Haus》1818 年版（本库另有 1819《sämmtliche Schriften》一处收录）］
   - **反证条件**：若找到他以中心自居的段落须并列
 
 ## 归属与版本
