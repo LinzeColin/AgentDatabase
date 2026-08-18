@@ -30,7 +30,7 @@ ALTO 149/149 页 / 27,762 词）。
 
 > `Pour éviter autant que possible les erreurs qui pourraient provenir d'une déformation
 > accidentelle des vibrations extrêmes, on a pris, de part et d'autre des points a et b,
-> des points c et d distants de cinq autres 20 vibrations.` <!-- src-20c8386535ea -->
+> des points c et d distants de cinq autres 20 1 vibrations.` <!-- src-20c8386535ea -->
 
 ⇒ 形状是「**为避免 X 可能带来的误差 → 所以取点这样取**」。
    误差处理出现在**操作步骤**里，而不是「结果讨论」一节里。
@@ -38,7 +38,7 @@ ALTO 149/149 页 / 27,762 词）。
 ### ④ 材料与受力给到毫米与千克，并注明是用什么量的
 
 > `excellent acier de 12 mm d'épaisseur et de 60 mm de largeur. Leur flèche est de 36 mm
-> pour une tension de 3.500 kg mesurée à une balance dynamométrique.` <!-- src-20c8386535ea -->
+> pour une tension de 3.500 /y mesurée à une balance dynamométrique.` <!-- src-20c8386535ea -->
 
 ⇒ 三个数（12 mm / 60 mm / 36 mm）＋ 一个荷载（3,500 kg）＋ **量具名**（测力天平）。
    他给数时几乎总带着「用什么量的」。

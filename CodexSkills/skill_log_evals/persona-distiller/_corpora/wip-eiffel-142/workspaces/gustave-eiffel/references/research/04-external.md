@@ -16,8 +16,8 @@
 ### ① 同代人记他，记的是**跨度与高度的数字**，不是形容词
 
 > `the great bridge over the Douro, at Oporto, the central span of which is 534 feet,
-> and the rise of arch 138 feet, the height of rails above the water-level being no less
-> than 200 feet` <!-- src-2fd2776e6eb5 -->
+> and the rise of arch 138 feet, the height of rails above the waterlevel being no less
+> than 200 feet.` <!-- src-2fd2776e6eb5 -->
 
 ⇒ 外部叙述与他自己的文风**同形**（见 01-writings ④：给量的同时给量具）。
    这一条说明那不是他一个人的习惯，而是当时工程评述的通行体例 ——

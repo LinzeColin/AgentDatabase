@@ -786,7 +786,44 @@ def self_test():
         for b in bad:
             print("  · " + b)
         return 2
-    print("\n✓ 自测全过（3 正 + 5 反 + 2 条取法 + 7 条跨行 + 6 条隔离）")
+    # ★★★ repair() 的自测——**走 main() 真入口**。2026-08-18 上午 `--restore`
+    #     的自测直接调函数，漏掉 argparse 根本没接线：14/14 全绿而用户那条路是死的。
+    #     [[a-checker-nothing-calls-is-not-a-checker]]
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        r = pathlib.Path(td) / "ws"
+        (r / "references" / "research").mkdir(parents=True)
+        (r / "evidence").mkdir(parents=True)
+        (r / "raw").mkdir(parents=True)
+        (r / "raw" / "a.txt").write_text(
+            "Leur fleche est de 36 mm pour une tension de 3.500 /y mesuree a une balance.\n",
+            encoding="utf-8")
+        (r / "evidence" / "source-ledger.jsonl").write_text(json.dumps(
+            {"source_id": "src-aaa", "local_path": "raw/a.txt", "split": "train"},
+            ensure_ascii=False) + "\n", encoding="utf-8")
+        lane = r / "references" / "research" / "01-writings.md"
+        lane.write_text(
+            "- 甲 `Leur fleche est de 36 mm pour une tension de 3.500 kg mesuree a une balance.`\n",
+            encoding="utf-8")            # ← 「读顺了」的引文：/y 被写成 kg
+        keep = lane.read_bytes()
+        _sv = sys.argv
+        try:
+            sys.argv = ["x", str(r), "--repair"]
+            main()
+            chk("★ repair 干跑：一个字节都不写", lane.read_bytes() == keep)
+            sys.argv = ["x", str(r), "--repair", "--apply"]
+            rc = main()
+        finally:
+            sys.argv = _sv
+        after = lane.read_text(encoding="utf-8")
+        chk("★ repair --apply 把 `kg` 改回语料真实的 `/y`", "3.500 /y mesuree" in after)
+        chk("★ 改完退出码 0", rc == 0)
+        corp3, _, _ = load_corpus(r)
+        chk("★★ 复量：改完之后对不上数为 0", _count_bad(r, corp3) == 0)
+        chk("★★ 只动引文，周围正文原样", after.startswith("- 甲 `") and after.rstrip().endswith("`"))
+        chk("★★★ 末尾词不许被截断（语料多出字时按词边界对齐）", "une balance." in after)
+
+    print("\n✓ 自测全过（3 正 + 5 反 + 2 条取法 + 7 条跨行 + 6 条隔离 + 5 条 repair）")
     # ★★★ 2026-08-18 新增：出处表头不许被当成引文，**而句中带 [src-…] 的真引文必须仍被抽到**。
     #   两个方向都要测 —— 只测「表头被排除」的话，把整条规则写成「凡含 [src- 就跳过」也能过。
     md_hdr = "`sg_2011_how_do_you_know_when_its_done [src-d35e2171afc6]`：\n\n> " + ("x"*40) + "\n"
@@ -804,16 +841,165 @@ def self_test():
     return 0
 
 
+
+def repair(ws: pathlib.Path, apply: bool = False):
+    """把**对不上的**逐字引文换成语料里的真实字节。→ (退出码, 报告)
+
+    ## ★★★★★ 2026-08-19：五条全是「我把 OCR 的伤读顺了」
+
+    Eiffel #142 的研究道 5 条引文回原文对不上，逐条查完**同属一类**——
+    我在引文里替 OCR 做了修补：
+
+    | 我写的 | 语料真实字节 | 我做了什么 |
+    |---|---|---|
+    | `cinq autres 20 vibrations` | `cinq autres 20 1 vibrations` | 删掉游离的页码 `1` |
+    | `3.500 kg mesurée` | `3.500 /y mesurée` | 把打坏的单位「还原」成 kg |
+    | `water-level` | `waterlevel` | 补了一个连字符 |
+    | `comme argent` | `comme ar gent` | 合上 OCR 拆开的词 |
+    | `120 millions` | `120 mil lions` | 同上 |
+
+    每一处都「更通顺」，每一处都**不再是逐字**。读者按引文回查会落空，
+    而更糟的是：**它掩盖了语料的真实质量**——OCR 有多烂，从产物上看不出来。
+
+    ★ 修法是**反的**：不是把语料修干净，而是把引文改回**带伤的原样**。
+      引文难看是事实的一部分；要干净就得换扫本，不能在引文里美化。
+
+    ★★ 与 [[bulk-auto-replace-damages-the-text]] 的两次事故对齐，本函数：
+      · 默认只报不写（`--repair` 干跑，`--repair --apply` 才落盘）；
+      · **只碰当前判为「对不上」的那几条**，命中的一个字不动；
+      · 写完**独立复核**——新引文要在 `p.read_text()` 的原始字节里
+        （不经 `_norm`、不经 `load_corpus`）能找到，避免
+        [[a-gate-must-not-share-a-part-with-what-it-guards]]；
+      · 写完**重量一次**，失败数没降就报「空操作」并返回非零。
+    """
+    corp, unread, _ = load_corpus(ws)
+    if corp is None:
+        return 2, {"错": unread}
+    raw = {}
+    for line in (ws / "evidence" / "source-ledger.jsonl").read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        r = json.loads(line)
+        if r.get("split") == "holdout":
+            continue          # ★ holdout 正文一律不进这里，见 load_corpus 的事故记录
+        f = ws / str(r.get("normalized_path") or r.get("local_path") or "")
+        if f.is_file():
+            raw[r.get("source_id")] = f.read_text(encoding="utf-8", errors="replace")
+
+    before = _count_bad(ws, corp)
+    out = {"干跑": not apply, "修前对不上": before, "改写": [], "**修不了**": []}
+    for f in sorted((ws / "references" / "research").glob("0*.md")):
+        lane = f.name          # ★ 与 check() 用同一条枚举，不另起扫描集
+        md = f.read_text(encoding="utf-8")
+        new_md = md
+        for q in extract_quotes(md):
+            if verify(q, corp):
+                continue
+            n = _norm(q)
+            cut = 0
+            for L in range(len(n), 15, -1):
+                if any(n[:L] in t for t in corp.values()):
+                    cut = L
+                    break
+            if not cut:
+                out["**修不了**"].append({"道": lane, "引文": q[:70], "因": "连前 16 字符都命中不了"})
+                continue
+            sid = next(s for s, t in corp.items() if n[:cut] in t)
+            i = corp[sid].index(n[:cut])
+            # ★★★ 2026-08-19：`corp[sid][i:i+len(n)]` **会把尾巴切掉**。
+            #   语料比引文多出字（游离页码 `1`、被拆成两半的 `ar gent`），
+            #   按旧引文的字符数去截，末尾就短一截：
+            #   `vibrations.`→`1 vibration`、`quelconque`→`quelconq`、`travaux`→`travau`。
+            #   而**截断的前缀照样能通过 verify()** ⇒ 判据全绿、产物更差。
+            #   改法：在词边界上扫一段窗口，取与原引文最像的那个终点。
+            import difflib as _dl
+            window = corp[sid][i:i + len(n) + 80]
+            # ★ `+ 1`：range 上界是开区间，不加就永远取不到 `len(window)`，
+            #   于是**最后一个词必被切掉**（自测里 `balance.` 整个丢了）。
+            ends = [k for k in range(max(1, len(n) - 40), min(len(window), len(n) + 80) + 1)
+                    if k == len(window) or window[k] in " \t"]
+            truth = max(ends, key=lambda k: _dl.SequenceMatcher(None, n, window[:k]).ratio(),
+                        default=len(n))
+            truth = window[:truth].rstrip()
+            # ★ 独立复核：不经 load_corpus / corpus_body（那才是可疑的一环），
+            #   直接在**原始字节**里找。折行连字符与空白按同一规则squash 掉——
+            #   语料里 `water- ⏎level` 与引文 `water-level` 指的是同一串字，
+            #   这条放宽**只在复核这一侧**，判据本身一个字不动。
+            _sq = lambda x: re.sub(r"[\s\-¬\u00ad]+", "", x)
+            #   ★ 比的是 `_norm(原始字节)`——`_norm` 只是纯文本归一（撇号、标点前空格、
+            #     折行连字符），**不是**可疑的那一环；可疑的是 corpus_body 的表头剥离
+            #     与台账 split 判定，本复核完全绕开它们。
+            if _sq(truth) not in _sq(_norm(raw.get(sid, ""))):
+                out["**修不了**"].append({"道": lane, "引文": q[:70], "因": "原始字节里复核不到，未改"})
+                continue
+            # ★★ 词级最小编辑：只改真正不同的那几个词，不整段重写。
+            #   [[bulk-auto-replace-damages-the-text]] 两次事故都是整段替换造成的；
+            #   而研究道用的是**多行块引**，按行匹配根本落不下去。
+            import difflib
+            ow, nw = n.split(), truth.split()
+            edits, okall = [], True
+            for tag, a1, a2, b1, b2 in difflib.SequenceMatcher(None, ow, nw).get_opcodes():
+                if tag == "equal":
+                    continue
+                old_run, new_run = ow[a1:a2], nw[b1:b2]
+                # 两侧各带一个锚词，避免改到别处同形的字
+                la = ow[a1 - 1] if a1 else ""
+                ra = ow[a2] if a2 < len(ow) else ""
+                pat = r"\s+".join(re.escape(w) for w in ([la] if la else []) + old_run + ([ra] if ra else []))
+                ms = list(re.finditer(pat, new_md))
+                if len(ms) != 1:
+                    out["**修不了**"].append({"道": lane, "引文": q[:70],
+                                           "因": f"词段 {' '.join(old_run)[:40]!r} 在文中命中 {len(ms)} 次（要求恰好 1 次）"})
+                    okall = False
+                    break
+                rep = " ".join(([la] if la else []) + new_run + ([ra] if ra else []))
+                edits.append((ms[0].group(0), rep))
+            if not okall:
+                continue
+            if not edits:
+                out["**修不了**"].append({"道": lane, "引文": q[:70], "因": "差异为空却核不过——请人看"})
+                continue
+            for old_txt, rep in edits:
+                new_md = new_md.replace(old_txt, rep, 1)
+            out["改写"].append({"道": lane, "旧": q[:64], "新": truth[:64]})
+        if apply and new_md != md:
+            f.write_text(new_md, encoding="utf-8")
+
+    if apply:
+        corp2, _, _ = load_corpus(ws)
+        after = _count_bad(ws, corp2)
+        out["修后对不上"] = after
+        if out["改写"] and after >= before:
+            out["**空操作**"] = f"改写了 {len(out['改写'])} 条，对不上数 {before} → {after}，**一条也没少**"
+            return 1, out
+    return (0 if not out["**修不了**"] else 1), out
+
+
+def _count_bad(ws: pathlib.Path, corp: dict) -> int:
+    """当前「对不上」的引文条数（**用本模块自己的 verify**，不另造尺子）。"""
+    bad = 0
+    for f in sorted((ws / "references" / "research").glob("0*.md")):
+        bad += sum(1 for q in extract_quotes(f.read_text(encoding="utf-8")) if not verify(q, corp))
+    return bad
+
+
 def main():
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("workspace", nargs="?", help="人物工作区（含 evidence/ 与 references/research/）")
     ap.add_argument("--self-test", action="store_true")
+    ap.add_argument("--repair", action="store_true",
+                    help="把对不上的引文换回语料的真实字节（含 OCR 的伤）；默认干跑")
+    ap.add_argument("--apply", action="store_true", help="与 --repair 合用才落盘")
     a = ap.parse_args()
     if a.self_test:
         return self_test()
     if not a.workspace:
         ap.error("要么 --self-test，要么给工作区")
+    if a.repair:
+        code, rep = repair(pathlib.Path(a.workspace), apply=a.apply)
+        print(json.dumps(rep, ensure_ascii=False, indent=2))
+        return code
     code, rep = check(pathlib.Path(a.workspace))
     print(json.dumps(rep, ensure_ascii=False, indent=2))
     return code

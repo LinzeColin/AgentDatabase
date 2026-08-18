@@ -31,9 +31,9 @@ ALTO 逐页取回 34 页 / 6,754 词）。
 
 ### ③ 承接工程时，先把自己的敞口封死
 
-> `sous aucun prétexte, elles ne pussent être dépassées comme argent, ni modifier mes
+> `sous aucun prétexte, elles ne pussent être dépassées comme ar gent, ni modifier mes
 > responsabilités, la Compagnie a exigé qu'elles fissent l'objet de forfaits séparés
-> non susceptibles d'une augmentation quelconque` <!-- src-56bc9705e2d3 -->
+> non susceptibles d'une augmenta tion quelconque,` <!-- src-56bc9705e2d3 -->
 
 > `j'avais dû repasser intégralement à mes sous-traitants tous les risques et avantages
 > de cette partie du contrat, aux prix mêmes qui m'étaient fixés par la Compagnie, et en
@@ -47,7 +47,7 @@ ALTO 逐页取回 34 页 / 6,754 词）。
 
 > `j'assumais la redoutable et écrasante responsabilité de prendre à ma charge la
 > livraison en état de bon fonctionnement de toutes les écluses en trente mois,
-> c'est-à-dire : 1° d'exécuter 120 millions de travaux` <!-- src-56bc9705e2d3 -->
+> c'est-à-dire : 1° d'exécuter 120 mil lions de travaux` <!-- src-56bc9705e2d3 -->
 
 ⇒ 「redoutable et écrasante」之后**立刻跟一个冒号和数字**：三十个月、一亿二千万工程量。
    形容词只用来引出量，从不单独站着。
