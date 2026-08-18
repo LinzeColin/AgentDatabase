@@ -162,7 +162,7 @@ def stem_coverage(tasks: list) -> tuple:
 def print_stem_note(tasks: list) -> None:
     n_stem, n = stem_coverage(tasks)
     print("  ★ **覆盖 %d 个独立题面 / %d 条样本**%s"
-          % (n_stem, n, "" if n_stem == n else "（同一题面的多个变体**不带额外信息**）"))
+          % (n_stem, n, "" if n_stem == n else "（同一题面的多个变体**对与长度无关的指标不带额外信息**；★ 对 `complexity` 这类**按字数算**的指标它们**会改结果**）"))
     if n_stem < 5:
         print("  ★★ **独立题面只有 %d 个 —— 下面的比例与区间都撑不起结论**；"
               "取样时请覆盖到更多题面。" % n_stem)
