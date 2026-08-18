@@ -1,0 +1,96 @@
+{
+ "抓取时间": "2026-08-19",
+ "记录": [
+  {
+   "identifier": "chemischebriefe00liebuoft",
+   "year": "1851",
+   "title": "Chemische Briefe",
+   "why_this_scan": "Toronto 扫本，非 Google",
+   "source_url": "https://archive.org/download/chemischebriefe00liebuoft/chemischebriefe00liebuoft_djvu.txt",
+   "bytes": 1197161,
+   "sha256": "9e3e230d8eaa428fd30a44fe8942dcb207e7c1f44a91b1e68a553c961a5fef6d"
+  },
+  {
+   "identifier": "dieorganischeche00lieb",
+   "year": "1841",
+   "title": "Die organische Chemie in ihrer Anwendung auf Agricultur und Physiologie",
+   "why_this_scan": "IA 原生扫本",
+   "source_url": "https://archive.org/download/dieorganischeche00lieb/dieorganischeche00lieb_djvu.txt",
+   "bytes": 649849,
+   "sha256": "fb8a818fadc9d2a8f0428111dfc17cd074a3dfeadee4a98795f6628bd81911eb"
+  },
+  {
+   "identifier": "bub_gb_TO4TAAAAQAAJ",
+   "year": "1843",
+   "title": "Die Chemie in ihrer Anwendung auf Agricultur und Physiologie",
+   "why_this_scan": "唯一可取的该版",
+   "source_url": "https://archive.org/download/bub_gb_TO4TAAAAQAAJ/bub_gb_TO4TAAAAQAAJ_djvu.txt",
+   "bytes": 862148,
+   "sha256": "a5db4471f78db7201fdd54818714f1a8f25374455bb5b887bb7f8288f6c871be"
+  },
+  {
+   "identifier": "34444006902241",
+   "year": "1855",
+   "title": "Die Grundsätze der Agricultur-Chemie",
+   "why_this_scan": "馆藏扫本",
+   "source_url": "https://archive.org/download/34444006902241/34444006902241_djvu.txt",
+   "bytes": 198458,
+   "sha256": "4eae5f88fb8b825bc0aa62500d1d50b2c012650c9e135975915391644bda7022"
+  },
+  {
+   "identifier": "11756487bsb",
+   "year": "1859",
+   "title": "Naturwissenschaftliche Briefe über die moderne Landwirthschaft",
+   "why_this_scan": "BSB 扫本",
+   "source_url": "https://archive.org/download/11756487bsb/11756487bsb_djvu.txt",
+   "bytes": 455498,
+   "sha256": "8270b1094cc7b85021389dfd7a963cdd42f04808d2acdfef919ff31a1a8cf70b"
+  },
+  {
+   "identifier": "10702759bsb",
+   "year": "1843",
+   "title": "Handbuch der Chemie",
+   "why_this_scan": "BSB 扫本",
+   "source_url": "https://archive.org/download/10702759bsb/10702759bsb_djvu.txt",
+   "bytes": 3012744,
+   "sha256": "6acc4cb63988b57dd2d077f32617a9594b8801e46062eac5c8f100484fe98091"
+  },
+  {
+   "identifier": "11438122bsb",
+   "year": "1843",
+   "title": "Handbuch der organischen Chemie",
+   "why_this_scan": "BSB 扫本",
+   "source_url": "https://archive.org/download/11438122bsb/11438122bsb_djvu.txt",
+   "bytes": 2978687,
+   "sha256": "7c2dbb6a6ad573a816cabacd62d258066ac146a247d8072652c1a8a41a3dda54"
+  },
+  {
+   "identifier": "10073239bsb",
+   "year": "1848",
+   "title": "Untersuchungen über einige Ursachen der Säftebewegung im thierischen Organismus",
+   "why_this_scan": "BSB 扫本",
+   "source_url": "https://archive.org/download/10073239bsb/10073239bsb_djvu.txt",
+   "bytes": 174671,
+   "sha256": "06c27daa785f534d7e3584b1e9583fb5db4bb931c71cad1bc415190faa9284e1"
+  },
+  {
+   "identifier": "10299951bsb",
+   "year": "1856",
+   "title": "Ueber Theorie und Praxis in der Landwirthschaft",
+   "why_this_scan": "BSB 扫本",
+   "source_url": "https://archive.org/download/10299951bsb/10299951bsb_djvu.txt",
+   "bytes": 247718,
+   "sha256": "a3f4c25c4f7a7e0fef2e73fc126b62ac2bdaf593bfd8836a40096720b70ed1a9"
+  },
+  {
+   "identifier": "10997170bsb",
+   "year": "1870",
+   "title": "Ueber Gährung, über Quelle der Muskelkraft und Ernährung",
+   "why_this_scan": "BSB 扫本",
+   "source_url": "https://archive.org/download/10997170bsb/10997170bsb_djvu.txt",
+   "bytes": 270247,
+   "sha256": "5060fc13ff64b2be8b2aa5fe88b05fbb167978f7b8b22c2a06b9f5f7bbde08c4"
+  }
+ ],
+ "★ 口径": "每部作品只取一个扫本；同一部作品的其他扫本**故意不取**，因为它们按 derived_from 并成一处，取多了也只算一处证据。"
+}
