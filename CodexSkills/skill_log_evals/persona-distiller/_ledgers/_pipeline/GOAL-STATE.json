@@ -1,10 +1,10 @@
 {
- "round": 7,
- "updated_at": "2026-08-19T11:0xAEST",
+ "round": 10,
+ "updated_at": "2026-08-19T11:05AEST",
  "time_band": "valley-until-1100",
  "people": 102,
  "current_person": null,
- "stage": "Machiavelli 判分完成: candidate 0.8191 / baseline 0.5353 / delta +0.2838",
+ "stage": "峰时：5条缺失下载验证——3条URL失效(villari×2/TO01040218)+2条版本不符(dli×2)，需谷时重新定位IA链接",
  "next": "1405-valley: flash批量修复(14对重复源判定+5条缺失账本定位) -> quality_check重跑 -> package_target -> register(+1)",
  "p0_queue": [
   "Machiavelli#177:32题",
@@ -27,5 +27,8 @@
  },
  "cost_rule": "90% flash 增量监测从谷时批量轮开始滚动统计；初始化轮 pro 占比高属编排例外",
  "blockers_found": "rubric 字符串格式 vs eval_runner 要求 dict（已定位 whitworth-152 为唯一 dict 样本：{通过条件,失败条件}）",
- "release_gate": "RED: ①ledger-file-missing 5条(TO01040218/dli.ministry.02746等) ②undeclared-duplicate-sources 14对(BRes092070-commedie00mach等)"
+ "release_gate": "RED: ①ledger-file-missing 5条(TO01040218/dli.ministry.02746等) ②undeclared-duplicate-sources 14对(BRes092070-commedie00mach等)",
+ "fix_plan": [
+  "1405谷时: ①flash批量14对重复源判定(derived_from/counting_convention) ②agent-reach重新定位5条IA链接+下载+台账更新(url/checksum) ③重跑quality_check release ④package_target+register(+1)"
+ ]
 }
