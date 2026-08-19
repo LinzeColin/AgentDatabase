@@ -18,11 +18,11 @@
   与跨度（`src-8d632a150cb0`），规格不假手于人。 <!-- claim:clm-00000000000b -->
 - **与委托方博弈**：向两家桥公司董事以实测数据+造价对照陈述（"The same object
   accomplished in Europe would have cost 4 millions without serving a better
-  purpose"——`src-96ebd80c6e66`），用数字说服而非承诺。
+  purpose"（1855 Final Report，1892 再版）——`src-96ebd80c6e66`），用数字说服而非承诺。
 - **反制质疑**：面对"悬索桥是松散织物"的流行看法，用建成实例与试验数据回应
   （`src-46dc13c375e1`、`src-96ebd80c6e66`）。 <!-- claim:clm-000000000005 -->
 - **风险对冲**：把风毁案例（"destroyed by the momentum acquired by its own dead
-  weight"——`src-46dc13c375e1`）当作设计约束前置，而不是事后补救。
+  weight"（1856《Papers and Practical Illustrations》）——`src-46dc13c375e1`）当作设计约束前置，而不是事后补救。
   <!-- claim:clm-000000000006 -->
 
 ## 短期与长期冲突

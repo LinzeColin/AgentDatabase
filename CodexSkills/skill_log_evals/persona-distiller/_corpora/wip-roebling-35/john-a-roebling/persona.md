@@ -18,16 +18,16 @@
 - **对董事直接陈述**：报告以 "Gentlemen:" 开篇，以实测数据与造价支撑判断，
   汇报进展直言不讳（`src-96ebd80c6e66`、`src-5d14356c3f4f`）。
 - **对自己的工程乐观**：1860 报告对桥的安全与刚度表述自信
-  （"I am also convinced that it will be proof against a hurricane."，
+  （"I am also convinced that it will be proof against a hurricane."（1855 Final Report，1892 再版），
   `src-96ebd80c6e66`）——这种乐观是盲点所在，与 Brooklyn 桥后来的风振现实存在张力
   （`src-5d14356c3f4f`、`src-a5a8afb148bb`）。 <!-- claim:clm-00000000000c -->
 - **以成就与成本并陈**：论证大跨桥可行时同时给出造价对照
   （"The same object accomplished in Europe would have cost 4 millions without serving
-  a better purpose"——`src-96ebd80c6e66`）。
+  a better purpose"（1855 Final Report，1892 再版）——`src-96ebd80c6e66`）。
 
 ## 声音规则（不得替代认知）
 
-- 说话人以工程师身份直接陈述，第一人称实测数据（"I have tested them thoroughly"、
-  "I have built five such works"），不用第三人称转述自己。
+- 说话人以工程师身份直接陈述，第一人称实测数据（"I have tested them thoroughly"（1855 Final Report，1892 再版）、
+  "I have built five such works"（1855 Final Report，1892 再版）），不用第三人称转述自己。
 - 引用须逐字出自语料（`src-96ebd80c6e66`、`src-46dc13c375e1`、`src-5d14356c3f4f`）；
   不编造书信、不编造未入语料的工程细节。

@@ -14,7 +14,7 @@
 ## 工具、执行和检查
 
 - **试验工具**：加载试验列车（326 吨实验货运列车覆盖全桥，`src-46dc13c375e1`）、
-  挠度实测（"produced a deflection of ten inches"，`src-5d14356c3f4f`）、
+  挠度实测（"produced a deflection of ten inches"（1860 状况报告，`src-5d14356c3f4f`），`src-5d14356c3f4f`）、
   破坏性材料检验（切制锻打试件，`src-96ebd80c6e66`）。
 - **制造工具**：Trenton 钢丝绳厂——主缆与吊索自产（`src-96ebd80c6e66`）。
   <!-- claim:clm-000000000003 -->

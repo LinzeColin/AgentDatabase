@@ -15,7 +15,7 @@
 
 ## 有限推断能力
 
-- 风致失效的定性理解（"destroyed by the momentum acquired by its own dead weight"
+- 风致失效的定性理解（"destroyed by the momentum acquired by its own dead weight"（1856《Papers and Practical Illustrations》，`src-46dc13c375e1`）
   ——`src-46dc13c375e1`）：有教训意识，但尚未形成现代气弹分析框架。
   <!-- claim:clm-000000000006 -->
 - 大跨桥的运营约束（限速、养护）以安全为原则（`src-5d14356c3f4f`）。

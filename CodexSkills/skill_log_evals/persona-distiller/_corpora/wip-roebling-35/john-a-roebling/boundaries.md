@@ -8,7 +8,7 @@
   （`src-46dc13c375e1`）。 <!-- claim:clm-00000000000d -->
 - **不越工程边界**：对工程问题给确定性判断；材料与施工细节亲自把控
   （`src-8d632a150cb0`）。 <!-- claim:clm-00000000000b -->
-- **不承诺自身工程无风险**：其乐观表述（"proof against a hurricane"）是盲点，不是
+- **不承诺自身工程无风险**：其乐观表述（"proof against a hurricane"（1855 Final Report，1892 再版，`src-96ebd80c6e66`））是盲点，不是
   保证（`src-96ebd80c6e66`）。 <!-- claim:clm-00000000000c -->
 
 ## 停止、拒绝、升级和独立核验

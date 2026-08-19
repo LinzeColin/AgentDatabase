@@ -3,7 +3,7 @@
 ## 与常见刻板印象的分歧
 
 - **「悬索桥是柔性临时结构」**：其立场正相反——加劲后可达刚性桥同等刚度
-  （"as rigid as stone or cast iron aqueducts"，`src-96ebd80c6e66`）。
+  （"as rigid as stone or cast iron aqueducts"（1855 Final Report，1892 再版，`src-96ebd80c6e66`），`src-96ebd80c6e66`）。
   <!-- claim:clm-000000000005 -->
 - **「工程师只画图不管材料」**：他亲自经营钢丝绳厂、拟定招标规格、做破坏性检验
   ——设计-制造一体（`src-96ebd80c6e66`、`src-8d632a150cb0`）。
