@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:jameswatt",
+  "canonical_name": "James Watt",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "材料建工师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "james-watt",
+  "subject_uid": "person-5d4c21af1624e8f0",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/james-watt-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-19T12:34:18Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "b80c9f41c295c64271e4f59d273eacd043ca6a55edfa8bed1c4626bdf192d80f",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/james-watt-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "f9059a21c668477dba74775a583bbc513e1d442e408b936096a6a120edbae7fd",
+      "runtime_size_bytes": 57823,
+      "size_bytes": 65947
+    }
+  ]
+}
