@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:thomasjefferson",
+  "canonical_name": "Thomas Jefferson",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "thomas-jefferson",
+  "subject_uid": "person-d9f53ae1ef89a093",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/thomas-jefferson-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-11T23:58:33Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "781fa7c128b300ba611dac38ec7c1fb9c4b62109f857edcac7c35c97ddfe8091",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/thomas-jefferson-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "421e575bf1d606dc4e67e4e1b24780e000cde6cf259f244193dd037f79c25300",
+      "runtime_size_bytes": 76219,
+      "size_bytes": 84168
+    }
+  ]
+}

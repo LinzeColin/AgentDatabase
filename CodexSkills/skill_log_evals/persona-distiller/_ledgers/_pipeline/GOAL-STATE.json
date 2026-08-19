@@ -2,10 +2,10 @@
  "round": 10,
  "updated_at": "2026-08-19T11:05AEST",
  "time_band": "valley-until-1100",
- "people": 103,
+ "people": 104,
  "current_person": null,
- "stage": "Machiavelli#177 入库（+1）——P0 流程全通",
- "next": "下一位 Brandeis#172：rubric迁移(flash批量)->prepare->双侧答题->判分->门->登记",
+ "stage": "Brandeis 入库（+1）；P0 剩 9 人",
+ "next": "Jefferson#175（rubric 输入已备好）",
  "p0_queue": [
   "Brandeis#172:32",
   "Jefferson#175:32",
@@ -37,6 +37,7 @@
   "1405谷时: ①flash批量14对重复源判定(derived_from/counting_convention) ②agent-reach重新定位5条IA链接+下载+台账更新(url/checksum) ③重跑quality_check release ④package_target+register(+1)"
  ],
  "p0_done": [
-  "Machiavelli#177"
+  "Machiavelli#177",
+  "Brandeis#172"
  ]
 }

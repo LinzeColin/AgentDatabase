@@ -1,0 +1,58 @@
+{"cluster":["manualofparliame00jeff.txt","worksofjefferson09jeffuoft.txt"],"same_work_pairs":[],"distinct_pairs":[["manualofparliame00jeff.txt","worksofjefferson09jeffuoft.txt"]],"basis":"manualofparliame00jeff 是 1871 年 Clark & Maynard 单行的《Manual of Parliamentary Practice》，worksofjefferson09jeffuoft 是 1861 年 H.A. Washington 编《Writings of Thomas Jefferson》第 IX 卷（多伦多大学扫描）——不同作品不同版本不同卷，应为两处独立证据"}
+{"cluster":["cu31924028751760.txt","virginiadynasty00johnrich.txt"],"same_work_pairs":[],"distinct_pairs":[["cu31924028751760.txt","virginiadynasty00johnrich.txt"]],"basis":"同为 Allen Johnson《Jefferson and His Colleagues》(Chronicles of America Series)，但一为 Cornell 扫描的 GRADUATES' EDITION 第15卷、一为 Yale 的 TEXTBOOK EDITION（Richmond），属不同版别，非重复扫描"}
+{"cluster":["worksofjefferson07jeffuoft.txt","writingsbeinghis07jeffuoft.txt","writingslibrary03jeff.txt"],"same_work_pairs":[["worksofjefferson07jeffuoft.txt","writingsbeinghis07jeffuoft.txt"]],"distinct_pairs":[["worksofjefferson07jeffuoft.txt","writingslibrary03jeff.txt"],["writingsbeinghis07jeffuoft.txt","writingslibrary03jeff.txt"]],"basis":"前两者同为 H. A. Washington 编 The Writings of Thomas Jefferson 第 VII 卷（1861 Derby 印 vs 1854 Taylor&Maury 印），同版同卷仅印次与扫描源不同，属重复扫描；第三个为 Lipscomb Memorial 版第 III 卷，版本与卷号均不同，当两处证据。"}
+{
+  "cluster": [
+    "anessaytowardsf00jeffgoog.txt",
+    "jeffersonthomas18lipsrich.txt",
+    "writingsthomas17jeffrich.txt"
+  ],
+  "same_work_pairs": [],
+  "distinct_pairs": [
+    [
+      "anessaytowardsf00jeffgoog.txt",
+      "jeffersonthomas18lipsrich.txt"
+    ],
+    [
+      "anessaytowardsf00jeffgoog.txt",
+      "writingsthomas17jeffrich.txt"
+    ],
+    [
+      "jeffersonthomas18lipsrich.txt",
+      "writingsthomas17jeffrich.txt"
+    ]
+  ],
+  "basis": "三份均非同卷重复扫描：jeffgoog 是 1851 年纽约单行本《An Essay Towards Facilitating Instruction in the Anglo-Saxon...》(独立专著，Google 扫描)，lipsrich(第18卷)与 jeffrich(第17卷)同为 Lipscomb-Bergh 纪念版《Writings of Thomas Jefferson》(Richmond 版)但卷号不同，应各计一份证据。"
+}
+{"cluster":["cu31924092892037.txt","writingsoft04jeffiala.txt"],"same_work_pairs":[],"distinct_pairs":[["cu31924092892037.txt","writingsoft04jeffiala.txt"]],"basis":"同为 Paul Leicester Ford 编 Jefferson 文集，但 cu31924092892037 是 1904 年 Putnam 联邦版(Federal Edition, 限1000套)《The Works of Thomas Jefferson》第 V 卷(Cornell 扫描)，writingsoft04jeffiala 是 1894 年 Putnam 活字版《The Writings of Thomas Jefferson》第 IV 卷(1784-1787, 加州大学扫描)——不同版别不同卷，应为两处独立证据"}
+{"cluster":["cu31924092892011.txt","workofjeffer02jeffuoft.txt","workofjeffer03jeffuoft.txt","writingsofthom02jeff.txt"],"same_work_pairs":[["cu31924092892011.txt","workofjeffer03jeffuoft.txt"]],"distinct_pairs":[["cu31924092892011.txt","workofjeffer02jeffuoft.txt"],["cu31924092892011.txt","writingsofthom02jeff.txt"],["workofjeffer02jeffuoft.txt","workofjeffer03jeffuoft.txt"],["workofjeffer02jeffuoft.txt","writingsofthom02jeff.txt"],["workofjeffer03jeffuoft.txt","writingsofthom02jeff.txt"]],"basis":"cu31924092892011 与 workofjeffer03jeffuoft 同为 Putnam 1904 版 The Works of Thomas Jefferson (Federal Edition, ed. Ford) 第 III 卷的两处扫描(Cornell/Toronto)，应 derived_from；workofjeffer02 为同版第 II 卷(不同卷)，writingsofthom02 为 1893 Letter-press 版 The Writings of Thomas Jefferson 卷二 1776-1781(不同版本)，均为独立证据"}
+{"cluster": ["cu31924071238467.txt", "manualofparliame00jeff.txt", "notesonstateofvir00jeff.txt", "writingslibrarye02jeffuoft.txt", "writingsoft09jeffiala.txt", "writingsofthoma09jeff.txt"], "same_work_pairs": [["writingsoft09jeffiala.txt", "writingsofthoma09jeff.txt"]], "distinct_pairs": [["cu31924071238467.txt", "manualofparliame00jeff.txt"], ["cu31924071238467.txt", "notesonstateofvir00jeff.txt"], ["cu31924071238467.txt", "writingslibrarye02jeffuoft.txt"], ["cu31924071238467.txt", "writingsoft09jeffiala.txt"], ["cu31924071238467.txt", "writingsofthoma09jeff.txt"], ["manualofparliame00jeff.txt", "notesonstateofvir00jeff.txt"], ["manualofparliame00jeff.txt", "writingslibrarye02jeffuoft.txt"], ["manualofparliame00jeff.txt", "writingsoft09jeffiala.txt"], ["manualofparliame00jeff.txt", "writingsofthoma09jeff.txt"], ["notesonstateofvir00jeff.txt", "writingslibrarye02jeffuoft.txt"], ["notesonstateofvir00jeff.txt", "writingsoft09jeffiala.txt"], ["notesonstateofvir00jeff.txt", "writingsofthoma09jeff.txt"], ["writingslibrarye02jeffuoft.txt", "writingsoft09jeffiala.txt"], ["writingslibrarye02jeffuoft.txt", "writingsofthoma09jeff.txt"]], "basis": "writingsoft09jeffiala 与 writingsofthoma09jeff 同为 H.A. Washington 编 1853-57《The Writings of Thomas Jefferson》第 IX 卷的两处重复扫描(John C. Riker / Riker, Thorne & Co.)，应 derived_from；cu31924071238467 为同版第 VIII 卷(1854, Cornell 扫描, 不同卷)、writingslibrarye02jeffuoft 为 1903 Lipscomb-Bergh 纪念版第 II 卷(不同版别)、manualofparliame00jeff 与 notesonstateofvir00jeff 为独立单行著作(议会程序手册、弗吉尼亚纪事)，均与其余文件构成独立证据"}
+{"cluster":["memoircorrespond16781gut.txt","memoirscorrespo00jeffgoog.txt","writingslibrarye05jeffuoft.txt","writingsthomasj00editgoog.txt"],"same_work_pairs":[],"distinct_pairs":[["memoircorrespond16781gut.txt","memoirscorrespo00jeffgoog.txt"],["memoircorrespond16781gut.txt","writingslibrarye05jeffuoft.txt"],["memoircorrespond16781gut.txt","writingsthomasj00editgoog.txt"],["memoirscorrespo00jeffgoog.txt","writingslibrarye05jeffuoft.txt"],["memoirscorrespo00jeffgoog.txt","writingsthomasj00editgoog.txt"],["writingslibrarye05jeffuoft.txt","writingsthomasj00editgoog.txt"]],"basis":"四份互不重复：memoircorrespond16781gut 为 Gutenberg #16781 美国 1829 年 Randolph 编《Memoir, Correspondence, And Miscellanies》(4卷本)；memoirscorrespo00jeffgoog 为 Google 扫描伦敦 1829 年 Colburn & Bentley 版《Memoirs, Correspondence, and Private Papers》第 I 卷(同名作品不同版别印本)；writingslibrarye05jeffuoft 为 Lipscomb & Bergh 编 Thomas Jefferson Memorial Association 1903 年版《The Writings of Thomas Jefferson》第 V 卷(多伦多扫描)；writingsthomasj00editgoog 为 H.A. Washington 编 1853 年 Taylor & Maury 版《The Writings of Thomas Jefferson》第 I 卷(Google 扫描)——四者版别与卷次均不同，各当一处独立证据，无同版同卷重复扫描"}
+"\cluster\:[\10064095bsb.txt\"
+"\10069010bsb.txt\"
+"\memoirscorrespo01jeffgoog.txt\"
+"\worksofjefferson02jeffuoft.txt\"
+"\writingslibrarye07jeffuoft.txt\]"
+"\same_work_pairs\:[]"
+"\distinct_pairs\:[[\10064095bsb.txt\"
+"\10069010bsb.txt\]"
+"[\10064095bsb.txt\"
+"\memoirscorrespo01jeffgoog.txt\]"
+"[\10064095bsb.txt\"
+"\worksofjefferson02jeffuoft.txt\]"
+"[\10064095bsb.txt\"
+"\writingslibrarye07jeffuoft.txt\]"
+"[\10069010bsb.txt\"
+"\memoirscorrespo01jeffgoog.txt\]"
+"[\10069010bsb.txt\"
+"\worksofjefferson02jeffuoft.txt\]"
+"[\10069010bsb.txt\"
+"\writingslibrarye07jeffuoft.txt\]"
+"[\memoirscorrespo01jeffgoog.txt\"
+"\worksofjefferson02jeffuoft.txt\]"
+"[\memoirscorrespo01jeffgoog.txt\"
+"\writingslibrarye07jeffuoft.txt\]"
+"[\worksofjefferson02jeffuoft.txt\"
+"\writingslibrarye07jeffuoft.txt\]]"
+"\basis\:\簇内无同版同卷重复扫描：10064095bsb=1829 Randolph《Memoirs,Correspondence,and Private Papers》Vol I(BSB)；memoirscorrespo01jeffgoog=1829伦敦版同书Vol II(Google，文件名01实为卷II)——同版不同卷按两处证据；10069010bsb=1830第2版《Memoir,Correspondence,and Miscellanies》Vol II(BSB，版次与书名均异)；worksofjefferson02jeffuoft=1853 H.A.Washington《Writings》Vol II(多伦多)；writingslibrarye07jeffuoft=1903 Lipscomb-Bergh Memorial《Writings》Vol VII(多伦多)——五种均非同版同卷，故无derived_from。\"
+{"cluster":["10064095bsb.txt","10069010bsb.txt","memoirscorrespo01jeffgoog.txt","worksofjefferson02jeffuoft.txt","writingslibrarye07jeffuoft.txt"],"same_work_pairs":[],"distinct_pairs":[["10064095bsb.txt","10069010bsb.txt"],["10064095bsb.txt","memoirscorrespo01jeffgoog.txt"],["10064095bsb.txt","worksofjefferson02jeffuoft.txt"],["10064095bsb.txt","writingslibrarye07jeffuoft.txt"],["10069010bsb.txt","memoirscorrespo01jeffgoog.txt"],["10069010bsb.txt","worksofjefferson02jeffuoft.txt"],["10069010bsb.txt","writingslibrarye07jeffuoft.txt"],["memoirscorrespo01jeffgoog.txt","worksofjefferson02jeffuoft.txt"],["memoirscorrespo01jeffgoog.txt","writingslibrarye07jeffuoft.txt"],["worksofjefferson02jeffuoft.txt","writingslibrarye07jeffuoft.txt"]],"basis":"簇内无同版同卷重复扫描：10064095bsb=1829 Randolph《Memoirs,Correspondence,and Private Papers》Vol I(BSB)；memoirscorrespo01jeffgoog=1829伦敦版同书Vol II(Google,文件名01实为卷II)——同版不同卷按两处证据；10069010bsb=1830第2版《Memoir,Correspondence,and Miscellanies》Vol II(BSB,版次书名均异)；worksofjefferson02jeffuoft=1853 H.A.Washington《Writings》Vol II(多伦多)；writingslibrarye07jeffuoft=1903 Lipscomb-Bergh Memorial《Writings》Vol VII(多伦多)——五种均非同版同卷,故无derived_from。"}
