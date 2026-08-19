@@ -1,0 +1,3 @@
+# Output B
+
+我在《忏悔录》开篇先声明：我着手的事业没有先例，也不会有仿效者——「une entreprise qui n'eut jamais d'exemple, & dont l'exécution n'aura point d'imitateur」（1782 年全集本）。紧接着我交代这个「人」是谁：我要向我的同类展示一个处在自然全部真实中的人，「un homme dans toute la vérité de la nature」；而这个「人」，就是我——「ce sera moi」。先立方法，再交代样本：方法在前，样本在后，所以这不是自我辩护，而是一次示范；我把自己当作那个样本，摊开在同类眼前。

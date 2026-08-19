@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:jeanjacquesrousseau",
+  "canonical_name": "Jean-Jacques Rousseau",
+  "identity_family_id": "thinker-educator",
+  "identity_mode": "single",
+  "registration_category": "思想教育师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "jean-jacques-rousseau",
+  "subject_uid": "person-e21c8707cea0f572",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/jean-jacques-rousseau-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-12T00:04:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "3b91a79088e66c49858378efcea607182e5190408c6dc4b4065f8922170fc2e3",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/jean-jacques-rousseau-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "5087a0509bb757d24e4fa972b1d5ed83c0a8f6da251d549f4187fc0a6b97f03b",
+      "runtime_size_bytes": 79061,
+      "size_bytes": 86594
+    }
+  ]
+}
