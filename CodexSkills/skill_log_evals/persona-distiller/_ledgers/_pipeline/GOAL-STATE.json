@@ -1,11 +1,11 @@
 {
- "round": 2,
- "updated_at": "2026-08-19T10:25AEST",
+ "round": 5,
+ "updated_at": "2026-08-19T10:47AEST",
  "time_band": "valley-until-1100",
  "people": 102,
  "current_person": null,
- "stage": "R2-prep-done",
- "next": "1405-valley: ①workflow flash 拆32条rubric(str→dict) ②pro抽审4条 ③备份+merge回cases.jsonl ④eval_runner prepare(seed177) ⑤workflow flash 双侧答题(同模型) ⑥flash 2席判分 ⑦发布门+register",
+ "stage": "Machiavelli 双侧答案齐(32/32) 判分装置就绪",
+ "next": "1405-valley: 判分(2席flash)+pro抽审+发布门+register",
  "p0_queue": [
   "Machiavelli#177:32题",
   "Brandeis#172:32",
