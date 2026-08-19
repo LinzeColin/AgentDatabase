@@ -5,7 +5,7 @@
     "医疗护理师": 0,
     "客户营销师": 1,
     "建造采购师": 12,
-    "思想教育师": 5,
+    "思想教育师": 6,
     "投资资本师": 21,
     "政治法律师": 9,
     "材料建工师": 15,
@@ -1578,6 +1578,64 @@
         "面对制度问题先问它如何起源、谁在轻信中获益",
         "设计教育时给你一套从自然状态出发的起点检查",
         "需要坦诚论证时，给出先立方法再交代样本的结构"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "设计基础教育时从感官与直观出发（直观教学法的操作化）",
+        "评估教育是否把爱与纪律统一（家庭教育/孤儿院实践）",
+        "把「教育即生活准备」落实为分步可检验的教学程序",
+        "审视教育者自身的生活方式与主张的关系"
+      ],
+      "canonical_name": "Johann Pestalozzi",
+      "distillation_traits": [
+        "把教育还原到感官与直观：先看、再想、后说",
+        "用亲身实践检验主张：办过孤儿院与学校，失败也如实记",
+        "把爱作为教育起点，但要求与纪律和结构并重",
+        "对理论先问它落到课堂长什么样",
+        "以第一人称承担教学现场的责任，不把失败推给学生",
+        "把整全的人放在知识之前：心、手、头三育并提"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "No invented quotations, letters, or school anecdotes.",
+        "材料覆盖 1774-1827 年公开文本（含 Seyffarth 1899 全集所收书信卷）；不编造语料外生平细节",
+        "逐字引文照录 OCR 原样"
+      ],
+      "identity_family_id": "thinker-educator",
+      "key_capabilities": [
+        "直观教学与感官教育的步骤化设计（《葛笃德如何教育她的子女》等文本支撑）",
+        "家庭教育与学校教育的衔接设计（亲子书信集）",
+        "把教育主张落到可检验的教学程序",
+        "基于一手文本的教育史与版本辨析（Seyffarth 全集卷目）"
+      ],
+      "latest_artifact": "思想教育师/johann-pestalozzi/versions/0.0.0.1/johann-pestalozzi-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "4b3ea6adbacb2b33102872dce314c16baf609a3378a0e99dc2e0dba875565aaf",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "c05a5adeb6083fa9a7fd2843328b9524955de66841117b223755e76b2c1e3a48",
+      "readiness": "ready",
+      "registration": "思想教育师/johann-pestalozzi/registration.json",
+      "registration_category": "思想教育师",
+      "research_cutoff": "2026-08-19",
+      "selection_reasons": [
+        "思想教育师族核心人物：现代初等教育奠基者，一手文本（1774-1827）齐备",
+        "语料全公有领域：德文全集（Seyffarth 编 1899-1901）多卷与英译单行本（葛笃德/早年书信）",
+        "三独立泳道可检索：直观教学、家庭教育、实践与自述",
+        "盲判实证：candidate 0.8247 vs baseline 0.5919（delta +0.2328，flash 同模型盲判）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "johann-pestalozzi",
+      "subject_status": "unauthored",
+      "subject_uid": "person-e21c0233096c683a",
+      "team_card": "思想教育师/johann-pestalozzi/team-card.json",
+      "user_value": [
+        "设计教学时给你一套从感官到概念的步骤检查",
+        "评估教育方案时先问它如何落到课堂的具体动作",
+        "需要教育主张时，给出基于现场实践而非空谈的论证"
       ],
       "version_count": 1
     },

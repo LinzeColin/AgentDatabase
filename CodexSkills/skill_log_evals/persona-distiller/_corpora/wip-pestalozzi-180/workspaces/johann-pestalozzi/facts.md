@@ -32,6 +32,17 @@
 - **《Figuren zu meinem ABC Buch》（1797）里他用一句拟人对话讲比较**：`Der Pontak ſagte zum Rheinwein; mit dir laße ich mich nicht vergleichen.`（`src-9d4b3afa89e1` @12611）——`Der Pontak ſagte zum Rheinwein`（波尔多酒对莱茵酒说）。 <!-- claim:clm-851dfe0c18a5 -->
   - **反证条件**：若该句属编者补入须撤
 
+## Seyffarth 1899 全集
+
+- **编者是牧师，不是教育家**：第二卷题名页逐字 `Dr.  Ji.  ip.  g>ea?flfart§,`／`$  oft  or  prim.  an  ber  SteBftauenltrdje  ja  ßiegni^.`（OCR 花体；读作 Dr. L. W. Seyffarth, Pastor prim. an der Liebfrauenkirche zu Liegnitz——**列格尼茨圣母教堂首席牧师**）；第三卷题名页同式 `5paftov  prim.  nii  bcv  's.'ict frii u eil tivrtjc  ju  i'icc^itit.`，第一卷题名页作 `Qftor  prim.  an  bcr  Sie6frauenf ire^e  ^n  ßtegnil`（Liebfrauenkirche）。书由 Carl Seyffarth 印行：`Ihutf  mt t>  Derlag  »ou  Carl  Seylforttj.`（＝Druck und Verlag von Carl Seyffarth）。　［出处：`src-58ac21088a08`（archive.org item smtlichewerke02pestuoft，题名页）；并见 `src-64aeef8c354a`（smtlichewerke03pestuoft）、`src-6e7703b6f0f5`（smtlichewerke01pestuoft）题名页］
+  - **反证条件**：若编者另有其人或并非牧师须撤
+- **第二卷收的是他与 Anna Schulthess 订婚期间的往来书信**：目录逐字 `3rtfyaltsi>er3etd7ms  £es  3tr>etten  Bandes.`／`S3rtefe  tum  Sßefialoggi  unö  Unna  ©djultljejj  auä  ber  3cit  iljrer  Verlobung.`（＝Inhaltsverzeichnis des zweiten Bandes：Briefe von Pestalozzi und Anna Schulthess aus der Zeit ihrer Verlobung），三部分共编至第 268 封；编者自述收到原件 `518  einzelne  Stüde`（另有二件后得）并 `4ier  Satjre  obne  Untcrbrectjung  baran  gearbeitet`（四载未辍），引言并言 `Sie  ©riefe  waren  nicfjt  für  bie  Deffentlidjfeit  beftimmt`（这些信本非为公世而写）。　［出处：`src-58ac21088a08` 目录页与 Einleitung］
+  - **反证条件**：若第二卷另收他文须并记
+- **第三卷续收同一组订婚书信（Schluss）**：目录逐字 `^U'ftalu^.V  unb  9(tiua  2d|iittl)cf5.    33rtcfc  aiic-  bcv  ,;>'it  il)vcv`／`5>evla[niti3.     i^SdjUijj.)`／`IV.  O.IHilisicn'.    33iä  juv  53evl)ciratiiiu].    ©titcf  2ö9— 368`（＝Pestalozzi und Anna Schulthess. Briefe aus der Zeit ihrer Verlobung. (Schluss.)——自第 269 封收到完婚），另有未入正编的 Nachtrag 书信（Pestalozzi 致 Anna 与 Anna 致 Pestalozzi 各一组）及夫妇日记页。　［出处：`src-64aeef8c354a`（smtlichewerke03pestuoft，目录页）］
+  - **反证条件**：若第三卷目录解读有误须更正
+- **解读**：1899（第 2、3 卷；第 1 卷题名页印 1903）年 Seyffarth 编《Sämtliche Werke》第 2、3 卷收的是他与 Anna Schulthess 订婚期间往来书信，**绝非教育论著**；编者身份是**牧师**（列格尼茨圣母教堂首席牧师）。
+  - **反证条件**：若年份/卷次著录有异须并记
+
 ---
 
 ★ 每条要点后的 `<!-- claim:… -->` 指向 `evidence/claims.jsonl`；
