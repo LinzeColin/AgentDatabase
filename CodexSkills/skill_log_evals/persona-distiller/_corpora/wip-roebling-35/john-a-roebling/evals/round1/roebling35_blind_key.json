@@ -1,0 +1,162 @@
+{
+ "q-fe1e507e": {
+  "case_id": "case-known-1",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-5bb62088": {
+  "case_id": "case-known-2",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-6cbf67e3": {
+  "case_id": "case-boundary-1",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-3b1c61db": {
+  "case_id": "case-boundary-2",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-a4850eb2": {
+  "case_id": "case-voice-1",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-7d79d48c": {
+  "case_id": "case-voice-2",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-1432f6bb": {
+  "case_id": "case-trajectory-1",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-ed1a0adc": {
+  "case_id": "case-trajectory-2",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-0de8ac78": {
+  "case_id": "case-contrast-1",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-bf4f19c9": {
+  "case_id": "case-contrast-2",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-b613ff6d": {
+  "case_id": "case-fact-preservation-1",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-1b7972bc": {
+  "case_id": "case-fact-preservation-2",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-d08ea2bb": {
+  "case_id": "case-style-decoy-1",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-ecc6e3ec": {
+  "case_id": "case-style-decoy-2",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-222ae750": {
+  "case_id": "case-task-completion-1",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-cdcce2d5": {
+  "case_id": "case-task-completion-2",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-de2c1e67": {
+  "case_id": "case-planning-fidelity-1",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-52406a66": {
+  "case_id": "case-planning-fidelity-2",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-09613b5f": {
+  "case_id": "case-tool-use-1",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-9a6cff58": {
+  "case_id": "case-tool-use-2",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-94ce7814": {
+  "case_id": "case-capability-calibration-1",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-f6885b36": {
+  "case_id": "case-capability-calibration-2",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-b23b085a": {
+  "case_id": "case-refusal-stop-1",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-fb342d71": {
+  "case_id": "case-refusal-stop-2",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-83c6a955": {
+  "case_id": "case-long-horizon-1",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-befb349c": {
+  "case_id": "case-long-horizon-2",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-75610a2f": {
+  "case_id": "case-identity-routing-1",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-76ab9092": {
+  "case_id": "case-identity-routing-2",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-6261400c": {
+  "case_id": "case-anonymous-fidelity-1",
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "q-0ab04fe5": {
+  "case_id": "case-anonymous-fidelity-2",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-6e7c8ac6": {
+  "case_id": "case-token-efficiency-1",
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "q-ae31e69a": {
+  "case_id": "case-token-efficiency-2",
+  "A": "candidate",
+  "B": "baseline"
+ }
+}
