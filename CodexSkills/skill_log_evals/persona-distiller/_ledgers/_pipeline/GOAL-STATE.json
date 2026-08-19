@@ -1,10 +1,10 @@
 {
  "round": 11,
- "updated_at": "2026-08-19T18:15AEST",
+ "updated_at": "2026-08-20T08:30AEST",
  "time_band": "valley-until-1100",
- "people": 115,
+ "people": 116,
  "current_person": null,
- "stage": "P2 流水线：Isambard Kingdom Brunel #34 已入库(115/600)，delta +0.248；Watt #31/Stephenson #33 已入库，Trevithick #32 延后",
+ "stage": "P2 流水线：John A. Roebling #35 已入库(116/600)，delta +0.225；Watt #31/Stephenson #33/Brunel #34 已入库，Trevithick #32 延后",
  "next": "Kant#179(33题, rubric输入已备)",
  "p0_queue": [
   "Brandeis#172:32",

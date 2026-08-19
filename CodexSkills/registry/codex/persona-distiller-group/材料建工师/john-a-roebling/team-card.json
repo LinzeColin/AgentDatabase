@@ -27,7 +27,7 @@
     "试验验证体系（加载试验、破坏性检验、温度效应量化）",
     "材料-成本优化（木+铁+钢丝绳混合结构）"
   ],
-  "latest_product_version": null,
+  "latest_product_version": "0.0.0.1",
   "readiness": "ready",
   "research_cutoff": "2026-08-19",
   "schema_version": "1.0",
