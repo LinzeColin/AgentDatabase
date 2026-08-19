@@ -1,10 +1,10 @@
 {
  "round": 11,
- "updated_at": "2026-08-19T15:30AEST",
+ "updated_at": "2026-08-19T18:00AEST",
  "time_band": "valley-until-1100",
- "people": 113,
+ "people": 114,
  "current_person": null,
- "stage": "P2 流水线：James Watt #31 已入库(113/600)，delta +0.107",
+ "stage": "P2 流水线：George Stephenson #33 已入库(114/600)，delta +0.135",
  "next": "Kant#179(33题, rubric输入已备)",
  "p0_queue": [
   "Brandeis#172:32",
