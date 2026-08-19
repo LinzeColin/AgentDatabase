@@ -2,10 +2,10 @@
  "round": 10,
  "updated_at": "2026-08-19T11:05AEST",
  "time_band": "valley-until-1100",
- "people": 104,
+ "people": 106,
  "current_person": null,
- "stage": "Brandeis 入库（+1）；P0 剩 9 人",
- "next": "Jefferson#175（rubric 输入已备好）",
+ "stage": "4人入库（102->106）；P0 剩 7 人",
+ "next": "Kant#179(33题, rubric输入已备)",
  "p0_queue": [
   "Brandeis#172:32",
   "Jefferson#175:32",
@@ -38,6 +38,8 @@
  ],
  "p0_done": [
   "Machiavelli#177",
-  "Brandeis#172"
+  "Brandeis#172",
+  "Jefferson#175",
+  "Bismarck#176"
  ]
 }
