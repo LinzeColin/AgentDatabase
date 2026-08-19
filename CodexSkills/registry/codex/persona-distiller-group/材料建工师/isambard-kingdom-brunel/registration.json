@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:isambardkingdombrunel",
+  "canonical_name": "Isambard Kingdom Brunel",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "材料建工师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "isambard-kingdom-brunel",
+  "subject_uid": "person-56d5dd480ea16743",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/isambard-kingdom-brunel-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-19T17:18:59Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "ed23f60eb10be3c30a5f83eccdf93b825ffd44db890e2845e09619bd5e4dda92",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/isambard-kingdom-brunel-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "42604d21376efa95d14f6e0f8cfc8d0873f6f78f123203b57b27e5b06cb16e4d",
+      "runtime_size_bytes": 52978,
+      "size_bytes": 59976
+    }
+  ]
+}
