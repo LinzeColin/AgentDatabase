@@ -1,0 +1,269 @@
+{
+  "cases": [
+    {
+      "case_id": "nm-known-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "known"
+    },
+    {
+      "case_id": "nm-boundary-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "boundary"
+    },
+    {
+      "case_id": "nm-voice-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "voice"
+    },
+    {
+      "case_id": "nm-trajectory-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "trajectory"
+    },
+    {
+      "case_id": "nm-contrast-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "contrast"
+    },
+    {
+      "case_id": "nm-fact-preservation-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "fact-preservation"
+    },
+    {
+      "case_id": "nm-style-decoy-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "style-decoy"
+    },
+    {
+      "case_id": "nm-task-completion-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "task-completion"
+    },
+    {
+      "case_id": "nm-planning-fidelity-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "planning-fidelity"
+    },
+    {
+      "case_id": "nm-tool-use-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "tool-use"
+    },
+    {
+      "case_id": "nm-capability-calibration-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "capability-calibration"
+    },
+    {
+      "case_id": "nm-refusal-stop-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "refusal-stop"
+    },
+    {
+      "case_id": "nm-long-horizon-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "long-horizon"
+    },
+    {
+      "case_id": "nm-identity-routing-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "identity-routing"
+    },
+    {
+      "case_id": "nm-anonymous-fidelity-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "anonymous-fidelity"
+    },
+    {
+      "case_id": "nm-token-efficiency-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "token-efficiency"
+    },
+    {
+      "case_id": "nm-known-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "known"
+    },
+    {
+      "case_id": "nm-boundary-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "boundary"
+    },
+    {
+      "case_id": "nm-voice-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "voice"
+    },
+    {
+      "case_id": "nm-trajectory-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "trajectory"
+    },
+    {
+      "case_id": "nm-contrast-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "contrast"
+    },
+    {
+      "case_id": "nm-fact-preservation-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "fact-preservation"
+    },
+    {
+      "case_id": "nm-style-decoy-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "style-decoy"
+    },
+    {
+      "case_id": "nm-task-completion-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "task-completion"
+    },
+    {
+      "case_id": "nm-planning-fidelity-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "planning-fidelity"
+    },
+    {
+      "case_id": "nm-tool-use-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "tool-use"
+    },
+    {
+      "case_id": "nm-capability-calibration-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "capability-calibration"
+    },
+    {
+      "case_id": "nm-refusal-stop-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "refusal-stop"
+    },
+    {
+      "case_id": "nm-long-horizon-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "long-horizon"
+    },
+    {
+      "case_id": "nm-identity-routing-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "identity-routing"
+    },
+    {
+      "case_id": "nm-anonymous-fidelity-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "anonymous-fidelity"
+    },
+    {
+      "case_id": "nm-token-efficiency-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "token-efficiency"
+    }
+  ],
+  "created_at": "2026-08-19T00:23:48Z",
+  "run_id": "run-20260819T002348Z-bfaf54",
+  "schema_version": "1.0",
+  "seed": 177,
+  "systems": [
+    "baseline",
+    "candidate"
+  ],
+  "warning": "Private mapping. Do not provide this file to blind judges."
+}
