@@ -1,0 +1,269 @@
+{
+  "cases": [
+    {
+      "case_id": "wc-known-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "known"
+    },
+    {
+      "case_id": "wc-known-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "known"
+    },
+    {
+      "case_id": "wc-fact-preservation-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "fact-preservation"
+    },
+    {
+      "case_id": "wc-fact-preservation-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "fact-preservation"
+    },
+    {
+      "case_id": "wc-voice-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "voice"
+    },
+    {
+      "case_id": "wc-voice-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "voice"
+    },
+    {
+      "case_id": "wc-boundary-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "boundary"
+    },
+    {
+      "case_id": "wc-boundary-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "boundary"
+    },
+    {
+      "case_id": "wc-capability-calibration-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "capability-calibration"
+    },
+    {
+      "case_id": "wc-capability-calibration-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "capability-calibration"
+    },
+    {
+      "case_id": "wc-refusal-stop-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "refusal-stop"
+    },
+    {
+      "case_id": "wc-refusal-stop-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "refusal-stop"
+    },
+    {
+      "case_id": "wc-contrast-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "contrast"
+    },
+    {
+      "case_id": "wc-contrast-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "contrast"
+    },
+    {
+      "case_id": "wc-identity-routing-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "identity-routing"
+    },
+    {
+      "case_id": "wc-identity-routing-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "identity-routing"
+    },
+    {
+      "case_id": "wc-style-decoy-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "style-decoy"
+    },
+    {
+      "case_id": "wc-style-decoy-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "style-decoy"
+    },
+    {
+      "case_id": "wc-task-completion-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "task-completion"
+    },
+    {
+      "case_id": "wc-task-completion-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "task-completion"
+    },
+    {
+      "case_id": "wc-planning-fidelity-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "planning-fidelity"
+    },
+    {
+      "case_id": "wc-planning-fidelity-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "planning-fidelity"
+    },
+    {
+      "case_id": "wc-long-horizon-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "long-horizon"
+    },
+    {
+      "case_id": "wc-long-horizon-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "long-horizon"
+    },
+    {
+      "case_id": "wc-trajectory-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "trajectory"
+    },
+    {
+      "case_id": "wc-trajectory-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "trajectory"
+    },
+    {
+      "case_id": "wc-tool-use-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "tool-use"
+    },
+    {
+      "case_id": "wc-tool-use-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "tool-use"
+    },
+    {
+      "case_id": "wc-token-efficiency-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "token-efficiency"
+    },
+    {
+      "case_id": "wc-token-efficiency-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "token-efficiency"
+    },
+    {
+      "case_id": "wc-anonymous-fidelity-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "anonymous-fidelity"
+    },
+    {
+      "case_id": "wc-anonymous-fidelity-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "anonymous-fidelity"
+    }
+  ],
+  "created_at": "2026-08-19T11:45:22Z",
+  "run_id": "run-20260819T114521Z-b01ef8",
+  "schema_version": "1.0",
+  "seed": 191,
+  "systems": [
+    "baseline",
+    "candidate"
+  ],
+  "warning": "Private mapping. Do not provide this file to blind judges."
+}

@@ -2,9 +2,9 @@
  "round": 10,
  "updated_at": "2026-08-19T11:05AEST",
  "time_band": "valley-until-1100",
- "people": 109,
+ "people": 112,
  "current_person": null,
- "stage": "7人入库（102->109）；P0 剩 5：Pestalozzi#180/Frobel#181/Lincoln#174/Michelangelo#185/Churchill#191",
+ "stage": "P0 收尾：10 入库 + 2 结案；下一步 P1 队列补齐",
  "next": "Kant#179(33题, rubric输入已备)",
  "p0_queue": [
   "Brandeis#172:32",
@@ -37,12 +37,19 @@
   "1405谷时: ①flash批量14对重复源判定(derived_from/counting_convention) ②agent-reach重新定位5条IA链接+下载+台账更新(url/checksum) ③重跑quality_check release ④package_target+register(+1)"
  ],
  "p0_done": [
-  "Machiavelli#177",
-  "Brandeis#172",
-  "Jefferson#175",
-  "Bismarck#176",
-  "Kant#179",
-  "Dewey#190",
-  "Rousseau#178"
+  "Machiavelli",
+  "Brandeis",
+  "Jefferson",
+  "Bismarck",
+  "Kant",
+  "Dewey",
+  "Rousseau",
+  "Pestalozzi",
+  "Frobel",
+  "Michelangelo"
+ ],
+ "p0_closed": [
+  "Lincoln(装置不成立)",
+  "Churchill(半途弃工)"
  ]
 }

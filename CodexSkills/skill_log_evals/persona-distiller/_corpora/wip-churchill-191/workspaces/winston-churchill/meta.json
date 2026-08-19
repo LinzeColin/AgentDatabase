@@ -1,7 +1,14 @@
 {
- "name": "Winston Churchill",
- "normalized_name": "winstonchurchill",
- "slug": "winston-churchill",
- "aliases": ["Churchill, Winston", "Winston S. Churchill", "Winston Spencer Churchill"],
- "★": "最小 meta.json：让 next_person 认出「这个人已经开过工」。名字取自队列与延后名单里已有的写法，不做推断。"
+  "name": "Winston Churchill",
+  "normalized_name": "winstonchurchill",
+  "slug": "winston-churchill",
+  "aliases": [
+    "Churchill, Winston",
+    "Winston S. Churchill",
+    "Winston Spencer Churchill"
+  ],
+  "★": "最小 meta.json：让 next_person 认出「这个人已经开过工」。名字取自队列与延后名单里已有的写法，不做推断。",
+  "attribution_basis": {
+    "counting_convention": "- in.ernet.dli.2015.206774.txt 与 in.ernet.dli.2015.41900.txt：不同版本/卷（All four are Winston Churchill's 'The World Crisis' series but differe）\n- in.ernet.dli.2015.206774.txt 与 worldcrisis0004unse.txt：不同版本/卷（All four are Winston Churchill's 'The World Crisis' series but differe）\n- in.ernet.dli.2015.206774.txt 与 worldcrisis00chur.txt：不同版本/卷（All four are Winston Churchill's 'The World Crisis' series but differe）\n- in.ernet.dli.2015.41900.txt 与 worldcrisis0004unse.txt：不同版本/卷（All four are Winston Churchill's 'The World Crisis' series but differe）\n- in.ernet.dli.2015.41900.txt 与 worldcrisis00chur.txt：不同版本/卷（All four are Winston Churchill's 'The World Crisis' series but differe）\n- worldcrisis0004unse.txt 与 worldcrisis00chur.txt：不同版本/卷（All four are Winston Churchill's 'The World Crisis' series but differe）"
+  }
 }
