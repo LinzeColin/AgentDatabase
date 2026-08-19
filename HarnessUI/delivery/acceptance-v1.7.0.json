@@ -1,0 +1,8581 @@
+{
+ "pack_version": "1.7.0",
+ "model": "gpt-image-2",
+ "size": "3840x2160",
+ "rounds": 3,
+ "spend_usd": 47.25,
+ "accepted": 611,
+ "total": 612,
+ "units": [
+  {
+   "task": "genshin/aino/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.488,
+    "right_edge": 3.8,
+    "spill": 0.242
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/aino/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.78,
+    "right_edge": 3.7,
+    "spill": 0.27
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/aloy/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.414,
+    "right_edge": 3.0,
+    "spill": 0.226
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/aloy/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.817,
+    "right_edge": 3.2,
+    "spill": 0.183
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/aloy/machine-hunter",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.469,
+    "right_edge": 2.9,
+    "spill": 0.215
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/aloy/machine-hunter",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.807,
+    "right_edge": 4.0,
+    "spill": 0.277
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/amber/100-outrider",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.393,
+    "right_edge": 3.8,
+    "spill": 0.365
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/amber/100-outrider",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.743,
+    "right_edge": 5.2,
+    "spill": 0.39
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/amber/5-star-outrider",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.327,
+    "right_edge": 3.7,
+    "spill": 0.291
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/amber/5-star-outrider",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.772,
+    "right_edge": 3.5,
+    "spill": 0.257
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/amber/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.386,
+    "right_edge": 2.8,
+    "spill": 0.227
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/amber/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.801,
+    "right_edge": 3.7,
+    "spill": 0.274
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/arlecchino/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.411,
+    "right_edge": 3.0,
+    "spill": 0.136
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/arlecchino/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.786,
+    "right_edge": 3.7,
+    "spill": 0.18
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/arlecchino/moonglare",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.361,
+    "right_edge": 5.5,
+    "spill": 0.456
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/arlecchino/moonglare",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.719,
+    "right_edge": 3.4,
+    "spill": 0.186
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/barbara/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.361,
+    "right_edge": 2.9,
+    "spill": 0.221
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/barbara/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.799,
+    "right_edge": 3.2,
+    "spill": 0.273
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/barbara/innocent-longing",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.374,
+    "right_edge": 2.9,
+    "spill": 0.185
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/barbara/innocent-longing",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.828,
+    "right_edge": 4.3,
+    "spill": 0.297
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/barbara/summertime-sparkle",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.474,
+    "right_edge": 4.6,
+    "spill": 0.389
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/barbara/summertime-sparkle",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.815,
+    "right_edge": 4.4,
+    "spill": 0.336
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/beidou/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.353,
+    "right_edge": 3.0,
+    "spill": 0.253
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/beidou/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.718,
+    "right_edge": 5.3,
+    "spill": 0.408
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/beidou/rolling-waves",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.441,
+    "right_edge": 3.8,
+    "spill": 0.221
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/beidou/rolling-waves",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.705,
+    "right_edge": 3.3,
+    "spill": 0.165
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/candace/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.461,
+    "right_edge": 4.1,
+    "spill": 0.414
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/candace/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.766,
+    "right_edge": 4.2,
+    "spill": 0.283
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/candace/desert-and-night",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.395,
+    "right_edge": 4.6,
+    "spill": 0.299
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/candace/desert-and-night",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.751,
+    "right_edge": 6.0,
+    "spill": 0.272
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/charlotte/all-is-overt-through-my-lens",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.343,
+    "right_edge": 4.4,
+    "spill": 0.239
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/charlotte/all-is-overt-through-my-lens",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.772,
+    "right_edge": 3.8,
+    "spill": 0.266
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/charlotte/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.428,
+    "right_edge": 4.1,
+    "spill": 0.311
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/charlotte/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.834,
+    "right_edge": 3.3,
+    "spill": 0.212
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/chasca/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.37,
+    "right_edge": 4.8,
+    "spill": 0.39
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/chasca/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.778,
+    "right_edge": 4.0,
+    "spill": 0.227
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/chasca/tlalocan-s-night-phantom",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.359,
+    "right_edge": 4.5,
+    "spill": 0.335
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/chasca/tlalocan-s-night-phantom",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.73,
+    "right_edge": 4.1,
+    "spill": 0.249
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/chevreuse/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.443,
+    "right_edge": 3.8,
+    "spill": 0.193
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/chevreuse/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.8,
+    "right_edge": 4.6,
+    "spill": 0.274
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/chevreuse/guardian-s-gun",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.376,
+    "right_edge": 5.2,
+    "spill": 0.349
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/chevreuse/guardian-s-gun",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.757,
+    "right_edge": 4.6,
+    "spill": 0.318
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/chiori/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.36,
+    "right_edge": 3.2,
+    "spill": 0.211
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/chiori/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.819,
+    "right_edge": 4.4,
+    "spill": 0.277
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/chiori/plucked-yamabuki-splendor",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.414,
+    "right_edge": 5.6,
+    "spill": 0.44
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/chiori/plucked-yamabuki-splendor",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.747,
+    "right_edge": 5.4,
+    "spill": 0.314
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/citlali/dawnseer",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.451,
+    "right_edge": 4.7,
+    "spill": 0.372
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/citlali/dawnseer",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.803,
+    "right_edge": 3.2,
+    "spill": 0.17
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/citlali/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.444,
+    "right_edge": 4.8,
+    "spill": 0.399
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/citlali/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.758,
+    "right_edge": 5.9,
+    "spill": 0.444
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/clorinde/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.41,
+    "right_edge": 3.7,
+    "spill": 0.235
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/clorinde/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.739,
+    "right_edge": 3.7,
+    "spill": 0.166
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/clorinde/sword-of-honor",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.432,
+    "right_edge": 4.3,
+    "spill": 0.241
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/clorinde/sword-of-honor",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.641,
+    "right_edge": 3.3,
+    "spill": 0.19
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/collei/a-new-leaf",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.404,
+    "right_edge": 4.2,
+    "spill": 0.374
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/collei/a-new-leaf",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.761,
+    "right_edge": 5.0,
+    "spill": 0.394
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/collei/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.41,
+    "right_edge": 4.1,
+    "spill": 0.261
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/collei/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.801,
+    "right_edge": 4.5,
+    "spill": 0.287
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/columbina/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.46,
+    "right_edge": 7.2,
+    "spill": 0.337
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/columbina/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.815,
+    "right_edge": 4.7,
+    "spill": 0.305
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/dahlia/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.47,
+    "right_edge": 4.5,
+    "spill": 0.274
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/dahlia/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.769,
+    "right_edge": 3.3,
+    "spill": 0.21
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/dahlia/pristine-prayers",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.455,
+    "right_edge": 5.4,
+    "spill": 0.491
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/dahlia/pristine-prayers",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.793,
+    "right_edge": 5.5,
+    "spill": 0.431
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/dehya/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.479,
+    "right_edge": 3.6,
+    "spill": 0.188
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/dehya/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.738,
+    "right_edge": 3.5,
+    "spill": 0.179
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/dehya/the-lioness-and-the-blazing-sun",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.439,
+    "right_edge": 6.0,
+    "spill": 0.381
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/dehya/the-lioness-and-the-blazing-sun",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.71,
+    "right_edge": 7.0,
+    "spill": 0.324
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/diona/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.46,
+    "right_edge": 4.4,
+    "spill": 0.459
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/diona/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.837,
+    "right_edge": 3.8,
+    "spill": 0.302
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/diona/sugary-brew",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.493,
+    "right_edge": 4.2,
+    "spill": 0.354
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/diona/sugary-brew",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.743,
+    "right_edge": 4.0,
+    "spill": 0.257
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/dori/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.478,
+    "right_edge": 5.2,
+    "spill": 0.43
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/dori/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.823,
+    "right_edge": 3.8,
+    "spill": 0.267
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/dori/i-love-mora",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.462,
+    "right_edge": 3.3,
+    "spill": 0.238
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/dori/i-love-mora",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.763,
+    "right_edge": 3.8,
+    "spill": 0.247
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/emilie/ambrosial-verdance",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.435,
+    "right_edge": 3.7,
+    "spill": 0.232
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/emilie/ambrosial-verdance",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.781,
+    "right_edge": 4.9,
+    "spill": 0.321
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/emilie/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.441,
+    "right_edge": 4.5,
+    "spill": 0.306
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/emilie/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.792,
+    "right_edge": 3.5,
+    "spill": 0.201
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/escoffier/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.465,
+    "right_edge": 4.4,
+    "spill": 0.327
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/escoffier/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.783,
+    "right_edge": 5.0,
+    "spill": 0.292
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/escoffier/sorbet-honey-pie",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.483,
+    "right_edge": 5.6,
+    "spill": 0.288
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/escoffier/sorbet-honey-pie",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.803,
+    "right_edge": 4.0,
+    "spill": 0.244
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/eula/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.49,
+    "right_edge": 6.2,
+    "spill": 0.455
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/eula/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.796,
+    "right_edge": 3.9,
+    "spill": 0.227
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/eula/wavecrest-waltz",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.478,
+    "right_edge": 6.7,
+    "spill": 0.385
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/eula/wavecrest-waltz",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.79,
+    "right_edge": 5.0,
+    "spill": 0.368
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/fischl/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.463,
+    "right_edge": 3.1,
+    "spill": 0.214
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/fischl/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.781,
+    "right_edge": 4.0,
+    "spill": 0.336
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/fischl/dunkelnacht-sakrament",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.461,
+    "right_edge": 4.5,
+    "spill": 0.363
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/fischl/dunkelnacht-sakrament",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.725,
+    "right_edge": 3.6,
+    "spill": 0.284
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/fischl/ein-immernachtstraum",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.454,
+    "right_edge": 4.4,
+    "spill": 0.293
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/fischl/ein-immernachtstraum",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.803,
+    "right_edge": 3.1,
+    "spill": 0.201
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/furina/coronated-prima-donna",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.382,
+    "right_edge": 4.7,
+    "spill": 0.366
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/furina/coronated-prima-donna",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.711,
+    "right_edge": 4.4,
+    "spill": 0.309
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/furina/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.398,
+    "right_edge": 4.4,
+    "spill": 0.333
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/furina/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.787,
+    "right_edge": 4.0,
+    "spill": 0.291
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ganyu/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.348,
+    "right_edge": 4.4,
+    "spill": 0.366
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ganyu/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.811,
+    "right_edge": 4.9,
+    "spill": 0.408
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ganyu/frostdew-trail",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.371,
+    "right_edge": 4.7,
+    "spill": 0.502
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ganyu/frostdew-trail",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.763,
+    "right_edge": 4.4,
+    "spill": 0.362
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ganyu/twilight-blossom",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.377,
+    "right_edge": 3.6,
+    "spill": 0.234
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ganyu/twilight-blossom",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.723,
+    "right_edge": 3.7,
+    "spill": 0.194
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/hu-tao/cherries-snow-laden",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.406,
+    "right_edge": 4.6,
+    "spill": 0.294
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/hu-tao/cherries-snow-laden",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.767,
+    "right_edge": 4.8,
+    "spill": 0.298
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/hu-tao/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.348,
+    "right_edge": 3.8,
+    "spill": 0.351
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/hu-tao/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.755,
+    "right_edge": 5.7,
+    "spill": 0.445
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/hu-tao/plum-blossom-bouquet",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.402,
+    "right_edge": 4.1,
+    "spill": 0.285
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/hu-tao/plum-blossom-bouquet",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.764,
+    "right_edge": 5.5,
+    "spill": 0.34
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/iansan/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.478,
+    "right_edge": 2.8,
+    "spill": 0.196
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/iansan/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.83,
+    "right_edge": 3.1,
+    "spill": 0.197
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/iansan/warrior-s-bonegarb",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.423,
+    "right_edge": 3.4,
+    "spill": 0.246
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/iansan/warrior-s-bonegarb",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.785,
+    "right_edge": 4.8,
+    "spill": 0.348
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ineffa/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.496,
+    "right_edge": 3.3,
+    "spill": 0.281
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ineffa/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.79,
+    "right_edge": 4.5,
+    "spill": 0.286
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ineffa/mechanical-dreams",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.331,
+    "right_edge": 4.3,
+    "spill": 0.278
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ineffa/mechanical-dreams",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.739,
+    "right_edge": 5.2,
+    "spill": 0.344
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/jahoda/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.455,
+    "right_edge": 5.0,
+    "spill": 0.433
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/jahoda/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.807,
+    "right_edge": 3.7,
+    "spill": 0.274
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/jean/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.451,
+    "right_edge": 2.7,
+    "spill": 0.187
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/jean/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.798,
+    "right_edge": 6.0,
+    "spill": 0.454
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/jean/favonian-devotion",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.458,
+    "right_edge": 4.1,
+    "spill": 0.187
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/jean/favonian-devotion",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.771,
+    "right_edge": 3.7,
+    "spill": 0.272
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/jean/gunnhildr-s-legacy",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.435,
+    "right_edge": 4.4,
+    "spill": 0.277
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/jean/gunnhildr-s-legacy",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.798,
+    "right_edge": 4.6,
+    "spill": 0.369
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/jean/sea-breeze-dandelion",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.368,
+    "right_edge": 3.4,
+    "spill": 0.28
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/jean/sea-breeze-dandelion",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.857,
+    "right_edge": 5.2,
+    "spill": 0.349
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kachina/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.32,
+    "right_edge": 3.6,
+    "spill": 0.173
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kachina/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.821,
+    "right_edge": 3.9,
+    "spill": 0.211
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kachina/tawny-peaks-spired-rock",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.475,
+    "right_edge": 4.1,
+    "spill": 0.208
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kachina/tawny-peaks-spired-rock",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.844,
+    "right_edge": 3.6,
+    "spill": 0.216
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kamisato-ayaka/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.33,
+    "right_edge": 4.2,
+    "spill": 0.246
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kamisato-ayaka/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.825,
+    "right_edge": 3.3,
+    "spill": 0.171
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kamisato-ayaka/flawless-radiance",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.469,
+    "right_edge": 6.7,
+    "spill": 0.524
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kamisato-ayaka/flawless-radiance",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.741,
+    "right_edge": 4.1,
+    "spill": 0.244
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kamisato-ayaka/springbloom-missive",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.435,
+    "right_edge": 3.8,
+    "spill": 0.315
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kamisato-ayaka/springbloom-missive",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.806,
+    "right_edge": 3.3,
+    "spill": 0.36
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/keqing/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.333,
+    "right_edge": 4.4,
+    "spill": 0.403
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/keqing/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.728,
+    "right_edge": 4.6,
+    "spill": 0.311
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/keqing/opulent-splendor",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.365,
+    "right_edge": 5.4,
+    "spill": 0.467
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/keqing/opulent-splendor",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.739,
+    "right_edge": 4.8,
+    "spill": 0.408
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/keqing/piercing-thunderbolt",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.287,
+    "right_edge": 3.5,
+    "spill": 0.238
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/keqing/piercing-thunderbolt",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.738,
+    "right_edge": 4.3,
+    "spill": 0.205
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kirara/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.489,
+    "right_edge": 3.8,
+    "spill": 0.264
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kirara/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.842,
+    "right_edge": 4.8,
+    "spill": 0.428
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kirara/phantom-in-boots",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.431,
+    "right_edge": 5.3,
+    "spill": 0.395
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kirara/phantom-in-boots",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.758,
+    "right_edge": 4.9,
+    "spill": 0.321
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kirara/whirling-bloom",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.356,
+    "right_edge": 3.0,
+    "spill": 0.214
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kirara/whirling-bloom",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.829,
+    "right_edge": 4.9,
+    "spill": 0.348
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/klee/blossoming-starlight",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.446,
+    "right_edge": 3.9,
+    "spill": 0.252
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/klee/blossoming-starlight",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.768,
+    "right_edge": 4.7,
+    "spill": 0.264
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/klee/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.378,
+    "right_edge": 3.0,
+    "spill": 0.271
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/klee/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.823,
+    "right_edge": 3.5,
+    "spill": 0.296
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/klee/shooting-spark",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.472,
+    "right_edge": 4.2,
+    "spill": 0.242
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/klee/shooting-spark",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.78,
+    "right_edge": 3.1,
+    "spill": 0.207
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kujou-sara/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.43,
+    "right_edge": 6.1,
+    "spill": 0.406
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kujou-sara/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.816,
+    "right_edge": 4.3,
+    "spill": 0.31
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kujou-sara/solemn-purity",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.391,
+    "right_edge": 3.5,
+    "spill": 0.27
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kujou-sara/solemn-purity",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.767,
+    "right_edge": 4.1,
+    "spill": 0.243
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kuki-shinobu/arataki-s-demonic-deputy",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.46,
+    "right_edge": 3.2,
+    "spill": 0.255
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kuki-shinobu/arataki-s-demonic-deputy",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.834,
+    "right_edge": 3.2,
+    "spill": 0.256
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kuki-shinobu/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.345,
+    "right_edge": 2.4,
+    "spill": 0.216
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/kuki-shinobu/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.806,
+    "right_edge": 3.8,
+    "spill": 0.254
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lan-yan/argent-chimes",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.422,
+    "right_edge": 3.8,
+    "spill": 0.218
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lan-yan/argent-chimes",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.812,
+    "right_edge": 5.3,
+    "spill": 0.397
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lan-yan/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.48,
+    "right_edge": 5.6,
+    "spill": 0.513
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lan-yan/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.8,
+    "right_edge": 4.4,
+    "spill": 0.301
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lauma/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.421,
+    "right_edge": 5.6,
+    "spill": 0.296
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lauma/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.765,
+    "right_edge": 3.2,
+    "spill": 0.164
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/layla/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.45,
+    "right_edge": 4.1,
+    "spill": 0.321
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/layla/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.749,
+    "right_edge": 6.5,
+    "spill": 0.538
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/layla/dreaming-star",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.382,
+    "right_edge": 4.2,
+    "spill": 0.32
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/layla/dreaming-star",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.777,
+    "right_edge": 4.4,
+    "spill": 0.274
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/linnea/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.398,
+    "right_edge": 3.4,
+    "spill": 0.187
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/linnea/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.846,
+    "right_edge": 3.8,
+    "spill": 0.199
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lisa/a-sobriquet-under-shade",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.469,
+    "right_edge": 3.1,
+    "spill": 0.189
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lisa/a-sobriquet-under-shade",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.829,
+    "right_edge": 3.6,
+    "spill": 0.234
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lisa/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.396,
+    "right_edge": 3.4,
+    "spill": 0.283
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lisa/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.775,
+    "right_edge": 3.5,
+    "spill": 0.239
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lisa/purple-rose",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.421,
+    "right_edge": 5.6,
+    "spill": 0.412
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lisa/purple-rose",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.751,
+    "right_edge": 3.4,
+    "spill": 0.247
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lynette/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.346,
+    "right_edge": 4.6,
+    "spill": 0.306
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lynette/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.806,
+    "right_edge": 3.6,
+    "spill": 0.239
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lynette/phantomeow",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.394,
+    "right_edge": 5.5,
+    "spill": 0.448
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/lynette/phantomeow",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.712,
+    "right_edge": 5.6,
+    "spill": 0.443
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mavuika/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.384,
+    "right_edge": 4.2,
+    "spill": 0.331
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mavuika/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.724,
+    "right_edge": 5.0,
+    "spill": 0.279
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mavuika/undying-sun",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.362,
+    "right_edge": 2.8,
+    "spill": 0.132
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mavuika/undying-sun",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.723,
+    "right_edge": 6.2,
+    "spill": 0.415
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mona/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.443,
+    "right_edge": 3.3,
+    "spill": 0.283
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mona/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.726,
+    "right_edge": 3.9,
+    "spill": 0.296
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mona/flowing-fate",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.418,
+    "right_edge": 6.1,
+    "spill": 0.461
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mona/flowing-fate",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.714,
+    "right_edge": 4.5,
+    "spill": 0.295
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mona/pact-of-stars-and-moon",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.393,
+    "right_edge": 4.7,
+    "spill": 0.442
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mona/pact-of-stars-and-moon",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.8,
+    "right_edge": 4.2,
+    "spill": 0.249
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mualani/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.32,
+    "right_edge": 3.9,
+    "spill": 0.336
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mualani/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.801,
+    "right_edge": 4.1,
+    "spill": 0.289
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mualani/flying-fish-heat-waves-and-moon-scallop",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.435,
+    "right_edge": 4.5,
+    "spill": 0.289
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/mualani/flying-fish-heat-waves-and-moon-scallop",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.82,
+    "right_edge": 3.9,
+    "spill": 0.314
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nahida/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.49,
+    "right_edge": 3.7,
+    "spill": 0.278
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nahida/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.845,
+    "right_edge": 3.9,
+    "spill": 0.32
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nahida/for-all-knowledge-a-verse",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.459,
+    "right_edge": 4.6,
+    "spill": 0.209
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nahida/for-all-knowledge-a-verse",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.791,
+    "right_edge": 5.8,
+    "spill": 0.384
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/navia/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.445,
+    "right_edge": 4.3,
+    "spill": 0.309
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/navia/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.746,
+    "right_edge": 4.3,
+    "spill": 0.217
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/navia/yellow-velvet-salon",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.408,
+    "right_edge": 7.4,
+    "spill": 0.541
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/navia/yellow-velvet-salon",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.805,
+    "right_edge": 3.7,
+    "spill": 0.203
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nefer/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.473,
+    "right_edge": 3.5,
+    "spill": 0.196
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nefer/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.808,
+    "right_edge": 3.8,
+    "spill": 0.205
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nicole/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.383,
+    "right_edge": 3.6,
+    "spill": 0.19
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nicole/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.815,
+    "right_edge": 4.4,
+    "spill": 0.294
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nilou/breeze-of-sabaa",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.452,
+    "right_edge": 5.1,
+    "spill": 0.319
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nilou/breeze-of-sabaa",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.849,
+    "right_edge": 4.3,
+    "spill": 0.278
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nilou/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.487,
+    "right_edge": 5.3,
+    "spill": 0.455
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nilou/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.794,
+    "right_edge": 4.2,
+    "spill": 0.302
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nilou/neither-flower-nor-mist",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.389,
+    "right_edge": 5.2,
+    "spill": 0.307
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/nilou/neither-flower-nor-mist",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.733,
+    "right_edge": 4.7,
+    "spill": 0.296
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ningguang/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.438,
+    "right_edge": 3.1,
+    "spill": 0.164
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ningguang/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.824,
+    "right_edge": 3.8,
+    "spill": 0.187
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ningguang/gold-leaf-and-pearly-jade",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.37,
+    "right_edge": 4.1,
+    "spill": 0.346
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ningguang/gold-leaf-and-pearly-jade",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.821,
+    "right_edge": 4.1,
+    "spill": 0.277
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ningguang/orchid-s-evening-gown",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.457,
+    "right_edge": 3.9,
+    "spill": 0.364
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/ningguang/orchid-s-evening-gown",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.761,
+    "right_edge": 4.3,
+    "spill": 0.376
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/noelle/armored-rose",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.485,
+    "right_edge": 6.6,
+    "spill": 0.449
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/noelle/armored-rose",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.836,
+    "right_edge": 3.8,
+    "spill": 0.247
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/noelle/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.455,
+    "right_edge": 4.0,
+    "spill": 0.334
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/noelle/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.816,
+    "right_edge": 3.2,
+    "spill": 0.26
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/odette/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.388,
+    "right_edge": 4.3,
+    "spill": 0.324
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/odette/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.776,
+    "right_edge": 4.2,
+    "spill": 0.328
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/prune/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.467,
+    "right_edge": 4.0,
+    "spill": 0.256
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/prune/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.791,
+    "right_edge": 4.5,
+    "spill": 0.235
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/qiqi/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.482,
+    "right_edge": 3.7,
+    "spill": 0.333
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/qiqi/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.814,
+    "right_edge": 3.2,
+    "spill": 0.241
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/qiqi/summerchill-dreams",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.442,
+    "right_edge": 6.1,
+    "spill": 0.429
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/qiqi/summerchill-dreams",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.843,
+    "right_edge": 4.0,
+    "spill": 0.322
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/raiden-shogun/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.468,
+    "right_edge": 3.8,
+    "spill": 0.35
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/raiden-shogun/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.758,
+    "right_edge": 5.1,
+    "spill": 0.397
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/raiden-shogun/narukami-s-law",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.384,
+    "right_edge": 4.7,
+    "spill": 0.322
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/raiden-shogun/narukami-s-law",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.697,
+    "right_edge": 5.6,
+    "spill": 0.517
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/rosaria/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.36,
+    "right_edge": 3.5,
+    "spill": 0.366
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/rosaria/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.749,
+    "right_edge": 3.3,
+    "spill": 0.259
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/rosaria/executor-s-thorns",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.417,
+    "right_edge": 6.9,
+    "spill": 0.539
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/rosaria/executor-s-thorns",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.746,
+    "right_edge": 5.0,
+    "spill": 0.436
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/rosaria/to-the-church-s-free-spirit",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.481,
+    "right_edge": 3.3,
+    "spill": 0.231
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/rosaria/to-the-church-s-free-spirit",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.721,
+    "right_edge": 5.1,
+    "spill": 0.436
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sandrone/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.365,
+    "right_edge": 4.3,
+    "spill": 0.392
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sandrone/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.812,
+    "right_edge": 4.4,
+    "spill": 0.265
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sangonomiya-kokomi/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.388,
+    "right_edge": 3.1,
+    "spill": 0.187
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sangonomiya-kokomi/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.834,
+    "right_edge": 3.6,
+    "spill": 0.225
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sangonomiya-kokomi/sparkling-coralbone",
+   "side": "dark",
+   "status": "blocked",
+   "attempts": 3,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.397,
+    "right_edge": 7.2,
+    "spill": 0.57
+   },
+   "fails": [
+    "C2 主体溢出比 0.57 > 0.55（下次：把人物再往左压，飘发收进左 35%）"
+   ]
+  },
+  {
+   "task": "genshin/sangonomiya-kokomi/sparkling-coralbone",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.836,
+    "right_edge": 5.1,
+    "spill": 0.347
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sayu/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.494,
+    "right_edge": 2.8,
+    "spill": 0.278
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sayu/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.818,
+    "right_edge": 3.5,
+    "spill": 0.295
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sayu/mini-mujina",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.448,
+    "right_edge": 3.5,
+    "spill": 0.215
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sayu/mini-mujina",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.776,
+    "right_edge": 3.9,
+    "spill": 0.318
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/shenhe/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.369,
+    "right_edge": 2.3,
+    "spill": 0.152
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/shenhe/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.783,
+    "right_edge": 4.3,
+    "spill": 0.289
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/shenhe/frostflower-dew",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.418,
+    "right_edge": 5.5,
+    "spill": 0.464
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/shenhe/frostflower-dew",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.757,
+    "right_edge": 3.8,
+    "spill": 0.288
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/shenhe/the-world-s-shackles",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.432,
+    "right_edge": 5.7,
+    "spill": 0.463
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/shenhe/the-world-s-shackles",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.736,
+    "right_edge": 4.4,
+    "spill": 0.289
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sigewinne/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.379,
+    "right_edge": 3.9,
+    "spill": 0.249
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sigewinne/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.834,
+    "right_edge": 3.3,
+    "spill": 0.223
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sigewinne/sweetness-of-the-sea",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.396,
+    "right_edge": 5.2,
+    "spill": 0.252
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sigewinne/sweetness-of-the-sea",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.814,
+    "right_edge": 4.3,
+    "spill": 0.294
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/skirk/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.463,
+    "right_edge": 4.2,
+    "spill": 0.4
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/skirk/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.803,
+    "right_edge": 5.0,
+    "spill": 0.339
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sucrose/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.457,
+    "right_edge": 3.2,
+    "spill": 0.205
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sucrose/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.803,
+    "right_edge": 3.4,
+    "spill": 0.236
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sucrose/germinating-wind",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.32,
+    "right_edge": 6.6,
+    "spill": 0.323
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/sucrose/germinating-wind",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.77,
+    "right_edge": 3.6,
+    "spill": 0.28
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/varesa/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.37,
+    "right_edge": 4.8,
+    "spill": 0.345
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/varesa/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.842,
+    "right_edge": 4.4,
+    "spill": 0.277
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/varesa/sugar-rush",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.488,
+    "right_edge": 4.4,
+    "spill": 0.325
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/varesa/sugar-rush",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.826,
+    "right_edge": 4.3,
+    "spill": 0.276
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xiangling/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.46,
+    "right_edge": 3.3,
+    "spill": 0.234
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xiangling/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.786,
+    "right_edge": 3.9,
+    "spill": 0.262
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xiangling/new-year-s-cheer",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.391,
+    "right_edge": 5.1,
+    "spill": 0.401
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xiangling/new-year-s-cheer",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.835,
+    "right_edge": 3.2,
+    "spill": 0.22
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xiangling/red-pepper-and-turmeric",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.419,
+    "right_edge": 3.7,
+    "spill": 0.234
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xiangling/red-pepper-and-turmeric",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.752,
+    "right_edge": 4.5,
+    "spill": 0.356
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xianyun/a-guest-s-august-omen",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.43,
+    "right_edge": 3.8,
+    "spill": 0.209
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xianyun/a-guest-s-august-omen",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.759,
+    "right_edge": 4.3,
+    "spill": 0.196
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xianyun/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.449,
+    "right_edge": 3.5,
+    "spill": 0.188
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xianyun/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.801,
+    "right_edge": 3.9,
+    "spill": 0.22
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xilonen/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.448,
+    "right_edge": 3.6,
+    "spill": 0.259
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xilonen/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.745,
+    "right_edge": 4.8,
+    "spill": 0.32
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xilonen/gold-draped-gorge",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.369,
+    "right_edge": 6.3,
+    "spill": 0.403
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xilonen/gold-draped-gorge",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.784,
+    "right_edge": 4.4,
+    "spill": 0.317
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xinyan/ardent-soul",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.393,
+    "right_edge": 3.8,
+    "spill": 0.275
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xinyan/ardent-soul",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.762,
+    "right_edge": 3.3,
+    "spill": 0.233
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xinyan/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.401,
+    "right_edge": 4.5,
+    "spill": 0.379
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/xinyan/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.783,
+    "right_edge": 3.2,
+    "spill": 0.233
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yae-miko/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.289,
+    "right_edge": 4.9,
+    "spill": 0.383
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yae-miko/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.798,
+    "right_edge": 5.2,
+    "spill": 0.39
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yae-miko/miko-s-instruction",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.419,
+    "right_edge": 6.2,
+    "spill": 0.523
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yae-miko/miko-s-instruction",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.695,
+    "right_edge": 6.0,
+    "spill": 0.432
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yanfei/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.417,
+    "right_edge": 2.7,
+    "spill": 0.205
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yanfei/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.807,
+    "right_edge": 3.7,
+    "spill": 0.283
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yanfei/golden-rule",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.492,
+    "right_edge": 4.1,
+    "spill": 0.343
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yanfei/golden-rule",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.801,
+    "right_edge": 4.5,
+    "spill": 0.335
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yaoyao/cherubic-osmanthus",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.47,
+    "right_edge": 3.8,
+    "spill": 0.258
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yaoyao/cherubic-osmanthus",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.803,
+    "right_edge": 3.7,
+    "spill": 0.228
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yaoyao/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.411,
+    "right_edge": 4.9,
+    "spill": 0.239
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yaoyao/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.801,
+    "right_edge": 3.5,
+    "spill": 0.269
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yelan/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.463,
+    "right_edge": 3.5,
+    "spill": 0.291
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yelan/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.798,
+    "right_edge": 4.4,
+    "spill": 0.331
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yelan/the-waning-point",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.371,
+    "right_edge": 5.4,
+    "spill": 0.41
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yelan/the-waning-point",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.687,
+    "right_edge": 4.4,
+    "spill": 0.268
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yoimiya/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.411,
+    "right_edge": 3.7,
+    "spill": 0.428
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yoimiya/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.791,
+    "right_edge": 3.3,
+    "spill": 0.246
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yoimiya/goldfish-firecracker",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.468,
+    "right_edge": 5.1,
+    "spill": 0.423
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yoimiya/goldfish-firecracker",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.747,
+    "right_edge": 5.5,
+    "spill": 0.388
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yumemizuki-mizuki/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.481,
+    "right_edge": 6.1,
+    "spill": 0.475
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yumemizuki-mizuki/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.784,
+    "right_edge": 5.9,
+    "spill": 0.372
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yun-jin/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.421,
+    "right_edge": 4.2,
+    "spill": 0.248
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yun-jin/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.726,
+    "right_edge": 3.6,
+    "spill": 0.22
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yun-jin/mistcloud-stage",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.363,
+    "right_edge": 5.7,
+    "spill": 0.468
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/yun-jin/mistcloud-stage",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.826,
+    "right_edge": 3.6,
+    "spill": 0.216
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/zibai/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.41,
+    "right_edge": 5.4,
+    "spill": 0.435
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/zibai/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.847,
+    "right_edge": 5.3,
+    "spill": 0.369
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/acheron/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.359,
+    "right_edge": 4.1,
+    "spill": 0.263
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/acheron/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.775,
+    "right_edge": 3.8,
+    "spill": 0.335
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/aglaea/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.433,
+    "right_edge": 3.4,
+    "spill": 0.248
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/aglaea/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.853,
+    "right_edge": 3.3,
+    "spill": 0.195
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/asta/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.359,
+    "right_edge": 5.7,
+    "spill": 0.51
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/asta/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.8,
+    "right_edge": 4.0,
+    "spill": 0.274
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/bailu/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.419,
+    "right_edge": 4.2,
+    "spill": 0.379
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/bailu/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.795,
+    "right_edge": 3.6,
+    "spill": 0.247
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/black-swan/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.386,
+    "right_edge": 4.0,
+    "spill": 0.406
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/black-swan/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.709,
+    "right_edge": 4.1,
+    "spill": 0.307
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/bronya/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.472,
+    "right_edge": 6.5,
+    "spill": 0.532
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/bronya/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.75,
+    "right_edge": 5.7,
+    "spill": 0.4
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/castorice/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.423,
+    "right_edge": 4.9,
+    "spill": 0.306
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/castorice/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.811,
+    "right_edge": 4.1,
+    "spill": 0.255
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/castorice/gossamer-flutter",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.416,
+    "right_edge": 3.9,
+    "spill": 0.23
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/castorice/gossamer-flutter",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.834,
+    "right_edge": 4.3,
+    "spill": 0.432
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/cerydra/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.416,
+    "right_edge": 3.6,
+    "spill": 0.276
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/cerydra/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.736,
+    "right_edge": 3.9,
+    "spill": 0.279
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/cipher/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.352,
+    "right_edge": 2.9,
+    "spill": 0.201
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/cipher/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.802,
+    "right_edge": 3.6,
+    "spill": 0.281
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/clara/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.404,
+    "right_edge": 3.1,
+    "spill": 0.285
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/clara/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.852,
+    "right_edge": 3.5,
+    "spill": 0.313
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/cyrene/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.448,
+    "right_edge": 5.3,
+    "spill": 0.545
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/cyrene/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.808,
+    "right_edge": 4.4,
+    "spill": 0.404
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/cyrene/the-promise-s",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.476,
+    "right_edge": 4.8,
+    "spill": 0.285
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/cyrene/the-promise-s",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.87,
+    "right_edge": 3.4,
+    "spill": 0.417
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/evanescia/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.436,
+    "right_edge": 3.4,
+    "spill": 0.308
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/evanescia/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.807,
+    "right_edge": 4.8,
+    "spill": 0.438
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/evernight/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.438,
+    "right_edge": 4.0,
+    "spill": 0.273
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/evernight/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.854,
+    "right_edge": 3.9,
+    "spill": 0.254
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/feixiao/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.395,
+    "right_edge": 2.9,
+    "spill": 0.207
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/feixiao/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.78,
+    "right_edge": 3.4,
+    "spill": 0.152
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/firefly/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.425,
+    "right_edge": 3.3,
+    "spill": 0.219
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/firefly/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.83,
+    "right_edge": 3.3,
+    "spill": 0.195
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/firefly/spring-missive",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.456,
+    "right_edge": 4.9,
+    "spill": 0.335
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/firefly/spring-missive",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.835,
+    "right_edge": 4.1,
+    "spill": 0.257
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/fu-xuan/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.459,
+    "right_edge": 4.7,
+    "spill": 0.369
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/fu-xuan/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.715,
+    "right_edge": 4.0,
+    "spill": 0.284
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/fugue/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.348,
+    "right_edge": 5.3,
+    "spill": 0.317
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/fugue/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.797,
+    "right_edge": 3.4,
+    "spill": 0.23
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/guinaifen/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.348,
+    "right_edge": 4.7,
+    "spill": 0.4
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/guinaifen/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.745,
+    "right_edge": 5.7,
+    "spill": 0.531
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/hanya/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.37,
+    "right_edge": 2.9,
+    "spill": 0.25
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/hanya/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.707,
+    "right_edge": 4.5,
+    "spill": 0.401
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/herta/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.399,
+    "right_edge": 4.8,
+    "spill": 0.462
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/herta/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.771,
+    "right_edge": 4.3,
+    "spill": 0.332
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/himeko/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.347,
+    "right_edge": 3.5,
+    "spill": 0.254
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/himeko/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.796,
+    "right_edge": 3.8,
+    "spill": 0.26
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/hook/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.293,
+    "right_edge": 4.0,
+    "spill": 0.353
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/hook/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.767,
+    "right_edge": 4.4,
+    "spill": 0.312
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/huohuo/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.333,
+    "right_edge": 2.8,
+    "spill": 0.231
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/huohuo/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.766,
+    "right_edge": 3.9,
+    "spill": 0.411
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/hyacine/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.499,
+    "right_edge": 4.4,
+    "spill": 0.283
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/hyacine/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.838,
+    "right_edge": 4.4,
+    "spill": 0.263
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/hysilens/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.444,
+    "right_edge": 4.2,
+    "spill": 0.352
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/hysilens/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.752,
+    "right_edge": 4.2,
+    "spill": 0.327
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/jade/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.346,
+    "right_edge": 4.2,
+    "spill": 0.375
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/jade/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.755,
+    "right_edge": 4.0,
+    "spill": 0.249
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/jingliu/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.36,
+    "right_edge": 5.4,
+    "spill": 0.423
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/jingliu/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.73,
+    "right_edge": 4.2,
+    "spill": 0.303
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/kafka/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.349,
+    "right_edge": 2.3,
+    "spill": 0.223
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/kafka/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.792,
+    "right_edge": 3.2,
+    "spill": 0.239
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/lingsha/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.403,
+    "right_edge": 5.3,
+    "spill": 0.504
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/lingsha/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.79,
+    "right_edge": 3.8,
+    "spill": 0.234
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/lynx/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.377,
+    "right_edge": 3.1,
+    "spill": 0.285
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/lynx/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.765,
+    "right_edge": 2.7,
+    "spill": 0.197
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/march-7th/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.477,
+    "right_edge": 4.1,
+    "spill": 0.32
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/march-7th/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.804,
+    "right_edge": 6.0,
+    "spill": 0.522
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/natasha/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.411,
+    "right_edge": 3.5,
+    "spill": 0.271
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/natasha/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.779,
+    "right_edge": 2.8,
+    "spill": 0.194
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/pela/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.358,
+    "right_edge": 4.8,
+    "spill": 0.45
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/pela/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.73,
+    "right_edge": 4.2,
+    "spill": 0.32
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/qingque/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.415,
+    "right_edge": 4.7,
+    "spill": 0.406
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/qingque/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.768,
+    "right_edge": 5.1,
+    "spill": 0.333
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/rappa/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.349,
+    "right_edge": 4.3,
+    "spill": 0.288
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/rappa/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.775,
+    "right_edge": 3.1,
+    "spill": 0.162
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/rin-tohsaka/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.421,
+    "right_edge": 2.9,
+    "spill": 0.223
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/rin-tohsaka/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.803,
+    "right_edge": 4.0,
+    "spill": 0.266
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/robin/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.33,
+    "right_edge": 6.4,
+    "spill": 0.496
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/robin/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.784,
+    "right_edge": 3.5,
+    "spill": 0.36
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/ruan-mei/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.3,
+    "right_edge": 3.1,
+    "spill": 0.224
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/ruan-mei/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.783,
+    "right_edge": 4.8,
+    "spill": 0.394
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/ruan-mei/plumblossom-letter",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.416,
+    "right_edge": 3.5,
+    "spill": 0.258
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/ruan-mei/plumblossom-letter",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.823,
+    "right_edge": 3.1,
+    "spill": 0.199
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/saber/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.379,
+    "right_edge": 5.3,
+    "spill": 0.448
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/saber/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.804,
+    "right_edge": 3.6,
+    "spill": 0.274
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/seele/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.372,
+    "right_edge": 4.9,
+    "spill": 0.371
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/seele/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.779,
+    "right_edge": 4.0,
+    "spill": 0.292
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/serval/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.473,
+    "right_edge": 3.2,
+    "spill": 0.23
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/serval/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.746,
+    "right_edge": 3.6,
+    "spill": 0.213
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/silver-wolf/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.468,
+    "right_edge": 3.6,
+    "spill": 0.259
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/silver-wolf/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.731,
+    "right_edge": 3.0,
+    "spill": 0.162
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/sparkle/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.334,
+    "right_edge": 3.5,
+    "spill": 0.264
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/sparkle/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.798,
+    "right_edge": 4.7,
+    "spill": 0.339
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/sparxie/candy-coated-waves",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.433,
+    "right_edge": 4.3,
+    "spill": 0.247
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/sparxie/candy-coated-waves",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.823,
+    "right_edge": 4.2,
+    "spill": 0.241
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/sparxie/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.372,
+    "right_edge": 3.7,
+    "spill": 0.27
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/sparxie/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.824,
+    "right_edge": 4.8,
+    "spill": 0.387
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/sushang/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.451,
+    "right_edge": 4.3,
+    "spill": 0.274
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/sushang/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.803,
+    "right_edge": 3.2,
+    "spill": 0.218
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/the-dahlia/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.43,
+    "right_edge": 3.6,
+    "spill": 0.314
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/the-dahlia/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.817,
+    "right_edge": 4.4,
+    "spill": 0.418
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/the-herta/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.404,
+    "right_edge": 3.3,
+    "spill": 0.21
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/the-herta/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.806,
+    "right_edge": 3.9,
+    "spill": 0.222
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/tingyun/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.367,
+    "right_edge": 4.1,
+    "spill": 0.445
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/tingyun/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.709,
+    "right_edge": 4.5,
+    "spill": 0.334
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/topaz/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.403,
+    "right_edge": 3.9,
+    "spill": 0.268
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/topaz/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.751,
+    "right_edge": 4.3,
+    "spill": 0.298
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/tribbie/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.448,
+    "right_edge": 3.5,
+    "spill": 0.284
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/tribbie/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.789,
+    "right_edge": 4.3,
+    "spill": 0.248
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/xueyi/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.39,
+    "right_edge": 2.8,
+    "spill": 0.168
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/xueyi/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.769,
+    "right_edge": 3.6,
+    "spill": 0.242
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/yao-guang/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.409,
+    "right_edge": 3.9,
+    "spill": 0.289
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/yao-guang/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.839,
+    "right_edge": 5.5,
+    "spill": 0.4
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/yukong/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.466,
+    "right_edge": 3.5,
+    "spill": 0.214
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/yukong/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.787,
+    "right_edge": 5.0,
+    "spill": 0.333
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/yunli/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.374,
+    "right_edge": 3.8,
+    "spill": 0.372
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/yunli/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.788,
+    "right_edge": 3.7,
+    "spill": 0.251
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/alice/celestian-etiquette",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.445,
+    "right_edge": 5.3,
+    "spill": 0.353
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/alice/celestian-etiquette",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.778,
+    "right_edge": 4.5,
+    "spill": 0.308
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/alice/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.367,
+    "right_edge": 3.2,
+    "spill": 0.342
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/alice/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.78,
+    "right_edge": 4.0,
+    "spill": 0.307
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/alice/sea-of-thyme",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.303,
+    "right_edge": 4.3,
+    "spill": 0.436
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/alice/sea-of-thyme",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.775,
+    "right_edge": 3.1,
+    "spill": 0.289
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/anby/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.335,
+    "right_edge": 2.6,
+    "spill": 0.181
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/anby/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.795,
+    "right_edge": 3.1,
+    "spill": 0.184
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/anby/street-streak",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.317,
+    "right_edge": 3.5,
+    "spill": 0.219
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/anby/street-streak",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.761,
+    "right_edge": 3.8,
+    "spill": 0.245
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/aria/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.424,
+    "right_edge": 3.6,
+    "spill": 0.272
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/aria/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.84,
+    "right_edge": 3.9,
+    "spill": 0.26
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/aria/discordant-note",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.384,
+    "right_edge": 6.3,
+    "spill": 0.427
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/aria/discordant-note",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.782,
+    "right_edge": 4.5,
+    "spill": 0.306
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/aria/energetic-idol",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.435,
+    "right_edge": 3.6,
+    "spill": 0.239
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/aria/energetic-idol",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.809,
+    "right_edge": 2.8,
+    "spill": 0.163
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/astra/chandelier",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.338,
+    "right_edge": 3.5,
+    "spill": 0.238
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/astra/chandelier",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.755,
+    "right_edge": 4.0,
+    "spill": 0.281
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/astra/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.453,
+    "right_edge": 4.1,
+    "spill": 0.24
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/astra/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.728,
+    "right_edge": 4.3,
+    "spill": 0.261
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/astra/scarlet-rock",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.309,
+    "right_edge": 4.9,
+    "spill": 0.257
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/astra/scarlet-rock",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.732,
+    "right_edge": 4.2,
+    "spill": 0.288
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/burnice/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.394,
+    "right_edge": 2.5,
+    "spill": 0.209
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/burnice/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.76,
+    "right_edge": 3.4,
+    "spill": 0.285
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/caesar/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.344,
+    "right_edge": 5.3,
+    "spill": 0.458
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/caesar/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.716,
+    "right_edge": 6.7,
+    "spill": 0.387
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/caesar/inferno-joyride",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.355,
+    "right_edge": 4.1,
+    "spill": 0.291
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/caesar/inferno-joyride",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.781,
+    "right_edge": 3.7,
+    "spill": 0.311
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/cissia/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.358,
+    "right_edge": 2.4,
+    "spill": 0.184
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/cissia/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.805,
+    "right_edge": 4.6,
+    "spill": 0.322
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/cissia/snake-mouse-game",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.409,
+    "right_edge": 5.7,
+    "spill": 0.3
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/cissia/snake-mouse-game",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.816,
+    "right_edge": 3.4,
+    "spill": 0.233
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/corin/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.388,
+    "right_edge": 6.2,
+    "spill": 0.262
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/corin/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.732,
+    "right_edge": 4.2,
+    "spill": 0.21
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/corin/matcha-profiterole",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.394,
+    "right_edge": 2.8,
+    "spill": 0.166
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/corin/matcha-profiterole",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.808,
+    "right_edge": 3.4,
+    "spill": 0.205
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/dialyn/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.39,
+    "right_edge": 5.5,
+    "spill": 0.495
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/dialyn/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.834,
+    "right_edge": 5.1,
+    "spill": 0.415
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/dialyn/ringing-judgment",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.389,
+    "right_edge": 4.2,
+    "spill": 0.372
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/dialyn/ringing-judgment",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.769,
+    "right_edge": 5.4,
+    "spill": 0.455
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ellen/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.364,
+    "right_edge": 2.2,
+    "spill": 0.157
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ellen/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.747,
+    "right_edge": 4.7,
+    "spill": 0.358
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ellen/ellen-scissorhands",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.302,
+    "right_edge": 3.7,
+    "spill": 0.335
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ellen/ellen-scissorhands",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.738,
+    "right_edge": 6.3,
+    "spill": 0.527
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ellen/on-campus",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.316,
+    "right_edge": 3.7,
+    "spill": 0.442
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ellen/on-campus",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.789,
+    "right_edge": 4.6,
+    "spill": 0.384
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/evelyn/a-moth-to-light",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.307,
+    "right_edge": 3.4,
+    "spill": 0.322
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/evelyn/a-moth-to-light",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.761,
+    "right_edge": 3.9,
+    "spill": 0.36
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/evelyn/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.371,
+    "right_edge": 3.5,
+    "spill": 0.322
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/evelyn/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.769,
+    "right_edge": 3.4,
+    "spill": 0.264
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/grace/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.372,
+    "right_edge": 3.0,
+    "spill": 0.201
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/grace/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.725,
+    "right_edge": 3.2,
+    "spill": 0.22
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/grace/the-iron-witch-outfit",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.374,
+    "right_edge": 2.8,
+    "spill": 0.234
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/grace/the-iron-witch-outfit",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.738,
+    "right_edge": 3.3,
+    "spill": 0.222
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/jane/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.488,
+    "right_edge": 3.4,
+    "spill": 0.2
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/jane/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.727,
+    "right_edge": 3.8,
+    "spill": 0.202
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/jane/hidden-nightfade",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.362,
+    "right_edge": 2.6,
+    "spill": 0.225
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/jane/hidden-nightfade",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.748,
+    "right_edge": 4.4,
+    "spill": 0.359
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/jane/nocturne-of-light",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.345,
+    "right_edge": 3.3,
+    "spill": 0.21
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/jane/nocturne-of-light",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.81,
+    "right_edge": 3.6,
+    "spill": 0.264
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ju-fufu/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.365,
+    "right_edge": 3.8,
+    "spill": 0.308
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ju-fufu/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.801,
+    "right_edge": 4.4,
+    "spill": 0.329
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ju-fufu/summit-s-cute-tiger",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.374,
+    "right_edge": 4.7,
+    "spill": 0.332
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ju-fufu/summit-s-cute-tiger",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.783,
+    "right_edge": 4.7,
+    "spill": 0.308
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/koleda/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.393,
+    "right_edge": 5.3,
+    "spill": 0.53
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/koleda/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.695,
+    "right_edge": 5.1,
+    "spill": 0.349
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/koleda/heart-hammer",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.37,
+    "right_edge": 5.3,
+    "spill": 0.437
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/koleda/heart-hammer",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.675,
+    "right_edge": 4.8,
+    "spill": 0.365
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/lucia/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.375,
+    "right_edge": 4.2,
+    "spill": 0.321
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/lucia/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.766,
+    "right_edge": 3.3,
+    "spill": 0.252
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/lucia/whispering-dreams",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.321,
+    "right_edge": 3.6,
+    "spill": 0.248
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/lucia/whispering-dreams",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.783,
+    "right_edge": 4.6,
+    "spill": 0.323
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/lucy/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.348,
+    "right_edge": 4.4,
+    "spill": 0.281
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/lucy/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.81,
+    "right_edge": 4.3,
+    "spill": 0.356
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/miyabi/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.347,
+    "right_edge": 4.1,
+    "spill": 0.5
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/miyabi/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.737,
+    "right_edge": 4.2,
+    "spill": 0.293
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nangong-yu/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.368,
+    "right_edge": 3.6,
+    "spill": 0.274
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nangong-yu/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.8,
+    "right_edge": 4.5,
+    "spill": 0.315
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nangong-yu/dreamy-dancer",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.39,
+    "right_edge": 4.3,
+    "spill": 0.235
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nangong-yu/dreamy-dancer",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.766,
+    "right_edge": 3.9,
+    "spill": 0.297
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nangong-yu/rhapsody-s-muse",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.391,
+    "right_edge": 5.0,
+    "spill": 0.415
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nangong-yu/rhapsody-s-muse",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.71,
+    "right_edge": 3.9,
+    "spill": 0.249
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nekomata/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.325,
+    "right_edge": 3.4,
+    "spill": 0.322
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nekomata/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.838,
+    "right_edge": 3.3,
+    "spill": 0.186
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nicole/cunning-cutie",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.373,
+    "right_edge": 5.6,
+    "spill": 0.346
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nicole/cunning-cutie",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.767,
+    "right_edge": 3.0,
+    "spill": 0.166
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nicole/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.351,
+    "right_edge": 3.9,
+    "spill": 0.286
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nicole/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.738,
+    "right_edge": 5.3,
+    "spill": 0.344
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nicole/lil-sassy",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.338,
+    "right_edge": 4.4,
+    "spill": 0.326
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/nicole/lil-sassy",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.812,
+    "right_edge": 4.0,
+    "spill": 0.241
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/norma/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.406,
+    "right_edge": 5.2,
+    "spill": 0.423
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/norma/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.745,
+    "right_edge": 6.4,
+    "spill": 0.382
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/orphie-and-magus/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.367,
+    "right_edge": 2.7,
+    "spill": 0.224
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/orphie-and-magus/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.68,
+    "right_edge": 5.0,
+    "spill": 0.38
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/piper/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.408,
+    "right_edge": 3.1,
+    "spill": 0.189
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/piper/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.812,
+    "right_edge": 3.3,
+    "spill": 0.277
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/promeia/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.382,
+    "right_edge": 4.4,
+    "spill": 0.306
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/promeia/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.8,
+    "right_edge": 3.3,
+    "spill": 0.194
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/promeia/shrouded-in-frost",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.387,
+    "right_edge": 5.5,
+    "spill": 0.493
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/promeia/shrouded-in-frost",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.779,
+    "right_edge": 4.0,
+    "spill": 0.24
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/pulchra/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.319,
+    "right_edge": 3.9,
+    "spill": 0.301
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/pulchra/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.751,
+    "right_edge": 3.4,
+    "spill": 0.211
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/qingyi/clarity-peace-and-joy",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.39,
+    "right_edge": 4.5,
+    "spill": 0.311
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/qingyi/clarity-peace-and-joy",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.735,
+    "right_edge": 3.7,
+    "spill": 0.221
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/qingyi/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.338,
+    "right_edge": 2.7,
+    "spill": 0.194
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/qingyi/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.829,
+    "right_edge": 4.2,
+    "spill": 0.308
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/remielle/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.46,
+    "right_edge": 5.7,
+    "spill": 0.481
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/remielle/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.825,
+    "right_edge": 4.8,
+    "spill": 0.523
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/rina/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 3,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.441,
+    "right_edge": 2.5,
+    "spill": 0.193
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/rina/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.758,
+    "right_edge": 4.0,
+    "spill": 0.336
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/seed/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.444,
+    "right_edge": 3.0,
+    "spill": 0.207
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/seed/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.85,
+    "right_edge": 3.1,
+    "spill": 0.217
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/seed/flower-in-bloom",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.433,
+    "right_edge": 5.8,
+    "spill": 0.514
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/seed/flower-in-bloom",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.817,
+    "right_edge": 3.6,
+    "spill": 0.294
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/sigrid/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.458,
+    "right_edge": 3.9,
+    "spill": 0.338
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/sigrid/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.819,
+    "right_edge": 4.8,
+    "spill": 0.392
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/soldier-0-anby/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.354,
+    "right_edge": 4.2,
+    "spill": 0.228
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/soldier-0-anby/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.765,
+    "right_edge": 5.5,
+    "spill": 0.361
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/soldier-0-anby/silver-soldier",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.356,
+    "right_edge": 2.2,
+    "spill": 0.134
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/soldier-0-anby/silver-soldier",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.812,
+    "right_edge": 4.0,
+    "spill": 0.273
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/soldier-11/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.339,
+    "right_edge": 3.5,
+    "spill": 0.246
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/soldier-11/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.718,
+    "right_edge": 3.7,
+    "spill": 0.3
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/soldier-11/elite-soldier",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.361,
+    "right_edge": 3.0,
+    "spill": 0.164
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/soldier-11/elite-soldier",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.767,
+    "right_edge": 3.9,
+    "spill": 0.262
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/soukaku/dance-of-azure-ice",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.361,
+    "right_edge": 3.8,
+    "spill": 0.281
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/soukaku/dance-of-azure-ice",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.736,
+    "right_edge": 3.2,
+    "spill": 0.179
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/soukaku/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.306,
+    "right_edge": 2.6,
+    "spill": 0.222
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/soukaku/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.781,
+    "right_edge": 4.0,
+    "spill": 0.302
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/sunna/afternoon-tea-break",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.433,
+    "right_edge": 3.7,
+    "spill": 0.265
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/sunna/afternoon-tea-break",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.733,
+    "right_edge": 4.2,
+    "spill": 0.341
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/sunna/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.359,
+    "right_edge": 4.8,
+    "spill": 0.246
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/sunna/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.849,
+    "right_edge": 3.7,
+    "spill": 0.234
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/sunna/dreams-on-loop",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.399,
+    "right_edge": 4.2,
+    "spill": 0.282
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/sunna/dreams-on-loop",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.812,
+    "right_edge": 4.1,
+    "spill": 0.285
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/trigger/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.334,
+    "right_edge": 3.2,
+    "spill": 0.223
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/trigger/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.826,
+    "right_edge": 3.0,
+    "spill": 0.231
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/trigger/gaze-into-the-light",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.357,
+    "right_edge": 4.3,
+    "spill": 0.253
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/trigger/gaze-into-the-light",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.813,
+    "right_edge": 4.0,
+    "spill": 0.251
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/velina/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.473,
+    "right_edge": 4.6,
+    "spill": 0.337
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/velina/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.809,
+    "right_edge": 6.4,
+    "spill": 0.511
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/vivian/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.427,
+    "right_edge": 3.0,
+    "spill": 0.264
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/vivian/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.742,
+    "right_edge": 4.4,
+    "spill": 0.34
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/vivian/fluttering-violet",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.398,
+    "right_edge": 3.2,
+    "spill": 0.277
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/vivian/fluttering-violet",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.749,
+    "right_edge": 3.2,
+    "spill": 0.197
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/vivian/iris-of-the-shore",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.427,
+    "right_edge": 5.2,
+    "spill": 0.426
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/vivian/iris-of-the-shore",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.836,
+    "right_edge": 4.0,
+    "spill": 0.343
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/yanagi/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.312,
+    "right_edge": 3.6,
+    "spill": 0.276
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/yanagi/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.772,
+    "right_edge": 3.9,
+    "spill": 0.287
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ye-shunguang/clouddrift-illumination",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.32,
+    "right_edge": 3.2,
+    "spill": 0.206
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ye-shunguang/clouddrift-illumination",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.79,
+    "right_edge": 3.7,
+    "spill": 0.216
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ye-shunguang/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.363,
+    "right_edge": 3.7,
+    "spill": 0.271
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ye-shunguang/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.79,
+    "right_edge": 3.7,
+    "spill": 0.194
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ye-shunguang/touch-of-dawnlight",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.357,
+    "right_edge": 4.9,
+    "spill": 0.386
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/ye-shunguang/touch-of-dawnlight",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.769,
+    "right_edge": 3.9,
+    "spill": 0.224
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/yidhari/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.412,
+    "right_edge": 3.9,
+    "spill": 0.227
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/yidhari/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.768,
+    "right_edge": 4.3,
+    "spill": 0.247
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/yixuan/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.409,
+    "right_edge": 3.9,
+    "spill": 0.398
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/yixuan/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.756,
+    "right_edge": 3.7,
+    "spill": 0.258
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/yixuan/summit-of-clouds",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.349,
+    "right_edge": 3.5,
+    "spill": 0.182
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/yixuan/summit-of-clouds",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.772,
+    "right_edge": 4.3,
+    "spill": 0.274
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/yixuan/trails-of-ink",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.355,
+    "right_edge": 2.6,
+    "spill": 0.147
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/yixuan/trails-of-ink",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.801,
+    "right_edge": 3.9,
+    "spill": 0.264
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/yuzuha/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.357,
+    "right_edge": 4.5,
+    "spill": 0.462
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/yuzuha/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.744,
+    "right_edge": 3.5,
+    "spill": 0.224
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/zhao/cuddly-executor",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.402,
+    "right_edge": 3.3,
+    "spill": 0.284
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/zhao/cuddly-executor",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.786,
+    "right_edge": 4.1,
+    "spill": 0.211
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/zhao/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.464,
+    "right_edge": 5.1,
+    "spill": 0.495
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/zhao/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.786,
+    "right_edge": 4.8,
+    "spill": 0.36
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/zhu-yuan/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.33,
+    "right_edge": 3.6,
+    "spill": 0.288
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/zhu-yuan/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.686,
+    "right_edge": 3.5,
+    "spill": 0.255
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/zhu-yuan/suppressor-of-evil",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.323,
+    "right_edge": 3.0,
+    "spill": 0.228
+   },
+   "fails": []
+  },
+  {
+   "task": "zzz/zhu-yuan/suppressor-of-evil",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.781,
+    "right_edge": 3.3,
+    "spill": 0.177
+   },
+   "fails": []
+  }
+ ]
+}

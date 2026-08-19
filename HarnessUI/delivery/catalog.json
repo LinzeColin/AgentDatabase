@@ -1,0 +1,3047 @@
+{
+ "version": 1,
+ "base": "http://127.0.0.1:3099",
+ "count": 304,
+ "entries": [
+  {
+   "id": "genshin/aino/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "aino",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/aino/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/aino/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/aino/default/light.webp"
+  },
+  {
+   "id": "genshin/aloy/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "aloy",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/aloy/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/aloy/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/aloy/default/light.webp"
+  },
+  {
+   "id": "genshin/aloy/machine-hunter",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "aloy",
+   "variant": "machine-hunter",
+   "light": "http://127.0.0.1:3099/display/genshin/aloy/machine-hunter/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/aloy/machine-hunter/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/aloy/machine-hunter/light.webp"
+  },
+  {
+   "id": "genshin/amber/100-outrider",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "amber",
+   "variant": "100-outrider",
+   "light": "http://127.0.0.1:3099/display/genshin/amber/100-outrider/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/amber/100-outrider/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/amber/100-outrider/light.webp"
+  },
+  {
+   "id": "genshin/amber/5-star-outrider",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "amber",
+   "variant": "5-star-outrider",
+   "light": "http://127.0.0.1:3099/display/genshin/amber/5-star-outrider/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/amber/5-star-outrider/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/amber/5-star-outrider/light.webp"
+  },
+  {
+   "id": "genshin/amber/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "amber",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/amber/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/amber/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/amber/default/light.webp"
+  },
+  {
+   "id": "genshin/arlecchino/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "arlecchino",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/arlecchino/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/arlecchino/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/arlecchino/default/light.webp"
+  },
+  {
+   "id": "genshin/arlecchino/moonglare",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "arlecchino",
+   "variant": "moonglare",
+   "light": "http://127.0.0.1:3099/display/genshin/arlecchino/moonglare/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/arlecchino/moonglare/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/arlecchino/moonglare/light.webp"
+  },
+  {
+   "id": "genshin/barbara/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "barbara",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/barbara/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/barbara/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/barbara/default/light.webp"
+  },
+  {
+   "id": "genshin/barbara/innocent-longing",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "barbara",
+   "variant": "innocent-longing",
+   "light": "http://127.0.0.1:3099/display/genshin/barbara/innocent-longing/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/barbara/innocent-longing/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/barbara/innocent-longing/light.webp"
+  },
+  {
+   "id": "genshin/barbara/summertime-sparkle",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "barbara",
+   "variant": "summertime-sparkle",
+   "light": "http://127.0.0.1:3099/display/genshin/barbara/summertime-sparkle/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/barbara/summertime-sparkle/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/barbara/summertime-sparkle/light.webp"
+  },
+  {
+   "id": "genshin/beidou/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "beidou",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/beidou/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/beidou/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/beidou/default/light.webp"
+  },
+  {
+   "id": "genshin/beidou/rolling-waves",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "beidou",
+   "variant": "rolling-waves",
+   "light": "http://127.0.0.1:3099/display/genshin/beidou/rolling-waves/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/beidou/rolling-waves/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/beidou/rolling-waves/light.webp"
+  },
+  {
+   "id": "genshin/candace/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "candace",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/candace/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/candace/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/candace/default/light.webp"
+  },
+  {
+   "id": "genshin/candace/desert-and-night",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "candace",
+   "variant": "desert-and-night",
+   "light": "http://127.0.0.1:3099/display/genshin/candace/desert-and-night/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/candace/desert-and-night/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/candace/desert-and-night/light.webp"
+  },
+  {
+   "id": "genshin/charlotte/all-is-overt-through-my-lens",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "charlotte",
+   "variant": "all-is-overt-through-my-lens",
+   "light": "http://127.0.0.1:3099/display/genshin/charlotte/all-is-overt-through-my-lens/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/charlotte/all-is-overt-through-my-lens/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/charlotte/all-is-overt-through-my-lens/light.webp"
+  },
+  {
+   "id": "genshin/charlotte/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "charlotte",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/charlotte/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/charlotte/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/charlotte/default/light.webp"
+  },
+  {
+   "id": "genshin/chasca/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "chasca",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/chasca/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/chasca/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/chasca/default/light.webp"
+  },
+  {
+   "id": "genshin/chasca/tlalocan-s-night-phantom",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "chasca",
+   "variant": "tlalocan-s-night-phantom",
+   "light": "http://127.0.0.1:3099/display/genshin/chasca/tlalocan-s-night-phantom/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/chasca/tlalocan-s-night-phantom/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/chasca/tlalocan-s-night-phantom/light.webp"
+  },
+  {
+   "id": "genshin/chevreuse/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "chevreuse",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/chevreuse/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/chevreuse/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/chevreuse/default/light.webp"
+  },
+  {
+   "id": "genshin/chevreuse/guardian-s-gun",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "chevreuse",
+   "variant": "guardian-s-gun",
+   "light": "http://127.0.0.1:3099/display/genshin/chevreuse/guardian-s-gun/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/chevreuse/guardian-s-gun/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/chevreuse/guardian-s-gun/light.webp"
+  },
+  {
+   "id": "genshin/chiori/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "chiori",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/chiori/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/chiori/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/chiori/default/light.webp"
+  },
+  {
+   "id": "genshin/chiori/plucked-yamabuki-splendor",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "chiori",
+   "variant": "plucked-yamabuki-splendor",
+   "light": "http://127.0.0.1:3099/display/genshin/chiori/plucked-yamabuki-splendor/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/chiori/plucked-yamabuki-splendor/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/chiori/plucked-yamabuki-splendor/light.webp"
+  },
+  {
+   "id": "genshin/citlali/dawnseer",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "citlali",
+   "variant": "dawnseer",
+   "light": "http://127.0.0.1:3099/display/genshin/citlali/dawnseer/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/citlali/dawnseer/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/citlali/dawnseer/light.webp"
+  },
+  {
+   "id": "genshin/citlali/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "citlali",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/citlali/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/citlali/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/citlali/default/light.webp"
+  },
+  {
+   "id": "genshin/clorinde/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "clorinde",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/clorinde/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/clorinde/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/clorinde/default/light.webp"
+  },
+  {
+   "id": "genshin/clorinde/sword-of-honor",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "clorinde",
+   "variant": "sword-of-honor",
+   "light": "http://127.0.0.1:3099/display/genshin/clorinde/sword-of-honor/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/clorinde/sword-of-honor/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/clorinde/sword-of-honor/light.webp"
+  },
+  {
+   "id": "genshin/collei/a-new-leaf",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "collei",
+   "variant": "a-new-leaf",
+   "light": "http://127.0.0.1:3099/display/genshin/collei/a-new-leaf/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/collei/a-new-leaf/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/collei/a-new-leaf/light.webp"
+  },
+  {
+   "id": "genshin/collei/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "collei",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/collei/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/collei/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/collei/default/light.webp"
+  },
+  {
+   "id": "genshin/columbina/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "columbina",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/columbina/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/columbina/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/columbina/default/light.webp"
+  },
+  {
+   "id": "genshin/dahlia/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "dahlia",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/dahlia/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/dahlia/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/dahlia/default/light.webp"
+  },
+  {
+   "id": "genshin/dahlia/pristine-prayers",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "dahlia",
+   "variant": "pristine-prayers",
+   "light": "http://127.0.0.1:3099/display/genshin/dahlia/pristine-prayers/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/dahlia/pristine-prayers/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/dahlia/pristine-prayers/light.webp"
+  },
+  {
+   "id": "genshin/dehya/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "dehya",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/dehya/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/dehya/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/dehya/default/light.webp"
+  },
+  {
+   "id": "genshin/dehya/the-lioness-and-the-blazing-sun",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "dehya",
+   "variant": "the-lioness-and-the-blazing-sun",
+   "light": "http://127.0.0.1:3099/display/genshin/dehya/the-lioness-and-the-blazing-sun/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/dehya/the-lioness-and-the-blazing-sun/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/dehya/the-lioness-and-the-blazing-sun/light.webp"
+  },
+  {
+   "id": "genshin/diona/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "diona",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/diona/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/diona/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/diona/default/light.webp"
+  },
+  {
+   "id": "genshin/diona/sugary-brew",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "diona",
+   "variant": "sugary-brew",
+   "light": "http://127.0.0.1:3099/display/genshin/diona/sugary-brew/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/diona/sugary-brew/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/diona/sugary-brew/light.webp"
+  },
+  {
+   "id": "genshin/dori/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "dori",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/dori/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/dori/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/dori/default/light.webp"
+  },
+  {
+   "id": "genshin/dori/i-love-mora",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "dori",
+   "variant": "i-love-mora",
+   "light": "http://127.0.0.1:3099/display/genshin/dori/i-love-mora/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/dori/i-love-mora/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/dori/i-love-mora/light.webp"
+  },
+  {
+   "id": "genshin/emilie/ambrosial-verdance",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "emilie",
+   "variant": "ambrosial-verdance",
+   "light": "http://127.0.0.1:3099/display/genshin/emilie/ambrosial-verdance/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/emilie/ambrosial-verdance/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/emilie/ambrosial-verdance/light.webp"
+  },
+  {
+   "id": "genshin/emilie/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "emilie",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/emilie/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/emilie/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/emilie/default/light.webp"
+  },
+  {
+   "id": "genshin/escoffier/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "escoffier",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/escoffier/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/escoffier/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/escoffier/default/light.webp"
+  },
+  {
+   "id": "genshin/escoffier/sorbet-honey-pie",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "escoffier",
+   "variant": "sorbet-honey-pie",
+   "light": "http://127.0.0.1:3099/display/genshin/escoffier/sorbet-honey-pie/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/escoffier/sorbet-honey-pie/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/escoffier/sorbet-honey-pie/light.webp"
+  },
+  {
+   "id": "genshin/eula/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "eula",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/eula/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/eula/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/eula/default/light.webp"
+  },
+  {
+   "id": "genshin/eula/wavecrest-waltz",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "eula",
+   "variant": "wavecrest-waltz",
+   "light": "http://127.0.0.1:3099/display/genshin/eula/wavecrest-waltz/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/eula/wavecrest-waltz/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/eula/wavecrest-waltz/light.webp"
+  },
+  {
+   "id": "genshin/fischl/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "fischl",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/fischl/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/fischl/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/fischl/default/light.webp"
+  },
+  {
+   "id": "genshin/fischl/dunkelnacht-sakrament",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "fischl",
+   "variant": "dunkelnacht-sakrament",
+   "light": "http://127.0.0.1:3099/display/genshin/fischl/dunkelnacht-sakrament/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/fischl/dunkelnacht-sakrament/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/fischl/dunkelnacht-sakrament/light.webp"
+  },
+  {
+   "id": "genshin/fischl/ein-immernachtstraum",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "fischl",
+   "variant": "ein-immernachtstraum",
+   "light": "http://127.0.0.1:3099/display/genshin/fischl/ein-immernachtstraum/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/fischl/ein-immernachtstraum/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/fischl/ein-immernachtstraum/light.webp"
+  },
+  {
+   "id": "genshin/furina/coronated-prima-donna",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "furina",
+   "variant": "coronated-prima-donna",
+   "light": "http://127.0.0.1:3099/display/genshin/furina/coronated-prima-donna/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/furina/coronated-prima-donna/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/furina/coronated-prima-donna/light.webp"
+  },
+  {
+   "id": "genshin/furina/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "furina",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/furina/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/furina/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/furina/default/light.webp"
+  },
+  {
+   "id": "genshin/ganyu/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "ganyu",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/ganyu/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/ganyu/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/ganyu/default/light.webp"
+  },
+  {
+   "id": "genshin/ganyu/frostdew-trail",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "ganyu",
+   "variant": "frostdew-trail",
+   "light": "http://127.0.0.1:3099/display/genshin/ganyu/frostdew-trail/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/ganyu/frostdew-trail/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/ganyu/frostdew-trail/light.webp"
+  },
+  {
+   "id": "genshin/ganyu/twilight-blossom",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "ganyu",
+   "variant": "twilight-blossom",
+   "light": "http://127.0.0.1:3099/display/genshin/ganyu/twilight-blossom/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/ganyu/twilight-blossom/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/ganyu/twilight-blossom/light.webp"
+  },
+  {
+   "id": "genshin/hu-tao/cherries-snow-laden",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "hu-tao",
+   "variant": "cherries-snow-laden",
+   "light": "http://127.0.0.1:3099/display/genshin/hu-tao/cherries-snow-laden/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/hu-tao/cherries-snow-laden/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/hu-tao/cherries-snow-laden/light.webp"
+  },
+  {
+   "id": "genshin/hu-tao/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "hu-tao",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/hu-tao/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/hu-tao/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/hu-tao/default/light.webp"
+  },
+  {
+   "id": "genshin/hu-tao/plum-blossom-bouquet",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "hu-tao",
+   "variant": "plum-blossom-bouquet",
+   "light": "http://127.0.0.1:3099/display/genshin/hu-tao/plum-blossom-bouquet/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/hu-tao/plum-blossom-bouquet/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/hu-tao/plum-blossom-bouquet/light.webp"
+  },
+  {
+   "id": "genshin/iansan/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "iansan",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/iansan/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/iansan/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/iansan/default/light.webp"
+  },
+  {
+   "id": "genshin/iansan/warrior-s-bonegarb",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "iansan",
+   "variant": "warrior-s-bonegarb",
+   "light": "http://127.0.0.1:3099/display/genshin/iansan/warrior-s-bonegarb/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/iansan/warrior-s-bonegarb/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/iansan/warrior-s-bonegarb/light.webp"
+  },
+  {
+   "id": "genshin/ineffa/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "ineffa",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/ineffa/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/ineffa/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/ineffa/default/light.webp"
+  },
+  {
+   "id": "genshin/ineffa/mechanical-dreams",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "ineffa",
+   "variant": "mechanical-dreams",
+   "light": "http://127.0.0.1:3099/display/genshin/ineffa/mechanical-dreams/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/ineffa/mechanical-dreams/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/ineffa/mechanical-dreams/light.webp"
+  },
+  {
+   "id": "genshin/jahoda/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "jahoda",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/jahoda/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/jahoda/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/jahoda/default/light.webp"
+  },
+  {
+   "id": "genshin/jean/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "jean",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/jean/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/jean/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/jean/default/light.webp"
+  },
+  {
+   "id": "genshin/jean/favonian-devotion",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "jean",
+   "variant": "favonian-devotion",
+   "light": "http://127.0.0.1:3099/display/genshin/jean/favonian-devotion/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/jean/favonian-devotion/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/jean/favonian-devotion/light.webp"
+  },
+  {
+   "id": "genshin/jean/gunnhildr-s-legacy",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "jean",
+   "variant": "gunnhildr-s-legacy",
+   "light": "http://127.0.0.1:3099/display/genshin/jean/gunnhildr-s-legacy/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/jean/gunnhildr-s-legacy/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/jean/gunnhildr-s-legacy/light.webp"
+  },
+  {
+   "id": "genshin/jean/sea-breeze-dandelion",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "jean",
+   "variant": "sea-breeze-dandelion",
+   "light": "http://127.0.0.1:3099/display/genshin/jean/sea-breeze-dandelion/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/jean/sea-breeze-dandelion/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/jean/sea-breeze-dandelion/light.webp"
+  },
+  {
+   "id": "genshin/kachina/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "kachina",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/kachina/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/kachina/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/kachina/default/light.webp"
+  },
+  {
+   "id": "genshin/kachina/tawny-peaks-spired-rock",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "kachina",
+   "variant": "tawny-peaks-spired-rock",
+   "light": "http://127.0.0.1:3099/display/genshin/kachina/tawny-peaks-spired-rock/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/kachina/tawny-peaks-spired-rock/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/kachina/tawny-peaks-spired-rock/light.webp"
+  },
+  {
+   "id": "genshin/kamisato-ayaka/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "kamisato-ayaka",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/kamisato-ayaka/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/kamisato-ayaka/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/kamisato-ayaka/default/light.webp"
+  },
+  {
+   "id": "genshin/kamisato-ayaka/flawless-radiance",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "kamisato-ayaka",
+   "variant": "flawless-radiance",
+   "light": "http://127.0.0.1:3099/display/genshin/kamisato-ayaka/flawless-radiance/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/kamisato-ayaka/flawless-radiance/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/kamisato-ayaka/flawless-radiance/light.webp"
+  },
+  {
+   "id": "genshin/kamisato-ayaka/springbloom-missive",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "kamisato-ayaka",
+   "variant": "springbloom-missive",
+   "light": "http://127.0.0.1:3099/display/genshin/kamisato-ayaka/springbloom-missive/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/kamisato-ayaka/springbloom-missive/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/kamisato-ayaka/springbloom-missive/light.webp"
+  },
+  {
+   "id": "genshin/keqing/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "keqing",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/keqing/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/keqing/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/keqing/default/light.webp"
+  },
+  {
+   "id": "genshin/keqing/opulent-splendor",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "keqing",
+   "variant": "opulent-splendor",
+   "light": "http://127.0.0.1:3099/display/genshin/keqing/opulent-splendor/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/keqing/opulent-splendor/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/keqing/opulent-splendor/light.webp"
+  },
+  {
+   "id": "genshin/keqing/piercing-thunderbolt",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "keqing",
+   "variant": "piercing-thunderbolt",
+   "light": "http://127.0.0.1:3099/display/genshin/keqing/piercing-thunderbolt/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/keqing/piercing-thunderbolt/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/keqing/piercing-thunderbolt/light.webp"
+  },
+  {
+   "id": "genshin/kirara/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "kirara",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/kirara/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/kirara/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/kirara/default/light.webp"
+  },
+  {
+   "id": "genshin/kirara/phantom-in-boots",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "kirara",
+   "variant": "phantom-in-boots",
+   "light": "http://127.0.0.1:3099/display/genshin/kirara/phantom-in-boots/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/kirara/phantom-in-boots/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/kirara/phantom-in-boots/light.webp"
+  },
+  {
+   "id": "genshin/kirara/whirling-bloom",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "kirara",
+   "variant": "whirling-bloom",
+   "light": "http://127.0.0.1:3099/display/genshin/kirara/whirling-bloom/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/kirara/whirling-bloom/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/kirara/whirling-bloom/light.webp"
+  },
+  {
+   "id": "genshin/klee/blossoming-starlight",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "klee",
+   "variant": "blossoming-starlight",
+   "light": "http://127.0.0.1:3099/display/genshin/klee/blossoming-starlight/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/klee/blossoming-starlight/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/klee/blossoming-starlight/light.webp"
+  },
+  {
+   "id": "genshin/klee/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "klee",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/klee/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/klee/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/klee/default/light.webp"
+  },
+  {
+   "id": "genshin/klee/shooting-spark",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "klee",
+   "variant": "shooting-spark",
+   "light": "http://127.0.0.1:3099/display/genshin/klee/shooting-spark/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/klee/shooting-spark/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/klee/shooting-spark/light.webp"
+  },
+  {
+   "id": "genshin/kujou-sara/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "kujou-sara",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/kujou-sara/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/kujou-sara/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/kujou-sara/default/light.webp"
+  },
+  {
+   "id": "genshin/kujou-sara/solemn-purity",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "kujou-sara",
+   "variant": "solemn-purity",
+   "light": "http://127.0.0.1:3099/display/genshin/kujou-sara/solemn-purity/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/kujou-sara/solemn-purity/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/kujou-sara/solemn-purity/light.webp"
+  },
+  {
+   "id": "genshin/kuki-shinobu/arataki-s-demonic-deputy",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "kuki-shinobu",
+   "variant": "arataki-s-demonic-deputy",
+   "light": "http://127.0.0.1:3099/display/genshin/kuki-shinobu/arataki-s-demonic-deputy/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/kuki-shinobu/arataki-s-demonic-deputy/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/kuki-shinobu/arataki-s-demonic-deputy/light.webp"
+  },
+  {
+   "id": "genshin/kuki-shinobu/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "kuki-shinobu",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/kuki-shinobu/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/kuki-shinobu/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/kuki-shinobu/default/light.webp"
+  },
+  {
+   "id": "genshin/lan-yan/argent-chimes",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "lan-yan",
+   "variant": "argent-chimes",
+   "light": "http://127.0.0.1:3099/display/genshin/lan-yan/argent-chimes/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/lan-yan/argent-chimes/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/lan-yan/argent-chimes/light.webp"
+  },
+  {
+   "id": "genshin/lan-yan/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "lan-yan",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/lan-yan/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/lan-yan/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/lan-yan/default/light.webp"
+  },
+  {
+   "id": "genshin/lauma/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "lauma",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/lauma/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/lauma/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/lauma/default/light.webp"
+  },
+  {
+   "id": "genshin/layla/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "layla",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/layla/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/layla/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/layla/default/light.webp"
+  },
+  {
+   "id": "genshin/layla/dreaming-star",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "layla",
+   "variant": "dreaming-star",
+   "light": "http://127.0.0.1:3099/display/genshin/layla/dreaming-star/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/layla/dreaming-star/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/layla/dreaming-star/light.webp"
+  },
+  {
+   "id": "genshin/linnea/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "linnea",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/linnea/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/linnea/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/linnea/default/light.webp"
+  },
+  {
+   "id": "genshin/lisa/a-sobriquet-under-shade",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "lisa",
+   "variant": "a-sobriquet-under-shade",
+   "light": "http://127.0.0.1:3099/display/genshin/lisa/a-sobriquet-under-shade/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/lisa/a-sobriquet-under-shade/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/lisa/a-sobriquet-under-shade/light.webp"
+  },
+  {
+   "id": "genshin/lisa/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "lisa",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/lisa/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/lisa/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/lisa/default/light.webp"
+  },
+  {
+   "id": "genshin/lisa/purple-rose",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "lisa",
+   "variant": "purple-rose",
+   "light": "http://127.0.0.1:3099/display/genshin/lisa/purple-rose/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/lisa/purple-rose/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/lisa/purple-rose/light.webp"
+  },
+  {
+   "id": "genshin/lynette/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "lynette",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/lynette/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/lynette/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/lynette/default/light.webp"
+  },
+  {
+   "id": "genshin/lynette/phantomeow",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "lynette",
+   "variant": "phantomeow",
+   "light": "http://127.0.0.1:3099/display/genshin/lynette/phantomeow/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/lynette/phantomeow/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/lynette/phantomeow/light.webp"
+  },
+  {
+   "id": "genshin/mavuika/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "mavuika",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/mavuika/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/mavuika/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/mavuika/default/light.webp"
+  },
+  {
+   "id": "genshin/mavuika/undying-sun",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "mavuika",
+   "variant": "undying-sun",
+   "light": "http://127.0.0.1:3099/display/genshin/mavuika/undying-sun/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/mavuika/undying-sun/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/mavuika/undying-sun/light.webp"
+  },
+  {
+   "id": "genshin/mona/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "mona",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/mona/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/mona/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/mona/default/light.webp"
+  },
+  {
+   "id": "genshin/mona/flowing-fate",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "mona",
+   "variant": "flowing-fate",
+   "light": "http://127.0.0.1:3099/display/genshin/mona/flowing-fate/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/mona/flowing-fate/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/mona/flowing-fate/light.webp"
+  },
+  {
+   "id": "genshin/mona/pact-of-stars-and-moon",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "mona",
+   "variant": "pact-of-stars-and-moon",
+   "light": "http://127.0.0.1:3099/display/genshin/mona/pact-of-stars-and-moon/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/mona/pact-of-stars-and-moon/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/mona/pact-of-stars-and-moon/light.webp"
+  },
+  {
+   "id": "genshin/mualani/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "mualani",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/mualani/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/mualani/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/mualani/default/light.webp"
+  },
+  {
+   "id": "genshin/mualani/flying-fish-heat-waves-and-moon-scallop",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "mualani",
+   "variant": "flying-fish-heat-waves-and-moon-scallop",
+   "light": "http://127.0.0.1:3099/display/genshin/mualani/flying-fish-heat-waves-and-moon-scallop/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/mualani/flying-fish-heat-waves-and-moon-scallop/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/mualani/flying-fish-heat-waves-and-moon-scallop/light.webp"
+  },
+  {
+   "id": "genshin/nahida/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "nahida",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/nahida/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/nahida/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/nahida/default/light.webp"
+  },
+  {
+   "id": "genshin/nahida/for-all-knowledge-a-verse",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "nahida",
+   "variant": "for-all-knowledge-a-verse",
+   "light": "http://127.0.0.1:3099/display/genshin/nahida/for-all-knowledge-a-verse/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/nahida/for-all-knowledge-a-verse/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/nahida/for-all-knowledge-a-verse/light.webp"
+  },
+  {
+   "id": "genshin/navia/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "navia",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/navia/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/navia/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/navia/default/light.webp"
+  },
+  {
+   "id": "genshin/navia/yellow-velvet-salon",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "navia",
+   "variant": "yellow-velvet-salon",
+   "light": "http://127.0.0.1:3099/display/genshin/navia/yellow-velvet-salon/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/navia/yellow-velvet-salon/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/navia/yellow-velvet-salon/light.webp"
+  },
+  {
+   "id": "genshin/nefer/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "nefer",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/nefer/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/nefer/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/nefer/default/light.webp"
+  },
+  {
+   "id": "genshin/nicole/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "nicole",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/nicole/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/nicole/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/nicole/default/light.webp"
+  },
+  {
+   "id": "genshin/nilou/breeze-of-sabaa",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "nilou",
+   "variant": "breeze-of-sabaa",
+   "light": "http://127.0.0.1:3099/display/genshin/nilou/breeze-of-sabaa/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/nilou/breeze-of-sabaa/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/nilou/breeze-of-sabaa/light.webp"
+  },
+  {
+   "id": "genshin/nilou/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "nilou",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/nilou/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/nilou/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/nilou/default/light.webp"
+  },
+  {
+   "id": "genshin/nilou/neither-flower-nor-mist",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "nilou",
+   "variant": "neither-flower-nor-mist",
+   "light": "http://127.0.0.1:3099/display/genshin/nilou/neither-flower-nor-mist/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/nilou/neither-flower-nor-mist/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/nilou/neither-flower-nor-mist/light.webp"
+  },
+  {
+   "id": "genshin/ningguang/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "ningguang",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/ningguang/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/ningguang/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/ningguang/default/light.webp"
+  },
+  {
+   "id": "genshin/ningguang/gold-leaf-and-pearly-jade",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "ningguang",
+   "variant": "gold-leaf-and-pearly-jade",
+   "light": "http://127.0.0.1:3099/display/genshin/ningguang/gold-leaf-and-pearly-jade/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/ningguang/gold-leaf-and-pearly-jade/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/ningguang/gold-leaf-and-pearly-jade/light.webp"
+  },
+  {
+   "id": "genshin/ningguang/orchid-s-evening-gown",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "ningguang",
+   "variant": "orchid-s-evening-gown",
+   "light": "http://127.0.0.1:3099/display/genshin/ningguang/orchid-s-evening-gown/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/ningguang/orchid-s-evening-gown/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/ningguang/orchid-s-evening-gown/light.webp"
+  },
+  {
+   "id": "genshin/noelle/armored-rose",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "noelle",
+   "variant": "armored-rose",
+   "light": "http://127.0.0.1:3099/display/genshin/noelle/armored-rose/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/noelle/armored-rose/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/noelle/armored-rose/light.webp"
+  },
+  {
+   "id": "genshin/noelle/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "noelle",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/noelle/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/noelle/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/noelle/default/light.webp"
+  },
+  {
+   "id": "genshin/odette/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "odette",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/odette/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/odette/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/odette/default/light.webp"
+  },
+  {
+   "id": "genshin/prune/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "prune",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/prune/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/prune/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/prune/default/light.webp"
+  },
+  {
+   "id": "genshin/qiqi/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "qiqi",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/qiqi/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/qiqi/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/qiqi/default/light.webp"
+  },
+  {
+   "id": "genshin/qiqi/summerchill-dreams",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "qiqi",
+   "variant": "summerchill-dreams",
+   "light": "http://127.0.0.1:3099/display/genshin/qiqi/summerchill-dreams/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/qiqi/summerchill-dreams/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/qiqi/summerchill-dreams/light.webp"
+  },
+  {
+   "id": "genshin/raiden-shogun/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "raiden-shogun",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/raiden-shogun/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/raiden-shogun/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/raiden-shogun/default/light.webp"
+  },
+  {
+   "id": "genshin/raiden-shogun/narukami-s-law",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "raiden-shogun",
+   "variant": "narukami-s-law",
+   "light": "http://127.0.0.1:3099/display/genshin/raiden-shogun/narukami-s-law/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/raiden-shogun/narukami-s-law/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/raiden-shogun/narukami-s-law/light.webp"
+  },
+  {
+   "id": "genshin/rosaria/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "rosaria",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/rosaria/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/rosaria/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/rosaria/default/light.webp"
+  },
+  {
+   "id": "genshin/rosaria/executor-s-thorns",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "rosaria",
+   "variant": "executor-s-thorns",
+   "light": "http://127.0.0.1:3099/display/genshin/rosaria/executor-s-thorns/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/rosaria/executor-s-thorns/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/rosaria/executor-s-thorns/light.webp"
+  },
+  {
+   "id": "genshin/rosaria/to-the-church-s-free-spirit",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "rosaria",
+   "variant": "to-the-church-s-free-spirit",
+   "light": "http://127.0.0.1:3099/display/genshin/rosaria/to-the-church-s-free-spirit/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/rosaria/to-the-church-s-free-spirit/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/rosaria/to-the-church-s-free-spirit/light.webp"
+  },
+  {
+   "id": "genshin/sandrone/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "sandrone",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/sandrone/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/sandrone/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/sandrone/default/light.webp"
+  },
+  {
+   "id": "genshin/sangonomiya-kokomi/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "sangonomiya-kokomi",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/sangonomiya-kokomi/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/sangonomiya-kokomi/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/sangonomiya-kokomi/default/light.webp"
+  },
+  {
+   "id": "genshin/sayu/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "sayu",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/sayu/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/sayu/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/sayu/default/light.webp"
+  },
+  {
+   "id": "genshin/sayu/mini-mujina",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "sayu",
+   "variant": "mini-mujina",
+   "light": "http://127.0.0.1:3099/display/genshin/sayu/mini-mujina/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/sayu/mini-mujina/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/sayu/mini-mujina/light.webp"
+  },
+  {
+   "id": "genshin/shenhe/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "shenhe",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/shenhe/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/shenhe/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/shenhe/default/light.webp"
+  },
+  {
+   "id": "genshin/shenhe/frostflower-dew",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "shenhe",
+   "variant": "frostflower-dew",
+   "light": "http://127.0.0.1:3099/display/genshin/shenhe/frostflower-dew/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/shenhe/frostflower-dew/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/shenhe/frostflower-dew/light.webp"
+  },
+  {
+   "id": "genshin/shenhe/the-world-s-shackles",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "shenhe",
+   "variant": "the-world-s-shackles",
+   "light": "http://127.0.0.1:3099/display/genshin/shenhe/the-world-s-shackles/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/shenhe/the-world-s-shackles/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/shenhe/the-world-s-shackles/light.webp"
+  },
+  {
+   "id": "genshin/sigewinne/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "sigewinne",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/sigewinne/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/sigewinne/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/sigewinne/default/light.webp"
+  },
+  {
+   "id": "genshin/sigewinne/sweetness-of-the-sea",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "sigewinne",
+   "variant": "sweetness-of-the-sea",
+   "light": "http://127.0.0.1:3099/display/genshin/sigewinne/sweetness-of-the-sea/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/sigewinne/sweetness-of-the-sea/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/sigewinne/sweetness-of-the-sea/light.webp"
+  },
+  {
+   "id": "genshin/skirk/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "skirk",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/skirk/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/skirk/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/skirk/default/light.webp"
+  },
+  {
+   "id": "genshin/sucrose/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "sucrose",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/sucrose/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/sucrose/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/sucrose/default/light.webp"
+  },
+  {
+   "id": "genshin/sucrose/germinating-wind",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "sucrose",
+   "variant": "germinating-wind",
+   "light": "http://127.0.0.1:3099/display/genshin/sucrose/germinating-wind/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/sucrose/germinating-wind/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/sucrose/germinating-wind/light.webp"
+  },
+  {
+   "id": "genshin/varesa/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "varesa",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/varesa/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/varesa/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/varesa/default/light.webp"
+  },
+  {
+   "id": "genshin/varesa/sugar-rush",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "varesa",
+   "variant": "sugar-rush",
+   "light": "http://127.0.0.1:3099/display/genshin/varesa/sugar-rush/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/varesa/sugar-rush/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/varesa/sugar-rush/light.webp"
+  },
+  {
+   "id": "genshin/xiangling/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "xiangling",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/xiangling/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/xiangling/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/xiangling/default/light.webp"
+  },
+  {
+   "id": "genshin/xiangling/new-year-s-cheer",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "xiangling",
+   "variant": "new-year-s-cheer",
+   "light": "http://127.0.0.1:3099/display/genshin/xiangling/new-year-s-cheer/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/xiangling/new-year-s-cheer/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/xiangling/new-year-s-cheer/light.webp"
+  },
+  {
+   "id": "genshin/xiangling/red-pepper-and-turmeric",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "xiangling",
+   "variant": "red-pepper-and-turmeric",
+   "light": "http://127.0.0.1:3099/display/genshin/xiangling/red-pepper-and-turmeric/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/xiangling/red-pepper-and-turmeric/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/xiangling/red-pepper-and-turmeric/light.webp"
+  },
+  {
+   "id": "genshin/xianyun/a-guest-s-august-omen",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "xianyun",
+   "variant": "a-guest-s-august-omen",
+   "light": "http://127.0.0.1:3099/display/genshin/xianyun/a-guest-s-august-omen/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/xianyun/a-guest-s-august-omen/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/xianyun/a-guest-s-august-omen/light.webp"
+  },
+  {
+   "id": "genshin/xianyun/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "xianyun",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/xianyun/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/xianyun/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/xianyun/default/light.webp"
+  },
+  {
+   "id": "genshin/xilonen/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "xilonen",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/xilonen/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/xilonen/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/xilonen/default/light.webp"
+  },
+  {
+   "id": "genshin/xilonen/gold-draped-gorge",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "xilonen",
+   "variant": "gold-draped-gorge",
+   "light": "http://127.0.0.1:3099/display/genshin/xilonen/gold-draped-gorge/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/xilonen/gold-draped-gorge/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/xilonen/gold-draped-gorge/light.webp"
+  },
+  {
+   "id": "genshin/xinyan/ardent-soul",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "xinyan",
+   "variant": "ardent-soul",
+   "light": "http://127.0.0.1:3099/display/genshin/xinyan/ardent-soul/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/xinyan/ardent-soul/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/xinyan/ardent-soul/light.webp"
+  },
+  {
+   "id": "genshin/xinyan/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "xinyan",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/xinyan/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/xinyan/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/xinyan/default/light.webp"
+  },
+  {
+   "id": "genshin/yae-miko/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yae-miko",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/yae-miko/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yae-miko/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yae-miko/default/light.webp"
+  },
+  {
+   "id": "genshin/yae-miko/miko-s-instruction",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yae-miko",
+   "variant": "miko-s-instruction",
+   "light": "http://127.0.0.1:3099/display/genshin/yae-miko/miko-s-instruction/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yae-miko/miko-s-instruction/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yae-miko/miko-s-instruction/light.webp"
+  },
+  {
+   "id": "genshin/yanfei/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yanfei",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/yanfei/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yanfei/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yanfei/default/light.webp"
+  },
+  {
+   "id": "genshin/yanfei/golden-rule",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yanfei",
+   "variant": "golden-rule",
+   "light": "http://127.0.0.1:3099/display/genshin/yanfei/golden-rule/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yanfei/golden-rule/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yanfei/golden-rule/light.webp"
+  },
+  {
+   "id": "genshin/yaoyao/cherubic-osmanthus",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yaoyao",
+   "variant": "cherubic-osmanthus",
+   "light": "http://127.0.0.1:3099/display/genshin/yaoyao/cherubic-osmanthus/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yaoyao/cherubic-osmanthus/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yaoyao/cherubic-osmanthus/light.webp"
+  },
+  {
+   "id": "genshin/yaoyao/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yaoyao",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/yaoyao/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yaoyao/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yaoyao/default/light.webp"
+  },
+  {
+   "id": "genshin/yelan/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yelan",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/yelan/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yelan/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yelan/default/light.webp"
+  },
+  {
+   "id": "genshin/yelan/the-waning-point",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yelan",
+   "variant": "the-waning-point",
+   "light": "http://127.0.0.1:3099/display/genshin/yelan/the-waning-point/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yelan/the-waning-point/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yelan/the-waning-point/light.webp"
+  },
+  {
+   "id": "genshin/yoimiya/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yoimiya",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/yoimiya/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yoimiya/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yoimiya/default/light.webp"
+  },
+  {
+   "id": "genshin/yoimiya/goldfish-firecracker",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yoimiya",
+   "variant": "goldfish-firecracker",
+   "light": "http://127.0.0.1:3099/display/genshin/yoimiya/goldfish-firecracker/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yoimiya/goldfish-firecracker/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yoimiya/goldfish-firecracker/light.webp"
+  },
+  {
+   "id": "genshin/yumemizuki-mizuki/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yumemizuki-mizuki",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/yumemizuki-mizuki/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yumemizuki-mizuki/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yumemizuki-mizuki/default/light.webp"
+  },
+  {
+   "id": "genshin/yun-jin/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yun-jin",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/yun-jin/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yun-jin/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yun-jin/default/light.webp"
+  },
+  {
+   "id": "genshin/yun-jin/mistcloud-stage",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "yun-jin",
+   "variant": "mistcloud-stage",
+   "light": "http://127.0.0.1:3099/display/genshin/yun-jin/mistcloud-stage/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/yun-jin/mistcloud-stage/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/yun-jin/mistcloud-stage/light.webp"
+  },
+  {
+   "id": "genshin/zibai/default",
+   "game": "genshin",
+   "gameName": "原神",
+   "character": "zibai",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/genshin/zibai/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/genshin/zibai/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/genshin/zibai/default/light.webp"
+  },
+  {
+   "id": "hsr/acheron/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "acheron",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/acheron/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/acheron/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/acheron/default/light.webp"
+  },
+  {
+   "id": "hsr/aglaea/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "aglaea",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/aglaea/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/aglaea/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/aglaea/default/light.webp"
+  },
+  {
+   "id": "hsr/asta/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "asta",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/asta/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/asta/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/asta/default/light.webp"
+  },
+  {
+   "id": "hsr/bailu/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "bailu",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/bailu/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/bailu/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/bailu/default/light.webp"
+  },
+  {
+   "id": "hsr/black-swan/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "black-swan",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/black-swan/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/black-swan/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/black-swan/default/light.webp"
+  },
+  {
+   "id": "hsr/bronya/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "bronya",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/bronya/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/bronya/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/bronya/default/light.webp"
+  },
+  {
+   "id": "hsr/castorice/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "castorice",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/castorice/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/castorice/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/castorice/default/light.webp"
+  },
+  {
+   "id": "hsr/castorice/gossamer-flutter",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "castorice",
+   "variant": "gossamer-flutter",
+   "light": "http://127.0.0.1:3099/display/hsr/castorice/gossamer-flutter/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/castorice/gossamer-flutter/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/castorice/gossamer-flutter/light.webp"
+  },
+  {
+   "id": "hsr/cerydra/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "cerydra",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/cerydra/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/cerydra/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/cerydra/default/light.webp"
+  },
+  {
+   "id": "hsr/cipher/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "cipher",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/cipher/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/cipher/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/cipher/default/light.webp"
+  },
+  {
+   "id": "hsr/clara/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "clara",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/clara/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/clara/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/clara/default/light.webp"
+  },
+  {
+   "id": "hsr/cyrene/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "cyrene",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/cyrene/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/cyrene/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/cyrene/default/light.webp"
+  },
+  {
+   "id": "hsr/cyrene/the-promise-s",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "cyrene",
+   "variant": "the-promise-s",
+   "light": "http://127.0.0.1:3099/display/hsr/cyrene/the-promise-s/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/cyrene/the-promise-s/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/cyrene/the-promise-s/light.webp"
+  },
+  {
+   "id": "hsr/evanescia/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "evanescia",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/evanescia/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/evanescia/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/evanescia/default/light.webp"
+  },
+  {
+   "id": "hsr/evernight/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "evernight",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/evernight/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/evernight/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/evernight/default/light.webp"
+  },
+  {
+   "id": "hsr/feixiao/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "feixiao",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/feixiao/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/feixiao/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/feixiao/default/light.webp"
+  },
+  {
+   "id": "hsr/firefly/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "firefly",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/firefly/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/firefly/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/firefly/default/light.webp"
+  },
+  {
+   "id": "hsr/firefly/spring-missive",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "firefly",
+   "variant": "spring-missive",
+   "light": "http://127.0.0.1:3099/display/hsr/firefly/spring-missive/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/firefly/spring-missive/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/firefly/spring-missive/light.webp"
+  },
+  {
+   "id": "hsr/fu-xuan/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "fu-xuan",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/fu-xuan/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/fu-xuan/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/fu-xuan/default/light.webp"
+  },
+  {
+   "id": "hsr/fugue/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "fugue",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/fugue/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/fugue/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/fugue/default/light.webp"
+  },
+  {
+   "id": "hsr/guinaifen/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "guinaifen",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/guinaifen/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/guinaifen/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/guinaifen/default/light.webp"
+  },
+  {
+   "id": "hsr/hanya/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "hanya",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/hanya/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/hanya/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/hanya/default/light.webp"
+  },
+  {
+   "id": "hsr/herta/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "herta",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/herta/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/herta/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/herta/default/light.webp"
+  },
+  {
+   "id": "hsr/himeko/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "himeko",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/himeko/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/himeko/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/himeko/default/light.webp"
+  },
+  {
+   "id": "hsr/hook/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "hook",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/hook/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/hook/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/hook/default/light.webp"
+  },
+  {
+   "id": "hsr/huohuo/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "huohuo",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/huohuo/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/huohuo/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/huohuo/default/light.webp"
+  },
+  {
+   "id": "hsr/hyacine/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "hyacine",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/hyacine/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/hyacine/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/hyacine/default/light.webp"
+  },
+  {
+   "id": "hsr/hysilens/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "hysilens",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/hysilens/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/hysilens/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/hysilens/default/light.webp"
+  },
+  {
+   "id": "hsr/jade/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "jade",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/jade/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/jade/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/jade/default/light.webp"
+  },
+  {
+   "id": "hsr/jingliu/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "jingliu",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/jingliu/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/jingliu/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/jingliu/default/light.webp"
+  },
+  {
+   "id": "hsr/kafka/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "kafka",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/kafka/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/kafka/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/kafka/default/light.webp"
+  },
+  {
+   "id": "hsr/lingsha/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "lingsha",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/lingsha/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/lingsha/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/lingsha/default/light.webp"
+  },
+  {
+   "id": "hsr/lynx/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "lynx",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/lynx/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/lynx/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/lynx/default/light.webp"
+  },
+  {
+   "id": "hsr/march-7th/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "march-7th",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/march-7th/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/march-7th/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/march-7th/default/light.webp"
+  },
+  {
+   "id": "hsr/natasha/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "natasha",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/natasha/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/natasha/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/natasha/default/light.webp"
+  },
+  {
+   "id": "hsr/pela/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "pela",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/pela/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/pela/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/pela/default/light.webp"
+  },
+  {
+   "id": "hsr/qingque/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "qingque",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/qingque/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/qingque/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/qingque/default/light.webp"
+  },
+  {
+   "id": "hsr/rappa/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "rappa",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/rappa/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/rappa/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/rappa/default/light.webp"
+  },
+  {
+   "id": "hsr/rin-tohsaka/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "rin-tohsaka",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/rin-tohsaka/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/rin-tohsaka/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/rin-tohsaka/default/light.webp"
+  },
+  {
+   "id": "hsr/robin/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "robin",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/robin/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/robin/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/robin/default/light.webp"
+  },
+  {
+   "id": "hsr/ruan-mei/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "ruan-mei",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/ruan-mei/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/ruan-mei/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/ruan-mei/default/light.webp"
+  },
+  {
+   "id": "hsr/ruan-mei/plumblossom-letter",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "ruan-mei",
+   "variant": "plumblossom-letter",
+   "light": "http://127.0.0.1:3099/display/hsr/ruan-mei/plumblossom-letter/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/ruan-mei/plumblossom-letter/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/ruan-mei/plumblossom-letter/light.webp"
+  },
+  {
+   "id": "hsr/saber/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "saber",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/saber/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/saber/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/saber/default/light.webp"
+  },
+  {
+   "id": "hsr/seele/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "seele",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/seele/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/seele/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/seele/default/light.webp"
+  },
+  {
+   "id": "hsr/serval/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "serval",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/serval/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/serval/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/serval/default/light.webp"
+  },
+  {
+   "id": "hsr/silver-wolf/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "silver-wolf",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/silver-wolf/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/silver-wolf/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/silver-wolf/default/light.webp"
+  },
+  {
+   "id": "hsr/sparkle/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "sparkle",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/sparkle/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/sparkle/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/sparkle/default/light.webp"
+  },
+  {
+   "id": "hsr/sparxie/candy-coated-waves",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "sparxie",
+   "variant": "candy-coated-waves",
+   "light": "http://127.0.0.1:3099/display/hsr/sparxie/candy-coated-waves/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/sparxie/candy-coated-waves/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/sparxie/candy-coated-waves/light.webp"
+  },
+  {
+   "id": "hsr/sparxie/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "sparxie",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/sparxie/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/sparxie/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/sparxie/default/light.webp"
+  },
+  {
+   "id": "hsr/sushang/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "sushang",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/sushang/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/sushang/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/sushang/default/light.webp"
+  },
+  {
+   "id": "hsr/the-dahlia/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "the-dahlia",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/the-dahlia/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/the-dahlia/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/the-dahlia/default/light.webp"
+  },
+  {
+   "id": "hsr/the-herta/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "the-herta",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/the-herta/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/the-herta/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/the-herta/default/light.webp"
+  },
+  {
+   "id": "hsr/tingyun/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "tingyun",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/tingyun/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/tingyun/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/tingyun/default/light.webp"
+  },
+  {
+   "id": "hsr/topaz/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "topaz",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/topaz/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/topaz/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/topaz/default/light.webp"
+  },
+  {
+   "id": "hsr/tribbie/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "tribbie",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/tribbie/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/tribbie/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/tribbie/default/light.webp"
+  },
+  {
+   "id": "hsr/xueyi/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "xueyi",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/xueyi/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/xueyi/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/xueyi/default/light.webp"
+  },
+  {
+   "id": "hsr/yao-guang/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "yao-guang",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/yao-guang/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/yao-guang/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/yao-guang/default/light.webp"
+  },
+  {
+   "id": "hsr/yukong/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "yukong",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/yukong/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/yukong/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/yukong/default/light.webp"
+  },
+  {
+   "id": "hsr/yunli/default",
+   "game": "hsr",
+   "gameName": "崩坏：星穹铁道",
+   "character": "yunli",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/hsr/yunli/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/hsr/yunli/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/hsr/yunli/default/light.webp"
+  },
+  {
+   "id": "zzz/alice/celestian-etiquette",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "alice",
+   "variant": "celestian-etiquette",
+   "light": "http://127.0.0.1:3099/display/zzz/alice/celestian-etiquette/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/alice/celestian-etiquette/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/alice/celestian-etiquette/light.webp"
+  },
+  {
+   "id": "zzz/alice/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "alice",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/alice/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/alice/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/alice/default/light.webp"
+  },
+  {
+   "id": "zzz/alice/sea-of-thyme",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "alice",
+   "variant": "sea-of-thyme",
+   "light": "http://127.0.0.1:3099/display/zzz/alice/sea-of-thyme/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/alice/sea-of-thyme/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/alice/sea-of-thyme/light.webp"
+  },
+  {
+   "id": "zzz/anby/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "anby",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/anby/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/anby/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/anby/default/light.webp"
+  },
+  {
+   "id": "zzz/anby/street-streak",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "anby",
+   "variant": "street-streak",
+   "light": "http://127.0.0.1:3099/display/zzz/anby/street-streak/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/anby/street-streak/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/anby/street-streak/light.webp"
+  },
+  {
+   "id": "zzz/aria/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "aria",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/aria/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/aria/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/aria/default/light.webp"
+  },
+  {
+   "id": "zzz/aria/discordant-note",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "aria",
+   "variant": "discordant-note",
+   "light": "http://127.0.0.1:3099/display/zzz/aria/discordant-note/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/aria/discordant-note/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/aria/discordant-note/light.webp"
+  },
+  {
+   "id": "zzz/aria/energetic-idol",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "aria",
+   "variant": "energetic-idol",
+   "light": "http://127.0.0.1:3099/display/zzz/aria/energetic-idol/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/aria/energetic-idol/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/aria/energetic-idol/light.webp"
+  },
+  {
+   "id": "zzz/astra/chandelier",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "astra",
+   "variant": "chandelier",
+   "light": "http://127.0.0.1:3099/display/zzz/astra/chandelier/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/astra/chandelier/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/astra/chandelier/light.webp"
+  },
+  {
+   "id": "zzz/astra/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "astra",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/astra/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/astra/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/astra/default/light.webp"
+  },
+  {
+   "id": "zzz/astra/scarlet-rock",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "astra",
+   "variant": "scarlet-rock",
+   "light": "http://127.0.0.1:3099/display/zzz/astra/scarlet-rock/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/astra/scarlet-rock/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/astra/scarlet-rock/light.webp"
+  },
+  {
+   "id": "zzz/burnice/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "burnice",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/burnice/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/burnice/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/burnice/default/light.webp"
+  },
+  {
+   "id": "zzz/caesar/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "caesar",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/caesar/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/caesar/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/caesar/default/light.webp"
+  },
+  {
+   "id": "zzz/caesar/inferno-joyride",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "caesar",
+   "variant": "inferno-joyride",
+   "light": "http://127.0.0.1:3099/display/zzz/caesar/inferno-joyride/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/caesar/inferno-joyride/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/caesar/inferno-joyride/light.webp"
+  },
+  {
+   "id": "zzz/cissia/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "cissia",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/cissia/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/cissia/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/cissia/default/light.webp"
+  },
+  {
+   "id": "zzz/cissia/snake-mouse-game",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "cissia",
+   "variant": "snake-mouse-game",
+   "light": "http://127.0.0.1:3099/display/zzz/cissia/snake-mouse-game/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/cissia/snake-mouse-game/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/cissia/snake-mouse-game/light.webp"
+  },
+  {
+   "id": "zzz/corin/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "corin",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/corin/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/corin/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/corin/default/light.webp"
+  },
+  {
+   "id": "zzz/corin/matcha-profiterole",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "corin",
+   "variant": "matcha-profiterole",
+   "light": "http://127.0.0.1:3099/display/zzz/corin/matcha-profiterole/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/corin/matcha-profiterole/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/corin/matcha-profiterole/light.webp"
+  },
+  {
+   "id": "zzz/dialyn/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "dialyn",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/dialyn/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/dialyn/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/dialyn/default/light.webp"
+  },
+  {
+   "id": "zzz/dialyn/ringing-judgment",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "dialyn",
+   "variant": "ringing-judgment",
+   "light": "http://127.0.0.1:3099/display/zzz/dialyn/ringing-judgment/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/dialyn/ringing-judgment/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/dialyn/ringing-judgment/light.webp"
+  },
+  {
+   "id": "zzz/ellen/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "ellen",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/ellen/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/ellen/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/ellen/default/light.webp"
+  },
+  {
+   "id": "zzz/ellen/ellen-scissorhands",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "ellen",
+   "variant": "ellen-scissorhands",
+   "light": "http://127.0.0.1:3099/display/zzz/ellen/ellen-scissorhands/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/ellen/ellen-scissorhands/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/ellen/ellen-scissorhands/light.webp"
+  },
+  {
+   "id": "zzz/ellen/on-campus",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "ellen",
+   "variant": "on-campus",
+   "light": "http://127.0.0.1:3099/display/zzz/ellen/on-campus/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/ellen/on-campus/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/ellen/on-campus/light.webp"
+  },
+  {
+   "id": "zzz/evelyn/a-moth-to-light",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "evelyn",
+   "variant": "a-moth-to-light",
+   "light": "http://127.0.0.1:3099/display/zzz/evelyn/a-moth-to-light/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/evelyn/a-moth-to-light/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/evelyn/a-moth-to-light/light.webp"
+  },
+  {
+   "id": "zzz/evelyn/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "evelyn",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/evelyn/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/evelyn/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/evelyn/default/light.webp"
+  },
+  {
+   "id": "zzz/grace/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "grace",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/grace/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/grace/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/grace/default/light.webp"
+  },
+  {
+   "id": "zzz/grace/the-iron-witch-outfit",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "grace",
+   "variant": "the-iron-witch-outfit",
+   "light": "http://127.0.0.1:3099/display/zzz/grace/the-iron-witch-outfit/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/grace/the-iron-witch-outfit/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/grace/the-iron-witch-outfit/light.webp"
+  },
+  {
+   "id": "zzz/jane/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "jane",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/jane/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/jane/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/jane/default/light.webp"
+  },
+  {
+   "id": "zzz/jane/hidden-nightfade",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "jane",
+   "variant": "hidden-nightfade",
+   "light": "http://127.0.0.1:3099/display/zzz/jane/hidden-nightfade/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/jane/hidden-nightfade/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/jane/hidden-nightfade/light.webp"
+  },
+  {
+   "id": "zzz/jane/nocturne-of-light",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "jane",
+   "variant": "nocturne-of-light",
+   "light": "http://127.0.0.1:3099/display/zzz/jane/nocturne-of-light/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/jane/nocturne-of-light/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/jane/nocturne-of-light/light.webp"
+  },
+  {
+   "id": "zzz/ju-fufu/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "ju-fufu",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/ju-fufu/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/ju-fufu/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/ju-fufu/default/light.webp"
+  },
+  {
+   "id": "zzz/ju-fufu/summit-s-cute-tiger",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "ju-fufu",
+   "variant": "summit-s-cute-tiger",
+   "light": "http://127.0.0.1:3099/display/zzz/ju-fufu/summit-s-cute-tiger/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/ju-fufu/summit-s-cute-tiger/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/ju-fufu/summit-s-cute-tiger/light.webp"
+  },
+  {
+   "id": "zzz/koleda/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "koleda",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/koleda/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/koleda/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/koleda/default/light.webp"
+  },
+  {
+   "id": "zzz/koleda/heart-hammer",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "koleda",
+   "variant": "heart-hammer",
+   "light": "http://127.0.0.1:3099/display/zzz/koleda/heart-hammer/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/koleda/heart-hammer/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/koleda/heart-hammer/light.webp"
+  },
+  {
+   "id": "zzz/lucia/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "lucia",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/lucia/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/lucia/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/lucia/default/light.webp"
+  },
+  {
+   "id": "zzz/lucia/whispering-dreams",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "lucia",
+   "variant": "whispering-dreams",
+   "light": "http://127.0.0.1:3099/display/zzz/lucia/whispering-dreams/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/lucia/whispering-dreams/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/lucia/whispering-dreams/light.webp"
+  },
+  {
+   "id": "zzz/lucy/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "lucy",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/lucy/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/lucy/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/lucy/default/light.webp"
+  },
+  {
+   "id": "zzz/miyabi/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "miyabi",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/miyabi/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/miyabi/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/miyabi/default/light.webp"
+  },
+  {
+   "id": "zzz/nangong-yu/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "nangong-yu",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/nangong-yu/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/nangong-yu/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/nangong-yu/default/light.webp"
+  },
+  {
+   "id": "zzz/nangong-yu/dreamy-dancer",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "nangong-yu",
+   "variant": "dreamy-dancer",
+   "light": "http://127.0.0.1:3099/display/zzz/nangong-yu/dreamy-dancer/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/nangong-yu/dreamy-dancer/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/nangong-yu/dreamy-dancer/light.webp"
+  },
+  {
+   "id": "zzz/nangong-yu/rhapsody-s-muse",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "nangong-yu",
+   "variant": "rhapsody-s-muse",
+   "light": "http://127.0.0.1:3099/display/zzz/nangong-yu/rhapsody-s-muse/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/nangong-yu/rhapsody-s-muse/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/nangong-yu/rhapsody-s-muse/light.webp"
+  },
+  {
+   "id": "zzz/nekomata/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "nekomata",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/nekomata/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/nekomata/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/nekomata/default/light.webp"
+  },
+  {
+   "id": "zzz/nicole/cunning-cutie",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "nicole",
+   "variant": "cunning-cutie",
+   "light": "http://127.0.0.1:3099/display/zzz/nicole/cunning-cutie/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/nicole/cunning-cutie/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/nicole/cunning-cutie/light.webp"
+  },
+  {
+   "id": "zzz/nicole/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "nicole",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/nicole/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/nicole/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/nicole/default/light.webp"
+  },
+  {
+   "id": "zzz/nicole/lil-sassy",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "nicole",
+   "variant": "lil-sassy",
+   "light": "http://127.0.0.1:3099/display/zzz/nicole/lil-sassy/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/nicole/lil-sassy/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/nicole/lil-sassy/light.webp"
+  },
+  {
+   "id": "zzz/norma/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "norma",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/norma/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/norma/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/norma/default/light.webp"
+  },
+  {
+   "id": "zzz/orphie-and-magus/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "orphie-and-magus",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/orphie-and-magus/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/orphie-and-magus/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/orphie-and-magus/default/light.webp"
+  },
+  {
+   "id": "zzz/piper/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "piper",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/piper/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/piper/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/piper/default/light.webp"
+  },
+  {
+   "id": "zzz/promeia/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "promeia",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/promeia/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/promeia/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/promeia/default/light.webp"
+  },
+  {
+   "id": "zzz/promeia/shrouded-in-frost",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "promeia",
+   "variant": "shrouded-in-frost",
+   "light": "http://127.0.0.1:3099/display/zzz/promeia/shrouded-in-frost/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/promeia/shrouded-in-frost/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/promeia/shrouded-in-frost/light.webp"
+  },
+  {
+   "id": "zzz/pulchra/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "pulchra",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/pulchra/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/pulchra/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/pulchra/default/light.webp"
+  },
+  {
+   "id": "zzz/qingyi/clarity-peace-and-joy",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "qingyi",
+   "variant": "clarity-peace-and-joy",
+   "light": "http://127.0.0.1:3099/display/zzz/qingyi/clarity-peace-and-joy/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/qingyi/clarity-peace-and-joy/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/qingyi/clarity-peace-and-joy/light.webp"
+  },
+  {
+   "id": "zzz/qingyi/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "qingyi",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/qingyi/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/qingyi/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/qingyi/default/light.webp"
+  },
+  {
+   "id": "zzz/remielle/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "remielle",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/remielle/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/remielle/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/remielle/default/light.webp"
+  },
+  {
+   "id": "zzz/seed/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "seed",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/seed/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/seed/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/seed/default/light.webp"
+  },
+  {
+   "id": "zzz/seed/flower-in-bloom",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "seed",
+   "variant": "flower-in-bloom",
+   "light": "http://127.0.0.1:3099/display/zzz/seed/flower-in-bloom/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/seed/flower-in-bloom/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/seed/flower-in-bloom/light.webp"
+  },
+  {
+   "id": "zzz/sigrid/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "sigrid",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/sigrid/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/sigrid/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/sigrid/default/light.webp"
+  },
+  {
+   "id": "zzz/soldier-0-anby/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "soldier-0-anby",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/soldier-0-anby/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/soldier-0-anby/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/soldier-0-anby/default/light.webp"
+  },
+  {
+   "id": "zzz/soldier-0-anby/silver-soldier",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "soldier-0-anby",
+   "variant": "silver-soldier",
+   "light": "http://127.0.0.1:3099/display/zzz/soldier-0-anby/silver-soldier/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/soldier-0-anby/silver-soldier/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/soldier-0-anby/silver-soldier/light.webp"
+  },
+  {
+   "id": "zzz/soldier-11/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "soldier-11",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/soldier-11/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/soldier-11/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/soldier-11/default/light.webp"
+  },
+  {
+   "id": "zzz/soldier-11/elite-soldier",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "soldier-11",
+   "variant": "elite-soldier",
+   "light": "http://127.0.0.1:3099/display/zzz/soldier-11/elite-soldier/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/soldier-11/elite-soldier/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/soldier-11/elite-soldier/light.webp"
+  },
+  {
+   "id": "zzz/soukaku/dance-of-azure-ice",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "soukaku",
+   "variant": "dance-of-azure-ice",
+   "light": "http://127.0.0.1:3099/display/zzz/soukaku/dance-of-azure-ice/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/soukaku/dance-of-azure-ice/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/soukaku/dance-of-azure-ice/light.webp"
+  },
+  {
+   "id": "zzz/soukaku/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "soukaku",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/soukaku/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/soukaku/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/soukaku/default/light.webp"
+  },
+  {
+   "id": "zzz/sunna/afternoon-tea-break",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "sunna",
+   "variant": "afternoon-tea-break",
+   "light": "http://127.0.0.1:3099/display/zzz/sunna/afternoon-tea-break/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/sunna/afternoon-tea-break/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/sunna/afternoon-tea-break/light.webp"
+  },
+  {
+   "id": "zzz/sunna/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "sunna",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/sunna/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/sunna/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/sunna/default/light.webp"
+  },
+  {
+   "id": "zzz/sunna/dreams-on-loop",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "sunna",
+   "variant": "dreams-on-loop",
+   "light": "http://127.0.0.1:3099/display/zzz/sunna/dreams-on-loop/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/sunna/dreams-on-loop/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/sunna/dreams-on-loop/light.webp"
+  },
+  {
+   "id": "zzz/trigger/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "trigger",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/trigger/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/trigger/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/trigger/default/light.webp"
+  },
+  {
+   "id": "zzz/trigger/gaze-into-the-light",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "trigger",
+   "variant": "gaze-into-the-light",
+   "light": "http://127.0.0.1:3099/display/zzz/trigger/gaze-into-the-light/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/trigger/gaze-into-the-light/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/trigger/gaze-into-the-light/light.webp"
+  },
+  {
+   "id": "zzz/velina/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "velina",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/velina/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/velina/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/velina/default/light.webp"
+  },
+  {
+   "id": "zzz/vivian/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "vivian",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/vivian/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/vivian/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/vivian/default/light.webp"
+  },
+  {
+   "id": "zzz/vivian/fluttering-violet",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "vivian",
+   "variant": "fluttering-violet",
+   "light": "http://127.0.0.1:3099/display/zzz/vivian/fluttering-violet/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/vivian/fluttering-violet/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/vivian/fluttering-violet/light.webp"
+  },
+  {
+   "id": "zzz/vivian/iris-of-the-shore",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "vivian",
+   "variant": "iris-of-the-shore",
+   "light": "http://127.0.0.1:3099/display/zzz/vivian/iris-of-the-shore/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/vivian/iris-of-the-shore/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/vivian/iris-of-the-shore/light.webp"
+  },
+  {
+   "id": "zzz/yanagi/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "yanagi",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/yanagi/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/yanagi/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/yanagi/default/light.webp"
+  },
+  {
+   "id": "zzz/ye-shunguang/clouddrift-illumination",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "ye-shunguang",
+   "variant": "clouddrift-illumination",
+   "light": "http://127.0.0.1:3099/display/zzz/ye-shunguang/clouddrift-illumination/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/ye-shunguang/clouddrift-illumination/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/ye-shunguang/clouddrift-illumination/light.webp"
+  },
+  {
+   "id": "zzz/ye-shunguang/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "ye-shunguang",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/ye-shunguang/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/ye-shunguang/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/ye-shunguang/default/light.webp"
+  },
+  {
+   "id": "zzz/ye-shunguang/touch-of-dawnlight",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "ye-shunguang",
+   "variant": "touch-of-dawnlight",
+   "light": "http://127.0.0.1:3099/display/zzz/ye-shunguang/touch-of-dawnlight/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/ye-shunguang/touch-of-dawnlight/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/ye-shunguang/touch-of-dawnlight/light.webp"
+  },
+  {
+   "id": "zzz/yidhari/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "yidhari",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/yidhari/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/yidhari/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/yidhari/default/light.webp"
+  },
+  {
+   "id": "zzz/yixuan/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "yixuan",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/yixuan/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/yixuan/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/yixuan/default/light.webp"
+  },
+  {
+   "id": "zzz/yixuan/summit-of-clouds",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "yixuan",
+   "variant": "summit-of-clouds",
+   "light": "http://127.0.0.1:3099/display/zzz/yixuan/summit-of-clouds/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/yixuan/summit-of-clouds/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/yixuan/summit-of-clouds/light.webp"
+  },
+  {
+   "id": "zzz/yixuan/trails-of-ink",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "yixuan",
+   "variant": "trails-of-ink",
+   "light": "http://127.0.0.1:3099/display/zzz/yixuan/trails-of-ink/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/yixuan/trails-of-ink/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/yixuan/trails-of-ink/light.webp"
+  },
+  {
+   "id": "zzz/yuzuha/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "yuzuha",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/yuzuha/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/yuzuha/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/yuzuha/default/light.webp"
+  },
+  {
+   "id": "zzz/zhao/cuddly-executor",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "zhao",
+   "variant": "cuddly-executor",
+   "light": "http://127.0.0.1:3099/display/zzz/zhao/cuddly-executor/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/zhao/cuddly-executor/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/zhao/cuddly-executor/light.webp"
+  },
+  {
+   "id": "zzz/zhao/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "zhao",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/zhao/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/zhao/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/zhao/default/light.webp"
+  },
+  {
+   "id": "zzz/zhu-yuan/default",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "zhu-yuan",
+   "variant": "default",
+   "light": "http://127.0.0.1:3099/display/zzz/zhu-yuan/default/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/zhu-yuan/default/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/zhu-yuan/default/light.webp"
+  },
+  {
+   "id": "zzz/zhu-yuan/suppressor-of-evil",
+   "game": "zzz",
+   "gameName": "绝区零",
+   "character": "zhu-yuan",
+   "variant": "suppressor-of-evil",
+   "light": "http://127.0.0.1:3099/display/zzz/zhu-yuan/suppressor-of-evil/light.webp",
+   "dark": "http://127.0.0.1:3099/display/zzz/zhu-yuan/suppressor-of-evil/dark.webp",
+   "thumb": "http://127.0.0.1:3099/thumb/zzz/zhu-yuan/suppressor-of-evil/light.webp"
+  }
+ ]
+}

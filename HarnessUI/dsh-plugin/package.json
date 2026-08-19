@@ -1,0 +1,7 @@
+{
+  "name": "dsh-harness-ui-skins",
+  "version": "0.1.0",
+  "description": "HarnessUI 角色皮肤：画廊选择 + 全库轮播两种模式",
+  "main": "lib/index.js",
+  "cordis": { "client": "lib/client.js" }
+}

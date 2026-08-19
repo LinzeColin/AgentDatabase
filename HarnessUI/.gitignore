@@ -1,0 +1,8 @@
+# 成品与派生图不进 git —— 母版 4.8GB、显示图 103MB。
+# 它们归档在 NAS：smb://192.168.0.1/share/03_资料库/MetaData/HarnessUI/<游戏>/<角色>/skins/
+output/
+skin-assets/
+*.png
+*.webp
+*.zip
+.oaikey

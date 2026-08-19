@@ -1,0 +1,7 @@
+# One row, two modes. The skin center is mutually exclusive — `dsh-skin use X`
+# writes `disabled: true` onto every other skin row — so shipping the gallery
+# picker and the rotation as two plugins would mean each one switches the other
+# off. They are the same skin wearing a different policy.
+- insert:
+    - id: ui-skin-harness-ui
+      name: dsh-harness-ui-skins
