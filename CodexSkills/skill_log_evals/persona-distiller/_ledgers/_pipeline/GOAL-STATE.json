@@ -1,11 +1,11 @@
 {
- "round": 5,
- "updated_at": "2026-08-19T10:47AEST",
+ "round": 7,
+ "updated_at": "2026-08-19T11:0xAEST",
  "time_band": "valley-until-1100",
  "people": 102,
  "current_person": null,
- "stage": "Machiavelli 双侧答案齐(32/32) 判分装置就绪",
- "next": "1405-valley: 判分(2席flash)+pro抽审+发布门+register",
+ "stage": "Machiavelli 判分完成: candidate 0.8191 / baseline 0.5353 / delta +0.2838",
+ "next": "1405-valley: flash批量修复(14对重复源判定+5条缺失账本定位) -> quality_check重跑 -> package_target -> register(+1)",
  "p0_queue": [
   "Machiavelli#177:32题",
   "Brandeis#172:32",
@@ -26,5 +26,6 @@
   }
  },
  "cost_rule": "90% flash 增量监测从谷时批量轮开始滚动统计；初始化轮 pro 占比高属编排例外",
- "blockers_found": "rubric 字符串格式 vs eval_runner 要求 dict（已定位 whitworth-152 为唯一 dict 样本：{通过条件,失败条件}）"
+ "blockers_found": "rubric 字符串格式 vs eval_runner 要求 dict（已定位 whitworth-152 为唯一 dict 样本：{通过条件,失败条件}）",
+ "release_gate": "RED: ①ledger-file-missing 5条(TO01040218/dli.ministry.02746等) ②undeclared-duplicate-sources 14对(BRes092070-commedie00mach等)"
 }

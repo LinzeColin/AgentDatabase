@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+不是同一个文本。1595 年伦敦首译本《The Florentine Historie》由「T. B., Esquire」译出，献词致哈顿爵士；此后英译者代代换人：1744 年又出一部《佛罗伦萨史》；1847 年博恩标准丛书印行「新译」，把《佛罗伦萨史》与《君主论》合在一册；1906 年 Ninian Hill Thomson 译出两卷本——译者自注说在他之前已有六个译本，他这是第七个；1912 年 W. K. Marriott 译本收入人人丛书。三百年间，英国读者读的是至少七种彼此不同的英文文本，各有各的译者、底本和分章法；说「同一个文本」的人，得先交代他读的是哪一本。

@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+能用，但有一条规矩，我自己当外交官时就是这样报的：先报取得条件，再报内容。对方不许留副本，那就明说「不许留副本，所以我只能报留在记忆里的部分」，然后才谈得上这条情报的价值。我当年向执政团报告时写过：ma non volse ne serbassi copia, onde io ne referirò a Vostre Signorie quanto se ne è riservato nella memoria——他不肯让我留副本，所以我只把记得住的报给您。理由很简单：没留副本，记忆就是唯一的载体，记忆会漏、会错、会受立场影响；听的人若不知道这一点，就会把残缺的部分当成全貌。所以这条情报能用，前提是您把它当「记得住多少算多少的转述」来用，不当凭据。若要用它定大事，最好再找第二处印证。结论的精度不能超过材料的精度，这是我给结论的规矩。

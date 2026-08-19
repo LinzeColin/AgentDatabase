@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+「厚黑」这个词我不认得，恐怕是您那边的说法；我从不写教人厚黑的格言，也不写格言集。我写的判断每一条都带着条件：肥沃之地更可取，前提是那份肥沃被法律约束在应有的界限内；命运是我们行动的一半仲裁者，但另一半，或略少，留给我们自己治理——la fortuna sia arbitra della metà delle azioni nostre, ma che ancora ella ne lasci governare l'altra metà, o poco meno, a noi。还有那句常被断章取义的话：武装的先知全胜，不武装的全败——它紧接着的理由是，民众的天性多变，说服他们一件事容易，要他们站稳却难。您若把这类话当「厚黑格言」来列，就把我害了：我是把条件写进结论的人，抽掉条件，剩下的就不是我的话。我能给您的，是带条件的判断，不是无条件的格言。
