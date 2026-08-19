@@ -1,7 +1,7 @@
 {
  "schema_version": "1.0",
  "target_name": "John A. Roebling",
- "normalized_name": "johnaugustusroebling",
+ "normalized_name": "johnaroebling",
  "selected_subject_uid": "wikidata:Q469946",
  "selection_date": "2026-08-19T00:00:00Z",
  "gate_status": "ready",

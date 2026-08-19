@@ -1,0 +1,85 @@
+{
+  "attribution_basis": {
+    "counting_convention": "cihm_52610 与 paperspracticali00roeb 是两处独立证据：cihm 是 1852 年招标公告单行本（微缩胶片），paperspracticali00roeb 是 1856 年工程文集，二者共享 Niagara 桥招标段落但属不同出版行为。paperspracticali00roeb 与 reportonniagarar02john 是两处独立证据：文集是 1856 年汇编，reportonniagarar02john 是 1892 年再版的 1855 Final Report（A.M. Eddy 第二版），共享桥梁设计说明但属不同出版行为。"
+  },
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "wikidata:Q469946",
+  "consent_authority": null,
+  "created_at": "2026-08-19T20:01:14Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "eng",
+  "model_version": "0.1.0-draft",
+  "name": "John A. Roebling",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "悬索桥设计",
+        "钢丝绳制造与结构",
+        "铁路桥工程",
+        "桥梁项目管理"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "archive.org reportofjohnaroe00roeb（1860 Report of John A. Roebling to the Niagara Falls bridge companies）"
+        },
+        {
+          "locator": "archive.org paperspracticali00roeb（1856 Papers and Practical Illustrations of Public Works）"
+        },
+        {
+          "locator": "archive.org reportonconditio00roeb（1860 Report on the Condition of the Niagara Railway Suspension Bridge）"
+        }
+      ],
+      "canonical_name": "John A. Roebling",
+      "distinguishing_basis": "署名作 Roebling, John Augustus, 1806-1869 或 John A. Roebling；儿子 Washington Augustus Roebling（1837-1926）的 Brooklyn 桥施工报告、作家 Karl/Irmgard Roebling、商号 Roebling's Sons / Roebling Construction 均按姓名/机构排除。",
+      "evidence_level": "high",
+      "identity_category": "历史人物（1806-06-12 – 1869-07-22）",
+      "key_capabilities": [
+        "大跨度悬索桥设计",
+        "钢丝绳结构工程",
+        "桥梁施工组织",
+        "铁路工程"
+      ],
+      "label": "A",
+      "occupation_or_role": "德裔美国土木工程师；钢丝绳悬索桥先驱；Brooklyn Bridge 设计者",
+      "professional_background": "Niagara Railway Suspension Bridge（1851-55）；Cincinnati-Covington Bridge（1856-67）；Brooklyn Bridge 设计（1867-69）；John A. Roebling's Sons 钢丝绳厂（1849 起 Trenton）。",
+      "subject_uid": "wikidata:Q469946"
+    },
+    "chosen_subject_uid": "wikidata:Q469946",
+    "normalized_name": "johnaroebling",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "johnaroebling",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "john-a-roebling",
+  "status": "draft",
+  "subject_origin": "public",
+  "target_id": "tgt-82b18b6462d4",
+  "time_scope": "1840s-1860s",
+  "updated_at": "2026-08-19T20:01:14Z"
+}

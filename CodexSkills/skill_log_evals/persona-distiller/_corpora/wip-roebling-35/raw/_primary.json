@@ -1,0 +1,131 @@
+{
+  "总数": 14,
+  "计数": {
+    "一手": 10,
+    "二手": 4,
+    "需人判": 0
+  },
+  "一手占比下界": 0.7143,
+  "一手占比上界": 0.7143,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "Roebling"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "bub_gb_Di6x5SMUdl4C",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Report of John A. Roebling, civil engineer to the presidents and director of the",
+      "creator": "John A. Roebling",
+      "words": 6219
+    },
+    {
+      "identifier": "cihm_52610",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "500 tons of wire wanted [microform] : proposals are invited by the undersigned, ",
+      "creator": "Roebling, John Augustus, 1806-1869",
+      "words": 747
+    },
+    {
+      "identifier": "earlyhistoryofsa0000colo",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Early History of Saxonburg",
+      "creator": "Colonel Washington A. Roebling",
+      "words": 9236
+    },
+    {
+      "identifier": "inmemoriamjohnar00brow",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "In memoriam, John A. Roebling",
+      "creator": "Brown, John C. [from old catalog]",
+      "words": 8335
+    },
+    {
+      "identifier": "inmemoriamjohnar00unse",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "In memoriam, John A. Roebling : born June 12, 1806, died July 22, 1869, aged 63 ",
+      "creator": "",
+      "words": 9089
+    },
+    {
+      "identifier": "johnaroeblingacc00barb",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "John A. Roebling; an account of the ceremonies at the unveiling of a monument to",
+      "creator": "Barber, Alfred Newton, 1867-; Stokes, Edward Casper, 1860-; Estabrook, Henry Dod",
+      "words": 15982
+    },
+    {
+      "identifier": "johnaroeblingacc00barbiala",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "John A. Roebling; an account of the ceremonies at the unveiling of a monument to",
+      "creator": "Barber, Alfred Newton, 1867-; Stokes, Edward C. (Edward Casper), 1860-1942; Esta",
+      "words": 15994
+    },
+    {
+      "identifier": "ldpd_11290547_000",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Report of John A. Roebling, civil engineer [electronic resource] : to the direct",
+      "creator": "Roebling, John Augustus, 1806-1869; Niagara Falls International Bridge Company; ",
+      "words": 40
+    },
+    {
+      "identifier": "paperspracticali00roeb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Papers and Practical Illustrations of Public Works of Recent Construction, both ",
+      "creator": "Roebling, John Augustus, 1806-1869",
+      "words": 55216
+    },
+    {
+      "identifier": "reportjohnaroeb00compgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Report of John A. Roebling to the Presidents and Directors of the Niagara ...",
+      "creator": "John Augustus Roebling,  Niagara Falls Suspension Bridge Company",
+      "words": 6788
+    },
+    {
+      "identifier": "reportjohnaroeb01compgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Report of John A. Roebling to the Directors of the Niagara Falls ...",
+      "creator": "John Augustus Roebling,  Niagara Falls Suspension Bridge Company",
+      "words": 2395
+    },
+    {
+      "identifier": "reportofjohnaroe00roeb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Report of John A. Roebling, civil engineer, to the presidents and directors of t",
+      "creator": "Roebling, John Augustus, 1806-1869 author",
+      "words": 6216
+    },
+    {
+      "identifier": "reportonconditio00roeb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Report on the Condition of the Niagara Railway Suspension Bridge",
+      "creator": "Roebling, John Augustus, 1806-1869",
+      "words": 6220
+    },
+    {
+      "identifier": "reportonniagarar02john",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Report on the Niagara Railway Suspension Bridge",
+      "creator": "John A. Roebling",
+      "words": 12636
+    }
+  ]
+}

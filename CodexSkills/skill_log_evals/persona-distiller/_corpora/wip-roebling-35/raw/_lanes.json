@@ -1,0 +1,82 @@
+{
+ "lanes": 3,
+ "去掉纸面道后": 3,
+ "逐道份数": {
+  "writings": 7,
+  "decisions": 1,
+  "external": 5,
+  "conversations": 0,
+  "expression": 0,
+  "timeline": 0
+ },
+ "未分道": 0,
+ "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（不是默认值，且不虚增道数）",
+ "★手动修正": "2026-08-19 人工复核：ldpd_11290547_000 坏 OCR 未 ingest，故不在本表；报告类（1852/1860 Report、1856 文集、1892 再版）归 writings，招标公告归 decisions，二手（悼念册/揭幕册/Saxonburg）归 external。",
+ "明细": [
+  {
+   "identifier": "bub_gb_Di6x5SMUdl4C",
+   "道": "writings",
+   "title": "Report of John A. Roebling... Niagara Falls bridge companies (1860)"
+  },
+  {
+   "identifier": "paperspracticali00roeb",
+   "道": "writings",
+   "title": "Papers and Practical Illustrations of Public Works (1856)"
+  },
+  {
+   "identifier": "reportjohnaroeb00compgoog",
+   "道": "writings",
+   "title": "Report to the Presidents and Directors (1860)"
+  },
+  {
+   "identifier": "reportjohnaroeb01compgoog",
+   "道": "writings",
+   "title": "Report to the Directors (1852)"
+  },
+  {
+   "identifier": "reportofjohnaroe00roeb",
+   "道": "writings",
+   "title": "Report of John A. Roebling... condition of the bridge (1860)"
+  },
+  {
+   "identifier": "reportonconditio00roeb",
+   "道": "writings",
+   "title": "Report on the Condition of the Niagara Railway Suspension Bridge (1860)"
+  },
+  {
+   "identifier": "reportonniagarar02john",
+   "道": "writings",
+   "title": "Report on the Niagara Railway Suspension Bridge (1892 2nd ed of 1855 Final Report)"
+  },
+  {
+   "identifier": "cihm_52610",
+   "道": "decisions",
+   "title": "500 tons of wire wanted (1852 tender)"
+  },
+  {
+   "identifier": "inmemoriamjohnar00unse",
+   "道": "external",
+   "title": "In memoriam, John A. Roebling (1869)"
+  },
+  {
+   "identifier": "inmemoriamjohnar00brow",
+   "道": "external",
+   "title": "In memoriam, John A. Roebling (1869 LOC)"
+  },
+  {
+   "identifier": "johnaroeblingacc00barb",
+   "道": "external",
+   "title": "Monument unveiling ceremonies (1908)"
+  },
+  {
+   "identifier": "johnaroeblingacc00barbiala",
+   "道": "external",
+   "title": "Monument unveiling ceremonies (1908 cdl)"
+  },
+  {
+   "identifier": "earlyhistoryofsa0000colo",
+   "道": "external",
+   "title": "Early History of Saxonburg (1924)"
+  }
+ ]
+}

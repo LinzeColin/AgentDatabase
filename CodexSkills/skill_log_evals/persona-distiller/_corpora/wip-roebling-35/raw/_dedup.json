@@ -1,0 +1,41 @@
+{
+ "文件数": 13,
+ "阈值": 0.3,
+ "重复簇": [
+  [
+   "bub_gb_Di6x5SMUdl4C.txt",
+   "reportjohnaroeb00compgoog.txt",
+   "reportofjohnaroe00roeb.txt",
+   "reportonconditio00roeb.txt"
+  ],
+  [
+   "inmemoriamjohnar00unse.txt",
+   "inmemoriamjohnar00brow.txt"
+  ],
+  [
+   "johnaroeblingacc00barb.txt",
+   "johnaroeblingacc00barbiala.txt"
+  ]
+ ],
+ "独立文献数上界": 9,
+ "按题名归并的独立作品数": 9,
+ "★ 两个口径": "门用台账行数（同一套书的不同卷各自独立）；按题名归并的数回答「他有多少部不同的作品」",
+ "★口径": "min-hash Jaccard；同卷多扫描与同书不同卷需人判；derived_from 声明见 source-ledger.jsonl；cihm×papers、papers×1892 两对经 counting_convention 豁免（不同出版行为）",
+ "已声明 derived_from": {
+  "src-6f4e7ba39f64": [
+   "src-5d14356c3f4f"
+  ],
+  "src-6b121804a1ff": [
+   "src-5d14356c3f4f"
+  ],
+  "src-70deec048eca": [
+   "src-5d14356c3f4f"
+  ],
+  "src-dc1c59893f61": [
+   "src-d94fe48de06d"
+  ],
+  "src-379ee7660736": [
+   "src-a5a8afb148bb"
+  ]
+ }
+}

@@ -1,0 +1,359 @@
+{
+  "生成时刻": "2026-08-20T05:22:58",
+  "请求数": 14,
+  "已取回": 14,
+  "skipped_access_restricted": 0,
+  "剔除": 0,
+  "失败": 0,
+  "并发降级": "无（全程并发 4）",
+  "总词数": 155113,
+  "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
+  "记录": [
+    {
+      "identifier": "bub_gb_Di6x5SMUdl4C",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_Di6x5SMUdl4C.txt",
+      "source_url": "https://archive.org/download/bub_gb_Di6x5SMUdl4C/bub_gb_Di6x5SMUdl4C_djvu.txt",
+      "sha256": "6f4e7ba39f6423db24c26d854a89c528e6a55b55e068e0749d4fcdacae3579be",
+      "bytes": 36756,
+      "words": 6219,
+      "fetched_at": "2026-08-20T05:22:43",
+      "ia_date": "1860",
+      "ia_year": "1860",
+      "ia_publicdate": "2014-10-08 15:15:44",
+      "ia_creator": "John A. Roebling",
+      "ia_title": "Report of John A. Roebling, civil engineer to the presidents and director of the niagara falls suspension and niagara falls internatinoal bridge companies, on the condition of the niagara railway suspension bridge",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1855"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "cihm_52610",
+      "status": "已取回",
+      "note": "",
+      "file": "cihm_52610.txt",
+      "source_url": "https://archive.org/download/cihm_52610/cihm_52610_djvu.txt",
+      "sha256": "8d632a150cb03ea91eae740415914b30df74252fb59a7c6cb405996ec74c137e",
+      "bytes": 4135,
+      "words": 747,
+      "fetched_at": "2026-08-20T05:22:43",
+      "ia_date": "1852",
+      "ia_year": "",
+      "ia_publicdate": "2012-03-13 19:15:23",
+      "ia_creator": "Roebling, John Augustus, 1806-1869",
+      "ia_title": "500 tons of wire wanted [microform] : proposals are invited by the undersigned, on the part of the Niagara Falls International Bridge Companies, for the construction of the wire cables of the railroad suspension bridge ...",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1852"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "earlyhistoryofsa0000colo",
+      "status": "已取回",
+      "note": "",
+      "file": "earlyhistoryofsa0000colo.txt",
+      "source_url": "https://archive.org/download/earlyhistoryofsa0000colo/earlyhistoryofsa0000colo_djvu.txt",
+      "sha256": "6309169d1b9dead76235039f786b7c3ee27441983a29c81591928d2c89d68960",
+      "bytes": 61351,
+      "words": 9236,
+      "fetched_at": "2026-08-20T05:22:57",
+      "ia_date": "1924, reprint 1975",
+      "ia_year": "",
+      "ia_publicdate": "2017-07-30 19:59:41",
+      "ia_creator": "Colonel Washington A. Roebling",
+      "ia_title": "Early History of Saxonburg",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1500",
+        "1806",
+        "1831",
+        "1835",
+        "1840",
+        "1845",
+        "1852",
+        "1858",
+        "1867",
+        "1924",
+        "1975"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "inmemoriamjohnar00brow",
+      "status": "已取回",
+      "note": "",
+      "file": "inmemoriamjohnar00brow.txt",
+      "source_url": "https://archive.org/download/inmemoriamjohnar00brow/inmemoriamjohnar00brow_djvu.txt",
+      "sha256": "dc1c59893f619b971194e1bf517e915a9c0c7543d21550de6d67bb6ee1f97038",
+      "bytes": 54615,
+      "words": 8335,
+      "fetched_at": "2026-08-20T05:22:55",
+      "ia_date": "1869",
+      "ia_year": "",
+      "ia_publicdate": "2011-05-16 18:30:55",
+      "ia_creator": "Brown, John C. [from old catalog]",
+      "ia_title": "In memoriam, John A. Roebling",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1619",
+        "1806",
+        "1844",
+        "1848",
+        "1851",
+        "1855",
+        "1856",
+        "1862",
+        "1866",
+        "1867",
+        "1869"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "inmemoriamjohnar00unse",
+      "status": "已取回",
+      "note": "",
+      "file": "inmemoriamjohnar00unse.txt",
+      "source_url": "https://archive.org/download/inmemoriamjohnar00unse/inmemoriamjohnar00unse_djvu.txt",
+      "sha256": "d94fe48de06d81b1ce1b6c70bc53423aa5d6627c2daa706ef6031bb8e46e1e80",
+      "bytes": 51360,
+      "words": 9089,
+      "fetched_at": "2026-08-20T05:22:55",
+      "ia_date": "1869",
+      "ia_year": "",
+      "ia_publicdate": "2021-12-09 16:08:19",
+      "ia_creator": "",
+      "ia_title": "In memoriam, John A. Roebling : born June 12, 1806, died July 22, 1869, aged 63 years",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1806",
+        "1869"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "johnaroeblingacc00barb",
+      "status": "已取回",
+      "note": "",
+      "file": "johnaroeblingacc00barb.txt",
+      "source_url": "https://archive.org/download/johnaroeblingacc00barb/johnaroeblingacc00barb_djvu.txt",
+      "sha256": "a5a8afb148bbac2ea4cb5aef79d9892a97aed26518d3f615ada291950af04ea0",
+      "bytes": 107237,
+      "words": 15982,
+      "fetched_at": "2026-08-20T05:22:58",
+      "ia_date": "1908",
+      "ia_year": "1908",
+      "ia_publicdate": "2011-01-21 19:03:47",
+      "ia_creator": [
+        "Barber, Alfred Newton, 1867-",
+        "Stokes, Edward Casper, 1860-",
+        "Estabrook, Henry Dodge, 1854-1917"
+      ],
+      "ia_title": "John A. Roebling; an account of the ceremonies at the unveiling of a monument to his memory",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1600",
+        "1855",
+        "1869",
+        "1883",
+        "1908"
+      ],
+      "digitization_years": [
+        "2011"
+      ]
+    },
+    {
+      "identifier": "johnaroeblingacc00barbiala",
+      "status": "已取回",
+      "note": "",
+      "file": "johnaroeblingacc00barbiala.txt",
+      "source_url": "https://archive.org/download/johnaroeblingacc00barbiala/johnaroeblingacc00barbiala_djvu.txt",
+      "sha256": "379ee76607368e8c07f01e51a5651b46f7fc4232aa588f2aea871fa958170619",
+      "bytes": 107127,
+      "words": 15994,
+      "fetched_at": "2026-08-20T05:22:57",
+      "ia_date": "1908",
+      "ia_year": "",
+      "ia_publicdate": "2006-11-22 10:26:39",
+      "ia_creator": [
+        "Barber, Alfred Newton, 1867-",
+        "Stokes, Edward C. (Edward Casper), 1860-1942",
+        "Estabrook, Henry Dodge, 1854-1917"
+      ],
+      "ia_title": "John A. Roebling; an account of the ceremonies at the unveiling of a monument to his memory",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1600",
+        "1855",
+        "1869",
+        "1883",
+        "1908"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "ldpd_11290547_000",
+      "status": "已取回",
+      "note": "",
+      "file": "ldpd_11290547_000.txt",
+      "source_url": "https://archive.org/download/ldpd_11290547_000/ldpd_11290547_000_djvu.txt",
+      "sha256": "10d9280d41c1e1f65a13556a272d6dc6bec1ab58bcccb9e02fd443df2a9a84db",
+      "bytes": 246,
+      "words": 40,
+      "fetched_at": "2026-08-20T05:22:43",
+      "ia_date": "1852",
+      "ia_year": "1852",
+      "ia_publicdate": "2015-03-25 20:14:43",
+      "ia_creator": [
+        "Roebling, John Augustus, 1806-1869",
+        "Niagara Falls International Bridge Company",
+        "Niagara Falls Suspension Bridge Company"
+      ],
+      "ia_title": "Report of John A. Roebling, civil engineer [electronic resource] : to the directors of the Niagara Falls International and Suspension Bridge companies",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "paperspracticali00roeb",
+      "status": "已取回",
+      "note": "",
+      "file": "paperspracticali00roeb.txt",
+      "source_url": "https://archive.org/download/paperspracticali00roeb/paperspracticali00roeb_djvu.txt",
+      "sha256": "46dc13c375e12badc98ef99cbcad88a7e9b2ea9e14b684089db3913249fe8661",
+      "bytes": 376759,
+      "words": 55216,
+      "fetched_at": "2026-08-20T05:22:46",
+      "ia_date": "1856",
+      "ia_year": "",
+      "ia_publicdate": "2012-11-26 15:00:54",
+      "ia_creator": "Roebling, John Augustus, 1806-1869",
+      "ia_title": "Papers and Practical Illustrations of Public Works of Recent Construction, both British and American",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1856",
+        "2000"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "reportjohnaroeb00compgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "reportjohnaroeb00compgoog.txt",
+      "source_url": "https://archive.org/download/reportjohnaroeb00compgoog/reportjohnaroeb00compgoog_djvu.txt",
+      "sha256": "6b121804a1ff62ec10a2a8fbfc7142ee938c66c662d0b21996a93e07d9190299",
+      "bytes": 40520,
+      "words": 6788,
+      "fetched_at": "2026-08-20T05:22:49",
+      "ia_date": "1860",
+      "ia_year": "1860",
+      "ia_publicdate": "2008-10-06 15:07:33",
+      "ia_creator": "John Augustus Roebling,  Niagara Falls Suspension Bridge Company",
+      "ia_title": "Report of John A. Roebling to the Presidents and Directors of the Niagara ...",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1855",
+        "1856",
+        "1860"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "reportjohnaroeb01compgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "reportjohnaroeb01compgoog.txt",
+      "source_url": "https://archive.org/download/reportjohnaroeb01compgoog/reportjohnaroeb01compgoog_djvu.txt",
+      "sha256": "3c1f72aef48841d1a8739835903362918d2cbd34a03877348c264c4abe864816",
+      "bytes": 13994,
+      "words": 2395,
+      "fetched_at": "2026-08-20T05:22:47",
+      "ia_date": "1852",
+      "ia_year": "1852",
+      "ia_publicdate": "2008-02-25 03:03:17",
+      "ia_creator": "John Augustus Roebling,  Niagara Falls Suspension Bridge Company",
+      "ia_title": "Report of John A. Roebling to the Directors of the Niagara Falls ...",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1852"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "reportofjohnaroe00roeb",
+      "status": "已取回",
+      "note": "",
+      "file": "reportofjohnaroe00roeb.txt",
+      "source_url": "https://archive.org/download/reportofjohnaroe00roeb/reportofjohnaroe00roeb_djvu.txt",
+      "sha256": "5d14356c3f4f9962613539093ce261e983249ee9af7d71bf026c07c1bd2eac54",
+      "bytes": 37011,
+      "words": 6216,
+      "fetched_at": "2026-08-20T05:22:50",
+      "ia_date": "1860",
+      "ia_year": "",
+      "ia_publicdate": "2024-04-12 20:51:16",
+      "ia_creator": "Roebling, John Augustus, 1806-1869 author",
+      "ia_title": "Report of John A. Roebling, civil engineer, to the presidents and directors of the Niagara Falls Suspension and Niagara Falls International Bridge Companies, on the condition of the Niagara Railway Suspension Bridge, August 1, 1860",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1855",
+        "1860"
+      ],
+      "digitization_years": [
+        "2024"
+      ]
+    },
+    {
+      "identifier": "reportonconditio00roeb",
+      "status": "已取回",
+      "note": "",
+      "file": "reportonconditio00roeb.txt",
+      "source_url": "https://archive.org/download/reportonconditio00roeb/reportonconditio00roeb_djvu.txt",
+      "sha256": "70deec048ecab48f9abad9a09d4fb5c6296cd7385e45a8e23adffc31214a978a",
+      "bytes": 42291,
+      "words": 6220,
+      "fetched_at": "2026-08-20T05:22:53",
+      "ia_date": "1860",
+      "ia_year": "",
+      "ia_publicdate": "2012-11-26 15:02:15",
+      "ia_creator": "Roebling, John Augustus, 1806-1869",
+      "ia_title": "Report on the Condition of the Niagara Railway Suspension Bridge",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1855",
+        "1860"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "reportonniagarar02john",
+      "status": "已取回",
+      "note": "",
+      "file": "reportonniagarar02john.txt",
+      "source_url": "https://archive.org/download/reportonniagarar02john/reportonniagarar02john_djvu.txt",
+      "sha256": "96ebd80c6e665386b7142e65bcc879afbff3f35160a9f3e11ced5b6fd22018e1",
+      "bytes": 84047,
+      "words": 12636,
+      "fetched_at": "2026-08-20T05:22:50",
+      "ia_date": "1892",
+      "ia_year": "",
+      "ia_publicdate": "2012-11-26 14:58:03",
+      "ia_creator": "John A. Roebling",
+      "ia_title": "Report on the Niagara Railway Suspension Bridge",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1855",
+        "1892",
+        "2000"
+      ],
+      "digitization_years": [
+        "2012"
+      ]
+    }
+  ]
+}
