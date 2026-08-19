@@ -1,0 +1,11 @@
+{
+ "schema_version": "1.0",
+ "target_name": "John A. Roebling",
+ "normalized_name": "johnaugustusroebling",
+ "selected_subject_uid": "wikidata:Q469946",
+ "selection_date": "2026-08-19T00:00:00Z",
+ "gate_status": "ready",
+ "resolution": "single",
+ "selected_candidate": "A",
+ "rationale": "探源 68 条：一手 9 份（1852/1860 Niagara 报告、1856 工程文集）目标全部第一作者；二手 5 份（悼念册/揭幕册/Saxonburg 史）。儿子 Washington 与商号 Roebling's Sons 按 EXCLUDE 排除。"
+}

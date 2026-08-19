@@ -1,0 +1,53 @@
+{
+ "schema_version": "1.0",
+ "target_name": "John A. Roebling",
+ "normalized_name": "johnaugustusroebling",
+ "search_scope": [
+  "sibling canonical registry",
+  "authoritative public sources supplied by orchestration"
+ ],
+ "selected_subject_uid": "wikidata:Q469946",
+ "generated_at": "2026-08-19T00:00:00Z",
+ "resolution": "single",
+ "status": "ready",
+ "candidate_count": 1,
+ "candidate_cards": [
+  "A. 人物与身份：John Augustus Roebling（1806-06-12 – 1869-07-22）；德裔美国土木工程师；钢丝绳悬索桥先驱——Niagara 铁路悬索桥（1855）、Cincinnati-Covington 桥、Brooklyn Bridge 设计者（1867 方案，开工前逝世，其子 Washington 施工）；John A. Roebling's Sons 钢丝绳厂创始人。\\n   专业背景：铁路、悬索桥、钢丝绳制造。\\n   应用价值：大跨度悬索桥设计；钢丝绳结构工程；桥梁施工组织。\\n   区分依据：署名作 Roebling, John Augustus, 1806-1869 / John A. Roebling；儿子 Washington Augustus Roebling（1837-1926）的工程报告（Brooklyn 桥施工）不是目标著作；作家 Karl Roebling 与 Irmgard Roebling、商号 John A. Roebling's Sons Co / Roebling Construction Company 按姓名/机构排除。"
+ ],
+ "candidates": [
+  {
+   "label": "A",
+   "canonical_name": "John A. Roebling",
+   "subject_uid": "wikidata:Q469946",
+   "identity_category": "历史人物（1806-06-12 – 1869-07-22）",
+   "occupation_or_role": "德裔美国土木工程师；钢丝绳悬索桥先驱；Brooklyn Bridge 设计者",
+   "professional_background": "Niagara Railway Suspension Bridge（1851-55）；Cincinnati-Covington Bridge（1856-67）；Brooklyn Bridge 设计（1867-69）；John A. Roebling's Sons 钢丝绳厂（1849 起 Trenton）。",
+   "key_capabilities": [
+    "大跨度悬索桥设计",
+    "钢丝绳结构工程",
+    "桥梁施工组织",
+    "铁路工程"
+   ],
+   "application_scenarios": [
+    "悬索桥设计",
+    "钢丝绳制造与结构",
+    "铁路桥工程",
+    "桥梁项目管理"
+   ],
+   "evidence_level": "high",
+   "distinguishing_basis": "署名作 Roebling, John Augustus, 1806-1869 或 John A. Roebling；儿子 Washington Augustus Roebling（1837-1926）的 Brooklyn 桥施工报告、作家 Karl/Irmgard Roebling、商号 Roebling's Sons / Roebling Construction 均按姓名/机构排除。",
+   "authoritative_sources": [
+    {
+     "locator": "archive.org reportofjohnaroe00roeb（1860 Report of John A. Roebling to the Niagara Falls bridge companies）"
+    },
+    {
+     "locator": "archive.org paperspracticali00roeb（1856 Papers and Practical Illustrations of Public Works）"
+    },
+    {
+     "locator": "archive.org reportonconditio00roeb（1860 Report on the Condition of the Niagara Railway Suspension Bridge）"
+    }
+   ]
+  }
+ ],
+ "evidence_notes": "IA 探源 68 条：creator Roebling, John Augustus 5 条 / John A. 变体 0 / title Roebling 39 条 / creator Roebling 34 条 / Brooklyn pre-1930 20 条 / Niagara 2 条。一手 9 份全部目标第一作者；二手 5 份（1869 悼念册×2、1908 纪念碑揭幕册×2、1924 Saxonburg 早期史）。同名者见 00-抓源前必读.md。"
+}

@@ -1,0 +1,4 @@
+# numFound=1 rows=1 query=title:(brooklyn bridge) AND creator:(Roebling)
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+reportofchiefeng00roeb	1877-01-01T00:00:00Z	1877	Roebling, Washington Augustus, 1837-1926.	Report of the chief engineer of the New York & Brooklyn Bridge, January 1, 1877.	eng	durstoldyorklibrary; ColumbiaUniversityLibraries; americana; fav-jellooperator; fav-wengae

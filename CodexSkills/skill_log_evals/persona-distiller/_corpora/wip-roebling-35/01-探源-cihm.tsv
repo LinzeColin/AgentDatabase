@@ -1,0 +1,5 @@
+# numFound=2 rows=2 query=creator:("Roebling") AND mediatype:texts AND identifier:cihm*
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+cihm_52610	1852-01-01T00:00:00Z	1852	Roebling, John Augustus, 1806-1869	500 tons of wire wanted [microform] : proposals are invited by the undersigned, on the part of the Niagara Falls International Bridge Companies, for the construction of the wire ca	eng	university_of_alberta_libraries_microfilm; university_of_alberta_libraries; toronto; microfilm
+cihm_13289	1877-01-01T00:00:00Z	1877	Roebling, W. A. (Washington Augustus), 1837-1926	A reply to the recent criticism made by Mr. Edward Wasell, upon the Niagara Railway suspension bridge [microform]	eng	university_of_alberta_libraries_microfilm; university_of_alberta_libraries; toronto; microfilm

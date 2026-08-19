@@ -1,0 +1,8 @@
+# numFound=5 rows=5 query=creator:"Roebling, John"
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+reportofjohnaroe00roeb	1860-01-01T00:00:00Z	1860	Roebling, John Augustus, 1806-1869 author	Report of John A. Roebling, civil engineer, to the presidents and directors of the Niagara Falls Suspension and Niagara Falls International Bridge Companies, on the condition of th	eng	thomasfishercanadiana; thomasfisher; toronto; university_of_toronto
+ldpd_11290547_000	1852-01-01T00:00:00Z	1852	Roebling, John Augustus, 1806-1869; Niagara Falls International Bridge Company; Niagara Falls Suspension Bridge Company	Report of John A. Roebling, civil engineer [electronic resource] : to the directors of the Niagara Falls International and Suspension Bridge companies	eng	ColumbiaUniversityLibraries; durstoldyorklibrary; americana
+reportonconditio00roeb	1860-01-01T00:00:00Z	1860	Roebling, John Augustus, 1806-1869	Report on the Condition of the Niagara Railway Suspension Bridge	eng	BrockUniversity; ontario_council_university_libraries; toronto
+cihm_52610	1852-01-01T00:00:00Z	1852	Roebling, John Augustus, 1806-1869	500 tons of wire wanted [microform] : proposals are invited by the undersigned, on the part of the Niagara Falls International Bridge Companies, for the construction of the wire ca	eng	university_of_alberta_libraries_microfilm; university_of_alberta_libraries; toronto; microfilm
+paperspracticali00roeb	1856-01-01T00:00:00Z	1856	Roebling, John Augustus, 1806-1869	Papers and Practical Illustrations of Public Works of Recent Construction, both British and American	eng	BrockUniversity; ontario_council_university_libraries; toronto; fav-akemiwellsplsidor; fav-hertha_harms; fav-m0lly5936; fav-vitoballs

@@ -204,6 +204,18 @@ EXCLUDE = {
                      # ★★ **侄孙 Michelangelo Buonarroti il Giovane（1568–1646）**——
                      #   同姓同名，写喜剧的，与雕刻家不是一个人。
                      "1568-1646", "il Giovane", "il giovane"],
+    # ★★ Roebling #35：同名/商号/后裔三类污染。目标 John Augustus Roebling (1806-1869)。
+    #   ① 儿子 Washington Augustus Roebling (1837-1926)——布鲁克林桥施工负责人，其工程报告
+    #      不是目标的著作。
+    #   ② 作家 Karl Roebling（二战神话等）与 Irmgard Roebling（1975 文学论文）。
+    #   ③ 商号 John A. Roebling's Sons Co / Roebling Construction Company（钢丝绳/防火构造目录等）。
+    #   ④ 法律案件（Roebling v. ...、Mary Roebling v. RFC）与 Roebling Medal 期刊条目。
+    "roebling": ["Roebling, Karl", "Roebling, Irmgard", "Roebling, Washington",
+                 "Roebling, Emily", "Roebling Construction", "Roebling's Sons",
+                 "Roebling, firm", "Roebling (Firm", "Roebling, Mary",
+                 "Roebling Medal", "Roebling Management", "Roebling Liquors",
+                 "Roebling Investment", "Roebling Food Express", "Roebling LLC",
+                 "ROEBLING 123"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -323,6 +335,11 @@ REQUIRE = {
     #   ⇒ 词元要求 watt+james，且同段里**不得**含 EXCLUDE 里的生卒年/身份词
     #   （EXCLUDE 比的是整条 creator 串，REQUIRE 只看段——两侧一起生效）。
     "watt": [["watt", "james"]],
+    # ★ Roebling #35：目标署名形态为 `Roebling, John Augustus, 1806-1869`／`John A. Roebling`／
+    #   `John Augustus Roebling, Niagara Falls Suspension Bridge Company`。
+    #   REQUIRE 钉住 roebling+john；儿子的 Washington 与作家 Karl/Irmgard 天然不含 john，
+    #   由 REQUIRE 挡掉（EXCLUDE 仍列全，两侧一起看）。
+    "roebling": [["roebling", "john"]],
 }
 
 

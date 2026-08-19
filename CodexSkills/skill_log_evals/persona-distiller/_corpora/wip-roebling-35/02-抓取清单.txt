@@ -1,0 +1,17 @@
+# roebling：探源 68 条 → 留 9 条（上限 30，截掉 0）
+# 丢：访问受限 12；版次年>1930 10；同名者 16；同名者·按题名 0；目标不在creator 21
+bub_gb_Di6x5SMUdl4C
+cihm_52610
+ldpd_11290547_000
+paperspracticali00roeb
+reportjohnaroeb00compgoog
+reportjohnaroeb01compgoog
+reportofjohnaroe00roeb
+reportonconditio00roeb
+reportonniagarar02john
+# 手动补充 5 条二手（curate 的 REQUIRE 挡 creator 无 roebling+john 的传记/纪念册；全部公开可抓）
+inmemoriamjohnar00unse
+inmemoriamjohnar00brow
+johnaroeblingacc00barb
+johnaroeblingacc00barbiala
+earlyhistoryofsa0000colo

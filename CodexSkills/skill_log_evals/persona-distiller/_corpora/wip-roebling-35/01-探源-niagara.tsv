@@ -1,0 +1,5 @@
+# numFound=2 rows=2 query=title:("niagara suspension bridge") AND mediatype:texts
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+cihm_26454	1881-01-01T00:00:00Z	1881	Buck, Leffert L. (Leffert Lefferts), 1837-1909	Report on the renewal of the Niagara Suspension Bridge [microform]	eng	university_of_alberta_libraries_microfilm; university_of_alberta_libraries; toronto; microfilm
+reportonrenewal00buckgoog	1881-01-01T00:00:00Z	1881	Leffert Lefferts Buck	Report on the Renewal of Niagara Suspension Bridge	English	americana
