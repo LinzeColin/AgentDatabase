@@ -1,0 +1,85 @@
+{
+  "attribution_basis": {
+    "counting_convention": "10048841bsb 与 10081153bsb 是两处独立证据：前者是 Reports 卷 4（1814 报告集），后者是 1794 年实验专著再版，共享实验内容但属不同出版行为。miscellaneouspa00smeagoog 与 10048841bsb 是两处独立证据：杂文集（1814）收录 Reports 未收论文，与卷 4 有重叠但独立成书。10048841bsb 与 b30509440、jstor-105184、jstor-105250 是独立证据：卷 4 重印早期论文，论文单行本（1754-1757）是原始出版。"
+  },
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "wikidata:Q456795",
+  "consent_authority": null,
+  "created_at": "2026-08-19T22:27:47Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "eng",
+  "model_version": "0.1.0-draft",
+  "name": "John Smeaton",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "灯塔/港口工程",
+        "水力机械设计",
+        "工程评估报告",
+        "实验方法论"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "archive.org reportslatejohn00smeagoog（1812《Reports of the late John Smeaton》第 1 卷）"
+        },
+        {
+          "locator": "archive.org anexperimentale00smeagoog（1760《An experimental enquiry concerning the natural powers of water and wind》第二版）"
+        },
+        {
+          "locator": "archive.org narrativeofbuild0000smea（1791《A Narrative of the Building of the Eddystone Lighthouse》）"
+        }
+      ],
+      "canonical_name": "John Smeaton",
+      "distinguishing_basis": "署名作 Smeaton, John, 1724-1792 / Smeaton, John, F.R.S. / J. Smeaton；小说主角 Henry Smeaton、Robert/Samuel/W.H.O. Smeaton 按姓名排除。",
+      "evidence_level": "high",
+      "identity_category": "历史人物（1724-06-08 – 1792-10-28）",
+      "key_capabilities": [
+        "灯塔与港口工程",
+        "水力机械实验",
+        "工程报告与造价",
+        "蒸汽机改进"
+      ],
+      "label": "A",
+      "occupation_or_role": "英国土木工程师；自称 civil engineer 第一人；皇家学会 FRS",
+      "professional_background": "Eddystone 灯塔（1756-59）；Ramsgate 港（1774-91）；Tyne 桥（1772 报告）；风车/水车机械效益实验（1754-59）；Newcomen 蒸汽机改进（1769）；Reports 四卷（1812-14）。",
+      "subject_uid": "wikidata:Q456795"
+    },
+    "chosen_subject_uid": "wikidata:Q456795",
+    "normalized_name": "johnsmeaton",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "johnsmeaton",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "john-smeaton",
+  "status": "draft",
+  "subject_origin": "public",
+  "target_id": "tgt-05791445715f",
+  "time_scope": "1740s-1810s",
+  "updated_at": "2026-08-19T22:27:47Z"
+}

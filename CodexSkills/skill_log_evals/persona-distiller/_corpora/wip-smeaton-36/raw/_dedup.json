@@ -1,0 +1,77 @@
+{
+ "文件数": 29,
+ "阈值": 0.3,
+ "重复簇": [
+  [
+   "anaccountsomeex00smeagoog.txt",
+   "b30509440.txt",
+   "jstor-105184.txt",
+   "bim_eighteenth-century_an-account-of-some-exper_smeaton-john_1754.txt"
+  ],
+  [
+   "b30545067.txt",
+   "jstor-105193.txt",
+   "bim_eighteenth-century_a-description-of-a-new-p_smeaton-john_1755.txt"
+  ],
+  [
+   "narrativeofbuild0000smea.txt",
+   "india.history.resource.94384.txt",
+   "gri_33125012143653.txt"
+  ],
+  [
+   "anexperimentale00smeagoog.txt",
+   "bim_eighteenth-century_an-experimental-enquiry-_smeaton-john_1760.txt"
+  ],
+  [
+   "bub_gb_hjVthKz_-cQC.txt",
+   "india.history.resource.72695.txt"
+  ],
+  [
+   "reportslatejohn00smeagoog.txt",
+   "10048838bsb.txt",
+   "10048839bsb.txt",
+   "10048840bsb.txt"
+  ]
+ ],
+ "独立文献数上界": 22,
+ "按题名归并的独立作品数": 22,
+ "★口径": "min-hash Jaccard；同卷多扫描与同书不同卷需人判；derived_from 声明见 source-ledger.jsonl",
+ "已声明 derived_from": {
+  "src-9c5bcaffc251": [
+   "src-7b12771f0f39"
+  ],
+  "src-6caa23a5f104": [
+   "src-7b12771f0f39"
+  ],
+  "src-743fc8fb8b65": [
+   "src-073df2a0f695"
+  ],
+  "src-99eba4e2e873": [
+   "src-073df2a0f695"
+  ],
+  "src-d9c1dfed9893": [
+   "src-073df2a0f695"
+  ],
+  "src-4653bb8c06e8": [
+   "src-4bb0e09ba471"
+  ],
+  "src-d6c01b1bc9bb": [
+   "src-fec338aef55b"
+  ],
+  "src-44e5ea18b6da": [
+   "src-fec338aef55b"
+  ],
+  "src-ce2848f29371": [
+   "src-0ac765186bbe"
+  ],
+  "src-a522ff79f63e": [
+   "src-fec338aef55b"
+  ],
+  "src-3b321e611b6b": [
+   "src-0ac765186bbe"
+  ],
+  "src-0cbad22174e9": [
+   "src-efb4fcceeb3b"
+  ]
+ }
+}
