@@ -283,3 +283,44 @@ _ledgers/（含 usage_stats 实测 token）；达到 600 或 20% 周额度目标
 ## 5. 其余沿用 v1：P0 解锁 11 在途 → P1 补齐 600 队列 → P2 蒸馏循环 → P3 双 skill 迭代；
 模型判断维持 Pro Max 主循环 + Flash 下放；验收口径同 v1。
 
+
+---
+
+# ★ v3 终版修订（2026-08-19 · 模型路由实测 + 对抗定稿）
+
+## 1. 模型检验结论（用户已重启 App 并切 promax）
+
+- 主会话 = deepseek-v4-pro（promax）✓（子代理 system prompt 实测自报）。
+- subagent / subagent-pro 工具均报 pro：profile 的 id-targeted override 对 agent-preset 层**不生效**（已查源码
+  resolveChildAgentOptions：requested 应覆盖父级，但 patch 覆盖没送达 preset 实例）。
+- **workflow 探针（零重启）实测**：agent({model:"deepseek-v4-flash"}) 真实路由到 flash ✓；
+  短 id "flash"/"pro" 无效；model id 必须完整写 deepseek-v4-flash / deepseek-v4-pro。
+- patch 已清理为"配置=行为"一致：仅保留 subagent-pro 实例（主会话换 flash 时它是显式 pro 通道）；
+  批量 flash 通道用 workflow。
+
+## 2. 85% 成本用 flash 的结构（用户约束，对抗定稿）
+
+| 通道 | 模型 | 用途 |
+|---|---|---|
+| 主循环 | pro | 只做编排/裁定/短决策；每轮汇报 ≤300 字，长内容一律下放 |
+| workflow 批量 | **flash** | 主力：双侧盲判答题、判分主判（2 席）、抓源、判据复查、台账起草、OCR |
+| subagent | pro（继承） | 独立上下文 + pro 判断（抽审、复杂裁定） |
+
+- 双侧答题必须同一模型（默认都 flash，delta 链一致可比）；判分评委可与答题不同模型。
+- pro 抽审只在这四种情况触发：①分数在门线 ±0.03；②两席分歧 >0.1；③首轮未过；④发布门红。
+- 每轮 usage_stats 实测 pro/flash 分账；连续 3 轮 flash <85% 必须纠正结构。
+
+## 3. 对抗补充（质量优先，不顺从的地方）
+
+- **无人值守红线**（用户 17h 谷时自动续轮 + v4 空转教训）：无人值守只跑确定性管线；
+  禁止改判据/门/评委指令/skill 文件（迭代须全套门全绿+commit+留痕）；"顺手修一下"一律走 P3 检查点。
+- **迭代=检查点**：每 3-5 人/组强制审视写记录，但只有实测收益才改文件（改 skill 打断 KV 缓存，集中谷时做）。
+- **hub 资产不引入**：kimi-code-hub（未装，跨模型污染 delta 红线）/ workbuddy（通用办公，无交集）原地保留，
+  出现真实缺口再评估——引入即新故障面+漂移入口。
+
+## 4. goal objective 终版（47 汉字）
+
+`蒸馏至600人：每轮现算上报人数，连3轮无新增只许出货；谷时全力峰时维护，85%成本下放flash、pro仅关键任务；每3-5人/组迭代两skill；细则见_ledgers/GOAL-CONTRACT-v5.md`
+
+契约文件：_ledgers/GOAL-CONTRACT-v5.md（v5.1 终版，含价格表/85%结构/无人值守红线/资产结论）。
+

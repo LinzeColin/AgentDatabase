@@ -1,97 +1,106 @@
-# Pursuing Goal 契约 v5（2026-08-19 定稿 · DeepSeek）
+# Pursuing Goal 契约 v5.1（2026-08-19 终版 · DeepSeek · 对抗定稿）
 
-> 本文件是 goal 的唯一执行细则。goal objective（≤50 字）只写计分规则；一切细节以本文件为准。
-> 承接《_移交v4-pursuing-goal-2026-08-19.md》；峰谷定义已联网核实纠正（v4 旧窗口过时）。
+> goal objective（≤50 字）只写计分规则；一切细节以本文件为准，goal 每轮开头重读本文件。
+> 本版吸收用户四点修正 + 联网核实 + 模型路由实测 + 无人值守红线。
 
 ## 0. 计分与汇报（每轮强制）
 
 - 唯一计分产出：包内人数 +1（team-card.json 成功登记）。其余活动（判据/复核/台账/skill 迭代）只是手段。
-- 每次汇报必须带两个数：① 包内人数（现算，不许引用）：
-  `git -c core.quotePath=false ls-files 'CodexSkills/registry/codex/persona-distiller-group/*/*/team-card.json' | wc -l`
-  ② 本轮新增人数。格式：两个数 + 进度（当前/600）+ 已完成 + 未完成 + 下一步。
+- 每次汇报必须带两个数（现算，不许引用）：
+  git -c core.quotePath=false ls-files 'CodexSkills/registry/codex/persona-distiller-group/*/*/team-card.json' | wc -l + 本轮新增。
+- 汇报格式：两个数 + 进度（当前/600）+ 已完成 + 未完成 + 下一步。
 - 连续 3 次行动没让包内人数 +1 → 停止一切判据/复核/缺陷调查，只许做「让下一位出货」的事；
   想开新审计，先说清它挡住了哪一位的哪一步。
 
-## 1. 峰谷时段（2026-08-19 联网核实：官方 2026-08-16 16:00 UTC 起分时价）
+## 1. 峰谷时段与价格（2026-08-19 两次联网核实官方价格页）
 
-| 时段 | 悉尼时间 | 时长 | 策略 |
+| 时段 | 悉尼 | 策略 |
+|---|---|---|
+| 峰时（贵） | 11:00–14:00、16:00–20:00（7h） | 轻维护（计划/台账/复盘/编排），允许 block，重活推迟谷时 |
+| 谷时（便宜） | 其余 17h | **全力推进**，无人值守自动恢复 |
+
+官方（元/百万 tokens，2026-08-16 16:00 UTC 起；高峰=北京 9-12、14-18）：
+| | 缓存命中输入 | 未命中输入 | 输出 |
 |---|---|---|---|
-| **峰时（贵）** | 11:00–14:00、16:00–20:00 | 7h | 只做轻维护（计划/台账/复盘/编排），允许 block，重活推迟到谷时 |
-| **谷时（便宜）** | 其余 17h（20:00–11:00、14:00–16:00） | 17h | **全力推进**批量活；无人值守自动恢复 |
+| V4-Flash 谷/峰 | 0.05 / 0.10 | 1.5 / 3.0 | 4.5 / 9.0 |
+| V4-Pro 谷/峰 | 0.15 / 0.30 | 4.5 / 9.0 | 13.5 / 27.0 |
 
-官方价格（元/百万 tokens；峰=谷×2）：Pro 输出 谷 ¥13.5/峰 ¥27.0、缓存命中输入 谷 ¥0.15/峰 ¥0.30、未命中输入 谷 ¥4.5/峰 ¥9.0；
-Flash 输出 谷 ¥4.5/峰 ¥9.0、命中 谷 ¥0.05/峰 ¥0.10、未命中 谷 ¥1.5/峰 ¥3.0。
-本机实测（usage_stats）：4.5 亿输入 token 仅 ¥76.59，**缓存命中率 98.4%**，93.6% 消费落在谷时。
+本机实测（usage_stats）：4.5 亿输入 token 共 ¥76.59，缓存命中率 98.4%，93.6% 消费在谷时。
+无人值守：每轮先 TZ=Australia/Sydney date +%H%M + 读 ~/.dsh/cron-flags/ 旗标，再读 GOAL-STATE.json；
+每轮结束写 GOAL-STATE（人物+阶段+下一步）。goal 自动续轮=无需人点击；App 退出需重开。
 
-无人值守规则：每轮第一步 `TZ=Australia/Sydney date +%H%M` 判时段 + 读 `~/.dsh/cron-flags/` 旗标；
-第二步读 `_ledgers/_pipeline/GOAL-STATE.json`；每轮结束写 GOAL-STATE（当前人物+阶段+下一步）。
-goal 自动续轮 = 无需人点击；App 退出需重开（cron 09:00 每日同步会留下断点日志）。
+## 2. 工作顺序
 
-## 2. 工作顺序（优先级从高到低）
-
-**P0 · 解锁在途人物**（产物已全做完，只差阶段 4/5；名单用 next_person.py「已做但未出货」现算）：
-- 候选侧独立子代理：只给该人物 skill 产物载荷 + 冻结题面（不给语料/rubric）；
-- 对照侧裸模型独立子代理：只给同一份冻结题面；
-- 独立评委盲判：不知哪侧是候选，按人物冻结的评委指令；两侧与评委互不见对方语料；
+**P0 · 解锁在途人物**（产物已全做完，名单用 next_person.py「已做但未出货」现算）：
+- 候选侧：只给该人物 skill 产物载荷 + 冻结题面（不给语料/rubric）；对照侧裸模型：只给同一份冻结题面；
+- 独立评委盲判（不知哪侧是候选，按人物冻结评委指令）；两侧与评委互不见对方语料；
 - 判分过 → 发布门 → register_persona.py 登记 → 包内人数 +1 → 划掉在途记录。
-- **双侧答题必须同一模型**（同 flash 或同 pro），禁止混模型制造假 delta。
+- **双侧答题必须同一模型**（全 flash 或全 pro），禁止混模型制造假 delta。
 
-**P1 · 补齐 600 人队列**（恢复「补齐 384 人进队列」，暂停前提已于 08-17 失效）：
-- 12 族 × 50 = 600（允许族间弹性，总量 ≥600）；每族对照 _蒸馏名单_v1草稿.md，
-  尾部用 agent-reach 轻量检索补全到 50；不编造名字；新名字过 namesake gate；
-  按 worth_starting.py 卒年/可得性排序；结果写回 build_queue.py（OUT 指向仓内 _ledgers/_蒸馏队列.json）并重建队列，
-  保证 next_person.py 有 NEXT；人名一律照队列串写。
+**P1 · 补齐 600 人队列**（恢复「补齐 384 人进队列」，暂停前提已失效）：
+- 12 族 × 50 = 600（允许族间弹性）；每族尾部用 agent-reach 轻量检索补全，不编造名字，过 namesake gate；
+- 按 worth_starting.py 排序；写回 build_queue.py（OUT 指向仓内）并重建队列，保证 next_person 有 NEXT；
+- 人名一律照队列串写。
 
-**P2 · 正常蒸馏循环**（队列有 NEXT 后）：RUNBOOK 12 步 + _每次开工必读.md 铁律；
-混合分工（抓源外包/泳道·claim·文档·用例主循环/评委独立）；单人 ≤40 万 token；评委 2 席
-（一席判分 + 一席不知前情异质核查，核查席不出分）；载荷冻结附指纹；复判轮 ≤1；
-台账写仓内 _ledgers/；raw 留工作区不进交付包；抓源清单存进仓。
+**P2 · 正常蒸馏循环**：RUNBOOK 12 步 + _每次开工必读.md；混合分工；单人 ≤40 万 token；
+载荷冻结附指纹；复判轮 ≤1；台账写仓内 _ledgers/；raw 留工作区；抓源清单存进仓。
 
-**P3 · 两个 skill 的迭代**：
-- persona-distiller：每 3–5 人迭代；改后 build_manifest.py + check_contract_drift.py + 全量自检；改 main() 补冒烟；
-- 专家团队 skill：每 3–5 组迭代；目标 = 路由效率/token 性价比/实质性推进，用包内判据实测
-  （check_mode_ladder_reachable、check_team_size_ladder_has_no_hole、check_execution_contract_fits_a_context、
-  check_admission_signal_depends_on_the_task、check_divergence_pairs_survive_extraction 等）；
-  重点：776KB 合同瘦身（Task #136）、C 层预测量（Task #137）、模式判对率 25%、分歧检出 0/72、
-  裸模型对照/寒（不知前情）评委/对立反抗复审是否真在执行；
-- 迭代必须有实测证据，无净增益回滚；不为迭代而迭代；迭代不超限 skill；
+**P3 · 两个 skill 的迭代（检查点制，不是机械改文件）**：
+- 每 3–5 人/每 3–5 组触发一次**检查点**：强制审视该轮积累的失效/读数，写检查点记录；
+- **只有存在可陈述失效或可实测改进点才改文件**；改动必须小步 + build_manifest + check_contract_drift +
+  全量自检全绿才落盘 + 立即 commit + GOAL-LOG 留痕；无净增益回滚；
+- **门、席位、评委指令是冻结资产，任何时候都不动**（2026-08-12 授权裁定）；
+- 迭代集中在谷时批量做（skill 文件变更打断 KV 缓存，别拆散到峰时）；
 - 必要时（结构性缺陷/连续两轮无净增益）调 teleiosis 白箱迭代（一次 27 轮，先写清候选与预期收益）。
 
-## 3. 模型路由（配置强制，不是「尽量」）
+## 3. 模型路由（2026-08-19 实测定稿：promax 仅关键必要任务，85%+ 成本用 flash）
 
-- 主循环（本会话，Pro）：同名消歧裁定、归属/权利裁定、rubric 编写、deep 档候选侧答案、判分与
-  「已确认干净」结论、发布门、skill 迭代决策。
-- subagent（profile 已配默认 `deepseek-v4-flash`，需冷启动生效）：抓源批次、判据复查/缺陷狩猎、
-  台账起草（Pro 复核）、OCR 分诊、语料整理、批量文档。
-- subagent-pro（profile 已新增，需冷启动生效）：需要独立会话但需要 Pro 判断的委派（盲判评委等）。
-- workflow 工具 agent() 支持 per-agent provider/model 覆盖：并行批量件显式派 flash。
-- 缓存纪律：长 goal 反复重读同一批 skill/合同文件命中 $0.022/M（实测命中率 98.4%）；
-  skill 迭代打断缓存 → 迭代集中到谷时批量做。
+实测结论（workflow 探针）：agent({model:'deepseek-v4-flash'}) 真实路由到 flash ✓；
+短 id 'flash'/'pro' 无效；subagent/subagent-pro 工具均继承主会话模型（pro）。
 
-## 4. 每日同步 / 日志 / token / 复盘（防丢失、防漂移）
+| 通道 | 模型 | 用途 |
+|---|---|---|
+| 主循环（本会话） | deepseek-v4-pro | **只做**：编排、裁定、短决策、rubric 编写、发布门结论。输出严格限量（每轮汇报 ≤300 字，长内容一律下放） |
+| **workflow 批量** | deepseek-v4-flash | **主力通道**：双侧盲判答题、判分主判（2 席：判分席+不知前情席）、抓源批次、判据复查/缺陷狩猎、台账起草、OCR 分诊、语料整理 |
+| subagent / subagent-pro | deepseek-v4-pro（继承） | 需要独立上下文 + pro 判断：pro 抽审、复杂裁定 |
 
-- **cron 每日 09:00（谷时）daily-sync.sh**（已装）：git fetch + ff-only/安全合并 + 白名单 commit +
-  fail-closed push（validate_group passed 才推）+ _ledgers → ~/Downloads/蒸馏 同步 + 开工快照日志；
-  日志 `~/.dsh/cron-logs/daily-sync.log`。
-- **实时进度**：`_ledgers/_pipeline/GOAL-STATE.json`（每轮更新：当前人物/阶段/下一步/时段）。
-- **运行日志**：`_ledgers/_pipeline/GOAL-LOG.md`（每轮追加一行：时间/人物/动作/两个数/token 实测）。
-- **单位任务 token**：每人物完成时用 usage_stats 实测记录（评委+主循环），写入 GOAL-LOG 与额度台账；
-  单人超 40 万须写原因。
-- **每日复盘**：每个谷时开始的第一轮，写 `_ledgers/_daily-review-YYYY-MM-DD.md`：
-  昨日新增/卡点/教训/明日计划；由 daily-sync 推上 GitHub。
+- **85% 成本达成路径**：主循环输入靠缓存命中（98.4% 实测）≈免费；主循环输出限量；
+  全部生成类/批量活（占 token 大头）走 workflow flash。每轮用 usage_stats 实测 pro/flash 分账，
+  连续 3 轮 flash 占比 <85% 必须说明原因并纠正结构。
+- **pro 抽审触发条件**（只在这四种情况之一出现时，判分结论才上 pro 复核）：
+  ① 分数落在门线 ±0.03 区间；② 两席分歧 >0.1；③ 第一轮未过；④ 发布门红。
+- **双侧盲判同模型纪律**：候选侧与基线侧必须在同一模型跑（默认都 flash）；判分评委可与答题不同模型。
 
-## 5. 硬约束（防漂移，吸取 v4 教训）
+## 4. 每日同步 / 日志 / token / 复盘
 
-1) 现算人数必须用 git ls-files 命令，不许引用、不许手数；
-2) 手搓统计前先 ls scripts/ 找权威判据；打架时假定错的是手搓那把；
-3) 人名进台账前 grep _蒸馏队列.json，用队列串；别名放「★ 别名」；
-4) 改 skill 目录任何文件 → build_manifest.py + check_contract_drift.py；改工具 main() → 冒烟；
-5) 零编造；只取公有领域（出版年 ≤1930）；不碰付费墙/访问控制/验证码；绝不 git add -A；
-   不删 _protected/；不把 private 资产推上 PUBLIC 仓；
-6) 已冻结判据与门一律不动（2026-08-12 授权裁定）；存量产物只记档（P2）；新人物流程可改（P3）；
+- cron 每日 09:00（谷时）daily-sync.sh（已装并验证）：git 同步+白名单 commit+
+  fail-closed push（canonical gate passed 才推）+ _ledgers→~/Downloads/蒸馏 + 快照日志；
+- 实时进度 _ledgers/_pipeline/GOAL-STATE.json；每轮日志 _ledgers/_pipeline/GOAL-LOG.md
+  （时间/人物/动作/两个数/pro·flash 分账 token）；
+- 每人物完成写结算（usage_stats 实测）；每日复盘 _ledgers/_daily-review-YYYY-MM-DD.md（谷时首轮写）；
+- 均随 daily-sync 推上 GitHub（防丢失）。
+
+## 5. 无人值守红线（谷时 17h 自动续轮的防漂移补丁，v4 教训）
+
+- 谷时无人值守只跑**确定性管线**（每步有脚本硬门兜底：抓源→判据→双侧答题→判分→发布门）。
+- 无人值守禁止：改任何判据/门/评委指令；改 skill 文件（迭代窗口除外，且须全套门全绿+commit+留痕）；
+  git 操作超出 daily-sync 白名单；启动 teleiosis；手搓统计结论。
+- 任何「顺手修一下」都必须回到 P3 检查点流程，不允许即兴改动。
+
+## 6. 硬约束与完成定义
+
+1) 现算人数必须用 git ls-files 命令；2) 手搓统计先 ls scripts/ 找权威判据；
+3) 人名进台账前 grep _蒸馏队列.json；4) 改 skill 文件 → build_manifest + check_contract_drift；改 main() → 冒烟；
+5) 零编造；只取公有领域（出版年 ≤1930）；不碰付费墙/访问控制/验证码；绝不 git add -A；不删 _protected/；
+6) 存量产物只记档（P2）；新人物流程可改（P3）；
 7) 停下来只有两种情况：不可逆后果；必须 Owner 裁定（说清哪件、为何只能人定）。
+8) 完成 = 600 人或用户喊停；每 5 人/每 5 组写结算。
 
-## 6. 完成定义
+## 7. 本机资产结论（2026-08-19 评估，质量优先）
 
-- 达到 600 人，或用户喊停；每 5 人/每 5 组写结算（含 usage_stats 实测 token）。
-- 本文件由 goal 每轮开头重读（不靠记忆）。
+- kimi-code-hub-install-v1.0.4.zip（_protected）：未安装（无 CLI）。它是 Claude Code 类 CLI，
+  唯一理论价值是额外独立会话；但双侧盲判要求同一模型（Kimi≠DeepSeek 会污染 delta），
+  批量活已有 workflow flash 通道。**不引入**——装新工具+新 API+跨工具协调 = 新故障面 + 漂移入口。
+- workbuddy（~/.workbuddy，v2.5.90 安装包在 Downloads）：通用办公 agent（表格/支付/PPT 插件），
+  与本任务无交集。**不引入**。
+- 两件资产原地保留；若 P0/P1 出现真实缺口（如需要第三方模型做交叉验证），再评估启用。
