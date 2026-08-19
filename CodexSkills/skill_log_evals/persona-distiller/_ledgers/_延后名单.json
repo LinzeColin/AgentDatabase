@@ -3750,9 +3750,33 @@
    ],
    "★ 本轮做过的": "① 申报 `attribution_basis.parallel_witnesses` 9 组 / 21 个 id（正对照：申报前判据印「0 组」，申报后印「9 组，覆盖 21 份来源」；负对照：meta.json 逐键比只多两个键，合成门仍 19、研究门仍 passed）② 落 `_pipeline/emit_parallel_witnesses.py`，全库量出 230 组 / 579 个 id、**只有 3 个工作区申报过**；③ 完整记录在 `_ledgers/_Michelangelo返工-第二处证据的可取面先要量清楚-2026-08-14.md`",
    "★ 产物保留了什么": "工作区完整：56 份源、22 条断言、三份研究道、32 个盲判用例、9 份 holdout、SKILL.md。**未判分**（阶段 5 要两名互相独立的空白会话，本会话 harness 不许派子代理）。"
+  },
+  {
+   "name": "Abraham Lincoln",
+   "family_zh": "政治法律师",
+   "deferred_at": "2026-08-19",
+   "seq": 186,
+   "disposition": "结案-装置不成立",
+   "class": "结构性不可用（deferral-class-structurally-unusable）",
+   "reason": "**67 份可用源只覆盖 5 部独立作品（< 8 min_sources）。** 结构上无法满足最小独立作品数，产物判为装置不成立，judged delta +0.3156 保留为对照记录。",
+   "aliases": [
+    "Lincoln, Abraham"
+   ]
+  },
+  {
+   "name": "John Marshall",
+   "family_zh": "政治法律师",
+   "deferred_at": "2026-08-19",
+   "seq": 187,
+   "disposition": "结案-装置不成立",
+   "class": "结构性不可用（deferral-class-structurally-unusable）",
+   "reason": "**装置不成立先例（Lincoln #174 依此裁定）。** 可用源独立作品数不足 8，结构上无法满足最小独立作品数。",
+   "aliases": [
+    "Marshall, John"
+   ]
   }
  ],
- "total": 186,
+ "total": 187,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。　★ 2026-08-13 实测又漂了：写着 168、实有 187（差 19 条），**注释写明「不手写」并不能阻止它漂**——已落成判据 `check_deferred_list.py` 每次现算。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",

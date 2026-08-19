@@ -1,6 +1,6 @@
 {
  "generated_note": "target roster; done-state derived live by next_person.py",
- "total": 237,
+ "total": 592,
  "queue": [
   {
    "name": "Dennis Ritchie",
@@ -1661,6 +1661,2846 @@
    "family_id": "agriculture-fishery",
    "priority": 12,
    "order": 15
+  },
+  {
+   "name": "James Watt",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 31,
+   "status": "pending"
+  },
+  {
+   "name": "Richard Trevithick",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 32,
+   "status": "pending"
+  },
+  {
+   "name": "George Stephenson",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 33,
+   "status": "pending"
+  },
+  {
+   "name": "Isambard Kingdom Brunel",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 34,
+   "status": "pending"
+  },
+  {
+   "name": "John A. Roebling",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 35,
+   "status": "pending"
+  },
+  {
+   "name": "John Smeaton",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 36,
+   "status": "pending"
+  },
+  {
+   "name": "Thomas Telford",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 37,
+   "status": "pending"
+  },
+  {
+   "name": "Frederick Winslow Taylor",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 38,
+   "status": "pending"
+  },
+  {
+   "name": "Frank Bunker Gilbreth",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 39,
+   "status": "pending"
+  },
+  {
+   "name": "Alan Arnold Griffith",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 40,
+   "status": "pending"
+  },
+  {
+   "name": "Cyril Stanley Smith",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 41,
+   "status": "pending"
+  },
+  {
+   "name": "Robert Hadfield",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 42,
+   "status": "pending"
+  },
+  {
+   "name": "William D. Coolidge",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 43,
+   "status": "pending"
+  },
+  {
+   "name": "August Wöhler",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 44,
+   "status": "pending"
+  },
+  {
+   "name": "Thomas Young",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 45,
+   "status": "pending"
+  },
+  {
+   "name": "Claude-Louis Navier",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 46,
+   "status": "pending"
+  },
+  {
+   "name": "Adhémar Barré de Saint-Venant",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 47,
+   "status": "pending"
+  },
+  {
+   "name": "Henry Tresca",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 48,
+   "status": "pending"
+  },
+  {
+   "name": "William J. M. Rankine",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 49,
+   "status": "pending"
+  },
+  {
+   "name": "Carl von Bach",
+   "family_zh": "材料建工师",
+   "family_id": "technical-engineer",
+   "priority": 3,
+   "order": 50,
+   "status": "pending"
+  },
+  {
+   "name": "Ada Lovelace",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 51,
+   "status": "pending"
+  },
+  {
+   "name": "Charles Babbage",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 52,
+   "status": "pending"
+  },
+  {
+   "name": "Alan Turing",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 53,
+   "status": "pending"
+  },
+  {
+   "name": "Claude Shannon",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 54,
+   "status": "pending"
+  },
+  {
+   "name": "John von Neumann",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 55,
+   "status": "pending"
+  },
+  {
+   "name": "Kurt Gödel",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 56,
+   "status": "pending"
+  },
+  {
+   "name": "Alonzo Church",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 57,
+   "status": "pending"
+  },
+  {
+   "name": "Haskell Curry",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 58,
+   "status": "pending"
+  },
+  {
+   "name": "Niklaus Wirth",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 59,
+   "status": "pending"
+  },
+  {
+   "name": "Kristen Nygaard",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 60,
+   "status": "pending"
+  },
+  {
+   "name": "Ole-Johan Dahl",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 61,
+   "status": "pending"
+  },
+  {
+   "name": "J. C. R. Licklider",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 62,
+   "status": "pending"
+  },
+  {
+   "name": "Ivan Sutherland",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 63,
+   "status": "pending"
+  },
+  {
+   "name": "Ted Nelson",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 64,
+   "status": "pending"
+  },
+  {
+   "name": "Richard Stallman",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 65,
+   "status": "pending"
+  },
+  {
+   "name": "Andrew Tanenbaum",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 66,
+   "status": "pending"
+  },
+  {
+   "name": "Gerald Weinberg",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 67,
+   "status": "pending"
+  },
+  {
+   "name": "Fred Brooks",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 68,
+   "status": "pending"
+  },
+  {
+   "name": "Martin Fowler",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 69,
+   "status": "pending"
+  },
+  {
+   "name": "Ward Cunningham",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 70,
+   "status": "pending"
+  },
+  {
+   "name": "John Backus",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 71,
+   "status": "pending"
+  },
+  {
+   "name": "Frances Allen",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 72,
+   "status": "pending"
+  },
+  {
+   "name": "Butler Lampson",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 73,
+   "status": "pending"
+  },
+  {
+   "name": "Alan Perlis",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 74,
+   "status": "pending"
+  },
+  {
+   "name": "Marvin Minsky",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 75,
+   "status": "pending"
+  },
+  {
+   "name": "Douglas Hofstadter",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 76,
+   "status": "pending"
+  },
+  {
+   "name": "Brian Kernighan",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 77,
+   "status": "pending"
+  },
+  {
+   "name": "Kenneth Iverson",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 78,
+   "status": "pending"
+  },
+  {
+   "name": "Peter Naur",
+   "family_zh": "软件开发师",
+   "family_id": "software-developer",
+   "priority": 2,
+   "order": 79,
+   "status": "pending"
+  },
+  {
+   "name": "Rembrandt",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 80,
+   "status": "pending"
+  },
+  {
+   "name": "Johannes Vermeer",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 81,
+   "status": "pending"
+  },
+  {
+   "name": "Francisco Goya",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 82,
+   "status": "pending"
+  },
+  {
+   "name": "Auguste Rodin",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 83,
+   "status": "pending"
+  },
+  {
+   "name": "Vincent van Gogh",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 84,
+   "status": "pending"
+  },
+  {
+   "name": "Paul Cézanne",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 85,
+   "status": "pending"
+  },
+  {
+   "name": "Claude Monet",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 86,
+   "status": "pending"
+  },
+  {
+   "name": "Edvard Munch",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 87,
+   "status": "pending"
+  },
+  {
+   "name": "Gustav Klimt",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 88,
+   "status": "pending"
+  },
+  {
+   "name": "Henri Matisse",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 89,
+   "status": "pending"
+  },
+  {
+   "name": "Marcel Duchamp",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 90,
+   "status": "pending"
+  },
+  {
+   "name": "Wassily Kandinsky",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 91,
+   "status": "pending"
+  },
+  {
+   "name": "Piet Mondrian",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 92,
+   "status": "pending"
+  },
+  {
+   "name": "Paul Klee",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 93,
+   "status": "pending"
+  },
+  {
+   "name": "Man Ray",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 94,
+   "status": "pending"
+  },
+  {
+   "name": "Salvador Dalí",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 95,
+   "status": "pending"
+  },
+  {
+   "name": "René Magritte",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 96,
+   "status": "pending"
+  },
+  {
+   "name": "Georgia O'Keeffe",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 97,
+   "status": "pending"
+  },
+  {
+   "name": "Jackson Pollock",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 98,
+   "status": "pending"
+  },
+  {
+   "name": "Andy Warhol",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 99,
+   "status": "pending"
+  },
+  {
+   "name": "Barbara Hepworth",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 100,
+   "status": "pending"
+  },
+  {
+   "name": "Isamu Noguchi",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 101,
+   "status": "pending"
+  },
+  {
+   "name": "Filippo Brunelleschi",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 102,
+   "status": "pending"
+  },
+  {
+   "name": "Gian Lorenzo Bernini",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 103,
+   "status": "pending"
+  },
+  {
+   "name": "Christopher Wren",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 104,
+   "status": "pending"
+  },
+  {
+   "name": "Leon Battista Alberti",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 105,
+   "status": "pending"
+  },
+  {
+   "name": "Andrea Palladio",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 106,
+   "status": "pending"
+  },
+  {
+   "name": "Louis Sullivan",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 107,
+   "status": "pending"
+  },
+  {
+   "name": "Ludwig Mies van der Rohe",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 108,
+   "status": "pending"
+  },
+  {
+   "name": "Alvar Aalto",
+   "family_zh": "艺术设计师",
+   "family_id": "art-designer",
+   "priority": 9,
+   "order": 109,
+   "status": "pending"
+  },
+  {
+   "name": "Reed Hastings",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 110,
+   "status": "pending"
+  },
+  {
+   "name": "Lou Gerstner",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 111,
+   "status": "pending"
+  },
+  {
+   "name": "Andrew Carnegie",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 112,
+   "status": "pending"
+  },
+  {
+   "name": "John D. Rockefeller",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 113,
+   "status": "pending"
+  },
+  {
+   "name": "J. P. Morgan",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 114,
+   "status": "pending"
+  },
+  {
+   "name": "Cornelius Vanderbilt",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 115,
+   "status": "pending"
+  },
+  {
+   "name": "Thomas Edison",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 116,
+   "status": "pending"
+  },
+  {
+   "name": "Henry Heinz",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 117,
+   "status": "pending"
+  },
+  {
+   "name": "Milton Hershey",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 118,
+   "status": "pending"
+  },
+  {
+   "name": "W. K. Kellogg",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 119,
+   "status": "pending"
+  },
+  {
+   "name": "C. W. Post",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 120,
+   "status": "pending"
+  },
+  {
+   "name": "Frank Woolworth",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 121,
+   "status": "pending"
+  },
+  {
+   "name": "J. C. Penney",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 122,
+   "status": "pending"
+  },
+  {
+   "name": "Richard Sears",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 123,
+   "status": "pending"
+  },
+  {
+   "name": "George Eastman",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 124,
+   "status": "pending"
+  },
+  {
+   "name": "Charles Schwab",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 125,
+   "status": "pending"
+  },
+  {
+   "name": "Charles Merrill",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 126,
+   "status": "pending"
+  },
+  {
+   "name": "A. P. Giannini",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 127,
+   "status": "pending"
+  },
+  {
+   "name": "Marshall Field",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 128,
+   "status": "pending"
+  },
+  {
+   "name": "John Wanamaker",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 129,
+   "status": "pending"
+  },
+  {
+   "name": "Lee Iacocca",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 130,
+   "status": "pending"
+  },
+  {
+   "name": "Thomas Watson Sr.",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 131,
+   "status": "pending"
+  },
+  {
+   "name": "Masaru Ibuka",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 132,
+   "status": "pending"
+  },
+  {
+   "name": "Kiichiro Toyoda",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 133,
+   "status": "pending"
+  },
+  {
+   "name": "Sakichi Toyoda",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 134,
+   "status": "pending"
+  },
+  {
+   "name": "George Westinghouse",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 135,
+   "status": "pending"
+  },
+  {
+   "name": "William Boeing",
+   "family_zh": "创业经营师",
+   "family_id": "entrepreneur-operator",
+   "priority": 8,
+   "order": 136,
+   "status": "pending"
+  },
+  {
+   "name": "Edward O. Thorp",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 137,
+   "status": "pending"
+  },
+  {
+   "name": "Jacob Fugger",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 138,
+   "status": "pending"
+  },
+  {
+   "name": "Mayer Amschel Rothschild",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 139,
+   "status": "pending"
+  },
+  {
+   "name": "Nathan Rothschild",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 140,
+   "status": "pending"
+  },
+  {
+   "name": "John Law",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 141,
+   "status": "pending"
+  },
+  {
+   "name": "Bernard Baruch",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 142,
+   "status": "pending"
+  },
+  {
+   "name": "Hetty Green",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 143,
+   "status": "pending"
+  },
+  {
+   "name": "Daniel Drew",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 144,
+   "status": "pending"
+  },
+  {
+   "name": "Jay Gould",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 145,
+   "status": "pending"
+  },
+  {
+   "name": "Russell Sage",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 146,
+   "status": "pending"
+  },
+  {
+   "name": "James Keene",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 147,
+   "status": "pending"
+  },
+  {
+   "name": "Gerald Loeb",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 148,
+   "status": "pending"
+  },
+  {
+   "name": "John Burr Williams",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 149,
+   "status": "pending"
+  },
+  {
+   "name": "Roger Babson",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 150,
+   "status": "pending"
+  },
+  {
+   "name": "Joseph P. Kennedy",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 151,
+   "status": "pending"
+  },
+  {
+   "name": "Benjamin Franklin",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 152,
+   "status": "pending"
+  },
+  {
+   "name": "David Ricardo",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 153,
+   "status": "pending"
+  },
+  {
+   "name": "John Maynard Keynes",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 154,
+   "status": "pending"
+  },
+  {
+   "name": "Irving Fisher",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 155,
+   "status": "pending"
+  },
+  {
+   "name": "Charles Dow",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 156,
+   "status": "pending"
+  },
+  {
+   "name": "Edward D. Jones",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 157,
+   "status": "pending"
+  },
+  {
+   "name": "Richard Wyckoff",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 158,
+   "status": "pending"
+  },
+  {
+   "name": "William Gann",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 159,
+   "status": "pending"
+  },
+  {
+   "name": "Nicolas Darvas",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 160,
+   "status": "pending"
+  },
+  {
+   "name": "Philip Carret",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 161,
+   "status": "pending"
+  },
+  {
+   "name": "T. Rowe Price",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 162,
+   "status": "pending"
+  },
+  {
+   "name": "Shelby Davis",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 163,
+   "status": "pending"
+  },
+  {
+   "name": "Jean-Baptiste Say",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 164,
+   "status": "pending"
+  },
+  {
+   "name": "John Stuart Mill",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 165,
+   "status": "pending"
+  },
+  {
+   "name": "Thorstein Veblen",
+   "family_zh": "投资资本师",
+   "family_id": "investor-capital-allocator",
+   "priority": 1,
+   "order": 166,
+   "status": "pending"
+  },
+  {
+   "name": "Thomas Saaty",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 167,
+   "status": "pending"
+  },
+  {
+   "name": "Laozi",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 168,
+   "status": "pending"
+  },
+  {
+   "name": "Zhuangzi",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 169,
+   "status": "pending"
+  },
+  {
+   "name": "Mencius",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 170,
+   "status": "pending"
+  },
+  {
+   "name": "Xunzi",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 171,
+   "status": "pending"
+  },
+  {
+   "name": "Mozi",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 172,
+   "status": "pending"
+  },
+  {
+   "name": "Sun Tzu",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 173,
+   "status": "pending"
+  },
+  {
+   "name": "Wang Yangming",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 174,
+   "status": "pending"
+  },
+  {
+   "name": "Zhu Xi",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 175,
+   "status": "pending"
+  },
+  {
+   "name": "Seneca",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 176,
+   "status": "pending"
+  },
+  {
+   "name": "Epictetus",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 177,
+   "status": "pending"
+  },
+  {
+   "name": "Marcus Aurelius",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 178,
+   "status": "pending"
+  },
+  {
+   "name": "Augustine",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 179,
+   "status": "pending"
+  },
+  {
+   "name": "Thomas Aquinas",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 180,
+   "status": "pending"
+  },
+  {
+   "name": "René Descartes",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 181,
+   "status": "pending"
+  },
+  {
+   "name": "John Locke",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 182,
+   "status": "pending"
+  },
+  {
+   "name": "Baruch Spinoza",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 183,
+   "status": "pending"
+  },
+  {
+   "name": "Gottfried Leibniz",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 184,
+   "status": "pending"
+  },
+  {
+   "name": "Voltaire",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 185,
+   "status": "pending"
+  },
+  {
+   "name": "David Hume",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 186,
+   "status": "pending"
+  },
+  {
+   "name": "Johann Herbart",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 187,
+   "status": "pending"
+  },
+  {
+   "name": "G. W. F. Hegel",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 188,
+   "status": "pending"
+  },
+  {
+   "name": "Arthur Schopenhauer",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 189,
+   "status": "pending"
+  },
+  {
+   "name": "Søren Kierkegaard",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 190,
+   "status": "pending"
+  },
+  {
+   "name": "Friedrich Nietzsche",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 191,
+   "status": "pending"
+  },
+  {
+   "name": "William James",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 192,
+   "status": "pending"
+  },
+  {
+   "name": "Edward Thorndike",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 193,
+   "status": "pending"
+  },
+  {
+   "name": "B. F. Skinner",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 194,
+   "status": "pending"
+  },
+  {
+   "name": "Jerome Bruner",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 195,
+   "status": "pending"
+  },
+  {
+   "name": "Albert Bandura",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 196,
+   "status": "pending"
+  },
+  {
+   "name": "Carl Rogers",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 197,
+   "status": "pending"
+  },
+  {
+   "name": "Abraham Maslow",
+   "family_zh": "思想教育师",
+   "family_id": "thinker-educator",
+   "priority": 10,
+   "order": 198,
+   "status": "pending"
+  },
+  {
+   "name": "Hammurabi",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 199,
+   "status": "pending"
+  },
+  {
+   "name": "Pericles",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 200,
+   "status": "pending"
+  },
+  {
+   "name": "Lycurgus",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 201,
+   "status": "pending"
+  },
+  {
+   "name": "Polybius",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 202,
+   "status": "pending"
+  },
+  {
+   "name": "Jean Bodin",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 203,
+   "status": "pending"
+  },
+  {
+   "name": "Thomas Hobbes",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 204,
+   "status": "pending"
+  },
+  {
+   "name": "Montesquieu",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 205,
+   "status": "pending"
+  },
+  {
+   "name": "Alexander Hamilton",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 206,
+   "status": "pending"
+  },
+  {
+   "name": "James Madison",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 207,
+   "status": "pending"
+  },
+  {
+   "name": "Edmund Burke",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 208,
+   "status": "pending"
+  },
+  {
+   "name": "Jeremy Bentham",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 209,
+   "status": "pending"
+  },
+  {
+   "name": "John Austin",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 210,
+   "status": "pending"
+  },
+  {
+   "name": "Henry Maine",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 211,
+   "status": "pending"
+  },
+  {
+   "name": "A. V. Dicey",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 212,
+   "status": "pending"
+  },
+  {
+   "name": "Woodrow Wilson",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 213,
+   "status": "pending"
+  },
+  {
+   "name": "Franklin D. Roosevelt",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 214,
+   "status": "pending"
+  },
+  {
+   "name": "Charles de Gaulle",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 215,
+   "status": "pending"
+  },
+  {
+   "name": "Konrad Adenauer",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 216,
+   "status": "pending"
+  },
+  {
+   "name": "Sun Yat-sen",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 217,
+   "status": "pending"
+  },
+  {
+   "name": "Mao Zedong",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 218,
+   "status": "pending"
+  },
+  {
+   "name": "Mahatma Gandhi",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 219,
+   "status": "pending"
+  },
+  {
+   "name": "Jawaharlal Nehru",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 220,
+   "status": "pending"
+  },
+  {
+   "name": "Mustafa Kemal Atatürk",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 221,
+   "status": "pending"
+  },
+  {
+   "name": "John Marshall Harlan",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 222,
+   "status": "pending"
+  },
+  {
+   "name": "Joseph Story",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 223,
+   "status": "pending"
+  },
+  {
+   "name": "James Kent",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 224,
+   "status": "pending"
+  },
+  {
+   "name": "Henry de Bracton",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 225,
+   "status": "pending"
+  },
+  {
+   "name": "Edward Coke",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 226,
+   "status": "pending"
+  },
+  {
+   "name": "Matthew Hale",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 227,
+   "status": "pending"
+  },
+  {
+   "name": "Thomas Erskine",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 228,
+   "status": "pending"
+  },
+  {
+   "name": "William Murray (Lord Mansfield)",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 229,
+   "status": "pending"
+  },
+  {
+   "name": "John Roberts",
+   "family_zh": "政治法律师",
+   "family_id": "political-legal",
+   "priority": 6,
+   "order": 230,
+   "status": "pending"
+  },
+  {
+   "name": "P. T. Barnum",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 231,
+   "status": "pending"
+  },
+  {
+   "name": "Albert Lasker",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 232,
+   "status": "pending"
+  },
+  {
+   "name": "John E. Kennedy",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 233,
+   "status": "pending"
+  },
+  {
+   "name": "Helen Lansdowne Resor",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 234,
+   "status": "pending"
+  },
+  {
+   "name": "Raymond Rubicam",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 235,
+   "status": "pending"
+  },
+  {
+   "name": "Bruce Barton",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 236,
+   "status": "pending"
+  },
+  {
+   "name": "Fairfax Cone",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 237,
+   "status": "pending"
+  },
+  {
+   "name": "James Webb Young",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 238,
+   "status": "pending"
+  },
+  {
+   "name": "Elmer Wheeler",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 239,
+   "status": "pending"
+  },
+  {
+   "name": "Vance Packard",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 240,
+   "status": "pending"
+  },
+  {
+   "name": "Everett Rogers",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 241,
+   "status": "pending"
+  },
+  {
+   "name": "Frank Bass",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 242,
+   "status": "pending"
+  },
+  {
+   "name": "John Caples",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 243,
+   "status": "pending"
+  },
+  {
+   "name": "John Wanamaker",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 244,
+   "status": "pending"
+  },
+  {
+   "name": "William Randolph Hearst",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 245,
+   "status": "pending"
+  },
+  {
+   "name": "Ivy Lee",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 246,
+   "status": "pending"
+  },
+  {
+   "name": "David Sarnoff",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 247,
+   "status": "pending"
+  },
+  {
+   "name": "George Gallup",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 248,
+   "status": "pending"
+  },
+  {
+   "name": "Elmo Roper",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 249,
+   "status": "pending"
+  },
+  {
+   "name": "Alfred Politz",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 250,
+   "status": "pending"
+  },
+  {
+   "name": "Ernest Dichter",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 251,
+   "status": "pending"
+  },
+  {
+   "name": "Theodore Vail",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 252,
+   "status": "pending"
+  },
+  {
+   "name": "Charles Atlas",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 253,
+   "status": "pending"
+  },
+  {
+   "name": "Sebastian Kresge",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 254,
+   "status": "pending"
+  },
+  {
+   "name": "R. E. Olds",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 255,
+   "status": "pending"
+  },
+  {
+   "name": "William C. Durant",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 256,
+   "status": "pending"
+  },
+  {
+   "name": "Asa Candler",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 257,
+   "status": "pending"
+  },
+  {
+   "name": "Caleb Bradham",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 258,
+   "status": "pending"
+  },
+  {
+   "name": "Walter Dill Scott",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 259,
+   "status": "pending"
+  },
+  {
+   "name": "Daniel Starch",
+   "family_zh": "客户营销师",
+   "family_id": "customer-marketing",
+   "priority": 7,
+   "order": 260,
+   "status": "pending"
+  },
+  {
+   "name": "Paul Teicholz",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 261,
+   "status": "pending"
+  },
+  {
+   "name": "Taiichi Ohno",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 262,
+   "status": "pending"
+  },
+  {
+   "name": "Vitruvius",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 265,
+   "status": "pending"
+  },
+  {
+   "name": "Joseph Paxton",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 266,
+   "status": "pending"
+  },
+  {
+   "name": "William Le Baron Jenney",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 267,
+   "status": "pending"
+  },
+  {
+   "name": "Daniel Burnham",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 268,
+   "status": "pending"
+  },
+  {
+   "name": "George A. Fuller",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 269,
+   "status": "pending"
+  },
+  {
+   "name": "Henri Fayol",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 270,
+   "status": "pending"
+  },
+  {
+   "name": "Max Weber",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 271,
+   "status": "pending"
+  },
+  {
+   "name": "Lillian Gilbreth",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 272,
+   "status": "pending"
+  },
+  {
+   "name": "Shigeo Shingo",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 273,
+   "status": "pending"
+  },
+  {
+   "name": "James P. Womack",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 274,
+   "status": "pending"
+  },
+  {
+   "name": "Michael Porter",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 275,
+   "status": "pending"
+  },
+  {
+   "name": "Henry Mintzberg",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 276,
+   "status": "pending"
+  },
+  {
+   "name": "James O. McKinsey",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 277,
+   "status": "pending"
+  },
+  {
+   "name": "Marvin Bower",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 278,
+   "status": "pending"
+  },
+  {
+   "name": "Hugo Diemer",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 279,
+   "status": "pending"
+  },
+  {
+   "name": "Wallace Clark",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 280,
+   "status": "pending"
+  },
+  {
+   "name": "C. Northcote Parkinson",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 281,
+   "status": "pending"
+  },
+  {
+   "name": "Laurence J. Peter",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 282,
+   "status": "pending"
+  },
+  {
+   "name": "Herbert Simon",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 283,
+   "status": "pending"
+  },
+  {
+   "name": "Douglas McGregor",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 284,
+   "status": "pending"
+  },
+  {
+   "name": "Russell Ackoff",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 285,
+   "status": "pending"
+  },
+  {
+   "name": "Jay Forrester",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 286,
+   "status": "pending"
+  },
+  {
+   "name": "Stafford Beer",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 287,
+   "status": "pending"
+  },
+  {
+   "name": "Eugène Viollet-le-Duc",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 288,
+   "status": "pending"
+  },
+  {
+   "name": "Eugène Freyssinet",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 289,
+   "status": "pending"
+  },
+  {
+   "name": "Robert Maillart",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 290,
+   "status": "pending"
+  },
+  {
+   "name": "Hassan Fathy",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 291,
+   "status": "pending"
+  },
+  {
+   "name": "Jane Jacobs",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 292,
+   "status": "pending"
+  },
+  {
+   "name": "John McAdam",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 293,
+   "status": "pending"
+  },
+  {
+   "name": "Thomas Brassey",
+   "family_zh": "建造采购师",
+   "family_id": "construction-procurement",
+   "priority": 4,
+   "order": 294,
+   "status": "pending"
+  },
+  {
+   "name": "Adam Smith",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 296,
+   "status": "pending"
+  },
+  {
+   "name": "Alfred Marshall",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 297,
+   "status": "pending"
+  },
+  {
+   "name": "Milton Friedman",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 298,
+   "status": "pending"
+  },
+  {
+   "name": "Friedrich Hayek",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 299,
+   "status": "pending"
+  },
+  {
+   "name": "Paul Samuelson",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 300,
+   "status": "pending"
+  },
+  {
+   "name": "James Tobin",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 301,
+   "status": "pending"
+  },
+  {
+   "name": "Joseph Schumpeter",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 302,
+   "status": "pending"
+  },
+  {
+   "name": "John Kenneth Galbraith",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 303,
+   "status": "pending"
+  },
+  {
+   "name": "Hyman Minsky",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 304,
+   "status": "pending"
+  },
+  {
+   "name": "Charles Kindleberger",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 305,
+   "status": "pending"
+  },
+  {
+   "name": "Daniel Kahneman",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 306,
+   "status": "pending"
+  },
+  {
+   "name": "Frank Knight",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 307,
+   "status": "pending"
+  },
+  {
+   "name": "John Hicks",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 308,
+   "status": "pending"
+  },
+  {
+   "name": "Knut Wicksell",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 309,
+   "status": "pending"
+  },
+  {
+   "name": "Trevor Kletz",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 310,
+   "status": "pending"
+  },
+  {
+   "name": "Frank Bird",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 311,
+   "status": "pending"
+  },
+  {
+   "name": "Jens Rasmussen",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 312,
+   "status": "pending"
+  },
+  {
+   "name": "Benedetto Cotrugli",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 313,
+   "status": "pending"
+  },
+  {
+   "name": "Giuseppe Cerboni",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 314,
+   "status": "pending"
+  },
+  {
+   "name": "Fabio Besta",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 315,
+   "status": "pending"
+  },
+  {
+   "name": "Lawrence Dicksee",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 316,
+   "status": "pending"
+  },
+  {
+   "name": "Henry Rand Hatfield",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 317,
+   "status": "pending"
+  },
+  {
+   "name": "Charles Ezra Sprague",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 318,
+   "status": "pending"
+  },
+  {
+   "name": "George O. May",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 319,
+   "status": "pending"
+  },
+  {
+   "name": "John B. Canning",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 320,
+   "status": "pending"
+  },
+  {
+   "name": "Wassily Leontief",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 321,
+   "status": "pending"
+  },
+  {
+   "name": "Ragnar Frisch",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 322,
+   "status": "pending"
+  },
+  {
+   "name": "Jan Tinbergen",
+   "family_zh": "财务合规师",
+   "family_id": "finance-compliance",
+   "priority": 5,
+   "order": 323,
+   "status": "pending"
+  },
+  {
+   "name": "Avicenna",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 324,
+   "status": "pending"
+  },
+  {
+   "name": "Rhazes",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 325,
+   "status": "pending"
+  },
+  {
+   "name": "Paracelsus",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 326,
+   "status": "pending"
+  },
+  {
+   "name": "Ambroise Paré",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 327,
+   "status": "pending"
+  },
+  {
+   "name": "William Morton",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 328,
+   "status": "pending"
+  },
+  {
+   "name": "James Simpson",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 329,
+   "status": "pending"
+  },
+  {
+   "name": "Mary Seacole",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 330,
+   "status": "pending"
+  },
+  {
+   "name": "Lillian Wald",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 331,
+   "status": "pending"
+  },
+  {
+   "name": "Margaret Sanger",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 332,
+   "status": "pending"
+  },
+  {
+   "name": "Sigmund Freud",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 333,
+   "status": "pending"
+  },
+  {
+   "name": "Carl Jung",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 334,
+   "status": "pending"
+  },
+  {
+   "name": "Ivan Pavlov",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 335,
+   "status": "pending"
+  },
+  {
+   "name": "Paul Ehrlich",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 336,
+   "status": "pending"
+  },
+  {
+   "name": "Emil von Behring",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 337,
+   "status": "pending"
+  },
+  {
+   "name": "Howard Florey",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 338,
+   "status": "pending"
+  },
+  {
+   "name": "Ernst Chain",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 339,
+   "status": "pending"
+  },
+  {
+   "name": "Selman Waksman",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 340,
+   "status": "pending"
+  },
+  {
+   "name": "Jonas Salk",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 341,
+   "status": "pending"
+  },
+  {
+   "name": "Albert Sabin",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 342,
+   "status": "pending"
+  },
+  {
+   "name": "Charles Drew",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 343,
+   "status": "pending"
+  },
+  {
+   "name": "Helen Taussig",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 344,
+   "status": "pending"
+  },
+  {
+   "name": "Christiaan Barnard",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 345,
+   "status": "pending"
+  },
+  {
+   "name": "Dorothea Orem",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 346,
+   "status": "pending"
+  },
+  {
+   "name": "Madeleine Leininger",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 347,
+   "status": "pending"
+  },
+  {
+   "name": "Martha E. Rogers",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 348,
+   "status": "pending"
+  },
+  {
+   "name": "Walter Reed",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 349,
+   "status": "pending"
+  },
+  {
+   "name": "Ronald Ross",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 350,
+   "status": "pending"
+  },
+  {
+   "name": "Carlos Finlay",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 351,
+   "status": "pending"
+  },
+  {
+   "name": "William Gorgas",
+   "family_zh": "医疗护理师",
+   "family_id": "healthcare-nursing",
+   "priority": 11,
+   "order": 352,
+   "status": "pending"
+  },
+  {
+   "name": "Antoine Lavoisier",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 353,
+   "status": "pending"
+  },
+  {
+   "name": "John Bennet Lawes",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 354,
+   "status": "pending"
+  },
+  {
+   "name": "Joseph Henry Gilbert",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 355,
+   "status": "pending"
+  },
+  {
+   "name": "Charles Darwin",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 356,
+   "status": "pending"
+  },
+  {
+   "name": "Jethro Tull",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 357,
+   "status": "pending"
+  },
+  {
+   "name": "Thomas Coke",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 358,
+   "status": "pending"
+  },
+  {
+   "name": "Robert Bakewell",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 359,
+   "status": "pending"
+  },
+  {
+   "name": "John Sinclair",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 360,
+   "status": "pending"
+  },
+  {
+   "name": "Humphry Davy",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 361,
+   "status": "pending"
+  },
+  {
+   "name": "Jean-Baptiste Boussingault",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 362,
+   "status": "pending"
+  },
+  {
+   "name": "Carl Sprengel",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 363,
+   "status": "pending"
+  },
+  {
+   "name": "Thomas Robert Malthus",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 364,
+   "status": "pending"
+  },
+  {
+   "name": "Henry A. Wallace",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 365,
+   "status": "pending"
+  },
+  {
+   "name": "George Shull",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 366,
+   "status": "pending"
+  },
+  {
+   "name": "Donald Jones",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 367,
+   "status": "pending"
+  },
+  {
+   "name": "Barbara McClintock",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 368,
+   "status": "pending"
+  },
+  {
+   "name": "Sewall Wright",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 369,
+   "status": "pending"
+  },
+  {
+   "name": "R. A. Fisher",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 370,
+   "status": "pending"
+  },
+  {
+   "name": "J. B. S. Haldane",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 371,
+   "status": "pending"
+  },
+  {
+   "name": "Franklin Hiram King",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 372,
+   "status": "pending"
+  },
+  {
+   "name": "Walter Lowdermilk",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 373,
+   "status": "pending"
+  },
+  {
+   "name": "Hugh Hammond Bennett",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 374,
+   "status": "pending"
+  },
+  {
+   "name": "George Perkins Marsh",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 375,
+   "status": "pending"
+  },
+  {
+   "name": "Cato the Elder",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 376,
+   "status": "pending"
+  },
+  {
+   "name": "Varro",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 377,
+   "status": "pending"
+  },
+  {
+   "name": "Columella",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 378,
+   "status": "pending"
+  },
+  {
+   "name": "Pliny the Elder",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 379,
+   "status": "pending"
+  },
+  {
+   "name": "Olivier de Serres",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 380,
+   "status": "pending"
+  },
+  {
+   "name": "Arthur Young",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 381,
+   "status": "pending"
+  },
+  {
+   "name": "Charles Townshend",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 382,
+   "status": "pending"
+  },
+  {
+   "name": "John Evelyn",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 383,
+   "status": "pending"
+  },
+  {
+   "name": "William Cobbett",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 384,
+   "status": "pending"
+  },
+  {
+   "name": "J. C. Loudon",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 385,
+   "status": "pending"
+  },
+  {
+   "name": "Liberty Hyde Bailey",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 386,
+   "status": "pending"
+  },
+  {
+   "name": "Frank N. Meyer",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 387,
+   "status": "pending"
+  },
+  {
+   "name": "Jared Eliot",
+   "family_zh": "农林牧渔师",
+   "family_id": "agriculture-fishery",
+   "priority": 12,
+   "order": 388,
+   "status": "pending"
   }
  ]
 }
