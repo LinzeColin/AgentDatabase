@@ -1,0 +1,56 @@
+{
+  "lanes": 4,
+  "去掉纸面道后": 2,
+  "逐道份数": {
+    "writings": 1,
+    "conversations": 2,
+    "expression": 0,
+    "decisions": 1,
+    "timeline": 0,
+    "external": 4
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "b29302766",
+      "道": "writings",
+      "title": "A description of the safety lamp invented by George Stephenson, and no"
+    },
+    {
+      "identifier": "georgestephenso00laysgoog",
+      "道": "external",
+      "title": "George Stephenson : the locomotive and the railway "
+    },
+    {
+      "identifier": "georgestephenso00step",
+      "道": "conversations",
+      "title": "George Stephenson letter to Robert Stephenson, his son, dated Liverpoo"
+    },
+    {
+      "identifier": "letters00step",
+      "道": "conversations",
+      "title": "Letters"
+    },
+    {
+      "identifier": "lifegeorgesteph05smilgoog",
+      "道": "external",
+      "title": "The life of George Stephenson, railway engineer"
+    },
+    {
+      "identifier": "lifeofgeorgestep00smiluoft",
+      "道": "external",
+      "title": "The life of George Stephenson and of his son Robert Stephenson; compri"
+    },
+    {
+      "identifier": "lifestephenson00smilrich",
+      "道": "external",
+      "title": "The life of George Stephenson, railway engineer"
+    },
+    {
+      "identifier": "londonblackwallc00step",
+      "道": "decisions",
+      "title": "London & Blackwall Commercial Railway : report of Messrs. Geo. Stephen"
+    }
+  ]
+}

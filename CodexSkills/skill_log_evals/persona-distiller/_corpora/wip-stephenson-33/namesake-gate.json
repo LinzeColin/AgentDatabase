@@ -1,0 +1,53 @@
+{
+ "schema_version": "1.0",
+ "target_name": "George Stephenson",
+ "normalized_name": "georgestephenson",
+ "search_scope": [
+  "sibling canonical registry",
+  "authoritative public sources supplied by orchestration"
+ ],
+ "selected_subject_uid": "wikidata:Q1849",
+ "generated_at": "2026-08-19T00:00:00Z",
+ "resolution": "single",
+ "status": "ready",
+ "candidate_count": 1,
+ "candidate_cards": [
+  "A. 人物与身份：George Stephenson（1781-06-09 – 1848-08-12）；英格兰铁路工程师；蒸汽机车之父（Rocket 1829、Liverpool & Manchester Railway 1830）；安全灯发明者（1815，与 Davy 并行）。\\n   专业背景：煤矿机械师起家，自修工程学；机车牵引与铁路工程。\\n   应用价值：铁路与机车设计；矿山安全设备；工程自修方法论。\\n   区分依据：署名作 Stephenson, George, 1781-1848；载体是 1817 年安全灯说明书、1828 年致子信、1832 年书信集、1838 年铁路报告。"
+ ],
+ "candidates": [
+  {
+   "application_scenarios": [
+    "铁路与机车设计",
+    "矿山安全设备",
+    "工程自修方法论"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "archive.org b29302766（1817《A description of the safety lamp invented by George Stephenson》）"
+    },
+    {
+     "locator": "archive.org georgestephenso00step（1828 致 Robert Stephenson 信）"
+    },
+    {
+     "locator": "archive.org letters00step（1832《Letters》）"
+    },
+    {
+     "locator": "archive.org londonblackwallc00step（1838《London & Blackwall Commercial Railway: report》）"
+    }
+   ],
+   "canonical_name": "George Stephenson",
+   "distinguishing_basis": "署名 Stephenson, George, 1781-1848；George M. Stephenson（1883-1958，历史学家）、George E. Stephenson（教材作者）等同名者按生卒年/题名排除。",
+   "subject_uid": "wikidata:Q1849",
+   "label": "A",
+   "evidence_level": "high",
+   "identity_category": "历史人物（1781-06-09 – 1848-08-12）",
+   "occupation_or_role": "英格兰铁路工程师；蒸汽机车之父；安全灯发明者",
+   "professional_background": "煤矿机械师出身；Rocket（1829）；Liverpool & Manchester Railway（1830）；1815 安全灯。",
+   "key_capabilities": [
+    "铁路与机车设计",
+    "矿山安全设备",
+    "工程自修方法论"
+   ]
+  }
+ ]
+}
