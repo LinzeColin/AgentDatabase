@@ -1,0 +1,111 @@
+{
+  "per_file": [
+    {
+      "file": "india.history.resource.85209.txt",
+      "title": "Niccolò Machiavelli and His Times",
+      "author": "Pasquale Villari (translated by Linda Villari)",
+      "volume": "Vol. I",
+      "year": "1878",
+      "language": "English",
+      "source": "Scan by the Asiatic Society of Bombay, Town Hall, Bombay; digitized with financial assistance from the Government of Maharashtra on 18 July 2018 (India digital library scan). London: C. Kegan Paul & Co., 1 Paternoster Square, 1878."
+    },
+    {
+      "file": "lifeandtimesnic00villgoog.txt",
+      "title": "The Life and Times of Niccolò Machiavelli (new edition of 'Niccolò Machiavelli and His Times')",
+      "author": "Pasquale Villari (translated by Linda Villari)",
+      "volume": "Vol. I (of 2)",
+      "year": "1892",
+      "language": "English",
+      "source": "Google Books scan. London: T. Fisher Unwin, Paternoster Square, MDCCCXCII (1892); 'New Edition (augmented by the author, revised by the translator)', Illustrated."
+    },
+    {
+      "file": "niccolmachiavel00villgoog.txt",
+      "title": "Niccolò Machiavelli and His Times",
+      "author": "Pasquale Villari (translated by Linda Villari)",
+      "volume": "Vol. II",
+      "year": "1878",
+      "language": "English",
+      "source": "Google Books scan. London: C. Kegan Paul & Co., 1 Paternoster Square, 1878 (first English translation, 4 vols, 1878-83); contains Book the First (1469-1512) + Appendix."
+    },
+    {
+      "file": "niccolmachiavel10villgoog.txt",
+      "title": "Niccolò Machiavelli and His Times",
+      "author": "Pasquale Villari (translated by Linda Villari)",
+      "volume": "Vol. I",
+      "year": "1878",
+      "language": "English",
+      "source": "Google Books scan. London: C. Kegan Paul & Co., 1 Paternoster Square, 1878; contains Preface + Introduction."
+    },
+    {
+      "file": "niccolmachiavel12villgoog.txt",
+      "title": "Niccolò Machiavelli and His Times",
+      "author": "Pasquale Villari (translated by Linda Villari)",
+      "volume": "Vol. I",
+      "year": "1878",
+      "language": "English",
+      "source": "Google Books scan. London: C. Kegan Paul & Co., 1 Paternoster Square, 1878; contains Preface + Introduction (duplicate scan of the same 1878 Vol. I as niccolmachiavel10villgoog.txt)."
+    }
+  ],
+  "pairs": [
+    {
+      "a": "india.history.resource.85209.txt",
+      "b": "lifeandtimesnic00villgoog.txt",
+      "verdict": "distinct",
+      "reason": "Different edition: india is the 1878 first English translation (C. Kegan Paul, 4 vols), lifeandtimes is the 1892 'New Edition' (T. Fisher Unwin, 2 vols, augmented by the author / revised by the translator, retitled 'The Life and Times of Niccolò Machiavelli'). counting_convention: count distinct editions as separate works."
+    },
+    {
+      "a": "india.history.resource.85209.txt",
+      "b": "niccolmachiavel00villgoog.txt",
+      "verdict": "distinct",
+      "reason": "Different volumes of the same 1878 edition: Vol. I (India scan) vs Vol. II (Google scan). counting_convention: count each volume of the 4-volume 1878 edition as a separate work."
+    },
+    {
+      "a": "india.history.resource.85209.txt",
+      "b": "niccolmachiavel10villgoog.txt",
+      "verdict": "same_work",
+      "reason": "Duplicate scans of the same volume and edition: both are Vol. I of the 1878 first English translation (London: C. Kegan Paul & Co., 1878), identical title page and preface/Introduction content. derived_from: same physical edition, 1878 Vol. I."
+    },
+    {
+      "a": "india.history.resource.85209.txt",
+      "b": "niccolmachiavel12villgoog.txt",
+      "verdict": "same_work",
+      "reason": "Duplicate scans of the same volume and edition: both are Vol. I of the 1878 first English translation (London: C. Kegan Paul & Co., 1878), identical title page and preface/Introduction content. derived_from: same physical edition, 1878 Vol. I."
+    },
+    {
+      "a": "lifeandtimesnic00villgoog.txt",
+      "b": "niccolmachiavel00villgoog.txt",
+      "verdict": "distinct",
+      "reason": "Different edition and different work arrangement: lifeandtimes is the 1892 T. Fisher Unwin 2-volume 'New Edition', niccolmachiavel00 is Vol. II of the 1878 C. Kegan Paul 4-volume first translation. counting_convention: count distinct editions as separate works."
+    },
+    {
+      "a": "lifeandtimesnic00villgoog.txt",
+      "b": "niccolmachiavel10villgoog.txt",
+      "verdict": "distinct",
+      "reason": "Different edition: 1892 'New Edition' (T. Fisher Unwin, 2 vols, augmented/revised) vs 1878 first English translation (C. Kegan Paul, 4 vols). counting_convention: count distinct editions as separate works."
+    },
+    {
+      "a": "lifeandtimesnic00villgoog.txt",
+      "b": "niccolmachiavel12villgoog.txt",
+      "verdict": "distinct",
+      "reason": "Different edition: 1892 'New Edition' (T. Fisher Unwin, 2 vols, augmented/revised) vs 1878 first English translation (C. Kegan Paul, 4 vols). counting_convention: count distinct editions as separate works."
+    },
+    {
+      "a": "niccolmachiavel00villgoog.txt",
+      "b": "niccolmachiavel10villgoog.txt",
+      "verdict": "distinct",
+      "reason": "Different volumes of the same 1878 edition: Vol. II vs Vol. I. counting_convention: count each volume of the 4-volume 1878 edition as a separate work."
+    },
+    {
+      "a": "niccolmachiavel00villgoog.txt",
+      "b": "niccolmachiavel12villgoog.txt",
+      "verdict": "distinct",
+      "reason": "Different volumes of the same 1878 edition: Vol. II vs Vol. I. counting_convention: count each volume of the 4-volume 1878 edition as a separate work."
+    },
+    {
+      "a": "niccolmachiavel10villgoog.txt",
+      "b": "niccolmachiavel12villgoog.txt",
+      "verdict": "same_work",
+      "reason": "Duplicate scans of the same volume and edition: both are Vol. I of the 1878 first English translation (London: C. Kegan Paul & Co., 1878), identical title pages and preface/Introduction content. derived_from: same physical edition, 1878 Vol. I."
+    }
+  ]
+}

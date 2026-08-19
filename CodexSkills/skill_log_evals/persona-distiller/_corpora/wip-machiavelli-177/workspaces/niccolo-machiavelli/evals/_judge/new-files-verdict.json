@@ -1,0 +1,30 @@
+{
+  "villari_v1": {
+    "volume": "VOLUME I (Scribner's 2-volume issue)",
+    "edition": "New Edition (Augmented by the Author, Revised by the Translator), Illustrated — complete English translation by Linda Villari; US issue (Charles Scribner's Sons) of the new edition (T. Fisher Unwin 4-vol complete translation family, i.e. the '1892 new edition')",
+    "year": "1891 (title page: 'New York: Charles Scribner's Sons, 743 and 745 Broadway, 1891')",
+    "scan_source": "Google Books digitization of the Princeton University Library copy, presented by Alvin Devereux (Class of 1912); front-matter Google/Princeton University plate, poor OCR"
+  },
+  "villari_v2": {
+    "volume": "VOLUME II (Scribner's 2-volume issue)",
+    "edition": "Same printing as villari_v1: New Edition (Augmented by the Author, Revised by the Translator), Illustrated; complete Linda Villari translation; Scribner's 1891 issue",
+    "year": "1891 (same Scribner's 1891 title page; preface = 'Preface to the New Edition')",
+    "scan_source": "Google Books digitization of the Princeton University Library copy (Princeton barcode 32101 0735971), presented by Alvin Devereux '12 — companion volume to villari_v1, same scan series"
+  },
+  "florence": {
+    "14051": {
+      "title": "Bohn's Standard Library. The History of Florence and The Prince. ... A New Translation. London: Henry G. Bohn, York Street, Covent Garden. 1847.",
+      "year": "1847 (first edition of the Bohn translation)"
+    },
+    "02746": {
+      "title": "History of Florence, and of the affairs of Italy, from the earliest times to the death of Lorenzo the Magnificent; together with The Prince and various historical tracts. By Niccolo Machiavelli. A New Translation. London: Henry G. Bohn, York Street, Covent Garden. (title-page year line illegible in OCR)",
+      "year": "unreadable in scan OCR ('V.D.20'); Henry G. Bohn imprint → a Bohn's Standard Library printing of the 1847 translation, later than the 1847 1st edition"
+    },
+    "bengal": {
+      "title": "The History of Florence, and of the affairs of Italy, from the earliest times to the death of Lorenzo the Magnificent; together with The Prince and various historical tracts. By Niccolo Machiavelli. A New Translation. London: Bell & Daldy, York Street, Covent Garden. 1872.",
+      "year": "1872 (Bell & Daldy, successors to Bohn, reprint)"
+    },
+    "relation": "different_edition",
+    "reason": "All three are the same work and the same translation — Bohn's Standard Library 'A New Translation' of Machiavelli's History of Florence and of the Affairs of Italy ... together with The Prince and Various Historical Tracts (identical long title, same translator, same York Street Covent Garden imprint line). They are NOT different volumes and NOT different books: 14051 is the 1847 first Bohn printing; bengal (dli.bengal.10689.19369) is the 1872 Bell & Daldy reprint of the same translation; 02746 (dli.ministry.02746) is another Henry G. Bohn printing of the same translation whose title-page year is garbled in OCR ('V.D.20'), so its exact year cannot be fixed from this scan — but the imprint and contents (identical Book I contents list) identify it as the same Bohn's Standard Library text. Hence same work, different printings/editions across the three scans."
+  }
+}
