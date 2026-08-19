@@ -1,0 +1,53 @@
+{
+ "schema_version": "1.0",
+ "target_name": "John Smeaton",
+ "normalized_name": "johnsmeaton",
+ "search_scope": [
+  "sibling canonical registry",
+  "authoritative public sources supplied by orchestration"
+ ],
+ "selected_subject_uid": "wikidata:Q456795",
+ "generated_at": "2026-08-20T00:00:00Z",
+ "resolution": "single",
+ "status": "ready",
+ "candidate_count": 1,
+ "candidate_cards": [
+  "A. 人物与身份：John Smeaton（1724-06-08 – 1792-10-28）；英国土木工程师，自称 civil engineer 第一人；Eddystone 灯塔（1756-59，水力石灰砂浆）、Ramsgate 港、Tyne 桥、风车/水车实验（1754/1759，机械效益）、蒸汽机改进（Newcomen 机实验 1769）；皇家学会 FRS，Copley 奖章（1759）；《Reports》（1812-14 四卷身后出版）。\\n   专业背景：土木工程、机械工程、水力实验。\\n   应用价值：灯塔与港口工程；水力机械实验方法；工程报告与造价估算。\\n   区分依据：署名作 Smeaton, John, 1724-1792 / Smeaton, John / Smeaton, John, F.R.S. / J. Smeaton；小说主角 Henry Smeaton、房产经纪 Robert Smeaton、牧师 Samuel Smeaton、编者 W.H.O. Smeaton 均排除。"
+ ],
+ "candidates": [
+  {
+   "label": "A",
+   "canonical_name": "John Smeaton",
+   "subject_uid": "wikidata:Q456795",
+   "identity_category": "历史人物（1724-06-08 – 1792-10-28）",
+   "occupation_or_role": "英国土木工程师；自称 civil engineer 第一人；皇家学会 FRS",
+   "professional_background": "Eddystone 灯塔（1756-59）；Ramsgate 港（1774-91）；Tyne 桥（1772 报告）；风车/水车机械效益实验（1754-59）；Newcomen 蒸汽机改进（1769）；Reports 四卷（1812-14）。",
+   "key_capabilities": [
+    "灯塔与港口工程",
+    "水力机械实验",
+    "工程报告与造价",
+    "蒸汽机改进"
+   ],
+   "application_scenarios": [
+    "灯塔/港口工程",
+    "水力机械设计",
+    "工程评估报告",
+    "实验方法论"
+   ],
+   "evidence_level": "high",
+   "distinguishing_basis": "署名作 Smeaton, John, 1724-1792 / Smeaton, John, F.R.S. / J. Smeaton；小说主角 Henry Smeaton、Robert/Samuel/W.H.O. Smeaton 按姓名排除。",
+   "authoritative_sources": [
+    {
+     "locator": "archive.org reportslatejohn00smeagoog（1812《Reports of the late John Smeaton》第 1 卷）"
+    },
+    {
+     "locator": "archive.org anexperimentale00smeagoog（1760《An experimental enquiry concerning the natural powers of water and wind》第二版）"
+    },
+    {
+     "locator": "archive.org narrativeofbuild0000smea（1791《A Narrative of the Building of the Eddystone Lighthouse》）"
+    }
+   ]
+  }
+ ],
+ "evidence_notes": "IA 探源 143 条：creator Smeaton, John 39 条 + title Smeaton 118 条（含 Smeaton, J. 学会论文与 Miscellaneous Papers）。一手 30 条上限截取，含 1754-1791 实验/报告/书信与 1812-14 Reports 四卷。同名者见 00-抓源前必读.md。"
+}

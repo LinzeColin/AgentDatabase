@@ -216,6 +216,18 @@ EXCLUDE = {
                  "Roebling Medal", "Roebling Management", "Roebling Liquors",
                  "Roebling Investment", "Roebling Food Express", "Roebling LLC",
                  "ROEBLING 123"],
+    # ★★ Smeaton #36：目标 John Smeaton (1724-1792)，土木工程师（Eddystone 灯塔、
+    #   Ramsgate 港、Tyne 桥、风车/水车实验、Reports 4 卷）。
+    #   ① 小说人物 Henry Smeaton（G.P.R. James 的历史小说主角）。
+    #   ② 当代同名：Robert J. Smeaton（房产经纪）、Robert W. Smeaton（电机手册）。
+    #   ③ 其他姓氏：Samuel Smeaton（1705 牧师）、William Henry Oliphant Smeaton
+    #      （1856-1914 编者）。
+    #   ④ 法律案件（United States v. Smeaton、Smeaton v. O'Connor 等）与无关机构条目。
+    #   ⑤ Smeaton, J. 的 philtrans/jstor 论文条目是目标本人（FRS 学会论文）——REQUIRE
+    #      用 john 钉住；Miscellaneous Papers 的 creator 是裸 "John Smeaton" 也收。
+    "smeaton": ["Henry Smeaton", "Smeaton, Robert", "Smeaton, Samuel",
+                "Smeaton, William Henry", "Smeaton, W. H.", "Smeaton v.",
+                "United States v. Smeaton", "Smeaton Grange"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -340,6 +352,11 @@ REQUIRE = {
     #   REQUIRE 钉住 roebling+john；儿子的 Washington 与作家 Karl/Irmgard 天然不含 john，
     #   由 REQUIRE 挡掉（EXCLUDE 仍列全，两侧一起看）。
     "roebling": [["roebling", "john"]],
+    # ★ Smeaton：目标署名形态为 `Smeaton, John, 1724-1792`／`Smeaton, John`／
+    #   `Smeaton, John, F. R. S.`／`J. Smeaton`（学会论文）／裸 `John Smeaton`。
+    #   REQUIRE 钉住 smeaton+john；小说主角 Henry Smeaton、房产经纪 Robert Smeaton、
+    #   牧师 Samuel Smeaton 均不含 john（Henry 不含 John，Robert 不含 John）。
+    "smeaton": [["smeaton", "john"], ["smeaton, j"]],
 }
 
 

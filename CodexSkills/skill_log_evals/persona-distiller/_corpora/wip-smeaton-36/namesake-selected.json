@@ -1,0 +1,11 @@
+{
+ "schema_version": "1.0",
+ "target_name": "John Smeaton",
+ "normalized_name": "johnsmeaton",
+ "selected_subject_uid": "wikidata:Q456795",
+ "selection_date": "2026-08-20T00:00:00Z",
+ "gate_status": "ready",
+ "resolution": "single",
+ "selected_candidate": "A",
+ "rationale": "探源 143 条：一手 30 条上限截取（1754-1791 实验/报告/书信 + 1812-14 Reports 四卷 + Miscellaneous Papers + jstor 论文）。同名者 Henry/Robert/Samuel/W.H.O. Smeaton 按 EXCLUDE 排除。"
+}

@@ -1,0 +1,32 @@
+# smeaton：探源 143 条 → 留 30 条（上限 30，截掉 40）
+# 丢：访问受限 3；版次年>1930 3；同名者 5；同名者·按题名 0；目标不在creator 62
+jstor-104686
+bim_eighteenth-century_a-description-of-a-new-p_smeaton-john_1755
+anaccountsomeex00smeagoog
+10048838bsb
+b30509440
+india.history.resource.72695
+dli.ernet.26402
+jstor-105082
+bim_eighteenth-century_a-report-relative-to-tyn_smeaton-john_1772
+anexperimentale00smeagoog
+10048839bsb
+b30545067
+india.history.resource.94384
+jstor-105095
+bim_eighteenth-century_account-of-an-observatio_smeaton-john_1787
+gri_33125012143653
+10048840bsb
+bub_gb_hjVthKz_-cQC
+jstor-105184
+bim_eighteenth-century_an-account-of-some-exper_smeaton-john_1754
+miscellaneouspa00smeagoog
+10048841bsb
+jstor-105193
+bim_eighteenth-century_an-experimental-enquiry-_smeaton-john_1760
+narrativeofbuild0000smea
+10081153bsb
+jstor-105250
+bim_eighteenth-century_an-historical-report-on-_smeaton-john_1791
+reportslatejohn00smeagoog
+10708301bsb
