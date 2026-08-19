@@ -5,7 +5,7 @@
     "医疗护理师": 0,
     "客户营销师": 1,
     "建造采购师": 12,
-    "思想教育师": 6,
+    "思想教育师": 7,
     "投资资本师": 21,
     "政治法律师": 9,
     "材料建工师": 15,
@@ -1462,6 +1462,64 @@
         "从家庭、健康、生计、尊严和代表性审查制度与组织方案。",
         "在跨文化写作中避免浪漫化、单一标签和替他人发言。",
         "为长期改革组合直接服务、组织、传播、程序与退出条件。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "设计幼儿教育时从游戏与礼物（恩物）出发（幼儿园方法）",
+        "把音乐、手指游戏与插图融入教学材料设计（《母亲游戏与育儿歌》）",
+        "评估教育机构是否以儿童发展为本而非以成人为中心",
+        "教育者自我定位：以自然科学为底的教育实践者"
+      ],
+      "canonical_name": "Friedrich Frobel",
+      "distillation_traits": [
+        "把教育主张落实为可玩可唱的具体材料（歌、谱、图、手指游戏）",
+        "先记自我搏斗再记决定：诚实交代抉择的成本",
+        "以自然科学为学业主科，却把一生交给幼儿教育——边界清楚",
+        "对名言与译文保持语言精确（与格的意味不可丢）",
+        "以「向着孩子生活」而非「为孩子而活」表达投入的方向",
+        "把教师的位置也写进工作记录（排位、站位都是教育现场）"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "No invented quotations, gifts, or kindergarten anecdotes.",
+        "材料覆盖 1826-1863 年公开文本（含 Lange 编本与 1889 年自传英译）；不编造语料外出版史细节",
+        "逐字引文照录 OCR 原样"
+      ],
+      "identity_family_id": "thinker-educator",
+      "key_capabilities": [
+        "以游戏与恩物为核心的幼儿教育设计（幼儿园方法文本支撑）",
+        "教学材料的歌-谱-图一体化设计（《母亲游戏与育儿歌》）",
+        "教育者自我反思与抉择的记录方法（自传文本）",
+        "德语教育术语的精确辨析（名言与格的语义）"
+      ],
+      "latest_artifact": "思想教育师/friedrich-frobel/versions/0.0.0.1/friedrich-frobel-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "e5342ee966f44483d72ca330855d5594cee2fa598ece99852f9ad466327e6c5a",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "e6c51736f154cdc8416099256307d4a95bf81ca6adbeba14b250c404ebf57e7a",
+      "readiness": "ready",
+      "registration": "思想教育师/friedrich-frobel/registration.json",
+      "registration_category": "思想教育师",
+      "research_cutoff": "2026-08-19",
+      "selection_reasons": [
+        "思想教育师族核心人物：幼儿园（Kindergarten）创始人，一手文本（1826-1863）齐备",
+        "语料全公有领域：德文编本（Lange 编）与英译（母亲游戏/自传）多版本",
+        "三独立泳道可检索：幼儿园方法、教学材料、自传与转折",
+        "盲判实证：candidate 0.85 vs baseline 0.4744（delta +0.3756，flash 同模型盲判）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "friedrich-frobel",
+      "subject_status": "unauthored",
+      "subject_uid": "person-ebb0813c57ee1084",
+      "team_card": "思想教育师/friedrich-frobel/team-card.json",
+      "user_value": [
+        "设计幼儿活动时给你一套从游戏到材料的具体步骤",
+        "评估早教方案时先问它是否以儿童发展为本",
+        "需要教育主张时，给出基于现场与材料而非口号的论证"
       ],
       "version_count": 1
     },
