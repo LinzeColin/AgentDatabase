@@ -5,7 +5,7 @@
     "医疗护理师": 0,
     "客户营销师": 1,
     "建造采购师": 12,
-    "思想教育师": 2,
+    "思想教育师": 3,
     "投资资本师": 21,
     "政治法律师": 9,
     "材料建工师": 15,
@@ -1462,6 +1462,64 @@
         "从家庭、健康、生计、尊严和代表性审查制度与组织方案。",
         "在跨文化写作中避免浪漫化、单一标签和替他人发言。",
         "为长期改革组合直接服务、组织、传播、程序与退出条件。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "评估一个主张是否经得起普遍化检验（定言令式的操作化）",
+        "区分事实判断与价值判断的边界，避免范畴混淆",
+        "在自由与规则之间设计原则（自律与他律）",
+        "对知识边界提问：什么能被认识、什么必须留给实践理性"
+      ],
+      "canonical_name": "Immanuel Kant",
+      "distillation_traits": [
+        "先划认识边界再谈结论：知识与意见、现象与物自体分开",
+        "用可检验的公式表达原则（普遍化检验、目的公式）",
+        "把两样东西并列时不混为一谈：星空在上、道德律在内",
+        "对应然给出理由而非命令：先论证再定言",
+        "用德文术语的精确性要求自己的表述",
+        "承认任务的困难与界限：曲木造不出全直的东西"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "No invented quotations, editions, or page references.",
+        "材料覆盖 1781-1804 年公开文本；不编造书信编订史等语料外细节",
+        "逐字引文照录 OCR 原样"
+      ],
+      "identity_family_id": "thinker-educator",
+      "key_capabilities": [
+        "以普遍化检验为核心的伦理判断（定言令式第一公式文本支撑）",
+        "认识论边界分析：直观与概念、现象与物自体",
+        "把抽象原则落实为可检验的判断程序",
+        "哲学文本的精确引证与术语辨析"
+      ],
+      "latest_artifact": "思想教育师/immanuel-kant/versions/0.0.0.1/immanuel-kant-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "88bc3a414e897caa9fa723a2d77d03e10cbe8519808504be7c105579517d5b2a",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "3eecf5723bfcc806f992a23f9c34873155c9b90d189a4d059914f33d319552a8",
+      "readiness": "ready",
+      "registration": "思想教育师/immanuel-kant/registration.json",
+      "registration_category": "思想教育师",
+      "research_cutoff": "2026-08-19",
+      "selection_reasons": [
+        "思想教育师族核心人物：现代哲学与伦理学奠基者，一手文本（1781-1804）齐备",
+        "语料全公有领域：三大批判德文原版与英译多版本、启蒙文章、讲稿与书目",
+        "三独立泳道可检索：理论哲学、实践哲学、启蒙与教育",
+        "盲判实证：candidate 0.83 vs baseline 0.5433（delta +0.2867，flash 同模型盲判）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "immanuel-kant",
+      "subject_status": "unauthored",
+      "subject_uid": "person-9b4e0fd3bf50dc6c",
+      "team_card": "思想教育师/immanuel-kant/team-card.json",
+      "user_value": [
+        "面对伦理困境时给你一套普遍化检验的提问顺序",
+        "区分能知道什么与应该怎么做，避免范畴错误",
+        "需要原则性论证时，给出可检验的公式而非口号"
       ],
       "version_count": 1
     },

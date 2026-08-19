@@ -1,0 +1,2252 @@
+{
+  "checks": [],
+  "errors": [],
+  "generated_at": "2026-08-19T06:24:47Z",
+  "metrics": {
+    "activation_yield": {
+      "状态": "输入不在（/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-kant-179/workspaces/immanuel-kant/evals/judge_payload.v1.json），**未核验**（不是通过）"
+    },
+    "anchor_coherence": {
+      "输出": [
+        "     0.0%  cognitive-os.md        clm-602a1a676506",
+        "           **他的认识模型：材料与形式各司其职，缺一方就失效。** `Gedanken ohne Inhalt sind leer, Anschauungen ohne Begriffe…",
+        "",
+        "低于 10% 的 39 处 —— **只列不判，须逐条看完**。",
+        "  合法情形：指针段（「见 X.md」）、断言几乎全是英文引文而正文用中文转述。",
+        "  不合法情形：断言改过而这一节没跟着改（RUNBOOK 第六十种）。"
+      ],
+      "退出码": 0
+    },
+    "answer_constraints": {
+      "状态": "cases.jsonl 或 judge_payload 不在，**未核验**（不是通过）"
+    },
+    "attribution_basis": {
+      "P1 声称本人所著": 60,
+      "authority": "主干书简卷的扫描件自印定位（`src-88e3670ea28b`）：`Digitized by the Internet Archive in 2010 wit",
+      "citation": "archive.org item `briefwechselvoni01kant`（其余 source_id 的 locator 与 sha256 记于 sou",
+      "subject_origin": "historical",
+      "争议篇目数": 0,
+      "未挂 attribution": 0
+    },
+    "authorship": {
+      "**historical 路**：A-* 五种证据结构上不存在，归属改由 attribution_basis 认定": "18 条无 A-* 证据，**已按已声明的归属依据放行**（依据本身由 check_attribution_basis 硬拦）",
+      "P1 声称为本人所著": 60,
+      "已证实归属": 42
+    },
+    "baseline_in_persona": {
+      "已扫答案": 33,
+      "状态": "无候选（第一人称覆盖率 0.424）",
+      "第一人称覆盖率": 0.424,
+      "载荷": "baseline_bare.json"
+    },
+    "baseline_overall": 0.5433,
+    "baseline_provenance": {
+      "baseline_rows": 33,
+      "by_source": {
+        "unknown": 33
+      },
+      "capability_evidence": false,
+      "unusable_rows": 33,
+      "usable_rows": 0
+    },
+    "candidate_baseline_delta": 0.2867,
+    "candidate_overall": 0.83,
+    "case_self_sufficiency": {
+      "断链的题": 0,
+      "用例数": 33
+    },
+    "catalogue_entries": {
+      "**疑似著录卡**": {},
+      "P1 份数": 60,
+      "★ 口径": "**只报不拦。** 改分档是人的判断——里头引的那几句确实是他的话。",
+      "计数": "0 份 P1 像是「著录方描述这份文献」而不是文献本身",
+      "读不到正文的": [],
+      "通过": true
+    },
+    "checker_census": {
+      "负对照可用": 92
+    },
+    "claim_coverage_checked": "实际检查 17/23 条（其中按引文判据 0 条；语料元断言 0、无实体无引文 6 未纳入）",
+    "claim_markers": 23,
+    "claim_source_independence": {
+      "**全部来源塌缩成一部作品的**": 0,
+      "★ 其中**靠台账声明**判出的": 0,
+      "作品组数（连通分量，仅供参考）": 57,
+      "参考·按连通分量多报的": 0,
+      "口径": "判「两份源是不是同一部作品」，**不判「引得对不对」**——**被引的源两两直接** 8 词片重叠都 ≥30%（以较短一侧为分母）才判塌缩；**不做传递闭包**。★ 或者**台账的 `derived_from` 已声明它们同源**——那一条比阈值确定，且能抓到重叠恒为 0 的跨语种同源",
+      "塌缩的断言": [],
+      "来源数": 65,
+      "检查的断言": 8
+    },
+    "claims_active": 23,
+    "claims_total": 23,
+    "content_review": {
+      "absence_claims": "⚠ 标记的须人工确认依据；本脚本不做自动判定",
+      "answer_surface_leak": "evals/baseline.v1.json 不在——**表面特征泄题未核（不是通过）**；基线只存在于人物工作目录里，没落进工作区，**门看不见它**",
+      "claim_anchors": "✓ 全部对上",
+      "corpus_cache": "未给 --cache，**自动使用 `raw`**（与本文件另外三处一致）",
+      "gate_reachability": "✓ 各绝对分门都在两席实测可达范围内",
+      "ocr_language_death": "⚠ **虚词占比低于下限的 3 份**（多半是 Fraktur／哥特体 OCR 认错字母）：",
+      "quote_in_span": "没有 `_BOUNDARIES.json` 作者边界清单——**引文落段未核（不是通过）**；语料若含整版扫图，须由读过原文的人写出每篇的起止行",
+      "quote_integrity": "有引文未在语料中找到——**未命中不等于伪造**，须人工核对；但「改了 OCR 错字再当逐字引文」也落在这里",
+      "quote_integrity_scope": "evals/judge_payload.v1.json 不在——**答案层未核验（不是通过）**；候选答案没落进工作区时，任何门都看不见它",
+      "quote_locator": "✓ 每条长引文同段内都能找到坐标线索",
+      "self_counts": "evals/judge_payload.v1.json 不在——**自报字数未核（不是通过）**",
+      "shared_anchor": "evals/judge_payload.v1.json 不在——**同源引用未比对（不是通过）**",
+      "unsourced_names": "缺 --cache 或 judge_payload，**承重人名未核（不是通过）**"
+    },
+    "corpus_ceiling": {
+      "quick 要的一手份数": 4,
+      "一手份数": 53,
+      "一手占比": 0.9636,
+      "台账": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-kant-179/workspaces/immanuel-kant/evidence/source-ledger.jsonl",
+      "台账总份数": 55,
+      "够得着吗": "吃全部材料就够得着",
+      "有材料的道数": 3,
+      "读的是": "入库 attest（口径同发布门）"
+    },
+    "corpus_feasibility": {
+      "min_lanes": 3,
+      "min_primary_ratio": 0.4,
+      "min_sources": 8,
+      "profile": "quick",
+      "★ 口径": "`min_sources` 只数 train，而 synthesis/release **强制要有 holdout**，holdout 要从总数里扣 —— **所以真实下限是 min_sources + 1，而文档写的是 min_sources**。",
+      "★ 真实下限": 9,
+      "可用材料总数": 65,
+      "可行": true,
+      "拦路的": [],
+      "最优选法": "把 src-231cd76552be 扣作 holdout 即满足三项门",
+      "结论": "feasible",
+      "还差": 0
+    },
+    "corpus_integrity": {
+      "不是语料": 0,
+      "口径": "**只判「这是不是一份文档」，不判「这是不是这个人的文档」**——抓错了书、抓了译本当原本，本门一概看不见。",
+      "可疑": 1,
+      "可疑（只报不拦）": [
+        "raw/immanuelkantpap00kant.txt　过短：687 字节 < 2000——**确认这是不是一份完整的件**"
+      ],
+      "已扫": 65
+    },
+    "delivery_denominators": {
+      "状态": "输入不在（/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-kant-179/workspaces/immanuel-kant/audit/source-coverage.json），**未核验**（不是通过）"
+    },
+    "eval_cases": 33,
+    "eval_results": 66,
+    "eval_suite_counts": {
+      "anonymous-fidelity": 2,
+      "boundary": 2,
+      "capability-calibration": 2,
+      "contrast": 2,
+      "fact-preservation": 2,
+      "identity-routing": 2,
+      "known": 3,
+      "long-horizon": 2,
+      "planning-fidelity": 2,
+      "refusal-stop": 2,
+      "style-decoy": 2,
+      "task-completion": 2,
+      "token-efficiency": 2,
+      "tool-use": 2,
+      "trajectory": 2,
+      "voice": 2
+    },
+    "evidence_per_claim": {
+      "counter_source_ids": "整批都空（非空 0/23，不同取值 0）",
+      "evidence_clusters": "逐条各异（非空 23/23，不同取值 23）",
+      "source_ids": "逐条各异（非空 23/23，不同取值 21）",
+      "断言条数": 23
+    },
+    "fact_density": {
+      "**人物事实**（计入）": 12,
+      "**可复用做法**（计入）": 3,
+      "fact 类条数": 12,
+      "usable_train": 55,
+      "work-method 条数": 3,
+      "口径": "每 5 条可用源至少 1 条**人物事实**，下限 5；每条须带专名或数字；**只说语料有多大的不算**",
+      "复述式（不计入）": 0,
+      "方法口径": "至少 3 条**可复用做法**；可复用 = 有步骤**且**有验证/弃置判据。**这个数是暂定的，尚无实测支持**——有实据的只是「四人恒为 1」这个事实",
+      "无可核内容": 0,
+      "要求": 11,
+      "账本事实（不计入）": 0
+    },
+    "filename_year_vs_ledger": {
+      "**逐条**": [
+        {
+          "source_id": "src-77a77c26b3f0",
+          "台账 published_at": 1867,
+          "差": 189,
+          "文件名": "265433882.1678.emory.edu.txt",
+          "文件名里的年份": [
+            1678
+          ]
+        },
+        {
+          "source_id": "src-602d11e03dce",
+          "台账 published_at": 1867,
+          "差": 185,
+          "文件名": "265433882.1682.emory.edu.txt",
+          "文件名里的年份": [
+            1682
+          ]
+        },
+        {
+          "source_id": "src-4ec8e58d3909",
+          "台账 published_at": 1867,
+          "差": 154,
+          "文件名": "265433882.1713.emory.edu.txt",
+          "文件名里的年份": [
+            1713
+          ]
+        }
+      ],
+      "★ 射程": "只判「两边对不上」，**不判哪一边对**；文件名里的年份未必是出版年（Internet Archive 编号、年份区间、丛书年都会混进来）；**只报不拦**。",
+      "不一致": 3,
+      "两边都有年份": 6,
+      "差一年": 0,
+      "有一边没年份": 59,
+      "跨PD分界": 0
+    },
+    "heuristics": 3,
+    "holdout_mention": {
+      "**其中点名了是哪一份的**": 0,
+      "★ 与出厂模板逐字相同、已豁免": 12,
+      "★ 只是泛泛提及（不说哪一份）": 0,
+      "★★ 射程": "抓不到「不提 holdout 也不抄它、却把题目描述出来」的写法——那一类只能靠人读或答题方主动上报",
+      "与 holdout 正文重叠": 0,
+      "字面提及": 0
+    },
+    "holdout_overlap": {
+      "**硬失败**": 0,
+      "其中·无法判定": 0,
+      "其中·真重合": 0,
+      "返回码": 0
+    },
+    "lane_quotes": {
+      "holdout 源数": 10,
+      "合计": "7 条引文，对不上 0 条",
+      "读不到正文的来源": [],
+      "逐道": {
+        "01-writings.md": {
+          "**对不上**": [],
+          "引文数": 4,
+          "核过": 4
+        },
+        "02-conversations.md": {
+          "**对不上**": [],
+          "引文数": 1,
+          "核过": 1
+        },
+        "03-expression.md": {
+          "**对不上**": [],
+          "引文数": 0,
+          "核过": 0
+        },
+        "04-external.md": {
+          "**对不上**": [],
+          "引文数": 2,
+          "核过": 2
+        },
+        "05-decisions.md": {
+          "**对不上**": [],
+          "引文数": 0,
+          "核过": 0
+        },
+        "06-timeline.md": {
+          "**对不上**": [],
+          "引文数": 0,
+          "核过": 0
+        }
+      },
+      "通过": true
+    },
+    "lane_scope": {
+      "与台账不一致的道": [
+        "01-writings.md"
+      ],
+      "修法": "python3 scripts/emit_lane_scope.py <workspace>",
+      "口径": "**只列不判**——全库实测 holdout 泄漏 0 处，差异全是分道记错",
+      "台账行": 65,
+      "道文件": 6
+    },
+    "lane_source_counts": {
+      "conversations": 2,
+      "decisions": 0,
+      "expression": 0,
+      "external": 2,
+      "timeline": 0,
+      "writings": 51
+    },
+    "ledger_counts": {
+      "claims": 23,
+      "sources": 65
+    },
+    "longs_corruption": {
+      "分布": {
+        "不可用": 22,
+        "不适用": 10,
+        "干净": 31,
+        "混杂": 2
+      },
+      "逐份": {
+        "src-0c9ca19f6c3a": {
+          "diagnostic_est_eft": [
+            0,
+            0
+          ],
+          "file": "b28738615.txt",
+          "rate": 0.8987,
+          "reason": "德语讹字率 0.8987（正形 31／讹形 275）",
+          "verdict": "不可用",
+          "words": 45151,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 1039,
+            "h→b率": 0.0,
+            "变音符每千词": 49.3,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 547.3,
+              "panel_bad": 275,
+              "panel_good": 31,
+              "rate": 0.8987,
+              "reason": "德语讹字率 0.8987（正形 31／讹形 275）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.8987,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-11ba5bebadda": {
+          "diagnostic_est_eft": [
+            6,
+            4
+          ],
+          "file": "bub_gb_nsALAAAAIAAJ.txt",
+          "rate": 0.4991,
+          "reason": "德语讹字率 0.4991（正形 1447／讹形 1442）",
+          "verdict": "不可用",
+          "words": 183993,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 2690,
+            "h→b率": 0.0,
+            "变音符每千词": 96.3,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 481.3,
+              "panel_bad": 1442,
+              "panel_good": 1447,
+              "rate": 0.4991,
+              "reason": "德语讹字率 0.4991（正形 1447／讹形 1442）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.4991,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-1487a594f356": {
+          "diagnostic_est_eft": [
+            0,
+            0
+          ],
+          "file": "10043581bsb.txt",
+          "rate": 0.9179,
+          "reason": "德语讹字率 0.9179（正形 84／讹形 939）",
+          "verdict": "不可用",
+          "words": 141280,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 3556,
+            "h→b率": 0.0,
+            "变音符每千词": 41.2,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 562.5,
+              "panel_bad": 939,
+              "panel_good": 84,
+              "rate": 0.9179,
+              "reason": "德语讹字率 0.9179（正形 84／讹形 939）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.9179,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-1f75cd8ee674": {
+          "diagnostic_est_eft": [
+            0,
+            0
+          ],
+          "file": "10046192bsb.txt",
+          "rate": 0.0004,
+          "reason": "德语讹字率 0.0004（正形 2838／讹形 1）",
+          "verdict": "干净",
+          "words": 98104,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 3420,
+            "h→b率": 0.0,
+            "变音符每千词": 76.7,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 633.2,
+              "panel_bad": 1,
+              "panel_good": 2838,
+              "rate": 0.0004,
+              "reason": "德语讹字率 0.0004（正形 2838／讹形 1）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0004,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-1f9e083c4a88": {
+          "diagnostic_est_eft": [
+            1530,
+            0
+          ],
+          "file": "kantchoixdetexte00kant.txt",
+          "reason": "**两个语域都不适用**（拉丁：锚 0.0<15.0，若强行读 0.0000；英文：锚 1.6<500.0，若强行读 0.0000；德语：锚 0.1<15.0，若强行读 0.2500）",
+          "verdict": "不适用",
+          "words": 91086,
+          "逐语域": {}
+        },
+        "src-21c82472024f": {
+          "diagnostic_est_eft": [
+            6,
+            0
+          ],
+          "file": "saemmtlichewerke0004kant.txt",
+          "rate": 0.0004,
+          "reason": "德语讹字率 0.0004（正形 5276／讹形 2）",
+          "verdict": "干净",
+          "words": 186969,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 6486,
+            "h→b率": 0.0,
+            "变音符每千词": 77.0,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 644.0,
+              "panel_bad": 2,
+              "panel_good": 5276,
+              "rate": 0.0004,
+              "reason": "德语讹字率 0.0004（正形 5276／讹形 2）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0004,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-2277fd90245f": {
+          "diagnostic_est_eft": [
+            2446,
+            0
+          ],
+          "file": "anthropologiesu00kantgoog.txt",
+          "reason": "**两个语域都不适用**（拉丁：锚 0.3<15.0，若强行读 0.0081；英文：锚 6.9<500.0，若强行读 0.0000；德语：锚 0.3<15.0，若强行读 0.1190）",
+          "verdict": "不适用",
+          "words": 150050,
+          "逐语域": {}
+        },
+        "src-2311e9d43ba5": {
+          "diagnostic_est_eft": [
+            17,
+            0
+          ],
+          "file": "aje7738.0003.001.umich.edu.txt",
+          "rate": 0.0004,
+          "reason": "德语讹字率 0.0004（正形 5703／讹形 2）",
+          "verdict": "干净",
+          "words": 243018,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 8413,
+            "h→b率": 0.0001,
+            "变音符每千词": 97.1,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 625.5,
+              "panel_bad": 2,
+              "panel_good": 5703,
+              "rate": 0.0004,
+              "reason": "德语讹字率 0.0004（正形 5703／讹形 2）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0004,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-231cd76552be": {
+          "diagnostic_est_eft": [
+            1,
+            1
+          ],
+          "file": "00074230bsb.txt",
+          "rate": 0.9252,
+          "reason": "德语讹字率 0.9252（正形 51／讹形 631）",
+          "verdict": "不可用",
+          "words": 74989,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 1515,
+            "h→b率": 0.0,
+            "变音符每千词": 50.3,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 507.1,
+              "panel_bad": 631,
+              "panel_good": 51,
+              "rate": 0.9252,
+              "reason": "德语讹字率 0.9252（正形 51／讹形 631）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.9252,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-23dc040bd16b": {
+          "diagnostic_est_eft": [
+            0,
+            1
+          ],
+          "file": "10040686bsb.txt",
+          "rate": 0.922,
+          "reason": "德语讹字率 0.9220（正形 11／讹形 130）",
+          "verdict": "不可用",
+          "words": 24571,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 609,
+            "h→b率": 0.0,
+            "变音符每千词": 44.0,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 572.2,
+              "panel_bad": 130,
+              "panel_good": 11,
+              "rate": 0.922,
+              "reason": "德语讹字率 0.9220（正形 11／讹形 130）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.922,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-2757219ba6a5": {
+          "diagnostic_est_eft": [
+            4,
+            0
+          ],
+          "file": "kantsprolegomen00kantuoft.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 1068／讹形 0）",
+          "verdict": "干净",
+          "words": 136600,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2182.7,
+              "panel_bad": 0,
+              "panel_good": 1068,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 1068／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-2defe6d152fc": {
+          "diagnostic_est_eft": [
+            12,
+            0
+          ],
+          "file": "bim_eighteenth-century_essays-and-treatises-on-_kant-immanuel_1798_2.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 1178／讹形 0）",
+          "verdict": "干净",
+          "words": 122096,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2176.6,
+              "panel_bad": 0,
+              "panel_good": 1178,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 1178／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-31a40f5f4513": {
+          "diagnostic_est_eft": [
+            1,
+            0
+          ],
+          "file": "educationaltheor0000kant.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 873／讹形 0）",
+          "verdict": "干净",
+          "words": 87660,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2029.5,
+              "panel_bad": 0,
+              "panel_good": 873,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 873／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-4058bbdfafa4": {
+          "diagnostic_est_eft": [
+            2,
+            0
+          ],
+          "file": "metaphysicofethi00kantiala.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 1238／讹形 0）",
+          "verdict": "干净",
+          "words": 106625,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2245.9,
+              "panel_bad": 0,
+              "panel_good": 1238,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 1238／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-4ec8e58d3909": {
+          "diagnostic_est_eft": [
+            2,
+            0
+          ],
+          "file": "265433882.1713.emory.edu.txt",
+          "rate": 0.0,
+          "reason": "德语讹字率 0.0000（正形 4769／讹形 0）",
+          "verdict": "干净",
+          "words": 191531,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 6873,
+            "h→b率": 0.0,
+            "变音符每千词": 83.6,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 657.1,
+              "panel_bad": 0,
+              "panel_good": 4769,
+              "rate": 0.0,
+              "reason": "德语讹字率 0.0000（正形 4769／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-5e054ba8e9ff": {
+          "diagnostic_est_eft": [
+            11,
+            33
+          ],
+          "file": "bub_gb_mIdQAAAAYAAJ.txt",
+          "rate": 0.8776,
+          "reason": "德语讹字率 0.8776（正形 210／讹形 1505）　★ **长 s 之外还坏了**：**h→b 讹变 20.3%**（`nicht`→`nicbt` 这一族，样本 1263）——逐字引用会印出作者没写的形",
+          "verdict": "不可用",
+          "words": 199903,
+          "德语附加": {
+            "h→b坏": true,
+            "h→b样本": 1263,
+            "h→b率": 0.2035,
+            "变音符每千词": 82.0,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 154.9,
+              "panel_bad": 1505,
+              "panel_good": 210,
+              "rate": 0.8776,
+              "reason": "德语讹字率 0.8776（正形 210／讹形 1505）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.8776,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-5e324d5180fb": {
+          "diagnostic_est_eft": [
+            3,
+            0
+          ],
+          "file": "ProlegomeniKantMartinetti.txt",
+          "reason": "**两个语域都不适用**（拉丁：锚 0.5<15.0，若强行读 0.0273；英文：锚 3.5<500.0，若强行读 0.0000；德语：锚 0.9<15.0，若强行读 0.1343）",
+          "verdict": "不适用",
+          "words": 104962,
+          "逐语域": {}
+        },
+        "src-5ec28c5c504d": {
+          "diagnostic_est_eft": [
+            5,
+            0
+          ],
+          "file": "philosophyoflawe0000kant.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 939／讹形 0）",
+          "verdict": "干净",
+          "words": 81187,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2295.6,
+              "panel_bad": 0,
+              "panel_good": 939,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 939／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-602d11e03dce": {
+          "diagnostic_est_eft": [
+            6,
+            0
+          ],
+          "file": "265433882.1682.emory.edu.txt",
+          "rate": 0.0,
+          "reason": "德语讹字率 0.0000（正形 5255／讹形 0）",
+          "verdict": "干净",
+          "words": 185195,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 6551,
+            "h→b率": 0.0,
+            "变音符每千词": 78.8,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 651.8,
+              "panel_bad": 0,
+              "panel_good": 5255,
+              "rate": 0.0,
+              "reason": "德语讹字率 0.0000（正形 5255／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-64ab9f79bfb5": {
+          "diagnostic_est_eft": [
+            5,
+            1
+          ],
+          "file": "ImmanuelKantsKritikDerReinenVernunftMitEinerEinleitungUnd.txt",
+          "rate": 0.0004,
+          "reason": "德语讹字率 0.0004（正形 7865／讹形 3）",
+          "verdict": "干净",
+          "words": 291049,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 9594,
+            "h→b率": 0.0002,
+            "变音符每千词": 71.6,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 622.4,
+              "panel_bad": 3,
+              "panel_good": 7865,
+              "rate": 0.0004,
+              "reason": "德语讹字率 0.0004（正形 7865／讹形 3）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0004,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-66a095d80263": {
+          "diagnostic_est_eft": [
+            0,
+            0
+          ],
+          "file": "10040687bsb.txt",
+          "rate": 0.9565,
+          "reason": "德语讹字率 0.9565（正形 10／讹形 220）",
+          "verdict": "不可用",
+          "words": 28802,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 757,
+            "h→b率": 0.0,
+            "变音符每千词": 60.9,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 595.8,
+              "panel_bad": 220,
+              "panel_good": 10,
+              "rate": 0.9565,
+              "reason": "德语讹字率 0.9565（正形 10／讹形 220）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.9565,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-693332ba2382": {
+          "diagnostic_est_eft": [
+            0,
+            15
+          ],
+          "file": "bub_gb_tawUAAAAQAAJ.txt",
+          "rate": 0.8917,
+          "reason": "德语讹字率 0.8917（正形 86／讹形 708）",
+          "verdict": "不可用",
+          "words": 89858,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 760,
+            "h→b率": 0.0079,
+            "变音符每千词": 96.1,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 168.3,
+              "panel_bad": 708,
+              "panel_good": 86,
+              "rate": 0.8917,
+              "reason": "德语讹字率 0.8917（正形 86／讹形 708）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.8917,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-69eaaa5ec8f7": {
+          "diagnostic_est_eft": [
+            2,
+            0
+          ],
+          "file": "kantsprolegomena00kantuoft.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 795／讹形 0）",
+          "verdict": "干净",
+          "words": 90804,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2175.2,
+              "panel_bad": 0,
+              "panel_good": 795,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 795／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-75b42fcb7fbd": {
+          "diagnostic_est_eft": [
+            6,
+            0
+          ],
+          "file": "textbooktokantcr00kant.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 2461／讹形 0）",
+          "verdict": "干净",
+          "words": 182768,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2140.8,
+              "panel_bad": 0,
+              "panel_good": 2461,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 2461／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-7719bb793564": {
+          "diagnostic_est_eft": [
+            0,
+            0
+          ],
+          "file": "bub_gb_Oc0AAAAAcAAJ.txt",
+          "rate": 0.9221,
+          "reason": "德语讹字率 0.9221（正形 25／讹形 296）",
+          "verdict": "不可用",
+          "words": 46357,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 1104,
+            "h→b率": 0.0,
+            "变音符每千词": 42.2,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 559.8,
+              "panel_bad": 296,
+              "panel_good": 25,
+              "rate": 0.9221,
+              "reason": "德语讹字率 0.9221（正形 25／讹形 296）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.9221,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-77a77c26b3f0": {
+          "ae_连字": {
+            "ae_per_1000": 0.67,
+            "quae": 80,
+            "quae_ratio": 0.941,
+            "que": 5,
+            "判读": "完好",
+            "理由": "ae 0.67/千字母（门 3.5）、quae 占比 0.941（门 0.80）"
+          },
+          "diagnostic_est_eft": [
+            221,
+            0
+          ],
+          "file": "265433882.1678.emory.edu.txt",
+          "rate": 0.0107,
+          "reason": "拉丁讹字率 0.0107（正形 185／讹形 2）　（两语域都适用，取更差的一侧）",
+          "verdict": "混杂",
+          "words": 165326,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 4599,
+            "h→b率": 0.0,
+            "变音符每千词": 79.0,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 610.1,
+              "panel_bad": 0,
+              "panel_good": 4601,
+              "rate": 0.0,
+              "reason": "德语讹字率 0.0000（正形 4601／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "德语"
+            },
+            "拉丁": {
+              "anchors_per_10k": 27.2,
+              "panel_bad": 2,
+              "panel_good": 185,
+              "rate": 0.0107,
+              "reason": "拉丁讹字率 0.0107（正形 185／讹形 2）",
+              "verdict": "混杂",
+              "若无语种门会读到": 0.0107,
+              "语域": "拉丁"
+            }
+          }
+        },
+        "src-811017be508d": {
+          "diagnostic_est_eft": [
+            2158,
+            0
+          ],
+          "file": "bub_gb_F7gA_JUh5EYC.txt",
+          "reason": "**两个语域都不适用**（拉丁：锚 0.3<15.0，若强行读 0.0000；英文：锚 0.9<500.0，若强行读 0.0000；德语：锚 0.2<15.0，若强行读 0.1429）",
+          "verdict": "不适用",
+          "words": 140375,
+          "逐语域": {}
+        },
+        "src-86087e7cfa77": {
+          "diagnostic_est_eft": [
+            11,
+            0
+          ],
+          "file": "ikuiseenrauhaanv53461gut.txt",
+          "reason": "**两个语域都不适用**（拉丁：锚 0.0<15.0，若强行读 0.0000；英文：锚 221.2<500.0，若强行读 0.0000；德语：锚 0.0<15.0，若强行读 0.0000）",
+          "verdict": "不适用",
+          "words": 26850,
+          "逐语域": {}
+        },
+        "src-86b26ba6469e": {
+          "diagnostic_est_eft": [
+            106,
+            0
+          ],
+          "file": "kantscritique01kantuoft.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 1360／讹形 0）",
+          "verdict": "干净",
+          "words": 161706,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2273.9,
+              "panel_bad": 0,
+              "panel_good": 1360,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 1360／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-86ba585ee0aa": {
+          "diagnostic_est_eft": [
+            23,
+            27
+          ],
+          "file": "kantsgesammeltes0010kant.txt",
+          "rate": 0.66,
+          "reason": "德语讹字率 0.6600（正形 1109／讹形 2153）",
+          "verdict": "不可用",
+          "words": 199982,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 1624,
+            "h→b率": 0.0006,
+            "变音符每千词": 98.4,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 110.9,
+              "panel_bad": 2153,
+              "panel_good": 1109,
+              "rate": 0.66,
+              "reason": "德语讹字率 0.6600（正形 1109／讹形 2153）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.66,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-88e3670ea28b": {
+          "diagnostic_est_eft": [
+            6,
+            0
+          ],
+          "file": "briefwechselvoni01kant.txt",
+          "rate": 0.001,
+          "reason": "德语讹字率 0.0010（正形 3806／讹形 4）",
+          "verdict": "干净",
+          "words": 124415,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 3398,
+            "h→b率": 0.0,
+            "变音符每千词": 77.2,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 610.6,
+              "panel_bad": 4,
+              "panel_good": 3806,
+              "rate": 0.001,
+              "reason": "德语讹字率 0.0010（正形 3806／讹形 4）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.001,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-8acbe47be596": {
+          "diagnostic_est_eft": [
+            0,
+            8
+          ],
+          "file": "bub_gb_7rI_AAAAYAAJ.txt",
+          "rate": 0.9252,
+          "reason": "德语讹字率 0.9252（正形 33／讹形 408）",
+          "verdict": "不可用",
+          "words": 78244,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 24,
+            "h→b率": 0.9583,
+            "变音符每千词": 56.1,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 33.2,
+              "panel_bad": 408,
+              "panel_good": 33,
+              "rate": 0.9252,
+              "reason": "德语讹字率 0.9252（正形 33／讹形 408）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.9252,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-8cb47c41068f": {
+          "diagnostic_est_eft": [
+            1,
+            8
+          ],
+          "file": "bub_gb_pbI_AAAAYAAJ.txt",
+          "rate": 0.9405,
+          "reason": "德语讹字率 0.9405（正形 16／讹形 253）",
+          "verdict": "不可用",
+          "words": 58705,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 24,
+            "h→b率": 0.75,
+            "变音符每千词": 56.5,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 31.0,
+              "panel_bad": 253,
+              "panel_good": 16,
+              "rate": 0.9405,
+              "reason": "德语讹字率 0.9405（正形 16／讹形 253）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.9405,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-8ea90f250530": {
+          "diagnostic_est_eft": [
+            106,
+            0
+          ],
+          "file": "india.history.resource.90167.txt",
+          "rate": 0.0007,
+          "reason": "英文讹字率 0.0007（正形 1345／讹形 1）",
+          "verdict": "干净",
+          "words": 161628,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2267.0,
+              "panel_bad": 1,
+              "panel_good": 1345,
+              "rate": 0.0007,
+              "reason": "英文讹字率 0.0007（正形 1345／讹形 1）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0007,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-9021c46737e7": {
+          "diagnostic_est_eft": [
+            14,
+            0
+          ],
+          "file": "immanuelkantscri0000kant_c7p6.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 2475／讹形 0）",
+          "verdict": "干净",
+          "words": 257142,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2280.6,
+              "panel_bad": 0,
+              "panel_good": 2475,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 2475／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-9261442ee7b4": {
+          "diagnostic_est_eft": [
+            7,
+            3
+          ],
+          "file": "immanuelkantskr03kantgoog.txt",
+          "rate": 0.0016,
+          "reason": "德语讹字率 0.0016（正形 6319／讹形 10）",
+          "verdict": "干净",
+          "words": 242072,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 7247,
+            "h→b率": 0.0032,
+            "变音符每千词": 62.0,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 586.8,
+              "panel_bad": 10,
+              "panel_good": 6319,
+              "rate": 0.0016,
+              "reason": "德语讹字率 0.0016（正形 6319／讹形 10）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0016,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-9572eb3c50ec": {
+          "diagnostic_est_eft": [
+            9,
+            0
+          ],
+          "file": "briefwechselvoni02kant.txt",
+          "rate": 0.0005,
+          "reason": "德语讹字率 0.0005（正形 3808／讹形 2）",
+          "verdict": "干净",
+          "words": 128170,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 3775,
+            "h→b率": 0.0032,
+            "变音符每千词": 75.3,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 589.8,
+              "panel_bad": 2,
+              "panel_good": 3808,
+              "rate": 0.0005,
+              "reason": "德语讹字率 0.0005（正形 3808／讹形 2）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0005,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-9d8b6c628788": {
+          "diagnostic_est_eft": [
+            0,
+            0
+          ],
+          "file": "kant-della-forza-dell-animo.txt",
+          "reason": "**两个语域都不适用**（拉丁：锚 0.0<15.0，若强行读 0.0625；英文：锚 0.7<500.0，若强行读 0.0000；德语：锚 0.7<15.0，若强行读 0.0000）",
+          "verdict": "不适用",
+          "words": 13386,
+          "逐语域": {}
+        },
+        "src-9f952fc1b4f9": {
+          "diagnostic_est_eft": [
+            7,
+            0
+          ],
+          "file": "KantAntropologiaPrammatica.txt",
+          "reason": "**两个语域都不适用**（拉丁：锚 0.2<15.0，若强行读 0.0000；英文：锚 1.7<500.0，若强行读 0.0000；德语：锚 0.5<15.0，若强行读 0.3600）",
+          "verdict": "不适用",
+          "words": 80313,
+          "逐语域": {}
+        },
+        "src-a261a5aa5094": {
+          "diagnostic_est_eft": [
+            73,
+            12
+          ],
+          "file": "kantsgesammeltes12kant.txt",
+          "rate": 0.7181,
+          "reason": "德语讹字率 0.7181（正形 451／讹形 1149）　★ **长 s 之外还坏了**：**h→b 讹变 26.2%**（`nicht`→`nicbt` 这一族，样本 42）——逐字引用会印出作者没写的形",
+          "verdict": "不可用",
+          "words": 163454,
+          "德语附加": {
+            "h→b坏": true,
+            "h→b样本": 42,
+            "h→b率": 0.2619,
+            "变音符每千词": 96.2,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 55.9,
+              "panel_bad": 1149,
+              "panel_good": 451,
+              "rate": 0.7181,
+              "reason": "德语讹字率 0.7181（正形 451／讹形 1149）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.7181,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-a33dcbcfacb0": {
+          "diagnostic_est_eft": [
+            6,
+            0
+          ],
+          "file": "immanuelkantscri02kantuoft.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 1906／讹形 0）",
+          "verdict": "干净",
+          "words": 199212,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2255.5,
+              "panel_bad": 0,
+              "panel_good": 1906,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 1906／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-b0804850b654": {
+          "diagnostic_est_eft": [
+            78,
+            0
+          ],
+          "file": "bim_eighteenth-century_the-metaphysic-of-morals_kant-immanuel_1799_1.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 590／讹形 0）",
+          "verdict": "干净",
+          "words": 55916,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2325.8,
+              "panel_bad": 0,
+              "panel_good": 590,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 590／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-b248bad33390": {
+          "diagnostic_est_eft": [
+            5,
+            1
+          ],
+          "file": "10046172bsb.txt",
+          "rate": 0.8987,
+          "reason": "德语讹字率 0.8987（正形 85／讹形 754）",
+          "verdict": "不可用",
+          "words": 114447,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 2223,
+            "h→b率": 0.0,
+            "变音符每千词": 69.3,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 569.6,
+              "panel_bad": 754,
+              "panel_good": 85,
+              "rate": 0.8987,
+              "reason": "德语讹字率 0.8987（正形 85／讹形 754）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.8987,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-bb1683d6b975": {
+          "diagnostic_est_eft": [
+            1,
+            0
+          ],
+          "file": "educationaltheor00kantuoft.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 867／讹形 0）",
+          "verdict": "干净",
+          "words": 81990,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2192.2,
+              "panel_bad": 0,
+              "panel_good": 867,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 867／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-c7cddf7d7774": {
+          "diagnostic_est_eft": [
+            6,
+            0
+          ],
+          "file": "critiqueofjudgem00kantuoft.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 1244／讹形 0）",
+          "verdict": "干净",
+          "words": 138929,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2365.9,
+              "panel_bad": 0,
+              "panel_good": 1244,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 1244／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-c90e1301fe6c": {
+          "diagnostic_est_eft": [
+            2,
+            0
+          ],
+          "file": "bub_gb_PiRNAAAAMAAJ.txt",
+          "rate": 0.0008,
+          "reason": "德语讹字率 0.0008（正形 5908／讹形 5）",
+          "verdict": "干净",
+          "words": 246770,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 6779,
+            "h→b率": 0.004,
+            "变音符每千词": 51.0,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 563.1,
+              "panel_bad": 5,
+              "panel_good": 5908,
+              "rate": 0.0008,
+              "reason": "德语讹字率 0.0008（正形 5908／讹形 5）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0008,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-c9c95efc5799": {
+          "diagnostic_est_eft": [
+            1,
+            0
+          ],
+          "file": "briefwechselvoni03kant.txt",
+          "rate": 0.0006,
+          "reason": "德语讹字率 0.0006（正形 3162／讹形 2）",
+          "verdict": "干净",
+          "words": 113311,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 2982,
+            "h→b率": 0.0013,
+            "变音符每千词": 74.0,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 562.8,
+              "panel_bad": 2,
+              "panel_good": 3162,
+              "rate": 0.0006,
+              "reason": "德语讹字率 0.0006（正形 3162／讹形 2）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0006,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-cb0bedef8e59": {
+          "diagnostic_est_eft": [
+            36,
+            0
+          ],
+          "file": "kantlobelloylosublime1919.txt",
+          "rate": null,
+          "reason": "德语面板只命中 13 次 < 30 —— **样本量不够，不是「干净」**　★ **长 s 之外还坏了**：**变音符湮灭**（0.0/千词，干净德语件是 69.9–123.4）——逐字引用会印出作者没写的形",
+          "verdict": "不可用",
+          "words": 22669,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 0,
+            "h→b率": 0.0,
+            "变音符每千词": 0.0,
+            "变音符湮灭": true
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 15.9,
+              "panel_bad": 1,
+              "panel_good": 12,
+              "reason": "德语面板只命中 13 次 < 30 —— **样本量不够，不是「干净」**",
+              "verdict": "未核",
+              "若无语种门会读到": 0.0769,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-d1201414c46b": {
+          "diagnostic_est_eft": [
+            14,
+            1
+          ],
+          "file": "10046194bsb.txt",
+          "rate": 0.0,
+          "reason": "德语讹字率 0.0000（正形 3528／讹形 0）",
+          "verdict": "干净",
+          "words": 126381,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 5084,
+            "h→b率": 0.0,
+            "变音符每千词": 73.8,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 701.9,
+              "panel_bad": 0,
+              "panel_good": 3528,
+              "rate": 0.0,
+              "reason": "德语讹字率 0.0000（正形 3528／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-d1983cf5ea92": {
+          "diagnostic_est_eft": [
+            2214,
+            1
+          ],
+          "file": "critiquedelarai02tissgoog.txt",
+          "reason": "**两个语域都不适用**（拉丁：锚 0.1<15.0，若强行读 0.0144；英文：锚 8.0<500.0，若强行读 0.0000；德语：锚 0.8<15.0，若强行读 0.5385）",
+          "verdict": "不适用",
+          "words": 156610,
+          "逐语域": {}
+        },
+        "src-d58c8adb13b0": {
+          "diagnostic_est_eft": [
+            28,
+            31
+          ],
+          "file": "kantsgesammeltes13kant.txt",
+          "rate": 0.1784,
+          "reason": "德语讹字率 0.1784（正形 2211／讹形 480）",
+          "verdict": "混杂",
+          "words": 233278,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 3072,
+            "h→b率": 0.002,
+            "变音符每千词": 75.8,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 322.5,
+              "panel_bad": 480,
+              "panel_good": 2211,
+              "rate": 0.1784,
+              "reason": "德语讹字率 0.1784（正形 2211／讹形 480）",
+              "verdict": "混杂",
+              "若无语种门会读到": 0.1784,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-d7cda8167b58": {
+          "diagnostic_est_eft": [
+            0,
+            1
+          ],
+          "file": "10042413bsb.txt",
+          "rate": 0.8989,
+          "reason": "德语讹字率 0.8989（正形 57／讹形 507）",
+          "verdict": "不可用",
+          "words": 82614,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 2138,
+            "h→b率": 0.0,
+            "变音符每千词": 40.2,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 585.0,
+              "panel_bad": 507,
+              "panel_good": 57,
+              "rate": 0.8989,
+              "reason": "德语讹字率 0.8989（正形 57／讹形 507）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.8989,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-dbda401744b9": {
+          "diagnostic_est_eft": [
+            1,
+            0
+          ],
+          "file": "10044864bsb.txt",
+          "rate": 0.8626,
+          "reason": "德语讹字率 0.8626（正形 58／讹形 364）",
+          "verdict": "不可用",
+          "words": 57339,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 1352,
+            "h→b率": 0.0,
+            "变音符每千词": 43.0,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 563.0,
+              "panel_bad": 364,
+              "panel_good": 58,
+              "rate": 0.8626,
+              "reason": "德语讹字率 0.8626（正形 58／讹形 364）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.8626,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-deba15392d05": {
+          "diagnostic_est_eft": [
+            2,
+            0
+          ],
+          "file": "10046188bsb.txt",
+          "rate": 0.0003,
+          "reason": "德语讹字率 0.0003（正形 3928／讹形 1）",
+          "verdict": "干净",
+          "words": 147503,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 5059,
+            "h→b率": 0.0,
+            "变音符每千词": 89.3,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 661.0,
+              "panel_bad": 1,
+              "panel_good": 3928,
+              "rate": 0.0003,
+              "reason": "德语讹字率 0.0003（正形 3928／讹形 1）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0003,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-e148cf5a20c5": {
+          "diagnostic_est_eft": [
+            1,
+            1
+          ],
+          "file": "10045002bsb.txt",
+          "rate": 0.9231,
+          "reason": "德语讹字率 0.9231（正形 86／讹形 1033）",
+          "verdict": "不可用",
+          "words": 131887,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 3204,
+            "h→b率": 0.0,
+            "变音符每千词": 57.8,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 548.1,
+              "panel_bad": 1033,
+              "panel_good": 86,
+              "rate": 0.9231,
+              "reason": "德语讹字率 0.9231（正形 86／讹形 1033）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.9231,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-e4025e372da2": {
+          "diagnostic_est_eft": [
+            0,
+            0
+          ],
+          "file": "dli.ministry.13241.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 370／讹形 0）",
+          "verdict": "干净",
+          "words": 32091,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2228.4,
+              "panel_bad": 0,
+              "panel_good": 370,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 370／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-e75627a6abc8": {
+          "diagnostic_est_eft": [
+            9,
+            0
+          ],
+          "file": "b24885046.txt",
+          "rate": 0.0004,
+          "reason": "德语讹字率 0.0004（正形 2852／讹形 1）",
+          "verdict": "干净",
+          "words": 129415,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 4261,
+            "h→b率": 0.0,
+            "变音符每千词": 100.0,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 630.3,
+              "panel_bad": 1,
+              "panel_good": 2852,
+              "rate": 0.0004,
+              "reason": "德语讹字率 0.0004（正形 2852／讹形 1）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0004,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-e8b8978bb63b": {
+          "diagnostic_est_eft": [
+            2168,
+            0
+          ],
+          "file": "bub_gb_F31ZAAAAcAAJ.txt",
+          "reason": "**两个语域都不适用**（拉丁：锚 0.3<15.0，若强行读 0.0000；英文：锚 0.7<500.0，若强行读 0.0000；德语：锚 0.1<15.0，若强行读 0.0000）",
+          "verdict": "不适用",
+          "words": 140813,
+          "逐语域": {}
+        },
+        "src-ecb363455da1": {
+          "diagnostic_est_eft": [
+            0,
+            1
+          ],
+          "file": "b28764523.txt",
+          "rate": 0.8449,
+          "reason": "德语讹字率 0.8449（正形 87／讹形 474）",
+          "verdict": "不可用",
+          "words": 92306,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 2517,
+            "h→b率": 0.0,
+            "变音符每千词": 31.5,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 625.1,
+              "panel_bad": 474,
+              "panel_good": 87,
+              "rate": 0.8449,
+              "reason": "德语讹字率 0.8449（正形 87／讹形 474）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.8449,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-f264e93c21bf": {
+          "diagnostic_est_eft": [
+            3,
+            0
+          ],
+          "file": "TheMetaphysicOfEthicsByImmanuelKantTranslatedByJ.w.SempleEdited.txt",
+          "rate": 0.0,
+          "reason": "英文讹字率 0.0000（正形 1153／讹形 0）",
+          "verdict": "干净",
+          "words": 97706,
+          "逐语域": {
+            "英文": {
+              "anchors_per_10k": 2227.2,
+              "panel_bad": 0,
+              "panel_good": 1153,
+              "rate": 0.0,
+              "reason": "英文讹字率 0.0000（正形 1153／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "英文"
+            }
+          }
+        },
+        "src-f56042424327": {
+          "diagnostic_est_eft": [
+            5,
+            0
+          ],
+          "file": "10046171bsb.txt",
+          "rate": 0.914,
+          "reason": "德语讹字率 0.9140（正形 59／讹形 627）",
+          "verdict": "不可用",
+          "words": 105219,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 2499,
+            "h→b率": 0.0,
+            "变音符每千词": 67.3,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 557.1,
+              "panel_bad": 627,
+              "panel_good": 59,
+              "rate": 0.914,
+              "reason": "德语讹字率 0.9140（正形 59／讹形 627）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.914,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-f7319e6e8db3": {
+          "diagnostic_est_eft": [
+            0,
+            0
+          ],
+          "file": "bub_gb_Wiw-AAAAYAAJ.txt",
+          "rate": 0.9626,
+          "reason": "德语讹字率 0.9626（正形 91／讹形 2344）",
+          "verdict": "不可用",
+          "words": 132469,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 2489,
+            "h→b率": 0.0,
+            "变音符每千词": 68.4,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 528.7,
+              "panel_bad": 2344,
+              "panel_good": 91,
+              "rate": 0.9626,
+              "reason": "德语讹字率 0.9626（正形 91／讹形 2344）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.9626,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-fa5013c12207": {
+          "diagnostic_est_eft": [
+            2,
+            0
+          ],
+          "file": "kantsgesammeltes55925gut.txt",
+          "rate": 0.0,
+          "reason": "德语讹字率 0.0000（正形 3304／讹形 0）",
+          "verdict": "干净",
+          "words": 137563,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 4879,
+            "h→b率": 0.0,
+            "变音符每千词": 115.1,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 655.9,
+              "panel_bad": 0,
+              "panel_good": 3304,
+              "rate": 0.0,
+              "reason": "德语讹字率 0.0000（正形 3304／讹形 0）",
+              "verdict": "干净",
+              "若无语种门会读到": 0.0,
+              "语域": "德语"
+            }
+          }
+        },
+        "src-fcbcea6ed0f0": {
+          "diagnostic_est_eft": [
+            0,
+            0
+          ],
+          "file": "immanuelkantpap00kant.txt",
+          "reason": "**两个语域都不适用**（拉丁：锚 0.0<15.0，若强行读 0.0000；英文：锚 0.0<500.0，若强行读 0.0000；德语：锚 0.0<15.0，若强行读 0.0000）",
+          "verdict": "不适用",
+          "words": 131,
+          "逐语域": {}
+        },
+        "src-ff581bf0e357": {
+          "diagnostic_est_eft": [
+            0,
+            0
+          ],
+          "file": "10046183bsb.txt",
+          "rate": 0.7597,
+          "reason": "德语讹字率 0.7597（正形 291／讹形 920）",
+          "verdict": "不可用",
+          "words": 163345,
+          "德语附加": {
+            "h→b坏": false,
+            "h→b样本": 2962,
+            "h→b率": 0.0,
+            "变音符每千词": 42.7,
+            "变音符湮灭": false
+          },
+          "逐语域": {
+            "德语": {
+              "anchors_per_10k": 602.3,
+              "panel_bad": 920,
+              "panel_good": 291,
+              "rate": 0.7597,
+              "reason": "德语讹字率 0.7597（正形 291／讹形 920）",
+              "verdict": "不可用",
+              "若无语种门会读到": 0.7597,
+              "语域": "德语"
+            }
+          }
+        }
+      }
+    },
+    "material_split": {
+      "**holdout 泄漏处**": 0,
+      "返回码": 2
+    },
+    "measurement_claims": {
+      "**光说不给数**": 0,
+      "同段带数": 0,
+      "实测声明": 0,
+      "已扫单元": 1,
+      "状态": "**一处实测声明都没扫到——本次什么也没检查，不构成通过。**合成阶段常态如此（断言层通常不写「我量过」），**但发布阶段若仍是 0，要去看是不是扫错了单元。**",
+      "诚实弃权（不计问题）": 0
+    },
+    "mental_models": 2,
+    "namesake_criteria": {
+      "★": "「名+姓」够不够，取决于这个人物有没有同名近亲。**每个人物都要单测一次。**",
+      "状态": "本人物没有定制判据——**不适用**（不是通过）"
+    },
+    "namesake_separability": {
+      "候选数": 0,
+      "分不开": 0,
+      "字面同名未定政策": [],
+      "未覆盖": [],
+      "状态": "skip",
+      "说明": "**找不到同名候选名单——不适用，不是通过**"
+    },
+    "ocr_homoglyphs": {
+      "**这些是 OCR 件，取引文时避开脏位置**": [
+        {
+          "全同形字词": 0,
+          "样例": [
+            "gα 读作 gα"
+          ],
+          "源": "10043581bsb.txt",
+          "非拉丁字符": 4
+        },
+        {
+          "全同形字词": 0,
+          "样例": [
+            "νππẽẽů 读作 vππẽẽů",
+            "νννẽƷm 读作 vvvẽƷm"
+          ],
+          "源": "10046172bsb.txt",
+          "非拉丁字符": 6
+        },
+        {
+          "全同形字词": 0,
+          "样例": [
+            "bonο 读作 bono",
+            "οçc 读作 oçc"
+          ],
+          "源": "bim_eighteenth-century_essays-and-treatises-on-_kant-immanuel_1798_2.txt",
+          "非拉丁字符": 2
+        },
+        {
+          "全同形字词": 0,
+          "样例": [
+            "usαter 读作 usαter"
+          ],
+          "源": "bim_eighteenth-century_the-metaphysic-of-morals_kant-immanuel_1799_1.txt",
+          "非拉丁字符": 1
+        }
+      ],
+      "含同形字的源": 4,
+      "已查语料件": 65
+    },
+    "own_voice": {
+      "own_voice_ratio": 1.0,
+      "train 总字节": 54622406,
+      "train 源总数": 65,
+      "★ 同名判据": "未启用（本人物没有 namesake-criteria.json）",
+      "★★ 按 voice 字段算的声口分布": "本人物的台账**没有一份标了 `voice`**——**不报占比**（没标不是没有）。v0.0.0.153 起 `ingest.py --voice` 可以标。",
+      "口径": "账本 author 命中人物姓氏的 train 源字节占比。**与 primary_ratio 量的不是一回事**：后者含「关于他的同期报道」（P2），前者只含他本人的表达。改 tier／再多抓报道都不会让这个数变大。",
+      "本人所著字节": 54622406,
+      "本人所著的 train 源数": 65
+    },
+    "pd_grounds": {
+      "状态": "**本人物未提供 `references/research/_pd_grounds.json`——未核，不是通过。**「它是公有领域」须写明凭哪一条（§105 ／ 1909 年法无标记 ／ 1929 年前出版 ／ 国会记录）并附证据"
+    },
+    "primary_ratio": 0.9636,
+    "primary_sources": 53,
+    "quote_attributed_source": {
+      "不唯一（同句见于多份源，挂错也照样绿）": 7,
+      "例": [
+        "clm-775319aa61b6：挂 ['10046192bsb.txt'] → 实 ['265433882.1713.emory.edu.txt']"
+      ],
+      "取不到正文的源": 0,
+      "挂错作品": 1,
+      "版本差（作品对、逐字文本取自另一版）": 0,
+      "长引文": 27
+    },
+    "quote_layer": {
+      "★★": "**一个文件都没扫到**——本项这一轮**没有起作用**，不是「查过没问题」",
+      "已扫文件": 0,
+      "引文层问题": 0
+    },
+    "quote_speaker": {
+      "**引到别人的话**": 0,
+      "★ 定位不到（未判，不是通过）": 4,
+      "★★ 射程": "只认英文转引标记、只往回看 260 字符、只比姓、抓不到无标记的间接引语",
+      "正文已注明出自他人（不判为误引）": 0,
+      "长逐字引文": 24
+    },
+    "quoted_arithmetic": {
+      "状态": "输入不在（/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-kant-179/workspaces/immanuel-kant/evals/judge_payload.v1.json），**未核验**（不是通过）"
+    },
+    "refusal_overflow": {
+      "已扫答案": 0,
+      "已扫载荷": 0,
+      "拒答溢出候选": 0
+    },
+    "research_lanes_complete": [
+      "writings",
+      "conversations",
+      "external"
+    ],
+    "rights_basis": {
+      "不声称（不判）": 65,
+      "依据取自聚合器": 0,
+      "声称公有领域": 0,
+      "有据可查": 0,
+      "有结论无依据": 0,
+      "源条数": 65
+    },
+    "rubric_health": {
+      "**判据要求出戏的**": {},
+      "★ 口径": "**只报不拦**：改不改由人定。但它现在**在答案写出来之前**说话，而不是等到派发前才说——那时答案已经是照着这条 rubric 写的了。",
+      "判据条数": 33,
+      "状态": "**答案尚未产出——本轮只验了 rubric**（不是全部核验）"
+    },
+    "secret_findings": 0,
+    "semantic_residue": {
+      "★": "全库回查：唯一有内容的订正是 Bessemer #132 的 2 条，scope 都是 `evaluation`。**这判据找的输入从来没出现过。**",
+      "状态": "未启用（0 条订正全是非 content 域，取不到规则）——**不是通过**"
+    },
+    "skill_lines": 67,
+    "sole_authorship": {
+      "合著／集体署名的源": 0,
+      "状态": "**账本里一条合著／集体署名的源都没有——本次什么也没查，不构成通过。**十一个人物里只有三个的账本记了这一层，**多半是抓源阶段没记，不是真的没有合著。**"
+    },
+    "source_attribution": {
+      "**未被逐份认领**": 0,
+      "subject_origin": "historical",
+      "口径": "**判「有没有被逐份认领」，不判「认领得对不对」**——在 citation 里写个错书名，本门照样放行。它挡的是整批免检。",
+      "声称本人所著的 P1 源": 0,
+      "靠 A-* 署名证据认定": 0,
+      "靠 attribution_basis 逐份点名认定": 0
+    },
+    "source_dedup": {
+      "**按内容去重后的作品数**": 47,
+      "★ 本件看不见的份数（文本太短／中日韩，不是已核）": 0,
+      "可用来源": 55,
+      "已声明的重复对": 6,
+      "未声明的重复对": 0,
+      "虚高": 1.17
+    },
+    "source_numbering_gap": {
+      "★ holdout 文件名不带前缀": "**判不出缺口是不是它留下的**",
+      "★ 文件名不带顺序前缀": "本件对这个工作区**看不见任何东西**（不是通过）",
+      "★ 缺口上正好是 holdout 的": 0,
+      "★★ 射程": "只看文件名；**尾部被整份拿走的缺口抓不到**；补齐编号也堵不住「份数本身是信息」那一层",
+      "其中疑似（组内首字母不是 a）": 0,
+      "其中确认型": 0,
+      "编号缺口": 0
+    },
+    "sources_holdout": 10,
+    "sources_total": 65,
+    "sources_train": 55,
+    "sources_usable_train": 55,
+    "stance_density": {
+      "**判据说未核验的**": 44,
+      "**立场句/万字**": 0.36,
+      "P1 字符合计": 12124814,
+      "★ 口径": "**只排序、只提示，不设阈值。** 第一人称已排除图纸标号／化学式／罗马数字（三处真实假阳，见判据文件头），**但未排除专利套语**——Coffin 实测 73% 是 `I claim as my invention` 这一类，**专利型语料要另减一道**。",
+      "★ 未核验的逐条（不并进分母，也不算 0）": [
+        {
+          "source_id": "src-231cd76552be",
+          "原因": "语种判为 **de**（en=0.000 de=0.140 fr=0.006）——**本件只认英语，不是「这个人没有声口」**"
+        },
+        {
+          "source_id": "src-23dc040bd16b",
+          "原因": "语种判为 **de**（en=0.001 de=0.120 fr=0.007）——**本件只认英语，不是「这个人没有声口」**"
+        },
+        {
+          "source_id": "src-66a095d80263",
+          "原因": "语种判为 **de**（en=0.000 de=0.123 fr=0.008）——**本件只认英语，不是「这个人没有声口」**"
+        },
+        {
+          "source_id": "src-d7cda8167b58",
+          "原因": "语种判为 **de**（en=0.001 de=0.122 fr=0.009）——**本件只认英语，不是「这个人没有声口」**"
+        },
+        {
+          "source_id": "src-1487a594f356",
+          "原因": "语种判为 **de**（en=0.000 de=0.133 fr=0.008）——**本件只认英语，不是「这个人没有声口」**"
+        },
+        {
+          "source_id": "src-dbda401744b9",
+          "原因": "语种判为 **de**（en=0.000 de=0.136 fr=0.007）——**本件只认英语，不是「这个人没有声口」**"
+        },
+        {
+          "source_id": "src-e148cf5a20c5",
+          "原因": "语种判为 **de**（en=0.001 de=0.131 fr=0.008）——**本件只认英语，不是「这个人没有声口」**"
+        },
+        {
+          "source_id": "src-f56042424327",
+          "原因": "语种判为 **de**（en=0.000 de=0.127 fr=0.008）——**本件只认英语，不是「这个人没有声口」**"
+        }
+      ],
+      "★★ 参照（㉙ 六样本）": "Coffin 0.95/0.00、Bain 0.91/0.23、Mehl 讲演 1.57/0.43、Nasmyth 自传 29.67/0.07",
+      "其中不含第一人称的": 327,
+      "第一人称（动词式）/万字": 14.69,
+      "读不到正文的": []
+    },
+    "suite_candidate_means": {
+      "anonymous-fidelity": 0.95,
+      "boundary": 0.925,
+      "capability-calibration": 0.825,
+      "contrast": 0.675,
+      "fact-preservation": 0.95,
+      "identity-routing": 0.925,
+      "known": 0.7167,
+      "long-horizon": 0.585,
+      "planning-fidelity": 0.95,
+      "refusal-stop": 0.9,
+      "style-decoy": 0.55,
+      "task-completion": 0.925,
+      "token-efficiency": 0.61,
+      "tool-use": 0.95,
+      "trajectory": 0.95,
+      "voice": 0.95
+    },
+    "suite_single_drag": {
+      "口径": "这只是「修哪里」，不是「该不该过」。**门还是门。**另：**「知道该改哪一道」与「知道该怎么改」是两件事**——Nightingale #112 那一道改完从 0.760 掉到 0.705。",
+      "未过阈值的套组": 0,
+      "状态": "有阈值的套组都过了——无需诊断"
+    },
+    "threshold_doc_drift": {
+      "**不一致处**": 0,
+      "返回码": 0
+    },
+    "title_is_not_filename": {
+      "**`title` 就是文件名**": 0,
+      "★": "**只报不拦**——全库 99% 如此；拦不解决问题，只会让人去关门",
+      "台账行数": 65,
+      "比例": 0.0,
+      "真书目题名": 65
+    },
+    "translation_witness": {
+      "★": "申报 0 组**不等于**没有并行见证——本件不猜，只查申报",
+      "明细": [],
+      "申报的并行见证组": 0,
+      "组内塌缩的断言": 0,
+      "错": 0
+    },
+    "unqualified_priority": {
+      "其中带限定": 0,
+      "扫了几个文件": 1,
+      "状态": "一处首创声明都没扫到。**这可能是产物干净，也可能是判据窄**——v0.0.0.73 第一版就在真数据上报过一次假的 0。",
+      "第一人称首创声明": 0
+    },
+    "verbatim_pointer": {
+      "状态": "cases.jsonl 或 judge_payload 不在，**未核验**（不是通过）"
+    },
+    "verbatim_quotes": {
+      "状态": "**未核验**（不是通过）——没有可用的 --cache，取不到语料原文"
+    },
+    "verdict_attribution": {
+      "**归属错**": 0
+    }
+  },
+  "passed": false,
+  "phase": "release",
+  "profile": "quick",
+  "schema_version": "1.0",
+  "strict": true,
+  "target": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-kant-179/workspaces/immanuel-kant",
+  "warnings": [
+    {
+      "code": "corpus.longs-corruption",
+      "message": "**22 份语料的长 s 讹字率超过 20%**——esse→esfe、such→fuch，份数／分档／字数三样都是真的，所以既有的门都放行了；**从这些文件里取不出任何可核的逐字引文**。★ 连带射程：`check_source_dedup` 对这些源的读数**不作数**——它读到的低值分不清「确实不同源」与「同源但字形认不出来」，**判重门对它们的沉默不构成「互相独立」的证据**（全库 245 对已声明同源实测中位 0.6709、低于门仅 1.6%，判据整体是好的；只有涉及本表这些源时它失去分辨力）。逐份见 metrics.longs_corruption。　`src-231cd76552be` 00074230bsb.txt —— 德语讹字率 0.9252（正形 51／讹形 631），**不可做逐字引文**"
+    },
+    {
+      "code": "corpus.unexamined-band",
+      "message": "**1/65 份语料落在两道门之间**：字符数够 `non_placeholder`（≥500）而词数不够语种判据（<500），**没有任何判据看过它们的内容**。★ 短不等于坏，本条是覆盖缺口不是缺陷；但若某条道只靠这类文件撑着，请人看一眼。"
+    },
+    {
+      "code": "source.filename-year-mismatch",
+      "message": "3 条文件名年份与 `published_at` 差 ≥2 年 —— **至少有一处记错了**；判据不知道是哪一处"
+    },
+    {
+      "code": "eval.baseline-not-capability-evidence",
+      "message": "33/33 条基线不可作能力证据（{'unknown': 33}）——**此产物的 delta 不得用于支持「比裸模型强」这类结论**；它只说明产物比该对照写得好"
+    }
+  ]
+}

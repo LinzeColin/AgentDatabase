@@ -1,0 +1,277 @@
+{
+  "cases": [
+    {
+      "case_id": "ik-known-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "known"
+    },
+    {
+      "case_id": "ik-boundary-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "boundary"
+    },
+    {
+      "case_id": "ik-voice-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "voice"
+    },
+    {
+      "case_id": "ik-trajectory-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "trajectory"
+    },
+    {
+      "case_id": "ik-contrast-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "contrast"
+    },
+    {
+      "case_id": "ik-fact-preservation-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "fact-preservation"
+    },
+    {
+      "case_id": "ik-style-decoy-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "style-decoy"
+    },
+    {
+      "case_id": "ik-task-completion-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "task-completion"
+    },
+    {
+      "case_id": "ik-planning-fidelity-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "planning-fidelity"
+    },
+    {
+      "case_id": "ik-tool-use-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "tool-use"
+    },
+    {
+      "case_id": "ik-capability-calibration-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "capability-calibration"
+    },
+    {
+      "case_id": "ik-refusal-stop-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "refusal-stop"
+    },
+    {
+      "case_id": "ik-long-horizon-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "long-horizon"
+    },
+    {
+      "case_id": "ik-identity-routing-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "identity-routing"
+    },
+    {
+      "case_id": "ik-anonymous-fidelity-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "anonymous-fidelity"
+    },
+    {
+      "case_id": "ik-token-efficiency-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "token-efficiency"
+    },
+    {
+      "case_id": "ik-known-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "known"
+    },
+    {
+      "case_id": "ik-known-03",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "known"
+    },
+    {
+      "case_id": "ik-boundary-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "boundary"
+    },
+    {
+      "case_id": "ik-voice-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "voice"
+    },
+    {
+      "case_id": "ik-trajectory-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "trajectory"
+    },
+    {
+      "case_id": "ik-contrast-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "contrast"
+    },
+    {
+      "case_id": "ik-fact-preservation-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "fact-preservation"
+    },
+    {
+      "case_id": "ik-style-decoy-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "style-decoy"
+    },
+    {
+      "case_id": "ik-task-completion-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "task-completion"
+    },
+    {
+      "case_id": "ik-planning-fidelity-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "planning-fidelity"
+    },
+    {
+      "case_id": "ik-tool-use-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "tool-use"
+    },
+    {
+      "case_id": "ik-capability-calibration-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "capability-calibration"
+    },
+    {
+      "case_id": "ik-refusal-stop-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "refusal-stop"
+    },
+    {
+      "case_id": "ik-long-horizon-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "long-horizon"
+    },
+    {
+      "case_id": "ik-identity-routing-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "identity-routing"
+    },
+    {
+      "case_id": "ik-anonymous-fidelity-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "anonymous-fidelity"
+    },
+    {
+      "case_id": "ik-token-efficiency-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "token-efficiency"
+    }
+  ],
+  "created_at": "2026-08-19T05:47:31Z",
+  "run_id": "run-20260819T054731Z-4a1def",
+  "schema_version": "1.0",
+  "seed": 179,
+  "systems": [
+    "baseline",
+    "candidate"
+  ],
+  "warning": "Private mapping. Do not provide this file to blind judges."
+}

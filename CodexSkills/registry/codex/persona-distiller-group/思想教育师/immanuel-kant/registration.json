@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:immanuelkant",
+  "canonical_name": "Immanuel Kant",
+  "identity_family_id": "thinker-educator",
+  "identity_mode": "single",
+  "registration_category": "思想教育师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "immanuel-kant",
+  "subject_uid": "person-9b4e0fd3bf50dc6c",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/immanuel-kant-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-12T00:05:04Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "88bc3a414e897caa9fa723a2d77d03e10cbe8519808504be7c105579517d5b2a",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/immanuel-kant-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "3eecf5723bfcc806f992a23f9c34873155c9b90d189a4d059914f33d319552a8",
+      "runtime_size_bytes": 70439,
+      "size_bytes": 78507
+    }
+  ]
+}
