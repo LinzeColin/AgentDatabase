@@ -1,11 +1,11 @@
 {
- "round": 1,
- "updated_at": "2026-08-19T10:20AEST",
+ "round": 2,
+ "updated_at": "2026-08-19T10:25AEST",
  "time_band": "valley-until-1100",
  "people": 102,
  "current_person": null,
- "stage": "R1-init",
- "next": "1405-valley: P0 Machiavelli#177 双侧盲判",
+ "stage": "R2-prep-done",
+ "next": "1405-valley: ①workflow flash 拆32条rubric(str→dict) ②pro抽审4条 ③备份+merge回cases.jsonl ④eval_runner prepare(seed177) ⑤workflow flash 双侧答题(同模型) ⑥flash 2席判分 ⑦发布门+register",
  "p0_queue": [
   "Machiavelli#177:32题",
   "Brandeis#172:32",
@@ -25,5 +25,6 @@
    "cost": 55.5695
   }
  },
- "cost_rule": "90% flash 增量监测从谷时批量轮开始滚动统计；初始化轮 pro 占比高属编排例外"
+ "cost_rule": "90% flash 增量监测从谷时批量轮开始滚动统计；初始化轮 pro 占比高属编排例外",
+ "blockers_found": "rubric 字符串格式 vs eval_runner 要求 dict（已定位 whitworth-152 为唯一 dict 样本：{通过条件,失败条件}）"
 }
