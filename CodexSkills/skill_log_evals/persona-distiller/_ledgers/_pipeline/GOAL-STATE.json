@@ -2,9 +2,9 @@
  "round": 10,
  "updated_at": "2026-08-19T11:05AEST",
  "time_band": "valley-until-1100",
- "people": 106,
+ "people": 109,
  "current_person": null,
- "stage": "4人入库（102->106）；P0 剩 7 人",
+ "stage": "7人入库（102->109）；P0 剩 5：Pestalozzi#180/Frobel#181/Lincoln#174/Michelangelo#185/Churchill#191",
  "next": "Kant#179(33题, rubric输入已备)",
  "p0_queue": [
   "Brandeis#172:32",
@@ -40,6 +40,9 @@
   "Machiavelli#177",
   "Brandeis#172",
   "Jefferson#175",
-  "Bismarck#176"
+  "Bismarck#176",
+  "Kant#179",
+  "Dewey#190",
+  "Rousseau#178"
  ]
 }
