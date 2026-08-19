@@ -4,8 +4,8 @@
  "time_band": "valley-until-1100",
  "people": 102,
  "current_person": null,
- "stage": "峰时：5条缺失下载验证——3条URL失效(villari×2/TO01040218)+2条版本不符(dli×2)，需谷时重新定位IA链接",
- "next": "1405-valley: flash批量修复(14对重复源判定+5条缺失账本定位) -> quality_check重跑 -> package_target -> register(+1)",
+ "stage": "峰时准备：dedup 10 组簇清单已提取落盘(evals/_judge/dedup-clusters.json)",
+ "next": "1405谷时: ①flash批量判定10组簇(derived_from/counting_convention) ②agent-reach重定位5条IA链接 ③重跑发布门 ④package+register(+1)",
  "p0_queue": [
   "Machiavelli#177:32题",
   "Brandeis#172:32",
