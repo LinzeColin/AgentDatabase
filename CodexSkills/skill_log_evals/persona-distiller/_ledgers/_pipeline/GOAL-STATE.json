@@ -2,17 +2,22 @@
  "round": 10,
  "updated_at": "2026-08-19T11:05AEST",
  "time_band": "valley-until-1100",
- "people": 102,
+ "people": 103,
  "current_person": null,
- "stage": "峰时准备：dedup 10 组簇清单已提取落盘(evals/_judge/dedup-clusters.json)",
- "next": "1405谷时: ①flash批量判定10组簇(derived_from/counting_convention) ②agent-reach重定位5条IA链接 ③重跑发布门 ④package+register(+1)",
+ "stage": "Machiavelli#177 入库（+1）——P0 流程全通",
+ "next": "下一位 Brandeis#172：rubric迁移(flash批量)->prepare->双侧答题->判分->门->登记",
  "p0_queue": [
-  "Machiavelli#177:32题",
   "Brandeis#172:32",
   "Jefferson#175:32",
   "Bismarck#176:32",
   "Kant#179:33",
-  "Dewey#190:32"
+  "Dewey#190:32",
+  "Lincoln#174",
+  "Rousseau#178",
+  "Pestalozzi#180",
+  "Frobel#181",
+  "Michelangelo#185",
+  "Churchill#191"
  ],
  "p0_flow": "make_blind_prompts -> eval_runner prepare baseline+candidate -> workflow flash 双侧答题(同模型) -> flash 2席判分 -> pro抽审(4触发) -> 发布门 -> register_persona",
  "cost_baseline": {
@@ -30,5 +35,8 @@
  "release_gate": "RED: ①ledger-file-missing 5条(TO01040218/dli.ministry.02746等) ②undeclared-duplicate-sources 14对(BRes092070-commedie00mach等)",
  "fix_plan": [
   "1405谷时: ①flash批量14对重复源判定(derived_from/counting_convention) ②agent-reach重新定位5条IA链接+下载+台账更新(url/checksum) ③重跑quality_check release ④package_target+register(+1)"
+ ],
+ "p0_done": [
+  "Machiavelli#177"
  ]
 }

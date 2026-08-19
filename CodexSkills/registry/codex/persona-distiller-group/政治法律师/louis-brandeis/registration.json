@@ -1,0 +1,28 @@
+{
+  "canonical_key": "public:louisbrandeis",
+  "canonical_name": "Louis Brandeis",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "louis-brandeis",
+  "subject_uid": "person-4211d534265ae7a8",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/louis-brandeis-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-11T16:23:35Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "ada4cd987a62f2df172e5281fff0a233bbddba7ffbf41e23254ef32b97da614d",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/louis-brandeis-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "789c31540328b346d40756a3a0c3230cbd106cb27ba40fbce27147ee669c1cae",
+      "runtime_size_bytes": 83622,
+      "size_bytes": 91431
+    }
+  ]
+}
