@@ -1,0 +1,147 @@
+{
+  "总数": 16,
+  "计数": {
+    "一手": 3,
+    "二手": 12,
+    "需人判": 1
+  },
+  "一手占比下界": 0.1875,
+  "一手占比上界": 0.25,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "brunel"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "11001081bsb",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The Life of Isambard Kingdom Brunel, Civil Engineer: By Isambard Brunel [his son",
+      "creator": "Brunel, Isambard",
+      "words": 230599
+    },
+    {
+      "identifier": "anexplanationwo00compgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "An explanation of the works of the tunnel under the Thames from Rotherhithe to W",
+      "creator": "Thames Tunnel Company",
+      "words": 3339
+    },
+    {
+      "identifier": "b22280303",
+      "档": "需人判",
+      "依据": "creator 第 2 位；无自著标记",
+      "title": "Report on the formation and general management of Renkioi Hospital, on the Darda",
+      "creator": "Parkes, Edmund Alexander, 1819-1876; Brunel, Isambard Kingdom, 1806-1859; Royal ",
+      "words": 16136
+    },
+    {
+      "identifier": "broadgaugebancg00unkngoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "The Broad Gauge the Banc of the Great Western Railway Company: With an Account o",
+      "creator": "",
+      "words": 12314
+    },
+    {
+      "identifier": "descriptionoftha00newy",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "A description of the Thames tunnel",
+      "creator": "",
+      "words": 1659
+    },
+    {
+      "identifier": "explanationofwor00bloo",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "An explanation of the works of the tunnel under the Thames from Rotherhithe to W",
+      "creator": "Blood, T., fl. 1809-1823; Dixie, M; Pinchback, J; Warrington, W; Beamish, Richar",
+      "words": 3361
+    },
+    {
+      "identifier": "historyofgreatw00seko",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "A history of the Great Western Railway; being the story of the broad gauge",
+      "creator": "Sekon, G. A., 1867-",
+      "words": 124429
+    },
+    {
+      "identifier": "india.history.resource.73330",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The Life of Isambard Kingdom Brunel, Civil Engineer",
+      "creator": "Brunel, Isambard",
+      "words": 216143
+    },
+    {
+      "identifier": "letters00brun",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters",
+      "creator": "Brunel, Isambard Kingdom, 1806-1859, author",
+      "words": 1129
+    },
+    {
+      "identifier": "lifeofisambardki00brunuoft",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "The life of Isambard Kingdom Brunel, civil engineer. By Isambard Brunel",
+      "creator": "Brunel, Isambard, 1837-",
+      "words": 219999
+    },
+    {
+      "identifier": "memoirlifesirma00beamgoog",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "Memoir of the Life of Sir Marc Isambard Brunel: Civil Engineer, Vice-president o",
+      "creator": "Richard Beamish",
+      "words": 105553
+    },
+    {
+      "identifier": "memoriescientif00brun",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Memorie scientifiche tratte dalla Biblioteca Italiana e da qualche altro giornal",
+      "creator": "Brunel, Isambard Kingdom",
+      "words": 3567
+    },
+    {
+      "identifier": "originprogressa00westgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "The Origin, Progress and Present State of the Thames Tunnel and the ...",
+      "creator": "William Westall",
+      "words": 7155
+    },
+    {
+      "identifier": "originprogresspr00west",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "The origin, progress and present state of the Thames tunnel and the advantage li",
+      "creator": "Westall, William, 1781-1850; Thames Tunnel Company",
+      "words": 5819
+    },
+    {
+      "identifier": "papers00brun",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「papers」",
+      "title": "Papers",
+      "creator": "Brunel, Marc Isambard, 1769-1849, author",
+      "words": 7497
+    },
+    {
+      "identifier": "railwayeccentri00brungoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Railway eccentrics : inconsistencies of men of genius exemplified in the practic",
+      "creator": "Cole, Henry, 1808-1882",
+      "words": 7923
+    }
+  ]
+}

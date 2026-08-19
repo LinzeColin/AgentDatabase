@@ -1,0 +1,52 @@
+{
+ "schema_version": "1.0",
+ "target_name": "Isambard Kingdom Brunel",
+ "normalized_name": "isambardkingdombrunel",
+ "search_scope": [
+  "sibling canonical registry",
+  "authoritative public sources supplied by orchestration"
+ ],
+ "selected_subject_uid": "wikidata:Q315376",
+ "generated_at": "2026-08-19T00:00:00Z",
+ "resolution": "single",
+ "status": "ready",
+ "candidate_count": 1,
+ "candidate_cards": [
+  "A. 人物与身份：Isambard Kingdom Brunel（1806-04-09 – 1859-09-15）；英国土木工程师；Great Western Railway 总工程师、Clifton 吊桥、SS Great Britain/Great Eastern 巨轮、泰晤士隧道（继父业）；近代工程史上的标志性人物。\\n   专业背景：铁路、桥梁、隧道、造船与港口工程。\\n   应用价值：大型工程系统设计；风险与创新平衡；工程组织管理。\\n   区分依据：署名 Brunel, Isambard Kingdom, 1806-1859；父亲 Marc Isambard Brunel（1769-1849）、儿子 Isambard Brunel Jr.（1837-1902）、法国革命政治家 Ignace Brunel（1742-1795）、诗人 Francois-Bernard Brunel 均需按生卒年/题名排除。"
+ ],
+ "candidates": [
+  {
+   "application_scenarios": [
+    "大型铁路系统设计",
+    "桥梁与隧道工程",
+    "船舶工程与港口",
+    "工程风险管理"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "archive.org letters00brun（1829 亲笔书信，creator 逐字 Brunel, Isambard Kingdom, 1806-1859）"
+    },
+    {
+     "locator": "archive.org b22280303（1857《Report on the formation and general management of Renkioi Hospital》）"
+    },
+    {
+     "locator": "archive.org lifeofisambardki00brunuoft（1870《The life of Isambard Kingdom Brunel》其子编，含一手书信）"
+    }
+   ],
+   "canonical_name": "Isambard Kingdom Brunel",
+   "distinguishing_basis": "署名 Brunel, Isambard Kingdom, 1806-1859 或 I.K. Brunel；父 Marc Isambard Brunel（1769-1849）的回忆录/论文、法国 Ignace Brunel（1742-1795）的政论均按生卒年排除。",
+   "subject_uid": "wikidata:Q315376",
+   "label": "A",
+   "evidence_level": "high",
+   "identity_category": "历史人物（1806-04-09 – 1859-09-15）",
+   "occupation_or_role": "英国土木工程师；GWR 总工程师；Clifton 吊桥、Great Britain/Eastern 巨轮设计者",
+   "professional_background": "Thames 隧道（1825-43 随父）；Clifton Suspension Bridge（1831-64）；Great Western Railway（1833-41）；SS Great Western/Britain/Eastern（1837-59）；Renkioi 医院（1855）。",
+   "key_capabilities": [
+    "大型铁路系统设计",
+    "桥梁与隧道工程",
+    "船舶工程与港口",
+    "工程风险管理"
+   ]
+  }
+ ]
+}

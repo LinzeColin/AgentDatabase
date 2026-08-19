@@ -1,0 +1,104 @@
+{
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "wikidata:Q315376",
+ "consent_authority": null,
+ "created_at": "2026-08-19T17:18:59Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "technical-engineer",
+  "display": "材料建工师",
+  "mode": "single",
+  "primary": "technical-engineer",
+  "weights": {
+   "technical-engineer": 1.0
+  }
+ },
+ "language": "zh-CN",
+ "model_version": "0.1.0-draft",
+ "name": "Isambard Kingdom Brunel",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "大型铁路系统设计",
+    "桥梁与隧道工程",
+    "船舶工程与港口",
+    "工程风险管理"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "archive.org letters00brun（1829 亲笔书信，creator 逐字 Brunel, Isambard Kingdom, 1806-1859）"
+    },
+    {
+     "locator": "archive.org b22280303（1857《Report on the formation and general management of Renkioi Hospital》）"
+    },
+    {
+     "locator": "archive.org lifeofisambardki00brunuoft（1870《The life of Isambard Kingdom Brunel》其子编，含一手书信）"
+    }
+   ],
+   "canonical_name": "Isambard Kingdom Brunel",
+   "distinguishing_basis": "署名 Brunel, Isambard Kingdom, 1806-1859 或 I.K. Brunel；父 Marc Isambard Brunel（1769-1849）的回忆录/论文、法国 Ignace Brunel（1742-1795）的政论均按生卒年排除。",
+   "evidence_level": "high",
+   "identity_category": "历史人物（1806-04-09 – 1859-09-15）",
+   "key_capabilities": [
+    "大型铁路系统设计",
+    "桥梁与隧道工程",
+    "船舶工程与港口",
+    "工程风险管理"
+   ],
+   "label": "A",
+   "occupation_or_role": "英国土木工程师；GWR 总工程师；Clifton 吊桥、Great Britain/Eastern 巨轮设计者",
+   "professional_background": "Thames 隧道（1825-43 随父）；Clifton Suspension Bridge（1831-64）；Great Western Railway（1833-41）；SS Great Western/Britain/Eastern（1837-59）；Renkioi 医院（1855）。",
+   "subject_uid": "wikidata:Q315376"
+  },
+  "chosen_subject_uid": "wikidata:Q315376",
+  "normalized_name": "isambardkingdombrunel",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "isambardkingdombrunel",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "isambard-kingdom-brunel",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-5a5423214bbd",
+ "time_scope": "all available periods, separated by role and material drift",
+ "updated_at": "2026-08-19T17:18:59Z",
+ "attribution_basis": {
+  "authority": "Isambard Kingdom Brunel（1806-1859）的署名形态：\n  ① 1829 书信（letters00brun）：archive.org 著录 creator 逐字 Brunel, Isambard Kingdom, 1806-1859；\n  ② 1840 手稿（memoriescientif00brun）：Holograph manuscript of various journal articles concerning Brunel；\n  ③ 1857 Renkioi 报告（b22280303）：与 Parkes 合著（creator 第 2 位 Brunel, Isambard Kingdom, 1806-1859）；\n  ④ 1870 传记（lifeofisambardki00brunuoft）：其子 Isambard Brunel Jr. 编，正文以 IKB 亲笔书信/文件/证词为主（编辑者非作者）。",
+  "★ 同名门": "父 Marc Isambard Brunel（1769-1849）的 Papers/回忆录、法国革命政治家 Ignace Brunel（1742-1795）的政论、诗人 Francois-Bernard Brunel 均按生卒年/题名排除。",
+  "covered_sources": [
+   "letters00brun（1829 书信，著录 1806-1859）",
+   "b22280303（1857 Renkioi 报告，合著）",
+   "lifeofisambardki00brunuoft（1870 传记，子编含一手书信）",
+   "11001081bsb（同书扫描）",
+   "india.history.resource.73330（同书扫描）",
+   "memoriescientif00brun（1840 手稿）",
+   "memoirlifesirma00beamgoog（1862 父传，二手）",
+   "papers00brun（1816 父文件，二手）",
+   "railwayeccentri00brungoog（1846 Cole，二手）",
+   "broadgaugebancg00unkngoog（1846 宽轨争论，二手）",
+   "historyofgreatw00seko（1895 GWR 史，二手）"
+  ],
+  "citation": "Isambard Kingdom Brunel（1806-1859）的一手载体：1829 书信、1840 手稿、1857 Renkioi 报告、1870 子编传记（以 IKB 亲笔文本为主）；二手为父传与外部文献。",
+  "disputed_policy": "1870 传记由其子编，虽正文以 IKB 文本为主但叙述层有家传立场；引用时注明转述层。Renkioi 报告为合著（Parkes 医学、Brunel 工程）。",
+  "disputed_works": [
+   "b22280303（Renkioi 报告，合著，工程部分归 Brunel）"
+  ]
+ }
+}

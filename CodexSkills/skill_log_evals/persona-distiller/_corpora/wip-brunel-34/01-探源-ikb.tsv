@@ -1,0 +1,9 @@
+# numFound=6 rows=6 query=creator:"Brunel, Isambard Kingdom"
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+memoriescientif00brun	1840-01-01T00:00:00Z	1840	Brunel, Isambard Kingdom	Memorie scientifiche tratte dalla Biblioteca Italiana e da qualche altro giornale technologico	ita	smithsonian
+b22280303	1857-01-01T00:00:00Z	1857	Parkes, Edmund Alexander, 1819-1876; Brunel, Isambard Kingdom, 1806-1859; Royal College of Surgeons of England	Report on the formation and general management of Renkioi Hospital, on the Dardanelles, Turkey	eng	rcseng; ukmhl; medicalheritagelibrary; europeanlibraries; medicallibrary; fav-kizkircil; fav-l_wyatt
+horseyou00youa	1898-01-01T00:00:00Z	1898	Youatt, William, 1776-1847; Watson, Walker; Brunel, Isambard Kingdom, 1806-1859. On draught	The horse	eng	ubclibrary; toronto; fav-amber_g774; fav-b0red; fav-bookman89; fav-cpt_deadman; fav-kirstyc; fav-lumprvt; fav-robinmnz
+historytreatment00youa	1853-01-01T00:00:00Z	1853	Youatt, William, 1776-1847; Brunel, Isambard Kingdom, 1806-1859. On draught; Society for the Diffusion of Useful Knowledge (Great Britain); Fairman Rogers Collection (University of	The history, treatment, and diseases of the horse : embrancing an account of his introduction and use in various countries ... : with a treatise on draught, and a copious index	eng	fairmanrogers; upenn; americana; fav-aristo25; fav-jesus_tovar; fav-lucas_a_silva; fav-terri_s
+youattshistorytr00youa	1888-01-01T00:00:00Z	1888	Youatt, William, 1776-1847; Brunel, Isambard Kingdom, 1806-1859	Youatt's history, treatment, and diseases of the horse ... : with a treatise on draught, and a copious index	eng	websterfamilyvetmed; blc; americana; fav-bryant_hollifield592; fav-muhammad_sachal_hussain
+letters00brun	1829-01-01T00:00:00Z	1829	Brunel, Isambard Kingdom, 1806-1859, author	Letters	eng	smithsonian; fav-jb8784
