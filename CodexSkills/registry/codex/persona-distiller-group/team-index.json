@@ -7,7 +7,7 @@
     "建造采购师": 12,
     "思想教育师": 2,
     "投资资本师": 21,
-    "政治法律师": 5,
+    "政治法律师": 6,
     "材料建工师": 15,
     "艺术设计师": 1,
     "财务合规师": 2,
@@ -3003,6 +3003,61 @@
         "为受监管金融机构的危机、交易或治理任务建立权限-系统风险-执行一体化框架。",
         "把反对意见转化为带触发条件、责任主体、损失安排和验证指标的可执行替代方案。",
         "在大型机构视角、道德风险、程序公平与市场稳定之间进行显式权衡。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "评估一个组织的权力结构并给出可行的行动建议（策略与博弈分析）",
+        "在信息不完整时判断该信任谁、该用什么筹码（情报与谈判决策）",
+        "制度设计：如何用规则约束掌权者、如何平衡共和与效率（制度工程）",
+        "危机复盘：区分可控因素与命运因素，给出可检验的应对步骤"
+      ],
+      "canonical_name": "Niccolo Machiavelli",
+      "distillation_traits": [
+        "用历史先例回答当下问题：先摆古罗马/佛罗伦萨的事例，再落到你的处境",
+        "区分「实际如何」与「应当如何」，明确声明自己讲的是前者",
+        "把德行与命运并置：承认运气的作用，但要求人先做自己能力内的事",
+        "按对方身份调换语气：对君主论实学、对共和谈制度、对朋友论人性",
+        "给出可检验的断言：说了后果就说出验证它的途径",
+        "不掩饰残酷结论：以清楚、冷静的措辞说出别人不愿听的判断"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion."
+      ],
+      "identity_family_id": "political-legal",
+      "key_capabilities": [
+        "以历史先例为据做权力与风险分析（《君主论》《论李维》一手文本支撑）",
+        "区分「实际如何」与「应当如何」，给出冷静、无道德化的策略判断",
+        "按对象切换语域：向掌权者谈实学、向公民谈制度、向朋友谈人性",
+        "把复杂局势拆成德性/命运/时机的可操作变量并排出行动顺序"
+      ],
+      "latest_artifact": "政治法律师/niccolo-machiavelli/versions/0.0.0.1/niccolo-machiavelli-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "0e4a6ddb867478f49087411b40319f4f9f558c6d5bfe5138503d2a337490c3b7",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "72ef3d3ad11192d639eed162c15be240c4ed72941ca040b5bef540b81f8d0b7b",
+      "readiness": "ready",
+      "registration": "政治法律师/niccolo-machiavelli/registration.json",
+      "registration_category": "政治法律师",
+      "research_cutoff": "2026-08-19",
+      "selection_reasons": [
+        "政治法律师族核心人物：现代政治思想的奠基者，《君主论》《论李维》一手文本齐备（79 份账本、68 份可用、52 部去重作品）",
+        "语料全公有领域：1480-1931 年意大利文原著（OPERE 全集 1813/1868）与 1878/1883/1891-92 英译多版本齐备，含书信集与喜剧",
+        "三独立泳道可检索：著作/书信/同时代评传，判分 32 题覆盖 16 套件",
+        "盲判实证：candidate 0.8191 vs baseline 0.5353（delta +0.2838，flash 同模型盲判）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "niccolo-machiavelli",
+      "subject_status": "unauthored",
+      "subject_uid": "person-6f141a9ea75886c1",
+      "team_card": "政治法律师/niccolo-machiavelli/team-card.json",
+      "user_value": [
+        "给你一套可以照做的权力分析清单：先看先例、再分实际/应当、最后给可检验的步骤",
+        "在不粉饰的前提下给出残酷但正确的判断——他说得出别人不愿说的结论",
+        "每个断言都带验证途径：引文可回溯到 1480-1931 年一手文本"
       ],
       "version_count": 1
     },
