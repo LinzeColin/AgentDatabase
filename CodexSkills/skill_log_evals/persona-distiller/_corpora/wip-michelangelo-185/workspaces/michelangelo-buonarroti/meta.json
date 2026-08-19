@@ -6,10 +6,10 @@
   "current_version": null,
   "existential_hypotheses_enabled": false,
   "identity_selection": {
-    "canonical": "art-design",
+    "canonical": "art-designer",
     "display": "艺术设计师",
     "mode": "single",
-    "primary": "art-design",
+    "primary": "art-designer",
     "weights": {
       "art-design": 1.0
     }
@@ -144,7 +144,8 @@
         "src-f547bc4a71ad"
       ]
     ],
-    "★ parallel_witnesses 怎么来的": "2026-08-14 实测申报，**不是猜的**：抽样哈希 8 词片（1/12），包含率 `|A∩B|/min(|A|,|B|)` ≥ 0.30 判同一部。**只申报「组内每一对都直接超阈值」的团** —— 另有 1 个 4-id 分量是靠传递闭包才连起来的（Facsimiles 组里有一对只有 0.1694），**没有申报**，因为 `check_claim_source_independence` 故意不做传递闭包（并查集把 32 份源串成一个分量那次的教训）。★ 跨语言 n 元重叠恒为 0，**所以没被合并 ≠ 独立**：德/英译本不会进这些组，本申报只覆盖同语种同源，不覆盖译本同源。"
+    "★ parallel_witnesses 怎么来的": "2026-08-14 实测申报，**不是猜的**：抽样哈希 8 词片（1/12），包含率 `|A∩B|/min(|A|,|B|)` ≥ 0.30 判同一部。**只申报「组内每一对都直接超阈值」的团** —— 另有 1 个 4-id 分量是靠传递闭包才连起来的（Facsimiles 组里有一对只有 0.1694），**没有申报**，因为 `check_claim_source_independence` 故意不做传递闭包（并查集把 32 份源串成一个分量那次的教训）。★ 跨语言 n 元重叠恒为 0，**所以没被合并 ≠ 独立**：德/英译本不会进这些组，本申报只覆盖同语种同源，不覆盖译本同源。",
+    "counting_convention": "- cu31924014269975.txt 与 sonnetsofmichael00michrich.txt：不同版本/卷（a 为 Symonds《米开朗琪罗十四行诗》第二版（仅 Michelangelo，全文无 Campanella），b 为 1878 第一版《）\n- michaelangelobuo0000unse_y1s3.txt 与 michaelangelobuo00holrrich.txt：不同版本/卷（同一部作品 Michael Angelo Buonarroti (Charles Holroyd, Duckworth/Scriber's)）\n- cu31924008756847.txt 与 seventyetchedfa00fishgoog.txt：不同版本/卷（1-3 均为 1865 年 Bell & Daldy 版《Facsimiles of Original Studies by Michael）\n- facsimilesorigi01fishgoog.txt 与 seventyetchedfa00fishgoog.txt：不同版本/卷（1-3 均为 1865 年 Bell & Daldy 版《Facsimiles of Original Studies by Michael）\n- facsimilesorigi02fishgoog.txt 与 seventyetchedfa00fishgoog.txt：不同版本/卷（1-3 均为 1865 年 Bell & Daldy 版《Facsimiles of Original Studies by Michael）"
   },
   "aliases": [
     "Michelangelo"

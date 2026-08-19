@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:michelangelobuonarroti",
+  "canonical_name": "Michelangelo Buonarroti",
+  "identity_family_id": "art-designer",
+  "identity_mode": "single",
+  "registration_category": "艺术设计师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "michelangelo-buonarroti",
+  "subject_uid": "person-81b2e44cf5498c2c",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/michelangelo-buonarroti-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-13T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "10bf10be44bdd58e5ee4ad0a26aa6112948300ba61c63ceebb16f9b7d96d2356",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/michelangelo-buonarroti-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "118b64999c839582e0cb1273ed021e7f0cb42c777fb606d0d73104e22064bca8",
+      "runtime_size_bytes": 82042,
+      "size_bytes": 89499
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "mental": {
+    "quote": "Non ha I ottimo artista alcun concetto, Ch' un marmo solo in sè non circonscriva Col suo soverchio; e solo a quello arriva La man che ubbidisce all' intelletto.",
+    "source_id": "src-05d67ff7e9df",
+    "local_path": "raw/cu31924014269975.txt"
+  },
+  "heur_a": {
+    "quote": "purché in capo de' cinque anni che noi siàno d' acordo, la sia murata in Santo Pietro, dove a quella piacerà, e sia cosa bella, come io ò promesso",
+    "source_id": "src-34bb6d56038a",
+    "local_path": "raw/leletteredimiche00mich.txt"
+  },
+  "heur_b": {
+    "quote": "Michael Angelo saw that the worthy magistrate was so placed as to be incapable of reaUy judging of this feature, but, as there was no time for discussion, he seemed to assent to the criticism, and catching up, unperceived, some marble dust, and mounting a temporary bridge on the side of the statue, affected to work lightly on the nose with a file, letting fall at the same moment some of the dust in his hand on the head of Soderini. He then called out, \"How does it look now ?\" \"I am perfectly satisfied,\" replied the gonfaloniere.",
+    "source_id": "src-1a70dbd068ca",
+    "local_path": "raw/lifemichaelange02buongoog.txt"
+  },
+  "heur_c": {
+    "quote": "Item, sia tenuto et obligato, innansi cominci affare esse figure, andare ad Siena e vedere la Cappella, misurare le tribunette dove quelle hanno da stare per li posamenti, zoccolo, o vero scabello dove si hanno a collocare, non havendo el mezo tondo dirieto, ma andando alquanto piane et dolci.",
+    "source_id": "src-6094206729a1",
+    "local_path": "raw/buonarroti_le_lettere_di_michelangelo_buonarroti.txt"
+  }
+}

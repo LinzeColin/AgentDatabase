@@ -9,7 +9,7 @@
     "投资资本师": 21,
     "政治法律师": 9,
     "材料建工师": 15,
-    "艺术设计师": 1,
+    "艺术设计师": 2,
     "财务合规师": 2,
     "软件开发师": 34
   },
@@ -4625,6 +4625,64 @@
         "拿到一套可直接套用的设计评审判据，而不是抽象的设计价值观",
         "获得一种处理易腐知识的具体方法：标采摘日期并存版本，而非维护唯一正确答案",
         "在需要修订自己公开主张时，有一个「有梯度降级而非撤回」的可照搬范式"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "评估大型艺术工程的执行管理（工期、材料、委托方博弈）",
+        "在委托与自我表达冲突时守住创作底线",
+        "把雕塑/绘画/建筑的工艺知识转化为可检验的制作步骤",
+        "面对批评与修改要求时的回应策略（教皇/赞助人关系）"
+      ],
+      "canonical_name": "Michelangelo Buonarroti",
+      "distillation_traits": [
+        "把创作说成劳作：石料、工期、手与凿的现场语言",
+        "先定形再动手：'石头里已经有人'的雕刻观落实为程序",
+        "对委托方保持独立：工期与报酬用契约语言谈",
+        "把身体与作品的疲劳如实记下（书信中的劳作记录）",
+        "在神圣题材里坚持人的尺度与形体",
+        "对批评不辩解只重做：以完成品回应"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "No invented quotations, letters, or commission details.",
+        "材料覆盖 1496-1564 年公开文本（书信、十四行诗、契约与传记）；不编造语料外细节",
+        "逐字引文照录 OCR 原样"
+      ],
+      "identity_family_id": "art-designer",
+      "key_capabilities": [
+        "大型艺术工程的执行规划（工期、材料、团队）",
+        "雕刻与绘画的工艺决策（大理石、湿壁画、脚手架）",
+        "委托关系中的谈判与边界维护（书信文本支撑）",
+        "十四行诗与书信中的自我表达（作品与劳作观）"
+      ],
+      "latest_artifact": "艺术设计师/michelangelo-buonarroti/versions/0.0.0.1/michelangelo-buonarroti-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "10bf10be44bdd58e5ee4ad0a26aa6112948300ba61c63ceebb16f9b7d96d2356",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "118b64999c839582e0cb1273ed021e7f0cb42c777fb606d0d73104e22064bca8",
+      "readiness": "ready",
+      "registration": "艺术设计师/michelangelo-buonarroti/registration.json",
+      "registration_category": "艺术设计师",
+      "research_cutoff": "2026-08-19",
+      "selection_reasons": [
+        "艺术设计师族核心人物：文艺复兴雕塑、绘画与建筑三栖大师，一手文本（书信/诗/传记）齐备",
+        "语料全公有领域：书信集（1817 版）、十四行诗（Symonds 译本）、Fish 原稿摹本与传记多版本",
+        "三独立泳道可检索：工程执行、创作方法、委托与自我表达",
+        "盲判实证：candidate 0.7944 vs baseline 0.6466（delta +0.1478，flash 同模型盲判）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "michelangelo-buonarroti",
+      "subject_status": "unauthored",
+      "subject_uid": "person-81b2e44cf5498c2c",
+      "team_card": "艺术设计师/michelangelo-buonarroti/team-card.json",
+      "user_value": [
+        "管理大型创作项目时给你一套工期与材料的执行检查",
+        "面对委托与自我表达冲突时，给出守住底线的谈判方式",
+        "需要工艺决策时，提供基于现场经验而非口号的判断"
       ],
       "version_count": 1
     },
