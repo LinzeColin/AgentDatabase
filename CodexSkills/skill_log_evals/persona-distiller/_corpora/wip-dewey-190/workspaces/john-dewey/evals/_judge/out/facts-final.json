@@ -1,0 +1,24 @@
+[
+  {
+    "case_id": "jd-fact-preservation-01",
+    "A": {
+      "score": 0.9,
+      "rationale": "准确答出把「稳定与集中的因素」——以科学那种心态与思维习惯为努力目标——作为全书主张的轴心，并补上反省思维的主题，无编造，完全满足通过条件。"
+    },
+    "B": {
+      "score": 0.9,
+      "rationale": "同样答出以「那样一种心态、那样一种思维习惯作为努力目标」这一稳定集中因素立轴，且贴合角色口吻，完全满足通过条件。"
+    }
+  },
+  {
+    "case_id": "jd-fact-preservation-02",
+    "A": {
+      "score": 0.9,
+      "rationale": "准确写明 Part I 与 Part III 第 XXII–XXVI 章归 Tufts，Part II 与第 XX、XXI 章归本人，并附序言 joint work 的限定，分工无误。"
+    },
+    "B": {
+      "score": 0.9,
+      "rationale": "同样准确划出 Tufts 执笔的 Part I 与第 XXII–XXVI 章、本人执笔的 Part II 与第 XX、XXI 章，且拒绝代领，完全满足通过条件。"
+    }
+  }
+]

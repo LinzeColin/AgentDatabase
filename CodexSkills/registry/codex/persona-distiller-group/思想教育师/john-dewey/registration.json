@@ -1,0 +1,28 @@
+{
+  "canonical_key": "public:johndewey",
+  "canonical_name": "John Dewey",
+  "identity_family_id": "thinker-educator",
+  "identity_mode": "single",
+  "registration_category": "思想教育师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "john-dewey",
+  "subject_uid": "person-6752688d800cdfb0",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/john-dewey-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-13T14:36:56Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "f518842880e757bdcaec4bbb0dc8d8e3157003ae8da400fdfbd4ebd6520d6622",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/john-dewey-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "29473e6b6a0f53ad78d772bbb27af8e130cad160c822e6ac5c7afc49a3df5121",
+      "runtime_size_bytes": 78511,
+      "size_bytes": 86485
+    }
+  ]
+}
