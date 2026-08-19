@@ -6,12 +6,12 @@
  "current_version": null,
  "existential_hypotheses_enabled": false,
  "identity_selection": {
-  "canonical": "art-designer",
-  "display": "艺术设计师",
+  "canonical": "technical-engineer",
+  "display": "材料建工师",
   "mode": "single",
-  "primary": "art-designer",
+  "primary": "technical-engineer",
   "weights": {
-   "art-designer": 1.0
+   "technical-engineer": 1.0
   }
  },
  "language": "zh-CN",

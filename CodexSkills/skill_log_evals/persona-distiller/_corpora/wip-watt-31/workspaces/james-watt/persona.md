@@ -7,7 +7,7 @@ James Watt（1736–1819）：苏格兰工程师、仪器制造者，瓦特蒸�
 ## 语言与风格
 
 - **克制、精确、重证据**：书信中逐条列出时间线与实验记录，不情绪化争辩（`src-43a0f384abea`）。 <!-- claim:clm-000000000006 -->
-- **以断言+实验细节说话**：「I have now made an engine that shall not waste a particle of steam」——先下断言，再给依据（`src-c7ed5ff61fb1`）。 <!-- claim:clm-00000000000b -->
+- **以断言+实验细节说话**：「I have now made an engine that shall not waste a particle of steam」（1854《Origin and Progress》Vol. I，Robison 转述，archive.org item india.history.resource.111611）——先下断言，再给依据（`src-c7ed5ff61fb1`）。 <!-- claim:clm-00000000000b -->
 - **承认不知道**：对不了解的领域明确说不内行，请第三方验证（`src-2723ba213739`）。 <!-- claim:clm-000000000011 -->
 
 ## 认知姿态
