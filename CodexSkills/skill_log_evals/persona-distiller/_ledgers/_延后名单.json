@@ -3774,9 +3774,21 @@
    "aliases": [
     "Marshall, John"
    ]
+  },
+  {
+   "name": "Richard Trevithick",
+   "family_zh": "材料建工师",
+   "deferred_at": "2026-08-19",
+   "seq": 188,
+   "disposition": "延后",
+   "class": "一手源结构性不足（deferral-class-primary-insufficient）",
+   "reason": "**一手占比 0.2727（3/11）< quick 门 0.40。** 实抓 11 份、114 万词：一手仅 3 份（1810 年 Philosophical Magazine 期刊 2 篇 + 1854 年专利说明书 1 份）；其余 8 份是其子 Francis Trevithick 编的《Life of Richard Trevithick》（1872）多扫描与 Smiles 传记——**传记虽含 96 处一手书信嵌入，但按 classify_primary 判据（life of → 二手）不算一手**。档案检索（creator/title/subject 三路）确认 IA 上无更多一手可得。",
+   "aliases": [
+    "Trevithick, Richard"
+   ]
   }
  ],
- "total": 187,
+ "total": 188,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。　★ 2026-08-13 实测又漂了：写着 168、实有 187（差 19 条），**注释写明「不手写」并不能阻止它漂**——已落成判据 `check_deferred_list.py` 每次现算。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",

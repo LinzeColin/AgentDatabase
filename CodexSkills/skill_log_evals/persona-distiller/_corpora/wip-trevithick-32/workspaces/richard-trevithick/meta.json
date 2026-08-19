@@ -1,0 +1,80 @@
+{
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "wikidata:Q319520",
+ "consent_authority": null,
+ "created_at": "2026-08-19T15:40:04Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "technical-engineer",
+  "display": "材料建工师",
+  "mode": "single",
+  "primary": "technical-engineer",
+  "weights": {
+   "technical-engineer": 1.0
+  }
+ },
+ "language": "zh-CN",
+ "model_version": "0.1.0-draft",
+ "name": "Richard Trevithick",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "高压蒸汽系统设计",
+    "蒸汽机车与牵引动力",
+    "矿山动力机械"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "archive.org jstor-30072523（1810 Inventions by Mr. R. Trevithick, Relative to Nautical）"
+    },
+    {
+     "locator": "archive.org b30743643（1854 Specification of Richard Trevithick: apparatus for heating apartments）"
+    },
+    {
+     "locator": "archive.org liferichardtrev00trevgoog（1872 Life of Richard Trevithick Vol. 1，其子 Francis 编）"
+    }
+   ],
+   "canonical_name": "Richard Trevithick",
+   "distinguishing_basis": "署名 Trevithick, Richard 或 R. Trevithick；1886 年 Baku 石油报告是 F.H. Trevithick（孙辈）所著，排除；1872 传记为 Francis Trevithick（其子）所编。",
+   "evidence_level": "high",
+   "identity_category": "历史人物（1771-04-13 – 1833-04-22）",
+   "key_capabilities": [
+    "高压蒸汽系统设计",
+    "蒸汽机车与牵引动力",
+    "矿山动力机械"
+   ],
+   "label": "A",
+   "occupation_or_role": "康沃尔矿业工程师；高压蒸汽机与蒸汽机车发明者",
+   "professional_background": "高压无冷凝蒸汽机（1802 专利）；Puffing Devil（1801）、Penydarren 机车（1804）、Catch Me Who Can（1808）；康沃尔矿山水泵。",
+   "subject_uid": "wikidata:Q319520"
+  },
+  "chosen_subject_uid": "wikidata:Q319520",
+  "normalized_name": "richardtrevithick",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "richardtrevithick",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "richard-trevithick",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-1e1c14c60c4a",
+ "time_scope": "all available periods, separated by role and material drift",
+ "updated_at": "2026-08-19T15:40:04Z"
+}

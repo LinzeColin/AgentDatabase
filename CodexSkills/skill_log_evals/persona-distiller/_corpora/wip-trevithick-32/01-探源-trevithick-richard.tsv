@@ -1,0 +1,4 @@
+# numFound=1 rows=1 query=creator:"Trevithick, Richard"
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+b30743643	1854-01-01T00:00:00Z	1854	Trevithick, Richard	Specification of Richard Trevithick : apparatus for heating apartments	eng	wellcomelibrary; ukmhl; medicalheritagelibrary; europeanlibraries; medicallibrary

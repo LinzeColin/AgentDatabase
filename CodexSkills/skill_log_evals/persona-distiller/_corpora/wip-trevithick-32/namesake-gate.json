@@ -1,0 +1,50 @@
+{
+ "schema_version": "1.0",
+ "target_name": "Richard Trevithick",
+ "normalized_name": "richardtrevithick",
+ "search_scope": [
+  "sibling canonical registry",
+  "authoritative public sources supplied by orchestration"
+ ],
+ "selected_subject_uid": "wikidata:Q319520",
+ "generated_at": "2026-08-19T00:00:00Z",
+ "resolution": "single",
+ "status": "ready",
+ "candidate_count": 1,
+ "candidate_cards": [
+  "A. 人物与身份：Richard Trevithick（1771-04-13 – 1833-04-22）；康沃尔矿业工程师；高压蒸汽机与蒸汽机车发明者（1801 Puffing Devil、1804 Penydarren 机车、1808 Catch Me Who Can 演示）；高压无冷凝蒸汽机专利（1802）。\\n   专业背景：康沃尔矿山水泵与高压蒸汽动力。\\n   应用价值：高压蒸汽系统设计；机车与牵引动力；矿山动力机械。\\n   区分依据：署名作 Trevithick, Richard；载体是 1810 年期刊论文、1854 年专利说明书、1872 年其子 Francis 编的传记（含大量一手书信与口述）。"
+ ],
+ "candidates": [
+  {
+   "application_scenarios": [
+    "高压蒸汽系统设计",
+    "蒸汽机车与牵引动力",
+    "矿山动力机械"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "archive.org jstor-30072523（1810 Inventions by Mr. R. Trevithick, Relative to Nautical）"
+    },
+    {
+     "locator": "archive.org b30743643（1854 Specification of Richard Trevithick: apparatus for heating apartments）"
+    },
+    {
+     "locator": "archive.org liferichardtrev00trevgoog（1872 Life of Richard Trevithick Vol. 1，其子 Francis 编）"
+    }
+   ],
+   "canonical_name": "Richard Trevithick",
+   "distinguishing_basis": "署名 Trevithick, Richard 或 R. Trevithick；1886 年 Baku 石油报告是 F.H. Trevithick（孙辈）所著，排除；1872 传记为 Francis Trevithick（其子）所编。",
+   "subject_uid": "wikidata:Q319520",
+   "label": "A",
+   "evidence_level": "high",
+   "identity_category": "历史人物（1771-04-13 – 1833-04-22）",
+   "occupation_or_role": "康沃尔矿业工程师；高压蒸汽机与蒸汽机车发明者",
+   "professional_background": "高压无冷凝蒸汽机（1802 专利）；Puffing Devil（1801）、Penydarren 机车（1804）、Catch Me Who Can（1808）；康沃尔矿山水泵。",
+   "key_capabilities": [
+    "高压蒸汽系统设计",
+    "蒸汽机车与牵引动力",
+    "矿山动力机械"
+   ]
+  }
+ ]
+}

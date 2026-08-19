@@ -1,0 +1,107 @@
+{
+  "总数": 11,
+  "计数": {
+    "一手": 3,
+    "二手": 8,
+    "需人判": 0
+  },
+  "一手占比下界": 0.2727,
+  "一手占比上界": 0.2727,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "trevithick"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "b30743643",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Specification of Richard Trevithick : apparatus for heating apartments",
+      "creator": "Trevithick, Richard",
+      "words": 1735
+    },
+    {
+      "identifier": "india.history.resource.85210",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "Life of Richard Trevithick, with an account of his Inventions, Vol. I",
+      "creator": "Trevithick, Francis",
+      "words": 130063
+    },
+    {
+      "identifier": "india.history.resource.85212",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "Life of Richard Trevithick, with an account of his Inventions, Vol. II",
+      "creator": "Trevithick, Francis",
+      "words": 138396
+    },
+    {
+      "identifier": "jstor-30072523",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Inventions by Mr. R. Trevithick, Relative to Nautical Affairs",
+      "creator": "Trevithick, R.",
+      "words": 3194
+    },
+    {
+      "identifier": "jstor-30072567",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Account of Nautical Inventions of Mr. R. Trevithick (Continued)",
+      "creator": "Trevithick, R.",
+      "words": 3222
+    },
+    {
+      "identifier": "lifeofgeorgestep00smiluoft",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "The life of George Stephenson and of his son Robert Stephenson; comprising also ",
+      "creator": "Smiles, Samuel, 1812-1904",
+      "words": 194503
+    },
+    {
+      "identifier": "lifeofrichardtre02trevrich",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "Life of Richard Trevithick : with an account of his inventions",
+      "creator": "Trevithick, Francis, 1812-1877",
+      "words": 140018
+    },
+    {
+      "identifier": "liferichardtrev00trevgoog",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "Life of Richard Trevithick: With an Account of His Inventions",
+      "creator": "Francis Trevithick",
+      "words": 131566
+    },
+    {
+      "identifier": "liferichardtrev01trevgoog",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "Life of Richard Trevithick: With an Account of His Inventions",
+      "creator": "Francis Trevithick",
+      "words": 138124
+    },
+    {
+      "identifier": "liferichardtrev02trevgoog",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "Life of Richard Trevithick: With an Account of His Inventions",
+      "creator": "Francis Trevithick",
+      "words": 129003
+    },
+    {
+      "identifier": "liferichardtrev03trevgoog",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "Life of Richard Trevithick: with an account of his inventions, Volume 1",
+      "creator": "Francis Trevithick",
+      "words": 133060
+    }
+  ]
+}
