@@ -1,0 +1,55 @@
+{
+ "candidate_cards": [
+  "A. 人物与身份：James Watt；历史人物（1736-01-19 – 1819-08-25）；苏格兰工程师、仪器制造商；瓦特蒸汽机改进者（分离冷凝器专利 1769；平行联动；离心调速器）；Boulton & Watt 合伙人。\n   专业背景：机械发明与蒸汽动力；Soho 铸造厂制造体系。\n   应用价值：蒸汽机与动力机械设计；机械测量仪器（示功器）；工程创新方法论；合伙人制造治理。\n   区分依据：署名作 `Watt, James, 1736-1819` 或与 Muirhead 合编的书信/发明史（creator 含 `Watt, James; Muirhead, James Patrick`）；载体是 1794-1859 的医学化学著作、书信集、专利说明书。"
+ ],
+ "candidate_count": 1,
+ "candidates": [
+  {
+   "application_scenarios": [
+    "蒸汽机与动力机械的设计改进",
+    "机械测量与仪器（示功器/气压装置）",
+    "工程创新方法与合伙人制造治理"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "archive.org correspondenceof00wattrich（1846《Correspondence of the late James Watt…》，creator 含 `Watt, James; Muirhead, James Patrick`）"
+    },
+    {
+     "locator": "archive.org india.history.resource.111682 等三卷（1854《The Origin and Progress of the Mechanical Invention of James Watt》）"
+    },
+    {
+     "locator": "archive.org b21439011（1794《Considerations on the medicinal use of factitious airs》，creator `Watt, James, 1736-1819`）"
+    },
+    {
+     "locator": "archive.org b30741208（1854《Specification of James Watt: furnaces and fire-places》）"
+    }
+   ],
+   "canonical_name": "James Watt",
+   "distinguishing_basis": "署名作 `Watt, James, 1736-1819`；载体是 1794-1859 的医学化学/蒸汽机著作、Muirhead 编书信集与发明史、专利说明书；其余 `Watt, James…` 全部按生卒年/职业/题名排除（同名门见 00-抓源前必读.md）。",
+   "subject_uid": "wikidata:Q9041",
+   "label": "A",
+   "evidence_level": "high",
+   "identity_category": "历史人物（1736-01-19 – 1819-08-25）",
+   "occupation_or_role": "苏格兰工程师、仪器制造商；Boulton & Watt 合伙人",
+   "professional_background": "蒸汽机改进（分离冷凝器 1769 专利；平行联动；离心调速器；示功器）；Soho 铸造厂制造体系；与 Joseph Black 合作研究水的组成。",
+   "key_capabilities": [
+    "蒸汽机与动力机械设计",
+    "机械测量与仪器（示功器/气压装置）",
+    "工程创新方法论",
+    "合伙人制造治理"
+   ]
+  }
+ ],
+ "resolution": "single",
+ "status": "ready",
+ "schema_version": "1.0",
+ "target_name": "James Watt",
+ "normalized_name": "jameswatt",
+ "search_scope": [
+  "sibling canonical registry",
+  "authoritative public sources supplied by orchestration"
+ ],
+ "selected_subject_uid": "wikidata:Q9041",
+ "generated_at": "2026-08-19T00:00:00Z",
+ "★ 选定依据": "探源池 99 条 creator 聚类出 14+ 个同名者（Crabb/Mavor/Raine/Jr/Crawford/Cromar/C.Y./H.Jr/G/BrewDog/T/1888-1923/教材/宗教 M.D.），目标本人（1736-1819）以 Watt, James, 1736-1819 或 Watt, James; Muirhead 署名，载体为 1794-1859 医学化学著作、书信集、发明史、专利说明书。"
+}

@@ -1,0 +1,27 @@
+# watt：探源 99 条 → 留 24 条（上限 30，截掉 0）
+# 丢：访问受限 31；版次年>1930 18；同名者 20；同名者·按题名 5；目标不在creator 1
+b21438912
+b21438924
+b30741208
+bim_eighteenth-century_an-account-of-the-naviga_watt-james_1767
+bim_eighteenth-century_an-account-of-the-scheme_watt-james_1774
+bim_eighteenth-century_considerations-on-the-m_watt-james_1714
+bim_eighteenth-century_directions-for-using-the_james-watt-and-company_1780
+correspondenceof00wattrich
+georgewilliamso00wattgoog
+india.history.resource.111611
+india.history.resource.111621
+india.history.resource.111682
+india.history.resource.37301
+jameswattletter00watt
+jstor-106594
+jstor-106595
+jstor-106599
+manueldelingeni00wattgoog
+b2143895x
+b21438961
+b21438973
+b21438985
+b21439011
+jstor-41323679
+livesofboultonwa00smiluoft

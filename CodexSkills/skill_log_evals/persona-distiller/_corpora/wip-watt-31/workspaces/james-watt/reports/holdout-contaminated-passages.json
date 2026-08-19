@@ -1,0 +1,24 @@
+{
+  "src-76d70fe67498": [
+    {
+      "words": 56,
+      "train_source": "src-ffef3251462d",
+      "text_head": "do not assume that just because we believe a book is in the public domain for users in the united"
+    },
+    {
+      "words": 55,
+      "train_source": "src-ffef3251462d",
+      "text_head": "on library shelves before it was carefully scanned by google as part of a project to make the world s"
+    },
+    {
+      "words": 56,
+      "train_source": "src-982d25f0d292",
+      "text_head": "do not assume that just because we believe a book is in the public domain for users in the united"
+    },
+    {
+      "words": 55,
+      "train_source": "src-982d25f0d292",
+      "text_head": "on library shelves before it was carefully scanned by google as part of a project to make the world s"
+    }
+  ]
+}

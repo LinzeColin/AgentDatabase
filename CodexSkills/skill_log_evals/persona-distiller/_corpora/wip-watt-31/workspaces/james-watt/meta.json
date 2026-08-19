@@ -1,0 +1,116 @@
+{
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "wikidata:Q9041",
+ "consent_authority": null,
+ "created_at": "2026-08-19T12:34:18Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "art-designer",
+  "display": "艺术设计师",
+  "mode": "single",
+  "primary": "art-designer",
+  "weights": {
+   "art-designer": 1.0
+  }
+ },
+ "language": "zh-CN",
+ "model_version": "0.1.0-draft",
+ "name": "James Watt",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "蒸汽机与动力机械的设计改进",
+    "机械测量与仪器（示功器/气压装置）",
+    "工程创新方法与合伙人制造治理"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "archive.org correspondenceof00wattrich（1846《Correspondence of the late James Watt…》，creator 含 `Watt, James; Muirhead, James Patrick`）"
+    },
+    {
+     "locator": "archive.org india.history.resource.111682 等三卷（1854《The Origin and Progress of the Mechanical Invention of James Watt》）"
+    },
+    {
+     "locator": "archive.org b21439011（1794《Considerations on the medicinal use of factitious airs》，creator `Watt, James, 1736-1819`）"
+    },
+    {
+     "locator": "archive.org b30741208（1854《Specification of James Watt: furnaces and fire-places》）"
+    }
+   ],
+   "canonical_name": "James Watt",
+   "distinguishing_basis": "署名作 `Watt, James, 1736-1819`；载体是 1794-1859 的医学化学/蒸汽机著作、Muirhead 编书信集与发明史、专利说明书；其余 `Watt, James…` 全部按生卒年/职业/题名排除（同名门见 00-抓源前必读.md）。",
+   "evidence_level": "high",
+   "identity_category": "历史人物（1736-01-19 – 1819-08-25）",
+   "key_capabilities": [
+    "蒸汽机与动力机械设计",
+    "机械测量与仪器（示功器/气压装置）",
+    "工程创新方法论",
+    "合伙人制造治理"
+   ],
+   "label": "A",
+   "occupation_or_role": "苏格兰工程师、仪器制造商；Boulton & Watt 合伙人",
+   "professional_background": "蒸汽机改进（分离冷凝器 1769 专利；平行联动；离心调速器；示功器）；Soho 铸造厂制造体系；与 Joseph Black 合作研究水的组成。",
+   "subject_uid": "wikidata:Q9041"
+  },
+  "chosen_subject_uid": "wikidata:Q9041",
+  "normalized_name": "jameswatt",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "jameswatt",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": "蒸汽机与动力机械的设计改进",
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "james-watt",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-a0e18e5bde8a",
+ "time_scope": "all available periods, separated by role and material drift",
+ "updated_at": "2026-08-19T12:34:18Z",
+ "attribution_basis": {
+  "authority": "James Watt（1736–1819）的署名形态在 archive.org 著录与题名页上均可见：\n  ① 医学/化学著作（1794–1796）：题名页逐字 \\`By THOMAS BEDDOES, M. D. AND JAMES WATT, Engineer\\`（src-940377bd1648 等）；\n  ② 工程报告（1774）：题名页逐字 \\`By JAMES WATT\\`（src-cb1806bfbe54）；\n  ③ 专利说明书（1854 重印 1785 专利 1485 号）：题名页 \\`SPECIFICATION OF JAMES WATT\\`（src-c8ba29e4e56f）；\n  ④ 书信集（1846，Muirhead 编）：\\`CORRESPONDENCE OF THE LATE JAMES WATT\\`（src-43a0f384abea）——信是他写的，编者是 J. P. Muirhead；\n  ⑤ 发明史（1854，Muirhead 编）：\\`The Origin and Progress of the Mechanical Invention of James Watt\\`（src-c7ed5ff61fb1）——含其自述（A Plain Story / Notes on Robison）与合伙通信。",
+  "★ 同名门": "Watt 是探源池同名者密度最高的人物之一（14+ 同名者：Crabb/Mavor/Raine/Jr/Crawford/Cromar/C.Y./H.Jr/G/BrewDog/T/1888-1923/教材/宗教 M.D.），全部按 00-抓源前必读.md 的名单排除；本池 25 份均以 \\`1736-1819\\` 生卒年著录或题名页署名确认。",
+  "covered_sources": [
+   "correspondenceof00wattrich（1846 书信集，题名页 CORRESPONDENCE OF THE LATE JAMES WATT）",
+   "india.history.resource.37301（同一 1846 书信集重扫）",
+   "india.history.resource.111611（1854 Origin and Progress Vol. I，含其自述）",
+   "india.history.resource.111621（1854 Origin and Progress Vol. II，合伙通信）",
+   "india.history.resource.111682（1854 Origin and Progress Vol. III，含专利重印）",
+   "b30741208（1854 Specification of James Watt，A.D. 1785 No. 1485）",
+   "bim_eighteenth-century_an-account-of-the-scheme_watt-james_1774（1774 通航方案，题名页 By JAMES WATT）",
+   "bim_eighteenth-century_an-account-of-the-naviga_watt-james_1767（1767 运河方案）",
+   "bim_eighteenth-century_directions-for-using-the_james-watt-and-company_1780（1780 复印机说明书）",
+   "b21438961（1795 Considerations Part III，题名页合著）",
+   "b21439011（1794 Considerations 首版，合著）",
+   "b2143895x（1795 Considerations Part I，合著）",
+   "b21438973（1796 Medical cases IV&V，合著）",
+   "b21438985（1796 Considerations 3rd ed，合著）",
+   "b21438912（1795 Description of pneumatic apparatus，题名页 By JAMES WATT Engineer）",
+   "b21438924（1796 Supplement，题名页 By JAMES WATT, Engineer）",
+   "bim_eighteenth-century_considerations-on-the-m_watt-james_1714（ECCO 扫描，合著多版）",
+   "jstor-106595（1784 Sequel to Thoughts…，JSTOR 著录 James Watt）",
+   "jstor-106599（1784 On a new method of preparing a test liquor，同上）",
+   "jstor-106594（1784 Thoughts on the constituent parts of water，同上，holdout）",
+   "jameswattletter00watt（1797 致 Samuel Lysons 信，著录 Watt, James 1736-1819 correspondent，holdout）"
+  ],
+  "citation": "James Watt（1736-1819）的全部一手载体：医学化学合著（题名页 By THOMAS BEDDOES M. D. AND JAMES WATT, Engineer）、工程报告（By JAMES WATT）、专利说明书（SPECIFICATION OF JAMES WATT）、书信集与发明史（Muirhead 编）、1784 年 Philosophical Transactions 论文（JSTOR 著录）。逐份点名见 covered_sources。",
+  "disputed_policy": "合著作品（Beddoes & Watt）中 Watt 的份额为仪器设计与气体制备部分；Medical cases 病例多出自 Beddoes。以整本为 Watt 一手声口的断言需降置信。",
+  "disputed_works": [
+   "b21438973（Medical cases and speculations，病例主体为 Beddoes）"
+  ]
+ }
+}

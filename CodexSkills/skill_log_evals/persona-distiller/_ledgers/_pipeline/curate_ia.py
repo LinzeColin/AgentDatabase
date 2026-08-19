@@ -134,6 +134,39 @@ EXCLUDE = {
     #   《Pentecost; the opening of a new school of inspiration》(1898)。
     #   ★ 与哲学家 Dewey(1859–1952) **年代重叠、同样在公有领域** —— 年份筛不掉。
     "dewey": ["Hamlin", "Dewey, John H."],
+    # ★★★ James Watt #31：**同名者密度全库最高的一档**——probe 池 99 条里
+    #   至少 **14 个不同的人**，且多数是「同名、年代重叠、同样在公有领域」：
+    #   ① James Watt Crabb（1847–1903，文学批评家，8 条）
+    #   ② James Watt Mavor（1923–2006，教育心理学家，10 条）
+    #   ③ James Watt Raine（1869–1949，诗人/教师，6 条）
+    #   ④ James Watt Jr.（1769–1848，**目标的儿子**，Soho 继承者）——creator 明写
+    #      `Watt, James, 1769-1848`（不排的话 1854 年他儿子的编目会混进来）
+    #   ⑤ James Watt Crawford（1886–1971?，医学，2 条）⑥ James Cromar Watt（艺术家）
+    #   ⑦ James C. Y. Watt（大都会中国艺术策展人，当代）⑧ James H. Watt Jr.（传播学者）
+    #   ⑨ James G. Watt（里根内政部长）⑩ James Watt（BrewDog 创始人）
+    #   ⑪ James T. Watt（1939–，建筑师）⑫ James Watt（1888–1923）
+    #   ⑬ General Biology 系列（bwb_*/generalbiology*，生物教材）⑭ Bible dramatics（1927）
+    #   ★ 目标本人（1736–1819）的署名形态：`Watt, James, 1736-1819`、
+    #     `Watt, James; Muirhead, James Patrick`（书信/发明史合编）。
+    #   ★ 池里还有 `Watt, James`（裸名 8 条）与 `Watt, James.`（2 条）——
+    #     不排：那正是目标本人在多版医学著作上的署名（b21438912 等实测 creator
+    #     同时列 `Watt, James, 1736-1819`，裸名条目来自别的馆的简写）。
+    "watt": ["1769-1848", "1847-1903", "1923-2006", "1869-1949", "1886-1971",
+             "Cromar", "C. Y", "C.Y", "H., Jr", "H. Jr", "James G", "BrewDog",
+             "James T", "1939-", "1888-1923", "Crabb", "Mavor", "Raine",
+             # ★ 2026-08-19 补：**第五类**——北爱尔兰医生 James Watt, M.D.（1790s-1820s
+             #   宗教/医学作者）。实测 4 条穿过了前几轮筛：
+             #     bim…infant-baptism-unchristi(1797)《Infant-baptism unchristian》——
+             #       creator 只写裸名 `Watt, James`，Penn 目录实证署 `James Watt, M.D.`
+             #     bim…plain-proof(1796)《Plain proof…creeds…Church of Scotland》—— 同上
+             #     bim…disputatio-medica(1796)《Disputatio medica inauguralis》——
+             #       creator 明写 `Watt, James, M. D.`
+             #     essaysonseveralc00watt(1810)《Essays on several controverted subjects》
+             #       —— Duke 目录实证为宗教论集（present doctrines and practices of
+             #       Christian churches）
+             #   ★ 它们 creator 有时带 M. D.、有时裸名 ⇒ 生卒年没有、身份词不全，
+             #     只能**按题名排**（见 EXCLUDE_TITLE）。creator 侧加 M. D. 兜底。
+             "M. D", "M.D", "M D"],
     # ★ Gifford Pinchot #192：同名者是**他的后人** `Pinchot, Gifford, III`（池里 1 条）。
     #   ★ 生卒年在这里**没用**：后人的著录不带生卒年，本人的带 1865-1946。
     #     只能钉住那个罗马数字后缀。
@@ -226,6 +259,20 @@ EXCLUDE_TITLE = {
         "Quaderno delle rime burlesche",
         "Epistola al Signor Niccolò Arrighetti",
     ],
+    # ★ Watt #31 的**第五类同名者**（北爱尔兰医生 James Watt, M.D.）——
+    #   三条 creator 侧只写裸名 `Watt, James`（Penn/Duke 目录实证署 M.D.）：
+    #   creator 排不掉，**只能按题名排**。实测 4 条：
+    #     bim…infant-baptism-unchristi(1797) 《Infant-baptism unchristian》
+    #     bim…plain-proof(1796)          《Plain proof that the public creeds…》
+    #     bim…disputatio-medica(1796)    《Disputatio medica inauguralis》（医学论文）
+    #     essaysonseveralc00watt(1810)   《Essays on several controverted subjects》
+    #   ★ 另外一条 J.C.Y. Watt（大都会中国艺术策展人）的 creator 写
+    #     `James Watt Anne Wardwell`——**没有 "C. Y" 可排**，只能按题名排：
+    #     WhenSilkWasGoldCentralAsianChineseTextile《When Silk Was Gold》。
+    #   ★ 还有 DLI 一条《The London Mechanics Register》（1825 期刊卷，非他的著作）
+    #     也按题名排。
+    "watt": ["infant-baptism", "infant baptism", "plain proof", "controverted subjects",
+             "disputatio medica", "silk was gold", "mechanics register"],
 }
 # 目标必须出现在 creator 里的**姓名词元**（同一个 creator 段里全部出现即命中）。
 # ★★ 曾写成 `["Fröbel, Friedrich"]` 这种「姓, 名」定串，于是
@@ -270,6 +317,12 @@ REQUIRE = {
     # ★ Plato 的著录有多种拼法：`Plato`／`PLATO`／`Plato, 427? BC-347? BC`／`Plato, Curt. Red.`，
     #   还有希腊文题名直接落在 creator 字段（`Πολιτεια του Πλατωνα`、`Ἀπολογία Σωκράτους`）。
     "plato": [["plato"], ["platon"], ["πλάτ"], ["πλατ"]],
+    # ★ Watt：目标本人署名 `Watt, James, 1736-1819` 或 `Watt, James; Muirhead…`。
+    #   **不能只写 ["watt", "james"]** —— 那样儿子（1769-1848）的合著也会被收进来；
+    #   但**也不能排除 1736-1819**（Bristol 医学馆的简写条目只有 `Watt, James`）。
+    #   ⇒ 词元要求 watt+james，且同段里**不得**含 EXCLUDE 里的生卒年/身份词
+    #   （EXCLUDE 比的是整条 creator 串，REQUIRE 只看段——两侧一起生效）。
+    "watt": [["watt", "james"]],
 }
 
 

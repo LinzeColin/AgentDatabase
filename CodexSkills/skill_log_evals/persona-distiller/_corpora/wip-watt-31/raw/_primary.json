@@ -1,0 +1,219 @@
+{
+  "总数": 25,
+  "计数": {
+    "一手": 18,
+    "二手": 1,
+    "需人判": 6
+  },
+  "一手占比下界": 0.72,
+  "一手占比上界": 0.96,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "watt"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "b21438912",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Description of a pneumatic apparatus, with directions for procuring the factitio",
+      "creator": "Watt, James, 1736-1819; Carrick, Andrew, 1767-1837, Provenance; Bristol Medical ",
+      "words": 11786
+    },
+    {
+      "identifier": "b21438924",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Supplement to the description of a pneumatic apparatus, for preparing factitious",
+      "creator": "Watt, James, 1736-1819; Carrick, Andrew, 1767-1837, Provenance; Bristol Medical ",
+      "words": 5738
+    },
+    {
+      "identifier": "b2143895x",
+      "档": "需人判",
+      "依据": "creator 第 2 位；无自著标记",
+      "title": "Considerations on the medicinal use, and on the production of factitious airs",
+      "creator": "Beddoes, Thomas, 1760-1808; Watt, James, 1736-1819; Kentish, Edward, -1832, Prov",
+      "words": 63401
+    },
+    {
+      "identifier": "b21438961",
+      "档": "需人判",
+      "依据": "creator 第 2 位；无自著标记",
+      "title": "Considerations on the medicinal use, and production of factitious airs. Part III",
+      "creator": "Beddoes, Thomas, 1760-1808; Watt, James, 1736-1819; Kentish, Edward, -1832, Prov",
+      "words": 35046
+    },
+    {
+      "identifier": "b21438973",
+      "档": "需人判",
+      "依据": "creator 第 2 位；无自著标记",
+      "title": "Medical cases and speculations : including parts IV. and V. of Considerations on",
+      "creator": "Beddoes, Thomas, 1760-1808; Watt, James, 1736-1819; Kentish, Edward, -1832, Prov",
+      "words": 80264
+    },
+    {
+      "identifier": "b21438985",
+      "档": "需人判",
+      "依据": "creator 第 2 位；无自著标记",
+      "title": "Considerations on the medicinal use, and on the production of factitious airs",
+      "creator": "Beddoes, Thomas, 1760-1808; Watt, James, 1736-1819; Carrick, Andrew, 1767-1837, ",
+      "words": 69292
+    },
+    {
+      "identifier": "b21439011",
+      "档": "需人判",
+      "依据": "creator 第 2 位；无自著标记",
+      "title": "Considerations on the medicinal use of factitious airs, and on the manner of obt",
+      "creator": "Beddoes, Thomas, 1760-1808; Watt, James, 1736-1819; University of Bristol. Libra",
+      "words": 29020
+    },
+    {
+      "identifier": "b30741208",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Specification of James Watt : furnaces and fire-places",
+      "creator": "Watt, James, 1736-1819",
+      "words": 1905
+    },
+    {
+      "identifier": "bim_eighteenth-century_an-account-of-the-naviga_watt-james_1767",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "An account of the navigable canal, proposed to be cut from the river Clyde to th",
+      "creator": "Watt, James.",
+      "words": 8059
+    },
+    {
+      "identifier": "bim_eighteenth-century_an-account-of-the-scheme_watt-james_1774",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "An account of the scheme for rendering navigable the rivers Forth and Devon, wit",
+      "creator": "Watt, James",
+      "words": 4400
+    },
+    {
+      "identifier": "bim_eighteenth-century_considerations-on-the-m_watt-james_1714",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "[Considerations on the medicinal use of factitious airs. Part 4-5]. Medical case",
+      "creator": "Watt, James.",
+      "words": 103478
+    },
+    {
+      "identifier": "bim_eighteenth-century_directions-for-using-the_james-watt-and-company_1780",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "Directions for using the machine for copying letters and other writings. Invente",
+      "creator": "James Watt and Company.",
+      "words": 7129
+    },
+    {
+      "identifier": "correspondenceof00wattrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「correspondence」",
+      "title": "Correspondence of the late James Watt on his discovery of the theory of the comp",
+      "creator": "Watt, James, 1736-1819; Muirhead, James Patrick, 1813-1898. ed; Cavendish, Henry",
+      "words": 110576
+    },
+    {
+      "identifier": "georgewilliamso00wattgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "GEORGE WILLIAMSON, ESQ",
+      "creator": "MEMORIALS OF THE LINEAGE,  EARLY LIFE ,  EDUCATION,  AND DEVELOPMENT OF THE GENI",
+      "words": 98386
+    },
+    {
+      "identifier": "india.history.resource.111611",
+      "档": "一手",
+      "依据": "题名含自述体标记「memoirs?\\b」且目标为第一作者",
+      "title": "The Origin and Progress of the Mechanical Invention of James Watt, in Three Volu",
+      "creator": "Watt, James; Muirhead, James Patrick",
+      "words": 107010
+    },
+    {
+      "identifier": "india.history.resource.111621",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「correspondence」",
+      "title": "The Origin and Progress of the Mechanical Invention of James Watt, in Three Volu",
+      "creator": "Watt, James; Muirhead, James Patrick",
+      "words": 106855
+    },
+    {
+      "identifier": "india.history.resource.111682",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "The Origin and Progress of the Mechanical Invention of James Watt, in Three Volu",
+      "creator": "Watt, James; Muirhead, James Patrick",
+      "words": 85366
+    },
+    {
+      "identifier": "india.history.resource.37301",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「correspondence」",
+      "title": "Correspondence of the Late James Watt on his Discovery of the Theoryof the Posit",
+      "creator": "Watt ,James; Muirhead, James Patrick",
+      "words": 109312
+    },
+    {
+      "identifier": "jameswattletter00watt",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "James Watt letter to Samuel Lysons, dated Heathfield, Handsworth, Birmingham, En",
+      "creator": "Watt, James, 1736-1819, author, correspondent",
+      "words": 161
+    },
+    {
+      "identifier": "jstor-106594",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Thoughts on the Constituent Parts of Water and of Dephlogisticated Air; With an ",
+      "creator": "Watt, James",
+      "words": 8730
+    },
+    {
+      "identifier": "jstor-106595",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Sequel to the Thoughts on the Constituent Parts of Water and Dephlogisticated Ai",
+      "creator": "Watt, James",
+      "words": 1407
+    },
+    {
+      "identifier": "jstor-106599",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On a New Method of Preparing a Test Liquor to Shew the Presence of Acids and Alk",
+      "creator": "Watt, James",
+      "words": 1497
+    },
+    {
+      "identifier": "jstor-41323679",
+      "档": "需人判",
+      "依据": "creator 第 2 位；无自著标记",
+      "title": "Journal of the Society of Arts, Vol. 6, no. 306",
+      "creator": "P. L. Simmonds; JAMES WATT; JOHN SOUTHERN",
+      "words": 13834
+    },
+    {
+      "identifier": "livesboultonand00unkngoog",
+      "档": "二手",
+      "依据": "题名含「lives of」且含目标姓名",
+      "title": "Lives of Boulton and Watt. Principally from the original Soho mss. Comprising al",
+      "creator": "Smiles, Samuel, 1812-1904",
+      "words": 200626
+    },
+    {
+      "identifier": "manueldelingeni00wattgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Manuel de l'ingenieur mécanicien constructeur de machines a vapeur",
+      "creator": "Oliver Evans,  Isaac Doolittle,  James Watt",
+      "words": 45040
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "lanes": 4,
+  "去掉纸面道后": 3,
+  "逐道份数": {
+    "writings": 15,
+    "conversations": 7,
+    "expression": 0,
+    "decisions": 2,
+    "timeline": 0,
+    "external": 1
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "b21438912",
+      "道": "writings",
+      "title": "Description of a pneumatic apparatus, with directions for procuring th"
+    },
+    {
+      "identifier": "b21438924",
+      "道": "writings",
+      "title": "Supplement to the description of a pneumatic apparatus, for preparing "
+    },
+    {
+      "identifier": "b2143895x",
+      "道": "writings",
+      "title": "Considerations on the medicinal use, and on the production of factitio"
+    },
+    {
+      "identifier": "b21438961",
+      "道": "writings",
+      "title": "Considerations on the medicinal use, and production of factitious airs"
+    },
+    {
+      "identifier": "b21438973",
+      "道": "writings",
+      "title": "Medical cases and speculations : including parts IV. and V. of Conside"
+    },
+    {
+      "identifier": "b21438985",
+      "道": "writings",
+      "title": "Considerations on the medicinal use, and on the production of factitio"
+    },
+    {
+      "identifier": "b21439011",
+      "道": "writings",
+      "title": "Considerations on the medicinal use of factitious airs, and on the man"
+    },
+    {
+      "identifier": "b30741208",
+      "道": "decisions",
+      "title": "Specification of James Watt : furnaces and fire-places"
+    },
+    {
+      "identifier": "bim_eighteenth-century_an-account-of-the-naviga_watt-james_1767",
+      "道": "writings",
+      "title": "An account of the navigable canal, proposed to be cut from the river C"
+    },
+    {
+      "identifier": "bim_eighteenth-century_an-account-of-the-scheme_watt-james_1774",
+      "道": "writings",
+      "title": "An account of the scheme for rendering navigable the rivers Forth and "
+    },
+    {
+      "identifier": "bim_eighteenth-century_considerations-on-the-m_watt-james_1714",
+      "道": "writings",
+      "title": "[Considerations on the medicinal use of factitious airs. Part 4-5]. Me"
+    },
+    {
+      "identifier": "bim_eighteenth-century_directions-for-using-the_james-watt-and-company_1780",
+      "道": "conversations",
+      "title": "Directions for using the machine for copying letters and other writing"
+    },
+    {
+      "identifier": "correspondenceof00wattrich",
+      "道": "writings",
+      "title": "Correspondence of the late James Watt on his discovery of the theory o"
+    },
+    {
+      "identifier": "georgewilliamso00wattgoog",
+      "道": "writings",
+      "title": "GEORGE WILLIAMSON, ESQ"
+    },
+    {
+      "identifier": "india.history.resource.111611",
+      "道": "conversations",
+      "title": "The Origin and Progress of the Mechanical Invention of James Watt, in "
+    },
+    {
+      "identifier": "india.history.resource.111621",
+      "道": "conversations",
+      "title": "The Origin and Progress of the Mechanical Invention of James Watt, in "
+    },
+    {
+      "identifier": "india.history.resource.111682",
+      "道": "decisions",
+      "title": "The Origin and Progress of the Mechanical Invention of James Watt, in "
+    },
+    {
+      "identifier": "india.history.resource.37301",
+      "道": "conversations",
+      "title": "Correspondence of the Late James Watt on his Discovery of the Theoryof"
+    },
+    {
+      "identifier": "jameswattletter00watt",
+      "道": "conversations",
+      "title": "James Watt letter to Samuel Lysons, dated Heathfield, Handsworth, Birm"
+    },
+    {
+      "identifier": "jstor-106594",
+      "道": "conversations",
+      "title": "Thoughts on the Constituent Parts of Water and of Dephlogisticated Air"
+    },
+    {
+      "identifier": "jstor-106595",
+      "道": "conversations",
+      "title": "Sequel to the Thoughts on the Constituent Parts of Water and Dephlogis"
+    },
+    {
+      "identifier": "jstor-106599",
+      "道": "writings",
+      "title": "On a New Method of Preparing a Test Liquor to Shew the Presence of Aci"
+    },
+    {
+      "identifier": "jstor-41323679",
+      "道": "writings",
+      "title": "Journal of the Society of Arts, Vol. 6, no. 306"
+    },
+    {
+      "identifier": "livesboultonand00unkngoog",
+      "道": "external",
+      "title": "Lives of Boulton and Watt. Principally from the original Soho mss. Com"
+    },
+    {
+      "identifier": "manueldelingeni00wattgoog",
+      "道": "writings",
+      "title": "Manuel de l'ingenieur mécanicien constructeur de machines a vapeur"
+    }
+  ]
+}
