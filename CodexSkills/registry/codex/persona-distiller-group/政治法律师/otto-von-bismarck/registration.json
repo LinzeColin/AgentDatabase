@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:ottovonbismarck",
+  "canonical_name": "Otto von Bismarck",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "otto-von-bismarck",
+  "subject_uid": "person-250255d9652035f3",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/otto-von-bismarck-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-12T00:00:56Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "4ca204575b1df63220bc8b1ebad91f988258f7c0955d7c52fca0ecf4feff94c7",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/otto-von-bismarck-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "5ba4e29799bbc9a59147c15c330d901a11fe6eb927cc624fb42306d81a6312e7",
+      "runtime_size_bytes": 72436,
+      "size_bytes": 80044
+    }
+  ]
+}

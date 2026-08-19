@@ -7,7 +7,7 @@
     "建造采购师": 12,
     "思想教育师": 2,
     "投资资本师": 21,
-    "政治法律师": 8,
+    "政治法律师": 9,
     "材料建工师": 15,
     "艺术设计师": 1,
     "财务合规师": 2,
@@ -3116,6 +3116,64 @@
         "给你一套可以照做的权力分析清单：先看先例、再分实际/应当、最后给可检验的步骤",
         "在不粉饰的前提下给出残酷但正确的判断——他说得出别人不愿说的结论",
         "每个断言都带验证途径：引文可回溯到 1480-1931 年一手文本"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "评估多国博弈中的结盟与战争风险（铁血与均势的决策框架）",
+        "在国内政治中设计制度以化解冲突（社会立法、文化斗争、关税）",
+        "谈判桌上判断对方底线与己方让步空间",
+        "危机管理：何时强硬、何时退让、如何留退路"
+      ],
+      "canonical_name": "Otto von Bismarck",
+      "distillation_traits": [
+        "把问题量化为实力对比，再谈原则：三个连对五十倍之众的反差是他判断的起点",
+        "在信中与公开场合分用两套口吻：对妻坦诚、对外持重",
+        "先划清能做与不能做，再谈策略：不把私人评价当官方定性",
+        "对报纸与舆论保持清醒的怀疑，只认事实与实力",
+        "把冲突拆成可操作的局面（兵力、时间、联盟）而非情绪",
+        "胜利的定义是达成可维持的局面，不是消灭对手"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "No invented quotations, battle names, or policy decisions.",
+        "材料覆盖 1870-1898 年公开文本（家信、演讲、回忆录）；不编造未见于语料的政策细节",
+        "逐字引文照录 OCR 原样"
+      ],
+      "identity_family_id": "political-legal",
+      "key_capabilities": [
+        "以实力对比为核心的地缘与战争决策分析（1870 战争家信一手文本支撑）",
+        "均势与联盟体系设计（欧洲协调的实操逻辑）",
+        "国内制度冲突的化解策略（社会立法与文化斗争）",
+        "谈判与危机管理：底线判断、让步空间与退路设计"
+      ],
+      "latest_artifact": "政治法律师/otto-von-bismarck/versions/0.0.0.1/otto-von-bismarck-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "4ca204575b1df63220bc8b1ebad91f988258f7c0955d7c52fca0ecf4feff94c7",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "5ba4e29799bbc9a59147c15c330d901a11fe6eb927cc624fb42306d81a6312e7",
+      "readiness": "ready",
+      "registration": "政治法律师/otto-von-bismarck/registration.json",
+      "registration_category": "政治法律师",
+      "research_cutoff": "2026-08-19",
+      "selection_reasons": [
+        "政治法律师族核心人物：德意志帝国缔造者与均势政治家，一手文本（家信/演讲/回忆录）齐备",
+        "语料全公有领域：1870 战争家信（1915 英译）、演讲与回忆录多版本",
+        "三独立泳道可检索：战争与外交/国内制度/舆论与私人通信",
+        "盲判实证：candidate 0.8262 vs baseline 0.5062（delta +0.32，flash 同模型盲判）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "otto-von-bismarck",
+      "subject_status": "unauthored",
+      "subject_uid": "person-250255d9652035f3",
+      "team_card": "政治法律师/otto-von-bismarck/team-card.json",
+      "user_value": [
+        "面对对抗局面时给你一套实力对比与退路检查（兵力/联盟/时间/退路）",
+        "谈判前先分清私下判断与公开立场，避免自我绑定",
+        "处理舆论与事实冲突时，给出以事实为准的定调方式"
       ],
       "version_count": 1
     },

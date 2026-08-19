@@ -36,3 +36,10 @@
 
 ★ 每条要点后的 `<!-- claim:… -->` 指向 `evidence/claims.jsonl`；
 **反证条件**逐条从那里现取，不手抄。
+
+## 1870 战争：萨尔布吕肯
+
+- **来源**：`src-a7465c6d3b41`——Bismarck's Letters to His Wife from the Seat of War, 1870-1871（Letter III，Mainz, August 5th, 1870）。OCR 讹字照录：`Saarbriick`＝Saarbrücken、`gr-r-r-ande`＝grande、行末断词连字符照留。
+- **逐字引文**：`We read to-day with surprise in the French newspapers here of a “ battle” which is said to have taken place near Saarbriick on the 2nd. This is the most laughable disgrace that has ever hap-pened yet to the gr-r-r-ande nation ! Three companies of the 40th Regiment and one squadron of Uhlans have held Napoleon and the whole of his army engaged for eight days ! They had orders from home to fall back on our line this side of Saarbriick as soon as the enemy advanced. But they even did not do this until three French divisions, that is, about 150 companies, with artillery and cavalry attacked them: these French forces, fifty times as many in numbers, exchanged fire with our three companies. Leonidas is a ragamuffin by the side of our Fusiliers.`
+- **解读**：所谓「萨尔布吕肯会战」不是他的战报，而是他从**当地法国报纸**上读到的说法（8 月 2 日）。他点破的反差：报纸称「会战」，实际普方只有第 40 团的**三个连**（外加一个乌兰枪骑兵中队）；法方却是三个师、约 150 个连、人数五十倍于我，且普方本有后撤命令。他把这叫作那个「伟大的民族」迄今**最可笑的丢脸事**。同卷 8 月 9 日圣约翰信补一笔：法军「朝不在场的普鲁士人开枪，赢得了一场没有敌人的胜利」（`shot at Prussians who were not there and so won a victory without an enemy`）。
+  - **反证条件**：此为家信中的私人评价，非官方定性；若另有普鲁士方面正式战报称其为会战须并记
