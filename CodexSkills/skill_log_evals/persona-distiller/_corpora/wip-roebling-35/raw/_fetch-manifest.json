@@ -1,14 +1,38 @@
 {
-  "生成时刻": "2026-08-20T05:22:58",
-  "请求数": 14,
-  "已取回": 14,
+  "生成时刻": "2026-08-20T06:18:44",
+  "请求数": 3,
+  "已取回": 18,
   "skipped_access_restricted": 0,
   "剔除": 0,
   "失败": 0,
   "并发降级": "无（全程并发 4）",
-  "总词数": 155113,
+  "总词数": 215099,
   "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
   "记录": [
+    {
+      "identifier": "addressdelivered00hewi",
+      "status": "已取回",
+      "note": "",
+      "file": "addressdelivered00hewi.txt",
+      "source_url": "https://archive.org/download/addressdelivered00hewi/addressdelivered00hewi_djvu.txt",
+      "sha256": "722ff5b4e7d9efc5ff9510f53d8c7426990c520595b244a6c6f422cf57f847dd",
+      "bytes": 54060,
+      "words": 8103,
+      "fetched_at": "2026-08-20T06:18:41",
+      "ia_date": "1883",
+      "ia_year": "",
+      "ia_publicdate": "2011-04-19 13:30:17",
+      "ia_creator": "Hewitt, Abram S. (Abram Stevens), 1822-1903",
+      "ia_title": "Address delivered by Abram S. Hewitt on the occasion of the opening of the New York and Brooklyn Bridge, May 24th, 1883",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1776",
+        "1883"
+      ],
+      "digitization_years": [
+        "2011"
+      ]
+    },
     {
       "identifier": "bub_gb_Di6x5SMUdl4C",
       "status": "已取回",
@@ -31,6 +55,31 @@
       "digitization_years": []
     },
     {
+      "identifier": "cablemakingfors00hildgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "cablemakingfors00hildgoog.txt",
+      "source_url": "https://archive.org/download/cablemakingfors00hildgoog/cablemakingfors00hildgoog_djvu.txt",
+      "sha256": "77e3eef4a71c4e692b3514b41e774267e71452defe7b28b70ceb496b5806075a",
+      "bytes": 126255,
+      "words": 21419,
+      "fetched_at": "2026-08-20T06:16:28",
+      "ia_date": "1877",
+      "ia_year": "1877",
+      "ia_publicdate": "2009-06-02 08:44:20",
+      "ia_creator": "Hildenbrand, Wilhelm",
+      "ia_title": "Cable-making for suspension bridges : with special reference to the cables of the East River bridge",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1562",
+        "1595",
+        "1860",
+        "1870",
+        "1877"
+      ],
+      "digitization_years": []
+    },
+    {
       "identifier": "cihm_52610",
       "status": "已取回",
       "note": "",
@@ -48,6 +97,34 @@
       "ia_licenseurl": "",
       "titlepage_years": [
         "1852"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "completehistoryo00gree",
+      "status": "已取回",
+      "note": "",
+      "file": "completehistoryo00gree.txt",
+      "source_url": "https://archive.org/download/completehistoryo00gree/completehistoryo00gree_djvu.txt",
+      "sha256": "f64d7e809c8dd238dd43d07b0c217ed3c026c1216ed00f7978a0d009bec01996",
+      "bytes": 195586,
+      "words": 29485,
+      "fetched_at": "2026-08-20T06:18:44",
+      "ia_date": "1883",
+      "ia_year": "",
+      "ia_publicdate": "2013-10-31 19:05:48",
+      "ia_creator": "",
+      "ia_title": "A Complete history of the New York and Brooklyn Bridge : from its conception in 1866 to its completion in 1883",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1794",
+        "1799",
+        "1803",
+        "1813",
+        "1849",
+        "1865",
+        "1866",
+        "1883"
       ],
       "digitization_years": []
     },
@@ -216,6 +293,27 @@
       "ia_title": "Report of John A. Roebling, civil engineer [electronic resource] : to the directors of the Niagara Falls International and Suspension Bridge companies",
       "ia_licenseurl": "",
       "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "openingceremonie00newy",
+      "status": "已取回",
+      "note": "",
+      "file": "openingceremonie00newy.txt",
+      "source_url": "https://archive.org/download/openingceremonie00newy/openingceremonie00newy_djvu.txt",
+      "sha256": "70b3ac5c1362a0177c3fb8edc865197a0a86146ee36be0f1abc25fd3389cbce2",
+      "bytes": 7003,
+      "words": 979,
+      "fetched_at": "2026-08-20T06:18:43",
+      "ia_date": "1883",
+      "ia_year": "",
+      "ia_publicdate": "2014-07-24 13:06:36",
+      "ia_creator": "New York (N.Y.). Board of Trustees of the New York and Brooklyn Bridge.",
+      "ia_title": "Opening ceremonies of the New York and Brooklyn bridge, Thursday, May 24, 1883, commencing at 2 o'clock p.m. at the Brooklyn approach.",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1883"
+      ],
       "digitization_years": []
     },
     {
