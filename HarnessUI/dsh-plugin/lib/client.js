@@ -33,6 +33,10 @@ window.__ModuleLoader__.load({
 		const SCOPE = "dshHarnessUi";              // body dataset key -> [data-dsh-harness-ui]
 		const STORE = "harness-ui.state.v1";
 		const CATALOG_URL = "http://127.0.0.1:3099/catalog.json";
+		// 同一份状态由菜单栏控制器、Kimi 外壳和这里三方共读共写。各存各的必然分叉 ——
+		// 菜单栏切到 A、这边还显示 B，用户看到的和菜单说的对不上。
+		const STATE_URL = "http://127.0.0.1:3099/state.json";
+		const SYNC_MS = 15000;
 		const DEFAULT_INTERVAL_MS = 4 * 60 * 60 * 1000;
 
 		/** Read persisted state, tolerating a corrupt or absent record. */
@@ -153,6 +157,7 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 			const state = loadState();
 			let catalog = null;
 			let timer = null;
+			let syncTimer = null;
 
 			const root = document.documentElement;
 			document.body.dataset[SCOPE] = "";
@@ -214,6 +219,25 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 
 			function interval() {
 				return Number(state.intervalMs) > 0 ? Number(state.intervalMs) : DEFAULT_INTERVAL_MS;
+			}
+
+			/** 跟随共享状态。菜单栏控制器负责推进轮播，这边只管把结果画出来，
+			 *  所以两处不会各转各的，也不会因为时钟差半分钟而显示不同的角色。 */
+			let syncSeen = 0;
+			async function syncShared() {
+				try {
+					const shared = await (await fetch(STATE_URL, { cache: "no-store" })).json();
+					if (!shared.updated || shared.updated === syncSeen) return;
+					syncSeen = shared.updated;
+					state.mode = shared.mode;
+					state.intervalMs = shared.intervalMs;
+					if (shared.selected && shared.selected !== state.selected) {
+						state.selected = shared.selected;
+						saveState(state);
+						if (await show(byId(shared.selected))) paintActive();
+					}
+					paintMode();
+				} catch { /* 控制器没开就按本地状态自转，不报错刷屏 */ }
 			}
 
 			function schedule() {
@@ -348,9 +372,11 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 				panel.querySelector('[data-hu="interval"]').value = String(interval());
 				paintMode();
 				renderGrid();
-				if (state.selected && state.mode === "gallery") await show(byId(state.selected));
+				await syncShared();
+				if (state.selected) await show(byId(state.selected));
 				else await rotate(true);
 				schedule();
+				syncTimer = setInterval(syncShared, SYNC_MS);
 			})();
 
 			// Day/night is the host's decision; follow it without re-fetching the
@@ -360,6 +386,7 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 
 			return () => {
 				if (timer) clearInterval(timer);
+				if (syncTimer) clearInterval(syncTimer);
 				observer.disconnect();
 				toggle.remove();
 				panel.remove();

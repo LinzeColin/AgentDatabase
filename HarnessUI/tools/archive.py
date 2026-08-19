@@ -33,21 +33,35 @@ import time
 GAME_ZH = {"genshin": "原神", "hsr": "崩铁", "zzz": "绝区零"}
 
 
-def copy_verified(source: pathlib.Path, target: pathlib.Path) -> str:
-    """Returns 'copied', 'skipped', or 'failed'."""
+def copy_verified(source: pathlib.Path, target: pathlib.Path, *, tries: int = 4) -> str:
+    """Returns 'copied', 'skipped', or 'failed'.
+
+    Retries on I/O error with a backoff. Copying 612 files of 6-8MB back to back
+    made the share return EIO on 240 of them, while the very same file copied by
+    hand a minute later went through in under a second — the mount was being
+    overrun, not broken. So a failure here is a reason to wait and try again,
+    not a reason to give up on the file.
+    """
     try:
         if target.exists() and target.stat().st_size == source.stat().st_size:
             return "skipped"
-        target.parent.mkdir(parents=True, exist_ok=True)
-        # Copy to a sidecar then rename, so an interrupted transfer never leaves
-        # a half-written file that the next run would mistake for complete.
-        staging = target.with_name(target.name + ".part")
-        shutil.copyfile(source, staging)
-        staging.replace(target)
-        return "copied"
-    except Exception as error:
-        print(f"  ! {target.name}: {str(error)[:70]}", flush=True)
-        return "failed"
+    except OSError:
+        pass
+    for attempt in range(1, tries + 1):
+        try:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            # Copy to a sidecar then rename, so an interrupted transfer never
+            # leaves a half-written file the next run mistakes for complete.
+            staging = target.with_name(target.name + ".part")
+            shutil.copyfile(source, staging)
+            staging.replace(target)
+            return "copied"
+        except Exception as error:
+            if attempt == tries:
+                print(f"  ! {target.parent.name}/{target.name}: {str(error)[:90]}", flush=True)
+                return "failed"
+            time.sleep(attempt * 2)
+    return "failed"
 
 
 def main() -> None:
@@ -80,6 +94,10 @@ def main() -> None:
             continue
         destination = args.share / game_zh / character / "skins" / variant / name
         tally[copy_verified(master, destination)] += 1
+        # A short breath every few files keeps the share from being overrun; the
+        # unthrottled run failed 240 of 612.
+        if index % 8 == 0:
+            time.sleep(0.4)
 
         if name == "light.png":
             seen_variants += 1

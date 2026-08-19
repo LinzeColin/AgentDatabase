@@ -1,0 +1,10 @@
+{
+  "name": "HarnessUI 角色背板",
+  "tagline": "原神 / 崩铁 / 绝区零 全量女角色，304 个变体昼夜成对",
+  "tags": ["角色", "全量库", "轮播"],
+  "author": "HarnessUI",
+  "accent": "#c58fb0",
+  "library": true,
+  "catalog": "assets/catalog.json",
+  "note": "多变体库：具体角色由外壳的 HarnessUI 菜单选择，不是一套固定画面"
+}

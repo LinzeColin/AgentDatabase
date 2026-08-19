@@ -1,0 +1,81 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><title>HarnessUI 角色库</title>
+<style>
+  :root{color-scheme:light dark}
+  body{margin:0;font:14px/1.5 -apple-system,"PingFang SC",sans-serif;background:#f6f5f8;color:#231a26}
+  @media (prefers-color-scheme:dark){body{background:#14101a;color:#ece4f0}}
+  header{position:sticky;top:0;z-index:9;padding:13px 18px;backdrop-filter:blur(12px);
+    background:color-mix(in srgb, canvas 84%, transparent);border-bottom:1px solid #8883}
+  h1{margin:0 0 9px;font-size:15px;font-weight:650}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  input[type=search],select{padding:6px 10px;border-radius:8px;border:1px solid #8885;
+    background:transparent;color:inherit;font-size:13px}
+  input[type=search]{flex:1;min-width:170px}
+  button{padding:6px 12px;border-radius:8px;border:1px solid #8885;background:transparent;
+    color:inherit;font-size:13px;cursor:pointer}
+  button.on{background:#c58fb0;border-color:#c58fb0;color:#25141f}
+  #count{font-size:12px;opacity:.62;margin-left:auto}
+  #grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(206px,1fr));gap:13px;padding:16px}
+  .card{border:1px solid #8883;border-radius:11px;overflow:hidden;cursor:pointer;background:#8881;
+    transition:transform .12s ease,box-shadow .12s ease}
+  .card:hover{transform:translateY(-2px);box-shadow:0 8px 20px #0003}
+  .card.active{outline:2px solid #c58fb0;outline-offset:1px}
+  .thumb{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#8882}
+  .meta{padding:7px 10px}
+  .name{font-weight:600;font-size:13px}
+  .sub{font-size:11px;opacity:.6}
+</style></head><body>
+<header>
+  <h1>HarnessUI 角色库 <span id="count"></span></h1>
+  <div class="row">
+    <select id="game"><option value="">全部游戏</option></select>
+    <input type="search" id="q" placeholder="搜角色 / 变体…">
+    <button id="single">单一角色</button>
+    <button id="shuffle">全库轮播</button>
+  </div>
+</header>
+<div id="grid"></div>
+<script>
+let list = [], st = {};
+const grid = document.getElementById("grid");
+const paintMode = () => {
+  document.getElementById("single").classList.toggle("on", st.mode !== "rotate");
+  document.getElementById("shuffle").classList.toggle("on", st.mode === "rotate");
+};
+function render(){
+  const g = document.getElementById("game").value;
+  const kw = document.getElementById("q").value.trim().toLowerCase();
+  const rows = list.filter(e => (!g || e.game === g) &&
+    (!kw || e.character.includes(kw) || e.variant.includes(kw)));
+  document.getElementById("count").textContent = `${rows.length} / ${list.length} 个变体`;
+  grid.textContent = "";
+  const frag = document.createDocumentFragment();
+  for (const e of rows){
+    const el = document.createElement("div");
+    el.className = "card" + (e.id === st.selected ? " active" : "");
+    const img = document.createElement("img");
+    img.className = "thumb"; img.loading = "lazy"; img.src = e.thumbFile; img.alt = e.character;
+    const meta = document.createElement("div"); meta.className = "meta";
+    const n = document.createElement("div"); n.className = "name"; n.textContent = e.character;
+    const s2 = document.createElement("div"); s2.className = "sub";
+    s2.textContent = `${e.gameName}${e.variant === "default" ? "" : " · " + e.variant}`;
+    meta.append(n, s2); el.append(img, meta);
+    el.onclick = async () => { st = await window.harnessAPI.pick(e.id); paintMode(); render(); };
+    frag.appendChild(el);
+  }
+  grid.appendChild(frag);
+}
+document.getElementById("single").onclick  = async () => { st = await window.harnessAPI.mode("gallery"); paintMode(); render(); };
+document.getElementById("shuffle").onclick = async () => { st = await window.harnessAPI.mode("rotate");  paintMode(); render(); };
+window.harnessAPI.onChanged(s => { st = s; paintMode(); render(); });
+(async () => {
+  list = await window.harnessAPI.list();
+  st   = await window.harnessAPI.state();
+  const sel = document.getElementById("game");
+  for (const g of [...new Set(list.map(e => e.game))]) {
+    const o = document.createElement("option");
+    o.value = g; o.textContent = list.find(e => e.game === g).gameName; sel.appendChild(o);
+  }
+  sel.onchange = render; document.getElementById("q").oninput = render;
+  paintMode(); render();
+})();
+</script></body></html>

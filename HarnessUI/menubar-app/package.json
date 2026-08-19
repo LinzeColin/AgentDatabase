@@ -1,0 +1,7 @@
+{
+  "name": "harness-ui-menubar",
+  "version": "1.0.0",
+  "description": "HarnessUI 皮肤菜单栏控制器（同时驱动 DSH 与 Kimi Code）",
+  "main": "main.js",
+  "private": true
+}

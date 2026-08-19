@@ -1,0 +1,85 @@
+/* HarnessUI 角色背板
+   稳定性约定与其他皮肤一致：只覆盖 :root 变量 + 用 #app 铺图，不碰任何压缩类名。
+
+   与其他皮肤不同的一点：画面不是写死的。#app 的背景读两个自定义变量，
+   由外壳在切换角色时 setProperty 进来 —— 304 个变体不可能各写一份 CSS，
+   而换一次角色只改一个变量，比重新注入整段样式快得多，也不会闪。 */
+
+:root, html[data-color-scheme="light"], html[data-color-scheme="system"] {
+  --color-bg: #f4f0f5;
+  --bg: rgba(248, 244, 249, .34);
+  --canvas: rgba(248, 244, 249, .48);
+  --color-surface: rgba(250, 246, 250, .74);
+  --color-surface-raised: rgba(253, 251, 253, .88);
+  --color-surface-overlay: rgba(253, 251, 253, .95);
+  --color-surface-sunken: rgba(238, 230, 240, .70);
+  --color-surface-deep: rgba(238, 230, 240, .62);
+  --color-sidebar-bg: rgba(246, 241, 247, .44);
+  --color-sidebar-tint: rgba(255, 255, 255, .30);
+  --panel: rgba(250, 246, 250, .74);
+  --panel2: rgba(120, 85, 115, .08);
+  --color-well: rgba(238, 230, 240, .60);
+  --color-menu-bg: rgba(252, 249, 252, .96);
+  --color-composer-bg: rgba(253, 251, 253, .90);
+  --color-user-bubble-bg: rgba(243, 232, 242, .86);
+
+  --color-text: #2a1f2c; --color-text-strong: #170f19;
+  --color-text-muted: rgba(42, 31, 44, .68); --color-text-faint: rgba(42, 31, 44, .45);
+  --dim: rgba(42, 31, 44, .68); --muted: rgba(42, 31, 44, .5); --faint: rgba(42, 31, 44, .32);
+
+  --color-accent: #c58fb0; --blue: #c58fb0; --logo: #a8628a;
+  --color-accent-hover: #b0789c; --blue2: #b0789c;
+  --color-accent-soft: rgba(197, 143, 176, .16); --soft: rgba(197, 143, 176, .16);
+  --bluebg: rgba(197, 143, 176, .14); --color-accent-bd: rgba(197, 143, 176, .45);
+  --p-selection: rgba(197, 143, 176, .30);
+}
+
+html[data-color-scheme="dark"], :root[data-color-scheme="dark"],
+html[data-color-scheme="dark"] :root {
+  --color-bg: #150f18;
+  --bg: rgba(21, 15, 24, .36);
+  --canvas: rgba(21, 15, 24, .50);
+  --color-surface: rgba(30, 22, 34, .74);
+  --color-surface-raised: rgba(38, 28, 43, .88);
+  --color-surface-overlay: rgba(38, 28, 43, .95);
+  --color-surface-sunken: rgba(17, 12, 20, .72);
+  --color-surface-deep: rgba(17, 12, 20, .64);
+  --color-sidebar-bg: rgba(21, 15, 24, .46);
+  --color-sidebar-tint: rgba(255, 255, 255, .05);
+  --panel: rgba(30, 22, 34, .74);
+  --panel2: rgba(210, 180, 205, .08);
+  --color-well: rgba(17, 12, 20, .62);
+  --color-menu-bg: rgba(28, 20, 32, .96);
+  --color-composer-bg: rgba(34, 25, 38, .90);
+  --color-user-bubble-bg: rgba(48, 34, 52, .86);
+
+  --color-text: #f0e6f2; --color-text-strong: #fdf8fe;
+  --color-text-muted: rgba(240, 230, 242, .70); --color-text-faint: rgba(240, 230, 242, .46);
+  --dim: rgba(240, 230, 242, .70); --muted: rgba(240, 230, 242, .5); --faint: rgba(240, 230, 242, .32);
+
+  --color-accent: #dda8c4; --blue: #dda8c4; --logo: #dda8c4;
+  --color-accent-hover: #ecc0d8; --blue2: #ecc0d8;
+  --color-accent-soft: rgba(221, 168, 196, .18); --soft: rgba(221, 168, 196, .18);
+  --bluebg: rgba(221, 168, 196, .15); --color-accent-bd: rgba(221, 168, 196, .48);
+  --p-selection: rgba(221, 168, 196, .32);
+}
+
+body { background-color: transparent !important; }
+#app, .app { background-color: transparent !important; }
+
+#app {
+  background-image: var(--hu-scene, none) !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  background-color: #efe6f0 !important;
+  /* 一次性过渡，绝不用 infinite 动画 —— 那是 DSH 那次 111% CPU 的真因 */
+  transition: background-image 320ms ease;
+}
+html[data-color-scheme="dark"] #app {
+  background-image: var(--hu-scene-dark, var(--hu-scene, none)) !important;
+  background-color: #120d15 !important;
+}
+/* 角色立绘压在左三分之一，正文区给一点毛玻璃，字才压得住画面 */
+.app { backdrop-filter: blur(2px) saturate(1.04); }
