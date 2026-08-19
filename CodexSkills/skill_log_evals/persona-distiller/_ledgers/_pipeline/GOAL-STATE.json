@@ -1,10 +1,10 @@
 {
- "round": 10,
- "updated_at": "2026-08-19T11:05AEST",
+ "round": 11,
+ "updated_at": "2026-08-19T15:30AEST",
  "time_band": "valley-until-1100",
- "people": 112,
+ "people": 113,
  "current_person": null,
- "stage": "P0 收尾：10 入库 + 2 结案；下一步 P1 队列补齐",
+ "stage": "P2 流水线：James Watt #31 已入库(113/600)，delta +0.107",
  "next": "Kant#179(33题, rubric输入已备)",
  "p0_queue": [
   "Brandeis#172:32",
@@ -46,7 +46,8 @@
   "Rousseau",
   "Pestalozzi",
   "Frobel",
-  "Michelangelo"
+  "Michelangelo",
+  "Watt"
  ],
  "p0_closed": [
   "Lincoln(装置不成立)",
