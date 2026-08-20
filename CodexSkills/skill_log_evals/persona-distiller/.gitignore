@@ -87,3 +87,21 @@
 **/*.tar.gz
 **/*.tgz
 **/*.zip
+
+# ⑥ `_refetch/items/` —— 第六类，2026-08-20 补。抬头那句「整类没有规则」又中了一次：
+#   ①~⑤ 五条按名字盖 raw / references / _fetch-staging / _rederived / 归档，
+#   **`_refetch/` 五个名字一个都不占**，于是 Adams #131 的 21 份正文（63.1 MB，
+#   单份最大 19.0 MB）一直是被跟踪的，只是 pre-push 钩子不看体积、没人发现。
+#   是 `repository_hygiene_audit` 在 PR 上报出来的 —— 而那条审计**不在 main 的必跑集里**，
+#   所以它红了不知道多久。
+#
+#   同目录的 `_fetch-manifest.json` 已经是完整指针：21/21 都有 sha256 + archive.org 直链，
+#   逐字节重建后能对上（2026-08-20 实测 21 对 21）。正文因此不必进仓。
+#   旧内容也仍在 git 历史里：`git log --all -- '<路径>'`。
+#   ★ 只挡正文，`items.json` / `_fetch-manifest.json` 必须留下 —— 它们就是重建依据。
+**/_refetch/**/*.txt
+**/_refetch/**/*.xml
+**/_refetch/**/*.pdf
+**/_refetch/**/*.djvu
+**/_refetch/**/*.html
+**/_refetch/**/*.htm

@@ -192,6 +192,81 @@ class RepositoryHygieneAuditTests(unittest.TestCase):
             ],
         )
 
+    def test_persona_distiller_large_object_ceilings_are_exact(self) -> None:
+        """2026-08-20 新开的三个 2 MiB 口子：每个都要能挡住多一个字节。
+
+        白名单是「口子」不是「豁免」—— 只加条目不加负控，等于把上界写成无穷。
+        """
+        cap = 2 * 1024 * 1024
+        pd = "CodexSkills/skill_log_evals/persona-distiller"
+        prefixes = (
+            f"{pd}/_ledgers/",
+            f"{pd}/_corpora/wip-galen-101/raw/",
+            "CodexSkills/registry/codex/persona-distiller-group/evidence/",
+        )
+        for prefix in prefixes:
+            with self.subTest(prefix=prefix):
+                violations = hygiene.evaluate_inventory(
+                    {
+                        f"{prefix}at_ceiling.json": cap,
+                        f"{prefix}over_ceiling.json": cap + 1,
+                    },
+                    self.policy,
+                )
+                self.assertEqual(
+                    violations,
+                    [
+                        {
+                            "path": f"{prefix}over_ceiling.json",
+                            "reason": "tracked_blob_exceeds_bound",
+                            "bytes": cap + 1,
+                            "max_bytes": cap,
+                        }
+                    ],
+                )
+
+    def test_persona_distiller_refetch_bodies_stay_untracked(self) -> None:
+        """_refetch/items/ 的正文若再被跟踪，必须重新报错。
+
+        它们是 2026-08-20 之前唯一没被 .gitignore 五条规则盖到的一类，
+        63.1 MB 就是这么混进来的。规则删掉后这条会红。
+        """
+        body = (
+            f"CodexSkills/skill_log_evals/persona-distiller/_corpora/"
+            f"wip-adams-131/workspaces/comfort-avery-adams/_refetch/items/"
+            f"whoswhoinenginee00leon.txt"
+        )
+        violations = hygiene.evaluate_inventory({body: 19_005_952}, self.policy)
+        self.assertEqual(
+            [row["reason"] for row in violations], ["tracked_blob_exceeds_bound"]
+        )
+
+    def test_new_persona_archives_are_allowlisted_one_by_one(self) -> None:
+        """新加的 8 个交付物 zip 沿用既有 108 条的样式：精确到文件，不是目录前缀。
+
+        写成目录前缀的话，往那棵树里塞任何 zip 都不会被发现。
+        """
+        approved = (
+            "CodexSkills/registry/codex/persona-distiller-group/财务合规师/"
+            "walter-a-shewhart/versions/0.0.0.1/"
+            "walter-a-shewhart-persona-distillation-delivery-v0.0.0.1.zip"
+        )
+        self.assertIn(approved, self.policy["allowed_archive_prefixes"])
+        nearby = f"{approved}.copy.zip"
+        violations = hygiene.evaluate_inventory(
+            {approved: 73_530, nearby: 73_530}, self.policy
+        )
+        self.assertEqual(
+            violations,
+            [
+                {
+                    "path": nearby,
+                    "reason": "unapproved_tracked_archive",
+                    "bytes": 73_530,
+                }
+            ],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
