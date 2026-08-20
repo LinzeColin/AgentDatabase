@@ -32,7 +32,10 @@ class VerificationPolicyTests(unittest.TestCase):
         result = self.runner.validate_policy(DATABASE_DIR, POLICY)
 
         self.assertEqual(result["status"], "PASS", result["errors"])
-        self.assertEqual(result["metrics"]["test_file_count"], 94)
+        # 这个数字必须和 tests/test_*.py 的实际个数一致。
+        # 新增测试文件时要同时改这里和 verification_policy.json 的 test_files ——
+        # 只改一边，这条「零漂移」守卫本身就成了漂移源（2026-08-20 实际发生过一次）。
+        self.assertEqual(result["metrics"]["test_file_count"], 95)
         for metric in (
             "unowned_test_count",
             "multi_owned_test_count",
@@ -66,7 +69,7 @@ class VerificationPolicyTests(unittest.TestCase):
 
         self.assertEqual(executable, ["fast", "unit", "security", "integration"])
         self.assertEqual(len(files), len(set(files)))
-        self.assertEqual(len(files), 94)
+        self.assertEqual(len(files), 95)
 
 
 if __name__ == "__main__":

@@ -104,6 +104,7 @@
         "tests/test_memory_atlas_launcher.py",
         "tests/test_memory_atlas_live_snapshot_api_v32.py",
         "tests/test_memory_atlas_live_snapshot_publish_v32.py",
+        "tests/test_memory_atlas_local_agent_source_registry.py",
         "tests/test_memory_atlas_owner_daily.py",
         "tests/test_memory_atlas_paths.py",
         "tests/test_memory_atlas_private_v31.py",
