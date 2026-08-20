@@ -78,6 +78,17 @@ def digest(path):
 一步判据：从**另一条路径**看同一个共享（另一个挂载点、或者 `smbutil view`
 确认服务端还在）。实测数据一张没少，坏的只是那个挂载点的目录缓存。
 
+**修法是挂到新挂载点，不是重挂旧的。** 坏掉的挂载点
+`umount` 报 `Invalid argument`，`mount_smbfs` 报 `File exists`，两条都走不通。
+
+```bash
+mkdir -p ~/mnt/share3
+mount_smbfs -N //GUEST@192.168.0.1/share ~/mnt/share3
+```
+
+新挂载点立刻是完整视图。**退化是渐进的**：先是某个目录只列出一部分子目录，
+再是 `ls` 列得出目录但单个文件 `stat` 不到。看到第一种就该换挂载点了。
+
 > 另：别在 SMB 上跑 `du -sh` / 全量 `find`，会超时；要数数就按子目录分别数。
 
 ## git

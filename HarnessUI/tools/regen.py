@@ -35,7 +35,15 @@ FIX = ("\n\nCRITICAL ANATOMY REQUIREMENTS — the previous attempt failed on the
        "may emerge from the waist, ribs, armpit or back. Exactly two hands, five fingers "
        "each, with a visible thumb. Exactly two legs. Every prop, weapon, ribbon and "
        "accessory must have a visible attachment point — nothing floating unattached. "
-       "No duplicated or fused body parts.")
+       "No duplicated or fused body parts. "
+       # 2026-08-21 新增：普罗米娅那两张是「头朝正面、躯干却背对镜头」，
+       # 四肢数目全对，所以上面每一条都通过了，缺陷仍然一眼可见。
+       "HEAD AND TORSO MUST FACE CONSISTENTLY: the direction the face looks and the "
+       "direction the chest, shoulders and hips face must differ by no more than a "
+       "natural head turn (about 45 degrees). Never render a frontal face on a torso "
+       "that is turned away from the viewer, and never show the back of the body "
+       "together with a front-facing head. The neck must connect the head to the "
+       "shoulders on the anatomically correct side.")
 
 
 def anchor_and_prompt(task_id: str, side: str, pack: pathlib.Path):

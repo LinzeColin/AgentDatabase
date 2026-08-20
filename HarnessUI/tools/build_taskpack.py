@@ -75,11 +75,20 @@ PROMPT = (
     # v1.5 写的是 "sheer tights where the design allows"——那个 where 是逃生口，
     # 角色原设穿长裤时模型直接跳过，而同一段又要求严格照锚图，两条打架。
     # v1.7 把冲突显式裁决掉：身份照锚图，服装按规则，冲突时规则赢。
-    "MANDATORY WARDROBE — applies to every character without exception: sheer stockings, "
-    "tights or thighhighs on fully visible legs. Where the canonical design has trousers, "
-    "greaves or armoured legs, restyle the legwear into sheer stockings or thighhighs while "
-    "keeping that design's own colours, patterns and trim. The silhouette is open and "
-    "skin-revealing — bare shoulders, arms, thighs and décolletage. "
+    # v0.0.1：用户要求把 pin-up 取向拉满。上限由 gpt-image-2 的安全系统定，
+    # 不由这段文字定——今晚实测过两次拒绝（重试通过），越界它直接不出图。
+    "MANDATORY WARDROBE AND PRESENTATION — applies to every character without exception, "
+    "this is glamour pin-up art and the wardrobe rule is not optional: sheer stockings, "
+    "tights or thighhighs on fully visible legs, worn with visible garter straps. Where the "
+    "canonical design has trousers, greaves or armoured legs, restyle the legwear into sheer "
+    "stockings or thighhighs while keeping that design's own colours, patterns and trim. "
+    "The silhouette is maximally skin-revealing: bare shoulders, bare arms, bare midriff, "
+    "fully bare thighs above the stocking band, and a deep plunging neckline. Favour "
+    "high-cut leotard, micro-skirt, bodysuit and open-side silhouettes over anything that "
+    "covers the hips or waist. "
+    "PIN-UP DIRECTION: emphasise the unbroken leg line from hip to ankle and the bust line; "
+    "the pose is consciously alluring and suggestive — weight on one hip, arched back, "
+    "chin slightly lowered, direct eye contact with the viewer. "
     "PRECEDENCE: character IDENTITY (face, hair colour and style, eye colour, signature "
     "accessories, colour palette) matches the reference exactly; WARDROBE STYLING follows "
     "this paragraph and overrides the reference wherever the two conflict. "
@@ -88,7 +97,15 @@ PROMPT = (
     "the figure and ALL flowing hair, skirt, weapon and effects stay inside the left 35% of the "
     "image. The RIGHT 65% is deliberately empty: {scene}, rendered low-detail, low-contrast, "
     "atmospheric and out of focus, with nothing readable in it. Nothing occupies the bottom "
-    "centre of the frame. The character faces the viewer or looks right, never away. "
+    # 用户点名「避免这种姿势」：指的是背对/侧转到能看见后背的姿势。
+    # 普罗米娅那四张返工两轮都还在转身，所以改成显式禁止，不再靠「never away」这种弱措辞。
+    "centre of the frame. "
+    "ORIENTATION (hard rule): the character faces the viewer squarely — chest, hips and face "
+    "all oriented toward the camera within about 30 degrees of frontal. NEVER show the "
+    "character's back, spine, shoulder blades or rear; no turned-away pose, no "
+    "over-the-shoulder glance, no three-quarter-rear view. Head and torso face the same way: "
+    "the difference between where the face looks and where the chest points must not exceed "
+    "a natural head turn of about 45 degrees. "
     "LIGHT: {light}. "
     "Clean rendering, correct anatomy, five fingers per hand, symmetrical features, "
     "crisp linework, no compression artefacts. "
