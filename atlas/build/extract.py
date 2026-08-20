@@ -580,6 +580,8 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
     stats = {"source": name, "root": redact(str(root)), "exists": root.is_dir(),
              "files": 0, "parsed": 0, "cached": 0, "failed": 0, "bytes": 0}
     if not root.is_dir():
+        if out.is_file() and out.stat().st_size > 0:
+            stats["degraded"] = f"来源目录不存在：{redact(str(root))}；已保留旧产物，未覆盖"
         return stats
 
     cache = {}
@@ -593,6 +595,7 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
                 cache[r["_k"]] = r
 
     records = []
+    prior = len(cache)
     for path in sorted(root.glob(cfg["glob"])):
         if not path.is_file() or path.name.startswith("."):
             continue
@@ -631,6 +634,14 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
         records.append(rec)
         stats["parsed"] += 1
 
+    # 防倒退门：上一轮有记录、这一轮一个文件都没扫到 —— 那几乎一定是路径解析
+    # 或挂载出了问题，不是数据真的没了。此时**不覆盖**旧产物，并让整轮失败。
+    # 实测踩过：仓根解析错，chatgpt 归档从 379 个文件掉到 0，产物被清空，
+    # 2025-11 到 2026-05 的历史静默消失，而流程照样报成功。
+    if not records and prior:
+        stats["degraded"] = f"上一轮有 {prior} 条，这一轮扫到 0 个文件；已保留旧产物，未覆盖"
+        return stats
+
     # 批处理判定要看整个来源，所以放在写盘前、缓存复用之后 ——
     # 复用回来的记录也要重新参与分组，否则增量跑会漏标。
     stats["batched"] = mark_batches(records)
@@ -667,6 +678,9 @@ def main() -> int:
             cfg["root"] = repo / cfg["root"]
         s = extract_source(n, cfg, outdir, args.full)
         all_stats.append(s)
+        if s.get("degraded"):
+            print(f"  {n:16s} ✗ 倒退：{s['degraded']}", file=sys.stderr)
+            continue
         print(f"  {n:16s} 文件 {s['files']:5d}  新解析 {s['parsed']:5d}  复用 {s['cached']:5d}  "
               f"失败 {s['failed']:3d}  批处理 {s.get('batched', 0):4d}  {s['bytes']/1048576:8.1f}MB")
 
@@ -679,7 +693,12 @@ def main() -> int:
     (outdir / "extract_meta.json").write_text(
         json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
     ok = sum(1 for s in all_stats if s["exists"])
+    bad = [s for s in all_stats if s.get("degraded")]
     print(f"\n用时 {meta['elapsed_sec']}s，可读来源 {ok}/{len(all_stats)}")
+    if bad:
+        print(f"✗ {len(bad)} 个来源倒退，旧产物已保留未被覆盖。"
+              f"先修路径再跑，不要拿残缺数据发布。", file=sys.stderr)
+        return 2
     return 0 if ok else 1
 
 
