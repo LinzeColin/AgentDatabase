@@ -38,7 +38,8 @@ OWNER_CATEGORY = re.compile(r"^(?!Paid |Free |Bundled |\d)(.+?) Outfits$")
 # Original），正则会把它们当成角色名。Original 尤其要挡：那是角色的默认装，
 # 它的图就是 <Name> Full Sprite.png —— 和默认锚图同一个文件，收进来就是重复变体。
 SKIP_OWNERS = {"Character", "Traveler", "Trailblazer", "Rover",
-               "Deluxe", "Premium", "Signature", "Original", "Standard"}
+               "Deluxe", "Premium", "Signature", "Original", "Standard",
+               "Default", "Limited Board", "Shop", "Battle Pass"}
 
 
 def api(wiki: str, params: dict, *, timeout: int = 30) -> dict:
@@ -47,17 +48,25 @@ def api(wiki: str, params: dict, *, timeout: int = 30) -> dict:
         return json.load(response)
 
 
+# 换装分类不止一个：原神有 Outfits 149 + Alternate Outfits 7，
+# 崩铁有 22 + 5。只读第一个就漏掉后面那些。
+OUTFIT_CATS = ("Outfits", "Alternate Outfits", "Skins", "Costumes")
+
+
 def list_outfits(wiki: str) -> list[str]:
-    """Every page in Category:Outfits, following continuation."""
-    titles, cont = [], {}
-    while True:
-        data = api(wiki, {"action": "query", "list": "categorymembers",
-                          "cmtitle": "Category:Outfits", "cmlimit": 500,
-                          "format": "json", **cont})
-        titles += [m["title"] for m in data.get("query", {}).get("categorymembers", [])]
-        if "continue" not in data:
-            return [t for t in titles if t != "Outfits"]
-        cont = data["continue"]
+    """Every page in the outfit categories, following continuation, de-duplicated."""
+    seen: list[str] = []
+    for cat in OUTFIT_CATS:
+        cont: dict = {}
+        while True:
+            data = api(wiki, {"action": "query", "list": "categorymembers",
+                              "cmtitle": f"Category:{cat}", "cmlimit": 500,
+                              "format": "json", **cont})
+            seen += [m["title"] for m in data.get("query", {}).get("categorymembers", [])]
+            if "continue" not in data:
+                break
+            cont = data["continue"]
+    return [t for t in dict.fromkeys(seen) if t not in OUTFIT_CATS]
 
 
 def describe(wiki: str, titles: list[str]) -> dict[str, dict]:
@@ -75,39 +84,62 @@ def describe(wiki: str, titles: list[str]) -> dict[str, dict]:
                 if match and match.group(1) not in SKIP_OWNERS:
                     owners.append(match.group(1))
             categories = {c["title"].replace("Category:", "") for c in page.get("categories", [])}
+            original = page.get("original") or {}
             out[page["title"]] = {
-                "image": (page.get("original") or {}).get("source"),
-                "owners": [] if "Original Outfits" in categories else owners,
+                "image": original.get("source"),
+                # piprop=original 本来就带宽高，不用再反查一次 File: 标题
+                "size": (original.get("width"), original.get("height"))
+                        if original.get("width") else None,
+                "owners": [] if ({"Original Outfits", "Default Outfits"} & categories) else owners,
             }
         time.sleep(0.3)
     return out
 
 
-def portrait_file(wiki: str, titles: list[str]) -> dict[str, tuple[str, int, int]]:
-    """`<Outfit> Full Sprite.png` — the outfit's own character portrait.
+def portrait_file(wiki: str, titles: list[str], owners: dict) -> dict:
+    """换装自己的人物立绘。各 wiki 命名不同，所以试多套模式。
 
-    The page image is NOT reliably a portrait. On the Wuthering Waves wiki the
-    outfit page's nominated image is `<Outfit> Splash Art.png`, which is the
-    promo key art for the whole scene: 2048x1667 of room, with the character
-    small and reclining somewhere inside it. As an identity anchor that is
-    worthless — and one of them (Laurel Nymph) was refused outright by the
-    image API's safety system, twice, on both light and dark.
+    page image 不可靠：鸣潮的换装页 page image 是 `<Outfit> Splash Art.png`，
+    整幅场景宣传图 2048x1667，人物小小地躺在中间，当身份锚图等于没有锚。
+    但也不能一律要求 `Full Sprite`——异环用的是 `<Outfit> - Portrait.png`
+    和 `<角色> <Outfit> Portrait.png`，那条规则把它 73 套全挡了。
 
-    So ask for the sprite by name first and only fall back to the page image
-    when the wiki has none.
+    所以：先按模式找，找不到再退回 page image，**并且用尺寸兜底**——
+    真正要挡的场景宣传图一律是横构图。
     """
-    wanted = [f"File:{t} Full Sprite.png" for t in titles]
+    wanted: dict[str, list[str]] = {}
+    for title in titles:
+        pats = [f"File:{title} Full Sprite.png",
+                f"File:{title} - Portrait.png",
+                f"File:{title} Portrait.png",
+                f"File:{title} Sprite.png"]
+        for owner in owners.get(title, []):
+            pats.append(f"File:{owner} {title} Portrait.png")
+            pats.append(f"File:{owner} {title} Full Sprite.png")
+        wanted[title] = pats
+    flat = [p for pats in wanted.values() for p in pats]
     found: dict[str, tuple[str, int, int]] = {}
-    for start in range(0, len(wanted), 40):
-        data = api(wiki, {"action": "query", "titles": "|".join(wanted[start:start + 40]),
+    for start in range(0, len(flat), 40):
+        data = api(wiki, {"action": "query", "titles": "|".join(flat[start:start + 40]),
                           "prop": "imageinfo", "iiprop": "url|size", "format": "json"})
         for page in data.get("query", {}).get("pages", {}).values():
             info = (page.get("imageinfo") or [None])[0]
             if info and info.get("width"):
-                outfit = page["title"][5:-len(" Full Sprite.png")]
-                found[outfit] = (info["url"], info["width"], info["height"])
+                found[page["title"]] = (info["url"], info["width"], info["height"])
         time.sleep(0.25)
-    return found
+    out: dict[str, tuple[str, int, int]] = {}
+    for title, pats in wanted.items():
+        # 同名多个候选时挑竖构图里面积最大的
+        cands = [found[p] for p in pats if p in found]
+        upright = [c for c in cands if c[2] >= c[1] * 1.15]
+        if upright:
+            out[title] = max(upright, key=lambda c: c[1] * c[2])
+    return out
+
+
+def image_size(wiki: str, urls: dict) -> dict:
+    """page image 的尺寸，用来判断它是不是横构图的场景宣传图。"""
+    return urls
 
 
 def original_url(url: str) -> str:
@@ -150,7 +182,9 @@ def main() -> None:
     print(f"{game_zh}: Category:Outfits 共 {len(titles)} 套")
 
     pages = describe(wiki, titles)
-    sprites = portrait_file(wiki, titles)
+    # 归属先算出来，才能试 "<角色> <换装> Portrait.png" 这种带角色名的模式
+    owners_of = {title: info["owners"] for title, info in pages.items()}
+    sprites = portrait_file(wiki, titles, owners_of)
     grouped: dict[str, list[tuple[str, str]]] = defaultdict(list)
     orphans = []
     for title, info in pages.items():
@@ -161,9 +195,22 @@ def main() -> None:
             continue
         # 场景宣传图当不了身份锚图：人物在里面只占很小一块，
         # 而锚图是这条产线里角色还原度的唯一来源。
+        # 判据是**构图**不是文件名：场景宣传图一律是横的。
         if not sprite:
-            orphans.append(f"{title} (只有场景宣传图，没有 Full Sprite)")
-            continue
+            wh = info.get("size")
+            if not wh:
+                orphans.append(f"{title} (取不到 page image 尺寸)")
+                continue
+            # 两条独立的判据，别混在一起：
+            # 形状——真正的场景宣传图是明显横的（鸣潮 2048x1667=1.23、王者 1920x882=2.18）；
+            #        方图是正经立绘（Pearl 的 2048x2048 锚图出图很好），不许当横的挡掉。
+            # 尺寸——256x256 那些是图标，该挡，但理由是太小不是形状。
+            if wh[0] > wh[1] * 1.15:
+                orphans.append(f"{title} (横构图 {wh[0]}x{wh[1]}，是场景宣传图不是立绘)")
+                continue
+            if min(wh) < 600:
+                orphans.append(f"{title} (只有 {wh[0]}x{wh[1]}，是图标不是立绘)")
+                continue
         owner = next((o for o in info["owners"] if o in by_name), None)
         if owner is None:
             orphans.append(f"{title} (归属 {info['owners'] or '未知'} 不在女角色名单)")

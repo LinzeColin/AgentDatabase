@@ -23,6 +23,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import io
 import json
 import shutil
@@ -56,6 +57,10 @@ SCENES = {
     # 但换成竹林、云海、远山，避免和原神的金色海岸撞。
     "wuwa": "an open eastern landscape — drifting cloud sea over distant blue mountains, "
             "bamboo or willow far out of focus, clear luminous sky, no structures",
+    # 异环是现代都市异能题材，但「现代都市」正好是被禁的背景（BANNED_SCENERY），
+    # 所以取它世界观里不含建筑的那一半：海滨与公园的开阔处。
+    "nte": "an open waterside park at dusk — calm harbour water, distant soft treeline, "
+           "drifting light haze and scattered petals, wide gradient sky, no buildings",
 }
 
 # Never allow these, regardless of game. Each was produced and rejected in the
@@ -213,6 +218,7 @@ def main() -> None:
 
     anchors_dir = args.out / "anchors"
     tasks: list[dict] = []
+    jobs: list[tuple] = []
     packed = skipped = 0
     total_bytes = 0
 
@@ -238,7 +244,8 @@ def main() -> None:
 
             for variant_id, art_path, subject in variants:
                 rel = Path(game) / character["id"] / f"{variant_id}.jpg"
-                total_bytes += encode_anchor(art_path, anchors_dir / rel)
+                # 编码排队，最后并发跑：这一步是纯网络 IO，串行时 8 张要 2 分钟
+                jobs.append((art_path, anchors_dir / rel))
                 packed += 1
                 tasks.append({
                     "id": f"{game}/{character['id']}/{variant_id}",
@@ -259,6 +266,13 @@ def main() -> None:
                     "aspect_ratio": "16:9",
                     "min_width": 2048,
                 })
+
+    print(f"锚图编码中：{len(jobs)} 张（并发 12）…", flush=True)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
+        for n, size in enumerate(pool.map(lambda j: encode_anchor(*j), jobs), 1):
+            total_bytes += size
+            if n % 50 == 0:
+                print(f"  {n}/{len(jobs)}", flush=True)
 
     manifest = {
         "pack": "HarnessUI-skin-backplates",
