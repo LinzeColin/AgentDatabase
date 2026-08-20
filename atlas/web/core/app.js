@@ -379,6 +379,12 @@ export async function render() {
     const mod = await import(`../themes/${S.theme}/views/${name}.js`);
     current = (await mod.render(host, arg)) || null;
     scrollTo(0, 0);
+    // 主题级的收尾钩子。鎏金要用它把视图吐出来的册页接进翻页器 ——
+    // **这一步不能塞进视图里**：视图只该管内容，翻页是外壳的事。
+    if (themeMod && themeMod.afterRender) {
+      try { themeMod.afterRender(host, name, arg); }
+      catch (e) { console.warn('[atlas] 主题收尾钩子出错，不影响内容：', e && e.message); }
+    }
   } catch (e) {
     host.innerHTML = `<div class="warnbox"><b>这个视图打不开。</b>状态：断了。<br>${esc(e.message || e)}</div>`;
   }

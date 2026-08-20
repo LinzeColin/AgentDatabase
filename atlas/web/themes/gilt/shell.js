@@ -1,146 +1,207 @@
-import { esc, fmt, S, toggleRail, reduced, go } from '../../core/app.js';
+// 鎏金的外壳 —— 「金册」。v0.7.0 推翻重做。
+//
+// **和另外两套主题不共用任何标记。**
+// 琉璃是左轨 + 便当格，星云是天幕 + 中央台面，这里是**一本可以翻的册子**：
+// 书眉、册页、页码、目录页 —— 纸书有什么，这里就有什么，没有的就没有。
+//
+// 最要紧的一条：**页面不滚动。** 视图把内容切成册页，←/→ 翻。
+// 一屏放不下的部分由视图自己决定怎么分页，而不是靠用户一直往下滚。
+import { esc, S, NAV, VIEW_LIST, GROUP_OF, go, reduced } from '../../core/app.js';
+
 export const css = 'themes/gilt/shell.css';
 
-let hall = null, raf = 0, onScroll = null, onResize = null, last = 0;
-
-// 相机默认由滚动开（摇臂：滚动=换机位）。视图要接管就得说一声。
-// 这条纪律是从星云那边继承来的：两个司机同时踩油门，回放当场失效。
-let held = false;
-
-// 发号作废。startFoundry 是异步的（要 import three.js），而 applyTheme
-// 可能在它落地之前又跑一遍 —— 首屏恢复上次主题、紧接着用户手动切就是这个时序。
-// 号对不上就整份丢弃，否则会出现两套场景：一套在屏幕上跑，另一套接指令。
-let gen = 0;
+let codex = null, onResize = null, onVis = null, raf = 0, gen = 0;
+let page = 0, pages = 1;
 
 export function chrome(mount) {
   mount.innerHTML = `
-    <canvas id="foundry"></canvas>
-    <div id="vignette"></div>
-    <div id="ribbon"><i></i></div>
+    <canvas id="codexcv"></canvas>
     <div id="shell">
-      <aside id="rail">
-        <div class="brandrow">
-          <span class="brand">Memory Atlas</span>
-          <button id="railtog" title="折叠／展开" aria-label="折叠或展开左侧目录">◀</button>
-        </div>
-        <nav id="nav"></nav>
+      <header id="head">
+        <span class="fish" aria-hidden="true"></span>
+        <span class="ttl" id="htitle">Memory Atlas</span>
+        <span class="grp" id="hgrp"></span>
+        <span class="sp"></span>
+        <div id="stamp"></div>
+        <button id="tocbtn" aria-haspopup="dialog">目录</button>
         <div id="tools"></div>
-        <div id="railfoot"></div>
-      </aside>
-      <div id="stamp"></div>
-      <div id="hud"></div>
-      <main id="view"></main>
-      <footer id="foot"></footer>
-    </div>`;
-  const t = mount.querySelector('#railtog');
-  t.textContent = S.railOpen ? '◀' : '▶';
-  t.onclick = () => { toggleRail(); t.textContent = S.railOpen ? '◀' : '▶'; setTimeout(fit, 560); };
-  startFoundry();
+      </header>
+      <div id="book"><div id="leaves"><main id="view"></main></div></div>
+      <footer id="folio">
+        <button id="prev" aria-label="上一页">◀ 前页</button>
+        <span class="no" id="pno"></span>
+        <button id="next" aria-label="下一页">后页 ▶</button>
+      </footer>
+      <div id="foot"></div>
+    </div>
+    <div id="toc" role="dialog" aria-modal="true" aria-label="目录"><div class="in"></div></div>`;
+
+  buildToc(mount);
+  mount.querySelector('#prev').onclick = () => turn(page - 1);
+  mount.querySelector('#next').onclick = () => turn(page + 1);
+  bindSwipe(mount.querySelector('#book'));
+  addEventListener('hashchange', () => { paintHead(); });
+  paintHead();
+  startCodex();
 }
 
-function fit() { if (hall) hall.resize(); }
+/* ── 分页。core/app.js 每次渲染完视图会调这里 ── */
+export function afterRender() { relayout(); }
 
-async function startFoundry() {
-  stopFoundry();                 // 先收摊（它会 gen++ 让在途的作废）
-  const my = ++gen;              // 再领号 —— 顺序反了会把自己也作废掉
-  const cv = document.getElementById('foundry');
-  if (!cv || !S.atlas) return;
-  const { buildFoundry } = await import('../../core/foundry.js');
-  if (my !== gen) return;
-  hall = buildFoundry(cv, S.atlas, { mode: S.mode });
-  requestAnimationFrame(() => { if (my === gen && hall) hall.resize(); });
-
-  const hud = document.getElementById('hud');
-  const ribbon = document.getElementById('ribbon');
-  const bar = ribbon && ribbon.querySelector('i');
-  const still = reduced();       // 减少动态偏好：滚动不再带动相机（全屏 3D 跟滚是最典型的眩晕源）
-
-  onScroll = () => {
-    const max = Math.max(1, document.body.scrollHeight - innerHeight);
-    const p = Math.min(1, Math.max(0, scrollY / max));
-    if (bar) bar.style.height = (p * 100).toFixed(2) + '%';
-    if (ribbon) markRivets(ribbon, max);
-    if (held || still || !hall) return;
-    hall.flyTo(p);               // 往下滚 = 机位压低、绕到另一侧，绝不进队列内部
-  };
-  addEventListener('scroll', onScroll, { passive: true });
-  onResize = () => fit();
-  addEventListener('resize', onResize);
-
-  // 悬停一根柱：浮出当天的三个数。3D 里的可点性必须用文字宣告，不能只靠光效。
-  let hover = -1;
-  cv.style.cursor = 'grab';
-  cv.onpointermove = e => {
-    if (!hall) return;
-    const i = hall.pick(e.clientX, e.clientY);
-    if (i === hover) return;
-    hover = i;
-    cv.style.cursor = i >= 0 ? 'pointer' : 'grab';
-  };
-  cv.onpointerleave = () => { hover = -1; cv.style.cursor = 'grab'; };
-  cv.onclick = e => {
-    if (!hall) return;
-    const i = hall.pick(e.clientX, e.clientY);
-    const iso = i >= 0 && hall.dayOf(i);
-    if (iso) go('day', iso);
-  };
-
-  const st = hall.stats;
-  const tick = now => {
-    if (my !== gen || !hall) return;
-    const dt = Math.min(80, now - (last || now)); last = now;
-    hall.frame(reduced() ? 0 : dt);
-    if (hud) {
-      const info = hover >= 0 ? hall.dayInfo(hover) : null;
-      hud.innerHTML = info
-        ? `<b>${esc(info.d)}</b>　点开这一天<br>
-           你开口 ${info.human} · 机器 ${info.n - info.human} · token ${fmt((info.tok_in || 0) + (info.tok_out || 0))}`
-        : `停在 <b>${esc(hall.dayAt() || '—')}</b><br>
-           ${st.stele} 根碑 · ${st.weeks} 周 · ${st.seams ? '金缮已补' : '暂无金缮'}`;
-    }
-    raf = requestAnimationFrame(tick);
-  };
-  raf = requestAnimationFrame(tick);
-  onScroll();
-}
-
-/** 目次丝带上的铆钉：每个 sec 一颗，滚过变金。 */
-function markRivets(ribbon, max) {
-  const secs = [...document.querySelectorAll('#view .sec')];
-  let riv = [...ribbon.querySelectorAll('u')];
-  if (riv.length !== secs.length) {
-    riv.forEach(u => u.remove());
-    riv = secs.map(() => {
-      const u = document.createElement('u');
-      ribbon.appendChild(u);
-      return u;
-    });
+function relayout() {
+  const leaves = document.getElementById('leaves');
+  const view = document.getElementById('view');
+  if (!leaves || !view) return;
+  // 视图可以自己吐 .leaf；没吐就把整个 #view 当成单页。
+  const own = view.querySelectorAll(':scope > .leaf');
+  if (own.length) {
+    // 把视图产的册页提到 #leaves 下，#view 退成一个空壳容器
+    leaves.innerHTML = '';
+    own.forEach(l => leaves.appendChild(l));
+    leaves.appendChild(view);
+    view.style.display = 'none';
+  } else {
+    view.style.display = '';
+    view.classList.add('leaf');
   }
-  secs.forEach((s, i) => {
-    const top = s.getBoundingClientRect().top + scrollY;
-    riv[i].style.top = ((top / (max + innerHeight)) * 100).toFixed(2) + '%';
-    if (top - scrollY < innerHeight * 0.5) riv[i].setAttribute('data-on', '1');
-    else riv[i].removeAttribute('data-on');
+  pages = Math.max(1, leaves.querySelectorAll('.leaf').length);
+  page = 0;
+  leaves.classList.add('noanim');
+  apply();
+  requestAnimationFrame(() => leaves.classList.remove('noanim'));
+}
+
+function apply() {
+  const leaves = document.getElementById('leaves');
+  if (leaves) leaves.style.transform = `translateX(${-page * 100}%)`;
+  const pno = document.getElementById('pno');
+  if (pno) pno.innerHTML = `第 <b>${page + 1}</b> 页 / 共 ${pages} 页`;
+  const p = document.getElementById('prev'), n = document.getElementById('next');
+  if (p) p.disabled = page <= 0;
+  if (n) n.disabled = page >= pages - 1;
+  if (codex && codex.turnTo) codex.turnTo(pages > 1 ? page / (pages - 1) : 0);
+}
+
+function turn(to) {
+  const t = Math.max(0, Math.min(pages - 1, to));
+  if (t === page) return;
+  page = t;
+  apply();
+  // 翻页后把新页滚回顶部 —— 纸书翻页不会停在半截
+  const cur = document.getElementById('leaves')?.children[page];
+  if (cur) cur.scrollTop = 0;
+}
+
+/* ── 目录页。**整页的目录，不是侧栏** ── */
+function buildToc(root) {
+  const toc = root.querySelector('#toc');
+  const box = toc.querySelector('.in');
+  const paint = () => {
+    const cur = (location.hash.replace(/^#\/?/, '').split('/')[0]) || 'overview';
+    let n = 0;
+    box.innerHTML = `<div class="shutbar"><button class="shut">合上 ✕</button></div>
+      <h1>目录</h1>
+      <p class="sub">${esc((S.atlas && S.atlas.meta && S.atlas.meta.first_day) || '')} 起　共 ${VIEW_LIST.length} 篇</p>`
+      + NAV.map(g => `<div class="grp"><div class="gh">${esc(g.label)}</div>${
+        g.views.map(([v, l]) => {
+          n += 1;
+          return `<a href="#/${v}" data-v="${v}" ${v === cur ? 'aria-current="true"' : ''}>
+            <span>${esc(l)}</span><span class="dots"></span><span class="pg">${n}</span></a>`;
+        }).join('')}</div>`).join('');
+  };
+  root.querySelector('#tocbtn').onclick = () => { paint(); toc.classList.add('on'); };
+  toc.addEventListener('click', e => {
+    if (e.target.closest('.shut') || e.target === toc) return toc.classList.remove('on');
+    if (e.target.closest('a[data-v]')) toc.classList.remove('on');
   });
 }
 
-function stopFoundry() {
+function paintHead() {
+  const cur = (location.hash.replace(/^#\/?/, '').split('/')[0]) || 'overview';
+  const v = VIEW_LIST.find(x => x[0] === cur);
+  const g = NAV.find(x => x.id === GROUP_OF[cur]);
+  const t = document.getElementById('htitle'), gr = document.getElementById('hgrp');
+  if (t) t.textContent = v ? v[1] : 'Memory Atlas';
+  if (gr) gr.textContent = g ? g.label : '';
+}
+
+/* ── 翻页手势。册子必须能划 ── */
+function bindSwipe(el) {
+  if (!el) return;
+  let x0 = null, y0 = null;
+  el.addEventListener('touchstart', e => {
+    const t = e.touches[0]; x0 = t.clientX; y0 = t.clientY;
+  }, { passive: true });
+  el.addEventListener('touchend', e => {
+    if (x0 == null) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - x0, dy = t.clientY - y0;
+    // 竖向位移更大就是在读，不是在翻 —— 别把滚动当成翻页
+    if (Math.abs(dx) > 56 && Math.abs(dx) > Math.abs(dy) * 1.6) turn(page + (dx < 0 ? 1 : -1));
+    x0 = y0 = null;
+  }, { passive: true });
+}
+
+export function bindKeys(views, api) {
+  const onKey = e => {
+    const t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    if (e.key === 'Escape') { document.getElementById('toc')?.classList.remove('on'); return; }
+    if (e.key === 'm' || e.key === 'M') { e.preventDefault(); document.getElementById('tocbtn')?.click(); return; }
+    if (e.key === 't' || e.key === 'T') { e.preventDefault(); api.cycleTheme(); return; }
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); turn(page + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); turn(page - 1); }
+  };
+  addEventListener('keydown', onKey);
+  return () => { removeEventListener('keydown', onKey); stopCodex(); };
+}
+
+/* ── 金页。三维在这套主题里是**物件的材质**，不是可以飞进去的空间 ── */
+async function startCodex() {
+  stopCodex();
+  const my = ++gen;
+  if (reduced()) return;
+  try {
+    const { buildCodex } = await import('../../core/codex.js');
+    if (my !== gen) return;
+    const cv = document.getElementById('codexcv');
+    if (!cv || !S.atlas) return;
+    const built = buildCodex(cv, S.atlas, { mode: S.mode });
+    if (my !== gen) { try { built.dispose(); } catch { /* 收摊失败不拖垮切换 */ } return; }
+    codex = built;
+  } catch (e) {
+    console.warn('[gilt] 金页点不起来，退回纯二维：', e && e.message);
+    codex = null;
+    return;
+  }
+  // 先同步画一帧：页面在后台标签加载时 rAF 一次都不触发，
+  // 画布会永远是空的而代码看起来完全正常。
+  try { codex.frame(0); } catch { /* 首帧失败不拦后面 */ }
+
+  let last = performance.now();
+  (function tick(now) {
+    if (my !== gen || !codex) return;
+    const dt = Math.min(64, now - last); last = now;
+    if (!document.hidden) { try { codex.frame(dt); } catch { /* 单帧失败不拆循环 */ } }
+    raf = requestAnimationFrame(tick);
+  })(last);
+
+  onVis = () => {
+    if (document.hidden || my !== gen || !codex) return;
+    last = performance.now();
+    try { codex.frame(0); } catch { /* 同上 */ }
+  };
+  document.addEventListener('visibilitychange', onVis);
+  onResize = () => { try { codex.resize(); } catch { /* 同上 */ } };
+  addEventListener('resize', onResize);
+}
+
+function stopCodex() {
   gen++;
-  cancelAnimationFrame(raf); raf = 0;
-  if (onScroll) { removeEventListener('scroll', onScroll); onScroll = null; }
+  if (raf) { cancelAnimationFrame(raf); raf = 0; }
   if (onResize) { removeEventListener('resize', onResize); onResize = null; }
-  if (hall) { hall.dispose(); hall = null; }
+  if (onVis) { document.removeEventListener('visibilitychange', onVis); onVis = null; }
+  if (codex) { try { codex.dispose(); } catch { /* 已经没了 */ } codex = null; }
 }
 
-/** 视图可以直接把某一天推到镜头前 —— 点日历上的一格，碑林就摇过去。 */
-export function flyToDay(iso) { if (hall) hall.flyToDay(iso); }
-
-/** 接管／交还相机。接管的视图必须在 dispose 里交还，否则下一屏滚动就死了。 */
-export function holdCamera(on) {
-  held = !!on;
-  if (!on && hall) hall.releaseFocus();
-}
-
-export function bindKeys() {
-  return () => { held = false; stopFoundry(); };
-}
+export function scene() { return codex; }
