@@ -289,6 +289,73 @@ class GitHubCanonicalPublisher:
         if self.release_client is None:
             self.release_client = GithubReleaseClient(self.repo, _resolve_gh())
 
+    def _reuse_published_release(
+        self,
+        previous_manifest: Mapping[str, Any] | None,
+        *,
+        canonical_object_key: str,
+    ) -> dict[str, Any]:
+        """Prove and reuse the existing canonical release for an empty delta."""
+        if previous_manifest is None:
+            raise CanonicalSourceError("canonical_empty_delta_without_baseline")
+        if str(previous_manifest.get("object") or "") != canonical_object_key:
+            raise CanonicalSourceError("canonical_existing_object_mismatch")
+        release_tag = str(previous_manifest.get("release_tag") or "")
+        digest = str(previous_manifest.get("sha256") or "")
+        try:
+            expected_bytes = int(previous_manifest.get("bytes"))
+            unique_events = int(previous_manifest.get("unique_events"))
+        except (TypeError, ValueError) as exc:
+            raise CanonicalSourceError("canonical_existing_manifest_incomplete") from exc
+        if not release_tag or len(digest) != 64 or expected_bytes < 0 or unique_events < 0:
+            raise CanonicalSourceError("canonical_existing_manifest_incomplete")
+        release = self.release_client.view(release_tag)
+        if release.get("isDraft") is not False or release.get("tagName") != release_tag:
+            raise CanonicalSourceError("canonical_existing_release_state_invalid")
+        assets = {
+            str(row.get("name") or ""): row
+            for row in release.get("assets", [])
+            if isinstance(row, Mapping)
+        }
+        events = assets.get(EVENTS_ASSET)
+        manifest = assets.get(MANIFEST_ASSET)
+        try:
+            observed_bytes = int(events.get("size")) if events is not None else -1
+        except (TypeError, ValueError):
+            observed_bytes = -1
+        if (
+            events is None
+            or manifest is None
+            or observed_bytes != expected_bytes
+            or str(events.get("digest") or "") != f"sha256:{digest}"
+        ):
+            raise CanonicalSourceError("canonical_existing_release_metadata_invalid")
+        supersedes = [
+            str(value) for value in previous_manifest.get("supersedes", [])
+            if isinstance(value, str)
+        ]
+        return {
+            "schema_version": "memory_atlas.github_canonical_backup.v1",
+            "state": "PASS",
+            "provider": "github_private_release",
+            "object": canonical_object_key,
+            "sha256": digest,
+            "bytes": expected_bytes,
+            "unique_events": unique_events,
+            "release_tag": release_tag,
+            "release_url": str(release.get("url") or ""),
+            "remote_readback_verified": True,
+            "verification_method": "github_release_asset_digest",
+            "supersedes": supersedes,
+            "merge": {
+                "current_events": 0,
+                "previous_only_events": unique_events,
+                "unique_events": unique_events,
+            },
+            "retention_deleted_count": 0,
+            "billable_cloud_storage_requests": 0,
+        }
+
     def run(
         self,
         *,
@@ -307,6 +374,13 @@ class GitHubCanonicalPublisher:
             events_path = release_root / EVENTS_ASSET
             shutil.copyfile(delta_path, events_path)
             previous_manifest = self.source.manifest() if self.source is not None else None
+            if delta_path.stat().st_size == 0:
+                result = self._reuse_published_release(
+                    previous_manifest,
+                    canonical_object_key=canonical_object_key,
+                )
+                result["local_cleanup"] = {"state": "PASS", "remaining_paths": 0}
+                return result
             supersedes: set[str] = {normalized_object_key}
             merge = {
                 "current_events": _count_unique_events(events_path),
@@ -329,6 +403,13 @@ class GitHubCanonicalPublisher:
                 previous_events.unlink(missing_ok=True)
 
             digest = sha256_file(events_path)
+            if previous_manifest is not None and digest == str(previous_manifest.get("sha256") or ""):
+                result = self._reuse_published_release(
+                    previous_manifest,
+                    canonical_object_key=canonical_object_key,
+                )
+                result["local_cleanup"] = {"state": "PASS", "remaining_paths": 0}
+                return result
             manifest = {
                 "schema_version": MANIFEST_SCHEMA,
                 "object": canonical_object_key,

@@ -622,11 +622,7 @@ class PrivateReleaseBackup:
             self.release_client = release_client
 
     def _preflight(self, logical_source_set: Iterable[str]) -> None:
-        observed_sources = tuple(logical_source_set)
-        if len(observed_sources) != len(self.policy.logical_sources) or set(observed_sources) != set(
-            self.policy.logical_sources
-        ):
-            raise PrivateReleaseBackupError("logical_source_contract_mismatch")
+        self.validate_logical_source_set(logical_source_set)
         self.release_client.assert_private_repository()
         identity = self.identity_loader()
         try:
@@ -635,6 +631,13 @@ class PrivateReleaseBackup:
         finally:
             for index in range(len(identity)):
                 identity[index] = 0
+
+    def validate_logical_source_set(self, logical_source_set: Iterable[str]) -> None:
+        observed_sources = tuple(logical_source_set)
+        if len(observed_sources) != len(self.policy.logical_sources) or set(observed_sources) != set(
+            self.policy.logical_sources
+        ):
+            raise PrivateReleaseBackupError("logical_source_contract_mismatch")
 
     def run(
         self,

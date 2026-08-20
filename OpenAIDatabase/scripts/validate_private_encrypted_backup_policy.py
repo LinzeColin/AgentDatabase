@@ -27,12 +27,54 @@ DEFAULT_POLICY = Path("config/storage/private_encrypted_backup_policy.json")
 DEFAULT_PUBLIC_POLICY = Path("config/storage/public_encrypted_backup_policy.json")
 EXPECTED_LOGICAL_SOURCES = [
     "codex_state",
-    "codex_memories",
     "codex_sessions",
     "codex_archived_sessions",
+    "codex_memories",
     "codex_attachments",
     "codex_automations",
     "codex_tasks",
+    "codex_skills",
+    "shared_agent_skills",
+    "claude_projects",
+    "claude_sessions",
+    "claude_tasks",
+    "claude_scheduled_tasks",
+    "claude_skills",
+    "dsh_sessions",
+    "dsh_attachments",
+    "dsh_cron_configuration",
+    "dsh_archived_sessions",
+    "kimi_code_sessions",
+    "kimi_code_user_history",
+    "kimi_code_file_state",
+    "kimi_code_files",
+    "kimi_code_cron_configuration",
+    "workbuddy_state_database",
+    "workbuddy_projects",
+    "workbuddy_sessions",
+    "workbuddy_tasks",
+    "workbuddy_plans",
+    "workbuddy_memory",
+    "workbuddy_skills",
+    "workbuddy_automation_backups",
+    "workbuddy_workspace",
+    "workbuddy_file_history",
+    "workbuddy_artifact_index",
+    "workbuddy_audit_log",
+    "automation_reports",
+    "codex_configuration",
+    "claude_backups",
+    "claude_hooks",
+    "dsh_profiles",
+    "dsh_storages",
+    "dsh_plugins",
+    "dsh_cron_flags",
+    "dsh_cron_logs",
+    "dsh_patches",
+    "kimi_code_server_state",
+    "workbuddy_project_resources",
+    "workbuddy_plugins",
+    "workbuddy_connectors",
     "chatgpt_exports",
     "openaidatabase_live_data",
     "verified_evidence_adapters",
@@ -177,10 +219,13 @@ def validate_policy(
                 "automatic_follow_up_task_allowed",
                 "shared_cwd_write_allowed",
                 "local_script_creation_allowed",
-                "local_persistent_state_allowed",
             )
         )
-        or automation.get("system_temporary_directory_only") is not True
+        or automation.get("system_temporary_directory_only") is not False
+        or automation.get("ephemeral_payload_workspace_required") is not True
+        or automation.get("local_persistent_state_allowed") is not True
+        or automation.get("persistent_state_scope")
+        != "protected_incremental_journal_and_deduplication_index_only"
         or automation.get("release_creation_requires_all_preflight") is not True
         or automation.get("private_identity_unavailable_action") != "ESCALATE"
         or automation.get("source_snapshot_unstable_action") != "STOP"
@@ -197,7 +242,7 @@ def validate_policy(
         "key_id": unified_key["key_id"],
         "release_repository": release["repository"],
         "release_transport": release["transport"],
-        "workspace_isolation": "system_temporary_directory_only",
+        "workspace_isolation": "protected_incremental_journal_plus_system_temporary_payloads",
     }
 
 

@@ -1549,6 +1549,64 @@ def test_private_release_workflow_verifies_remote_restore_and_cleans_local_paylo
     assert not (tmp_path / "private-github-release").exists()
 
 
+def test_canonical_publisher_reuses_a_verified_release_for_an_empty_delta(tmp_path: Path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.canonical_source import GitHubCanonicalPublisher
+
+    canonical_object = "primary-objects/memory-atlas/private-agentdatabase/normalized/canonical/events.jsonl"
+    previous_manifest = {
+        "object": canonical_object,
+        "sha256": "a" * 64,
+        "bytes": 0,
+        "unique_events": 0,
+        "release_tag": "memory-atlas-canonical-fixture",
+        "supersedes": ["primary-objects/memory-atlas/private-agentdatabase/normalized/canonical/delta/old.jsonl"],
+    }
+
+    class FakeSource:
+        def manifest(self) -> dict[str, object]:
+            return dict(previous_manifest)
+
+    class FakeReleaseClient:
+        def assert_private_repository(self) -> None:
+            return None
+
+        def view(self, tag: str) -> dict[str, object]:
+            assert tag == previous_manifest["release_tag"]
+            return {
+                "tagName": tag,
+                "isDraft": False,
+                "url": "https://github.example.test/private/release",
+                "assets": [
+                    {"name": "events.jsonl", "size": 0, "digest": f"sha256:{previous_manifest['sha256']}"},
+                    {"name": "MANIFEST.json", "size": 1, "digest": "sha256:" + "b" * 64},
+                ],
+            }
+
+        def create_draft(self, *_: object) -> None:
+            pytest.fail("an empty delta must not create a duplicate release")
+
+    empty_delta = tmp_path / "empty-events.jsonl"
+    empty_delta.write_text("", encoding="utf-8")
+    work_root = tmp_path / "work"
+    work_root.mkdir()
+    result = GitHubCanonicalPublisher(
+        source=FakeSource(),  # type: ignore[arg-type]
+        release_client=FakeReleaseClient(),  # type: ignore[arg-type]
+    ).run(
+        delta_path=empty_delta,
+        normalized_object_key="primary-objects/memory-atlas/private-agentdatabase/normalized/canonical/delta/current.jsonl",
+        canonical_object_key=canonical_object,
+        run_id="marun_fixture_1234567890",
+        created_at=FIXED_TIME,
+        work_root=work_root,
+    )
+    assert result["state"] == "PASS"
+    assert result["release_tag"] == previous_manifest["release_tag"]
+    assert result["verification_method"] == "github_release_asset_digest"
+    assert result["local_cleanup"] == {"state": "PASS", "remaining_paths": 0}
+    assert not (work_root / "github-canonical-release").exists()
+
+
 def test_source_capture_entry_only_sweeps_owned_stale_temp_dirs(tmp_path: Path) -> None:
     import OpenAIDatabase.scripts.memory_atlas_source_capture_entry as entry
 
@@ -1586,6 +1644,31 @@ def test_source_capture_entry_redacts_unreadable_source_filename() -> None:
     assert coverage and coverage[0]["reason_code"] == "STANDALONE_CREDENTIAL_LIKE_FILE_EXCLUDED"
 
 
+def test_source_capture_entry_help_never_starts_capture(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    import OpenAIDatabase.scripts.memory_atlas_source_capture_entry as entry
+
+    def unexpected_capture(*_: object, **__: object) -> subprocess.CompletedProcess[str]:
+        pytest.fail("--help must not start a capture")
+
+    monkeypatch.setattr(entry, "_run_capture", unexpected_capture)
+    with pytest.raises(SystemExit) as exit_info:
+        entry.main(["--help"])
+    assert exit_info.value.code == 0
+    assert "Memory Atlas source capture" in capsys.readouterr().out
+
+
+def test_source_capture_entry_maps_pre_json_child_failure_without_stderr_leak() -> None:
+    import OpenAIDatabase.scripts.memory_atlas_source_capture_entry as entry
+
+    assert entry._safe_child_failure_code(1, "No module named 'boto3'") == "MISSING_BOTO3_DEPENDENCY"
+    assert entry._safe_child_failure_code(1, "OSError: [Errno 30] Read-only file system") == "RUNTIME_DIRECTORY_UNWRITABLE"
+    assert entry._safe_child_failure_code(1, "logical_source_contract_mismatch") == "PRIVATE_BACKUP_SOURCE_CONTRACT_MISMATCH"
+    assert entry._safe_child_failure_code(124, "") == "CHILD_CAPTURE_TIMEOUT"
+
+
 def test_private_snapshot_is_only_exposed_through_signed_api() -> None:
     repo = Path(__file__).resolve().parents[2]
     provider = (repo / "MemoryAtlas/src/v31/PrivateAnalyticsProvider.tsx").read_text(encoding="utf-8")
@@ -1609,7 +1692,7 @@ def test_manual_backup_sources_protected_env_and_current_runtime() -> None:
     assert "private_db_client.py" in text and "source-registry.json" in text
 
 
-def test_source_capture_entry_forces_ephemeral_local_paths(
+def test_source_capture_entry_uses_protected_incremental_state_and_ephemeral_payloads(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -1663,9 +1746,11 @@ def test_source_capture_entry_forces_ephemeral_local_paths(
         "MEMORY_ATLAS_SOURCE_HOST_ID",
     ):
         assert observed[key] == expected[key]
-    ephemeral = Path(observed["MEMORY_ATLAS_RUNTIME_DIR"]).parent
+    state_dir = Path(observed["MEMORY_ATLAS_RUNTIME_DIR"])
+    assert state_dir == tmp_path / "memory-atlas-state"
+    assert state_dir.is_dir()
+    ephemeral = Path(observed["MEMORY_ATLAS_WORK_DIR"]).parent
     assert ephemeral.name.startswith(entry.TEMP_PREFIX)
-    assert Path(observed["MEMORY_ATLAS_WORK_DIR"]).parent == ephemeral
     assert Path(observed["MEMORY_ATLAS_WEB_DATA_DIR"]).parent == ephemeral
     assert Path(observed["TMPDIR"]).parent == ephemeral
     assert not ephemeral.exists()
@@ -1673,7 +1758,7 @@ def test_source_capture_entry_forces_ephemeral_local_paths(
     assert observed["MEMORY_ATLAS_CAPTURE_STORAGE_MODE"] == "GITHUB_RELEASE_ONLY"
 
 
-def test_source_capture_entry_symlink_keeps_evidence_binding_but_uses_ephemeral_runtime(
+def test_source_capture_entry_symlink_keeps_evidence_binding_and_uses_protected_state(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -1720,9 +1805,11 @@ def test_source_capture_entry_symlink_keeps_evidence_binding_but_uses_ephemeral_
     with pytest.raises(SystemExit) as exit_info:
         entry.main()
     assert exit_info.value.code == 0
-    ephemeral = Path(observed["MEMORY_ATLAS_RUNTIME_DIR"]).parent
+    state_dir = Path(observed["MEMORY_ATLAS_RUNTIME_DIR"])
+    assert state_dir == protected / "memory-atlas-state"
+    assert state_dir.is_dir()
+    ephemeral = Path(observed["MEMORY_ATLAS_WORK_DIR"]).parent
     assert ephemeral.name.startswith(entry.TEMP_PREFIX)
-    assert Path(observed["MEMORY_ATLAS_WORK_DIR"]).parent == ephemeral
     assert Path(observed["MEMORY_ATLAS_WEB_DATA_DIR"]).parent == ephemeral
     assert not ephemeral.exists()
     assert observed["MEMORY_ATLAS_VERIFIED_EVIDENCE_ROOTS"] == str(protected / "memory-atlas-evidence-adapters")

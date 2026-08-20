@@ -38,7 +38,18 @@ class PrivateEncryptedBackupPolicyTests(unittest.TestCase):
         self.assertEqual(result["status"], "PASS")
         self.assertTrue(result["ready_for_upload"])
         self.assertEqual(result["release_repository"], "LinzeColin/Private-Database")
-        self.assertEqual(result["workspace_isolation"], "system_temporary_directory_only")
+        self.assertEqual(
+            result["workspace_isolation"],
+            "protected_incremental_journal_plus_system_temporary_payloads",
+        )
+        registry = json.loads(
+            (DATABASE_DIR.parent / "ops/memory-atlas/source-registry.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            self.policy["scope"]["logical_sources"],
+            [row["source_id"] for row in registry["sources"]],
+        )
+        self.assertEqual(self.policy["scope"]["logical_sources"], self.module.EXPECTED_LOGICAL_SOURCES)
 
     def test_policy_rejects_another_repository_or_shared_workspace_writes(self) -> None:
         candidate = copy.deepcopy(self.policy)

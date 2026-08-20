@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import shutil
@@ -14,7 +15,7 @@ from typing import Any
 
 
 TEMP_PREFIX = "memory-atlas-daily-"
-MAX_RUN_SECONDS = 90 * 60
+MAX_RUN_SECONDS = 6 * 60 * 60
 STALE_SECONDS = 24 * 60 * 60
 
 
@@ -34,6 +35,26 @@ def load_env_file(path: Path) -> dict[str, str]:
         key, value = line.split("=", 1)
         values[key.strip()] = value.strip().strip('"').strip("'")
     return values
+
+
+def protected_incremental_state_dir(env_path: Path) -> Path:
+    """Return the only durable local state: a protected deduplication journal.
+
+    Raw snapshots, release payloads, and web projections remain in the per-run
+    temporary directory. The journal is committed only after a completed run,
+    so losing it can cause extra work but cannot cause data to be skipped.
+    """
+    state_dir = env_path.resolve().parent / "memory-atlas-state"
+    try:
+        if state_dir.exists():
+            if state_dir.is_symlink() or not state_dir.is_dir():
+                raise RuntimeError("protected_incremental_state_invalid")
+        else:
+            state_dir.mkdir(mode=0o700)
+        state_dir.chmod(0o700)
+    except OSError as exc:
+        raise RuntimeError("protected_incremental_state_unavailable") from exc
+    return state_dir
 
 
 def _is_owned_temp(path: Path, temporary_root: Path) -> bool:
@@ -102,6 +123,36 @@ def _child_payload(stdout: str) -> dict[str, Any]:
     return value
 
 
+def _safe_child_failure_code(returncode: int, stderr: str) -> str:
+    """Expose a stable diagnosis without publishing child stderr or paths."""
+    if returncode == 124:
+        return "CHILD_CAPTURE_TIMEOUT"
+    if "No module named 'boto3'" in stderr:
+        return "MISSING_BOTO3_DEPENDENCY"
+    if "Read-only file system" in stderr:
+        return "RUNTIME_DIRECTORY_UNWRITABLE"
+    if "logical_source_contract_mismatch" in stderr:
+        return "PRIVATE_BACKUP_SOURCE_CONTRACT_MISMATCH"
+    if "scope_policy_invalid" in stderr:
+        return "PRIVATE_BACKUP_SCOPE_POLICY_INVALID"
+    if "private_identity_unavailable" in stderr:
+        return "PRIVATE_BACKUP_IDENTITY_UNAVAILABLE"
+    if "github_release_command_failed" in stderr:
+        return "GITHUB_RELEASE_COMMAND_FAILED"
+    if "No module named" in stderr:
+        return "PYTHON_DEPENDENCY_MISSING"
+    if returncode != 0:
+        return "CHILD_EXITED_BEFORE_STRUCTURED_RESULT"
+    return "CHILD_STRUCTURED_RESULT_MISSING"
+
+
+def _parse_args(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(
+        description="Run one Memory Atlas source capture with temporary payloads and a protected incremental journal."
+    )
+    parser.parse_args(argv)
+
+
 def _public_safe_source_coverage(value: object) -> list[dict[str, Any]] | None:
     if not isinstance(value, list):
         return None
@@ -132,7 +183,8 @@ def _public_safe_source_coverage(value: object) -> list[dict[str, Any]] | None:
     return safe
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
+    _parse_args([] if argv is None else argv)
     repo = find_repo_root(Path(__file__).resolve())
     env_path = Path(os.environ.get(
         "MEMORY_ATLAS_ENV_FILE",
@@ -148,6 +200,15 @@ def main() -> None:
     values = load_env_file(env_path)
     process_env = os.environ
     linked_protected_root = env_path.resolve().parent if env_path.is_symlink() else None
+    try:
+        incremental_state_dir = protected_incremental_state_dir(env_path)
+    except RuntimeError as exc:
+        print(json.dumps({
+            "state": "BLOCKED",
+            "failure_code": str(exc),
+            "message_zh": "受保护的增量备份状态目录不可用；未启动采集。",
+        }, ensure_ascii=False, indent=2))
+        raise SystemExit(2) from exc
     values.update({
         "MEMORY_ATLAS_PRIVATE_DB_CLIENT": process_env.get(
             "MEMORY_ATLAS_PRIVATE_DB_CLIENT",
@@ -200,7 +261,7 @@ def main() -> None:
     env.update(process_env)
     env.update({
         "TMPDIR": str(run_root / "tmp"),
-        "MEMORY_ATLAS_RUNTIME_DIR": str(run_root / "runtime"),
+        "MEMORY_ATLAS_RUNTIME_DIR": str(incremental_state_dir),
         "MEMORY_ATLAS_WORK_DIR": str(run_root / "work"),
         "MEMORY_ATLAS_WEB_DATA_DIR": str(run_root / "web"),
         "MEMORY_ATLAS_PRIVATE_RELEASE_BACKUP_ENABLED": "1",
@@ -215,9 +276,12 @@ def main() -> None:
     child: dict[str, Any] = {}
     returncode = 1
     failure_code = "capture_not_started"
+    child_stderr = ""
+    child_failure_code = ""
     try:
         completed = _run_capture(command, cwd=repo, env=env)
         returncode = completed.returncode
+        child_stderr = completed.stderr
         child = _child_payload(completed.stdout)
         failure_code = "" if returncode == 0 else "capture_command_failed"
     except Exception as exc:
@@ -226,6 +290,8 @@ def main() -> None:
             if str(exc) in {"capture_result_json_missing", "capture_result_json_invalid"}
             else f"entrypoint_exception_{exc.__class__.__name__}"
         )
+        if failure_code == "capture_result_json_missing":
+            child_failure_code = _safe_child_failure_code(returncode, child_stderr)
     finally:
         cleanup_error = False
         if _is_owned_temp(run_root, temporary_root):
@@ -239,6 +305,7 @@ def main() -> None:
     result = {
         "schema_version": "memory_atlas.daily_backup_entry_result.v1",
         "state": "SUCCEEDED" if succeeded else "FAILED",
+        "child_returncode": returncode,
         "run_id": child.get("run_id"),
         "bytes_discovered": child.get("bytes_discovered"),
         "bytes_uploaded": child.get("bytes_uploaded"),
@@ -259,9 +326,11 @@ def main() -> None:
     }
     if not succeeded:
         result["failure_code"] = failure_code or f"child_state_{state.lower()}"
+    if child_failure_code:
+        result["child_failure_code"] = child_failure_code
     print(json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2))
     raise SystemExit(0 if succeeded else 1)
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])

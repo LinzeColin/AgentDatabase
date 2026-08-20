@@ -731,6 +731,12 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
                 manifest.state = RunState.WAITING_SOURCE
                 manifest.completed_at = self.clock()
                 return self._publish_terminal(manifest, events=[], message="必需来源缺失，未伪报全量成功")
+            logical_source_set = [item.spec.source_id for item in registry]
+            if self.private_release_backup is not None:
+                # Reject registry/policy drift before publishing a large canonical
+                # event release. A rejected release contract is not a partial
+                # backup success and must not consume an upload cycle.
+                self.private_release_backup.validate_logical_source_set(logical_source_set)
             manifest.state = RunState.CAPTURING
             all_events: list[NormalizedEvent] = []
             for record in records:
@@ -779,14 +785,13 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
                 )
             manifest.objects.append(normalized_receipt)
             manifest.normalized_batch_key = normalized_receipt.object_key
-            _extend_published_ids(self.config.runtime_dir, (event.event_id for event in delta_events))
             manifest.state = RunState.VERIFYING_OBJECTS
             if not all(item.readback_verified and item.readback_sha256 == item.sha256 for item in manifest.objects):
                 raise PipelineError("至少一个对象缺少完整读回证明")
             if self.private_release_backup is not None:
                 manifest.github_private_release_backup = self.private_release_backup.run(
                     records=records,
-                    logical_source_set=[item.spec.source_id for item in registry],
+                    logical_source_set=logical_source_set,
                     backup_id=run_id,
                     created_at=started_at,
                     work_root=work,
@@ -886,6 +891,10 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
                 "delta_object": manifest.normalized_batch_key,
                 "skipped_already_published": event_count - published_event_count,
             }
+            # Advance the durable deduplication journal only after every remote
+            # backup and fact receipt has succeeded. A journal write failure is
+            # safe: the next run may repeat work but cannot skip uncaptured data.
+            _extend_published_ids(self.config.runtime_dir, (event.event_id for event in delta_events))
             return result
         except Exception as exc:
             manifest.state = RunState.FAILED
