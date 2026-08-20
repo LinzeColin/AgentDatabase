@@ -262,10 +262,67 @@ def blank(sid: str, source: str, path: Path) -> dict:
         "start": "", "end": "", "project": "", "title": "",
         "turns": 0, "msgs": 0, "tools": 0, "errors": 0,
         "tok_in": 0, "tok_out": 0, "tok_cache_r": 0, "tok_cache_w": 0,
+        # 每个整点小时真实花掉多少 token。**这是 token 能落到正确日子的唯一依据** ——
+        # 靠 start/end 猜的话，19 场跨度 >7 天的会话独占 68.9% 的 token，
+        # 全被记在它们的 start 日上。逐条 timestamp 源日志里本来就有，只是以前丢掉了。
+        "hourly": {},
+        # 真实的工具失败数（is_error:true）。旧的 errors 数的是正文里「error」这个词，
+        # 一段贴进来的日志能一次贡献上百次。两个都留着，好并列对照。
+        "errors_tool": 0,
+        # 「答案的指针」。沉淀现在只沉淀了「这个问题被问了几次」，
+        # 从来没沉淀「上次是怎么解决的」—— 所以「写下来了还找不到」的根因是
+        # **答案从未被写下**。这两个字段是唯一能确定性派生出来的答案痕迹：
+        #   files —— 这场会话真的改过哪些文件
+        #   cmds  —— 真的跑过哪些命令
+        # 不写摘要、不改写原话，只给指针。压缩改写会牺牲「精确复述当时的东西」。
+        "files": [], "cmds": [],
         "models": [], "kw": {}, "topics": [], "prompts": [], "bytes": 0,
         "tool_names": {}, "provider_hint": "", "effort": "",
         "kind": "human", "batch": "", "dsh_origin": "", "dsh_preset": "",
     }
+
+
+MAX_FILES = 12
+MAX_CMDS = 8
+
+
+def take_pointers(rec: dict, m: dict) -> None:
+    """从一条助手消息里挖出「碰过哪个文件 / 跑过哪条命令」。
+
+    ⚠ 别再挂到「未解析行」那条分支上：带 tool_use 的助手行**同时带 usage**，
+    所以它走的是已解析路径，那个分支永远进不去（第一版实测命中 0/1528）。
+    """
+    c = (m or {}).get("content")
+    if not isinstance(c, list):
+        return
+    for b in c:
+        if not isinstance(b, dict) or b.get("type") != "tool_use":
+            continue
+        inp = b.get("input")
+        if not isinstance(inp, dict):
+            continue
+        fp = inp.get("file_path") or inp.get("path") or inp.get("notebook_path")
+        if fp and len(rec["files"]) < MAX_FILES:
+            v = redact(str(fp))[:160]
+            if v not in rec["files"]:
+                rec["files"].append(v)
+        cmd = inp.get("command")
+        if isinstance(cmd, str) and cmd.strip() and len(rec["cmds"]) < MAX_CMDS:
+            # 命令里可能带令牌，走同一套脱敏；只留首行，长命令截断
+            v = redact(cmd.strip().splitlines()[0])[:120]
+            if v not in rec["cmds"]:
+                rec["cmds"].append(v)
+
+
+def hour_add(rec: dict, ts: str, n: int) -> None:
+    """把 n 个 token 记到 ts 所在的那个整点。ts 形如 2026-07-25T07:25:58.762Z。
+
+    键取前 13 个字符（YYYY-MM-DDTHH），既是日期又是小时，摊到天只要切前 10 位。
+    """
+    if not ts or n <= 0:
+        return
+    k = ts[:13]
+    rec["hourly"][k] = rec["hourly"].get(k, 0) + int(n)
 
 
 def parse_cc(path: Path, rec: dict) -> dict:
@@ -283,7 +340,9 @@ def parse_cc(path: Path, rec: dict) -> dict:
         need_title = '"ai-title"' in line or '"custom-title"' in line
         need_meta = not rec["start"] and '"timestamp"' in line
         if not (need_usage or need_user or need_title or need_meta):
-            # 助手/工具行只计数，不解析
+            # 助手/工具行只计数，不解析 —— 它们占 84% 的行，全解一遍很贵。
+            # 例外：带 file_path / command 的 tool_use 要挖出指针（P2-2）。
+            # 子串预筛是硬要求：去掉它，1528 个文件的解析时间从 65s 涨到几分钟。
             if '"type":"assistant"' in line:
                 rec["msgs"] += 1
             if '"tool_use"' in line:
@@ -331,10 +390,24 @@ def parse_cc(path: Path, rec: dict) -> dict:
                 if not mid or mid not in seen_usage:
                     if mid:
                         seen_usage.add(mid)
-                    rec["tok_in"] += int(u.get("input_tokens") or 0)
-                    rec["tok_out"] += int(u.get("output_tokens") or 0)
-                    rec["tok_cache_r"] += int(u.get("cache_read_input_tokens") or 0)
-                    rec["tok_cache_w"] += int(u.get("cache_creation_input_tokens") or 0)
+                    got = (int(u.get("input_tokens") or 0),
+                           int(u.get("output_tokens") or 0),
+                           int(u.get("cache_read_input_tokens") or 0),
+                           int(u.get("cache_creation_input_tokens") or 0))
+                    rec["tok_in"] += got[0]
+                    rec["tok_out"] += got[1]
+                    rec["tok_cache_r"] += got[2]
+                    rec["tok_cache_w"] += got[3]
+                    hour_add(rec, ts, sum(got))
+            # 真实的工具失败：tool_result 块上的 is_error:true。
+            # 【实测 2026-08-20】抽样 120 个会话文件，47% 命中，共 664 次，
+            # 全部出现在 type=="tool_result" 上 —— 没有第二种形态。
+            c = m.get("content")
+            if isinstance(c, list):
+                for blk in c:
+                    if isinstance(blk, dict) and blk.get("is_error") is True:
+                        rec["errors_tool"] += 1
+                take_pointers(rec, m)
             if t == "user":
                 rec["msgs"] += 1
                 body, tool_blocks = text_of(m.get("content"))
@@ -399,12 +472,16 @@ def parse_codex(path: Path, rec: dict) -> dict:
             # 口径统一：codex 的 input_tokens **含**缓存命中，claude-code 的**不含**
             # （它把缓存单列成 cache_read_input_tokens）。不减掉就是把两种口径相加，
             # 单场会被抬到 24 亿这种量级，看着像天文数字其实是重复计数。
+            before = rec["tok_in"] + rec["tok_cache_r"] + rec["tok_out"]
             if isinstance(inp, (int, float)):
                 rec["tok_in"] = max(rec["tok_in"], int(inp) - int(cached))
             if isinstance(cached, (int, float)):
                 rec["tok_cache_r"] = max(rec["tok_cache_r"], int(cached))
             if isinstance(out, (int, float)):
                 rec["tok_out"] = max(rec["tok_out"], int(out))
+            # codex 每一轮重报一次**累计**值，所以这里按增量归到当前小时。
+            # 直接把累计值 hour_add 进去，一场会话的总量会被放大几十倍。
+            hour_add(rec, ts, rec["tok_in"] + rec["tok_cache_r"] + rec["tok_out"] - before)
         elif pt in ("function_call", "custom_tool_call", "local_shell_call"):
             rec["tools"] += 1
             nm = p.get("name") or p.get("tool_name") or pt
@@ -611,10 +688,13 @@ def parse_kimi(path: Path, rec: dict) -> dict:
             models.add(d["modelAlias"])
         elif t == "usage.record":
             u = d.get("usage") or {}
-            rec["tok_in"] += int(u.get("inputOther") or 0)
-            rec["tok_out"] += int(u.get("output") or 0)
-            rec["tok_cache_r"] += int(u.get("inputCacheRead") or 0)
-            rec["tok_cache_w"] += int(u.get("inputCacheCreation") or 0)
+            got = (int(u.get("inputOther") or 0), int(u.get("output") or 0),
+                   int(u.get("inputCacheRead") or 0), int(u.get("inputCacheCreation") or 0))
+            rec["tok_in"] += got[0]
+            rec["tok_out"] += got[1]
+            rec["tok_cache_r"] += got[2]
+            rec["tok_cache_w"] += got[3]
+            hour_add(rec, ts, sum(got))   # kimi 每条 usage.record 是增量，不是累计
         elif t == "context.append_message":
             m = d.get("message") or {}
             body, tool_blocks = text_of(m.get("content"))

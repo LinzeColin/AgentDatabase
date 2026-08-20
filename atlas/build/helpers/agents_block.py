@@ -20,6 +20,14 @@ def main() -> int:
     s = src.read_text(encoding="utf-8")
     block = s[s.index(b): s.index(e) + len(e)]
     t = tgt.read_text(encoding="utf-8")
+
+    # 旧哨兵先清掉。不清的后果：v1 那 116 行留在原地不被替换，
+    # v2 的 25 行追加在后面 —— 文件变成 141 行，比不瘦身还糟。
+    ob, oe = os.environ.get("ATLAS_OB", ""), os.environ.get("ATLAS_OE", "")
+    if ob and oe and ob in t and oe in t and ob != b:
+        t = t[:t.index(ob)] + t[t.index(oe) + len(oe):]
+        t = t.replace("\n\n\n", "\n\n")
+
     has = b in t and e in t
     cur = t[t.index(b): t.index(e) + len(e)] if has else None
 
@@ -35,6 +43,10 @@ def main() -> int:
         new = t[:t.index(b)] + block + t[t.index(e) + len(e):]
     else:
         new = t + ("" if t.endswith("\n") else "\n") + "\n" + block + "\n"
+
+    if new == tgt.read_text(encoding="utf-8"):
+        print("SAME")
+        return 0
 
     # 只在真要改的时候留一份备份，且固定一个文件名 —— 每天无条件备份
     # 会在半年里堆出上千个 .bak，那本身就是一种垃圾。

@@ -42,6 +42,12 @@ trap 'rmdir "$LOCK" 2>/dev/null || true' EXIT
     --atlas "$WORK/web/atlas/atlas.json"
   # 把《收尾必须回写》契约分发到每个 agent 的指令文件。内容没变就不动文件。
   # 靠人去五个文件里同步是同步不住的 —— 这一步就是为了不再靠人。
+  # 提问那一刻要用的字面索引。**必须在 build.py 之后**（它读 atlas.json），
+  # 也必须在部署之前 —— 索引落在本机 $WORK，不进站点、不进仓。
+  python3 "$ROOT/build/brief_index.py" --atlas "$WORK/web/atlas/atlas.json" \
+    --repo "$REPO" --out "$WORK/brief_index.jsonl" \
+    || echo "字面索引生成失败，本轮 UserPromptSubmit 钩子会静默不注入"
+
   bash "$ROOT/build/install_agents_md.sh" || echo "契约分发失败，本轮 agent 指令未更新"
   # 权威副本推私有仓，让任何有仓权限的 agent 都能直接取。
   # 失败不阻断本轮 —— 站点和本机那两份还在。

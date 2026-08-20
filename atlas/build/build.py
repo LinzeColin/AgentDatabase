@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """build.py —— 把会话记录聚合成页面直接读的 atlas.json。
 
-纯标准库，不调用任何模型。所有结论都是**从数据算出来的**，不是生成的：
+纯标准库，不调用任何模型。所有结论都是从数据算出来的，不是生成的：
 算不出来就写「不确定」，不写「没问题」。
 
 产出:
@@ -26,6 +26,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from extract import TOPICS, SKIPPED  # noqa: E402  词表是唯一真源，不在这里复制一份
 from metrics import token_block, economics_block, coupling_block, delivery_block  # noqa: E402
+import outward as outward_mod  # noqa: E402
 import taxonomy  # noqa: E402
 import aei as aei_mod  # noqa: E402
 import compound as compound_mod  # noqa: E402
@@ -133,6 +134,90 @@ def hour_buckets(s: dict) -> list:
     return sorted(out)
 
 
+TOKEN_FIELDS = ("tok_in", "tok_out", "tok_cache_r", "tok_cache_w")
+
+
+def day_share(s: dict) -> dict:
+    """这场会话的 token 该按什么比例摊到哪几天。
+
+    为什么不能按 start 日整块记【实测 2026-08-20】：94.5% 的 token 记错了日子，
+    最极端一场跨 24 天 16 小时、却独占它 start 日的 99.7%。
+    「某天 130 亿 token、0 次提交」那条债务卡极可能就是这么来的。
+
+    两条路，优先级是硬的：
+      ① `hourly` —— extract 从逐条 timestamp 记下的真实每小时用量。这不是摊，是实测。
+         【实测 2026-08-20】本机有量到 token 的会话 100% 都有它。
+      ② 退路：按 hour_buckets 的整点格子线性摊。跨度超过 ACTIVE_CAP_H 时
+         hour_buckets 只给起止两端，那就是猜 —— token_spread() 单列占比，
+         不许混进总数当成已知。
+    """
+    h = s.get("hourly") or {}
+    if h:
+        # 首选：extract 逐条 timestamp 记下来的真实每小时用量。这不是摊，是实测。
+        per = Counter()
+        for k, v in h.items():
+            per[k[:10]] += v
+        n = sum(per.values())
+        if n > 0:
+            return {d: v / n for d, v in per.items()}
+    b = s.get("buckets") or []
+    if not b:
+        return {s.get("day") or s["start"][:10]: 1.0}
+    per = Counter(d for d, _ in b)
+    n = sum(per.values())
+    return {d: c / n for d, c in per.items()}
+
+
+def token_spread(sessions: list) -> dict:
+    """按小时摊完之后，每天各拿到多少 token；同时给出与旧口径的对照。
+
+    对照是硬要求，不是好意：改口径而不并列公布，用户无法判断是「修好了」
+    还是「换了个错法」。v0.5.5 的教训就是四类 token 一起虚高、比值几乎不动。
+    """
+    spread = defaultdict(lambda: {k: 0.0 for k in TOKEN_FIELDS})
+    start_day = defaultdict(lambda: {k: 0 for k in TOKEN_FIELDS})
+    moved = 0
+    total = 0
+    long_span = 0
+    for s in sessions:
+        raw = sum(s.get(k, 0) or 0 for k in TOKEN_FIELDS)
+        total += raw
+        sd = s.get("day") or s["start"][:10]
+        for k in TOKEN_FIELDS:
+            start_day[sd][k] += s.get(k, 0) or 0
+        sh = day_share(s)
+        if raw and (len(sh) > 1 or next(iter(sh)) != sd):
+            moved += raw * (1 - sh.get(sd, 0.0))
+        # 该警示的不是「跨度长」，是「没有实测小时、只能靠起止两端猜」的那部分。
+        if raw and not (s.get("hourly") or {}):
+            long_span += raw
+        for d, f in sh.items():
+            for k in TOKEN_FIELDS:
+                spread[d][k] += (s.get(k, 0) or 0) * f
+
+    rounded = {d: {k: int(round(v)) for k, v in kv.items()} for d, kv in spread.items()}
+
+    def _peak(m):
+        if not m:
+            return None
+        d = max(m, key=lambda x: sum(m[x].values()))
+        return {"d": d, "tok": int(sum(m[d].values()))}
+
+    a, b = _peak({k: dict(v) for k, v in start_day.items()}), _peak(rounded)
+    delta = None
+    if a and b and a["tok"]:
+        delta = round((b["tok"] - a["tok"]) / a["tok"], 4)
+
+    return {
+        "by_day": rounded,
+        "moved_share": round(total and moved / total, 4) or 0.0,
+        "guessed_share": round(total and long_span / total, 4) or 0.0,
+        "peak_before": a, "peak_after": b, "peak_delta": delta,
+        "note": ("token 按逐条 timestamp 记到它真正花掉的那一小时，不再整块记在 start 日。"
+                 "没有逐条时间戳的来源退回按起止两端猜，那部分占比单列在 guessed_share。"),
+    }
+
+
 def iso_week(d: str) -> str:
     y, m, dd = (int(x) for x in d.split("-"))
     iy, iw, _ = datetime(y, m, dd).isocalendar()
@@ -140,7 +225,8 @@ def iso_week(d: str) -> str:
 
 
 def blank_bucket() -> dict:
-    return {"n": 0, "human": 0, "auto": 0, "fanout": 0, "turns": 0, "tools": 0, "errors": 0,
+    return {"n": 0, "human": 0, "auto": 0, "fanout": 0, "turns": 0, "tools": 0,
+            "errors": 0, "errors_tool": 0,
             "tok_in": 0, "tok_out": 0, "tok_cache_r": 0,
             "topics": Counter(), "sources": Counter(), "projects": Counter(), "hours": set()}
 
@@ -150,7 +236,7 @@ def fold(b: dict, s: dict, buckets: list) -> None:
     b["human" if s["kind"] == "human" else "auto"] += 1
     if s["kind"] == "fanout":
         b["fanout"] += 1
-    for k in ("turns", "tools", "errors", "tok_in", "tok_out", "tok_cache_r"):
+    for k in ("turns", "tools", "errors", "errors_tool", "tok_in", "tok_out", "tok_cache_r"):
         b[k] += s.get(k, 0)
     b["sources"][s["source"]] += 1
     if s.get("project"):
@@ -263,8 +349,9 @@ def build(sessions: list, out: Path, gh: dict | None = None) -> dict:
         "tp": s["topics"], "h": s["span_min"], "n": (s.get("title") or "")[:90],
     } for s in sessions]
 
-    _lessons = lessons_block(sessions, proj_rows)
-    _tokens = token_block(sessions)
+    _lessons = lessons_block(sessions, proj_rows, gh)
+    _spread = token_spread(sessions)
+    _tokens = token_block(sessions, _spread)
     # 成果复利投影。语义事件来自 ChatGPT 定时任务与 agent 归档；
     # 这一层只做形状校验、合并、去重与状态投影 —— 运行期不调用任何模型。
     _events_dirs = [
@@ -293,6 +380,9 @@ def build(sessions: list, out: Path, gh: dict | None = None) -> dict:
         "economics": economics_block(sessions, _ladder_counts(sessions)),
         "coupling": coupling_block(sessions),
         "compounding": compound_mod.build(_events_dirs, _lessons, proj_rows, _dl, _tokens),
+        # 「对外」那一列。现有每个指标回答的都是「我做了多少」，
+        # 一个都回答不了「有没有一个动作的收件人不是我自己」。
+        "outward": outward_mod.build(sessions, gh or {}),
         "keyword_weights": {k: round(v, 3) for k, v in sorted(weights.items(), key=lambda kv: -kv[1])[:60]},
     }
 
@@ -343,7 +433,7 @@ def meta_block(sessions: list, days: list, fanout_n: int = 0) -> dict:
         "skipped_sources": SKIPPED,
         "method": {
             "topics": "关键词命中 × 语料稀有度(IDF)，出现在半数以上会话的词权重归零",
-            "active_hours": f"有动静的整点格子数（去重）。**不等于工作时长** —— 同一小时内开十场会话也只算一格；跨度超过 {ACTIVE_CAP_H} 小时的会话只认起止两端，中间不脑补。",
+            "active_hours": f"有动静的整点格子数（去重）。不等于工作时长 —— 同一小时内开十场会话也只算一格；跨度超过 {ACTIVE_CAP_H} 小时的会话只认起止两端，中间不脑补。",
             "kind": f"auto = 无用户发言 / 单轮机器指令 / 同一段提示词重复 5 次以上；"
                     f"fanout = 同一来源同一小时内起了 {FANOUT_PER_HOUR} 场以上（agent 扇出，不是你在对话）",
             "model_calls": "0（全部为确定性统计，运行期不调用任何模型）",
@@ -491,7 +581,46 @@ REPEAT_PREFIX = 26
 REPEAT_MIN = 3
 
 
-def lessons_block(sessions: list, projects: list) -> dict:
+# 草稿纸不是答案。这些路径下的东西下次就不在了，留着只会让「指针可核率」虚高。
+SCRATCH = ("/private/tmp/", "/tmp/", "/var/folders/", "~/.claude/projects/",
+           "~/.memory-atlas/out/", "/T/tmp")
+
+
+def _durable(p: str) -> bool:
+    return not any(x in p for x in SCRATCH)
+
+
+def _pointers(rows: list, gh_days: dict) -> dict:
+    """一组重复问题的「上次落在哪」。全部可自动核验，核不动就如实说没有。"""
+    files, cmds = [], []
+    for r in reversed(rows):            # 从最近一次往前找，直到凑够
+        for f in (r.get("files") or []):
+            if _durable(f) and f not in files and len(files) < 3:
+                files.append(f)
+        for c in (r.get("cmds") or []):
+            # 命令里指向草稿纸的同样不算答案（`cd /private/tmp/...` 下次就不在了）
+            if _durable(c) and c not in cmds and len(cmds) < 3:
+                cmds.append(c)
+        if len(files) >= 3 and len(cmds) >= 3:
+            break
+    last = rows[-1]
+    g = gh_days.get(last["day"]) or {}
+    repos = sorted((g.get("repos") or {}).items(), key=lambda kv: -kv[1])[:2]
+    out = {"files": files, "cmds": cmds,
+           # 当天该仓的提交数。这是弱证据 —— 只说明「那天在这个仓上有动静」，
+           # 不证明这条提交就是这个问题的答案。所以单独标出来，不和 files/cmds 混。
+           "repos": [{"repo": k, "commits": v} for k, v in repos],
+           "repos_note": "当天该仓有多少提交，弱证据：只说明那天在动这个仓，不等于答案在里面。"}
+    if not files and not cmds:
+        # 编一个路径比留空危险得多。空就是空，明写出来。
+        out["state"] = "没有产物"
+        out["why"] = "这组会话里一个文件都没改、一条命令都没跑成 —— 大概率是纯问答。"
+    else:
+        out["state"] = "有指针"
+    return out
+
+
+def lessons_block(sessions: list, projects: list, gh: dict | None = None) -> dict:
     """经验沉淀。全部从数据里数出来，没有一句是生成的。
 
     最有用的一条是「同一件事你问过几次」：一个问题被反复问，说明上一次的答案
@@ -499,6 +628,7 @@ def lessons_block(sessions: list, projects: list) -> dict:
     再长会因为一点点措辞差异就判成两件事。
     """
     hum = [s for s in sessions if s["kind"] == "human"]
+    gh_days = {r["d"]: r for r in ((gh or {}).get("days") or [])}
 
     groups = defaultdict(list)
     for s in hum:
@@ -527,7 +657,12 @@ def lessons_block(sessions: list, projects: list) -> dict:
             "days": len({r["day"] for r in rows}),
             "projects": [k for k, _ in Counter(r.get("project") or "—" for r in rows).most_common(3)],
         }
-        # 判据：**跨天** 且 **平均每天 ≤5 遍**。
+        # P2-2：答案的指针。以前这里只有「问过几次」——
+        # 于是「写下来了还找不到」的根因其实是：答案从未被写下。
+        # 只给指针（最后一次落在哪个文件、用的什么命令、当天哪些提交），
+        # 不写摘要、不改写原话 —— 压缩改写会牺牲「精确复述当时的东西」。
+        row.update(_pointers(rows, gh_days))
+        # 判据：跨天 且 平均每天 ≤5 遍。
         # 只看「跨天」不够 —— 一个评委面板工作流跑 4 天照样产出 340 条一模一样的提示词。
         # 实测（41 组）：只用 days>=2 会放进来 340次/4天(85/天)、297次/2天(148/天) 这种；
         # 加上速率闸之后剩 13 组，头部变成「wholefood 是什么」14次/5天、「中文」9次/2天 ——
@@ -538,36 +673,50 @@ def lessons_block(sessions: list, projects: list) -> dict:
     repeats.sort(key=lambda r: -r["n"])
     batches.sort(key=lambda r: -r["n"])
 
-    # 报错**提及**最密集的项目：不是「哪个项目 bug 多」，是「哪个项目最耗你」。
-    # 注意口径：extract.py 数的是会话文本里 "error"/"报错" 出现的次数，
-    # 不是工具真的失败了几次（真信号是各家日志里的 is_error 字段，尚未接入 —— 见 PRD）。
-    # 一段贴进来的报错日志能一次贡献上百次「提及」，所以这是一个**消耗代理**，不是缺陷计数。
-    perr = defaultdict(lambda: {"errors": 0, "sessions": 0})
+    # 报错最密集的项目。v0.6.0 起两个口径并列：
+    #   tool   —— 工具真的失败了几次（tool_result 上的 is_error:true）。这是真信号。
+    #   errors —— 你自己在会话里说了几次 "error"/"报错"。这是另一件事，不是同一个东西的粗略版。
+    # 【实测 2026-08-20】两者相差 3.4 倍，而且方向和原先猜的相反：
+    # 旧口径只扫用户发言（不含工具输出），所以它一直在少数，不是多数。
+    # 并列保留是因为它们各自回答一个问题：工具有多不稳 / 你有多被它烦到要说出来。
+    perr = defaultdict(lambda: {"errors": 0, "tool": 0, "sessions": 0})
     for s in hum:
         k = s.get("project") or "未标注"
         perr[k]["errors"] += s.get("errors", 0)
+        perr[k]["tool"] += s.get("errors_tool", 0)
         perr[k]["sessions"] += 1
     pain = sorted(
-        ({"name": k, "errors": v["errors"], "sessions": v["sessions"],
-          "per": round(v["errors"] / max(1, v["sessions"]), 1)}
-         for k, v in perr.items() if v["errors"] > 0),
-        key=lambda r: -r["per"])[:12]
+        ({"name": k, "errors": v["errors"], "tool": v["tool"], "sessions": v["sessions"],
+          "per": round(v["errors"] / max(1, v["sessions"]), 1),
+          "per_tool": round(v["tool"] / max(1, v["sessions"]), 1)}
+         for k, v in perr.items() if v["errors"] > 0 or v["tool"] > 0),
+        key=lambda r: -r["per_tool"])[:12]
 
     longest = sorted(hum, key=lambda s: -s.get("turns", 0))[:10]
     revisit = sorted(projects, key=lambda p: -(p["last"] > p["first"] and p["human"] or 0))[:10]
 
+    _cov = sum(1 for r in repeats if r.get("state") == "有指针")
     return {
         "repeats": repeats[:25],
         "batches": batches[:25],
+        "pointer_coverage": {
+            "with_pointer": _cov, "groups": len(repeats),
+            "rate": round(_cov / len(repeats), 3) if repeats else None,
+            "why_low": ("PRD 的目标是 ≥80%，实测没达到。原因不是指针挖得不够，"
+                        "是这批跨天重复组里大部分是 agent 内部的评委/探源提示词，"
+                        "它们的产物只落在草稿目录里 —— 草稿纸下次就不在了，不算答案。"
+                        "把草稿路径算进来能把这个数做到 100%，那是假绿。"),
+        },
         "pain": pain,
         "longest": [{"day": s["day"], "title": (s.get("title") or "")[:90], "turns": s.get("turns", 0),
                      "project": s.get("project", ""), "topics": s["topics"]} for s in longest],
         "revisit": [{"name": p["name"], "human": p["human"], "first": p["first"], "last": p["last"],
                      "shipped": p["shipped"]} for p in revisit if p["human"] > 1],
-        "pain_note": "「报错」这一列数的是会话文本里出现 error/报错 的次数，不是工具失败次数。"
-                     "它是「哪个项目最消耗你」的代理指标，不能当 bug 数读。",
+        "pain_note": ("两列并排：工具失败数的是 tool_result 上的 is_error:true，这是真信号；"
+                      "你提到报错数的是你自己发言里出现 error/报错 的次数 —— 它不含工具输出，"
+                      "所以一直偏低（实测差 3.4 倍），是「你有多被烦到」的代理，不是缺陷计数。"),
         "note": f"按每场会话第一句的前 {REPEAT_PREFIX} 个字判重，出现 {REPEAT_MIN} 次以上才列出来。"
-                f"**跨天复发**（隔天又问）与**单日批量**（一天之内投喂 N 遍）分开列 —— "
+                f"跨天复发（隔天又问）与单日批量（一天之内投喂 N 遍）分开列 —— "
                 f"前者说明答案没留下来，后者说明这活该做成脚本。混在一起会把一次批处理"
                 f"读成「你问了 15 遍」。",
         "batch_note": "同一段提示词在一天之内被投喂多次。这不是「反复问」，"
@@ -590,7 +739,7 @@ def _ladder_counts(sessions: list) -> dict:
 def opportunity_block(sessions: list, projects: list) -> dict:
     """发展方向与可挖掘的口子。
 
-    这里只给**素材**，不替 Owner 判断市场 —— 判断市场需要我没有的信息
+    这里只给素材，不替 Owner 判断市场 —— 判断市场需要我没有的信息
     （他的客户、他的报价、他所在的行业），凭数据编出来的机会是假的。
     所以每一条都注明「这是从什么数出来的」，结论留给他。
     """

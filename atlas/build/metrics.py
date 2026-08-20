@@ -9,12 +9,14 @@ from __future__ import annotations
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
 
+import pricing
+
 # Owner 在悉尼。固定 +10，不猜夏令时 —— 猜错比差一小时更糟。
 TZ_OFFSET_H = 10
 
 # 参照 Owner 给的 codex_cache_hit_report 口径，逐字对齐：
 #   缓存命中率 = cached_input_tokens / input_tokens，按 input token 加权
-#   其中 input_tokens **含**缓存命中部分
+#   其中 input_tokens 含缓存命中部分
 # 本仓 extract 存的是「不含缓存」的 tok_in，所以这里要加回去再算，
 # 否则同一份数据会算出两个不同的命中率。
 CACHE_METRIC = "cached / (input_excl_cache + cached)，按 token 加权；input 口径含缓存，与参照报告一致"
@@ -59,8 +61,14 @@ def _close(b: dict) -> dict:
     return b
 
 
-def token_block(sessions: list) -> dict:
-    """按天／周／时段／来源／会话五种切法给 token 与缓存。"""
+def token_block(sessions: list, spread: dict | None = None) -> dict:
+    """按天／周／时段／来源／会话五种切法给 token 与缓存。
+
+    v0.6.0 起多三块，都是「让页面停止假装它知道它不知道的事」：
+      cost        —— 价格加权 token（BIE）。旧口径 cost=in+out 只覆盖 12.6% 的成本。
+      attribution —— token 归日的新旧对照。不并列公布就是偷换口径。
+      fanout      —— 扇出成本不可观测，明写「说不准」，不再假装是 0。
+    """
     by_day, by_week, by_slice, by_source, by_kind = (defaultdict(_blank) for _ in range(5))
     per_session = []
     for s in sessions:
@@ -112,6 +120,54 @@ def token_block(sessions: list) -> dict:
         # 有多少场根本没有用量记录，必须自己站出来说，不能只在分母里消失
         "no_usage": sum(1 for s in sessions
                         if not (s.get("tok_in") or s.get("tok_cache_r") or s.get("tok_out"))),
+        "cost": pricing.summarize(sessions),
+        "attribution": _attribution(spread, by_day),
+        "fanout": _fanout_cost(sessions),
+    }
+
+
+def _attribution(spread: dict | None, by_day: dict) -> dict:
+    """token 归日：新旧对照。
+
+    改口径而不并列公布，用户无法判断是「修好了」还是「换了个错法」。
+    v0.5.5 的教训就是四类 token 一起虚高、比值几乎不动 —— 只看一个数发现不了。
+    """
+    if not spread:
+        return {"state": "说不准", "why": "这一轮没算逐小时归集"}
+    out = {
+        "state": "通",
+        "moved_share": spread.get("moved_share"),
+        "guessed_share": spread.get("guessed_share"),
+        "peak_before": spread.get("peak_before"),
+        "peak_after": spread.get("peak_after"),
+        "peak_delta": spread.get("peak_delta"),
+        "note": spread.get("note"),
+        "by_day_true": [{"d": d, "tok": sum(v.values())}
+                        for d, v in sorted((spread.get("by_day") or {}).items())],
+    }
+    d = spread.get("peak_delta")
+    out["verdict"] = ("按 start 日整块归集确实造出了假的高峰"
+                      if d is not None and abs(d) > 0.20
+                      else "两种归集法差别不大，原来的高峰不是归集假象")
+    return out
+
+
+def _fanout_cost(sessions: list) -> dict:
+    """扇出成本：说不准。这是一个功能，不是认怂。
+
+    【实测 2026-08-20】Claude Code 子 agent 的 usage 根本不写进父会话文件
+    （原以为走 isSidechain:true —— 实测该字段 6,718 次全是 false，判据不成立）。
+    不写出来，「每条提交摊到多少 token」看起来就是全部真相。
+    """
+    fan = [s for s in sessions if s.get("kind") == "fanout"]
+    measured = [s for s in fan if (s.get("tok_in") or s.get("tok_cache_r") or s.get("tok_out"))]
+    return {
+        "state": "说不准",
+        "sessions": len(fan),
+        "with_usage": len(measured),
+        "why": ("子 agent 的用量不写进父会话文件，这些扇出场次的成本没进任何一个数。"
+                "isSidechain 字段试过，6,718 次全是 false，认不出来。"),
+        "impact": "所以「每条提交摊到多少 token」是下界，不是真值。",
     }
 
 
@@ -239,7 +295,7 @@ def coupling_block(sessions: list, min_weight: int = 2) -> dict:
 
 
 # —— 交付对照 ——
-# 会话记录只能证明你**在做**，GitHub 才能证明你**做出来了**。
+# 会话记录只能证明你在做，GitHub 才能证明你做出来了。
 # 两条曲线放在一起，「建设 : 交付」那个比例才不是自说自话。
 def delivery_block(sessions: list, gh: dict) -> dict:
     if not gh or gh.get("state") == "不确定":
@@ -280,6 +336,13 @@ def delivery_block(sessions: list, gh: dict) -> dict:
 
     tot_s = sum(r["sessions"] for r in rows)
     tot_c = sum(r["commits"] for r in rows)
+    # P1-3：commit 粒度极不均匀（1 行 typo 和 2000 行重构同为 1 commit），
+    # 而且任何按 commit 数考核的口径，最终都会得到更多、更小的 commit。
+    # merged PR 有 review 边界、粒度均匀，还能区分「合了」和「提了没合」。
+    # 两个分母并列，不替换 —— 替换掉就没人能看出换过。
+    tot_p = sum(r["prs"] for r in rows)
+    tot_m = sum(r["merged"] for r in rows)
+    merged_days = [r for r in rows if r["merged"] > 0]
 
     # 项目层：会话里提到的项目名 vs 仓名，能对上的才算
     repo_names = {r["repo"] for r in gh.get("repos", [])}
@@ -312,6 +375,21 @@ def delivery_block(sessions: list, gh: dict) -> dict:
             "commits": tot_c,
             "commits_per_session": round(tot_c / max(1, tot_s), 3),
             "overlap_rate": round(len(both) / max(1, len(talked)), 4),
+            "prs": tot_p,
+            "merged": tot_m,
+            "days_merged": len(merged_days),
+            "merged_per_session": round(tot_m / max(1, tot_s), 4),
+            "merge_rate": round(tot_m / tot_p, 4) if tot_p else None,
+            "commits_per_merged": round(tot_c / tot_m, 2) if tot_m else None,
+        },
+        "denominators": {
+            "note": ("两个分母并列，不替换。commit 粒度不均匀，且按 commit 数考核会"
+                     "诱导出更多更小的 commit；merged PR 有 review 边界、粒度均匀。"),
+            "commit": {"n": tot_c, "per_session": round(tot_c / max(1, tot_s), 3),
+                       "caveat": "粒度不均匀，会被优化"},
+            "merged_pr": {"n": tot_m, "per_session": round(tot_m / max(1, tot_s), 4),
+                          "caveat": ("样本小得多；且只覆盖走 PR 的仓 —— "
+                                     "直接推 main 的活在这个分母下等于没发生")},
         },
         "note": "「只聊没交付」＝那天有会话但没有一条属于你的提交。"
                 "不代表白干（可能在读、在想、在做仓外的事），但它是那条比例最直观的证据。"

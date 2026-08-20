@@ -5,6 +5,7 @@ import { sec, bento, orbit, drawer, table, warn, pill, rate, state } from '../ki
 
 export async function render(host) {
   const K = D.A().stack, T = D.tokens(), t = T.total;
+  const C = T.cost, A = T.attribution, F = T.fanout;
   const llm = K.harness.filter(r => r.kind === 'llm');
   const tools = K.harness.filter(r => r.kind === 'tool');
   let mode = 'slice';
@@ -18,6 +19,29 @@ ${bento([
   { k: '输出', v: fmt(t.output), n: '模型写出来的' },
   { k: 'LLM 应用', v: String(llm.length), n: `另有 ${tools.length} 个只是工具` },
 ])}
+${sec('真实成本口径', '旧口径 cost = 输入 + 输出，只看得到十分之一的账单 —— 而缓存读取才是大头。')}
+${bento([
+  { k: '价格加权 token', v: fmt(C.bie_total), n: 'BIE：按各家单价折成"基础输入"当量', w: 3, tone: 'acc' },
+  { k: '旧口径能看到的', v: pct(C.coverage_by_cost), n: `按条数只有 ${pct(C.coverage_by_volume)} —— 只看条数会以为没漏`, w: 3, alt: true },
+  { k: '缓存读取占成本', v: pct(C.by_field.cache_read / C.bie_total), n: `${fmt(C.by_field.cache_read)} BIE` },
+  { k: '缓存写入', v: fmt(C.by_field.cache_write), n: '单价最高的那类输入，以前页面上根本没有' },
+  { k: '没有价目表', v: `${C.no_price.sessions} 场`, n: Object.keys(C.no_price.sources).join('、') || '—' },
+  { k: '没量到 token', v: `${C.no_usage.sessions} 场`, n: '有价目表，但日志里一个 token 都没记' },
+])}
+${warn(`<b>${esc(F.state)}：扇出成本</b> —— ${esc(F.why)}<br>${esc(F.impact)}
+  当前 ${F.sessions} 场扇出，其中只有 ${F.with_usage} 场有用量记录。`)}
+${warn(`<b>这些数不能跨家相加。</b>${C.caveats.map(esc).join('<br>')}<br>
+  按哪几家的价算的：${C.prices.map(x => `${esc(x.provider)}<span class="st" data-s="${x.confidence === 'verified' ? '通' : '不确定'}">${esc(x.confidence)}</span>`).join('　')}`)}
+
+${sec('token 记在哪一天', esc(A.note || ''))}
+${A.state === '通' ? bento([
+  { k: '记错日子的', v: pct(A.moved_share), n: '以前按会话开始那天整块记', w: 3, tone: 'warn' },
+  { k: '只能靠猜的', v: pct(A.guessed_share), n: '没有逐条时间戳的来源', w: 3 },
+  { k: '最贵的一天 · 修前', v: esc(A.peak_before.d), n: fmt(A.peak_before.tok), size: 'sm' },
+  { k: '最贵的一天 · 修后', v: esc(A.peak_after.d), n: fmt(A.peak_after.tok), size: 'sm', alt: true },
+  { k: '变了多少', v: (A.peak_delta * 100).toFixed(1) + '%', n: esc(A.verdict), w: 2, tone: 'acc' },
+]) : warn(`归日对照：${esc(A.state)}`)}
+
 ${tools.length ? warn(`<b>这些不是 LLM，不产生 token</b> —— 单独列出，不混进上面的分母：<br>
   ${tools.map(r => `<b>${esc(r.label)}</b>（${r.sessions} 场）—— ${esc(r.note)}`).join('<br>')}`) : ''}
 
