@@ -238,6 +238,7 @@ def blank(sid: str, source: str, path: Path) -> dict:
         "turns": 0, "msgs": 0, "tools": 0, "errors": 0,
         "tok_in": 0, "tok_out": 0, "tok_cache_r": 0, "tok_cache_w": 0,
         "models": [], "kw": {}, "topics": [], "prompts": [], "bytes": 0,
+        "tool_names": {}, "provider_hint": "", "effort": "",
         "kind": "human", "batch": "",
     }
 
@@ -283,6 +284,10 @@ def parse_cc(path: Path, rec: dict) -> dict:
             if m.get("model"):
                 models.add(m["model"])
             u = m.get("usage")
+            for blk in (m.get("content") or []):
+                if isinstance(blk, dict) and blk.get("type") == "tool_use" and blk.get("name"):
+                    nm = str(blk["name"])[:40]
+                    rec["tool_names"][nm] = rec["tool_names"].get(nm, 0) + 1
             if isinstance(u, dict):
                 rec["tok_in"] += int(u.get("input_tokens") or 0)
                 rec["tok_out"] += int(u.get("output_tokens") or 0)
@@ -333,6 +338,15 @@ def parse_codex(path: Path, rec: dict) -> dict:
                 rec["project"] = project_of(p["cwd"])
             if p.get("model"):
                 models.add(p["model"])
+        elif d.get("type") == "turn_context":
+            # 真正带模型的是 turn_context，不是 session_meta。漏了这一支，
+            # 455 场 codex 会全部显示「未记录模型」——实测就是这么错的。
+            if p.get("model"):
+                models.add(str(p["model"]))
+            if p.get("model_provider"):
+                rec["provider_hint"] = str(p["model_provider"])
+            if p.get("effort"):
+                rec["effort"] = str(p["effort"])
         elif pt == "token_count":
             # 累计值挂在 info.total_token_usage 下，不是 info 本身。取 max 而不是求和：
             # 每一轮都会重报一次累计数，求和会把用量放大几十倍。
@@ -351,6 +365,8 @@ def parse_codex(path: Path, rec: dict) -> dict:
                 rec["tok_out"] = max(rec["tok_out"], int(out))
         elif pt in ("function_call", "custom_tool_call", "local_shell_call"):
             rec["tools"] += 1
+            nm = p.get("name") or p.get("tool_name") or pt
+            rec["tool_names"][str(nm)[:40]] = rec["tool_names"].get(str(nm)[:40], 0) + 1
         elif pt == "message":
             rec["msgs"] += 1
             role = p.get("role")

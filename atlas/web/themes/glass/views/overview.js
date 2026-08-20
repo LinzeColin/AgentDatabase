@@ -58,7 +58,7 @@ ${((D.opportunities() || {}).items || []).map(o => `
     if (t) go('grid', 't=' + encodeURIComponent(t.dataset.topic));
   });
 
-  // 三档画成一条分段弧，不是柱状图 —— 星域主题不用直角图表
+  // 三档画成一条分段弧，不是柱状图 —— 琉璃主题不用直角图表
   const cv = host.querySelector('#ladder');
   const draw = () => {
     const { ctx, w } = fitCanvas(cv, 150);

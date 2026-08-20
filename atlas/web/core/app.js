@@ -3,18 +3,19 @@
 // 共享的只有 core/select.js 里的纯数据选择器。
 // CSP 是 script-src 'self'：无内联脚本、无 CDN，GSAP 已 vendor。
 
-export const S = { atlas: null, dayCache: new Map(), theme: 'nebula', mode: 'dark' };
+export const S = { atlas: null, dayCache: new Map(), theme: 'glass', mode: 'dark' };
 
 export const THEMES = [
   ['console', '控制台'],
-  ['nebula', '星域'],
+  ['glass', '琉璃'],
   ['journal', '手记'],
 ];
 
 export const VIEW_LIST = [
   ['overview', '概览'], ['calendar', '日历'], ['day', '一天'], ['timeline', '时间轴'],
   ['grid', '网格'], ['universe', '宇宙'], ['replay', '回放'],
-  ['economics', '经济'], ['tokens', 'Token'], ['lessons', '沉淀'], ['method', '口径'],
+  ['delivery', '交付'], ['aei', '经济指数'], ['stack', 'Token'],
+  ['lessons', '沉淀'], ['method', '口径'],
 ];
 
 export const TOPIC_COLORS = {
@@ -55,7 +56,7 @@ export function go(name, arg) { location.hash = '#/' + name + (arg ? '/' + arg :
 export function motion() {
   return {
     console: { d: .14, ease: 'power2.out', stagger: .010, cap: .22, y: 5, s: 1, blur: 0 },
-    nebula: { d: .70, ease: 'back.out(1.3)', stagger: .055, cap: .62, y: 34, s: .93, blur: 8 },
+    glass: { d: .70, ease: 'back.out(1.3)', stagger: .055, cap: .62, y: 34, s: .93, blur: 8 },
     journal: { d: .48, ease: 'power1.out', stagger: .07, cap: .45, y: 14, s: 1, blur: 0 },
   }[S.theme];
 }
@@ -234,6 +235,34 @@ async function boot() {
   });
   addEventListener('hashchange', render);
   render();
+  startPolling();
+}
+
+// 自动更新：每 10 分钟看一眼 atlas.json 的 generated_at 变没变。
+// 变了就重载数据并重绘当前视图 —— 长开的标签页自己跟上，不用手动刷新。
+// 这一步不调用任何模型，只是一个静态文件的条件请求，零 token。
+const POLL_MS = 10 * 60 * 1000;
+function startPolling() {
+  let timer = setInterval(async () => {
+    if (document.hidden) return;          // 看不见就不轮询，别白费流量
+    try {
+      const r = await fetch('atlas/atlas.json', { cache: 'no-store' });
+      if (!r.ok) return;
+      const j = await r.json();
+      if (j.meta.generated_at === S.atlas.meta.generated_at) return;
+      S.atlas = j;
+      S.dayCache.clear();
+      stampAndFoot();
+      const el = document.getElementById('stamp');
+      if (el) {
+        el.dataset.fresh = '1';
+        el.textContent += '　· 刚更新';
+        setTimeout(() => { el.dataset.fresh = ''; stampAndFoot(); }, 12000);
+      }
+      render();
+    } catch { /* 拉不到就等下一轮，不打扰 */ }
+  }, POLL_MS);
+  addEventListener('pagehide', () => clearInterval(timer));
 }
 
 boot();

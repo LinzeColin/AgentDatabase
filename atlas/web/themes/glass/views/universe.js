@@ -2,7 +2,7 @@ import { esc, fmt, go, KIND_COLORS, topicColor, reduced, enter, S } from '../../
 import * as D from '../../../core/select.js';
 import { forceLayout, loop } from '../../../core/g3d.js';
 import { buildGraphScene } from '../../../core/scene3d.js';
-import { sec, lede, p, n as num, aside, figure, rank, table } from '../kit.js';
+import { sec, orbit, drawer, table, warn, pill } from '../kit.js';
 
 // 真 WebGL 3D：three.js 本地 vendor（CSP 的 script-src 'self' 只挡 CDN，vendor 完全合法）。
 // 实例化网格 + 光照 + 雾 + 加色辉光，材质按主题给不同配置 —— 同一份几何，三种质感。
@@ -20,23 +20,22 @@ export async function render(host) {
     adj.get(e.a).add(e.b); adj.get(e.b).add(e.a);
   }
 
-  host.innerHTML = `${sec('耦合')}
-${lede(`把每一场会话看成一次「同时提到」，来源、项目、主题就连成一张网。
-  整张网有 ${num(nodes.length)} 个节点、${num(edges.length)} 条边。下面是它在三维里的样子 ——
-  真的三维：网格、光照、雾，拖得动，不是画得像。`)}
-${aside(esc(C.note) + (C.dropped_edges ? `<br>另有 ${C.dropped_edges} 条弱边未画出 —— 不是不存在。` : ''))}
+  host.innerHTML = `${sec('耦合星图', '真 WebGL 场景：实例化网格 + 光照 + 加色辉光。悬停任一节点，只留它和它的邻居 —— 耦合关系直接看得见。')}
 <div class="ctl">
   <button id="spin" aria-pressed="true">自转</button>
   <button id="reset">重置视角</button>
-  <span id="hud"></span>
+  <span class="pill" id="hud">节点 ${C.nodes.length} · 边 ${C.edges.length}</span>
 </div>
-${figure('<canvas class="viz" id="cv"></canvas>', '拖动转视角，滚轮推拉。悬停任一节点，只留它和它的邻居；点击进目录。')}
+<canvas class="viz" id="cv"></canvas>
+<p class="hint">拖动转视角，滚轮推拉，点一个节点进网格。${esc(C.note)}${C.dropped_edges ? `　丢弃弱边 ${C.dropped_edges} 条。` : ''}</p>
+${warn('<b>颜色只是辅助。</b>三类节点在下面的抽屉里都有名字和度数，不靠颜色也能读出来。')}
 <div id="near"></div>
-${figure(table([{ t: 'A' }, { t: 'B' }, { t: '共同出现', r: true }],
-  edges.slice(0, 30).map(e => {
+${drawer('展开最紧的 40 组耦合', table([{ t: 'A' }, { t: 'B' }, { t: '共同出现', r: true }],
+  edges.slice(0, 40).map(e => {
     const a = byId.get(e.a), b = byId.get(e.b);
-    return [esc(a ? a.label : e.a), esc(b ? b.label : e.b), String(e.w)];
-  })), '连得最紧的三十组。')}`;
+    return [`${pill(a ? a.kind : '')} ${esc(a ? a.label : e.a)}`,
+            `${pill(b ? b.kind : '')} ${esc(b ? b.label : e.b)}`, String(e.w)];
+  })))}`;
 
   const cv = host.querySelector('#cv');
   cv.style.height = Math.max(460, Math.min(760, innerHeight - 250)) + 'px';
@@ -85,9 +84,11 @@ ${figure(table([{ t: 'A' }, { t: 'B' }, { t: '共同出现', r: true }],
     const n = nodes[i];
     hud.textContent = `${n.label} · 度数 ${(adj.get(n.id) || new Set()).size} · 出现 ${n.w} 场`;
     if (nearBox) {
-      nearBox.innerHTML = p(`<b>${esc(n.label)}</b> 连着：`) + rank(D.neighbours(n.id).slice(0, 8).map(x => {
+      nearBox.innerHTML = `<p class="hint" style="margin-top:18px"><b style="color:var(--fg)">${esc(n.label)}</b> 连着这些：</p>` +
+        orbit(D.neighbours(n.id).slice(0, 10).map(x => {
           const nn = byId.get(x.id);
-          return { k: nn ? nn.label : x.id, v: x.w, label: String(x.w) };
+          return { k: nn ? nn.label : x.id, v: x.w, label: String(x.w),
+                   c: nn && nn.kind === 'topic' ? topicColor(nn.label) : 'var(--acc)' };
         }));
     }
   });
@@ -97,6 +98,6 @@ ${figure(table([{ t: 'A' }, { t: 'B' }, { t: '共同出现', r: true }],
     S3.resize();
   };
   addEventListener('resize', onR);
-  enter('.sec, p.body, figure, .aside', host);
+  enter('.sec, .card', host);
   return { dispose() { l.stop(); S3.dispose(); removeEventListener('resize', onR); } };
 }

@@ -1,6 +1,6 @@
 import { esc, fmt, go, local, topicColor, enter, reduced } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
-import { fitCanvas, loop } from '../../../core/g3d.js';
+import { fitCanvas, loop , cssVar } from '../../../core/g3d.js';
 import { sec, kv, warn } from '../kit.js';
 
 export async function render(host) {
@@ -26,7 +26,7 @@ ${sec('REPLAY', `从 ${days[0].d} 推到 ${days[days.length - 1].d}，一帧一�
 <div id="sum"></div>`;
 
   const cv = host.querySelector('#cv'), btn = host.querySelector('#play'), scrub = host.querySelector('#scrub');
-  const css = k => getComputedStyle(document.body).getPropertyValue(k).trim();
+  const css = k => cssVar(k);
 
   const draw = () => {
     const { ctx, w } = fitCanvas(cv, 400);

@@ -21,6 +21,14 @@ HASH=$(find "$SRC" -type f -exec shasum -a 256 {} \; | sort | shasum -a 256 | cu
 TS=$(date -u +%Y%m%dT%H%M%SZ)
 REL="$APP/releases/$TS-$HASH"
 
+# 探测清单在本地按发布目录现算，再作为字面量带进远端 —— 不手写主题名。
+# 手写过一次：nebula 改名成 glass，探测清单漏改，自检把「文件没发上去」
+# 读成了「一切正常」（nginx 的 try_files 把它兜底成首页并返回 200）。
+PROBE="/ /core/app.js /core/select.js /vendor/gsap.min.js /vendor/three.module.min.js /atlas/atlas.json"
+for th in $(ls "$SRC/themes" 2>/dev/null); do
+  PROBE="$PROBE /themes/$th/shell.css /themes/$th/views/overview.js"
+done
+
 echo "→ 发布 $TS-$HASH"
 ssh "$HOST" "mkdir -p '$REL/dist'"
 rsync -az --delete -e ssh "$SRC/" "$HOST:$REL/dist/"
@@ -46,7 +54,9 @@ done
 [ -n "\$IP" ] || { echo "超时：20 次探测都没拿到健康的容器"; exit 1; }
 
 echo "--- 源站自检（容器直连）---"
-for p in / /core/app.js /themes/console/shell.css /themes/nebula/shell.css /themes/journal/shell.css /vendor/gsap.min.js /atlas/atlas.json; do
+# 探测清单不再手写主题名 —— 改名一次就会漏一个，实测 nebula→glass 改完就漏了。
+# 从发布目录里现算：每个主题的 shell.css 都要真的能取到。
+for p in $PROBE; do
   code=\$(curl -s -o /dev/null -w '%{http_code}' "http://\$IP:8088\$p")
   size=\$(curl -s -o /dev/null -w '%{size_download}' "http://\$IP:8088\$p")
   ctype=\$(curl -s -o /dev/null -w '%{content_type}' "http://\$IP:8088\$p")
