@@ -17715,6 +17715,20 @@
         "behavior_signal"
       ],
       "status": "active"
+    },
+    {
+      "activity_count": 2770,
+      "description": "本机各 agent 会话的脱敏派生摘要（只含聚合，不含原话）。",
+      "id": "agent_sessions",
+      "ingestion_status": "active_real_local_redacted_summary",
+      "label": "本机 Agent 会话",
+      "latest_date": "2026-08-20",
+      "node_count": 16,
+      "platform": "local_agents",
+      "record_types": [
+        "agent_session_summary"
+      ],
+      "status": "active"
     }
   ],
   "edges": [
@@ -22757,6 +22771,166 @@
       "source": "memory:codex_recommendation_meta_codex_signal_authorization_gate",
       "target": "category:codex-agent-metadata",
       "weight": 0.35
+    },
+    {
+      "id": "edge:agent:chatgpt-archive:修bug",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:chatgpt-archive",
+      "target": "agenttopic:修bug",
+      "weight": 55
+    },
+    {
+      "id": "edge:agent:chatgpt-archive:部署上线",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:chatgpt-archive",
+      "target": "agenttopic:部署上线",
+      "weight": 39
+    },
+    {
+      "id": "edge:agent:chatgpt-archive:数据",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:chatgpt-archive",
+      "target": "agenttopic:数据",
+      "weight": 79
+    },
+    {
+      "id": "edge:agent:chatgpt-archive:赚钱",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:chatgpt-archive",
+      "target": "agenttopic:赚钱",
+      "weight": 36
+    },
+    {
+      "id": "edge:agent:chatgpt-archive:测试验收",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:chatgpt-archive",
+      "target": "agenttopic:测试验收",
+      "weight": 57
+    },
+    {
+      "id": "edge:agent:chatgpt-archive:治理",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:chatgpt-archive",
+      "target": "agenttopic:治理",
+      "weight": 21
+    },
+    {
+      "id": "edge:agent:chatgpt-archive:自动化",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:chatgpt-archive",
+      "target": "agenttopic:自动化",
+      "weight": 65
+    },
+    {
+      "id": "edge:agent:chatgpt-archive:前端界面",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:chatgpt-archive",
+      "target": "agenttopic:前端界面",
+      "weight": 58
+    },
+    {
+      "id": "edge:agent:chatgpt-archive:重构简化",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:chatgpt-archive",
+      "target": "agenttopic:重构简化",
+      "weight": 40
+    },
+    {
+      "id": "edge:agent:chatgpt-archive:文档",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:chatgpt-archive",
+      "target": "agenttopic:文档",
+      "weight": 20
+    },
+    {
+      "id": "edge:agent:claude-code:修bug",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:claude-code",
+      "target": "agenttopic:修bug",
+      "weight": 1084
+    },
+    {
+      "id": "edge:agent:claude-code:前端界面",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:claude-code",
+      "target": "agenttopic:前端界面",
+      "weight": 944
+    },
+    {
+      "id": "edge:agent:claude-code:数据",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:claude-code",
+      "target": "agenttopic:数据",
+      "weight": 583
+    },
+    {
+      "id": "edge:agent:claude-code:文档",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:claude-code",
+      "target": "agenttopic:文档",
+      "weight": 1051
+    },
+    {
+      "id": "edge:agent:claude-code:治理",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:claude-code",
+      "target": "agenttopic:治理",
+      "weight": 147
+    },
+    {
+      "id": "edge:agent:claude-code:测试验收",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:claude-code",
+      "target": "agenttopic:测试验收",
+      "weight": 866
+    },
+    {
+      "id": "edge:agent:claude-code:部署上线",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:claude-code",
+      "target": "agenttopic:部署上线",
+      "weight": 113
+    },
+    {
+      "id": "edge:agent:claude-code:重构简化",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:claude-code",
+      "target": "agenttopic:重构简化",
+      "weight": 45
+    },
+    {
+      "id": "edge:agent:claude-code:自动化",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:claude-code",
+      "target": "agenttopic:自动化",
+      "weight": 465
+    },
+    {
+      "id": "edge:agent:claude-code:赚钱",
+      "kind": "agent_uses_topic",
+      "layer": "agent_sessions",
+      "source": "agentsrc:claude-code",
+      "target": "agenttopic:赚钱",
+      "weight": 44
     }
   ],
   "formula_what_if": {
@@ -22947,6 +23121,12 @@
         "memory-rag-continuity": 115,
         "uncategorized": 4
       }
+    },
+    {
+      "id": "agent_sessions_total",
+      "label": "Agent 会话总数",
+      "unit": "个",
+      "value": 2770
     }
   ],
   "nodes": [
@@ -27925,18 +28105,339 @@
         "sensitive": false,
         "size": 10.64
       }
+    },
+    {
+      "id": "agentsrc:chatgpt-archive",
+      "kind": "theme",
+      "label": "AI 工具·chatgpt-archive（374 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 374
+      },
+      "theme_id": "agent-chatgpt-archive",
+      "visual": {
+        "brightness": 0.9,
+        "color": "#8fffc4",
+        "position": {
+          "x": 84.0,
+          "y": 50.0,
+          "z": 0
+        },
+        "size": 3.574
+      }
+    },
+    {
+      "id": "agentsrc:claude-code",
+      "kind": "theme",
+      "label": "AI 工具·claude-code（1500 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 1500
+      },
+      "theme_id": "agent-claude-code",
+      "visual": {
+        "brightness": 0.9,
+        "color": "#c78bff",
+        "position": {
+          "x": 67.0,
+          "y": 79.4449,
+          "z": 0
+        },
+        "size": 4.176
+      }
+    },
+    {
+      "id": "agentsrc:codex",
+      "kind": "theme",
+      "label": "AI 工具·codex（457 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 457
+      },
+      "theme_id": "agent-codex",
+      "visual": {
+        "brightness": 0.9,
+        "color": "#8fd3ff",
+        "position": {
+          "x": 33.0,
+          "y": 79.4449,
+          "z": 0
+        },
+        "size": 3.661
+      }
+    },
+    {
+      "id": "agentsrc:dws",
+      "kind": "theme",
+      "label": "AI 工具·dws（12 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 12
+      },
+      "theme_id": "agent-dws",
+      "visual": {
+        "brightness": 0.9,
+        "color": "#ff9fb8",
+        "position": {
+          "x": 16.0,
+          "y": 50.0,
+          "z": 0
+        },
+        "size": 2.114
+      }
+    },
+    {
+      "id": "agentsrc:kimi-code",
+      "kind": "theme",
+      "label": "AI 工具·kimi-code（419 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 419
+      },
+      "theme_id": "agent-kimi-code",
+      "visual": {
+        "brightness": 0.9,
+        "color": "#ffd08f",
+        "position": {
+          "x": 33.0,
+          "y": 20.5551,
+          "z": 0
+        },
+        "size": 3.623
+      }
+    },
+    {
+      "id": "agentsrc:openchatcut",
+      "kind": "theme",
+      "label": "AI 工具·openchatcut（8 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 8
+      },
+      "theme_id": "agent-openchatcut",
+      "visual": {
+        "brightness": 0.9,
+        "color": "#c4c4c4",
+        "position": {
+          "x": 67.0,
+          "y": 20.5551,
+          "z": 0
+        },
+        "size": 1.954
+      }
+    },
+    {
+      "id": "agenttopic:修bug",
+      "kind": "theme",
+      "label": "我在做·修bug（1139 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 1139
+      },
+      "theme_id": "agent-topic-修bug",
+      "visual": {
+        "brightness": 0.75,
+        "color": "#ffffff",
+        "position": {
+          "x": 66.0,
+          "y": 50.0,
+          "z": 0
+        },
+        "size": 2.434
+      }
+    },
+    {
+      "id": "agenttopic:文档",
+      "kind": "theme",
+      "label": "我在做·文档（1071 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 1071
+      },
+      "theme_id": "agent-topic-文档",
+      "visual": {
+        "brightness": 0.75,
+        "color": "#ffffff",
+        "position": {
+          "x": 62.9443,
+          "y": 59.4046,
+          "z": 0
+        },
+        "size": 2.418
+      }
+    },
+    {
+      "id": "agenttopic:前端界面",
+      "kind": "theme",
+      "label": "我在做·前端界面（1002 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 1002
+      },
+      "theme_id": "agent-topic-前端界面",
+      "visual": {
+        "brightness": 0.75,
+        "color": "#ffffff",
+        "position": {
+          "x": 54.9443,
+          "y": 65.2169,
+          "z": 0
+        },
+        "size": 2.401
+      }
+    },
+    {
+      "id": "agenttopic:测试验收",
+      "kind": "theme",
+      "label": "我在做·测试验收（923 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 923
+      },
+      "theme_id": "agent-topic-测试验收",
+      "visual": {
+        "brightness": 0.75,
+        "color": "#ffffff",
+        "position": {
+          "x": 45.0557,
+          "y": 65.2169,
+          "z": 0
+        },
+        "size": 2.379
+      }
+    },
+    {
+      "id": "agenttopic:数据",
+      "kind": "theme",
+      "label": "我在做·数据（662 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 662
+      },
+      "theme_id": "agent-topic-数据",
+      "visual": {
+        "brightness": 0.75,
+        "color": "#ffffff",
+        "position": {
+          "x": 37.0557,
+          "y": 59.4046,
+          "z": 0
+        },
+        "size": 2.293
+      }
+    },
+    {
+      "id": "agenttopic:自动化",
+      "kind": "theme",
+      "label": "我在做·自动化（530 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 530
+      },
+      "theme_id": "agent-topic-自动化",
+      "visual": {
+        "brightness": 0.75,
+        "color": "#ffffff",
+        "position": {
+          "x": 34.0,
+          "y": 50.0,
+          "z": 0
+        },
+        "size": 2.235
+      }
+    },
+    {
+      "id": "agenttopic:治理",
+      "kind": "theme",
+      "label": "我在做·治理（168 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 168
+      },
+      "theme_id": "agent-topic-治理",
+      "visual": {
+        "brightness": 0.75,
+        "color": "#ffffff",
+        "position": {
+          "x": 37.0557,
+          "y": 40.5954,
+          "z": 0
+        },
+        "size": 1.937
+      }
+    },
+    {
+      "id": "agenttopic:部署上线",
+      "kind": "theme",
+      "label": "我在做·部署上线（152 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 152
+      },
+      "theme_id": "agent-topic-部署上线",
+      "visual": {
+        "brightness": 0.75,
+        "color": "#ffffff",
+        "position": {
+          "x": 45.0557,
+          "y": 34.7831,
+          "z": 0
+        },
+        "size": 1.911
+      }
+    },
+    {
+      "id": "agenttopic:重构简化",
+      "kind": "theme",
+      "label": "我在做·重构简化（85 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 85
+      },
+      "theme_id": "agent-topic-重构简化",
+      "visual": {
+        "brightness": 0.75,
+        "color": "#ffffff",
+        "position": {
+          "x": 54.9443,
+          "y": 34.7831,
+          "z": 0
+        },
+        "size": 1.761
+      }
+    },
+    {
+      "id": "agenttopic:赚钱",
+      "kind": "theme",
+      "label": "我在做·赚钱（80 会话）",
+      "layer": "agent_sessions",
+      "metrics": {
+        "sessions": 80
+      },
+      "theme_id": "agent-topic-赚钱",
+      "visual": {
+        "brightness": 0.75,
+        "color": "#ffffff",
+        "position": {
+          "x": 62.9443,
+          "y": 40.5954,
+          "z": 0
+        },
+        "size": 1.745
+      }
     }
   ],
   "overview": {
     "active_memory_count": 6,
+    "agent_session_count": 2770,
     "candidate_count_latest_snapshot": 108,
     "codex_session_count": 128,
     "conversation_count": 379,
-    "edge_count": 720,
+    "edge_count": 740,
     "generated_at": "2026-07-16T02:20:09.000Z",
     "memory_node_count": 124,
-    "node_count": 156,
-    "theme_node_count": 9
+    "node_count": 172,
+    "theme_node_count": 25
   },
   "schema_version": "memory_atlas.v1",
   "source_contract": {
@@ -29192,6 +29693,1122 @@
       "memory_id": "codex_recommendation_meta_codex_signal_no_plaintext_secrets_in_git",
       "memory_tier": "一般",
       "node_id": "memory:codex_recommendation_meta_codex_signal_no_plaintext_secrets_in_git"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-11-24",
+      "importance": "低",
+      "label": "3 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-11-25",
+      "importance": "低",
+      "label": "5 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-11-26",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-11-27",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-11-29",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-11-30",
+      "importance": "低",
+      "label": "6 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-12-01",
+      "importance": "低",
+      "label": "3 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-12-02",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-12-03",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-12-06",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-12-20",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-12-21",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2025-12-24",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-01",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-02",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-05",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-06",
+      "importance": "低",
+      "label": "3 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-12",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-13",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-14",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-15",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-16",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-20",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-21",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-22",
+      "importance": "低",
+      "label": "4 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-23",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-24",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-25",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-26",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-01-30",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-02-04",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-02-21",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-02-22",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-02-26",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-03-01",
+      "importance": "低",
+      "label": "3 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-03-03",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-03-05",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-03-14",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-03-21",
+      "importance": "低",
+      "label": "3 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-04-14",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-04-26",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-04-29",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-05-07",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-05-18",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-05-20",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-05-27",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-05-28",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-05-29",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-05-30",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-05-31",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-04",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-05",
+      "importance": "低",
+      "label": "12 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-06",
+      "importance": "低",
+      "label": "6 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-07",
+      "importance": "低",
+      "label": "7 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-08",
+      "importance": "低",
+      "label": "10 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-09",
+      "importance": "低",
+      "label": "6 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-10",
+      "importance": "低",
+      "label": "13 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-11",
+      "importance": "低",
+      "label": "12 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-12",
+      "importance": "低",
+      "label": "7 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-13",
+      "importance": "低",
+      "label": "6 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-14",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-15",
+      "importance": "低",
+      "label": "14 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-16",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-17",
+      "importance": "低",
+      "label": "12 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-18",
+      "importance": "低",
+      "label": "12 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-19",
+      "importance": "低",
+      "label": "16 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-20",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-21",
+      "importance": "低",
+      "label": "6 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-22",
+      "importance": "低",
+      "label": "9 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-23",
+      "importance": "低",
+      "label": "10 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-24",
+      "importance": "低",
+      "label": "3 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-25",
+      "importance": "低",
+      "label": "3 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-26",
+      "importance": "低",
+      "label": "6 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-27",
+      "importance": "低",
+      "label": "8 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-28",
+      "importance": "低",
+      "label": "5 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-29",
+      "importance": "低",
+      "label": "6 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-06-30",
+      "importance": "低",
+      "label": "5 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-01",
+      "importance": "低",
+      "label": "12 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-02",
+      "importance": "中",
+      "label": "26 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-03",
+      "importance": "低",
+      "label": "14 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-04",
+      "importance": "低",
+      "label": "13 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-05",
+      "importance": "低",
+      "label": "10 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-06",
+      "importance": "低",
+      "label": "19 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-07",
+      "importance": "低",
+      "label": "3 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-11",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-12",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-14",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-15",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-16",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-17",
+      "importance": "中",
+      "label": "30 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-18",
+      "importance": "低",
+      "label": "3 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-19",
+      "importance": "低",
+      "label": "3 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-20",
+      "importance": "中",
+      "label": "49 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-21",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-22",
+      "importance": "高",
+      "label": "260 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-23",
+      "importance": "低",
+      "label": "12 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-24",
+      "importance": "中",
+      "label": "41 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-25",
+      "importance": "低",
+      "label": "10 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-26",
+      "importance": "中",
+      "label": "70 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-27",
+      "importance": "高",
+      "label": "129 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-28",
+      "importance": "中",
+      "label": "47 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-29",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-30",
+      "importance": "低",
+      "label": "4 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-07-31",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-01",
+      "importance": "中",
+      "label": "49 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-02",
+      "importance": "中",
+      "label": "44 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-03",
+      "importance": "中",
+      "label": "53 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-04",
+      "importance": "中",
+      "label": "61 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-05",
+      "importance": "中",
+      "label": "47 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-06",
+      "importance": "低",
+      "label": "13 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-07",
+      "importance": "低",
+      "label": "3 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-08",
+      "importance": "低",
+      "label": "1 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-09",
+      "importance": "低",
+      "label": "16 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-10",
+      "importance": "中",
+      "label": "50 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-11",
+      "importance": "中",
+      "label": "31 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-12",
+      "importance": "低",
+      "label": "2 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-13",
+      "importance": "中",
+      "label": "35 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-14",
+      "importance": "中",
+      "label": "31 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-15",
+      "importance": "高",
+      "label": "442 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-16",
+      "importance": "低",
+      "label": "10 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-17",
+      "importance": "高",
+      "label": "763 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-18",
+      "importance": "中",
+      "label": "22 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-19",
+      "importance": "中",
+      "label": "36 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
+    },
+    {
+      "category": "agent_activity",
+      "date": "2026-08-20",
+      "importance": "低",
+      "label": "4 个会话",
+      "layer": "agent_sessions",
+      "memory_id": "",
+      "memory_tier": "一般"
     }
   ],
   "visual_layers": {

@@ -40,6 +40,8 @@ LESSONS = Path("OpenAIDatabase/data/derived/agent_context/LESSONS.md")
 # 公开面：只放脱敏聚合，不含任何原话与路径。
 # 本仓是 PUBLIC，而事件的 title 就是 Owner 当时说的原话 —— 合同禁止入库。
 PUBLIC = Path("OpenAIDatabase/data/derived/agent_context/PUBLIC_SUMMARY.md")
+# MemoryAtlas 前端读的可视化数据 —— 产出了却不在 Owner 会打开的地方，等于没产出。
+ATLAS = Path("OpenAIDatabase/data/derived/visualization/memory_atlas.json")
 ANALYSIS = Path("OpenAIDatabase/人类可读/memory-atlas/我在用AI做什么.md")
 
 
@@ -149,6 +151,8 @@ def main() -> int:
          SCRIPTS / "agent_journal_build.py"),
         (["--events", str(EVENTS), "--out", str(LESSONS)], "4_lessons",
          SCRIPTS / "agent_lessons_build.py"),
+        (["--events", str(EVENTS), "--atlas", str(ATLAS)], "5_atlas",
+         SCRIPTS / "agent_atlas_project.py"),
     ]
     results = [run(root, [str(script), *a], label) for a, label, script in steps]
 
