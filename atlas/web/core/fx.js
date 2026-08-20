@@ -1,5 +1,5 @@
 // core/fx.js —— 背景光场。三套主题三种性格，不是同一个效果换个颜色。
-//   星域  粒子 + 加色辉光 + 鼠标视差（参照 motionsites.ai 那类站点的做法）
+//   琉璃  粒子 + 加色辉光 + 鼠标视差（参照 motionsites.ai 那类站点的做法）
 //   控制台 细网格 + 缓慢扫描线，像示波器底噪
 //   手记  完全没有背景动效 —— 安静是这套主题的重点，加特效等于毁了它
 //
@@ -31,7 +31,7 @@ function resize() {
 function seed() {
   const colors = PALETTE[S.mode] || PALETTE.dark;
   // 粒子数按视口面积给，不是写死 —— 小窗口上 400 颗会糊成一片
-  const n = S.theme === 'nebula' ? Math.min(220, Math.round(w * h / 9000)) : 0;
+  const n = S.theme === 'glass' ? Math.min(220, Math.round(w * h / 9000)) : 0;
   particles = Array.from({ length: n }, (_, i) => ({
     x: Math.random() * w, y: Math.random() * h,
     z: 0.25 + Math.random() * 0.75,
@@ -44,7 +44,7 @@ function seed() {
   }));
 }
 
-function drawNebula(t) {
+function drawGlass(t) {
   ctx.clearRect(0, 0, w, h);
   // 两团缓慢漂移的辉光，给深空一点体积感
   const gx = w * (0.28 + 0.1 * Math.sin(t * 0.00007));
@@ -99,7 +99,7 @@ function frame(t) {
   if (!t0) t0 = t;
   mouse.x += (mouse.tx - mouse.x) * 0.055;
   mouse.y += (mouse.ty - mouse.y) * 0.055;
-  if (S.theme === 'nebula') drawNebula(t - t0);
+  if (S.theme === 'glass') drawGlass(t - t0);
   else if (S.theme === 'console') drawConsole(t - t0);
   else ctx.clearRect(0, 0, w, h);
   raf = requestAnimationFrame(frame);
@@ -132,7 +132,7 @@ export function initFX() {
   });
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     // 尊重系统设置：画一帧静态底纹就停，不做任何持续动画
-    if (S.theme === 'console') drawConsole(0); else if (S.theme === 'nebula') drawNebula(0);
+    if (S.theme === 'console') drawConsole(0); else if (S.theme === 'glass') drawGlass(0);
     return;
   }
   start();

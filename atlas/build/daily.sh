@@ -30,7 +30,13 @@ trap 'rmdir "$LOCK" 2>/dev/null || true' EXIT
 {
   echo "───── $(date -u +%FT%TZ) ─────"
   python3 "$ROOT/build/extract.py" --out "$WORK/out" --repo "$REPO"
-  python3 "$ROOT/build/build.py"   --sessions "$WORK/out" --out "$WORK/web"
+  # GitHub 活动：证明「做出来了」的那一半。拉不到不阻断本轮 —— 页面会把它标成「不确定」。
+  python3 "$ROOT/build/github.py" --out "$WORK/out/github.json" || echo "GitHub 拉取失败，本轮该块标不确定"
+  python3 "$ROOT/build/build.py"   --sessions "$WORK/out" --out "$WORK/web" \
+    --github "$WORK/out/github.json"
+  # 给 agent 看的开发经验沉淀。落私有目录，**绝不进公开仓**（里面有 Owner 原话）。
+  python3 "$ROOT/build/sediment.py" --sessions "$WORK/out" --out "$WORK/brief"
+
   # 页面本体来自仓里的 web/，数据来自 $WORK/web/atlas/ —— 发布时合到一起
   rsync -a --delete --exclude atlas/ "$ROOT/web/" "$WORK/web/"
   bash "$ROOT/build/deploy.sh" "$WORK/web"

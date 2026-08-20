@@ -1,6 +1,6 @@
 import { esc, go, local, topicColor, enter } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
-import { fitCanvas } from '../../../core/g3d.js';
+import { fitCanvas , cssVar } from '../../../core/g3d.js';
 import { sec, lede, p, n, big, aside, figure } from '../kit.js';
 
 export async function render(host) {
@@ -26,7 +26,7 @@ ${lede(`从 ${n(days[0].d)} 推到 ${n(days[days.length - 1].d)}，一帧一天�
 ${figure('<canvas class="viz" id="cv"></canvas>', '横轴为日期，纵轴为一天里的时刻。')}
 <div id="sum"></div>`;
   const cv = host.querySelector('#cv'), btn = host.querySelector('#play'), scrub = host.querySelector('#scrub');
-  const css = k => getComputedStyle(document.body).getPropertyValue(k).trim();
+  const css = k => cssVar(k);
   const draw = () => {
     const { ctx, w } = fitCanvas(cv, 380);
     const h = 380, pl = 48, pb = 20, pt = 10;

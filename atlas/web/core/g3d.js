@@ -147,3 +147,21 @@ export function loop(fn) {
   raf = requestAnimationFrame(tick);
   return { stop() { alive = false; cancelAnimationFrame(raf); } };
 }
+
+/** 读 CSS 变量并保证拿到一个合法颜色。
+ *  主题 CSS 还没加载、或变量名写错时，getPropertyValue 返回空串，
+ *  canvas 的 addColorStop('') 会直接抛错、整个视图当场死掉 —— 实测踩过。
+ *  兜底表放在这里而不是各个视图里：调用方少一个必须记得声明的东西，
+ *  就少一处会忘。一个取不到的颜色不该让页面崩。 */
+const CSS_FALLBACK = {
+  '--acc': '#7cc4ff', '--acc2': '#b58cff', '--ok': '#5ce6b4', '--warn': '#ffc46b', '--bad': '#ff7a92',
+  '--fg': '#e6e9ee', '--dim': '#8e99a8', '--dim2': '#5e6773',
+  '--line': '#2a3140', '--line2': '#1a2030', '--track': '#2a3140',
+  '--hair': '#1c2530', '--hair2': '#141b23', '--sel': '#1a2230',
+  '--rule': '#ddd4c4', '--rule2': '#ece4d5', '--paper': '#fffdf7',
+};
+
+export function cssVar(name, fallback) {
+  const v = getComputedStyle(document.body).getPropertyValue(name);
+  return (v && v.trim()) || fallback || CSS_FALLBACK[name] || '#888';
+}

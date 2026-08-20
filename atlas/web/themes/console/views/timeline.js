@@ -1,6 +1,6 @@
 import { esc, fmt, go, local, enter, topicColor, S } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
-import { fitCanvas, loop } from '../../../core/g3d.js';
+import { fitCanvas, loop , cssVar } from '../../../core/g3d.js';
 import { sec, kv, table, warn, rate } from '../kit.js';
 
 // 之前这一屏只是好看。现在它要能回答问题：拖出一段区间，立刻给这段的合计。
@@ -26,7 +26,7 @@ ${sec('TIMELINE', '每行一天，横轴 00:00→24:00（悉尼）。一竖＝�
   const cv = host.querySelector('#cv'), hud = host.querySelector('#hud');
   let rows = [], drag = null;
 
-  const css = k => getComputedStyle(document.body).getPropertyValue(k).trim();
+  const css = k => cssVar(k);
   const draw = () => {
     rows = (range ? days.slice(-range) : days).slice().reverse();
     const rowH = 15, padL = 78, padT = 18;

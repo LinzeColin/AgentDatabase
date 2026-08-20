@@ -1,9 +1,9 @@
 import { esc, fmt, go, local, enter, topicColor, S } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
-import { fitCanvas } from '../../../core/g3d.js';
+import { fitCanvas , cssVar } from '../../../core/g3d.js';
 import { sec, bento, orbit, drawer, table, pill, rate } from '../kit.js';
 
-// 星域版时间轴：一条带辉光的星河。横拖框选一段，立刻给这段的合计 —— 这是它的功能价值。
+// 琉璃版时间轴：一条带辉光的星河。横拖框选一段，立刻给这段的合计 —— 这是它的功能价值。
 export async function render(host) {
   const days = D.days(), all = D.A().sessions;
   const byDay = new Map();
@@ -24,7 +24,7 @@ ${sec('星河', '每行一天，横轴 00:00→24:00（悉尼）。<b>在图上�
 
   const cv = host.querySelector('#cv'), hud = host.querySelector('#hud');
   let rows = [], drag = null;
-  const css = k => getComputedStyle(document.body).getPropertyValue(k).trim();
+  const css = k => cssVar(k);
 
   const draw = () => {
     rows = (range ? days.slice(-range) : days).slice().reverse();

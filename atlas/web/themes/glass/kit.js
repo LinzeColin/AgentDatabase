@@ -1,4 +1,4 @@
-// 星域主题的组件词汇。只属于这个主题。
+// 琉璃主题的组件词汇。只属于这个主题。
 // 主表面不放表格 —— 数字先变成轨道条、弧、卡片，明细收进抽屉。
 import { esc, fmt, pct } from '../../core/app.js';
 
@@ -12,7 +12,7 @@ export const bento = cards => `<div class="bento">${cards.map(c =>
      <div class="cn">${c.n || ''}</div>
      ${c.extra || ''}</div>`).join('')}</div>`;
 
-/** 轨道条：星域用它代替排行表。 */
+/** 轨道条：琉璃用它代替排行表。 */
 export const orbit = rows => {
   const mx = Math.max(1, ...rows.map(r => r.v));
   return `<div class="orbit">${rows.map(r => `

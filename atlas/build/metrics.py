@@ -236,3 +236,84 @@ def coupling_block(sessions: list, min_weight: int = 2) -> dict:
                 f"只统计你亲自开口的会话。",
         "dropped_edges": len(edges) - len(keep),
     }
+
+
+# —— 交付对照 ——
+# 会话记录只能证明你**在做**，GitHub 才能证明你**做出来了**。
+# 两条曲线放在一起，「建设 : 交付」那个比例才不是自说自话。
+def delivery_block(sessions: list, gh: dict) -> dict:
+    if not gh or gh.get("state") == "不确定":
+        return {"state": "不确定",
+                "why": (gh or {}).get("why", "没有 GitHub 数据"),
+                "days": [], "projects": [], "totals": {}}
+
+    hum = [s for s in sessions if s.get("kind") == "human"]
+    sess_by_day = Counter()
+    turns_by_day = Counter()
+    for s in hum:
+        d = local_dt(s.get("start", ""))
+        if d:
+            sess_by_day[d.date().isoformat()] += 1
+            turns_by_day[d.date().isoformat()] += s.get("turns", 0)
+
+    gh_by_day = {r["d"]: r for r in gh.get("days", [])}
+    all_days = sorted(set(sess_by_day) | set(gh_by_day))
+    rows = []
+    for d in all_days:
+        g = gh_by_day.get(d, {})
+        rows.append({
+            "d": d,
+            "sessions": sess_by_day.get(d, 0),
+            "turns": turns_by_day.get(d, 0),
+            "commits": g.get("commits", 0),
+            "prs": g.get("prs", 0),
+            "merged": g.get("merged", 0),
+            "releases": g.get("releases", 0),
+            "repos": g.get("repos", {}),
+        })
+
+    talked = [r for r in rows if r["sessions"] > 0]
+    shipped = [r for r in rows if r["commits"] > 0]
+    both = [r for r in rows if r["sessions"] > 0 and r["commits"] > 0]
+    talk_only = [r for r in rows if r["sessions"] > 0 and r["commits"] == 0]
+    ship_only = [r for r in rows if r["sessions"] == 0 and r["commits"] > 0]
+
+    tot_s = sum(r["sessions"] for r in rows)
+    tot_c = sum(r["commits"] for r in rows)
+
+    # 项目层：会话里提到的项目名 vs 仓名，能对上的才算
+    repo_names = {r["repo"] for r in gh.get("repos", [])}
+    repo_commits = {r["repo"]: r["commits"] for r in gh.get("repos", [])}
+    proj_sessions = Counter(s.get("project") or "未标注" for s in hum)
+    matched, unmatched = [], []
+    for p, n in proj_sessions.most_common(40):
+        hit = next((r for r in repo_names if r.lower() == p.lower()
+                    or p.lower().startswith(r.lower()) or r.lower().startswith(p.lower())), None)
+        if hit:
+            matched.append({"project": p, "repo": hit, "sessions": n,
+                            "commits": repo_commits.get(hit, 0),
+                            "per_session": round(repo_commits.get(hit, 0) / max(1, n), 2)})
+        elif n >= 3:
+            unmatched.append({"project": p, "sessions": n})
+    matched.sort(key=lambda r: -r["sessions"])
+
+    return {
+        "state": "通",
+        "days": rows,
+        "projects": matched,
+        "unmatched_projects": unmatched[:20],
+        "totals": {
+            "days_talked": len(talked),
+            "days_shipped": len(shipped),
+            "days_both": len(both),
+            "days_talk_only": len(talk_only),
+            "days_ship_only": len(ship_only),
+            "sessions": tot_s,
+            "commits": tot_c,
+            "commits_per_session": round(tot_c / max(1, tot_s), 3),
+            "overlap_rate": round(len(both) / max(1, len(talked)), 4),
+        },
+        "note": "「只聊没交付」＝那天有会话但没有一条属于你的提交。"
+                "不代表白干（可能在读、在想、在做仓外的事），但它是那条比例最直观的证据。"
+                "项目名与仓名对不上的单独列出，不硬凑。",
+    }

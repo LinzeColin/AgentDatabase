@@ -25,7 +25,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from extract import TOPICS, SKIPPED  # noqa: E402  词表是唯一真源，不在这里复制一份
-from metrics import token_block, economics_block, coupling_block  # noqa: E402
+from metrics import token_block, economics_block, coupling_block, delivery_block  # noqa: E402
+import taxonomy  # noqa: E402
+import aei as aei_mod  # noqa: E402
 
 SLICES = [3, 7, 15, 30, 45, 60, 90, 180]
 
@@ -189,7 +191,16 @@ def mark_fanout(sessions: list) -> int:
     return n
 
 
-def build(sessions: list, out: Path) -> dict:
+def _load_gh(path: str) -> dict:
+    if not path:
+        return {}
+    try:
+        return json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def build(sessions: list, out: Path, gh: dict | None = None) -> dict:
     fanout_n = mark_fanout(sessions)
     weights = keyword_weights(sessions)
     for s in sessions:
@@ -257,6 +268,10 @@ def build(sessions: list, out: Path) -> dict:
         "lessons": lessons_block(sessions, proj_rows),
         "opportunities": opportunity_block(sessions, proj_rows),
         "tokens": token_block(sessions),
+        "stack": taxonomy.summarize(sessions),
+        "aei": aei_mod.build(sessions),
+        "github": {k: v for k, v in (gh or {}).items() if k not in ("prs", "days")} or {"state": "不确定"},
+        "delivery": delivery_block(sessions, gh or {}),
         "economics": economics_block(sessions, _ladder_counts(sessions)),
         "coupling": coupling_block(sessions),
         "keyword_weights": {k: round(v, 3) for k, v in sorted(weights.items(), key=lambda kv: -kv[1])[:60]},
@@ -610,6 +625,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sessions", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--github", default="", help="github.py 产出的 json；缺省则该块标「不确定」")
     args = ap.parse_args()
     sess = load(Path(args.sessions))
     if not sess:
@@ -617,7 +633,7 @@ def main() -> int:
         return 1
     out = Path(args.out)
     (out / "atlas").mkdir(parents=True, exist_ok=True)
-    atlas = build(sess, out / "atlas")
+    atlas = build(sess, out / "atlas", _load_gh(args.github))
     p = out / "atlas" / "atlas.json"
     p.write_text(json.dumps(atlas, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     m = atlas["meta"]

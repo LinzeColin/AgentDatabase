@@ -1,6 +1,6 @@
 import { esc, fmt, go, local, enter, topicColor } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
-import { fitCanvas } from '../../../core/g3d.js';
+import { fitCanvas , cssVar } from '../../../core/g3d.js';
 import { sec, lede, p, n, big, aside, figure, rank, table, rate } from '../kit.js';
 
 // 手记版时间轴：一条一条的墨点行。竖着拖能框选一段，立刻给这段的合计。
@@ -25,7 +25,7 @@ ${figure('<canvas class="viz" id="cv"></canvas>', '横轴为一天 24 小时，�
 
   const cv = host.querySelector('#cv'), hud = host.querySelector('#hud');
   let rows = [], drag = null;
-  const css = k => getComputedStyle(document.body).getPropertyValue(k).trim();
+  const css = k => cssVar(k);
   const draw = () => {
     rows = (range ? days.slice(-range) : days).slice().reverse();
     const rowH = 14, padL = 74, padT = 20;

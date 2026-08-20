@@ -1,5 +1,5 @@
 import { esc } from '../../core/app.js';
-export const css = 'themes/nebula/shell.css';
+export const css = 'themes/glass/shell.css';
 export function chrome(mount) {
   mount.innerHTML = `
     <canvas id="fxlayer"></canvas>
