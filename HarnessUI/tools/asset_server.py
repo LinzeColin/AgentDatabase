@@ -28,6 +28,7 @@ import argparse
 import functools
 import http.server
 import pathlib
+import time
 import socketserver
 
 
@@ -45,9 +46,25 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Cache-Control", "public, max-age=86400")
         super().end_headers()
 
+    def do_POST(self):
+        """插件把自己的状态回报到这里，落成一行日志。
+
+        为什么需要它：DSH 是打包应用，它的渲染进程既不能从外面查 DOM，
+        也不方便开控制台 —— 用鼠标去点它的开发者工具已经出过一次事故
+        （点错窗口，把诊断代码打进了用户正在用的另一个应用并发送）。
+        让被诊断的代码自己说话，比隔着屏幕去问它可靠得多。
+        """
+        if not self.path.startswith("/__diag"):
+            self.send_response(404); self.end_headers(); return
+        length = int(self.headers.get("content-length") or 0)
+        body = self.rfile.read(length).decode("utf-8", "replace")[:4000]
+        with open(pathlib.Path.home() / ".harness-ui" / "diag.log", "a") as handle:
+            handle.write(f"{time.strftime('%H:%M:%S')}  {body}\n")
+        self.send_response(204); self.end_headers()
+
     def do_OPTIONS(self):
         self.send_response(204)
-        self.send_header("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS")
+        self.send_header("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "*")
         self.end_headers()
 

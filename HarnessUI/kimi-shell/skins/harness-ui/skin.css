@@ -6,19 +6,19 @@
    而换一次角色只改一个变量，比重新注入整段样式快得多，也不会闪。 */
 
 :root, html[data-color-scheme="light"], html[data-color-scheme="system"] {
-  --color-bg: #f4f0f5;
-  --bg: rgba(248, 244, 249, .34);
-  --canvas: rgba(248, 244, 249, .48);
-  --color-surface: rgba(250, 246, 250, .74);
+  --color-bg: transparent;
+  --bg: transparent;
+  --canvas: transparent;
+  --color-surface: rgba(250, 246, 250, .28);
   --color-surface-raised: rgba(253, 251, 253, .88);
   --color-surface-overlay: rgba(253, 251, 253, .95);
-  --color-surface-sunken: rgba(238, 230, 240, .70);
-  --color-surface-deep: rgba(238, 230, 240, .62);
-  --color-sidebar-bg: rgba(246, 241, 247, .44);
-  --color-sidebar-tint: rgba(255, 255, 255, .30);
-  --panel: rgba(250, 246, 250, .74);
+  --color-surface-sunken: rgba(238, 230, 240, .26);
+  --color-surface-deep: rgba(238, 230, 240, .24);
+  --color-sidebar-bg: transparent;
+  --color-sidebar-tint: transparent;
+  --panel: rgba(250, 246, 250, .30);
   --panel2: rgba(120, 85, 115, .08);
-  --color-well: rgba(238, 230, 240, .60);
+  --color-well: rgba(238, 230, 240, .24);
   --color-menu-bg: rgba(252, 249, 252, .96);
   --color-composer-bg: rgba(253, 251, 253, .90);
   --color-user-bubble-bg: rgba(243, 232, 242, .86);
@@ -36,19 +36,19 @@
 
 html[data-color-scheme="dark"], :root[data-color-scheme="dark"],
 html[data-color-scheme="dark"] :root {
-  --color-bg: #150f18;
-  --bg: rgba(21, 15, 24, .36);
-  --canvas: rgba(21, 15, 24, .50);
-  --color-surface: rgba(30, 22, 34, .74);
+  --color-bg: transparent;
+  --bg: transparent;
+  --canvas: transparent;
+  --color-surface: rgba(30, 22, 34, .30);
   --color-surface-raised: rgba(38, 28, 43, .88);
   --color-surface-overlay: rgba(38, 28, 43, .95);
-  --color-surface-sunken: rgba(17, 12, 20, .72);
-  --color-surface-deep: rgba(17, 12, 20, .64);
-  --color-sidebar-bg: rgba(21, 15, 24, .46);
-  --color-sidebar-tint: rgba(255, 255, 255, .05);
-  --panel: rgba(30, 22, 34, .74);
+  --color-surface-sunken: rgba(17, 12, 20, .28);
+  --color-surface-deep: rgba(17, 12, 20, .26);
+  --color-sidebar-bg: transparent;
+  --color-sidebar-tint: transparent;
+  --panel: rgba(30, 22, 34, .32);
   --panel2: rgba(210, 180, 205, .08);
-  --color-well: rgba(17, 12, 20, .62);
+  --color-well: rgba(17, 12, 20, .26);
   --color-menu-bg: rgba(28, 20, 32, .96);
   --color-composer-bg: rgba(34, 25, 38, .90);
   --color-user-bubble-bg: rgba(48, 34, 52, .86);
@@ -64,22 +64,44 @@ html[data-color-scheme="dark"] :root {
   --p-selection: rgba(221, 168, 196, .32);
 }
 
+/* 大面积一律透明。这些底色原本是半透明浅色，叠在立绘上等于蒙了一层雾 ——
+   DSH 那边同一个毛病表现为「整张图被盖住」，这边表现为「发灰发糊」，同一个根因。
+   只有输入框、弹窗、菜单保留底色，因为那几处不给底真的读不清。 */
 body { background-color: transparent !important; }
 #app, .app { background-color: transparent !important; }
+#app :is(input, textarea, select),
+#app :is([role=dialog], [role=menu], [role=listbox], [role=tooltip]) {
+  background-color: rgba(253, 251, 253, .86) !important;
+}
+html[data-color-scheme="dark"] #app :is(input, textarea, select),
+html[data-color-scheme="dark"] #app :is([role=dialog], [role=menu], [role=listbox], [role=tooltip]) {
+  background-color: rgba(22, 16, 26, .84) !important;
+}
 
 #app {
   background-image: var(--hu-scene, none) !important;
   background-position: center center !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
-  background-attachment: fixed !important;
+  /* 这里原本是 `background-attachment: fixed`。它把背景推进独立合成层，
+     而 Chromium 在这条路径上常按 1x 光栅化再放大到 DPR 2 —— Retina 上看就是
+     「不至于看不清、但明显不够锐」。#app 本来就铺满整窗，fixed 一点好处都没有。
+     同时去掉的还有 background-image 的 transition：它会再造一层做交叉淡入，
+     换图那一瞬同样走低质量光栅。切换的平滑感由预取保证，不靠这个。 */
+  background-attachment: scroll !important;
   background-color: #efe6f0 !important;
-  /* 一次性过渡，绝不用 infinite 动画 —— 那是 DSH 那次 111% CPU 的真因 */
-  transition: background-image 320ms ease;
 }
 html[data-color-scheme="dark"] #app {
   background-image: var(--hu-scene-dark, var(--hu-scene, none)) !important;
   background-color: #120d15 !important;
 }
-/* 角色立绘压在左三分之一，正文区给一点毛玻璃，字才压得住画面 */
-.app { backdrop-filter: blur(2px) saturate(1.04); }
+/* 这里原本是 `.app { backdrop-filter: blur(2px) }`。
+   backdrop-filter 糊的是元素**背后的一切** —— 而 .app 铺满整窗，所以它把整张
+   人物立绘都糊掉了。用户的原话是「人物模型在文本的后面，不清楚很模糊」，
+   单独看图 100% 清楚、DSH 95%、这里只剩 10%，差的就是这一行。
+
+   文字可读性改由消息气泡自己承担：只在气泡范围内加不透明底，
+   人物所在的空白区一点不动。 */
+[class*="message"], [class*="bubble"], [class*="composer"], [class*="input"] {
+  backdrop-filter: saturate(1.05);
+}

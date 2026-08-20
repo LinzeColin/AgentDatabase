@@ -11,9 +11,10 @@
  * DSH 插件和 Kimi 外壳各自去读。两个宿主的皮肤机制天差地别，但它们需要
  * 达成一致的只有一句话——现在显示哪个角色。
  */
-const { app, BrowserWindow, Menu, Tray, nativeImage, ipcMain, shell } = require("electron");
+const { app, BrowserWindow, Menu, Tray, nativeImage, ipcMain, shell, dialog } = require("electron");
 const path = require("node:path");
 const fs = require("node:fs");
+const { execFile } = require("node:child_process");
 const store = require("./state");
 
 let tray = null;
@@ -22,6 +23,48 @@ let timer = null;
 let entries = [];
 
 const byId = (id) => entries.find(e => e.id === id) || null;
+const hidden = () => new Set(store.read().hidden || []);
+/** 轮播和画廊都只看这一份。隐藏的既不轮到，也不显示。 */
+const visible = () => { const h = hidden(); return entries.filter(e => !h.has(e.id)); };
+
+function setHidden(id, on) {
+  const s = store.read();
+  const set = new Set(s.hidden || []);
+  on ? set.add(id) : set.delete(id);
+  s.hidden = [...set];
+  // 周期里可能还留着刚隐藏的那张，清掉重洗，否则下一格会跳到一张已经不该出现的图
+  if (on && s.cycle?.includes(id)) { s.cycle = []; s.cursor = 0; }
+  store.write(s);
+  refresh();
+  return s;
+}
+
+/** 真删文件。隐藏可以撤销，这个不行，所以要单独确认。 */
+function removeFiles(id) {
+  for (const root of ["display", "thumb"]) {
+    const dir = path.join(store.ROOT, root, id);
+    try { fs.rmSync(dir, { recursive: true, force: true }); } catch {}
+  }
+  entries = entries.filter(e => e.id !== id);
+  const s = store.read();
+  s.hidden = (s.hidden || []).filter(x => x !== id);
+  if (s.selected === id) s.selected = null;
+  s.cycle = []; s.cursor = 0;
+  store.write(s);
+  refresh();
+}
+
+/** 收一张外部图片进库。缩放交给 Python —— Electron 不会编 WebP。 */
+function importImage(file, id, side) {
+  return new Promise((resolve) => {
+    execFile("/usr/bin/python3", [path.join(store.ROOT, "import_one.py"),
+                                  "--src", file, "--id", id, "--side", side],
+      (error, stdout) => {
+        if (error) { resolve({ ok: false, error: error.message.slice(0, 160) }); return; }
+        try { resolve(JSON.parse(stdout)); } catch { resolve({ ok: true, id, side }); }
+      });
+  });
+}
 
 function label(entry) {
   if (!entry) return "未选择";
@@ -34,8 +77,9 @@ function rotate(force) {
   const s = store.read();
   const now = Date.now();
   if (!force && now - (s.lastRotate || 0) < s.intervalMs) return;
-  if (!entries.length) return;
-  if (!s.cycle.length || s.cursor >= s.cycle.length) { s.cycle = store.newCycle(entries); s.cursor = 0; }
+  const pool = visible();
+  if (!pool.length) return;
+  if (!s.cycle.length || s.cursor >= s.cycle.length) { s.cycle = store.newCycle(pool); s.cursor = 0; }
   let entry = null;
   // 跳过素材里已经不存在的 id —— 素材库增删过之后旧周期里会留下空号
   while (s.cursor < s.cycle.length && !entry) { entry = byId(s.cycle[s.cursor]); s.cursor += 1; }
@@ -79,6 +123,35 @@ function schedule() {
   timer = setInterval(() => rotate(false), 60 * 1000);
 }
 
+/** 挑文件 → 问归属 → 转成 WebP 落库 → 重扫。 */
+async function addAssetFlow() {
+  const { canceled, filePaths } = await dialog.showOpenDialog({
+    title: "添加素材（16:9 最好，其他比例会按居中裁切）",
+    properties: ["openFile", "multiSelections"],
+    filters: [{ name: "图片", extensions: ["png", "jpg", "jpeg", "webp"] }],
+  });
+  if (canceled || !filePaths.length) return { ok: false, cancelled: true };
+
+  let added = 0;
+  for (const file of filePaths) {
+    // 从文件名猜归属：<game>-<character>-<variant>-<side> 或 <character>-<side>。
+    // 猜不准也没关系，用户能在素材目录里改名重导，比弹五个输入框强。
+    const stem = path.basename(file).replace(/\.[^.]+$/, "");
+    const side = /(^|[-_])dark([-_]|$)/i.test(stem) ? "dark" : "light";
+    const clean = stem.replace(/[-_](light|dark)([-_].*)?$/i, "");
+    const bits = clean.split(/[-_]/).filter(Boolean);
+    const game = ["genshin", "hsr", "zzz"].includes(bits[0]) ? bits.shift() : "custom";
+    const character = bits.shift() || "unnamed";
+    const variant = bits.join("-") || "default";
+    const result = await importImage(file, `${game}/${character}/${variant}`, side);
+    if (result.ok) added += 1;
+  }
+  rescan();
+  await dialog.showMessageBox({ type: "info", message: `已导入 ${added} / ${filePaths.length} 张`,
+    detail: "只导入了一侧的，另一侧（昼或夜）会用同一张顶上，直到你补上。" });
+  return { ok: true, added };
+}
+
 function openGallery() {
   if (gallery && !gallery.isDestroyed()) { gallery.show(); gallery.focus(); return; }
   gallery = new BrowserWindow({
@@ -94,11 +167,12 @@ function buildMenu() {
   const s = store.read();
   const cur = byId(s.selected);
   const games = {};
-  for (const e of entries) (games[e.gameName] ||= []).push(e);
+  const h = hidden();
+  for (const e of visible()) (games[e.gameName] ||= []).push(e);
 
   const template = [
     { label: `当前：${label(cur)}`, enabled: false },
-    { label: `素材库 ${entries.length} 个变体`, enabled: false },
+    { label: `素材库 ${entries.length} 个变体` + (h.size ? `（已隐藏 ${h.size}）` : ""), enabled: false },
     { type: "separator" },
     { label: "角色画廊（缩略图）…", accelerator: "Cmd+Shift+K", click: openGallery },
     { label: "换下一张", accelerator: "Cmd+Shift+N", click: () => rotate(true) },
@@ -127,11 +201,11 @@ function buildMenu() {
 
   template.push(
     { type: "separator" },
+    { label: "添加素材…", click: () => addAssetFlow() },
+    ...(h.size ? [{ label: `取消隐藏全部（${h.size}）`, click: () => {
+        const st = store.read(); st.hidden = []; st.cycle = []; st.cursor = 0; store.write(st); refresh(); } }] : []),
     { label: "打开素材目录", click: () => shell.openPath(store.ROOT) },
-    { label: "重新扫描素材库", click: () => {
-        entries = store.catalog().map(e => ({ ...e,
-          thumbFile: "file://" + path.join(store.ROOT, "thumb", e.id, "light.webp") }));
-        refresh(); } },
+    { label: "重新扫描素材库", click: rescan },
     { type: "separator" },
     { label: "退出 HarnessUI 控制器", role: "quit" },
   );
@@ -154,11 +228,17 @@ function trayIcon() {
   return nativeImage.createEmpty();
 }
 
+/** 重扫目录并补上本地缩略图路径（画廊是 file:// 页面，用不了 http 那份 URL）。 */
+function rescan() {
+  entries = store.catalog().map(e => ({ ...e,
+    thumbFile: "file://" + path.join(store.ROOT, "thumb", e.id, "light.webp") }));
+  refresh();
+}
+
 app.whenReady().then(() => {
   // 菜单栏程序不该占 Dock 图标，也不该抢焦点
   if (app.dock) app.dock.hide();
-  entries = store.catalog().map(e => ({ ...e,
-    thumbFile: "file://" + path.join(store.ROOT, "thumb", e.id, "light.webp") }));
+  rescan();
   tray = new Tray(trayIcon());
   tray.setToolTip("HarnessUI 皮肤");
   // 图标之外再挂一个短标题：模板图在某些菜单栏配置下不显眼，文字保证找得到。
@@ -167,7 +247,19 @@ app.whenReady().then(() => {
   schedule();
   if (store.read().mode === "rotate") rotate(false);
 
-  ipcMain.handle("harness:list", () => entries);
+  ipcMain.handle("harness:list", () => entries.map(e => ({ ...e, hidden: hidden().has(e.id) })));
+  ipcMain.handle("harness:hide", (_e, id, on) => setHidden(id, on));
+  ipcMain.handle("harness:delete", async (_e, id) => {
+    const { response } = await dialog.showMessageBox({
+      type: "warning", buttons: ["删除文件", "取消"], defaultId: 1, cancelId: 1,
+      message: `删除「${label(byId(id))}」的素材文件？`,
+      detail: "display 与 thumb 都会删掉，无法撤销。母版仍在 NAS 上，可以重新导入。",
+    });
+    if (response !== 0) return { ok: false, cancelled: true };
+    removeFiles(id);
+    return { ok: true };
+  });
+  ipcMain.handle("harness:import", () => addAssetFlow());
   ipcMain.handle("harness:state", () => store.read());
   ipcMain.handle("harness:pick", (_e, id) => { pick(id); return store.read(); });
   ipcMain.handle("harness:mode", (_e, m) => { setMode(m); return store.read(); });

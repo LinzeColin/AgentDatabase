@@ -103,16 +103,40 @@ window.__ModuleLoader__.load({
 			const style = document.createElement("style");
 			style.id = "harness-ui-skin";
 			style.textContent = `
-body[data-dsh-harness-ui]::before {
-  content: ""; position: fixed; inset: 0; z-index: -1;
-  background-image: var(--harness-bg, none);
-  background-size: cover; background-position: center;
-  background-color: var(--harness-fallback, #0d1117);
-  /* One-shot on change. Never 'infinite' — see the CPU note at the top. */
-  transition: opacity 420ms ease;
-  opacity: var(--harness-bg-opacity, 1);
+/* 背板直接画在根容器上，不用 body::before。
+   z-index:-1 的伪元素要能看见，得 html、body 和每一层祖先都不挡它 —— 实测在 DSH
+   里挡住了：面板、缩略图、切换全都工作，窗口里却是一片空白默认界面。
+   鲸鱼娘皮肤（在这个宿主上一直好用）就是直接画在 [id=root] 上的，照它来。 */
+body[data-dsh-harness-ui],
+html:has(body[data-dsh-harness-ui]) { background: transparent !important; }
+
+body[data-dsh-harness-ui] [id=root],
+body[data-dsh-harness-ui] #app {
+  background-image: var(--harness-bg, none) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: var(--harness-fallback, #0d1117) !important;
 }
-body[data-dsh-harness-ui] { background: transparent; }
+/* 根容器之下的不透明底全部清掉，否则它们把背板整个盖住。
+   实测：挡住的是 DIV.pI_x6G_frame（铺满窗口的纯白层），但那是编译出来的哈希类名，
+   DSH 每次构建都会变，写死它等于埋定时炸弹；而只清三层结构又清不干净——
+   把全部后代清空、再按"这个元素承不承载文字"把底加回去，才是不依赖类名的做法。 */
+body[data-dsh-harness-ui] [id=root] * { background-color: transparent !important; }
+
+/* 加回来的只有真正需要底色才读得清的：输入框、弹窗、菜单、下拉。
+   用半透明而不是纯色，背板仍然透得出来——这也是参照皮肤的做法。 */
+body[data-dsh-harness-ui] [id=root] :is(input, textarea, select),
+body[data-dsh-harness-ui] [id=root] :is([role=dialog], [role=menu], [role=listbox], [role=tooltip]),
+body[data-dsh-harness-ui] [id=root] :is(pre, code) {
+  background-color: rgba(255, 255, 255, .82) !important;
+}
+body[data-dsh-harness-ui][data-ds-dark-theme] [id=root] :is(input, textarea, select),
+body[data-dsh-harness-ui][data-ds-dark-theme] [id=root] :is([role=dialog], [role=menu], [role=listbox], [role=tooltip]),
+body[data-dsh-harness-ui][data-ds-dark-theme] [id=root] :is(pre, code) {
+  background-color: rgba(16, 22, 36, .80) !important;
+}
+
 body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef7; }
 #harness-ui-picker {
   position: fixed; right: 16px; bottom: 56px; width: min(720px, 68vw);
@@ -148,9 +172,7 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 }
 #harness-ui-bar button { cursor: pointer; }
 #harness-ui-bar .hu-status { margin-left: auto; color: #93a4c2; font-size: 11px; }
-@media (prefers-reduced-motion: reduce) {
-  body[data-dsh-harness-ui]::before { transition: none; }
-}`;
+`;
 			return style;
 		}
 
@@ -175,6 +197,7 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 				const url = isDark() ? entry.dark : entry.light;
 				const ready = await preload(url);
 				if (!ready) {
+					report("image-failed", { url: url.slice(0, 120) });
 					console.warn("[harness-ui] 素材加载失败，保留当前背景:", url);
 					return false;
 				}
@@ -360,12 +383,23 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 
 			/* ---------------- boot ---------------- */
 
+			/** 把自己的状态回报给素材服务。宿主是打包应用，从外面查不了它的 DOM。 */
+			const report = (stage, extra) => {
+				try {
+					fetch("http://127.0.0.1:3099/__diag", { method: "POST", mode: "no-cors",
+						body: JSON.stringify({ stage, ...extra }) });
+				} catch { /* 诊断失败不该影响皮肤本身 */ }
+			};
+
 			(async () => {
+				report("boot", { href: location.href, scoped: document.body.hasAttribute("data-dsh-harness-ui") });
 				try {
 					const response = await fetch(CATALOG_URL, { cache: "no-store" });
 					catalog = await response.json();
+					report("catalog", { count: catalog?.entries?.length ?? null });
 				} catch (error) {
 					status("素材服务未启动");
+					report("catalog-failed", { error: String(error).slice(0, 160) });
 					console.warn("[harness-ui] 目录拉取失败：", error);
 					return;
 				}
@@ -385,6 +419,11 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 				else await rotate(true);
 				schedule();
 				syncTimer = setInterval(syncShared, SYNC_MS);
+				report("ready", {
+					cards: panel.querySelectorAll(".hu-card").length,
+					bg: root.style.getPropertyValue("--harness-bg").slice(0, 90),
+					mode: state.mode, selected: state.selected,
+				});
 			})();
 
 			// Day/night is the host's decision; follow it without re-fetching the

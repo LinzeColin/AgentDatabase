@@ -40,8 +40,10 @@ function catalog() {
     harnessCatalog = raw.entries.map(e => ({
       id: e.id, game: e.game, gameName: e.gameName, character: e.character, variant: e.variant,
       label: e.label || e.character, characterZh: e.characterZh,
-      light: `kimiskin://${HARNESS}/display/${e.id}/light.webp`,
-      dark:  `kimiskin://${HARNESS}/display/${e.id}/dark.webp`,
+      // 母版 PNG，不是重编码的 WebP —— 这批图是花钱产出的，压缩省下的几百 KB
+      // 换不来削掉的线稿锐度。7MB 解码约 0.3 秒，预取已经把它藏在切换之前。
+      light: `kimiskin://${HARNESS}/master/${e.id}/light.png`,
+      dark:  `kimiskin://${HARNESS}/master/${e.id}/dark.png`,
       thumb: `kimiskin://${HARNESS}/thumb/${e.id}/light.webp`,
     }));
   } catch { harnessCatalog = []; }
@@ -55,7 +57,7 @@ function catalog() {
 const SHARED_DIR = path.join(HOME, ".harness-ui");
 const SHARED = path.join(SHARED_DIR, "state.json");
 const H_DEFAULTS = { mode: "gallery", selected: null, cycle: [], cursor: 0,
-                     lastRotate: 0, intervalMs: 4*3600*1000 };
+                     lastRotate: 0, intervalMs: 4*3600*1000, hidden: [] };
 const hstate = () => { try { return { ...H_DEFAULTS, ...JSON.parse(fs.readFileSync(SHARED, "utf8")) }; }
                        catch { return { ...H_DEFAULTS }; } };
 const saveH = (h) => {
@@ -86,7 +88,9 @@ function watchShared() {
 
 /** 一个不重复的完整周期。走完才重洗，这样「一轮覆盖全库」是真的。 */
 function newCycle() {
-  const ids = catalog().map(e => e.id);
+  // 隐藏的既不轮到也不在菜单里。增删的真源在菜单栏控制器，这边只是照着办。
+  const hide = new Set(hstate().hidden || []);
+  const ids = catalog().filter(e => !hide.has(e.id)).map(e => e.id);
   for (let i = ids.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [ids[i], ids[j]] = [ids[j], ids[i]]; }
   return ids;
 }
@@ -214,15 +218,17 @@ async function applySkinNow(id) {
 
 /** HarnessUI 的子菜单。皮肤没装时给一行说明，而不是一个空菜单。 */
 function harnessMenu() {
-  const list = catalog();
-  if (!list.length) return [{ label: "未找到角色库（skins/harness-ui/assets/catalog.json）", enabled: false }];
+  const all = catalog();
+  if (!all.length) return [{ label: "未找到角色库（skins/harness-ui/assets/catalog.json）", enabled: false }];
   const h = hstate();
+  const hide = new Set(h.hidden || []);
+  const list = all.filter(e => !hide.has(e.id));
   const cur = list.find(e => e.id === h.selected);
   const byGame = {};
   for (const e of list) (byGame[e.gameName] ||= []).push(e);
   return [
     { label: `当前：${cur ? (cur.label || cur.character) + (cur.variant === "default" ? "" : " / " + cur.variant) : "未选择"}`, enabled: false },
-    { label: `共 ${list.length} 个变体`, enabled: false },
+    { label: `共 ${list.length} 个变体` + (hide.size ? `（已隐藏 ${hide.size}）` : ""), enabled: false },
     { type: "separator" },
     { label: "角色画廊（缩略图）…", accelerator: "CmdOrCtrl+Shift+K", click: () => openHarnessGallery() },
     { label: "换下一张", accelerator: "CmdOrCtrl+Shift+N", click: () => rotateHarness(true) },

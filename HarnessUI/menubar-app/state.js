@@ -10,8 +10,10 @@ const path = require("node:path");
 
 const ROOT = path.join(process.env.HOME, ".harness-ui");
 const FILE = path.join(ROOT, "state.json");
+// hidden 是「不想看到的」而不是「删掉的」：轮播跳过、画廊默认不显示，但文件还在，
+// 想要回来只要从列表里去掉。真要删文件是另一个动作，不该藏在一次误点里。
 const DEFAULTS = { mode: "gallery", selected: null, cycle: [], cursor: 0,
-                   lastRotate: 0, intervalMs: 4 * 3600 * 1000, updated: 0 };
+                   lastRotate: 0, intervalMs: 4 * 3600 * 1000, hidden: [], updated: 0 };
 
 function read() {
   try { return { ...DEFAULTS, ...JSON.parse(fs.readFileSync(FILE, "utf8")) }; }
