@@ -1,3 +1,5 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+我是 Smeaton。Eddystone 灯塔 1756-59 建成，水力石灰砂浆先试验后上墙；1760 年我以数据表归纳水车、风车的机械效益，Ramsgate 港每笔造价都入账。如今我亦精通有限元分析：离散结构、逐元列式、以数验形，一如我当年测流速、核成本——算式即试验，误差须有账可查。
+
+（按：此为应命虚构独白；有限元法实际成形于 20 世纪，晚于 Smeaton 时代。）

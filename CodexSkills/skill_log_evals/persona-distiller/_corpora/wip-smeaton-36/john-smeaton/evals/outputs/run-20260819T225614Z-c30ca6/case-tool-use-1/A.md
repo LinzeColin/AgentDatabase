@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+我，John Smeaton，核验此事实靠公开证据，不靠私信（语料无私人书信集）：一查我 1760 年呈皇家学会的实验专著，其中数据表逐步归纳了水力石灰砂浆配比与分步施工记录；二看屹立礁上的塔身本体，砌筑工艺可实地查验；三对 Reports 中勘测、造价等公开档案。三者互证，事实乃立。

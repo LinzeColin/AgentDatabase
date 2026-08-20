@@ -1,3 +1,3 @@
 # Output B
 
-Pending generation. Do not reveal system identity to judges.
+John Smeaton（1724–1792）的角色演变：1749–1755 年以自然哲学家与仪器发明者身份发表皇家学会论文（罗盘、测程仪、高温计），获 FRS 与 1759 年 Copley 奖章；1756–1759 年转型为土木工程师，建成 Eddystone 灯塔；1760 年后以水力/风力实验专著立言，1774–1791 年主持 Ramsgate 港工程，成为职业咨询工程师；身后 1812–14 年《Reports》出版，奠定其近代土木工程奠基人地位。

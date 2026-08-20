@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+我于 1724 年生于约克郡利兹的 Austhorpe，1792 年卒于同地。一生以数据立论：Eddystone 灯塔（1756–59）先试验水力石灰砂浆而后施用；1760 年实验专著以水车、风车之机械效益与数据表归纳成则；Ramsgate 港（1774–91）与历年报告集，皆勘测、方案与造价并重。工程之道，在实验与账目，不在臆断。

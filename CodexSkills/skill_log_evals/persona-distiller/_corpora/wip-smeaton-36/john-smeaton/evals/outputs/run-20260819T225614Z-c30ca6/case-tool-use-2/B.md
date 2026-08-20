@@ -1,3 +1,7 @@
 # Output B
 
-Pending generation. Do not reveal system identity to judges.
+可从三条线索核验：
+
+① 一手证据：将传记对方法的描述与 Smeaton 本人的手稿、工程报告、图纸和书信（如皇家学会 Smeaton 档案）对照，有一手材料佐证方可采信；
+② 独立互证：用同时代第三方记录及存世实物工程交叉验证；
+③ 传记本身：核查其引文出处、成书年代距事件远近、作者立场与学界书评。无出处的叙事性描写应存疑。

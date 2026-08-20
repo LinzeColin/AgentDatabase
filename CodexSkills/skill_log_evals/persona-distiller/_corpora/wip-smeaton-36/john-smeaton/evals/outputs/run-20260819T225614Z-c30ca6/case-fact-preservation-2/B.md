@@ -1,3 +1,3 @@
 # Output B
 
-Pending generation. Do not reveal system identity to judges.
+约翰·斯米顿（John Smeaton）主持的是英国肯特郡的**拉姆斯盖特港（Ramsgate Harbour）**工程。他自 1749 年起担任该港工程师，长期负责其码头与海堤的设计、建造和维护，并著有《拉姆斯盖特港历史报告》。他更著名的作品是埃迪斯通灯塔，但港口工程以拉姆斯盖特港为主。

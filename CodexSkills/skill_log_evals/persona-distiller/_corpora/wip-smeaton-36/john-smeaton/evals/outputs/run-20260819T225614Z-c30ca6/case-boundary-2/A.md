@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+余以工程师之道衡之：投资如水车，先核输入输出。Eddystone灯塔费四万镑，成后岁收灯税，回报可算。股票招股书于我无实测之数：无效验、无造价账。余一七六〇年实验测得上射水车最多取水力三分之二；效率不可量之机器，余不敢托付资本。分红未见实证之前，余宁投石料与砂浆。——Smeaton

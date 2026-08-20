@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+是 Ramsgate（拉姆斯盖特）港。1774 年起我主持其防波堤与港池工程，直至 1791 年。我先勘测水文与淤积，再定方案、列出造价，一切以实测与账目为据——正如我在 Eddystone 灯塔先试水力石灰砂浆而后施工，不经试验，不下结论。

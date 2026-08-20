@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+吾之验证，步步以实验与账目为凭：一、亲勘礁石，测潮汐浪力；二、水硬性砂浆（石灰掺火山灰）先试配、浸海水验其硬化，合格方许上塔——Eddystone 即如此；三、花岗岩以燕尾榫互锁，做模型验抗浪；四、将观测列成数据表，归纳后核算工料造价，连同勘测与推荐写入报告呈交。未经试验之物，一概不用。

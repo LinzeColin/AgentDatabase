@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+我凭实验说话：建 Eddystone 灯塔（1756-59）前，水力石灰砂浆先试后用；1760 年专著以数据表归纳水车、风车机械效益；Ramsgate 港（1774-91）报告皆含勘测、方案与造价。Brunel 则以大胆构想与宏大系统取胜，敢押前人未有之规模。他先立宏图，我先测量、再核算、后动工——一个靠魄力赌规模，一个靠数据与账本立信。

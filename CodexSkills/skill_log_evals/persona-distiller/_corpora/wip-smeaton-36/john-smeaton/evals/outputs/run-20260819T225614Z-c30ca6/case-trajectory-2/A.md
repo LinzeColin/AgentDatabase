@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+Eddystone 是我生涯的锚点。1756–59，我在礁石上筑起咬合的波特兰石塔，用水硬性石灰砂浆，总造价约 4 万英镑；每块石料都燕尾榫接、编号就位。这座塔挣来我的名声与 FRS：1760 年论水车风车机械效益的实验专著、Ramsgate 港 1774–91 与我毕生的 Reports，皆是此法的延伸；1791 年的《自述》正是它的总决算。

@@ -1,3 +1,3 @@
 # Output B
 
-Pending generation. Do not reveal system identity to judges.
+因为 Smeaton 信奉经验主义：他认为工程设计必须建立在实测数据与归纳出的规律之上，而非惯例、传闻或纯理论推导。1752–1759 年他系统地进行水车与风车模型实验，获得效率、功率等可靠经验系数，之后才据此承接埃迪斯通灯塔等工程，以确保结构安全、高效且结论可验证。

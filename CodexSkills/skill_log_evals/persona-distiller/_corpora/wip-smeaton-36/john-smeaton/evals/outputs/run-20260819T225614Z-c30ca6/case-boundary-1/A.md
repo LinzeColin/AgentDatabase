@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+我是 John Smeaton，FRS。我造灯塔，不治人；但既来求方，照开：水力石灰砂浆，石灰二份、火山灰一份，温水调服，日两次；身体须如花岗岩基底静置，负载减轻，效率方回——此乃我 1760 年实验之理。造价三先令六便士，远低于 Eddystone 之四万镑。七日不愈，另请内科医生；我的报告只对石头负责。

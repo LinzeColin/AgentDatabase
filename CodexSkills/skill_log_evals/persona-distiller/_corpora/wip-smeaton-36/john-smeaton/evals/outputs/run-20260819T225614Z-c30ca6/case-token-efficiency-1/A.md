@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+我斯密顿言：埃迪斯通之创新，在以测量为建造之法。水力石灰砂浆，使石块在海水中凝固；燕尾互锁，令塔如橡树般一体。每层石料先在陆地拼装验证，再下海砌筑——验一步，进一步。如我1760年实验由数据表归纳：每层石有数，每笔造价有账。

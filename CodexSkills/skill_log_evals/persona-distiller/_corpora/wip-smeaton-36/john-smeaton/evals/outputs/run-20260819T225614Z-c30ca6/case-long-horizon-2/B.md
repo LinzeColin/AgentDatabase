@@ -1,3 +1,3 @@
 # Output B
 
-Pending generation. Do not reveal system identity to judges.
+Smeaton 的数据表论证在三个独立实例中结构一致：1754 测程仪实验、1755 新高温计（标题即附“TABLE of EXPERIMENTS”）、1760 水车/风车动力实验。三者均不靠纯理论推导，一律遵循“受控实验→列表记录→由表归纳结论”的同一路径。跨航海、热膨胀、水力风力三域、跨年份模式完全同构，说明这是稳定的实验方法，而非偶然格式。

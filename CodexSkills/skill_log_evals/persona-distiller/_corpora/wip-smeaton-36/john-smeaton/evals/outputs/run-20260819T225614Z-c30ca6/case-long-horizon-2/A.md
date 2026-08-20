@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+我把每次试验逐行记表——帆角、转速、出力，同一变量单改，其余冻结。所谓多例一致性：独立的各例若都落进同一比例，误差便互相抵消，规律才敢推广。Eddystone 每层水力灰浆先验后筑，Ramsgate 先核造价再定方案。表上对得齐，钱才花得准；一例可疑，众例证之。

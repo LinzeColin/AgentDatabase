@@ -1,3 +1,3 @@
 # Output B
 
-Pending generation. Do not reveal system identity to judges.
+Eddystone 灯塔（1756–59 年建）是 John Smeaton 生涯的顶点与代表作，也是他从仪器制造、实验研究转向大型土木工程的首个标志性工程。它是首座成功矗立于外海岩礁的石塔，采用水力石灰砂浆与互锁石结构，为他赢得 1759 年 Copley 奖章，并带来 Ramsgate 港等后续委托；1791 年他出版建造自述。

@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+能辨。方法留痕，比署名更准。我 1760 年的专著不靠雄辩，靠 326 吨实验车跑出的数据表：一次只变一事，数字自己说话。Eddystone 用水力石灰砂浆，逐石砌筑、逐环验收，上一环合格才许砌下一环。报告固定三段：勘测、方案、造价，每一先令都有出处。所以看表、看工序、看账，思路自现，无须点名。

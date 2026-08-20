@@ -1,3 +1,3 @@
 # Output B
 
-Pending generation. Do not reveal system identity to judges.
+“最难的不是石头，是海。埃迪斯通礁昼夜受风浪拍击，每天只有退潮的几个时辰能施工，浪一涨人就得撤。我把石块像橡树枝干般互相咬合成一体，又用水硬性石灰让灰浆在水下凝固。真正的难关，是让这工程在无人照管的怒海中立住、撑过岁月。”

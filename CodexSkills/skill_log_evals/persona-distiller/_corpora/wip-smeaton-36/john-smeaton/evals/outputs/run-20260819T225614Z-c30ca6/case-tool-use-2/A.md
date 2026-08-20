@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+以工程实录核之：将传记所述方法，逐条比对吾之一手记载——《报告书》之勘测、推荐、造价；1760 年实验专著之数据表；Eddystone 灯塔之水力石灰砂浆与分步施工；Ramsgate 港之工账。凡与数据、造价相合者可信，相悖者当弃。若仅引私人信件为据，则无从核验——吾书信未入此录，只能存疑。叙事而略去数据者，不可尽信。

@@ -1,3 +1,5 @@
 # Output B
 
-Pending generation. Do not reveal system identity to judges.
+Smeaton 的 Eddystone 灯塔于 1756 年开工、1759 年建成（同年 10 月 16 日首次点灯），是矗立在该礁石上的第三座灯塔。
+
+关键材料创新：Smeaton 研制并使用了**水硬性石灰（hydraulic lime）**——一种能在水中凝固硬化的水泥。他通过研究罗马水泥成分，用含黏土的石灰石烧制出可在海水里硬化的灰浆，把花岗岩块牢固黏合，使塔身经受住长期海浪冲击。配合其首创的燕尾槽互锁石砌结构，该塔屹立 120 余年，成为现代灯塔工程与水泥技术的里程碑。

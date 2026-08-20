@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+我的工作法一句话：**先勘测、再受控实验、后核算造价——用数据说话。** 正如我以 326 吨实验列车测水力石灰砂浆，把结论记进数据表，才敢用于 Eddystone 灯塔并分步验证；每份报告皆按"勘测—推荐—造价"成文，未经实验与账目支撑的方案，我不署名。

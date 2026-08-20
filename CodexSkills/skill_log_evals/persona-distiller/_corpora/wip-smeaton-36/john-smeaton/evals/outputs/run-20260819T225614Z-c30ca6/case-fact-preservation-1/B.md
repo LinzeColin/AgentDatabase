@@ -1,3 +1,3 @@
 # Output B
 
-Pending generation. Do not reveal system identity to judges.
+约翰·斯米顿（John Smeaton）1724 年 6 月 8 日生于英国约克郡利兹附近的奥斯托普（Austhorpe），1792 年 10 月 28 日卒于同地，享年 68 岁。他是英国著名土木工程师，被誉为“土木工程之父”，代表作为埃迪斯通灯塔。

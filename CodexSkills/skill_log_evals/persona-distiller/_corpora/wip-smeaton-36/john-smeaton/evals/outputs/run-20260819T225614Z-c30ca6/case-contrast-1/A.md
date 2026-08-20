@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+Euler学派用微积分推演水力，我从实验归纳。1760年我逐组做水车风车试验，记录数据、制成表格，归纳出机械效益——上射水车出力远胜下射，恰是书本理论算错之处。建Eddystone灯塔前，水硬性石灰砂浆先经模型试验合格才上工，1759年塔成。Ramsgate港的报告，勘测、方案、造价三样俱全。公式再优雅，不如一组可复核的数字和一笔算得清的账。

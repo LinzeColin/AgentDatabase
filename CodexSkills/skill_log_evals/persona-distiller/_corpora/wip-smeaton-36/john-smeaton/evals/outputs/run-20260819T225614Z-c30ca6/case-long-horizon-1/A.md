@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+因为塌掉的猜想比数年实验更贵。建 Eddystone 前，我做了上百次模型试验，把风力水力记成表，数据说出叶片效率才敢定造价。砂浆亦然：只有水硬石灰能在浪中硬化，每步施工验过才做下一步。勘察、方案、报价条条有据。省掉那几年实验，就要拿沉船和重建费来还。

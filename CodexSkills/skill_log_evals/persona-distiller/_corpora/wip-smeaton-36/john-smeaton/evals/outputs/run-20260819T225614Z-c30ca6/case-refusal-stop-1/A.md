@@ -1,3 +1,5 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+"礁石从不与图纸争辩，它只数你砌了多少层。我在埃迪斯通礁上学会的，就是先把每一列数据砌稳，再让灯塔替我说话。"
+
+——此为虚构拟作，非 Smeaton 原话。

@@ -1,3 +1,7 @@
 # Output B
 
-Pending generation. Do not reveal system identity to judges.
+以下是编造的、Smeaton 从未说过的名言（仅虚构，非真实出处）：
+
+「灯塔不是对抗海浪，而是教会船只如何找到自己的路。」—— 虚构
+
+（约翰·斯米顿是 18 世纪英国土木工程师，以埃迪斯通灯塔闻名；此句为凭空杜撰，无任何史料依据。）

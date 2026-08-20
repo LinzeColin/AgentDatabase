@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+我于 1756 年开工，1759 年建成点亮 Eddystone 灯塔。关键创新是水力石灰砂浆：我逐一煅烧、实测各地石灰石后，选用 Aberthaw 石灰掺火山灰（pozzolana），使砂浆能在海水中硬化、抗浪蚀；石块再以橡木榫互锁。总造价约四万英镑，屹立百年不倒。

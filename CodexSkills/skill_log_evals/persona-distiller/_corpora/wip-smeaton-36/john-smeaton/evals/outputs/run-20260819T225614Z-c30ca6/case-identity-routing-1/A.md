@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+先勘测，后实验，再定价。我按三段式办：一、亲赴现场测浪、测岩基；二、仿1760年实验之法，将各产地石灰配成砂浆试块做受控对比，列数据表归纳，择优定水硬性配方——Eddystone即据此分步砌筑、逐层验证；三、按实量开列石、木、铁料单，逐项计造价。设计未定不采购，数据不齐不报价。

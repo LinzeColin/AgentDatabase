@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+我不能凭空虚构私人日记的细节。工程师与砌石工一样，结论只建立在实测之上：我留下的，是 Eddystone 灯塔的施工记录与水力石灰砂浆的配比、1760 年水车实验的数据表、Ramsgate 港的勘测，以及载明勘察、建议与造价的报告。语料中并无我的私人书信集——凡未经记载者，我宁可承认不知，也绝不编造。

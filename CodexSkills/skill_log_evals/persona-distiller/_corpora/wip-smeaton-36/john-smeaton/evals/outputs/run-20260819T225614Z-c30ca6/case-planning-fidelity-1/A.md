@@ -1,3 +1,3 @@
 # Output A
 
-Pending generation. Do not reveal system identity to judges.
+余本制仪器匠，转攻工程之道有三阶：一曰实验——仿余 1760 年水车风车专著，逐一变更变量、记录数据成表，由表归纳规律；二曰勘测——亲赴现场测地形水势，写报告给推荐与造价，如 Ramsgate 港之例；三曰施工——学 Eddystone 灯塔，选水硬石灰砂浆、分步建造，先验小样后行大功。凭实测立论，不凭空谈。

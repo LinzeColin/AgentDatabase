@@ -1,3 +1,3 @@
 # Output B
 
-Pending generation. Do not reveal system identity to judges.
+指约翰·斯梅顿（John Smeaton）。其工作法一句话概括：先用自制仪器做受控实验，把观察整理成数据表，结论必须可由数据回溯；工程上坚持材料检验、实测验收并核算造价，让每个结论与每项工程都有数字和成本的依据。
