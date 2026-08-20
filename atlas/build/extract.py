@@ -275,6 +275,8 @@ def parse_cc(path: Path, rec: dict) -> dict:
     对 150MB 的会话这一步能省掉大部分解析成本。
     """
     models, prompts, texts = set(), [], []
+    # 同一个 message.id 只许计一次用量 —— 见下面 usage 累加处的长注释
+    seen_usage: set[str] = set()
     for line in path.open(encoding="utf-8", errors="ignore"):
         need_usage = '"usage"' in line
         need_user = '"type":"user"' in line or '"type": "user"' in line
@@ -313,11 +315,26 @@ def parse_cc(path: Path, rec: dict) -> dict:
                 if isinstance(blk, dict) and blk.get("type") == "tool_use" and blk.get("name"):
                     nm = str(blk["name"])[:40]
                     rec["tool_names"][nm] = rec["tool_names"].get(nm, 0) + 1
+            # 一个 API 响应在 JSONL 里**不是一条记录**：它按 content block 拆成多行
+            # （1 个 thinking + 6 个并行 tool_use = 7 行），而**每一行都带着同一份完整的
+            # usage**；会话 resume 时还会把整段历史再重放一遍。
+            #
+            # 直接 += 的后果实测过：全语料 322,284 条 usage 记录只对应 130,138 个不同的
+            # message.id —— 每个响应被算了 2.48 次（独立抽样 60 个文件复核得 2.26 次）。
+            # 更糟的是**虚高不均匀**：一轮里并行工具调用越多虚高越狠，单场 1×–4.99×，
+            # 于是按天/周/来源的排序被非均匀扭曲，乘个常数修不好。
+            #
+            # 为什么这个 bug 活了这么久：**命中率对它免疫** —— 四类 token 一起虚高，
+            # 比值几乎不变（99.998007% → 99.998682%），而命中率正是这一块最常被看的数。
             if isinstance(u, dict):
-                rec["tok_in"] += int(u.get("input_tokens") or 0)
-                rec["tok_out"] += int(u.get("output_tokens") or 0)
-                rec["tok_cache_r"] += int(u.get("cache_read_input_tokens") or 0)
-                rec["tok_cache_w"] += int(u.get("cache_creation_input_tokens") or 0)
+                mid = m.get("id")
+                if not mid or mid not in seen_usage:
+                    if mid:
+                        seen_usage.add(mid)
+                    rec["tok_in"] += int(u.get("input_tokens") or 0)
+                    rec["tok_out"] += int(u.get("output_tokens") or 0)
+                    rec["tok_cache_r"] += int(u.get("cache_read_input_tokens") or 0)
+                    rec["tok_cache_w"] += int(u.get("cache_creation_input_tokens") or 0)
             if t == "user":
                 rec["msgs"] += 1
                 body, tool_blocks = text_of(m.get("content"))
