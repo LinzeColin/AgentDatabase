@@ -6,7 +6,7 @@ import { sec, bento, orbit, drawer, table, warn, pill, state } from '../kit.js';
 export async function render(host) {
   const V = D.A().delivery || {}, G = D.A().github || {};
   if (V.state !== '通') {
-    host.innerHTML = sec('交付') + warn(`<b>状态：不确定。</b>${esc(V.why || '没有 GitHub 数据')}`);
+    host.innerHTML = sec('交付') + warn(`<b>状态：说不准。</b>${esc(V.why || '没有 GitHub 数据')}`);
     return;
   }
   const t = V.totals, days = V.days;

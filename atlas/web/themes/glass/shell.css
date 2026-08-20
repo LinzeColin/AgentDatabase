@@ -42,7 +42,8 @@
   width:22px;height:22px;text-align:center;border-radius:999px;flex:none}
 [data-theme="glass"] #railtog:hover{color:var(--acc);background:var(--line2)}
 :root[data-theme="glass"][data-rail="shut"] .brand{opacity:0;width:0}
-[data-theme="glass"] #nav{display:flex;flex-direction:column;gap:2px;padding:6px 10px;overflow-y:auto}
+[data-theme="glass"] #nav{display:flex;flex-direction:column;gap:2px;padding:6px 10px;
+  flex:1 1 auto;min-height:0;overflow-y:auto}
 [data-theme="glass"] .navg{border-radius:16px;padding:2px 0}
 [data-theme="glass"] .navg.on{background:var(--line2)}
 [data-theme="glass"] .navh{display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;
@@ -148,7 +149,7 @@
 [data-theme="glass"] .warnbox b{color:var(--fg)}
 [data-theme="glass"] .st{font-size:12px;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--dim)}
 [data-theme="glass"] .st[data-s="通"]{color:var(--ok)} [data-theme="glass"] .st[data-s="断了"]{color:var(--bad)}
-[data-theme="glass"] .st[data-s="不确定"]{color:var(--warn)} [data-theme="glass"] .st[data-s="没做"]{color:var(--dim2)}
+[data-theme="glass"] .st[data-s="说不准"]{color:var(--warn)} [data-theme="glass"] .st[data-s="没做"]{color:var(--dim2)}
 [data-theme="glass"] .ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:16px 0}
 [data-theme="glass"] .ctl select,[data-theme="glass"] .ctl input[type=date]{all:unset;cursor:pointer;
   border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:13px;background:var(--glass2)}

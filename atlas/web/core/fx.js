@@ -1,10 +1,11 @@
-// core/fx.js —— 背景光场。三套主题三种性格，不是同一个效果换个颜色。
-//   琉璃  粒子 + 加色辉光 + 鼠标视差（参照 motionsites.ai 那类站点的做法）
-//   控制台 细网格 + 缓慢扫描线，像示波器底噪
-//   手记  完全没有背景动效 —— 安静是这套主题的重点，加特效等于毁了它
+// core/fx.js —— 背景光场。只有「琉璃」用它。
+//   琉璃      粒子 + 加色辉光 + 鼠标视差（参照 motionsites.ai 那类站点的做法）
+//   星云宇宙  背景本身就是一整片 WebGL 星图，再叠一层 2D 粒子只会糊掉它 —— 所以不挂这一层
+//   白昼      纸面上不该有星星。整套主题的主张是版式，不是光
 //
-// 全部画在一张 canvas 上，pointer-events:none，不拦交互。
+// 画在一张 canvas 上，pointer-events:none，不拦交互。
 // 页面不可见时停帧，别让一张看不见的画布一直吃 CPU。
+// 没有 #fxlayer 的主题直接空转返回 —— 「这套主题不要背景动效」是合法选择，不是错误。
 
 import { S } from './app.js';
 
@@ -18,6 +19,7 @@ const PALETTE = {
 };
 
 function resize() {
+  if (!cv || !ctx) return;
   dpr = Math.min(2, devicePixelRatio || 1);
   w = innerWidth; h = innerHeight;
   cv.width = Math.floor(w * dpr);
@@ -76,31 +78,13 @@ function drawGlass(t) {
   ctx.globalAlpha = 1;
 }
 
-function drawConsole(t) {
-  ctx.clearRect(0, 0, w, h);
-  const dim = S.mode === 'dark' ? 'rgba(90,140,200,.055)' : 'rgba(20,60,120,.05)';
-  ctx.strokeStyle = dim; ctx.lineWidth = 1;
-  const step = 46;
-  ctx.beginPath();
-  for (let x = 0; x <= w; x += step) { ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, h); }
-  for (let y = 0; y <= h; y += step) { ctx.moveTo(0, y + 0.5); ctx.lineTo(w, y + 0.5); }
-  ctx.stroke();
-  // 一条缓慢下扫的亮线。周期 14 秒，慢到不干扰阅读，但你知道它是活的。
-  const sy = ((t * 0.055) % (h + 260)) - 130;
-  const g = ctx.createLinearGradient(0, sy - 130, 0, sy + 130);
-  const c = S.mode === 'dark' ? '77,163,255' : '11,98,214';
-  g.addColorStop(0, `rgba(${c},0)`);
-  g.addColorStop(0.5, `rgba(${c},${S.mode === 'dark' ? 0.05 : 0.035})`);
-  g.addColorStop(1, `rgba(${c},0)`);
-  ctx.fillStyle = g; ctx.fillRect(0, sy - 130, w, 260);
-}
 
 function frame(t) {
+  if (!ctx) { running = false; return; }
   if (!t0) t0 = t;
   mouse.x += (mouse.tx - mouse.x) * 0.055;
   mouse.y += (mouse.ty - mouse.y) * 0.055;
   if (S.theme === 'glass') drawGlass(t - t0);
-  else if (S.theme === 'console') drawConsole(t - t0);
   else ctx.clearRect(0, 0, w, h);
   raf = requestAnimationFrame(frame);
 }
@@ -113,13 +97,17 @@ function start() {
 function stop() {
   running = false;
   cancelAnimationFrame(raf);
-  ctx && ctx.clearRect(0, 0, w, h);
+  if (ctx) ctx.clearRect(0, 0, w, h);
 }
 
+let wired = false;
 export function initFX() {
   cv = document.getElementById('fxlayer');
+  if (!cv) { stop(); ctx = null; return; }     // 这套主题不要背景动效
   ctx = cv.getContext('2d');
   resize();
+  if (wired) { start(); return; }              // 全局监听只挂一次，切主题不该越挂越多
+  wired = true;
   addEventListener('resize', resize, { passive: true });
   addEventListener('pointermove', e => {
     mouse.tx = e.clientX / innerWidth;
@@ -132,7 +120,7 @@ export function initFX() {
   });
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     // 尊重系统设置：画一帧静态底纹就停，不做任何持续动画
-    if (S.theme === 'console') drawConsole(0); else if (S.theme === 'glass') drawGlass(0);
+    if (S.theme === 'glass') drawGlass(0);
     return;
   }
   start();

@@ -1,0 +1,233 @@
+/* 白昼 —— 瑞士国际主义。纸面、栅格、发丝线、一个红。
+   这里没有圆角、没有毛玻璃、没有辉光：它靠的是对齐、字号跨度和留白。
+   和琉璃（半透明面板）、星云（全屏 WebGL）不共用任何一条规则。 */
+:root[data-theme="daylight"]{
+  --disp:"Helvetica Neue",Inter,-apple-system,system-ui,"PingFang SC",sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --gut:24px;
+}
+:root[data-theme="daylight"][data-mode="light"]{
+  --bg:#fff; --paper:#fff; --fg:#111; --dim:#4a4a4a; --dim2:#8a8a8a;
+  --line:#111; --hair:#d6d6d6; --track:#ececec;
+  --acc:#e8402a; --acc2:#111; --ok:#15803d; --warn:#b45309; --bad:#e8402a;
+}
+:root[data-theme="daylight"][data-mode="dark"]{
+  --bg:#0d0d0d; --paper:#0d0d0d; --fg:#f2f2f2; --dim:#b4b4b4; --dim2:#787878;
+  --line:#f2f2f2; --hair:#2e2e2e; --track:#242424;
+  --acc:#ff5236; --acc2:#f2f2f2; --ok:#4ade80; --warn:#fbbf24; --bad:#ff5236;
+}
+[data-theme="daylight"] body{background:var(--bg);color:var(--fg);
+  font-family:var(--disp);-webkit-font-smoothing:antialiased}
+[data-theme="daylight"] #fxlayer{display:none}      /* 白昼不放粒子。纸上不该有星星。 */
+[data-theme="daylight"] #shell{padding-left:236px;transition:padding-left .34s cubic-bezier(.4,0,.1,1)}
+:root[data-theme="daylight"][data-rail="shut"] #shell{padding-left:56px}
+
+/* ── 左轨：一张排版索引，不是按钮堆 ── */
+[data-theme="daylight"] #rail{position:fixed;left:0;top:0;bottom:0;width:236px;z-index:20;
+  background:var(--paper);border-right:1px solid var(--line);padding:26px 0 18px;
+  display:flex;flex-direction:column;overflow-y:auto;
+  transition:width .34s cubic-bezier(.4,0,.1,1)}
+:root[data-theme="daylight"][data-rail="shut"] #rail{width:56px}
+[data-theme="daylight"] .brandrow{display:flex;align-items:baseline;justify-content:space-between;
+  padding:0 18px 20px;border-bottom:1px solid var(--line);margin-bottom:2px}
+[data-theme="daylight"] .brand{font-size:14px;font-weight:700;letter-spacing:-.03em;white-space:nowrap}
+:root[data-theme="daylight"][data-rail="shut"] .brand{opacity:0;pointer-events:none}
+[data-theme="daylight"] #railtog{all:unset;cursor:pointer;font-size:11px;color:var(--dim2);padding:2px 4px}
+[data-theme="daylight"] #railtog:hover{color:var(--acc)}
+
+[data-theme="daylight"] #nav{flex:1 1 auto;min-height:0;overflow-y:auto;padding:0}
+[data-theme="daylight"] .navg{border-bottom:1px solid var(--hair)}
+/* 一级：编号 + 大写字距 + 整行。它是「章」。 */
+[data-theme="daylight"] .navh{display:flex;align-items:baseline;gap:10px;cursor:pointer;
+  padding:13px 18px 11px;user-select:none}
+[data-theme="daylight"] .navh:hover .navl{color:var(--acc)}
+/* 一级用编号，不用图标 —— 编号自带层级，图标不带。二级继承父编号：01 / 01.1。 */
+[data-theme="daylight"] #nav{counter-reset:navn}
+[data-theme="daylight"] .navg{counter-increment:navn;counter-reset:subn}
+[data-theme="daylight"] .navi{font-family:var(--mono);font-size:0;color:var(--dim2);
+  font-variant-numeric:tabular-nums;min-width:18px}
+[data-theme="daylight"] .navi::after{content:counter(navn,decimal-leading-zero);font-size:10px}
+[data-theme="daylight"] .navg.on .navi::after{color:var(--acc)}
+[data-theme="daylight"] .navl{font-size:12px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--fg);white-space:nowrap;transition:color .2s}
+[data-theme="daylight"] .navg.on .navl{color:var(--acc)}
+[data-theme="daylight"] .navh::after{content:"−";margin-left:auto;font-family:var(--mono);
+  font-size:12px;color:var(--dim2)}
+[data-theme="daylight"] .navg.shut .navh::after{content:"+"}
+:root[data-theme="daylight"][data-rail="shut"] .navl,
+:root[data-theme="daylight"][data-rail="shut"] .navh::after,
+:root[data-theme="daylight"][data-rail="shut"] .navs{display:none}
+
+/* 二级：缩进到编号列之后、小写、细体。它是「节」，一眼就不是章。 */
+[data-theme="daylight"] .navs{overflow:hidden;max-height:340px;padding:0 0 9px;
+  transition:max-height .3s cubic-bezier(.4,0,.1,1),opacity .2s}
+[data-theme="daylight"] .navg.shut .navs{max-height:0;opacity:0;padding:0}
+[data-theme="daylight"] .navs button{all:unset;cursor:pointer;display:block;width:100%;
+  box-sizing:border-box;padding:6px 18px 6px 44px;font-size:13px;color:var(--dim);
+  position:relative;transition:color .18s,background .18s}
+[data-theme="daylight"] .navs button{counter-increment:subn}
+[data-theme="daylight"] .navs button::before{content:counter(navn,decimal-leading-zero) "." counter(subn);
+  position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:var(--mono);
+  font-size:9px;color:var(--dim2);letter-spacing:0}
+[data-theme="daylight"] .navs button:hover{color:var(--fg);background:var(--track)}
+[data-theme="daylight"] .navs button[aria-current="true"]{color:var(--fg);font-weight:600}
+[data-theme="daylight"] .navs button[aria-current="true"]::before{color:var(--acc)}
+
+[data-theme="daylight"] #tools{padding:14px 18px;border-top:1px solid var(--line);display:flex;
+  flex-direction:column;gap:8px}
+[data-theme="daylight"] .seg{display:flex;border:1px solid var(--line)}
+[data-theme="daylight"] .seg button{all:unset;cursor:pointer;flex:1;text-align:center;padding:5px 0;
+  font-size:10.5px;letter-spacing:.06em;color:var(--dim);border-right:1px solid var(--line)}
+[data-theme="daylight"] .seg button:last-child{border-right:0}
+[data-theme="daylight"] .seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+[data-theme="daylight"] #railfoot{padding:0 18px 4px;font-family:var(--mono);font-size:9.5px;
+  color:var(--dim2);line-height:1.7}
+:root[data-theme="daylight"][data-rail="shut"] #tools,
+:root[data-theme="daylight"][data-rail="shut"] #railfoot{display:none}
+
+/* ── 纸面 ── */
+[data-theme="daylight"] #stamp{position:fixed;right:26px;top:20px;font-family:var(--mono);
+  font-size:10px;color:var(--dim2);z-index:15;letter-spacing:.02em}
+[data-theme="daylight"] main{max-width:1180px;margin:0 auto;padding:74px 34px 100px}
+[data-theme="daylight"] footer{max-width:1180px;margin:0 auto;padding:22px 34px 46px;
+  border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;color:var(--dim2)}
+
+/* 头图：一个巨大的标题压在发丝线上。这是这套主题的签名。 */
+[data-theme="daylight"] .hero{border-top:3px solid var(--fg);padding-top:14px;margin:0 0 46px}
+[data-theme="daylight"] .hero .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--acc);margin-bottom:16px}
+[data-theme="daylight"] .hero h1{font-size:clamp(38px,7vw,88px);line-height:.95;letter-spacing:-.045em;
+  font-weight:700;margin:0 0 18px;max-width:16ch}
+[data-theme="daylight"] .hero p{font-size:15px;line-height:1.62;color:var(--dim);max-width:62ch;margin:0}
+[data-theme="daylight"] .hero p b{color:var(--fg);font-weight:600}
+
+/* 分节：编号 + 通栏发丝线。章节感来自版式，不是卡片。 */
+[data-theme="daylight"] .sec{display:flex;align-items:baseline;gap:14px;border-top:1px solid var(--line);
+  padding-top:11px;margin:56px 0 4px;font-size:13px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase}
+[data-theme="daylight"] .sec::before{content:counter(secn,decimal-leading-zero);counter-increment:secn;
+  font-family:var(--mono);font-size:10.5px;color:var(--acc);letter-spacing:0;font-weight:400}
+[data-theme="daylight"] main{counter-reset:secn}
+[data-theme="daylight"] .hint{font-size:12.5px;line-height:1.65;color:var(--dim2);margin:8px 0 20px;
+  max-width:74ch}
+[data-theme="daylight"] .hint b{color:var(--fg)}
+
+/* 数据格：没有卡片，只有栅格线切出来的格子。 */
+[data-theme="daylight"] .grid{display:grid;grid-template-columns:repeat(12,1fr);
+  border-top:1px solid var(--line);margin:20px 0 8px}
+[data-theme="daylight"] .cell{grid-column:span 3;padding:18px 16px 20px;
+  border-right:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+[data-theme="daylight"] .cell:last-child{border-right:0}
+[data-theme="daylight"] .cell.w3{grid-column:span 3}
+[data-theme="daylight"] .cell.w6{grid-column:span 6}
+[data-theme="daylight"] .cell.w12{grid-column:span 12}
+[data-theme="daylight"] .ck{font-family:var(--mono);font-size:10px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--dim2);margin-bottom:12px}
+[data-theme="daylight"] .cv{font-size:40px;line-height:1;letter-spacing:-.04em;font-weight:700;
+  font-variant-numeric:tabular-nums}
+[data-theme="daylight"] .cv.acc{color:var(--acc)}
+[data-theme="daylight"] .cv.warn{color:var(--warn)}
+[data-theme="daylight"] .cn{font-size:11.5px;color:var(--dim);margin-top:10px;line-height:1.5}
+@media(max-width:900px){
+  [data-theme="daylight"] .cell,[data-theme="daylight"] .cell.w3{grid-column:span 6}
+  [data-theme="daylight"] .cell.w6{grid-column:span 12}
+}
+
+/* 条形：一根发丝线上的实心块。没有渐变、没有圆头。 */
+[data-theme="daylight"] .orbit{margin:16px 0 8px;border-top:1px solid var(--hair)}
+[data-theme="daylight"] .orow{display:grid;grid-template-columns:158px 1fr auto;gap:16px;
+  align-items:center;padding:8px 0;border-bottom:1px solid var(--hair)}
+[data-theme="daylight"] .olabel{font-size:12.5px;color:var(--fg);overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+[data-theme="daylight"] .otrack{height:9px;background:var(--track);position:relative}
+[data-theme="daylight"] .ofill{position:absolute;left:0;top:0;bottom:0;background:var(--fg);
+  transition:width .5s cubic-bezier(.4,0,.1,1)}
+[data-theme="daylight"] .orow:hover .ofill{background:var(--acc)}
+[data-theme="daylight"] .oval{font-family:var(--mono);font-size:11px;color:var(--dim);
+  font-variant-numeric:tabular-nums;text-align:right;min-width:120px}
+[data-theme="daylight"] .orow[data-topic]{cursor:pointer}
+
+/* 长条内容块：靠左侧一根粗线定位，不靠背景色。 */
+[data-theme="daylight"] .slab{border-left:3px solid var(--fg);padding:16px 0 18px 18px;
+  margin:16px 0;border-bottom:1px solid var(--hair)}
+[data-theme="daylight"] .slab .cv{font-size:30px}
+[data-theme="daylight"] .stitle{font-size:19px;font-weight:700;letter-spacing:-.025em;margin:6px 0 9px}
+[data-theme="daylight"] .quote{margin-top:9px;padding:10px 0 10px 15px;border-left:1px solid var(--hair);
+  color:var(--dim);font-size:13px;white-space:pre-wrap;word-break:break-word;
+  max-height:170px;overflow:auto;font-family:var(--mono);line-height:1.6}
+
+[data-theme="daylight"] details.drawer{border-top:1px solid var(--line);margin:22px 0}
+[data-theme="daylight"] details.drawer>summary{cursor:pointer;list-style:none;padding:11px 0;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+[data-theme="daylight"] details.drawer>summary::-webkit-details-marker{display:none}
+[data-theme="daylight"] details.drawer>summary::before{content:"+ ";color:var(--acc)}
+[data-theme="daylight"] details.drawer[open]>summary::before{content:"− "}
+[data-theme="daylight"] details.drawer>summary:hover{color:var(--fg)}
+[data-theme="daylight"] details.drawer .inner{overflow-x:auto;padding-bottom:14px}
+
+[data-theme="daylight"] table{width:100%;border-collapse:collapse;font-size:12.5px}
+[data-theme="daylight"] th{text-align:left;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);font-weight:400;
+  padding:7px 12px 7px 0;border-bottom:1px solid var(--line);white-space:nowrap}
+[data-theme="daylight"] td{padding:8px 12px 8px 0;border-bottom:1px solid var(--hair);
+  color:var(--dim);vertical-align:top}
+[data-theme="daylight"] td b{color:var(--fg)}
+[data-theme="daylight"] tr:hover td{background:var(--track)}
+[data-theme="daylight"] .r{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+[data-theme="daylight"] .pill{display:inline-block;padding:1px 8px;font-family:var(--mono);
+  font-size:10px;border:1px solid var(--hair);color:var(--dim);margin:2px 4px 2px 0;
+  letter-spacing:.03em}
+[data-theme="daylight"] .warnbox{border-left:3px solid var(--acc);padding:14px 0 14px 18px;
+  margin:20px 0;font-size:13px;color:var(--dim);line-height:1.7}
+[data-theme="daylight"] .warnbox b{color:var(--fg)}
+[data-theme="daylight"] .st{font-family:var(--mono);font-size:10px;padding:1px 7px;
+  border:1px solid var(--hair);color:var(--dim);letter-spacing:.05em}
+[data-theme="daylight"] .st[data-s="通"]{color:var(--ok);border-color:var(--ok)}
+[data-theme="daylight"] .st[data-s="断了"]{color:var(--bad);border-color:var(--bad)}
+[data-theme="daylight"] .st[data-s="说不准"]{color:var(--warn);border-color:var(--warn)}
+[data-theme="daylight"] .st[data-s="没做"]{color:var(--dim2)}
+[data-theme="daylight"] .st[data-s="看这里"]{color:var(--acc);border-color:var(--acc)}
+
+[data-theme="daylight"] .ctl{display:flex;gap:0;align-items:stretch;flex-wrap:wrap;margin:20px 0;
+  border:1px solid var(--line);width:fit-content;max-width:100%}
+[data-theme="daylight"] .ctl>*{border-right:1px solid var(--hair)}
+[data-theme="daylight"] .ctl>*:last-child{border-right:0}
+[data-theme="daylight"] .ctl select,[data-theme="daylight"] .ctl input[type=date]{all:unset;
+  cursor:pointer;padding:7px 14px;font-size:12px;font-family:var(--mono);color:var(--fg)}
+[data-theme="daylight"] .ctl button{all:unset;cursor:pointer;padding:7px 16px;font-size:11px;
+  letter-spacing:.06em;color:var(--dim);transition:background .18s,color .18s}
+[data-theme="daylight"] .ctl button:hover{background:var(--track);color:var(--fg)}
+[data-theme="daylight"] .ctl button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+[data-theme="daylight"] .ctl button[disabled]{opacity:.3;cursor:not-allowed}
+[data-theme="daylight"] .ctl .pill{border:0;align-self:center;padding:0 14px;margin:0}
+[data-theme="daylight"] .ctl input[type=range]{align-self:center;margin:0 12px}
+
+[data-theme="daylight"] canvas.viz{width:100%;display:block;border-top:1px solid var(--line);
+  border-bottom:1px solid var(--hair);touch-action:none;margin:4px 0 8px}
+[data-theme="daylight"] .lnk{color:var(--fg);cursor:pointer;border-bottom:1px solid var(--acc)}
+[data-theme="daylight"] .lnk:hover{color:var(--acc)}
+
+/* 星历：白昼版是印刷体的月份方阵，不是发光点。 */
+[data-theme="daylight"] .calwrap{display:flex;gap:14px;overflow-x:auto;padding:6px 0 10px}
+[data-theme="daylight"] .calmon{display:flex;flex-direction:column;gap:7px}
+[data-theme="daylight"] .calmon>span{font-family:var(--mono);font-size:9.5px;color:var(--dim2);
+  letter-spacing:.08em}
+[data-theme="daylight"] .calgrid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,12px);gap:3px}
+[data-theme="daylight"] .calgrid i{width:12px;height:12px;background:var(--track);cursor:pointer;
+  transition:outline .14s}
+[data-theme="daylight"] .calgrid i[data-pad]{visibility:hidden}
+[data-theme="daylight"] .calgrid i:hover{outline:2px solid var(--acc);outline-offset:1px}
+[data-theme="daylight"] .calgrid i[data-out]{opacity:.22}
+[data-theme="daylight"] .calgrid i[data-lv="1"]{background:color-mix(in srgb,var(--fg) 22%,var(--track))}
+[data-theme="daylight"] .calgrid i[data-lv="2"]{background:color-mix(in srgb,var(--fg) 46%,var(--track))}
+[data-theme="daylight"] .calgrid i[data-lv="3"]{background:color-mix(in srgb,var(--fg) 72%,var(--track))}
+[data-theme="daylight"] .calgrid i[data-lv="4"]{background:var(--acc)}
+
+@media(max-width:900px){
+  [data-theme="daylight"] #shell{padding-left:0}
+  [data-theme="daylight"] #rail{position:static;width:auto;border-right:0;
+    border-bottom:1px solid var(--line)}
+  [data-theme="daylight"] #stamp{position:static;display:block;padding:10px 34px 0}
+  [data-theme="daylight"] main{padding-top:22px}
+}

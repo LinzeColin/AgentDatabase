@@ -40,7 +40,7 @@ ${sec(`${cur} ${wd}`)}
 ${bento([
   { k: '你开口', v: String(meta.human), n: `机器 ${meta.n - meta.human} 场`, w: 3, tone: 'acc' },
   { k: '有动静的钟点', v: String(meta.active_hours), n: '不等于工作时长', w: 3, alt: true },
-  { k: 'token 输入(含缓存)', v: tk ? fmt(tk.input_total) : '—', n: tk ? `命中率 ${rate(tk.hit_rate)}` : '无用量记录' },
+  { k: 'token 输入(含缓存)', v: tk ? fmt(tk.input_total) : '—', n: tk ? `命中率 ${rate(tk.hit_rate)}` : '没有用量数据数据' },
   { k: '主题', v: `<span style="font-size:20px">${Object.entries(meta.topics).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([t])=>esc(t)).join('、') || '未分类'}</span>`,
     n: Object.entries(meta.topics).length + ' 类' },
 ])}

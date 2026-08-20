@@ -18,13 +18,13 @@ ${bento([
   { k: '最近 7 天', v: String(d7.human), n: `活跃 ${d7.days_active} 天` },
   { k: '最近 30 天', v: String(d30.human), n: `活跃 ${d30.days_active} 天` },
   { k: '缓存命中率', v: rate(tk.hit_rate), n: `输入 ${fmt(tk.input_total)}（含缓存）`, tone: 'acc' },
-  { k: '未分类', v: String(all.unclassified), n: '一个关键词都没命中，如实留空' },
-  { k: '无用量记录', v: String(D.tokens().no_usage), n: '命中率写「不确定」，不是 0' },
+  { k: '未分类', v: String(all.unclassified), n: '这些会话里没出现能判断的词，就先空着' },
+  { k: '没有用量数据数据', v: String(D.tokens().no_usage), n: '这类记录里没有 token 字段，所以写「说不准」而不是 0' },
 ])}
 
 ${warn(`<b>${m.sessions_total} 场里有 ${m.sessions_auto} 场不是你在对话。</b>
-  ${m.sessions_fanout} 场是 agent 同一小时内密集扇出（最大一次 ${esc((m.fanout_hours[0] || {}).when || '—')}），
-  其余是批处理与单轮机器指令。本页全部口径已剔除它们 —— 剔掉多少写在这里，不藏进分母。`)}
+  ${m.sessions_fanout} 场是 机器在一小时内一次性铺开了大批任务（最大一次 ${esc((m.fanout_hours[0] || {}).when || '—')}），
+  其余是批处理与单轮机器指令。本页全部口径已剔除它们 —— 剔掉多少写在这里，不会悄悄算进总数。`)}
 
 ${sec('时间去哪了', '只统计你亲自开口的会话；一场最多挂 3 个主题。点任一条进网格。')}
 ${orbit(Object.entries(all.topics).sort((a, b) => b[1] - a[1]).map(([t, n]) => ({
@@ -38,7 +38,7 @@ ${sec('三档', '把上面的主题归并出来的，不是另外算的。')}
 
 ${sec('数出来的几件事')}
 ${bento(D.insights().map(i => ({
-  k: `${state(i.t === 'warn' ? '不确定' : '通')}　${esc(i.k)}`,
+  kHtml: `${state(i.t === 'warn' ? '说不准' : '看这里')}　${esc(i.k)}`, k: i.k,
   v: `<span style="font-size:26px">${esc(i.v)}</span>`, n: esc(i.d), w: 3,
 })))}
 
