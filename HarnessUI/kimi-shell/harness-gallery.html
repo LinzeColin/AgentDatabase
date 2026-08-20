@@ -44,7 +44,8 @@ function render(){
   const g = document.getElementById("game").value;
   const kw = document.getElementById("q").value.trim().toLowerCase();
   const rows = list.filter(e => (!g || e.game === g) &&
-    (!kw || e.character.includes(kw) || e.variant.includes(kw) || (e.label||"").includes(kw)));
+    (!kw || e.character.includes(kw) || e.variant.includes(kw)
+     || (e.label||"").includes(kw) || (e.variantLabel||"").includes(kw)));
   document.getElementById("count").textContent = `${rows.length} / ${list.length} 个变体`;
   grid.textContent = "";
   const frag = document.createDocumentFragment();
@@ -56,7 +57,7 @@ function render(){
     const meta = document.createElement("div"); meta.className = "meta";
     const n = document.createElement("div"); n.className = "name"; n.textContent = e.label || e.character;
     const s = document.createElement("div"); s.className = "sub";
-    s.textContent = `${e.gameName}${e.variant === "default" ? "" : " · " + e.variant}`;
+    s.textContent = `${e.gameName}${e.variant === "default" ? "" : " · " + (e.variantLabel || e.variant)}`;
     meta.append(n, s); el.append(img, meta);
     el.onclick = async () => { await window.harnessAPI.pick(e.id); st = await window.harnessAPI.state(); paintMode(); render(); };
     frag.appendChild(el);

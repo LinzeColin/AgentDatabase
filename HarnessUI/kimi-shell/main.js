@@ -40,6 +40,7 @@ function catalog() {
     harnessCatalog = raw.entries.map(e => ({
       id: e.id, game: e.game, gameName: e.gameName, character: e.character, variant: e.variant,
       label: e.label || e.character, characterZh: e.characterZh,
+      variantLabel: e.variantLabel || e.variant, fullLabel: e.fullLabel || e.label || e.character,
       // 母版 PNG，不是重编码的 WebP —— 这批图是花钱产出的，压缩省下的几百 KB
       // 换不来削掉的线稿锐度。7MB 解码约 0.3 秒，预取已经把它藏在切换之前。
       light: `kimiskin://${HARNESS}/master/${e.id}/light.png`,
@@ -227,7 +228,7 @@ function harnessMenu() {
   const byGame = {};
   for (const e of list) (byGame[e.gameName] ||= []).push(e);
   return [
-    { label: `当前：${cur ? (cur.label || cur.character) + (cur.variant === "default" ? "" : " / " + cur.variant) : "未选择"}`, enabled: false },
+    { label: `当前：${cur ? (cur.fullLabel || cur.label || cur.character) : "未选择"}`, enabled: false },
     { label: `共 ${list.length} 个变体` + (hide.size ? `（已隐藏 ${hide.size}）` : ""), enabled: false },
     { type: "separator" },
     { label: "角色画廊（缩略图）…", accelerator: "CmdOrCtrl+Shift+K", click: () => openHarnessGallery() },

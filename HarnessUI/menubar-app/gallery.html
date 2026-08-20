@@ -57,7 +57,8 @@ function render(){
   const kw = document.getElementById("q").value.trim().toLowerCase();
   const rows = list.filter(e => (!g || e.game === g) &&
     (showHidden || !e.hidden) &&
-    (!kw || e.character.includes(kw) || e.variant.includes(kw) || (e.label||"").includes(kw)));
+    (!kw || e.character.includes(kw) || e.variant.includes(kw)
+     || (e.label||"").includes(kw) || (e.variantLabel||"").includes(kw)));
   const nHidden = list.filter(e => e.hidden).length;
   document.getElementById("count").textContent =
     `${rows.length} / ${list.length} 个变体` + (nHidden ? ` · 已隐藏 ${nHidden}` : "");
@@ -71,7 +72,7 @@ function render(){
     const meta = document.createElement("div"); meta.className = "meta";
     const n = document.createElement("div"); n.className = "name"; n.textContent = e.label || e.character;
     const s2 = document.createElement("div"); s2.className = "sub";
-    s2.textContent = `${e.gameName}${e.variant === "default" ? "" : " · " + e.variant}`;
+    s2.textContent = `${e.gameName}${e.variant === "default" ? "" : " · " + (e.variantLabel || e.variant)}`;
     meta.append(n, s2);
     const acts = document.createElement("div"); acts.className = "acts";
     const hideBtn = document.createElement("button");

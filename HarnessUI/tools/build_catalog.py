@@ -23,6 +23,22 @@ import pathlib
 GAME_ZH = {"genshin": "原神", "hsr": "崩坏：星穹铁道", "zzz": "绝区零", "wuwa": "鸣潮"}
 
 
+def chinese_variants(assets: pathlib.Path) -> dict:
+    """`<game>/<variant>` -> 换装的简体中文名。
+
+    界面上最刺眼的一块曾经是这个：角色名是中文，后面跟一串
+    `peach-blossom` / `germinating-wind`。变体 slug 是我们自己造的，
+    中文名来自各 wiki 换装页的 `zhs`。
+    """
+    for candidate in (assets / "variants_zh.json",
+                      pathlib.Path(__file__).parent.parent / "research/variants_zh.json"):
+        try:
+            return json.loads(candidate.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+    return {}
+
+
 def chinese_names(assets: pathlib.Path) -> dict:
     """id -> 简体中文名。缺的就没有 —— 界面回退到英文 id，不编一个出来。"""
     for candidate in (assets / "names_zh.json",
@@ -49,6 +65,7 @@ def main() -> None:
     master = args.assets / "master"
     display = args.assets / "display"
     zh = chinese_names(args.assets)
+    zh_variant = chinese_variants(args.assets)
     entries = []
     source = master if master.exists() else display
     pattern = "light.png" if source is master else "light.webp"
@@ -61,6 +78,10 @@ def main() -> None:
         if not dark.exists():
             continue
         name_zh = zh.get(f"{game}/{character}")
+        # default 是我们自己的叫法，wiki 上没有对应词条，直接写死。
+        variant_zh = "默认" if variant == "default" else zh_variant.get(f"{game}/{variant}")
+        variant_label = variant_zh or variant
+        char_label = name_zh or character
         entries.append({
             "id": f"{game}/{character}/{variant}",
             "game": game, "gameName": GAME_ZH.get(game, game),
@@ -68,7 +89,12 @@ def main() -> None:
             "characterZh": name_zh,
             # 菜单和画廊统一用这个字段。有中文名就用中文，没有就用英文 id ——
             # 两种混排也比音译一个假名字强。
-            "label": name_zh or character,
+            "label": char_label,
+            "variantZh": variant_zh,
+            # 菜单和画廊统一读这两个，别再各自拼字符串——
+            # 三个宿主原来各拼各的，中文名补上了它们也还在显示英文 slug。
+            "variantLabel": variant_label,
+            "fullLabel": char_label if variant == "default" else f"{char_label} · {variant_label}",
             "light": f"{args.base}/master/{game}/{character}/{variant}/light.png",
             "dark": f"{args.base}/master/{game}/{character}/{variant}/dark.png",
             "thumb": f"{args.base}/thumb/{game}/{character}/{variant}/light.webp",

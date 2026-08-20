@@ -67,9 +67,11 @@ function importImage(file, id, side) {
 }
 
 function label(entry) {
+  if (entry && entry.fullLabel) return entry.fullLabel;
   if (!entry) return "未选择";
   const name = entry.label || entry.character;
-  return entry.variant === "default" ? name : `${name} · ${entry.variant}`;
+  const variant = entry.variantLabel || entry.variant;
+  return entry.variant === "default" ? name : `${name} · ${variant}`;
 }
 
 /** 推进一格。force 忽略间隔，用于「换下一张」和刚切进轮播时。 */

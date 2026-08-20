@@ -229,7 +229,7 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 				}
 				root.style.setProperty("--harness-bg", `url("${ready}")`);
 				warm(isDark() ? entry.light : entry.dark);
-				status(`${entry.gameName} · ${entry.character}${entry.variant === "default" ? "" : " / " + entry.variant}`);
+				status(`${entry.gameName} · ${entry.fullLabel || entry.label || entry.character}`);
 				return true;
 			}
 
@@ -362,7 +362,8 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 					!skip.has(entry.id) &&
 					(!game || entry.game === game) &&
 					(!term || entry.character.includes(term) || entry.variant.includes(term)
-					 || (entry.label || "").includes(term)));
+					 || (entry.label || "").includes(term)
+					 || (entry.variantLabel || "").includes(term)));
 				grid.textContent = "";
 				const fragment = document.createDocumentFragment();
 				for (const entry of shown) {
@@ -374,10 +375,9 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 					const image = document.createElement("img");
 					image.loading = "lazy";
 					image.src = entry.thumb;
-					image.alt = entry.label || entry.character;
+					image.alt = entry.fullLabel || entry.label || entry.character;
 					const caption = document.createElement("figcaption");
-					const shown = entry.label || entry.character;
-					caption.textContent = entry.variant === "default" ? shown : `${shown} · ${entry.variant}`;
+					caption.textContent = entry.fullLabel || entry.label || entry.character;
 					card.append(image, caption);
 					const pick = async () => {
 						// Picking is an explicit choice, so it also leaves rotate mode —
