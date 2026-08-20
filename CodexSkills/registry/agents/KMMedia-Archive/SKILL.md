@@ -1,6 +1,12 @@
+---
+name: kmmedia-archive
+description: "钉钉媒体归档与 KMVideo 管理流水线。"
+---
+
 # KMMedia-Archive（KMVideo 一体化流水线）
 
-> 版本 v0.3.0（260819）。素材库任务书 v0.0.2.0 的完整执行体。
+> 版本 v0.3.1（260820）。素材库任务书 v0.0.2.0 的完整执行体。
+> v0.3.1 三处运维修复：SMB 挂载点动态解析（盘换挂后 skill 起不来）、单窗口失败不再中断整轮（一个坏件曾毁掉当轮全部剩余窗口）、SMB 写后 stat 延迟沉降 2 次→4 次带退避。
 > v0.3.0 按 260818 全量实跑的 12 条问题记录迭代：audit 认改名账本（误报归零）、
 > 动态群名单、增量起点直读 manifest、manifest 写入保护、永久错误不堵窗口、
 > dws 绝对路径、并发锁、SMB 健康自检。
@@ -99,6 +105,63 @@ Owner 已明确说过「不管」的群（台泥(贵港)、生产付款群、生
 - 画质等级与分辨率一致；`.manifest.jsonl` mtime 未变
 - 改名幂等：连跑两次第二次零变更
 - 三处落地校验：SMB 写后字节数相等；公开仓含脱敏版；私有仓 ingest 成功
+
+## 每日增量：怎么设 cron（v0.3.1 / v0.0.0.3 起）
+
+**先看两个实测数字**（260814–260820，31 群）：
+
+| | 数值 |
+|---|---|
+| 新增速率 | **155 件/天**（照片 1016 / 文件 40 / 视频 31，7 天 1087 件） |
+| 归档速率 | **4.11 秒/件**（均 566KB，137 KB/s）→ 单线程 875 件/小时 |
+| 日增量耗时 | **约 13 分钟**（单线程），8 worker 更短 |
+
+**结论：半小时/天的预算有 2 倍余量。质量一条都不用降。**
+
+### 回填和增量必须拆成两个 cron
+
+混在一起跑，看到的永远是回填的耗时（武汉开明一个群 18027 件是一次性回填，
+它的日增量只有 110 件），会得出「永远追不上」的错误结论。
+
+```bash
+# 每日增量（进 cron）—— 起点由 manifest 自己算，窗口切到 1 天
+python3 scripts/<pipeline>.py all --since-manifest --window-days 1
+
+# 全量回填（不进 cron，跑完就停）
+python3 scripts/<pipeline>.py all --start "2025-01-01 00:00:00" --window-days 30
+```
+
+### 量大的群单独一个 cron
+
+武汉开明占日增量的 **71%**（773/1087）。把它单独拆一个 cron 给 8 worker，
+其余 30 群一个 cron，互不阻塞。
+
+### cron 间隔必须大于单轮耗时
+
+pipeline 自己有 `workdir/.pipeline.lock` pid 锁，第二个实例会直接退出，
+但间隔太密只是在反复白启动。
+
+## 窗口失败语义（v0.3.1 / v0.0.0.3 改动）
+
+**单个窗口失败不再中断整轮。** 旧版遇到一个坏件就 `break`，当轮剩下的窗口全不跑 ——
+实测全库 13 个 stopped 窗口（项目设备工具类管理群 9、武汉开明 4），
+而武汉开明占日增量 71%，它一被截断整体就停住，这才是「追不上」的真机制。
+
+现在：失败窗口记 `stopped` 后**继续下一个窗口**，下轮重试；
+连续 `MAX_CONSECUTIVE_WINDOW_FAILURES`（3）个失败才放弃该群本轮。
+
+**「不得跳过未完成窗口」这条保证没有丢**，改由 `manifest_window_bounds` 兜：
+增量起点只推进到**第一个非 complete 窗口之前**，不是 `max(end)`。
+所以中间卡着 stopped 窗口的群，起点会停在它前面反复重扫那几天 ——
+这是**正确的代价**，不重扫就是静默缺口。把坏窗口修好，起点自动前进。
+
+## SMB 挂载点
+
+`SMB_ROOT` 现在动态解析，**不再写死 `/Volumes/share`**：
+`KM_SMB_ROOT` 环境变量 → `/Volumes/share` → `~/mnt/share` → `mount` 输出里任何 smbfs 挂载点。
+
+起因是实测事故：260820 盘换挂到 `~/mnt/share` 之后，写死路径的两个 skill 直接报
+`SMB root is unavailable` 起不来 —— 定时任务会天天空转失败且不易察觉。
 
 ## 接手须知（新 agent 从这里开始）
 
@@ -206,6 +269,40 @@ pipeline 开跑前自动跑一次健康自检（listdir 计时，超 `SMB_SLOW_S
 
 同一 workdir 只允许一个实例（`workdir/.pipeline.lock` pid 锁）。
 cron 触发间隔一定要大于单轮耗时，否则第二个实例会和第一个抢同一份 manifest 与登记表。
+
+### SMB rename 会随机永久挂死 —— 用子进程超时（260821 实测）
+
+`os.rename` 在 OpenWRT Samba 上可能直接进 U 态永久挂死，主线程调用会卡死整条 pipeline。
+新版 pipeline 已内置 `rename_with_timeout()`：单文件 rename 放 `subprocess.Popen(start_new_session=True)`
+子进程，超 `KM_RENAME_TIMEOUT`（默认 8s）就 `killpg(SIGKILL)` 清掉。**不要在 pipeline 外另写直接
+`os.rename` 的脚本去碰 SMB。** 账本增量落盘用 `flush_ledger()`（每 200 条写一次），
+被杀进程/断连也不丢太多已改名条目。
+
+### 超大目录 rename 是服务端缺陷，要单独针对性脚本（260821 实测）
+
+单群万级文件（武汉开明 18027 件回填）的 photo 目录，NAS 服务端 rename 成功率约 50%、
+8–10s/个，是服务端目录/索引退化，不是 skill 问题。命中时不要混进全量 rename：
+写独立脚本只处理该群，每轮重挂新 SMB 会话绕开服务端目录污染 + 逐文件子进程超时 + 每 20 条落账，
+后台长跑（数小时收敛），账本 flush 前被杀只丢当批。
+
+### 白箱进度：一条命令看清在跑什么（v0.3.1 +260821）
+
+用户问「你是不是在空转」「怎么看不到进度」时，说明进度不可见。本 skill 提供
+`scripts/progress.py`，**只读**（读 workdir 产物 + pgrep 阶段进程，不碰 SMB、不动数据）：
+
+```bash
+python3 ~/.agents/skills/KMMedia-Archive/scripts/progress.py           # 一次快照
+python3 ~/.agents/skills/KMMedia-Archive/scripts/progress.py --watch   # 每 60s 刷一次
+python3 ~/.agents/skills/KMMedia-Archive/scripts/progress.py --workdir /tmp/xxx  # 指定 workdir
+```
+
+三段输出，缺一段就不算白箱：
+- **① 登记表进度**：已改名 / 总数（百分比条）、标注已 / 待确认、accept pass/fail
+- **② 阶段是否在跑**：scan/probe/thumbs/dedup/label/rename/registry/accept/report 谁活着
+  （用 `pgrep -f kmvideo_pipeline.py <stage>` + `ps` 取命令行判断，排掉 progress.py 自身与 bash 包装）
+- **③ 素材库概况**：照片/视频/脱敏非无/有描述/缩略图数
+
+何时主动贴：每完成一个阶段；任何一步预计超 5 分钟先说清「怎么自己查」；等一个不会来的通知前先查快照。
 
 ## 已知外部障碍（记录在案，不阻塞流水线）
 
