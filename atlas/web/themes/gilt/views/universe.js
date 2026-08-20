@@ -43,7 +43,7 @@ ${drawer('连得最紧的 40 组', table([{ t: '一头' }, { t: '另一头' }, {
   cv.style.height = Math.max(440, Math.min(720, innerHeight - 300)) + 'px';
   const ghud = host.querySelector('#ghud'), nearBox = host.querySelector('#near');
   let spin = true, last = performance.now(), drag = null, cur = -1;
-  const S3 = buildGraphScene(cv, nodes, edges, { theme: 'glass' });
+  const S3 = buildGraphScene(cv, nodes, edges, { theme: 'gilt' });
 
   cv.addEventListener('pointerdown', e => {
     drag = { x: e.clientX, y: e.clientY, yaw: S3.orbit.yaw, pitch: S3.orbit.pitch };

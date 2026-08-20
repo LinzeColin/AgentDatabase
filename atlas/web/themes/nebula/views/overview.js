@@ -33,16 +33,17 @@ ${orbit(Object.entries(all.topics).sort((a, b) => b[1] - a[1]).map(([t, n]) => (
 })).concat([{ k: '没认出在做什么', v: all.unclassified, c: 'var(--dim2)' }]))}
 
 ${sec('几件数出来的事', '全部从记录里直接数的，没有一句是编的。')}
-${grid(D.insights().map(i => ({
+${grid(D.insights().map((i, idx, arr) => ({
   kHtml: `${state(i.t === 'warn' ? '说不准' : '看这里')}　${esc(i.k)}`, k: i.k,
-  v: `<span style="font-size:26px">${esc(i.v)}</span>`, n: esc(i.d), w: 3,
+  v: `${esc(i.v)}`, size: 'sm', n: esc(i.d),
+  w: idx === arr.length - 1 && arr.length % 2 ? 6 : 3,   // 末张单数时占满，别留孤儿
 })))}
 
 ${sec('往哪走、哪里有口子', esc((D.opportunities() || {}).caveat || ''))}
 ${((D.opportunities() || {}).items || []).map(o => `
   <div class="slab">
     <div class="ck">${esc(o.k)}　<span style="color:var(--dim2)">依据：${esc(o.from)}</span></div>
-    <div class="cv acc" style="font-size:34px">${esc(o.v)}</div>
+    <div class="cv acc md">${esc(o.v)}</div>
     <div class="cn" style="margin:8px 0 14px">${esc(o.d)}</div>
     ${(o.list || []).map(x => pill(x)).join('')}
   </div>`).join('')}

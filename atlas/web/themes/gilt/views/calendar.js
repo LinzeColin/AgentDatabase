@@ -1,6 +1,7 @@
 import { esc, fmt, go, enter } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
 import { hero, sec, grid, orbit, drawer, table, pill, rate } from '../kit.js';
+import { flyToDay } from '../shell.js';
 
 // 白昼的日历就是一本印出来的日历：月份方阵、周一起头、发丝线分格。
 // 它不发光、不动 —— 它的可读性来自对齐和留白。
@@ -23,8 +24,8 @@ ${hero('日历', `${first} 起，${days.length} 天`,
     <option value="turns">你说话次数</option><option value="input">读进去的 token</option>
     <option value="hit">缓存命中率</option></select>
 </div>
-<div id="sum"></div>
 <div id="cal"></div>
+<div id="sum"></div>
 <div id="rest"></div>`;
 
   const ctlslot = host.querySelector('#ctlslot');
@@ -73,7 +74,7 @@ ${hero('日历', `${first} 起，${days.length} 天`,
     const { sessions, dayset, label } = resolve();
     const agg = D.aggregate(sessions);
     host.querySelector('#sum').innerHTML = grid([
-      { k: '现在看的是', v: `<span style="font-size:20px">${esc(label)}</span>`, n: `${dayset.size} 天`, w: 3, tone: 'acc' },
+      { k: '现在看的是', v: `${esc(label)}`, size: 'sm', n: `${dayset.size} 天`, w: 3, tone: 'acc' },
       { k: '会话', v: String(agg.n), n: `你说话 ${agg.turns} 次 · 用工具 ${agg.tools} 次`, w: 3 },
       { k: '读进 token', v: fmt(agg.input_total), n: `命中缓存 ${rate(agg.hit)}`, w: 3 },
       { k: '没认出来', v: String(agg.unclassified), n: '一个关键词都没对上', w: 3 },
@@ -95,7 +96,7 @@ ${hero('日历', `${first} 起，${days.length} 天`,
         l.map(iso => {
           const v = valueOf(iso);
           return `<i data-day="${iso}" data-lv="${lv(v)}" ${dayset.has(iso) ? '' : 'data-out="1"'}
-            title="${iso}　${show(v)}"></i>`;
+            title="${iso}　${show(v)}" aria-label="${iso} ${show(v)}" role="button" tabindex="0"></i>`;
         }).join('')}</div></div>`).join('')}</div>
       <p class="hint">深浅分界 ${[t1, t2, t3].map(show).join(' / ')}（按你自己的分布取四分位，不是固定值）。
         淡掉的格子＝不在当前切片内，不是那天没有数据。</p>`;
@@ -123,6 +124,10 @@ ${drawer('摊开逐日明细', table(
     drawCtl(); draw();
   });
   host.querySelector('#metric').onchange = e => { metric = e.target.value; draw(); };
+  host.addEventListener('mouseover', e => {
+    const h = e.target.closest('[data-day]');
+    if (h) flyToDay(h.dataset.day);
+  });
   host.addEventListener('click', e => {
     const d = e.target.closest('[data-day]'); if (d) return go('day', d.dataset.day);
     const t = e.target.closest('[data-topic]'); if (t) go('grid', 't=' + encodeURIComponent(t.dataset.topic));

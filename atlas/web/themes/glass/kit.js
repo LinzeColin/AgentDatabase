@@ -8,7 +8,7 @@ export const sec = (t, hint) =>
 export const bento = cards => `<div class="bento">${cards.map(c =>
   `<div class="card ${c.w ? 'w' + c.w : ''} ${c.alt ? 'alt' : ''}">
      <div class="ck">${c.kHtml || esc(c.k)}</div>
-     <div class="cv ${c.tone || ''}">${c.v}</div>
+     <div class="cv ${c.tone || ''} ${c.size || ''}">${c.v}</div>
      <div class="cn">${c.n || ''}</div>
      ${c.extra || ''}</div>`).join('')}</div>`;
 
@@ -16,9 +16,9 @@ export const bento = cards => `<div class="bento">${cards.map(c =>
 export const orbit = rows => {
   const mx = Math.max(1, ...rows.map(r => r.v));
   return `<div class="orbit">${rows.map(r => `
-    <div class="orow" ${r.attr || ''}>
+    <div class="orow" ${r.attr || ''} ${r.attr ? 'role="button" tabindex="0"' : ''}>
       <span class="olabel" title="${esc(r.k)}">${esc(r.k)}</span>
-      <span class="otrack"><span class="ofill" style="width:${(r.v / mx * 100).toFixed(1)}%;
+      <span class="otrack"><span class="ofill" style="transform:scaleX(${(r.v / mx).toFixed(4)});
         background:linear-gradient(90deg,${r.c || 'var(--acc)'},${r.c2 || r.c || 'var(--acc2)'})"></span></span>
       <span class="oval">${r.label != null ? r.label : fmt(r.v)}</span>
     </div>`).join('')}</div>`;

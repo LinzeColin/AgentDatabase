@@ -28,7 +28,7 @@ ${warn(`<b>「只聊没交付」不等于白干。</b>那天可能在读、在�
   但它仍然是「造东西 : 交出去」最直接的证据，而且是两个互不知情的来源对出来的，不是我推的。`)}
 
 ${sec('说的话 vs 交的东西', '上半截是会话，下半截是提交。中间那条线是同一天。')}
-<div class="slab" style="padding:10px 12px 6px"><canvas class="viz" id="cv" style="border:0;background:none"></canvas></div>
+<div class="slab" style="padding:10px 12px 6px"><canvas class="viz" id="cv" style="border:0;background:none" role="img" aria-label="会话与提交的逐日对照图。逐日明细见下方表格。"></canvas></div>
 
 ${sec('哪个仓在动')}
 ${orbit((G.repos || []).map(r => ({ k: r.repo, v: r.commits,

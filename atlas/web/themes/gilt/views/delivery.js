@@ -2,6 +2,7 @@ import { esc, fmt, pct, go, enter } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
 import { fitCanvas, cssVar } from '../../../core/g3d.js';
 import { hero, sec, grid, orbit, drawer, table, warn, pill } from '../kit.js';
+import { flyToDay } from '../shell.js';
 
 // 两个互不知情的来源对出来的：本机会话证明你在做，GitHub 提交证明你做出来了。
 export async function render(host) {
@@ -28,7 +29,7 @@ ${warn(`<b>「只聊没交付」不等于白干。</b>那天可能在读、在�
   而且是两个互不知情的来源对出来的，不是我推的。`)}
 
 ${sec('说的话 vs 交的东西', '上半截是会话，下半截是提交。中间那条线是同一天。')}
-<canvas class="viz" id="cv"></canvas>
+<canvas class="viz" id="cv" role="img" aria-label="会话与提交的逐日对照图。逐日明细见下方表格。"></canvas>
 
 ${sec('哪个仓在动')}
 ${orbit((G.repos || []).map(r => ({ k: r.repo, v: r.commits,
@@ -80,6 +81,10 @@ ${drawer('摊开逐日明细（最近 60 天）', table(
   draw();
   const onR = () => draw();
   addEventListener('resize', onR); addEventListener('atlas:theme', onR);
+  host.addEventListener('mouseover', e => {
+    const h = e.target.closest('[data-day]');
+    if (h) flyToDay(h.dataset.day);
+  });
   host.addEventListener('click', e => {
     const d = e.target.closest('[data-day]'); if (d) go('day', d.dataset.day);
   });

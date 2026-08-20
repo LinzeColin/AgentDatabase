@@ -19,7 +19,7 @@ ${sec('星河', '每行一天，横轴 00:00→24:00（悉尼）。<b>在图上�
   <button id="clear">清除框选</button>
   <span class="pill" id="hud">未框选</span>
 </div>
-<canvas class="viz" id="cv"></canvas>
+<canvas class="viz" id="cv" role="img" aria-label="按周的主题成分图。逐周明细见下方表格。"></canvas>
 <div id="sum"></div>`;
 
   const cv = host.querySelector('#cv'), hud = host.querySelector('#hud');
@@ -77,7 +77,7 @@ ${sec('星河', '每行一天，横轴 00:00→24:00（悉尼）。<b>在图上�
   cv.addEventListener('pointermove', e => { if (!drag) return;
     const b = rowAt(e.clientY);
     sel = [drag.d < b.d ? drag.d : b.d, drag.d < b.d ? b.d : drag.d]; draw(); sum(); });
-  cv.addEventListener('pointerup', () => { drag = null; });
+  cv.addEventListener('pointerup', () => { drag = null; sum(); });   // 松手才补那一次入场与相机飞行
   cv.addEventListener('dblclick', e => { const r = rowAt(e.clientY); if (r) go('day', r.d); });
 
   const sum = () => {
@@ -87,13 +87,13 @@ ${sec('星河', '每行一天，横轴 00:00→24:00（悉尼）。<b>在图上�
     const nd = days.filter(d => d.d >= sel[0] && d.d <= sel[1]).length;
     hud.textContent = `${sel[0]} → ${sel[1]}　${nd} 天　${agg.n} 场`;
     host.querySelector('#sum').innerHTML = bento([
-      { k: '框选区间', v: `<span style="font-size:22px">${sel[0]} → ${sel[1]}</span>`, n: `${nd} 天`, w: 3, tone: 'acc' },
+      { k: '框选区间', v: `${sel[0]} → ${sel[1]}`, size: 'sm', n: `${nd} 天`, w: 3, tone: 'acc' },
       { k: '会话', v: String(agg.n), n: `你说话 ${agg.turns} 次 · 工具 ${agg.tools} 次`, w: 3, alt: true },
       { k: 'token 输入(含缓存)', v: fmt(agg.input_total), n: `命中率 ${rate(agg.hit)}` },
       { k: '未分类', v: String(agg.unclassified), n: '如实留空' },
     ]) + `${sec('这段区间的主题')}${orbit(agg.topics.map(([t, n]) =>
       ({ k: t, v: n, c: topicColor(t) })))}`;
-    enter('.card, .orow', host);
+    if (!drag) enter('.card, .orow', host);
   };
 
   host.querySelector('#range').onchange = e => { range = +e.target.value; draw(); };

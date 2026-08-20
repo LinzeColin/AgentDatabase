@@ -1,0 +1,384 @@
+/* 鎏金 —— 你的记录不是光，是被铸出来的器物。
+   琉璃的质感来自毛玻璃，星云的质感来自加色发光 —— 两套都是「光」。
+   这一套走剩下那条：实体材质。漆面、切角、错金、阴刻、真阴影。
+   所以这里**一条 backdrop-filter 都没有**，那是别人的身份。 */
+
+:root[data-theme="gilt"]{
+  --disp:"Didot","Bodoni 72","Playfair Display",Georgia,"Songti SC","STSong",serif;
+  --sans:-apple-system,"SF Pro Text","Segoe UI",Inter,"PingFang SC",system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --rail:236px; --rail-shut:64px;
+  /* 强减速：重物落位。琉璃是弹，星云是飘，这套是「落下去就不动了」。 */
+  --ease-heavy:cubic-bezier(.3,.7,0,1);
+}
+/* 深色「玄堂」 */
+:root[data-theme="gilt"][data-mode="dark"]{
+  --bg:#0B0906; --fg:#F2EBDD; --dim:#C3B69B; --dim2:#8A7D63;
+  --line:rgba(214,178,110,.20); --line2:rgba(214,178,110,.09);
+  --acc:#D9A54D; --acc2:#BFC7D2;
+  --ok:#55BE92; --warn:#E98A4B; --bad:#E4574E;
+  --panel:rgba(26,20,12,.90); --panel2:rgba(20,15,9,.82);
+  --track:rgba(214,178,110,.13);
+  --gold:linear-gradient(160deg,#F0CE8A,#D9A54D 45%,#8F6B26);
+  --bevel:inset 0 1px 0 rgba(255,255,255,.07);
+  --press:inset 0 1px 2px rgba(0,0,0,.4);
+  --groove:inset 0 1px 2px rgba(0,0,0,.35);
+}
+/* 浅色「白玉堂」—— 不是把深色调淡，是同一座厅的另一套布光。 */
+:root[data-theme="gilt"][data-mode="light"]{
+  --bg:#F5F1E8; --fg:#211A12; --dim:#574A38; --dim2:#766549;
+  --line:rgba(92,72,40,.22); --line2:rgba(92,72,40,.10);
+  --acc:#8A6512; --acc2:#5C6472;
+  --ok:#17714D; --warn:#A4540E; --bad:#A3271F;
+  --panel:rgba(255,252,245,.94); --panel2:rgba(250,246,236,.9);
+  --track:rgba(92,72,40,.12);
+  --gold:linear-gradient(160deg,#B08430,#8A6512 55%,#6B4E0E);
+  --bevel:inset 0 1px 0 rgba(255,255,255,.55);
+  --press:inset 0 1px 2px rgba(0,0,0,.16);
+  --groove:inset 0 1px 2px rgba(0,0,0,.12);
+}
+
+[data-theme="gilt"] body{background:var(--bg);color:var(--fg);
+  font-family:var(--sans);-webkit-font-smoothing:antialiased}
+[data-theme="gilt"] #foundry{position:fixed;inset:0;z-index:0;display:block;width:100vw;height:100vh}
+/* 暗角：浅色没有后期管线，用一层 DOM 渐变补上 */
+[data-theme="gilt"] #vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 42%,transparent 38%,rgba(0,0,0,.05) 100%)}
+:root[data-theme="gilt"][data-mode="dark"] #vignette{display:none}
+[data-theme="gilt"] #shell{position:relative;z-index:2;padding-left:var(--rail);
+  transition:padding-left .5s var(--ease-heavy)}
+:root[data-theme="gilt"][data-rail="shut"] #shell{padding-left:var(--rail-shut)}
+
+/* ── 左轨：一级「鎏金浮雕」，二级「素铜阴刻」 ── */
+[data-theme="gilt"] #rail{position:fixed;left:0;top:0;bottom:0;width:var(--rail);z-index:20;
+  background:var(--panel);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;padding:20px 0 14px;
+  transition:width .5s var(--ease-heavy)}
+:root[data-theme="gilt"][data-rail="shut"] #rail{width:var(--rail-shut)}
+[data-theme="gilt"] .brandrow{display:flex;align-items:center;justify-content:space-between;
+  padding:0 16px 16px;border-bottom:1px solid var(--line)}
+[data-theme="gilt"] .brand{font-family:var(--disp);font-size:17px;font-weight:600;
+  letter-spacing:-.01em;white-space:nowrap;
+  background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent}
+:root[data-theme="gilt"][data-rail="shut"] .brand{opacity:0;pointer-events:none}
+[data-theme="gilt"] #railtog{all:unset;cursor:pointer;font-size:11px;color:var(--dim2);padding:4px 6px;
+  transition:color .22s var(--ease-heavy)}
+[data-theme="gilt"] #railtog:hover{color:var(--acc)}
+[data-theme="gilt"] #railtog:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+[data-theme="gilt"] #nav{flex:1 1 auto;min-height:0;overflow-y:auto;padding:4px 0}
+/* 一级下缘一条金横档 —— 「横档只属于一级」是三通道冗余里的结构通道 */
+[data-theme="gilt"] .navg{border-bottom:1px solid var(--line2)}
+[data-theme="gilt"] .navh{display:flex;align-items:center;gap:11px;cursor:pointer;
+  padding:11px 16px 9px;user-select:none}
+/* 一级前置：22×22 铸章块（漆面 + 金描边 + 单切角） */
+[data-theme="gilt"] .navi{width:22px;height:22px;flex:none;display:flex;align-items:center;
+  justify-content:center;font-size:12px;color:var(--acc);
+  background:var(--panel2);border:1px solid var(--line);
+  clip-path:polygon(6px 0,100% 0,100% 100%,0 100%,0 6px);
+  transition:border-color .28s var(--ease-heavy),box-shadow .28s var(--ease-heavy)}
+[data-theme="gilt"] .navg.on .navi{border-color:var(--acc);box-shadow:0 0 0 1px var(--line)}
+/* 一级文字：鎏金渐变填充 */
+[data-theme="gilt"] .navl{font-size:12px;font-weight:600;letter-spacing:.06em;white-space:nowrap;
+  background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* 展开指示：银色闩点 → 竖闩。不用箭头也不用 +/−，那是另两套的。 */
+[data-theme="gilt"] .navh::after{content:"";margin-left:auto;width:4px;height:12px;
+  background:var(--acc2);opacity:.55;transform-origin:center;
+  transition:transform .34s var(--ease-heavy),opacity .34s}
+[data-theme="gilt"] .navg.shut .navh::after{transform:scaleY(.34);opacity:.3}
+[data-theme="gilt"] .navh:hover::after{opacity:.9}
+
+[data-theme="gilt"] .navs{overflow:hidden;max-height:320px;padding-bottom:7px;
+  transition:max-height .42s var(--ease-heavy),opacity .26s}
+[data-theme="gilt"] .navg.shut .navs{max-height:0;opacity:0;padding:0}
+/* 二级：素铜。不渐变、不大写、不发光；前置一枚菱形铆钉。 */
+[data-theme="gilt"] .navs button{all:unset;cursor:pointer;display:block;width:100%;
+  box-sizing:border-box;padding:7px 16px 7px 40px;font-size:13px;color:var(--dim);
+  position:relative;transition:color .2s var(--ease-heavy),background .2s}
+[data-theme="gilt"] .navs button::before{content:"";position:absolute;left:22px;top:50%;
+  width:5px;height:5px;margin-top:-2.5px;background:var(--dim2);
+  transform:rotate(45deg);transition:all .24s var(--ease-heavy)}
+[data-theme="gilt"] .navs button:hover{color:var(--fg);background:var(--track)}
+[data-theme="gilt"] .navs button:hover::before{background:var(--acc)}
+[data-theme="gilt"] .navs button:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+[data-theme="gilt"] .navs button[aria-current="true"]{color:var(--fg);background:var(--track)}
+[data-theme="gilt"] .navs button[aria-current="true"]::before{background:var(--acc);
+  transform:rotate(45deg) scale(1.4)}
+[data-theme="gilt"] .navs button[aria-current="true"]::after{content:"";position:absolute;
+  left:0;top:4px;bottom:4px;width:2px;background:var(--gold)}
+:root[data-theme="gilt"][data-rail="shut"] .navl,
+:root[data-theme="gilt"][data-rail="shut"] .navs,
+:root[data-theme="gilt"][data-rail="shut"] .navh::after,
+:root[data-theme="gilt"][data-rail="shut"] #tools,
+:root[data-theme="gilt"][data-rail="shut"] #railfoot{display:none}
+
+[data-theme="gilt"] #tools{margin-top:auto;padding:12px 16px;display:flex;
+  flex-direction:column;gap:8px;border-top:1px solid var(--line)}
+[data-theme="gilt"] .seg{display:flex;border:1px solid var(--line);
+  clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px)}
+[data-theme="gilt"] .seg button{all:unset;cursor:pointer;flex:1;text-align:center;padding:6px 0;
+  font-size:11px;letter-spacing:.04em;color:var(--dim2);
+  transition:background .24s var(--ease-heavy),color .24s}
+[data-theme="gilt"] .seg button:hover{color:var(--fg);background:var(--track)}
+[data-theme="gilt"] .seg button:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+[data-theme="gilt"] .seg button[aria-pressed="true"]{background:var(--acc);color:var(--bg);font-weight:600}
+[data-theme="gilt"] #railfoot{padding:0 16px;font-family:var(--mono);font-size:9.5px;
+  color:var(--dim2);line-height:1.7;letter-spacing:.02em}
+
+/* ── 纸面 ── */
+[data-theme="gilt"] #stamp{position:fixed;right:26px;top:20px;z-index:22;
+  font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.02em}
+/* 展位铭牌：3D 厅里当前停在哪 */
+[data-theme="gilt"] #hud{position:fixed;right:26px;bottom:22px;z-index:22;text-align:right;
+  font-family:var(--mono);font-size:10.5px;color:var(--dim2);line-height:1.7;
+  pointer-events:none;letter-spacing:.02em}
+[data-theme="gilt"] #hud b{color:var(--acc);font-weight:600;font-size:12px}
+/* 目次丝带：滚动的空间回应，每个 sec 一颗铆钉 */
+[data-theme="gilt"] #ribbon{position:fixed;right:0;top:0;bottom:0;width:2px;z-index:21;
+  background:var(--line2);pointer-events:none}
+[data-theme="gilt"] #ribbon i{position:absolute;right:0;width:2px;background:var(--gold);
+  top:0;height:0;transition:height .1s linear}
+[data-theme="gilt"] #ribbon u{position:absolute;right:-2px;width:6px;height:6px;
+  background:var(--dim2);transform:rotate(45deg);margin-top:-3px;transition:background .3s}
+[data-theme="gilt"] #ribbon u[data-on]{background:var(--acc)}
+
+[data-theme="gilt"] main{max-width:1180px;margin:0 auto;padding:70px 34px 110px}
+[data-theme="gilt"] footer{max-width:1180px;margin:0 auto;padding:20px 34px 46px;
+  border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;color:var(--dim2)}
+
+/* hero「匾额」：小方章 + 鎏金衬线大字 + 双线。这是这套主题的签名。 */
+[data-theme="gilt"] .hero{margin:0 0 52px}
+[data-theme="gilt"] .hero .eyebrow{display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--dim2);margin-bottom:18px}
+[data-theme="gilt"] .hero .eyebrow::before{content:attr(data-seal);width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--disp);
+  font-size:12px;color:var(--acc);background:var(--panel2);border:1px solid var(--acc);
+  clip-path:polygon(6px 0,100% 0,100% 100%,0 100%,0 6px);letter-spacing:0}
+[data-theme="gilt"] .hero h1{font-family:var(--disp);font-size:clamp(42px,6.8vw,92px);
+  line-height:.98;letter-spacing:-.015em;font-weight:600;margin:0 0 16px;max-width:18ch;
+  background:var(--gold);background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+:root[data-theme="gilt"][data-mode="dark"] .hero h1{filter:drop-shadow(0 1px 0 rgba(0,0,0,.35))}
+:root[data-theme="gilt"][data-mode="light"] .hero h1{filter:drop-shadow(0 1px 0 rgba(255,255,255,.6))}
+[data-theme="gilt"] .hero p{font-size:16px;line-height:1.7;color:var(--dim);max-width:64ch;margin:0 0 20px}
+[data-theme="gilt"] .hero p b{color:var(--fg);font-weight:600}
+[data-theme="gilt"] .hero::after{content:"";display:block;height:3px;max-width:220px;
+  background:var(--gold);box-shadow:0 5px 0 -4px var(--line);transform-origin:left}
+
+/* sec「界碑」：竖金条 + 衬线标题 + 通栏发丝线 */
+[data-theme="gilt"] .sec{display:flex;align-items:center;gap:14px;margin:72px 0 6px;
+  padding-bottom:10px;border-bottom:1px solid var(--line);
+  font-family:var(--disp);font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-.01em}
+[data-theme="gilt"] .sec::before{content:"";width:10px;height:26px;flex:none;background:var(--gold);
+  clip-path:polygon(0 0,100% 6px,100% 100%,0 calc(100% - 6px))}
+[data-theme="gilt"] .sec:first-child{margin-top:0}
+[data-theme="gilt"] .hint{font-size:13px;line-height:1.72;color:var(--dim2);margin:12px 0 22px;max-width:74ch}
+[data-theme="gilt"] .hint b{color:var(--dim)}
+
+/* grid(cell)「展柜」：不透明漆面 + 对角切角 + 渐变描边 + 铸件倒角高光 */
+[data-theme="gilt"] .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin:22px 0 6px}
+[data-theme="gilt"] .cell{grid-column:span 2;padding:20px 20px 22px;position:relative;
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+  background:linear-gradient(var(--panel),var(--panel)) padding-box,
+             linear-gradient(150deg,rgba(214,178,110,.5),rgba(214,178,110,.08) 40%,rgba(214,178,110,.35)) border-box;
+  border:1px solid transparent;box-shadow:var(--bevel);
+  transition:transform .22s var(--ease-heavy),box-shadow .22s var(--ease-heavy)}
+[data-theme="gilt"] .cell.w3{grid-column:span 3}
+[data-theme="gilt"] .cell.w6{grid-column:span 6}
+[data-theme="gilt"] .ck{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.14em;
+  color:var(--dim2);margin-bottom:14px}
+[data-theme="gilt"] .cv{font-family:var(--disp);font-size:clamp(30px,4vw,48px);line-height:1;
+  font-weight:500;font-variant-numeric:lining-nums;color:var(--fg)}
+[data-theme="gilt"] .cv.acc{background:var(--gold);background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="gilt"] .cv.warn{color:var(--warn)}
+[data-theme="gilt"] .cn{font-size:12.5px;color:var(--dim);margin-top:12px;line-height:1.6}
+@media(max-width:900px){
+  [data-theme="gilt"] .grid{grid-template-columns:repeat(2,1fr)}
+  [data-theme="gilt"] .cell,[data-theme="gilt"] .cell.w3{grid-column:span 1}
+  [data-theme="gilt"] .cell.w6{grid-column:span 2}
+}
+
+/* orbit「错金条」：凹槽里的一根金条 */
+[data-theme="gilt"] .orbit{margin:18px 0 8px}
+[data-theme="gilt"] .orow{display:grid;grid-template-columns:150px 1fr auto;gap:16px;
+  align-items:center;padding:9px 8px 9px 0;border-bottom:1px solid var(--line2);
+  transition:background .2s var(--ease-heavy)}
+[data-theme="gilt"] .orow:hover{background:var(--track)}
+[data-theme="gilt"] .orow[data-topic],[data-theme="gilt"] .orow[data-day]{cursor:pointer}
+[data-theme="gilt"] .olabel{font-size:13px;color:var(--fg);overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+[data-theme="gilt"] .otrack{height:9px;background:var(--track);box-shadow:var(--groove);position:relative}
+[data-theme="gilt"] .ofill{position:absolute;left:0;top:0;bottom:0;width:100%;transform-origin:left;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28);
+  transition:transform .5s var(--ease-heavy)}
+[data-theme="gilt"] .oval{font-family:var(--mono);font-size:11px;color:var(--dim);
+  font-variant-numeric:tabular-nums;text-align:right;min-width:124px}
+/* 行尾银点：错银点睛，hover 才出现 */
+[data-theme="gilt"] .orow::after{content:"";position:absolute;width:0;height:0}
+[data-theme="gilt"] .orow{position:relative}
+[data-theme="gilt"] .orow:hover::after{width:5px;height:5px;right:2px;top:50%;margin-top:-2.5px;
+  background:var(--acc2);transform:rotate(45deg)}
+
+/* slab「碑拓」 */
+[data-theme="gilt"] .slab{position:relative;padding:18px 20px 20px 22px;margin:16px 0;
+  background:var(--panel);border:1px solid var(--line);border-left:none;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%);
+  box-shadow:var(--bevel)}
+[data-theme="gilt"] .slab::before{content:"";position:absolute;left:0;top:0;bottom:0;
+  width:3px;background:var(--gold)}
+[data-theme="gilt"] .slab.mach{opacity:.5}
+[data-theme="gilt"] .stitle{font-family:var(--disp);font-size:21px;font-weight:600;
+  letter-spacing:-.01em;margin:8px 0 10px;color:var(--fg)}
+[data-theme="gilt"] .quote{margin-top:10px;padding:11px 14px;background:var(--track);
+  border-left:1px solid var(--acc2);color:var(--dim);font-family:var(--mono);font-size:12.5px;
+  line-height:1.65;white-space:pre-wrap;word-break:break-word;max-height:170px;overflow:auto}
+
+/* drawer「藏匣」：中央一枚拉手，开时转成竖闩 */
+[data-theme="gilt"] details.drawer{margin:24px 0;border-top:1px solid var(--line)}
+[data-theme="gilt"] details.drawer>summary{cursor:pointer;list-style:none;position:relative;
+  padding:13px 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--dim2);
+  transition:color .22s var(--ease-heavy)}
+[data-theme="gilt"] details.drawer>summary::-webkit-details-marker{display:none}
+[data-theme="gilt"] details.drawer>summary:hover{color:var(--fg)}
+[data-theme="gilt"] details.drawer>summary:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+[data-theme="gilt"] details.drawer>summary::after{content:"";position:absolute;left:50%;top:50%;
+  width:36px;height:4px;margin:-2px 0 0 -18px;border-radius:2px;background:var(--line);
+  transition:transform .38s var(--ease-heavy),background .38s}
+[data-theme="gilt"] details.drawer[open]>summary::after{transform:rotate(90deg);background:var(--acc)}
+[data-theme="gilt"] details.drawer .inner{overflow-x:auto;padding-bottom:16px}
+
+/* table「铭文」 */
+[data-theme="gilt"] table{width:100%;border-collapse:collapse;font-size:12.5px}
+[data-theme="gilt"] th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  color:var(--dim2);font-weight:500;padding:9px 12px 9px 0;
+  border-bottom:1px solid var(--line);white-space:nowrap}
+[data-theme="gilt"] td{padding:9px 12px 9px 0;border-bottom:1px solid var(--line2);
+  color:var(--dim);vertical-align:top}
+[data-theme="gilt"] td b{color:var(--fg)}
+[data-theme="gilt"] tr:hover td{background:var(--track)}
+[data-theme="gilt"] .r{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* pill「铭牌」 */
+[data-theme="gilt"] .pill{display:inline-block;padding:2px 9px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.03em;border:1px solid var(--line);color:var(--dim);margin:2px 5px 2px 0;
+  clip-path:polygon(6px 0,100% 0,100% 100%,0 100%,0 6px)}
+[data-theme="gilt"] .warnbox{position:relative;padding:16px 20px 16px 22px;margin:20px 0;
+  background:var(--panel2);border:1px solid var(--line);border-left:none;
+  font-size:13.5px;line-height:1.75;color:var(--dim)}
+[data-theme="gilt"] .warnbox::before{content:"";position:absolute;left:0;top:0;bottom:0;
+  width:3px;background:var(--warn)}
+[data-theme="gilt"] .warnbox b{color:var(--fg)}
+
+/* state「四态印」：字 + 刻符 + 色，三通道冗余 */
+[data-theme="gilt"] .st{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.08em;padding:2px 9px;border:1px solid var(--line);color:var(--dim)}
+[data-theme="gilt"] .st::before{content:attr(data-m);font-size:9px;line-height:1}
+[data-theme="gilt"] .st[data-s="通"]{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,transparent)}
+[data-theme="gilt"] .st[data-s="断了"]{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+[data-theme="gilt"] .st[data-s="说不准"]{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+[data-theme="gilt"] .st[data-s="没做"]{color:var(--dim2)}
+[data-theme="gilt"] .st[data-s="看这里"]{color:var(--acc);border-color:var(--acc)}
+
+/* 控制条 */
+[data-theme="gilt"] .ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:20px 0}
+[data-theme="gilt"] .ctl select,[data-theme="gilt"] .ctl input[type=date]{all:unset;cursor:pointer;
+  border:1px solid var(--line);padding:7px 14px;font-family:var(--mono);font-size:12px;
+  color:var(--fg);background:var(--panel2);min-height:40px;box-sizing:border-box;
+  clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px)}
+[data-theme="gilt"] .ctl select:focus-visible,[data-theme="gilt"] .ctl input:focus-visible{
+  outline:2px solid var(--acc);outline-offset:2px}
+[data-theme="gilt"] .ctl button{all:unset;cursor:pointer;padding:7px 17px;font-size:12px;
+  letter-spacing:.04em;color:var(--dim);border:1px solid var(--line);background:var(--panel2);
+  min-height:40px;box-sizing:border-box;
+  clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px);
+  box-shadow:var(--bevel);transition:all .22s var(--ease-heavy)}
+[data-theme="gilt"] .ctl button:hover{color:var(--fg);border-color:var(--acc)}
+[data-theme="gilt"] .ctl button:active{transform:scale(.97);box-shadow:var(--press)}
+[data-theme="gilt"] .ctl button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+[data-theme="gilt"] .ctl button[aria-pressed="true"]{background:var(--acc);color:var(--bg);
+  border-color:var(--acc);font-weight:600}
+[data-theme="gilt"] .ctl button[disabled]{opacity:.32;cursor:not-allowed}
+[data-theme="gilt"] .ctl .pill{align-self:center}
+[data-theme="gilt"] .ctl input[type=range]{accent-color:var(--acc);align-self:center;min-height:34px}
+
+[data-theme="gilt"] canvas.viz{width:100%;display:block;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--bevel);touch-action:none;
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
+[data-theme="gilt"] .lnk{color:var(--fg);cursor:pointer;position:relative;
+  border-bottom:1px solid color-mix(in srgb,var(--acc) 50%,transparent)}
+[data-theme="gilt"] .lnk:hover{color:var(--acc);border-bottom-color:var(--acc)}
+[data-theme="gilt"] .lnk:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+/* 日历方阵（calendar 视图专用） */
+[data-theme="gilt"] .calwrap{display:flex;gap:13px;overflow-x:auto;padding:6px 0 12px}
+[data-theme="gilt"] .calmon{display:flex;flex-direction:column;gap:7px}
+[data-theme="gilt"] .calmon>span{font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.1em}
+[data-theme="gilt"] .calgrid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,12px);gap:3px}
+[data-theme="gilt"] .calgrid i{width:12px;height:12px;background:var(--track);cursor:pointer;
+  box-shadow:var(--groove);transition:outline .14s,transform .2s var(--ease-heavy)}
+[data-theme="gilt"] .calgrid i[data-pad]{visibility:hidden}
+[data-theme="gilt"] .calgrid i:hover{outline:1.5px solid var(--acc);outline-offset:1px;transform:scale(1.25)}
+[data-theme="gilt"] .calgrid i[data-out]{opacity:.2}
+[data-theme="gilt"] .calgrid i[data-lv="1"]{background:color-mix(in srgb,var(--acc) 24%,var(--track))}
+[data-theme="gilt"] .calgrid i[data-lv="2"]{background:color-mix(in srgb,var(--acc) 48%,var(--track))}
+[data-theme="gilt"] .calgrid i[data-lv="3"]{background:color-mix(in srgb,var(--acc) 74%,var(--track))}
+[data-theme="gilt"] .calgrid i[data-lv="4"]{background:var(--acc);box-shadow:var(--bevel)}
+
+@media(max-width:900px){
+  [data-theme="gilt"] #shell{padding-left:0}
+  [data-theme="gilt"] #rail{position:static;width:auto;border-right:0;border-bottom:1px solid var(--line)}
+  [data-theme="gilt"] #stamp,[data-theme="gilt"] #hud{position:static;display:block;
+    margin:0 34px 8px;text-align:left}
+  [data-theme="gilt"] #ribbon{display:none}
+  [data-theme="gilt"] main{padding-top:24px}
+}
+@media(prefers-reduced-motion:reduce){
+  [data-theme="gilt"] *{transition-duration:.01ms !important}
+}
+
+/* ══ v0.4.4 布局审计补丁（鎏金从出生就带上，不用再补一遍） ══ */
+
+[data-theme="gilt"] :is(button,select,input,summary,a,[tabindex],[role="button"]):focus-visible{
+  outline:2px solid var(--acc);outline-offset:2px;box-shadow:0 0 0 1px var(--bg)}
+[data-theme="gilt"] :is(.navs button,.seg button):active{transform:scale(.97)}
+[data-theme="gilt"] .seg button{padding:8px 0;min-height:40px;box-sizing:border-box}
+
+/* 小节标题：衬线中间级，填上 34px 界碑与 13px 正文之间的断层 */
+[data-theme="gilt"] .sub{font-family:var(--disp);font-weight:600;font-size:20px;
+  letter-spacing:-.01em;margin:30px 0 4px;color:var(--fg)}
+[data-theme="gilt"] .sub:first-child{margin-top:8px}
+
+[data-theme="gilt"] .cv.md{font-size:30px}
+[data-theme="gilt"] .cv.sm{font-size:21px;color:var(--dim)}
+[data-theme="gilt"] .orow[role="button"]{cursor:pointer}
+
+/* 日历格 12px，命中区外扩到 24px */
+[data-theme="gilt"] .calgrid i::after{content:"";position:absolute;inset:-6px}
+[data-theme="gilt"] .calgrid i{position:relative}
+
+@media(max-width:900px){
+  [data-theme="gilt"] #shell{transition:none}
+  [data-theme="gilt"] :is(.ctl button,.seg button){padding:11px 16px;min-height:44px}
+  [data-theme="gilt"] .calgrid{gap:8px}
+  [data-theme="gilt"] .calgrid i::after{inset:-14px}
+}
+
+/* 碑拓在网格里占半宽。不复用 .cell —— 那会把两套面板样式叠在一起。 */
+[data-theme="gilt"] .slab.half{grid-column:span 3;margin:0}
+@media(max-width:900px){ [data-theme="gilt"] .slab.half{grid-column:span 6} }
+
+/* 窄屏：收起态只留一条 52px 的横条（品牌 + 折叠钮），展开是一层最高 70vh 的浮层。
+   rail-mobile-bar —— 目的是让 375px 首屏至少出现一张数据卡。 */
+@media(max-width:900px){
+  :root[data-theme="gilt"][data-rail="shut"] #rail{max-height:52px;overflow:hidden;padding-top:8px}
+  /* 收起态下品牌是这条横条上唯一的抓手，桌面端那条「折叠即隐藏品牌」的规则在这里要撤销 */
+  :root[data-theme="gilt"][data-rail="shut"] .brand{opacity:1}
+  /* 3D 展位铭牌在手机上只是噪声：那块信息要靠悬停，手机没有悬停 */
+  [data-theme="gilt"] #hud{display:none}
+  :root[data-theme="gilt"][data-rail="shut"] .brandrow{border-bottom:0;padding-bottom:6px}
+  [data-theme="gilt"] #rail{max-height:70vh;overflow-y:auto}
+  [data-theme="gilt"] .hero h1{font-size:clamp(30px,8.4vw,44px)}
+  [data-theme="gilt"] .hero{margin-bottom:26px}
+  [data-theme="gilt"] main{padding-left:18px;padding-right:18px;padding-top:16px}
+}

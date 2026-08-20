@@ -23,7 +23,7 @@ ${hero('网格', '哪一类活，哪一周在烧', `一行一类，一列一周�
   <select id="metric"><option value="sessions">按会话数</option><option value="tokens">按新 token</option></select>
   <span class="pill" id="hud"></span>
 </div>
-<canvas class="viz" id="mx"></canvas>
+<canvas class="viz" id="mx" role="img" aria-label="分类 × 周的强度矩阵。合计与逐行明细见下方表格。"></canvas>
 <p class="hint">最右一列是整行合计。新 token＝真正读进去的加吐出来的，<b>不含缓存命中</b> ——
   缓存那部分是重复读同一段，算进去会把量吹大十倍以上。</p>
 <div id="side"></div>`;

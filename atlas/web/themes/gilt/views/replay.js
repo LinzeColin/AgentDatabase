@@ -2,6 +2,7 @@ import { esc, fmt, go, enter, reduced, topicColor } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
 import { loop } from '../../../core/g3d.js';
 import { hero, sec, grid, orbit, slab, drawer, table, warn, pill } from '../kit.js';
+import { flyToDay, holdCamera } from '../shell.js';
 
 // 白昼的回放是一份**逐周排版的编年**：像翻报纸，一周一版。
 // 不做竞速条（琉璃有）、不飞相机（星云有）—— 它靠字号跨度和留白讲「这一周发生了什么」。
@@ -36,6 +37,7 @@ export async function render(host) {
   });
 
   let i = 0, playing = false, speed = 1200, tAcc = 0, last = performance.now();
+  holdCamera(true);            // 回放期间镜头归回放，滚动不抢方向盘
 
   host.innerHTML = `
 ${hero('回放', '一周一版', `${cum.length} 周，一周一版地翻过去。
@@ -75,6 +77,7 @@ ${dl.length ? '' : warn('没接上 GitHub 提交数据，所以「那周交出�
         : `<div class="sec">这一周在做老活</div><p class="hint">没有新增的主题 —— 全部落在此前已经开过的口子里。</p>`}
       <div class="sec">到这一周为止，谁跑在前面</div>${orbit(top)}`;
     enter('.orow', page);
+    flyToDay(weekStart(c.w));  // 翻到哪一版，碑林就摇到那一周
   };
 
   const stop = () => { playing = false; btn.textContent = '▶ 播放'; };
@@ -92,14 +95,14 @@ ${dl.length ? '' : warn('没接上 GitHub 提交数据，所以「那周交出�
 
   const st = document.createElement('style');
   st.textContent = `
-    [data-theme="daylight"] .pgtop{display:flex;justify-content:space-between;align-items:flex-end;
+    [data-theme="gilt"] .pgtop{display:flex;justify-content:space-between;align-items:flex-end;
       gap:24px;flex-wrap:wrap;border-top:3px solid var(--fg);padding-top:14px;margin-top:8px}
-    [data-theme="daylight"] .pgw{font-size:clamp(34px,6vw,64px);font-weight:700;letter-spacing:-.04em;
+    [data-theme="gilt"] .pgw{font-size:clamp(34px,6vw,64px);font-weight:700;letter-spacing:-.04em;
       line-height:1;margin:6px 0 8px;font-variant-numeric:tabular-nums}
-    [data-theme="daylight"] .pgnum{display:flex;gap:32px}
-    [data-theme="daylight"] .pgnum b{display:block;font-size:34px;font-weight:700;letter-spacing:-.03em;
+    [data-theme="gilt"] .pgnum{display:flex;gap:32px}
+    [data-theme="gilt"] .pgnum b{display:block;font-size:34px;font-weight:700;letter-spacing:-.03em;
       font-variant-numeric:tabular-nums}
-    [data-theme="daylight"] .pgnum span{font-family:var(--mono);font-size:10px;color:var(--dim2);
+    [data-theme="gilt"] .pgnum span{font-family:var(--mono);font-size:10px;color:var(--dim2);
       letter-spacing:.08em}`;
   host.appendChild(st);
 
@@ -113,5 +116,5 @@ ${dl.length ? '' : warn('没接上 GitHub 提交数据，所以「那周交出�
     scrub.value = i; paint();
   });
   paint(); enter('.hero', host);
-  return { dispose() { l.stop(); } };
+  return { dispose() { l.stop(); holdCamera(false); } };
 }

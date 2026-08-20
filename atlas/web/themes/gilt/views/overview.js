@@ -48,10 +48,10 @@ ${orbit(Object.entries(all.topics).sort((a, b) => b[1] - a[1]).map(([t, n]) => (
 })).concat([{ k: '没认出在做什么', v: all.unclassified }]))}
 
 ${sec('几件数出来的事', '全部从记录里直接数的，没有一句是编的。')}
-<div class="grid">${D.insights().map(i => `
-  <div class="cell w6">
+<div class="grid">${D.insights().map((i, idx, arr) => `
+  <div class="cell ${idx === arr.length - 1 && arr.length % 2 ? 'w6' : 'w3'}">
     <div class="ck">${state(i.t === 'warn' ? '说不准' : '看这里')}　${esc(i.k)}</div>
-    <div class="cv" style="font-size:29px">${esc(i.v)}</div>
+    <div class="cv md">${esc(i.v)}</div>
     <div class="cn">${esc(i.d)}</div>
   </div>`).join('')}</div>
 

@@ -10,8 +10,8 @@ export async function render(host) {
   const modeOrder = ['指派', '反馈环', '迭代', '学习', '校验', '未归类'];
   const MODE_COL = { '指派': '#1f7a5a', '反馈环': '#2fae86', '迭代': '#2563eb',
                      '学习': '#7c3aed', '校验': '#0891b2', '未归类': '#9aa0a6' };
-  const bands = o => orbit((o.bands || Object.keys(o.counts)).filter(b => o.counts[b])
-    .map(b => ({ k: b, v: o.counts[b], label: `${o.counts[b]}　${pct(o.counts[b] / N)}` })));
+  const bands = (o, c) => orbit((o.bands || Object.keys(o.counts)).filter(b => o.counts[b])
+    .map(b => ({ k: b, v: o.counts[b], label: `${o.counts[b]}　${pct(o.counts[b] / N)}`, c })));
 
   host.innerHTML = `
 ${hero('经济指数', '你这三个月，到底在产什么',
@@ -27,7 +27,7 @@ ${grid([
 ])}
 
 ${sec('五种协作模式的配比', 'AEI 把它们分成两边：指派、反馈环算「自动化」；迭代、学习、校验算「增强」。')}
-<canvas class="viz" id="stackbar"></canvas>
+<canvas class="viz" id="stackbar" role="img" aria-label="协作模式与作息节律图。判据与逐行明细见下方表格。"></canvas>
 <div id="legend"></div>
 ${drawer('这五种模式各自的判据（AEI 原定义）',
   table([{ t: '模式' }, { t: '英文' }, { t: '算哪一边' }, { t: '判据' }],
@@ -35,13 +35,13 @@ ${drawer('这五种模式各自的判据（AEI 原定义）',
       [`<b>${esc(m)}</b>`, esc(E.mode_defs[m].en), esc(E.mode_defs[m].group), esc(E.mode_defs[m].desc)])))}
 
 ${sec('五个经济原语', 'AEI 的骨架。')}
-<p class="hint">① 任务有多难 —— ${esc(P.complexity.note)}</p>${bands(P.complexity)}
-<p class="hint" style="margin-top:28px">② 用到哪一层本事 —— ${esc(P.skill.note)}</p>${bands(P.skill)}
-<p class="hint" style="margin-top:28px">③ 拿来干嘛</p>${bands({ counts: P.use_case.counts, bands: ['工作', '学习', '个人'] })}
-<p class="hint" style="margin-top:28px">④ 放手到什么程度 —— ${esc(P.autonomy.note)}</p>
+<div class="sub">① 任务有多难</div><p class="hint">${esc(P.complexity.note)}</p>${bands(P.complexity, 'var(--acc)')}
+<div class="sub">② 用到哪一层本事</div><p class="hint">${esc(P.skill.note)}</p>${bands(P.skill, 'var(--acc2)')}
+<div class="sub">③ 拿来干嘛</div>${bands({ counts: P.use_case.counts, bands: ['工作', '学习', '个人'] }, 'var(--ok)')}
+<div class="sub">④ 放手到什么程度</div><p class="hint">${esc(P.autonomy.note)}</p>
 ${orbit(Object.entries(P.autonomy.counts).map(([k, v]) =>
   ({ k: P.autonomy.labels[k] || k, v, label: `${v}　${pct(v / N)}` })))}
-<p class="hint" style="margin-top:28px">⑤ 到底做成了没有 —— ${esc(P.success.note)}</p>${bands(P.success)}
+<div class="sub">⑤ 到底做成了没有</div><p class="hint">${esc(P.success.note)}</p>${bands(P.success, 'var(--warn)')}
 
 ${sec('行业分布：碰过多少，真做成多少',
   '「真做成的比例」＝碰过的比例 × 成功率。AEI 用这一对区分「摸过」和「做出来了」—— 只看前者会把自己骗了。')}
@@ -67,7 +67,7 @@ ${orbit(E.context.rows.slice(0, 14).map(r => ({ k: r.context, v: r.n,
   label: `${r.n} 场　${fmt(r.tokens)} 新 token` })))}
 
 ${sec('节律：你什么时候干活', esc(E.cadence.note))}
-<canvas class="viz" id="cad"></canvas>
+<canvas class="viz" id="cad" role="img" aria-label="协作模式与作息节律图。判据与逐行明细见下方表格。"></canvas>
 
 ${sec('迁移：这三个月你从哪挪到了哪', esc(E.transition.note))}
 ${orbit(E.transition.drift.map(x => ({ k: x.domain, v: Math.abs(x.delta) * 1000,

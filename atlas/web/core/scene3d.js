@@ -10,23 +10,25 @@
 import * as THREE from '../vendor/three.module.min.js';
 
 export const THEME_LOOK = {
-  console: {
-    bg: null, fogNear: 900, fogFar: 2600,
-    node: { metalness: 0.1, roughness: 0.85, emissiveK: 0.55, flat: true },
-    edge: { opacity: 0.30, additive: false, width: 1 },
-    halo: 0.0, ambient: 0.75, key: 0.5, rim: 0.25,
-  },
   glass: {
     bg: null, fogNear: 1100, fogFar: 3200,
     node: { metalness: 0.35, roughness: 0.18, emissiveK: 0.85, flat: false },
     edge: { opacity: 0.42, additive: true, width: 1 },
     halo: 1.0, ambient: 0.35, key: 1.15, rim: 0.9,
   },
-  journal: {
-    bg: null, fogNear: 800, fogFar: 2400,
-    node: { metalness: 0.0, roughness: 1.0, emissiveK: 0.18, flat: false },
-    edge: { opacity: 0.22, additive: false, width: 1 },
-    halo: 0.0, ambient: 0.9, key: 0.65, rim: 0.15,
+  nebula: {
+    bg: null, fogNear: 1200, fogFar: 3400,
+    node: { metalness: 0.30, roughness: 0.22, emissiveK: 0.90, flat: false },
+    edge: { opacity: 0.38, additive: true, width: 1 },
+    halo: 1.0, ambient: 0.30, key: 1.10, rim: 1.0,
+  },
+  // 鎏金：金属实体。发光靠不住（这套主题在浅色下根本不用加色），
+  // 所以把亮度交给金属度与三点布光，halo 归零。
+  gilt: {
+    bg: null, fogNear: 1000, fogFar: 3000,
+    node: { metalness: 0.85, roughness: 0.30, emissiveK: 0.12, flat: false },
+    edge: { opacity: 0.30, additive: false, width: 1 },
+    halo: 0.0, ambient: 0.55, key: 1.20, rim: 0.35,
   },
 };
 

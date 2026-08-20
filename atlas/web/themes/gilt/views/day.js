@@ -1,11 +1,14 @@
 import { esc, fmt, go, day as loadDay, hhmm, enter, topicColor } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
 import { hero, sec, grid, slab, drawer, table, warn, pill, rate } from '../kit.js';
+import { flyToDay, holdCamera } from '../shell.js';
 
 export async function render(host, arg) {
   const list = D.days().map(d => d.d);
   const cur = list.includes(arg) ? arg : list[list.length - 1];
   const i = list.indexOf(cur);
+  holdCamera(true);            // 这一屏由视图开镜头，滚动不参与
+  flyToDay(cur);               // 打开哪一天，碑林就摇到那一天
   host.innerHTML = `
 <div class="ctl">
   <button id="prev" ${i > 0 ? '' : 'disabled'}>← 前一天</button>
@@ -39,13 +42,15 @@ ${grid([
   { k: '你开口', v: String(meta.human), n: `机器另跑 ${meta.n - meta.human} 场`, w: 3, tone: 'acc' },
   { k: '有动静的钟点', v: String(meta.active_hours), n: '这不等于工作时长', w: 3 },
   { k: '读进 token', v: tk ? fmt(tk.input_total) : '—', n: tk ? `命中缓存 ${rate(tk.hit_rate)}` : '这天没有用量记录', w: 3 },
-  { k: '在做什么', v: `<span style="font-size:22px">${Object.entries(meta.topics).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([t])=>esc(t)).join('、') || '没认出来'}</span>`,
+  { k: '在做什么', v: `${Object.entries(meta.topics).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([t])=>esc(t)).join('、') || '没认出来'}`, size: 'sm',
     n: Object.entries(meta.topics).length + ' 类', w: 3 },
 ])}
 ${sec('你说的话')}
-${human.length ? human.map(card).join('') : warn('这一天你没有亲自开口。下面全是机器跑的。')}
-${mach.length ? sec(`机器跑的 ${mach.length} 场`, '列出来是让你能核对「被剔掉的到底是什么」，不是凑数。')
-  + mach.slice(0, 24).map(card).join('')
-  + (mach.length > 24 ? `<p class="hint">还有 ${mach.length - 24} 场同类，没展开。</p>` : '') : ''}`;
+${human.length ? `<div class="grid">${human.map(card).join('')}</div>`
+  : warn('这一天你没有亲自开口。下面全是机器跑的。')}
+${mach.length ? sec(`机器跑的 ${mach.length} 场`, '列出来是让你能核对「被剔掉的到底是什么」，不是凑数。默认收着 —— 67 张同权重的卡是一堵墙。')
+  + drawer(`摊开这 ${mach.length} 场`, `<div class="grid">${mach.slice(0, 24).map(card).join('')}</div>`
+    + (mach.length > 24 ? `<p class="hint">还有 ${mach.length - 24} 场同类，没展开。</p>` : '')) : ''}`;
   enter('.hero, .sec, .cell, .slab', host);
+  return { dispose() { holdCamera(false); } };
 }
