@@ -112,7 +112,20 @@ html:has(body[data-dsh-harness-ui]) { background: transparent !important; }
 
 body[data-dsh-harness-ui] [id=root],
 body[data-dsh-harness-ui] #app {
-  background-image: var(--harness-bg, none) !important;
+  /* 两层：文字遮罩在上，背板在下。
+     清空全部后代底色之后文字直接压在明亮画面上，实测几乎读不了 —— 但把底色加回去
+     又会重新盖住背板。出路在这套图的构图本身：人物压在左 35%，右侧是刻意留白的
+     低细节天空。所以遮罩按列做，侧栏区和正文区淡淡压一层，人物那一段一点不遮。
+     一条规则搞定，不碰任何子元素，也不依赖类名。 */
+  background-image:
+    linear-gradient(to right,
+      rgba(255,255,255,.62) 0,
+      rgba(255,255,255,.52) 11%,
+      rgba(255,255,255,0)  17%,
+      rgba(255,255,255,0)  30%,
+      rgba(255,255,255,.68) 40%,
+      rgba(255,255,255,.76) 100%),
+    var(--harness-bg, none) !important;
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
@@ -137,6 +150,18 @@ body[data-dsh-harness-ui][data-ds-dark-theme] [id=root] :is(pre, code) {
   background-color: rgba(16, 22, 36, .80) !important;
 }
 
+body[data-dsh-harness-ui][data-ds-dark-theme] [id=root],
+body[data-dsh-harness-ui][data-ds-dark-theme] #app {
+  background-image:
+    linear-gradient(to right,
+      rgba(10,14,24,.66) 0,
+      rgba(10,14,24,.56) 11%,
+      rgba(10,14,24,0)   17%,
+      rgba(10,14,24,0)   30%,
+      rgba(10,14,24,.70) 40%,
+      rgba(10,14,24,.78) 100%),
+    var(--harness-bg, none) !important;
+}
 body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef7; }
 #harness-ui-picker {
   position: fixed; right: 16px; bottom: 56px; width: min(720px, 68vw);
