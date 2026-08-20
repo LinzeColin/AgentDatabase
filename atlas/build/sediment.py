@@ -53,21 +53,32 @@ def build(sessions: list) -> dict:
     for s in hum:
         if s.get("prompts"):
             groups["".join(s["prompts"][0].split())[:REPEAT_PREFIX]].append(s)
-    repeats = []
+    # 跨天复发 vs 单日批量：两种病，两种药，绝不能同名。
+    # 实测：排第一的「738 次」全部发生在 2026-08-17 一天之内，是一批图片标注扇出。
+    # 把它叫「被问过 738 次」会让读的人以为有人真的问了 738 遍。
+    repeats, batches = [], []
     for _, rows in groups.items():
         if len(rows) < REPEAT_MIN:
             continue
         rows.sort(key=lambda r: r["start"])
-        repeats.append({
+        row = {
             "asked": len(rows),
             "days": len({r["start"][:10] for r in rows}),
             "first": rows[0]["start"][:10], "last": rows[-1]["start"][:10],
             "gist": rows[0]["prompts"][0][:180],
             "projects": [k for k, _ in Counter(r.get("project") or "—" for r in rows).most_common(3)],
             "tokens_spent": sum(r.get("tok_in", 0) + r.get("tok_cache_r", 0) for r in rows),
-            "advice": "固化成模板／脚本／skill；下次先查这里再动手",
-        })
+        }
+        # 见 build.py 同一处：只看跨天不够，评委面板跑 4 天也能产 340 条一样的提示词。
+        rate = row["asked"] / max(1, row["days"])
+        if row["days"] >= 2 and rate <= 5:
+            row["advice"] = "隔天又问，说明上一次的答案没留下来 —— 写进对应仓的 AGENTS.md"
+            repeats.append(row)
+        else:
+            row["advice"] = "同一段提示词被重放 N 遍（平均每天 >5 遍）—— 该做成脚本/workflow，把提示词参数化"
+            batches.append(row)
     repeats.sort(key=lambda r: -r["asked"])
+    batches.sort(key=lambda r: -r["asked"])
 
     # 2) 每个项目的进入简报
     proj = defaultdict(lambda: {"n": 0, "turns": 0, "tools": Counter(), "topics": Counter(),
@@ -138,12 +149,14 @@ def build(sessions: list) -> dict:
         "sessions_analysed": len(hum),
         "sessions_scope": "含 agent 扇出与批处理 —— 它们本身就是该被固化的对象",
         "repeats": repeats[:30],
+        "batches": batches[:20],
         "project_briefs": briefs[:30],
         "expensive_sessions": cost[:20],
         "pain_points": pain,
         "tool_usage": [{"tool": k, "n": v} for k, v in tool_tot.most_common(25)],
         "method": "全部由会话记录直接派生，运行期不调用任何模型。"
-                  "「被问过几次」按每场会话第一句的前 26 个字判重。",
+                  "「问过几次」按每场会话第一句的前 26 个字判重；"
+                  "**跨天复发**与**单日批量**分开列 —— 前者是答案没留下来，后者是活该做成脚本。",
     }
 
 
@@ -156,13 +169,30 @@ def to_markdown(b: dict) -> str:
     A(f"> {b['purpose']}\n")
     A(f"> {b['method']}\n")
 
-    A("## 一、已经问过很多次的事（先查这里，别再问一遍）\n")
-    A("| 问过 | 横跨 | 烧掉 token | 大意 | 涉及项目 |")
-    A("|---:|---:|---:|---|---|")
-    for r in b["repeats"][:15]:
-        gist = r["gist"].replace("|", "／").replace("\n", " ")[:80]
-        A(f"| {r['asked']} 次 | {r['days']} 天 | {r['tokens_spent']:,} | {gist} | {'、'.join(r['projects'])} |")
-    A("\n每一行都是「本该固化却没固化」的证据。动手之前先把它变成模板或脚本，之后每一次都是净赚的时间。\n")
+    A("## 一、隔天又问过的事（先查这里，别再问一遍）\n")
+    if b["repeats"]:
+        A("| 问过 | 横跨 | 烧掉 token | 大意 | 涉及项目 |")
+        A("|---:|---:|---:|---|---|")
+        for r in b["repeats"][:15]:
+            gist = r["gist"].replace("|", "／").replace("\n", " ")[:80]
+            A(f"| {r['asked']} 次 | {r['days']} 天 | {r['tokens_spent']:,} | {gist} | {'、'.join(r['projects'])} |")
+        A("\n每一行都是「上一次的答案没留下来」的证据 —— 结论该写进对应仓的 `AGENTS.md`。\n")
+    else:
+        A("目前没有跨天复发的提问。\n")
+
+    A("## 一之二、被批量重放的提示词（该做成脚本，不是该记住）\n")
+    A("> 这一节和上一节**是两种病**。上面那种是「忘了」，这种是「本来可以只写一次脚本」。")
+    A("> 早前把两者混在一张表里，排第一的「被问过 738 次」其实全部发生在 2026-08-17 一天之内，")
+    A("> 是一批图片标注扇出 —— 读的人会以为真有人问了 738 遍。\n")
+    if b.get("batches"):
+        A("| 投喂 | 起始 | 天数 | 烧掉 token | 大意 | 涉及项目 |")
+        A("|---:|---|---:|---:|---|---|")
+        for r in b["batches"][:12]:
+            gist = r["gist"].replace("|", "／").replace("\n", " ")[:80]
+            A(f"| {r['asked']} 遍 | {r['first']} | {r['days']} | {r['tokens_spent']:,} | {gist} | {'、'.join(r['projects'])} |")
+        A("\n把提示词参数化写成脚本或 workflow，之后每一次都是净赚的时间。\n")
+    else:
+        A("目前没有单日批量投喂。\n")
 
     A("## 二、项目进入简报\n")
     for p in b["project_briefs"][:14]:
@@ -220,7 +250,7 @@ def main() -> int:
         w.mkdir(parents=True, exist_ok=True)
         (w / "AGENT_BRIEF.md").write_text(md, encoding="utf-8")
         (w / "agent_brief.json").write_text(json.dumps(b, ensure_ascii=False), encoding="utf-8")
-    print(f"AGENT_BRIEF: {len(b['repeats'])} 条重复问题 · {len(b['project_briefs'])} 个项目简报 · "
+    print(f"AGENT_BRIEF: {len(b['repeats'])} 条跨天复发 · {len(b.get('batches') or [])} 条批量重放 · {len(b['project_briefs'])} 个项目简报 · "
           f"{len(b['pain_points'])} 个痛点 · {len(b['tool_usage'])} 种工具")
     return 0
 

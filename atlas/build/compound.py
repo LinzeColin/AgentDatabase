@@ -126,20 +126,41 @@ def derive_debt(lessons: dict, projects: list, delivery: dict, tokens: dict) -> 
     """
     debt = []
 
-    # ① 问了很多次但还没固化：同一个问题被反复问，说明上一次的答案没留下来
+    # ① 跨天复发但还没固化：隔了几天又问同一件事，说明上一次的答案没留下来。
+    #    注意 lessons.repeats 现在只含 days>=2 的组 —— 单日批量在 lessons.batches 里，
+    #    那是另一种病（见 ②）。混在一起会把一次批处理读成「你问了 15 遍」。
     for r in (lessons.get("repeats") or [])[:8]:
-        if r.get("n", 0) < 3:
+        if r.get("n", 0) < 3 or r.get("days", 0) < 2:
             continue
         debt.append({
             "kind": "repeat_no_asset",
-            "kind_label": "问了很多次，还没固化",
+            "kind_label": "隔天又问，还没固化",
             "title": (r.get("text") or "")[:60],
             "size": r["n"],
-            "size_label": f"{r['n']} 遍",
+            "size_label": f"{r['n']} 遍 / {r.get('days', 0)} 天",
             "why": f"横跨 {r.get('days', 0)} 天还在问同一件事。答案没有留在任何一个 agent 找得到的地方。",
             "evidence": [f"{r.get('first', '?')} → {r.get('last', '?')}",
                          "、".join((r.get("projects") or [])[:3]) or "未标项目"],
             "next": "把结论写进对应仓的 AGENTS.md，下一轮蒸馏会带进简报。",
+        })
+
+    # ② 单日批量投喂：一天之内同一段提示词手工重来 N 遍。
+    #    这不是「忘了」，是「本该做成脚本」—— 两种病，两种药。
+    for r in (lessons.get("batches") or [])[:4]:
+        if r.get("n", 0) < 5:
+            continue
+        debt.append({
+            "kind": "batch_no_script",
+            "kind_label": "同一段提示词手工投喂，没做成脚本",
+            "title": (r.get("text") or "")[:60],
+            "size": r["n"],
+            "size_label": f"{r['n']} 遍 / {r.get('days', 1)} 天",
+            "why": f"从 {r.get('first', '?')} 起，同一段提示词被重放了 {r['n']} 遍"
+                   f"（平均每天 {r['n'] / max(1, r.get('days', 1)):.0f} 遍）。"
+                   "答案没丢 —— 丢的是「这件事本来可以只写一次脚本」。",
+            "evidence": [f"{r.get('first', '?')} → {r.get('last', r.get('first', '?'))}",
+                         "、".join((r.get("projects") or [])[:3]) or "未标项目"],
+            "next": "写成脚本或 workflow，把这段提示词参数化，别再手工重来。",
         })
 
     # ② 烧得很贵但没有可观测产出：token 花了，git 上什么都没留下

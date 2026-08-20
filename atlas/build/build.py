@@ -506,19 +506,37 @@ def lessons_block(sessions: list, projects: list) -> dict:
             key = "".join(p.split())[:REPEAT_PREFIX]
             if len(key) >= 8:
                 groups[key].append(s)
-    repeats = []
+    # 「同一天里出现 N 次」和「隔了几天又问一遍」是两种完全不同的病，
+    # 混在一起是本项目实际发生过的假信号：25 组里有 21 组 days<=1，
+    # 排第一的「问了 15 遍」其实是 2026-08-14 一天之内的一批评委打分提示词。
+    # 扇出检测（≥15 场/小时/来源）漏掉了它们 —— 因为每条提示词开头都带不同的人名。
+    #
+    #   跨天复发（跨天 且 每天≤5 遍）= 上一次的答案没留下来  → 该写进 AGENTS.md
+    #   批量投喂（其余）              = 同一段提示词被机器/手工重放 N 遍 → 该做成脚本
+    #
+    # 两边都要留着（丢掉的东西不参与校验，总量就永远显得是对的），但绝不能同名。
+    repeats, batches = [], []
     for key, rows in groups.items():
         if len(rows) < REPEAT_MIN:
             continue
         rows.sort(key=lambda r: r["start"])
-        repeats.append({
+        row = {
             "text": rows[0]["prompts"][0][:150],
             "n": len(rows),
             "first": rows[0]["day"], "last": rows[-1]["day"],
             "days": len({r["day"] for r in rows}),
             "projects": [k for k, _ in Counter(r.get("project") or "—" for r in rows).most_common(3)],
-        })
+        }
+        # 判据：**跨天** 且 **平均每天 ≤5 遍**。
+        # 只看「跨天」不够 —— 一个评委面板工作流跑 4 天照样产出 340 条一模一样的提示词。
+        # 实测（41 组）：只用 days>=2 会放进来 340次/4天(85/天)、297次/2天(148/天) 这种；
+        # 加上速率闸之后剩 13 组，头部变成「wholefood 是什么」14次/5天、「中文」9次/2天 ——
+        # 那才是一个人隔几天又问了一遍。
+        rate = row["n"] / max(1, row["days"])
+        is_human_repeat = row["days"] >= 2 and rate <= 5
+        (repeats if is_human_repeat else batches).append(row)
     repeats.sort(key=lambda r: -r["n"])
+    batches.sort(key=lambda r: -r["n"])
 
     # 报错提及最密集的项目：不是「哪个项目 bug 多」，是「哪个项目最耗你」
     perr = defaultdict(lambda: {"errors": 0, "sessions": 0})
@@ -537,13 +555,18 @@ def lessons_block(sessions: list, projects: list) -> dict:
 
     return {
         "repeats": repeats[:25],
+        "batches": batches[:25],
         "pain": pain,
         "longest": [{"day": s["day"], "title": (s.get("title") or "")[:90], "turns": s.get("turns", 0),
                      "project": s.get("project", ""), "topics": s["topics"]} for s in longest],
         "revisit": [{"name": p["name"], "human": p["human"], "first": p["first"], "last": p["last"],
                      "shipped": p["shipped"]} for p in revisit if p["human"] > 1],
-        "note": f"「问过几次」按每场会话第一句的前 {REPEAT_PREFIX} 个字判重，"
-                f"出现 {REPEAT_MIN} 次以上才列出来。",
+        "note": f"按每场会话第一句的前 {REPEAT_PREFIX} 个字判重，出现 {REPEAT_MIN} 次以上才列出来。"
+                f"**跨天复发**（隔天又问）与**单日批量**（一天之内投喂 N 遍）分开列 —— "
+                f"前者说明答案没留下来，后者说明这活该做成脚本。混在一起会把一次批处理"
+                f"读成「你问了 15 遍」。",
+        "batch_note": "同一段提示词在一天之内被投喂多次。这不是「反复问」，"
+                      "是「本该做成脚本却手工重来」—— 两种病，两种药。",
     }
 
 
