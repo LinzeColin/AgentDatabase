@@ -26,7 +26,9 @@ export async function render(host) {
     <div class="panel" id="proj"></div>
 
     <h2>Token</h2>
-    <p class="sub">从会话记录里直接读到的用量。缓存读取单列 —— 它便宜得多，混在一起看会严重高估成本。</p>
+    <p class="sub">从会话记录里直接读到的用量。<b>口径统一为「不含缓存命中」</b> ——
+      codex 的 <code>input_tokens</code> 含缓存、claude-code 的不含，不减掉就是把两种口径相加，
+      单场能被抬到 24 亿这种量级。缓存读取单列，它便宜得多。</p>
     <div class="panel" id="tok"></div>`;
 
   drawArea(host.querySelector('#area'), W, topics);
