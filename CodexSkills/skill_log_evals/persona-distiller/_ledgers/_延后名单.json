@@ -3786,9 +3786,30 @@
    "aliases": [
     "Trevithick, Richard"
    ]
+  },
+  {
+   "name": "Gustave Eiffel",
+   "family_zh": "材料建工师",
+   "deferred_at": "2026-08-20",
+   "reason": "quick 档 min_sources=8，去重后一手仅 6 部（10 份扫本，check_source_dedup 阈值 0.3 去重）。2026-08-20 真跑 archive.org advancedsearch.php 15 条查询（HTTP 200 全通，上轮拒答未复现）：1907《Recherches expérimentales…》(已从 Gallica 取到)、1911《Examen des formules…》、1914《Nouvelles recherches…》三部均 0 命中，无法补足法文工程原作。仅可补 2 部弱一手：1887 letters00eiff(手稿信件,非工程文) 与 1905 NACA-TN-2372(英译本,非原作)，严格口径不算，仍 6<8。",
+   "probed_and_failed": [
+    "archive.org advancedsearch 15 条查询(2026-08-20 实跑)：1907/1911/1914 三部各 0 命中",
+    "5 份归属 research.authorship-unproven：法语 OCR 形态判据覆盖缺口（PAR /' G. EIFFEL、DE EIFFEL、Mie CAP EL、无题名页正文、holdout 合作件），证据真实但 check_authorship 认不出"
+   ],
+   "already_confirmed_fetchable": [
+    "10 份扫本已取回（1887/1888/1889/1900/1902/1910 等，去重后 6 部）",
+    "letters00eiff (1887 手稿信件 ALS)",
+    "nasa_techdoc_19930083161 (1905 NACA-TN-2372 英译本)"
+   ],
+   "unblock_todo": [
+    "若接受 英译本+手稿 计入 P1 口径，可凑 8 部重开 quick（需 Owner/契约裁定口径）",
+    "Gallica ARK 再探 1911/1914 两部（archive.org 无，Gallica 或 Kramerius 可能有）",
+    "check_authorship 法语 OCR 形态覆盖缺口 → 记入 P3 skill 迭代检查点候选"
+   ],
+   "处置类": "① 一手规模不够（去重后 6 < quick 门 8）＋ ② 归属证据 OCR 形态判据覆盖缺口"
   }
  ],
- "total": 188,
+ "total": 189,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。　★ 2026-08-13 实测又漂了：写着 168、实有 187（差 19 条），**注释写明「不手写」并不能阻止它漂**——已落成判据 `check_deferred_list.py` 每次现算。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
