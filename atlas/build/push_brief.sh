@@ -17,7 +17,12 @@ BRANCH="${BRIEF_BRANCH:-dev-notes}"
 DEST="${BRIEF_PATH:-Private-AgentDatabase/dev-notes}"
 
 [ -f "$SRC/AGENT_BRIEF.md" ] || { echo "没有 AGENT_BRIEF.md"; exit 1; }
-command -v gh >/dev/null || { echo "没有 gh"; exit 1; }
+command -v gh >/dev/null || {
+  echo "⚠ PATH 里没有 gh —— AGENT_BRIEF 本轮**没有推送**（不是没变化，是根本没跑）。"
+  echo "  当前 PATH=$PATH"
+  echo "  cron 是非交互 shell，gh 在 ~/.local/bin，见 bootstrap.sh 的 PATH 那一段。"
+  exit 1
+}
 
 vis=$(gh repo view "$REPO" --json visibility -q .visibility 2>/dev/null || echo "")
 # 硬门：目标仓必须是私有。判不出来也算不通过 ——
