@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# daily.sh —— 每日增量：抽取 → 聚合 → 部署。无人值守，零 agent，零 token。
+#
+# 为什么这一段必须跑在本机：源数据（~/.claude、~/.codex、~/.kimi-code …）
+# 只存在于这台机器上，VPS 上没有。合同里「定时任务放 VPS」的用意是别让服务端
+# 依赖笔记本；这里服务端不依赖 —— 笔记本关着，站点照常提供昨天的数据，
+# 页面顶部会自己标出「数据截至」，超过 48 小时会显示「断了」。
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"        # atlas/ ，代码所在，只读
+REPO="$(cd "$ROOT/.." && pwd)"                  # 仓根，chatgpt 归档在这下面
+WORK="${ATLAS_WORK:-$HOME/.memory-atlas}"       # 产物所在，绝不写进仓
+LOG="$WORK/daily.log"
+LOCK="$WORK/.lock"
+
+mkdir -p "$WORK/out" "$WORK/web"
+
+# 上一轮没跑完就退出。不等待、不重试 —— 等待循环是这台机器上出过事的东西
+# （同时挂过 7 个死等，最长 1 天 5 小时）。超过 3 小时的锁视为残留，直接清掉。
+if [ -d "$LOCK" ]; then
+  if [ -n "$(find "$LOCK" -maxdepth 0 -mmin +180 2>/dev/null)" ]; then
+    rmdir "$LOCK" 2>/dev/null || true
+  else
+    echo "$(date -u +%FT%TZ) 上一轮还在跑，本轮跳过" >>"$LOG"; exit 0
+  fi
+fi
+mkdir "$LOCK" 2>/dev/null || { echo "$(date -u +%FT%TZ) 抢锁失败，跳过" >>"$LOG"; exit 0; }
+trap 'rmdir "$LOCK" 2>/dev/null || true' EXIT
+
+{
+  echo "───── $(date -u +%FT%TZ) ─────"
+  python3 "$ROOT/build/extract.py" --out "$WORK/out" --repo "$REPO"
+  python3 "$ROOT/build/build.py"   --sessions "$WORK/out" --out "$WORK/web"
+  # 页面本体来自仓里的 web/，数据来自 $WORK/web/atlas/ —— 发布时合到一起
+  rsync -a --delete --exclude atlas/ "$ROOT/web/" "$WORK/web/"
+  bash "$ROOT/build/deploy.sh" "$WORK/web"
+  echo "完成 $(date -u +%FT%TZ)"
+} >>"$LOG" 2>&1
+
+# 日志只留最近 2000 行，别让它无限长
+tail -n 2000 "$LOG" >"$LOG.tmp" && mv "$LOG.tmp" "$LOG"
