@@ -254,6 +254,7 @@ def build(sessions: list, out: Path) -> dict:
         "trend": trend_block(week_rows),
         "insights": insights_block(sessions, day_rows, week_rows, proj_rows),
         "lessons": lessons_block(sessions, proj_rows),
+        "opportunities": opportunity_block(sessions, proj_rows),
         "keyword_weights": {k: round(v, 3) for k, v in sorted(weights.items(), key=lambda kv: -kv[1])[:60]},
     }
 
@@ -506,6 +507,87 @@ def lessons_block(sessions: list, projects: list) -> dict:
         "note": f"「问过几次」按每场会话第一句的前 {REPEAT_PREFIX} 个字判重，"
                 f"出现 {REPEAT_MIN} 次以上才列出来。",
     }
+
+
+def opportunity_block(sessions: list, projects: list) -> dict:
+    """发展方向与可挖掘的口子。
+
+    这里只给**素材**，不替 Owner 判断市场 —— 判断市场需要我没有的信息
+    （他的客户、他的报价、他所在的行业），凭数据编出来的机会是假的。
+    所以每一条都注明「这是从什么数出来的」，结论留给他。
+    """
+    hum = [s for s in sessions if s["kind"] == "human"]
+    items = []
+
+    # 1) 离钱最近的那一类：办公文书 + 业务方案 —— 这两类直接连着他现在的工作
+    near = [s for s in hum if {"办公文书", "业务方案"} & set(s["topics"])]
+    far = [s for s in hum if s["topics"] and not ({"办公文书", "业务方案", "赚钱"} & set(s["topics"]))]
+    if near:
+        pj = Counter(s.get("project") or "未标注" for s in near).most_common(5)
+        items.append({
+            "k": "离钱最近的那一类",
+            "v": f"{len(near)} 场",
+            "d": f"「办公文书 + 业务方案」共 {len(near)} 场，纯技术类 {len(far)} 场。"
+                 f"前者直接连着你现在的工作，后者是为了让工具跑起来。",
+            "from": "按主题归类的会话计数",
+            "list": [f"{k}（{v} 场）" for k, v in pj],
+        })
+
+    # 2) 已经做熟、但每次都从头做的事 —— 重复次数最高的任务
+    groups = defaultdict(list)
+    for s in hum:
+        if s.get("prompts"):
+            groups["".join(s["prompts"][0].split())[:26]].append(s)
+    ready = sorted((g for g in groups.values() if len(g) >= 4),
+                   key=lambda g: -len(g))[:6]
+    if ready:
+        items.append({
+            "k": "做熟了但每次重来的",
+            "v": f"{len(ready)} 件",
+            "d": "同一件事你已经做过 4 次以上。做第 5 次之前先把它固化成模板或脚本，"
+                 "之后每一次都是净赚的时间。",
+            "from": "每场会话第一句的前 26 个字判重，出现 4 次以上",
+            "list": [f"{len(g)} 次 · {g[0]['prompts'][0][:44]}" for g in ready],
+        })
+
+    # 3) 投入了但从没交付出去的
+    sunk = [p for p in projects if p["active_hours"] >= 4 and not p["shipped"] and p["human"] >= 3]
+    if sunk:
+        items.append({
+            "k": "投入了但没交付",
+            "v": f"{len(sunk)} 个",
+            "d": "这些项目你花了时间，但对话里一次都没谈过部署上线。"
+                 "要么补上最后一步，要么明确放掉 —— 挂着最贵。",
+            "from": "项目下从未出现「部署上线」类话题",
+            "list": [f"{p['name']}（{p['active_hours']} 个钟点 / {p['human']} 场）" for p in sunk[:6]],
+        })
+
+    # 4) 最贵的几场：token 用量最高的，看看钱烧在哪个方向
+    costly = sorted(hum, key=lambda s: -(s.get("tok_in", 0) + s.get("tok_out", 0)))[:5]
+    if costly and costly[0].get("tok_in"):
+        items.append({
+            "k": "最贵的几场",
+            "v": fmt_n(sum(s.get("tok_in", 0) + s.get("tok_out", 0) for s in costly)),
+            "d": "token 用量最高的 5 场。看它们在做什么，就知道钱主要烧在哪个方向。",
+            "from": "会话记录里直接读到的 token 用量",
+            "list": [f"{s['day']} · {fmt_n(s.get('tok_in', 0))} · {(s.get('title') or '')[:40]}"
+                     for s in costly],
+        })
+
+    return {
+        "items": items,
+        "caveat": "这一页只给素材，不替你判断市场。判断市场要的是你的客户、你的报价、"
+                  "你所在的行业 —— 那些数据不在这台机器上。运行期不调用任何模型，"
+                  "所以这里不会有一句「我猜你应该……」。",
+    }
+
+
+def fmt_n(n: int) -> str:
+    if n >= 1_000_000:
+        return f"{n / 1_000_000:.1f}M"
+    if n >= 1000:
+        return f"{n / 1000:.1f}k"
+    return str(n)
 
 
 def main() -> int:

@@ -337,11 +337,18 @@ def parse_codex(path: Path, rec: dict) -> dict:
             # 累计值挂在 info.total_token_usage 下，不是 info 本身。取 max 而不是求和：
             # 每一轮都会重报一次累计数，求和会把用量放大几十倍。
             usage = ((p.get("info") or {}).get("total_token_usage") or {})
-            for k_src, k_dst in (("input_tokens", "tok_in"), ("output_tokens", "tok_out"),
-                                 ("cached_input_tokens", "tok_cache_r")):
-                v = usage.get(k_src)
-                if isinstance(v, (int, float)):
-                    rec[k_dst] = max(rec[k_dst], int(v))
+            inp = usage.get("input_tokens")
+            cached = usage.get("cached_input_tokens") or 0
+            out = usage.get("output_tokens")
+            # 口径统一：codex 的 input_tokens **含**缓存命中，claude-code 的**不含**
+            # （它把缓存单列成 cache_read_input_tokens）。不减掉就是把两种口径相加，
+            # 单场会被抬到 24 亿这种量级，看着像天文数字其实是重复计数。
+            if isinstance(inp, (int, float)):
+                rec["tok_in"] = max(rec["tok_in"], int(inp) - int(cached))
+            if isinstance(cached, (int, float)):
+                rec["tok_cache_r"] = max(rec["tok_cache_r"], int(cached))
+            if isinstance(out, (int, float)):
+                rec["tok_out"] = max(rec["tok_out"], int(out))
         elif pt in ("function_call", "custom_tool_call", "local_shell_call"):
             rec["tools"] += 1
         elif pt == "message":
@@ -596,6 +603,7 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
 
     records = []
     prior = len(cache)
+    scanned = set()
     for path in sorted(root.glob(cfg["glob"])):
         if not path.is_file() or path.name.startswith("."):
             continue
@@ -605,6 +613,7 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
             continue
         if st.st_size == 0:
             continue
+        scanned.add(str(path))
         stats["files"] += 1
         stats["bytes"] += st.st_size
         # 缓存键必须带上解析器自身的指纹：只按 (路径, mtime, 大小) 判重的话，
@@ -634,11 +643,26 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
         records.append(rec)
         stats["parsed"] += 1
 
+    # 源文件被清掉之后，那段历史不能跟着消失 —— 这是个「记忆」图谱，
+    # 缓存文件本身就是长期归档。本机确实在按天清理会话缓存（磁盘从 19G 压到 8.3G），
+    # 所以这不是假想风险。留下来的记录标 gone，页面上照常算，只是不再更新。
+    kept = 0
+    for key, rec in cache.items():
+        src_path = key.split("|", 1)[0]
+        if src_path in scanned or Path(src_path).exists():
+            continue
+        rec["gone"] = True
+        records.append(rec)
+        kept += 1
+    stats["kept_gone"] = kept
+    if kept:
+        records.sort(key=lambda r: r.get("start") or "")
+
     # 防倒退门：上一轮有记录、这一轮一个文件都没扫到 —— 那几乎一定是路径解析
     # 或挂载出了问题，不是数据真的没了。此时**不覆盖**旧产物，并让整轮失败。
     # 实测踩过：仓根解析错，chatgpt 归档从 379 个文件掉到 0，产物被清空，
     # 2025-11 到 2026-05 的历史静默消失，而流程照样报成功。
-    if not records and prior:
+    if not records and prior and not stats.get("kept_gone"):
         stats["degraded"] = f"上一轮有 {prior} 条，这一轮扫到 0 个文件；已保留旧产物，未覆盖"
         return stats
 
@@ -682,7 +706,8 @@ def main() -> int:
             print(f"  {n:16s} ✗ 倒退：{s['degraded']}", file=sys.stderr)
             continue
         print(f"  {n:16s} 文件 {s['files']:5d}  新解析 {s['parsed']:5d}  复用 {s['cached']:5d}  "
-              f"失败 {s['failed']:3d}  批处理 {s.get('batched', 0):4d}  {s['bytes']/1048576:8.1f}MB")
+              f"失败 {s['failed']:3d}  批处理 {s.get('batched', 0):4d}  "
+              f"源已删留存 {s.get('kept_gone', 0):4d}  {s['bytes']/1048576:8.1f}MB")
 
     meta = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),

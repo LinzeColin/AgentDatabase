@@ -44,6 +44,18 @@ export async function render(host) {
         <b>${esc(i.k)}</b><span style="font-size:20px;font-weight:680">${esc(i.v)}</span></div>
         <div class="muted" style="margin-top:5px;font-size:13px">${esc(i.d)}</div></div>`).join('')}
 
+    <h2>方向与口子</h2>
+    <p class="sub">${esc((a.opportunities || {}).caveat || '')}</p>
+    ${((a.opportunities || {}).items || []).map(o => `
+      <div class="panel">
+        <div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
+          <b>${esc(o.k)}</b><span style="font-size:20px;font-weight:680">${esc(o.v)}</span>
+          <span class="muted" style="font-size:11.5px">数据来源：${esc(o.from)}</span></div>
+        <div class="muted" style="margin:6px 0 8px;font-size:13px">${esc(o.d)}</div>
+        <ul style="margin:0;padding-left:18px;font-size:13px;color:var(--dim)">
+          ${(o.list || []).map(x => `<li style="margin:2px 0">${esc(x)}</li>`).join('')}</ul>
+      </div>`).join('')}
+
     <h2>去看细节</h2>
     <div class="flexbar">
       <button class="act" data-go="calendar">按日历翻</button>
