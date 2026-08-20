@@ -23,7 +23,9 @@ ${hero('耦合', '谁和谁总是一起出现', `行和列是同一批东西：�
   <span class="pill" id="hud">${C.nodes.length} 个点 · ${C.edges.length} 条边</span>
 </div>
 <canvas class="viz" id="mx"></canvas>
-<p class="hint">停在任一格看这两样同时出现了几次；点一下进那一边的明细。
+<p class="hint"><b>深浅是开方刻度</b>，不是线性 —— 最强的一对能到三位数，
+  绝大多数只有个位数，线性下整张图会糊成一片淡色。
+  停在任一格看这两样同时出现了几次；点一下进那一边的明细。
   ${C.dropped_edges ? `另有 ${C.dropped_edges} 组太弱的关联没画出来 —— 是弱，不是没有。` : ''}</p>
 <div id="near"></div>
 ${drawer('连得最紧的 40 组', table([{ t: '一头' }, { t: '另一头' }, { t: '同时出现', r: true }],
@@ -96,7 +98,10 @@ ${drawer('连得最紧的 40 组', table([{ t: '一头' }, { t: '另一头' }, {
         }
         const v = W.get(key(r.id, c.id)) || 0;
         if (!v) return;
-        ctx.globalAlpha = 0.16 + (v / mx) * 0.84;
+        // 线性映射会把整张矩阵压成一片淡色：最强的一对能到三位数，
+        // 而绝大多数对只有个位数，线性下它们全落在 0.16~0.2 的透明度里，肉眼分不开。
+        // 开方之后中段拉得开，仍然单调 —— 强的还是强，只是弱的看得见了。
+        ctx.globalAlpha = 0.22 + Math.sqrt(v / mx) * 0.78;
         ctx.fillStyle = r.kind === 'topic' ? topicColor(r.label) : (KIND_COLORS[r.kind] || cssVar('--fg'));
         ctx.fillRect(labelW + j * cell + 0.5, y + 0.5, cell - 1, cell - 1);
         ctx.globalAlpha = 1;

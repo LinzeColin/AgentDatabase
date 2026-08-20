@@ -1,12 +1,13 @@
 import { esc, fmt, go, day as loadDay, hhmm, enter, topicColor } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
-import { flyToDay } from '../shell.js';
+import { flyToDay, holdCamera } from '../shell.js';
 import { hero, sec, grid, slab, drawer, table, warn, pill, rate } from '../kit.js';
 
 export async function render(host, arg) {
   const list = D.days().map(d => d.d);
   const cur = list.includes(arg) ? arg : list[list.length - 1];
   const i = list.indexOf(cur);
+  holdCamera(true);
   flyToDay(cur);                       // 打开哪一天，星图就停在哪一天
 
   host.innerHTML = `
@@ -51,4 +52,5 @@ ${mach.length ? `${sec(`机器跑的 ${mach.length} 场`, '列出来是让你能
   ${mach.slice(0, 24).map(card).join('')}
   ${mach.length > 24 ? `<p class="hint">还有 ${mach.length - 24} 场同类，没展开。</p>` : ''}` : ''}`;
   enter('.hero, .sec, .cell, .slab', host);
+  return { dispose() { holdCamera(false); } };
 }
