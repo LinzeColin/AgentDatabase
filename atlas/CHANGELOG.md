@@ -9,6 +9,42 @@
 
 ---
 
+## 0.4.1 — 2026-08-20
+
+### 接上 DeepSeek Harness（一直漏着的一个来源）
+
+`~/.dsh/sessions` 有 **1937 个会话、216MB**，此前完全没抽。之前把 DSH 记成
+「只有 Electron 缓存」—— 那说的是 `~/Library/Application Support/DSH Desktop`，
+判断错了对象。
+
+解析踩到两个坑，都写进代码注释了：
+- DSH 把**每一行当成独立的 zstd 帧**追加，一个文件上千帧；
+  `zstdDecompressSync` 只解第一帧，照着拿每场只得到 273 字节的元数据 ——
+  1937 场全是 0 轮 0 消息，「抽到了」其实什么都没抽到。改为按魔数切帧逐个解。
+- 1937 场里 **1929 场 `origin=subagent`**，是 agent 自己派生的。不标出来，
+  「你亲自开口」会一夜多出近两千场。现在标为机器，真人只有 5 场。
+
+顺带补上 provider/model：DSH 的 `request/header` 里有
+`deepseek-official/deepseek-v4-pro`、`scnet/DeepSeek-V4-Flash-0731`、
+`scnet/Qwen3.8-Max` —— 正是 Owner 说的 DeepSeek 与 SCNet。
+
+### 脱敏补宽
+
+原本只按**键名**过滤密钥，挡不住嵌在 `oauth` 下的令牌。改为按**前缀族**匹配
+（oat- / dfrt- / xox / glpat / JWT 三段式 …）并加一条通用的
+`*_token|*_secret|apiKey` 取值抹除。五个负控全过。
+
+### 开发经验沉淀有地址了
+
+权威副本推到 `LinzeColin/Private-Database` 的
+`Private-AgentDatabase/dev-notes/`，推送前硬校验目标仓可见性必须是 PRIVATE。
+同时在站点 `/brief/` 留一份（Access 后面）。
+
+新增归档钩子 `on_archive.sh`：上下文压缩或会话结束时刷新沉淀并上传，
+30 分钟去抖，只复审不重抽（重抽 60 秒，放钩子里会卡住 agent）。
+
+---
+
 ## 0.4.0 — 2026-08-20
 
 ### 对齐 Anthropic Economic Index
