@@ -89,3 +89,36 @@ loader 根本不看，插件目录放对了也是白搭。
 `~/.dsh/cordis.patch.yml` 那段互斥列表里写的 `ui-skin-maid-atelier` 拦不住它。
 要停它得按它实际插入的 id `ui-skin-deep-whale-day-night` 加一行 disabled，
 否则两套皮肤同时挂载互相盖。
+
+---
+
+## 素材放哪（2026-08-20 修正的一个真实隐患）
+
+母版一度只存在于会话的 scratchpad（`/private/tmp/...`）里，而 `~/.harness-ui/`
+下的 `genshin` / `hsr` / `zzz` 三个软链就指向那里。**/tmp 一被清，4.8GB 母版和
+验收页的全部大图链接一起没**。用户点出来之后已改：
+
+```
+~/.harness-ui/
+  master/<game>/<char>/<variant>/{light,dark}.png   4.8GB  ← 皮肤实际铺的图
+  thumb/ <game>/<char>/<variant>/light.webp         5MB    ← 画廊网格
+  catalog.json · names_zh.json · state.json · review.html
+  asset_server.py                                          ← launchd 起它，读不了 ~/Documents
+```
+
+`/tmp` 下现在一张母版都没有。NAS 上另有一份（`<游戏>/<角色>/skins/<变体>/`，612 张已核对）。
+
+## 皮肤铺的是母版 PNG，不是 WebP
+
+一度为了「切换快」把 3840 的母版压成 380KB 的 WebP q88。动漫线稿最吃这一刀，
+用户给的评价是 70 分。实测 kimiskin:// 协议吐一张 7MB 母版只要 **33ms**，
+所谓的体积优化从一开始就没必要 —— 这批图是花钱产出的，为省几百 KB 削它的画质是错的取舍。
+
+模糊问题一共三个来源，按影响从大到小：
+
+1. **`.app { backdrop-filter: blur(2px) }`** —— backdrop-filter 糊的是元素**背后的一切**，
+   而 `.app` 铺满整窗，等于把整张立绘糊掉。用户原话「人物模型在文本的后面，不清楚很模糊」，
+   单独看图 100%、DSH 95%、这里只剩 10%。DSH 插件里没有这一行，所以 DSH 一直是清楚的。
+2. **`background-attachment: fixed`** —— 把背景推进独立合成层，Chromium 常按 1x 光栅化
+   再放大到 DPR 2，Retina 上表现为「能看清但不够锐」。`#app` 本来就铺满整窗，fixed 毫无用处。
+3. **WebP 重编码** —— 已改回母版 PNG。

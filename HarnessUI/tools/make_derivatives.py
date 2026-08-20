@@ -27,7 +27,11 @@ import sys
 
 from PIL import Image
 
-DISPLAY = (2560, 1440)
+# 母版原尺寸。2560 曾经看着够用——DSH 的窗口宽，cover 是缩小——但 Kimi 的主窗
+# 是 1440x920pt，比 16:9 更高，cover 按高度铺满时 1440 要放大到 1840，1.28 倍
+# 的放大在人物脸上一眼能看出来。而且人物只占画面左 35%，它的有效像素本来就只有
+# 整图的三分之一，经不起再放大。保持母版尺寸，让所有窗口都是缩小而不是放大。
+DISPLAY = (3840, 2160)
 THUMB = (384, 216)
 
 
@@ -41,7 +45,7 @@ def build(master: pathlib.Path, src: pathlib.Path, out: pathlib.Path) -> tuple[s
         image = image.convert("RGB")
         display.parent.mkdir(parents=True, exist_ok=True)
         thumb.parent.mkdir(parents=True, exist_ok=True)
-        image.resize(DISPLAY, Image.LANCZOS).save(display, "WEBP", quality=82, method=5)
+        image.resize(DISPLAY, Image.LANCZOS).save(display, "WEBP", quality=88, method=5)
         image.resize(THUMB, Image.LANCZOS).save(thumb, "WEBP", quality=75, method=5)
     return (str(rel), display.stat().st_size, thumb.stat().st_size)
 

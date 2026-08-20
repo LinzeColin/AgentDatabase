@@ -176,8 +176,8 @@ def main() -> None:
             "thumbDark": f"{args.base}/thumb/{game}/{character}/{variant}/dark.webp",
             # Click-through goes to the master, not the display derivative — a
             # 2560px re-encode is not what acceptance should be judged on.
-            "lightFull": f"{args.base}/{game}/{character}/{variant}/light.png",
-            "darkFull": f"{args.base}/{game}/{character}/{variant}/dark.png",
+            "lightFull": f"{args.base}/master/{game}/{character}/{variant}/light.png",
+            "darkFull": f"{args.base}/master/{game}/{character}/{variant}/dark.png",
         })
     args.out.write_text(
         PAGE % {"count": len(data), "data": json.dumps(data, ensure_ascii=False)},

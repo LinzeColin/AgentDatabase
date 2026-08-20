@@ -63,8 +63,9 @@ window.__ModuleLoader__.load({
 		 * Fisher-Yates on a copy; the caller persists it so a restart resumes the
 		 * same cycle rather than starting a new one and repeating entries.
 		 */
-		function newCycle(entries) {
-			const ids = entries.map((entry) => entry.id);
+		function newCycle(entries, hidden) {
+			const skip = new Set(hidden || []);
+			const ids = entries.filter((entry) => !skip.has(entry.id)).map((entry) => entry.id);
 			for (let i = ids.length - 1; i > 0; i -= 1) {
 				const j = Math.floor(Math.random() * (i + 1));
 				[ids[i], ids[j]] = [ids[j], ids[i]];
@@ -189,7 +190,7 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 				const now = Date.now();
 				if (!force && now - (state.lastRotate || 0) < interval()) return;
 				if (!state.cycle?.length || state.cursor >= state.cycle.length) {
-					state.cycle = newCycle(catalog.entries);
+					state.cycle = newCycle(catalog.entries, state.hidden);
 					state.cursor = 0;
 				}
 				// Walk forward past ids that vanished from the catalogue between runs.
@@ -231,6 +232,10 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 					syncSeen = shared.updated;
 					state.mode = shared.mode;
 					state.intervalMs = shared.intervalMs;
+					// 增删由菜单栏控制器做，这边跟着走 —— 隐藏的不显示也不轮到
+					const before = (state.hidden || []).join();
+					state.hidden = shared.hidden || [];
+					if (state.hidden.join() !== before) { state.cycle = []; state.cursor = 0; renderGrid(); }
 					if (shared.selected && shared.selected !== state.selected) {
 						state.selected = shared.selected;
 						saveState(state);
@@ -291,7 +296,9 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 				const grid = panel.querySelector(".hu-grid");
 				const game = panel.querySelector('[data-hu="game"]').value;
 				const term = panel.querySelector('[data-hu="search"]').value.trim().toLowerCase();
+				const skip = new Set(state.hidden || []);
 				const shown = (catalog?.entries || []).filter((entry) =>
+					!skip.has(entry.id) &&
 					(!game || entry.game === game) &&
 					(!term || entry.character.includes(term) || entry.variant.includes(term)
 					 || (entry.label || "").includes(term)));

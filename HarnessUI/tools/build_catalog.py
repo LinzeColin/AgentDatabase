@@ -41,13 +41,21 @@ def main() -> None:
     parser.add_argument("--base", default="http://127.0.0.1:3099")
     args = parser.parse_args()
 
+    # 皮肤铺的是母版 PNG，不是重编码的 WebP。
+    # 之前为了切换快把 3840 的母版压成 380KB 的 WebP q88，动漫线稿最吃这一刀 ——
+    # 用户的原话是「高价值物品就应该原生展示」，他是对的：这批图是花钱产出的，
+    # 为省几百 KB 去削它的画质本来就是错的取舍。7MB PNG 解码约 0.3 秒，
+    # 而背景是点一下或四小时才换一次，而且预取已经把这 0.3 秒藏掉了。
+    master = args.assets / "master"
     display = args.assets / "display"
     zh = chinese_names(args.assets)
     entries = []
-    for light in sorted(display.rglob("light.webp")):
-        rel = light.relative_to(display)
+    source = master if master.exists() else display
+    pattern = "light.png" if source is master else "light.webp"
+    for light in sorted(source.rglob(pattern)):
+        rel = light.relative_to(source)
         game, character, variant = rel.parts[0], rel.parts[1], rel.parts[2]
-        dark = light.with_name("dark.webp")
+        dark = light.with_name(pattern.replace("light", "dark"))
         # A one-sided entry would show a blank window in whichever theme is
         # missing, so pairs only — the odd one out is reported, not shipped.
         if not dark.exists():
@@ -61,8 +69,8 @@ def main() -> None:
             # 菜单和画廊统一用这个字段。有中文名就用中文，没有就用英文 id ——
             # 两种混排也比音译一个假名字强。
             "label": name_zh or character,
-            "light": f"{args.base}/display/{game}/{character}/{variant}/light.webp",
-            "dark": f"{args.base}/display/{game}/{character}/{variant}/dark.webp",
+            "light": f"{args.base}/master/{game}/{character}/{variant}/light.png",
+            "dark": f"{args.base}/master/{game}/{character}/{variant}/dark.png",
             "thumb": f"{args.base}/thumb/{game}/{character}/{variant}/light.webp",
         })
     catalog = {"version": 1, "base": args.base, "count": len(entries), "entries": entries}
