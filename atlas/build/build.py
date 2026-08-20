@@ -200,8 +200,16 @@ def _load_gh(path: str) -> dict:
         return {}
 
 
+def _version() -> str:
+    try:
+        return (Path(__file__).resolve().parent.parent / "VERSION").read_text(encoding="utf-8").strip()
+    except OSError:
+        return "0.0.0"
+
+
 def build(sessions: list, out: Path, gh: dict | None = None) -> dict:
     fanout_n = mark_fanout(sessions)
+    _dl = delivery_block(sessions, gh or {})
     weights = keyword_weights(sessions)
     for s in sessions:
         s["topics"], s["topic_share"] = assign_topics(s, weights)
@@ -255,6 +263,7 @@ def build(sessions: list, out: Path, gh: dict | None = None) -> dict:
     } for s in sessions]
 
     atlas = {
+        "version": _version(),
         "meta": meta_block(sessions, day_rows, fanout_n),
         "topic_names": list(TOPICS),
         "ladder": LADDER,
@@ -269,9 +278,9 @@ def build(sessions: list, out: Path, gh: dict | None = None) -> dict:
         "opportunities": opportunity_block(sessions, proj_rows),
         "tokens": token_block(sessions),
         "stack": taxonomy.summarize(sessions),
-        "aei": aei_mod.build(sessions),
         "github": {k: v for k, v in (gh or {}).items() if k not in ("prs", "days")} or {"state": "不确定"},
-        "delivery": delivery_block(sessions, gh or {}),
+        "delivery": _dl,
+        "aei": aei_mod.build(sessions, _dl),
         "economics": economics_block(sessions, _ladder_counts(sessions)),
         "coupling": coupling_block(sessions),
         "keyword_weights": {k: round(v, 3) for k, v in sorted(weights.items(), key=lambda kv: -kv[1])[:60]},

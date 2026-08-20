@@ -3,7 +3,7 @@
 // 共享的只有 core/select.js 里的纯数据选择器。
 // CSP 是 script-src 'self'：无内联脚本、无 CDN，GSAP 已 vendor。
 
-export const S = { atlas: null, dayCache: new Map(), theme: 'glass', mode: 'dark' };
+export const S = { atlas: null, dayCache: new Map(), theme: 'glass', mode: 'dark', railOpen: true };
 
 export const THEMES = [
   ['console', '控制台'],
@@ -11,12 +11,40 @@ export const THEMES = [
   ['journal', '手记'],
 ];
 
-export const VIEW_LIST = [
-  ['overview', '概览'], ['calendar', '日历'], ['day', '一天'], ['timeline', '时间轴'],
-  ['grid', '网格'], ['universe', '宇宙'], ['replay', '回放'],
-  ['delivery', '交付'], ['aei', '经济指数'], ['stack', 'Token'],
-  ['lessons', '沉淀'], ['method', '口径'],
+// 导航：一级 ≤5，每个一级下二级 ≤5，全部在左侧、可折叠。
+// 这是硬约束，不是建议 —— 超过就得先合并，不能往下堆。
+export const NAV = [
+  { id: 'home',  label: '概览', icon: '◎', views: [
+      ['overview', '总览'],
+  ]},
+  { id: 'time',  label: '时间', icon: '◷', views: [
+      ['calendar', '日历'], ['day', '一天'], ['timeline', '时间轴'], ['replay', '回放'],
+  ]},
+  { id: 'econ',  label: '经济', icon: '◈', views: [
+      ['aei', '经济指数'], ['delivery', '交付与 ROI'], ['stack', 'Token 与栈'],
+  ]},
+  { id: 'shape', label: '结构', icon: '⬡', views: [
+      ['universe', '耦合星图'], ['grid', '网格'],
+  ]},
+  { id: 'arch',  label: '档案', icon: '❐', views: [
+      ['lessons', '沉淀'], ['method', '口径'],
+  ]},
 ];
+
+// 扁平表，路由用
+export const VIEW_LIST = NAV.flatMap(g => g.views);
+export const GROUP_OF = Object.fromEntries(
+  NAV.flatMap(g => g.views.map(([v]) => [v, g.id])));
+
+// 导航契约的机器守卫：写错了立刻在控制台报，而不是等页面看起来怪。
+(() => {
+  const bad = [];
+  if (NAV.length > 5) bad.push(`一级菜单 ${NAV.length} 个，上限 5`);
+  for (const g of NAV) {
+    if (g.views.length > 5) bad.push(`「${g.label}」下有 ${g.views.length} 个二级，上限 5`);
+  }
+  if (bad.length) console.error('[atlas] 导航契约被破坏：' + bad.join('；'));
+})();
 
 export const TOPIC_COLORS = {
   '修bug': '#ff6b6b', '部署上线': '#4ec9a7', '重构简化': '#c48fff', '测试验收': '#ffd166',
@@ -118,13 +146,7 @@ async function applyTheme() {
   if (disposeChrome) { try { disposeChrome(); } catch { /* 外壳清理失败不该拖垮切换 */ } disposeChrome = null; }
   themeMod.chrome(document.getElementById('root'));
 
-  const nav = document.getElementById('nav');
-  nav.innerHTML = themeMod.navMarkup ? themeMod.navMarkup(VIEW_LIST)
-    : VIEW_LIST.map(([v, l]) => `<button data-v="${v}">${esc(l)}</button>`).join('');
-  nav.addEventListener('click', e => {
-    const b = e.target.closest('button');
-    if (b) go(b.dataset.v);
-  });
+  renderRail();
 
   const tools = document.getElementById('tools');
   if (tools) {
@@ -164,6 +186,49 @@ export function cycleTheme() {
   setTheme(THEMES[(i + 1) % THEMES.length][0], null);
 }
 
+/** 左侧导航轨。分组 + 可折叠；折叠状态记在 localStorage。 */
+export function renderRail() {
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const cur = parseHash().name;
+  nav.innerHTML = NAV.map(g => {
+    const active = g.views.some(([v]) => v === cur);
+    return `<div class="navg${active ? ' on' : ''}" data-g="${g.id}">
+      <div class="navh"><span class="navi">${g.icon}</span><span class="navl">${esc(g.label)}</span></div>
+      <div class="navs">${g.views.map(([v, l]) =>
+        `<button data-v="${v}" ${v === cur ? 'aria-current="true"' : ''}>${esc(l)}</button>`).join('')}</div>
+    </div>`;
+  }).join('');
+  nav.onclick = e => {
+    const b = e.target.closest('button[data-v]');
+    if (b) return go(b.dataset.v);
+    const h = e.target.closest('.navh');
+    if (h) {
+      const g = h.parentElement;
+      g.classList.toggle('shut');
+      saveShut();
+    }
+  };
+  restoreShut();
+}
+const SHUT = 'atlas.rail.shut.v1';
+function saveShut() {
+  const shut = [...document.querySelectorAll('.navg.shut')].map(x => x.dataset.g);
+  localStorage.setItem(SHUT, JSON.stringify(shut));
+}
+function restoreShut() {
+  let shut = [];
+  try { shut = JSON.parse(localStorage.getItem(SHUT) || '[]'); } catch { shut = []; }
+  document.querySelectorAll('.navg').forEach(g => {
+    if (shut.includes(g.dataset.g)) g.classList.add('shut');
+  });
+}
+export function toggleRail() {
+  S.railOpen = !S.railOpen;
+  document.documentElement.dataset.rail = S.railOpen ? 'open' : 'shut';
+  localStorage.setItem('atlas.rail.open.v1', S.railOpen ? '1' : '0');
+}
+
 function stampAndFoot() {
   const m = S.atlas && S.atlas.meta;
   if (!m) return;
@@ -178,9 +243,12 @@ function stampAndFoot() {
       stamp.style.color = 'var(--warn)';
     }
   }
+  const ver = S.atlas.version || '—';
+  const line = `${m.sessions_total} 场会话 · ${m.days_active} 天 · ${m.first_day} 起 · 运行期不调用任何模型`;
   const foot = document.getElementById('foot');
-  if (foot) foot.textContent =
-    `${m.sessions_total} 场会话 · ${m.days_active} 天 · ${m.first_day} 起 · 运行期不调用任何模型`;
+  if (foot) foot.textContent = `Memory Atlas v${ver}　${line}`;
+  const rf = document.getElementById('railfoot');
+  if (rf) rf.innerHTML = `v${esc(ver)}<br>${m.sessions_total} 场 · ${m.days_active} 天<br>${esc(m.last_day)}`;
 }
 
 // ── 路由 ──
@@ -193,8 +261,7 @@ function parseHash() {
 let current = null;
 export async function render() {
   const { name, arg } = parseHash();
-  document.querySelectorAll('#nav button').forEach(b =>
-    b.setAttribute('aria-current', String(b.dataset.v === name)));
+  renderRail();
   const host = document.getElementById('view');
   if (!host) return;
   if (current && current.dispose) { try { current.dispose(); } catch { /* 视图清理失败不拖垮路由 */ } }
@@ -215,6 +282,8 @@ async function boot() {
     if (THEMES.some(t => t[0] === v.t)) S.theme = v.t;
     if (v.m === 'light' || v.m === 'dark') S.mode = v.m;
   } catch { /* 存坏了就用默认 */ }
+  S.railOpen = localStorage.getItem('atlas.rail.open.v1') !== '0';
+  document.documentElement.dataset.rail = S.railOpen ? 'open' : 'shut';
 
   try {
     const r = await fetch('atlas/atlas.json', { cache: 'no-store' });

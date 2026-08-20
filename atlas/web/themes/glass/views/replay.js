@@ -1,85 +1,114 @@
-import { esc, fmt, go, local, topicColor, enter, S } from '../../../core/app.js';
+import { esc, fmt, pct, go, enter, topicColor, reduced, S } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
-import { fitCanvas , cssVar } from '../../../core/g3d.js';
-import { sec, bento, pill } from '../kit.js';
+import { fitCanvas, cssVar, loop } from '../../../core/g3d.js';
+import { sec, bento, orbit, drawer, table, warn, pill } from '../kit.js';
 
+// 回放 = 竞速条：主题份额一周一周赛跑。
+// 上一版只是让点一颗颗亮起来，看不出「什么在变」—— 那是它被要求重做的原因。
 export async function render(host) {
-  const days = D.days(), all = D.A().sessions;
-  const idx = new Map(days.map((d, i) => [d.d, i]));
-  const pts = all.map(s => {
-    const lt = local(s.t);
-    return { di: idx.get(s.d), x: (idx.get(s.d) || 0) / Math.max(1, days.length - 1),
-      y: (lt.getUTCHours() + lt.getUTCMinutes() / 60) / 24,
-      r: Math.min(7, 1.9 + Math.sqrt(Math.max(1, s.u)) * 1.1),
-      c: s.tp[0] ? topicColor(s.tp[0]) : null, human: s.k === 'human' };
-  }).filter(p => p.di != null);
-  let i = days.length - 1, timer = null, speed = 140;
+  const A = D.A(), W = A.trend.weeks.filter(w => w.human > 0);
+  const names = A.topic_names.filter(t => W.some(w => (w.count[t] || 0) > 0));
+  const dl = (A.delivery && A.delivery.state === '通') ? A.delivery.days : [];
+  const commitsByWeek = {};
+  for (const r of dl) {
+    const d = new Date(r.d + 'T00:00:00Z');
+    const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+    const day = t.getUTCDay() || 7; t.setUTCDate(t.getUTCDate() + 4 - day);
+    const y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+    const wk = `${t.getUTCFullYear()}-W${String(Math.ceil(((t - y0) / 864e5 + 1) / 7)).padStart(2, '0')}`;
+    commitsByWeek[wk] = (commitsByWeek[wk] || 0) + r.commits;
+  }
+  const css = k => cssVar(k);
 
-  host.innerHTML = `
-${sec('回放', `从 ${days[0].d} 推到 ${days[days.length - 1].d}，一帧一天。星星一颗颗亮起来，不会熄灭。`)}
+  // 累计值 —— 竞速条比的是「到这一周为止累计了多少」
+  const cum = [];
+  const acc = {};
+  for (const w of W) {
+    for (const t of names) acc[t] = (acc[t] || 0) + (w.count[t] || 0);
+    cum.push({ w: w.w, n: w.human, snap: { ...acc }, commits: commitsByWeek[w.w] || 0 });
+  }
+
+  let i = cum.length - 1, playing = false, speed = 900, tAcc = 0, last = performance.now();
+  const shown = {};   // 平滑插值用
+
+  host.innerHTML = `${sec('赛跑', '主题累计场次一周一周赛跑。看的是「什么在追上什么」。')}
 <div class="ctl">
   <button id="play">▶ 播放</button><button id="rew">⟲ 从头</button>
-  <input type="range" id="scrub" min="0" max="${days.length - 1}" value="${i}" style="flex:1;min-width:220px">
-  <select id="sp"><option value="60">快</option><option value="140" selected>中</option><option value="320">慢</option></select>
+  <input type="range" id="scrub" min="0" max="${cum.length - 1}" value="${cum.length - 1}" style="flex:1;min-width:200px">
+  <select id="sp"><option value="450">快</option><option value="900" selected>中</option><option value="1600">慢</option></select>
 </div>
-<canvas class="viz" id="cv"></canvas>
-<div id="sum"></div>`;
+<canvas class="viz" id="race"></canvas>
+<div id="capt"></div>`;
 
-  const cv = host.querySelector('#cv'), btn = host.querySelector('#play'), scrub = host.querySelector('#scrub');
-  const css = k => cssVar(k);
+  const cv = host.querySelector('#race');
+  const btn = host.querySelector('#play'), scrub = host.querySelector('#scrub');
+  const capt = host.querySelector('#capt');
+
   const draw = () => {
-    const { ctx, w } = fitCanvas(cv, 420);
-    const h = 420, pl = 52, pb = 24, pt = 12;
+    const rowH = 26, padT = 14, padL = 118, padR = 92, top = 10;
+    const target = cum[i].snap;
+    for (const t of names) {
+      const v = target[t] || 0;
+      shown[t] = shown[t] == null ? v : shown[t] + (v - shown[t]) * 0.22;
+    }
+    const order = names.slice().sort((a, b) => (shown[b] || 0) - (shown[a] || 0)).slice(0, top);
+    const h = padT + order.length * rowH + 12;
+    const { ctx, w } = fitCanvas(cv, h);
     ctx.clearRect(0, 0, w, h);
-    ctx.strokeStyle = css('--line2'); ctx.fillStyle = css('--dim2');
-    ctx.font = '10.5px -apple-system, system-ui, sans-serif';
-    for (let hh = 0; hh <= 24; hh += 4) {
-      const y = pt + (hh / 24) * (h - pt - pb);
-      ctx.beginPath(); ctx.moveTo(pl, y); ctx.lineTo(w - 10, y); ctx.stroke();
-      ctx.fillText(String(hh).padStart(2, '0') + ':00', 8, y + 4);
-    }
-    ctx.globalCompositeOperation = S.mode === 'dark' ? 'lighter' : 'source-over';
-    for (const p of pts) {
-      if (p.di > i) continue;
-      const x = pl + p.x * (w - pl - 12), y = pt + p.y * (h - pt - pb);
-      const c = p.c || css('--dim2');
-      const fresh = p.di === i;
-      const g = ctx.createRadialGradient(x, y, 0, x, y, p.r * 3.6);
-      g.addColorStop(0, c); g.addColorStop(1, 'transparent');
-      ctx.globalAlpha = fresh ? .5 : (p.human ? .2 : .07);
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, p.r * 3.6, 0, 6.2832); ctx.fill();
-      ctx.globalAlpha = fresh ? 1 : (p.human ? .62 : .16);
-      ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, y, fresh ? p.r + 1.4 : p.r, 0, 6.2832); ctx.fill();
-    }
-    ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
-    const cx = pl + (i / Math.max(1, days.length - 1)) * (w - pl - 12);
-    ctx.strokeStyle = css('--acc'); ctx.lineWidth = 1.4;
-    ctx.beginPath(); ctx.moveTo(cx, pt); ctx.lineTo(cx, h - pb); ctx.stroke();
+    const mx = Math.max(1, ...order.map(t => shown[t] || 0));
+    order.forEach((t, r) => {
+      const y = padT + r * rowH;
+      const bw = ((shown[t] || 0) / mx) * (w - padL - padR);
+      const g = ctx.createLinearGradient(padL, 0, padL + Math.max(1, bw), 0);
+      g.addColorStop(0, topicColor(t)); g.addColorStop(1, css('--acc2'));
+      ctx.fillStyle = g; ctx.globalAlpha = .92;
+      ctx.beginPath(); ctx.roundRect(padL, y + 4, Math.max(2, bw), rowH - 9, 999); ctx.fill(); ctx.globalAlpha = 1;
+      ctx.fillStyle = css('--fg'); ctx.font = '600 12px -apple-system, system-ui, sans-serif'; ctx.textAlign = 'right';
+      ctx.fillText(t.slice(0, 8), padL - 8, y + rowH * .68);
+      ctx.textAlign = 'left'; ctx.fillStyle = css('--dim');
+      ctx.font = '11px -apple-system, system-ui, sans-serif';
+      ctx.fillText(String(Math.round(shown[t] || 0)), padL + bw + 7, y + rowH * .68);
+    });
+    ctx.textAlign = 'left';
+  };
 
-    const d = days[i];
-    host.querySelector('#sum').innerHTML = bento([
-      { k: '当前', v: `<span class="lnk" data-day="${d.d}" style="font-size:30px">${d.d}</span>`,
-        n: `第 ${i + 1} / ${days.length} 个有记录的日子`, w: 3, tone: 'acc' },
-      { k: '这天你开口', v: String(d.human), n: `累计 ${days.slice(0, i + 1).reduce((a, b) => a + b.human, 0)} 场`, w: 3, alt: true },
-      { k: '当天主题', v: `<span style="font-size:20px">${Object.entries(d.topics).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([t])=>esc(t)).join('、') || '未分类'}</span>`,
-        n: `${d.active_hours} 个钟点里有动静` },
+  const caption = () => {
+    const c = cum[i], prev = i > 0 ? cum[i - 1] : null;
+    const deltas = names.map(t => ({ t, d: (c.snap[t] || 0) - (prev ? (prev.snap[t] || 0) : 0) }))
+      .filter(x => x.d > 0).sort((a, b) => b.d - a.d).slice(0, 3);
+    capt.innerHTML = bento([
+      { k: '当前', v: esc(c.w), n: `第 ${i + 1} / ${cum.length} 周`, w: 3, tone: 'acc' },
+      { k: '这周会话', v: String(c.n), n: `这周提交 ${c.commits}`, w: 3, alt: true },
+      { k: '涨得最多', v: `<span style="font-size:20px">${deltas.map(x => esc(x.t)).join('、') || '—'}</span>`,
+        n: deltas.map(x => `+${x.d}`).join('　') },
     ]);
   };
-  // 到头就停。绝不写没有终止条件的循环。
-  const stop = () => { if (timer) clearInterval(timer); timer = null; btn.textContent = '▶ 播放'; };
+
+  const stop = () => { playing = false; btn.textContent = '▶ 播放'; };
   btn.onclick = () => {
-    if (timer) return stop();
-    if (i >= days.length - 1) i = 0;
-    btn.textContent = '⏸ 暂停';
-    timer = setInterval(() => { i++; if (i >= days.length - 1) { i = days.length - 1; stop(); }
-      scrub.value = i; draw(); }, speed);
+    if (playing) return stop();
+    if (i >= cum.length - 1) { i = 0; for (const k of names) shown[k] = 0; }
+    playing = true; btn.textContent = '⏸ 暂停';
   };
-  host.querySelector('#rew').onclick = () => { stop(); i = 0; scrub.value = 0; draw(); };
-  scrub.oninput = () => { stop(); i = +scrub.value; draw(); };
-  host.querySelector('#sp').onchange = e => { speed = +e.target.value; if (timer) { stop(); btn.click(); } };
-  host.addEventListener('click', e => { const d = e.target.closest('[data-day]'); if (d) go('day', d.dataset.day); });
+  host.querySelector('#rew').onclick = () => { stop(); i = 0; for (const k of names) shown[k] = 0; scrub.value = 0; caption(); };
+  scrub.oninput = () => { stop(); i = +scrub.value; caption(); };
+  host.querySelector('#sp').onchange = e => { speed = +e.target.value; };
+
+  const l = loop(now => {
+    const dt = Math.min(80, now - last); last = now;
+    if (playing && !reduced()) {
+      tAcc += dt;
+      if (tAcc >= speed) {
+        tAcc = 0; i++;
+        if (i >= cum.length - 1) { i = cum.length - 1; stop(); }
+        scrub.value = i; caption();
+      }
+    }
+    draw();
+  });
+  caption();
   const onR = () => draw();
   addEventListener('resize', onR); addEventListener('atlas:theme', onR);
-  draw(); enter('.sec, .card', host);
-  return { dispose() { stop(); removeEventListener('resize', onR); removeEventListener('atlas:theme', onR); } };
+  enter('.sec, .card', host);
+  return { dispose() { l.stop(); removeEventListener('resize', onR); removeEventListener('atlas:theme', onR); } };
 }
