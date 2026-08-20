@@ -36,6 +36,7 @@ window.__ModuleLoader__.load({
 		// 同一份状态由菜单栏控制器、Kimi 外壳和这里三方共读共写。各存各的必然分叉 ——
 		// 菜单栏切到 A、这边还显示 B，用户看到的和菜单说的对不上。
 		const STATE_URL = "http://127.0.0.1:3099/state.json";
+		const STATE_WRITE = "http://127.0.0.1:3099/__state";
 		const SYNC_MS = 15000;
 		const DEFAULT_INTERVAL_MS = 4 * 60 * 60 * 1000;
 
@@ -251,6 +252,8 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 					state.lastRotate = now;
 					state.selected = entry.id;
 					saveState(state);
+					pushShared({ selected: entry.id, lastRotate: now,
+						cycle: state.cycle, cursor: state.cursor });
 					paintActive();
 					warmNext();
 				}
@@ -291,6 +294,16 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 					}
 					paintMode();
 				} catch { /* 控制器没开就按本地状态自转，不报错刷屏 */ }
+			}
+
+			/** 把改动写回共享状态。只写 localStorage 的话，15 秒后就被 syncShared 盖掉 ——
+			 *  面板看起来能改模式和间隔，实际改不动，用户选的 1 小时一直没生效。 */
+			function pushShared(patch) {
+				syncSeen = Date.now();   // 别让自己刚写的又被自己读回来当成外部变更
+				try {
+					fetch(STATE_WRITE, { method: "POST", mode: "no-cors",
+						body: JSON.stringify(patch) });
+				} catch { /* 素材服务没开就只影响同步，本地照常 */ }
 			}
 
 			function schedule() {
@@ -372,6 +385,7 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 						state.mode = "gallery";
 						state.selected = entry.id;
 						saveState(state);
+						pushShared({ mode: "gallery", selected: entry.id });
 						paintMode();
 						if (await show(entry)) paintActive();
 					};
@@ -388,6 +402,7 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 			panel.querySelector('[data-hu="mode"]').addEventListener("click", () => {
 				state.mode = state.mode === "rotate" ? "gallery" : "rotate";
 				saveState(state);
+				pushShared({ mode: state.mode });
 				paintMode();
 				schedule();
 				if (state.mode === "rotate") rotate(true);
@@ -396,6 +411,7 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 			panel.querySelector('[data-hu="interval"]').addEventListener("change", (event) => {
 				state.intervalMs = Number(event.target.value);
 				saveState(state);
+				pushShared({ intervalMs: state.intervalMs });
 				schedule();
 			});
 			panel.querySelector('[data-hu="game"]').addEventListener("change", renderGrid);

@@ -27,6 +27,7 @@ from __future__ import annotations
 import argparse
 import functools
 import http.server
+import json
 import pathlib
 import time
 import socketserver
@@ -54,6 +55,31 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         （点错窗口，把诊断代码打进了用户正在用的另一个应用并发送）。
         让被诊断的代码自己说话，比隔着屏幕去问它可靠得多。
         """
+        if self.path.startswith("/__state"):
+            # DSH 的皮肤面板住在浏览器里，写不了文件——它只能写自己的
+            # localStorage，而同一份状态每 15 秒又从共享文件读回来覆盖。
+            # 结果是那个面板看起来能改模式和间隔，实际上改完 15 秒内就被盖掉。
+            # 给它一条写回的路，控制才是真的。
+            length = int(self.headers.get("content-length") or 0)
+            try:
+                patch = json.loads(self.rfile.read(length).decode("utf-8", "replace"))
+            except Exception:
+                self.send_response(400); self.end_headers(); return
+            target = pathlib.Path.home() / ".harness-ui" / "state.json"
+            try:
+                current = json.loads(target.read_text(encoding="utf-8"))
+            except Exception:
+                current = {}
+            # 只收白名单里的键：面板改的是模式和间隔，不该让它整份覆盖，
+            # 否则一个陈旧的面板会把菜单栏刚推进的周期游标抹掉。
+            for key in ("mode", "selected", "intervalMs", "hidden", "cycle", "cursor", "lastRotate"):
+                if key in patch:
+                    current[key] = patch[key]
+            current["updated"] = int(time.time() * 1000)
+            tmp = target.with_suffix(".tmp")
+            tmp.write_text(json.dumps(current, ensure_ascii=False, indent=1), encoding="utf-8")
+            tmp.replace(target)
+            self.send_response(204); self.end_headers(); return
         if not self.path.startswith("/__diag"):
             self.send_response(404); self.end_headers(); return
         length = int(self.headers.get("content-length") or 0)
