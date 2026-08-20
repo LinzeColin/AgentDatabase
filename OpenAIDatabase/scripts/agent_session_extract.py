@@ -158,7 +158,12 @@ def extract_jsonl_session(path: Path, source_id: str) -> dict | None:
     joined = redact(" ".join(user_texts))[:4000]
     st = path.stat()
     occurred = first_ts or datetime.fromtimestamp(st.st_mtime, tz=timezone.utc).isoformat()
-    rid = f"{source_id}-{path.stem[:40]}"
+    # record_id 必须对「文件」唯一，不能只用文件名：
+    # kimi-code 的 419 个会话文件**全部叫 wire.jsonl**，只是分散在不同目录。
+    # 只取 stem 会让 419 个碰成 1 个，增量按 record_id 去重时直接塌掉 418 条。
+    # 2026-08-19 实测踩过，所以带上完整路径的短哈希。
+    ph = hashlib.sha256(str(path).encode()).hexdigest()[:10]
+    rid = f"{source_id}-{path.stem[:32]}-{ph}"
     return {
         "source_id": source_id,
         "record_id": rid,
@@ -221,7 +226,8 @@ def extract_envelope(path: Path, source_id: str) -> dict | None:
     occurred = str(d.get("created_at") or d.get("occurred_at") or "")[:19] or None
     if not occurred:
         return None
-    rid = f"{source_id}-{(d.get('conversation_id') or path.stem)[:40]}"
+    ph = hashlib.sha256(str(path).encode()).hexdigest()[:10]
+    rid = f"{source_id}-{(d.get('conversation_id') or path.stem)[:32]}-{ph}"
     return {
         "source_id": source_id, "record_id": rid, "occurred_at": occurred,
         "record_type": f"{source_id}_session_summary",

@@ -1,0 +1,96 @@
+name: Memory Atlas Sediment
+
+# 每日沉淀流水线的守卫。它本身不采集本机数据（CI 上没有 ~/.claude），
+# 只做三件 runner 上能做的事：
+#   1 抽取器的正控与负控（含 kimi 那个 419→1 的塌方回归锁）
+#   2 零依赖零 token 自证：不许出现第三方库或网络调用
+#   3 四个工具在合成夹具上端到端能跑通
+#
+# 真实采集由本机 codex automation 每日触发 memory_atlas_daily.py，
+# 那一侧是唯一的 agent 依赖，且只是触发器 —— 运行期纯脚本、零 token。
+on:
+  push:
+    branches: [main]
+    paths:
+      - "OpenAIDatabase/scripts/agent_*.py"
+      - "OpenAIDatabase/scripts/memory_atlas_daily.py"
+      - "OpenAIDatabase/tests/test_agent_*.py"
+      - ".github/workflows/memory-atlas-sediment.yml"
+  pull_request:
+    paths:
+      - "OpenAIDatabase/scripts/agent_*.py"
+      - "OpenAIDatabase/scripts/memory_atlas_daily.py"
+      - "OpenAIDatabase/tests/test_agent_*.py"
+      - ".github/workflows/memory-atlas-sediment.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sediment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: 抽取器正控与负控
+        run: |
+          set -euo pipefail
+          python3 -m unittest OpenAIDatabase.tests.test_agent_session_extract -v
+      - name: 零依赖零 token 自证
+        run: |
+          set -euo pipefail
+          # 运行期不许调模型、不许联网、不许第三方库 —— 这是 Owner 的硬约束。
+          # 这里用 AST 而不是 grep：注释里出现这些词不该误报。
+          python3 - <<'PY'
+          import ast, sys
+          from pathlib import Path
+          STD = {"argparse","hashlib","json","os","re","sys","collections","datetime",
+                 "pathlib","subprocess","time","typing","unittest","shutil","tempfile","itertools","math"}
+          bad = {}
+          files = sorted(Path("OpenAIDatabase/scripts").glob("agent_*.py"))
+          files.append(Path("OpenAIDatabase/scripts/memory_atlas_daily.py"))
+          for f in files:
+              mods = set()
+              for n in ast.walk(ast.parse(f.read_text(encoding="utf-8"))):
+                  if isinstance(n, ast.Import):
+                      mods |= {a.name.split('.')[0] for a in n.names}
+                  elif isinstance(n, ast.ImportFrom) and n.module and n.level == 0:
+                      mods.add(n.module.split('.')[0])
+              ext = sorted(m for m in mods if m not in STD and m != "__future__")
+              if ext:
+                  bad[f.name] = ext
+          if bad:
+              raise SystemExit(f"FAIL: 引入了非标准库依赖 {bad} —— 破坏零依赖零 token 约束")
+          print(f"PASS: {len(files)} 个工具全部纯标准库")
+          PY
+      - name: 端到端（合成夹具）
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, subprocess, sys, tempfile
+          from pathlib import Path
+          sys.path.insert(0, "OpenAIDatabase/scripts")
+          import agent_session_extract as X
+          td = Path(tempfile.mkdtemp())
+          src, out = td/"src", td/"out"
+          for i in range(4):
+              d = src/f"p{i}"; d.mkdir(parents=True)
+              (d/"wire.jsonl").write_text("\n".join(
+                  json.dumps({"type":"user","timestamp":f"2026-08-0{i+1}T01:00:00Z",
+                              "message":{"text":"部署上线 修bug 赚钱"}}, ensure_ascii=False)
+                  for _ in range(5)) + "\n", encoding="utf-8")
+          X.SOURCES["_ci"] = {"root": src, "parser": "jsonl_dir", "payload_mb": 0}
+          r = X.extract_source("_ci", out, incremental=True)
+          assert r["events"] == 4, r
+          for tool, args in (("agent_usage_analysis.py", ["--events", str(out)]),
+                             ("agent_journal_build.py", ["--events", str(out), "--out", str(td/"v")]),
+                             ("agent_lessons_build.py", ["--events", str(out), "--out", str(td/"l.md")])):
+              p = subprocess.run([sys.executable, f"OpenAIDatabase/scripts/{tool}", *args],
+                                 capture_output=True, text=True)
+              assert p.returncode == 0, f"{tool} 失败: {p.stderr[:300]}"
+          print("PASS: 抽取 -> 分析 -> 视图 -> 沉淀 端到端跑通")
+          PY
