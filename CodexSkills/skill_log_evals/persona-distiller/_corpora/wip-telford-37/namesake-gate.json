@@ -1,0 +1,49 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Thomas Telford；材料建工师；Scottish civil engineer, architect and stonemason。\n   专业背景：1757-08-09 生于苏格兰 Eskdale，1834-09-02 卒于伦敦。从石匠学徒起步，后成为英国土木工程协会首任会长（1820）。主持 Menai Suspension Bridge、Pontcysyllte Aqueduct、Ellesmere Canal、Holyhead Road、Caledonian Canal、伦敦供水等大型公共工程，著有多卷工程报告与自传。。\n   应用价值：场景：公路/桥梁/运河工程的结构设计与项目管理；大型公共工程的规划、招标、监理与成本控制；工程规范、合同与跨期项目管理（19 世纪工程管理范式）；关键能力：大型土木工程（公路/桥梁/运河/港口/供水）的勘察、设计、规划与项目管理；工程预算、成本控制与合同招标（19 世纪工程管理）；铁质/石质桥梁结构设计与荷载论证。\n   区分依据：Wikidata Q380875（Scottish civil engineer, architect and stonemason 1757-1834）；以公路/桥梁/运河工程著称（Menai Suspension Bridge、Pontcysyllte Aqueduct、Ellesmere Canal、Holyhead Road、伦敦供水）。archive.org creator:'Telford, Thomas, 1757-1834' 与 'Telford, Thomas' 均指同一人；无其他知名同名工程人物。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "公路/桥梁/运河工程的结构设计与项目管理",
+        "大型公共工程的规划、招标、监理与成本控制",
+        "工程规范、合同与跨期项目管理（19 世纪工程管理范式）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q380875",
+          "type": "wikidata"
+        },
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Telford%2C+Thomas%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=100&output=json",
+          "type": "archive.org"
+        }
+      ],
+      "canonical_name": "Thomas Telford",
+      "distinguishing_basis": "Wikidata Q380875（Scottish civil engineer, architect and stonemason 1757-1834）；以公路/桥梁/运河工程著称（Menai Suspension Bridge、Pontcysyllte Aqueduct、Ellesmere Canal、Holyhead Road、伦敦供水）。archive.org creator:'Telford, Thomas, 1757-1834' 与 'Telford, Thomas' 均指同一人；无其他知名同名工程人物。",
+      "evidence_level": "high",
+      "identity_category": "材料建工师",
+      "key_capabilities": [
+        "大型土木工程（公路/桥梁/运河/港口/供水）的勘察、设计、规划与项目管理",
+        "工程预算、成本控制与合同招标（19 世纪工程管理）",
+        "铁质/石质桥梁结构设计与荷载论证"
+      ],
+      "label": "A",
+      "occupation_or_role": "Scottish civil engineer, architect and stonemason",
+      "professional_background": "1757-08-09 生于苏格兰 Eskdale，1834-09-02 卒于伦敦。从石匠学徒起步，后成为英国土木工程协会首任会长（1820）。主持 Menai Suspension Bridge、Pontcysyllte Aqueduct、Ellesmere Canal、Holyhead Road、Caledonian Canal、伦敦供水等大型公共工程，著有多卷工程报告与自传。",
+      "subject_uid": null
+    }
+  ],
+  "generated_at": "2026-08-20T04:39:43Z",
+  "normalized_name": "thomastelford",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "ready",
+  "target_name": "Thomas Telford"
+}
