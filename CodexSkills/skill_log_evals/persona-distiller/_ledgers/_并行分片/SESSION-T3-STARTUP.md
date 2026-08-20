@@ -10,7 +10,7 @@
 
 ## 第一步（必做，按序读）
 
-1. `cd /Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase-T3 && git pull`
+1. `cd /Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase-T3 && git merge main --no-edit`（本 worktree 与主树共享 .git；T1 在 main 上提交，你本地 merge 即可拿到最新指令与 T1 产物，无需 remote pull）
 2. 读 `CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/PLAN-2026-08-20-三线程并行.md`（**本方案的唯一事实源**，含并发模型/规则/注意事项）
 3. 读 `CodexSkills/skill_log_evals/persona-distiller/_ledgers/GOAL-CONTRACT-v5.md`（目标契约）
 4. 读 `CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/HANDOFF-2026-08-20.md`（全流程 12 步 + 9 条踩坑清单）
