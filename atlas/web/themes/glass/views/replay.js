@@ -37,7 +37,7 @@ export async function render(host) {
   <input type="range" id="scrub" min="0" max="${cum.length - 1}" value="${cum.length - 1}" style="flex:1;min-width:200px">
   <select id="sp"><option value="450">快</option><option value="900" selected>中</option><option value="1600">慢</option></select>
 </div>
-<canvas class="viz" id="race"></canvas>
+<canvas class="viz" id="race" role="img" aria-label="逐周累计的排行图。"></canvas>
 <div id="capt"></div>`;
 
   const cv = host.querySelector('#race');
@@ -79,7 +79,7 @@ export async function render(host) {
     capt.innerHTML = bento([
       { k: '当前', v: esc(c.w), n: `第 ${i + 1} / ${cum.length} 周`, w: 3, tone: 'acc' },
       { k: '这周会话', v: String(c.n), n: `这周提交 ${c.commits}`, w: 3, alt: true },
-      { k: '涨得最多', v: `<span style="font-size:20px">${deltas.map(x => esc(x.t)).join('、') || '—'}</span>`,
+      { k: '涨得最多', v: `${deltas.map(x => esc(x.t)).join('、') || '—'}`, size: 'sm',
         n: deltas.map(x => `+${x.d}`).join('　') },
     ]);
   };

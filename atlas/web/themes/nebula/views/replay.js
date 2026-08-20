@@ -55,10 +55,10 @@ ${dl.length ? '' : warn('这一屏没有接上 GitHub 提交数据，所以「�
     const deltas = names.map(t => ({ t, d: (c.snap[t] || 0) - (prev ? (prev.snap[t] || 0) : 0) }))
       .filter(x => x.d > 0).sort((a, b) => b.d - a.d);
     capt.innerHTML = grid([
-      { k: '飞到了', v: `<span style="font-size:30px">${esc(c.w)}</span>`,
+      { k: '飞到了', v: `${esc(c.w)}`, size: 'md',
         n: `第 ${i + 1} / ${cum.length} 周`, w: 3, tone: 'acc' },
       { k: '那周你开口', v: String(c.n), n: `提交 ${c.commits} 次 · PR ${c.prs} 个`, w: 3, alt: true },
-      { k: '那周新长出来的', v: `<span style="font-size:19px">${deltas.slice(0, 3).map(x => esc(x.t)).join('、') || '没有新的'}</span>`,
+      { k: '那周新长出来的', v: `${deltas.slice(0, 3).map(x => esc(x.t)).join('、') || '没有新的'}`, size: 'sm',
         n: deltas.slice(0, 3).map(x => `+${x.d}`).join('　') || '这周在做老活' },
       { k: '到这周为止累计', v: fmt(Object.values(c.snap).reduce((a, b) => a + b, 0)), n: '所有主题加起来' },
     ]);

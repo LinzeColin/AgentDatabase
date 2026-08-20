@@ -27,7 +27,7 @@ export async function render(host, arg) {
   const mach = j.sessions.filter(s => s.kind !== 'human');
   const wd = ['周一','周二','周三','周四','周五','周六','周日'][(new Date(cur + 'T00:00:00Z').getUTCDay() + 6) % 7];
 
-  const card = s => slab(`
+  const card = s => `<div class="slab half${s.kind === 'human' ? '' : ' mach'}">
   <div class="ck">${hhmm(s.start)}　${esc(s.source)}${s.project ? ' · ' + esc(s.project) : ''}
     ${s.kind === 'fanout' ? ' · <b style="color:var(--warn)">同一批扇出去的</b>'
       : s.kind === 'auto' ? ' · <b style="color:var(--warn)">机器自己跑的</b>' : ''}</div>
@@ -36,7 +36,7 @@ export async function render(host, arg) {
   <div class="cn" style="margin-top:9px">你说 ${s.turns} 次 · 用工具 ${s.tools} 次 · 前后 ${s.span_min} 分钟
     ${s.models.length ? ' · ' + esc(s.models.join('/')) : ''}
     ${(s.tok_in || s.tok_out) ? ` · token 进 ${fmt(s.tok_in)} 出 ${fmt(s.tok_out)}` : ''}</div>
-  ${(s.prompts || []).slice(0, 3).map(p => `<div class="quote">${esc(p)}</div>`).join('')}`);
+  ${(s.prompts || []).slice(0, 3).map(p => `<div class="quote">${esc(p)}</div>`).join('')}</div>`;
 
   host.querySelector('#body').innerHTML = `
 ${hero(wd, cur, `这一天你开口 ${meta.human} 次，机器跑了 ${meta.n - meta.human} 次。下面是原话。`)}
@@ -44,13 +44,14 @@ ${grid([
   { k: '你开口', v: String(meta.human), n: `机器另跑了 ${meta.n - meta.human} 场`, w: 3, tone: 'acc' },
   { k: '有动静的钟点', v: String(meta.active_hours), n: '这不等于工作时长', w: 3, alt: true },
   { k: '读进去的 token', v: tk ? fmt(tk.input_total) : '—', n: tk ? `命中缓存 ${rate(tk.hit_rate)}` : '这天没有用量记录' },
-  { k: '在做什么', v: `<span style="font-size:20px">${Object.entries(meta.topics).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([t])=>esc(t)).join('、') || '没认出来'}</span>`,
+  { k: '在做什么', v: `${Object.entries(meta.topics).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([t])=>esc(t)).join('、') || '没认出来'}`, size: 'sm',
     n: Object.entries(meta.topics).length + ' 类' },
 ])}
-${human.length ? human.map(card).join('') : warn('这一天你没有亲自开口。下面全是机器跑的。')}
-${mach.length ? `${sec(`机器跑的 ${mach.length} 场`, '列出来是让你能核对「被剔掉的到底是什么」，不是凑数。')}
-  ${mach.slice(0, 24).map(card).join('')}
-  ${mach.length > 24 ? `<p class="hint">还有 ${mach.length - 24} 场同类，没展开。</p>` : ''}` : ''}`;
+${human.length ? `<div class="grid">${human.map(card).join('')}</div>`
+  : warn('这一天你没有亲自开口。下面全是机器跑的。')}
+${mach.length ? sec(`机器跑的 ${mach.length} 场`, '列出来是让你能核对「被剔掉的到底是什么」，不是凑数。默认收着 —— 67 张同权重的卡是一堵墙。')
+  + drawer(`摊开这 ${mach.length} 场`, `<div class="grid">${mach.slice(0, 24).map(card).join('')}</div>`
+    + (mach.length > 24 ? `<p class="hint">还有 ${mach.length - 24} 场同类，没展开。</p>` : '')) : ''}`;
   enter('.hero, .sec, .cell, .slab', host);
   return { dispose() { holdCamera(false); } };
 }

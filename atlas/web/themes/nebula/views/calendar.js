@@ -24,8 +24,8 @@ ${hero('星历', '每一天是一颗星', `从 ${esc(first)} 到 ${esc(last)}，
     <option value="turns">你说话次数</option><option value="input">读进去的 token</option>
     <option value="hit">缓存命中率</option></select>
 </div>
-<div id="sum"></div>
 <div id="band"></div>
+<div id="sum"></div>
 <div id="rest"></div>`;
 
   const ctlslot = host.querySelector('#ctlslot');
@@ -75,7 +75,7 @@ ${hero('星历', '每一天是一颗星', `从 ${esc(first)} 到 ${esc(last)}，
     const { sessions, dayset, label } = resolve();
     const agg = D.aggregate(sessions);
     host.querySelector('#sum').innerHTML = grid([
-      { k: '现在看的是', v: `<span style="font-size:21px">${esc(label)}</span>`,
+      { k: '现在看的是', v: `${esc(label)}`, size: 'sm',
         n: `${dayset.size} 天`, w: 3, tone: 'acc' },
       { k: '会话', v: String(agg.n), n: `你说话 ${agg.turns} 次 · 用工具 ${agg.tools} 次`, w: 3, alt: true },
       { k: '读进去的 token', v: fmt(agg.input_total), n: `其中命中缓存 ${rate(agg.hit)}` },
@@ -100,7 +100,7 @@ ${hero('星历', '每一天是一颗星', `从 ${esc(first)} 到 ${esc(last)}，
         const v = valueOf(iso);
         return `${head ? `<b class="bmon">${mm.slice(2).replace('-', '/')}</b>` : ''}
           <i data-day="${iso}" data-lv="${lv(v)}" ${dayset.has(iso) ? '' : 'data-out="1"'}
-             title="${iso}　${show(v)}"></i>`;
+             title="${iso}　${show(v)}" aria-label="${iso} ${show(v)}" role="button" tabindex="0"></i>`;
       }).join('')}</div>
       <p class="hint" style="margin:16px 0 0">亮度分界 ${[t1, t2, t3].map(show).join(' / ')}
         （按你自己的分布取的四分位，不是固定值）。暗掉的＝不在当前切片里，不是那天没数据。</p></div>`;

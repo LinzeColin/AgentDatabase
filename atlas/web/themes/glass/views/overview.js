@@ -37,16 +37,17 @@ ${sec('三档', '把上面的主题归并出来的，不是另外算的。')}
   `${pill(`${k} ${L[k]} · ${pct(L[k] / Object.values(L).reduce((a, b) => a + b, 0))}`)}`).join('')}</p>
 
 ${sec('数出来的几件事')}
-${bento(D.insights().map(i => ({
+${bento(D.insights().map((i, idx, arr) => ({
   kHtml: `${state(i.t === 'warn' ? '说不准' : '看这里')}　${esc(i.k)}`, k: i.k,
-  v: `<span style="font-size:26px">${esc(i.v)}</span>`, n: esc(i.d), w: 3,
+  v: `${esc(i.v)}`, size: 'sm', n: esc(i.d),
+  w: idx === arr.length - 1 && arr.length % 2 ? 6 : 3,   // 末张单数时占满，别留孤儿
 })))}
 
 ${sec('方向与口子', esc((D.opportunities() || {}).caveat || ''))}
 ${((D.opportunities() || {}).items || []).map(o => `
   <div class="card w6" style="margin:14px 0">
     <div class="ck">${esc(o.k)}　<span style="color:var(--dim2)">来源：${esc(o.from)}</span></div>
-    <div class="cv acc" style="font-size:32px">${esc(o.v)}</div>
+    <div class="cv acc md">${esc(o.v)}</div>
     <div class="cn" style="margin:6px 0 12px">${esc(o.d)}</div>
     ${(o.list || []).map(x => pill(x)).join('')}
   </div>`).join('')}

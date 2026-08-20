@@ -5,21 +5,23 @@ import { sec, bento, orbit, drawer, table, warn, pill } from '../kit.js';
 
 // 网格 = 真正的矩阵：行是领域/主题，列是周，格子是强度。
 // 上一版只是把会话画成一堆彩色方块，看不出任何结构 —— 那是它被要求重做的原因。
-export async function render(host) {
+export async function render(host, arg) {
   const A = D.A(), E = A.aei;
-  let rowMode = 'domain';     // domain | topic | project | source
+  const q = new URLSearchParams((arg || '').replace(/^\?/, ''));
+  const focus = q.get('t') || q.get('p') || q.get('s') || '';
+  let rowMode = q.get('p') ? 'project' : q.get('s') ? 'source' : 'topic';
   let metric = 'sessions';    // sessions | tokens | automation | success
   let cur = null;
   const css = k => cssVar(k);
 
   host.innerHTML = `${sec('矩阵', '行 = 分类，列 = 周，格子越亮＝那一周在这类活上花得越多。这是矩阵，不是散点。')}
 <div class="ctl">
-  <select id="rowmode"><option value="domain">按主题</option><option value="topic">按主题（全部）</option>
+  <select id="rowmode"><option value="topic">按主题</option>
     <option value="project">按项目</option><option value="source">按来源</option></select>
   <select id="metric"><option value="sessions">会话数</option><option value="tokens">新 token</option></select>
   <span class="pill" id="hud"></span>
 </div>
-<canvas class="viz" id="mx"></canvas>
+<canvas class="viz" id="mx" role="img" aria-label="分类 × 周的强度矩阵。合计与逐行明细见下方表格。"></canvas>
 <p class="hint">悬停任一格看那一周的数。右侧是该行合计。</p>`;
 
   const weeks = A.trend.weeks.filter(w => w.human > 0).map(w => w.w);
@@ -80,18 +82,24 @@ export async function render(host) {
     weeks.forEach((wk, i) => { if (i % step === 0) ctx.fillText(wk.slice(2), labelW + i * cw, padT - 8); });
     rows.forEach((r, ri) => {
       const y = padT + ri * rowH;
-      ctx.fillStyle = css('--fg'); ctx.font = '11px -apple-system, system-ui, sans-serif';
+      const dim = focus && r.key !== focus;
+      ctx.fillStyle = dim ? css('--dim2') : css('--fg');
+      ctx.font = (focus && r.key === focus ? '600 ' : '') + '11px -apple-system, system-ui, sans-serif';
       ctx.fillText(r.key.slice(0, 14), 6, y + rowH * .72);
       weeks.forEach((wk, i) => {
         const v = val(r, i); if (!v) return;
         ctx.fillStyle = topicColor(r.key);
-        ctx.globalAlpha = 0.12 + (v / mx) * 0.88;
+        // 线性映射会把整张矩阵压成一片淡色（最强三位数、多数个位数）；开方拉开中段
+        const a = 0.16 + Math.sqrt(v / mx) * 0.84;
+        ctx.globalAlpha = dim ? a * 0.24 : a;
         ctx.beginPath(); ctx.roundRect(labelW + i * cw + 1, y + 3, Math.max(1, cw - 2), rowH - 6, 4); ctx.fill();
       });
       ctx.globalAlpha = 1;
       ctx.fillStyle = css('--dim2'); ctx.font = '10px -apple-system, system-ui, sans-serif';
       ctx.fillText(metric === 'tokens' ? fmt(r.tokTotal) : String(r.total), w - padR + 6, y + rowH * .72);
     });
+    const hud0 = host.querySelector('#hud');
+    if (hud0 && !cur) hud0.textContent = `${rows.length} 行 × ${weeks.length} 周`;
   };
 
   cv.addEventListener('pointermove', e => {
@@ -108,8 +116,18 @@ export async function render(host) {
     } else { cur = null; hud.textContent = `${rows.length} 行 × ${weeks.length} 周`; }
   });
   cv.addEventListener('pointerleave', () => { cur = null; });
-  cv.addEventListener('click', () => { if (cur && rowMode === 'topic') go('grid2', ''); });
+  // 原来这里 go('grid2') —— grid2 不在 VIEW_LIST，parseHash 会静默落回 overview，
+  // 于是「点矩阵格」= 被传送回总览。对齐 nebula：点格子进那一周的周一。
+  cv.addEventListener('click', () => {
+    if (!cur) return;
+    const [y, n] = cur.week.split('-W').map(Number);
+    const jan4 = new Date(Date.UTC(y, 0, 4));
+    const mon = new Date(jan4);
+    mon.setUTCDate(jan4.getUTCDate() - ((jan4.getUTCDay() || 7) - 1) + (n - 1) * 7);
+    go('day', mon.toISOString().slice(0, 10));
+  });
 
+  host.querySelector('#rowmode').value = rowMode;
   host.querySelector('#rowmode').onchange = e => { rowMode = e.target.value; draw(); };
   host.querySelector('#metric').onchange = e => { metric = e.target.value; draw(); };
   const onR = () => draw();

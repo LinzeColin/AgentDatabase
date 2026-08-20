@@ -21,8 +21,8 @@ ${sec('日历', '每格一天，全历史铺满。切片方式、口径、区间
     <option value="turns">你说话次数</option><option value="input">token 输入(含缓存)</option>
     <option value="hit">缓存命中率</option></select>
 </div>
-<div id="sum"></div>
 <div class="card w6" id="calcard"><div id="cal"></div></div>
+<div id="sum"></div>
 <div id="rest"></div>`;
 
   const ctlslot = host.querySelector('#ctlslot');
@@ -71,7 +71,7 @@ ${sec('日历', '每格一天，全历史铺满。切片方式、口径、区间
     const { sessions, dayset, label } = resolve();
     const agg = D.aggregate(sessions);
     host.querySelector('#sum').innerHTML = bento([
-      { k: '当前切片', v: `<span style="font-size:22px">${esc(label)}</span>`, n: `${dayset.size} 天`, w: 3, tone: 'acc' },
+      { k: '当前切片', v: `${esc(label)}`, size: 'sm', n: `${dayset.size} 天`, w: 3, tone: 'acc' },
       { k: '会话', v: String(agg.n), n: `你说话 ${agg.turns} 次 · 工具 ${agg.tools} 次`, w: 3, alt: true },
       { k: 'token 输入(含缓存)', v: fmt(agg.input_total), n: `命中率 ${rate(agg.hit)}` },
       { k: '未分类', v: String(agg.unclassified), n: '一个关键词都没命中' },
@@ -94,7 +94,7 @@ ${sec('日历', '每格一天，全历史铺满。切片方式、口径、区间
         l.map(iso => {
           const v = valueOf(iso);
           const shown = metric === 'input' ? fmt(v) : metric === 'hit' ? v.toFixed(1) + '%' : String(v);
-          return `<i data-day="${iso}" data-lv="${lv(v)}" ${dayset.has(iso) ? '' : 'data-out="1"'} title="${iso}　${shown}"></i>`;
+          return `<i data-day="${iso}" data-lv="${lv(v)}" ${dayset.has(iso) ? '' : 'data-out="1"'} title="${iso}　${shown}" aria-label="${iso} ${shown}" role="button" tabindex="0"></i>`;
         }).join('')}</div></div>`).join('')}</div>
       <p class="hint" style="margin:14px 0 0">分界 ${[t1, t2, t3].map(v => metric === 'input' ? fmt(v) : v.toFixed(metric === 'hit' ? 1 : 0)).join(' / ')}
       （按你自己的分布取四分位）。淡掉的格子＝不在当前切片内，不是没有数据。</p>`;

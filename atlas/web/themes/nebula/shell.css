@@ -6,7 +6,7 @@
   --rail:238px; --rail-shut:60px;
 }
 :root[data-theme="nebula"][data-mode="dark"]{
-  --bg:#04030c; --fg:#eef0ff; --dim:#a6abd4; --dim2:#6a6f9a;
+  --bg:#04030c; --fg:#eef0ff; --dim:#a6abd4; --dim2:#7b80ad;
   --panel:rgba(14,12,34,.52); --panel2:rgba(22,19,48,.62);
   --line:rgba(150,160,255,.15); --line2:rgba(150,160,255,.07);
   --acc:#8fb8ff; --acc2:#c79bff; --ok:#5ce6b4; --warn:#ffc46b; --bad:#ff7a92;
@@ -16,7 +16,7 @@
 }
 :root[data-theme="nebula"][data-mode="light"]{
   /* 浅色下依然是星云，只是把夜空换成晨雾 —— 不做成"另一个白主题" */
-  --bg:#e9ecfa; --fg:#0e1030; --dim:#464c78; --dim2:#7a80ab;
+  --bg:#e9ecfa; --fg:#0e1030; --dim:#464c78; --dim2:#5a6089;
   --panel:rgba(255,255,255,.72); --panel2:rgba(255,255,255,.86);
   --line:rgba(60,70,170,.16); --line2:rgba(60,70,170,.07);
   --acc:#3b56cc; --acc2:#7b45c9; --ok:#0a7a58; --warn:#9a5b00; --bad:#c02648;
@@ -50,7 +50,7 @@
   flex:1 1 auto;min-height:0;overflow-y:auto}   /* min-height:0 —— 少了它 flex 子项不肯收缩，菜单会压到下面的按钮上 */
 [data-theme="nebula"] .navg{position:relative;padding:1px 0 2px}
 [data-theme="nebula"] .navh{display:flex;align-items:center;gap:10px;padding:7px 12px;cursor:pointer;
-  border-radius:14px;user-select:none;transition:all .35s cubic-bezier(.16,1,.3,1)}
+  border-radius:14px;user-select:none;transition:color .15s,background .15s}
 [data-theme="nebula"] .navh:hover{background:var(--line2)}
 [data-theme="nebula"] .navi{font-size:13px;color:var(--acc);width:16px;text-align:center;flex:none;
   filter:drop-shadow(0 0 6px currentColor)}
@@ -69,7 +69,7 @@
 /* 二级：正常字号、不大写、带连接短线 —— 层级一目了然 */
 [data-theme="nebula"] .navs button{all:unset;cursor:pointer;padding:6px 12px;border-radius:11px;
   font-size:13.5px;color:var(--dim);white-space:nowrap;position:relative;
-  transition:all .3s cubic-bezier(.16,1,.3,1)}
+  transition:color .15s,background .15s,box-shadow .15s}
 [data-theme="nebula"] .navs button::before{content:"";position:absolute;left:-13px;top:50%;width:9px;
   height:1px;background:var(--line)}
 [data-theme="nebula"] .navs button:hover{color:var(--fg);background:var(--line2)}
@@ -140,8 +140,9 @@
   font-size:13.5px;cursor:pointer}
 [data-theme="nebula"] .olabel{color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 [data-theme="nebula"] .otrack{height:10px;border-radius:999px;background:var(--track);overflow:hidden}
-[data-theme="nebula"] .ofill{height:100%;border-radius:999px;box-shadow:0 0 18px -3px currentColor;
-  transition:width .8s cubic-bezier(.16,1,.3,1)}
+[data-theme="nebula"] .ofill{height:100%;width:100%;border-radius:999px;transform-origin:left;
+  box-shadow:0 0 18px -3px currentColor;
+  transition:transform .55s cubic-bezier(.16,1,.3,1)}
 [data-theme="nebula"] .oval{font-variant-numeric:tabular-nums;color:var(--fg);font-size:13px;
   min-width:64px;text-align:right}
 [data-theme="nebula"] .orow:hover .ofill{filter:brightness(1.3)}
@@ -173,7 +174,8 @@
 [data-theme="nebula"] .ctl select,[data-theme="nebula"] .ctl input[type=date]{all:unset;cursor:pointer;
   border:1px solid var(--line);border-radius:999px;padding:6px 15px;font-size:13px;background:var(--panel2)}
 [data-theme="nebula"] .ctl button{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:999px;
-  padding:6px 16px;font-size:13px;color:var(--dim);transition:all .34s cubic-bezier(.16,1,.3,1)}
+  padding:8px 17px;font-size:13px;color:var(--dim);min-height:40px;box-sizing:border-box;
+  transition:color .15s,background .15s,border-color .15s,box-shadow .15s}
 [data-theme="nebula"] .ctl button:hover{color:var(--fg);border-color:var(--acc);box-shadow:0 0 22px -8px var(--acc)}
 [data-theme="nebula"] .ctl button[aria-pressed="true"]{background:var(--acc);color:var(--bg);border-color:var(--acc)}
 [data-theme="nebula"] canvas.viz{width:100%;display:block;border-radius:22px;border:1px solid var(--line);
@@ -201,9 +203,70 @@
 [data-theme="nebula"] .quote{margin-top:9px;padding:12px 16px;border-radius:14px;background:var(--line2);
   border-left:2px solid var(--acc);color:var(--dim);font-size:13.5px;white-space:pre-wrap;
   word-break:break-word;max-height:170px;overflow:auto}
-[data-theme="nebula"] .slab.mach{opacity:.46}
+/* 整卡 opacity 降权会把 --dim2 文字压到 ~2:1。改用虚线边 + 标题降级，对比度不动。 */
+[data-theme="nebula"] .slab.mach{border-style:dashed;background:transparent}
+[data-theme="nebula"] .slab.mach .stitle{color:var(--dim)}
 @media(max-width:880px){
   [data-theme="nebula"] #shell{padding-left:0}
   [data-theme="nebula"] #rail{position:static;width:auto;margin:16px;border-radius:22px}
   [data-theme="nebula"] #stamp,[data-theme="nebula"] #hud{position:static;display:block;margin:0 16px 10px;text-align:left}
+}
+
+/* ══ v0.4.4 布局审计补丁 ══ */
+
+/* P0-1 焦点环。星云用自己的辉光语言，不是套一个通用蓝框。 */
+[data-theme="nebula"] :is(button,select,input,summary,a,[tabindex],[role="button"]):focus-visible{
+  outline:2px solid var(--acc);outline-offset:2px;box-shadow:0 0 18px -6px var(--acc);border-radius:12px}
+
+/* P2-17 */
+[data-theme="nebula"] :is(.ctl button,.navs button,.seg button):active{transform:scale(.97)}
+
+/* P1-10 */
+[data-theme="nebula"] .seg button{padding:8px 0;min-height:40px;box-sizing:border-box}
+/* 星带上一颗点 11px，却是进「一天」的主入口。视觉不动，命中区外扩。 */
+[data-theme="nebula"] .band i{position:relative}
+[data-theme="nebula"] .band i::after{content:"";position:absolute;inset:-6px}
+
+/* P1-12 */
+[data-theme="nebula"] .sub{font-family:var(--disp);font-weight:620;font-size:19px;
+  letter-spacing:-.02em;margin:30px 0 4px;color:var(--fg)}
+[data-theme="nebula"] .sub:first-child{margin-top:8px}
+
+/* P2-13 */
+[data-theme="nebula"] .cv.md{font-size:30px}
+[data-theme="nebula"] .cv.sm{font-size:21px;color:var(--dim)}
+
+[data-theme="nebula"] .orow[role="button"]{cursor:pointer}
+
+/* P2-16 hover 缩放 2 倍会盖住相邻 8 颗点，扫过一排像爆米花 */
+[data-theme="nebula"] .band i:hover{transform:scale(1.35)}
+
+@media(max-width:900px){
+  [data-theme="nebula"] #shell{transition:none}
+  [data-theme="nebula"] :is(.ctl button,.seg button){padding:11px 16px;min-height:44px}
+  [data-theme="nebula"] .band{gap:8px}
+  [data-theme="nebula"] .band i::after{inset:-14px}
+}
+@media(prefers-reduced-motion:reduce){
+  [data-theme="nebula"] *{transition-duration:.01ms !important;animation:none !important}
+  [data-theme="nebula"] .band i:hover{transform:none}
+}
+
+/* 碑拓在网格里占半宽。不复用 .cell —— 那会把两套面板样式叠在一起。 */
+[data-theme="nebula"] .slab.half{grid-column:span 3;margin:0}
+@media(max-width:900px){ [data-theme="nebula"] .slab.half{grid-column:span 6} }
+
+/* 窄屏：收起态只留一条 52px 的横条（品牌 + 折叠钮），展开是一层最高 70vh 的浮层。
+   rail-mobile-bar —— 目的是让 375px 首屏至少出现一张数据卡。 */
+@media(max-width:900px){
+  :root[data-theme="nebula"][data-rail="shut"] #rail{max-height:52px;overflow:hidden;padding-top:8px}
+  /* 收起态下品牌是这条横条上唯一的抓手，桌面端那条「折叠即隐藏品牌」的规则在这里要撤销 */
+  :root[data-theme="nebula"][data-rail="shut"] .brand{opacity:1}
+  /* 3D 展位铭牌在手机上只是噪声：那块信息要靠悬停，手机没有悬停 */
+  [data-theme="nebula"] #hud{display:none}
+  :root[data-theme="nebula"][data-rail="shut"] .brandrow{border-bottom:0;padding-bottom:6px}
+  [data-theme="nebula"] #rail{max-height:70vh;overflow-y:auto}
+  [data-theme="nebula"] .hero h1{font-size:clamp(30px,8.4vw,44px)}
+  [data-theme="nebula"] .hero{margin-bottom:26px}
+  [data-theme="nebula"] main{padding-left:18px;padding-right:18px;padding-top:16px}
 }

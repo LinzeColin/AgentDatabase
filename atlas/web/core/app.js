@@ -8,7 +8,7 @@ export const S = { atlas: null, dayCache: new Map(), theme: 'glass', mode: 'dark
 export const THEMES = [
   ['glass', '琉璃'],
   ['nebula', '星云宇宙'],
-  ['daylight', '白昼'],
+  ['gilt', '鎏金'],
 ];
 
 // 导航：一级 ≤5，每个一级下二级 ≤5，全部在左侧、可折叠。
@@ -83,11 +83,39 @@ export function go(name, arg) { location.hash = '#/' + name + (arg ? '/' + arg :
 // 三套主题的动效性格。这是「完全不一样」里最容易被省掉、也最能被身体感觉到的一半。
 export function motion() {
   return {
-    glass: { d: .62, ease: 'back.out(1.3)', stagger: .05, cap: .55, y: 30, s: .94, blur: 7 },
-    nebula: { d: .80, ease: 'expo.out', stagger: .06, cap: .70, y: 44, s: .90, blur: 10 },
-    daylight: { d: .34, ease: 'power3.out', stagger: .03, cap: .32, y: 14, s: 1, blur: 0 },
+    // 三套的性格差留在 ease / y / blur 三个维度上，不靠把时长拖长。
+    // 时长差 0.15s 身体就感知得到；0.35s 的差价买到的只有「慢」。
+    glass: { d: .45, ease: 'power3.out', stagger: .05, cap: .40, y: 18, s: .97, blur: 0 },
+    nebula: { d: .60, ease: 'expo.out', stagger: .06, cap: .55, y: 28, s: .94, blur: 0 },
+    // 鎏金的性格是「重物落位」：位移小、尾程长、不虚焦（金属不该有景深模糊）。
+    // 琉璃是弹（back.out），星云是飘（expo.out），这套是落下去就不动了。
+    gilt: { d: .52, ease: 'power4.out', stagger: .05, cap: .45, y: 20, s: .985, blur: 0 },
   }[S.theme];
 }
+// 折下的内容不该在 t=0 就把入场演完 —— 没人看见，还让首屏 40+ 个节点同帧起跳。
+// 正规做法是 ScrollTrigger.batch()，但 CSP 是 script-src 'self' 且 vendor 里只有 gsap core，
+// 所以用 IntersectionObserver 复刻同一套语义。视图切走时必须 disconnect，否则观察器越堆越多。
+let enterIO = null, enterWatch = 0;
+const enterPending = new Set();
+
+/** 把还没入场的那批直接给终态。看门狗、切视图、标签页切回来都走这里。 */
+function flushPending() {
+  for (const n of enterPending) {
+    n.style.opacity = ''; n.style.transform = ''; n.style.filter = '';
+    if (enterIO) { try { enterIO.unobserve(n); } catch { /* 节点可能已被移除 */ } }
+  }
+  enterPending.clear();
+}
+
+export function dropEnterObservers() {
+  clearTimeout(enterWatch);
+  flushPending();
+  if (enterIO) { try { enterIO.disconnect(); } catch { /* 已经断了就算了 */ } enterIO = null; }
+}
+
+// 标签页切回来时 IO 可能已经错过了那一拨回调 —— 直接兜底给终态。
+addEventListener('visibilitychange', () => { if (!document.hidden) flushPending(); });
+
 export function enter(sel, host) {
   const g = window.gsap;
   const nodes = [...(host || document).querySelectorAll(sel)];
@@ -110,19 +138,51 @@ export function enter(sel, host) {
   const to = { opacity: 1, y: 0, scale: 1, duration: m.d, ease: m.ease,
     stagger: { amount: total }, clearProps: 'filter,transform,opacity' };
   if (m.blur) to.filter = 'blur(0px)';
-  g.fromTo(nodes, from, to);
+
+  // 首屏那批照旧批量 stagger；折下的逐个挂观察器，滚到了才演。
+  const vh = innerHeight || 800;
+  const above = nodes.filter(n => n.getBoundingClientRect().top < vh);
+  const below = nodes.filter(n => n.getBoundingClientRect().top >= vh);
+  g.fromTo(above.length ? above : nodes, from, to);
+  if (below.length && 'IntersectionObserver' in window) {
+    if (!enterIO) {
+      enterIO = new IntersectionObserver(es => {
+        for (const e of es) {
+          if (!e.isIntersecting) continue;
+          enterIO.unobserve(e.target);
+          enterPending.delete(e.target);
+          const f = e.target.__enterFrom, t = e.target.__enterTo;
+          if (f && t) g.fromTo(e.target, f, { ...t, stagger: 0 });
+        }
+      }, { rootMargin: '0px 0px -8% 0px' });
+    }
+    for (const n of below) {
+      g.set(n, from);
+      n.__enterFrom = from; n.__enterTo = to;
+      enterPending.add(n);
+      enterIO.observe(n);
+    }
+    // 看门狗必须覆盖折下这一批。把 opacity 设成 0 之后如果观察器没回调
+    // （标签页隐藏、IO 被节流、任何意外），内容就永远看不见 ——
+    // 「一片空白」是最坏的失败形态，宁可动画不好看也不能空白。
+    clearTimeout(enterWatch);
+    enterWatch = setTimeout(flushPending, 6000);
+  }
   // 看门狗：无论什么原因动画没跑完，到点强制显示。
   // 「内容永远看不见」是最坏的失败形态，宁可动画不好看也不能空白。
   clearTimeout(nodes.__wd);
-  setTimeout(done, (m.d + total) * 1000 + 400);
+  setTimeout(() => { for (const n of above) { n.style.opacity = ''; n.style.transform = ''; n.style.filter = ''; } },
+    (m.d + total) * 1000 + 400);
 }
 export function countUp(el, to, digits = 0) {
   const g = window.gsap;
   const set = v => { el.textContent = digits ? v.toFixed(digits) : String(Math.round(v)); };
   if (!g || reduced() || document.hidden) return set(to);
   const o = { v: 0 };
-  g.to(o, { v: to, duration: motion().d * 2.2, ease: 'power2.out', onUpdate: () => set(o.v) });
-  setTimeout(() => set(to), motion().d * 2200 + 400);   // 同样的看门狗
+  // 1.76s 的数字滚动已经是「等待」，不是「揭示」。封顶 1 秒。
+  const dur = Math.min(1.0, motion().d * 1.8);
+  g.to(o, { v: to, duration: dur, ease: 'power2.out', onUpdate: () => set(o.v) });
+  setTimeout(() => set(to), dur * 1000 + 400);   // 同样的看门狗
 }
 
 // ── 主题切换：换 CSS、重建外壳、重绘当前视图 ──
@@ -246,11 +306,30 @@ function saveShut() {
 }
 function restoreShut() {
   let shut = [];
-  try { shut = JSON.parse(localStorage.getItem(SHUT) || '[]'); } catch { shut = []; }
+  const raw = localStorage.getItem(SHUT);
+  try { shut = JSON.parse(raw || '[]'); } catch { shut = []; }
+  // 窄屏且用户从没手动开合过：默认全收起。
+  // 实测 375×812 下静态化的左轨高 839px，第一屏第二屏全是菜单，一个数据都看不到。
+  if (raw == null && matchMedia('(max-width:900px)').matches) shut = NAV.map(g => g.id);
   document.querySelectorAll('.navg').forEach(g => {
     if (shut.includes(g.dataset.g)) g.classList.add('shut');
   });
 }
+// 可点的排行条/日历格是 div，不是 <button> —— 换元素会打散网格布局。
+// 折中：给它们 role=button + tabindex，再在这里把回车/空格翻译成点击。
+// 一处加，三套主题的钻取路径同时对键盘打开。
+(function bindKbd() {
+  if (window.__atlasKbd) return;
+  window.__atlasKbd = true;   // atlas:kbd
+  addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const t = e.target;
+    if (!t || t.getAttribute?.('role') !== 'button') return;
+    e.preventDefault();
+    t.click();
+  });
+})();
+
 export function toggleRail() {
   S.railOpen = !S.railOpen;
   document.documentElement.dataset.rail = S.railOpen ? 'open' : 'shut';
@@ -292,6 +371,7 @@ export async function render() {
   renderRail();
   const host = document.getElementById('view');
   if (!host) return;
+  dropEnterObservers();
   if (current && current.dispose) { try { current.dispose(); } catch { /* 视图清理失败不拖垮路由 */ } }
   current = null;
   host.innerHTML = '';
@@ -310,7 +390,12 @@ async function boot() {
     if (THEMES.some(t => t[0] === v.t)) S.theme = v.t;
     if (v.m === 'light' || v.m === 'dark') S.mode = v.m;
   } catch { /* 存坏了就用默认 */ }
-  S.railOpen = localStorage.getItem('atlas.rail.open.v1') !== '0';
+  // 窄屏第一次打开：默认收起。实测 375×812 下摊开的左轨吃掉 480px，
+  // 加上匾额，第一张数据卡落在 833px —— 手机首屏一个数都看不到。
+  const railPref = localStorage.getItem('atlas.rail.open.v1');
+  S.railOpen = railPref == null
+    ? !matchMedia('(max-width:900px)').matches
+    : railPref !== '0';
   document.documentElement.dataset.rail = S.railOpen ? 'open' : 'shut';
 
   try {

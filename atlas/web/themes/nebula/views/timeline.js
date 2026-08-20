@@ -23,7 +23,7 @@ ${hero('光谱', '你的注意力是怎么挪的', `一列＝一周。柱子里�
   <button id="clear">清掉框选</button>
   <span class="pill" id="hud">没框</span>
 </div>
-<canvas class="viz" id="cv"></canvas>
+<canvas class="viz" id="cv" role="img" aria-label="按周的主题成分图。逐周明细见下方表格。"></canvas>
 <p class="hint">一次对话最多算三个主题，所以配比之和可以超过会话数。一个关键词都没对上的算「没认出来」，
   照实留着，不硬塞进某一类。</p>
 <div id="sum"></div>`;
@@ -86,7 +86,7 @@ ${hero('光谱', '你的注意力是怎么挪的', `一列＝一周。柱子里�
     if (drag == null) return;
     const b = colAt(e.clientX); sel = [Math.min(drag, b), Math.max(drag, b)]; draw(); sum();
   });
-  cv.addEventListener('pointerup', () => { drag = null; });
+  cv.addEventListener('pointerup', () => { drag = null; sum(); });   // 松手才补那一次入场与相机飞行
   cv.addEventListener('dblclick', e => {
     const c = cols[colAt(e.clientX)]; if (c) go('day', c.w);
   });
@@ -95,19 +95,19 @@ ${hero('光谱', '你的注意力是怎么挪的', `一列＝一周。柱子里�
     if (!sel || !cols.length) { hud.textContent = '没框'; host.querySelector('#sum').innerHTML = ''; return; }
     const a = cols[sel[0]], b = cols[sel[1]];
     const from = a.w, to = days.filter(d => d.d <= addDays(b.w, 6)).slice(-1)[0]?.d || b.w;
-    flyToDay(from);
+    if (!drag) flyToDay(from);   // 拖动全程每帧飞一次相机是纯噪声，松手才飞
     const list = D.sessions({ kind: 'human', from, to });
     const agg = D.aggregate(list);
     hud.textContent = `${from} → ${to}　${sel[1] - sel[0] + 1} 周　${agg.n} 场`;
     host.querySelector('#sum').innerHTML = grid([
-      { k: '框到的区间', v: `<span style="font-size:21px">${from} → ${to}</span>`,
+      { k: '框到的区间', v: `${from} → ${to}`, size: 'sm',
         n: `${sel[1] - sel[0] + 1} 周`, w: 3, tone: 'acc' },
       { k: '你开口', v: String(agg.n), n: `说话 ${agg.turns} 次 · 用工具 ${agg.tools} 次`, w: 3, alt: true },
       { k: '读进 token', v: fmt(agg.input_total), n: `命中缓存 ${rate(agg.hit)}` },
       { k: '没认出来的', v: String(agg.unclassified), n: '照实留空' },
     ]) + sec('这段时间在做什么')
       + orbit(agg.topics.map(([t, n]) => ({ k: t, v: n, c: topicColor(t), attr: `data-topic="${esc(t)}"` })));
-    enter('.cell, .orow', host);
+    if (!drag) enter('.cell, .orow', host);
   };
 
   function addDays(iso, n) {

@@ -23,7 +23,7 @@ ${tools.length ? warn(`<b>下面这些不是 LLM，本身不产生 token</b> —
   ${tools.map(r => `<b>${esc(r.label)}</b>（${r.sessions} 场）—— ${esc(r.note)}`).join('<br>')}`) : ''}
 
 ${sec('按应用分', '应用＝你手里操作的那个壳。条子的长度是缓存命中率。')}
-<canvas class="viz" id="hbar"></canvas>
+<canvas class="viz" id="hbar" role="img" aria-label="各应用的缓存命中率对照图。逐项明细见下方表格。"></canvas>
 ${drawer('摊开应用明细', table(
   [{ t: '应用' }, { t: '厂商' }, { t: '会话', r: true }, { t: '读进(含缓存)', r: true },
    { t: '写出', r: true }, { t: '命中率', r: true }, { t: '用了哪些模型' }],

@@ -26,7 +26,7 @@ export async function render(host) {
   <button id="reset">重置视角</button>
   <span class="pill" id="hud">节点 ${C.nodes.length} · 边 ${C.edges.length}</span>
 </div>
-<canvas class="viz" id="cv"></canvas>
+<canvas class="viz" id="cv" role="img" aria-label="来源、项目、主题的关联网络图。连得最紧的组合见下方表格。"></canvas>
 <p class="hint">拖动转视角，滚轮推拉，点一个节点进网格。${esc(C.note)}${C.dropped_edges ? `　丢弃弱边 ${C.dropped_edges} 条。` : ''}</p>
 ${warn('<b>颜色只是辅助。</b>三类节点在下面的抽屉里都有名字和度数，不靠颜色也能读出来。')}
 <div id="near"></div>

@@ -22,7 +22,7 @@ ${bento([
 ${warn(`<b>「只聊没交付」不等于白干。</b>那天可能在读、在想、在做仓外的事（Excel、方案、视频都不进 git）。
   但它是「建设 : 交付」最直接的证据 —— 而且是两个互不知情的数据源对出来的。`)}
 ${sec('会话 vs 提交', '上半是会话，下半是提交。')}
-<canvas class="viz" id="cv" height="240"></canvas>
+<canvas class="viz" id="cv" height="240" role="img" aria-label="会话与提交的逐日对照图。逐日明细见下方表格。"></canvas>
 ${sec('按仓')}
 ${orbit((G.repos || []).map(r => ({ k: r.repo, v: r.commits,
   label: `${r.commits} 提交 · ${r.merged}/${r.prs} PR · ${r.releases} Release`,

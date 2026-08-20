@@ -1,6 +1,7 @@
 import { esc, go, enter } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
 import { hero, sec, orbit, slab, drawer, table, warn, pill, state } from '../kit.js';
+import { flyToDay } from '../shell.js';
 
 export async function render(host) {
   const L = D.lessons();
@@ -34,6 +35,10 @@ ${sec('回头又捡起来的项目')}
 ${drawer('摊开', table([{ t: '项目' }, { t: '你开口', r: true }, { t: '起止' }, { t: '谈过上线没有' }],
   L.revisit.map(p => [esc(p.name), String(p.human), `${p.first} → ${p.last}`,
     state(p.shipped ? '通' : '没做')])))}`;
+  host.addEventListener('mouseover', e => {
+    const h = e.target.closest('[data-day]');
+    if (h) flyToDay(h.dataset.day);
+  });
   host.addEventListener('click', e => {
     const d = e.target.closest('[data-day]'); if (d) go('day', d.dataset.day);
   });

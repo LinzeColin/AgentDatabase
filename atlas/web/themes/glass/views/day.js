@@ -24,7 +24,7 @@ export async function render(host, arg) {
   const wd = ['周一','周二','周三','周四','周五','周六','周日'][(new Date(cur + 'T00:00:00Z').getUTCDay() + 6) % 7];
 
   const card = s => `
-<div class="card w6 sess ${s.kind === 'human' ? '' : 'mach'}">
+<div class="card w3 sess ${s.kind === 'human' ? '' : 'mach'}">
   <div class="ck">${hhmm(s.start)}　${esc(s.source)}${s.project ? ' · ' + esc(s.project) : ''}
     ${s.kind === 'fanout' ? ` · <b style="color:var(--warn)">扇出</b>` : s.kind === 'auto' ? ` · <b style="color:var(--warn)">机器</b>` : ''}</div>
   <div style="font-family:var(--disp);font-weight:640;font-size:19px;letter-spacing:-.02em;margin:6px 0 8px">${esc(s.title || '(无标题)')}</div>
@@ -41,13 +41,14 @@ ${bento([
   { k: '你开口', v: String(meta.human), n: `机器 ${meta.n - meta.human} 场`, w: 3, tone: 'acc' },
   { k: '有动静的钟点', v: String(meta.active_hours), n: '不等于工作时长', w: 3, alt: true },
   { k: 'token 输入(含缓存)', v: tk ? fmt(tk.input_total) : '—', n: tk ? `命中率 ${rate(tk.hit_rate)}` : '没有用量数据数据' },
-  { k: '主题', v: `<span style="font-size:20px">${Object.entries(meta.topics).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([t])=>esc(t)).join('、') || '未分类'}</span>`,
+  { k: '主题', v: `${Object.entries(meta.topics).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([t])=>esc(t)).join('、') || '未分类'}`, size: 'sm',
     n: Object.entries(meta.topics).length + ' 类' },
 ])}
-${human.length ? human.map(card).join('') : warn('这一天没有你亲自开口的会话。下面是机器跑的。')}
-${mach.length ? `${sec(`机器跑的 ${mach.length} 场`, '列出来是为了让你能核对「剔掉的是什么」，不是凑数。')}
-  ${mach.slice(0, 24).map(card).join('')}
-  ${mach.length > 24 ? `<p class="hint">另有 ${mach.length - 24} 场同类，未展开。</p>` : ''}` : ''}`;
+${human.length ? `<div class="bento">${human.map(card).join('')}</div>`
+  : warn('这一天没有你亲自开口的会话。下面是机器跑的。')}
+${mach.length ? sec(`机器跑的 ${mach.length} 场`, '列出来是为了让你能核对「剔掉的是什么」，不是凑数。默认收着 —— 67 张同权重的卡是一堵墙。')
+  + drawer(`摊开这 ${mach.length} 场`, `<div class="bento">${mach.slice(0, 24).map(card).join('')}</div>`
+    + (mach.length > 24 ? `<p class="hint">另有 ${mach.length - 24} 场同类，未展开。</p>` : '')) : ''}`;
 
   const st = document.createElement('style');
   st.textContent = `.sess.mach{opacity:.5}

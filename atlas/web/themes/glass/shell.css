@@ -5,7 +5,7 @@
   --disp:-apple-system,"SF Pro Display","Segoe UI",Inter,"PingFang SC",system-ui,sans-serif;
 }
 :root[data-theme="glass"][data-mode="dark"]{
-  --bg:#05060f; --fg:#eef1fb; --dim:#a6adcd; --dim2:#6c7398;
+  --bg:#05060f; --fg:#eef1fb; --dim:#a6adcd; --dim2:#7d84a8;
   --glass:rgba(26,31,54,.46); --glass2:rgba(38,44,74,.4);
   --line:rgba(150,170,255,.16); --line2:rgba(150,170,255,.07);
   --acc:#7cc4ff; --acc2:#b58cff; --ok:#5ce6b4; --warn:#ffc46b; --bad:#ff7a92;
@@ -13,7 +13,7 @@
   --track:rgba(150,170,255,.13);
 }
 :root[data-theme="glass"][data-mode="light"]{
-  --bg:#eaeefb; --fg:#0d1230; --dim:#4b5480; --dim2:#8189b2;
+  --bg:#eaeefb; --fg:#0d1230; --dim:#4b5480; --dim2:#5f6890;
   --glass:rgba(255,255,255,.66); --glass2:rgba(255,255,255,.82);
   --line:rgba(60,80,180,.17); --line2:rgba(60,80,180,.08);
   --acc:#3358d4; --acc2:#7a4bd0; --ok:#0a7a58; --warn:#9a5b00; --bad:#c02648;
@@ -47,7 +47,8 @@
 [data-theme="glass"] .navg{border-radius:16px;padding:2px 0}
 [data-theme="glass"] .navg.on{background:var(--line2)}
 [data-theme="glass"] .navh{display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;
-  color:var(--dim);border-radius:14px;user-select:none;transition:all .3s cubic-bezier(.22,1,.36,1)}
+  color:var(--dim);border-radius:14px;user-select:none;
+  transition:color .15s,background .15s}
 [data-theme="glass"] .navh:hover{color:var(--fg);background:var(--line2)}
 [data-theme="glass"] .navi{font-size:14px;color:var(--acc);width:16px;text-align:center;flex:none}
 [data-theme="glass"] .navl{font-size:13.5px;white-space:nowrap;overflow:hidden}
@@ -60,7 +61,8 @@
   transition:max-height .38s cubic-bezier(.22,1,.36,1)}
 [data-theme="glass"] .navg.shut .navs{max-height:0}
 [data-theme="glass"] .navs button{all:unset;cursor:pointer;padding:6px 12px 6px 38px;border-radius:12px;
-  font-size:13px;color:var(--dim2);white-space:nowrap;transition:all .28s cubic-bezier(.22,1,.36,1)}
+  font-size:13px;color:var(--dim2);white-space:nowrap;
+  transition:color .15s,background .15s}
 [data-theme="glass"] .navs button:hover{color:var(--fg);background:var(--line2)}
 [data-theme="glass"] .navs button[aria-current="true"]{color:var(--fg);background:var(--line);
   box-shadow:inset 0 0 0 1px var(--line)}
@@ -122,7 +124,9 @@
 [data-theme="glass"] .orow:hover .otrack{filter:brightness(1.25)}
 [data-theme="glass"] .olabel{color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 [data-theme="glass"] .otrack{height:10px;border-radius:999px;background:var(--track);overflow:hidden}
-[data-theme="glass"] .ofill{height:100%;border-radius:999px;transition:width .7s cubic-bezier(.22,1,.36,1)}
+/* 宽度动画每帧重排整列轨道条；改 scaleX 只走合成器。 */
+[data-theme="glass"] .ofill{height:100%;width:100%;border-radius:999px;transform-origin:left;
+  transition:transform .5s cubic-bezier(.22,1,.36,1)}
 [data-theme="glass"] .oval{font-variant-numeric:tabular-nums;color:var(--fg);font-size:13px;min-width:56px;text-align:right}
 
 /* 抽屉：表格只出现在这里 */
@@ -154,10 +158,63 @@
 [data-theme="glass"] .ctl select,[data-theme="glass"] .ctl input[type=date]{all:unset;cursor:pointer;
   border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:13px;background:var(--glass2)}
 [data-theme="glass"] .ctl button{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:999px;
-  padding:5px 15px;font-size:13px;color:var(--dim);transition:all .3s cubic-bezier(.22,1,.36,1)}
+  padding:8px 16px;font-size:13px;color:var(--dim);min-height:40px;box-sizing:border-box;
+  transition:color .15s,background .15s,border-color .15s,box-shadow .15s}
 [data-theme="glass"] .ctl button:hover{color:var(--fg);border-color:var(--acc)}
 [data-theme="glass"] .ctl button[aria-pressed="true"]{background:var(--acc);color:var(--bg);border-color:var(--acc)}
 [data-theme="glass"] canvas.viz{width:100%;display:block;border-radius:22px;border:1px solid var(--line);
   background:var(--glass);backdrop-filter:blur(20px);touch-action:none}
 [data-theme="glass"] .lnk{color:var(--acc);cursor:pointer}
 [data-theme="glass"] .lnk:hover{text-decoration:underline}
+
+/* ══ v0.4.4 布局审计补丁 ══
+   逐条对应 layout-audit 的 P0/P1/P2，每条都写清为什么。 */
+
+/* P0-1 焦点环：全站 all:unset 把它抹掉了，键盘走到哪完全看不见。 */
+[data-theme="glass"] :is(button,select,input,summary,a,[tabindex],[role="button"]):focus-visible{
+  outline:2px solid var(--acc);outline-offset:2px;border-radius:14px}
+
+/* P2-17 按下反馈：80–150ms 的窗口里必须有回应，之前一处 :active 都没有。 */
+[data-theme="glass"] :is(.ctl button,.navs button,.seg button):active{transform:scale(.97)}
+
+/* P1-10 触控命中区：.seg 原来只有 29px 高。视觉不变，命中区拉到 40/44。 */
+[data-theme="glass"] .seg button{padding:8px 0;min-height:40px;box-sizing:border-box}
+
+/* P1-12 小节标题：27px 的 .sec 与 14px 的 hint 之间原本没有中间级，
+   于是「①任务复杂度」只能伪装成正文，59 条轨道条读起来一根筋到底。 */
+[data-theme="glass"] .sub{font-family:var(--disp);font-weight:600;font-size:18px;
+  letter-spacing:-.015em;margin:30px 0 4px;color:var(--fg)}
+[data-theme="glass"] .sub:first-child{margin-top:8px}
+
+/* P2-13 数值字阶：原来 9 种 inline font-size 散落各处，没有一个走 token。 */
+[data-theme="glass"] .cv.md{font-size:28px}
+[data-theme="glass"] .cv.sm{font-size:20px;color:var(--dim)}
+
+/* P1-7 可点行的键盘身份 */
+[data-theme="glass"] .orow[role="button"]{cursor:pointer}
+
+/* P2-15 断点穿越时 padding-left 也会走过渡，会捕捉到 238px 的卡帧 */
+@media(max-width:900px){
+  [data-theme="glass"] #shell{transition:none}
+  [data-theme="glass"] :is(.ctl button,.seg button){padding:11px 16px;min-height:44px}
+}
+/* P2-16 CSS 侧此前完全不吃减少动态偏好（JS 侧吃了） */
+@media(prefers-reduced-motion:reduce){
+  [data-theme="glass"] *{transition-duration:.01ms !important;animation:none !important}
+  [data-theme="glass"] .calgrid i:hover{transform:none}
+}
+
+/* 窄屏：收起态只留一条 52px 的横条（品牌 + 折叠钮），展开是一层最高 70vh 的浮层。
+   rail-mobile-bar —— 目的是让 375px 首屏至少出现一张数据卡。 */
+@media(max-width:900px){
+  :root[data-theme="glass"][data-rail="shut"] #rail{max-height:52px;overflow:hidden;padding-top:8px}
+  /* 收起态下品牌是这条横条上唯一的抓手，桌面端那条「折叠即隐藏品牌」的规则在这里要撤销 */
+  :root[data-theme="glass"][data-rail="shut"] .brand{opacity:1}
+  /* 3D 展位铭牌在手机上只是噪声：那块信息要靠悬停，手机没有悬停 */
+  [data-theme="glass"] #hud{display:none}
+  :root[data-theme="glass"][data-rail="shut"] .brandrow{border-bottom:0;padding-bottom:6px}
+  [data-theme="glass"] #rail{max-height:70vh;overflow-y:auto}
+  [data-theme="glass"] .hero h1{font-size:clamp(30px,8.4vw,44px)}
+  [data-theme="glass"] .hero{margin-bottom:26px}
+  [data-theme="glass"] main{padding-left:18px;padding-right:18px;padding-top:16px}
+}

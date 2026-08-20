@@ -91,15 +91,15 @@ ${drawer('摊开成表', table(
 
   const st = document.createElement('style');
   st.textContent = `
-    [data-theme="daylight"] .smwrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(216px,1fr));
+    [data-theme="gilt"] .smwrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(216px,1fr));
       border-top:1px solid var(--line)}
-    [data-theme="daylight"] .sm{margin:0;padding:12px 14px 10px;border-right:1px solid var(--hair);
+    [data-theme="gilt"] .sm{margin:0;padding:12px 14px 10px;border-right:1px solid var(--hair);
       border-bottom:1px solid var(--hair);cursor:pointer}
-    [data-theme="daylight"] .sm:hover{background:var(--track)}
-    [data-theme="daylight"] .sm figcaption{display:flex;justify-content:space-between;align-items:baseline;
+    [data-theme="gilt"] .sm:hover{background:var(--track)}
+    [data-theme="gilt"] .sm figcaption{display:flex;justify-content:space-between;align-items:baseline;
       font-size:12px;margin-bottom:8px}
-    [data-theme="daylight"] .sm figcaption span{font-family:var(--mono);font-size:11px;color:var(--dim2)}
-    [data-theme="daylight"] .sm canvas{width:100%;display:block}`;
+    [data-theme="gilt"] .sm figcaption span{font-family:var(--mono);font-size:11px;color:var(--dim2)}
+    [data-theme="gilt"] .sm canvas{width:100%;display:block}`;
   host.appendChild(st);
 
   const onR = () => draw();

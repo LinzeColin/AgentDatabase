@@ -8,8 +8,9 @@ export async function render(host) {
   const modeOrder = ['指派', '反馈环', '迭代', '学习', '校验', '未归类'];
   const MODE_COL = { '指派': '#5ce6b4', '反馈环': '#2fae86', '迭代': '#7cc4ff', '学习': '#b58cff', '校验': '#63d2ff', '未归类': '#5a6480' };
   const css = k => cssVar(k);
-  const bands = o => orbit((o.bands || Object.keys(o.counts)).filter(b => o.counts[b])
-    .map(b => ({ k: b, v: o.counts[b], label: `${o.counts[b]}　${pct(o.counts[b] / N)}`, c: 'var(--acc)' })));
+  // 五组原语共 59 条轨道条，同色同宽读起来是一堵墙。按组换色断开同质感。
+  const bands = (o, c) => orbit((o.bands || Object.keys(o.counts)).filter(b => o.counts[b])
+    .map(b => ({ k: b, v: o.counts[b], label: `${o.counts[b]}　${pct(o.counts[b] / N)}`, c: c || 'var(--acc)' })));
 
   host.innerHTML = `
 ${sec('经济指数', esc(E.framework))}
@@ -20,19 +21,19 @@ ${bento([
   { k: '中位加速', v: P.complexity.speedup_median ? P.complexity.speedup_median + '×' : '说不准', n: `能算的 ${P.complexity.speedup_n} 场` },
   { k: '领域集中度', v: E.concentration.domain_hhi ?? '说不准', n: 'HHI 0 摊开 · 1 全压一件事' },
 ])}
-<canvas class="viz" id="donut" height="250"></canvas>
+<canvas class="viz" id="donut" height="250" role="img" aria-label="协作模式与作息节律图。判据与逐行明细见下方表格。"></canvas>
 ${drawer('五种模式的判据（AEI 原定义）', table([{ t: '模式' }, { t: 'EN' }, { t: '归属' }, { t: '判据' }],
   modeOrder.filter(m => E.modes[m]).map(m =>
     [`<b>${esc(m)}</b>`, esc(E.mode_defs[m].en), esc(E.mode_defs[m].group), esc(E.mode_defs[m].desc)])))}
 
 ${sec('五个经济原语', 'AEI 的骨架。每一项的口径都写在下面，做不到的在最后单独列。')}
-<p class="hint">① 任务复杂度 —— ${esc(P.complexity.note)}</p>${bands(P.complexity)}
-<p class="hint" style="margin-top:24px">② 技能层级 —— ${esc(P.skill.note)}</p>${bands(P.skill)}
-<p class="hint" style="margin-top:24px">③ 用途</p>${bands({ counts: P.use_case.counts, bands: ['工作', '学习', '个人'] })}
-<p class="hint" style="margin-top:24px">④ AI 自主度 —— ${esc(P.autonomy.note)}</p>
+<div class="sub">① 任务有多难</div><p class="hint">${esc(P.complexity.note)}</p>${bands(P.complexity, 'var(--acc)')}
+<div class="sub">② 用到哪一层本事</div><p class="hint">${esc(P.skill.note)}</p>${bands(P.skill, 'var(--acc2)')}
+<div class="sub">③ 拿来干嘛</div>${bands({ counts: P.use_case.counts, bands: ['工作', '学习', '个人'] }, 'var(--ok)')}
+<div class="sub">④ 放手到什么程度</div><p class="hint">${esc(P.autonomy.note)}</p>
 ${orbit(Object.entries(P.autonomy.counts).map(([k, v]) =>
   ({ k: P.autonomy.labels[k] || k, v, label: `${v}　${pct(v / N)}`, c: 'var(--acc2)' })))}
-<p class="hint" style="margin-top:24px">⑤ 任务成功 —— ${esc(P.success.note)}</p>${bands(P.success)}
+<div class="sub">⑤ 到底做成了没有</div><p class="hint">${esc(P.success.note)}</p>${bands(P.success, 'var(--warn)')}
 
 ${sec('领域：碰过的比例与真做成的比例率', '真做成的比例率 = 碰过的比例 × 成功率。AEI 用它区分「碰过」与「真的做成了」。')}
 ${orbit(E.domains.map(r => ({ k: r.domain, v: r.coverage,
@@ -57,7 +58,7 @@ ${orbit(E.context.rows.slice(0, 14).map(r => ({ k: r.context, v: r.n,
   label: `${r.n} 场　${fmt(r.tokens)} 新token`, c: 'var(--acc)' })))}
 
 ${sec('Cadence', esc(E.cadence.note))}
-<canvas class="viz" id="cad" height="210"></canvas>
+<canvas class="viz" id="cad" height="210" role="img" aria-label="协作模式与作息节律图。判据与逐行明细见下方表格。"></canvas>
 
 ${sec('转换轨迹', esc(E.transition.note))}
 ${orbit(E.transition.drift.map(x => ({ k: x.domain, v: Math.abs(x.delta) * 1000,
