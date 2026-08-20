@@ -23,14 +23,23 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import pathlib
-import shutil
 import sys
 import time
 
-GAME_ZH = {"genshin": "原神", "hsr": "崩铁", "zzz": "绝区零"}
+GAME_ZH = {"genshin": "原神", "hsr": "崩铁", "zzz": "绝区零", "wuwa": "鸣潮"}
+
+
+def digest(path: pathlib.Path) -> str:
+    """内容摘要。SMB 上「返回成功」不等于「数据落盘」，只有读回来比对算数。"""
+    hasher = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(4 * 1024 * 1024), b""):
+            hasher.update(chunk)
+    return hasher.hexdigest()
 
 
 def copy_verified(source: pathlib.Path, target: pathlib.Path, *, tries: int = 4) -> str:
@@ -42,8 +51,11 @@ def copy_verified(source: pathlib.Path, target: pathlib.Path, *, tries: int = 4)
     overrun, not broken. So a failure here is a reason to wait and try again,
     not a reason to give up on the file.
     """
+    # 只比大小是不够的：2026-08-20 全量复查发现 614 张归档里 376 张
+    # 「大小完全正确、内容全是 0」，而这个 skip 判据把它们一律当成已完成，
+    # 于是每次重跑都跳过，坏了一个月也不会被发现。要比内容。
     try:
-        if target.exists() and target.stat().st_size == source.stat().st_size:
+        if target.exists() and digest(target) == digest(source):
             return "skipped"
     except OSError:
         pass
@@ -53,7 +65,20 @@ def copy_verified(source: pathlib.Path, target: pathlib.Path, *, tries: int = 4)
             # Copy to a sidecar then rename, so an interrupted transfer never
             # leaves a half-written file the next run mistakes for complete.
             staging = target.with_name(target.name + ".part")
-            shutil.copyfile(source, staging)
+            # 不要用 shutil.copyfile：macOS 上它走 fcopyfile(clone)，在 smbfs 上
+            # 写出一个尺寸完全正确、内容全是 0 的文件，并且**返回成功**。
+            # 376 张空壳就是这么来的。
+            want = digest(source)
+            with open(source, "rb") as reader, open(staging, "wb") as writer:
+                for chunk in iter(lambda: reader.read(4 * 1024 * 1024), b""):
+                    writer.write(chunk)
+                writer.flush()
+                os.fsync(writer.fileno())
+            if digest(staging) != want:
+                staging.unlink(missing_ok=True)
+                raise OSError("写完读回来对不上（SMB 静默写零）")
+            if target.exists():
+                target.unlink()          # SMB 上覆盖同名的 rename 会报 EIO
             staging.replace(target)
             return "copied"
         except Exception as error:
