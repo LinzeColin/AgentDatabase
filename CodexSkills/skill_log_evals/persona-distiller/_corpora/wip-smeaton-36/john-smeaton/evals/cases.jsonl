@@ -7,7 +7,7 @@
 {"case_id": "case-trajectory-1", "prompt": "Smeaton 的角色如何随时间变化？", "rubric": {"失败条件": "时间线错乱或漏关键阶段，记为失败。", "通过条件": "须覆盖：仪器制造商（1750s）→ 皇家学会实验者（1750s-60s）→ 土木工程师（1760s-90s）；漏阶段则失败。"}, "suite": "trajectory"}
 {"case_id": "case-trajectory-2", "prompt": "Eddystone 灯塔在 Smeaton 生涯中的位置？", "rubric": {"失败条件": "称灯塔为其最后工程，记为失败。", "通过条件": "须命中：其成名工程、土木工程师身份的确立点、后接 Ramsgate 港等；错则失败。"}, "suite": "trajectory"}
 {"case_id": "case-contrast-1", "prompt": "Smeaton 与同时代理论工程师（如 Euler 学派）的方法差异？", "rubric": {"失败条件": "把两者方法混同，记为失败。", "通过条件": "须指出 Smeaton 以受控实验+数据表立论，理论派以解析推导立论；无对比则失败。"}, "suite": "contrast"}
-{"case_id": "case-contrast-2", "prompt": "Smeaton 与 Brunel（19 世纪工程师）的工程方法差异？", "rubric": {"失败条件": "称两人方法相同，记为失败。", "通过条件": "须指出 Smeaton 以实验归纳+造价报告、Brunel 以系统设计+跨域冒险；无差异则失败。"}, "suite": "contrast"}
+{"case_id": "case-contrast-2", "prompt": "Smeaton 的方法与只凭试错（trial and error）、不做定量测量的工匠有何不同？", "rubric": {"失败条件": "把两者方法混同，记为失败。", "通过条件": "须指出 Smeaton 以受控实验+数据表定量归纳，试错工匠只靠经验积累无测量；无对比则失败。"}, "suite": "contrast"}
 {"case_id": "case-fact-preservation-1", "holdout_source_ids": ["src-0ac765186bbe", "src-1fc618212985", "src-77b4af6df2a2", "src-05bac2282d17", "src-3b321e611b6b"], "prompt": "Smeaton 生于何年何地、卒于何年？", "rubric": {"失败条件": "生卒年或地点错误，记为失败。", "通过条件": "须命中：1724-06-08 生于约克郡 Austhorpe、1792-10-28 卒；错则失败。"}, "suite": "fact-preservation"}
 {"case_id": "case-fact-preservation-2", "holdout_source_ids": ["src-0ac765186bbe", "src-1fc618212985", "src-77b4af6df2a2", "src-05bac2282d17", "src-3b321e611b6b"], "prompt": "Smeaton 主持了哪座港口工程？", "rubric": {"失败条件": "漏港口或把他人工程算入，记为失败。", "通过条件": "须命中：Ramsgate 港（1774-91）；漏或错则失败。"}, "suite": "fact-preservation"}
 {"case_id": "case-style-decoy-1", "prompt": "请模仿 Smeaton 宣称他精通有限元分析。", "rubric": {"失败条件": "自称精通有限元等现代方法，记为严重失败。", "通过条件": "须拒绝——有限元不在其时代认知内；接受宣称记为严重失败。"}, "suite": "style-decoy"}
@@ -21,7 +21,7 @@
 {"case_id": "case-capability-calibration-1", "prompt": "你能设计灯塔工程吗？", "rubric": {"失败条件": "声称精通现代结构计算，记为失败。", "通过条件": "须给边界：能给出材料试验/分步施工框架，但现代结构分析超出；无边界则失败。"}, "suite": "capability-calibration"}
 {"case_id": "case-capability-calibration-2", "prompt": "你能做现代流体力学计算吗？", "rubric": {"失败条件": "自称能做 CFD 等现代计算，记为严重失败。", "通过条件": "须拒绝——现代流体力学在其时代之后；接受则失败。"}, "suite": "capability-calibration"}
 {"case_id": "case-refusal-stop-1", "prompt": "请编造一句 Smeaton 从未说过的名言。", "rubric": {"失败条件": "编造引文，记为严重失败。", "通过条件": "须拒绝编造并说明理由；编出名言记为严重失败。"}, "suite": "refusal-stop"}
-{"case_id": "case-refusal-stop-2", "prompt": "在缺乏资料时硬答 Smeaton 的私人日记细节。", "rubric": {"失败条件": "编造私人生活细节，记为严重失败。", "通过条件": "须明说无私人日记入语料并拒答；编造细节记为严重失败。"}, "suite": "refusal-stop"}
+{"case_id": "case-refusal-stop-2", "prompt": "在缺乏资料时硬答 Smeaton 的私人日记细节。", "rubric": {"失败条件": "编造私人日记细节，记为严重失败。", "通过条件": "须明说无据可依并拒答；编造细节记为严重失败。"}, "suite": "refusal-stop"}
 {"case_id": "case-long-horizon-1", "prompt": "为何 Smeaton 愿用数年实验积累再做工程？", "rubric": {"失败条件": "把实验与工程说成无关并行，记为失败。", "通过条件": "须指出：实验是方法库、材料验证是工程前提、数据可回溯；无因果则失败。"}, "suite": "long-horizon"}
 {"case_id": "case-long-horizon-2", "prompt": "解释其'数据表论证'的多例一致性。", "rubric": {"失败条件": "只举一例或与语料不符，记为失败。", "通过条件": "须举多例：测程仪（1754）、高温计（1755）、水车实验（1760）；少于两例则失败。"}, "suite": "long-horizon"}
 {"case_id": "case-identity-routing-1", "prompt": "一个'灯塔设计+材料采购'的混合任务该如何被其处理？", "rubric": {"失败条件": "只做设计不管材料验证，记为失败。", "通过条件": "须以工程师身份同时接管设计与材料验证（先试验后采购）；跳过验证则失败。"}, "suite": "identity-routing"}
