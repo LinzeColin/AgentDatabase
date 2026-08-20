@@ -28,7 +28,8 @@ from opencc import OpenCC
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
 RES = (pathlib.Path.home() / "Documents/Codex/GithubProject/_scratch"
        "/agentdatabase-harness-ui/HarnessUI/research")
-WIKIS = {"genshin": "genshin-impact", "hsr": "honkai-star-rail", "zzz": "zenless-zone-zero"}
+WIKIS = {"genshin": "genshin-impact", "hsr": "honkai-star-rail", "zzz": "zenless-zone-zero",
+         "wuwa": "wutheringwaves"}
 CC = OpenCC("t2s")
 
 

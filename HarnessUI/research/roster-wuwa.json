@@ -1,8 +1,11 @@
 {
  "game": "wuwa",
  "game_zh": "鸣潮",
+ "wiki": "wutheringwaves",
+ "kind": "female-playable",
+ "count": 43,
  "source": "wutheringwaves.fandom.com Category:Female Resonators",
- "fetched": "2026-08-20",
+ "collected": "2026-08-20",
  "characters": [
   {
    "id": "aemeath",
@@ -16,7 +19,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "augusta",
@@ -30,12 +33,12 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "baizhi",
    "name_en": "Baizhi",
-   "name_zh": null,
+   "name_zh": "白芷",
    "game": "wuwa",
    "game_zh": "鸣潮",
    "wiki_page": "Baizhi",
@@ -44,7 +47,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "buling",
@@ -58,7 +61,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "camellya",
@@ -72,7 +75,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "cantarella",
@@ -86,7 +89,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "carlotta",
@@ -100,7 +103,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "cartethyia",
@@ -114,7 +117,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "changli",
@@ -128,7 +131,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "chisa",
@@ -142,12 +145,12 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "chixia",
    "name_en": "Chixia",
-   "name_zh": null,
+   "name_zh": "炽霞",
    "game": "wuwa",
    "game_zh": "鸣潮",
    "wiki_page": "Chixia",
@@ -156,7 +159,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "ciaccona",
@@ -170,7 +173,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "danjin",
@@ -184,7 +187,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "denia",
@@ -198,7 +201,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "encore",
@@ -212,7 +215,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "galbrena",
@@ -226,7 +229,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "hiyuki",
@@ -240,7 +243,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "hsin",
@@ -254,7 +257,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "iuno",
@@ -268,12 +271,12 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "jianxin",
    "name_en": "Jianxin",
-   "name_zh": null,
+   "name_zh": "鉴心",
    "game": "wuwa",
    "game_zh": "鸣潮",
    "wiki_page": "Jianxin",
@@ -282,7 +285,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "jinhsi",
@@ -296,7 +299,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "lucilla",
@@ -310,7 +313,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "lucy",
@@ -324,12 +327,12 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "lumi",
    "name_en": "Lumi",
-   "name_zh": null,
+   "name_zh": "灯灯",
    "game": "wuwa",
    "game_zh": "鸣潮",
    "wiki_page": "Lumi",
@@ -338,7 +341,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "lynae",
@@ -352,7 +355,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "mornye",
@@ -366,7 +369,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "phoebe",
@@ -380,7 +383,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "qingxiao",
@@ -394,7 +397,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "rebecca",
@@ -408,12 +411,12 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "roccia",
    "name_en": "Roccia",
-   "name_zh": null,
+   "name_zh": "洛可可",
    "game": "wuwa",
    "game_zh": "鸣潮",
    "wiki_page": "Roccia",
@@ -422,12 +425,12 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "sanhua",
    "name_en": "Sanhua",
-   "name_zh": null,
+   "name_zh": "散华",
    "game": "wuwa",
    "game_zh": "鸣潮",
    "wiki_page": "Sanhua",
@@ -436,7 +439,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "shorekeeper",
@@ -450,7 +453,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "sigrika",
@@ -464,7 +467,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "suisui",
@@ -478,7 +481,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "suoming",
@@ -492,7 +495,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "taoqi",
@@ -506,12 +509,12 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "verina",
    "name_en": "Verina",
-   "name_zh": null,
+   "name_zh": "维里奈",
    "game": "wuwa",
    "game_zh": "鸣潮",
    "wiki_page": "Verina",
@@ -520,12 +523,12 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "yangyang",
    "name_en": "Yangyang",
-   "name_zh": null,
+   "name_zh": "秧秧",
    "game": "wuwa",
    "game_zh": "鸣潮",
    "wiki_page": "Yangyang",
@@ -534,7 +537,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "yangyang-xuanling",
@@ -548,7 +551,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "yinlin",
@@ -562,12 +565,12 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "youhu",
    "name_en": "Youhu",
-   "name_zh": null,
+   "name_zh": "釉瑚",
    "game": "wuwa",
    "game_zh": "鸣潮",
    "wiki_page": "Youhu",
@@ -576,7 +579,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "zani",
@@ -590,12 +593,12 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   },
   {
    "id": "zhezhi",
    "name_en": "Zhezhi",
-   "name_zh": null,
+   "name_zh": "折枝",
    "game": "wuwa",
    "game_zh": "鸣潮",
    "wiki_page": "Zhezhi",
@@ -604,7 +607,7 @@
    "lora": null,
    "current_version": null,
    "versions": [],
-   "refs_status": "none"
+   "refs_status": "ok"
   }
  ]
 }

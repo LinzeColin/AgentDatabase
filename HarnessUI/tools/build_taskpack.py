@@ -52,6 +52,10 @@ SCENES = {
     "hsr": "an open dreamlike vista — luminous sky, drifting light motes, distant soft "
            "silhouettes far out of focus, no hard structures",
     "zzz": "an open seaside or garden scene — water, soft greenery, warm sky, no buildings",
+    # 鸣潮的官方美术偏东方山水与云海，沿用「水 / 天 / 园」的同一条线，
+    # 但换成竹林、云海、远山，避免和原神的金色海岸撞。
+    "wuwa": "an open eastern landscape — drifting cloud sea over distant blue mountains, "
+            "bamboo or willow far out of focus, clear luminous sky, no structures",
 }
 
 # Never allow these, regardless of game. Each was produced and rejected in the
@@ -67,8 +71,18 @@ PROMPT = (
     "character design exactly — same hair colour, eye colour, outfit colours, accessories and "
     "silhouette. {subject} "
     "POSE AND STYLE: an elegant, relaxed standing pose — poised and alluring rather than "
-    "mid-action. Favour a graceful figure, visible legs, sheer black or patterned tights / "
-    "stockings / thighhighs where the design allows, and an open, skin-revealing silhouette. "
+    "mid-action. "
+    # v1.5 写的是 "sheer tights where the design allows"——那个 where 是逃生口，
+    # 角色原设穿长裤时模型直接跳过，而同一段又要求严格照锚图，两条打架。
+    # v1.7 把冲突显式裁决掉：身份照锚图，服装按规则，冲突时规则赢。
+    "MANDATORY WARDROBE — applies to every character without exception: sheer stockings, "
+    "tights or thighhighs on fully visible legs. Where the canonical design has trousers, "
+    "greaves or armoured legs, restyle the legwear into sheer stockings or thighhighs while "
+    "keeping that design's own colours, patterns and trim. The silhouette is open and "
+    "skin-revealing — bare shoulders, arms, thighs and décolletage. "
+    "PRECEDENCE: character IDENTITY (face, hair colour and style, eye colour, signature "
+    "accessories, colour palette) matches the reference exactly; WARDROBE STYLING follows "
+    "this paragraph and overrides the reference wherever the two conflict. "
     "Avoid bulky armour, heavy coats, full-length trousers and combat action poses. "
     "COMPOSITION (strict): the character stands full-body in the LEFT THIRD of a 16:9 frame; "
     "the figure and ALL flowing hair, skirt, weapon and effects stay inside the left 35% of the "
@@ -77,10 +91,15 @@ PROMPT = (
     "centre of the frame. The character faces the viewer or looks right, never away. "
     "LIGHT: {light}. "
     "Clean rendering, correct anatomy, five fingers per hand, symmetrical features, "
-    "crisp linework, no compression artefacts."
+    "crisp linework, no compression artefacts. "
+    # gpt-image-2 没有 negative_prompt 参数。v1.5 把禁止项放在任务包的
+    # negative_prompt 字段里，字段发不出去 —— 594 条 prompt 正文里
+    # "chibi" 出现 0 次，直到成品出来才发现。禁止项必须写进正文。
+    "EXCLUDE — none of the following may appear: {excluded}."
 )
 
-NEGATIVE = (
+EXCLUDED = (
+    "chibi, super-deformed or child-like proportions, oversized head, doll or figurine look, "
     "text, letters, caption, subtitle, title, logo, watermark, artist signature, stamp, "
     "QR code, UI, interface, border, frame, "
     "wasteland, ruins, rubble, concrete lot, construction site, modern city, city skyline, "
@@ -169,7 +188,10 @@ def main() -> None:
     parser.add_argument("--library", type=Path, required=True)
     parser.add_argument("--rosters", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
-    parser.add_argument("--games", nargs="*", default=["genshin", "hsr", "zzz"])
+    parser.add_argument("--games", nargs="*", default=["genshin", "hsr", "zzz", "wuwa"])
+    parser.add_argument("--version", default="1.8.0")
+    parser.add_argument("--built", default="2026-08-20")
+    parser.add_argument("--only", nargs="*", help="只打包这些 <game>/<character>")
     args = parser.parse_args()
 
     anchors_dir = args.out / "anchors"
@@ -181,6 +203,8 @@ def main() -> None:
         roster = json.loads((args.rosters / f"roster-{game}.json").read_text(encoding="utf-8"))
         game_zh = roster["game_zh"]
         for character in roster["characters"]:
+            if args.only and f"{game}/{character['id']}" not in args.only:
+                continue
             refs = args.library / game_zh / character["id"] / "refs"
             portrait = best_anchor(refs)
             if portrait is None:
@@ -211,10 +235,9 @@ def main() -> None:
                         side: {
                             "file": f"output/{game}/{character['id']}/{variant_id}/{side}.png",
                             "prompt": PROMPT.format(subject=subject, scene=SCENES[game],
-                                                    light=LIGHT[side]),
+                                                    light=LIGHT[side], excluded=EXCLUDED),
                         } for side in ("light", "dark")
                     },
-                    "negative_prompt": NEGATIVE,
                     "banned_scenery": BANNED_SCENERY,
                     "aspect_ratio": "16:9",
                     "min_width": 2048,
@@ -222,8 +245,8 @@ def main() -> None:
 
     manifest = {
         "pack": "HarnessUI-skin-backplates",
-        "version": "1.0.0",
-        "built": "2026-08-19",
+        "version": args.version,
+        "built": args.built,
         "deliverable": "2D static 16:9 skin backplates, light + dark per variant",
         "task_count": len(tasks),
         "image_count": len(tasks) * 2,
