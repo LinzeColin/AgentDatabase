@@ -1,0 +1,1327 @@
+{
+ "pack_version": "1.8.0",
+ "model": "gpt-image-2",
+ "size": "3840x2160",
+ "rounds": 2,
+ "spend_usd": 6.54,
+ "accepted": 94,
+ "total": 94,
+ "units": [
+  {
+   "task": "genshin/vodyanitsa/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.498,
+    "right_edge": 5.5,
+    "spill": 0.394
+   },
+   "fails": []
+  },
+  {
+   "task": "genshin/vodyanitsa/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.795,
+    "right_edge": 5.6,
+    "spill": 0.332
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/pearl/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.309,
+    "right_edge": 3.1,
+    "spill": 0.263
+   },
+   "fails": []
+  },
+  {
+   "task": "hsr/pearl/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.793,
+    "right_edge": 3.5,
+    "spill": 0.24
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/aemeath/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.425,
+    "right_edge": 4.0,
+    "spill": 0.222
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/aemeath/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.841,
+    "right_edge": 4.8,
+    "spill": 0.324
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/augusta/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.372,
+    "right_edge": 4.1,
+    "spill": 0.228
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/augusta/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.754,
+    "right_edge": 4.7,
+    "spill": 0.296
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/baizhi/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.377,
+    "right_edge": 3.7,
+    "spill": 0.298
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/baizhi/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.743,
+    "right_edge": 4.0,
+    "spill": 0.311
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/buling/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.367,
+    "right_edge": 2.3,
+    "spill": 0.13
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/buling/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.753,
+    "right_edge": 4.2,
+    "spill": 0.328
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/camellya/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.32,
+    "right_edge": 3.2,
+    "spill": 0.287
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/camellya/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.74,
+    "right_edge": 4.1,
+    "spill": 0.226
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/cantarella/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.412,
+    "right_edge": 3.4,
+    "spill": 0.296
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/cantarella/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.778,
+    "right_edge": 3.6,
+    "spill": 0.253
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/carlotta/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.366,
+    "right_edge": 3.5,
+    "spill": 0.193
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/carlotta/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.723,
+    "right_edge": 4.9,
+    "spill": 0.3
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/cartethyia/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.303,
+    "right_edge": 3.1,
+    "spill": 0.188
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/cartethyia/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.735,
+    "right_edge": 5.1,
+    "spill": 0.3
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/changli/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.354,
+    "right_edge": 2.6,
+    "spill": 0.158
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/changli/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.81,
+    "right_edge": 3.2,
+    "spill": 0.173
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/chisa/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.374,
+    "right_edge": 3.6,
+    "spill": 0.332
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/chisa/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.753,
+    "right_edge": 3.3,
+    "spill": 0.183
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/chixia/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.353,
+    "right_edge": 3.0,
+    "spill": 0.219
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/chixia/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.708,
+    "right_edge": 3.8,
+    "spill": 0.257
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/ciaccona/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.443,
+    "right_edge": 4.0,
+    "spill": 0.282
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/ciaccona/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.785,
+    "right_edge": 3.4,
+    "spill": 0.314
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/danjin/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.385,
+    "right_edge": 3.9,
+    "spill": 0.356
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/danjin/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.765,
+    "right_edge": 3.5,
+    "spill": 0.27
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/denia/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.427,
+    "right_edge": 3.7,
+    "spill": 0.223
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/denia/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.739,
+    "right_edge": 3.8,
+    "spill": 0.235
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/encore/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.401,
+    "right_edge": 3.2,
+    "spill": 0.306
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/encore/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.76,
+    "right_edge": 3.2,
+    "spill": 0.188
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/galbrena/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.383,
+    "right_edge": 2.7,
+    "spill": 0.175
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/galbrena/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.696,
+    "right_edge": 3.3,
+    "spill": 0.215
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/hiyuki/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.354,
+    "right_edge": 4.8,
+    "spill": 0.324
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/hiyuki/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.721,
+    "right_edge": 4.2,
+    "spill": 0.218
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/hsin/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.435,
+    "right_edge": 3.6,
+    "spill": 0.192
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/hsin/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.795,
+    "right_edge": 4.5,
+    "spill": 0.246
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/iuno/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.368,
+    "right_edge": 5.9,
+    "spill": 0.359
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/iuno/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.736,
+    "right_edge": 4.5,
+    "spill": 0.236
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/jianxin/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.322,
+    "right_edge": 4.7,
+    "spill": 0.509
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/jianxin/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.751,
+    "right_edge": 3.8,
+    "spill": 0.24
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/jinhsi/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.323,
+    "right_edge": 4.8,
+    "spill": 0.377
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/jinhsi/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.808,
+    "right_edge": 3.6,
+    "spill": 0.278
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/jinhsi/peach-blossom",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.399,
+    "right_edge": 2.9,
+    "spill": 0.18
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/jinhsi/peach-blossom",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.84,
+    "right_edge": 3.9,
+    "spill": 0.257
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/lucilla/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.317,
+    "right_edge": 3.3,
+    "spill": 0.228
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/lucilla/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.759,
+    "right_edge": 3.7,
+    "spill": 0.217
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/lucy/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.343,
+    "right_edge": 2.7,
+    "spill": 0.298
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/lucy/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.704,
+    "right_edge": 3.1,
+    "spill": 0.27
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/lumi/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.389,
+    "right_edge": 3.8,
+    "spill": 0.233
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/lumi/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.776,
+    "right_edge": 3.1,
+    "spill": 0.184
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/lynae/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.384,
+    "right_edge": 4.3,
+    "spill": 0.395
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/lynae/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.805,
+    "right_edge": 3.8,
+    "spill": 0.229
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/mornye/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.377,
+    "right_edge": 5.3,
+    "spill": 0.454
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/mornye/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.776,
+    "right_edge": 4.4,
+    "spill": 0.358
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/phoebe/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.417,
+    "right_edge": 3.3,
+    "spill": 0.135
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/phoebe/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.807,
+    "right_edge": 3.2,
+    "spill": 0.256
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/qingxiao/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.483,
+    "right_edge": 4.5,
+    "spill": 0.345
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/qingxiao/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.791,
+    "right_edge": 4.7,
+    "spill": 0.32
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/rebecca/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.36,
+    "right_edge": 3.0,
+    "spill": 0.318
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/rebecca/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.74,
+    "right_edge": 3.2,
+    "spill": 0.311
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/roccia/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.419,
+    "right_edge": 4.1,
+    "spill": 0.346
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/roccia/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.709,
+    "right_edge": 4.4,
+    "spill": 0.281
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/sanhua/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.395,
+    "right_edge": 3.3,
+    "spill": 0.324
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/sanhua/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.803,
+    "right_edge": 4.7,
+    "spill": 0.442
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/sanhua/exorcistic-adjuration",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.433,
+    "right_edge": 3.4,
+    "spill": 0.259
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/sanhua/exorcistic-adjuration",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.715,
+    "right_edge": 3.1,
+    "spill": 0.216
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/shorekeeper/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.357,
+    "right_edge": 4.0,
+    "spill": 0.427
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/shorekeeper/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.754,
+    "right_edge": 4.1,
+    "spill": 0.492
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/sigrika/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.408,
+    "right_edge": 3.8,
+    "spill": 0.324
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/sigrika/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.78,
+    "right_edge": 3.6,
+    "spill": 0.215
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/suisui/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.396,
+    "right_edge": 2.8,
+    "spill": 0.18
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/suisui/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.792,
+    "right_edge": 3.7,
+    "spill": 0.28
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/suoming/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.417,
+    "right_edge": 2.6,
+    "spill": 0.214
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/suoming/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.687,
+    "right_edge": 4.2,
+    "spill": 0.193
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/taoqi/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.381,
+    "right_edge": 2.1,
+    "spill": 0.165
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/taoqi/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.763,
+    "right_edge": 4.8,
+    "spill": 0.327
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/verina/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.39,
+    "right_edge": 3.4,
+    "spill": 0.241
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/verina/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.872,
+    "right_edge": 3.0,
+    "spill": 0.192
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/yangyang-xuanling/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.393,
+    "right_edge": 5.6,
+    "spill": 0.314
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/yangyang-xuanling/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.772,
+    "right_edge": 3.5,
+    "spill": 0.168
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/yangyang/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.371,
+    "right_edge": 2.7,
+    "spill": 0.258
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/yangyang/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.751,
+    "right_edge": 3.6,
+    "spill": 0.251
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/yinlin/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.319,
+    "right_edge": 3.1,
+    "spill": 0.276
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/yinlin/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.721,
+    "right_edge": 3.6,
+    "spill": 0.229
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/youhu/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.427,
+    "right_edge": 3.9,
+    "spill": 0.325
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/youhu/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.819,
+    "right_edge": 4.1,
+    "spill": 0.29
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/zani/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.371,
+    "right_edge": 2.7,
+    "spill": 0.201
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/zani/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.791,
+    "right_edge": 3.1,
+    "spill": 0.158
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/zhezhi/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.37,
+    "right_edge": 3.2,
+    "spill": 0.191
+   },
+   "fails": []
+  },
+  {
+   "task": "wuwa/zhezhi/default",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.756,
+    "right_edge": 3.7,
+    "spill": 0.212
+   },
+   "fails": []
+  }
+ ]
+}
