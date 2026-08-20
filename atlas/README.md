@@ -19,11 +19,19 @@ atlas/web/               页面本体。没有构建步骤，没有依赖，没�
 
 ## 每天怎么跑
 
-无人值守，一条命令，本机 cron 每天 03:10 自动跑：
+无人值守，本机 cron 每天 03:10 跑一条命令：
 
 ```bash
-bash atlas/build/daily.sh
+bash ~/.memory-atlas/run.sh
 ```
+
+`run.sh` 是 `atlas/build/bootstrap.sh` 的一份拷贝，装一次就不再动。它每次先
+`git fetch` 再 `git archive origin/main atlas` 把代码从**远端 ref** 取出来，
+然后执行 `daily.sh`。
+
+**为什么要绕这一层**：主树归「谁在开发谁占着」—— 实测它可以领先 `origin/main`
+63 个提交并带着未跟踪目录（铁律 2 被别的线程破坏）。定时任务不能依赖它的状态，
+更不许去清理它（那是别人还没推的活）。所以对主树只做 `fetch`，一个字节都不写。
 
 它依次做：抽取 → 聚合 → 发布 → 自检。产物写在 `~/.memory-atlas/`，**绝不写进仓**
 （仓是 PUBLIC，产物含对话原文）。

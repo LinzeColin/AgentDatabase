@@ -8,7 +8,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"        # atlas/ ，代码所在，只读
-REPO="$(cd "$ROOT/.." && pwd)"                  # 仓根，chatgpt 归档在这下面
+REPO="${ATLAS_REPO_ROOT:-$(cd "$ROOT/.." && pwd)}"   # 仓根，chatgpt 归档在这下面（只读）
 WORK="${ATLAS_WORK:-$HOME/.memory-atlas}"       # 产物所在，绝不写进仓
 LOG="$WORK/daily.log"
 LOCK="$WORK/.lock"
