@@ -1,7 +1,7 @@
 import { esc, fmt, go, enter, topicColor, reduced } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
 import { loop } from '../../../core/g3d.js';
-import { flyToDay } from '../shell.js';
+import { flyToDay, holdCamera } from '../shell.js';
 import { hero, sec, grid, orbit, slab, warn, pill } from '../kit.js';
 
 // 星云主题的回放不是图表在动 —— 是**相机真的往回飞**。
@@ -33,6 +33,7 @@ export async function render(host) {
   });
 
   let i = 0, playing = false, speed = 1100, tAcc = 0, last = performance.now();
+  holdCamera(true);          // 这一屏由回放开镜头，滚动不参与
 
   host.innerHTML = `
 ${hero('回放', '一周一周飞回去', `按播放，背后那片星图会跟着往前推 —— 你看到的是<b>当时</b>的天空。
@@ -96,5 +97,5 @@ ${dl.length ? '' : warn('这一屏没有接上 GitHub 提交数据，所以「�
 
   paint();
   enter('.hero, .sec, .cell', host);
-  return { dispose() { l.stop(); } };
+  return { dispose() { l.stop(); holdCamera(false); } };
 }
