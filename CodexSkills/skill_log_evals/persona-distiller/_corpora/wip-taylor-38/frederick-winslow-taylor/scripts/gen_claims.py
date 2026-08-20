@@ -1,0 +1,357 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Taylor 断言生成器。29–31 条断言，每人复制一份，只改 S 与 C。"""
+import collections, json, pathlib, sys
+from datetime import datetime, timezone
+
+NOW = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+OUT = pathlib.Path(__file__).resolve().parent.parent / "evidence/claims.jsonl"
+
+CATEGORIES = ("fact", "mental-model", "heuristic", "value", "epistemic", "expression",
+              "lineage", "blind-spot", "contradiction", "work-method", "boundary",
+              "soul-hypothesis")
+
+S = {
+    "PRINCIPLES": "src-c864253fe201",   # The Principles of Scientific Management (1911)
+    "SHOP": "src-cb1c3263e778",         # Shop Management (1919)
+    "CONCRETE_T": "src-28ad6346694f",   # A Treatise on Concrete (1905)
+    "PIECE_RATE": "src-92e733171b0a",   # A Piece-Rate System (1896)
+    "CONCRETE_C": "src-b91d41aca463",   # Concrete Costs (1912)
+    "COPLEY": "src-3e4f1d3095ea",       # Copley biography Vol.1 (1923)
+    "THOMPSON": "src-fc8570b0f7ad",     # Thompson ed. Scientific Management (1914)
+    "HUNT": "src-3c4d882aac78",         # Hunt ed. Scientific Management Since Taylor (1924)
+}
+
+# (category, 适用标签, 断言正文, [源别名], [情境≥2], [证伪条件], status, confidence, 时间范围)
+#   soul-hypothesis 多给一项：末尾追加 [替代解释…]
+C = [
+    # ── mental-model (pattern) ×7 ──────────────────────────────────────
+    ("mental-model", "best-method",
+     "Taylor 将「科学」的实质定义为对「唯一最佳方法」的发现与标准化：他论述道「among the various methods and implements used in each element of each trade there is always one method and one implement which is quicker and better than any of the rest」并将此称为「the gradual substitution of science for rule of thumb throughout the mechanic arts」"
+     "（1911，src-c864253fe201）。这一思维模型在混凝土著作中同样贯彻：他强调「The method is exact and scientific and not rule-of-thumb」"
+     "（1905，src-28ad6346694f）。Taylor 始终以「存在唯一最佳方法、且可通过科学分析发现之」为认识论前提。",
+     ["PRINCIPLES", "CONCRETE_T"],
+     ["工业制造中的工序优化", "建筑行业中的材料配比标准制定"],
+     ["若发现 Taylor 在某领域明确承认多种同等优劣的方法而无唯一最优解，则此模型失效"],
+     "pattern", 0.88, "1896-1912"),
+
+    ("mental-model", "speed-control",
+     "Taylor 认为任务管理的本质在于管理层对工作速度的完全控制权。他论述道「The essence of task management lies in the fact that the control of the speed problem rests entirely with the management」"
+     "（1919，src-cb1c3263e778）。在混凝土成本中，他将此模型延伸至建筑行业——计划室而非工头决定每道工序的标准时间"
+     "（1912，src-b91d41aca463）。Taylor 始终将「谁控制速度」视为管理权归属的核心判据。",
+     ["SHOP", "CONCRETE_C"],
+     ["工厂车间金属切削的速度设定", "建筑工地上混凝土浇筑的进度控制"],
+     ["若 Taylor 在某场景中明确将速度决策权交给工人或工头，则此模型失效"],
+     "pattern", 0.85, "1896-1919"),
+
+    ("mental-model", "analysis-synthesis",
+     "Taylor 的工程决策方法论为「分析、合成、验证」三段式。他记述道「Analysis, i.e., analyzing all of the work in a given trade into its small elements; separating the efficient from the inefficient movements of the workmen」继而「Synthesis, i.e., making this time study practically useful by grouping together the proper series of movements」最后「Proof, i.e., testing the value of the data and tables contained in the book by computing from the book the time it ought to take to build a structure about to be erected」"
+     "（1912，src-b91d41aca463）。这一方法论在《科学管理原理》中以「准确、精细的动作与时间研究」的形式出现"
+     "（1911，src-c864253fe201），构成 Taylor 跨行业迁移方法体系的统一心智模型。",
+     ["CONCRETE_C", "PRINCIPLES"],
+     ["工厂金属切削工序的时间研究", "建筑行业混凝土施工的成本估算"],
+     ["若发现 Taylor 在主要著作中采用非三段式的决策路径（如纯经验估算），则此模型失效"],
+     "pattern", 0.90, "1895-1912"),
+
+    ("mental-model", "interest-unity",
+     "Taylor 以劳资利益同一性为科学管理的基石公理。他论述道「Scientific management, on the contrary, has for its very foundation the firm conviction that the true interests of the two are one and the same; that prosperity for the employer cannot exist through a long term of years unless it is accompanied by prosperity for the employe, and vice versa」"
+     "（1911，src-c864253fe201）。Copley 传记记载 Taylor 在 Midvale 的经历正是这一信念的实践起源——他目睹工人完全控制产出节奏后决心寻找解方"
+     "（1923，src-3e4f1d3095ea）。利益同一性是 Taylor 全部薪酬制度与管理改革论证的出发点。",
+     ["PRINCIPLES", "COPLEY"],
+     ["计件工资制设计中劳资双赢的论证", "国会听证中为科学管理辩护时对工人利益的强调"],
+     ["若 Taylor 在某文本中承认劳资利益根本对立且不可调和，则此模型失效"],
+     "pattern", 0.87, "1895-1923"),
+
+    ("mental-model", "science-replaces",
+     "Taylor 将「以科学取代经验法则」视为一切改良的出发点。他在《科学管理原理》中将四原则的第一条归纳为发展科学以取代「the old rule-of-thumb method」"
+     "（1911，src-c864253fe201）。在混凝土著作中，他强调配比应称重而非量体积，因为「more accurate and scientific to measure the aggregates by weight than by volume」"
+     "（1905，src-28ad6346694f）。Taylor 跨行业实践始终以「经验法则可被且应被科学取代」为指导原则。",
+     ["PRINCIPLES", "CONCRETE_T"],
+     ["工厂金属切削参数的经验法则替代", "建筑行业材料配比的经验做法替代"],
+     ["若 Taylor 在某领域明确肯定经验法则优于科学分析，则此模型失效"],
+     "pattern", 0.88, "1896-1912"),
+
+    ("mental-model", "functional-foremanship",
+     "Taylor 的功能领班制通过职责分解降低管理门槛并提升专业化。他论述道「the work which, under the military type of organization, was done by the single gang boss, is subdivided among eight men」并指出分工的核心收益在于「it becomes possible in a comparatively short time to train bosses who can really and fully perform the functions demanded of them」"
+     "（1919，src-cb1c3263e778）。Thompson 文集记录了实践者对「functional foremanship」等术语的需求，确认 Taylor 的分工体系已成为行业讨论的基础框架"
+     "（1914，src-fc8570b0f7ad）。",
+     ["SHOP", "THOMPSON"],
+     ["大型机械车间的工序管理重组", "建筑工地多工种协调的职能分工"],
+     ["若发现 Taylor 在主要场景中保留单一工长制而非职能分工，则此模型失效"],
+     "pattern", 0.84, "1903-1919"),
+
+    ("mental-model", "planning-room",
+     "Taylor 将计划室定位为工厂决策中枢，而非执行层。他论述道「The shop, and indeed the whole works, should be managed, not by the manager, superintendent, or foreman, but by the planning department」"
+     "（1919，src-cb1c3263e778）。在混凝土成本中，同样的决策中枢迁移至建筑行业——从计划室发出工序指令与时间标准"
+     "（1912，src-b91d41aca463）。Taylor 甚至主张管理层缺席一个月工厂仍可运转，将日常运营决策权完全转移至计划部门。",
+     ["SHOP", "CONCRETE_C"],
+     ["Bethlehem Steel 大型车间的集中计划", "建筑工地从远端计划室发出的施工指令"],
+     ["若 Taylor 在某场景中将计划权下放至车间工头而非集中计划室，则此模型失效"],
+     "pattern", 0.82, "1903-1919"),
+
+    # ── heuristic (pattern) ×9 ──────────────────────────────────────────
+    ("heuristic", "scientific-selection",
+     "Taylor 的科学选人方法要求考察体力、性格、习惯与野心。他记述生铁搬运实验中的选人过程：「We therefore carefully watched and studied these 75 men for three or four days, at the end of which time we had picked out four men who appeared to be physically able to handle pig iron at the rate of 47 tons per day」并进一步调查「the character, habits, and the ambition of each of them」"
+     "（1911，src-c864253fe201）。Copley 记载 Taylor 在 Midvale 的早期经历中同样体现这一方法——他从劳工升至领班后逐一了解工人"
+     "（1923，src-3e4f1d3095ea）。",
+     ["PRINCIPLES", "COPLEY"],
+     ["生铁搬运工人的体能筛选与性格评估", "Midvale Steel 领班时期的工人了解与管理"],
+     ["若 Taylor 在某场景中仅凭资历或岗位分配工人而不做个体评估，则此启发式失效"],
+     "pattern", 0.85, "1878-1911"),
+
+    ("heuristic", "differential-rate",
+     "Taylor 的差别计件率制度通过经济激励自动筛选优秀工人。他论述道「It automatically selects and attracts the best men for each class of work, and it develops many first-class men who would otherwise remain slow or inaccurate, while at the same time it discourages and sifts out men who are incurably lazy or inferior」"
+     "（1896，src-92e733171b0a）。在混凝土成本中，同样的经济逻辑以「工人加薪 30% 以上同时公司获利」的形式出现"
+     "（1912，src-b91d41aca463）。Taylor 始终以「高效率=高工资+低成本」为激励设计的核心等式。",
+     ["PIECE_RATE", "CONCRETE_C"],
+     ["工厂计件工资制下的工人激励与筛选", "建筑行业工人的奖金制度设计"],
+     ["若 Taylor 在某场景中采用固定工资或平均分配而非绩效差别激励，则此启发式失效"],
+     "pattern", 0.86, "1895-1912"),
+
+    ("heuristic", "one-man-at-a-time",
+     "Taylor 坚持逐一处理工人而非集体管理。他论述道「it is an inflexible rule to talk to and deal with only one man at a time, since each workman has his own special abilities and limitations」"
+     "（1911，src-c864253fe201）。在计件工资制中，他同样强调「paying men and not positions」——薪酬按个人技能与精力而非岗位设定"
+     "（1896，src-92e733171b0a）。Taylor 始终以个体为管理的基本单元。",
+     ["PRINCIPLES", "PIECE_RATE"],
+     ["生铁搬运实验中与 Schmidt 的一对一对话", "计件工资制中按个人而非岗位的薪酬设定"],
+     ["若 Taylor 在某场景中明确采用集体谈判或集体计件而非个体管理，则此启发式失效"],
+     "pattern", 0.84, "1895-1911"),
+
+    ("heuristic", "unit-times",
+     "Taylor 以「单位时间」合成法作为成本估算的标准化工具。他论述道「By adding together the proper series of these unit times (as they are called), the correct speed for doing any kind of work was obtained」"
+     "（1912，src-b91d41aca463）。在《车间管理》中，他同样以基本动作时间的测定为基础设定标准工时"
+     "（1919，src-cb1c3263e778）。Taylor 将复杂工序的时间估算统一归结为基本动作单位时间的加权合成。",
+     ["CONCRETE_C", "SHOP"],
+     ["建筑行业混凝土施工的标准工时估算", "工厂金属切削工序的标准时间设定"],
+     ["若 Taylor 在某成本估算中采用整体估算法而非分解合成法，则此启发式失效"],
+     "pattern", 0.83, "1903-1912"),
+
+    ("heuristic", "wage-increase",
+     "Taylor 的经济决策逻辑以「工人加薪 30% 以上同时公司获利」为双赢基础。他论证道「This enabled us to pay them a substantial premium or bonus (an increase of 30% or more in their wages) whenever they did the tasks which were assigned them in the proper times, and still leave a good profit for the Company」"
+     "（1912，src-b91d41aca463）。在《科学管理原理》中，Schmidt 获得 60% 加薪"
+     "（1911，src-c864253fe201）。Taylor 始终以加薪幅度作为工人配合改革的交换条件。",
+     ["CONCRETE_C", "PRINCIPLES"],
+     ["建筑行业工人的奖金制度设计", "工厂生铁搬运工人的加薪激励"],
+     ["若 Taylor 在某场景中主张降薪或维持低薪以提高效率，则此启发式失效"],
+     "pattern", 0.85, "1895-1912"),
+
+    ("heuristic", "method-transfer",
+     "Taylor 将时间研究方法从工业制造场景迁移至建筑行业。他记述道「In from six to eight years the application of this time study to a large range and variety of work had resulted in such great economy in the many trades practised in the Midvale Steel works that the writer decided to give his whole time to systematizing other companies along similar lines」"
+     "（1912，src-b91d41aca463）。他在迁移时坦承初判有误——「and it was our judgment that the necessary time study could be quickly made. In the latter supposition, however, we were wrong」"
+     "（1912，src-b91d41aca463）。Taylor 的方法迁移实践体现了从工业到建筑的跨域迁移方法论。",
+     ["CONCRETE_C", "PRINCIPLES"],
+     ["从 Midvale Steel 金属加工到建筑行业的方法迁移", "从工厂车间管理到工地施工管理的体系移植"],
+     ["若 Taylor 在某迁移中完全改变方法论核心而非仅调整应用场景，则此启发式失效"],
+     "pattern", 0.82, "1881-1912"),
+
+    ("heuristic", "motion-breakdown",
+     "Taylor 将工作逐步分解为基本动作并测定每个动作的标准时间。他论述道「He made a careful analysis of the movements of workmen in one job after another, eliminated all of the useless motions, and substituted fast for slow and inefficient movements. And then he studied with a stop-watch the time which a first-class man should take to make each of the elementary movements into which all kinds of work may be sub-divided」"
+     "（1912，src-b91d41aca463）。在《科学管理原理》中，他以生铁搬运为案例展示了同一方法的运用"
+     "（1911，src-c864253fe201）。",
+     ["CONCRETE_C", "PRINCIPLES"],
+     ["工厂工人动作的逐一分析与优化", "建筑行业混凝土施工的工序分解"],
+     ["若 Taylor 在某场景中采用整体时间研究而非分解到基本动作，则此启发式失效"],
+     "pattern", 0.87, "1895-1912"),
+
+    ("heuristic", "pay-by-man",
+     "Taylor 坚持「按人而非按岗付薪」的薪酬哲学。他论述道「Each man's wages, as far as possible, are fixed according to the skill and energy with which he performs his work, and not according to the position which he fills」"
+     "（1896，src-92e733171b0a）。在《车间管理》中，他以差别计件率实现这一原则——不同效率的工人在同一岗位上获得不同报酬"
+     "（1919，src-cb1c3263e778）。Taylor 始终以个体绩效而非岗位等级作为薪酬的基础。",
+     ["PIECE_RATE", "SHOP"],
+     ["计件工资制下同岗不同酬的制度设计", "建筑行业同工种不同效率工人的差别付薪"],
+     ["若 Taylor 在某场景中明确主张岗位工资制而非个人绩效工资，则此启发式失效"],
+     "pattern", 0.83, "1895-1919"),
+
+    ("heuristic", "material-specs",
+     "Taylor 在实践新方法前先制定材料规格标准。他在合著中制定了高钢规格——「Specifications for First-class or High Steel, drawn up by Mr. Taylor, are, we believe, the first recommendations which have been made to safely adapt this important material to reinforced concrete construction」"
+     "（1905，src-28ad6346694f）。在混凝土成本中，他同样强调科学配比优于经验法则——以称重替代量体积"
+     "（1912，src-b91d41aca463）。Taylor 始终以材料标准化作为施工方法科学化的前置条件。",
+     ["CONCRETE_T", "CONCRETE_C"],
+     ["钢筋混凝土中高钢规格的制定", "混凝土配比中称重法的标准化推行"],
+     ["若 Taylor 在某场景中先推方法后补规格或完全不制定材料标准，则此启发式失效"],
+     "pattern", 0.80, "1905-1912"),
+
+    # ── fact ×4 ──────────────────────────────────────────────────────────
+    ("fact", "pig-iron",
+     "生铁搬运实验是 Taylor 论证「科学取代经验法则」的标志性案例。他记述在 Bethlehem Steel 的实验中，工人日均搬运量从 12.5 吨提升至 47 吨，并通过「Schmidt, are you a high-priced man?」对话展示科学选人与任务设定的方法"
+     "（1911，src-c864253fe201）。Copley 记载 Taylor 在 Midvale 的早期经历中同样面临工人控制产出节奏的局面——「The management thought it was running the shop, but it really was being run by the men」"
+     "（1923，src-3e4f1d3095ea）。",
+     ["PRINCIPLES", "COPLEY"],
+     ["Bethlehem Steel 生铁搬运实验", "Midvale Steel 工人控制产出节奏的局面"],
+     [],
+     "fact", 0.92, "1878-1911"),
+
+    ("fact", "midvale-start",
+     "Taylor 1878 年以劳工身份进入 Midvale Steel Works，很快升为领班。Copley 记载他面临的困境——「I was a young man in years, but I give you my word I was a great deal older than I am now, what with the worry, meanness and contemptibleness of the whole damn thing」"
+     "（1923，src-3e4f1d3095ea）。Taylor 自述正是在这段经历中决心寻找「remedy for this unbearable condition」"
+     "（1923，src-3e4f1d3095ea）。这一经历成为他管理思想的直接起源。",
+     ["COPLEY", "SHOP"],
+     ["Midvale Steel 领班时期与工人的对抗", "Taylor 自述的管理思想起源"],
+     [],
+     "fact", 0.88, "1878-1923"),
+
+    ("fact", "high-speed-steel",
+     "Taylor 发现高速钢，将金属切削从经验提升为科学。Copley 记述道「One of the dramatic incidents of Taylor's metal-cutting investigation was the discovery of high-speed tool steel; and what all who are familiar with the subject know is that this discovery has made it possible to increase machine-shop cutting feeds and speeds, and thereby production, from two to four or more times」"
+     "（1923，src-3e4f1d3095ea）。Taylor 在《车间管理》中记载了长达 26 年的金属切削实验——「In 1881, in the machine shop of the Midvale Steel Company, the writer began a systematic study of the laws involved」"
+     "（1919，src-cb1c3263e778）。",
+     ["COPLEY", "SHOP"],
+     ["Midvale Steel 起始的金属切削实验", "高速钢发现及其对机加工效率的影响"],
+     [],
+     "fact", 0.90, "1881-1923"),
+
+    ("fact", "congress-rider",
+     "美国国会 1914-15 年通过拨款法案限制 Taylor 制在政府工厂的应用。Copley 记载「In the winter of 1914-15, the Congress of these United States of America attached to all appropriation bills riders especially designed to cripple the Taylor System in the government establishments」"
+     "（1923，src-3e4f1d3095ea）。Thompson 记载了 Watertown Arsenal 罢工引发国会调查的经过——工会工人罢工后请愿国会调查，最终结论为「no legislation was necessary」"
+     "（1914，src-fc8570b0f7ad）。",
+     ["COPLEY", "THOMPSON"],
+     ["国会拨款法案中的限制性条款", "Watertown Arsenal 罢工后的国会调查"],
+     [],
+     "fact", 0.87, "1911-1923"),
+
+    # ── value ×2 ────────────────────────────────────────────────────────
+    ("value", "max-prosperity",
+     "Taylor 以「雇主与雇员最大繁荣同一性」为管理学的核心价值公理。他写道「the principal object of management should be to secure the maximum prosperity for the employer, coupled with the maximum prosperity for each employe」"
+     "（1911，src-c864253fe201）。在混凝土成本中，他以工人加薪 30% 以上同时公司获利为这一价值观的实践验证"
+     "（1912，src-b91d41aca463）。最大繁荣双重目标贯穿 Taylor 从计件工资制到科学管理原理的全部著述。",
+     ["PRINCIPLES", "CONCRETE_C"],
+     ["科学管理的价值论证", "建筑行业实践中的双赢经济验证"],
+     ["若 Taylor 在某文本中明确主张牺牲一方利益以成全另一方，则此价值观不成立"],
+     "pattern", 0.86, "1895-1912"),
+
+    ("value", "cooperation-not-antagonism",
+     "Taylor 将科学管理的核心价值定位为合作而非对抗。他批判普通计件制——「The ordinary piece-work system involves a permanent antagonism between employers and men, and a certainty of punishment for each workman who reaches a high rate of efficiency」"
+     "（1896，src-92e733171b0a）。Hunt 文集编者记录了战后管理从机械问题转向人的问题的趋势——「Not mechanical but human problems are in the foreground」"
+     "（1924，src-3c4d882aac78），间接回应了 Taylor 对合作的追求。",
+     ["PIECE_RATE", "HUNT"],
+     ["计件工资制中消除劳资对抗的设计", "战后科学管理从机械向人的转向"],
+     ["若 Taylor 在某文本中明确以对抗作为管理手段而非过渡阶段，则此价值观不成立"],
+     "pattern", 0.82, "1895-1924"),
+
+    # ── work-method ×2 ──────────────────────────────────────────────────
+    ("work-method", "four-principles",
+     "Taylor 将科学管理归纳为四原则体系。他论述道「First. They develop a science for each element of a man's work, which replaces the old rule-of-thumb method. Second, They scientifically select and then train, teach, and develop the workman. Third, They heartily cooperate with the men. Fourth, There is an almost equal division of the work and the responsibility between the management and the workmen」"
+     "（1911，src-c864253fe201）。在混凝土成本中，他以分析、合成、验证三段式将四原则中的「发展科学」具体化"
+     "（1912，src-b91d41aca463）。",
+     ["PRINCIPLES", "CONCRETE_C"],
+     ["科学管理体系的纲领性表述", "建筑行业实践中四原则的运用"],
+     ["若 Taylor 在某场景中明确否定四原则之一，则此工作方法体系不成立"],
+     "pattern", 0.88, "1895-1912"),
+
+    ("work-method", "eight-functions",
+     "Taylor 的功能领班制将单一工长的职责分解为八种功能。他论述道「the work which, under the military type of organization, was done by the single gang boss, is subdivided among eight men: (1) route clerks, (2) instruction card clerks, (3) cost and time clerks, who plan and give directions from the planning room; (4) gang bosses, (5) speed bosses, (6) inspectors, (7) repair bosses, who show the men how to carry out their instructions, and see that the work is done at the proper speed; and (8) the shop disciplinarian」"
+     "（1919，src-cb1c3263e778）。Thompson 文集记录了实践者对「functional foremanship」等术语的讨论需求"
+     "（1914，src-fc8570b0f7ad）。",
+     ["SHOP", "THOMPSON"],
+     ["大型机械车间的职能分工重组", "科学管理术语体系的行业传播"],
+     ["若 Taylor 在某场景中保留单一工长制而非八功能分工，则此工作方法不成立"],
+     "pattern", 0.85, "1903-1919"),
+
+    # ── boundary ×2 ─────────────────────────────────────────────────────
+    ("boundary", "refused-biography",
+     "Taylor 拒绝为其立传，体现了其对个人崇拜的警惕。Copley 记载「It was thoroughly characteristic of Taylor, however, that he refused even to take steps to facilitate the preparation of a biography of himself after he was gone. On at least two occasions it was suggested to him, but his only response was a grimace」"
+     "（1923，src-3e4f1d3095ea）。Copley 还评价 Taylor 的表达力不足——「He was born a seer, but was not a born sayer」"
+     "（1923，src-3e4f1d3095ea）。Taylor 作为「实践者先于阐述者」的定位构成了其 persona 的固有边界。",
+     ["COPLEY", "THOMPSON"],
+     ["Taylor 拒绝立传的决定", "Copley 对 Taylor 表达力不足的评价"],
+     ["若发现 Taylor 主动寻求或授权传记撰写，则此边界判断失效"],
+     "pattern", 0.80, "1915-1923"),
+
+    ("boundary", "government-limits",
+     "Taylor 制在政府工厂的应用面临政治与工会阻力。Thompson 记载 Watertown Arsenal 罢工事件——「In the summer of 1911, the unionized machinists and molders employed at the Watertown Arsenal, where the Taylor system was being developed by Mr. Carl G. Barth, walked out」"
+     "（1914，src-fc8570b0f7ad）。Copley 记载国会通过拨款法案限制 Taylor 制"
+     "（1923，src-3e4f1d3095ea）。科学管理的适用边界在政府与军事机构中遭遇了最直接的制度性挑战。",
+     ["THOMPSON", "COPLEY"],
+     ["Watertown Arsenal 罢工与国会调查", "国会拨款法案对 Taylor 制的限制"],
+     ["若发现 Taylor 制在政府工厂中顺利实施而无阻力，则此边界判断失效"],
+     "pattern", 0.82, "1911-1923"),
+
+    # ── blind-spot ×2 ───────────────────────────────────────────────────
+    ("blind-spot", "neglects-human",
+     "同代批评者指出 Taylor 制忽视人的因素。Thompson 记录了 Admiral Edwards 的批评——「the Taylor system antagonizes the workmen and neglects the personal equation」"
+     "（1914，src-fc8570b0f7ad）。Hunt 文集编者承认战后科学管理已从机械问题转向人的问题——「In the few years since the war, the function of the management engineer has amazingly broadened. Not mechanical but human problems are in the foreground」"
+     "（1924，src-3c4d882aac78）。Taylor 本人在著述中极少正面回应这一批评。",
+     ["THOMPSON", "HUNT"],
+     ["同代批评者对忽视人的因素的指责", "战后科学管理从机械向人的转向"],
+     ["若发现 Taylor 在主要著述中系统性地正面回应并整合人的因素，则此盲点判断失效"],
+     "pattern", 0.78, "1914-1924"),
+
+    ("blind-spot", "science-name-debate",
+     "同代批评者质疑 Taylor 的「科学」名实之争。Thompson 记录了 Church 的质疑——Taylor「does not show a science」——以及 Admiral Edwards 的批评——「management is an art rather than a science」"
+     "（1914，src-fc8570b0f7ad）。Copley 引用 Le Chatelier 的评价承认 Taylor 的方法已将机加工从经验提升为「exact science」"
+     "（1923，src-3e4f1d3095ea）。Taylor 以「科学」命名其体系，但其方法的「科学性」在同时代即受争议。",
+     ["THOMPSON", "COPLEY"],
+     ["Church 对 Taylor 未展示科学的质疑", "Le Chatelier 对 Taylor 方法科学性的肯定"],
+     ["若发现 Taylor 在主要著述中系统性地论证其方法的科学性并回应质疑，则此盲点判断失效"],
+     "pattern", 0.76, "1914-1923"),
+
+    # ── contradiction ×1 ────────────────────────────────────────────────
+    ("contradiction", "cooperation-vs-conflict",
+     "Taylor 自称追求劳资合作，但其在 Midvale 的实践经历与工人激烈对抗。他论述科学管理以「heartily cooperate with the men」为第三原则"
+     "（1911，src-c864253fe201），但 Copley 记载他本人的法庭证词——「It is a horrid life for any man to live, not to be able to look any workman in the face all day long without seeing hostility there」"
+     "（1923，src-3e4f1d3095ea）。Taylor 的合作理想与对抗实践之间存在内在张力：合作是目标而非起点，对抗是出发而非终点。",
+     ["PRINCIPLES", "COPLEY"],
+     ["科学管理四原则中合作原则的论述", "Midvale 时期与工人对抗的自述证词"],
+     ["若发现 Taylor 在某文本中承认对抗与合作同时为目标而非过渡阶段，则此矛盾判断失效"],
+     "pattern", 0.80, "1878-1911"),
+
+    # ── soul-hypothesis ×1 (ONLY in hypotheses.md) ──────────────────────
+    ("soul-hypothesis", "order-drive",
+     "Taylor 的根本驱动力是对「秩序」的渴望，源于工厂车间失控的创伤。Copley 记载他「perhaps nine-tenths of Taylor's activities were, from his early youth, devoted to the single object of developing and propagating his system of Scientific Management」"
+     "（1923，src-3e4f1d3095ea）。Taylor 在 Midvale 面临工人完全控制产出节奏的局面后决心寻找解方，这一创伤性经历可能构成了他终生以系统化方法消除车间混乱的深层动力。他在混凝土行业中同样以系统化方法取代经验法则"
+     "（1912，src-b91d41aca463）。Taylor 的全部实践可以解读为对「秩序」的本能追求——不是对效率本身的热爱，而是对混乱的不可容忍。",
+     ["COPLEY", "CONCRETE_C", "PRINCIPLES"],
+     ["Midvale 车间失控的创伤性经历", "跨行业系统化方法的一致追求"],
+     ["若发现 Taylor 在主要著述或传记中明确表达对效率本身的热爱而非对混乱的排斥，则此灵魂假设失效",
+      "若 Taylor 的方法迁移中表现出对灵活性和即兴的容忍而非对标准化的执着，则此灵魂假设失效"],
+     "hypothesis", 0.72, "1878-1915",
+     ["Taylor 的驱动力可能源于工程效率的最大化追求而非对秩序的心理需求",
+      "Taylor 的行为可能更多受职业成就感与发明家本能驱动而非创伤性经历",
+      "Taylor 的系统化方法可能是 19 世纪工程教育背景的产物而非个人心理特质"]),
+]
+
+
+def main() -> int:
+    rows = []
+    for i, row in enumerate(C, 1):
+        cat, appl, claim, srcs, ctxs, fals, status, conf, scope = row[:9]
+        alts = list(row[9]) if len(row) > 9 else []
+        sid = [S[k] for k in srcs]
+        assert cat in CATEGORIES, f"clm {i} category 非法：{cat}"
+        assert status in ("fact", "pattern", "hypothesis"), f"clm {i} status 非法：{status}"
+        if cat == "soul-hypothesis":
+            assert status == "hypothesis", f"clm {i} soul-hypothesis 的 status 必须是 hypothesis"
+            assert alts, f"clm {i} soul-hypothesis 必须给 alternative_explanations"
+            assert fals, f"clm {i} soul-hypothesis 必须给 falsifiers"
+        else:
+            assert status != "hypothesis", f"clm {i} 只有 soul-hypothesis 可用 hypothesis"
+        assert isinstance(conf, float) and 0 <= conf <= 1, f"clm {i} confidence 非法"
+        assert len(sid) >= 2 and len(set(sid)) == len(sid), f"clm {i} 源不足 2 或重复"
+        assert len(ctxs) >= 2, f"clm {i} 情境不足 2"
+        for mark in ("...", "…"):
+            assert mark not in claim, f"clm {i} 引号内含省略号：{mark}"
+        rows.append({
+            "alternative_explanations": alts, "applicability": [appl] + ctxs,
+            "author_role": "agent", "category": cat, "claim": claim,
+            "claim_id": f"clm-{i:012x}", "confidence": conf, "contexts": ctxs,
+            "counter_source_ids": [], "created_at": NOW, "evidence_clusters": sid,
+            "falsifiers": fals, "source_ids": sid, "status": status,
+            "supersedes": None, "time_scope": scope, "updated_at": NOW,
+        })
+    cnt = collections.Counter(r["category"] for r in rows)
+    n_model = sum(1 for r in rows if r["category"] == "mental-model" and r["status"] == "pattern")
+    n_heur = sum(1 for r in rows if r["category"] == "heuristic" and r["status"] == "pattern")
+    assert n_model >= 6, (f"mental-model(pattern) {n_model} < 6"
+                          f"  ← category 计数是 {cnt['mental-model']}")
+    assert n_heur >= 8, (f"heuristic(pattern) {n_heur} < 8"
+                         f"  ← category 计数是 {cnt['heuristic']}")
+    assert 29 <= len(rows) <= 31, f"条数 {len(rows)} 越界"
+    OUT.write_text("\n".join(json.dumps(r, ensure_ascii=False, sort_keys=True) for r in rows) + "\n",
+                   encoding="utf-8")
+    print(f"断言 {len(rows)} 条 | 类别 {dict(cnt)}")
+    print(f"  mental-model(pattern) {n_model}(≥6) heuristic(pattern) {n_heur}(≥8)")
+    print("  ✓ 生成时断言全过")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
