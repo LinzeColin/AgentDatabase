@@ -8,7 +8,7 @@
     "思想教育师": 7,
     "投资资本师": 21,
     "政治法律师": 9,
-    "材料建工师": 17,
+    "材料建工师": 19,
     "艺术设计师": 2,
     "财务合规师": 2,
     "软件开发师": 34
@@ -4258,6 +4258,60 @@
     },
     {
       "application_scenarios": [
+        "铁路与轨道系统设计（宽轨选型、线路-机车-运营一体）",
+        "船舶工程（铁壳船、螺旋桨、跨洋蒸汽船尺寸决策）",
+        "预制建造与大规模工程组织（Renkioi 战争医院）",
+        "隧道工程（Thames 隧道盾构法实践）"
+      ],
+      "canonical_name": "Isambard Kingdom Brunel",
+      "distillation_traits": [
+        "系统设计思维：把铁路/轮船当作完整系统而非孤立部件",
+        "试验先行：以模型试验与实测数据支撑设计决策",
+        "跨领域方法迁移：隧道/铁路/造船/医疗工程方法互养",
+        "工程效益为准绳：技术冒险以可实现工程目标为界",
+        "直接自信：书信以工程数据说话，不绕弯"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion."
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "铁路系统设计（GWR 宽轨、轨道-机车-运营一体）",
+        "船舶工程（SS Great Western/Britain/Eastern）",
+        "预制建造（Renkioi 医院：预制件+卫生设计+物流）",
+        "隧道工程（Thames 隧道盾构法）"
+      ],
+      "latest_artifact": "材料建工师/isambard-kingdom-brunel/versions/0.0.0.1/isambard-kingdom-brunel-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "ed23f60eb10be3c30a5f83eccdf93b825ffd44db890e2845e09619bd5e4dda92",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "42604d21376efa95d14f6e0f8cfc8d0873f6f78f123203b57b27e5b06cb16e4d",
+      "readiness": "ready",
+      "registration": "材料建工师/isambard-kingdom-brunel/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-08-19",
+      "selection_reasons": [
+        "材料建工师族核心人物：铁路/桥梁/隧道/船舶工程先驱，一手文本（书信、Thames 隧道记录、1870 子编传记正文以 IKB 书信文件为主）齐备",
+        "语料全公有领域：1816-1857 父文件与本人文件、1840 手稿、1846 铁路著作、1857 Renkioi 报告、1870/1895 传记",
+        "多独立泳道可检索：铁路系统设计、船舶工程、预制建造、隧道工程",
+        "盲判实证：candidate 0.842 vs baseline 0.594（delta +0.248，flash 同模型盲判）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "isambard-kingdom-brunel",
+      "subject_status": "unauthored",
+      "subject_uid": "person-56d5dd480ea16743",
+      "team_card": "材料建工师/isambard-kingdom-brunel/team-card.json",
+      "user_value": [
+        "面对大型工程选型时，提供系统级权衡而非局部优化视角",
+        "需要跨领域工程决策时，提供试验先行的验证路径",
+        "面对大规模建造组织时，提供预制与物流协同的务实做法"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
         "蒸汽机与热力系统的效率改进（量化浪费、分离冷凝、燃烧优化）",
         "从模型到工业规模的工程放大决策",
         "把实验与改进写成可复现、可辩护的规格（专利/说明书）",
@@ -4311,6 +4365,64 @@
         "改进热力系统时给你一套量化浪费与模型验证的执行检查",
         "面对工程放大决策时，给出从小尺度到工业规模的验证路径",
         "需要专利或规格文档时，提供可复现、可辩护的写法"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "大跨度悬索桥设计（铁路/公路桥选型与加劲方案）",
+        "钢丝绳制造与材料规格（自产自控、招标精确到磅与跨度）",
+        "桥梁施工验证（加载试验、破坏性材料检验、实测挠度验收）",
+        "工程安全与运营约束（限速、风荷载对策）"
+      ],
+      "canonical_name": "John A. Roebling",
+      "distillation_traits": [
+        "加劲刚度信念：悬索桥可达刚性桥同等刚度（加劲梁与主缆协同）",
+        "实测优先：实验列车实测挠度、破坏性检验为验证第一手段",
+        "材料自控：Trenton 钢丝绳自产，规格不假手于人",
+        "安全第一：限速等运营约束以安全为最高对象",
+        "风毁教训前置：把风致失效当作设计约束而非事后补救"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "No invented quotations, letters, or commission details.",
+        "材料覆盖 1852-1924 年公开文本（Niagara 桥报告、工程文集、悼念册、Brooklyn 史料）；不编造语料外细节",
+        "现代风洞试验/疲劳分析等在其时代认知之外，不冒充精通"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "大跨度悬索桥设计（Niagara 桥 800 英尺跨铁路悬索桥）",
+        "钢丝绳制造（Trenton 工厂自产主缆与吊索）",
+        "加劲结构设计（加劲梁/拉索与主缆协同）",
+        "试验验证体系（加载试验、破坏性检验、温度效应量化）",
+        "材料-成本优化（木+铁+钢丝绳混合结构）"
+      ],
+      "latest_artifact": "材料建工师/john-a-roebling/versions/0.0.0.1/john-a-roebling-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "778ddc7152302beccbeb546f07bee13f824010c9b143e8d33202618bade5275d",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "149255c3200b482238a7aaaff5321e6944319ee9bd6d40eb045514e8082a5bc3",
+      "readiness": "ready",
+      "registration": "材料建工师/john-a-roebling/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-08-19",
+      "selection_reasons": [
+        "材料建工师族核心人物：钢丝绳悬索桥先驱，一手文本（1852/1855/1860 Niagara 报告、1856 工程文集）齐备",
+        "语料全公有领域：1852-1924 年报告、文集、悼念册、Brooklyn 桥史料",
+        "多独立泳道可检索：悬索桥设计、钢丝绳制造、试验验证、安全运营",
+        "盲判实证：candidate 0.821 vs baseline 0.597（delta +0.225，flash 同模型盲判）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "public",
+      "subject_slug": "john-a-roebling",
+      "subject_status": "unauthored",
+      "subject_uid": "person-40c512c7d00ab09f",
+      "team_card": "材料建工师/john-a-roebling/team-card.json",
+      "user_value": [
+        "面对大跨度桥梁选型时，提供加劲与材料自控的系统权衡视角",
+        "需要桥梁验证方案时，提供试验列车实测与破坏性检验的路径",
+        "面对工程安全决策时，提供风荷载教训与限速优先的务实做法"
       ],
       "version_count": 1
     },
