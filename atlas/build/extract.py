@@ -145,6 +145,14 @@ def is_injected(text: str) -> bool:
     return (not t) or t.startswith(INJECTED)
 
 
+def _under(path: Path, root: Path) -> bool:
+    try:
+        path.relative_to(root)
+        return True
+    except ValueError:
+        return False
+
+
 def redact(s: str) -> str:
     for pat, rep in REDACT:
         s = pat.sub(rep, s)
@@ -629,12 +637,17 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
             continue
         if st.st_size == 0:
             continue
-        scanned.add(str(path))
+        scanned.add(str(path.relative_to(root)) if _under(path, root) else str(path))
         stats["files"] += 1
         stats["bytes"] += st.st_size
-        # 缓存键必须带上解析器自身的指纹：只按 (路径, mtime, 大小) 判重的话，
+        # 身份用**相对来源根**的路径，不用绝对路径：仓根一变（比如从主树换到
+        # ~/.memory-atlas/src），所有绝对路径都会失效 —— 旧记录被当成「源已删」
+        # 留下来，同一批文件又重新解析一遍，同一份数据就被算了两次。
+        # 实测：chatgpt 379 个文件，新解析 379 + 源已删留存 379 = 虚涨一倍。
+        rel = str(path.relative_to(root)) if _under(path, root) else str(path)
+        # 缓存键还要带解析器指纹：只按 (路径, mtime, 大小) 判重的话，
         # 改了解析逻辑却复用旧记录，产出会静默陈旧且没有任何东西会变红。
-        key = f"{path}|{st.st_mtime_ns}|{st.st_size}|{PARSER_FINGERPRINT}"
+        key = f"{rel}|{st.st_mtime_ns}|{st.st_size}|{PARSER_FINGERPRINT}"
         hit = cache.get(key)
         if hit is not None:
             records.append(hit)
@@ -642,7 +655,8 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
             continue
         # record_id 必须对「文件」唯一而不是文件名：kimi-code 的会话文件全叫
         # wire.jsonl，只是分散在不同目录，只用文件名会把 419 个会话压成 1 个。
-        sid = f"{name}-{hashlib.sha256(str(path).encode()).hexdigest()[:12]}"
+        # record_id 也用相对路径：绝对路径一变，同一场会话就会换个 id 冒出来。
+        sid = f"{name}-{hashlib.sha256(rel.encode()).hexdigest()[:12]}"
         rec = blank(sid, name, path)
         rec["bytes"] = st.st_size
         try:
@@ -664,8 +678,9 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
     # 所以这不是假想风险。留下来的记录标 gone，页面上照常算，只是不再更新。
     kept = 0
     for key, rec in cache.items():
-        src_path = key.split("|", 1)[0]
-        if src_path in scanned or Path(src_path).exists():
+        rel_path = key.split("|", 1)[0]
+        # 相对路径比对：这一轮扫到了就跳过；文件还在也跳过。
+        if rel_path in scanned or (root / rel_path).exists():
             continue
         rec["gone"] = True
         records.append(rec)
