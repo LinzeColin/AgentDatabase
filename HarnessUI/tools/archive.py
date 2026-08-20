@@ -30,7 +30,7 @@ import pathlib
 import sys
 import time
 
-GAME_ZH = {"genshin": "原神", "hsr": "崩铁", "zzz": "绝区零", "wuwa": "鸣潮"}
+GAME_ZH = {"genshin": "原神", "hsr": "崩铁", "zzz": "绝区零", "wuwa": "鸣潮", "nte": "异环"}
 
 
 def digest(path: pathlib.Path) -> str:

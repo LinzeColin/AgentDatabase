@@ -30,6 +30,8 @@ RES = (pathlib.Path.home() / "Documents/Codex/GithubProject/_scratch"
        "/agentdatabase-harness-ui/HarnessUI/research")
 WIKIS = {"genshin": "genshin-impact", "hsr": "honkai-star-rail", "zzz": "zenless-zone-zero",
          "wuwa": "wutheringwaves"}
+# 异环不进这张表：它的英文站没有任何中文字段（Other Languages 只有 en/ru），
+# 也没有中文 Fandom 站，三条常规路全空。中文名走萌娘百科，见 tools/fetch_zh_moegirl.py。
 CC = OpenCC("t2s")
 
 

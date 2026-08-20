@@ -90,3 +90,41 @@ merged = dict(new)
 for k, v in old.items():
     merged.setdefault(k, v)      # 新的没有的才用旧的；有冲突先打印出来看
 ```
+
+## 花名册 = 可玩 ∩ 女性，不是单个分类
+
+异环上 `Playable Characters` 21 人、`Female Characters` 29 人，**交集才是 15 人**。
+只取其中一个就会多做一倍或做进男角色。`scout_ip.py` 按这个规则自动筛，
+两个分类拿不到时退回单个并在报告里标注「未筛性别」——**退了要说，不能默默退**。
+
+## 有的 IP 根本不该用 wiki
+
+**王者荣耀**：两个 Fandom 站都不够（`honor-of-kings` 115 人无性别无皮肤分类）。
+腾讯官方接口一次给全：
+
+```
+https://pvp.qq.com/web201605/js/herolist.json
+  cname      → 中文名（不用另找源）
+  skin_name  → 该英雄全部皮肤，| 分隔
+…/skin/hero-info/{id}/{id}-mobileskin-{n}.jpg   竖 727x1070   ← 锚图
+…/skin/hero-info/{id}/{id}-bigskin-{n}.jpg      横 1920x882   ← 横幅，不能用
+```
+
+**先查这个 IP 有没有官方接口，再退回 wiki。** 官方接口的中文名和皮肤清单都是权威的，
+wiki 是二手的。
+
+## 中文名的第四条路：非 Fandom 的中文站
+
+异环三条常规路全空（英文站 `Other Languages` 只有 `en/ru`，没有中文 Fandom 站）。
+第四条路是**萌娘百科**——它的 API 拒绝匿名调用，但 HTML 可取。
+
+**用 `html.parser` 按块解析，不要用正则就近匹配。** 就近匹配那版 15 个里 3 对串行
+（Aurelia 抓成了隔壁 Chiz 的「小吱」），因为 `srcset` 里同一张图重复出现，
+把「中间不许有别的角色」这条判据废掉了。
+
+**判据：抓完查重名。** 重名 = 串了。这条比任何正则都可靠。
+
+## 性别筛不出来时，别自己判
+
+王者荣耀的接口和两个 wiki 都没有性别字段。做法是**出一张编号联系表让用户圈**，
+不是拿视觉模型判——那类判定试过四次，四次都复现不了用户的阈值（见 06）。

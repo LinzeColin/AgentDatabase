@@ -20,7 +20,7 @@ import argparse
 import json
 import pathlib
 
-GAME_ZH = {"genshin": "原神", "hsr": "崩坏：星穹铁道", "zzz": "绝区零", "wuwa": "鸣潮"}
+GAME_ZH = {"genshin": "原神", "hsr": "崩坏：星穹铁道", "zzz": "绝区零", "wuwa": "鸣潮", "nte": "异环"}
 
 
 def chinese_variants(assets: pathlib.Path) -> dict:

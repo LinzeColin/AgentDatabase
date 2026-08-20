@@ -29,7 +29,8 @@ from pathlib import Path
 
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
 WIKIS = {"genshin": "genshin-impact", "hsr": "honkai-star-rail",
-         "zzz": "zenless-zone-zero", "wuwa": "wutheringwaves"}
+         "zzz": "zenless-zone-zero", "wuwa": "wutheringwaves",
+         "nte": "neverness-to-everness"}
 CANDIDATES = {
     "genshin": ["{n} Card.png", "Character {n} Full Wish.png",
                 "Character {n} Full Wish Alt.png", "Character {n} Portrait.png"],
@@ -39,6 +40,9 @@ CANDIDATES = {
             "Agent {n} Portrait.png", "{n} Card.png", "Agent {n} Splash Art.png"],
     "wuwa": ["{n} Full Sprite.png", "{n} Splash Art.png", "{n} Card.png",
              "{n} Portrait.png"],
+    # 异环实测：15/15 都有 Portrait.png @2160x2560，是四个游戏里最好的一档。
+    # Card 只有 1080x1512，"in game Model" 是 600 出头的模型截图，都不如它。
+    "nte": ["{n} Portrait.png", "{n} Card.png"],
 }
 
 
