@@ -46,14 +46,32 @@ done
 [ -n "\$IP" ] || { echo "超时：20 次探测都没拿到健康的容器"; exit 1; }
 
 echo "--- 源站自检（容器直连）---"
-for p in / /app.js /app.css /atlas/atlas.json; do
+for p in / /core/app.js /themes/console/shell.css /themes/nebula/shell.css /themes/journal/shell.css /vendor/gsap.min.js /atlas/atlas.json; do
   code=\$(curl -s -o /dev/null -w '%{http_code}' "http://\$IP:8088\$p")
   size=\$(curl -s -o /dev/null -w '%{size_download}' "http://\$IP:8088\$p")
-  printf '  %-22s HTTP %s  %s bytes\n' "\$p" "\$code" "\$size"
+  ctype=\$(curl -s -o /dev/null -w '%{content_type}' "http://\$IP:8088\$p")
+  # nginx 的 try_files 会把不存在的路径回落成 index.html：HTTP 200、内容却是首页。
+  # 只看状态码会把「文件根本没发上去」读成「一切正常」——必须同时核对类型。
+  flag=""
+  case "\$p" in
+    *.js)   [ "\${ctype#*javascript}" = "\$ctype" ] && flag="  ← 不是 JS，疑似回落到首页" ;;
+    *.css)  [ "\${ctype#*css}" = "\$ctype" ] && flag="  ← 不是 CSS，疑似回落到首页" ;;
+    *.json) [ "\${ctype#*json}" = "\$ctype" ] && flag="  ← 不是 JSON，疑似回落到首页" ;;
+  esac
+  printf '  %-32s HTTP %s  %s bytes  %s%s\n' "\$p" "\$code" "\$size" "\$ctype" "\$flag"
+  [ -n "\$flag" ] && bad=1
 done
+[ "\${bad:-0}" = 1 ] && { echo "✗ 有资源没真正发上去（被 SPA 兜底掩盖）"; exit 1; }
 echo "--- 边缘自检（经 Traefik，按真实 Host 路由）---"
-edge=\$(curl -sk -o /dev/null -w '%{http_code}' -H 'Host: memoryatlas.linzezhang.com' https://127.0.0.1/)
+# 容器刚 recreate，Traefik 要几秒才认到新后端，期间是 503。最多试 15 次，不写死等。
+edge=000
+for i in \$(seq 1 15); do
+  edge=\$(curl -sk -o /dev/null -w '%{http_code}' -H 'Host: memoryatlas.linzezhang.com' https://127.0.0.1/)
+  [ "\$edge" = 200 ] && break
+  sleep 1
+done
 echo "  Traefik -> HTTP \$edge"
+[ "\$edge" = 200 ] || { echo "✗ 边缘没通"; exit 1; }
 echo "  release  = \$(readlink current)"
 echo "  previous = \$(readlink previous)"
 REMOTE

@@ -1,0 +1,109 @@
+/* 主题 C · 手记。单栏杂志排版：衬线、大行距、旁注在栏外、数字写进句子里。
+   这套的重点是**安静** —— 没有卡片、没有粒子、没有辉光，动效只留淡入。 */
+:root[data-theme="journal"]{
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Songti SC","Source Han Serif SC",Georgia,serif;
+  --sans:-apple-system,"SF Pro Text","PingFang SC",system-ui,sans-serif;
+  --col:720px;
+}
+:root[data-theme="journal"][data-mode="light"]{
+  --bg:#f8f5ee; --paper:#fffdf7; --fg:#1d1a15; --dim:#575046; --dim2:#8f887c;
+  --rule:#ddd4c4; --rule2:#ece4d5; --acc:#a2423a; --acc2:#7a6a4f;
+  --ok:#3d6a46; --warn:#8f5c11; --bad:#a2423a;
+}
+:root[data-theme="journal"][data-mode="dark"]{
+  --bg:#14120e; --paper:#1a1712; --fg:#ece5d6; --dim:#a79d8a; --dim2:#726a5c;
+  --rule:#312c23; --rule2:#241f18; --acc:#e08a72; --acc2:#c2ad86;
+  --ok:#7cbb8a; --warn:#d9a441; --bad:#e07b6b;
+}
+[data-theme="journal"] body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.85 var(--serif);letter-spacing:.002em;-webkit-font-smoothing:antialiased}
+[data-theme="journal"] #fxlayer{display:none}
+[data-theme="journal"] #shell{position:relative;z-index:1}
+[data-theme="journal"] #topbar{position:sticky;top:0;z-index:40;background:var(--bg);
+  border-bottom:1px solid var(--rule);padding:0}
+[data-theme="journal"] #topbar>*{max-width:var(--col);margin:0 auto}
+[data-theme="journal"] .brand{font-family:var(--serif);font-size:19px;letter-spacing:.03em;
+  padding:16px 24px 4px;font-style:italic}
+[data-theme="journal"] #nav{display:flex;flex-wrap:wrap;gap:0 18px;padding:0 24px 10px}
+[data-theme="journal"] #nav button{all:unset;cursor:pointer;font:11px/1.6 var(--sans);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--dim2);padding-bottom:2px;
+  border-bottom:1px solid transparent}
+[data-theme="journal"] #nav button:hover{color:var(--fg)}
+[data-theme="journal"] #nav button[aria-current="true"]{color:var(--fg);border-bottom-color:var(--acc)}
+[data-theme="journal"] #tools{display:flex;gap:8px;padding:0 24px 12px}
+[data-theme="journal"] .seg{display:flex;gap:10px}
+[data-theme="journal"] .seg button{all:unset;cursor:pointer;font:10.5px var(--sans);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim2)}
+[data-theme="journal"] .seg button[aria-pressed="true"]{color:var(--acc);text-decoration:underline;text-underline-offset:3px}
+[data-theme="journal"] #stamp{padding:0 24px 12px;font:10.5px var(--sans);letter-spacing:.1em;color:var(--dim2)}
+[data-theme="journal"] main{max-width:var(--col);margin:0 auto;padding:44px 24px 120px}
+[data-theme="journal"] footer{max-width:var(--col);margin:0 auto;padding:0 24px 60px;
+  font:10.5px var(--sans);letter-spacing:.1em;color:var(--dim2);text-align:center}
+
+/* 章节：编号 + 衬线大标题 + 一条细规线 */
+[data-theme="journal"] .sec{font-family:var(--serif);font-weight:600;font-size:27px;
+  letter-spacing:-.012em;margin:64px 0 2px;padding-top:22px;border-top:1px solid var(--rule);
+  position:relative;line-height:1.25}
+[data-theme="journal"] .sec:first-child{margin-top:0;border-top:none;padding-top:0}
+[data-theme="journal"] .sec::after{content:"";display:block;width:44px;height:2px;
+  background:var(--acc);margin:13px 0 0}
+[data-theme="journal"] .hint{color:var(--dim);font-size:15px;font-style:italic;margin:14px 0 20px}
+
+/* 正文段落。第一段首字下沉。 */
+[data-theme="journal"] .lede{font-size:19px;line-height:1.8}
+[data-theme="journal"] .lede::first-letter{float:left;font-size:62px;line-height:.82;
+  padding:6px 10px 0 0;color:var(--acc);font-weight:600}
+[data-theme="journal"] p.body{margin:0 0 18px}
+[data-theme="journal"] .big{font-size:1.32em;font-weight:600;color:var(--fg);font-variant-numeric:tabular-nums}
+[data-theme="journal"] .n{font-variant-numeric:tabular-nums;font-weight:600;color:var(--fg)}
+[data-theme="journal"] .q{color:var(--acc)}
+
+/* 旁注：正文栏之外，宽屏时浮到左边 */
+[data-theme="journal"] .aside{font:12.5px/1.6 var(--sans);color:var(--dim2);
+  border-left:2px solid var(--rule);padding:2px 0 2px 14px;margin:20px 0}
+@media(min-width:1180px){
+  [data-theme="journal"] .aside{position:relative;float:left;width:220px;
+    margin-left:-266px;margin-top:4px;border-left:none;border-right:2px solid var(--rule);
+    padding:2px 14px 2px 0;text-align:right;clear:left}
+}
+[data-theme="journal"] .aside b{color:var(--fg);font-weight:600}
+
+/* 图：细规线上下夹住，带图注 */
+[data-theme="journal"] figure{margin:26px 0;padding:0}
+[data-theme="journal"] figure>.fbody{border-top:1px solid var(--fg);border-bottom:1px solid var(--rule);padding:14px 0}
+[data-theme="journal"] figcaption{font:12px/1.6 var(--sans);color:var(--dim2);margin-top:9px;letter-spacing:.02em}
+[data-theme="journal"] figcaption::before{content:"图 — ";letter-spacing:.1em}
+
+/* 排行：文字 + 细横线，不用色块 */
+[data-theme="journal"] .rank{display:grid;grid-template-columns:auto 1fr auto;gap:0 14px;align-items:baseline}
+[data-theme="journal"] .rank>span{padding:5px 0;border-bottom:1px solid var(--rule2)}
+[data-theme="journal"] .rank .rk{color:var(--dim2);font:11px var(--sans);letter-spacing:.1em}
+[data-theme="journal"] .rank .rl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+[data-theme="journal"] .rank .rv{font-variant-numeric:tabular-nums;color:var(--dim);font-size:15px;text-align:right}
+[data-theme="journal"] .rank .rl i{display:inline-block;height:1px;background:var(--acc);
+  vertical-align:middle;margin-left:8px;opacity:.6}
+
+[data-theme="journal"] table{width:100%;border-collapse:collapse;font:14px var(--sans)}
+[data-theme="journal"] th{text-align:left;font:10.5px var(--sans);letter-spacing:.13em;
+  text-transform:uppercase;color:var(--dim2);font-weight:500;padding:6px 8px;border-bottom:1px solid var(--fg)}
+[data-theme="journal"] td{padding:6px 8px;border-bottom:1px solid var(--rule2);vertical-align:top}
+[data-theme="journal"] .r{text-align:right;font-variant-numeric:tabular-nums}
+
+[data-theme="journal"] .note{font-style:italic;color:var(--dim);border-left:2px solid var(--acc);
+  padding:4px 0 4px 16px;margin:22px 0;font-size:15.5px}
+[data-theme="journal"] .note b{font-style:normal;color:var(--fg)}
+[data-theme="journal"] .st{font:11px var(--sans);letter-spacing:.08em;color:var(--dim2)}
+[data-theme="journal"] .st[data-s="通"]{color:var(--ok)} [data-theme="journal"] .st[data-s="断了"]{color:var(--bad)}
+[data-theme="journal"] .st[data-s="不确定"]{color:var(--warn)}
+[data-theme="journal"] .ctl{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin:20px 0;
+  font:12px var(--sans);color:var(--dim2)}
+[data-theme="journal"] .ctl select,[data-theme="journal"] .ctl input[type=date]{all:unset;cursor:pointer;
+  border-bottom:1px solid var(--rule);padding:2px 0;font:13px var(--sans);color:var(--fg)}
+[data-theme="journal"] .ctl button{all:unset;cursor:pointer;font:11px var(--sans);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--dim2);border-bottom:1px solid transparent;padding-bottom:2px}
+[data-theme="journal"] .ctl button[aria-pressed="true"]{color:var(--acc);border-bottom-color:var(--acc)}
+[data-theme="journal"] .ctl button:hover{color:var(--fg)}
+[data-theme="journal"] canvas.viz{width:100%;display:block;background:transparent}
+[data-theme="journal"] .lnk{color:var(--acc);cursor:pointer;text-decoration:underline;text-underline-offset:2px;
+  text-decoration-thickness:.5px}
+[data-theme="journal"] .kw{font:11.5px var(--sans);color:var(--dim2);margin-right:12px}
