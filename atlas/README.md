@@ -8,14 +8,40 @@ Linze 打开一个网址，看懂自己这段时间的时间去了哪。
 
 **杀期：2026-09-20。** 到期 Owner 一次都没主动想打开就杀掉，不复活、不重构。
 
-## 三个文件就是全部
+## 结构
 
 ```
 atlas/build/extract.py   本机 7 个来源 → 一行一会话（增量，未改动的文件直接复用）
+atlas/build/metrics.py   token/缓存、经济指数、耦合网络三个派生块
 atlas/build/build.py     会话 → atlas.json + 每天一个明细文件
-atlas/build/deploy.sh    发到 VPS3 的 memory-atlas 容器，翻软链接，自检，给回滚命令
-atlas/web/               页面本体。没有构建步骤，没有依赖，没有 CDN。
+atlas/build/deploy.sh    发到 VPS3，翻软链接，自检，给回滚命令
+atlas/build/daily.sh     每日流水线；bootstrap.sh 是 cron 唯一入口
+atlas/web/
+  core/app.js     启动 / 主题切换 / 路由
+  core/select.js  纯数据选择器（**不产出任何标记、不含任何样式**）
+  core/fx.js      背景光场：星域=粒子辉光，控制台=网格扫描线，手记=无
+  core/g3d.js     手写 3D：投影、轨道相机、力导布局（CSP 装不了 three.js）
+  vendor/gsap.min.js   GSAP 3.15，本地 vendor —— CSP 是 script-src 'self'，用不了 CDN
+  themes/<主题>/  shell.css + shell.js + kit.js + views/×11
 ```
+
+## 三套主题：换的是排版、结构、交互，不是配色
+
+三套各有自己的 `shell.css`、组件词汇（`kit.js`）和 11 个视图实现，
+**互相不共享一行样式或标记**。共享的只有 `core/select.js` 里的纯数据选择器。
+
+| | 控制台 | 星域 | 手记 |
+|---|---|---|---|
+| 字面 | 等宽 | 无衬线 | 衬线 |
+| 导航 | 左命令轨 + 数字键 | 浮岛胶囊 | running head 小型大写 |
+| 组件 | 行与规则线，没有卡片 | Bento 玻璃卡 + 轨道条 | 段落、旁注、图注 |
+| 表格 | 主表面就是表格 | 收进抽屉，主表面是形状 | 当作「图」并配图注 |
+| 图表 | ASCII 火花线 | 环形 / 流图 / 辉光 | 细墨线线稿 |
+| 动效 | 0.14s power2，硬 | 0.70s back.out，弹 | 0.48s power1，几乎没有 |
+| 背景 | 网格 + 扫描线 | 粒子 + 辉光 + 视差 | 无 |
+| 交互 | 键盘优先（1-9 / d / t） | 悬停展开、拖拽轨道 | 点击翻页 |
+
+每套都有深浅两色，共 6 种组合，选择记在 localStorage。
 
 ## 每天怎么跑
 

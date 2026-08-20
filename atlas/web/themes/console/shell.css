@@ -1,0 +1,90 @@
+/* 主题 A · 控制台。没有卡片、没有圆角、没有阴影、没有留白炫技。
+   一切都是行与规则线。数字右对齐等宽，键盘优先。 */
+:root[data-theme="console"] {
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "PingFang SC", monospace;
+  --rail: 190px;
+}
+:root[data-theme="console"][data-mode="dark"] {
+  --bg:#06080b; --fg:#c9d3de; --dim:#7d8a99; --dim2:#4d5764; --hair:#161d26; --hair2:#0f151c;
+  --acc:#4da3ff; --ok:#3ddc9a; --warn:#ffb14d; --bad:#ff6b6b; --sel:rgba(77,163,255,.10);
+}
+:root[data-theme="console"][data-mode="light"] {
+  --bg:#fbfbf9; --fg:#14181d; --dim:#4d5764; --dim2:#8a94a0; --hair:#dfe3e8; --hair2:#eef1f4;
+  --acc:#0b62d6; --ok:#0a7a52; --warn:#8a5000; --bad:#c62828; --sel:rgba(11,98,214,.07);
+}
+[data-theme="console"] body{margin:0;background:var(--bg);color:var(--fg);
+  font:13px/1.5 var(--mono);-webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+[data-theme="console"] #fxlayer{position:fixed;inset:0;z-index:0;pointer-events:none}
+[data-theme="console"] #shell{position:relative;z-index:1;padding-left:var(--rail);min-height:100vh;padding-bottom:26px}
+[data-theme="console"] #topbar{position:fixed;inset:0 auto 26px 0;width:var(--rail);
+  border-right:1px solid var(--hair);display:flex;flex-direction:column;padding:14px 0;overflow-y:auto}
+[data-theme="console"] .brand{padding:0 14px 12px;font-size:11px;letter-spacing:.34em;color:var(--dim2)}
+[data-theme="console"] #nav{display:flex;flex-direction:column}
+[data-theme="console"] #nav button{all:unset;cursor:pointer;padding:4px 14px;color:var(--dim);
+  font:12px/1.6 var(--mono);border-left:2px solid transparent;display:flex;gap:8px}
+[data-theme="console"] #nav button::before{content:attr(data-k);color:var(--dim2);width:1.2em}
+[data-theme="console"] #nav button:hover{background:var(--hair2);color:var(--fg)}
+[data-theme="console"] #nav button[aria-current="true"]{border-left-color:var(--acc);color:var(--fg);background:var(--sel)}
+[data-theme="console"] #tools{margin-top:auto;padding:12px 14px 0;display:flex;flex-direction:column;gap:6px}
+[data-theme="console"] .seg{display:flex;border:1px solid var(--hair)}
+[data-theme="console"] .seg button{all:unset;cursor:pointer;flex:1;text-align:center;padding:3px 0;
+  font:11px var(--mono);color:var(--dim2)}
+[data-theme="console"] .seg button[aria-pressed="true"]{background:var(--acc);color:var(--bg)}
+[data-theme="console"] main{padding:16px 20px 40px;max-width:1600px}
+[data-theme="console"] #statusline{position:fixed;left:0;right:0;bottom:0;height:26px;z-index:50;
+  display:flex;align-items:center;gap:14px;padding:0 12px;background:var(--hair2);
+  border-top:1px solid var(--hair);font-size:11px;color:var(--dim2)}
+[data-theme="console"] #statusline b{color:var(--acc);font-weight:400}
+[data-theme="console"] footer{display:none}
+
+/* 章节 = ASCII 规则线，不是标题卡 */
+[data-theme="console"] .sec{margin:22px 0 6px;display:flex;align-items:center;gap:10px;
+  color:var(--fg);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+[data-theme="console"] .sec::before{content:"##";color:var(--acc)}
+[data-theme="console"] .sec::after{content:"";flex:1;border-top:1px solid var(--hair)}
+[data-theme="console"] .hint{color:var(--dim2);font-size:11.5px;margin:0 0 10px}
+
+/* 指标 = 一行文本，不是卡片 */
+[data-theme="console"] .kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:0 26px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:6px 0;margin:8px 0 14px}
+[data-theme="console"] .kv>div{display:flex;justify-content:space-between;gap:12px;padding:2px 0;border-bottom:1px dotted var(--hair2)}
+[data-theme="console"] .kv .k{color:var(--dim)}
+[data-theme="console"] .kv .v{color:var(--fg)}
+[data-theme="console"] .kv .v.acc{color:var(--acc)}
+[data-theme="console"] .kv .v.warn{color:var(--warn)}
+
+[data-theme="console"] table{width:100%;border-collapse:collapse;font-size:12px}
+[data-theme="console"] th{text-align:left;color:var(--dim2);font-weight:400;padding:3px 8px;
+  border-bottom:1px solid var(--hair);white-space:nowrap;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+[data-theme="console"] td{padding:2px 8px;border-bottom:1px solid var(--hair2);vertical-align:top}
+[data-theme="console"] tr:hover td{background:var(--sel)}
+[data-theme="console"] .r{text-align:right}
+[data-theme="console"] .meter{display:inline-block;height:9px;background:var(--acc);vertical-align:middle}
+[data-theme="console"] .sparkcell{font-size:10px;letter-spacing:-1px;color:var(--acc)}
+[data-theme="console"] .tag{color:var(--dim2)}
+[data-theme="console"] .tag::before{content:"["}
+[data-theme="console"] .tag::after{content:"]"}
+[data-theme="console"] .st{font-size:11px}
+[data-theme="console"] .st[data-s="通"]{color:var(--ok)}
+[data-theme="console"] .st[data-s="断了"]{color:var(--bad)}
+[data-theme="console"] .st[data-s="没做"]{color:var(--dim2)}
+[data-theme="console"] .st[data-s="不确定"]{color:var(--warn)}
+[data-theme="console"] .warnbox{border-left:2px solid var(--warn);padding:6px 12px;margin:10px 0;
+  color:var(--dim);font-size:12px;background:var(--hair2)}
+[data-theme="console"] .warnbox b{color:var(--fg);font-weight:400}
+[data-theme="console"] canvas.viz{width:100%;display:block;border:1px solid var(--hair);background:var(--hair2)}
+[data-theme="console"] .ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0;
+  padding:6px 0;border-bottom:1px solid var(--hair)}
+[data-theme="console"] .ctl select,[data-theme="console"] .ctl input{all:unset;cursor:pointer;
+  border:1px solid var(--hair);padding:2px 8px;font:12px var(--mono);color:var(--fg);background:var(--hair2)}
+[data-theme="console"] .ctl button{all:unset;cursor:pointer;border:1px solid var(--hair);
+  padding:2px 10px;font:12px var(--mono);color:var(--dim)}
+[data-theme="console"] .ctl button:hover,[data-theme="console"] .ctl button[aria-pressed="true"]{color:var(--acc);border-color:var(--acc)}
+[data-theme="console"] a,[data-theme="console"] .lnk{color:var(--acc);cursor:pointer;text-decoration:none}
+[data-theme="console"] .lnk:hover{text-decoration:underline}
+@media(max-width:900px){
+  [data-theme="console"] #shell{padding-left:0}
+  [data-theme="console"] #topbar{position:static;width:auto;border-right:none;border-bottom:1px solid var(--hair)}
+  [data-theme="console"] #nav{flex-direction:row;flex-wrap:wrap}
+}

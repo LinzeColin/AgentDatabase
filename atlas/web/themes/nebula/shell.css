@@ -1,0 +1,118 @@
+/* 主题 B · 星域。主表面**不放表格** —— 数据先是形状，再是数字。
+   Bento 布局、玻璃质感、粒子光场、浮岛导航。表格收进「明细」抽屉里。 */
+:root[data-theme="nebula"]{
+  --sans:-apple-system,"SF Pro Text","Segoe UI",Inter,"PingFang SC",system-ui,sans-serif;
+  --disp:-apple-system,"SF Pro Display","Segoe UI",Inter,"PingFang SC",system-ui,sans-serif;
+}
+:root[data-theme="nebula"][data-mode="dark"]{
+  --bg:#05060f; --fg:#eef1fb; --dim:#a6adcd; --dim2:#6c7398;
+  --glass:rgba(26,31,54,.46); --glass2:rgba(38,44,74,.4);
+  --line:rgba(150,170,255,.16); --line2:rgba(150,170,255,.07);
+  --acc:#7cc4ff; --acc2:#b58cff; --ok:#5ce6b4; --warn:#ffc46b; --bad:#ff7a92;
+  --shadow:0 24px 70px -30px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.07);
+  --track:rgba(150,170,255,.13);
+}
+:root[data-theme="nebula"][data-mode="light"]{
+  --bg:#eaeefb; --fg:#0d1230; --dim:#4b5480; --dim2:#8189b2;
+  --glass:rgba(255,255,255,.66); --glass2:rgba(255,255,255,.82);
+  --line:rgba(60,80,180,.17); --line2:rgba(60,80,180,.08);
+  --acc:#3358d4; --acc2:#7a4bd0; --ok:#0a7a58; --warn:#9a5b00; --bad:#c02648;
+  --shadow:0 22px 54px -30px rgba(30,50,140,.45),inset 0 1px 0 rgba(255,255,255,.9);
+  --track:rgba(60,80,180,.12);
+}
+[data-theme="nebula"] body{margin:0;background:var(--bg);color:var(--fg);
+  font:15px/1.66 var(--sans);letter-spacing:-.003em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+[data-theme="nebula"] #fxlayer{position:fixed;inset:0;z-index:0;pointer-events:none}
+[data-theme="nebula"] #shell{position:relative;z-index:1;min-height:100vh}
+[data-theme="nebula"] #topbar{position:sticky;top:14px;z-index:40;margin:14px auto 0;width:fit-content;
+  max-width:calc(100% - 28px);display:flex;align-items:center;gap:10px;padding:8px 12px;
+  border-radius:999px;border:1px solid var(--line);background:var(--glass);
+  backdrop-filter:blur(30px) saturate(1.8);box-shadow:var(--shadow);flex-wrap:wrap;justify-content:center}
+[data-theme="nebula"] .brand{font-family:var(--disp);font-weight:680;font-size:14px;letter-spacing:-.02em;padding:0 6px}
+[data-theme="nebula"] #nav{display:flex;gap:2px;flex-wrap:wrap}
+[data-theme="nebula"] #nav button{all:unset;cursor:pointer;padding:6px 13px;border-radius:999px;
+  font-size:13px;color:var(--dim);transition:all .34s cubic-bezier(.22,1,.36,1)}
+[data-theme="nebula"] #nav button:hover{color:var(--fg);background:var(--line2)}
+[data-theme="nebula"] #nav button[aria-current="true"]{color:var(--fg);background:var(--line);
+  box-shadow:inset 0 0 0 1px var(--line)}
+[data-theme="nebula"] #tools{display:flex;gap:6px}
+[data-theme="nebula"] .seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+[data-theme="nebula"] .seg button{all:unset;cursor:pointer;padding:5px 11px;font-size:12px;color:var(--dim2)}
+[data-theme="nebula"] .seg button[aria-pressed="true"]{background:var(--acc);color:var(--bg)}
+[data-theme="nebula"] main{max-width:1220px;margin:0 auto;padding:34px 26px 100px}
+[data-theme="nebula"] #stamp{width:100%;text-align:center;font-size:11px;color:var(--dim2);order:9}
+[data-theme="nebula"] footer{text-align:center;color:var(--dim2);font-size:11px;padding:0 26px 46px}
+
+/* 章节 = 大标题 + 说明，没有规则线 */
+[data-theme="nebula"] .sec{font-family:var(--disp);font-weight:660;font-size:27px;
+  letter-spacing:-.03em;margin:52px 0 6px}
+[data-theme="nebula"] .sec:first-child{margin-top:6px}
+[data-theme="nebula"] .hint{color:var(--dim);font-size:14px;margin:0 0 18px;max-width:70ch}
+
+/* Bento：卡片尺寸不等，重要的占大格 */
+[data-theme="nebula"] .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin:18px 0}
+[data-theme="nebula"] .card{background:var(--glass);border:1px solid var(--line);border-radius:22px;
+  padding:22px 24px;box-shadow:var(--shadow);backdrop-filter:blur(24px) saturate(1.6);
+  position:relative;overflow:hidden;grid-column:span 2}
+[data-theme="nebula"] .card.w3{grid-column:span 3}
+[data-theme="nebula"] .card.w4{grid-column:span 4}
+[data-theme="nebula"] .card.w6{grid-column:span 6}
+[data-theme="nebula"] .card::after{content:"";position:absolute;inset:-46% -46% auto auto;
+  width:190px;height:190px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,var(--acc),transparent 66%);opacity:.10}
+[data-theme="nebula"] .card.alt::after{background:radial-gradient(circle,var(--acc2),transparent 66%)}
+[data-theme="nebula"] .ck{font-size:12px;color:var(--dim2);letter-spacing:.02em}
+[data-theme="nebula"] .cv{font-family:var(--disp);font-weight:700;font-size:44px;letter-spacing:-.035em;
+  line-height:1.05;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+[data-theme="nebula"] .cn{font-size:12.5px;color:var(--dim2)}
+[data-theme="nebula"] .cv.acc{color:var(--acc)} [data-theme="nebula"] .cv.warn{color:var(--warn)}
+@media(max-width:860px){[data-theme="nebula"] .bento{grid-template-columns:repeat(2,1fr)}
+  [data-theme="nebula"] .card,[data-theme="nebula"] .card.w3,[data-theme="nebula"] .card.w4,
+  [data-theme="nebula"] .card.w6{grid-column:span 2}}
+
+/* 数据条：星域不用表格排行，用轨道条 */
+[data-theme="nebula"] .orbit{display:flex;flex-direction:column;gap:11px;margin-top:6px}
+[data-theme="nebula"] .orow{display:grid;grid-template-columns:96px 1fr auto;align-items:center;gap:12px;
+  font-size:13.5px;cursor:pointer}
+[data-theme="nebula"] .orow:hover .otrack{filter:brightness(1.25)}
+[data-theme="nebula"] .olabel{color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-theme="nebula"] .otrack{height:10px;border-radius:999px;background:var(--track);overflow:hidden}
+[data-theme="nebula"] .ofill{height:100%;border-radius:999px;transition:width .7s cubic-bezier(.22,1,.36,1)}
+[data-theme="nebula"] .oval{font-variant-numeric:tabular-nums;color:var(--fg);font-size:13px;min-width:56px;text-align:right}
+
+/* 抽屉：表格只出现在这里 */
+[data-theme="nebula"] details.drawer{margin:12px 0;border:1px solid var(--line);border-radius:16px;
+  background:var(--glass);backdrop-filter:blur(20px);overflow:hidden}
+[data-theme="nebula"] details.drawer>summary{cursor:pointer;padding:12px 20px;font-size:13.5px;
+  color:var(--dim);list-style:none;user-select:none}
+[data-theme="nebula"] details.drawer>summary::-webkit-details-marker{display:none}
+[data-theme="nebula"] details.drawer>summary::before{content:"▸ ";color:var(--acc)}
+[data-theme="nebula"] details.drawer[open]>summary::before{content:"▾ "}
+[data-theme="nebula"] details.drawer .inner{padding:0 20px 18px;overflow-x:auto}
+[data-theme="nebula"] table{width:100%;border-collapse:collapse;font-size:13px}
+[data-theme="nebula"] th{text-align:left;color:var(--dim2);font-weight:500;font-size:11.5px;
+  padding:7px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+[data-theme="nebula"] td{padding:7px 9px;border-bottom:1px solid var(--line2)}
+[data-theme="nebula"] tr:hover td{background:var(--line2)}
+[data-theme="nebula"] .r{text-align:right;font-variant-numeric:tabular-nums}
+
+[data-theme="nebula"] .pill{display:inline-block;padding:3px 11px;border-radius:999px;font-size:12px;
+  background:var(--line2);border:1px solid var(--line);color:var(--dim);margin:2px 4px 2px 0}
+[data-theme="nebula"] .warnbox{border-radius:18px;border:1px solid var(--line);
+  background:var(--glass2);backdrop-filter:blur(18px);padding:16px 20px;margin:16px 0;
+  font-size:13.5px;color:var(--dim);border-left:3px solid var(--warn)}
+[data-theme="nebula"] .warnbox b{color:var(--fg)}
+[data-theme="nebula"] .st{font-size:12px;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--dim)}
+[data-theme="nebula"] .st[data-s="通"]{color:var(--ok)} [data-theme="nebula"] .st[data-s="断了"]{color:var(--bad)}
+[data-theme="nebula"] .st[data-s="不确定"]{color:var(--warn)} [data-theme="nebula"] .st[data-s="没做"]{color:var(--dim2)}
+[data-theme="nebula"] .ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:16px 0}
+[data-theme="nebula"] .ctl select,[data-theme="nebula"] .ctl input[type=date]{all:unset;cursor:pointer;
+  border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:13px;background:var(--glass2)}
+[data-theme="nebula"] .ctl button{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:999px;
+  padding:5px 15px;font-size:13px;color:var(--dim);transition:all .3s cubic-bezier(.22,1,.36,1)}
+[data-theme="nebula"] .ctl button:hover{color:var(--fg);border-color:var(--acc)}
+[data-theme="nebula"] .ctl button[aria-pressed="true"]{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+[data-theme="nebula"] canvas.viz{width:100%;display:block;border-radius:22px;border:1px solid var(--line);
+  background:var(--glass);backdrop-filter:blur(20px);touch-action:none}
+[data-theme="nebula"] .lnk{color:var(--acc);cursor:pointer}
+[data-theme="nebula"] .lnk:hover{text-decoration:underline}

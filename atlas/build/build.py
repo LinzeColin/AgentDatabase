@@ -25,6 +25,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from extract import TOPICS, SKIPPED  # noqa: E402  词表是唯一真源，不在这里复制一份
+from metrics import token_block, economics_block, coupling_block  # noqa: E402
 
 SLICES = [3, 7, 15, 30, 45, 60, 90, 180]
 
@@ -255,6 +256,9 @@ def build(sessions: list, out: Path) -> dict:
         "insights": insights_block(sessions, day_rows, week_rows, proj_rows),
         "lessons": lessons_block(sessions, proj_rows),
         "opportunities": opportunity_block(sessions, proj_rows),
+        "tokens": token_block(sessions),
+        "economics": economics_block(sessions, _ladder_counts(sessions)),
+        "coupling": coupling_block(sessions),
         "keyword_weights": {k: round(v, 3) for k, v in sorted(weights.items(), key=lambda kv: -kv[1])[:60]},
     }
 
@@ -507,6 +511,18 @@ def lessons_block(sessions: list, projects: list) -> dict:
         "note": f"「问过几次」按每场会话第一句的前 {REPEAT_PREFIX} 个字判重，"
                 f"出现 {REPEAT_MIN} 次以上才列出来。",
     }
+
+
+def _ladder_counts(sessions: list) -> dict:
+    ld = Counter()
+    for s in sessions:
+        if s["kind"] != "human":
+            continue
+        for t in s["topics"]:
+            for name, members in LADDER.items():
+                if t in members:
+                    ld[name] += 1
+    return dict(ld)
 
 
 def opportunity_block(sessions: list, projects: list) -> dict:
