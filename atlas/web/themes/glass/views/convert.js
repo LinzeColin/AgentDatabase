@@ -17,6 +17,28 @@ export async function render(host) {
     enter('.sec', host); return;
   }
   const S = C.stage_labels || {};
+  const O = D.A().outward;
+
+  // ── 0.「对外」那一列。放在最前面是故意的：
+  //    下面所有的数回答的都是「我做了多少」，只有这一块回答
+  //    「有没有一个动作的收件人不是我自己」。它很可能是 0 —— 0 才是它的价值。
+  const outward = !O ? '' : `
+${sec('对外', esc(O.note))}
+${bento([
+  { k: `过去 ${O.window_days} 天走出去过吗`, v: esc(O.headline.state),
+    n: esc(O.headline.basis), w: 3, tone: (O.headline.n_30d ? 'acc' : 'warn'), size: 'sm' },
+  { k: '公开仓', v: `${O.public_repos} / ${O.repos_total}`, n: '能被别人看到的那几个', w: 3 },
+])}
+${table([{ t: '信号' }, { t: '强度' }, { t: '全期', r: true }, { t: '30 天', r: true }, { t: '判定' }],
+  (O.signals || []).map(x => [
+    `<b>${esc(x.label)}</b><div class="hint">${esc(x.caveat || '')}</div>`,
+    `<span class="st" data-s="${x.strength === 'hard' ? '通' : x.strength === 'soft' ? '不确定' : '没做'}">${
+      x.strength === 'hard' ? '机器可核' : x.strength === 'soft' ? '说过而已' : '没信号源'}</span>`,
+    x.n_all == null ? '—' : String(x.n_all),
+    x.n_30d == null ? '—' : String(x.n_30d),
+    esc(x.state)]))}
+${warn(`<b>这三件事这里测不到，别把上面的数读成它们：</b><br>${(O.not_measurable || []).map(esc).join('<br>')}`)}
+`;
 
   // ── A. 这周最值得转化的一件事 ──
   const champ = C.champion ? `
@@ -59,7 +81,7 @@ ${(C.champion.evidence || []).length ? `<p class="hint"><b>依据：</b>${
     label: `${C.funnel[s] || 0}　${s}`,   // 中文在前：这一屏给人看，schema 名是给 agent 写事件用的
   })));
 
-  host.innerHTML = `
+  host.innerHTML = outward + `
 ${sec('这周最值得转化的一件事',
   `沉淀是原料，不是资产。这一屏只回答一个问题：<b>已经花掉的时间，
    哪一块最接近变成可复用的东西或真实收益？</b>　当前状态：${state(C.state)}`)}

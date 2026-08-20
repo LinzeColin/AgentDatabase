@@ -19,8 +19,12 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"          # atlas/
 SRC="$ROOT/AGENTS_CONTRACT.md"
 WORKSPACE="${ATLAS_WORKSPACE:-$HOME/Documents/Codex/GithubProject}"
-BEGIN='<!-- BEGIN memory-atlas:agent-contract v1 -->'
-END='<!-- END memory-atlas:agent-contract v1 -->'
+# v2：常驻块从 116 行缩到 25 行。旧的 v1 哨兵也要认，否则各 agent 文件里
+# 那 116 行会**留在原地不被替换**，新块追加在后面 —— 变成 141 行，比不改还糟。
+BEGIN='<!-- BEGIN memory-atlas:agent-contract v2 -->'
+END='<!-- END memory-atlas:agent-contract v2 -->'
+OLD_BEGIN='<!-- BEGIN memory-atlas:agent-contract v1 -->'
+OLD_END='<!-- END memory-atlas:agent-contract v1 -->'
 MODE="${1:-install}"
 
 [ -f "$SRC" ] || { echo "✗ 找不到契约正文：$SRC"; exit 1; }
@@ -46,6 +50,7 @@ for f in "${TARGETS[@]}"; do
   fi
 
   out="$(ATLAS_TGT="$f" ATLAS_SRC="$SRC" ATLAS_B="$BEGIN" ATLAS_E="$END" \
+         ATLAS_OB="$OLD_BEGIN" ATLAS_OE="$OLD_END" \
          ATLAS_MODE="$MODE" python3 "$ROOT/build/helpers/agents_block.py")"
   case "$out" in
     SAME)  [ "$MODE" = "--check" ] && echo "✓ $f" || echo "＝ 已最新 $f" ;;

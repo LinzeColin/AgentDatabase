@@ -8,14 +8,14 @@
   五个经济原语   任务复杂度、技能层级、用途、AI 自主度、任务成功
   协作五模式     指派 / 反馈环 / 迭代 / 学习 / 校验 → 自动化份额 =(指派+反馈环)
   产物分类       30+ 类产出，各自标 工作/学习/个人
-  覆盖率         任务覆盖率 + **有效覆盖率**（按成功率加权）
+  覆盖率         任务覆盖率 + 有效覆盖率（按成功率加权）
   按职业 token   高薪职业的会话消耗更多 token
   地理分布       国家采用度 vs 人均 GDP
   Cadence        小时 / 星期 / 季节
   调查层         自报暴露度、预期暴露度、职业影响预期
 
 本机数据能对上哪些、对不上哪些，逐条写在 NOT_MEASURED 里，不含糊过去。
-全部为确定性统计，**运行期不调用任何模型**。
+全部为确定性统计，运行期不调用任何模型。
 """
 from __future__ import annotations
 
@@ -69,7 +69,7 @@ DOMAINS = {
 }
 
 # ── 产物分类。AEI 用分类器认 30+ 类；本机没有分类器，
-#    改用**工具调用的形状**推产出类型，并写明是代理而非分类器。 ──
+#    改用工具调用的形状推产出类型，并写明是代理而非分类器。 ──
 ARTIFACTS = [
     (re.compile(r"^(Write|Edit|MultiEdit|str_replace|apply_patch|patch)", re.I), "代码与文件改动"),
     (re.compile(r"^(Bash|exec|exec_command|shell|run_command)", re.I),          "命令执行"),
@@ -84,7 +84,7 @@ ARTIFACTS = [
 
 # ── 技能层级代理：术语密度。
 #    AEI 用「读懂提示词所需的教育年限」，那需要模型；这里用确定性的术语密度替代，
-#    并且**明写它不是教育年限**。 ──
+#    并且明写它不是教育年限。 ──
 TECHNICAL_TERMS = re.compile(
     r"[A-Za-z][A-Za-z0-9_\-]{3,}\(\)|"                    # 函数调用
     r"\b(?:git|docker|nginx|sql|json|yaml|api|http|ssh|cron|regex|schema|"
@@ -95,17 +95,17 @@ TECHNICAL_TERMS = re.compile(
 NOT_MEASURED = [
     {"item": "O*NET 职业映射", "why": "AEI 把每段对话映射到 O*NET 任务再聚合成职业。"
      "本机没有那份映射表，映射本身也需要模型 —— 运行期禁模型。"
-     "改用**行业／领域分布**，从你的原话直接认，写明是替代不是等价。"},
+     "改用行业／领域分布，从你的原话直接认，写明是替代不是等价。"},
     {"item": "真实地理分布", "why": "AEI 比较国家采用度与人均 GDP。你只有一个人、一个地区，"
-     "这一维在本机无意义。改用**上下文分布**（项目／工作区），"
+     "这一维在本机无意义。改用上下文分布（项目／工作区），"
      "它回答的是同一类问题：注意力分布在哪几块地方。"},
     {"item": "调查层", "why": "AEI 有 9700 份问卷（自报暴露度、预期暴露度、职业影响预期）。"
      "没有问卷就没有这一层，如实留空，不用推断顶替。"},
     {"item": "真实成功率", "why": "AEI 用分类器判「Claude 是否成功完成」。"
      "这里用三个可观测信号合成（是否再问同一件事／报错密度／当天有无提交），"
-     "是**代理指标**，不是真实成功率。"},
+     "是代理指标，不是真实成功率。"},
     {"item": "教育年限", "why": "AEI 的技能层级是教育年限。这里用术语密度代理，"
-     "它只说明「文本有多专业」，**不说明你需要多少年教育**。"},
+     "它只说明「文本有多专业」，不说明你需要多少年教育。"},
 ]
 
 
@@ -146,23 +146,26 @@ def span_min(s: dict) -> float:
 
 # ── 原语 1：任务复杂度 ──
 # AEI 用「没有 AI 时人要花多久」。这里由可观测量推：工具调用数是最强信号
-# （一次工具调用 ≈ 人手动做一步），跨度与轮次做修正。**这是估计，不是测量。**
+# （一次工具调用 ≈ 人手动做一步），跨度与轮次做修正。这是估计，不是测量。
 def complexity(s: dict) -> dict:
     tools, turns = s.get("tools", 0), s.get("turns", 0)
     sp = span_min(s)
-    # 保守估计：一次工具调用按人工 1.5 分钟折算，一轮往返按 4 分钟
-    est_h = (tools * 1.5 + turns * 4) / 60
-    band = ("琐碎（<1 小时）" if est_h < 1 else
-            "半天以内（1–4 小时）" if est_h < 4 else
-            "一天上下（4–8 小时）" if est_h < 8 else
-            "多天（>8 小时）")
-    speedup = (est_h * 60 / sp) if sp > 1 and est_h > 0 else None
-    return {"est_human_hours": round(est_h, 2), "band": band,
-            "actual_min": round(sp, 1),
-            "speedup": round(speedup, 1) if speedup and speedup < 500 else None}
+    # 规模档。这不是「本来要花多久」 —— 那两个常数（工具 1.5 分钟、
+    # 往返 4 分钟）是拍出来的，拿它去除实际耗时就得到一个假的「快了 N 倍」。
+    # v0.6.0 删掉了那个比值，理由是 METR 的随机对照实验：
+    # 资深开发者在自己熟悉的成熟仓上用 AI 实测慢了 19%，自评却快了 20% ——
+    # 差 39 个百分点。即便让当事人亲自估都有 +40pp 的系统性高估，
+    # 用常数假设算只会更差。所以这里只留工作量档位，不再声称任何加速。
+    size = (tools * 1.5 + turns * 4) / 60
+    band = ("小（工具+往返 <1 小时当量）" if size < 1 else
+            "中（1–4 小时当量）" if size < 4 else
+            "大（4–8 小时当量）" if size < 8 else
+            "很大（>8 小时当量）")
+    return {"workload_units": round(size, 2), "band": band, "actual_min": round(sp, 1)}
 
 
-COMPLEXITY_BANDS = ["琐碎（<1 小时）", "半天以内（1–4 小时）", "一天上下（4–8 小时）", "多天（>8 小时）"]
+COMPLEXITY_BANDS = ["小（工具+往返 <1 小时当量）", "中（1–4 小时当量）",
+                    "大（4–8 小时当量）", "很大（>8 小时当量）"]
 
 
 # ── 原语 2：技能层级（术语密度代理） ──
@@ -282,7 +285,7 @@ def artifacts_of(s: dict) -> Counter:
     return out
 
 
-# 成本口径：**只算新 token**（不含缓存命中的输入 + 输出）。
+# 成本口径：只算新 token（不含缓存命中的输入 + 输出）。
 # 缓存读取虽然计费，但单价低一个数量级，而且它随会话长度线性膨胀 ——
 # 把它算进 ROI，「每条提交 1.85 亿 token」这种荒谬数字就出来了。
 # 缓存单独列，不混进成本。
@@ -297,6 +300,64 @@ def cache_tokens(s: dict) -> int:
 def hhi(counts) -> float | None:
     tot = sum(counts.values())
     return round(sum((v / tot) ** 2 for v in counts.values()), 4) if tot else None
+
+
+FANOUT_PER_HOUR = 15
+BATCH_PREFIX = 80
+BATCH_MIN_PER_DAY = 5
+
+
+def _populations(sessions: list) -> dict:
+    """把「人在对话」「agent 扇出」「批处理」拆成三个总体。
+
+    三条判据缺一不可：
+      ① 同来源同小时 ≥15 场            —— 抓密度
+      ② 无用户发言 / 单轮机器指令       —— 抓形态
+      ③ 同一提示词前缀一天内重复 ≥5 次   —— 抓速率
+    只用 ①② 的后果 v0.5.3 实测过：评委面板每条提示词带不同人名、摊在几小时里，
+    两条都躲过去了，于是 25 组「反复问的问题」里 21 组其实是机器在批量重放。
+    """
+    from collections import defaultdict as _dd
+    hourly = _dd(int)
+    for s in sessions:
+        hourly[(s.get("source"), (s.get("start") or "")[:13])] += 1
+    daily_prefix = _dd(int)
+    for s in sessions:
+        p = (s.get("prompts") or [""])[0]
+        k = "".join((p or "").split())[:BATCH_PREFIX]
+        if len(k) >= 12:
+            daily_prefix[((s.get("start") or "")[:10], k)] += 1
+
+    out = {"H": 0, "F": 0, "B": 0}
+    by_rule = {"密度": 0, "形态": 0, "速率": 0}
+    for s in sessions:
+        p = (s.get("prompts") or [""])[0]
+        k = "".join((p or "").split())[:BATCH_PREFIX]
+        dense = hourly[(s.get("source"), (s.get("start") or "")[:13])] >= FANOUT_PER_HOUR
+        shaped = s.get("kind") != "human" or s.get("turns", 0) <= 1
+        fast = len(k) >= 12 and daily_prefix[((s.get("start") or "")[:10], k)] >= BATCH_MIN_PER_DAY
+        if dense:
+            out["F"] += 1; by_rule["密度"] += 1
+        elif fast:
+            out["B"] += 1; by_rule["速率"] += 1
+        elif shaped and s.get("kind") != "human":
+            out["B"] += 1; by_rule["形态"] += 1
+        else:
+            out["H"] += 1
+    tot = sum(out.values()) or 1
+    return {
+        "counts": out,
+        "share": {k: round(v / tot, 4) for k, v in out.items()},
+        "labels": {"H": "人在对话", "F": "agent 扇出", "B": "批处理"},
+        "caught_by": by_rule,
+        "note": ("三条判据：密度（同来源同小时 ≥15 场）／形态（无人发言或单轮机器指令）／"
+                 "速率（同一提示词前缀一天内重复 ≥5 次）。"
+                 "只用前两条会漏掉评委面板那一类 —— 它每条提示词带不同人名，"
+                 "且摊在几个小时里，密度和形态都躲得过去。"),
+        "why_split": ("AEI 从 v3 起把 Claude.ai 与 1P API 分开报，因为两者 automation 率"
+                      "差 49.1% vs 77%。混在一起的比值没有含义 —— 本机同理："
+                      "H 回答「这个人怎么工作」，F/B 回答「这套系统怎么跑」。"),
+    }
 
 
 def build(sessions: list, delivery: dict | None = None) -> dict:
@@ -325,7 +386,6 @@ def build(sessions: list, delivery: dict | None = None) -> dict:
     ctx_count, ctx_tokens = Counter(), Counter()
     cadence = defaultdict(int)          # (weekday, hour) -> n
     week_dom = defaultdict(Counter)
-    speedups = []
 
     for s in hum:
         text = "\n".join(s.get("prompts") or [])
@@ -333,8 +393,6 @@ def build(sessions: list, delivery: dict | None = None) -> dict:
         s["_domains"] = doms
         m = classify_mode(s); s["_mode"] = m; modes[m] += 1
         c = complexity(s); s["_complexity"] = c; comp_band[c["band"]] += 1
-        if c["speedup"]:
-            speedups.append(c["speedup"])
         sk = skill_band(s); s["_skill"] = sk; skill[sk] += 1
         u = use_case(s, doms); s["_use"] = u; uses[u] += 1
         a = autonomy(s); s["_autonomy"] = a; auton[a] += 1
@@ -409,7 +467,7 @@ def build(sessions: list, delivery: dict | None = None) -> dict:
                             "share": {k: round(v / tot, 4) for k, v in c.items()}})
     drift = []
     if len(trans_weeks) >= 4:
-        # 按**会话数**切两半，不是按周数 —— 早期一周只有两三场，
+        # 按会话数切两半，不是按周数 —— 早期一周只有两三场，
         # 简单平均会让那一周的极端值主导整个「早期」，漂移就成了噪音。
         cum, total_n = 0, sum(r["n"] for r in trans_weeks)
         half_i = len(trans_weeks) // 2
@@ -459,7 +517,7 @@ def build(sessions: list, delivery: dict | None = None) -> dict:
                   "tokens_per_session": r["tokens_per_session"],
                   "automation": r["automation"], "success_rate": r["success_rate"]}
                  for r in dom_rows], key=lambda r: -r["tokens"]),
-            "note": "每条提交平摊多少 token 是**粗口径** —— 提交只是产出的一种，"
+            "note": "每条提交平摊多少 token 是粗口径 —— 提交只是产出的一种，"
                     "Excel、方案、视频都不进 git。它衡量的是「进 git 的那部分产出有多贵」。",
         }
 
@@ -484,8 +542,38 @@ def build(sessions: list, delivery: dict | None = None) -> dict:
     opp.sort(key=lambda r: -r["n"])
 
     art_tot = sum(art_count.values()) or 1
+
+    # ── P3-1：先拆总体，再谈百分比 ──
+    # AEI 自己从 v3 起就把 Claude.ai 与 1P API 分开报，因为两者 automation 率
+    # 差得离谱（49.1% vs 77%）。混在一起的比值没有含义。
+    #
+    # 判据要三条，不是两条：v0.5.3 已经证明「同来源同小时 ≥15 场」会漏 ——
+    # 评委面板每条提示词带不同人名、且摊在几个小时里，扇出检测认不出来。
+    # 第三条是速率闸：同一段提示词前缀在一天之内重复 ≥5 次。
+    pops = _populations(sessions)
+
+    # ── P3-3：可判定率升为一级指标 ──
+    # AEI 的隐私下限（≥15 对话且 ≥5 账号）事实上起「有效样本门槛」的作用 ——
+    # 低于门槛的直接不进分析，不是记成 0。
+    # 本机对应物：分母只取可判定集合，同时把可判定率单独露出来。
+    decidable = {
+        "note": ("每个维度能判出来的占多少。以前只有 domains 有这个数，"
+                 "其余维度把「没判出来」和「判出来是某一类」混在同一个分母里 —— "
+                 "那在数学上是把「没测出来」当成了「测出来是第三类」。"),
+        "dims": [
+            {"dim": "领域", "decided": N - dom_count.get("未归类", 0), "total": N,
+             "rate": round((N - dom_count.get("未归类", 0)) / N, 4)},
+            {"dim": "协作模式", "decided": N - modes.get("未归类", 0), "total": N,
+             "rate": round((N - modes.get("未归类", 0)) / N, 4)},
+            {"dim": "技能层级", "decided": N - skill.get("不确定", 0), "total": N,
+             "rate": round((N - skill.get("不确定", 0)) / N, 4)},
+            {"dim": "任务成功", "decided": N - succ.get("不确定", 0), "total": N,
+             "rate": round((N - succ.get("不确定", 0)) / N, 4)},
+        ],
+    }
+
     return {
-        "version": "aei-aligned/2",
+        "version": "aei-aligned/3",
         "framework": "对齐 Anthropic Economic Index：五个经济原语 + 协作五模式 + 产物分类 "
                      "+ 覆盖率与有效覆盖率 + 按领域 token + Cadence + 转换轨迹 + ROI。"
                      "做不到的逐条列在「没测的」里。",
@@ -493,14 +581,20 @@ def build(sessions: list, delivery: dict | None = None) -> dict:
 
         "primitives": {
             "complexity": {"bands": COMPLEXITY_BANDS, "counts": dict(comp_band),
-                           "note": "「没有 AI 大概要多久」由工具调用数与轮次折算 —— "
-                                   "一次工具调用按人工 1.5 分钟、一轮往返按 4 分钟。"
-                                   "**这是估计，不是测量。**",
-                           "speedup_median": round(sorted(speedups)[len(speedups) // 2], 1) if speedups else None,
-                           "speedup_n": len(speedups)},
+                           "note": "工作量档位：工具调用数与轮次折算成一个当量刻度"
+                                   "（工具 1.5 分钟 / 往返 4 分钟）。"
+                                   "这是一把刻度尺，不是「本来要花多久」 —— "
+                                   "它只能用来比较两场会话谁更大，不能用来算省了多少。",
+                           "removed": {
+                               "what": "speedup（「比人工快 N 倍」）",
+                               "why": ("分子是两个拍出来的常数（工具 1.5 分钟 / 往返 4 分钟），"
+                                       "分母是墙钟时长。METR 随机对照实验：资深开发者在熟悉的成熟仓上"
+                                       "用 AI 实测慢了 19%，自评却快了 20% —— 差 39 个百分点。"
+                                       "这个数字方向都可能是反的。"),
+                               "when": "v0.6.0"}},
             "skill": {"bands": SKILL_BANDS, "counts": dict(skill),
-                      "note": "AEI 用「读懂所需的教育年限」，那需要模型。这里用**术语密度**代理，"
-                              "它只说明文本有多专业，**不说明你需要多少年教育**。"},
+                      "note": "AEI 用「读懂所需的教育年限」，那需要模型。这里用术语密度代理，"
+                              "它只说明文本有多专业，不说明你需要多少年教育。"},
             "use_case": {"counts": dict(uses),
                          "note": "工作 / 学习 / 个人。按领域与关键词判，与 AEI 同名维度对齐。"},
             "autonomy": {"labels": AUTONOMY_LABELS, "counts": {str(k): v for k, v in sorted(auton.items())},
@@ -508,7 +602,7 @@ def build(sessions: list, delivery: dict | None = None) -> dict:
                          "note": "1 = 你全程在场，5 = 一句话丢过去它自己干完。由工具调用÷轮次映射。"},
             "success": {"bands": SUCCESS_BANDS, "counts": dict(succ),
                         "note": "三个可观测信号合成：同一件事是否又被问、报错密度、当天有无提交。"
-                                "**是代理指标，不是真实成功率。**"},
+                                "是代理指标，不是真实成功率。"},
         },
 
         "modes": dict(modes),
@@ -521,13 +615,15 @@ def build(sessions: list, delivery: dict | None = None) -> dict:
 
         "domains": dom_rows,
         "domains_unclassified": dom_count.get("未归类", 0),
+        "populations": pops,
+        "decidable": decidable,
         "artifacts": [{"artifact": k, "n": v, "share": round(v / art_tot, 4)}
                       for k, v in art_count.most_common()],
         "artifacts_note": "AEI 用分类器认 30+ 类产出；本机没有分类器，"
-                          "改用**工具调用的形状**推产出类型 —— 是代理，不是分类器。",
+                          "改用工具调用的形状推产出类型 —— 是代理，不是分类器。",
 
         "context": {"note": "AEI 比较国家采用度与人均 GDP。你只有一个人一个地区，"
-                            "这一维在本机无意义 —— 改用**项目／工作区**，"
+                            "这一维在本机无意义 —— 改用项目／工作区，"
                             "它回答的是同一类问题：注意力分布在哪几块地方。",
                     "rows": [{"context": k, "n": v, "tokens": ctx_tokens[k],
                               "tokens_per_session": int(ctx_tokens[k] / max(1, v))}
@@ -546,6 +642,12 @@ def build(sessions: list, delivery: dict | None = None) -> dict:
         "opportunity": opp,
         "concentration": {"domain_hhi": hhi(dom_count), "context_hhi": hhi(ctx_count),
                           "mode_hhi": hhi(modes),
-                          "note": "赫芬达尔指数：0 = 完全摊开，1 = 全压在一件事上。"},
+                          "note": ("赫芬达尔指数：0 = 完全摊开，1 = 全压在一件事上。"
+                          "这不是 AEI 的 Gini —— AEI 的 Gini 测的是人与人之间的不平等，"
+                          "需要跨人分布；单人只有一个点，算不出那个东西。"
+                          "这里测的是你自己的注意力集中度，同名但不同物，"
+                          "所以叫「跨项目注意力集中度」，不叫 Gini。"),
+                 "renamed_from": "Gini（AEI 原义）",
+                 "label": "跨项目注意力集中度"},
         "not_measured": NOT_MEASURED,
     }

@@ -1,4 +1,42 @@
-<!-- BEGIN memory-atlas:agent-contract v1 -->
+<!-- BEGIN memory-atlas:agent-contract v2 -->
+## 经验沉淀 —— 动手前先查，收尾必须回写
+
+**唯一地址**：`LinzeColin/Private-Database` 的 **`dev-notes` 分支** →
+`Private-AgentDatabase/dev-notes/`（网页 `memoryatlas.linzezhang.com/brief/`；
+本机副本 `~/.memory-atlas/brief/AGENT_BRIEF.md`）。
+
+四条硬规矩，其余细则见仓内 `atlas/AGENTS_CONTRACT.md`：
+
+1. **先查再问。** 简报里每条都被问过很多次；最贵的那条被问过 738 次。
+   本机已挂 `UserPromptSubmit` 钩子做字面检索，命中会自动摆到你眼前 ——
+   **没有注入不代表没有前例**，进某个项目前仍要读该项目那一节。
+2. **收尾必须回写。** 会话结束／上下文被压缩／一件交付做完／PR 合并／
+   你正准备说「完成了」—— 任一成立就算收尾。回写进**那个仓**的 `AGENTS.md`
+   （一条一段：结论 / 为什么 / 代价），然后跑 `bash ~/.memory-atlas/on-archive.sh`。
+   Claude Code 与 Codex 已挂钩子会自动触发第三步；**Kimi Code GUI 与 DSH 必须手动跑**。
+   前两步在哪个 agent 里都得自己做 —— 钩子只能重算机器派生的那一半。
+3. **别手写 `AGENT_BRIEF.md`，别跨仓写，别把密钥写进任何公开仓。**
+   brief 每天重新生成，手写会被整体覆盖；一个仓的经验只写进那个仓的 `AGENTS.md`。
+4. **「做完了」不等于「被采用」。** 归档时可产一条
+   `memory_atlas.compounding_event.v1` 事件（schema 见 `atlas/build/compound.py`）：
+   没有采用证据不许写 ADOPTED，没有经济证据不许写 ECONOMIC_IMPACT，
+   金额未知留 `null` 不要填 0 —— 填高了会被按证据压回去并在页面上点名。
+
+<!-- END memory-atlas:agent-contract v2 -->
+
+
+---
+
+# 细则（不分发，只留在仓里）
+
+> 上面那 25 行是常驻块，分发到每个 agent 的指令文件里。
+> 这一段是它的展开，**故意不分发** —— Anthropic 官方原话：
+> 「Bloated CLAUDE.md files cause Claude to ignore your actual instructions!」
+> 「If Claude keeps doing something you don't want despite having a rule against it,
+>  the file is probably too long and the rule is getting lost.」
+> 旧版常驻块 116 行，占 `~/.kimi-code/AGENTS.md` 的 97%、`~/.claude/CLAUDE.md` 的 76% ——
+> 那不是「写得全」，那是把真正要遵守的规矩淹掉了。
+
 ## 开发经验沉淀 —— 动手前先查，收尾必须回写
 
 > 这一节由 `atlas/build/install_agents_md.sh` 统一分发到 Claude Code / Codex / Kimi Code / DSH。
@@ -113,4 +151,3 @@ Memory Atlas 每天会把它拉进来，投影成转化漏斗，显示在站点�
 - **别把密钥、token、Owner 原话写进任何公开仓。** 沉淀目标仓是私有的；
   推送脚本会先核对目标仓可见性，不是 PRIVATE 就直接拒绝推送。
 - **别跨仓写。** 一个仓的经验只写进那个仓的 `AGENTS.md`。
-<!-- END memory-atlas:agent-contract v1 -->

@@ -1,56 +1,42 @@
-import { esc, fmt, go, day as loadDay, hhmm, enter, topicColor } from '../../../core/app.js';
+import { esc, fmt, pct, go, enter, topicColor } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
-import { hero, sec, grid, slab, drawer, table, warn, pill, rate } from '../kit.js';
-import { flyToDay, holdCamera } from '../shell.js';
+import { leaf, h2, plate, plates, carve, marginal, warn, rub, fold, chip, seal, rate } from '../kit.js';
 
+import { day as day_ } from '../../../core/app.js';
+
+// 一天。第一页是这天的总账，后面每页 20 场。
 export async function render(host, arg) {
-  const list = D.days().map(d => d.d);
-  const cur = list.includes(arg) ? arg : list[list.length - 1];
-  const i = list.indexOf(cur);
-  holdCamera(true);            // 这一屏由视图开镜头，滚动不参与
-  flyToDay(cur);               // 打开哪一天，碑林就摇到那一天
-  host.innerHTML = `
-<div class="ctl">
-  <button id="prev" ${i > 0 ? '' : 'disabled'}>← 前一天</button>
-  <select id="pick">${list.slice().reverse().map(d => `<option ${d === cur ? 'selected' : ''}>${d}</option>`).join('')}</select>
-  <button id="next" ${i < list.length - 1 ? '' : 'disabled'}>后一天 →</button>
-</div><div id="body"><p class="hint">读取中…</p></div>`;
-  host.querySelector('#pick').onchange = e => go('day', e.target.value);
-  host.querySelector('#prev').onclick = () => i > 0 && go('day', list[i - 1]);
-  host.querySelector('#next').onclick = () => i < list.length - 1 && go('day', list[i + 1]);
+  const ds = D.days();
+  const dstr = arg || (ds.length ? ds[ds.length - 1].d : '');
+  let j;
+  try { j = await day_(dstr); }
+  catch (e) { host.innerHTML = leaf({ title: dstr, lead: '', body: warn(`<b>那一天没有记录。</b>${esc(e.message || e)}`) }); return; }
 
-  const j = await loadDay(cur);
-  const meta = D.days().find(x => x.d === cur) || { human: 0, n: 0, active_hours: 0, topics: {} };
-  const tk = D.tokens().by_day.find(x => x.d === cur);
-  const human = j.sessions.filter(s => s.kind === 'human');
-  const mach = j.sessions.filter(s => s.kind !== 'human');
-  const wd = ['周一','周二','周三','周四','周五','周六','周日'][(new Date(cur + 'T00:00:00Z').getUTCDay() + 6) % 7];
+  const rows = j.sessions || [];
+  const hum = rows.filter(r => r.kind === 'human');
+  const row = ds.find(d => d.d === dstr) || {};
+  const PER = 20, chunks = [];
+  for (let i = 0; i < rows.length; i += PER) chunks.push(rows.slice(i, i + PER));
 
-  const card = s => slab(`
-  <div class="ck">${hhmm(s.start)}　${esc(s.source)}${s.project ? '　' + esc(s.project) : ''}
-    ${s.kind === 'fanout' ? '　同一批扇出去的' : s.kind === 'auto' ? '　机器自己跑的' : ''}</div>
-  <div class="stitle">${esc(s.title || '(没有标题)')}</div>
-  <div>${s.topics.map(t => `<span class="pill" style="border-color:${topicColor(t)};color:${topicColor(t)}">${esc(t)}</span>`).join('')}</div>
-  <div class="cn">你说 ${s.turns} 次 · 用工具 ${s.tools} 次 · 前后 ${s.span_min} 分钟
-    ${s.models.length ? '　' + esc(s.models.join(' / ')) : ''}
-    ${(s.tok_in || s.tok_out) ? `　token 进 ${fmt(s.tok_in)} 出 ${fmt(s.tok_out)}` : ''}</div>
-  ${(s.prompts || []).slice(0, 3).map(p => `<div class="quote">${esc(p)}</div>`).join('')}`);
-
-  host.querySelector('#body').innerHTML = `
-${hero(wd, cur, `这一天你开口 ${meta.human} 次，机器跑了 ${meta.n - meta.human} 次。下面是原话。`)}
-${grid([
-  { k: '你开口', v: String(meta.human), n: `机器另跑 ${meta.n - meta.human} 场`, w: 3, tone: 'acc' },
-  { k: '有动静的钟点', v: String(meta.active_hours), n: '这不等于工作时长', w: 3 },
-  { k: '读进 token', v: tk ? fmt(tk.input_total) : '—', n: tk ? `命中缓存 ${rate(tk.hit_rate)}` : '这天没有用量记录', w: 3 },
-  { k: '在做什么', v: `${Object.entries(meta.topics).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([t])=>esc(t)).join('、') || '没认出来'}`, size: 'sm',
-    n: Object.entries(meta.topics).length + ' 类', w: 3 },
-])}
-${sec('你说的话')}
-${human.length ? `<div class="grid">${human.map(card).join('')}</div>`
-  : warn('这一天你没有亲自开口。下面全是机器跑的。')}
-${mach.length ? sec(`机器跑的 ${mach.length} 场`, '列出来是让你能核对「被剔掉的到底是什么」，不是凑数。默认收着 —— 67 张同权重的卡是一堵墙。')
-  + drawer(`摊开这 ${mach.length} 场`, `<div class="grid">${mach.slice(0, 24).map(card).join('')}</div>`
-    + (mach.length > 24 ? `<p class="hint">还有 ${mach.length - 24} 场同类，没展开。</p>` : '')) : ''}`;
-  enter('.hero, .sec, .cell, .slab', host);
-  return { dispose() { holdCamera(false); } };
+  host.innerHTML =
+    leaf({
+      title: dstr,
+      lead: `这一天共 ${rows.length} 场，其中你自己开口 ${hum.length} 场。`,
+      body: plate({ k: '你开口的次数', v: String(hum.length), big: true,
+        n: `另有 ${rows.length - hum.length} 场是机器在跑` })
+        + plates([
+          { k: '轮次', v: String(row.turns || 0) },
+          { k: '工具调用', v: String(row.tools || 0) },
+          { k: '工具失败', v: String(row.errors_tool || 0), n: '真实的 is_error，不是词频' },
+          { k: 'token', v: fmt((row.tok_in || 0) + (row.tok_cache_r || 0)) },
+        ]),
+    })
+    + chunks.map((c, i) => leaf({
+        title: `${dstr} · 第 ${i + 1} 叠`,
+        lead: `共 ${chunks.length} 叠，每叠 ${PER} 场。`,
+        cols: false,
+        body: rub([{ t: '开始' }, { t: '来源' }, { t: '项目' }, { t: '标题' }, { t: '轮', r: true }],
+          c.map(s => [esc((s.start || '').slice(11, 16)), esc(s.source), esc(s.project || '—'),
+            esc((s.title || '').slice(0, 56)), String(s.turns || 0)])),
+      })).join('');
 }

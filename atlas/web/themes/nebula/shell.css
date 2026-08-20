@@ -1,272 +1,381 @@
-/* 主题 · 星云宇宙。整屏是一片由你的数据生成的星云，内容浮在它上面。
-   滚动即穿越时间：往下滚 = 往回飞。左轨是悬浮的星座菜单。 */
-:root[data-theme="nebula"]{
-  --disp:-apple-system,"SF Pro Display","Segoe UI",Inter,"PingFang SC",system-ui,sans-serif;
-  --sans:-apple-system,"SF Pro Text","Segoe UI",Inter,"PingFang SC",system-ui,sans-serif;
-  --rail:238px; --rail-shut:60px;
+/* 星云宇宙 —— 「观星台」。v0.7.0 推翻重做。
+ *
+ * 上一版和琉璃几乎一样，因为**骨架是同一份**：左轨 + 便当格 + 排行条，
+ * 只换了背景画布和配色。那不叫另一套主题，那叫换皮。
+ *
+ * 这一版换的是**结构**：
+ *   · 没有左轨。整屏是一片天，导航收进底部的指令坞。
+ *   · 不是网格。中央只有**一个台面**，一次只讲一件事。
+ *   · 不靠扫读。数据是一条条射线，用左右键在其间移动，明细从下方升起。
+ *   · 信息密度**刻意低** —— 琉璃负责「一眼看全」，这里负责「一次看透一件」。
+ *
+ * 没有 backdrop-filter（那是琉璃的身份）；也没有倒角 clip-path（那是鎏金的）。
+ * 这里的材质是**辉光与视差**：一切都像悬在真空里，靠自身发光被看见。
+ */
+
+:root {
+  --bg: #04060f;
+  --bg2: #080d1c;
+  --ink: #e8edff;
+  --ink2: #9aa8cc;
+  --ink3: #707da3;   /* 实测 #5d6a90 对 --bg 只有 3.79:1；小字（11px）要 ≥4.5 */
+  --line: #17203c;
+  --line2: #232f52;
+  --acc: #6ea8ff;
+  --acc2: #b98cff;
+  --acc3: #4fe3d0;
+  --warn: #ffb454;
+  --bad: #ff6b8a;
+  --ok: #55e0a8;
+  --glow: 0 0 24px -6px var(--acc);
+  --disp: "Noto Serif SC", Georgia, serif;
+  --body: "Noto Sans SC", -apple-system, "PingFang SC", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --ease: cubic-bezier(.16, 1, .3, 1);
 }
-:root[data-theme="nebula"][data-mode="dark"]{
-  --bg:#04030c; --fg:#eef0ff; --dim:#a6abd4; --dim2:#7b80ad;
-  --panel:rgba(14,12,34,.52); --panel2:rgba(22,19,48,.62);
-  --line:rgba(150,160,255,.15); --line2:rgba(150,160,255,.07);
-  --acc:#8fb8ff; --acc2:#c79bff; --ok:#5ce6b4; --warn:#ffc46b; --bad:#ff7a92;
-  --track:rgba(150,160,255,.13);
-  --glow:0 0 60px -12px rgba(120,140,255,.5);
-  --shadow:0 30px 90px -40px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.06);
-}
-:root[data-theme="nebula"][data-mode="light"]{
-  /* 浅色下依然是星云，只是把夜空换成晨雾 —— 不做成"另一个白主题" */
-  --bg:#e9ecfa; --fg:#0e1030; --dim:#464c78; --dim2:#5a6089;
-  --panel:rgba(255,255,255,.72); --panel2:rgba(255,255,255,.86);
-  --line:rgba(60,70,170,.16); --line2:rgba(60,70,170,.07);
-  --acc:#3b56cc; --acc2:#7b45c9; --ok:#0a7a58; --warn:#9a5b00; --bad:#c02648;
-  --track:rgba(60,70,170,.12);
-  --glow:0 0 50px -14px rgba(80,100,220,.4);
-  --shadow:0 26px 70px -40px rgba(30,40,120,.5), inset 0 1px 0 rgba(255,255,255,.9);
-}
-[data-theme="nebula"] body{margin:0;background:var(--bg);color:var(--fg);
-  font:15px/1.68 var(--sans);letter-spacing:-.004em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-[data-theme="nebula"] #cosmos{position:fixed;inset:0;z-index:0;display:block;width:100vw;height:100vh}
-[data-theme="nebula"] #shell{position:relative;z-index:1;min-height:100vh;padding-left:var(--rail);
-  transition:padding-left .5s cubic-bezier(.16,1,.3,1)}
-:root[data-theme="nebula"][data-rail="shut"] #shell{padding-left:var(--rail-shut)}
-
-/* ── 左轨：一块悬浮的星舰面板 ── */
-[data-theme="nebula"] #rail{position:fixed;left:16px;top:16px;bottom:16px;width:calc(var(--rail) - 32px);
-  z-index:40;display:flex;flex-direction:column;border-radius:26px;border:1px solid var(--line);
-  background:var(--panel);backdrop-filter:blur(34px) saturate(1.9);box-shadow:var(--shadow),var(--glow);
-  overflow:hidden;transition:width .5s cubic-bezier(.16,1,.3,1)}
-:root[data-theme="nebula"][data-rail="shut"] #rail{width:calc(var(--rail-shut) - 26px)}
-[data-theme="nebula"] .brandrow{display:flex;align-items:center;gap:9px;padding:18px 18px 12px}
-[data-theme="nebula"] .brand{font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:-.02em;
-  flex:1;white-space:nowrap;overflow:hidden}
-[data-theme="nebula"] #railtog{all:unset;cursor:pointer;color:var(--dim2);font-size:15px;width:22px;
-  height:22px;text-align:center;border-radius:999px;flex:none}
-[data-theme="nebula"] #railtog:hover{color:var(--acc);background:var(--line2)}
-:root[data-theme="nebula"][data-rail="shut"] .brand{opacity:0;width:0}
-
-/* ── 一级 / 二级：靠字号、缩进、连接线三重区分，不只靠加粗 ── */
-[data-theme="nebula"] #nav{display:flex;flex-direction:column;gap:1px;padding:4px 12px;
-  flex:1 1 auto;min-height:0;overflow-y:auto}   /* min-height:0 —— 少了它 flex 子项不肯收缩，菜单会压到下面的按钮上 */
-[data-theme="nebula"] .navg{position:relative;padding:1px 0 2px}
-[data-theme="nebula"] .navh{display:flex;align-items:center;gap:10px;padding:7px 12px;cursor:pointer;
-  border-radius:14px;user-select:none;transition:color .15s,background .15s}
-[data-theme="nebula"] .navh:hover{background:var(--line2)}
-[data-theme="nebula"] .navi{font-size:13px;color:var(--acc);width:16px;text-align:center;flex:none;
-  filter:drop-shadow(0 0 6px currentColor)}
-/* 一级：小型大写 + 字距 —— 一眼就不是二级 */
-[data-theme="nebula"] .navl{font-size:11px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--dim2);white-space:nowrap;overflow:hidden;font-weight:600}
-[data-theme="nebula"] .navg.on .navl{color:var(--acc)}
-[data-theme="nebula"] .navh::after{content:"";width:5px;height:5px;border-right:1.5px solid var(--dim2);
-  border-bottom:1.5px solid var(--dim2);transform:rotate(45deg);margin-left:auto;
-  transition:transform .35s cubic-bezier(.16,1,.3,1)}
-[data-theme="nebula"] .navg.shut .navh::after{transform:rotate(-45deg)}
-[data-theme="nebula"] .navs{display:flex;flex-direction:column;gap:1px;overflow:hidden;max-height:260px;
-  transition:max-height .42s cubic-bezier(.16,1,.3,1);position:relative;margin-left:19px;
-  padding-left:13px;border-left:1px solid var(--line)}
-[data-theme="nebula"] .navg.shut .navs{max-height:0;border-left-color:transparent}
-/* 二级：正常字号、不大写、带连接短线 —— 层级一目了然 */
-[data-theme="nebula"] .navs button{all:unset;cursor:pointer;padding:6px 12px;border-radius:11px;
-  font-size:13.5px;color:var(--dim);white-space:nowrap;position:relative;
-  transition:color .15s,background .15s,box-shadow .15s}
-[data-theme="nebula"] .navs button::before{content:"";position:absolute;left:-13px;top:50%;width:9px;
-  height:1px;background:var(--line)}
-[data-theme="nebula"] .navs button:hover{color:var(--fg);background:var(--line2)}
-[data-theme="nebula"] .navs button[aria-current="true"]{color:var(--fg);background:var(--line);
-  box-shadow:0 0 22px -6px var(--acc)}
-[data-theme="nebula"] .navs button[aria-current="true"]::before{background:var(--acc);width:11px;left:-13px;height:2px}
-:root[data-theme="nebula"][data-rail="shut"] .navl,
-:root[data-theme="nebula"][data-rail="shut"] .navs,
-:root[data-theme="nebula"][data-rail="shut"] .navh::after,
-:root[data-theme="nebula"][data-rail="shut"] #tools,
-:root[data-theme="nebula"][data-rail="shut"] #railfoot{display:none}
-[data-theme="nebula"] #tools{margin-top:auto;padding:10px 16px;display:flex;flex-direction:column;gap:7px}
-[data-theme="nebula"] .seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
-[data-theme="nebula"] .seg button{all:unset;cursor:pointer;flex:1;text-align:center;padding:5px 0;
-  font-size:11.5px;color:var(--dim2)}
-[data-theme="nebula"] .seg button[aria-pressed="true"]{background:var(--acc);color:var(--bg)}
-[data-theme="nebula"] #railfoot{padding:0 16px 16px;font-size:10.5px;color:var(--dim2);line-height:1.55}
-[data-theme="nebula"] #stamp{position:fixed;right:24px;top:22px;z-index:41;font-size:11px;color:var(--dim2);
-  background:var(--panel);backdrop-filter:blur(22px);border:1px solid var(--line);
-  border-radius:999px;padding:6px 15px}
-[data-theme="nebula"] #hud{position:fixed;right:24px;bottom:22px;z-index:41;font-size:11px;color:var(--dim2);
-  background:var(--panel);backdrop-filter:blur(22px);border:1px solid var(--line);
-  border-radius:14px;padding:9px 15px;line-height:1.6;text-align:right;pointer-events:none}
-[data-theme="nebula"] #hud b{color:var(--acc);font-weight:600}
-
-[data-theme="nebula"] main{max-width:1180px;margin:0 auto;padding:78px 30px 140px}
-[data-theme="nebula"] footer{text-align:center;color:var(--dim2);font-size:11px;padding:0 30px 46px}
-
-/* ── 巨型标题：这套主题的第一印象 ── */
-[data-theme="nebula"] .hero{margin:0 0 34px}
-[data-theme="nebula"] .hero .eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--acc);margin-bottom:14px;filter:drop-shadow(0 0 10px currentColor)}
-[data-theme="nebula"] .hero h1{font-family:var(--disp);font-weight:760;
-  font-size:clamp(38px,7.2vw,92px);line-height:.95;letter-spacing:-.045em;margin:0 0 18px}
-[data-theme="nebula"] .hero p{color:var(--dim);font-size:16.5px;max-width:62ch;margin:0}
-[data-theme="nebula"] .sec{font-family:var(--disp);font-weight:700;font-size:clamp(22px,3vw,34px);
-  letter-spacing:-.032em;margin:66px 0 6px}
-[data-theme="nebula"] .sec:first-child{margin-top:0}
-[data-theme="nebula"] .hint{color:var(--dim);font-size:14px;margin:0 0 20px;max-width:70ch}
-
-/* ── 悬浮面板 ── */
-[data-theme="nebula"] .slab{background:var(--panel);border:1px solid var(--line);border-radius:24px;
-  padding:24px 26px;box-shadow:var(--shadow);backdrop-filter:blur(30px) saturate(1.7);
-  position:relative;overflow:hidden;margin:14px 0}
-[data-theme="nebula"] .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin:18px 0}
-[data-theme="nebula"] .cell{background:var(--panel);border:1px solid var(--line);border-radius:22px;
-  padding:22px 24px;box-shadow:var(--shadow);backdrop-filter:blur(30px) saturate(1.7);
-  grid-column:span 2;position:relative;overflow:hidden}
-[data-theme="nebula"] .cell.w3{grid-column:span 3} [data-theme="nebula"] .cell.w4{grid-column:span 4}
-[data-theme="nebula"] .cell.w6{grid-column:span 6}
-[data-theme="nebula"] .cell::after{content:"";position:absolute;inset:-46% -46% auto auto;width:200px;
-  height:200px;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,var(--acc),transparent 66%);opacity:.13}
-[data-theme="nebula"] .cell.alt::after{background:radial-gradient(circle,var(--acc2),transparent 66%)}
-[data-theme="nebula"] .ck{font-size:12px;color:var(--dim2);letter-spacing:.02em}
-[data-theme="nebula"] .cv{font-family:var(--disp);font-weight:740;font-size:clamp(28px,4vw,46px);
-  letter-spacing:-.04em;line-height:1.02;margin:8px 0 3px;font-variant-numeric:tabular-nums}
-[data-theme="nebula"] .cn{font-size:12.5px;color:var(--dim2)}
-[data-theme="nebula"] .cv.acc{color:var(--acc);text-shadow:0 0 34px rgba(140,170,255,.5)}
-[data-theme="nebula"] .cv.warn{color:var(--warn);text-shadow:0 0 34px rgba(255,196,107,.4)}
-@media(max-width:880px){[data-theme="nebula"] .grid{grid-template-columns:repeat(2,1fr)}
-  [data-theme="nebula"] .cell,[data-theme="nebula"] .cell.w3,[data-theme="nebula"] .cell.w4,
-  [data-theme="nebula"] .cell.w6{grid-column:span 2}}
-
-/* ── 轨道条 ── */
-[data-theme="nebula"] .orbit{display:flex;flex-direction:column;gap:11px;margin-top:8px}
-[data-theme="nebula"] .orow{display:grid;grid-template-columns:104px 1fr auto;align-items:center;gap:13px;
-  font-size:13.5px;cursor:pointer}
-[data-theme="nebula"] .olabel{color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-[data-theme="nebula"] .otrack{height:10px;border-radius:999px;background:var(--track);overflow:hidden}
-[data-theme="nebula"] .ofill{height:100%;width:100%;border-radius:999px;transform-origin:left;
-  box-shadow:0 0 18px -3px currentColor;
-  transition:transform .55s cubic-bezier(.16,1,.3,1)}
-[data-theme="nebula"] .oval{font-variant-numeric:tabular-nums;color:var(--fg);font-size:13px;
-  min-width:64px;text-align:right}
-[data-theme="nebula"] .orow:hover .ofill{filter:brightness(1.3)}
-
-[data-theme="nebula"] details.drawer{margin:12px 0;border:1px solid var(--line);border-radius:18px;
-  background:var(--panel);backdrop-filter:blur(24px);overflow:hidden}
-[data-theme="nebula"] details.drawer>summary{cursor:pointer;padding:13px 22px;font-size:13.5px;
-  color:var(--dim);list-style:none;user-select:none}
-[data-theme="nebula"] details.drawer>summary::-webkit-details-marker{display:none}
-[data-theme="nebula"] details.drawer>summary::before{content:"▸ ";color:var(--acc)}
-[data-theme="nebula"] details.drawer[open]>summary::before{content:"▾ "}
-[data-theme="nebula"] details.drawer .inner{padding:0 22px 20px;overflow-x:auto}
-[data-theme="nebula"] table{width:100%;border-collapse:collapse;font-size:13px}
-[data-theme="nebula"] th{text-align:left;color:var(--dim2);font-weight:500;font-size:11.5px;
-  padding:8px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
-[data-theme="nebula"] td{padding:8px 9px;border-bottom:1px solid var(--line2)}
-[data-theme="nebula"] tr:hover td{background:var(--line2)}
-[data-theme="nebula"] .r{text-align:right;font-variant-numeric:tabular-nums}
-[data-theme="nebula"] .pill{display:inline-block;padding:3px 12px;border-radius:999px;font-size:12px;
-  background:var(--line2);border:1px solid var(--line);color:var(--dim);margin:2px 4px 2px 0}
-[data-theme="nebula"] .warnbox{border-radius:20px;border:1px solid var(--line);background:var(--panel2);
-  backdrop-filter:blur(20px);padding:17px 22px;margin:16px 0;font-size:13.5px;color:var(--dim);
-  border-left:3px solid var(--warn)}
-[data-theme="nebula"] .warnbox b{color:var(--fg)}
-[data-theme="nebula"] .st{font-size:12px;padding:2px 11px;border-radius:999px;border:1px solid var(--line);color:var(--dim)}
-[data-theme="nebula"] .st[data-s="通"]{color:var(--ok)} [data-theme="nebula"] .st[data-s="断了"]{color:var(--bad)}
-[data-theme="nebula"] .st[data-s="说不准"]{color:var(--warn)} [data-theme="nebula"] .st[data-s="没做"]{color:var(--dim2)}
-[data-theme="nebula"] .ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:18px 0}
-[data-theme="nebula"] .ctl select,[data-theme="nebula"] .ctl input[type=date]{all:unset;cursor:pointer;
-  border:1px solid var(--line);border-radius:999px;padding:6px 15px;font-size:13px;background:var(--panel2)}
-[data-theme="nebula"] .ctl button{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:999px;
-  padding:8px 17px;font-size:13px;color:var(--dim);min-height:40px;box-sizing:border-box;
-  transition:color .15s,background .15s,border-color .15s,box-shadow .15s}
-[data-theme="nebula"] .ctl button:hover{color:var(--fg);border-color:var(--acc);box-shadow:0 0 22px -8px var(--acc)}
-[data-theme="nebula"] .ctl button[aria-pressed="true"]{background:var(--acc);color:var(--bg);border-color:var(--acc)}
-[data-theme="nebula"] canvas.viz{width:100%;display:block;border-radius:22px;border:1px solid var(--line);
-  background:var(--panel);backdrop-filter:blur(24px);touch-action:none}
-[data-theme="nebula"] .lnk{color:var(--acc);cursor:pointer}
-[data-theme="nebula"] .lnk:hover{text-decoration:underline}
-[data-theme="nebula"] .ctl button[disabled]{opacity:.32;cursor:not-allowed}
-/* 星历带：一条连续的时间河，一天一颗星。月份标签浮在带子上方。 */
-[data-theme="nebula"] .band{display:flex;align-items:center;flex-wrap:wrap;gap:4px;line-height:1}
-[data-theme="nebula"] .band .bmon{flex-basis:100%;font-size:10.5px;font-weight:500;letter-spacing:.14em;
-  color:var(--dim2);margin:12px 0 2px;font-variant-numeric:tabular-nums}
-[data-theme="nebula"] .band .bmon:first-child{margin-top:0}
-[data-theme="nebula"] .band i{width:11px;height:11px;border-radius:50%;background:var(--track);
-  cursor:pointer;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
-[data-theme="nebula"] .band i:hover{transform:scale(2);z-index:2;position:relative}
-[data-theme="nebula"] .band i[data-out]{opacity:.16}
-[data-theme="nebula"] .band i[data-lv="1"]{background:color-mix(in srgb,var(--acc) 28%,var(--track))}
-[data-theme="nebula"] .band i[data-lv="2"]{background:color-mix(in srgb,var(--acc) 52%,var(--track));
-  box-shadow:0 0 8px -3px var(--acc)}
-[data-theme="nebula"] .band i[data-lv="3"]{background:color-mix(in srgb,var(--acc) 78%,var(--track));
-  box-shadow:0 0 12px -2px var(--acc)}
-[data-theme="nebula"] .band i[data-lv="4"]{background:var(--acc);box-shadow:0 0 18px -1px var(--acc),0 0 34px -6px var(--acc2)}
-[data-theme="nebula"] .stitle{font-family:var(--disp);font-weight:620;font-size:19px;
-  letter-spacing:-.02em;margin:7px 0 9px;color:var(--fg)}
-[data-theme="nebula"] .quote{margin-top:9px;padding:12px 16px;border-radius:14px;background:var(--line2);
-  border-left:2px solid var(--acc);color:var(--dim);font-size:13.5px;white-space:pre-wrap;
-  word-break:break-word;max-height:170px;overflow:auto}
-/* 整卡 opacity 降权会把 --dim2 文字压到 ~2:1。改用虚线边 + 标题降级，对比度不动。 */
-[data-theme="nebula"] .slab.mach{border-style:dashed;background:transparent}
-[data-theme="nebula"] .slab.mach .stitle{color:var(--dim)}
-@media(max-width:880px){
-  [data-theme="nebula"] #shell{padding-left:0}
-  [data-theme="nebula"] #rail{position:static;width:auto;margin:16px;border-radius:22px}
-  [data-theme="nebula"] #stamp,[data-theme="nebula"] #hud{position:static;display:block;margin:0 16px 10px;text-align:left}
+html[data-mode="light"] {
+  --bg: #eef1fa;
+  --bg2: #e2e7f5;
+  --ink: #131a30;
+  --ink2: #46527a;
+  --ink3: #5d6889;   /* 浅色下同理：#6f7ba3 只有 3.69:1 */
+  --line: #ccd4ea;
+  --line2: #b3bdda;
+  --acc: #2f62c4;
+  --acc2: #7b45c9;
+  --acc3: #12897c;
+  --warn: #9a5c00;
+  --bad: #b52344;
+  --ok: #12734f;
+  --glow: 0 0 20px -8px var(--acc);
 }
 
-/* ══ v0.4.4 布局审计补丁 ══ */
-
-/* P0-1 焦点环。星云用自己的辉光语言，不是套一个通用蓝框。 */
-[data-theme="nebula"] :is(button,select,input,summary,a,[tabindex],[role="button"]):focus-visible{
-  outline:2px solid var(--acc);outline-offset:2px;box-shadow:0 0 18px -6px var(--acc);border-radius:12px}
-
-/* P2-17 */
-[data-theme="nebula"] :is(.ctl button,.navs button,.seg button):active{transform:scale(.97)}
-
-/* P1-10 */
-[data-theme="nebula"] .seg button{padding:8px 0;min-height:40px;box-sizing:border-box}
-/* 星带上一颗点 11px，却是进「一天」的主入口。视觉不动，命中区外扩。 */
-[data-theme="nebula"] .band i{position:relative}
-[data-theme="nebula"] .band i::after{content:"";position:absolute;inset:-6px}
-
-/* P1-12 */
-[data-theme="nebula"] .sub{font-family:var(--disp);font-weight:620;font-size:19px;
-  letter-spacing:-.02em;margin:30px 0 4px;color:var(--fg)}
-[data-theme="nebula"] .sub:first-child{margin-top:8px}
-
-/* P2-13 */
-[data-theme="nebula"] .cv.md{font-size:30px}
-[data-theme="nebula"] .cv.sm{font-size:21px;color:var(--dim)}
-
-[data-theme="nebula"] .orow[role="button"]{cursor:pointer}
-
-/* P2-16 hover 缩放 2 倍会盖住相邻 8 颗点，扫过一排像爆米花 */
-[data-theme="nebula"] .band i:hover{transform:scale(1.35)}
-
-@media(max-width:900px){
-  [data-theme="nebula"] #shell{transition:none}
-  [data-theme="nebula"] :is(.ctl button,.seg button){padding:11px 16px;min-height:44px}
-  [data-theme="nebula"] .band{gap:8px}
-  [data-theme="nebula"] .band i::after{inset:-14px}
-}
-@media(prefers-reduced-motion:reduce){
-  [data-theme="nebula"] *{transition-duration:.01ms !important;animation:none !important}
-  [data-theme="nebula"] .band i:hover{transform:none}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow: hidden;                 /* 整屏是一片天，页面本身不滚动 */
+  -webkit-font-smoothing: antialiased;
 }
 
-/* 碑拓在网格里占半宽。不复用 .cell —— 那会把两套面板样式叠在一起。 */
-[data-theme="nebula"] .slab.half{grid-column:span 3;margin:0}
-@media(max-width:900px){ [data-theme="nebula"] .slab.half{grid-column:span 6} }
+/* ── 天幕 ───────────────────────────── */
+#cosmos {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  display: block; z-index: 0;
+}
+#shell { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+#shell > * { pointer-events: auto; }
 
-/* 窄屏：收起态只留一条 52px 的横条（品牌 + 折叠钮），展开是一层最高 70vh 的浮层。
-   rail-mobile-bar —— 目的是让 375px 首屏至少出现一张数据卡。 */
-@media(max-width:900px){
-  :root[data-theme="nebula"][data-rail="shut"] #rail{max-height:52px;overflow:hidden;padding-top:8px}
-  /* 收起态下品牌是这条横条上唯一的抓手，桌面端那条「折叠即隐藏品牌」的规则在这里要撤销 */
-  :root[data-theme="nebula"][data-rail="shut"] .brand{opacity:1}
-  /* 3D 展位铭牌在手机上只是噪声：那块信息要靠悬停，手机没有悬停 */
-  [data-theme="nebula"] #hud{display:none}
-  :root[data-theme="nebula"][data-rail="shut"] .brandrow{border-bottom:0;padding-bottom:6px}
-  [data-theme="nebula"] #rail{max-height:70vh;overflow-y:auto}
-  [data-theme="nebula"] .hero h1{font-size:clamp(30px,8.4vw,44px)}
-  [data-theme="nebula"] .hero{margin-bottom:26px}
-  [data-theme="nebula"] main{padding-left:18px;padding-right:18px;padding-top:16px}
+/* ── 角落读数。HUD 不抢中央，贴边站着 ── */
+#stamp {
+  position: fixed; top: 16px; left: 20px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .04em;
+  color: var(--ink3); z-index: 3; max-width: 46vw;
+}
+#stamp[data-fresh="1"] { color: var(--acc3); }
+#foot {
+  position: fixed; bottom: 8px; left: 20px;
+  font-family: var(--mono); font-size: 10px; color: var(--ink3);
+  z-index: 3; opacity: .7; max-width: 46vw;
+}
+#hud {
+  position: fixed; top: 14px; right: 20px; z-index: 3;
+  display: flex; gap: 18px; align-items: flex-start;
+  font-family: var(--mono); font-size: 11px; color: var(--ink2);
+}
+#hud .r { text-align: right; }
+#hud .r b {
+  display: block; font-family: var(--disp); font-size: 19px;
+  font-weight: 700; color: var(--ink); line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+#hud .r span { color: var(--ink3); font-size: 10px; }
+
+/* ── 中央台面。**一次只讲一件事** ── */
+#view {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(760px, calc(100vw - 48px));
+  max-height: calc(100vh - 210px);
+  overflow-y: auto; overflow-x: hidden;
+  scrollbar-width: thin;
+  padding: 4px 2px;
+}
+#view::-webkit-scrollbar { width: 4px; }
+#view::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 2px; }
+
+/* 中央台面底下垫一层径向压暗。**这不是装饰，是可读性的下限** ——
+ * 星云团最亮的时候正好压在标题上，实测大字直接读不出来。
+ * 用径向渐变而不是实底：边缘要化开，否则就变成一块贴在天上的板子。 */
+#view::before {
+  content: ""; position: absolute; inset: -8% -12%;
+  z-index: -1; pointer-events: none;
+  background: radial-gradient(closest-side,
+    color-mix(in srgb, var(--bg) 88%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 72%, transparent) 46%,
+    transparent 100%);
+}
+#view > * { position: relative; }
+
+.stage { text-align: center; }
+.stage .eyebrow {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--acc); margin-bottom: 12px;
+}
+.stage h1 {
+  font-family: var(--disp); font-weight: 700;
+  font-size: clamp(24px, 4.4vw, 38px); line-height: 1.2;
+  margin: 0 0 10px; letter-spacing: -.02em; text-wrap: balance;
+}
+.stage .hint {
+  color: var(--ink2); font-size: 13.5px; line-height: 1.7;
+  max-width: 60ch; margin: 0 auto 26px; text-wrap: pretty;
+}
+
+/* 头条数：**大到没有第二个焦点** */
+.headline { margin: 0 0 26px; }
+.headline .v {
+  font-family: var(--disp); font-weight: 700;
+  font-size: clamp(44px, 11vw, 92px); line-height: .95;
+  letter-spacing: -.04em; font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  text-shadow: 0 0 42px color-mix(in srgb, var(--acc) 40%, transparent);
+}
+.headline .k {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink3); margin-bottom: 10px;
+}
+.headline .n { color: var(--ink2); font-size: 13px; margin-top: 10px; }
+
+/* ── 射线：一条数据 = 一条从中心射出的光 ── */
+.beams { display: flex; flex-direction: column; gap: 2px; margin: 0 0 20px; }
+.beam {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: baseline; gap: 14px;
+  padding: 9px 14px; border-radius: 3px;
+  position: relative; text-align: left;
+  cursor: default; transition: background .18s var(--ease);
+}
+.beam[role="button"] { cursor: pointer; }
+.beam::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+  width: var(--w, 0%); border-radius: 3px;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--c, var(--acc)) 26%, transparent),
+    color-mix(in srgb, var(--c, var(--acc)) 4%, transparent));
+  pointer-events: none;
+}
+.beam:hover, .beam:focus-visible { background: color-mix(in srgb, var(--acc) 9%, transparent); }
+.beam.on { background: color-mix(in srgb, var(--acc) 14%, transparent); }
+.beam .k {
+  position: relative; font-size: 13.5px; color: var(--ink);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.beam .v {
+  position: relative; font-family: var(--mono); font-size: 13px;
+  color: var(--ink2); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.beam .sub { display: block; font-size: 11px; color: var(--ink3); }
+
+/* ── 读数组：中央下方一排小数，不是便当格 ── */
+.reads {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0; margin: 0 0 22px;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.read {
+  flex: 1 1 130px; min-width: 118px; padding: 13px 14px;
+  border-right: 1px solid var(--line); text-align: left;
+}
+.read:last-child { border-right: none; }
+.read .k {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--ink3); margin-bottom: 5px;
+}
+.read .v {
+  font-family: var(--disp); font-weight: 700; font-size: 21px;
+  line-height: 1.15; font-variant-numeric: tabular-nums;
+}
+.read .v.acc { color: var(--acc); }
+.read .v.warn { color: var(--warn); }
+.read .v.sm { font-size: 15px; line-height: 1.35; }
+.read .n { font-size: 11px; color: var(--ink3); margin-top: 4px; line-height: 1.5; }
+
+/* ── 明细从下方升起，不是内联展开 ── */
+.sheet { margin: 18px 0 0; text-align: left; }
+.sheet > summary {
+  list-style: none; cursor: pointer;
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em;
+  color: var(--acc); padding: 9px 0;
+  border-top: 1px solid var(--line);
+}
+.sheet > summary::-webkit-details-marker { display: none; }
+.sheet > summary::before { content: "▸ "; }
+.sheet[open] > summary::before { content: "▾ "; }
+.sheet > summary:hover { color: var(--ink); }
+.sheet .inner { padding: 6px 0 14px; }
+
+table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+th, td { padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+th {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink3); font-weight: 500; white-space: nowrap;
+}
+td.r, th.r { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.tw { overflow-x: auto; }
+
+.warnbox {
+  text-align: left; margin: 16px 0; padding: 12px 16px;
+  border: 1px solid var(--line2); border-left: 2px solid var(--warn);
+  border-radius: 3px; font-size: 12.5px; line-height: 1.7; color: var(--ink2);
+}
+.warnbox b { color: var(--ink); }
+.pill {
+  display: inline-block; font-family: var(--mono); font-size: 10.5px;
+  padding: 1px 7px; margin: 0 3px 3px 0; border-radius: 10px;
+  border: 1px solid var(--line2); color: var(--ink2);
+}
+.st {
+  display: inline-block; font-family: var(--mono); font-size: 10.5px;
+  padding: 0 6px; margin-left: 5px; border-radius: 2px; border: 1px solid currentColor;
+}
+.st[data-s="通"] { color: var(--ok); }
+.st[data-s="断了"] { color: var(--bad); }
+.st[data-s="没做"] { color: var(--ink3); }
+.st[data-s="说不准"] { color: var(--warn); }
+
+/* ── 指令坞：导航全在这里。**这是取代左轨的东西** ── */
+#dock {
+  position: fixed; left: 50%; bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 4; display: flex; align-items: center; gap: 4px;
+  padding: 6px; border-radius: 999px;
+  background: color-mix(in srgb, var(--bg2) 88%, transparent);
+  border: 1px solid var(--line2);
+  box-shadow: 0 10px 40px -14px #000;
+  max-width: calc(100vw - 24px);
+}
+#dock .g {
+  position: relative; display: flex; align-items: center; gap: 7px;
+  padding: 8px 13px; border-radius: 999px; border: 0; cursor: pointer;
+  background: transparent; color: var(--ink2);
+  font-family: var(--body); font-size: 12.5px; white-space: nowrap;
+  transition: background .18s var(--ease), color .18s var(--ease);
+}
+#dock .g:hover { color: var(--ink); background: color-mix(in srgb, var(--acc) 12%, transparent); }
+#dock .g[aria-expanded="true"], #dock .g.on {
+  color: var(--bg); background: var(--acc);
+}
+html[data-mode="light"] #dock .g[aria-expanded="true"],
+html[data-mode="light"] #dock .g.on { color: #fff; }
+#dock .gi { font-size: 14px; line-height: 1; }
+#dock .gl { }
+#dock .sep { width: 1px; height: 20px; background: var(--line2); margin: 0 4px; }
+/* 主题/明暗开关由 core/app.js 塞进 #tools，标记不归这套主题管 ——
+ * 所以只能在这里把它按坞的规矩重排。不管的话，窄屏下那五个按钮
+ * 会竖着堆成一列把坞撑破（实测 375px 就是这样）。 */
+#dock #tools { display: flex; gap: 4px; flex: 0 0 auto; }
+#dock .seg { display: flex; gap: 2px; flex-wrap: nowrap; }
+#dock .seg button {
+  padding: 7px 11px; border-radius: 999px; border: 0; cursor: pointer;
+  background: transparent; color: var(--ink3);
+  font-family: var(--body); font-size: 12px; white-space: nowrap;
+}
+#dock .seg button:hover { color: var(--ink); }
+#dock .seg button[aria-pressed="true"] {
+  color: var(--acc); background: color-mix(in srgb, var(--acc) 14%, transparent);
+}
+
+#dock .mini {
+  padding: 8px 11px; border-radius: 999px; border: 0; cursor: pointer;
+  background: transparent; color: var(--ink3); font-family: var(--mono); font-size: 11px;
+}
+#dock .mini:hover { color: var(--ink); }
+#dock .mini[aria-pressed="true"] { color: var(--acc); }
+
+/* 二级：从坞上方浮出的一排 */
+#sub {
+  position: fixed; left: 50%; bottom: 78px;
+  transform: translateX(-50%);
+  z-index: 4; display: none; gap: 4px; padding: 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg2) 92%, transparent);
+  border: 1px solid var(--line2);
+  box-shadow: 0 10px 34px -16px #000;
+  max-width: calc(100vw - 24px); overflow-x: auto;
+}
+#sub.on { display: flex; }
+#sub button {
+  padding: 7px 13px; border-radius: 999px; border: 0; cursor: pointer;
+  background: transparent; color: var(--ink2);
+  font-family: var(--body); font-size: 12.5px; white-space: nowrap;
+}
+#sub button:hover { color: var(--ink); background: color-mix(in srgb, var(--acc) 12%, transparent); }
+#sub button[aria-current="true"] { color: var(--acc); }
+
+/* ── 命令面板：`/` 唤起。没有左轨，就得有个直达 ── */
+#pal {
+  position: fixed; inset: 0; z-index: 20; display: none;
+  align-items: flex-start; justify-content: center;
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  padding-top: 16vh;
+}
+#pal.on { display: flex; }
+#pal .box {
+  width: min(520px, calc(100vw - 40px));
+  border: 1px solid var(--line2); border-radius: 6px;
+  background: var(--bg2); box-shadow: 0 24px 70px -20px #000;
+  overflow: hidden;
+}
+#pal input {
+  width: 100%; padding: 15px 18px; border: 0; outline: 0;
+  background: transparent; color: var(--ink);
+  font-family: var(--body); font-size: 16px;
+  border-bottom: 1px solid var(--line);
+}
+#pal input::placeholder { color: var(--ink3); }
+#pal .hits { max-height: 46vh; overflow-y: auto; }
+#pal .hit {
+  padding: 10px 18px; cursor: pointer; font-size: 13.5px; color: var(--ink2);
+  display: flex; justify-content: space-between; gap: 12px;
+}
+#pal .hit .g { font-family: var(--mono); font-size: 10.5px; color: var(--ink3); }
+#pal .hit.on, #pal .hit:hover { background: color-mix(in srgb, var(--acc) 16%, transparent); color: var(--ink); }
+
+/* 左右键在射线之间移动的提示 */
+#keyhint {
+  position: fixed; right: 20px; bottom: 10px; z-index: 3;
+  font-family: var(--mono); font-size: 10px; color: var(--ink3); opacity: .6;
+}
+
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+@media (max-width: 760px) {
+  body { font-size: 14.5px; }
+  #view { width: calc(100vw - 26px); max-height: calc(100vh - 190px); }
+  #hud { display: none; }                 /* 小屏把角落读数让给中央 */
+  #keyhint { display: none; }
+  #dock { bottom: 14px; padding: 5px; gap: 2px; overflow-x: auto; justify-content: flex-start; }
+  #dock .gl { display: none; }            /* 只留字形，横向放得下 5 个 */
+  #dock .g { padding: 9px 12px; }
+  #sub { bottom: 64px; }
+  /* 窄屏把主题名压成一个字：坞是一条横带，不许换行。 */
+  #dock .seg button { font-size: 0; padding: 8px 9px; }
+  #dock .seg button::before { font-size: 12.5px; }
+  #dock [data-theme-btn="glass"]::before { content: "琉"; }
+  #dock [data-theme-btn="nebula"]::before { content: "云"; }
+  #dock [data-theme-btn="gilt"]::before { content: "金"; }
+  #dock [data-mode-btn="dark"]::before { content: "深"; }
+  #dock [data-mode-btn="light"]::before { content: "浅"; }
+  .read { flex: 1 1 100px; min-width: 96px; padding: 11px 12px; }
+  #foot { max-width: 62vw; }
 }
