@@ -23,6 +23,7 @@
       "owner": "OpenAIDatabase/modeling-core",
       "purpose": "Offline deterministic model and transformation behavior",
       "test_files": [
+        "tests/test_agent_session_extract.py",
         "tests/test_codex_runtime_config.py",
         "tests/test_memory_atlas_v1_2_home_layout_contract.py",
         "tests/test_memory_atlas_v1_2_product_identity_contract.py",

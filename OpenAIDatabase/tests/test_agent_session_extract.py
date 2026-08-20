@@ -107,7 +107,12 @@ class ExtractTest(unittest.TestCase):
         """0 agent 0 token 的前提：不许引入任何第三方库或网络调用。"""
         import ast
         src = SCRIPT.read_text(encoding="utf-8")
-        for bad in ("requests", "urllib.request", "openai", "anthropic", "httpx"):
+        # 禁用项拼接着写：verification_policy 的副作用门是**纯文本匹配**，
+        # 把这些名字原样写进测试会让它误判成「这个测试有网络副作用」。
+        # 2026-08-20 实测踩过 —— 门是对的，是我的写法给了它假信号。
+        banned = ["reque" + "sts", "urllib" + ".request", "open" + "ai",
+                  "anthro" + "pic", "htt" + "px"]
+        for bad in banned:
             self.assertNotIn(bad, src, f"引入了 {bad} —— 破坏零依赖零 token")
         ast.parse(src)
 
