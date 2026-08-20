@@ -18,8 +18,9 @@ ${L.repeats.slice(0, 14).map(r => `
 ${drawer(`展开全部 ${L.repeats.length} 组`, table([{ t: '次数', r: true }, { t: '横跨', r: true }, { t: '问的是什么' }],
   L.repeats.map(r => [String(r.n), `${r.days} 天`, esc(r.text)])))}
 
-${sec('最耗你的项目', '按「每场会话平均提到多少次报错」排。不是哪个项目 bug 多，是哪个项目最消耗你。')}
-${orbit(L.pain.map(p => ({ k: p.name, v: p.per, label: `${p.per.toFixed(1)} / 场（${p.sessions} 场）`, c: 'var(--warn)' })))}
+${sec('最耗你的项目', '按「每场会话里 error/报错 这个词出现几次」排 —— 是<b>消耗代理</b>，不是 bug 数。'
+  + '一段贴进来的日志能一次贡献上百次。它回答的是「哪个项目最消耗你」。')}
+${orbit(L.pain.map(p => ({ k: p.name, v: p.per, label: `${p.per.toFixed(1)} 次提及/场（${p.sessions} 场）`, c: 'var(--warn)' })))}
 
 ${sec('最长的十场', '你说话次数最多的会话。一场里说了几百次，通常意味着那次没有一遍过。')}
 ${orbit(L.longest.map(x => ({ k: x.day, v: x.turns, label: `${x.turns} 次 · ${esc((x.title || '').slice(0, 26))}`,
