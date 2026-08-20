@@ -88,7 +88,19 @@ async function boot() {
   }
   const m = S.atlas.meta;
   const built = local(m.generated_at).toISOString().slice(0, 16).replace('T', ' ');
-  document.getElementById('stamp').textContent = `数据截至 ${m.last_day} · 生成于 ${built}`;
+  // 流水线停了必须看得出来。数据静默陈旧、页面一切正常，是最坏的一种假绿：
+  // 探测机制自己坏掉的时候，结果必须显示「不确定」，不能显示「通」。
+  const ageH = (Date.now() - new Date(m.generated_at).getTime()) / 3600e3;
+  const stamp = document.getElementById('stamp');
+  stamp.textContent = `数据截至 ${m.last_day} · 生成于 ${built}`;
+  if (ageH > 48) {
+    stamp.textContent += `　⚠ 断了：已 ${Math.floor(ageH / 24)} 天没有新数据`;
+    stamp.style.color = 'var(--warn)';
+    document.getElementById('view').insertAdjacentHTML('beforebegin',
+      `<div class="note warn" style="max-width:1180px;margin:16px auto 0"><b>状态：断了。</b>
+       这一页显示的是 ${built} 那一刻的数据，之后每日流水线没有再成功跑过。
+       下面所有数字都是那一刻的，不是现在的。</div>`);
+  }
   document.getElementById('foot').textContent =
     `${m.sessions_total} 场会话 · ${m.days_active} 个有记录的日子 · ${m.first_day} 起 · 运行期不调用任何模型`;
   addEventListener('hashchange', render);

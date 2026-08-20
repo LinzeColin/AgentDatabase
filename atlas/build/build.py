@@ -253,6 +253,7 @@ def build(sessions: list, out: Path) -> dict:
         "slices": slices_block(sessions, day_rows),
         "trend": trend_block(week_rows),
         "insights": insights_block(sessions, day_rows, week_rows, proj_rows),
+        "lessons": lessons_block(sessions, proj_rows),
         "keyword_weights": {k: round(v, 3) for k, v in sorted(weights.items(), key=lambda kv: -kv[1])[:60]},
     }
 
@@ -445,6 +446,66 @@ def insights_block(sessions, days, weeks, projects) -> list:
         out.append({"k": "认不出主题的", "v": f"{unc} 场",
                     "d": f"一个关键词都没命中，如实标成未分类，没有硬塞进任何一类。", "t": "info"})
     return out
+
+
+REPEAT_PREFIX = 26
+REPEAT_MIN = 3
+
+
+def lessons_block(sessions: list, projects: list) -> dict:
+    """经验沉淀。全部从数据里数出来，没有一句是生成的。
+
+    最有用的一条是「同一件事你问过几次」：一个问题被反复问，说明上一次的答案
+    没有沉淀下来 —— 那就是下一次该固化的东西。近似判重用前 26 个字，
+    再长会因为一点点措辞差异就判成两件事。
+    """
+    hum = [s for s in sessions if s["kind"] == "human"]
+
+    groups = defaultdict(list)
+    for s in hum:
+        for p in (s.get("prompts") or [])[:1]:
+            key = "".join(p.split())[:REPEAT_PREFIX]
+            if len(key) >= 8:
+                groups[key].append(s)
+    repeats = []
+    for key, rows in groups.items():
+        if len(rows) < REPEAT_MIN:
+            continue
+        rows.sort(key=lambda r: r["start"])
+        repeats.append({
+            "text": rows[0]["prompts"][0][:150],
+            "n": len(rows),
+            "first": rows[0]["day"], "last": rows[-1]["day"],
+            "days": len({r["day"] for r in rows}),
+            "projects": [k for k, _ in Counter(r.get("project") or "—" for r in rows).most_common(3)],
+        })
+    repeats.sort(key=lambda r: -r["n"])
+
+    # 报错提及最密集的项目：不是「哪个项目 bug 多」，是「哪个项目最耗你」
+    perr = defaultdict(lambda: {"errors": 0, "sessions": 0})
+    for s in hum:
+        k = s.get("project") or "未标注"
+        perr[k]["errors"] += s.get("errors", 0)
+        perr[k]["sessions"] += 1
+    pain = sorted(
+        ({"name": k, "errors": v["errors"], "sessions": v["sessions"],
+          "per": round(v["errors"] / max(1, v["sessions"]), 1)}
+         for k, v in perr.items() if v["errors"] > 0),
+        key=lambda r: -r["per"])[:12]
+
+    longest = sorted(hum, key=lambda s: -s.get("turns", 0))[:10]
+    revisit = sorted(projects, key=lambda p: -(p["last"] > p["first"] and p["human"] or 0))[:10]
+
+    return {
+        "repeats": repeats[:25],
+        "pain": pain,
+        "longest": [{"day": s["day"], "title": (s.get("title") or "")[:90], "turns": s.get("turns", 0),
+                     "project": s.get("project", ""), "topics": s["topics"]} for s in longest],
+        "revisit": [{"name": p["name"], "human": p["human"], "first": p["first"], "last": p["last"],
+                     "shipped": p["shipped"]} for p in revisit if p["human"] > 1],
+        "note": f"「问过几次」按每场会话第一句的前 {REPEAT_PREFIX} 个字判重，"
+                f"出现 {REPEAT_MIN} 次以上才列出来。",
+    }
 
 
 def main() -> int:

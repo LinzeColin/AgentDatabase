@@ -12,7 +12,7 @@ set -euo pipefail
 HOST="${ATLAS_HOST:-linze-vps3}"
 APP=/srv/linze/apps/memory-atlas
 COMPOSE=/srv/linze/apps/agentdatabase/current/ops/memory-atlas/docker-compose.yml
-SRC="$(cd "$(dirname "$0")/../web" && pwd)"
+SRC="$(cd "${1:-$(dirname "$0")/../web}" && pwd)"   # 默认仓内 web/，也可传发布目录
 
 [ -f "$SRC/index.html" ] || { echo "没有 web/index.html，先跑 build.py"; exit 1; }
 [ -f "$SRC/atlas/atlas.json" ] || { echo "没有 atlas/atlas.json，先跑 build.py"; exit 1; }

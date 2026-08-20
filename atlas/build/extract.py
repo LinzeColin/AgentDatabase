@@ -28,6 +28,10 @@ from pathlib import Path
 HOME = Path.home()
 APPSUP = HOME / "Library" / "Application Support"
 
+# 本文件自身的指纹。进缓存键 —— 解析逻辑一变，所有缓存自动失效。
+PARSER_FINGERPRINT = hashlib.sha256(
+    Path(__file__).read_bytes()).hexdigest()[:8] if Path(__file__).is_file() else "dev"
+
 # 本机实测位置（2026-08-20）。payload 是真实会话载荷，已剔除安装包与缓存。
 SOURCES = {
     "claude-code": {"root": HOME / ".claude" / "projects",  "glob": "**/*.jsonl", "parser": "cc"},
@@ -116,6 +120,8 @@ INJECTED = (
     "# instructions", "caveat: the messages below", "<ide_", "<user-prompt-submit-hook>",
     "<task>", "<attachment", "[request interrupted", "# claude.md", "<repo_instructions>",
     "# files mentioned by the user", "# file mentioned by the user", "<attached",
+    # 上下文压缩后自动注入的续接说明，不是人说的话
+    "this session is being continued", "本会话是上一次对话的延续", "analysis:",
 )
 
 
@@ -598,7 +604,9 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
             continue
         stats["files"] += 1
         stats["bytes"] += st.st_size
-        key = f"{path}|{st.st_mtime_ns}|{st.st_size}"
+        # 缓存键必须带上解析器自身的指纹：只按 (路径, mtime, 大小) 判重的话，
+        # 改了解析逻辑却复用旧记录，产出会静默陈旧且没有任何东西会变红。
+        key = f"{path}|{st.st_mtime_ns}|{st.st_size}|{PARSER_FINGERPRINT}"
         hit = cache.get(key)
         if hit is not None:
             records.append(hit)
