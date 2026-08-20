@@ -108,6 +108,582 @@
       "required_for_product": false
     },
     {
+      "source_id": "codex_skills",
+      "label_zh": "Codex 技能",
+      "path_template": "$HOME/.codex/skills",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "exclude_globs": [
+        "**/__pycache__/**",
+        "**/*.pyc",
+        "**/node_modules/**"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "shared_agent_skills",
+      "label_zh": "跨 Agent 共享技能",
+      "path_template": "$HOME/.agents/skills",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "exclude_globs": [
+        "**/__pycache__/**",
+        "**/*.pyc",
+        "**/node_modules/**"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "claude_projects",
+      "label_zh": "Claude Code 项目会话",
+      "path_template": "$HOME/.claude/projects",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "claude_sessions",
+      "label_zh": "Claude Code 会话",
+      "path_template": "$HOME/.claude/sessions",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "claude_tasks",
+      "label_zh": "Claude Code 本机任务",
+      "path_template": "$HOME/.claude/tasks",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "claude_scheduled_tasks",
+      "label_zh": "Claude Code 定时任务",
+      "path_template": "$HOME/.claude/scheduled-tasks",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "claude_skills",
+      "label_zh": "Claude Code 技能",
+      "path_template": "$HOME/.claude/skills",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "exclude_globs": [
+        "**/__pycache__/**",
+        "**/*.pyc",
+        "**/node_modules/**"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "dsh_sessions",
+      "label_zh": "DeepSeek Harness 会话",
+      "path_template": "$HOME/.dsh/sessions",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "dsh_attachments",
+      "label_zh": "DeepSeek Harness 附件",
+      "path_template": "$HOME/.dsh/attachments",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "dsh_cron_configuration",
+      "label_zh": "DeepSeek Harness 定时任务配置",
+      "path_template": "$HOME/.dsh/cron",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "dsh_archived_sessions",
+      "label_zh": "DeepSeek Harness 归档会话",
+      "path_template": "$HOME/.dsh/_archived",
+      "kind": "files",
+      "required": false,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "kimi_code_sessions",
+      "label_zh": "Kimi Code 会话",
+      "path_template": "$HOME/.kimi-code/sessions",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "kimi_code_user_history",
+      "label_zh": "Kimi Code 用户历史",
+      "path_template": "$HOME/.kimi-code/user-history",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "kimi_code_file_state",
+      "label_zh": "Kimi Code 文件状态",
+      "path_template": "$HOME/.kimi-code/file",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "kimi_code_files",
+      "label_zh": "Kimi Code 文件附件",
+      "path_template": "$HOME/.kimi-code/files",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "kimi_code_cron_configuration",
+      "label_zh": "Kimi Code 定时任务配置",
+      "path_template": "$HOME/.kimi-code/cron",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_state_database",
+      "label_zh": "WorkBuddy 状态数据库",
+      "path_template": "$HOME/.workbuddy/workbuddy.db",
+      "kind": "sqlite",
+      "required": true,
+      "recursive": false,
+      "include_globs": [
+        "*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_projects",
+      "label_zh": "WorkBuddy 项目状态",
+      "path_template": "$HOME/.workbuddy/projects",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_sessions",
+      "label_zh": "WorkBuddy 会话",
+      "path_template": "$HOME/.workbuddy/sessions",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_tasks",
+      "label_zh": "WorkBuddy 任务",
+      "path_template": "$HOME/.workbuddy/tasks",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_plans",
+      "label_zh": "WorkBuddy 计划",
+      "path_template": "$HOME/.workbuddy/plans",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_memory",
+      "label_zh": "WorkBuddy 记忆",
+      "path_template": "$HOME/.workbuddy/memory",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_skills",
+      "label_zh": "WorkBuddy 技能",
+      "path_template": "$HOME/.workbuddy/skills",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "exclude_globs": [
+        "**/__pycache__/**",
+        "**/*.pyc",
+        "**/node_modules/**"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_automation_backups",
+      "label_zh": "WorkBuddy 自动化备份",
+      "path_template": "$HOME/.workbuddy/automation-backups",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_workspace",
+      "label_zh": "WorkBuddy 工作区状态",
+      "path_template": "$HOME/.workbuddy/workspace",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_file_history",
+      "label_zh": "WorkBuddy 文件历史",
+      "path_template": "$HOME/.workbuddy/file-history",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_artifact_index",
+      "label_zh": "WorkBuddy 产物索引",
+      "path_template": "$HOME/.workbuddy/artifact-index",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_audit_log",
+      "label_zh": "WorkBuddy 审计记录",
+      "path_template": "$HOME/.workbuddy/audit-log",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "automation_reports",
+      "label_zh": "本机 Automation 报告",
+      "path_template": "$HOME/Documents/CodexAutomationReports",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "codex_configuration",
+      "label_zh": "Codex 用户配置",
+      "path_template": "$HOME/.codex/config.toml",
+      "kind": "files",
+      "required": true,
+      "recursive": false,
+      "include_globs": [
+        "*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "claude_backups",
+      "label_zh": "Claude Code 本机备份",
+      "path_template": "$HOME/.claude/backups",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "claude_hooks",
+      "label_zh": "Claude Code Hooks",
+      "path_template": "$HOME/.claude/hooks",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "dsh_profiles",
+      "label_zh": "DeepSeek Harness Profiles",
+      "path_template": "$HOME/.dsh/profiles",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "dsh_storages",
+      "label_zh": "DeepSeek Harness 存储状态",
+      "path_template": "$HOME/.dsh/storages",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "dsh_plugins",
+      "label_zh": "DeepSeek Harness 插件状态",
+      "path_template": "$HOME/.dsh/plugins",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "exclude_globs": [
+        "**/__pycache__/**",
+        "**/*.pyc",
+        "**/node_modules/**"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "dsh_cron_flags",
+      "label_zh": "DeepSeek Harness 定时任务标记",
+      "path_template": "$HOME/.dsh/cron-flags",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "dsh_cron_logs",
+      "label_zh": "DeepSeek Harness 定时任务日志",
+      "path_template": "$HOME/.dsh/cron-logs",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "dsh_patches",
+      "label_zh": "DeepSeek Harness 本机补丁",
+      "path_template": "$HOME/.dsh/_patches",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "kimi_code_server_state",
+      "label_zh": "Kimi Code Server 状态",
+      "path_template": "$HOME/.kimi-code/server",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_project_resources",
+      "label_zh": "WorkBuddy 项目资源索引",
+      "path_template": "$HOME/.workbuddy/project-resources",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_plugins",
+      "label_zh": "WorkBuddy 插件状态",
+      "path_template": "$HOME/.workbuddy/plugins",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "exclude_globs": [
+        "**/__pycache__/**",
+        "**/*.pyc",
+        "**/node_modules/**"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
+      "source_id": "workbuddy_connectors",
+      "label_zh": "WorkBuddy 连接器状态",
+      "path_template": "$HOME/.workbuddy/connectors",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    },
+    {
       "source_id": "chatgpt_exports",
       "label_zh": "ChatGPT 官方导出",
       "env_var": "MEMORY_ATLAS_CHATGPT_EXPORT_ROOTS",

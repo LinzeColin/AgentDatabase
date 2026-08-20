@@ -25,18 +25,34 @@ TASK_ID = "TSK.OpenAIDatabase.PEB1.0003"
 ACCEPTANCE_ID = "ACC.OpenAIDatabase.PEB1.0003"
 DEFAULT_POLICY = Path("config/storage/private_encrypted_backup_policy.json")
 DEFAULT_PUBLIC_POLICY = Path("config/storage/public_encrypted_backup_policy.json")
-EXPECTED_LOGICAL_SOURCES = [
-    "codex_state",
-    "codex_memories",
-    "codex_sessions",
-    "codex_archived_sessions",
-    "codex_attachments",
-    "codex_automations",
-    "codex_tasks",
-    "chatgpt_exports",
-    "openaidatabase_live_data",
-    "verified_evidence_adapters",
-]
+# 期望的来源集合**从注册表推导**，不在这里抄一份。
+# 2026-08-20 实测：这里曾硬编码 10 个（全是 codex/chatgpt），而注册表已经有 52 个。
+# 两份清单各自都「自洽」，于是 41 个标着 required 的本机来源（共 4.36GB，
+# 其中 claude_projects 3.09GB）连续三天没进备份，没有任何一处会变红。
+# 读不到注册表就抛错 —— 校验机制自己坏掉时必须失败，不能放行。
+SOURCE_REGISTRY = Path("ops/memory-atlas/source-registry.json")
+
+
+def expected_logical_sources(repo_root: Path | None = None) -> list[str]:
+    root = repo_root or Path.cwd()
+    path = root / SOURCE_REGISTRY
+    if not path.is_file():
+        for parent in (Path(__file__).resolve().parents):
+            candidate = parent / SOURCE_REGISTRY
+            if candidate.is_file():
+                path = candidate
+                break
+    if not path.is_file():
+        raise PrivateBackupPolicyError("source_registry_unreadable")
+    try:
+        registry = json.loads(path.read_text(encoding="utf-8"))
+        sources = registry["sources"]
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        raise PrivateBackupPolicyError("source_registry_invalid") from exc
+    ids = [str(item["source_id"]) for item in sources if isinstance(item, dict) and item.get("source_id")]
+    if not ids:
+        raise PrivateBackupPolicyError("source_registry_empty")
+    return ids
 EXPECTED_PREFLIGHT = [
     "age_binary_available",
     "unified_recipient_provisioned",
@@ -96,7 +112,7 @@ def validate_policy(
     automation = mapping(policy.get("automation"), "automation")
 
     if (
-        scope.get("logical_sources") != EXPECTED_LOGICAL_SOURCES
+        scope.get("logical_sources") != expected_logical_sources()
         or scope.get("full_recovery_intended") is not True
         or any(
             scope.get(key) is not False
