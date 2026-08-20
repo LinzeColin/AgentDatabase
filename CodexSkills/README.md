@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**103 份实例 / 87 个不同名字**，6252 个文件，约 133 MB。
+本机全部 Skill 的仓库镜像：**106 份实例 / 90 个不同名字**，6088 个文件，约 141 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -222,12 +222,13 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`gitnexus-refactoring`](registry/agents/gitnexus-refactoring/SKILL.md) | `agents` | Use when the user wants to rename, extract, split, move, or restructure code safely. Examples: \"Rename this function\", \"Extract this into a module\", \"Refactor this class\", \"Move this to a separate file\ |
 | [`gitnexus-taint-analysis`](registry/agents/gitnexus-taint-analysis/SKILL.md) | `agents` | Use when working on, reviewing, or extending GitNexus's CFG/taint/PDG subsystem (the `--pdg` layers), or when reasoning about source→sink data-flow findings. Examples: \"How does taint analysis work here?\", \"Why didn't explain find this flow?\", \"Add a new… |
 
-## 工程与交付（24）
+## 工程与交付（25）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
 | [`awesome-selfhosted`](registry/codex/awesome-selfhosted/SKILL.md) | `codex` | Use when Codex needs to discover, compare, or shortlist self-hosted Free/Libre software for deployment, replacement, or architecture work—such as analytics, backups, collaboration, databases, identity, notes, monitoring, AI, or web services—from the Awesome-Se… |
 | [`awesome-selfhosted-data`](registry/codex/awesome-selfhosted-data/SKILL.md) | `codex` | Use when Codex needs to search, filter, compare, or shortlist self-hosted Free/Libre software from structured Awesome-Selfhosted data—by category, license, platform, project status, release freshness, or source repository—before architecture, deployment, or re… |
+| [`character-skin-pipeline`](registry/claude/character-skin-pipeline/SKILL.md) | `claude` | 用游戏官方立绘批量产出应用皮肤背板（原神/崩铁/绝区零/鸣潮等），并装进 DSH、Kimi Code 这类 Electron 应用。Use when 要做角色壁纸/背板批量生成、给桌面应用换皮肤、按花名册全量出图、排查"皮肤装了但不显示"、或做需要人工审美判定的批量验收。覆盖：需求固化、花名册与中文名、锚图选取、任务包与 prompt 版本治理、Batch 出图与断点续跑、验收闸门与人工复核、宿主接入、共享状态与消费方案、SMB/git 归档。 |
 | [`codex-dev-orchestrator`](registry/agents/codex-dev-orchestrator/SKILL.md) | `agents` | Use when the user asks to plan, scope, package, or deliver a multi-step software/product/system build, especially PRD, MVP, or controlled implementation workflows. Classify the request first, then load only the matching reference. Do not use for narrow bug fix… |
 | [`domain-dual-plane`](registry/codex/domain-dual-plane/SKILL.md) | `codex` | Fail-closed domain modeling for repositories governed by machine/facts and exactly seven human-facing documents. Use only to resolve domain terms, boundaries, scenarios, or irreversible domain decisions without creating parallel governance files or crossing re… |
 | [`dynamic-personal-profile-update`](registry/codex/dynamic-personal-profile-update/SKILL.md) | `codex` | Read allowlisted redacted derived data and produce one human-readable and machine-readable dynamic personal profile Markdown file. Use when updating a time-aware user profile, detecting meaningful behavior or preference changes, turning profile changes into te… |

@@ -6,8 +6,8 @@
     "claude": "Claude Skill（Anthropic 侧）",
     "agents": "Agent Skill（跨工具通用目录）"
   },
-  "skill_instance_count": 105,
-  "unique_slug_count": 89,
+  "skill_instance_count": 106,
+  "unique_slug_count": 90,
   "skills": [
     {
       "slug": "agent-reach",
@@ -758,6 +758,16 @@
       "entry": "registry/codex-system/skill-installer/SKILL.md",
       "file_count": 8,
       "size_bytes": 30677
+    },
+    {
+      "slug": "character-skin-pipeline",
+      "source": "claude",
+      "name": "character-skin-pipeline",
+      "description": "用游戏官方立绘批量产出应用皮肤背板（原神/崩铁/绝区零/鸣潮等），并装进 DSH、Kimi Code 这类 Electron 应用。Use when 要做角色壁纸/背板批量生成、给桌面应用换皮肤、按花名册全量出图、排查\"皮肤装了但不显示\"、或做需要人工审美判定的批量验收。覆盖：需求固化、花名册与中文名、锚图选取、任务包与 prompt 版本治理、Batch 出图与断点续跑、验收闸门与人工复核、宿主接入、共享状态与消费方案、SMB/git 归档。",
+      "category": "工程与交付",
+      "entry": "registry/claude/character-skin-pipeline/SKILL.md",
+      "file_count": 12,
+      "size_bytes": 44403
     },
     {
       "slug": "context-kernel",
