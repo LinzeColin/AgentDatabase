@@ -39,6 +39,34 @@ parts = urlsplit(url); q = parse_qs(parts.query); q["format"] = ["original"]
 url = urlunsplit(parts._replace(query=urlencode(q, doseq=True)))
 ```
 
+## 换装的锚图：page image 不一定是人物像
+
+`collect_outfits.py` 原来拿 outfit 页的 `pageimages` 当锚图。**在鸣潮上那是错的**：
+它的 page image 是 `<Outfit> Splash Art.png` —— 整套场景的宣传图，
+2048×1667 全是房间，人物小小地躺在中间某处。当身份锚图等于没有锚。
+
+正确的是 `<Outfit> Full Sprite.png`（竖构图的人物立绘）。
+**先按名字要 sprite，wiki 没有才退回 page image**——而没有 sprite 的那几套，
+宁可不收：
+
+```python
+sprite = sprites.get(title)          # File:<Outfit> Full Sprite.png
+if not sprite:
+    orphans.append(f"{title} (只有场景宣传图，没有 Full Sprite)")
+    continue
+```
+
+鸣潮 5 套「真·另一套」里只有 2 套有 Full Sprite。拿场景图跑过一次试跑：
+图本身能看，**但同一套换装的昼版和夜版长得不是一套衣服**——
+锚图弱到锁不住身份。而昼夜是同一张皮肤的两面，不一致就是缺陷。
+
+> 附带一次静态误判：这两张场景图锚图第一次提交被 safety system 拒了，
+> 我据此以为是内容被封。第二轮重试**同样的请求通过了**——是瞬时抖动，不是必然。
+> **一次拒绝不构成结论**，重试一次再下判断。
+
+顺带：`collect_outfits.py` 下载时也要 `?format=original`，
+否则拿到的是 CDN 的 WebP 转码（同一个 1200×1600 的文件会被喂成 2048×2048 的转码版）。
+
 ## 存法
 
 落盘前 `thumbnail((2048, 2048))` 统一上限，存 JPEG q95。

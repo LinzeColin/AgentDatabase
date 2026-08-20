@@ -83,6 +83,42 @@ def describe(wiki: str, titles: list[str]) -> dict[str, dict]:
     return out
 
 
+def portrait_file(wiki: str, titles: list[str]) -> dict[str, tuple[str, int, int]]:
+    """`<Outfit> Full Sprite.png` — the outfit's own character portrait.
+
+    The page image is NOT reliably a portrait. On the Wuthering Waves wiki the
+    outfit page's nominated image is `<Outfit> Splash Art.png`, which is the
+    promo key art for the whole scene: 2048x1667 of room, with the character
+    small and reclining somewhere inside it. As an identity anchor that is
+    worthless — and one of them (Laurel Nymph) was refused outright by the
+    image API's safety system, twice, on both light and dark.
+
+    So ask for the sprite by name first and only fall back to the page image
+    when the wiki has none.
+    """
+    wanted = [f"File:{t} Full Sprite.png" for t in titles]
+    found: dict[str, tuple[str, int, int]] = {}
+    for start in range(0, len(wanted), 40):
+        data = api(wiki, {"action": "query", "titles": "|".join(wanted[start:start + 40]),
+                          "prop": "imageinfo", "iiprop": "url|size", "format": "json"})
+        for page in data.get("query", {}).get("pages", {}).values():
+            info = (page.get("imageinfo") or [None])[0]
+            if info and info.get("width"):
+                outfit = page["title"][5:-len(" Full Sprite.png")]
+                found[outfit] = (info["url"], info["width"], info["height"])
+        time.sleep(0.25)
+    return found
+
+
+def original_url(url: str) -> str:
+    """Fandom 的 CDN 对所有 UA 都返回 WebP 转码；不加这个参数拿到的不是原图。"""
+    parts = urllib.parse.urlsplit(url)
+    query = urllib.parse.parse_qs(parts.query)
+    query["format"] = ["original"]
+    return urllib.parse.urlunsplit(
+        parts._replace(query=urllib.parse.urlencode(query, doseq=True)))
+
+
 def slug(text: str) -> str:
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", text.lower())).strip("-")
 
@@ -114,17 +150,25 @@ def main() -> None:
     print(f"{game_zh}: Category:Outfits 共 {len(titles)} 套")
 
     pages = describe(wiki, titles)
+    sprites = portrait_file(wiki, titles)
     grouped: dict[str, list[tuple[str, str]]] = defaultdict(list)
     orphans = []
     for title, info in pages.items():
-        if not info["image"]:
+        sprite = sprites.get(title)
+        image = sprite[0] if sprite else info["image"]
+        if not image:
             orphans.append(f"{title} (无立绘)")
+            continue
+        # 场景宣传图当不了身份锚图：人物在里面只占很小一块，
+        # 而锚图是这条产线里角色还原度的唯一来源。
+        if not sprite:
+            orphans.append(f"{title} (只有场景宣传图，没有 Full Sprite)")
             continue
         owner = next((o for o in info["owners"] if o in by_name), None)
         if owner is None:
             orphans.append(f"{title} (归属 {info['owners'] or '未知'} 不在女角色名单)")
             continue
-        grouped[owner].append((title, info["image"]))
+        grouped[owner].append((title, image))
 
     saved = 0
     for owner, items in sorted(grouped.items()):
@@ -136,7 +180,7 @@ def main() -> None:
             target = home / f"{slug(title)}.png"
             if not target.exists():
                 try:
-                    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as response:
+                    with urllib.request.urlopen(urllib.request.Request(original_url(url), headers=UA), timeout=60) as response:
                         target.write_bytes(response.read())
                 except Exception as error:
                     orphans.append(f"{title} (下载失败 {str(error)[:40]})")
