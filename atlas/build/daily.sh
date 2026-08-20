@@ -35,7 +35,10 @@ trap 'rmdir "$LOCK" 2>/dev/null || true' EXIT
   python3 "$ROOT/build/build.py"   --sessions "$WORK/out" --out "$WORK/web" \
     --github "$WORK/out/github.json"
   # 给 agent 看的开发经验沉淀。落私有目录，**绝不进公开仓**（里面有 Owner 原话）。
-  python3 "$ROOT/build/sediment.py" --sessions "$WORK/out" --out "$WORK/brief"
+  python3 "$ROOT/build/sediment.py" --sessions "$WORK/out" --out "$WORK/brief" --web "$WORK/web"
+  # 权威副本推私有仓，让任何有仓权限的 agent 都能直接取。
+  # 失败不阻断本轮 —— 站点和本机那两份还在。
+  bash "$ROOT/build/push_brief.sh" "$WORK/brief" || echo "AGENT_BRIEF 推送失败，本轮只留站点与本机副本"
 
   # 页面本体来自仓里的 web/，数据来自 $WORK/web/atlas/ —— 发布时合到一起
   rsync -a --delete --exclude atlas/ "$ROOT/web/" "$WORK/web/"

@@ -25,6 +25,8 @@ HARNESS = {
                        "note": "可接多家模型，实际用到 DeepSeek 与 SCNet"},
     "chatgpt":        {"label": "ChatGPT", "kind": "llm", "vendor": "OpenAI",
                        "note": "仓内历史导出，不含 token 用量字段"},
+    "dsh":            {"label": "DeepSeek Harness (DSH)", "kind": "llm", "vendor": "DeepSeek / SCNet",
+                       "note": "会话是多帧 zstd；1937 场里 1929 场是 subagent 扇出，已标为机器"},
     "dws":            {"label": "钉钉 CLI（dws）", "kind": "tool", "vendor": "—",
                        "note": "钉钉客户端命令行，不是 LLM，不产生 token"},
     "openchatcut":    {"label": "OpenChatCut", "kind": "tool", "vendor": "—",
@@ -34,6 +36,7 @@ HARNESS = {
 # 模型名 → provider。按前缀判，顺序即优先级。
 PROVIDER_RULES = [
     (re.compile(r"^scnet/", re.I),                    "SCNet（中国超算）"),
+    (re.compile(r"^deepseek-official/", re.I),        "DeepSeek"),
     (re.compile(r"^deepseek/|^deepseek-", re.I),      "DeepSeek"),
     (re.compile(r"^moonshot/|^kimi-", re.I),          "Moonshot"),
     (re.compile(r"^claude", re.I),                    "Anthropic"),
@@ -44,15 +47,19 @@ PROVIDER_RULES = [
 # 不是真模型名的占位符。计进模型分布会凭空造出一个不存在的「模型」。
 PLACEHOLDER_MODELS = {"__secondary__", "<synthetic>", "", "unknown"}
 
+# provider_hint 的原样值 → 展示名
+HINT_MAP = {"deepseek-official": "DeepSeek", "openai": "OpenAI", "anthropic": "Anthropic",
+            "scnet": "SCNet（中国超算）", "moonshot": "Moonshot"}
+
 
 def provider_of(model: str, hint: str = "") -> str:
     if not model or model in PLACEHOLDER_MODELS:
-        return hint.title() if hint else "未记录"
+        return HINT_MAP.get(hint.lower(), hint.title()) if hint else "未记录"
     for pat, name in PROVIDER_RULES:
         if pat.search(model):
             return name
     if hint:
-        return hint.title()
+        return HINT_MAP.get(hint.lower(), hint.title())
     return "未归类"
 
 

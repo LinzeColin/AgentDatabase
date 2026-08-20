@@ -202,6 +202,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sessions", required=True)
     ap.add_argument("--out", required=True, help="私有目录 —— 里面有 Owner 原话，绝不进公开仓")
+    ap.add_argument("--web", default="", help="站点目录；给出则同时写一份到 <web>/brief/")
     args = ap.parse_args()
     sess = load(Path(args.sessions))
     if not sess:
@@ -210,8 +211,15 @@ def main() -> int:
     b = build(sess)
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
+    md = to_markdown(b)
     (out / "agent_brief.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
-    (out / "AGENT_BRIEF.md").write_text(to_markdown(b), encoding="utf-8")
+    (out / "AGENT_BRIEF.md").write_text(md, encoding="utf-8")
+    # 同时落到站点目录，让人能在 Access 后面直接打开
+    if args.web:
+        w = Path(args.web) / "brief"
+        w.mkdir(parents=True, exist_ok=True)
+        (w / "AGENT_BRIEF.md").write_text(md, encoding="utf-8")
+        (w / "agent_brief.json").write_text(json.dumps(b, ensure_ascii=False), encoding="utf-8")
     print(f"AGENT_BRIEF: {len(b['repeats'])} 条重复问题 · {len(b['project_briefs'])} 个项目简报 · "
           f"{len(b['pain_points'])} 个痛点 · {len(b['tool_usage'])} 种工具")
     return 0

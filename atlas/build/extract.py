@@ -20,6 +20,8 @@ import hashlib
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 import time
 from datetime import datetime, timezone
@@ -37,6 +39,10 @@ SOURCES = {
     "claude-code": {"root": HOME / ".claude" / "projects",  "glob": "**/*.jsonl", "parser": "cc"},
     "codex":       {"root": HOME / ".codex" / "sessions",   "glob": "**/*.jsonl", "parser": "codex"},
     "kimi-code":   {"root": HOME / ".kimi-code" / "sessions", "glob": "**/*.jsonl", "parser": "kimi"},
+    # DeepSeek Harness。会话是 zstd 压缩的 JSONL，本机 Python 3.9 没有 zstd
+    # （stdlib 要 3.14+），用 node 的 zlib.zstdDecompressSync 解 —— DSH 自己的
+    # 归档脚本也是这么做的。node 缺席时该来源标「不确定」，不静默跳过。
+    "dsh":         {"root": HOME / ".dsh" / "sessions", "glob": "**/session.jsonl.zstd", "parser": "dsh"},
     "dws":         {"root": HOME / ".dws" / "audit",        "glob": "**/*.jsonl", "parser": "generic"},
     "openchatcut": {"root": HOME / ".openchatcut" / "project-store-v1", "glob": "**/*.json", "parser": "generic"},
     "claude-desktop": {"root": APPSUP / "Claude" / "claude-code-sessions", "glob": "**/*.json", "parser": "cdmeta"},
@@ -48,7 +54,8 @@ SOURCES = {
 # 查过、确认没有对话内容的来源。**必须出现在产物里**，否则「筛掉的那部分」
 # 不参与任何总量校验，总量就永远显得是对的（合同 §2.3 判据一）。
 SKIPPED = {
-    "dsh":       {"path": "~/Library/Application Support/DSH Desktop", "size_mb": 1100, "why": "全是 Electron 缓存，无对话"},
+    "dsh-desktop": {"path": "~/Library/Application Support/DSH Desktop", "size_mb": 1100,
+                    "why": "Electron 缓存，无对话。真正的 DSH 会话在 ~/.dsh/sessions，已入库（source_id=dsh）"},
     "workbuddy": {"path": "~/.workbuddy",       "size_mb": 1300, "why": "应用安装包与运行日志，非对话"},
     "mmx":       {"path": "~/.mmx",             "size_mb": 0,    "why": "仅配置文件 8KB"},
     "kimi-desktop": {"path": "~/Library/Application Support/kimi-desktop", "size_mb": 428, "why": "缓存与共享资源，对话在云端"},
@@ -57,7 +64,15 @@ SKIPPED = {
 
 REDACT = [
     (re.compile(re.escape(str(HOME))), "~"),
-    (re.compile(r"\b(gh[pousr]_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16})\b"), "<SECRET>"),
+    # 令牌形态按**前缀族**匹配，不按字段名。实测踩过：MiniMax 的
+    # access_token / refresh_token 嵌在 oauth 这一层里，按键名过滤完全挡不住。
+    (re.compile(r"\b(gh[pousr]_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9\-]{20,}|AKIA[0-9A-Z]{16}|"
+                r"oat-[A-Za-z0-9_\-]{16,}|dfrt-[A-Za-z0-9_\-]{16,}|"
+                r"xox[baprs]-[A-Za-z0-9\-]{10,}|glpat-[A-Za-z0-9_\-]{16,}|"
+                r"eyJ[A-Za-z0-9_\-]{16,}\.[A-Za-z0-9_\-]{16,}\.[A-Za-z0-9_\-]{8,})\b"), "<SECRET>"),
+    # 任何 "xxx_token"/"xxx_secret"/"apiKey" 的取值也一并抹掉，兜住没见过的前缀
+    (re.compile(r'("?(?:access|refresh|api|auth|bearer|client)[_-]?(?:token|secret|key)"?\s*[:=]\s*"?)[^",\s}]{12,}',
+                re.I), r"\1<SECRET>"),
 ]
 
 # 主题词。中英混排是因为实际对话就是混着说的。
@@ -122,6 +137,8 @@ INJECTED = (
     "# files mentioned by the user", "# file mentioned by the user", "<attached",
     # 上下文压缩后自动注入的续接说明，不是人说的话
     "this session is being continued", "本会话是上一次对话的延续", "analysis:",
+    # DSH 会把运行时状态变更也塞成 user/message
+    "the approval policy changed", "the sandbox mode changed", "permission preset",
 )
 
 
@@ -247,7 +264,7 @@ def blank(sid: str, source: str, path: Path) -> dict:
         "tok_in": 0, "tok_out": 0, "tok_cache_r": 0, "tok_cache_w": 0,
         "models": [], "kw": {}, "topics": [], "prompts": [], "bytes": 0,
         "tool_names": {}, "provider_hint": "", "effort": "",
-        "kind": "human", "batch": "",
+        "kind": "human", "batch": "", "dsh_origin": "", "dsh_preset": "",
     }
 
 
@@ -478,6 +495,78 @@ def parse_cdmeta(path: Path, rec: dict) -> dict:
     return rec
 
 
+_NODE = shutil.which("node") or str(HOME / ".local" / "bin" / "node")
+_DSH_HELPER = Path(__file__).resolve().parent / "helpers" / "dsh_reduce.js"
+_DSH_CACHE: dict = {}
+_DSH_BATCH = 220          # 一次给 node 多少个文件；太多会顶穿 argv 上限
+
+
+def _dsh_prepare(root: Path) -> None:
+    """一次 node 进程归约全部 DSH 会话。
+
+    两件必须知道的事：
+    1. DSH 把**每一行当成独立的 zstd 帧**追加，一个文件里能有上千帧。
+       zstdDecompressSync 只解第一帧 —— 照着它拿，每个会话只会得到那条
+       session 元数据（273 字节），正文一行都读不到。实测就是这么错的：
+       1937 场全是 0 轮 0 消息，看起来"抽到了"，其实什么都没抽到。
+    2. 一次 node 进程处理全部文件。1937 个文件各起一个进程要几分钟。
+
+    本机 Python 3.9 没有 zstd（stdlib 要 3.14+），所以借 node 的 zlib；
+    DSH 自己的归档脚本也是这么解的。node 缺席就抛错，不静默跳过。
+    """
+    if _DSH_CACHE:
+        return
+    if not Path(_NODE).is_file() or not _DSH_HELPER.is_file():
+        raise RuntimeError("node_or_helper_missing")
+    files = [str(p) for p in sorted(root.rglob("session.jsonl.zstd"))]
+    for i in range(0, len(files), _DSH_BATCH):
+        r = subprocess.run([_NODE, str(_DSH_HELPER), *files[i:i + _DSH_BATCH]],
+                           capture_output=True, timeout=900)
+        for line in r.stdout.decode("utf-8", "ignore").splitlines():
+            try:
+                d = json.loads(line)
+            except ValueError:
+                continue
+            _DSH_CACHE[d["path"]] = d
+
+
+def parse_dsh(path: Path, rec: dict) -> dict:
+    """DeepSeek Harness 的 session.jsonl.zstd（多帧 zstd，见 helpers/dsh_reduce.js）。"""
+    d = _DSH_CACHE.get(str(path))
+    if not d or not d.get("ok"):
+        raise RuntimeError("dsh_decode_failed")
+    if d.get("first"):
+        rec["start"] = iso(d["first"])
+    if d.get("last"):
+        rec["end"] = iso(d["last"])
+    rec["project"] = project_of(d.get("cwd") or "")
+    rec["msgs"] = d.get("msgs", 0) + d.get("turns", 0)
+    rec["tools"] = d.get("tools", 0)
+    rec["tool_names"] = d.get("toolNames") or {}
+    if d.get("model"):
+        rec["models"] = [f'{d.get("provider", "")}/{d["model"]}'.strip("/")]
+    if d.get("provider"):
+        rec["provider_hint"] = d["provider"]
+
+    prompts, texts = [], []
+    for raw in (d.get("prompts") or []):
+        if is_injected(raw):
+            continue
+        texts.append(raw)
+        if len(prompts) < MAX_PROMPTS:
+            prompts.append(redact(strip_injected(raw))[:PROMPT_CHARS])
+    rec["turns"] = len(texts)
+    rec["prompts"] = prompts
+    joined = "\n".join(texts)
+    rec["errors"] = joined.lower().count("error") + joined.count("报错")
+    rec["kw"] = count_keywords(joined)
+    rec["title"] = redact(d.get("title") or "")[:120] or (prompts[0][:80] if prompts else "dsh 会话")
+    # DSH 的子代理会话带 origin=subagent —— 那是扇出，不是你在对话。
+    rec["dsh_origin"] = d.get("origin") or ""
+    rec["dsh_preset"] = d.get("preset") or ""
+    return rec
+
+
 def parse_kimi(path: Path, rec: dict) -> dict:
     """Kimi Code 的 wire.jsonl。
 
@@ -575,7 +664,7 @@ def parse_chatgpt(path: Path, rec: dict) -> dict:
     return rec
 
 
-PARSERS = {"cc": parse_cc, "chatgpt": parse_chatgpt, "kimi": parse_kimi, "codex": parse_codex, "generic": parse_generic, "cdmeta": parse_cdmeta}
+PARSERS = {"cc": parse_cc, "chatgpt": parse_chatgpt, "dsh": parse_dsh, "kimi": parse_kimi, "codex": parse_codex, "generic": parse_generic, "cdmeta": parse_cdmeta}
 
 
 BATCH_MIN = 5
@@ -625,6 +714,15 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
             if r.get("_k"):
                 cache[r["_k"]] = r
 
+    if cfg["parser"] == "dsh":
+        try:
+            _dsh_prepare(root)
+        except (RuntimeError, OSError, subprocess.SubprocessError) as exc:
+            # 解不了就整源标不确定，**不产出空壳会话** ——
+            # 1937 个 0 轮 0 消息的记录会把总量灌水，那比没有更糟。
+            stats["degraded"] = f"DSH 解压失败（{exc}）；本轮不产出该来源"
+            return stats
+
     records = []
     prior = len(cache)
     scanned = set()
@@ -669,6 +767,11 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
         if not rec["end"]:
             rec["end"] = rec["start"]
         rec["kind"] = session_kind(rec)
+        # DSH 的 origin=subagent 是 agent 自己派生的子会话 —— 1937 场里 1929 场是这个。
+        # 不标出来，「你亲自开口」会一夜之间多出近两千场。
+        if rec.get("dsh_origin") == "subagent":
+            rec["kind"] = "auto"
+            rec["batch"] = f"DSH 子代理（{rec.get('dsh_preset') or 'agent'}）"
         rec["_k"] = key
         records.append(rec)
         stats["parsed"] += 1
