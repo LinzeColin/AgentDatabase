@@ -1,0 +1,112 @@
+{
+  "生成时刻": "2026-08-20T19:22:57Z",
+  "请求数": 9,
+  "已取回": 9,
+  "skipped_access_restricted": 0,
+  "剔除": 0,
+  "失败": 0,
+  "并发降级": [],
+  "总词数": 1292840,
+  "★ 年份口径": "archive.org date 字段为原作年，PD 判定看题名页",
+  "记录": [
+    {
+      "identifier": "principlesofscie1911tayl",
+      "status": "已取回",
+      "file": "src-c864253fe201/principlesofscie1911tayl.txt",
+      "words": 37804,
+      "bytes": 254394,
+      "sha256": "c864253fe2018497eff3b66d6fff40f2869edfcc3bc91a759e9ceadb9b1ff46b",
+      "ia_title": "The Principles of Scientific Management",
+      "ia_creator": "Taylor, Frederick Winslow, 1856-1915",
+      "note": "rebuild-from-disk"
+    },
+    {
+      "identifier": "shopmanagement00tayl",
+      "status": "已取回",
+      "file": "src-cb1c3263e778/shopmanagement00tayl.txt",
+      "words": 56363,
+      "bytes": 374606,
+      "sha256": "cb1c3263e778be8370a4e867f83cce2856754fcca8ab64d960288785383ec2db",
+      "ia_title": "Shop Management",
+      "ia_creator": "Taylor, Frederick Winslow, 1856-1915",
+      "note": "rebuild-from-disk"
+    },
+    {
+      "identifier": "atreatiseonconc00taylgoog",
+      "status": "已取回",
+      "file": "src-28ad6346694f/atreatiseonconc00taylgoog.txt",
+      "words": 225774,
+      "bytes": 1533931,
+      "sha256": "28ad6346694f18c4b73f754a962ad0277ebe5fb83a9bfbe9cffe9e45bfbe76e6",
+      "ia_title": "A Treatise on Concrete, Plain and Reinforced",
+      "ia_creator": "Taylor, Frederick Winslow, 1856-1915; Thompson, Sanford E.",
+      "note": "rebuild-from-disk"
+    },
+    {
+      "identifier": "concretecoststa00thomgoog",
+      "status": "已取回",
+      "file": "src-b91d41aca463/concretecoststa00thomgoog.txt",
+      "words": 255529,
+      "bytes": 1665471,
+      "sha256": "b91d41aca463454a2ba9b9401271fdc78c37785a935958c47910c8b439f84dc9",
+      "ia_title": "Concrete Costs",
+      "ia_creator": "Taylor, Frederick Winslow, 1856-1915; Thompson, Sanford E.",
+      "note": "rebuild-from-disk"
+    },
+    {
+      "identifier": "adjustmentwages02taylgoog",
+      "status": "已取回",
+      "file": "src-92e733171b0a/adjustmentwages02taylgoog.txt",
+      "words": 27840,
+      "bytes": 165853,
+      "sha256": "92e733171b0aa2aae0136d17d71ad8024ff96fbabc7f86e47a670e9873a1b71a",
+      "ia_title": "The Adjustment of Wages to Efficiency",
+      "ia_creator": "Towne, Halsey, Taylor",
+      "note": "rebuild-from-disk"
+    },
+    {
+      "identifier": "frederickwtaylor01copl",
+      "status": "已取回",
+      "file": "src-3e4f1d3095ea/frederickwtaylor01copl.txt",
+      "words": 168885,
+      "bytes": 1121695,
+      "sha256": "3e4f1d3095ea50aa1594555b4c56ee92b49ec077bdcab6170d5189e735eba2fd",
+      "ia_title": "Frederick W. Taylor: Father of Scientific Management v.1",
+      "ia_creator": "Copley, Frank Barkley",
+      "note": "rebuild-from-disk"
+    },
+    {
+      "identifier": "frederickwtaylor02copl",
+      "status": "已取回",
+      "file": "../raw-holdout/src-8aebeb3ab433/frederickwtaylor02copl.txt",
+      "words": 166780,
+      "bytes": 1106038,
+      "sha256": "8aebeb3ab4337f9f4b68d7beb44e2e87f4fcedc977d4a1b0aed39b4a7266b55f",
+      "ia_title": "Frederick W. Taylor: Father of Scientific Management v.2",
+      "ia_creator": "Copley, Frank Barkley",
+      "note": "rebuild-from-disk"
+    },
+    {
+      "identifier": "scientificmanage00thomuoft",
+      "status": "已取回",
+      "file": "src-fc8570b0f7ad/scientificmanage00thomuoft.txt",
+      "words": 315896,
+      "bytes": 2141532,
+      "sha256": "fc8570b0f7ad9b1d9bc52dadbd1c0e867a0d564d17a7b4cb20c10e37bbe17436",
+      "ia_title": "Scientific Management: A Collection of Articles",
+      "ia_creator": "Thompson, Clarence Bertrand (ed.)",
+      "note": "rebuild-from-disk"
+    },
+    {
+      "identifier": "cu31924085713331",
+      "status": "已取回",
+      "file": "src-696c17b22d69/cu31924085713331.txt",
+      "words": 37969,
+      "bytes": 220538,
+      "sha256": "696c17b22d6980827110694be4d0f3bedb7f0094a155f853e5c1bd07dd59891c",
+      "ia_title": "The Principles of Scientific Management (Cornell 1913)",
+      "ia_creator": "Taylor, Frederick Winslow, 1856-1915",
+      "note": "rebuild-from-disk"
+    }
+  ]
+}

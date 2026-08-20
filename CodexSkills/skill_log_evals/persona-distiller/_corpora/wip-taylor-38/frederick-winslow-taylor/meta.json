@@ -1,0 +1,84 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": null,
+  "consent_authority": null,
+  "created_at": "2026-08-20T18:47:44Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "zh-CN",
+  "model_version": "0.1.0-draft",
+  "name": "Frederick Winslow Taylor",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "生产与车间管理（时间研究、动作研究、工序组织）",
+        "计件工资与激励制度设计（piece-rate / differential rate）",
+        "金属切削与工具钢工程（高速钢、切削速度与进给）",
+        "混凝土工程实务（配比、成本与施工管理）",
+        "工厂制度诊断与改造（科学管理四原则）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q217730",
+          "type": "wikidata"
+        },
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Taylor%2C+Frederick+Winslow%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=100&output=json",
+          "type": "archive.org"
+        }
+      ],
+      "canonical_name": "Frederick Winslow Taylor",
+      "distinguishing_basis": "Wikidata Q217730（American mechanical engineer, 1856-1915，科学管理之父）；archive.org creator:'Taylor, Frederick Winslow, 1856-1915' 指向同一人；其核心著作为 The Principles of Scientific Management / Shop Management / 混凝土与刀具专著。同名排除：现代法庭规则编者 Frederick Winslow Taylor（Georgia court rules 2004，非工程师）、行星科学家 F. W. Taylor（NASA）、语言学家 Frank William Taylor（富拉语语法）。",
+      "evidence_level": "high",
+      "identity_category": "材料建工师",
+      "key_capabilities": [
+        "时间研究/动作研究（scientific management 的实证方法）",
+        "金属切削实验（高速钢、车床速度/进给/吃刀量）",
+        "混凝土结构工程与造价（Taylor & Thompson 体系）",
+        "车间组织与职能管理（Shop Management 1903）",
+        "激励工资制设计（A Piece-Rate System 1895）"
+      ],
+      "label": "A",
+      "occupation_or_role": "American mechanical engineer, management consultant, and the father of scientific management",
+      "professional_background": "1856-03-20 生于美国宾夕法尼亚 Germantown，1915-03-21 卒于费城。Midvale Steel 从学徒做到总工程师，发明高速钢（with Maunsel White, 1898-1900），1906 年任 ASME 会长。创立科学管理（time study、piece-rate、职能工长制），著有《Shop Management》(1903)、《The Principles of Scientific Management》(1911) 及国会特别委员会证词 (1912)；与 Sanford E. Thompson 合著混凝土工程专著。",
+      "subject_uid": null
+    },
+    "chosen_subject_uid": null,
+    "normalized_name": "frederickwinslowtaylor",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "frederickwinslowtaylor",
+  "origin_review_required": true,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "frederick-winslow-taylor",
+  "status": "draft",
+  "subject_origin": "public",
+  "target_id": "tgt-2d9e1142a415",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-20T18:47:44Z",
+  "middle_initial": "w"
+}

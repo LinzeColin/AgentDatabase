@@ -228,6 +228,16 @@ EXCLUDE = {
     "smeaton": ["Henry Smeaton", "Smeaton, Robert", "Smeaton, Samuel",
                 "Smeaton, William Henry", "Smeaton, W. H.", "Smeaton v.",
                 "United States v. Smeaton", "Smeaton Grange"],
+    # ★ Taylor #38：同名者分三类——
+    #   ① 行星科学家 F. W. Taylor（NASA 论文、Cambridge photographic atlas、Scientific
+    #      exploration of Mars），creator 只有 `Taylor, F. W.`（无 Frederick/Winslow）→ REQUIRE 挡；
+    #   ② 语言学家 Frank William Taylor, 1887-（富拉语语法）→ 按名排；
+    #   ③ **同名同形** Frederick Winslow Taylor（乔治亚州法庭规则编者，2004）——creator 串完全相同，
+    #     靠 EXCLUDE 排不掉，只能按题名排（见 EXCLUDE_TITLE）。
+    "taylor": ["Frank William", "1887-", "Newburn", "Elachi", "Fanale",
+               "Giffin", "Parker, R. H", "Thorpe", "Briggs", "Irwin",
+               "Parrish", "Fouchet", "Calcutt", "Simon-Miller", "Nixon",
+               "nursery", "Taylor Bros", "T. H"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -297,6 +307,9 @@ EXCLUDE_TITLE = {
     #     也按题名排。
     "watt": ["infant-baptism", "infant baptism", "plain proof", "controverted subjects",
              "disputatio medica", "silk was gold", "mechanics register"],
+    # ★ Taylor #38：同名同形 Frederick Winslow Taylor（法庭规则编者）的 2004 年书
+    #   （Georgia court rules…），creator 串与工程师完全相同，只能按题名排。
+    "taylor": ["georgia court", "court rules"],
 }
 # 目标必须出现在 creator 里的**姓名词元**（同一个 creator 段里全部出现即命中）。
 # ★★ 曾写成 `["Fröbel, Friedrich"]` 这种「姓, 名」定串，于是
@@ -357,6 +370,11 @@ REQUIRE = {
     #   REQUIRE 钉住 smeaton+john；小说主角 Henry Smeaton、房产经纪 Robert Smeaton、
     #   牧师 Samuel Smeaton 均不含 john（Henry 不含 John，Robert 不含 John）。
     "smeaton": [["smeaton", "john"], ["smeaton, j"]],
+    # ★ Taylor #38：目标署名形态为 `Taylor, Frederick Winslow, 1856-1915`／`Taylor, Frederick
+    #   Winslow`／`Taylor Frederick Winslow`（DLI 无逗号）。REQUIRE 钉住 taylor+frederick+winslow。
+    #   行星科学家 F. W. Taylor 与 Frank William Taylor 不含 winslow → 天然挡掉；
+    #   同名同形（法庭规则编者）含 winslow → 由 EXCLUDE_TITLE 按题名排。
+    "taylor": [["taylor", "frederick", "winslow"]],
 }
 
 
