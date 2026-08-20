@@ -28,6 +28,7 @@ from extract import TOPICS, SKIPPED  # noqa: E402  词表是唯一真源，不�
 from metrics import token_block, economics_block, coupling_block, delivery_block  # noqa: E402
 import taxonomy  # noqa: E402
 import aei as aei_mod  # noqa: E402
+import compound as compound_mod  # noqa: E402
 
 SLICES = [3, 7, 15, 30, 45, 60, 90, 180]
 
@@ -262,6 +263,14 @@ def build(sessions: list, out: Path, gh: dict | None = None) -> dict:
         "tp": s["topics"], "h": s["span_min"], "n": (s.get("title") or "")[:90],
     } for s in sessions]
 
+    _lessons = lessons_block(sessions, proj_rows)
+    _tokens = token_block(sessions)
+    # 成果复利投影。语义事件来自 ChatGPT 定时任务与 agent 归档；
+    # 这一层只做形状校验、合并、去重与状态投影 —— 运行期不调用任何模型。
+    _events_dirs = [
+        Path(os.environ.get("ATLAS_WORK", str(Path.home() / ".memory-atlas"))) / "compounding" / "events",
+    ]
+
     atlas = {
         "version": _version(),
         "meta": meta_block(sessions, day_rows, fanout_n),
@@ -274,15 +283,16 @@ def build(sessions: list, out: Path, gh: dict | None = None) -> dict:
         "slices": slices_block(sessions, day_rows),
         "trend": trend_block(week_rows),
         "insights": insights_block(sessions, day_rows, week_rows, proj_rows),
-        "lessons": lessons_block(sessions, proj_rows),
+        "lessons": _lessons,
         "opportunities": opportunity_block(sessions, proj_rows),
-        "tokens": token_block(sessions),
+        "tokens": _tokens,
         "stack": taxonomy.summarize(sessions),
         "github": {k: v for k, v in (gh or {}).items() if k not in ("prs", "days")} or {"state": "不确定"},
         "delivery": _dl,
         "aei": aei_mod.build(sessions, _dl),
         "economics": economics_block(sessions, _ladder_counts(sessions)),
         "coupling": coupling_block(sessions),
+        "compounding": compound_mod.build(_events_dirs, _lessons, proj_rows, _dl, _tokens),
         "keyword_weights": {k: round(v, 3) for k, v in sorted(weights.items(), key=lambda kv: -kv[1])[:60]},
     }
 

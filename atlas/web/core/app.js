@@ -27,7 +27,7 @@ export const NAV = [
       ['universe', '耦合星图'], ['grid', '网格'],
   ]},
   { id: 'arch',  label: '档案', icon: '❐', views: [
-      ['lessons', '沉淀'], ['method', '口径'],
+      ['lessons', '沉淀'], ['convert', '转化'], ['method', '口径'],
   ]},
 ];
 

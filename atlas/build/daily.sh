@@ -32,6 +32,9 @@ trap 'rmdir "$LOCK" 2>/dev/null || true' EXIT
   python3 "$ROOT/build/extract.py" --out "$WORK/out" --repo "$REPO"
   # GitHub 活动：证明「做出来了」的那一半。拉不到不阻断本轮 —— 页面会把它标成「不确定」。
   python3 "$ROOT/build/github.py" --out "$WORK/out/github.json" || echo "GitHub 拉取失败，本轮该块标不确定"
+  # 成果复利事件：先把私有仓里的语义事件拉进本机收件箱，再构建。
+  # 拉不到不阻断本轮 —— 页面会如实显示「尚无事件」，不是假 0。
+  bash "$ROOT/build/sync_compound.sh" pull || echo "复利事件拉取失败，本轮按无事件构建"
   python3 "$ROOT/build/build.py"   --sessions "$WORK/out" --out "$WORK/web" \
     --github "$WORK/out/github.json"
   # 给 agent 看的开发经验沉淀。落私有目录，**绝不进公开仓**（里面有 Owner 原话）。
@@ -42,6 +45,15 @@ trap 'rmdir "$LOCK" 2>/dev/null || true' EXIT
   # 权威副本推私有仓，让任何有仓权限的 agent 都能直接取。
   # 失败不阻断本轮 —— 站点和本机那两份还在。
   bash "$ROOT/build/push_brief.sh" "$WORK/brief" || echo "AGENT_BRIEF 推送失败，本轮只留站点与本机副本"
+  # 复利投影回推私有仓，供 ChatGPT 定时任务与其他 agent 读取当前漏斗状态。
+  python3 -c "
+import json,sys,pathlib
+a=json.loads(pathlib.Path('$WORK/web/atlas/atlas.json').read_text())
+pathlib.Path('$WORK/compounding').mkdir(parents=True,exist_ok=True)
+pathlib.Path('$WORK/compounding/latest.json').write_text(
+    json.dumps(a.get('compounding') or {}, ensure_ascii=False, indent=2))
+" && bash "$ROOT/build/sync_compound.sh" push "$WORK/compounding/latest.json" \
+    || echo "复利投影推送失败，本轮只留本机副本"
 
   # 页面本体来自仓里的 web/，数据来自 $WORK/web/atlas/ —— 发布时合到一起
   rsync -a --delete --exclude atlas/ "$ROOT/web/" "$WORK/web/"

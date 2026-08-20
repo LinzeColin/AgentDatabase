@@ -11,7 +11,9 @@ set -euo pipefail
 
 SRC="${1:?用法: push_brief.sh <brief 目录>}"
 REPO="${BRIEF_REPO:-LinzeColin/Private-Database}"
-BRANCH="${BRIEF_BRANCH:-main}"
+# Owner 指定的沉淀地址是 dev-notes **分支**（tree/dev-notes/...），不是 main 上的同名目录。
+# 两处都写等于两条事实链 —— 统一到这一条，main 上那份留一行指路。
+BRANCH="${BRIEF_BRANCH:-dev-notes}"
 DEST="${BRIEF_PATH:-Private-AgentDatabase/dev-notes}"
 
 [ -f "$SRC/AGENT_BRIEF.md" ] || { echo "没有 AGENT_BRIEF.md"; exit 1; }
