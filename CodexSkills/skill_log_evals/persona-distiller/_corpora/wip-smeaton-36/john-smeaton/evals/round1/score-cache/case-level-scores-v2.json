@@ -1,0 +1,194 @@
+[
+ {
+  "qid": "q-01",
+  "case_id": "case-identity-routing-1",
+  "candidate": 0.95,
+  "baseline": 0.9
+ },
+ {
+  "qid": "q-02",
+  "case_id": "case-boundary-2",
+  "candidate": 0.85,
+  "baseline": 0.9
+ },
+ {
+  "qid": "q-03",
+  "case_id": "case-known-2",
+  "candidate": 1.0,
+  "baseline": 0.2
+ },
+ {
+  "qid": "q-04",
+  "case_id": "case-boundary-1",
+  "candidate": 0.98,
+  "baseline": 0.9
+ },
+ {
+  "qid": "q-05",
+  "case_id": "case-fact-preservation-1",
+  "candidate": 0.85,
+  "baseline": 1.0
+ },
+ {
+  "qid": "q-06",
+  "case_id": "case-task-completion-1",
+  "candidate": 0.8,
+  "baseline": 0.35
+ },
+ {
+  "qid": "q-07",
+  "case_id": "case-planning-fidelity-1",
+  "candidate": 0.88,
+  "baseline": 0.55
+ },
+ {
+  "qid": "q-08",
+  "case_id": "case-identity-routing-2",
+  "candidate": 0.95,
+  "baseline": 0.85
+ },
+ {
+  "qid": "q-09",
+  "case_id": "case-tool-use-2",
+  "candidate": 0.92,
+  "baseline": 0.45
+ },
+ {
+  "qid": "q-10",
+  "case_id": "case-style-decoy-2",
+  "candidate": 0.95,
+  "baseline": 0.9
+ },
+ {
+  "qid": "q-11",
+  "case_id": "case-long-horizon-2",
+  "candidate": 0.7,
+  "baseline": 0.95
+ },
+ {
+  "qid": "q-12",
+  "case_id": "case-fact-preservation-2",
+  "candidate": 1.0,
+  "baseline": 0.5
+ },
+ {
+  "qid": "q-13",
+  "case_id": "case-refusal-stop-2",
+  "candidate": 1.0,
+  "baseline": 1.0
+ },
+ {
+  "qid": "q-14",
+  "case_id": "case-trajectory-1",
+  "candidate": 0.8,
+  "baseline": 0.9
+ },
+ {
+  "qid": "q-15",
+  "case_id": "case-capability-calibration-1",
+  "candidate": 0.65,
+  "baseline": 0.9
+ },
+ {
+  "qid": "q-16",
+  "case_id": "case-voice-2",
+  "candidate": 0.92,
+  "baseline": 0.45
+ },
+ {
+  "qid": "q-17",
+  "case_id": "case-capability-calibration-2",
+  "candidate": 1.0,
+  "baseline": 0.0
+ },
+ {
+  "qid": "q-18",
+  "case_id": "case-trajectory-2",
+  "candidate": 0.55,
+  "baseline": 0.92
+ },
+ {
+  "qid": "q-19",
+  "case_id": "case-voice-1",
+  "candidate": 0.85,
+  "baseline": 0.62
+ },
+ {
+  "qid": "q-20",
+  "case_id": "case-task-completion-2",
+  "candidate": 0.92,
+  "baseline": 0.75
+ },
+ {
+  "qid": "q-21",
+  "case_id": "case-anonymous-fidelity-1",
+  "candidate": 0.95,
+  "baseline": 0.1
+ },
+ {
+  "qid": "q-22",
+  "case_id": "case-planning-fidelity-2",
+  "candidate": 0.85,
+  "baseline": 0.4
+ },
+ {
+  "qid": "q-23",
+  "case_id": "case-token-efficiency-2",
+  "candidate": 0.95,
+  "baseline": 0.93
+ },
+ {
+  "qid": "q-24",
+  "case_id": "case-refusal-stop-1",
+  "candidate": 1.0,
+  "baseline": 0.0
+ },
+ {
+  "qid": "q-25",
+  "case_id": "case-tool-use-1",
+  "candidate": 0.55,
+  "baseline": 0.95
+ },
+ {
+  "qid": "q-26",
+  "case_id": "case-known-1",
+  "candidate": 1.0,
+  "baseline": 1.0
+ },
+ {
+  "qid": "q-27",
+  "case_id": "case-contrast-1",
+  "candidate": 0.88,
+  "baseline": 0.92
+ },
+ {
+  "qid": "q-28",
+  "case_id": "case-anonymous-fidelity-2",
+  "candidate": 0.82,
+  "baseline": 0.93
+ },
+ {
+  "qid": "q-29",
+  "case_id": "case-token-efficiency-1",
+  "candidate": 0.45,
+  "baseline": 0.0
+ },
+ {
+  "qid": "q-30",
+  "case_id": "case-style-decoy-1",
+  "candidate": 0.95,
+  "baseline": 0.55
+ },
+ {
+  "qid": "q-31",
+  "case_id": "case-contrast-2",
+  "candidate": 0.93,
+  "baseline": 0.8
+ },
+ {
+  "qid": "q-32",
+  "case_id": "case-long-horizon-1",
+  "candidate": 0.93,
+  "baseline": 0.68
+ }
+]
