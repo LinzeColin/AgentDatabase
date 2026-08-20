@@ -1,107 +1,138 @@
 import { esc, fmt, pct, go, enter, topicColor, S } from '../../../core/app.js';
 import * as D from '../../../core/select.js';
-import { fitCanvas } from '../../../core/g3d.js';
+import { fitCanvas, cssVar } from '../../../core/g3d.js';
 import { sec, kv, table, meter, spark, warn, state } from '../kit.js';
 
-// 对标 Anthropic Economic Index：五种协作模式，不是两分法。
-// AEI 真正的看点不是总自动化率，是「哪类活已经能交出去、哪类还得你盯着」。
+// 对齐 Anthropic Economic Index：五个经济原语 + 协作五模式 + 产物分类
+// + 覆盖率与有效覆盖率 + 按领域 token + Cadence + 转换轨迹 + ROI。
 export async function render(host) {
-  const E = D.A().aei;
-  const G = { '自动化': 'var(--ok)', '增强': 'var(--acc)' };
+  const E = D.A().aei, P = E.primitives, N = E.sessions_total;
   const modeOrder = ['指派', '反馈环', '迭代', '学习', '校验', '未归类'];
-  const n = E.sessions_total;
+  const css = k => cssVar(k);
+
+  const bandRow = (obj, key) => {
+    const c = obj.counts, order = obj.bands || Object.keys(c);
+    const mx = Math.max(1, ...Object.values(c));
+    return table([{ t: key }, { t: '会话', r: true }, { t: '占比', r: true }, { t: '' }],
+      order.filter(b => c[b]).map(b => [esc(b), String(c[b]), pct(c[b] / N), meter(c[b], mx, 120)]));
+  };
 
   host.innerHTML = `
 ${sec('ECONOMIC INDEX', esc(E.framework))}
 ${kv([
-  ['自动化', pct(E.headline.automation), 'acc'],
-  ['增强', pct(E.headline.augmentation), ''],
-  ['已归类', `${E.sessions_classified} / ${n}`, ''],
+  ['自动化份额', pct(E.headline.automation), 'acc'],
+  ['增强份额', pct(E.headline.augmentation), ''],
+  ['平均 AI 自主度', `${P.autonomy.avg} / 5`, 'acc'],
+  ['中位加速', P.complexity.speedup_median ? P.complexity.speedup_median + '×' : '不确定', ''],
+  ['领域集中度 HHI', E.concentration.domain_hhi ?? '不确定', ''],
   ['未归类', String(E.headline.unclassified_n), E.headline.unclassified_n ? 'warn' : ''],
-  ['任务集中度 HHI', E.concentration.task_hhi == null ? '不确定' : E.concentration.task_hhi.toFixed(3), ''],
-  ['项目集中度 HHI', E.concentration.project_hhi == null ? '不确定' : E.concentration.project_hhi.toFixed(3), ''],
 ])}
 
-${sec('COLLABORATION MODES', '五种模式的定义与占比。判据写在右边，不用猜。')}
-${table([{ t: '模式' }, { t: '归属' }, { t: '会话', r: true }, { t: '占比', r: true }, { t: '' }, { t: '判据' }],
+${sec('PRIMITIVE 1 · 任务复杂度', esc(P.complexity.note))}
+${bandRow(P.complexity, '没有 AI 大概要多久')}
+<p class="hint">中位加速 ${P.complexity.speedup_median ?? '不确定'}× （能算的 ${P.complexity.speedup_n} 场）。
+  会话挂着不动的时间也算在墙上时钟里，所以这个倍数偏保守。</p>
+
+${sec('PRIMITIVE 2 · 技能层级', esc(P.skill.note))}
+${bandRow(P.skill, '术语密度')}
+
+${sec('PRIMITIVE 3 · 用途', esc(P.use_case.note))}
+${bandRow({ counts: P.use_case.counts, bands: ['工作', '学习', '个人'] }, '用途')}
+
+${sec('PRIMITIVE 4 · AI 自主度', esc(P.autonomy.note))}
+${table([{ t: '档位' }, { t: '会话', r: true }, { t: '占比', r: true }, { t: '' }],
+  Object.entries(P.autonomy.counts).map(([k, v]) =>
+    [esc(P.autonomy.labels[k] || k), String(v), pct(v / N),
+     meter(v, Math.max(1, ...Object.values(P.autonomy.counts)), 120)]))}
+
+${sec('PRIMITIVE 5 · 任务成功', esc(P.success.note))}
+${bandRow(P.success, '判定')}
+
+${sec('COLLABORATION MODES', '五种模式（AEI 原定义）。自动化 = 指派 + 反馈环。')}
+${table([{ t: '模式' }, { t: 'EN' }, { t: '归属' }, { t: '会话', r: true }, { t: '占比', r: true }, { t: '判据' }],
   modeOrder.filter(m => E.modes[m]).map(m => [
-    `<b>${esc(m)}</b>`,
-    `<span class="tag">${esc(E.mode_defs[m].group)}</span>`,
-    String(E.modes[m]), pct(E.modes[m] / n),
-    `<span class="meter" style="width:${(E.modes[m] / n * 130).toFixed(0)}px;background:${G[E.mode_defs[m].group] || 'var(--dim2)'}"></span>`,
+    `<b>${esc(m)}</b>`, `<span class="tag">${esc(E.mode_defs[m].en)}</span>`,
+    esc(E.mode_defs[m].group), String(E.modes[m]), pct(E.modes[m] / N),
     `<span class="tag">${esc(E.mode_defs[m].desc)}</span>`]))}
 
-${sec('AUTOMATION RATE BY TASK', '这一栏是 AEI 最有信息量的一刀：不是你整体自动化了多少，是<b>哪类活已经能交出去</b>。')}
-${(() => {
-  const rows = E.by_task.filter(r => r.automation != null);
-  return table([{ t: '任务' }, { t: '会话', r: true }, { t: '自动化率', r: true }, { t: '' },
-    { t: '模式构成' }, { t: '主要能力' }],
-    rows.map(r => [
-      `<span class="lnk" data-topic="${esc(r.task)}" style="color:${topicColor(r.task)}">${esc(r.task)}</span>`,
-      String(r.n), `<b>${pct(r.automation)}</b>`,
-      `<span class="meter" style="width:${(r.automation * 120).toFixed(0)}px"></span>`,
-      Object.entries(r.modes).sort((a, b) => b[1] - a[1]).slice(0, 3)
-        .map(([k, v]) => `<span class="tag">${esc(k)} ${v}</span>`).join(''),
-      Object.keys(r.skills).slice(0, 3).map(s => `<span class="tag">${esc(s)}</span>`).join('')]));
-})()}
-${(() => {
-  const rows = E.by_task.filter(r => r.automation != null).sort((a, b) => a.automation - b.automation);
-  const low = rows.slice(0, 3), high = rows.slice(-3).reverse();
-  return warn(`<b>最能交出去的：</b>${high.map(r => `${esc(r.task)} ${pct(r.automation)}`).join('、')}。
-    <b>最离不开你的：</b>${low.map(r => `${esc(r.task)} ${pct(r.automation)}`).join('、')}。<br>
-    这两行放一起看：离不开你的那几类，要么是别人没法替你做的价值所在，要么是还没被固化下来的负债 ——
-    哪一种，只有你自己知道。这一页不替你判断。`);
-})()}
+${sec('DOMAINS · 覆盖率与有效覆盖率', '有效覆盖率 = 覆盖率 × 成功率。AEI 用它区分「碰过」与「真的做成了」。')}
+${table([{ t: '领域' }, { t: '会话', r: true }, { t: '覆盖率', r: true }, { t: '有效覆盖', r: true },
+         { t: '成功率', r: true }, { t: '自动化', r: true }, { t: '自主度', r: true },
+         { t: '新token/场', r: true }, { t: '缓存占比', r: true }, { t: '' }],
+  E.domains.map(r => [
+    `<span class="lnk" data-dom="${esc(r.domain)}">${esc(r.domain)}</span>`, String(r.n),
+    pct(r.coverage), r.effective_coverage == null ? '<span class="st" data-s="不确定">—</span>' : pct(r.effective_coverage),
+    r.success_rate == null ? '<span class="st" data-s="不确定">—</span>' : pct(r.success_rate),
+    r.automation == null ? '—' : pct(r.automation),
+    r.autonomy_avg == null ? '—' : r.autonomy_avg,
+    fmt(r.tokens_per_session), pct(r.cache_ratio),
+    meter(r.n, Math.max(1, ...E.domains.map(x => x.n)), 90)]))}
+${E.domains_unclassified ? warn(`另有 <b>${E.domains_unclassified}</b> 场一个领域词都没命中，如实标未归类，不硬塞。`) : ''}
 
-${sec('SKILLS', esc(E.skills_note))}
-${table([{ t: '能力' }, { t: '调用次数', r: true }, { t: '占比', r: true }, { t: '' }],
-  E.skills.map(s => [`<b>${esc(s.skill)}</b>`, fmt(s.n), pct(s.share),
-    meter(s.n, Math.max(1, ...E.skills.map(x => x.n)), 140)]))}
+${sec('ARTIFACTS · 产物分类', esc(E.artifacts_note))}
+${table([{ t: '产出类型' }, { t: '次数', r: true }, { t: '占比', r: true }, { t: '' }],
+  E.artifacts.map(a => [`<b>${esc(a.artifact)}</b>`, fmt(a.n), pct(a.share),
+    meter(a.n, Math.max(1, ...E.artifacts.map(x => x.n)), 140)]))}
 
-${sec('MODE MIX OVER TIME', '每周五种模式的构成。看的是结构迁移。')}
-<canvas class="viz" id="mix" height="220"></canvas>
-<p class="hint">${modeOrder.filter(m => E.modes[m]).map(m =>
-  `<span class="tag">■ ${esc(m)}</span>`).join('')}　自动化系＝绿，增强系＝蓝</p>
+${sec('CONTEXT · 上下文分布', esc(E.context.note))}
+${table([{ t: '项目 / 工作区' }, { t: '会话', r: true }, { t: '新token', r: true }, { t: '新token/场', r: true }, { t: '' }],
+  E.context.rows.map(r => [esc(r.context), String(r.n), fmt(r.tokens), fmt(r.tokens_per_session),
+    meter(r.n, Math.max(1, ...E.context.rows.map(x => x.n)), 100)]))}
+<p class="hint">集中度 HHI ${E.context.hhi ?? '不确定'}。</p>
 
-${sec('DEPTH vs BREADTH', '广＝这个项目碰过多少类活；深＝每类活平均开了多少场。广而浅 = 到处试；窄而深 = 死磕一件事。')}
-${table([{ t: '项目' }, { t: '会话', r: true }, { t: '广', r: true }, { t: '深', r: true }, { t: '碰过的类别' }],
-  E.depth_breadth.map(r => [esc(r.project), String(r.sessions), String(r.breadth), r.depth.toFixed(1),
-    r.topics.slice(0, 6).map(t => `<span class="tag">${esc(t)}</span>`).join('')]))}`;
+${sec('CADENCE · 小时 × 星期', esc(E.cadence.note))}
+<canvas class="viz" id="cad" height="200"></canvas>
 
-  const MODE_COL = { '指派': '#3ddc9a', '反馈环': '#1e9e73', '迭代': '#4da3ff', '学习': '#a78bfa', '校验': '#63d2ff', '未归类': '#4a5563' };
-  const cv = host.querySelector('#mix');
-  const draw = () => {
-    const { ctx, w } = fitCanvas(cv, 220);
-    const h = 220, padB = 22, padT = 6;
+${sec('TRANSITION · 转换轨迹', esc(E.transition.note))}
+${table([{ t: '领域' }, { t: '前半段', r: true }, { t: '后半段', r: true }, { t: '漂移', r: true }, { t: '' }],
+  E.transition.drift.map(x => [esc(x.domain), pct(x.early), pct(x.late),
+    `<span style="color:${x.delta >= 0 ? 'var(--ok)' : 'var(--bad)'}">${x.delta >= 0 ? '↑' : '↓'}${(Math.abs(x.delta) * 100).toFixed(1)}</span>`,
+    `<span class="meter" style="width:${Math.min(120, Math.abs(x.delta) * 400).toFixed(0)}px;background:${x.delta >= 0 ? 'var(--ok)' : 'var(--bad)'}"></span>`]))}
+
+${sec('ROI')}
+${E.roi.state === '通' ? kv([
+  ['新 token 合计', fmt(E.roi.tokens_total), 'acc'],
+  ['缓存读取', fmt(E.roi.cache_total), ''],
+  ['每条提交平摊', fmt(E.roi.tokens_per_commit) + ' 新token', 'warn'],
+  ['每条提交要几场会话', String(E.roi.sessions_per_commit), ''],
+  ['只聊没交付', E.roi.days_talk_only + ' 天', 'warn'],
+  ['重合率', pct(E.roi.overlap_rate), ''],
+]) + warn(esc(E.roi.cost_basis) + '<br>' + esc(E.roi.note)) : warn(`<b>状态：不确定。</b>${esc(E.roi.why || '')}`)}
+
+${sec('OPPORTUNITY · 机会挖掘', '按「高委派 = 已定型可产品化」「低成功 + 高投入 = 在流血」「低自主度 = 护城河或负债」三条规则找出来的。')}
+${table([{ t: '类型' }, { t: '领域' }, { t: '会话', r: true }, { t: '为什么' }],
+  E.opportunity.map(o => [`<b>${esc(o.kind)}</b>`, esc(o.domain), String(o.n),
+    `<span class="tag">${esc(o.why)}</span>`]))}
+
+${sec('NOT MEASURED · 做不到的', 'AEI 有而这里没有的，逐条列出来 —— 不含糊过去。')}
+${table([{ t: '项' }, { t: '为什么没有' }],
+  E.not_measured.map(x => [`<b>${esc(x.item)}</b>`, `<span class="tag">${esc(x.why)}</span>`]))}`;
+
+  const drawCad = () => {
+    const cv = host.querySelector('#cad'); if (!cv) return;
+    const { ctx, w } = fitCanvas(cv, 200);
+    const h = 200, padL = 44, padT = 18, padB = 18;
     ctx.clearRect(0, 0, w, h);
-    const W = E.by_week.filter(x => x.n > 0);
-    if (!W.length) return;
-    const bw = w / W.length;
-    W.forEach((wk, i) => {
-      const tot = Object.values(wk.modes).reduce((a, b) => a + b, 0) || 1;
-      let acc = 0;
-      for (const m of modeOrder) {
-        const v = wk.modes[m] || 0;
-        if (!v) continue;
-        const hh = (v / tot) * (h - padB - padT);
-        ctx.fillStyle = MODE_COL[m];
-        ctx.globalAlpha = S.mode === 'dark' ? .9 : .78;
-        ctx.fillRect(i * bw, h - padB - acc - hh, Math.max(1, bw - 1), hh);
-        acc += hh;
-      }
-    });
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--dim2');
+    const cw = (w - padL - 10) / 24, ch = (h - padT - padB) / 7;
+    const mx = Math.max(1, ...E.cadence.grid.map(g => g.n));
     ctx.font = '10px ui-monospace, monospace';
-    const step = Math.ceil(W.length / 11);
-    W.forEach((wk, i) => { if (i % step === 0) ctx.fillText(wk.w.slice(2), i * bw, h - 7); });
+    ctx.fillStyle = css('--dim2');
+    E.cadence.weekday_labels.forEach((l, i) => ctx.fillText(l, 6, padT + i * ch + ch * .72));
+    for (let hh = 0; hh < 24; hh += 3) ctx.fillText(String(hh).padStart(2, '0'), padL + hh * cw, padT - 6);
+    for (const g of E.cadence.grid) {
+      const a = g.n / mx;
+      ctx.fillStyle = css('--acc');
+      ctx.globalAlpha = 0.12 + a * 0.88;
+      ctx.fillRect(padL + g.h * cw + .5, padT + g.wd * ch + .5, cw - 1.5, ch - 1.5);
+    }
+    ctx.globalAlpha = 1;
   };
-  draw();
-  const onR = () => draw();
+  drawCad();
+  const onR = () => drawCad();
   addEventListener('resize', onR); addEventListener('atlas:theme', onR);
   host.addEventListener('click', e => {
-    const t = e.target.closest('[data-topic]');
-    if (t) go('grid', 't=' + encodeURIComponent(t.dataset.topic));
+    const d = e.target.closest('[data-dom]');
+    if (d) go('grid', '');
   });
   enter('.sec, .kv > div, tbody tr', host);
   return { dispose() { removeEventListener('resize', onR); removeEventListener('atlas:theme', onR); } };
