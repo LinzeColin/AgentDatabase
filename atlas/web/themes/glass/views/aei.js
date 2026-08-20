@@ -17,8 +17,8 @@ ${bento([
   { k: '自动化份额', v: pct(E.headline.automation), n: '指派 + 反馈环', w: 3, tone: 'acc' },
   { k: '增强份额', v: pct(E.headline.augmentation), n: '迭代 + 学习 + 校验', w: 3, alt: true },
   { k: '平均 AI 自主度', v: `${P.autonomy.avg}/5`, n: '1 全程在场 · 5 完全委派' },
-  { k: '中位加速', v: P.complexity.speedup_median ? P.complexity.speedup_median + '×' : '不确定', n: `能算的 ${P.complexity.speedup_n} 场` },
-  { k: '领域集中度', v: E.concentration.domain_hhi ?? '不确定', n: 'HHI 0 摊开 · 1 全压一件事' },
+  { k: '中位加速', v: P.complexity.speedup_median ? P.complexity.speedup_median + '×' : '说不准', n: `能算的 ${P.complexity.speedup_n} 场` },
+  { k: '领域集中度', v: E.concentration.domain_hhi ?? '说不准', n: 'HHI 0 摊开 · 1 全压一件事' },
 ])}
 <canvas class="viz" id="donut" height="250"></canvas>
 ${drawer('五种模式的判据（AEI 原定义）', table([{ t: '模式' }, { t: 'EN' }, { t: '归属' }, { t: '判据' }],
@@ -34,17 +34,17 @@ ${orbit(Object.entries(P.autonomy.counts).map(([k, v]) =>
   ({ k: P.autonomy.labels[k] || k, v, label: `${v}　${pct(v / N)}`, c: 'var(--acc2)' })))}
 <p class="hint" style="margin-top:24px">⑤ 任务成功 —— ${esc(P.success.note)}</p>${bands(P.success)}
 
-${sec('领域：覆盖率与有效覆盖率', '有效覆盖率 = 覆盖率 × 成功率。AEI 用它区分「碰过」与「真的做成了」。')}
+${sec('领域：碰过的比例与真做成的比例率', '真做成的比例率 = 碰过的比例 × 成功率。AEI 用它区分「碰过」与「真的做成了」。')}
 ${orbit(E.domains.map(r => ({ k: r.domain, v: r.coverage,
   label: `覆盖 ${pct(r.coverage)}　有效 ${r.effective_coverage == null ? '—' : pct(r.effective_coverage)}　${r.n} 场`,
   c: 'var(--acc)' })))}
 ${drawer('展开领域明细', table(
-  [{ t: '领域' }, { t: '会话', r: true }, { t: '覆盖率', r: true }, { t: '有效覆盖', r: true },
+  [{ t: '领域' }, { t: '会话', r: true }, { t: '碰过的比例', r: true }, { t: '真做成的比例', r: true },
    { t: '成功率', r: true }, { t: '自动化', r: true }, { t: '自主度', r: true },
    { t: '新token/场', r: true }, { t: '缓存占比', r: true }],
   E.domains.map(r => [esc(r.domain), String(r.n), pct(r.coverage),
-    r.effective_coverage == null ? state('不确定') : pct(r.effective_coverage),
-    r.success_rate == null ? state('不确定') : pct(r.success_rate),
+    r.effective_coverage == null ? state('说不准') : pct(r.effective_coverage),
+    r.success_rate == null ? state('说不准') : pct(r.success_rate),
     r.automation == null ? '—' : pct(r.automation), r.autonomy_avg ?? '—',
     fmt(r.tokens_per_session), pct(r.cache_ratio)])))}
 ${E.domains_unclassified ? warn(`另有 <b>${E.domains_unclassified}</b> 场一个领域词都没命中，如实标未归类。`) : ''}
@@ -70,7 +70,7 @@ ${E.roi.state === '通' ? bento([
   { k: '新 token 合计', v: fmt(E.roi.tokens_total), n: `缓存另有 ${fmt(E.roi.cache_total)}`, w: 3, alt: true },
   { k: '每条提交要几场', v: String(E.roi.sessions_per_commit), n: '场会话' },
   { k: '只聊没交付', v: `${E.roi.days_talk_only} 天`, n: `重合率 ${pct(E.roi.overlap_rate)}` },
-]) + warn(esc(E.roi.cost_basis) + '<br>' + esc(E.roi.note)) : warn(`<b>状态：不确定。</b>${esc(E.roi.why || '')}`)}
+]) + warn(esc(E.roi.cost_basis) + '<br>' + esc(E.roi.note)) : warn(`<b>状态：说不准。</b>${esc(E.roi.why || '')}`)}
 
 ${sec('机会挖掘', '三条规则：高委派＝已定型可产品化；低成功＋高投入＝在流血；低自主度＝护城河或负债。')}
 ${E.opportunity.map(o => `<div class="card w6">

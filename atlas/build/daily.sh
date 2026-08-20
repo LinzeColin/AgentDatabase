@@ -36,6 +36,9 @@ trap 'rmdir "$LOCK" 2>/dev/null || true' EXIT
     --github "$WORK/out/github.json"
   # 给 agent 看的开发经验沉淀。落私有目录，**绝不进公开仓**（里面有 Owner 原话）。
   python3 "$ROOT/build/sediment.py" --sessions "$WORK/out" --out "$WORK/brief" --web "$WORK/web"
+  # 把《收尾必须回写》契约分发到每个 agent 的指令文件。内容没变就不动文件。
+  # 靠人去五个文件里同步是同步不住的 —— 这一步就是为了不再靠人。
+  bash "$ROOT/build/install_agents_md.sh" || echo "契约分发失败，本轮 agent 指令未更新"
   # 权威副本推私有仓，让任何有仓权限的 agent 都能直接取。
   # 失败不阻断本轮 —— 站点和本机那两份还在。
   bash "$ROOT/build/push_brief.sh" "$WORK/brief" || echo "AGENT_BRIEF 推送失败，本轮只留站点与本机副本"

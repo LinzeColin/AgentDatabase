@@ -6,9 +6,9 @@
 export const S = { atlas: null, dayCache: new Map(), theme: 'glass', mode: 'dark', railOpen: true };
 
 export const THEMES = [
-  ['console', '控制台'],
   ['glass', '琉璃'],
-  ['journal', '手记'],
+  ['nebula', '星云宇宙'],
+  ['daylight', '白昼'],
 ];
 
 // 导航：一级 ≤5，每个一级下二级 ≤5，全部在左侧、可折叠。
@@ -83,9 +83,9 @@ export function go(name, arg) { location.hash = '#/' + name + (arg ? '/' + arg :
 // 三套主题的动效性格。这是「完全不一样」里最容易被省掉、也最能被身体感觉到的一半。
 export function motion() {
   return {
-    console: { d: .14, ease: 'power2.out', stagger: .010, cap: .22, y: 5, s: 1, blur: 0 },
-    glass: { d: .70, ease: 'back.out(1.3)', stagger: .055, cap: .62, y: 34, s: .93, blur: 8 },
-    journal: { d: .48, ease: 'power1.out', stagger: .07, cap: .45, y: 14, s: 1, blur: 0 },
+    glass: { d: .62, ease: 'back.out(1.3)', stagger: .05, cap: .55, y: 30, s: .94, blur: 7 },
+    nebula: { d: .80, ease: 'expo.out', stagger: .06, cap: .70, y: 44, s: .90, blur: 10 },
+    daylight: { d: .34, ease: 'power3.out', stagger: .03, cap: .32, y: 14, s: 1, blur: 0 },
   }[S.theme];
 }
 export function enter(sel, host) {
@@ -129,19 +129,47 @@ export function countUp(el, to, digits = 0) {
 const LS = 'atlas.theme.v3';
 let themeMod = null, disposeChrome = null;
 
+// 所有主题的 CSS 在启动时一次性全部插入，切换只翻 disabled 布尔位。
+// 原来是改同一个 <link> 的 href：旧样式先被移除、新样式还没到，
+// 中间那段既白屏又要等一次网络往返 —— 切换「非常缓慢」就是这么来的。
+const cssLinks = new Map();
+function ensureThemeCss() {
+  for (const [name] of THEMES) {
+    if (cssLinks.has(name)) continue;
+    const l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = `themes/${name}/shell.css`;
+    l.disabled = true;
+    document.head.appendChild(l);
+    cssLinks.set(name, l);
+  }
+}
+function activateCss(name) {
+  ensureThemeCss();
+  for (const [k, l] of cssLinks) l.disabled = (k !== name);
+  const boot = document.getElementById('themecss');
+  if (boot) boot.disabled = true;          // 首屏那张引导样式表用完即停
+}
+
+// 外壳模块也预取：第一次切过去不该再等一次 import 往返。
+const shellMods = new Map();
+async function loadShell(name) {
+  if (!shellMods.has(name)) shellMods.set(name, import(`../themes/${name}/shell.js`));
+  return shellMods.get(name);
+}
+function prefetchShells() {
+  requestIdleCallback ? requestIdleCallback(() => THEMES.forEach(([n]) => loadShell(n)))
+    : setTimeout(() => THEMES.forEach(([n]) => loadShell(n)), 1200);
+}
+
 async function applyTheme() {
   const el = document.documentElement;
   el.dataset.theme = S.theme;
   el.dataset.mode = S.mode;
   localStorage.setItem(LS, JSON.stringify({ t: S.theme, m: S.mode }));
 
-  themeMod = await import(`../themes/${S.theme}/shell.js`);
-  const link = document.getElementById('themecss');
-  await new Promise(res => {
-    if (link.getAttribute('href') === themeMod.css) return res();
-    link.onload = link.onerror = res;
-    link.setAttribute('href', themeMod.css);
-  });
+  activateCss(S.theme);
+  themeMod = await loadShell(S.theme);
 
   if (disposeChrome) { try { disposeChrome(); } catch { /* 外壳清理失败不该拖垮切换 */ } disposeChrome = null; }
   themeMod.chrome(document.getElementById('root'));
@@ -152,7 +180,7 @@ async function applyTheme() {
   if (tools) {
     tools.innerHTML = `
       <div class="seg" role="group" aria-label="主题">${
-        THEMES.map(([k, l]) => `<button data-theme-btn="${k}">${l}</button>`).join('')}</div>
+        THEMES.map(([k, l]) => `<button data-theme-btn="${k}">${esc(l)}</button>`).join('')}</div>
       <div class="seg" role="group" aria-label="明暗">
         <button data-mode-btn="dark">深</button><button data-mode-btn="light">浅</button></div>`;
     tools.addEventListener('click', e => {

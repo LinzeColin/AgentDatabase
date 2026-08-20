@@ -13,7 +13,7 @@ export async function render(host) {
 ${sec('技术栈与 Token', esc(K.note))}
 ${bento([
   { k: '输入（含缓存）', v: fmt(t.input_total), n: `其中缓存 ${fmt(t.cached)}`, w: 3, tone: 'acc' },
-  { k: '缓存命中率', v: rate(t.hit_rate), n: `有用量 ${t.measured} / 无用量 ${t.unmeasured}`, w: 3, alt: true },
+  { k: '缓存命中率', v: rate(t.hit_rate), n: `有用量数据 ${t.measured} / 无用量 ${t.unmeasured}`, w: 3, alt: true },
   { k: '输入（不含缓存）', v: fmt(t.input_excl), n: '真正重新读进去的' },
   { k: '输出', v: fmt(t.output), n: '模型写出来的' },
   { k: 'LLM 应用', v: String(llm.length), n: `另有 ${tools.length} 个只是工具` },
@@ -61,7 +61,7 @@ ${sec('切片')}
           String(r.sessions), fmt(r.input_total), fmt(r.cached), rate(r.hit_rate)])))}`;
   };
   const bySession = () => {
-    cnt.textContent = `${T.sessions.length} 场有用量 / 共 ${T.sessions_total} 场`;
+    cnt.textContent = `${T.sessions.length} 场有用量数据 / 共 ${T.sessions_total} 场`;
     return `<p class="hint">最烧的 30 场</p>${orbit(T.sessions.slice(0, 30).map(r => ({
       k: r.day, v: r.input_total, label: `${fmt(r.input_total)}　${rate(r.hit)}`,
       c: 'var(--acc)', attr: `data-day="${r.day}"` })))}
@@ -99,7 +99,7 @@ ${sec('切片')}
       ctx.textAlign = 'center';
       ctx.fillStyle = r.hit_rate == null ? css('--warn') : css('--fg');
       ctx.font = '700 15px -apple-system, system-ui, sans-serif';
-      ctx.fillText(r.hit_rate == null ? '不确定' : (r.hit_rate * 100).toFixed(1) + '%', cx, cy + 5);
+      ctx.fillText(r.hit_rate == null ? '说不准' : (r.hit_rate * 100).toFixed(1) + '%', cx, cy + 5);
       ctx.fillStyle = css('--dim'); ctx.font = '12px -apple-system, system-ui, sans-serif';
       ctx.fillText(r.label.slice(0, 13), cx, cy + R + 26);
       ctx.fillStyle = css('--dim2'); ctx.font = '11px -apple-system, system-ui, sans-serif';
