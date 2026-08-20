@@ -1,0 +1,931 @@
+{
+ "slice": "T3",
+ "range": "451-604",
+ "note": "待办清单切片；status: REG已入库/DEF延后/TODO待蒸",
+ "people": [
+  {
+   "no": 451,
+   "name": "John McAdam",
+   "family": "建造采购师",
+   "status": "TODO"
+  },
+  {
+   "no": 452,
+   "name": "Thomas Brassey",
+   "family": "建造采购师",
+   "status": "TODO"
+  },
+  {
+   "no": 453,
+   "name": "Luca Pacioli",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 454,
+   "name": "William Paton",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 455,
+   "name": "A. C. Littleton",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 456,
+   "name": "Robert Kaplan",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 457,
+   "name": "Harry Markowitz",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 458,
+   "name": "William Sharpe",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 459,
+   "name": "Eugene Fama",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 460,
+   "name": "Robert Merton",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 461,
+   "name": "Myron Scholes",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 462,
+   "name": "Fischer Black",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 463,
+   "name": "Franco Modigliani",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 464,
+   "name": "Merton Miller",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 465,
+   "name": "Herbert Heinrich",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 466,
+   "name": "James Reason",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 467,
+   "name": "Charles Perrow",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 468,
+   "name": "Nancy Leveson",
+   "family": "财务合规师",
+   "status": "REG"
+  },
+  {
+   "no": 469,
+   "name": "Sidney Dekker",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 470,
+   "name": "W. Edwards Deming",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 471,
+   "name": "Joseph Juran",
+   "family": "财务合规师",
+   "status": "REG"
+  },
+  {
+   "no": 472,
+   "name": "Walter Shewhart",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 473,
+   "name": "Kaoru Ishikawa",
+   "family": "财务合规师",
+   "status": "DEF"
+  },
+  {
+   "no": 474,
+   "name": "Genichi Taguchi",
+   "family": "财务合规师",
+   "status": "REG"
+  },
+  {
+   "no": 475,
+   "name": "Adam Smith",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 476,
+   "name": "Alfred Marshall",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 477,
+   "name": "Milton Friedman",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 478,
+   "name": "Friedrich Hayek",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 479,
+   "name": "Paul Samuelson",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 480,
+   "name": "James Tobin",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 481,
+   "name": "Joseph Schumpeter",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 482,
+   "name": "John Kenneth Galbraith",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 483,
+   "name": "Hyman Minsky",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 484,
+   "name": "Charles Kindleberger",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 485,
+   "name": "Daniel Kahneman",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 486,
+   "name": "Frank Knight",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 487,
+   "name": "John Hicks",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 488,
+   "name": "Knut Wicksell",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 489,
+   "name": "Trevor Kletz",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 490,
+   "name": "Frank Bird",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 491,
+   "name": "Jens Rasmussen",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 492,
+   "name": "Benedetto Cotrugli",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 493,
+   "name": "Giuseppe Cerboni",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 494,
+   "name": "Fabio Besta",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 495,
+   "name": "Lawrence Dicksee",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 496,
+   "name": "Henry Rand Hatfield",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 497,
+   "name": "Charles Ezra Sprague",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 498,
+   "name": "George O. May",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 499,
+   "name": "John B. Canning",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 500,
+   "name": "Wassily Leontief",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 501,
+   "name": "Ragnar Frisch",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 502,
+   "name": "Jan Tinbergen",
+   "family": "财务合规师",
+   "status": "TODO"
+  },
+  {
+   "no": 503,
+   "name": "Hippocrates",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 504,
+   "name": "Galen",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 505,
+   "name": "Andreas Vesalius",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 506,
+   "name": "William Harvey",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 507,
+   "name": "Edward Jenner",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 508,
+   "name": "Ignaz Semmelweis",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 509,
+   "name": "Louis Pasteur",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 510,
+   "name": "Robert Koch",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 511,
+   "name": "Joseph Lister",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 512,
+   "name": "Rudolf Virchow",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 513,
+   "name": "William Osler",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 514,
+   "name": "Alexander Fleming",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 515,
+   "name": "Florence Nightingale",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 516,
+   "name": "Virginia Henderson",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 517,
+   "name": "Hildegard Peplau",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 518,
+   "name": "Jean Watson",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 519,
+   "name": "Clara Barton",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 520,
+   "name": "Elizabeth Blackwell",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 521,
+   "name": "Michael DeBakey",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 522,
+   "name": "Atul Gawande",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 523,
+   "name": "Paul Farmer",
+   "family": "医疗护理师",
+   "status": "DEF"
+  },
+  {
+   "no": 524,
+   "name": "Avicenna",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 525,
+   "name": "Rhazes",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 526,
+   "name": "Paracelsus",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 527,
+   "name": "Ambroise Paré",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 528,
+   "name": "William Morton",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 529,
+   "name": "James Simpson",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 530,
+   "name": "Mary Seacole",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 531,
+   "name": "Lillian Wald",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 532,
+   "name": "Margaret Sanger",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 533,
+   "name": "Sigmund Freud",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 534,
+   "name": "Carl Jung",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 535,
+   "name": "Ivan Pavlov",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 536,
+   "name": "Paul Ehrlich",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 537,
+   "name": "Emil von Behring",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 538,
+   "name": "Howard Florey",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 539,
+   "name": "Ernst Chain",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 540,
+   "name": "Selman Waksman",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 541,
+   "name": "Jonas Salk",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 542,
+   "name": "Albert Sabin",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 543,
+   "name": "Charles Drew",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 544,
+   "name": "Helen Taussig",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 545,
+   "name": "Christiaan Barnard",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 546,
+   "name": "Dorothea Orem",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 547,
+   "name": "Madeleine Leininger",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 548,
+   "name": "Martha E. Rogers",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 549,
+   "name": "Walter Reed",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 550,
+   "name": "Ronald Ross",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 551,
+   "name": "Carlos Finlay",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 552,
+   "name": "William Gorgas",
+   "family": "医疗护理师",
+   "status": "TODO"
+  },
+  {
+   "no": 553,
+   "name": "Norman Borlaug",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 554,
+   "name": "Yuan Longping",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 555,
+   "name": "Justus von Liebig",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 556,
+   "name": "Gregor Mendel",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 557,
+   "name": "Nikolai Vavilov",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 558,
+   "name": "George Washington Carver",
+   "family": "农林牧渔师",
+   "status": "REG"
+  },
+  {
+   "no": 559,
+   "name": "Luther Burbank",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 560,
+   "name": "M. S. Swaminathan",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 561,
+   "name": "Albert Howard",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 562,
+   "name": "Masanobu Fukuoka",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 563,
+   "name": "Wes Jackson",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 564,
+   "name": "Gifford Pinchot",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 565,
+   "name": "Aldo Leopold",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 566,
+   "name": "Jay Lush",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 567,
+   "name": "Temple Grandin",
+   "family": "农林牧渔师",
+   "status": "DEF"
+  },
+  {
+   "no": 568,
+   "name": "Joel Salatin",
+   "family": "农林牧渔师",
+   "status": "REG"
+  },
+  {
+   "no": 569,
+   "name": "Antoine Lavoisier",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 570,
+   "name": "John Bennet Lawes",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 571,
+   "name": "Joseph Henry Gilbert",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 572,
+   "name": "Charles Darwin",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 573,
+   "name": "Jethro Tull",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 574,
+   "name": "Thomas Coke",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 575,
+   "name": "Robert Bakewell",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 576,
+   "name": "John Sinclair",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 577,
+   "name": "Humphry Davy",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 578,
+   "name": "Jean-Baptiste Boussingault",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 579,
+   "name": "Carl Sprengel",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 580,
+   "name": "Thomas Robert Malthus",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 581,
+   "name": "Henry A. Wallace",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 582,
+   "name": "George Shull",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 583,
+   "name": "Donald Jones",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 584,
+   "name": "Barbara McClintock",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 585,
+   "name": "Sewall Wright",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 586,
+   "name": "R. A. Fisher",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 587,
+   "name": "J. B. S. Haldane",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 588,
+   "name": "Franklin Hiram King",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 589,
+   "name": "Walter Lowdermilk",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 590,
+   "name": "Hugh Hammond Bennett",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 591,
+   "name": "George Perkins Marsh",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 592,
+   "name": "Cato the Elder",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 593,
+   "name": "Varro",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 594,
+   "name": "Columella",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 595,
+   "name": "Pliny the Elder",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 596,
+   "name": "Olivier de Serres",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 597,
+   "name": "Arthur Young",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 598,
+   "name": "Charles Townshend",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 599,
+   "name": "John Evelyn",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 600,
+   "name": "William Cobbett",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 601,
+   "name": "J. C. Loudon",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 602,
+   "name": "Liberty Hyde Bailey",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 603,
+   "name": "Frank N. Meyer",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  },
+  {
+   "no": 604,
+   "name": "Jared Eliot",
+   "family": "农林牧渔师",
+   "status": "TODO"
+  }
+ ]
+}

@@ -1,0 +1,190 @@
+{
+ "note": "已注册但不在 _蒸馏名单_v2.json 的产物（历史/额外注册）；计入 117 基线，不进 600 待蒸清单，编号不占位。",
+ "count": 46,
+ "people": [
+  {
+   "family_zh": "建造采购师",
+   "slug": "david-t-hulett"
+  },
+  {
+   "family_zh": "建造采购师",
+   "slug": "donald-g-reinertsen"
+  },
+  {
+   "family_zh": "建造采购师",
+   "slug": "john-k-hollmann"
+  },
+  {
+   "family_zh": "建造采购师",
+   "slug": "lauri-koskela"
+  },
+  {
+   "family_zh": "建造采购师",
+   "slug": "martin-fischer-stanford"
+  },
+  {
+   "family_zh": "建造采购师",
+   "slug": "philip-crosby"
+  },
+  {
+   "family_zh": "思想教育师",
+   "slug": "charles-eastman"
+  },
+  {
+   "family_zh": "投资资本师",
+   "slug": "li-lu"
+  },
+  {
+   "family_zh": "投资资本师",
+   "slug": "michael-mauboussin"
+  },
+  {
+   "family_zh": "投资资本师",
+   "slug": "nick-sleep"
+  },
+  {
+   "family_zh": "投资资本师",
+   "slug": "robert-a-kindler"
+  },
+  {
+   "family_zh": "政治法律师",
+   "slug": "beth-wilkinson"
+  },
+  {
+   "family_zh": "政治法律师",
+   "slug": "evan-r-chesler"
+  },
+  {
+   "family_zh": "政治法律师",
+   "slug": "h-rodgin-cohen"
+  },
+  {
+   "family_zh": "政治法律师",
+   "slug": "scott-a-barshay"
+  },
+  {
+   "family_zh": "政治法律师",
+   "slug": "theodore-v-wells-jr"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "adam-booth-abom79"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "ali-erdemir"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "charles-becht-iv"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "dan-gelbart"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "doc-palmer"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "ernest-rabinowicz"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "george-antaki"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "harry-bhadeshia"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "heinz-p-bloch"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "ian-michael-hutchings"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "john-c-lippold"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "r-keith-mobley"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "sindo-kou"
+  },
+  {
+   "family_zh": "材料建工师",
+   "slug": "stefan-gotteswinter"
+  },
+  {
+   "family_zh": "艺术设计师",
+   "slug": "john-maeda"
+  },
+  {
+   "family_zh": "财务合规师",
+   "slug": "walter-a-shewhart"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "andrej-karpathy"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "chip-huyen"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "christopher-manning"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "hamel-husain"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "jerry-liu-llamaindex"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "jesse-vincent"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "karen-sparck-jones"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "matei-zaharia"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "omar-khattab"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "peter-steinberger"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "rich-hickey"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "shreya-shankar"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "simon-willison"
+  },
+  {
+   "family_zh": "软件开发师",
+   "slug": "stephen-e-robertson"
+  }
+ ]
+}
