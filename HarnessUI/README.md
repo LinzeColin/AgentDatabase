@@ -1,6 +1,6 @@
 # HarnessUI
 
-给 DeepSeek Harness 做角色皮肤的素材库与生产线。原神 + 绝区零全量女角色。
+给 DSH / Kimi Code 做角色皮肤的素材库与生产线。原神 + 崩铁 + 绝区零 + 鸣潮全量女角色。
 
 **定位:个人自用、非商业、不分发。** 角色版权归米哈游,本目录下所有产物只在本机 DSH 里用。
 
@@ -10,8 +10,12 @@
 HarnessUI/
 ├── README.md                      本文件：目录约定 + 版本规则 + 流水线
 ├── research/
-│   ├── roster-genshin.json        原神女角色全量清单（78）
+│   ├── roster-genshin.json        原神女角色全量清单（79）
+│   ├── roster-hsr.json            崩铁女角色全量清单（56）
 │   ├── roster-zzz.json            绝区零女角色全量清单（45）
+│   ├── roster-wuwa.json           鸣潮女角色全量清单（43）
+│   ├── names_zh.json              简体中文名映射（198）
+│   ├── douyin-analysis.md         抖音三博主蒸馏与角色清单
 │   ├── generation-stack.md        生成链路选型（为什么必须用 LoRA）
 │   └── material-sources.md        素材来源调研（哪些平台真的有用）
 ├── characters/<id>/

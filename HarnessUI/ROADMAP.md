@@ -56,8 +56,11 @@
 
 | 项 | 状态 |
 |---|---|
-| 崩铁 nova | 无立绘，wiki 页 66 个文件里没有可用锚图 |
-| `zzz/nekomata/default [light]`、`zzz/rina/default [dark]` | 被 OpenAI 安全系统拒绝，重出中；若再拒需改写露肤度措辞或接受缺失 |
+| 崩铁 nova | 无立绘，wiki 页 66 个文件里没有可用锚图 —— **仍缺** |
+| `zzz/nekomata`、`zzz/rina` | 已解决：重出通过，两个变体齐全。安全系统的拒绝是瞬时的，重试即可 |
+| 鸣潮 `changli/laurel-nymph`、`carlotta/splashing-summer`、`zani/downtown-repose` | wiki 只有整幅场景宣传图，没有 `<Outfit> Full Sprite.png`。拿场景图跑过，昼夜出的不是同一套衣服，已剔除。要补需人工裁出人物区 |
+| 「梨诺」 | 四个游戏的现役与未上线名单里都查不到，未纳入 |
+| 鸣潮 `hsin`、`suoming` | 未上线，只有卡面没有 hires，锚图质量低一档但已出图 |
 | OpenAI key | 对话里贴过明文，**用完请轮换** |
 | 战斗立绘 / 终结技原画 | 与现有锚图大量重复，未纳入 |
 
@@ -70,4 +73,5 @@
 | **OpenAI API + Batch** | **0.57 元** | **~350 元** | ~2 小时 |
 | OpenAI API 实时 | 0.82 元 | ~700 元 | ~9 小时 |
 | MiniMax Hub Pro | 8.34 元 × 3 次重出 | 15,300 元 | 10.9 个月 |
+| **v1.8.0 实测（鸣潮 94 张）** | **约 0.50 元** | **$6.5–7.5 / 94 张** | **~25 分钟** |
 | mmx CLI / ComfyUI | — | — | 质量已证否 |
