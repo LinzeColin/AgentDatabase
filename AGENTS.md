@@ -143,3 +143,26 @@ ssh ovh 'sudo /usr/local/bin/linze-r2-free-tier-guard.py'
 > 脚本的安全底线也别削：**删 R2 对象前先 `HeadObject` 核对 OCI 上同 key 同大小，核不上就跳过不删**；
 > 最新一批永远保留；只碰 `backups/<组>/<时间戳>/`，**不碰 `primary-objects/`（那是制品字节，删了就是毁档）**。
 > 每份快照有 `r2`/`oci`/`github` 三个 verified 副本，删掉 R2 那份仍剩两份 —— 这是「卸载」不是「删除」。
+
+---
+
+## persona-distiller 流水线经验（2026-08-21 Telford#37 实测，供 T1/T2/T3 共用）
+
+- **结论**：模型文档里引文坐标必须写成 `（src-XXX，YYYY 年）`，裸 `（src-XXX）` 不算坐标。
+  **为什么**：check_quote_locator 的 LOCATOR 只认同段内的年份/页码/刊名/@偏移，不含 source_id；
+  10 份产物一次性扫出 65 条缺坐标，release 被拦。**代价**：65 条 × 8 文件逐条返工（约 1 段）。
+- **结论**：claims 层无排除机制——OCR 拼写变体（如 Pontcysyllte→Pontycysyllte）时，claim 文本必须
+  用语料拼写；答案/产物可留标准拼写，但要在 `raw/_EXCLUDED.txt` 记录（二手依据，脱「无依据」）。
+  **为什么**：check_claim_coverage 只看语料正文+台账，不读排除表；check_unsourced_names 读 raw/ 下
+  `_` 前缀 .txt。**代价**：两个名字各一次拦门 + 一轮排查。
+- **结论**：盲判载荷构建用 `--balanced-positions`（默认 sha256%2 可能偏，Telford 抽到 21/11）。
+  **为什么**：位次与系统相关会灌进 delta（Holmes#170 实测位次效应 +0.015~+0.027）。重建只重排
+  A/B 标签、不重生成答案，便宜。**代价**：重排后 judge 输入须重建（几行脚本）。
+- **结论**：release 门扫 `evals/judge_payload.v1.json`（候选侧），不扫 A/B 盲判载荷——baseline 侧
+  引文缺坐标不阻塞 release；基线 provenance warning 用 `package_target.py --acknowledge-disclosure
+  '<warning 原文子串>'` 具名承认，不是 error，不打回。**为什么**：裸模型基线本来就是「非能力证据」，
+  门拦的是冒充，不是发布。**代价**：0（按标准流程走）。
+- **结论**：case-known 类题有意测 holdout 记忆，rubric 里会要求 holdout 细节（如 "Appendices 7-13"）；
+  这类源标题词会穿过 holdout 泄漏门（非独有专名/数字）但被 unsourced-name 门抓——答案必须靠
+  `_EXCLUDED.txt` 记录兜底，别去改答案。**为什么**：holdout 密封源正文不在 raw/，checker 查不到属预期。
+  **代价**：Telford case-known-2 一次拦门。
