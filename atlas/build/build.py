@@ -538,7 +538,10 @@ def lessons_block(sessions: list, projects: list) -> dict:
     repeats.sort(key=lambda r: -r["n"])
     batches.sort(key=lambda r: -r["n"])
 
-    # 报错提及最密集的项目：不是「哪个项目 bug 多」，是「哪个项目最耗你」
+    # 报错**提及**最密集的项目：不是「哪个项目 bug 多」，是「哪个项目最耗你」。
+    # 注意口径：extract.py 数的是会话文本里 "error"/"报错" 出现的次数，
+    # 不是工具真的失败了几次（真信号是各家日志里的 is_error 字段，尚未接入 —— 见 PRD）。
+    # 一段贴进来的报错日志能一次贡献上百次「提及」，所以这是一个**消耗代理**，不是缺陷计数。
     perr = defaultdict(lambda: {"errors": 0, "sessions": 0})
     for s in hum:
         k = s.get("project") or "未标注"
@@ -561,6 +564,8 @@ def lessons_block(sessions: list, projects: list) -> dict:
                      "project": s.get("project", ""), "topics": s["topics"]} for s in longest],
         "revisit": [{"name": p["name"], "human": p["human"], "first": p["first"], "last": p["last"],
                      "shipped": p["shipped"]} for p in revisit if p["human"] > 1],
+        "pain_note": "「报错」这一列数的是会话文本里出现 error/报错 的次数，不是工具失败次数。"
+                     "它是「哪个项目最消耗你」的代理指标，不能当 bug 数读。",
         "note": f"按每场会话第一句的前 {REPEAT_PREFIX} 个字判重，出现 {REPEAT_MIN} 次以上才列出来。"
                 f"**跨天复发**（隔天又问）与**单日批量**（一天之内投喂 N 遍）分开列 —— "
                 f"前者说明答案没留下来，后者说明这活该做成脚本。混在一起会把一次批处理"

@@ -194,10 +194,12 @@ def derive_debt(lessons: dict, projects: list, delivery: dict, tokens: dict) -> 
         debt.append({
             "kind": "failed_recurred_no_guard",
             "kind_label": "反复出错，还没有守卫",
-            "title": f"{p.get('name')} 每场平均 {p.get('per', 0):.1f} 次报错",
+            "title": f"{p.get('name')} 每场平均提到 {p.get('per', 0):.1f} 次 error/报错",
             "size": round(p.get("per", 0) * 10),
             "size_label": f"{p.get('sessions', 0)} 场",
-            "why": "不是这个项目 bug 多，是它最消耗你。反复出现的同一类失败没有沉下来变成守卫，"
+            "why": "口径是「会话文本里出现 error/报错 这个词的次数」，不是真实的工具失败次数 —— "
+                   "一段贴进来的日志能一次贡献上百。它仍然指得出「哪个项目最消耗你」，"
+                   "但别把它读成 bug 数。反复出现的同一类失败没有沉下来变成守卫，"
                    "下一个 agent 会原样再踩一遍。",
             "evidence": [f"{p.get('sessions', 0)} 场会话"],
             "next": "挑一条复发次数最高的，写成回归测试或 pre-commit 守卫。",

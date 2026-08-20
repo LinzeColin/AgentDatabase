@@ -42,7 +42,25 @@ def load(sessdir: Path) -> list:
     return out
 
 
-def build(sessions: list) -> dict:
+def topics_by_id(atlas_path: str) -> dict:
+    """从 build.py 的产物里取「会话 id → 主题」。
+
+    为什么不在这里自己判：主题分类要全语料的 IDF 权重，重算一遍等于开第二个分类器。
+    两个分类器迟早给出两个答案，那时候没人知道该信哪个。
+    """
+    if not atlas_path:
+        return {}
+    p = Path(atlas_path)
+    if not p.exists():
+        return {}
+    try:
+        a = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    return {s["id"]: (s.get("tp") or []) for s in (a.get("sessions") or []) if s.get("id")}
+
+
+def build(sessions: list, topics: dict | None = None) -> dict:
     # 这里**故意把 agent 扇出也算进来**：扇出本身就是「该被固化却没固化」的对象。
     # 738 次同一句提示词烧掉 2.27 亿 token 正是扇出干的 —— 把它剔掉，
     # 这份简报就看不见最该修的那一件事。但标签必须说清楚，不能叫「真人会话」。
@@ -92,7 +110,7 @@ def build(sessions: list) -> dict:
         d["errors"] += s.get("errors", 0)
         d["tok"] += s.get("tok_in", 0) + s.get("tok_cache_r", 0)
         d["tools"].update(s.get("tool_names") or {})
-        d["topics"].update(s.get("topics") or [])
+        d["topics"].update(s.get("topics") or (topics or {}).get(s.get("id")) or [])
         d["sources"][s["source"]] += 1
         for m in (s.get("models") or []):
             d["models"][m] += 1
@@ -233,12 +251,15 @@ def main() -> int:
     ap.add_argument("--sessions", required=True)
     ap.add_argument("--out", required=True, help="私有目录 —— 里面有 Owner 原话，绝不进公开仓")
     ap.add_argument("--web", default="", help="站点目录；给出则同时写一份到 <web>/brief/")
+    ap.add_argument("--atlas", default="",
+                    help="build.py 产出的 atlas.json；主题在那里判过一次，这里只读不重判 —— "
+                         "自己再判一遍就是第二套口径，两边迟早对不上")
     args = ap.parse_args()
     sess = load(Path(args.sessions))
     if not sess:
         print("没有会话可分析", flush=True)
         return 1
-    b = build(sess)
+    b = build(sess, topics_by_id(args.atlas))
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     md = to_markdown(b)

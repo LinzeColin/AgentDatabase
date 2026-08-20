@@ -38,7 +38,8 @@ trap 'rmdir "$LOCK" 2>/dev/null || true' EXIT
   python3 "$ROOT/build/build.py"   --sessions "$WORK/out" --out "$WORK/web" \
     --github "$WORK/out/github.json"
   # 给 agent 看的开发经验沉淀。落私有目录，**绝不进公开仓**（里面有 Owner 原话）。
-  python3 "$ROOT/build/sediment.py" --sessions "$WORK/out" --out "$WORK/brief" --web "$WORK/web"
+  python3 "$ROOT/build/sediment.py" --sessions "$WORK/out" --out "$WORK/brief" --web "$WORK/web" \
+    --atlas "$WORK/web/atlas/atlas.json"
   # 把《收尾必须回写》契约分发到每个 agent 的指令文件。内容没变就不动文件。
   # 靠人去五个文件里同步是同步不住的 —— 这一步就是为了不再靠人。
   bash "$ROOT/build/install_agents_md.sh" || echo "契约分发失败，本轮 agent 指令未更新"
