@@ -1,3 +1,8 @@
+# 带斜杠只匹配目录。铁律 2 要求在 worktree 里开发，而 worktree 不共享主树的未跟踪目录，
+# 跑 canonical_gate 前得把主树那份**软链**过来 —— 软链不是目录，
+# 会被 git add -A 当普通文件收进提交（一条指向本机绝对路径的链接）。
+# 2026-08-20 连踩两次，补上不带斜杠的这一行。
 node_modules/
+node_modules
 dist/
 *.tsbuildinfo
