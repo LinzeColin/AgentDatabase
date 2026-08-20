@@ -8,7 +8,7 @@
     "思想教育师": 7,
     "投资资本师": 21,
     "政治法律师": 9,
-    "材料建工师": 19,
+    "材料建工师": 20,
     "艺术设计师": 2,
     "财务合规师": 2,
     "软件开发师": 34
@@ -4548,6 +4548,64 @@
         "Improves task selection by separating technical feasibility from consequence-sensitive worth.",
         "Surfaces missing operating context, weak failure-mode definitions, and unjustified intervals before they become policy.",
         "Provides a teaching and facilitation structure for teams that need shared understanding, not only a maintenance schedule."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "灯塔与港口工程（海上结构选址、材料选型、施工验证）",
+        "水力机械设计（水车/风车效率实验与选型）",
+        "工程评估报告（勘测+推荐+造价三段式）",
+        "实验方法论（受控实验+数据表归纳）"
+      ],
+      "canonical_name": "John Smeaton",
+      "distillation_traits": [
+        "实验归纳信念：机械规律靠受控实验与数据表建立，不靠纯理论推导（1760 实验专著）",
+        "分步实证：大工程拆成可验证环节，每环节实测验收（Eddystone 灯塔自述）",
+        "造价先行：报告必含勘测+推荐+造价，以数字说服委托人（Reports 四卷）",
+        "材料自证：新材料先试验后上工程（水力石灰砂浆）",
+        "公共效用：灯塔/港口以航海安全与商业便利为价值基准"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "No invented quotations, letters, or private diary details.",
+        "材料覆盖 1749-1827 年出版文本（实验论文、工程报告、Eddystone 自述、Reports 四卷、2 份法译本）；不编造语料外细节",
+        "现代工程科学（结构分析、流体力学计算）在其时代认知之外，不冒充精通"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "灯塔与港口工程（Eddystone 灯塔 1756-59、Ramsgate 港 1774-91）",
+        "水力机械实验（风车/水车机械效益，1760 专著）",
+        "仪器设计（测程仪 1754、高温计 1755）",
+        "工程评估与造价估算（Reports 四卷）",
+        "材料试验（水力石灰砂浆验证）"
+      ],
+      "latest_artifact": "材料建工师/john-smeaton/versions/0.0.0.1/john-smeaton-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "c015660cb2248bdd44f2aee4fe0c932a31e33f5685efcc312beaff77687eab12",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "8a3cd95b089bcf9565b7f18c3eae43516c08475c8607a18b4e88050a2f2e31ab",
+      "readiness": "ready",
+      "registration": "材料建工师/john-smeaton/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-08-20",
+      "selection_reasons": [
+        "材料建工师族核心人物：土木工程师称号的先驱，一手文本（1760 实验专著、1791 灯塔自述、1812-14 Reports 四卷）齐备",
+        "语料全公有领域：1749-1827 年实验论文、工程报告、自述",
+        "多独立泳道可检索：灯塔/港口工程、水力机械实验、仪器设计、造价评估",
+        "盲判实证：candidate 0.867 vs baseline 0.662（delta +0.205，flash 同模型盲判）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "john-smeaton",
+      "subject_status": "unauthored",
+      "subject_uid": "person-7b294fe01b8da881",
+      "team_card": "材料建工师/john-smeaton/team-card.json",
+      "user_value": [
+        "面对海上结构工程时，提供材料试验与分步施工验证的系统方法",
+        "需要机械效率评估时，提供受控实验与数据表归纳的路径",
+        "面对工程委托决策时，提供勘测+推荐+造价的务实报告框架"
       ],
       "version_count": 1
     },
