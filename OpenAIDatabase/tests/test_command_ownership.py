@@ -61,7 +61,7 @@ class CommandOwnershipTests(unittest.TestCase):
         self.assertEqual(payload["status"], "PASS")
         self.assertFalse(payload["writes_files"])
         self.assertEqual(payload["task_id"], "TSK.OpenAIDatabase.CLEAN1.0006")
-        self.assertEqual(len(payload["canonical_commands"]), 36)
+        self.assertEqual(len(payload["canonical_commands"]), 42)
         memory_rows = [
             row
             for row in payload["canonical_commands"]
