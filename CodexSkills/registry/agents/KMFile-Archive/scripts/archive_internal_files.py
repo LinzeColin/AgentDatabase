@@ -55,8 +55,45 @@ def _resolve_kmos_root() -> Path:
 
 
 ROOT = _resolve_kmos_root()
+
+
+def _resolve_smb_root(sub: str) -> Path:
+    """SMB 根动态解析：盘挂在哪都能跑。
+
+    实测事故（260820）：盘从 `/Volumes/share` 换挂到 `~/mnt/share` 之后，写死路径的
+    两个 skill 直接报 `SMB root is unavailable` 起不来 —— 定时任务会天天空转失败。
+    顺序：`KM_SMB_ROOT` 环境变量 → /Volumes/share → ~/mnt/share → `mount` 输出里
+    任何 smbfs 挂载点。都不命中时返回第一个候选，让后续检查报出可读的错。
+    """
+    candidates: list[Path] = []
+    env = os.environ.get("KM_SMB_ROOT", "").strip()
+    if env:
+        candidates.append(Path(env).expanduser())
+    candidates.append(Path("/Volumes/share"))
+    candidates.append(Path.home() / "mnt" / "share")
+    try:
+        out = subprocess.run(["mount"], capture_output=True, text=True, timeout=10).stdout
+        for line in out.splitlines():
+            if "smbfs" in line and " on " in line:
+                point = line.split(" on ", 1)[1].split(" (")[0].strip()
+                if point:
+                    candidates.append(Path(point))
+    except (OSError, subprocess.SubprocessError):
+        pass
+    tail = Path("03_资料库") / "MetaData" / "IDS_MetaData" / sub
+    seen: set[str] = set()
+    for base in candidates:
+        key = str(base)
+        if key in seen:
+            continue
+        seen.add(key)
+        target = base / tail
+        if target.is_dir():
+            return target
+    return candidates[0] / tail
+
 PRIVATE_DB_CLIENT = ROOT / "KMDatabase" / "machine" / "tools" / "private_db_client.py"
-SMB_ROOT = Path("/Volumes/share/03_资料库/MetaData/IDS_MetaData/KMFile")
+SMB_ROOT = _resolve_smb_root("KMFile")
 GITHUB_AREA = "Private-KMDatabase"
 GITHUB_PREFIX = "KMFile"
 GITHUB_MAX_BYTES = 95 * 1024 * 1024
@@ -81,6 +118,9 @@ SMB_COPY_METHODS = ("dd", "rsync", "dd", "rsync")
 
 # 单进程内并发下载时，records 字典与 manifest 追加仍保持单一写入者语义。
 MANIFEST_LOCK = threading.Lock()
+
+# 连续这么多个窗口失败就放弃该群本轮（防止对一个系统性坏掉的群空转整轮）
+MAX_CONSECUTIVE_WINDOW_FAILURES = 3
 
 
 class ArchiveError(RuntimeError):
@@ -661,7 +701,7 @@ def verify_smb_copy(source: Path, target: Path) -> None:
     last_reason = "SMB copy did not verify"
     source_size = 0
     target_size = 0
-    for settle_attempt in range(2):
+    for settle_attempt in range(4):
         source_size = source.stat().st_size
         target_size = target.stat().st_size
         if target_size == source_size:
@@ -680,8 +720,9 @@ def verify_smb_copy(source: Path, target: Path) -> None:
                     return
         else:
             last_reason = "SMB copy size differs from source"
-        if not settle_attempt:
-            time.sleep(1)
+        # SMB 写后 stat 会短暂返回旧尺寸，实测「size differs」多数是延迟不是数据坏。
+        # 沉降四次带退避，仍不符才认失败。
+        time.sleep(2 ** settle_attempt)
     raise ArchiveError(f"{last_reason}: source_size={source_size}, target_size={target_size}")
 
 
@@ -1115,6 +1156,7 @@ def archive_group(
                 for future in futures:
                     future.result()
 
+        consecutive_failures = 0
         for start, end in windows:
             boundary_key = window_record_id(group, start, end)
             if records.get(boundary_key, {}).get("window_status") == "complete" and not reconcile:
@@ -1191,7 +1233,16 @@ def archive_group(
                         )
                 print_event("window_stopped", group=group.title, start=dws_time(start), end=dws_time(end), reason=str(exc))
                 counts.merge(window_counts)
-                break
+                consecutive_failures += 1
+                # 一个坏件不该毁掉当轮剩下的所有窗口。窗口留 stopped 状态，下轮重试；
+                # 「不得跳过未完成窗口」的保证由 manifest_window_bounds 的**连续前缀**
+                # 来兜（增量起点只推进到第一个非 complete 窗口之前），不靠这里 break。
+                if consecutive_failures >= MAX_CONSECUTIVE_WINDOW_FAILURES:
+                    print_event("group_aborted_after_consecutive_failures",
+                                group=group.title, failures=consecutive_failures)
+                    break
+                continue
+            consecutive_failures = 0
             counts.merge(window_counts)
     return counts
 
@@ -1407,6 +1458,7 @@ def manifest_window_bounds(folder: str) -> tuple[datetime | None, datetime | Non
     """
     earliest: datetime | None = None
     latest_complete: datetime | None = None
+    windows: list[tuple[datetime, datetime, object]] = []
     for record in read_manifest(SMB_ROOT / folder / MANIFEST_NAME).values():
         if record.get("record_type") != "window":
             continue
@@ -1417,9 +1469,14 @@ def manifest_window_bounds(folder: str) -> tuple[datetime | None, datetime | Non
             continue
         if earliest is None or start < earliest:
             earliest = start
-        if record.get("window_status") == "complete":
-            if latest_complete is None or end > latest_complete:
-                latest_complete = end
+        windows.append((start, end, record.get("window_status")))
+    # 增量起点只能推进到**第一个非 complete 窗口之前**。
+    # 取 max(end) 会把中间那个 stopped 窗口永久跳过去，变成静默缺口。
+    for start, end, status in sorted(windows):
+        if status != "complete":
+            break
+        if latest_complete is None or end > latest_complete:
+            latest_complete = end
     return earliest, latest_complete
 
 

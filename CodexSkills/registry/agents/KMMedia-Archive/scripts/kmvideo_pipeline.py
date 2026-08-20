@@ -40,7 +40,7 @@ MANIFEST = aim.MANIFEST_NAME
 DWS = aim.dws_json
 MEDIA_ID_RE = aim.MEDIA_ID_RE
 
-SMB_THUMBS = Path("/Volumes/share/03_资料库/MetaData/IDS_MetaData/KMVideo_缩略图")
+SMB_THUMBS = SMB_ROOT.parent / "KMVideo_缩略图"   # 跟随动态解析出的 SMB 根
 REG_CSV = SMB_ROOT / "素材登记表.csv"
 MAP_CSV = SMB_ROOT / "原名新名映射.csv"
 PRIVATE_CLIENT = aim.PRIVATE_DB_CLIENT
