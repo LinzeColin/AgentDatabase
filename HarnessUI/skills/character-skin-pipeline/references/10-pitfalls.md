@@ -98,9 +98,18 @@ def newest_logs(count: int = 2) -> list[Path]:  # 读两个最新的
 `codesign --force --deep --sign -` 复制来的 Electron.app，
 在 Apple Silicon 上静默退出、无崩溃日志。用 `@electron/packager`。
 
-## 12. SMB 连续写会崩
+## 12. 「备份完成」其实是 376 个空壳
 
-见 09-archive.md。四次重试 + 退避 + 每 8 个歇 0.4 秒。
+`shutil.copyfile` 在 macOS 上走 `fcopyfile`（clone），在 smbfs 上它写出
+**大小完全正确、内容全是 0** 的文件并返回成功。614 张归档里 376 张是这样，
+归档脚本一个错都没报，我也就照着报了「已备份」。
+
+**代价方向**：备份坏了，只有需要它的那天才会发现——那天已经没得救了。
+
+改成显式分块 read/write + `fsync`，并且**每张读回来核对**才算写成功。
+连续写还会把 SMB 打崩（240/612 报 I/O error），要退避 + 节流。见 09-archive.md。
+
+**通用教训：写完不读回来核对，就不叫备份。exit code 0 不是判据。**
 
 ## 13. 面板看起来是控制器，其实是只读的
 
@@ -117,3 +126,21 @@ client.js 里的 CSS 写在模板字符串里，注释里一个反引号把它�
 `git add` 报 "outside of your sparse-checkout definition" 时文件没进暂存区，
 但 `git push` 仍然成功（推的是空提交）。
 **push 之后要 `git show --stat` 核一眼真的有文件。**
+
+## 16. 判据太严第二次犯：把 1868 张好图报成坏图
+
+修完全 0 之后我做全量复验，判据写的是「PNG 魔数必须是 `\x89PNG`」，
+结果 2646 张里报了 1868 张坏。真相是 **Fandom 一律吐 WebP，只是文件名带 .png/.jpg**。
+
+和第 7 条同一个病：**判据要先在已知正确的样本上跑一遍，看它误杀多少。**
+正确的判据是「PNG / JPEG / WebP 任一魔数，且不是全 0」——
+要抓的是「大小对但内容全 0」，不是「扩展名和格式不一致」。
+
+## 17. 新角色未必在你以为的那个游戏里
+
+用户报了三个新角色名，我按「都是崩铁的」去查，结果：
+真珠 = HSR `Pearl`（Upcoming），**沃雅妮莎 = 原神 `Vodyanitsa`**（不是崩铁），
+梨诺在四个游戏的现役和未上线名单里都查不到。
+
+**按中文名跨全部 wiki 搜一遍再归属**（`list=search&srwhat=text` 能命中 wikitext 里的 `zhs`），
+查不到的就如实说查不到，别塞进任务包凑数。

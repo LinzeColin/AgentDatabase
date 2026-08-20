@@ -63,3 +63,30 @@ python3 -m pip install opencc-python-reimplemented
    "status":"pending","refs":[],"refs_status":"none"}]}
 ```
 `id` 用 `re.sub(r"[^a-z0-9]+","-",title.lower()).strip("-")`。
+
+## 第三条路：英文站 infobox 的 `zhs` 字段
+
+两条互链路都走完还缺的（鸣潮实测缺 5 个：baizhi / chixia / jianxin / sanhua / youhu），
+去英文页的 wikitext 里取 `zhs`——中文站没挂 en 互链时它仍然在。
+
+```python
+wt = api({"action": "parse", "page": page, "prop": "wikitext", "format": "json"})
+zh = re.search(r"zhs\s*=\s*([\u4e00-\u9fff·]{1,10})", wt).group(1)
+```
+
+**取第一个 `zhs`，不是最后一个**：有的页面有两个——第二个是 `realname` 的中文
+（Chixia 的第二个 `zhs` 是「马小芳」，角色名是「炽霞」）。
+
+加上这条之后鸣潮 43 人全部补齐。
+
+## 重跑会丢名字：只补不覆盖
+
+同一个脚本第二次跑，因为 wiki 侧偶发不返回，**比上一版少了 5 个**
+（firefly / jingliu / fu-xuan / black-swan / odette 全是对的）。
+直接覆盖输出文件就把它们丢了。
+
+```python
+merged = dict(new)
+for k, v in old.items():
+    merged.setdefault(k, v)      # 新的没有的才用旧的；有冲突先打印出来看
+```

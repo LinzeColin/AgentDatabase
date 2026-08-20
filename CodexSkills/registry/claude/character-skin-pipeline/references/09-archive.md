@@ -15,17 +15,49 @@ smb://192.168.0.1/share/03_资料库/MetaData/HarnessUI/
 `meta.json` 记：task / game / character / variant / model / size /
 pack_version / acceptance(含每张的验收指标) / generated 日期。
 
-## SMB 的两个坑
+## SMB 的三个坑（第一个最致命）
 
-**1. 连续写会把它打崩。** 612 个 6-8MB 文件背对背拷，实测 **240 个报
-`Input/output error`**，而同一个文件一分钟后手动拷只要 0.9 秒——是被打崩不是坏了。
+### 1. `shutil.copyfile` 会写出「大小正确、内容全 0」的文件，并返回成功
+
+macOS 上 `shutil.copyfile` 优先走 `fcopyfile`（clone）。在 smbfs 上它**创建一个
+尺寸完全正确、内容全是零字节的文件，且不抛任何异常**。
+
+2026-08-20 实测：614 张已归档成品里 **376 张是全 0**，当初的归档脚本一个错都没报。
+用户以为有备份，实际 61% 是空壳。
+
+```python
+# ✗ 在 SMB 上会静默写出全 0
+shutil.copyfile(src, dst)
+
+# ✓ 显式分块 read/write + fsync
+with open(src, "rb") as reader, open(dst, "wb") as writer:
+    for chunk in iter(lambda: reader.read(4 * 1024 * 1024), b""):
+        writer.write(chunk)
+    writer.flush()
+    os.fsync(writer.fileno())
+```
+
+**并且每张都要读回来核对**（SHA-256 或至少魔数），
+把「校验通过」当成写入成功的唯一判据。exit code 0 不算数。
+
+一步自检：
+```bash
+find <归档根> -name '*.png' -not -name '._*' -exec sh -c \
+  'head -c8 "$1" | grep -q PNG || echo "坏 $1"' _ {} \;
+```
+
+### 2. 连续写会把它打崩
+
+612 个 6-8MB 文件背对背拷，实测 **240 个报 `Input/output error`**，
+而同一个文件一分钟后手动拷只要 0.9 秒——是被打崩不是坏了。
 做法：**四次重试 + 指数退避 + 每 8 个文件歇 0.4 秒**。加了之后失败 0。
 
-**2. 覆盖同名文件的 rename 会失败。** `mv a.png.part a.png` 在目标已存在时报 I/O 错误，
-而且会**先把目标删掉**——中途失败就是两边都没有。
-做法：先确认目标名空出来再 rename，失败后立刻查目录状态（数据通常还在 `.part` 里）。
+### 3. 覆盖同名文件的 rename 会失败
 
-**3. 别在 SMB 上跑 `du -sh` / 全量 `find`。** 会超时。要数数就按子目录分别数。
+`mv a.png.part a.png` 在目标已存在时报 I/O 错误，而且会**先把目标删掉**——
+中途失败就是两边都没有。做法：先确认目标名空出来再写。
+
+> 另：别在 SMB 上跑 `du -sh` / 全量 `find`，会超时；要数数就按子目录分别数。
 
 ## git
 
