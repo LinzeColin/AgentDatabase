@@ -1,0 +1,99 @@
+name: Memory Atlas Deploy
+
+# 为什么需要它（2026-08-03 的 DEPLOYMENT_FINDINGS.md 记录，本次复核仍成立）：
+#   线上 Pages 项目 openai-memory-atlas **没有接仓库**（source: null），
+#   推 main 不会部署任何东西，每次上线都是有人手动 wrangler pages deploy。
+#   production 至今在服务一个**从未推送过的 commit**（12734c10bf37，
+#   GitHub API 返回 422 No commit found）—— 不可复现、不可复审、回滚目标同样是它。
+#
+# 本工作流把部署搬上云：推 main 自动构建 + 上传 preview，
+# **不自动升 production** —— 升级仍由 Owner 点，因为线上那个孤儿构建
+# 一旦被覆盖就再也回不去了。
+#
+# 本机零参与：构建在 runner 上，不占 Owner 的机器。
+on:
+  push:
+    branches: [main]
+    paths:
+      - "MemoryAtlas/**"
+      - "OpenAIDatabase/data/derived/visualization/memory_atlas.json"
+      - ".github/workflows/memory-atlas-deploy.yml"
+  workflow_dispatch:
+    inputs:
+      promote:
+        description: "同时升 production（默认只发 preview）"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7
+        with:
+          node-version: "22"
+      - name: 凭据自检（缺了就明说，不静默跳过）
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          missing=""
+          [ -n "${CF_TOKEN:-}" ]   || missing="$missing CLOUDFLARE_API_TOKEN"
+          [ -n "${CF_ACCOUNT:-}" ] || missing="$missing CLOUDFLARE_ACCOUNT_ID"
+          if [ -n "$missing" ]; then
+            echo "FAIL: 缺少 secret：$missing"
+            echo "Owner 需在 repo Settings → Secrets 添加后重跑。"
+            echo "本工作流不接受任何形式的明文凭据。"
+            exit 1
+          fi
+          echo "PASS: 凭据就位"
+      - name: 构建
+        run: |
+          set -euo pipefail
+          cd MemoryAtlas
+          npm ci --no-audit --no-fund
+          npm run build
+          test -s dist/memory_atlas.json
+          test -s dist/index.html
+      - name: 数据自检（构建产物必须含最新数据）
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d = json.loads(Path("MemoryAtlas/dist/memory_atlas.json").read_text(encoding="utf-8"))
+          ov = d.get("overview", {})
+          n = ov.get("node_count", 0)
+          if n < 100:
+              raise SystemExit(f"FAIL: 节点数 {n} 异常偏低，疑似数据没打进去")
+          print(f"PASS: node={n} edge={ov.get('edge_count')} "
+                f"agent_sessions={ov.get('agent_session_count', 0)}")
+          PY
+      - name: 发布 preview
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          npx --yes wrangler@3 pages deploy MemoryAtlas/dist \
+            --project-name openai-memory-atlas \
+            --branch "preview-${GITHUB_SHA:0:8}" \
+            --commit-hash "$GITHUB_SHA"
+      - name: 升 production（仅手动触发且显式勾选）
+        if: github.event_name == 'workflow_dispatch' && inputs.promote
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          # 线上现役是个从未推送过的孤儿构建，覆盖后回不去 ——
+          # 所以升级必须是 Owner 显式的一次点击，不能顺带发生。
+          npx --yes wrangler@3 pages deploy MemoryAtlas/dist \
+            --project-name openai-memory-atlas \
+            --branch main --commit-hash "$GITHUB_SHA"
