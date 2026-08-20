@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import fcntl
 import json
 import os
 import shutil
@@ -55,6 +56,20 @@ def protected_incremental_state_dir(env_path: Path) -> Path:
     except OSError as exc:
         raise RuntimeError("protected_incremental_state_unavailable") from exc
     return state_dir
+
+
+def acquire_capture_lock(state_dir: Path) -> Any:
+    """Hold one host-local lock so scheduled captures never overlap."""
+    handle = (state_dir / "capture.lock").open("a+", encoding="utf-8")
+    try:
+        fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError as exc:
+        handle.close()
+        raise RuntimeError("concurrent_capture_active") from exc
+    except OSError as exc:
+        handle.close()
+        raise RuntimeError("protected_incremental_lock_unavailable") from exc
+    return handle
 
 
 def _is_owned_temp(path: Path, temporary_root: Path) -> bool:
@@ -202,6 +217,7 @@ def main(argv: list[str] | None = None) -> None:
     linked_protected_root = env_path.resolve().parent if env_path.is_symlink() else None
     try:
         incremental_state_dir = protected_incremental_state_dir(env_path)
+        capture_lock = acquire_capture_lock(incremental_state_dir)
     except RuntimeError as exc:
         print(json.dumps({
             "state": "BLOCKED",
@@ -299,6 +315,7 @@ def main(argv: list[str] | None = None) -> None:
                 shutil.rmtree(run_root)
             except OSError:
                 cleanup_error = True
+        capture_lock.close()
         cleanup_pass = not cleanup_error and not run_root.exists()
     state = str(child.get("state", "FAILED"))
     succeeded = returncode == 0 and state == "SUCCEEDED" and cleanup_pass

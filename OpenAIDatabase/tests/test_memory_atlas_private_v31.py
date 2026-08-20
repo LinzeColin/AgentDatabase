@@ -1669,6 +1669,30 @@ def test_source_capture_entry_maps_pre_json_child_failure_without_stderr_leak() 
     assert entry._safe_child_failure_code(124, "") == "CHILD_CAPTURE_TIMEOUT"
 
 
+def test_source_capture_entry_refuses_a_concurrent_capture(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    import fcntl
+    import OpenAIDatabase.scripts.memory_atlas_source_capture_entry as entry
+
+    env_file = tmp_path / "memory_atlas.env"
+    env_file.write_text("MEMORY_ATLAS_RUNTIME_DIR=/ignored\n", encoding="utf-8")
+    monkeypatch.setenv("MEMORY_ATLAS_ENV_FILE", str(env_file))
+    state_dir = entry.protected_incremental_state_dir(env_file)
+    handle = (state_dir / "capture.lock").open("a+", encoding="utf-8")
+    fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    try:
+        with pytest.raises(SystemExit) as exit_info:
+            entry.main()
+    finally:
+        handle.close()
+    assert exit_info.value.code == 2
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["failure_code"] == "concurrent_capture_active"
+
+
 def test_private_snapshot_is_only_exposed_through_signed_api() -> None:
     repo = Path(__file__).resolve().parents[2]
     provider = (repo / "MemoryAtlas/src/v31/PrivateAnalyticsProvider.tsx").read_text(encoding="utf-8")
