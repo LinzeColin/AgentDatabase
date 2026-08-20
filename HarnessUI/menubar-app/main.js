@@ -25,7 +25,8 @@ const byId = (id) => entries.find(e => e.id === id) || null;
 
 function label(entry) {
   if (!entry) return "未选择";
-  return entry.variant === "default" ? entry.character : `${entry.character} · ${entry.variant}`;
+  const name = entry.label || entry.character;
+  return entry.variant === "default" ? name : `${name} · ${entry.variant}`;
 }
 
 /** 推进一格。force 忽略间隔，用于「换下一张」和刚切进轮播时。 */
@@ -112,7 +113,8 @@ function buildMenu() {
 
   for (const [game, list] of Object.entries(games)) {
     const chars = {};
-    for (const e of list) (chars[e.character] ||= []).push(e);
+    // 按中文名归组。没有中文名的（中文站还没建条目的新角色）回退到英文 id。
+    for (const e of list) (chars[e.label || e.character] ||= []).push(e);
     template.push({
       label: `${game}（${list.length}）`,
       // 按角色再分一级：160 个变体拉成一条直的菜单没法用
@@ -159,6 +161,8 @@ app.whenReady().then(() => {
     thumbFile: "file://" + path.join(store.ROOT, "thumb", e.id, "light.webp") }));
   tray = new Tray(trayIcon());
   tray.setToolTip("HarnessUI 皮肤");
+  // 图标之外再挂一个短标题：模板图在某些菜单栏配置下不显眼，文字保证找得到。
+  tray.setTitle(" HU");
   refresh();
   schedule();
   if (store.read().mode === "rotate") rotate(false);

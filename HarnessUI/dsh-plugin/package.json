@@ -1,7 +1,24 @@
 {
   "name": "dsh-harness-ui-skins",
   "version": "0.1.0",
-  "description": "HarnessUI 角色皮肤：画廊选择 + 全库轮播两种模式",
+  "private": true,
+  "description": "HarnessUI 角色背板：画廊挑选 + 全库轮播，素材走本地资源服务",
+  "type": "module",
   "main": "lib/index.js",
-  "cordis": { "client": "lib/client.js" }
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [],
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "license": "MIT"
 }

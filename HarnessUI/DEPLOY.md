@@ -70,3 +70,22 @@ cp -R ~/Documents/Codex/GithubProject/_scratch/agentdatabase-harness-ui/HarnessU
 ```
 然后**你手动完全退出 DSH Desktop 再打开**（桌面壳没有热重载，这是唯一办法）。
 我不会自己动手重启。
+
+---
+
+## 装 DSH 插件踩的坑（下次直接照做）
+
+插件光放进 `~/.dsh/plugins/` **不会被加载**。要三处齐全，缺一不可：
+
+1. `~/.dsh/profiles/desktop/node_modules/<包名>` → 软链到插件目录
+2. `~/.dsh/profiles/desktop/package.json` 的 `dependencies` 加 `"<包名>": "link:<绝对路径>"`
+3. **同一个 package.json 的 `dsh.profile.bundles` 数组里加 `<包名>`** ← 最容易漏的一条
+
+另外 `package.json` 必须有 `"type": "module"`、`exports` 里给出 `./client`，
+以及 `dsh.bundle.patch` / `dsh.client` 两块 —— 我一开始自己编了个 `cordis` 字段，
+loader 根本不看，插件目录放对了也是白搭。
+
+还有一条：**鲸鱼娘皮肤是通过它自己插件目录里的 `insert` 挂载的**，
+`~/.dsh/cordis.patch.yml` 那段互斥列表里写的 `ui-skin-maid-atelier` 拦不住它。
+要停它得按它实际插入的 id `ui-skin-deep-whale-day-night` 加一行 disabled，
+否则两套皮肤同时挂载互相盖。

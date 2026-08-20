@@ -261,7 +261,7 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 			panel.innerHTML = `
 <div id="harness-ui-bar">
   <select data-hu="game"><option value="">全部游戏</option></select>
-  <input data-hu="search" type="search" placeholder="搜角色…" size="12" />
+  <input data-hu="search" type="search" placeholder="搜中文/英文…" size="12" />
   <button type="button" data-hu="mode"></button>
   <button type="button" data-hu="next">下一张</button>
   <select data-hu="interval">
@@ -293,7 +293,8 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 				const term = panel.querySelector('[data-hu="search"]').value.trim().toLowerCase();
 				const shown = (catalog?.entries || []).filter((entry) =>
 					(!game || entry.game === game) &&
-					(!term || entry.character.includes(term) || entry.variant.includes(term)));
+					(!term || entry.character.includes(term) || entry.variant.includes(term)
+					 || (entry.label || "").includes(term)));
 				grid.textContent = "";
 				const fragment = document.createDocumentFragment();
 				for (const entry of shown) {
@@ -305,10 +306,10 @@ body[data-dsh-harness-ui]:not([data-ds-dark-theme]) { --harness-fallback: #e8eef
 					const image = document.createElement("img");
 					image.loading = "lazy";
 					image.src = entry.thumb;
-					image.alt = entry.character;
+					image.alt = entry.label || entry.character;
 					const caption = document.createElement("figcaption");
-					caption.textContent = entry.variant === "default"
-						? entry.character : `${entry.character} · ${entry.variant}`;
+					const shown = entry.label || entry.character;
+					caption.textContent = entry.variant === "default" ? shown : `${shown} · ${entry.variant}`;
 					card.append(image, caption);
 					const pick = async () => {
 						// Picking is an explicit choice, so it also leaves rotate mode —

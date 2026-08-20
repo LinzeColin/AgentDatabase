@@ -28,7 +28,7 @@
   <h1>HarnessUI 角色库 <span id="count"></span></h1>
   <div class="row">
     <select id="game"><option value="">全部游戏</option></select>
-    <input type="search" id="q" placeholder="搜角色 / 变体…">
+    <input type="search" id="q" placeholder="搜中文名 / 英文名 / 变体…">
     <button id="single">单一角色</button>
     <button id="shuffle">全库轮播</button>
   </div>
@@ -44,7 +44,7 @@ function render(){
   const g = document.getElementById("game").value;
   const kw = document.getElementById("q").value.trim().toLowerCase();
   const rows = list.filter(e => (!g || e.game === g) &&
-    (!kw || e.character.includes(kw) || e.variant.includes(kw)));
+    (!kw || e.character.includes(kw) || e.variant.includes(kw) || (e.label||"").includes(kw)));
   document.getElementById("count").textContent = `${rows.length} / ${list.length} 个变体`;
   grid.textContent = "";
   const frag = document.createDocumentFragment();
@@ -52,9 +52,9 @@ function render(){
     const el = document.createElement("div");
     el.className = "card" + (e.id === st.selected ? " active" : "");
     const img = document.createElement("img");
-    img.className = "thumb"; img.loading = "lazy"; img.src = e.thumb; img.alt = e.character;
+    img.className = "thumb"; img.loading = "lazy"; img.src = e.thumb; img.alt = e.label || e.character;
     const meta = document.createElement("div"); meta.className = "meta";
-    const n = document.createElement("div"); n.className = "name"; n.textContent = e.character;
+    const n = document.createElement("div"); n.className = "name"; n.textContent = e.label || e.character;
     const s = document.createElement("div"); s.className = "sub";
     s.textContent = `${e.gameName}${e.variant === "default" ? "" : " · " + e.variant}`;
     meta.append(n, s); el.append(img, meta);

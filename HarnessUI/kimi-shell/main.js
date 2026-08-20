@@ -39,6 +39,7 @@ function catalog() {
     // 不必为两个宿主各生成一份目录。
     harnessCatalog = raw.entries.map(e => ({
       id: e.id, game: e.game, gameName: e.gameName, character: e.character, variant: e.variant,
+      label: e.label || e.character, characterZh: e.characterZh,
       light: `kimiskin://${HARNESS}/display/${e.id}/light.webp`,
       dark:  `kimiskin://${HARNESS}/display/${e.id}/dark.webp`,
       thumb: `kimiskin://${HARNESS}/thumb/${e.id}/light.webp`,
@@ -220,7 +221,7 @@ function harnessMenu() {
   const byGame = {};
   for (const e of list) (byGame[e.gameName] ||= []).push(e);
   return [
-    { label: `当前：${cur ? cur.character + (cur.variant === "default" ? "" : " / " + cur.variant) : "未选择"}`, enabled: false },
+    { label: `当前：${cur ? (cur.label || cur.character) + (cur.variant === "default" ? "" : " / " + cur.variant) : "未选择"}`, enabled: false },
     { label: `共 ${list.length} 个变体`, enabled: false },
     { type: "separator" },
     { label: "角色画廊（缩略图）…", accelerator: "CmdOrCtrl+Shift+K", click: () => openHarnessGallery() },
@@ -237,7 +238,7 @@ function harnessMenu() {
     ...Object.entries(byGame).map(([game, entries]) => ({
       label: `${game}（${entries.length}）`,
       // 按角色分二级，否则 160 个变体拉成一条直的菜单没法用
-      submenu: Object.entries(entries.reduce((acc, e) => ((acc[e.character] ||= []).push(e), acc), {}))
+      submenu: Object.entries(entries.reduce((acc, e) => ((acc[e.label || e.character] ||= []).push(e), acc), {}))
         .map(([character, vs]) => vs.length === 1
           ? { label: character, type: "radio", checked: h.selected === vs[0].id,
               click: () => pickHarness(vs[0].id) }

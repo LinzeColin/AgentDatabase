@@ -23,6 +23,17 @@ import pathlib
 GAME_ZH = {"genshin": "原神", "hsr": "崩坏：星穹铁道", "zzz": "绝区零"}
 
 
+def chinese_names(assets: pathlib.Path) -> dict:
+    """id -> 简体中文名。缺的就没有 —— 界面回退到英文 id，不编一个出来。"""
+    for candidate in (assets / "names_zh.json",
+                      pathlib.Path(__file__).parent.parent / "research/names_zh.json"):
+        try:
+            return json.loads(candidate.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+    return {}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--assets", type=pathlib.Path, required=True)
@@ -31,6 +42,7 @@ def main() -> None:
     args = parser.parse_args()
 
     display = args.assets / "display"
+    zh = chinese_names(args.assets)
     entries = []
     for light in sorted(display.rglob("light.webp")):
         rel = light.relative_to(display)
@@ -40,10 +52,15 @@ def main() -> None:
         # missing, so pairs only — the odd one out is reported, not shipped.
         if not dark.exists():
             continue
+        name_zh = zh.get(f"{game}/{character}")
         entries.append({
             "id": f"{game}/{character}/{variant}",
             "game": game, "gameName": GAME_ZH.get(game, game),
             "character": character, "variant": variant,
+            "characterZh": name_zh,
+            # 菜单和画廊统一用这个字段。有中文名就用中文，没有就用英文 id ——
+            # 两种混排也比音译一个假名字强。
+            "label": name_zh or character,
             "light": f"{args.base}/display/{game}/{character}/{variant}/light.webp",
             "dark": f"{args.base}/display/{game}/{character}/{variant}/dark.webp",
             "thumb": f"{args.base}/thumb/{game}/{character}/{variant}/light.webp",
