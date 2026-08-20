@@ -1,0 +1,49 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Frank Bunker Gilbreth；材料建工师；American industrial engineer, efficiency expert, pioneer of motion study。\n   专业背景：1868-07-07 生于美国缅因州 Fairfield，1924-06-14 卒于 Montclair, New Jersey。承包建筑商出身（Gilbreth, Inc. 建筑公司），发明混凝土打桩的 Corrugated Concrete Pile 与脚手架创新；后转向科学管理，与妻子 Lillian Moller Gilbreth 共同创立运动研究（motion study），创立 therbligs 单元、micro-motion study、process charts，应用于工业效率、建筑与残疾人工效学。。\n   应用价值：场景：工业工程与动作/工时研究（therbligs、micro-motion、process charts）；建筑承包施工方法与现场效率（混凝土桩、脚手架、砖砌标准化）；科学管理与生产组织（效率工程、疲劳消除）；关键能力：动作分析与标准化（therbligs 18 基本动作单元）；时间与动作研究（time and motion study）、micro-motion 摄影分析；流程图表法（process charts）与工效学/疲劳管理。\n   区分依据：Wikidata Q918543（American engineer 1868-1924）；以动作研究（motion study）与 therbligs 著称，与 Lillian Gilbreth 合著 Motion study(1911)、Fatigue study(1916)、Applied motion study(1917)、Primer of scientific management(1912)。archive.org creator:'Gilbreth, Frank Bunker, 1868-1924' 指本尊。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "工业工程与动作/工时研究（therbligs、micro-motion、process charts）",
+        "建筑承包施工方法与现场效率（混凝土桩、脚手架、砖砌标准化）",
+        "科学管理与生产组织（效率工程、疲劳消除）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q918543",
+          "type": "wikidata"
+        },
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Gilbreth%2C+Frank+Bunker%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=100&output=json",
+          "type": "archive.org"
+        }
+      ],
+      "canonical_name": "Frank Bunker Gilbreth",
+      "distinguishing_basis": "Wikidata Q918543（American engineer 1868-1924）；以动作研究（motion study）与 therbligs 著称，与 Lillian Gilbreth 合著 Motion study(1911)、Fatigue study(1916)、Applied motion study(1917)、Primer of scientific management(1912)。archive.org creator:'Gilbreth, Frank Bunker, 1868-1924' 指本尊。",
+      "evidence_level": "high",
+      "identity_category": "材料建工师",
+      "key_capabilities": [
+        "动作分析与标准化（therbligs 18 基本动作单元）",
+        "时间与动作研究（time and motion study）、micro-motion 摄影分析",
+        "流程图表法（process charts）与工效学/疲劳管理"
+      ],
+      "label": "A",
+      "occupation_or_role": "American industrial engineer, efficiency expert, pioneer of motion study",
+      "professional_background": "1868-07-07 生于美国缅因州 Fairfield，1924-06-14 卒于 Montclair, New Jersey。承包建筑商出身（Gilbreth, Inc. 建筑公司），发明混凝土打桩的 Corrugated Concrete Pile 与脚手架创新；后转向科学管理，与妻子 Lillian Moller Gilbreth 共同创立运动研究（motion study），创立 therbligs 单元、micro-motion study、process charts，应用于工业效率、建筑与残疾人工效学。",
+      "subject_uid": null
+    }
+  ],
+  "generated_at": "2026-08-20T21:42:59Z",
+  "normalized_name": "frankbunkergilbreth",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "ready",
+  "target_name": "Frank Bunker Gilbreth"
+}

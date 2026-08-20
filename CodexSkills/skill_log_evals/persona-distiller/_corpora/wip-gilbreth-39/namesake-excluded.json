@@ -1,0 +1,16 @@
+{
+ "excluded_namesake": {
+  "canonical_name": "Frank Bunker Gilbreth Jr.",
+  "occupation_or_role": "American author",
+  "professional_background": "1911-03-17 生于 Montclair, New Jersey，2001-02-18 卒于 Charleston, SC。F. B. Gilbreth 夫妇长子；与姐姐合著《Cheaper by the Dozen》(1948) 等回忆录。",
+  "distinguishing_basis": "生卒 1911-2001 与工程师父 1868-1924 不同；archive.org creator:'Gilbreth, Frank Bunker, 1911-2001' 属子，排除。",
+  "evidence_level": "high",
+  "authoritative_sources": [
+   {
+    "locator": "https://www.wikidata.org/wiki/Q368633",
+    "type": "wikidata"
+   }
+  ]
+ },
+ "exclusion_reason": "Frank Bunker Gilbreth Jr.(1911-2001) 为父子作家，非工程师本尊(1868-1924)；archive.org creator 'Gilbreth, Frank Bunker, 1911-2001' 属子，抓取时用 EXCLUDE_TITLE 过滤"
+}

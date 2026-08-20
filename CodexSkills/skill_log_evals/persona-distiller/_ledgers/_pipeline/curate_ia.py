@@ -238,6 +238,16 @@ EXCLUDE = {
                "Giffin", "Parker, R. H", "Thorpe", "Briggs", "Irwin",
                "Parrish", "Fouchet", "Calcutt", "Simon-Miller", "Nixon",
                "nursery", "Taylor Bros", "T. H"],
+    # ★ Gilbreth #39：同名者分两类——
+    #   ① 儿子 Frank Bunker Gilbreth Jr.（1911-2001，作家，父子合著《Cheaper by the Dozen》），
+    #     creator 带 `Gilbreth, Frank Bunker, 1911-2001` → 按生卒年排；
+    #   ② 妻子 Lillian Moller Gilbreth(1878-1972) 的**独著**（如疲劳心理学研究）不挂
+    #     Frank 名 → REQUIRE(gilbreth+frank+bunker) 天然挡掉；合著（Fatigue study 等）
+    #     creator 段为 `Gilbreth, Frank Bunker, 1868-1924; Gilbreth, Lillian Moller` 正常收。
+    #   ③ 1970s 的重印（fatiguestudyelim0000gilb 等，internetarchivebooks/printdisabled）——
+    #      creator 仍是 1868-1924 本尊，但多为版权受限重印，按题名收录原文时以可抓取的
+    #      cdl/americana 版本优先。
+    "gilbreth": ["1911-2001", "Gilbreth, Frank Bunker, 1911-2001"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -310,6 +320,10 @@ EXCLUDE_TITLE = {
     # ★ Taylor #38：同名同形 Frederick Winslow Taylor（法庭规则编者）的 2004 年书
     #   （Georgia court rules…），creator 串与工程师完全相同，只能按题名排。
     "taylor": ["georgia court", "court rules"],
+    # ★ Gilbreth #39：儿子的书 creator 挂 `Frank Bunker Gilbreth, 1911-2001`（如
+    #   auskindernwerden0000gilb《Aus Kindern werden Leute》1992）——REQUIRE 钉的是
+    #   gilbreth+frank+bunker 会命中儿子，必须按题名排（德语童书回忆录，非工程）。
+    "gilbreth": ["aus kindern werden leute", "cheaper by the dozen", "bells on their toes"],
 }
 # 目标必须出现在 creator 里的**姓名词元**（同一个 creator 段里全部出现即命中）。
 # ★★ 曾写成 `["Fröbel, Friedrich"]` 这种「姓, 名」定串，于是
@@ -375,6 +389,11 @@ REQUIRE = {
     #   行星科学家 F. W. Taylor 与 Frank William Taylor 不含 winslow → 天然挡掉；
     #   同名同形（法庭规则编者）含 winslow → 由 EXCLUDE_TITLE 按题名排。
     "taylor": [["taylor", "frederick", "winslow"]],
+    # ★ Gilbreth #39：目标署名形态为 `Gilbreth, Frank Bunker, 1868-1924`／
+    #   `Gilbreth, Frank Bunker`（无逗号）／`Frank B. Gilbreth`（混凝土桩报告）。
+    #   REQUIRE 钉住 gilbreth+frank+bunker：儿子(1911-2001)虽同名同形，但
+    #   EXCLUDE 按生卒年/题名排；妻子 Lillian 独著不含 frank+bunker → 天然挡。
+    "gilbreth": [["gilbreth", "frank", "bunker"]],
 }
 
 

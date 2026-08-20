@@ -1,0 +1,91 @@
+{
+  "总数": 9,
+  "计数": {
+    "一手": 9,
+    "二手": 0,
+    "需人判": 0
+  },
+  "一手占比下界": 1.0,
+  "一手占比上界": 1.0,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "gilbreth"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "appliedmotionstu00gilbrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「papers」",
+      "title": "Applied motion study; a collection of papers on the efficient method to industri",
+      "creator": "Gilbreth, Frank Bunker, 1868-1924; Gilbreth, Lillian Moller, 1878-1972",
+      "words": 46574
+    },
+    {
+      "identifier": "bricklayingsyste00gilb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Bricklaying system",
+      "creator": "Gilbreth, Frank Bunker, 1868-1924",
+      "words": 62550
+    },
+    {
+      "identifier": "fatiguestudyelim1916gilb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Fatigue study, the elimination of humanity's greatest unnecessary waste; a first",
+      "creator": "Gilbreth, Frank Bunker, 1868-1924; Gilbreth, Lillian Moller, 1878-1972",
+      "words": 32465
+    },
+    {
+      "identifier": "fieldsystem00gilb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Field system",
+      "creator": "Gilbreth, Frank Bunker, 1868-1924",
+      "words": 39629
+    },
+    {
+      "identifier": "measurementofhum00gilb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Measurement of the human factor in industry",
+      "creator": "Gilbreth, Frank Bunker, 1868-1924; Gilbreth, Lillian Moller, 1878-1972, joint au",
+      "words": 5015
+    },
+    {
+      "identifier": "motionstudyforha00gilbuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Motion study for the handicapped",
+      "creator": "Gilbreth, Frank Bunker, 1868-1924; Gilbreth, Lillian Evelyn, 1878-",
+      "words": 44318
+    },
+    {
+      "identifier": "motionstudymetho00gilbrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Motion study : a method for increasing the efficiency of the workman",
+      "creator": "Gilbreth, Frank Bunker, 1868-1924",
+      "words": 28453
+    },
+    {
+      "identifier": "primerofscientif00gilb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Primer of scientific management",
+      "creator": "Gilbreth, Frank Bunker, 1868-1924",
+      "words": 42057
+    },
+    {
+      "identifier": "processcharts01gilb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Process charts",
+      "creator": "Gilbreth, Frank Bunker, 1868-1924; Gilbreth, Lillian Moller, 1878-1972, joint au",
+      "words": 4884
+    }
+  ]
+}

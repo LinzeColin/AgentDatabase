@@ -1,0 +1,279 @@
+{
+ "生成时刻": "2026-08-21T08:01:35",
+ "请求数": 1,
+ "已取回": 11,
+ "skipped_access_restricted": 0,
+ "剔除": 0,
+ "失败": 1,
+ "并发降级": "无（全程并发 4）",
+ "总词数": 398732,
+ "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
+ "记录": [
+  {
+   "identifier": "TheMakingAndDrivingOfCorrugatedConcretePilesByFrankB.Gilbreth",
+   "status": "已取回",
+   "note": "rebuild-from-disk",
+   "file": "src-84fb8b78b859/TheMakingAndDrivingOfCorrugatedConcretePilesByFrankB.Gilbreth.txt",
+   "source_url": "https://archive.org/download/TheMakingAndDrivingOfCorrugatedConcretePilesByFrankB.Gilbreth/AssociationOfAmericanPortlandCementCca31004_djvu.txt",
+   "sha256": "84fb8b78b859f6e9311977f434a0baae62a5f9924a414d75b2fbedc74d439792",
+   "bytes": 10893,
+   "words": 1903,
+   "fetched_at": "2026-08-21T08:01:35",
+   "ia_date": "[1906]",
+   "ia_year": "1906",
+   "ia_publicdate": "2012-12-03 04:37:16",
+   "ia_creator": "Gilbreth, Frank Bunker",
+   "ia_title": "The making and driving of corrugated concrete piles :/ by Frank B. Gilbreth, read before the March Quarterly Meeting of the Association of American Portland Cement Manufacturers ...March 13th and 14th, 1906. ",
+   "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "titlepage_years": [
+    "1906"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "appliedmotionstu00gilbrich",
+   "status": "已取回",
+   "note": "rebuild-from-disk",
+   "file": "src-b84ad47069dd/appliedmotionstu00gilbrich.txt",
+   "source_url": "https://archive.org/download/appliedmotionstu00gilbrich/appliedmotionstu00gilbrich_djvu.txt",
+   "sha256": "b84ad47069dd0cd7964f84fd455a1cae1d5aaff0823e701234741b8016a17fd9",
+   "bytes": 320700,
+   "words": 46574,
+   "fetched_at": "2026-08-21T07:54:05",
+   "ia_date": "1917",
+   "ia_year": "",
+   "ia_publicdate": "2007-01-26 09:48:47",
+   "ia_creator": [
+    "Gilbreth, Frank Bunker, 1868-1924",
+    "Gilbreth, Lillian Moller, 1878-1972"
+   ],
+   "ia_title": "Applied motion study; a collection of papers on the efficient method to industrial preparedness",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1917"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "b28111345",
+   "status": "已取回",
+   "note": "rebuild-from-disk",
+   "file": "src-8ae7cf6e0575/b28111345.txt",
+   "source_url": "https://archive.org/download/b28111345/b28111345_djvu.txt",
+   "sha256": "8ae7cf6e057544b56e2adb398bd1fdbf333501e4f068574f32ece9454ee0d384",
+   "bytes": 625181,
+   "words": 90884,
+   "fetched_at": "2026-08-21T07:58:05",
+   "ia_date": "1914",
+   "ia_year": "",
+   "ia_publicdate": "2016-05-19 11:12:49",
+   "ia_creator": "Gilbreth, Lillian Moller, 1878-1972",
+   "ia_title": "The psychology of management : the function of the mind in determining, teaching and installing methods of least waste",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1914",
+    "1917"
+   ],
+   "digitization_years": [
+    "2016"
+   ]
+  },
+  {
+   "identifier": "bricklayingsyste00gilb",
+   "status": "已取回",
+   "note": "rebuild-from-disk",
+   "file": "src-a105f1d59a92/bricklayingsyste00gilb.txt",
+   "source_url": "https://archive.org/download/bricklayingsyste00gilb/bricklayingsyste00gilb_djvu.txt",
+   "sha256": "a105f1d59a92356cb8b081d0a3a7134b7059d4d991164ee6e3dc8036ad31633e",
+   "bytes": 404447,
+   "words": 62550,
+   "fetched_at": "2026-08-21T07:46:55",
+   "ia_date": "1909",
+   "ia_year": "",
+   "ia_publicdate": "2015-01-30 23:03:34",
+   "ia_creator": "Gilbreth, Frank Bunker, 1868-1924",
+   "ia_title": "Bricklaying system",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1909"
+   ],
+   "digitization_years": [
+    "2015"
+   ]
+  },
+  {
+   "identifier": "fatiguestudyelim1916gilb",
+   "status": "已取回",
+   "note": "rebuild-from-disk",
+   "file": "src-39dfef403efb/fatiguestudyelim1916gilb.txt",
+   "source_url": "https://archive.org/download/fatiguestudyelim1916gilb/fatiguestudyelim1916gilb_djvu.txt",
+   "sha256": "39dfef403efb17b881b19f0b57fc5c507d477818651d96534abf409a733e174b",
+   "bytes": 216286,
+   "words": 32465,
+   "fetched_at": "2026-08-21T07:46:17",
+   "ia_date": "1916",
+   "ia_year": "",
+   "ia_publicdate": "2010-04-28 17:23:54",
+   "ia_creator": [
+    "Gilbreth, Frank Bunker, 1868-1924",
+    "Gilbreth, Lillian Moller, 1878-1972"
+   ],
+   "ia_title": "Fatigue study, the elimination of humanity's greatest unnecessary waste; a first step in motion study",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1916"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "fieldsystem00gilb",
+   "status": "已取回",
+   "note": "rebuild-from-disk",
+   "file": "src-512232eb4755/fieldsystem00gilb.txt",
+   "source_url": "https://archive.org/download/fieldsystem00gilb/fieldsystem00gilb_djvu.txt",
+   "sha256": "512232eb47552af7e878ac25dde8f64ed5194a57da645b8e48f58b110fa7aa7a",
+   "bytes": 263359,
+   "words": 39629,
+   "fetched_at": "2026-08-21T07:47:13",
+   "ia_date": "1908",
+   "ia_year": "",
+   "ia_publicdate": "2011-05-23 12:06:32",
+   "ia_creator": "Gilbreth, Frank Bunker, 1868-1924",
+   "ia_title": "Field system",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1904",
+    "1907",
+    "1908"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "measurementofhum00gilb",
+   "status": "已取回",
+   "note": "rebuild-from-disk",
+   "file": "src-2019536f67f7/measurementofhum00gilb.txt",
+   "source_url": "https://archive.org/download/measurementofhum00gilb/measurementofhum00gilb_djvu.txt",
+   "sha256": "2019536f67f7df3225e62853e4f55231c1e89ec255f0c3fd2c871221554d0e19",
+   "bytes": 34442,
+   "words": 5015,
+   "fetched_at": "2026-08-21T07:48:14",
+   "ia_date": "1917",
+   "ia_year": "",
+   "ia_publicdate": "2012-02-28 00:45:22",
+   "ia_creator": [
+    "Gilbreth, Frank Bunker, 1868-1924",
+    "Gilbreth, Lillian Moller, 1878-1972, joint author"
+   ],
+   "ia_title": "Measurement of the human factor in industry",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1915",
+    "1917"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "motionstudyforha00gilbuoft",
+   "status": "已取回",
+   "note": "rebuild-from-disk",
+   "file": "../raw-holdout/src-6d9c3e11ab6d/motionstudyforha00gilbuoft.txt",
+   "source_url": "https://archive.org/download/motionstudyforha00gilbuoft/motionstudyforha00gilbuoft_djvu.txt",
+   "sha256": "6d9c3e11ab6d774de267fe078267f2932ac410b6822b885b660273e7c2573215",
+   "bytes": 301257,
+   "words": 44318,
+   "fetched_at": "2026-08-21T07:48:29",
+   "ia_date": "1920",
+   "ia_year": "",
+   "ia_publicdate": "2007-08-31 21:44:31",
+   "ia_creator": [
+    "Gilbreth, Frank Bunker, 1868-1924",
+    "Gilbreth, Lillian Evelyn, 1878-"
+   ],
+   "ia_title": "Motion study for the handicapped",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1914",
+    "1919",
+    "1920"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "motionstudymetho00gilbrich",
+   "status": "已取回",
+   "note": "rebuild-from-disk",
+   "file": "src-d229be6683e5/motionstudymetho00gilbrich.txt",
+   "source_url": "https://archive.org/download/motionstudymetho00gilbrich/motionstudymetho00gilbrich_djvu.txt",
+   "sha256": "d229be6683e5ec9fa3f31a7088a1c540ef1d8f5367260ebc38407341d87ae9f7",
+   "bytes": 192646,
+   "words": 28453,
+   "fetched_at": "2026-08-21T07:46:05",
+   "ia_date": "1911",
+   "ia_year": "",
+   "ia_publicdate": "2007-01-19 09:43:10",
+   "ia_creator": "Gilbreth, Frank Bunker, 1868-1924",
+   "ia_title": "Motion study : a method for increasing the efficiency of the workman",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1911",
+    "1921",
+    "2006"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "onebestwaytodowo00gilb",
+   "status": "正文取不到",
+   "note": "HTTP 500 on onebestwaytodowo00gilb_djvu.txt"
+  },
+  {
+   "identifier": "primerofscientif00gilb",
+   "status": "已取回",
+   "note": "rebuild-from-disk",
+   "file": "src-51659308714b/primerofscientif00gilb.txt",
+   "source_url": "https://archive.org/download/primerofscientif00gilb/primerofscientif00gilb_djvu.txt",
+   "sha256": "51659308714b154c3b7f5136c9060fdb4061957a7f473ba740af96f34dfb3606",
+   "bytes": 291145,
+   "words": 42057,
+   "fetched_at": "2026-08-21T07:46:41",
+   "ia_date": "1912",
+   "ia_year": "",
+   "ia_publicdate": "2011-08-30 16:15:54",
+   "ia_creator": "Gilbreth, Frank Bunker, 1868-1924",
+   "ia_title": "Primer of scientific management",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1911",
+    "1912"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "processcharts01gilb",
+   "status": "已取回",
+   "note": "rebuild-from-disk",
+   "file": "src-4613a3b8b48f/processcharts01gilb.txt",
+   "source_url": "https://archive.org/download/processcharts01gilb/processcharts01gilb_djvu.txt",
+   "sha256": "4613a3b8b48f6e47e92c8341ae71eaf7f551c3c892eb96b75332138e7bdbd371",
+   "bytes": 35449,
+   "words": 4884,
+   "fetched_at": "2026-08-21T07:54:17",
+   "ia_date": "1921",
+   "ia_year": "",
+   "ia_publicdate": "2011-08-30 15:43:29",
+   "ia_creator": [
+    "Gilbreth, Frank Bunker, 1868-1924",
+    "Gilbreth, Lillian Moller, 1878-1972, joint author",
+    "American society of mechanical engineers. [from old catalog]"
+   ],
+   "ia_title": "Process charts",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1921",
+    "1932"
+   ],
+   "digitization_years": []
+  }
+ ]
+}

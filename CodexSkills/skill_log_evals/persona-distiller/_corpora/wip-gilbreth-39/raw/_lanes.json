@@ -1,0 +1,61 @@
+{
+  "lanes": 1,
+  "去掉纸面道后": 1,
+  "逐道份数": {
+    "writings": 9,
+    "conversations": 0,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 0,
+    "external": 0
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "appliedmotionstu00gilbrich",
+      "道": "writings",
+      "title": "Applied motion study; a collection of papers on the efficient method t"
+    },
+    {
+      "identifier": "bricklayingsyste00gilb",
+      "道": "writings",
+      "title": "Bricklaying system"
+    },
+    {
+      "identifier": "fatiguestudyelim1916gilb",
+      "道": "writings",
+      "title": "Fatigue study, the elimination of humanity's greatest unnecessary wast"
+    },
+    {
+      "identifier": "fieldsystem00gilb",
+      "道": "writings",
+      "title": "Field system"
+    },
+    {
+      "identifier": "measurementofhum00gilb",
+      "道": "writings",
+      "title": "Measurement of the human factor in industry"
+    },
+    {
+      "identifier": "motionstudyforha00gilbuoft",
+      "道": "writings",
+      "title": "Motion study for the handicapped"
+    },
+    {
+      "identifier": "motionstudymetho00gilbrich",
+      "道": "writings",
+      "title": "Motion study : a method for increasing the efficiency of the workman"
+    },
+    {
+      "identifier": "primerofscientif00gilb",
+      "道": "writings",
+      "title": "Primer of scientific management"
+    },
+    {
+      "identifier": "processcharts01gilb",
+      "道": "writings",
+      "title": "Process charts"
+    }
+  ]
+}
