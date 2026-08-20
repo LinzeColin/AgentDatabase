@@ -22,7 +22,7 @@ export async function render(host) {
   const champ = C.champion ? `
 ${bento([
   { k: '现在这一步', v: `${esc(S[C.champion.stage] || C.champion.stage)}`, size: 'sm',
-    n: esc(C.champion.stage), w: 3, tone: 'acc' },
+    n: '漏斗六档里的第 ' + (1 + (C.stages || []).indexOf(C.champion.stage)) + ' 档', w: 3, tone: 'acc' },
   { k: '为什么是现在', v: `${esc((C.champion.why_now || '—').slice(0, 40))}`, size: 'sm', w: 3 },
 ])}
 ${card(`
@@ -55,7 +55,8 @@ ${(C.champion.evidence || []).length ? `<p class="hint"><b>依据：</b>${
   const stages = C.stages || [];
   const total = stages.reduce((a, s) => a + (C.funnel[s] || 0), 0);
   const funnel = orbit(stages.map(s => ({
-    k: `${s}　${S[s] || ''}`, v: C.funnel[s] || 0, label: String(C.funnel[s] || 0),
+    k: `${S[s] || s}`, v: C.funnel[s] || 0,
+    label: `${C.funnel[s] || 0}　${s}`,   // 中文在前：这一屏给人看，schema 名是给 agent 写事件用的
   })));
 
   host.innerHTML = `
@@ -74,7 +75,7 @@ ${funnel}
 ${(C.funnel_moves || []).length ? `${sec('最近的状态变化')}
 ${table([{ t: '候选' }, { t: '从' }, { t: '到' }, { t: '什么时候' }],
   (C.funnel_moves || []).map(m => [esc(m.candidate),
-    `${esc(m.from)}　${esc(S[m.from] || '')}`, `<b>${esc(m.to)}　${esc(S[m.to] || '')}</b>`,
+    `${esc(S[m.from] || m.from)}`, `<b>${esc(S[m.to] || m.to)}</b>`,
     esc((m.at || '').slice(0, 10))]))}`
   : '<p class="hint">还没有任何状态变化 —— 漏斗强调的是「动了没有」，不是累计数量。</p>'}
 
@@ -101,7 +102,7 @@ ${(C.closeout.lessons || []).length || (C.closeout.unresolved || []).length
      ${(C.closeout.unresolved || []).length ? drawer(`未了事项 ${C.closeout.unresolved.length} 条`,
         table([{ t: '项目' }, { t: '还欠着什么' }],
           C.closeout.unresolved.map(u => [esc(u.project), esc(u.what)]))) : ''}`
-  : '<p class="hint">还没有收到任何 closeout 事件。Claude Code 与 Codex 已挂 SessionEnd/PreCompact 钩子，'
+  : '<p class="hint">还没有收到任何收尾事件（closeout）。Claude Code 与 Codex 已挂 SessionEnd/PreCompact 钩子，'
     + 'Kimi Code 与 DSH 没有钩子机制，需要手动跑一次归档。</p>'}
 
 ${sec('失败有没有变成防复发资产', esc(C.failure_bridge.note))}
@@ -113,7 +114,7 @@ ${bento([
 
 ${drawer(`候选全表（${(C.candidates || []).length} 条）`, (C.candidates || []).length
   ? table([{ t: '这一步' }, { t: '类型' }, { t: '问题' }, { t: '证据', r: true }, { t: '最近出现' }],
-      (C.candidates || []).map(c => [`${esc(c.stage)}　${esc(S[c.stage] || '')}`,
+      (C.candidates || []).map(c => [`${esc(S[c.stage] || c.stage)}`,
         esc(c.type), esc(c.problem), String((c.evidence || []).length), esc((c.last_seen || '').slice(0, 10))]))
   : '<p class="hint">还没有候选。</p>')}
 
