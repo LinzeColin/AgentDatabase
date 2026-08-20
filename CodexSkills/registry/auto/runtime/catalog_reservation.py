@@ -54,6 +54,7 @@ EXPLICIT_SOURCE_ROOT_NON_SKILL_ENTRIES = {
     "claude": {},
     "codex": {
         ".DS_Store": "OS_METADATA",
+        ".backups": "NON_SKILL_BACKUP_DIRECTORY_INCLUDED_IN_SOURCE_COVERAGE",
         ".system": "SOURCE_OVERLAP",
         ".verifier-backups": "NON_SKILL_DOT_DIRECTORY_INCLUDED_IN_SOURCE_COVERAGE",
         ".wbi-install-transactions": (
@@ -509,11 +510,45 @@ def inventory_source_roots(
     source_roots: Mapping[str, Path],
     *,
     enforce_exact_aliases: bool,
+    source_namespaces: Sequence[str] = SOURCE_NAMESPACES,
+    selected_skill_slugs: Mapping[str, Sequence[str]] | None = None,
 ) -> SourceRootInventory:
     skills: Dict[Tuple[str, str], str] = {}
     counts: Dict[str, int] = {}
     non_skill: Dict[str, Tuple[Mapping[str, str], ...]] = {}
-    for namespace in SOURCE_NAMESPACES:
+    selected_namespaces = tuple(source_namespaces)
+    if (
+        not selected_namespaces
+        or len(set(selected_namespaces)) != len(selected_namespaces)
+        or any(namespace not in SOURCE_NAMESPACES for namespace in selected_namespaces)
+    ):
+        raise CatalogReservationError("SOURCE_NAMESPACE_SELECTION_INVALID")
+    if enforce_exact_aliases and (
+        selected_namespaces != SOURCE_NAMESPACES
+        or selected_skill_slugs is not None
+    ):
+        raise CatalogReservationError("SOURCE_ALIAS_SCOPE_REQUIRES_ALL")
+    requested_slugs: Dict[str, Tuple[str, ...]] = {}
+    if selected_skill_slugs is not None:
+        if any(namespace not in selected_namespaces for namespace in selected_skill_slugs):
+            raise CatalogReservationError("SOURCE_NAMESPACE_SELECTION_INVALID")
+        for namespace in selected_namespaces:
+            slugs = tuple(selected_skill_slugs.get(namespace, ()))
+            if (
+                not slugs
+                or len(set(slugs)) != len(slugs)
+                or any(
+                    not isinstance(slug, str)
+                    or not slug
+                    or slug in {".", ".."}
+                    or "/" in slug
+                    or "\\" in slug
+                    for slug in slugs
+                )
+            ):
+                raise CatalogReservationError("SOURCE_SKILL_SELECTION_INVALID")
+            requested_slugs[namespace] = slugs
+    for namespace in selected_namespaces:
         if namespace not in source_roots:
             raise CatalogReservationError("SOURCE_NAMESPACE_MISSING", namespace)
         root = assert_real_directory(
@@ -526,64 +561,76 @@ def inventory_source_roots(
             raise CatalogReservationError(
                 "SOURCE_ROOT_RESTAT_FAILED"
             ) from exc
-        allowed_non_skill = EXPLICIT_SOURCE_ROOT_NON_SKILL_ENTRIES[namespace]
         observed_non_skill: List[Mapping[str, str]] = []
-        try:
-            with os.scandir(str(root)) as iterator:
-                entries = sorted(iterator, key=lambda item: item.name.encode("utf-8"))
-        except (OSError, UnicodeError) as exc:
-            raise CatalogReservationError("SOURCE_ROOT_ENUMERATION_FAILED") from exc
         names: List[str] = []
-        for entry in entries:
+        if selected_skill_slugs is not None:
+            for slug in requested_slugs[namespace]:
+                selected_root = assert_real_directory(
+                    root / slug,
+                    "SOURCE_SELECTED_SKILL_NOT_REAL_DIRECTORY",
+                )
+                if not _within(root, selected_root):
+                    raise CatalogReservationError("SOURCE_SELECTED_SKILL_ESCAPE")
+                names.append(slug)
+                skills[(namespace, slug)] = str(selected_root)
+        else:
+            allowed_non_skill = EXPLICIT_SOURCE_ROOT_NON_SKILL_ENTRIES[namespace]
             try:
-                info = entry.stat(follow_symlinks=False)
-            except OSError as exc:
-                raise CatalogReservationError("SOURCE_ROOT_ENTRY_LSTAT_FAILED") from exc
-            reason = allowed_non_skill.get(entry.name)
-            if reason is not None:
-                if entry.name in {
-                    ".system",
-                    ".verifier-backups",
-                    ".wbi-install-transactions",
-                }:
-                    if stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(info.st_mode):
-                        raise CatalogReservationError(
-                            "SOURCE_ROOT_NON_SKILL_TYPE_DRIFT",
-                            f"{namespace}/{entry.name}",
-                        )
-                    kind = "DIRECTORY"
-                else:
-                    if stat.S_ISLNK(info.st_mode) or not stat.S_ISREG(info.st_mode):
-                        raise CatalogReservationError(
-                            "SOURCE_ROOT_NON_SKILL_TYPE_DRIFT",
-                            f"{namespace}/{entry.name}",
-                        )
-                    kind = "REGULAR_FILE"
-                observed_non_skill.append(
-                    {
-                        "entry_name": entry.name,
-                        "entry_type": kind,
-                        "reason_code": reason,
-                    }
-                )
-                continue
-            if entry.name.startswith("."):
-                raise CatalogReservationError(
-                    "SOURCE_ROOT_UNCLASSIFIED_DOT_ENTRY",
-                    f"{namespace}/{entry.name}",
-                )
-            if stat.S_ISLNK(info.st_mode):
-                raise CatalogReservationError(
-                    "SOURCE_SKILL_ROOT_SYMLINK_FORBIDDEN",
-                    f"{namespace}/{entry.name}",
-                )
-            if not stat.S_ISDIR(info.st_mode):
-                raise CatalogReservationError(
-                    "SOURCE_ROOT_UNCLASSIFIED_NON_DIRECTORY",
-                    f"{namespace}/{entry.name}",
-                )
-            names.append(entry.name)
-            skills[(namespace, entry.name)] = str(root / entry.name)
+                with os.scandir(str(root)) as iterator:
+                    entries = sorted(iterator, key=lambda item: item.name.encode("utf-8"))
+            except (OSError, UnicodeError) as exc:
+                raise CatalogReservationError("SOURCE_ROOT_ENUMERATION_FAILED") from exc
+            for entry in entries:
+                try:
+                    info = entry.stat(follow_symlinks=False)
+                except OSError as exc:
+                    raise CatalogReservationError("SOURCE_ROOT_ENTRY_LSTAT_FAILED") from exc
+                reason = allowed_non_skill.get(entry.name)
+                if reason is not None:
+                    if entry.name in {
+                        ".system",
+                        ".backups",
+                        ".verifier-backups",
+                        ".wbi-install-transactions",
+                    }:
+                        if stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(info.st_mode):
+                            raise CatalogReservationError(
+                                "SOURCE_ROOT_NON_SKILL_TYPE_DRIFT",
+                                f"{namespace}/{entry.name}",
+                            )
+                        kind = "DIRECTORY"
+                    else:
+                        if stat.S_ISLNK(info.st_mode) or not stat.S_ISREG(info.st_mode):
+                            raise CatalogReservationError(
+                                "SOURCE_ROOT_NON_SKILL_TYPE_DRIFT",
+                                f"{namespace}/{entry.name}",
+                            )
+                        kind = "REGULAR_FILE"
+                    observed_non_skill.append(
+                        {
+                            "entry_name": entry.name,
+                            "entry_type": kind,
+                            "reason_code": reason,
+                        }
+                    )
+                    continue
+                if entry.name.startswith("."):
+                    raise CatalogReservationError(
+                        "SOURCE_ROOT_UNCLASSIFIED_DOT_ENTRY",
+                        f"{namespace}/{entry.name}",
+                    )
+                if stat.S_ISLNK(info.st_mode):
+                    raise CatalogReservationError(
+                        "SOURCE_SKILL_ROOT_SYMLINK_FORBIDDEN",
+                        f"{namespace}/{entry.name}",
+                    )
+                if not stat.S_ISDIR(info.st_mode):
+                    raise CatalogReservationError(
+                        "SOURCE_ROOT_UNCLASSIFIED_NON_DIRECTORY",
+                        f"{namespace}/{entry.name}",
+                    )
+                names.append(entry.name)
+                skills[(namespace, entry.name)] = str(root / entry.name)
         counts[namespace] = len(names)
         non_skill[namespace] = tuple(observed_non_skill)
         try:
@@ -594,11 +641,7 @@ def inventory_source_roots(
             ) from exc
         if not _same_lstat(root_before, root_after):
             raise CatalogReservationError("SOURCE_ROOT_CHANGED_DURING_SCAN")
-    aliases = (
-        assert_exact_alias_set(source_roots)
-        if enforce_exact_aliases
-        else tuple()
-    )
+    aliases = assert_exact_alias_set(source_roots) if enforce_exact_aliases else tuple()
     return SourceRootInventory(
         skills=skills,
         skill_counts=counts,

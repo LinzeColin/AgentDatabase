@@ -389,8 +389,14 @@ def parse_frontmatter(path):
 # ---------------------------------------------------------------- 盘点
 
 
-def inventory(*, enforce_exact_aliases=False):
+def inventory(
+    *,
+    enforce_exact_aliases=False,
+    source_namespaces=SOURCE_NAMESPACES,
+    selected_skill_slugs=None,
+):
     """Lstat-first 扫描全部来源，返回 {(source, slug): 本机绝对路径}。"""
+    selected_namespaces = tuple(source_namespaces)
     source_roots = {
         source: Path(meta["path"])
         for source, meta in SOURCES.items()
@@ -399,9 +405,14 @@ def inventory(*, enforce_exact_aliases=False):
         observed = inventory_source_roots(
             source_roots,
             enforce_exact_aliases=enforce_exact_aliases,
+            source_namespaces=selected_namespaces,
+            selected_skill_slugs=selected_skill_slugs,
         )
     except CatalogReservationError as exc:
-        for source, source_path in source_roots.items():
+        for source in selected_namespaces:
+            source_path = source_roots.get(source)
+            if source_path is None:
+                continue
             try:
                 info = os.lstat(source_path)
             except OSError:
@@ -416,7 +427,7 @@ def inventory(*, enforce_exact_aliases=False):
             f"{exc}"
         ) from exc
 
-    for source in SOURCE_NAMESPACES:
+    for source in selected_namespaces:
         log(f"  · {source}: {observed.skill_counts[source]} 个")
         for row in observed.explicit_non_skill_entries[source]:
             log(
@@ -1150,12 +1161,30 @@ def main():
     catalog_root = os.path.join(root, CATALOG_DIRNAME)
     mirror_root = os.path.join(root, REGISTRY_DIRNAME)
 
+    selected_sources = SOURCE_NAMESPACES
+    selected_skills = None
+    if args.only:
+        selected_source, separator, selected_slug = args.only.partition("/")
+        if (
+            not separator
+            or not selected_slug
+            or selected_source not in SOURCES
+        ):
+            log(f"无效的受控单项范围：{args.only}")
+            return 2
+        selected_sources = (selected_source,)
+        selected_skills = {selected_source: (selected_slug,)}
+
     log("=== 1/6 盘点本机 skill ===")
     try:
         # 全量同步必须核验所有来源 alias，避免误删或复制漂移的来源树。
         # 单项同步不复制或删除未选中的 Skill；目标自身仍在 mirror() 的
         # walk_entries() 阶段按 EXPECTED_SOURCE_ALIASES 逐项验证。
-        inv = inventory(enforce_exact_aliases=not bool(args.only))
+        inv = inventory(
+            enforce_exact_aliases=not bool(args.only),
+            source_namespaces=selected_sources,
+            selected_skill_slugs=selected_skills,
+        )
     except RuntimeError as exc:
         log(f"  ✗ {exc}")
         return 2

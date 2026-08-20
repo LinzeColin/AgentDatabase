@@ -546,6 +546,26 @@ class RuntimeCatalogReservationTests(unittest.TestCase):
                     enforce_exact_aliases=False,
                 )
 
+    def test_selected_source_inventory_does_not_require_other_roots(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            selected = root / "codex"
+            (selected / "demo").mkdir(parents=True)
+            (selected / "unrelated").symlink_to("demo")
+
+            observed = inventory_source_roots(
+                {"codex": selected},
+                enforce_exact_aliases=False,
+                source_namespaces=("codex",),
+                selected_skill_slugs={"codex": ("demo",)},
+            )
+
+            self.assertEqual(
+                observed.skills,
+                {("codex", "demo"): str((selected / "demo").resolve())},
+            )
+            self.assertEqual(observed.skill_counts, {"codex": 1})
+
     def test_wbi_operational_entries_are_explicit_non_skills(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -605,6 +625,32 @@ class RuntimeCatalogReservationTests(unittest.TestCase):
                     roots,
                     enforce_exact_aliases=False,
                 )
+
+    def test_backup_directory_is_an_explicit_non_skill(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            roots = {}
+            for namespace in SOURCE_NAMESPACES:
+                source = root / namespace
+                (source / "demo").mkdir(parents=True)
+                roots[namespace] = source
+            (roots["codex"] / ".backups").mkdir()
+
+            observed = inventory_source_roots(
+                roots,
+                enforce_exact_aliases=False,
+            )
+
+            self.assertIn(
+                {
+                    "entry_name": ".backups",
+                    "entry_type": "DIRECTORY",
+                    "reason_code": (
+                        "NON_SKILL_BACKUP_DIRECTORY_INCLUDED_IN_SOURCE_COVERAGE"
+                    ),
+                },
+                observed.explicit_non_skill_entries["codex"],
+            )
 
     def test_alias_escape_fails_closed_without_exposing_absolute_root(
         self,
