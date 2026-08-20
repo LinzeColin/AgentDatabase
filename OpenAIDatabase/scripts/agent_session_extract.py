@@ -44,6 +44,10 @@ SOURCES = {
     "workbuddy":   {"root": HOME / ".workbuddy" / "logs",  "parser": "auto",      "payload_mb": 136},
     "dws":         {"root": HOME / ".dws" / "audit",       "parser": "auto",      "payload_mb": 35},
     "openchatcut": {"root": HOME / ".openchatcut" / "project-store-v1", "parser": "auto", "payload_mb": 8},
+    # 本仓已入库的历史导出。本机 ~/.claude 只到 2026-07-03，而这里的 chatgpt
+    # 导出能回溯到 2025-11 —— 不接它，「全历史」和「180 天」切片就是假的。
+    "chatgpt-archive": {"root": Path("OpenAIDatabase/data/public_raw/chatgpt"), "parser": "envelope", "payload_mb": 0},
+    "codex-archive":   {"root": Path("OpenAIDatabase/data/public_raw/codex"),   "parser": "envelope", "payload_mb": 0},
 }
 
 # 查过但**没有可入库内容**的来源，登记在此以免下次又有人去挖：
@@ -181,21 +185,109 @@ def extract_jsonl_session(path: Path, source_id: str) -> dict | None:
     }
 
 
-def extract_source(source_id: str, out_dir: Path, stats_only: bool = False) -> dict:
+def _load_state(out_dir: Path, source_id: str) -> dict:
+    """增量状态：文件路径 -> (mtime, size)。这是「每日沉淀」的关键 ——
+    没有它每天都要重扫 4.3GB，跑不进 codex 那 90 分钟批次。"""
+    f = out_dir / f".{source_id}.state.json"
+    if f.is_file():
+        try:
+            return json.loads(f.read_text(encoding="utf-8"))
+        except ValueError:
+            return {}
+    return {}
+
+
+def _save_state(out_dir: Path, source_id: str, state: dict) -> None:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / f".{source_id}.state.json").write_text(
+        json.dumps(state, ensure_ascii=False, sort_keys=True), encoding="utf-8")
+
+
+def extract_envelope(path: Path, source_id: str) -> dict | None:
+    """已入库导出的信封格式：整文件一个 dict，有 created_at 与 messages[]。
+    和本机 jsonl 不同结构，所以单独一个解析器 —— 不去猜、不去合并。"""
+    try:
+        d = json.loads(path.read_text(encoding="utf-8", errors="ignore"))
+    except (ValueError, OSError):
+        return None
+    if not isinstance(d, dict):
+        return None
+    msgs = d.get("messages") or []
+    if not isinstance(msgs, list) or not msgs:
+        return None
+    users = [_text_of(m) for m in msgs
+             if isinstance(m, dict) and m.get("role") == "user"]
+    joined = redact(" ".join(u for u in users if u))[:4000]
+    occurred = str(d.get("created_at") or d.get("occurred_at") or "")[:19] or None
+    if not occurred:
+        return None
+    rid = f"{source_id}-{(d.get('conversation_id') or path.stem)[:40]}"
+    return {
+        "source_id": source_id, "record_id": rid, "occurred_at": occurred,
+        "record_type": f"{source_id}_session_summary",
+        "title": redact(users[0][:120]) if users else f"{source_id} 会话",
+        "summary": joined[:1200], "topics": topics_of(joined),
+        "sensitivity": "private_redacted_derived", "memory_tier": "一般",
+        "importance": "中" if len(users) >= 5 else "低", "confidence": "高",
+        "dedupe_key": hashlib.sha256(f"{source_id}:{rid}".encode()).hexdigest()[:32],
+        "source_kind": "ingested_export",
+        "behavior_metrics": {
+            "message_count": d.get("message_count") or len(msgs),
+            "user_turn_count": len(users), "tool_call_count": 0,
+            "error_mention_count": 0, "raw_bytes": path.stat().st_size,
+            "last_activity": occurred,
+        },
+        "project_refs": [],
+    }
+
+
+def extract_source(source_id: str, out_dir: Path, stats_only: bool = False,
+                   incremental: bool = False) -> dict:
     cfg = SOURCES[source_id]
     root = Path(cfg["root"])
     if not root.exists():
         return {"source_id": source_id, "state": "MISSING_SOURCE", "root": str(root)}
     files = [p for p in root.rglob("*.jsonl")] or [p for p in root.rglob("*.json")]
-    events, raw_bytes = [], 0
+
+    prev = _load_state(out_dir, source_id) if incremental else {}
+    kept = {}
+    if incremental:
+        # 已有事件按 record_id 保留，只重算变化的文件。
+        old_events = {}
+        tgt = out_dir / f"{source_id}.events.jsonl"
+        if tgt.is_file():
+            for line in tgt.read_text(encoding="utf-8", errors="ignore").splitlines():
+                if line.strip():
+                    try:
+                        e = json.loads(line)
+                        old_events[e["record_id"]] = e
+                    except (ValueError, KeyError):
+                        continue
+        kept = old_events
+
+    events, raw_bytes, rescanned, new_state = [], 0, 0, {}
     for p in files:
         try:
-            raw_bytes += p.stat().st_size
+            st = p.stat()
         except OSError:
             continue
-        ev = extract_jsonl_session(p, source_id)
+        raw_bytes += st.st_size
+        key = str(p)
+        sig = [int(st.st_mtime), st.st_size]
+        new_state[key] = sig
+        if incremental and prev.get(key) == sig:
+            continue                    # 没变，跳过重算
+        rescanned += 1
+        ev = (extract_envelope(p, source_id) if cfg.get("parser") == "envelope"
+              else extract_jsonl_session(p, source_id))
         if ev:
             events.append(ev)
+
+    if incremental:
+        for e in events:
+            kept[e["record_id"]] = e     # 新的覆盖旧的
+        events = sorted(kept.values(), key=lambda e: e["occurred_at"])
+
     out_bytes = 0
     if events and not stats_only:
         out_dir.mkdir(parents=True, exist_ok=True)
@@ -203,12 +295,14 @@ def extract_source(source_id: str, out_dir: Path, stats_only: bool = False) -> d
         body = "\n".join(json.dumps(e, ensure_ascii=False, sort_keys=True) for e in events) + "\n"
         target.write_text(body, encoding="utf-8")
         out_bytes = len(body.encode("utf-8"))
+        if incremental:
+            _save_state(out_dir, source_id, new_state)
     elif events:
         out_bytes = sum(len(json.dumps(e, ensure_ascii=False).encode()) for e in events) + len(events)
     return {
         "source_id": source_id, "state": "READY" if events else "NO_EVENTS",
         "files_scanned": len(files), "events": len(events),
-        "raw_mb": round(raw_bytes / 1048576, 1),
+        "raw_mb": round(raw_bytes / 1048576, 1), "rescanned": rescanned,
         "out_mb": round(out_bytes / 1048576, 2),
         "reduction_pct": round(100 - out_bytes * 100 / raw_bytes, 2) if raw_bytes else 0,
     }
@@ -219,6 +313,8 @@ def main() -> int:
     ap.add_argument("--source", default="all", help="来源 id 或 all")
     ap.add_argument("--out", default="_out")
     ap.add_argument("--stats-only", action="store_true", help="只统计不落盘")
+    ap.add_argument("--incremental", action="store_true",
+                    help="只重算 mtime/size 变化的文件（每日跑必须开）")
     args = ap.parse_args()
     ids = list(SOURCES) if args.source == "all" else [args.source]
     bad = [i for i in ids if i not in SOURCES]
@@ -226,15 +322,16 @@ def main() -> int:
         print(f"FAIL: 未知来源 {bad}；可选 {list(SOURCES)}")
         return 1
     out = Path(args.out)
-    rows = [extract_source(i, out, args.stats_only) for i in ids]
+    rows = [extract_source(i, out, args.stats_only, args.incremental) for i in ids]
     tr = sum(r.get("raw_mb", 0) for r in rows)
     to = sum(r.get("out_mb", 0) for r in rows)
-    print(f"{'来源':<14}{'状态':<16}{'文件':>7}{'事件':>8}{'原始MB':>10}{'产出MB':>9}{'压缩':>8}")
+    print(f"{'来源':<14}{'状态':<16}{'文件':>7}{'事件':>8}{'重算':>7}{'原始MB':>10}{'产出MB':>9}{'压缩':>8}")
     for r in rows:
         print(f"{r['source_id']:<14}{r['state']:<16}{r.get('files_scanned',0):>7}"
-              f"{r.get('events',0):>8}{r.get('raw_mb',0):>10}{r.get('out_mb',0):>9}"
+              f"{r.get('events',0):>8}{r.get('rescanned',0):>7}{r.get('raw_mb',0):>10}{r.get('out_mb',0):>9}"
               f"{str(r.get('reduction_pct',0))+'%':>8}")
     print(f"{'合计':<14}{'':<16}{'':>7}{sum(r.get('events',0) for r in rows):>8}"
+          f"{sum(r.get('rescanned',0) for r in rows):>7}"
           f"{round(tr,1):>10}{round(to,2):>9}"
           f"{(str(round(100-to*100/tr,2))+'%' if tr else '-'):>8}")
     return 0

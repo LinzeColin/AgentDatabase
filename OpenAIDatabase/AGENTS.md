@@ -142,3 +142,20 @@ python3 -m unittest discover -s tests -p "test_*.py" -q
   评估指标、memory sync、隐私门禁或派生上下文生成。
 - 治理验证：`python3 -B OpenAIDatabase/scripts/lean_governance.py --database-dir OpenAIDatabase validate`。
 - owner 预览：`python3 -B OpenAIDatabase/scripts/lean_governance.py --database-dir OpenAIDatabase check-render`。
+
+## 每日沉淀（memory atlas）
+
+本机全部 agent 会话每天自动抽取入库，**运行期零 agent 零 token**（纯脚本）。
+
+| 产物 | 位置 | 给谁看 |
+|---|---|---|
+| 教训（带出处，有预算上限） | `data/derived/agent_context/LESSONS.md` | **agent 开工前读这个** |
+| 我在用 AI 做什么 | `人类可读/memory-atlas/我在用AI做什么.md` | Owner |
+| 日记 / 日历 / 时间线 | `人类可读/memory-atlas/` | Owner |
+| canonical 事件 | `data/derived/agent_sessions/*.events.jsonl` | 机器 |
+
+驱动：`scripts/memory_atlas_daily.py`（增量，codex auto 每日触发）。
+
+**为什么只读 LESSONS.md 不读原始会话**：实测一个 151MB 的会话里用户发言只占
+1%，抽取后压缩 99.92%。LESSONS.md 有 8KB 硬上限（≈2000 tokens）——
+它每个 session 都要被读，超预算就是新的 token 负担，**超了要精简条目，不许调大上限**。

@@ -331,11 +331,77 @@
       "raw_payload_policy": "no_raw_transcripts_or_source_files",
       "writeback_policy": "proposal_only",
       "extractor": "OpenAIDatabase/scripts/agent_session_extract.py"
+    },
+    {
+      "id": "chatgpt-archive",
+      "label": "ChatGPT 历史导出",
+      "platform": "chatgpt_archive",
+      "status": "active",
+      "description": "本仓 data/public_raw/chatgpt 已入库导出的脱敏派生摘要（可回溯到 2025-11）",
+      "record_types": [
+        "chatgpt-archive_session_summary"
+      ],
+      "ingestion_status": "active_real_local_redacted_summary",
+      "expected_minimal_fields": [
+        "session_id",
+        "day",
+        "message_count",
+        "topics",
+        "user_turn_count"
+      ],
+      "agent_use": [
+        "behavior_analysis",
+        "agent_personalization"
+      ],
+      "privacy_level": "private_redacted_derived",
+      "raw_payload_policy": "no_raw_transcripts_or_source_files",
+      "writeback_policy": "proposal_only",
+      "extractor": "OpenAIDatabase/scripts/agent_session_extract.py"
+    },
+    {
+      "id": "codex-archive",
+      "label": "Codex 历史导出",
+      "platform": "codex_archive",
+      "status": "active",
+      "description": "本仓 data/public_raw/codex 已入库导出的脱敏派生摘要",
+      "record_types": [
+        "codex-archive_session_summary"
+      ],
+      "ingestion_status": "active_real_local_redacted_summary",
+      "expected_minimal_fields": [
+        "session_id",
+        "day",
+        "message_count",
+        "topics",
+        "user_turn_count"
+      ],
+      "agent_use": [
+        "behavior_analysis",
+        "agent_personalization"
+      ],
+      "privacy_level": "private_redacted_derived",
+      "raw_payload_policy": "no_raw_transcripts_or_source_files",
+      "writeback_policy": "proposal_only",
+      "extractor": "OpenAIDatabase/scripts/agent_session_extract.py"
     }
   ],
   "no_ingest_sources": {
     "dsh": "~/Library/Application Support/DSH Desktop —— 1.0GB 全是 Electron 缓存，无对话数据",
     "workbuddy": "~/.workbuddy —— binaries 707MB + plugins 189MB 是安装包，logs 是运行日志非对话",
     "mmx": "~/.mmx —— 仅 config.json 与 update-state.json，8KB"
+  },
+  "daily_sediment_pipeline": {
+    "driver": "OpenAIDatabase/scripts/memory_atlas_daily.py",
+    "trigger": "codex automation memory-atlas-daily-source-capture（唯一 agent 依赖）",
+    "runtime_agent_dependency": "none",
+    "runtime_token_cost": 0,
+    "mode": "incremental_by_mtime_size",
+    "archive_granularity": "iso_week_or_finer",
+    "outputs": {
+      "events": "data/derived/agent_sessions/*.events.jsonl",
+      "lessons_for_agents": "data/derived/agent_context/LESSONS.md",
+      "analysis_for_owner": "人类可读/memory-atlas/我在用AI做什么.md",
+      "views": "人类可读/memory-atlas/{日记,日历,时间线}.md"
+    }
   }
 }
