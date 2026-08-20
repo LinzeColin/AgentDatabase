@@ -37,6 +37,9 @@ SCRIPTS = Path("OpenAIDatabase/scripts")
 EVENTS = Path("OpenAIDatabase/data/derived/agent_sessions")
 VIEWS = Path("OpenAIDatabase/人类可读/memory-atlas")
 LESSONS = Path("OpenAIDatabase/data/derived/agent_context/LESSONS.md")
+# 公开面：只放脱敏聚合，不含任何原话与路径。
+# 本仓是 PUBLIC，而事件的 title 就是 Owner 当时说的原话 —— 合同禁止入库。
+PUBLIC = Path("OpenAIDatabase/data/derived/agent_context/PUBLIC_SUMMARY.md")
 ANALYSIS = Path("OpenAIDatabase/人类可读/memory-atlas/我在用AI做什么.md")
 
 
@@ -82,6 +85,44 @@ def write_weekly(events_dir: Path, out_dir: Path) -> dict:
             "max_granularity_policy": "weekly_or_finer_only", "counts": written}
 
 
+def write_public_summary(root: Path) -> None:
+    """公开仓唯一允许的产物：纯计数与占比，零原话、零路径。
+
+    为什么单独做一份而不是「把 LESSONS 脱敏一下」：
+    脱敏是尽力而为，聚合是结构上就不含个人内容 —— 后者才敢放进 PUBLIC 仓。
+    """
+    from collections import Counter as _C
+    ev = root / EVENTS
+    topics, sources, days = _C(), _C(), set()
+    total = 0
+    for f in sorted(ev.glob("*.events.jsonl")):
+        for line in f.read_text(encoding="utf-8", errors="ignore").splitlines():
+            if not line.strip():
+                continue
+            try:
+                e = json.loads(line)
+            except ValueError:
+                continue
+            total += 1
+            days.add(str(e.get("occurred_at", ""))[:10])
+            sources[e.get("source_id", "?")] += 1
+            for t in e.get("topics", []):
+                topics[t] += 1
+    lines = ["<!-- 由 memory_atlas_daily.py 生成。只含聚合计数，无原话无路径。 -->",
+             "", "# Agent 使用聚合（公开面）", "",
+             f"会话 **{total}** 个，活跃 **{len(days)}** 天。", "",
+             "| 主题 | 会话数 | 占比 |", "|---|---|---|"]
+    for t, c in topics.most_common():
+        lines.append(f"| {t} | {c} | {c * 100 // max(total, 1)}% |")
+    lines += ["", "| 来源 | 会话数 |", "|---|---|"]
+    for s_, c in sources.most_common():
+        lines.append(f"| {s_} | {c} |")
+    lines += ["", "> 明细（含原话与路径）不入公开仓 —— 见 `.gitignore` 与",
+              "> `config/data_sources/source_registry.json` 的 privacy_contract。", ""]
+    (root / PUBLIC).parent.mkdir(parents=True, exist_ok=True)
+    (root / PUBLIC).write_text("\n".join(lines), encoding="utf-8")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo-root", default=".")
@@ -114,6 +155,8 @@ def main() -> int:
     weekly = None
     if args.weekly_archive:
         weekly = write_weekly(root / EVENTS, Path(args.weekly_archive))
+
+    write_public_summary(root)
 
     ev_files = sorted((root / EVENTS).glob("*.events.jsonl"))
     events = sum(sum(1 for line in f.read_text(encoding="utf-8", errors="ignore").splitlines()

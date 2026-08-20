@@ -29,3 +29,16 @@ data/private_imports/
 #   实际 `文档/踩坑库/` 还有 197 份，比第一份还多。
 文档/踩坑库/
 **/_ledgers/_教训库/
+
+# 每日沉淀 memory atlas —— 个人内容绝不入公开仓
+#
+# 本仓是 PUBLIC。canonical 事件里的 title 是 Owner 当时说的原话、
+# summary 是他发言的前 1200 字、project_refs 是真实本机路径。
+# source_registry.json 的隐私合同写着：
+#   raw_payload_policy = never_commit_raw_platform_exports_or_full_messages_to_github
+#   public_snapshot_policy = redacted_summary_only
+# 所以事件与人类可读视图只留在本机 / 走 Private-Database，
+# 公开仓只放脱敏聚合（见 data/derived/agent_context/PUBLIC_SUMMARY.md）。
+OpenAIDatabase/data/derived/agent_sessions/
+OpenAIDatabase/人类可读/memory-atlas/
+OpenAIDatabase/data/derived/agent_context/LESSONS.md
