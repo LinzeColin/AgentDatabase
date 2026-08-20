@@ -34,7 +34,11 @@ UA = {"User-Agent": "harness-ui-collector/1.0 (personal, non-commercial)"}
 # "Ganyu Outfits" → Ganyu. Anchored so "Paid Outfits" / "4-Star Outfits" and the
 # other bookkeeping categories on the same page never look like a character.
 OWNER_CATEGORY = re.compile(r"^(?!Paid |Free |Bundled |\d)(.+?) Outfits$")
-SKIP_OWNERS = {"Character", "Traveler", "Trailblazer"}
+# 鸣潮把稀有度也写成 "<词> Outfits" 分类（Deluxe / Premium / Signature /
+# Original），正则会把它们当成角色名。Original 尤其要挡：那是角色的默认装，
+# 它的图就是 <Name> Full Sprite.png —— 和默认锚图同一个文件，收进来就是重复变体。
+SKIP_OWNERS = {"Character", "Traveler", "Trailblazer", "Rover",
+               "Deluxe", "Premium", "Signature", "Original", "Standard"}
 
 
 def api(wiki: str, params: dict, *, timeout: int = 30) -> dict:
@@ -70,9 +74,10 @@ def describe(wiki: str, titles: list[str]) -> dict[str, dict]:
                 match = OWNER_CATEGORY.match(category["title"].replace("Category:", ""))
                 if match and match.group(1) not in SKIP_OWNERS:
                     owners.append(match.group(1))
+            categories = {c["title"].replace("Category:", "") for c in page.get("categories", [])}
             out[page["title"]] = {
                 "image": (page.get("original") or {}).get("source"),
-                "owners": owners,
+                "owners": [] if "Original Outfits" in categories else owners,
             }
         time.sleep(0.3)
     return out
