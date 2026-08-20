@@ -458,6 +458,33 @@ def build_patterns(full_name: str) -> dict:
         "TRANSLATOR_MARK": re.compile(
             r"\b(?:[üu]bersetzt|uebersetzt|translated|traduit|vertaald|p[řr]elo[žz]il|herausgegeben\s+von|Liebhaber\s+der)\b", re.I),
         "SURNAME": re.compile(surname_rx, re.I),
+        # ★★★★ 2026-08-20（Telford #183）：19 世纪工程文献三种真实署名形态。
+        #   议会证词 `Mr. Telford said…`（单姓讨论轮次，无名字）、
+        #   供水报告 `REPORT Of Thomas Telford, Civil Engineer`（OCR 噪声 H）、
+        #   西语合著 `Telford, Thomas y Alexander Nimmo`（Edinburgh Encyclopaedia）。
+        #   **三条都是新增独立分支，不改现有正则；各自受反证或同名护栏约束。**
+        # ★ A-discussion-surname：单姓讨论轮次 `Mr. <SURNAME> said…`——
+        #   **安全约束**：只有 `known_namesakes` 为空时才启用（调用点检查
+        #   `not pat.get("namesakes")`）。单姓无法区分同名者，声明了同名必须关闭。
+        #   发言动词与 DISCUSSION 同一份，区分「said」（发言）与「was praised」（评价）。
+        "DISCUSSION_SURNAME": re.compile(
+            rf"\b(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Lord|Lady)\.?[ \t]+{surname_rx}"
+            rf"(?:[ \t]+(?:said|remarked|observed|replied|added|asked|stated|"
+            rf"pointed[ \t]+out|thought|agreed)\b|[ \t]*:)", re.I),
+        # ★ A-report-of：报告型署名 `REPORT Of <Name>, Civil Engineer`——
+        #   OCR 把 `REPORT OF` 打成 `REPORT H Of`（H 是噪声）。
+        #   结构上只允许 H 与 Of 在 REPORT 与名字之间，
+        #   天然排除 `REPORT edited by X`（edited ≠ Of）。
+        "REPORT_OF": re.compile(
+            rf"REPORT[\s\S]{{0,140}}?Of[\s\S]{{0,80}}?{name_rx}\b", re.I),
+        # ★ A-coauthor-es：西语合著 `<姓>, <名> y <另一人>`——
+        #   只认本人物在合著者第一位、另一人姓名齐全（至少两词）。
+        #   单名人物（first == last）不生成（`Galen, Galen y` 无意义）。
+        "COAUTHOR_ES": (re.compile(
+            rf"\b{surname_rx},[ \t]+{first}[ \t]+y[ \t]+"
+            rf"[A-Za-z][A-Za-z.'\-]{{1,20}}[ \t]+[A-Za-z][A-Za-z.'\-]{{1,20}}"
+            rf"(?:[ \t]+[A-Za-z][A-Za-z.'\-]{{1,20}})?\b", re.I)
+            if first != last else None),
     }
 
 
@@ -1843,6 +1870,15 @@ def _check_one(text, pat):
             a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
             return True, code, " ".join(text[a:b].split()), counter
 
+    # ★ 2026-08-20 `A-coauthor-es`：西语合著 `<姓>, <名> y <另一人>`——
+    #   Telford #183 Edinburgh Encyclopaedia：`Telford, Thomas y Alexander Nimmo.`
+    #   只认本人物在合著者第一位、另一人姓名齐全。受反证约束。
+    if pat.get("COAUTHOR_ES") and not counter:
+        m = pat["COAUTHOR_ES"].search(text)
+        if m:
+            a, b = max(0, m.start() - 40), min(len(text), m.end() + 80)
+            return True, "A-coauthor-es", " ".join(text[a:b].split()), counter
+
     # ★ v0.0.0.56 `A-discussion-turn`：学会讨论记录里的发言归属。
     #   `Mr. ALEXANDER FLEMING said that…` —— 记录者写的，比正文里的 by 更硬。
     #   与显式 `By` 同级，**可以顶着反证走**：同场讨论里本来就有别人发言，
@@ -1853,6 +1889,28 @@ def _check_one(text, pat):
             a, b = max(0, m.start() - 40), min(len(text), m.end() + 80)
             return True, "A-discussion-turn", " ".join(text[a:b].split()), counter
 
+    # ★ 2026-08-20 `A-discussion-surname`：单姓讨论轮次 `Mr. <SURNAME> said…`——
+    #   Telford #183 议会证词：`Mr. Telford said the road should be 30 feet wide.`
+    #   **安全约束**：只有 `known_namesakes` 为空时才启用——
+    #   单姓无法区分同名者。与 DISCUSSION 同级，可顶着反证走（议会听证多人发言）。
+    if pat.get("DISCUSSION_SURNAME") and not pat.get("namesakes"):
+        m = pat["DISCUSSION_SURNAME"].search(text)
+        if m:
+            a, b = max(0, m.start() - 40), min(len(text), m.end() + 80)
+            return True, "A-discussion-turn", " ".join(text[a:b].split()), counter
+
+    # ★ 2026-08-20 `A-report-of`：报告型署名 `REPORT Of <Name>, Civil Engineer`——
+    #   Telford #183 供水报告：OCR 把 `REPORT OF` 打成 `REPORT H Of`（H 是噪声）。
+    #   受反证约束。结构上只允许 H 与 Of 在 REPORT 与名字之间，
+    #   天然排除 `REPORT edited by X`（edited ≠ Of）。
+    #   ★ 位置约束：`REPORT` 必须落在文件前 500 字符（题名页区）。
+    #     放宽 `[\s\S]{0,140}` 之后，没有这条会把正文深处的
+    #     「REPORT ... Of ... 姓名」误当署名（像 STANDALONE 的位置规则一样）。
+    if pat.get("REPORT_OF") and not counter:
+        m = pat["REPORT_OF"].search(text[:500])
+        if m:
+            a, b = max(0, m.start() - 40), min(len(text), m.end() + 80)
+            return True, "A-report-of", " ".join(text[a:b].split()), counter
 
     # A-copyright：版权页。与上面两类同样受反证约束——
     # 文中出现别人的身份署名时不放行。
@@ -2029,6 +2087,23 @@ SELFTEST_POSITIVE = [
         f"TML: Question number {i} about communal priorities and their funding?\n"
         f"JP: Answer number {i} setting out the reasoning at some length here.\n"
         for i in range(1, 6))),
+    # ★★★ 2026-08-20（Telford #183）：19 世纪工程文献三种真实署名形态
+    #   ——新增独立分支，不改现有正则。
+    # ★ A-discussion-surname：单姓讨论轮次 `Mr. <SURNAME> said…`
+    #   议会证词里大量是 `Mr. Telford`（无名字）。仅当无同名声明时启用。
+    #   发言动词 said/remarked/… 区分「发言」与「被评价」（was praised）。
+    ("单姓讨论轮次 Mr. Public said",
+     "Mr. Public said the ratio should be higher than the market average.\n"),
+    # ★ A-report-of：报告型署名 `REPORT Of <Name>, Civil Engineer`
+    #   OCR 把 `REPORT OF` 打成 `REPORT H Of`（H 是噪声）。
+    ("报告型署名 REPORT Of（含 OCR 噪声 H）",
+     "REPORT H Of Jane Q. Public, Civil Engineer, February 1834.\n"
+     "The water supply of the metropolis was examined at length here.\n"),
+    # ★ A-coauthor-es：西语合著 `<姓>, <名> y <另一人>`
+    #   Edinburgh Encyclopaedia 词条：`Telford, Thomas y Alexander Nimmo.`
+    ("西语合著 Public, Jane y",
+     "Public, Jane y Alexander Nimmo. Bridge.\n"
+     "The construction of the bridge was described in some detail here.\n"),
 ]
 SELFTEST_POSITIVE_COPYRIGHT = [
     # ★ 实测形态（Livermore 1940 年那本书的版权页 OCR 结果）：
@@ -2100,6 +2175,20 @@ SELFTEST_NEGATIVE = [
      "The work was done at St. Mary's Hospital in London during that period.\n" * 30
      + "Later the results were confirmed by Jane Q. Public and her colleagues there.\n"
      + "Further discussion of the method follows in the next section below.\n" * 20),
+    # ★★★ 2026-08-20（Telford #183）：三种新形态的反例
+    # ★ A-discussion-surname 反例：`was praised` 不是发言动词——
+    #   「被评价」不是「发言」，发言动词列表（said/replied/…）把它挡住。
+    ("单姓讨论轮次·评价不是发言",
+     "Mr. Public was praised by the committee for his excellent work here.\n"),
+    # ★ A-report-of 反例：`REPORT edited by X` 不是署名——
+    #   结构上 `edited` ≠ `Of`，模式天然不匹配。
+    ("报告型署名·edited by 不是署名",
+     "REPORT edited by Jane Q. Public, with annotations by the editor here.\n"),
+    # ★ A-coauthor-es 反例：有反证（另一人的署名 `By John Smith`）——
+    #   受反证约束，文中出现别人署名时不放行。
+    ("西语合著·有反证（另一人的署名）",
+     "Public, Jane y John Smith. Bridge.\n\nBy John Smith\n"
+     "The bridge was described here in some detail.\n"),
 ]
 
 
@@ -2264,6 +2353,43 @@ def self_test() -> int:
         print(f"  {'✓' if not ok else '✗'} 反例 {label}: {'已拒' if not ok else '误放行 ' + code}")
         if ok:
             bad.append(f"反例 {label} 被误放行（{code}）")
+
+    # ★★★★ 2026-08-20（Telford #183）：三种新形态的定向验证——
+    #   用 `build_patterns('Thomas Telford')` + `check_text` 跑全链，
+    #   确认正例通过、反例拒绝。
+    print("\n══ Telford #183 三种新形态定向验证 ══")
+    _tp = build_patterns("Thomas Telford")
+    _tp["namesakes"] = ()
+    _tp["own_mid"] = ""
+    for _lbl, _s, _want in (
+            ("正例：REPORT Of Thomas Telford, Civil Engineer",
+             "REPORT Of Thomas Telford, Civil Engineer, February 1834.\n", True),
+            ("正例：REPORT H Of Thomas Telford（OCR 噪声 H）",
+             "REPORT H Of Thomas Telford, Civil Engineer.\nSome text follows.\n", True),
+            ("正例：Mr. Telford said…（无同名时）",
+             "Mr. Telford said the road should be 30 feet wide.\n", True),
+            ("正例：Telford, Thomas y Alexander Nimmo. Bridge.",
+             "Telford, Thomas y Alexander Nimmo. Bridge.\nSome text follows.\n", True),
+            ("反例：Mr. Telford was praised（评价不是发言）",
+             "Mr. Telford was praised by the committee.\n", False),
+            ("反例：REPORT edited by Thomas Telford",
+             "REPORT edited by Thomas Telford.\nSome text follows.\n", False),
+            ("反例：Telford, Thomas y（有反证 By John Smith）",
+             "Telford, Thomas y John Smith. Bridge.\n\nBy John Smith\nText.\n", False)):
+        _ok, _code, _ev, _ = check_text(_s, _tp)
+        _pass = _ok == _want
+        print(f"  {'✓' if _pass else '✗'} {'应通过' if _want else '应拒绝'}　{_lbl}"
+              f" → ok={_ok} code={_code!r}")
+        if not _pass:
+            bad.append(f"Telford 定向验证：{_lbl}")
+    # ★ 安全约束：声明了同名时，单姓讨论轮次必须关闭
+    _tp_ns = build_patterns("Thomas Telford")
+    _tp_ns["namesakes"] = ("Thomas Telford Jr.",)   # 声明了一个同名者
+    _tp_ns["own_mid"] = ""
+    _ok_ns = not check_text("Mr. Telford said the road should be 30 feet wide.\n", _tp_ns)[0]
+    print(f"  {'✓' if _ok_ns else '✗'} 反例：声明同名时 Mr. Telford said… 必须关闭")
+    if not _ok_ns:
+        bad.append("Telford 定向验证：声明同名时单姓讨论轮次未关闭")
 
     # ★ v0.0.0.26 非西方姓名形态（Galen #101 实测撞出）：
     #   ① 单名必须能建判据且 `By Galen` 命中；② `X of Y` 的识别标记是 X 不是 Y。
