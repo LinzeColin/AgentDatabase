@@ -1,3 +1,8 @@
+---
+name: kmfile-archive
+description: "钉钉文档归档与 KMFile 管理流水线。"
+---
+
 # KMFile-Archive（KMFile 一体化流水线）
 
 > 版本 v0.0.0.3（260820）。`KMMedia-Archive` 的同位体，只处理钉钉**文件（文档）**。
@@ -313,6 +318,32 @@ pipeline 开跑前自动跑一次健康自检（listdir 计时，超 `SMB_SLOW_S
 
 同一 workdir 只允许一个实例（`workdir/.pipeline.lock` pid 锁）。
 cron 触发间隔一定要大于单轮耗时，否则第二个实例会和第一个抢同一份 manifest 与登记表。
+
+### SMB rename 风险提示（260821 · 沿用媒体版实测）
+
+本 skill 的 `stage_rename` 目前仍是直接 `os.rename`（无子进程超时）。
+SMB 服务端（OpenWRT Samba）上 rename 可能进 U 态永久挂死、单文件挂死拖死整条 pipeline。
+命中症状与处置同 KMMedia-Archive：用子进程 + 超时 + `killpg` 清掉、账本增量落盘（防「磁盘已改、账本没记」）。
+KMFile 侧当前文件量小（日增量 ~40 件）尚未命中，如单群膨胀到万级再补同样的 `rename_with_timeout()`。
+
+### 白箱进度：一条命令看清在跑什么（v0.0.0.3 +260821）
+
+用户问「你是不是在空转」「怎么看不到进度」时，说明进度不可见。本 skill 提供
+`scripts/progress.py`，**只读**（读 workdir 产物 + pgrep 阶段进程，不碰 SMB、不动数据）：
+
+```bash
+python3 ~/.agents/skills/KMFile-Archive/scripts/progress.py           # 一次快照
+python3 ~/.agents/skills/KMFile-Archive/scripts/progress.py --watch   # 每 60s 刷一次
+python3 ~/.agents/skills/KMFile-Archive/scripts/progress.py --workdir /tmp/xxx  # 指定 workdir
+```
+
+三段输出，缺一段就不算白箱：
+- **① 登记表进度**：已改名 / 总数（百分比条）、标注已 / 待确认、accept pass/fail
+- **② 阶段是否在跑**：scan/probe/extract/dedup/label/rename/registry/accept/report 谁活着
+  （用 `pgrep -f kmfile_pipeline.py <stage>` + `ps` 取命令行判断，排掉 progress.py 自身与 bash 包装）
+- **③ 素材库概况**：文件总数/脱敏非无/有描述
+
+何时主动贴：每完成一个阶段；任何一步预计超 5 分钟先说清「怎么自己查」；等一个不会来的通知前先查快照。
 
 ## 已知外部障碍（记录在案，不阻塞流水线）
 

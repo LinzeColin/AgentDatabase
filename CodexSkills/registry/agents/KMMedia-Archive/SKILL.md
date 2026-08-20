@@ -1,3 +1,8 @@
+---
+name: kmmedia-archive
+description: "钉钉媒体归档与 KMVideo 管理流水线。"
+---
+
 # KMMedia-Archive（KMVideo 一体化流水线）
 
 > 版本 v0.3.1（260820）。素材库任务书 v0.0.2.0 的完整执行体。
@@ -264,6 +269,40 @@ pipeline 开跑前自动跑一次健康自检（listdir 计时，超 `SMB_SLOW_S
 
 同一 workdir 只允许一个实例（`workdir/.pipeline.lock` pid 锁）。
 cron 触发间隔一定要大于单轮耗时，否则第二个实例会和第一个抢同一份 manifest 与登记表。
+
+### SMB rename 会随机永久挂死 —— 用子进程超时（260821 实测）
+
+`os.rename` 在 OpenWRT Samba 上可能直接进 U 态永久挂死，主线程调用会卡死整条 pipeline。
+新版 pipeline 已内置 `rename_with_timeout()`：单文件 rename 放 `subprocess.Popen(start_new_session=True)`
+子进程，超 `KM_RENAME_TIMEOUT`（默认 8s）就 `killpg(SIGKILL)` 清掉。**不要在 pipeline 外另写直接
+`os.rename` 的脚本去碰 SMB。** 账本增量落盘用 `flush_ledger()`（每 200 条写一次），
+被杀进程/断连也不丢太多已改名条目。
+
+### 超大目录 rename 是服务端缺陷，要单独针对性脚本（260821 实测）
+
+单群万级文件（武汉开明 18027 件回填）的 photo 目录，NAS 服务端 rename 成功率约 50%、
+8–10s/个，是服务端目录/索引退化，不是 skill 问题。命中时不要混进全量 rename：
+写独立脚本只处理该群，每轮重挂新 SMB 会话绕开服务端目录污染 + 逐文件子进程超时 + 每 20 条落账，
+后台长跑（数小时收敛），账本 flush 前被杀只丢当批。
+
+### 白箱进度：一条命令看清在跑什么（v0.3.1 +260821）
+
+用户问「你是不是在空转」「怎么看不到进度」时，说明进度不可见。本 skill 提供
+`scripts/progress.py`，**只读**（读 workdir 产物 + pgrep 阶段进程，不碰 SMB、不动数据）：
+
+```bash
+python3 ~/.agents/skills/KMMedia-Archive/scripts/progress.py           # 一次快照
+python3 ~/.agents/skills/KMMedia-Archive/scripts/progress.py --watch   # 每 60s 刷一次
+python3 ~/.agents/skills/KMMedia-Archive/scripts/progress.py --workdir /tmp/xxx  # 指定 workdir
+```
+
+三段输出，缺一段就不算白箱：
+- **① 登记表进度**：已改名 / 总数（百分比条）、标注已 / 待确认、accept pass/fail
+- **② 阶段是否在跑**：scan/probe/thumbs/dedup/label/rename/registry/accept/report 谁活着
+  （用 `pgrep -f kmvideo_pipeline.py <stage>` + `ps` 取命令行判断，排掉 progress.py 自身与 bash 包装）
+- **③ 素材库概况**：照片/视频/脱敏非无/有描述/缩略图数
+
+何时主动贴：每完成一个阶段；任何一步预计超 5 分钟先说清「怎么自己查」；等一个不会来的通知前先查快照。
 
 ## 已知外部障碍（记录在案，不阻塞流水线）
 

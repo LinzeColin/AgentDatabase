@@ -19,6 +19,7 @@ import hashlib
 import json
 import os
 import re
+import signal
 import subprocess
 import sys
 import tempfile
@@ -1053,30 +1054,12 @@ def stage_rename(args, ctx) -> dict:
     ops = kept
     ok = gone = fail = 0
     done_ops = []
-    for rel, nn, _ in ops:
-        old_p = SMB_ROOT / rel
-        new_p = old_p.parent / nn
-        last = None
-        for attempt in range(3):
-            try:
-                os.rename(old_p, new_p)
-                ok += 1
-                done_ops.append((rel, nn))
-                last = None
-                break
-            except FileNotFoundError:
-                gone += 1
-                last = None
-                break
-            except OSError as e:
-                last = e   # SMB rename 实测会随机 EIO，重试而不是直接判失败
-                time.sleep(2 ** attempt)
-        if last is not None:
-            fail += 1
-            log(f"rename fail {rel}: {last}")
-    # 改名成功即刻落账本，不等 registry —— 中途中断也不会留下「磁盘已改、账本没记」的黑洞
-    if done_ops:
-        for rel, nn in done_ops:
+    ledger_synced = 0  # done_ops 里已落账本的条数（断点续标：每 200 条增量落一次，进程被杀不丢账本）
+
+    def flush_ledger():
+        # 把 done_ops 里还没落账本的记录写进 ledger 并落盘（增量，防「磁盘已改、账本没记」黑洞）
+        nonlocal ledger_synced
+        for rel, nn in done_ops[ledger_synced:]:
             folder = rel.split("/")[0]
             old_name = os.path.basename(rel)
             prev = ledger.get((folder, old_name)) or {}
@@ -1084,7 +1067,76 @@ def stage_rename(args, ctx) -> dict:
                 "项目": folder, "原文件名": old_name, "新文件名": nn,
                 "日期": prev.get("日期", ""), "大小": prev.get("大小", ""),
             }
+        ledger_synced = len(done_ops)
         save_ledger(ledger)
+
+    RENAME_TIMEOUT = int(os.environ.get("KM_RENAME_TIMEOUT", "20"))  # 单文件 rename 超时秒
+
+    def rename_with_timeout(old_p, new_p):
+        """子进程执行 rename + 超时：SMB rename 会随机永久挂死，单文件挂死不拖死全局。
+
+        SMB 服务端（OpenWRT Samba）对 rename 请求偶发不返回（不是 EIO，是永久挂起），
+        主线程一旦阻塞在 os.rename 上整个进程就卡死、必须外部强制卸载才能唤醒。
+        这里把每次 rename 放进子进程（独立进程组），父进程轮询等它；超时就 SIGKILL
+        进程组并立即返回，**绝不等待** —— U 态子进程杀不掉会残留为孤儿，但不会拖住主线程。
+        """
+        import subprocess as sp
+        code = (
+            "import os,sys\n"
+            "try:\n"
+            "    os.rename(sys.argv[1], sys.argv[2])\n"
+            "    print('OK')\n"
+            "except FileNotFoundError:\n"
+            "    print('GONE')\n"
+            "except OSError as e:\n"
+            "    print('ERR', repr(e))\n"
+        )
+        proc = sp.Popen([sys.executable, "-c", code, str(old_p), str(new_p)],
+                        stdout=sp.PIPE, stderr=sp.PIPE, text=True,
+                        start_new_session=True)  # 独立进程组，超时后可按组清理
+        deadline = time.time() + RENAME_TIMEOUT
+        while time.time() < deadline:
+            rc = proc.poll()
+            if rc is not None:
+                out, _err = proc.communicate(timeout=2)
+                return (out or "").strip()
+            time.sleep(0.2)
+        # 超时：按进程组 SIGKILL（U 态杀不掉也无妨，主线程直接返回继续），不等待
+        try:
+            os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+        except Exception:
+            pass
+        return "TIMEOUT"
+
+    for rel, nn, _ in ops:
+        old_p = SMB_ROOT / rel
+        new_p = old_p.parent / nn
+        last = None
+        for attempt in range(3):
+            res = rename_with_timeout(old_p, new_p)
+            if res == "OK":
+                ok += 1
+                done_ops.append((rel, nn))
+                if len(done_ops) - ledger_synced >= 200:
+                    flush_ledger()
+                last = None
+                break
+            if res == "GONE":
+                gone += 1
+                last = None
+                break
+            if res == "TIMEOUT":
+                # SMB rename 永久挂死：杀掉子进程、跳过该文件，留给下一轮；不重试拖时间
+                last = "timeout(SMB rename 挂死)"
+                break
+            last = "EIO"  # OSError：SMB 随机 EIO，重试而不是直接判失败
+            time.sleep(2 ** attempt)
+        if last is not None:
+            fail += 1
+            log(f"rename fail {rel}: {last}")
+    # 改名成功即刻落账本，不等 registry —— 中途中断也不会留下「磁盘已改、账本没记」的黑洞
+    if done_ops:
+        flush_ledger()
     # 对照表
     cmp = ctx["workdir"] / "改名前后对照.csv"
     with cmp.open("w", encoding="utf-8-sig", newline="") as f:
