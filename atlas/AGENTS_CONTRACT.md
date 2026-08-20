@@ -7,13 +7,14 @@
 
 ### 唯一地址
 
-`LinzeColin/Private-Database` → `Private-AgentDatabase/dev-notes/`
+`LinzeColin/Private-Database` 的 **`dev-notes` 分支** → `Private-AgentDatabase/dev-notes/`
 
 - `AGENT_BRIEF.md` —— 给人和 agent 读的正文
 - `agent_brief.json` —— 给程序读的同一份数据
+- `compounding-events/` —— agent 收尾时产的成果复利事件（见下）
 
 ```bash
-gh api repos/LinzeColin/Private-Database/contents/Private-AgentDatabase/dev-notes/AGENT_BRIEF.md \
+gh api "repos/LinzeColin/Private-Database/contents/Private-AgentDatabase/dev-notes/AGENT_BRIEF.md?ref=dev-notes" \
   --jq .content | base64 -d
 ```
 
@@ -57,6 +58,53 @@ gh api repos/LinzeColin/Private-Database/contents/Private-AgentDatabase/dev-note
 第 3 步会自动触发；**Kimi Code GUI 和 DSH 没有钩子机制，必须自己跑那一行**。
 第 1、2 步在哪个 agent 里都得自己做 —— 钩子只能重算机器派生的那一半，
 「这次学到了什么」只有你知道。
+
+### 收尾时还可以多做一步：产一条「成果复利事件」
+
+上面三步管的是「经验有没有留下来」。这一步管的是**「留下来的东西有没有变成结果」**。
+
+不是每次都要做 —— 只有当这一轮**确实结束了一件事**（不是随手改两行）时才值得：
+
+把结论写成一个 `memory_atlas.compounding_event.v1` JSON，推到
+
+    LinzeColin/Private-Database @ dev-notes 分支
+    Private-AgentDatabase/dev-notes/compounding-events/<event_id>.json
+
+Memory Atlas 每天会把它拉进来，投影成转化漏斗，显示在站点的「档案 → 转化」那一屏。
+
+**最小可用的字段**（完整 schema 见 Memory Atlas 仓的 `atlas/build/compound.py`）：
+
+```json
+{
+  "schema_version": "memory_atlas.compounding_event.v1",
+  "event_id": "<agent>-<日期>-<序号>",
+  "generated_at": "<ISO-8601>",
+  "producer": { "kind": "agent_closeout", "name": "<哪个 agent>" },
+  "missions": [{ "mission_id": "", "project": "", "objective": "",
+                 "actual_outcome": "", "completion_state": "COMPLETE|PARTIAL|BLOCKED|ABANDONED",
+                 "evidence": [], "unresolved_obligations": [] }],
+  "lessons": [{ "lesson": "", "scope": "project|cross_project|tentative",
+                "evidence": [], "do_not_repeat": "" }],
+  "failure_inputs": [{ "failure_id": "", "project": "", "symptom": "", "impact": "",
+                       "root_cause_state": "PROVEN|HYPOTHESIS|UNKNOWN",
+                       "failed_attempts": [], "effective_fix_or_workaround": "",
+                       "do_not_repeat": "", "regression_asset_candidate": "" }],
+  "candidates": [{ "candidate_id": "", "type": "prompt|workflow|sop|bug_guard|checklist|skill|stop_rule|other",
+                   "problem": "", "evidence": [], "recurrence": "",
+                   "cost_of_not_fixing": "", "stage": "CAPTURED|QUALIFIED|EXPERIMENT|HOLD|REJECT" }],
+  "verification_state": "VERIFIED|PARTIAL|UNVERIFIED"
+}
+```
+
+**四条硬规矩**（写之前先读，写错了系统会当场压回去并记一笔）：
+
+1. **「做完了」不等于「被采用」。** 文件写完、commit 了、部署成功了，都还只是 OUTCOME 之前的事。
+2. **没有采用证据不许写 ADOPTED，没有经济证据不许写 ECONOMIC_IMPACT。**
+   写高了 Memory Atlas 会按证据压回去，并在「被压回去的」那张表里点名 —— 只会更难看。
+3. **金额未知就留 `null`，不要填 0。** 0 是一个断言（「没赚到」），未知不是。
+4. **不要放完整聊天、思维过程、大段工具日志。** 只留下一个 agent 真的用得上的东西。
+
+允许一次都不产 —— 一个模式只出现过一次就做成 Skill，是把这套东西做坏的最快方式。
 
 ### 三条边界
 
