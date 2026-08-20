@@ -37,12 +37,24 @@
 #   [[git-status-folds-untracked-dirs]]｜[[git-ls-files-quotes-non-ascii-paths]]
 
 # ① raw/ 下的正文（任意层数，raw/ 自身也可再套子目录）
+#    以及 raw-holdout/（密封原始正文）—— 2026-08-20 Telford #37 实测：
+#    assign_holdout 把源移到 `workspaces/*/raw-holdout/`，旧规则只有 `**/raw/**`
+#    不盖它，导致 3 份 holdout 语料被误提交。与 raw 同级忽略。
 **/raw/**/*.txt
 **/raw/**/*.xml
 **/raw/**/*.pdf
 **/raw/**/*.djvu
 **/raw/**/*.html
 **/raw/**/*.htm
+**/raw-holdout/**/*.txt
+**/raw-holdout/**/*.xml
+**/raw-holdout/**/*.pdf
+**/raw-holdout/**/*.djvu
+**/raw-holdout/**/*.html
+**/raw-holdout/**/*.htm
+#   但 raw/ 与 raw-holdout/ 的清单与 manifest 必须保留（重建指针）
+!**/raw-holdout/**/_ids*.txt
+!**/raw-holdout/**/_fetch-manifest.json
 # ★ 通配要写 `_ids*.txt` 不是 `_ids.txt`：后者只放行首轮那份 30 条的清单，
 #   而**真正可复现的是 `_ids-final.txt`**（第三轮扩容后的 70 条）。
 #   写成精确名 = 仓里留着一份**过时且更短**的清单，重建出来的语料比实际少一半。
