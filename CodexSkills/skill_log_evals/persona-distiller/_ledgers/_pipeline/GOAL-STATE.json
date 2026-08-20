@@ -1,25 +1,46 @@
 {
- "round": 12,
- "updated_at": "2026-08-20T13:15AEST",
- "time_band": "peak-1600-2000",
- "people": 117,
+ "round": 13,
+ "updated_at": "2026-08-21T04:30AEST",
+ "time_band": "valley-0000-0800",
+ "people": 118,
  "current_person": null,
- "stage": "三线程并行启动：T1=1-300(主)/T2=301-450/T3=451-604；T1 NEXT=Thomas Telford；P0 Eiffel(wip-eiffel-142)待查卡点",
- "next": "Thomas Telford（材料建工师 #37，T1 负责）",
+ "stage": "T1 完成 Thomas Telford（材料建工师 #37）入库（118/600，delta +0.0771）；NEXT=Frederick Winslow Taylor #38；P0 Eiffel(wip-eiffel-142)已结（记延后）",
+ "next": "Frederick Winslow Taylor（材料建工师 #38，T1 负责）",
  "threads": {
-  "T1": {"branch": "main", "worktree": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase", "range": "1-300", "slice": "_ledgers/_并行分片/T1-1-300.json"},
-  "T2": {"branch": "thread2-301-450", "worktree": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase-T2", "range": "301-450", "slice": "_ledgers/_并行分片/T2-301-450.json"},
-  "T3": {"branch": "thread3-451-604", "worktree": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase-T3", "range": "451-604", "slice": "_ledgers/_并行分片/T3-451-604.json"}
+  "T1": {
+   "branch": "main",
+   "worktree": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase",
+   "range": "1-300",
+   "slice": "_ledgers/_并行分片/T1-1-300.json"
+  },
+  "T2": {
+   "branch": "thread2-301-450",
+   "worktree": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase-T2",
+   "range": "301-450",
+   "slice": "_ledgers/_并行分片/T2-301-450.json"
+  },
+  "T3": {
+   "branch": "thread3-451-604",
+   "worktree": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase-T3",
+   "range": "451-604",
+   "slice": "_ledgers/_并行分片/T3-451-604.json"
+  }
  },
  "p0_queue": [
   "Eiffel(wip-eiffel-142)已做未出货，先查卡点"
  ],
  "p0_done": [],
  "p0_closed": [],
- "note": "旧 p0_queue/p0_done 为 DS 前会话遗留，已清；以 PLAN-2026-08-20-三线程并行.md 为三线程事实源。共享文件仅 T1 写。",
+ "note": "Telford 盲判双席（seat-D/seat-E）128 行、六门全过；release 修复 3 项（claims 拼写、EXCLUDE、65 引文坐标）；基线 warning 经 --acknowledge-disclosure 记录。",
  "cost_baseline": {
-  "flash": {"calls": 934, "cost": 24.0526},
-  "pro": {"calls": 1126, "cost": 55.5695}
+  "flash": {
+   "calls": 934,
+   "cost": 24.0526
+  },
+  "pro": {
+   "calls": 1126,
+   "cost": 55.5695
+  }
  },
  "cost_rule": "90%+ flash；批量/盲判/判分全 flash（双侧同模型），pro 仅关键决策",
  "release_gate": "以 quality_check --phase release --strict 为准（0 错 0 警）"

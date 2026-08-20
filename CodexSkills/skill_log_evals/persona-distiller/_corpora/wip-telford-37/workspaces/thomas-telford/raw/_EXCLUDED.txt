@@ -1,0 +1,12 @@
+# EXCLUDED / 项目记录（二手依据，供 check_unsourced_names 归档；不是一手语料）
+
+# 以下两项不是「查无实据的人名」，答案里出现是正常引用，故在此归档：
+
+# 1) Appendices —— 文档标题词，非人名。
+#    case-known-2 答「1817 年议会文件中我的报告附录编号为第 7 至第 13 号（Appendices 7-13）」，
+#    对应 holdout 源标题 "Parliamentary Papers Appendices 7-13 Holyhead Road"（src-2bdb30fc96f0）。
+#    该词只在源标题里，正文语料（raw/）不含，属标题专名，不是编造的人名。
+
+# 2) Pontcysyllte —— 渡槽名，非人名。
+#    语料（src-659c3ee6ac1a / src-988d9ca66526，Life of Thomas Telford 1838）OCR 拼作 Pontycysyllte，
+#    答案与产物沿用标准现代拼写 Pontcysyllte；两者同指 Ellesmere 运河上的铸铁渡槽。

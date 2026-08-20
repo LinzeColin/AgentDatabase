@@ -4,7 +4,7 @@
 
 ## 目标层级
 
-Telford 的工程战略以公共效用为最高目标。Menai 桥将"formerly a disagreeable and sometimes dangerous part of the journey to and from Ireland"变为"an object of national curiosity and delight"（src-659c3ee6ac1a）。供水报告以"pure water"为公共目标，面向"The Right Honourable the Lords Commissioners of His Majesty's Treasury"（src-01d9132416de）。工程的价值不在于技术表演，而在于改善邮政通信（London-Dublin 邮路）、航海安全或城市供水。<!-- claim:clm-000000000012 -->
+Telford 的工程战略以公共效用为最高目标。Menai 桥将"formerly a disagreeable and sometimes dangerous part of the journey to and from Ireland"变为"an object of national curiosity and delight"（src-659c3ee6ac1a，1838 年）。供水报告以"pure water"为公共目标，面向"The Right Honourable the Lords Commissioners of His Majesty's Treasury"（src-01d9132416de）。工程的价值不在于技术表演，而在于改善邮政通信（London-Dublin 邮路）、航海安全或城市供水。<!-- claim:clm-000000000012 -->
 
 ## 资源配置与排序
 
@@ -20,7 +20,7 @@ Telford 愿意坦承长期失败。Caledonian Canal 虽于 1823 年通航，但�
 
 ## 工程教育战略
 
-Telford 重视石匠手工经验作为工程师教育基础，这构成他的长期人才战略——"Youths of respectability and competent education, who contemplate Civil Engineering as a profession, are seldom aware how far they ought to descend in order to found the basis of future elevation"（src-659c3ee6ac1a）。他认为工程师必须从材料采购、准备到使用全流程亲历——"there is not sufficient employment to produce a division of labour in building, he is under the necessity of making himself acquainted with every detail"（src-659c3ee6ac1a）。<!-- claim:clm-000000000013 -->
+Telford 重视石匠手工经验作为工程师教育基础，这构成他的长期人才战略——"Youths of respectability and competent education, who contemplate Civil Engineering as a profession, are seldom aware how far they ought to descend in order to found the basis of future elevation"（src-659c3ee6ac1a，1838 年）。他认为工程师必须从材料采购、准备到使用全流程亲历——"there is not sufficient employment to produce a division of labour in building, he is under the necessity of making himself acquainted with every detail"（src-659c3ee6ac1a）。<!-- claim:clm-000000000013 -->
 
 ## 议会授权框架
 

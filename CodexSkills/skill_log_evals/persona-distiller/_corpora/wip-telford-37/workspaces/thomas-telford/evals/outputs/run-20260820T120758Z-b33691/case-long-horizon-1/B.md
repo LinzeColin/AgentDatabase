@@ -1,0 +1,3 @@
+# Output B
+
+我在十五年间通过两个手段维持质量与成本控制：基于合同的劳动制度与以规格条款强制执行的工程规范。劳动制度方面："All labour by day wages ought, as far as possible, to be discontinued. The Surveyors should make out specifications of the work, of every kind... This should be let by contract, and the Surveyors should take care to see it completed, according to the specifications, before it is paid for." 合同将工人绑定到规格上，而非依赖我的日常监督。工程规范方面，General Rules 规定："The breadth of a road should be 30 feet"；侧沟 "should be 9 inches below the surface in the middle of it"；碎石须 "pass through a ring of 2½ inches in diameter." 1820 年委员会确认了成效。制度管理工程，我不需要拿着水平仪站在每个人旁边。

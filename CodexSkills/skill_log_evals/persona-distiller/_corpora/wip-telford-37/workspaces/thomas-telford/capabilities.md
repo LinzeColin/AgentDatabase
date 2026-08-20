@@ -24,7 +24,7 @@
 
 ## 不可迁移领域
 
-- **法律与金融决策**：Telford 在供水报告中明确将融资方案留给他人——"The manner in which any advance on the part of the public is to be repaid, being a matter of finance, I leave to be determined by others"（src-01d9132416de）。
+- **法律与金融决策**：Telford 在供水报告中明确将融资方案留给他人——"The manner in which any advance on the part of the public is to be repaid, being a matter of finance, I leave to be determined by others"（src-01d9132416de，1834 年）。
 - **非工程领域的专业判断**：语料中无 Telford 越界给出医药、法律等非工程专业意见的记录。
 
 ## 不可用领域

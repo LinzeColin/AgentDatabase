@@ -10,13 +10,13 @@ Menai Bridge 的桥位选择同样基于地形数据。他在 Ynys-y-moch 与 Sw
 
 ## 量化阈值
 
-Menai Bridge 强度决策是 Telford 量化阈值的最佳示例。他以实验数据计算安全余量——"the weight to be suspended is 342 tons"且"I have taken a section of 192 square inches, which at 5½ tons to each square inch, will support 1,008 tons being a surplus of 666 tons above the real weight of the bridge"（src-7d31bbb6da22）。他总结："this I conceive is making ample provision against any probable trial to which such a bridge can be exposed"（src-7d31bbb6da22）。666 吨余量不是模糊的"足够"，而是以实验数据推导出的精确数字。<!-- claim:clm-00000000000c -->
+Menai Bridge 强度决策是 Telford 量化阈值的最佳示例。他以实验数据计算安全余量——"the weight to be suspended is 342 tons"且"I have taken a section of 192 square inches, which at 5½ tons to each square inch, will support 1,008 tons being a surplus of 666 tons above the real weight of the bridge"（src-7d31bbb6da22，1819 年）。他总结："this I conceive is making ample provision against any probable trial to which such a bridge can be exposed"（src-7d31bbb6da22）。666 吨余量不是模糊的"足够"，而是以实验数据推导出的精确数字。<!-- claim:clm-00000000000c -->
 
-供水方案决策排除 Thames 水源，选择 Verulam 河与 Wandle 河，基于水量实测——"I found an abundance of pure, transparent water, within the distance of 16 miles on the North"以及"within 10 miles on the South"（src-01d9132416de）。总造价估算为"about 1,177,840l. 16s. 5d."（src-01d9132416de）。<!-- claim:clm-000000000006 -->
+供水方案决策排除 Thames 水源，选择 Verulam 河与 Wandle 河，基于水量实测——"I found an abundance of pure, transparent water, within the distance of 16 miles on the North"以及"within 10 miles on the South"（src-01d9132416de，1834 年）。总造价估算为"about 1,177,840l. 16s. 5d."（src-01d9132416de）。<!-- claim:clm-000000000006 -->
 
 ## 风险与退出
 
-Telford 对风险的判断以实验数据为依据，且接受同行更保守的建议。当 Rennie 提出 Menai 桥应建为四倍自重强度时，Telford 不坚持原设计——"None at all; only the additional expense of that quantity of iron; you may have any quantity of iron which will give the proportional power"（src-7d31bbb6da22）。Rennie 的理由是"about two-thirds the weight that will break it, begins to stretch it"，因此四倍安全系数是防止铁材蠕变的必要措施（src-7d31bbb6da22）。<!-- claim:clm-000000000015 -->
+Telford 对风险的判断以实验数据为依据，且接受同行更保守的建议。当 Rennie 提出 Menai 桥应建为四倍自重强度时，Telford 不坚持原设计——"None at all; only the additional expense of that quantity of iron; you may have any quantity of iron which will give the proportional power"（src-7d31bbb6da22，1819 年）。Rennie 的理由是"about two-thirds the weight that will break it, begins to stretch it"，因此四倍安全系数是防止铁材蠕变的必要措施（src-7d31bbb6da22）。<!-- claim:clm-000000000015 -->
 
 ## 报告结构作为决策模板
 

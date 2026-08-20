@@ -1,0 +1,68 @@
+{
+  "usable": 13,
+  "distinct_works": 11,
+  "inflation": 1.182,
+  "distinct_works_declared": 11,
+  "inflation_declared": 1.182,
+  "★ 两个作品数的区别": "`distinct_works` 只认实测重叠；`distinct_works_declared` 把 `derived_from` 声明也并进去。**后者才是「有几处独立证据」**——同一部作品的跨语种译本、分卷、坏 OCR 本，逐对重叠都在门下，只有声明连得起来。",
+  "threshold": 0.3,
+  "**未声明的重复对**": [],
+  "★ 已按 counting_convention 逐对点名说明的": [
+    {
+      "甲": "b30448645.txt",
+      "乙": "in.ernet.dli.2015.53284.txt",
+      "重叠": 0.4549,
+      "扣样板前": 0.4549,
+      "已声明 derived_from": false,
+      "★ 已按 counting_convention 逐对点名说明": true
+    },
+    {
+      "甲": "b30448645.txt",
+      "乙": "dli.bengal.10689.19434.txt",
+      "重叠": 0.4646,
+      "扣样板前": 0.4646,
+      "已声明 derived_from": false,
+      "★ 已按 counting_convention 逐对点名说明": true
+    }
+  ],
+  "已声明的重复对数": 1,
+  "作品分组": [
+    [
+      "b30448645.txt",
+      "in.ernet.dli.2015.53284.txt",
+      "dli.bengal.10689.19434.txt"
+    ],
+    [
+      "bim_eighteenth-century_eskdale-a-descriptive-p_telford-thomas_1795.txt"
+    ],
+    [
+      "t-088-1830-telford.-bridge-edinburgh-encyclopaedia.txt"
+    ],
+    [
+      "generalrulesfor00unkngoog.txt"
+    ],
+    [
+      "op1243639-1001.txt"
+    ],
+    [
+      "Commons1819ReportLondonHolyheadRoad.txt"
+    ],
+    [
+      "bub_gb_vwXJDnM4VUEC.txt"
+    ],
+    [
+      "op1243550-1001.txt"
+    ],
+    [
+      "op1244285-1001.txt"
+    ],
+    [
+      "op1243424-1001.txt"
+    ],
+    [
+      "parliamentary-papers-1817-george-thomas.txt"
+    ]
+  ],
+  "样板词片数": 0,
+  "★ 只因样板才越线的对数（已扣除，不计入重复）": 0
+}

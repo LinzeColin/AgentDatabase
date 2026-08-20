@@ -60,6 +60,10 @@
 #   写成精确名 = 仓里留着一份**过时且更短**的清单，重建出来的语料比实际少一半。
 !**/raw/**/_ids*.txt
 !**/raw/**/_fetch-manifest.json
+# _EXCLUDED.txt —— 排除/署名记录（二手依据，供 check_unsourced_names 归档）。
+#    名字在语料里以 OCR 变体或只在源标题出现时写进这份记录，与 _ids/_manifest 同级保留；
+#    没有它，重拉语料后 unsourced-name 门会退回去。
+!**/raw/**/_EXCLUDED.txt
 
 # ② 归一化正文：references/sources/ 与 references/holdout/
 #   —— 它们是 raw 的派生副本，**体量与 raw 同级**。.json/.jsonl 是台账与指针，必须留下。

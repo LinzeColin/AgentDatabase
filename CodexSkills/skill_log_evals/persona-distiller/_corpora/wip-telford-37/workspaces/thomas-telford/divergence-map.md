@@ -12,13 +12,13 @@
 
 Telford 的自我叙述在不同角色中呈现不同面貌：
 
-- **自传第一人称**（src-659c3ee6ac1a）：以工程项目为主线，兼具自豪与审慎。如 Holyhead Road 总结——"was indeed an arduous undertaking, which occupied fifteen years of incessant exertion"。将 Menai Bridge 详述归于 Provis，以谦逊措辞收纳成就。
+- **自传第一人称**（src-659c3ee6ac1a，1838 年）：以工程项目为主线，兼具自豪与审慎。如 Holyhead Road 总结——"was indeed an arduous undertaking, which occupied fifteen years of incessant exertion"。将 Menai Bridge 详述归于 Provis，以谦逊措辞收纳成就。
 - **议会证词**（src-7d31bbb6da22）：以精确数字和实验数据为核心论证工具。书面陈述"I have a great many, which I took the liberty of putting down on paper"为本人手笔，口头问答为速记记录。
 - **委员会转述**（src-d2402f96bb68, src-c7891703b4e4）：委员会以间接引语呈现 Telford 的工程判断，可能省略了原始表述的细节与条件。
 
 ## 来源冲突：Rickman 编辑视角 vs Telford 自述
 
-自传由 Rickman 身后编辑出版。书名页标注"WRITTEN BY HIMSELF"与"EDITED BY JOHN RICKMAN, ONE OF HIS EXECUTORS; WITH A PREFACE, SUPPLEMENT, ANNOTATIONS, AND INDEX"（src-659c3ee6ac1a）。Rickman 在 Preface 中以编辑者身份呈现 Telford 的晚年状态——"from a growing infirmity of deafness, felt himself uncomfortable in any mixed company"与"he felt himself out of the habit of composing accurately for public perusal"（src-659c3ee6ac1a）。<!-- claim:clm-000000000008 -->
+自传由 Rickman 身后编辑出版。书名页标注"WRITTEN BY HIMSELF"与"EDITED BY JOHN RICKMAN, ONE OF HIS EXECUTORS; WITH A PREFACE, SUPPLEMENT, ANNOTATIONS, AND INDEX"（src-659c3ee6ac1a，1838 年）。Rickman 在 Preface 中以编辑者身份呈现 Telford 的晚年状态——"from a growing infirmity of deafness, felt himself uncomfortable in any mixed company"与"he felt himself out of the habit of composing accurately for public perusal"（src-659c3ee6ac1a）。<!-- claim:clm-000000000008 -->
 
 这些自述来自 Rickman 的 Preface 而非 Telford 本人的正文叙述。因此，在引用关于 Telford 晚年状态、写作困境等内容时，需区分 Telford 第一人称正文（工程叙述主体）与 Rickman 编辑视角（Preface、Annotations、Supplement）。<!-- claim:clm-000000000016 -->
 
@@ -26,11 +26,11 @@ DLI 副本（src-988d9ca66526）为主副本（src-659c3ee6ac1a）的数字扫�
 
 ## 来源冲突：Telford 实验数据 vs 议会报告转述
 
-议会报告（src-7d31bbb6da22）的委员会叙述部分称 Telford"has not made less than 300 experiments"（第 163 行），而研究文档中有时引用为"200 experiments"。核对原始文本：委员会报告正文第 163 行确实写的是"300 experiments"——这是委员会对 Telford 证词的转述。因此，在使用实验数量时应以议会报告印刷文本为准——"not less than 300 experiments"。<!-- claim:clm-00000000000b -->
+议会报告（src-7d31bbb6da22，1819 年）的委员会叙述部分称 Telford"has not made less than 300 experiments"（第 163 行），而研究文档中有时引用为"200 experiments"。核对原始文本：委员会报告正文第 163 行确实写的是"300 experiments"——这是委员会对 Telford 证词的转述。因此，在使用实验数量时应以议会报告印刷文本为准——"not less than 300 experiments"。<!-- claim:clm-00000000000b -->
 
 ## 来源冲突：Rennie 保守建议 vs Telford 原设计
 
-Rennie 在议会证词中提出 Menai 桥应建为四倍自重强度——"I should not think it secure unless it was capable of carrying at least four times its own weight"（src-7d31bbb6da22），高于 Telford 原设计余量。这暗示 Telford 原始设计可能偏于激进。但 Telford 立即接受 Rennie 的建议——"None at all; only the additional expense of that quantity of iron"（src-7d31bbb6da22）。<!-- claim:clm-000000000015 -->
+Rennie 在议会证词中提出 Menai 桥应建为四倍自重强度——"I should not think it secure unless it was capable of carrying at least four times its own weight"（src-7d31bbb6da22，1819 年），高于 Telford 原设计余量。这暗示 Telford 原始设计可能偏于激进。但 Telford 立即接受 Rennie 的建议——"None at all; only the additional expense of that quantity of iron"（src-7d31bbb6da22）。<!-- claim:clm-000000000015 -->
 
 ## 来源冲突：委员会评价 vs 委托关系偏差
 
