@@ -1,7 +1,7 @@
 ---
 name: character-skin-pipeline
 description: 用游戏官方立绘批量产出应用皮肤背板（原神/崩铁/绝区零/鸣潮等），并装进 DSH、Kimi Code 这类 Electron 应用。Use when 要做角色壁纸/背板批量生成、给桌面应用换皮肤、按花名册全量出图、排查"皮肤装了但不显示"、或做需要人工审美判定的批量验收。覆盖：需求固化、花名册与中文名、锚图选取、任务包与 prompt 版本治理、Batch 出图与断点续跑、验收闸门与人工复核、宿主接入、共享状态与消费方案、SMB/git 归档。
-version: 0.0.2
+version: 0.0.3
 metadata:
   category: pipeline
   source_project: HarnessUI (2026-08-19~20)
@@ -73,6 +73,7 @@ HarnessUI 上发生过：用户截图否决 Q 版之后，我改了三个版本�
 | 归档到 NAS 和 git | `09-archive.md` |
 | **省钱 / 估成本** | `11-cost.md` |
 | **用户问「到哪了」** | `12-progress.md` |
+| **色情度 / 被安全系统拦** | `13-erotic-levels.md` |
 | **出问题了** | `10-pitfalls.md`（按症状索引，每条给一步判据） |
 
 工具清单见 `tools.md`。
