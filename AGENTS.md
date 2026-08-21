@@ -143,3 +143,88 @@ ssh ovh 'sudo /usr/local/bin/linze-r2-free-tier-guard.py'
 > 脚本的安全底线也别削：**删 R2 对象前先 `HeadObject` 核对 OCI 上同 key 同大小，核不上就跳过不删**；
 > 最新一批永远保留；只碰 `backups/<组>/<时间戳>/`，**不碰 `primary-objects/`（那是制品字节，删了就是毁档）**。
 > 每份快照有 `r2`/`oci`/`github` 三个 verified 副本，删掉 R2 那份仍剩两份 —— 这是「卸载」不是「删除」。
+
+---
+
+## persona-distiller 流水线经验（2026-08-21 Telford#37 实测，供 T1/T2/T3 共用）
+
+- **结论**：模型文档里引文坐标必须写成 `（src-XXX，YYYY 年）`，裸 `（src-XXX）` 不算坐标。
+  **为什么**：check_quote_locator 的 LOCATOR 只认同段内的年份/页码/刊名/@偏移，不含 source_id；
+  10 份产物一次性扫出 65 条缺坐标，release 被拦。**代价**：65 条 × 8 文件逐条返工（约 1 段）。
+- **结论**：claims 层无排除机制——OCR 拼写变体（如 Pontcysyllte→Pontycysyllte）时，claim 文本必须
+  用语料拼写；答案/产物可留标准拼写，但要在 `raw/_EXCLUDED.txt` 记录（二手依据，脱「无依据」）。
+  **为什么**：check_claim_coverage 只看语料正文+台账，不读排除表；check_unsourced_names 读 raw/ 下
+  `_` 前缀 .txt。**代价**：两个名字各一次拦门 + 一轮排查。
+- **结论**：盲判载荷构建用 `--balanced-positions`（默认 sha256%2 可能偏，Telford 抽到 21/11）。
+  **为什么**：位次与系统相关会灌进 delta（Holmes#170 实测位次效应 +0.015~+0.027）。重建只重排
+  A/B 标签、不重生成答案，便宜。**代价**：重排后 judge 输入须重建（几行脚本）。
+- **结论**：release 门扫 `evals/judge_payload.v1.json`（候选侧），不扫 A/B 盲判载荷——baseline 侧
+  引文缺坐标不阻塞 release；基线 provenance warning 用 `package_target.py --acknowledge-disclosure
+  '<warning 原文子串>'` 具名承认，不是 error，不打回。**为什么**：裸模型基线本来就是「非能力证据」，
+  门拦的是冒充，不是发布。**代价**：0（按标准流程走）。
+- **结论**：case-known 类题有意测 holdout 记忆，rubric 里会要求 holdout 细节（如 "Appendices 7-13"）；
+  这类源标题词会穿过 holdout 泄漏门（非独有专名/数字）但被 unsourced-name 门抓——答案必须靠
+  `_EXCLUDED.txt` 记录兜底，别去改答案。**为什么**：holdout 密封源正文不在 raw/，checker 查不到属预期。
+  **代价**：Telford case-known-2 一次拦门。
+
+## worktree 位置：桌面版**没有**「Worktree location」这个设置（2026-08-13 实测，Claude Code 2.1.212）
+
+**结论**：`GithubProject/README.md` 里长期写着「桌面版可在 Settings → Claude Code → Worktree location
+指到 `~/Documents/Codex/GithubProject/_scratch/`」—— **那个设置不存在**。二进制里 0 处该文案；
+`~/.claude.json`、`~/.claude/settings.json`、桌面版 `claude_desktop_config.json` 里都没有对应键；
+搜「值为 `~/Documents/Codex` 的配置项」也是 0 处。这条是当初某个 agent **猜的**。
+
+真实规则是**算出来的**：worktree 固定落在 `<仓的祖父目录>/<仓名>/<worktree名>`。
+所以根指到 `GithubProject/AgentDatabase` 时，worktree 落在 `~/Documents/Codex/AgentDatabase/<名字>`，
+**在 `GithubProject/` 外面，违反铁律 2**。证据在桌面版自己的登记表
+`~/Library/Application Support/Claude/git-worktrees.json` 的 `untrackedDirGc.roots`，
+明写着 `~/Documents/Codex/AgentDatabase` 和 `~/Documents/Codex/MetaDatabase` 两个根。
+
+**代价**：这条铁律从写下那天起就不可执行，而后来每个 agent（包括我）都把它当「Owner 定的规矩」引用，
+**谁也没去点开看一眼**。我还差点把「你去 Settings 改」当成 Owner 的待办交回去 ——
+要他去改的那个东西本来就是 agent 写错的，交回去等于让他替我们的错买单。
+
+**怎么办**（README 已改成这两条）：
+① **手开 worktree，别用桌面版自动的** —— 在主树跑 `git worktree add ../_scratch/<repo>-<任务名> -b <分支> origin/main`。
+本机 MetaDatabase 的 worktree 全在 `_scratch/` 下就是因为都是手开的，**这条一直有效，只是从没被写下来**。
+② 已被自动开在外面的照常能用，但**收尾要多确认一步** `~/Documents/Codex/<REPO>/` 空了 ——
+否则会留下 `git worktree list` 里都没有的空壳目录（2026-08-10 留下过一个，里面躺着一份文件）。
+
+**自查**（已验四个方向：主树不报、`_scratch/` 下不报、`NotGithubProject/` 下报、别处报）：
+
+```bash
+ROOT=$(cd ~/Documents/Codex/GithubProject && pwd -P)   # 必须 pwd -P 取真实路径
+for r in "$ROOT"/*/; do
+  [ -d "$r/.git" ] || continue
+  git -C "$r" worktree list --porcelain 2>/dev/null | awk -v ROOT="$ROOT/" -v R="$(basename "$r")" \
+    '/^worktree /{p=substr($0,10); if (index(p, ROOT) != 1) print "✗ " R ": " p}'
+done
+```
+
+> 这条命令的两个坑都是造夹具才炸出来的，**别改回去**：
+> ① `!~ /GithubProject/` 是**子串**匹配，会放过 `/x/NotGithubProject/y`，也会把主树自己误报；必须 `index(p,ROOT)!=1` 做前缀。
+> ② `ROOT` 不 `pwd -P` 的话，在有软链的环境（macOS `/tmp`→`/private/tmp`）**100% 全报** ——
+> `git worktree list` 返回的是解析过软链的路径。本机 `~/Documents/` 没软链所以碰巧不发作，**换台机器就炸**。
+>
+> **不止桌面版会这样**：2026-08-21 跑这条自查抓到
+> `/Users/linzezhang/.codex/worktrees/521b/MetaDatabase` —— **Codex 把 worktree 放在 `~/.codex/worktrees/`**，
+> 又是另一个 `GithubProject/` 外的根。所以这条自查要**定期跑**，别只在换 agent 时想起来。
+
+## 报路径一律用绝对路径 —— 剥前缀等于报错位置
+
+**结论**：交付运维金库时我为了好看用 `sed 's|.*/GithubProject/|  |'` 把前缀剥掉，打印成
+`_protected/ops_vault/LINZE_OPS_VAULT_20260813.tar.gz`。界面把相对路径按**会话 cwd** 渲染成可点链接，
+而那个会话的 cwd 恰好是一棵开在错位置的 worktree —— **Owner 点开看到的是一条指向公开仓工作树的凭据路径，据此判我泄漏**。
+
+文件从头到尾都在正确的 `GithubProject/_protected/` 下（`find` 全盘只有 3 处，全对）。**错的是我的汇报。**
+
+**代价**：他必须先花时间**证伪我**，才能继续干活。这类错比内容错更贵 —— 内容错会被判据抓到，坐标错不会。
+
+**规矩**：① 报路径一律绝对路径，不 sed、不省略、不为对齐截断；
+② **凭据 / 备份 / 交付物**这三类的位置尤其如此，报错位置是安全事故级的；
+③ 想让输出好看就用表格或缩进，**不要动路径本身的字符**；
+④ 自查加一条：**我打印的每条路径，从 Owner 的 cwd 出发点开，落在我以为的地方吗？**
+
+> 同一个错第二天在别人身上复现：Codex 报「`_protected` 里没东西」，因为它在
+> `_scratch/metadatabase-abd-v0001-s11-p01/` 里找相对路径 —— **`_protected/` 在 `GithubProject/` 根下，往上两级**。
+> 给别的 agent 指路时也只给绝对路径。
