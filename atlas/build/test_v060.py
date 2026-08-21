@@ -1,6 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""v0.6.0 的负控。**每一条都对应一个「不做这条就会产生假数据」的失败形态。**
+"""v0.6.0 / v0.8.0 的负控。
+
+⚠ **macOS 系统 Python 的字节码缓存不在 `__pycache__`，在
+`~/Library/Caches/com.apple.python/<绝对路径>/*.pyc`。**
+删 `__pycache__` 清不掉它，`python3 -B` 也只挡写不挡读。
+「破坏源码 → 跑测试 → 还原源码」这套负控自检**会污染那个缓存**：
+还原之后再跑，读到的可能仍是被破坏那一版的字节码 —— 于是测试对着不存在的代码报红/报绿。
+
+本次实测就撞上了：文件里明明写着 `moonshot.cache_read = 0.25`，
+`inspect.getsource` 也是 0.25，而 `pricing.PRICES` 取出来是 0.1，
+`ast.literal_eval` 和 `exec` 同一份源码都给 0.25 —— 只有 import 是旧值。
+
+跑完任何「改源码再还原」的自检，先 `rm -rf ~/Library/Caches/com.apple.python` 再复核。
+
+**每一条都对应一个「不做这条就会产生假数据」的失败形态。**
 
 负控自身也要能红：删掉被测的那段逻辑，这里必须挂。
 不这样的话，一组永远绿的测试只是在给假数据背书。
@@ -39,7 +53,21 @@ class Pricing(unittest.TestCase):
         总量就永远显得是对的。v0.5.x 那批假数字全是这个形态。
         """
         self.assertIsNone(pricing.bie({"source": "mars", "tok_in": 999}))
-        self.assertIsNone(pricing.bie({"source": "dsh", "tok_in": 999}))
+        # dws 是审计日志不是模型会话，故意不给 provider。
+        # （v0.8.0 之前这里用的是 dsh —— 后来从 DSH 自己的账本反推出了 DeepSeek 倍数，
+        #   dsh 就不再是「未定价」了。断言跟着事实改，但要守的东西没变。）
+        self.assertIsNone(pricing.bie({"source": "dws", "tok_in": 999}))
+
+    def test_deepseek_multipliers_come_from_the_real_ledger(self):
+        """DeepSeek 的倍数是从本机账本反推的，不是抄来的 —— 锁住这个事实。
+
+        缓存读 0.25 而不是 Anthropic 的 0.10，正是「不许跨家套用倍数」的实证。
+        这条挂了，说明有人把它改回了某个「通用」值。
+        """
+        d = pricing.PRICES["deepseek"]
+        self.assertEqual(d["confidence"], "ledger")
+        self.assertEqual(d["cache_read"], 0.25)
+        self.assertNotEqual(d["cache_read"], pricing.PRICES["anthropic"]["cache_read"])
 
     def test_zero_tokens_is_none_not_zero(self):
         self.assertIsNone(pricing.bie({"source": "claude-code", "tok_in": 0}))
@@ -55,11 +83,11 @@ class Pricing(unittest.TestCase):
         混在一起会让「dsh 根本没单价」和「这场 claude-code 没记用量」
         看起来是同一件事 —— 而两者的解法完全不同。
         """
-        r = pricing.summarize([{"source": "dsh", "tok_in": 100},        # 没价目表
+        r = pricing.summarize([{"source": "dws", "tok_in": 100},        # 没价目表
                                {"source": "claude-code", "tok_in": 0},  # 有价目表但没量到
                                {"source": "claude-code", "tok_in": 100}])
         self.assertEqual(r["no_price"]["sessions"], 1)
-        self.assertIn("dsh", r["no_price"]["sources"])
+        self.assertIn("dws", r["no_price"]["sources"])
         self.assertEqual(r["no_usage"]["sessions"], 1)
         self.assertIn("claude-code", r["no_usage"]["sources"])
 
