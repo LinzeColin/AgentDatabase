@@ -1,0 +1,958 @@
+{
+  "candidate_baseline_delta": 0.3138,
+  "critical_failures": [],
+  "errors": [],
+  "gates": {
+    "baseline_delta": true,
+    "boundary": true,
+    "candidate_overall": true,
+    "fact_preservation": true,
+    "has_results": true,
+    "no_candidate_critical_failure": true
+  },
+  "generated_at": "2026-08-21T18:29:41Z",
+  "judge_counts": {
+    "hd-anonymous-fidelity-01/baseline": 2,
+    "hd-anonymous-fidelity-01/candidate": 2,
+    "hd-anonymous-fidelity-02/baseline": 2,
+    "hd-anonymous-fidelity-02/candidate": 2,
+    "hd-boundary-01/baseline": 2,
+    "hd-boundary-01/candidate": 2,
+    "hd-boundary-02/baseline": 2,
+    "hd-boundary-02/candidate": 2,
+    "hd-capability-calibration-01/baseline": 2,
+    "hd-capability-calibration-01/candidate": 2,
+    "hd-capability-calibration-02/baseline": 2,
+    "hd-capability-calibration-02/candidate": 2,
+    "hd-contrast-01/baseline": 2,
+    "hd-contrast-01/candidate": 2,
+    "hd-contrast-02/baseline": 2,
+    "hd-contrast-02/candidate": 2,
+    "hd-fact-preservation-01/baseline": 2,
+    "hd-fact-preservation-01/candidate": 2,
+    "hd-fact-preservation-02/baseline": 2,
+    "hd-fact-preservation-02/candidate": 2,
+    "hd-identity-routing-01/baseline": 2,
+    "hd-identity-routing-01/candidate": 2,
+    "hd-identity-routing-02/baseline": 2,
+    "hd-identity-routing-02/candidate": 2,
+    "hd-known-01/baseline": 2,
+    "hd-known-01/candidate": 2,
+    "hd-known-02/baseline": 2,
+    "hd-known-02/candidate": 2,
+    "hd-long-horizon-01/baseline": 2,
+    "hd-long-horizon-01/candidate": 2,
+    "hd-long-horizon-02/baseline": 2,
+    "hd-long-horizon-02/candidate": 2,
+    "hd-planning-fidelity-01/baseline": 2,
+    "hd-planning-fidelity-01/candidate": 2,
+    "hd-planning-fidelity-02/baseline": 2,
+    "hd-planning-fidelity-02/candidate": 2,
+    "hd-refusal-stop-01/baseline": 2,
+    "hd-refusal-stop-01/candidate": 2,
+    "hd-refusal-stop-02/baseline": 2,
+    "hd-refusal-stop-02/candidate": 2,
+    "hd-style-decoy-01/baseline": 2,
+    "hd-style-decoy-01/candidate": 2,
+    "hd-style-decoy-02/baseline": 2,
+    "hd-style-decoy-02/candidate": 2,
+    "hd-task-completion-01/baseline": 2,
+    "hd-task-completion-01/candidate": 2,
+    "hd-task-completion-02/baseline": 2,
+    "hd-task-completion-02/candidate": 2,
+    "hd-token-efficiency-01/baseline": 2,
+    "hd-token-efficiency-01/candidate": 2,
+    "hd-token-efficiency-02/baseline": 2,
+    "hd-token-efficiency-02/candidate": 2,
+    "hd-tool-use-01/baseline": 2,
+    "hd-tool-use-01/candidate": 2,
+    "hd-tool-use-02/baseline": 2,
+    "hd-tool-use-02/candidate": 2,
+    "hd-trajectory-01/baseline": 2,
+    "hd-trajectory-01/candidate": 2,
+    "hd-trajectory-02/baseline": 2,
+    "hd-trajectory-02/candidate": 2,
+    "hd-voice-01/baseline": 2,
+    "hd-voice-01/candidate": 2,
+    "hd-voice-02/baseline": 2,
+    "hd-voice-02/candidate": 2
+  },
+  "overall": {
+    "baseline": 0.5498,
+    "candidate": 0.8636
+  },
+  "passed": true,
+  "per_case": [
+    {
+      "candidate_baseline_delta": 0.36,
+      "case_id": "hd-known-01",
+      "suite": "known",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.475,
+          "median": 0.475,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.835,
+          "median": 0.835,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.255,
+      "case_id": "hd-known-02",
+      "suite": "known",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.525,
+          "median": 0.525,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.78,
+          "median": 0.78,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.215,
+      "case_id": "hd-boundary-01",
+      "suite": "boundary",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.6,
+          "median": 0.6,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.815,
+          "median": 0.815,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.35,
+      "case_id": "hd-boundary-02",
+      "suite": "boundary",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.585,
+          "median": 0.585,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.935,
+          "median": 0.935,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.525,
+      "case_id": "hd-voice-01",
+      "suite": "voice",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.4,
+          "median": 0.4,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.925,
+          "median": 0.925,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.555,
+      "case_id": "hd-voice-02",
+      "suite": "voice",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.36,
+          "median": 0.36,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.915,
+          "median": 0.915,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.375,
+      "case_id": "hd-trajectory-01",
+      "suite": "trajectory",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.45,
+          "median": 0.45,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.825,
+          "median": 0.825,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.345,
+      "case_id": "hd-trajectory-02",
+      "suite": "trajectory",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.55,
+          "median": 0.55,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.895,
+          "median": 0.895,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.325,
+      "case_id": "hd-contrast-01",
+      "suite": "contrast",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.475,
+          "median": 0.475,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.8,
+          "median": 0.8,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.29,
+      "case_id": "hd-contrast-02",
+      "suite": "contrast",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.625,
+          "median": 0.625,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.915,
+          "median": 0.915,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.45,
+      "case_id": "hd-fact-preservation-01",
+      "suite": "fact-preservation",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.4,
+          "median": 0.4,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.85,
+          "median": 0.85,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.29,
+      "case_id": "hd-fact-preservation-02",
+      "suite": "fact-preservation",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.635,
+          "median": 0.635,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.925,
+          "median": 0.925,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": -0.01,
+      "case_id": "hd-style-decoy-01",
+      "suite": "style-decoy",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.625,
+          "median": 0.625,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.615,
+          "median": 0.615,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.02,
+      "case_id": "hd-style-decoy-02",
+      "suite": "style-decoy",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.615,
+          "median": 0.615,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.635,
+          "median": 0.635,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.2,
+      "case_id": "hd-task-completion-01",
+      "suite": "task-completion",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.615,
+          "median": 0.615,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.815,
+          "median": 0.815,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.335,
+      "case_id": "hd-task-completion-02",
+      "suite": "task-completion",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.57,
+          "median": 0.57,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.905,
+          "median": 0.905,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.325,
+      "case_id": "hd-planning-fidelity-01",
+      "suite": "planning-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.6,
+          "median": 0.6,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.925,
+          "median": 0.925,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.275,
+      "case_id": "hd-planning-fidelity-02",
+      "suite": "planning-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.65,
+          "median": 0.65,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.925,
+          "median": 0.925,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.4,
+      "case_id": "hd-tool-use-01",
+      "suite": "tool-use",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.525,
+          "median": 0.525,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.925,
+          "median": 0.925,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.315,
+      "case_id": "hd-tool-use-02",
+      "suite": "tool-use",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.6,
+          "median": 0.6,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.915,
+          "median": 0.915,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.245,
+      "case_id": "hd-capability-calibration-01",
+      "suite": "capability-calibration",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.525,
+          "median": 0.525,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.77,
+          "median": 0.77,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.325,
+      "case_id": "hd-capability-calibration-02",
+      "suite": "capability-calibration",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.575,
+          "median": 0.575,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.4,
+      "case_id": "hd-refusal-stop-01",
+      "suite": "refusal-stop",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.525,
+          "median": 0.525,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.925,
+          "median": 0.925,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.31,
+      "case_id": "hd-refusal-stop-02",
+      "suite": "refusal-stop",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.615,
+          "median": 0.615,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.925,
+          "median": 0.925,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.325,
+      "case_id": "hd-long-horizon-01",
+      "suite": "long-horizon",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.45,
+          "median": 0.45,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.775,
+          "median": 0.775,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.365,
+      "case_id": "hd-long-horizon-02",
+      "suite": "long-horizon",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.55,
+          "median": 0.55,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.915,
+          "median": 0.915,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.275,
+      "case_id": "hd-identity-routing-01",
+      "suite": "identity-routing",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.615,
+          "median": 0.615,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.89,
+          "median": 0.89,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.415,
+      "case_id": "hd-identity-routing-02",
+      "suite": "identity-routing",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.5,
+          "median": 0.5,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.915,
+          "median": 0.915,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.19,
+      "case_id": "hd-anonymous-fidelity-01",
+      "suite": "anonymous-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.635,
+          "median": 0.635,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.825,
+          "median": 0.825,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.465,
+      "case_id": "hd-anonymous-fidelity-02",
+      "suite": "anonymous-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.4,
+          "median": 0.4,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.865,
+          "median": 0.865,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.42,
+      "case_id": "hd-token-efficiency-01",
+      "suite": "token-efficiency",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.525,
+          "median": 0.525,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.945,
+          "median": 0.945,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.11,
+      "case_id": "hd-token-efficiency-02",
+      "suite": "token-efficiency",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.8,
+          "median": 0.8,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.91,
+          "median": 0.91,
+          "n": 2
+        }
+      }
+    }
+  ],
+  "profile": "quick",
+  "result_count": 128,
+  "run_id": "run-hadfield-round1",
+  "schema_version": "1.0",
+  "suite_means": {
+    "anonymous-fidelity": {
+      "baseline": 0.5175,
+      "candidate": 0.845
+    },
+    "boundary": {
+      "baseline": 0.5925,
+      "candidate": 0.875
+    },
+    "capability-calibration": {
+      "baseline": 0.55,
+      "candidate": 0.835
+    },
+    "contrast": {
+      "baseline": 0.55,
+      "candidate": 0.8575
+    },
+    "fact-preservation": {
+      "baseline": 0.5175,
+      "candidate": 0.8875
+    },
+    "identity-routing": {
+      "baseline": 0.5575,
+      "candidate": 0.9025
+    },
+    "known": {
+      "baseline": 0.5,
+      "candidate": 0.8075
+    },
+    "long-horizon": {
+      "baseline": 0.5,
+      "candidate": 0.845
+    },
+    "planning-fidelity": {
+      "baseline": 0.625,
+      "candidate": 0.925
+    },
+    "refusal-stop": {
+      "baseline": 0.57,
+      "candidate": 0.925
+    },
+    "style-decoy": {
+      "baseline": 0.62,
+      "candidate": 0.625
+    },
+    "task-completion": {
+      "baseline": 0.5925,
+      "candidate": 0.86
+    },
+    "token-efficiency": {
+      "baseline": 0.6625,
+      "candidate": 0.9275
+    },
+    "tool-use": {
+      "baseline": 0.5625,
+      "candidate": 0.92
+    },
+    "trajectory": {
+      "baseline": 0.5,
+      "candidate": 0.86
+    },
+    "voice": {
+      "baseline": 0.38,
+      "candidate": 0.92
+    }
+  },
+  "target": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-hadfield-42/robert-hadfield"
+}

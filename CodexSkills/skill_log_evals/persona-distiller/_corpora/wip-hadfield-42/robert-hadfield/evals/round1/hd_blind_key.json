@@ -1,0 +1,162 @@
+{
+ "q-01": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-voice-02"
+ },
+ "q-02": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-long-horizon-01"
+ },
+ "q-03": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-capability-calibration-01"
+ },
+ "q-04": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-fact-preservation-01"
+ },
+ "q-05": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-voice-01"
+ },
+ "q-06": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-known-02"
+ },
+ "q-07": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-long-horizon-02"
+ },
+ "q-08": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-task-completion-02"
+ },
+ "q-09": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-refusal-stop-01"
+ },
+ "q-10": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-contrast-01"
+ },
+ "q-11": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-anonymous-fidelity-01"
+ },
+ "q-12": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-trajectory-01"
+ },
+ "q-13": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-anonymous-fidelity-02"
+ },
+ "q-14": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-style-decoy-01"
+ },
+ "q-15": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-tool-use-01"
+ },
+ "q-16": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-style-decoy-02"
+ },
+ "q-17": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-capability-calibration-02"
+ },
+ "q-18": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-contrast-02"
+ },
+ "q-19": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-boundary-01"
+ },
+ "q-20": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-tool-use-02"
+ },
+ "q-21": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-planning-fidelity-02"
+ },
+ "q-22": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-task-completion-01"
+ },
+ "q-23": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-trajectory-02"
+ },
+ "q-24": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-identity-routing-02"
+ },
+ "q-25": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-identity-routing-01"
+ },
+ "q-26": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-planning-fidelity-01"
+ },
+ "q-27": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-refusal-stop-02"
+ },
+ "q-28": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-token-efficiency-01"
+ },
+ "q-29": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-boundary-02"
+ },
+ "q-30": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "hd-known-01"
+ },
+ "q-31": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-token-efficiency-02"
+ },
+ "q-32": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "hd-fact-preservation-02"
+ }
+}
