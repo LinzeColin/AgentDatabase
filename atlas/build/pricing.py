@@ -30,8 +30,8 @@ SOURCE_PROVIDER = {
     "claude-desktop": "anthropic",
     "codex":          "openai",
     "chatgpt":        "openai",
-    "openchatcut":    "openai",
     "kimi-code":      "moonshot",
+    "workbuddy":      None,      # 用量在 traces 里、没有 sessionId，摊不到会话上
     "dsh":            "deepseek",
     # dws 是审计日志，不是模型会话 —— 故意不给 provider。
 }
@@ -58,9 +58,27 @@ PRICES = {
         "note": "按 Kimi K2 档折算。缓存命中折扣比 Anthropic 浅得多（0.25 而不是 0.1）"
                 "—— 这正是「不许跨家套用倍数」的原因",
     },
-    # deepseek 故意留空：2026-08-16 它把缓存命中档涨了约 6 倍，
-    # 而本机 dsh 来源一个 token 都没量到（1937 场全是 0）。
-    # 给一个查不准的倍数去乘一堆 0，只会让「未定价」这件事从页面上消失。
+    # DeepSeek —— 倍数**从本机的真实账本反推出来的**，不是抄单价页。
+    # ~/.dsh/storages/token-billing-ledger.json 每一步都带 cost + 四类 token，
+    # 解一个最小二乘就得到相对倍数。这是这张表里唯一有本机账单背书的一行。
+    "deepseek": {
+        "in": 1.0, "cache_read": 0.25, "cache_write": 0.0, "out": 4.0,
+        "confidence": "ledger", "fetched": "2026-08-17",
+        "note": ("由本机 token-billing-ledger.json 的 580 条非估算计费步骤最小二乘反推："
+                 "v4-pro ¥4.0e-6/输入、¥1.0e-6/缓存读、¥1.6e-5/输出；v4-flash 恰好是它的一半。"
+                 "两个型号解出同一组相对倍数（缓存读 0.25、输出 4.00）。"
+                 "★ 注意缓存读是 0.25 不是 Anthropic 的 0.10 —— 这正是「不许跨家套用倍数」的实证。"
+                 "★ 那本账是滚动的，只覆盖 1 场 1 天（¥133.90）—— 倍数可信，用量不是全历史"),
+    },
+    # SCNet（中国超算）—— 本机是 Token Plan 套餐制，**按量单价不适用**。
+    # 硬给一个倍数会让页面显示出一个根本不存在的「按量成本」。
+    "scnet": {
+        "in": 1.0, "cache_read": 0.10, "cache_write": 0.0, "out": 1.0,
+        "confidence": "plan", "fetched": "2026-08-21",
+        "note": ("套餐制（Token Plan），按量单价不适用 —— 倍数只用来做内部占比，"
+                 "绝不能读成钱。而且 Token Plan 明令禁止 API 脚本化/批量调用，"
+                 "扇出走这条线是合规问题不只是成本问题"),
+    },
 }
 
 FIELDS = (("tok_in", "in"), ("tok_cache_r", "cache_read"),
@@ -95,6 +113,35 @@ def bie(s: dict) -> float | None:
 
 def raw_tokens(s: dict) -> int:
     return sum((s.get(f) or 0) for f, _ in FIELDS)
+
+
+def _real_money(sessions: list) -> dict:
+    """**真实账单**，不是折算。本机只有 DSH 记了这个（cost + currency + estimated）。
+
+    为什么单独成一栏：BIE 是无量纲倍数，回答「哪一块最贵」；
+    这一栏是真钱，回答「到底花了多少」。把两者并成一个数，
+    读的人会以为整个站上的量都有账单背书 —— 实际上只有极小一块有。
+    """
+    rows = [s for s in sessions if s.get("cost_cny")]
+    if not rows:
+        return {"state": "没做", "why": "没有任何来源记了真实账单金额。"}
+    tot = round(sum(s["cost_cny"] for s in rows), 2)
+    est = sum(s.get("cost_estimated_steps", 0) for s in rows)
+    steps = sum(s.get("billing_steps", 0) for s in rows)
+    days = sorted({(s.get("start") or "")[:10] for s in rows if s.get("start")})
+    return {
+        "state": "通",
+        "currency": "CNY",
+        "total": tot,
+        "sessions": len(rows),
+        "billing_steps": steps,
+        "estimated_steps": est,
+        "days": days,
+        "coverage_note": (f"只有 {len(rows)} 场 / {len(days)} 天有真实账单 —— "
+                          f"来自 DSH 的滚动账本，它只保留最近一场。"
+                          f"这不是你的全部花费，是唯一一块能拿出账单的。"),
+        "why_others_missing": "其余 harness 的本机日志里只有 token 数，没有金额。",
+    }
 
 
 def summarize(sessions: list) -> dict:
@@ -150,6 +197,7 @@ def summarize(sessions: list) -> dict:
         "no_price": dict(no_price, why="这些来源没有价目表 —— 要么本机查不到当期单价，要么它根本不是模型会话。"),
         "no_usage": dict(no_usage, why="这些来源有价目表，但日志里一个 token 都没记 —— 是「没量到」，不是「没花钱」。"),
         "prices": priced_providers(),
+        "real_money": _real_money(sessions),
         "caveats": [
             "跨 provider 加总不成立：各家缓存折扣差一个数量级（0.10 ~ 0.25）。",
             "跨 tokenizer 版本不可比：换过 tokenizer 的模型，同样文本 token 数不同。",

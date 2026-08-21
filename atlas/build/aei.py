@@ -360,6 +360,141 @@ def _populations(sessions: list) -> dict:
     }
 
 
+
+# ── AEI 对齐清单 ──
+# Owner 的原话：「anthropic economic index 还是评分 20%，依旧不够满足 AEI 的内容」。
+# 所以这张表把「对齐到什么程度」变成**逐项可核的**，而不是一个拍出来的百分比：
+#   full      本机能按 AEI 的口径算出同一个东西
+#   proxy     换了一个可测的替代物，回答同一类问题，但**不是等价**
+#   none      本机做不到，且不拿别的东西顶替
+# 分数 = full 计 1、proxy 计 0.5、none 计 0，再除以条目数。**算法印在页面上**，
+# 免得下次又变成一个没人能复核的数字。
+AEI_ALIGN = [
+    ("协作五模式（指派/反馈环/迭代/学习/校验）", "full",
+     "按行为判：轮次、工具数、学习/校验词形。与 AEI 同名同义。"),
+    ("自动化 vs 增强 份额", "full", "= (指派+反馈环) / 全部，与 AEI 同一算法。"),
+    ("automation 率的时间序列", "full",
+     "AEI 自己最重要的发现就是这个比值 16 个月翻了两次方向 —— 单点值没有意义，必须成序列。"),
+    ("按来源分开报 automation 率", "full",
+     "AEI 从 v3 起把 Claude.ai 与 1P API 分开（49.1% vs 77%）。本机对应物是按 harness 分开。"),
+    ("有效覆盖率（覆盖率 × 成功率）", "full",
+     "AEI 明确区分「覆盖率」与「有效覆盖率」。本机两个都能算。"),
+    ("样本量下限", "full",
+     "AEI 的隐私下限（≥15 段对话且跨 ≥5 账号）事实上是有效样本门槛：低于门槛不进分析，不记 0。"),
+    ("任务复杂度分档", "proxy",
+     "AEI 用任务时长分布；本机用工具调用数与轮次折算成当量刻度。只能比大小，不能读成工时。"),
+    ("技能层级", "proxy", "AEI 用教育年限；本机用术语密度。只说明文本多专业，不说明需要几年教育。"),
+    ("任务成功", "proxy",
+     "AEI 用分类器判；本机用三个可观测信号合成（是否再问、工具失败密度、当天有无提交）。"),
+    ("用途分类（工作/学习/个人）", "proxy", "AEI 有标注集；本机按领域与关键词认。"),
+    ("AI 自主度 1–5", "proxy", "AEI 有标注；本机由工具调用 ÷ 轮次映射。"),
+    ("产物分类", "proxy", "AEI 有 30+ 类标注；本机按产出关键词认，粒度更粗。"),
+    ("按职业的 token 消耗", "proxy", "没有职业维度，改用领域维度。"),
+    ("Cadence（小时/星期/季节）", "full", "AEI 同款，本机数据足够。"),
+    ("注意力集中度", "proxy",
+     "数学对象是赫芬达尔指数。这不是 AEI 的 Gini —— AEI 的 Gini 测人与人之间的不平等，单人算不出。"),
+    ("O*NET 职业映射", "none", "需要映射表且映射本身要模型；运行期禁模型。不拿别的顶替。"),
+    ("地理分布 vs 人均 GDP", "none", "一个人、一个地区，这一维在本机没有含义。"),
+    ("调查层（自报暴露度等）", "none", "AEI 有 9700 份问卷。没有问卷就没有这一层，留空。"),
+    ("跨人不平等（真 Gini / AUI 原义）", "none", "需要跨人分布，单人只有一个点。"),
+    ("劳动生产率 pp", "none",
+     "Hulten 定理三个输入全缺（无工资份额、无任务时间权重、无可信反事实耗时）。"),
+]
+
+# 样本量下限。AEI 的隐私下限起的就是这个作用：**低于门槛的直接不进分析，不是记成 0**。
+MIN_BUCKET = 8
+
+
+def _align_score() -> dict:
+    w = {"full": 1.0, "proxy": 0.5, "none": 0.0}
+    got = sum(w[k] for _, k, _ in AEI_ALIGN)
+    n = len(AEI_ALIGN)
+    return {
+        "score": round(got / n, 3),
+        "full": sum(1 for _, k, _ in AEI_ALIGN if k == "full"),
+        "proxy": sum(1 for _, k, _ in AEI_ALIGN if k == "proxy"),
+        "none": sum(1 for _, k, _ in AEI_ALIGN if k == "none"),
+        "items": [{"item": a, "level": b, "why": c} for a, b, c in AEI_ALIGN],
+        "formula": "full 计 1、proxy 计 0.5、none 计 0，除以条目数。算法印在这里，好让下次能复核。",
+        "note": ("满分不是目标 —— 有 5 条是本机原理上做不到的（跨人分布、问卷、O*NET）。"
+                 "把它们硬凑出来才是真正的退步。这个分只用来回答一个问题："
+                 "「还有哪几条是能做而没做的」。"),
+    }
+
+
+def _automation_series(hum: list, min_n: int = MIN_BUCKET) -> dict:
+    """automation 率的**时间序列**。
+
+    AEI 自己最重要的发现就是这个比值在 16 个月里翻了两次方向
+    （57/43 → 49.1/47 → 45/52）。所以单点值是误导的，必须成序列。
+
+    低于 min_n 的周**整周剔除，不记 0** —— 记 0 会画出一条假的崩盘曲线。
+    """
+    from collections import defaultdict as _dd
+    wk = _dd(lambda: {"auto": 0, "aug": 0, "n": 0})
+    for s in hum:
+        d = local_dt(s.get("start", ""))
+        if not d:
+            continue
+        iy, iw, _ = d.isocalendar()
+        b = wk[f"{iy}-W{iw:02d}"]
+        g = MODES.get(s.get("_mode", ""), {}).get("group")
+        if g == "自动化":
+            b["auto"] += 1
+        elif g == "增强":
+            b["aug"] += 1
+        else:
+            continue
+        b["n"] += 1
+    rows, dropped = [], 0
+    for k in sorted(wk):
+        b = wk[k]
+        if b["n"] < min_n:
+            dropped += 1
+            continue
+        rows.append({"w": k, "n": b["n"], "automation": round(b["auto"] / b["n"], 4)})
+    flips = sum(1 for i in range(1, len(rows))
+                if (rows[i]["automation"] >= 0.5) != (rows[i - 1]["automation"] >= 0.5))
+    return {
+        "weeks": rows, "dropped_weeks": dropped, "min_n": min_n,
+        "flips": flips,
+        "note": (f"每周至少 {min_n} 场才计入；不够的整周剔除，不记 0 —— "
+                 "记 0 会画出一条假的崩盘曲线。这正是 AEI 隐私下限在做的事。"),
+        "verdict": (f"这条线越过 50% 线 {flips} 次。" +
+                    ("和 AEI 一样，它是会翻方向的 —— 任何单点的「你的自动化率是 X%」都在误导。"
+                     if flips else "本机这段时间里没有翻过方向。")),
+    }
+
+
+def _by_harness(hum: list, min_n: int = MIN_BUCKET) -> dict:
+    """按 harness 分开报 automation 率。
+
+    AEI 从 v3 起把 Claude.ai 与 1P API 分开报，因为两者差 49.1% vs 77% ——
+    混在一起的那个比值不对应任何真实场景。本机同理。
+    """
+    from collections import defaultdict as _dd
+    b = _dd(lambda: {"auto": 0, "aug": 0, "n": 0, "tok": 0})
+    for s in hum:
+        g = MODES.get(s.get("_mode", ""), {}).get("group")
+        if g not in ("自动化", "增强"):
+            continue
+        x = b[s.get("source", "?")]
+        x["auto" if g == "自动化" else "aug"] += 1
+        x["n"] += 1
+        x["tok"] += (s.get("tok_in", 0) or 0) + (s.get("tok_cache_r", 0) or 0)
+    rows = [{"source": k, "n": v["n"], "tokens": v["tok"],
+             "automation": round(v["auto"] / v["n"], 4)}
+            for k, v in b.items() if v["n"] >= min_n]
+    rows.sort(key=lambda r: -r["n"])
+    spread = (max(r["automation"] for r in rows) - min(r["automation"] for r in rows)) if len(rows) > 1 else None
+    return {
+        "rows": rows, "min_n": min_n, "spread": round(spread, 4) if spread is not None else None,
+        "note": ("AEI v3 起把不同来源分开报，因为它们差得离谱（49.1% vs 77%）。"
+                 "本机各 harness 之间的差距见 spread —— 差得越大，"
+                 "「一个总的 automation 率」就越没有意义。"),
+    }
+
+
 def build(sessions: list, delivery: dict | None = None) -> dict:
     hum = [s for s in sessions if s.get("kind") == "human"]
     N = max(1, len(hum))
@@ -617,6 +752,29 @@ def build(sessions: list, delivery: dict | None = None) -> dict:
         "domains_unclassified": dom_count.get("未归类", 0),
         "populations": pops,
         "decidable": decidable,
+        # ── Owner：「AEI 还是评分 20%」。这一块把「对齐到什么程度」变成逐项可核的 ──
+        "alignment": _align_score(),
+        "automation_series": _automation_series(hum),
+        "by_harness": _by_harness(hum),
+        "effective_coverage": {
+            "note": ("AEI 明确区分覆盖率（有多少任务被碰过）与有效覆盖率"
+                     "（按成功率加权后还剩多少）。只报前者会把「试过但没成」也算成收益。"),
+            "coverage": round((N - dom_count.get("未归类", 0)) / N, 4),
+            # 分母**只取判得出来的**（剔掉「不确定」）—— 把判不出来的塞进分母
+            # 等于默认它们失败了，那是拿「没测出来」当「测出来是坏的」。
+            # 这正是 AEI 隐私下限的同一条道理。
+            "decided": sum(v for k, v in succ.items() if k != "不确定"),
+            "unknown": succ.get("不确定", 0),
+            "success_rate": round(succ.get("多半成了", 0)
+                                  / max(1, sum(v for k, v in succ.items() if k != "不确定")), 4),
+            "effective": round((N - dom_count.get("未归类", 0)) / N
+                               * succ.get("多半成了", 0)
+                               / max(1, sum(v for k, v in succ.items() if k != "不确定")), 4),
+            "denominator_note": ("成功率的分母只算判得出来的那部分（剔掉「不确定」）。"
+                                 "把判不出来的算进分母，等于默认它们失败了。"),
+            "success_caveat": ("成功率是三个可观测信号合成的代理（是否再问同一件事／"
+                               "工具失败密度／当天有无提交），不是 AEI 那种分类器判定。"),
+        },
         "artifacts": [{"artifact": k, "n": v, "share": round(v / art_tot, 4)}
                       for k, v in art_count.most_common()],
         "artifacts_note": "AEI 用分类器认 30+ 类产出；本机没有分类器，"

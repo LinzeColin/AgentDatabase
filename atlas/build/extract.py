@@ -49,6 +49,11 @@ SOURCES = {
     # 仓内已入库的历史导出，回溯到 2025-11。路径相对仓根，由 --repo 指定。
     "chatgpt": {"root": Path("OpenAIDatabase/data/public_raw/chatgpt"), "glob": "*.json",
                 "parser": "chatgpt", "repo_relative": True},
+    # WorkBuddy。**上一版把它整个跳过了，判词是「应用安装包与运行日志，非对话」——那是错的。**
+    # 实测 ~/.workbuddy 下有 workbuddy.db（sessions 表 21 行、session_usage 6 行）、
+    # traces/ 73 个 trace（totalTokens 合计 5,054 万）、app/sessions.json、memory/*.md。
+    # 会话主体在 sqlite 里而不是 jsonl 里，所以按扩展名找文件的探测法看不见它。
+    "workbuddy":   {"root": HOME / ".workbuddy", "glob": "workbuddy.db", "parser": "workbuddy"},
 }
 
 # 查过、确认没有对话内容的来源。**必须出现在产物里**，否则「筛掉的那部分」
@@ -56,8 +61,11 @@ SOURCES = {
 SKIPPED = {
     "dsh-desktop": {"path": "~/Library/Application Support/DSH Desktop", "size_mb": 1100,
                     "why": "Electron 缓存，无对话。真正的 DSH 会话在 ~/.dsh/sessions，已入库（source_id=dsh）"},
-    "workbuddy": {"path": "~/.workbuddy",       "size_mb": 1300, "why": "应用安装包与运行日志，非对话"},
-    "mmx":       {"path": "~/.mmx",             "size_mb": 0,    "why": "仅配置文件 8KB"},
+    # 2026-08-21 复查：workbuddy 有对话，已入库（见 SOURCES）。这一条**是错判，删掉**。
+    "minimax-hub": {"path": "~/.mmx 与 ~/Library/.../com.minimax.hub", "size_mb": 0,
+                    "why": ("本机只有 8KB 配置（config.json / update-state.json）与 macOS 应用状态，"
+                            "没有任何本地对话 —— MiniMax Hub 的会话在云端。"
+                            "要它进来只能走云端导出，本机抽不出。")},
     "kimi-desktop": {"path": "~/Library/Application Support/kimi-desktop", "size_mb": 428, "why": "缓存与共享资源，对话在云端"},
     "claude-vm": {"path": "~/Library/Application Support/Claude/vm_bundles", "size_mb": 10240, "why": "虚拟机镜像，非对话"},
 }
@@ -66,7 +74,10 @@ REDACT = [
     (re.compile(re.escape(str(HOME))), "~"),
     # 令牌形态按**前缀族**匹配，不按字段名。实测踩过：MiniMax 的
     # access_token / refresh_token 嵌在 oauth 这一层里，按键名过滤完全挡不住。
-    (re.compile(r"\b(gh[pousr]_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9\-]{20,}|AKIA[0-9A-Z]{16}|"
+    # ★ 字符类必须含下划线。实测漏过一次：真实的 OpenAI key 形如
+    #   `sk-proj-wRPf…RGbY_KMqL9LcFX…`，中间那个 `_` 让 `[A-Za-z0-9\-]{20,}` 提前断掉，
+    #   整串就没被认出来。凡是「令牌形态」的字符类，`_` 一定要在里面。
+    (re.compile(r"\b(gh[pousr]_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9_\-]{20,}|AKIA[0-9A-Z]{16}|"
                 r"oat-[A-Za-z0-9_\-]{16,}|dfrt-[A-Za-z0-9_\-]{16,}|"
                 r"xox[baprs]-[A-Za-z0-9\-]{10,}|glpat-[A-Za-z0-9_\-]{16,}|"
                 r"eyJ[A-Za-z0-9_\-]{16,}\.[A-Za-z0-9_\-]{16,}\.[A-Za-z0-9_\-]{8,})\b"), "<SECRET>"),
@@ -312,6 +323,23 @@ def take_pointers(rec: dict, m: dict) -> None:
             v = redact(cmd.strip().splitlines()[0])[:120]
             if v not in rec["cmds"]:
                 rec["cmds"].append(v)
+
+
+def dedupe_models(models: list) -> list:
+    """同一个模型的多个别名合成一个，**留带前缀的那个**（它带着 provider）。
+
+    为什么必须做：下游按 `1/len(models)` 给一场会话分权重。
+    同时收到 `GLM-5.2` 和 `scnet/glm-5.2` 时，一场会被拆成两个半场 ——
+    表面上「模型分布更细了」，实际上是同一份用量被摊成两半，
+    而且其中一半没有厂商归属。这是一种很难看出来的重复计数。
+    """
+    keep = []
+    for m in sorted(set(models), key=lambda x: (0 if "/" in x else 1, x)):
+        tail = m.split("/")[-1].lower()
+        if any(k.split("/")[-1].lower() == tail for k in keep):
+            continue
+        keep.append(m)
+    return keep
 
 
 def hour_add(rec: dict, ts: str, n: int) -> None:
@@ -624,6 +652,9 @@ def _dsh_prepare(root: Path) -> None:
             _DSH_CACHE[d["path"]] = d
 
 
+_DSH_LEDGER: dict = {}
+
+
 def parse_dsh(path: Path, rec: dict) -> dict:
     """DeepSeek Harness 的 session.jsonl.zstd（多帧 zstd，见 helpers/dsh_reduce.js）。"""
     d = _DSH_CACHE.get(str(path))
@@ -641,6 +672,19 @@ def parse_dsh(path: Path, rec: dict) -> dict:
         rec["models"] = [f'{d.get("provider", "")}/{d["model"]}'.strip("/")]
     if d.get("provider"):
         rec["provider_hint"] = d["provider"]
+
+    # 账本按 sessionId 对回来。DSH 的目录名就是 sessionId（session-<uuid>）。
+    led = _DSH_LEDGER.get(path.parent.name)
+    if led:
+        for k in ("tok_in", "tok_out", "tok_cache_r", "tok_cache_w"):
+            rec[k] = led[k]
+        rec["hourly"] = dict(led["hourly"])
+        # **真实人民币账单**，不是 BIE 折算 —— 本机只有 DSH 记了这个。
+        rec["cost_cny"] = round(led["cost_cny"], 4)
+        rec["cost_estimated_steps"] = led["estimated_steps"]
+        rec["billing_steps"] = led["steps"]
+        if led["models"]:
+            rec["models"] = led["models"]
 
     prompts, texts = [], []
     for raw in (d.get("prompts") or []):
@@ -680,12 +724,20 @@ def parse_kimi(path: Path, rec: dict) -> dict:
                 rec["start"] = ts
             if ts > rec["end"]:
                 rec["end"] = ts
+        # 模型名：Kimi 写在**两处** —— profile.bind 的 modelAlias 和其它事件里的裸 model。
+        # 而且 modelAlias 常常是占位符 `__secondary__`（子代理的次模型），真名在 model 里。
+        # 只认 modelAlias 的后果实测过：372 场显示「未记录模型」，实际跑的是 deepseek-v4-pro。
+        # ★ 收的时候就滤占位符 —— 留到下游滤，`__secondary__` 会先把真名挤掉。
+        # 这一段**放在 if/elif 链外**：模型可能出现在任何一类事件上，
+        # 挂进链里就只有那一类事件才会被看到。
+        for _k in ("modelAlias", "model"):
+            _v = d.get(_k)
+            if isinstance(_v, str) and _v and _v not in ("__secondary__", "<synthetic>", "unknown"):
+                models.add(_v)
         if t == "metadata":
             ts = iso(d.get("created_at"))
             if ts and (not rec["start"] or ts < rec["start"]):
                 rec["start"] = ts
-        elif t == "profile.bind" and d.get("modelAlias"):
-            models.add(d["modelAlias"])
         elif t == "usage.record":
             u = d.get("usage") or {}
             got = (int(u.get("inputOther") or 0), int(u.get("output") or 0),
@@ -761,7 +813,149 @@ def parse_chatgpt(path: Path, rec: dict) -> dict:
     return rec
 
 
-PARSERS = {"cc": parse_cc, "chatgpt": parse_chatgpt, "dsh": parse_dsh, "kimi": parse_kimi, "codex": parse_codex, "generic": parse_generic, "cdmeta": parse_cdmeta}
+# DSH 的用量**不在会话文件里**，在一个单独的账本里。
+# 上一版把 1937 场 dsh 会话全记成「没量到 token」—— 因为解析器只看 session.jsonl.zstd，
+# 而那里面确实一个 usage 字段都没有。账本在 ~/.dsh/storages/token-billing-ledger.json。
+#
+# ★ 它是**滚动账本**，不是全历史：实测 581 条步骤只覆盖 1 个 sessionId、1 天
+#   （2026-08-17，¥133.90）。所以它能补上的是「那一场的真实花费」，
+#   不是「dsh 的全部用量」。这个边界必须原样透出去，不许当成全量。
+DSH_LEDGER = HOME / ".dsh" / "storages" / "token-billing-ledger.json"
+
+
+def dsh_ledger() -> dict:
+    """按 sessionId 汇总 DSH 账本。返回 {sessionId: {...}}，读不到就空。"""
+    try:
+        d = json.loads(DSH_LEDGER.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    out: dict = {}
+    for st in (d.get("steps") or []):
+        sid = st.get("sessionId")
+        if not sid:
+            continue
+        o = out.setdefault(sid, {"tok_in": 0, "tok_out": 0, "tok_cache_r": 0, "tok_cache_w": 0,
+                                 "cost_cny": 0.0, "steps": 0, "estimated_steps": 0,
+                                 "models": set(), "providers": set(), "hourly": {}})
+        o["tok_in"] += int(st.get("uncachedInputTokens") or 0)
+        o["tok_out"] += int(st.get("outputTokens") or 0)
+        o["tok_cache_r"] += int(st.get("cacheReadTokens") or 0)
+        o["tok_cache_w"] += int(st.get("cacheWriteTokens") or 0)
+        o["cost_cny"] += float(st.get("cost") or 0.0)
+        o["steps"] += 1
+        o["estimated_steps"] += 1 if st.get("estimated") else 0
+        if st.get("model"):
+            o["models"].add(f'{st.get("provider", "")}/{st["model"]}'.strip("/"))
+        if st.get("provider"):
+            o["providers"].add(st["provider"])
+        # 账本每一步都带 at（毫秒）—— 直接就是逐小时归集要的东西，不用猜
+        at = st.get("at")
+        if at:
+            k = iso(int(at) / 1000)[:13]
+            n = sum(int(st.get(x) or 0) for x in
+                    ("uncachedInputTokens", "outputTokens", "cacheReadTokens", "cacheWriteTokens"))
+            o["hourly"][k] = o["hourly"].get(k, 0) + n
+    for o in out.values():
+        o["models"] = sorted(o["models"])
+        o["providers"] = sorted(o["providers"])
+    return out
+
+
+def _load_dsh_ledger() -> None:
+    """扫 dsh 之前载入一次账本。放在模块级而不是每场会话读一遍 —— 1937 场读 1937 次没有意义。"""
+    global _DSH_LEDGER
+    if not _DSH_LEDGER:
+        _DSH_LEDGER = dsh_ledger()
+
+
+def parse_workbuddy(path: Path, rec: dict) -> dict:
+    """WorkBuddy —— 会话在 sqlite 里，用量在 traces/ 里。
+
+    **这个来源上一版被整个跳过了**，判词是「应用安装包与运行日志，非对话」。
+    错在探测法：那一版按扩展名找 *.jsonl / *.json，而 WorkBuddy 把会话存进
+    workbuddy.db 的 sessions 表 —— 按文件名找永远找不到。
+    实测它有 21 场会话、73 个 trace、合计 5,054 万 token。
+
+    一个 .db 文件对应**整个来源**（不是一场会话），所以这里一次性把所有会话
+    读出来挂在 rec["_multi"] 上，由外层展开。
+    """
+    import sqlite3
+    root = path.parent
+    out = []
+    try:
+        con = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
+        cols = [r[1] for r in con.execute('PRAGMA table_info("sessions")')]
+        rows = [dict(zip(cols, r)) for r in con.execute("select * from sessions")]
+        usage = {}
+        try:
+            ucols = [r[1] for r in con.execute('PRAGMA table_info("session_usage")')]
+            for r in con.execute("select * from session_usage"):
+                d = dict(zip(ucols, r))
+                usage[d.get("session_id")] = d
+        except sqlite3.Error:
+            pass
+        con.close()
+    except sqlite3.Error as e:
+        rec["_error"] = f"workbuddy.db 读不了：{e}"
+        return rec
+
+    # traces：一个 trace 一次 agent 工作流，带 totalTokens 与真实起止时刻。
+    # 它挂在 workerPid 目录下，**没有 sessionId** —— 所以只能给来源级总量，
+    # 不能摊到具体会话上。硬摊就是编数据。
+    tr_tok = tr_n = 0
+    tr_first = tr_last = ""
+    for f in sorted(root.glob("traces/*/*.json")):
+        try:
+            t = (json.loads(f.read_text(encoding="utf-8")) or {}).get("trace") or {}
+        except (OSError, ValueError):
+            continue
+        n = int(t.get("totalTokens") or 0)
+        if n:
+            tr_tok += n
+            tr_n += 1
+        a, b = iso(t.get("startedAt")), iso(t.get("endedAt"))
+        if a and (not tr_first or a < tr_first):
+            tr_first = a
+        if b and b > tr_last:
+            tr_last = b
+
+    ms = lambda v: iso(int(v) / 1000) if v not in (None, "") else ""
+    deleted = sum(1 for r in rows if r.get("deleted_at"))
+    for r in rows:
+        if r.get("deleted_at"):
+            continue                      # 删掉的会话不算 —— 那是 Owner 主动丢弃的
+        one = blank(str(r.get("id") or ""), "workbuddy", path)
+        one["start"] = ms(r.get("created_at"))
+        one["end"] = ms(r.get("last_activity_at") or r.get("updated_at")) or one["start"]
+        one["title"] = redact(str(r.get("custom_title") or r.get("title") or ""))[:120]
+        one["project"] = project_of(str(r.get("cwd") or ""))
+        if r.get("model"):
+            one["models"] = [str(r["model"])]
+        u = usage.get(r.get("id")) or {}
+        # `used` 是**上下文窗口用掉多少**，不是计费 token —— 名字像但不是一回事。
+        # 放进 ctx_used，绝不混进 tok_* 那四个字段。
+        if u.get("used"):
+            one["ctx_used"] = int(u["used"])
+            one["ctx_size"] = int(u.get("size") or 0)
+        if one["title"]:
+            one["prompts"] = [one["title"]]
+            one["turns"] = 1
+            one["kw"] = count_keywords(one["title"])
+        out.append(one)
+
+    rec["_multi"] = out
+    rec["_source_totals"] = {
+        "trace_tokens": tr_tok, "traces": tr_n,
+        "first": tr_first, "last": tr_last,
+        "sessions_in_db": len(rows), "deleted_skipped": deleted,
+        "note": ("traces 里的 totalTokens 是来源级总量：trace 挂在 workerPid 下、"
+                 "没有 sessionId，摊不到具体会话上。摊了就是编。"
+                 f"另有 {deleted} 场已被你自己删除，没有计入。"),
+    }
+    return rec
+
+
+PARSERS = {"cc": parse_cc, "chatgpt": parse_chatgpt, "dsh": parse_dsh, "kimi": parse_kimi, "codex": parse_codex, "generic": parse_generic, "cdmeta": parse_cdmeta, "workbuddy": parse_workbuddy}
 
 
 BATCH_MIN = 5
@@ -814,6 +1008,7 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
     if cfg["parser"] == "dsh":
         try:
             _dsh_prepare(root)
+            _load_dsh_ledger()
         except (RuntimeError, OSError, subprocess.SubprocessError) as exc:
             # 解不了就整源标不确定，**不产出空壳会话** ——
             # 1937 个 0 轮 0 消息的记录会把总量灌水，那比没有更糟。
@@ -863,6 +1058,7 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
             rec["start"] = iso(st.st_mtime)
         if not rec["end"]:
             rec["end"] = rec["start"]
+        rec["models"] = dedupe_models(rec.get("models") or [])
         rec["kind"] = session_kind(rec)
         # DSH 的 origin=subagent 是 agent 自己派生的子会话 —— 1937 场里 1929 场是这个。
         # 不标出来，「你亲自开口」会一夜之间多出近两千场。
@@ -870,6 +1066,24 @@ def extract_source(name: str, cfg: dict, outdir: Path, full: bool) -> dict:
             rec["kind"] = "auto"
             rec["batch"] = f"DSH 子代理（{rec.get('dsh_preset') or 'agent'}）"
         rec["_k"] = key
+        # 一个文件装着整个来源的多场会话（WorkBuddy 的 sqlite 就是这样）时，
+        # 解析器把它们挂在 _multi 上，这里展开。不展开的话 21 场会被压成 1 场。
+        multi = rec.pop("_multi", None)
+        if multi:
+            st_tot = rec.pop("_source_totals", None)
+            for i, one in enumerate(multi):
+                one["_k"] = f"{key}#{i}"
+                one["kind"] = session_kind(one)
+                if not one["start"]:
+                    one["start"] = iso(st.st_mtime)
+                if not one["end"]:
+                    one["end"] = one["start"]
+                records.append(one)
+            stats["parsed"] += len(multi)
+            if st_tot:
+                stats["source_totals"] = st_tot
+            continue
+        rec.pop("_source_totals", None)
         records.append(rec)
         stats["parsed"] += 1
 

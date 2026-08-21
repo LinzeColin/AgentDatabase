@@ -48,6 +48,13 @@ trap 'rmdir "$LOCK" 2>/dev/null || true' EXIT
     --repo "$REPO" --out "$WORK/brief_index.jsonl" \
     || echo "字面索引生成失败，本轮 UserPromptSubmit 钩子会静默不注入"
 
+  # 全量语料 → 私有仓。**这一步是 Owner 明确要过的**：
+  # 「把 cc 和 codex 还有所有本地所有 agent 对话信息全部都上传到 private repo」。
+  # 上传的是你的原话（不截断）+ 工具指针，不含助手输出（可再生、且是它撑到 5GB 的）。
+  python3 "$ROOT/build/corpus.py" --sessions "$WORK/out" --out "$WORK/corpus" --repo "$REPO" \
+    && bash "$ROOT/build/push_corpus.sh" "$WORK/corpus" \
+    || echo "语料本轮未上传（自检没过或推送失败）—— 站点与 brief 不受影响"
+
   bash "$ROOT/build/install_agents_md.sh" || echo "契约分发失败，本轮 agent 指令未更新"
   # 权威副本推私有仓，让任何有仓权限的 agent 都能直接取。
   # 失败不阻断本轮 —— 站点和本机那两份还在。

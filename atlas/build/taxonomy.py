@@ -31,17 +31,26 @@ HARNESS = {
                        "note": "钉钉客户端命令行，不是 LLM，不产生 token"},
     "openchatcut":    {"label": "OpenChatCut", "kind": "tool", "vendor": "—",
                        "note": "剪辑工具，不是 LLM，不产生 token"},
+    "workbuddy":      {"label": "WorkBuddy", "kind": "llm", "vendor": "未记录",
+                       "note": ("会话在 sqlite 里、用量在 traces 里。上一版按扩展名找文件，"
+                                "所以整个来源被漏掉了。traces 合计 5,054 万 token，"
+                                "但 trace 没有 sessionId，只能给来源级总量")},
 }
 
 # 模型名 → provider。按前缀判，顺序即优先级。
 PROVIDER_RULES = [
-    (re.compile(r"^scnet/", re.I),                    "SCNet（中国超算）"),
+    # scnet 有两种写法：`scnet/xxx`（modelAlias）和 `scnet-xxx`（部分 harness 写扁了）。
+    # 只认斜杠那种的后果实测过：scnet-deepseek-v4-flash-0731 这类落进「未归类」，
+    # 连带 1.1 亿 token 没有厂商归属。
+    (re.compile(r"^scnet[-/]", re.I),                 "SCNet（中国超算）"),
     (re.compile(r"^deepseek-official/", re.I),        "DeepSeek"),
     (re.compile(r"^deepseek/|^deepseek-", re.I),      "DeepSeek"),
     (re.compile(r"^moonshot/|^kimi-", re.I),          "Moonshot"),
     (re.compile(r"^claude", re.I),                    "Anthropic"),
     (re.compile(r"^(gpt|o[13-9]|chatgpt|codex)", re.I), "OpenAI"),
-    (re.compile(r"^(glm|qwen|minimax)", re.I),        "其他国内厂商"),
+    (re.compile(r"^(glm|qwen|minimax|hunyuan|hy\d)", re.I), "其他国内厂商"),
+    # code-spark / spark 是 Codex 侧的内部代号，本机日志里和 gpt-5.3-codex 同场出现
+    (re.compile(r"^(code-)?spark", re.I),             "OpenAI"),
 ]
 
 # 不是真模型名的占位符。计进模型分布会凭空造出一个不存在的「模型」。
@@ -116,11 +125,21 @@ def summarize(sessions: list) -> dict:
         src = s["source"]
         h = harness_of(src)
         fold(by_h[src], s)
+        # **工具不进 provider / model 表。**（Owner 原话：「dws 只是一个 cli 工具不是 LLM」）
+        # 混进去的后果：provider 表里冒出一个「—」的桶，看着像一个没认出来的厂商，
+        # 其实那几场根本不该有厂商这一维。
+        if h["kind"] != "llm":
+            continue
         mods = [m for m in (s.get("models") or []) if m not in PLACEHOLDER_MODELS]
         if not mods:
-            prov = provider_of("", s.get("provider_hint", "")) if h["kind"] == "llm" else "—"
+            # 没记模型的会话：**按 harness 分别列**，不要全塞进一个「未记录」大桶。
+            # 811 场挤在一个桶里等于什么都没说；分开之后能看出是
+            # 「ChatGPT 导出本来就不带模型字段」还是「某个 harness 该记没记」。
+            prov = provider_of("", s.get("provider_hint", ""))
+            if prov in ("未记录", "未归类"):
+                prov = f"未记录（{h['label']}）"
             fold(by_p[prov], s)
-            fold(by_m["未记录"], s)
+            fold(by_m[f"未记录（{h['label']}）"], s)
             fold(pair[(prov, "未记录")], s)
             hm[src]["未记录"] += 1
             continue
@@ -164,4 +183,7 @@ def summarize(sessions: list) -> dict:
             [dict(close(v), provider=k[0], model=k[1], sessions=round(v["sessions"], 1)) for k, v in pair.items()],
             key=lambda r: -r["input_total"])[:40],
         "tools_not_llm": [r for r in harness_rows if r["kind"] == "tool"],
+        "tools_note": ("这几个不是 LLM，一个 token 都不该有。它们不进 provider / model 两张表 —— "
+                       "混进去会凭空造出一个没有厂商的桶。"),
+        "vendors": sorted({h["vendor"] for h in HARNESS.values() if h["kind"] == "llm"} - {"未记录", "未知"}),
     }
