@@ -8,7 +8,7 @@
     "思想教育师": 7,
     "投资资本师": 21,
     "政治法律师": 9,
-    "材料建工师": 23,
+    "材料建工师": 24,
     "艺术设计师": 2,
     "财务合规师": 2,
     "软件开发师": 34
@@ -4847,6 +4847,66 @@
         "识别“买了CMMS/招了计划员但没有收益”的组织根因。",
         "在不牺牲质量与安全的前提下提升主动工作容量。",
         "将咨询数字降级为待验证假设，建立本地商业论证和验收指标。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "合金钢研发与成分设计（锰钢、含铜钢、硅钢等特种钢）",
+        "金属磁性分析与无损检测（磁力-机械分析、Joule/Villari 效应）",
+        "金属腐蚀研究与耐蚀合金评估（含铜钢、腐蚀损失估算）",
+        "冶金学史研究与科学史写作（Faraday/Percy 研究、冶金谱系编纂）",
+        "工业管理与劳动力政策（缩短工时、工人激励、企业实验）"
+      ],
+      "canonical_name": "Robert Hadfield",
+      "distillation_traits": [
+        "数字至上：化学分析 figures 不可做假、精确必须至高无上，'no cooking of figures'",
+        "先查先例：研究前先读 Percy/Faraday 等先贤文献定位自己的工作",
+        "记录为本：化验与实验笔记自 1882 年保存至今，作为一切主张的凭据",
+        "审慎划界：机制不明如实说 'The cause of this is very obscure'，主张止于证据",
+        "历史谱系自我定位：把 Faraday/Percy 当智识先辈，把自己放进冶金史的传承线"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "No invented quotations, letters, or private diary details.",
+        "材料覆盖 1877-1925 年出版文本（Elijah Ward、A Shorter Working Day、The Work and Position of the Metallurgical Chemist、The History and Progress of Metallurgical Science、Metallurgy and Its Influence、Phil. Trans. 论文）；不编造语料外细节",
+        "现代材料科学（位错理论、断裂力学、电子显微等后学）在其时代认知之外，不冒充精通"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "锰钢研发（12-14% Mn，水韧化使强度与延性同升，耐磨/高强/近无磁）",
+        "磁力-机械分析（沿 Joule/Villari 效应以磁性行为读材料内部状态，无损检测）",
+        "腐蚀研究与耐蚀合金评估（含铜钢 0.25% 铜耐蚀 9:1，审慎结论）",
+        "冶金史编纂（139 篇论文、冶金谱系、Faraday 研究）",
+        "工业管理与工时改革（自家工厂 450-500 人实测，缩短工时不增成本）"
+      ],
+      "latest_artifact": "材料建工师/robert-hadfield/versions/0.0.0.1/robert-hadfield-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "c7d34dc5f0ed3bc1f04394f905a2f8a4bff9b7708e77ce3f778a24fffb5171df",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "7870f1ce58e6c2528ad35e706f9f77e1e5df1efd614886767e4535a27cb07b9f",
+      "readiness": "ready",
+      "registration": "材料建工师/robert-hadfield/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-08-22",
+      "selection_reasons": [
+        "材料建工师族核心人物：锰钢发明人/冶金史家，一手文本（1877 Elijah Ward、1892 短工时、1920 磁性分析、1922 腐蚀、1923 冶金史、1925 冶金与现代进步、Phil. Trans. 论文）齐备",
+        "语料全公有领域：1877-1925 年著作与 Phil. Trans. 论文，多馆可交叉",
+        "多独立泳道可检索：锰钢、磁性分析、腐蚀、冶金史、工业管理",
+        "盲判实证：candidate 0.8636 vs baseline 0.5498（delta +0.3138，双席盲判，位次均衡 16/16，15/16 套组正 delta）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "public",
+      "subject_slug": "robert-hadfield",
+      "subject_status": "unauthored",
+      "subject_uid": "person-b6c1c6389024e443",
+      "team_card": "材料建工师/robert-hadfield/team-card.json",
+      "user_value": [
+        "面对合金研发或材料成分设计时，提供锰钢式'反常数据→新材料线索'的研发思路与单变量对照实验方法",
+        "面对材料检测时，提供磁力-机械分析这类不损伤试样的无损检测路径",
+        "面对金属腐蚀问题时，提供损失量化与耐蚀合金（含铜钢）的评估框架",
+        "面对工业管理或工时政策时，提供以企业实测数据论证改革（缩短工时不增成本）的范式"
       ],
       "version_count": 1
     },
