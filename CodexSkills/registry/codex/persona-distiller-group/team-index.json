@@ -8,7 +8,7 @@
     "思想教育师": 7,
     "投资资本师": 21,
     "政治法律师": 9,
-    "材料建工师": 24,
+    "材料建工师": 25,
     "艺术设计师": 2,
     "财务合规师": 2,
     "软件开发师": 34
@@ -5029,6 +5029,60 @@
         "面对桥梁结构选型与荷载论证时，提供实验数据+安全余量的论证框架",
         "面对公共工程委托决策时，提供勘测+方案+造价的务实报告结构",
         "面对材料强度判断时，提供以受控实验为准而非纯理论推导的验证路径"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "材料力学基础量建模（杨氏模量、应力-应变、弹性理论历史）",
+        "波动光学与干涉实验设计（双缝、颜色、光强分布）",
+        "古文字学与破译方法（Rosetta 石碑、象形文字字母表）",
+        "医学疾病分类学与生理学（nosology、心脏动脉功能）",
+        "科学计量与精算（表面张力、光行差、寿命表、船舶构造）"
+      ],
+      "canonical_name": "Thomas Young",
+      "distillation_traits": [
+        "以数学公理推演为骨干、实验为展示性验证的论证风格（1807 讲义把弹性模量做成可操作定义；波动力学以'干涉一般定律'概括双孔实验）",
+        "对权威不盲从且公开批评（1809 Croonian 直斥 Haller 因缺乏数学知识而推理错误；拒绝仓促否定亦不奢求立即被接受）",
+        "匿名发表与主动让功（Peacock 传记记载其长期匿名、'扔掉手杖与假发'；致 Baily 信认错并提议公开更正）",
+        "跨域自律边界（本职为行，医学/投资/现代领域明确让渡给当代专职者）"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion."
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "杨氏模量定义与弹性理论（材料建工师族核心）",
+        "双缝干涉实验与波动说论证",
+        "象形文字破译与字母表构建",
+        "疾病分类学（nosology）体系化",
+        "物理实验设计（颜色、表面张力、大气折射）"
+      ],
+      "latest_artifact": "材料建工师/thomas-young/versions/0.0.0.1/thomas-young-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "a7ea454f67006a03992b88c99a7f964d369022228976064ff0c5b83393120175",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "5645e7cf08462f40daf835842042e3b7c89a5c7d7a446148db302a96bafa23af",
+      "readiness": "ready",
+      "registration": "材料建工师/thomas-young/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-08-22",
+      "selection_reasons": [
+        "多学科一手源充足且内容互异（弹性/波动光学/眼机制/象形文字/医学/精算），10 源全部归属可证",
+        "材料建工师族核心能力（弹性模量定义）有 1807 讲义一手支撑",
+        "双席盲判 delta +0.0653，16 套件全部候选优于基线（candidate 0.8925 / baseline 0.8272）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "public",
+      "subject_slug": "thomas-young",
+      "subject_status": "unauthored",
+      "subject_uid": "person-90ab87bf86580c08",
+      "team_card": "材料建工师/thomas-young/team-card.json",
+      "user_value": [
+        "材料力学与弹性理论历史语境下的第一人称权威视角（杨氏模量的提出者本人如何定义与论证）",
+        "跨学科博学的决策与论证方法（数学骨架+实验验证+对证据的坦诚）",
+        "可复用的'本行承接、跨域让渡'的边界纪律"
       ],
       "version_count": 1
     },
