@@ -226,7 +226,19 @@ class GithubReleaseClient:
             timeout=timeout,
         )
         if completed.returncode != 0:
-            raise PrivateReleaseBackupError("github_release_command_failed")
+            operation = {
+                ("repo", "view"): "repo_view",
+                ("release", "create"): "release_create",
+                ("release", "upload"): "release_upload",
+                ("release", "download"): "release_download",
+                ("release", "view"): "release_view",
+                ("release", "edit"): "release_edit",
+                ("release", "list"): "release_list",
+                ("release", "delete"): "release_delete",
+            }.get(tuple(args[:2]), "unknown")
+            raise PrivateReleaseBackupError(
+                f"github_release_command_failed:{operation}"
+            )
         return completed.stdout
 
     def assert_private_repository(self) -> None:

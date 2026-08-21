@@ -78,6 +78,10 @@ FAILED until directly reverified.
    Release，canonical 事件进入私有 Release；两者都必须远端读回，原始来源还必须隔离恢复。
    Schedule 中 R2 必须报告 `SKIPPED_ZERO_CHARGE` 且 `billable_requests=0`。未经 Owner 新授权不得改回。
 
+- **结论**：canonical 事件超过单个 GitHub Release 资产容量时，发布端必须按 Manifest 分片，读取端按顺序重组，并继续兼容历史单文件资产。
+  **为什么**：2026-08-22 前台复现中，约 2.41 GB 的事件资产上传失败而 Manifest 已成功，导致每日无人值守任务连续停摆；此前约 1.99 GB 的单文件仍能成功。
+  **代价**：一次失败批次留下未发布草稿；发布、读回和零增量复用都必须同时理解分片 Manifest。
+
 完整事故记录、账单逐行归因、免费额度速查表 → **`Private-Database` 仓 `OPS/AGENT_ONBOARDING.md` §9.7**。
 机器守卫 → OVH `/usr/local/bin/linze-r2-free-tier-guard.py`（每 6 小时，非 Standard 桶自动熔断改回；
 判定 `/srv/linze/apps/status/data/r2_free_tier_guard.json`）。

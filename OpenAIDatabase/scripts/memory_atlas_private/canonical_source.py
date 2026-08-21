@@ -6,10 +6,10 @@ storage cap — a real billing risk — so the memory-atlas primary tree moved t
 the private repository and R2 was drained.
 
 Nothing here assumes which side holds the bytes. It reads the release manifest,
-downloads the asset, hashes it, and only a hash equal to the manifest's makes
-the source usable: a truncated or substituted download is a hard error, never a
-quietly smaller event stream. The 389 MB asset is cached by digest so a
-fifteen-minute timer re-verifies rather than re-downloads.
+downloads the declared asset set, and accepts only bytes matching the manifest.
+A truncated or substituted download is a hard error, never a quietly smaller
+event stream. The reassembled event stream is cached by digest so a later run
+re-verifies rather than re-downloads it.
 """
 
 from __future__ import annotations
@@ -32,10 +32,116 @@ MANIFEST_ASSET = "MANIFEST.json"
 EVENTS_ASSET = "events.jsonl"
 MANIFEST_SCHEMA = "memory_atlas.canonical_events_manifest.v1"
 CANONICAL_RELEASE_RETENTION = 2
+CANONICAL_ASSET_MAX_BYTES = 1_900_000_000
+COPY_CHUNK_BYTES = 8 * 1024 * 1024
 
 
 class CanonicalSourceError(RuntimeError):
     """Fail-closed error; never carries repository content or a token."""
+
+
+def _part_asset_name(number: int, count: int) -> str:
+    return f"events.part-{number:05d}-of-{count:05d}.jsonl"
+
+
+def _manifest_parts(manifest: Mapping[str, Any]) -> list[dict[str, Any]]:
+    raw_parts = manifest.get("parts")
+    if raw_parts is None:
+        return []
+    if not isinstance(raw_parts, list) or not raw_parts:
+        raise CanonicalSourceError("canonical_manifest_parts_invalid")
+    count = len(raw_parts)
+    parts: list[dict[str, Any]] = []
+    for number, raw in enumerate(raw_parts, start=1):
+        if not isinstance(raw, Mapping):
+            raise CanonicalSourceError("canonical_manifest_parts_invalid")
+        try:
+            declared_number = int(raw.get("part_number"))
+            declared_count = int(raw.get("part_count"))
+            size_bytes = int(raw.get("bytes"))
+        except (TypeError, ValueError) as exc:
+            raise CanonicalSourceError("canonical_manifest_parts_invalid") from exc
+        name = str(raw.get("name") or "")
+        digest = str(raw.get("sha256") or "")
+        if (
+            name != _part_asset_name(number, count)
+            or declared_number != number
+            or declared_count != count
+            or size_bytes <= 0
+            or re.fullmatch(r"[0-9a-f]{64}", digest) is None
+        ):
+            raise CanonicalSourceError("canonical_manifest_parts_invalid")
+        parts.append({
+            "name": name,
+            "part_number": number,
+            "part_count": count,
+            "bytes": size_bytes,
+            "sha256": digest,
+        })
+    if sum(int(part["bytes"]) for part in parts) != int(manifest["bytes"]):
+        raise CanonicalSourceError("canonical_manifest_parts_size_mismatch")
+    return parts
+
+
+def _split_event_asset(source: Path, *, max_bytes: int) -> tuple[list[Path], list[dict[str, Any]]]:
+    if max_bytes <= 0:
+        raise CanonicalSourceError("canonical_asset_max_bytes_invalid")
+    source_bytes = source.stat().st_size
+    if source_bytes <= max_bytes:
+        return [source], []
+    count = (source_bytes + max_bytes - 1) // max_bytes
+    paths: list[Path] = []
+    parts: list[dict[str, Any]] = []
+    with source.open("rb") as input_handle:
+        for number in range(1, count + 1):
+            path = source.parent / _part_asset_name(number, count)
+            remaining = max_bytes
+            with path.open("wb") as output_handle:
+                while remaining:
+                    chunk = input_handle.read(min(COPY_CHUNK_BYTES, remaining))
+                    if not chunk:
+                        break
+                    output_handle.write(chunk)
+                    remaining -= len(chunk)
+            paths.append(path)
+            parts.append({
+                "name": path.name,
+                "part_number": number,
+                "part_count": count,
+                "bytes": path.stat().st_size,
+                "sha256": sha256_file(path),
+            })
+    if any(int(part["bytes"]) <= 0 for part in parts) or sum(
+        int(part["bytes"]) for part in parts
+    ) != source_bytes:
+        for path in paths:
+            path.unlink(missing_ok=True)
+        raise CanonicalSourceError("canonical_asset_split_incomplete")
+    return paths, parts
+
+
+def _materialize_release_events(
+    manifest: Mapping[str, Any], asset_root: Path, destination: Path
+) -> None:
+    parts = _manifest_parts(manifest)
+    if not parts:
+        source = asset_root / EVENTS_ASSET
+        if source != destination:
+            _link_or_copy(source, destination)
+        return
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    with destination.open("wb") as output_handle:
+        for part in parts:
+            source = asset_root / str(part["name"])
+            if (
+                not source.is_file()
+                or source.stat().st_size != int(part["bytes"])
+                or sha256_file(source) != str(part["sha256"])
+            ):
+                destination.unlink(missing_ok=True)
+                raise CanonicalSourceError("canonical_part_asset_mismatch")
+            with source.open("rb") as input_handle:
+                shutil.copyfileobj(input_handle, output_handle, COPY_CHUNK_BYTES)
 
 
 def _resolve_gh() -> str:
@@ -142,6 +248,7 @@ class GitHubCanonicalSource:
         for key in ("object", "sha256", "bytes", "unique_events"):
             if value.get(key) in (None, ""):
                 raise CanonicalSourceError(f"canonical_manifest_incomplete: {key}")
+        _manifest_parts(value)
         out = dict(value)
         out["release_tag"] = release["tag"]
         out["release_published_at"] = release["published_at"]
@@ -164,7 +271,22 @@ class GitHubCanonicalSource:
                 "sha256": expected, "bytes": expected_bytes,
                 "release_tag": manifest.get("release_tag"),
             }
-        self._download(str(manifest["release_tag"]), EVENTS_ASSET, destination)
+        parts = _manifest_parts(manifest)
+        if parts:
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            with tempfile.TemporaryDirectory(
+                prefix="memory-atlas-canon-parts-", dir=destination.parent
+            ) as work:
+                asset_root = Path(work)
+                for part in parts:
+                    self._download(
+                        str(manifest["release_tag"]),
+                        str(part["name"]),
+                        asset_root / str(part["name"]),
+                    )
+                _materialize_release_events(manifest, asset_root, destination)
+        else:
+            self._download(str(manifest["release_tag"]), EVENTS_ASSET, destination)
         observed_bytes = destination.stat().st_size
         observed = sha256_file(destination)
         if observed != expected or observed_bytes != expected_bytes:
@@ -273,8 +395,8 @@ def _count_unique_events(path: Path) -> int:
 class GitHubCanonicalPublisher:
     """Publish the current all-time event union without touching R2.
 
-    A published release is accepted only after both assets are downloaded again
-    and the event bytes match the declared digest.  The previous published
+    A published release is accepted only after its declared assets are downloaded
+    again and the event bytes match the declared digest. The previous published
     release remains available until the new one passes and is published.
     """
 
@@ -282,6 +404,7 @@ class GitHubCanonicalPublisher:
     source: GitHubCanonicalSource | None = None
     release_client: Any = None
     retention_count: int = CANONICAL_RELEASE_RETENTION
+    asset_max_bytes: int = CANONICAL_ASSET_MAX_BYTES
 
     def __post_init__(self) -> None:
         if self.source is None:
@@ -317,18 +440,28 @@ class GitHubCanonicalPublisher:
             for row in release.get("assets", [])
             if isinstance(row, Mapping)
         }
-        events = assets.get(EVENTS_ASSET)
         manifest = assets.get(MANIFEST_ASSET)
-        try:
-            observed_bytes = int(events.get("size")) if events is not None else -1
-        except (TypeError, ValueError):
-            observed_bytes = -1
-        if (
-            events is None
-            or manifest is None
-            or observed_bytes != expected_bytes
-            or str(events.get("digest") or "") != f"sha256:{digest}"
-        ):
+        parts = _manifest_parts(previous_manifest)
+        expected_assets = parts or [{
+            "name": EVENTS_ASSET,
+            "bytes": expected_bytes,
+            "sha256": digest,
+        }]
+        asset_metadata_valid = manifest is not None
+        for expected in expected_assets:
+            observed = assets.get(str(expected["name"]))
+            try:
+                observed_bytes = int(observed.get("size")) if observed is not None else -1
+            except (TypeError, ValueError):
+                observed_bytes = -1
+            if (
+                observed is None
+                or observed_bytes != int(expected["bytes"])
+                or str(observed.get("digest") or "") != f"sha256:{expected['sha256']}"
+            ):
+                asset_metadata_valid = False
+                break
+        if not asset_metadata_valid:
             raise CanonicalSourceError("canonical_existing_release_metadata_invalid")
         supersedes = [
             str(value) for value in previous_manifest.get("supersedes", [])
@@ -403,6 +536,7 @@ class GitHubCanonicalPublisher:
                 previous_events.unlink(missing_ok=True)
 
             digest = sha256_file(events_path)
+            events_bytes = events_path.stat().st_size
             if previous_manifest is not None and digest == str(previous_manifest.get("sha256") or ""):
                 result = self._reuse_published_release(
                     previous_manifest,
@@ -414,13 +548,19 @@ class GitHubCanonicalPublisher:
                 "schema_version": MANIFEST_SCHEMA,
                 "object": canonical_object_key,
                 "sha256": digest,
-                "bytes": events_path.stat().st_size,
+                "bytes": events_bytes,
                 "unique_events": merge["unique_events"],
                 "supersedes": sorted(supersedes),
                 "source_run_id": run_id,
                 "created_at": created_at,
                 "storage_mode": "GITHUB_PRIVATE_RELEASE_ZERO_CHARGE",
             }
+            event_assets, parts = _split_event_asset(
+                events_path, max_bytes=self.asset_max_bytes
+            )
+            if parts:
+                manifest["parts"] = parts
+                events_path.unlink()
             manifest_path = release_root / MANIFEST_ASSET
             manifest_path.write_text(
                 json.dumps(manifest, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
@@ -429,13 +569,18 @@ class GitHubCanonicalPublisher:
             timestamp = re.sub(r"[^0-9]", "", created_at)[:14]
             tag = f"{CANONICAL_TAG_PREFIX}{timestamp}-{run_id[-12:]}"
             self.release_client.create_draft(tag, f"Memory Atlas canonical events {timestamp}")
-            self.release_client.upload(tag, [events_path, manifest_path])
+            self.release_client.upload(tag, [*event_assets, manifest_path])
             remote_dir = release_root / "remote-readback"
             remote_dir.mkdir()
             self.release_client.download(tag, remote_dir)
             remote_manifest = json.loads((remote_dir / MANIFEST_ASSET).read_text(encoding="utf-8"))
-            remote_events = remote_dir / EVENTS_ASSET
-            if remote_manifest != manifest or sha256_file(remote_events) != digest:
+            remote_events = remote_dir / "reassembled-events.jsonl"
+            _materialize_release_events(remote_manifest, remote_dir, remote_events)
+            if (
+                remote_manifest != manifest
+                or remote_events.stat().st_size != events_bytes
+                or sha256_file(remote_events) != digest
+            ):
                 raise CanonicalSourceError("canonical_publish_remote_readback_mismatch")
             release = self.release_client.view(tag)
             asset_names = {
@@ -443,7 +588,8 @@ class GitHubCanonicalPublisher:
                 for row in release.get("assets", [])
                 if isinstance(row, Mapping)
             }
-            if release.get("isDraft") is not True or asset_names != {MANIFEST_ASSET, EVENTS_ASSET}:
+            expected_asset_names = {MANIFEST_ASSET, *(path.name for path in event_assets)}
+            if release.get("isDraft") is not True or asset_names != expected_asset_names:
                 raise CanonicalSourceError("canonical_publish_draft_assets_invalid")
             self.release_client.publish(tag)
             published = self.release_client.view(tag)
@@ -458,8 +604,10 @@ class GitHubCanonicalPublisher:
                 "provider": "github_private_release",
                 "object": canonical_object_key,
                 "sha256": digest,
-                "bytes": events_path.stat().st_size,
+                "bytes": events_bytes,
                 "unique_events": merge["unique_events"],
+                "asset_count": len(event_assets),
+                "part_count": len(parts),
                 "release_tag": tag,
                 "release_url": str(published.get("url") or ""),
                 "remote_readback_verified": True,

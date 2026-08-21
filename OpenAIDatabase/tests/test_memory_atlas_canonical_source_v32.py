@@ -55,7 +55,13 @@ def _manifest(**overrides) -> dict:
     return value
 
 
-def _fake_gh(tmp_path: Path, *, manifest: dict | None = None, events: bytes = EVENTS) -> Path:
+def _fake_gh(
+    tmp_path: Path,
+    *,
+    manifest: dict | None = None,
+    events: bytes = EVENTS,
+    extra_assets: dict[str, bytes] | None = None,
+) -> Path:
     """A `gh` that answers from disk, so no test ever reaches the network."""
     payload = tmp_path / "gh-fixture"
     payload.mkdir(exist_ok=True)
@@ -64,6 +70,8 @@ def _fake_gh(tmp_path: Path, *, manifest: dict | None = None, events: bytes = EV
         json.dumps(_manifest() if manifest is None else manifest), encoding="utf-8"
     )
     (payload / "events.jsonl").write_bytes(events)
+    for name, content in (extra_assets or {}).items():
+        (payload / name).write_bytes(content)
     script = tmp_path / "gh"
     script.write_text(
         "#!/usr/bin/env python3\n"
@@ -118,6 +126,27 @@ def test_a_manifest_that_does_not_describe_the_object_is_refused(tmp_path: Path,
 
 def test_events_are_accepted_only_when_the_digest_matches(tmp_path: Path) -> None:
     source = _source(tmp_path)
+    destination = tmp_path / "events.jsonl"
+    receipt = source.fetch_events(source.manifest(), destination)
+    assert receipt["state"] == "READY" and receipt["cache"] == "MISS"
+    assert destination.read_bytes() == EVENTS
+
+
+def test_split_events_are_reassembled_in_manifest_order(tmp_path: Path) -> None:
+    first, second = EVENTS[:37], EVENTS[37:]
+    parts = []
+    assets: dict[str, bytes] = {}
+    for number, payload in enumerate((first, second), start=1):
+        name = f"events.part-{number:05d}-of-00002.jsonl"
+        assets[name] = payload
+        parts.append({
+            "name": name,
+            "part_number": number,
+            "part_count": 2,
+            "bytes": len(payload),
+            "sha256": hashlib.sha256(payload).hexdigest(),
+        })
+    source = _source(tmp_path, manifest=_manifest(parts=parts), extra_assets=assets)
     destination = tmp_path / "events.jsonl"
     receipt = source.fetch_events(source.manifest(), destination)
     assert receipt["state"] == "READY" and receipt["cache"] == "MISS"
@@ -229,6 +258,131 @@ def test_canonical_publisher_merges_remote_union_and_verifies_release_readback(t
     assert '"event_id":"evt_2","activity":"current"' in published
     assert '"event_id":"evt_1"' in published
     assert not (tmp_path / "work" / "github-canonical-release").exists()
+
+
+def test_canonical_publisher_splits_assets_before_the_release_limit(tmp_path: Path) -> None:
+    class ReleaseClient:
+        def __init__(self) -> None:
+            self.tag = ""
+            self.draft = True
+            self.assets: dict[str, bytes] = {}
+
+        def assert_private_repository(self) -> None:
+            return None
+
+        def create_draft(self, tag: str, title: str) -> None:
+            self.tag = tag
+
+        def upload(self, tag: str, paths: list[Path]) -> None:
+            self.assets = {path.name: path.read_bytes() for path in paths}
+
+        def download(self, tag: str, destination: Path) -> None:
+            for name, payload in self.assets.items():
+                (destination / name).write_bytes(payload)
+
+        def view(self, tag: str) -> dict[str, object]:
+            return {
+                "tagName": tag,
+                "isDraft": self.draft,
+                "url": "https://github.example.test/canonical",
+                "assets": [
+                    {"name": name, "size": len(payload)}
+                    for name, payload in self.assets.items()
+                ],
+            }
+
+        def publish(self, tag: str) -> None:
+            self.draft = False
+
+        def enforce_retention(self, prefix: str, keep: int) -> list[str]:
+            return []
+
+    delta = tmp_path / "delta.jsonl"
+    delta.write_bytes(
+        b'{"event_id":"evt_2","activity":"current"}\n'
+        b'{"event_id":"evt_3","activity":"new"}\n'
+    )
+    client = ReleaseClient()
+    result = GitHubCanonicalPublisher(
+        source=_source(tmp_path),
+        release_client=client,
+        asset_max_bytes=40,
+    ).run(
+        delta_path=delta,
+        normalized_object_key="primary-objects/memory-atlas/private-agentdatabase/normalized/current.jsonl",
+        canonical_object_key="primary-objects/memory-atlas/private-agentdatabase/normalized/canonical/events.jsonl",
+        run_id="marun_fixture_1234567890",
+        created_at="2026-08-09T00:00:00Z",
+        work_root=tmp_path / "work",
+    )
+    manifest = json.loads(client.assets["MANIFEST.json"])
+    part_names = [part["name"] for part in manifest["parts"]]
+    reassembled = b"".join(client.assets[name] for name in part_names)
+    assert "events.jsonl" not in client.assets
+    assert all(len(client.assets[name]) <= 40 for name in part_names)
+    assert reassembled.startswith(b'{"event_id":"evt_2","activity":"current"}')
+    assert b'"event_id":"evt_1"' in reassembled
+    assert result["state"] == "PASS"
+    assert result["asset_count"] == result["part_count"] == len(part_names)
+
+
+def test_empty_delta_reuses_a_published_split_release(tmp_path: Path) -> None:
+    first, second = EVENTS[:37], EVENTS[37:]
+    parts = []
+    extra_assets: dict[str, bytes] = {}
+    for number, payload in enumerate((first, second), start=1):
+        name = f"events.part-{number:05d}-of-00002.jsonl"
+        extra_assets[name] = payload
+        parts.append({
+            "name": name,
+            "part_number": number,
+            "part_count": 2,
+            "bytes": len(payload),
+            "sha256": hashlib.sha256(payload).hexdigest(),
+        })
+
+    class ReleaseClient:
+        def assert_private_repository(self) -> None:
+            return None
+
+        def view(self, tag: str) -> dict[str, object]:
+            return {
+                "tagName": tag,
+                "isDraft": False,
+                "url": "https://github.example.test/canonical",
+                "assets": [
+                    {"name": "MANIFEST.json", "size": 1},
+                    *(
+                        {
+                            "name": part["name"],
+                            "size": part["bytes"],
+                            "digest": f"sha256:{part['sha256']}",
+                        }
+                        for part in parts
+                    ),
+                ],
+            }
+
+    delta = tmp_path / "empty.jsonl"
+    delta.write_bytes(b"")
+    result = GitHubCanonicalPublisher(
+        source=_source(
+            tmp_path,
+            manifest=_manifest(parts=parts),
+            extra_assets=extra_assets,
+        ),
+        release_client=ReleaseClient(),
+    ).run(
+        delta_path=delta,
+        normalized_object_key="primary-objects/memory-atlas/private-agentdatabase/normalized/current.jsonl",
+        canonical_object_key="primary-objects/memory-atlas/private-agentdatabase/normalized/canonical/events.jsonl",
+        run_id="marun_fixture_1234567890",
+        created_at="2026-08-09T00:00:00Z",
+        work_root=tmp_path / "work",
+    )
+    assert result["state"] == "PASS"
+    assert result["release_tag"] == "memory-atlas-canonical-20260804"
+    assert result["merge"]["current_events"] == 0
 
 
 class _DrainedR2:

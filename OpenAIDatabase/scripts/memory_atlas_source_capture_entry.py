@@ -152,6 +152,18 @@ def _safe_child_failure_code(returncode: int, stderr: str) -> str:
         return "PRIVATE_BACKUP_SCOPE_POLICY_INVALID"
     if "private_identity_unavailable" in stderr:
         return "PRIVATE_BACKUP_IDENTITY_UNAVAILABLE"
+    for operation in (
+        "REPO_VIEW",
+        "RELEASE_CREATE",
+        "RELEASE_UPLOAD",
+        "RELEASE_DOWNLOAD",
+        "RELEASE_VIEW",
+        "RELEASE_EDIT",
+        "RELEASE_LIST",
+        "RELEASE_DELETE",
+    ):
+        if f"github_release_command_failed:{operation.lower()}" in stderr:
+            return f"GITHUB_{operation}_FAILED"
     if "github_release_command_failed" in stderr:
         return "GITHUB_RELEASE_COMMAND_FAILED"
     if "No module named" in stderr:

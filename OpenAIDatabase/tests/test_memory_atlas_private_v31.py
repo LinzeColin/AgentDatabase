@@ -1666,7 +1666,28 @@ def test_source_capture_entry_maps_pre_json_child_failure_without_stderr_leak() 
     assert entry._safe_child_failure_code(1, "No module named 'boto3'") == "MISSING_BOTO3_DEPENDENCY"
     assert entry._safe_child_failure_code(1, "OSError: [Errno 30] Read-only file system") == "RUNTIME_DIRECTORY_UNWRITABLE"
     assert entry._safe_child_failure_code(1, "logical_source_contract_mismatch") == "PRIVATE_BACKUP_SOURCE_CONTRACT_MISMATCH"
+    assert entry._safe_child_failure_code(
+        1, "PrivateReleaseBackupError: github_release_command_failed:release_upload"
+    ) == "GITHUB_RELEASE_UPLOAD_FAILED"
     assert entry._safe_child_failure_code(124, "") == "CHILD_CAPTURE_TIMEOUT"
+
+
+def test_github_release_client_names_the_failed_operation(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private import private_release
+
+    monkeypatch.setattr(
+        private_release.subprocess,
+        "run",
+        lambda *args, **kwargs: subprocess.CompletedProcess(args=args, returncode=1, stdout="", stderr="failed"),
+    )
+    client = private_release.GithubReleaseClient("owner/private", "/usr/bin/gh")
+    with pytest.raises(
+        private_release.PrivateReleaseBackupError,
+        match="github_release_command_failed:release_upload",
+    ):
+        client.upload("tag", [Path("events.jsonl")])
 
 
 def test_source_capture_entry_refuses_a_concurrent_capture(
