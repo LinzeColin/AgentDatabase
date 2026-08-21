@@ -6,6 +6,7 @@ import { sec, bento, orbit, drawer, table, warn, pill, rate, state } from '../ki
 export async function render(host) {
   const K = D.A().stack, T = D.tokens(), t = T.total;
   const C = T.cost, A = T.attribution, F = T.fanout;
+  const RM = C.real_money || {};
   const llm = K.harness.filter(r => r.kind === 'llm');
   const tools = K.harness.filter(r => r.kind === 'tool');
   let mode = 'slice';
@@ -28,6 +29,15 @@ ${bento([
   { k: '没有价目表', v: `${C.no_price.sessions} 场`, n: Object.keys(C.no_price.sources).join('、') || '—' },
   { k: '没量到 token', v: `${C.no_usage.sessions} 场`, n: '有价目表，但日志里一个 token 都没记' },
 ])}
+${RM.state === '通' ? bento([
+  { k: '真实账单', v: `¥${RM.total}`, w: 3, tone: 'acc',
+    n: `${RM.sessions} 场 / ${RM.days.length} 天 · ${RM.billing_steps} 条计费步骤${
+      RM.estimated_steps ? ` · 其中 ${RM.estimated_steps} 条是估算` : ''}` },
+  { k: '这是全部花费吗', v: '不是', w: 3, tone: 'warn', size: 'sm', n: esc(RM.coverage_note) },
+]) : warn(`<b>真实账单：${esc(RM.state || '没做')}</b>　${esc(RM.why || '')}`)}
+${warn(`<b>BIE 和真实账单是两个东西，别混着读。</b>
+  BIE 是无量纲倍数，回答「哪一块最贵」；上面那个 ¥ 是真钱，回答「到底花了多少」。
+  ${esc((RM.why_others_missing) || '')}`)}
 ${warn(`<b>${esc(F.state)}：扇出成本</b> —— ${esc(F.why)}<br>${esc(F.impact)}
   当前 ${F.sessions} 场扇出，其中只有 ${F.with_usage} 场有用量记录。`)}
 ${warn(`<b>这些数不能跨家相加。</b>${C.caveats.map(esc).join('<br>')}<br>
@@ -42,7 +52,7 @@ ${A.state === '通' ? bento([
   { k: '变了多少', v: (A.peak_delta * 100).toFixed(1) + '%', n: esc(A.verdict), w: 2, tone: 'acc' },
 ]) : warn(`归日对照：${esc(A.state)}`)}
 
-${tools.length ? warn(`<b>这些不是 LLM，不产生 token</b> —— 单独列出，不混进上面的分母：<br>
+${tools.length ? warn(`<b>${esc(K.tools_note || '这些不是 LLM，不产生 token')}</b><br>
   ${tools.map(r => `<b>${esc(r.label)}</b>（${r.sessions} 场）—— ${esc(r.note)}`).join('<br>')}`) : ''}
 
 ${sec('按应用', 'harness = 你操作的那个应用。')}

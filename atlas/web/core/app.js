@@ -15,10 +15,10 @@ export const THEMES = [
 // 这是硬约束，不是建议 —— 超过就得先合并，不能往下堆。
 export const NAV = [
   { id: 'home',  label: '概览', icon: '◎', views: [
-      ['overview', '总览'],
+      ['overview', '总览'], ['direction', '方向'],
   ]},
   { id: 'time',  label: '时间', icon: '◷', views: [
-      ['calendar', '日历'], ['day', '一天'], ['timeline', '时间轴'], ['replay', '回放'],
+      ['calendar', '日历'], ['diary', '日记'], ['day', '一天'], ['timeline', '时间轴'], ['replay', '回放'],
   ]},
   { id: 'econ',  label: '经济', icon: '◈', views: [
       ['aei', '经济指数'], ['delivery', '交付与 ROI'], ['stack', 'Token 与栈'],

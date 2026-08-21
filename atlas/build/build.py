@@ -26,6 +26,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from extract import TOPICS, SKIPPED  # noqa: E402  词表是唯一真源，不在这里复制一份
 from metrics import token_block, economics_block, coupling_block, delivery_block  # noqa: E402
+import journal as journal_mod  # noqa: E402
 import outward as outward_mod  # noqa: E402
 import taxonomy  # noqa: E402
 import aei as aei_mod  # noqa: E402
@@ -350,6 +351,8 @@ def build(sessions: list, out: Path, gh: dict | None = None) -> dict:
     } for s in sessions]
 
     _lessons = lessons_block(sessions, proj_rows, gh)
+    _slices = slices_block(sessions, day_rows)
+    _outward = outward_mod.build(sessions, gh or {})
     _spread = token_spread(sessions)
     _tokens = token_block(sessions, _spread)
     # 成果复利投影。语义事件来自 ChatGPT 定时任务与 agent 归档；
@@ -367,7 +370,7 @@ def build(sessions: list, out: Path, gh: dict | None = None) -> dict:
         "weeks": week_rows,
         "projects": proj_rows,
         "sessions": compact,
-        "slices": slices_block(sessions, day_rows),
+        "slices": _slices,
         "trend": trend_block(week_rows),
         "insights": insights_block(sessions, day_rows, week_rows, proj_rows),
         "lessons": _lessons,
@@ -382,7 +385,14 @@ def build(sessions: list, out: Path, gh: dict | None = None) -> dict:
         "compounding": compound_mod.build(_events_dirs, _lessons, proj_rows, _dl, _tokens),
         # 「对外」那一列。现有每个指标回答的都是「我做了多少」，
         # 一个都回答不了「有没有一个动作的收件人不是我自己」。
-        "outward": outward_mod.build(sessions, gh or {}),
+        "outward": _outward,
+        # 发展方向 / 路径 / 范围 —— Owner 最初那句 prompt 里的三个词，
+        # 九个时间切片早就有了，但这三个词一个都没被回答过。
+        # 顺带直答最后那句「三个月了我依旧不能用它赚钱」。
+        "direction": journal_mod.direction(_slices, sessions, _dl, _outward, _lessons),
+        # 日记：Owner 明确要过「日历日程时间线」三样，日历和时间线早就有，
+        # **日记一直没有**。日历回答「哪天忙」，日记回答「那天你在干什么」。
+        "diary": journal_mod.diary(sessions, day_rows, gh or {}),
         "keyword_weights": {k: round(v, 3) for k, v in sorted(weights.items(), key=lambda kv: -kv[1])[:60]},
     }
 

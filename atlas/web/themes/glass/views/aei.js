@@ -12,7 +12,41 @@ export async function render(host) {
   const bands = (o, c) => orbit((o.bands || Object.keys(o.counts)).filter(b => o.counts[b])
     .map(b => ({ k: b, v: o.counts[b], label: `${o.counts[b]}　${pct(o.counts[b] / N)}`, c: c || 'var(--acc)' })));
 
+  const AL = E.alignment || {}, SE = E.automation_series || {}, BH = E.by_harness || {}, EC = E.effective_coverage || {};
   host.innerHTML = `
+${sec('对齐到什么程度', esc(AL.note || ''))}
+${bento([
+  { k: 'AEI 对齐度', v: `${((AL.score || 0) * 100).toFixed(0)}%`, w: 3, tone: 'acc',
+    n: `逐条算出来的，不是拍的：${esc(AL.formula || '')}` },
+  { k: '构成', v: `${AL.full || 0} 对齐 · ${AL.proxy || 0} 替代 · ${AL.none || 0} 做不到`,
+    size: 'sm', w: 3, n: '「做不到」那几条是原理上做不到，硬凑才是退步' },
+])}
+${drawer(`逐条看这 ${(AL.items || []).length} 项`, table(
+  [{ t: '项' }, { t: '程度' }, { t: '为什么' }],
+  (AL.items || []).map(it => [`<b>${esc(it.item)}</b>`,
+    state(it.level === 'full' ? '通' : it.level === 'proxy' ? '不确定' : '没做'),
+    esc(it.why)])))}
+
+${sec('automation 率是会翻方向的', esc(SE.verdict || ''))}
+${orbit((SE.weeks || []).map(w => ({ k: w.w, v: w.automation,
+  label: `${(w.automation * 100).toFixed(0)}%　${w.n} 场`,
+  c: w.automation >= 0.5 ? 'var(--acc)' : 'var(--acc2)' })))}
+${warn(esc(SE.note || ''))}
+
+${sec('按来源分开报', esc(BH.note || ''))}
+${orbit((BH.rows || []).map(r => ({ k: r.source, v: r.automation,
+  label: `${(r.automation * 100).toFixed(1)}%　${r.n} 场`, c: 'var(--acc)' })))}
+${BH.spread != null ? warn(`<b>各来源之间差 ${(BH.spread * 100).toFixed(1)} 个百分点。</b>
+  差得越大，「一个总的 automation 率」就越没有意义 —— 这正是 AEI v3 分开报的理由。`) : ''}
+
+${sec('覆盖率 vs 有效覆盖率', esc(EC.note || ''))}
+${bento([
+  { k: '覆盖率', v: pct(EC.coverage), n: '有多少场判得出领域' },
+  { k: '成功率', v: pct(EC.success_rate), n: esc(EC.denominator_note || '') },
+  { k: '有效覆盖率', v: pct(EC.effective), tone: 'acc', n: '两者相乘 —— AEI 明确区分这两个' },
+])}
+${warn(esc(EC.success_caveat || ''))}
+
 ${sec('经济指数', esc(E.framework))}
 ${bento([
   { k: '自动化份额', v: pct(E.headline.automation), n: '指派 + 反馈环', w: 3, tone: 'acc' },
