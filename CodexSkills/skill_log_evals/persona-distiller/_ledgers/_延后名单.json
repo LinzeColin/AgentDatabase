@@ -3830,9 +3830,30 @@
     "一手不足已记，若后续通道打通可从延后名单移除"
    ],
    "处置类": "① 一手规模不够（quick 需 4 一手，实际 1 篇；论文型人物）"
+  },
+  {
+   "name": "Cyril Stanley Smith",
+   "family_zh": "材料建工师",
+   "deferred_at": "2026-08-21",
+   "reason": "全部一手著作在版权期：creator:'Smith, Cyril Stanley' 仅 3 条（Atoms Blacksmiths & Crystals 1967、A Search for Structure 1981、On Divers Arts/Theophilus 1963 译注），全部 IA access-restricted=true（正文取不到）；无 1930 前著作（creator:'Smith, Cyril' AND year 1900-1930 = 0 命中；1926 论文 0 命中）。卒 1992，美国法版权到 2062，无授权方。quick 档一手 0 可用。",
+   "probed_and_failed": [
+    "creator:'Smith, Cyril Stanley' 3 条全 restricted=true",
+    "creator:'Smith, Cyril S' 0 命中",
+    "creator:'Smith, Cyril' AND year 1900-1930 0 命中",
+    "'Cyril Stanley Smith' 1926 0 命中",
+    "subject:'Smith, Cyril Stanley' 0 命中",
+    "metallurgy 主题仅 Singer《A History of Technology》1954(编者非他,受限)"
+   ],
+   "already_confirmed_fetchable": [],
+   "unblock_todo": [
+    "MIT 公开档案/口述史若有非版权材料可重开（Hopper 口述史先例）",
+    "若契约放宽至'IA 可访问即收'（对照现代人物批次）需 Owner 裁定",
+    "其 1967 Atoms Blacksmiths 若获版权方授权可做（现代人物授权先例）"
+   ],
+   "处置类": "⑥ 版权在保护期内（1992 卒，美国法 →2062）"
   }
  ],
- "total": 190,
+ "total": 191,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。　★ 2026-08-13 实测又漂了：写着 168、实有 187（差 19 条），**注释写明「不手写」并不能阻止它漂**——已落成判据 `check_deferred_list.py` 每次现算。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
