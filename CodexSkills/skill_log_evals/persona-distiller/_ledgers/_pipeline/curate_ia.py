@@ -280,6 +280,14 @@ EXCLUDE = {
                      "Young, Thomas, of Dublin", "British Central American", "Minister of Ellon",
                      "Young, Thomas Pettigrew", "Young, Thomas R", "Young, Thomas Earl",
                      "Young, Thomas-Durell", "Wood-Young"],
+    # ★ Claude-Louis Navier #46：同名者——
+    #   ① Pierre Toussaint Navier (1712-1779) 医师/毒理学家（Contre-poisons/arsenic/Châlons 等）→ Pierre Toussaint
+    #   ② Toussaint-Claude-Nicolas Navier（1770s 巴黎医学院论文候选人，BIUSante 微缩）→ Toussaint-Claude
+    #   ③ Claude-Bernard Navier (1756-1793) 法国贵族/革命者（Dauphiné 贵族会议文件）→ Claude-Bernard
+    #   ④ Denis Zmirou-Navier（现代公卫）→ Zmirou-Navier
+    #   ⑤ 现代 Navier-Stokes 会议论文集（1980 印刷受限）→ Approximation Methods for Navier-Stokes
+    "navier": ["Pierre Toussaint", "Toussaint-Claude", "Claude-Bernard", "Zmirou-Navier",
+               "Approximation Methods for Navier-Stokes"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -448,6 +456,11 @@ REQUIRE = {
     #   EXCLUDE/EXCLUDE_TITLE 排。注意 `Young, Thomas, 1773-1829` 与纯 `Young, Thomas`
     #   同为本尊，REQUIRE 不可再收紧。
     "thomas-young": [["young", "thomas"]],
+    # ★ Claude-Louis Navier #46：目标署名形态 `Navier, Claude Louis Marie Henri, 1785-1836`／
+    #   `Navier, M. (Claude-Louis-Marie-Henri), 1785-1836`／`Navier (Claude-Louis -Marie-Henri)`／
+    #   `Claude Navier`。REQUIRE 钉住 navier；同名者（Pierre Toussaint 医生、Toussaint-Claude-Nicolas、
+    #   Claude-Bernard 贵族、Zmirou-Navier 现代）由 EXCLUDE 排。
+    "navier": [["navier"]],
 }
 
 

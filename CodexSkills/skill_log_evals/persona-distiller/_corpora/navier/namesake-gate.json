@@ -1,0 +1,53 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Claude-Louis Navier；材料建工师；French civil engineer, physicist and mathematician; 桥梁/结构/弹性/流体力学奠基人（Navier-Stokes 方程、梁理论、悬索桥）；École des Ponts et Chaussées 教授。\n   专业背景：Claude-Louis-Marie-Henri Navier（1785-02-10 生于 Dijon，1836-08-21 卒于 Paris）是法国土木工程师与数学力学家。École Polytechnique（1802 入学）→ École des Ponts et Chaussées 毕业；1824 年起任该校正教授讲授应用力学；1830 年起任 École Polytechnique 分析与力学教授。核心成就：①悬索桥——1821-26 设计并建成 Paris 的 Pont des Invalides 悬索桥，1823《Rapport à M. Becquey et mémoire sur les ponts suspendus》奠定悬索桥理论；②弹性力学——建立梁的弯曲理论、给出弹性体平衡的一般方程（Navier equations），为后来的 Cauchy/Stokes 奠定基础；③流体力学——1822 年推导黏性流体运动方程（后称 Navier-Stokes 方程）；④工程实务——桥梁/铁路/道路工程报告（waggons 弯道运动 1835、铁路线比较 1836、tontine 年金数学 1819）；⑤教学——1833-1838 多版《Résumé des leçons sur l'application de la mécanique à l'établissement des constructions et des machines》（École des Ponts 讲义）与《Résumé des leçons de mécanique/analyse》（Polytechnique）。1824 入选法国科学院。。\n   应用价值：场景：结构力学与材料强度分析（梁弯曲、弹性理论、杆件强度）；悬索桥设计与验算（跨度、索形、载荷）；流体力学与黏性流建模（Navier-Stokes 方程的历史语境）；土木工程实务决策（桥梁/铁路/道路的选线与造价比较）；工程数学教学（应用力学课程体系）；关键能力：梁弯曲理论与弹性体平衡方程（材料建工师族核心）；悬索桥理论（索形与载荷的数学建模）；黏性流体运动方程推导；铁路/道路工程的经济性比较与力学分析；应用力学教学讲义体系化。\n   区分依据：Wikidata Q365442（French civil engineer 1785-1836）。archive.org creator 形态 `Navier, Claude Louis Marie Henri, 1785-1836`／`Navier, M. (Claude-Louis-Marie-Henri), 1785-1836`／`Navier (Claude-Louis -Marie-Henri), M . Navier`／`Claude Navier` 均指本尊（Résumé des leçons、Rapport à Becquey、Mémoire sur les ponts suspendus、Considérations roulage、Note sur le mouvement des waggons、Examen de la tontine、英文/意文译本）。同名者一律排除：Pierre Toussaint Navier (1712-1779) 医师/毒理学家（Contre-poisons 等）、Toussaint-Claude-Nicolas Navier（1770s 巴黎医学院论文候选人）、Claude-Bernard Navier (1756-1793) 法国贵族/革命者、Denis Zmirou-Navier（现代公卫研究者）。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "结构力学与材料强度分析（梁弯曲、弹性理论、杆件强度）",
+        "悬索桥设计与验算（跨度、索形、载荷）",
+        "流体力学与黏性流建模（Navier-Stokes 方程的历史语境）",
+        "土木工程实务决策（桥梁/铁路/道路的选线与造价比较）",
+        "工程数学教学（应用力学课程体系）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q365442",
+          "type": "wikidata"
+        },
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Navier%2C+Claude-Louis%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=100&output=json",
+          "type": "archive.org"
+        }
+      ],
+      "canonical_name": "Claude-Louis Navier",
+      "distinguishing_basis": "Wikidata Q365442（French civil engineer 1785-1836）。archive.org creator 形态 `Navier, Claude Louis Marie Henri, 1785-1836`／`Navier, M. (Claude-Louis-Marie-Henri), 1785-1836`／`Navier (Claude-Louis -Marie-Henri), M . Navier`／`Claude Navier` 均指本尊（Résumé des leçons、Rapport à Becquey、Mémoire sur les ponts suspendus、Considérations roulage、Note sur le mouvement des waggons、Examen de la tontine、英文/意文译本）。同名者一律排除：Pierre Toussaint Navier (1712-1779) 医师/毒理学家（Contre-poisons 等）、Toussaint-Claude-Nicolas Navier（1770s 巴黎医学院论文候选人）、Claude-Bernard Navier (1756-1793) 法国贵族/革命者、Denis Zmirou-Navier（现代公卫研究者）。",
+      "evidence_level": "high",
+      "identity_category": "材料建工师",
+      "key_capabilities": [
+        "梁弯曲理论与弹性体平衡方程（材料建工师族核心）",
+        "悬索桥理论（索形与载荷的数学建模）",
+        "黏性流体运动方程推导",
+        "铁路/道路工程的经济性比较与力学分析",
+        "应用力学教学讲义体系化"
+      ],
+      "label": "A",
+      "occupation_or_role": "French civil engineer, physicist and mathematician; 桥梁/结构/弹性/流体力学奠基人（Navier-Stokes 方程、梁理论、悬索桥）；École des Ponts et Chaussées 教授",
+      "professional_background": "Claude-Louis-Marie-Henri Navier（1785-02-10 生于 Dijon，1836-08-21 卒于 Paris）是法国土木工程师与数学力学家。École Polytechnique（1802 入学）→ École des Ponts et Chaussées 毕业；1824 年起任该校正教授讲授应用力学；1830 年起任 École Polytechnique 分析与力学教授。核心成就：①悬索桥——1821-26 设计并建成 Paris 的 Pont des Invalides 悬索桥，1823《Rapport à M. Becquey et mémoire sur les ponts suspendus》奠定悬索桥理论；②弹性力学——建立梁的弯曲理论、给出弹性体平衡的一般方程（Navier equations），为后来的 Cauchy/Stokes 奠定基础；③流体力学——1822 年推导黏性流体运动方程（后称 Navier-Stokes 方程）；④工程实务——桥梁/铁路/道路工程报告（waggons 弯道运动 1835、铁路线比较 1836、tontine 年金数学 1819）；⑤教学——1833-1838 多版《Résumé des leçons sur l'application de la mécanique à l'établissement des constructions et des machines》（École des Ponts 讲义）与《Résumé des leçons de mécanique/analyse》（Polytechnique）。1824 入选法国科学院。",
+      "subject_uid": "Q365442"
+    }
+  ],
+  "generated_at": "2026-08-21T21:00:40Z",
+  "normalized_name": "claudelouisnavier",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "Q365442",
+  "status": "ready",
+  "target_name": "Claude-Louis Navier"
+}
