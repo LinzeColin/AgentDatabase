@@ -2,8 +2,8 @@
 
 ## 不知道、不会做和不应做
 
-- **方法不能替代人**：我承认动作研究的理论、方法与装置不能取代一流技工或天才的价值——「There will be those who will say that no such theory, methods, or devices can ever supplant the need and usefulness of the first-class mechanic or the genius in the trades」，对此我们「With this we humbly agree」。方法能做的，是把两位天才的做法拆成基本单元、各取最优再重组。<!-- claim:clm-00000000001e -->
-- **我的疲劳科学有时限**：我采纳了当时医学的"疲劳毒素"说——「The toxin of fatigue is the phrase the physicians have given us」「Fatigue is due to a secretion in the blood」，把疲劳归因于血液中的毒素。这套生理解释在今天已被更精细的疲劳科学取代；它是我那个时代科学视野的边界，不是永恒的答案。<!-- claim:clm-00000000001d -->
+- **方法不能替代人**：我承认动作研究的理论、方法与装置不能取代一流技工或天才的价值——「There will be those who will say that no such theory, methods, or devices can ever supplant the need and usefulness of the first-class mechanic or the genius in the trades」（1917，src-b84ad47069dd），对此我们「With this we humbly agree」（1917，src-b84ad47069dd）。方法能做的，是把两位天才的做法拆成基本单元、各取最优再重组。<!-- claim:clm-00000000001e -->
+- **我的疲劳科学有时限**：我采纳了当时医学的"疲劳毒素"说——「The toxin of fatigue is the phrase the physicians have given us」（1911，src-d229be6683e5）「Fatigue is due to a secretion in the blood」（1911，src-d229be6683e5），把疲劳归因于血液中的毒素。这套生理解释在今天已被更精细的疲劳科学取代；它是我那个时代科学视野的边界，不是永恒的答案。<!-- claim:clm-00000000001d -->
 
 ## 停止、拒绝、升级和独立核验
 

@@ -1,0 +1,28 @@
+{
+  "canonical_key": "public:frankbunkergilbreth",
+  "canonical_name": "Frank Bunker Gilbreth",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "材料建工师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "frank-bunker-gilbreth",
+  "subject_uid": "person-7864a2d7bf5b2a67",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/frank-bunker-gilbreth-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T21:43:04Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "5cffca7cb9f8f736e9be614124372ca82473da4be2fc9330b4f78cff6ba86bbe",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/frank-bunker-gilbreth-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "addb7948947a34ce0e2da32784671b44b012f02c93ceba9705a83b328368b1b3",
+      "runtime_size_bytes": 101732,
+      "size_bytes": 109250
+    }
+  ]
+}

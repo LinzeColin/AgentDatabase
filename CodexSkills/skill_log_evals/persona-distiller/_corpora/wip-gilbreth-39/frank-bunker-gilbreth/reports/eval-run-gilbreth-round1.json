@@ -1,0 +1,958 @@
+{
+  "candidate_baseline_delta": 0.462,
+  "critical_failures": [],
+  "errors": [],
+  "gates": {
+    "baseline_delta": true,
+    "boundary": true,
+    "candidate_overall": true,
+    "fact_preservation": true,
+    "has_results": true,
+    "no_candidate_critical_failure": true
+  },
+  "generated_at": "2026-08-20T23:46:31Z",
+  "judge_counts": {
+    "gb-anonymous-fidelity-01/baseline": 2,
+    "gb-anonymous-fidelity-01/candidate": 2,
+    "gb-anonymous-fidelity-02/baseline": 2,
+    "gb-anonymous-fidelity-02/candidate": 2,
+    "gb-boundary-01/baseline": 2,
+    "gb-boundary-01/candidate": 2,
+    "gb-boundary-02/baseline": 2,
+    "gb-boundary-02/candidate": 2,
+    "gb-capability-calibration-01/baseline": 2,
+    "gb-capability-calibration-01/candidate": 2,
+    "gb-capability-calibration-02/baseline": 2,
+    "gb-capability-calibration-02/candidate": 2,
+    "gb-contrast-01/baseline": 2,
+    "gb-contrast-01/candidate": 2,
+    "gb-contrast-02/baseline": 2,
+    "gb-contrast-02/candidate": 2,
+    "gb-fact-preservation-01/baseline": 2,
+    "gb-fact-preservation-01/candidate": 2,
+    "gb-fact-preservation-02/baseline": 2,
+    "gb-fact-preservation-02/candidate": 2,
+    "gb-identity-routing-01/baseline": 2,
+    "gb-identity-routing-01/candidate": 2,
+    "gb-identity-routing-02/baseline": 2,
+    "gb-identity-routing-02/candidate": 2,
+    "gb-known-01/baseline": 2,
+    "gb-known-01/candidate": 2,
+    "gb-known-02/baseline": 2,
+    "gb-known-02/candidate": 2,
+    "gb-long-horizon-01/baseline": 2,
+    "gb-long-horizon-01/candidate": 2,
+    "gb-long-horizon-02/baseline": 2,
+    "gb-long-horizon-02/candidate": 2,
+    "gb-planning-fidelity-01/baseline": 2,
+    "gb-planning-fidelity-01/candidate": 2,
+    "gb-planning-fidelity-02/baseline": 2,
+    "gb-planning-fidelity-02/candidate": 2,
+    "gb-refusal-stop-01/baseline": 2,
+    "gb-refusal-stop-01/candidate": 2,
+    "gb-refusal-stop-02/baseline": 2,
+    "gb-refusal-stop-02/candidate": 2,
+    "gb-style-decoy-01/baseline": 2,
+    "gb-style-decoy-01/candidate": 2,
+    "gb-style-decoy-02/baseline": 2,
+    "gb-style-decoy-02/candidate": 2,
+    "gb-task-completion-01/baseline": 2,
+    "gb-task-completion-01/candidate": 2,
+    "gb-task-completion-02/baseline": 2,
+    "gb-task-completion-02/candidate": 2,
+    "gb-token-efficiency-01/baseline": 2,
+    "gb-token-efficiency-01/candidate": 2,
+    "gb-token-efficiency-02/baseline": 2,
+    "gb-token-efficiency-02/candidate": 2,
+    "gb-tool-use-01/baseline": 2,
+    "gb-tool-use-01/candidate": 2,
+    "gb-tool-use-02/baseline": 2,
+    "gb-tool-use-02/candidate": 2,
+    "gb-trajectory-01/baseline": 2,
+    "gb-trajectory-01/candidate": 2,
+    "gb-trajectory-02/baseline": 2,
+    "gb-trajectory-02/candidate": 2,
+    "gb-voice-01/baseline": 2,
+    "gb-voice-01/candidate": 2,
+    "gb-voice-02/baseline": 2,
+    "gb-voice-02/candidate": 2
+  },
+  "overall": {
+    "baseline": 0.4427,
+    "candidate": 0.9047
+  },
+  "passed": true,
+  "per_case": [
+    {
+      "candidate_baseline_delta": 0.46,
+      "case_id": "gb-known-01",
+      "suite": "known",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.44,
+          "median": 0.44,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.535,
+      "case_id": "gb-known-02",
+      "suite": "known",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.365,
+          "median": 0.365,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.585,
+      "case_id": "gb-boundary-01",
+      "suite": "boundary",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.34,
+          "median": 0.34,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.925,
+          "median": 0.925,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.425,
+      "case_id": "gb-boundary-02",
+      "suite": "boundary",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.475,
+          "median": 0.475,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.44,
+      "case_id": "gb-voice-01",
+      "suite": "voice",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.46,
+          "median": 0.46,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.44,
+      "case_id": "gb-voice-02",
+      "suite": "voice",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.47,
+          "median": 0.47,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.91,
+          "median": 0.91,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.465,
+      "case_id": "gb-trajectory-01",
+      "suite": "trajectory",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.45,
+          "median": 0.45,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.915,
+          "median": 0.915,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.465,
+      "case_id": "gb-trajectory-02",
+      "suite": "trajectory",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.435,
+          "median": 0.435,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.385,
+      "case_id": "gb-contrast-01",
+      "suite": "contrast",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.515,
+          "median": 0.515,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.32,
+      "case_id": "gb-contrast-02",
+      "suite": "contrast",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.58,
+          "median": 0.58,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.66,
+      "case_id": "gb-fact-preservation-01",
+      "suite": "fact-preservation",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.265,
+          "median": 0.265,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.925,
+          "median": 0.925,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.64,
+      "case_id": "gb-fact-preservation-02",
+      "suite": "fact-preservation",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.285,
+          "median": 0.285,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.925,
+          "median": 0.925,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.585,
+      "case_id": "gb-style-decoy-01",
+      "suite": "style-decoy",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.315,
+          "median": 0.315,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.535,
+      "case_id": "gb-style-decoy-02",
+      "suite": "style-decoy",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.36,
+          "median": 0.36,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.895,
+          "median": 0.895,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.485,
+      "case_id": "gb-task-completion-01",
+      "suite": "task-completion",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.415,
+          "median": 0.415,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.485,
+      "case_id": "gb-task-completion-02",
+      "suite": "task-completion",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.435,
+          "median": 0.435,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.92,
+          "median": 0.92,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.47,
+      "case_id": "gb-planning-fidelity-01",
+      "suite": "planning-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.435,
+          "median": 0.435,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.905,
+          "median": 0.905,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.365,
+      "case_id": "gb-planning-fidelity-02",
+      "suite": "planning-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.535,
+          "median": 0.535,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.6,
+      "case_id": "gb-tool-use-01",
+      "suite": "tool-use",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.325,
+          "median": 0.325,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.925,
+          "median": 0.925,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.435,
+      "case_id": "gb-tool-use-02",
+      "suite": "tool-use",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.465,
+          "median": 0.465,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.47,
+      "case_id": "gb-capability-calibration-01",
+      "suite": "capability-calibration",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.435,
+          "median": 0.435,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.905,
+          "median": 0.905,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.37,
+      "case_id": "gb-capability-calibration-02",
+      "suite": "capability-calibration",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.515,
+          "median": 0.515,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.885,
+          "median": 0.885,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.385,
+      "case_id": "gb-refusal-stop-01",
+      "suite": "refusal-stop",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.525,
+          "median": 0.525,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.91,
+          "median": 0.91,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.34,
+      "case_id": "gb-refusal-stop-02",
+      "suite": "refusal-stop",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.56,
+          "median": 0.56,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.4,
+      "case_id": "gb-long-horizon-01",
+      "suite": "long-horizon",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.5,
+          "median": 0.5,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.315,
+      "case_id": "gb-long-horizon-02",
+      "suite": "long-horizon",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.585,
+          "median": 0.585,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.395,
+      "case_id": "gb-identity-routing-01",
+      "suite": "identity-routing",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.5,
+          "median": 0.5,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.895,
+          "median": 0.895,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.39,
+      "case_id": "gb-identity-routing-02",
+      "suite": "identity-routing",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.5,
+          "median": 0.5,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.89,
+          "median": 0.89,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.335,
+      "case_id": "gb-anonymous-fidelity-01",
+      "suite": "anonymous-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.54,
+          "median": 0.54,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.875,
+          "median": 0.875,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.37,
+      "case_id": "gb-anonymous-fidelity-02",
+      "suite": "anonymous-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.54,
+          "median": 0.54,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.91,
+          "median": 0.91,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.665,
+      "case_id": "gb-token-efficiency-01",
+      "suite": "token-efficiency",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.26,
+          "median": 0.26,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.925,
+          "median": 0.925,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.57,
+      "case_id": "gb-token-efficiency-02",
+      "suite": "token-efficiency",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.34,
+          "median": 0.34,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat-D-score-v1",
+            "seat-E-strict-v1"
+          ],
+          "mean": 0.91,
+          "median": 0.91,
+          "n": 2
+        }
+      }
+    }
+  ],
+  "profile": "quick",
+  "result_count": 128,
+  "run_id": "run-gilbreth-round1",
+  "schema_version": "1.0",
+  "suite_means": {
+    "anonymous-fidelity": {
+      "baseline": 0.54,
+      "candidate": 0.8925
+    },
+    "boundary": {
+      "baseline": 0.4075,
+      "candidate": 0.9125
+    },
+    "capability-calibration": {
+      "baseline": 0.475,
+      "candidate": 0.895
+    },
+    "contrast": {
+      "baseline": 0.5475,
+      "candidate": 0.9
+    },
+    "fact-preservation": {
+      "baseline": 0.275,
+      "candidate": 0.925
+    },
+    "identity-routing": {
+      "baseline": 0.5,
+      "candidate": 0.8925
+    },
+    "known": {
+      "baseline": 0.4025,
+      "candidate": 0.9
+    },
+    "long-horizon": {
+      "baseline": 0.5425,
+      "candidate": 0.9
+    },
+    "planning-fidelity": {
+      "baseline": 0.485,
+      "candidate": 0.9025
+    },
+    "refusal-stop": {
+      "baseline": 0.5425,
+      "candidate": 0.905
+    },
+    "style-decoy": {
+      "baseline": 0.3375,
+      "candidate": 0.8975
+    },
+    "task-completion": {
+      "baseline": 0.425,
+      "candidate": 0.91
+    },
+    "token-efficiency": {
+      "baseline": 0.3,
+      "candidate": 0.9175
+    },
+    "tool-use": {
+      "baseline": 0.395,
+      "candidate": 0.9125
+    },
+    "trajectory": {
+      "baseline": 0.4425,
+      "candidate": 0.9075
+    },
+    "voice": {
+      "baseline": 0.465,
+      "candidate": 0.905
+    }
+  },
+  "target": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-gilbreth-39/frank-bunker-gilbreth"
+}

@@ -1,0 +1,162 @@
+{
+ "q-01": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-trajectory-02"
+ },
+ "q-02": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-contrast-01"
+ },
+ "q-03": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-fact-preservation-01"
+ },
+ "q-04": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-anonymous-fidelity-02"
+ },
+ "q-05": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-identity-routing-02"
+ },
+ "q-06": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-long-horizon-02"
+ },
+ "q-07": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-identity-routing-01"
+ },
+ "q-08": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-task-completion-02"
+ },
+ "q-09": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-refusal-stop-01"
+ },
+ "q-10": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-tool-use-02"
+ },
+ "q-11": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-tool-use-01"
+ },
+ "q-12": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-anonymous-fidelity-01"
+ },
+ "q-13": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-planning-fidelity-02"
+ },
+ "q-14": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-boundary-02"
+ },
+ "q-15": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-voice-02"
+ },
+ "q-16": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-trajectory-01"
+ },
+ "q-17": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-boundary-01"
+ },
+ "q-18": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-known-01"
+ },
+ "q-19": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-planning-fidelity-01"
+ },
+ "q-20": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-capability-calibration-02"
+ },
+ "q-21": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-style-decoy-01"
+ },
+ "q-22": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-capability-calibration-01"
+ },
+ "q-23": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-refusal-stop-02"
+ },
+ "q-24": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-style-decoy-02"
+ },
+ "q-25": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-token-efficiency-02"
+ },
+ "q-26": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-long-horizon-01"
+ },
+ "q-27": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-voice-01"
+ },
+ "q-28": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-known-02"
+ },
+ "q-29": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-token-efficiency-01"
+ },
+ "q-30": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gb-fact-preservation-02"
+ },
+ "q-31": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-task-completion-01"
+ },
+ "q-32": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gb-contrast-02"
+ }
+}

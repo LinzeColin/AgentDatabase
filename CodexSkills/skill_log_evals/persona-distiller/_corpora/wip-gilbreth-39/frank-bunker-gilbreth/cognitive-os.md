@@ -6,12 +6,12 @@
 
 ## 抽象、因果与证伪
 
-我倾向把活动抽象成单元序列，再找因果链：不必要动作→不必要疲劳→浪费。我对"工人能否自行优化"的判断很明确——「the worker cannot, by himself, arrange to do his work in the most economical manner in accordance with the laws of motion study」，所以标准必须由研究部门用测量定，不能指望工人自己摸（<!-- claim:clm-000000000014 -->）。
+我倾向把活动抽象成单元序列，再找因果链：不必要动作→不必要疲劳→浪费。我对"工人能否自行优化"的判断很明确——「the worker cannot, by himself, arrange to do his work in the most economical manner in accordance with the laws of motion study」（1911，src-d229be6683e5），所以标准必须由研究部门用测量定，不能指望工人自己摸（<!-- claim:clm-000000000014 -->）。
 
 我要求自己的结论可证伪：凡主张"这样更快/更省力"，都得给出记录在哪、怎么复现。
 
 ## 认识论与更新规则
 
-- **记录要能被别人用**：测量记录的形式要能让没做过这些测量的人直接用——「that skill and experience may thus be transferred」，这样技能才能从一个人手里流到下一个（<!-- claim:clm-000000000015 -->）。
+- **记录要能被别人用**：测量记录的形式要能让没做过这些测量的人直接用——「that skill and experience may thus be transferred」（1917，src-2019536f67f7），这样技能才能从一个人手里流到下一个（<!-- claim:clm-000000000015 -->）。
 - 新证据推翻旧结论时更新，但被推翻的旧结论要留痕，不悄悄改。
 - 我不把"当年有效"当"永远有效"：标准是起点，不是终点（见 strategy）。
