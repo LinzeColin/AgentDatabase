@@ -1,0 +1,219 @@
+{
+ "生成时刻": "2026-08-21T19:32:18",
+ "请求数": 9,
+ "已取回": 9,
+ "skipped_access_restricted": 0,
+ "剔除": 0,
+ "失败": [],
+ "并发降级": "无（全程并发 4）",
+ "总词数": 1423762,
+ "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
+ "记录": [
+  {
+   "identifier": "b21299705",
+   "status": "已取回",
+   "note": "",
+   "file": "b21299705.txt",
+   "source_url": "https://archive.org/download/b21299705/b21299705_djvu.txt",
+   "sha256": "ed6b3adb3a5b504b7c2a7ff2419cf79a6b154f19b269107ab8bb715cc4c66213",
+   "bytes": 1094617,
+   "words": 155366,
+   "fetched_at": "2026-08-22T05:09:19",
+   "ia_date": "1813",
+   "ia_year": "",
+   "ia_publicdate": "2015-06-04 14:45:58",
+   "ia_creator": [
+    "Young, Thomas, 1773-1829",
+    "Physical Society (Guy's Hospital) former owner",
+    "King's College London"
+   ],
+   "ia_title": "An introduction to medical literature, including a system of practical nosology [electronic resource] : intended as a guide to students, and an assistant to practitioners",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1813"
+   ],
+   "digitization_years": [
+    "2015"
+   ]
+  },
+  {
+   "identifier": "b28408226_0001",
+   "status": "已取回",
+   "note": "",
+   "file": "b28408226_0001.txt",
+   "source_url": "https://archive.org/download/b28408226_0001/b28408226_0001_djvu.txt",
+   "sha256": "88da063192b4d75ce4b5a9673ae3961d3ce9ea2dc2549af7f70d5bb28b13d437",
+   "bytes": 2280285,
+   "words": 344435,
+   "fetched_at": "2026-08-22T05:06:52",
+   "ia_date": "1807",
+   "ia_year": "",
+   "ia_publicdate": "2016-04-11 12:05:21",
+   "ia_creator": [
+    "Young, Thomas, 1773-1829",
+    "Royal College of Physicians of London"
+   ],
+   "ia_title": "A course of lectures on natural philosophy and the mechanical arts.",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1807"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "b28525164",
+   "status": "已取回",
+   "note": "curl 直下补齐（fetch_ia 500）",
+   "file": "b28525164.txt",
+   "source_url": "https://archive.org/download/b28525164/b28525164_djvu.txt",
+   "sha256": "ef6adfa3d6ca42df3ce382932f03315e28e027bce77d2b2b46fa316697686f9f",
+   "bytes": 90531,
+   "words": 12196,
+   "fetched_at": "2026-08-21T19:20:13",
+   "ia_date": "1796",
+   "ia_year": "",
+   "ia_publicdate": "2016-05-04 16:41:57",
+   "ia_creator": [
+    "Young, Thomas, 1773-1829",
+    "Royal College of Physicians of London"
+   ],
+   "ia_title": "De corporis humani viribus conservatricibus dissertatio",
+   "ia_licenseurl": "",
+   "titlepage_years": [],
+   "digitization_years": []
+  },
+  {
+   "identifier": "b33546484",
+   "status": "已取回",
+   "note": "重建",
+   "file": "b33546484.txt",
+   "source_url": "https://archive.org/download/b33546484/b33546484_djvu.txt",
+   "sha256": "c1504874ac13762797670b9eefc6c2b157caa95c9931e1aee44ac138d7ddf445",
+   "bytes": 202504,
+   "words": 47797,
+   "fetched_at": "2026-08-21T19:32:16",
+   "ia_date": "1823",
+   "ia_year": "",
+   "ia_publicdate": "2026-06-15 15:43:57",
+   "ia_creator": [
+    "Young, Thomas, 1773-1829"
+   ],
+   "ia_title": "Hieroglyphics : collected by the Egyptian Society",
+   "ia_licenseurl": "",
+   "titlepage_years": [],
+   "digitization_years": []
+  },
+  {
+   "identifier": "jstor-107248",
+   "status": "已取回",
+   "note": "",
+   "file": "jstor-107248.txt",
+   "source_url": "https://archive.org/download/jstor-107248/107248_djvu.txt",
+   "sha256": "c75d65ab2ff5439110bf27063add09aa1e617598bc05e76c3de345b304345fb9",
+   "bytes": 58785,
+   "words": 10184,
+   "fetched_at": "2026-08-22T05:09:32",
+   "ia_date": "1809-01-01",
+   "ia_year": "",
+   "ia_publicdate": "2013-03-15 19:26:24",
+   "ia_creator": "Young, Thomas",
+   "ia_title": "The Croonian Lecture: On the Functions of the Heart and Arteries",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1808"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "lecturescourseof02younrich",
+   "status": "已取回",
+   "note": "",
+   "file": "lecturescourseof02younrich.txt",
+   "source_url": "https://archive.org/download/lecturescourseof02younrich/lecturescourseof02younrich_djvu.txt",
+   "sha256": "e1cfbdfb8e07b93b5f1dbbdf2dce8e64c31c52d269b0d627d5c6c46b23229802",
+   "bytes": 2861289,
+   "words": 420343,
+   "fetched_at": "2026-08-22T05:06:46",
+   "ia_date": "1807",
+   "ia_year": "",
+   "ia_publicdate": "2008-03-26 21:07:23",
+   "ia_creator": "Young, Thomas, 1773-1829",
+   "ia_title": "A course of lectures on natural philosophy and the mechanical arts",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1805",
+    "1807"
+   ],
+   "digitization_years": []
+  },
+  {
+   "identifier": "miscellaneouswo03youngoog",
+   "status": "已取回",
+   "note": "curl 直下补齐（fetch_ia 500）",
+   "file": "miscellaneouswo03youngoog.txt",
+   "source_url": "https://archive.org/download/miscellaneouswo03youngoog/miscellaneouswo03youngoog_djvu.txt",
+   "sha256": "e0b52403d6e475be52707b72653cccd133f04e5c296464df2edbff6665d6f5f9",
+   "bytes": 1546173,
+   "words": 235918,
+   "fetched_at": "2026-08-21T19:11:09",
+   "ia_date": "1855",
+   "ia_year": "1855",
+   "ia_publicdate": "2009-04-15 04:23:19",
+   "ia_creator": [
+    "Young, Thomas, 1773-1829",
+    "Peacock, George, 1791-1858, ed",
+    "Leitch, John, joint ed"
+   ],
+   "ia_title": "Miscellaneous works of the late Thomas Young ..",
+   "ia_licenseurl": "",
+   "titlepage_years": [],
+   "digitization_years": []
+  },
+  {
+   "identifier": "oeuvresophthalmo00youn",
+   "status": "已取回",
+   "note": "重建",
+   "file": "oeuvresophthalmo00youn.txt",
+   "source_url": "https://archive.org/download/oeuvresophthalmo00youn/oeuvresophthalmo00youn_djvu.txt",
+   "sha256": "61782774d25cf398198343dad077187e45772595494231be921d8538d99268e7",
+   "bytes": 548973,
+   "words": 76643,
+   "fetched_at": "2026-08-21T19:32:18",
+   "ia_date": "1894",
+   "ia_year": "",
+   "ia_publicdate": "2011-12-14 14:07:02",
+   "ia_creator": [
+    "Young, Thomas, 1773-1829",
+    "Arago, F. (François), 1786-1853",
+    "Tscherning, Marius Hans Erik, 1854- , ed. & tr"
+   ],
+   "ia_title": "Oeuvres ophthalmologiques de Thomas Young",
+   "ia_licenseurl": "",
+   "titlepage_years": [],
+   "digitization_years": []
+  },
+  {
+   "identifier": "practicalhistori00youn",
+   "status": "已取回",
+   "note": "",
+   "file": "practicalhistori00youn.txt",
+   "source_url": "https://archive.org/download/practicalhistori00youn/practicalhistori00youn_djvu.txt",
+   "sha256": "2ed4144cd1624833af7872dc5858ce5b106c331a7edd0d56b044abc4b73846fe",
+   "bytes": 834337,
+   "words": 120880,
+   "fetched_at": "2026-08-22T05:09:02",
+   "ia_date": "1815",
+   "ia_year": "",
+   "ia_publicdate": "2012-01-26 15:48:47",
+   "ia_creator": "Young, Thomas, 1773-1829",
+   "ia_title": "A practical and historical treatise on consumptive diseases, deduced from original observations, and collected from authors of all ages",
+   "ia_licenseurl": "",
+   "titlepage_years": [
+    "1815"
+   ],
+   "digitization_years": [
+    "2012"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,83 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "Q174194",
+  "consent_authority": null,
+  "created_at": "2026-08-21T19:04:27Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "zh-CN",
+  "model_version": "0.1.0-draft",
+  "name": "Thomas Young",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "材料力学基础量建模（杨氏模量、应力-应变、弹性理论历史）",
+        "波动光学与干涉实验设计（双缝、颜色、光强分布）",
+        "古文字学与破译方法（Rosetta 石碑、象形文字字母表）",
+        "医学疾病分类学与生理学（nosology、心脏动脉功能）",
+        "科学计量与精算（表面张力、光行差、寿命表、船舶构造）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q174194",
+          "type": "wikidata"
+        },
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Young%2C+Thomas%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=100&output=json",
+          "type": "archive.org"
+        }
+      ],
+      "canonical_name": "Thomas Young",
+      "distinguishing_basis": "Wikidata Q174194（English polymath, 1773-1829）。archive.org creator 'Young, Thomas, 1773-1829' 均指本尊（Course of Lectures 1807、Miscellaneous Works 1855、Bakerian Lecture 1801、Hieroglyphics 1823、Practical treatise on consumptive diseases 1815、Phil Trans 论文系列）。同名者一律排除：Thomas W. Young（1962- 小说家，warriors/mullah's storm）、Thomas Daniel Young（1919-1997 文学批评家，Nashville Agrarians）、Thomas Emley Young（1843- 保险与投资作家）、Thomas Young 1587-1655（Smectymnuus 清教牧师）、Thomas Young of Dublin（1784 Siddoniad 诗人）、Thomas Young（British Central American Land Company，Mosquito Shore 游记 1847）、Thomas Young of Ellon（1909 圣诗史）、Thomas Pettigrew Young（1907 教育史论文）、Thomas Jefferson 'T.J.' Young（Newark Eagles 棒球）、Thomas R. Young（玉米茎腐病）、Thomas-Durell Young（防务研究）、Thomas Earl Young（无烟锅炉）、Wood-Young Thomas（直觉销售）。",
+      "evidence_level": "high",
+      "identity_category": "材料建工师",
+      "key_capabilities": [
+        "杨氏模量定义与弹性理论（材料建工师族核心）",
+        "双缝干涉实验与波动说论证",
+        "象形文字破译与字母表构建",
+        "疾病分类学（nosology）体系化",
+        "物理实验设计（颜色、表面张力、大气折射）"
+      ],
+      "label": "A",
+      "occupation_or_role": "English polymath, physician, physicist; 弹性模量（Young's modulus）与波动光学开创者；1797 剑桥三一学院，1800-1803 伦敦皇家学会教授，1802-1829 外事大臣秘书",
+      "professional_background": "Thomas Young（1773-06-13 生于 Somerset Milverton，1829-05-10 卒于伦敦）是英格兰博学家：医生（St Bartholomew's Hospital 医师，1796 爱丁堡/1808 剑桥医学学位）、物理学家、语言学家。成名成就：①弹性模量——1807 年在《Course of Lectures on Natural Philosophy》中提出杨氏模量（Young's modulus），是材料力学的基础量；②波动光学——1801 双缝干涉实验与波粒二象性的波动说复兴，1801 Bakerian Lecture 论眼睛机制（视觉适应），1803-1804 论颜色产生与干涉；③Rosetta 石碑破译——1814 起解读埃及象形文字，1823《Account of Some Recent Discoveries in Hieroglyphical Literature》奠定 Champollion 的基础；④医学——1813《An Introduction to Medical Literature》确立疾病分类学（nosology），1808-1809 Croonian Lecture 论心脏与动脉功能；⑤物理其余——表面张力（cohesion of fluids, 1805）、光行差、人体寿命递减公式（1826 保险精算）、船舶构造（对 Admiralty 的报告）等。皇家学会外事秘书（1802-1829）。",
+      "subject_uid": "Q174194"
+    },
+    "chosen_subject_uid": "Q174194",
+    "normalized_name": "thomasyoung",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "thomasyoung",
+  "origin_review_required": true,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "thomas-young",
+  "status": "draft",
+  "subject_origin": "public",
+  "target_id": "tgt-29e8861ad7d8",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-21T19:04:27Z"
+}

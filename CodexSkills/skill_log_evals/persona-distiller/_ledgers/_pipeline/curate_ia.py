@@ -259,6 +259,27 @@ EXCLUDE = {
     #   目标署名形态 `Coolidge, William D.`／`Coolidge, William David, 1873-`。
     #   creator 里 `Coolidge, William David, 1873-` 即本尊（1899 德文博士论文）。
     "coolidge": ["Theodore W. Coolidge", "William Appleton Coolidge", "Coolidge, Theodore"],
+    # ★ Thomas Young #45：同名者众多，全按 creator 串排（本尊 `Young, Thomas, 1773-1829` 不含任何下列片段）——
+    #   ① Thomas Daniel Young（1919-1997 文学批评家，Vanderbilt/Agrarians）→ Young, Thomas Daniel
+    #   ② Thomas Emley Young（1843- 保险与投资作家）→ Young, Thomas Emley
+    #   ③ Thomas W. Young（1962- 军事惊悚小说家）→ Young, Thomas W
+    #   ④ Thomas M. Young / III（棉花工业/特殊教育书目）→ Young, Thomas M
+    #   ⑤ Thomas Jefferson 'T.J.' Young（Newark Eagles 棒球）→ Young, Thomas Jefferson
+    #   ⑥ Thomas Young 1587-1655（Smectymnuus 清教牧师）→ Young, Thomas, 1587-1655
+    #   ⑦ Thomas Young of Dublin（1784 Siddoniad 诗人）→ Young, Thomas, of Dublin
+    #   ⑧ Thomas Young（British Central American Land Company，Mosquito Shore）→ British Central American
+    #   ⑨ Thomas Young of Ellon（1909 圣诗史牧师）→ Minister of Ellon
+    #   ⑩ Thomas Pettigrew Young（1907 教育史博士论文）→ Young, Thomas Pettigrew
+    #   ⑪ Thomas R. Young（玉米茎腐病）→ Young, Thomas R
+    #   ⑫ Thomas Earl Young（无烟锅炉）→ Young, Thomas Earl
+    #   ⑬ Thomas-Durell Young（防务研究）→ Young, Thomas-Durell
+    #   ⑭ Wood-Young Thomas（直觉销售）→ Wood-Young
+    #   ⑮ Thomas Young of 1968 American Literature（Thomas Daniel Young 法文 Auteur 记录）→ 由 ① 覆盖
+    "thomas-young": ["Young, Thomas Daniel", "Young, Thomas Emley", "Young, Thomas W",
+                     "Young, Thomas M", "Young, Thomas Jefferson", "Young, Thomas, 1587-1655",
+                     "Young, Thomas, of Dublin", "British Central American", "Minister of Ellon",
+                     "Young, Thomas Pettigrew", "Young, Thomas R", "Young, Thomas Earl",
+                     "Young, Thomas-Durell", "Wood-Young"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -421,6 +442,12 @@ REQUIRE = {
     # ★ Coolidge #43：目标署名形态 `Coolidge, William D.`／`Coolidge, William David, 1873-`。
     #   REQUIRE 钉住 coolidge+william；Theodore/William Appleton Coolidge 由 EXCLUDE/EXCLUDE_TITLE 排。
     "coolidge": [["coolidge", "william"]],
+    # ★ Thomas Young #45：目标署名形态 `Young, Thomas, 1773-1829`／`Young, Thomas`
+    #   （jstor 摘要/DLI/IndiaHistory 无生卒年）。REQUIRE 钉住 young+thomas；
+    #   同名者（Daniel/Emley/W./Jefferson/1587-1655/of Dublin/of Ellon/R./Earl/T.-Durell 等）由
+    #   EXCLUDE/EXCLUDE_TITLE 排。注意 `Young, Thomas, 1773-1829` 与纯 `Young, Thomas`
+    #   同为本尊，REQUIRE 不可再收紧。
+    "thomas-young": [["young", "thomas"]],
 }
 
 
