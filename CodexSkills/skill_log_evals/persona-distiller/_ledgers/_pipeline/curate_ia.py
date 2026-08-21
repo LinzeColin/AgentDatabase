@@ -254,6 +254,11 @@ EXCLUDE = {
     #   目标署名形态 `Hadfield, Robert A. (Robert Abbott), 1858-1940`／
     #   `Hadfield, Robert Abbott, Sir, 1858-1940`／`Hadfield, Robert A.`。
     "hadfield": ["Hadfield, Robert L", "James S. Hadfield", "Mathiasen", "Robert L."],
+    # ★ Coolidge #43：同名者分两类——
+    #   ① Theodore W. Coolidge（哈佛法律史家）与 William Appleton Coolidge（1995 收藏家画册）。
+    #   目标署名形态 `Coolidge, William D.`／`Coolidge, William David, 1873-`。
+    #   creator 里 `Coolidge, William David, 1873-` 即本尊（1899 德文博士论文）。
+    "coolidge": ["Theodore W. Coolidge", "William Appleton Coolidge", "Coolidge, Theodore"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -335,6 +340,9 @@ EXCLUDE_TITLE = {
     #   creator 带 `Hadfield, Robert L` / `Hadfield, Robert L. Mathiasen`，REQUIRE(hadfield+robert)
     #   会命中，按题名排。
     "hadfield": ["mutiny at sea", "douglas-fir", "dwarf mistletoe"],
+    # ★ Coolidge #43：Theodore W. Coolidge 与 William Appleton Coolidge 的著作（1995 收藏画册等）
+    #   creator 带 `Coolidge, William Appleton`——REQUIRE(coolidge+william) 会命中，按题名排。
+    "coolidge": ["appleton coolidge collection", "william appleton"],
 }
 # 目标必须出现在 creator 里的**姓名词元**（同一个 creator 段里全部出现即命中）。
 # ★★ 曾写成 `["Fröbel, Friedrich"]` 这种「姓, 名」定串，于是
@@ -410,6 +418,9 @@ REQUIRE = {
     #   REQUIRE 钉住 hadfield+robert；Robert L. Hadfield 与 James S. Hadfield 由
     #   EXCLUDE/EXCLUDE_TITLE 排。
     "hadfield": [["hadfield", "robert"]],
+    # ★ Coolidge #43：目标署名形态 `Coolidge, William D.`／`Coolidge, William David, 1873-`。
+    #   REQUIRE 钉住 coolidge+william；Theodore/William Appleton Coolidge 由 EXCLUDE/EXCLUDE_TITLE 排。
+    "coolidge": [["coolidge", "william"]],
 }
 
 

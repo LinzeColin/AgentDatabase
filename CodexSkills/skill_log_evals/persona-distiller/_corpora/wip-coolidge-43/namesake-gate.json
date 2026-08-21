@@ -1,0 +1,51 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：William David Coolidge；材料建工师；American physical chemist and engineer at General Electric, inventor of ductile tungsten and the Coolidge X-ray tube。\n   专业背景：1873-10-23 生于美国 Massachusetts 州 Hudson，1975-02-03 卒于 Schenectady, NY。MIT 学士(1896)/莱比锡大学博士(1899，Dielektrische Untersuchungen 德文博士论文)；1905 年入 General Electric Research Laboratory，在 Willis R. Whitney 领导下工作。1911 年发明韧性钨（ductile tungsten，加入微量氧化钍经机械加工得到可延展的钨丝），使钨丝白炽灯成为可能，后发展出钨氩气灯；1913-1916 年发明 Coolidge X-ray tube（热阴极电子管），奠定现代 X 射线与放射学基础。曾任 GE 研究实验室主任(1932-1940)。。\n   应用价值：场景：难熔金属加工与韧性钨开发（钨丝、灯丝、放电材料）；X 射线管设计与阴极电子学（Coolidge 管、热阴极）；电光源与白炽灯工程（钨丝灯、氩气填充）；工业研究实验室组织（GE 研究实验室、研究管理）；关键能力：难熔金属塑性加工（韧性钨、掺钍钨丝）；X 射线管与热阴极设计（Coolidge 管）；电光源材料工程（钨丝、氩气灯）；物理化学实验（电导率、介电研究、高温）。\n   区分依据：Wikidata Q935989（American physical chemist 1873-1975）；以韧性钨与 Coolidge X-ray tube 著称。archive.org creator 'Coolidge, William D.'/'Coolidge, William David, 1873-' 均指本尊。同名排除：Theodore W. Coolidge（其他）等。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "难熔金属加工与韧性钨开发（钨丝、灯丝、放电材料）",
+        "X 射线管设计与阴极电子学（Coolidge 管、热阴极）",
+        "电光源与白炽灯工程（钨丝灯、氩气填充）",
+        "工业研究实验室组织（GE 研究实验室、研究管理）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q935989",
+          "type": "wikidata"
+        },
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Coolidge%2C+William%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=100&output=json",
+          "type": "archive.org"
+        }
+      ],
+      "canonical_name": "William David Coolidge",
+      "distinguishing_basis": "Wikidata Q935989（American physical chemist 1873-1975）；以韧性钨与 Coolidge X-ray tube 著称。archive.org creator 'Coolidge, William D.'/'Coolidge, William David, 1873-' 均指本尊。同名排除：Theodore W. Coolidge（其他）等。",
+      "evidence_level": "high",
+      "identity_category": "材料建工师",
+      "key_capabilities": [
+        "难熔金属塑性加工（韧性钨、掺钍钨丝）",
+        "X 射线管与热阴极设计（Coolidge 管）",
+        "电光源材料工程（钨丝、氩气灯）",
+        "物理化学实验（电导率、介电研究、高温）"
+      ],
+      "label": "A",
+      "occupation_or_role": "American physical chemist and engineer at General Electric, inventor of ductile tungsten and the Coolidge X-ray tube",
+      "professional_background": "1873-10-23 生于美国 Massachusetts 州 Hudson，1975-02-03 卒于 Schenectady, NY。MIT 学士(1896)/莱比锡大学博士(1899，Dielektrische Untersuchungen 德文博士论文)；1905 年入 General Electric Research Laboratory，在 Willis R. Whitney 领导下工作。1911 年发明韧性钨（ductile tungsten，加入微量氧化钍经机械加工得到可延展的钨丝），使钨丝白炽灯成为可能，后发展出钨氩气灯；1913-1916 年发明 Coolidge X-ray tube（热阴极电子管），奠定现代 X 射线与放射学基础。曾任 GE 研究实验室主任(1932-1940)。",
+      "subject_uid": null
+    }
+  ],
+  "generated_at": "2026-08-21T18:47:20Z",
+  "normalized_name": "williamdcoolidge",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "ready",
+  "target_name": "William D. Coolidge"
+}

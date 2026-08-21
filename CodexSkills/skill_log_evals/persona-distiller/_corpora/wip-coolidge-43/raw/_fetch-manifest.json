@@ -1,0 +1,148 @@
+{
+  "生成时刻": "2026-08-22T04:53:09",
+  "请求数": 1,
+  "已取回": 6,
+  "skipped_access_restricted": 0,
+  "剔除": 0,
+  "失败": 0,
+  "并发降级": "无（全程并发 4）",
+  "总词数": 50775,
+  "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
+  "记录": [
+    {
+      "identifier": "b30800304",
+      "status": "已取回",
+      "note": "",
+      "file": "b30800304.txt",
+      "source_url": "https://archive.org/download/b30800304/b30800304_djvu.txt",
+      "sha256": "d8f3f7b54f912217a982ce8743c91fcc32eb129e18335c2d75b0d8e8dec81e70",
+      "bytes": 14123,
+      "words": 2082,
+      "fetched_at": "2026-08-22T04:50:37",
+      "ia_date": "1914",
+      "ia_year": "",
+      "ia_publicdate": "2019-04-03 15:30:57",
+      "ia_creator": "Cole, Lewis Gregory, 1874-1954, author",
+      "ia_title": "Note on the diagnostic and therapeutic value of the Coolidge tube",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "coolidge-tube",
+      "status": "已取回",
+      "note": "",
+      "file": "coolidge-tube.txt",
+      "source_url": "https://archive.org/download/coolidge-tube/Coolidge Tube_djvu.txt",
+      "sha256": "0c66bdf6a03918cee95fa4d5c2a7d7636fc1a57f1492f85b180cc6531e262a5b",
+      "bytes": 39476,
+      "words": 6495,
+      "fetched_at": "2026-08-22T04:53:09",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2021-04-10 18:37:12",
+      "ia_creator": "Victor Electric, General Electric, William Coolidge, Frank Jones, Jeff Behary",
+      "ia_title": "Coolidge X-Ray Tube",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1924"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "coolidgexraytube00gene",
+      "status": "已取回",
+      "note": "",
+      "file": "coolidgexraytube00gene.txt",
+      "source_url": "https://archive.org/download/coolidgexraytube00gene/coolidgexraytube00gene_djvu.txt",
+      "sha256": "d14d9f3fc3f3c13b266c8d54e287a5579dcfee791b7a83f6f25d88ebea091b93",
+      "bytes": 47464,
+      "words": 6768,
+      "fetched_at": "2026-08-22T04:49:18",
+      "ia_date": "1920",
+      "ia_year": "",
+      "ia_publicdate": "2011-11-04 16:15:49",
+      "ia_creator": [
+        "General Electric X-Ray Corporation",
+        "Coolidge, William David, 1873-1975"
+      ],
+      "ia_title": "Coolidge X-ray tube",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1920"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "dielektrischeun00coolgoog",
+      "status": "已取回",
+      "note": "",
+      "file": "dielektrischeun00coolgoog.txt",
+      "source_url": "https://archive.org/download/dielektrischeun00coolgoog/dielektrischeun00coolgoog_djvu.txt",
+      "sha256": "d5fd2f65100de2201cf11344aa27f82d8d2eaa3760583dd3852d9d1272f2a44f",
+      "bytes": 84348,
+      "words": 12466,
+      "fetched_at": "2026-08-22T04:53:01",
+      "ia_date": "1899",
+      "ia_year": "1899",
+      "ia_publicdate": "2008-03-09 18:49:06",
+      "ia_creator": "Coolidge, William David, 1873-",
+      "ia_title": "Dielektrische Untersuchungen vermittelst elektrischer Drahtwellen ..",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1892",
+        "1897",
+        "1899"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "jstor-20021866",
+      "status": "已取回",
+      "note": "",
+      "file": "jstor-20021866.txt",
+      "source_url": "https://archive.org/download/jstor-20021866/20021866_djvu.txt",
+      "sha256": "8e9a783720cc12ad1d14b679cd6084904115d192fd9e5c0f156f4ba1636c1743",
+      "bytes": 139141,
+      "words": 22834,
+      "fetched_at": "2026-08-22T04:53:05",
+      "ia_date": "1903-11-01",
+      "ia_year": "",
+      "ia_publicdate": "2013-03-15 07:59:20",
+      "ia_creator": "Coolidge, William D.",
+      "ia_title": "The Electrical Conductivity of Aqueous Solutions at High Temperatures. I. Description of the Apparatus. Results with Sodium and Potassium Chloride up to 306°",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1891",
+        "1895",
+        "1901",
+        "1903",
+        "2000"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "william-d-coolidge-letter",
+      "status": "已取回",
+      "note": "",
+      "file": "william-d-coolidge-letter.txt",
+      "source_url": "https://archive.org/download/william-d-coolidge-letter/William_D_Coolidge_Letter_djvu.txt",
+      "sha256": "50ac14ea00eede9f8ed4fbd50309ad69d360950f7f7684e51241a5ee9c3bf373",
+      "bytes": 692,
+      "words": 130,
+      "fetched_at": "2026-08-22T04:50:14",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2021-04-10 20:00:07",
+      "ia_creator": "William D. Coolidge, Frank Jones, Jeff Behary",
+      "ia_title": "William D Coolidge Letter",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1969"
+      ],
+      "digitization_years": []
+    }
+  ]
+}

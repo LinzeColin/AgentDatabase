@@ -3851,9 +3851,38 @@
     "其 1967 Atoms Blacksmiths 若获版权方授权可做（现代人物授权先例）"
    ],
    "处置类": "⑥ 版权在保护期内（1992 卒，美国法 →2062）"
+  },
+  {
+   "name": "William D. Coolidge",
+   "family_zh": "材料建工师",
+   "deferred_at": "2026-08-22",
+   "reason": "quick 档 min_sources=8 / min_primary=4。archive.org 一手源仅 3 个且核心成就缺失：①dielektrischeun00coolgoog(1899 德文博士论文, 电介质研究, 非其成名领域) ②jstor-20021866(1903 电导率论文) ③william-d-coolidge-letter(130 词亲笔信)。其成名核心（1911 韧性钨、1913-16 Coolidge X-ray tube）的一手论文（AIEE/Physical Review）在 IA 全零命中（ductile tungsten/tungsten lamp/Coolidge tube 各查询 0 命中）。GE 官方 X-ray tube 手册×2(coolidgexraytube00gene 6768 词、coolidge-tube 6495 词) 是公司署名产品说明书（第三人称描述其发明），非 Coolidge 个人一手；b30800304(1914) 为他人评价其管。合计 6 源/50K 词，一手占比与道数均不足以蒸馏真实人格（会严重偏向电化学博士论文而非钨/X-ray 发明人）。",
+   "probed_and_failed": [
+    "creator:'Coolidge, William D.' 1 条（jstor 电导率）",
+    "creator:'Coolidge, William David' 2 条（博士论文+GE 手册）",
+    "creator:'Coolidge, W. D.' 0 命中",
+    "'ductile tungsten' Coolidge 0 命中",
+    "Coolidge tungsten lamp filament 0 命中",
+    "creator:'Coolidge' AND (electrical OR physical) 10 条全为同名者（William Coolidge Lane/Susan Coolidge/Olivia Coolidge/Julian Lowell Coolidge 等）",
+    "philtrans AND Coolidge 0 命中"
+   ],
+   "already_confirmed_fetchable": [
+    "dielektrischeun00coolgoog (1899 博士论文 12466 词)",
+    "jstor-20021866 (1903 电导率 22834 词)",
+    "william-d-coolidge-letter (130 词)",
+    "coolidgexraytube00gene (1920 GE 手册 6768 词)",
+    "coolidge-tube (X-ray 手册 6495 词)",
+    "b30800304 (1914 他人评价 2082 词)"
+   ],
+   "unblock_todo": [
+    "AIEE Transactions 1910s 韧性钨论文若获数字档案通道（如 IEEE Xplore 开放/其他存档）可重开",
+    "GE 内部技术报告（Research Laboratory 1911-1916）若公开可大幅补强一手",
+    "Yankee Scientist (1963)/Liebhafsky (1974) 传记为 restricted，若获授权可作权威二手"
+   ],
+   "处置类": "① 一手规模不够（成名核心一手在 IA 全缺，现有 3 一手非其本行）"
   }
  ],
- "total": 191,
+ "total": 192,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。　★ 2026-08-13 实测又漂了：写着 168、实有 187（差 19 条），**注释写明「不手写」并不能阻止它漂**——已落成判据 `check_deferred_list.py` 每次现算。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
