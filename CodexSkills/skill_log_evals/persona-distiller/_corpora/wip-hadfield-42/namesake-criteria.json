@@ -1,0 +1,24 @@
+{
+  "subject": "Robert Abbott Hadfield",
+  "surname": "Hadfield",
+  "born": 1858,
+  "died": 1940,
+  "marker_window": 45,
+  "any_of_markers": [
+    "Hadfield, Robert",
+    "Robert A. Hadfield",
+    "Robert Abbott Hadfield",
+    "Hadfield, Robert A.",
+    "Hadfield, Robert Abbott"
+  ],
+  "excluded_names": [
+    "Robert L. Hadfield",
+    "Hadfield, Robert L",
+    "James S. Hadfield",
+    "Hadfield, James S.",
+    "A. Hill Griffith"
+  ],
+  "★ 为什么这个人非要有这份文件": "namesake-gate 的单候选 canonical_name 写的是目标本人的**全名**「Robert Abbott Hadfield」，而目标 name（meta.name）是简称「Robert Hadfield」——check_namesake_separability 把全名当成了「分不开且未被 excluded_names 覆盖的同名者」。与 Martens #134 完全同构：criteria 的 `subject` 声明目标本人全名即可豁免（判据第四档，2026-08-17 实测）。",
+  "★ 区分符的出处与射程": "目标署名形态（archive.org 实测）：`Hadfield, Robert A. (Robert Abbott), 1858-1940`／`Hadfield, Robert Abbott, Sir, 1858-1940`／`Hadfield, Robert A.`（DLI 无逗号）。REQUIRE 钉 hadfield+robert；同名者 Robert L. Hadfield（1979 航海小说《Mutiny at Sea》）与 James S. Hadfield（1961 植物病理报告）由 EXCLUDE/EXCLUDE_TITLE 按题名排。",
+  "identical_name_policy": "gate 候选仅 1 条且即目标本人，无字面同名候选，本档不适用。"
+}

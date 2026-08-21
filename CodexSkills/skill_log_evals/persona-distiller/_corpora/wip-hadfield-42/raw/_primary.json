@@ -1,0 +1,91 @@
+{
+  "总数": 9,
+  "计数": {
+    "一手": 9,
+    "二手": 0,
+    "需人判": 0
+  },
+  "一手占比下界": 1.0,
+  "一手占比上界": 1.0,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "hadfield"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "elijahwardofnewy00hadf",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Elijah Ward <of New York.>",
+      "creator": "Hadfield, Robert. [from old catalog]",
+      "words": 31065
+    },
+    {
+      "identifier": "historyprogresso00hadf",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The history and progress of metallurgical science and its influence upon modern ",
+      "creator": "Hadfield, Robert A. (Robert Abbott), 1858-1940",
+      "words": 39424
+    },
+    {
+      "identifier": "in.ernet.dli.2015.205779",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Metullurgy",
+      "creator": "Hadfield,robert. A, Sir",
+      "words": 146043
+    },
+    {
+      "identifier": "in.ernet.dli.2015.70291",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Metallurgy And Its Influence On Modern Progress With A Survey Of Education And R",
+      "creator": "Hadfield, Robert A.",
+      "words": 148224
+    },
+    {
+      "identifier": "in.gov.ignca.20600",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Metallurgy and its influence on modern progress with a survey of education and r",
+      "creator": "Hadfield, Robert A. ",
+      "words": 151277
+    },
+    {
+      "identifier": "jstor-1762549",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Hadfield's Manganese Steel",
+      "creator": "Hadfield, Robert A.",
+      "words": 4235
+    },
+    {
+      "identifier": "magneticmechanic00hadf",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The magnetic mechanical analysis of manganese steel",
+      "creator": "Hadfield, Robert A. (Robert Abbott), 1858-1940; Williams, S. R; Bowen, L. S",
+      "words": 2482
+    },
+    {
+      "identifier": "shorterworkingda00hadf",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A shorter working day",
+      "creator": "Hadfield, Robert Abbott, Sir, 1858-1940; Gibbins, H. de B. (Henry de Beltgens), ",
+      "words": 62076
+    },
+    {
+      "identifier": "workpositionofme00hadf",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The work and position of the metallurgical chemist; also references to Sheffield",
+      "creator": "Hadfield, Robert A. (Robert Abbott), 1858-1940; Sheffield Association of Metallu",
+      "words": 35941
+    }
+  ]
+}

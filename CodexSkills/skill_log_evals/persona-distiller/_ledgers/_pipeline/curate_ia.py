@@ -248,6 +248,12 @@ EXCLUDE = {
     #      creator 仍是 1868-1924 本尊，但多为版权受限重印，按题名收录原文时以可抓取的
     #      cdl/americana 版本优先。
     "gilbreth": ["1911-2001", "Gilbreth, Frank Bunker, 1911-2001"],
+    # ★ Hadfield #42：同名者分两类——
+    #   ① Robert L. Hadfield（1979 航海小说《Mutiny at Sea》作者）→ 按题名排；
+    #   ② James S. Hadfield（1961 植物病理报告 Douglas-Fir Dwarf Mistletoe 作者）。
+    #   目标署名形态 `Hadfield, Robert A. (Robert Abbott), 1858-1940`／
+    #   `Hadfield, Robert Abbott, Sir, 1858-1940`／`Hadfield, Robert A.`。
+    "hadfield": ["Hadfield, Robert L", "James S. Hadfield", "Mathiasen", "Robert L."],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -324,6 +330,11 @@ EXCLUDE_TITLE = {
     #   auskindernwerden0000gilb《Aus Kindern werden Leute》1992）——REQUIRE 钉的是
     #   gilbreth+frank+bunker 会命中儿子，必须按题名排（德语童书回忆录，非工程）。
     "gilbreth": ["aus kindern werden leute", "cheaper by the dozen", "bells on their toes"],
+    # ★ Hadfield #42：Robert L. Hadfield 的《Mutiny at Sea》1979（航海小说）与
+    #   James S. Hadfield 的《Douglas-Fir Dwarf Mistletoe》1961（植物病理）——
+    #   creator 带 `Hadfield, Robert L` / `Hadfield, Robert L. Mathiasen`，REQUIRE(hadfield+robert)
+    #   会命中，按题名排。
+    "hadfield": ["mutiny at sea", "douglas-fir", "dwarf mistletoe"],
 }
 # 目标必须出现在 creator 里的**姓名词元**（同一个 creator 段里全部出现即命中）。
 # ★★ 曾写成 `["Fröbel, Friedrich"]` 这种「姓, 名」定串，于是
@@ -394,6 +405,11 @@ REQUIRE = {
     #   REQUIRE 钉住 gilbreth+frank+bunker：儿子(1911-2001)虽同名同形，但
     #   EXCLUDE 按生卒年/题名排；妻子 Lillian 独著不含 frank+bunker → 天然挡。
     "gilbreth": [["gilbreth", "frank", "bunker"]],
+    # ★ Hadfield #42：目标署名形态 `Hadfield, Robert A. (Robert Abbott), 1858-1940`／
+    #   `Hadfield, Robert Abbott, Sir, 1858-1940`／`Hadfield, Robert A.`（DLI 无逗号）。
+    #   REQUIRE 钉住 hadfield+robert；Robert L. Hadfield 与 James S. Hadfield 由
+    #   EXCLUDE/EXCLUDE_TITLE 排。
+    "hadfield": [["hadfield", "robert"]],
 }
 
 

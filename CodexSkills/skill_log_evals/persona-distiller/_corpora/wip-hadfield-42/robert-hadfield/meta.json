@@ -1,0 +1,81 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": null,
+  "consent_authority": null,
+  "created_at": "2026-08-21T00:46:56Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "zh-CN",
+  "model_version": "0.1.0-draft",
+  "name": "Robert Hadfield",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "冶金材料研发与合金钢设计（锰钢、硅钢、特种钢）",
+        "金属疲劳与磁性分析（磁机械分析法）",
+        "冶金学史与科学史研究（Faraday 研究）",
+        "工业管理与社会改革（缩短工时论、工业教育与职业化学家地位）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q3104696",
+          "type": "wikidata"
+        },
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Hadfield%2C+Robert%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=100&output=json",
+          "type": "archive.org"
+        }
+      ],
+      "canonical_name": "Robert Abbott Hadfield",
+      "distinguishing_basis": "Wikidata Q3104696（British metallurgist 1858-1940）；以锰钢发明与 Faraday 冶金史研究著称。archive.org creator 'Hadfield, Robert A. (Robert Abbott), 1858-1940' / 'Hadfield, Robert Abbott, Sir, 1858-1940' 均指本尊。同名排除：Robert L. Hadfield（1979 航海小说《Mutiny at Sea》作者）与 James S. Hadfield（1961 植物病理报告作者）非本尊。",
+      "evidence_level": "high",
+      "identity_category": "材料建工师",
+      "key_capabilities": [
+        "合金钢研发（锰钢 12-14% Mn 耐磨/高强）",
+        "金属磁机械分析（magnetic mechanical analysis）",
+        "冶金学历史编纂与 Faraday 冶金研究考证",
+        "工业管理与劳动力政策（缩短工作日的论证）"
+      ],
+      "label": "A",
+      "occupation_or_role": "British metallurgist and steel industrialist, inventor of manganese steel",
+      "professional_background": "1858-11-28 生于英国 Sheffield，1940-09-30 卒于伦敦。Hadfield 是锰钢（Hadfield manganese steel, 1882）的发明人——含 12-14% 锰的钢首次兼具耐磨与高强度，彻底改变采矿、铁路、军工的耐磨部件。主持 Hadfield's Steel Foundry（Sheffield），1908-1910 任铁钢学会（Iron and Steel Institute）会长，1920 受封从男爵（baronet），1922 年任 Faraday Society 会长。著有《The History and Progress of Metallurgical Science》(1923)、《A Shorter Working Day》(1892)、《The Work and Position of the Metallurgical Chemist》(1922)、《Faraday and His Metallurgical Researches》(1931) 等。他也是科学史与冶金史学者，研究 Faraday 的冶金研究。",
+      "subject_uid": null
+    },
+    "chosen_subject_uid": null,
+    "normalized_name": "roberthadfield",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "roberthadfield",
+  "origin_review_required": true,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "robert-hadfield",
+  "status": "draft",
+  "subject_origin": "public",
+  "target_id": "tgt-6ba0dad55ded",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-21T00:46:56Z"
+}

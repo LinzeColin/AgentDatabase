@@ -1,0 +1,61 @@
+{
+  "lanes": 1,
+  "去掉纸面道后": 1,
+  "逐道份数": {
+    "writings": 9,
+    "conversations": 0,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 0,
+    "external": 0
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "elijahwardofnewy00hadf",
+      "道": "writings",
+      "title": "Elijah Ward <of New York.>"
+    },
+    {
+      "identifier": "historyprogresso00hadf",
+      "道": "writings",
+      "title": "The history and progress of metallurgical science and its influence up"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.205779",
+      "道": "writings",
+      "title": "Metullurgy"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.70291",
+      "道": "writings",
+      "title": "Metallurgy And Its Influence On Modern Progress With A Survey Of Educa"
+    },
+    {
+      "identifier": "in.gov.ignca.20600",
+      "道": "writings",
+      "title": "Metallurgy and its influence on modern progress with a survey of educa"
+    },
+    {
+      "identifier": "jstor-1762549",
+      "道": "writings",
+      "title": "Hadfield's Manganese Steel"
+    },
+    {
+      "identifier": "magneticmechanic00hadf",
+      "道": "writings",
+      "title": "The magnetic mechanical analysis of manganese steel"
+    },
+    {
+      "identifier": "shorterworkingda00hadf",
+      "道": "writings",
+      "title": "A shorter working day"
+    },
+    {
+      "identifier": "workpositionofme00hadf",
+      "道": "writings",
+      "title": "The work and position of the metallurgical chemist; also references to"
+    }
+  ]
+}
