@@ -143,3 +143,9 @@ ssh ovh 'sudo /usr/local/bin/linze-r2-free-tier-guard.py'
 > 脚本的安全底线也别削：**删 R2 对象前先 `HeadObject` 核对 OCI 上同 key 同大小，核不上就跳过不删**；
 > 最新一批永远保留；只碰 `backups/<组>/<时间戳>/`，**不碰 `primary-objects/`（那是制品字节，删了就是毁档）**。
 > 每份快照有 `r2`/`oci`/`github` 三个 verified 副本，删掉 R2 那份仍剩两份 —— 这是「卸载」不是「删除」。
+
+## Kimi Code GUI 前后台生命周期
+
+- **结论**：Kimi Code 外壳不能只保存自己 `spawn()` 返回的 `ChildProcess`；端口已存在时也要核对监听者确为 `~/.kimi-code/bin/kimi`、接管其 PID，并在 `before-quit` 中等待该 PID 退出后再结束 GUI。macOS 下红色关闭键和 `Cmd+W` 只关窗口，`activate` 负责恢复窗口；`Cmd+Q` 才关闭后台并释放端口。设置 `app.setName("Kimi Code")` 后必须把原 `userData` 路径设回去，否则登录与会话会表现成全新安装。
+  **为什么**：旧实现检测到端口已开就直接返回，`serverProc` 仍是 `null`，因此 GUI 重启后复用的是失联后台，之后 `Cmd+Q` 永远回收不了它。应用名称更正又会让 Electron 默认资料目录从 `kimi-shell` 漂到 `Kimi Code`。
+  **代价**：修复前会出现 GUI 已退出但 CLI/端口仍驻留、前后台权限主体错位，以及改菜单名后会话“消失”的假回归。完全磁盘访问需同时授权 GUI bundle `com.electron.kimi-code` 与实际 CLI 路径，并完整退出重开后生效。

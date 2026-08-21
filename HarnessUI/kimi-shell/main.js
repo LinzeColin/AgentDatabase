@@ -5,7 +5,6 @@ const { app, BrowserWindow, Menu, protocol, net, shell, ipcMain } = require("ele
 const { spawn, execFileSync } = require("node:child_process");
 const fs = require("node:fs");
 const path = require("node:path");
-const net_ = require("node:net");
 
 const HOME = process.env.HOME;
 const KIMI = path.join(HOME, ".kimi-code");
@@ -13,10 +12,22 @@ const SHELL_DIR = path.join(KIMI, "shell");
 const SKINS_DIR = path.join(SHELL_DIR, "skins");
 const STATE = path.join(SHELL_DIR, "state.json");
 const PORT = Number(process.env.KIMI_PORT || 58627);
+const KIMI_BIN = path.join(KIMI, "bin/kimi");
 
-let serverProc = null;   // 只有我们自己拉起的服务才由我们关闭
+let serverProc = null;
+let serverPid = null;    // 即使是从上一个 GUI 接管的后台，退出时也能精确关闭
+let serverOrigin = null;
+let quitCleanupStarted = false;
 let win = null;
+let windowPromise = null;
 let galleryWin = null;
+
+// 更正菜单名不能顺手把 Electron 的资料目录也改名，否则会像新安装一样丢失登录与本地 UI 状态。
+const existingUserData = app.getPath("userData");
+app.setName("Kimi Code");
+app.setPath("userData", existingUserData);
+const hasSingleInstanceLock = app.requestSingleInstanceLock();
+if (!hasSingleInstanceLock) app.quit();
 
 function openGallery() {
   if (galleryWin && !galleryWin.isDestroyed()) { galleryWin.focus(); return; }
@@ -151,28 +162,103 @@ const listSkins = () => { try {
 } catch { return []; } };
 
 async function createWindow() {
-  win = new BrowserWindow({ width: 1440, height: 920, title: "Kimi Code",
-    backgroundColor: "#0d1b2a", webPreferences: { contextIsolation: true } });
-  buildMenu();
-  win.webContents.on("did-finish-load", () => applySkin(readState().skin));
-  win.on("closed", () => { win = null; });
-  await win.loadURL(`http://127.0.0.1:${PORT}/#token=${token()}`);
-  return win;
+  if (win && !win.isDestroyed()) { win.show(); win.focus(); return win; }
+  if (windowPromise) return windowPromise;
+  windowPromise = (async () => {
+    const next = new BrowserWindow({ width: 1440, height: 920, title: "Kimi Code",
+      backgroundColor: "#0d1b2a", webPreferences: { contextIsolation: true } });
+    win = next;
+    buildMenu();
+    next.webContents.on("did-finish-load", () => applySkin(readState().skin));
+    next.on("closed", () => { if (win === next) win = null; });
+    try { await next.loadURL(`http://127.0.0.1:${PORT}/#token=${token()}`); }
+    catch (error) {
+      if (!next.isDestroyed()) next.destroy();
+      if (win === next) win = null;
+      throw error;
+    }
+    return next;
+  })();
+  try { return await windowPromise; }
+  finally { windowPromise = null; }
 }
 
-const portOpen = (port) => new Promise(res => {
-  const s = net_.connect({ port, host: "127.0.0.1" });
-  s.on("connect", () => { s.destroy(); res(true); });
-  s.on("error", () => res(false));
-  setTimeout(() => { s.destroy(); res(false); }, 1500);
-});
+function listenerPid(port) {
+  try {
+    const out = execFileSync("/usr/sbin/lsof", ["-nP", `-iTCP:${port}`, "-sTCP:LISTEN", "-Fp"],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+    const match = out.match(/^p(\d+)$/m);
+    return match ? Number(match[1]) : null;
+  } catch { return null; }
+}
+
+function isKimiServerPid(pid) {
+  if (!pid) return false;
+  try {
+    const out = execFileSync("/usr/sbin/lsof", ["-nP", "-a", "-p", String(pid), "-d", "txt", "-Fn"],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+    return out.split("\n").includes(`n${KIMI_BIN}`);
+  } catch { return false; }
+}
+
+function processAlive(pid) {
+  if (!pid) return false;
+  try { process.kill(pid, 0); return true; }
+  catch { return false; }
+}
+
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 async function ensureServer() {
-  if (await portOpen(PORT)) return "已在运行";               // 复用他自己开的服务，不重复拉起
-  serverProc = spawn(path.join(KIMI, "bin/kimi"), ["web", "--no-open", "--port", String(PORT)],
+  const existingPid = listenerPid(PORT);
+  if (existingPid) {
+    if (!isKimiServerPid(existingPid)) throw new Error(`端口 ${PORT} 被非 Kimi 进程占用（PID ${existingPid}）`);
+    if (serverPid !== existingPid) {
+      serverProc = null;
+      serverPid = existingPid;
+      serverOrigin = "已接管";
+    }
+    return serverOrigin || "已在运行";
+  }
+
+  const child = spawn(KIMI_BIN, ["web", "--no-open", "--port", String(PORT)],
     { stdio: "ignore", detached: false });
-  for (let i = 0; i < 40; i++) { if (await portOpen(PORT)) return "已启动"; await new Promise(r => setTimeout(r, 500)); }
+  serverProc = child;
+  const startedPid = child.pid;
+  let launchError = null;
+  serverPid = startedPid;
+  serverOrigin = "已启动";
+  child.once("error", error => { launchError = error; });
+  child.once("exit", () => {
+    if (serverPid === startedPid) { serverPid = null; serverOrigin = null; }
+    if (serverProc === child) serverProc = null;
+  });
+  for (let i = 0; i < 40; i++) {
+    const pid = listenerPid(PORT);
+    if (pid === startedPid && isKimiServerPid(pid)) return serverOrigin;
+    if (launchError) throw new Error(`kimi web 启动失败: ${launchError.message}`);
+    if (child.exitCode !== null) throw new Error("kimi web 在端口就绪前退出");
+    await wait(500);
+  }
   throw new Error("kimi web 起不来（等了 20 秒）");
+}
+
+async function shutdownServer() {
+  const targetPid = serverPid;
+  if (!targetPid || !processAlive(targetPid) || !isKimiServerPid(targetPid)) {
+    serverProc = null; serverPid = null; serverOrigin = null;
+    return;
+  }
+
+  console.log(`[kimi-shell] 退出应用，关闭后台 PID ${targetPid}`);
+  try { process.kill(targetPid, "SIGTERM"); } catch {}
+  for (let i = 0; i < 50 && processAlive(targetPid); i++) await wait(100);
+  if (processAlive(targetPid) && isKimiServerPid(targetPid)) {
+    console.log(`[kimi-shell] 后台未在 5 秒内退出，精确终止 PID ${targetPid}`);
+    try { process.kill(targetPid, "SIGKILL"); } catch {}
+    for (let i = 0; i < 10 && processAlive(targetPid); i++) await wait(100);
+  }
+  serverProc = null; serverPid = null; serverOrigin = null;
 }
 
 const token = () => { try { return fs.readFileSync(path.join(KIMI, "server.token"), "utf8").trim(); } catch { return ""; } };
@@ -305,6 +391,7 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 app.whenReady().then(async () => {
+  if (!hasSingleInstanceLock) return;
   protocol.handle("kimiskin", (req) => {                     // 皮肤图片走自定义协议，避免 file:// 被拦
     const u = new URL(req.url);
     const rel = decodeURIComponent(u.pathname).replace(/^\/+/, "");
@@ -332,6 +419,9 @@ app.whenReady().then(async () => {
   const how = await ensureServer();
   await createWindow();
   console.log(`[kimi-shell] 服务 ${how}，端口 ${PORT}`);
+}).catch(error => {
+  console.log(`[kimi-shell] 启动失败: ${error.message}`);
+  app.quit();
 });
 
 // macOS 约定：关窗 ≠ 退出。少了 activate 这一半，关掉窗口后进程还在但永远回不来 ——
@@ -342,7 +432,27 @@ app.on("window-all-closed", () => {
 });
 
 app.on("activate", async () => {
-  if (win && !win.isDestroyed()) { win.show(); win.focus(); return; }
-  await createWindow();
+  if (!hasSingleInstanceLock) return;
+  try {
+    await ensureServer();
+    await createWindow();
+  } catch (error) { console.log(`[kimi-shell] 恢复窗口失败: ${error.message}`); }
 });
-app.on("before-quit", () => { if (serverProc) { try { serverProc.kill(); } catch {} } });
+
+app.on("second-instance", async () => {
+  if (!app.isReady() || !hasSingleInstanceLock) return;
+  try {
+    await ensureServer();
+    await createWindow();
+  } catch (error) { console.log(`[kimi-shell] 处理第二次打开失败: ${error.message}`); }
+});
+
+// 正常软件语义：关窗口只留后台；退出应用必须等后台真正释放端口后再结束 GUI。
+app.on("before-quit", event => {
+  event.preventDefault();
+  if (quitCleanupStarted) return;
+  quitCleanupStarted = true;
+  shutdownServer()
+    .catch(error => console.log(`[kimi-shell] 关闭后台失败: ${error.message}`))
+    .finally(() => app.exit(0));
+});
