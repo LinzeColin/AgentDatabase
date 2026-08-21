@@ -3807,9 +3807,32 @@
     "check_authorship 法语 OCR 形态覆盖缺口 → 记入 P3 skill 迭代检查点候选"
    ],
    "处置类": "① 一手规模不够（去重后 6 < quick 门 8）＋ ② 归属证据 OCR 形态判据覆盖缺口"
+  },
+  {
+   "name": "Alan Arnold Griffith",
+   "family_zh": "材料建工师",
+   "deferred_at": "2026-08-21",
+   "reason": "quick 档 min_sources=8 / min_primary=4，archive.org 一手源仅 1 篇（philtrans01457975《The Phenomena of Rupture and Flow in Solids》1920/21 Phil. Trans.，PDF 4.3MB 已取回全文，含断裂判据/裂纹板/实验验证/薄纤维/分子理论）。A.A. Griffith 是论文型人物：其余一手（《An Aerodynamic Theory of Turbine Design》RAE 1926、《The Present Position of the Gas Turbine》1929、《Theory of Rupture》1924）均为期刊/RAE 报告，archive.org 0 命中（creator:Griffith, A 全库 26 条除本文外全为同名者：A. Hill Griffith 眼科医生、Griffith A. Hamlin 神学家、Griffith A. V. Morgan 教育学者等）。",
+   "probed_and_failed": [
+    "creator:'Griffith, A. A.' 0 命中",
+    "creator:'Griffith, Alan Arnold' 0 命中",
+    "creator:'Griffith, A' 26 条全看：除 philtrans01457975 外全为同名者",
+    "'theory of rupture' 1924 仅 DTIC_AD0278746(1962 二手报告，非一手)",
+    "'gas turbine'/'aerodynamic theory' 1926 0 命中",
+    "creator:'Griffith, A. A., 1893-1963' 0 命中"
+   ],
+   "already_confirmed_fetchable": [
+    "philtrans01457975 (1920/21 断裂论文全文，PDF 直下 4.3MB 已落 /tmp/griffith-philtrans.txt，36 页 10 万字符)"
+   ],
+   "unblock_todo": [
+    "Royal Society 1920 原文已收，缺其他一手；若接受 '1 篇里程碑论文 + 大量二手断裂力学史' 的特殊人物口径可重开（需 Owner/契约裁定）",
+    "RAE 技术报告 1926/1929 或可在 Wayback/NASA NTRS/其他政府存档翻案（Eiffel 先例：没探过的那条通道往往有）",
+    "一手不足已记，若后续通道打通可从延后名单移除"
+   ],
+   "处置类": "① 一手规模不够（quick 需 4 一手，实际 1 篇；论文型人物）"
   }
  ],
- "total": 189,
+ "total": 190,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。　★ 2026-08-13 实测又漂了：写着 168、实有 187（差 19 条），**注释写明「不手写」并不能阻止它漂**——已落成判据 `check_deferred_list.py` 每次现算。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
