@@ -223,19 +223,19 @@
       "no": 37,
       "name": "Thomas Telford",
       "family": "材料建工师",
-      "status": "TODO"
+      "status": "REG"
     },
     {
       "no": 38,
       "name": "Frederick Winslow Taylor",
       "family": "材料建工师",
-      "status": "TODO"
+      "status": "REG"
     },
     {
       "no": 39,
       "name": "Frank Bunker Gilbreth",
       "family": "材料建工师",
-      "status": "TODO"
+      "status": "REG"
     },
     {
       "no": 40,
@@ -253,7 +253,7 @@
       "no": 42,
       "name": "Robert Hadfield",
       "family": "材料建工师",
-      "status": "TODO"
+      "status": "REG"
     },
     {
       "no": 43,
@@ -271,13 +271,13 @@
       "no": 45,
       "name": "Thomas Young",
       "family": "材料建工师",
-      "status": "TODO"
+      "status": "REG"
     },
     {
       "no": 46,
       "name": "Claude-Louis Navier",
       "family": "材料建工师",
-      "status": "TODO"
+      "status": "REG"
     },
     {
       "no": 47,
@@ -295,7 +295,7 @@
       "no": 49,
       "name": "William J. M. Rankine",
       "family": "材料建工师",
-      "status": "TODO"
+      "status": "REG"
     },
     {
       "no": 50,
@@ -1129,7 +1129,7 @@
       "no": 188,
       "name": "George Eastman",
       "family": "创业经营师",
-      "status": "TODO"
+      "status": "REG"
     },
     {
       "no": 189,
@@ -1435,7 +1435,7 @@
       "no": 239,
       "name": "Irving Fisher",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "REG"
     },
     {
       "no": 240,
@@ -1447,7 +1447,7 @@
       "no": 241,
       "name": "Edward D. Jones",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "REG"
     },
     {
       "no": 242,
