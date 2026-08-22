@@ -302,6 +302,13 @@ EXCLUDE = {
     #   另有 `Babbage, Charles Pierre Lefebvre de Laboulaye`（法语译者，1830s 共译数学书）
     #   与一些合著/编委会条目（Campbell-Kelly 编、Lacroix/Peacock/Herschel 合著）。
     "babbage": ["Benjamin Herschel", "Herschel Babbage", "Laboulaye", "Campbell-Kelly"],
+    # ★ John von Neumann #75：EXCLUDE 兜底——同名者按 creator 串逐条排：
+    #   Franz Neumann（Behemoth 作者、矿物学家）、Frank Neumann（地震调查）、
+    #   Fritz Neumann（罗曼语文学）、Luise Neumann（Erinnerungsblätter）、
+    #   Albert Wangerin（写 Franz Neumann 者）、Franz L. Neumann（Rule of Law）、
+    #   Margarete Buber-Neumann（政治回忆录）、Elisabeth Noelle-Neumann（民意研究）。
+    "von-neumann": ["Franz Neumann", "Frank Neumann", "Fritz Neumann", "Luise Neumann",
+                    "Wangerin", "Noelle-Neumann", "Buber-Neumann", "Franz L. Neumann"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -485,6 +492,13 @@ REQUIRE = {
     #   或已被 EXCLUDE 排；Lacroix/Peacock/Herschel 合著含 charles babbage 但为多作者数学书，
     #   由 classify_primary 判位次。
     "babbage": [["babbage", "charles"]],
+    # ★ John von Neumann #75：目标署名形态 `Von Neumann, John, 1903-1957`／
+    #   `John von Neumann`／`Von Neumann, John`。REQUIRE 钉住 von+neumann+john 三词元
+    #   （von+neumann 单取会吞进 Franz Neumann 的合著者串；john 定位本尊）。
+    #   同名者主要是德国各 Neumann：Franz Neumann（法学家/矿物学家）、Frank Neumann（地震）、
+    #   Fritz Neumann（罗曼语文学）、Luise Neumann、Elisabeth Noelle-Neumann——均无
+    #   john+von+neumann 组合，被 REQUIRE 天然挡掉。
+    "von-neumann": [["von", "neumann", "john"], ["neumann", "john", "von"]],
 }
 
 
