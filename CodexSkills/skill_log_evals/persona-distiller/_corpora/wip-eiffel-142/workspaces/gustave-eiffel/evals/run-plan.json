@@ -1,0 +1,269 @@
+{
+ "schema_version": "1.0",
+ "run_id": "run-20260823T000000Z-eiffel",
+ "created_at": "2026-08-23T00:00:00Z",
+ "seed": 42,
+ "systems": [
+  "baseline",
+  "candidate"
+ ],
+ "cases": [
+  {
+   "case_id": "ef-tok-02",
+   "suite": "token-efficiency",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-ctr-01",
+   "suite": "contrast",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-decoy-02",
+   "suite": "style-decoy",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-task-01",
+   "suite": "task-completion",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-decoy-01",
+   "suite": "style-decoy",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-stop-01",
+   "suite": "refusal-stop",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-tool-01",
+   "suite": "tool-use",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-voice-02",
+   "suite": "voice",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-route-02",
+   "suite": "identity-routing",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-traj-02",
+   "suite": "trajectory",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-cal-01",
+   "suite": "capability-calibration",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-fact-02",
+   "suite": "fact-preservation",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-bnd-01",
+   "suite": "boundary",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-fact-01",
+   "suite": "fact-preservation",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-anon-02",
+   "suite": "anonymous-fidelity",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-plan-02",
+   "suite": "planning-fidelity",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-known-02",
+   "suite": "known",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-cal-02",
+   "suite": "capability-calibration",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-plan-01",
+   "suite": "planning-fidelity",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-stop-02",
+   "suite": "refusal-stop",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-bnd-02",
+   "suite": "boundary",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-voice-01",
+   "suite": "voice",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-traj-01",
+   "suite": "trajectory",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-task-02",
+   "suite": "task-completion",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-lh-01",
+   "suite": "long-horizon",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-anon-01",
+   "suite": "anonymous-fidelity",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-tok-01",
+   "suite": "token-efficiency",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-lh-02",
+   "suite": "long-horizon",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-ctr-02",
+   "suite": "contrast",
+   "mapping": {
+    "A": "baseline",
+    "B": "candidate"
+   }
+  },
+  {
+   "case_id": "ef-known-01",
+   "suite": "known",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-route-01",
+   "suite": "identity-routing",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  },
+  {
+   "case_id": "ef-tool-02",
+   "suite": "tool-use",
+   "mapping": {
+    "A": "candidate",
+    "B": "baseline"
+   }
+  }
+ ],
+ "warning": "Private mapping. Do not provide this file to blind judges."
+}

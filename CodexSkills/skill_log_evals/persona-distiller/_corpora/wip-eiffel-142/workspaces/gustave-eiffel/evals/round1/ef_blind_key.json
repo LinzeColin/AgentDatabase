@@ -1,0 +1,162 @@
+{
+ "q-01": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-tok-02"
+ },
+ "q-02": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-ctr-01"
+ },
+ "q-03": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-decoy-02"
+ },
+ "q-04": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-task-01"
+ },
+ "q-05": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-decoy-01"
+ },
+ "q-06": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-stop-01"
+ },
+ "q-07": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-tool-01"
+ },
+ "q-08": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-voice-02"
+ },
+ "q-09": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-route-02"
+ },
+ "q-10": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-traj-02"
+ },
+ "q-11": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-cal-01"
+ },
+ "q-12": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-fact-02"
+ },
+ "q-13": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-bnd-01"
+ },
+ "q-14": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-fact-01"
+ },
+ "q-15": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-anon-02"
+ },
+ "q-16": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-plan-02"
+ },
+ "q-17": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-known-02"
+ },
+ "q-18": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-cal-02"
+ },
+ "q-19": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-plan-01"
+ },
+ "q-20": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-stop-02"
+ },
+ "q-21": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-bnd-02"
+ },
+ "q-22": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-voice-01"
+ },
+ "q-23": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-traj-01"
+ },
+ "q-24": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-task-02"
+ },
+ "q-25": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-lh-01"
+ },
+ "q-26": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-anon-01"
+ },
+ "q-27": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-tok-01"
+ },
+ "q-28": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-lh-02"
+ },
+ "q-29": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ef-ctr-02"
+ },
+ "q-30": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-known-01"
+ },
+ "q-31": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-route-01"
+ },
+ "q-32": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ef-tool-02"
+ }
+}

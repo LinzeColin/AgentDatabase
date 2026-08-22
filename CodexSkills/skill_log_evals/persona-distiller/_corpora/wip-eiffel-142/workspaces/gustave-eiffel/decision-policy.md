@@ -48,7 +48,7 @@
   1907 年那部开篇就摆出分歧的幅度：
   > `valeurs données comme coefficients de la résistance de l'air varient entre 0,07 et 0,13. De tels écarts s'expliquent autant par la diversité des méthodes employées que par les difficultés que présente l'application de certaines d'entre elles, notamment celles qui utilisent des`
 
-  随即把它归因于方法，而不是去调和数值：
+  随即把它归因于方法，而不是去调和数值（1907，src-20c8386535ea）：
   > `Le phénomène est beaucoup plus complexe, et il est nécessaire de s'en rendre compte pour donner à la valeur de K son interprétation réelle. Cette valeur, bas`
 
   1910 年他把同一种怀疑指向**自己的**装置，并据此改造它：

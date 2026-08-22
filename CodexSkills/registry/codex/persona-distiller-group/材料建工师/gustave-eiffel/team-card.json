@@ -29,7 +29,7 @@
     "风压/荷载计算：每次简化翻成明写的等价假设",
     "实验设计：量具明确、速度范围自己划清、误差写进操作规则"
   ],
-  "latest_product_version": null,
+  "latest_product_version": "0.0.0.1",
   "readiness": "ready",
   "research_cutoff": "2026-08-23",
   "schema_version": "1.0",

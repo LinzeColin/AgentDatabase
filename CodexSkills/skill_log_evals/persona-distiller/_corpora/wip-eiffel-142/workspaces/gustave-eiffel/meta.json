@@ -73,7 +73,7 @@
   "schema_version": "2.0",
   "slug": "gustave-eiffel",
   "status": "draft",
-  "subject_origin": "public",
+  "subject_origin": "historical",
   "target_id": "tgt-3a42516774f5",
   "time_scope": "all available periods, separated by role and material drift",
   "updated_at": "2026-08-18T13:05:02Z",
@@ -113,6 +113,22 @@
         "定性": "★ **本份判不了**——不是「没有署名」，是**这份扫本里没有扉页**。要定性须另取含扉页的扫本。记为未决，不计入署名已证。"
       }
     ],
-    "disputed_policy": "① 1907／1892 两份：署名确凿，只是引出词形态判据不认（OCR 插字 / `DE`）。**本轮不动判据** —— 加宽 `DE` 在法文里会大量误报，这一条留给 Owner。\n② 1885：合作件。可用于「他的提案」，**不得当作独著**；且本份在 holdout，研究侧不读。\n③ 1879：**扉页读不出**。按公司纪要归属，逐字引文须标明来源为公司纪要而非个人署名件。\n④ 1910：**这一份没有扉页**，不当作「无署名」，当作「未决」。\n★ 四类处置各不相同 —— 把它们合并成一条规则，就会把 ③④ 也说成「法文识别问题」。"
+    "disputed_policy": "① 1907／1892 两份：署名确凿，只是引出词形态判据不认（OCR 插字 / `DE`）。**本轮不动判据** —— 加宽 `DE` 在法文里会大量误报，这一条留给 Owner。\n② 1885：合作件。可用于「他的提案」，**不得当作独著**；且本份在 holdout，研究侧不读。\n③ 1879：**扉页读不出**。按公司纪要归属，逐字引文须标明来源为公司纪要而非个人署名件。\n④ 1910：**这一份没有扉页**，不当作「无署名」，当作「未决」。\n★ 四类处置各不相同 —— 把它们合并成一条规则，就会把 ③④ 也说成「法文识别问题」。",
+    "covered_sources": [
+      "1879-pont-du-douro.txt ｜ 署名照录：Le projet présenté par MM. G. Eiffel et C° fut préféré",
+      "1885-tour-en-fer-300m.txt ｜ 署名照录：PROJET PRESENTE PAR M. G. EIFFEL INGÉNIEUR-CONSTRUCTEUR",
+      "1888-garabit-notice-A.txt ｜ 署名照录：PAR G. EIFFEL ANCIEN ÉLÈVE DE L'ÉCOLE CENTRALE DES ARTS ET MANUFACTURES",
+      "1888-garabit-notice-B.txt ｜ 署名照录：PAR G. EIFFEL ANCIEN ÉLÈVE DE L'ÉCOLE CENTRALE DES ARTS ET MANUFACTURES",
+      "1888-grandes-constructions.txt ｜ 署名照录：CONFÉRENCE FAITE PAR G. EIFFEL VICE-PRÉSIDENT DE LA SOCIÉTÉ DES INGÉNIEURS CIVILS",
+      "1889-memoire-viaduc.txt ｜ 署名照录：VIADUC DE GARABIT PAR M. G. EIFFEL PRÉSIDENT DE LA SOCIÉTÉ DES INGÉNIEURS CIVILS",
+      "1892-note-ecluses-panama.txt ｜ 署名照录：NOTE DE M. G. EIFFEL SUR SON CONTRAT D'ENTREPRISE DES ÉCLUSES DU CANAL DE PANAMA",
+      "1900-tour-de-trois-cents-metres.txt ｜ 署名照录：G. EIFFEL OFFICIER DE LA LÉGION D'HONNEUR ANCIEN PRÉSIDENT",
+      "1900-travaux-scientifiques-A.txt ｜ 署名照录：DE 1889 À 1900 G. EIFFEL OFFICIER DE LA LÉGION D'HONNEUR ANCIEN PRÉSIDENT",
+      "1900-travaux-scientifiques-B.txt ｜ 署名照录：G. EIFFEL OFFICIER DE LA LÉGION D'HONNEUR（同书另一扫本，A 已照录）",
+      "1902-la-tour-eiffel-en-1900.txt ｜ 署名照录：LA TOUR EIFFEL EN 1900 G. EIFFEL OFFICIER DE LA LÉGION D'HONNEUR",
+      "1907-recherches-resistance-air.txt ｜ 署名照录：EXÉCUTÉES A LA TOUR EIFFEL PAR G. EIFFEL ANCIEN PRÉSIDENT DE LA SOCIÉTÉ DES INGÉNIEURS CIVILS DE FRANCE",
+      "1910-resistance-de-lair-aviation.txt ｜ 署名照录：La Tour Eiffel en 1900. In-4o. Paris, Masson et Cie, 1902（作品自录书目，署名见同系列他书）",
+      "1910-laboratoire-aerodynamique.txt ｜ 署名照录：LABORATOIRE AÉRODYNAMIQUE DE M. G. EIFFEL（Société des Ingénieurs Civils de France, Bulletin de Janvier 1910）"
+    ]
   }
 }

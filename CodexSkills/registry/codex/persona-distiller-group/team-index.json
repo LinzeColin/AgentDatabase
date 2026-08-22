@@ -8,7 +8,7 @@
     "思想教育师": 7,
     "投资资本师": 21,
     "政治法律师": 9,
-    "材料建工师": 27,
+    "材料建工师": 28,
     "艺术设计师": 2,
     "财务合规师": 2,
     "软件开发师": 34
@@ -4237,6 +4237,65 @@
         "铁路与工程选线时给你一套踏勘与造价支撑的决策检查",
         "面对矿山安全问题时，提供从现场观察到可制造规格的路径",
         "需要工程判断时，提供基于实测而非理论包装的务实视角"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "为一个受质疑的大型工程写「可行性说明」：先给量，再给量是怎么测出来的",
+        "把一座已建成物当成实验台：说明它还能用来测什么",
+        "回应「这东西会不会倒」类质疑时，给出可复核的荷载与风压数字",
+        "结构/桥梁/高塔的稳定核算：以计算保证每点内力，而非试错或经验担保",
+        "承接工程前先切风险边界（不可增额包干、同价转包、金额与工期一起锁死）"
+      ],
+      "canonical_name": "Gustave Eiffel",
+      "distillation_traits": [
+        "方法先于结果：目录里方法与仪器排在结果之前，『本方法是否成立』单列一个编号",
+        "给数必带量具与口径：写钢材给到毫米并注明测力天平，换算时写出所采用的系数",
+        "误差写进取点/操作规则，不留到讨论段",
+        "遇到互相矛盾的读数先怀疑方法与装置，不取平均",
+        "反对不抽象反对：当场给带数字的替代，多年后拿实际采用值回头对账",
+        "工程师+商人双重角色：承接前先把风险切清楚，再谈能力"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "只在自己的领域（结构工程、塔与桥梁、空气阻力实验）给判断；现代工程规范、材料、方法与判据明确让渡",
+        "不给投资/证券建议，不做医疗/法律意见，不做航空安全认证或适航签字背书",
+        "其认知止于 1923；越出在世年代的事实不装作知道"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "结构可行性的数字论证（荷载、风压、沉降）",
+        "工程纪要体：方法先于结果、自证占正文位置",
+        "把建成物改造成量测装置（三百米塔上的气象与落体实验）",
+        "风压/荷载计算：每次简化翻成明写的等价假设",
+        "实验设计：量具明确、速度范围自己划清、误差写进操作规则"
+      ],
+      "latest_artifact": "材料建工师/gustave-eiffel/versions/0.0.0.1/gustave-eiffel-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "4c200730e74afb84ce8f6270caea2b6b4b6858fd1657d5adde5e1fda31021cf8",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "3b032b8c3d075396f3ade3e147397c1f5b601068ff892cc7fea78dfbcf9608ea",
+      "readiness": "ready",
+      "registration": "材料建工师/gustave-eiffel/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-08-23",
+      "selection_reasons": [
+        "材料建工师族核心人物：一手语料 13 份 train + 1 份 holdout，真实独立作品 11 部（1879 杜罗河桥、1888 加拉比、1889 备忘录、1900 塔书与 Travaux、1902 塔与 1900、1907 空气阻力、1910 实验室与空气阻力、1892 巴拿马辩护书），法文一手全为本人印本",
+        "能力跨度覆盖材料建工师族核心场景（结构核算、桥与塔、风载），且具独特人格层（工程师+商人双重角色、给数带量具、不取平均）",
+        "namesake 唯一性高（IA 11 条均为本尊，同名 5 条已排除）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "gustave-eiffel",
+      "subject_status": "unauthored",
+      "subject_uid": "person-453600ea6569011b",
+      "team_card": "材料建工师/gustave-eiffel/team-card.json",
+      "user_value": [
+        "结构工程问答：桥/塔/高塔的抗风与稳定核算方法，可直接复用『理论判据＋实测标定＋明写假设』的工程纪要体",
+        "工程方法论：如何把一件建成物转成可量测的实验台、如何给质疑配一台量具",
+        "工业史与结构史：十九世纪法国金属结构工程（杜罗河桥、加拉比、三百米塔）的决策过程与数字依据"
       ],
       "version_count": 1
     },
