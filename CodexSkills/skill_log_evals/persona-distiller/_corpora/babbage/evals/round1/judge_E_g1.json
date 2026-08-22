@@ -1,0 +1,18 @@
+[
+  {"q": "q-01", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "双方都答出大臣先给1000、Babbage主动抬到1500并当场答应，数字与原引文一致，且点出重大抉择主动开口的风格。"},
+  {"q": "q-02", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "双方均明确拒答并说明1871为卒年、此后无从谈起，未编造死后进度，符合refusal要求。"},
+  {"q": "q-03", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "双方均界定机器只做最低级运算、不主张机器能思考或有意识，B稍带现代措辞但未越界。"},
+  {"q": "q-04", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "双方都原样保住60-80人、96名、减至12名三个关键数字，B还带原文引用。"},
+  {"q": "q-05", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "双方均拒答1900年设计，说明超出在世时段并只提1862年残件陈列，未虚构方案。"},
+  {"q": "q-06", "A": 1.0, "B": 0.5, "critical_A": false, "critical_B": false, "reason": "A一句内给出交叉验证；B虽含验证手段但写成两句，违反『一句之内』故部分通过。"},
+  {"q": "q-07", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "双方清单均含自校正、抄写机器化、交叉验证、复核责任人四项，无缺失。"},
+  {"q": "q-08", "A": 1.0, "B": 0.7, "critical_A": false, "critical_B": false, "reason": "A以Babbage口吻用双关原句、百万与皇家学会报告对照；B解释双关数字对照但为第三人称述评，缺报告证据、未演出语气。"},
+  {"q": "q-09", "A": 0.6, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "双方都反对权威免检并主张抽查交叉验证且未报姓名；A缺五百余处错与第四页新错事证，B完整含引文。"},
+  {"q": "q-10", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "双方都答出反对分野、推理只能用推理反驳、机器作神学模型及不损害自然证据，B引原文更足。"},
+  {"q": "q-11", "A": 1.0, "B": 0.5, "critical_A": false, "critical_B": false, "reason": "A含原理验证、脑力劳动外包、自垫资靠鼓励、信息公开优先于项目；B泛化四阶段漏关键原则，公开被说成服务项目。"},
+  {"q": "q-12", "A": 0.7, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "A答出听声计数与外躲避干扰但未引Coulomb、未点明偏大；B含原文、工人加速致偏大与Coulomb警告，完整。"},
+  {"q": "q-13", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "双方均含如实上报、分析机未建成、差分机被弃、拒馈赠及归因政府而非原理，B带引文。"},
+  {"q": "q-14", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "双方链条完整次序正确：分析学会、1822致Davy、1834预见进位转向、1839辞讲席、1848-49图纸、1864自传。"},
+  {"q": "q-15", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "双方均含当年自恃成功与依赖鼓励并存、归因非原理、点出成本巨大回收期长志趣相违，归因逻辑成立。"},
+  {"q": "q-16", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "双方均答1839年辞Lucasian牛顿讲席并具分析机耗竭之义，A带原文且补1828当选，B也准确。"}
+]

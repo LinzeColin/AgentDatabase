@@ -1,0 +1,37 @@
+{
+  "文件数": 68,
+  "阈值": 0.55,
+  "重复簇": [
+    [
+      "10730620bsb",
+      "b28744597",
+      "india.history.resource.117183"
+    ],
+    [
+      "bub_gb_95dn9JDkB7YC",
+      "bub_gb_C2sYl7PskYgC",
+      "ninthbridgewate00babb",
+      "ninthbridgewater00babb_0"
+    ],
+    [
+      "in.ernet.dli.2015.180977",
+      "in.ernet.dli.2015.49255",
+      "ninthbridgewater00babb",
+      "ninthbridgewater00babbiala"
+    ],
+    [
+      "observationsonte00babb",
+      "observationsonte00babbiala"
+    ],
+    [
+      "oneconomyofmac00babb",
+      "oneconomyofmachi00babb",
+      "oneconomyofmachi00babbrich",
+      "oneconomyofmanuf00babbiala"
+    ]
+  ],
+  "独立文献数上界": 56,
+  "按题名归并的独立作品数": 42,
+  "★ 两个口径": "门用台账行数（同一套书的不同卷各自独立，Bessemer #132 先例）；按题名归并的数回答「他有多少部不同的作品」。**只报一个等于替读者选口径**",
+  "★口径": "min-hash Jaccard；同卷多扫描与同书不同卷需人判"
+}

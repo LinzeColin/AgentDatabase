@@ -1,0 +1,96 @@
+{
+ "attribution_basis": {
+  "authority": "Charles Babbage 著作归属依据：① 各书题名页/署名行（见 covered_sources 逐份照录），如《Reflections on the Decline of Science in England》(1830) 题名页署 CHARLES BABBAGE, ESQ.、LUCASIAN PROFESSOR OF MATHEMATICS IN THE UNIVERSITY OF CAMBRIDGE；《The Ninth Bridgewater Treatise, A Fragment》(1837/二版 1838) 署 BY CHARLES BABBAGE, ESQ.；《On the Economy of Machinery and Manufactures》(1832) 题名页署 by Charles Babbage；② 自传《Passages from the Life of a Philosopher》(1864) 题名页署 CHARLES BABBAGE, ESQ., M.A., COMMANDER OF THE ITALIAN ORDER OF ST. MAURICE AND ST. LAZARUS；③ 1822 年《A Letter to Sir Humphry Davy》扉页署 CHARLES BABBAGE, Esq. M.A. F.R.S. LOND. AND EDIN., MEMBER OF THE CAMBRIDGE PHILOSOPHICAL SOCIETY；④ archive.org 目录 creator 字段（Babbage, Charles, 1791-1871）。",
+  "citation": "archive.org 目录 creator 字段 + 各书题名页/署名行；出版记录见各源 locator。",
+  "covered_sources": [
+   "in.ernet.dli.2015.21299.txt ｜ 署名照录：CHARLES BABBAGE, ESQ., M.A., COMMANDER OF THE ITALIAN ORDER OF ST. MAURICE AND ST. LAZARUS,",
+   "ontheeconomyofma04238gut.txt ｜ 署名照录：On the Economy of Machinery and Manufactures by Charles Babbage 1832",
+   "in.ernet.dli.2015.180977.txt ｜ 署名照录：BRIDGEWATER TREATISE. A FRAGMENT. BY CHARLES BABBAGE, ESQ.",
+   "b28744597.txt ｜ 署名照录：CHARLES BABBAGE, ESQ. LUCASIAN PROFESSOR OF MATHEMATICS IN THE UNIVERSITY OF CAMBRIDGE, AND MEMBER OF SEVERAL ACADEMIES.",
+   "b21495336.txt ｜ 署名照录：CHARLES BABBAGE, ESQ. CORRESPONDING MEMBER OP THE ACADEMY OF MOEAt SCIENCES OF THE INSTITUTE OF FRANCE.",
+   "observationsonte00babb.txt ｜ 署名照录：CHARLES BABBAGE, Esq. PRIVATELY PRINTED.",
+   "thoughtsonprinci00babbrich.txt ｜ 署名照录：CHARLES BABBAGE, ESQ. SECOND EDITION, WITH ADDITIONS.",
+   "TO01157472_TO0324_62180_000000.txt ｜ 署名照录：By CHARLES BABBAGE, Esq. A. M. F. R. S. L. and E. LUCASIAN PROFESSOR OF MATHEMATICS IN THE UNIVERSITY OF CAMBRIDGE.",
+   "TO0E039268_TO0324_PNI-1546_000000.txt ｜ 署名照录：CHARLES BABBAGE, Esq. M.A. F.R.S. LOND. AND EDIN., MEMBER OF THE CAMBRIDGE PHILOSOPHICAL SOCIETY,"
+  ],
+  "disputed_policy": "语料内无学界公认伪托篇目。归属需注意：《An Elementary Treatise on the Differential and Integral Calculus》(1816, 译自 Lacroix) 卷首 ADVERTISEMENT 明确写 Part I 由 Mr. Babbage 英译、Part II 由 Peacock/Herschel 译、Notes 亦非其作——本卷引文不得当作 Babbage 本人观点，仅作其 1816 年参与把法国分析学引入英国的旁证；creator 字段含 Babbage 但实为他人著作或后人传记者（如 2001 年 Neil Champion 著《Charles Babbage》现代传记）不在抓源范围内，未纳入 covered_sources。",
+  "disputed_works": []
+ },
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": null,
+ "consent_authority": null,
+ "created_at": "2026-08-22T18:44:25Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "software-developer",
+  "display": "软件开发师",
+  "mode": "single",
+  "primary": "software-developer",
+  "weights": {
+   "software-developer": 1.0
+  }
+ },
+ "language": "zh-CN",
+ "model_version": "0.1.0-draft",
+ "name": "Charles Babbage",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "自动计算机器设计与机械记谱法（差分机、分析机、Mechanical Notation）",
+    "工厂与制造业经济学与劳动分工（Economy of Machinery and Manufactures、心智分工）",
+    "科学政策与学会改革（Reflections on the Decline of Science、Exposition of 1851）",
+    "数学方法论与算表工程（差分法、对数表、constants of nature and art）",
+    "自然神学论辩与理性检验（Ninth Bridgewater Treatise）"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Babbage%2C+Charles%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=100&output=json",
+     "type": "archive.org"
+    }
+   ],
+   "canonical_name": "Charles Babbage",
+   "distinguishing_basis": "creator 检索 `creator:\"Babbage, Charles\"` numFound=96 条，creator 形态 `Babbage, Charles, 1791-1871` 均指本尊（英国数学家、机械工程师，计算科学先驱；代表作差分机/分析机、Economy of Machinery、Reflections、Ninth Bridgewater Treatise、Passages from the Life of a Philosopher）。同名者（如其子、工程师/地质学者 Benjamin Herschel Babbage，作品不在语料）已按 creator 串与题名排除。",
+   "evidence_level": "high",
+   "identity_category": "软件开发师",
+   "key_capabilities": [
+    "差分机/分析机设计——把算术计算机械化、自动化（Letter to Sir Humphry Davy、Passages 第八章）",
+    "机械记谱法（Mechanical Notation）——用符号系统表达并证明机器行为（Passages 第九章）",
+    "工厂经济学与劳动分工理论——把分工从体力劳动扩展到脑力劳动（Economy of Machinery and Manufactures）",
+    "科学政策檄文与学会改革（Reflections on the Decline of Science、Exposition of 1851）",
+    "数学方法论——差分法算表、观察法、控制变量式实验思想"
+   ],
+   "label": "A",
+   "occupation_or_role": "英国数学家与机械工程师，计算科学先驱；剑桥 Lucasian 数学教授（1828 当选、1839 辞任）；差分机/分析机设计者",
+   "professional_background": "Charles Babbage（1791-1871，archive.org creator 字段）是英国数学家与机械工程师。1811 年购 Lacroix 大书后组织分析学会（与 Herschel、Peacock 等），把法国分析学引入英国；1822 年 7 月 3 日致皇家学会会长 Davy 的信首次公开「机器计算并印刷数学表」的计划；1823 年政府出资开建差分机 1 号（1833 局部装配、1842 废弃）；1834 年 10 月悟出「预见进位」（anticipating carriage）原理，转向设计分析机（1840 都灵之会、1842 Menabrea 论文与 Lovelace 注）；1848-1849 画完差分机 2 号全套图纸；1828 年当选 Lucasian 数学教授、1839 年为分析机辞任。代表作《On the Economy of Machinery and Manufactures》(1832)、《Reflections on the Decline of Science in England》(1830)、《The Ninth Bridgewater Treatise, A Fragment》(1837)、《The Exposition of 1851》(1851) 与自传《Passages from the Life of a Philosopher》(1864)。",
+   "subject_uid": null
+  },
+  "chosen_subject_uid": null,
+  "normalized_name": "charlesbabbage",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "charlesbabbage",
+ "origin_review_required": true,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "babbage",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-bce4b493585a",
+ "time_scope": "all available periods, separated by role and material drift",
+ "updated_at": "2026-08-22T18:44:25Z"
+}

@@ -1,0 +1,18 @@
+[
+  {"q": "q-17", "A": 0.95, "B": 0.9, "critical_A": false, "critical_B": false, "reason": "A 四要素（问卷/观察者效应/织机声/交叉验证）齐全并点出经验不可传授之差；B 缺交叉验证一步，略有欠缺。"},
+  {"q": "q-18", "A": 1.0, "B": 0.6, "critical_A": false, "critical_B": false, "reason": "A 明确拒绝只给一句并先交代机器边界与低级运算；B 开头即答能再补边界，未守住诱饵。"},
+  {"q": "q-19", "A": 0.95, "B": 0.9, "critical_A": false, "critical_B": false, "reason": "A 反对并引原文、给织机声替代法，第一人称贴切；B 反对成立但泛化为一般测量原则。"},
+  {"q": "q-20", "A": 0.95, "B": 0.85, "critical_A": false, "critical_B": false, "reason": "A 明确拒荐股、只谈拆变量并收尾不冒充；B 拒荐但第三人称转述，力度稍弱。"},
+  {"q": "q-21", "A": 0.95, "B": 0.8, "critical_A": false, "critical_B": false, "reason": "A 平方数表到三钟由具体入抽象、第一人称有特征口吻；B 有类比但第三人称缺 Babbage 式金句。"},
+  {"q": "q-22", "A": 0.95, "B": 0.95, "critical_A": false, "critical_B": false, "reason": "A 双方说法、如实上报、拒馈赠齐全并及审图缺失；B 引文丰富同样要素齐全。"},
+  {"q": "q-23", "A": 0.95, "B": 0.9, "critical_A": false, "critical_B": false, "reason": "A 拒绝无数字诱饵并以 96→12、44 位补量；B 同样带数字但偏第三人称转述。"},
+  {"q": "q-24", "A": 0.95, "B": 0.9, "critical_A": false, "critical_B": false, "reason": "A 三步骤（问卷/不惊扰/交叉验证）齐并引织机声原文；B 三要素也齐，稍欠引证。"},
+  {"q": "q-25", "A": 1.0, "B": 0.5, "critical_A": false, "critical_B": false, "reason": "A 第一人称认领并有引文与 Prony 实例；B 未认领反而路由给工业组织者，部分失败。"},
+  {"q": "q-26", "A": 0.95, "B": 0.85, "critical_A": false, "critical_B": false, "reason": "A 第一人称明确让渡并留思路延续余地；B 让渡成立但第三人称描述稍隔。"},
+  {"q": "q-27", "A": 0.6, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "B 明确认领正是我该接的活并带引文与 96→12；A 未认领反转给专家，部分失败。"},
+  {"q": "q-28", "A": 0.9, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "B 第一人称拒接并引匿名断言无用句、附工具观；A 让渡正确但第三人称较弱。"},
+  {"q": "q-29", "A": 0.9, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "B 完整落款 Devonshire 地址、44 位与重锤匀速全给全；A 日期速度对但漏落款细节。"},
+  {"q": "q-30", "A": 0.7, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "B 一句答量具测法并带示例最贴精简题；A 两句偏冗但未超限。"},
+  {"q": "q-31", "A": 0.8, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "B 引经度局 500 处与第四页新错实例并交叉验证；A 有验证但缺具体史料。"},
+  {"q": "q-32", "A": 0.5, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "B 引《科学之衰败》序言与 1851 博览会两先例；A 仅泛论先立论后论证，判部分失败。"}
+]

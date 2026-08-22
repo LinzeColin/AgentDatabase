@@ -295,6 +295,13 @@ EXCLUDE = {
     #   REQUIRE 钉住 bach+von；CPE 一系（Carl Philipp Emanuel）不含 von → 天然挡掉。
     #   ★ 仍把 CPE 姓名串列进 EXCLUDE 兜底（防止个别条目 creator 段内混排）。
     "bach": ["Philipp Emanuel", "Johann Sebastian", "August Wilhelm"],
+    # ★ Charles Babbage #72：creator 池 96 条里绝大多数是他本人
+    #   （`Babbage, Charles, 1791-1871` 37 条 + `Babbage, Charles` 34 条 + 变体）。
+    #   同名者主要是**他儿子 Benjamin Herschel Babbage（1815-1878，澳大利亚测绘）**，
+    #   creator 形态 `Babbage, Benjamin Herschel`——REQUIRE 钉 babbage+charles 天然挡掉；
+    #   另有 `Babbage, Charles Pierre Lefebvre de Laboulaye`（法语译者，1830s 共译数学书）
+    #   与一些合著/编委会条目（Campbell-Kelly 编、Lacroix/Peacock/Herschel 合著）。
+    "babbage": ["Benjamin Herschel", "Herschel Babbage", "Laboulaye", "Campbell-Kelly"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -472,6 +479,12 @@ REQUIRE = {
     #   REQUIRE 钉住 bach+von（词元匹配，不认名序）；CPE Bach（Carl Philipp Emanuel）
     #   不含 von → 天然挡掉；Johann Sebastian / August Wilhelm 同样不含 von。
     "bach": [["bach", "von"]],
+    # ★ Charles Babbage #72：目标署名形态 `Babbage, Charles, 1791-1871`／`Babbage, Charles`／
+    #   `BABBAGE, CHARLES`／`Babbage Charles`。REQUIRE 钉住 babbage+charles；
+    #   儿子 Benjamin Herschel（1815-1878）、Laboulaye（共译）不含 charles+babbage 组合
+    #   或已被 EXCLUDE 排；Lacroix/Peacock/Herschel 合著含 charles babbage 但为多作者数学书，
+    #   由 classify_primary 判位次。
+    "babbage": [["babbage", "charles"]],
 }
 
 

@@ -1,0 +1,356 @@
+{
+  "lanes": 3,
+  "去掉纸面道后": 2,
+  "逐道份数": {
+    "writings": 64,
+    "conversations": 3,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 0,
+    "external": 1
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "10708873bsb",
+      "道": "writings",
+      "title": "Ueber Maschinen- und Fabrikenwesen"
+    },
+    {
+      "identifier": "10730620bsb",
+      "道": "writings",
+      "title": "Reflections on the decline of science in England, and on some of its c"
+    },
+    {
+      "identifier": "BRes141157",
+      "道": "writings",
+      "title": "Tratado de mecánica práctica y economía política que con el título de "
+    },
+    {
+      "identifier": "TO00961792_TO0324_62184_000000",
+      "道": "external",
+      "title": "Passages from the life of a philosopher / by Charles Babbage"
+    },
+    {
+      "identifier": "TO01157391_TO0324_62137_000000",
+      "道": "writings",
+      "title": "Abstract of a paper entitled Observations on the Temple of Serapis at "
+    },
+    {
+      "identifier": "TO01157442_TO0324_62167_000000",
+      "道": "writings",
+      "title": "Laws of mechanical notation (for consideration) / [C. Babbage]"
+    },
+    {
+      "identifier": "TO01157472_TO0324_62180_000000",
+      "道": "writings",
+      "title": "On the advantage of a collection of numbers, to be entitled the consta"
+    },
+    {
+      "identifier": "TO0E039268_TO0324_PNI-1546_000000",
+      "道": "conversations",
+      "title": "A letter to sir Humphry Davy, Bart. president of the Royal Society, et"
+    },
+    {
+      "identifier": "TO0E039272_TO0324_PNI-1551_000000",
+      "道": "writings",
+      "title": "Observations on the notation employed in the calculus of functions ..."
+    },
+    {
+      "identifier": "TO0E039283_TO0324_PNI-1555_000000",
+      "道": "writings",
+      "title": "On the application of analysis to the discovery of local theorems and "
+    },
+    {
+      "identifier": "TO0E039289_TO0324_PNI-1557_000000",
+      "道": "writings",
+      "title": "An examination of some questions connected with games of chance. By Ch"
+    },
+    {
+      "identifier": "TO0E039502_TO0324_PNI-1635_000000",
+      "道": "writings",
+      "title": "Account of the repetition of M. Arago's experiments on the magnetism m"
+    },
+    {
+      "identifier": "anelementarytre00babbgoog",
+      "道": "writings",
+      "title": "An elementary treatise on the differential and integral calculus "
+    },
+    {
+      "identifier": "b21495336",
+      "道": "writings",
+      "title": "The Exposition of 1851, or, Views of the industry, the science, and th"
+    },
+    {
+      "identifier": "b22278114",
+      "道": "writings",
+      "title": "A chapter on street nuisances : extracted from Passages in the life of"
+    },
+    {
+      "identifier": "b22290540",
+      "道": "writings",
+      "title": "On the influence of signs in mathematical reasoning"
+    },
+    {
+      "identifier": "b22376914",
+      "道": "writings",
+      "title": "Abstract of a paper entitled Observations on the Temple of Serapis at "
+    },
+    {
+      "identifier": "b28744597",
+      "道": "writings",
+      "title": "Reflections on the decline of science in England, and on some of its c"
+    },
+    {
+      "identifier": "bub_gb_2T0AAAAAQAAJ",
+      "道": "writings",
+      "title": "Passages from the life of a philosopher"
+    },
+    {
+      "identifier": "bub_gb_8rtdVgQNCuwC",
+      "道": "writings",
+      "title": "Passages from the life of a philosopher"
+    },
+    {
+      "identifier": "bub_gb_95dn9JDkB7YC",
+      "道": "writings",
+      "title": "The ninth Bridgewater treatise; a fragment"
+    },
+    {
+      "identifier": "bub_gb_C2sYl7PskYgC",
+      "道": "writings",
+      "title": "The ninth Bridgewater treatise"
+    },
+    {
+      "identifier": "bub_gb_CPdRAAAAcAAJ",
+      "道": "writings",
+      "title": "Traité sur l'économie des machines et des manufactures Elektronische"
+    },
+    {
+      "identifier": "bub_gb_DP0JAAAAIAAJ",
+      "道": "writings",
+      "title": "Traité sur l'économie des machines et des manufactures"
+    },
+    {
+      "identifier": "bub_gb_Fa1JAAAAMAAJ",
+      "道": "writings",
+      "title": "Passages from the life of a philosopher"
+    },
+    {
+      "identifier": "charlesbabbagel00babb",
+      "道": "conversations",
+      "title": "Charles Babbage letter to Sir John Lubbock, dated 22 August 1833"
+    },
+    {
+      "identifier": "charlesbabbagel00babba",
+      "道": "conversations",
+      "title": "Charles Babbage letter to Mr. Rogers [possibly English poet Samuel Rog"
+    },
+    {
+      "identifier": "dli.bengal.10689.13631",
+      "道": "writings",
+      "title": "THE EXPOSITION ED. 2ND(1851)"
+    },
+    {
+      "identifier": "examplesofsoluti00babbrich",
+      "道": "writings",
+      "title": "Examples of the solutions of functional equations"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.180977",
+      "道": "writings",
+      "title": "The Ninth Bridgewater Treatise  Ed. 2"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.21299",
+      "道": "writings",
+      "title": "The Life Of A Philosopher"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.49255",
+      "道": "writings",
+      "title": "The Ninth Bridgewater Treatise  Ed. 2"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.514199",
+      "道": "writings",
+      "title": "Reflections On The Decline Of Science In England"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.92595",
+      "道": "writings",
+      "title": "The Exposition  Ed. 2nd(1851)"
+    },
+    {
+      "identifier": "india.history.resource.117183",
+      "道": "writings",
+      "title": "Reflections on the Decline of Science in England and on some of its Ca"
+    },
+    {
+      "identifier": "india.history.resource.37569",
+      "道": "writings",
+      "title": "Table of Logarithms of the Natural Numbers From 1 to 108000"
+    },
+    {
+      "identifier": "india.history.resource.37756",
+      "道": "writings",
+      "title": "Ninth Bridgewater Treatise: A Fragment"
+    },
+    {
+      "identifier": "india.history.resource.52834",
+      "道": "writings",
+      "title": "On the Economy of Machinery and Manufactures"
+    },
+    {
+      "identifier": "india.history.resource.73335",
+      "道": "writings",
+      "title": "Passages from the Life of a Philosopher"
+    },
+    {
+      "identifier": "jstor-107505",
+      "道": "writings",
+      "title": "On Some New Methods of Investigating the Sums of Several Classes of In"
+    },
+    {
+      "identifier": "jstor-107581",
+      "道": "writings",
+      "title": "Observations on the Analogy Which Subsists between the Calculus of Fun"
+    },
+    {
+      "identifier": "jstor-107813",
+      "道": "writings",
+      "title": "On a Method of Expressing by Signs the Action of Machinery"
+    },
+    {
+      "identifier": "jstor-107825",
+      "道": "writings",
+      "title": "On Electrical and Magnetic Rotations"
+    },
+    {
+      "identifier": "jstor-109879",
+      "道": "writings",
+      "title": "Observations on the Analogy Which Subsists between the Calculus of Fun"
+    },
+    {
+      "identifier": "jstor-109936",
+      "道": "writings",
+      "title": "On Some New Methods of Investigating the Sums of Several Classes of In"
+    },
+    {
+      "identifier": "jstor-110122",
+      "道": "writings",
+      "title": "On a Method of Expressing by Signs the Action of Machinery. [Abstract]"
+    },
+    {
+      "identifier": "jstor-110134",
+      "道": "writings",
+      "title": "On Electrical and Magnetic Rotations. [Abstract]"
+    },
+    {
+      "identifier": "jstor-111607",
+      "道": "writings",
+      "title": "Observations on the Discovery in Various Localities of the Remains of "
+    },
+    {
+      "identifier": "jstor-2338172",
+      "道": "writings",
+      "title": "Analysis of the Statistics of the Clearing House During the Year 1839"
+    },
+    {
+      "identifier": "ninthbridgewatai00babb",
+      "道": "writings",
+      "title": "The ninth Bridgewater treatise; a fragment"
+    },
+    {
+      "identifier": "ninthbridgewate00babb",
+      "道": "writings",
+      "title": "The ninth Bridgewater treatise; a fragment"
+    },
+    {
+      "identifier": "ninthbridgewater00babb",
+      "道": "writings",
+      "title": "The ninth Bridgewater treatise. A fragment"
+    },
+    {
+      "identifier": "ninthbridgewater00babb_0",
+      "道": "writings",
+      "title": "The ninth Bridgewater treatise. A fragment"
+    },
+    {
+      "identifier": "ninthbridgewater00babbiala",
+      "道": "writings",
+      "title": "The ninth Bridgewater treatise. A fragment"
+    },
+    {
+      "identifier": "observationsonte00babb",
+      "道": "writings",
+      "title": "Observations on the temple of Serapis at Pozzuoli near Naples : with a"
+    },
+    {
+      "identifier": "observationsonte00babbiala",
+      "道": "writings",
+      "title": "Observations on the temple of Serapis at Pozzuoli near Naples; with an"
+    },
+    {
+      "identifier": "oneconomyofmac00babb",
+      "道": "writings",
+      "title": "On the economy of machinery and manufactures"
+    },
+    {
+      "identifier": "oneconomyofmach00babb",
+      "道": "writings",
+      "title": "On the Economy of Machinery and Manufactures"
+    },
+    {
+      "identifier": "oneconomyofmachi00babb",
+      "道": "writings",
+      "title": "On the economy of machinery and manufactures"
+    },
+    {
+      "identifier": "oneconomyofmachi00babbrich",
+      "道": "writings",
+      "title": "On the economy of machinery and manufactures"
+    },
+    {
+      "identifier": "oneconomyofmanuf00babbiala",
+      "道": "writings",
+      "title": "On the economy of manufactures"
+    },
+    {
+      "identifier": "ontheeconomyofma04238gut",
+      "道": "writings",
+      "title": "On the Economy of Machinery and Manufactures"
+    },
+    {
+      "identifier": "papers00babb",
+      "道": "writings",
+      "title": "Papers"
+    },
+    {
+      "identifier": "passagesfromlife00babb",
+      "道": "writings",
+      "title": "Passages from the life of a philosopher"
+    },
+    {
+      "identifier": "thoughtsonprinci00babbrich",
+      "道": "writings",
+      "title": "Thoughts on the principles of taxation, with reference to a property t"
+    },
+    {
+      "identifier": "traitsurlcon00babb",
+      "道": "writings",
+      "title": "Traité sur l'économie des machines et des manufactures. Traduit de l'a"
+    },
+    {
+      "identifier": "traitsurlconomi00babbgoog",
+      "道": "writings",
+      "title": "Traité sur l'économie des machines et des manufactures"
+    },
+    {
+      "identifier": "uebermaschinenu00babbgoog",
+      "道": "writings",
+      "title": "Ueber Maschinen- und Fabrikenwesen"
+    }
+  ]
+}

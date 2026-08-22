@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:charlesbabbage",
+  "canonical_name": "Charles Babbage",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "babbage",
+  "subject_uid": "person-cf805dd9a4096c3b",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/babbage-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-22T18:44:25Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "01088867bc0b8da35d0a87b958219e4206854b93510b5429a1ea21457cfe2d18",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/babbage-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "592939476b946ec50fa1737a8964662f7546eec14c350ba644a255d4bd1d44f9",
+      "runtime_size_bytes": 61730,
+      "size_bytes": 72247
+    }
+  ]
+}

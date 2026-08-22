@@ -1,0 +1,563 @@
+{
+  "总数": 68,
+  "计数": {
+    "一手": 67,
+    "二手": 1,
+    "需人判": 0
+  },
+  "一手占比下界": 0.9853,
+  "一手占比上界": 0.9853,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "babbage"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "10708873bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Ueber Maschinen- und Fabrikenwesen",
+      "creator": "Babbage, Charles",
+      "words": 117856
+    },
+    {
+      "identifier": "10730620bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Reflections on the decline of science in England, and on some of its causes",
+      "creator": "Babbage, Charles",
+      "words": 53251
+    },
+    {
+      "identifier": "BRes141157",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Tratado de mecánica práctica y economía política que con el título de Economía d",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 129630
+    },
+    {
+      "identifier": "TO00961792_TO0324_62184_000000",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "Passages from the life of a philosopher / by Charles Babbage",
+      "creator": "Babbage, Charles",
+      "words": 147181
+    },
+    {
+      "identifier": "TO01157391_TO0324_62137_000000",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Abstract of a paper entitled Observations on the Temple of Serapis at Pozzuoli :",
+      "creator": "Babbage, Charles",
+      "words": 1783
+    },
+    {
+      "identifier": "TO01157442_TO0324_62167_000000",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Laws of mechanical notation (for consideration) / [C. Babbage]",
+      "creator": "Babbage, Charles",
+      "words": 1043
+    },
+    {
+      "identifier": "TO01157472_TO0324_62180_000000",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On the advantage of a collection of numbers, to be entitled the constants of nat",
+      "creator": "Babbage, Charles",
+      "words": 2361
+    },
+    {
+      "identifier": "TO0E039268_TO0324_PNI-1546_000000",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A letter to sir Humphry Davy, Bart. president of the Royal Society, etc. etc. on",
+      "creator": "Babbage, Charles",
+      "words": 3613
+    },
+    {
+      "identifier": "TO0E039272_TO0324_PNI-1551_000000",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Observations on the notation employed in the calculus of functions ... By Charle",
+      "creator": "Babbage, Charles",
+      "words": 3897
+    },
+    {
+      "identifier": "TO0E039283_TO0324_PNI-1555_000000",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On the application of analysis to the discovery of local theorems and porisms. B",
+      "creator": "Babbage, Charles",
+      "words": 4534
+    },
+    {
+      "identifier": "TO0E039289_TO0324_PNI-1557_000000",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "An examination of some questions connected with games of chance. By Charles Babb",
+      "creator": "Babbage, Charles",
+      "words": 6646
+    },
+    {
+      "identifier": "TO0E039502_TO0324_PNI-1635_000000",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Account of the repetition of M. Arago's experiments on the magnetism manifested ",
+      "creator": "Babbage, Charles",
+      "words": 9126
+    },
+    {
+      "identifier": "anelementarytre00babbgoog",
+      "档": "一手",
+      "依据": "【人裁】Babbage 本人数学著作（微积分/变分法）",
+      "title": "An elementary treatise on the differential and integral calculus ",
+      "creator": "Lacroix, S. F. (Silvestre François), 1765-1843; Babbage, Charles, 1791-1871; Pe",
+      "words": 158464
+    },
+    {
+      "identifier": "b21495336",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Exposition of 1851, or, Views of the industry, the science, and the governme",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 83984
+    },
+    {
+      "identifier": "b22278114",
+      "档": "一手",
+      "依据": "【人裁】Babbage 本人自传《Passages from the Life of a Philosopher》(1864) 的各扫描本，creator 均为 Charles Babbage 本人，实为一手",
+      "title": "A chapter on street nuisances : extracted from Passages in the life of a philoso",
+      "creator": "Babbage, Charles, 1791-1871; Royal College of Surgeons of England",
+      "words": 10652
+    },
+    {
+      "identifier": "b22290540",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On the influence of signs in mathematical reasoning",
+      "creator": "Babbage, Charles, 1791-1871; Royal College of Surgeons of England",
+      "words": 17380
+    },
+    {
+      "identifier": "b22376914",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Abstract of a paper entitled Observations on the Temple of Serapis at Pozzuoli :",
+      "creator": "Babbage, Charles, 1791-1871; Fitton, William Henry, 1780-1861; Royal College of ",
+      "words": 1902
+    },
+    {
+      "identifier": "b28744597",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Reflections on the decline of science in England, and on some of its causes",
+      "creator": "Babbage, Charles, 1791-1871. n 50031102",
+      "words": 54047
+    },
+    {
+      "identifier": "bub_gb_2T0AAAAAQAAJ",
+      "档": "一手",
+      "依据": "【人裁】Babbage 本人自传《Passages from the Life of a Philosopher》(1864) 的各扫描本，creator 均为 Charles Babbage 本人，实为一手",
+      "title": "Passages from the life of a philosopher",
+      "creator": "Babbage, Charles",
+      "words": 164467
+    },
+    {
+      "identifier": "bub_gb_8rtdVgQNCuwC",
+      "档": "一手",
+      "依据": "【人裁】Babbage 本人自传《Passages from the Life of a Philosopher》(1864) 的各扫描本，creator 均为 Charles Babbage 本人，实为一手",
+      "title": "Passages from the life of a philosopher",
+      "creator": "Babbage, Charles",
+      "words": 151244
+    },
+    {
+      "identifier": "bub_gb_95dn9JDkB7YC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The ninth Bridgewater treatise; a fragment",
+      "creator": "Babbage, Charles, 1791-1871; Herschel, John F. W. (John Frederick William), Sir,",
+      "words": 39565
+    },
+    {
+      "identifier": "bub_gb_C2sYl7PskYgC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The ninth Bridgewater treatise",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 42368
+    },
+    {
+      "identifier": "bub_gb_CPdRAAAAcAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Traité sur l'économie des machines et des manufactures Elektronische Daten",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 126464
+    },
+    {
+      "identifier": "bub_gb_DP0JAAAAIAAJ",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Traité sur l'économie des machines et des manufactures",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 118023
+    },
+    {
+      "identifier": "bub_gb_Fa1JAAAAMAAJ",
+      "档": "一手",
+      "依据": "【人裁】Babbage 本人自传《Passages from the Life of a Philosopher》(1864) 的各扫描本，creator 均为 Charles Babbage 本人，实为一手",
+      "title": "Passages from the life of a philosopher",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 164064
+    },
+    {
+      "identifier": "charlesbabbagel00babb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Charles Babbage letter to Sir John Lubbock, dated 22 August 1833",
+      "creator": "Babbage, Charles, 1791-1871, author, correspondent",
+      "words": 61
+    },
+    {
+      "identifier": "charlesbabbagel00babba",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Charles Babbage letter to Mr. Rogers [possibly English poet Samuel Rogers], date",
+      "creator": "Babbage, Charles, 1791-1871, author, correspondent",
+      "words": 30
+    },
+    {
+      "identifier": "dli.bengal.10689.13631",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "THE EXPOSITION ED. 2ND(1851)",
+      "creator": "BABBAGE, CHARLES",
+      "words": 83880
+    },
+    {
+      "identifier": "examplesofsoluti00babbrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Examples of the solutions of functional equations",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 6952
+    },
+    {
+      "identifier": "in.ernet.dli.2015.180977",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Ninth Bridgewater Treatise  Ed. 2",
+      "creator": "Babbage, Charles",
+      "words": 46592
+    },
+    {
+      "identifier": "in.ernet.dli.2015.21299",
+      "档": "一手",
+      "依据": "【人裁】Babbage 本人自传《Passages from the Life of a Philosopher》(1864) 的各扫描本，creator 均为 Charles Babbage 本人，实为一手",
+      "title": "The Life Of A Philosopher",
+      "creator": "Babbage, Charles",
+      "words": 104798
+    },
+    {
+      "identifier": "in.ernet.dli.2015.49255",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Ninth Bridgewater Treatise  Ed. 2",
+      "creator": "Babbage, Charles",
+      "words": 45912
+    },
+    {
+      "identifier": "in.ernet.dli.2015.514199",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Reflections On The Decline Of Science In England",
+      "creator": "Babbage, Charles.",
+      "words": 56243
+    },
+    {
+      "identifier": "in.ernet.dli.2015.92595",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Exposition  Ed. 2nd(1851)",
+      "creator": "Babbage, Charles",
+      "words": 83302
+    },
+    {
+      "identifier": "india.history.resource.117183",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Reflections on the Decline of Science in England and on some of its Causes",
+      "creator": "Babbage, Charles",
+      "words": 51056
+    },
+    {
+      "identifier": "india.history.resource.37569",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Table of Logarithms of the Natural Numbers From 1 to 108000",
+      "creator": "Babbage Charles",
+      "words": 274840
+    },
+    {
+      "identifier": "india.history.resource.37756",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Ninth Bridgewater Treatise: A Fragment",
+      "creator": "Babbage Charles",
+      "words": 38647
+    },
+    {
+      "identifier": "india.history.resource.52834",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On the Economy of Machinery and Manufactures",
+      "creator": "Babbage, Charles",
+      "words": 119032
+    },
+    {
+      "identifier": "india.history.resource.73335",
+      "档": "一手",
+      "依据": "【人裁】Babbage 本人自传《Passages from the Life of a Philosopher》(1864) 的各扫描本，creator 均为 Charles Babbage 本人，实为一手",
+      "title": "Passages from the Life of a Philosopher",
+      "creator": "Babbage, Charles",
+      "words": 147553
+    },
+    {
+      "identifier": "jstor-107505",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On Some New Methods of Investigating the Sums of Several Classes of Infinite Ser",
+      "creator": "Babbage, Charles",
+      "words": 10240
+    },
+    {
+      "identifier": "jstor-107581",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Observations on the Analogy Which Subsists between the Calculus of Functions and",
+      "creator": "Babbage, Charles",
+      "words": 5792
+    },
+    {
+      "identifier": "jstor-107813",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On a Method of Expressing by Signs the Action of Machinery",
+      "creator": "Babbage, Charles",
+      "words": 7498
+    },
+    {
+      "identifier": "jstor-107825",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On Electrical and Magnetic Rotations",
+      "creator": "Babbage, Charles",
+      "words": 9622
+    },
+    {
+      "identifier": "jstor-109879",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Observations on the Analogy Which Subsists between the Calculus of Functions and",
+      "creator": "Babbage, Charles",
+      "words": 629
+    },
+    {
+      "identifier": "jstor-109936",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On Some New Methods of Investigating the Sums of Several Classes of Infinite Ser",
+      "creator": "Babbage, Charles",
+      "words": 680
+    },
+    {
+      "identifier": "jstor-110122",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On a Method of Expressing by Signs the Action of Machinery. [Abstract]",
+      "creator": "Babbage, Charles",
+      "words": 1194
+    },
+    {
+      "identifier": "jstor-110134",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On Electrical and Magnetic Rotations. [Abstract]",
+      "creator": "Babbage, Charles",
+      "words": 1193
+    },
+    {
+      "identifier": "jstor-111607",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Observations on the Discovery in Various Localities of the Remains of Human Art ",
+      "creator": "Babbage, Charles",
+      "words": 4750
+    },
+    {
+      "identifier": "jstor-2338172",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Analysis of the Statistics of the Clearing House During the Year 1839",
+      "creator": "Babbage, Charles",
+      "words": 7604
+    },
+    {
+      "identifier": "ninthbridgewatai00babb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The ninth Bridgewater treatise; a fragment",
+      "creator": "Babbage, Charles, 1791-1871; Herschel, John F. W. (John Frederick William), Sir,",
+      "words": 31903
+    },
+    {
+      "identifier": "ninthbridgewate00babb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The ninth Bridgewater treatise; a fragment",
+      "creator": "Babbage, Charles, 1791-1871; Herschel, John F. W. (John Frederick William), Sir,",
+      "words": 39112
+    },
+    {
+      "identifier": "ninthbridgewater00babb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The ninth Bridgewater treatise. A fragment",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 46432
+    },
+    {
+      "identifier": "ninthbridgewater00babb_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The ninth Bridgewater treatise. A fragment",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 38967
+    },
+    {
+      "identifier": "ninthbridgewater00babbiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The ninth Bridgewater treatise. A fragment",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 47520
+    },
+    {
+      "identifier": "observationsonte00babb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Observations on the temple of Serapis at Pozzuoli near Naples : with an attempt ",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 20153
+    },
+    {
+      "identifier": "observationsonte00babbiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Observations on the temple of Serapis at Pozzuoli near Naples; with an attempt t",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 20116
+    },
+    {
+      "identifier": "oneconomyofmac00babb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On the economy of machinery and manufactures",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 116199
+    },
+    {
+      "identifier": "oneconomyofmach00babb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On the Economy of Machinery and Manufactures",
+      "creator": "Babbage, Charles",
+      "words": 91622
+    },
+    {
+      "identifier": "oneconomyofmachi00babb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On the economy of machinery and manufactures",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 111969
+    },
+    {
+      "identifier": "oneconomyofmachi00babbrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On the economy of machinery and manufactures",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 121432
+    },
+    {
+      "identifier": "oneconomyofmanuf00babbiala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On the economy of manufactures",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 115319
+    },
+    {
+      "identifier": "ontheeconomyofma04238gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On the Economy of Machinery and Manufactures",
+      "creator": "Babbage, Charles, 1792-1871",
+      "words": 107753
+    },
+    {
+      "identifier": "papers00babb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「papers」",
+      "title": "Papers",
+      "creator": "Babbage, Charles, 1791-1871, author",
+      "words": 3254
+    },
+    {
+      "identifier": "passagesfromlife00babb",
+      "档": "一手",
+      "依据": "【人裁】Babbage 本人自传《Passages from the Life of a Philosopher》(1864) 的各扫描本，creator 均为 Charles Babbage 本人，实为一手",
+      "title": "Passages from the life of a philosopher",
+      "creator": "Babbage, Charles, 1791-1871, author; Longman, Green, Longman, Roberts and Green,",
+      "words": 162496
+    },
+    {
+      "identifier": "thoughtsonprinci00babbrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Thoughts on the principles of taxation, with reference to a property tax, and it",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 6471
+    },
+    {
+      "identifier": "traitsurlcon00babb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Traité sur l'économie des machines et des manufactures. Traduit de l'anglais sur",
+      "creator": "Babbage, Charles, 1791-1871; Biot, Éduard Constant, 1803-1850",
+      "words": 120649
+    },
+    {
+      "identifier": "traitsurlconomi00babbgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Traité sur l'économie des machines et des manufactures",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 115907
+    },
+    {
+      "identifier": "uebermaschinenu00babbgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Ueber Maschinen- und Fabrikenwesen",
+      "creator": "Babbage, Charles, 1791-1871",
+      "words": 114684
+    }
+  ]
+}

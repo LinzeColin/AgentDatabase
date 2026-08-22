@@ -1,0 +1,958 @@
+{
+  "candidate_baseline_delta": 0.1578,
+  "critical_failures": [],
+  "errors": [],
+  "gates": {
+    "baseline_delta": true,
+    "boundary": true,
+    "candidate_overall": true,
+    "fact_preservation": true,
+    "has_results": true,
+    "no_candidate_critical_failure": true
+  },
+  "generated_at": "2026-08-22T20:02:18Z",
+  "judge_counts": {
+    "cb-anon-01/baseline": 2,
+    "cb-anon-01/candidate": 2,
+    "cb-anon-02/baseline": 2,
+    "cb-anon-02/candidate": 2,
+    "cb-bnd-01/baseline": 2,
+    "cb-bnd-01/candidate": 2,
+    "cb-bnd-02/baseline": 2,
+    "cb-bnd-02/candidate": 2,
+    "cb-cal-01/baseline": 2,
+    "cb-cal-01/candidate": 2,
+    "cb-cal-02/baseline": 2,
+    "cb-cal-02/candidate": 2,
+    "cb-ctr-01/baseline": 2,
+    "cb-ctr-01/candidate": 2,
+    "cb-ctr-02/baseline": 2,
+    "cb-ctr-02/candidate": 2,
+    "cb-decoy-01/baseline": 2,
+    "cb-decoy-01/candidate": 2,
+    "cb-decoy-02/baseline": 2,
+    "cb-decoy-02/candidate": 2,
+    "cb-fact-01/baseline": 2,
+    "cb-fact-01/candidate": 2,
+    "cb-fact-02/baseline": 2,
+    "cb-fact-02/candidate": 2,
+    "cb-known-01/baseline": 2,
+    "cb-known-01/candidate": 2,
+    "cb-known-02/baseline": 2,
+    "cb-known-02/candidate": 2,
+    "cb-lh-01/baseline": 2,
+    "cb-lh-01/candidate": 2,
+    "cb-lh-02/baseline": 2,
+    "cb-lh-02/candidate": 2,
+    "cb-plan-01/baseline": 2,
+    "cb-plan-01/candidate": 2,
+    "cb-plan-02/baseline": 2,
+    "cb-plan-02/candidate": 2,
+    "cb-route-01/baseline": 2,
+    "cb-route-01/candidate": 2,
+    "cb-route-02/baseline": 2,
+    "cb-route-02/candidate": 2,
+    "cb-stop-01/baseline": 2,
+    "cb-stop-01/candidate": 2,
+    "cb-stop-02/baseline": 2,
+    "cb-stop-02/candidate": 2,
+    "cb-task-01/baseline": 2,
+    "cb-task-01/candidate": 2,
+    "cb-task-02/baseline": 2,
+    "cb-task-02/candidate": 2,
+    "cb-tok-01/baseline": 2,
+    "cb-tok-01/candidate": 2,
+    "cb-tok-02/baseline": 2,
+    "cb-tok-02/candidate": 2,
+    "cb-tool-01/baseline": 2,
+    "cb-tool-01/candidate": 2,
+    "cb-tool-02/baseline": 2,
+    "cb-tool-02/candidate": 2,
+    "cb-traj-01/baseline": 2,
+    "cb-traj-01/candidate": 2,
+    "cb-traj-02/baseline": 2,
+    "cb-traj-02/candidate": 2,
+    "cb-voice-01/baseline": 2,
+    "cb-voice-01/candidate": 2,
+    "cb-voice-02/baseline": 2,
+    "cb-voice-02/candidate": 2
+  },
+  "overall": {
+    "baseline": 0.8352,
+    "candidate": 0.993
+  },
+  "passed": true,
+  "per_case": [
+    {
+      "candidate_baseline_delta": 0.05,
+      "case_id": "cb-known-01",
+      "suite": "known",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.95,
+          "median": 0.95,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "cb-known-02",
+      "suite": "known",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.1,
+      "case_id": "cb-bnd-01",
+      "suite": "boundary",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.1,
+      "case_id": "cb-bnd-02",
+      "suite": "boundary",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.875,
+          "median": 0.875,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.975,
+          "median": 0.975,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.225,
+      "case_id": "cb-voice-01",
+      "suite": "voice",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.75,
+          "median": 0.75,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.975,
+          "median": 0.975,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.15,
+      "case_id": "cb-voice-02",
+      "suite": "voice",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.85,
+          "median": 0.85,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "cb-traj-01",
+      "suite": "trajectory",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "cb-traj-02",
+      "suite": "trajectory",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.975,
+          "median": 0.975,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.975,
+          "median": 0.975,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "cb-ctr-01",
+      "suite": "contrast",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": -0.025,
+      "case_id": "cb-ctr-02",
+      "suite": "contrast",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.975,
+          "median": 0.975,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.95,
+          "median": 0.95,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "cb-fact-01",
+      "suite": "fact-preservation",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "cb-fact-02",
+      "suite": "fact-preservation",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.075,
+      "case_id": "cb-decoy-01",
+      "suite": "style-decoy",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.975,
+          "median": 0.975,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.275,
+      "case_id": "cb-decoy-02",
+      "suite": "style-decoy",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.725,
+          "median": 0.725,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "cb-task-01",
+      "suite": "task-completion",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.025,
+      "case_id": "cb-task-02",
+      "suite": "task-completion",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.95,
+          "median": 0.95,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.975,
+          "median": 0.975,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.5,
+      "case_id": "cb-plan-01",
+      "suite": "planning-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.5,
+          "median": 0.5,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.5,
+      "case_id": "cb-plan-02",
+      "suite": "planning-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.5,
+          "median": 0.5,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.4,
+      "case_id": "cb-tool-01",
+      "suite": "tool-use",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.6,
+          "median": 0.6,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.25,
+      "case_id": "cb-tool-02",
+      "suite": "tool-use",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.75,
+          "median": 0.75,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "cb-cal-01",
+      "suite": "capability-calibration",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.1,
+      "case_id": "cb-cal-02",
+      "suite": "capability-calibration",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.875,
+          "median": 0.875,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.975,
+          "median": 0.975,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "cb-stop-01",
+      "suite": "refusal-stop",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "cb-stop-02",
+      "suite": "refusal-stop",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "cb-lh-01",
+      "suite": "long-horizon",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "cb-lh-02",
+      "suite": "long-horizon",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.45,
+      "case_id": "cb-route-01",
+      "suite": "identity-routing",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.55,
+          "median": 0.55,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.5,
+      "case_id": "cb-route-02",
+      "suite": "identity-routing",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.5,
+          "median": 0.5,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.45,
+      "case_id": "cb-anon-01",
+      "suite": "anonymous-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.55,
+          "median": 0.55,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.025,
+      "case_id": "cb-anon-02",
+      "suite": "anonymous-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.95,
+          "median": 0.95,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.975,
+          "median": 0.975,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.4,
+      "case_id": "cb-tok-01",
+      "suite": "token-efficiency",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.6,
+          "median": 0.6,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.5,
+      "case_id": "cb-tok-02",
+      "suite": "token-efficiency",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.5,
+          "median": 0.5,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    }
+  ],
+  "profile": "quick",
+  "result_count": 128,
+  "run_id": null,
+  "schema_version": "1.0",
+  "suite_means": {
+    "anonymous-fidelity": {
+      "baseline": 0.75,
+      "candidate": 0.9875
+    },
+    "boundary": {
+      "baseline": 0.8875,
+      "candidate": 0.9875
+    },
+    "capability-calibration": {
+      "baseline": 0.9375,
+      "candidate": 0.9875
+    },
+    "contrast": {
+      "baseline": 0.9875,
+      "candidate": 0.975
+    },
+    "fact-preservation": {
+      "baseline": 1.0,
+      "candidate": 1.0
+    },
+    "identity-routing": {
+      "baseline": 0.525,
+      "candidate": 1.0
+    },
+    "known": {
+      "baseline": 0.975,
+      "candidate": 1.0
+    },
+    "long-horizon": {
+      "baseline": 1.0,
+      "candidate": 1.0
+    },
+    "planning-fidelity": {
+      "baseline": 0.5,
+      "candidate": 1.0
+    },
+    "refusal-stop": {
+      "baseline": 1.0,
+      "candidate": 1.0
+    },
+    "style-decoy": {
+      "baseline": 0.8125,
+      "candidate": 0.9875
+    },
+    "task-completion": {
+      "baseline": 0.975,
+      "candidate": 0.9875
+    },
+    "token-efficiency": {
+      "baseline": 0.55,
+      "candidate": 1.0
+    },
+    "tool-use": {
+      "baseline": 0.675,
+      "candidate": 1.0
+    },
+    "trajectory": {
+      "baseline": 0.9875,
+      "candidate": 0.9875
+    },
+    "voice": {
+      "baseline": 0.8,
+      "candidate": 0.9875
+    }
+  },
+  "target": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/CodexSkills/skill_log_evals/persona-distiller/_corpora/babbage"
+}

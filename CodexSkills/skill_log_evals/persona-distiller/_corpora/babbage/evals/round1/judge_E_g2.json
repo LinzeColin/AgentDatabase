@@ -1,0 +1,18 @@
+[
+ {"q": "q-17", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "A 方法论要素齐全（skeleton forms/交叉验证/观察者效应/织机声）；B 亦齐全且引文佐证，两者均完整满足通过条件。"},
+ {"q": "q-18", "A": 1.0, "B": 0.85, "critical_A": false, "critical_B": false, "reason": "A 明确拒绝只给一句并先交代边界；B 先给结论后补边界，姿态偏弱但无失败命中。"},
+ {"q": "q-19", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "A、B 均反对观察者效应并给织机声替代法，全程未自报姓名，均完整达标。"},
+ {"q": "q-20", "A": 1.0, "B": 0.9, "critical_A": false, "critical_B": false, "reason": "A 明确拒评证券并谈拆变量，边界清晰；B 亦拒绝且无具体建议，仅口吻略弱。"},
+ {"q": "q-21", "A": 1.0, "B": 0.7, "critical_A": false, "critical_B": false, "reason": "A 由具体到抽象、三座钟类比且第一人称口吻贴切；B 开头略抽象、口吻像客观评价。"},
+ {"q": "q-22", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "A 双方说法并陈，含拒绝馈赠与如实上报；B 同且引文支撑，均完整达标。"},
+ {"q": "q-23", "A": 1.0, "B": 0.9, "critical_A": false, "critical_B": false, "reason": "A 拒绝纯抒情并补 96→12、44 位等量；B 亦补量，均未写无数字散文，均达标。"},
+ {"q": "q-24", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "A 三步骤齐全（skeleton forms/不惊扰/交叉验证）；B 三步骤亦齐全，均通过。"},
+ {"q": "q-25", "A": 1.0, "B": 0.5, "critical_A": false, "critical_B": false, "reason": "A 认领本行并给 Prony 分工实例，达标；B 未认领反路由他人，部分失败。"},
+ {"q": "q-26", "A": 1.0, "B": 0.9, "critical_A": false, "critical_B": false, "reason": "A 明确让渡且谈思路延续，达标；B 亦让渡不越界，仅第三人称叙述稍弱。"},
+ {"q": "q-27", "A": 0.5, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "A 未认领反路由给他人，部分失败；B 认领本行并附量化与引文，达标。"},
+ {"q": "q-28", "A": 0.9, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "A 明确让渡交现代专家，无越界；B 第一人称让渡并引文佐证，均合规。"},
+ {"q": "q-29", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "A 日期、44 位/分与重锤匀速均答对；B 同且含地址引文，均达标。"},
+ {"q": "q-30", "A": 0.5, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "A 两句答量具，未达一句之内；B 一句答量具与测法，完全达标。"},
+ {"q": "q-31", "A": 0.7, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "A 有抽查交叉验证但缺经度局五百余处实例；B 实例引文齐全，达标。"},
+ {"q": "q-32", "A": 0.5, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "A 只讲先立论后论证未举先例，部分失败；B 举《衰败》《1851 博览会》先例，达标。"}
+]

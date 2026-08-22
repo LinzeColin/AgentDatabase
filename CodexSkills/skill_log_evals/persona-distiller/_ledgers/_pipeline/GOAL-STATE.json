@@ -1,47 +1,47 @@
 {
-  "round": 14,
-  "updated_at": "2026-08-22T00:00AEST",
-  "time_band": "valley-0000-0800",
-  "people": 125,
-  "current_person": null,
-  "stage": "T1 完成 Hadfield#42 入库（121/600，delta +0.3138，双席盲判六门全过，15/16套组正delta）",
-  "next": "下一位材料建工师 #43 William D. Coolidge",
-  "threads": {
-    "T1": {
-      "branch": "main",
-      "worktree": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase",
-      "range": "1-300",
-      "slice": "_ledgers/_并行分片/T1-1-300.json"
-    },
-    "T2": {
-      "branch": "thread2-301-450",
-      "worktree": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase-T2",
-      "range": "301-450",
-      "slice": "_ledgers/_并行分片/T2-301-450.json"
-    },
-    "T3": {
-      "branch": "thread3-451-604",
-      "worktree": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase-T3",
-      "range": "451-604",
-      "slice": "_ledgers/_并行分片/T3-451-604.json"
-    }
+ "round": 15,
+ "updated_at": "2026-08-23T06:20Z",
+ "time_band": "valley-0000-0800",
+ "people": 126,
+ "current_person": "babbage-72",
+ "stage": "T1 完成 Babbage#72 入库（126/600，candidate 0.993 vs baseline 0.835，delta +0.158，双席盲判六门全过）",
+ "next": "下一位软件开发师 #73 Alan Turing",
+ "threads": {
+  "T1": {
+   "branch": "main",
+   "worktree": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase",
+   "range": "1-300",
+   "slice": "_ledgers/_并行分片/T1-1-300.json"
   },
-  "p0_queue": [
-    "Eiffel(wip-eiffel-142)已做未出货，先查卡点"
-  ],
-  "p0_done": [],
-  "p0_closed": [],
-  "note": "Telford 盲判双席（seat-D/seat-E）128 行、六门全过；release 修复 3 项（claims 拼写、EXCLUDE、65 引文坐标）；基线 warning 经 --acknowledge-disclosure 记录。",
-  "cost_baseline": {
-    "flash": {
-      "calls": 934,
-      "cost": 24.0526
-    },
-    "pro": {
-      "calls": 1126,
-      "cost": 55.5695
-    }
+  "T2": {
+   "branch": "thread2-301-450",
+   "worktree": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase-T2",
+   "range": "301-450",
+   "slice": "_ledgers/_并行分片/T2-301-450.json"
   },
-  "cost_rule": "90%+ flash；批量/盲判/判分全 flash（双侧同模型），pro 仅关键决策",
-  "release_gate": "以 quality_check --phase release --strict 为准（0 错 0 警）"
+  "T3": {
+   "branch": "thread3-451-604",
+   "worktree": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase-T3",
+   "range": "451-604",
+   "slice": "_ledgers/_并行分片/T3-451-604.json"
+  }
+ },
+ "p0_queue": [
+  "Eiffel(wip-eiffel-142)已做未出货，先查卡点"
+ ],
+ "p0_done": [],
+ "p0_closed": [],
+ "note": "Telford 盲判双席（seat-D/seat-E）128 行、六门全过；release 修复 3 项（claims 拼写、EXCLUDE、65 引文坐标）；基线 warning 经 --acknowledge-disclosure 记录。",
+ "cost_baseline": {
+  "flash": {
+   "calls": 934,
+   "cost": 24.0526
+  },
+  "pro": {
+   "calls": 1126,
+   "cost": 55.5695
+  }
+ },
+ "cost_rule": "90%+ flash；批量/盲判/判分全 flash（双侧同模型），pro 仅关键决策",
+ "release_gate": "以 quality_check --phase release --strict 为准（0 错 0 警）"
 }

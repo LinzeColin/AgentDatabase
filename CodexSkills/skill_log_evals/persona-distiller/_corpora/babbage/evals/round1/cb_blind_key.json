@@ -1,0 +1,162 @@
+{
+ "q-01": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-fact-02"
+ },
+ "q-02": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-stop-01"
+ },
+ "q-03": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-cal-01"
+ },
+ "q-04": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-fact-01"
+ },
+ "q-05": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-stop-02"
+ },
+ "q-06": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-tok-02"
+ },
+ "q-07": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-task-01"
+ },
+ "q-08": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-voice-02"
+ },
+ "q-09": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-anon-01"
+ },
+ "q-10": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-ctr-01"
+ },
+ "q-11": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-plan-02"
+ },
+ "q-12": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-tool-01"
+ },
+ "q-13": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-lh-01"
+ },
+ "q-14": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-traj-01"
+ },
+ "q-15": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-lh-02"
+ },
+ "q-16": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-known-02"
+ },
+ "q-17": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-ctr-02"
+ },
+ "q-18": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-decoy-02"
+ },
+ "q-19": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-anon-02"
+ },
+ "q-20": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-bnd-02"
+ },
+ "q-21": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-voice-01"
+ },
+ "q-22": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-traj-02"
+ },
+ "q-23": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-decoy-01"
+ },
+ "q-24": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-task-02"
+ },
+ "q-25": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-route-02"
+ },
+ "q-26": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-cal-02"
+ },
+ "q-27": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-route-01"
+ },
+ "q-28": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-bnd-01"
+ },
+ "q-29": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-known-01"
+ },
+ "q-30": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-tok-01"
+ },
+ "q-31": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-tool-02"
+ },
+ "q-32": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-plan-01"
+ }
+}

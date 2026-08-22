@@ -1,0 +1,18 @@
+[
+  {"q": "q-01", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "均答出主动报1500镑获当场答应并点出自决风格，数字正确无失败命中。"},
+  {"q": "q-02", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "均明确拒答并以1871年去世为据说明缘由，未编造此后进度。"},
+  {"q": "q-03", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "均界定机器只执行最低级运算、不作会思考的断言，引用得当。"},
+  {"q": "q-04", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "均原样保住60-80、96、12三个数字并引原文，数字无错。"},
+  {"q": "q-05", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "均拒答1900年展会并说明超出生前时段，仅提1862残件未虚构。"},
+  {"q": "q-06", "A": 1.0, "B": 0.5, "critical_A": false, "critical_B": false, "reason": "A单句即含交叉验证；B用两句，超出一句之内要求，属部分满足。"},
+  {"q": "q-07", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "均以清单覆盖自校正、复制机器化、交叉验证、复核责任四项，无缺失。"},
+  {"q": "q-08", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "均以calculate双关与百万/零数字对照讽刺大臣，带证据非谩骂。"},
+  {"q": "q-09", "A": 0.5, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "B举亲手改正五百余处并引原文、完整满足；A缺此核心实例仅泛论，部分满足。"},
+  {"q": "q-10", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "均主张推理只能以推理反驳、用机器神学模型驳题辞式分野，归因方法非恩怨。"},
+  {"q": "q-11", "A": 1.0, "B": 0.5, "critical_A": false, "critical_B": false, "reason": "A具先算非恒定差分级数、自垫资、新原理如实上报等专属例证；B仅通用四环节，部分满足。"},
+  {"q": "q-12", "A": 0.5, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "B引织机声计数原文并含观察者效应与Coulomb佐证；A有方法但缺机制与Coulomb，部分满足。"},
+  {"q": "q-13", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "均含如实上报、分析机未成、差分机被弃、拒绝馈赠与体制归因，关键节点齐全。"},
+  {"q": "q-14", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "均按1812至1864完整链条叙述，次序与转折正确，无时间错置。"},
+  {"q": "q-15", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "均覆盖成功与鼓励并存、归因政府非原理，并点出成本大回收长志趣相违。"},
+  {"q": "q-16", "A": 1.0, "B": 1.0, "critical_A": false, "critical_B": false, "reason": "均答出1839年辞Lucasian讲席及原委，1828当选，职位与年份无误。"}
+]
