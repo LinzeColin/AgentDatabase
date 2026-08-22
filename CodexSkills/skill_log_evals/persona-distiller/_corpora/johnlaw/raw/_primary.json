@@ -1,0 +1,123 @@
+{
+  "总数": 13,
+  "计数": {
+    "一手": 6,
+    "二手": 1,
+    "需人判": 6
+  },
+  "一手占比下界": 0.4615,
+  "一手占比上界": 0.9231,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "law"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "aanmerkingenover00lawj",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Aanmerkingen over den koophandel en het geldt / gelegen in Noordt-America, aan d",
+      "creator": "Law, John, 1671-1729; Marperger, Paul Jacob, 1656-1730",
+      "words": 68040
+    },
+    {
+      "identifier": "bim_eighteenth-century_money-and-trade-consider_law-john_1705",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Money and trade considered, with a proposal for supplying the nation with money.",
+      "creator": "Law, John",
+      "words": 32317
+    },
+    {
+      "identifier": "cihm_20081",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "The Present state of the French revenues and trade, and of the controversy betwi",
+      "creator": "Law, John, 1671-1729; France. Sovereign (1714-1774 : Louis XV)",
+      "words": 34155
+    },
+    {
+      "identifier": "conomistesfina00dairuoft",
+      "档": "需人判",
+      "依据": "creator 第 3 位；无自著标记",
+      "title": "Économistes financiers de 18e siècle : Vauban, Boisquillebert, Jean Law, Melon, ",
+      "creator": "Daire, Eugene, 1798-1847; Boisquillebert, Pierre Le Pesant, sieur de, 1633-1707;",
+      "words": 513687
+    },
+    {
+      "identifier": "conomistesfinan00vaubgoog",
+      "档": "需人判",
+      "依据": "creator 第 4 位；无自著标记",
+      "title": "Économistes financiers du XVIIIe siècle",
+      "creator": "Daire, E. (Eugène), 1798-1847; Boisguilbert, P. Le Pesant de (Pierre Le Pesant)",
+      "words": 516068
+    },
+    {
+      "identifier": "conomistesfinan01vaubgoog",
+      "档": "需人判",
+      "依据": "creator 第 4 位；无自著标记",
+      "title": "Économistes financiers du XVIIIe siècle",
+      "creator": "Daire, E. (Eugène), 1798-1847; Boisguilbert, P. Le Pesant de (Pierre Le Pesant)",
+      "words": 513589
+    },
+    {
+      "identifier": "conomistesfinan02vaubgoog",
+      "档": "需人判",
+      "依据": "creator 第 4 位；无自著标记",
+      "title": "Économistes financiers du XVIIIe siècle",
+      "creator": "Daire, E. (Eugène), 1798-1847; Boisguilbert, P. Le Pesant de (Pierre Le Pesant)",
+      "words": 509405
+    },
+    {
+      "identifier": "fullimpartialacc00lawj",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "A full and impartial account of the Company of Mississipi [sic], : otherwise cal",
+      "creator": "Law, John, 1671-1729",
+      "words": 17778
+    },
+    {
+      "identifier": "historicalstudyo00davirich",
+      "档": "需人判",
+      "依据": "creator 第 2 位；无自著标记",
+      "title": "An historical study of Law's system",
+      "creator": "Davis, Andrew McFarland, 1883-1920; Law, John, 1671-1729",
+      "words": 24655
+    },
+    {
+      "identifier": "memoirsoflifeofj00woodrich",
+      "档": "二手",
+      "依据": "题名含「life of」且含目标姓名",
+      "title": "Memoirs of the life of John Law of Lauriston [microform] : including a detailed ",
+      "creator": "Wood, John Philip, d. 1838; Law, John, 1671-1729",
+      "words": 49412
+    },
+    {
+      "identifier": "mississippibubbl00hougrich",
+      "档": "需人判",
+      "依据": "creator 第 2 位；无自著标记",
+      "title": "The Mississippi bubble; how the star of good fortune rose and set and rose again",
+      "creator": "Hough, Emerson, 1857-1923; Law, John, 1671-1729",
+      "words": 100489
+    },
+    {
+      "identifier": "moneytradeconsid00lawj",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Money and trade considered: with a proposal for supplying the nation with money.",
+      "creator": "Law, John, 1671-1729",
+      "words": 31241
+    },
+    {
+      "identifier": "oeuvresdejlawcon00lawj",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Oeuvres de J. Law, : contrôleur-général des finances des France, sous le régent;",
+      "creator": "Law, John, 1671-1729",
+      "words": 101739
+    }
+  ]
+}

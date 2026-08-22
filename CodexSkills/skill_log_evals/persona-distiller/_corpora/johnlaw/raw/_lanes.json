@@ -1,0 +1,81 @@
+{
+  "lanes": 3,
+  "去掉纸面道后": 2,
+  "逐道份数": {
+    "writings": 10,
+    "conversations": 2,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 1,
+    "external": 0
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "aanmerkingenover00lawj",
+      "道": "writings",
+      "title": "Aanmerkingen over den koophandel en het geldt / gelegen in Noordt-Amer"
+    },
+    {
+      "identifier": "bim_eighteenth-century_money-and-trade-consider_law-john_1705",
+      "道": "writings",
+      "title": "Money and trade considered, with a proposal for supplying the nation w"
+    },
+    {
+      "identifier": "cihm_20081",
+      "道": "conversations",
+      "title": "The Present state of the French revenues and trade, and of the controv"
+    },
+    {
+      "identifier": "conomistesfina00dairuoft",
+      "道": "writings",
+      "title": "Économistes financiers de 18e siècle : Vauban, Boisquillebert, Jean La"
+    },
+    {
+      "identifier": "conomistesfinan00vaubgoog",
+      "道": "writings",
+      "title": "Économistes financiers du XVIIIe siècle"
+    },
+    {
+      "identifier": "conomistesfinan01vaubgoog",
+      "道": "writings",
+      "title": "Économistes financiers du XVIIIe siècle"
+    },
+    {
+      "identifier": "conomistesfinan02vaubgoog",
+      "道": "writings",
+      "title": "Économistes financiers du XVIIIe siècle"
+    },
+    {
+      "identifier": "fullimpartialacc00lawj",
+      "道": "conversations",
+      "title": "A full and impartial account of the Company of Mississipi [sic], : oth"
+    },
+    {
+      "identifier": "historicalstudyo00davirich",
+      "道": "writings",
+      "title": "An historical study of Law's system"
+    },
+    {
+      "identifier": "memoirsoflifeofj00woodrich",
+      "道": "timeline",
+      "title": "Memoirs of the life of John Law of Lauriston [microform] : including a"
+    },
+    {
+      "identifier": "mississippibubbl00hougrich",
+      "道": "writings",
+      "title": "The Mississippi bubble; how the star of good fortune rose and set and "
+    },
+    {
+      "identifier": "moneytradeconsid00lawj",
+      "道": "writings",
+      "title": "Money and trade considered: with a proposal for supplying the nation w"
+    },
+    {
+      "identifier": "oeuvresdejlawcon00lawj",
+      "道": "writings",
+      "title": "Oeuvres de J. Law, : contrôleur-général des finances des France, sous "
+    }
+  ]
+}

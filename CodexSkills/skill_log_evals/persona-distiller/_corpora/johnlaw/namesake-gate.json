@@ -1,0 +1,51 @@
+{
+ "schema_version": "1.0",
+ "target_name": "John Law",
+ "normalized_name": "johnlaw",
+ "status": "ready",
+ "resolution": "single",
+ "candidate_count": 1,
+ "selected_subject_uid": "person-john-law-1671",
+ "generated_at": "2026-08-22T21:06:30Z",
+ "search_scope": [
+  "sibling canonical registry",
+  "authoritative public sources supplied by orchestration"
+ ],
+ "candidates": [
+  {
+   "label": "A",
+   "canonical_name": "John Law",
+   "subject_uid": "person-john-law-1671",
+   "identity_category": "投资资本师",
+   "occupation_or_role": "苏格兰经济学家与金融家；法国财政总监（1716-1720）；密西西比公司（Compagnie du Mississippi / Banque Générale）创始人",
+   "professional_background": "John Law（1671-1729，苏格兰爱丁堡）是货币理论家与金融改革者。1705 年出版《Money and Trade Considered》，主张以土地作担保发行纸币以扩大货币供给、降低利率；1716 年在法国创立 Banque Générale（后皇家银行），1717 年成立 Compagnie d'Occident（密西西比公司），垄断法国对北美贸易并接管国债清偿，推动法国从金属货币转向信用货币；1720 年任法国财政总监（Contrôleur général des finances），当年密西西比泡沫破裂后流亡。其经济著作（货币与贸易、纸币、土地银行、公共信用）与密西西比方案是早期货币经济学与金融工程的奠基文本。档案：archive.org creator 字段 `Law, John, 1671-1729`。",
+   "application_scenarios": [
+    "货币理论与纸币信用设计（Money and Trade Considered 的货币供给与利率分析）",
+    "中央银行/公共信用与债务重组方案（Banque Générale、密西西比公司债务接管）",
+    "资产泡沫与市场狂热的风险判断（1720 密西西比泡沫的膨胀与破裂）",
+    "金融工程与政府融资（土地银行、特许公司、股权与债券安排）",
+    "商人/银行家的跨市场套利与资本配置（东印度/密西西比贸易垄断）"
+   ],
+   "key_capabilities": [
+    "货币经济学——论证纸币/信用货币对贸易与增长的刺激（Money and Trade Considered）",
+    "金融方案设计——土地担保纸币、银行特许、公司股权融资（Banque Générale、Mississippi）",
+    "公共债务运作——以公司股份接盘并重组王室债务（1720 年财政方案）",
+    "特许公司运营——殖民贸易垄断、股份发行与市场预期管理",
+    "危机中的立场——泡沫破裂后的辩护与责任归属（A Letter by Mr. Law、Defence）"
+   ],
+   "distinguishing_basis": "探源：`creator:\"Law, John\"` numFound=57 条，目标署名 `Law, John, 1671-1729` 或裸 `Law, John`（1705 初版）。同名者全部按 creator 生卒年/身份词与题名排除：1796-1873 Vincennes 历史家、1946- 科学社会学家、1854-1923 小说家（A city girl）、fl.1881-1921 印度游记作家、active 1762 医学论文作者、1901- 民权作家、1698/1699/1797 牧师 John Law D.D.、1832 Upper Canada 商号、John Easton/M/Adger/Radford/Duncan/James Law/Thomas Graves 等合著者。一手互异 7 份（Money and Trade 1705/1750、Present State 1720、Full and Impartial Account 1720、Aanmerkingen 1721 荷兰译本、Oeuvres 1790、Économistes financiers 1843 集），二手 3 份（Wood 1824 Memoirs、Davis 1887、Hough 1902）。",
+   "authoritative_sources": [
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Law%2C+John%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=200&output=json"
+    },
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=title%3A%28%22money+and+trade+considered%22%29&fl%5B%5D=identifier,title,creator,year&rows=50&output=json"
+    }
+   ],
+   "evidence_level": "high"
+  }
+ ],
+ "candidate_cards": [
+  "A. 人物与身份：John Law；投资资本师；苏格兰经济学家与金融家；法国财政总监（1716-1720）；密西西比公司（Compagnie du Mississippi / Banque Générale）创始人。\n   专业背景：John Law（1671-1729，苏格兰爱丁堡）是货币理论家与金融改革者。1705 年出版《Money and Trade Considered》，主张以土地作担保发行纸币以扩大货币供给、降低利率；1716 年在法国创立 Banque Générale（后皇家银行），1717 年成立 Compagnie d'Occident（密西西比公司），垄断法国对北美贸易并接管国债清偿，推动法国从金属货币转向信用货币；1720 年任法国财政总监（Contrôleur général des finances），当年密西西比泡沫破裂后流亡。其经济著作（货币与贸易、纸币、土地银行、公共信用）与密西西比方案是早期货币经济学与金融工程的奠基文本。档案：archive.org creator 字段 `Law, John, 1671-1729`。。\n   应用价值：场景：货币理论与纸币信用设计（Money and Trade Considered 的货币供给与利率分析）；中央银行/公共信用与债务重组方案（Banque Générale、密西西比公司债务接管）；资产泡沫与市场狂热的风险判断（1720 密西西比泡沫的膨胀与破裂）；金融工程与政府融资（土地银行、特许公司、股权与债券安排）；商人/银行家的跨市场套利与资本配置（东印度/密西西比贸易垄断）；关键能力：货币经济学——论证纸币/信用货币对贸易与增长的刺激（Money and Trade Considered）；金融方案设计——土地担保纸币、银行特许、公司股权融资（Banque Générale、Mississippi）；公共债务运作——以公司股份接盘并重组王室债务（1720 年财政方案）；特许公司运营——殖民贸易垄断、股份发行与市场预期管理；危机中的立场——泡沫破裂后的辩护与责任归属（A Letter by Mr. Law、Defence）。\n   区分依据：探源：`creator:\"Law, John\"` numFound=57 条，目标署名 `Law, John, 1671-1729` 或裸 `Law, John`（1705 初版）。同名者全部按 creator 生卒年/身份词与题名排除：1796-1873 Vincennes 历史家、1946- 科学社会学家、1854-1923 小说家（A city girl）、fl.1881-1921 印度游记作家、active 1762 医学论文作者、1901- 民权作家、1698/1699/1797 牧师 John Law D.D.、1832 Upper Canada 商号、John Easton/M/Adger/Radford/Duncan/James Law/Thomas Graves 等合著者。一手互异 7 份（Money and Trade 1705/1750、Present State 1720、Full and Impartial Account 1720、Aanmerkingen 1721 荷兰译本、Oeuvres 1790、Économistes financiers 1843 集），二手 3 份（Wood 1824 Memoirs、Davis 1887、Hough 1902）。。"
+ ]
+}

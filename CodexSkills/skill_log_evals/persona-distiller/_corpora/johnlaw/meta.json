@@ -1,0 +1,96 @@
+{
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "person-john-law-1671",
+ "consent_authority": null,
+ "created_at": "2026-08-22T21:06:51Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "investor-capital-allocator",
+  "display": "投资资本师",
+  "mode": "single",
+  "primary": "investor-capital-allocator",
+  "weights": {
+   "investor-capital-allocator": 1.0
+  }
+ },
+ "language": "zh-CN",
+ "model_version": "0.1.0-draft",
+ "name": "John Law",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "货币理论与纸币信用设计（Money and Trade Considered 的货币供给与利率分析）",
+    "中央银行/公共信用与债务重组方案（Banque Générale、密西西比公司债务接管）",
+    "资产泡沫与市场狂热的风险判断（1720 密西西比泡沫的膨胀与破裂）",
+    "金融工程与政府融资（土地银行、特许公司、股权与债券安排）",
+    "商人/银行家的跨市场套利与资本配置（东印度/密西西比贸易垄断）"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Law%2C+John%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=200&output=json"
+    },
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=title%3A%28%22money+and+trade+considered%22%29&fl%5B%5D=identifier,title,creator,year&rows=50&output=json"
+    }
+   ],
+   "canonical_name": "John Law",
+   "distinguishing_basis": "探源：`creator:\"Law, John\"` numFound=57 条，目标署名 `Law, John, 1671-1729` 或裸 `Law, John`（1705 初版）。同名者全部按 creator 生卒年/身份词与题名排除：1796-1873 Vincennes 历史家、1946- 科学社会学家、1854-1923 小说家（A city girl）、fl.1881-1921 印度游记作家、active 1762 医学论文作者、1901- 民权作家、1698/1699/1797 牧师 John Law D.D.、1832 Upper Canada 商号、John Easton/M/Adger/Radford/Duncan/James Law/Thomas Graves 等合著者。一手互异 7 份（Money and Trade 1705/1750、Present State 1720、Full and Impartial Account 1720、Aanmerkingen 1721 荷兰译本、Oeuvres 1790、Économistes financiers 1843 集），二手 3 份（Wood 1824 Memoirs、Davis 1887、Hough 1902）。",
+   "evidence_level": "high",
+   "identity_category": "投资资本师",
+   "key_capabilities": [
+    "货币经济学——论证纸币/信用货币对贸易与增长的刺激（Money and Trade Considered）",
+    "金融方案设计——土地担保纸币、银行特许、公司股权融资（Banque Générale、Mississippi）",
+    "公共债务运作——以公司股份接盘并重组王室债务（1720 年财政方案）",
+    "特许公司运营——殖民贸易垄断、股份发行与市场预期管理",
+    "危机中的立场——泡沫破裂后的辩护与责任归属（A Letter by Mr. Law、Defence）"
+   ],
+   "label": "A",
+   "occupation_or_role": "苏格兰经济学家与金融家；法国财政总监（1716-1720）；密西西比公司（Compagnie du Mississippi / Banque Générale）创始人",
+   "professional_background": "John Law（1671-1729，苏格兰爱丁堡）是货币理论家与金融改革者。1705 年出版《Money and Trade Considered》，主张以土地作担保发行纸币以扩大货币供给、降低利率；1716 年在法国创立 Banque Générale（后皇家银行），1717 年成立 Compagnie d'Occident（密西西比公司），垄断法国对北美贸易并接管国债清偿，推动法国从金属货币转向信用货币；1720 年任法国财政总监（Contrôleur général des finances），当年密西西比泡沫破裂后流亡。其经济著作（货币与贸易、纸币、土地银行、公共信用）与密西西比方案是早期货币经济学与金融工程的奠基文本。档案：archive.org creator 字段 `Law, John, 1671-1729`。",
+   "subject_uid": "person-john-law-1671"
+  },
+  "chosen_subject_uid": "person-john-law-1671",
+  "normalized_name": "johnlaw",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "johnlaw",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "johnlaw",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-0d687175d72a",
+ "time_scope": "all available periods, separated by role and material drift",
+ "updated_at": "2026-08-22T21:06:51Z",
+ "attribution_basis": {
+  "authority": "John Law（1671-1729）著作归属依据：① archive.org 目录 creator 字段（Law, John, 1671-1729）逐份点名；② 各书题名页/署名行（见 covered_sources 逐份照录）——《Money and Trade Considered》1750 版题名页明署 BY THE CELEBRATED JOHN LAW, Esq；《A Full and Impartial Account of the Company of Mississippi》(1720) 题名页 'projected and settled by Mr. LAW'；《The Present State of the French Revenues》(1720) 卷内收录 'A Letter by Mr. Law'、'Mr. Law's Defence'；《Économistes financiers du XVIIIe siècle》(Daire 编, 1843) 卷内 Jean Law 论著栏目标 'J. LAW'；《Oeuvres de J. Law》(1790) 为其经济论著结集。",
+  "citation": "archive.org 目录检索 creator:\"Law, John\"（numFound=57 条，互异一手 7 份）+ 各源 archive.org item 页（locator 见 source-ledger.jsonl）；出版记录见各源 locator。",
+  "disputed_policy": "《A Full and Impartial Account of the Company of Mississippi》(1720) 署名有争议——部分书目归 Daniel Defoe、部分归 John Law 本人；IA creator 字段挂 Law，且题名页自述 'projected and settled by Mr. LAW'，按 IA 著录计入 P1，但研究稿中该件引文只作密西西比公司方案的一手旁证，不当作其个人经济观点孤证。《Économistes financiers du XVIIIe siècle》(1843) 为 Daire 编选的多人论著集，Law 之论著在卷内、以 'J. LAW' 栏目标示，计入 P1 但引文须核对确在 Law 名下分栏（其卷内文本与《Oeuvres de J. Law》1790 大体同源）。其余 P1 件（Money and Trade 1705/1750、Present State 1720、Oeuvres 1790、Aanmerkingen 1721 荷兰译本）无学界公认伪托争议；modern 传记（2001 后）未纳入抓源。",
+  "disputed_works": [],
+  "covered_sources": [
+   "bim_eighteenth-century_money-and-trade-consider_law-john_1705.txt ｜ 署名照录：MONEY AND TRADE CONSIDERED，WITH A PROPOSAL for supplying the nation with money；EDINBURGH",
+   "moneytradeconsid00lawj.txt ｜ 署名照录：WITH A PROPOSAL FOR SUPPLYING THE NATION WITH MONEY. FIRST PUBLISHED AT EDINBURGH MDCCV. BY THE CELEBRATED JOHN LAW, Esq",
+   "cihm_20081.txt ｜ 署名照录：A Letter in Answer to it; by Mr. Law; A Letter by Mr. Law treating further of Annuities; Mr. Law's Defence",
+   "fullimpartialacc00lawj.txt ｜ 署名照录：A full and impartial account of the Company of Mississippi, projected and settled by Mr. LAW, London 1720",
+   "oeuvresdejlawcon00lawj.txt ｜ 署名照录：Oeuvres de J. Law; le célèbre Law; marchandises; circulation; établissement",
+   "conomistesfina00dairuoft.txt ｜ 署名照录：Économistes financiers du XVIIIe siècle; Jean Law; marchandises; consommation; exportation",
+   "aanmerkingenover00lawj.txt ｜ 署名照录：Aanmerkingen over den koophandel en het geldt, gelegen in Noordt-America, Mississippi"
+  ]
+ }
+}

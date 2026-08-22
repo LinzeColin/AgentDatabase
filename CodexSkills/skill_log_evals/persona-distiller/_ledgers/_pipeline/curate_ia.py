@@ -309,6 +309,20 @@ EXCLUDE = {
     #   Margarete Buber-Neumann（政治回忆录）、Elisabeth Noelle-Neumann（民意研究）。
     "von-neumann": ["Franz Neumann", "Frank Neumann", "Fritz Neumann", "Luise Neumann",
                     "Wangerin", "Noelle-Neumann", "Buber-Neumann", "Franz L. Neumann"],
+    # ★ John Law #225（1671-1729，苏格兰金融家/Mississippi 公司）：同名者极多，
+    #   按 creator 串逐类排（生卒年 + 身份词）。REQUIRE 钉 law+john 后仍会命中一批裸名
+    #   "Law, John"，余者交给 EXCLUDE_TITLE 按题名排。
+    #   类别：① 1796-1873 Vincennes 历史家（The colonial history of Vincennes 等）；
+    #   ② 1946- 科学社会学家（After method / Aircraft stories / Organizing modernity 等）；
+    #   ③ 1854-1923 小说家（A city girl）；④ fl.1881-1921 印度游记作家
+    #   （Modern Hyderabad / Indian Snapshots / Glimpses of hidden India / A Manchester shirtmaker）；
+    #   ⑤ active 1762 医学论文（Dissertatio medica de asthmate）；⑥ 1901- 民权著作；
+    #   ⑦ 牧师 John Law D.D.（1698/1699/1797，题名排）；⑧ 1832 Upper Canada 商号（题名排）；
+    #   ⑨ 同名机构/合著者（John Easton、John M、John W、John Adger、Radford、Duncan、
+    #   James Law、Thomas Graves）。
+    "johnlaw": ["1796-1873", "1946-", "1854-1923", "1881-1921", "active 1762", "1901-",
+                "John Easton", "Adger", "John M", "John E", "John W", "Radford", "Duncan",
+                "James Law", "Thomas Graves", "Cresson"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -393,6 +407,15 @@ EXCLUDE_TITLE = {
     # ★ Coolidge #43：Theodore W. Coolidge 与 William Appleton Coolidge 的著作（1995 收藏画册等）
     #   creator 带 `Coolidge, William Appleton`——REQUIRE(coolidge+william) 会命中，按题名排。
     "coolidge": ["appleton coolidge collection", "william appleton"],
+    # ★ John Law #225：creator 侧裸名 `Law, John`（无生卒年）被 REQUIRE(law+john) 命中、
+    #   又排不掉的一批，只能按题名排：
+    #   牧师 John Law D.D.（1698 Illustrissimo / 1699 Calendarium / 1797 两篇布道与 Rochester 训谕）、
+    #   1832 Upper Canada「Prospectus of a wholesale dry goods importing company」、
+    #   fl.1881-1921 印度游记（Modern Hyderabad / Indian Snapshots / Glimpses of hidden India /
+    #   A Manchester shirtmaker）、1990《How to coach hockey》、dli《The horoscope》。
+    "johnlaw": ["illustrissimo", "calendarium", "charge delivered", "sermon preached",
+                "prospectus", "horoscope", "hyderabad", "indian snapshots", "hidden india",
+                "shirtmaker", "coach hockey", "gcse"],
 }
 # 目标必须出现在 creator 里的**姓名词元**（同一个 creator 段里全部出现即命中）。
 # ★★ 曾写成 `["Fröbel, Friedrich"]` 这种「姓, 名」定串，于是
@@ -499,6 +522,10 @@ REQUIRE = {
     #   Fritz Neumann（罗曼语文学）、Luise Neumann、Elisabeth Noelle-Neumann——均无
     #   john+von+neumann 组合，被 REQUIRE 天然挡掉。
     "von-neumann": [["von", "neumann", "john"], ["neumann", "john", "von"]],
+    # ★ John Law #225：目标署名形态 `Law, John, 1671-1729`／`Law, John`（1705 初版原版
+    #   bim 条目无生卒年）。REQUIRE 钉 law+john 两词元；同名者全部交给
+    #   EXCLUDE（生卒年/身份词）与 EXCLUDE_TITLE（裸名者按题名）两侧排。
+    "johnlaw": [["law", "john"]],
 }
 
 
