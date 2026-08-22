@@ -1,0 +1,5 @@
+# numFound=2 rows=2 query=creator:("Von Neumann" OR "von Neumann, John") AND mediatype:texts AND (title:(papers) OR title:(essays) OR title:(lectures) OR title:(mathematical))
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+mathematicalfoun0613vonn	1955-01-01T00:00:00Z	1955	Von Neumann, John, 1903-1957	Mathematical foundations of quantum mechanics	eng; ger	trent_university; internetarchivebooks; printdisabled; fav-418283142; fav-8jtxumapmemrkmt; fav-abdullah_saba; fav-ajay_agarwal945; fav-alex3_14159; fav-aneczka15; fav-antonioprieto
+papersofjohnvonn00vonn	1987-01-01T00:00:00Z	1987	Von Neumann, John; Aspray, William, editor; Burks, Arthur W. (Arthur Walter), 1915-2008, editor	Papers of John von Neumann on computing and computer theory	eng	mitpress; americana; inlibrary; printdisabled; fav-38djaj3jnl3jn383810zzr; fav-abdul_fattah398; fav-akhilgarapati; fav-albertobalsam50020618; fav-anchee; fav-andy765422; fav-anothe

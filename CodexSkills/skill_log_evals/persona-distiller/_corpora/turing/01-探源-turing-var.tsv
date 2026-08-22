@@ -1,0 +1,4 @@
+# numFound=1 rows=1 query=creator:("Turing, Alan Mathison" OR "Turing, A. M.") AND mediatype:texts
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+amturingsacerepo00turi	1986-01-01T00:00:00Z	1986	Carpenter, Brian E; Doran, R. W; Turing, Alan Mathison, 1912-1954. Proposal for development in the Mathematics Division of an automatic computing engine (ACE). 1986; Turing, Alan M	A.M. Turing's ACE report of 1946 and other papers	eng	mitpress; americana; printdisabled; inlibrary; fav-autumnjohnson; fav-balraj_arpit; fav-dgrt; fav-dr_xujun; fav-fabrizio_festa; fav-federico_xiccato; fav-fran_g_1; fav-jkdanonymous

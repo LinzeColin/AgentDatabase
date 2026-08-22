@@ -1,0 +1,5 @@
+# numFound=2 rows=2 query=creator:("Shannon, Claude E" OR "Shannon, C. E.") AND mediatype:texts
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+mathematicaltheo00shan_0			Shannon, Claude E.; Weaver, Warren	The Mathematical Theory of Communication	eng	dlarc; americana; inlibrary; printdisabled; dlarc-library; fav-ilias_a; fav-khoshmaram1
+mathematicaltheo0000shan	1964-01-01T00:00:00Z	1964	Shannon, Claude E. and Weaver, Warren	The Mathematical Theory of Communication	eng	internetarchivebooks; inlibrary; printdisabled; fav-aknot520; fav-benjamin_castillo183; fav-bill_davenport792; fav-blackaller; fav-cartebiblioarchives; fav-edwadjw; fav-greisch; fa

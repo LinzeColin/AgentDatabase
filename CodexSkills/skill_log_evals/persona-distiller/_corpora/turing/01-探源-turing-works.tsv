@@ -1,0 +1,6 @@
+# numFound=3 rows=3 query=title:("computing machinery and intelligence" OR "on computable numbers" OR "turing 1936" OR "mathematical theory of enigma") AND mediatype:texts
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+MIND--COMPUTING-MACHINERY-AND-INTELLIGENCE	1950-10-01T00:00:00Z	1950	A.M Turing	I.—COMPUTING MACHINERY AND INTELLIGENCE	eng	opensource; community; fav-automata_box; fav-blake_burge; fav-cctu_pico_sena; fav-charles_blair; fav-chris_ssss; fav-dr_muhammad_usman_javed; fav-jack_the_bookman; fav-kam270; fav-
+Turing1936OnCumputableNumbers	1936-01-01T00:00:00Z	1936	Alan Turing	Turing 1936 On Cumputable Numbers	eng	scholarworkspaces; community; fav-archive_rooke; fav-botellitadejerez; fav-dingua; fav-edo9k; fav-steven_paley552; fav-user532593
+TuringMathTheoryEnigma				"Mathematical Theory of ENIGMA Machine" by Alan Turing	English	thememoryhole; patron-library-collection; fav-1776com; fav-19omhs72; fav-alastou; fav-box_junofish; fav-c842; fav-codoprotostar; fav-cotardsyndrome; fav-eohlson; fav-felix_deutsch;

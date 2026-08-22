@@ -1,0 +1,80 @@
+# numFound=77 rows=77 query=title:("turing machine" OR "computable numbers") AND mediatype:texts
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+what-is-a-turing-machine			PoisonPencil	What Is A Turing Machine?		opensource
+arxiv-1206.0207				Probabilistic Turing Machine and Landauer Limit		arxiv; journals
+conscious-turing-machine				Conscious Turing Machine	eng	folkscanomy_science; folkscanomy
+turing-machine-game-g-4-g-15-071-1				The Game Turing Machine		opensource
+sabrina-190319				How to compute with an infinite time Turing machine?	fil	folkscanomy_science; folkscanomy
+smulation-of-a-turing-machine				Smulation Of A Turing Machine		folkscanomy_science; folkscanomy
+41-herken-ed.-95-the-universal-turing-machine				The Universal Turing Machine	English	opensource; community; fav-marccic
+turingmachinetaskanalysis				Turing Machine Task Analysis	English	folkscanomy_science; folkscanomy
+turing-machine-and-automata-simulators				Turing Machine And Automata Simulators		folkscanomy_science; folkscanomy
+turing-machine-as-an-ecological-model-for-task-analysis				Turing Machine As An Ecological Model For Task Analysis	English	folkscanomy_science; folkscanomy
+turing-machine-variations				Turing Machine Variations		folkscanomy_science; folkscanomy
+arxiv-1508.03174	2015-08-13T00:00:00Z	2015	Victor Hernandez-Urbina	Logical N-AND Gate on a Molecular Turing Machine	English	arxiv; journals
+ma-3-9-1				Methods for understanding Turing machine computations		opensource
+arxiv-cs0608067	2006-08-16T00:00:00Z	2006	Tetsushi Matsui	On Polynomial Time Computable Numbers		arxiv; journals
+turing-machine-simulator-and-its-underlying-mechanism				Turing Machine Simulator And Its Underlying Mechanism		folkscanomy_science; folkscanomy
+turingmachineuni0000rend	2015-01-01T00:00:00Z	2015	Rendell, Paul	Turing machine universality of the game of life	eng	internetarchivebooks; nationaluniversity; printdisabled; fav-gone_to_persia; fav-mirrshad
+your-turing-machine-or-mine				Your Turing Machine Or Mine		folkscanomy_science; folkscanomy
+annotatedturingg0000petz	2008-01-01T00:00:00Z	2008	Petzold, Charles, 1953-	The annotated Turing : a guided tour through Alan Turing's historic paper on computability and the Turing machine	eng	internetarchivebooks; printdisabled; fav-alexs11111; fav-apoorv_mhaswade; fav-arch0172; fav-arisbe_a_guess_at_the_riddle; fav-awufl; fav-beneventus; fav-catalinc; fav-celeste_cassi
+arxiv-1410.1017	2014-10-03T00:00:00Z	2014	Verónica Becher; Yann Bugeaud; Theodore A. Slaman	The Irrationality Exponents of Computable Numbers		arxiv; journals
+arxiv-1203.1335	2012-03-06T00:00:00Z	2012	Ilir Capuni; Peter Gacs	A Turing Machine Resisting Isolated Bursts Of Faults	English	arxiv; journals
+arxiv-1302.2898	2013-02-12T00:00:00Z	2013	Thomas Hales	Mathematics in the Age of the Turing Machine	English	arxiv; journals
+consecutiverepeatingstatecyclesdetermineperiodicpointsturingmachine	2013-04-17T00:00:00Z	2013	Michael Stephen Fiske	Consecutive Repeating State Cycles Determine Periodic Points in a Turing Machine	eng	opensource; community
+arxiv-cs0601050	2006-01-13T00:00:00Z	2006	Alex Vinokur	Computing Fibonacci numbers on a Turing Machine	English	arxiv; journals
+the-turing-machine-theory-for-some				The Turing Machine Theory For Some		opensource; community
+884-article-text-3586-2-10-20141125				Rudy Turing Machine	eng	folkscanomy_science; folkscanomy
+turing-machine-in-conway-life				Turing Machine In Conway Life		folkscanomy_science; folkscanomy
+arxiv-quant-ph9702021	1997-02-07T00:00:00Z	1997	Paul Benioff	The Landauer Resistance and Band Spectra for the Counting Quantum Turing Machine	English	arxiv; journals
+arxiv-1212.4756	2012-12-19T00:00:00Z	2012	Erik D. Demaine; Martin L. Demaine; Sándor P. Fekete; Matthew J. Patitz; Robert T. Schweller; Andrew Winslow; Damien Woods	One Tile to Rule Them All: Simulating Any Turing Machine, Tile Assembly System, or Tiling System with a Single Puzzle Piece	English	arxiv; journals
+arxiv-1604.00959	2016-04-04T00:00:00Z	2016	John Rhodes; Anne Schilling; Pedro V. Silva	The semaphore codes attached to a Turing machine via resets and their various limits		arxiv; journals
+arxiv-1605.04343	2016-05-13T00:00:00Z	2016	Adam Yedidia; Scott Aaronson	A Relatively Small Turing Machine Whose Behavior Is Independent of Set Theory		arxiv; journals
+1606.08109				Can Turing machine be curious about its Turing test results?	English	opensource; community
+arxiv-1411.5679	2014-11-20T00:00:00Z	2014	Bryce M. Kim	Zeno machines and Running Turing machine for infinite time		arxiv; journals
+arxiv-quant-ph0701108	2007-01-16T00:00:00Z	2007	Willem Fouché; Johannes Heidema; Glyn Jones; Petrus H. Potgieter	Deutsch's Universal Quantum Turing Machine (Revisited)	English	arxiv; journals; fav-alinso
+arxiv-math0410411	2004-10-19T00:00:00Z	2004	Tommaso Toffoli	Maxwell's daemon, the Turing machine, and Jaynes' robot	English	arxiv; journals; fav-cpressey
+2306.16872				Towards a Self-Replicating Turing Machine	eng	folkscanomy_science; folkscanomy
+hw6s07				Homework n.6 Turing Machine		opensource
+arxiv-1208.6342				Is Wolfram and Cook's (2,5) Turing machine really universal?		arxiv; journals
+arxiv-quant-ph0405191	2004-05-31T00:00:00Z	2004	Satoshi Iriyama; Masanori Ohya; Igor Volovich	Generalized Quantum Turing Machine and its Application to the SAT Chaos Algorithm	English	arxiv; journals
+mechanical-turing-machine-in-wood-richard-ridel	2015-02-10T00:00:00Z	2015	Richard Ridel	Mechanical Turing Machine In Wood by Richard Ridel	eng	opensource; community; fav-microlisp
+a-turing-machine-of-oblivious-mobile-robots-with-limited-visibility				A Turing Machine Of Oblivious Mobile Robots With Limited Visibility	eng	opensource; community
+arxiv-0712.4377	2007-12-28T00:00:00Z	2007	Markus Mueller	Quantum Kolmogorov Complexity and the Quantum Turing Machine	English	arxiv; journals
+TuringMachineBorgPolackRowley				Turing Machine Borg Polak Rowley	English	journals_contributions; journals
+a-theory-of-consciousness-from-a-theoretical-compu				Insights from the Conscious Turing Machine	eng	folkscanomy_science; folkscanomy
+arxiv-0904.3273	2009-05-14T00:00:00Z	2009	John S. Hamel	A Thermodynamic Turing Machine: Artificial Molecular Computing Using Classical Reversible Logic Switching Networks	English	arxiv; journals
+arxiv-cs0411037	2004-11-13T00:00:00Z	2004	Tetsushi Matsui	A Note on Bulk Quantum Turing Machine		arxiv; journals; fav-lancearaiza
+cours-compl-2				Formal Definition of a Turing Machine		opensource
+kr-02_202309				A Universal Turing Machine with 3 States and 9 Symbols	eng	folkscanomy_science; folkscanomy
+computational-modeling-vs-computational-explanatio				Is Everything a Turing Machine, and Does It Matter to	eng	folkscanomy_science; folkscanomy
+consecutive-repeating-state-cycles-determine-periodic-points-in-a-turing-machine	2013-01-01T00:00:00Z	2013	Michael Stephen Fiske	Consecutive Repeating State Cycles Determine Periodic Points In A Turing Machine	eng	opensource
+arxiv-1602.08671	2016-02-27T00:00:00Z	2016	Greg Yang	Lie Access Neural Turing Machine		arxiv; journals
+bitsavers_mitlincoln6M3938ClarkTheLogicalStructureofDigitalC_2230791	1919-10-01T00:00:00Z	1919		mit :: lincolnLaboratory :: division 6 :: 6M-3938 Clark - The Logical Structure of Digital Computers The Turing Machine Oct1955	eng	bitsavers_unsorted; bitsavers
+emulating-the-turing-machine-and-flip-flop-gates-with-amma				Emulating The Turing Machine And Flip Flop Gates With Amma	eng	opensource; community
+arxiv-1607.03810	2016-07-13T00:00:00Z	2016	Yue Liu	On the Algebraic Representation of One-Tape Deterministic Turing Machine		arxiv; journals
+82572715				Deterministic Simulation of a Single Tape Turing Machine by	eng	folkscanomy_science; folkscanomy
+a-universal-turing-machine-with-3-states-and-9-symbols				A Universal Turing Machine With 3 States And 9 Symbols	eng	opensource; community; fav-marccic
+0410051				Turing Machine with Faults	English	journals_contributions; journals; fav-marccic
+arxiv-quant-ph9906084	1999-06-23T00:00:00Z	1999	Tomoyuki Yamakami	A Foundation of Programming a Multi-Tape Quantum Turing machine	English	arxiv; journals
+arxiv-quant-ph0302051	2003-02-07T00:00:00Z	2003	Takayuki Miyadera; Masanori Ohya	On Halting Process of Quantum Turing Machine	English	arxiv; journals
+arxiv-1507.08582	2015-07-30T00:00:00Z	2015	Giovanni Pighizzini	One-Tape Turing Machine Variants and Language Recognition	English	arxiv; journals
+arxiv-quant-ph0506266	2008-04-05T00:00:00Z	2008	Caroline Rogers; Vlatko Vedral	The Second Quantized Quantum Turing Machine and Kolmogorov Complexity	English	arxiv; journals
+neural-turing-machine				Neural Turing Machine Biomorphs	fra	opensource; community
+arxiv-cs9903012	1999-03-16T00:00:00Z	1999	Anatoly D. Plotnikov	Formalization of the class of problems solvable by a nondeterministic Turing machine	English	arxiv; journals
+StupidTuringMachineTricks				Stupid Turing Machine Tricks	English	journals_contributions; journals
+arxiv-cond-mat9701007				Transmission and Spectral Aspects of Tight Binding Hamiltonians for the Counting Quantum Turing Machine		arxiv; journals
+universalturingm0000unse	1988-01-01T00:00:00Z	1988		The Universal turing machine : a half-century survey	eng	trent_university; internetarchivebooks; inlibrary; printdisabled; fav-andres_escobar; fav-cindykrieger; fav-cpressey; fav-djbuller; fav-ioannak3333; fav-mirrshad; fav-neuralsmith; 
+arxiv-1202.6530	2012-02-29T00:00:00Z	2012	Min Liang; Li Yang	On Quantum Turing Machine Halting Deterministically	English	arxiv; journals
+10.11591csit.v7i2.p196-202	2026-07-01T00:00:00Z	2026	Rajesh Kumar, Anju Jain, Rakesh Kumar	Complexity of finite state Turing machine with other domain	eng	opensource
+thesis_202603				Turing Machine Universality of the Game of Life		opensource
+arxiv-1607.00036	2016-06-30T00:00:00Z	2016	Caglar Gulcehre; Sarath Chandar; Kyunghyun Cho; Yoshua Bengio	Dynamic Neural Turing Machine with Soft and Hard Addressing Schemes		arxiv; journals
+arxiv-1503.00168	2015-02-28T00:00:00Z	2015	Jiwei Li; Eduard Hovy	The NLP Engine: A Universal Turing Machine for NLP	English	arxiv; journals
+arxiv-1604.01154	2016-04-05T00:00:00Z	2016	Igor S. Sergeev	On the complexity of computing prime tables on a Turing machine		arxiv; journals
+program-algebra-for-turing-machine-programs				Program Algebra For Turing Machine Programs		folkscanomy_science; folkscanomy
+terminating-turing-machine				Terminating Turing Machine		folkscanomy_science; folkscanomy
+small-minimal-aperiodic-reversible-turing-machine				Small Minimal Aperiodic Reversible Turing Machine	kaz	opensource; community
+l-0-turing-machine				L 0 Turing Machine	eng	folkscanomy_science; folkscanomy
+states_202606				A Universal Turing Machine with Zero Internal States		opensource
+theoreticalcompu0000book	2010-06-05T00:00:00Z	2010	Books Llc	Theoretical Computer Science: Algorithm, Turing Machine, Computation, Formal Language, Lambda Calculus, Quantum Computer, Idempotence, Closure	eng	internetarchivebooks; inlibrary; printdisabled; fav-billmaz; fav-cindykrieger; fav-conail; fav-dnaultra5; fav-mirrshad; fav-nicholas_smart114; fav-tvsignallost

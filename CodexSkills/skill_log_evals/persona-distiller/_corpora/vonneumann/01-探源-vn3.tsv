@@ -1,0 +1,103 @@
+# numFound=115 rows=100 query=title:(neumann) AND mediatype:texts AND collection:(americana OR opensource OR community)
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+earthquakeinves00neum	1965-01-01T00:00:00Z	1965	Neumann, Frank; U.S. Coast and Geodetic Survey	Earthquake investigation in the United States / [prepared originally by Frank Neumann]	eng	penn_state_univ; americana; fav-kevin_calnan
+hawkins-morpurgo-davies-neumann-hittite-hieroglyphs-and-luwian-new-evidence-for-the-connection-1974			Allan R. Bomhard	Hawkins, Morpurgo-Davies, & Neumann - Hittite Hieroglyphs and Luwian - New Evidence for the Connection (1974)	eng	opensource; fav-laichar
+franzneumanneri00neumgoog	1904-01-01T00:00:00Z	1904	Neumann, Luise	Franz Neumann : Erinnerungsblätter	ger	americana
+bub_gb_vvQ4AAAAMAAJ	1907-01-01T00:00:00Z	1907	Albert Wangerin	Franz Neumann und sein Wirken als Forscher und Lehrer	German	americana
+k-texte-margarete-buber-neumann-kriegsschauplatze-1967	2025-01-01T00:00:00Z	2025	Buber-Neumann 1967 / ed. Roudaro	K TEXTE Margarete Buber Neumann Kriegsschauplätze 1967	ger	opensource
+fcc_ecfs-104112685302678	2025-04-14T00:00:00Z	2025	Renee Neumann	Renee Neumann COMMENT regarding 25-133		fcc-ecfs; dlarc; americana
+euphrosynechris00hosgoog	1871-01-01T00:00:00Z	1871	Wilhelm Hosäus	Euphrosyne. Christiane Amalie Louise Becker, geb. Neumann(1778-1797)	German	americana
+franzneumannsep00volkgoog	1896-01-01T00:00:00Z	1896	Paul Volkmann	Franz Neumann.* 11. September 1798,+ 23. Mai 1895	German	americana
+fundamentos-05-ordinais-von-neumann			Vinicius	Fundamentos 05 - Ordinais de Von Neumann		opensource; community
+computerfrompasc00herm	1972-01-01T00:00:00Z	1972	Goldstine, Herman Heine, 1913-	The computer from Pascal to von Neumann	eng	internetarchivebooks; americana; printdisabled; fav-anaxagoras12; fav-anton_yakovchuk; fav-christos_sevastiadis; fav-cldem; fav-comtedelautr_amont; fav-conail; fav-df34535; fav-don
+neumann-franz.-behemoth-ocr-1942	1942-01-01T00:00:00Z	1942	Franz Neumann	Neumann, Franz. Behemoth [ocr] [1942]	eng	opensource; fav-marccic
+neumann-soak-einfuhrungen	1982-01-01T00:00:00Z	1982	Franz Neumann	zzDIG: Neumann - SOAK Einführungen	ger	opensource; fav-mmos
+15-1-neumann-historia-rebeliones				Neumann Historia Rebeliones en la Sierra Tarahumara		opensource
+brno_20260601				Čapek, Turing, von Neumann, and the 20th Century Evolution of the Concept of Machine		opensource
+OMGUSEspeciallyInformationsAboutElisabethNoelleNeumann28.10.1949	1949-10-28T00:00:00Z	1949	Kurt Glaser	OMGUS, Especially Informations About Elisabeth Noelle Neumann, 28.10.1949	eng	opensource; community
+romanischephilol00neum	1886-01-01T00:00:00Z	1886	Neumann, Fritz, 1854-1934	ROMANISCHE PHILOLOGIE, EIN GRUNDRISS VON FRITZ NEUMANN ..	eng	university_of_illinois_urbana-champaign; americana
+neumann-binder-1	2022-01-01T00:00:00Z	2022	UKMT	Neumann Binder 1	eng	opensource; community
+9000NeumannENRuleOfLawRed	1936-12-01T00:00:00Z	1936	Franz L. Neumann	Rule of Law by Franz L. Neumann	eng	opensource; community; fav-anselmaxxing; fav-dancedany; fav-e_k_b; fav-mmos; fav-uri_aurora
+NEUMANNVOLUMES	2025-09-02T00:00:00Z	2025	John Von Neumann	COLLECTED WORKS OF JOHN VON NEUMANN( ALL 6 VOLUMES)	eng	opensource; fav-abehareram; fav-archiveuser94035; fav-dstev1; fav-haight1968; fav-irohamca; fav-jkv421n; fav-monad1; fav-nhatphu; fav-sameermadh; fav-trang_v_461; fav-user238645; f
+ElisabethNoelleNeumannAsNaziPropagandistInUSNewspapers19371	1937-11-11T00:00:00Z	1937	Ulrich Maichle	Elisabeth Noelle Neumann As Nazi Propagandist In US Newspapers, 1937	eng	opensource; community
+ernstneumann00essw	1905-01-01T00:00:00Z	1905	Esswein, Hermann, 1877-; Neumann, Ernst, 1871-1954	Ernst Neumann	ger	getty; americana
+a-espiral-do-silencio				NOELLE-NEUMANN, Elisabeth. A Espiral do Silêncio: Opinião Pública - nosso tecido social. Estudos Nacionais, 2017.		opensource
+blessedjohnneuma0000galv	1964-01-01T00:00:00Z	1964	Galvin, James J., 1911-	Blessed John Neumann, bishop of Philadelphia	eng	marygrovecollege; internetarchivebooks; americana; printdisabled; inlibrary; fav-klayneb; fav-trendyweb1
+kunstund-sein-komel	2004-05-10T00:00:00Z	2004	Dean Komel	Kunst und Sein. Beiträge zur phänomenologischen Ästhetik und Aletheiologie. Dean Komel [Hrsg.]. Orbis phaenomenologicus. Würzburg : Königshausen und Neumann 2004	ger	opensource
+apndicesalderec00inclgoog	1894-01-01T00:00:00Z	1894	Pío Suárez Inclán	Apéndices al Derecho internacional público del barón Leopoldo de Neumann ...	Spanish	americana
+neumann-kondensator-mikrofone-fuer-alle-verwendungszwecke-katalog-1960	1960-01-01T00:00:00Z	1960	Georg Neumann & Co. KG.	Georg Neumann & Co. KG. Kondensator-Mikrofone für alle Verwendungszwecke Katalog 1960	mul	opensource; community
+dc_circ_1921_3646_evans_v_neumann	1921-01-01T00:00:00Z	1921	United States. Court of Appeals (District of Columbia Circuit)	Evans v. Neumann (D.C. Cir. 1921)	English	georgetown-university-law-library; americana
+diestigmatisiert02frit	1929-01-01T00:00:00Z	1929	Fritz Gerlich	Die Stigmatisierte Therese Neumann von Konnersreuth : Zweiter Teil die Glaubwurdigkeit der Therese Neumann	ger	aphmigel; medicalheritagelibrary; americana; medicallibrary; fav-douglas_kayse; fav-mmos; fav-ratown
+CatechismByVen.JohnNeumann_201710				Catechism by Ven. John Neumann	English	opensource; community; fav-ak-47-ak-74
+blessedjohnneuma0000frea	1963-01-01T00:00:00Z	1963	Frean, W	Blessed John Neumann : the helper of the afflicted	eng	marygrovecollege; internetarchivebooks; americana; printdisabled; inlibrary; fav-klayneb
+die-reden-gotamo-buddhos.-mittlere-sammlung-erster-band-by-karl-eugen-neumann				Die Reden Gotamo Buddhos. Mittlere Sammlung, Erster Band By Karl Eugen Neumann		opensource
+diestigmatisiert01frit	1929-01-01T00:00:00Z	1929	Fritz Gerlich	Die Stigmatisierte Therese Neumann von Konnersreuth : Erster Teil die Lebensgeschichte der Therese Neumann	ger	aphmigel; medicalheritagelibrary; americana; medicallibrary; fav-mmos
+grundrissdesheut00neum	1877-01-01T00:00:00Z	1877	Neumann, Leopold, Freiherr von, 1811-1888	Grundriss des heutigen europaÌˆischen VoÌˆlkerrechts / von Leop. Neumann.	ger	university_of_illinois_urbana-champaign; americana
+grundrisseinerge00neum	1887-01-01T00:00:00Z	1887	Neumann, Wilhelm, 1849-1919	Grundriss einer Geschichte der bildenden Künste und des Kunstgewerbes in Liv-, Est- und Kurland vom Ende des 12. bis zum Ausgang des 18. Jahrhunderts. Von W[ilhelm] Neumann	ger	getty; americana; fav-wackko1
+neumann-dst-62_202601	2026-01-01T00:00:00Z	2026	lenco heaven	LENCO HEAVEN DIY Neumann DST 62 Tsar Turntable Cartridge Making Plans	eng	opensource
+soy-un-preso-poli-tico-militar-eduardo-iturriaga-neumann_202409				SOY UN PRESO POLÍ TICO MILITAR EDUARDO ITURRIAGA NEUMANN		opensource; fav-roberto_mart_nez718
+kadison-pagenumber-watermark			Silvano Salvador	Il Problema di Kadison-Singer sulla Decomposizione di Stati in Algebre di von Neumann	ita	opensource
+konnersreuthmedi0000hyne	1932-01-01T00:00:00Z	1932	Hynek, Rudolf Maria, 1883-1952	Konnersreuth; a medical and psychological study of the case of Teresa Neumann	eng	marygrovecollege; internetarchivebooks; americana; inlibrary; printdisabled; fav-andr_lino; fav-andr_niffinegger; fav-bella1963; fav-keisha_josephs_phd; fav-shaixhulud
+juan-pablo	2022-03-07T00:00:00Z	2022	Juan Pablo Alcon Apaza	On removable singularities for solutions of Neumann problem for elliptic equations involving variable exponent		opensource; community
+franzneumannund00wanggoog	1907-01-01T00:00:00Z	1907	Albert Wangerin	Franz Neumann und Seim Wiken als Forscher und Lehrer	German	americana
+dasdenkmalredege00fran	1862-01-01T00:00:00Z	1862	Frankfurter, L	Das Denkmal : Rede, gehalten zu Beilitz, beim Aufstellen des Leichensteines der Sel. Frau Ccilie Neumann	ger	harvardlibraryjudaicadivision; regionaldigitizationmass; americana
+antiquittenausve00rudo_0	1918-01-01T00:00:00Z	1918	Rudolph Lepke's Kunst-Auctions-Haus	Antiquitäten aus verschiedenem Privatbesitz, darunter die Nachlässe des Grafen Potocki und der Frau Anna Neumann, Berlin : Gemälde, Möbel, Antiquitäten, Orientteppiche, Spitzen	ger	metmuseumlibraries; americana; fav-aucps
+soy-un-preso-poli-tico-militar-eduardo-iturriaga-neumann				SOY UN PRESO POLÍ TICO MILITAR EDUARDO ITURRIAGA NEUMANN		opensource; community; fav-roberto_mart_nez718
+directassessment00haus	1976-01-01T00:00:00Z	1976	Hauser, John R; Sloan School of Management; Urban, Glen L	Direct assessment of consumer utility functions : von Neumann-Morgenstern utility theory applied to marketing	eng	mitlibraries; blc; americana; fav-akhilgarapati; fav-angsty80
+1926-on-the-theory-of-games-of-strategy-John-von-Neumann	1926-01-01T00:00:00Z	1926	John Von Neumann (translated by Sonia Bargmann 1928)	On The Theory Of Games Of Strategy by John Von Neumann, 1926	eng	opensource; fav-jlouison92
+luiseneumanncoll1287unse				Luise Neumann Collection.	German; English	lbiarchives; LeoBaeckInstitute; americana
+therese-neumann-mystic-victim-soul-stigmatic				Therese Neumann Mystic Victim Soul Stigmatic	English	opensource; community; fav-hollyanna66
+uniformstabiliza00bart	1988-01-01T00:00:00Z	1988	Bartolomeo, Jerry	Uniform stabilization of the Euler-Bernoulli equation with active Dirichlet and non-active Neumann boundary feedback controls	eng	UFRDS; univ_florida_smathers; americana; theses-and-dissertations
+httpswww.bibliotecaamplamente.comebook-de-isaac-newton-a-john-von-neumann	2026-01-01T00:00:00Z	2026	EDITORA AMPLAMENTE	EBOOK DE ISAAC NEWTON A JOHN VON NEUMANN: UM BREVE PASSEIO PELA HISTÓRIA DA MATEMÁTICA	por	opensource
+automata-John-Von-Neumann	1960-01-01T00:00:00Z	1960	John Von Neumann	Theory of Self-Reproducing Automata by John Von Neumann	eng	opensource; fav-monad1; fav-zebras_epitome
+lifeofrightrevjo00bergiala	1884-01-01T00:00:00Z	1884	Berger, Johann, 1845-1933	Life of Right Rev. John N. Neumann, D.D., of the Congregation of the Most Holy Redeemer. Fourth bishop of Philadelphia	eng	cdl; americana; fav-christusheri; fav-j_scott
+john-von-neumann-and-norbert-wiener-heims-steve-j				John Von Neumann and Norbert Wiener - Heims	eng	opensource; fav-_superuser; fav-gerardo_gallegos_ochoa_gaog680518; fav-jahanzeb_shah
+storyoftheresene0000schi_x7d6	1947-01-01T00:00:00Z	1947	Schimberg, Albert Paul, 1885-	The story of Therese Neumann	eng	marygrovecollege; internetarchivebooks; americana; inlibrary; printdisabled; fav-andr_lino; fav-andres_sanchez55; fav-bella1963; fav-kmb57; fav-littleturtle3985; fav-santosh1168; f
+SomeMeasurabilityResultsForVonNeumann-hausdorffTriviallySymmetric			Aloysius Vrandt	Some Measurability Results for Von Neumann-Hausdorff, Trivially Symmetric, OMEGA-Conditionally Thompson Subsets	English	opensource; community
+MrsMorrowDrexelNeumannAcademyNeopoprealim	2014-03-24T00:00:00Z	2014	QB	Drexel Neumann Academy. The Upper Grages Students Were Introduced top NeoPopRealism	eng	opensource; community
+espiral_do_silencio				Espiral do silêncio é uma teoria da ciência política e comunicação de massa proposta em 1977 pela alemã Elisabeth Noelle-Neumann. Resumo desenhado.	ita	opensource; fav-johnmds7705
+chemicalworksofc00neum	1759-01-01T00:00:00Z	1759	Neumann, Caspar, 1683-1737; Lewis, William, 1708-1781; Johnston, W. (William), -1804	The chemical works of Caspar Neumann ... : abridged and methodized, with large additions : containing the later discoveries and improvements made in chemistry and the arts dependin	eng	getty; americana; fav-aghast_ghost; fav-gldnpebble; fav-pjc1901
+bub_gb_VuY5AAAAMAAJ	1907-01-01T00:00:00Z	1907	Albert Wangerin	Franz Neumann und sein Wirken als Forscher und Lehrer	German	americana
+lehrbuchderhautk00neum	1870-01-01T00:00:00Z	1870	Neumann, Isidor von, 1832-1906	Lehrbuch der Hautkrankheiten, von Dr. Isidor Neumann.	ger	university_of_illinois_urbana-champaign; americana; fav-associate-caitlin-crowley
+the-computer-and-the-brain-by-john-von-neumann	2012-06-26T00:00:00Z	2012	John von Neumann	The Computer And The Brain By John Von Neumann	eng	opensource; fav-jahanzeb_shah; fav-jlouison92; fav-kingdavid425; fav-kristiina_kompus; fav-nguy_n_ho_ng_long
+verycol00thos	1881-01-01T00:00:00Z	1881	Thos. E. Kirby & Co	A very important collection of exceptional paintings in oil and water colors, by celebrated artists of Europe and America, in part the private collection of H.L. Neumann ..	eng	johngjohnson; philadelphiamuseumofart; americana
+franzneumannund02wanggoog	1907-01-01T00:00:00Z	1907	Wangerin, A. (Albert), 1844-1933	Franz Neumann und sein Wirken als Forscher und Lehrer	ger	americana
+nachlassdeskukho00doro	1914-01-01T00:00:00Z	1914	Dorotheum (Firm)	Nachlass des k.u.k. Hof-Kunsthändlers Heinrich L. Neumann	ger	metmuseumlibraries; americana
+srihierarchicald00levi	1980-01-01T00:00:00Z	1980	Levitt, Karl N; Neumann, Peter, 1932-; Robinson, Lawrence, 1949-; United States. National Bureau of Standards; Institute for Computer Sciences and Technology	The SRI hierarchical development methodology (HDM) and its application to the development of secure software / Karl N. Levitt, Peter Neumann, Lawrence Robinson	eng	penn_state_univ; americana
+lenco-heaven-diy-neumann-dst-62-tsar-turntable-cartridge-plans	2024-01-01T00:00:00Z	2024	LENCO HEAVEN	DIY Neumann DST 62 Tsar Turntable Cartridge Plans	english-handwritten	opensource
+ThomasAdolpheQuemnerHugoNeumannDictionnairBookZZ.org				[ Thomas Adolphe Quemner, Hugo Neumann] Dictionnair( Book ZZ.org)	English	opensource; community
+lifejohnnneuman00berggoog	1884-01-01T00:00:00Z	1884	Johann Berger	Life of John N. Neumann: , of the Congregation of the Most Holy Redeemer: Fourth Bishop of ...	English	americana
+14846437.5794.emory.edu	1856-01-01T00:00:00Z	1856	Roth, Mathias, 1839-1891	Hand-book of the movement cure : a description of the positions, movements, and manipulations, used for preventive and curative purposes, according to the system of Ling & the work	eng	emory; medicalheritagelibrary; americana; medicallibrary; fav-bridgetj; fav-christina_hamilton354; fav-swswswswsw; fav-yuyantis
+neumann-kondensator-mikrofone-in-studioqualitaet-katalog-1960	1960-01-01T00:00:00Z	1960	Georg Neumann & Co. KG.	Georg Neumann & Co. KG. Kondensator-Mikrofone in Studioqualität Katalog 1960	mul	opensource; community
+book-theory-of-games-and-economic-behavior-1953-von-neumann-morgenstern				Theory Of Games And Economic Behavior [ 1953 Von Neumann & Morgenstern]	eng	opensource
+AlsoSprachVonNeumann	1971-05-15T00:00:00Z	1971	Eric Blodax	Also Sprach Von Neumann (article)	eng	opensource; community
+casacsh_000622	1935-01-01T00:00:00Z	1935	Neumann, Margaret	Magaret Neumann scrapbook	eng	centerforsacramentohistory; californiarevealed; americana; fav-amcps; fav-california_audiovisual_preservation_project; fav-jessicaleigh; fav-leroyjetson; fav-lucia_rossi281; fav-ne
+quelquesdocument00paul	1930-01-01T00:00:00Z	1930	Paul Meignant	Quelques Documents sur Therese Neumann: La Stigmatisee de Konnersreuth	fre	aphmigel; medicalheritagelibrary; americana; medicallibrary; fav-dompedro; fav-douglas_kayse
+NT_NEUMP	2016-03-01T00:00:00Z	2016		Newton Talks Oral History: An Interview with Peter Neumann, a Vietnam veteran	eng	newtonfreelibraryma; americana
+franzneumannund01wanggoog	1907-01-01T00:00:00Z	1907	Albert Wangerin	Franz Neumann und sein Wirken als Forscher und Lehrer	German	americana
+otrabalho-guarani-missioneiro-no-rio-da-prata-colonial-1640-1750-eduardo-neumann-porto-alegre-1996				OTRABALHO GUARANI MISSIONEIRO NO RIO DA PRATA COLONIAL 1640 1750 Eduardo Neumann PORTO ALEGRE 1996		opensource
+venerablejohnneu0000curl	1952-01-01T00:00:00Z	1952	Curley, Michael J. (Michael Joseph), 1900-1972	Venerable John Neumann, C. SS. R., fourth bishop of Philadelphia	eng	marygrovecollege; internetarchivebooks; americana; inlibrary; printdisabled; fav-jbecker33; fav-nathanneuman
+alsgefangene_202005			eleonora45	Margarete Buber-Neumann: Als Gefangene bei Stalin und Hitler	ger	opensource; community
+gustav-neumann-ssp-212			Gustav Neumann	Gustav Neumann SSp212	ger	opensource
+CAT31338177	1932-01-01T00:00:00Z	1932	Floral Acre Gardens (Great Kills, Staten Island, N.Y.); Henry G. Gilbert Nursery and Seed Trade Catalog Collection	Floral Acre dahlias / Floral Acre Gardens ; Anton J. Neumann, prop.	eng	usda-nurseryandseedcatalog; usdanationalagriculturallibrary; biodiversity; fedlink; americana
+die-reden-gotamo-buddhos.-mittlere-sammlung-zweiter-band-by-karl-eugen-neumann				Die Reden Gotamo Buddhos. Mittlere Sammlung, Zweiter Band By Karl Eugen Neumann	ger	opensource
+stalinhitlerm	2020-05-11T00:00:00Z	2020	eleonora45	Margarete Buber-Neumann: Sztálin és Hitler fogságában		opensource; community
+Ampere-NeumannElectrodynamicsOfMetals	1994-01-01T00:00:00Z	1994	Graneau, Peter	Ampere-Neumann electrodynamics of metals	eng	opensource; community; fav-callum153; fav-david_parker352; fav-eth369; fav-virus_media
+finitedifference00frie	1962-01-01T00:00:00Z	1962	Friedrichs, Kurt Otto	A finite difference scheme for the Neumann and the Dirichlet problem	eng	newyorkuniversity; americana
+ElisabethNoelleNeumannAsNaziPropagandistInUSNewspapers1938	2016-02-22T00:00:00Z	2016	Ulrich Maichle	Elisabeth Noelle Neumann As Nazi Propagandist In US Newspapers, 1938	eng	opensource; community
+venerablejohnneu00curl	1952-01-01T00:00:00Z	1952	Curley, Michael Joseph, 1900-	Venerable John Neumann, C.SS.R. : fourth bishop of Philadelphia	eng	Princeton; americana; fav-thomaspodonnell93; fav-trendyweb1
+CatechismByVen.JohnNeumann				Catechism By Ven. John Neumann		opensource; community; fav-bella1963; fav-dannygrd; fav-luke_m_ironside
+robertneumanncol1426unse				Robert Neumann Collection	German; English	lbiarchives; LeoBaeckInstitute; americana
+the-rule-of-law-under-siege-selected-essays-of-franz-l.-neumann-and-otto-kirchhe				The Rule Of Law Under Siege Selected Essays Of Franz L. Neumann And Otto Kirchheimer	eng	opensource; community; fav-aureliamack; fav-carlos_henrique_marques; fav-gregorybrown
+Konnersreuth1952	1952-01-01T00:00:00Z	1952	Erwein von Aretin	Therese Neumann. Die stigmatisierte Sühneseele von Konnersreuth	ger	opensource
+alfredneumann				Alfred Neumann Collection	ger; eng	LeoBaeckInstitute; americana; fav-marccic
+balthasarneumann00kell	1896-01-01T00:00:00Z	1896	Keller, Joseph	Balthasar Neumann ... eine Studie zur Kunstgeschichte des 18. Jahrhunderts	ger	getty; americana; fav-colognianguy; fav-helgiklimov; fav-weareyoung5833
+earthquakeinvest00neum	1962-01-01T00:00:00Z	1962	Neumann, Frank; U.S. Coast and Geodetic Survey	Earthquake investigation in the United States / [prepared originally by Frank Neumann]	eng	penn_state_univ; americana
+CatechismByVen.JohnNeumann_201506				Catechism By Ven. John Neumann		opensource; community; fav-rose_w; fav-stpiusx; fav-wildflower12
+elisabeth-noelle-neumann-and-the-cia-1963	2021-03-18T00:00:00Z	2021	Hunter594	Elisabeth Noelle Neumann And The CIA, 1963	eng	opensource; community
+john-von-neumann-according-to-systems-neuromechanics				John Von Neumann According To Systems Neuromechanics		opensource
+churchisraelroma00fred	1990-01-01T00:00:00Z	1990	Frederick Neumann Symposium on Theological Interpretation of Scripture (3rd : 1989 : Princeton, N. J.)	The Church and Israel : Romans 9-11 : the 1989 Frederick Neumann Symposium on the Theological Interpretation of Scripture	eng	Princeton; americana; fav-seunghwan_kim
+lebenundwirkende00berg	1883-01-01T00:00:00Z	1883	Berger, Johann, 1845-1933	Leben und Wirken des hochseligen Johannes Nep. Neumann : aus der Congregation des allerh. Erlösers, Bischofs von Philadelphia.	ger	bostonuniversiyschooloftheology; blc; americana
+hopeforkingdomre00fred	1994-01-01T00:00:00Z	1994	Frederick Neumann Symposium on Theological Interpretation of Scripture (1993 : Princeton, N.J.)	Hope for the kingdom and responsibility for the world : the 1993 Frederick Neumann Symposium on the Theological Interpretation of Scripture	eng	Princeton; americana; fav-gane_life; fav-manayprasadkushwaha20; fav-stevexx
+astrid-neumann-diskografi			René Aagaard	Astrid Neumann Diskografi	dan	opensource

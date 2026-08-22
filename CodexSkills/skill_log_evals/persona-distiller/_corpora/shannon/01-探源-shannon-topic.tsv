@@ -1,0 +1,103 @@
+# numFound=615 rows=100 query=title:("mathematical theory of communication" OR "shannon 1948" OR "bell system technical journal" OR "shannon information") AND mediatype:texts
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+systembelltechni2122amerrich	1922-01-01T00:00:00Z	1922	American Telephone and Telegraph Company	The Bell System technical journal	eng	prelinger_library; americana; patron-library-collection
+bitsavers_BellSystemJV31N03195205_9411506	1952-05-01T00:00:00Z	1952		magazine :: Bell System Technical Journal :: BSTJ V31N03 195205	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV53N06197407_9345846	1974-07-01T00:00:00Z	1974		magazine :: Bell System Technical Journal :: BSTJ V53N06 197407	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV54N05197505_7854614	1975-05-01T00:00:00Z	1975		magazine :: Bell System Technical Journal :: BSTJ V54N05 197505	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV55N07197609_6577385	1976-09-01T00:00:00Z	1976		magazine :: Bell System Technical Journal :: BSTJ V55N07 197609	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV39N02196003_7034335	1960-03-01T00:00:00Z	1960		magazine :: Bell System Technical Journal :: BSTJ V39N02 196003	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV39N03196005_13774783	1960-05-01T00:00:00Z	1960		magazine :: Bell System Technical Journal :: BSTJ V39N03 196005	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV46N04196704_6114655	1967-04-01T00:00:00Z	1967		magazine :: Bell System Technical Journal :: BSTJ V46N04 196704	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV49N07197009_18179045	1970-09-01T00:00:00Z	1970		magazine :: Bell System Technical Journal :: BSTJ V49N07 197009	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV62N10198312Part2_7069827				magazine :: Bell System Technical Journal :: BSTJ V62N10 198312 Part 2	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV58N06197907Part2_8995200				magazine :: Bell System Technical Journal :: BSTJ V58N06 197907 Part 2	eng	bitsavers_bstj; bitsavers
+bwb_S0-BSU-636	1949-01-01T00:00:00Z	1949	Claude E. Shannon ,Warren Weaver	The mathematical theory of communication	eng	internetarchivebooks; printdisabled; inlibrary; fav-charles_meissner
+sim_att-technical-journal_1967_46_index	1967-01-01T00:00:00Z	1967		The Bell System Technical Journal 1967: Vol 46 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1970_49_index_0	1970-01-01T00:00:00Z	1970		The Bell System Technical Journal 1970: Vol 49 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1976_55_index	1976-01-01T00:00:00Z	1976		The Bell System Technical Journal 1976: Vol 55 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1931-07_10_3	1931-07-01T00:00:00Z	1931		The Bell System Technical Journal 1931-07: Vol 10 Iss 3	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1932-10_11_4	1932-10-01T00:00:00Z	1932		The Bell System Technical Journal 1932-10: Vol 11 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1942-01_21_1	1942-01-01T00:00:00Z	1942		The Bell System Technical Journal 1942-01: Vol 21 Iss 1	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1950-01_29_1	1950-01-01T00:00:00Z	1950		The Bell System Technical Journal 1950-01: Vol 29 Iss 1	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1950-07_29_3	1950-07-01T00:00:00Z	1950		The Bell System Technical Journal 1950-07: Vol 29 Iss 3	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1952-03_31_2	1952-03-01T00:00:00Z	1952		The Bell System Technical Journal 1952-03: Vol 31 Iss 2	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_the-bell-system-technical-journal_1962_41_index	1962-01-01T00:00:00Z	1962		The Bell System Technical Journal 1962: Vol 41 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1926_5_index	1926-01-01T00:00:00Z	1926		The Bell System Technical Journal 1926: Vol 5 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1927-01_6_1	1927-01-01T00:00:00Z	1927		The Bell System Technical Journal 1927-01: Vol 6 Iss 1	English	pub_att-technical-journal; sim_microfilm; periodicals
+bitsavers_BellSystemJV62N03198303Part1_5931881				magazine :: Bell System Technical Journal :: BSTJ V62N03 198303 Part 1	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV62N04198304Part1_7306327				magazine :: Bell System Technical Journal :: BSTJ V62N04 198304 Part 1	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV30N02195104_15439976	1951-04-01T00:00:00Z	1951		magazine :: Bell System Technical Journal :: BSTJ V30N02 195104	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV51N08197210_12849567	1972-10-01T00:00:00Z	1972		magazine :: Bell System Technical Journal :: BSTJ V51N08 197210	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV56N06197707_6391602	1977-07-01T00:00:00Z	1977		magazine :: Bell System Technical Journal :: BSTJ V56N06 197707	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV37N01195801_12441269	1958-01-01T00:00:00Z	1958		magazine :: Bell System Technical Journal :: BSTJ V37N01 195801	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV37N04195807_9859631	1958-07-01T00:00:00Z	1958		magazine :: Bell System Technical Journal :: BSTJ V37N04 195807	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV48N03196903_11955886	1969-03-01T00:00:00Z	1969		magazine :: Bell System Technical Journal :: BSTJ V48N03 196903	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV49N01197001_6271212	1970-01-01T00:00:00Z	1970		magazine :: Bell System Technical Journal :: BSTJ V49N01 197001	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV49N08197010_13962032	1970-10-01T00:00:00Z	1970		magazine :: Bell System Technical Journal :: BSTJ V49N08 197010	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV50N02197102_26113876	1971-02-01T00:00:00Z	1971		magazine :: Bell System Technical Journal :: BSTJ V50N02 197102	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV62N07198309Part1_7741415				magazine :: Bell System Technical Journal :: BSTJ V62N07 198309 Part 1	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV63N05198405_6781437	1984-05-01T00:00:00Z	1984		magazine :: Bell System Technical Journal :: BSTJ V63N05 198405	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV64N06198507Part1_6543240				magazine :: Bell System Technical Journal :: BSTJ V64N06 198507 Part 1	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV46N01196701_13103537	1967-01-01T00:00:00Z	1967		magazine :: Bell System Technical Journal :: BSTJ V46N01 196701	eng	bitsavers_bstj; bitsavers
+sim_att-technical-journal_1950-10_29_4	1950-10-01T00:00:00Z	1950		The Bell System Technical Journal 1950-10: Vol 29 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1951-10_30_4	1951-10-01T00:00:00Z	1951		The Bell System Technical Journal 1951-10: Vol 30 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1955-03_34_2	1955-03-01T00:00:00Z	1955		The Bell System Technical Journal 1955-03: Vol 34 Iss 2	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1958-03_37_2	1958-03-01T00:00:00Z	1958		The Bell System Technical Journal 1958-03: Vol 37 Iss 2	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1959_38_index	1959-01-01T00:00:00Z	1959		The Bell System Technical Journal 1959: Vol 38 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1960_39_index	1960-01-01T00:00:00Z	1960		The Bell System Technical Journal 1960: Vol 39 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1961-07_40_4	1961-07-01T00:00:00Z	1961		The Bell System Technical Journal 1961-07: Vol 40 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1971_50_index_0	1971-01-01T00:00:00Z	1971		The Bell System Technical Journal 1971: Vol 50 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1930-10_9_4	1930-10-01T00:00:00Z	1930		The Bell System Technical Journal 1930-10: Vol 9 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1932-01_11_1	1932-01-01T00:00:00Z	1932		The Bell System Technical Journal 1932-01: Vol 11 Iss 1	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1933-01_12_1	1933-01-01T00:00:00Z	1933		The Bell System Technical Journal 1933-01: Vol 12 Iss 1	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1944-07_23_3	1944-07-01T00:00:00Z	1944		The Bell System Technical Journal 1944-07: Vol 23 Iss 3	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1947-04_26_2	1947-04-01T00:00:00Z	1947		The Bell System Technical Journal 1947-04: Vol 26 Iss 2	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1947-10_26_4	1947-10-01T00:00:00Z	1947		The Bell System Technical Journal 1947-10: Vol 26 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1948-10_27_4	1948-10-01T00:00:00Z	1948		The Bell System Technical Journal 1948-10: Vol 27 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals; fav-buffalobill666; fav-relevantusername2020
+sim_att-technical-journal_1950_29_index	1950-01-01T00:00:00Z	1950		The Bell System Technical Journal 1950: Vol 29 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1952-09_31_5	1952-09-01T00:00:00Z	1952		The Bell System Technical Journal 1952-09: Vol 31 Iss 5	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1953-07_32_4	1953-07-01T00:00:00Z	1953		The Bell System Technical Journal 1953-07: Vol 32 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1954-07_33_4	1954-07-01T00:00:00Z	1954		The Bell System Technical Journal 1954-07: Vol 33 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_the-bell-system-technical-journal_1960-03_39_2	1960-03-01T00:00:00Z	1960		The Bell System Technical Journal 1960-03: Vol 39 Iss 2	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_the-bell-system-technical-journal_1960-11_39_6	1960-11-01T00:00:00Z	1960		The Bell System Technical Journal 1960-11: Vol 39 Iss 6	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1932-04_11_2	1932-04-01T00:00:00Z	1932		The Bell System Technical Journal 1932-04: Vol 11 Iss 2	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1935-07_14_3	1935-07-01T00:00:00Z	1935		The Bell System Technical Journal 1935-07: Vol 14 Iss 3	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1942_21_index	1942-01-01T00:00:00Z	1942		The Bell System Technical Journal 1942: Vol 21 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+bitsavers_BellSystemJV50N06197107_15547399	1971-07-01T00:00:00Z	1971		magazine :: Bell System Technical Journal :: BSTJ V50N06 197107	eng	bitsavers_bstj; bitsavers
+sim_att-technical-journal_1951_30_index	1951-01-01T00:00:00Z	1951		The Bell System Technical Journal 1951: Vol 30 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1957-07_36_4	1957-07-01T00:00:00Z	1957		The Bell System Technical Journal 1957-07: Vol 36 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1977_56_index-contents	1977-01-01T00:00:00Z	1977		The Bell System Technical Journal 1977: Vol 56 Index & Table of Contents	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_the-bell-system-technical-journal_1960-09_39_5	1960-09-01T00:00:00Z	1960		The Bell System Technical Journal 1960-09: Vol 39 Iss 5	English	pub_att-technical-journal; sim_microfilm; periodicals; fav-noah_bolanowski
+sim_att-technical-journal_1934-01_13_1	1934-01-01T00:00:00Z	1934		The Bell System Technical Journal 1934-01: Vol 13 Iss 1	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1934-07_13_3	1934-07-01T00:00:00Z	1934		The Bell System Technical Journal 1934-07: Vol 13 Iss 3	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1934-10_13_4	1934-10-01T00:00:00Z	1934		The Bell System Technical Journal 1934-10: Vol 13 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1938-07_17_3	1938-07-01T00:00:00Z	1938		The Bell System Technical Journal 1938-07: Vol 17 Iss 3	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1941-10_20_4	1941-10-01T00:00:00Z	1941		The Bell System Technical Journal 1941-10: Vol 20 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1948_27_index	1948-01-01T00:00:00Z	1948		The Bell System Technical Journal 1948: Vol 27 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1925-01_4_1	1925-01-01T00:00:00Z	1925		The Bell System Technical Journal 1925-01: Vol 4 Iss 1	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1927-04_6_2	1927-04-01T00:00:00Z	1927		The Bell System Technical Journal 1927-04: Vol 6 Iss 2	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_the-bell-system-technical-journal_1960-05_39_3	1960-05-01T00:00:00Z	1960		The Bell System Technical Journal 1960-05: Vol 39 Iss 3	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1929-01_8_1	1929-01-01T00:00:00Z	1929		The Bell System Technical Journal 1929-01: Vol 8 Iss 1	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1933-07_12_3	1933-07-01T00:00:00Z	1933		The Bell System Technical Journal 1933-07: Vol 12 Iss 3	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1933-10_12_4	1933-10-01T00:00:00Z	1933		The Bell System Technical Journal 1933-10: Vol 12 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1934_13_index	1934-01-01T00:00:00Z	1934		The Bell System Technical Journal 1934: Vol 13 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1958-09_37_5	1958-09-01T00:00:00Z	1958		The Bell System Technical Journal 1958-09: Vol 37 Iss 5	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1960-09_39_5	1960-09-01T00:00:00Z	1960		The Bell System Technical Journal 1960-09: Vol 39 Iss 5	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1970_49_index	1970-01-01T00:00:00Z	1970		The Bell System Technical Journal 1970: Vol 49 Index	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1981_60_index-contents	1981-01-01T00:00:00Z	1981		The Bell System Technical Journal 1981: Vol 60 Index & Table of Contents	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1939-04_18_2	1939-04-01T00:00:00Z	1939		The Bell System Technical Journal 1939-04: Vol 18 Iss 2	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1941-01_20_1	1941-01-01T00:00:00Z	1941		The Bell System Technical Journal 1941-01: Vol 20 Iss 1	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1941-07_20_3	1941-07-01T00:00:00Z	1941		The Bell System Technical Journal 1941-07: Vol 20 Iss 3	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1944-04_23_2	1944-04-01T00:00:00Z	1944		The Bell System Technical Journal 1944-04: Vol 23 Iss 2	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1948-04_27_2	1948-04-01T00:00:00Z	1948		The Bell System Technical Journal 1948-04: Vol 27 Iss 2	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1949-10_28_4	1949-10-01T00:00:00Z	1949		The Bell System Technical Journal 1949-10: Vol 28 Iss 4	English	pub_att-technical-journal; sim_microfilm; periodicals
+sim_att-technical-journal_1926-07_5_3	1926-07-01T00:00:00Z	1926		The Bell System Technical Journal 1926-07: Vol 5 Iss 3	English	pub_att-technical-journal; sim_microfilm; periodicals
+bitsavers_BellSystemJV53N01197401_7675318	1974-01-01T00:00:00Z	1974		magazine :: Bell System Technical Journal :: BSTJ V53N01 197401	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV55N02197602_5519637	1976-02-01T00:00:00Z	1976		magazine :: Bell System Technical Journal :: BSTJ V55N02 197602	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV56N07197709_17132591	1977-09-01T00:00:00Z	1977		magazine :: Bell System Technical Journal :: BSTJ V56N07 197709	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV34N04195507_8752974	1955-07-01T00:00:00Z	1955		magazine :: Bell System Technical Journal :: BSTJ V34N04 195507	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV41N05196209_8619438	1962-09-01T00:00:00Z	1962		magazine :: Bell System Technical Journal :: BSTJ V41N05 196209	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV43N03196405_12988042	1964-05-01T00:00:00Z	1964		magazine :: Bell System Technical Journal :: BSTJ V43N03 196405	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV45N04196604_6481289	1966-04-01T00:00:00Z	1966		magazine :: Bell System Technical Journal :: BSTJ V45N04 196604	eng	bitsavers_bstj; bitsavers
+bitsavers_BellSystemJV46N06196707_9982797	1967-07-01T00:00:00Z	1967		magazine :: Bell System Technical Journal :: BSTJ V46N06 196707	eng	bitsavers_bstj; bitsavers

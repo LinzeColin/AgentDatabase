@@ -1,0 +1,7 @@
+# numFound=4 rows=4 query=creator:"Shannon, Claude" AND mediatype:texts
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+claudeelwoodshan0000shan	1993-01-01T00:00:00Z	1993	Shannon, Claude Elwood, 1916-2001	Claude Elwood Shannon : collected papers	eng	internetarchivebooks; printdisabled; fav-baha_el_amine; fav-blackaller; fav-chonkyapple; fav-codoprotostar; fav-drikaa; fav-finch777; fav-flibdy; fav-hazel_dobkins; fav-jacquesjame
+mathematicaltheo0000shan	1964-01-01T00:00:00Z	1964	Shannon, Claude E. and Weaver, Warren	The Mathematical Theory of Communication	eng	internetarchivebooks; inlibrary; printdisabled; fav-aknot520; fav-benjamin_castillo183; fav-bill_davenport792; fav-blackaller; fav-cartebiblioarchives; fav-edwadjw; fav-greisch; fa
+mathematicaltheo00shan_0			Shannon, Claude E.; Weaver, Warren	The Mathematical Theory of Communication	eng	dlarc; americana; inlibrary; printdisabled; dlarc-library; fav-ilias_a; fav-khoshmaram1
+mathematicaltheo00shan	1949-01-01T00:00:00Z	1949	Shannon, Claude Elwood, 1916-2001; Weaver, Warren, 1894-1978	The mathematical theory of communication	eng	internetarchivebooks; americana; inlibrary; printdisabled; fav-aga97markiewicz; fav-aknot520; fav-alberto_rom_n; fav-allison_lenters; fav-ambassadorpineapple; fav-babulous; fav-boo
