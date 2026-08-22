@@ -3912,9 +3912,22 @@
     "elasticalresearc00sainuoft（Toronto 扫本）与 elasticalresear00saingoog（Google 扫本）为同一部作品另一扫本，不能当独立一手"
    ],
    "处置类": "① 一手规模不够（quick 需 9 部互异作品，IA 实际可靠一手仅 7 部；成名 1855 扭转论/1871 浅水方程无独立全文）"
+  },
+  {
+   "name": "Henry Tresca",
+   "family_zh": "材料建工师",
+   "deferred_at": "2026-08-22",
+   "reason": "quick 档需 8 train + 1 holdout = 9 部互异一手。archive.org 可得的 Tresca（Henri Édouard Tresca 1814-1885）一手仅 5 部互异作品：Complément au Mémoire sur l'écoulement des corps solides 1869（76.7K 词，核心塑性/固体流动）、Visite à l'exposition universelle 1855（289K 词，博览会报告非工程核心）、Leçons de mécanique pratique 1860-61 两卷（Morin 与 Tresca 合著讲义）、Traité élémentaire de géométrie descriptive 1852（Tresca 与 Olivier 合著）。其成名判据——1864-72 年《Mémoire sur l'écoulement des corps solides》（屈服准则/最大剪应力理论、vis plastica）——在 IA 无独立全文，仅 Complément 补篇在；核心一手缺主体。",
+   "probed_and_failed": [
+    "creator:'Tresca, Henri' 3 条（Visite×2、US Board Report 1881 为合著）",
+    "creator:'Tresca' AND mediatype:texts 20 条：本尊 5 部 + 同名者（Francesco Maria 1717 意大利诗人、Carlo Tresca FBI、Lake Tresca Nurseries、Stefano/Michael/Cesare/O. Tresca 现代）",
+    "title:'écoulement des corps solides'/'Tresca' 21 条：FBI/Court/Nursery/NASA 等无关，无新增一手",
+    "1864-72 Mémoire sur l'écoulement des corps solides 主体在 IA 无全文（仅 Complément 1869 补篇在）"
+   ],
+   "处置类": "① 一手规模不够（IA 仅 5 部互异一手，quick 需 9；成名 1864-72 回忆录主体缺失，仅补篇在）"
   }
  ],
- "total": 194,
+ "total": 195,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。　★ 2026-08-13 实测又漂了：写着 168、实有 187（差 19 条），**注释写明「不手写」并不能阻止它漂**——已落成判据 `check_deferred_list.py` 每次现算。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
