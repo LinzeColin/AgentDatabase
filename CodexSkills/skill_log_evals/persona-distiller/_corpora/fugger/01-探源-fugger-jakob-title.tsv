@@ -1,0 +1,7 @@
+# numFound=4 rows=4 query=title:("Jakob Fugger") AND mediatype:texts
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+groesgeldjakobfu0000unse	1986-01-01T00:00:00Z	1986	Frederik Hetmann	Großes Geld. Jakob Fugger und seine Zeit	ger	internetarchivebooks; printdisabled
+derreichstemannd0000stei	2016-01-01T00:00:00Z	2016	Steinmetz, Greg Verfasser	Der reichste Mann der Weltgeschichte Leben und Werk von Jakob Fugger	ger	internetarchivebooks; inlibrary; printdisabled; fav-ivstvs; fav-mmos
+hansjakobfugger100maas	1922-01-01T00:00:00Z	1922	Maasen, Wilhelm, 1888-1916; Ruf, Paul, 1890-1964	Hans Jakob Fugger (1516-1575) ein Beitrag zur Geschichte des 16. Jahrhunderts	ger	robarts; toronto; university_of_toronto
+hartig-die-grundung-der-munchener-hofbibliothek-durch-albrecht-v.-und-johann-jakob-fugger	1917-01-01T00:00:00Z	1917	Hartig, Otto, 1876- ed	Die Gründung Der Münchener Hofbibliothek Durch Albrecht V. Und Johann Jakob Fugger	ger	booksbylanguage_german; booksbylanguage

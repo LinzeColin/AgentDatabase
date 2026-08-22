@@ -1,11 +1,11 @@
 {
- "round": 15,
- "updated_at": "2026-08-23T07:10Z",
+ "round": 16,
+ "updated_at": "2026-08-22T20:50Z",
  "time_band": "valley-0000-0800",
  "people": 126,
  "current_person": null,
- "stage": "T1 软件开发师族 #73-75 探源延后（Turing/Shannon/von Neumann 一手版权受阻，延后名单→199）；族内 #76-100 多为 20 世纪版权人物；转向其他族",
- "next": "投资资本师族 #222 Jacob Fugger（族内 REG 19 人证明一手可做；Fugger 若稀缺则试 #223 Rothschild）",
+ "stage": "Fugger(#222)/Mayer Amschel Rothschild(#223) 探源延后（一手 0 份本尊著作，延后名单→201）；转向族内一手充足者",
+ "next": "投资资本师族 #225 John Law（一手≥8 份互异：Money and Trade 1705+1750、Oeuvres 1790、Present State of French Revenues 1720、Full and Impartial Account of Mississippi 1720、Aanmerkingen 1721、Économistes financiers 1843 集等；辅以 Wood 1824/Hough 1902/Historical Study 1887 二手 PD）",
  "threads": {
   "T1": {
    "branch": "main",
@@ -27,11 +27,12 @@
   }
  },
  "p0_queue": [
-  "Eiffel(wip-eiffel-142)已做未出货，先查卡点"
+  "Eiffel(wip-eiffel-142)已做未出货，先查卡点",
+  "John Law #225 全流程（探源→curate→fetch→classify→lanes→研究→claims→10模型文档→32cases→盲判→release→register 127）"
  ],
  "p0_done": [],
  "p0_closed": [],
- "note": "Telford 盲判双席（seat-D/seat-E）128 行、六门全过；release 修复 3 项（claims 拼写、EXCLUDE、65 引文坐标）；基线 warning 经 --acknowledge-disclosure 记录。",
+ "note": "Fugger+Rothschild 延后（①）：探源 TSV 已入 _corpora/fugger|rothschild|johnlaw；T1 分片 222/223→DEF；下一位 #225 John Law 一手充分。",
  "cost_baseline": {
   "flash": {
    "calls": 934,
