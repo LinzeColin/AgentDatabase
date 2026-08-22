@@ -288,6 +288,13 @@ EXCLUDE = {
     #   ⑤ 现代 Navier-Stokes 会议论文集（1980 印刷受限）→ Approximation Methods for Navier-Stokes
     "navier": ["Pierre Toussaint", "Toussaint-Claude", "Claude-Bernard", "Zmirou-Navier",
                "Approximation Methods for Navier-Stokes"],
+    # ★ Carl von Bach #50：creator 池 46 条里 **38 条是 C.P.E. Bach（1714-1788 音乐家）**，
+    #   `creator:"Bach, Carl"` 会把 `Bach, Carl Philipp Emanuel` 全部收进来。
+    #   本尊署名形态：`Bach, Carl von, 1847-`（elasticittundfe*）／
+    #   `Carl von Bach, Carl Bach`（diewasserrder* Die Wasserräder）。
+    #   REQUIRE 钉住 bach+von；CPE 一系（Carl Philipp Emanuel）不含 von → 天然挡掉。
+    #   ★ 仍把 CPE 姓名串列进 EXCLUDE 兜底（防止个别条目 creator 段内混排）。
+    "bach": ["Philipp Emanuel", "Johann Sebastian", "August Wilhelm"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -461,6 +468,10 @@ REQUIRE = {
     #   `Claude Navier`。REQUIRE 钉住 navier；同名者（Pierre Toussaint 医生、Toussaint-Claude-Nicolas、
     #   Claude-Bernard 贵族、Zmirou-Navier 现代）由 EXCLUDE 排。
     "navier": [["navier"]],
+    # ★ Carl von Bach #50：目标署名形态 `Bach, Carl von, 1847-`／`Carl von Bach, Carl Bach`。
+    #   REQUIRE 钉住 bach+von（词元匹配，不认名序）；CPE Bach（Carl Philipp Emanuel）
+    #   不含 von → 天然挡掉；Johann Sebastian / August Wilhelm 同样不含 von。
+    "bach": [["bach", "von"]],
 }
 
 

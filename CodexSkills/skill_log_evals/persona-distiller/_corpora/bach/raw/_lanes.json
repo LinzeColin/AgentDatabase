@@ -1,0 +1,56 @@
+{
+  "lanes": 1,
+  "去掉纸面道后": 1,
+  "逐道份数": {
+    "writings": 8,
+    "conversations": 0,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 0,
+    "external": 0
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "diemaschinenele00bachgoog",
+      "道": "writings",
+      "title": "Die maschinenelemente : Ihre Berechnung und Konstruktion mit Rücksich"
+    },
+    {
+      "identifier": "diemaschinenele01bachgoog",
+      "道": "writings",
+      "title": "Die maschinenelemente : Ihre Berechnung und Konstruktion mit Rücksich"
+    },
+    {
+      "identifier": "diewasserrder00bachgoog",
+      "道": "writings",
+      "title": "Die Wasserräder"
+    },
+    {
+      "identifier": "elasticittundfe00bachgoog",
+      "道": "writings",
+      "title": "Elasticität und festigkeit : die für technik wichtigsten sätze und "
+    },
+    {
+      "identifier": "elasticittundfe01bachgoog",
+      "道": "writings",
+      "title": "Elasticität und festigkeit : die für technik wichtigsten sätze und "
+    },
+    {
+      "identifier": "elasticittundfe02bachgoog",
+      "道": "writings",
+      "title": "Elasticität und Festigkeit: Die für die Technik wichtigsten Sätze und "
+    },
+    {
+      "identifier": "elasticittundfe03bachgoog",
+      "道": "writings",
+      "title": "Elasticität und Festigkeit. Die für die Technik wichtigsten Sätze und "
+    },
+    {
+      "identifier": "festigkeitseige00baumgoog",
+      "道": "writings",
+      "title": "Festigkeitseigenschaften und Gefügebilder der Konstruktions-materialie"
+    }
+  ]
+}

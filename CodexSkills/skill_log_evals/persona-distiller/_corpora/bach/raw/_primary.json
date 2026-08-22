@@ -1,0 +1,75 @@
+{
+  "总数": 7,
+  "计数": {
+    "一手": 7,
+    "二手": 0,
+    "需人判": 0
+  },
+  "一手占比下界": 1.0,
+  "一手占比上界": 1.0,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "bach"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "diemaschinenele00bachgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die maschinenelemente : Ihre Berechnung und Konstruktion mit Rücksicht auf die ",
+      "creator": "Bach, C. (Carl von), 1847-1931",
+      "words": 302117
+    },
+    {
+      "identifier": "diemaschinenele01bachgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die maschinenelemente : Ihre Berechnung und Konstruktion mit Rücksicht auf die ",
+      "creator": "Bach, C. (Carl von), 1847-1931",
+      "words": 235909
+    },
+    {
+      "identifier": "diewasserrder00bachgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die Wasserräder",
+      "creator": "Carl von Bach,  Carl Bach",
+      "words": 80024
+    },
+    {
+      "identifier": "elasticittundfe00bachgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Elasticität und festigkeit : die für technik wichtigsten sätze und deren erfa",
+      "creator": "Bach, C. (Carl von), 1847-1931",
+      "words": 145064
+    },
+    {
+      "identifier": "elasticittundfe01bachgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Elasticität und festigkeit : die für technik wichtigsten sätze und deren erfa",
+      "creator": "Bach, C. (Carl von), 1847-1931",
+      "words": 152796
+    },
+    {
+      "identifier": "elasticittundfe02bachgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Elasticität und Festigkeit: Die für die Technik wichtigsten Sätze und deren erfa",
+      "creator": "Carl Bach",
+      "words": 93912
+    },
+    {
+      "identifier": "elasticittundfe03bachgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Elasticität und Festigkeit. Die für die Technik wichtigsten Sätze und deren erfa",
+      "creator": "Bach, Carl von, 1847-",
+      "words": 126519
+    }
+  ]
+}

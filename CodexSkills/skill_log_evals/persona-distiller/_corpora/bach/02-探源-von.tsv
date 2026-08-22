@@ -1,0 +1,8 @@
+# numFound=5 rows=5 query=creator:("Bach, Carl von" OR "Bach, C. (Carl")
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+elasticittundfe00bachgoog	1902-01-01T00:00:00Z	1902	Bach, C. (Carl von), 1847-1931	Elasticität und festigkeit : die für technik wichtigsten sätze und deren erfahrungsmässige grundlage	ger	americana
+elasticittundfe01bachgoog	1902-01-01T00:00:00Z	1902	Bach, C. (Carl von), 1847-1931	Elasticität und festigkeit : die für technik wichtigsten sätze und deren erfahrungsmässige grundlage	ger	americana
+elasticittundfe03bachgoog	1898-01-01T00:00:00Z	1898	Bach, Carl von, 1847-	Elasticität und Festigkeit. Die für die Technik wichtigsten Sätze und deren erfahrungsmässige Grundlage	ger	americana
+diemaschinenele00bachgoog	1881-01-01T00:00:00Z	1881	Bach, C. (Carl von), 1847-1931	Die maschinenelemente : Ihre Berechnung und Konstruktion mit Rücksicht auf die neueren Versuche	ger	americana; fav-negrete58
+diemaschinenele01bachgoog	1881-01-01T00:00:00Z	1881	Bach, C. (Carl von), 1847-1931	Die maschinenelemente : Ihre Berechnung und Konstruktion mit Rücksicht auf die neueren Versuche	ger	americana; fav-negrete58
