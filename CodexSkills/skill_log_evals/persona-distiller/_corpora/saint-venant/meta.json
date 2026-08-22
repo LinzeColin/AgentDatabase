@@ -1,0 +1,83 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "Q1847823",
+  "consent_authority": null,
+  "created_at": "2026-08-22T00:29:53Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "zh-CN",
+  "model_version": "0.1.0-draft",
+  "name": "Adhémar Barré de Saint-Venant",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "弹性理论与材料强度（Saint-Venant 原理、扭转、梁）",
+        "水力学与明渠/管道流动建模（圣维南方程组）",
+        "结构工程计算（桥梁/道路/隧道）",
+        "力学原理与运动学教学（力学基础讲义）",
+        "工程师职业史与工程圣徒史（Saint-Benezet）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q1847823",
+          "type": "wikidata"
+        },
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Barr%C3%A9+de+Saint-Venant%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=100&output=json",
+          "type": "archive.org"
+        }
+      ],
+      "canonical_name": "Adhémar Barré de Saint-Venant",
+      "distinguishing_basis": "Wikidata Q1847823（French mechanical engineer 1797-1886）。archive.org creator 形态 `Barré de Saint-Venant, Adhémar Jean Claude, 1797-1886`／`Adhémar Jean Claude Barré de Saint-Venant`／`M. de Saint-Venant` 均指本尊。同名者一律排除：Jean Barré de Saint-Venant (1737-1810) 农学家（其父，Des colonies modernes 1802）、Guillaume Saint-Venant（1790s 巴黎革命小册子出版商）、Saint-Venant B. D.（NASA 1965 现代）。注意 1864 版 Navier《Résumé des leçons》creator 同时含 Navier 与 Saint-Venant——那部以 Navier 正文为主，圣维南是校订者，作为其一手需谨慎。",
+      "evidence_level": "high",
+      "identity_category": "材料建工师",
+      "key_capabilities": [
+        "Saint-Venant 原理与扭转理论（材料建工师族核心）",
+        "弹性体方程的推导与数值处理",
+        "浅水流动方程组（圣维南方程）",
+        "力学原理的运动学奠基",
+        "工程力学经典著作校订与注疏"
+      ],
+      "label": "A",
+      "occupation_or_role": "French mechanical engineer and mathematician; 弹性理论（Saint-Venant 原理、扭转理论）、流体力学、圣维南方程组；Corps des ponts et chaussées；Navier 讲义校订者",
+      "professional_background": "Adhémar Jean Claude Barré de Saint-Venant（1797-08-23 生于 Villiers-en-Bière，1886-01-06 卒于 Saint-Ouen）是法国力学工程师与数学家。École Polytechnique（1813 入学）与 École des Ponts et Chaussées 毕业；长期在 Corps des ponts et chaussées 任桥梁/道路工程师，晚年任 École des Ponts 教授。核心成就：①Saint-Venant 原理（弹性体局部载荷的衰减，1855-56 前后）；②扭转理论（Saint-Venant torsion，非圆截面扭转，1855）；③圣维南方程组（浅水流动方程，1871）；④弹性理论体系化——校订 Navier《Résumé des leçons》(1864)、校订并补充 Clebsch《Théorie de l'élasticité des corps solides》(1881)，注疏本含其大量个人研究；⑤力学基础——《Principes de mécanique fondés sur la cinématique》(1852)；⑥水力学——《Formules et tables nouvelles...écoulement des eaux》(1851)。1868 年当选法国科学院院士。其弹性研究由 Todhunter 英译为《The Elastical Researches of Barré de Saint-Venant》(1889)。",
+      "subject_uid": "Q1847823"
+    },
+    "chosen_subject_uid": "Q1847823",
+    "normalized_name": "adhémarbarrédesaintvenant",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "adhémarbarrédesaintvenant",
+  "origin_review_required": true,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "saint-venant",
+  "status": "draft",
+  "subject_origin": "public",
+  "target_id": "tgt-43fb6c882f40",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-22T00:29:53Z"
+}

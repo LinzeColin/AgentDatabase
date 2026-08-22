@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:williamjohnmacquornrankine",
+  "canonical_name": "William John Macquorn Rankine",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "材料建工师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "rankine",
+  "subject_uid": "person-7b734a64069985c3",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/rankine-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-22T00:38:33Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "b0024ac82a4b8593e20333ef271465faed378a6dec8060d072de69c0ad219c40",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/rankine-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "ae23c44dfa2ea9cac3656bac4dd0b29da81794355789d5bc288b82ff0c75e65b",
+      "runtime_size_bytes": 78364,
+      "size_bytes": 86579
+    }
+  ]
+}
