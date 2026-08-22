@@ -1,0 +1,100 @@
+{
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "Q176029",
+ "consent_authority": null,
+ "created_at": "2026-08-22T00:38:33Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "technical-engineer",
+  "display": "材料建工师",
+  "mode": "single",
+  "primary": "technical-engineer",
+  "weights": {
+   "technical-engineer": 1.0
+  }
+ },
+ "language": "zh-CN",
+ "model_version": "0.1.0-draft",
+ "name": "William John Macquorn Rankine",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "结构力学与材料强度（梁、桁架、土压力）",
+    "热力学与动力工程（Rankine cycle、蒸汽机）",
+    "机械设计与机器运动（机械手册）",
+    "土木工程（桥梁、挡土墙、地基）",
+    "工程教育与方法论（应用力学教学体系）"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "https://www.wikidata.org/wiki/Q176029",
+     "type": "wikidata"
+    },
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Rankine%2C+William+John+Macquorn%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=100&output=json",
+     "type": "archive.org"
+    }
+   ],
+   "canonical_name": "William John Macquorn Rankine",
+   "distinguishing_basis": "Wikidata Q176029（Scottish engineer 1820-1872）。archive.org creator 形态 `Rankine, William John Macquorn, 1820-1872` 均指本尊（Manual of Applied Mechanics / Civil Engineering / Steam Engine / Machinery、Miscellaneous Scientific Papers、Songs and Fables、Memoir of John Elder）。同名者极少（Alexander Rankine、W.J. Rankine 现代等，见宽窗口），按 creator 串排除。",
+   "evidence_level": "high",
+   "identity_category": "材料建工师",
+   "key_capabilities": [
+    "土压力理论（Rankine 土压力）与边坡稳定（材料建工师族核心）",
+    "热力学循环建模（Rankine cycle）",
+    "结构/机械/土木一体化应用力学手册体系",
+    "蒸汽机与动力工程理论",
+    "工程教育方法论（理论-实践并重）"
+   ],
+   "label": "A",
+   "occupation_or_role": "Scottish civil and mechanical engineer, physicist and mathematician; 热力学（Rankine cycle）、土力学（Rankine 土压力理论）、应用力学手册作者",
+   "professional_background": "William John Macquorn Rankine（1820-07-05 生于 Edinburgh，1872-12-24 卒于 Glasgow）是苏格兰工程师、物理学家与数学家。Glasgow 大学自然哲学教授（1855 起）。核心成就：①热力学——与 Clausius/Thomson 并列建立热力学（Rankine cycle，蒸汽机理论，1850s）；②土力学——Rankine 土压力理论（1857，挡土墙/边坡）；③应用力学体系——四部经典手册《A Manual of Applied Mechanics》(1858)、《A Manual of the Steam Engine and Other Prime Movers》(1859)、《A Manual of Civil Engineering》(1861)、《A Manual of Machinery and Millwork》(1869)，确立工程教育范式；④舰船工程——与 John Elder 合作在 Clyde 造船；⑤科学史与散文——诗集《Songs and Fables》(1874) 与《A Memoir of John Elder》(1871)。其《Miscellaneous Scientific Papers》(1881, Tait 编) 收录其散篇论文。",
+   "subject_uid": "Q176029"
+  },
+  "chosen_subject_uid": "Q176029",
+  "normalized_name": "williamjohnmacquornrankine",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "williamjohnmacquornrankine",
+ "origin_review_required": true,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "rankine",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-5d6d9208443e",
+ "time_scope": "all available periods, separated by role and material drift",
+ "updated_at": "2026-08-22T00:38:33Z",
+ "attribution_basis": {
+  "authority": "William John Macquorn Rankine 著作归属依据：① Glasgow 大学自然哲学教授（1855-1872），四部经典手册《A Manual of Applied Mechanics》(1858)、《A Manual of the Steam Engine and Other Prime Movers》(1859)、《A Manual of Civil Engineering》(1861)、《A Manual of Machinery and Millwork》(1869) 均署其名出版；② Philosophical Transactions of the Royal Society 1854 年论文（On the Geometrical Representation of the Expansive Action of Heat）署 By William John Macquorn Rankine, C.E., F.R.SS.；③ 身后 Tait 编《Miscellaneous Scientific Papers》(1881) 与《Songs and Fables》(1874)、自撰《A Memoir of John Elder》(1871)；④ archive.org 目录 creator 字段（Rankine, William John Macquorn, 1820-1872）。",
+  "citation": "archive.org 目录 creator 字段 + 各书题名页/署名行；出版记录见各源 locator。",
+  "disputed_policy": "语料内无学界公认伪托篇目；凡 archive.org creator 含 Rankine 但实际作者为他人者（John Rankine 1864-1922、A.O. Rankine、Claudia Rankine 现代、Douglas Rankine Mason 等）已在抓源按 creator 串排除。",
+  "disputed_works": [],
+  "covered_sources": [
+   "amanualappliedm05rankgoog.txt ｜ 署名照录：A MANUAL OF APPLIED MECHANICS, W. J. MAGQUORN RANKINE, C.E., LLD, F.R.S.",
+   "amanualcivileng01rankgoog.txt ｜ 署名照录：A MANUAL OF CIVIL ENGINEERING, WILLIAM JOHN MACQUORN RANKINE",
+   "amanualsteameng00rankgoog.txt ｜ 署名照录：A MANUAL OF THE STEAM ENGINE, WILLIAM JOHN MACQUORN RANKINE",
+   "amanualmachiner00rankgoog.txt ｜ 署名照录：A MANUAL OF MACHINERY AND MILLWORK, PROFESSOR RANKINE'S SERIES OF MANUALS",
+   "mechanicaltextbo00rankrich.txt ｜ 署名照录：A MECHANICAL TEXT-BOOK, WILLIAM JOHN MACQUORN RANKINE",
+   "memoirofjohnelde00rankiala.txt ｜ 署名照录：A MEMOIR OF JOHN ELDER, W. J. MACQUORN RANKINE",
+   "miscellaneoussc00taitgoog.txt ｜ 署名照录：MISCELLANEOUS SCIENTIFIC PAPERS, W. J. MACQUORN RANKINE, C.E., LLD., F.R.S.",
+   "philtrans08776343.txt ｜ 署名照录：On the Geometrical Representation of the Expansive Action of Heat, and the Theory of Thermo-dynamic Engines, By William John Macquorn Rankine",
+   "songsandfablesil00rankuoft.txt ｜ 署名照录：SONGS AND FABLES, WILLIAM J. MACQUORN RANKINE"
+  ]
+ }
+}
