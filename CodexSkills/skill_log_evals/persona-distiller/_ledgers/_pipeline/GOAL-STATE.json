@@ -1,11 +1,11 @@
 {
  "round": 15,
- "updated_at": "2026-08-23T06:40Z",
+ "updated_at": "2026-08-23T07:10Z",
  "time_band": "valley-0000-0800",
  "people": 126,
- "current_person": "turing-73-deferred",
- "stage": "T1 延后 Turing#73（一手 5 份互异全 writings，lanes 2 道<3，同 Lovelace/Bach 一手稀缺）；126/600 已入库",
- "next": "下一位软件开发师 #74 Claude Shannon",
+ "current_person": null,
+ "stage": "T1 软件开发师族 #73-75 探源延后（Turing/Shannon/von Neumann 一手版权受阻，延后名单→199）；族内 #76-100 多为 20 世纪版权人物；转向其他族",
+ "next": "投资资本师族 #222 Jacob Fugger（族内 REG 19 人证明一手可做；Fugger 若稀缺则试 #223 Rothschild）",
  "threads": {
   "T1": {
    "branch": "main",
