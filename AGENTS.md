@@ -170,3 +170,30 @@ ssh ovh 'sudo /usr/local/bin/linze-r2-free-tier-guard.py'
   这类源标题词会穿过 holdout 泄漏门（非独有专名/数字）但被 unsourced-name 门抓——答案必须靠
   `_EXCLUDED.txt` 记录兜底，别去改答案。**为什么**：holdout 密封源正文不在 raw/，checker 查不到属预期。
   **代价**：Telford case-known-2 一次拦门。
+
+## persona-distiller 预筛/收尾经验（2026-08-22 T3 会话实测，供三线程共用）
+
+- **结论**：预筛 distinct 计数用 `creator:"姓, 名"` 全量检索，不用 title 检索。
+  **为什么**：title 检索易漏不同书/多扫描只算 1 标题；King#588 预筛判「distinct≈7 临界」，
+  creator 全量 70 条实得 13 部书/报告 + 15 篇期刊，上界 23、一手占比 0.957，正常走 REG。
+  **代价**：0（多一次 creator 检索）。
+- **结论**：「分类 ≠ IA 语料实况」——卒年/版次推断只是纸面，派发前必须 probe 实测。
+  **为什么**：财务合规 PD 池 6 人（Cotrugli/Cerboni/Besta/Sprague/May/Canning）纸面全「PD 可做」，
+  探源实测全 DEF（单著作天花板/独立著作<8/无 IA PD 语料）；Waksman#540 卒年推断归版权墙被实测推翻。
+  **代价**：1 轮 6 人探源 TSV（零 LLM，便宜），换回不烧整窗全流程。
+- **结论**：判分解析必须显式 `is None` 判空，禁止 `d.get("A") or ...`。
+  **为什么**：`or` 把 0 分吞成 falsy 落到 fallback，统计全错。**代价**：一次全批分数失真 + 重判。
+- **结论**：子代理（resume 尾段）后台任务随回合消亡——mandate 必须写明「前台阻塞跑完、
+  同回合 register+commit、禁后台任务」。
+  **为什么**：agent 两次 resume 都起后台 package_target 等自动通知，子代理一结束其后台任务即被杀。
+  **代价**：多轮空 resume 烧循环（本会话一次）。
+- **结论**：resume 代理不要信父代理「已生成」断言，先自查真实磁盘断点。
+  **为什么**：Lawes 父代理断言 results 已生成实测 0 行（死 eval prepare 后）；Boussingault 断言
+  claims/cases/results 已生成实测全 0 字节 + research gate FAIL 3 errors。**代价**：各补一段完整流水线。
+- **结论**：flash judge 空返回用 `--max-tokens 4000` 重判即稳（2000 被 reasoning 吃光）；外语人物
+  答案生成用「同长度硬帽 + 禁格式标记」双侧指令（泄题门 ratio>1.3 时）；`quality_check --cache`
+  只传一个 raw 目录（传多个误报 ocr_legibility 负对照）；team-card.json 占位
+  （provisional/not-yet-established/replace-with）在 package 阶段硬拦，打包前必填 ready。
+  **为什么**：四者均为本会话 3 个 resume 代理实测踩坑；quality_check 须用 `scripts/quality_check.py`
+  禁用 `references/pipeline/checkers/` 镜像（check_holdout_mention.py 模板路径 bug 必败）。
+  **代价**：每项一次返工。
