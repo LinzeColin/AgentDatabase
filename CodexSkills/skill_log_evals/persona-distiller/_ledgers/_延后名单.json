@@ -3935,9 +3935,25 @@
    "★ 处置类的原键": "reason",
    "★ disposition 未记": "2026-08-23 补记",
    "★ 处置类怎么来的-2026-08-15": "由 reason 文本归纳为 ① 一手规模不够"
+  },
+  {
+   "name": "Claude Shannon",
+   "family_zh": "软件开发师",
+   "deferred_at": "2026-08-23",
+   "reason": "①证据不足：archive.org 一手仅《The Mathematical Theory of Communication》(1949/1964 多版次扫描，单一作品) + 1993 Collected Papers 汇编（坑 10 弃汇编凑数）；Bell System Technical Journal 1948 原始卷不在 archive.org（bitsavers 收藏多为 1952+）。一手互异作品 <8 份、lanes 仅 writings，不足 quick 档 8 份互异 + 3 道。与 Turing #73 同类 20 世纪计算机先驱一手稀缺。",
+   "probed_and_failed": [
+    "creator:\"Shannon, Claude\" 仅 4 条：MTC 1949/1964 两版次 + 1993 Collected Papers + 1 重复版次",
+    "creator:(\"Shannon, Claude E\" OR \"Shannon, C. E.\") 仅 2 条（MTC 版次）",
+    "title:(\"mathematical theory of communication\" OR \"shannon 1948\" OR \"bell system technical journal\"...) 命中的 BSTJ 卷多为 1952-1983，缺 1948 原始论文卷",
+    "Shannon 其他一手（Philosophy of Cybernetics 1987、Predicting the Future、晚年演讲）不在 archive.org"
+   ],
+   "处置类": "① 一手规模不够 —— 引自本条 `reason`：archive.org 一手互异作品仅 **1** 部（MTC，多版次）+ 汇编（弃），不足 8 份互异 + 3 道",
+   "★ 处置类的原键": "reason",
+   "★ disposition 未记": "2026-08-23 补记",
+   "★ 处置类怎么来的-2026-08-15": "由 reason 文本归纳为 ① 一手规模不够"
   }
  ],
- "total": 197,
+ "total": 198,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。　★ 2026-08-13 实测又漂了：写着 168、实有 187（差 19 条），**注释写明「不手写」并不能阻止它漂**——已落成判据 `check_deferred_list.py` 每次现算。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
