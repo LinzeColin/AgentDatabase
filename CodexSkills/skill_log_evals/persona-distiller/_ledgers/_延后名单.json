@@ -3788,27 +3788,6 @@
       ]
     },
     {
-      "name": "Gustave Eiffel",
-      "family_zh": "材料建工师",
-      "deferred_at": "2026-08-20",
-      "reason": "quick 档 min_sources=8，去重后一手仅 6 部（10 份扫本，check_source_dedup 阈值 0.3 去重）。2026-08-20 真跑 archive.org advancedsearch.php 15 条查询（HTTP 200 全通，上轮拒答未复现）：1907《Recherches expérimentales…》(已从 Gallica 取到)、1911《Examen des formules…》、1914《Nouvelles recherches…》三部均 0 命中，无法补足法文工程原作。仅可补 2 部弱一手：1887 letters00eiff(手稿信件,非工程文) 与 1905 NACA-TN-2372(英译本,非原作)，严格口径不算，仍 6<8。",
-      "probed_and_failed": [
-        "archive.org advancedsearch 15 条查询(2026-08-20 实跑)：1907/1911/1914 三部各 0 命中",
-        "5 份归属 research.authorship-unproven：法语 OCR 形态判据覆盖缺口（PAR /' G. EIFFEL、DE EIFFEL、Mie CAP EL、无题名页正文、holdout 合作件），证据真实但 check_authorship 认不出"
-      ],
-      "already_confirmed_fetchable": [
-        "10 份扫本已取回（1887/1888/1889/1900/1902/1910 等，去重后 6 部）",
-        "letters00eiff (1887 手稿信件 ALS)",
-        "nasa_techdoc_19930083161 (1905 NACA-TN-2372 英译本)"
-      ],
-      "unblock_todo": [
-        "若接受 英译本+手稿 计入 P1 口径，可凑 8 部重开 quick（需 Owner/契约裁定口径）",
-        "Gallica ARK 再探 1911/1914 两部（archive.org 无，Gallica 或 Kramerius 可能有）",
-        "check_authorship 法语 OCR 形态覆盖缺口 → 记入 P3 skill 迭代检查点候选"
-      ],
-      "处置类": "① 一手规模不够（去重后 6 < quick 门 8）＋ ② 归属证据 OCR 形态判据覆盖缺口"
-    },
-    {
       "name": "Alan Arnold Griffith",
       "family_zh": "材料建工师",
       "deferred_at": "2026-08-21",
@@ -3932,6 +3911,13 @@
       "deferred_at": "2026-08-22",
       "reason": "quick 档需 8 train + 1 holdout = 9 部互异一手且 min_lanes=3。archive.org 全库可得的 Carl von Bach（1847-1931，材料检验之父/斯图加特教授）一手共 8 份文件但真实独立作品仅约 4 部：①Elasticität und Festigkeit 多版次（elasticittundfe00/01=1902、fe02=1894 二版、fe03=1898 三版，四卷同为一书第一卷的不同版次，jaccard 0.09-0.19 属同书）②Die Maschinenelemente 两版（diemaschinenele00/01，1881 一版与后续版）③Die Wasserräder 1886（80K 词）④Festigkeitseigenschaften und Gefügebilder 1914（与 R. Baumann 合著，1921 印）。六条研究道只占 writings 1 条（check_corpus_ceiling --profile quick 明确『够不着：六条道只占 1 < 3，空着的道抓再多别的也补不上』）。跨库探测（Gallica/DDB/HathiTrust）无可补的 external/conversations 一手。待德语一手全数字化（BSB/斯图加特大学馆藏）后可翻案。",
       "处置类": "① 一手规模不够（quick 需 9 部互异一手 + 3 道；IA 实际独立一手仅约 4 部且六道只占 writings 1 道；Elasticität 4 卷为同书多版次、Maschinenelemente 2 卷为两版，跨库 Gallica/DDB/HathiTrust 无可补）"
+    },
+    {
+      "name": "Ada Lovelace",
+      "family_zh": "软件开发师",
+      "deferred_at": "2026-08-23",
+      "reason": "quick 档需 8 train + 1 holdout = 9 部互异一手且 min_lanes=3。IA 全库 creator/subject 检索（Lovelace, Ada / Byron, Augusta Ada / Lovelace, Augusta Ada）0 命中其一手；标题检索全为现代 P2 传记（Lethbridge/Essinger/Stone 等 2010s，且多数 restricted）。其一手核心《Notes on the Analytical Engine》(1843) 仅 wikisource 有全文（Scientific Memoirs/3 djvu 701-743 页，含 Note G），但它是单一作品（A-G 注同属一部，内容互异不成立）；与 Babbage 的通信集（Toole 1998《Ada the Enchantress of Numbers》）在 IA 为 access-restricted 不可抓。Babbage《Passages from the Life of a Philosopher》(1864) 可抓但其引文属二手引用。独立一手作品实为 1 部 Notes，无法凑 8 份互异 + 3 道。待 Notes 全文/书信集获开放数字化后可翻案。",
+      "处置类": "① 一手规模不够（IA 一手仅 wikisource 的 Notes 1843 单一作品；通信集 1998 受限不可抓，quick 需 9 部互异一手 + 3 道）"
     }
   ],
   "total": 196,
