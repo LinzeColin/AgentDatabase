@@ -3896,9 +3896,25 @@
     "title:'Wöhler' 前 30 条为 Wohler Technologies 设备手册(AMP/AVMFlex 等) 与 Friedrich Wöhler 化学著作，无其传记"
    ],
    "处置类": "① 一手规模不够（成名核心 1860-70s Zeitschrift für Bauwesen 铁路车轴疲劳实验系列在 IA 全缺，creator 全库 83 条无一为其作品）"
+  },
+  {
+   "name": "Adhémar Barré de Saint-Venant",
+   "family_zh": "材料建工师",
+   "deferred_at": "2026-08-22",
+   "reason": "quick 档 min_sources=8 / 需 8 train + 1 holdout = 9 部互异作品。archive.org 全库可得的 Saint-Venant 一手仅 8 部互异作品（Mémoire sur les lignes courbes 1845、Tableau de formules 1845、Formules et tables hydrauliques 1851、Principes de mécanique cinématique 1852[OCR 全噪声不可用]、Théorie de l'élasticité t.I-II 1881、Navier Résumé éd. Saint-Venant 1864、Elastical Researches 英译 1889、Saint Benezet 1889），扣除不可用的 bub_gb_LNUSZRGGweEC（93% OCR 噪声，mécanique/cinématique/force/mouvement 全 0 命中）与仅 4.8K 词的薄表 tableaudeformul，可靠一手仅 7 部，差 2 部；torion/浅水/柔性著名单行本（Mémoire sur la torsion des prismes 1855、Mouvement non permanent des eaux 1871）在 IA 均无独立全文。",
+   "probed_and_failed": [
+    "creator:'Barré de Saint-Venant' 5 条（含同名父 Jean 1737-1810 农学家、Todhunter 译本）",
+    "creator:'Saint-Venant' AND mediatype:texts 16 条：本尊 8 部 + 同名者（Jean 农学家、Guillaume 出版商、B.D. NASA 现代）+ Clebsch 独立著者版",
+    "title:(Saint-Venant) 26 条：绝大多数为现代浅水方程（Saint-Venant 方程组）论文，无新增一手",
+    "\"de Saint-Venant\" 21 条：无新增一手",
+    "bub_gb_LNUSZRGGweEC 抓回但 OCR 93% 噪声（mécanique/cinématique/force/mouvement 0 命中），不可用于引文",
+    "torion 定向探 4 条全为现代论文",
+    "elasticalresearc00sainuoft（Toronto 扫本）与 elasticalresear00saingoog（Google 扫本）为同一部作品另一扫本，不能当独立一手"
+   ],
+   "处置类": "① 一手规模不够（quick 需 9 部互异作品，IA 实际可靠一手仅 7 部；成名 1855 扭转论/1871 浅水方程无独立全文）"
   }
  ],
- "total": 193,
+ "total": 194,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。　★ 2026-08-13 实测又漂了：写着 168、实有 187（差 19 条），**注释写明「不手写」并不能阻止它漂**——已落成判据 `check_deferred_list.py` 每次现算。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
