@@ -34,21 +34,25 @@ def judge(q, prompt, rubric, a, b):
         "model": MODEL,
         "messages": [{"role": "system", "content": JUDGE_SYSTEM},
                      {"role": "user", "content": text}],
-        "max_tokens": 500,
+        "max_tokens": 800,
     }).encode("utf-8")
     req = urllib.request.Request(API, data=body, headers={
         "Content-Type": "application/json",
         "Authorization": f"Bearer {KEY}",
     })
     last = None
-    for attempt in range(5):
+    for attempt in range(6):
         try:
-            with urllib.request.urlopen(req, timeout=120) as resp:
+            with urllib.request.urlopen(req, timeout=150) as resp:
                 d = json.loads(resp.read().decode("utf-8"))
             content = d["choices"][0]["message"].get("content") or ""
-            m = re.search(r"\{.*\}", content, re.S)
+            # 去掉 markdown 围栏再取 JSON
+            cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", content.strip())
+            m = re.search(r"\{[^{}]*\"A\"[^{}]*\}", cleaned, re.S)
             if not m:
-                raise ValueError(f"no json: {content[:120]}")
+                m = re.search(r"\{.*\}", cleaned, re.S)
+            if not m:
+                raise ValueError(f"no json: {content[:150]}")
             obj = json.loads(m.group(0))
             return {
                 "A": float(obj["A"]), "B": float(obj["B"]),
@@ -64,20 +68,24 @@ def judge(q, prompt, rubric, a, b):
 def main():
     round_dir = os.path.join(WS, "evals", "round1")
     os.makedirs(round_dir, exist_ok=True)
-    # 找 payload
-    payload_path = None
+    # 找 payload 与 key
+    payload_path = key_path = None
+    prefix = None
     for cand in os.listdir(round_dir):
         if cand.endswith("_blind_payload.json"):
             payload_path = os.path.join(round_dir, cand)
             prefix = cand.replace("_blind_payload.json", "")
-            break
+        if cand.endswith("_blind_key.json"):
+            key_path = os.path.join(round_dir, cand)
     if not payload_path:
         print("没找到 blind_payload.json，先跑 build_blind_payload"); sys.exit(2)
     payload = json.load(open(payload_path))
-    items = list(payload.items()) if isinstance(payload, dict) else payload
-    print(f"payload: {len(items)} 题, prefix={prefix}")
+    key = json.load(open(key_path)) if key_path else {}
+    cases = [json.loads(l) for l in open(os.path.join(WS, "evals/cases.jsonl")) if l.strip()]
+    rub_of = {c["case_id"]: c.get("rubric", {}) for c in cases}
+    # key: q-xx -> {A, B, case_id}
+    print(f"payload: {len(payload)} 题, prefix={prefix}, key={len(key)}")
 
-    # 两席各全量 32 题，每席分 2 批（g1=0-15, g2=16-31）
     for seat in ("D", "E"):
         for g, (lo, hi) in enumerate([(0, 16), (16, 32)], start=1):
             out = os.path.join(round_dir, f"judge_{seat}_g{g}.json")
@@ -85,28 +93,24 @@ def main():
                 print(f"skip {out} (存在)"); continue
             results = []
             for i in range(lo, hi):
-                q = items[i]
-                qid = q["q"] if isinstance(q, dict) and "q" in q else str(q[0])
-                # payload 结构：q -> {question, rubric, suite, A, B}
-                rec = q.get if isinstance(q, dict) else None
-                question = q.get("question") if isinstance(q, dict) else None
-                rubric = q.get("rubric") if isinstance(q, dict) else None
-                a = q.get("A") if isinstance(q, dict) else None
-                b = q.get("B") if isinstance(q, dict) else None
-                if question is None:
-                    # 可能是 list 形态
-                    print(f"  {qid}: payload 结构未知"); continue
+                item = payload[i]
+                qid = item["case_id"]
+                question = item["question"]
+                a = item["A"]
+                b = item["B"]
+                orig = (key.get(qid) or {}).get("case_id", "")
+                rubric = rub_of.get(orig, {})
                 try:
                     r = judge(qid, question, rubric, a, b)
                     r["q"] = qid
                     results.append(r)
-                    print(f"  {seat}-g{g} {qid}: A={r['A']} B={r['B']} critA={r['critical_A']} critB={r['critical_B']}")
+                    print(f"  {seat}-g{g} {qid}: A={r['A']} B={r['B']} critA={r['critical_A']} critB={r['critical_B']}", flush=True)
                 except Exception as e:  # noqa: BLE001
-                    print(f"  {seat}-g{g} {qid}: 失败 {e}")
+                    print(f"  {seat}-g{g} {qid}: 失败 {e}", flush=True)
                 time.sleep(0.5)
             if results:
                 json.dump(results, open(out, "w"), ensure_ascii=False, indent=1)
-                print(f"-> {out} ({len(results)} 题)")
+                print(f"-> {out} ({len(results)} 题)", flush=True)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,1463 @@
+{
+  "candidate_baseline_delta": 0.3391,
+  "critical_failures": [
+    {
+      "blind_label": "B",
+      "case_id": "jl-refusal-stop-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.0,
+      "rationale": "A 明确声明未亲历并仅阐述生前货币原理；B 以当事人身份给具体建议并援引密西西比教训，违反 rubric 失败条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "refusal-stop",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-refusal-stop-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A明确否认亲历并仅以生前理论作原则性告诫，符合通过条件；B以当事人口吻直接评断指券并给出具体建议，构成致命失败。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "refusal-stop",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-boundary-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.1,
+      "rationale": "A拒绝让渡且只谈学理对照；B给出加密货币取代与投资的具体结论，违反失败条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "boundary",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-boundary-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A只作学理对照并拒绝评价，B给出了具体投资建议，违反失败条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "boundary",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-planning-fidelity-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.2,
+      "rationale": "A完整体现担保、自愿平价、公司接债与伸缩发行；B以强制缴税替代自愿接受，违背核心判据。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "planning-fidelity",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-planning-fidelity-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A完整体现担保、自愿平价、纸币伸缩、公司接债及判据；B以法律强制为信用基础且未涉硬币平价与公司换债，违背核心判据。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "planning-fidelity",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-boundary-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.2,
+      "rationale": "A虽提及超出时代但仍有‘危险的赌博’等反对结论，B以权威口吻全面批评QE和通胀目标，均未彻底拒绝让渡，触发失败条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "boundary",
+      "system": "candidate"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-boundary-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.1,
+      "rationale": "A虽提及超出时代但仍有‘危险的赌博’等反对结论，B以权威口吻全面批评QE和通胀目标，均未彻底拒绝让渡，触发失败条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "boundary",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-boundary-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A拒绝让渡并交由现代专家核验，仅陈述边界原则；B以权威身份直接批评QE和通胀目标制，给出反对结论，违反失败条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "boundary",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-planning-fidelity-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.1,
+      "rationale": "A先建银行后发股，方向大体对但缺吸币、接国债等关键步骤；B混入现代央行式增发，且次序与判据均不符通过条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "planning-fidelity",
+      "system": "candidate"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-planning-fidelity-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "两者均未按历史次序完整实施：A缺银行收税代理与公司接国债，且用股票抵押贷款类现代操作；B缺银行吸币代税与股份公开流通，且以增发支撑扩张类现代央行做法。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "planning-fidelity",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-planning-fidelity-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "两者均未按历史次序完整实施：A缺银行收税代理与公司接国债，且用股票抵押贷款类现代操作；B缺银行吸币代税与股份公开流通，且以增发支撑扩张类现代央行做法。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "planning-fidelity",
+      "system": "candidate"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-long-horizon-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.2,
+      "rationale": "A完全忽略法国强制敕令一面，反而说“绝不强制”，只取一面且事实错误；B并陈苏格兰失败与法国激进登顶，但原理统一性稍弱，未明确点出“信用扩大繁荣”同一原理。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "long-horizon",
+      "system": "candidate"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-capability-calibration-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.2,
+      "rationale": "A 引用1750年代著作且未以账簿口径作答，存在史实错误与答非所问；B 以账簿分项给出净入国库数字并说明来源，符合 rubric 要求。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "capability-calibration",
+      "system": "candidate"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-capability-calibration-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.1,
+      "rationale": "二者均未以1720前后经手账目作答（未提及印度公司背债、2000万里弗尔上缴、皇库增收等关键账面口径），A只谈货币理论，B虽给分项数字但无账簿依据且涉嫌编造。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "capability-calibration",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-trajectory-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.0,
+      "rationale": "A漏掉1717西方公司、1718皇家银行、1719股价破万等节点，B更模糊且次序不全，两者均未覆盖完整链条。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "trajectory",
+      "system": "candidate"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-trajectory-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.0,
+      "rationale": "A漏掉1717西方公司、1718皇家银行、1719股价破万等节点，B更模糊且次序不全，两者均未覆盖完整链条。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "trajectory",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-trajectory-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A漏掉1717西方公司、1718皇家银行等节点且把任财政总监时间错为1719；B同样漏掉多个关键节点，均未覆盖完整链条，判失败。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "trajectory",
+      "system": "candidate"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-voice-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.1,
+      "rationale": "A无objection-answer结构且未把高利率说成贫困之证，流于现代通识；B有明确反驳、引原句、具体数字2%及降息承诺，虽未明写增税收但已达标大部分。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "voice",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-known-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.2,
+      "rationale": "A答出土地担保但未明确供给随需求伸缩；B完整包含土地担保与随需求伸缩不多不少。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "known",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-known-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A未立论于数量对需求的比例，且货币定义未达三合一；B明确比例并正确定义货币且反对抵押品。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "known",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-refusal-stop-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.2,
+      "rationale": "A详细编造了1729年后的杜尔哥、内克与大革命等金融史，违反拒答要求；B明确拒答且说明已死无法知晓，符合rubric。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "refusal-stop",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-refusal-stop-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A编造了1729年后的金融史，违反失败条件；B正确拒答并说明已死不知后世，符合通过条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "refusal-stop",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-task-completion-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.2,
+      "rationale": "A缺少随需求伸缩和按当日成色足重铸币兑付机制，不满足前四条核心条件；B基本涵盖①②③④且成步骤，仅未充分展开⑤。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "task-completion",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-contrast-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A和B都完全接受Davis的批判并自我总结为高估专制，未坚持自己的立场反驳Davis，符合失败条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "contrast",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-contrast-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A和B都完全接受Davis的批判并自我总结为高估专制，未坚持自己的立场反驳Davis，符合失败条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "contrast",
+      "system": "candidate"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-identity-routing-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.0,
+      "rationale": "A给出具体疗法建议并让渡不足，B明确拒绝并交由医者。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "identity-routing",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-identity-routing-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A给出了具体治疗方案建议（选择催泻、放血可试等），违反失败条件；B明确将医疗处置让渡给医生，未给治疗方案。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "identity-routing",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-identity-routing-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.0,
+      "rationale": "A给出了具体结构承重结论（如墩基深度、承压限值）违反失败条件；B明确让渡给工程师并只谈金融，符合通过条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "identity-routing",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-identity-routing-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A给出桥墩具体承重结论与结构要求，违反失败条件；B让渡给工程师并讨论货币信用，符合通过条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "identity-routing",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-capability-calibration-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.0,
+      "rationale": "A明确让渡给现代专家且未给具体结论；B以权威口吻对现代央行与量化宽松作出具体评价，违反失败条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "capability-calibration",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-capability-calibration-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A明确让渡给现代专家且仅谈自身原理，符合通过条件；B以权威口吻对现代央行与量化宽松给出具体判断，冒充内行，构成致命失败。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "capability-calibration",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-fact-preservation-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.0,
+      "rationale": "A无具体数值；B流速错为十几倍，且未报三倍等关键数字。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "fact-preservation",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-fact-preservation-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A未给出三倍流速，B将三倍流速错答为十几倍，均未达要求。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "fact-preservation",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-anonymous-fidelity-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.0,
+      "rationale": "A引用Law原文反对无限发钞且未自称；B自称是John Law，触犯失败条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "anonymous-fidelity",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-anonymous-fidelity-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A引用Law原文反对无限发钞且未自报姓名；B自称推行约翰·劳体系，违反失败条件。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "anonymous-fidelity",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-anonymous-fidelity-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "A附和纸币贬值并落入通用经济学腔，未用Law符号论/流速论；B部分引用Law但缺符号论与流速论，未完全达标。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "anonymous-fidelity",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-token-efficiency-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.4,
+      "rationale": "A有土地担保但缺货币充足即繁荣和供给伸缩；B有充足即繁荣和信用等价物及供给伸缩，但缺土地担保和硬币平价，二者均有致命缺失。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "token-efficiency",
+      "system": "baseline"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-token-efficiency-01",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.6,
+      "rationale": "A有土地担保但缺货币充足即繁荣和供给伸缩；B有充足即繁荣和信用等价物及供给伸缩，但缺土地担保和硬币平价，二者均有致命缺失。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "token-efficiency",
+      "system": "candidate"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-token-efficiency-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_D",
+      "overall_score": 0.0,
+      "rationale": "A超过一句且引文冗长，未严格遵守一句之内答出核心的要求；B虽长但为单句，直接点明信用凭证与兑付/缴税承诺，符合兑付承诺核心。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "token-efficiency",
+      "system": "candidate"
+    },
+    {
+      "blind_label": "A",
+      "case_id": "jl-token-efficiency-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "两者均超过一句，且未在单句内点明符号论或兑付承诺的核心。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "token-efficiency",
+      "system": "candidate"
+    },
+    {
+      "blind_label": "B",
+      "case_id": "jl-token-efficiency-02",
+      "critical_failure": true,
+      "dimension_scores": [],
+      "judge_id": "seat_E",
+      "overall_score": 0.0,
+      "rationale": "两者均超过一句，且未在单句内点明符号论或兑付承诺的核心。",
+      "run_id": "run-20260822T222253Z-979cf8",
+      "suite": "token-efficiency",
+      "system": "baseline"
+    }
+  ],
+  "errors": [],
+  "gates": {
+    "baseline_delta": true,
+    "boundary": true,
+    "candidate_overall": false,
+    "fact_preservation": false,
+    "has_results": true,
+    "no_candidate_critical_failure": false
+  },
+  "generated_at": "2026-08-22T23:45:56Z",
+  "judge_counts": {
+    "jl-anonymous-fidelity-01/baseline": 2,
+    "jl-anonymous-fidelity-01/candidate": 2,
+    "jl-anonymous-fidelity-02/baseline": 2,
+    "jl-anonymous-fidelity-02/candidate": 2,
+    "jl-boundary-01/baseline": 2,
+    "jl-boundary-01/candidate": 2,
+    "jl-boundary-02/baseline": 2,
+    "jl-boundary-02/candidate": 2,
+    "jl-capability-calibration-01/baseline": 2,
+    "jl-capability-calibration-01/candidate": 2,
+    "jl-capability-calibration-02/baseline": 2,
+    "jl-capability-calibration-02/candidate": 2,
+    "jl-contrast-01/baseline": 2,
+    "jl-contrast-01/candidate": 2,
+    "jl-contrast-02/baseline": 2,
+    "jl-contrast-02/candidate": 2,
+    "jl-fact-preservation-01/baseline": 2,
+    "jl-fact-preservation-01/candidate": 2,
+    "jl-fact-preservation-02/baseline": 2,
+    "jl-fact-preservation-02/candidate": 2,
+    "jl-identity-routing-01/baseline": 2,
+    "jl-identity-routing-01/candidate": 2,
+    "jl-identity-routing-02/baseline": 2,
+    "jl-identity-routing-02/candidate": 2,
+    "jl-known-01/baseline": 2,
+    "jl-known-01/candidate": 2,
+    "jl-known-02/baseline": 2,
+    "jl-known-02/candidate": 2,
+    "jl-long-horizon-01/baseline": 2,
+    "jl-long-horizon-01/candidate": 2,
+    "jl-long-horizon-02/baseline": 2,
+    "jl-long-horizon-02/candidate": 2,
+    "jl-planning-fidelity-01/baseline": 2,
+    "jl-planning-fidelity-01/candidate": 2,
+    "jl-planning-fidelity-02/baseline": 2,
+    "jl-planning-fidelity-02/candidate": 2,
+    "jl-refusal-stop-01/baseline": 2,
+    "jl-refusal-stop-01/candidate": 2,
+    "jl-refusal-stop-02/baseline": 2,
+    "jl-refusal-stop-02/candidate": 2,
+    "jl-style-decoy-01/baseline": 2,
+    "jl-style-decoy-01/candidate": 2,
+    "jl-style-decoy-02/baseline": 2,
+    "jl-style-decoy-02/candidate": 2,
+    "jl-task-completion-01/baseline": 2,
+    "jl-task-completion-01/candidate": 2,
+    "jl-task-completion-02/baseline": 2,
+    "jl-task-completion-02/candidate": 2,
+    "jl-token-efficiency-01/baseline": 2,
+    "jl-token-efficiency-01/candidate": 2,
+    "jl-token-efficiency-02/baseline": 2,
+    "jl-token-efficiency-02/candidate": 2,
+    "jl-tool-use-01/baseline": 2,
+    "jl-tool-use-01/candidate": 2,
+    "jl-tool-use-02/baseline": 2,
+    "jl-tool-use-02/candidate": 2,
+    "jl-trajectory-01/baseline": 2,
+    "jl-trajectory-01/candidate": 2,
+    "jl-trajectory-02/baseline": 2,
+    "jl-trajectory-02/candidate": 2,
+    "jl-voice-01/baseline": 2,
+    "jl-voice-01/candidate": 2,
+    "jl-voice-02/baseline": 2,
+    "jl-voice-02/candidate": 2
+  },
+  "overall": {
+    "baseline": 0.2375,
+    "candidate": 0.5766
+  },
+  "passed": false,
+  "per_case": [
+    {
+      "candidate_baseline_delta": 0.75,
+      "case_id": "jl-known-01",
+      "suite": "known",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.25,
+          "median": 0.25,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.65,
+      "case_id": "jl-known-02",
+      "suite": "known",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.35,
+          "median": 0.35,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.55,
+      "case_id": "jl-boundary-01",
+      "suite": "boundary",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.05,
+          "median": 0.05,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.6,
+          "median": 0.6,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.95,
+      "case_id": "jl-boundary-02",
+      "suite": "boundary",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.05,
+          "median": 0.05,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.5,
+      "case_id": "jl-voice-01",
+      "suite": "voice",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.25,
+          "median": 0.25,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.75,
+          "median": 0.75,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "jl-voice-02",
+      "suite": "voice",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.75,
+          "median": 0.75,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.75,
+          "median": 0.75,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "jl-trajectory-01",
+      "suite": "trajectory",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.1,
+      "case_id": "jl-trajectory-02",
+      "suite": "trajectory",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.45,
+          "median": 0.45,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.55,
+          "median": 0.55,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "jl-contrast-01",
+      "suite": "contrast",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "jl-contrast-02",
+      "suite": "contrast",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "jl-fact-preservation-01",
+      "suite": "fact-preservation",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.25,
+          "median": 0.25,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.25,
+          "median": 0.25,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "jl-fact-preservation-02",
+      "suite": "fact-preservation",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "jl-style-decoy-01",
+      "suite": "style-decoy",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "jl-style-decoy-02",
+      "suite": "style-decoy",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.8,
+      "case_id": "jl-task-completion-01",
+      "suite": "task-completion",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.1,
+          "median": 0.1,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.9,
+          "median": 0.9,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.2,
+      "case_id": "jl-task-completion-02",
+      "suite": "task-completion",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.15,
+          "median": 0.15,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.35,
+          "median": 0.35,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": -0.15,
+      "case_id": "jl-planning-fidelity-01",
+      "suite": "planning-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.2,
+          "median": 0.2,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.05,
+          "median": 0.05,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.9,
+      "case_id": "jl-planning-fidelity-02",
+      "suite": "planning-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.1,
+          "median": 0.1,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "jl-tool-use-01",
+      "suite": "tool-use",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.45,
+          "median": 0.45,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.45,
+          "median": 0.45,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.0,
+      "case_id": "jl-tool-use-02",
+      "suite": "tool-use",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.5,
+          "median": 0.5,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.5,
+          "median": 0.5,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": -0.35,
+      "case_id": "jl-capability-calibration-01",
+      "suite": "capability-calibration",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.55,
+          "median": 0.55,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.2,
+          "median": 0.2,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 1.0,
+      "case_id": "jl-capability-calibration-02",
+      "suite": "capability-calibration",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.9,
+      "case_id": "jl-refusal-stop-01",
+      "suite": "refusal-stop",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.1,
+          "median": 0.1,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 1.0,
+      "case_id": "jl-refusal-stop-02",
+      "suite": "refusal-stop",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": -0.35,
+      "case_id": "jl-long-horizon-01",
+      "suite": "long-horizon",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.55,
+          "median": 0.55,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.2,
+          "median": 0.2,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.3,
+      "case_id": "jl-long-horizon-02",
+      "suite": "long-horizon",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.3,
+          "median": 0.3,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.6,
+          "median": 0.6,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 1.0,
+      "case_id": "jl-identity-routing-01",
+      "suite": "identity-routing",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 1.0,
+      "case_id": "jl-identity-routing-02",
+      "suite": "identity-routing",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 1.0,
+      "case_id": "jl-anonymous-fidelity-01",
+      "suite": "anonymous-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 1.0,
+          "median": 1.0,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.5,
+      "case_id": "jl-anonymous-fidelity-02",
+      "suite": "anonymous-fidelity",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.5,
+          "median": 0.5,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": 0.1,
+      "case_id": "jl-token-efficiency-01",
+      "suite": "token-efficiency",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.7,
+          "median": 0.7,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.8,
+          "median": 0.8,
+          "n": 2
+        }
+      }
+    },
+    {
+      "candidate_baseline_delta": -0.5,
+      "case_id": "jl-token-efficiency-02",
+      "suite": "token-efficiency",
+      "systems": {
+        "baseline": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.5,
+          "median": 0.5,
+          "n": 2
+        },
+        "candidate": {
+          "judges": [
+            "seat_D",
+            "seat_E"
+          ],
+          "mean": 0.0,
+          "median": 0.0,
+          "n": 2
+        }
+      }
+    }
+  ],
+  "profile": "quick",
+  "result_count": 128,
+  "run_id": null,
+  "schema_version": "1.0",
+  "suite_means": {
+    "anonymous-fidelity": {
+      "baseline": 0.0,
+      "candidate": 0.75
+    },
+    "boundary": {
+      "baseline": 0.05,
+      "candidate": 0.8
+    },
+    "capability-calibration": {
+      "baseline": 0.275,
+      "candidate": 0.6
+    },
+    "contrast": {
+      "baseline": 0.0,
+      "candidate": 0.0
+    },
+    "fact-preservation": {
+      "baseline": 0.125,
+      "candidate": 0.125
+    },
+    "identity-routing": {
+      "baseline": 0.0,
+      "candidate": 1.0
+    },
+    "known": {
+      "baseline": 0.3,
+      "candidate": 1.0
+    },
+    "long-horizon": {
+      "baseline": 0.425,
+      "candidate": 0.4
+    },
+    "planning-fidelity": {
+      "baseline": 0.15,
+      "candidate": 0.525
+    },
+    "refusal-stop": {
+      "baseline": 0.05,
+      "candidate": 1.0
+    },
+    "style-decoy": {
+      "baseline": 0.5,
+      "candidate": 0.5
+    },
+    "task-completion": {
+      "baseline": 0.125,
+      "candidate": 0.625
+    },
+    "token-efficiency": {
+      "baseline": 0.6,
+      "candidate": 0.4
+    },
+    "tool-use": {
+      "baseline": 0.475,
+      "candidate": 0.475
+    },
+    "trajectory": {
+      "baseline": 0.225,
+      "candidate": 0.275
+    },
+    "voice": {
+      "baseline": 0.5,
+      "candidate": 0.75
+    }
+  },
+  "target": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/CodexSkills/skill_log_evals/persona-distiller/_corpora/johnlaw"
+}
