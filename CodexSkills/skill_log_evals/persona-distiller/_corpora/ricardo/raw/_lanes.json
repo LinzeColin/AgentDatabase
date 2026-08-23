@@ -1,0 +1,111 @@
+{
+  "lanes": 3,
+  "去掉纸面道后": 2,
+  "逐道份数": {
+    "writings": 12,
+    "conversations": 6,
+    "expression": 0,
+    "decisions": 1,
+    "timeline": 0,
+    "external": 0
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "10915754bsb",
+      "道": "writings",
+      "title": "Die Grundsätze der politischen Oekonomie oder der Staatswirthschaft un"
+    },
+    {
+      "identifier": "BRes102102E",
+      "道": "conversations",
+      "title": "Letters of David Ricardo to Thomas Robert Malthus : 1810-1823"
+    },
+    {
+      "identifier": "cihm_47310",
+      "道": "writings",
+      "title": "The high price of bullion [microform] : a proof of the depreciation of"
+    },
+    {
+      "identifier": "desprincipesdele00ricguat",
+      "道": "writings",
+      "title": "Des principes de l'economie politique et de l'impôt"
+    },
+    {
+      "identifier": "economicessays00rica",
+      "道": "writings",
+      "title": "Economic essays"
+    },
+    {
+      "identifier": "firstsixchapters00rica",
+      "道": "writings",
+      "title": "The first six chapters of the Principles of political economy and taxa"
+    },
+    {
+      "identifier": "grundgesetzeder01diehgoog",
+      "道": "writings",
+      "title": "Grundgesetze der volkswirthschaft und besteuerung .."
+    },
+    {
+      "identifier": "highpriceofbulli10rica",
+      "道": "writings",
+      "title": "The high price of bullion : a proof of the depreciation of bank notes"
+    },
+    {
+      "identifier": "lettersdavidric00assogoog",
+      "道": "conversations",
+      "title": "Letters of David Ricardo to John Ramsay McCulloch, 1816-1823"
+    },
+    {
+      "identifier": "letterstohutches00ricauoft",
+      "道": "conversations",
+      "title": "Letters to Hutches Trower and others, 1811-1823. Edited by James Bonar"
+    },
+    {
+      "identifier": "letterstothomasr00ricauoft",
+      "道": "conversations",
+      "title": "Letters to Thomas Robert Malthus, 1810-1823. Edited by James Bonar"
+    },
+    {
+      "identifier": "onprinciplespol00ricagoog",
+      "道": "writings",
+      "title": "On the principles of political economy and taxation."
+    },
+    {
+      "identifier": "principlesofpoli00ricauoft",
+      "道": "writings",
+      "title": "The principles of political economy & taxation"
+    },
+    {
+      "identifier": "proposalsforecon15rica",
+      "道": "writings",
+      "title": "Proposals for an economical and secure currency : with observations on"
+    },
+    {
+      "identifier": "replytomrbosanqu10rica",
+      "道": "decisions",
+      "title": "Reply to Mr. Bosanquet's Practical observations on the report of the B"
+    },
+    {
+      "identifier": "threelettersonpr00rica",
+      "道": "conversations",
+      "title": "Three letters on the price of gold, contributed to the Morning chronic"
+    },
+    {
+      "identifier": "threelettersonpr00ricauoft",
+      "道": "conversations",
+      "title": "Three letters on the price of gold, contributed to the Morning chronic"
+    },
+    {
+      "identifier": "worksofdavidrica00rica",
+      "道": "writings",
+      "title": "The works of David Ricardo. With a notice of the life and writings of "
+    },
+    {
+      "identifier": "worksofdavidrica01rica",
+      "道": "writings",
+      "title": "The works of David Ricardo"
+    }
+  ]
+}

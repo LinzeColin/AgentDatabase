@@ -323,6 +323,10 @@ EXCLUDE = {
     "johnlaw": ["1796-1873", "1946-", "1854-1923", "1881-1921", "active 1762", "1901-",
                 "John Easton", "Adger", "John M", "John E", "John W", "Radford", "Duncan",
                 "James Law", "Thomas Graves", "Cresson"],
+    # ★ David Ricardo #237（1772-1823，政治经济学家）：同名者/误挂按 creator 串排。
+    #   Katz（arxiv 数学）、Rabinovich-Berkman（印加法）、Rodbertus（德文社会主义选集，Ricardo 第 3 作者）、
+    #   Camp（Ricardian theory 论著作者）、Thompson（anti-Ricardo 论战者）。
+    "ricardo": ["Katz", "Rabinovich", "Berkman", "Rodbertus", "Camp", "Thompson", "John Ricardo"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -416,6 +420,9 @@ EXCLUDE_TITLE = {
     "johnlaw": ["illustrissimo", "calendarium", "charge delivered", "sermon preached",
                 "prospectus", "horoscope", "hyderabad", "indian snapshots", "hidden india",
                 "shirtmaker", "coach hockey", "gcse"],
+    # ★ Ricardo #237：1843 年《Mr. Ricardo speech on commercial treaties》是他弟弟 John Ricardo 在下院的演说
+    #   （David 1823 已卒，IA creator 误挂 David）——只能按题名排。
+    "ricardo": ["commercial treaties"],
 }
 # 目标必须出现在 creator 里的**姓名词元**（同一个 creator 段里全部出现即命中）。
 # ★★ 曾写成 `["Fröbel, Friedrich"]` 这种「姓, 名」定串，于是
@@ -526,6 +533,10 @@ REQUIRE = {
     #   bim 条目无生卒年）。REQUIRE 钉 law+john 两词元；同名者全部交给
     #   EXCLUDE（生卒年/身份词）与 EXCLUDE_TITLE（裸名者按题名）两侧排。
     "johnlaw": [["law", "john"]],
+    # ★ David Ricardo #237：目标署名形态 `Ricardo, David, 1772-1823`／`David Ricardo`。
+    #   REQUIRE 钉 ricardo+david；同名者由 EXCLUDE（Katz/Rabinovich/Rodbertus/Camp/Thompson/John）
+    #   与 EXCLUDE_TITLE（弟弟 John 的 1843 演说）排。
+    "ricardo": [["ricardo", "david"]],
 }
 
 

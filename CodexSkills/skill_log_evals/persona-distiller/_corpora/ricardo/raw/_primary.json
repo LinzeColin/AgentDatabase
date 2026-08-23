@@ -1,0 +1,171 @@
+{
+  "总数": 19,
+  "计数": {
+    "一手": 19,
+    "二手": 0,
+    "需人判": 0
+  },
+  "一手占比下界": 1.0,
+  "一手占比上界": 1.0,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "ricardo"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "10915754bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Die Grundsätze der politischen Oekonomie oder der Staatswirthschaft und der Best",
+      "creator": "Ricardo, David",
+      "words": 143193
+    },
+    {
+      "identifier": "BRes102102E",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters of David Ricardo to Thomas Robert Malthus : 1810-1823",
+      "creator": "Ricardo, David, 1772-1823",
+      "words": 96970
+    },
+    {
+      "identifier": "cihm_47310",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The high price of bullion [microform] : a proof of the depreciation of bank note",
+      "creator": "Ricardo, David, 1772-1823",
+      "words": 26155
+    },
+    {
+      "identifier": "desprincipesdele00ricguat",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Des principes de l'economie politique et de l'impôt",
+      "creator": "Ricardo, David",
+      "words": 86591
+    },
+    {
+      "identifier": "economicessays00rica",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Economic essays",
+      "creator": "Ricardo, David, 1772-1823",
+      "words": 125496
+    },
+    {
+      "identifier": "firstsixchapters00rica",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The first six chapters of the Principles of political economy and taxation of Da",
+      "creator": "Ricardo, David, 1772-1823",
+      "words": 37885
+    },
+    {
+      "identifier": "grundgesetzeder01diehgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Grundgesetze der volkswirthschaft und besteuerung ..",
+      "creator": "Ricardo, David, 1772-1823",
+      "words": 160557
+    },
+    {
+      "identifier": "highpriceofbulli10rica",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The high price of bullion : a proof of the depreciation of bank notes",
+      "creator": "Ricardo, David, 1772-1823",
+      "words": 16204
+    },
+    {
+      "identifier": "lettersdavidric00assogoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters of David Ricardo to John Ramsay McCulloch, 1816-1823",
+      "creator": "Ricardo, David, 1772-1823",
+      "words": 73373
+    },
+    {
+      "identifier": "letterstohutches00ricauoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters to Hutches Trower and others, 1811-1823. Edited by James Bonar and J.H. ",
+      "creator": "Ricardo, David, 1772-1823; Bonar, James, 1852-1941; Hollander, Jacob Harry, 1871",
+      "words": 91621
+    },
+    {
+      "identifier": "letterstothomasr00ricauoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Letters to Thomas Robert Malthus, 1810-1823. Edited by James Bonar",
+      "creator": "Ricardo, David, 1772-1823; Malthus, T. R. (Thomas Robert), 1766-1834; Bonar, Jam",
+      "words": 93813
+    },
+    {
+      "identifier": "onprinciplespol00ricagoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On the principles of political economy and taxation.",
+      "creator": "Ricardo, David, 1772-1823",
+      "words": 140536
+    },
+    {
+      "identifier": "principlesofpoli00ricauoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The principles of political economy & taxation",
+      "creator": "Ricardo, David, 1772-1823",
+      "words": 135119
+    },
+    {
+      "identifier": "proposalsforecon15rica",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Proposals for an economical and secure currency : with observations on the profi",
+      "creator": "Ricardo, David, 1772-1823; Murray, John, 1778-1843, publisher",
+      "words": 27011
+    },
+    {
+      "identifier": "replytomrbosanqu10rica",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Reply to Mr. Bosanquet's Practical observations on the report of the Bullion Com",
+      "creator": "Ricardo, David, 1772-1823; Murray, John, 1778-1843, publisher; Blackwood, Willia",
+      "words": 32817
+    },
+    {
+      "identifier": "threelettersonpr00rica",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Three letters on the price of gold, contributed to the Morning chronicle (London",
+      "creator": "Ricardo, David, 1772-1823",
+      "words": 9564
+    },
+    {
+      "identifier": "threelettersonpr00ricauoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Three letters on the price of gold, contributed to the Morning chronicle (London",
+      "creator": "Ricardo, David, 1772-1823",
+      "words": 9352
+    },
+    {
+      "identifier": "worksofdavidrica00rica",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "The works of David Ricardo. With a notice of the life and writings of the author",
+      "creator": "Ricardo, David, 1772-1823; McCulloch, J. R. (John Ramsay), 1789-1864",
+      "words": 302493
+    },
+    {
+      "identifier": "worksofdavidrica01rica",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "The works of David Ricardo",
+      "creator": "Ricardo, David, 1772-1823; McCulloch, J. R. (John Ramsay), 1789-1864",
+      "words": 298363
+    }
+  ]
+}

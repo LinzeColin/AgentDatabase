@@ -1,0 +1,108 @@
+{
+  "build_depth": {
+    "art-designer": "screening",
+    "entrepreneur-operator": "screening",
+    "investor-capital-allocator": "deep",
+    "software-developer": "screening",
+    "technical-engineer": "screening",
+    "thinker-educator": "screening"
+  },
+  "generated_at": "2026-08-23T02:23:55Z",
+  "identity_selection": {
+    "canonical": "investor-capital-allocator",
+    "display": "投资资本师",
+    "mode": "single",
+    "primary": "investor-capital-allocator",
+    "weights": {
+      "investor-capital-allocator": 1.0
+    }
+  },
+  "product_release_versioning": {
+    "consumed_on": "successful-registration",
+    "format": "0.0.0.N",
+    "maximum": "0.0.0.999",
+    "minimum": "0.0.0.1",
+    "scope": "per-canonical-person"
+  },
+  "provided_scenario": null,
+  "research": {
+    "base_lanes": [
+      "writings",
+      "conversations",
+      "expression",
+      "external",
+      "decisions",
+      "timeline"
+    ],
+    "completeness_method": [
+      "source-universe",
+      "coverage-cube",
+      "origin-clustering",
+      "gap-expansion",
+      "two-round-saturation"
+    ],
+    "primary_identity_focus": [
+      "估值与赔率",
+      "仓位与组合",
+      "风险预算",
+      "买入卖出和退出",
+      "逆风期行为",
+      "事后归因偏差"
+    ],
+    "scenario_priors": [
+      "公司研究",
+      "投资决策",
+      "组合管理",
+      "风险控制",
+      "资本配置",
+      "商业分析"
+    ],
+    "source_priorities": [
+      "investor-letters",
+      "filings",
+      "transactions",
+      "portfolio-history",
+      "risk-memos",
+      "downturn-behavior",
+      "postmortems"
+    ]
+  },
+  "runtime_identity_routing": {
+    "mode": "automatic",
+    "source": "distilled-identity-selection",
+    "task_reweighting": true,
+    "user_selection_required": false
+  },
+  "runtime_invocation_versioning": {
+    "audit_records": "optional-unnumbered",
+    "enabled": false,
+    "user_visible_version": false,
+    "versioned_output_names": false
+  },
+  "runtime_model_load_order": [
+    "boundaries.md",
+    "corrections/ACTIVE.md",
+    "facts.md",
+    "identity-facets/<selection>.md",
+    "cognitive-os.md",
+    "decision-policy.md",
+    "strategy.md",
+    "capabilities.md",
+    "work.md",
+    "persona.md",
+    "scenario-adapters/<inferred>.md",
+    "divergence-map.md"
+  ],
+  "runtime_readiness": {
+    "art-designer": "provisional-until-evidenced",
+    "entrepreneur-operator": "provisional-until-evidenced",
+    "investor-capital-allocator": "building",
+    "software-developer": "provisional-until-evidenced",
+    "technical-engineer": "provisional-until-evidenced",
+    "thinker-educator": "provisional-until-evidenced"
+  },
+  "scenario_policy": "infer-per-task",
+  "schema_version": "1.0",
+  "subject_origin": "historical",
+  "target_name": "David Ricardo"
+}

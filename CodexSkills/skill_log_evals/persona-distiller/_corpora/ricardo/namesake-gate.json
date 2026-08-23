@@ -1,0 +1,51 @@
+{
+ "schema_version": "1.0",
+ "target_name": "David Ricardo",
+ "normalized_name": "davidricardo",
+ "status": "ready",
+ "resolution": "single",
+ "candidate_count": 1,
+ "selected_subject_uid": "person-david-ricardo-1772",
+ "generated_at": "2026-08-23T02:23:42Z",
+ "search_scope": [
+  "sibling canonical registry",
+  "authoritative public sources supplied by orchestration"
+ ],
+ "candidates": [
+  {
+   "label": "A",
+   "canonical_name": "David Ricardo",
+   "subject_uid": "person-david-ricardo-1772",
+   "identity_category": "投资资本师",
+   "occupation_or_role": "英国政治经济学家（1772-1823），古典经济学完成者；下院议员（1819-1823），金块委员会/货币理论论战核心人物",
+   "professional_background": "David Ricardo（1772-1823，伦敦/伦敦证交所起家）是古典政治经济学的集大成者。1810-1811 年发表《金块高价论》（The High Price of Bullion）与对 Bosanquet 的驳论，主张恢复金本位、批评纸币过度发行；1816 年《一个经济而稳妥的通货建议》提出货币发行的规范方案；1817 年出版《政治经济学及赋税原理》（Principles of Political Economy and Taxation），提出地租理论、比较优势理论与劳动价值论；1819 年当选下院议员。其《致 Malthus 书信》（1810-1823）是经济学史上最著名的通信之一。档案：archive.org creator 字段 `Ricardo, David, 1772-1823`。",
+   "application_scenarios": [
+    "货币与金本位理论：纸币发行、金块价格与通货紧缩（Bullion 论战）",
+    "国际贸易与比较优势：专业化分工与关税/贸易政策分析（Principles 第七章）",
+    "地租、利润与工资分配：劳动价值论、地租理论与级差地租",
+    "财政与赋税：税收转嫁、公债与货币发行规范（Proposals for Economical Currency）",
+    "政策论战与议会演说的论证方式（答 Bosanquet、致 Malthus 书信的 objection-answer）"
+   ],
+   "key_capabilities": [
+    "货币经济学——金本位、纸币发行限制、金块高价与通货贬值分析（High Price of Bullion、Proposals）",
+    "劳动价值论与分配理论——地租、利润、工资的三分与级差地租（Principles）",
+    "比较优势理论——国际贸易专业化与自由贸易论证（Principles 第七章）",
+    "赋税理论——税收归宿、转嫁与公债分析（Principles 第八至十七章）",
+    "论战与通信——以严密推理逐条反驳对手（Reply to Bosanquet、致 Malthus 书信）"
+   ],
+   "distinguishing_basis": "探源：`creator:\"Ricardo, David\"` numFound=87 条，目标署名 `Ricardo, David, 1772-1823`。同名者/误挂全部按 creator 与题名排除：Katz（arxiv 数学）、Rabinovich-Berkman（印加法）、Rodbertus（德文社会主义选集，Ricardo 第 3 作者）、Camp（Ricardian theory 论著）、Thompson（anti-Ricardo 论战）、John Ricardo（弟，1843 年下院演说，IA 误挂 David，按题名排）。一手互异约 10 部（Principles 多版次、High Price of Bullion、Reply to Bosanquet、Proposals、Three Letters on Gold、致 Malthus/Trower/McCulloch 书信集、Works 1888）。",
+   "authoritative_sources": [
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Ricardo%2C+David%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=200&output=json"
+    },
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=title%3A%28%22high+price+of+bullion%22%29&fl%5B%5D=identifier,title,creator,year&rows=50&output=json"
+    }
+   ],
+   "evidence_level": "high"
+  }
+ ],
+ "candidate_cards": [
+  "A. 人物与身份：David Ricardo；投资资本师；英国政治经济学家（1772-1823），古典经济学完成者；下院议员（1819-1823），金块委员会/货币理论论战核心人物。\n   专业背景：David Ricardo（1772-1823，伦敦/伦敦证交所起家）是古典政治经济学的集大成者。1810-1811 年发表《金块高价论》（The High Price of Bullion）与对 Bosanquet 的驳论，主张恢复金本位、批评纸币过度发行；1816 年《一个经济而稳妥的通货建议》提出货币发行的规范方案；1817 年出版《政治经济学及赋税原理》（Principles of Political Economy and Taxation），提出地租理论、比较优势理论与劳动价值论；1819 年当选下院议员。其《致 Malthus 书信》（1810-1823）是经济学史上最著名的通信之一。档案：archive.org creator 字段 `Ricardo, David, 1772-1823`。。\n   应用价值：场景：货币与金本位理论：纸币发行、金块价格与通货紧缩（Bullion 论战）；国际贸易与比较优势：专业化分工与关税/贸易政策分析（Principles 第七章）；地租、利润与工资分配：劳动价值论、地租理论与级差地租；财政与赋税：税收转嫁、公债与货币发行规范（Proposals for Economical Currency）；政策论战与议会演说的论证方式（答 Bosanquet、致 Malthus 书信的 objection-answer）；关键能力：货币经济学——金本位、纸币发行限制、金块高价与通货贬值分析（High Price of Bullion、Proposals）；劳动价值论与分配理论——地租、利润、工资的三分与级差地租（Principles）；比较优势理论——国际贸易专业化与自由贸易论证（Principles 第七章）；赋税理论——税收归宿、转嫁与公债分析（Principles 第八至十七章）；论战与通信——以严密推理逐条反驳对手（Reply to Bosanquet、致 Malthus 书信）。\n   区分依据：探源：`creator:\"Ricardo, David\"` numFound=87 条，目标署名 `Ricardo, David, 1772-1823`。同名者/误挂全部按 creator 与题名排除：Katz（arxiv 数学）、Rabinovich-Berkman（印加法）、Rodbertus（德文社会主义选集，Ricardo 第 3 作者）、Camp（Ricardian theory 论著）、Thompson（anti-Ricardo 论战）、John Ricardo（弟，1843 年下院演说，IA 误挂 David，按题名排）。一手互异约 10 部（Principles 多版次、High Price of Bullion、Reply to Bosanquet、Proposals、Three Letters on Gold、致 Malthus/Trower/McCulloch 书信集、Works 1888）。。"
+ ]
+}
