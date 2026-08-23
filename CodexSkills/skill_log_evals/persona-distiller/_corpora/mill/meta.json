@@ -1,0 +1,103 @@
+{
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "person-john-stuart-mill-1806",
+ "consent_authority": null,
+ "created_at": "2026-08-23T10:56:18Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "investor-capital-allocator",
+  "display": "投资资本师",
+  "mode": "single",
+  "primary": "investor-capital-allocator",
+  "weights": {
+   "investor-capital-allocator": 1.0
+  }
+ },
+ "language": "zh-CN",
+ "model_version": "0.1.0-draft",
+ "name": "John Stuart Mill",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "政治经济学：生产与分配规律、工资与利润、价值理论（Principles）",
+    "自由主义与政治哲学：个人自由边界、社会对个人的权力（On Liberty）",
+    "功利主义伦理：最大幸福原则及其应用（Utilitarianism）",
+    "代议制与政府理论：代议制政府、比例代表（Representative Government）",
+    "经济学方法论：归纳与演绎、实证与规范之分（System of Logic、Unsettled Questions）"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Mill%2C+John+Stuart%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=300&output=json"
+    },
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=title%3A%28%22autobiography%22%29+AND+creator%3A%28%22Mill%22%29&fl%5B%5D=identifier,title,creator,year&rows=50&output=json"
+    }
+   ],
+   "canonical_name": "John Stuart Mill",
+   "distinguishing_basis": "探源：`creator:\"Mill, John Stuart\"` numFound=624 条，目标署名 `Mill, John Stuart, 1806-1873`（含变体 Mill,john Stuart / MILL JOHN STUART）。同名者为其父 James Mill（历史学家/功利主义哲学家，creator `Mill, James`）已按 creator 串排除。一手互异约 13 部（Principles 多版、On Liberty、Utilitarianism、System of Logic、Examination of Hamilton、Representative Government、Chapters on Socialism、Unsettled Questions、Auguste Comte、Dissertations、Autobiography 1873、Letters 1910、John Stuart Mill his life 1873）。",
+   "evidence_level": "high",
+   "identity_category": "投资资本师",
+   "key_capabilities": [
+    "政治经济学——生产/分配规律、价值与价格、工资基金论及其修正（Principles）",
+    "自由主义哲学——伤害原则（harm principle）、思想与言论自由（On Liberty）",
+    "功利主义——最大幸福原则、快乐质的区分（Utilitarianism）",
+    "代议制理论——比例代表、少数代表权（Representative Government）",
+    "逻辑与方法论——归纳法五律、经验主义认识论（System of Logic）"
+   ],
+   "label": "A",
+   "occupation_or_role": "英国哲学家与政治经济学家（1806-1873），古典自由主义与功利主义集大成者；东印度公司职员（1823-1858）",
+   "professional_background": "John Stuart Mill（1806-1873，伦敦）是 19 世纪最重要的自由主义者与经济学家之一。其父 James Mill 自幼对其进行严格教育（三岁学希腊文）；1823 年入东印度公司任检查员，服务至 1858 年公司解散。1843 年《逻辑体系》（A System of Logic）；1848 年《政治经济学原理》（Principles of Political Economy，历经多版）；1859 年《论自由》（On Liberty）；1861 年《代议制政府》；1863 年《功利主义》；1869 年《妇女的从属地位》；1873 年《自传》（Autobiography）。其《政治经济学原理》长期是标准教科书，提出生产规律与分配规律之分、工资基金论（后修正）、对社会主义的同情式分析。档案：archive.org creator 字段 `Mill, John Stuart, 1806-1873`。",
+   "subject_uid": "person-john-stuart-mill-1806"
+  },
+  "chosen_subject_uid": "person-john-stuart-mill-1806",
+  "normalized_name": "johnstuartmill",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "johnstuartmill",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "mill",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-5957d8c947cd",
+ "time_scope": "all available periods, separated by role and material drift",
+ "updated_at": "2026-08-23T10:56:18Z",
+ "attribution_basis": {
+  "authority": "John Stuart Mill（1806-1873）著作归属依据：① archive.org 目录 creator 字段（Mill, John Stuart, 1806-1873）逐份点名；② 各书题名页/署名行（见 covered_sources 逐份照录）——《On Liberty》题名页署 JOHN STUART MILL；《Utilitarianism》题名页署 JOHN STUART MILL；《The Letters of John Stuart Mill》(1910) 卷首 'WORKS BY JOHN STUART MILL'；《Autobiography》(1873) 为其自传（第一人称，与第三方传记区分）。",
+  "citation": "archive.org 目录检索 creator:\"Mill, John Stuart\"（numFound=624 条，互异一手约 13 部）+ 各源 archive.org item 页（locator 见 source-ledger.jsonl）；出版记录见各源 locator。",
+  "disputed_policy": "《John Stuart Mill: his life and works》(1873) 为逝世后编的纪念/述评卷（二手，external）；《Memories of Old Friends》(Caroline Fox 1882) 为同时代友人回忆录（二手，external），引用时须标注第三方视角。两书均不当作 Mill 本人观点。其余作品为 Mill 本人著作或书信；《Letters of John Stuart Mill》(1910, Hugh Elliott 编) 为其书信结集（一手，conversations）。无学界公认伪托争议。",
+  "disputed_works": [],
+  "covered_sources": [
+   "principlesofpoli00mill_3.txt ｜ 署名照录：Principles of political economy, with some of their applications to social philosophy",
+   "onliberty05millgoog.txt ｜ 署名照录：ON LIBERTY. BY JOHN STUART MILL.",
+   "dli.ernet.531701.txt ｜ 署名照录：UTILITARIANISM. JOHN STUART MILL",
+   "asystemlogicrat00millgoog.txt ｜ 署名照录：A system of logic, ratiocinative and inductive",
+   "asystemoflogic02milluoft.txt ｜ 署名照录：A system of logic, ratiocinative and inductive",
+   "essaysonsomeunse12004gut.txt ｜ 署名照录：Essays on some unsettled Questions of Political Economy",
+   "augustecomteposi00mill_0.txt ｜ 署名照录：Auguste Comte and positivism",
+   "dissertationsdis00milliala.txt ｜ 署名照录：Dissertations and discussions: political, philosophical, and historical",
+   "autobiographymil00milluoft.txt ｜ 署名照录：AUTOBIOGRAPHY",
+   "india.history.resource.77050.txt ｜ 署名照录：WORKS BY JOHN STUART MILL",
+   "chaptersonsocial00mill.txt ｜ 署名照录：Chapters on socialism",
+   "johnstuartmillhi00mill.txt ｜ 署名照录：John Stuart Mill: his life and works",
+   "examinationofsir00mill.txt ｜ 署名照录：An examination of Sir William Hamilton's philosophy",
+   "memoriesofoldfri01foxc.txt ｜ 署名照录：Memories of old friends : being extracts from the journals of Caroline Fox"
+  ]
+ }
+}

@@ -327,6 +327,9 @@ EXCLUDE = {
     #   Katz（arxiv 数学）、Rabinovich-Berkman（印加法）、Rodbertus（德文社会主义选集，Ricardo 第 3 作者）、
     #   Camp（Ricardian theory 论著作者）、Thompson（anti-Ricardo 论战者）。
     "ricardo": ["Katz", "Rabinovich", "Berkman", "Rodbertus", "Camp", "Thompson", "John Ricardo"],
+    # ★ John Stuart Mill #249（1806-1873）：同名者为父亲 James Mill（历史学家/哲学家）——
+    #   按 creator 串排；其余 creator 变体（Mill,john Stuart/MILL JOHN STUART）为本尊。
+    "mill": ["Mill, James", "James Mill", "Mill, John Stuart, 1806-1873; Mill, James"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -423,6 +426,7 @@ EXCLUDE_TITLE = {
     # ★ Ricardo #237：1843 年《Mr. Ricardo speech on commercial treaties》是他弟弟 John Ricardo 在下院的演说
     #   （David 1823 已卒，IA creator 误挂 David）——只能按题名排。
     "ricardo": ["commercial treaties"],
+    "mill": [],
 }
 # 目标必须出现在 creator 里的**姓名词元**（同一个 creator 段里全部出现即命中）。
 # ★★ 曾写成 `["Fröbel, Friedrich"]` 这种「姓, 名」定串，于是
@@ -537,6 +541,9 @@ REQUIRE = {
     #   REQUIRE 钉 ricardo+david；同名者由 EXCLUDE（Katz/Rabinovich/Rodbertus/Camp/Thompson/John）
     #   与 EXCLUDE_TITLE（弟弟 John 的 1843 演说）排。
     "ricardo": [["ricardo", "david"]],
+    # ★ John Stuart Mill #249：目标署名形态 `Mill, John Stuart, 1806-1873`／`Mill,john Stuart`
+    #   ／`MILL, JOHN STUART`。REQUIRE 钉 mill+john+stuart；James Mill（父）由 EXCLUDE 排。
+    "mill": [["mill", "john", "stuart"]],
 }
 
 

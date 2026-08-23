@@ -1,0 +1,101 @@
+{
+  "lanes": 4,
+  "去掉纸面道后": 1,
+  "逐道份数": {
+    "writings": 14,
+    "conversations": 1,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 1,
+    "external": 1
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "asystemlogicrat00millgoog",
+      "道": "writings",
+      "title": "A system of logic, ratiocinative and inductive, being a connected view"
+    },
+    {
+      "identifier": "asystemoflogic02milluoft",
+      "道": "writings",
+      "title": "A system of logic, ratiocinative and inductive; being a connected view"
+    },
+    {
+      "identifier": "augustecomteposi00mill_0",
+      "道": "writings",
+      "title": "Auguste Comte and positivism"
+    },
+    {
+      "identifier": "autobiographymil00milluoft",
+      "道": "timeline",
+      "title": "Autobiography"
+    },
+    {
+      "identifier": "chaptersonsocial00mill",
+      "道": "writings",
+      "title": "Chapters on socialism"
+    },
+    {
+      "identifier": "considerationson05669gut",
+      "道": "writings",
+      "title": "Considerations on Representative Government"
+    },
+    {
+      "identifier": "dissertationsdis00milliala",
+      "道": "writings",
+      "title": "Dissertations and discussions: political, philosophical, and historica"
+    },
+    {
+      "identifier": "dli.ernet.531701",
+      "道": "writings",
+      "title": "Utilitarianism"
+    },
+    {
+      "identifier": "essaysonsomeunse12004gut",
+      "道": "writings",
+      "title": "Essays on some unsettled Questions of Political Economy"
+    },
+    {
+      "identifier": "examinationofsir00mill",
+      "道": "writings",
+      "title": "An examination of Sir William Hamilton's philosophy, and of the princi"
+    },
+    {
+      "identifier": "india.history.resource.77050",
+      "道": "conversations",
+      "title": "The Letters of John Stuart Mill, Vol. II"
+    },
+    {
+      "identifier": "johnstuartmillhi00mill",
+      "道": "external",
+      "title": "John Stuart Mill: his life and works"
+    },
+    {
+      "identifier": "memoriesofoldfri01foxc",
+      "道": "writings",
+      "title": "Memories of old friends : being extracts from the journals of Caroline"
+    },
+    {
+      "identifier": "onliberty05millgoog",
+      "道": "writings",
+      "title": "On liberty"
+    },
+    {
+      "identifier": "onlibertyxero00milluoft",
+      "道": "writings",
+      "title": "On liberty"
+    },
+    {
+      "identifier": "principlesofpoli00mill_3",
+      "道": "writings",
+      "title": "Principles of political economy :with some of their applications to so"
+    },
+    {
+      "identifier": "principlespolit03millgoog",
+      "道": "writings",
+      "title": "Principles of political economy : with some of their applications to s"
+    }
+  ]
+}

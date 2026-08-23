@@ -1,0 +1,155 @@
+{
+  "总数": 17,
+  "计数": {
+    "一手": 15,
+    "二手": 1,
+    "需人判": 1
+  },
+  "一手占比下界": 0.8824,
+  "一手占比上界": 0.9412,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "mill"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "asystemlogicrat00millgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A system of logic, ratiocinative and inductive, being a connected view of the pr",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 189807
+    },
+    {
+      "identifier": "asystemoflogic02milluoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A system of logic, ratiocinative and inductive; being a connected view of the pr",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 204195
+    },
+    {
+      "identifier": "augustecomteposi00mill_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Auguste Comte and positivism",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 56045
+    },
+    {
+      "identifier": "autobiographymil00milluoft",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "Autobiography",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 79088
+    },
+    {
+      "identifier": "chaptersonsocial00mill",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Chapters on socialism",
+      "creator": "Mill, John Stuart",
+      "words": 29424
+    },
+    {
+      "identifier": "considerationson05669gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Considerations on Representative Government",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 97570
+    },
+    {
+      "identifier": "dissertationsdis00milliala",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Dissertations and discussions: political, philosophical, and historical",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 130133
+    },
+    {
+      "identifier": "dli.ernet.531701",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Utilitarianism",
+      "creator": "Mill,john Stuart",
+      "words": 32836
+    },
+    {
+      "identifier": "essaysonsomeunse12004gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Essays on some unsettled Questions of Political Economy",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 53177
+    },
+    {
+      "identifier": "examinationofsir00mill",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「writings」",
+      "title": "An examination of Sir William Hamilton's philosophy, and of the principal philos",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 216554
+    },
+    {
+      "identifier": "india.history.resource.77050",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "The Letters of John Stuart Mill, Vol. II",
+      "creator": "Mill, John Stuart; Elliot, Hugh S. R. (Ed.); Taylor, Mary",
+      "words": 147243
+    },
+    {
+      "identifier": "johnstuartmillhi00mill",
+      "档": "二手",
+      "依据": "题名含「his life and」且含目标姓名",
+      "title": "John Stuart Mill: his life and works",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 25941
+    },
+    {
+      "identifier": "memoriesofoldfri01foxc",
+      "档": "需人判",
+      "依据": "creator 第 3 位；无自著标记",
+      "title": "Memories of old friends : being extracts from the journals of Caroline Fox of Pe",
+      "creator": "Fox, Caroline, 1819-1871; Pym, Horace N; Mill, John Stuart, 1806-1873",
+      "words": 78919
+    },
+    {
+      "identifier": "onliberty05millgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On liberty",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 52988
+    },
+    {
+      "identifier": "onlibertyxero00milluoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "On liberty",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 55123
+    },
+    {
+      "identifier": "principlesofpoli00mill_3",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Principles of political economy :with some of their applications to social philo",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 451901
+    },
+    {
+      "identifier": "principlespolit03millgoog",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Principles of political economy : with some of their applications to social phil",
+      "creator": "Mill, John Stuart, 1806-1873",
+      "words": 216141
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+ "schema_version": "1.0",
+ "target_name": "John Stuart Mill",
+ "normalized_name": "johnstuartmill",
+ "status": "ready",
+ "resolution": "single",
+ "candidate_count": 1,
+ "selected_subject_uid": "person-john-stuart-mill-1806",
+ "generated_at": "2026-08-23T10:53:55Z",
+ "search_scope": [
+  "sibling canonical registry",
+  "authoritative public sources supplied by orchestration"
+ ],
+ "candidates": [
+  {
+   "label": "A",
+   "canonical_name": "John Stuart Mill",
+   "subject_uid": "person-john-stuart-mill-1806",
+   "identity_category": "投资资本师",
+   "occupation_or_role": "英国哲学家与政治经济学家（1806-1873），古典自由主义与功利主义集大成者；东印度公司职员（1823-1858）",
+   "professional_background": "John Stuart Mill（1806-1873，伦敦）是 19 世纪最重要的自由主义者与经济学家之一。其父 James Mill 自幼对其进行严格教育（三岁学希腊文）；1823 年入东印度公司任检查员，服务至 1858 年公司解散。1843 年《逻辑体系》（A System of Logic）；1848 年《政治经济学原理》（Principles of Political Economy，历经多版）；1859 年《论自由》（On Liberty）；1861 年《代议制政府》；1863 年《功利主义》；1869 年《妇女的从属地位》；1873 年《自传》（Autobiography）。其《政治经济学原理》长期是标准教科书，提出生产规律与分配规律之分、工资基金论（后修正）、对社会主义的同情式分析。档案：archive.org creator 字段 `Mill, John Stuart, 1806-1873`。",
+   "application_scenarios": [
+    "政治经济学：生产与分配规律、工资与利润、价值理论（Principles）",
+    "自由主义与政治哲学：个人自由边界、社会对个人的权力（On Liberty）",
+    "功利主义伦理：最大幸福原则及其应用（Utilitarianism）",
+    "代议制与政府理论：代议制政府、比例代表（Representative Government）",
+    "经济学方法论：归纳与演绎、实证与规范之分（System of Logic、Unsettled Questions）"
+   ],
+   "key_capabilities": [
+    "政治经济学——生产/分配规律、价值与价格、工资基金论及其修正（Principles）",
+    "自由主义哲学——伤害原则（harm principle）、思想与言论自由（On Liberty）",
+    "功利主义——最大幸福原则、快乐质的区分（Utilitarianism）",
+    "代议制理论——比例代表、少数代表权（Representative Government）",
+    "逻辑与方法论——归纳法五律、经验主义认识论（System of Logic）"
+   ],
+   "distinguishing_basis": "探源：`creator:\"Mill, John Stuart\"` numFound=624 条，目标署名 `Mill, John Stuart, 1806-1873`（含变体 Mill,john Stuart / MILL JOHN STUART）。同名者为其父 James Mill（历史学家/功利主义哲学家，creator `Mill, James`）已按 creator 串排除。一手互异约 13 部（Principles 多版、On Liberty、Utilitarianism、System of Logic、Examination of Hamilton、Representative Government、Chapters on Socialism、Unsettled Questions、Auguste Comte、Dissertations、Autobiography 1873、Letters 1910、John Stuart Mill his life 1873）。",
+   "authoritative_sources": [
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Mill%2C+John+Stuart%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=300&output=json"
+    },
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=title%3A%28%22autobiography%22%29+AND+creator%3A%28%22Mill%22%29&fl%5B%5D=identifier,title,creator,year&rows=50&output=json"
+    }
+   ],
+   "evidence_level": "high"
+  }
+ ],
+ "candidate_cards": [
+  "A. 人物与身份：John Stuart Mill；投资资本师；英国哲学家与政治经济学家（1806-1873），古典自由主义与功利主义集大成者；东印度公司职员（1823-1858）。\n   专业背景：John Stuart Mill（1806-1873，伦敦）是 19 世纪最重要的自由主义者与经济学家之一。其父 James Mill 自幼对其进行严格教育（三岁学希腊文）；1823 年入东印度公司任检查员，服务至 1858 年公司解散。1843 年《逻辑体系》（A System of Logic）；1848 年《政治经济学原理》（Principles of Political Economy，历经多版）；1859 年《论自由》（On Liberty）；1861 年《代议制政府》；1863 年《功利主义》；1869 年《妇女的从属地位》；1873 年《自传》（Autobiography）。其《政治经济学原理》长期是标准教科书，提出生产规律与分配规律之分、工资基金论（后修正）、对社会主义的同情式分析。档案：archive.org creator 字段 `Mill, John Stuart, 1806-1873`。。\n   应用价值：场景：政治经济学：生产与分配规律、工资与利润、价值理论（Principles）；自由主义与政治哲学：个人自由边界、社会对个人的权力（On Liberty）；功利主义伦理：最大幸福原则及其应用（Utilitarianism）；代议制与政府理论：代议制政府、比例代表（Representative Government）；经济学方法论：归纳与演绎、实证与规范之分（System of Logic、Unsettled Questions）；关键能力：政治经济学——生产/分配规律、价值与价格、工资基金论及其修正（Principles）；自由主义哲学——伤害原则（harm principle）、思想与言论自由（On Liberty）；功利主义——最大幸福原则、快乐质的区分（Utilitarianism）；代议制理论——比例代表、少数代表权（Representative Government）；逻辑与方法论——归纳法五律、经验主义认识论（System of Logic）。\n   区分依据：探源：`creator:\"Mill, John Stuart\"` numFound=624 条，目标署名 `Mill, John Stuart, 1806-1873`（含变体 Mill,john Stuart / MILL JOHN STUART）。同名者为其父 James Mill（历史学家/功利主义哲学家，creator `Mill, James`）已按 creator 串排除。一手互异约 13 部（Principles 多版、On Liberty、Utilitarianism、System of Logic、Examination of Hamilton、Representative Government、Chapters on Socialism、Unsettled Questions、Auguste Comte、Dissertations、Autobiography 1873、Letters 1910、John Stuart Mill his life 1873）。。"
+ ]
+}
