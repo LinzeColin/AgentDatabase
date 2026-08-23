@@ -110,6 +110,9 @@ def newest_logs(count: int = 2) -> list[Path]:  # 读两个最新的
 连续写还会把 SMB 打崩（240/612 报 I/O error），要退避 + 节流。见 09-archive.md。
 
 **通用教训：写完不读回来核对，就不叫备份。exit code 0 不是判据。**
+（2026-08-23 补充：`shutil.copy2` 和 `PIL Image.save` **直写** SMB 路径同样中招——爱莉希雅
+待发包 18 张成品全部整文件清零、Finder 打不开。铁律：写 /Volumes/share 一律
+`rsync -a --inplace --exclude='.DS_Store' --exclude='._*'` + 写后 md5/PIL verify + 收尾删 `._*`。）
 
 ## 13. 面板看起来是控制器，其实是只读的
 

@@ -30,7 +30,8 @@ import pathlib
 import sys
 import time
 
-GAME_ZH = {"genshin": "原神", "hsr": "崩铁", "zzz": "绝区零", "wuwa": "鸣潮", "nte": "异环"}
+GAME_ZH = {"genshin": "原神", "hsr": "崩铁", "zzz": "绝区零", "wuwa": "鸣潮", "nte": "异环",
+           "hi3": "崩坏3"}
 
 
 def digest(path: pathlib.Path) -> str:
@@ -98,8 +99,10 @@ def main() -> None:
 
     os.environ["COPYFILE_DISABLE"] = "1"
     metrics = {}
+    pack_version = "1.7.0"
     if args.state and args.state.exists():
         state = json.loads(args.state.read_text(encoding="utf-8"))
+        pack_version = state.get("pack_version") or pack_version
         for unit in state["units"].values():
             metrics.setdefault(unit["task"], {})[unit["side"]] = {
                 "status": unit["status"], "metrics": unit["metrics"],
@@ -132,7 +135,7 @@ def main() -> None:
                 "game": game, "game_zh": game_zh,
                 "character": character, "variant": variant,
                 "model": "gpt-image-2", "size": "3840x2160",
-                "pack_version": "1.7.0",
+                "pack_version": pack_version,
                 "acceptance": metrics.get(f"{game}/{character}/{variant}", {}),
                 "generated": time.strftime("%Y-%m-%d"),
             }

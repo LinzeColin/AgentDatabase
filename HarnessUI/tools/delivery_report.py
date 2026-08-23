@@ -67,7 +67,7 @@ def main() -> None:
         f"- 运行时（宿主直接读）：`~/.harness-ui/master/` · `display/` · `thumb/`",
         f"- NAS 归档：`{args.share}/<游戏中文>/<角色>/skins/<变体>/`",
         f"- 仓内治理：`HarnessUI/delivery/`（manifest + 验收台账）",
-        f"- 人工复核页：`~/.harness-ui/qa/index.html`（需素材服务在跑）", "",
+        f"- 人工复核页：`~/.harness-ui/review.html`（build_review.py 生成，需素材服务在跑）", "",
         "## 上线状态", "",
         f"- 目录 **{catalog.get('count', 0)} 条**：" + " · ".join(f"{k} {v}" for k, v in sorted(by_game.items())),
         "- 轮播周期：已清空重洗（不重洗新素材这轮走完前不会出现）",

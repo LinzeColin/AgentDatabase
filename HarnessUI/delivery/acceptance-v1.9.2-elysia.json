@@ -1,0 +1,266 @@
+{
+ "pack_version": "1.9.2-elysia",
+ "model": "gpt-image-2",
+ "size": "3840x2160",
+ "rounds": 3,
+ "max_attempts": 3,
+ "spend_usd": 0.526919,
+ "generated_total": 30,
+ "accepted": 10,
+ "blocked": 6,
+ "retry": 0,
+ "pending": 0,
+ "in_batch": 0,
+ "records": {
+  "hi3/elysia/default|light": {
+   "task": "hi3/elysia/default",
+   "side": "light",
+   "status": "blocked",
+   "attempts": 3,
+   "metrics": null,
+   "fails": [
+    "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and inclu"
+   ]
+  },
+  "hi3/elysia/default|dark": {
+   "task": "hi3/elysia/default",
+   "side": "dark",
+   "status": "blocked",
+   "attempts": 3,
+   "metrics": null,
+   "fails": [
+    "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and inclu"
+   ]
+  },
+  "hi3/elysia/miss-pink|light": {
+   "task": "hi3/elysia/miss-pink",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.77,
+    "right_edge": 4.5,
+    "spill": 0.311
+   },
+   "fails": [],
+   "dhash": {
+    "anchor": "0011000010110010111000001110000001100000110010001101100001111000",
+    "generated": "0001001010100000011010000011010101110000011000010010000101100001",
+    "hamming": 25
+   }
+  },
+  "hi3/elysia/miss-pink|dark": {
+   "task": "hi3/elysia/miss-pink",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.492,
+    "right_edge": 3.9,
+    "spill": 0.319
+   },
+   "fails": [],
+   "dhash": {
+    "anchor": "0011000010110010111000001110000001100000110010001101100001111000",
+    "generated": "0011001100000101001000110010000100010010000101001100010001000100",
+    "hamming": 31
+   }
+  },
+  "hi3/elysia/herrscher-of-human-ego|light": {
+   "task": "hi3/elysia/herrscher-of-human-ego",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.777,
+    "right_edge": 5.6,
+    "spill": 0.376
+   },
+   "fails": [],
+   "dhash": {
+    "anchor": "0001000000110000011000000110110001111100111011000111100011111001",
+    "generated": "1001000100110011001110100110100101111010011100100111101100101001",
+    "hamming": 22
+   }
+  },
+  "hi3/elysia/herrscher-of-human-ego|dark": {
+   "task": "hi3/elysia/herrscher-of-human-ego",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.495,
+    "right_edge": 7.7,
+    "spill": 0.398
+   },
+   "fails": [],
+   "dhash": {
+    "anchor": "0001000000110000011000000110110001111100111011000111100011111001",
+    "generated": "1100100110000011100100100010001101001011000100010001000100010011",
+    "hamming": 41
+   }
+  },
+  "hi3/elysia/faded-miss-elf|light": {
+   "task": "hi3/elysia/faded-miss-elf",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.781,
+    "right_edge": 3.1,
+    "spill": 0.215
+   },
+   "fails": [],
+   "dhash": {
+    "anchor": "0111000110110000101100011010010011110100111100101100100011001100",
+    "generated": "0101100000110100001110001111010011111110011110100001100000001000",
+    "hamming": 20
+   }
+  },
+  "hi3/elysia/faded-miss-elf|dark": {
+   "task": "hi3/elysia/faded-miss-elf",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.495,
+    "right_edge": 6.0,
+    "spill": 0.358
+   },
+   "fails": [],
+   "dhash": {
+    "anchor": "0111000110110000101100011010010011110100111100101100100011001100",
+    "generated": "0010011100001011100101010010010100001001000111000000110110011000",
+    "hamming": 34
+   }
+  },
+  "hi3/elysia/summer-miss-elf|light": {
+   "task": "hi3/elysia/summer-miss-elf",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 3,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.85,
+    "right_edge": 3.4,
+    "spill": 0.261
+   },
+   "fails": [],
+   "dhash": {
+    "anchor": "0111100110110000101110011100010011001000111010001101000011100001",
+    "generated": "1101001101110100001100000011010000110100001010010010100001100010",
+    "hamming": 31
+   }
+  },
+  "hi3/elysia/summer-miss-elf|dark": {
+   "task": "hi3/elysia/summer-miss-elf",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.453,
+    "right_edge": 5.0,
+    "spill": 0.366
+   },
+   "fails": [],
+   "dhash": {
+    "anchor": "0111100110110000101110011100010011001000111010001101000011100001",
+    "generated": "0000001101001001010000111001010110010011000000111100001111000001",
+    "hamming": 35
+   }
+  },
+  "hi3/elysia/peachy-spring|light": {
+   "task": "hi3/elysia/peachy-spring",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.825,
+    "right_edge": 4.2,
+    "spill": 0.215
+   },
+   "fails": [],
+   "dhash": {
+    "anchor": "0101100000111010010101011111010111110011110110001000110011011100",
+    "generated": "0001001101011001010110010101001001110100001100000001100001001001",
+    "hamming": 30
+   }
+  },
+  "hi3/elysia/peachy-spring|dark": {
+   "task": "hi3/elysia/peachy-spring",
+   "side": "dark",
+   "status": "blocked",
+   "attempts": 3,
+   "metrics": null,
+   "fails": [
+    "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and inclu"
+   ]
+  },
+  "hi3/elysia/lunar-grace|light": {
+   "task": "hi3/elysia/lunar-grace",
+   "side": "light",
+   "status": "blocked",
+   "attempts": 3,
+   "metrics": null,
+   "fails": [
+    "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and inclu"
+   ]
+  },
+  "hi3/elysia/lunar-grace|dark": {
+   "task": "hi3/elysia/lunar-grace",
+   "side": "dark",
+   "status": "blocked",
+   "attempts": 3,
+   "metrics": null,
+   "fails": [
+    "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and inclu"
+   ]
+  },
+  "hi3/elysia/hi-love-elf|light": {
+   "task": "hi3/elysia/hi-love-elf",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.836,
+    "right_edge": 4.0,
+    "spill": 0.219
+   },
+   "fails": [],
+   "dhash": {
+    "anchor": "0001100000111001101100000110000011111000100000110100001001011000",
+    "generated": "0101001000111001111010011011010001100100110001000100100111001011",
+    "hamming": 26
+   }
+  },
+  "hi3/elysia/hi-love-elf|dark": {
+   "task": "hi3/elysia/hi-love-elf",
+   "side": "dark",
+   "status": "blocked",
+   "attempts": 3,
+   "metrics": null,
+   "fails": [
+    "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and inclu"
+   ]
+  }
+ }
+}

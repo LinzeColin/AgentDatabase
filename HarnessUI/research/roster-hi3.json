@@ -1,0 +1,1767 @@
+{
+ "game": "hi3",
+ "game_zh": "崩坏3",
+ "wiki": "honkaiimpact3",
+ "kind": "female-playable(全员女性;wiki无可用性别分类交集,筛法=Category:Playable Characters全量41人,2个APHO后缀页并入本体得39)",
+ "count": 39,
+ "source": "https://honkaiimpact3.fandom.com (Category:Playable Characters / <角色> Battlesuits / <装甲> Outfits)",
+ "anchor_source": "bh3.com 官网内容接口 act-api-takumi-static.mihoyo.com/content_v2_user/app/b9d5f96cd69047eb/getContentList?iChanId=703 (sExt.703_3=装甲立绘,实测1198x1151)",
+ "collected": "2026-08-23",
+ "characters": [
+  {
+   "id": "kiana-kaslana",
+   "name_en": "Kiana Kaslana",
+   "name_zh": "琪亚娜·卡斯兰娜",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Kiana_Kaslana",
+   "battlesuits": [
+    {
+     "name_en": "White Comet",
+     "outfits": [
+      "White Comet/Outfit",
+      "Starless Rift",
+      "Sunny Beach",
+      "Prodigal Girl"
+     ]
+    },
+    {
+     "name_en": "Valkyrie Ranger",
+     "outfits": [
+      "Valkyrie Ranger/Outfit",
+      "Ocean Ranger",
+      "Honkai World Diva"
+     ]
+    },
+    {
+     "name_en": "Void Drifter",
+     "outfits": [
+      "Void Drifter/Outfit",
+      "Red Lictor",
+      "Peak Sync PS",
+      "Radiant Blaze"
+     ]
+    },
+    {
+     "name_en": "Divine Prayer",
+     "outfits": [
+      "Divine Prayer/Outfit",
+      "Lavender Love",
+      "Winter Princess",
+      "Frostmoon Bunny",
+      "Sea & Breeze"
+     ]
+    },
+    {
+     "name_en": "Knight Moonbeam",
+     "outfits": [
+      "Knight Moonbeam/Outfit",
+      "Dark Devourer",
+      "Lemon Soda",
+      "Bastet's Secret"
+     ]
+    },
+    {
+     "name_en": "Herrscher of the Void",
+     "outfits": [
+      "Herrscher of the Void/Outfit",
+      "Frigid Empress",
+      "Parasol Kaiserin",
+      "Magic Girl ☆ Sirin"
+     ]
+    },
+    {
+     "name_en": "Herrscher of Flamescion",
+     "outfits": [
+      "Herrscher of Flamescion/Outfit",
+      "Time Runner",
+      "Flowering Luminance",
+      "Born in Flames"
+     ]
+    },
+    {
+     "name_en": "Herrscher of Finality",
+     "outfits": [
+      "Herrscher of Finality/Outfit",
+      "Selenic Ripples"
+     ]
+    },
+    {
+     "name_en": "Ba-Dum! Fiery Wishing Star",
+     "outfits": [
+      "Ba-Dum! Fiery Wishing Star/Outfit",
+      "Wintery Wishes"
+     ]
+    }
+   ],
+   "suit_count": 9,
+   "variant_count": 32,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "raiden-mei",
+   "name_en": "Raiden Mei",
+   "name_zh": "雷电芽衣",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Raiden_Mei",
+   "battlesuits": [
+    {
+     "name_en": "Crimson Impulse",
+     "outfits": [
+      "Crimson Impulse/Outfit",
+      "Azure",
+      "Vast Ocean",
+      "Gardenia"
+     ]
+    },
+    {
+     "name_en": "Valkyrie Bladestrike",
+     "outfits": [
+      "Valkyrie Bladestrike/Outfit",
+      "Blue Memories",
+      "Aeterna Purum"
+     ]
+    },
+    {
+     "name_en": "Striker Fulminata",
+     "outfits": [
+      "Striker Fulminata/Outfit",
+      "Thunderbolt Drive"
+     ]
+    },
+    {
+     "name_en": "Shadow Dash",
+     "outfits": [
+      "Shadow Dash/Outfit",
+      "Soul Symphony",
+      "Hind of Noel"
+     ]
+    },
+    {
+     "name_en": "Danzai Spectramancer",
+     "outfits": [
+      "Danzai Spectramancer/Outfit",
+      "Orochi Cuirass"
+     ]
+    },
+    {
+     "name_en": "Lightning Empress",
+     "outfits": [
+      "Lightning Empress/Outfit",
+      "Scorching Golden Thunder",
+      "Aqua Chime",
+      "Ultramarine Octave",
+      "Eventide Phantom"
+     ]
+    },
+    {
+     "name_en": "Herrscher of Thunder",
+     "outfits": [
+      "Herrscher of Thunder/Outfit",
+      "Aqueous Springtide",
+      "Rainy Springtide",
+      "Haunted Dusk",
+      "Nocturne Ablaze"
+     ]
+    },
+    {
+     "name_en": "Herrscher of Origin",
+     "outfits": [
+      "Herrscher of Origin/Outfit",
+      "Crooning Tides"
+     ]
+    },
+    {
+     "name_en": "Xentinel · Dawnbearing Crescent",
+     "outfits": []
+    }
+   ],
+   "suit_count": 9,
+   "variant_count": 26,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none",
+   "merged": "Raiden Mei (APHO) 无独立装甲/服装分类,并入本体"
+  },
+  {
+   "id": "bronya-zaychik",
+   "name_en": "Bronya Zaychik",
+   "name_zh": "布洛妮娅·扎伊切克",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Bronya_Zaychik",
+   "battlesuits": [
+    {
+     "name_en": "Valkyrie Chariot",
+     "outfits": [
+      "Valkyrie Chariot/Outfit",
+      "School Swimsuit",
+      "Blue Sky",
+      "Blue Reunion"
+     ]
+    },
+    {
+     "name_en": "Snowy Sniper",
+     "outfits": [
+      "Snowy Sniper/Outfit",
+      "Carrot and Beet Soup",
+      "Nightfall Witch"
+     ]
+    },
+    {
+     "name_en": "Yamabuki Armor",
+     "outfits": [
+      "Yamabuki Armor/Outfit",
+      "Candy Demon",
+      "Helena's Wings",
+      "Throatwort"
+     ]
+    },
+    {
+     "name_en": "Drive Kometa",
+     "outfits": [
+      "Drive Kometa/Outfit"
+     ]
+    },
+    {
+     "name_en": "Wolf's Dawn",
+     "outfits": [
+      "Wolf's Dawn/Outfit",
+      "Midnight Blues",
+      "Mercurial Hatter"
+     ]
+    },
+    {
+     "name_en": "Dimension Breaker",
+     "outfits": [
+      "Dimension Breaker/Outfit",
+      "White Devil",
+      "Techno Beats"
+     ]
+    },
+    {
+     "name_en": "Black Nucleus",
+     "outfits": [
+      "Black Nucleus/Outfit",
+      "Fleurs du Mal"
+     ]
+    },
+    {
+     "name_en": "Herrscher of Reason",
+     "outfits": [
+      "Herrscher of Reason/Outfit",
+      "Bestial Afterburn",
+      "Ultraviolet Kinetik",
+      "Magic Girl Bronya"
+     ]
+    },
+    {
+     "name_en": "Haxxor Bunny",
+     "outfits": [
+      "Haxxor Bunny/Outfit",
+      "Old Times",
+      "White ARC",
+      "Arc City Blues"
+     ]
+    },
+    {
+     "name_en": "Silverwing: N-EX",
+     "outfits": [
+      "Silverwing: N-EX/Outfit",
+      "Heart of the Night",
+      "Neonized",
+      "Outstanding Attitude",
+      "Maximum Velocity"
+     ]
+    },
+    {
+     "name_en": "Herrscher of Truth",
+     "outfits": [
+      "Herrscher of Truth/Outfit",
+      "Seaside Vibes"
+     ]
+    }
+   ],
+   "suit_count": 11,
+   "variant_count": 35,
+   "collab": null,
+   "r5": "borderline",
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "murata-himeko",
+   "name_en": "Murata Himeko",
+   "name_zh": "无量塔姬子",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Murata_Himeko",
+   "battlesuits": [
+    {
+     "name_en": "Battle Storm",
+     "outfits": [
+      "Battle Storm/Outfit",
+      "Desert Camouflage"
+     ]
+    },
+    {
+     "name_en": "Valkyrie Triumph",
+     "outfits": [
+      "Valkyrie Triumph/Outfit",
+      "Black Mamba",
+      "Holy Rose"
+     ]
+    },
+    {
+     "name_en": "Scarlet Fusion",
+     "outfits": [
+      "Scarlet Fusion/Outfit",
+      "Red Mist",
+      "Origin",
+      "Summer Party"
+     ]
+    },
+    {
+     "name_en": "Blood Rose",
+     "outfits": [
+      "Blood Rose/Outfit",
+      "Night Enchantress",
+      "Rosy Passion"
+     ]
+    },
+    {
+     "name_en": "Kriegsmesser",
+     "outfits": [
+      "Kriegsmesser/Outfit",
+      "Frisian Cutlass"
+     ]
+    },
+    {
+     "name_en": "Vermilion Knight: Eclipse",
+     "outfits": [
+      "Vermilion Knight: Eclipse/Outfit",
+      "Vernal Brocade",
+      "Rouged Mayumi"
+     ]
+    }
+   ],
+   "suit_count": 6,
+   "variant_count": 17,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "yae-sakura",
+   "name_en": "Yae Sakura",
+   "name_zh": "八重樱",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Yae_Sakura",
+   "battlesuits": [
+    {
+     "name_en": "Gyakushinn Miko",
+     "outfits": [
+      "Gyakushinn Miko/Outfit",
+      "Midnight Marigold",
+      "Frozen Sakura",
+      "Summer Dream",
+      "Sublime Lotus",
+      "Summer Sakura"
+     ]
+    },
+    {
+     "name_en": "Goushinnso Memento",
+     "outfits": [
+      "Goushinnso Memento/Outfit",
+      "Blanc X: Ichijin",
+      "Blooming Maiko",
+      "Hyoukai Sonata",
+      "Sakura Summer"
+     ]
+    },
+    {
+     "name_en": "Flame Sakitama",
+     "outfits": [
+      "Flame Sakitama/Outfit",
+      "Dream Raiment",
+      "Rising Moon",
+      "Mauve Cascade"
+     ]
+    },
+    {
+     "name_en": "Darkbolt Jonin",
+     "outfits": [
+      "Darkbolt Jonin/Outfit",
+      "Peach Sanctuary",
+      "Shiden Kasumi",
+      "Neon Shade",
+      "Shimmering Wavelets"
+     ]
+    }
+   ],
+   "suit_count": 4,
+   "variant_count": 20,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "theresa-apocalypse",
+   "name_en": "Theresa Apocalypse",
+   "name_zh": "德丽莎·阿波卡利斯",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Theresa_Apocalypse",
+   "battlesuits": [
+    {
+     "name_en": "Valkyrie Pledge",
+     "outfits": [
+      "Valkyrie Pledge/Outfit",
+      "Pledge",
+      "Ouranon's Forgiveness",
+      "Morning Sunshine",
+      "Sugar Haw Child",
+      "Shallow Sunset",
+      "Campus Detective"
+     ]
+    },
+    {
+     "name_en": "Violet Executer",
+     "outfits": [
+      "Violet Executer/Outfit",
+      "Blood Knight: Moonlight",
+      "Wonderland Trek"
+     ]
+    },
+    {
+     "name_en": "Twilight Paladin",
+     "outfits": [
+      "Twilight Paladin/Outfit",
+      "Verdant Sky"
+     ]
+    },
+    {
+     "name_en": "Sakuno Rondo",
+     "outfits": [
+      "Sakuno Rondo/Outfit",
+      "Lilac of the Valley",
+      "Magic Girl Teriri"
+     ]
+    },
+    {
+     "name_en": "Celestial Hymn",
+     "outfits": [
+      "Celestial Hymn/Outfit",
+      "Starry Night",
+      "Grand Sage",
+      "Empyrean Psalms",
+      "Heat of Trifolium"
+     ]
+    },
+    {
+     "name_en": "Luna Kindred",
+     "outfits": [
+      "Luna Kindred/Outfit",
+      "Rosy Bridesmaid",
+      "Before the Dawn"
+     ]
+    },
+    {
+     "name_en": "Starlit Astrologos",
+     "outfits": [
+      "Starlit Astrologos/Outfit",
+      "Orchid's Night",
+      "Herald of Spring",
+      "Startold Fortune"
+     ]
+    },
+    {
+     "name_en": "Lunar Vow: Crimson Love",
+     "outfits": [
+      "Lunar Vow: Crimson Love/Outfit",
+      "Till Death Do Us Part",
+      "Redolent in Red"
+     ]
+    },
+    {
+     "name_en": "Schicksal's Imperative",
+     "outfits": [
+      "Schicksal's Imperative/Outfit"
+     ]
+    }
+   ],
+   "suit_count": 9,
+   "variant_count": 31,
+   "collab": null,
+   "r5": "exempt_candidate",
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "fu-hua",
+   "name_en": "Fu Hua",
+   "name_zh": "符华",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Fu_Hua",
+   "battlesuits": [
+    {
+     "name_en": "Valkyrie Accipiter",
+     "outfits": [
+      "Valkyrie Accipiter/Outfit",
+      "Blue Swallow"
+     ]
+    },
+    {
+     "name_en": "Hawk of the Fog",
+     "outfits": [
+      "Hawk of the Fog/Outfit",
+      "Hawk of the Yard",
+      "Onyx Simurgh"
+     ]
+    },
+    {
+     "name_en": "Phoenix",
+     "outfits": [
+      "Phoenix/Outfit",
+      "Fire and Sword",
+      "Sword and Fire"
+     ]
+    },
+    {
+     "name_en": "Night Squire",
+     "outfits": [
+      "Night Squire/Outfit",
+      "Rustic Noir",
+      "Spring Traveler",
+      "Dark Butler",
+      "Autumn Shades"
+     ]
+    },
+    {
+     "name_en": "Shadow Knight",
+     "outfits": [
+      "Shadow Knight/Outfit",
+      "Blood Voivode",
+      "Seagull's Soar"
+     ]
+    },
+    {
+     "name_en": "Azure Empyrea",
+     "outfits": [
+      "Azure Empyrea/Outfit",
+      "Cerulean Court",
+      "Taixuan Impression"
+     ]
+    },
+    {
+     "name_en": "Herrscher of Sentience",
+     "outfits": [
+      "Herrscher of Sentience/Outfit",
+      "Ooh! Summer!",
+      "Turn Up the Music!"
+     ]
+    },
+    {
+     "name_en": "Fenghuang of Vicissitude",
+     "outfits": [
+      "Fenghuang of Vicissitude/Outfit",
+      "Crane of Taixuan"
+     ]
+    }
+   ],
+   "suit_count": 8,
+   "variant_count": 24,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "kallen-kaslana",
+   "name_en": "Kallen Kaslana",
+   "name_zh": "卡莲·卡斯兰娜",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Kallen_Kaslana",
+   "battlesuits": [
+    {
+     "name_en": "Ritual Imayoh",
+     "outfits": [
+      "Ritual Imayoh/Outfit",
+      "Blanc X: Kata",
+      "Snow Fairy"
+     ]
+    },
+    {
+     "name_en": "Sixth Serenade",
+     "outfits": [
+      "Sixth Serenade/Outfit",
+      "Hanami Daimyo"
+     ]
+    },
+    {
+     "name_en": "Sündenjäger",
+     "outfits": [
+      "Sündenjäger/Outfit",
+      "Pumpkin Hunter"
+     ]
+    }
+   ],
+   "suit_count": 3,
+   "variant_count": 7,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "rita-rossweisse",
+   "name_en": "Rita Rossweisse",
+   "name_zh": "丽塔·洛丝薇瑟",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Rita_Rossweisse",
+   "battlesuits": [
+    {
+     "name_en": "Umbral Rose",
+     "outfits": [
+      "Umbral Rose/Outfit",
+      "Dame de Cœur",
+      "Dusky Murmurs",
+      "Victoria",
+      "Hanafuda Oyabun",
+      "Valkyrie Dawn"
+     ]
+    },
+    {
+     "name_en": "Phantom Iron",
+     "outfits": [
+      "Phantom Iron/Outfit",
+      "Icy Sea Spray"
+     ]
+    },
+    {
+     "name_en": "Argent Knight: Artemis",
+     "outfits": [
+      "Argent Knight: Artemis/Outfit",
+      "Maid of Celestia",
+      "Vow of Roses"
+     ]
+    },
+    {
+     "name_en": "Fallen Rosemary",
+     "outfits": [
+      "Fallen Rosemary/Outfit",
+      "Deepwood Thyme",
+      "Summer Night's Dream",
+      "Sweet Osmanthus"
+     ]
+    },
+    {
+     "name_en": "Spina Astera",
+     "outfits": [
+      "Spina Astera/Outfit",
+      "Eternal Dance",
+      "Sandy Leisure in Twilight"
+     ]
+    },
+    {
+     "name_en": "Miss Espionage",
+     "outfits": [
+      "Miss Espionage/Outfit"
+     ]
+    }
+   ],
+   "suit_count": 6,
+   "variant_count": 19,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "seele-vollerei",
+   "name_en": "Seele Vollerei",
+   "name_zh": "希儿·芙乐艾",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Seele_Vollerei",
+   "battlesuits": [
+    {
+     "name_en": "Swallowtail Phantasm",
+     "outfits": [
+      "Swallowtail Phantasm/Outfit",
+      "Azure Memories",
+      "Papilio Lily",
+      "Dream Seeker"
+     ]
+    },
+    {
+     "name_en": "Stygian Nymph",
+     "outfits": [
+      "Stygian Nymph/Outfit",
+      "Mirrored Flourishes",
+      "Stygian Seafoam",
+      "Estonia in Spring"
+     ]
+    },
+    {
+     "name_en": "Starchasm Nyx",
+     "outfits": [
+      "Starchasm Nyx/Outfit",
+      "Magic Girl Seele",
+      "On Fair Clouds"
+     ]
+    },
+    {
+     "name_en": "Herrscher of Rebirth",
+     "outfits": [
+      "Herrscher of Rebirth/Outfit",
+      "Eternal Night's Embrace"
+     ]
+    },
+    {
+     "name_en": "Wings of Panacea",
+     "outfits": []
+    }
+   ],
+   "suit_count": 5,
+   "variant_count": 13,
+   "collab": null,
+   "r5": "borderline",
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "liliya-olenyeva",
+   "name_en": "Liliya Olenyeva",
+   "name_zh": "莉莉娅·阿琳",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Liliya_Olenyeva",
+   "battlesuits": [
+    {
+     "name_en": "Blueberry Blitz",
+     "outfits": [
+      "Blueberry Blitz/Outfit",
+      "Shelley's Beastliya",
+      "Lavender Glow",
+      "Wave Galactica"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 4,
+   "collab": null,
+   "r5": "exempt_candidate",
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "rozaliya-olenyeva",
+   "name_en": "Rozaliya Olenyeva",
+   "name_zh": "萝莎莉娅·阿琳",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Rozaliya_Olenyeva",
+   "battlesuits": [
+    {
+     "name_en": "Molotov Cherry",
+     "outfits": [
+      "Molotov Cherry/Outfit",
+      "Gothic Rozamary",
+      "Violet Dreamscape",
+      "Coral Sunrise"
+     ]
+    },
+    {
+     "name_en": "Fervent Tempo Δ",
+     "outfits": [
+      "Fervent Tempo Δ/Outfit",
+      "8-bit Fever"
+     ]
+    }
+   ],
+   "suit_count": 2,
+   "variant_count": 6,
+   "collab": null,
+   "r5": "exempt_candidate",
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "durandal",
+   "name_en": "Durandal",
+   "name_zh": "幽兰黛尔",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Durandal",
+   "battlesuits": [
+    {
+     "name_en": "Valkyrie Gloria",
+     "outfits": [
+      "Valkyrie Gloria/Outfit",
+      "Lord Paramount",
+      "Purrfect Holiday",
+      "Misty Lavender",
+      "Starlit Evening"
+     ]
+    },
+    {
+     "name_en": "Bright Knight: Excelsis",
+     "outfits": [
+      "Bright Knight: Excelsis/Outfit",
+      "Emerald of Alfheim",
+      "Gale Hunter"
+     ]
+    },
+    {
+     "name_en": "Dea Anchora",
+     "outfits": [
+      "Dea Anchora/Outfit",
+      "Stellar Promise",
+      "Heavenward Dragon",
+      "Red Dragon Rises",
+      "Pumping Heart"
+     ]
+    },
+    {
+     "name_en": "Palatinus Equinox",
+     "outfits": [
+      "Palatinus Equinox/Outfit",
+      "Nibelungen Traumlied"
+     ]
+    },
+    {
+     "name_en": "Reign Solaris",
+     "outfits": [
+      "Reign Solaris/Outfit"
+     ]
+    }
+   ],
+   "suit_count": 5,
+   "variant_count": 16,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "asuka",
+   "name_en": "Asuka",
+   "name_zh": "明日香",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Asuka",
+   "battlesuits": [
+    {
+     "name_en": "Blazing Hope",
+     "outfits": [
+      "Blazing Hope/Outfit",
+      "Auburn Sync PS"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 2,
+   "collab": "新世纪福音战士(EVA)联动",
+   "r5": null,
+   "name_zh_source": "萌娘百科",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "fischl",
+   "name_en": "Fischl",
+   "name_zh": "菲谢尔",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Fischl",
+   "battlesuits": [
+    {
+     "name_en": "Prinzessin der Verurteilung!",
+     "outfits": [
+      "Prinzessin der Verurteilung!/Outfit"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 1,
+   "collab": "原神联动",
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "elysia",
+   "name_en": "Elysia",
+   "name_zh": "爱莉希雅",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Elysia",
+   "battlesuits": [
+    {
+     "name_en": "Miss Pink Elf♪",
+     "outfits": [
+      "Miss Pink Elf♪/Outfit",
+      "Miss Pink♪",
+      "Summer Miss Elf♪",
+      "Faded Miss Elf♬"
+     ]
+    },
+    {
+     "name_en": "Herrscher of Human: Ego",
+     "outfits": [
+      "Herrscher of Human: Ego/Outfit",
+      "Peachy Spring"
+     ]
+    },
+    {
+     "name_en": "Hi♪ Love Elf♥",
+     "outfits": [
+      "Hi♪ Love Elf♥/Outfit",
+      "Lunar Grace"
+     ]
+    }
+   ],
+   "suit_count": 3,
+   "variant_count": 8,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "mobius",
+   "name_en": "Mobius",
+   "name_zh": "梅比乌斯",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Mobius",
+   "battlesuits": [
+    {
+     "name_en": "Infinite Ouroboros",
+     "outfits": [
+      "Infinite Ouroboros/Outfit",
+      "Daughter of Corals",
+      "Scorching Gravel"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 3,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "natasha-cioara",
+   "name_en": "Natasha Cioara",
+   "name_zh": "娜塔莎·希奥拉",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Natasha_Cioara",
+   "battlesuits": [
+    {
+     "name_en": "Midnight Absinthe",
+     "outfits": [
+      "Midnight Absinthe/Outfit",
+      "Absinthe Dream",
+      "Midnight Martini",
+      "Tipsy Hour",
+      "Spectral Raven"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 5,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "carole-pepper",
+   "name_en": "Carole Pepper",
+   "name_zh": "卡萝尔·佩珀",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Carole_Pepper",
+   "battlesuits": [
+    {
+     "name_en": "Sweet 'n' Spicy",
+     "outfits": [
+      "Sweet 'n' Spicy/Outfit",
+      "Let the Class End",
+      "Special Blend"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 3,
+   "collab": null,
+   "r5": "exempt_candidate",
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none",
+   "merged": "Carole Pepper (APHO) 无独立装甲/服装分类,并入本体"
+  },
+  {
+   "id": "pardofelis",
+   "name_en": "Pardofelis",
+   "name_zh": "帕朵菲莉丝",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Pardofelis",
+   "battlesuits": [
+    {
+     "name_en": "Reverist Calico",
+     "outfits": [
+      "Reverist Calico/Outfit",
+      "Spectral Claws",
+      "Midsummer Collector",
+      "Simply Orange",
+      "Meowtose Macchiato"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 5,
+   "collab": null,
+   "r5": "borderline",
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "aponia",
+   "name_en": "Aponia",
+   "name_zh": "阿波尼亚",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Aponia",
+   "battlesuits": [
+    {
+     "name_en": "Disciplinary Perdition",
+     "outfits": [
+      "Disciplinary Perdition/Outfit",
+      "Mesmerizing Blue",
+      "Butterfly Dreams"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 3,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "eden",
+   "name_en": "Eden",
+   "name_zh": "伊甸",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Eden",
+   "battlesuits": [
+    {
+     "name_en": "Golden Diva",
+     "outfits": [
+      "Golden Diva/Outfit",
+      "Flowing Rhyme",
+      "Crimson Carol"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 3,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "griseo",
+   "name_en": "Griseo",
+   "name_zh": "格蕾修",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Griseo",
+   "battlesuits": [
+    {
+     "name_en": "Starry Impression",
+     "outfits": [
+      "Starry Impression/Outfit",
+      "Summer as a Painting",
+      "Maroon Riding Hood",
+      "Everdream"
+     ]
+    },
+    {
+     "name_en": "Cosmic Expression",
+     "outfits": [
+      "Cosmic Expression/Outfit",
+      "Gokudo Brushstrokes",
+      "Star-Speckled Blue",
+      "Starlit Amethyst"
+     ]
+    }
+   ],
+   "suit_count": 2,
+   "variant_count": 8,
+   "collab": null,
+   "r5": "exempt_candidate",
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "vill-v",
+   "name_en": "Vill-V",
+   "name_zh": "维尔薇",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Vill-V",
+   "battlesuits": [
+    {
+     "name_en": "Helical Contraption",
+     "outfits": [
+      "Helical Contraption/Outfit",
+      "I'm the Storm"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 2,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "li-sushang",
+   "name_en": "Li Sushang",
+   "name_zh": "李素裳",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Li_Sushang",
+   "battlesuits": [
+    {
+     "name_en": "Jade Knight",
+     "outfits": [
+      "Jade Knight/Outfit",
+      "Auspicious Dazzle",
+      "Midnight Moon"
+     ]
+    },
+    {
+     "name_en": "Peregrine Sword",
+     "outfits": [
+      "Peregrine Sword/Outfit"
+     ]
+    }
+   ],
+   "suit_count": 2,
+   "variant_count": 4,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "ai-hyperion",
+   "name_en": "Ai Hyperion Λ",
+   "name_zh": "爱衣·休伯利安Λ",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Ai_Hyperion_Λ",
+   "battlesuits": [
+    {
+     "name_en": "Chrono Navi",
+     "outfits": [
+      "Chrono Navi/Outfit",
+      "Leisurely Melody",
+      "Burning Rescue Soul",
+      "Indelible Memories",
+      "Guiding Star"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 5,
+   "collab": null,
+   "r5": "exempt_candidate",
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "susannah-manatt",
+   "name_en": "Susannah Manatt",
+   "name_zh": "苏莎娜",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Susannah_Manatt",
+   "battlesuits": [
+    {
+     "name_en": "Valkyrie Quicksand",
+     "outfits": [
+      "Valkyrie Quicksand/Outfit",
+      "Immortal Blades Uniform",
+      "Bear Squad, go!",
+      "Sandy Coast"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 4,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "misteln-schariac",
+   "name_en": "Misteln Schariac",
+   "name_zh": "米丝忒琳·沙尼亚特",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Misteln_Schariac",
+   "battlesuits": [
+    {
+     "name_en": "Dreamweaver",
+     "outfits": [
+      "Dreamweaver/Outfit",
+      "Silky Violet Dream",
+      "Lulling Waves"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 3,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "prometheus",
+   "name_en": "PROMETHEUS",
+   "name_zh": "普罗米修斯",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "PROMETHEUS",
+   "battlesuits": [
+    {
+     "name_en": "Terminal Aide 0017",
+     "outfits": [
+      "Terminal Aide 0017/Outfit",
+      "Saccharine Lash-Out",
+      "Fizzy Ray",
+      "404: Overheat Alert"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 4,
+   "collab": null,
+   "r5": "exempt_candidate",
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "shigure-kira",
+   "name_en": "Shigure Kira",
+   "name_zh": "时雨绮罗",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Shigure_Kira",
+   "battlesuits": [
+    {
+     "name_en": "Sugary Starburst",
+     "outfits": [
+      "Sugary Starburst/Outfit",
+      "Tonight's My Time!",
+      "Fuzzy Pink Love",
+      "Dreamy Melody"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 4,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "sirin",
+   "name_en": "Sirin",
+   "name_zh": "西琳",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Sirin",
+   "battlesuits": [
+    {
+     "name_en": "Miracle ☆ Magical Girl",
+     "outfits": [
+      "Miracle ☆ Magical Girl/Outfit",
+      "Soaring Wings",
+      "Magic Academy Uniform"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 3,
+   "collab": null,
+   "r5": "exempt_candidate",
+   "name_zh_source": "bh3.com官方",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "senadina",
+   "name_en": "Senadina",
+   "name_zh": "希娜狄雅",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Senadina",
+   "battlesuits": [
+    {
+     "name_en": "Deepspace Anchor: First Light",
+     "outfits": [
+      "Deepspace Anchor: First Light/Outfit",
+      "Steering Inequations"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 2,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "萌娘百科",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "coralie-6626-planck",
+   "name_en": "Coralie 6626 Planck",
+   "name_zh": "科拉莉·6626·普朗克",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Coralie_6626_Planck",
+   "battlesuits": [
+    {
+     "name_en": "Valkyrie Blastmetal",
+     "outfits": [
+      "Valkyrie Blastmetal/Outfit",
+      "Puppy Patrol",
+      "Brainiac Dark Lord"
+     ]
+    },
+    {
+     "name_en": "Behold! Fate-Defying Dragon",
+     "outfits": [
+      "Behold! Fate-Defying Dragon/Outfit",
+      "Candied Curtains"
+     ]
+    }
+   ],
+   "suit_count": 2,
+   "variant_count": 5,
+   "collab": null,
+   "r5": "borderline",
+   "name_zh_source": "萌娘百科",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "erd-s-helia",
+   "name_en": "Erdős Helia",
+   "name_zh": "埃尔德什·赫丽娅",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Erdős_Helia",
+   "battlesuits": [
+    {
+     "name_en": "Valkyrie Boltstorm",
+     "outfits": [
+      "Valkyrie Boltstorm/Outfit",
+      "Salted Plum",
+      "Citrus Days"
+     ]
+    },
+    {
+     "name_en": "Planar Armament: Warped Spacetime",
+     "outfits": [
+      "Planar Armament: Warped Spacetime/Outfit",
+      "Summer Tactical Gear"
+     ]
+    }
+   ],
+   "suit_count": 2,
+   "variant_count": 5,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "萌娘百科",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "thelema-nutriscu",
+   "name_en": "Thelema Nutriscu",
+   "name_zh": "瑟莉姆·努特里斯科",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Thelema_Nutriscu",
+   "battlesuits": [
+    {
+     "name_en": "Mad Pleasure: Shadowbringer",
+     "outfits": [
+      "Mad Pleasure: Shadowbringer/Outfit",
+      "Gentle is the Night",
+      "Pact Absolute",
+      "Roseate Summer"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 4,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "萌娘百科",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "lantern",
+   "name_en": "\"Lantern\"",
+   "name_zh": "莎芙莱",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "\"Lantern\"",
+   "battlesuits": [
+    {
+     "name_en": "Lone Destruction: Shadowchaser",
+     "outfits": [
+      "Lone Destruction: Shadowchaser/Outfit",
+      "At Your Service",
+      "Lantern Ablaze"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 3,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "萌娘百科",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "songque",
+   "name_en": "Songque",
+   "name_zh": "松雀",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Songque",
+   "battlesuits": [
+    {
+     "name_en": "Jovial Deception: Shadowdimmer",
+     "outfits": [
+      "Jovial Deception: Shadowdimmer/Outfit",
+      "Whitewave Topper",
+      "Vagapunk"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 3,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "萌娘百科",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "vita",
+   "name_en": "Vita",
+   "name_zh": "薇塔",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Vita",
+   "battlesuits": [
+    {
+     "name_en": "Lone Planetfarer",
+     "outfits": [
+      "Lone Planetfarer/Outfit",
+      "Eldritch Vantage",
+      "White Velveteer"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 3,
+   "collab": null,
+   "r5": null,
+   "name_zh_source": "萌娘百科",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  },
+  {
+   "id": "sparkle",
+   "name_en": "Sparkle",
+   "name_zh": "花火",
+   "game": "hi3",
+   "game_zh": "崩坏3",
+   "wiki": "honkaiimpact3",
+   "wiki_page": "Sparkle",
+   "battlesuits": [
+    {
+     "name_en": "Thousand-Faced Maestro: Cameo!",
+     "outfits": [
+      "Thousand-Faced Maestro: Cameo!/Outfit",
+      "Fictitious Game"
+     ]
+    }
+   ],
+   "suit_count": 1,
+   "variant_count": 2,
+   "collab": "崩坏:星穹铁道联动",
+   "r5": null,
+   "name_zh_source": "萌娘百科",
+   "status": "pending",
+   "refs": [],
+   "lora": null,
+   "current_version": null,
+   "versions": [],
+   "refs_status": "none"
+  }
+ ]
+}

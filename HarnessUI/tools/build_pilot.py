@@ -57,6 +57,24 @@ PILOT = [
 OUTFIT_AXIS = ("时装变体（非默认装）",
                "若穿的还是默认装 → 锚图没被真正当作参考图使用，这是全量的致命问题")
 
+# 崩坏3 单列一份：上面四条压的是前四作的轴，hi3 任务包里它们一条都不在，
+# 会只剩 outfit 兜底一条。hi3 的「最难」是 R5 豁免（出丝袜=禁忌级失败）和
+# 联动身份（只收有官网图的变体，无图的第二部/明日香/花火一期本来就不收）。
+HI3_PILOT = [
+    ("hi3", "fischl", "default",
+     "联动角色（原神联动）+ 全角色仅 1 套装甲",
+     "若生成的是泛化菲谢尔而非锚图这套 → 联动锚图没锁住身份"),
+    ("hi3", "theresa-apocalypse", "default",
+     "R5 豁免（儿童体型）",
+     "若出现丝袜/吊袜带/深 V/露腰 → R5 闸门失效，禁忌级失败，全量必须拦下"),
+    ("hi3", "bronya-zaychik", "default",
+     "R5 borderline 豁免（边界角色）",
+     "同上：边界角色也不许进 pin-up，验证闸门的覆盖面"),
+    ("hi3", "elysia", "default",
+     "粉色长发 + 精灵耳 + 首发人气角色",
+     "若发色/耳形/标志性配饰漂移 → 锚图身份约束力不足"),
+]
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -71,8 +89,12 @@ def main() -> None:
         sys.exit("先跑 build_taskpack.py 生成全量 manifest.json")
     index = {t["id"]: t for t in full["tasks"]}
 
+    # hi3 单作任务包用 HI3_PILOT；混合包维持原四条，行为不变。
+    games_in_pack = {t["game"] for t in full["tasks"]}
+    pilot = HI3_PILOT if games_in_pack == {"hi3"} else PILOT
+
     picked: list[tuple[dict, str, str]] = []
-    for game, character, variant, axis, risk in PILOT:
+    for game, character, variant, axis, risk in pilot:
         task = index.get(f"{game}/{character}/{variant}")
         if task is None:
             print(f"  ! 跳过 {game}/{character}/{variant}（不在全量清单里）")
@@ -115,8 +137,13 @@ def main() -> None:
     }, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
     for name in ("SPEC.md", "ACCEPTANCE.md"):
-        shutil.copyfile(args.out.parent / "taskpack" / "docs" / name, args.out / "docs" / name)
-    shutil.copytree(args.out.parent / "taskpack" / "tools", args.out / "tools")
+        # 对外交付包里才有 docs/ 与 tools/；内部批次（如 hi3 试跑）没有就跳过，
+        # 试跑的核心产物是 manifest + anchors。
+        source = args.out.parent / "taskpack" / "docs" / name
+        if source.exists():
+            shutil.copyfile(source, args.out / "docs" / name)
+    if (args.out.parent / "taskpack" / "tools").exists():
+        shutil.copytree(args.out.parent / "taskpack" / "tools", args.out / "tools")
 
     # The README is written here rather than kept as a file beside the script:
     # this builder wipes its output directory on every run, so a hand-placed

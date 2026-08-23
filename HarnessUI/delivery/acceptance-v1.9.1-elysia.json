@@ -1,0 +1,235 @@
+{
+ "pack_version": "1.9.1-elysia",
+ "model": "gpt-image-2",
+ "size": "3840x2160",
+ "rounds": 4,
+ "max_attempts": 4,
+ "spend_usd": 0.8807924999999999,
+ "accepted": 14,
+ "blocked": 2,
+ "generated_total": 35,
+ "records": {
+  "hi3/elysia/default|dark": {
+   "task": "hi3/elysia/default",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.412,
+    "right_edge": 3.8,
+    "spill": 0.243
+   },
+   "fails": []
+  },
+  "hi3/elysia/default|light": {
+   "task": "hi3/elysia/default",
+   "side": "light",
+   "status": "blocked",
+   "attempts": 4,
+   "metrics": null,
+   "fails": [
+    "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and inclu"
+   ]
+  },
+  "hi3/elysia/faded-miss-elf|dark": {
+   "task": "hi3/elysia/faded-miss-elf",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.413,
+    "right_edge": 4.1,
+    "spill": 0.289
+   },
+   "fails": []
+  },
+  "hi3/elysia/faded-miss-elf|light": {
+   "task": "hi3/elysia/faded-miss-elf",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 3,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.757,
+    "right_edge": 5.1,
+    "spill": 0.3
+   },
+   "fails": []
+  },
+  "hi3/elysia/herrscher-of-human-ego|dark": {
+   "task": "hi3/elysia/herrscher-of-human-ego",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.469,
+    "right_edge": 6.6,
+    "spill": 0.348
+   },
+   "fails": []
+  },
+  "hi3/elysia/herrscher-of-human-ego|light": {
+   "task": "hi3/elysia/herrscher-of-human-ego",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.82,
+    "right_edge": 4.5,
+    "spill": 0.308
+   },
+   "fails": []
+  },
+  "hi3/elysia/hi-love-elf|dark": {
+   "task": "hi3/elysia/hi-love-elf",
+   "side": "dark",
+   "status": "blocked",
+   "attempts": 4,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.541,
+    "right_edge": 4.7,
+    "spill": 0.255
+   },
+   "fails": [
+    "G1 暗版过亮 0.541（下次：压低天空亮度，保留主体打光，目标 0.35 左右）"
+   ]
+  },
+  "hi3/elysia/hi-love-elf|light": {
+   "task": "hi3/elysia/hi-love-elf",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 4,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.849,
+    "right_edge": 3.3,
+    "spill": 0.208
+   },
+   "fails": []
+  },
+  "hi3/elysia/lunar-grace|dark": {
+   "task": "hi3/elysia/lunar-grace",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.437,
+    "right_edge": 8.4,
+    "spill": 0.445
+   },
+   "fails": []
+  },
+  "hi3/elysia/lunar-grace|light": {
+   "task": "hi3/elysia/lunar-grace",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.83,
+    "right_edge": 3.2,
+    "spill": 0.214
+   },
+   "fails": []
+  },
+  "hi3/elysia/miss-pink|dark": {
+   "task": "hi3/elysia/miss-pink",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.354,
+    "right_edge": 3.5,
+    "spill": 0.189
+   },
+   "fails": []
+  },
+  "hi3/elysia/miss-pink|light": {
+   "task": "hi3/elysia/miss-pink",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 3,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.797,
+    "right_edge": 4.4,
+    "spill": 0.273
+   },
+   "fails": []
+  },
+  "hi3/elysia/peachy-spring|dark": {
+   "task": "hi3/elysia/peachy-spring",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 2,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.361,
+    "right_edge": 3.7,
+    "spill": 0.301
+   },
+   "fails": []
+  },
+  "hi3/elysia/peachy-spring|light": {
+   "task": "hi3/elysia/peachy-spring",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 1,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.769,
+    "right_edge": 4.7,
+    "spill": 0.275
+   },
+   "fails": []
+  },
+  "hi3/elysia/summer-miss-elf|dark": {
+   "task": "hi3/elysia/summer-miss-elf",
+   "side": "dark",
+   "status": "accepted",
+   "attempts": 3,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.423,
+    "right_edge": 3.6,
+    "spill": 0.226
+   },
+   "fails": []
+  },
+  "hi3/elysia/summer-miss-elf|light": {
+   "task": "hi3/elysia/summer-miss-elf",
+   "side": "light",
+   "status": "accepted",
+   "attempts": 3,
+   "metrics": {
+    "width": 3840,
+    "height": 2160,
+    "brightness": 0.842,
+    "right_edge": 4.4,
+    "spill": 0.365
+   },
+   "fails": []
+  }
+ }
+}

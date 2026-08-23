@@ -126,3 +126,24 @@ HarnessUI/
 **把唯一副本放在会话临时目录。** 母版一度只存在 `/private/tmp/.../scratchpad`，
 而运行时目录的三个软链正指着那儿。/tmp 一清，4.8GB 和验收页全部大图一起没。
 运行时素材放 `~/.harness-ui/`，母版另有 NAS 备份。
+
+
+## 新旧同时入库时必须打标
+
+重出之后旧版保留为 `<side>.rejected-N.png`，新旧都在库里——
+**必须能分辨哪些不许发公开平台**，否则迟早发错。
+
+```
+~/.harness-ui/private_only.json
+{"ids": ["nte/nanally/reverse-fairy-tale", ...]}
+```
+
+`build_catalog.py` 据此在每条目录项上出 `public: true/false`，宿主和复核页都能看到。
+
+**默认私有的三类**：
+1. 所有 `<side>.rejected-N.png`（被替换的旧版——它就是因为不合格才被换掉的）
+2. 按 `character-skin-sexy` 出的产物
+3. 人工判定性暗示过强的
+
+**为什么这条不能省**：2026-08 艾莉西亚那条因性暗示过强被抖音限流，
+一条被限流影响整个号后续的自然流量，不是"删掉那条就好"。

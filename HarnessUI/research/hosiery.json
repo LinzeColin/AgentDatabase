@@ -1,0 +1,84 @@
+{
+ "schema": "harness-ui.hosiery.v1",
+ "说明": "丝袜类型不是一律黑丝。按角色原设配色与气质选，用户可逐角色覆写；market 字段发布后回填真实数据，让选择从推断变成实测。",
+ "types": {
+  "black_sheer": {
+   "zh": "黑丝（薄）",
+   "prompt": "sheer black stockings with a visible lace top band"
+  },
+  "black_opaque": {
+   "zh": "厚黑丝",
+   "prompt": "opaque black tights, matte finish"
+  },
+  "white_opaque": {
+   "zh": "白丝",
+   "prompt": "opaque white thighhighs with a clean top band"
+  },
+  "white_sheer": {
+   "zh": "白丝（薄）",
+   "prompt": "sheer white stockings"
+  },
+  "pantyhose": {
+   "zh": "连裤袜",
+   "prompt": "full-length sheer pantyhose covering hip to toe"
+  },
+  "over_knee": {
+   "zh": "长筒袜",
+   "prompt": "ribbed over-the-knee socks reaching mid-thigh"
+  },
+  "patterned": {
+   "zh": "花纹袜",
+   "prompt": "patterned stockings echoing the outfit's own motif"
+  },
+  "fishnet": {
+   "zh": "渔网袜",
+   "prompt": "fine fishnet stockings"
+  },
+  "canonical": {
+   "zh": "照原设",
+   "prompt": "legwear exactly as in the reference image"
+  }
+ },
+ "auto_rules": [
+  {
+   "when": "r5（幼态体型）",
+   "use": "canonical",
+   "why": "不可协商"
+  },
+  {
+   "when": "原设主色为白/浅/粉/圣洁系",
+   "use": "white_opaque",
+   "why": "同色系顺色，最常见的高接受度组合"
+  },
+  {
+   "when": "原设主色为黑/深紫/哥特/暗色系",
+   "use": "black_sheer",
+   "why": "同色系顺色"
+  },
+  {
+   "when": "原设为红/橙/暖色系",
+   "use": "black_sheer",
+   "why": "暖色配黑丝是高对比，市场最熟悉的搭法"
+  },
+  {
+   "when": "原设为学院/制服/运动风",
+   "use": "over_knee",
+   "why": "品类内自然，不违和"
+  },
+  {
+   "when": "原设为和风/华服",
+   "use": "white_opaque",
+   "why": "和风足袋/白足の延伸"
+  },
+  {
+   "when": "原设本身就有明确腿部服装且好看",
+   "use": "canonical",
+   "why": "改了反而偏离基准特征"
+  }
+ ],
+ "overrides": {},
+ "market": {
+  "说明": "发布后回填。字段：type / 曝光 / 完播 / 点赞率 / 是否限流。有了 20 条以上样本再让 auto_rules 让位给实测排序。",
+  "records": []
+ }
+}

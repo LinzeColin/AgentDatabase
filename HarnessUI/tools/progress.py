@@ -65,14 +65,20 @@ def _running_one(pattern: str) -> bool:
     return False
 
 
-def remote_counts(state: dict) -> tuple[int, int, str]:
-    """问远端批次：已出图 / 总数 / 状态。本机没进程 ≠ 没在跑。"""
+# 历史吞吐：v1.8.0 那轮 110 张一轮约 25 分钟 → 约 4.4 张/分。
+# 刚提交时远端还没出图，算不出瞬时速度，用这个兜底。
+HISTORIC_RATE = 4.4
+
+
+def remote_counts(state: dict) -> tuple[int, int, str, float]:
+    """问远端批次：已出图 / 总数 / 状态 / 批次创建时间。本机没进程 ≠ 没在跑。"""
     try:
         token = pathlib.Path(state["key_file"]).read_text().strip()
     except Exception:
         return 0, 0, "取不到 key"
     done = total = 0
     status = "—"
+    created = 0.0
     for b in state.get("batches", []):
         if b.get("harvested"):
             continue
@@ -85,9 +91,10 @@ def remote_counts(state: dict) -> tuple[int, int, str]:
             done += c.get("completed", 0) + c.get("failed", 0)
             total += c.get("total", 0)
             status = data.get("status", "—")
+            created = data.get("created_at") or 0
         except Exception as exc:
             status = f"查询失败 {str(exc)[:24]}"
-    return done, total, status
+    return done, total, status, created
 
 
 def find_state(explicit: str | None) -> pathlib.Path | None:
@@ -124,10 +131,21 @@ def snapshot(state_path: pathlib.Path | None) -> str:
               f"  {bar(acc, total)} {pct:5.1f}%   已落盘 {acc} / {total}",
               f"  未结算 {openv} · 已花 ${s.get('spend_usd', 0):.2f} · 轮次 {s.get('round')}"]
         if openv:
-            done, tot, status = remote_counts(s)
+            done, tot, status, created = remote_counts(s)
             if tot:
                 L.append(f"  远端批次 {status}：{bar(done, tot, 20)} {done}/{tot} 已出图"
                          f"（整批完成才落盘）")
+                now = time.time()
+                elapsed = max(now - created, 1) if created else 0
+                if done and elapsed:
+                    rate = done / elapsed * 60
+                    src = "实测"
+                else:
+                    rate, src = HISTORIC_RATE, "按历史吞吐估"
+                left = (tot - done) / max(rate, 0.1)
+                eta = time.strftime("%H:%M", time.localtime(now + left * 60))
+                L.append(f"  速度 {rate:.1f} 张/分（{src}）· 已跑 {elapsed/60:.0f} 分 · "
+                         f"**ETA 还需 {left:.0f} 分 → 约 {eta}**")
             else:
                 L.append(f"  远端批次 {status}")
         by: dict = {}

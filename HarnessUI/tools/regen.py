@@ -25,6 +25,9 @@ import sys
 import time
 import urllib.request
 
+sys.path.insert(0, str(pathlib.Path(__file__).parent))
+import erotic_levels  # noqa: E402
+
 ROOT = pathlib.Path.home() / ".harness-ui"
 SIZE = "3840x2160"
 MODEL = "gpt-image-2"
@@ -43,7 +46,18 @@ FIX = ("\n\nCRITICAL ANATOMY REQUIREMENTS — the previous attempt failed on the
        "natural head turn (about 45 degrees). Never render a frontal face on a torso "
        "that is turned away from the viewer, and never show the back of the body "
        "together with a front-facing head. The neck must connect the head to the "
-       "shoulders on the anatomically correct side.")
+       "shoulders on the anatomically correct side."
+       "\n\nHANDS (the single most failure-prone part of this image): "
+       "Exactly two hands total, no more. Each hand traces cleanly from fingertips to "
+       "palm to wrist to forearm to upper arm to a visible shoulder joint on the correct "
+       "side of the torso. Five fingers per hand with one clearly separate thumb; no sixth "
+       "finger, no fused or duplicated fingers, no ghosted or doubled hand outline. "
+       "Palm-versus-back orientation must follow the forearm's rotation the way a real hand "
+       "does: the thumb sits on the radial side, and a visible palm means the forearm is "
+       "supinated. Hands never intersect the chest, torso, hair or any prop — where a hand "
+       "overlaps something, render a clear occlusion edge, not a blend. Both hands are "
+       "rendered at the same focus and detail level as the face; a blurred or smudged hand "
+       "is a defect even if everything else is sharp.")
 
 
 def anchor_and_prompt(task_id: str, side: str, pack: pathlib.Path):
@@ -90,6 +104,8 @@ def main() -> None:
     parser.add_argument("--from-list", type=pathlib.Path, help="复核页导出的 <id>|<side> 清单")
     parser.add_argument("--sides", default="light,dark")
     parser.add_argument("--note", default="", help="这一版具体错在哪，写进 prompt")
+    parser.add_argument("--level", type=int, choices=[1, 2, 3, 4, 5],
+                        help="锁定色情度档位，不走 L4→L3→L2 阶梯（兜底时用 L1）")
     args = parser.parse_args()
 
     key = args.key_file.read_text().strip()
@@ -109,15 +125,34 @@ def main() -> None:
     spent = 0.0
     for task_id, side in jobs:
         anchor, prompt = anchor_and_prompt(task_id, side, args.pack)
-        full = prompt + FIX + (f" Specifically: {args.note}" if args.note else "")
         target = ROOT / "master" / task_id / f"{side}.png"
         started = time.time()
-        try:
-            data, cost = generate(anchor, full, key)
-        except Exception as error:
-            print(f"  ! {task_id} [{side}] 失败：{str(error)[:110]}")
+        data = None
+        # 色情度阶梯 L4 → L3 → L2。任务包里存的是 L5，直接用必被安全系统拦。
+        ladder = [args.level] * 3 if args.level else [erotic_levels.level_for_attempt(a) for a in (1, 2, 3)]
+        for level in ladder:
+            full = (erotic_levels.at_level(prompt, level) + FIX
+                    + (f" Specifically: {args.note}" if args.note else ""))
+            try:
+                data, cost = generate(anchor, full, key)
+                spent += cost
+                print(f"    {erotic_levels.NAMES[level]} 通过", flush=True)
+                break
+            except Exception as error:
+                body = ""
+                if hasattr(error, "read"):
+                    try:
+                        body = error.read().decode("utf-8", "replace")
+                    except Exception:
+                        body = ""
+                blocked = "moderation_blocked" in body or "safety system" in body
+                print(f"    {erotic_levels.NAMES[level]} "
+                      f"{'被安全系统拦' if blocked else str(error)[:70]}", flush=True)
+                if not blocked:
+                    break
+        if data is None:
+            print(f"  ! {task_id} [{side}] 三档都没过，标记需重做")
             continue
-        spent += cost
         if target.exists():
             # 旧图留在原地改个名：新的不一定更好，得留退路
             n = 1

@@ -113,6 +113,30 @@ https://pvp.qq.com/web201605/js/herolist.json
 **先查这个 IP 有没有官方接口，再退回 wiki。** 官方接口的中文名和皮肤清单都是权威的，
 wiki 是二手的。
 
+## 崩坏3（hi3）：三层结构，锚图走官网接口（2026-08-23 实测）
+
+崩坏3 和前四个 IP 的结构不同：**角色 → 装甲 → 皮肤** 三层（四 IP 是角色→皮肤 两层）。
+
+| 层 | Fandom 分类 | 备注 |
+|---|---|---|
+| 角色（39 人） | `Category:Playable Characters`（41 页，APHO 后缀 2 页并入本体） | 全员女性，无性别分类可筛，逐页核对 |
+| 装甲（110 套） | `Category:<角色名> Battlesuits` | 每角色 1–11 套 |
+| 皮肤（347 个） | `Category:<装甲名> Outfits` | 含 `<装甲>/Outfit` 默认外观页 |
+
+**锚图源：Fandom 证否（Portrait 仅 148×260），HoYoWiki 证否（无 hi3 区），
+正解是 bh3.com 官网内容接口**：
+
+```
+act-api-takumi-static.mihoyo.com/content_v2_user/app/b9d5f96cd69047eb/getContentList
+  ?iChanId=703&sLangKey=zh-cn&iPage=1&iPageSize=…
+  sExt.703_3 字段 = 装甲默认立绘（实测 1198×1151，短边中位 1151px 达标）
+  703_5 是背景条(869×272)、703_4 是选人卡(140×120)，都不可用
+```
+
+- 中文名：崩坏3 是国服游戏，中文名走官方接口/萌娘百科（权威源），不要从英文 wiki 反查（互链实测 0 条）。
+- en↔zh 桥：Fandom 装甲页 `{{Other Languages|zhs=}}` 模板可取中文。
+- **文件名归一化教训**：官网文件 `miss-pink-elf.jpg` vs 任务包 id `miss-pink`，不映射就静默用了低清锚。组包前打印每个变体实际锚图尺寸核对。
+
 ## 中文名的第四条路：非 Fandom 的中文站
 
 异环三条常规路全空（英文站 `Other Languages` 只有 `en/ru`，没有中文 Fandom 站）。

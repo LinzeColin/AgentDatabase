@@ -1,4 +1,51 @@
+> ⚠ **2026-08-24 改名：本文件的 L1–L5 一律改称 W 轴 W1–W5（Wardrobe Tier）。**
+> 原因：`G-尺度分级.csv` 的 L0–L4 是**题材与镜头语言**分级（决定被抖音限流的概率，
+> DouyinOps 唯一权威）；本文件这套是**服装露肤度 + 姿态暗示强度**（决定被 OpenAI
+> 安全系统拦的概率）。两者同名不同义，接 H 姿势轴时会在代码里出现两个含义不同的 L2。
+> 对照：W5 全强度 · W4 −暗示性姿态 · W3 −含胸挺腰 · W2 −露腰深V高衩（最低可接受档）· W1 v1.7.0 原版。
+
 # 色情度档位 L1–L5：出图率与色情度的取舍
+
+## 先于档位的硬规则（2026-08-23 用户定，两个 skill 口径不同）
+
+### 默认走 pipeline，不是 sexy
+
+**所有产物默认按 `character-skin-pipeline`（安全版）出。**
+要 sexy 那一档必须用户显式指定，不许我替他决定。
+
+**代价是实测过的**：2026-08 艾莉西亚那条因**性暗示过强**被抖音限流。
+一条被限流，整个号后续的自然流量都受影响——这不是"删掉那条就好"的损失。
+
+### 三个维度
+
+| 优先级 | 维度 | 判据（人看一眼能判的） |
+|---|---|---|
+| ① | **性暗示** | 姿态/眼神/身体语言有明确挑逗意味 |
+| ② | **色情度与露肤度** | 大面积裸露：肩、臂、腰、腿、胸线 |
+| ③ | **丝袜 / 性感 / 肉感 / 巨乳** | 丝袜可见，身材曲线明确 |
+
+### 两个 skill 各自的门槛
+
+| | **pipeline（默认 · 抖音可发）** | **sexy（非公开）** |
+|---|---|---|
+| ① 性暗示 | **不要求**（过强会被限流） | **必须** |
+| ② 露肤度 | ②③ **满足其一即可** | **必须** |
+| ③ 丝袜肉感 | ②③ 满足其一即可 | **必须** |
+| 偏离基准人物特征 | **严格禁止** | 尽量不偏离 |
+
+**「不偏离基准人物特征」= 脸、发色发型、瞳色、标志配饰、配色必须和锚图一致。**
+pipeline 这条是红线：偏了就是画了另一个角色，公开发布会被认成侵权或劣质二创。
+sexy 允许服装大改，但脸和发型仍要能认出是谁。
+
+**验收时逐张过**：`性暗示 ✓/✗ · 露肤 ✓/✗ · 丝袜肉感 ✓/✗ · 基准特征 ✓/✗`
+- pipeline：②③ 至少一个 ✓，**且基准特征必须 ✓**
+- sexy：①②③ 全 ✓
+
+---
+
+> **v0.1.0 公开档收敛（2026-08-23）**：本文件 L1-L5 体系在 **character-skin-sexy（非公开）** 全强度使用。
+> **character-skin-pipeline（公开抖音）只用 L0-L2**（软色情 + 全遮挡 + 合规条），L3+ 一律移交 sexy。
+> 公开/非公开判定见 `14-public-safety.md`。
 
 **结论先行：不要挑一档跑全量，要用阶梯降级重试。**
 第 1 次 L4、第 2 次 L3、第 3 次 L2；L2 还出不来就标记为需重做。
@@ -98,3 +145,33 @@ L5 那一轮里，昼夜**成对**可用的只剩 **9 / 55 个变体**，单张�
 
 花名册里明显儿童体型的（可莉、七七、菲林一类），这套档位不适用，保持原设服装。
 不是可配置项。
+
+---
+
+## 2026-08-23 实测补充：L5/L4/L3 的 PIN-UP 措辞会放大腿部曲线（爱莉希雅「腿太胖」教训）
+
+**现象**：hi3 爱莉希雅 v1.9.1（L5 进包，L4→L3→L2 阶梯）出图被用户判「腿太胖、不符合原设身材」。
+
+**根因**：`PIN-UP DIRECTION: emphasise the unbroken leg line from hip to ankle and the bust line; weight on one hip, arched back...`
+这一串在 **L5/L4/L3 都保留**（L4 只是把 suggestive 换 elegant，L3 才删 arched back），
+它在放大腿线与胯部曲线；叠加上 6/8 锚图是低清（544–960px），模型锁不住角色真实的纤细体型。
+
+**修法（已验证，v1.9.2）**：新增一条**不参与任何阶梯替换串**的独立条款，全档位保留：
+
+```
+PHYSIQUE (strict): the figure's body proportions follow the reference character's actual
+slender build exactly — narrow hips, slim waist, long slim thighs and calves; legs and hips
+are never thickened, widened or exaggerated; keep the hip-to-thigh-to-calf ratio and limb
+slenderness as in the reference image. The pose may be alluring, but limbs and frame stay
+natural, undistorted and in proportion.
+```
+
+实现要点：这条措辞不能与 `erotic_levels.py` 的任何替换串（SUGGESTIVE/MAXIMAL/PIN-UP DIRECTION/garter…）
+字节级重叠，否则降级时被误改。核对命令：断言 PHYSIQUE 在每个任务的每个 side 都在（变体数×2）。
+
+**另一层根因（锚图 bug）**：爱莉希雅官网高清立绘 `miss-pink-elf.jpg` 存在，但任务包按 `miss-pink` 找锚，
+文件名不匹配导致**用了 544×660 低清版**。教训：组包前核对每个变体实际用的锚图尺寸，
+官网高清与 Fandom 低清同名不同后缀时要做文件名归一化映射。
+
+**结果**：v1.9.2 一次通过率 56.2%（vs v1.9.1 43.8%），实付 $0.53（vs $0.88）。
+与 Claude Code 旧批次（v1.7.0，L1 措辞无腿线强调）的质量差，**不是流程差异，是档位差异**。

@@ -20,7 +20,21 @@ import argparse
 import json
 import pathlib
 
-GAME_ZH = {"genshin": "原神", "hsr": "崩坏：星穹铁道", "zzz": "绝区零", "wuwa": "鸣潮", "nte": "异环"}
+GAME_ZH = {"genshin": "原神", "hsr": "崩坏：星穹铁道", "zzz": "绝区零", "wuwa": "鸣潮", "nte": "异环",
+           "hi3": "崩坏3"}
+
+
+def private_only(assets: pathlib.Path) -> set:
+    """不允许发公开平台的产物 id。
+
+    新旧同时入库之后必须能分辨：旧版（.rejected-N）和 sexy skill 的产物
+    都不许发抖音——2026-08 艾莉西亚那条因性暗示过强被限流，
+    一条被限流影响整个号的自然流量。
+    """
+    try:
+        return set(json.loads((assets / "private_only.json").read_text(encoding="utf-8"))["ids"])
+    except Exception:
+        return set()
 
 
 def chinese_variants(assets: pathlib.Path) -> dict:
@@ -66,6 +80,7 @@ def main() -> None:
     display = args.assets / "display"
     zh = chinese_names(args.assets)
     zh_variant = chinese_variants(args.assets)
+    private = private_only(args.assets)
     entries = []
     source = master if master.exists() else display
     pattern = "light.png" if source is master else "light.webp"
@@ -90,6 +105,8 @@ def main() -> None:
             # 菜单和画廊统一用这个字段。有中文名就用中文，没有就用英文 id ——
             # 两种混排也比音译一个假名字强。
             "label": char_label,
+            # 公开可发 = 不在私有清单里。宿主和复核页据此打标。
+            "public": f"{game}/{character}/{variant}" not in private,
             "variantZh": variant_zh,
             # 菜单和画廊统一读这两个，别再各自拼字符串——
             # 三个宿主原来各拼各的，中文名补上了它们也还在显示英文 slug。

@@ -2,6 +2,58 @@
 
 版本号连续递增：v0.0.1 → v0.0.2 → …
 
+## v0.2.0 · 2026-08-24
+
+**A–I 九轴接进产线 + W 轴改名 + 生成后端默认本地**
+
+在这之前 `build_taskpack.py` 是：每个 IP 一句写死的场景、两句写死的光照、一种景别、
+一个姿势、一段固定 wardrobe 文本 —— **414 个变体 = 414 个角色 × 1 个配方**。
+维度表本来就在 DouyinOps 躺着（每行带实测出处），产线一张都没读。
+
+- `references/17-axes.md` 新增：九轴、配方语法、**五道硬闸**、权力轴与机位轴解耦。
+- `references/18-render-quality.md` 新增：「AI 感」的四个病因与解、三条后端对比、混合链。
+- `13-erotic-levels.md`：**L1–L5 → W1–W5**。G 轴 L0–L4 是题材分级，两者同名不同义，
+  接 H 轴时代码里会出现两个含义不同的 L2。
+- `16-hosiery.md`：丝袜升为 **I 轴**（7×8×6=336 组合，原 9 个枚举），真源搬 DouyinOps。
+  修正 auto_rules 方向错误 —— 旧规则把角色推向语料稀薄的白丝组合。
+- 工具：`02_通用资产/axes.py` 配方编译器；`04_素材产线/01_壁纸批量出图.py` 加 CSV 第 4 列负向。
+
+**H 轴 41 → 65 条**，两处结构性修正：
+- 权力轴与机位解耦：支配/服从不再绑死仰拍/俯拍，靠凝视(`looking_down` 13.8万)
+  + 姿态(`crossed_arms` 12.1万) + 道具(`thigh_boots` 12.3万) 实现，机位保持平视。
+  公开线覆盖 **对等100% 支配71% 服从100% 诱惑89%**（原来支配2条、诱惑0条）。
+- 两条标错的权力轴修正：跪坐正面/鸭子坐是幼态可爱不是性服从。
+
+**新增 `语料量` 列**（Danbooru post_count = 底模见过多少这类图 ≈ 生成质量先验）。
+实测三条反直觉：`close-up` 6.3万 比 `full_body` 127万少 20 倍（特写别让模型出，从母版裁）；
+`thighhighs` 152万 是 `pantyhose` 73万 的两倍；`school_uniform` 105万 是 `office_lady` 2.3万 的 45 倍。
+
+## v0.1.3 · 2026-08-23（补记）
+
+13 项缺陷返工同批落地的产线改进，当时没写变更记录：
+- `15-hands.md`：手部条款按五类缺陷逐条写死（多手/重影/穿模/模糊/朝向反），
+  不再是笼统的 `correct anatomy`。
+- `16-hosiery.md` + `research/hosiery.json`：丝袜九类三层选择（幼态豁免→用户覆写→配色推断）。
+- `private_only.json` + catalog `public` 字段：合规标注机制。
+- `build_taskpack.py` 改为**以磁盘为准**枚举变体（原来只读 `outfits.json` 台账，实测漏了 3 个）。
+- `build_taskpack.py:337` 恢复 r5 幼态角色的 `WARDROBE_CANONICAL` 路径。
+
+## v0.0.4 · 2026-08-23
+
+**崩坏3(hi3)第五 IP 上线 + 腿型修复（PHYSIQUE 条款）**
+
+- `references/02-roster.md`：新增崩坏3 三层结构（角色→装甲→皮肤）与官网锚图源
+  （bh3.com 内容接口 iChanId=703，sExt.703_3 立绘 1198×1151）；中文名走国服官方/萌娘百科；
+  en↔zh 桥用 Fandom `zhs` 模板；**文件名归一化教训**（miss-pink-elf vs miss-pink 静默用低清锚）。
+- `references/13-erotic-levels.md`：实测补充——L5/L4/L3 的 PIN-UP 措辞会放大腿部曲线
+  （爱莉希雅「腿太胖」），正解是新增**不参与阶梯替换**的 `PHYSIQUE` 独立条款（腰/胯/腿
+  严格照锚图纤细体型、禁加粗），措辞与 erotic_levels.py 替换串字节级零重叠。
+- `references/10-pitfalls.md` #12 补充：`shutil.copy2` / `PIL Image.save` 直写 SMB 同样整文件清零
+  （爱莉希雅待发包 18 张成品全灭），铁律=rsync+读回校验。
+- 工具：`tools/collect_hi3_official.py`（官网立绘采集）、`tools/build_taskpack.py` 加 `{physique}` 槽。
+
+实测：v1.9.2 一次通过率 56.2%、实付 $0.53；与 v1.7.0(L1) 的质量差是档位差异不是流程差异。
+
 ## v0.0.3 · 2026-08-21
 
 **色情度档位 L1–L5 与降级重试**（`references/13-erotic-levels.md` + `tools/erotic_levels.py`）
@@ -75,3 +127,13 @@ batch_run.py 按 attempt 自动降档；L2 是最低可接受档，
 
 **新增参考**
 - `11-cost.md`：钱只花在 gpt-image-2 上，按收益排的五条省钱路
+
+## v0.1.0 · 2026-08-23
+
+**公开安全版（T18 拆分，对标公开抖音）**
+
+- `SKILL.md`：frontmatter 加 `public_grade: 安全`；新增「公开安全红线」章节——隐私部位一律不允许暴露 / G 轴 L0-L2 / L2 强制合规条 / PHYSIQUE 自然体型 / L3+ 移交 sexy / 版本纪律；决策树加「公开/非公开」与「L3+ 切 sexy」路由。
+- `references/14-public-safety.md`：新增——公开自查清单、色情度档位（L0-L2 公开）、与 sexy 分工铁律、锚图高清纪律。
+- `references/13-erotic-levels.md`：头部加公开档收敛说明（公开只用 L0-L2，L3+ 移交 sexy；L1-L5 体系在 sexy 全强度使用）。
+- 拆分产出：`character-skin-sexy` v0.1.0（非公开高色情度）独立 skill。
+- 安装：claude + agent 两处；`模型与工具登记.csv` 登记 SKILL-PIPELINE / SKILL-SEXY。
