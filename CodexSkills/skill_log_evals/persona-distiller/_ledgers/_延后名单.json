@@ -4001,9 +4001,25 @@
    "★ 处置类的原键": "reason",
    "★ disposition 未记": "2026-08-23 补记",
    "★ 处置类怎么来的-2026-08-15": "由 reason 文本归纳为 ① 一手规模不够"
+  },
+  {
+   "name": "John Maynard Keynes",
+   "family_zh": "投资资本师",
+   "deferred_at": "2026-08-23",
+   "reason": "①证据不足（lane 不足）：archive.org 一手互异约 6-7 部（ECoP 1919、Revision 1922、Indian Currency 1913、Treatise on Probability 1921、Treatise on Money 1930 两卷、Tract on Monetary Reform 1923）但**全部为 writings**；其经济学代表作 General Theory (1936)、Essays in Persuasion (1931)、A Treatise 后期版均在版权保护期（1946 卒 +70 → 2046），书信（Collected Writings 1971+、Lydia & Maynard 1989）与传记（Harrod 1951、Skidelsky）全部 borrow-only 在保护期内。无 conversations/letters、无 timeline/自传、无 PD 二手 external 可下载，lanes 最多 2 道（writings + 勉强 expression 期刊文）< 3。与 Turing/Shannon 同类：20 世纪经济学大家一手版权受阻。",
+   "probed_and_failed": [
+    "creator:\"Keynes, John Maynard\" 123 条，≤1930 的一手全为 writings（ECoP/Revision/Indian Currency/Probability/Money/Tract）",
+    "title:(Keynes) 480 条早期无书信/传记 PD 版；letters（Moggridge Correspondence、Lydia & Maynard 1989）全在版权期",
+    "General Theory 1936、Essays in Persuasion 1931、Collected Writings 1971+ 全部 inlibrary/printdisabled（版权期）",
+    "Harrod《Life of Keynes》1951、Skidelsky 传记均版权期内不可下载"
+   ],
+   "处置类": "① 一手规模不够（lane 不足）—— 引自本条 `reason`：PD 一手全为 writings（quick 要 ≥8 份互异 + 3 道 lane），书信/传记版权期内不可得，lanes 最多 2 道",
+   "★ 处置类的原键": "reason",
+   "★ disposition 未记": "2026-08-23 补记",
+   "★ 处置类怎么来的-2026-08-15": "由 reason 文本归纳为 ① 一手规模不够"
   }
  ],
- "total": 201,
+ "total": 202,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。　★ 2026-08-13 实测又漂了：写着 168、实有 187（差 19 条），**注释写明「不手写」并不能阻止它漂**——已落成判据 `check_deferred_list.py` 每次现算。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",

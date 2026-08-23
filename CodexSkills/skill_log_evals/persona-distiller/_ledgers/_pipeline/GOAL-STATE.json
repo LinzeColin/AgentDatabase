@@ -1,11 +1,11 @@
 {
  "round": 18,
- "updated_at": "2026-08-23T09:47Z",
+ "updated_at": "2026-08-23T09:53Z",
  "time_band": "valley-0000-0800",
  "people": 128,
- "current_person": "投资资本师族 #237 David Ricardo",
- "stage": "Ricardo 全流程完成：candidate 0.872 / baseline 0.292 / delta +0.58（六门全过）→ package v0.0.0.1 → register 成功，index 128",
- "next": "投资资本师族 #238 John Maynard Keynes（1883-1946，一手充足：A Treatise on Money/General Theory/书信；注意 1946 卒→部分著作版权期）",
+ "current_person": "投资资本师族 #238 John Maynard Keynes",
+ "stage": "Keynes #238 探源延后（① PD 一手全 writings、书信/传记版权至 2046，lane<3；延后名单→202）",
+ "next": "投资资本师族 #249 John Stuart Mill（1806-1873，四道齐全：writings Principles/On Liberty/Utilitarianism + timeline Autobiography 1873 + conversations 书信 + external Bain 1882）",
  "threads": {
   "T1": {
    "branch": "main",
@@ -28,11 +28,11 @@
  },
  "p0_queue": [
   "Eiffel(wip-eiffel-142)已做未出货，先查卡点",
-  "投资资本师族 #238 Keynes 全流程"
+  "投资资本师族 #249 John Stuart Mill 全流程"
  ],
  "p0_done": [
-  "投资资本师族 #225 John Law 入库(127)",
-  "投资资本师族 #237 David Ricardo 入库(128，delta+0.58)"
+  "#225 John Law(127)",
+  "#237 David Ricardo(128，delta+0.58)"
  ],
  "p0_closed": [],
  "note": "Ricardo #237 完成：8 train+3 holdout（含 Diehl 1905 德文评述纠错 P2/external）；research 门 0 错 0 引文对不上；盲判 3 轮（首轮 4 处 critical → 修 contrast-02 朗姆酒桶类比/planning-01 四段链/long-horizon-02 出处对齐语料 → 六门全过）；release 2 条 strict 警告已 acknowledge。",
