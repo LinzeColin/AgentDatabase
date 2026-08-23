@@ -1,7 +1,7 @@
 ---
 name: character-skin-sexy
 description: 角色皮肤的**非公开**高色情度产线（私域/付费/测试用途）。Use when 需要 L3-L5 色情度拉满的角色素材（吊袜带/深V/高衩/pin-up 全强度），或 character-skin-pipeline 阶梯降级到 L2 仍不够时。**边界铁律（不可协商）**：本 skill 产物**绝不进公开抖音**（G 轴 L3/L4 = 限流 30 天实测），公开发布一律走 character-skin-pipeline（安全版）。覆盖：L3-L5 档位 prompt、pin-up 全强度措辞、阶梯降级重试、产物隔离标记、非公开登记。
-version: 0.2.0
+version: 0.2.1
 metadata:
   category: pipeline
   scope: 非公开（私域/付费/测试）
