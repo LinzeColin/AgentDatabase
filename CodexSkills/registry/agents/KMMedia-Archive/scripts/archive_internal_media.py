@@ -450,6 +450,33 @@ def find_existing_folder(group: Group) -> str:
     return group.title
 
 
+def _manifest_conversation_id(title: str) -> tuple[str | None, str | None]:
+    """群名在 dws 会话列表匹配不到时，从 SMB 群目录 .manifest.jsonl 的 header 反查 conversation_id。
+
+    实测（260823）：`dws chat list-all-conversations` 不含已归档群（被隐藏/过滤），
+    但 conversation_id 直查仍可访问。manifest 是 durable 账本，conversation_id 是最可靠反查源。
+    返回 (conversation_id, group_type)；找不到返回 (None, None)。
+    """
+    candidates = [SMB_ROOT / title]
+    candidates.extend(c for c in SMB_ROOT.iterdir() if c.is_dir() and c.name != title)
+    for candidate in candidates:
+        manifest = candidate / MANIFEST_NAME
+        if not manifest.exists():
+            continue
+        try:
+            records = read_manifest(manifest)
+        except (OSError, json.JSONDecodeError):
+            continue
+        for record in records.values():
+            if record.get("record_type") != "group":
+                continue
+            conv_id = str(record.get("conversation_id") or "")
+            rec_title = str(record.get("title") or record.get("folder") or "")
+            if conv_id and (candidate.name == title or rec_title == title):
+                return conv_id, str(record.get("group_type") or "INTERNAL_GROUP")
+    return None, None
+
+
 def select_groups(allowed_titles: list[str]) -> list[Group]:
     result = dws_json(["chat", "list-all-conversations"])
     conversations = result.get("conversations") or []
@@ -466,6 +493,10 @@ def select_groups(allowed_titles: list[str]) -> list[Group]:
         if len(non_single) == 1:
             matches = non_single
         if len(matches) != 1:
+            conv_id, group_type = _manifest_conversation_id(title)
+            if conv_id:
+                selected.append(Group(title=title, conversation_id=conv_id, group_type=group_type or "INTERNAL_GROUP"))
+                continue
             failures.append(f"{title}: expected one live conversation, got {len(matches)}")
             continue
         conversation = matches[0]

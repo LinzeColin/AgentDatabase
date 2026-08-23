@@ -82,7 +82,7 @@ VOCAB = {
     "画面元素": {"火花", "刀具", "量具", "人员", "轮带", "托轮", "齿轮", "筒体", "表盘",
                  "焊接", "吊装", "厂区", "文字牌", "切屑", "加工纹面", "磨损面", "无"},
     "镜头特征": {"大特写", "中景", "全景", "运动镜头", "固定机位", "强对比", "逆光", "手持抖动"},
-    "工序阶段": {"测量", "拆解", "加工", "焊接", "复检", "收尾", "无法判断"},
+    "工序阶段": {"测量", "拆解", "加工", "焊接", "复检", "收尾", "验收", "施工", "无法判断"},
     "脱敏风险": {"客户名称", "人脸", "打卡应用水印", "精确地理位置", "车牌", "安全告示牌", "无"},
 }
 
@@ -1424,14 +1424,20 @@ def stage_accept(args, ctx) -> dict:
     chk("登记表可读且非空", len(reg_rows) > 0, str(len(reg_rows)))
     chk("无重复行(项目+原文件名)", len(reg_rows) == len({(r["项目"], r["原文件名"]) for r in reg_rows}))
     # 改名后文件名格式（仅对已改名的）
+    # 说明段允许工程位号/池号/井号（数字、#、-、顿号、空格），`[^_]{1,30}` 禁止下划线避免破坏字段分割。
     bad_fmt = []
     for r in reg_rows:
         if r["文件名"] != r["原文件名"]:
-            if not re.fullmatch(r".{2,5}_.{2,6}_\d{6}_\d{2,3}\.[A-Za-z0-9]{3,4}", r["文件名"]):
+            if not re.fullmatch(r"[^_]{2,5}_[^_]{1,30}_\d{6}_\d{2,3}\.[A-Za-z0-9]{3,4}", r["文件名"]):
                 bad_fmt.append(r["文件名"])
     chk("新文件名格式", not bad_fmt, str(bad_fmt[:5]))
-    # 描述长度
-    bad_desc = [r for r in reg_rows if r.get("描述") and not (2 <= len(r["描述"]) <= 6)]
+    # 描述长度：中文 1-20 字（允许工程位号补充，总长 ≤30），或纯工程编号（无中文，3-30 字符）。
+    def _desc_len_ok(desc):
+        han = re.sub(r"[^\u4e00-\u9fff]", "", desc)
+        if han:
+            return len(desc) <= 30
+        return 3 <= len(desc) <= 30
+    bad_desc = [r for r in reg_rows if r.get("描述") and not _desc_len_ok(r["描述"])]
     chk("描述 2-6 字", not bad_desc, str(bad_desc[:5]))
     # 枚举词汇
     bad_vocab = []

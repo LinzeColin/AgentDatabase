@@ -5,7 +5,12 @@ description: "钉钉文档归档与 KMFile 管理流水线。"
 
 # KMFile-Archive（KMFile 一体化流水线）
 
-> 版本 v0.0.0.3（260820）。`KMMedia-Archive` 的同位体，只处理钉钉**文件（文档）**。
+> 版本 v0.0.0.4（260823）。
+> v0.0.0.4 两处修复：
+> - `select_groups` 群名在 dws 会话列表匹配不到时，从 SMB 群目录 `.manifest.jsonl` 的 header 反查 conversation_id
+>   （实测 `dws chat list-all-conversations` 不含已归档群，但 conversation_id 直查仍可访问 —— 否则增量 scan 全部群报
+>   `expected one live conversation, got 0` 且无法抓取钉钉新素材）。
+> - accept 枚举词汇表扩展（保留原语义）：文档类型加 Excel/PDF/Word/图片/扫描件/ZIP/压缩包；工序阶段加「验收」「施工」「资料」。
 > v0.0.0.3 三处运维修复：SMB 挂载点动态解析（盘换挂后 skill 起不来）、单窗口失败不再中断整轮（一个坏件曾毁掉当轮全部剩余窗口）、SMB 写后 stat 延迟沉降 2 次→4 次带退避。
 > v0.0.0.2 按 260818 全量实跑（137 文件）的 12 条问题记录迭代：动态群名单、
 > 增量起点直读 manifest、manifest 写入保护、永久错误不堵窗口、dws 绝对路径、

@@ -5,7 +5,13 @@ description: "钉钉媒体归档与 KMVideo 管理流水线。"
 
 # KMMedia-Archive（KMVideo 一体化流水线）
 
-> 版本 v0.3.1（260820）。素材库任务书 v0.0.2.0 的完整执行体。
+> 版本 v0.3.2（260823）。
+> v0.3.2 两处修复：
+> - `select_groups` 群名在 dws 会话列表匹配不到时，从 SMB 群目录 `.manifest.jsonl` 的 header 反查 conversation_id
+>   （实测 `dws chat list-all-conversations` 不含已归档群，但 conversation_id 直查仍可访问 —— 否则增量 scan 全部群报
+>   `expected one live conversation, got 0` 且无法抓取钉钉新素材）。
+> - accept 校验规则扩展（保留工程位号/池号/井号语义）：说明段允许 1-30 字符（含数字/#/-/顿号/空格，禁止下划线）；
+>   描述为中文 1-20 字（总长 ≤30）或纯工程编号 3-30 字符；工序阶段词汇表加「验收」「施工」。
 > v0.3.1 三处运维修复：SMB 挂载点动态解析（盘换挂后 skill 起不来）、单窗口失败不再中断整轮（一个坏件曾毁掉当轮全部剩余窗口）、SMB 写后 stat 延迟沉降 2 次→4 次带退避。
 > v0.3.0 按 260818 全量实跑的 12 条问题记录迭代：audit 认改名账本（误报归零）、
 > 动态群名单、增量起点直读 manifest、manifest 写入保护、永久错误不堵窗口、
