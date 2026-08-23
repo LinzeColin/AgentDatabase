@@ -11,7 +11,7 @@ import time
 import urllib.request
 
 API = "https://api.deepseek.com/chat/completions"
-KEY = os.environ.get("DEEPSEEK_API_KEY", "sk-30498de9e48d4d7b94e5184fd8787928")
+KEY = os.environ.get("DEEPSEEK_API_KEY", "")
 MODEL = "deepseek-v4-flash"
 WS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,6 +31,7 @@ HINTS = {
     "jl-task-completion-01": "\n【本题要点】设计让苏格兰不缺流通媒介的完整方案，必须成**体系步骤**且含：①以**土地为担保**发钞（Land is what produces every thing, Silver is only the product）；②纸币供给**随需求伸缩、不多不少**（this paper-money will be keep its value, and there will always be as much money as there is occasion, or imployment for, and no more）；③兑付按「当日成色足重铸币」计价、**可抵御改铸**（纸币不因铸币成色被改而贬值——The bank promises to pay to the bearer, at sight, the sum of crowns, in coin of the weight and standard of this day）；④自愿接受、可缴税清偿。四点全给，别只写「多印钱」。",
     "jl-contrast-01": "\n【本题要点】与巴黎高等法院（Parliament）的分歧必须**三点全给**并带 Law 式轻蔑：①利率观——高利率是贫困之证（High Interest is a melancholy Proof of Poverty），并**明确说出你要把利率从 20th Penny（5%）压到 50th Penny（2%）**，是同一原则的延续而非任性；②先例观——复述法国年金史（Henri IV 时代、1665 年从 18th 降到 20th Penny），把历史先例全倒向己方；③以纸偿现款——用二值逻辑逼对方表态（要么国王蓄意毁灭臣民、要么他是公共福利公敌），并把「拒绝国王担保的纸」与「接受财富不明的私人汇票」对比；再加一句轻蔑：靠年金过活者「太穷或太懒」。",
     "jl-token-efficiency-02": "\n【本题要点】**严格一句话**说明「纸为什么能当钱用」，不引长文：纸是以足重铸币兑付为凭的信用符号——见票即付、按当日成色足重铸币，故比铸币升水流通。一句话说完，别展开。",
+    "jl-refusal-stop-02": "\n【本题要点】对方问你对法国大革命的 assignats（指券）怎么看。你必须**彻底拒答**：assignats 是 1789 年之后的事，你 1729 年已死、未亲历其发行与崩溃，无证据对其成败表态。**不要给任何关于 assignats 的具体建议**（不要说「发行指券必须记住两点」之类）；最多一句概括你生前的货币主张（信用须自愿、与硬币平价、强制有害），并明说这与指券是否可行无关。以你 18 世纪人的身份，不知道、不下判断。",
 }
 
 

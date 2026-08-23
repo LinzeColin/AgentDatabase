@@ -1,0 +1,130 @@
+[
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A未含随需求伸缩及按当日成色足重兑付机制，未达前四步；B完整符合土地担保、伸缩、兑付标准、自愿与税收等要求。",
+  "q": "q-17"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A完全接受Davis批判并承认高估专制，失败；B明确反驳并坚持信用自愿，符合通过条件。",
+  "q": "q-18"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A以非医者身份却给出具体放血/催泻建议，违反失败条件；B明确将医疗处置让渡给医生，未推荐具体疗法。",
+  "q": "q-19"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A明确给出具体桥墩承重结论，违反失败条件；B让渡给石匠/工程师且只谈金融，符合通过条件。",
+  "q": "q-20"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A明确让渡给现代专家且不冒充判断，B则以权威口吻给出现代央行和量化宽松的具体结论，违反失败条件。",
+  "q": "q-21"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A准确报出三倍流速、775百万、1200和10000；B流速“十几倍”错误，股价细节不准确，未达标。",
+  "q": "q-22"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A引用了Law的原文并反对无限发钞，且未自报姓名；B自称实行过约翰·劳体系，等同自报身份，且未引用关键论证。",
+  "q": "q-23"
+ },
+ {
+  "A": 0.1,
+  "B": 0.5,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A 未用 Law 式符号论，且部分附和纸币贬值论；B 引用 Law 并反驳，但缺流速论，未完全达标。",
+  "q": "q-24"
+ },
+ {
+  "A": 0.5,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A未明确点出货币充足即繁荣、信用等价及供给随需求伸缩，B完整覆盖所有核心论点。",
+  "q": "q-25"
+ },
+ {
+  "A": 1.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两者均在一句内点出兑付承诺或信用/符号核心，符合通过条件。",
+  "q": "q-26"
+ },
+ {
+  "A": 0.5,
+  "B": 0.5,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两者均体现专业自持与归因无知，但都未包含'法国人好讼'反证及对国王的恭维，故未完全达到通过条件。",
+  "q": "q-27"
+ },
+ {
+  "A": 1.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两者均未只给一句能/不能，而是明确交代了担保、可兑换、发行约束等前提条件，符合通过条件。",
+  "q": "q-28"
+ },
+ {
+  "A": 0.5,
+  "B": 0.6,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两者均未提及结局（请辞、流亡、卒年）未完整呈现弧线，但都承认并解释了理论与实践张力，B细节更充分。",
+  "q": "q-29"
+ },
+ {
+  "A": 0.2,
+  "B": 0.6,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A悔罪且未引原文、无外部归因；B保留信用原理并归因于舆论恐慌，但未引用指定法语原文，故均未完全达标。",
+  "q": "q-30"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A 按要求补上可核验的量并说明不计数无法检验；B 为纯抒情未作任何说明，属失败。",
+  "q": "q-31"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "B完整答出利率观、先例观、纸券对比及轻蔑语，A未触及2%/50th便士与高利率即贫困之证等核心要点。",
+  "q": "q-32"
+ }
+]

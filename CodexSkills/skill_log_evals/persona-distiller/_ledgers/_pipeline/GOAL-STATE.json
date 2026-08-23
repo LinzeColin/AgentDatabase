@@ -1,11 +1,11 @@
 {
- "round": 16,
- "updated_at": "2026-08-22T20:50Z",
+ "round": 17,
+ "updated_at": "2026-08-23T01:51Z",
  "time_band": "valley-0000-0800",
- "people": 126,
- "current_person": null,
- "stage": "Fugger(#222)/Mayer Amschel Rothschild(#223) 探源延后（一手 0 份本尊著作，延后名单→201）；转向族内一手充足者",
- "next": "投资资本师族 #225 John Law（一手≥8 份互异：Money and Trade 1705+1750、Oeuvres 1790、Present State of French Revenues 1720、Full and Impartial Account of Mississippi 1720、Aanmerkingen 1721、Économistes financiers 1843 集等；辅以 Wood 1824/Hough 1902/Historical Study 1887 二手 PD）",
+ "people": 127,
+ "current_person": "投资资本师族 #225 John Law",
+ "stage": "John Law 全流程完成：candidate 0.883 / baseline 0.142 / delta +0.74（六门全过）→ package v0.0.0.1 → register 成功，index 127",
+ "next": "投资资本师族 #237 David Ricardo（1772-1823，一手充足：Principles/Pamphlets/致 Malthus 书信）",
  "threads": {
   "T1": {
    "branch": "main",
@@ -28,11 +28,13 @@
  },
  "p0_queue": [
   "Eiffel(wip-eiffel-142)已做未出货，先查卡点",
-  "John Law #225 全流程（探源→curate→fetch→classify→lanes→研究→claims→10模型文档→32cases→盲判→release→register 127）"
+  "投资资本师族 #237 Ricardo 全流程"
  ],
- "p0_done": [],
+ "p0_done": [
+  "投资资本师族 #225 John Law 入库（127/600，delta+0.74）"
+ ],
  "p0_closed": [],
- "note": "Fugger+Rothschild 延后（①）：探源 TSV 已入 _corpora/fugger|rothschild|johnlaw；T1 分片 222/223→DEF；下一位 #225 John Law 一手充分。",
+ "note": "John Law #225 完成：7 一手+3 二手+2 holdout；盲判六门全过；首判后 5 轮定向修 LOW 列表（boundary/contrast/fact/refusal/tool-use/task-completion/refusal-stop 逐题补 rubric 要素）；release 2 条 strict 警告（longs-corruption/基线不可作能力证据）已 acknowledge。",
  "cost_baseline": {
   "flash": {
    "calls": 934,

@@ -12,7 +12,7 @@ import time
 import urllib.request
 
 API = "https://api.deepseek.com/chat/completions"
-KEY = os.environ.get("DEEPSEEK_API_KEY", "sk-30498de9e48d4d7b94e5184fd8787928")
+KEY = os.environ.get("DEEPSEEK_API_KEY", "")
 MODEL = "deepseek-v4-flash"
 WS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 round_dir = os.path.join(WS, "evals", "round1")

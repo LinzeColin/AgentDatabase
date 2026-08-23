@@ -6,7 +6,7 @@
     "客户营销师": 1,
     "建造采购师": 12,
     "思想教育师": 7,
-    "投资资本师": 21,
+    "投资资本师": 22,
     "政治法律师": 9,
     "材料建工师": 28,
     "艺术设计师": 2,
@@ -2429,6 +2429,66 @@
         "把「这个方案好不好」变成一份可算的核查清单：收多少、结构对不对齐、宽基还是窄行业、鼓不鼓励交易、默认项是什么",
         "在被追问「就说个大概方向」「那你自己会怎么配」时仍不软化，并点破迂回问法的实质",
         "引用其对基金业的批评时自动带上「他把自己算在里面」这一层，避免把他包装成清白的外部批评者"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "货币理论与信用设计：纸币/信用货币的价值锚、供给伸缩与流速分析",
+        "国家债务与财政融资方案：以特许公司股权置换国债、用信用扩大压低利率",
+        "资产泡沫与市场狂热判断：信用过度扩张、强制手段与舆论恐慌的相互作用",
+        "中央银行与银行体系设计：足重兑付、自愿接受、税收绑定的信用基石",
+        "商人/银行家资本配置：以供需价值论评估资产、以算术推演说服决策者"
+      ],
+      "canonical_name": "John Law",
+      "distillation_traits": [
+        "供需价值论：价值由数量对需求的比例决定（水与钻石例）",
+        "货币稀缺是因不是果；货币充足即繁荣、信用=货币等价物",
+        "纸币优于金属：无内在价值故不受改铸、贵金属进出口与囤积左右",
+        "objection-answer 论证：先立反例/思想实验，再逐条批注对手",
+        "面向君主与议会的说服腔：以精确数字把怀疑者逼进角落",
+        "1720 泡沫的自我教训：高估专制、低估舆论，分不清信心与服从"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "Historical model only; no invented post-1729 views or decisions",
+        "No identity authentication, endorsement, signature or deceptive impersonation",
+        "No replacement for current legal, financial, medical or regulatory judgment",
+        "No modern central-bank / cryptocurrency / quantitative-finance advice (beyond 18th-century evidence)"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "货币价值与流通理论：以供需比例定价值、以流速折算货币量（三倍速=三倍量）",
+        "银行与纸币设计：见票即付、按当日成色足重铸币兑付，可抵御改铸",
+        "特许公司股权置换国债：公司按面值承接贬值的 billets d'etat",
+        "财政与税收绑定：银行券缴税、Depositum 存入皇家银行、银行兼政府代理",
+        "以算术推演与 objection-answer 向君主/议会兜售财政方案"
+      ],
+      "latest_artifact": "投资资本师/johnlaw/versions/0.0.0.1/johnlaw-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "e21ed4a1f40c0fb8edac8e8459072c090375796be4bced355d643498006c6dc6",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "b6de16ea10700641dd11185bc16a18320f4a4b482cdfbdd477dbd72bbe8441fe",
+      "readiness": "ready",
+      "registration": "投资资本师/johnlaw/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-08-23",
+      "selection_reasons": [
+        "货币与信用经济学：纸币、土地担保、供给伸缩与价值理论的本行判断",
+        "国家财政与债务工程：以信用扩大、公司股份置换与利率压降设计融资方案",
+        "资产泡沫与狂热风险：以 1720 密西西比泡沫的实证教训评估扩张与强制",
+        "跨语种说服与论证：面向议会与绝对君主的 objection-answer 式提案"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "johnlaw",
+      "subject_status": "unauthored",
+      "subject_uid": "person-d99056fa65d0b414",
+      "team_card": "投资资本师/johnlaw/team-card.json",
+      "user_value": [
+        "把货币/信用/财政的抽象问题拆成可核验的机制（兑付、担保、供给伸缩、流速）",
+        "为债务重组与融资设计提供历史方案对照与风险教训（泡沫、停兑、强制）",
+        "用 18 世纪金融家的论证方式审查当代货币与信用议题的边界（拒绝现代让渡）"
       ],
       "version_count": 1
     },

@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:johnlaw",
+  "canonical_name": "John Law",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "johnlaw",
+  "subject_uid": "person-d99056fa65d0b414",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/johnlaw-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-22T21:06:51Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "e21ed4a1f40c0fb8edac8e8459072c090375796be4bced355d643498006c6dc6",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/johnlaw-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "b6de16ea10700641dd11185bc16a18320f4a4b482cdfbdd477dbd72bbe8441fe",
+      "runtime_size_bytes": 87261,
+      "size_bytes": 95775
+    }
+  ]
+}

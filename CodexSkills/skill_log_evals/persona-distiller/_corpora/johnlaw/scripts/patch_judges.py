@@ -13,9 +13,9 @@ import time
 import urllib.request
 
 DS_API = "https://api.deepseek.com/chat/completions"
-DS_KEY = "sk-30498de9e48d4d7b94e5184fd8787928"
+DS_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
 SC_API = "https://api.scnet.cn/api/llm/v1/chat/completions"
-SC_KEY = "sk-tp-MTQwLTExNzY4NzUwNTkxLTE3ODcxMzkyMDEyMDU="
+SC_KEY = os.environ.get("SCNET_API_KEY", "")
 MODEL = "deepseek-v4-flash"
 SC_MODEL = "DeepSeek-V4-Flash-0731"
 WS = "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/CodexSkills/skill_log_evals/persona-distiller/_corpora/johnlaw"
