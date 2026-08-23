@@ -1,11 +1,11 @@
 {
  "round": 19,
- "updated_at": "2026-08-23T20:44Z",
+ "updated_at": "2026-08-23T20:54Z",
  "time_band": "valley-0000-0800",
  "people": 129,
- "current_person": "投资资本师族 #249 John Stuart Mill",
- "stage": "Mill 全流程完成：candidate 0.884 / baseline 0.462 / delta +0.42（六门全过）→ package v0.0.0.1 → register 成功，index 129",
- "next": "投资资本师族 #250 Thorstein Veblen（1857-1929，一手充足：Theory of the Leisure Class 1899/Theory of Business Enterprise 1904/Absentee Ownership 1923）",
+ "current_person": "投资资本师族 #250 Thorstein Veblen",
+ "stage": "Veblen #250 探源延后（① PD 一手全 writings、期刊/书信/传记不可得，lane=1；延后→203）",
+ "next": "投资资本师族 #236 Benjamin Franklin（1706-1790，多道：Autobiography timeline + Poor Richard writings + 书信 conversations + 早期传记 external）",
  "threads": {
   "T1": {
    "branch": "main",
@@ -28,13 +28,14 @@
  },
  "p0_queue": [
   "Eiffel(wip-eiffel-142)已做未出货，先查卡点",
-  "投资资本师族 #250 Veblen 全流程"
+  "投资资本师族 #236 Benjamin Franklin 全流程"
  ],
  "p0_done": [
   "#225 John Law(127)",
-  "#237 David Ricardo(128)",
+  "#237 Ricardo(128)",
   "#238 Keynes 延后(202)",
-  "#249 John Stuart Mill(129，delta+0.42)"
+  "#249 Mill(129)",
+  "#250 Veblen 延后(203)"
  ],
  "p0_closed": [],
  "note": "Mill #249 完成：16 train+3 holdout（4 道：writings/timeline/conversations/external）；research 门 0 错；盲判 7 轮（首轮 6 处 critical → 逐轮修自由三域/诱饵/轨迹归因/Comte 早后期/书信逐字引文/卒日细节/无数字诱饵 → 六门全过）；release 2 条 strict 警告（lane_quotes 17 条/基线不可作能力证据）已 acknowledge。",

@@ -4017,9 +4017,25 @@
    "★ 处置类的原键": "reason",
    "★ disposition 未记": "2026-08-23 补记",
    "★ 处置类怎么来的-2026-08-15": "由 reason 文本归纳为 ① 一手规模不够"
+  },
+  {
+   "name": "Thorstein Veblen",
+   "family_zh": "投资资本师",
+   "deferred_at": "2026-08-24",
+   "reason": "①证据不足（lane 不足）：archive.org 一手互异约 10 部（Theory of the Leisure Class 1899、Theory of Business Enterprise 1904、Instinct of Workmanship 1914、Nature of Peace 1917、Higher Learning 1918、Vested Interests 1919、Engineers and Price System 1921、Place of Science 1919、Use of Loan Credit 1903、Science of Finance 1895）但**全部为 writings**；其期刊文章（Why is Economics not an Evolutionary Science 等）在 IA 上仅 jstor-* 元数据不可下载正文；书信未出版 PD 版、传记（Duffus 1944、Riesman 1953、Dorfman 1934 等）全在版权期。无 conversations/expression/timeline/external 可用源，lanes 仅 1 道 < 3。与 Keynes 同类：单一 writings 语料。",
+   "probed_and_failed": [
+    "creator:\"Veblen, Thorstein\" 139 条，≤1930 一手全为 writings 专著",
+    "jstor-* 期刊文章（Preconceptions/Evolutionary Science/Marx 等）djvu.txt 404 不可下载",
+    "传记（Duffus Innocents at Cedro 1944、Riesman 1953、Dorfman 1934、Dowd 1958、Tilman 1992）全 inlibrary 版权期",
+    "书信无 PD 结集；The Place of Science 1919 为其论文集（仍 writings）"
+   ],
+   "处置类": "① 一手规模不够（lane 不足）—— 引自本条 `reason`：PD 一手全为 writings（quick 要 ≥8 份互异 + 3 道 lane），期刊/书信/传记均不可得，lanes 仅 1 道",
+   "★ 处置类的原键": "reason",
+   "★ disposition 未记": "2026-08-24 补记",
+   "★ 处置类怎么来的-2026-08-15": "由 reason 文本归纳为 ① 一手规模不够"
   }
  ],
- "total": 202,
+ "total": 203,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。　★ 2026-08-13 实测又漂了：写着 168、实有 187（差 19 条），**注释写明「不手写」并不能阻止它漂**——已落成判据 `check_deferred_list.py` 每次现算。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
