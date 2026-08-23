@@ -1,0 +1,269 @@
+{
+  "cases": [
+    {
+      "case_id": "ml-known-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "known"
+    },
+    {
+      "case_id": "ml-known-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "known"
+    },
+    {
+      "case_id": "ml-boundary-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "boundary"
+    },
+    {
+      "case_id": "ml-boundary-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "boundary"
+    },
+    {
+      "case_id": "ml-voice-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "voice"
+    },
+    {
+      "case_id": "ml-voice-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "voice"
+    },
+    {
+      "case_id": "ml-trajectory-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "trajectory"
+    },
+    {
+      "case_id": "ml-trajectory-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "trajectory"
+    },
+    {
+      "case_id": "ml-contrast-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "contrast"
+    },
+    {
+      "case_id": "ml-contrast-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "contrast"
+    },
+    {
+      "case_id": "ml-fact-preservation-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "fact-preservation"
+    },
+    {
+      "case_id": "ml-fact-preservation-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "fact-preservation"
+    },
+    {
+      "case_id": "ml-style-decoy-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "style-decoy"
+    },
+    {
+      "case_id": "ml-style-decoy-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "style-decoy"
+    },
+    {
+      "case_id": "ml-task-completion-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "task-completion"
+    },
+    {
+      "case_id": "ml-task-completion-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "task-completion"
+    },
+    {
+      "case_id": "ml-planning-fidelity-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "planning-fidelity"
+    },
+    {
+      "case_id": "ml-planning-fidelity-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "planning-fidelity"
+    },
+    {
+      "case_id": "ml-tool-use-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "tool-use"
+    },
+    {
+      "case_id": "ml-tool-use-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "tool-use"
+    },
+    {
+      "case_id": "ml-capability-calibration-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "capability-calibration"
+    },
+    {
+      "case_id": "ml-capability-calibration-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "capability-calibration"
+    },
+    {
+      "case_id": "ml-refusal-stop-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "refusal-stop"
+    },
+    {
+      "case_id": "ml-refusal-stop-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "refusal-stop"
+    },
+    {
+      "case_id": "ml-long-horizon-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "long-horizon"
+    },
+    {
+      "case_id": "ml-long-horizon-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "long-horizon"
+    },
+    {
+      "case_id": "ml-identity-routing-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "identity-routing"
+    },
+    {
+      "case_id": "ml-identity-routing-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "identity-routing"
+    },
+    {
+      "case_id": "ml-anonymous-fidelity-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "anonymous-fidelity"
+    },
+    {
+      "case_id": "ml-anonymous-fidelity-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "anonymous-fidelity"
+    },
+    {
+      "case_id": "ml-token-efficiency-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "token-efficiency"
+    },
+    {
+      "case_id": "ml-token-efficiency-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "token-efficiency"
+    }
+  ],
+  "created_at": "2026-08-23T17:43:43Z",
+  "run_id": "run-20260823T174343Z-5b9f75",
+  "schema_version": "1.0",
+  "seed": 42,
+  "systems": [
+    "baseline",
+    "candidate"
+  ],
+  "warning": "Private mapping. Do not provide this file to blind judges."
+}

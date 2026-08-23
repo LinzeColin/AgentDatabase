@@ -1,0 +1,162 @@
+{
+ "q-01": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-anonymous-fidelity-02"
+ },
+ "q-02": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-fact-preservation-02"
+ },
+ "q-03": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-task-completion-02"
+ },
+ "q-04": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-anonymous-fidelity-01"
+ },
+ "q-05": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-known-01"
+ },
+ "q-06": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-voice-02"
+ },
+ "q-07": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-tool-use-01"
+ },
+ "q-08": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-trajectory-02"
+ },
+ "q-09": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-trajectory-01"
+ },
+ "q-10": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-fact-preservation-01"
+ },
+ "q-11": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-token-efficiency-02"
+ },
+ "q-12": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-contrast-02"
+ },
+ "q-13": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-long-horizon-01"
+ },
+ "q-14": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-planning-fidelity-01"
+ },
+ "q-15": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-planning-fidelity-02"
+ },
+ "q-16": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-task-completion-01"
+ },
+ "q-17": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-token-efficiency-01"
+ },
+ "q-18": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-long-horizon-02"
+ },
+ "q-19": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-capability-calibration-02"
+ },
+ "q-20": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-refusal-stop-02"
+ },
+ "q-21": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-tool-use-02"
+ },
+ "q-22": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-style-decoy-01"
+ },
+ "q-23": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-contrast-01"
+ },
+ "q-24": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-identity-routing-02"
+ },
+ "q-25": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-refusal-stop-01"
+ },
+ "q-26": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-style-decoy-02"
+ },
+ "q-27": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-known-02"
+ },
+ "q-28": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-capability-calibration-01"
+ },
+ "q-29": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-boundary-02"
+ },
+ "q-30": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ml-voice-01"
+ },
+ "q-31": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-identity-routing-01"
+ },
+ "q-32": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ml-boundary-01"
+ }
+}

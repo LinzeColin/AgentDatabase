@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:johnstuartmill",
+  "canonical_name": "John Stuart Mill",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "mill",
+  "subject_uid": "person-aeea9080d234dd94",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/mill-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-23T10:56:18Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "9c601e1da1b95690cf415b2b86a9a66afe4088a2a9195df55f41914414a0ecfd",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/mill-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "f3e7a70b5ef70526c7c9652d89ccaed98c1739fa053bba7038535f370e9220fb",
+      "runtime_size_bytes": 84355,
+      "size_bytes": 92462
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 {
- "round": 18,
- "updated_at": "2026-08-23T09:53Z",
+ "round": 19,
+ "updated_at": "2026-08-23T20:44Z",
  "time_band": "valley-0000-0800",
- "people": 128,
- "current_person": "投资资本师族 #238 John Maynard Keynes",
- "stage": "Keynes #238 探源延后（① PD 一手全 writings、书信/传记版权至 2046，lane<3；延后名单→202）",
- "next": "投资资本师族 #249 John Stuart Mill（1806-1873，四道齐全：writings Principles/On Liberty/Utilitarianism + timeline Autobiography 1873 + conversations 书信 + external Bain 1882）",
+ "people": 129,
+ "current_person": "投资资本师族 #249 John Stuart Mill",
+ "stage": "Mill 全流程完成：candidate 0.884 / baseline 0.462 / delta +0.42（六门全过）→ package v0.0.0.1 → register 成功，index 129",
+ "next": "投资资本师族 #250 Thorstein Veblen（1857-1929，一手充足：Theory of the Leisure Class 1899/Theory of Business Enterprise 1904/Absentee Ownership 1923）",
  "threads": {
   "T1": {
    "branch": "main",
@@ -28,14 +28,16 @@
  },
  "p0_queue": [
   "Eiffel(wip-eiffel-142)已做未出货，先查卡点",
-  "投资资本师族 #249 John Stuart Mill 全流程"
+  "投资资本师族 #250 Veblen 全流程"
  ],
  "p0_done": [
   "#225 John Law(127)",
-  "#237 David Ricardo(128，delta+0.58)"
+  "#237 David Ricardo(128)",
+  "#238 Keynes 延后(202)",
+  "#249 John Stuart Mill(129，delta+0.42)"
  ],
  "p0_closed": [],
- "note": "Ricardo #237 完成：8 train+3 holdout（含 Diehl 1905 德文评述纠错 P2/external）；research 门 0 错 0 引文对不上；盲判 3 轮（首轮 4 处 critical → 修 contrast-02 朗姆酒桶类比/planning-01 四段链/long-horizon-02 出处对齐语料 → 六门全过）；release 2 条 strict 警告已 acknowledge。",
+ "note": "Mill #249 完成：16 train+3 holdout（4 道：writings/timeline/conversations/external）；research 门 0 错；盲判 7 轮（首轮 6 处 critical → 逐轮修自由三域/诱饵/轨迹归因/Comte 早后期/书信逐字引文/卒日细节/无数字诱饵 → 六门全过）；release 2 条 strict 警告（lane_quotes 17 条/基线不可作能力证据）已 acknowledge。",
  "cost_baseline": {
   "flash": {
    "calls": 934,

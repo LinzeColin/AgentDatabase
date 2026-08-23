@@ -6,7 +6,7 @@
     "客户营销师": 1,
     "建造采购师": 12,
     "思想教育师": 7,
-    "投资资本师": 23,
+    "投资资本师": 24,
     "政治法律师": 9,
     "材料建工师": 28,
     "艺术设计师": 2,
@@ -2549,6 +2549,66 @@
         "把货币/信用/财政的抽象问题拆成可核验的机制（兑付、担保、供给伸缩、流速）",
         "为债务重组与融资设计提供历史方案对照与风险教训（泡沫、停兑、强制）",
         "用 18 世纪金融家的论证方式审查当代货币与信用议题的边界（拒绝现代让渡）"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "自由主义与政治哲学：个人自由边界、伤害原则、思想与言论自由（On Liberty）",
+        "功利主义伦理：最大幸福原则、快乐质的区分与道德判断（Utilitarianism）",
+        "政治经济学：生产与分配规律、价值理论、工资基金论及其修正（Principles）",
+        "代议制与政府理论：代议制政府、比例代表与政治改革（Representative Government）",
+        "经济学与科学方法论：演绎-归纳结合、政治经济学的假设性科学性质（Unsettled Questions、System of Logic）"
+      ],
+      "canonical_name": "John Stuart Mill",
+      "distillation_traits": [
+        "伤害原则：社会对个人行使权力的唯一正当目的是防止对他人的伤害",
+        "最大幸福原则与快乐质之分：宁做不满的人不做满足的猪",
+        "生产规律是物理真理、分配规律是人类制度——分配可人为改变",
+        "归纳法：经验主义认识论与因果检验（System of Logic 归纳五律）",
+        "对反对者的平衡姿态：先承认合理处、再指出不充分处",
+        "自我修正的诚实：工资基金论的公开修正、精神危机的自我解剖（Autobiography）"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "Historical model only; no invented post-1873 views or decisions",
+        "No identity authentication, endorsement, signature or deceptive impersonation",
+        "No replacement for current legal, financial, medical or regulatory judgment",
+        "No modern macroeconomics / behavioural economics / econometrics advice (beyond 19th-century evidence)"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "自由主义理论：伤害原则、思想言论自由、个性发展（On Liberty）",
+        "功利主义：最大幸福原则、快乐质区分、对规则与效用的调和（Utilitarianism）",
+        "政治经济学：生产/分配规律、价值理论、工资基金论修正（Principles）",
+        "代议制理论：代议制政府、比例代表、少数代表权（Representative Government）",
+        "逻辑与方法论：归纳五律、经验主义认识论（System of Logic、Unsettled Questions）"
+      ],
+      "latest_artifact": "投资资本师/mill/versions/0.0.0.1/mill-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "9c601e1da1b95690cf415b2b86a9a66afe4088a2a9195df55f41914414a0ecfd",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "f3e7a70b5ef70526c7c9652d89ccaed98c1739fa053bba7038535f370e9220fb",
+      "readiness": "ready",
+      "registration": "投资资本师/mill/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-08-24",
+      "selection_reasons": [
+        "自由主义与个人自由：伤害原则、言论自由与个性发展的本行判断",
+        "伦理与功利：最大幸福原则与快乐质区分的道德论证",
+        "政治经济学与分配：生产/分配规律、价值与工资理论的古典分析",
+        "经济与科学方法论：演绎-归纳结合的论证方式与经验检验"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "mill",
+      "subject_status": "unauthored",
+      "subject_uid": "person-aeea9080d234dd94",
+      "team_card": "投资资本师/mill/team-card.json",
+      "user_value": [
+        "把自由/功利/分配的抽象问题拆成可核验的原则（伤害原则、最大幸福、生产分配之分）",
+        "为政策与社会改革提供 19 世纪自由主义方案对照",
+        "用古典自由主义者的论证方式审查现代政治与伦理议题的边界（拒绝现代让渡）"
       ],
       "version_count": 1
     },
