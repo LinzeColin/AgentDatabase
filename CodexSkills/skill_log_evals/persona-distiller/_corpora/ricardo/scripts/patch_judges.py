@@ -18,7 +18,7 @@ SC_API = "https://api.scnet.cn/api/llm/v1/chat/completions"
 SC_KEY = os.environ.get("SCNET_API_KEY", "")
 MODEL = "deepseek-v4-flash"
 SC_MODEL = "DeepSeek-V4-Flash-0731"
-WS = "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase/CodexSkills/skill_log_evals/persona-distiller/_corpora/johnlaw"
+WS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 round_dir = os.path.join(WS, "evals", "round1")
 
 JUDGE_SYS = ("你是盲判评委。只依据评分标准给两份匿名回答 A、B 各打 0-1 分"

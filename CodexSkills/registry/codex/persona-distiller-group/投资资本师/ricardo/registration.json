@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:davidricardo",
+  "canonical_name": "David Ricardo",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "ricardo",
+  "subject_uid": "person-40c4885dbf818cfc",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/ricardo-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-23T02:23:55Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "8b92e98c97fb179523c9ce398f3db766b99554a51b707c6cbbe8074cc620f9ad",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/ricardo-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "d2bff797c3bf19d30384525615d926bb1614637fc7330bd03c301cbd657559bb",
+      "runtime_size_bytes": 83468,
+      "size_bytes": 91742
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 {
- "round": 17,
- "updated_at": "2026-08-23T01:51Z",
+ "round": 18,
+ "updated_at": "2026-08-23T09:47Z",
  "time_band": "valley-0000-0800",
- "people": 127,
- "current_person": "投资资本师族 #225 John Law",
- "stage": "John Law 全流程完成：candidate 0.883 / baseline 0.142 / delta +0.74（六门全过）→ package v0.0.0.1 → register 成功，index 127",
- "next": "投资资本师族 #237 David Ricardo（1772-1823，一手充足：Principles/Pamphlets/致 Malthus 书信）",
+ "people": 128,
+ "current_person": "投资资本师族 #237 David Ricardo",
+ "stage": "Ricardo 全流程完成：candidate 0.872 / baseline 0.292 / delta +0.58（六门全过）→ package v0.0.0.1 → register 成功，index 128",
+ "next": "投资资本师族 #238 John Maynard Keynes（1883-1946，一手充足：A Treatise on Money/General Theory/书信；注意 1946 卒→部分著作版权期）",
  "threads": {
   "T1": {
    "branch": "main",
@@ -28,13 +28,14 @@
  },
  "p0_queue": [
   "Eiffel(wip-eiffel-142)已做未出货，先查卡点",
-  "投资资本师族 #237 Ricardo 全流程"
+  "投资资本师族 #238 Keynes 全流程"
  ],
  "p0_done": [
-  "投资资本师族 #225 John Law 入库（127/600，delta+0.74）"
+  "投资资本师族 #225 John Law 入库(127)",
+  "投资资本师族 #237 David Ricardo 入库(128，delta+0.58)"
  ],
  "p0_closed": [],
- "note": "John Law #225 完成：7 一手+3 二手+2 holdout；盲判六门全过；首判后 5 轮定向修 LOW 列表（boundary/contrast/fact/refusal/tool-use/task-completion/refusal-stop 逐题补 rubric 要素）；release 2 条 strict 警告（longs-corruption/基线不可作能力证据）已 acknowledge。",
+ "note": "Ricardo #237 完成：8 train+3 holdout（含 Diehl 1905 德文评述纠错 P2/external）；research 门 0 错 0 引文对不上；盲判 3 轮（首轮 4 处 critical → 修 contrast-02 朗姆酒桶类比/planning-01 四段链/long-horizon-02 出处对齐语料 → 六门全过）；release 2 条 strict 警告已 acknowledge。",
  "cost_baseline": {
   "flash": {
    "calls": 934,

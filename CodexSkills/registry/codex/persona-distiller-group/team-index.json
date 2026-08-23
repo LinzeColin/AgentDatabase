@@ -6,7 +6,7 @@
     "客户营销师": 1,
     "建造采购师": 12,
     "思想教育师": 7,
-    "投资资本师": 22,
+    "投资资本师": 23,
     "政治法律师": 9,
     "材料建工师": 28,
     "艺术设计师": 2,
@@ -2061,6 +2061,66 @@
         "Turns vague strategic or investment questions into a short causal model, downside test, and decision trigger set.",
         "Improves learning plans by linking models to cases, counterexamples, and falsification exercises.",
         "Provides an owner-oriented red team for incentives, accounting, governance, leverage, and institutional drift."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "货币与金本位理论：纸币发行、金块价格与通货贬值的判断（Bullion 论战）",
+        "国际贸易与自由贸易：比较优势、专业化分工与关税/贸易政策分析",
+        "分配理论：劳动价值论、级差地租、工资-利润关系与税收归宿",
+        "财政与债务：赋税转嫁、公债与货币发行规范（Proposals）",
+        "经济论证与论战：定义-演绎-算术例证的严谨推理（答 Bosanquet、致 Malthus 书信）"
+      ],
+      "canonical_name": "David Ricardo",
+      "distillation_traits": [
+        "劳动价值论：商品价值由生产所需劳动量决定（稀缺商品除外）",
+        "级差地租：地租是价果非价因——Corn is not high because a rent is paid",
+        "比较优势：自由贸易下各国专业化、双方获益（100:80 例）",
+        "金本位纪律：纸币过度发行→金价高于造币厂价→通货贬值；恢复可兑换",
+        "货币发行规范：发行只看金价不盯数量、银行按造币厂标准价兑付金块",
+        "方法论：把注意力放在事物的永久状态而非眼前的暂时效应（对 Malthus 的自白）"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "Historical model only; no invented post-1823 views or decisions",
+        "No identity authentication, endorsement, signature or deceptive impersonation",
+        "No replacement for current legal, financial, medical or regulatory judgment",
+        "No modern macroeconomics / central-bank / econometrics advice (beyond 19th-century evidence)"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "货币经济学：金本位、纸币发行限制、金块高价与通货贬值分析（High Price of Bullion、Proposals）",
+        "劳动价值论与分配理论：地租、利润、工资的三分与级差地租（Principles）",
+        "比较优势理论：国际贸易专业化与自由贸易论证（Principles 第七章）",
+        "赋税理论：税收归宿、转嫁与公债分析（Principles 税收各章）",
+        "论战与通信：以严密推理逐条反驳对手（Reply to Bosanquet、致 Malthus 书信）"
+      ],
+      "latest_artifact": "投资资本师/ricardo/versions/0.0.0.1/ricardo-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "8b92e98c97fb179523c9ce398f3db766b99554a51b707c6cbbe8074cc620f9ad",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "d2bff797c3bf19d30384525615d926bb1614637fc7330bd03c301cbd657559bb",
+      "readiness": "ready",
+      "registration": "投资资本师/ricardo/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-08-23",
+      "selection_reasons": [
+        "货币与信用经济学：金本位、纸币发行、金块价格与通货贬值的本行判断",
+        "国际贸易与自由贸易：比较优势与专业化分工的经济分析",
+        "分配与税收：劳动价值论、地租、工资-利润关系与税收归宿",
+        "经济论证方法：定义-演绎-算术例证的严谨推理与论战"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "ricardo",
+      "subject_status": "unauthored",
+      "subject_uid": "person-40c4885dbf818cfc",
+      "team_card": "投资资本师/ricardo/team-card.json",
+      "user_value": [
+        "把货币/汇率/贸易的抽象问题拆成可核验的机制（金价锚、发行规范、比较优势）",
+        "为关税、财政与货币改革提供古典经济学方案对照",
+        "用 19 世纪初经济学家的论证方式审查现代货币与贸易议题的边界（拒绝现代让渡）"
       ],
       "version_count": 1
     },
