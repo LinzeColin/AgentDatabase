@@ -149,3 +149,90 @@ ssh ovh 'sudo /usr/local/bin/linze-r2-free-tier-guard.py'
 - **结论**：Kimi Code 外壳不能只保存自己 `spawn()` 返回的 `ChildProcess`；端口已存在时也要核对监听者确为 `~/.kimi-code/bin/kimi`、接管其 PID，并在 `before-quit` 中等待该 PID 退出后再结束 GUI。macOS 下红色关闭键和 `Cmd+W` 只关窗口，`activate` 负责恢复窗口；`Cmd+Q` 才关闭后台并释放端口。设置 `app.setName("Kimi Code")` 后必须把原 `userData` 路径设回去，否则登录与会话会表现成全新安装。
   **为什么**：旧实现检测到端口已开就直接返回，`serverProc` 仍是 `null`，因此 GUI 重启后复用的是失联后台，之后 `Cmd+Q` 永远回收不了它。应用名称更正又会让 Electron 默认资料目录从 `kimi-shell` 漂到 `Kimi Code`。
   **代价**：修复前会出现 GUI 已退出但 CLI/端口仍驻留、前后台权限主体错位，以及改菜单名后会话“消失”的假回归。完全磁盘访问需同时授权 GUI bundle `com.electron.kimi-code` 与实际 CLI 路径，并完整退出重开后生效。
+
+## 「已完成」的判据必须是读回校验，不能是脚本返回成功（2026-08-23 · 代价 $4.51）
+
+**结论**：`~/.harness-ui/harness_service.py`（launchd `com.harnessui.assets`，每 900 秒一轮）
+把 SMB 当真源往本地 `master/` 反向回填，判据是 `source.st_size != dest.st_size or source 更新`。
+**「尺寸不同」就回填** —— 而重出的图尺寸必然和旧图不同，于是 `regen.py` 刚写的 25 张返工新图
+在下一个周期被 `shutil.copy2` 用 SMB 的旧版盖回，`copy2` 连源 mtime 一起还原，
+**文件看上去根本没被动过**。已据此向用户报过「13/13 完成」，是假的。
+
+**为什么没被抓到**：SMB 静默写 0 那次（§10）写的是 0，`audit.py empty` 抓得到；
+这次写的是**一模一样的旧内容**，任何非空/非零/尺寸校验都通过。
+连"归档后比对 master↔NAS 摘要一致"也通过 —— 因为两边都已经是旧内容。
+唯一抓得到的判据是**和 `.rejected-N.png` 比 md5**，以及 `stat -f %SB`（birth）与 mtime 打架：
+新图 birth 08-23 21:47、mtime 却是 08-21，两个不同 inode 同 mtime 同内容 = 保留时间戳的拷贝，不是 rename。
+
+**代价**：$4.51 的 25 张图全销毁，且带着"已完成"的结论进了交接单，差点被下游按可发排期。
+
+**怎么办**：
+1. `copy_required` 已加前置 `if dest.st_mtime_ns > source.st_mtime_ns: return False`（本地更新绝不回填）。
+   备份 `harness_service.py.bak-20260823-*`，改完必须 `launchctl kickstart -k gui/$(id -u)/com.harnessui.assets`，
+   **不重启等于没改**（跑着的进程还是旧代码）。
+2. 任何"生成→落盘"的产线，收尾判据一律改成**隔一个同步周期后回读比对**，
+   而不是"脚本 print 了 ✓"。有 `.rejected` 留底的，直接和留底比 md5。
+3. 本机多条 Claude 会话并发跑同一个库。动 `catalog.json` / `private_only.json` 前先 `stat` 修改时间。
+
+## 素材复核页/总览页禁止写死 `http://127.0.0.1:PORT`（2026-08-23）
+
+**结论**：`review.html` 与 `qa/index.html` 曾把 828 / 1656 条图片地址写成
+`http://127.0.0.1:3099/...`。素材服务不跑时用户双击打开就是整页碎图，连续两次被反馈"打不开"。
+**改成相对路径**（页面与 `crops/`、`thumb/`、`display/` 同级），零 `fetch`/XHR，`file://` 直接能开。
+
+**为什么**：这类页是给人看的一次性交付物，不该带运行时依赖。
+生成器 `tools/build_gallery.py` 已把"所有地址必须相对 + 逐条核文件存在"写成硬校验，缺一个就报错不出页。
+
+**附带**：背板是 3840×2160、人物贴在一侧，缩略图用 `object-fit:cover` 居中裁**只剩天空**，
+414 张分不清谁是谁。缩略图必须用 `qa/crops/` 的人物特写（460×616），灯箱再看整张背板。
+
+## 本地 SDXL 出图产线：跑通了什么、卡在哪（2026-08-24 · 代价约 2.5 小时 GPU）
+
+**动机**：托管 API 成本远超收益 —— 414 个变体已花 $25+，且高档位配方实测 **67/110 被远端策略拒绝**、
+单变体成本 $0.34（被拒也计费）。
+
+**本机已有的底子**（`~/ComfyUI-Installs/ComfyUI/ComfyUI`）：
+`waiIllustriousSDXL_v170`（danbooru 训练、认角色 tag）+ 27 个角色 LoRA +
+ControlNet depth + IP-Adapter plus + CLIP-ViT-H + 4x-UltraSharp + RealESRGAN_x4plus_anime_6B +
+MeshGraphormer（手部修复）+ 全套 inpaint 节点。
+
+### 已证明
+| 维度 | 结论 |
+|---|---|
+| 画质 | **够**。单张实测：服装口径全中、构图锁左三分之一、手部正确、体型比例未被扭曲 |
+| 成本 | **$0** |
+| 内容策略 | 本地模型无远端内容策略拦截，产线里那套「被拒→降档重试」的阶梯**在本地可以整个删掉**（具体档位口径不在本仓，见 04_DouyinOps） |
+| 只修手 | **能**。MeshGraphormer 框手 + inpaint，其余像素不动 —— gpt-image-2 做不到（无 mask），13 张缺陷里 10 张是手 |
+
+### 未解决（不解决就不能切）
+1. **人物辨识度**。有专属 LoRA 的芙宁娜都丢了帽子和标志配色，踩 pipeline「严格不能偏离基准人物特征」。
+   **27 个 LoRA 只覆盖 33/414 变体（8%）**，其余 92% 无 LoRA。
+2. **IP-Adapter 救不回来，反而更差**（详见下节），用户两张全否。
+3. **LoRA 采购路径不通**：Civitai 返回 **451 REGION_BLOCKED**，需另找源。
+4. **吞吐**。单张 **555 秒**（gpt-image-2 是 30–60 秒且可并发）。414 变体全量 ≈ **64 小时**连续占机。
+5. **远端策略这道兜底消失**。那 67 次拒绝实际替产线挡下了 67 张超出发布口径的素材；
+   切到本地后，合规判定 100% 落在自己的闸门上（口径见 04_DouyinOps，不在本仓）。
+
+### IP-Adapter 是错的工具，别再试第二遍
+`IPAdapterAdvanced` weight 0.7 / end_at 0.75 / concat / V only，两种失败模式：
+- **画面长出两个人**：`ConditioningSetArea` 只约束**文字条件**在左 512px，
+  而 **IP-Adapter 全图生效** —— 它在整幅画上都想要人物。多出来那个还穿了完全不同的服装，服装口径作废。
+- **渲染扁平劣质**：锚图的平面立绘风格被一起搬进来。
+
+**不加锚图、只用 LoRA 的那张画质更好。** 锁身份的正解是角色 LoRA，不是 IP-Adapter。
+
+### 环境坑（会直接烧掉几小时）
+- **`--bf16-unet` 让 SDXL 在 Apple MPS 上算出 NaN**，产纯色图但 ComfyUI 仍报 `success`。
+  同一张最小图：bf16 → 3KB 纯灰；fp16 → 1133KB 真图。日志证据是
+  `RuntimeWarning: invalid value encountered in cast`（NaN 转 uint8）。
+  **用共享实例前先 `ps -o command=` 看精度参数。**
+- **判废判据**：3840×2160 的 PNG 只有 ~27KB，或缩到 64px 后 <1200 字节 = 纯色废图。
+- **ComfyUI 的 queue/history 是内存态，重启即全清。** 2026-08-24 一小时内被别的线程重启三次，
+  T04 排的队两次整队蒸发、**一秒 GPU 都没拿到**。判「产物在不在」**一律扫盘，不看 history**。
+- **同一配方连败 2 次就停手做最小复现**，不要换 seed 重试。我掷了 6 次骰子 ≈ 两小时，
+  最小复现两分钟定死根因。守护进程会一边帮你重试一边掩盖问题，**诊断前先停它**。
+- macOS **没有 `setsid`**，后台起服务用 `nohup ... &`。
+
+### 复现入口
+对照页生成器与实验脚本在会话 scratchpad（`bench/run.py` / `run_ipa.py` / `page.py` / `supervise.py`），
+产物对照页 `~/Downloads/本地出图对照-260824/对照.html`（三栏：gpt-image-2 / 本地无锚图 / 本地+锚图）。
