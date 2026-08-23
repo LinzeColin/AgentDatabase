@@ -330,6 +330,8 @@ EXCLUDE = {
     # ★ John Stuart Mill #249（1806-1873）：同名者为父亲 James Mill（历史学家/哲学家）——
     #   按 creator 串排；其余 creator 变体（Mill,john Stuart/MILL JOHN STUART）为本尊。
     "mill": ["Mill, James", "James Mill", "Mill, John Stuart, 1806-1873; Mill, James"],
+    # ★ Benjamin Franklin #236（1706-1790）：同名者少（后代/现代人），按 creator 串排。
+    "franklin": ["Franklin, Benjamin, 1731-1790", "Franklin, Benjamin, 18", "Benjamin Franklin, 1706"],
 }
 
 # ★★★ 2026-08-13 新增：**按题名排除**。
@@ -427,6 +429,7 @@ EXCLUDE_TITLE = {
     #   （David 1823 已卒，IA creator 误挂 David）——只能按题名排。
     "ricardo": ["commercial treaties"],
     "mill": [],
+    "franklin": [],
 }
 # 目标必须出现在 creator 里的**姓名词元**（同一个 creator 段里全部出现即命中）。
 # ★★ 曾写成 `["Fröbel, Friedrich"]` 这种「姓, 名」定串，于是
@@ -544,6 +547,9 @@ REQUIRE = {
     # ★ John Stuart Mill #249：目标署名形态 `Mill, John Stuart, 1806-1873`／`Mill,john Stuart`
     #   ／`MILL, JOHN STUART`。REQUIRE 钉 mill+john+stuart；James Mill（父）由 EXCLUDE 排。
     "mill": [["mill", "john", "stuart"]],
+    # ★ Benjamin Franklin #236：目标署名 `Franklin, Benjamin, 1706-1790`／`Franklin Benjamin`。
+    #   REQUIRE 钉 franklin+benjamin；同名者（其后代/现代同名者）由 EXCLUDE 排。
+    "franklin": [["franklin", "benjamin"]],
 }
 
 

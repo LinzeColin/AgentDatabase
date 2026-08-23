@@ -1,0 +1,51 @@
+{
+ "schema_version": "1.0",
+ "target_name": "Benjamin Franklin",
+ "normalized_name": "benjaminfranklin",
+ "status": "ready",
+ "resolution": "single",
+ "candidate_count": 1,
+ "selected_subject_uid": "person-benjamin-franklin-1706",
+ "generated_at": "2026-08-23T21:07:29Z",
+ "search_scope": [
+  "sibling canonical registry",
+  "authoritative public sources supplied by orchestration"
+ ],
+ "candidates": [
+  {
+   "label": "A",
+   "canonical_name": "Benjamin Franklin",
+   "subject_uid": "person-benjamin-franklin-1706",
+   "identity_category": "投资资本师",
+   "occupation_or_role": "美国开国元勋、印刷商、发明家、科学家与政治经济学家（1706-1790）；大陆会议代表、《独立宣言》签署人、驻法大使",
+   "professional_background": "Benjamin Franklin（1706-1790，波士顿/费城）是启蒙时代的全能者。1706 年生，印刷学徒出身，1730 年代起办《宾夕法尼亚公报》与《穷理查年鉴》（Poor Richard's Almanack），借此致富并积累「节俭与勤勉」的经济伦理；1750s 研究电学（风筝实验、正负电荷、避雷针），《电学实验与观察》(1751) 是 18 世纪最重要的科学著作之一；1757-1775 驻伦敦代表殖民地利益（《大不列颠的利益》《宾夕法尼亚真相》等政治经济学论著）；1776 参与起草《独立宣言》，1776-1785 驻法大使；晚年参与制宪。《自传》(1793 年由后人刊行，其本人 1771-1790 手写) 是英语文学经典。档案：archive.org creator 字段 `Franklin, Benjamin, 1706-1790`。",
+   "application_scenarios": [
+    "经济伦理与个人理财：穷理查式的节俭、勤勉、时间与金钱观（Poor Richard's Almanack）",
+    "殖民地经济与帝国贸易：美洲殖民地利益、货币与人口理论（Interest of Great Britain、Observations on Mankind）",
+    "公共政策与政治经济：宾夕法尼亚治理、美洲政治、和平与扩张（True State of Pennsylvania、Causes of Distractions）",
+    "科学方法论：电学实验、观察与归纳（Experiments on Electricity、Smoky Chimneys）",
+    "人生与自我管理：自传中的成长、习惯养成与目标管理（Autobiography）"
+   ],
+   "key_capabilities": [
+    "经济论辩——殖民地利益、货币、人口与贸易分析（Interest of Great Britain、True State）",
+    "科学实验——电学正负电荷、避雷针、观察归纳（Experiments on Electricity）",
+    "公共写作——政治檄文、讽刺短篇、科普（Rules for Reducing、Causes of Distractions）",
+    "理财与自我管理——穷理查的节俭勤勉伦理与人生设计（Poor Richard、Autobiography）",
+    "书信与外交——跨大西洋通信、游说与谈判（Familiar Letters、驻法通信）"
+   ],
+   "distinguishing_basis": "探源：`creator:\"Franklin, Benjamin\"` numFound=1448 条，目标署名 `Franklin, Benjamin, 1706-1790`。同名者（后代/现代同名者）由 creator 串排除。一手互异约 15 部（Experiments on Electricity 多版、Interest of Great Britain、True State of Pennsylvania、Narrative of Massacres、Information to America、Observations on Smoky Chimneys、Reflections on Courtship、Causes of Distractions、Works(自传) 1793、Familiar Letters、Scelta di lettere、Briefe von Electricität 德文、Vie de Franklin 法文等）。",
+   "authoritative_sources": [
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Franklin%2C+Benjamin%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=300&output=json"
+    },
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=title%3A%28%22autobiography%22%29+AND+creator%3A%28%22Franklin%22%29&fl%5B%5D=identifier,title,creator,year&rows=50&output=json"
+    }
+   ],
+   "evidence_level": "high"
+  }
+ ],
+ "candidate_cards": [
+  "A. 人物与身份：Benjamin Franklin；投资资本师；美国开国元勋、印刷商、发明家、科学家与政治经济学家（1706-1790）；大陆会议代表、《独立宣言》签署人、驻法大使。\n   专业背景：Benjamin Franklin（1706-1790，波士顿/费城）是启蒙时代的全能者。1706 年生，印刷学徒出身，1730 年代起办《宾夕法尼亚公报》与《穷理查年鉴》（Poor Richard's Almanack），借此致富并积累「节俭与勤勉」的经济伦理；1750s 研究电学（风筝实验、正负电荷、避雷针），《电学实验与观察》(1751) 是 18 世纪最重要的科学著作之一；1757-1775 驻伦敦代表殖民地利益（《大不列颠的利益》《宾夕法尼亚真相》等政治经济学论著）；1776 参与起草《独立宣言》，1776-1785 驻法大使；晚年参与制宪。《自传》(1793 年由后人刊行，其本人 1771-1790 手写) 是英语文学经典。档案：archive.org creator 字段 `Franklin, Benjamin, 1706-1790`。。\n   应用价值：场景：经济伦理与个人理财：穷理查式的节俭、勤勉、时间与金钱观（Poor Richard's Almanack）；殖民地经济与帝国贸易：美洲殖民地利益、货币与人口理论（Interest of Great Britain、Observations on Mankind）；公共政策与政治经济：宾夕法尼亚治理、美洲政治、和平与扩张（True State of Pennsylvania、Causes of Distractions）；科学方法论：电学实验、观察与归纳（Experiments on Electricity、Smoky Chimneys）；人生与自我管理：自传中的成长、习惯养成与目标管理（Autobiography）；关键能力：经济论辩——殖民地利益、货币、人口与贸易分析（Interest of Great Britain、True State）；科学实验——电学正负电荷、避雷针、观察归纳（Experiments on Electricity）；公共写作——政治檄文、讽刺短篇、科普（Rules for Reducing、Causes of Distractions）；理财与自我管理——穷理查的节俭勤勉伦理与人生设计（Poor Richard、Autobiography）；书信与外交——跨大西洋通信、游说与谈判（Familiar Letters、驻法通信）。\n   区分依据：探源：`creator:\"Franklin, Benjamin\"` numFound=1448 条，目标署名 `Franklin, Benjamin, 1706-1790`。同名者（后代/现代同名者）由 creator 串排除。一手互异约 15 部（Experiments on Electricity 多版、Interest of Great Britain、True State of Pennsylvania、Narrative of Massacres、Information to America、Observations on Smoky Chimneys、Reflections on Courtship、Causes of Distractions、Works(自传) 1793、Familiar Letters、Scelta di lettere、Briefe von Electricität 德文、Vie de Franklin 法文等）。。"
+ ]
+}

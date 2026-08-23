@@ -1,0 +1,147 @@
+{
+  "总数": 16,
+  "计数": {
+    "一手": 15,
+    "二手": 1,
+    "需人判": 0
+  },
+  "一手占比下界": 0.9375,
+  "一手占比上界": 0.9375,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "franklin"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "10133750bsb",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Des Herrn Benjamin Franklins Esq. Briefe von der Elektricität",
+      "creator": "Franklin, Benjamin",
+      "words": 86418
+    },
+    {
+      "identifier": "b30499860_0003",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Experiments and observations on electricity, made at Philadelphia in America",
+      "creator": "Franklin, Benjamin, 1706-1790",
+      "words": 144316
+    },
+    {
+      "identifier": "bim_eighteenth-century_a-true-and-impartial-sta_franklin-benjamin-ll_1759",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A true and impartial state of the province of Pennsylvania. Containing, an exact",
+      "creator": "[Franklin, Benjamin, LL.D.].",
+      "words": 60285
+    },
+    {
+      "identifier": "bim_eighteenth-century_observations-on-the-caus_franklin-benjamin-lld_1787",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Observations on the causes and cure of smoky chimneys. By ... Benjamin Franklin,",
+      "creator": "Franklin, Benjamin, LL.D.",
+      "words": 17365
+    },
+    {
+      "identifier": "bim_eighteenth-century_reflections-on-courtship_franklin-benjamin_1784",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Reflections on courtship and marriage: in two letters to a friend. Wherein a pra",
+      "creator": "Franklin, Benjamin",
+      "words": 29637
+    },
+    {
+      "identifier": "bim_eighteenth-century_the-causes-of-the-presen_franklin-benjamin-ll_1774",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "The causes of the present distractions in America explained: in two letters to a",
+      "creator": "[Franklin, Benjamin, LL.D.].",
+      "words": 5347
+    },
+    {
+      "identifier": "bim_eighteenth-century_the-interest-of-great-br_franklin-benjamin_1760",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "The interest of Great Britain considered with regard to her colonies and the acq",
+      "creator": "Franklin, Benjamin",
+      "words": 22494
+    },
+    {
+      "identifier": "bim_eighteenth-century_works-of-the-late-doctor_franklin-benjamin_1793_1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Works of the late Doctor Benjamin Franklin: consisting of his Life written by hi",
+      "creator": "Franklin, Benjamin",
+      "words": 49519
+    },
+    {
+      "identifier": "bim_eighteenth-century_works-of-the-late-doctor_franklin-benjamin_1794_2",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「works」",
+      "title": "Works of the late Doctor Benjamin Franklin: consisting of his life written by hi",
+      "creator": "Franklin, Benjamin",
+      "words": 45089
+    },
+    {
+      "identifier": "familiarletterst43523gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "Familiar Letters",
+      "creator": "F. B. (Franklin Benjamin) Sanborn; Henry David Thoreau",
+      "words": 143231
+    },
+    {
+      "identifier": "narrativeoflatem00fran",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "A narrative of the late massacres, in Lancaster County, of a number of Indians, ",
+      "creator": "Franklin, Benjamin, 1706-1790; Armbruster, Anthony, 1717?-1796, printer; Frankli",
+      "words": 7606
+    },
+    {
+      "identifier": "newexperimentsob00fran",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "New experiments and observations on electricity. Made at Philadelphia in America",
+      "creator": "Franklin, Benjamin, 1706-1790",
+      "words": 41994
+    },
+    {
+      "identifier": "sceltadiletteree00fran_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「lettere」",
+      "title": "Scelta di lettere e di opuscoli",
+      "creator": "Franklin, Benjamin, 1706-1790",
+      "words": 24906
+    },
+    {
+      "identifier": "spohn1089",
+      "档": "二手",
+      "依据": "题名含「leben (des|von)」且含目标姓名",
+      "title": "Der Weg zum Glück, oder, Das Leben von Dr. Benj. Franklin",
+      "creator": "Franklin, Benjamin, 1706-1790",
+      "words": 20229
+    },
+    {
+      "identifier": "twotractsinforma00fran",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Two tracts: : Information to those who would remove to America. And, Remarks con",
+      "creator": "Franklin, Benjamin, 1706-1790",
+      "words": 7141
+    },
+    {
+      "identifier": "viedebenjaminfra00fran",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Vie de Benjamin Franklin,",
+      "creator": "Franklin, Benjamin, 1706-1790; Howe, Richard Howe, Earl, 1726-1799; Castéra, Jea",
+      "words": 67518
+    }
+  ]
+}

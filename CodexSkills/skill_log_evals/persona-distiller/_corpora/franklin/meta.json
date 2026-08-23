@@ -1,0 +1,105 @@
+{
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "person-benjamin-franklin-1706",
+ "consent_authority": null,
+ "created_at": "2026-08-23T21:07:47Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "investor-capital-allocator",
+  "display": "投资资本师",
+  "mode": "single",
+  "primary": "investor-capital-allocator",
+  "weights": {
+   "investor-capital-allocator": 1.0
+  }
+ },
+ "language": "zh-CN",
+ "model_version": "0.1.0-draft",
+ "name": "Benjamin Franklin",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "经济伦理与个人理财：穷理查式的节俭、勤勉、时间与金钱观（Poor Richard's Almanack）",
+    "殖民地经济与帝国贸易：美洲殖民地利益、货币与人口理论（Interest of Great Britain、Observations on Mankind）",
+    "公共政策与政治经济：宾夕法尼亚治理、美洲政治、和平与扩张（True State of Pennsylvania、Causes of Distractions）",
+    "科学方法论：电学实验、观察与归纳（Experiments on Electricity、Smoky Chimneys）",
+    "人生与自我管理：自传中的成长、习惯养成与目标管理（Autobiography）"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Franklin%2C+Benjamin%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=300&output=json"
+    },
+    {
+     "locator": "https://archive.org/advancedsearch.php?q=title%3A%28%22autobiography%22%29+AND+creator%3A%28%22Franklin%22%29&fl%5B%5D=identifier,title,creator,year&rows=50&output=json"
+    }
+   ],
+   "canonical_name": "Benjamin Franklin",
+   "distinguishing_basis": "探源：`creator:\"Franklin, Benjamin\"` numFound=1448 条，目标署名 `Franklin, Benjamin, 1706-1790`。同名者（后代/现代同名者）由 creator 串排除。一手互异约 15 部（Experiments on Electricity 多版、Interest of Great Britain、True State of Pennsylvania、Narrative of Massacres、Information to America、Observations on Smoky Chimneys、Reflections on Courtship、Causes of Distractions、Works(自传) 1793、Familiar Letters、Scelta di lettere、Briefe von Electricität 德文、Vie de Franklin 法文等）。",
+   "evidence_level": "high",
+   "identity_category": "投资资本师",
+   "key_capabilities": [
+    "经济论辩——殖民地利益、货币、人口与贸易分析（Interest of Great Britain、True State）",
+    "科学实验——电学正负电荷、避雷针、观察归纳（Experiments on Electricity）",
+    "公共写作——政治檄文、讽刺短篇、科普（Rules for Reducing、Causes of Distractions）",
+    "理财与自我管理——穷理查的节俭勤勉伦理与人生设计（Poor Richard、Autobiography）",
+    "书信与外交——跨大西洋通信、游说与谈判（Familiar Letters、驻法通信）"
+   ],
+   "label": "A",
+   "occupation_or_role": "美国开国元勋、印刷商、发明家、科学家与政治经济学家（1706-1790）；大陆会议代表、《独立宣言》签署人、驻法大使",
+   "professional_background": "Benjamin Franklin（1706-1790，波士顿/费城）是启蒙时代的全能者。1706 年生，印刷学徒出身，1730 年代起办《宾夕法尼亚公报》与《穷理查年鉴》（Poor Richard's Almanack），借此致富并积累「节俭与勤勉」的经济伦理；1750s 研究电学（风筝实验、正负电荷、避雷针），《电学实验与观察》(1751) 是 18 世纪最重要的科学著作之一；1757-1775 驻伦敦代表殖民地利益（《大不列颠的利益》《宾夕法尼亚真相》等政治经济学论著）；1776 参与起草《独立宣言》，1776-1785 驻法大使；晚年参与制宪。《自传》(1793 年由后人刊行，其本人 1771-1790 手写) 是英语文学经典。档案：archive.org creator 字段 `Franklin, Benjamin, 1706-1790`。",
+   "subject_uid": "person-benjamin-franklin-1706"
+  },
+  "chosen_subject_uid": "person-benjamin-franklin-1706",
+  "normalized_name": "benjaminfranklin",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "benjaminfranklin",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "franklin",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-37d2de483556",
+ "time_scope": "all available periods, separated by role and material drift",
+ "updated_at": "2026-08-23T21:07:47Z",
+ "attribution_basis": {
+  "authority": "Benjamin Franklin（1706-1790）著作归属依据：① archive.org 目录 creator 字段（Franklin, Benjamin, 1706-1790）逐份点名；② 各书题名页/署名行（见 covered_sources 逐份照录）——《New Experiments and Observations on Electricity》题名页署 BENJAMIN FRANKLIN, Esq.；《Experiments and Observations on Electricity》1769 版署名 Benjamin Franklin, L. L. D. and F. R. S.；《Works of the late Doctor Benjamin Franklin... his Life written by himself》1793 为其自传。",
+  "citation": "archive.org 目录检索 creator:\"Franklin, Benjamin\"（numFound=1448 条，互异一手约 15 部）+ 各源 archive.org item 页（locator 见 source-ledger.jsonl）；出版记录见各源 locator。",
+  "disputed_policy": "《Der Weg zum Glück, oder, Das Leben von Dr. Benj. Franklin》(1796) 与《Vie de Benjamin Franklin》(1797) 为德语/法语传记（二手，external），引用时须标注第三方视角。其余作品为 Franklin 本人著作或书信；《Works of the late Doctor Benjamin Franklin》(1793) 卷首为其自传（his Life written by himself，一手 timeline），卷内其余为本人文集。无学界公认伪托争议。",
+  "disputed_works": [],
+  "covered_sources": [
+   "newexperimentsob00fran.txt ｜ 署名照录：BENJAMIN FRANKLIN, Esq; New experiments and observations on electricity",
+   "b30499860_0003.txt ｜ 署名照录：Benjamin Franklin, L. L. D. and F. R. S. Experiments and observations on electricity",
+   "bim_eighteenth-century_the-interest-of-great-br_franklin-benjamin_1760.txt ｜ 署名照录：The interest of Great Britain considered with regard to her colonies",
+   "bim_eighteenth-century_a-true-and-impartial-sta_franklin-benjamin-ll_1759.txt ｜ 署名照录：A true and impartial state of the province of Pennsylvania",
+   "bim_eighteenth-century_works-of-the-late-doctor_franklin-benjamin_1793.txt ｜ 署名照录：Works of the late Doctor Benjamin Franklin: consisting of his Life written by himself",
+   "familiarletterst43523gut.txt ｜ 署名照录：Familiar Letters",
+   "sceltadiletteree00fran_0.txt ｜ 署名照录：Scelta di lettere e di opuscoli",
+   "10133750bsb.txt ｜ 署名照录：Des Herrn Benjamin Franklins Esq. Briefe von der Electricität",
+   "bim_eighteenth-century_observations-on-the-caus_franklin-benjamin-lld_1787.txt ｜ 署名照录：Observations on the causes and cure of smoky chimneys",
+   "bim_eighteenth-century_reflections-on-courtship_franklin-benjamin_1784.txt ｜ 署名照录：Reflections on courtship and marriage",
+   "bim_eighteenth-century_the-causes-of-the-presen_franklin-benjamin-ll_1774.txt ｜ 署名照录：The causes of the present distractions in America explained",
+   "twotractsinforma00fran.txt ｜ 署名照录：Two tracts: Information to those who would remove to America",
+   "narrativeoflatem00fran.txt ｜ 署名照录：A narrative of the late massacres, in Lancaster County",
+   "spohn1089.txt ｜ 署名照录：Der Weg zum Glück, oder, Das Leben von Dr. Benj. Franklin",
+   "viedebenjaminfra00fran.txt ｜ 署名照录：Vie de Benjamin Franklin"
+  ],
+  "counting_convention": "b30499860_0003.txt 与 newexperimentsob00fran.txt 内容重叠（电学实验，Jaccard 0.47）：b30499860_0003 是 1769 年编集《Experiments and Observations on Electricity》（writings，系统化论著）；newexperimentsob00fran 是 1760 年《New Experiments... communicated in several letters to Peter Collinson》（conversations，以书信形式向 Collinson 通报实验——正是电学发现的原始通信载体，声口与编集不同）。两处分别服务 writings 与 conversations 两道，非同一证据的重印。"
+ }
+}

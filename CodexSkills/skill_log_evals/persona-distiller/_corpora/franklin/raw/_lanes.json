@@ -1,0 +1,96 @@
+{
+  "lanes": 3,
+  "去掉纸面道后": 2,
+  "逐道份数": {
+    "writings": 8,
+    "conversations": 7,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 0,
+    "external": 1
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "10133750bsb",
+      "道": "conversations",
+      "title": "Des Herrn Benjamin Franklins Esq. Briefe von der Elektricität"
+    },
+    {
+      "identifier": "b30499860_0003",
+      "道": "writings",
+      "title": "Experiments and observations on electricity, made at Philadelphia in A"
+    },
+    {
+      "identifier": "bim_eighteenth-century_a-true-and-impartial-sta_franklin-benjamin-ll_1759",
+      "道": "writings",
+      "title": "A true and impartial state of the province of Pennsylvania. Containing"
+    },
+    {
+      "identifier": "bim_eighteenth-century_observations-on-the-caus_franklin-benjamin-lld_1787",
+      "道": "conversations",
+      "title": "Observations on the causes and cure of smoky chimneys. By ... Benjamin"
+    },
+    {
+      "identifier": "bim_eighteenth-century_reflections-on-courtship_franklin-benjamin_1784",
+      "道": "conversations",
+      "title": "Reflections on courtship and marriage: in two letters to a friend. Whe"
+    },
+    {
+      "identifier": "bim_eighteenth-century_the-causes-of-the-presen_franklin-benjamin-ll_1774",
+      "道": "conversations",
+      "title": "The causes of the present distractions in America explained: in two le"
+    },
+    {
+      "identifier": "bim_eighteenth-century_the-interest-of-great-br_franklin-benjamin_1760",
+      "道": "writings",
+      "title": "The interest of Great Britain considered with regard to her colonies a"
+    },
+    {
+      "identifier": "bim_eighteenth-century_works-of-the-late-doctor_franklin-benjamin_1793_1",
+      "道": "writings",
+      "title": "Works of the late Doctor Benjamin Franklin: consisting of his Life wri"
+    },
+    {
+      "identifier": "bim_eighteenth-century_works-of-the-late-doctor_franklin-benjamin_1794_2",
+      "道": "writings",
+      "title": "Works of the late Doctor Benjamin Franklin: consisting of his life wri"
+    },
+    {
+      "identifier": "familiarletterst43523gut",
+      "道": "conversations",
+      "title": "Familiar Letters"
+    },
+    {
+      "identifier": "narrativeoflatem00fran",
+      "道": "writings",
+      "title": "A narrative of the late massacres, in Lancaster County, of a number of"
+    },
+    {
+      "identifier": "newexperimentsob00fran",
+      "道": "conversations",
+      "title": "New experiments and observations on electricity. Made at Philadelphia "
+    },
+    {
+      "identifier": "sceltadiletteree00fran_0",
+      "道": "conversations",
+      "title": "Scelta di lettere e di opuscoli"
+    },
+    {
+      "identifier": "spohn1089",
+      "道": "external",
+      "title": "Der Weg zum Glück, oder, Das Leben von Dr. Benj. Franklin"
+    },
+    {
+      "identifier": "twotractsinforma00fran",
+      "道": "writings",
+      "title": "Two tracts: : Information to those who would remove to America. And, R"
+    },
+    {
+      "identifier": "viedebenjaminfra00fran",
+      "道": "writings",
+      "title": "Vie de Benjamin Franklin,"
+    }
+  ]
+}
