@@ -80,9 +80,20 @@ def from_atlas(atlas: dict) -> list:
 
 
 def from_agents_md(repo_root: Path) -> list:
-    """各仓 AGENTS.md 的三段式经验条。**这是唯一由人写的那一半**，机器蒸馏不出来。"""
+    """各仓由人写的经验条（结论/为什么/代价三段式）。**机器蒸馏不出来的那一半。**
+
+    收两处，缺一不可：
+      · `**/dev-notes/*.md` —— 契约 2026-08-25 修订后的新落点
+      · `**/AGENTS.md`      —— 修订前的存量，继续收，不然历史经验会静默消失
+
+    为什么把经验挪出 AGENTS.md：旧契约让各仓的 AGENTS.md 被经验条撑爆
+    （DouyinOps 实测 182 → 1037 行），开头的开工指令被埋掉。
+    **改契约必须同时改这里** —— 只改契约的话，蒸馏器还在只 glob AGENTS.md，
+    新经验一条都收不到，而 brief 照常生成、页面照常显示「数据截至」，没有任何一处会喊。
+    """
     rows = []
-    for p in sorted(repo_root.glob("**/AGENTS.md")):
+    _srcs = sorted(set(repo_root.glob("**/dev-notes/*.md")) | set(repo_root.glob("**/AGENTS.md")))
+    for p in _srcs:
         # 排除项按**仓内相对路径**判。用绝对路径判的话，
         # 在 worktree（本身就在 _scratch/ 底下）里跑，整个仓都会被跳过 ——
         # 实测就是这样：agents 类目一条都没有，只剩 rule。
