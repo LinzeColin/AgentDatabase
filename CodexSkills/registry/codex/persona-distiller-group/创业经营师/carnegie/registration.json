@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:andrewcarnegie",
+  "canonical_name": "Andrew Carnegie",
+  "identity_family_id": "entrepreneur-operator",
+  "identity_mode": "single",
+  "registration_category": "创业经营师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "carnegie",
+  "subject_uid": "person-db857579ff0df48a",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/carnegie-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-24T20:17:56Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "36a7a72c8a5c1eac9802174b0b53e41086218df624462e7013a3f3076625281f",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/carnegie-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "9a06df990c87b30d928a18da3e605fb98d201767dcb231c124bb5bc17e7e347f",
+      "runtime_size_bytes": 98992,
+      "size_bytes": 107294
+    }
+  ]
+}

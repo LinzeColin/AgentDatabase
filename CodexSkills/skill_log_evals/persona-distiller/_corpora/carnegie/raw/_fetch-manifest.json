@@ -1,0 +1,282 @@
+{
+  "生成时刻": "2026-08-25T06:21:44",
+  "请求数": 1,
+  "已取回": 11,
+  "skipped_access_restricted": 0,
+  "剔除": 0,
+  "失败": 0,
+  "并发降级": "无（全程并发 4）",
+  "总词数": 642925,
+  "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
+  "记录": [
+    {
+      "identifier": "americanfourinha00carn",
+      "status": "已取回",
+      "note": "",
+      "file": "americanfourinha00carn.txt",
+      "source_url": "https://archive.org/download/americanfourinha00carn/americanfourinha00carn_djvu.txt",
+      "sha256": "f4dde1785991f03709e835b26faac21ab8e02db87926783a54b4bd15ee9fca73",
+      "bytes": 580634,
+      "words": 90925,
+      "fetched_at": "2026-08-25T06:18:27",
+      "ia_date": "1883",
+      "ia_year": "",
+      "ia_publicdate": "2008-01-08 17:40:25",
+      "ia_creator": "Carnegie, Andrew, 1835-1919",
+      "ia_title": "An American four-in-hand in Britain",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": [
+        "2008"
+      ]
+    },
+    {
+      "identifier": "autobiographyofa01carn",
+      "status": "已取回",
+      "note": "",
+      "file": "autobiographyofa01carn.txt",
+      "source_url": "https://archive.org/download/autobiographyofa01carn/autobiographyofa01carn_djvu.txt",
+      "sha256": "f942339e1cea8e629f1a027b98dde4441688d5522f89f2e8e206821032c8fef5",
+      "bytes": 703636,
+      "words": 122527,
+      "fetched_at": "2026-08-25T06:18:27",
+      "ia_date": "1920",
+      "ia_year": "",
+      "ia_publicdate": "2023-08-21 15:35:11",
+      "ia_creator": "Carnegie, Andrew, 1835-1919",
+      "ia_title": "Autobiography of Andrew Carnegie.",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1835",
+        "1914",
+        "1920",
+        "1924"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "cu31924002470700",
+      "status": "已取回",
+      "note": "",
+      "file": "cu31924002470700.txt",
+      "source_url": "https://archive.org/download/cu31924002470700/cu31924002470700_djvu.txt",
+      "sha256": "552bbfdc799fac1895f8c2b7cf392f1fad11d708ca61d8d242c068d06b88e5b3",
+      "bytes": 339445,
+      "words": 58099,
+      "fetched_at": "2026-08-25T06:18:35",
+      "ia_date": "1913",
+      "ia_year": "",
+      "ia_publicdate": "2009-10-26 11:24:26",
+      "ia_creator": "Carnegie, Andrew, 1835-1919",
+      "ia_title": "James Watt",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1642",
+        "1644",
+        "1683",
+        "1696",
+        "1736",
+        "1905",
+        "1913"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "edwinmstantonad00carn",
+      "status": "已取回",
+      "note": "",
+      "file": "edwinmstantonad00carn.txt",
+      "source_url": "https://archive.org/download/edwinmstantonad00carn/edwinmstantonad00carn_djvu.txt",
+      "sha256": "5a457dfece71038d2d33493d0430553c55fc8482aa5e64eaea79bafc90fd2ae7",
+      "bytes": 48377,
+      "words": 7037,
+      "fetched_at": "2026-08-25T06:21:44",
+      "ia_date": "1906",
+      "ia_year": "",
+      "ia_publicdate": "2011-12-22 13:44:41",
+      "ia_creator": "Carnegie, Andrew, 1835-1919",
+      "ia_title": "Edwin M. Stanton : an address by Andrew Carnegie on Stanton Memorial Day at Kenyon College",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1800",
+        "1825",
+        "1831",
+        "1847",
+        "1861",
+        "1906"
+      ],
+      "digitization_years": [
+        "2011"
+      ]
+    },
+    {
+      "identifier": "empireofbusiness00carnuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "empireofbusiness00carnuoft.txt",
+      "source_url": "https://archive.org/download/empireofbusiness00carnuoft/empireofbusiness00carnuoft_djvu.txt",
+      "sha256": "b465964357a339127feb53ab59322266499ffecd772dd6945a8e66bcbda3a54b",
+      "bytes": 516180,
+      "words": 78270,
+      "fetched_at": "2026-08-25T06:18:25",
+      "ia_date": "1902",
+      "ia_year": "",
+      "ia_publicdate": "2008-01-23 14:15:56",
+      "ia_creator": "Carnegie, Andrew, 1835-1919",
+      "ia_title": "The empire of business",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1885",
+        "1902"
+      ],
+      "digitization_years": [
+        "2008"
+      ]
+    },
+    {
+      "identifier": "gospelofwealthot00carn",
+      "status": "已取回",
+      "note": "",
+      "file": "gospelofwealthot00carn.txt",
+      "source_url": "https://archive.org/download/gospelofwealthot00carn/gospelofwealthot00carn_djvu.txt",
+      "sha256": "8a5d4e1793b68dce7ec04561aa70e3c5448e8d81e61519dc2f9230ae31ea6d37",
+      "bytes": 513980,
+      "words": 87990,
+      "fetched_at": "2026-08-25T06:18:32",
+      "ia_date": "1901",
+      "ia_year": "",
+      "ia_publicdate": "2025-04-07 20:58:22",
+      "ia_creator": "Carnegie, Andrew, 1835-1919",
+      "ia_title": "The gospel of wealth and other timely essays",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": []
+    },
+    {
+      "identifier": "leagueofpeacerec00carn_1",
+      "status": "已取回",
+      "note": "",
+      "file": "leagueofpeacerec00carn_1.txt",
+      "source_url": "https://archive.org/download/leagueofpeacerec00carn_1/leagueofpeacerec00carn_1_djvu.txt",
+      "sha256": "eabcbd209294cf0f42ded695e94ecad3daf209145faf484415ea0fc04ec9a8ac",
+      "bytes": 80654,
+      "words": 13588,
+      "fetched_at": "2026-08-25T06:18:34",
+      "ia_date": "1906",
+      "ia_year": "",
+      "ia_publicdate": "2026-03-30 14:20:36",
+      "ia_creator": "Carnegie, Andrew, 1835-1919, author",
+      "ia_title": "A league of peace : a rectorial address delivered to the students in the University of St. Andrews, 17th October, 1905",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1905",
+        "1906"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "negroinamericaad00carn_0",
+      "status": "已取回",
+      "note": "",
+      "file": "negroinamericaad00carn_0.txt",
+      "source_url": "https://archive.org/download/negroinamericaad00carn_0/negroinamericaad00carn_0_djvu.txt",
+      "sha256": "4769b2a7c8a7585113d172f12732c936d49c88c9261a0cb4e6ca8676dc5fec5e",
+      "bytes": 76347,
+      "words": 11220,
+      "fetched_at": "2026-08-25T06:18:38",
+      "ia_date": "1907",
+      "ia_year": "",
+      "ia_publicdate": "2017-06-02 16:49:13",
+      "ia_creator": [
+        "Carnegie, Andrew, 1835-1919",
+        "Committee of Twelve for the Advancement of the Interests of the Negro Race, Cheyney, Pa"
+      ],
+      "ia_title": "The negro in America ; an address delivered before the Philosophical institution of Edinburgh, 16th October 1907",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1619",
+        "1776",
+        "1790",
+        "1807",
+        "1837",
+        "1848",
+        "1858",
+        "1871",
+        "1873",
+        "1880",
+        "1888",
+        "1890"
+      ],
+      "digitization_years": [
+        "2017"
+      ]
+    },
+    {
+      "identifier": "problemsoftodayw00carnuoft",
+      "status": "已取回",
+      "note": "",
+      "file": "problemsoftodayw00carnuoft.txt",
+      "source_url": "https://archive.org/download/problemsoftodayw00carnuoft/problemsoftodayw00carnuoft_djvu.txt",
+      "sha256": "5512c8642a233626afeae51f4345bfe336c2b6c5069df7438e77bd6f605cc4c0",
+      "bytes": 262250,
+      "words": 38171,
+      "fetched_at": "2026-08-25T06:18:33",
+      "ia_date": "1908",
+      "ia_year": "",
+      "ia_publicdate": "2007-09-29 18:22:30",
+      "ia_creator": "Carnegie, Andrew, 1835-1919",
+      "ia_title": "Problems of to-day, wealth- labor- socialism",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1889",
+        "1905",
+        "1906",
+        "1907",
+        "1908"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "triumphantdemo00carn",
+      "status": "已取回",
+      "note": "",
+      "file": "triumphantdemo00carn.txt",
+      "source_url": "https://archive.org/download/triumphantdemo00carn/triumphantdemo00carn_djvu.txt",
+      "sha256": "d1a85cb73073d49107c9632907d960262c540c88e57dda5c1e23891510e001ac",
+      "bytes": 911105,
+      "words": 134049,
+      "fetched_at": "2026-08-25T06:18:26",
+      "ia_date": "1886",
+      "ia_year": "",
+      "ia_publicdate": "2013-06-27 13:18:18",
+      "ia_creator": "Carnegie, Andrew, 1835-1919",
+      "ia_title": "Triumphant democracy; or, Fifty years' march of the republic",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1886"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "warasmotherofval00carn",
+      "status": "已取回",
+      "note": "",
+      "file": "warasmotherofval00carn.txt",
+      "source_url": "https://archive.org/download/warasmotherofval00carn/warasmotherofval00carn_djvu.txt",
+      "sha256": "c9f9e79154adc758f182270965317d02ad5db84b3cc3aa7b3b5a46f95ba84b76",
+      "bytes": 7386,
+      "words": 1049,
+      "fetched_at": "2026-08-25T06:18:38",
+      "ia_date": "1910",
+      "ia_year": "",
+      "ia_publicdate": "2014-11-28 14:42:08",
+      "ia_creator": "Carnegie, Andrew, 1835-1919",
+      "ia_title": "War as the mother of valor and civilization",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1910"
+      ],
+      "digitization_years": []
+    }
+  ]
+}

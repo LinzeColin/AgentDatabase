@@ -1,11 +1,11 @@
 {
   "round": 19,
-  "updated_at": "2026-08-25T04:30Z",
+  "updated_at": "2026-08-25T09:30Z",
   "time_band": "valley-0000-0800",
-  "people": 135,
-  "current_person": "投资资本师族 #234 Roger Babson 完成入库",
-  "stage": "Babson #234 全流程完成（盲判 6 轮 → 六门全过 candidate 0.8688 / delta +0.6797；release 0 错 2 警已 acknowledge；package+register 入库）",
-  "next": "投资资本师族已全做（REG 27/DEF 延后），切换下一族 TODO",
+  "people": 136,
+  "current_person": "创业经营师族 #176 Andrew Carnegie 完成入库",
+  "stage": "Carnegie #176 全流程完成（盲判 5 轮 → 六门全过 candidate 0.8977 / delta +0.6852；release 0 错 2 警已 acknowledge；package+register 入库）",
+  "next": "创业经营师族 #180 Thomas Edison（一手 15 部可做）",
   "threads": {
     "T1": {
       "branch": "main",
@@ -38,10 +38,11 @@
     "#236 Benjamin Franklin(130/131)",
     "#147 Andrea Palladio 补记(130)",
     "#248 Say 全流程(134)",
-    "#234 Babson 全流程(135)"
+    "#234 Babson 全流程(135)",
+    "#176 Carnegie 全流程(136)"
   ],
   "p0_closed": [],
-  "note": "Babson #234 完成：17 语料（train 14+holdout 3，含 3 份 decisions 道 JSTOR 政论补第3道）；盲判 6 轮（修 decoy 中文数字/tok 单句/plan 力量清单/task 保守投资核心/route 认领/fact foot-pounds/voice 四基石/lh 张力承认/cal 让渡/baseline decoy 数字 → 六门全过，candidate 0.8688 / baseline 0.1891 / delta +0.6797）；release 0 错 2 警（baseline-not-capability/rubric 谈资料库）已 acknowledge；投资资本师族 27 REG 完成，剩余候选全延后",
+  "note": "Carnegie #176 完成：8 train+3 holdout（writings/expression/timeline 三道）；盲判 5 轮（修 decoy 数字/tok 单句/traj 年表自证/anon 身份暗示/voice 四步/fact tiustee 讹形/known 免费学校/planning 四步 → 六门全过，candidate 0.8977 / baseline 0.2125 / delta +0.6852）；release 0 错 2 警已 acknowledge；创业经营师族可做者：Carnegie 完成、Edison/Wanamaker 待做",
   "cost_baseline": {
     "flash": {
       "calls": 934,

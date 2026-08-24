@@ -1,0 +1,15 @@
+# carnegie：探源 262 条 → 精选 10 条（PD<1930 一手，覆盖 writings/expression/timeline 三道）
+# 丢：printdisabled 现代重印（1986+）；同名者；Carnegie Corporation 机构台账
+# --- timeline（自传/旅行回忆录） ---
+autobiographyofa01carn
+americanfourinha00carn
+# --- writings（核心论著） ---
+triumphantdemo00carn
+empireofbusiness00carnuoft
+gospelofwealthot00carn
+problemsoftodayw00carnuoft
+cu31924002470700
+# --- expression（演讲/政论） ---
+leagueofpeacerec00carn_1
+negroinamericaad00carn_0
+warasmotherofval00carn

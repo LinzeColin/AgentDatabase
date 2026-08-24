@@ -1,0 +1,97 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "person-andrew-carnegie-1835",
+  "consent_authority": "archive.org 公开领域一手著作（1882-1920，PD 稳）；无涉个人隐私",
+  "created_at": "2026-08-24T20:17:56Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "entrepreneur-operator",
+    "display": "创业经营师",
+    "mode": "single",
+    "primary": "entrepreneur-operator",
+    "weights": {
+      "entrepreneur-operator": 1.0
+    }
+  },
+  "language": "zh-CN",
+  "model_version": "0.1.0-draft",
+  "name": "Andrew Carnegie",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "商业与工业：钢铁业整合、成本管理、规模化生产与竞争（Empire of Business、Autobiography）",
+        "财富伦理与慈善：财富的福音、富人的责任、散财哲学（Gospel of Wealth、Problems of To-day）",
+        "政治与社会评论：民主、劳工、帝国与和平（Triumphant Democracy、The Path to Peace 系列）",
+        "生平与自我管理：从移民童工到钢铁大王的成长（Autobiography、旅行回忆录）",
+        "和平与全球治理：废除战争、国际仲裁（League of Peace、和平演讲）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Carnegie%2C+Andrew%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=200&output=json"
+        }
+      ],
+      "canonical_name": "Andrew Carnegie",
+      "distinguishing_basis": "探源：creator:\"Carnegie, Andrew\" numFound=219、带生卒年 179、title 自传/Triumphant Democracy/Gospel of Wealth 多路，合并去重 262 条、本人一手 209 条、独立一手作品 95 部、一手占比 80%。同名剔除：Agnew David Carnegie Andrew（中间名同名 4 条）、Carnegie Louise Whilfield（其妻误标）。一手覆盖 writings 54 部（Triumphant Democracy/Empire of Business/Gospel of Wealth/James Watt + 期刊文章）+ expression 31 部（演讲）+ timeline 10 部（自传/旅行回忆录），道数 3-4。核心著作全出版于 1882-1920（<1930）PD 稳。",
+      "evidence_level": "high",
+      "identity_category": "创业经营师",
+      "key_capabilities": [
+        "工业经营——钢铁业垂直整合、成本与规模管理（Empire of Business、Autobiography）",
+        "财富伦理——散财哲学、富人的责任、图书馆与教育捐赠（Gospel of Wealth、Problems of To-day）",
+        "政论与公共写作——民主/劳工/帝国/和平议题（Triumphant Democracy、期刊文章）",
+        "演讲与说服——就职演说、纪念演讲、和平倡议（expression 道）",
+        "自我叙事——从移民到工业巨头的生涯重构（Autobiography、旅行回忆录）"
+      ],
+      "label": "A",
+      "occupation_or_role": "美国钢铁业巨头、慈善家与政论家（1835-1919）；卡内基钢铁公司创始人、现代慈善基金会制度开创者",
+      "professional_background": "Andrew Carnegie（1835-1919，苏格兰移民）是美国钢铁工业的奠基人与慈善事业的现代开创者。1835 年生于苏格兰邓弗姆林，1848 年随家移民美国，从匹兹堡电报童工做起；1870s-1890s 建立卡内基钢铁公司（后合并为美国钢铁），1890s 成为世界最大钢铁制造商；1889 年发表《财富的福音》（Gospel of Wealth）提出\"富人的责任\"——生前散尽财富、死后不留遗产，据此捐建 2500+ 公共图书馆与卡内基基金会/卡内基梅隆大学等；1901 年退休后转向和平运动与世界事务。著作：自传《Autobiography of Andrew Carnegie》(1920)、Triumphant Democracy(1886)、Empire of Business(1902)、Gospel of Wealth(1901)、Problems of To-day(1908)、James Watt(1913)、旅行回忆录（Round the World 1884、American Four-in-Hand 1883）+ 30+ 篇期刊文章与演讲。档案：archive.org creator 字段 Carnegie, Andrew（1835-1919），独立一手 95 部、道数 3-4。",
+      "subject_uid": "person-andrew-carnegie-1835"
+    },
+    "chosen_subject_uid": "person-andrew-carnegie-1835",
+    "normalized_name": "andrewcarnegie",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "andrewcarnegie",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "carnegie",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-9d3d19e00df6",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-24T20:17:56Z",
+  "attribution_basis": {
+    "authority": "Andrew Carnegie（1835-1919）著作归属依据：① archive.org creator 字段（Carnegie, Andrew, 1835-1919）逐份点名；② 各书题名页/署名行（见 covered_sources）——《Autobiography of Andrew Carnegie》题名页署 Andrew Carnegie；《Triumphant Democracy》题名页署 Andrew Carnegie；《The Gospel of Wealth》题名页署 Andrew Carnegie。同名者（Agnew David Carnegie Andrew 中间名/其妻 Louise）由 creator 剔除。",
+    "citation": "archive.org creator 检索（numFound 219/179，合并去重 262 条，独立一手 95 部）；各源 archive.org item 页。",
+    "disputed_policy": "10 份全为 Carnegie 本人一手（著作/演讲/自传/旅行回忆录），无学界公认伪托争议。",
+    "disputed_works": [],
+    "covered_sources": [
+      "americanfourinha00carn.txt ｜ 署名照录：An American four-in-hand in Britain",
+      "autobiographyofa01carn.txt ｜ 署名照录：Autobiography of Andrew Carnegie.",
+      "cu31924002470700.txt ｜ 署名照录：James Watt",
+      "empireofbusiness00carnuoft.txt ｜ 署名照录：The empire of business",
+      "gospelofwealthot00carn.txt ｜ 署名照录：The gospel of wealth and other timely essays",
+      "leagueofpeacerec00carn_1.txt ｜ 署名照录：A league of peace : a rectorial address delivered to the students in the Univers",
+      "negroinamericaad00carn_0.txt ｜ 署名照录：The negro in America ; an address delivered before the Philosophical institution",
+      "problemsoftodayw00carnuoft.txt ｜ 署名照录：Problems of to-day, wealth- labor- socialism",
+      "triumphantdemo00carn.txt ｜ 署名照录：Triumphant democracy; or, Fifty years' march of the republic",
+      "warasmotherofval00carn.txt ｜ 署名照录：War as the mother of valor and civilization"
+    ],
+    "counting_convention": "10 份覆盖 writings 5（Triumphant Democracy/Empire of Business/Gospel of Wealth/Problems of To-day/James Watt）+ expression 3（League of Peace/Negro in America/War as Mother of Valor）+ timeline 2（Autobiography 1920/American Four-in-Hand 1883）；各著作单版本，无重复扫描。"
+  }
+}

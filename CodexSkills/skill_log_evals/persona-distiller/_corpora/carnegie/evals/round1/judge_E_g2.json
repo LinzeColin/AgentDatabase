@@ -1,0 +1,130 @@
+[
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A严格按可核转变线展开并引用原文；B编造美西战争等具体分水岭事件，违反失败条件。",
+  "q": "q-17"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A出现'一生''每一分'等中文数字，违反无数字硬性要求；B完全符合受托人、生前散财、死时蒙羞等Carnegie锚点且无数字。",
+  "q": "q-18"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A一句内完整答出受托人、生前散财、死后蒙羞核心；B超过一句且未明确死后蒙羞，失败。",
+  "q": "q-19"
+ },
+ {
+  "A": 1.0,
+  "B": 0.5,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A完整包含三铁律及鸡蛋比喻；B有节俭与不投机，但集中只讲专注未及资本集中，且未引用关键原文。",
+  "q": "q-20"
+ },
+ {
+  "A": 0.0,
+  "B": 0.5,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A编造大量具体年份和数额，且未按要求引用自传原文；B引用了部分关键原文，但缺少童工周薪、图书馆缘起及废除战争原句，未完全达到通过条件。",
+  "q": "q-21"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A未答出三足凳与滑动工资的核心反驳，仅提资本劳工两方；B完整引述三足凳、滑动工资并明确反对资本独断。",
+  "q": "q-22"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A一句内答出集中并盯住核心；B多句且冗长，超过一句限制，按标准失败。",
+  "q": "q-23"
+ },
+ {
+  "A": 0.75,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A完整给出垂直整合与滑动工资制并引原文，但未明确落到“资源集中本行”；B未提滑动工资，用计件工资混淆，且缺少最便宜钢铁与集中资源，构成致命缺失。",
+  "q": "q-24"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A明确拒绝对2026年走势做具体预测并将问题让渡给现代分析师；B却给出了详细走势与价格预测，属于具体预言，构成致命错误。",
+  "q": "q-25"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A点名多个现代机构违反失败条件；B拒答并说明缘由，未举具体受捐方，符合通过条件。",
+  "q": "q-26"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A未原样给出英文原句且出处错误，B完整引用原句并保住对举结构。",
+  "q": "q-27"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A未原样保留英文关键句及OCR讹形照录，且未明确引用'which proclaims him only a trustee of: the surplus'；B完整满足通过条件。",
+  "q": "q-28"
+ },
+ {
+  "A": 1.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两者均成方案形式，体现生前亲散、拒绝无差别施舍、以教育/图书馆等刺激上进为用途，并呼应死后蒙羞；未触发失败条件。",
+  "q": "q-29"
+ },
+ {
+  "A": 1.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两份回答均准确涵盖死时蒙羞、受托人、生前亲散且反对养懒，符合核心通过条件。",
+  "q": "q-30"
+ },
+ {
+  "A": 0.5,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A无数字且有文明分界锚点但缺支出小于收入与童工自述；B有童工自述但出现中文数字'一'，属致命错误。",
+  "q": "q-31"
+ },
+ {
+  "A": 1.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两者均明确反对遗产继承，分别表达了富人是受托人、应生前散财、否则死时蒙羞的观点，且全程未自报姓名。",
+  "q": "q-32"
+ }
+]

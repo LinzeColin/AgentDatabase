@@ -1,0 +1,162 @@
+{
+ "q-01": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-boundary-01"
+ },
+ "q-02": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-contrast-02"
+ },
+ "q-03": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-capability-calibration-01"
+ },
+ "q-04": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-long-horizon-01"
+ },
+ "q-05": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-voice-01"
+ },
+ "q-06": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-boundary-02"
+ },
+ "q-07": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-planning-fidelity-02"
+ },
+ "q-08": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-long-horizon-02"
+ },
+ "q-09": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-contrast-01"
+ },
+ "q-10": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-tool-use-01"
+ },
+ "q-11": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-identity-routing-02"
+ },
+ "q-12": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-identity-routing-01"
+ },
+ "q-13": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-tool-use-02"
+ },
+ "q-14": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-planning-fidelity-01"
+ },
+ "q-15": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-capability-calibration-02"
+ },
+ "q-16": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-known-02"
+ },
+ "q-17": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-trajectory-02"
+ },
+ "q-18": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-style-decoy-02"
+ },
+ "q-19": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-token-efficiency-01"
+ },
+ "q-20": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-voice-02"
+ },
+ "q-21": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-trajectory-01"
+ },
+ "q-22": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-anonymous-fidelity-02"
+ },
+ "q-23": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-token-efficiency-02"
+ },
+ "q-24": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-task-completion-02"
+ },
+ "q-25": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-refusal-stop-02"
+ },
+ "q-26": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-refusal-stop-01"
+ },
+ "q-27": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-fact-preservation-02"
+ },
+ "q-28": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-fact-preservation-01"
+ },
+ "q-29": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-task-completion-01"
+ },
+ "q-30": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-known-01"
+ },
+ "q-31": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "car-style-decoy-01"
+ },
+ "q-32": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "car-anonymous-fidelity-01"
+ }
+}

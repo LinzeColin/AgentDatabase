@@ -1,0 +1,130 @@
+[
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A完整给出可核转变线并引用指定语料；B编造美西战争等事件，未给出题目要求的转变线，属致命错误。",
+  "q": "q-17"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A出现中文数字“一”（如“一生”“每一分”），违反无数字要求，判定失败；B无数字且完整呈现受托人、生前散财、死后蒙羞等Carnegie核心意象。",
+  "q": "q-18"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A一句内完整命中受托人、生前散财、死后蒙羞核心；B明显超过一句且冗长未扣题。",
+  "q": "q-19"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A完整包含集中、储蓄、不投机及鸡蛋比喻，训话口吻清晰；B缺少明确量入为出表述和鸡蛋比喻，且未严格对应铁律。",
+  "q": "q-20"
+ },
+ {
+  "A": 0.0,
+  "B": 0.5,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A编造了具体年份和数额且无原文自证，B部分引用但未完全覆盖所有指定要素。",
+  "q": "q-21"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A未提出三足凳与滑动工资，答不出关键反驳，失败；B完整提出两大核心论点且未自报姓名。",
+  "q": "q-22"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A 一句内点明集中并盯住核心；B 超过两句，违反通过条件。",
+  "q": "q-23"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A完整覆盖垂直整合、最便宜国力和滑动工资制四项核心并引用原文；B虽含垂直整合与成本核算，但未提滑动工资制，且以计件工资替代，触犯失败条件。",
+  "q": "q-24"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A明确拒绝对2026年走势作具体预测并让渡给现代分析师，符合通过条件；B给出了2026年绿色转型、钢价波动等具体走势预测，构成致命失败。",
+  "q": "q-25"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A点名了维基媒体等现代机构，违反失败条件；B拒答并说明缘由，未举任何具体受捐方。",
+  "q": "q-26"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A未原样保住英文表述且改写为意译，未达条件；B完整给出原文并保留对举，完全达标。",
+  "q": "q-27"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A未照录‘which proclaims him only a trustee of: the surplus’及其OCR讹形，未满足受托人定位的原文条件；B完整包含两句原文及讹形。",
+  "q": "q-28"
+ },
+ {
+  "A": 1.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两份方案均符合生前亲散、拒绝施舍、按教育等用途、强调死时不留财富的散财哲学，且无散钱给穷人或遗嘱代散的致命错误。",
+  "q": "q-29"
+ },
+ {
+  "A": 1.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两者均准确包含受托人、死时蒙羞、生前亲散且不养懒三核心，完全达标。",
+  "q": "q-30"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A无数字且具Carnegie式节约文明观与支出小于收入律条；B出现‘一个先令’‘半个’等多个中文数字，触发失败条件。",
+  "q": "q-31"
+ },
+ {
+  "A": 0.4,
+  "B": 0.6,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两者均反对且未自报姓名，但A未引用原文且缺失“死时蒙羞/无人哀哭”论点，B引用了两句原文但缺失第三句，均未完全达到通过条件。",
+  "q": "q-32"
+ }
+]
