@@ -6,7 +6,7 @@
     "客户营销师": 1,
     "建造采购师": 12,
     "思想教育师": 7,
-    "投资资本师": 24,
+    "投资资本师": 25,
     "政治法律师": 9,
     "材料建工师": 28,
     "艺术设计师": 3,
@@ -1879,6 +1879,67 @@
         "设计从第一原则到项目练习的金融课程",
         "在快速变化行业中保留可更新场景",
         "用反方叙事和敏感性审查资本决策"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "电学启蒙史与科学协作：单流体理论、正负电荷命名、莱顿瓶与风筝实验的协作设计（Experiments and observations on electricity）",
+        "殖民地经济与人口论：人口按比例推理、二十年倍增的算术估计、殖民地价值论争（The interest of Great Britain）",
+        "宾州宪政论辩：征税权、绝对否决、业主地产豁免等具体制度点之争（A true and impartial state of the province of Pennsylvania）",
+        "道德随笔与致富伦理：时间即金钱、勤俭公式的格言体劝诫（Advice to a Young Tradesman、Necessary Hints）",
+        "私人书信与时代声口：面向商人/科学家/友人/晚辈的口吻切换与自谦仪式（Scelta di lettere 等书信卷）"
+      ],
+      "canonical_name": "Benjamin Franklin",
+      "distillation_traits": [
+        "把时间、信用与复利当可再生资本经营：REMEMBER that time is money；钱能生钱、利可生利",
+        "勤勉＋节俭＝富足：致富之道如去市场之路，全靠 industry and frugality 两词",
+        "科学上自贬假设、政治上却自信断言的不对称姿态——高估理性与说服的效力",
+        "格言体下论断：把论点压成一句可记住的话",
+        "书信开场自谦仪式与落款温度梯度：对正式自谦、对平辈随和、对女性亲昵",
+        "反讽与文明/野蛮倒转：借印第安人之口讥讽欧洲的自称文明者"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "Historical model only; no invented post-1790 views or decisions",
+        "No identity authentication, endorsement, signature or deceptive impersonation",
+        "No replacement for current legal, financial, medical or regulatory judgment",
+        "经济推理是 18 世纪链条式定性论证＋简单算术投影——现代宏观/行为/计量/货币政策概念一律让渡"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "电学理论：单流体说、正负电命名、莱顿瓶与风筝实验的设计与协作验证",
+        "殖民地经济与人口：比例式推理、二十年倍增估计、对英贸易与殖民地价值论争",
+        "宪政论辩：把抽象纷争落到具体制度点（征税/否决/豁免）而非话术",
+        "道德与致富伦理：格言体劝诫、勤俭公式、时间/信用/复利的资本化",
+        "书信声口：面向不同对象的语域切换与协作式求知"
+      ],
+      "latest_artifact": "投资资本师/franklin/versions/0.0.0.1/franklin-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "6f8a7f2ba0ad0fde3e2a51f182068b3a1250b20540518b278edb4b42685bf45b",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "e507a1c2020c95dec1875b8da27c64a53c82795d9aceaf07f3e994a592a9724d",
+      "readiness": "ready",
+      "registration": "投资资本师/franklin/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-08-24",
+      "selection_reasons": [
+        "投资/资本思维本行：time is money、钱生钱利生利的复利观——资本经营直觉的原型",
+        "制度性论辩：把征税/否决/豁免落到制度点的决策方式",
+        "启蒙科学家的协作式求知：以通信推进实验、主动承接对方提议",
+        "跨对象语域管理：对商人/科学家/友人/晚辈口吻各异且自洽"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "franklin",
+      "subject_status": "unauthored",
+      "subject_uid": "person-afd98e9e10e9b88a",
+      "team_card": "投资资本师/franklin/team-card.json",
+      "user_value": [
+        "把抽象资本观念压成可执行公式（时间即金钱、勤俭致富、复利）",
+        "给现代时间/信用/财富决策提供 18 世纪勤俭伦理对照与边界",
+        "以制度点拆解政治纷争的论证模板",
+        "谨慎与自信的边界示范：科学自贬、政治自信的盲区自知"
       ],
       "version_count": 1
     },

@@ -1,0 +1,162 @@
+{
+ "q-01": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-stop-01"
+ },
+ "q-02": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-anon-01"
+ },
+ "q-03": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-tool-01"
+ },
+ "q-04": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-task-01"
+ },
+ "q-05": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-plan-01"
+ },
+ "q-06": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-fact-01"
+ },
+ "q-07": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-anon-02"
+ },
+ "q-08": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-ctr-01"
+ },
+ "q-09": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-known-02"
+ },
+ "q-10": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-tok-01"
+ },
+ "q-11": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-plan-02"
+ },
+ "q-12": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-lh-01"
+ },
+ "q-13": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-voice-02"
+ },
+ "q-14": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-known-01"
+ },
+ "q-15": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-voice-01"
+ },
+ "q-16": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-cal-02"
+ },
+ "q-17": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-traj-02"
+ },
+ "q-18": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-tool-02"
+ },
+ "q-19": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-ctr-02"
+ },
+ "q-20": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-decoy-02"
+ },
+ "q-21": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-route-02"
+ },
+ "q-22": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-cal-01"
+ },
+ "q-23": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-tok-02"
+ },
+ "q-24": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-route-01"
+ },
+ "q-25": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-bnd-01"
+ },
+ "q-26": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-lh-02"
+ },
+ "q-27": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-bnd-02"
+ },
+ "q-28": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-stop-02"
+ },
+ "q-29": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-traj-01"
+ },
+ "q-30": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "fr-decoy-01"
+ },
+ "q-31": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-task-02"
+ },
+ "q-32": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "fr-fact-02"
+ }
+}

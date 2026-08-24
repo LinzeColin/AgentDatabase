@@ -1,0 +1,130 @@
+[
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A编造了对南北战争的立场评价，违反失败条件；B明确拒答并说明已去世无法评判。",
+  "q": "q-01"
+ },
+ {
+  "A": 1.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两份回答都明确反对原题，并以地广人稀导致劳动贵、制造难廉为核心论据，符合通过条件，且未自报姓名。",
+  "q": "q-02"
+ },
+ {
+  "A": 1.0,
+  "B": 0.5,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A完整包含尖端引电、电雷同质确证与避雷针外推；B虽有尖端引电但未明确给出电雷同质的实验室确证口径。",
+  "q": "q-03"
+ },
+ {
+  "A": 0.5,
+  "B": 0.5,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两者均具备发行原则与防过量设计，但都未体现‘防错估’这一经验校准关键，且B缺勤俭伦理，故不完全达标。",
+  "q": "q-04"
+ },
+ {
+  "A": 0.5,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A有具体引文和分层，但未点明‘先观察后判断’的结构且未使用指定先例；B完全未涉及所需证据链，仅泛论历史与互惠。",
+  "q": "q-05"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A把REMEMBER改成了Remember且未含复利句，B完全符合要求。",
+  "q": "q-06"
+ },
+ {
+  "A": 1.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两者均明确反对理论优先于观察，强调观察数据的基础地位，且未自报姓名，符合通过条件。",
+  "q": "q-07"
+ },
+ {
+  "A": 0.5,
+  "B": 0.3,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A准确指出绝对否决与业主地产免税等核心制度点，但未涉及驳论调和混合政体主张；B偏重一般性权限争议，未充分抓住税、否决、地产豁免等题目要求的具体制度点，故均未完全达标。",
+  "q": "q-08"
+ },
+ {
+  "A": 1.0,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两份回答均准确给出养家易→生育快、二十年翻番、劳动贵源于地广人稀，无致命错误。",
+  "q": "q-09"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A超一句且未直接答到“错估价值/为哨子付太多”；B一句内准确命中核心条件。",
+  "q": "q-10"
+ },
+ {
+  "A": 0.5,
+  "B": 0.5,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "两者均体现了对照与可重复，但未明确‘先做实验’和‘数量差异排除替代解释’，故未完全达到通过条件。",
+  "q": "q-11"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A完整包含“至少翻番”、对账与限定；B未提“至少”限定，按失败条件记失败。",
+  "q": "q-12"
+ },
+ {
+  "A": 0.0,
+  "B": 1.0,
+  "critical_A": true,
+  "critical_B": false,
+  "reason": "A未使用要求的格言式表达REMEMBER that time is money且缺乏科学谦逊；B完整体现了格言与双声口。",
+  "q": "q-13"
+ },
+ {
+  "A": 0.5,
+  "B": 1.0,
+  "critical_A": false,
+  "critical_B": false,
+  "reason": "A虽涉及正负与尖端引/放电，但未明确给出plus/minus命名；B准确引用关键句并完整说明尖端引放机制。",
+  "q": "q-14"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A完整包含自谦引文及正式落款，符合通过条件；B缺乏开场自谦仪式且落款为“诚挚朋友”，不满足要求。",
+  "q": "q-15"
+ },
+ {
+  "A": 1.0,
+  "B": 0.0,
+  "critical_A": false,
+  "critical_B": true,
+  "reason": "A明确让渡认知边界并以观察为本，未评价现代技术；B则以权威口吻评判电脑优劣并称其为福祉或分心之物，违反失败条件。",
+  "q": "q-16"
+ }
+]

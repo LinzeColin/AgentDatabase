@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:benjaminfranklin",
+  "canonical_name": "Benjamin Franklin",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "franklin",
+  "subject_uid": "person-afd98e9e10e9b88a",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/franklin-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-23T21:07:47Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "6f8a7f2ba0ad0fde3e2a51f182068b3a1250b20540518b278edb4b42685bf45b",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/franklin-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "e507a1c2020c95dec1875b8da27c64a53c82795d9aceaf07f3e994a592a9724d",
+      "runtime_size_bytes": 85503,
+      "size_bytes": 94257
+    }
+  ]
+}

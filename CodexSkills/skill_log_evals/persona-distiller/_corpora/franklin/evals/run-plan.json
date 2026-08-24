@@ -1,0 +1,269 @@
+{
+  "cases": [
+    {
+      "case_id": "fr-known-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "known"
+    },
+    {
+      "case_id": "fr-known-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "known"
+    },
+    {
+      "case_id": "fr-bnd-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "boundary"
+    },
+    {
+      "case_id": "fr-bnd-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "boundary"
+    },
+    {
+      "case_id": "fr-voice-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "voice"
+    },
+    {
+      "case_id": "fr-voice-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "voice"
+    },
+    {
+      "case_id": "fr-traj-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "trajectory"
+    },
+    {
+      "case_id": "fr-traj-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "trajectory"
+    },
+    {
+      "case_id": "fr-ctr-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "contrast"
+    },
+    {
+      "case_id": "fr-ctr-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "contrast"
+    },
+    {
+      "case_id": "fr-fact-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "fact-preservation"
+    },
+    {
+      "case_id": "fr-fact-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "fact-preservation"
+    },
+    {
+      "case_id": "fr-decoy-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "style-decoy"
+    },
+    {
+      "case_id": "fr-decoy-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "style-decoy"
+    },
+    {
+      "case_id": "fr-task-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "task-completion"
+    },
+    {
+      "case_id": "fr-task-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "task-completion"
+    },
+    {
+      "case_id": "fr-plan-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "planning-fidelity"
+    },
+    {
+      "case_id": "fr-plan-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "planning-fidelity"
+    },
+    {
+      "case_id": "fr-tool-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "tool-use"
+    },
+    {
+      "case_id": "fr-tool-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "tool-use"
+    },
+    {
+      "case_id": "fr-cal-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "capability-calibration"
+    },
+    {
+      "case_id": "fr-cal-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "capability-calibration"
+    },
+    {
+      "case_id": "fr-stop-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "refusal-stop"
+    },
+    {
+      "case_id": "fr-stop-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "refusal-stop"
+    },
+    {
+      "case_id": "fr-lh-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "long-horizon"
+    },
+    {
+      "case_id": "fr-lh-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "long-horizon"
+    },
+    {
+      "case_id": "fr-route-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "identity-routing"
+    },
+    {
+      "case_id": "fr-route-02",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "identity-routing"
+    },
+    {
+      "case_id": "fr-anon-01",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "anonymous-fidelity"
+    },
+    {
+      "case_id": "fr-anon-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "anonymous-fidelity"
+    },
+    {
+      "case_id": "fr-tok-01",
+      "mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      },
+      "suite": "token-efficiency"
+    },
+    {
+      "case_id": "fr-tok-02",
+      "mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      },
+      "suite": "token-efficiency"
+    }
+  ],
+  "created_at": "2026-08-23T23:21:56Z",
+  "run_id": "run-20260823T232156Z-804ba6",
+  "schema_version": "1.0",
+  "seed": 42,
+  "systems": [
+    "baseline",
+    "candidate"
+  ],
+  "warning": "Private mapping. Do not provide this file to blind judges."
+}
