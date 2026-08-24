@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:jesselauristonlivermore",
+  "canonical_name": "Jesse Lauriston Livermore",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "jesse-livermore",
+  "subject_uid": "person-8a07564548fb23d7",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/jesse-livermore-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-01T13:32:44Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.19",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "84140b0370afefeec46b32a522e1fb3e4c2bd7a8f52978ec212eae020ab2e2b8",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/jesse-livermore-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "f148a6410c7ded874b44901f48e1cd0e3f74c0803c9f9f3233fe824c10b5c89b",
+      "runtime_size_bytes": 119912,
+      "size_bytes": 126510
+    }
+  ]
+}

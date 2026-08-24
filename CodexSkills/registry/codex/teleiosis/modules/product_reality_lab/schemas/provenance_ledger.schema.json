@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linze.local/schemas/product-reality-lab/provenance-ledger.schema.json",
+  "title": "Open-source Provenance Ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "items"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "source",
+          "version_or_commit",
+          "license",
+          "use",
+          "modified_files",
+          "review_status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "version_or_commit": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "copyright_or_notice": {
+            "type": "string"
+          },
+          "use": {
+            "type": "string"
+          },
+          "modified_files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "allowed_use_basis": {
+            "type": "string"
+          },
+          "review_status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "APPROVED",
+              "REJECTED"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "reviewer": {
+            "type": "string"
+          },
+          "reviewed_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

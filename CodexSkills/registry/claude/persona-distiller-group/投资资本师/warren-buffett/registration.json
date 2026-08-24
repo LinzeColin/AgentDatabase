@@ -1,0 +1,29 @@
+{
+  "canonical_key": "public:warrenbuffett",
+  "canonical_name": "Warren Buffett",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "warren-buffett",
+  "subject_uid": "person-006a3697d70d2a8d",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/warren-buffett-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.6",
+      "distilled_with_note": "2026-07-26 十二族重组：70 人只重打包未重蒸，正文来自 ≤v0.0.0.5",
+      "distilled_with_source": "git-first-commit:bulk-repackage",
+      "model_version": "1.0.0",
+      "outer_sha256": "11bd0b695c7d46cfe738c3fd55c634bd967aa9586842191082a54d9595a05d27",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/warren-buffett-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "492db55d4130c1333624b3d563023f15392e5085b198e9d45524513b6bf7a6c9",
+      "runtime_size_bytes": 85482,
+      "size_bytes": 96456
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "video-prompt-compiler",
+  "display_name_zh": "视频提示词编译器｜自然语言→电影级·工业级·多模型 Prompt",
+  "version": "v0.0.0.2",
+  "language": [
+    "zh-CN",
+    "en"
+  ],
+  "runtime": "Agent Skill + Python 3.9+ standard library",
+  "default_behavior": "compile_only_no_paid_generation",
+  "architecture": "natural_language -> constraint_ledger -> VideoPromptIR -> dual_candidate -> scored_selection -> model_renderer -> delta_repair",
+  "capabilities": [
+    "natural_language_to_video_prompt",
+    "typed_video_prompt_ir",
+    "dual_candidate_prompt_optimization",
+    "model_specific_prompt_rendering",
+    "text_to_video",
+    "image_to_video",
+    "reference_to_video",
+    "video_edit_and_extend",
+    "footage_editing_edl",
+    "screenplay_to_shots",
+    "2d_motion_graphics",
+    "aigc_3d_concept",
+    "true_3d_handoff",
+    "reference_video_reverse_engineering",
+    "industrial_physics_ledger",
+    "micro_performance_language",
+    "character_reference_lock",
+    "prompt_scoring_and_delta_repair",
+    "cost_and_unknown_gate"
+  ],
+  "officially_verified_model_adapters_as_of": "2026-08-17",
+  "optional_external_tools": [
+    "ffmpeg",
+    "ffprobe"
+  ],
+  "required_paid_services": [],
+  "status": "INSTALLABLE_CANDIDATE",
+  "offline_functional_validation": "PASS_52_OF_52_PLUS_PACKAGE_AND_INSTALL",
+  "native_model_validation": "NOT_RUN",
+  "external_verifier": "NOT_RUN"
+}

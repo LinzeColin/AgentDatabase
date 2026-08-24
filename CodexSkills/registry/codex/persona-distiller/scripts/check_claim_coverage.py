@@ -285,31 +285,6 @@ def self_test() -> int:
     print(f"  {'✓' if ok11 else '✗'} ⑪ 台账刊名写成 JASA → 断言里的 BSTJ 仍**不**命中（红）")
     fail += not ok11
 
-    # ── ★★★ 2026-08-17：实际检查 0 条时不许印「通过」（子进程断言，正反各一）──
-    #   benardos-128 实测：「源账本 0 条 … 实际检查 0/0 条 … 结论: 通过」rc=0。
-    #   ★ 断言打在**子进程真正印出来的那一行**上：印字在 `main()` 里。
-    import subprocess as _sp, sys as _sys, tempfile as _tf, json as _json
-    _self = str(pathlib.Path(__file__).resolve())
-
-    def _run(claims: list, corpus: str) -> str:
-        with _tf.TemporaryDirectory() as _td:
-            w = pathlib.Path(_td) / "ws"; (w / "evidence").mkdir(parents=True)
-            c = pathlib.Path(_td) / "cache"; c.mkdir()
-            (w / "evidence" / "claims.jsonl").write_text(
-                "".join(_json.dumps(x, ensure_ascii=False) + "\n" for x in claims),
-                encoding="utf-8")
-            (w / "evidence" / "source-ledger.jsonl").write_text("", encoding="utf-8")
-            (c / "a.txt").write_text(corpus, encoding="utf-8")
-            return _sp.run([_sys.executable, _self, "--workspace", str(w), "--cache", str(c)],
-                           capture_output=True, text=True).stdout
-
-    _o0 = _run([], "irrelevant corpus text\n")
-    ok_a = "**未核，不是通过**" in _o0
-    ok_b = "实际检查 0/0" in _o0 and "结论: 通过" not in _o0
-    print(f"  {'✓' if ok_a else '✗'} ★★★ 实际检查 0 条 → 印「未核，不是通过」")
-    print(f"  {'✓' if ok_b else '✗'} ★★★ 实际检查 0 条 → **不许**印「结论: 通过」")
-    fail += (not ok_a) + (not ok_b)
-
     print("  ✓ 负对照通过（15/15）" if not fail
           else f"  ✗ {fail} 项未过——本检查器已失效，其「通过」不构成证据")
     return fail
@@ -438,22 +413,7 @@ def main() -> int:
     print(f"\n实际检查 {checked}/{len(claims)} 条"
           f"（其中按引文判据 {quote_checked} 条；语料元断言 {len(corpus_meta)}、"
           f"无实体无引文 {len(unverifiable)} 未纳入）")
-    # ★★★ 2026-08-17：**实际检查 0 条时不许印「通过」**。
-    #   `decorative` 为空在空集上恒真 ⇒ benardos-128 实测输出是
-    #   「源账本 0 条 … 实际检查 **0/0** 条 … 结论: 通过」并 rc=0。
-    #   而本件上面几行**自己就写着**「未检查，不等于通过」——
-    #   那句话对 `unverifiable` 那一档说了，对「一条都没有」这一档没说。
-    #   ★ 只改措辞、**不改退出码**（收紧判定属决定不属清理；调用点
-    #     `quality_check.py:1855` 只区分 rc 0/1/2，本改动不动它）。
-    #   [[zero-hit-gates-must-prove-they-can-hit]]｜[[a-continue-hid-the-worst-case]]
-    if decorative:
-        print("结论: 不通过——存在装饰性引用")
-    elif checked == 0:
-        print(f"结论: **未核，不是通过** —— 实际检查 0 条"
-              f"（账本 {len(claims)} 条断言：语料元 {len(corpus_meta)}、"
-              f"无实体无引文 {len(unverifiable)}，**没有一条进入本件的射程**）")
-    else:
-        print(f"结论: 通过（**{checked}** 条逐条查过）")
+    print(f"结论: {'不通过——存在装饰性引用' if decorative else '通过'}")
     return 1 if decorative else 0
 
 

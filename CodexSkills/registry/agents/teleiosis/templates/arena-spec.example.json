@@ -1,0 +1,108 @@
+{
+  "arena_id": "arena-example-001",
+  "candidate_participant_id": "candidate",
+  "declared_evidence_level": "L2",
+  "mode": "development",
+  "participants": [
+    {
+      "adapter": {
+        "kind": "result_ingest",
+        "native_execution": true,
+        "official_implementation": true
+      },
+      "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "display_name": "Baseline",
+      "governance_capabilities": [
+        "version_identity",
+        "rollback"
+      ],
+      "id": "baseline",
+      "role": "baseline",
+      "version": "v1"
+    },
+    {
+      "adapter": {
+        "kind": "result_ingest",
+        "native_execution": true,
+        "official_implementation": true
+      },
+      "artifact_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "display_name": "Candidate",
+      "governance_capabilities": [
+        "version_identity",
+        "candidate_lineage",
+        "data_isolation",
+        "evidence_manifest",
+        "rollback",
+        "release_gate"
+      ],
+      "id": "candidate",
+      "role": "candidate",
+      "version": "v2"
+    }
+  ],
+  "protocol": {
+    "bootstrap_samples": 1000,
+    "bootstrap_seed": 20260802,
+    "budget": {
+      "ceiling_per_participant": 16,
+      "equal_budget": true,
+      "metric": "candidate_evaluations",
+      "relative_tolerance": 0.0
+    },
+    "dimensions": [
+      {
+        "id": "hidden_quality",
+        "weight": 0.3
+      },
+      {
+        "id": "worst_slice",
+        "weight": 0.2
+      },
+      {
+        "id": "hard_constraint_pass",
+        "weight": 0.15
+      },
+      {
+        "id": "redteam_pass",
+        "weight": 0.15
+      },
+      {
+        "id": "regression_retention",
+        "weight": 0.1
+      },
+      {
+        "id": "cost_efficiency",
+        "weight": 0.1
+      }
+    ],
+    "governance_requirements": [
+      "version_identity",
+      "candidate_lineage",
+      "data_isolation",
+      "evidence_manifest",
+      "rollback",
+      "release_gate"
+    ],
+    "hard_gate_categories": [
+      "safety",
+      "truthfulness",
+      "permission",
+      "data_integrity",
+      "sealed_leakage"
+    ],
+    "repetitions": 2,
+    "required_splits": [
+      "hidden_iid",
+      "hidden_ood",
+      "redteam",
+      "regression"
+    ],
+    "sealed_data_visibility": "verifier_only",
+    "seeds": [
+      101,
+      202
+    ]
+  },
+  "schema_version": "teleiosis.arena_spec.v1"
+}

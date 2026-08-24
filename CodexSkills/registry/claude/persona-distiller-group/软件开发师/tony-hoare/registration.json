@@ -1,0 +1,29 @@
+{
+  "canonical_key": "public:tonyhoare",
+  "canonical_name": "Tony Hoare",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "tony-hoare",
+  "subject_uid": "person-843351440a0dfd7a",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/tony-hoare-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T16:39:43Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.6",
+      "distilled_with_note": "首次落盘提交 526272e6",
+      "distilled_with_source": "git-first-commit",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "476abae45f73d685a361ed4232c0b1c91f7c9ddf53c550dc2c702629df33b8ce",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/tony-hoare-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "b7c7f3c8e975a9af64b3c63de1398a994c40128878cc329d02eba575f44e4b8c",
+      "runtime_size_bytes": 68717,
+      "size_bytes": 75677
+    }
+  ]
+}

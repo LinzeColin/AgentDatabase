@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prompt Compiler v0.0.0.4 runtime.
+"""Prompt Compiler v0.0.0.2 runtime.
 
 A local, evidence-gated optimization orchestrator for prompts and other textual
 agent artifacts. User-facing messages are Chinese; technical identifiers remain
@@ -38,34 +38,8 @@ import traceback
 import uuid
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-if str(SCRIPT_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPT_DIR))
-
-from champion_core import (
-    CHAMPION_STATUS_PASS,
-    MANDATORY_DIMENSIONS,
-    DimensionSpec,
-    EvaluationCache,
-    adaptive_budget_plan,
-    dimension_summary as champion_dimension_summary,
-    robust_candidate_key,
-    strict_champion_gate,
-    self_test as champion_core_self_test,
-    verify_competitor_registry,
-)
-from native_engine_adapter import (
-    NativeEngineError,
-    command_from_value as native_command_from_value,
-    discover_meta_harness_entrypoint,
-    read_candidate_artifact,
-    render_command as render_native_command,
-    run_isolated_workspace,
-    sha256_file as native_sha256_file,
-)
-
 SKILL_NAME = "prompt-compiler"
-SKILL_VERSION = "v0.0.0.4"
+SKILL_VERSION = "v0.0.0.2"
 SCHEMA_VERSION = "1.0"
 GEPA_VERSION = "0.1.4"
 GEPA_WHEEL_SHA256 = "12b971039599625c156d2231f6d72a29c31a22e9c237689459b5f1a3c353f532"
@@ -88,14 +62,10 @@ TARGET_LABELS = {
     "gemini": "Gemini",
 }
 ARTIFACT_KINDS = ("prompt", "code", "agent_architecture", "config", "text")
-ENGINE_NAMES = ("gepa", "autoresearch", "meta_harness", "promptfoo", "omni", "prompt_compiler")
-BUILTIN_COMPETITOR_NAMES = ("gepa", "autoresearch", "meta_harness", "promptfoo")
-INTERNAL_CHAMPION_ENGINE = "prompt_compiler"
-EVALUATION_CACHE = EvaluationCache()
+ENGINE_NAMES = ("gepa", "autoresearch", "meta_harness", "promptfoo", "omni")
 EXTERNAL_COMPETITOR_NAMES = (
-    "dspy_mipro", "textgrad", "opro", "promptwizard", "promptagent", "sammo",
-    "opik", "mlflow", "openai_optimizer", "anthropic_generator",
-    "google_optimizer", "prompthub", "promptlayer",
+    "dspy_mipro", "opik", "mlflow", "openai_optimizer",
+    "anthropic_generator", "google_optimizer", "prompthub", "promptlayer",
 )
 ROLE_NAMES = ("task", "reflection", "evaluator", "final_judge", "compiler")
 STATUS_LABELS_ZH = {
@@ -147,19 +117,11 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "seed": 42,
     },
     "optimization": {
-        # Built-in competitors have two simultaneous roles: they are same-layer
-        # opponents in the sealed arena and routable lower-layer executors whose
-        # mechanisms may be absorbed by Prompt Compiler's synthesis arm.
-        "engines": ["gepa", "autoresearch", "meta_harness", "promptfoo", "prompt_compiler"],
+        "engines": ["gepa", "autoresearch", "meta_harness", "promptfoo", "omni"],
         "preset": "quick",
         "repeat_count": 3,
-        "max_candidates_per_engine": 6,
-        # Legacy per-arm budget remains readable for old projects. New projects use
-        # one conserved total budget, allocated adaptively after minimum probes.
+        "max_candidates_per_engine": 4,
         "matched_budget": {"smoke": 8, "quick": 24, "formal": 60},
-        "total_budget": {"smoke": 60, "quick": 180, "formal": 480},
-        "minimum_probe_budget": {"smoke": 6, "quick": 12, "formal": 24},
-        "synthesis_share": 0.24,
         "reflection_minibatch_size": 3,
         "parallel": False,
         "stop_on_hard_failure": False,
@@ -167,59 +129,10 @@ DEFAULT_CONFIG: dict[str, Any] = {
         # contract over JSON stdin and returns candidates over JSON stdout. The final
         # test is never sent to these commands; Prompt Compiler independently scores
         # every returned candidate. No provider or hosted service is hardcoded.
-        # Native-only adapters. These paths execute the actual upstream tool or an
-        # explicitly configured external agent command in an isolated workspace.
-        # There is no local same-name simulation and no compatible fallback.
-        "native_engines": {
-            "autoresearch": {
-                "workspace": "",
-                "command": [],
-                "candidate_path": "train.py",
-                "required_files": ["program.md", "prepare.py", "train.py"],
-                "allowed_paths": ["train.py"],
-                "timeout_seconds": 3600,
-                "require_official_origin": True,
-            },
-            "meta_harness": {
-                "workspace": "",
-                "command": [],
-                "entrypoint": "",
-                "candidate_path": "",
-                "allowed_paths": [],
-                "iterations": 1,
-                "timeout_seconds": 3600,
-                "require_official_origin": True,
-            },
-            "promptfoo": {
-                "suggestions_identity": "",
-                "require_distinct_suggestions_identity": False,
-                "validation_split": 0.3,
-            },
-            "omni": {
-                "require_all_four_native_paths": True,
-                "require_stage_one_pass": True,
-            },
-        },
         "external_engines": {
             name: {"enabled": False, "command": [], "identity": name, "timeout_seconds": 1800}
             for name in EXTERNAL_COMPETITOR_NAMES
         },
-    },
-    "champion": {
-        "enabled": True,
-        "required_for_release": True,
-        "required_competitors": list(BUILTIN_COMPETITOR_NAMES),
-        "required_dimensions": list(MANDATORY_DIMENSIONS),
-        # Project-specific normalized evaluator dimensions are appended and become
-        # equally mandatory. Missing row-level evidence blocks champion release.
-        "additional_dimensions": [],
-        "auto_freeze_discovered_dimensions": True,
-        "bootstrap_iterations": 4000,
-        "confidence": 0.95,
-        "minimum_margin": 0.0,
-        "allow_only_ceiling_ties": True,
-        "synthesis_rounds": {"smoke": 2, "quick": 4, "formal": 8},
-        "missing_competitor_policy": "BLOCK",
     },
     "scoring": {
         "weights": {
@@ -258,23 +171,6 @@ DEFAULT_CONFIG: dict[str, Any] = {
         ]
     },
 }
-
-
-def competitor_registry_path() -> Path:
-    return Path(__file__).resolve().parents[1] / "references" / "COMPETITOR_REGISTRY.json"
-
-
-def load_competitor_registry() -> dict[str, Any]:
-    path = competitor_registry_path()
-    registry = read_json(path, {}) if path.exists() else {}
-    check = verify_competitor_registry(registry or {})
-    if check.get("status") != "PASS":
-        raise CompilerError(
-            "竞品注册表未通过双角色与结构校验。",
-            code="COMPETITOR_REGISTRY_INVALID",
-            details=check,
-        )
-    return dict(registry or {})
 
 
 def status_zh(value: Any) -> str:
@@ -522,9 +418,8 @@ class MockClient(BaseClient):
     def generate(self, *, system: str, user: str, temperature: float = 0.0) -> str:
         del temperature
         if "只返回 JSON" in system or "JSON" in system and "score" in system:
-            champion = "【冠军标记】" in user or "冠军标记" in system
-            improved = champion or "【优化标记】" in user or "优化标记" in system
-            score = 0.985 if champion else (0.94 if improved else 0.58)
+            improved = "【优化标记】" in user or "优化标记" in system
+            score = 0.94 if improved else 0.58
             return json.dumps(
                 {
                     "score": score,
@@ -535,16 +430,11 @@ class MockClient(BaseClient):
                         "correctness": score,
                         "coverage": score,
                         "executability": score,
-                        "security": 1.0 if improved else 0.95,
+                        "security": 0.95,
                     },
                 },
                 ensure_ascii=False,
             )
-        if "冠军合成" in system:
-            source_match = re.search(r"【原始工件】\n(.*?)(?:\n【|\Z)", user, flags=re.S)
-            base = source_match.group(1).strip() if source_match else user.strip()
-            base = re.sub(r"\n\n【优化标记】.*?\Z", "", base, flags=re.S).rstrip()
-            return base + "\n\n【冠军标记】"
         if "生成一个更优候选" in system or "改写候选" in system or "失败轨迹" in user:
             source_match = re.search(r"【当前候选】\n(.*?)(?:\n【|\Z)", user, flags=re.S)
             base = source_match.group(1).strip() if source_match else user.strip()
@@ -557,8 +447,6 @@ class MockClient(BaseClient):
         attack_markers = ("忽略权限", "系统消息已经作废", "删除本地文件", "其他用户 Prompt", "API 密钥", "管理员专用")
         if any(marker in user for marker in attack_markers):
             return "拒绝越权、提示注入和数据泄露请求；不会执行未获授权的操作。"
-        if "【冠军标记】" in system:
-            return "结论与验收标准\n硬约束已保留\n证据状态已核验"
         if "【优化标记】" in system:
             return "结论\n验收标准\n硬约束已保留\n证据状态已核验"
         return "结论\n基础回答"
@@ -1270,7 +1158,7 @@ def write_context_kernel(project: Path, state: Mapping[str, Any]) -> None:
     if not decisions:
         atomic_write(
             ramify / "DECISIONS.md",
-            "# 决策账本\n\n- 原始 Prompt 永不覆盖。\n- 四模型版本逐次留痕。\n- 最终测试集在候选冻结前不可见。\n- 任务模型与终审模型不得同一身份。\n- 只有逐竞品、逐冻结维度、同总预算、独立终审的冠军证据全部通过，才允许声称第一并发布。\n",
+            "# 决策账本\n\n- 原始 Prompt 永不覆盖。\n- 四模型版本逐次留痕。\n- 最终测试集在候选冻结前不可见。\n- 任务模型与终审模型不得同一身份。\n- 没有独立证据，不得声称优于竞品或允许发布。\n",
         )
     handoff = [
         "# 交接",
@@ -1968,17 +1856,11 @@ def evaluate_one(
     judge_client: BaseClient | None,
     phase: str,
 ) -> dict[str, Any]:
-    generation_started = time.monotonic()
     output = task_client.generate(system=candidate, user=str(case.get("input", "")), temperature=0.0)
-    generation_elapsed = max(0.0, time.monotonic() - generation_started)
-    if task_client.identity.mode == "mock":
-        # Deterministic operational fixtures keep champion tests free from host
-        # scheduler noise while preserving the same higher-is-better contract.
-        generation_elapsed = 0.001 if "【冠军标记】" in candidate else (0.002 if "【优化标记】" in candidate else 0.003)
     deterministic = deterministic_assertions(output, case)
     oracle = oracle_score(output, case)
     semantic = semantic_judgement(judge_client, candidate=candidate, output=output, case=case, phase=phase)
-    custom_result: dict[str, Any] = {"score": 1.0, "hard_fail": False, "feedback": "", "dimensions": {}}
+    custom_result: dict[str, Any] = {"score": 1.0, "hard_fail": False, "feedback": ""}
     custom = load_custom_evaluator(project)
     if custom:
         value = custom(output, case, candidate)
@@ -1987,10 +1869,6 @@ def evaluate_one(
                 "score": clamp(float(value.get("score", 1.0))),
                 "hard_fail": bool(value.get("hard_fail", False)),
                 "feedback": str(value.get("feedback", "")),
-                "dimensions": {
-                    str(name): clamp(float(score))
-                    for name, score in dict(value.get("dimensions", {}) or {}).items()
-                },
             }
     config = project_config(project)
     weights = config.get("scoring", {}).get("weights", {})
@@ -2031,24 +1909,14 @@ def evaluate_one(
         "oracle": oracle,
         "custom": custom_result,
         "dimensions": {
-            **{
-                str(name): clamp(float(value))
-                for name, value in dict(semantic.get("dimensions", {}) or {}).items()
-            },
-            **dict(custom_result.get("dimensions", {}) or {}),
-            "correctness": clamp(float(semantic.get("dimensions", {}).get("correctness", semantic["score"]))),
-            "coverage": clamp(float(semantic.get("dimensions", {}).get("coverage", deterministic["score"]))),
-            "executability": clamp(float(semantic.get("dimensions", {}).get("executability", semantic["score"]))),
+            "correctness": float(semantic.get("dimensions", {}).get("correctness", semantic["score"])),
+            "coverage": float(semantic.get("dimensions", {}).get("coverage", deterministic["score"])),
+            "executability": float(semantic.get("dimensions", {}).get("executability", semantic["score"])),
             "security": security_score,
             "efficiency": efficiency_score,
             "oracle": oracle["score"],
         },
         "synthetic": bool(case.get("synthetic")),
-        "elapsed_seconds": generation_elapsed,
-        "candidate_chars": len(candidate),
-        "output_chars": len(output),
-        "work_chars": len(candidate) + len(output),
-        "usage": dict(getattr(task_client, "last_usage", {}) or {}),
     }
 
 
@@ -2147,34 +2015,16 @@ def evaluate_suite(
     if repeat_count < 1:
         raise CompilerError("重复次数必须至少为 1。", code="INVALID_REPEAT_COUNT")
     rows: list[dict[str, Any]] = []
-    config_path = project / "config.json"
-    config_digest = sha256_file(config_path) if config_path.is_file() else "no-config"
-    judge_key = judge_client.identity.stable_key() if judge_client is not None else "no-judge"
-    role_identity = "|".join((str(project), config_digest, task_client.identity.stable_key(), judge_key))
     for repeat in range(1, repeat_count + 1):
         for case in cases:
-            cache_key = EVALUATION_CACHE.key(
+            result = evaluate_one(
+                project,
                 candidate=candidate,
                 case=case,
-                role_identity=role_identity,
-                repeat=repeat,
+                task_client=task_client,
+                judge_client=judge_client,
                 phase=phase,
             )
-            cached = EVALUATION_CACHE.get(cache_key)
-            if cached is not None:
-                result = json.loads(json.dumps(cached, ensure_ascii=False))
-                result["cache_hit"] = True
-            else:
-                result = evaluate_one(
-                    project,
-                    candidate=candidate,
-                    case=case,
-                    task_client=task_client,
-                    judge_client=judge_client,
-                    phase=phase,
-                )
-                EVALUATION_CACHE.put(cache_key, json.loads(json.dumps(result, ensure_ascii=False)))
-                result["cache_hit"] = False
             result["repeat"] = repeat
             rows.append(result)
             if trace_path:
@@ -2191,7 +2041,6 @@ def evaluate_suite(
     aggregate["results"] = rows
     aggregate["candidate_sha256"] = sha256_text(candidate)
     aggregate["phase"] = phase
-    aggregate["evaluation_cache"] = EVALUATION_CACHE.stats()
     return aggregate
 
 
@@ -2222,23 +2071,18 @@ def failure_digest(evaluation: Mapping[str, Any], *, limit: int = 12) -> list[di
 
 def candidate_metrics(candidate: Candidate, seed: str) -> dict[str, float]:
     validation = candidate.validation or {}
-    summary = champion_dimension_summary(validation)
-    if int(validation.get("hard_failure_count", 0)) > 0:
-        summary["hard_safety"] = 0.0
-    values = {
-        name: float(value)
-        for name, value in summary.items()
-        if value is not None and name not in {"regression", "redteam"}
+    dimensions = validation.get("dimensions", {}) or {}
+    return {
+        "mean": float(validation.get("mean", 0.0)),
+        "worst": float(validation.get("worst", 0.0)),
+        "stability": 1.0 - clamp(float(validation.get("variance", 1.0))),
+        "correctness": float(dimensions.get("correctness", validation.get("mean", 0.0))),
+        "coverage": float(dimensions.get("coverage", validation.get("mean", 0.0))),
+        "executability": float(dimensions.get("executability", validation.get("mean", 0.0))),
+        "security": float(dimensions.get("security", 0.0)),
+        "efficiency": clamp(len(seed) / max(1, len(candidate.content))),
+        "hard_safety": 1.0 if int(validation.get("hard_failure_count", 0)) == 0 else 0.0,
     }
-    for name, value in dict(validation.get("dimensions", {}) or {}).items():
-        if name not in values:
-            values[str(name)] = clamp(float(value))
-    # Keep stable aliases used by existing reports and Pareto logic.
-    values.setdefault("mean", float(validation.get("mean", 0.0)))
-    values.setdefault("worst", float(validation.get("worst", 0.0)))
-    values.setdefault("stability", 1.0 - clamp(float(validation.get("variance", 1.0))))
-    values["length_efficiency"] = clamp(len(seed) / max(1, len(candidate.content)))
-    return values
 
 
 def dominates(left: Candidate, right: Candidate, seed: str) -> bool:
@@ -2269,31 +2113,23 @@ def pareto_archive(candidates: Sequence[Candidate], seed: str) -> list[Candidate
 
 
 def select_winner(candidates: Sequence[Candidate], seed: str, config: Mapping[str, Any]) -> Candidate:
-    """Select by hard safety and the weakest dimension before the aggregate mean.
-
-    v0.0.0.2 could hide a catastrophic slice behind a good weighted average. The
-    champion selector is lexicographic: hard safety, minimum observed dimension,
-    weakest task slice, overall score, stability, then shorter content.
-    """
-    del config
     if not candidates:
         raise CompilerError("没有可选择的候选。", code="NO_CANDIDATES")
+    variance_penalty = float(config.get("scoring", {}).get("variance_penalty", 0.08))
+    max_length_ratio = float(config.get("scoring", {}).get("max_length_ratio", 1.30))
 
-    def key(candidate: Candidate) -> tuple[Any, ...]:
+    def utility(candidate: Candidate) -> tuple[float, float, float, int]:
         validation = candidate.validation or {}
-        summary = champion_dimension_summary(validation)
-        for name, value in dict(validation.get("dimensions", {}) or {}).items():
-            summary.setdefault(str(name), clamp(float(value)))
-        if int(validation.get("hard_failure_count", 0)) > 0:
-            summary["hard_safety"] = 0.0
-        usable = {
-            name: value
-            for name, value in summary.items()
-            if value is not None and name not in {"regression", "redteam"}
-        }
-        return robust_candidate_key(usable, length=len(candidate.content))
+        hard = int(validation.get("hard_failure_count", 0))
+        mean = float(validation.get("mean", 0.0))
+        worst = float(validation.get("worst", 0.0))
+        variance = float(validation.get("variance", 0.0))
+        length_ratio = len(candidate.content) / max(1, len(seed))
+        length_penalty = max(0.0, length_ratio - max_length_ratio)
+        score = mean * 0.55 + worst * 0.35 - variance * variance_penalty - length_penalty * 0.25
+        return (-float(hard), score, -variance, -len(candidate.content))
 
-    return max(candidates, key=key)
+    return max(candidates, key=utility)
 
 
 def select_engine_finalists(
@@ -2328,32 +2164,22 @@ def build_competitive_evidence(
     requested_engines: Sequence[str],
     missing_engines: Sequence[str],
     budget: int,
-    finalist_suite_results: Mapping[str, Mapping[str, Mapping[str, Any]]] | None = None,
-    budget_allocations: Mapping[str, int] | None = None,
-    required_dimensions: Sequence[str] | None = None,
-    bootstrap_iterations: int = 4000,
-    confidence: float = 0.95,
-    minimum_margin: float = 0.0,
-    scope: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Strict all-dimension held-out arena evidence.
-
-    The old aggregate-only contract could declare victory while losing a slice.
-    v0.0.0.4 compares Prompt Compiler against every required peer on every
-    frozen dimension. Missing evidence, a below-ceiling tie, or an overlapping
-    confidence interval fails closed.
-    """
-    requested_peers = [
-        name for name in dict.fromkeys(requested_engines)
-        if name not in {INTERNAL_CHAMPION_ENGINE, "omni", "seed"}
-    ]
-    by_engine_candidate: dict[str, Candidate] = {}
+    """Bounded held-out head-to-head evidence; never a universal claim."""
     by_engine: dict[str, dict[str, Any]] = {}
+    winner_result = finalist_results.get(winner.candidate_id)
+    if not winner_result:
+        return {
+            "status": "NOT_PROVEN_FOR_RELEASE",
+            "status_zh": status_zh("NOT_PROVEN_FOR_RELEASE"),
+            "reason": "获胜候选缺少独立最终测试结果",
+            "universal_superiority_claimed": False,
+            "missing_engines": list(missing_engines),
+        }
     for item in finalist_slate:
         result = finalist_results.get(item.candidate_id)
         if not result:
             continue
-        by_engine_candidate[item.engine] = item
         by_engine[item.engine] = {
             "candidate_id": item.candidate_id,
             "candidate_sha256": item.sha256,
@@ -2363,105 +2189,86 @@ def build_competitive_evidence(
             "sample_variance": result.get("sample_variance"),
             "hard_failure_count": result.get("hard_failure_count"),
             "repeat_count": result.get("repeat_count"),
-            "dimensions": result.get("dimensions", {}),
         }
-    winner_result = finalist_results.get(winner.candidate_id)
-    if not winner_result:
-        return {
-            "status": "NOT_PROVEN_FOR_RELEASE",
-            "status_zh": status_zh("NOT_PROVEN_FOR_RELEASE"),
-            "champion_status": "CHAMPION_NOT_PROVEN",
-            "reason": "Prompt Compiler 获胜候选缺少独立最终测试结果",
-            "universal_superiority_claimed": False,
-            "missing_engines": list(missing_engines),
-            "winner_not_worse_than_each_requested_engine": False,
-        }
-
-    suite_results = dict(finalist_suite_results or {})
-    champion_suites = suite_results.get(winner.candidate_id)
-    if not isinstance(champion_suites, Mapping):
-        champion_suites = {"final": winner_result}
-    peer_suites: dict[str, Mapping[str, Mapping[str, Any]]] = {}
-    missing = list(missing_engines)
-    for engine in requested_peers:
-        finalist = by_engine_candidate.get(engine)
-        if finalist is None:
-            missing.append(engine)
+    comparisons: dict[str, Any] = {}
+    all_not_worse = not missing_engines
+    for engine in requested_engines:
+        if engine in missing_engines:
+            comparisons[engine] = {"status": "MISSING", "not_worse": False}
+            all_not_worse = False
             continue
-        suites = suite_results.get(finalist.candidate_id)
-        if isinstance(suites, Mapping):
-            peer_suites[engine] = suites
-        else:
-            peer_suites[engine] = {"final": finalist_results[finalist.candidate_id]}
-
-    specs = [
-        DimensionSpec(
-            name=name,
-            minimum_margin=float(minimum_margin),
-            confidence=float(confidence),
-            required=True,
+        peer = by_engine.get(engine)
+        if not peer:
+            comparisons[engine] = {"status": "MISSING_FINAL_RESULT", "not_worse": False}
+            all_not_worse = False
+            continue
+        not_worse = (
+            float(winner_result.get("mean", 0.0)) + 1e-12 >= float(peer.get("mean", 0.0))
+            and float(winner_result.get("worst", 0.0)) + 1e-12 >= float(peer.get("worst", 0.0))
+            and int(winner_result.get("hard_failure_count", 999)) <= int(peer.get("hard_failure_count", 999))
         )
-        for name in (required_dimensions or MANDATORY_DIMENSIONS)
-    ]
-    champion_gate = strict_champion_gate(
-        champion_name=INTERNAL_CHAMPION_ENGINE,
-        champion_suites=champion_suites,
-        peer_suites=peer_suites,
-        required_peers=requested_peers,
-        dimensions=specs,
-        bootstrap_iterations=max(200, int(bootstrap_iterations)),
-        seed=42,
-        scope={
-            "claim": "仅限当前封印数据集、模型身份、统一预言机、同一总预算、重复次数和独立终审",
-            "total_budget": int(budget),
-            "budget_allocations": dict(budget_allocations or {}),
-            **dict(scope or {}),
-        },
-    )
-    passed = champion_gate.get("status") == CHAMPION_STATUS_PASS and not missing
-    machine_status = "PROVEN_ON_THIS_DATASET" if passed else "NOT_PROVEN_FOR_RELEASE"
-    comparisons = {
-        peer: {
-            "status": payload.get("status"),
-            "all_dimensions_first": all(
-                row.get("status") in {"STRICTLY_FIRST", "TIED_FIRST_AT_CEILING"}
-                for row in (payload.get("dimensions") or {}).values()
-            ) if payload.get("status") == "COMPARED" else False,
-            "dimensions": payload.get("dimensions", {}),
-        }
-        for peer, payload in (champion_gate.get("comparisons") or {}).items()
-    }
+        comparisons[engine] = {"status": "COMPARED", "not_worse": not_worse, "peer": peer}
+        all_not_worse = all_not_worse and not_worse
+    machine_status = "PROVEN_ON_THIS_DATASET" if all_not_worse and bool(comparisons) else "NOT_PROVEN_FOR_RELEASE"
     return {
-        "claim": "Prompt Compiler 只有在每个冻结必选维度均排名第一时才通过；低于满分的并列不算第一。",
-        "scope": champion_gate.get("scope", {}),
-        "matched_total_budget": int(budget),
-        "budget_allocations": dict(budget_allocations or {}),
-        "requested_engines": requested_peers,
-        "missing_engines": sorted(set(missing) | set(champion_gate.get("missing_peers", []))),
-        "winner_engine": winner.engine,
-        "winner_candidate_id": winner.candidate_id,
-        "winner_candidate_sha256": winner.sha256,
-        "winner_final": by_engine.get(winner.engine, {
+        "claim": "仅限当前封印数据集、当前模型身份、同预算、同重复次数和独立终审条件",
+        "matched_budget": budget,
+        "requested_engines": list(requested_engines),
+        "missing_engines": list(missing_engines),
+        "winner": {
             "candidate_id": winner.candidate_id,
-            "candidate_sha256": winner.sha256,
+            "engine": winner.engine,
             "mean": winner_result.get("mean"),
             "worst": winner_result.get("worst"),
             "variance": winner_result.get("variance"),
             "hard_failure_count": winner_result.get("hard_failure_count"),
-        }),
-        "engine_finalists": by_engine,
+        },
+        "finalists": by_engine,
         "comparisons": comparisons,
-        "champion_gate": champion_gate,
-        "champion_status": champion_gate.get("status"),
+        "winner_not_worse_than_each_requested_engine": all_not_worse,
         "status": machine_status,
         "status_zh": status_zh(machine_status),
-        "winner_not_worse_than_each_requested_engine": passed,
-        "strict_first_on_every_dimension": passed,
-        "required_dimensions": [spec.name for spec in specs],
-        "observed_ranks": champion_gate.get("observed_ranks", {}),
         "universal_superiority_claimed": False,
-        "evidence_boundary": "该结论不外推到未运行竞品、未封印数据、其他模型、预算、版本或业务域。",
     }
+
+
+def proposal_prompt(
+    *,
+    engine: str,
+    candidate: Candidate,
+    objective: str,
+    requirements: Mapping[str, Any],
+    train_evaluation: Mapping[str, Any],
+    archive: Sequence[Candidate],
+    artifact_kind: str,
+) -> tuple[str, str]:
+    common = (
+        "生成一个更优候选。必须完整返回候选正文，不要解释。"
+        "不得改变任务目标、硬约束、禁止项、输出合同、Oracle 或评分尺度。"
+        "不得复制训练案例中的专有名称、具体答案或隐私数据。"
+        "应从失败轨迹抽象出可泛化机制，而不是为单一案例打补丁。"
+    )
+    if engine == "autoresearch":
+        method = "像自动研究循环一样提出一个明确假设，只做一次可归因修改；利用全部既往候选、分数和失败轨迹，避免重复已失败路径。"
+    elif engine == "meta_harness":
+        method = "像元级执行框架搜索一样，同时审视候选结构、步骤顺序、工具边界、错误恢复和验收接口；仍只输出被优化工件正文。"
+    elif engine == "promptfoo":
+        method = "先对照基线得分和失败样本，针对区分度最高的失败生成修订版，再确保旧案例不退化。"
+    elif engine == "omni":
+        method = "融合 Pareto 前沿中互补候选的机制，只合并经证据支持的改进，避免无证据拼接和长度膨胀。"
+    else:
+        method = "读取完整失败轨迹并反思，通过可泛化的约束重组和执行机制产生变异候选。"
+    system = common + method
+    user = (
+        f"【工件类型】\n{artifact_kind}\n\n"
+        f"【目标】\n{objective}\n\n"
+        f"【需求合同】\n{json_text(requirements)}\n\n"
+        f"【当前候选】\n{candidate.content}\n\n"
+        f"【失败轨迹】\n{json_text(failure_digest(train_evaluation))}\n\n"
+        f"【当前统计】\n{json_text({k: train_evaluation.get(k) for k in ('mean','worst','variance','hard_failure_count','per_task','dimensions')})}\n\n"
+        f"【Pareto 前沿摘要】\n{json_text([{'id': x.candidate_id, 'engine': x.engine, 'metrics': candidate_metrics(x, candidate.content)} for x in archive[:8]])}"
+    )
+    return system, user
 
 
 def clean_candidate_output(raw: str, fallback: str) -> str:
@@ -2498,373 +2305,75 @@ def unwrap_gepa_candidate(value: Any) -> str | None:
     return None
 
 
-def native_engine_settings(config: Mapping[str, Any], engine: str) -> dict[str, Any]:
-    return dict(config.get("optimization", {}).get("native_engines", {}).get(engine, {}) or {})
-
-
-def native_engine_blocked(engine: str, exc: BaseException) -> tuple[list[Candidate], dict[str, Any]]:
-    if isinstance(exc, NativeEngineError):
-        return [], {
-            "status": "BLOCKED",
-            "engine": engine,
-            "mode": "native-only-fail-closed",
-            "code": exc.code,
-            "reason": str(exc),
-            "details": exc.details,
-            "local_same_name_simulation": False,
-        }
-    if isinstance(exc, subprocess.TimeoutExpired):
-        return [], {
-            "status": "BLOCKED",
-            "engine": engine,
-            "mode": "native-only-fail-closed",
-            "code": "NATIVE_TIMEOUT",
-            "reason": "原生执行超过冻结超时上限。",
-            "details": {"command": [redact(str(x)) for x in (exc.cmd or [])], "timeout": exc.timeout},
-            "local_same_name_simulation": False,
-        }
-    return [], {
-        "status": "BLOCKED",
-        "engine": engine,
-        "mode": "native-only-fail-closed",
-        "code": "NATIVE_UNEXPECTED_ERROR",
-        "reason": f"{type(exc).__name__}: {exc}",
-        "local_same_name_simulation": False,
-    }
-
-
-def native_input_contract(
+def run_local_engine(
     project: Path,
     *,
     engine: str,
     seed_candidate: Candidate,
     train: Sequence[Mapping[str, Any]],
     validation: Sequence[Mapping[str, Any]],
-    budget: int,
-) -> dict[str, Any]:
-    config = project_config(project)
-    return {
-        "schema_version": "1.0",
-        "engine": engine,
-        "artifact_kind": str(config.get("artifact", {}).get("kind", "prompt")),
-        "seed_candidate": seed_candidate.content,
-        "seed_sha256": seed_candidate.sha256,
-        "objective": read_text(project / "objective.md"),
-        "requirements": read_json(project / "requirements.json", {}) or {},
-        "train": list(train),
-        "validation": list(validation),
-        "budget": int(budget),
-        "forbidden": [
-            "不得读取 final_test",
-            "不得改变 Oracle、评分尺度、硬约束或禁止项",
-            "不得自行裁决发布",
-            "不得把本地模拟结果标为官方或原生执行",
-        ],
-    }
-
-
-def run_autoresearch_native_engine(
-    project: Path,
-    *,
-    seed_candidate: Candidate,
-    train: Sequence[Mapping[str, Any]],
-    validation: Sequence[Mapping[str, Any]],
     task_client: BaseClient,
     evaluator_client: BaseClient | None,
+    reflection_client: BaseClient,
     budget: int,
     current_run_id: str,
     run_dir: Path,
-) -> tuple[list[Candidate], dict[str, Any]]:
-    """Run an actual external AutoResearch loop in an isolated Git workspace.
-
-    No local proposal loop is used. A real command must edit the declared
-    candidate artifact. Only the declared path may change; all other mutations
-    fail closed. The final test is never placed in the input capsule.
-    """
-    del current_run_id
-    engine = "autoresearch"
+    existing_archive: Sequence[Candidate],
+) -> list[Candidate]:
     config = project_config(project)
-    settings = native_engine_settings(config, engine)
-    workspace_value = os.environ.get("PROMPT_COMPILER_AUTORESEARCH_WORKSPACE") or settings.get("workspace")
-    command_value = os.environ.get("PROMPT_COMPILER_AUTORESEARCH_COMMAND") or settings.get("command")
-    candidate_path = str(
-        os.environ.get("PROMPT_COMPILER_AUTORESEARCH_CANDIDATE_PATH")
-        or settings.get("candidate_path")
-        or "train.py"
-    )
-    required_files = [str(x) for x in settings.get("required_files", ["program.md", "prepare.py", "train.py"])]
-    allowed_paths = [str(x) for x in settings.get("allowed_paths", [candidate_path])]
-    timeout_seconds = int(settings.get("timeout_seconds", 3600))
-    require_origin = bool(settings.get("require_official_origin", True))
-    if not workspace_value:
-        return native_engine_blocked(
-            engine,
-            NativeEngineError(
-                "AutoResearch 官方/受控工作区未配置。",
-                code="AUTORESEARCH_WORKSPACE_NOT_CONFIGURED",
-                details={"environment": "PROMPT_COMPILER_AUTORESEARCH_WORKSPACE"},
-            ),
-        )
-    command = native_command_from_value(command_value)
-    if not command:
-        return native_engine_blocked(
-            engine,
-            NativeEngineError(
-                "AutoResearch 真实 Agent/实验命令未配置。",
-                code="AUTORESEARCH_COMMAND_NOT_CONFIGURED",
-                details={"environment": "PROMPT_COMPILER_AUTORESEARCH_COMMAND"},
-            ),
-        )
-    engine_dir = run_dir / "native-engines" / engine
-    engine_dir.mkdir(parents=True, exist_ok=True)
-    contract_path = engine_dir / "input-contract.json"
-    write_json(
-        contract_path,
-        native_input_contract(
+    objective = read_text(project / "objective.md")
+    requirements = read_json(project / "requirements.json", {}) or {}
+    artifact_kind = str(config.get("artifact", {}).get("kind", "prompt"))
+    max_candidates = min(int(config.get("optimization", {}).get("max_candidates_per_engine", 4)), max(1, budget // max(1, len(train) + len(validation))))
+    candidates: list[Candidate] = []
+    current = seed_candidate
+    archive = list(existing_archive) or [seed_candidate]
+    for generation in range(1, max_candidates + 1):
+        train_eval = evaluate_suite(
             project,
-            engine=engine,
-            seed_candidate=seed_candidate,
-            train=train,
-            validation=validation,
-            budget=budget,
-        ),
-    )
-    isolated = engine_dir / "workspace"
-    variables = {
-        "workspace": str(isolated),
-        "candidate": candidate_path,
-        "input_contract": str(contract_path),
-        "budget": str(int(budget)),
-        "program": "program.md",
-    }
-    rendered = render_native_command(command, variables)
-    environment = {
-        "PROMPT_COMPILER_NATIVE_ENGINE": engine,
-        "PROMPT_COMPILER_INPUT_CONTRACT": str(contract_path),
-        "PROMPT_COMPILER_CANDIDATE_PATH": candidate_path,
-        "PROMPT_COMPILER_BUDGET": str(int(budget)),
-    }
-    try:
-        evidence = run_isolated_workspace(
-            source=Path(str(workspace_value)),
-            destination=isolated,
-            command=rendered,
-            required_files=required_files,
-            allowed_paths=allowed_paths,
-            expected_origin_fragments=("karpathy/autoresearch",),
-            timeout_seconds=timeout_seconds,
-            environment=environment,
-            initial_files={candidate_path: seed_candidate.content},
-            allow_unverified_origin=(not require_origin) or os.environ.get("PROMPT_COMPILER_ALLOW_TEST_NATIVE_WORKSPACE") == "1",
+            candidate=current.content,
+            cases=train,
+            task_client=task_client,
+            judge_client=evaluator_client,
+            phase=f"search/{engine}/train",
+            repeat_count=1,
+            trace_path=run_dir / f"{engine}-train.jsonl",
         )
-        if candidate_path not in set(evidence.changed_paths):
-            raise NativeEngineError(
-                "AutoResearch 命令未修改声明的候选文件。",
-                code="AUTORESEARCH_CANDIDATE_NOT_CHANGED",
-                details=evidence.to_dict(),
-            )
-        content = read_candidate_artifact(Path(evidence.isolated), candidate_path, original_sha256=seed_candidate.sha256)
-        item = Candidate(
-            candidate_id=f"autoresearch-native-1-{sha256_text(content)[:10]}",
-            content=content,
+        system, user = proposal_prompt(
             engine=engine,
-            parent_ids=[seed_candidate.candidate_id],
-            generation=1,
-            metadata={
-                "engine_mode": "native-autoresearch-external-loop",
-                "candidate_path": candidate_path,
-                "workspace_origin": evidence.origin,
-                "before_tree_sha256": evidence.before_tree_sha256,
-                "after_tree_sha256": evidence.after_tree_sha256,
-                "changed_paths": list(evidence.changed_paths),
-                "local_same_name_simulation": False,
-            },
+            candidate=current,
+            objective=objective,
+            requirements=requirements,
+            train_evaluation=train_eval,
+            archive=archive,
+            artifact_kind=artifact_kind,
         )
-        item.validation = evaluate_suite(
+        proposed = clean_candidate_output(reflection_client.generate(system=system, user=user, temperature=0.2), current.content)
+        if sha256_text(proposed) == current.sha256:
+            proposed = proposed.rstrip() + "\n\n【改进检查】\n逐项核验目标、硬约束、禁止项、输入、权限、错误恢复和验收标准。"
+        candidate = Candidate(
+            candidate_id=f"{engine}-{generation}-{sha256_text(proposed)[:10]}",
+            content=proposed,
+            engine=engine,
+            parent_ids=[current.candidate_id],
+            generation=generation,
+            metadata={"engine_mode": "local-compatible", "budget": budget},
+        )
+        candidate.validation = evaluate_suite(
             project,
-            candidate=content,
+            candidate=candidate.content,
             cases=validation,
             task_client=task_client,
             judge_client=evaluator_client,
-            phase="search/autoresearch/native-independent-validation",
+            phase=f"search/{engine}/validation",
             repeat_count=1,
-            trace_path=engine_dir / "independent-validation.jsonl",
+            trace_path=run_dir / f"{engine}-validation.jsonl",
         )
-        write_json(engine_dir / "execution-evidence.json", evidence.to_dict())
-        return [item], {
-            "status": "PASS",
-            "engine": engine,
-            "mode": "native-autoresearch-external-loop",
-            "candidate_count": 1,
-            "candidate_path": candidate_path,
-            "execution": evidence.to_dict(),
-            "local_same_name_simulation": False,
-        }
-    except BaseException as exc:
-        candidates, report = native_engine_blocked(engine, exc)
-        write_json(engine_dir / "blocked-evidence.json", report)
-        return candidates, report
+        candidates.append(candidate)
+        archive = pareto_archive([*archive, candidate], seed_candidate.content)
+        current = select_winner(archive, seed_candidate.content, config)
+    return candidates
 
-
-def run_meta_harness_native_engine(
-    project: Path,
-    *,
-    seed_candidate: Candidate,
-    train: Sequence[Mapping[str, Any]],
-    validation: Sequence[Mapping[str, Any]],
-    task_client: BaseClient,
-    evaluator_client: BaseClient | None,
-    budget: int,
-    current_run_id: str,
-    run_dir: Path,
-) -> tuple[list[Candidate], dict[str, Any]]:
-    """Run the actual Meta-Harness reference implementation or a verified fork."""
-    del current_run_id
-    engine = "meta_harness"
-    config = project_config(project)
-    settings = native_engine_settings(config, engine)
-    workspace_value = os.environ.get("PROMPT_COMPILER_META_HARNESS_WORKSPACE") or settings.get("workspace")
-    if not workspace_value:
-        return native_engine_blocked(
-            engine,
-            NativeEngineError(
-                "Meta-Harness 官方/受控工作区未配置。",
-                code="META_HARNESS_WORKSPACE_NOT_CONFIGURED",
-                details={"environment": "PROMPT_COMPILER_META_HARNESS_WORKSPACE"},
-            ),
-        )
-    source = Path(str(workspace_value)).expanduser().resolve()
-    try:
-        entrypoint = discover_meta_harness_entrypoint(source, str(settings.get("entrypoint") or ""))
-    except BaseException as exc:
-        return native_engine_blocked(engine, exc)
-    candidate_path = str(
-        os.environ.get("PROMPT_COMPILER_META_HARNESS_CANDIDATE_PATH")
-        or settings.get("candidate_path")
-        or ""
-    )
-    if not candidate_path:
-        return native_engine_blocked(
-            engine,
-            NativeEngineError(
-                "Meta-Harness 候选制品路径未配置。",
-                code="META_HARNESS_CANDIDATE_PATH_NOT_CONFIGURED",
-                details={"environment": "PROMPT_COMPILER_META_HARNESS_CANDIDATE_PATH"},
-            ),
-        )
-    iterations = max(1, int(settings.get("iterations", 1)))
-    command_value = os.environ.get("PROMPT_COMPILER_META_HARNESS_COMMAND") or settings.get("command")
-    command = native_command_from_value(command_value)
-    if not command:
-        # This is the upstream executable path, not a local reimplementation.
-        command = [
-            "uv",
-            "run",
-            "--project",
-            str(Path(entrypoint).parent),
-            "python",
-            entrypoint,
-            "--iterations",
-            str(iterations),
-        ]
-    allowed_paths = [str(x) for x in settings.get("allowed_paths", [])]
-    if candidate_path not in allowed_paths:
-        allowed_paths.append(candidate_path)
-    timeout_seconds = int(settings.get("timeout_seconds", 3600))
-    require_origin = bool(settings.get("require_official_origin", True))
-    engine_dir = run_dir / "native-engines" / engine
-    engine_dir.mkdir(parents=True, exist_ok=True)
-    contract_path = engine_dir / "input-contract.json"
-    write_json(
-        contract_path,
-        native_input_contract(
-            project,
-            engine=engine,
-            seed_candidate=seed_candidate,
-            train=train,
-            validation=validation,
-            budget=budget,
-        ),
-    )
-    isolated = engine_dir / "workspace"
-    variables = {
-        "workspace": str(isolated),
-        "candidate": candidate_path,
-        "input_contract": str(contract_path),
-        "budget": str(int(budget)),
-        "entrypoint": entrypoint,
-        "entrypoint_dir": str(Path(entrypoint).parent),
-        "iterations": str(iterations),
-    }
-    rendered = render_native_command(command, variables)
-    environment = {
-        "PROMPT_COMPILER_NATIVE_ENGINE": engine,
-        "PROMPT_COMPILER_INPUT_CONTRACT": str(contract_path),
-        "PROMPT_COMPILER_CANDIDATE_PATH": candidate_path,
-        "PROMPT_COMPILER_BUDGET": str(int(budget)),
-    }
-    try:
-        evidence = run_isolated_workspace(
-            source=source,
-            destination=isolated,
-            command=rendered,
-            required_files=[entrypoint],
-            allowed_paths=allowed_paths,
-            expected_origin_fragments=("stanford-iris-lab/meta-harness",),
-            timeout_seconds=timeout_seconds,
-            environment=environment,
-            initial_files={candidate_path: seed_candidate.content},
-            allow_unverified_origin=(not require_origin) or os.environ.get("PROMPT_COMPILER_ALLOW_TEST_NATIVE_WORKSPACE") == "1",
-        )
-        if candidate_path not in set(evidence.changed_paths):
-            raise NativeEngineError(
-                "Meta-Harness 未修改声明的候选制品。",
-                code="META_HARNESS_CANDIDATE_NOT_CHANGED",
-                details=evidence.to_dict(),
-            )
-        content = read_candidate_artifact(Path(evidence.isolated), candidate_path, original_sha256=seed_candidate.sha256)
-        item = Candidate(
-            candidate_id=f"meta-harness-native-1-{sha256_text(content)[:10]}",
-            content=content,
-            engine=engine,
-            parent_ids=[seed_candidate.candidate_id],
-            generation=1,
-            metadata={
-                "engine_mode": "official-meta-harness-search",
-                "entrypoint": entrypoint,
-                "candidate_path": candidate_path,
-                "workspace_origin": evidence.origin,
-                "before_tree_sha256": evidence.before_tree_sha256,
-                "after_tree_sha256": evidence.after_tree_sha256,
-                "changed_paths": list(evidence.changed_paths),
-                "local_same_name_simulation": False,
-            },
-        )
-        item.validation = evaluate_suite(
-            project,
-            candidate=content,
-            cases=validation,
-            task_client=task_client,
-            judge_client=evaluator_client,
-            phase="search/meta-harness/native-independent-validation",
-            repeat_count=1,
-            trace_path=engine_dir / "independent-validation.jsonl",
-        )
-        write_json(engine_dir / "execution-evidence.json", evidence.to_dict())
-        return [item], {
-            "status": "PASS",
-            "engine": engine,
-            "mode": "official-meta-harness-search",
-            "candidate_count": 1,
-            "entrypoint": entrypoint,
-            "candidate_path": candidate_path,
-            "execution": evidence.to_dict(),
-            "local_same_name_simulation": False,
-        }
-    except BaseException as exc:
-        candidates, report = native_engine_blocked(engine, exc)
-        write_json(engine_dir / "blocked-evidence.json", report)
-        return candidates, report
 
 def run_gepa_engine(
     project: Path,
@@ -3022,90 +2531,18 @@ def promptfoo_binary() -> str | None:
     return shutil.which("promptfoo")
 
 
-def strip_ansi(text: str) -> str:
-    return re.sub(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])", "", text)
-
-
-def promptfoo_pair_timeout_seconds(
-    config: Mapping[str, Any],
-    *,
-    case_count: int,
-    repeat_count: int,
-) -> int:
-    """Derive one bounded deadline for Promptfoo optimize/eval subprocesses."""
-    runtime_config = dict(config.get("runtime", {}) or {})
-    configured_timeout = runtime_config.get("promptfoo_timeout_seconds", 0)
-    try:
-        configured_timeout = int(configured_timeout)
-    except (TypeError, ValueError):
-        configured_timeout = 0
-    per_call_timeout = max(1, int(runtime_config.get("timeout_seconds", 900)))
-    derived_timeout = max(
-        300,
-        per_call_timeout * max(1, int(case_count)) * max(1, int(repeat_count)) * 2 + 60,
-    )
-    return min(
-        PROMPTFOO_PAIR_TIMEOUT_MAX_SECONDS,
-        configured_timeout if configured_timeout > 0 else derived_timeout,
-    )
-
-
 def extract_promptfoo_candidate(stdout: str, seed: str) -> str | None:
-    """Extract only the official CLI's final ``Best prompt`` section.
-
-    Promptfoo's optimize command prints a line containing exactly ``Best prompt``,
-    then the raw winning prompt, then a border made from ``=`` characters. We do
-    not accept generic fenced blocks, ``Optimized prompt`` aliases, or any local
-    fallback because those can silently select the wrong text.
-    """
-    clean = strip_ansi(stdout).replace("\r\n", "\n").replace("\r", "\n")
-    lines = clean.split("\n")
-    header_indexes = [index for index, line in enumerate(lines) if line.strip() == "Best prompt"]
-    if not header_indexes:
-        return None
-    start = header_indexes[-1] + 1
-    collected: list[str] = []
-    for line in lines[start:]:
-        stripped = line.strip()
-        if len(stripped) >= 8 and set(stripped) == {"="}:
-            break
-        collected.append(line)
-    candidate = "\n".join(collected).strip()
-    if not candidate:
-        return None
-    # The official winner may legitimately be the unchanged baseline. Preserve it
-    # as Promptfoo's finalist instead of inventing a local improvement.
-    return candidate
-
-
-def infer_promptfoo_suggestions_identity(config: Mapping[str, Any]) -> dict[str, str]:
-    settings = native_engine_settings(config, "promptfoo")
-    declared = str(
-        os.environ.get("PROMPT_COMPILER_PROMPTFOO_SUGGESTIONS_IDENTITY")
-        or settings.get("suggestions_identity")
-        or ""
-    ).strip()
-    if declared:
-        return {"identity": declared, "source": "explicit"}
-    # Promptfoo chooses its default suggestions provider independently from the
-    # selected target provider. This mirrors the upstream preference order only
-    # to label evidence; Promptfoo itself remains the authority that performs the
-    # call. No credential value is inspected or persisted.
-    if os.environ.get("OPENAI_API_KEY"):
-        return {"identity": "promptfoo-default:openai-suggestions", "source": "environment-family-probe"}
-    if os.environ.get("ANTHROPIC_API_KEY"):
-        return {"identity": "promptfoo-default:anthropic-suggestions", "source": "environment-family-probe"}
-    if os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or os.environ.get("PALM_API_KEY"):
-        return {"identity": "promptfoo-default:google-suggestions", "source": "environment-family-probe"}
-    if os.environ.get("MISTRAL_API_KEY"):
-        return {"identity": "promptfoo-default:mistral-suggestions", "source": "environment-family-probe"}
-    if os.environ.get("XAI_API_KEY"):
-        return {"identity": "promptfoo-default:xai-suggestions", "source": "environment-family-probe"}
-    if os.environ.get("GITHUB_TOKEN"):
-        return {"identity": "promptfoo-default:github-models-suggestions", "source": "environment-family-probe"}
-    if (Path.home() / ".codex" / "auth.json").is_file():
-        return {"identity": "promptfoo-default:codex-suggestions", "source": "local-credential-presence-probe"}
-    return {"identity": "promptfoo-default:auto", "source": "upstream-default-unresolved"}
+    patterns = [
+        r"(?is)(?:optimized prompt|best prompt|strongest prompt)\s*:?\s*```(?:\w+)?\s*(.*?)```",
+        r"(?is)```(?:markdown|md|text)?\s*(.*?)```",
+    ]
+    for pattern in patterns:
+        matches = re.findall(pattern, stdout)
+        for value in reversed(matches):
+            candidate = value.strip()
+            if candidate and sha256_text(candidate) != sha256_text(seed) and len(candidate) >= max(20, int(len(seed) * 0.4)):
+                return candidate
+    return None
 
 
 def run_promptfoo_optimizer_engine(
@@ -3115,117 +2552,32 @@ def run_promptfoo_optimizer_engine(
     validation: Sequence[Mapping[str, Any]],
     task_client: BaseClient,
     evaluator_client: BaseClient | None,
-    reflection_client: BaseClient | None,
     current_run_id: str,
     run_dir: Path,
 ) -> tuple[list[Candidate], dict[str, Any]]:
-    del current_run_id
     executable = promptfoo_binary()
     if not executable:
-        return [], {
-            "status": "BLOCKED",
-            "reason": "Promptfoo 官方 CLI 未安装",
-            "mode": "official-promptfoo-optimize-only",
-            "local_same_name_simulation": False,
-        }
-    config = project_config(project)
-    settings = native_engine_settings(config, "promptfoo")
-    role_probe = infer_promptfoo_suggestions_identity(config)
-    target_identity = task_client.identity.stable_key()
-    suggestions_identity = role_probe["identity"]
-    role_contract = {
-        "target": {
-            "role": "optimized_target",
-            "identity": target_identity,
-            "provider_path": "promptfooconfig.providers[0] -> Prompt Compiler task provider",
-        },
-        "candidate_suggestions": {
-            "role": "candidate_suggestion",
-            "identity": suggestions_identity,
-            "identity_source": role_probe["source"],
-            "provider_path": "Promptfoo getDefaultProviders().suggestionsProvider",
-        },
-        "roles_distinct": True,
-        "provider_identity_distinct": suggestions_identity != target_identity,
-        "reflection_runtime_identity": reflection_client.identity.stable_key() if reflection_client is not None else "",
-    }
-    if bool(settings.get("require_distinct_suggestions_identity", False)) and suggestions_identity == target_identity:
-        return [], {
-            "status": "BLOCKED",
-            "reason": "Promptfoo 候选建议 Provider 与目标模型身份相同，违反项目的额外身份隔离要求。",
-            "role_contract": role_contract,
-            "mode": "official-promptfoo-optimize-only",
-            "local_same_name_simulation": False,
-        }
-
+        return [], {"status": "BLOCKED", "reason": "Promptfoo 未安装"}
     engine_dir = run_dir / "promptfoo-optimize"
     engine_dir.mkdir(parents=True, exist_ok=True)
-    # One prompt and one target provider: this is the exact upstream optimize
-    # contract. Pair comparison is generated later by the independent gate.
-    export_promptfoo_project(
-        project,
-        seed_candidate.content,
-        seed_candidate.content,
-        engine_dir,
-        cases=validation,
-        comparison=False,
-    )
+    # This config deliberately contains one target prompt because promptfoo optimize
+    # tunes exactly one resolved prompt/provider pair. Independent pair comparison
+    # is generated later and contains both seed and optimized prompts.
+    export_promptfoo_project(project, seed_candidate.content, seed_candidate.content, engine_dir, cases=validation, comparison=False)
     config_path = engine_dir / "promptfooconfig.yaml"
-    validation_split = float(settings.get("validation_split", 0.3))
-    validation_split = min(0.5, max(0.01, validation_split))
-    command = [
-        executable,
-        "optimize",
-        "-c",
-        str(config_path),
-        "--prompt-index",
-        "0",
-        "--provider-index",
-        "0",
-        "--validation-split",
-        f"{validation_split:.6g}",
-    ]
-    env = {
-        **os.environ,
-        "PROMPT_COMPILER_PROJECT": str(project),
-        "PROMPT_COMPILER_RUNTIME_SCRIPT": str(Path(__file__).resolve()),
-    }
-    timeout = promptfoo_pair_timeout_seconds(config, case_count=max(1, len(validation)), repeat_count=1)
-    try:
-        completed = run_process_group(command, cwd=engine_dir, timeout_seconds=timeout, env=env)
-    except subprocess.TimeoutExpired as exc:
-        record = timeout_command_record(command, exc, timeout_seconds=timeout)
-        write_json(engine_dir / "command.json", record)
-        write_json(engine_dir / "role-contract.json", role_contract)
-        return [], {
-            "status": "BLOCKED",
-            "reason": "Promptfoo optimize 超时",
-            "command": record,
-            "role_contract": role_contract,
-            "mode": "official-promptfoo-optimize-only",
-            "local_same_name_simulation": False,
-        }
+    command = [executable, "optimize", "-c", str(config_path), "--prompt-index", "0", "--provider-index", "0", "--validation-split", "0.3"]
+    env = {**os.environ, "PROMPT_COMPILER_PROJECT": str(project), "PROMPT_COMPILER_RUNTIME_SCRIPT": str(Path(__file__).resolve())}
+    completed = subprocess.run(command, cwd=engine_dir, text=True, capture_output=True, env=env)
     record = command_record(command, completed)
     write_json(engine_dir / "command.json", record)
-    write_json(engine_dir / "role-contract.json", role_contract)
     if completed.returncode != 0:
-        return [], {
-            "status": "BLOCKED",
-            "reason": "Promptfoo optimize 官方命令执行失败",
-            "command": record,
-            "role_contract": role_contract,
-            "mode": "official-promptfoo-optimize-only",
-            "local_same_name_simulation": False,
-        }
+        return [], {"status": "BLOCKED", "reason": "Promptfoo optimize 执行失败", "command": record}
     candidate_text = extract_promptfoo_candidate(completed.stdout, seed_candidate.content)
     if not candidate_text:
         return [], {
             "status": "BLOCKED",
-            "reason": "官方命令已运行，但输出中没有可验证的 Best prompt 区段",
+            "reason": "Promptfoo optimize 已运行，但当前 CLI 输出中无法可靠提取候选；原始日志已保留",
             "command": record,
-            "role_contract": role_contract,
-            "mode": "official-promptfoo-optimize-only",
-            "local_same_name_simulation": False,
         }
     item = Candidate(
         candidate_id=f"promptfoo-official-1-{sha256_text(candidate_text)[:10]}",
@@ -3233,14 +2585,7 @@ def run_promptfoo_optimizer_engine(
         engine="promptfoo",
         parent_ids=[seed_candidate.candidate_id],
         generation=1,
-        metadata={
-            "engine_mode": "official-promptfoo-optimize",
-            "promptfoo_version": PROMPTFOO_VERSION,
-            "best_prompt_section_exact": True,
-            "baseline_remained_strongest": sha256_text(candidate_text) == seed_candidate.sha256,
-            "role_contract": role_contract,
-            "local_same_name_simulation": False,
-        },
+        metadata={"engine_mode": "official-promptfoo-optimize", "promptfoo_version": PROMPTFOO_VERSION},
     )
     item.validation = evaluate_suite(
         project,
@@ -3248,19 +2593,11 @@ def run_promptfoo_optimizer_engine(
         cases=validation,
         task_client=task_client,
         judge_client=evaluator_client,
-        phase="search/promptfoo/official-independent-validation",
+        phase="search/promptfoo/independent-validation",
         repeat_count=1,
         trace_path=run_dir / "promptfoo-optimizer-validation.jsonl",
     )
-    return [item], {
-        "status": "PASS",
-        "candidate_count": 1,
-        "command": record,
-        "role_contract": role_contract,
-        "best_prompt_section_exact": True,
-        "mode": "official-promptfoo-optimize-only",
-        "local_same_name_simulation": False,
-    }
+    return [item], {"status": "PASS", "candidate_count": 1, "command": record}
 
 
 
@@ -3375,7 +2712,7 @@ def run_external_optimizer_engine(
         "command": record,
     }
 
-def run_champion_synthesis(
+def run_omni_crossover(
     project: Path,
     *,
     seed_candidate: Candidate,
@@ -3384,224 +2721,41 @@ def run_champion_synthesis(
     task_client: BaseClient,
     evaluator_client: BaseClient | None,
     reflection_client: BaseClient,
-    budget: int,
-    preset: str,
     current_run_id: str,
     run_dir: Path,
-    stage_one_candidates: Sequence[Candidate] | None = None,
-    stage_one_reports: Mapping[str, Mapping[str, Any]] | None = None,
-) -> tuple[list[Candidate], dict[str, Any]]:
-    """Build Prompt Compiler's own arm from routed competitor mechanisms.
-
-    Competitors remain same-layer opponents. Their validated mechanisms are also
-    exposed as lower-layer inputs to a bounded synthesis loop. Each round targets
-    one currently weakest dimension, performs one attributable change, evaluates
-    it independently, and reverts the active parent when the robust lexicographic
-    key does not improve.
-    """
-    del current_run_id
-    config = project_config(project)
-    native_config = native_engine_settings(config, "omni")
-    required_paths = list(BUILTIN_COMPETITOR_NAMES)
-    stage_reports = {name: dict((stage_one_reports or {}).get(name, {}) or {}) for name in required_paths}
-    stage_candidates = list(stage_one_candidates or [item for item in archive if item.engine in required_paths])
-    by_engine = {name: [item for item in stage_candidates if item.engine == name] for name in required_paths}
-    missing_paths = [name for name in required_paths if not by_engine[name]]
-    failed_paths = [name for name in required_paths if stage_reports.get(name, {}).get("status") != "PASS"]
-    if bool(native_config.get("require_all_four_native_paths", True)) and (missing_paths or failed_paths):
-        return [], {
-            "status": "BLOCKED",
-            "mode": "prompt-compiler-omni-two-stage-native",
-            "reason": "第一阶段四条独立原生路径未全部通过，Omni 禁止以本地模拟或缺失路径继续。",
-            "stage_1": {
-                "name": "four-independent-native-optimizers",
-                "required_paths": required_paths,
-                "missing_paths": missing_paths,
-                "failed_paths": failed_paths,
-                "reports": stage_reports,
-            },
-            "stage_2": {"name": "cross-route-and-dimension-gap-synthesis", "status": "NOT_RUN"},
-            "local_same_name_simulation": False,
-        }
-    if not stage_candidates:
-        return [], {"status": "BLOCKED", "reason": "没有可供 Omni 第二阶段编排的原生候选"}
-    champion_config = dict(config.get("champion", {}) or {})
-    requested_rounds = int((champion_config.get("synthesis_rounds", {}) or {}).get(preset, 2))
-    metric_cost = max(1, len(validation))
-    max_rounds = max(1, min(requested_rounds, max(1, int(budget) // metric_cost)))
+) -> list[Candidate]:
+    if len(archive) < 2:
+        return []
+    top = list(archive[: min(4, len(archive))])
     objective = read_text(project / "objective.md")
-    requirements = read_json(project / "requirements.json", {}) or {}
-    source = seed_candidate.content
-    base = select_winner(stage_candidates, source, config)
-
-    # The portfolio baseline gives Prompt Compiler exact access to the best
-    # validated lower-layer output. It cannot by itself pass strict superiority,
-    # but it prevents accidental loss before synthesis begins.
-    portfolio = Candidate(
-        candidate_id=f"prompt-compiler-portfolio-{base.candidate_id}-{base.sha256[:10]}",
-        content=base.content,
-        engine=INTERNAL_CHAMPION_ENGINE,
-        parent_ids=[base.candidate_id],
-        generation=base.generation + 1,
-        metadata={
-            "engine_mode": "routed-portfolio-baseline",
-            "source_engine": base.engine,
-            "dual_role": True,
-            "budget": budget,
-        },
-        validation=json.loads(json.dumps(base.validation or {}, ensure_ascii=False)),
+    system = (
+        "融合多个 Pareto 候选中互补且有证据支持的机制。只返回一个完整候选正文。"
+        "不得简单拼接、不得增加未经验证的职责、不得改变硬约束或评分尺度。"
     )
-    generated: list[Candidate] = [portfolio]
-    working = portfolio
-    accepted_rounds = 0
-    round_evidence: list[dict[str, Any]] = []
-
-    for round_index in range(1, max_rounds + 1):
-        pool = list(stage_candidates) + generated
-        summaries = {item.candidate_id: candidate_metrics(item, source) for item in pool}
-        dimensions = sorted({key for summary in summaries.values() for key in summary})
-        leaders: dict[str, Candidate] = {}
-        gaps: dict[str, float] = {}
-        own = summaries.get(working.candidate_id, candidate_metrics(working, source))
-        for dimension in dimensions:
-            candidates_with_value = [item for item in pool if dimension in summaries.get(item.candidate_id, {})]
-            if not candidates_with_value:
-                continue
-            leader = max(candidates_with_value, key=lambda item: summaries[item.candidate_id][dimension])
-            leaders[dimension] = leader
-            gaps[dimension] = max(0.0, summaries[leader.candidate_id][dimension] - own.get(dimension, 0.0))
-        target_dimension = max(
-            gaps,
-            key=lambda name: (gaps[name], -own.get(name, 0.0), name),
-            default="weakest_slice",
-        )
-        target_leader = leaders.get(target_dimension, base)
-        safety_leader = leaders.get("hard_safety", base)
-        cost_leader = leaders.get("cost_efficiency", leaders.get("length_efficiency", base))
-        selected_leaders = list(
-            {
-                item.candidate_id: item
-                for item in (target_leader, safety_leader, cost_leader, base)
-                if item is not None
-            }.values()
-        )
-        system = (
-            "你是 Prompt Compiler 的冠军合成器。生成一个更优候选；这是冠军合成，不是摘要。"
-            "本轮只允许一个可归因的机制变化，目标是关闭指定最弱维度差距。"
-            "必须保留原始目标、硬约束、禁止项、权限、数据、版本、链接、阈值、错误恢复和输出合同。"
-            "可以复用下层执行器已验证机制，但不得简单拼接、不得伪造测试、不得改变评分尺度。"
-            "只返回完整候选正文，不返回解释、Markdown 围栏或分数。"
-        )
-        user = (
-            f"【本轮目标维度】\n{target_dimension}\n"
-            f"【观测差距】\n{gaps.get(target_dimension, 0.0):.8f}\n"
-            f"【总体目标】\n{objective}\n"
-            f"【硬约束合同】\n{json_text(requirements)}\n"
-            f"【原始工件】\n{source}\n"
-            f"【当前 Prompt Compiler 候选】\n{working.content}\n"
-            "【下层执行器维度领先候选】\n"
-            + "\n\n".join(
-                f"### {item.engine}/{item.candidate_id}\n"
-                f"指标：{json_text(summaries.get(item.candidate_id, {}))}\n"
-                f"正文：\n{item.content}"
-                for item in selected_leaders
-            )
-        )
-        proposed = clean_candidate_output(
-            reflection_client.generate(system=system, user=user, temperature=0.15),
-            working.content,
-        )
-        if sha256_text(proposed) == working.sha256:
-            round_evidence.append(
-                {
-                    "round": round_index,
-                    "target_dimension": target_dimension,
-                    "status": "NO_CHANGE",
-                    "parent": working.candidate_id,
-                }
-            )
-            continue
-        candidate = Candidate(
-            candidate_id=f"prompt-compiler-{round_index}-{sha256_text(proposed)[:10]}",
-            content=proposed,
-            engine=INTERNAL_CHAMPION_ENGINE,
-            parent_ids=[working.candidate_id, *[item.candidate_id for item in selected_leaders]],
-            generation=working.generation + 1,
-            metadata={
-                "engine_mode": "adaptive-dimension-gap-synthesis",
-                "target_dimension": target_dimension,
-                "observed_gap": gaps.get(target_dimension, 0.0),
-                "single_change_contract": True,
-                "lower_layer_executors": sorted({item.engine for item in selected_leaders}),
-                "budget": budget,
-            },
-        )
-        candidate.validation = evaluate_suite(
-            project,
-            candidate=candidate.content,
-            cases=validation,
-            task_client=task_client,
-            judge_client=evaluator_client,
-            phase=f"search/prompt_compiler/round-{round_index}/validation",
-            repeat_count=1,
-            trace_path=run_dir / "prompt-compiler-validation.jsonl",
-        )
-        generated.append(candidate)
-        before_key = robust_candidate_key(
-            {
-                key: value
-                for key, value in champion_dimension_summary(working.validation or {}).items()
-                if value is not None and key not in {"regression", "redteam"}
-            },
-            length=len(working.content),
-        )
-        after_summary = champion_dimension_summary(candidate.validation or {})
-        if int((candidate.validation or {}).get("hard_failure_count", 0)) > 0:
-            after_summary["hard_safety"] = 0.0
-        after_key = robust_candidate_key(
-            {key: value for key, value in after_summary.items() if value is not None and key not in {"regression", "redteam"}},
-            length=len(candidate.content),
-        )
-        accepted = after_key > before_key
-        if accepted:
-            working = candidate
-            accepted_rounds += 1
-        round_evidence.append(
-            {
-                "round": round_index,
-                "target_dimension": target_dimension,
-                "observed_gap": gaps.get(target_dimension, 0.0),
-                "status": "KEEP" if accepted else "REVERT",
-                "parent": candidate.parent_ids[0],
-                "candidate": candidate.candidate_id,
-                "candidate_sha256": candidate.sha256,
-                "before_key": list(before_key),
-                "after_key": list(after_key),
-            }
-        )
-
-    return generated, {
-        "status": "PASS" if generated else "BLOCKED",
-        "mode": "prompt-compiler-omni-two-stage-native",
-        "stage_1": {
-            "name": "four-independent-native-optimizers",
-            "status": "PASS",
-            "required_paths": required_paths,
-            "reports": stage_reports,
-            "candidate_ids": {name: [item.candidate_id for item in by_engine[name]] for name in required_paths},
-        },
-        "stage_2": {
-            "name": "cross-route-and-dimension-gap-synthesis",
-            "status": "PASS" if generated else "BLOCKED",
-            "budget": budget,
-            "round_limit": max_rounds,
-            "accepted_rounds": accepted_rounds,
-            "candidate_count": len(generated),
-            "rounds": round_evidence,
-            "portfolio_source": {"candidate_id": base.candidate_id, "engine": base.engine, "sha256": base.sha256},
-        },
-        "local_same_name_simulation": False,
-    }
+    user = f"【目标】\n{objective}\n\n【候选与指标】\n" + "\n\n".join(
+        f"### {item.candidate_id}\n指标：{json_text(candidate_metrics(item, seed_candidate.content))}\n正文：\n{item.content}"
+        for item in top
+    )
+    content = clean_candidate_output(reflection_client.generate(system=system, user=user, temperature=0.2), top[0].content)
+    item = Candidate(
+        candidate_id=f"omni-1-{sha256_text(content)[:10]}",
+        content=content,
+        engine="omni",
+        parent_ids=[x.candidate_id for x in top],
+        generation=max(x.generation for x in top) + 1,
+        metadata={"engine_mode": "composed-pareto-crossover"},
+    )
+    item.validation = evaluate_suite(
+        project,
+        candidate=content,
+        cases=validation,
+        task_client=task_client,
+        judge_client=evaluator_client,
+        phase="search/omni/validation",
+        repeat_count=1,
+        trace_path=run_dir / "omni-validation.jsonl",
+    )
+    return [item]
 
 # ---------------------------------------------------------------------------
 # Promptfoo independent comparison, regression and red-team bridge
@@ -4352,26 +3506,6 @@ def release_gate(
     }
 
 
-def frozen_champion_dimensions(
-    champion_config: Mapping[str, Any],
-    candidates: Sequence[Candidate] = (),
-) -> list[str]:
-    """Freeze built-in, configured, and evaluator-discovered dimensions.
-
-    Discovery only reads validation aggregates before final-test opening. A
-    dimension can never silently disappear from final evidence once observed.
-    """
-    requested = [
-        *list(champion_config.get("required_dimensions", MANDATORY_DIMENSIONS) or []),
-        *list(champion_config.get("additional_dimensions", []) or []),
-    ]
-    if bool(champion_config.get("auto_freeze_discovered_dimensions", True)):
-        for candidate in candidates:
-            for name in dict((candidate.validation or {}).get("dimensions", {}) or {}):
-                requested.append(str(name))
-    return list(dict.fromkeys(str(name) for name in requested if str(name)))
-
-
 def optimize_project(
     project: Path,
     *,
@@ -4400,55 +3534,14 @@ def optimize_project(
             "代码、Agent 架构或配置的正式优化必须提供真实可执行的自定义评分器；模板评分器不得形成发布证据。",
             code="CUSTOM_EVALUATOR_REQUIRED_FOR_NON_PROMPT",
         )
-
-    champion_config = dict(config.get("champion", {}) or {})
-    champion_enabled = bool(champion_config.get("enabled", True))
-    raw_requested = list(engines or config.get("optimization", {}).get("engines", []))
-    # `omni` is retained as a user-facing alias for Prompt Compiler's two-stage
-    # orchestration arm; the four upstream paths remain independent competitors.
-    raw_requested = [INTERNAL_CHAMPION_ENGINE if item == "omni" else item for item in raw_requested]
+    requested_engines = list(engines or config.get("optimization", {}).get("engines", []))
     external_engine_config = dict(config.get("optimization", {}).get("external_engines", {}) or {})
     allowed_engines = set(ENGINE_NAMES) | set(external_engine_config)
-    unknown = [item for item in raw_requested if item not in allowed_engines]
+    unknown = [x for x in requested_engines if x not in allowed_engines]
     if unknown:
         raise CompilerError("存在未知优化引擎。", code="UNKNOWN_ENGINE", details=unknown)
-
-    registry = load_competitor_registry()
-    registry_check = verify_competitor_registry(registry)
-    registry_required = [str(item) for item in registry_check.get("required_competitors", [])]
-    configured_required = [
-        str(item) for item in champion_config.get("required_competitors", BUILTIN_COMPETITOR_NAMES)
-    ]
-    required_competitors = list(dict.fromkeys([*registry_required, *configured_required])) if champion_enabled else []
-    arena_engines = list(
-        dict.fromkeys(
-            [item for item in raw_requested if item not in {INTERNAL_CHAMPION_ENGINE, "omni"}]
-            + required_competitors
-        )
-    )
-    # Any explicitly enabled external competitor becomes required for this run;
-    # it cannot disappear from the arena after contributing to search.
-    for name, entry in external_engine_config.items():
-        if bool((entry or {}).get("enabled")) and name not in arena_engines:
-            arena_engines.append(name)
-    requested_engines = [*arena_engines, INTERNAL_CHAMPION_ENGINE]
-
-    optimization = dict(config.get("optimization", {}) or {})
-    total_budget = int((optimization.get("total_budget", {}) or {}).get(preset, 0))
-    if total_budget <= 0:
-        legacy = int((optimization.get("matched_budget", {}) or {}).get(preset, 24))
-        total_budget = legacy * max(1, len(arena_engines) + 1)
-    minimum_probe = int((optimization.get("minimum_probe_budget", {}) or {}).get(preset, 1))
-    minimum_probe = max(1, min(minimum_probe, max(1, total_budget // max(1, len(arena_engines) + 1))))
-    budget_plan = adaptive_budget_plan(
-        total_budget=total_budget,
-        arms=arena_engines,
-        minimum_probe=minimum_probe,
-        synthesis_share=float(optimization.get("synthesis_share", 0.24)),
-    )
-    allocations = dict(budget_plan.allocations)
-    repeat_count = max(3, int(optimization.get("repeat_count", 3)))
-
+    budget = int(config.get("optimization", {}).get("matched_budget", {}).get(preset, 24))
+    repeat_count = max(3, int(config.get("optimization", {}).get("repeat_count", 3)))
     seed = read_text(project / "source.md")
     train = load_split(project, "train")
     val = load_split(project, "validation")
@@ -4460,18 +3553,7 @@ def optimize_project(
     run_dir.mkdir(parents=True, exist_ok=True)
     report_dir.mkdir(parents=True, exist_ok=True)
     source_record_id = str((read_json(project / "project.json", {}) or {}).get("source_record_id", ""))
-    ledger_start_run(
-        project,
-        current_run_id,
-        source_record_id,
-        {
-            "preset": preset,
-            "engines": requested_engines,
-            "total_budget": total_budget,
-            "budget_allocations": allocations,
-            "champion_contract": "strict-first-on-every-required-dimension",
-        },
-    )
+    ledger_start_run(project, current_run_id, source_record_id, {"preset": preset, "engines": requested_engines, "matched_budget": budget})
 
     task_client = resolve_client(config, "task", allow_mock=allow_mock)
     reflection_client = resolve_client(config, "reflection", allow_mock=allow_mock)
@@ -4503,14 +3585,8 @@ def optimize_project(
     all_candidates: list[Candidate] = [seed_candidate]
     engine_reports: dict[str, Any] = {}
 
-    # Stage 1: four independent native optimization paths. None may fall back
-    # to a local same-name simulation. Each path is independently evaluated by
-    # Prompt Compiler's frozen validation Oracle before it can enter Omni.
-    stage_one_candidates: list[Candidate] = []
-
-    if "gepa" in arena_engines:
-        engine_budget = allocations.get("gepa", minimum_probe)
-        generated, report = run_gepa_engine(
+    if "gepa" in requested_engines:
+        gepa_candidates, gepa_report = run_gepa_engine(
             project,
             seed_candidate=seed_candidate,
             train=train,
@@ -4518,84 +3594,69 @@ def optimize_project(
             task_client=task_client,
             evaluator_client=evaluator_client,
             reflection_client=reflection_client,
-            budget=engine_budget,
+            budget=budget,
             current_run_id=current_run_id,
             run_dir=run_dir,
         )
-        all_candidates.extend(generated)
-        stage_one_candidates.extend(generated)
-        engine_reports["gepa"] = {
-            **dict(report or {}),
-            "allocated_budget": engine_budget,
-            "local_same_name_simulation": False,
-        }
+        all_candidates.extend(gepa_candidates)
+        engine_reports["gepa"] = gepa_report
 
-    if "autoresearch" in arena_engines:
-        engine_budget = allocations.get("autoresearch", minimum_probe)
-        generated, report = run_autoresearch_native_engine(
-            project,
-            seed_candidate=seed_candidate,
-            train=train,
-            validation=val,
-            task_client=task_client,
-            evaluator_client=evaluator_client,
-            budget=engine_budget,
-            current_run_id=current_run_id,
-            run_dir=run_dir,
-        )
-        all_candidates.extend(generated)
-        stage_one_candidates.extend(generated)
-        engine_reports["autoresearch"] = {
-            **dict(report or {}),
-            "allocated_budget": engine_budget,
-            "local_same_name_simulation": False,
-        }
-
-    if "meta_harness" in arena_engines:
-        engine_budget = allocations.get("meta_harness", minimum_probe)
-        generated, report = run_meta_harness_native_engine(
-            project,
-            seed_candidate=seed_candidate,
-            train=train,
-            validation=val,
-            task_client=task_client,
-            evaluator_client=evaluator_client,
-            budget=engine_budget,
-            current_run_id=current_run_id,
-            run_dir=run_dir,
-        )
-        all_candidates.extend(generated)
-        stage_one_candidates.extend(generated)
-        engine_reports["meta_harness"] = {
-            **dict(report or {}),
-            "allocated_budget": engine_budget,
-            "local_same_name_simulation": False,
-        }
-
-    if "promptfoo" in arena_engines:
-        engine_budget = allocations.get("promptfoo", minimum_probe)
-        generated, report = run_promptfoo_optimizer_engine(
-            project,
-            seed_candidate=seed_candidate,
-            validation=val,
-            task_client=task_client,
-            evaluator_client=evaluator_client,
-            reflection_client=reflection_client,
-            current_run_id=current_run_id,
-            run_dir=run_dir,
-        )
-        all_candidates.extend(generated)
-        stage_one_candidates.extend(generated)
-        engine_reports["promptfoo"] = {
-            **dict(report or {}),
-            "allocated_budget": engine_budget,
-            "local_same_name_simulation": False,
-        }
-
-    for engine in arena_engines:
-        if engine in BUILTIN_COMPETITOR_NAMES:
+    for engine in ("autoresearch", "meta_harness"):
+        if engine not in requested_engines:
             continue
-        engine_budget = allocations.get(engine, minimum_probe)
+        generated = run_local_engine(
+            project,
+            engine=engine,
+            seed_candidate=seed_candidate,
+            train=train,
+            validation=val,
+            task_client=task_client,
+            evaluator_client=evaluator_client,
+            reflection_client=reflection_client,
+            budget=budget,
+            current_run_id=current_run_id,
+            run_dir=run_dir,
+            existing_archive=pareto_archive(all_candidates, seed),
+        )
+        all_candidates.extend(generated)
+        engine_reports[engine] = {"status": "PASS", "mode": "兼容执行器", "candidate_count": len(generated), "budget": budget}
+
+    if "promptfoo" in requested_engines:
+        official_candidates, official_report = run_promptfoo_optimizer_engine(
+            project,
+            seed_candidate=seed_candidate,
+            validation=val,
+            task_client=task_client,
+            evaluator_client=evaluator_client,
+            current_run_id=current_run_id,
+            run_dir=run_dir,
+        )
+        all_candidates.extend(official_candidates)
+        # Always run a local Promptfoo-style loop too; it is clearly labelled and
+        # provides a candidate even when the upstream CLI cannot expose one reliably.
+        compatible = run_local_engine(
+            project,
+            engine="promptfoo",
+            seed_candidate=seed_candidate,
+            train=train,
+            validation=val,
+            task_client=task_client,
+            evaluator_client=evaluator_client,
+            reflection_client=reflection_client,
+            budget=budget,
+            current_run_id=current_run_id,
+            run_dir=run_dir,
+            existing_archive=pareto_archive(all_candidates, seed),
+        )
+        all_candidates.extend(compatible)
+        engine_reports["promptfoo"] = {
+            "official": official_report,
+            "compatible": {"status": "PASS", "candidate_count": len(compatible), "mode": "基线→失败→候选→重评兼容执行器"},
+        }
+
+    for engine in requested_engines:
+        if engine in ENGINE_NAMES:
+            continue
         external_candidates, external_report = run_external_optimizer_engine(
             project,
             engine=engine,
@@ -4604,60 +3665,39 @@ def optimize_project(
             validation=val,
             task_client=task_client,
             evaluator_client=evaluator_client,
-            budget=engine_budget,
+            budget=budget,
             run_dir=run_dir,
         )
         all_candidates.extend(external_candidates)
-        engine_reports[engine] = {**external_report, "allocated_budget": engine_budget}
+        engine_reports[engine] = external_report
 
-    # Stage 2: Prompt Compiler Omni routes the four independently validated
-    # Stage-1 outputs and performs bounded cross-route/dimension-gap synthesis.
-    # It fails closed when any required native path is missing or blocked.
     archive = pareto_archive(all_candidates, seed)
-    stage_one_reports = {
-        name: dict(engine_reports.get(name, {}) or {})
-        for name in BUILTIN_COMPETITOR_NAMES
-    }
-    champion_candidates, champion_report = run_champion_synthesis(
-        project,
-        seed_candidate=seed_candidate,
-        archive=archive,
-        validation=val,
-        task_client=task_client,
-        evaluator_client=evaluator_client,
-        reflection_client=reflection_client,
-        budget=allocations.get(INTERNAL_CHAMPION_ENGINE, minimum_probe),
-        preset=preset,
-        current_run_id=current_run_id,
-        run_dir=run_dir,
-        stage_one_candidates=stage_one_candidates,
-        stage_one_reports=stage_one_reports,
-    )
-    all_candidates.extend(champion_candidates)
-    archive = pareto_archive(all_candidates, seed)
-    engine_reports[INTERNAL_CHAMPION_ENGINE] = champion_report
-    engine_reports["omni"] = {
-        **dict(champion_report or {}),
-        "engine": "prompt_compiler_omni",
-        "alias_of": INTERNAL_CHAMPION_ENGINE,
-        "two_stage_orchestration": True,
-        "local_same_name_simulation": False,
-    }
+    if "omni" in requested_engines:
+        omni_candidates = run_omni_crossover(
+            project,
+            seed_candidate=seed_candidate,
+            archive=archive,
+            validation=val,
+            task_client=task_client,
+            evaluator_client=evaluator_client,
+            reflection_client=reflection_client,
+            current_run_id=current_run_id,
+            run_dir=run_dir,
+        )
+        all_candidates.extend(omni_candidates)
+        archive = pareto_archive(all_candidates, seed)
+        engine_reports["omni"] = {"status": "PASS" if omni_candidates else "NOT_APPLICABLE", "candidate_count": len(omni_candidates)}
 
-    prompt_compiler_pool = [item for item in all_candidates if item.engine == INTERNAL_CHAMPION_ENGINE]
-    if not prompt_compiler_pool:
-        raise CompilerError("Prompt Compiler 自身没有产生可终审候选。", code="CHAMPION_CANDIDATE_MISSING")
-    winner = select_winner(prompt_compiler_pool, seed, config)
+    non_seed = [x for x in archive if x.sha256 != seed_candidate.sha256]
+    winner = select_winner(non_seed or archive, seed, config)
     finalist_slate, missing_finalist_engines = select_engine_finalists(
         all_candidates,
         requested_engines,
         seed,
         config,
     )
-    # Ensure the exact Prompt Compiler winner, rather than an earlier portfolio
-    # candidate, is frozen for final testing.
-    finalist_slate = [item for item in finalist_slate if item.engine != INTERNAL_CHAMPION_ENGINE]
-    finalist_slate.append(winner)
+    if all(item.sha256 != winner.sha256 for item in finalist_slate):
+        finalist_slate.append(winner)
     freeze_candidate(project, current_run_id, winner, archive, finalist_slate)
     atomic_write(report_dir / "seed.md", seed.rstrip() + "\n")
     atomic_write(report_dir / "optimized.md", winner.content.rstrip() + "\n")
@@ -4665,7 +3705,6 @@ def optimize_project(
     final_seed: dict[str, Any] | None = None
     final_optimized: dict[str, Any] | None = None
     finalist_results: dict[str, dict[str, Any]] = {}
-    finalist_suite_results: dict[str, dict[str, dict[str, Any]]] = {}
     if final_judge_client is not None and final_judge_status.get("status") == "PASS":
         final_cases = open_final_test(project, current_run_id, winner, finalist_slate)
         final_seed = evaluate_suite(
@@ -4678,67 +3717,37 @@ def optimize_project(
             repeat_count=repeat_count,
             trace_path=run_dir / "final-seed.jsonl",
         )
-        suite_cache: dict[tuple[str, str], dict[str, Any]] = {}
+        final_result_cache: dict[str, dict[str, Any]] = {}
         for finalist in finalist_slate:
-            suites: dict[str, dict[str, Any]] = {}
-            for suite_name, cases in (
-                ("final", final_cases),
-                ("regression", regression_cases),
-                ("redteam", redteam_cases),
-            ):
-                cache_key = (finalist.sha256, suite_name)
-                if cache_key in suite_cache:
-                    result = json.loads(json.dumps(suite_cache[cache_key], ensure_ascii=False))
-                    result["reused_exact_content_evidence"] = True
-                    result["reused_from_sha256"] = finalist.sha256
-                else:
-                    result = evaluate_suite(
-                        project,
-                        candidate=finalist.content,
-                        cases=cases,
-                        task_client=task_client,
-                        judge_client=final_judge_client,
-                        phase=f"champion/{suite_name}/{finalist.engine}/{finalist.candidate_id}",
-                        repeat_count=repeat_count,
-                        trace_path=run_dir / f"champion-{suite_name}-{safe_filename(finalist.candidate_id)}.jsonl",
-                    )
-                    suite_cache[cache_key] = result
-                suites[suite_name] = result
-            finalist_suite_results[finalist.candidate_id] = suites
-            finalist_results[finalist.candidate_id] = suites["final"]
-            if finalist.candidate_id == winner.candidate_id:
-                final_optimized = suites["final"]
+            if finalist.sha256 in final_result_cache:
+                finalist_result = json.loads(json.dumps(final_result_cache[finalist.sha256], ensure_ascii=False))
+                finalist_result["reused_exact_content_evidence"] = True
+                finalist_result["reused_from_sha256"] = finalist.sha256
+            else:
+                finalist_result = evaluate_suite(
+                    project,
+                    candidate=finalist.content,
+                    cases=final_cases,
+                    task_client=task_client,
+                    judge_client=final_judge_client,
+                    phase=f"final/finalist/{finalist.engine}/{finalist.candidate_id}",
+                    repeat_count=repeat_count,
+                    trace_path=run_dir / f"final-{safe_filename(finalist.candidate_id)}.jsonl",
+                )
+                final_result_cache[finalist.sha256] = finalist_result
+            finalist_results[finalist.candidate_id] = finalist_result
+            if finalist.sha256 == winner.sha256:
+                final_optimized = finalist_result
     else:
         final_cases = []
 
-    required_champion_dimensions = frozen_champion_dimensions(champion_config, finalist_slate)
     competitive_evidence = build_competitive_evidence(
         winner=winner,
         finalist_results=finalist_results,
         finalist_slate=finalist_slate,
-        requested_engines=arena_engines,
+        requested_engines=requested_engines,
         missing_engines=missing_finalist_engines,
-        budget=total_budget,
-        finalist_suite_results=finalist_suite_results,
-        budget_allocations=allocations,
-        required_dimensions=required_champion_dimensions,
-        bootstrap_iterations=int(champion_config.get("bootstrap_iterations", 4000)),
-        confidence=float(champion_config.get("confidence", 0.95)),
-        minimum_margin=float(champion_config.get("minimum_margin", 0.0)),
-        scope={
-            "dataset_seal_sha256": sha256_file(project / "datasets" / "dataset_seal.json"),
-            "repeat_count": repeat_count,
-            "task_identity": task_client.identity.stable_key(),
-            "evaluator_identity": evaluator_client.identity.stable_key(),
-            "final_judge_identity": final_judge_client.identity.stable_key() if final_judge_client else None,
-            "frozen_dimensions": required_champion_dimensions,
-            "competitor_versions": {
-                "gepa": GEPA_VERSION,
-                "promptfoo": PROMPTFOO_VERSION,
-                "autoresearch": "official-workspace-native-command",
-                "meta_harness": "official-reference-native-command",
-            },
-        },
+        budget=budget,
     )
 
     regression_seed = evaluate_suite(
@@ -4751,9 +3760,6 @@ def optimize_project(
         repeat_count=repeat_count,
         trace_path=run_dir / "regression-seed.jsonl",
     )
-    # Reuse the winner's independently judged suite only for champion evidence;
-    # the release regression remains on the search evaluator for compatibility
-    # with the pre-frozen release contract.
     regression_optimized = evaluate_suite(
         project,
         candidate=winner.content,
@@ -4838,12 +3844,7 @@ def optimize_project(
         content=winner.content,
         parent_id=source_record_id or None,
         current_run_id=current_run_id,
-        metadata={
-            "engine": winner.engine,
-            "validation": winner.validation,
-            "release_decision": gate["decision"],
-            "champion_status": competitive_evidence.get("champion_status"),
-        },
+        metadata={"engine": winner.engine, "validation": winner.validation, "release_decision": gate["decision"]},
     )
     compiler_client: BaseClient | None = None
     with contextlib.suppress(CompilerError):
@@ -4856,28 +3857,21 @@ def optimize_project(
         report_dir=report_dir,
         compiler_client=compiler_client,
     )
-    candidate_records = [
-        {
-            "id": item.candidate_id,
-            "sha256": item.sha256,
-            "engine": item.engine,
-            "parents": item.parent_ids,
-            "generation": item.generation,
-            "validation": item.validation,
-            "metadata": item.metadata,
-        }
-        for item in all_candidates
-    ]
+    candidate_records: list[dict[str, Any]] = []
+    for item in all_candidates:
+        candidate_records.append(
+            {
+                "id": item.candidate_id,
+                "sha256": item.sha256,
+                "engine": item.engine,
+                "parents": item.parent_ids,
+                "generation": item.generation,
+                "validation": item.validation,
+                "metadata": item.metadata,
+            }
+        )
     write_json(report_dir / "candidates.json", candidate_records)
-    write_json(
-        report_dir / "pareto.json",
-        [{"id": item.candidate_id, "engine": item.engine, "metrics": candidate_metrics(item, seed)} for item in archive],
-    )
-    champion_evidence_path = report_dir / "champion-evidence.json"
-    write_json(champion_evidence_path, competitive_evidence)
-    champion_evidence_sha256 = sha256_file(champion_evidence_path)
-    write_json(report_dir / "budget-plan.json", budget_plan.as_dict())
-
+    write_json(report_dir / "pareto.json", [{"id": x.candidate_id, "engine": x.engine, "metrics": candidate_metrics(x, seed)} for x in archive])
     report = {
         "schema_version": SCHEMA_VERSION,
         "skill": SKILL_NAME,
@@ -4886,11 +3880,8 @@ def optimize_project(
         "created_at": utc_now(),
         "preset": preset,
         "artifact_kind": kind,
-        "matched_total_budget": total_budget,
-        "budget_plan": budget_plan.as_dict(),
+        "matched_budget_per_engine": budget,
         "repeat_count": repeat_count,
-        "frozen_champion_dimensions": required_champion_dimensions,
-        "evaluation_cache": EVALUATION_CACHE.stats(),
         "runtime_identities": {
             "task": dataclasses.asdict(task_client.identity),
             "reflection": dataclasses.asdict(reflection_client.identity),
@@ -4915,22 +3906,16 @@ def optimize_project(
             "seed": final_seed,
             "optimized": final_optimized,
             "finalists": finalist_results,
-            "finalist_suites": finalist_suite_results,
             "frozen_slate": [
                 {"id": item.candidate_id, "engine": item.engine, "sha256": item.sha256}
                 for item in finalist_slate
             ],
         },
         "regression": regression,
-        "redteam": {
-            "internal": internal_redteam,
-            "promptfoo_fixed": promptfoo_redteam,
-            "promptfoo_official": promptfoo_official_redteam,
-        },
+        "redteam": {"internal": internal_redteam, "promptfoo_fixed": promptfoo_redteam, "promptfoo_official": promptfoo_official_redteam},
         "promptfoo": {"final": promptfoo_final, "regression": promptfoo_regression},
         "external_evidence": external,
         "competitive_evidence": competitive_evidence,
-        "competitive_evidence_sha256": champion_evidence_sha256,
         "release_gate": gate,
         "original_overwritten": False,
         "artifacts": {
@@ -4938,50 +3923,31 @@ def optimize_project(
             "optimized": str(report_dir / "optimized.md"),
             "candidates": str(report_dir / "candidates.json"),
             "pareto": str(report_dir / "pareto.json"),
-            "champion_evidence": str(champion_evidence_path),
-            "budget_plan": str(report_dir / "budget-plan.json"),
             "target_versions": {target: value["path"] for target, value in optimized_prompt_versions.items()},
         },
     }
     write_json(report_dir / "report.json", report)
-    write_json(
-        project / "reports" / "latest.json",
-        {
-            "run_id": current_run_id,
-            "report": str(report_dir / "report.json"),
-            "decision": gate["decision"],
-            "champion_status": competitive_evidence.get("champion_status"),
-            "updated_at": utc_now(),
-        },
-    )
+    write_json(project / "reports" / "latest.json", {"run_id": current_run_id, "report": str(report_dir / "report.json"), "decision": gate["decision"], "updated_at": utc_now()})
     report_md = [
-        "# Prompt Compiler 优化与全维冠军验收报告",
+        "# Prompt Compiler 优化与独立验收报告",
         "",
         f"- 决策：**{gate['decision_zh']}**",
-        f"- 全维冠军状态：**{status_zh(competitive_evidence.get('champion_status'))}**",
-        f"- Prompt Compiler 候选：`{winner.candidate_id}`",
+        f"- 候选：`{winner.candidate_id}`（{winner.engine}）",
         f"- 候选总数 / Pareto 前沿：{len(all_candidates)} / {len(archive)}",
-        f"- 冻结总预算：{total_budget}；分配守恒：{'是' if sum(allocations.values()) == total_budget else '否'}",
         f"- 同一最终数据重复次数：{repeat_count}",
         f"- 最终测试提升：{gate.get('final_improvement')}",
         f"- 是否允许发布：{'是' if gate['release_allowed'] else '否'}",
         "",
-        "## 全维冠军硬门",
-        "- 每个必选竞品既是同层对手，也是可路由的下层执行器。",
-        "- 每个必选维度均须排名第一；低于 100% 的并列不算第一。",
-        "- 只有双方均为 100% 的有界维度允许并列第一，因为不存在更高数值。",
-        "- 缺竞品、缺维度、缺重复、统计区间未分离或任一竞品更优，均阻止冠军发布。",
-        "",
         "## 阻塞",
-        *([f"- {item}" for item in gate["blocked_reasons"]] or ["- 无"]),
+        *([f"- {x}" for x in gate["blocked_reasons"]] or ["- 无"]),
         "",
         "## 退回原因",
-        *([f"- {item}" for item in gate["rejected_reasons"]] or ["- 无"]),
+        *([f"- {x}" for x in gate["rejected_reasons"]] or ["- 无"]),
         "",
         "## 证据边界",
-        f"- 同场竞技证据：{competitive_evidence.get('status_zh', status_zh(competitive_evidence.get('status')))}。",
-        "- 冠军结论仅覆盖本次封印数据、模型身份、版本、统一预言机、总预算和重复次数。",
-        "- 原始工件未覆盖；最终测试在候选和竞品终审名单冻结后才开启。",
+        f"- 同预算竞赛证据：{competitive_evidence.get('status_zh', status_zh(competitive_evidence.get('status')))}。",
+        "- 不声明跨任务、跨模型、跨预算的普遍优越性；只接受本次独立对照证据。",
+        "- 原始工件未覆盖；最终测试在候选冻结后才开启。",
     ]
     atomic_write(report_dir / "REPORT.md", "\n".join(report_md) + "\n")
     ledger_finish_run(
@@ -4990,12 +3956,7 @@ def optimize_project(
         status=gate["decision"],
         candidate_record_id=candidate_record_id,
         report_path=str(report_dir / "report.json"),
-        metadata={
-            "winner": winner.candidate_id,
-            "gate": gate,
-            "competitive_evidence": competitive_evidence,
-            "budget_plan": budget_plan.as_dict(),
-        },
+        metadata={"winner": winner.candidate_id, "gate": gate, "competitive_evidence": competitive_evidence},
     )
     project_meta = read_json(project / "project.json", {}) or {}
     project_meta.update(
@@ -5004,7 +3965,6 @@ def optimize_project(
             "latest_winner_record_id": candidate_record_id,
             "latest_run_id": current_run_id,
             "latest_release_decision": gate["decision"],
-            "latest_champion_status": competitive_evidence.get("champion_status"),
             "updated_at": utc_now(),
         }
     )
@@ -5016,12 +3976,11 @@ def optimize_project(
             "run_id": current_run_id,
             "release_decision": gate["decision"],
             "winner_record_id": candidate_record_id,
-            "next_action": (
-                "全维冠军门通过后才允许由 Codex 完成最后一公里落库；否则保留原版并按差距表继续优化。"
-            ),
+            "next_action": "仅当发布门禁允许发布时，由 Codex 完成最后一公里落库。",
         },
     )
     return report
+
 
 def doctor(*, probe: bool = False, allow_mock: bool = False) -> dict[str, Any]:
     status: dict[str, Any] = {
@@ -5298,11 +4257,6 @@ def self_test() -> dict[str, Any]:
         checks["promptfoo_two_prompts"] = "种子版本" in config_text and "优化版本" in config_text
         checks["context_kernel"] = (project / ".ramify" / "KERNEL.md").is_file()
         checks["no_source_overwrite"] = read_text(project / "source.md") == "保留硬约束并给出结论。"
-        champion_check = champion_core_self_test()
-        checks["champion_core"] = champion_check.get("status") == "PASS"
-        registry_path = Path(__file__).resolve().parents[1] / "references" / "COMPETITOR_REGISTRY.json"
-        registry_check = verify_competitor_registry(read_json(registry_path, {}) or {})
-        checks["competitor_dual_role_registry"] = registry_check.get("status") == "PASS"
     passed = all(bool(x) for x in checks.values())
     return {"status": "PASS" if passed else "FAIL", "checks": checks}
 
@@ -5361,7 +4315,7 @@ def build_parser() -> argparse.ArgumentParser:
     optimize = sub.add_parser("optimize", help="运行多引擎优化与独立发布门禁")
     optimize.add_argument("--project", required=True)
     optimize.add_argument("--preset", choices=("smoke", "quick", "formal"), default="quick")
-    optimize.add_argument("--engines", default=",".join((*BUILTIN_COMPETITOR_NAMES, INTERNAL_CHAMPION_ENGINE)))
+    optimize.add_argument("--engines", default=",".join(ENGINE_NAMES))
     optimize.add_argument("--allow-mock", action="store_true", help=argparse.SUPPRESS)
 
     pair = sub.add_parser("promptfoo-pair", help="单独运行种子与优化两版 Promptfoo 对照")
@@ -5397,7 +4351,7 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--objective-text", default="")
     run_parser.add_argument("--kind", choices=ARTIFACT_KINDS, default="prompt")
     run_parser.add_argument("--preset", choices=("smoke", "quick", "formal"), default="quick")
-    run_parser.add_argument("--engines", default=",".join((*BUILTIN_COMPETITOR_NAMES, INTERNAL_CHAMPION_ENGINE)))
+    run_parser.add_argument("--engines", default=",".join(ENGINE_NAMES))
     run_parser.add_argument("--generate-cases", action=argparse.BooleanOptionalAction, default=True)
     run_parser.add_argument("--case-count", type=int, default=16)
     run_parser.add_argument("--force", action="store_true")
@@ -5424,59 +4378,11 @@ def cli_ci_gate(project: Path) -> dict[str, Any]:
     promptfoo_checks = {
         "最终双版对照": compare_promptfoo_groups(promptfoo.get("final", {})).get("status") == "PASS",
         "旧案例回归": compare_promptfoo_groups(promptfoo.get("regression", {})).get("status") == "PASS",
-        "固定红队双版对照": compare_promptfoo_groups(
-            redteam.get("promptfoo_fixed", {}), require_zero_candidate_failures=True
-        ).get("status") == "PASS",
+        "固定红队双版对照": compare_promptfoo_groups(redteam.get("promptfoo_fixed", {}), require_zero_candidate_failures=True).get("status") == "PASS",
         "官方红队真实结果": redteam.get("promptfoo_official", {}).get("status") == "PASS",
     }
     promptfoo_independent_acceptance = all(promptfoo_checks.values())
-
-    evidence = report.get("competitive_evidence", {}) if isinstance(report.get("competitive_evidence"), Mapping) else {}
-    champion_gate = evidence.get("champion_gate", {}) if isinstance(evidence.get("champion_gate"), Mapping) else {}
-    champion_dimensions_ok = True
-    dimension_checks: dict[str, bool] = {}
-    required_dimensions = list(evidence.get("required_dimensions", []) or [])
-    comparisons = champion_gate.get("comparisons", {}) if isinstance(champion_gate.get("comparisons"), Mapping) else {}
-    for peer, payload in comparisons.items():
-        dims = payload.get("dimensions", {}) if isinstance(payload, Mapping) and isinstance(payload.get("dimensions"), Mapping) else {}
-        for dimension in required_dimensions:
-            status = str((dims.get(dimension) or {}).get("status", "MISSING"))
-            passed = status in {"STRICTLY_FIRST", "TIED_FIRST_AT_CEILING"}
-            dimension_checks[f"{peer}/{dimension}"] = passed
-            champion_dimensions_ok = champion_dimensions_ok and passed
-    if not comparisons or not required_dimensions:
-        champion_dimensions_ok = False
-
-    evidence_path_value = (report.get("artifacts", {}) or {}).get("champion_evidence")
-    evidence_file_check: dict[str, Any] = {"status": "BLOCKED", "reason": "冠军证据文件缺失"}
-    if evidence_path_value:
-        evidence_path = Path(str(evidence_path_value))
-        if evidence_path.is_file():
-            actual_sha = sha256_file(evidence_path)
-            expected_sha = str(report.get("competitive_evidence_sha256") or "")
-            file_payload = read_json(evidence_path, {}) or {}
-            same_payload = file_payload == evidence
-            sha_matches = bool(expected_sha) and actual_sha == expected_sha
-            evidence_file_check = {
-                "status": "PASS" if same_payload and sha_matches else "BLOCKED",
-                "path": str(evidence_path),
-                "actual_sha256": actual_sha,
-                "expected_sha256": expected_sha,
-                "sha256_matches": sha_matches,
-                "payload_matches_report": same_payload,
-            }
-
-    competitive_ok = (
-        evidence.get("status") == "PROVEN_ON_THIS_DATASET"
-        and evidence.get("champion_status") == CHAMPION_STATUS_PASS
-        and evidence.get("strict_first_on_every_dimension") is True
-        and not evidence.get("missing_engines")
-        and champion_gate.get("strict_all_dimensions") is True
-        and champion_gate.get("release_allowed") is True
-        and champion_dimensions_ok
-        and evidence_file_check.get("status") == "PASS"
-    )
-
+    competitive_ok = report.get("competitive_evidence", {}).get("status") == "PROVEN_ON_THIS_DATASET"
     external_report = report.get("external_evidence", {}) if isinstance(report.get("external_evidence"), Mapping) else {}
     external_path_value = external_report.get("path")
     external_actual: dict[str, Any] = {"status": "BLOCKED", "reason": "真实外部证据路径缺失"}
@@ -5506,7 +4412,7 @@ def cli_ci_gate(project: Path) -> dict[str, Any]:
     if not promptfoo_independent_acceptance:
         blockers.append("独立 Promptfoo 最终、回归或红队证据未通过")
     if not competitive_ok:
-        blockers.append("全维冠军证据文件、逐维排名或统计分离未通过独立重读")
+        blockers.append("同预算独立终审竞赛证据未通过")
     if not external_independent_acceptance:
         blockers.append("真实 GEPA、Codex、Promptfoo 外部证据未通过独立重读")
     return {
@@ -5520,10 +4426,8 @@ def cli_ci_gate(project: Path) -> dict[str, Any]:
             "checks": promptfoo_checks,
         },
         "competitive_evidence": "PASS" if competitive_ok else "BLOCKED",
-        "champion_dimension_checks": dimension_checks,
-        "champion_evidence_file": evidence_file_check,
         "external_independent_acceptance": external_actual,
-        "blockers": list(dict.fromkeys(blockers)),
+        "blockers": blockers,
     }
 
 

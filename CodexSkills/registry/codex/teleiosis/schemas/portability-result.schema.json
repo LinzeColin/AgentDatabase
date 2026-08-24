@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://teleiosis.local/schemas/portability-result.schema.json",
+  "title": "Teleiosis portability result row",
+  "type": "object",
+  "required": ["runtime", "model_family", "candidate_tree_hash", "status", "formal_promotion_status", "metrics", "raw_evidence_path", "raw_evidence_sha256"],
+  "properties": {
+    "runtime": {"type": "string", "minLength": 1},
+    "model_family": {"type": "string", "minLength": 1},
+    "candidate_tree_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "status": {"enum": ["PASS", "FAIL", "BLOCKED"]},
+    "formal_promotion_status": {"enum": ["PASS", "FAIL", "BLOCKED"]},
+    "raw_evidence_path": {"type": "string", "minLength": 1},
+    "raw_evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "metrics": {"type": "object"}
+  },
+  "additionalProperties": true
+}

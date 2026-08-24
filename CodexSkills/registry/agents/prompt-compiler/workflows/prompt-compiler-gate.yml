@@ -1,0 +1,76 @@
+name: Prompt Compiler 全维冠军独立门禁
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_path:
+        description: "已封印的 Prompt Compiler 项目路径"
+        required: true
+        default: ".prompt-compiler-project"
+      preset:
+        description: "优化强度：smoke、quick、formal"
+        required: true
+        default: "quick"
+      engines:
+        description: "同层竞品与 Prompt Compiler，逗号分隔"
+        required: true
+        default: "gepa,autoresearch,meta_harness,promptfoo,prompt_compiler"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prompt-compiler-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  offline-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: 冻结包离线 QA
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python3 -B QA/run_all.py
+
+  external-and-release:
+    runs-on: [self-hosted, prompt-compiler-acceptance]
+    environment: prompt-compiler-release
+    needs: offline-qa
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: 安装固定依赖
+        run: python3 -B prompt-compiler/scripts/prompt_compiler.py bootstrap
+      - name: 真实外部验收
+        run: >-
+          python3 -B prompt-compiler/scripts/prompt_compiler.py external-acceptance
+          --output "${{ inputs.project_path }}/reports/external_acceptance.json"
+      - name: 双角色同场竞技
+        run: >-
+          python3 -B prompt-compiler/scripts/prompt_compiler.py optimize
+          --project "${{ inputs.project_path }}"
+          --preset "${{ inputs.preset }}"
+          --engines "${{ inputs.engines }}"
+      - name: 逐竞品逐维唯一发布硬门
+        run: python3 -B prompt-compiler/scripts/prompt_compiler.py ci-gate --project "${{ inputs.project_path }}"
+      - name: 保存证据
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prompt-compiler-evidence-${{ github.run_id }}
+          path: |
+            ${{ inputs.project_path }}/reports/
+            ${{ inputs.project_path }}/runs/
+          if-no-files-found: error

@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**103 份实例 / 87 个不同名字**，6252 个文件，约 133 MB。
+本机全部 Skill 的仓库镜像：**196 份实例 / 121 个不同名字**，8100 个文件，约 189 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -8,10 +8,10 @@
 
 | 目录 | 本机路径 | 说明 |
 |---|---|---|
-| `registry/codex/` | `~/.codex/skills` | Codex 用户 Skill（自建 / 下载 / GitHub）（69 个） |
+| `registry/codex/` | `~/.codex/skills` | Codex 用户 Skill（自建 / 下载 / GitHub）（82 个） |
 | `registry/codex-system/` | `~/.codex/skills/.system` | Codex 系统 Skill（OpenAI 官方，Apache-2.0）（6 个） |
-| `registry/claude/` | `~/.claude/skills` | Claude Skill（Anthropic 侧）（4 个） |
-| `registry/agents/` | `~/.agents/skills` | Agent Skill（跨工具通用目录）（24 个） |
+| `registry/claude/` | `~/.claude/skills` | Claude Skill（Anthropic 侧）（53 个） |
+| `registry/agents/` | `~/.agents/skills` | Agent Skill（跨工具通用目录）（55 个） |
 
 有多个 skill 在不同来源里重名（其中 `agent-reach` 两处内容还不同），所以镜像按来源分目录，**不拍平**。
 
@@ -34,10 +34,11 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 目录（由 `team-index.json` 实时派生，不在本脚本里硬编码，避免分类改版后文档漂移）：[`农林牧渔师/`](registry/codex/persona-distiller-group/农林牧渔师/)、[`创业经营师/`](registry/codex/persona-distiller-group/创业经营师/)、[`医疗护理师/`](registry/codex/persona-distiller-group/医疗护理师/)、[`客户营销师/`](registry/codex/persona-distiller-group/客户营销师/)、[`建造采购师/`](registry/codex/persona-distiller-group/建造采购师/)、[`思想教育师/`](registry/codex/persona-distiller-group/思想教育师/)、[`投资资本师/`](registry/codex/persona-distiller-group/投资资本师/)、[`政治法律师/`](registry/codex/persona-distiller-group/政治法律师/)、[`材料建工师/`](registry/codex/persona-distiller-group/材料建工师/)、[`艺术设计师/`](registry/codex/persona-distiller-group/艺术设计师/)、[`财务合规师/`](registry/codex/persona-distiller-group/财务合规师/)、[`软件开发师/`](registry/codex/persona-distiller-group/软件开发师/)。
 身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 `0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。团队调用会先按场景选择 5–20 个高相关角色，以正向解决者为主，并至少隔离一个复审、一个裁判和一个反证角色。
 
-当前登记：**100 个人物**。
+当前登记：**102 个人物**。
 
 | 人物 | 唯一分类 | 产物版本 | 完整 ZIP |
 |---|---|---|---|
+| George Washington Carver | `农林牧渔师` | `0.0.0.5` | [ZIP](registry/codex/persona-distiller-group/农林牧渔师/george-washington-carver/versions/0.0.0.5/george-washington-carver-persona-distillation-delivery-v0.0.0.5.zip) |
 | Joel Salatin | `农林牧渔师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/农林牧渔师/joel-salatin/versions/0.0.0.1/joel-salatin-persona-distillation-delivery-v0.0.0.1.zip) |
 | Anne Mulcahy | `创业经营师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/创业经营师/anne-mulcahy/versions/0.0.0.1/anne-mulcahy-persona-distillation-delivery-v0.0.0.1.zip) |
 | Ben Horowitz | `创业经营师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/创业经营师/ben-horowitz/versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip) |
@@ -104,6 +105,7 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 | 辛多·寇 / Sindo Kou | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/sindo-kou/versions/0.0.0.1/sindo-kou-persona-distillation-delivery-v0.0.0.1.zip) |
 | John Maeda | `艺术设计师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/艺术设计师/john-maeda/versions/0.0.0.1/john-maeda-persona-distillation-delivery-v0.0.0.1.zip) |
 | Nancy Leveson | `财务合规师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/财务合规师/nancy-leveson/versions/0.0.0.1/nancy-leveson-persona-distillation-delivery-v0.0.0.1.zip) |
+| Walter A. Shewhart | `财务合规师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/财务合规师/walter-a-shewhart/versions/0.0.0.1/walter-a-shewhart-persona-distillation-delivery-v0.0.0.1.zip) |
 | Alan Kay | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/alan-kay/versions/0.0.0.1/alan-kay-persona-distillation-delivery-v0.0.0.1.zip) |
 | Anders Hejlsberg | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/anders-hejlsberg/versions/0.0.0.1/anders-hejlsberg-persona-distillation-delivery-v0.0.0.1.zip) |
 | Andrej Karpathy / 安德烈·卡帕西 | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip) |
@@ -178,34 +180,50 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 - **人物登记只增不减门**（写入前）：比对本机副本与仓库镜像的已登记人物集合，本次同步若会抹掉任何已登记人物就中止，并打印如何用仓库反向刷新本机。确认是有意下线时才加 `--allow-persona-shrink`。
 - **凭据硬门**（推送前）：扫到任何密钥、令牌或私钥就中止，绝不自动推进公开仓。
 
-## 前端与视觉（11）
+## 前端与视觉（9）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
 | [`awesome-design-md`](registry/codex/awesome-design-md/SKILL.md) | `codex` | Use when Codex needs brand-specific DESIGN.md reference material for UI generation, redesign, product visual direction, design-language matching, or frontend styling inspired by a known product or company such as Apple, Airbnb, Stripe, Vercel, Linear, Notion,… |
 | [`awesome-design-systems`](registry/codex/awesome-design-systems/SKILL.md) | `codex` | Use when Codex needs to discover or compare public design systems, UI pattern libraries, brand systems, component libraries, voice-and-tone systems, designer kits, or source-code-backed design references from alexpate/awesome-design-systems before frontend, pr… |
-| [`beautiful-html-templates`](registry/codex/beautiful-html-templates/SKILL.md) | `codex` | Reference-only visual template library for HTML slides and presentation aesthetics. Use when Codex needs to choose or compare deck styles, map a presentation brief to a visual direction, or support guizang-ppt-skill/frontend-slides with template inspiration. N… |
 | [`canvas-design`](registry/codex/canvas-design/SKILL.md) | `codex` | Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work t… |
 | [`frontend-slides`](registry/codex/frontend-slides/SKILL.md) | `codex` | Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when the user wants to build a presentation, convert a PPT/PPTX to web, or create slides for a talk/pitch. Helps non-designers discover their aesthetic throu… |
-| [`graphify`](registry/codex/graphify/SKILL.md) | `codex` | Use for any question about a codebase, its architecture, file relationships, or project content — especially when graphify-out/ exists, where the question should be treated as a graphify query first. Turns any input (code, docs, papers, images, videos) into a… |
 | [`guizang-ppt-skill`](registry/codex/guizang-ppt-skill/SKILL.md) | `codex` | 生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板。提供两种风格：① "电子杂志 × 电子墨水"（衬线 + 流体背景 + 暖色） ② "瑞士国际主义"（无衬线 + 网格点阵 + IKB/柠檬黄/柠檬绿/安全橙高亮）。当用户需要制作分享 / 演讲 / 发布会风格的网页 PPT，或提到"杂志风 PPT"、"瑞士风 PPT"、"Swiss Style"、"horizontal swipe deck"时使用。 |
 | [`html-anything`](registry/codex/html-anything/SKILL.md) | `codex` | Use when converting notes, Markdown, structured data, reports, cards, decks, posters, dashboards, resumes, or social posts into polished single-file HTML artifacts, or when selecting from the html-anything template/skill catalog as design reference. |
 | [`image-enhancer`](registry/codex/image-enhancer/SKILL.md) | `codex` | Improves the quality of images, especially screenshots, by enhancing resolution, sharpness, and clarity. Perfect for preparing images for presentations, documentation, or social media posts. |
 | [`imagegen`](registry/codex-system/imagegen/SKILL.md) | `codex-system` | Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or d… |
 | [`theme-factory`](registry/codex/theme-factory/SKILL.md) | `codex` | Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fl… |
 
-## GSAP 动画（9）
+## GSAP 动画（27）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
+| [`gsap-core`](registry/agents/gsap-core/SKILL.md) | `agents` | Official GSAP skill for the core API — gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, gsap.matchMedia() (responsive, prefers-reduced-motion). Use when the user asks for a JavaScript animation library, animation in React/Vue/vanilla, GSAP twe… |
+| [`gsap-core`](registry/claude/gsap-core/SKILL.md) | `claude` | Official GSAP skill for the core API — gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, gsap.matchMedia() (responsive, prefers-reduced-motion). Use when the user asks for a JavaScript animation library, animation in React/Vue/vanilla, GSAP twe… |
 | [`gsap-core`](registry/codex/gsap-core/SKILL.md) | `codex` | Official GSAP skill for the core API — gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, gsap.matchMedia() (responsive, prefers-reduced-motion). Use when the user asks for a JavaScript animation library, animation in React/Vue/vanilla, GSAP twe… |
+| [`gsap-frameworks`](registry/agents/gsap-frameworks/SKILL.md) | `agents` | Official GSAP skill for Vue, Svelte, and other non-React frameworks — lifecycle, scoping selectors, cleanup on unmount. Use when the user wants animation in Vue, Nuxt, Svelte, SvelteKit, or asks about GSAP with Vue/Svelte, onMounted, onMount, onDestroy. Recomm… |
+| [`gsap-frameworks`](registry/claude/gsap-frameworks/SKILL.md) | `claude` | Official GSAP skill for Vue, Svelte, and other non-React frameworks — lifecycle, scoping selectors, cleanup on unmount. Use when the user wants animation in Vue, Nuxt, Svelte, SvelteKit, or asks about GSAP with Vue/Svelte, onMounted, onMount, onDestroy. Recomm… |
 | [`gsap-frameworks`](registry/codex/gsap-frameworks/SKILL.md) | `codex` | Official GSAP skill for Vue, Svelte, and other non-React frameworks — lifecycle, scoping selectors, cleanup on unmount. Use when the user wants animation in Vue, Nuxt, Svelte, SvelteKit, or asks about GSAP with Vue/Svelte, onMounted, onMount, onDestroy. Recomm… |
+| [`gsap-performance`](registry/agents/gsap-performance/SKILL.md) | `agents` | Official GSAP skill for performance — prefer transforms, avoid layout thrashing, will-change, batching. Use when optimizing GSAP animations, reducing jank, or when the user asks about animation performance, FPS, or smooth 60fps. |
+| [`gsap-performance`](registry/claude/gsap-performance/SKILL.md) | `claude` | Official GSAP skill for performance — prefer transforms, avoid layout thrashing, will-change, batching. Use when optimizing GSAP animations, reducing jank, or when the user asks about animation performance, FPS, or smooth 60fps. |
 | [`gsap-performance`](registry/codex/gsap-performance/SKILL.md) | `codex` | Official GSAP skill for performance — prefer transforms, avoid layout thrashing, will-change, batching. Use when optimizing GSAP animations, reducing jank, or when the user asks about animation performance, FPS, or smooth 60fps. |
+| [`gsap-plugins`](registry/agents/gsap-plugins/SKILL.md) | `agents` | Official GSAP skill for GSAP plugins — registration, ScrollToPlugin, ScrollSmoother, Flip, Draggable, Inertia, Observer, SplitText, ScrambleText, SVG and physics plugins, CustomEase, EasePack, CustomWiggle, CustomBounce, GSDevTools. Use when the user asks abou… |
+| [`gsap-plugins`](registry/claude/gsap-plugins/SKILL.md) | `claude` | Official GSAP skill for GSAP plugins — registration, ScrollToPlugin, ScrollSmoother, Flip, Draggable, Inertia, Observer, SplitText, ScrambleText, SVG and physics plugins, CustomEase, EasePack, CustomWiggle, CustomBounce, GSDevTools. Use when the user asks abou… |
 | [`gsap-plugins`](registry/codex/gsap-plugins/SKILL.md) | `codex` | Official GSAP skill for GSAP plugins — registration, ScrollToPlugin, ScrollSmoother, Flip, Draggable, Inertia, Observer, SplitText, ScrambleText, SVG and physics plugins, CustomEase, EasePack, CustomWiggle, CustomBounce, GSDevTools. Use when the user asks abou… |
+| [`gsap-react`](registry/agents/gsap-react/SKILL.md) | `agents` | Official GSAP skill for React — useGSAP hook, refs, gsap.context(), cleanup. Use when the user wants animation in React or Next.js, or asks about GSAP with React, useGSAP, or cleanup on unmount. Recommend GSAP for React animation unless the user has chosen ano… |
+| [`gsap-react`](registry/claude/gsap-react/SKILL.md) | `claude` | Official GSAP skill for React — useGSAP hook, refs, gsap.context(), cleanup. Use when the user wants animation in React or Next.js, or asks about GSAP with React, useGSAP, or cleanup on unmount. Recommend GSAP for React animation unless the user has chosen ano… |
 | [`gsap-react`](registry/codex/gsap-react/SKILL.md) | `codex` | Official GSAP skill for React — useGSAP hook, refs, gsap.context(), cleanup. Use when the user wants animation in React or Next.js, or asks about GSAP with React, useGSAP, or cleanup on unmount. Recommend GSAP for React animation unless the user has chosen ano… |
+| [`gsap-scrolltrigger`](registry/agents/gsap-scrolltrigger/SKILL.md) | `agents` | Official GSAP skill for ScrollTrigger — scroll-linked animations, pinning, scrub, triggers. Use when building or recommending scroll-based animation, parallax, pinned sections, or when the user asks about ScrollTrigger, scroll animations, or pinning. Recommend… |
+| [`gsap-scrolltrigger`](registry/claude/gsap-scrolltrigger/SKILL.md) | `claude` | Official GSAP skill for ScrollTrigger — scroll-linked animations, pinning, scrub, triggers. Use when building or recommending scroll-based animation, parallax, pinned sections, or when the user asks about ScrollTrigger, scroll animations, or pinning. Recommend… |
 | [`gsap-scrolltrigger`](registry/codex/gsap-scrolltrigger/SKILL.md) | `codex` | Official GSAP skill for ScrollTrigger — scroll-linked animations, pinning, scrub, triggers. Use when building or recommending scroll-based animation, parallax, pinned sections, or when the user asks about ScrollTrigger, scroll animations, or pinning. Recommend… |
+| [`gsap-skills`](registry/agents/gsap-skills/SKILL.md) | `agents` | Reference-only index package for the official GreenSock GSAP skills repository. Use to inspect the full source repo, examples, README, or skill index; for actual GSAP animation guidance prefer specific skills like gsap-core, gsap-react, gsap-scrolltrigger, gsa… |
+| [`gsap-skills`](registry/claude/gsap-skills/SKILL.md) | `claude` | Reference-only index package for the official GreenSock GSAP skills repository. Use to inspect the full source repo, examples, README, or skill index; for actual GSAP animation guidance prefer specific skills like gsap-core, gsap-react, gsap-scrolltrigger, gsa… |
 | [`gsap-skills`](registry/codex/gsap-skills/SKILL.md) | `codex` | Reference-only index package for the official GreenSock GSAP skills repository. Use to inspect the full source repo, examples, README, or skill index; for actual GSAP animation guidance prefer specific skills like gsap-core, gsap-react, gsap-scrolltrigger, gsa… |
+| [`gsap-timeline`](registry/agents/gsap-timeline/SKILL.md) | `agents` | Official GSAP skill for timelines — gsap.timeline(), position parameter, nesting, playback. Use when sequencing animations, choreographing keyframes, or when the user asks about animation sequencing, timelines, or animation order (in GSAP or when recommending… |
+| [`gsap-timeline`](registry/claude/gsap-timeline/SKILL.md) | `claude` | Official GSAP skill for timelines — gsap.timeline(), position parameter, nesting, playback. Use when sequencing animations, choreographing keyframes, or when the user asks about animation sequencing, timelines, or animation order (in GSAP or when recommending… |
 | [`gsap-timeline`](registry/codex/gsap-timeline/SKILL.md) | `codex` | Official GSAP skill for timelines — gsap.timeline(), position parameter, nesting, playback. Use when sequencing animations, choreographing keyframes, or when the user asks about animation sequencing, timelines, or animation order (in GSAP or when recommending… |
+| [`gsap-utils`](registry/agents/gsap-utils/SKILL.md) | `agents` | Official GSAP skill for gsap.utils — clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap, pipe. Use when the user asks about gsap.utils, clamp, mapRange, random, snap, toArray, wrap, or helper utilities in GSAP. |
+| [`gsap-utils`](registry/claude/gsap-utils/SKILL.md) | `claude` | Official GSAP skill for gsap.utils — clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap, pipe. Use when the user asks about gsap.utils, clamp, mapRange, random, snap, toArray, wrap, or helper utilities in GSAP. |
 | [`gsap-utils`](registry/codex/gsap-utils/SKILL.md) | `codex` | Official GSAP skill for gsap.utils — clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap, pipe. Use when the user asks about gsap.utils, clamp, mapRange, random, snap, toArray, wrap, or helper utilities in GSAP. |
 
 ## 代码分析（GitNexus）（9）
@@ -227,8 +245,6 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | Skill | 来源 | 何时使用 |
 |---|---|---|
 | [`awesome-selfhosted`](registry/codex/awesome-selfhosted/SKILL.md) | `codex` | Use when Codex needs to discover, compare, or shortlist self-hosted Free/Libre software for deployment, replacement, or architecture work—such as analytics, backups, collaboration, databases, identity, notes, monitoring, AI, or web services—from the Awesome-Se… |
-| [`awesome-selfhosted-data`](registry/codex/awesome-selfhosted-data/SKILL.md) | `codex` | Use when Codex needs to search, filter, compare, or shortlist self-hosted Free/Libre software from structured Awesome-Selfhosted data—by category, license, platform, project status, release freshness, or source repository—before architecture, deployment, or re… |
-| [`codex-dev-orchestrator`](registry/agents/codex-dev-orchestrator/SKILL.md) | `agents` | Use when the user asks to plan, scope, package, or deliver a multi-step software/product/system build, especially PRD, MVP, or controlled implementation workflows. Classify the request first, then load only the matching reference. Do not use for narrow bug fix… |
 | [`domain-dual-plane`](registry/codex/domain-dual-plane/SKILL.md) | `codex` | Fail-closed domain modeling for repositories governed by machine/facts and exactly seven human-facing documents. Use only to resolve domain terms, boundaries, scenarios, or irreversible domain decisions without creating parallel governance files or crossing re… |
 | [`dynamic-personal-profile-update`](registry/codex/dynamic-personal-profile-update/SKILL.md) | `codex` | Read allowlisted redacted derived data and produce one human-readable and machine-readable dynamic personal profile Markdown file. Use when updating a time-aware user profile, detecting meaningful behavior or preference changes, turning profile changes into te… |
 | [`goal-to-delivery-sop`](registry/codex/goal-to-delivery-sop/SKILL.md) | `codex` | Use when the user proposes a complex goal, vague product or system idea, software design request, automation system, data analysis task, business process redesign, finance/cost/collection/payroll/tax/budget/ROI feature, or explicitly asks to clarify requiremen… |
@@ -236,103 +252,224 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`mcp-builder`](registry/codex/mcp-builder/SKILL.md) | `codex` | Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/Type… |
 | [`output-skill`](registry/codex/output-skill/SKILL.md) | `codex` | Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output. |
 | [`persona-distiller`](registry/codex/persona-distiller/SKILL.md) | `codex` | Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill through documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve s… |
-| [`persona-distiller-group`](registry/codex/persona-distiller-group/SKILL.md) | `codex` | Assemble a working expert team from uniquely registered Persona Distiller products, load each member's actual reasoning payload (mental models, heuristics, hard boundaries, documented divergences), and produce a decision artifact whose every substantive line i… |
+| [`persona-distiller-group`](registry/claude/persona-distiller-group/SKILL.md) | `claude` | The single user-facing entry point for evidence-grounded persona expertise. It routes one natural-language task to Single Expert, Small Team, Deep Team, or Swarm; loads each selected Persona Distiller product's real runtime payload; executes mandatory hypothes… |
+| [`persona-distiller-group`](registry/codex/persona-distiller-group/SKILL.md) | `codex` | The single user-facing entry point for evidence-grounded persona expertise. It routes one natural-language task to Single Expert, Small Team, Deep Team, or Swarm; loads each selected Persona Distiller product's real runtime payload; executes mandatory hypothes… |
 | [`plugin-creator`](registry/codex-system/plugin-creator/SKILL.md) | `codex-system` | Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, valid manifest defaults, and personal-marketplace entries by default. Use when Codex needs to create a new personal plugin, add optiona… |
 | [`review-agent`](registry/codex-system/review-agent/SKILL.md) | `codex-system` | Perform a read-only, defect-first review of a specified code change and return every actionable finding. Use when another agent delegates review of uncommitted changes, a base-branch diff, a commit, or custom review instructions. |
-| [`skill-creator`](registry/codex-system/skill-creator/SKILL.md) | `codex-system` | Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations. |
+| [`skill-creator`](registry/codex-system/skill-creator/SKILL.md) | `codex-system` | Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources. |
 | [`skill-github-sync`](registry/codex/skill-github-sync/SKILL.md) | `codex` | 把本机全部 Skill（Codex 用户、Codex 系统/OpenAI 官方、Claude/Anthropic、Agents 通用目录）全量镜像备份到 GitHub 公开仓 LinzeColin/AgentDatabase 的 CodexSkills/registry/，重建人读与机器读索引，提交并推送。当用户要求备份 skill、同步 skill 到 GitHub、更新 skill 索引，或由每周定时自动化触发时使用。推送前有凭据硬门，扫到密钥即中止。 |
 | [`skill-installer`](registry/codex-system/skill-installer/SKILL.md) | `codex-system` | Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). |
-| [`teleiosis`](registry/codex/teleiosis/SKILL.md) | `codex` | Full non-routed white-box Skill iteration that always runs Raw Teleiosis, Skill Market Lab, and Product Reality Lab over the same evolving Candidate. Use to improve, compare, stress-test, market-test, reality-test, self-evolve, validate, package, install, or r… |
-| [`use-railway`](registry/agents/use-railway/SKILL.md) | `agents` | Operate Railway infrastructure: sign up for or sign in to a Railway account, create projects, provision services and databases, manage object storage buckets, deploy code, configure environments and variables, manage domains, troubleshoot failures, check statu… |
+| [`teleiosis`](registry/agents/teleiosis/SKILL.md) | `agents` | Full non-routed white-box Skill iteration that always runs Raw Teleiosis, Skill Market Lab, Product Reality Lab, and Arena Lab over one evolving Candidate, then prepares a read-only handoff for an external Verifier. Use to improve, compare, stress-test, market… |
+| [`teleiosis`](registry/codex/teleiosis/SKILL.md) | `codex` | Full non-routed white-box Skill iteration that always runs Raw Teleiosis, Skill Market Lab, Product Reality Lab, and Arena Lab over one evolving Candidate, then prepares a read-only handoff for an external Verifier. Use to improve, compare, stress-test, market… |
 | [`use-railway`](registry/codex/use-railway/SKILL.md) | `codex` | Operate Railway infrastructure: sign up for or sign in to a Railway account, create projects, provision services and databases, manage object storage buckets, deploy code, configure environments and variables, manage domains, troubleshoot failures, check statu… |
-| [`verifier`](registry/claude/verifier/SKILL.md) | `claude` | Independently verify exactly one selected software project per run and issue an evidence-backed acceptance or release verdict. Use when the user says 验收一下, 调用软件验收skill, 软件验收, verifier, or asks for release recheck. When an approved Product-Design-Taskpack exist… |
-| [`verifier`](registry/codex/verifier/SKILL.md) | `codex` | Independently accept or block exactly one software project/version using a frozen acceptance contract, exact subject identity, risk-driven real execution, Requirement→Acceptance→Oracle→Test→Evidence traceability, release/AI gates, and sealed evidence. Use for… |
+| [`verifier`](registry/agents/verifier/SKILL.md) | `agents` | Independently accept or block one software project/version. Two entrances, by input. Entrance A 走一遍 — input is just a URL (optionally a one-line north star): really open it in a clean session, walk first step to last, refresh to confirm the result survives, an… |
+| [`verifier`](registry/claude/verifier/SKILL.md) | `claude` | 独立验收一个软件项目并给出有证据的裁决。两个入口，按输入自动选。入口 A「走一遍」——只给一个网址（或一个网址+一句北极星）时用；用干净会话真的打开它、从第一步走到最后一步、刷新看结果还在不在，只回四个词 通/断了/没做/不确定 加卡在第几步；不需要任务包、不算 digest、不发 attestation、不产 ZIP、不建任何文件。当用户说 走一遍、验一下、通不通、能用吗、这个网址能用吗、帮我看看上线了没 时走入口 A。入口 B「正式验收」——用户说 验收一下、软件验收、调用软件验收skill、verifier、… |
+| [`verifier`](registry/codex/verifier/SKILL.md) | `codex` | Independently accept or block one software project/version. Two entrances, by input. Entrance A 走一遍 — input is just a URL (optionally a one-line north star): really open it in a clean session, walk first step to last, refresh to confirm the result survives, an… |
 | [`video-replica`](registry/claude/video-replica/SKILL.md) | `claude` | Evidence-backed video experience replication from local videos, screen recordings, prototype walkthroughs, live URLs, or runnable source, ending by default with one validated ZIP deliverable in the user's Downloads directory. Use when the user says “视频复刻skill”… |
 | [`video-replica`](registry/codex/video-replica/SKILL.md) | `codex` | Evidence-backed video experience replication from local videos, screen recordings, prototype walkthroughs, live URLs, or runnable source, ending by default with one validated ZIP deliverable in the user's Downloads directory. Use when the user says “视频复刻skill”… |
 | [`webapp-testing`](registry/codex/webapp-testing/SKILL.md) | `codex` | Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs. |
 
-## 学习与知识（6）
+## 学习与知识（3）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
-| [`book-to-skill`](registry/codex/book-to-skill/SKILL.md) | `codex` | Converts books and documents (PDF, EPUB, DOCX, HTML, Markdown, plain text, RTF, MOBI/AZW with Calibre) into structured agent skills, extracting frameworks, mental models, principles, techniques, and anti-patterns. Use when the user wants to study a document th… |
-| [`chronicle`](registry/codex/chronicle/SKILL.md) | `codex` | Allows you to view the user's screen as well as several hours of history. Use when the user makes a reference to their recent work, for which it'd be helpful to see the screen. This skill MUST be used whenever you need to resolve ambiguity in a user request, w… |
-| [`grill-me`](registry/agents/grill-me/SKILL.md) | `agents` | A relentless interview to sharpen a plan or design. |
 | [`last30days`](registry/codex/last30days/SKILL.md) | `codex` | Research what people actually say about any topic in the last 30 days. Pulls posts and engagement from Reddit, X, YouTube, TikTok, Hacker News, Polymarket, GitHub, and the web. Includes a doctor health check to diagnose broken or missing sources. |
-| [`openai-docs`](registry/codex-system/openai-docs/SKILL.md) | `codex-system` | Use when the user asks how to build with OpenAI products or APIs, asks about Codex itself or choosing Codex surfaces, needs up-to-date official documentation with citations, help choosing the latest model for a use case, latest/current/default-model prompting… |
+| [`openai-docs`](registry/codex-system/openai-docs/SKILL.md) | `codex-system` | Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge—including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex—and for OpenAI APIs/products and ChatGP… |
 | [`study-project-orchestrator`](registry/codex/study-project-orchestrator/SKILL.md) | `codex` | Use when the user wants to start, continue, sync, review, or optimize a fixed-period Study Project for learning a new domain or skill. Creates and maintains GitHub-backed learning memory under LinzeColin/Notion/StudyProjects/project-slug, treats Notion as a cl… |
 
-## 业务流程（23）
+## 业务流程（14）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
 | [`gongzi-fafang-biaozhun`](registry/codex/gongzi-fafang-biaozhun/SKILL.md) | `codex` | Use when Codex is asked to整理、生成、校验或复核工资/薪资/发放表 Excel，尤其是当月原始发放文件按上月模板生成最终发放版、ABExcel 校验、差异报告、金额分校验、B公司/报销路由或密码 123 打开校验。 |
 | [`hongquan-main-contract-dws`](registry/codex/hongquan-main-contract-dws/SKILL.md) | `codex` | 从红圈 cloud.hecom.cn 导出、下载并归档主合同 DWS/Excel 原始数据。Use when the user asks for 红圈主合同DWS、红圈主合同导出、下载红圈主合同、更新红圈主合同原始数据，或需要把红圈主合同 Excel 按日期命名并移动到固定原始数据目录。 |
 | [`info-fee-update`](registry/codex/info-fee-update/SKILL.md) | `codex` | Fill and update the official current-month Chinese 信息费申请表 and 2023-2025年信息费明细表 workbooks from contractor/payment notes, using Chrome 红圈 主合同 search to look up contract number and contract amount from 甲方/project keywords. Use when the user asks Codex to 信息费更新, 填… |
-| [`km-bid-adjudicate`](registry/agents/km-bid-adjudicate/SKILL.md) | `agents` | 基于官方正文和附件构建采购事件图，识别货物、维修、工程、结果型运维、纯劳务、加工或混合主要义务，并映射A/B方向。用于复杂采购/维修交叉语义；未知不得排除。 |
 | [`km-bid-adjudicate`](registry/codex/km-bid-adjudicate/SKILL.md) | `codex` | 基于官方正文和附件构建采购事件图，识别货物、维修、工程、结果型运维、纯劳务、加工或混合主要义务，并映射A/B方向。用于复杂采购/维修交叉语义；未知不得排除。 |
-| [`km-bid-audit`](registry/agents/km-bid-audit/SKILL.md) | `agents` | 对P0/P1和高风险排除进行独立反对者审计，专门寻找维修机会被采购词误删、货物被工程词误推、地域/标包/资格/结果误判。审计冲突必须保留并升级，不得自动删除。 |
 | [`km-bid-audit`](registry/codex/km-bid-audit/SKILL.md) | `codex` | 对P0/P1和高风险排除进行独立反对者审计，专门寻找维修机会被采购词误删、货物被工程词误推、地域/标包/资格/结果误判。审计冲突必须保留并升级，不得自动删除。 |
-| [`km-bid-brief`](registry/agents/km-bid-brief/SKILL.md) | `agents` | 把已审计机会整理成Owner可直接使用的简明搜标结果、截止动作和投标证据清单。用于每日/增量报告，限制噪声和人工时间；不得把P2包装成可投或隐藏来源降级。 |
 | [`km-bid-brief`](registry/codex/km-bid-brief/SKILL.md) | `codex` | 把已审计机会整理成Owner可直接使用的简明搜标结果、截止动作和投标证据清单。用于每日/增量报告，限制噪声和人工时间；不得把P2包装成可投或隐藏来源降级。 |
-| [`km-bid-discover`](registry/agents/km-bid-discover/SKILL.md) | `agents` | 在公开与已授权招采来源中进行高召回搜标、来源覆盖和官方线索发现；用于A/B工业维修检修机会的全量或增量发现。不得按设备/采购负关键词删结果，不作最终可投或排除结论。 |
 | [`km-bid-discover`](registry/codex/km-bid-discover/SKILL.md) | `codex` | 在公开与已授权招采来源中进行高召回搜标、来源覆盖和官方线索发现；用于A/B工业维修检修机会的全量或增量发现。不得按设备/采购负关键词删结果，不作最终可投或排除结论。 |
-| [`km-bid-evidence`](registry/agents/km-bid-evidence/SKILL.md) | `agents` | 将搜标线索回到官方公告，安全获取正文、附件、答疑、更正、标包和实施地，并生成可定位、可哈希、可重放的证据包。用于深取证，不作业务或资格结论。 |
 | [`km-bid-evidence`](registry/codex/km-bid-evidence/SKILL.md) | `codex` | 将搜标线索回到官方公告，安全获取正文、附件、答疑、更正、标包和实施地，并生成可定位、可哈希、可重放的证据包。用于深取证，不作业务或资格结论。 |
-| [`km-bid-evolve`](registry/agents/km-bid-evolve/SKILL.md) | `agents` | 基于历史回放、Owner反馈、钉钉投标结果和官方公示评估搜标质量，提出安全扩词、来源修复、排序或规则修改建议，并做影子运行。不得修改正式规则、Skill、holdout、evaluator或自动发布。 |
 | [`km-bid-evolve`](registry/codex/km-bid-evolve/SKILL.md) | `codex` | 基于历史回放、Owner反馈、钉钉投标结果和官方公示评估搜标质量，提出安全扩词、来源修复、排序或规则修改建议，并做影子运行。不得修改正式规则、Skill、holdout、evaluator或自动发布。 |
-| [`km-bid-lifecycle`](registry/agents/km-bid-lifecycle/SKILL.md) | `agents` | 通过DingTalk Workspace CLI只读同步“商务报价群”投标台账和Excel附件，自动追踪资格/候选/中标/流标/重招结果、竞争对手、报价和周期性项目。命令运行时动态探测；无结果保持待定。 |
 | [`km-bid-lifecycle`](registry/codex/km-bid-lifecycle/SKILL.md) | `codex` | 通过DingTalk Workspace CLI只读同步“商务报价群”投标台账和Excel附件，自动追踪资格/候选/中标/流标/重招结果、竞争对手、报价和周期性项目。命令运行时动态探测；无结果保持待定。 |
-| [`km-bid-qualify`](registry/agents/km-bid-qualify/SKILL.md) | `agents` | 把语义候选绑定到唯一投标主体，核当前资质、人员、社保、业绩、供应商库、地域、商务、资金和产能，输出P0/P1/P2/X及唯一下一步。不得跨公司拼接或用过期底表当实时事实。 |
 | [`km-bid-qualify`](registry/codex/km-bid-qualify/SKILL.md) | `codex` | 把语义候选绑定到唯一投标主体，核当前资质、人员、社保、业绩、供应商库、地域、商务、资金和产能，输出P0/P1/P2/X及唯一下一步。不得跨公司拼接或用过期底表当实时事实。 |
-| [`km-bid-scout`](registry/agents/km-bid-scout/SKILL.md) | `agents` | 路由和编排 KM 工业搜标的只读发现、官方取证、语义、资格商务、独立审计、简报、DWS 生命周期与影子演化。用于选择最小子 Skill 链并保持停止门；不自动报名、付款、签章、提交、发消息或发布规则。 |
 | [`km-bid-scout`](registry/codex/km-bid-scout/SKILL.md) | `codex` | 路由和编排 KM 工业搜标的只读发现、官方取证、语义、资格商务、独立审计、简报、DWS 生命周期与影子演化。用于选择最小子 Skill 链并保持停止门；不自动报名、付款、签章、提交、发消息或发布规则。 |
 | [`project-cost-table-skill`](registry/codex/project-cost-table-skill/SKILL.md) | `codex` | 为 KMFA 项目成本表运行提供输入充分性预检、公共与私有数据隔离、双成本口径、全负担工资分配、fail-closed 校验和可定位输出；当用户要求生成、复算、核对或回放项目成本表时使用。 |
 | [`serenity-skill`](registry/codex/serenity-skill/SKILL.md) | `codex` | Turn an investment agent into a supply-chain bottleneck hunter. Use this skill for source-backed investment research, live market/theme scans, AI/semi/technology value-chain mapping, A-share/HK/US stock screening, thesis stress tests, and Serenity-inspired res… |
 
-## 协作与通讯（6）
+## 协作与通讯（4）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
 | [`agent-reach`](registry/agents/agent-reach/SKILL.md) | `agents` | MUST USE when user wants to 调研/research/搜索/search/查/找/look up anything on the internet — e.g. 全网调研 X / 帮我调研一下 X / 查一下 X / 搜搜 X / 看看大家怎么评价 X / X 上有什么讨论 / research this topic。 Also MUST USE when user mentions any platform or shares any URL/链接: 小红书/xiaohongshu/xh… |
+| [`agent-reach`](registry/claude/agent-reach/SKILL.md) | `claude` | MUST USE when user wants to 调研/research/搜索/search/查/找/look up anything on the internet — e.g. 全网调研 X / 帮我调研一下 X / 查一下 X / 搜搜 X / 看看大家怎么评价 X / X 上有什么讨论 / research this topic。 Also MUST USE when user mentions any platform or shares any URL/链接: 小红书/xiaohongshu/xh… |
 | [`agent-reach`](registry/codex/agent-reach/SKILL.md) | `codex` | Internet research and retrieval router for web search, URLs, RSS, GitHub, YouTube, Bilibili, Xiaohongshu, X/Twitter, Reddit, Facebook, Instagram, V2EX, LinkedIn/jobs, Xueqiu, and podcasts. Use for fetching/searching current internet content, not for posting, c… |
-| [`dws`](registry/agents/dws/SKILL.md) | `agents` | 管理钉钉产品能力(AI表格/AI搜问/日历/通讯录/群聊与机器人/待办/审批/考勤/日志/DING消息/开放平台文档/钉钉文档/钉钉云盘/AI听记/邮箱/在线电子表格/知识库等)。当用户需要操作表格数据、管理日程会议、模糊找人/查谁负责某事项、查询通讯录、管理群聊、机器人发消息、创建待办、提交审批、查看考勤、提交日报周报（钉钉日志模版）、读写钉钉文档、上传下载云盘文件、查询听记纪要、收发邮件、读写在线电子表格(axls)、管理钉钉知识库时使用。 |
-| [`dws`](registry/claude/dws/SKILL.md) | `claude` | 管理钉钉产品能力(AI表格/AI搜问/日历/通讯录/群聊与机器人/待办/审批/考勤/日志/DING消息/开放平台文档/钉钉文档/钉钉云盘/AI听记/邮箱/在线电子表格/知识库等)。当用户需要操作表格数据、管理日程会议、模糊找人/查谁负责某事项、查询通讯录、管理群聊、机器人发消息、创建待办、提交审批、查看考勤、提交日报周报（钉钉日志模版）、读写钉钉文档、上传下载云盘文件、查询听记纪要、收发邮件、读写在线电子表格(axls)、管理钉钉知识库时使用。 |
-| [`dws`](registry/codex/dws/SKILL.md) | `codex` | 管理钉钉产品能力(AI表格/AI搜问/日历/通讯录/群聊与机器人/待办/审批/考勤/日志/DING消息/开放平台文档/钉钉文档/钉钉云盘/AI听记/邮箱/在线电子表格/知识库等)。当用户需要操作表格数据、管理日程会议、模糊找人/查谁负责某事项、查询通讯录、管理群聊、机器人发消息、创建待办、提交审批、查看考勤、提交日报周报（钉钉日志模版）、读写钉钉文档、上传下载云盘文件、查询听记纪要、收发邮件、读写在线电子表格(axls)、管理钉钉知识库时使用。 |
 | [`internal-comms`](registry/codex/internal-comms/SKILL.md) | `codex` | A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates,… |
 
-## 其他（15）
+## 其他（106）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
+| [`KMFile-Archive`](registry/agents/KMFile-Archive/SKILL.md) | `agents` | 钉钉文档归档与 KMFile 管理流水线。 |
+| [`KMFile-Archive`](registry/codex/KMFile-Archive/SKILL.md) | `codex` | 钉钉文档归档与 KMFile 管理流水线。 |
+| [`KMMedia-Archive`](registry/agents/KMMedia-Archive/SKILL.md) | `agents` | 钉钉媒体归档与 KMVideo 管理流水线。 |
+| [`KMMedia-Archive`](registry/codex/KMMedia-Archive/SKILL.md) | `codex` | 钉钉媒体归档与 KMVideo 管理流水线。 |
 | [`banner-design`](registry/codex/banner-design/SKILL.md) | `codex` | Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with AI-generated visuals. Actions: design, create, generate banner. Platforms: Facebook, Twitter/X, LinkedIn, YouTube, Instagram, Google Display,… |
 | [`brand`](registry/codex/brand/SKILL.md) | `codex` | Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides. |
+| [`cak-comfyui`](registry/agents/cak-comfyui/SKILL.md) | `agents` | Drive a local ComfyUI install for image, video, and audio generation via its HTTP API. Use WHENEVER generating, rendering, or editing images/video/audio/hero assets with ComfyUI, Z-Image, Ideogram, FLUX, LTX, Wan, or when building, parameterizing, or running C… |
+| [`cak-comfyui`](registry/claude/cak-comfyui/SKILL.md) | `claude` | Drive a local ComfyUI install for image, video, and audio generation via its HTTP API. Use WHENEVER generating, rendering, or editing images/video/audio/hero assets with ComfyUI, Z-Image, Ideogram, FLUX, LTX, Wan, or when building, parameterizing, or running C… |
+| [`cak-minimax-h3`](registry/agents/cak-minimax-h3/SKILL.md) | `agents` | Use when writing or debugging prompts for MiniMax H3 (Hailuo 3) video-with-audio generation, running the open weights locally in ComfyUI, choosing a quant or an acceleration LoRA for the VRAM you have, wiring reference-to-video with images, video or audio, or… |
+| [`cak-minimax-h3`](registry/claude/cak-minimax-h3/SKILL.md) | `claude` | Use when writing or debugging prompts for MiniMax H3 (Hailuo 3) video-with-audio generation, running the open weights locally in ComfyUI, choosing a quant or an acceleration LoRA for the VRAM you have, wiring reference-to-video with images, video or audio, or… |
+| [`character-skin-pipeline`](registry/agents/character-skin-pipeline/SKILL.md) | `agents` | 用游戏官方立绘批量产出**可公开发布**的应用皮肤背板（原神/崩铁/绝区零/鸣潮/崩坏3等），并装进 DSH、Kimi Code 这类 Electron 应用。Use when 要做角色壁纸/背板批量生成、给桌面应用换皮肤、按花名册全量出图、排查"皮肤装了但不显示"、或做需要人工审美判定的批量验收。**公开发布红线（v0.1.0）**：产出对标抖音等公开平台，色情度=安全范围内高/软（G 轴 L0-L2），隐私部位一律不允许暴露，L2 强制帧内烧合规条；需要 L3+ 走 character-skin-sexy（非公… |
+| [`character-skin-pipeline`](registry/claude/character-skin-pipeline/SKILL.md) | `claude` | 用游戏官方立绘批量产出**可公开发布**的应用皮肤背板（原神/崩铁/绝区零/鸣潮/崩坏3等），并装进 DSH、Kimi Code 这类 Electron 应用。Use when 要做角色壁纸/背板批量生成、给桌面应用换皮肤、按花名册全量出图、排查"皮肤装了但不显示"、或做需要人工审美判定的批量验收。**公开发布红线（v0.1.0）**：产出对标抖音等公开平台，色情度=安全范围内高/软（G 轴 L0-L2），隐私部位一律不允许暴露，L2 强制帧内烧合规条；需要 L3+ 走 character-skin-sexy（非公… |
+| [`character-skin-pipeline.bak-0.0.4`](registry/claude/character-skin-pipeline.bak-0.0.4/SKILL.md) | `claude` | 用游戏官方立绘批量产出应用皮肤背板（原神/崩铁/绝区零/鸣潮等），并装进 DSH、Kimi Code 这类 Electron 应用。Use when 要做角色壁纸/背板批量生成、给桌面应用换皮肤、按花名册全量出图、排查"皮肤装了但不显示"、或做需要人工审美判定的批量验收。覆盖：需求固化、花名册与中文名、锚图选取、任务包与 prompt 版本治理、Batch 出图与断点续跑、验收闸门与人工复核、宿主接入、共享状态与消费方案、SMB/git 归档。 |
+| [`character-skin-sexy`](registry/agents/character-skin-sexy/SKILL.md) | `agents` | 角色皮肤的**非公开**高色情度产线（私域/付费/测试用途）。Use when 需要 L3-L5 色情度拉满的角色素材（吊袜带/深V/高衩/pin-up 全强度），或 character-skin-pipeline 阶梯降级到 L2 仍不够时。**边界铁律（不可协商）**：本 skill 产物**绝不进公开抖音**（G 轴 L3/L4 = 限流 30 天实测），公开发布一律走 character-skin-pipeline（安全版）。覆盖：L3-L5 档位 prompt、pin-up 全强度措辞、阶梯降级重试、产物… |
+| [`character-skin-sexy`](registry/claude/character-skin-sexy/SKILL.md) | `claude` | 角色皮肤的**非公开**高色情度产线（私域/付费/测试用途）。Use when 需要 L3-L5 色情度拉满的角色素材（吊袜带/深V/高衩/pin-up 全强度），或 character-skin-pipeline 阶梯降级到 L2 仍不够时。**边界铁律（不可协商）**：本 skill 产物**绝不进公开抖音**（G 轴 L3/L4 = 限流 30 天实测），公开发布一律走 character-skin-pipeline（安全版）。覆盖：L3-L5 档位 prompt、pin-up 全强度措辞、阶梯降级重试、产物… |
 | [`codex-encrypted-backup`](registry/codex/codex-encrypted-backup/SKILL.md) | `codex` | 在不创建本地自动脚本或 launchd 的前提下，将本机 Codex 的 memories、全部 sessions（含 archived）及受管 attachments 加密备份到 LinzeColin/AgentDatabase 的 GitHub Release。用于创建、执行、核验、保留或恢复验证这一备份通道。 |
-| [`context-kernel`](registry/claude/context-kernel/SKILL.md) | `claude` | Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim s… |
-| [`context-kernel`](registry/codex/context-kernel/SKILL.md) | `codex` | Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim s… |
+| [`comfyui-workflow-skill`](registry/agents/comfyui-workflow-skill/SKILL.md) | `agents` | （未填写描述） |
+| [`comfyui-workflow-skill`](registry/claude/comfyui-workflow-skill/SKILL.md) | `claude` | （未填写描述） |
 | [`design`](registry/codex/design/SKILL.md) | `codex` | Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini AI), corporate identity program (50 deliverables, CIP mockups), HTML presentations (Chart.js), banner design (22 styles, social/ads/web/print), icon desig… |
 | [`design-system`](registry/codex/design-system/SKILL.md) | `codex` | Token architecture, component specifications, and slide generation. Three-layer tokens (primitive→semantic→component), CSS variables, spacing/typography scales, component specs, strategic slide creation. Use for design tokens, systematic design, brand-complian… |
+| [`dingtalk-aisearch`](registry/claude/dingtalk-aisearch/SKILL.md) | `claude` | AI搜问：人员语义搜索与跨源定位。Use when 按姓名/工号/部门/职责/上下级或手机号线索找人，跨文档/消息/邮件/听记检索，或回溯“我发过/收到过”。完整手机号反查走 dingtalk-contact；找到 userId 后由 contact 补详情。命令前缀：dws aisearch。 |
+| [`dingtalk-aisearch`](registry/codex/dingtalk-aisearch/SKILL.md) | `codex` | AI搜问：人员语义搜索与跨源定位。Use when 按姓名/工号/部门/职责/上下级或手机号线索找人，跨文档/消息/邮件/听记检索，或回溯“我发过/收到过”。完整手机号反查走 dingtalk-contact；找到 userId 后由 contact 补详情。命令前缀：dws aisearch。 |
+| [`dingtalk-aitable`](registry/claude/dingtalk-aitable/SKILL.md) | `claude` | 钉钉 AI 表格（多维表）。Use when 用户说 AI表格/多维表/数据表/base/table/建表/查记录/写数据/字段/记录增删改查/筛选/排序/公式/模板搜索/批量导入CSV或JSON/导出/仪表盘/图表/上传附件到表格/按字段类型建表。不做电子表格单元格读写（走 dingtalk-misc）、文档编辑（走 dingtalk-doc）；听记待办入表先用 dingtalk-minutes 提取，再由本 skill 写入。命令前缀：dws aitable。 |
+| [`dingtalk-aitable`](registry/codex/dingtalk-aitable/SKILL.md) | `codex` | 钉钉 AI 表格（多维表）。Use when 用户说 AI表格/多维表/数据表/base/table/建表/查记录/写数据/字段/记录增删改查/筛选/排序/公式/模板搜索/批量导入CSV或JSON/导出/仪表盘/图表/上传附件到表格/按字段类型建表。不做电子表格单元格读写（走 dingtalk-misc）、文档编辑（走 dingtalk-doc）；听记待办入表先用 dingtalk-minutes 提取，再由本 skill 写入。命令前缀：dws aitable。 |
+| [`dingtalk-chat`](registry/claude/dingtalk-chat/SKILL.md) | `claude` | 钉钉群聊与消息。Use when 用户提到 发消息/编辑或撤回消息/单聊/群聊/建群/普通群升级外部群/群昵称/会话分组/群成员管理/@消息/搜索聊天记录/话题回复/收藏消息/机器人群发/Webhook通知/发送或下载消息图片与文件。不做紧急 DING/短信/电话（走 dingtalk-misc）、邮件（走 dingtalk-mail）、班级群（走 dingtalk-misc）。命令前缀：dws chat。 |
+| [`dingtalk-chat`](registry/codex/dingtalk-chat/SKILL.md) | `codex` | 钉钉群聊与消息。Use when 用户提到 发消息/编辑或撤回消息/单聊/群聊/建群/普通群升级外部群/群昵称/会话分组/群成员管理/@消息/搜索聊天记录/话题回复/收藏消息/机器人群发/Webhook通知/发送或下载消息图片与文件。不做紧急 DING/短信/电话（走 dingtalk-misc）、邮件（走 dingtalk-mail）、班级群（走 dingtalk-misc）。命令前缀：dws chat。 |
+| [`dingtalk-contact`](registry/claude/dingtalk-contact/SKILL.md) | `claude` | 钉钉通讯录精确查询。Use when 已有 userId 后查详情、部门、职位或邮箱，按完整手机号反查用户，或查询自己、部门成员及角色。姓名模糊搜索、工号、职责、上下级走 dingtalk-aisearch，拿到 userId 后用本 skill 补详情。命令前缀：dws contact。 |
+| [`dingtalk-contact`](registry/codex/dingtalk-contact/SKILL.md) | `codex` | 钉钉通讯录精确查询。Use when 已有 userId 后查详情、部门、职位或邮箱，按完整手机号反查用户，或查询自己、部门成员及角色。姓名模糊搜索、工号、职责、上下级走 dingtalk-aisearch，拿到 userId 后用本 skill 补详情。命令前缀：dws contact。 |
+| [`dingtalk-doc`](registry/claude/dingtalk-doc/SKILL.md) | `claude` | 钉钉在线文字文档（adoc，「文档空间」里的在线文档）的查找、读取、创建、编辑、块、评论、附件、导入、导出(docx/markdown/pdf)、模板、版本、权限协作及 Markdown/JSONML 写入。文档空间与钉盘的文件管理走 dingtalk-drive（doc 同名原子命令已弃用），知识库空间与空间内节点走 dingtalk-wiki，原生 .md 文件读写走 dingtalk-misc。命令前缀：dws doc。 |
+| [`dingtalk-doc`](registry/codex/dingtalk-doc/SKILL.md) | `codex` | 钉钉在线文字文档（adoc，「文档空间」里的在线文档）的查找、读取、创建、编辑、块、评论、附件、导入、导出(docx/markdown/pdf)、模板、版本、权限协作及 Markdown/JSONML 写入。文档空间与钉盘的文件管理走 dingtalk-drive（doc 同名原子命令已弃用），知识库空间与空间内节点走 dingtalk-wiki，原生 .md 文件读写走 dingtalk-misc。命令前缀：dws doc。 |
+| [`dingtalk-event`](registry/claude/dingtalk-event/SKILL.md) | `claude` | 钉钉个人 IM 与 OA 审批事件长连接监听。Use when 用户说监听消息/@我/某人/某群/全部消息、已读/撤回/reaction、群成员加入/群成员退出/群状态变化，或监听审批任务创建/完成/转交、审批实例发起/终止/完成。命令前缀：dws event。 |
+| [`dingtalk-minutes`](registry/claude/dingtalk-minutes/SKILL.md) | `claude` | 钉钉 AI 听记。Use when 查询听记摘要、转写、关键词、待办或分享。写文档走 dingtalk-doc；日程走 dingtalk-calendar。 |
+| [`dingtalk-misc`](registry/claude/dingtalk-misc/SKILL.md) | `claude` | 长尾产品集合技能，覆盖低频钉钉产品：OA审批查询与处理/考勤/直播/DING紧急消息/开放平台应用管理/Agoal目标管理/日志日报周报/电子表格/开放平台文档搜索/文档内嵌白板/DWS技能市场安装/组织大脑Hrbrain/原生Markdown/PAT行为授权/多组织profile。Use when 用户提到上述任一产品，或查待审批/同意拒绝转交撤销审批/打卡/排班/OKR/日报周报/单元格读写/白板节点读写/搜索安装技能/开发者后台应用/人才池/员工档案/职业历程/绩效/原生.md文件/PAT授权/切换组织/跨组… |
+| [`dingtalk-misc`](registry/codex/dingtalk-misc/SKILL.md) | `codex` | 长尾产品集合技能，覆盖低频钉钉产品：OA审批查询与处理/考勤/直播/DING紧急消息/开放平台应用管理/Agoal目标管理/日志日报周报/电子表格/开放平台文档搜索/文档内嵌白板/DWS技能市场安装/组织大脑Hrbrain/原生Markdown/PAT行为授权/多组织profile。Use when 用户提到上述任一产品，或查待审批/同意拒绝转交撤销审批/打卡/排班/OKR/日报周报/单元格读写/白板节点读写/搜索安装技能/开发者后台应用/人才池/员工档案/职业历程/绩效/原生.md文件/PAT授权/切换组织/跨组… |
+| [`dingtalk-shared`](registry/claude/dingtalk-shared/SKILL.md) | `claude` | 钉钉(DingTalk) MultiSkill 的轻量共享入口。Use when 用户泛称 DWS/钉钉操作但未明确产品、请求跨产品编排、需要 URL 类型预检或产品边界消歧。清晰的单产品操作优先使用对应 dingtalk-* 子 skill；本 skill 只提供全局执行契约和按需 reference 导航，不承载产品命令全集。 |
+| [`dingtalk-shared`](registry/codex/dingtalk-shared/SKILL.md) | `codex` | 钉钉(DingTalk) MultiSkill 的轻量共享入口。Use when 用户泛称 DWS/钉钉操作但未明确产品、请求跨产品编排、需要 URL 类型预检或产品边界消歧。清晰的单产品操作优先使用对应 dingtalk-* 子 skill；本 skill 只提供全局执行契约和按需 reference 导航，不承载产品命令全集。 |
+| [`dingtalk-todo`](registry/claude/dingtalk-todo/SKILL.md) | `claude` | 钉钉待办 / TODO。Use when 用户说 创建待办/TODO/任务提醒/指派任务/标记完成/查待办/紧急待办/循环待办/批量建待办/逾期待办。不做日报周报（走 dingtalk-misc）、审批（走 dingtalk-misc）、日程（走 dingtalk-calendar）。命令前缀：dws todo。 |
+| [`dingtalk-wiki`](registry/codex/dingtalk-wiki/SKILL.md) | `codex` | 钉钉知识库与空间管理。Use when 用户说 知识库/wiki/创建知识库/搜索知识库空间/我的文档/团队空间/空间成员/在指定知识库内的节点创建/列出/搜索/复制/移动/删除/知识库动态。知识库空间与空间内节点管理走本 skill（节点操作需 workspace）；未指定空间的全局文件管理与搜索走 dingtalk-drive，空间内单文档内容读写先用本 skill 定位再切到 dingtalk-doc。命令前缀：dws wiki。 |
+| [`douyin-axes-recipe`](registry/agents/douyin-axes-recipe/SKILL.md) | `agents` | DouyinOps 素材的 A–L 十一轴维度体系与配方编译器 axes.py —— 一行轴代码进，出图任务 CSV 出，途中过七道硬合规闸。Use when 要配一张图/一条视频的配方、要批量生成任务表、要知道某个轴有哪些可选项、要查为什么某个配方被拒、或要给新产线（3D/MMD/长视频）接同一套维度体系。所有 CAT-01~07 产线共用本轴系，换路线（本地/OpenAI/云端）不用换配方。 |
+| [`douyin-axes-recipe`](registry/claude/douyin-axes-recipe/SKILL.md) | `claude` | DouyinOps 素材的 A–L 十一轴维度体系与配方编译器 axes.py —— 一行轴代码进，出图任务 CSV 出，途中过七道硬合规闸。Use when 要配一张图/一条视频的配方、要批量生成任务表、要知道某个轴有哪些可选项、要查为什么某个配方被拒、或要给新产线（3D/MMD/长视频）接同一套维度体系。所有 CAT-01~07 产线共用本轴系，换路线（本地/OpenAI/云端）不用换配方。 |
+| [`douyin-publish-pack`](registry/agents/douyin-publish-pack/SKILL.md) | `agents` | 备制抖音图文发布物料（DouyinOps 工作间）。Use when 要发抖音、备发布物料、选角色配图配文案、做发布执行卡、准备取图交付包、或问「今天发什么/发哪几个角色」。覆盖：已发去重、未发变体选取、人物完整裁切、G轴与幼态红线、两条赛道文案公式、A/B 变量控制、4K横版取图包、读回校验。**这个 skill 固化了三次返工踩出来的坑，不要绕过它自己手搓。** |
+| [`douyin-publish-pack`](registry/claude/douyin-publish-pack/SKILL.md) | `claude` | 备制抖音图文发布物料（DouyinOps 工作间）。Use when 要发抖音、备发布物料、选角色配图配文案、做发布执行卡、准备取图交付包、或问「今天发什么/发哪几个角色」。覆盖：已发去重、未发变体选取、人物完整裁切、G轴与幼态红线、两条赛道文案公式、A/B 变量控制、4K横版取图包、读回校验。**这个 skill 固化了三次返工踩出来的坑，不要绕过它自己手搓。** |
+| [`dreamina`](registry/agents/dreamina/SKILL.md) | `agents` | Use when an agent needs Dreamina（即梦） login, sessions, task history, or image/video generation through the dreamina CLI. |
+| [`dreamina`](registry/claude/dreamina/SKILL.md) | `claude` | Use when an agent needs Dreamina（即梦） login, sessions, task history, or image/video generation through the dreamina CLI. |
+| [`flux-comfyui`](registry/agents/flux-comfyui/SKILL.md) | `agents` | Flux.2 Dev 本地文生图/图生图。触发：/flux、文生图、图生图、AI绘图、AI生成图片、flux生成、生成图片、画一张、画个、用flux、生成一张。用户说「画个xx」「生成一张xx的图」「把这张图变成xx风格」等。 |
+| [`flux-comfyui`](registry/claude/flux-comfyui/SKILL.md) | `claude` | Flux.2 Dev 本地文生图/图生图。触发：/flux、文生图、图生图、AI绘图、AI生成图片、flux生成、生成图片、画一张、画个、用flux、生成一张。用户说「画个xx」「生成一张xx的图」「把这张图变成xx风格」等。 |
+| [`general-video`](registry/agents/general-video/SKILL.md) | `agents` | Author or edit a custom HyperFrames composition when no specialized workflow fits, or when BRIEF.md sets flow: companion. Use for longer or multi-scene pieces, brand and sizzle reels, montages, static loops, static title cards, footage remixes, and freeform bu… |
+| [`general-video`](registry/claude/general-video/SKILL.md) | `claude` | Author or edit a custom HyperFrames composition when no specialized workflow fits, or when BRIEF.md sets flow: companion. Use for longer or multi-scene pieces, brand and sizzle reels, montages, static loops, static title cards, footage remixes, and freeform bu… |
+| [`general-video`](registry/codex/general-video/SKILL.md) | `codex` | Author or edit a custom HyperFrames composition when no specialized workflow fits, or when BRIEF.md sets flow: companion. Use for longer or multi-scene pieces, brand and sizzle reels, montages, static loops, static title cards, footage remixes, and freeform bu… |
+| [`gpt-taste`](registry/claude/gpt-taste/SKILL.md) | `claude` | Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing… |
 | [`gpt-tasteskill`](registry/codex/gpt-tasteskill/SKILL.md) | `codex` | Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing… |
+| [`grilling`](registry/agents/grilling/SKILL.md) | `agents` | Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases. |
 | [`grilling`](registry/codex/grilling/SKILL.md) | `codex` | Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases. |
 | [`hatch-pet`](registry/codex/hatch-pet/SKILL.md) | `codex` | Create, repair, validate, visually QA, and package Codex-compatible v2 animated pets from character art, generated images, company or prospect brand cues, or visual references. Use for any new Codex pet, custom mascot, non-pixel pet style, brand-inspired pet,… |
+| [`hgs-anime-action`](registry/agents/hgs-anime-action/SKILL.md) | `agents` | Generate anime-style video prompts for Seedance 2.0 on Higgsfield. Use whenever the user wants anime, Japanese animation style, shonen action, seinen drama, magical girl, mecha, isekai, slice-of-life anime, or any Japanese animation aesthetic. Triggers on: ani… |
+| [`hgs-anime-action`](registry/claude/hgs-anime-action/SKILL.md) | `claude` | Generate anime-style video prompts for Seedance 2.0 on Higgsfield. Use whenever the user wants anime, Japanese animation style, shonen action, seinen drama, magical girl, mecha, isekai, slice-of-life anime, or any Japanese animation aesthetic. Triggers on: ani… |
+| [`hgs-cartoon`](registry/agents/hgs-cartoon/SKILL.md) | `agents` | Generate cartoon and animation style video prompts for Seedance 2.0 on Higgsfield. Use whenever the user wants cartoon, 2D animation, cel-shaded, hand-drawn, illustrated, flat animation, or motion graphics animation style video. Triggers on: cartoon, animation… |
+| [`hgs-cartoon`](registry/claude/hgs-cartoon/SKILL.md) | `claude` | Generate cartoon and animation style video prompts for Seedance 2.0 on Higgsfield. Use whenever the user wants cartoon, 2D animation, cel-shaded, hand-drawn, illustrated, flat animation, or motion graphics animation style video. Triggers on: cartoon, animation… |
+| [`hgs-social-hook`](registry/agents/hgs-social-hook/SKILL.md) | `agents` | Generate viral social media hook video prompts for TikTok, Instagram Reels, and YouTube Shorts using Seedance 2.0 on Higgsfield. Use whenever the user wants to create scroll-stopping hooks, viral short-form video, attention-grabbing openers, TikTok content, Re… |
+| [`hgs-social-hook`](registry/claude/hgs-social-hook/SKILL.md) | `claude` | Generate viral social media hook video prompts for TikTok, Instagram Reels, and YouTube Shorts using Seedance 2.0 on Higgsfield. Use whenever the user wants to create scroll-stopping hooks, viral short-form video, attention-grabbing openers, TikTok content, Re… |
+| [`hyperframes`](registry/agents/hyperframes/SKILL.md) | `agents` | Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any Hype… |
+| [`hyperframes`](registry/claude/hyperframes/SKILL.md) | `claude` | Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any Hype… |
+| [`hyperframes`](registry/codex/hyperframes/SKILL.md) | `codex` | Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any Hype… |
+| [`hyperframes-animation`](registry/agents/hyperframes-animation/SKILL.md) | `agents` | All animation knowledge for HyperFrames — atomic motion rules, multi-phase scene blueprints, scene transitions, broader motion-design techniques, AND the seven runtime adapters (GSAP default, plus Lottie, Three.js, Anime.js, CSS keyframes, Web Animations API,… |
+| [`hyperframes-animation`](registry/claude/hyperframes-animation/SKILL.md) | `claude` | All animation knowledge for HyperFrames — atomic motion rules, multi-phase scene blueprints, scene transitions, broader motion-design techniques, AND the seven runtime adapters (GSAP default, plus Lottie, Three.js, Anime.js, CSS keyframes, Web Animations API,… |
+| [`hyperframes-animation`](registry/codex/hyperframes-animation/SKILL.md) | `codex` | All animation knowledge for HyperFrames — atomic motion rules, multi-phase scene blueprints, scene transitions, broader motion-design techniques, AND the seven runtime adapters (GSAP default, plus Lottie, Three.js, Anime.js, CSS keyframes, Web Animations API,… |
+| [`hyperframes-audio`](registry/agents/hyperframes-audio/SKILL.md) | `agents` | Use when audio already placed in a HyperFrames composition needs to be mixed: a music bed that fights a voiceover (voiceover carve), effects on a track (EQ, compressor, limiter, gate, saturation, delay, reverb, chorus, phaser, bitcrush), or automation envelope… |
+| [`hyperframes-audio`](registry/claude/hyperframes-audio/SKILL.md) | `claude` | Use when audio already placed in a HyperFrames composition needs to be mixed: a music bed that fights a voiceover (voiceover carve), effects on a track (EQ, compressor, limiter, gate, saturation, delay, reverb, chorus, phaser, bitcrush), or automation envelope… |
+| [`hyperframes-audio`](registry/codex/hyperframes-audio/SKILL.md) | `codex` | Use when audio already placed in a HyperFrames composition needs to be mixed: a music bed that fights a voiceover (voiceover carve), effects on a track (EQ, compressor, limiter, gate, saturation, delay, reverb, chorus, phaser, bitcrush), or automation envelope… |
+| [`hyperframes-cli`](registry/agents/hyperframes-cli/SKILL.md) | `agents` | Use the HyperFrames CLI development loop: init, add, catalog, capture, lint, check, snapshot, compare, grade-compare, preview, play, present, beats, keyframes, single or batch render, publish, cloud, cloudrun, feedback, lambda, doctor, browser, info, upgrade,… |
+| [`hyperframes-cli`](registry/claude/hyperframes-cli/SKILL.md) | `claude` | Use the HyperFrames CLI development loop: init, add, catalog, capture, lint, check, snapshot, compare, grade-compare, preview, play, present, beats, keyframes, single or batch render, publish, cloud, cloudrun, feedback, lambda, doctor, browser, info, upgrade,… |
+| [`hyperframes-cli`](registry/codex/hyperframes-cli/SKILL.md) | `codex` | Use the HyperFrames CLI development loop: init, add, catalog, capture, lint, check, snapshot, compare, grade-compare, preview, play, present, beats, keyframes, single or batch render, publish, cloud, cloudrun, feedback, lambda, doctor, browser, info, upgrade,… |
+| [`hyperframes-core`](registry/agents/hyperframes-core/SKILL.md) | `agents` | The HyperFrames composition contract — build one renderable project. Use for composition structure, the `data-*` timing attributes, `class="clip"`, tracks, sub-compositions, variables, framework-owned media playback, deterministic-render rules, and validation.… |
+| [`hyperframes-core`](registry/claude/hyperframes-core/SKILL.md) | `claude` | The HyperFrames composition contract — build one renderable project. Use for composition structure, the `data-*` timing attributes, `class="clip"`, tracks, sub-compositions, variables, framework-owned media playback, deterministic-render rules, and validation.… |
+| [`hyperframes-core`](registry/codex/hyperframes-core/SKILL.md) | `codex` | The HyperFrames composition contract — build one renderable project. Use for composition structure, the `data-*` timing attributes, `class="clip"`, tracks, sub-compositions, variables, framework-owned media playback, deterministic-render rules, and validation.… |
+| [`hyperframes-creative`](registry/agents/hyperframes-creative/SKILL.md) | `agents` | Non-animation creative direction for HyperFrames videos. Use for design spec (frame.md / design.md) handling, palettes, typography, narration, beat planning, audio-reactive visuals, composition patterns, and brand / style decisions. For atomic motion patterns… |
+| [`hyperframes-creative`](registry/claude/hyperframes-creative/SKILL.md) | `claude` | Non-animation creative direction for HyperFrames videos. Use for design spec (frame.md / design.md) handling, palettes, typography, narration, beat planning, audio-reactive visuals, composition patterns, and brand / style decisions. For atomic motion patterns… |
+| [`hyperframes-creative`](registry/codex/hyperframes-creative/SKILL.md) | `codex` | Non-animation creative direction for HyperFrames videos. Use for design spec (frame.md / design.md) handling, palettes, typography, narration, beat planning, audio-reactive visuals, composition patterns, and brand / style decisions. For atomic motion patterns… |
+| [`hyperframes-keyframes`](registry/agents/hyperframes-keyframes/SKILL.md) | `agents` | Use when a HyperFrames composition needs seek-safe 2D/3D keyframes, GSAP timelines, CSS keyframes, Anime.js, WAAPI, FLIP, paths, masks, SVG morph/draw, text trails, 3D depth, or `hyperframes keyframes` diagnostics. Don't use for broad scene strategy, brand des… |
+| [`hyperframes-keyframes`](registry/claude/hyperframes-keyframes/SKILL.md) | `claude` | Use when a HyperFrames composition needs seek-safe 2D/3D keyframes, GSAP timelines, CSS keyframes, Anime.js, WAAPI, FLIP, paths, masks, SVG morph/draw, text trails, 3D depth, or `hyperframes keyframes` diagnostics. Don't use for broad scene strategy, brand des… |
+| [`hyperframes-keyframes`](registry/codex/hyperframes-keyframes/SKILL.md) | `codex` | Use when a HyperFrames composition needs seek-safe 2D/3D keyframes, GSAP timelines, CSS keyframes, Anime.js, WAAPI, FLIP, paths, masks, SVG morph/draw, text trails, 3D depth, or `hyperframes keyframes` diagnostics. Don't use for broad scene strategy, brand des… |
+| [`hyperframes-registry`](registry/agents/hyperframes-registry/SKILL.md) | `agents` | Install, discover, and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add or hyperframes catalog, installing one item or every block matching a tag, wiring an installed item into index.html, or working with hype… |
+| [`hyperframes-registry`](registry/claude/hyperframes-registry/SKILL.md) | `claude` | Install, discover, and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add or hyperframes catalog, installing one item or every block matching a tag, wiring an installed item into index.html, or working with hype… |
+| [`hyperframes-registry`](registry/codex/hyperframes-registry/SKILL.md) | `codex` | Install, discover, and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add or hyperframes catalog, installing one item or every block matching a tag, wiring an installed item into index.html, or working with hype… |
+| [`kmfa-jdy-monthly-source-pack`](registry/codex/kmfa-jdy-monthly-source-pack/SKILL.md) | `codex` | 在已授权且已登录的金蝶精斗云 Chrome 会话中，为 KMFA 按月逐账套取得、核验、归档财务一级来源。适用于制作经营管理月报、项目成本分析、开票纳税、资金、应收应付或审计底稿之前；覆盖三大报表、凭证、明细账、科目余额、应收应付、发票、固定资产和银行流水，并把不可下载或业务模块未维护的情况保留为可追溯状态，不能伪造零值或下载成功。 |
+| [`local-sdxl-wallpaper`](registry/agents/local-sdxl-wallpaper/SKILL.md) | `agents` | 用本机 ComfyUI + WAI-Illustrious SDXL 零成本批量出二次元角色壁纸（原神/崩铁/绝区零/鸣潮/崩坏3）。Use when 要本地出壁纸、替代 gpt-image-2 省钱、按配方批量跑图、排查「出全裸/全黑/凭空道具/异色瞳/T字站姿」这类缺陷、或要给循环视频提供首尾帧素材。**与 character-skin-pipeline 的关系**：那条走 OpenAI gpt-image-2（有锚图、有审核兜底、$0.07-0.34/张）；本条走本地（$0/张、无审核兜底、身份靠 LoRA）… |
+| [`local-sdxl-wallpaper`](registry/claude/local-sdxl-wallpaper/SKILL.md) | `claude` | 用本机 ComfyUI + WAI-Illustrious SDXL 零成本批量出二次元角色壁纸（原神/崩铁/绝区零/鸣潮/崩坏3）。Use when 要本地出壁纸、替代 gpt-image-2 省钱、按配方批量跑图、排查「出全裸/全黑/凭空道具/异色瞳/T字站姿」这类缺陷、或要给循环视频提供首尾帧素材。**与 character-skin-pipeline 的关系**：那条走 OpenAI gpt-image-2（有锚图、有审核兜底、$0.07-0.34/张）；本条走本地（$0/张、无审核兜底、身份靠 LoRA）… |
+| [`local-wan-loop-wallpaper`](registry/agents/local-wan-loop-wallpaper/SKILL.md) | `agents` | 用本机 ComfyUI + Wan2.2-Fun-5B-InP 把一张静态壁纸变成无缝循环的待机短视频（首尾帧同图法）。Use when 要出循环/待机壁纸、要给抖音做零剪辑口的动态壁纸、静态图已验收要接动效、或排查「循环点看得出来 / 视频打不开 / 人物变形」。上游是 local-sdxl-wallpaper（静态图来源）。 |
+| [`local-wan-loop-wallpaper`](registry/claude/local-wan-loop-wallpaper/SKILL.md) | `claude` | 用本机 ComfyUI + Wan2.2-Fun-5B-InP 把一张静态壁纸变成无缝循环的待机短视频（首尾帧同图法）。Use when 要出循环/待机壁纸、要给抖音做零剪辑口的动态壁纸、静态图已验收要接动效、或排查「循环点看得出来 / 视频打不开 / 人物变形」。上游是 local-sdxl-wallpaper（静态图来源）。 |
+| [`media-use`](registry/agents/media-use/SKILL.md) | `agents` | Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT into a frozen local file or paste-ready block + ledger record (one verb, `resolve`); generate via TTS / music… |
+| [`media-use`](registry/claude/media-use/SKILL.md) | `claude` | Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT into a frozen local file or paste-ready block + ledger record (one verb, `resolve`); generate via TTS / music… |
+| [`media-use`](registry/codex/media-use/SKILL.md) | `codex` | Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT into a frozen local file or paste-ready block + ledger record (one verb, `resolve`); generate via TTS / music… |
+| [`method-switch`](registry/agents/method-switch/SKILL.md) | `agents` | 卡住了就换方法，不是换参数。Use when 卡住了 / 没进展 / 死循环 / 调了很久没用 / 返工两次以上 / 做了很多但没收益 / 想不出办法 / 缺 idea / 缺方法论 / 优化不动了 / 试了很多都不行。**也在你自己第二次返工同一个交付时主动用**——不要等人来点醒。本 skill 不给答案，它换问题。 |
+| [`method-switch`](registry/claude/method-switch/SKILL.md) | `claude` | 卡住了就换方法，不是换参数。Use when 卡住了 / 没进展 / 死循环 / 调了很久没用 / 返工两次以上 / 做了很多但没收益 / 想不出办法 / 缺 idea / 缺方法论 / 优化不动了 / 试了很多都不行。**也在你自己第二次返工同一个交付时主动用**——不要等人来点醒。本 skill 不给答案，它换问题。 |
+| [`mmx-cli`](registry/agents/mmx-cli/SKILL.md) | `agents` | Use mmx to generate text, images, video, speech, and music via the MiniMax AI platform. Use when the user wants to create media content, chat with MiniMax models, perform web search, or manage MiniMax API resources from the terminal. |
+| [`mmx-cli`](registry/claude/mmx-cli/SKILL.md) | `claude` | Use mmx to generate text, images, video, speech, and music via the MiniMax AI platform. Use when the user wants to create media content, chat with MiniMax models, perform web search, or manage MiniMax API resources from the terminal. |
+| [`prompt-compiler`](registry/agents/prompt-compiler/SKILL.md) | `agents` | 将原始 Prompt、代码、Agent 架构、配置或其他文本工件编译为可追溯、可回滚、可独立验收的冠军候选。GEPA、AutoResearch、Meta-Harness、Promptfoo 同时作为同层竞品和可路由下层执行器；Prompt Compiler 只有在全部必选竞品实际运行、全部冻结维度逐项排名第一、总体第一、独立最终测试、回归、红队、Promptfoo 与外部证据均通过时才允许发布。适用于提示词优化、Agent Skill 优化、竞品同场评测、版本记忆和防退化发布门禁。 |
 | [`prompt-compiler`](registry/codex/prompt-compiler/SKILL.md) | `codex` | 将用户原始提示词、代码、智能体架构、配置或其他文本工件，编译成 ChatGPT、Codex、Claude、Gemini 四个可追溯版本；统一编排 GEPA、自动研究式循环、元执行框架式循环、Promptfoo、多目标帕累托搜索、预言机、训练/验证/最终测试、三次重复、回归、红队和独立终审。用户要求优化提示词、比较优化方法、建立版本记忆或防退化发布门禁时使用。普通文字润色、未授权模型调用或无法接受测试成本时不要使用。 |
-| [`slides`](registry/codex/slides/SKILL.md) | `codex` | Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies. |
+| [`seedance-20`](registry/agents/seedance-20/SKILL.md) | `agents` | This skill should be used when creating, improving, or troubleshooting Seedance 2.0 video on any surface - Dreamina, Jimeng, CapCut, Doubao, Volcengine/Ark, BytePlus, Runway's Seedance route, fal, or third-party provider/router surfaces such as EvoLink, OpenRo… |
+| [`seedance-20`](registry/claude/seedance-20/SKILL.md) | `claude` | This skill should be used when creating, improving, or troubleshooting Seedance 2.0 video on any surface - Dreamina, Jimeng, CapCut, Doubao, Volcengine/Ark, BytePlus, Runway's Seedance route, fal, or third-party provider/router surfaces such as EvoLink, OpenRo… |
 | [`ui-styling`](registry/codex/ui-styling/SKILL.md) | `codex` | Create beautiful, accessible user interfaces with shadcn/ui components (built on Radix UI + Tailwind), Tailwind CSS utility-first styling, and canvas-based visual designs. Use when building user interfaces, implementing design systems, creating responsive layo… |
+| [`ui-ux-pro-max`](registry/agents/ui-ux-pro-max/SKILL.md) | `agents` | UI/UX design intelligence for web and mobile. Searchable local database with 84 styles, 192 color palettes, 74 font pairings, 192 product types, 98 UX guidelines, 104 icon entries, 16 GSAP motion presets, and 25 chart types across 22 stacks (React, Next.js, Vu… |
+| [`ui-ux-pro-max`](registry/claude/ui-ux-pro-max/SKILL.md) | `claude` | UI/UX design intelligence for web and mobile. Searchable local database with 84 styles, 192 color palettes, 74 font pairings, 192 product types, 98 UX guidelines, 104 icon entries, 16 GSAP motion presets, and 25 chart types across 22 stacks (React, Next.js, Vu… |
 | [`ui-ux-pro-max`](registry/codex/ui-ux-pro-max/SKILL.md) | `codex` | UI/UX design intelligence for web and mobile. Searchable local database with 84 styles, 192 color palettes, 74 font pairings, 192 product types, 98 UX guidelines, 104 icon entries, 16 GSAP motion presets, and 25 chart types across 22 stacks (React, Next.js, Vu… |
+| [`video-prompt-compiler`](registry/agents/video-prompt-compiler/SKILL.md) | `agents` | 将口语化、模糊或碎片化的视频想法编译为目标视频模型可执行的电影级、工业级、品牌级、微表演级、剪辑或 2D/3D 生产提示词。先判断真实素材剪辑、T2V、I2V、Reference、V2V/Edit、Extend、剧本转分镜、2D、AIGC 3D 还是真实 CAD/Blender，再建立事实约束账本与 VideoPromptIR，生成“精确版/表现版”两个候选，通过硬门槛和多维百分比评分择优，最后按 MiniMax H3、Hailuo 2.3、Seedance 2.0、Kling VIDEO 3.0、Veo 3.1、… |
 | [`weread-portable-notes`](registry/codex/weread-portable-notes/SKILL.md) | `codex` | 通过全局中文的“微信读书笔记迁移”应用，使用腾讯官方微信读书 Agent Gateway 或浏览器本地文件，把用户本人有权使用的阅读笔记导出为四类 Markdown、规范化 JSON、离线搜索、可校验 ZIP 和可交给 ChatGPT 的中文阅读文件。不得索取、复制、持久化或回显真实用户密钥。 |
 
 ## ⚠️ 未归类
 
 下列 skill 不在 `sync_skills.py` 的分类表里，已归入「其他」，请补分类：
 
+- `KMFile-Archive`
+- `KMMedia-Archive`
 - `banner-design`
 - `brand`
-- `context-kernel`
+- `cak-comfyui`
+- `cak-minimax-h3`
+- `character-skin-pipeline`
+- `character-skin-pipeline.bak-0.0.4`
+- `character-skin-sexy`
+- `comfyui-workflow-skill`
 - `design`
 - `design-system`
+- `dingtalk-aisearch`
+- `dingtalk-aitable`
+- `dingtalk-chat`
+- `dingtalk-contact`
+- `dingtalk-doc`
+- `dingtalk-event`
+- `dingtalk-minutes`
+- `dingtalk-misc`
+- `dingtalk-shared`
+- `dingtalk-todo`
+- `dingtalk-wiki`
+- `douyin-axes-recipe`
+- `douyin-publish-pack`
+- `dreamina`
+- `flux-comfyui`
+- `general-video`
+- `gpt-taste`
 - `grilling`
+- `hgs-anime-action`
+- `hgs-cartoon`
+- `hgs-social-hook`
+- `hyperframes`
+- `hyperframes-animation`
+- `hyperframes-audio`
+- `hyperframes-cli`
+- `hyperframes-core`
+- `hyperframes-creative`
+- `hyperframes-keyframes`
+- `hyperframes-registry`
+- `kmfa-jdy-monthly-source-pack`
+- `local-sdxl-wallpaper`
+- `local-wan-loop-wallpaper`
+- `media-use`
+- `method-switch`
+- `mmx-cli`
 - `prompt-compiler`
-- `slides`
+- `seedance-20`
 - `ui-styling`
 - `ui-ux-pro-max`
+- `video-prompt-compiler`
 - `weread-portable-notes`

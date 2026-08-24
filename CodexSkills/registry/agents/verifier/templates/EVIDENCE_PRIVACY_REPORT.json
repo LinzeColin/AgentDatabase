@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "",
+  "root": "",
+  "scanned_file_count": 0,
+  "scanned_total_bytes": 0,
+  "findings": [],
+  "blocking_findings": [],
+  "binary_files": [],
+  "skipped_large_text": [],
+  "filesystem_issues": [],
+  "status": "NOT_RUN",
+  "limitations": [
+    "Run evidence_guard.py scan before a positive verdict."
+  ]
+}

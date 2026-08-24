@@ -1,0 +1,41 @@
+{
+  "$id": "teleiosis://schemas/decision-receipt.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_identity": {
+      "$ref": "candidate-identity.schema.json"
+    },
+    "decision": {
+      "enum": [
+        "KEEP",
+        "REVERT",
+        "REHEAT",
+        "BLOCKED"
+      ]
+    },
+    "external_verifier_status": {
+      "enum": [
+        "REQUIRED",
+        "UNAVAILABLE",
+        "PENDING",
+        "FORMAL_PASS",
+        "FORMAL_FAIL"
+      ]
+    },
+    "reason": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "teleiosis.decision_receipt.v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "candidate_identity",
+    "decision",
+    "reason",
+    "external_verifier_status"
+  ],
+  "type": "object"
+}

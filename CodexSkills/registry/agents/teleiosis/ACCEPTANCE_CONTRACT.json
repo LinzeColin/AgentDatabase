@@ -1,0 +1,220 @@
+{
+  "criteria": [
+    {
+      "acceptance": "ZIP 根只有 teleiosis/，不得注册独立 Lab Skill。",
+      "id": "AC-001",
+      "name": "单一安装身份",
+      "oracle": "test_package_root",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "VERSION、SKILL metadata、release metadata 均为 v0.0.0.5。",
+      "id": "AC-002",
+      "name": "版本一致",
+      "oracle": "test_version_consistency",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "Locked Genesis SHA-256 必须为 14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086。",
+      "id": "AC-003",
+      "name": "Genesis 不变",
+      "oracle": "test_genesis_lock",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "T/S/P/A 均有非空、唯一、强制 Capability Manifest。",
+      "id": "AC-004",
+      "name": "四引擎全量能力表",
+      "oracle": "test_capability_manifests",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "一次 Run 恰为 36 阶段，按 T/S/P/A 重复 9 轮。",
+      "id": "AC-005",
+      "name": "完整顺序",
+      "oracle": "test_run_contract",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "KEEP/NO_CHANGE/REVERT 与实际 Delta 对账并保留 revision。",
+      "id": "AC-006",
+      "name": "Candidate 连续与回滚",
+      "oracle": "test_workflow_revision",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "冻结后任一协议字段变化均使 hash 校验失败。",
+      "id": "AC-007",
+      "name": "Arena 协议冻结",
+      "oracle": "test_arena_freeze",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "等预算主榜拒绝预算不等、参与者任务集不一致或缺失重复。",
+      "id": "AC-008",
+      "name": "公平预算",
+      "oracle": "test_arena_fairness",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "密封场要求冻结协议和 verifier_only 数据可见性。",
+      "id": "AC-009",
+      "name": "双竞技场",
+      "oracle": "test_sealed_arena",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "效果、治理、Pareto 分离，治理不混入效果分。",
+      "id": "AC-010",
+      "name": "三层榜单",
+      "oracle": "test_arena_outputs",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "Candidate 任一硬失败即 BLOCKED，不能因总分高而晋级。",
+      "id": "AC-011",
+      "name": "硬门不可补偿",
+      "oracle": "test_arena_hard_gate",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "代理或非官方运行最高 L2，不能冒充 L3/L4。",
+      "id": "AC-012",
+      "name": "证据等级诚实",
+      "oracle": "test_evidence_level_cap",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "内部代码不得返回 FORMAL_PASS；handoff 明确只读外部裁决。",
+      "id": "AC-013",
+      "name": "外部 Verifier 分权",
+      "oracle": "test_no_internal_formal_pass",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "全新、幂等、旧版升级、Genesis 冲突、高版本、回滚均有确定性结果。",
+      "id": "AC-014",
+      "name": "事务安装",
+      "oracle": "test_installer",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "无符号链接、路径穿越、重复条目、缓存、秘密和未知可执行冲突。",
+      "id": "AC-015",
+      "name": "安全封包",
+      "oracle": "test_security",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "任务 DAG 无循环；每条 Acceptance 映射到任务、测试、Oracle、证据和制品。",
+      "id": "AC-016",
+      "name": "DAG 与追踪",
+      "oracle": "test_governance_artifacts",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "两次清洁构建字节一致；冷解压后自检和测试通过。",
+      "id": "AC-017",
+      "name": "确定性 ZIP",
+      "oracle": "test_reproducible_package",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "真实市场、L3/L4、正式独立复审未运行时明确 NOT_CLAIMED/UNAVAILABLE。",
+      "id": "AC-018",
+      "name": "证据边界",
+      "oracle": "test_truth_boundaries",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "原始 v3 SKILL/README/444 条 Manifest 快照存在，语义继承矩阵和回归测试证明 T/S/P、Candidate、移动仓库与回滚不降级。",
+      "id": "AC-019",
+      "name": "v3 非降级继承",
+      "oracle": "test_v3_lineage",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "七类状态分类可执行；保留更新上游，固定 SHA 不作为普通漂移门，conflict/blocked fail-closed。",
+      "id": "AC-020",
+      "name": "Stage 0 Semantic Reconcile",
+      "oracle": "test_semantic_reconcile",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "Pass A/B/C 输入 hash 不同，每次有真实制品/Finding和 Developer Burden Delta。",
+      "id": "AC-021",
+      "name": "三次 Skill Catalog 扫描",
+      "oracle": "test_skill_audit",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "无 dossier/claim_id 时明确 insufficient_roster 并使用中立角色，不计人物专家贡献。",
+      "id": "AC-022",
+      "name": "人物专家真实性边界",
+      "oracle": "test_persona_gate",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "十视角与两轮六角色均完整，非独立运行不冒充独立 PASS。",
+      "id": "AC-023",
+      "name": "十视角与六角色复审",
+      "oracle": "test_review_contract",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "Project Input、状态机、六类无环 DAG、Acceptance→Task→Test→Oracle→Evidence→Artifact 完整可验证。",
+      "id": "AC-024",
+      "name": "Taskpack 编译与追踪",
+      "oracle": "test_taskpack_validation",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "只剩环境绑定任务，每项都有命令、输入、Expected、失败分支、停止、回滚和证据。",
+      "id": "AC-025",
+      "name": "Fresh Builder Readiness",
+      "oracle": "test_fresh_builder_v5",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "内部可生成绑定精确 Subject/Acceptance/Manifest 的只读 ZIP，绝不签发 formal PASS。",
+      "id": "AC-026",
+      "name": "冻结 Verifier handoff",
+      "oracle": "test_verifier_handoff_v5",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "T/S/P/A、六分区、checksum、总哈希、数量与覆盖全部通过。",
+      "id": "AC-027",
+      "name": "8192 条确定性回归语料",
+      "oracle": "test_regression_corpus",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "一条命令完成体检；新装、幂等、v1—v4升级、保留、备份、回滚、冷解压均验证。",
+      "id": "AC-028",
+      "name": "一键 Doctor 与跨平台安装",
+      "oracle": "test_doctor_and_install_v5",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "三次完整测试与三次 Doctor 的原始日志、退出码、测试数、时长和哈希随包保存。",
+      "id": "AC-029",
+      "name": "三轮原始验证证据",
+      "oracle": "test_raw_validation_evidence",
+      "severity": "HARD"
+    },
+    {
+      "acceptance": "两次清洁封包字节一致，ZIP 仅一根、无旧候选副本/缓存/垃圾，冷解压后全门通过。",
+      "id": "AC-030",
+      "name": "唯一确定性完整 ZIP",
+      "oracle": "test_final_zip_v5",
+      "severity": "HARD"
+    }
+  ],
+  "definition_of_done": "All deterministic local gates pass; v3 semantics are non-degraded; the package is install-ready with raw evidence; external-only evidence remains explicitly unclaimed.",
+  "formal_release_authority": "external independent verifier",
+  "frozen_at": "2026-08-03T00:00:00Z",
+  "schema_version": "teleiosis.acceptance_contract.v5",
+  "scope": "Teleiosis v0.0.0.5 full non-routed T/S/P/A integration, v3 non-degradation, Stage0, three Skill passes, taskpack, regression and verifier handoff",
+  "version": "v0.0.0.5"
+}

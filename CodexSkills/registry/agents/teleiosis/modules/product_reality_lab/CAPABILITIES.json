@@ -1,0 +1,262 @@
+{
+  "capabilities": [
+    {
+      "acceptance": "直接、邻近、替代、人工流程、开源同类均有覆盖或理由。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P001",
+      "mandatory": true,
+      "name_zh": "五类参照"
+    },
+    {
+      "acceptance": "页面、组件、按钮、API、任务、数据、角色、Flag、依赖双向对账。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P002",
+      "mandatory": true,
+      "name_zh": "源码与运行时 Census"
+    },
+    {
+      "acceptance": "用户可见入口和功能面完整登记并测试。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P003",
+      "mandatory": true,
+      "name_zh": "Surface 覆盖"
+    },
+    {
+      "acceptance": "关键状态、空态、边界态和持久化状态可验证。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P004",
+      "mandatory": true,
+      "name_zh": "State 覆盖"
+    },
+    {
+      "acceptance": "状态转换、重复执行、取消、恢复和幂等可验证。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P005",
+      "mandatory": true,
+      "name_zh": "Transition 覆盖"
+    },
+    {
+      "acceptance": "角色、权限、越权和最小权限边界可验证。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P006",
+      "mandatory": true,
+      "name_zh": "Role 覆盖"
+    },
+    {
+      "acceptance": "来源、Schema、迁移、完整性、备份和恢复可验证。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P007",
+      "mandatory": true,
+      "name_zh": "Data 覆盖"
+    },
+    {
+      "acceptance": "故障、半失败、依赖失效和降级路径可验证。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P008",
+      "mandatory": true,
+      "name_zh": "Fault 覆盖"
+    },
+    {
+      "acceptance": "每条关键验收有独立业务 Oracle，而非仅字符串或 HTTP 状态。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P009",
+      "mandatory": true,
+      "name_zh": "Oracle 覆盖"
+    },
+    {
+      "acceptance": "原始结果、环境、输入、输出、哈希和责任主体可追溯。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P010",
+      "mandatory": true,
+      "name_zh": "Evidence 覆盖"
+    },
+    {
+      "acceptance": "真实操作链、API 合同、错误反馈和可访问性可验证。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P011",
+      "mandatory": true,
+      "name_zh": "前端与 API 试炼"
+    },
+    {
+      "acceptance": "容量、性能、并发、幂等和数据不丢失可验证。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P012",
+      "mandatory": true,
+      "name_zh": "数据与性能试炼"
+    },
+    {
+      "acceptance": "故障注入、权限、安全、恢复和回滚可验证。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P013",
+      "mandatory": true,
+      "name_zh": "可靠性与安全试炼"
+    },
+    {
+      "acceptance": "误点、连点、重复提交、刷新、旧会话、半失败、Undo 均覆盖。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P014",
+      "mandatory": true,
+      "name_zh": "防呆与滥用路径"
+    },
+    {
+      "acceptance": "测试必须能识别故意注入的错误，避免伪测试。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P015",
+      "mandatory": true,
+      "name_zh": "Negative Control 与 Mutation"
+    },
+    {
+      "acceptance": "证据等级真实；缺陷有稳定 ID、复现、根因、修复、回归和残余风险。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P016",
+      "mandatory": true,
+      "name_zh": "Field 与缺陷收敛"
+    },
+    {
+      "acceptance": "一条命令完成完整体检并输出唯一 JSON 结果和下一步。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P017",
+      "mandatory": true,
+      "name_zh": "零技术门槛 Doctor"
+    },
+    {
+      "acceptance": "支持全新、幂等、v1—v4 升级、未知文件保留、备份和收据回滚。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P018",
+      "mandatory": true,
+      "name_zh": "事务升级与精确回滚"
+    },
+    {
+      "acceptance": "8192 条 T/S/P/A 多分区语料逐条 checksum、覆盖和整体哈希验证。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P019",
+      "mandatory": true,
+      "name_zh": "大样本回归语料"
+    },
+    {
+      "acceptance": "两次清洁构建字节一致，冷解压后体检、测试和安装烟测通过。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P020",
+      "mandatory": true,
+      "name_zh": "冷解压与确定性构建"
+    },
+    {
+      "acceptance": "Windows、macOS、Linux 入口及人类可见操作文档为中文。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "P021",
+      "mandatory": true,
+      "name_zh": "中文人机文档与跨平台入口"
+    }
+  ],
+  "capability_count": 21,
+  "module": "P",
+  "schema_version": "teleiosis.capability_manifest.v5",
+  "scope_mode": "FULL_NO_ROUTING",
+  "slug": "product_reality_lab",
+  "version": "v0.0.0.5"
+}

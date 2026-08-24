@@ -1,0 +1,29 @@
+{
+  "canonical_key": "public:georgeantaki",
+  "canonical_name": "George Antaki",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "材料建工师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "george-antaki",
+  "subject_uid": "person-d22682d28b6acd4b",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/george-antaki-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T07:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.6",
+      "distilled_with_note": "2026-07-26 十二族重组：70 人只重打包未重蒸，正文来自 ≤v0.0.0.5",
+      "distilled_with_source": "git-first-commit:bulk-repackage",
+      "model_version": "1.0.0",
+      "outer_sha256": "f816327cb81e518af32f38f3958a964d1bf63e9a90e7acb03931b935a1d5ba2d",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/george-antaki-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "df4dbce4b89db764cffad5dfefe95d6e605b5a594c10f42b4dc33484bd3b100f",
+      "runtime_size_bytes": 74382,
+      "size_bytes": 531402
+    }
+  ]
+}

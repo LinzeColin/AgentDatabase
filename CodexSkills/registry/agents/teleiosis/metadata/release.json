@@ -1,0 +1,23 @@
+{
+  "architecture": "single-skill-four-built-in-full-run-engines",
+  "artifact_status": "INSTALL_READY_FROZEN_CANDIDATE",
+  "display_name": "Teleiosis v0.0.0.5",
+  "effective_genesis_composite_sha256": "d7349b951034ba2b5335c94ff7cfbc5bb472524c39010af66877c21c9e4f5b96",
+  "formal_pass": "EXTERNAL_VERIFIER_REQUIRED",
+  "genesis_locked_sha256": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
+  "lineage": [
+    "v0.0.0.1",
+    "v0.0.0.2",
+    "v0.0.0.3",
+    "v0.0.0.4",
+    "v0.0.0.5"
+  ],
+  "name": "teleiosis",
+  "one_click": "python3 START_HERE.py doctor && python3 START_HERE.py install",
+  "release_date": "2026-08-03",
+  "run_contract": "T-C-S-C-P-C-A-C x 3 rounds x 3 groups",
+  "schema_version": "teleiosis.release.v5",
+  "scope_mode": "FULL_NO_ROUTING",
+  "v3_inheritance": "FUNCTIONAL_SUPERSET_WITH_SOURCE_BOUNDARY",
+  "version": "v0.0.0.5"
+}

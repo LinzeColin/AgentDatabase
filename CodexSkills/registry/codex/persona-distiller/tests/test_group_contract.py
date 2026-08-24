@@ -169,40 +169,10 @@ class GroupContractTests(unittest.TestCase):
             for role in plan['selected_roles']
             if role['role_type'] == 'persona-solver'
         }
-        # ★★★ 2026-08-18：这道红的**真因已量清，且不该靠放宽断言变绿**。
-        #   `AssertionError: False is not true` 什么也没说，下一个人会从头再查一遍 ——
-        #   所以把实测结论写进失败信息里。**断言本身一个字没动。**
-        #
-        #   实测（v0.0.0.32）：Gerstner **第 1**（进），**Anne Mulcahy 第 38 / 70**（不进）。
-        #   两人**同族（创业经营师）、同题、`domain_match` 都是满分 1.000**：
-        #
-        #       郭士纳    卡片 778 字符｜中文字 **76%**｜与题面 token 交集 **4 个**
-        #                 ⇒ task_similarity **0.0848** ⇒ 第 1
-        #       Mulcahy   卡片 2357 字符｜中文字 **0%**｜交集 **0 个**
-        #                 ⇒ task_similarity **0.0000** ⇒ 第 38
-        #
-        #   她的场景是 `Enterprise turnaround and cash-constrained operating plans`
-        #   —— **意思高度对口，一个 token 都撞不上**。
-        #
-        #   ★ 单开关消融：清空 `WEAK_SIGNALS`（＝08-17 修复前）⇒
-        #     Maeda 第 1→31、Godin 第 2→37、郭士纳 第 3→**1**，
-        #     而 **Mulcahy 两种状态下都是第 38，纹丝不动**。
-        #     ⇒ 08-17 那个修复**是对的**；她从来不是被 `creative-design` 压下去的。
-        #     **两个原因叠着，修掉一个才看见另一个。**
-        #
-        #   ⇒ 要它绿只有两条路：**改存量卡片**（撞 ㊵「已判分即冻结」）
-        #     或**改路由**（撞「门、席位一概不动」）—— **都要 Owner 定**（Task #129 选项 D-1）。
-        #   台账：`_ledgers/_那道红了很久的验收测试-真因是卡片语言不是域-2026-08-18.md`
-        want = {'Anne Mulcahy', '路易斯·郭士纳 / Louis V. Gerstner Jr.'}
-        self.assertTrue(
-            want.issubset(selected),
-            "缺席：%s\n"
-            "★ 真因已量清：缺的那位卡片是**纯英文**，与中文题面 token 交集 0 ⇒ "
-            "task_similarity 0.0000，而同族的郭士纳中文卡交集 4 个 ⇒ 0.0848。\n"
-            "  两人 domain_match 同为 1.000 —— **差的只有卡片语言**。\n"
-            "  **不要靠放宽这条断言变绿**：要绿须改存量卡片（㊵ 冻结）或改路由"
-            "（门/席位不动）—— 都要 Owner 定，见 Task #129。\n"
-            "  选出的 8 人：%s" % (sorted(want - selected), sorted(selected)))
+        self.assertTrue({
+            'Anne Mulcahy',
+            '路易斯·郭士纳 / Louis V. Gerstner Jr.',
+        }.issubset(selected))
 
     def test_new_software_deliveries_are_available_to_routing(self) -> None:
         tasks = (
@@ -246,47 +216,13 @@ class GroupContractTests(unittest.TestCase):
                 for role in plan['selected_roles']
                 if role['role_type'] == 'persona-solver'
             )
-        # ★★★ 2026-08-18：真因量清了（**断言一个字没动**），而我**第一版写错了两处，此处是订正版**。
-        #
-        #   ✗ 我写过「本测试调的是 A 层旧路由 `route_team.py`」——**错的**。
-        #     `scripts/route_team.py` 是 **6 行的向后兼容薄壳**：`from route_team_moe import main`。
-        #     **两者是同一个路由。**
-        #   ✗ 我写过「MoE 把 Willison 排第 9、size=14 会入选」——**也是错的**。
-        #     那是我按 `base_score` 排的名次，而**选人不是取前 N**。
-        #
-        #   ✓ 真机制：`route_team_moe.marginal_select()` —— **按边际增益逐个挑，重罚同族**。
-        #     同一道英文软件题（size=14）实测 base vs marginal：
-        #
-        #         1. Kent Beck      软件开发师  base 0.3616 → marginal 0.3548
-        #         2. Harry Bhadeshia 材料建工师 base 0.3076 → marginal 0.2738
-        #         5. **Joel Salatin 农林牧渔师 base 0.2299 → marginal 0.2470**（唯一的农林牧渔师）
-        #        10. Chip Huyen     软件开发师  base **0.3549**（全场第 2 高）→ marginal **0.1872**
-        #
-        #     **第 2–9 名是每族各一人**；第 10 名才回到第二个软件开发师。
-        #     ⇒ 一道软件工程评审题，14 人里**只有 3 个软件开发师**，第 5 位是**农场主**。
-        #     Simon Willison（软件开发师，base 排第 9）进不来，是因为软件席位早被占满。
-        #
-        #   ⇒ **这不是「路由坏了」，是 `marginal_select` 的多样性权重压过了对口度。**
-        #     要它绿只有调那个权重（＝改路由，撞「门、席位一概不动」）或改测试断言。
-        #     **两条都要 Owner 定。** 台账：`_marginal_select把软件题选成每族一人-2026-08-18.md`
-        expected = {
+        self.assertTrue({
             'Barbara Liskov',
             'Chip Huyen',
             'Kent Beck',
             'Martin Fowler / 马丁·福勒',
             'Simon Willison',
-        }
-        self.assertTrue(
-            expected.issubset(selected),
-            "缺席：%s\n"
-            "★ 真因是 `marginal_select` **重罚同族**，不是路由坏了、也不是缺人：\n"
-            "  实测同一道软件题 size=14 —— Kent Beck 第 1，**第 2–9 名每族各一人**"
-            "（材料/建造/财务/**农林牧渔**/创业/投资/法律/艺术设计），第 10 名才回到第二个软件人；\n"
-            "  Chip Huyen base **0.3549**（全场第 2 高）被压到 marginal **0.1872** ⇒ 第 10。\n"
-            "  ⇒ 软件席位早被占满，Willison（base 第 9）进不来。\n"
-            "  **要绿只有调多样性权重（＝改路由）或改断言 —— 都要 Owner 定。**\n"
-            "  三道题的并集（%d 人）：%s" % (
-                sorted(expected - selected), len(selected), sorted(selected)))
+        }.issubset(selected), selected)
 
     def test_human_views_register_required_card_fields(self) -> None:
         readme = (GROUP / 'README.md').read_text(encoding='utf-8')

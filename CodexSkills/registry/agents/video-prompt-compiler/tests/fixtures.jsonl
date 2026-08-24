@@ -1,0 +1,8 @@
+{"idea": "我有十字轴激光熔覆原片，剪成40秒竖屏企业片", "expected_route": "footage_edit", "expected_preset": "industrial"}
+{"idea": "让这张产品图轻微旋转，镜头慢推", "expected_route": "image_to_video", "expected_preset": "product"}
+{"idea": "参考这段人物视频的动作和运镜，换成另一个角色", "expected_route": "reference_to_video", "expected_preset": "micro_performance"}
+{"idea": "制作公司五大业务的2D流程动画", "expected_route": "2d_motion_graphics", "expected_preset": "2d_explainer"}
+{"idea": "做一个看起来像三维剖面的十字轴概念CG", "expected_route": "aigc_3d_concept", "expected_preset": "industrial"}
+{"idea": "建立真实尺寸的回转窑CAD模型和装配干涉检查", "expected_route": "true_3d_handoff", "expected_preset": "industrial"}
+{"idea": "把这个剧本转分镜并输出逐镜头prompt", "expected_route": "screenplay_to_shots", "expected_preset": "cinematic"}
+{"idea": "优化这条prompt，让它更适合视频模型", "expected_route": "prompt_optimize", "expected_preset": "cinematic"}

@@ -1,0 +1,31 @@
+{
+  "name": "industrial",
+  "purpose": "industrial process, equipment and project video",
+  "priorities": [
+    "workpiece_tool_relationship",
+    "trajectory_contact_standoff",
+    "process_order",
+    "material_response",
+    "evidence_boundary",
+    "real_sound"
+  ],
+  "camera_defaults": [
+    "locked_closeup",
+    "slow_tracking",
+    "stable_wide"
+  ],
+  "avoid": [
+    "shape_morphing",
+    "floating_tools",
+    "fantasy_sparks",
+    "unsupported_claims",
+    "fake_project_footage"
+  ],
+  "invariants": [
+    "geometry",
+    "clamping",
+    "axis",
+    "tool_distance",
+    "action_region"
+  ]
+}

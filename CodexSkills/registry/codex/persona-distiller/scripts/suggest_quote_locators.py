@@ -194,143 +194,6 @@ def suggest(ws: pathlib.Path) -> dict:
     return {"逐条": rows, "引文总数": len(rows), "**定不出出处的**": unresolved}
 
 
-
-YEAR_ANY = re.compile(r"\b(?:1[5-9]\d{2}|20\d{2})\b")
-
-
-def apply_locators(ws: pathlib.Path, result: dict, *, write: bool) -> dict:
-    """把**唯一命中**那些的坐标追加到引文所在段落末尾。
-
-    ## 为什么要有这个模式
-
-    2026-08-18 一天里对 Godin／Brandeis／Bismarck／Jefferson 手工做了同一件事约 80 处。
-    手写映射的风险是**年份打错**——而年份一旦写错，产物看起来更可信、实际更假
-    （[[my-checkers-are-mis-cut-six-times-in-one-day]]）。
-
-    ## 三条不许越的线
-
-    1. **只动「命中份数 == 1」的**。命中多份是「须人定」，本件一律不碰
-       ——多份重复收录时选哪一版是判断，不是查表。
-    2. **只在段尾追加**，不改动引文本身、不改段内任何既有文字
-       （[[bulk-auto-replace-damages-the-text]]）。
-    3. **同段已有年份或已有「［出处：」就跳过**——不叠加第二个坐标。
-
-    默认干跑（`write=False`）：只报会改哪些，一个字节都不落盘。
-    """
-    # ★ 账本的 `title` 常被填成文件名（本仓已记过），于是 coord_of 退回 locator，
-    #   而 `archive.org item <标识符>` **既不是年份也不是卷页刊名** —— 写进去满足不了
-    #   `check_quote_locator`，读者也回查不到。所以这里先补年份；补不出就**不写**。
-    year_of = {}
-    led = ws / "evidence" / "source-ledger.jsonl"
-    if led.is_file():
-        for line in led.read_text(encoding="utf-8").splitlines():
-            if line.strip():
-                r0 = json.loads(line)
-                y = str(r0.get("published_at") or "")[:4]
-                if y.isdigit():
-                    year_of[r0.get("source_id")] = y
-
-    # ★★ 2026-08-19 实测缺陷①：本件原先**只写产物 .md，不写 claims.jsonl**，
-    #   而 `check_quote_locator` **两边都查**。Fröbel #181 缺的 21 条几乎全在断言层 ⇒
-    #   本件报「已落盘 1 处」而门 21 → 21 一动没动。
-    #   「写了」不等于「门动了」——见本函数末尾的复量守卫。
-    claims_path = ws / "evidence" / "claims.jsonl"
-    claim_rows = []
-    if claims_path.is_file():
-        claim_rows = [json.loads(x) for x in claims_path.read_text(encoding="utf-8").splitlines() if x.strip()]
-
-    plan, skipped, no_year = [], 0, 0
-    for row in result.get("逐条", []):
-        if row.get("命中份数") != 1 or "建议坐标" not in row or "★★" in row:
-            continue
-        rel, quote, coord = row["文件"], row["引文"], row["建议坐标"]
-        if not YEAR_ANY.search(coord):
-            y = year_of.get((row.get("命中") or [None])[0])
-            if not y:
-                no_year += 1        # ★ 补不出年份 —— 宁可不写，也不写个过不了门的坐标
-                continue
-            coord = f"{coord}（{y}）"
-        p = ws / rel
-        if not p.is_file():
-            continue
-        text = p.read_text(encoding="utf-8", errors="replace")
-        i = text.find(quote[:40])
-        if i < 0:
-            skipped += 1
-            continue
-        # ★★★ 2026-08-19 实测缺陷②：原先按 `\n\n` 回溯到**段首**、追加到**段尾**。
-        #   而引文所在段的最后一行常常是 `- **反证条件**：…` 这种**不含引文**的子项 ⇒
-        #   坐标贴到了反证条款后面，看起来像「这条反证有出处」——**这是把正文改坏了**，
-        #   而判据一条也没少（lincoln 写 5 门不动／pestalozzi 写 7 门不动／michelangelo 写 11 门不动）。
-        #   改法：**追加到引文所在的那一行末尾**，按行还是按段判都在射程内。
-        line_start = text.rfind("\n", 0, i) + 1
-        line_end = text.find("\n", i)
-        line_end = line_end if line_end > 0 else len(text)
-        line = text[line_start:line_end]
-        if "［出处：" in line or YEAR_ANY.search(line):
-            skipped += 1
-            continue
-        plan.append({"文件": rel, "引文": quote[:44], "将追加": f"［出处：{coord}］"})
-        if write:
-            p.write_text(text[:line_start] + line.rstrip() + f"　［出处：{coord}］" + text[line_end:],
-                         encoding="utf-8")
-    # 断言层：同一批「唯一命中」的引文，若断言正文里也有它且没坐标，一并补
-    claim_hits = 0
-    if claim_rows:
-        changed = False
-        for cr in claim_rows:
-            body = str(cr.get("claim", ""))
-            if not body or "［出处：" in body or YEAR_ANY.search(body):
-                continue
-            for row in result.get("逐条", []):
-                if row.get("命中份数") != 1 or "建议坐标" not in row or "★★" in row:
-                    continue
-                frag = row["引文"][:40]
-                if frag and frag in body:
-                    coord = row["建议坐标"]
-                    if not YEAR_ANY.search(coord):
-                        y = year_of.get((row.get("命中") or [None])[0])
-                        if not y:
-                            break
-                        coord = f"{coord}（{y}）"
-                    if write:
-                        cr["claim"] = body.rstrip() + f"　［出处：{coord}］"
-                        changed = True
-                    claim_hits += 1
-                    break
-        if write and changed:
-            claims_path.write_text(
-                "\n".join(json.dumps(r, ensure_ascii=False) for r in claim_rows) + "\n",
-                encoding="utf-8")
-
-    return {"将改/已改": len(plan), "断言层": claim_hits,
-            "跳过（同段已有坐标或定位不到）": skipped,
-            "**跳过·坐标里补不出年份**": no_year,
-            "明细": plan, "已落盘": write}
-
-
-
-def _missing_locators(ws: pathlib.Path) -> int | None:
-    """跑权威判据 `check_quote_locator` 数「缺坐标」条数。**不另造尺子。**"""
-    import subprocess
-    prods = sorted(str(x) for x in ws.glob("*.md"))
-    claims = ws / "evidence" / "claims.jsonl"
-    if not prods:
-        return None
-    cmd = [sys.executable, str(pathlib.Path(__file__).resolve().parent / "check_quote_locator.py"),
-           "--products", *prods]
-    if claims.is_file():
-        cmd += ["--claims", str(claims)]
-    try:
-        out = subprocess.run(cmd, capture_output=True, text=True, timeout=600).stdout
-    except Exception:                     # noqa: BLE001
-        return None
-    #   ★ 实际格式是 `**缺坐标 20 条**`（`**` 在**前**）——我第一版按 `缺坐标 **20` 写，
-    #     正则不命中 ⇒ 守卫自报「复量跑不起来」。**它没骗我，但也没算出数。**
-    m = re.search(r"缺坐标\s*(\d+)\s*条", out)
-    return int(m.group(1)) if m else None
-
-
 def self_test() -> int:
     import tempfile
     ok = True
@@ -387,33 +250,6 @@ def self_test() -> int:
         chk("⑤ ★ 命中两份（期刊本＋文集本）→ **不给建议**，列出候选",
             a2["命中份数"] == 2 and "建议坐标" not in a2)
 
-
-        #   ⑦ --apply 只动唯一命中、只追加在段尾、同段已有年份必跳过
-        import tempfile as _tf
-        with _tf.TemporaryDirectory() as td2:
-            ws2 = pathlib.Path(td2) / "w"
-            (ws2 / "raw/s1").mkdir(parents=True)
-            (ws2 / "evidence").mkdir(parents=True)
-            (ws2 / "raw/s1/a.txt").write_text("alpha beta gamma delta epsilon zeta eta theta", encoding="utf-8")
-            (ws2 / "evidence/source-ledger.jsonl").write_text(json.dumps(
-                {"source_id": "src-a", "local_path": "raw/s1/a.txt",
-                 "locator": "ASCE Transactions 91", "published_at": "1927", "split": "train"},
-                ensure_ascii=False) + "\n", encoding="utf-8")
-            (ws2 / "facts.md").write_text(
-                "段一。`alpha beta gamma delta epsilon zeta eta theta` 就是这句。\n\n"
-                "段二（**同段已有 1927 年份**）。`alpha beta gamma delta epsilon zeta eta theta` 又一次。\n",
-                encoding="utf-8")
-            r7 = suggest(ws2)
-            dry = apply_locators(ws2, r7, write=False)
-            body_before = (ws2 / "facts.md").read_text(encoding="utf-8")
-            chk("⑦ **干跑一个字节都不落盘**", "［出处：" not in body_before)
-            hot = apply_locators(ws2, r7, write=True)
-            body = (ws2 / "facts.md").read_text(encoding="utf-8")
-            chk("⑧ 落盘后段一有坐标，且**引文本身一字未改**",
-                "［出处：" in body and "`alpha beta gamma delta epsilon zeta eta theta`" in body)
-            chk("⑨ **反对照**：同段已有年份的那一段**没被加第二个坐标**",
-                body.count("［出处：") == 1)
-
         #   ⑥ ★★ 命中的是 holdout → 必须报出来
         led.write_text(led.read_text(encoding="utf-8").replace(
             '"source_id": "src-b", "local_path": "raw/s2/b.txt", "locator": "ASCE Transactions 91 (1927) p.54", "split": "train"',
@@ -453,9 +289,6 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("workspace", nargs="?")
     ap.add_argument("--json", action="store_true")
-    ap.add_argument("--apply", action="store_true",
-                    help="把**唯一命中**的坐标追加到段尾（默认只干跑，不落盘）")
-    ap.add_argument("--dry-run", action="store_true", help="配合 --apply 只看会改什么")
     ap.add_argument("--only-missing", action="store_true",
                     help="只列同段还没有坐标的那些（配合 check_quote_locator 用）")
     ap.add_argument("--self-test", action="store_true")
@@ -464,39 +297,7 @@ def main() -> int:
         return self_test()
     if not a.workspace:
         ap.error("要么 --self-test，要么给 workspace")
-    ws = pathlib.Path(a.workspace).expanduser().resolve()
-    r = suggest(ws)
-    if a.apply:
-        if "状态" in r:
-            print(" ", r["状态"])
-            return 3
-        before = _missing_locators(ws)
-        out = apply_locators(ws, r, write=not a.dry_run)
-        head = "**已落盘**" if out["已落盘"] else "干跑（未落盘）"
-        print(f"  {head}：{out['将改/已改']} 处；跳过 {out['跳过（同段已有坐标或定位不到）']} 处"
-              f"（同段已有坐标，或引文在产物里定位不到）；"
-              f"**{out['**跳过·坐标里补不出年份**']} 处因补不出年份而不写**")
-        for it in out["明细"][:20]:
-            print(f"   ✓ {it['文件']:20} {it['引文']:46} {it['将追加']}")
-        if len(out["明细"]) > 20:
-            print(f"   …另有 {len(out['明细']) - 20} 处")
-        print("  ★ **命中多份的一处都没动** —— 选哪一版是判断，不是查表。")
-        #   ★★★ 写完必须自己复量：**「写了 N 处」不是成果，「门少了 N 条」才是。**
-        #   2026-08-19 实测：本件曾报「已落盘 1 处」而 `check_quote_locator` 21 → 21
-        #   一动没动（写在了判据不认的那一段，且当时还不写断言层）。
-        if not a.dry_run:
-            after = _missing_locators(ws)
-            wrote = out["将改/已改"] + out["断言层"]
-            if before is None or after is None:
-                print("  ⚠ **复量跑不起来 —— 本次未核（不是通过）**")
-                return 4
-            print(f"  复量（权威判据 check_quote_locator）：缺坐标 {before} → **{after}**"
-                  f"　｜写了 {wrote} 处")
-            if wrote and after >= before:
-                print("  ✗ **写了却一条都没少 —— 这次是空操作**："
-                      "坐标多半落在判据不认的那一段，或缺的根本在别处。别当成做完了。")
-                return 1
-        return 0
+    r = suggest(pathlib.Path(a.workspace).expanduser().resolve())
     if a.json:
         print(json.dumps(r, ensure_ascii=False, indent=1))
         return 0 if not r.get("**定不出出处的**") else 1

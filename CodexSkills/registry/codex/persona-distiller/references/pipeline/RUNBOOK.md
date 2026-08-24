@@ -4,134 +4,6 @@
 > 本 RUNBOOK 由 Donald Knuth 校准跑（2026-07-25，release --strict 0 错 0 警通过）提炼；
 > 参考实现见同目录 `example-knuth/`（8 个已验证脚本，照抄结构、只换人物数据）。
 
-## 一次跑完全部判据的自测
-
-> ★★ **下面这些命令用的是相对路径，必须站在 `_ledgers/` 里跑。**
-> 2026-08-17 实测：照抄到别处 **4 个 cwd 里 3 个 rc=2**（仓根 / `_pipeline/` 里 / `/tmp`
-> 全是 `can't open file`），而 RUNBOOK 此前**从头到尾没说过该站哪个目录**。
->
->     cd <仓根>/CodexSkills/skill_log_evals/persona-distiller/_ledgers
->
-> **或者用绝对路径，跟 cwd 无关**（实测三个 cwd 全 rc=0）：
->
->     python3 <仓根>/CodexSkills/skill_log_evals/persona-distiller/_ledgers/_pipeline/run_checks.py
-
-    python3 _pipeline/run_checks.py            # 有红就 rc=1
-    python3 _pipeline/run_checks.py --report   # 只报告
-
-并行跑 `_pipeline/` 下**凡声明了 `--self-test` 的**脚本
-（2026-08-17 由「只 glob `check_*.py`」改为**按能力发现**，当场多收进 12 件：
-**28 → 40 件、0.8 秒**）。
-★ **它只验判据自己的判定逻辑，不代跑真语料** —— 各判据的 `--corpora` /
-`--skill-root` 参数不同，本入口不代跑。**别把「自测全绿」读成「全库没问题」。**
-
-## ★★★ 推送前必跑（**清单，不靠记忆**）
-
-2026-08-17 同一天犯两次：先是「改完 RUNBOOK 没重算 checksums 就推了」，
-接着是「**打印了 `合同漂移门 rc=1` 然后照样提交并推送**」。
-真因不是健忘 —— 是我推送前只有**一个**固定动作（公开仓那道），
-其余的门不在清单里，等于不存在。
-
-    # 1) 公开仓：别人的东西别乱放 / 我们的秘密别外泄
-    python3 _pipeline/check_private_assets_not_public.py --check --range origin/main..HEAD
-
-    # 2) 判据自身逻辑（不代跑真语料）
-    python3 _pipeline/run_checks.py
-
-    # 3) 合同漂移（版本三轴 / 镜像 / 自报数字）—— **动过 registry 里任何文件都要跑**
-    python3 <仓根>/CodexSkills/registry/codex/persona-distiller/scripts/check_contract_drift.py
-
-    # 4) 两棵 _pipeline 树的同名文件必须逐字节一致
-    python3 _pipeline/check_runbook_trees_agree.py
-
-    # 5) 新增的语料正文不许进 git（本仓是 PUBLIC）
-    python3 _pipeline/check_new_corpus_text_not_committed.py
-
-    # 6) 每件判据都要有流程调用方（**新加了判据就会红**）
-    python3 _pipeline/check_checker_has_a_procedural_caller.py
-
-    # 7) 语料为空时，每一栏都必须说「未核」——**端到端**，不是静态扫描
-    python3 _pipeline/check_empty_corpus_says_unmeasured.py
-
-★ 第 7 道是 2026-08-18 补的。当天修了 **6 处**同形状缺陷
-  （「判据说未核、`content_review` 记成一个干净的 0」），**前 5 处静态扫描能标出来，
-  第 6 处标不出来** —— 它的措辞、默认值都不沾，坏在一个 `else` 绑到了 20 行外的 `if _me:`，
-  把刚写好的「未核」覆盖成一句**自称相反事实**的 ✓。
-  抓到它的是这一道：拿一个 `raw/` 为空的真实工作区跑 `--phase research`，
-  `content_review` 六栏里唯一印 ✓ 的就是它。**一条命令过完全部消费点，且新加的栏自动覆盖。**
-  ★★ 它跑之前会**清空副本里的 `reports/`** —— 否则读回来的可能是随工作区一起拷过去的旧报告
-  （`cp -R` 把 mtime 一起改成拷贝时刻，**按 mtime 挑最新分不出来**）。
-  ★★★ 反例实测：把第六处的缺陷放回去，它 **rc=1 并点名 `staged_not_ingested`**；
-  复原后回 rc=0。**绿得起来也红得起来，才算一盏灯。**
-
-★ 第 5 道是 2026-08-18 补的，补的理由本身就是这一节存在的理由：
-  它 2026-08-17 建成当天**自测就进了 `run_checks`（第 2 道）**，
-  于是「它有调用方吗」这个问题看着是绿的 —— 而**真跑一次**它的调用方是 0。
-  自测验的是「它的判定逻辑站不站得住」，**不是「今天这批提交干不干净」**，
-  这句话它自己的 docstring 第 13 行就写着。
-  ⇒ **一件判据可以同时「被调用」和「从没对现实跑过」。**
-  引它诞生的那件事（1940 年那本书的全文在公开仓躺了三天）正是这一档。
-
-**三条纪律：**
-
-1. **跑完守卫之后又动了东西，那次守卫就作废** —— 顺序是「改 → 跑全部 → 提交」，
-   不是「跑 → 改 → 提交」。
-2. **红了就停**，不许「打印出来然后继续」。
-3. 改了随包分发的文件 ⇒ `scripts/build_manifest.py` 重算；
-   **改 `VERIFICATION.md` 会让它自己的校验和再变一次，要再算一遍**（实测）。
-   ★ 写盘型工具是免费探针：跑一次 `build_manifest` 后看 `git status`，
-   有输出就说明**已提交的派生物是陈旧的**。
-
-## 这些判据各自该在什么时候跑（**不在 12 步里，但都有时机**）
-
-2026-08-18 建 `check_checker_has_a_procedural_caller.py` 时一数：
-`_pipeline/` 39 件判据里 **11 件在 RUNBOOK / quality_check / `*.sh` 三处一次都没出现**。
-它们的自测被 `run_checks` 按能力自动收编，所以「有没有调用方」看着一直是绿的 ——
-**而自测验的是判定逻辑站不站得住，不是「今天这批数据干不干净」。**
-
-| 什么时候跑 | 判据 | 它抓什么 |
-|---|---|---|
-| **抓源之前**（定检索词时） | `check_keywords_dont_pull_unowned_domains.py` | 一个词把「没人拥有的域」拉了进来 |
-| **步骤 3 前后**（台账／著录） | `check_one_ledger_per_workspace.py` | 一个工作区两份台账 ⇒ 每个 rglob 统计都虚高 |
-| 同上 | `check_title_person.py` | 书自印的题名说这是谁的集子 ≠ 台账著录的人 |
-| 同上 | `check_inflected_byline_candidates.py` | 署名就在扉页上，只是变了格（属格/夺格） |
-| **holdout 指派之后** | `check_holdout_train_same_work.py` | 密封集那部书，train 里也有一份 |
-| **步骤 8（生成用例）之前** | `check_generators_respect_freeze.py` | `gen_cases_*.py` 会无条件重写用例（撞 ㊵ 冻结） |
-| **队列／名册维护时** | `check_roster_name_join.py` | 三张表用姓名 join，口径不同就给出不同的队列状态 |
-| 同上 | `check_ranking_driver_is_computed.py` | `ranking_driver` 曾是二值标志冒充度量 |
-| **复检延后名单时** | `check_deferred_list.py` | 名单自称有某件判据，实际不存在 |
-| 同上 | `check_unblock_premise_fresh.py` | 「在等某个裁定」的条目，那个裁定可能早就裁过了 |
-| **改完任何工具之后** | `check_viewers_are_readonly_or_say_so.py` | 名字承诺「只显示」的工具，要么别写盘，要么说出来 |
-
-★ 这一节本身就是它们的**流程调用方** —— 建了不写进流程，等于没建。
-  新加判据时，**要么进 12 步，要么进这张表，要么进推送前清单**；
-  三处都没有 ⇒ `check_checker_has_a_procedural_caller.py` 会报出来。
-
-## 把某一道门跑遍一批工作区（口径由工具保证）
-
-    python3 _pipeline/sweep_phase_gate.py --phase research     # 默认只跑未判分的
-    python3 _pipeline/sweep_phase_gate.py --phase synthesis
-    python3 _pipeline/sweep_phase_gate.py --phase release --include-frozen
-    python3 _pipeline/sweep_phase_gate.py --self-test          # 断言数以它自己印的为准
-                                                          # （此处原写 11，2026-08-17 实测 12）
-
-**为什么要用它而不是手写一段 for 循环**：2026-08-17 我手写了一次
-（32 个未判分工作区 × `--phase research`），**同一份台账一天订正五次，五次全是口径**：
-出现次数当工作区数（`source-unclaimed` 报 22，真值 4）／分母混进 7 个**被拒检**的
-（据此发布「32/32 不通过」）／把「未核」当成「违规」／`warnings` 混进「错误码分布」。
-
-本工具把那四条写进代码，每次都保证：
-
-* **单位** —— 按工作区去重，**同时并列出现次数**（两个数一起印，看得见差别）；
-* **分母** —— 拒检的按产品给的 `refused` 位剔出分母，**单列并印出是谁**；
-* **严重度** —— `errors` / `warnings` 两张表，绝不合并；
-* **冻结** —— `results.jsonl` 非空按 ㊵ 跳过并计数（`--include-frozen` 才连它们一起跑）；
-* **只读** —— 跑完自查 `git status --porcelain -- <语料目录>`，有写盘就 rc=2 报红
-  （射程只圈语料目录：仓里别处的改动不算它的账）。
-
-★ 全库跑一次十几分钟，**逐个往 stderr 打进度**（表格走 stdout，重定向到文件互不污染）；
-  `--quiet` 可关。
-
 ## 索引（本节由脚本生成，勿手改）
 
 截至最近一次更新：**二级标题 95 节**；
@@ -242,38 +114,9 @@
    `own_voice` 会自动读它。**没有这份文件的人物走原路，一个数都不变。**
 2. **初始化**：`init_target.py --name .. --identity <1-12> --namesake-gate gate.json --workspace WS --profile deep`。
 3. **来源账本**（照 `example-knuth/gen_sources.py`+`gen_more.py`）：**≥45 条 usable train，≥65% 一手(P1/P2)，覆盖全 6 lane，≥1 holdout**。每条**必须真实 curl 取内容算 SHA-256**（`checksum_basis="content"`），rights 不含 "unknown"。
-
-   ★★ **账本出完立刻跑这一件**（2026-08-18 新加，此前它没有任何流程调用方）：
-
-       python3 _pipeline/check_primary_excludes_failed_extraction.py
-
-   它比对 `_primary.json` 的「一手」与 `_fetch-manifest.json` 的 `status`：
-   **凡 status 不是「已取回」却算进一手的，一律报出来**。
-   实测抓到过 **4 份 / 451,983 词**从没取回的材料躺在一手计数里（churchill×2 / dewey / ford）。
-   ★ 它会印 **join 命中率**；低于阈值判**未核**，因为键对不上时「0 违规」是坏 join 的假干净。
 4. **六路研究**（`gen_lanes.py`）：6 个 `references/research/0X-*.md`，每篇 **≥500 字**、引用真实 `src-` ID。
-5. **claims**（`gen_claims.py`）：**≥4 mental-model + ≥6 heuristic**（★ **这是 deep 档的数**——本节步骤 2 已写死 `--profile deep`；quick 是 2/3、standard 是 3/5，真源同为 `PROFILE_THRESHOLDS`）；刚性 claim 各需 **≥2 个不同源、≥2 情境、≥2 独立证据簇、falsifiers、time_scope**（多标签源会去重塌成 1，用兜底补齐）。再配 fact/value/work-method/boundary/blind-spot。
-
-   ★★ **claims 写完跑这一件**（2026-08-18 新加，此前无流程调用方）：
-
-       python3 _pipeline/check_pinned_year_from_relative_date.py
-
-   抓「断言把年月日钉死了，而它自己引的原文写的是『上一个』」。
-   Pasteur #106 实测：产物五处都写「**1881 年 12 月 10 日**」，
-   而原文是 « Le 10 décembre **dernier** » —— 年份不在那句话里，在**刊期**里，正解 1880-12-10。
-   **错了整整一年，且错在事实层**（题面是从 facts.md 抄的 ⇒ 尺子与被测物同源，三轮盲判都测不出来）。
+5. **claims**（`gen_claims.py`）：**≥4 mental-model + ≥6 heuristic**；刚性 claim 各需 **≥2 个不同源、≥2 情境、≥2 独立证据簇、falsifiers、time_scope**（多标签源会去重塌成 1，用兜底补齐）。再配 fact/value/work-method/boundary/blind-spot。
 6. **模型文档**（`gen_docs.py`）：渲染 9–10 份；**这 8 份 release 必须"非占位"**：cognitive-os / decision-policy / strategy / capabilities / work / persona / boundaries / divergence-map，各 **strip 后 ≥500 字（留到 ~700 更稳）、≥5 条非 # 有效行**。**每条 active claim 必须**以 `<!-- claim:clm-... -->` 标记渲染进某文档（release 有孤儿=报错）。
-> **改完判据/脚本先跑这个**：`python3 scripts/run_tests.py` —— 并行跑 `tests/` 全部件数
-> （**件数以它自己印的「扫描面」为准**；此处原写 14，2026-08-18 实测 **19**），
-> 逐件计时、把**已知未决**、**超时**与**新回归**分开。
-> ★ 耗时：并行度 8 → 约 250s 但制造 1–4 盏假超时；**4**（默认）→ 约 325–380s。
-> ★★ **此处原写「并行度 4 假红 0」，已订正：不是 0。** 四次实测里两次各有 1 盏假超时。
->   它们**被 runner 正确标成「超时（并行压力），不是回归」**——看「新回归」那个数，别看红的总数。
->   （唯一必须独占跑的是带**墙钟断言**的 `test_checkers_actually_run.py`，已在 `SERIAL_ONLY` 里；
->    子进程 timeout 造成的假超时是噪声，不值得为它把整套串行化：串行 ~818s vs 并行 ~350s。）
-> 开头会先跑一次合同漂移门并转述它报的每一条 —— **清单陈旧/镜像不一致会让三件验清册的测试
-> 红成「不相干的新回归」**，先看那几行。
-
 7. **中途验收**：`quality_check.py WS --phase research --strict` 通过 → 再 `--phase synthesis --strict` 通过（便宜，先挡结构错，别等到 release）。
 8. **评测用例**（`gen_cases.py`）：**16 套件 × 每套 ≥2 = ≥32 用例**；`known` 套件的用例必须挂 holdout 源 ID。
 9. **答案 + 跑分**：写 candidate（人格化、事实正确）+ baseline（通用、较弱）短答案（`gen_answers.py`）→ **派 2 个隔离评委子代理**独立打分（`example-knuth` 的做法：只读 payload、只回 JSON，省 token）→ 组装 128 条 `results.jsonl`（`gen_results.py`）。**评委必须独立于构建者；分数必须真评，禁止编造。**
@@ -286,7 +129,7 @@
     | standard | ≥0.72 | **≥0.05** | ≥0.78 | ≥0.88 |
     | deep     | ≥0.80 | **≥0.07** | ≥0.85 | ≥0.93 |
 
-    **唯一真源是 `PROFILE_THRESHOLDS`，它定义在 `scripts/common.py`**（`quality_check.py` 只是 import 它——2026-08-17 订正：原文写作「`quality_check.py` 的」，照着去那个文件里改是找不到的）；这张表若与代码不符，以代码为准并回来改这里。
+    **唯一真源是 `quality_check.py` 的 `PROFILE_THRESHOLDS`**；这张表若与代码不符，以代码为准并回来改这里。
     ★ 报门槛之前先确认**这个人物用的是哪一档**（`meta.json` 的 `profile`）。
 11. **team-card**：置 `readiness="ready"`、真实 `research_cutoff`、6 个数组字段全部填真（不留 "replace-with-"）。
 12. **打包→登记→校验**：`package_target.py WS --output dist/` → `register_persona.py dist/<slug>-...-v0.0.0.1.zip` → `validate_group.py`（必须 passed）。**把 ZIP 复制到 Downloads/蒸馏**。
@@ -631,11 +474,6 @@ Jim Simons 探源结果：**usable_train 43（门槛 45）、一手比例 27.9%�
    ★ **不许自己把 `f` 改回 `ſ` 再当逐字引文用**——改讹字再引是本项目记档过的事故形态。
 
 **判定**：五项里**两项以上为负 → 直接进延后名单，不做完整抓源**，并在延后记录里写明预筛依据与解封条件。
-
-**判定**：四项里**两项以上为负 → 直接进延后名单，不做完整抓源**，并在延后记录里写明预筛依据与解封条件。
-
-> ★ **本行的「四项」是 2026-08-11 增补第 5 问**之前的写法（第 5 问见上）。**判定要不要改成「五项里两项以上为负」，只能由人定 —— 本次同步只保留原文，不擅改规则。**
-
 **四项均正 → 正常开工。** 介于之间 → 做一次限量试抓（≤5 万 token）再定。
 
 ### ⚠️ 预筛规则的第一次修订（2026-07-27，Druckenmiller 实战后）
@@ -4012,121 +3850,6 @@ if (source / "VERSION").read_text().strip() != VERSION:
 > 后者到今天为止只有一个办法：回去读原文。
 
 ---
-
-## ★★★ 对照侧（裸模型基线）：照 `scaffold/baseline_provenance_template.md`，**在新会话里做**
-
-2026-08-18 新加。理由与下面「盲判载荷」那条一模一样 ——
-**对照侧的纪律此前只存在于一个人的副本里**（Bessemer #132 的 `BASELINE-PROVENANCE.md`，
-本仓唯一一份 90 行），下一个人看不到。
-
-**这一步为什么必须换会话**：对照侧回答的是「一个没读过这些材料的模型会答成什么样」，
-`delta = 候选 − 对照` 能读作「蒸馏增益」全靠这条。凡是读过该人物
-`rubric` / 语料 / 产物 / 既往判分的上下文，**都不合格**。
-Bessemer 那份严到把两条 `ls -la`（只看到文件名）记进「破例与灰区」。
-
-**母版里有一栏是新加的硬要求**：出处必须写明**模型是 `claude-opus-5`**。
-2026-08-18 全库实测：**这一栏只有 Bessemer 一位记了**，其余人物的 delta
-说的是「比某个没记名字的裸模型强 X」。换模型会把 delta 变成
-「蒸馏增益 ＋ 模型差异」，且与已入库产物不可比 —— 所以这一步**外部 API 也顶不上**。
-
-**当前待办（2026-08-18 实测）**：在册待判 10 位 / 321 题，**两侧答案一位都没有** ——
-Bismarck #176、Brandeis #172、Dewey #190、Frobel #181、Jefferson #175、
-Kant #179、Lincoln #174、Machiavelli #177、Pestalozzi #180、Rousseau #178。
-
-<!-- ★ 母版正文并入本节（2026-08-18）：原为 `scaffold/baseline_provenance_template.md`，
-     但包有 **≤500 文件**的硬上限（`self_check.py:136`），加它就是 501。
-     **不抬那道门**——本件是纯散文（不像 `answers_template.py` 要被 import），
-     并进本来就随包的 RUNBOOK，包回到 500，纪律照样随包。 -->
-
-## 0. 你为什么必须是新会话
-
-对照侧要回答的是：「**一个没读过这些材料的模型，面对同样的题会答成什么样**」。
-`delta = 候选 − 对照` 之所以能读作「蒸馏增益」，全靠这一条。
-
-**污染一次，这个人物的 delta 就永久不可信**（㊵：已判分即冻结，改不回来）。
-
-判断你自己够不够干净，用这条：**除了 `cases.jsonl` 的 `case_id` 与 `prompt` 两个字段，
-你还打开过这个人物的任何东西吗？** 打开过 ⇒ 你不合格，换会话。
-
-## 1. 允许读的，只有这一件
-
-```bash
-# ★ 只取两个字段，**整行 JSON 一次也不许打印**
-python3 - <<'EOF'
-import json, pathlib
-p = pathlib.Path("<工作区>/evals/cases.jsonl")     # 路径由派发件给出
-for line in p.read_text(encoding="utf-8").splitlines():
-    if not line.strip():
-        continue
-    r = json.loads(line)
-    print(r["case_id"], "|", r["prompt"])          # 只有这两个
-EOF
-```
-
-**明令禁止**（这些都会毁掉这次对照）：
-
-| 不许 | 为什么 |
-|---|---|
-| `rubric` 字段 | 它写着「答成什么样算对」——读了就是看着答案答题 |
-| `_corpora/` 下任何语料正文 | 对照侧的全部内容必须来自模型自身通识记忆 |
-| `claims.jsonl` / `cognitive-os.md` / 任何人物产物 | 那是候选侧的原料 |
-| `results.jsonl` / 既往判分 / 判决书 | 会告诉你哪一题被扣过分 |
-| WebSearch / WebFetch / `curl` 查这个人 | 一手材料同理 |
-| 别的会话转述给你的「背景」 | 转述也是污染，且更难追 |
-
-★ **连 `ls -la` 都要记。** Bessemer 那份把两条 `ls -la`（只看到文件名、大小、时间戳，
-没有任何内容）如实写进了「破例与灰区」。**宁可多记，不要漏记。**
-
-## 2. 产出
-
-- `<工作区>/evals/baseline_answers.json` —— `{case_id: 答案文本}`，**一题不缺**。
-- `<工作区>/BASELINE-PROVENANCE.md` —— 照下面第 3 节逐项填。
-
-## 3. 出处记录必填项（缺一项就不算做完）
-
-```markdown
-# BASELINE-PROVENANCE — <人物> 裸模型基线
-
-## 1. 上下文独立性
-- 是否独立上下文、与产物构建上下文有无共享历史
-- 本上下文收到的**全部输入**是什么
-
-## 2. 实际读过的文件（完整清单）
-| 文件 | 读了什么 | 方式 |
-- ★ 逐条写「只取了哪几个字段」，并明确写出 **`rubric` 没有被读取、没有被打印**
-
-## 3. 网络检索 / 一手材料 / 产物文件
-- 三项分别写「有/没有」，有就写清楚
-
-## 4. ★ 破例与灰区（必须如实记录）
-- 任何超出「只读 case_id + prompt」字面约束的动作，不论多轻微
-
-## 5. 环境
-- **模型：`claude-opus-5`**   ← ★★★ 必填。已有的对照侧都是它跑的；
-  换模型会把 delta 变成「蒸馏增益 ＋ 模型差异」，且与已入库的产物不可比。
-- 日期、工作区路径、题数
-```
-
-★★ **「模型」这一栏 2026-08-18 全库实测：只有 Bessemer #132 一位记了。**
-其余人物的 delta 说的是「比某个没记名字的裸模型强 X」。**从本母版起，缺它不算做完。**
-
-## 4. 做完之后
-
-对照侧与候选侧都齐了，才轮得到盲判载荷与判分。
-**本母版只管对照侧**；候选侧照 `answers_template.py`。
-
-## 5. 当前待办（2026-08-18 实测）
-
-在册待判 **10 位 / 321 题，两侧答案一位都没有**：
-Bismarck #176、Brandeis #172、Dewey #190、Frobel #181、Jefferson #175、
-Kant #179、Lincoln #174、Machiavelli #177、Pestalozzi #180、Rousseau #178。
-
-（Blackwell #118 / Churchill #191 / Michelangelo #185 有题但在 `_延后名单.json` 里，不在册。）
-
-**每人一个独立上下文** —— 一个上下文连做两人，第二人就带着第一人的题面，
-虽不同人物但已不是「干净」的原意，**要做就在灰区里写明**。
-
-[[evidence-must-carry-what-it-measured]]｜[[a-rule-in-a-doc-has-no-enforcer]]
 
 ## ★ 盲判载荷：照抄 `scaffold/blind_payload_template.py`，不要各写一遍
 

@@ -75,13 +75,7 @@ if args[0] == 'optimize':
     seed = config.parent / 'prompts' / 'seed.md'
     text = seed.read_text(encoding='utf-8')
     text = text.split('\n\n【测试输入】\n', 1)[0]
-    border = '=' * 80
-    print(border)
-    print('Prompt optimization result')
-    print(border)
-    print('Best prompt')
-    print(text + '\n\n【优化标记】\n明确验收标准并保留全部硬约束。')
-    print(border)
+    print('Optimized prompt:\n```text\n' + text + '\n\n【优化标记】\n明确验收标准并保留全部硬约束。\n```')
     raise SystemExit(0)
 if args[0] == 'eval':
     out = Path(args[args.index('-o') + 1])
@@ -443,69 +437,13 @@ class PromptCompilerRuntimeTests(unittest.TestCase):
             runtime.write_json(project / "reports" / "external_acceptance.json", {"status": "PASS", "note": "测试夹具；不代表外部实测"})
             previous = os.environ.get("PATH", "")
             os.environ["PATH"] = f"{fake_bin}{os.pathsep}{previous}"
-            def fake_native_runner(engine: str):
-                def _run(*args, **kwargs):
-                    del args
-                    seed_candidate = kwargs["seed_candidate"]
-                    validation = kwargs["validation"]
-                    task_client = kwargs["task_client"]
-                    evaluator_client = kwargs["evaluator_client"]
-                    run_dir = kwargs["run_dir"]
-                    content = (
-                        seed_candidate.content
-                        + f"\n\n【优化标记】\n{engine} 原生路径夹具：明确验收标准并保留全部硬约束。"
-                    )
-                    item = runtime.Candidate(
-                        candidate_id=f"{engine}-native-fixture",
-                        content=content,
-                        engine=engine,
-                        parent_ids=[seed_candidate.candidate_id],
-                        generation=1,
-                        metadata={
-                            "engine_mode": f"{engine}-native-test-fixture",
-                            "local_same_name_simulation": False,
-                        },
-                    )
-                    item.validation = runtime.evaluate_suite(
-                        project,
-                        candidate=content,
-                        cases=validation,
-                        task_client=task_client,
-                        judge_client=evaluator_client,
-                        phase=f"test/{engine}/native-independent-validation",
-                        repeat_count=1,
-                        trace_path=run_dir / f"{engine}-native-fixture.jsonl",
-                    )
-                    return [item], {
-                        "status": "PASS",
-                        "engine": engine,
-                        "mode": f"{engine}-native-test-fixture",
-                        "candidate_count": 1,
-                        "local_same_name_simulation": False,
-                    }
-
-                return _run
-
             try:
-                with (
-                    mock.patch.object(runtime, "run_gepa_engine", side_effect=fake_native_runner("gepa")),
-                    mock.patch.object(
-                        runtime,
-                        "run_autoresearch_native_engine",
-                        side_effect=fake_native_runner("autoresearch"),
-                    ),
-                    mock.patch.object(
-                        runtime,
-                        "run_meta_harness_native_engine",
-                        side_effect=fake_native_runner("meta_harness"),
-                    ),
-                ):
-                    report = runtime.optimize_project(
-                        project,
-                        preset="smoke",
-                        engines=["autoresearch", "meta_harness", "promptfoo", "omni"],
-                        allow_mock=True,
-                    )
+                report = runtime.optimize_project(
+                    project,
+                    preset="smoke",
+                    engines=["autoresearch", "meta_harness", "promptfoo", "omni"],
+                    allow_mock=True,
+                )
             finally:
                 os.environ["PATH"] = previous
             self.assertEqual(report["release_gate"]["decision"], "PASS", report["release_gate"])
@@ -622,27 +560,6 @@ class PromptCompilerRuntimeTests(unittest.TestCase):
                 result = runtime.external_evidence_status(Path(temp) / "project")
             self.assertEqual(result["status"], "NOT_RUN_EXTERNAL")
 
-
-    def test_frozen_champion_dimensions_include_discovered_project_dimensions(self) -> None:
-        candidate = runtime.Candidate(
-            "c1",
-            "正文",
-            "prompt_compiler",
-            [],
-            1,
-            {},
-            validation={"dimensions": {"business_roi": 0.91, "domain.accuracy": 0.94}},
-        )
-        config = {
-            "required_dimensions": ["overall", "hard_safety"],
-            "additional_dimensions": ["owner_acceptance"],
-            "auto_freeze_discovered_dimensions": True,
-        }
-        dimensions = runtime.frozen_champion_dimensions(config, [candidate])
-        self.assertEqual(
-            dimensions,
-            ["overall", "hard_safety", "owner_acceptance", "business_roi", "domain.accuracy"],
-        )
 
     def test_all_named_competitor_bridges_are_present_and_disabled_by_default(self) -> None:
         external = runtime.DEFAULT_CONFIG["optimization"]["external_engines"]

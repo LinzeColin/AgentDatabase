@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://teleiosis.local/schemas/reviewer-ablation-study.schema.json",
+  "title": "Teleiosis reviewer ablation study",
+  "type": "object",
+  "required": ["schema_version", "evidence_class", "packet_index_sha256", "reviews", "cohorts"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "evidence_class": {"enum": ["REAL_REVIEW", "FIXTURE"]},
+    "packet_index_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "reference_findings": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "reviews": {"type": "array", "minItems": 13, "items": {"type": "object"}},
+    "cohorts": {"type": "array", "minItems": 4, "items": {"type": "object"}}
+  },
+  "additionalProperties": true
+}

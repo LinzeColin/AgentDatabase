@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "status": "FROZEN",
+  "provider": "replace-with-external-provider",
+  "adapter_version": "replace-with-version",
+  "deployment_identity": "replace-with-external-deployment-id",
+  "adapter_path": "/absolute/external/path/to/teleiosis-review-attestor",
+  "adapter_sha256": "replace-with-64-char-sha256",
+  "receipt_root": "/absolute/external/protected/receipt-root",
+  "capabilities": ["independent-subagents", "read-only-verifier", "provider-identifiable-runs"],
+  "candidate_can_write_receipts": false,
+  "candidate_can_access_signing_key": false,
+  "shell_execution": false,
+  "attestation_mode": "FORMAL_EXTERNAL",
+  "formal_attestation": true,
+  "trust_mode": "ED25519_SIGNED_RECEIPTS",
+  "signature_algorithm": "ed25519",
+  "trust_anchor_path": "/absolute/external/pre-existing/trust-anchor-public.pem",
+  "trust_anchor_sha256": "replace-with-64-char-sha256",
+  "trust_anchor_provisioning": "PRE_EXISTING_EXTERNAL",
+  "isolation_mode": "REMOTE_PROVIDER"
+}

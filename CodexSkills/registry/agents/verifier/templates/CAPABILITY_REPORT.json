@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "",
+  "read_only": true,
+  "repository": {
+    "root": "",
+    "target_project_path": "",
+    "target_inventory_digest_sha256": "",
+    "observed_entry_count": 0,
+    "walk_truncated": false,
+    "unsafe_entries": [],
+    "case_collisions": []
+  },
+  "git": {},
+  "environment": {},
+  "project": {
+    "ecosystems": [],
+    "markers": [],
+    "ci_systems": [],
+    "candidate_commands": []
+  },
+  "risk": {
+    "signals": [],
+    "suggested_profile": "standard",
+    "requires_owner_authorization_before_side_effects": true
+  },
+  "limitations": []
+}

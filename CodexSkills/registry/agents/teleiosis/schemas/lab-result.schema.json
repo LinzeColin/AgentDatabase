@@ -1,0 +1,42 @@
+{
+  "$id": "teleiosis://schemas/lab-result.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_identity": {
+      "$ref": "candidate-identity.schema.json"
+    },
+    "evidence": {
+      "type": "array"
+    },
+    "findings": {
+      "type": "array"
+    },
+    "module": {
+      "enum": [
+        "T",
+        "S",
+        "P",
+        "A"
+      ]
+    },
+    "residual_risks": {
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "teleiosis.lab_result.v1"
+    },
+    "status": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "module",
+    "candidate_identity",
+    "status",
+    "findings",
+    "evidence"
+  ],
+  "type": "object"
+}

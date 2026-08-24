@@ -1,0 +1,17 @@
+{
+  "invocation_id": "invocation-001",
+  "phase": "evaluation",
+  "provider": "replace-with-provider",
+  "model": "replace-with-model",
+  "runtime": "replace-with-runtime",
+  "adapter_version": "replace-with-adapter-version",
+  "started_at": "2026-07-26T00:00:00Z",
+  "finished_at": "2026-07-26T00:00:01Z",
+  "latency_ms": 1000,
+  "human_minutes": 0,
+  "attempt_ids": ["attempt-001"],
+  "retry_count": 0,
+  "token_evidence_status": "UNKNOWN",
+  "token_usage": {"input": null, "output": null, "cached": null, "reasoning": null},
+  "monetary_cost": {"status": "UNKNOWN", "amount": null, "currency": null}
+}

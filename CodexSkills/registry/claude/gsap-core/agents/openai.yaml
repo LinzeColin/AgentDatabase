@@ -1,0 +1,6 @@
+interface:
+  display_name: "GSAP Core"
+  short_description: "Core tweens, easing, staggers, transforms, matchMedia"
+  default_prompt: "Use $gsap-core for GSAP core tween and animation API guidance."
+policy:
+  allow_implicit_invocation: true

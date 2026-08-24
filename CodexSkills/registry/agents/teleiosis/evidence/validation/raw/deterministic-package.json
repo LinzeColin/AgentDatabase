@@ -1,0 +1,11 @@
+{
+  "byte_identical": true,
+  "bytes": 2613615,
+  "files": 187,
+  "schema_version": "teleiosis.deterministic_package.v5",
+  "sha256": "3e2ae7b10e571d4f6558b4c5ee1c920b323846755fee9ee3479b0c0487301e24",
+  "status": "PASS",
+  "uncompressed_bytes": 10109558,
+  "zip_a": "candidate-a.zip",
+  "zip_b": "candidate-b.zip"
+}

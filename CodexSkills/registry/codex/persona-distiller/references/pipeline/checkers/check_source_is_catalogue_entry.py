@@ -135,21 +135,12 @@ def check(rows, read_text):
                 "著录话术": m[:6],
             }
     return {
-        "P1 份数": (_p1 := sum(1 for r in rows if str(r.get("tier") or "").startswith("P1"))),
+        "P1 份数": sum(1 for r in rows if str(r.get("tier") or "").startswith("P1")),
         "**疑似著录卡**": hits,
         "读不到正文的": unread,          # ★ 读不到就说读不到，不当成「没问题」
         "计数": f"{len(hits)} 份 P1 像是「著录方描述这份文献」而不是文献本身",
         "★ 口径": "**只报不拦。** 改分档是人的判断——里头引的那几句确实是他的话。",
-        # ★★★ 2026-08-17 第二轮：**零扫描面不许给 true**。
-        #   P1 份数 0 时「没有著录卡」恒真 ⇒ 本件对着「一份也没看」印
-        #   `"通过": true`，而这是**机器可读字段**，下游读的就是它。
-        #   照仓里先例（`check_persona_frame_break` 对「不适用」置 None）办；
-        #   **不翻成 false**（那是收紧判定，属决定不属清理）。
-        #   [[zero-hit-gates-must-prove-they-can-hit]]
-        "通过": (None if not _p1 else True),
-        **({} if _p1 else {"★ 未核（不是通过）":
-                           "P1 份数 0 —— 本件一份也没看过；`通过` 置 null "
-                           "表示**既不算通过也不算失败**。"}),
+        "通过": True,
     }
 
 

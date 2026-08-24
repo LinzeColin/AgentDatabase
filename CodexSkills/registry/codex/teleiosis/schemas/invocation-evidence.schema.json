@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://teleiosis.local/schemas/invocation-evidence.schema.json",
+  "title": "Invocation-level token, cost, latency and human-burden evidence",
+  "type": "object",
+  "required": [
+    "invocation_id", "phase", "provider", "model", "runtime", "adapter_version",
+    "started_at", "finished_at", "latency_ms", "human_minutes", "attempt_ids",
+    "retry_count", "token_evidence_status", "token_usage", "monetary_cost"
+  ],
+  "additionalProperties": true
+}

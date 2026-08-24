@@ -1,0 +1,6 @@
+interface:
+  display_name: "GSAP Performance"
+  short_description: "Animation performance, jank, transforms, batching"
+  default_prompt: "Use $gsap-performance for optimizing GSAP animations and reducing animation jank."
+policy:
+  allow_implicit_invocation: true

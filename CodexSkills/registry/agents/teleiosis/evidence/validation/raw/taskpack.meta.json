@@ -1,0 +1,13 @@
+{
+  "label": "taskpack",
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "scripts/teleiosis.py",
+    "taskpack",
+    "validate"
+  ],
+  "returncode": 0,
+  "seconds": 0.539,
+  "stdout_sha256": "30403482302825a833789f86b763585e846de477a5e1f6decb2e805df385ade8",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

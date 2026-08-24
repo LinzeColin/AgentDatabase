@@ -1,0 +1,17 @@
+{
+  "name": "repair",
+  "purpose": "diagnose and minimally repair failed generation",
+  "priorities": [
+    "symptom",
+    "root_cause",
+    "keep_list",
+    "single_change",
+    "new_end_state",
+    "fallback_ladder"
+  ],
+  "avoid": [
+    "full_rewrite",
+    "multiple_simultaneous_changes",
+    "overwriting_previous_version"
+  ]
+}

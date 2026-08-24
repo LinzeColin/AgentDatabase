@@ -1,0 +1,29 @@
+{
+  "canonical_key": "public:timcook",
+  "canonical_name": "Tim Cook",
+  "identity_family_id": "entrepreneur-operator",
+  "identity_mode": "single",
+  "registration_category": "创业经营师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "tim-cook",
+  "subject_uid": "person-5d2b961b1c591949",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/tim-cook-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.6",
+      "distilled_with_note": "2026-07-26 十二族重组：70 人只重打包未重蒸，正文来自 ≤v0.0.0.5",
+      "distilled_with_source": "git-first-commit:bulk-repackage",
+      "model_version": "1.0.0",
+      "outer_sha256": "0ab2ba5eafffb7d93ca4815c3fe21b51462144cc1f79e8012ce13e54969211fd",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/tim-cook-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "21892c3d095dc671f4a5ad9358ce3d2a7a3e6d3bd26e09cbca409e890bca5afd",
+      "runtime_size_bytes": 72956,
+      "size_bytes": 83592
+    }
+  ]
+}

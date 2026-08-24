@@ -1,0 +1,128 @@
+{
+  "contract_id": "REPLACE",
+  "created_before_first_change": true,
+  "systems": [
+    {
+      "system_id": "no-skill",
+      "role": "no-skill",
+      "tree_hash": null
+    },
+    {
+      "system_id": "baseline",
+      "role": "baseline",
+      "tree_hash": "REPLACE"
+    },
+    {
+      "system_id": "candidate",
+      "role": "candidate",
+      "tree_hash": "REPLACE"
+    }
+  ],
+  "metrics": {
+    "trigger_accuracy": {
+      "direction": "maximize",
+      "regression_tolerance": 0.0
+    },
+    "task_effectiveness": {
+      "direction": "maximize",
+      "regression_tolerance": 0.0
+    },
+    "safety": {
+      "direction": "maximize",
+      "regression_tolerance": 0.0
+    },
+    "evidence_truthfulness": {
+      "direction": "maximize",
+      "regression_tolerance": 0.0
+    },
+    "cost": {
+      "direction": "minimize",
+      "regression_tolerance": 0.0
+    },
+    "latency": {
+      "direction": "minimize",
+      "regression_tolerance": 0.0
+    },
+    "installability": {
+      "direction": "maximize",
+      "regression_tolerance": 0.0
+    },
+    "compatibility": {
+      "direction": "maximize",
+      "regression_tolerance": 0.0
+    },
+    "cross_model_transfer": {
+      "direction": "maximize",
+      "regression_tolerance": 0.0
+    },
+    "maintainability": {
+      "direction": "maximize",
+      "regression_tolerance": 0.0
+    },
+    "future_adaptability": {
+      "direction": "maximize",
+      "regression_tolerance": 0.0
+    }
+  },
+  "hard_gates": [
+    "genesis",
+    "safety",
+    "truthfulness",
+    "install",
+    "rollback",
+    "holdout_integrity"
+  ],
+  "datasets": [
+    {
+      "dataset_id": "dev-v1",
+      "dataset_hash": "REPLACE",
+      "split": "dev"
+    },
+    {
+      "dataset_id": "validation-v1",
+      "dataset_hash": "REPLACE",
+      "split": "validation"
+    },
+    {
+      "dataset_id": "holdout-v1",
+      "dataset_hash": "REPLACE_EXTERNAL_HASH_ONLY",
+      "split": "sealed-holdout"
+    },
+    {
+      "dataset_id": "adversarial-v1",
+      "dataset_hash": "REPLACE",
+      "split": "adversarial"
+    }
+  ],
+  "protected_task_families": [],
+  "judge_policy": {
+    "modifier_cannot_be_final_judge": true,
+    "blind_identity": true,
+    "randomized_order": true
+  },
+  "cross_model_matrix": [],
+  "unknowns": [],
+  "optional_frontier_metrics": {
+    "instruction_compliance": {
+      "direction": "maximize",
+      "apply_when": "the Skill contains observable procedural requirements"
+    },
+    "solution_path_coverage": {
+      "direction": "maximize",
+      "apply_when": "multiple legitimate task paths must be supported"
+    },
+    "trajectory_faithfulness": {
+      "direction": "maximize",
+      "apply_when": "the Skill is distilled from execution traces"
+    },
+    "counterfactual_downstream_utility": {
+      "direction": "maximize",
+      "apply_when": "related probe tasks can isolate the effect of a candidate edit"
+    },
+    "skill_selection_quality": {
+      "direction": "maximize",
+      "apply_when": "the runtime chooses among multiple Skills"
+    }
+  },
+  "frontier_metric_policy": "Optional metrics become frozen per-run only when applicable and evidence-producing; absence must be recorded as NOT_APPLICABLE or UNKNOWN, never silently scored."
+}

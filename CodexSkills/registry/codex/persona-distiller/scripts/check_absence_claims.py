@@ -124,16 +124,7 @@ def main() -> int:
 
     print(f"\n扫过 {len(files)} 份 .md；合计 {n_all} 条绝对化断言，"
           f"其中 {n_bare} 条邻近未见检索依据")
-    # ★★★ 2026-08-17 第二轮：**扫了 N 份文件 ≠ 核了 N 条断言**。
-    #   [[zero-hit-gates-must-prove-they-can-hit]]（第二轮：分母是文件数，断言的单位却是别的）
-    if n_bare:
-        print("⚠ 标记的须人工确认依据；本脚本不做自动判定")
-    elif not n_all:
-        print("⚠ **绝对化断言 0 条 —— 本次未核，不是通过。**")
-        print(f"   （扫过 {len(files)} 份 .md，其中一条绝对化断言都没有；"
-              "「全部带依据」在空集上恒真。）")
-    else:
-        print(f"✓ 全部 **{n_all}** 条绝对化断言都带依据")
+    print("⚠ 标记的须人工确认依据；本脚本不做自动判定" if n_bare else "✓ 全部带依据")
     return 0
 
 

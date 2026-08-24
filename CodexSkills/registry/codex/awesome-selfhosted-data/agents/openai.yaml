@@ -1,4 +1,0 @@
-interface:
-  display_name: "Awesome Self-Hosted Data"
-  short_description: "Structured self-hosted software dataset"
-  default_prompt: "Use $awesome-selfhosted-data to shortlist self-hosted software from structured catalog data."

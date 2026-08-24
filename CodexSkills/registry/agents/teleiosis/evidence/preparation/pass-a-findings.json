@@ -1,0 +1,23 @@
+{
+  "findings": [
+    {
+      "finding": "v4 是功能可运行但交付证据薄，不能作为 v3 完整继承证明",
+      "id": "F-A-001",
+      "resolution": "v3 三快照+继承矩阵+新执行模块+旧回归",
+      "severity": "P0"
+    },
+    {
+      "finding": "没有可执行 Stage0/Taskpack/Verifier handoff",
+      "id": "F-A-002",
+      "resolution": "新增 semantic.py/taskpack.py/verifier_handoff.py",
+      "severity": "P1"
+    },
+    {
+      "finding": "persona dossier 不可用却可能被误称专家参与",
+      "id": "F-A-003",
+      "resolution": "INSUFFICIENT_ROSTER_FALLBACK 硬门",
+      "severity": "P1"
+    }
+  ],
+  "schema_version": "teleiosis.findings.v5"
+}

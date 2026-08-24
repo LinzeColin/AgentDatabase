@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VideoPromptIR",
+  "type": "object",
+  "required": [
+    "ir_version",
+    "status",
+    "source_request",
+    "routing",
+    "constraint_ledger",
+    "production",
+    "scene_ir",
+    "candidate_plan",
+    "model_render",
+    "evidence"
+  ],
+  "properties": {
+    "ir_version": {
+      "const": "0.2"
+    },
+    "status": {
+      "enum": [
+        "IR_SCAFFOLD",
+        "IR_COMPLETE",
+        "BLOCKED"
+      ]
+    },
+    "source_request": {
+      "type": "string"
+    },
+    "routing": {
+      "type": "object"
+    },
+    "constraint_ledger": {
+      "type": "object",
+      "required": [
+        "locked_facts",
+        "creative_space",
+        "unknowns",
+        "forbidden"
+      ],
+      "properties": {
+        "locked_facts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "creative_space": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unknowns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "forbidden": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "production": {
+      "type": "object",
+      "required": [
+        "method",
+        "primary_preset",
+        "secondary_presets",
+        "source_duration_seconds",
+        "duration_seconds",
+        "aspect_ratio",
+        "output_mode",
+        "action_budget"
+      ],
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "primary_preset": {
+          "type": "string"
+        },
+        "secondary_presets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_duration_seconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "duration_seconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "aspect_ratio": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "output_mode": {
+          "type": "string"
+        },
+        "action_budget": {
+          "type": "string"
+        }
+      }
+    },
+    "assets": {
+      "type": "array"
+    },
+    "scene_ir": {
+      "type": "object"
+    },
+    "candidate_plan": {
+      "type": "object"
+    },
+    "model_render": {
+      "type": "object"
+    },
+    "evidence": {
+      "type": "object"
+    }
+  }
+}

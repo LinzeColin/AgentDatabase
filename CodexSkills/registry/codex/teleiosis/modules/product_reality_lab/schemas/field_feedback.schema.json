@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linze.local/schemas/product-reality-lab/field-feedback.schema.json",
+  "title": "Field Feedback",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "evidence_class",
+    "observations",
+    "metrics",
+    "decision"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "evidence_class": {
+      "type": "string",
+      "enum": [
+        "SYNTHETIC",
+        "CONTROLLED_HUMAN",
+        "FIELD_OBSERVED"
+      ]
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "metrics": {
+      "type": "object"
+    },
+    "decision": {
+      "type": "string"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

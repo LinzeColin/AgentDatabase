@@ -370,34 +370,10 @@ def check(ws: pathlib.Path, cache: list[pathlib.Path]) -> int:
     #   一份写着「出题必须避开这些段」的清单与当前判定互相矛盾，
     #   读的人无从知道该信哪个。[[stale-artifacts-from-my-machine-leak-into-the-build]]
     out = ws / "reports/holdout-contaminated-passages.json"
-    # ★★★ 2026-08-17：**已判分（㊵ 冻结）的工作区一个字节都不许写。**
-    #   2026-08-14 与今天两次事故都是这条链：有人跑一次判据（今天是
-    #   `show_gate.py` 这个看起来只读的查看器），报告就落进了已判分人物的目录。
-    #   上面那条「每次都写、哪怕是空的」照旧管**未判分**的（Dewey #190 的理由成立：
-    #   那时还会重跑，旧清单必须被覆盖）；对冻结的人则**跳过并说明**——
-    #   跳过之后磁盘上那份可能与本次判定不符，所以要把「它是旧的」讲出来。
-    #   [[calling-the-authoritative-checker-overwrote-frozen-evidence]]
-    _res = ws / "evals" / "results.jsonl"
-    _frozen = _res.is_file() and any(
-        l.strip() for l in _res.read_text(encoding="utf-8", errors="replace").splitlines())
-    #   ★★ **只跳过写，不跳过判定**：本函数 return 的是退出码（0/1/2），
-    #     后面还有决定判定的逻辑。我第一版写成 early return，
-    #     会让冻结工作区拿到一个错的退出码。[[a-continue-hid-the-worst-case]]
-    if _frozen:
-        print(f"\n  ★ **本工作区已判分（{_res.name} 非空）——按 ㊵ 冻结，本件不写任何文件。**")
-        if out.is_file():
-            print(f"  ⚠ 磁盘上那份 {out.name} 是**上一次**跑出来的，"
-                  f"**可能与本次判定不符**；当次结果以上面的逐条输出为准。")
-    else:
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(json.dumps(passages, ensure_ascii=False, indent=2),
-                       encoding="utf-8")
-    # ★ 冻结时**没写**，这两句就不能说「已落盘／已写成空」——那是说了做了其实没做。
-    if _frozen:
-        if passages:
-            print(f"\n  ★ 有受污染段（见上面逐条）；**因 ㊵ 冻结未落盘**，"
-                  f"出评测题时仍须避开这些段。")
-    elif passages:
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(passages, ensure_ascii=False, indent=2),
+                   encoding="utf-8")
+    if passages:
         print(f"\n  ★ 受污染段已逐段落盘：{out.relative_to(ws)}"
               f"——**出评测题时必须避开这些段**")
     else:

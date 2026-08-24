@@ -25,7 +25,7 @@ Required inputs:
 | 文件密码 | Opening password for protected workbooks | `123` |
 | 目标月份 | Used in workbook title and output filenames, e.g. `2026.05月发放` | none |
 | 发给 Agent 的日期 | `YYYYMMDD` used in output filenames | current date only if user accepts |
-| 输出位置 | Where deliverables should be written | current task output directory |
+| 输出位置 | Determined from the primary raw payroll input | Primary raw input's parent directory |
 | 特殊规则/例外 | Only if user wants rules beyond the standard | none |
 
 Necessary and sufficient condition to proceed: raw file + template file + file-role mapping + target month + output date + readable password. If these are not satisfied, do not infer from filenames when doing so could change money, routing, or deliverable names.
@@ -43,6 +43,16 @@ Start every non-trivial run with a compact contract:
 7. Stop conditions.
 
 Only write outputs to the declared output directory. Never modify input workbooks.
+
+## Output Placement
+
+Unless the user explicitly specifies another directory, declare the output directory automatically as follows:
+
+1. Use the parent directory of the primary raw payroll input.
+2. If the primary raw input is a compressed archive, use the archive's parent directory, never a temporary extraction directory.
+3. If several inputs are in different directories, the primary raw payroll input takes precedence; a template, detail workbook, or reference workbook never determines the output directory.
+4. Write every deliverable directly to that directory: final payroll workbook, ABExcel check workbook, difference report, and difference detail workbook. Do not create a separate output subdirectory.
+5. This payroll-specific placement rule takes precedence over a generic raw-data-directory write restriction. It permits only task deliverables in that directory and never permits modifying, moving, renaming, or overwriting an input workbook.
 
 ## Mandatory Workflow
 

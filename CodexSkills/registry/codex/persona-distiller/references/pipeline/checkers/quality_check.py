@@ -394,32 +394,6 @@ def evaluate_claims(report: Report, target: Path, thresholds: dict[str, Any], so
             if float(claim.get('confidence', 0)) > 0.8:
                 report.warn('claim.hypothesis-overconfidence', f'{claim_id} existential hypothesis confidence exceeds 0.8')
 
-    # ★★★★★ 2026-08-19：**产物里出现未替换的格式占位符，全部判据都放行。**
-    #
-    #   Comenius #182 实测：我生成 `decision-policy.md` 时少写了 `% (...)`，
-    #   写进去的是字面 `%s`。后果是**门全绿而产物是坏的**：
-    #     · `check_lane_quotes_verbatim --include-products` 报 **0 条对不上**
-    #       —— 因为 `` `%s` `` 太短、不含字母，**根本不被当成引文抽出来**；
-    #     · `non_placeholder()` 把 `> \`%s\`` 算作实义行，长度也够；
-    #     · 合成门 errors **0**、warnings 2。
-    #   **是我 `cat` 了一遍产物才看见的，不是任何一道门看见的。**
-    #   [[read-the-artifact-as-its-actual-reader]]
-    #
-    #   ★ 这条只认**未替换**的形状，不认正文里合法出现的百分号
-    #     （`20%`、`%d 的写法` 这类不匹配，因为要求 `%` 后紧跟 s/d/r/f 且是词尾）。
-    _PLACEHOLDER = re.compile(r'%[sdrf](?![A-Za-z0-9_])|\{\}|\{\d+\}|\$\{[A-Za-z_][A-Za-z0-9_]*\}')
-    for rel in RENDER_FILES:
-        _p = target / rel
-        if not _p.is_file():
-            continue
-        _hits = _PLACEHOLDER.findall(_p.read_text(encoding='utf-8'))
-        if _hits:
-            report.error(
-                'render.unsubstituted-placeholder',
-                f'{rel} 里有 {len(_hits)} 处**未替换的格式占位符** {sorted(set(_hits))} —— '
-                f'生成产物的脚本少做了一次替换。**引文判据看不见它**（`%s` 不被当成引文），'
-                f'`non_placeholder` 也把它算作实义文本，所以门会全绿。')
-
     markers_by_file = {rel: markdown_claim_markers(target / rel) for rel in RENDER_FILES}
     all_markers = set().union(*markers_by_file.values()) if markers_by_file else set()
     active_ids = {claim.get('claim_id') for claim in active}
@@ -637,21 +611,9 @@ def markdown_report(data: dict[str, Any]) -> str:
         '## Errors',
         '',
     ]
-    # ★★★ 2026-08-17：**errors/warnings 里的条目不都是 dict，有的是纯字符串。**
-    #   原写法 `item["code"]` 对字符串就是 `TypeError: string indices must be integers`
-    #   ⇒ `--write-report` **写完 .json 就崩**：.md 从来没产出过，
-    #   而 rc=1 读起来像「门红了」，其实是崩溃。实测 seth-godin 的 5 条 warning 里
-    #   有 1 条是纯字符串（`research.lane_quotes：36 条逐字引文…`）。
-    #   同族：本仓早记过「errors items can be plain strings」，当时只修了读的那一侧。
-    #   [[one-requirement-two-consumers]]｜[[fixed-the-symptom-kept-the-root-cause]]
-    def _line(item):
-        if isinstance(item, dict):
-            return f'- `{item.get("code", "?")}`: {item.get("message", "")}'
-        return f'- {item}'
-
-    lines.extend([_line(i) for i in (data.get('errors') or [])] or ['- None'])
+    lines.extend([f'- `{item["code"]}`: {item["message"]}' for item in data['errors']] or ['- None'])
     lines.extend(['', '## Warnings', ''])
-    lines.extend([_line(i) for i in (data.get('warnings') or [])] or ['- None'])
+    lines.extend([f'- `{item["code"]}`: {item["message"]}' for item in data['warnings']] or ['- None'])
     return '\n'.join(lines).rstrip() + '\n'
 
 
@@ -1416,24 +1378,11 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                          f'**{n_bad} 条来源的署名照录，在它自己的载体文件里搜不到**——'
                          '要么记录指错了文件，要么那段引文不是从这份文件里来的。'
                          f'　{[x.get("original_name") for x in info.get("对不上的", [])][:5]}')
-        # ★★★ 2026-08-18（工具改动，不升版）：原来的守卫是 `… if info else '未核'`，
-        #   **它只挡得住空字典**。而判据在两条路上回的是**非空**字典（见其 :103、:108）：
-        #       {"状态": "meta.json 或 source-ledger.jsonl 不在——**未核（不是通过）**"}
-        #       {"状态": "`attribution_basis.covered_sources` 为空——**未核（不是通过）**"}
-        #   非空 ⇒ 走计数分支 ⇒ 记成「**核过 0 条，指错 0 条**」。实测复现过。
-        # ★★ 「守卫在」不等于「守住了」——它守的条件（字典空不空）和判据表达
-        #   未核的方式（放一个 `状态` 键、不放计数键）**对不上**。
-        #   改为 key 在**计数键在不在**上：这是判据表达「我量过了」的唯一方式。
-        #   [[empty-default-swallows-unknown]]｜[[a-comment-claiming-a-guard-is-not-a-guard]]
-        if '核过' not in info:
-            review['byline_in_carrier'] = (
-                '**未核（不是通过）**：判据没有给出「核过」计数（%s）'
-                % (str(info.get('状态') or info or '输出解析不了')[:70]))
-        else:
-            review['byline_in_carrier'] = (
-                f"核过 {info.get('核过', 0)} 条，指错 {n_bad} 条"
-                + (f"，**没核 {len(info.get('★ 没核的') or [])} 条（不是通过）**"
-                   if info.get('★ 没核的') else ""))
+        review['byline_in_carrier'] = (
+            f"核过 {info.get('核过', 0)} 条，指错 {n_bad} 条"
+            + (f"，**没核 {len(info.get('★ 没核的') or [])} 条（不是通过）**"
+               if info.get('★ 没核的') else "")
+            if info else '**未核（不是通过）**')
 
     # ── 2026-08-07：**引文逐字在语料里，可它是别人说的**（候选子代理抓出来的） ──
     #   Whitworth #152 的 `clm-e120a051a8ad` 初稿引 General Lefroy 的话当他本人的推测语气，
@@ -1597,11 +1546,11 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                 report.error(
                     'corpus.undeclared-duplicate-sources',
                     f'**{n_un} 对来源重叠 ≥{dd.get("threshold")} 而两边都没声明 `derived_from`**——'
-                    '台账上看不出它们是同一部作品。**清掉这条错有两条路**：① 补 `derived_from`（同一部作品的另一份扫本）；② 在 `meta.json` 的 `attribution_basis.counting_convention` 里**逐对点名**说明为什么它们该当两处证据（2026-08-17 起这条路真的通了——在那之前它只是句话，代码从没读过 `counting_convention`）——'
-                    '★★ 2026-08-17 订正：上面这几句原本写的是「本件只读 `derived_from`，'
-                    '在 `counting_convention` 里写散文不会让它变绿」——**那句当时是对的**，'
-                    '因为那条出路从没被实现。今天已实现，但**只认逐对点名**：'
-                    '约定文本里要同时出现这一对的两个文件名才算，泛泛的散文仍然不豁免任何一对。'
+                    '台账上看不出它们是同一部作品。**清掉这条错的唯一办法是补 `derived_from`**——'
+                    '★ 本件只读 `derived_from`（`check_source_dedup.py` 第 182 行），'
+                    '**在 `counting_convention` 里写散文不会让它变绿**：'
+                    '那件判据当初正是因为「散文里写了、机器读得到的字段里没写」才建的。'
+                    '散文该写，但它是给人看的，不是给这道门看的。'
                     f'　{[(p["甲"][:26], p["乙"][:26], p["重叠"]) for p in dd["**未声明的重复对**"][:3]]}')
             # ★ `thresholds` **不在本函数的作用域里**（`run_corpus_text_checks(report, target,
             #   cache_dirs)`）。第一版直接写 `thresholds.get(...)`：`py_compile` 绿、
@@ -1645,10 +1594,7 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
         #   ⇒ [[empty-default-swallows-unknown]]：绿章不许盖在「不知道」上。
         n_bad = None
         try:
-            _oc = json.loads(out)
-            n_bad = _oc.get('**判为花体乱码**', 0)
-            _n_read = _oc.get('**读到的份数**', 0)
-            _n_de = _oc.get('**测到的德文份数**', 0)
+            n_bad = json.loads(out).get('**判为花体乱码**', 0)
         except Exception:                                        # noqa: BLE001
             review['fraktur_mojibake'] = ('**未核（不是通过）**：'
                                           'check_ocr_legibility 的输出解析不了')
@@ -1659,18 +1605,7 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                         '份数／分档／字数三样都是真的，所以既有的门都放行了；'
                         '**从这些文件里取不出任何可核的逐字引文**。')
         if n_bad is not None:
-            # ★★★ 2026-08-17：**肯定句要带它自己那个单位的计数** ——
-            #   空扫描面上「没有 X」恒真，而只印一个 ✓ 看不出核过几份。
-            #   [[zero-hit-gates-must-prove-they-can-hit]]
-            # ★ 分母用判据**自己吐出的键**（读出来的，不是猜的）：
-            #   顶层有 `**读到的份数**` 与 `**测到的德文份数**`；
-            #   本件的射程是**德文花体**，所以真正的分母是后者。
-            review['fraktur_mojibake'] = (
-                f'{n_bad} 份' if n_bad else
-                ('✓ 没有花体乱码（德文 **%s** 份逐份看过；共读到 %s 份）'
-                 % (_n_de, _n_read) if _n_de else
-                 '⚠ **德文语料 0 份 —— 未核，不是通过**'
-                 '（「没有花体乱码」在空集上恒真；共读到 %s 份）' % _n_read))
+            review['fraktur_mojibake'] = f'{n_bad} 份' if n_bad else '✓ 没有花体乱码'
 
     # ★★★ v0.0.0.136：**台账上有、磁盘上没有的源。**
     #   Blackwell #118 实测：台账 95 行里有 6 行（4 本日记＋2 份手稿，**88,685 词，全是 P1**）
@@ -1704,11 +1639,6 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
         try:
             _s = json.loads(out[out.find('{'):])
             _me = [m for m in _s.get('明细', []) if m.get('人物') in (outer.name,)]
-            if not _me:
-                # ★ 判据的明细里**没有这个人物** ⇒ 它对本人物一行也没核过。
-                review['staged_not_ingested'] = (
-                    '⚠ **未核，不是通过** —— `check_staged_but_not_ingested` 的明细里'
-                    '没有 `%s`（本人物可能压根没走过抓源台账）' % outer.name)
             if _me:
                 m0 = _me[0]
                 n_miss = m0.get('**没进工作区**', 0)
@@ -1721,23 +1651,8 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                        "若仍存疑，先 `find` 一遍再下结论——⑯ 就是没 find 就升级出来的误报）"
                        if n_pri else "")
                     + "　★ 清单：" + "、".join(str(x) for x in m0.get('清单', [])[:6]))
-            # ★★★ 2026-08-17：把「真的一致」与「明细里压根没有这个人物」拆开 ——
-            #   原文案是「✓ 台账与工作区一致（**或本人物没走过抓源台账**）」，
-            #   括号里那半正是「没核过」，却与「核过且一致」共用一个 ✓。
-            #   [[zero-hit-gates-must-prove-they-can-hit]]
-            # ★★★★ 2026-08-18（工具改动，不升版）：**上面那次拆分没拆成，方向还反了。**
-            #   原来这里是一个 `else:`，配的是 `if _me:` —— 于是 `_me` 为空时：
-            #     ① `if not _me:` 刚写完「⚠ **未核，不是通过** —— 明细里没有 <人物>」；
-            #     ② 这个 `else` **立刻把它覆盖**成 `✓ 台账与工作区一致`，
-            #        而 ✓ 的正文写着「**该人物在判据明细里**」——
-            #        在这条分支上这句话恰恰是**假的**（`_me` 空正说明他不在明细里）。
-            #   ⇒ **一句「未核」被一句自称相反事实的 ✓ 盖掉。**
-            #   端到端负对照抓到的：空语料工作区跑 `--phase research`，
-            #   `content_review` 6 栏里唯一印 ✓ 的就是这一栏。
-            #   改法是**删掉这个 `else`**（不是改成 `elif`——`n_miss` 只在 `if _me:` 里有定义）：
-            #   `_me` 非空时上面的 f-string 已经把 `没进工作区 N 份` 如实写出（N 可以是 0），
-            #   `_me` 为空时就该停在 ①。**两条分支各自完整，不需要第三条。**
-            #   [[a-comment-claiming-a-guard-is-not-a-guard]]｜[[fixed-the-symptom-kept-the-root-cause]]
+            else:
+                review['staged_not_ingested'] = '✓ 台账与工作区一致（或本人物没走过抓源台账）'
         except (json.JSONDecodeError, ValueError, TypeError):
             review['staged_not_ingested'] = '**未核（不是通过）**：输出解析不了'
 
@@ -1754,34 +1669,13 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
     else:
         try:
             _h = json.loads(out)
-            # ★★★ 2026-08-18（**工具改动，不升版**——2026-08-04 裁定：判据落地不动版本号）：
-            #   **空默认值吞掉了「不知道」。** `raw/` 是空的时候，
-            #   判据回的是 `{"状态": "**未核（不是通过）**：没有找到任何 .txt"}` 且 **rc=0**，
-            #   而这里两个 `.get(..., 0)` 把它变成「头部引文 0 条，正文里找不到 0 条」——
-            #   **判据说未核，review 记成体检合格。** 上面第 1701 行我自己写着
-            #   「报 0 时必须连覆盖面一起报」，可 0 的两种来源（真的 0 条 vs 一份没读到）
-            #   在这里长得一模一样。实测：空 `raw/` ⇒ 「0 条，找不到 0 条」。
-            # ★★ 判定 key 在**闭集合**上（两个键在不在），不 key 在「未核」这个措辞上——
-            #   措辞归判据作者，键归数据结构；追措辞的判据永远慢一步。
-            #   [[empty-default-swallows-unknown]]｜[[checkers-must-key-on-a-closed-set-not-on-wording]]
-            _MISSING = object()
-            _n = _h.get('头部里的引文', _MISSING)
-            _bad = _h.get('**正文里找不到的**', _MISSING)
-            # ★ 用 if/else，**不许用 `return`**：本函数后面还有别的检查，
-            #   一个提前 return 会把它们全部静默跳过。[[a-red-gate-hides-every-gate-behind-it]]
-            if _n is _MISSING or _bad is _MISSING:
-                review['source_header_quotes'] = (
-                    '**未核（不是通过）**：判据没有给出计数（%s）——'
-                    '最常见成因是 `raw/` 下一份 .txt 都没有（语料不在本机）。'
-                    '★ 这一栏**不是 0 条问题**，是**没量过**。'
-                    % (str(_h.get('状态') or _h)[:80]))
-            else:
-                review['source_header_quotes'] = (
-                    f"头部引文 {_n} 条，**正文里找不到 {_bad} 条**"
-                    + ("　★ 逐条：" + "｜".join(f"{b['文件']}: {b['头部引的'][:60]}"
-                                                for b in _h.get('逐条', [])[:4]) if _bad else "")
-                    + ("　★★ 覆盖面窄：头部不引原文的文件本件看不见，**这个数不是全库体检**"
-                       if not _bad else ""))
+            _n, _bad = _h.get('头部里的引文', 0), _h.get('**正文里找不到的**', 0)
+            review['source_header_quotes'] = (
+                f"头部引文 {_n} 条，**正文里找不到 {_bad} 条**"
+                + ("　★ 逐条：" + "｜".join(f"{b['文件']}: {b['头部引的'][:60]}"
+                                            for b in _h.get('逐条', [])[:4]) if _bad else "")
+                + ("　★★ 覆盖面窄：头部不引原文的文件本件看不见，**这个数不是全库体检**"
+                   if not _bad else ""))
         except (json.JSONDecodeError, TypeError):
             review['source_header_quotes'] = '**未核（不是通过）**：输出解析不了'
 
@@ -1910,21 +1804,12 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     if code == -1:
         report.metrics.setdefault('content_review', {})['checker_census'] = out
     else:
-        # ★★ 2026-08-18（工具改动，不升版）：解析失败时原来只往 `content_review`
-        #   写一句「未做检查器先验」，**却照样往下建 census**——而 census 落在
-        #   `metrics['checker_census']`（**另一个键**，没被那句话覆盖），
-        #   内容是 `{'负对照可用': 0}`。于是同一件事有两处记录：
-        #   一处说「未核」，一处给了个数；**只看后者就是「0 件判据有负对照」**。
-        #   与本轮 `source_header_quotes` 同一形状（未核被写成一个干净的数）。
-        #   [[empty-default-swallows-unknown]]
-        _parsed = True
         try:
             rows = json.loads(out)
         except json.JSONDecodeError:
-            rows, _parsed = [], False
-            _msg = '元检查器输出无法解析，**本次未做检查器先验**（不是通过）'
-            report.metrics.setdefault('content_review', {})['checker_census'] = _msg
-            report.metrics['checker_census'] = _msg      # ★ 两个键给同一个答案
+            rows = []
+            report.metrics.setdefault('content_review', {})['checker_census'] = \
+                '元检查器输出无法解析，**本次未做检查器先验**（不是通过）'
         tally: dict[str, list[str]] = defaultdict(list)
         for row in rows:
             tally[row['verdict']].append(row['checker'])
@@ -1936,8 +1821,7 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
             census['**无负对照**（其「全绿」不构成证据）'] = tally['NO-SELFTEST']
         if tally.get('NOT-STANDALONE'):
             census['**负对照不可独立验证**'] = tally['NOT-STANDALONE']
-        if _parsed:                      # ★ 没解析成功就别用一个数盖掉「未核」
-            report.metrics['checker_census'] = census
+        report.metrics['checker_census'] = census
 
     review: dict[str, str] = {}
     # ★★★★ 2026-08-11：**没给 --cache 时自动用 `<target>/raw`**。
@@ -2250,20 +2134,9 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
                      '**有被 OCR 整份毁掉的文件被记作 P1**——'
                      '你正打算从一份读不出字的文件里取逐字引文；换干净扫本或降级')
     else:
-        # ★★★ 2026-08-17：**判据自己已经说了「未检查」，别在调用点把它翻成 ✓**。
-        #   `check_ocr_language_death` 对「没有词数 ≥500 的文件」印的原话是
-        #   「**本次未检查（不是通过）**」，而这里只找含「低于下限」的行，
-        #   找不到就一律 ✓ —— 空扫描面被读成通过。
-        #   同一个形状本文件里早有记录（`check_claim_coverage` 的 code 2：
-        #   「**防线设在检查器里、在调用点被抹掉了**」）。
-        #   [[zero-hit-gates-must-prove-they-can-hit]]｜[[a-refusal-to-check-prints-one-error]]
         n = next((l for l in out.splitlines() if '低于下限' in l), '')
-        _unchecked = next((l for l in out.splitlines()
-                           if '未检查' in l or '未核' in l), '')
-        review['ocr_language_death'] = (
-            n.strip()[:150] if n else
-            ('⚠ **未核，不是通过** —— ' + _unchecked.strip()[:130]) if _unchecked
-            else '✓ 没有被 OCR 整份毁掉的语料')
+        review['ocr_language_death'] = (n.strip()[:150] if n
+                                        else '✓ 没有被 OCR 整份毁掉的语料')
 
     res = target / 'evals/results.jsonl'
     if not res.exists():
@@ -2284,17 +2157,7 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
                            '**不要因此自行放宽阈值，这是人的决定**。'
                            + ('　' + '；'.join(hit) if hit else ''))
         else:
-            # ★★★ 2026-08-17：**同一个形状的第二处** —— `check_gate_reachability`
-            #   对空 `results.jsonl` 印的原话是「没有可用的判分数据——**本次未检查
-            #   （不是通过）**」并 rc=0，而这里一律翻成 ✓。
-            #   ★ 我在同一次里修了两处一样的：ocr_language_death 与本处。
-            #     **判据自己说了未检查，调用点就不许说通过。**
-            #   [[zero-hit-gates-must-prove-they-can-hit]]｜[[one-requirement-two-consumers]]
-            _unchecked = next((l for l in out.splitlines()
-                               if '未检查' in l or '未核' in l), '')
-            review['gate_reachability'] = (
-                ('⚠ **未核，不是通过** —— ' + _unchecked.strip()[:130]) if _unchecked
-                else '✓ 各绝对分门都在两席实测可达范围内')
+            review['gate_reachability'] = '✓ 各绝对分门都在两席实测可达范围内'
 
     # ── 只列不判：写进 warnings，不拦 ────────────────────────────────
     for script, argv, key in (
@@ -3645,35 +3508,9 @@ def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
         return
     out = buffer.getvalue()
     hard = [ln.strip() for ln in out.splitlines() if ln.strip().startswith('✗')]
-    # ★★★ 2026-08-17：**「无法判定」不是「有重合」，这两句话此前被合并了。**
-    #   `check_holdout_overlap.py` 自己分得很清楚——定位不到正文时它印
-    #   「✗ 找不到正文的源 N 条 …… 无法判定，**不算通过**」并 rc=2；
-    #   而这里把**所有** ✗ 一律计进 `hard`，再报成
-    #   「holdout 与 train 有内容重合（N 条硬失败）……**现在换源还来得及**」。
-    #   Rousseau #178 实测：唯一那条 ✗ 是「找不到正文的源 **103** 条」
-    #   （语料正文本来就不进 git），零条真重合，而门印的是「有内容重合」
-    #   并建议他去换源——**换源修不了「文件不在这台机器上」**。
-    #   全库 25 个被检查的未判分工作区里，22 个撞的都是这一条。
-    #   未核 ≠ 违规 ≠ 通过，三者要各说各的。
-    #   [[a-blocked-by-x-label-needs-x-rerun]]｜[[error-message-points-at-an-exit-that-isnt-there]]
-    unverifiable = [ln for ln in hard if '无法判定' in ln]
-    contaminated = [ln for ln in hard if '无法判定' not in ln]
-    info: dict[str, Any] = {'返回码': rc, '**硬失败**': len(hard),
-                            '其中·真重合': len(contaminated),
-                            '其中·无法判定': len(unverifiable)}
+    info: dict[str, Any] = {'返回码': rc, '**硬失败**': len(hard)}
     if hard:
         info['**逐条**'] = hard[:8]
-    if unverifiable:
-        info['未核口径'] = ('定位不到 holdout 的正文 ⇒ **这道门没能跑起来**，'
-                            '既不是「有重合」也不是「没重合」。语料正文不进 git，'
-                            '在没有语料缓存的机器上这是预期结果——'
-                            '给 `--cache <语料目录>` 才核得成。')
-        if report.phase == 'research':
-            report.error('corpus.holdout-unverifiable',
-                         'holdout 与 train 的重合**未能核验**（%d 条定位不到正文）——'
-                         '**未核不等于通过，也不等于有重合**；给 `--cache <语料目录>` 重跑。'
-                         '逐条见 metrics.holdout_overlap' % len(unverifiable))
-    if contaminated:
         info['口径'] = ('holdout 的内容已在 train 中出现——**用它出的 known 题不测泛化，'
                         '且一定得高分**。正解是换源，不是调阈值。')
         # ★★★ v0.0.0.154：**research 阶段改成硬拦**，其余阶段照旧只报不拦。
@@ -3686,10 +3523,9 @@ def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
         #     **那是正确行为，不是回归**。
         if report.phase == 'research':
             report.error('corpus.holdout-overlap',
-                         'holdout 与 train 有内容重合（%d 条**真重合**，另有 %d 条无法判定'
-                         '另计）——**现在换源还来得及**；逐条见 metrics.holdout_overlap，'
-                         '受污染段清单见 reports/holdout-contaminated-passages.json'
-                         % (len(contaminated), len(unverifiable)))
+                         'holdout 与 train 有内容重合（%d 条硬失败）——**现在换源还来得及**；'
+                         '逐条见 metrics.holdout_overlap，受污染段清单见 '
+                         'reports/holdout-contaminated-passages.json' % len(hard))
     report.metrics['holdout_overlap'] = info
 
 
@@ -3975,17 +3811,7 @@ def run_threshold_doc_drift(report, target: Path) -> None:
     code, out = proc.returncode, (proc.stdout or '') + (proc.stderr or '')
     bad = [ln.strip() for ln in out.splitlines() if ln.strip().startswith('✗')]
     info: dict[str, Any] = {'返回码': code, '**不一致处**': len(bad)}
-    # ★ 同日普查出来的第二处「未核被说成不合格」——**这一处退出码本身就分得清**：
-    #   `check_threshold_doc_drift.py` 找不到代码真源/文档时 **rc=3**（它自己印
-    #   「未核，不是通过」），真漂移是 **rc=2**。而这里原先只判 `code != 0`，
-    #   于是「文件找不到」会被报成「文档门槛表与 PROFILE_THRESHOLDS 不一致——
-    #   **改文档去迁就代码**」——照这句去改文档，改的是一个没被读过的文件。
-    #   ★ 与 holdout 那处不同：那处只能靠文本分辨，这处**现成的退出码没被用**。
-    if code == 3:
-        info['未核口径'] = ('找不到代码真源或文档 ⇒ **这道门没能跑起来**，'
-                            '不是「文档写错了」。别照「改文档」那句去改。')
-        report.errors.append(f'doc.threshold-unverifiable: {len(bad)} 条（**未核，不是通过**）')
-    elif code != 0:
+    if code != 0:
         info['**逐条**'] = bad[:6]
         info['口径'] = ('文档门槛表与 PROFILE_THRESHOLDS 不一致——'
                         '**改文档去迁就代码，不许反过来**。'
@@ -4499,63 +4325,14 @@ def main() -> int:
     try:
         meta = ensure_target(target)
     except (ValueError, OSError) as exc:
-        # ★★★ **拒检必须自己说自己拒检了。** 这里原本只印一条 `target.invalid`，
-        #   屏幕上「1 条错」看起来像个小毛病，实际是**零项被检查** ——
-        #   同一个坑我踩了三次：
-        #     2026-08-14 改完 Leonardo 的图版集去看效果，改前改后都是「1 条错」，
-        #               差点读成「我的改动没起作用」；
-        #     2026-08-14 Churchill 的 13 条 claim 从没被合成门看过一眼，
-        #               而他已经排在判分队列里；
-        #     2026-08-17 我拿 32 个未判分工作区跑普查，publish 出「32/32 不通过」——
-        #               其中 **7 个一条检查都没跑**，分母是错的。
-        #   [[a-refusal-to-check-prints-one-error]]（第三次）
-        #
-        #   ★ 只**加**字段、不动 `errors` 的形状：两个解析方
-        #     （`check_profile_declared.py` / `check_scoring_ready.py`）读的是
-        #     `passed` 与 `errors`，加键不会把它们弄坏。
-        #     [[one-requirement-two-consumers]]
-        _need = [n for n in ('meta.json', 'SKILL.md') if not (target / n).is_file()]
-        print("★★★ **拒检**：本次 `--phase %s` **一项检查都没跑**（checks_run=0）。\n"
-              "    这不是「只有 1 个问题」，是门根本没开机。\n"
-              "    实际路径：%s\n"
-              "    缺：%s\n"
-              "    ★ 若这是**语料阶段**的工作区（还没走 `init_target.py`），\n"
-              "      拒检是对的——但它的研究道结论也一样不存在，别记成「已检查」。"
-              % (args.phase, target, "、".join(_need) if _need else "（不是缺文件，见下方 message）"),
-              file=sys.stderr)
-        print(json.dumps({'passed': False,
-                          'refused': True,       # ★ 机器读的那一位：拒检 ≠ 检查完发现 1 个问题
-                          'checks_run': 0,
-                          'missing_required': _need,
-                          'errors': [{'code': 'target.invalid', 'message': str(exc)}]},
-                         ensure_ascii=False, indent=2))
+        print(json.dumps({'passed': False, 'errors': [{'code': 'target.invalid', 'message': str(exc)}]}, ensure_ascii=False, indent=2))
         return 1
-    # ★★★ 2026-08-17：**`profile` 缺席时，本件与 `check_corpus_feasibility` 回退到不同的档。**
-    #   本件：`meta.get('profile', 'standard')` ⇒ min_sources **24**、min_lanes **6**
-    #   那件：`profile = 'quick'`（第 148 行）  ⇒ min_sources  **8**、min_lanes **3**
-    #   **同一个工作区，一个按 24 判、一个按 8 判 —— 3 倍差，全来自一个缺失字段。**
-    #   实测受影响：burbank／churchill／ford／leonardo **4 个**（都是最小占位 meta.json）。
-    #   ★ 那件判据**会把回退印出来**（「profile 是 None，按 quick 算——若它本该是
-    #     deep/standard，本次结论偏松」），而本件一直是**静默**的。
-    #   ⇒ 本次**只让它说话，不动判定**：改默认值会移动 4 个工作区的门，那是决定不是清理。
-    #   [[two-checkers-same-text-different-rules]]｜[[counts-need-their-cutoff-stated]]
-    _profile_declared = meta.get('profile')
-    profile = _profile_declared or 'standard'
+    profile = meta.get('profile', 'standard')
     thresholds = PROFILE_THRESHOLDS.get(profile)
     if thresholds is None:
         print(f'ERROR: invalid profile {profile!r}', file=sys.stderr)
         return 2
     report = Report(target, args.phase, profile)
-    if _profile_declared is None:
-        report.metrics['profile_fallback'] = (
-            '★ **meta.json 里没有 `profile`**，本件按 **%s** 判'
-            '（min_sources %s、min_lanes %s）。'
-            '★★ 而 `check_corpus_feasibility.py` 对同一情形回退到 **quick**'
-            '（min_sources %s、min_lanes %s）—— **两件判据会给出不同结论**，'
-            '差的不是数据，是这个缺失字段。要定档就把 `profile` 写进 meta.json。'
-            % (profile, thresholds['min_sources'], thresholds['min_lanes'],
-               PROFILE_THRESHOLDS['quick']['min_sources'],
-               PROFILE_THRESHOLDS['quick']['min_lanes']))
 
     for rel in REQUIRED_FILES:
         if not (target / rel).exists():

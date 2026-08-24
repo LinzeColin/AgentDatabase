@@ -1,0 +1,7 @@
+{
+  "label": "install-idempotent",
+  "returncode": 0,
+  "result_status": "ALREADY_INSTALLED",
+  "stdout_sha256": "8e30dcf0383bdb1bba787bdd6d7c3d048fe0d06983d997133478a7b1bf4091a5",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

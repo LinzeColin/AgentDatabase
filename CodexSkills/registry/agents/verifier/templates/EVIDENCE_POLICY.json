@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "classification": "internal",
+  "purpose": "software acceptance evidence",
+  "allowed_data": ["synthetic", "masked", "minimum necessary operational evidence"],
+  "forbidden_in_public_bundle": ["credentials", "private keys", "session tokens", "restricted personal data", "unredacted production datasets"],
+  "private_evidence_root": "",
+  "redaction_required": true,
+  "retention_days": 30,
+  "retention_expires_at": "",
+  "owner": "",
+  "destruction_action": "delete_or_reauthorize",
+  "external_sharing_authorized": false,
+  "exceptions": []
+}

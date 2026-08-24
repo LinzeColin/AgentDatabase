@@ -1,0 +1,19 @@
+{
+  "claim_ids": [],
+  "control_roles": [
+    "独立复审",
+    "最终裁判",
+    "反证分析"
+  ],
+  "divergences_presented": false,
+  "dossier_hash": null,
+  "dossier_loaded": false,
+  "fallback_mode": "neutral_functional_roles",
+  "formal_independent_pass": "UNAVAILABLE",
+  "persona_contributions_counted": false,
+  "reason": "当前执行环境只取得 persona-distiller-group 的公开合同，未取得实际成员内层 runtime dossier；按硬门不得开始人物推理或虚构 claim_id。",
+  "route_attempted": true,
+  "schema_version": "teleiosis.persona_team_evidence.v5",
+  "source_skill_version": "v0.0.0.7",
+  "status": "INSUFFICIENT_ROSTER_FALLBACK"
+}

@@ -1,0 +1,1 @@
+{"ok": true, "result": {"plan": {"collisions": [], "from_version": null, "mode": "fresh", "target": "/mnt/data/_v5_install_validation/fresh-skills/teleiosis", "unknown_files": [], "version": "v0.0.0.5"}, "status": "DRY_RUN_READY", "writes": false}, "version": "v0.0.0.5"}

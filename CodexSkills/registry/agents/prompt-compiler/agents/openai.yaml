@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prompt 编译器｜全维冠军版"
+  short_description: "四竞品双角色路由、逐维第一硬门、独立终审与版本记忆"
+  default_prompt: "$prompt-compiler 优化下面的原始工件；GEPA、AutoResearch、Meta-Harness、Promptfoo 同时作为同层竞品和可路由执行器。原文不可覆盖；一个守恒总预算；最终测试密封；任何冻结维度或总体未排名第一都不得发布。"

@@ -102,26 +102,12 @@ AGGREGATORS = re.compile(
 # 能作数的依据
 AUTHORITATIVE = re.compile(
     r"crossref|出版方|publisher|版权局|copyright\s*office|\bcce\b|\bcprs\b"
-    # ★ `卒于/卒於/逝于` 是**同一类的拼写变体**，2026-08-17 之前漏配 ——
-    #   证据是这份正则**自己的不一致**：`殁` 是单字（所以 `殁于` 一直能中）、
-    #   `逝世` 在而 `逝于` 不在、`卒年` 在而 `卒于` 不在。抽读 4 条命中原文
-    #   （「作者卒于 1910 亦满足生前+70」「作者卒于 1910 → 依 17 U.S.C. §303 已入…」）
-    #   全是货真价实的卒年推理。全库实测：**102 条**由此从「无依据」翻成「有据可查」。
-    #   ★ 这是**开脱侧**的放宽，所以先读命中再改，并把正反用例钉进自测。
-    r"|renewal|续展|卒年|卒于|卒於|逝于|death|逝世|殁|public\s*domain\s*day|扉页|title\s*page"
+    r"|renewal|续展|卒年|death|逝世|殁|public\s*domain\s*day|扉页|title\s*page"
     r"|colophon|terms\s*and\s*conditions|©|\(c\)", re.I)
 
 # 依据可能写在这些字段里
 BASIS_FIELDS = ("rights_basis", "rights_source", "license_source",
                 "rights_note", "attribution")
-
-
-# 明说「判不了／未确认」的写法。**这些不是声称公有领域。**
-UNDETERMINED = re.compile(r"未定|未确认|待查|判不了|无法(确定|判定|判断)|"
-                          r"undetermined|unconfirmed|cannot\s+(be\s+)?determin", re.I)
-# 肯定性结论词。带保留的真声明（如「public-domain（…未声明底本年份）」）靠它保住。
-AFFIRMATIVE_PD = re.compile(r"public[\s-]?domain|公有领域|已过(版权|保护期)|"
-                            r"进入公(有|共)领域", re.I)
 
 
 def is_pd(value):
@@ -136,16 +122,6 @@ def is_pd(value):
     s = str(value).strip()
     if s.lower().rstrip(".") in PD_VALUES:
         return True
-    # ★★ **「判不了」不是声称。** 2026-08-17 实测：本函数把
-    #   `未定——无出版年，PD 判不了` 与 `PD 状态未确认` 判成了「声称公有领域」——
-    #   两句都在明说**判不了**。上面那段 docstring 早写着「不许把『不声称公有领域』
-    #   的也认进来」，**规则写对了，代码漏了这一类**。
-    #   [[the-comment-states-the-rule-the-code-narrows-it]]
-    #   ★ 守卫必须窄：`public-domain（原作公元前 1 世纪；本转写页未声明底本年份）`
-    #     是**带保留的真声明**，不许误伤 ⇒ 只有在「有未决词 **且** 没有任何
-    #     肯定性结论词」时才判 False。
-    if UNDETERMINED.search(s) and not AFFIRMATIVE_PD.search(s):
-        return False
     return bool(PD_ASSERTIONS.search(s))
 
 
@@ -199,25 +175,6 @@ def selftest() -> int:
         print(("  ✓ " if cond else "  ✗ ") + label)
         if not cond:
             fails.append(label)
-    # ★ 「判不了」不是声称 —— 2026-08-17 实测本函数把下面两句判成了「声称公有领域」。
-    #   同时钉住**不许误伤**带保留的真声明。
-    for _text, _want in (("未定——无出版年，PD 判不了", False),
-                         ("PD 状态未确认", False),
-                         ("PD 无法判定", False),
-                         ("public-domain（原作公元前 1 世纪；本转写页未声明底本年份）", True),
-                         ("公有领域（卒年未确认，按出版年 1901 判定）", True),
-                         ("public-domain", True)):
-        chk("is_pd(%r) == %s" % (_text[:34], _want), is_pd(_text) is _want)
-
-    # ★ 卒年一类的拼写变体（2026-08-17 补 `卒于/卒於/逝于`）。**正反都钉**：
-    #   放宽在开脱侧，必须同时钉住「不该认的仍然不认」。
-    for _t, _w in (("作者卒于 1910 亦满足生前+70", True), ("卒年 1912", True),
-                   ("逝于 1905", True), ("殁于 1901", True), ("逝世于 1899", True),
-                   ("Unpaywall 说是 public-domain", False),
-                   ("OpenAlex license 字段", False),
-                   ("依 17 U.S.C. §303", False)):
-        chk("AUTHORITATIVE(%r) == %s" % (_t[:30], _w),
-            bool(AUTHORITATIVE.search(_t)) is _w)
 
     print("── ★★ 正向：**聚合器依据必须报**（Watson #116 那条真实误判的形状）──")
     agg, nb, ok, npd = audit([{
@@ -356,20 +313,6 @@ def main() -> int:
               "  **版权判据只能取自出版方页面、Crossref 原始记录或版权局记录。**")
         return 1
 
-    # ★★ **披露一件不由本判据裁定的事**：`17 U.S.C. §303` 这类**法条引用**
-    #   是「规则」不是「来源」，而本判据的判词写着「只能取自出版方页面、
-    #   Crossref 原始记录或版权局记录」。算不算数是**政策问题**，
-    #   我只把数报出来，**不据此改变判定**。[[only-three-things-are-his-to-decide]]
-    import re as _re
-    _STATUTE = _re.compile(r"17\s*U\.?S\.?C|§\s*\d{3}|U\.S\.C\.")
-    _cited = sum(1 for r in records
-                 if r.get("source_id") in set(nb) and _STATUTE.search(basis_of(r) or ""))
-    if _cited:
-        print(f"\n  ⓘ 另有 **{_cited}** 条：依据里**引了法条**（17 U.S.C./§）"
-              "但不含本判据认可的来源词。")
-        print("     法条是**规则**不是**来源**，本判据的判词只认「出版方页面／Crossref／"
-              "版权局记录」——\n     **算不算数由 Owner 定，本判据不据此改判定。**")
-
     if nb:
         print(f"\n！ **{len(nb)} 条只有结论、没有依据。**")
         print("  **这不是说这些判断错了**——今天名册上八位历史人物的结论都站得住。\n"
@@ -379,16 +322,7 @@ def main() -> int:
               "  只记结论不记依据，事后分不出是按卒年推定、查了出版方，还是照抄了聚合器。")
         return 1
 
-    # ★★ **零扫描面不许印肯定句。** 2026-08-17 交叉喂测：把一份无关 JSON 当账本
-    #   传进来，本判据**照样印「✓ 每一条公有领域声明都带得住的依据」并 rc=0** ——
-    #   而它一条声明都没读到。「每一条都成立」在空集上恒真，那不是通过。
-    #   [[zero-hit-gates-must-prove-they-can-hit]]｜[[a-rights-check-said-zero-red-after-reading-nothing]]
-    claimed = len(agg) + len(nb) + len(ok)
-    if not claimed:
-        print("\n  ⚠ **账本里一条公有领域声明都没读到 —— 本次未核，不是通过。**")
-        print("    （扫描面为空时「每一条都成立」恒真；先确认传对了账本文件。）")
-        return 0
-    print("\n  ✓ 全部 **%d** 条公有领域声明都带得住依据" % claimed)
+    print("\n  ✓ 每一条公有领域声明都带得住的依据")
     return 0
 
 

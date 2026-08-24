@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "persona-distiller-group/delivery-manifest.schema.json",
+  "additionalProperties": true,
+  "properties": {
+    "artifact_kind": {"const": "persona-distillation-full-delivery"},
+    "builder": {"const": "persona-distiller"},
+    "builder_version": {"minLength": 1, "type": "string"},
+    "delivery_contract": {"const": "v0.0.0.5"},
+    "files": {
+      "items": {
+        "properties": {
+          "path": {"minLength": 1, "type": "string"},
+          "sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+          "size_bytes": {"minimum": 0, "type": "integer"}
+        },
+        "required": ["path", "sha256", "size_bytes"],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "identity": {
+      "properties": {
+        "family_id": {"minLength": 1, "type": "string"},
+        "folder": {"minLength": 1, "type": "string"},
+        "mode": {"enum": ["single", "multi"]}
+      },
+      "required": ["folder", "family_id", "mode"],
+      "type": "object"
+    },
+    "product_version": {
+      "pattern": "^0\\.0\\.0\\.([1-9][0-9]{0,2})$",
+      "type": "string"
+    },
+    "runtime": {
+      "properties": {
+        "builder_version": {"minLength": 1, "type": "string"},
+        "path": {"minLength": 1, "type": "string"},
+        "sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+        "size_bytes": {"minimum": 1, "type": "integer"}
+      },
+      "required": ["path", "sha256", "size_bytes", "builder_version"],
+      "type": "object"
+    },
+    "schema_version": {"const": "1.0"},
+    "single_archive_only": {"const": true},
+    "subject": {
+      "properties": {
+        "canonical_name": {"minLength": 1, "type": "string"},
+        "origin": {"minLength": 1, "type": "string"},
+        "slug": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "uid": {"pattern": "^person-[0-9a-f]{16}$", "type": "string"}
+      },
+      "required": ["uid", "canonical_name", "slug", "origin"],
+      "type": "object"
+    },
+    "top_level_count": {"const": 1}
+  },
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "delivery_contract",
+    "builder",
+    "builder_version",
+    "single_archive_only",
+    "top_level_count",
+    "subject",
+    "identity",
+    "product_version",
+    "runtime",
+    "files"
+  ],
+  "title": "Persona full-delivery manifest",
+  "type": "object"
+}

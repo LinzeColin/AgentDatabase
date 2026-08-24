@@ -1,0 +1,17 @@
+{
+  "name": "anime",
+  "purpose": "anime, illustration and stylized narrative",
+  "priorities": [
+    "character_sheet",
+    "style_lock",
+    "pose_and_action",
+    "background_depth",
+    "effects_timing",
+    "continuity"
+  ],
+  "avoid": [
+    "identity_drift",
+    "style_switching",
+    "crowded_actions"
+  ]
+}

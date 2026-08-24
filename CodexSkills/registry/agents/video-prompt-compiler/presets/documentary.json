@@ -1,0 +1,17 @@
+{
+  "name": "documentary",
+  "purpose": "real factory, employee and project documentation",
+  "priorities": [
+    "authentic_location",
+    "human_work",
+    "observational_camera",
+    "ambient_sound",
+    "chronology",
+    "context"
+  ],
+  "avoid": [
+    "overpolished_fake_factory",
+    "invented_dialogue",
+    "aigc_as_evidence"
+  ]
+}

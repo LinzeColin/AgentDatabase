@@ -1,0 +1,9 @@
+{
+  "baseline_id": "WBI-GB-CANDIDATE-001",
+  "locked_path": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+  "locked_sha256": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
+  "policy": "fail_closed_append_only",
+  "schema_version": "teleiosis.genesis_lock.v5",
+  "source_path": "constitution/GENESIS_SOURCE.v0.0.0.1.zh-CN.md",
+  "version": "v0.0.0.1"
+}

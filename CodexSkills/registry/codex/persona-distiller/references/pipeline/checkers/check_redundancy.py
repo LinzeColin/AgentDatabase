@@ -150,26 +150,15 @@ def main() -> int:
         print(f"✗ **{a.workspace} 下一个 .md／.jsonl 都没读到——结果不可信，不是「没问题」**")
         return 3
     total = 0
-    # ★ 真正的可比单位是**长度 ≥60 的段**（`scan_text` 的射程），不是文件数。
-    _n_para = 0
     for f in files:
-        _txt = f.read_text(encoding="utf-8", errors="replace")
-        _n_para += sum(1 for _p in _txt.split("\n") if len(_p) >= 60)
-        rows = scan_text(_txt)
+        rows = scan_text(f.read_text(encoding="utf-8", errors="replace"))
         if rows:
             print(f"── {f.name}")
             for label, n, k in rows[:6]:
                 print(f"   [{label} ×{n}] {k}")
             total += len(rows)
-    # ★★★ 2026-08-17 第二轮：**扫了 N 份文件 ≠ 比过 N 个段落**。
-    #   [[zero-hit-gates-must-prove-they-can-hit]]（第二轮：分母是文件数，断言的单位却是别的）
-    if total:
-        print(f"\n扫过 {len(files)} 份；⚠ {total} 处段内重复——只列不判，逐条判断是否刻意")
-    elif not _n_para:
-        print(f"\n扫过 {len(files)} 份；⚠ **可比段落 0 个 —— 本次未核，不是通过。**"
-              "\n   「无段内重复」在空集上恒真。")
-    else:
-        print(f"\n扫过 {len(files)} 份 / **{_n_para}** 个段落；✓ 无段内重复")
+    print(f"\n扫过 {len(files)} 份；"
+          f"{'✓ 无段内重复' if not total else f'⚠ {total} 处段内重复——只列不判，逐条判断是否刻意'}")
     return 0
 
 

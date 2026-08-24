@@ -1,0 +1,14 @@
+﻿candidate,natural_language_compilation,production_method_routing,cinematic_directing,model_adapter_depth,continuity_reference_control,industrial_physics,editing_storyboard_breadth,qc_delta_repair,current_model_freshness,installability_runtime_burden,license_reuse_clarity,license_note,weighted_goal_fit_percent,evidence_confidence_percent,native_model_validation_status,independent_acceptance_status,evidence_tier,role
+Video Prompt Compiler v0.0.0.2,98,98,96,96,95,97,96,94,95,96,100,MIT; package-owned implementation,96.4,76,NOT_RUN,NOT_RUN,B: package tests + official/paper sources,recommended integrated base
+DirectorSKILL,82,92,98,80,90,60,94,90,80,88,100,MIT,85.7,65,UNKNOWN,NOT_RUN,B/C: public skill design,director and shot-planning donor
+0xadvait/ai-video-skill,82,88,90,88,86,55,82,96,88,70,100,MIT,83.7,62,SELF_REPORTED_WORKFLOW,NOT_RUN,B/C: executable repo + self documentation,QC and end-to-end workflow donor
+Square-Zero-Labs/video-prompting-skill,88,78,82,98,88,50,62,60,94,95,100,Apache-2.0,80.5,68,NOT_DISCLOSED,NOT_RUN,B: modular skill + official-guide linkage,model adapter and H3 schema donor
+PenShot / story-shot-agent,80,88,92,70,90,35,95,68,76,70,100,MIT,77.1,68,NOT_DISCLOSED,NOT_RUN,B/C: open project workflow,screenplay-to-shot donor
+Cinematic Video Prompt Engineer Skill,85,70,97,68,95,42,55,62,75,90,100,MIT,74.8,55,NOT_DISCLOSED,NOT_RUN,C: public skill design,micro-performance donor
+Alisa0808/vibe-creating-skill,98,65,82,65,75,35,35,55,90,98,90,MIT; NOTICE/attribution applies to the ported methodology,70.6,62,NOT_DISCLOSED,NOT_RUN,B/C: public skill + examples,judgment-first natural-language donor
+FFMPEGA natural-language editing,75,92,35,10,35,10,98,70,70,65,55,GPL-3.0 code; optional model weights include non-commercial terms,54.4,60,OPEN_SOURCE_WORKFLOW,NOT_RUN,B/C: open-source editing workflow,deterministic edit-plan donor
+PhyT2V / PhyPrompt,72,20,55,25,25,98,10,82,75,45,70,Research code/paper; verify each repository before direct code reuse,52.6,92,PAPER_EXPERIMENTS,PEER_REVIEWED_OR_PREPRINT,A: research + official code,physics-ledger and refinement donor
+RAPO / RAPO++,86,20,60,35,30,30,10,88,72,45,70,Research paper/code; verify repository terms before direct code reuse,49.9,94,PAPER_EXPERIMENTS,PEER_REVIEWED,A: peer-reviewed research,dual-branch optimizer donor
+VideoFeedback2 / VideoScore2,20,5,20,20,35,70,5,98,80,50,60,Dataset/model terms require component-level review,40.2,95,DATASET_AND_MODEL_EVALUATION,RESEARCH_EVIDENCE,A/B: human-annotated dataset,evaluation-dimension donor
+HF video-prompt-enhancer,85,10,55,15,20,20,5,25,50,35,100,Apache-2.0 model card,36.5,52,MODEL_CARD_ONLY,NOT_RUN,C: model card,optional local enhancer; not core
+VidProM dataset,30,5,20,15,10,10,5,20,45,20,40,Mixed dataset provenance; includes non-commercial components,19.1,90,LARGE_DATASET,RESEARCH_EVIDENCE,A/B: published dataset; noncommercial components,research corpus only

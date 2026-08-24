@@ -1,0 +1,15 @@
+{
+  "baseline_id": "WBI-GB-CANDIDATE-001",
+  "baseline_hash": "REPLACE_WITH_LOCKED_GENESIS_HASH",
+  "valid_as_of": "YYYY-MM-DD",
+  "requirements": [
+    {
+      "id": "WBI-GB-001",
+      "status": "BLOCKED",
+      "evidence_bindings": [
+        {"path": "evidence/validation/example.json", "sha256": "REPLACE_WITH_SHA256", "bytes": 0}
+      ],
+      "unknowns": []
+    }
+  ]
+}

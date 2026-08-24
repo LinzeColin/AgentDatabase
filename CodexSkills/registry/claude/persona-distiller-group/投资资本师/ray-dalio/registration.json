@@ -1,0 +1,29 @@
+{
+  "canonical_key": "public:raydalio",
+  "canonical_name": "Ray Dalio",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "ray-dalio",
+  "subject_uid": "person-c82d6e799dd1c0fa",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/ray-dalio-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-27T00:42:39Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.6",
+      "distilled_with_note": "首次落盘提交 b7f9404b",
+      "distilled_with_source": "git-first-commit",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "b8ba6b7f6d3161eaeb5b9cc319f1c6e84ce4405554146786f879d8621ffe4482",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/ray-dalio-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "26ece9e12cd1cc3ecb8180f4cb976c988b5c10fd01b015da5540843e36ba30ed",
+      "runtime_size_bytes": 71115,
+      "size_bytes": 78764
+    }
+  ]
+}

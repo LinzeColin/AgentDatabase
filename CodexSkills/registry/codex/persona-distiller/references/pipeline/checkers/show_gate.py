@@ -30,27 +30,6 @@ schema_version / target / phase / profile / generated_at
     python3 show_gate.py --self-test
 
 退出码与 `passed` 一致：**过 0，不过 1**——可以直接串进 `&&`。
-## ★★★ 本件**不是只读的** —— 2026-08-17 咬了我一次
-
-我要扫全库看哪些人的 rubric 自相矛盾，按规矩先查它写不写盘：
-
-    grep -cE "write_text|open\(...w|mkdir|json.dump" scripts/show_gate.py  →  **0**
-
-判定「只读」，挂后台跑完全库。`git status` 冒出**两个新文件**：
-`seth-godin` 与 `michael-steinhardt` 的 `reports/holdout-contaminated-passages.json`
-—— 而这两人**都已判分（各 128 行结果），按 ㊵ 是冻结的**。
-
-**链条**：本件起子进程跑 `quality_check.py`（默认**不带** `--write-report`）
-→ 它加载 `check_holdout_overlap.py` → 那里 **372–374 行无条件 `mkdir` + `write_text`**。
-
-★ 那个无条件写**是有意的、不要改**：`if passages:` 是原版，2026-08-13 Dewey #190
-  撞上过「磁盘上留着上一轮的旧清单，与当前判定互相矛盾」。见该文件注释。
-
-⇒ 要改的是**本件没说自己会写**。现在说了，并在运行时把它会碰的路径印出来。
-  **名字里有 `show_` 不代表只读。**
-
-★ 要真只读：把工作区复制到 scratchpad 再跑，或直接 import 你要的那个 checker
-  （例如只想看 rubric 就 import `check_persona_frame_break.scan_text`）。
 """
 import argparse
 import json
@@ -70,29 +49,10 @@ def render(payload: dict) -> tuple:
              f"phase={payload.get('phase')}　profile={payload.get('profile')}　"
              f"strict={payload.get('strict')}",
              f"  errors {len(errs)}　warnings {len(warns)}"]
-    # ★★★ 2026-08-18：`quality_check` **两种形状都发** —— 实测
-    #   `warnings.append({...})` 1 处、`warnings.append("...")` **4 处**；
-    #   `errors` 同样是 dict 1 处、裸字符串 3 处。
-    #   而这里原本只按 dict 处理 ⇒ 撞上字符串就
-    #   `AttributeError: 'str' object has no attribute 'get'` **抛栈**。
-    #   实测在 Rousseau 的真工作区上必炸（它的 warnings 恰好是那条裸字符串）。
-    #   ★ 同一个形状差异对**两个消费者一冷一热**：吃 JSON 的下游毫发无伤，
-    #     渲染给人看的这一个直接死。[[same-parse-bug-fatal-to-one-consumer-harmless-to-another]]
-    #   ★★ 不把裸字符串**悄悄**格式化掉 —— 那会把「生产者形状不一致」这件事藏起来。
-    #     标一个 `(无 code)`，让它在输出里看得见。
-    def _row(item, mark: str) -> str:
-        if isinstance(item, dict):
-            return f"  {mark} {item.get('code')} — {str(item.get('message', ''))[:150]}"
-        return f"  {mark} (无 code) — {str(item)[:150]}"
-
     for e in errs:
-        lines.append(_row(e, "✗"))
+        lines.append(f"  ✗ {e.get('code')} — {e.get('message', '')}")
     for w in warns:
-        lines.append(_row(w, "⚠"))
-    _bare = sum(1 for x in list(errs) + list(warns) if not isinstance(x, dict))
-    if _bare:
-        lines.append(f"  ★ 其中 **{_bare}** 条没有 `code`（生产者发的是裸字符串）——"
-                     f"**按 code 做的过滤/统计会漏掉它们**")
+        lines.append(f"  ⚠ {w.get('code')} — {str(w.get('message', ''))[:150]}")
     missing = [k for k in REAL_KEYS if k not in payload]
     if missing:
         lines.append(f"  ★ **输出里缺字段 {missing}——未核，不是通过**")
@@ -102,17 +62,6 @@ def render(payload: dict) -> tuple:
 
 def run(target: str, phase: str, strict: bool) -> tuple:
     here = pathlib.Path(__file__).resolve().parent
-    # ★★★ 2026-08-17：**本件会在工作区里写盘**，跑之前先说出来。
-    #   链条：本件 → quality_check.py（默认不带 --write-report）
-    #        → check_holdout_overlap.py:372 **无条件** mkdir + write_text。
-    #   那个无条件写是有意的（见该文件注释，Dewey #190 的陈旧清单事故），不要改它；
-    #   要改的是**本件不说**。名字里有 show_ 不代表只读。
-    _touch = pathlib.Path(target) / "reports" / "holdout-contaminated-passages.json"
-    # ★ 绝对路径。用户要照着去看/去清的路径印成相对的，等于报错了位置。
-    #   [[printing-relative-paths-misreports-location]]
-    print("★ **本件不是只读的**：它会在工作区写\n     %s" % _touch.resolve(),
-          file=sys.stderr)
-    print("  （成因见本文件头；要真只读，把工作区复制到别处再跑）", file=sys.stderr)
     argv = [sys.executable, str(here / "quality_check.py"), target, "--phase", phase]
     if strict:
         argv.append("--strict")

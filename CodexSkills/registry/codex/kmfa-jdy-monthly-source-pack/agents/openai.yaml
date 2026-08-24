@@ -1,0 +1,3 @@
+interface:
+  display_name: "KMFA 金蝶月度归档"
+  short_description: "获取、核验并归档金蝶月度一级来源"

@@ -1,0 +1,12 @@
+{
+  "acceptance_id": "AC-002",
+  "candidate_core_hash": "166a2284ab0749353ea9b898db55c3750347c9cfeca6321581779858519dce89",
+  "evidence_refs": [
+    "evidence/validation/raw/full-tests-1.stderr.log",
+    "evidence/validation/raw/strict-check.stdout.log"
+  ],
+  "formal_pass": "NOT_ISSUED",
+  "formal_pass_authority": "external independent verifier",
+  "schema_version": "teleiosis.acceptance_evidence.v5",
+  "status": "LOCAL_ENGINEERING_PASS"
+}

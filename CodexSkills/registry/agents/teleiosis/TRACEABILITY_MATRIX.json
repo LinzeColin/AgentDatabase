@@ -1,0 +1,438 @@
+{
+  "entries": [
+    {
+      "acceptance": "ZIP 根只有 teleiosis/，不得注册独立 Lab Skill。",
+      "artifacts": [
+        "SKILL.md",
+        "metadata/release.json"
+      ],
+      "evidence": "evidence/validation/ac-001.json",
+      "oracle": "test_package_root",
+      "requirement_id": "AC-001",
+      "task_ids": [
+        "T-001",
+        "T-015"
+      ],
+      "test": "test_package_root"
+    },
+    {
+      "acceptance": "VERSION、SKILL metadata、release metadata 均为 v0.0.0.5。",
+      "artifacts": [
+        "VERSION",
+        "SKILL.md",
+        "metadata/release.json"
+      ],
+      "evidence": "evidence/validation/ac-002.json",
+      "oracle": "test_version_consistency",
+      "requirement_id": "AC-002",
+      "task_ids": [
+        "T-002",
+        "T-015"
+      ],
+      "test": "test_version_consistency"
+    },
+    {
+      "acceptance": "Locked Genesis SHA-256 必须为 14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086。",
+      "artifacts": [
+        "constitution/genesis-lock.json"
+      ],
+      "evidence": "evidence/validation/ac-003.json",
+      "oracle": "test_genesis_lock",
+      "requirement_id": "AC-003",
+      "task_ids": [
+        "T-003",
+        "T-015"
+      ],
+      "test": "test_genesis_lock"
+    },
+    {
+      "acceptance": "T/S/P/A 均有非空、唯一、强制 Capability Manifest。",
+      "artifacts": [
+        "modules/",
+        "metadata/capability-manifest.json"
+      ],
+      "evidence": "evidence/validation/ac-004.json",
+      "oracle": "test_capability_manifests",
+      "requirement_id": "AC-004",
+      "task_ids": [
+        "T-004",
+        "T-015"
+      ],
+      "test": "test_capability_manifests"
+    },
+    {
+      "acceptance": "一次 Run 恰为 36 阶段，按 T/S/P/A 重复 9 轮。",
+      "artifacts": [
+        "references/FULL_RUN_CONTRACT.md",
+        "scripts/teleiosis_core/workflow.py"
+      ],
+      "evidence": "evidence/validation/ac-005.json",
+      "oracle": "test_run_contract",
+      "requirement_id": "AC-005",
+      "task_ids": [
+        "T-005",
+        "T-015"
+      ],
+      "test": "test_run_contract"
+    },
+    {
+      "acceptance": "KEEP/NO_CHANGE/REVERT 与实际 Delta 对账并保留 revision。",
+      "artifacts": [
+        "scripts/teleiosis_core/workflow.py"
+      ],
+      "evidence": "evidence/validation/ac-006.json",
+      "oracle": "test_workflow_revision",
+      "requirement_id": "AC-006",
+      "task_ids": [
+        "T-006",
+        "T-015"
+      ],
+      "test": "test_workflow_revision"
+    },
+    {
+      "acceptance": "冻结后任一协议字段变化均使 hash 校验失败。",
+      "artifacts": [
+        "scripts/teleiosis_core/arena.py"
+      ],
+      "evidence": "evidence/validation/ac-007.json",
+      "oracle": "test_arena_freeze",
+      "requirement_id": "AC-007",
+      "task_ids": [
+        "T-007",
+        "T-015"
+      ],
+      "test": "test_arena_freeze"
+    },
+    {
+      "acceptance": "等预算主榜拒绝预算不等、参与者任务集不一致或缺失重复。",
+      "artifacts": [
+        "scripts/teleiosis_core/arena.py"
+      ],
+      "evidence": "evidence/validation/ac-008.json",
+      "oracle": "test_arena_fairness",
+      "requirement_id": "AC-008",
+      "task_ids": [
+        "T-008",
+        "T-015"
+      ],
+      "test": "test_arena_fairness"
+    },
+    {
+      "acceptance": "密封场要求冻结协议和 verifier_only 数据可见性。",
+      "artifacts": [
+        "references/ARENA_LAB_CONTRACT.md"
+      ],
+      "evidence": "evidence/validation/ac-009.json",
+      "oracle": "test_sealed_arena",
+      "requirement_id": "AC-009",
+      "task_ids": [
+        "T-009",
+        "T-015"
+      ],
+      "test": "test_sealed_arena"
+    },
+    {
+      "acceptance": "效果、治理、Pareto 分离，治理不混入效果分。",
+      "artifacts": [
+        "scripts/teleiosis_core/arena.py"
+      ],
+      "evidence": "evidence/validation/ac-010.json",
+      "oracle": "test_arena_outputs",
+      "requirement_id": "AC-010",
+      "task_ids": [
+        "T-010",
+        "T-015"
+      ],
+      "test": "test_arena_outputs"
+    },
+    {
+      "acceptance": "Candidate 任一硬失败即 BLOCKED，不能因总分高而晋级。",
+      "artifacts": [
+        "scripts/teleiosis_core/arena.py"
+      ],
+      "evidence": "evidence/validation/ac-011.json",
+      "oracle": "test_arena_hard_gate",
+      "requirement_id": "AC-011",
+      "task_ids": [
+        "T-011",
+        "T-015"
+      ],
+      "test": "test_arena_hard_gate"
+    },
+    {
+      "acceptance": "代理或非官方运行最高 L2，不能冒充 L3/L4。",
+      "artifacts": [
+        "metadata/evidence-boundaries.json"
+      ],
+      "evidence": "evidence/validation/ac-012.json",
+      "oracle": "test_evidence_level_cap",
+      "requirement_id": "AC-012",
+      "task_ids": [
+        "T-012",
+        "T-015"
+      ],
+      "test": "test_evidence_level_cap"
+    },
+    {
+      "acceptance": "内部代码不得返回 FORMAL_PASS；handoff 明确只读外部裁决。",
+      "artifacts": [
+        "references/EXTERNAL_VERIFIER_HANDOFF.md"
+      ],
+      "evidence": "evidence/validation/ac-013.json",
+      "oracle": "test_no_internal_formal_pass",
+      "requirement_id": "AC-013",
+      "task_ids": [
+        "T-013",
+        "T-015"
+      ],
+      "test": "test_no_internal_formal_pass"
+    },
+    {
+      "acceptance": "全新、幂等、旧版升级、Genesis 冲突、高版本、回滚均有确定性结果。",
+      "artifacts": [
+        "scripts/teleiosis_core/installer.py"
+      ],
+      "evidence": "evidence/validation/ac-014.json",
+      "oracle": "test_installer",
+      "requirement_id": "AC-014",
+      "task_ids": [
+        "T-014",
+        "T-015"
+      ],
+      "test": "test_installer"
+    },
+    {
+      "acceptance": "无符号链接、路径穿越、重复条目、缓存、秘密和未知可执行冲突。",
+      "artifacts": [
+        "scripts/teleiosis_core/integrity.py"
+      ],
+      "evidence": "evidence/validation/ac-015.json",
+      "oracle": "test_security",
+      "requirement_id": "AC-015",
+      "task_ids": [
+        "T-015"
+      ],
+      "test": "test_security"
+    },
+    {
+      "acceptance": "任务 DAG 无循环；每条 Acceptance 映射到任务、测试、Oracle、证据和制品。",
+      "artifacts": [
+        "TASK_DAG.json",
+        "TRACEABILITY_MATRIX.json"
+      ],
+      "evidence": "evidence/validation/ac-016.json",
+      "oracle": "test_governance_artifacts",
+      "requirement_id": "AC-016",
+      "task_ids": [
+        "T-016",
+        "T-015"
+      ],
+      "test": "test_governance_artifacts"
+    },
+    {
+      "acceptance": "两次清洁构建字节一致；冷解压后自检和测试通过。",
+      "artifacts": [
+        "scripts/teleiosis_core/packaging.py"
+      ],
+      "evidence": "evidence/validation/ac-017.json",
+      "oracle": "test_reproducible_package",
+      "requirement_id": "AC-017",
+      "task_ids": [
+        "T-017",
+        "T-015"
+      ],
+      "test": "test_reproducible_package"
+    },
+    {
+      "acceptance": "真实市场、L3/L4、正式独立复审未运行时明确 NOT_CLAIMED/UNAVAILABLE。",
+      "artifacts": [
+        "CANONICAL_STATE.json",
+        "metadata/evidence-boundaries.json"
+      ],
+      "evidence": "evidence/validation/ac-018.json",
+      "oracle": "test_truth_boundaries",
+      "requirement_id": "AC-018",
+      "task_ids": [
+        "T-018",
+        "T-015"
+      ],
+      "test": "test_truth_boundaries"
+    },
+    {
+      "artifacts": [
+        "legacy/v0.0.0.3/",
+        "tests/test_v5_lineage.py"
+      ],
+      "evidence": "evidence/validation/ac-019.json",
+      "oracle": "test_v3_lineage",
+      "requirement_id": "AC-019",
+      "task_ids": [
+        "T-019",
+        "T-028"
+      ],
+      "test": "test_v3_lineage"
+    },
+    {
+      "artifacts": [
+        "scripts/teleiosis_core/semantic.py",
+        "templates/semantic-reconcile-spec.example.json"
+      ],
+      "evidence": "evidence/validation/ac-020.json",
+      "oracle": "test_semantic_reconcile",
+      "requirement_id": "AC-020",
+      "task_ids": [
+        "T-020",
+        "T-028"
+      ],
+      "test": "test_semantic_reconcile"
+    },
+    {
+      "artifacts": [
+        "metadata/skill-catalog-snapshot.json",
+        "evidence/preparation/skill-pass-a.json",
+        "evidence/preparation/skill-pass-b.json",
+        "evidence/preparation/skill-pass-c.json"
+      ],
+      "evidence": "evidence/validation/ac-021.json",
+      "oracle": "test_skill_audit",
+      "requirement_id": "AC-021",
+      "task_ids": [
+        "T-021",
+        "T-027",
+        "T-030"
+      ],
+      "test": "test_skill_audit"
+    },
+    {
+      "artifacts": [
+        "scripts/teleiosis_core/review.py",
+        "evidence/preparation/persona-team-evidence.json"
+      ],
+      "evidence": "evidence/validation/ac-022.json",
+      "oracle": "test_persona_gate",
+      "requirement_id": "AC-022",
+      "task_ids": [
+        "T-022",
+        "T-028"
+      ],
+      "test": "test_persona_gate"
+    },
+    {
+      "artifacts": [
+        "evidence/preparation/ten-lens-review.json",
+        "evidence/preparation/role-review-round1.json",
+        "evidence/preparation/role-review-round2.json"
+      ],
+      "evidence": "evidence/validation/ac-023.json",
+      "oracle": "test_review_contract",
+      "requirement_id": "AC-023",
+      "task_ids": [
+        "T-022",
+        "T-027"
+      ],
+      "test": "test_review_contract"
+    },
+    {
+      "artifacts": [
+        "metadata/project-input.json",
+        "TASK_DAG.json",
+        "TRACEABILITY_MATRIX.json"
+      ],
+      "evidence": "evidence/validation/ac-024.json",
+      "oracle": "test_taskpack_validation",
+      "requirement_id": "AC-024",
+      "task_ids": [
+        "T-023",
+        "T-028"
+      ],
+      "test": "test_taskpack_validation"
+    },
+    {
+      "artifacts": [
+        "metadata/last-mile-tasks.json",
+        "evidence/preparation/fresh-builder-simulation.json"
+      ],
+      "evidence": "evidence/validation/ac-025.json",
+      "oracle": "test_fresh_builder_v5",
+      "requirement_id": "AC-025",
+      "task_ids": [
+        "T-023",
+        "T-025"
+      ],
+      "test": "test_fresh_builder_v5"
+    },
+    {
+      "artifacts": [
+        "scripts/teleiosis_core/verifier_handoff.py",
+        "references/EXTERNAL_VERIFIER_HANDOFF.md"
+      ],
+      "evidence": "evidence/validation/ac-026.json",
+      "oracle": "test_verifier_handoff_v5",
+      "requirement_id": "AC-026",
+      "task_ids": [
+        "T-026",
+        "T-028"
+      ],
+      "test": "test_verifier_handoff_v5"
+    },
+    {
+      "artifacts": [
+        "fixtures/regression/teleiosis-v5-regression.jsonl",
+        "scripts/teleiosis_core/regression.py"
+      ],
+      "evidence": "evidence/validation/ac-027.json",
+      "oracle": "test_regression_corpus",
+      "requirement_id": "AC-027",
+      "task_ids": [
+        "T-024",
+        "T-028"
+      ],
+      "test": "test_regression_corpus"
+    },
+    {
+      "artifacts": [
+        "START_HERE.py",
+        "INSTALL.command",
+        "INSTALL.bat",
+        "scripts/teleiosis_core/doctor.py"
+      ],
+      "evidence": "evidence/validation/ac-028.json",
+      "oracle": "test_doctor_and_install_v5",
+      "requirement_id": "AC-028",
+      "task_ids": [
+        "T-025",
+        "T-028"
+      ],
+      "test": "test_doctor_and_install_v5"
+    },
+    {
+      "artifacts": [
+        "evidence/validation/raw/",
+        "evidence/validation/RAW_EVIDENCE_INDEX.json"
+      ],
+      "evidence": "evidence/validation/ac-029.json",
+      "oracle": "test_raw_validation_evidence",
+      "requirement_id": "AC-029",
+      "task_ids": [
+        "T-028",
+        "T-029"
+      ],
+      "test": "test_raw_validation_evidence"
+    },
+    {
+      "artifacts": [
+        "scripts/teleiosis_core/packaging.py",
+        "evidence/validation/final-validation-summary.json"
+      ],
+      "evidence": "evidence/validation/ac-030.json",
+      "oracle": "test_final_zip_v5",
+      "requirement_id": "AC-030",
+      "task_ids": [
+        "T-029",
+        "T-030"
+      ],
+      "test": "test_final_zip_v5"
+    }
+  ],
+  "schema_version": "teleiosis.traceability_matrix.v5"
+}

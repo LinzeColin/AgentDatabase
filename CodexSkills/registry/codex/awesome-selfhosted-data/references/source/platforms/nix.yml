@@ -1,2 +1,0 @@
-name: Nix
-description: "[Nix](https://en.wikipedia.org/wiki/Nix_(package_manager)) is a cross-platform package manager that uses a deployment model where software is installed into unique directories generated through cryptographic hashes. It is also the name of the tool's programming language."

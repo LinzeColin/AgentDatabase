@@ -60,30 +60,9 @@
 
     python3 emit_corpus_pointer.py --corpora <_corpora 根> --out <清单.json>
     python3 emit_corpus_pointer.py --verify <清单.json> --corpora <_corpora 根>
-    python3 emit_corpus_pointer.py --restore <工作区目录>        # 按指针取回
     python3 emit_corpus_pointer.py --self-test
 
-退出码：0=成功　1=校验有出入／取回失败　2=自测未过　3=能取的都取到了，**但仍有取不回的**
-
-## `--restore`：这件工具原本只会「产指针」和「验指针」，不会**用**指针
-
-2026-08-18 实测：十一个工作区在 release 门上同时报 `research.ledger-file-missing`，
-形状一模一样——语料被清掉了（本来也不进 git，`.gitignore:40 **/raw/**/*.txt`），
-账本还在、产物还在、判据还在，**只有正文没了**，于是引文核查与覆盖率全在对着虚空算。
-仓里当时有「检测」（`check_corpus_presence.py`）、有「产指针」（本件）、有「验指针」（本件
-`--verify`），**唯独没有「照着指针取回来」那一步**——那一步一直是手工的。
-
-★ 取回的两条 URL 来源，都是**仓里记过的事实**，不是猜出来的：
-  ① `raw/_fetch-manifest.json` 的 `记录[].source_url`（当初真正用过的那条链接）
-  ② 账本行里的任意 URL（`refetch_class` 已证实 73.5% 藏在 `locator` 而不是 `url`）
-优先 ①——它是原次实际取用的链接；②只在 ① 没有该文件时才用。
-**两条都取不到就如实记成「取不回」，不去按 identifier 拼下载路径**：
-拼出来的链接下到的可能是另一个版次，而校验和会因此对不上，
-届时分不清是「拼错了」还是「这份真的变了」。
-
-★★ **校验不通过的字节一律不落盘。** 留在盘上的每一份都是校验和逐份对上的原件；
-取回来对不上就删掉并计入「校验不符」——**绝不留一份「差不多的」冒充语料**
-（[[name-match-is-not-content-match-in-backup]]）。
+退出码：0=成功　1=校验有出入　2=自测未过
 """
 from __future__ import annotations
 
@@ -94,10 +73,6 @@ import json
 import pathlib
 import re
 import sys
-import time
-import urllib.error
-import urllib.request
-import xml.etree.ElementTree as ET
 
 URL = re.compile(r"https?://[^\s\"')]+")
 ITEM = re.compile(r"\bitem\s+[\w.\-]{6,}|\bark:/|\bdoi:|10\.\d{4,}/|hdl\.handle|\bMS\s?\d+|\bcatalog(?:ue)?\s+no")
@@ -236,179 +211,6 @@ def verify(manifest: dict, corpora: pathlib.Path) -> int:
     return 0
 
 
-
-def _urls_for(ws_dir: pathlib.Path, row: dict, fname: str) -> list:
-    """这一份能从哪些**记录过的**链接取回。顺序即优先级，不含任何拼出来的链接。"""
-    urls = []
-    man = ws_dir / "raw" / "_fetch-manifest.json"
-    if man.is_file():
-        try:
-            recs = json.loads(man.read_text(encoding="utf-8")).get("记录") or []
-        except (ValueError, OSError):
-            recs = []
-        for r in recs:
-            if str(r.get("file") or "") == fname and r.get("source_url"):
-                urls.append(str(r["source_url"]))
-    m = URL.search(json.dumps(row, ensure_ascii=False))
-    if m and m.group(0) not in urls:
-        urls.append(m.group(0))
-    return urls
-
-
-
-def _ascii_url(url: str) -> str:
-    """把 URL 里的非 ASCII 字符做百分号编码。
-
-    ★ 2026-08-19 实测：Jefferson #175 有一条源的 URL 里含 `ó`
-      （`…declaración…`），`urllib.request` 直接抛
-      `UnicodeEncodeError: 'ascii' codec can't encode character '\xf3'`，
-      于是那一份**永远取不回**，而 release 门一直报 `research.ledger-file-missing`。
-      —— 报错信息指向「文件不在」，真因却是**取的那一步根本没发出去**。
-    """
-    import urllib.parse
-    parts = urllib.parse.urlsplit(url)
-    return urllib.parse.urlunsplit((
-        parts.scheme,
-        parts.netloc.encode("idna").decode("ascii") if any(ord(c) > 127 for c in parts.netloc) else parts.netloc,
-        urllib.parse.quote(parts.path, safe="/%"),
-        urllib.parse.quote(parts.query, safe="=&%"),
-        urllib.parse.quote(parts.fragment, safe="%"),
-    ))
-
-
-def restore(ws_dir: pathlib.Path, *, timeout: int = 180) -> int:
-    """照账本把语料取回来，逐份核校验和。**核不过不落盘。**"""
-    import urllib.request
-
-    led = ws_dir / "evidence" / "source-ledger.jsonl"
-    if not led.is_file():
-        print(f"  ✗ 没有账本：{led} —— **本次未取回（不是没东西可取）**")
-        return 1
-
-    tally = collections.Counter()
-    problems = []
-    for line in led.read_text(encoding="utf-8").splitlines():
-        if not line.strip():
-            continue
-        row = json.loads(line)
-        lp = str(row.get("local_path") or "")
-        want = str(row.get("checksum") or "")
-        if not lp:
-            tally["台账无 local_path"] += 1
-            continue
-        dst = ws_dir / lp
-        if dst.is_file() and want and sha256_of(dst) == want:
-            tally["已在"] += 1
-            continue
-        if not want:
-            tally["台账无校验和·不取"] += 1
-            problems.append((lp, "台账没有校验和，取回来也证不了是原件"))
-            continue
-        urls = _urls_for(ws_dir, row, pathlib.PurePosixPath(lp).name)
-        if not urls:
-            tally["取不回·无记录链接"] += 1
-            continue
-        got_ok = False
-        last = ""
-        for u in urls:
-            try:
-                req = urllib.request.Request(_ascii_url(u), headers={"User-Agent": "persona-distiller/restore"})
-                with urllib.request.urlopen(req, timeout=timeout) as f:
-                    data = f.read()
-            except Exception as e:                      # noqa: BLE001 —— 什么错都要记下来继续下一条
-                last = f"{type(e).__name__}: {e}"[:80]
-                continue
-            if hashlib.sha256(data).hexdigest() == want:
-                dst.parent.mkdir(parents=True, exist_ok=True)
-                dst.write_bytes(data)                   # ★ 只有校验通过才落盘
-                got_ok = True
-                break
-            last = f"校验和对不上（{len(data)} B）"
-        if got_ok:
-            tally["取回并校验通过"] += 1
-        else:
-            tally["取回失败"] += 1
-            problems.append((lp, last or "所有记录链接都取不到"))
-
-    total = sum(tally.values())
-    print(f"  {ws_dir.name} —— 账本 {total} 行：" +
-          "　".join(f"{k} {v}" for k, v in sorted(tally.items())))
-    for lp, why in problems[:15]:
-        print(f"   ✗ {lp[:52]:<52} {why}")
-    if len(problems) > 15:
-        print(f"   …另有 {len(problems) - 15} 条")
-
-    if tally["取回失败"] or tally["台账无校验和·不取"]:
-        return 1
-    if tally["取不回·无记录链接"] or tally["台账无 local_path"]:
-        print(f"  ⚠ **仍有 {tally['取不回·无记录链接'] + tally['台账无 local_path']} 份取不回**"
-              f"——这不是「都齐了」，是射程到头了")
-        return 3
-    return 0
-
-
-
-GALLICA_UA = ("persona-distiller/1.0 (public-domain corpus retrieval; "
-               "https://github.com/LinzeColin/AgentDatabase)")
-
-def decode_alto(raw: bytes) -> str:
-    """★ 头里写 ISO-8859-1，字节却是 UTF-8 —— 先按 UTF-8 解，解不开才退 latin-1。"""
-    try:
-        return raw.decode("utf-8")
-    except UnicodeDecodeError:
-        return raw.decode("latin-1")
-
-def page_text(raw: bytes) -> str | None:
-    """从一页 ALTO 里抽正文；不是 ALTO 就返回 None（**不返回空串** —— 空串会被读成「这页没字」）。"""
-    text = decode_alto(raw)
-    # 去掉 XML 声明里的假编码，否则 ElementTree 会拿它再解一次
-    text = re.sub(r'^<\?xml[^>]*\?>', '<?xml version="1.0"?>', text, count=1)
-    try:
-        root = ET.fromstring(text)
-    except ET.ParseError:
-        return None
-    # ★ 光「解得开」不够：`<html>…</html>` 也是合法 XML，抽不出 String 就会返回 ''，
-    #   于是「这不是 ALTO」被读成「这页没字」。**根标签必须是 alto。**
-    #   （这一条是本件自测的反对照当场逼出来的，不是想出来的。）
-    if not root.tag.endswith("alto"):
-        return None
-    words = [el.get("CONTENT", "") for el in root.iter() if el.tag.endswith("String")]
-    return " ".join(w for w in words if w)
-
-def _http_get(url: str, timeout: int = 90) -> bytes:
-    req = urllib.request.Request(url, headers={"User-Agent": GALLICA_UA})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return resp.read()
-
-def fetch_book(ark: str, pages: range, delay: float = 4.0,
-               log=print) -> tuple[list[str], int, int]:
-    """按页取回。429 时退避 30／60／120 秒；仍失败就记这一页取不到，继续下一页。"""
-    out: list[str] = []
-    ok = bad = 0
-    for page in pages:
-        url = f"https://gallica.bnf.fr/RequestDigitalElement?O={ark}&E=ALTO&Deb={page}"
-        text = None
-        for attempt, backoff in enumerate((0, 30, 60, 120)):
-            if backoff:
-                time.sleep(backoff)
-            try:
-                text = page_text(_http_get(url))
-                break
-            except urllib.error.HTTPError as exc:
-                if exc.code != 429 or attempt == 3:
-                    log(f"   第 {page} 页 ✗ HTTP {exc.code}")
-                    break
-            except Exception as exc:                      # noqa: BLE001
-                log(f"   第 {page} 页 ✗ {type(exc).__name__}")
-                break
-        if text is None:
-            bad += 1
-        else:
-            ok += 1
-            out.append(text)
-        time.sleep(delay)
-    return out, ok, bad
-
 def self_test() -> int:
     n = [0]
     fail = 0
@@ -478,106 +280,6 @@ def self_test() -> int:
         note("文件删掉 → 报「文件不在」（退出 1）", ok7)
         fail += not ok7
 
-
-    print("══ --restore 三档对照（走真取回路径，用 file:// 不出网）══")
-    import tempfile
-
-    def _mkws(root, body, ledger_checksum, with_url):
-        src = root / "origin.txt"
-        src.write_bytes(body)
-        ws = root / "ws"
-        (ws / "evidence").mkdir(parents=True)
-        (ws / "raw").mkdir(parents=True)
-        (ws / "evidence" / "source-ledger.jsonl").write_text(json.dumps(
-            {"source_id": "src-x", "local_path": "raw/a.txt", "checksum": ledger_checksum},
-            ensure_ascii=False) + "\n", encoding="utf-8")
-        if with_url:
-            (ws / "raw" / "_fetch-manifest.json").write_text(json.dumps(
-                {"记录": [{"file": "a.txt", "source_url": src.as_uri(), "sha256": ledger_checksum}]},
-                ensure_ascii=False), encoding="utf-8")
-        return ws
-
-    body = b"hello corpus, this is the one true original\n"
-    good = hashlib.sha256(body).hexdigest()
-
-    with tempfile.TemporaryDirectory() as td:
-        ws = _mkws(pathlib.Path(td), body, good, True)
-        rc = restore(ws)
-        got = ws / "raw" / "a.txt"
-        okA = rc == 0 and got.is_file() and got.read_bytes() == body
-        note("正对照：校验和对上 ⇒ rc=0 且落盘字节与原件相同", okA)
-        fail += not okA
-
-    with tempfile.TemporaryDirectory() as td:
-        ws = _mkws(pathlib.Path(td), body, "0" * 64, True)
-        rc = restore(ws)
-        okB = rc == 1 and not (ws / "raw" / "a.txt").exists()
-        note("**反对照**：校验和对不上 ⇒ rc=1 且没有落盘（「下到什么存什么」的退化实现在此必红）", okB)
-        fail += not okB
-
-    with tempfile.TemporaryDirectory() as td:
-        ws = _mkws(pathlib.Path(td), body, good, False)
-        rc = restore(ws)
-        okC = rc == 3 and not (ws / "raw" / "a.txt").exists()
-        note("射程档：无记录链接 ⇒ rc=3（**「取不回」不许混成「都齐了」**）", okC)
-        fail += not okC
-
-    with tempfile.TemporaryDirectory() as td:
-        ws = _mkws(pathlib.Path(td), body, good, False)
-        (ws / "raw" / "_fetch-manifest.json").write_text(json.dumps(
-            {"记录": [{"file": "a.txt", "identifier": "someIAitem", "sha256": good}]},
-            ensure_ascii=False), encoding="utf-8")
-        okD = restore(ws) == 3
-        note("只有 identifier 没有链接 ⇒ 仍是「取不回」，**不去拼下载路径**", okD)
-        fail += not okD
-
-
-    print("══ 入口对照（**自测直接调函数会绕开 argparse**）══")
-    with tempfile.TemporaryDirectory() as td:
-        ws = _mkws(pathlib.Path(td), body, good, True)
-        import contextlib, io
-        buf = io.StringIO()
-        argv_bak = sys.argv[:]
-        sys.argv = ["emit_corpus_pointer.py", "--restore", str(ws)]
-        try:
-            with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
-                rc_main = main()
-        except SystemExit as e:               # argparse 认不出旗标就在这里退出
-            rc_main = f"argparse 拒收：{e}"
-        finally:
-            sys.argv = argv_bak
-        okE = rc_main == 0 and (ws / "raw" / "a.txt").is_file()
-        note(f"`--restore` 从 **main() 入口**走得通（实得 {rc_main!r}）", okE)
-        fail += not okE
-
-
-    print("══ Gallica ALTO 通道（.texteBrut 取不到时用它）══")
-    body = ('<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>'
-            '<alto xmlns="http://bibnum.bnf.fr/ns/alto_prod"><Layout>'
-            '<String CONTENT="RÉSISTANCE"/><String CONTENT="de"/><String CONTENT="l\'air"/>'
-            '</Layout></alto>').encode("utf-8")
-    got = page_text(body)
-    okG1 = got == "RÉSISTANCE de l'air"
-    note(f"正对照：头谎报 ISO-8859-1 而字节是 UTF-8 ⇒ 解出 'RÉSISTANCE'（实得 {got!r}）", okG1)
-    fail += not okG1
-
-    moji = body.decode("latin-1")
-    okG2 = "RÃ" in moji and "RÉSISTANCE" not in moji
-    note("**反对照**：同一批字节按声明的 latin-1 解**必然**是 mojibake（证明上一条不是碰巧）", okG2)
-    fail += not okG2
-
-    # ★★ 这一档第一次是红的：`<html>…</html>` 也是合法 XML，ET 解得开、抽出 0 个 String
-    #    ⇒ 返回 ''，于是「这不是 ALTO」被读成「这页没字」。加根标签断言才绿。
-    okG3 = page_text(b"<html><body>Acces interdit</body></html>") is None
-    note("**反对照**：网页外壳（合法 XML 但不是 ALTO）⇒ None 而不是 ''", okG3)
-    fail += not okG3
-
-    empty = ('<?xml version="1.0"?><alto xmlns="http://bibnum.bnf.fr/ns/alto_prod">'
-             '<Layout/></alto>').encode("utf-8")
-    okG4 = page_text(empty) == ""
-    note("空白页（合法 ALTO、零个 String）⇒ '' —— 与「取不到」区分得开", okG4)
-    fail += not okG4
-
     print(f"\n  ✓ 自测通过（{n[0]}/{n[0]}）" if not fail
           else f"\n  ✗ {fail}/{n[0]} 项未过——本件的输出不作数")
     return fail
@@ -588,33 +290,11 @@ def main() -> int:
     ap.add_argument("--corpora", type=pathlib.Path, help="_corpora 根目录")
     ap.add_argument("--out", type=pathlib.Path, help="清单落盘路径")
     ap.add_argument("--verify", type=pathlib.Path, help="拿这份清单去核 --corpora 那棵树")
-    ap.add_argument("--gallica-alto", metavar="ARK",
-                    help="从 Gallica 按 ALTO 逐页取一部书（.texteBrut 取不到时用这条）")
-    ap.add_argument("--pages", default="1-40", help="配合 --gallica-alto，如 1-149")
-    ap.add_argument("--out-text", type=pathlib.Path, help="--gallica-alto 的落盘路径")
-    ap.add_argument("--delay", type=float, default=4.0, help="每页间隔秒数（Gallica 连发 3 个即 429）")
-    ap.add_argument("--restore", type=pathlib.Path,
-                    help="按账本+仓里记过的链接把语料取回该工作区（核不过不落盘）")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
 
     if a.self_test:
         return 2 if self_test() else 0
-    if a.gallica_alto:
-        if not a.out_text:
-            ap.error("--gallica-alto 须配 --out-text")
-        lo, _, hi = a.pages.partition("-")
-        texts, ok, bad = fetch_book(a.gallica_alto, range(int(lo), int(hi or lo) + 1), a.delay)
-        body = "\n".join(texts)
-        print(f"  {a.gallica_alto}：取到 {ok} 页，取不到 {bad} 页，共 {len(body.split())} 词")
-        if not ok:
-            print("  ✗ **一页都没取到 —— 这是「未取」，不是「没有正文」**")
-            return 3
-        a.out_text.write_text(body + "\n", encoding="utf-8")
-        print(f"  ✓ 已写 {a.out_text}（{len(body.encode('utf-8'))} 字节）")
-        return 1 if bad else 0
-    if a.restore:
-        return restore(a.restore)
     if not a.corpora:
         ap.error("须给 --corpora")
 

@@ -1,0 +1,16 @@
+{
+  "project_name": "Teleiosis",
+  "target_repository": "LinzeColin/AgentDatabase",
+  "target_area": "CodexSkills/registry/codex/teleiosis",
+  "target_domain": "Agent Skill white-box iteration",
+  "runtime_node": "local Python 3.9+",
+  "current_phase": "FROZEN_CANDIDATE",
+  "product_version": "v0.0.0.5",
+  "taskpack_version": "v0.0.0.5",
+  "owner_approved_scope": "single Skill with T/S/P/A",
+  "resource_ceiling": "standard library only",
+  "cost_ceiling": "zero API cost for local gates",
+  "required_integrations": ["Agent Skills directory"],
+  "forbidden_dependencies": ["internal formal PASS"],
+  "production_side_effect_authorization": "NOT_AUTHORIZED_IN_PACKAGE"
+}

@@ -1,0 +1,34 @@
+{
+  "baseline_version": "v0.0.0.3",
+  "byte_exact_full_v3_copy": false,
+  "exact_snapshots": {
+    "MANIFEST.sha256": "a503f9288d51fc695f28fe185a728b537ba39519c1f5fb55a099c62979d71b52",
+    "README.md": "45446884ad930437c1bd9eaa22410fca71c2e233549a47c8004ed716fe3b1e36",
+    "SKILL.md": "6585cbcfdf9c516d72d558d18151d66702fe4678fec89fcdda0e44d6ad9158fd"
+  },
+  "functional_regression_required": true,
+  "preserved_semantics": [
+    "FULL_NO_ROUTING",
+    "single evolving Candidate lineage",
+    "T/S/P complete capability execution",
+    "three rounds per group and three groups per run",
+    "dynamic fingerprint not fixed SHA gate",
+    "transactional evidence/revision/rollback",
+    "moving-main semantic adapt",
+    "external verifier sole formal PASS"
+  ],
+  "schema_version": "teleiosis.semantic_inheritance.v5",
+  "source_boundary": "本包没有冒充取得 v0.0.0.3 的全部 444 个文件字节；以三份原始快照、v4 可执行实现、v5 回归测试与功能覆盖矩阵证明非降级。",
+  "status": "FUNCTIONAL_SUPERSET_WITH_SOURCE_BOUNDARY",
+  "target_version": "v0.0.0.5",
+  "v3_manifest_entries": 444,
+  "v5_extensions": [
+    "A/Arena Lab",
+    "Stage 0 semantic reconcile",
+    "three-pass Skill audit",
+    "taskpack compiler",
+    "large regression corpus",
+    "verifier handoff",
+    "one-command doctor"
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "技能市场实证实验室"
+  short_description: "用因果实验、压力与真实市场反馈持续优化 Skill"
+  default_prompt: "使用 skill-market-lab 为目标 Skill 建立永久 No Skill 对照、盲化因果实验、六类压力、大数据与真实市场反馈闭环，并依据冻结证据决定晋级、保留、回退或回炉。"
