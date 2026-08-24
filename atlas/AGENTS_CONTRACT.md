@@ -11,12 +11,15 @@
    本机已挂 `UserPromptSubmit` 钩子做字面检索，命中会自动摆到你眼前 ——
    **没有注入不代表没有前例**，进某个项目前仍要读该项目那一节。
 2. **收尾必须回写。** 会话结束／上下文被压缩／一件交付做完／PR 合并／
-   你正准备说「完成了」—— 任一成立就算收尾。回写进**那个仓**的 `AGENTS.md`
-   （一条一段：结论 / 为什么 / 代价），然后跑 `bash ~/.memory-atlas/on-archive.sh`。
+   你正准备说「完成了」—— 任一成立就算收尾。回写进**那个仓**的
+   **`dev-notes/经验-YYYYMM.md`**（没有就建；一条一段：结论 / 为什么 / 代价），
+   然后跑 `bash ~/.memory-atlas/on-archive.sh`。
+   **`AGENTS.md` 只放「违反有代价」的规则，不放经验** —— 经验会过期，规则不会；
+   混在一起会把开头的开工指令埋掉（实测：某仓 182 行 → 1037 行，新线程读不到开工三件事）。
    Claude Code 与 Codex 已挂钩子会自动触发第三步；**Kimi Code GUI 与 DSH 必须手动跑**。
    前两步在哪个 agent 里都得自己做 —— 钩子只能重算机器派生的那一半。
 3. **别手写 `AGENT_BRIEF.md`，别跨仓写，别把密钥写进任何公开仓。**
-   brief 每天重新生成，手写会被整体覆盖；一个仓的经验只写进那个仓的 `AGENTS.md`。
+   brief 每天重新生成，手写会被整体覆盖；一个仓的经验只写进那个仓的 `dev-notes/`。
 4. **「做完了」不等于「被采用」。** 归档时可产一条
    `memory_atlas.compounding_event.v1` 事件（schema 见 `atlas/build/compound.py`）：
    没有采用证据不许写 ADOPTED，没有经济证据不许写 ECONOMIC_IMPACT，
@@ -78,8 +81,8 @@ gh api "repos/LinzeColin/Private-Database/contents/Private-AgentDatabase/dev-not
 
 1. **复审这一轮**：这次踩过什么坑、什么判断当时不明显、下一个 agent 怎样能少走一遍？
    只留**下一次真的用得上**的，不写流水账。
-2. **写进对应仓的 `AGENTS.md`**（哪个仓的活就写哪个仓，不跨仓）。
-   一条经验一段，格式：
+2. **写进对应仓的 `dev-notes/经验-YYYYMM.md`**（哪个仓的活就写哪个仓，不跨仓；
+   目录不存在就建）。一条经验一段，格式：
    ```
    - **结论**：<一句话，直接可执行>
      **为什么**：<不写这句，下一个 agent 会以为可以绕过去>
@@ -90,6 +93,8 @@ gh api "repos/LinzeColin/Private-Database/contents/Private-AgentDatabase/dev-not
    bash ~/.memory-atlas/on-archive.sh
    ```
    它会重新蒸馏本机全部会话、更新 `AGENT_BRIEF.md`，并推到上面那个私有仓。
+   蒸馏器 `atlas/build/brief_index.py` **同时收 `**/dev-notes/*.md` 与 `**/AGENTS.md`**
+   （后者为兼容存量，新经验一律写前者）。
    30 分钟内重复调用会自动跳过（去抖），所以多调几次不会有副作用，漏调才有。
 
 **Claude Code 和 Codex 已经挂了钩子**（`PreCompact` / `SessionEnd` / `SessionStart`），
@@ -147,7 +152,24 @@ Memory Atlas 每天会把它拉进来，投影成转化漏斗，显示在站点�
 ### 三条边界
 
 - **别手写 `AGENT_BRIEF.md`。** 它每天重新生成，手写内容会被整体覆盖。
-  新结论写进仓里的 `AGENTS.md`，下一轮蒸馏会自己带进去。
+  新结论写进仓里的 `dev-notes/`，下一轮蒸馏会自己带进去。
 - **别把密钥、token、Owner 原话写进任何公开仓。** 沉淀目标仓是私有的；
   推送脚本会先核对目标仓可见性，不是 PRIVATE 就直接拒绝推送。
-- **别跨仓写。** 一个仓的经验只写进那个仓的 `AGENTS.md`。
+- **别跨仓写。** 一个仓的经验只写进那个仓的 `dev-notes/`。
+
+### 为什么把经验从 `AGENTS.md` 挪到 `dev-notes/`（2026-08-25 修订 · Owner 定）
+
+> 哨兵仍是 `v2` —— 版本号不动，整段原地替换，避免各机器上留下孤儿旧块。
+
+此前写的是「回写进那个仓的 `AGENTS.md`」，各 agent **一直在照做，没有违规**。
+后果是 `AGENTS.md` 被经验条撑爆：DouyinOps 实测 182 行 → **1037 行**，
+开头的「开工三件事」被埋在 800 行经验后面，新线程根本读不到 —— 路由失效。
+而清理它又会误删别人的经验（08-24 有个线程 117 行被另一个线程整体重写抹掉）。
+
+这正是本契约自己引用的那条 Anthropic 原话在仓一级的复现：
+「Bloated CLAUDE.md files cause Claude to ignore your actual instructions!」
+上一版把常驻块从 116 行缩到 25 行，解决了**指令文件**的膨胀，却把同样的膨胀
+转嫁到了**各仓的 `AGENTS.md`**。本次修的是这一半。
+
+**分工**：`AGENTS.md` = 规则（违反有代价、不会过期）；`dev-notes/` = 经验（会过期、可归档）。
+判据：**这条东西过期了会不会害人？会 = 规则，不会 = 经验。**
