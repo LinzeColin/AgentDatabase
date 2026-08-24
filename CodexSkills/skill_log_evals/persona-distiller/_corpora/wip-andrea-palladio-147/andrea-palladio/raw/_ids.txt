@@ -1,0 +1,57 @@
+# palladio 精选抓取清单（去 image-only / 低价值重复；含一手 + 传记二手）
+# 1570 意大利原版
+qvattrolibridel00pall
+# 1581 意大利
+iquattrolibridel01pall
+gri_33125006448050
+# 1711 Louisa 版（含第五书）
+gri_33125010858245
+# 1740 Muttoni 增补版
+gri_33125008638575
+# 1771 意大利
+iqvattrolibridel00pall_0
+# 英译四书（Leoni 1715/1721、1736、1738、1742 等）
+architecturePal00Pall
+architectureofap0001pall
+architectureofapvol2pall
+andreapalladiosa00pall
+gri_33125011569684
+gri_33125008860922
+gri_33125008860989
+gri_33125011115488
+bim_eighteenth-century_quattro-libri-dell-arc_palladio-andrea_1735
+bim_eighteenth-century_the-architecture-of-a-p_palladio-andrea_1721_2
+mma_the_architecture_of_a_palladio_in_four_books_containing_a_short_treatise_on_348912
+# 第一书（Le Muet/Richards 英译）
+firstbookofarchi0000pall
+firstbookofarchi00pall
+bookofarchitectu00pall
+andreapalladiosf00pall
+bim_early-english-books-1641-1700_the-first-book-of-archit_palladio-andrea_1668
+bim_eighteenth-century_the-first-book-of-archit_palladio-andrea_1729
+# 五柱式（意/法）
+cinqueordinidiar00pall
+icinqueordinidel00pall
+traittedescinqor00pall
+bub_gb_ujAa4--Tc7gC
+McGillLibrary-rbsc_sono-stati-copiati-li-detti-numero_elfNA2810P351740-22586
+# 罗马古迹
+lantichitadiroma00pall
+bub_gb_ktETgRIYzBUC
+# 浴场图集（Bertotti Scamozzi 编）
+bertotti-le-terme-dei-romani-1785
+# Le Fabbriche e i Disegni（Bertotti Scamozzi 编）
+lefabbricheeidis03bert
+lefabbricheeidis04bert
+le-fabbriche-e-i-disegni-di-andrea-palladio-t.-4-1843
+CHEPFL_LIPR_AXB223_4
+india.history.resource.93250
+india.history.resource.93773
+india.history.resource.93774
+# Commentari di Cesare（1575 首版，此为 1598/1618 版）
+icommentaridicgi00caes_0
+bub_gb_ahhUAAAAcAAJ
+# 传记/评述（二手，external/timeline 道）
+andreapalladio00gurl
+andreapalladioh00flet
+dellavitaedelle00scol

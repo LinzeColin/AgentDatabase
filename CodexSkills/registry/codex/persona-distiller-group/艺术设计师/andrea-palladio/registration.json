@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:andreapalladio",
+  "canonical_name": "Andrea Palladio",
+  "identity_family_id": "art-designer",
+  "identity_mode": "single",
+  "registration_category": "艺术设计师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "andrea-palladio",
+  "subject_uid": "person-c65f4c0a38bf2e99",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/andrea-palladio-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-23T23:39:49Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "ef2f9339a923467df371ad3d012742e0b91657d188da5aced871c3d353f353ee",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/andrea-palladio-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "44da1d83d6f6560f0931d5d8d02efd0b9abac7bff70ac918366e547ecb6de9b7",
+      "runtime_size_bytes": 67729,
+      "size_bytes": 76165
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+McGillLibrary-rbsc_sono-stati-copiati-li-detti-numero_elfNA2810P351740-22586
+# 原因：McGill 馆藏五柱式手抄本扫描，OCR 为乱码（无 'Palladio' 文本命中），无法支撑逐字引文，剔除。

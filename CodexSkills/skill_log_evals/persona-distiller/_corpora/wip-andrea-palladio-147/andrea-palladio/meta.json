@@ -1,0 +1,126 @@
+{
+  "attribution_basis": {
+    "authority": "Andrea Palladio（1508-1580）著作归属依据：① 其亲撰《I Quattro Libri dell'Architettura》（威尼斯 1570，献辞署名 Andrea Palladio）与《L'Antichità di Roma》（1554/1555，扉页署 DI M. ANDREA PALLADIO）；② 16-18 世纪多语种译本/重印本（1663-1801 英/法/意）均以 Palladio 名义刊行，扉页照录见 covered_sources；③ 身后由 Ottavio Bertotti Scamozzi 编辑出版的《Le Fabbriche e i Disegni di Andrea Palladio》与《Le Terme dei Romani》（1780s-1785，题名冠 Palladio 之名）；④ 《I Commentari di C. Giulio Cesare》（1575 首版，1598/1618 版扉页署 Fatte da Andrea Palladio）；⑤ 近代书目权威（Banister Fletcher 1902《Andrea Palladio, his life and works》、Gurlitt 1922《Andrea Palladio》专论）。",
+    "citation": "archive.org 目录 creator 字段（Palladio, Andrea, 1508-1580 / Andrea Palladio / Andreas Palladius Vicentinus）+ 各载体扉页署名照录（见 covered_sources）；出版记录见各源 locator 与 evidence/source-ledger.jsonl。",
+    "disputed_policy": "语料内无学界公认伪托篇目；凡 archive.org creator 含 Palladio 但实际作者为他人者（现代作者 Caroline Constant《The Palladio Guide》、Bertotti Scamozzi 独撰的《Le terme dei Romani》1785 单行评述、19 世纪画作/画传类）已在抓源阶段按内容/生卒/creator 排除，逐条列于 disputed_works。",
+    "disputed_works": [],
+    "covered_sources": [
+      "qvattrolibridel00pall.txt ｜ 署名照录：Andrea Palladio.  IL PRIMO LIBRO DELL'ARCHITETTVRA DI ANDREA PALLADIO（1570 威尼斯原版献辞签名与书名页）",
+      "iquattrolibridel01pall.txt ｜ 署名照录：IL PRIMO LIBRO DELL'ARCHITETTVRA DI ANDREA PALLADIO（1581 版书名页）",
+      "gri_33125006448050.txt ｜ 署名照录：Andrea Palladio.  IL PRIMO LIBRO DELL'ARCHITETTVRA DI ANDREA PALLADIO（1581 版）",
+      "iqvattrolibridel00pall_0.txt ｜ 署名照录：Andrea Palladio.  IL PRIMO LIBRO DELL'ARCHITETTVRA DI ANDREA PALLADIO（1771 版）",
+      "gri_33125010858245.txt ｜ 署名照录：DELL'ARCHITETT VRA DI ANDREA PALLADIO.  libro primo. proemio ai lettori（1711 Louisa 版，含第五书）",
+      "gri_33125008638575.txt ｜ 署名照录：ARCHITETTURA DI ANDREA PALLADIO VICENTINO DI NUOVO RISTAMPATA（1740 Muttoni 增补版书名页）",
+      "architecturePal00Pall.txt ｜ 署名照录：THE ARCHITECTURE OF A. PALLADIO; IN FOUR BOOKS CONTAINING A short Treatise of the Five Orders（1715 英译书名页）",
+      "architectureofap0001pall.txt ｜ 署名照录：The Architecture of Andrea Palladio, in Four Books, Printed in English, Italian and French（1721 Leoni 英译本）",
+      "architectureofapvol2pall.txt ｜ 署名照录：THE ARCHITECTURE OF A. PALLADIO; BOOK the THIRD.（1721 Leoni 英译本第三书）",
+      "gri_33125008860922.txt ｜ 署名照录：THE ARCHITECTURE OF A. PALLADIO; IN FOUR BOOKS. CONTAINING A short Treatise of the Five Orders（1742 英译书名页）",
+      "gri_33125008860989.txt ｜ 署名照录：THE ARCHITECTURE OF A. PALLADIO; BOOK the FOURTH.（1742 英译本第四书）",
+      "gri_33125011115488.txt ｜ 署名照录：THE ARCHITECTURE OF A. PALLADIO; IN FOUR BOOKS CONTAINING A short Treatise of the Five Orders（1721 英译书名页）",
+      "andreapalladiosa00pall.txt ｜ 署名照录：ANDREA PALLADIO'S FIRST BOOK OF ARCHITECTURE（1736 英译书名页）",
+      "bim_eighteenth-century_quattro-libri-dell-arc_palladio-andrea_1735.txt ｜ 署名照录：PALLADIO's ARCHITECTURE（1735 英译版内文眉题）",
+      "bim_eighteenth-century_the-architecture-of-a-p_palladio-andrea_1721_2.txt ｜ 署名照录：THE ARCHITECTURE OF A.PALLADIO; BOOK the THIRD.（1721 英译本）",
+      "firstbookofarchi0000pall.txt ｜ 署名照录：THE FIRST BOOK OF ARCHITECTURE, BY ANDREA PALLADIO（1663 英译书名页；译者 Le Muet 所加，Palladio only discourfing of them）",
+      "firstbookofarchi00pall.txt ｜ 署名照录：He was Andrea Palladio, a Famous Architect of Italy（1733 英译编者序）",
+      "bookofarchitectu00pall.txt ｜ 署名照录：Defigns of Doors and Windows according to the five Orders of Andrea Palladio（1733 英译本内文）",
+      "andreapalladiosf00pall.txt ｜ 署名照录：ANDREA PALEADIOVS ARCHITECTVRE（1728 英译书名页）",
+      "bim_early-english-books-1641-1700_the-first-book-of-archit_palladio-andrea_1668.txt ｜ 署名照录：THE FIRST BOOK OF ARCHITECTURE, BY ANDREA PALLADIO（1668 英译书名页）",
+      "bim_eighteenth-century_the-first-book-of-archit_palladio-andrea_1729.txt ｜ 署名照录：THE FIRST BOOK OF ARCHITECTURE: BY ANDREA PALLADIO（1729 英译书名页）",
+      "icinqueordinidel00pall.txt ｜ 署名照录：CINQVE ORDINI DELL'ARCHITETTVRA DI ANDREA PALLADIO（1801 意语书名页）",
+      "traittedescinqor00pall.txt ｜ 署名照录：TRAITTÉ DES CINQ ORDRES D'ARCHITECTURE, dont se sont servy les anciens du Palladio（1682 法语书名页）",
+      "bub_gb_ujAa4--Tc7gC.txt ｜ 署名照录：Selon les cinq ordres a André Palladio（1679 法语五柱式）",
+      "lantichitadiroma00pall.txt ｜ 署名照录：L'ANTICHITÀ DI ROMA DI M. ANDREA PALLADIO. RACCOLTA BREVEMENTE dagli Auttori Antichi, & Moderni（1555 书名页）",
+      "bub_gb_ktETgRIYzBUC.txt ｜ 署名照录：L'ANTICHITÀ DI ROMA DI M. ANDREA PALLADIO. RACOLTA BREVEMENTE dagli Auttori Antichi, ò Moderni（1554 书名页）",
+      "bertotti-le-terme-dei-romani-1785.txt ｜ 署名照录：LE TERME DEI ROMANI DISEGNATE DA ANDREA PALLADIO E RIPUBBLICATE CON LA GIUNTA DI ALCUNE OSSERVAZIONI DA OTTAVIO BERTOTTI SCAMOZZI（1785 书名页）",
+      "lefabbricheeidis04bert.txt ｜ 署名照录：LE FABBRICHE E I DISEGNI DI ANDREA PALLADIO E LE TERME（1843 重印书名页）",
+      "le-fabbriche-e-i-disegni-di-andrea-palladio-t.-4-1843.txt ｜ 署名照录：LE FABBRICHE E I DISEGNI DI ANDREA PALLADIO E LE TERME NUOVA EDIZIONE ITALIANA FOGGIATA SULLA VICENTINA DI BERTOTTI SCAMOZZI（1846 书名页，TORINO 1846 TIPOGRAFIA FONTANA）",
+      "CHEPFL_LIPR_AXB223_4.txt ｜ 署名照录：LE FABBRICHE E I DISEGNI DI ANDREA PALLADIO RACCOLTI ED ILLUSTRATI DA OTTAVIO BERTOTTI SCAMOZZI（1796 版书名页）",
+      "india.history.resource.93773.txt ｜ 署名照录：LE FABBRICHE E I DISEGNI DI ANDREA PALLADIO（1786 卷二/卷四 Bertotti Scamozzi 图集）",
+      "icommentaridicgi00caes_0.txt ｜ 署名照录：I COMMENTARI DI C. GIVLIO CESARE con le figure in rame de gli alloggiamenti... Fatte da ANDREA PALLADIO per facilitare a chi legge（1598 版书名页）",
+      "bub_gb_ahhUAAAAcAAJ.txt ｜ 署名照录：I COMMENTARI DI C. GIULIO CESARE... Fatte da ANDREA PALLADIO per facilitare a chi legge（1618 版书名页）",
+      "andreapalladio00gurl.txt ｜ 署名照录：ANDREA PALLADIO（1922 Gurlitt/Vinaccia 专论书名页，二手）",
+      "andreapalladioh00flet.txt ｜ 署名照录：ANDREA PALLADIO HIS LIFE AND WORKS, BANISTER F. FLETCHER（1902 传记书名页，二手）",
+      "dellavitaedelle00scol.txt ｜ 署名照录：DELLA VITA E DELLE OPERE DELL'ARCHITETTO VINCENZO SCAMOZZI... GIUNTEVI LE NOTIZIE DI ANDREA PALLADIO（1837 Scolari 书名页，二手）"
+    ],
+    "attribution_policy": "印刷时代署名证据形态为书名页/献辞/内文题名；OCR 讹形（ſ→f、À→A、'→’、PALEADIOVS→PALLADIO 等）使部分书名页姓名不可机读，归属以出版物记录（archive.org 元数据 creator 字段 + 上述扉页照录）为准。译文由他人翻译但内容属 Palladio 著作；身后图集由 Bertotti Scamozzi 编辑，图样为 Palladio 本人设计。",
+    "pseudepigrapha_policy": "语料内无伪托篇目；凡 archive.org creator 字段含 Palladio 但题名/内容指向他人（现代《The Palladio Guide》、他人画作画传）者已在抓源 EXCLUDE 排除，见 wip-andrea-palladio-147/00-抓源前必读.md 与 raw/_EXCLUDED.txt。",
+    "counting_convention": "四书意大利语各版（1570 qvattrolibridel00pall、1581 iquattrolibridel01pall/gri_33125006448050、1711 gri_33125010858245、1740 gri_33125008638575、1771 iqvattrolibridel00pall_0）与四书英语各版（1715 architecturePal00Pall、1721 architectureofap0001pall/architectureofapvol2pall/gri_33125011115488、1735 bim_quattro-libri-dell-arc、1736 andreapalladiosa00pall、1742 gri_33125008860922/gri_33125008860989）分别为同一著作的不同版次/语种，台账以 derived_from 归并、只计一部独立作品。第一书英译（1663 firstbookofarchi0000pall、1668 bim_early-english、1728 andreapalladiosf00pall、1729 bim_first-book、1733 firstbookofarchi00pall/bookofarchitectu00pall）同书多版，derived_from 归并。五柱式意（1784 cinqueordinidiar00pall、1801 icinqueordinidel00pall）与法（1679 bub_gb_ujAa4--Tc7gC、1682 traittedescinqor00pall）各为同书多版，derived_from 归并。罗马古迹（1554 bub_gb_ktETgRIYzBUC、1555 lantichitadiroma00pall）同书两版，derived_from 归并。Commentari di Cesare（1598 icommentaridicgi00caes_0、1618 bub_gb_ahhUAAAAcAAJ）同书两版，derived_from 归并。Le Fabbriche 各卷为同一多卷总集的不同卷（内容互补非重复），卷四的 1796/1843/1846 三印本经 derived_from 归并。"
+  },
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "person-andrea-palladio-1508",
+  "consent_authority": null,
+  "created_at": "2026-08-23T23:39:49Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "art-designer",
+    "display": "艺术设计师",
+    "mode": "single",
+    "primary": "art-designer",
+    "weights": {
+      "art-designer": 1.0
+    }
+  },
+  "language": "eng",
+  "model_version": "0.1.0-draft",
+  "name": "Andrea Palladio",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "古典建筑理论与实践（五柱式、比例、对称、柱廊系统）",
+        "住宅/别墅/公共建筑设计（平面布局、立面比例、细部构造）",
+        "罗马古迹测绘与古建筑复原（Antichità di Roma、浴场测绘图）",
+        "建筑教育方法论（从实例与古物提炼设计法则，教学式著作）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Palladio%2C+Andrea%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=200&output=json"
+        },
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=title%3A%28%22quattro+libri%22+OR+%22four+books+of+architecture%22%29&fl%5B%5D=identifier,title,creator,year&rows=100&output=json"
+        }
+      ],
+      "canonical_name": "Andrea Palladio",
+      "distinguishing_basis": "探源：creator 检索与题名检索命中全部指向同一人（Palladio, Andrea, 1508-1580）。同名干扰项：①拉丁化署名 `Andreas Palladius Vicentinus` 与 'SPQR' 目录条目（Vicenza 人，实为本人）；②现代作者 Caroline Constant《The Palladio Guide》(1985/1993，美国建筑史家，姓氏误用)；③Bertotti Scamozzi（1735-1820，维琴察建筑师，编辑 Palladio 图集者，与 Palladio 非同人）；④`churchesofrome0000pall`（1991 The Churches of Rome，Palladio 罗马古迹英译本，版权在期不入库）。以上均按内容/生卒排除，目标为一手著作。",
+      "evidence_level": "high",
+      "identity_category": "艺术设计师",
+      "key_capabilities": [
+        "建筑五柱式理论与应用（I Quattro Libri 第一书）",
+        "别墅/宫殿/教堂/剧院设计（平面、立面、比例、构造）",
+        "罗马古建筑测绘与复原（Antichità di Roma、浴场图集）",
+        "以图和文字结合的教学著作（四书的图版与文字）"
+      ],
+      "label": "A",
+      "occupation_or_role": "意大利文艺复兴建筑师（1508-1580），威尼托地区建筑理论与实践奠基人；《建筑四书》（I Quattro Libri dell'Architettura, 1570）作者",
+      "professional_background": "Andrea Palladio，本名 Andrea di Pietro della Gondola（1508-11-30 生于帕多瓦，1580-08-19 卒于维琴察）。诗人 Gian Giorgio Trissino 为其取名 Palladio（源自智慧女神 Pallas Athena）。学徒石匠出身，1540s 起在维琴察、威尼斯等地设计并建造教堂、宫殿、别墅与剧院：Basilica Palladiana（维琴察）、Villa Capra/Rotonda、Villa Barbaro（Maser）、Villa Emo、San Giorgio Maggiore、Il Redentore、Teatro Olimpico 等。主要著作：《建筑四书》（1570，威尼斯）；《罗马古迹》（L'Antichità di Roma，1554/1555）；身后由 Ottavio Bertotti Scamozzi 编辑出版的建筑图集（Le Fabbriche e i Disegni di Andrea Palladio, 1780s）与《罗马人浴场》（Le Terme dei Romani, 1785）。其建筑理论影响欧洲三百年（帕拉第奥主义/Palladianism）。档案：archive.org creator 字段 `Palladio, Andrea, 1508-1580` / `Andrea Palladio` / 拉丁署名 `Andreas Palladius Vicentinus`。",
+      "subject_uid": "person-andrea-palladio-1508"
+    },
+    "chosen_subject_uid": "person-andrea-palladio-1508",
+    "normalized_name": "andreapalladio",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "andreapalladio",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "andrea-palladio",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-4318616629ca",
+  "time_scope": "1540s-1790s",
+  "updated_at": "2026-08-23T23:39:49Z"
+}

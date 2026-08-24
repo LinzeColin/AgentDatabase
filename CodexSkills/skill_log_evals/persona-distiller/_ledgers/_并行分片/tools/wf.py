@@ -33,9 +33,12 @@ def load_credentials():
     """从 ~/.kimi-code/config.toml 读 providers.deepseek 的 base_url 与 api_key。"""
     cfg = os.path.expanduser("~/.kimi-code/config.toml")
     txt = open(cfg, encoding="utf-8").read()
+    # ★ 2026-08-24 实测：config.toml 的 provider 段是 `[providers.Deepseek]`（大写），
+    #   wf.py 原正则只认小写 `deepseek` 且强要 type 行 → 直接找不到 key。
+    #   改成大小写不敏感 + type 段可选（实测两处都含 type，但不必依赖）。
     m = re.search(
-        r'\[providers\.deepseek\]\s*base_url\s*=\s*"([^"]+)"\s*type\s*=\s*"[^"]+"\s*api_key\s*=\s*"([^"]+)"',
-        txt)
+        r'\[providers\.deepseek\]\s*base_url\s*=\s*"([^"]+)"\s*(?:type\s*=\s*"[^"]+"\s*)?api_key\s*=\s*"([^"]+)"',
+        txt, re.IGNORECASE)
     if not m:
         raise SystemExit("wf.py: 无法在 ~/.kimi-code/config.toml 中找到 providers.deepseek")
     return m.group(1).rstrip("/"), m.group(2)

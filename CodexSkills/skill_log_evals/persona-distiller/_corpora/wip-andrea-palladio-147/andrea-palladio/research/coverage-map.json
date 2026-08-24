@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "status": "in-progress",
+  "critical_gaps": [
+    {
+      "cell": "authorized-private / 工程文书与私人书信",
+      "evidence": "Palladio 致庇护人（Trissino/Barbaro/Cornaro）的私人信函与工程合同、造价文书未以独立出版物形态入语料；一手序言/献辞承担对话证据",
+      "resolution": "unresolved——不采集私域材料，序献作为可及的一手替代"
+    },
+    {
+      "cell": "multimodal / 建筑实物与图版",
+      "evidence": "四书木刻与图集铜版在 OCR 中缺失；现存建筑实物（Villa Rotonda、Basilica、Redentore 等）未以文字入语料",
+      "resolution": "unresolved——图版信息经 Bertotti 图集与二手传记的文字转述覆盖"
+    }
+  ]
+}

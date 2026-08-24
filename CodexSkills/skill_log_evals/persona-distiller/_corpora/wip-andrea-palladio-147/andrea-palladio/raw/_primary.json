@@ -1,0 +1,356 @@
+{
+  "总数": 42,
+  "计数": {
+    "一手": 39,
+    "二手": 3,
+    "需人判": 0
+  },
+  "一手占比下界": 0.9286,
+  "一手占比上界": 0.9286,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "Palladio",
+      "Palladius"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "CHEPFL_LIPR_AXB223_4",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Le fabbriche e i disegni di Andrea Palladio, t.4",
+      "creator": "Palladio, Andrea",
+      "words": 33738
+    },
+    {
+      "identifier": "McGillLibrary-rbsc_sono-stati-copiati-li-detti-numero_elfNA2810P351740-22586",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Sono stati copiati li detti numero cinque ordini d'architettura dal disegnio ori",
+      "creator": "Palladio, Andrea, 1508-1580",
+      "words": 13020
+    },
+    {
+      "identifier": "andreapalladio00gurl",
+      "档": "二手",
+      "依据": "【人裁】Andrea Palladio（1922，Gurlitt/Vinaccia）：后世学者的 Palladio 专论/画传，判二手。",
+      "title": "Andrea Palladio",
+      "creator": "Gurlitt, Cornelius, 1850-1938; Vinaccia, Gaetano; Palladio, Andrea, 1508-1580",
+      "words": 7402
+    },
+    {
+      "identifier": "andreapalladioh00flet",
+      "档": "二手",
+      "依据": "题名含「his life and」且含目标姓名",
+      "title": "Andrea Palladio, his life and works",
+      "creator": "Fletcher, Banister, Sir, 1866-1953",
+      "words": 40301
+    },
+    {
+      "identifier": "andreapalladiosa00pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Andrea Palladio's Architecture, in four books : containing a dissertation on the",
+      "creator": "Palladio, Andrea, 1508-1580",
+      "words": 87614
+    },
+    {
+      "identifier": "andreapalladiosf00pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Andrea Palladio's first book of architecture : with all the plates, exactly copy",
+      "creator": "Palladio, Andrea, 1508-1580",
+      "words": 23839
+    },
+    {
+      "identifier": "architecturePal00Pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The architecture of A. Palladio, in four books : containing, a short treatise of",
+      "creator": "Palladio, Andrea, 1508-1580; Leoni, Giacomo, ca. 1686-1746; Jones, Inigo, 1573-1",
+      "words": 226020
+    },
+    {
+      "identifier": "architectureofap0001pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The architecture of A. Palladio in four books : containing a short treatise of t",
+      "creator": "Palladio, Andrea, 1508-1580; Leoni, Giacomo, approximately 1686-1746, editor; Du",
+      "words": 41097
+    },
+    {
+      "identifier": "architectureofapvol2pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The architecture of A. Palladio in four books : containing a short treatise of t",
+      "creator": "Palladio, Andrea, 1508-1580; Leoni, Giacomo, approximately 1686-1746, editor; Du",
+      "words": 39666
+    },
+    {
+      "identifier": "bertotti-le-terme-dei-romani-1785",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Le terme dei romani disegnate da Andrea Palladio e ripubblicate con la giunta di",
+      "creator": "Palladio, Andrea (1508-1580); Bertotti Scamozzi, Ottavio (1719-1790)",
+      "words": 27428
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_the-first-book-of-archit_palladio-andrea_1668",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The first book of architecture, ...  1668",
+      "creator": "Palladio, Andrea",
+      "words": 28435
+    },
+    {
+      "identifier": "bim_eighteenth-century_quattro-libri-dell-arc_palladio-andrea_1735",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "[Quattro libri dell' architettura. English]. Andrea Palladio's Architecture, in ",
+      "creator": "Palladio, Andrea",
+      "words": 232824
+    },
+    {
+      "identifier": "bim_eighteenth-century_the-architecture-of-a-p_palladio-andrea_1721_2",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The architecture of A. Palladio; in four books. Containing a short treatise of t",
+      "creator": "Palladio, Andrea",
+      "words": 71398
+    },
+    {
+      "identifier": "bim_eighteenth-century_the-first-book-of-archit_palladio-andrea_1729",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The first book of architecture: by Andrea Palladio. Translated out of Italian, w",
+      "creator": "Palladio, Andrea",
+      "words": 36076
+    },
+    {
+      "identifier": "bookofarchitectu00pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The first book of architecture",
+      "creator": "Palladio, Andrea, 1508-1580; Le Muet, Pierre, 1591-1669; Richards, Godfrey; Pope",
+      "words": 26904
+    },
+    {
+      "identifier": "bub_gb_ahhUAAAAcAAJ",
+      "档": "一手",
+      "依据": "【人裁】I commentari di C. Giulio Cesare con le figure（1618 版）：Palladio 亲撰的恺撒《高卢战记》评注（1575 首版，身后出版），附其绘制的营地/战役图版。正文含 Palladio 的第一人称评注，属本人一手。creator 首位为 Caesar（原典作者），Palladio 为评注作者，按内容判一手。",
+      "title": "I commentari di C. Giulio Cesare : con le figure in reme degli alloggiamenti, de",
+      "creator": "Caesar, Gaius Iulius; Palladio, Andrea",
+      "words": 322607
+    },
+    {
+      "identifier": "bub_gb_ktETgRIYzBUC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Lantichita di Roma di M. Andrea Palladio. Racolta breuemente da gli auttori anti",
+      "creator": "Andrea Palladio",
+      "words": 18285
+    },
+    {
+      "identifier": "bub_gb_ujAa4--Tc7gC",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Traicté des cinq ordres d'architecture dont se sont servy les anciens du Palladi",
+      "creator": "Andrea Palladio",
+      "words": 18122
+    },
+    {
+      "identifier": "cinqueordinidiar00pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "I cinque ordini di architettura di Andrea Palladio : esposti per un' esatta istr",
+      "creator": "Palladio, Andrea, 1508-1580; Costa, Giovanni Francesco, 1711-1773",
+      "words": 6771
+    },
+    {
+      "identifier": "dellavitaedelle00scol",
+      "档": "二手",
+      "依据": "【人裁】Della vita e delle opere dell'architetto Vincenzo Scamozzi, commentario: giuntevi le notizie di Andrea Palladio（1837，Scolari）：以 Scamozzi 为主角的人物论，仅附录 Palladio 生平资料，作者 Scolari 为后世学者，判二手。",
+      "title": "Della vita e delle opere dell'architetto Vincenzo Scamozzi commentario",
+      "creator": "Scolari, Filippo, 1792-1872; Palladio, Andrea, 1508-1580",
+      "words": 67669
+    },
+    {
+      "identifier": "firstbookofarchi0000pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The first book of architecture",
+      "creator": "Palladio, Andrea, 1508-1580",
+      "words": 31076
+    },
+    {
+      "identifier": "firstbookofarchi00pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The first book of architecture",
+      "creator": "Palladio, Andrea, 1508-1580; Le Muet, Pierre, 1591-1669",
+      "words": 27107
+    },
+    {
+      "identifier": "gri_33125006448050",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "I quattro libri dell'architettura di Andrea Palladio : ne' quali, dopo vn breue ",
+      "creator": "Palladio, Andrea, 1508-1580",
+      "words": 63461
+    },
+    {
+      "identifier": "gri_33125008638575",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Architettura di Andrea Palladio, Vicentino : di nuovo ristampata, e di figure in",
+      "creator": "Palladio, Andrea, 1508-1580; Muttoni, Francesco, 1669-1747; Fossati, Giorgio, 17",
+      "words": 94664
+    },
+    {
+      "identifier": "gri_33125008860922",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The architecture of A. Palladio, in four books : containing a short treatise of ",
+      "creator": "Palladio, Andrea, 1508-1580",
+      "words": 64394
+    },
+    {
+      "identifier": "gri_33125008860989",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The architecture of A. Palladio, in four books : containing a short treatise of ",
+      "creator": "Palladio, Andrea, 1508-1580",
+      "words": 55864
+    },
+    {
+      "identifier": "gri_33125010858245",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "L'architettura d'Andrea Palladio, divisa in quatro libri : di nuovo ristampata, ",
+      "creator": "Palladio, Andrea, 1508-1580; Louisa, Domenico",
+      "words": 70989
+    },
+    {
+      "identifier": "gri_33125011115488",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The architecture of A. Palladio, in four books : containing a short treatise of ",
+      "creator": "Palladio, Andrea, 1508-1580",
+      "words": 81007
+    },
+    {
+      "identifier": "gri_33125011569684",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The four books of architecture",
+      "creator": "Palladio, Andrea, 1508-1580",
+      "words": 76732
+    },
+    {
+      "identifier": "icinqueordinidel00pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "I cinque ordini dell' architettura di Andrea Palladio : illustrati e ridottia me",
+      "creator": "Palladio, Andrea, 1508-1580",
+      "words": 8205
+    },
+    {
+      "identifier": "icommentaridicgi00caes_0",
+      "档": "一手",
+      "依据": "【人裁】I commentari di C. Givlio Cesare（1598 版）：与 1618 版同书的早期版本，Palladio 亲撰评注与图版。creator 列出 Palladio 与其子 Orazio/Leonida（身后出版承继者），评注正文属 Palladio，按内容判一手。",
+      "title": "I commentari di C. Givlio Cesare : con le figvre in rame de gli alloggiamenti, d",
+      "creator": "Caesar, Julius; Palladio, Andrea, 1508-1580; Palladio, Orazio, d. 1572; Palladio",
+      "words": 261776
+    },
+    {
+      "identifier": "india.history.resource.93250",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Le Fabbriche el Disegni di Andrea Palladio, 2nd ed., Vol. I",
+      "creator": "Palladio, Andrea; Scamozzi, Ottavio Bertotti (Illus.)",
+      "words": 45425
+    },
+    {
+      "identifier": "india.history.resource.93773",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Le Fabbriche el Disegni di Andrea Palladio, 2nd ed., Vol. IV",
+      "creator": "Palladio, Andrea; Scamozzi, Ottavio Bertotti (Illus.)",
+      "words": 41258
+    },
+    {
+      "identifier": "india.history.resource.93774",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Le Fabbriche el Disegni di Andrea Palladio, 2nd ed., Vol. II",
+      "creator": "Palladio, Andrea; Scamozzi, Ottavio Bertotti (Illus.)",
+      "words": 42741
+    },
+    {
+      "identifier": "iquattrolibridel01pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "I quattro libri dell'architettura di Andrea Palladio.",
+      "creator": "Palladio, Andrea (1508-1580)",
+      "words": 61687
+    },
+    {
+      "identifier": "iqvattrolibridel00pall_0",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "I qvattro libri dell'architettvra di Andrea Palladio : ne' quali, dopo un breue ",
+      "creator": "Palladio, Andrea, 1508-1580; Smith, Joseph, 1674-1770",
+      "words": 75816
+    },
+    {
+      "identifier": "lantichitadiroma00pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "L'antichita di Roma di M. Andrea Palladio, raccolta brevemente da gli auttore an",
+      "creator": "Palladio, Andrea, 1508-1580",
+      "words": 14191
+    },
+    {
+      "identifier": "le-fabbriche-e-i-disegni-di-andrea-palladio-t.-4-1843",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Le fabbriche e i disegni di Andrea Palladio e le terme. T. 4",
+      "creator": "Palladio, Andrea (1508-1580); Bertotti Scamozzi, Ottavio (1719-1790)",
+      "words": 32858
+    },
+    {
+      "identifier": "lefabbricheeidis03bert",
+      "档": "一手",
+      "依据": "【人裁】同上 Le fabbriche e i disegni di Andrea Palladio 卷 3（1843 重印）：Palladio 建筑图样一手总集，Bertotti Scamozzi 编辑。",
+      "title": "Le fabbriche e i disegni di Andrea Palladio e Le terme",
+      "creator": "Bertotti Scamozzi, Ottavio, 1719-1790; Foppiani, Celestino; Bertotti Scamozzi, O",
+      "words": 24481
+    },
+    {
+      "identifier": "lefabbricheeidis04bert",
+      "档": "一手",
+      "依据": "【人裁】Le fabbriche e i disegni di Andrea Palladio（Bertotti Scamozzi 编，1843 重印）：Palladio 的建筑图样与设计的总集（含 Le terme），图样为 Palladio 本人设计（身前图纸），Bertotti Scamozzi 为编辑出版者。题名冠 Palladio 之名，图样即其一手作品；说明文字为编者口吻，声口须另标。",
+      "title": "Le fabbriche e i disegni di Andrea Palladio e Le terme",
+      "creator": "Bertotti Scamozzi, Ottavio, 1719-1790; Foppiani, Celestino; Bertotti Scamozzi, O",
+      "words": 29432
+    },
+    {
+      "identifier": "qvattrolibridel00pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "I qvattro libri dell'architettvra di Andrea Palladio : ne' quali, dopo un breue ",
+      "creator": "Palladio, Andrea, 1508-1580",
+      "words": 69651
+    },
+    {
+      "identifier": "traittedescinqor00pall",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Traitté des cinq ordres d'architecture dont se sont servi les anciens",
+      "creator": "Palladio, Andrea, 1508-1580; Le Muet, Pierre, 1591-1669. Manière de bastir pour",
+      "words": 17770
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "lanes": 2,
+  "去掉纸面道后": 2,
+  "逐道份数": {
+    "writings": 39,
+    "conversations": 0,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 0,
+    "external": 3
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "CHEPFL_LIPR_AXB223_4",
+      "道": "writings",
+      "title": "Le fabbriche e i disegni di Andrea Palladio, t.4"
+    },
+    {
+      "identifier": "McGillLibrary-rbsc_sono-stati-copiati-li-detti-numero_elfNA2810P351740-22586",
+      "道": "writings",
+      "title": "Sono stati copiati li detti numero cinque ordini d'architettura dal di"
+    },
+    {
+      "identifier": "andreapalladio00gurl",
+      "道": "external",
+      "title": "Andrea Palladio"
+    },
+    {
+      "identifier": "andreapalladioh00flet",
+      "道": "external",
+      "title": "Andrea Palladio, his life and works"
+    },
+    {
+      "identifier": "andreapalladiosa00pall",
+      "道": "writings",
+      "title": "Andrea Palladio's Architecture, in four books : containing a dissertat"
+    },
+    {
+      "identifier": "andreapalladiosf00pall",
+      "道": "writings",
+      "title": "Andrea Palladio's first book of architecture : with all the plates, ex"
+    },
+    {
+      "identifier": "architecturePal00Pall",
+      "道": "writings",
+      "title": "The architecture of A. Palladio, in four books : containing, a short t"
+    },
+    {
+      "identifier": "architectureofap0001pall",
+      "道": "writings",
+      "title": "The architecture of A. Palladio in four books : containing a short tre"
+    },
+    {
+      "identifier": "architectureofapvol2pall",
+      "道": "writings",
+      "title": "The architecture of A. Palladio in four books : containing a short tre"
+    },
+    {
+      "identifier": "bertotti-le-terme-dei-romani-1785",
+      "道": "writings",
+      "title": "Le terme dei romani disegnate da Andrea Palladio e ripubblicate con la"
+    },
+    {
+      "identifier": "bim_early-english-books-1641-1700_the-first-book-of-archit_palladio-andrea_1668",
+      "道": "writings",
+      "title": "The first book of architecture, ...  1668"
+    },
+    {
+      "identifier": "bim_eighteenth-century_quattro-libri-dell-arc_palladio-andrea_1735",
+      "道": "writings",
+      "title": "[Quattro libri dell' architettura. English]. Andrea Palladio's Archite"
+    },
+    {
+      "identifier": "bim_eighteenth-century_the-architecture-of-a-p_palladio-andrea_1721_2",
+      "道": "writings",
+      "title": "The architecture of A. Palladio; in four books. Containing a short tre"
+    },
+    {
+      "identifier": "bim_eighteenth-century_the-first-book-of-archit_palladio-andrea_1729",
+      "道": "writings",
+      "title": "The first book of architecture: by Andrea Palladio. Translated out of "
+    },
+    {
+      "identifier": "bookofarchitectu00pall",
+      "道": "writings",
+      "title": "The first book of architecture"
+    },
+    {
+      "identifier": "bub_gb_ahhUAAAAcAAJ",
+      "道": "writings",
+      "title": "I commentari di C. Giulio Cesare : con le figure in reme degli alloggi"
+    },
+    {
+      "identifier": "bub_gb_ktETgRIYzBUC",
+      "道": "writings",
+      "title": "Lantichita di Roma di M. Andrea Palladio. Racolta breuemente da gli au"
+    },
+    {
+      "identifier": "bub_gb_ujAa4--Tc7gC",
+      "道": "writings",
+      "title": "Traicté des cinq ordres d'architecture dont se sont servy les anciens "
+    },
+    {
+      "identifier": "cinqueordinidiar00pall",
+      "道": "writings",
+      "title": "I cinque ordini di architettura di Andrea Palladio : esposti per un' e"
+    },
+    {
+      "identifier": "dellavitaedelle00scol",
+      "道": "external",
+      "title": "Della vita e delle opere dell'architetto Vincenzo Scamozzi commentario"
+    },
+    {
+      "identifier": "firstbookofarchi0000pall",
+      "道": "writings",
+      "title": "The first book of architecture"
+    },
+    {
+      "identifier": "firstbookofarchi00pall",
+      "道": "writings",
+      "title": "The first book of architecture"
+    },
+    {
+      "identifier": "gri_33125006448050",
+      "道": "writings",
+      "title": "I quattro libri dell'architettura di Andrea Palladio : ne' quali, dopo"
+    },
+    {
+      "identifier": "gri_33125008638575",
+      "道": "writings",
+      "title": "Architettura di Andrea Palladio, Vicentino : di nuovo ristampata, e di"
+    },
+    {
+      "identifier": "gri_33125008860922",
+      "道": "writings",
+      "title": "The architecture of A. Palladio, in four books : containing a short tr"
+    },
+    {
+      "identifier": "gri_33125008860989",
+      "道": "writings",
+      "title": "The architecture of A. Palladio, in four books : containing a short tr"
+    },
+    {
+      "identifier": "gri_33125010858245",
+      "道": "writings",
+      "title": "L'architettura d'Andrea Palladio, divisa in quatro libri : di nuovo ri"
+    },
+    {
+      "identifier": "gri_33125011115488",
+      "道": "writings",
+      "title": "The architecture of A. Palladio, in four books : containing a short tr"
+    },
+    {
+      "identifier": "gri_33125011569684",
+      "道": "writings",
+      "title": "The four books of architecture"
+    },
+    {
+      "identifier": "icinqueordinidel00pall",
+      "道": "writings",
+      "title": "I cinque ordini dell' architettura di Andrea Palladio : illustrati e r"
+    },
+    {
+      "identifier": "icommentaridicgi00caes_0",
+      "道": "writings",
+      "title": "I commentari di C. Givlio Cesare : con le figvre in rame de gli allogg"
+    },
+    {
+      "identifier": "india.history.resource.93250",
+      "道": "writings",
+      "title": "Le Fabbriche el Disegni di Andrea Palladio, 2nd ed., Vol. I"
+    },
+    {
+      "identifier": "india.history.resource.93773",
+      "道": "writings",
+      "title": "Le Fabbriche el Disegni di Andrea Palladio, 2nd ed., Vol. IV"
+    },
+    {
+      "identifier": "india.history.resource.93774",
+      "道": "writings",
+      "title": "Le Fabbriche el Disegni di Andrea Palladio, 2nd ed., Vol. II"
+    },
+    {
+      "identifier": "iquattrolibridel01pall",
+      "道": "writings",
+      "title": "I quattro libri dell'architettura di Andrea Palladio."
+    },
+    {
+      "identifier": "iqvattrolibridel00pall_0",
+      "道": "writings",
+      "title": "I qvattro libri dell'architettvra di Andrea Palladio : ne' quali, dopo"
+    },
+    {
+      "identifier": "lantichitadiroma00pall",
+      "道": "writings",
+      "title": "L'antichita di Roma di M. Andrea Palladio, raccolta brevemente da gli "
+    },
+    {
+      "identifier": "le-fabbriche-e-i-disegni-di-andrea-palladio-t.-4-1843",
+      "道": "writings",
+      "title": "Le fabbriche e i disegni di Andrea Palladio e le terme. T. 4"
+    },
+    {
+      "identifier": "lefabbricheeidis03bert",
+      "道": "writings",
+      "title": "Le fabbriche e i disegni di Andrea Palladio e Le terme"
+    },
+    {
+      "identifier": "lefabbricheeidis04bert",
+      "道": "writings",
+      "title": "Le fabbriche e i disegni di Andrea Palladio e Le terme"
+    },
+    {
+      "identifier": "qvattrolibridel00pall",
+      "道": "writings",
+      "title": "I qvattro libri dell'architettvra di Andrea Palladio : ne' quali, dopo"
+    },
+    {
+      "identifier": "traittedescinqor00pall",
+      "道": "writings",
+      "title": "Traitté des cinq ordres d'architecture dont se sont servi les anciens"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "coverage_axes": [
+    "identity",
+    "role",
+    "period",
+    "research-lane",
+    "source-family",
+    "language",
+    "decision-context",
+    "success/failure",
+    "public/private"
+  ],
+  "families": [
+    {
+      "examples": [
+        "books",
+        "papers",
+        "official essays",
+        "courses",
+        "code",
+        "patents",
+        "formal documents"
+      ],
+      "id": "first-party-systematic",
+      "priority": "highest"
+    },
+    {
+      "examples": [
+        "致庇护人的献辞",
+        "致读者的序言",
+        "题献信函"
+      ],
+      "id": "dialogue-pressure",
+      "priority": "high"
+    },
+    {
+      "examples": [
+        "设计决断（选柱式、定比例、依场地定案）",
+        "建成作品的图面档案（Le Fabbriche）",
+        "浴场复原图（Terme dei Romani）"
+      ],
+      "id": "decisions-actions-outcomes",
+      "priority": "highest"
+    },
+    {
+      "examples": [
+        "后世传记（Fletcher 1902、Gurlitt 1922、Scolari 1837）",
+        "建筑史评价（帕拉第奥主义）",
+        "编者评述（Bertotti Scamozzi）"
+      ],
+      "id": "external-triangulation",
+      "priority": "high"
+    },
+    {
+      "examples": [
+        "庇护人网络（Trissino、Barbaro、Cornaro）",
+        "威尼托建筑市场",
+        "文艺复兴古物热",
+        "威尼斯印刷出版"
+      ],
+      "id": "context-constraints",
+      "priority": "high"
+    },
+    {
+      "examples": [
+        "建筑图版（四书木刻、图集铜版）",
+        "建筑实物（现存别墅/教堂/剧院）",
+        "手稿抄本（五柱式手抄本）"
+      ],
+      "id": "multimodal",
+      "priority": "medium"
+    },
+    {
+      "examples": [
+        "工程文书（合同、造价、施工指令）",
+        "私人书信"
+      ],
+      "id": "authorized-private",
+      "priority": "conditional"
+    }
+  ],
+  "generated_at": "2026-08-23T23:39:49Z",
+  "identity_priorities": [
+    "treatises",
+    "prefaces",
+    "dedications",
+    "ancient-monument-surveys",
+    "design-rules",
+    "commentaries",
+    "biographies",
+    "drawing-archives"
+  ],
+  "non_claim": "This protocol targets evidence saturation, not a logically impossible guarantee that every public or private source has been found.",
+  "schema_version": "1.0",
+  "stop_rule": "Stop only after two consecutive gap-driven rounds add no high-impact Claim and all critical coverage cells are either evidenced or explicitly unresolved.",
+  "target_name": "Andrea Palladio"
+}

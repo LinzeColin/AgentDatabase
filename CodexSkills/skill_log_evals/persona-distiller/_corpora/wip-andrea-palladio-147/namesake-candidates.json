@@ -1,0 +1,40 @@
+{
+  "target_name": "Andrea Palladio",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration",
+    "archive.org creator field probe"
+  ],
+  "candidates": [
+    {
+      "label": "A",
+      "canonical_name": "Andrea Palladio",
+      "subject_uid": "person-andrea-palladio-1508",
+      "identity_category": "艺术设计师",
+      "occupation_or_role": "意大利文艺复兴建筑师（1508-1580），威尼托地区建筑理论与实践奠基人；《建筑四书》（I Quattro Libri dell'Architettura, 1570）作者",
+      "professional_background": "Andrea Palladio，本名 Andrea di Pietro della Gondola（1508-11-30 生于帕多瓦，1580-08-19 卒于维琴察）。诗人 Gian Giorgio Trissino 为其取名 Palladio（源自智慧女神 Pallas Athena）。学徒石匠出身，1540s 起在维琴察、威尼斯等地设计并建造教堂、宫殿、别墅与剧院：Basilica Palladiana（维琴察）、Villa Capra/Rotonda、Villa Barbaro（Maser）、Villa Emo、San Giorgio Maggiore、Il Redentore、Teatro Olimpico 等。主要著作：《建筑四书》（1570，威尼斯）；《罗马古迹》（L'Antichità di Roma，1554/1555）；身后由 Ottavio Bertotti Scamozzi 编辑出版的建筑图集（Le Fabbriche e i Disegni di Andrea Palladio, 1780s）与《罗马人浴场》（Le Terme dei Romani, 1785）。其建筑理论影响欧洲三百年（帕拉第奥主义/Palladianism）。档案：archive.org creator 字段 `Palladio, Andrea, 1508-1580` / `Andrea Palladio` / 拉丁署名 `Andreas Palladius Vicentinus`。",
+      "application_scenarios": [
+        "古典建筑理论与实践（五柱式、比例、对称、柱廊系统）",
+        "住宅/别墅/公共建筑设计（平面布局、立面比例、细部构造）",
+        "罗马古迹测绘与古建筑复原（Antichità di Roma、浴场测绘图）",
+        "建筑教育方法论（从实例与古物提炼设计法则，教学式著作）"
+      ],
+      "key_capabilities": [
+        "建筑五柱式理论与应用（I Quattro Libri 第一书）",
+        "别墅/宫殿/教堂/剧院设计（平面、立面、比例、构造）",
+        "罗马古建筑测绘与复原（Antichità di Roma、浴场图集）",
+        "以图和文字结合的教学著作（四书的图版与文字）"
+      ],
+      "distinguishing_basis": "探源：creator 检索与题名检索命中全部指向同一人（Palladio, Andrea, 1508-1580）。同名干扰项：①拉丁化署名 `Andreas Palladius Vicentinus` 与 'SPQR' 目录条目（Vicenza 人，实为本人）；②现代作者 Caroline Constant《The Palladio Guide》(1985/1993，美国建筑史家，姓氏误用)；③Bertotti Scamozzi（1735-1820，维琴察建筑师，编辑 Palladio 图集者，与 Palladio 非同人）；④`churchesofrome0000pall`（1991 The Churches of Rome，Palladio 罗马古迹英译本，版权在期不入库）。以上均按内容/生卒排除，目标为一手著作。",
+      "authoritative_sources": [
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Palladio%2C+Andrea%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=200&output=json"
+        },
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=title%3A%28%22quattro+libri%22+OR+%22four+books+of+architecture%22%29&fl%5B%5D=identifier,title,creator,year&rows=100&output=json"
+        }
+      ],
+      "evidence_level": "high"
+    }
+  ]
+}

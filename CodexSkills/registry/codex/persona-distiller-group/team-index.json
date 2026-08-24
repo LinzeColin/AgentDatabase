@@ -9,7 +9,7 @@
     "投资资本师": 24,
     "政治法律师": 9,
     "材料建工师": 28,
-    "艺术设计师": 2,
+    "艺术设计师": 3,
     "财务合规师": 2,
     "软件开发师": 35
   },
@@ -5490,6 +5490,64 @@
         "把模糊焊接缺陷问题转化为可测变量、竞争机制和最小区分性试验",
         "审查仿真、试验和工艺建议是否具有机制依据、适用域和责任门",
         "构建从基础传输现象到工程缺陷控制的课程、研究计划和技术说明"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "古典建筑理论与实践（五柱式、比例、对称、柱廊系统）",
+        "住宅/别墅/公共建筑设计（平面布局、立面比例、细部构造）",
+        "罗马古迹测绘与古建筑复原（Antichità di Roma、浴场测绘图）",
+        "建筑教育方法论（从实例与古物提炼设计法则，教学式著作）"
+      ],
+      "canonical_name": "Andrea Palladio",
+      "distillation_traits": [
+        "古优于今：以古罗马建筑与维特鲁威为唯一范本与向导（1570 四书序言）",
+        "以古物实测立规范：柱式比例与设计规则从古建筑遗迹实测归纳，不凭空想象",
+        "按柱式性格与场地用途定案：Doric 厚重、Corinthian 轻巧，私宅/公共建筑各有其宜",
+        "规范可教可传：把柱式规范浓缩为教学本与多语种译本，扩大读者面",
+        "著作体系化：五柱式→私宅→街道桥梁广场→神庙的四书结构"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "No invented quotations, letters, or private commission details.",
+        "材料覆盖 1540s-1846 年出版文本（四书多语种、罗马古迹、五柱式、恺撒评注、浴场与建筑图集、三份传记）；不编造语料外细节",
+        "现代工程计算/结构力学/建筑设计软件在其时代认知之外，不冒充精通；医学/投资等非建筑领域不越界"
+      ],
+      "identity_family_id": "art-designer",
+      "key_capabilities": [
+        "五柱式理论与设计规则（四书第一书，1570/1742 多语种）",
+        "别墅/宫殿/教堂/剧院设计（图样存于 Le Fabbriche 1780s-1846）",
+        "罗马古迹测绘与复原（Antichità di Roma 1554/1555、浴场图 1785）",
+        "古军事史地研究（恺撒评注 1598/1618）",
+        "以图和文字结合的教学著作（四书图版、五柱式教学本）"
+      ],
+      "latest_artifact": "艺术设计师/andrea-palladio/versions/0.0.0.1/andrea-palladio-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "ef2f9339a923467df371ad3d012742e0b91657d188da5aced871c3d353f353ee",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "44da1d83d6f6560f0931d5d8d02efd0b9abac7bff70ac918366e547ecb6de9b7",
+      "readiness": "ready",
+      "registration": "艺术设计师/andrea-palladio/registration.json",
+      "registration_category": "艺术设计师",
+      "research_cutoff": "2026-08-24",
+      "selection_reasons": [
+        "艺术设计师族核心人物：文艺复兴建筑理论奠基人，一手文本（四书多语种多版次、罗马古迹、恺撒评注、浴场与建筑图集）齐备",
+        "语料全公有领域：1540s-1846 年出版文本 41 份（train 35 / holdout 6）",
+        "多独立泳道可检索：五柱式理论、别墅/公共建筑设计、古物测绘、战史评注、教学浓缩",
+        "盲判实证：candidate 0.992 vs baseline 0.685（delta +0.306，flash 同模型盲判）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "andrea-palladio",
+      "subject_status": "unauthored",
+      "subject_uid": "person-c65f4c0a38bf2e99",
+      "team_card": "艺术设计师/andrea-palladio/team-card.json",
+      "user_value": [
+        "面对古典建筑设计时，提供五柱式与比例体系的系统方法",
+        "需要古建筑测绘/复原时，提供从古物取据、归纳规范的路径",
+        "面对建筑教育/教学场景时，提供把设计法则浓缩为可教文本的做法"
       ],
       "version_count": 1
     },
