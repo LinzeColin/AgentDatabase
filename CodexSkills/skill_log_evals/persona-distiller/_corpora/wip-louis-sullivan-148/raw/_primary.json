@@ -1,0 +1,108 @@
+{
+  "总数": 11,
+  "计数": {
+    "一手": 8,
+    "二手": 3,
+    "需人判": 0
+  },
+  "一手占比下界": 0.7273,
+  "一手占比上界": 0.7273,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "Sullivan",
+      "SULLIVAN"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "autobiographyofa005655mbp",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The Autobiography Of An Idea",
+      "creator": "Louis H. Sullivan",
+      "words": 95668
+    },
+    {
+      "identifier": "autobiographyofa010209mbp",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The Autobiography Of An Idea",
+      "creator": "Louis H. Sullivan",
+      "words": 95668
+    },
+    {
+      "identifier": "autobiographyofi00sull_0",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The autobiography of an idea",
+      "creator": "Sullivan, Louis H., 1856-1924",
+      "words": 96468
+    },
+    {
+      "identifier": "autobiographyofi00sull_1",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The autobiography of an idea",
+      "creator": "Sullivan, Louis H., 1856-1924",
+      "words": 96768
+    },
+    {
+      "identifier": "in.ernet.dli.2015.154075",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The Autobiography Of An Idea",
+      "creator": "Louis H. Sullivan",
+      "words": 97665
+    },
+    {
+      "identifier": "in.ernet.dli.2015.156478",
+      "档": "一手",
+      "依据": "题名含自述体标记「autobiograph」且目标为第一作者",
+      "title": "The Autobiography Of An Idea",
+      "creator": "Louis H. Sullivan",
+      "words": 97832
+    },
+    {
+      "identifier": "jstor-20570735",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Wherefore the Poet?",
+      "creator": "Sullivan, Louis H.",
+      "words": 864
+    },
+    {
+      "identifier": "louishsullivant00barkgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Louis H. Sullivan, Thinker and Architect",
+      "creator": "Anthony Barker",
+      "words": 59024
+    },
+    {
+      "identifier": "louishsullivant01barkgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Louis H. Sullivan, Thinker and Architect",
+      "creator": "Anthony Barker",
+      "words": 88550
+    },
+    {
+      "identifier": "louishsullivant02barkgoog",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Louis H. Sullivan, Thinker and Architect",
+      "creator": "Anthony Barker",
+      "words": 14167
+    },
+    {
+      "identifier": "tallofficebuildi00sull",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The tall office building artistically considered",
+      "creator": "Sullivan, Louis H., 1856-1924",
+      "words": 5800
+    }
+  ]
+}

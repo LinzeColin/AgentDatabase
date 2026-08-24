@@ -1,0 +1,11 @@
+{
+ "schema_version": "1.0",
+ "target_name": "Louis Sullivan",
+ "normalized_name": "louissullivan",
+ "selected_subject_uid": "wikidata:Q243829",
+ "selection_date": "2026-08-24T00:00:00Z",
+ "gate_status": "ready",
+ "resolution": "single",
+ "selected_candidate": "A",
+ "rationale": "IA 探源：creator \"Sullivan, Louis\" 54 条中同名者 Louis R. Sullivan（人类学家 1892-1925，American Anthropologist 人体测量论文）、Louis Wade Sullivan（b.1933，美国 HHS 卫生部长 Medicare 报告）、Louis Sullivan（英超球员）均按身份/年代排除；目标 Louis H. Sullivan（1856-1924，建筑师）一手 PD 载体为 Autobiography of an Idea(1924)/Tall Office Building(1896)/Wherefore the Poet(1916)。"
+}

@@ -1,0 +1,71 @@
+{
+  "lanes": 3,
+  "去掉纸面道后": 3,
+  "逐道份数": {
+    "writings": 2,
+    "conversations": 0,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 6,
+    "external": 3
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "autobiographyofa005655mbp",
+      "道": "timeline",
+      "title": "The Autobiography Of An Idea"
+    },
+    {
+      "identifier": "autobiographyofa010209mbp",
+      "道": "timeline",
+      "title": "The Autobiography Of An Idea"
+    },
+    {
+      "identifier": "autobiographyofi00sull_0",
+      "道": "timeline",
+      "title": "The autobiography of an idea"
+    },
+    {
+      "identifier": "autobiographyofi00sull_1",
+      "道": "timeline",
+      "title": "The autobiography of an idea"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.154075",
+      "道": "timeline",
+      "title": "The Autobiography Of An Idea"
+    },
+    {
+      "identifier": "in.ernet.dli.2015.156478",
+      "道": "timeline",
+      "title": "The Autobiography Of An Idea"
+    },
+    {
+      "identifier": "jstor-20570735",
+      "道": "writings",
+      "title": "Wherefore the Poet?"
+    },
+    {
+      "identifier": "louishsullivant00barkgoog",
+      "道": "external",
+      "title": "Louis H. Sullivan, Thinker and Architect"
+    },
+    {
+      "identifier": "louishsullivant01barkgoog",
+      "道": "external",
+      "title": "Louis H. Sullivan, Thinker and Architect"
+    },
+    {
+      "identifier": "louishsullivant02barkgoog",
+      "道": "external",
+      "title": "Louis H. Sullivan, Thinker and Architect"
+    },
+    {
+      "identifier": "tallofficebuildi00sull",
+      "道": "writings",
+      "title": "The tall office building artistically considered"
+    }
+  ]
+}

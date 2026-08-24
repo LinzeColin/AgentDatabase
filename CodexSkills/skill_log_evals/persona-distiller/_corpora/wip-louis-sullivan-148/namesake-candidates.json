@@ -1,0 +1,34 @@
+[
+ {
+  "canonical_name": "Louis H. Sullivan",
+  "subject_uid": "wikidata:Q243829",
+  "identity_category": "历史人物（1856-09-03 – 1924-04-14）",
+  "occupation_or_role": "美国建筑师；芝加哥学派（Chicago School）领袖，Adler & Sullivan 事务所合伙人",
+  "professional_background": "芝加哥 Auditorium Building（1887-89，与 Dankmar Adler 合作）；Wainwright Building（1890-91）；Guaranty Building（1894-95）；Carson, Pirie, Scott 百货（1899-1904）；「form follows function」格言提出者；写作：The Autobiography of an Idea（1924）、Kindergarten Chats（1896-97 连载/rev.1918）、The Tall Office Building Artistically Considered（1896）、Wherefore the Poet?（1916）、A System of Architectural Ornament（1924）。",
+  "key_capabilities": [
+   "高层钢结构办公建筑理论",
+   "有机装饰（organic ornament）",
+   "建筑理论写作",
+   "民主与建筑关系的哲学论述"
+  ],
+  "application_scenarios": [
+   "建筑理论/设计哲学咨询",
+   "高层建筑形式与结构的关系论证",
+   "有机建筑与装饰体系",
+   "美国建筑史与芝加哥学派"
+  ],
+  "evidence_level": "high",
+  "distinguishing_basis": "署名作 Sullivan, Louis H., 1856-1924 / Louis H. Sullivan / Louis Henry Sullivan；同名者 Louis R. Sullivan（人类学家 1892-1925）、Louis Wade Sullivan（美国卫生部长 b.1933）、Louis Sullivan（英超球员 b.1947）按身份与年代排除。",
+  "authoritative_sources": [
+   {
+    "locator": "archive.org autobiographyofi00sull_0（1924《The Autobiography of an Idea》）"
+   },
+   {
+    "locator": "archive.org tallofficebuildi00sull（1896《The Tall Office Building Artistically Considered》）"
+   },
+   {
+    "locator": "archive.org jstor-20570735（1916《Wherefore the Poet?》Poetry 杂志）"
+   }
+  ]
+ }
+]
