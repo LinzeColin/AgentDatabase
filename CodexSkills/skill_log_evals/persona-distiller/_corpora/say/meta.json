@@ -1,0 +1,124 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "person-jean-baptiste-say-1767",
+  "consent_authority": "archive.org 公开领域一手著作（1767-1832 法语原文及英/德/西/意译本）+ 当代学界二手综述；无涉个人隐私或未公开材料",
+  "created_at": "2026-08-24T03:12:50Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "investor-capital-allocator",
+    "display": "投资资本师",
+    "mode": "single",
+    "primary": "investor-capital-allocator",
+    "weights": {
+      "investor-capital-allocator": 1.0
+    }
+  },
+  "language": "zh-CN",
+  "model_version": "0.1.0-draft",
+  "name": "Jean-Baptiste Say",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "政治经济学基础：生产/分配/消费三分法、价值、财富与生产性消费（Traité d'économie politique）",
+        "销售法则与市场：萨伊定律、供给创造需求、一般过剩之辩、与马尔萨斯论战（Lettres à M. Malthus）",
+        "经济学教学与体系化：CNAM 首门系统经济学课程、教学法（Cours complet d'économie politique pratique、Catéchisme）",
+        "政策与政论：自由贸易、反对重商主义与过度管制、财政与税收（Tribunat 时期的政论）",
+        "道德与社会伦理：文明与奢侈、人口与风俗（Olbie、Petit volume）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Say%2C+Jean+Baptiste%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=300&output=json"
+        },
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Say%2C+Jean-Baptiste%2C+1767-1832%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=300&output=json"
+        }
+      ],
+      "canonical_name": "Jean-Baptiste Say",
+      "distinguishing_basis": "探源：creator:\"Say, Jean Baptiste\" 与 creator:\"Say, Jean-Baptiste\" 各 numFound=98、creator:\"Say, Jean-Baptiste, 1767-1832\" numFound=78，三路合并去重 105 条，其中 Say 本人一手约 98 条。独立一手著作 ≥8 部互异：Traité d'économie politique（1803 首版，1814/1817/1819 多版+英/德/西/意译）、Cours complet d'économie politique pratique（1828-29，多版）、Catéchisme d'économie politique（1815，多版+英/西译）、Lettres à M. Malthus（1820 法/英）、Olbie（1800）、Petit volume（1839 生后编）、Mélanges et correspondance（1833 生后编）、Bemerkungen über den Zustand Grossbritanniens（1818 德译）、经济政策论（1818）。同名干扰：孙 Léon Say（1826-1896，政治家/财政部长）、子 Horace Say（1794-1860，银行家）——creator 串 Say, Jean Baptiste 已按生卒年 1767-1832 排除，检索时按内容剔除后代著作。",
+      "evidence_level": "high",
+      "identity_category": "投资资本师",
+      "key_capabilities": [
+        "生产/分配/消费分析——政治经济学三分法与价值理论（Traité）",
+        "销售法则——供给创造需求、一般过剩不可能性的论证（Traité、Lettres）",
+        "经济学教学——把政治经济学体系化为可授课的课程（Cours complet、Catéchisme）",
+        "政策论辩——自由贸易、反管制、财政与税收主张（政论与教材）",
+        "书信论战——与马尔萨斯关于市场与过剩的往复论辩（Lettres à M. Malthus）"
+      ],
+      "label": "A",
+      "occupation_or_role": "法国经济学家、实业家与政论家（1767-1832）；销售法则（萨伊定律）提出者、政治经济学教学制度化推动者、工艺美术院（CNAM）经济学教授",
+      "professional_background": "Jean-Baptiste Say（1767-1832，里昂/巴黎）是法国古典政治经济学的奠基人。出身商人家庭，青年做过保险职员与《Courrier de Provence》编辑，1799-1800 任法国五百人院（Tribunat）财政委员会成员，因反对拿破仑的专断财政政策于 1803 年被解职；1803 年出版《政治经济学概论》（Traité d'économie politique），确立生产-分配-消费三分法并系统提出销售法则（萨伊定律：供给创造自身需求），1814 年第二版、1817 年第三版、1819 年第四版陆续修订；1815 年出版《政治经济学入门》（Catéchisme d'économie politique），1818-1828 在工艺美术院（CNAM）开设首门系统经济学课程，1828-1829 年将其讲稿整理为《政治经济学实用教程》（Cours complet d'économie politique pratique）两卷；1820 年与马尔萨斯就供给过剩与一般过剩展开著名书信论战（Lettres à M. Malthus），1821 年出版《给马尔萨斯的信》英文版；还著有人口与伦理随笔《Olbie》（1800）。档案：archive.org creator 字段 Say, Jean Baptiste, 1767-1832，一手著作多版多语（法/英/德/西/意）。",
+      "subject_uid": "person-jean-baptiste-say-1767"
+    },
+    "chosen_subject_uid": "person-jean-baptiste-say-1767",
+    "normalized_name": "jeanbaptistesay",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "jeanbaptistesay",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "say",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-4d5c2a0bc193",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-24T03:12:50Z",
+  "attribution_basis": {
+    "authority": "Jean-Baptiste Say（1767-1832）著作归属依据：① archive.org 目录 creator 字段（Say, Jean Baptiste, 1767-1832 / Say, Jean-Baptiste）逐份点名；② 各书题名页/署名行（见 covered_sources 逐份照录）——《Traité d'économie politique》1803 首版题名页署 J.-B. Say；《Cours complet d'économie politique pratique》1828-29题名页署 J.-B. Say；《Catéchisme d'économie politique》题名页署 J.-B. Say；《Lettres à M. Malthus》1820 题名页署 J.-B. Say。同名孙 Léon Say（政治家）与子 Horace Say（银行家）由 creator 生卒年与内容剔除，不在本语料。",
+    "citation": "archive.org 目录检索 creator:\"Say, Jean Baptiste\" / creator:\"Say, Jean-Baptiste\"（numFound 各 98 条，三路合并去重 105 条，互异一手 ≥8 部）+ 各源 archive.org item 页（locator 见 source-ledger.jsonl）；出版记录见各源 locator。",
+    "disputed_policy": "36 份全部为 Say 本人一手著作/书信/随笔或生前整理的教程与生后编文集；英/德/西/意译本均为其本人著作的翻译载体，引用时以译本语言呈现、标注原作出处。《Bemerkungen über den zustand Grossbritanniens》1818 德文本因整篇花体 OCR 乱码且归属 Nebenius 评论集，已从语料移除。《Oeuvres diverses》(1848)、《Petit volume》(1839)、《Mélanges et correspondance》为生后编辑的文集，内容仍为 Say 本人文字。无学界公认伪托争议。 另，Traité 的 1818 德译（darstellungdern00morsgoog.txt）整篇花体 OCR 乱码不可作逐字引文，已从语料移除。",
+    "disputed_works": [],
+    "covered_sources": [
+      "10388811bsb.txt ｜ 署名照录：Johann Baptist Say's ausführliche Darstellung der Nationalökonomie oder der Staatswirthschaft. 1",
+      "A086B229.txt ｜ 署名照录：Tratado de economía política o Simple exposición del modo con que se forman, distribuyen y consumen las riquezas",
+      "b29287571.txt ｜ 署名照录：Lettres à M. Malthus, sur différens sujets d'economie politique, notamment sur les causes de la stagnation générale du commerce",
+      "bub_gb_-ywuSOEQ5d4C.txt ｜ 署名照录：Cours complet d'Économie politique pratique, suivi des Mélanges, Correspondance et Catéchisme d'Économie politique. Troisième édition. [Edited, with a life of the author, by C. Comte.]",
+      "bub_gb_LWhDAAAAcAAJ.txt ｜ 署名照录：Traité d'économie politique, ou Simple exposition de la manière dont se forment, se distribuent, et se consomment les richesses",
+      "bub_gb_N7JDAAAAcAAJ.txt ｜ 署名照录：Traité d'économie politique, ou, Simple exposition de la manière dont se forment, se distribuent, et se consomment les richesses",
+      "bub_gb_nGt2dzHrtIMC.txt ｜ 署名照录：Trattato d'economia politica",
+      "catchismedc00sayj.txt ｜ 署名照录：Catéchisme d'économie politique, ou, Instruction familière : qui montre de quelle façon les richesses sont produites, distribuées et consommées dans la société",
+      "catchismedco00sayj.txt ｜ 署名照录：Catéchisme d'économie politique; ou Instruction familière qui montre de quelle façon les richesses sont produites, distribuées et consommées dans la société. 4. éd. Revue et enrichie de nouveaux développemens",
+      "catechismofpolit00sayj.txt ｜ 署名照录：Catechism of political economy; or, Familiar conversations on the manner in which wealth is produced, distributed, and consumed in society",
+      "catecismodeecon00sayjguat.txt ｜ 署名照录：Catecismo de Economía Política, ó Instrucción Familiar Que muestra de que modo se producen, distribuyen y consumen las riquezas en la sociedad",
+      "courscompletdc00sayjuoft.txt ｜ 署名照录：Cours complet d'économie politique pratique, ouvrage destiné à mettre sous les yeux des hommes d'état, des propriétaires fonciers et des capitalistes, des savants, des agricultuers, des manufacturiers, des négociants, et en général de tous les citoyens, l'économie des sociétés;",
+      "courscompletdco00saygoog.txt ｜ 署名照录：Cours complet d'économie politique pratique : ouvrage destiné à mettre sous les yeux des hommes d'état ... et tous les citoyens, l'économie des sociétés",
+      "courscompletdco04saygoog.txt ｜ 署名照录：Cours complet d'économie politique pratique : ouvrage destiné à mettre sous les yeux des hommes d'état, des propriétaires fonciers et des capitalistes, des savants, des agriculteurs, des manufacturiers, des négociants et en général de tous les citoyens, l'économie des sociétés",
+      "india.history.resource.18485.txt ｜ 署名照录：Traite d’Economie Politique; ou, Simple Exposition de la Maniere dont se Forment se Distribuent et se Consomment les Richesse, 4th ed., Vol. II",
+      "india.history.resource.35409.txt ｜ 署名照录：Cours Complet D’Economie Politique Pratique: L’Economie Des Societes",
+      "india.history.resource.35412.txt ｜ 署名照录：Cours Complet D’Economie Politique Pratique: L’Economie Des Societes (Vol. VI)",
+      "ldpd_6416326_000.txt ｜ 署名照录：Oeuvres diverses de J.-B. Say contenant, Catechisme d'économie politique, fragments et opuscules inédits, correspondance générale, olbie, petit volume, mélanges de morale et de litterature : précédées d'une notice historique sur la vie et les travaux de l'auteur : avec des notes, par Ch. Comte, E. Daire et Horace Say",
+      "letterstomrmalth00sayjrich.txt ｜ 署名照录：Letters to Mr. Malthus on several subjects of political economy, and particularly on the cause of the general stagnation of commerce",
+      "micro_IA40244320_0069.txt ｜ 署名照录：Olbie : ou, Essai sur les moyens de réformer les moeurs d'une nation.",
+      "oeuvresdiverses00saygoog.txt ｜ 署名照录：Oeuvres divers : contenant: Catechisme d'économie politique, fragments et opuscules inédits, Correspondance générale, Olbie, petit volume, Mélanges de morale et de littérature. Précédées d'une notice historique sur la vie et les travaux de l'auteur",
+      "olbieouessaisurl00sayj.txt ｜ 署名照录：Olbie, ou, Essai sur les moyens de réformer les mœurs d'une nation",
+      "petitvolumeconte00sayj.txt ｜ 署名照录：Petit volume contenant quelques aperçus des hommes et de la société",
+      "traitdconomiepo03saygoog.txt ｜ 署名照录：Traité d'économie politique, ou simple exposition de la manière dont se forment, se distribuent et se consomment les richesses; 5. éd., augmentée d'un volume, et à laquelle se trouvent joints un épitome des principes fondamentaux de l'économie politique, et un index raisonné des matières;",
+      "traitedeconomie00saygoog.txt ｜ 署名照录：Traité d'économie politique",
+      "traitedeconomiep00sayj.txt ｜ 署名照录：Traité d'économie politique [microform], ou Simple exposition de la manière dont se forment, se distribuent et se consomment les richesses",
+      "tratadodeeconom01sayjguat.txt ｜ 署名照录：Tratado de Economía Política ó simple exposición del modo con que se forman, distribuyen y consumen las riquezas",
+      "treatiseonpoliti00sayj.txt ｜ 署名照录：A treatise on political economy; or The production, distribution, and consumption of wealth",
+      "treatiseonpoliti00sayjiala.txt ｜ 署名照录：A treatise on political economy, or, the production, distribution, and consumption of wealth",
+      "treatiseonpoliti01sayjuoft.txt ｜ 署名照录：A treatise on political economy; or, The production, distribution, and consumption of wealth;",
+      "treatiseonpoliti02sayjuoft.txt ｜ 署名照录：A treatise on political economy; or, The production, distribution, and consumption of wealth;",
+      "treatiseonpoliti03sayj.txt ｜ 署名照录：A treatise on political economy;",
+      "treatiseonpoliti04sayj.txt ｜ 署名照录：A treatise on political economy;",
+      "treatiseonpoliti05sayj.txt ｜ 署名照录：A treatise on political economy; or, The production, distribution, and consumption of wealth"
+    ],
+    "counting_convention": "语料已精简为每著作的代表版本（18 份，覆盖 Traité 法/英/西/意、Cours complet、Catéchisme、Lettres à Malthus、Olbie、Petit volume、Oeuvres diverses、Bemerkungen）。两对保留的重叠是同一著作的不同载体、各自成立：① catechismofpolit00sayj.txt 与 letterstomrmalth00sayjrich.txt（重叠 61.6%）——Catéchisme 英译《Catechism of political economy》1817 以对话体写成，与 1821 年《Letters to Mr. Malthus》英译在表述方式上有大量共享文本，但二者是 Say 的两部独立著作（入门教本 vs 论战书信），分属 writings 与conversations 两道，非同一证据的重印；② treatiseonpoliti00sayj.txt（1867 英译）与 treatiseonpoliti01sayjuoft.txt（1821 英译）（重叠 53.3%）——《Traité d'économie politique》的两个英译本版本，跨越 46 年、版次不同，作为同一著作的不同版本各自服务 writings 道，不虚增作品数。"
+  }
+}

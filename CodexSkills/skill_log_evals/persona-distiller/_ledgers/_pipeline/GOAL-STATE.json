@@ -1,11 +1,11 @@
 {
   "round": 19,
-  "updated_at": "2026-08-24T12:05Z",
+  "updated_at": "2026-08-25T01:10Z",
   "time_band": "valley-0000-0800",
-  "people": 131,
-  "current_person": "投资资本师族 #236 Benjamin Franklin 完成入库",
-  "stage": "Franklin #236 全流程完成（盲判 5 轮 → 六门全过 candidate 0.8641 / delta +0.6016；release 3 条 strict 警告已 acknowledge；package+register 入库）",
-  "next": "投资资本师族 #248 Jean-Baptiste Say（1803 Traité 多版 + 与 Malthus 通信，可能 3 道；若 lane 不足则延后①并试 #240 Charles Dow）",
+  "people": 134,
+  "current_person": "投资资本师族 #248 Jean-Baptiste Say 完成入库",
+  "stage": "Say #248 全流程完成（盲判 4 轮 → 六门全过 candidate 0.9172 / delta +0.5813；release 0 错 3 警已 acknowledge；package+register 入库）",
+  "next": "投资资本师族 下一位候选（#240 Charles Dow 或族内未做者）",
   "threads": {
     "T1": {
       "branch": "main",
@@ -27,8 +27,7 @@
     }
   },
   "p0_queue": [
-    "Eiffel(wip-eiffel-142)已做未出货，先查卡点",
-    "投资资本师族 #236 Benjamin Franklin 全流程"
+    "Eiffel(wip-eiffel-142)已做未出货，先查卡点"
   ],
   "p0_done": [
     "#225 John Law(127)",
@@ -37,10 +36,11 @@
     "#249 Mill(129)",
     "#250 Veblen 延后(203)",
     "#236 Benjamin Franklin(130/131)",
-    "#147 Andrea Palladio 补记(130)"
+    "#147 Andrea Palladio 补记(130)",
+    "#248 Say 全流程(134)"
   ],
   "p0_closed": [],
-  "note": "Franklin #236 完成：16 语料 train 13+holdout 3（Familiar Letters/Narrative of Massacres/Vie de Franklin）；research 门 0 错；盲判 5 轮（首轮 candidate 0.5375/13 critical → 批量修 13 题 → R2 修 fact/voice → R3 修 decoy/task → R4 六门全过但随后修 decoy 中文意引+divergence-map → R5 重建载荷重判六门全过，candidate 0.8641 / baseline 0.2625 / delta +0.6016，0 critical）；release 3 条 strict 警告（longs-corruption 6 份 / lane_quotes 17 条 / baseline-not-capability 64/64）已 acknowledge；注：真实 registry 计数含此前漏记的 Palladio #147，校准 people=131",
+  "note": "Say #248 完成：16 语料（train 12+holdout 4，法/英/西/意），research 门 0 错；盲判 4 轮（首轮 candidate 8 题 critical → 修 traj 转述身份/decoy 中文数字/tool 数量例/渐进保留 → 第三轮修 fact-02 on prend le moyen → 第四轮修 traj-02 完整锚点 → 六门全过，candidate 0.9172 / baseline 0.3359 / delta +0.5813）；release 0 错 3 警（lane_quotes 28/基线不可作能力证据/rubric 谈资料库）已 acknowledge；main 计数校准含 T3 合入的艺术族，people=134",
   "cost_baseline": {
     "flash": {
       "calls": 934,

@@ -1,0 +1,48 @@
+# say：探源 105 条去重 → 精选 40 条（一手为主，覆盖法/英/德/西/意与 writings/conversations/expression 道）
+# 丢：同名者（Léon/Horace Say 后代）；版次年>1930 的现代重印；目标不在 creator 的评论卷
+# --- Traité 法语原版（writings 核心） ---
+bub_gb_N7JDAAAAcAAJ
+bub_gb_LWhDAAAAcAAJ
+india.history.resource.18485
+traitdconomiepo03saygoog
+traitedeconomiep00sayj
+traitedeconomie00saygoog
+# --- Traité 英译（writings 多版） ---
+treatiseonpoliti01sayjuoft
+treatiseonpoliti02sayjuoft
+treatiseonpoliti03sayj
+treatiseonpoliti05sayj
+treatiseonpoliti04sayj
+treatiseonpoliti00sayjiala
+treatiseonpoliti00sayj
+# --- Traité 德译 ---
+darstellungdern00morsgoog
+10388811bsb
+# --- Traité 西译/意译 ---
+tratadodeeconom01sayjguat
+A086B229
+bub_gb_nGt2dzHrtIMC
+# --- Cours complet（writings + 教学） ---
+india.history.resource.35409
+india.history.resource.35412
+courscompletdco00saygoog
+courscompletdc00sayjuoft
+courscompletdco04saygoog
+# --- Catéchisme（writings + 入门） ---
+catechismofpolit00sayj
+catchismedco00sayj
+catchismedc00sayj
+catecismodeecon00sayjguat
+# --- 书信（conversations） ---
+letterstomrmalth0000sayj
+letterstomrmalth00sayjrich
+b29287571
+# --- 杂文/随笔/生后编（expression） ---
+olbieouessaisurl00sayj
+micro_IA40244320_0069
+petitvolumeconte00sayj
+oeuvresdiverses00saygoog
+ldpd_6416326_000
+# --- 德译 Cours/其他 ---
+bub_gb_-ywuSOEQ5d4C
+bub_gb_O5pWHnpsheIC

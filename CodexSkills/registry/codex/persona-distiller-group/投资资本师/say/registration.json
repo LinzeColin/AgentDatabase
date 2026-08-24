@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:jeanbaptistesay",
+  "canonical_name": "Jean-Baptiste Say",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "say",
+  "subject_uid": "person-67f1205af8c3e5ce",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/say-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-24T03:12:50Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "3aceee99b5556c9ef512295b1ed3b64510a5b96f000da30a64de93f6eaea915a",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/say-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "ef0a02388573e5403c5d8bbb632cdea34e4b942f0c306ede9905e6dfa89a47ef",
+      "runtime_size_bytes": 102904,
+      "size_bytes": 111832
+    }
+  ]
+}

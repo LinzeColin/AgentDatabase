@@ -1,1807 +1,1807 @@
 {
- "slice": "T1",
- "range": "1-300",
- "note": "待办清单切片；status: REG已入库/DEF延后/TODO待蒸",
- "people": [
-  {
-   "no": 1,
-   "name": "Nikolai Slavyanov",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 2,
-   "name": "Nikolai Benardos",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 3,
-   "name": "Elihu Thomson",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 4,
-   "name": "C. L. Coffin",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 5,
-   "name": "Comfort Avery Adams",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 6,
-   "name": "Henry Bessemer",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 7,
-   "name": "Henry Clifton Sorby",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 8,
-   "name": "Adolf Martens",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 9,
-   "name": "William Chandler Roberts-Austen",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 10,
-   "name": "Edgar Bain",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 11,
-   "name": "Robert Franklin Mehl",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 12,
-   "name": "Walter Rosenhain",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 13,
-   "name": "Pol Duwez",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 14,
-   "name": "Morris Cohen",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 15,
-   "name": "William D. Callister",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 16,
-   "name": "Gustave Eiffel",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 17,
-   "name": "Fazlur Rahman Khan",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 18,
-   "name": "Ove Arup",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 19,
-   "name": "Hardy Cross",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 20,
-   "name": "Eduardo Torroja",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 21,
-   "name": "Pier Luigi Nervi",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 22,
-   "name": "Anton Tedesko",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 23,
-   "name": "Stephen Timoshenko",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 24,
-   "name": "Henry Maudslay",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 25,
-   "name": "Joseph Whitworth",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 26,
-   "name": "James Nasmyth",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 27,
-   "name": "William Sellers",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 28,
-   "name": "Waloddi Weibull",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 29,
-   "name": "John Moubray",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 30,
-   "name": "Stanley Nowlan",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 31,
-   "name": "James Watt",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 32,
-   "name": "Richard Trevithick",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 33,
-   "name": "George Stephenson",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 34,
-   "name": "Isambard Kingdom Brunel",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 35,
-   "name": "John A. Roebling",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 36,
-   "name": "John Smeaton",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 37,
-   "name": "Thomas Telford",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 38,
-   "name": "Frederick Winslow Taylor",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 39,
-   "name": "Frank Bunker Gilbreth",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 40,
-   "name": "Alan Arnold Griffith",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 41,
-   "name": "Cyril Stanley Smith",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 42,
-   "name": "Robert Hadfield",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 43,
-   "name": "William D. Coolidge",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 44,
-   "name": "August Wöhler",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 45,
-   "name": "Thomas Young",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 46,
-   "name": "Claude-Louis Navier",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 47,
-   "name": "Adhémar Barré de Saint-Venant",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 48,
-   "name": "Henry Tresca",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 49,
-   "name": "William J. M. Rankine",
-   "family": "材料建工师",
-   "status": "REG"
-  },
-  {
-   "no": 50,
-   "name": "Carl von Bach",
-   "family": "材料建工师",
-   "status": "DEF"
-  },
-  {
-   "no": 51,
-   "name": "Dennis Ritchie",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 52,
-   "name": "Ken Thompson",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 53,
-   "name": "Linus Torvalds",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 54,
-   "name": "Donald Knuth",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 55,
-   "name": "Grace Hopper",
-   "family": "软件开发师",
-   "status": "DEF"
-  },
-  {
-   "no": 56,
-   "name": "Alan Kay",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 57,
-   "name": "Guido van Rossum",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 58,
-   "name": "Bjarne Stroustrup",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 59,
-   "name": "Anders Hejlsberg",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 60,
-   "name": "John Carmack",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 61,
-   "name": "Tim Berners-Lee",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 62,
-   "name": "Vint Cerf",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 63,
-   "name": "Barbara Liskov",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 64,
-   "name": "Leslie Lamport",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 65,
-   "name": "Edsger Dijkstra",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 66,
-   "name": "Tony Hoare",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 67,
-   "name": "John McCarthy",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 68,
-   "name": "Rob Pike",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 69,
-   "name": "Margaret Hamilton",
-   "family": "软件开发师",
-   "status": "DEF"
-  },
-  {
-   "no": 70,
-   "name": "Douglas Engelbart",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 71,
-   "name": "Ada Lovelace",
-   "family": "软件开发师",
-   "status": "DEF"
-  },
-  {
-   "no": 72,
-   "name": "Charles Babbage",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 73,
-   "name": "Alan Turing",
-   "family": "软件开发师",
-   "status": "DEF"
-  },
-  {
-   "no": 74,
-   "name": "Claude Shannon",
-   "family": "软件开发师",
-   "status": "DEF"
-  },
-  {
-   "no": 75,
-   "name": "John von Neumann",
-   "family": "软件开发师",
-   "status": "DEF"
-  },
-  {
-   "no": 76,
-   "name": "Kurt Gödel",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 77,
-   "name": "Alonzo Church",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 78,
-   "name": "Haskell Curry",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 79,
-   "name": "Niklaus Wirth",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 80,
-   "name": "Kristen Nygaard",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 81,
-   "name": "Ole-Johan Dahl",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 82,
-   "name": "J. C. R. Licklider",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 83,
-   "name": "Ivan Sutherland",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 84,
-   "name": "Ted Nelson",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 85,
-   "name": "Richard Stallman",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 86,
-   "name": "Andrew Tanenbaum",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 87,
-   "name": "Gerald Weinberg",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 88,
-   "name": "Fred Brooks",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 89,
-   "name": "Kent Beck",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 90,
-   "name": "Martin Fowler",
-   "family": "软件开发师",
-   "status": "REG"
-  },
-  {
-   "no": 91,
-   "name": "Ward Cunningham",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 92,
-   "name": "John Backus",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 93,
-   "name": "Frances Allen",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 94,
-   "name": "Butler Lampson",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 95,
-   "name": "Alan Perlis",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 96,
-   "name": "Marvin Minsky",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 97,
-   "name": "Douglas Hofstadter",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 98,
-   "name": "Brian Kernighan",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 99,
-   "name": "Kenneth Iverson",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 100,
-   "name": "Peter Naur",
-   "family": "软件开发师",
-   "status": "TODO"
-  },
-  {
-   "no": 101,
-   "name": "Leonardo da Vinci",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 102,
-   "name": "Michelangelo Buonarroti",
-   "family": "艺术设计师",
-   "status": "REG"
-  },
-  {
-   "no": 103,
-   "name": "Pablo Picasso",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 104,
-   "name": "Dieter Rams",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 105,
-   "name": "Paul Rand",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 106,
-   "name": "Milton Glaser",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 107,
-   "name": "Massimo Vignelli",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 108,
-   "name": "Saul Bass",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 109,
-   "name": "Josef Albers",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 110,
-   "name": "Walter Gropius",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 111,
-   "name": "Le Corbusier",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 112,
-   "name": "Frank Lloyd Wright",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 113,
-   "name": "Charles Eames",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 114,
-   "name": "Raymond Loewy",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 115,
-   "name": "Henry Dreyfuss",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 116,
-   "name": "Buckminster Fuller",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 117,
-   "name": "Zaha Hadid",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 118,
-   "name": "Tadao Ando",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 119,
-   "name": "Kenya Hara",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 120,
-   "name": "Coco Chanel",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 121,
-   "name": "Rembrandt",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 122,
-   "name": "Johannes Vermeer",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 123,
-   "name": "Francisco Goya",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 124,
-   "name": "Auguste Rodin",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 125,
-   "name": "Vincent van Gogh",
-   "family": "艺术设计师",
-   "status": "REG"
-  },
-  {
-   "no": 126,
-   "name": "Paul Cézanne",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 127,
-   "name": "Claude Monet",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 128,
-   "name": "Edvard Munch",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 129,
-   "name": "Gustav Klimt",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 130,
-   "name": "Henri Matisse",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 131,
-   "name": "Marcel Duchamp",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 132,
-   "name": "Wassily Kandinsky",
-   "family": "艺术设计师",
-   "status": "REG"
-  },
-  {
-   "no": 133,
-   "name": "Piet Mondrian",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 134,
-   "name": "Paul Klee",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 135,
-   "name": "Man Ray",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 136,
-   "name": "Salvador Dalí",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 137,
-   "name": "René Magritte",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 138,
-   "name": "Georgia O'Keeffe",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 139,
-   "name": "Jackson Pollock",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 140,
-   "name": "Andy Warhol",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 141,
-   "name": "Barbara Hepworth",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 142,
-   "name": "Isamu Noguchi",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 143,
-   "name": "Filippo Brunelleschi",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 144,
-   "name": "Gian Lorenzo Bernini",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 145,
-   "name": "Christopher Wren",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 146,
-   "name": "Leon Battista Alberti",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 147,
-   "name": "Andrea Palladio",
-   "family": "艺术设计师",
-   "status": "REG"
-  },
-  {
-   "no": 148,
-   "name": "Louis Sullivan",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 149,
-   "name": "Ludwig Mies van der Rohe",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 150,
-   "name": "Alvar Aalto",
-   "family": "艺术设计师",
-   "status": "DEF"
-  },
-  {
-   "no": 151,
-   "name": "Henry Ford",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 152,
-   "name": "Alfred Sloan",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 153,
-   "name": "Konosuke Matsushita",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 154,
-   "name": "Akio Morita",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 155,
-   "name": "Soichiro Honda",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 156,
-   "name": "Ray Kroc",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 157,
-   "name": "Ingvar Kamprad",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 158,
-   "name": "Jack Welch",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 159,
-   "name": "Herb Kelleher",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 160,
-   "name": "Jeff Bezos",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 161,
-   "name": "Steve Jobs",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 162,
-   "name": "Peter Drucker",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 163,
-   "name": "Jim Collins",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 164,
-   "name": "Satya Nadella",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 165,
-   "name": "Mary Barra",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 166,
-   "name": "Indra Nooyi",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 167,
-   "name": "Jamie Dimon",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 168,
-   "name": "Richard Branson",
-   "family": "创业经营师",
-   "status": "DEF"
-  },
-  {
-   "no": 169,
-   "name": "Sam Walton",
-   "family": "创业经营师",
-   "status": "REG"
-  },
-  {
-   "no": 170,
-   "name": "Tim Cook",
-   "family": "创业经营师",
-   "status": "REG"
-  },
-  {
-   "no": 171,
-   "name": "David Packard",
-   "family": "创业经营师",
-   "status": "REG"
-  },
-  {
-   "no": 172,
-   "name": "Reed Hastings",
-   "family": "创业经营师",
-   "status": "REG"
-  },
-  {
-   "no": 173,
-   "name": "Lou Gerstner",
-   "family": "创业经营师",
-   "status": "REG"
-  },
-  {
-   "no": 174,
-   "name": "Ben Horowitz",
-   "family": "创业经营师",
-   "status": "REG"
-  },
-  {
-   "no": 175,
-   "name": "Anne Mulcahy",
-   "family": "创业经营师",
-   "status": "REG"
-  },
-  {
-   "no": 176,
-   "name": "Andrew Carnegie",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 177,
-   "name": "John D. Rockefeller",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 178,
-   "name": "J. P. Morgan",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 179,
-   "name": "Cornelius Vanderbilt",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 180,
-   "name": "Thomas Edison",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 181,
-   "name": "Henry Heinz",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 182,
-   "name": "Milton Hershey",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 183,
-   "name": "W. K. Kellogg",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 184,
-   "name": "C. W. Post",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 185,
-   "name": "Frank Woolworth",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 186,
-   "name": "J. C. Penney",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 187,
-   "name": "Richard Sears",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 188,
-   "name": "George Eastman",
-   "family": "创业经营师",
-   "status": "REG"
-  },
-  {
-   "no": 189,
-   "name": "Charles Schwab",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 190,
-   "name": "Charles Merrill",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 191,
-   "name": "A. P. Giannini",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 192,
-   "name": "Marshall Field",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 193,
-   "name": "John Wanamaker",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 194,
-   "name": "Lee Iacocca",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 195,
-   "name": "Thomas Watson Sr.",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 196,
-   "name": "Masaru Ibuka",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 197,
-   "name": "Kiichiro Toyoda",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 198,
-   "name": "Sakichi Toyoda",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 199,
-   "name": "George Westinghouse",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 200,
-   "name": "William Boeing",
-   "family": "创业经营师",
-   "status": "TODO"
-  },
-  {
-   "no": 201,
-   "name": "Warren Buffett",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 202,
-   "name": "Charlie Munger",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 203,
-   "name": "Benjamin Graham",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 204,
-   "name": "Philip Fisher",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 205,
-   "name": "Peter Lynch",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 206,
-   "name": "John Bogle",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 207,
-   "name": "Ray Dalio",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 208,
-   "name": "George Soros",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 209,
-   "name": "Jim Simons",
-   "family": "投资资本师",
-   "status": "DEF"
-  },
-  {
-   "no": 210,
-   "name": "David Swensen",
-   "family": "投资资本师",
-   "status": "DEF"
-  },
-  {
-   "no": 211,
-   "name": "Howard Marks",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 212,
-   "name": "Seth Klarman",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 213,
-   "name": "Joel Greenblatt",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 214,
-   "name": "Stanley Druckenmiller",
-   "family": "投资资本师",
-   "status": "DEF"
-  },
-  {
-   "no": 215,
-   "name": "Carl Icahn",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 216,
-   "name": "John Templeton",
-   "family": "投资资本师",
-   "status": "DEF"
-  },
-  {
-   "no": 217,
-   "name": "Julian Robertson",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 218,
-   "name": "Michael Steinhardt",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 219,
-   "name": "Jesse Livermore",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 220,
-   "name": "Edward O. Thorp",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 221,
-   "name": "Aswath Damodaran",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 222,
-   "name": "Jacob Fugger",
-   "family": "投资资本师",
-   "status": "DEF"
-  },
-  {
-   "no": 223,
-   "name": "Mayer Amschel Rothschild",
-   "family": "投资资本师",
-   "status": "DEF"
-  },
-  {
-   "no": 224,
-   "name": "Nathan Rothschild",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 225,
-   "name": "John Law",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 226,
-   "name": "Bernard Baruch",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 227,
-   "name": "Hetty Green",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 228,
-   "name": "Daniel Drew",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 229,
-   "name": "Jay Gould",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 230,
-   "name": "Russell Sage",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 231,
-   "name": "James Keene",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 232,
-   "name": "Gerald Loeb",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 233,
-   "name": "John Burr Williams",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 234,
-   "name": "Roger Babson",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 235,
-   "name": "Joseph P. Kennedy",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 236,
-   "name": "Benjamin Franklin",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 237,
-   "name": "David Ricardo",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 238,
-   "name": "John Maynard Keynes",
-   "family": "投资资本师",
-   "status": "DEF"
-  },
-  {
-   "no": 239,
-   "name": "Irving Fisher",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 240,
-   "name": "Charles Dow",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 241,
-   "name": "Edward D. Jones",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 242,
-   "name": "Richard Wyckoff",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 243,
-   "name": "William Gann",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 244,
-   "name": "Nicolas Darvas",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 245,
-   "name": "Philip Carret",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 246,
-   "name": "T. Rowe Price",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 247,
-   "name": "Shelby Davis",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 248,
-   "name": "Jean-Baptiste Say",
-   "family": "投资资本师",
-   "status": "TODO"
-  },
-  {
-   "no": 249,
-   "name": "John Stuart Mill",
-   "family": "投资资本师",
-   "status": "REG"
-  },
-  {
-   "no": 250,
-   "name": "Thorstein Veblen",
-   "family": "投资资本师",
-   "status": "DEF"
-  },
-  {
-   "no": 251,
-   "name": "Confucius",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 252,
-   "name": "Socrates",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 253,
-   "name": "Plato",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 254,
-   "name": "Aristotle",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 255,
-   "name": "Immanuel Kant",
-   "family": "思想教育师",
-   "status": "REG"
-  },
-  {
-   "no": 256,
-   "name": "Jean-Jacques Rousseau",
-   "family": "思想教育师",
-   "status": "REG"
-  },
-  {
-   "no": 257,
-   "name": "Johann Pestalozzi",
-   "family": "思想教育师",
-   "status": "REG"
-  },
-  {
-   "no": 258,
-   "name": "Friedrich Frobel",
-   "family": "思想教育师",
-   "status": "REG"
-  },
-  {
-   "no": 259,
-   "name": "John Amos Comenius",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 260,
-   "name": "John Dewey",
-   "family": "思想教育师",
-   "status": "REG"
-  },
-  {
-   "no": 261,
-   "name": "Maria Montessori",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 262,
-   "name": "Lev Vygotsky",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 263,
-   "name": "Jean Piaget",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 264,
-   "name": "Paulo Freire",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 265,
-   "name": "Benjamin Bloom",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 266,
-   "name": "Howard Gardner",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 267,
-   "name": "Seymour Papert",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 268,
-   "name": "John Hattie",
-   "family": "思想教育师",
-   "status": "DEF"
-  },
-  {
-   "no": 269,
-   "name": "Thomas Saaty",
-   "family": "思想教育师",
-   "status": "REG"
-  },
-  {
-   "no": 270,
-   "name": "Laozi",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 271,
-   "name": "Zhuangzi",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 272,
-   "name": "Mencius",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 273,
-   "name": "Xunzi",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 274,
-   "name": "Mozi",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 275,
-   "name": "Sun Tzu",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 276,
-   "name": "Wang Yangming",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 277,
-   "name": "Zhu Xi",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 278,
-   "name": "Seneca",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 279,
-   "name": "Epictetus",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 280,
-   "name": "Marcus Aurelius",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 281,
-   "name": "Augustine",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 282,
-   "name": "Thomas Aquinas",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 283,
-   "name": "René Descartes",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 284,
-   "name": "John Locke",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 285,
-   "name": "Baruch Spinoza",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 286,
-   "name": "Gottfried Leibniz",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 287,
-   "name": "Voltaire",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 288,
-   "name": "David Hume",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 289,
-   "name": "Johann Herbart",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 290,
-   "name": "G. W. F. Hegel",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 291,
-   "name": "Arthur Schopenhauer",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 292,
-   "name": "Søren Kierkegaard",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 293,
-   "name": "Friedrich Nietzsche",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 294,
-   "name": "William James",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 295,
-   "name": "Edward Thorndike",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 296,
-   "name": "B. F. Skinner",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 297,
-   "name": "Jerome Bruner",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 298,
-   "name": "Albert Bandura",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 299,
-   "name": "Carl Rogers",
-   "family": "思想教育师",
-   "status": "TODO"
-  },
-  {
-   "no": 300,
-   "name": "Abraham Maslow",
-   "family": "思想教育师",
-   "status": "TODO"
-  }
- ]
+  "slice": "T1",
+  "range": "1-300",
+  "note": "待办清单切片；status: REG已入库/DEF延后/TODO待蒸",
+  "people": [
+    {
+      "no": 1,
+      "name": "Nikolai Slavyanov",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 2,
+      "name": "Nikolai Benardos",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 3,
+      "name": "Elihu Thomson",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 4,
+      "name": "C. L. Coffin",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 5,
+      "name": "Comfort Avery Adams",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 6,
+      "name": "Henry Bessemer",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 7,
+      "name": "Henry Clifton Sorby",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 8,
+      "name": "Adolf Martens",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 9,
+      "name": "William Chandler Roberts-Austen",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 10,
+      "name": "Edgar Bain",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 11,
+      "name": "Robert Franklin Mehl",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 12,
+      "name": "Walter Rosenhain",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 13,
+      "name": "Pol Duwez",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 14,
+      "name": "Morris Cohen",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 15,
+      "name": "William D. Callister",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 16,
+      "name": "Gustave Eiffel",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 17,
+      "name": "Fazlur Rahman Khan",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 18,
+      "name": "Ove Arup",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 19,
+      "name": "Hardy Cross",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 20,
+      "name": "Eduardo Torroja",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 21,
+      "name": "Pier Luigi Nervi",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 22,
+      "name": "Anton Tedesko",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 23,
+      "name": "Stephen Timoshenko",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 24,
+      "name": "Henry Maudslay",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 25,
+      "name": "Joseph Whitworth",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 26,
+      "name": "James Nasmyth",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 27,
+      "name": "William Sellers",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 28,
+      "name": "Waloddi Weibull",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 29,
+      "name": "John Moubray",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 30,
+      "name": "Stanley Nowlan",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 31,
+      "name": "James Watt",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 32,
+      "name": "Richard Trevithick",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 33,
+      "name": "George Stephenson",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 34,
+      "name": "Isambard Kingdom Brunel",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 35,
+      "name": "John A. Roebling",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 36,
+      "name": "John Smeaton",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 37,
+      "name": "Thomas Telford",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 38,
+      "name": "Frederick Winslow Taylor",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 39,
+      "name": "Frank Bunker Gilbreth",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 40,
+      "name": "Alan Arnold Griffith",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 41,
+      "name": "Cyril Stanley Smith",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 42,
+      "name": "Robert Hadfield",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 43,
+      "name": "William D. Coolidge",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 44,
+      "name": "August Wöhler",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 45,
+      "name": "Thomas Young",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 46,
+      "name": "Claude-Louis Navier",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 47,
+      "name": "Adhémar Barré de Saint-Venant",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 48,
+      "name": "Henry Tresca",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 49,
+      "name": "William J. M. Rankine",
+      "family": "材料建工师",
+      "status": "REG"
+    },
+    {
+      "no": 50,
+      "name": "Carl von Bach",
+      "family": "材料建工师",
+      "status": "DEF"
+    },
+    {
+      "no": 51,
+      "name": "Dennis Ritchie",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 52,
+      "name": "Ken Thompson",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 53,
+      "name": "Linus Torvalds",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 54,
+      "name": "Donald Knuth",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 55,
+      "name": "Grace Hopper",
+      "family": "软件开发师",
+      "status": "DEF"
+    },
+    {
+      "no": 56,
+      "name": "Alan Kay",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 57,
+      "name": "Guido van Rossum",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 58,
+      "name": "Bjarne Stroustrup",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 59,
+      "name": "Anders Hejlsberg",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 60,
+      "name": "John Carmack",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 61,
+      "name": "Tim Berners-Lee",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 62,
+      "name": "Vint Cerf",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 63,
+      "name": "Barbara Liskov",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 64,
+      "name": "Leslie Lamport",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 65,
+      "name": "Edsger Dijkstra",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 66,
+      "name": "Tony Hoare",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 67,
+      "name": "John McCarthy",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 68,
+      "name": "Rob Pike",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 69,
+      "name": "Margaret Hamilton",
+      "family": "软件开发师",
+      "status": "DEF"
+    },
+    {
+      "no": 70,
+      "name": "Douglas Engelbart",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 71,
+      "name": "Ada Lovelace",
+      "family": "软件开发师",
+      "status": "DEF"
+    },
+    {
+      "no": 72,
+      "name": "Charles Babbage",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 73,
+      "name": "Alan Turing",
+      "family": "软件开发师",
+      "status": "DEF"
+    },
+    {
+      "no": 74,
+      "name": "Claude Shannon",
+      "family": "软件开发师",
+      "status": "DEF"
+    },
+    {
+      "no": 75,
+      "name": "John von Neumann",
+      "family": "软件开发师",
+      "status": "DEF"
+    },
+    {
+      "no": 76,
+      "name": "Kurt Gödel",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 77,
+      "name": "Alonzo Church",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 78,
+      "name": "Haskell Curry",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 79,
+      "name": "Niklaus Wirth",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 80,
+      "name": "Kristen Nygaard",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 81,
+      "name": "Ole-Johan Dahl",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 82,
+      "name": "J. C. R. Licklider",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 83,
+      "name": "Ivan Sutherland",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 84,
+      "name": "Ted Nelson",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 85,
+      "name": "Richard Stallman",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 86,
+      "name": "Andrew Tanenbaum",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 87,
+      "name": "Gerald Weinberg",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 88,
+      "name": "Fred Brooks",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 89,
+      "name": "Kent Beck",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 90,
+      "name": "Martin Fowler",
+      "family": "软件开发师",
+      "status": "REG"
+    },
+    {
+      "no": 91,
+      "name": "Ward Cunningham",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 92,
+      "name": "John Backus",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 93,
+      "name": "Frances Allen",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 94,
+      "name": "Butler Lampson",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 95,
+      "name": "Alan Perlis",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 96,
+      "name": "Marvin Minsky",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 97,
+      "name": "Douglas Hofstadter",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 98,
+      "name": "Brian Kernighan",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 99,
+      "name": "Kenneth Iverson",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 100,
+      "name": "Peter Naur",
+      "family": "软件开发师",
+      "status": "TODO"
+    },
+    {
+      "no": 101,
+      "name": "Leonardo da Vinci",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 102,
+      "name": "Michelangelo Buonarroti",
+      "family": "艺术设计师",
+      "status": "REG"
+    },
+    {
+      "no": 103,
+      "name": "Pablo Picasso",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 104,
+      "name": "Dieter Rams",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 105,
+      "name": "Paul Rand",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 106,
+      "name": "Milton Glaser",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 107,
+      "name": "Massimo Vignelli",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 108,
+      "name": "Saul Bass",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 109,
+      "name": "Josef Albers",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 110,
+      "name": "Walter Gropius",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 111,
+      "name": "Le Corbusier",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 112,
+      "name": "Frank Lloyd Wright",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 113,
+      "name": "Charles Eames",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 114,
+      "name": "Raymond Loewy",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 115,
+      "name": "Henry Dreyfuss",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 116,
+      "name": "Buckminster Fuller",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 117,
+      "name": "Zaha Hadid",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 118,
+      "name": "Tadao Ando",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 119,
+      "name": "Kenya Hara",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 120,
+      "name": "Coco Chanel",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 121,
+      "name": "Rembrandt",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 122,
+      "name": "Johannes Vermeer",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 123,
+      "name": "Francisco Goya",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 124,
+      "name": "Auguste Rodin",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 125,
+      "name": "Vincent van Gogh",
+      "family": "艺术设计师",
+      "status": "REG"
+    },
+    {
+      "no": 126,
+      "name": "Paul Cézanne",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 127,
+      "name": "Claude Monet",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 128,
+      "name": "Edvard Munch",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 129,
+      "name": "Gustav Klimt",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 130,
+      "name": "Henri Matisse",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 131,
+      "name": "Marcel Duchamp",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 132,
+      "name": "Wassily Kandinsky",
+      "family": "艺术设计师",
+      "status": "REG"
+    },
+    {
+      "no": 133,
+      "name": "Piet Mondrian",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 134,
+      "name": "Paul Klee",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 135,
+      "name": "Man Ray",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 136,
+      "name": "Salvador Dalí",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 137,
+      "name": "René Magritte",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 138,
+      "name": "Georgia O'Keeffe",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 139,
+      "name": "Jackson Pollock",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 140,
+      "name": "Andy Warhol",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 141,
+      "name": "Barbara Hepworth",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 142,
+      "name": "Isamu Noguchi",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 143,
+      "name": "Filippo Brunelleschi",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 144,
+      "name": "Gian Lorenzo Bernini",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 145,
+      "name": "Christopher Wren",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 146,
+      "name": "Leon Battista Alberti",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 147,
+      "name": "Andrea Palladio",
+      "family": "艺术设计师",
+      "status": "REG"
+    },
+    {
+      "no": 148,
+      "name": "Louis Sullivan",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 149,
+      "name": "Ludwig Mies van der Rohe",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 150,
+      "name": "Alvar Aalto",
+      "family": "艺术设计师",
+      "status": "DEF"
+    },
+    {
+      "no": 151,
+      "name": "Henry Ford",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 152,
+      "name": "Alfred Sloan",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 153,
+      "name": "Konosuke Matsushita",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 154,
+      "name": "Akio Morita",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 155,
+      "name": "Soichiro Honda",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 156,
+      "name": "Ray Kroc",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 157,
+      "name": "Ingvar Kamprad",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 158,
+      "name": "Jack Welch",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 159,
+      "name": "Herb Kelleher",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 160,
+      "name": "Jeff Bezos",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 161,
+      "name": "Steve Jobs",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 162,
+      "name": "Peter Drucker",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 163,
+      "name": "Jim Collins",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 164,
+      "name": "Satya Nadella",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 165,
+      "name": "Mary Barra",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 166,
+      "name": "Indra Nooyi",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 167,
+      "name": "Jamie Dimon",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 168,
+      "name": "Richard Branson",
+      "family": "创业经营师",
+      "status": "DEF"
+    },
+    {
+      "no": 169,
+      "name": "Sam Walton",
+      "family": "创业经营师",
+      "status": "REG"
+    },
+    {
+      "no": 170,
+      "name": "Tim Cook",
+      "family": "创业经营师",
+      "status": "REG"
+    },
+    {
+      "no": 171,
+      "name": "David Packard",
+      "family": "创业经营师",
+      "status": "REG"
+    },
+    {
+      "no": 172,
+      "name": "Reed Hastings",
+      "family": "创业经营师",
+      "status": "REG"
+    },
+    {
+      "no": 173,
+      "name": "Lou Gerstner",
+      "family": "创业经营师",
+      "status": "REG"
+    },
+    {
+      "no": 174,
+      "name": "Ben Horowitz",
+      "family": "创业经营师",
+      "status": "REG"
+    },
+    {
+      "no": 175,
+      "name": "Anne Mulcahy",
+      "family": "创业经营师",
+      "status": "REG"
+    },
+    {
+      "no": 176,
+      "name": "Andrew Carnegie",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 177,
+      "name": "John D. Rockefeller",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 178,
+      "name": "J. P. Morgan",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 179,
+      "name": "Cornelius Vanderbilt",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 180,
+      "name": "Thomas Edison",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 181,
+      "name": "Henry Heinz",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 182,
+      "name": "Milton Hershey",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 183,
+      "name": "W. K. Kellogg",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 184,
+      "name": "C. W. Post",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 185,
+      "name": "Frank Woolworth",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 186,
+      "name": "J. C. Penney",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 187,
+      "name": "Richard Sears",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 188,
+      "name": "George Eastman",
+      "family": "创业经营师",
+      "status": "REG"
+    },
+    {
+      "no": 189,
+      "name": "Charles Schwab",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 190,
+      "name": "Charles Merrill",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 191,
+      "name": "A. P. Giannini",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 192,
+      "name": "Marshall Field",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 193,
+      "name": "John Wanamaker",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 194,
+      "name": "Lee Iacocca",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 195,
+      "name": "Thomas Watson Sr.",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 196,
+      "name": "Masaru Ibuka",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 197,
+      "name": "Kiichiro Toyoda",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 198,
+      "name": "Sakichi Toyoda",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 199,
+      "name": "George Westinghouse",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 200,
+      "name": "William Boeing",
+      "family": "创业经营师",
+      "status": "TODO"
+    },
+    {
+      "no": 201,
+      "name": "Warren Buffett",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 202,
+      "name": "Charlie Munger",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 203,
+      "name": "Benjamin Graham",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 204,
+      "name": "Philip Fisher",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 205,
+      "name": "Peter Lynch",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 206,
+      "name": "John Bogle",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 207,
+      "name": "Ray Dalio",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 208,
+      "name": "George Soros",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 209,
+      "name": "Jim Simons",
+      "family": "投资资本师",
+      "status": "DEF"
+    },
+    {
+      "no": 210,
+      "name": "David Swensen",
+      "family": "投资资本师",
+      "status": "DEF"
+    },
+    {
+      "no": 211,
+      "name": "Howard Marks",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 212,
+      "name": "Seth Klarman",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 213,
+      "name": "Joel Greenblatt",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 214,
+      "name": "Stanley Druckenmiller",
+      "family": "投资资本师",
+      "status": "DEF"
+    },
+    {
+      "no": 215,
+      "name": "Carl Icahn",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 216,
+      "name": "John Templeton",
+      "family": "投资资本师",
+      "status": "DEF"
+    },
+    {
+      "no": 217,
+      "name": "Julian Robertson",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 218,
+      "name": "Michael Steinhardt",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 219,
+      "name": "Jesse Livermore",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 220,
+      "name": "Edward O. Thorp",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 221,
+      "name": "Aswath Damodaran",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 222,
+      "name": "Jacob Fugger",
+      "family": "投资资本师",
+      "status": "DEF"
+    },
+    {
+      "no": 223,
+      "name": "Mayer Amschel Rothschild",
+      "family": "投资资本师",
+      "status": "DEF"
+    },
+    {
+      "no": 224,
+      "name": "Nathan Rothschild",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 225,
+      "name": "John Law",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 226,
+      "name": "Bernard Baruch",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 227,
+      "name": "Hetty Green",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 228,
+      "name": "Daniel Drew",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 229,
+      "name": "Jay Gould",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 230,
+      "name": "Russell Sage",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 231,
+      "name": "James Keene",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 232,
+      "name": "Gerald Loeb",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 233,
+      "name": "John Burr Williams",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 234,
+      "name": "Roger Babson",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 235,
+      "name": "Joseph P. Kennedy",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 236,
+      "name": "Benjamin Franklin",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 237,
+      "name": "David Ricardo",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 238,
+      "name": "John Maynard Keynes",
+      "family": "投资资本师",
+      "status": "DEF"
+    },
+    {
+      "no": 239,
+      "name": "Irving Fisher",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 240,
+      "name": "Charles Dow",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 241,
+      "name": "Edward D. Jones",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 242,
+      "name": "Richard Wyckoff",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 243,
+      "name": "William Gann",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 244,
+      "name": "Nicolas Darvas",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 245,
+      "name": "Philip Carret",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 246,
+      "name": "T. Rowe Price",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 247,
+      "name": "Shelby Davis",
+      "family": "投资资本师",
+      "status": "TODO"
+    },
+    {
+      "no": 248,
+      "name": "Jean-Baptiste Say",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 249,
+      "name": "John Stuart Mill",
+      "family": "投资资本师",
+      "status": "REG"
+    },
+    {
+      "no": 250,
+      "name": "Thorstein Veblen",
+      "family": "投资资本师",
+      "status": "DEF"
+    },
+    {
+      "no": 251,
+      "name": "Confucius",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 252,
+      "name": "Socrates",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 253,
+      "name": "Plato",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 254,
+      "name": "Aristotle",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 255,
+      "name": "Immanuel Kant",
+      "family": "思想教育师",
+      "status": "REG"
+    },
+    {
+      "no": 256,
+      "name": "Jean-Jacques Rousseau",
+      "family": "思想教育师",
+      "status": "REG"
+    },
+    {
+      "no": 257,
+      "name": "Johann Pestalozzi",
+      "family": "思想教育师",
+      "status": "REG"
+    },
+    {
+      "no": 258,
+      "name": "Friedrich Frobel",
+      "family": "思想教育师",
+      "status": "REG"
+    },
+    {
+      "no": 259,
+      "name": "John Amos Comenius",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 260,
+      "name": "John Dewey",
+      "family": "思想教育师",
+      "status": "REG"
+    },
+    {
+      "no": 261,
+      "name": "Maria Montessori",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 262,
+      "name": "Lev Vygotsky",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 263,
+      "name": "Jean Piaget",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 264,
+      "name": "Paulo Freire",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 265,
+      "name": "Benjamin Bloom",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 266,
+      "name": "Howard Gardner",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 267,
+      "name": "Seymour Papert",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 268,
+      "name": "John Hattie",
+      "family": "思想教育师",
+      "status": "DEF"
+    },
+    {
+      "no": 269,
+      "name": "Thomas Saaty",
+      "family": "思想教育师",
+      "status": "REG"
+    },
+    {
+      "no": 270,
+      "name": "Laozi",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 271,
+      "name": "Zhuangzi",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 272,
+      "name": "Mencius",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 273,
+      "name": "Xunzi",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 274,
+      "name": "Mozi",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 275,
+      "name": "Sun Tzu",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 276,
+      "name": "Wang Yangming",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 277,
+      "name": "Zhu Xi",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 278,
+      "name": "Seneca",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 279,
+      "name": "Epictetus",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 280,
+      "name": "Marcus Aurelius",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 281,
+      "name": "Augustine",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 282,
+      "name": "Thomas Aquinas",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 283,
+      "name": "René Descartes",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 284,
+      "name": "John Locke",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 285,
+      "name": "Baruch Spinoza",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 286,
+      "name": "Gottfried Leibniz",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 287,
+      "name": "Voltaire",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 288,
+      "name": "David Hume",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 289,
+      "name": "Johann Herbart",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 290,
+      "name": "G. W. F. Hegel",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 291,
+      "name": "Arthur Schopenhauer",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 292,
+      "name": "Søren Kierkegaard",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 293,
+      "name": "Friedrich Nietzsche",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 294,
+      "name": "William James",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 295,
+      "name": "Edward Thorndike",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 296,
+      "name": "B. F. Skinner",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 297,
+      "name": "Jerome Bruner",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 298,
+      "name": "Albert Bandura",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 299,
+      "name": "Carl Rogers",
+      "family": "思想教育师",
+      "status": "TODO"
+    },
+    {
+      "no": 300,
+      "name": "Abraham Maslow",
+      "family": "思想教育师",
+      "status": "TODO"
+    }
+  ]
 }
