@@ -1,0 +1,114 @@
+{
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "wikidata:Q5582",
+ "consent_authority": null,
+ "created_at": "2026-08-23T23:43:51Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "art-designer",
+  "display": "艺术设计师",
+  "mode": "single",
+  "primary": "art-designer",
+  "weights": {
+   "art-designer": 1.0
+  }
+ },
+ "language": "eng",
+ "model_version": "0.1.0-draft",
+ "name": "Vincent van Gogh",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "绘画创作与色彩理论咨询",
+    "书信/文字表达（艺术观、创作经济、生活困境）",
+    "19世纪艺术市场观察",
+    "艺术史研究辅助"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "archive.org lettersofpostimp00gogh（1913《The Letters of a Post-Impressionist》，致 Bernard 书信英译）"
+    },
+    {
+     "locator": "archive.org brievenaanzijnbr01gogh（1914《Brieven aan zijn broeder》，致 Theo 书信荷文）"
+    },
+    {
+     "locator": "archive.org briefego00goghuoft（1918《Briefe》，书信德译）"
+    }
+   ],
+   "canonical_name": "Vincent van Gogh",
+   "distinguishing_basis": "唯一为世所知的 Vincent van Gogh（1853-1890 画家）；archive.org creator 字段 'Gogh, Vincent van, 1853-1890' 即此人；同名者 Vincent van Gogh（1820-1888，其叔，艺术品商，留有一份 1871 年拍卖目录）已在探源 EXCLUDE",
+   "evidence_level": "low",
+   "identity_category": "历史人物（1853-03-30 – 1890-07-29）",
+   "key_capabilities": [
+    "后印象派绘画",
+    "色彩与情感表达理论（书信中的画论）",
+    "书信写作（大量书信论及艺术、色彩、创作与经济）",
+    "对 19 世纪艺术市场与技法的观察"
+   ],
+   "label": "A",
+   "occupation_or_role": "荷兰后印象派画家；书信家（与弟弟 Theo 及友人 Émile Bernard 的通信，身后由弟媳 J. van Gogh-Bonger 编辑出版）",
+   "professional_background": "1853 生于荷兰 Zundert；先后任艺术品商行职员、英国教师、传教士；1880 年起立志为画家；1886-88 巴黎；1888 阿尔勒（与 Gauguin 同住，割耳事件）；1889 圣雷米精神病院；1890 Auvers-sur-Oise 自尽；书信 900+ 封（致 Theo 为主）",
+   "subject_uid": "wikidata:Q5582"
+  },
+  "chosen_subject_uid": "wikidata:Q5582",
+  "normalized_name": "vincentvangogh",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "vincentvangogh",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "vincent-van-gogh",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-357ccf54740f",
+ "time_scope": "1872-1928",
+ "updated_at": "2026-08-23T23:43:51Z",
+ "attribution_basis": {
+  "authority": "Vincent van Gogh（1853-03-30 生于荷兰 Zundert – 1890-07-29 卒于 Auvers-sur-Oise）书信著作归属依据：① 书信由弟媳 Johanna van Gogh-Bonger 编辑出版，1914 年荷兰文《Brieven aan zijn broeder》三卷（题名页 'UITGEGEVEN EN TOEGELICHT DOOR ZIJN SCHOONZUSTER J. VAN GOGH-BONGER'）；② 1913 年英文《The Letters of a Post-Impressionist》（致 Émile Bernard 书信，Anthony M. Ludovici 英译，题名页 'THE LETTERS OF A POST-IMPRESSIONIST... TRANSLATED FROM THE GERMAN BY ANTHONY M. LUDOVICI'）；③ 1906-1918 年德文《Briefe》（Margarete Mauthner 编译，Bruno Cassirer 出版，题名页 'DEUTSCHE AUSGABE BESORGT VON M. MAUTHNER'）；④ 1927 年英文两卷《Letters of Vincent van Gogh to His Brother 1872-1886》（题名页 'VINCENT VAN GOGH TO HIS BROTHER 1872-1886 With a Memoir by his Sister-in-law J. van Gogh-Bonger IN TWO VOLUMES... 1927'）。",
+  "citation": "archive.org 元数据 creator 字段（Gogh, Vincent van, 1853-1890）+ 各载体题名页（见 covered_sources 逐份照录）。",
+  "disputed_policy": "语料内无学界公认伪托篇目。凡 archive.org creator 含 Gogh 但实为他人的条目已排除：其一叔 Vincent van Gogh（1820-1888，艺术品商）的《Tableaux anciens et modernes》（1871 拍卖目录）在探源阶段排除；各展览目录（1892/1905/1920）虽 creator 首位为画家本人，实为第三方策展目录，已在 _primary-decisions.json 逐条裁定为二手。",
+  "disputed_works": [],
+  "covered_sources": [
+   "lettersofpostimp00gogh.txt ｜ 署名照录：THE LETTERS OF A POST-IMPRESSIONIST TRANSLATED FROM THE GERMAN BY ANTHONY M. LUDOVICI",
+   "lettersofpostimp00goghuoft.txt ｜ 署名照录：THE LETTERS OF A POST-IMPRESSIONIST BEING THE FAMILIAR CORRESPONDENCE OF VINCENT VAN GOGH LONDON CONSTABLE AND COMPANY LTD. 1912",
+   "cu31924101831505.txt ｜ 署名照录：THE LETTERS OF A POST-IMPRESSIONIST BEING THE FAMILIAR CORRESPONDENCE OF VINCENT VAN GOGH",
+   "brievenaanzijnbr01gogh.txt ｜ 署名照录：VINCENT VAN GOGH BRIEVEN AAN ZIJN BROEDER UITGEGEVEN EN TOEGELICHT DOOR ZIJN SCHOONZUSTER J. VAN GOGH-BONGER EERSTE DEEL",
+   "brievenaanzijnbr02gogh.txt ｜ 署名照录：VINCENT VAN GOGH BRIEVEN AAN ZIJN BROEDER UITGEGEVEN EN TOEGELICHT DOOR ZIJN SCHOONZUSTER J. VAN GOGH-BONGER TWEEDE DEEL MIJ. VOOR GOEDE EN GOEDKOOPE LECTUUR OVERTOOM 230 TE AMSTERDAM",
+   "brievenaanzijnbr03gogh.txt ｜ 署名照录：VINCENT VAN GOGH BRIEVEN AAN ZIJN BROEDER UITGEGEVEN EN TOEGELICHT DOOR ZIJN SCHOONZUSTER J. VAN GOGH-BONGER DERDE DEEL",
+   "briefe0000gogh.txt ｜ 署名照录：VINCENT VAN GOGH BRIEFE VIERTE AUFLAGE VERLAG VON BRUNO CASSIRER DEUTSCHE AUSGABE VON MARGARETE MAUTHNER",
+   "briefe1906gogh.txt ｜ 署名照录：VINCENT VAN GOGH BRIEFE VERLAG VON BRUNO CASSIRER BERLIN DEUTSCHE AUSGABE BESORGT VON M. MAUTHNER 20. BIS 24. TAUSEND",
+   "briefego00goghuoft.txt ｜ 署名照录：VINCENT VAN GOGH BRIEFE ACHTE UND NEUNTE AUFLAGE VERLAG VON BRUNO CASSIRER DEUTSCHE AUSGABE BESORGT VON M. MAUTHNER",
+   "vincentvangoghbr00maut.txt ｜ 署名照录：VINCENT VAN GOGH BRIEFE 15. BIS 19. TAUSEND VERLAG VON BRUNO CASSIRER BERLIN DEUTSCHE AUSGABE BESORGT VON M. MAUTHNER",
+   "bwb_C0-BNZ-746_1.txt ｜ 署名照录：VINCENT VAN GOGH TO HIS BROTHER 1872-1886 With a Memoir by his Sister-in-law J. van Gogh-Bonger IN TWO VOLUMES WITH ILLUSTRATIONS VOL. I LONDON CONSTABLE AND CO. LTD.",
+   "bwb_C0-BNZ-755_2.txt ｜ 署名照录：VINCENT VAN GOGH TO HIS BROTHER 1872-1886 With a Memoir by his Sister-in-law J. van Gogh-Bonger IN TWO VOLUMES WITH ILLUSTRATIONS VOL. II LONDON CONSTABLE AND CO. LTD.",
+   "persrecollec00gogh.txt ｜ 署名照录：PERSONAL RECOLLECTIONS OF VINCENT VAN GOGH BY ELIZABETH DU QUESNE VAN GOGH",
+   "persnlicheerinne00duqu.txt ｜ 署名照录：PERSÖNLICHE ERINNERUNGEN AN VINCENT VAN GOGH E. H. DU QUESNE-VAN GOGH MIT 24 ABBILDUNGEN ZWEITE AUFLAGE R. PIPER AND CO. VERLAG MÜNCHEN 1911",
+   "vincentvangoghpe02duqu.txt ｜ 署名照录：VINCENT VAN GOGH PERSOONLIJKE HERINNERINGEN AANGAANDE EEN KUNSTENAAR E.H. DU QUESNE-VAN GOGH BAARN J. F. VAN DE VEN 1910",
+   "vangoghvincent00dureuoft.txt ｜ 署名照录：Van Gogh Par Théodore Duret BERNHEIM-JEUNE ET CIE ÉDITEURS",
+   "vincentvangoghbi02meie.txt ｜ 署名照录：VINCENT VAN GOGH A BIOGRAPHICAL STUDY BY JULIUS MEIER-GRAEFE Translated by JOHN HOLROYD REECE With One Hundred and Two Illustrations Volume Two THE MEDICI SOCIETY LONDON AND BOSTON",
+   "lafoliedevincent00doit.txt ｜ 署名照录：La folie de Vincent van Gogh（Doiteau 与 Leroy 撰，1928 巴黎，医学精神病学评述）",
+   "tentoonstellingd00gogh.txt ｜ 署名照录：TENTOONSTELLING DER NAGELATEN WERKEN VAN VINCENT VAN GOGH KUNSTZAAL PANORAMA AMSTERDAM",
+   "catalogusdertent00gogh.txt ｜ 署名照录：CATALOGUS DER TENTOONSTELLING VAN SCHILDERIJEN EN TEEKENINGEN DOOR VINCENT VAN GOGH STEDELIJK MUSEUM AMSTERDAM JULI EN AUGUSTUS 1905",
+   "vincentvangoghex00gogh.txt ｜ 署名照录：Vincent van Gogh Exhibition October Twenty-third 1920 Catalogue with Half-tone Reproductions and Color Plate MONTROSS GALLERY 550 FIFTH AVENUE NEW YORK"
+  ],
+  "attribution_policy": "印刷时代书信出版物的署名证据形态为题名页/扉页；OCR 对德文荷兰文的变音字母与合字有讹变（如 MÜNCHEN→MUNCHEN、ZIJN→ZIJN 讹为 ZIJN），归属以出版物题名页与 archive.org 目录 creator 字段为准；译本（Ludovici/Mauthner/Holroyd Reece 英德译本）以原作者为本尊，译者作为编者处理。",
+  "pseudepigrapha_policy": "语料内无伪托篇目；凡 archive.org creator 含 Gogh 但实为他人的条目已在抓源阶段排除，见 _primary-decisions.json 与 namesake-gate。",
+  "counting_convention": "lettersofpostimp00gogh、lettersofpostimp00goghuoft、cu31924101831505 是同一部《Letters of a Post-Impressionist》（1913 英译）的三份扫描，后两者 derived_from 前者，只算一处独立证据。briefe0000gogh、briefe1906gogh、briefego00goghuoft、vincentvangoghbr00maut 是同一部德文《Briefe》（Mauthner 编译，Bruno Cassirer 1906-1918 各印次）的四份扫描/印次，后三者 derived_from briefego00goghuoft，只算一处独立证据。persrecollec00gogh、persnlicheerinne00duqu、vincentvangoghpe02duqu 是其妹 Elisabeth du Quesne-van Gogh 同一回忆录的英/德/荷三语版本，后两者 derived_from persrecollec00gogh，只算一处独立证据。brievenaanzijnbr01/02/03gogh 是《Brieven aan zijn broeder》三卷（1872-82/1882-86/1886-89），各卷内容不同，各算独立证据；bwb_C0-BNZ-746_1 与 bwb_C0-BNZ-755_2 是 1927 英文两卷（Vol I/II），内容不同，各算独立证据。"
+ }
+}

@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:vincentvangogh",
+  "canonical_name": "Vincent van Gogh",
+  "identity_family_id": "art-designer",
+  "identity_mode": "single",
+  "registration_category": "艺术设计师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "vincent-van-gogh",
+  "subject_uid": "person-663be6bcf2bb11bc",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/vincent-van-gogh-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-23T23:43:51Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "0a7ebff1a94c70b2c5172155dcc789d67fc7ecf6d1a13815d9451abf6953e27e",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/vincent-van-gogh-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "60a9e3d2792ceaa00c7343d6e9c4a9f2907ca822fc1a1526226c32e243c8ad00",
+      "runtime_size_bytes": 64322,
+      "size_bytes": 72637
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "lanes": 4,
+  "去掉纸面道后": 3,
+  "逐道份数": {
+    "writings": 3,
+    "conversations": 9,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 1,
+    "external": 10
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "McGillLibrary-rbsc_stern_vincent-van-gogh_ND653G7A41928-17738",
+      "道": "external",
+      "title": "Vincent van Gogh : Gemälde, [Ausstellung] Januar 1928, Paul Cassirer,"
+    },
+    {
+      "identifier": "briefe0000gogh",
+      "道": "conversations",
+      "title": "Briefe"
+    },
+    {
+      "identifier": "briefe1906gogh",
+      "道": "conversations",
+      "title": "Briefe"
+    },
+    {
+      "identifier": "briefego00goghuoft",
+      "道": "conversations",
+      "title": "Briefe"
+    },
+    {
+      "identifier": "brievenaanzijnbr01gogh",
+      "道": "writings",
+      "title": "Brieven aan zijn broeder; uitgegeven en toegelicht door zijn schoonzus"
+    },
+    {
+      "identifier": "brievenaanzijnbr02gogh",
+      "道": "writings",
+      "title": "Brieven aan zijn broeder; uitgegeven en toegelicht door zijn schoonzus"
+    },
+    {
+      "identifier": "brievenaanzijnbr03gogh",
+      "道": "writings",
+      "title": "Brieven aan zijn broeder; uitgegeven en toegelicht door zijn schoonzus"
+    },
+    {
+      "identifier": "bwb_C0-BNZ-746_1",
+      "道": "conversations",
+      "title": "the letters of vincent van gogh to his brother 1872-1886"
+    },
+    {
+      "identifier": "bwb_C0-BNZ-755_2",
+      "道": "conversations",
+      "title": "the letters of vincent van gogh to his brother 1872-1886"
+    },
+    {
+      "identifier": "catalogusdertent00gogh",
+      "道": "external",
+      "title": "Catalogus der tentoonstelling van schilderijen en teekeningen door Vin"
+    },
+    {
+      "identifier": "cu31924101831505",
+      "道": "conversations",
+      "title": "The letters of a post-impressionist; being the familiar correspondence"
+    },
+    {
+      "identifier": "gri_33125012764672",
+      "道": "external",
+      "title": "100 teekeningen uit de verzameling Hidde Nyland in het Museum te Dordr"
+    },
+    {
+      "identifier": "lafoliedevincent00doit",
+      "道": "external",
+      "title": "La folie de Vincent van Gogh"
+    },
+    {
+      "identifier": "lettersofpostimp00gogh",
+      "道": "conversations",
+      "title": "The letters of a post-impressionist : being the familiar correspondenc"
+    },
+    {
+      "identifier": "lettersofpostimp00goghuoft",
+      "道": "conversations",
+      "title": "The letters of a post-impressionist; being the familiar correspondence"
+    },
+    {
+      "identifier": "persnlicheerinne00duqu",
+      "道": "timeline",
+      "title": "Persönliche Erinnerungen an Vincent van Gogh"
+    },
+    {
+      "identifier": "persrecollec00gogh",
+      "道": "external",
+      "title": "Personal recollections of Vincent van Gogh, by Elizabeth du Quesne van"
+    },
+    {
+      "identifier": "tentoonstellingd00gogh",
+      "道": "external",
+      "title": "Tentoonstelling der nagelaten werken van Vincent van Gogh : December 1"
+    },
+    {
+      "identifier": "vangoghvincent00dureuoft",
+      "道": "external",
+      "title": "Van Gogh, Vincent"
+    },
+    {
+      "identifier": "vincentvangoghbi02meie",
+      "道": "external",
+      "title": "Vincent Van Gogh : a biographical study"
+    },
+    {
+      "identifier": "vincentvangoghbr00maut",
+      "道": "conversations",
+      "title": "Vincent van Gogh : Briefe"
+    },
+    {
+      "identifier": "vincentvangoghex00gogh",
+      "道": "external",
+      "title": "Vincent van Gogh exhibition : October twenty-third, 1920"
+    },
+    {
+      "identifier": "vincentvangoghpe02duqu",
+      "道": "external",
+      "title": "Vincent van Gogh : persoonlijke herinneringen aangaande een kunstenaar"
+    }
+  ]
+}

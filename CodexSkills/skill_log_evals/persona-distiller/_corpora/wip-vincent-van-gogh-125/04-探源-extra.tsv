@@ -1,0 +1,12 @@
+# numFound=9 rows=9 query=identifier:(bwb_C0-BNZ-746_1 OR bwb_C0-BNZ-755_2 OR persrecollec00gogh OR vangoghvincent00dureuoft OR vincentvangoghbi02meie OR lafoliedevincent00doit OR vincentvangoghbr00maut OR persnlicheerinne00duqu OR vincentvangoghpe02duqu)
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+vincentvangoghbi02meie	1926-01-01T00:00:00Z	1926	Meier-Graefe, Julius, 1867-1935	Vincent Van Gogh : a biographical study	eng	getty; americana; fav-tedbillups
+vangoghvincent00dureuoft	1919-01-01T00:00:00Z	1919	Duret, Théodore, 1838-1927	Van Gogh, Vincent	fre	robarts; toronto; university_of_toronto; fav-19omhs72; fav-crmsc; fav-devilsapricot; fav-galleryslave; fav-glennorlando; fav-jn2935; fav-ketanarose; fav-vansh_sharma572; fav-ver_ni
+vincentvangoghbr00maut	1908-01-01T00:00:00Z	1908	Mauthner, M	Vincent van Gogh : Briefe	und	internetarchivebooks; americana; fav-aru13; fav-yoshiyamadeep
+lafoliedevincent00doit	1928-01-01T00:00:00Z	1928	Doiteau, Victor	La folie de Vincent van Gogh	fre	university_of_illinois_urbana-champaign; americana
+vincentvangoghpe02duqu	1910-01-01T00:00:00Z	1910	Gogh, Elisabeth du Quesne van, 1859-1936	Vincent van Gogh : persoonlijke herinneringen aangaande een kunstenaar	dut	getty; americana
+persrecollec00gogh	1913-01-01T00:00:00Z	1913	Gogh, Elizabeth du Quesne van	Personal recollections of Vincent van Gogh, by Elizabeth du Quesne van Gogh; translated by Katherine S. Dreier, with a foreword by Arthur B. Davies.	English	whitneymuseum; artresources; americana; fav-44person; fav-ahelmtexas; fav-al2838484; fav-camelian_propinatiu; fav-crmsc; fav-digboston; fav-jedwards26; fav-kayz66; fav-secretsociet
+bwb_C0-BNZ-746_1	1927-01-01T00:00:00Z	1927	j. van gogh-bonger	the letters of vincent van gogh to his brother 1872-1886	eng	internetarchivebooks; fav-chapalan
+bwb_C0-BNZ-755_2	1927-01-01T00:00:00Z	1927	j. van gogh-bonger	the letters of vincent van gogh to his brother 1872-1886	eng	internetarchivebooks
+persnlicheerinne00duqu	1911-01-01T00:00:00Z	1911	Du Quesne-van Gogh, Elisabeth Huberta	Persönliche Erinnerungen an Vincent van Gogh	ger; dut	brigham_young_university; americana; fav-mmos

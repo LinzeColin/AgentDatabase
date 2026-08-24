@@ -1,0 +1,7 @@
+# numFound=4 rows=4 query=title:(letters AND gogh AND brother) AND mediatype:texts
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+bwb_C0-BNZ-746_1	1927-01-01T00:00:00Z	1927	j. van gogh-bonger	the letters of vincent van gogh to his brother 1872-1886	eng	internetarchivebooks; fav-chapalan
+bwb_C0-BNZ-755_2	1927-01-01T00:00:00Z	1927	j. van gogh-bonger	the letters of vincent van gogh to his brother 1872-1886	eng	internetarchivebooks
+cmapr3444	1987-01-12T00:00:00Z	1987	Cleveland Museum of Art	Performance - Letters from the Yellow Chair (Play on Van Gogh and his Brother, Theo)	eng	clevelandmuseumofartpressreleases; clevelandmuseumofart; patron-library-collection
+mylifeloveareone00gogh	1976-01-01T00:00:00Z	1976	Gogh, Vincent van, 1853-1890	My life & love are one : quotations from the letters of Vincent Van Gogh to his brother Theo	eng	internetarchivebooks; inlibrary; printdisabled; fav-buttereliza; fav-francesca_magalang; fav-gill_matthew; fav-jasmin_fulgar; fav-justinu007; fav-ketanarose; fav-ladywithveil; fav-

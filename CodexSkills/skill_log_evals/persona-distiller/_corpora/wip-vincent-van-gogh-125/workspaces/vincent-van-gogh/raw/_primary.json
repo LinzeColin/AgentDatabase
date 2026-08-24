@@ -1,0 +1,204 @@
+{
+  "总数": 23,
+  "计数": {
+    "一手": 12,
+    "二手": 11,
+    "需人判": 0
+  },
+  "一手占比下界": 0.5217,
+  "一手占比上界": 0.5217,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "Gogh",
+      "van Gogh"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "McGillLibrary-rbsc_stern_vincent-van-gogh_ND653G7A41928-17738",
+      "档": "二手",
+      "依据": "【人裁】1928 年 1 月柏林 Paul Cassirer 画廊梵高画展目录（Faille 编，Gemälde 展），第三方策展目录，非梵高本人文字。",
+      "title": "Vincent van Gogh : Gemälde, [Ausstellung] Januar 1928, Paul Cassirer, Berlin",
+      "creator": "Gogh, Vincent van, 1853-1890; Faille, J.-B. de la (Jacob-Baart), 1886-1959; Cass",
+      "words": 3238
+    },
+    {
+      "identifier": "briefe0000gogh",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Briefe",
+      "creator": "Gogh, Vincent van, 1853-1890",
+      "words": 35392
+    },
+    {
+      "identifier": "briefe1906gogh",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Briefe",
+      "creator": "Gogh, Vincent van, 1853-1890; Gogh, Theo van, 1857-1891; Bernard, Emile, 1868-19",
+      "words": 30790
+    },
+    {
+      "identifier": "briefego00goghuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「briefe」",
+      "title": "Briefe",
+      "creator": "Gogh, Vincent van, 1853-1890; Gogh, Theo van, 1857-1891; Bernard, Emile, 1868-19",
+      "words": 31216
+    },
+    {
+      "identifier": "brievenaanzijnbr01gogh",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Brieven aan zijn broeder; uitgegeven en toegelicht door zijn schoonzuster, J. va",
+      "creator": "Gogh, Vincent van, 1853-1890",
+      "words": 237238
+    },
+    {
+      "identifier": "brievenaanzijnbr02gogh",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Brieven aan zijn broeder; uitgegeven en toegelicht door zijn schoonzuster, J. va",
+      "creator": "Gogh, Vincent van, 1853-1890",
+      "words": 254681
+    },
+    {
+      "identifier": "brievenaanzijnbr03gogh",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Brieven aan zijn broeder; uitgegeven en toegelicht door zijn schoonzuster, J. va",
+      "creator": "Gogh, Vincent van, 1853-1890",
+      "words": 187508
+    },
+    {
+      "identifier": "bwb_C0-BNZ-746_1",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "the letters of vincent van gogh to his brother 1872-1886",
+      "creator": "j. van gogh-bonger",
+      "words": 238797
+    },
+    {
+      "identifier": "bwb_C0-BNZ-755_2",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "the letters of vincent van gogh to his brother 1872-1886",
+      "creator": "j. van gogh-bonger",
+      "words": 253073
+    },
+    {
+      "identifier": "catalogusdertent00gogh",
+      "档": "二手",
+      "依据": "【人裁】1905 年阿姆斯特丹画作展览目录（Catalogus der tentoonstelling），第三方策展目录，非梵高本人文字。",
+      "title": "Catalogus der tentoonstelling van schilderijen en teekeningen door Vincent van G",
+      "creator": "Gogh, Vincent van, 1853-1890; Amsterdam (Netherlands). Stedelijk Museum",
+      "words": 9247
+    },
+    {
+      "identifier": "cu31924101831505",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "The letters of a post-impressionist; being the familiar correspondence of Vincen",
+      "creator": "Gogh, Vincent van, 1853-1890; Ludovici, Anthony Mario, 1882-",
+      "words": 55377
+    },
+    {
+      "identifier": "gri_33125012764672",
+      "档": "二手",
+      "依据": "【人裁】1905 年《100 teekeningen uit de verzameling Hidde Nyland》Dordrecht 博物馆画作目录，第三方策展目录，非梵高本人文字。",
+      "title": "100 teekeningen uit de verzameling Hidde Nyland in het Museum te Dordrecht",
+      "creator": "Gogh, Vincent van, 1853-1890",
+      "words": 3982
+    },
+    {
+      "identifier": "lafoliedevincent00doit",
+      "档": "二手",
+      "依据": "【人裁】1928 年 Victor Doiteau 与 Édouard Leroy《La folie de Vincent van Gogh》法文医学精神病学评述，第三方，非梵高本人文字。",
+      "title": "La folie de Vincent van Gogh",
+      "creator": "Doiteau, Victor",
+      "words": 35551
+    },
+    {
+      "identifier": "lettersofpostimp00gogh",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "The letters of a post-impressionist : being the familiar correspondence of Vince",
+      "creator": "Gogh, Vincent van, 1853-1890",
+      "words": 55482
+    },
+    {
+      "identifier": "lettersofpostimp00goghuoft",
+      "档": "一手",
+      "依据": "目标为第一作者，题名含「letters」",
+      "title": "The letters of a post-impressionist; being the familiar correspondence of Vincen",
+      "creator": "Gogh, Vincent van, 1853-1890; Ludovici, Anthony Mario, 1882-",
+      "words": 55282
+    },
+    {
+      "identifier": "persnlicheerinne00duqu",
+      "档": "二手",
+      "依据": "【人裁】1911 年德文版《Persönliche Erinnerungen an Vincent van Gogh》（其妹回忆录），非梵高本人文字。",
+      "title": "Persönliche Erinnerungen an Vincent van Gogh",
+      "creator": "Du Quesne-van Gogh, Elisabeth Huberta",
+      "words": 15741
+    },
+    {
+      "identifier": "persrecollec00gogh",
+      "档": "二手",
+      "依据": "【人裁】1913 年其妹 Elisabeth du Quesne-van Gogh 的《Personal recollections of Vincent van Gogh》英文回忆录，是第三人称/亲属回忆体，非梵高本人文字。",
+      "title": "Personal recollections of Vincent van Gogh, by Elizabeth du Quesne van Gogh; tra",
+      "creator": "Gogh, Elizabeth du Quesne van",
+      "words": 18537
+    },
+    {
+      "identifier": "tentoonstellingd00gogh",
+      "档": "二手",
+      "依据": "【人裁】1892 年遗作展览目录（Tentoonstelling der nagelaten werken），为第三方策展目录，非梵高本人文字。",
+      "title": "Tentoonstelling der nagelaten werken van Vincent van Gogh : December 1892",
+      "creator": "Gogh, Vincent van, 1853-1890",
+      "words": 1296
+    },
+    {
+      "identifier": "vangoghvincent00dureuoft",
+      "档": "二手",
+      "依据": "【人裁】1919 年 Théodore Duret 法文评传《Van Gogh, Vincent》（Bernheim-Jeune 出版），第三方艺术评论家对梵高的研究，非梵高本人文字。",
+      "title": "Van Gogh, Vincent",
+      "creator": "Duret, Théodore, 1838-1927",
+      "words": 18950
+    },
+    {
+      "identifier": "vincentvangoghbi02meie",
+      "档": "二手",
+      "依据": "【人裁】1926 年 Julius Meier-Graefe《Vincent Van Gogh: A Biographical Study》英译本第二卷，第三方传记研究，非梵高本人文字。",
+      "title": "Vincent Van Gogh : a biographical study",
+      "creator": "Meier-Graefe, Julius, 1867-1935",
+      "words": 35477
+    },
+    {
+      "identifier": "vincentvangoghbr00maut",
+      "档": "一手",
+      "依据": "【人裁】1908 年 Margarete Mauthner 编译的《Vincent van Gogh: Briefe》，是梵高书信的德文译本（致 Theo 与 Bernard 的信），creator 字段挂的是译者 Mauthner 而非本人，但正文是梵高本人的书信译文。",
+      "title": "Vincent van Gogh : Briefe",
+      "creator": "Mauthner, M",
+      "words": 30191
+    },
+    {
+      "identifier": "vincentvangoghex00gogh",
+      "档": "二手",
+      "依据": "【人裁】1920 年 Montross 画廊纽约梵高画展目录（exhibition catalogue），第三方，非梵高本人文字。",
+      "title": "Vincent van Gogh exhibition : October twenty-third, 1920",
+      "creator": "Gogh, Vincent van, 1853-1890; Montross Gallery",
+      "words": 418
+    },
+    {
+      "identifier": "vincentvangoghpe02duqu",
+      "档": "二手",
+      "依据": "【人裁】1910 年荷兰文版《Vincent van Gogh: persoonlijke herinneringen aangaande een kunstenaar》（其妹回忆录），非梵高本人文字。",
+      "title": "Vincent van Gogh : persoonlijke herinneringen aangaande een kunstenaar",
+      "creator": "Gogh, Elisabeth du Quesne van, 1859-1936",
+      "words": 16876
+    }
+  ]
+}
