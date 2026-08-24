@@ -1,0 +1,52 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Wassily Kandinsky；历史人物（1866-12-16 – 1944-12-13）；抽象艺术先驱；画家、艺术理论家；包豪斯教员；Der Blaue Reiter 联合创办人。\n   专业背景：俄裔，1866 生于莫斯科；慕尼黑学画，1900 年代前卫艺术；1911 与 Franz Marc 创办 Der Blaue Reiter；1912《Über das Geistige in der Kunst》；1913《Klänge》；1922-1933 包豪斯任教；1926《Punkt und Linie zu Fläche》；1933 迁巴黎，1944 卒。。\n   应用价值：场景：抽象艺术理论（精神性、内在必然性）；色彩与形式心理学（点线面分析）；艺术教育（包豪斯课程）；先锋艺术运动（Blaue Reiter）；关键能力：抽象艺术理论体系（精神性、内在必然性）；色彩与形式心理学（点线面分析）；艺术教育方法论（包豪斯课程）；先锋艺术运动组织（Blaue Reiter）。\n   区分依据：本人署名 Wassily Kandinsky（Василий Кандинский），1866-1944，抽象绘画与理论著作；区别于：Victor Kandinsky（1849-1889 精神病学家）、Carla Kandinsky（现代诗人）、Nina Kandinsky（其妻，回忆录作者）。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "抽象艺术理论（精神性、内在必然性）",
+        "色彩与形式心理学（点线面分析）",
+        "艺术教育（包豪斯课程）",
+        "先锋艺术运动（Blaue Reiter）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "archive.org artofspiritualha00kandrich（1914《The Art of Spiritual Harmony》英译本）"
+        },
+        {
+          "locator": "archive.org bderdasgeistigein46203gut（1912《Über das Geistige in der Kunst》德文原版）"
+        },
+        {
+          "locator": "archive.org kandinsky_202603（1912 德文原版扫描）"
+        }
+      ],
+      "canonical_name": "Wassily Kandinsky",
+      "distinguishing_basis": "本人署名 Wassily Kandinsky（Василий Кандинский），1866-1944，抽象绘画与理论著作；区别于：Victor Kandinsky（1849-1889 精神病学家）、Carla Kandinsky（现代诗人）、Nina Kandinsky（其妻，回忆录作者）。",
+      "evidence_level": "low",
+      "identity_category": "历史人物（1866-12-16 – 1944-12-13）",
+      "key_capabilities": [
+        "抽象艺术理论体系（精神性、内在必然性）",
+        "色彩与形式心理学（点线面分析）",
+        "艺术教育方法论（包豪斯课程）",
+        "先锋艺术运动组织（Blaue Reiter）"
+      ],
+      "label": "A",
+      "occupation_or_role": "抽象艺术先驱；画家、艺术理论家；包豪斯教员；Der Blaue Reiter 联合创办人",
+      "professional_background": "俄裔，1866 生于莫斯科；慕尼黑学画，1900 年代前卫艺术；1911 与 Franz Marc 创办 Der Blaue Reiter；1912《Über das Geistige in der Kunst》；1913《Klänge》；1922-1933 包豪斯任教；1926《Punkt und Linie zu Fläche》；1933 迁巴黎，1944 卒。",
+      "subject_uid": "wikidata:Q61064"
+    }
+  ],
+  "generated_at": "2026-08-23T23:43:07Z",
+  "normalized_name": "wassilykandinsky",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "wikidata:Q61064",
+  "status": "ready",
+  "target_name": "Wassily Kandinsky"
+}

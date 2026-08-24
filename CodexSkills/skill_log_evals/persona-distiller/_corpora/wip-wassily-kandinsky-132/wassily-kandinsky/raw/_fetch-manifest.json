@@ -1,0 +1,518 @@
+{
+  "生成时刻": "2026-08-24T09:58:12",
+  "请求数": 3,
+  "已取回": 19,
+  "skipped_access_restricted": 0,
+  "剔除": 0,
+  "失败": 0,
+  "并发降级": "无（全程并发 4）",
+  "总词数": 408411,
+  "★ 年份口径": "ia_date 是原作年不是版次年；PD 判定看 titlepage_years，由人判",
+  "记录": [
+    {
+      "identifier": "PunctumLineaque",
+      "status": "已取回",
+      "note": "",
+      "file": "PunctumLineaque.txt",
+      "source_url": "https://archive.org/download/PunctumLineaque/punctum_lineaque_djvu.txt",
+      "sha256": "557c74321e402435b3cdd13f7bf2ad2cb4f19050da383504af817fc642a0ded2",
+      "bytes": 282645,
+      "words": 36770,
+      "fetched_at": "2026-08-24T09:47:59",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2010-03-02 20:10:57",
+      "ia_creator": "Vasily Kandinsky",
+      "ia_title": "PunctumLineaque",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1885"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "TheSpiritualInArtByWassilyKandinsky",
+      "status": "已取回",
+      "note": "",
+      "file": "TheSpiritualInArtByWassilyKandinsky.txt",
+      "source_url": "https://archive.org/download/TheSpiritualInArtByWassilyKandinsky/ConcerningTheSpiritualInArt_djvu.txt",
+      "sha256": "8f01bd832c2a4188b7d72398a6f561f9e0863f850c63a0f05b34d7ac388e8db6",
+      "bytes": 185219,
+      "words": 29654,
+      "fetched_at": "2026-08-24T09:47:56",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2010-05-02 18:30:39",
+      "ia_creator": "Wassily Kandinsky",
+      "ia_title": "The Spiritual in Art by Wassily Kandinsky",
+      "ia_licenseurl": "http://creativecommons.org/licenses/by-nc/3.0/us/",
+      "titlepage_years": [
+        "1910",
+        "1911",
+        "1912",
+        "1913",
+        "1971",
+        "2002",
+        "2005",
+        "2010"
+      ],
+      "digitization_years": [
+        "2004"
+      ]
+    },
+    {
+      "identifier": "artofspiritualha00kandrich",
+      "status": "已取回",
+      "note": "",
+      "file": "artofspiritualha00kandrich.txt",
+      "source_url": "https://archive.org/download/artofspiritualha00kandrich/artofspiritualha00kandrich_djvu.txt",
+      "sha256": "e62aac6f850385e8d38b3113b00db376b98ef74edd95191e3ede1dad696db5f8",
+      "bytes": 188997,
+      "words": 27770,
+      "fetched_at": "2026-08-24T09:47:55",
+      "ia_date": "1914",
+      "ia_year": "",
+      "ia_publicdate": "2007-08-22 20:07:50",
+      "ia_creator": [
+        "Kandinsky, Wassily, 1866-1944",
+        "Sadleir, Michael, 1888-1957"
+      ],
+      "ia_title": "The art of spiritual harmony",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1914"
+      ],
+      "digitization_years": [
+        "2007"
+      ]
+    },
+    {
+      "identifier": "berdasgeistigein46203gut",
+      "status": "已取回",
+      "note": "",
+      "file": "berdasgeistigein46203gut.txt",
+      "source_url": "https://archive.org/download/berdasgeistigein46203gut/46203-8.txt",
+      "sha256": "be465c1fefa134c518e576dd9c4c650181fdcbf1c71ea2ef6b88486b8564232d",
+      "bytes": 212224,
+      "words": 30553,
+      "fetched_at": "2026-08-24T09:47:58",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2018-08-02 00:19:00",
+      "ia_creator": "Wassily Kandinsky",
+      "ia_title": "Über das Geistige in der Kunst, Insbesondere in der Malerei",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1910",
+        "1911",
+        "1912"
+      ],
+      "digitization_years": [
+        "2014"
+      ]
+    },
+    {
+      "identifier": "bub_gb_TgdaAAAAYAAJ",
+      "status": "已取回",
+      "note": "",
+      "file": "bub_gb_TgdaAAAAYAAJ.txt",
+      "source_url": "https://archive.org/download/bub_gb_TgdaAAAAYAAJ/bub_gb_TgdaAAAAYAAJ_djvu.txt",
+      "sha256": "c7d305577980c2ec9e3d0aee4e43863ff1aa5ff9806d532e4569314fa7904def",
+      "bytes": 83800,
+      "words": 11804,
+      "fetched_at": "2026-08-24T09:58:12",
+      "ia_date": "1920",
+      "ia_year": "1920",
+      "ia_publicdate": "2015-02-02 18:26:26",
+      "ia_creator": "Zehder, Hugo",
+      "ia_title": "Wassily Kandinsky",
+      "ia_licenseurl": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1810",
+        "1911",
+        "1912",
+        "1913",
+        "1918"
+      ],
+      "digitization_years": [
+        "1920"
+      ]
+    },
+    {
+      "identifier": "calanhm_000639",
+      "status": "已取回",
+      "note": "",
+      "file": "calanhm_000639.txt",
+      "source_url": "https://archive.org/download/calanhm_000639/calanhm_000639_access_djvu.txt",
+      "sha256": "f78bbf250274d4ff5ba07f43214a14114b784197d26baefb1bb29684bec26fe9",
+      "bytes": 4807,
+      "words": 736,
+      "fetched_at": "2026-08-24T09:48:21",
+      "ia_date": "1926-09-01",
+      "ia_year": "",
+      "ia_publicdate": "2022-06-22 21:23:24",
+      "ia_creator": "Natural History Museum Los Angeles County",
+      "ia_title": "The Blue Four: Feininger, Kandinsky, Jawlensky, Paul Klee",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1864",
+        "1866",
+        "1871",
+        "1879",
+        "1910",
+        "1912",
+        "1913",
+        "1914",
+        "1915",
+        "1916",
+        "1917",
+        "1918"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "concerningthespi05321gut",
+      "status": "已取回",
+      "note": "",
+      "file": "concerningthespi05321gut.txt",
+      "source_url": "https://archive.org/download/concerningthespi05321gut/cnspr10.txt",
+      "sha256": "a027b18b6270d66f642bbc30a020787bfccaad5c757d9ccc2ecafeff791e9e2d",
+      "bytes": 175505,
+      "words": 28616,
+      "fetched_at": "2026-08-24T09:48:03",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2015-06-20 11:13:33",
+      "ia_creator": "Kandinsky, Wassily, 1866-1944",
+      "ia_title": "Concerning the Spiritual in Art",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1910",
+        "1911",
+        "1912",
+        "1913",
+        "1971",
+        "2002",
+        "2005"
+      ],
+      "digitization_years": [
+        "2004"
+      ]
+    },
+    {
+      "identifier": "derblauereiter00kand",
+      "status": "已取回",
+      "note": "",
+      "file": "derblauereiter00kand.txt",
+      "source_url": "https://archive.org/download/derblauereiter00kand/derblauereiter00kand_djvu.txt",
+      "sha256": "7854e9844c36e0cb0e9c7b69582239f5a3b727a31f80624be25d6295c7131938",
+      "bytes": 239371,
+      "words": 30857,
+      "fetched_at": "2026-08-24T09:48:03",
+      "ia_date": "1914",
+      "ia_year": "",
+      "ia_publicdate": "2012-10-31 14:09:51",
+      "ia_creator": [
+        "Kandinsky, Wassily, 1866-1944",
+        "Marc, Franz, 1880-1916"
+      ],
+      "ia_title": "Der Blaue Reiter",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1761",
+        "1914"
+      ],
+      "digitization_years": [
+        "2012"
+      ]
+    },
+    {
+      "identifier": "exposition00gale",
+      "status": "已取回",
+      "note": "",
+      "file": "exposition00gale.txt",
+      "source_url": "https://archive.org/download/exposition00gale/exposition00gale_djvu.txt",
+      "sha256": "9de3accf8d52a7efdabbc8b2eae920a81a740b6d5c75675172aef5c0849dd9b9",
+      "bytes": 10002,
+      "words": 1338,
+      "fetched_at": "2026-08-24T09:48:17",
+      "ia_date": "1930",
+      "ia_year": "",
+      "ia_publicdate": "2012-08-09 11:37:18",
+      "ia_creator": "Galerie de France (Paris, France)",
+      "ia_title": "Exposition Kandinsky, du 14 au 31 mars 1930: Galerie de France",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1886",
+        "1896",
+        "1903",
+        "1908",
+        "1910",
+        "1911",
+        "1912",
+        "1914",
+        "1920",
+        "1922",
+        "1923",
+        "1926"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "kandinsky-wassily-1866-1944.-the-art-of-spiritual-harmony",
+      "status": "已取回",
+      "note": "",
+      "file": "kandinsky-wassily-1866-1944.-the-art-of-spiritual-harmony.txt",
+      "source_url": "https://archive.org/download/kandinsky-wassily-1866-1944.-the-art-of-spiritual-harmony/Kandinsky, Wassily, 1866-1944. The Art of Spiritual Harmony_djvu.txt",
+      "sha256": "2b12ff13e0d3d9bca415a2396e1b690d981063fb919f21f670f6d25a5a1d633d",
+      "bytes": 165222,
+      "words": 27351,
+      "fetched_at": "2026-08-24T09:48:04",
+      "ia_date": "1914",
+      "ia_year": "",
+      "ia_publicdate": "2023-05-21 10:22:42",
+      "ia_creator": [
+        "Kandinsky, Wassily, 1866-1944",
+        "Кандинский, Василий Васильевич, 1866-1944",
+        "Sadler, M. T. H., tr."
+      ],
+      "ia_title": "The Art of Spiritual Harmony",
+      "ia_licenseurl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1910",
+        "1911",
+        "1912",
+        "1913"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "kandinsky00drei",
+      "status": "已取回",
+      "note": "",
+      "file": "kandinsky00drei.txt",
+      "source_url": "https://archive.org/download/kandinsky00drei/kandinsky00drei_djvu.txt",
+      "sha256": "4ebf6e296c02e1719e44d585c31bc163facca2d06d7908b19953cc46c04a335d",
+      "bytes": 17532,
+      "words": 2606,
+      "fetched_at": "2026-08-24T09:48:19",
+      "ia_date": "1923",
+      "ia_year": "",
+      "ia_publicdate": "2012-08-09 11:37:31",
+      "ia_creator": "Dreier, Katherine Sophie",
+      "ia_title": "Kandinsky",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1885",
+        "1911",
+        "1913",
+        "1921",
+        "1922",
+        "1923"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "kandinsky190119102kand",
+      "status": "已取回",
+      "note": "",
+      "file": "kandinsky190119102kand.txt",
+      "source_url": "https://archive.org/download/kandinsky190119102kand/kandinsky190119102kand_djvu.txt",
+      "sha256": "8602bfda914675059350f2e0f65eec9a197e87dd8fdaf51bdff6992b8ebf1821",
+      "bytes": 107232,
+      "words": 18432,
+      "fetched_at": "2026-08-24T09:48:05",
+      "ia_date": "1913",
+      "ia_year": "",
+      "ia_publicdate": "2025-02-13 18:24:49",
+      "ia_creator": "Kandinsky, Wassily, 1866-1944",
+      "ia_title": "Kandinsky, 1901-1913",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1902",
+        "1912"
+      ],
+      "digitization_years": [
+        "2025"
+      ]
+    },
+    {
+      "identifier": "kandinsky_202603",
+      "status": "已取回",
+      "note": "",
+      "file": "kandinsky_202603.txt",
+      "source_url": "https://archive.org/download/kandinsky_202603/Kandinsky_djvu.txt",
+      "sha256": "3c2a619a83a11a05bfa036e26e46a10fb368cc12f61c586f530de093c67eaf23",
+      "bytes": 197464,
+      "words": 28371,
+      "fetched_at": "2026-08-24T09:48:07",
+      "ia_date": "1912",
+      "ia_year": "",
+      "ia_publicdate": "2026-03-20 19:55:59",
+      "ia_creator": "Wassily Kandinsky",
+      "ia_title": "Über das Geistige in der Kunst, insbesondere in der Malerei",
+      "ia_licenseurl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1910",
+        "1911",
+        "1912"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "modernart00drei",
+      "status": "已取回",
+      "note": "",
+      "file": "modernart00drei.txt",
+      "source_url": "https://archive.org/download/modernart00drei/modernart00drei_djvu.txt",
+      "sha256": "4cd45ad5398f6e13b21efb3e31058ce12c36d988097e9329e42a5362886b57fc",
+      "bytes": 113066,
+      "words": 16768,
+      "fetched_at": "2026-08-24T09:58:12",
+      "ia_date": "1926",
+      "ia_year": "",
+      "ia_publicdate": "2012-08-08 20:00:03",
+      "ia_creator": "Dreier, Katherine Sophie",
+      "ia_title": "Modern art",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1912",
+        "1922",
+        "1925"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "punto-y-linea-sobre-el-plano-kandinsky",
+      "status": "已取回",
+      "note": "",
+      "file": "punto-y-linea-sobre-el-plano-kandinsky.txt",
+      "source_url": "https://archive.org/download/punto-y-linea-sobre-el-plano-kandinsky/Kandinsky_ Vassily-Punto y Linea sobre el Plano_djvu.txt",
+      "sha256": "b0b2815f19a362bbbedcb9cec112a1dae5c33467d416e886ddaa93e9fb3de9ae",
+      "bytes": 197114,
+      "words": 30690,
+      "fetched_at": "2026-08-24T09:48:10",
+      "ia_date": "",
+      "ia_year": "",
+      "ia_publicdate": "2023-10-02 04:39:36",
+      "ia_creator": "Vassily Kandinsky",
+      "ia_title": "Punto & linea sobre el plano - Vassily Kandinsky",
+      "ia_licenseurl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "titlepage_years": [
+        "1500",
+        "1918",
+        "1920",
+        "1921",
+        "1922",
+        "1923",
+        "1925",
+        "1926",
+        "1928",
+        "1933",
+        "1947",
+        "1952"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "tocka-i-linia-na-ploskosti.-o-duhovnom-v-iskusstve.ios",
+      "status": "已取回",
+      "note": "",
+      "file": "tocka-i-linia-na-ploskosti.-o-duhovnom-v-iskusstve.ios.txt",
+      "source_url": "https://archive.org/download/tocka-i-linia-na-ploskosti.-o-duhovnom-v-iskusstve.ios/Tocka i linia na ploskosti. O duhovnom v iskusstve.ios_djvu.txt",
+      "sha256": "8b82ecb2b8b96e57b31786b18a0e8408be4ac298918949b98cf150a95707c90e",
+      "bytes": 773797,
+      "words": 57789,
+      "fetched_at": "2026-08-24T09:48:09",
+      "ia_date": "1926",
+      "ia_year": "",
+      "ia_publicdate": "2026-04-07 05:49:38",
+      "ia_creator": "Wassily Kandinsky",
+      "ia_title": "Tocka I Linia Na Ploskosti. O Duhovnom V Iskusstve.ios",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1904",
+        "1910",
+        "1912"
+      ],
+      "digitization_years": []
+    },
+    {
+      "identifier": "unset0000unse_n2u2",
+      "status": "已取回",
+      "note": "",
+      "file": "unset0000unse_n2u2.txt",
+      "source_url": "https://archive.org/download/unset0000unse_n2u2/unset0000unse_n2u2_djvu.txt",
+      "sha256": "b7ab8020939096872249665e0743392f6617651abcc2686e37ff93fa9204f91a",
+      "bytes": 30480,
+      "words": 4922,
+      "fetched_at": "2026-08-24T09:58:10",
+      "ia_date": "1913",
+      "ia_year": "",
+      "ia_publicdate": "2024-06-26 01:36:42",
+      "ia_creator": "MEINEN ELTERN",
+      "ia_title": "KANDINSKY KLANGE",
+      "ia_licenseurl": "",
+      "titlepage_years": [],
+      "digitization_years": [
+        "2024"
+      ]
+    },
+    {
+      "identifier": "wassilykand00zehd",
+      "status": "已取回",
+      "note": "",
+      "file": "wassilykand00zehd.txt",
+      "source_url": "https://archive.org/download/wassilykand00zehd/wassilykand00zehd_djvu.txt",
+      "sha256": "24586df621a1d60fd1fa60fd002b802d026b6ebbac0f07accd70c012af6423c0",
+      "bytes": 93732,
+      "words": 11711,
+      "fetched_at": "2026-08-24T09:48:09",
+      "ia_date": "1920",
+      "ia_year": "",
+      "ia_publicdate": "2012-08-09 11:37:46",
+      "ia_creator": "Zehder, Hugo",
+      "ia_title": "Wassily Kandinsky: unter autorisierter Benutzung der russischen Selbstbiographie",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1806",
+        "1810",
+        "1911",
+        "1912",
+        "1913",
+        "1918",
+        "1920"
+      ],
+      "digitization_years": [
+        "2012"
+      ]
+    },
+    {
+      "identifier": "wassilykandinsky00zehduoft",
+      "status": "已取回",
+      "note": "",
+      "file": "wassilykandinsky00zehduoft.txt",
+      "source_url": "https://archive.org/download/wassilykandinsky00zehduoft/wassilykandinsky00zehduoft_djvu.txt",
+      "sha256": "c70e49dfd58a49ebae6ae90561a83e0bfdd9f61f48ae3dcbbee177132a1fb578",
+      "bytes": 93402,
+      "words": 11673,
+      "fetched_at": "2026-08-24T09:48:13",
+      "ia_date": "1920",
+      "ia_year": "",
+      "ia_publicdate": "2008-09-03 23:25:36",
+      "ia_creator": "Zehder, Hugo",
+      "ia_title": "Wassily Kandinsky; unter autorisierter Benutzung der russischen Selbstbiographie",
+      "ia_licenseurl": "",
+      "titlepage_years": [
+        "1806",
+        "1810",
+        "1911",
+        "1912",
+        "1913",
+        "1918",
+        "1920"
+      ],
+      "digitization_years": []
+    }
+  ]
+}

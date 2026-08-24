@@ -9,7 +9,7 @@
     "投资资本师": 25,
     "政治法律师": 9,
     "材料建工师": 28,
-    "艺术设计师": 4,
+    "艺术设计师": 5,
     "财务合规师": 2,
     "软件开发师": 35
   },
@@ -5790,6 +5790,63 @@
         "面对绘画/视觉创作的色彩问题时，提供以色彩为表达核心的方案与判断",
         "需要艺术家式第一人称文字（书信/自述/创作谈）时，提供可核验的声口",
         "规划创作或艺术工作流时，提供习作先行、反复练习、材料经济的方法"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "抽象艺术与色彩/形式理论分析（黄橙红情感效价、形状精神效价、形式-色彩语言）",
+        "现代艺术史观的框架性评述（精神演进、内在必然 vs 市场/流派）",
+        "艺术理论教学与纲领表述（1912 德/1914 英多语种理论书、Blaue Reiter 运动）",
+        "以自传/画册形态的自我表达（Rückblick 色彩记忆、1913 画册自传）"
+      ],
+      "canonical_name": "Wassily Kandinsky",
+      "distillation_traits": [
+        "以「内在必然性」（innere Notwendigkeit）为最高原理：创作与评价服从内在需要，而非模仿/装饰/市场（1912 德文原版）",
+        "媒介即有声：词语/颜色/形状都携带内在声音（innerer Klang），艺术是灵魂的唤醒而非装饰",
+        "形式服从内在需要：抽象/具象不是对错标准，形式的选择以内在必然为据",
+        "精神演进史观：把现代艺术放在物质主义之后灵魂初醒的长程中定位（金字塔/三角形态）",
+        "自我奠基的开创者叙事：以童年色彩记忆与第一幅自称「抽象」的画强调内在感受的原始性"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "No invented quotations, letters, or private commission details.",
+        "语料覆盖 1912-1930 年（一手）与至 1920 的传记；1922 后包豪斯、1933 后巴黎阶段不作断言",
+        "非艺术领域（医学/工程/投资/法律）明确拒绝判断；引文须逐字出自语料（含 OCR 原形），不编造书信/画作细节"
+      ],
+      "identity_family_id": "art-designer",
+      "key_capabilities": [
+        "建立并表述艺术理论体系（内在必然性原理，1912 德文原版/1914 英译）",
+        "色彩与形式的系统性分析（黄橙红等颜色与形状的精神效价、形式-色彩语言）",
+        "组织先锋艺术运动（与 Marc 合编 Der Blaue Reiter 年鉴、联结国际艺术家网络）",
+        "以自传/画册形态自我表达（Rückblick 把个人色彩记忆写成可传播文字）"
+      ],
+      "latest_artifact": "艺术设计师/wassily-kandinsky/versions/0.0.0.1/wassily-kandinsky-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "420f604da15a96b41703c1f7e6212250405dba9bd7bb2376462571b7c47f892f",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "4f1f6992c204cb087e79a96ec32cab551912d786120396391249cbf2ba381985",
+      "readiness": "ready",
+      "registration": "艺术设计师/wassily-kandinsky/registration.json",
+      "registration_category": "艺术设计师",
+      "research_cutoff": "2026-08-24",
+      "selection_reasons": [
+        "艺术设计师族核心人物：抽象艺术与艺术理论奠基人，一手德文/英文文本（1912《Über das Geistige in der Kunst》德文原版、1914 Sadler 英译、1913 画册自传）齐备",
+        "语料全公有领域：1912-1930 年出版文本 16 份（train 14 / holdout 2），2003 现代重印按 PD 判据排除",
+        "多独立泳道可检索：艺术理论体系、色彩与形式理论、先锋艺术组织（Blaue Reiter）、自传/画册自我表达",
+        "盲判实证：candidate 0.9456 vs baseline 0.6356（delta +0.31，flash 同模型盲判）"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "wassily-kandinsky",
+      "subject_status": "unauthored",
+      "subject_uid": "person-9f176e58304f995f",
+      "team_card": "艺术设计师/wassily-kandinsky/team-card.json",
+      "user_value": [
+        "面对抽象艺术/色彩理论时，提供内在必然性 + 形式-色彩语言的分析框架",
+        "需要理解现代艺术演进时，提供从「灵魂初醒/精神转向」定位艺术长程的史观",
+        "面对艺术创作/教育场景时，提供把个人内在感受与可教可传的理论纲领结合的做法"
       ],
       "version_count": 1
     },

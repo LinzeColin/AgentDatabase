@@ -1,0 +1,110 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "wikidata:Q61064",
+  "consent_authority": null,
+  "created_at": "2026-08-23T23:43:18Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "art-designer",
+    "display": "艺术设计师",
+    "mode": "single",
+    "primary": "art-designer",
+    "weights": {
+      "art-designer": 1.0
+    }
+  },
+  "language": "eng",
+  "model_version": "0.1.0-draft",
+  "name": "Wassily Kandinsky",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "抽象艺术理论（精神性、内在必然性）",
+        "色彩与形式心理学（点线面分析）",
+        "艺术教育（包豪斯课程）",
+        "先锋艺术运动（Blaue Reiter）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "archive.org artofspiritualha00kandrich（1914《The Art of Spiritual Harmony》英译本）"
+        },
+        {
+          "locator": "archive.org bderdasgeistigein46203gut（1912《Über das Geistige in der Kunst》德文原版）"
+        },
+        {
+          "locator": "archive.org kandinsky_202603（1912 德文原版扫描）"
+        }
+      ],
+      "canonical_name": "Wassily Kandinsky",
+      "distinguishing_basis": "本人署名 Wassily Kandinsky（Василий Кандинский），1866-1944，抽象绘画与理论著作；区别于：Victor Kandinsky（1849-1889 精神病学家）、Carla Kandinsky（现代诗人）、Nina Kandinsky（其妻，回忆录作者）。",
+      "evidence_level": "low",
+      "identity_category": "历史人物（1866-12-16 – 1944-12-13）",
+      "key_capabilities": [
+        "抽象艺术理论体系（精神性、内在必然性）",
+        "色彩与形式心理学（点线面分析）",
+        "艺术教育方法论（包豪斯课程）",
+        "先锋艺术运动组织（Blaue Reiter）"
+      ],
+      "label": "A",
+      "occupation_or_role": "抽象艺术先驱；画家、艺术理论家；包豪斯教员；Der Blaue Reiter 联合创办人",
+      "professional_background": "俄裔，1866 生于莫斯科；慕尼黑学画，1900 年代前卫艺术；1911 与 Franz Marc 创办 Der Blaue Reiter；1912《Über das Geistige in der Kunst》；1913《Klänge》；1922-1933 包豪斯任教；1926《Punkt und Linie zu Fläche》；1933 迁巴黎，1944 卒。",
+      "subject_uid": "wikidata:Q61064"
+    },
+    "chosen_subject_uid": "wikidata:Q61064",
+    "normalized_name": "wassilykandinsky",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "wassilykandinsky",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "wassily-kandinsky",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-fa511680bb18",
+  "time_scope": "1890s-1940s",
+  "updated_at": "2026-08-24T03:30:18Z",
+  "attribution_basis": {
+    "authority": "Wassily Kandinsky 著作归属依据：① 各载体扉页/题名页署名照录（见 covered_sources 逐份点名）：1912《Über das Geistige in der Kunst》（德文原版，扉页 KANDINSKY / ÜBER DAS GEISTIGE）；1914《The Art of Spiritual Harmony》英译（扉页 HARMONY BY WASSILY KANDINSKY: translated with an introduction by M. T. H. SADLER）；1913《Klänge》（扉页 KANDINSKY / KLÄNGE）；② Project Gutenberg 德文/英文全文电子版（berdasgeistigein46203gut、concerningthespi05321gut，元数据 Author: Wassily Kandinsky）；③ 1920 Zehder 传记（扉页 WASSILY KANDINSKY VON HUGO ZEHDER UNTER AUTORISIERTER BENUTZUNG DER RUSSISCHEN SELBSTBIOGRAPHIE，即作者授权自传）。",
+    "citation": "archive.org 各源 locator（artofspiritualha00kandrich 1914 英译 / berdasgeistigein46203gut 1912 德文 PG / kandinsky_202603 1912 德文原版扫描 / concerningthespi05321gut 1914 英译 PG / unset0000unse_n2u2 1913 Klänge / derblauereiter00kand 1914 年鉴 / kandinsky190119102kand 1913 画册 / wassilykand00zehd 1920 传记）+ 各载体扉页署名照录（逐份见 covered_sources）；档案记录：Kandinsky 1866-1944，索罗门·古根海姆基金会 Hilla von Rebay 收藏（各源 digitized 标注）。 新增 locator：kandinskijvvstupenimizdotdelaizob56 / vvkandinskij72（1918 俄文自传）、imkampfumdiekuns00unse（1911 答复册）、poschechinaobshchestvennomuvkusudburlju72（1913 宣言集）。",
+    "disputed_policy": "语料内无学界公认伪托篇目；1912 德文原版为 Kandinsky 亲著（其艺术理论代表作，多次再版）；1914 英译为 M. T. H. Sadler 授权英译，版权在译者但正文归属 Kandinsky；1913 Klänge 为其散文诗集；Der Blaue Reiter 1914 年鉴由 Kandinsky 与 Franz Marc 合编（Kandinsky 为第一编者并撰稿）；Kandinsky 1901-1913 为其自选画册（含自传性文字 Rückblick）；1920 Zehder 传记依 Kandinsky 授权俄语自传编写，属当代传记（S1）。2003 年现代重印（俄文《Точка и линия》《О духовном в искусстве》与西文 Punto y línea）载体为 2003 年版次，按 PD 判据（出版年 ≤1930）排除，已记入 raw/_EXCLUDED.txt。 1911《Im Kampf um die Kunst》为多人集体答复册（非康定斯基独著），其中含其亲笔署名文字，按「含本人署名文本的合著/集体载体」计 P1 expression；1913《Пощечина общественному вкусу》为多人宣言集，含康定斯基文，计 P1 expression（集体载体）；1918《Ступени》为康定斯基独著自传，P1。",
+    "disputed_works": [],
+    "covered_sources": [
+      "berdasgeistigein46203gut.txt ｜ 署名照录：Project Gutenberg's Über das Geistige in der Kunst, by Wassily Kandinsky / Author: Wassily Kandinsky / DEM ANDENKEN AN",
+      "kandinsky_202603.txt ｜ 署名照录：KANDINSKY ÜBER DAS GEISTIGE IN DER KUNST, insbesondere in der Malerei",
+      "concerningthespi05321gut.txt ｜ 署名照录：CONCERNING THE SPIRITUAL IN ART BY WASSILY KANDINSKY [TRANSLATED BY MICHAEL T. H. SADLER]",
+      "TheSpiritualInArtByWassilyKandinsky.txt ｜ 署名照录：The Spiritual in Art by Wassily Kandinsky（与 concerningthespi05321gut 同文，PG 英译副本）",
+      "artofspiritualha00kandrich.txt ｜ 署名照录：THE ART OF SPIRITUAL HARMONY BY WASSILY KANDINSKY: translated WITH AN INTRODUCTION BY M. T. H. SADLER",
+      "kandinsky-wassily-1866-1944.-the-art-of-spiritual-harmony.txt ｜ 署名照录：The Art of Spiritual Harmony by Wassily Kandinsky（与 artofspiritualha00kandrich 同文）",
+      "unset0000unse_n2u2.txt ｜ 署名照录：KANDINSKY KLÄNGE（1913 散文诗集扉页）",
+      "kandinsky190119102kand.txt ｜ 署名照录：KANDINSKY 1901-1913 Verlag Der Sturm Berlin（1913 自选画册扉页）",
+      "derblauereiter00kand.txt ｜ 署名照录：DER BLAUE REITER Herausgegeben von Kandinsky und Franz Marc 1914",
+      "wassilykand00zehd.txt ｜ 署名照录：ERSTER BAND: WASSILY KANDINSKY VON HUGO ZEHDER UNTER AUTORISIERTER BENUTZUNG DER RUSSISCHEN SELBSTBIOGRAPHIE 1920",
+      "wassilykandinsky00zehduoft.txt ｜ 署名照录：WASSILY KANDINSKY VON HUGO ZEHDER UNTER AUTORISIERTER BENUTZUNG DER RUSSISCHEN SELBSTBIOGRAPHIE 1920（同一传记另一馆）",
+      "bub_gb_TgdaAAAAYAAJ.txt ｜ 署名照录：WASSILY KANDINSKY VON HUGO ZEHDER UNTER AUTORISIERTER BENUTZUNG DER RUSSISCHEN SELBSTBIOGRAPHIE 1920（同一传记 Google 扫描）",
+      "kandinsky00drei.txt ｜ 署名照录：KANDINSKY Published by the SOCIETE ANONYME, Inc. 19 East 47th St., New York（Dreier 1923 英文介绍小册）",
+      "modernart00drei.txt ｜ 署名照录：MODERN ART COMPOSED BY KATHERINE S. DREIER & CONSTANTIN ALADJALOV SOCIETE ANONYME—MUSEUM OF MODERN ART（1926，含 Kandinsky 评述）",
+      "exposition00gale.txt ｜ 署名照录：EXPOSITION KANDINSKY du 14 au 31 mars 1930 Galerie de France Rue de l'Abbaye, Paris（1930 法文展览目录）",
+      "calanhm_000639.txt ｜ 署名照录：THE BLUE FOUR FEININGER KANDINSKY JAWLENSKY PAUL KLEE Los Angeles Museum Exposition Park October 1926（展览目录）",
+      "imkampfumdiekuns00unse.txt ｜ 署名照录：IM KAMPF UM DIE KUNST DIE ANTWORT AUF DEN »PROTEST DEUTSCHER KÜNSTLER« … München. W. Kandinsky. （1911 集体答复册，含康定斯基署名文字）"
+    ],
+    "attribution_policy": "印刷时代署名证据形态为扉页/题名页/编者序；Kandinsky 为画家-理论家，其文字著作以德文/英文印刷本传世，扉页署名 KANDINSKY / WASSILY KANDINSKY 明确。外语一手（德文原版、1913 Klänge 德文）与英译（Sadler 1914、PG 全文）对照使用。",
+    "pseudepigrapha_policy": "语料内无伪托篇目；凡 archive.org creator 字段含 Kandinsky 但实为他人者（Victor Kandinsky 精神病学家、Carla Kandinsky 诗人、Nina Kandinsky 回忆录作者）已在抓源 EXCLUDE 排除；2003 现代重印排除见 _EXCLUDED.txt。",
+    "counting_convention": "berdasgeistigein46203gut 与 kandinsky_202603 是 1912 德文原版的两份独立扫描（PG 全文 vs Cleveland 馆扫描），内容重合但属同一出版行为的不同数字化副本，故前者为主件后者 derived_from；concerningthespi05321gut 与 TheSpiritualInArtByWassilyKandinsky 是同一 PG 英译的两份抓取（主件 concerningthespi05321gut）；artofspiritualha00kandrich 与 kandinsky-wassily-1866-1944.-the-art-of-spiritual-harmony 是 1914 Sadler 英译的两份扫描（主件 artofspiritualha00kandrich）；wassilykand00zehd / wassilykandinsky00zehduoft / bub_gb_TgdaAAAAYAAJ 是 1920 Zehder 传记的三个馆的扫描（主件 wassilykand00zehd）。以上重复对均已在台账以 derived_from 标注，独立作品计数不虚增。；kandinskijvvstupenimizdotdelaizob56 与 vvkandinskij72 是 1918 俄文自传《Ступени》（Текст художника）的两份扫描副本（主件 src-7adc3107df41，另一份 derived_from 已声明）。补充三条一手 PD 源：① imkampfumdiekuns00unse（1911《Im Kampf um die Kunst》集体答复册，含康定斯基亲笔署名文字「München. W. Kandinsky.」，扉页 IM KAMPF UM DIE KUNST）；② kandinskijvvstupenimizdotdelaizob56 / vvkandinskij72（1918 俄文自传《Ступени》，扉页署名 В. В. КАНДИНСКИИ / Текст художника / МОСКВА 1918，人工核验；纯西里尔载体，check_byline_in_carrier 的拉丁词分词无法逐字回查，故署名照录在 counting_convention 与 authority 中人工声明，不放入 covered_sources）；③ poschechinaobshchestvennomuvkusudburlju72（1913 未来主义宣言集《Пощечина общественному вкусу》，目录署名 В. В. Кандинсюй 79—83，含康定斯基文，人工核验；纯西里尔载体同上处理）。语料中德文原版《Über das Geistige in der Kunst》（1912）与 Sadler 英译（1914）为同一理论著作的两个独立出版载体（平行见证），check_source_dedup 按内容将跨语种载体计为独立 distinct_works（跨语种 shingle 永不合并，判据口径），快速档来源计数采用该机械口径；断言侧事实类断言（如出版史）引用两版属合理。"
+  }
+}

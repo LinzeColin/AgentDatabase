@@ -1,0 +1,111 @@
+{
+  "lanes": 3,
+  "去掉纸面道后": 3,
+  "逐道份数": {
+    "writings": 11,
+    "conversations": 0,
+    "expression": 0,
+    "decisions": 0,
+    "timeline": 2,
+    "external": 6
+  },
+  "未分道": 0,
+  "★口径": "按题名粗判，一份只进一道；external 只由一手/二手分类定；一手的剩余类归 writings（**不是默认值，且不虚增道数**）",
+  "明细": [
+    {
+      "identifier": "PunctumLineaque",
+      "道": "writings",
+      "title": "PunctumLineaque"
+    },
+    {
+      "identifier": "TheSpiritualInArtByWassilyKandinsky",
+      "道": "writings",
+      "title": "The Spiritual in Art by Wassily Kandinsky"
+    },
+    {
+      "identifier": "artofspiritualha00kandrich",
+      "道": "writings",
+      "title": "The art of spiritual harmony"
+    },
+    {
+      "identifier": "berdasgeistigein46203gut",
+      "道": "writings",
+      "title": "Über das Geistige in der Kunst, Insbesondere in der Malerei"
+    },
+    {
+      "identifier": "bub_gb_TgdaAAAAYAAJ",
+      "道": "external",
+      "title": "Wassily Kandinsky"
+    },
+    {
+      "identifier": "calanhm_000639",
+      "道": "external",
+      "title": "The Blue Four: Feininger, Kandinsky, Jawlensky, Paul Klee"
+    },
+    {
+      "identifier": "concerningthespi05321gut",
+      "道": "writings",
+      "title": "Concerning the Spiritual in Art"
+    },
+    {
+      "identifier": "derblauereiter00kand",
+      "道": "writings",
+      "title": "Der Blaue Reiter"
+    },
+    {
+      "identifier": "exposition00gale",
+      "道": "external",
+      "title": "Exposition Kandinsky, du 14 au 31 mars 1930: Galerie de France"
+    },
+    {
+      "identifier": "kandinsky-wassily-1866-1944.-the-art-of-spiritual-harmony",
+      "道": "writings",
+      "title": "The Art of Spiritual Harmony"
+    },
+    {
+      "identifier": "kandinsky00drei",
+      "道": "external",
+      "title": "Kandinsky"
+    },
+    {
+      "identifier": "kandinsky190119102kand",
+      "道": "writings",
+      "title": "Kandinsky, 1901-1913"
+    },
+    {
+      "identifier": "kandinsky_202603",
+      "道": "writings",
+      "title": "Über das Geistige in der Kunst, insbesondere in der Malerei"
+    },
+    {
+      "identifier": "modernart00drei",
+      "道": "external",
+      "title": "Modern art"
+    },
+    {
+      "identifier": "punto-y-linea-sobre-el-plano-kandinsky",
+      "道": "writings",
+      "title": "Punto & linea sobre el plano - Vassily Kandinsky"
+    },
+    {
+      "identifier": "tocka-i-linia-na-ploskosti.-o-duhovnom-v-iskusstve.ios",
+      "道": "writings",
+      "title": "Tocka I Linia Na Ploskosti. O Duhovnom V Iskusstve.ios"
+    },
+    {
+      "identifier": "unset0000unse_n2u2",
+      "道": "external",
+      "title": "KANDINSKY KLANGE"
+    },
+    {
+      "identifier": "wassilykand00zehd",
+      "道": "timeline",
+      "title": "Wassily Kandinsky: unter autorisierter Benutzung der russischen Selbst"
+    },
+    {
+      "identifier": "wassilykandinsky00zehduoft",
+      "道": "timeline",
+      "title": "Wassily Kandinsky; unter autorisierter Benutzung der russischen Selbst"
+    }
+  ]
+}

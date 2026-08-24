@@ -1,0 +1,15 @@
+# numFound=12 rows=12 query=title:("о духовном" OR "Кандинский")
+# ★ date 是**原作年**不是版次年；PD 判定看题名页
+identifier	date	year	creator	title	language	collection
+2017_20240918			Yuriy Karetin	Кандинский. Альбом Для Творчества - 2017	rus	booksbylanguage_russian; booksbylanguage
+140-5173-2012	2012-01-01T00:00:00Z	2012		Санкт-Петербургская психиатрическая больница св. Николая Чудотворца. К 140-летию. Т.III. В.Х. Кандинский (2012)	rus	booksbylanguage_russian; booksbylanguage; fav-pavel_the_first
+vvkandinskij72	1918-01-01T00:00:00Z	1918	Кандинский Василий Васильевич	В. В. Кандинский	Russian	russian-online-libraries; booksbylanguage_russian; booksbylanguage; fav-cruentaver; fav-eivuv; fav-t011641; fav-thisismy555; fav-user17207
+2017_20260629				Кандинский Альбом Для Творчества 2017		opensource
+poschechinaobschestvennomuvkusudburlju72	1913-01-01T00:00:00Z	1913		Пощечина общественному вкусу. Д. Бурлюк, Н. Бурлюк, А. Крученых, В. Кандинский, Б. Лившиц, В. Маяковский, В. Хлебников : [стихи, проза, статьи]. - М., 1912.	Russian	russian-online-libraries; booksbylanguage_russian; booksbylanguage; fav-alexconver
+1890-74523-260503	1890-01-01T00:00:00Z	1890		Кандинский В.Х. К вопросу о невменяемости (1890)	rus	opensource
+kandinskijvvstupenimizdotdelaizob56	1918-01-01T00:00:00Z	1918	Кандинский, Василий Васильевич (1866 - 1944)	Кандинский В. В. Ступени. - М. : Изд. Отдела Изобразительных Искусств Нар. Комиссариата Просвещения, 1918.	Russian	russian-online-libraries; booksbylanguage_russian; booksbylanguage; fav-alexconver; fav-thisismy555
+2005-31240250814	2005-01-01T00:00:00Z	2005		Кандинский В.В. Точка и линия на плоскости (2005)	rus	booksbylanguage_russian; booksbylanguage
+1890_24102505117	1890-01-01T00:00:00Z	1890		Кандинский В.Х. О псевдогаллюцинациях (1890)	rus	booksbylanguage_russian; booksbylanguage; fav-pavel_the_first
+1881-64574-60503	1881-01-01T00:00:00Z	1881		Кандинский В.Х. Общепонятные психологические этюды (1881)	rus	opensource
+obupokoeniiusopshihioduhovnomzdraviizhiv94	1866-01-01T00:00:00Z	1866	Бухарев Александр Матвеевич	Об упокоении усопших и о духовном здравии живых	Russian	russian-online-libraries; booksbylanguage_russian; booksbylanguage
+dmitrievdoduhovnomobrazovaniizemledelc97	1846-01-01T00:00:00Z	1846	Дмитриев, Дмитрий	Дмитриев Д. О духовном образовании земледельческого класса в России, в отношении к его благосостоянию. - СПб., 1846.	Russian	russian-online-libraries; booksbylanguage_russian; booksbylanguage

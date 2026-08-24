@@ -1,0 +1,43 @@
+{
+  "红": [
+    {
+      "identifier": "punto-y-linea-sobre-el-plano-kandinsky",
+      "title": "Punto & linea sobre el plano - Vassily Kandinsky",
+      "理由": [
+        "有 ISBN（ISBN 制度 1970 年才有）：ISBN 950-12-5025-83"
+      ]
+    }
+  ],
+  "黄": [
+    {
+      "identifier": "TheSpiritualInArtByWassilyKandinsky",
+      "title": "The Spiritual in Art by Wassily Kandinsky",
+      "理由": [
+        "有版权字样但取不到年份：of Concerning the Spiritual in Art, by Wassily Kandinsky Copyright law",
+        "有版权字样但取不到年份：laws are changing all over the world. Be sure to check the copyright l"
+      ]
+    },
+    {
+      "identifier": "concerningthespi05321gut",
+      "title": "Concerning the Spiritual in Art",
+      "理由": [
+        "有版权字样但取不到年份：k of Concerning the Spiritual in Art, by Wassily Kandinsky Copyright l",
+        "有版权字样但取不到年份： laws are changing all over the world. Be sure to check the copyright "
+      ]
+    },
+    {
+      "identifier": "wassilykand00zehd",
+      "title": "Wassily Kandinsky: unter autorisierter Benutzung der russischen Selbst",
+      "理由": [
+        "有版权字样但取不到年份：BIENERT/DRESDEN Image not reproduced. May be under Copyright. VORWORT "
+      ]
+    }
+  ],
+  "绿": 12,
+  "PG发布日": 3,
+  "_覆盖面": {
+    "台账份数": 16,
+    "真读到": 16,
+    "读不到": 0
+  }
+}

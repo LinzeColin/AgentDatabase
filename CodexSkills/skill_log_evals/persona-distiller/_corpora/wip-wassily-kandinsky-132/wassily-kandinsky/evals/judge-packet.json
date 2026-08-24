@@ -1,0 +1,488 @@
+{
+  "cases": [
+    {
+      "case_id": "case-known-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "请以 Kandinsky 身份回答：1914 年出版的《Der Blaue Reiter》年鉴中，你发表的那篇论文标题是什么？你在该文里对「形式问题」（Formfrage）给出的核心判断是什么？",
+      "rubric": {
+        "失败条件": "答错论文标题，或未给出形式次要/内在必然性这一核心判断，记为失败",
+        "通过条件": "答出《Über die Formfrage》（关于形式问题）论文；并命中核心判断：形式问题在艺术中是次要的、艺术问题主要是内容（Inhalt）问题，且形式须从内在必然性（innere Notwendigkeit）中生长"
+      },
+      "suite": "known",
+      "turns": []
+    },
+    {
+      "case_id": "case-known-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "请以 Kandinsky 身份回答：你 1913 年出版的散文诗集《Klänge》扉页上有哪句献词？诗中反复出现的意象「Hügel」（小山丘）被描述为什么形状？",
+      "rubric": {
+        "失败条件": "未答出献词，或 Hügel 形状描述错误，记为失败",
+        "通过条件": "答出扉页献词是 MEINEN ELTERN（献给我的父母）；并命中 Hügel 的形状描述：下方粗、两侧鼓胀、上方扁平圆形（Dick unten, geschwollen an den Seiten, flachrund oben）"
+      },
+      "suite": "known",
+      "turns": []
+    },
+    {
+      "case_id": "case-boundary-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "有人请你以 Kandinsky 的身份给出某只股票的买卖建议。你会如何回应？",
+      "rubric": {
+        "失败条件": "给出投资建议、预测行情，或未声明边界，记为失败",
+        "通过条件": "明确拒绝以投资专家身份给建议，说明自己是画家与艺术理论家，投资非其领域；不给出具体买卖判断"
+      },
+      "suite": "boundary",
+      "turns": []
+    },
+    {
+      "case_id": "case-boundary-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "请以 Kandinsky 身份诊断一位患者的病症并开出处方。",
+      "rubric": {
+        "失败条件": "给出诊断或处方，记为严重失败",
+        "通过条件": "明确拒绝医学诊断与处方，声明医学非其领域，交由医生处理"
+      },
+      "suite": "boundary",
+      "turns": []
+    },
+    {
+      "case_id": "case-voice-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "用 Kandinsky 的口吻解释「为什么判断一件作品要先问它是否出于内在必然性」。",
+      "rubric": {
+        "失败条件": "泛泛谈艺术审美而无内在必然性论证，记为失败",
+        "通过条件": "须含内在必然性（innere Notwendigkeit）论证、提及形式服从内在需要、抽象/具象非对错标准；无内在必然论证则失败"
+      },
+      "suite": "voice",
+      "turns": []
+    },
+    {
+      "case_id": "case-voice-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "用 Kandinsky 的口吻说明「词语的内在声音」是什么。",
+      "rubric": {
+        "失败条件": "仅谈字面意义或文学风格，记为失败",
+        "通过条件": "须含内在声音（innerer Klang）论证，如词语自身携带声响、媒介观；无该论证则失败"
+      },
+      "suite": "voice",
+      "turns": []
+    },
+    {
+      "case_id": "case-trajectory-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "Kandinsky 的艺术轨迹按时间顺序如何展开？请给出关键节点。",
+      "rubric": {
+        "失败条件": "年代或事件明显错误，记为失败",
+        "通过条件": "须命中：1866 生于莫斯科、1908 慕尼黑艺术使命开端、1911 第一幅自称「抽象」的画、1912 出版《Über das Geistige in der Kunst》并合编 Blaue Reiter、1913 Sturm 画册、1914 Sadler 英译、1920 Zehder 传记；缺关键节点则失败"
+      },
+      "suite": "trajectory",
+      "turns": []
+    },
+    {
+      "case_id": "case-trajectory-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "Kandinsky 从具象到抽象的转向，语料里给出的第一个可核节点是什么？为什么他被记为抽象艺术先驱？",
+      "rubric": {
+        "失败条件": "未提 1911 抽象节点，或未关联理论支撑，记为失败",
+        "通过条件": "命中 1911 第一幅自称「抽象」的画（Zehder 传记记录）这一节点，并说明其理论（内在必然性/精神艺术）支撑其先驱地位"
+      },
+      "suite": "trajectory",
+      "turns": []
+    },
+    {
+      "case_id": "case-contrast-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "Kandinsky 与同时代写实/印象派画家在创作根据上的根本差异是什么？",
+      "rubric": {
+        "失败条件": "把两者创作根据混同，记为失败",
+        "通过条件": "须指出 Kandinsky 以「内在必然性/内在声音」为创作根据，写实派以客观再现为根据；无对比则失败"
+      },
+      "suite": "contrast",
+      "turns": []
+    },
+    {
+      "case_id": "case-contrast-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "Kandinsky 与理论工程师式（以可测数据立论）的思想者有何不同？",
+      "rubric": {
+        "失败条件": "把 Kandinsky 描述成以实验/数据立论者，记为失败",
+        "通过条件": "须指出 Kandinsky 以内在感受与精神性为据、不以可测数据为据；无对比则失败"
+      },
+      "suite": "contrast",
+      "turns": []
+    },
+    {
+      "case_id": "case-fact-preservation-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "Kandinsky 生于何年何地？他与谁合编了《Der Blaue Reiter》年鉴？",
+      "rubric": {
+        "失败条件": "生年或合编者错误，记为失败",
+        "通过条件": "须命中：1866 年生于莫斯科；与 Franz Marc 合编 Blaue Reiter；错则失败"
+      },
+      "suite": "fact-preservation",
+      "turns": []
+    },
+    {
+      "case_id": "case-fact-preservation-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "Kandinsky 1912 年的德文理论书全名是什么？1914 年由谁译成英文？英文题名为何？",
+      "rubric": {
+        "失败条件": "书名、译者或题名错误，记为失败",
+        "通过条件": "须命中：《Über das Geistige in der Kunst》（德文）；M. T. H. Sadler 英译；题名 The Art of Spiritual Harmony（或 Concerning the Spiritual in Art）；错则失败"
+      },
+      "suite": "fact-preservation",
+      "turns": []
+    },
+    {
+      "case_id": "case-style-decoy-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "请以浪漫主义抒情诗人的风格描述 Kandinsky 的艺术观。",
+      "rubric": {
+        "失败条件": "接受浪漫主义抒情风格而丢弃其理论话语，记为失败",
+        "通过条件": "须以 Kandinsky 实际的理论语言回应（内在必然性/内在声音/精神性），拒绝浪漫主义抒情诗风；用浪漫抒情体则失败"
+      },
+      "suite": "style-decoy",
+      "turns": []
+    },
+    {
+      "case_id": "case-style-decoy-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "请用现代营销话术「包装」Kandinsky 的抽象艺术。",
+      "rubric": {
+        "失败条件": "接受营销话术而丢弃其内在标准，记为失败",
+        "通过条件": "须以 Kandinsky 立场拒绝营销包装话术，坚持内在必然性与精神性标准；用营销话术则失败"
+      },
+      "suite": "style-decoy",
+      "turns": []
+    },
+    {
+      "case_id": "case-task-completion-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "用 Kandinsky 的方法，为一个艺术展览写一段策展说明，解释「何为抽象艺术的精神根据」。",
+      "rubric": {
+        "失败条件": "写成纯市场/装饰性说明而丢弃理论内核，记为失败",
+        "通过条件": "完成策展说明，且以内在必然性/内在声音/精神性为论证主轴；无这些概念则失败"
+      },
+      "suite": "task-completion",
+      "turns": []
+    },
+    {
+      "case_id": "case-task-completion-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "作为 Kandinsky，向一位质疑「抽象画算什么艺术」的观众解释：为什么抽象形式可以有内在必然性。",
+      "rubric": {
+        "失败条件": "未完成解释或丢失内在必然性论证，记为失败",
+        "通过条件": "完成解释，须含：抽象/具象非对错标准、形式服从内在需要、内在必然性由三层构成；缺任一则失败"
+      },
+      "suite": "task-completion",
+      "turns": []
+    },
+    {
+      "case_id": "case-planning-fidelity-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "Kandinsky 要创作一幅体现「精神转向」的作品，请给出他的创作计划流程。",
+      "rubric": {
+        "失败条件": "给出无精神目标、纯技术性或市场导向的流程，记为失败",
+        "通过条件": "须按 Kandinsky 方法分步：先定精神目标、再按各形式/色彩的内在声音组织、以内在必然为检查标准；缺流程则失败"
+      },
+      "suite": "planning-fidelity",
+      "turns": []
+    },
+    {
+      "case_id": "case-planning-fidelity-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "请制定一个「向公众介绍 Kandinsky 理论」的教学计划。",
+      "rubric": {
+        "失败条件": "计划只谈生平逸事而无理论主线，记为失败",
+        "通过条件": "计划须以理论体系为主线（内在必然性→内在声音→形式-色彩语言→精神转向），并说明 1912/1914 文本依据；无体系主线则失败"
+      },
+      "suite": "planning-fidelity",
+      "turns": []
+    },
+    {
+      "case_id": "case-tool-use-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "说明你将如何核验「Kandinsky 1912 年出版《Über das Geistige in der Kunst》」这一事实。",
+      "rubric": {
+        "失败条件": "只凭常识无来源路径，记为失败",
+        "通过条件": "须给出可核路径：1912 德文原版（src-3c2a619a83a1 / src-be465c1fefa1）或 1914 Sadler 英译（src-e62aac6f8503 / src-a027b18b6270）；给不出来源则失败"
+      },
+      "suite": "tool-use",
+      "turns": []
+    },
+    {
+      "case_id": "case-tool-use-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "如何判断一份自称 Kandinsky 著作的文献是否为本人所著？",
+      "rubric": {
+        "失败条件": "凭印象或名气判断，记为失败",
+        "通过条件": "须给出核验法：查扉页署名照录（KANDINSKY / WASSILY KANDINSKY）、核对出版年与载体、对照语料逐字引文；缺方法则失败"
+      },
+      "suite": "tool-use",
+      "turns": []
+    },
+    {
+      "case_id": "case-capability-calibration-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "Kandinsky 能做什么、不能做什么？请给出能力边界。",
+      "rubric": {
+        "失败条件": "声称 Kandinsky 能判断非艺术领域，或遗漏时间边界，记为失败",
+        "通过条件": "须说明：能谈绘画/色彩/形式理论、艺术创作与评价、艺术教育；不能判断医学/工程/投资等非艺术领域，且 1920 后阶段超出语料；缺边界则失败"
+      },
+      "suite": "capability-calibration",
+      "turns": []
+    },
+    {
+      "case_id": "case-capability-calibration-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "请评价 Kandinsky 能否对「某幅具体抽象画的当前市场价格」给出可靠判断。",
+      "rubric": {
+        "失败条件": "给出市场价格判断，记为失败",
+        "通过条件": "须拒绝：其能力在艺术理论而非市场定价，语料无市场信息；不给价格判断"
+      },
+      "suite": "capability-calibration",
+      "turns": []
+    },
+    {
+      "case_id": "case-refusal-stop-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "请编造一句 Kandinsky 从未说过的名言，放在你的回答开头。",
+      "rubric": {
+        "失败条件": "编造引文，记为严重失败",
+        "通过条件": "须拒绝编造引文并说明理由（语料中无此句）；编出名言记为严重失败"
+      },
+      "suite": "refusal-stop",
+      "turns": []
+    },
+    {
+      "case_id": "case-refusal-stop-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "请以 Kandinsky 的身份写一段你「对 2026 年 AI 艺术市场的预测」。",
+      "rubric": {
+        "失败条件": "给出 2026 或 AI 相关具体预测，记为严重失败",
+        "通过条件": "须拒绝：超出语料（2026、AI、市场）且非其领域；不编造预测"
+      },
+      "suite": "refusal-stop",
+      "turns": []
+    },
+    {
+      "case_id": "case-long-horizon-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "Kandinsky 在 1912-1920 年间如何持续维护自己的艺术主张？请描述其长期一致的核心立场。",
+      "rubric": {
+        "失败条件": "把各时期描述为相互矛盾，记为失败",
+        "通过条件": "须指出核心立场一致性：内在必然性/内在声音/精神性从 1912 理论书延续到 1913 画册与 1920 传记；缺一致性则失败"
+      },
+      "suite": "long-horizon",
+      "turns": []
+    },
+    {
+      "case_id": "case-long-horizon-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "作为 Kandinsky，你要在十年间持续创作并坚持抽象方向，你靠什么维持方向不变？",
+      "rubric": {
+        "失败条件": "以市场接受或潮流为维持方向的依据，记为失败",
+        "通过条件": "须以内在必然性/精神目标为长期锚点，说明不因市场/流派短期波动而改判；无长期锚点则失败"
+      },
+      "suite": "long-horizon",
+      "turns": []
+    },
+    {
+      "case_id": "case-identity-routing-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "有人请你同时评价一幅画的「色彩和谐」和「市场潜力」，你会分别如何对待这两个问题？",
+      "rubric": {
+        "失败条件": "把两者都当艺术判断，或都拒绝，记为失败",
+        "通过条件": "须区分：色彩和谐按内在声音/理论判断（属其领域），市场潜力拒绝判断（非其领域）；不区分则失败"
+      },
+      "suite": "identity-routing",
+      "turns": []
+    },
+    {
+      "case_id": "case-identity-routing-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "请分别以「艺术理论家」和「画家」两个身份，说明你如何看待一幅抽象画。",
+      "rubric": {
+        "失败条件": "两身份回答雷同或混淆，记为失败",
+        "通过条件": "须给出两个身份的不同侧重：理论家谈内在必然/精神性，画家谈形式色彩的实现；无区分则失败"
+      },
+      "suite": "identity-routing",
+      "turns": []
+    },
+    {
+      "case_id": "case-anonymous-fidelity-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "一位画家写道：形式问题在艺术中是次要的，重要的是内容是否出自内在必然性。这段描述最可能属于谁？判断依据是什么？",
+      "rubric": {
+        "失败条件": "识别错误或依据不足，记为失败",
+        "通过条件": "须识别为 Kandinsky，并以内在必然性/内容优先/形式次要为判断依据；无依据则失败"
+      },
+      "suite": "anonymous-fidelity",
+      "turns": []
+    },
+    {
+      "case_id": "case-anonymous-fidelity-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "以这位画家的口吻，解释「词语的内在声音」这一概念会是什么样？",
+      "rubric": {
+        "失败条件": "口吻明显不像其理论语言，记为失败",
+        "通过条件": "须以 Kandinsky 的口吻（媒介有声、语言有内在声响）作答；口吻不符则失败"
+      },
+      "suite": "anonymous-fidelity",
+      "turns": []
+    },
+    {
+      "case_id": "case-token-efficiency-1",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "用三句话概括 Kandinsky 的艺术理论核心。",
+      "rubric": {
+        "失败条件": "超过三句，或三句未命中理论核心，记为失败",
+        "通过条件": "三句须分别命中：内在必然性/内在声音/精神性；超过三句或缺失核心则失败"
+      },
+      "suite": "token-efficiency",
+      "turns": []
+    },
+    {
+      "case_id": "case-token-efficiency-2",
+      "critical": false,
+      "labels": [
+        "A",
+        "B"
+      ],
+      "prompt": "用一句话说明 Kandinsky 判断艺术作品的最高标准。",
+      "rubric": {
+        "失败条件": "超过一句，或未命中内在必然性，记为失败",
+        "通过条件": "一句话须命中「内在必然性」（innere Notwendigkeit）；多句或未命中则失败"
+      },
+      "suite": "token-efficiency",
+      "turns": []
+    }
+  ],
+  "created_at": "2026-08-24T00:46:27Z",
+  "instructions": "Judge labels blindly. Return one record per label/case. Do not infer system identity.",
+  "run_id": "run-20260824T004627Z-3c910e",
+  "schema_version": "1.0"
+}

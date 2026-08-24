@@ -1,0 +1,14 @@
+# EXCLUDED / 项目记录（非一手语料；供 check_unsourced_names 归档）
+
+# 1) 2003 现代重印（俄文/西文），版次年 >1930，非 PD 版次，已移出 raw/_modern_excluded/：
+#    - tocka-i-linia-na-ploskosti.-o-duhovnom-v-iskusstve.ios.txt（俄文《Точка и линия》《О духовном в искусстве》，Azbuka 2003）
+#    - PunctumLineaque.txt（俄文《Точка и линия》，Azbuka 2003）
+#    - punto-y-linea-sobre-el-plano-kandinsky.txt（西文《Punto y línea sobre el plano》，ISBN 950-12-5025-83）
+#    三者正文为 1926 年原文，但载体为 2003 年版次，按 PD 版次判据（出版年 ≤1930）不采用；
+#    语料以 1912 德文原版 / 1914 英文译本 / 1913 Klänge 原版为准。
+
+# 2) 作品/书名专名（非人名，答案里出现属正常引用）：
+#    - Klänge —— Kandinsky 1913 年散文诗集书名。
+#    - Der Blaue Reiter —— 1912/1914 年鉴书名（与 Franz Marc 合编）。
+#    - Gabriele Münter —— 其长期伴侣与画家（出现在 Zehder 传记语料中）。
+#    - Franz Marc —— Blaue Reiter 合编者（语料中）。

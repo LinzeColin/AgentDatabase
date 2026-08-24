@@ -1,0 +1,172 @@
+{
+  "总数": 19,
+  "计数": {
+    "一手": 11,
+    "二手": 8,
+    "需人判": 0
+  },
+  "一手占比下界": 0.5789,
+  "一手占比上界": 0.5789,
+  "★口径": "需人判**不默认成一手**；门取哪个数须先把需人判判完",
+  "★参数": {
+    "surname": [
+      "Kandinsky",
+      "Кандинский"
+    ],
+    "说明": "本产物由这些参数生成；复验请原样重放，不要从 meta.json 猜姓"
+  },
+  "明细": [
+    {
+      "identifier": "PunctumLineaque",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "PunctumLineaque",
+      "creator": "Vasily Kandinsky",
+      "words": 36770
+    },
+    {
+      "identifier": "TheSpiritualInArtByWassilyKandinsky",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Spiritual in Art by Wassily Kandinsky",
+      "creator": "Wassily Kandinsky",
+      "words": 29654
+    },
+    {
+      "identifier": "artofspiritualha00kandrich",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The art of spiritual harmony",
+      "creator": "Kandinsky, Wassily, 1866-1944; Sadleir, Michael, 1888-1957",
+      "words": 27770
+    },
+    {
+      "identifier": "berdasgeistigein46203gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Über das Geistige in der Kunst, Insbesondere in der Malerei",
+      "creator": "Wassily Kandinsky",
+      "words": 30553
+    },
+    {
+      "identifier": "bub_gb_TgdaAAAAYAAJ",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Wassily Kandinsky",
+      "creator": "Zehder, Hugo",
+      "words": 11804
+    },
+    {
+      "identifier": "calanhm_000639",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "The Blue Four: Feininger, Kandinsky, Jawlensky, Paul Klee",
+      "creator": "Natural History Museum Los Angeles County",
+      "words": 736
+    },
+    {
+      "identifier": "concerningthespi05321gut",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Concerning the Spiritual in Art",
+      "creator": "Kandinsky, Wassily, 1866-1944",
+      "words": 28616
+    },
+    {
+      "identifier": "derblauereiter00kand",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Der Blaue Reiter",
+      "creator": "Kandinsky, Wassily, 1866-1944; Marc, Franz, 1880-1916",
+      "words": 30857
+    },
+    {
+      "identifier": "exposition00gale",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Exposition Kandinsky, du 14 au 31 mars 1930: Galerie de France",
+      "creator": "Galerie de France (Paris, France)",
+      "words": 1338
+    },
+    {
+      "identifier": "kandinsky-wassily-1866-1944.-the-art-of-spiritual-harmony",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "The Art of Spiritual Harmony",
+      "creator": "Kandinsky, Wassily, 1866-1944; Кандинский, Василий Васильевич, 1866-1944; Sadler",
+      "words": 27351
+    },
+    {
+      "identifier": "kandinsky00drei",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Kandinsky",
+      "creator": "Dreier, Katherine Sophie",
+      "words": 2606
+    },
+    {
+      "identifier": "kandinsky190119102kand",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Kandinsky, 1901-1913",
+      "creator": "Kandinsky, Wassily, 1866-1944",
+      "words": 18432
+    },
+    {
+      "identifier": "kandinsky_202603",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Über das Geistige in der Kunst, insbesondere in der Malerei",
+      "creator": "Wassily Kandinsky",
+      "words": 28371
+    },
+    {
+      "identifier": "modernart00drei",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "Modern art",
+      "creator": "Dreier, Katherine Sophie",
+      "words": 16768
+    },
+    {
+      "identifier": "punto-y-linea-sobre-el-plano-kandinsky",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Punto & linea sobre el plano - Vassily Kandinsky",
+      "creator": "Vassily Kandinsky",
+      "words": 30690
+    },
+    {
+      "identifier": "tocka-i-linia-na-ploskosti.-o-duhovnom-v-iskusstve.ios",
+      "档": "一手",
+      "依据": "目标为第一作者，题名无「写他」的标记",
+      "title": "Tocka I Linia Na Ploskosti. O Duhovnom V Iskusstve.ios",
+      "creator": "Wassily Kandinsky",
+      "words": 57789
+    },
+    {
+      "identifier": "unset0000unse_n2u2",
+      "档": "二手",
+      "依据": "目标不在 creator 字段里",
+      "title": "KANDINSKY KLANGE",
+      "creator": "MEINEN ELTERN",
+      "words": 4922
+    },
+    {
+      "identifier": "wassilykand00zehd",
+      "档": "二手",
+      "依据": "题名含「(?<!auto)biograph」且含目标姓名",
+      "title": "Wassily Kandinsky: unter autorisierter Benutzung der russischen Selbstbiographie",
+      "creator": "Zehder, Hugo",
+      "words": 11711
+    },
+    {
+      "identifier": "wassilykandinsky00zehduoft",
+      "档": "二手",
+      "依据": "题名含「(?<!auto)biograph」且含目标姓名",
+      "title": "Wassily Kandinsky; unter autorisierter Benutzung der russischen Selbstbiographie",
+      "creator": "Zehder, Hugo",
+      "words": 11673
+    }
+  ]
+}
