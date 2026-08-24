@@ -1345,7 +1345,8 @@
       "no": 224,
       "name": "Nathan Rothschild",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 225,
@@ -1363,55 +1364,63 @@
       "no": 227,
       "name": "Hetty Green",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 228,
       "name": "Daniel Drew",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 229,
       "name": "Jay Gould",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 230,
       "name": "Russell Sage",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 231,
       "name": "James Keene",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 232,
       "name": "Gerald Loeb",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 233,
       "name": "John Burr Williams",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 234,
       "name": "Roger Babson",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "REG"
     },
     {
       "no": 235,
       "name": "Joseph P. Kennedy",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 236,
@@ -1441,7 +1450,8 @@
       "no": 240,
       "name": "Charles Dow",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手仅 2 部（Scientific Stock Speculation/Charles H. Dow Economist），其余全为后人解读，lane=1"
     },
     {
       "no": 241,
@@ -1453,37 +1463,43 @@
       "no": 242,
       "name": "Richard Wyckoff",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 243,
       "name": "William Gann",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 244,
       "name": "Nicolas Darvas",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 245,
       "name": "Philip Carret",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 246,
       "name": "T. Rowe Price",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 247,
       "name": "Shelby Davis",
       "family": "投资资本师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源定判延后：一手不足（见 _延后名单.json）"
     },
     {
       "no": 248,

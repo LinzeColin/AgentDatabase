@@ -1,0 +1,14 @@
+{
+  "文件数": 14,
+  "阈值": 0.55,
+  "重复簇": [
+    [
+      "businessbar00babs.txt",
+      "jstor-1011180.txt"
+    ]
+  ],
+  "独立文献数上界": 13,
+  "按题名归并的独立作品数": 13,
+  "★ 两个口径": "门用台账行数；按题名归并的数回答「他有多少部不同的作品」。",
+  "★口径": "min-hash Jaccard；businessbar00babs×jstor-1011180 同源 barometer 方法，见 counting_convention"
+}

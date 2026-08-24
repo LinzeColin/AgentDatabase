@@ -1,11 +1,11 @@
 {
   "round": 19,
-  "updated_at": "2026-08-25T01:10Z",
+  "updated_at": "2026-08-25T04:30Z",
   "time_band": "valley-0000-0800",
-  "people": 134,
-  "current_person": "投资资本师族 #248 Jean-Baptiste Say 完成入库",
-  "stage": "Say #248 全流程完成（盲判 4 轮 → 六门全过 candidate 0.9172 / delta +0.5813；release 0 错 3 警已 acknowledge；package+register 入库）",
-  "next": "投资资本师族 下一位候选（#240 Charles Dow 或族内未做者）",
+  "people": 135,
+  "current_person": "投资资本师族 #234 Roger Babson 完成入库",
+  "stage": "Babson #234 全流程完成（盲判 6 轮 → 六门全过 candidate 0.8688 / delta +0.6797；release 0 错 2 警已 acknowledge；package+register 入库）",
+  "next": "投资资本师族已全做（REG 27/DEF 延后），切换下一族 TODO",
   "threads": {
     "T1": {
       "branch": "main",
@@ -37,10 +37,11 @@
     "#250 Veblen 延后(203)",
     "#236 Benjamin Franklin(130/131)",
     "#147 Andrea Palladio 补记(130)",
-    "#248 Say 全流程(134)"
+    "#248 Say 全流程(134)",
+    "#234 Babson 全流程(135)"
   ],
   "p0_closed": [],
-  "note": "Say #248 完成：16 语料（train 12+holdout 4，法/英/西/意），research 门 0 错；盲判 4 轮（首轮 candidate 8 题 critical → 修 traj 转述身份/decoy 中文数字/tool 数量例/渐进保留 → 第三轮修 fact-02 on prend le moyen → 第四轮修 traj-02 完整锚点 → 六门全过，candidate 0.9172 / baseline 0.3359 / delta +0.5813）；release 0 错 3 警（lane_quotes 28/基线不可作能力证据/rubric 谈资料库）已 acknowledge；main 计数校准含 T3 合入的艺术族，people=134",
+  "note": "Babson #234 完成：17 语料（train 14+holdout 3，含 3 份 decisions 道 JSTOR 政论补第3道）；盲判 6 轮（修 decoy 中文数字/tok 单句/plan 力量清单/task 保守投资核心/route 认领/fact foot-pounds/voice 四基石/lh 张力承认/cal 让渡/baseline decoy 数字 → 六门全过，candidate 0.8688 / baseline 0.1891 / delta +0.6797）；release 0 错 2 警（baseline-not-capability/rubric 谈资料库）已 acknowledge；投资资本师族 27 REG 完成，剩余候选全延后",
   "cost_baseline": {
     "flash": {
       "calls": 934,

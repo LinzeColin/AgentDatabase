@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:rogerbabson",
+  "canonical_name": "Roger Babson",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "babson",
+  "subject_uid": "person-6f7653de34fb54d5",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/babson-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-24T16:00:04Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "cd30a9385bd59b415299f000c7698dac40148e591d32f776523e2fe50355c263",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/babson-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "f1960854f09b20799faf5696307c50237a9be8953c66ee304bc52ad672dff9f8",
+      "runtime_size_bytes": 106608,
+      "size_bytes": 115183
+    }
+  ]
+}

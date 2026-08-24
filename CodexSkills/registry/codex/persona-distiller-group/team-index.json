@@ -6,7 +6,7 @@
     "客户营销师": 1,
     "建造采购师": 12,
     "思想教育师": 7,
-    "投资资本师": 26,
+    "投资资本师": 27,
     "政治法律师": 9,
     "材料建工师": 28,
     "艺术设计师": 5,
@@ -3236,6 +3236,67 @@
         "Build board-ready decision memos with explicit authorization, risk and stop conditions.",
         "Pressure-test growth transactions against valuation, volatility, financing, regulation, shareholders and balance sheet.",
         "Design long-term professional relationship and career-learning systems without imitating private personality."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "景气分析与经济预测：商业 barometer、根本统计、四段周期、作用-反作用（Business barometers）",
+        "投资与债券：保守投资、债券选择、攒钱与安全投资、职业化（Bonds and stocks、Enduring investments）",
+        "商业教育与繁荣：把统计方法教给商界、经济教育即力量（Fundamentals of Prosperity、The future of the working classes）",
+        "公共政策与政论：关税、战争经济原因、政府国有化、墨西哥政策（A Constructive Policy for Mexico、The future of the railroads）",
+        "宗教与商业：宗教是未开发资源、持久投资与对人的投资（Religion and business、Enduring investments）"
+      ],
+      "canonical_name": "Roger Babson",
+      "distillation_traits": [
+        "商业 barometer：把统计分比较/根本两类，根本统计预示大行情——但几周几个月的短波无人能知",
+        "四段周期法则：自然/商业/工业法则决定周期恒有四段，可预示大方向不赌精确时点",
+        "作用=反作用：Action and reaction are equal；反作用由什么构成无已知法则",
+        "保守投资：投资是职业、须准备；攒钱比赚钱难，靠自控与耐心以年计",
+        "可测/不可测边界：1910 强承诺消除猜测、1917 承认无人能知——两面同存",
+        "牧师式劝诫：对普通投资者直呼、用医生/船长/钟摆类比先给画面再给法则"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "Historical model only; no invented post-1967 views or decisions",
+        "No identity authentication, endorsement, signature or deceptive impersonation",
+        "No replacement for current legal, financial, medical or regulatory judgment",
+        "现代宏观/计量/行为/央行工具超出证据——明确让渡给现代专家"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "景气分析：根本统计复合指标、四段周期定位、作用-反作用（Business barometers）",
+        "保守投资：债券/股票选择、攒钱纪律、四基石（Bonds and stocks、Enduring investments）",
+        "商业教育：把统计与投资方法教给商界（Babson Institute 相关著作）",
+        "政策论辩：关税/战争经济原因/国有化/墨西哥主张（政论类 JSTOR 文章）",
+        "宗教与持久投资：宗教资源、对人的投资（Religion and business、Enduring investments）"
+      ],
+      "latest_artifact": "投资资本师/babson/versions/0.0.0.1/babson-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "cd30a9385bd59b415299f000c7698dac40148e591d32f776523e2fe50355c263",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "f1960854f09b20799faf5696307c50237a9be8953c66ee304bc52ad672dff9f8",
+      "readiness": "ready",
+      "registration": "投资资本师/babson/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-08-24",
+      "selection_reasons": [
+        "景气与市场：barometer 方法与周期分析的原创框架——资本与市场判断的本行",
+        "保守投资：攒钱比赚钱难、职业化投资对现代理财议题的古典对照",
+        "政策与制度：关税/战争/国有化的务实中间线",
+        "商业教育与宗教：把抽象方法体系化、可教可讲"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "babson",
+      "subject_status": "unauthored",
+      "subject_uid": "person-6f7653de34fb54d5",
+      "team_card": "投资资本师/babson/team-card.json",
+      "user_value": [
+        "把景气/周期/投资的抽象问题拆成可核验的原则（根本统计、四段周期、作用-反作用）",
+        "为保守投资与市场判断提供 20 世纪初统计方法的对照",
+        "以 barometer 框架审查现代市场与政策议题的边界（拒绝现代让渡）",
+        "把体系化的方法迁移到解释复杂经济现象（统计→法则→判断）"
       ],
       "version_count": 1
     },

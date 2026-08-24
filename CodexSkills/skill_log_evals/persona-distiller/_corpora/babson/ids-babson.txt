@@ -1,0 +1,19 @@
+# babson：探源 80 条去重 → 精选 14 条（PD 稳一手，覆盖 writings/expression/timeline）
+# 丢：1930 后版权墙（If Inflation Comes 1937 等）；同名（Babson College/家谱）
+# --- writings 主干（Business Barometers 多版 + 投资论著） ---
+businessbarom00babs
+bondsstockseleme00babs
+enduringinvestme00babs
+fundamentalsofpr00babs
+religionbusiness00babs
+futureofsouthame01babs
+futureofrailroad00babs
+cu31924032459822
+wbwilsonanddepa00babsgoog
+coxtheman00babs
+# --- expression 期刊文章（JSTOR） ---
+jstor-1011180
+jstor-1011181
+jstor-1814786
+# --- 其他 writings ---
+whatissuccess00babs

@@ -1,0 +1,101 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "person-roger-babson-1875",
+  "consent_authority": "archive.org 公开领域一手著作（1875-1967，1930 前 PD 稳）+ JSTOR 期刊文章；无涉个人隐私",
+  "created_at": "2026-08-24T16:00:04Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "investor-capital-allocator",
+    "display": "投资资本师",
+    "mode": "single",
+    "primary": "investor-capital-allocator",
+    "weights": {
+      "investor-capital-allocator": 1.0
+    }
+  },
+  "language": "zh-CN",
+  "model_version": "0.1.0-draft",
+  "name": "Roger Babson",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "景气分析与经济预测：商业 barometer、供给-需求曲线、周期判断（Business Barometers）",
+        "投资与债券：保守投资、债券选择、永久投资（Bonds and Stocks、Enduring Investments）",
+        "商业教育与繁荣：商科教育、繁荣的基础（Fundamentals of Prosperity、Babson Institute）",
+        "公共政策与政论：自由贸易、宗教与商业、时局评论（Religion and Business、Future of South America）",
+        "人生与自我管理：自传中的创业与信念（Actions and Reactions）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Babson%2C+Roger+W%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=200&output=json"
+        }
+      ],
+      "canonical_name": "Roger W. Babson",
+      "distinguishing_basis": "探源：creator:\"Babson, Roger W.\" numFound 大、creator:\"Babson, Roger Ward\" 命中、creator:\"Babson, Roger\" 命中，合并去重 185 条、本人一手 135 条、独立一手作品 65 部、一手占比 73%。同名干扰：Babson College/家谱/法院判例/数学论文作者已按 creator 生卒年 1875-1967 排除。一手覆盖 writings 52 部（Business Barometers 12 版、Religion and Business、Enduring Investments 等）+ expression 12 篇（JSTOR 1910-1920）+ timeline 1 部（Actions and Reactions 1935），道数 3+。",
+      "evidence_level": "high",
+      "identity_category": "投资资本师",
+      "key_capabilities": [
+        "景气分析——商业 barometer 与统计指标预测周期（Business Barometers）",
+        "投资建议——债券/股票选择、保守与永久投资（Bonds and Stocks、Enduring Investments）",
+        "商业教育——把统计方法教给商界（Babson Institute、教材）",
+        "公共写作——宗教/政治/社会评论（Religion and Business 等）",
+        "时局判断——1929 年看跌警告等（社论与自传）"
+      ],
+      "label": "A",
+      "occupation_or_role": "美国统计学家、投资顾问与商业教育家（1875-1967）；商业景气（barometer）分析与投资咨询的奠基人",
+      "professional_background": "Roger W. Babson（1875-1967，马萨诸塞）是美国统计投资分析的先驱。1904 年创办 Babson's Statistical Organization，以《Business Barometers》(1909 起年刊) 建立商业景气指标体系，用统计图（supply/demand 曲线）预测经济周期；1920s 创办 Babson Institute（后 Babson College）推广商科教育；著书 60+ 部覆盖投资、商业、宗教与公共政策（Bonds and Stocks 1913、Enduring Investments 1921、Fundamentals of Prosperity 1920、Future of South America 1915 等）；1929 年 9 月发出著名的市场看跌警告。档案：archive.org creator 字段 Babson, Roger W./Babson, Roger Ward，一手著作 60+ 部、JSTOR 期刊文章多篇、自传 Actions and Reactions(1935)。",
+      "subject_uid": "person-roger-babson-1875"
+    },
+    "chosen_subject_uid": "person-roger-babson-1875",
+    "normalized_name": "rogerbabson",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "rogerbabson",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "babson",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-523f6e24ed5b",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-24T16:00:04Z",
+  "attribution_basis": {
+    "authority": "Roger W. Babson（1875-1967）著作归属依据：① archive.org 目录 creator 字段（Babson, Roger W. / Babson, Roger Ward，生卒年 1875-1967）逐份点名；② 各书题名页/署名行（见 covered_sources 逐份照录）——《Business Barometers》1912 题名页署 Roger W. Babson；《Bonds and Stocks》题名页署 Roger W. Babson；《Religion and Business》题名页署 Roger W. Babson；JSTOR 期刊文章《Barometric Indices of the Condition of Trade》(1910) 等以 Babson 本名发表。同名干扰（Babson College/家谱/法院判例）由 creator 生卒年与内容剔除。",
+    "citation": "archive.org 目录检索 creator:\"Babson, Roger W\"(numFound 16) + creator:\"Babson, Roger Ward\"(numFound 64)，合并去重 80 条，独立一手作品 32 部；各源 archive.org item 页（locator 见 source-ledger.jsonl）。",
+    "disputed_policy": "14 份全部为 Babson 本人一手著作/期刊文章；Business Barometers 多版为同一著作的不同版本，JSTOR 文章为其方法在期刊载体的表述。无学界公认伪托争议。",
+    "disputed_works": [],
+    "covered_sources": [
+      "bondsstockseleme00babs.txt ｜ 署名照录：Bonds and stocks; the elements of successful investing",
+      "businessbar00babs.txt ｜ 署名照录：Business barometers used in the accumulation of money;",
+      "coxtheman00babs.txt ｜ 署名照录：Cox--the man",
+      "cu31924032459822.txt ｜ 署名照录：The future of the working classes; economic facts for employers and wage earners",
+      "enduringinvestme00babs.txt ｜ 署名照录：Enduring investments, by Roger W. Babson",
+      "fundamentalsofpr00babs.txt ｜ 署名照录：Fundamentals of prosperity : what they are and whence they come",
+      "futureofrailroad00babs.txt ｜ 署名照录：The future of the railroads : historic and economic facts for railroad men, shippers, and investors",
+      "futureofsouthame01babs.txt ｜ 署名照录：The future of South America",
+      "jstor-1011180.txt ｜ 署名照录：Barometric Indices of the Condition of Trade",
+      "jstor-1011181.txt ｜ 署名照录：Sources of Market News",
+      "jstor-1814786.txt ｜ 署名照录：Security Prices and the War",
+      "religionbusiness00babs.txt ｜ 署名照录：Religion and business",
+      "wbwilsonanddepa00babsgoog.txt ｜ 署名照录：W. B. Wilson and the Department of labor",
+      "whatissuccess00babs.txt ｜ 署名照录：What is success?"
+    ],
+    "counting_convention": "Business Barometers（businessbar00babs.txt，1912 版）与 JSTOR 文章《Barometric Indices of the Condition of Trade》(jstor-1011180.txt，1910) 内容重叠 34.2%——二者是同一套 barometer 方法在两个载体（年刊专著 vs 期刊文章）的表述，分属 writings 与 expression两道、非同一证据的重印，各自成立。"
+  }
+}
