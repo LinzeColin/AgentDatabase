@@ -1,0 +1,97 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "person-john-wanamaker-1838",
+  "consent_authority": "archive.org 公开领域一手著作（1890-1928，PD 绿）；无涉个人隐私",
+  "created_at": "2026-08-24T23:07:37Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "entrepreneur-operator",
+    "display": "创业经营师",
+    "mode": "single",
+    "primary": "entrepreneur-operator",
+    "weights": {
+      "entrepreneur-operator": 1.0
+    }
+  },
+  "language": "zh-CN",
+  "model_version": "0.1.0-draft",
+  "name": "John Wanamaker",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "零售经营：百货经营、明码标价、退换货、广告营销（Evolution of Mercantile Business、Aisle Managers）",
+        "商业教育与人力资源：商店学校、员工培训（Commercial Institute、Aisle Managers）",
+        "公共服务与政策：邮政改革、乡村投递、邮政储蓄（任邮政部长时期的政策主张）",
+        "人生哲学与自我管理：格言、商业伦理（Maxims of Life and Business）",
+        "历史人物与纪念：林肯、Isaiah Williamson 等人物传记与纪念（Primer on Lincoln、Life of Williamson）"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://archive.org/advancedsearch.php?q=creator%3A%28%22Wanamaker%2C+John%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier,title,creator,year&rows=200&output=json"
+        }
+      ],
+      "canonical_name": "John Wanamaker",
+      "distinguishing_basis": "探源：creator 规范著录 ×2 + title Wanamaker/Maxims/John Wanamaker + 名作题名补查，合并去重 242 条；一手 23 identifier、独立一手 9-11 部（writings 3/expression 6/timeline 2/external 2）、道数 4-5、一手占比约 0.6。同名剔除（NASA John L/Marc/Zoe/Joe Wanamaker/法院案）；圣诗编选（compiler 非作者声口）不充一手。卒 1922 ≤1930 全 PD。",
+      "evidence_level": "high",
+      "identity_category": "创业经营师",
+      "key_capabilities": [
+        "零售经营——现代百货原则、明码标价、退换货、广告（Evolution of Mercantile Business、Aisle Managers）",
+        "商业教育——商店学校、员工培训、零售人才（Commercial Institute）",
+        "公共服务——邮政改革、乡村投递、邮政储蓄（邮政部长时期）",
+        "公共演讲与政论——纪念演讲、时政演说（Quayism、Taft 献词）",
+        "商业伦理与格言——人生格言、商业信条（Maxims of Life and Business）"
+      ],
+      "label": "A",
+      "occupation_or_role": "美国百货零售业先驱（1838-1922）；费城与纽约 Wanamaker 百货创始人、现代零售营销与商业教育开创者、美国邮政部长",
+      "professional_background": "John Wanamaker（1838-1922，费城）是美国现代百货零售业的开创者。1861 年与人合开男装店，1876 年创立 Wanamaker 百货（费城），后扩张至纽约，首创\"货品可退换/明码标价/广告营销\"等现代零售原则；1889-1893 任美国邮政部长（推行乡村免费投递、邮政储蓄）；创办 John Wanamaker Commercial Institute（商场学校，商业教育）；以\"商店即学校\"理念著称。著作：Wanamaker Primer on Abraham Lincoln（1908）、Maxims of Life and Business（1923 身后编选）、Life of Isaiah V. Williamson（1928）、The Evolution of Mercantile Business（1900 期刊）+ 多篇演讲（Aisle Managers 1914、Quayism 1898、Taft 献词 1912）+ 圣诗编选（Living Hymns）。档案：archive.org creator 字段 Wanamaker, John，独立一手 9-11 部、道数 4-5。",
+      "subject_uid": "person-john-wanamaker-1838"
+    },
+    "chosen_subject_uid": "person-john-wanamaker-1838",
+    "normalized_name": "johnwanamaker",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "johnwanamaker",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "wanamaker",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-18f0915f91b8",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-24T23:07:37Z",
+  "attribution_basis": {
+    "authority": "John Wanamaker（1838-1922）著作归属依据：① archive.org creator 字段（Wanamaker, John）逐份点名；② 各篇题名页/署名行（见 covered_sources）——《The Wanamaker Primer on Abraham Lincoln》题名页署 John Wanamaker；《The speeches of Hon. John Wanamaker on Quayism and Boss Domination》署 John Wanamaker；《The Evolution of Mercantile Business》以 John Wanamaker 本名发表于期刊。同名者（NASA John L/Marc/Zoe/Joe Wanamaker/法院案）已剔。",
+    "citation": "archive.org creator 检索 + title Wanamaker/Maxims/John Wanamaker + 名作题名补查，合并 242 条，独立一手 9-11 部；各源 archive.org item 页。",
+    "disputed_policy": "10 份中 9 份为 Wanamaker 本人一手（著作/演讲/期刊/宣传册）；《Maxims of Life and Business》(1923) 为身后编选的其格言集（正文是他的话，但为编选本）；《The Abraham Lincoln chair》(1911) 为百货纪念宣传册。圣诗编选（Living Hymns）未纳入。",
+    "disputed_works": [],
+    "covered_sources": [
+      "LifeIsaiahVWilliamsonWanamaker.txt ｜ 署名照录：Life of Isaiah V. Williamson",
+      "abrahamlincolnch00wana.txt ｜ 署名照录：The Abraham Lincoln chair : [advertising brochure]",
+      "addressmadeonocc00wana.txt ｜ 署名照录：Address made ... on the occasion of the visit of President Taft at the dedicatio",
+      "jstor-1009719.txt ｜ 署名照录：The Evolution of Mercantile Business",
+      "jstor-1011753.txt ｜ 署名照录：The John Wanamaker Commercial Institute-A Store School",
+      "maximsoflifebusi00wana.txt ｜ 署名照录：Maxims of life and business",
+      "mrwanamakersaddr00wana.txt ｜ 署名照录：Mr. Wanamaker's address to the aisle managers of the John Wanamaker store Philad",
+      "speechesofhonjoh00wana.txt ｜ 署名照录：The speeches of Hon. John Wanamaker on Quayism and boss domination in Pennsylvan",
+      "wanamakerprimero00wana.txt ｜ 署名照录：The Wanamaker primer on Abraham Lincoln : strength, mind, heart, will, the full-",
+      "wanamakerprimero5027wana.txt ｜ 署名照录：The Wanamaker primer on Abraham Lincoln"
+    ],
+    "counting_convention": "Primer on Abraham Lincoln 两版 wanamakerprimero5027wana.txt 与 wanamakerprimero00wana.txt（重叠，为同一著作不同版次，1908/1919）；Maxims of Life and Business 为身后格言编选（声口层须逐条人判说话人）。覆盖 writings 4（Primer 两版/Maxims/Williamson 传记）+ expression 5（Evolution/Commercial Institute/Aisle Managers/Taft 献词/Quayism 演说）+ timeline 1（Lincoln Chair 宣传册）。"
+  }
+}

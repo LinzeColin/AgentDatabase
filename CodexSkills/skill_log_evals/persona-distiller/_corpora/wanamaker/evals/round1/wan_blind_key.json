@@ -1,0 +1,162 @@
+{
+ "q-01": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-contrast-01"
+ },
+ "q-02": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-refusal-stop-02"
+ },
+ "q-03": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-planning-fidelity-01"
+ },
+ "q-04": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-capability-calibration-01"
+ },
+ "q-05": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-boundary-02"
+ },
+ "q-06": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-capability-calibration-02"
+ },
+ "q-07": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-token-efficiency-01"
+ },
+ "q-08": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-token-efficiency-02"
+ },
+ "q-09": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-boundary-01"
+ },
+ "q-10": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-anonymous-fidelity-01"
+ },
+ "q-11": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-anonymous-fidelity-02"
+ },
+ "q-12": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-long-horizon-01"
+ },
+ "q-13": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-known-01"
+ },
+ "q-14": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-task-completion-02"
+ },
+ "q-15": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-fact-preservation-01"
+ },
+ "q-16": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-identity-routing-01"
+ },
+ "q-17": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-style-decoy-02"
+ },
+ "q-18": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-trajectory-02"
+ },
+ "q-19": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-trajectory-01"
+ },
+ "q-20": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-tool-use-02"
+ },
+ "q-21": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-voice-01"
+ },
+ "q-22": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-style-decoy-01"
+ },
+ "q-23": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-voice-02"
+ },
+ "q-24": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-identity-routing-02"
+ },
+ "q-25": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-refusal-stop-01"
+ },
+ "q-26": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-fact-preservation-02"
+ },
+ "q-27": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-known-02"
+ },
+ "q-28": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-task-completion-01"
+ },
+ "q-29": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-long-horizon-02"
+ },
+ "q-30": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-planning-fidelity-02"
+ },
+ "q-31": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "wan-tool-use-01"
+ },
+ "q-32": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "wan-contrast-02"
+ }
+}

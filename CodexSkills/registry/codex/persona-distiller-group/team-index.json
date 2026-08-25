@@ -1,7 +1,7 @@
 {
   "category_counts": {
     "农林牧渔师": 2,
-    "创业经营师": 8,
+    "创业经营师": 9,
     "医疗护理师": 0,
     "客户营销师": 1,
     "建造采购师": 12,
@@ -389,6 +389,67 @@
         "Provides a rigorous operating lens for engineering-led companies and research institutions.",
         "Balances people, profit, customer value and social responsibility without collapsing them into one metric.",
         "Includes explicit modern-transfer limits, preventing nostalgic copying of the HP Way."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "零售经营：现代百货原则、明码标价、退换货、广告营销、顾客关系（The Evolution of Mercantile Business、Aisle Managers）",
+        "商业教育与人力资源：商店学校、员工培训、从基层提拔（The John Wanamaker Commercial Institute）",
+        "公共服务与政策：邮政改革、乡村投递、邮政储蓄（邮政部长时期，语料空白如实标注）",
+        "商业伦理与格言：服务公众、自私为大罪、行动从行动开始（Primer on Lincoln、Maxims 声口）",
+        "历史人物与纪念：林肯、Isaiah Williamson 传记与纪念（Primer on Lincoln、Life of Williamson）"
+      ],
+      "canonical_name": "John Wanamaker",
+      "distillation_traits": [
+        "零售三原则：货真价实、统一公道价、可退换——退换是销售合同条款而非恩惠",
+        "商业=服务公众：经营的全部目的就是服务公众，'I serve'是最伟大的格言",
+        "广告哲学：不硬塞我们要卖的，只告知人们想买的、并说真话",
+        "竞争防垄断：只要法律不压制竞争，零售业不会有垄断",
+        "商店即学校：雇佣即教育、从基层提拔、成绩定晋升",
+        "改革渐进法：试点→教育公众→承担成本→以结果说话"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "Historical model only; no invented post-1922 views or decisions",
+        "No identity authentication, endorsement, signature or deceptive impersonation",
+        "No replacement for current legal, financial, medical or regulatory judgment",
+        "现代零售数据科学/电商/算法定价超出证据——明确让渡给现代专家"
+      ],
+      "identity_family_id": "entrepreneur-operator",
+      "key_capabilities": [
+        "零售经营：百货三原则、顾客关系、广告营销（Evolution of Mercantile Business、Aisle Managers）",
+        "商业教育：商店学校、员工培训、从基层提拔（Commercial Institute）",
+        "公共演讲：纪念演讲、时政演说、店内训话（Quayism、Aisle Managers）",
+        "商业伦理：服务公众使命、格言化表达（Primer on Lincoln）",
+        "人物纪念与宣传：林肯/Williamson 传记、商店宣传册（Primer、Lincoln Chair）"
+      ],
+      "latest_artifact": "创业经营师/wanamaker/versions/0.0.0.1/wanamaker-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "b3ceda0233948fe8ec13743c3c1e60aa95d15a9f82be0ab58214f3d230509505",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "a4393c45fa1b58fcb86598863448ec74ae2623c7f347e457caa6daa2873c7741",
+      "readiness": "ready",
+      "registration": "创业经营师/wanamaker/registration.json",
+      "registration_category": "创业经营师",
+      "research_cutoff": "2026-08-24",
+      "selection_reasons": [
+        "零售经营：现代百货三原则与顾客服务——零售与商业经营的本行判断",
+        "商业伦理：服务公众使命对现代商业道德的古典对照",
+        "商业教育：商店学校与从基层提拔的人力观",
+        "公共与宣传：演讲声口与人物纪念的叙事方法"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "wanamaker",
+      "subject_status": "unauthored",
+      "subject_uid": "person-c303f264b170a786",
+      "team_card": "创业经营师/wanamaker/team-card.json",
+      "user_value": [
+        "把零售/服务/顾客关系的抽象问题拆成可核验的原则（货真价实、服务公众、广告真话）",
+        "为现代零售与商业伦理提供 20 世纪初的对照与边界",
+        "以服务公众使命审查现代商业议题（拒绝现代让渡）",
+        "把商店学校与渐进改革方法迁移到组织与教育话题"
       ],
       "version_count": 1
     },

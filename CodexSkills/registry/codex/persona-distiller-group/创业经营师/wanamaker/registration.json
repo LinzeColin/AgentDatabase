@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:johnwanamaker",
+  "canonical_name": "John Wanamaker",
+  "identity_family_id": "entrepreneur-operator",
+  "identity_mode": "single",
+  "registration_category": "创业经营师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "wanamaker",
+  "subject_uid": "person-c303f264b170a786",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/wanamaker-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-24T23:07:37Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "b3ceda0233948fe8ec13743c3c1e60aa95d15a9f82be0ab58214f3d230509505",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/wanamaker-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "a4393c45fa1b58fcb86598863448ec74ae2623c7f347e457caa6daa2873c7741",
+      "runtime_size_bytes": 92105,
+      "size_bytes": 100073
+    }
+  ]
+}

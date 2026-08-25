@@ -1081,7 +1081,8 @@
       "no": 180,
       "name": "Thomas Edison",
       "family": "创业经营师",
-      "status": "TODO"
+      "status": "DEF",
+      "note": "探源实测 conversations 书信 OCR 全灭，仅 2 道可用 <3 门槛"
     },
     {
       "no": 181,
@@ -1159,7 +1160,7 @@
       "no": 193,
       "name": "John Wanamaker",
       "family": "创业经营师",
-      "status": "TODO"
+      "status": "REG"
     },
     {
       "no": 194,

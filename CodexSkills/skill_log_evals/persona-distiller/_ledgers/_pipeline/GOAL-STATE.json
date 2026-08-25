@@ -1,11 +1,11 @@
 {
   "round": 19,
-  "updated_at": "2026-08-25T09:30Z",
+  "updated_at": "2026-08-25T12:30Z",
   "time_band": "valley-0000-0800",
-  "people": 136,
-  "current_person": "创业经营师族 #176 Andrew Carnegie 完成入库",
-  "stage": "Carnegie #176 全流程完成（盲判 5 轮 → 六门全过 candidate 0.8977 / delta +0.6852；release 0 错 2 警已 acknowledge；package+register 入库）",
-  "next": "创业经营师族 #180 Thomas Edison（一手 15 部可做）",
+  "people": 137,
+  "current_person": "创业经营师族 #193 John Wanamaker 完成入库（T1 最后一单）",
+  "stage": "Wanamaker #193 全流程完成（盲判 4 轮 → 六门全过 candidate 0.8672 / delta +0.6203；release 0 错 2 警已 acknowledge；package+register 入库）；T1 主线程按用户指示收尾",
+  "next": "收尾：T2/T3 切片收敛 + skill 迭代总结",
   "threads": {
     "T1": {
       "branch": "main",
@@ -39,10 +39,11 @@
     "#147 Andrea Palladio 补记(130)",
     "#248 Say 全流程(134)",
     "#234 Babson 全流程(135)",
-    "#176 Carnegie 全流程(136)"
+    "#176 Carnegie 全流程(136)",
+    "#193 Wanamaker 全流程(137)"
   ],
   "p0_closed": [],
-  "note": "Carnegie #176 完成：8 train+3 holdout（writings/expression/timeline 三道）；盲判 5 轮（修 decoy 数字/tok 单句/traj 年表自证/anon 身份暗示/voice 四步/fact tiustee 讹形/known 免费学校/planning 四步 → 六门全过，candidate 0.8977 / baseline 0.2125 / delta +0.6852）；release 0 错 2 警已 acknowledge；创业经营师族可做者：Carnegie 完成、Edison/Wanamaker 待做",
+  "note": "Wanamaker #193 完成：9 train+2 holdout（writings/expression/timeline 三道）；盲判 4 轮（修 decoy 数字/tok 单句/task 晋升挂钩/lh 两面/voice 四指纹+四要素 → 六门全过，candidate 0.8672 / baseline 0.2469 / delta +0.6203）；release 0 错 2 警已 acknowledge；T1 主线程 137/600 后按用户指示收尾",
   "cost_baseline": {
     "flash": {
       "calls": 934,
