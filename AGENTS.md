@@ -197,3 +197,27 @@ ssh ovh 'sudo /usr/local/bin/linze-r2-free-tier-guard.py'
   **为什么**：四者均为本会话 3 个 resume 代理实测踩坑；quality_check 须用 `scripts/quality_check.py`
   禁用 `references/pipeline/checkers/` 镜像（check_holdout_mention.py 模板路径 bug 必败）。
   **代价**：每项一次返工。
+- **结论**：style-decoy 无数字题须禁中文量词全族（一/每/份/句/生/年/袋/匹），引文坐标用《书名》。
+  **为什么**：Say#248/Franklin#236/Babson#234/Carnegie#176/Wanamaker#193 五人多轮被
+  「一言以蔽之/每一分/一匹布/一生/身份」等判为违反无数字；check_self_reported_counts 把
+  `[中文数字]{1,3}字` 当自报字数（「服务二字」「职业二字」都触发）。
+  **代价**：每轮 1-2 题重生成+重建载荷+整份重判（约 15 分钟）。
+- **结论**：trajectory 生平密集题必须把 rubric 锚点逐条（含 OCR 引文）写进 refine 提示，生成后逐锚点 grep。
+  **为什么**：Say#248 traj-02 五轮才修完（漏 1813/1830/卒年/创办 vs 任编者）；Carnegie#176 traj-01/02
+  首判编造年份数额被双席 critical。
+  **代价**：每漏一锚点多一轮重判。
+- **结论**：改答案/rubric 后重建盲判载荷，旧 judge 分数全作废，须清空整份重判（非只判改动题）。
+  **为什么**：build_blind_payload 每次重新随机化 q 编号；Say#248 两轮、Babson#234 六轮均踩。
+  **代价**：一轮 64 次 flash 判分（约 25 分钟），比"只重判改动题"贵但必须。
+- **结论**：conversations 道手写信 OCR 常全灭（Edison#180：2 封 0-19 词乱码），探源须实测抓取核可用性。
+  **为什么**：Edison 探源报 3 道（writings/conversations/expression），实测 conversations 4 条书信全乱码
+  → 实际 2 道 <3 门槛，延后。
+  **代价**：1 次抓取核验（便宜），避免整窗全流程后才发现缺道。
+- **结论**：quick 档第 3 道可用 decisions 道补齐（JSTOR 政论文章归 decisions）。
+  **为什么**：Babson#234 timeline 自传 1935 printdisabled 不可抓，用 JSTOR 1916/1912/1920 政论文章
+  （A Business Man's View on Peace 等）补足 3 道。
+  **代价**：0（JSTOR Early Journal Content 免费开放）。
+- **结论**：三线程收敛回 main 用「复制 registry 新人物目录 + 同步切片台账」而非 git merge。
+  **为什么**：T2/T3 分支基于旧分叉点，merge 会带入大量无关文件（cak-comfyui 等）与冲突；
+  复制新人物（git ls-files 对比 main 独有 slug）干净可控。
+  **代价**：54 人复制 + team-index 重建（脚本化，约 2 分钟）。
