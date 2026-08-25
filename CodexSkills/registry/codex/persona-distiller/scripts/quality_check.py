@@ -613,7 +613,7 @@ def markdown_report(data: dict[str, Any]) -> str:
     ]
     lines.extend([f'- `{item["code"]}`: {item["message"]}' for item in data['errors']] or ['- None'])
     lines.extend(['', '## Warnings', ''])
-    lines.extend([f'- `{item["code"]}`: {item["message"]}' for item in data['warnings']] or ['- None'])
+    lines.extend([(f'- `{item["code"]}`: {item["message"]}' if isinstance(item, dict) else f'- {item}') for item in data['warnings']] or ['- None'])
     return '\n'.join(lines).rstrip() + '\n'
 
 
