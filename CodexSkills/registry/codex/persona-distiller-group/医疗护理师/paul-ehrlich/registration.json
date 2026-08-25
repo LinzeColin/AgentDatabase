@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:paulehrlich",
+  "canonical_name": "Paul Ehrlich",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "paul-ehrlich",
+  "subject_uid": "person-045db539bd4452dc",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/paul-ehrlich-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T19:13:27Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "84a9cb55c8b58947dfec4c5a760c12bbd2bdd9ab5bbf3669640b8c4bfa7c3416",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/paul-ehrlich-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "9d3b1548bd428804fb786d6e7c9b6d66664e49617e03ad1359803bbe3dd76084",
+      "runtime_size_bytes": 66407,
+      "size_bytes": 75141
+    }
+  ]
+}

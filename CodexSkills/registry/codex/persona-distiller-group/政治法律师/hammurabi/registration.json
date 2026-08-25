@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:hammurabi",
+  "canonical_name": "Hammurabi",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "hammurabi",
+  "subject_uid": "person-fdf5a52e84163875",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/hammurabi-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T04:05:11Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "feae0d7c50cbe673836ed4febd4670f2c6a861d2bf0c4b977701fcf4d07cba9a",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/hammurabi-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "bc33fa9fe9b21aaa7e046fd925b30c7dcaea268a99f0b661be9339dc1f8e70e0",
+      "runtime_size_bytes": 94099,
+      "size_bytes": 103440
+    }
+  ]
+}

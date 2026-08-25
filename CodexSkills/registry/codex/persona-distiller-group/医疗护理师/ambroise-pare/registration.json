@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:ambroiseparé",
+  "canonical_name": "Ambroise Paré",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "ambroise-pare",
+  "subject_uid": "person-65c0744441bf4c2b",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/ambroise-pare-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T04:13:52Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "ee7265e73b7fdbe523e2b32f8eb158429fb429a55300492a6e9db91650146cb5",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/ambroise-pare-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "fb49a8fc52d214807b401f7556614c7ad5498a1310a9e1cb441babfeb3878a0f",
+      "runtime_size_bytes": 66379,
+      "size_bytes": 74624
+    }
+  ]
+}

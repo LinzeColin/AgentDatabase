@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:lawrencerobertdicksee",
+  "canonical_name": "Lawrence Robert Dicksee",
+  "identity_family_id": "finance-compliance",
+  "identity_mode": "single",
+  "registration_category": "财务合规师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "lawrence-robert-dicksee",
+  "subject_uid": "person-395a6bb2fccb4d13",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/lawrence-robert-dicksee-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T05:12:55Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "eb1e95fca6de03f5e844215f9b359b25291ba665a209ed062c7da0ab186b4bba",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/lawrence-robert-dicksee-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "c94b2ed9c124087b95524613a53969a1c70d34159f48d26f4ea1828d81628f46",
+      "runtime_size_bytes": 63541,
+      "size_bytes": 70235
+    }
+  ]
+}

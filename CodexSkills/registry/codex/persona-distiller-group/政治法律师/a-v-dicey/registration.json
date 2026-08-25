@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:avdicey",
+  "canonical_name": "A. V. Dicey",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "a-v-dicey",
+  "subject_uid": "person-7ed7fd76d97c8ce6",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/a-v-dicey-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-22T22:03:32Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "0747be4be0f9b2c090a4920fb962237156e81044d8772b57179c66e53929740f",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/a-v-dicey-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "7d24fb8d837c5f282f982d0f141d2220d39e1a03a34f405b368ad609fd5ed277",
+      "runtime_size_bytes": 75668,
+      "size_bytes": 94931
+    }
+  ]
+}

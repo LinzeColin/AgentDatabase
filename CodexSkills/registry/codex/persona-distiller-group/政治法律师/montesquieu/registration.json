@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:montesquieu",
+  "canonical_name": "Montesquieu",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "montesquieu",
+  "subject_uid": "person-758db7fccdd6e91c",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/montesquieu-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T18:21:44Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "7c0ab86915f9107c0989b7a91b2c537ebc05648b39c0da34f68f73ee7cb32b7a",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/montesquieu-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "2fe1ad2f8311251c68d2ac0c2b52b6d0cbcf99c7ccf0c47ad908a9e1469fd7d0",
+      "runtime_size_bytes": 58553,
+      "size_bytes": 66214
+    }
+  ]
+}

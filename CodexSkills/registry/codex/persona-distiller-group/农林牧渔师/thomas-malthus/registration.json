@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:thomasrobertmalthus",
+  "canonical_name": "Thomas Robert Malthus",
+  "identity_family_id": "agriculture-fishery",
+  "identity_mode": "single",
+  "registration_category": "农林牧渔师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "thomas-malthus",
+  "subject_uid": "person-b43202699dbee991",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/thomas-malthus-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T04:39:19Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "3f1be73079fad79b4d68cb991a00e80843bab0949de2daf5abd20cc12e5a9f97",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/thomas-malthus-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "58e44e6112b03c2502b8443448a680df49240d32239448d5c9ea6740b234bb2c",
+      "runtime_size_bytes": 59753,
+      "size_bytes": 67695
+    }
+  ]
+}

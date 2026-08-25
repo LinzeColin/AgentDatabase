@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:antoinelavoisier",
+  "canonical_name": "Antoine Lavoisier",
+  "identity_family_id": "agriculture-fishery",
+  "identity_mode": "single",
+  "registration_category": "农林牧渔师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "antoine-lavoisier",
+  "subject_uid": "person-392ba367c22b3efa",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/antoine-lavoisier-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T09:34:01Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "639c6a5f4580e08f222dfe16f99850b67a91c02db1b4a9c640ecb66178e94745",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/antoine-lavoisier-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "6eee63f44127a58de4e5e815f4ea826672a77e335b2749e74f8ef93517a37cb1",
+      "runtime_size_bytes": 65783,
+      "size_bytes": 73675
+    }
+  ]
+}

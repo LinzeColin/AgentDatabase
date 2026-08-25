@@ -1,11 +1,11 @@
 {
   "round": 19,
-  "updated_at": "2026-08-25T12:30Z",
+  "updated_at": "2026-08-25T13:00Z",
   "time_band": "valley-0000-0800",
-  "people": 137,
-  "current_person": "创业经营师族 #193 John Wanamaker 完成入库（T1 最后一单）",
-  "stage": "Wanamaker #193 全流程完成（盲判 4 轮 → 六门全过 candidate 0.8672 / delta +0.6203；release 0 错 2 警已 acknowledge；package+register 入库）；T1 主线程按用户指示收尾",
-  "next": "收尾：T2/T3 切片收敛 + skill 迭代总结",
+  "people": 191,
+  "current_person": "T1 收尾：T2/T3 54 人收敛回 main，全库 191",
+  "stage": "收尾完成：T1 本线程 137 + T2 22 + T3 32 = 191 人入库；切片/台账/HANDOFF 全同步；team-index 重建",
+  "next": "收尾：skill 迭代 + 推送 + 汇报",
   "threads": {
     "T1": {
       "branch": "main",
@@ -43,7 +43,7 @@
     "#193 Wanamaker 全流程(137)"
   ],
   "p0_closed": [],
-  "note": "Wanamaker #193 完成：9 train+2 holdout（writings/expression/timeline 三道）；盲判 4 轮（修 decoy 数字/tok 单句/task 晋升挂钩/lh 两面/voice 四指纹+四要素 → 六门全过，candidate 0.8672 / baseline 0.2469 / delta +0.6203）；release 0 错 2 警已 acknowledge；T1 主线程 137/600 后按用户指示收尾",
+  "note": "T1 收尾汇总：Wanamaker #193 为 T1 最后一单（137），T2 分支 22 人（政治法律师 19+客户营销 3）、T3 分支 32 人（医疗护理 13+农林牧渔 16+财务合规 3）收敛回 main，全库 191/600（完成标准按用户喊停）；T2/T3 切片台账与 HANDOFF/THREAD-FEEDBACK 文档已同步；team-index 重建为 191 products",
   "cost_baseline": {
     "flash": {
       "calls": 934,

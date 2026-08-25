@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:pericles",
+  "canonical_name": "Pericles",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "pericles",
+  "subject_uid": "person-9861d21ac29b3e20",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/pericles-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T18:19:12Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "df8c862ec8ff2cf4335116e33fe430e1892423faf3ccbd28935f42ba5fc8315e",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/pericles-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "a539d861ace5991695f5d0bfb182fcf9d91a48f27d42508a35b9cd847134c1f6",
+      "runtime_size_bytes": 62336,
+      "size_bytes": 70355
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:polybius",
+  "canonical_name": "Polybius",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "polybius",
+  "subject_uid": "person-a8eec7dfe6f2db53",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/polybius-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T22:02:11Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "d2718d2a828766dda982ecefd9d83b55eaf337300f415fae2488a520b4788489",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/polybius-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "630ba531f3c1c232c5c2b37cb06801996bf73b0b36ab63f0708a480c851057de",
+      "runtime_size_bytes": 59362,
+      "size_bytes": 67447
+    }
+  ]
+}

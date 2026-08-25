@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:williamthomasgreenmorton",
+  "canonical_name": "William Thomas Green Morton",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "william-morton",
+  "subject_uid": "person-92152b773ebe7b34",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/william-morton-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T05:11:48Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "b025d93e74315959ca32b57024241cfca813f3d6ae313c3702617a7685a21c72",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/william-morton-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "41b2bf4dba4691129a22d343db2842a92743ff7ff4097affde801f8a7bf05799",
+      "runtime_size_bytes": 64864,
+      "size_bytes": 71954
+    }
+  ]
+}

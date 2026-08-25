@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:williamcobbett",
+  "canonical_name": "William Cobbett",
+  "identity_family_id": "agriculture-fishery",
+  "identity_mode": "single",
+  "registration_category": "农林牧渔师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "william-cobbett",
+  "subject_uid": "person-552fa238f96e2ecd",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/william-cobbett-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T03:41:12Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "a69ad0afd8f87cc36dfc6c25ccbc79d276fb170a19423eb9fb0868e6947bb9d0",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/william-cobbett-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "23bd26e9e3e21d42cabc0279131420460cb5c3483c54498859ba98bd3bb130f8",
+      "runtime_size_bytes": 61273,
+      "size_bytes": 69114
+    }
+  ]
+}

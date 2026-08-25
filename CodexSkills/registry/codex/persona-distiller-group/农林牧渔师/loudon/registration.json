@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:johnclaudiusloudon",
+  "canonical_name": "John Claudius Loudon",
+  "identity_family_id": "agriculture-fishery",
+  "identity_mode": "single",
+  "registration_category": "农林牧渔师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "loudon",
+  "subject_uid": "person-373bc2356b501404",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/loudon-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T18:54:14Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "dcb31a259239c492ce975d86ea34a38b7a811cd9993735172c49285901bd9c6e",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/loudon-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "ca400da26bf5da6221d436561363fc87fd284b8b02f6821e67ade61118b704c0",
+      "runtime_size_bytes": 65370,
+      "size_bytes": 73721
+    }
+  ]
+}

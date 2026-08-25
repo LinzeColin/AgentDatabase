@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:frankhknight",
+  "canonical_name": "Frank H. Knight",
+  "identity_family_id": "finance-compliance",
+  "identity_mode": "single",
+  "registration_category": "财务合规师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "frank-knight",
+  "subject_uid": "person-bf4edfd4bb185bfb",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/frank-knight-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T12:33:46Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "45629d3f31508d533949be29389e47e2dff955fca00e64f18e627ccc74d72aa4",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/frank-knight-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "a709f27845e7764180ff64bfc5d2b9260ba0224556351d974527bd917221f1af",
+      "runtime_size_bytes": 60286,
+      "size_bytes": 68116
+    }
+  ]
+}

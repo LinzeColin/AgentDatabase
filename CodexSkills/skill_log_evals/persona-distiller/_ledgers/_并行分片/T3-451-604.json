@@ -7,13 +7,13 @@
    "no": 451,
    "name": "John McAdam",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 452,
    "name": "Thomas Brassey",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 453,
@@ -25,7 +25,7 @@
    "no": 454,
    "name": "William Paton",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 455,
@@ -133,7 +133,7 @@
    "no": 472,
    "name": "Walter Shewhart",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 473,
@@ -151,169 +151,170 @@
    "no": 475,
    "name": "Adam Smith",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 476,
    "name": "Alfred Marshall",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 477,
    "name": "Milton Friedman",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 478,
    "name": "Friedrich Hayek",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 479,
    "name": "Paul Samuelson",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 480,
    "name": "James Tobin",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 481,
    "name": "Joseph Schumpeter",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 482,
    "name": "John Kenneth Galbraith",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 483,
    "name": "Hyman Minsky",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 484,
    "name": "Charles Kindleberger",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 485,
    "name": "Daniel Kahneman",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 486,
    "name": "Frank Knight",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 487,
    "name": "John Hicks",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 488,
    "name": "Knut Wicksell",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF",
+   "note": "release门1错不可解：source-count-inflated(7 distinct works < 8 min_sources)。IA 上 Wicksell PD 著作仅 4 部(Interest and Prices, Lectures Vol.1/2, Finanztheoretische)+1 Swedish speech+2 Brems secondary=7。holdout已设(Brems 1986)。delta +0.131, aggregate全门通过。"
   },
   {
    "no": 489,
    "name": "Trevor Kletz",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 490,
    "name": "Frank Bird",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 491,
    "name": "Jens Rasmussen",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 492,
    "name": "Benedetto Cotrugli",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 493,
    "name": "Giuseppe Cerboni",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 494,
    "name": "Fabio Besta",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 495,
    "name": "Lawrence Dicksee",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 496,
    "name": "Henry Rand Hatfield",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 497,
    "name": "Charles Ezra Sprague",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 498,
    "name": "George O. May",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 499,
    "name": "John B. Canning",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 500,
    "name": "Wassily Leontief",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 501,
    "name": "Ragnar Frisch",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 502,
    "name": "Jan Tinbergen",
    "family": "财务合规师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 503,
@@ -445,175 +446,175 @@
    "no": 524,
    "name": "Avicenna",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 525,
    "name": "Rhazes",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 526,
    "name": "Paracelsus",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 527,
    "name": "Ambroise Paré",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 528,
    "name": "William Morton",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 529,
    "name": "James Simpson",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 530,
    "name": "Mary Seacole",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 531,
    "name": "Lillian Wald",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 532,
    "name": "Margaret Sanger",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 533,
    "name": "Sigmund Freud",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 534,
    "name": "Carl Jung",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 535,
    "name": "Ivan Pavlov",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 536,
    "name": "Paul Ehrlich",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 537,
    "name": "Emil von Behring",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 538,
    "name": "Howard Florey",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 539,
    "name": "Ernst Chain",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 540,
    "name": "Selman Waksman",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 541,
    "name": "Jonas Salk",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 542,
    "name": "Albert Sabin",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 543,
    "name": "Charles Drew",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 544,
    "name": "Helen Taussig",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 545,
    "name": "Christiaan Barnard",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 546,
    "name": "Dorothea Orem",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 547,
    "name": "Madeleine Leininger",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 548,
    "name": "Martha E. Rogers",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 549,
    "name": "Walter Reed",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 550,
    "name": "Ronald Ross",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 551,
    "name": "Carlos Finlay",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 552,
    "name": "William Gorgas",
    "family": "医疗护理师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 553,
@@ -715,217 +716,220 @@
    "no": 569,
    "name": "Antoine Lavoisier",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 570,
    "name": "John Bennet Lawes",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG",
+   "note": "delta +0.4782; quick档; 33来源(一手占比0.70, holdout 3); 与Gilbert合著按own-voice剥离化学分析侧, attribution CO-AUTHOR"
   },
   {
    "no": 571,
    "name": "Joseph Henry Gilbert",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG",
+   "note": "delta +0.6297; quick档; 13 distinct works, 一手占比0.90; 与Lawes合著按own-voice剥离, attribution CO-AUTHOR"
   },
   {
    "no": 572,
    "name": "Charles Darwin",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 573,
    "name": "Jethro Tull",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 574,
    "name": "Thomas Coke",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 575,
    "name": "Robert Bakewell",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 576,
    "name": "John Sinclair",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 577,
    "name": "Humphry Davy",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 578,
    "name": "Jean-Baptiste Boussingault",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG",
+   "note": "delta +0.6093; quick档; 41份语料(一手P1 29, 占比0.83); 与Dumas合著按attribution CO-AUTHOR, 物质循环框架"
   },
   {
    "no": 579,
    "name": "Carl Sprengel",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 580,
    "name": "Thomas Robert Malthus",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 581,
    "name": "Henry A. Wallace",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 582,
    "name": "George Shull",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 583,
    "name": "Donald Jones",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 584,
    "name": "Barbara McClintock",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 585,
    "name": "Sewall Wright",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 586,
    "name": "R. A. Fisher",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 587,
    "name": "J. B. S. Haldane",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 588,
    "name": "Franklin Hiram King",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 589,
    "name": "Walter Lowdermilk",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 590,
    "name": "Hugh Hammond Bennett",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 591,
    "name": "George Perkins Marsh",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 592,
    "name": "Cato the Elder",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 593,
    "name": "Varro",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 594,
    "name": "Columella",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 595,
    "name": "Pliny the Elder",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 596,
    "name": "Olivier de Serres",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 597,
    "name": "Arthur Young",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 598,
    "name": "Charles Townshend",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 599,
    "name": "John Evelyn",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 600,
    "name": "William Cobbett",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 601,
    "name": "J. C. Loudon",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 602,
    "name": "Liberty Hyde Bailey",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 603,
    "name": "Frank N. Meyer",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 604,
    "name": "Jared Eliot",
    "family": "农林牧渔师",
-   "status": "TODO"
+   "status": "DEF"
   }
  ]
 }

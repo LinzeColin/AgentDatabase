@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:libertyhydebailey",
+  "canonical_name": "Liberty Hyde Bailey",
+  "identity_family_id": "agriculture-fishery",
+  "identity_mode": "single",
+  "registration_category": "农林牧渔师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "liberty-hyde-bailey",
+  "subject_uid": "person-334e1fe2578b0507",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/liberty-hyde-bailey-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T20:41:48Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "39704cfb84ebd8fe7755b3285eb92bd6eddc15d4c4cc615bbd4e53be95ca3203",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/liberty-hyde-bailey-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "815b6422dedb0a0d20178d1c5009a2527b4181194d81111b61364c7b84ade742",
+      "runtime_size_bytes": 64299,
+      "size_bytes": 71408
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:selmanwaksman",
+  "canonical_name": "Selman Waksman",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "selman-waksman",
+  "subject_uid": "person-fa6c01b2a4d93264",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/selman-waksman-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T19:37:23Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "84a6f6be5fef328ac7838871bd0867a9eb08448087348afb68680274ad693ec7",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/selman-waksman-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "3b69b5bc7883530e0b8c9b12292d556195184750283915da0d6804b7dc7e154c",
+      "runtime_size_bytes": 59933,
+      "size_bytes": 68321
+    }
+  ]
+}

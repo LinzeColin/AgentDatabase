@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:johnsinclair",
+  "canonical_name": "John Sinclair",
+  "identity_family_id": "agriculture-fishery",
+  "identity_mode": "single",
+  "registration_category": "农林牧渔师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "john-sinclair",
+  "subject_uid": "person-f8d450a0d91e853a",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/john-sinclair-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T19:22:36Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "45c2d9ced040a8c980211030f71f48247d6b7d747ae8f825b4c1bd5a0d0dfbef",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/john-sinclair-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "03c02dde75c4b8875199d971c5312fc38296bf22da2d2d836725f21a87e08eaa",
+      "runtime_size_bytes": 57462,
+      "size_bytes": 65310
+    }
+  ]
+}

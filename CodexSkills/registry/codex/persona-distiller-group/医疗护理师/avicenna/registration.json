@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:avicenna",
+  "canonical_name": "Avicenna",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "avicenna",
+  "subject_uid": "person-7f37059f3558db49",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/avicenna-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": null,
+      "distilled_with_source": "unknown",
+      "model_version": "1",
+      "outer_sha256": "3703721f4206a0f7c824c0fa46521a2a2f547b961b11897e9390bed34ad22bf0",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/avicenna-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "2129be7af1e36b126a60ddb257682ee7f102ee5fbd5dfc86bf637b7674c51afa",
+      "runtime_size_bytes": 651626,
+      "size_bytes": 641405
+    }
+  ]
+}

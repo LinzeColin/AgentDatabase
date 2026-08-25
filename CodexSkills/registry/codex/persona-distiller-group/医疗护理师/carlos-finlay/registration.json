@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:carlosfinlay",
+  "canonical_name": "Carlos Finlay",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "carlos-finlay",
+  "subject_uid": "person-4b942caac8bbea60",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/carlos-finlay-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T12:11:36Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "b242923408573f3fdb879d9ac98335ac15529a0fafe0b1fb5909ac91f4ad09be",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/carlos-finlay-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "770984e42845561d081ee870e79db4fbb0b034b8c8cd53778d33465be415fb34",
+      "runtime_size_bytes": 55994,
+      "size_bytes": 63291
+    }
+  ]
+}

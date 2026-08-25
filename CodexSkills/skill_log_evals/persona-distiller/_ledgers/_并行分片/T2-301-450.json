@@ -115,91 +115,91 @@
    "no": 319,
    "name": "Hammurabi",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 320,
    "name": "Pericles",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 321,
    "name": "Lycurgus",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 322,
    "name": "Polybius",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 323,
    "name": "Jean Bodin",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 324,
    "name": "Thomas Hobbes",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 325,
    "name": "Montesquieu",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 326,
    "name": "Alexander Hamilton",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 327,
    "name": "James Madison",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 328,
    "name": "Edmund Burke",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 329,
    "name": "Jeremy Bentham",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 330,
    "name": "John Austin",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 331,
    "name": "Henry Maine",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 332,
    "name": "A. V. Dicey",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 333,
    "name": "Woodrow Wilson",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 334,
@@ -211,49 +211,49 @@
    "no": 335,
    "name": "Charles de Gaulle",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 336,
    "name": "Konrad Adenauer",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 337,
    "name": "Sun Yat-sen",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 338,
    "name": "Mao Zedong",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 339,
    "name": "Mahatma Gandhi",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 340,
    "name": "Jawaharlal Nehru",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 341,
    "name": "Mustafa Kemal Atatürk",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 342,
    "name": "John Marshall Harlan",
    "family": "政治法律师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 343,
@@ -427,91 +427,91 @@
    "no": 371,
    "name": "P. T. Barnum",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 372,
    "name": "Albert Lasker",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 373,
    "name": "John E. Kennedy",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 374,
    "name": "Helen Lansdowne Resor",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 375,
    "name": "Raymond Rubicam",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 376,
    "name": "Bruce Barton",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 377,
    "name": "Fairfax Cone",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 378,
    "name": "James Webb Young",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 379,
    "name": "Elmer Wheeler",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 380,
    "name": "Vance Packard",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 381,
    "name": "Everett Rogers",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 382,
    "name": "Frank Bass",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 383,
    "name": "John Caples",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 384,
    "name": "John Wanamaker",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "REG"
   },
   {
    "no": 385,
    "name": "William Randolph Hearst",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 386,
@@ -523,31 +523,31 @@
    "no": 387,
    "name": "David Sarnoff",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 388,
    "name": "George Gallup",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 389,
    "name": "Elmo Roper",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 390,
    "name": "Alfred Politz",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 391,
    "name": "Ernest Dichter",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 392,
@@ -559,37 +559,37 @@
    "no": 393,
    "name": "Charles Atlas",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 394,
    "name": "Sebastian Kresge",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 395,
    "name": "R. E. Olds",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 396,
    "name": "William C. Durant",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 397,
    "name": "Asa Candler",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 398,
    "name": "Caleb Bradham",
    "family": "客户营销师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 399,
@@ -715,7 +715,7 @@
    "no": 419,
    "name": "Donald Reinertsen",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 420,
@@ -727,13 +727,13 @@
    "no": 421,
    "name": "Martin Fischer",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 422,
    "name": "David Hulett",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 423,
@@ -745,31 +745,31 @@
    "no": 424,
    "name": "Joseph Paxton",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 425,
    "name": "William Le Baron Jenney",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 426,
    "name": "Daniel Burnham",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 427,
    "name": "George A. Fuller",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 428,
    "name": "Henri Fayol",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 429,
@@ -793,19 +793,19 @@
    "no": 432,
    "name": "James P. Womack",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 433,
    "name": "Michael Porter",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 434,
    "name": "Henry Mintzberg",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 435,
@@ -817,7 +817,7 @@
    "no": 436,
    "name": "Marvin Bower",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 437,
@@ -835,43 +835,43 @@
    "no": 439,
    "name": "C. Northcote Parkinson",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 440,
    "name": "Laurence J. Peter",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 441,
    "name": "Herbert Simon",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 442,
    "name": "Douglas McGregor",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 443,
    "name": "Russell Ackoff",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 444,
    "name": "Jay Forrester",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 445,
    "name": "Stafford Beer",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 446,
@@ -883,25 +883,25 @@
    "no": 447,
    "name": "Eugène Freyssinet",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 448,
    "name": "Robert Maillart",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 449,
    "name": "Hassan Fathy",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   },
   {
    "no": 450,
    "name": "Jane Jacobs",
    "family": "建造采购师",
-   "status": "TODO"
+   "status": "DEF"
   }
  ]
 }

@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:arthuryoung",
+  "canonical_name": "Arthur Young",
+  "identity_family_id": "agriculture-fishery",
+  "identity_mode": "single",
+  "registration_category": "农林牧渔师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "arthur-young",
+  "subject_uid": "person-d744fde3bd77eca9",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/arthur-young-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T12:13:42Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "5a18b89f22dcfca3f945a16969179aa4b9d09578fef7d936838b65be0776d9cf",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/arthur-young-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "f213dac9049a19b475b5b5542a22afbb29f1d2137e8c6f05e32031caf2437dc1",
+      "runtime_size_bytes": 61500,
+      "size_bytes": 69485
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:williamgorgas",
+  "canonical_name": "William Gorgas",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "william-gorgas",
+  "subject_uid": "person-89c56835b3ef8a0c",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/william-gorgas-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T11:39:22Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "81e83a4f19487d1376b8cd37cfc617534a1427e7ce4d220f6784201ac4e2721d",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/william-gorgas-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "56e33685137a644cc2bab49ce7d47cefc97cbd46cd25f0ebb4539466d8ec3083",
+      "runtime_size_bytes": 61537,
+      "size_bytes": 69075
+    }
+  ]
+}

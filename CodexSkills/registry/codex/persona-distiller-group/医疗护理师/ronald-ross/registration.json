@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:ronaldross",
+  "canonical_name": "Ronald Ross",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "ronald-ross",
+  "subject_uid": "person-65e5c941c6475e4e",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/ronald-ross-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T12:14:06Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "3f090964dc38b75af5a247d74a97b328836ad55958666fafb03413ba7d2e1fbd",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/ronald-ross-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "c1a24050f364ab99a22d74754f22baa1d0ad83311e72ee3ca349f727f59dad3f",
+      "runtime_size_bytes": 61653,
+      "size_bytes": 68837
+    }
+  ]
+}

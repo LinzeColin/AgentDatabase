@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:walterreed",
+  "canonical_name": "Walter Reed",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "walter-reed",
+  "subject_uid": "person-3af6af983ed76e08",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/walter-reed-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T12:13:04Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "847e4480ee89645d7a75b9811496e179bcd0a021e8e951c76668150b9ec12c4f",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/walter-reed-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "53ca1851bac2a5c38e26246a353c70759d90bd70468cfa14bafc44103825c33d",
+      "runtime_size_bytes": 54053,
+      "size_bytes": 61337
+    }
+  ]
+}

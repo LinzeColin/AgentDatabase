@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:thomashobbes",
+  "canonical_name": "Thomas Hobbes",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "hobbes",
+  "subject_uid": "person-cdefd46f6ae6d3d2",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/hobbes-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T05:05:54Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "3bbfb0b21a83ca9b11d560e99124dd0e7ed50999d9a82e5a7bcaf654bb230ff3",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/hobbes-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "b3f7d9ec48fb1e9af4717e3826034b1f7dfb7619a27f825a445d8d83fa113a43",
+      "runtime_size_bytes": 61252,
+      "size_bytes": 69428
+    }
+  ]
+}

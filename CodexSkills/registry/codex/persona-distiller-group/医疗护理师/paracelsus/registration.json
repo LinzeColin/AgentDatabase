@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:paracelsus",
+  "canonical_name": "Paracelsus",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "paracelsus",
+  "subject_uid": "person-16f355ccbe37ba3a",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/paracelsus-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T05:02:06Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "c4319df700682e8db1bcc8cf90ec9d1d786e15ebc5b7728caadfdd2a9fb9af07",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/paracelsus-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "2fa58077ce235d75e61c8e21d6cb830acc25620928bb585160fa216aff9d0ad5",
+      "runtime_size_bytes": 66476,
+      "size_bytes": 75131
+    }
+  ]
+}

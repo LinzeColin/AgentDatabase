@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:johnaustin",
+  "canonical_name": "John Austin",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "austin",
+  "subject_uid": "person-b2d695995bf99ee0",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/austin-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-22T17:32:53Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "2681eaceaeb60b02bffddae662da4f3bfa58323157a33467d658284c7ae3c1d1",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/austin-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "923d39b75f943e27d0720693945758c4bd60a70370a62f621bd48ed4d90b0406",
+      "runtime_size_bytes": 72032,
+      "size_bytes": 91266
+    }
+  ]
+}

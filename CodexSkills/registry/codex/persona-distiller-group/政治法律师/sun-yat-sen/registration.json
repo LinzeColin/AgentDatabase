@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:sunyatsen",
+  "canonical_name": "Sun Yat-sen",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "sun-yat-sen",
+  "subject_uid": "person-95ed51116ef85895",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/sun-yat-sen-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-23T21:49:26Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "53de3205268ce0ec7bd0c169d39b49e41842243e9e4999994f55d00ab2481360",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/sun-yat-sen-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "8ee325ae4df3d0925708cd59b17d82eed57326e581bbceb9ee0eac777fd629dd",
+      "runtime_size_bytes": 89366,
+      "size_bytes": 108494
+    }
+  ]
+}

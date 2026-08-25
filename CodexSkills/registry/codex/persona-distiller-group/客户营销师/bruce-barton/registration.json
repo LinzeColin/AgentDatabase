@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:brucebarton",
+  "canonical_name": "Bruce Barton",
+  "identity_family_id": "customer-marketing",
+  "identity_mode": "single",
+  "registration_category": "客户营销师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "bruce-barton",
+  "subject_uid": "person-5066cc5419cbbe6b",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/bruce-barton-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-24T12:09:48Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "d7239743c52667eb4fe5839227aabce367fd80311a86db80b5b0209d9fb65a96",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/bruce-barton-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "430feabd4e0239bbbaeb2fac59365376ee1fe1a82699a1b421ca23dd8d55d213",
+      "runtime_size_bytes": 68363,
+      "size_bytes": 76156
+    }
+  ]
+}

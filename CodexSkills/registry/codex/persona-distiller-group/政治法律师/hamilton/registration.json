@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:alexanderhamilton",
+  "canonical_name": "Alexander Hamilton",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "hamilton",
+  "subject_uid": "person-fac657bd9a89bd01",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/hamilton-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T19:25:58Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "407cf0702c8e6a0e710741ba4f73fb3da20b95a10c0e2ba53fa911dcfb691955",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/hamilton-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "96c896eae98ac3f38873b44eba0ba84a28e18bf6d7c4f52aee537a80927a9ab6",
+      "runtime_size_bytes": 68261,
+      "size_bytes": 76292
+    }
+  ]
+}

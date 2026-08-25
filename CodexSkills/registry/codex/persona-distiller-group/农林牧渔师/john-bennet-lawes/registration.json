@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:johnbennetlawes",
+  "canonical_name": "John Bennet Lawes",
+  "identity_family_id": "agriculture-fishery",
+  "identity_mode": "single",
+  "registration_category": "农林牧渔师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "john-bennet-lawes",
+  "subject_uid": "person-95ac664427265fd5",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/john-bennet-lawes-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T20:52:27Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "eaef41707c66c4c82ef7908a992abb7b928fc7aace815503a0abc5c0e82c188b",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/john-bennet-lawes-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "be19af4abd84192d3f74598eb0beef0f5927f2ac14189fafc56885151f6c2d0e",
+      "runtime_size_bytes": 63447,
+      "size_bytes": 70407
+    }
+  ]
+}

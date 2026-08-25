@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:woodrowwilson",
+  "canonical_name": "Woodrow Wilson",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "woodrow-wilson",
+  "subject_uid": "person-afebed5a999be477",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/woodrow-wilson-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-23T00:15:17Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "dd9a39962b2cbe3e5f085fd782655a54fa0848cf203f1654436dd9ae2a36a981",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/woodrow-wilson-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "e8adf2c44645d06ea4791af66812142161723821854e5972e7e43c0ec7adb610",
+      "runtime_size_bytes": 82156,
+      "size_bytes": 101016
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:mahatmagandhi",
+  "canonical_name": "Mahatma Gandhi",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "mahatma-gandhi",
+  "subject_uid": "person-773dd1ac2e0d8be2",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/mahatma-gandhi-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-24T06:54:01Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "4476ed1e747a2c14981cd0507885c1492a19e23de43286ccecee7760e110ce4d",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/mahatma-gandhi-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "f6a45d1299d65defd8c1a6f0575708904e35ba9926dd212647ae65a4809075e6",
+      "runtime_size_bytes": 88937,
+      "size_bytes": 107722
+    }
+  ]
+}

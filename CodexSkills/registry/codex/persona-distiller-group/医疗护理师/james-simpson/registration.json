@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:jamesyoungsimpson",
+  "canonical_name": "James Young Simpson",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "james-simpson",
+  "subject_uid": "person-9f868859e9cd4682",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/james-simpson-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T05:02:33Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "f0f2912941f525c99a75bcaa355de862071df25dba4c2299af97027ada284688",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/james-simpson-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "d7018d1f3d771384e8f7322ab334638c59d2ca15481aeec6d40aebf5ac6c6681",
+      "runtime_size_bytes": 63360,
+      "size_bytes": 70714
+    }
+  ]
+}

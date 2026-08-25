@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:emilvonbehring",
+  "canonical_name": "Emil von Behring",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "emil-von-behring",
+  "subject_uid": "person-3998b4901c466028",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/emil-von-behring-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-22T05:40:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "ce1d27e48e1f5680abbf16b879dac2ec9fdd59732c33c7fc78a907fda496df23",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/emil-von-behring-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "5e52053ce8fe015c2a1d5fef409fa3baf5dc0d5551fd3f9f7dfb129e46003fc2",
+      "runtime_size_bytes": 68330,
+      "size_bytes": 77199
+    }
+  ]
+}

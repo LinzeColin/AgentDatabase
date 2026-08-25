@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:franklindroosevelt",
+  "canonical_name": "Franklin D. Roosevelt",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "franklin-d-roosevelt",
+  "subject_uid": "person-1602ac7b94541c6f",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/franklin-d-roosevelt-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-23T03:14:21Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "1f84c70317152b393822e589f39781f1cf3b0e7218c09874b7473c40062b0a2c",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/franklin-d-roosevelt-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "16ed11190a4b90b5cead748d087b75709c9edaadd9e9076432095c01978733f8",
+      "runtime_size_bytes": 88159,
+      "size_bytes": 106808
+    }
+  ]
+}

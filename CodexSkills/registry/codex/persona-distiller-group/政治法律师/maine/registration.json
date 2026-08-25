@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:henrymaine",
+  "canonical_name": "Henry Maine",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "maine",
+  "subject_uid": "person-cb2195a0c222ce11",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/maine-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-22T19:31:17Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "913d90d6dd795d00c67d4f9e922fa178110948f21462247c7868ab64aea86bfa",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/maine-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "e53ab454bdeed8a8dcc1d20a8c7f6b5aa00f72cb34051b44b3e774755d38bb10",
+      "runtime_size_bytes": 75980,
+      "size_bytes": 95876
+    }
+  ]
+}

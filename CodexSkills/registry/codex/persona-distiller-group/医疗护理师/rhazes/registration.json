@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:rhazes",
+  "canonical_name": "Rhazes",
+  "identity_family_id": "healthcare-nursing",
+  "identity_mode": "single",
+  "registration_category": "医疗护理师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "rhazes",
+  "subject_uid": "person-5a1a91d091929de4",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/rhazes-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T19:28:21Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "1b07b305ed0f15e46ad2d70778e1813cb33ea18582fcc633119ca9a84d705b20",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/rhazes-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "fcec69671b1bcb7521324176ff214b889fd7c1e2d77155305f890c158864f726",
+      "runtime_size_bytes": 55302,
+      "size_bytes": 63260
+    }
+  ]
+}

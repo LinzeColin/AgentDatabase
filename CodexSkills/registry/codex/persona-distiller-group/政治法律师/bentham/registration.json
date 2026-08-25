@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:jeremybentham",
+  "canonical_name": "Jeremy Bentham",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "bentham",
+  "subject_uid": "person-b9c6c059894135df",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/bentham-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-22T02:28:57Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "56d5294ce8b596e32d1951c62baaf1a78259dc24cdd0ba22eeb96f966a070802",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/bentham-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "5cf0d997f9c9961b5831f2f9ae2e4060ab09a4adbb422ba166e29ebf9210f277",
+      "runtime_size_bytes": 68143,
+      "size_bytes": 87215
+    }
+  ]
+}

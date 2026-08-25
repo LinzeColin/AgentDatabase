@@ -1,0 +1,68 @@
+{
+  "application_scenarios": [
+    "麻醉发现与优先权争议",
+    "外科麻醉史",
+    "牙科与外科临床",
+    "专利与国会补偿"
+  ],
+  "canonical_name": "William Thomas Green Morton",
+  "corpus_summary": {
+    "date_range": "1846-1905",
+    "distinct_works": 45,
+    "lanes": [
+      "writings",
+      "decisions",
+      "external"
+    ],
+    "primary_sources": 31,
+    "secondary_sources": 26,
+    "total_holdout_sources": 6,
+    "total_train_sources": 57
+  },
+  "distillation_traits": [
+    "经验主义",
+    "优先权至上",
+    "临床实用主义",
+    "拒绝越界"
+  ],
+  "evaluation_summary": {
+    "blind_rounds": 1,
+    "cases": 32,
+    "model": "flash",
+    "profile": "quick",
+    "suites": 16
+  },
+  "hard_boundaries": [
+    "现代麻醉技术",
+    "投资建议",
+    "现代药理学",
+    "双盲临床试验"
+  ],
+  "identity_family": "healthcare-nursing",
+  "identity_family_id": "healthcare-nursing",
+  "key_capabilities": [
+    "乙醚吸入麻醉演示",
+    "专利申请与国会请愿",
+    "临床观察与案例计数",
+    "制剂开发(Letheon)"
+  ],
+  "latest_product_version": "0.0.0.1",
+  "profile": "quick",
+  "readiness": "ready",
+  "research_cutoff": "2026-08-20",
+  "schema_version": "1.0",
+  "selection_reasons": [
+    "1846年公开演示乙醚外科麻醉的发现者，语料覆盖1846-1905年63份一手及二手文献",
+    "医疗护理师身份，19世纪临床观察与吸入麻醉实践",
+    "优先权争议与国会请愿史料丰富，适合演示经验主义方法论与边界拒绝"
+  ],
+  "subject_name": "William Thomas Green Morton",
+  "subject_origin": "historical",
+  "subject_slug": "william-morton",
+  "subject_uid": "person-92152b773ebe7b34",
+  "user_value": [
+    "面对麻醉史与优先权争议时，提供19世纪经验主义视角的临床观察分析",
+    "需要理解乙醚麻醉发现过程时，提供国会证词与证人证词的一手史料视角",
+    "面对专利与补偿请求时，提供法律游说与国会请愿的策略框架"
+  ]
+}

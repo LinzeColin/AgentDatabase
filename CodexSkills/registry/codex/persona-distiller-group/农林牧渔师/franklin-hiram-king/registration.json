@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:franklinhiramking",
+  "canonical_name": "Franklin Hiram King",
+  "identity_family_id": "agriculture-fishery",
+  "identity_mode": "single",
+  "registration_category": "农林牧渔师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "franklin-hiram-king",
+  "subject_uid": "person-da607e5562d183f5",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/franklin-hiram-king-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-21T18:58:56Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "a4be8470e29a7bf55aa42087e883834d9fef13f38faad1ea8587d06023bd3f58",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/franklin-hiram-king-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "6a2d4b51938f202b6f6fecd522da24a10a74f8ef96f4aac834a86de6750e5d50",
+      "runtime_size_bytes": 60073,
+      "size_bytes": 66525
+    }
+  ]
+}

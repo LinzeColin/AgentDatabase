@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:lycurgus",
+  "canonical_name": "Lycurgus",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "lycurgus",
+  "subject_uid": "person-5eb152f0b27b53ec",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/lycurgus-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-20T20:16:18Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.154",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "437335d8b4509b52d3dc72ece31281161f03850b151a00f40ee4d31fbdde267f",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/lycurgus-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "84d2caafc1d0530d3843e9926450314de64814edc618ae217d3fe2fbd6608577",
+      "runtime_size_bytes": 59718,
+      "size_bytes": 68407
+    }
+  ]
+}
