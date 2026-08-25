@@ -1,8 +1,8 @@
 {
   "round": 19,
-  "updated_at": "2026-08-25T13:00Z",
+  "updated_at": "2026-08-26T07:00Z",
   "time_band": "valley-0000-0800",
-  "people": 191,
+  "people": 190,
   "current_person": "T1 收尾：T2/T3 54 人收敛回 main，全库 191",
   "stage": "收尾完成：T1 本线程 137 + T2 22 + T3 32 = 191 人入库；切片/台账/HANDOFF 全同步；team-index 重建",
   "next": "收尾：skill 迭代 + 推送 + 汇报",
@@ -43,7 +43,7 @@
     "#193 Wanamaker 全流程(137)"
   ],
   "p0_closed": [],
-  "note": "T1 收尾汇总：Wanamaker #193 为 T1 最后一单（137），T2 分支 22 人（政治法律师 19+客户营销 3）、T3 分支 32 人（医疗护理 13+农林牧渔 16+财务合规 3）收敛回 main，全库 191/600（完成标准按用户喊停）；T2/T3 切片台账与 HANDOFF/THREAD-FEEDBACK 文档已同步；team-index 重建为 191 products",
+  "note": "复审修正：真实独有 190 人（191 含 Wanamaker 重复 1 个，T1/T2 平行各做一次、去重保留 T1 版）；三片 REG 143（T1 77 + T2 29 + T3 37）+ 47 早期波次 = 190；T1 切片修正 3 个 REG 误标（Eastman/Fisher/Jones→TODO）；fleet admission 重建 190（12 族全覆盖、医疗护理 13 人可路由）；路由实测：3 个中文任务均路由到正确领域专家（Gorgas/Bailey/Zaharia）",
   "cost_baseline": {
     "flash": {
       "calls": 934,
