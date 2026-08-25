@@ -1,0 +1,15 @@
+{
+  "seeds": [
+    "alchaincyf/darwin-skill",
+    "LearnPrompt/luban-skill",
+    "microsoft/SkillOpt",
+    "anthropics/skills",
+    "sentient-agi/EvoSkill",
+    "AlphaLab-USTC/Skill1",
+    "sduyangmin/Skill-Master",
+    "FrancyJGLisboa/agent-skill-creator",
+    "dotnet/skills",
+    "Zhang-Henry/CoEvoSkills"
+  ],
+  "note": "Seeds are dated discovery hints, not automatic endorsements or qualifying peers. Every run must resolve current provenance, commit, licence, artifact inventory and evidence status."
+}

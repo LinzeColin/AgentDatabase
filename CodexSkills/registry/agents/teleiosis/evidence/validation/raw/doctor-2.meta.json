@@ -1,0 +1,12 @@
+{
+  "label": "doctor-2",
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "scripts/teleiosis.py",
+    "doctor"
+  ],
+  "returncode": 0,
+  "seconds": 0.939,
+  "stdout_sha256": "811040beda43b957a2e6909d56578e5691aee319939e948e7013252f5085a2ec",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

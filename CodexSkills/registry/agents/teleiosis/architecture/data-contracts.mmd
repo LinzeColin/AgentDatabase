@@ -1,0 +1,15 @@
+classDiagram
+  class CandidateIdentity
+  class EvidenceEnvelope
+  class LabResult
+  class PromotionPacket
+  class DecisionReceipt
+  class ArenaSpec
+  class ArenaResult
+  CandidateIdentity "1" --> "many" EvidenceEnvelope
+  EvidenceEnvelope "many" --> "1" LabResult
+  LabResult "many" --> "1" PromotionPacket
+  ArenaSpec "1" --> "1" ArenaResult
+  ArenaResult --> PromotionPacket
+  PromotionPacket --> DecisionReceipt
+  DecisionReceipt --> ExternalVerifierHandoff

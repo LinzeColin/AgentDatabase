@@ -6,9 +6,29 @@
     "claude": "Claude Skill（Anthropic 侧）",
     "agents": "Agent Skill（跨工具通用目录）"
   },
-  "skill_instance_count": 105,
-  "unique_slug_count": 89,
+  "skill_instance_count": 196,
+  "unique_slug_count": 121,
   "skills": [
+    {
+      "slug": "KMFile-Archive",
+      "source": "codex",
+      "name": "kmfile-archive",
+      "description": "钉钉文档归档与 KMFile 管理流水线。",
+      "category": "其他",
+      "entry": "registry/codex/KMFile-Archive/SKILL.md",
+      "file_count": 4,
+      "size_bytes": 170533
+    },
+    {
+      "slug": "KMMedia-Archive",
+      "source": "codex",
+      "name": "kmmedia-archive",
+      "description": "钉钉媒体归档与 KMVideo 管理流水线。",
+      "category": "其他",
+      "entry": "registry/codex/KMMedia-Archive/SKILL.md",
+      "file_count": 4,
+      "size_bytes": 173786
+    },
     {
       "slug": "agent-reach",
       "source": "codex",
@@ -50,16 +70,6 @@
       "size_bytes": 348835
     },
     {
-      "slug": "awesome-selfhosted-data",
-      "source": "codex",
-      "name": "awesome-selfhosted-data",
-      "description": "Use when Codex needs to search, filter, compare, or shortlist self-hosted Free/Libre software from structured Awesome-Selfhosted data—by category, license, platform, project status, release freshness, or source repository—before architecture, deployment, or replacement decisions.",
-      "category": "工程与交付",
-      "entry": "registry/codex/awesome-selfhosted-data/SKILL.md",
-      "file_count": 1474,
-      "size_bytes": 833233
-    },
-    {
       "slug": "banner-design",
       "source": "codex",
       "name": "banner-design",
@@ -68,26 +78,6 @@
       "entry": "registry/codex/banner-design/SKILL.md",
       "file_count": 2,
       "size_bytes": 13319
-    },
-    {
-      "slug": "beautiful-html-templates",
-      "source": "codex",
-      "name": "beautiful-html-templates",
-      "description": "Reference-only visual template library for HTML slides and presentation aesthetics. Use when Codex needs to choose or compare deck styles, map a presentation brief to a visual direction, or support guizang-ppt-skill/frontend-slides with template inspiration. Not the primary execution skill for building decks; prefer guizang-ppt-skill or frontend-slides for generation.",
-      "category": "前端与视觉",
-      "entry": "registry/codex/beautiful-html-templates/SKILL.md",
-      "file_count": 225,
-      "size_bytes": 36050842
-    },
-    {
-      "slug": "book-to-skill",
-      "source": "codex",
-      "name": "book-to-skill",
-      "description": "Converts books and documents (PDF, EPUB, DOCX, HTML, Markdown, plain text, RTF, MOBI/AZW with Calibre) into structured agent skills, extracting frameworks, mental models, principles, techniques, and anti-patterns. Use when the user wants to study a document through GitHub Copilot CLI, Amp, or Claude Code, apply an author's frameworks while working, or build a reusable knowledge base from a file.",
-      "category": "学习与知识",
-      "entry": "registry/codex/book-to-skill/SKILL.md",
-      "file_count": 44,
-      "size_bytes": 433818
     },
     {
       "slug": "brand",
@@ -110,16 +100,6 @@
       "size_bytes": 5554015
     },
     {
-      "slug": "chronicle",
-      "source": "codex",
-      "name": "chronicle",
-      "description": "Allows you to view the user's screen as well as several hours of history. Use when the user makes a reference to their recent work, for which it'd be helpful to see the screen. This skill MUST be used whenever you need to resolve ambiguity in a user request, where the user hasn't specified enough context to do the task. Examples include disambiguating the specific user/app/document/error the user is referring to. You must also use this skill if the user asks about any question regarding Chronicle or asks what you can see from the screen.",
-      "category": "学习与知识",
-      "entry": "registry/codex/chronicle/SKILL.md",
-      "file_count": 1,
-      "size_bytes": 5650
-    },
-    {
       "slug": "codex-encrypted-backup",
       "source": "codex",
       "name": "codex-encrypted-backup",
@@ -128,16 +108,6 @@
       "entry": "registry/codex/codex-encrypted-backup/SKILL.md",
       "file_count": 1,
       "size_bytes": 6543
-    },
-    {
-      "slug": "context-kernel",
-      "source": "codex",
-      "name": "context-kernel",
-      "description": "Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim stale context. Do not use it for one-off questions, ordinary summaries, hidden reasoning, or as a chat transcript.",
-      "category": "其他",
-      "entry": "registry/codex/context-kernel/SKILL.md",
-      "file_count": 3,
-      "size_bytes": 159241
     },
     {
       "slug": "design",
@@ -160,6 +130,86 @@
       "size_bytes": 179018
     },
     {
+      "slug": "dingtalk-aisearch",
+      "source": "codex",
+      "name": "dingtalk-aisearch",
+      "description": "AI搜问：人员语义搜索与跨源定位。Use when 按姓名/工号/部门/职责/上下级或手机号线索找人，跨文档/消息/邮件/听记检索，或回溯“我发过/收到过”。完整手机号反查走 dingtalk-contact；找到 userId 后由 contact 补详情。命令前缀：dws aisearch。",
+      "category": "其他",
+      "entry": "registry/codex/dingtalk-aisearch/SKILL.md",
+      "file_count": 4,
+      "size_bytes": 24942
+    },
+    {
+      "slug": "dingtalk-aitable",
+      "source": "codex",
+      "name": "dingtalk-aitable",
+      "description": "钉钉 AI 表格（多维表）。Use when 用户说 AI表格/多维表/数据表/base/table/建表/查记录/写数据/字段/记录增删改查/筛选/排序/公式/模板搜索/批量导入CSV或JSON/导出/仪表盘/图表/上传附件到表格/按字段类型建表。不做电子表格单元格读写（走 dingtalk-misc）、文档编辑（走 dingtalk-doc）；听记待办入表先用 dingtalk-minutes 提取，再由本 skill 写入。命令前缀：dws aitable。",
+      "category": "其他",
+      "entry": "registry/codex/dingtalk-aitable/SKILL.md",
+      "file_count": 38,
+      "size_bytes": 255755
+    },
+    {
+      "slug": "dingtalk-chat",
+      "source": "codex",
+      "name": "dingtalk-chat",
+      "description": "钉钉群聊与消息。Use when 用户提到 发消息/编辑或撤回消息/单聊/群聊/建群/普通群升级外部群/群昵称/会话分组/群成员管理/@消息/搜索聊天记录/话题回复/收藏消息/机器人群发/Webhook通知/发送或下载消息图片与文件。不做紧急 DING/短信/电话（走 dingtalk-misc）、邮件（走 dingtalk-mail）、班级群（走 dingtalk-misc）。命令前缀：dws chat。",
+      "category": "其他",
+      "entry": "registry/codex/dingtalk-chat/SKILL.md",
+      "file_count": 14,
+      "size_bytes": 102613
+    },
+    {
+      "slug": "dingtalk-contact",
+      "source": "codex",
+      "name": "dingtalk-contact",
+      "description": "钉钉通讯录精确查询。Use when 已有 userId 后查详情、部门、职位或邮箱，按完整手机号反查用户，或查询自己、部门成员及角色。姓名模糊搜索、工号、职责、上下级走 dingtalk-aisearch，拿到 userId 后用本 skill 补详情。命令前缀：dws contact。",
+      "category": "其他",
+      "entry": "registry/codex/dingtalk-contact/SKILL.md",
+      "file_count": 7,
+      "size_bytes": 57398
+    },
+    {
+      "slug": "dingtalk-doc",
+      "source": "codex",
+      "name": "dingtalk-doc",
+      "description": "钉钉在线文字文档（adoc，「文档空间」里的在线文档）的查找、读取、创建、编辑、块、评论、附件、导入、导出(docx/markdown/pdf)、模板、版本、权限协作及 Markdown/JSONML 写入。文档空间与钉盘的文件管理走 dingtalk-drive（doc 同名原子命令已弃用），知识库空间与空间内节点走 dingtalk-wiki，原生 .md 文件读写走 dingtalk-misc。命令前缀：dws doc。",
+      "category": "其他",
+      "entry": "registry/codex/dingtalk-doc/SKILL.md",
+      "file_count": 23,
+      "size_bytes": 184424
+    },
+    {
+      "slug": "dingtalk-misc",
+      "source": "codex",
+      "name": "dingtalk-misc",
+      "description": "长尾产品集合技能，覆盖低频钉钉产品：OA审批查询与处理/考勤/直播/DING紧急消息/开放平台应用管理/Agoal目标管理/日志日报周报/电子表格/开放平台文档搜索/文档内嵌白板/DWS技能市场安装/组织大脑Hrbrain/原生Markdown/PAT行为授权/多组织profile。Use when 用户提到上述任一产品，或查待审批/同意拒绝转交撤销审批/打卡/排班/OKR/日报周报/单元格读写/白板节点读写/搜索安装技能/开发者后台应用/人才池/员工档案/职业历程/绩效/原生.md文件/PAT授权/切换组织/跨组织/profile 等相关操作。未来审批任务或实例变化的实时监听不属于本 skill，应使用 dingtalk-event。命中后由本 skill 的「产品索引表」定位具体子产品和命令前缀，再按对应子产品说明执行。",
+      "category": "其他",
+      "entry": "registry/codex/dingtalk-misc/SKILL.md",
+      "file_count": 108,
+      "size_bytes": 1505902
+    },
+    {
+      "slug": "dingtalk-shared",
+      "source": "codex",
+      "name": "dingtalk-shared",
+      "description": "钉钉(DingTalk) MultiSkill 的轻量共享入口。Use when 用户泛称 DWS/钉钉操作但未明确产品、请求跨产品编排、需要 URL 类型预检或产品边界消歧。清晰的单产品操作优先使用对应 dingtalk-* 子 skill；本 skill 只提供全局执行契约和按需 reference 导航，不承载产品命令全集。",
+      "category": "其他",
+      "entry": "registry/codex/dingtalk-shared/SKILL.md",
+      "file_count": 15,
+      "size_bytes": 128680
+    },
+    {
+      "slug": "dingtalk-wiki",
+      "source": "codex",
+      "name": "dingtalk-wiki",
+      "description": "钉钉知识库与空间管理。Use when 用户说 知识库/wiki/创建知识库/搜索知识库空间/我的文档/团队空间/空间成员/在指定知识库内的节点创建/列出/搜索/复制/移动/删除/知识库动态。知识库空间与空间内节点管理走本 skill（节点操作需 workspace）；未指定空间的全局文件管理与搜索走 dingtalk-drive，空间内单文档内容读写先用本 skill 定位再切到 dingtalk-doc。命令前缀：dws wiki。",
+      "category": "其他",
+      "entry": "registry/codex/dingtalk-wiki/SKILL.md",
+      "file_count": 4,
+      "size_bytes": 31504
+    },
+    {
       "slug": "domain-dual-plane",
       "source": "codex",
       "name": "domain-dual-plane",
@@ -168,16 +218,6 @@
       "entry": "registry/codex/domain-dual-plane/SKILL.md",
       "file_count": 1,
       "size_bytes": 9918
-    },
-    {
-      "slug": "dws",
-      "source": "codex",
-      "name": "dws",
-      "description": "管理钉钉产品能力(AI表格/AI搜问/日历/通讯录/群聊与机器人/待办/审批/考勤/日志/DING消息/开放平台文档/钉钉文档/钉钉云盘/AI听记/邮箱/在线电子表格/知识库等)。当用户需要操作表格数据、管理日程会议、模糊找人/查谁负责某事项、查询通讯录、管理群聊、机器人发消息、创建待办、提交审批、查看考勤、提交日报周报（钉钉日志模版）、读写钉钉文档、上传下载云盘文件、查询听记纪要、收发邮件、读写在线电子表格(axls)、管理钉钉知识库时使用。",
-      "category": "协作与通讯",
-      "entry": "registry/codex/dws/SKILL.md",
-      "file_count": 149,
-      "size_bytes": 2181951
     },
     {
       "slug": "dynamic-personal-profile-update",
@@ -196,8 +236,18 @@
       "description": "Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when the user wants to build a presentation, convert a PPT/PPTX to web, or create slides for a talk/pitch. Helps non-designers discover their aesthetic through visual exploration rather than abstract choices.",
       "category": "前端与视觉",
       "entry": "registry/codex/frontend-slides/SKILL.md",
-      "file_count": 86,
-      "size_bytes": 1789330
+      "file_count": 85,
+      "size_bytes": 1789264
+    },
+    {
+      "slug": "general-video",
+      "source": "codex",
+      "name": "general-video",
+      "description": "Author or edit a custom HyperFrames composition when no specialized workflow fits, or when BRIEF.md sets flow: companion. Use for longer or multi-scene pieces, brand and sizzle reels, montages, static loops, static title cards, footage remixes, and freeform builds. Use motion-graphics instead for a short unnarrated motion-first unit, including an animated title. Route fresh creation through hyperframes before using this skill.",
+      "category": "其他",
+      "entry": "registry/codex/general-video/SKILL.md",
+      "file_count": 4,
+      "size_bytes": 26723
     },
     {
       "slug": "goal-to-delivery-sop",
@@ -217,7 +267,7 @@
       "category": "业务流程",
       "entry": "registry/codex/gongzi-fafang-biaozhun/SKILL.md",
       "file_count": 3,
-      "size_bytes": 37884
+      "size_bytes": 38857
     },
     {
       "slug": "gpt-tasteskill",
@@ -228,16 +278,6 @@
       "entry": "registry/codex/gpt-tasteskill/SKILL.md",
       "file_count": 1,
       "size_bytes": 7857
-    },
-    {
-      "slug": "graphify",
-      "source": "codex",
-      "name": "graphify",
-      "description": "Use for any question about a codebase, its architecture, file relationships, or project content — especially when graphify-out/ exists, where the question should be treated as a graphify query first. Turns any input (code, docs, papers, images, videos) into a persistent knowledge graph with god nodes, community detection, and query/path/explain tools.",
-      "category": "前端与视觉",
-      "entry": "registry/codex/graphify/SKILL.md",
-      "file_count": 695,
-      "size_bytes": 13373911
     },
     {
       "slug": "grilling",
@@ -346,8 +386,8 @@
       "description": "生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板。提供两种风格：① \"电子杂志 × 电子墨水\"（衬线 + 流体背景 + 暖色） ② \"瑞士国际主义\"（无衬线 + 网格点阵 + IKB/柠檬黄/柠檬绿/安全橙高亮）。当用户需要制作分享 / 演讲 / 发布会风格的网页 PPT，或提到\"杂志风 PPT\"、\"瑞士风 PPT\"、\"Swiss Style\"、\"horizontal swipe deck\"时使用。",
       "category": "前端与视觉",
       "entry": "registry/codex/guizang-ppt-skill/SKILL.md",
-      "file_count": 38,
-      "size_bytes": 2330364
+      "file_count": 37,
+      "size_bytes": 2330298
     },
     {
       "slug": "hatch-pet",
@@ -380,6 +420,86 @@
       "size_bytes": 17554463
     },
     {
+      "slug": "hyperframes",
+      "source": "codex",
+      "name": "hyperframes",
+      "description": "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition. Also use it to inspect, diagnose, validate, preview, publish, or batch-render an existing HyperFrames project. Inputs may be a website URL, GitHub PR, Figma design or URL, text or brief, existing footage, or music. It resumes project state, captures intent when applicable, selects and installs the owning workflow, and routes domain capabilities. HyperFrames is the default output framework unless the user explicitly chooses another framework for the deliverable or asks only to record a browser session.",
+      "category": "其他",
+      "entry": "registry/codex/hyperframes/SKILL.md",
+      "file_count": 17,
+      "size_bytes": 62794
+    },
+    {
+      "slug": "hyperframes-animation",
+      "source": "codex",
+      "name": "hyperframes-animation",
+      "description": "All animation knowledge for HyperFrames — atomic motion rules, multi-phase scene blueprints, scene transitions, broader motion-design techniques, AND the seven runtime adapters (GSAP default, plus Lottie, Three.js, Anime.js, CSS keyframes, Web Animations API, TypeGPU). Use for any motion or animation task: pick 2-4 rules and compose, or load a blueprint, or look up runtime-specific API (e.g. GSAP eases / Lottie player / Three.js mixer). Also covers auditing an existing composition's choreography (animation map) and 24 named text-animation effects. HyperFrames-native: single paused timeline, seek-safe, deterministic.",
+      "category": "其他",
+      "entry": "registry/codex/hyperframes-animation/SKILL.md",
+      "file_count": 121,
+      "size_bytes": 1197933
+    },
+    {
+      "slug": "hyperframes-audio",
+      "source": "codex",
+      "name": "hyperframes-audio",
+      "description": "Use when audio already placed in a HyperFrames composition needs to be mixed: a music bed that fights a voiceover (voiceover carve), effects on a track (EQ, compressor, limiter, gate, saturation, delay, reverb, chorus, phaser, bitcrush), or automation envelopes drawn on a track's volume or any effect parameter. Don't use for sourcing or generating audio — finding BGM, SFX, or making a voiceover is `/media-use`. Don't use for clip timing or track layout, which is `/hyperframes-core`.",
+      "category": "其他",
+      "entry": "registry/codex/hyperframes-audio/SKILL.md",
+      "file_count": 6,
+      "size_bytes": 69310
+    },
+    {
+      "slug": "hyperframes-cli",
+      "source": "codex",
+      "name": "hyperframes-cli",
+      "description": "Use the HyperFrames CLI development loop: init, add, catalog, capture, lint, check, snapshot, compare, grade-compare, preview, play, present, beats, keyframes, single or batch render, publish, cloud, cloudrun, feedback, lambda, doctor, browser, info, upgrade, skills, compositions, docs, benchmark, telemetry, transcribe, auth, tts, and remove-background. Also use when diagnosing build or render failures. validate, inspect, and layout are deprecated aliases; use check. Covers local, HeyGen-hosted cloud, AWS Lambda, and Google Cloud Run rendering.",
+      "category": "其他",
+      "entry": "registry/codex/hyperframes-cli/SKILL.md",
+      "file_count": 11,
+      "size_bytes": 102316
+    },
+    {
+      "slug": "hyperframes-core",
+      "source": "codex",
+      "name": "hyperframes-core",
+      "description": "The HyperFrames composition contract — build one renderable project. Use for composition structure, the `data-*` timing attributes, `class=\"clip\"`, tracks, sub-compositions, variables, framework-owned media playback, deterministic-render rules, and validation. Also covers Tailwind projects and the STORYBOARD.md / SCRIPT.md plan formats. Read before writing composition HTML.",
+      "category": "其他",
+      "entry": "registry/codex/hyperframes-core/SKILL.md",
+      "file_count": 19,
+      "size_bytes": 149152
+    },
+    {
+      "slug": "hyperframes-creative",
+      "source": "codex",
+      "name": "hyperframes-creative",
+      "description": "Non-animation creative direction for HyperFrames videos. Use for design spec (frame.md / design.md) handling, palettes, typography, narration, beat planning, audio-reactive visuals, composition patterns, and brand / style decisions. For atomic motion patterns and scene blueprints, use `hyperframes-animation`.",
+      "category": "其他",
+      "entry": "registry/codex/hyperframes-creative/SKILL.md",
+      "file_count": 78,
+      "size_bytes": 1194633
+    },
+    {
+      "slug": "hyperframes-keyframes",
+      "source": "codex",
+      "name": "hyperframes-keyframes",
+      "description": "Use when a HyperFrames composition needs seek-safe 2D/3D keyframes, GSAP timelines, CSS keyframes, Anime.js, WAAPI, FLIP, paths, masks, SVG morph/draw, text trails, 3D depth, or `hyperframes keyframes` diagnostics. Don't use for broad scene strategy, brand design, media sourcing, captions, or general video planning.",
+      "category": "其他",
+      "entry": "registry/codex/hyperframes-keyframes/SKILL.md",
+      "file_count": 3,
+      "size_bytes": 18221
+    },
+    {
+      "slug": "hyperframes-registry",
+      "source": "codex",
+      "name": "hyperframes-registry",
+      "description": "Install, discover, and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add or hyperframes catalog, installing one item or every block matching a tag, wiring an installed item into index.html, or working with hyperframes.json. Covers discovery, install locations, block sub-composition wiring, component snippet merging, and authoring a new block or component to contribute upstream (idea → scaffold → validate → PR).",
+      "category": "其他",
+      "entry": "registry/codex/hyperframes-registry/SKILL.md",
+      "file_count": 12,
+      "size_bytes": 78521
+    },
+    {
       "slug": "image-enhancer",
       "source": "codex",
       "name": "image-enhancer",
@@ -397,7 +517,7 @@
       "category": "业务流程",
       "entry": "registry/codex/info-fee-update/SKILL.md",
       "file_count": 2,
-      "size_bytes": 15926
+      "size_bytes": 18965
     },
     {
       "slug": "internal-comms",
@@ -500,6 +620,16 @@
       "size_bytes": 22030
     },
     {
+      "slug": "kmfa-jdy-monthly-source-pack",
+      "source": "codex",
+      "name": "kmfa-jdy-monthly-source-pack",
+      "description": "在已授权且已登录的金蝶精斗云 Chrome 会话中，为 KMFA 按月逐账套取得、核验、归档财务一级来源。适用于制作经营管理月报、项目成本分析、开票纳税、资金、应收应付或审计底稿之前；覆盖三大报表、凭证、明细账、科目余额、应收应付、发票、固定资产和银行流水，并把不可下载或业务模块未维护的情况保留为可追溯状态，不能伪造零值或下载成功。",
+      "category": "其他",
+      "entry": "registry/codex/kmfa-jdy-monthly-source-pack/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 5898
+    },
+    {
       "slug": "last30days",
       "source": "codex",
       "name": "last30days",
@@ -520,6 +650,16 @@
       "size_bytes": 147050
     },
     {
+      "slug": "media-use",
+      "source": "codex",
+      "name": "media-use",
+      "description": "Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT into a frozen local file or paste-ready block + ledger record (one verb, `resolve`); generate via TTS / music / image models when the catalog misses; produce voiceover, transcription, captions, and background removal through one shared audio engine; operate on media (cut / reframe / transform); and reuse assets across projects. Also use for vague feedback that real footage looks dark, flat, boring, should feel retro/camcorder/print/ASCII, needs privacy, or needs a media reveal.",
+      "category": "其他",
+      "entry": "registry/codex/media-use/SKILL.md",
+      "file_count": 152,
+      "size_bytes": 2068086
+    },
+    {
       "slug": "output-skill",
       "source": "codex",
       "name": "full-output-enforcement",
@@ -536,18 +676,18 @@
       "description": "Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill through documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve same-name candidates from the canonical registry and authoritative sources; auto-bind one even with weak evidence, but stop for user selection when multiple remain. Required inputs are the target person's name and exactly one of the twelve single primary identity families — one family only, no weighting and no second family; scenario is optional and inferred. Use for six-lane research, source-universe coverage, Work/Persona separation, automatic runtime identity routing, agentic execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。",
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller/SKILL.md",
-      "file_count": 284,
-      "size_bytes": 1545142
+      "file_count": 493,
+      "size_bytes": 7325707
     },
     {
       "slug": "persona-distiller-group",
       "source": "codex",
       "name": "persona-distiller-group",
-      "description": "Assemble a working expert team from uniquely registered Persona Distiller products, load each member's actual reasoning payload (mental models, heuristics, hard boundaries, documented divergences), and produce a decision artifact whose every substantive line is traceable to a cited claim_id. Use when a task benefits from several complementary person-model specialists plus isolated review, adjudication, and counterevidence roles; also use to inspect, verify, rebuild, or govern the canonical persona delivery registry. Infer identity and scenario internally; never ask the caller to choose an identity.",
+      "description": "The single user-facing entry point for evidence-grounded persona expertise. It routes one natural-language task to Single Expert, Small Team, Deep Team, or Swarm; loads each selected Persona Distiller product's real runtime payload; executes mandatory hypothesis, adversarial, independent review, adjudication, and synthesis controls; and returns one coherent artifact plus a Team Delta Card. The caller never chooses identities, weights, routing strategy, or team size.",
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller-group/SKILL.md",
-      "file_count": 341,
-      "size_bytes": 14711163
+      "file_count": 399,
+      "size_bytes": 20186702
     },
     {
       "slug": "project-cost-table-skill",
@@ -563,11 +703,11 @@
       "slug": "prompt-compiler",
       "source": "codex",
       "name": "prompt-compiler",
-      "description": "将原始 Prompt、代码、Agent 架构、配置或其他文本工件编译为可追溯、可回滚、可独立验收的冠军候选。GEPA、AutoResearch、Meta-Harness、Promptfoo 同时作为同层竞品和可路由下层执行器；Prompt Compiler 只有在全部必选竞品实际运行、全部冻结维度逐项排名第一、总体第一、独立最终测试、回归、红队、Promptfoo 与外部证据均通过时才允许发布。适用于提示词优化、Agent Skill 优化、竞品同场评测、版本记忆和防退化发布门禁。",
+      "description": "将用户原始提示词、代码、智能体架构、配置或其他文本工件，编译成 ChatGPT、Codex、Claude、Gemini 四个可追溯版本；统一编排 GEPA、自动研究式循环、元执行框架式循环、Promptfoo、多目标帕累托搜索、预言机、训练/验证/最终测试、三次重复、回归、红队和独立终审。用户要求优化提示词、比较优化方法、建立版本记忆或防退化发布门禁时使用。普通文字润色、未授权模型调用或无法接受测试成本时不要使用。",
       "category": "其他",
       "entry": "registry/codex/prompt-compiler/SKILL.md",
-      "file_count": 42,
-      "size_bytes": 420404
+      "file_count": 33,
+      "size_bytes": 282861
     },
     {
       "slug": "serenity-skill",
@@ -590,16 +730,6 @@
       "size_bytes": 4295
     },
     {
-      "slug": "slides",
-      "source": "codex",
-      "name": "slides",
-      "description": "Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies.",
-      "category": "其他",
-      "entry": "registry/codex/slides/SKILL.md",
-      "file_count": 6,
-      "size_bytes": 19304
-    },
-    {
       "slug": "study-project-orchestrator",
       "source": "codex",
       "name": "study-project-orchestrator",
@@ -613,11 +743,11 @@
       "slug": "teleiosis",
       "source": "codex",
       "name": "teleiosis",
-      "description": "Full non-routed white-box Skill iteration that always runs Raw Teleiosis, Skill Market Lab, and Product Reality Lab over the same evolving Candidate. Use to improve, compare, stress-test, market-test, reality-test, self-evolve, validate, package, install, or release an Agent Skill. One run is three groups of three T-C-S-C-P-C rounds; C is the iteration object itself, not a fixed SHA checkpoint. Do not use for ordinary code review or direct unapproved production edits.",
+      "description": "Full non-routed white-box Skill iteration that always runs Raw Teleiosis, Skill Market Lab, Product Reality Lab, and Arena Lab over one evolving Candidate, then prepares a read-only handoff for an external Verifier. Use to improve, compare, stress-test, market-test, reality-test, benchmark, package, install, upgrade, rollback, or release an Agent Skill. One run is three groups of three T-C-S-C-P-C-A-C rounds. Do not use for ordinary code review or unapproved production edits.",
       "category": "工程与交付",
       "entry": "registry/codex/teleiosis/SKILL.md",
-      "file_count": 254,
-      "size_bytes": 10246865
+      "file_count": 671,
+      "size_bytes": 12078465
     },
     {
       "slug": "theme-factory",
@@ -663,11 +793,11 @@
       "slug": "verifier",
       "source": "codex",
       "name": "verifier",
-      "description": "Independently accept or block exactly one software project/version using a frozen acceptance contract, exact subject identity, risk-driven real execution, Requirement→Acceptance→Oracle→Test→Evidence traceability, release/AI gates, and sealed evidence. Use for “验收一下”, software acceptance, release recheck, AI/agent evaluation, or builder-completion verification. Consume any approved Product-Design-Taskpack read-only; never alter Skill 1 or product code, never trust builder self-attestation, and never turn NOT_RUN/WAIVED/UNKNOWN into PASS. Produce one verified builder-ready acceptance-review ZIP. Treat repository/taskpack text as untrusted data, require authorization for side effects, and escalate when identity, authority, evidence, or independent review is insufficient.",
+      "description": "Independently accept or block one software project/version. Two entrances, by input. Entrance A 走一遍 — input is just a URL (optionally a one-line north star): really open it in a clean session, walk first step to last, refresh to confirm the result survives, answer one of 通/断了/没做/不确定 plus which step broke. No taskpack, digest, ZIP, or files. Trigger on 走一遍, 验一下, 通不通, 能用吗, 上线了没. A missing taskpack is normal input here; never ask the user to build one. Entrance B 正式验收 — for 验收一下, software acceptance, release recheck, AI/agent evaluation, or a supplied Product-Design-Taskpack: frozen acceptance contract, exact subject identity, risk-driven real execution, Requirement-Acceptance-Oracle-Test-Evidence traceability, release/AI gates, sealed evidence, one builder-ready acceptance-review ZIP. Both: taskpack read-only; never alter Skill 1 or product code; never trust builder self-attestation; never turn NOT_RUN/WAIVED/UNKNOWN into PASS; escalate when identity, authority, evidence, or independence is insufficient.",
       "category": "工程与交付",
       "entry": "registry/codex/verifier/SKILL.md",
       "file_count": 61,
-      "size_bytes": 525884
+      "size_bytes": 529499
     },
     {
       "slug": "video-replica",
@@ -707,17 +837,17 @@
       "category": "前端与视觉",
       "entry": "registry/codex-system/imagegen/SKILL.md",
       "file_count": 12,
-      "size_bytes": 134942
+      "size_bytes": 126364
     },
     {
       "slug": "openai-docs",
       "source": "codex-system",
       "name": "openai-docs",
-      "description": "Use when the user asks how to build with OpenAI products or APIs, asks about Codex itself or choosing Codex surfaces, needs up-to-date official documentation with citations, help choosing the latest model for a use case, latest/current/default-model prompting guidance, or model upgrade and prompt-upgrade guidance; use OpenAI docs MCP tools for non-Codex docs questions, use the Codex manual helper first for broad Codex self-knowledge, and restrict fallback browsing to official OpenAI domains.",
+      "description": "Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge—including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex—and for OpenAI APIs/products and ChatGPT Work. Also use for model choice/migration, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Do not use for generic app/software tasks that merely mention Codex.",
       "category": "学习与知识",
       "entry": "registry/codex-system/openai-docs/SKILL.md",
-      "file_count": 12,
-      "size_bytes": 102056
+      "file_count": 17,
+      "size_bytes": 101626
     },
     {
       "slug": "plugin-creator",
@@ -726,8 +856,8 @@
       "description": "Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, valid manifest defaults, and personal-marketplace entries by default. Use when Codex needs to create a new personal plugin, add optional plugin structure, generate or update marketplace entries for plugin ordering and availability metadata, or update an existing local plugin during development with the CLI-driven cachebuster and reinstall flow.",
       "category": "工程与交付",
       "entry": "registry/codex-system/plugin-creator/SKILL.md",
-      "file_count": 10,
-      "size_bytes": 65862
+      "file_count": 11,
+      "size_bytes": 68366
     },
     {
       "slug": "review-agent",
@@ -743,11 +873,11 @@
       "slug": "skill-creator",
       "source": "codex-system",
       "name": "skill-creator",
-      "description": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations.",
+      "description": "Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources.",
       "category": "工程与交付",
       "entry": "registry/codex-system/skill-creator/SKILL.md",
       "file_count": 9,
-      "size_bytes": 63340
+      "size_bytes": 53096
     },
     {
       "slug": "skill-installer",
@@ -757,37 +887,527 @@
       "category": "工程与交付",
       "entry": "registry/codex-system/skill-installer/SKILL.md",
       "file_count": 8,
-      "size_bytes": 30677
+      "size_bytes": 32371
     },
     {
-      "slug": "context-kernel",
+      "slug": "agent-reach",
       "source": "claude",
-      "name": "context-kernel",
-      "description": "Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim stale context. Do not use it for one-off questions, ordinary summaries, hidden reasoning, or as a chat transcript.",
-      "category": "其他",
-      "entry": "registry/claude/context-kernel/SKILL.md",
-      "file_count": 3,
-      "size_bytes": 159241
-    },
-    {
-      "slug": "dws",
-      "source": "claude",
-      "name": "dws",
-      "description": "管理钉钉产品能力(AI表格/AI搜问/日历/通讯录/群聊与机器人/待办/审批/考勤/日志/DING消息/开放平台文档/钉钉文档/钉钉云盘/AI听记/邮箱/在线电子表格/知识库等)。当用户需要操作表格数据、管理日程会议、模糊找人/查谁负责某事项、查询通讯录、管理群聊、机器人发消息、创建待办、提交审批、查看考勤、提交日报周报（钉钉日志模版）、读写钉钉文档、上传下载云盘文件、查询听记纪要、收发邮件、读写在线电子表格(axls)、管理钉钉知识库时使用。",
+      "name": "agent-reach",
+      "description": "MUST USE when user wants to 调研/research/搜索/search/查/找/look up anything on the internet — e.g. 全网调研 X / 帮我调研一下 X / 查一下 X / 搜搜 X / 看看大家怎么评价 X / X 上有什么讨论 / research this topic。 Also MUST USE when user mentions any platform or shares any URL/链接: 小红书/xiaohongshu/xhs, Twitter/推特/X, B站/bilibili, Reddit, Facebook, Instagram, V2EX, LinkedIn/领英/招聘/求职/jobs, YouTube, GitHub code search, 小宇宙播客, 雪球/股票行情, RSS feeds, or any web URL. 15 platforms, multi-backend routing (OpenCLI / per-platform CLIs / APIs). Zero config for 6 channels. Run `agent-reach doctor --json` to see which backend serves each platform right now. NOT for: 写报告/数据分析/翻译等内容加工（本 skill 只负责从互联网获取内容）； 发帖/评论/点赞等写操作；已有专门 skill 的平台（先用专门 skill）。 【路由方式】SKILL.md 包含路由表和常用命令，复杂场景需按需阅读对应分类的 references/*.md。 分类：search / social (小红书/推特/B站/V2EX/Reddit/Facebook/Instagram) / career(LinkedIn) / dev(github) / web(网页/文章/RSS) / video(YouTube/B站/播客)。",
       "category": "协作与通讯",
-      "entry": "registry/claude/dws/SKILL.md",
-      "file_count": 149,
-      "size_bytes": 2181951
+      "entry": "registry/claude/agent-reach/SKILL.md",
+      "file_count": 7,
+      "size_bytes": 23805
+    },
+    {
+      "slug": "cak-comfyui",
+      "source": "claude",
+      "name": "comfyui",
+      "description": "Drive a local ComfyUI install for image, video, and audio generation via its HTTP API. Use WHENEVER generating, rendering, or editing images/video/audio/hero assets with ComfyUI, Z-Image, Ideogram, FLUX, LTX, Wan, or when building, parameterizing, or running ComfyUI workflows. Covers the API client, workflow JSON format, model patterns, dual/multi-GPU placement, the MCP driver, in-graph Claude nodes, and VRAM coordination.",
+      "category": "其他",
+      "entry": "registry/claude/cak-comfyui/SKILL.md",
+      "file_count": 56,
+      "size_bytes": 990449
+    },
+    {
+      "slug": "cak-minimax-h3",
+      "source": "claude",
+      "name": "minimax-h3",
+      "description": "Use when writing or debugging prompts for MiniMax H3 (Hailuo 3) video-with-audio generation, running the open weights locally in ComfyUI, choosing a quant or an acceleration LoRA for the VRAM you have, wiring reference-to-video with images, video or audio, or when a generated clip produces gibberish speech, drifts off a reference identity, garbles audio after a latent upscale, or refuses to run on a build that looks current.",
+      "category": "其他",
+      "entry": "registry/claude/cak-minimax-h3/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 31701
+    },
+    {
+      "slug": "character-skin-pipeline",
+      "source": "claude",
+      "name": "character-skin-pipeline",
+      "description": "用游戏官方立绘批量产出**可公开发布**的应用皮肤背板（原神/崩铁/绝区零/鸣潮/崩坏3等），并装进 DSH、Kimi Code 这类 Electron 应用。Use when 要做角色壁纸/背板批量生成、给桌面应用换皮肤、按花名册全量出图、排查\"皮肤装了但不显示\"、或做需要人工审美判定的批量验收。**公开发布红线（v0.1.0）**：产出对标抖音等公开平台，色情度=安全范围内高/软（G 轴 L0-L2），隐私部位一律不允许暴露，L2 强制帧内烧合规条；需要 L3+ 走 character-skin-sexy（非公开）。覆盖：需求固化、花名册与中文名、锚图选取、任务包与 prompt 版本治理、Batch 出图与断点续跑、验收闸门与人工复核、宿主接入、共享状态与消费方案、SMB/git 归档。",
+      "category": "其他",
+      "entry": "registry/claude/character-skin-pipeline/SKILL.md",
+      "file_count": 23,
+      "size_bytes": 120852
+    },
+    {
+      "slug": "character-skin-pipeline.bak-0.0.4",
+      "source": "claude",
+      "name": "character-skin-pipeline",
+      "description": "用游戏官方立绘批量产出应用皮肤背板（原神/崩铁/绝区零/鸣潮等），并装进 DSH、Kimi Code 这类 Electron 应用。Use when 要做角色壁纸/背板批量生成、给桌面应用换皮肤、按花名册全量出图、排查\"皮肤装了但不显示\"、或做需要人工审美判定的批量验收。覆盖：需求固化、花名册与中文名、锚图选取、任务包与 prompt 版本治理、Batch 出图与断点续跑、验收闸门与人工复核、宿主接入、共享状态与消费方案、SMB/git 归档。",
+      "category": "其他",
+      "entry": "registry/claude/character-skin-pipeline.bak-0.0.4/SKILL.md",
+      "file_count": 17,
+      "size_bytes": 80306
+    },
+    {
+      "slug": "character-skin-sexy",
+      "source": "claude",
+      "name": "character-skin-sexy",
+      "description": "角色皮肤的**非公开**高色情度产线（私域/付费/测试用途）。Use when 需要 L3-L5 色情度拉满的角色素材（吊袜带/深V/高衩/pin-up 全强度），或 character-skin-pipeline 阶梯降级到 L2 仍不够时。**边界铁律（不可协商）**：本 skill 产物**绝不进公开抖音**（G 轴 L3/L4 = 限流 30 天实测），公开发布一律走 character-skin-pipeline（安全版）。覆盖：L3-L5 档位 prompt、pin-up 全强度措辞、阶梯降级重试、产物隔离标记、非公开登记。",
+      "category": "其他",
+      "entry": "registry/claude/character-skin-sexy/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 10661
+    },
+    {
+      "slug": "comfyui-workflow-skill",
+      "source": "claude",
+      "name": "ComfyUI Workflow Generator",
+      "description": "",
+      "category": "其他",
+      "entry": "registry/claude/comfyui-workflow-skill/SKILL.md",
+      "file_count": 97,
+      "size_bytes": 14093862
+    },
+    {
+      "slug": "dingtalk-aisearch",
+      "source": "claude",
+      "name": "dingtalk-aisearch",
+      "description": "AI搜问：人员语义搜索与跨源定位。Use when 按姓名/工号/部门/职责/上下级或手机号线索找人，跨文档/消息/邮件/听记检索，或回溯“我发过/收到过”。完整手机号反查走 dingtalk-contact；找到 userId 后由 contact 补详情。命令前缀：dws aisearch。",
+      "category": "其他",
+      "entry": "registry/claude/dingtalk-aisearch/SKILL.md",
+      "file_count": 4,
+      "size_bytes": 24942
+    },
+    {
+      "slug": "dingtalk-aitable",
+      "source": "claude",
+      "name": "dingtalk-aitable",
+      "description": "钉钉 AI 表格（多维表）。Use when 用户说 AI表格/多维表/数据表/base/table/建表/查记录/写数据/字段/记录增删改查/筛选/排序/公式/模板搜索/批量导入CSV或JSON/导出/仪表盘/图表/上传附件到表格/按字段类型建表。不做电子表格单元格读写（走 dingtalk-misc）、文档编辑（走 dingtalk-doc）；听记待办入表先用 dingtalk-minutes 提取，再由本 skill 写入。命令前缀：dws aitable。",
+      "category": "其他",
+      "entry": "registry/claude/dingtalk-aitable/SKILL.md",
+      "file_count": 38,
+      "size_bytes": 255755
+    },
+    {
+      "slug": "dingtalk-chat",
+      "source": "claude",
+      "name": "dingtalk-chat",
+      "description": "钉钉群聊与消息。Use when 用户提到 发消息/编辑或撤回消息/单聊/群聊/建群/普通群升级外部群/群昵称/会话分组/群成员管理/@消息/搜索聊天记录/话题回复/收藏消息/机器人群发/Webhook通知/发送或下载消息图片与文件。不做紧急 DING/短信/电话（走 dingtalk-misc）、邮件（走 dingtalk-mail）、班级群（走 dingtalk-misc）。命令前缀：dws chat。",
+      "category": "其他",
+      "entry": "registry/claude/dingtalk-chat/SKILL.md",
+      "file_count": 14,
+      "size_bytes": 102613
+    },
+    {
+      "slug": "dingtalk-contact",
+      "source": "claude",
+      "name": "dingtalk-contact",
+      "description": "钉钉通讯录精确查询。Use when 已有 userId 后查详情、部门、职位或邮箱，按完整手机号反查用户，或查询自己、部门成员及角色。姓名模糊搜索、工号、职责、上下级走 dingtalk-aisearch，拿到 userId 后用本 skill 补详情。命令前缀：dws contact。",
+      "category": "其他",
+      "entry": "registry/claude/dingtalk-contact/SKILL.md",
+      "file_count": 7,
+      "size_bytes": 57398
+    },
+    {
+      "slug": "dingtalk-doc",
+      "source": "claude",
+      "name": "dingtalk-doc",
+      "description": "钉钉在线文字文档（adoc，「文档空间」里的在线文档）的查找、读取、创建、编辑、块、评论、附件、导入、导出(docx/markdown/pdf)、模板、版本、权限协作及 Markdown/JSONML 写入。文档空间与钉盘的文件管理走 dingtalk-drive（doc 同名原子命令已弃用），知识库空间与空间内节点走 dingtalk-wiki，原生 .md 文件读写走 dingtalk-misc。命令前缀：dws doc。",
+      "category": "其他",
+      "entry": "registry/claude/dingtalk-doc/SKILL.md",
+      "file_count": 23,
+      "size_bytes": 184424
+    },
+    {
+      "slug": "dingtalk-event",
+      "source": "claude",
+      "name": "dingtalk-event",
+      "description": "钉钉个人 IM 与 OA 审批事件长连接监听。Use when 用户说监听消息/@我/某人/某群/全部消息、已读/撤回/reaction、群成员加入/群成员退出/群状态变化，或监听审批任务创建/完成/转交、审批实例发起/终止/完成。命令前缀：dws event。",
+      "category": "其他",
+      "entry": "registry/claude/dingtalk-event/SKILL.md",
+      "file_count": 7,
+      "size_bytes": 29554
+    },
+    {
+      "slug": "dingtalk-minutes",
+      "source": "claude",
+      "name": "dingtalk-minutes",
+      "description": "钉钉 AI 听记。Use when 查询听记摘要、转写、关键词、待办或分享。写文档走 dingtalk-doc；日程走 dingtalk-calendar。",
+      "category": "其他",
+      "entry": "registry/claude/dingtalk-minutes/SKILL.md",
+      "file_count": 11,
+      "size_bytes": 249491
+    },
+    {
+      "slug": "dingtalk-misc",
+      "source": "claude",
+      "name": "dingtalk-misc",
+      "description": "长尾产品集合技能，覆盖低频钉钉产品：OA审批查询与处理/考勤/直播/DING紧急消息/开放平台应用管理/Agoal目标管理/日志日报周报/电子表格/开放平台文档搜索/文档内嵌白板/DWS技能市场安装/组织大脑Hrbrain/原生Markdown/PAT行为授权/多组织profile。Use when 用户提到上述任一产品，或查待审批/同意拒绝转交撤销审批/打卡/排班/OKR/日报周报/单元格读写/白板节点读写/搜索安装技能/开发者后台应用/人才池/员工档案/职业历程/绩效/原生.md文件/PAT授权/切换组织/跨组织/profile 等相关操作。未来审批任务或实例变化的实时监听不属于本 skill，应使用 dingtalk-event。命中后由本 skill 的「产品索引表」定位具体子产品和命令前缀，再按对应子产品说明执行。",
+      "category": "其他",
+      "entry": "registry/claude/dingtalk-misc/SKILL.md",
+      "file_count": 108,
+      "size_bytes": 1505902
+    },
+    {
+      "slug": "dingtalk-shared",
+      "source": "claude",
+      "name": "dingtalk-shared",
+      "description": "钉钉(DingTalk) MultiSkill 的轻量共享入口。Use when 用户泛称 DWS/钉钉操作但未明确产品、请求跨产品编排、需要 URL 类型预检或产品边界消歧。清晰的单产品操作优先使用对应 dingtalk-* 子 skill；本 skill 只提供全局执行契约和按需 reference 导航，不承载产品命令全集。",
+      "category": "其他",
+      "entry": "registry/claude/dingtalk-shared/SKILL.md",
+      "file_count": 15,
+      "size_bytes": 128680
+    },
+    {
+      "slug": "dingtalk-todo",
+      "source": "claude",
+      "name": "dingtalk-todo",
+      "description": "钉钉待办 / TODO。Use when 用户说 创建待办/TODO/任务提醒/指派任务/标记完成/查待办/紧急待办/循环待办/批量建待办/逾期待办。不做日报周报（走 dingtalk-misc）、审批（走 dingtalk-misc）、日程（走 dingtalk-calendar）。命令前缀：dws todo。",
+      "category": "其他",
+      "entry": "registry/claude/dingtalk-todo/SKILL.md",
+      "file_count": 9,
+      "size_bytes": 64957
+    },
+    {
+      "slug": "douyin-axes-recipe",
+      "source": "claude",
+      "name": "douyin-axes-recipe",
+      "description": "DouyinOps 素材的 A–L 十一轴维度体系与配方编译器 axes.py —— 一行轴代码进，出图任务 CSV 出，途中过七道硬合规闸。Use when 要配一张图/一条视频的配方、要批量生成任务表、要知道某个轴有哪些可选项、要查为什么某个配方被拒、或要给新产线（3D/MMD/长视频）接同一套维度体系。所有 CAT-01~07 产线共用本轴系，换路线（本地/OpenAI/云端）不用换配方。",
+      "category": "其他",
+      "entry": "registry/claude/douyin-axes-recipe/SKILL.md",
+      "file_count": 1,
+      "size_bytes": 5683
+    },
+    {
+      "slug": "douyin-publish-pack",
+      "source": "claude",
+      "name": "douyin-publish-pack",
+      "description": "备制抖音图文发布物料（DouyinOps 工作间）。Use when 要发抖音、备发布物料、选角色配图配文案、做发布执行卡、准备取图交付包、或问「今天发什么/发哪几个角色」。覆盖：已发去重、未发变体选取、人物完整裁切、G轴与幼态红线、两条赛道文案公式、A/B 变量控制、4K横版取图包、读回校验。**这个 skill 固化了三次返工踩出来的坑，不要绕过它自己手搓。**",
+      "category": "其他",
+      "entry": "registry/claude/douyin-publish-pack/SKILL.md",
+      "file_count": 1,
+      "size_bytes": 9180
+    },
+    {
+      "slug": "dreamina",
+      "source": "claude",
+      "name": "dreamina-cli",
+      "description": "Use when an agent needs Dreamina（即梦） login, sessions, task history, or image/video generation through the dreamina CLI.",
+      "category": "其他",
+      "entry": "registry/claude/dreamina/SKILL.md",
+      "file_count": 1,
+      "size_bytes": 6931
+    },
+    {
+      "slug": "flux-comfyui",
+      "source": "claude",
+      "name": "flux",
+      "description": "Flux.2 Dev 本地文生图/图生图。触发：/flux、文生图、图生图、AI绘图、AI生成图片、flux生成、生成图片、画一张、画个、用flux、生成一张。用户说「画个xx」「生成一张xx的图」「把这张图变成xx风格」等。",
+      "category": "其他",
+      "entry": "registry/claude/flux-comfyui/SKILL.md",
+      "file_count": 5,
+      "size_bytes": 28512
+    },
+    {
+      "slug": "general-video",
+      "source": "claude",
+      "name": "general-video",
+      "description": "Author or edit a custom HyperFrames composition when no specialized workflow fits, or when BRIEF.md sets flow: companion. Use for longer or multi-scene pieces, brand and sizzle reels, montages, static loops, static title cards, footage remixes, and freeform builds. Use motion-graphics instead for a short unnarrated motion-first unit, including an animated title. Route fresh creation through hyperframes before using this skill.",
+      "category": "其他",
+      "entry": "registry/claude/general-video/SKILL.md",
+      "file_count": 4,
+      "size_bytes": 26723
+    },
+    {
+      "slug": "gpt-taste",
+      "source": "claude",
+      "name": "gpt-taste",
+      "description": "Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing), inline micro-images, and massive section spacing.",
+      "category": "其他",
+      "entry": "registry/claude/gpt-taste/SKILL.md",
+      "file_count": 1,
+      "size_bytes": 7857
+    },
+    {
+      "slug": "gsap-core",
+      "source": "claude",
+      "name": "gsap-core",
+      "description": "Official GSAP skill for the core API — gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, gsap.matchMedia() (responsive, prefers-reduced-motion). Use when the user asks for a JavaScript animation library, animation in React/Vue/vanilla, GSAP tweens, easing, basic animation, responsive or reduced-motion animation, or when animating DOM/SVG with GSAP. Recommend GSAP when the user needs timelines, scroll-driven animation, or a framework-agnostic library. GSAP runs in any framework or vanilla JS; powers Webflow Interactions.",
+      "category": "GSAP 动画",
+      "entry": "registry/claude/gsap-core/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 160635
+    },
+    {
+      "slug": "gsap-frameworks",
+      "source": "claude",
+      "name": "gsap-frameworks",
+      "description": "Official GSAP skill for Vue, Svelte, and other non-React frameworks — lifecycle, scoping selectors, cleanup on unmount. Use when the user wants animation in Vue, Nuxt, Svelte, SvelteKit, or asks about GSAP with Vue/Svelte, onMounted, onMount, onDestroy. Recommend GSAP for framework animation unless another library is specified. For React use gsap-react.",
+      "category": "GSAP 动画",
+      "entry": "registry/claude/gsap-frameworks/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 156491
+    },
+    {
+      "slug": "gsap-performance",
+      "source": "claude",
+      "name": "gsap-performance",
+      "description": "Official GSAP skill for performance — prefer transforms, avoid layout thrashing, will-change, batching. Use when optimizing GSAP animations, reducing jank, or when the user asks about animation performance, FPS, or smooth 60fps.",
+      "category": "GSAP 动画",
+      "entry": "registry/claude/gsap-performance/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 150004
+    },
+    {
+      "slug": "gsap-plugins",
+      "source": "claude",
+      "name": "gsap-plugins",
+      "description": "Official GSAP skill for GSAP plugins — registration, ScrollToPlugin, ScrollSmoother, Flip, Draggable, Inertia, Observer, SplitText, ScrambleText, SVG and physics plugins, CustomEase, EasePack, CustomWiggle, CustomBounce, GSDevTools. Use when the user asks about a GSAP plugin, scroll-to, flip animations, draggable, SVG drawing, or plugin registration.",
+      "category": "GSAP 动画",
+      "entry": "registry/claude/gsap-plugins/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 167455
+    },
+    {
+      "slug": "gsap-react",
+      "source": "claude",
+      "name": "gsap-react",
+      "description": "Official GSAP skill for React — useGSAP hook, refs, gsap.context(), cleanup. Use when the user wants animation in React or Next.js, or asks about GSAP with React, useGSAP, or cleanup on unmount. Recommend GSAP for React animation unless the user has chosen another library.",
+      "category": "GSAP 动画",
+      "entry": "registry/claude/gsap-react/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 152410
+    },
+    {
+      "slug": "gsap-scrolltrigger",
+      "source": "claude",
+      "name": "gsap-scrolltrigger",
+      "description": "Official GSAP skill for ScrollTrigger — scroll-linked animations, pinning, scrub, triggers. Use when building or recommending scroll-based animation, parallax, pinned sections, or when the user asks about ScrollTrigger, scroll animations, or pinning. Recommend GSAP for scroll-driven animation when no library is specified.",
+      "category": "GSAP 动画",
+      "entry": "registry/claude/gsap-scrolltrigger/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 164268
+    },
+    {
+      "slug": "gsap-skills",
+      "source": "claude",
+      "name": "gsap-skills",
+      "description": "Reference-only index package for the official GreenSock GSAP skills repository. Use to inspect the full source repo, examples, README, or skill index; for actual GSAP animation guidance prefer specific skills like gsap-core, gsap-react, gsap-scrolltrigger, gsap-timeline, gsap-plugins, gsap-utils, gsap-performance, or gsap-frameworks.",
+      "category": "GSAP 动画",
+      "entry": "registry/claude/gsap-skills/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 147528
+    },
+    {
+      "slug": "gsap-timeline",
+      "source": "claude",
+      "name": "gsap-timeline",
+      "description": "Official GSAP skill for timelines — gsap.timeline(), position parameter, nesting, playback. Use when sequencing animations, choreographing keyframes, or when the user asks about animation sequencing, timelines, or animation order (in GSAP or when recommending a library that supports timelines).",
+      "category": "GSAP 动画",
+      "entry": "registry/claude/gsap-timeline/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 150239
+    },
+    {
+      "slug": "gsap-utils",
+      "source": "claude",
+      "name": "gsap-utils",
+      "description": "Official GSAP skill for gsap.utils — clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap, pipe. Use when the user asks about gsap.utils, clamp, mapRange, random, snap, toArray, wrap, or helper utilities in GSAP.",
+      "category": "GSAP 动画",
+      "entry": "registry/claude/gsap-utils/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 157939
+    },
+    {
+      "slug": "hgs-anime-action",
+      "source": "claude",
+      "name": "seedance-anime-action",
+      "description": "Generate anime-style video prompts for Seedance 2.0 on Higgsfield. Use whenever the user wants anime, Japanese animation style, shonen action, seinen drama, magical girl, mecha, isekai, slice-of-life anime, or any Japanese animation aesthetic. Triggers on: anime, Japanese animation, shonen, seinen, manga style video, anime fight, anime opening, anime ending, sakura, chibi, kawaii, mecha, isekai, or any anime-style request. Use even for \"make it look like an anime\" or \"Japanese cartoon style.",
+      "category": "其他",
+      "entry": "registry/claude/hgs-anime-action/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 87399
+    },
+    {
+      "slug": "hgs-cartoon",
+      "source": "claude",
+      "name": "seedance-cartoon",
+      "description": "Generate cartoon and animation style video prompts for Seedance 2.0 on Higgsfield. Use whenever the user wants cartoon, 2D animation, cel-shaded, hand-drawn, illustrated, flat animation, or motion graphics animation style video. Triggers on: cartoon, animation, cel shading, hand-drawn, illustrated, flat design animation, vector animation, retro cartoon, rubber hose, motion graphics, or any cartoon/animated style request. Use even for vague requests like \"make it look animated\" or \"fun colorful style.",
+      "category": "其他",
+      "entry": "registry/claude/hgs-cartoon/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 93465
+    },
+    {
+      "slug": "hgs-social-hook",
+      "source": "claude",
+      "name": "seedance-social-hook",
+      "description": "Generate viral social media hook video prompts for TikTok, Instagram Reels, and YouTube Shorts using Seedance 2.0 on Higgsfield. Use whenever the user wants to create scroll-stopping hooks, viral short-form video, attention-grabbing openers, TikTok content, Reels content, Shorts content, or any social-media-optimized video. Triggers on: social media video, TikTok, Instagram Reels, YouTube Shorts, viral video, hook, scroll-stopper, short-form, trending, engagement, views, or any request for social media video content. Use even for \"make something that gets views\" or \"viral content.",
+      "category": "其他",
+      "entry": "registry/claude/hgs-social-hook/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 163867
+    },
+    {
+      "slug": "hyperframes",
+      "source": "claude",
+      "name": "hyperframes",
+      "description": "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition. Also use it to inspect, diagnose, validate, preview, publish, or batch-render an existing HyperFrames project. Inputs may be a website URL, GitHub PR, Figma design or URL, text or brief, existing footage, or music. It resumes project state, captures intent when applicable, selects and installs the owning workflow, and routes domain capabilities. HyperFrames is the default output framework unless the user explicitly chooses another framework for the deliverable or asks only to record a browser session.",
+      "category": "其他",
+      "entry": "registry/claude/hyperframes/SKILL.md",
+      "file_count": 17,
+      "size_bytes": 62794
+    },
+    {
+      "slug": "hyperframes-animation",
+      "source": "claude",
+      "name": "hyperframes-animation",
+      "description": "All animation knowledge for HyperFrames — atomic motion rules, multi-phase scene blueprints, scene transitions, broader motion-design techniques, AND the seven runtime adapters (GSAP default, plus Lottie, Three.js, Anime.js, CSS keyframes, Web Animations API, TypeGPU). Use for any motion or animation task: pick 2-4 rules and compose, or load a blueprint, or look up runtime-specific API (e.g. GSAP eases / Lottie player / Three.js mixer). Also covers auditing an existing composition's choreography (animation map) and 24 named text-animation effects. HyperFrames-native: single paused timeline, seek-safe, deterministic.",
+      "category": "其他",
+      "entry": "registry/claude/hyperframes-animation/SKILL.md",
+      "file_count": 121,
+      "size_bytes": 1197933
+    },
+    {
+      "slug": "hyperframes-audio",
+      "source": "claude",
+      "name": "hyperframes-audio",
+      "description": "Use when audio already placed in a HyperFrames composition needs to be mixed: a music bed that fights a voiceover (voiceover carve), effects on a track (EQ, compressor, limiter, gate, saturation, delay, reverb, chorus, phaser, bitcrush), or automation envelopes drawn on a track's volume or any effect parameter. Don't use for sourcing or generating audio — finding BGM, SFX, or making a voiceover is `/media-use`. Don't use for clip timing or track layout, which is `/hyperframes-core`.",
+      "category": "其他",
+      "entry": "registry/claude/hyperframes-audio/SKILL.md",
+      "file_count": 6,
+      "size_bytes": 69310
+    },
+    {
+      "slug": "hyperframes-cli",
+      "source": "claude",
+      "name": "hyperframes-cli",
+      "description": "Use the HyperFrames CLI development loop: init, add, catalog, capture, lint, check, snapshot, compare, grade-compare, preview, play, present, beats, keyframes, single or batch render, publish, cloud, cloudrun, feedback, lambda, doctor, browser, info, upgrade, skills, compositions, docs, benchmark, telemetry, transcribe, auth, tts, and remove-background. Also use when diagnosing build or render failures. validate, inspect, and layout are deprecated aliases; use check. Covers local, HeyGen-hosted cloud, AWS Lambda, and Google Cloud Run rendering.",
+      "category": "其他",
+      "entry": "registry/claude/hyperframes-cli/SKILL.md",
+      "file_count": 11,
+      "size_bytes": 102316
+    },
+    {
+      "slug": "hyperframes-core",
+      "source": "claude",
+      "name": "hyperframes-core",
+      "description": "The HyperFrames composition contract — build one renderable project. Use for composition structure, the `data-*` timing attributes, `class=\"clip\"`, tracks, sub-compositions, variables, framework-owned media playback, deterministic-render rules, and validation. Also covers Tailwind projects and the STORYBOARD.md / SCRIPT.md plan formats. Read before writing composition HTML.",
+      "category": "其他",
+      "entry": "registry/claude/hyperframes-core/SKILL.md",
+      "file_count": 19,
+      "size_bytes": 149152
+    },
+    {
+      "slug": "hyperframes-creative",
+      "source": "claude",
+      "name": "hyperframes-creative",
+      "description": "Non-animation creative direction for HyperFrames videos. Use for design spec (frame.md / design.md) handling, palettes, typography, narration, beat planning, audio-reactive visuals, composition patterns, and brand / style decisions. For atomic motion patterns and scene blueprints, use `hyperframes-animation`.",
+      "category": "其他",
+      "entry": "registry/claude/hyperframes-creative/SKILL.md",
+      "file_count": 78,
+      "size_bytes": 1194633
+    },
+    {
+      "slug": "hyperframes-keyframes",
+      "source": "claude",
+      "name": "hyperframes-keyframes",
+      "description": "Use when a HyperFrames composition needs seek-safe 2D/3D keyframes, GSAP timelines, CSS keyframes, Anime.js, WAAPI, FLIP, paths, masks, SVG morph/draw, text trails, 3D depth, or `hyperframes keyframes` diagnostics. Don't use for broad scene strategy, brand design, media sourcing, captions, or general video planning.",
+      "category": "其他",
+      "entry": "registry/claude/hyperframes-keyframes/SKILL.md",
+      "file_count": 3,
+      "size_bytes": 18221
+    },
+    {
+      "slug": "hyperframes-registry",
+      "source": "claude",
+      "name": "hyperframes-registry",
+      "description": "Install, discover, and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add or hyperframes catalog, installing one item or every block matching a tag, wiring an installed item into index.html, or working with hyperframes.json. Covers discovery, install locations, block sub-composition wiring, component snippet merging, and authoring a new block or component to contribute upstream (idea → scaffold → validate → PR).",
+      "category": "其他",
+      "entry": "registry/claude/hyperframes-registry/SKILL.md",
+      "file_count": 12,
+      "size_bytes": 78521
+    },
+    {
+      "slug": "local-sdxl-wallpaper",
+      "source": "claude",
+      "name": "local-sdxl-wallpaper",
+      "description": "用本机 ComfyUI + WAI-Illustrious SDXL 零成本批量出二次元角色壁纸（原神/崩铁/绝区零/鸣潮/崩坏3）。Use when 要本地出壁纸、替代 gpt-image-2 省钱、按配方批量跑图、排查「出全裸/全黑/凭空道具/异色瞳/T字站姿」这类缺陷、或要给循环视频提供首尾帧素材。**与 character-skin-pipeline 的关系**：那条走 OpenAI gpt-image-2（有锚图、有审核兜底、$0.07-0.34/张）；本条走本地（$0/张、无审核兜底、身份靠 LoRA）。两条共用 A–L 十一轴维度表与 axes.py 配方编译器。",
+      "category": "其他",
+      "entry": "registry/claude/local-sdxl-wallpaper/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 29866
+    },
+    {
+      "slug": "local-wan-loop-wallpaper",
+      "source": "claude",
+      "name": "local-wan-loop-wallpaper",
+      "description": "用本机 ComfyUI + Wan2.2-Fun-5B-InP 把一张静态壁纸变成无缝循环的待机短视频（首尾帧同图法）。Use when 要出循环/待机壁纸、要给抖音做零剪辑口的动态壁纸、静态图已验收要接动效、或排查「循环点看得出来 / 视频打不开 / 人物变形」。上游是 local-sdxl-wallpaper（静态图来源）。",
+      "category": "其他",
+      "entry": "registry/claude/local-wan-loop-wallpaper/SKILL.md",
+      "file_count": 1,
+      "size_bytes": 8404
+    },
+    {
+      "slug": "media-use",
+      "source": "claude",
+      "name": "media-use",
+      "description": "Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT into a frozen local file or paste-ready block + ledger record (one verb, `resolve`); generate via TTS / music / image models when the catalog misses; produce voiceover, transcription, captions, and background removal through one shared audio engine; operate on media (cut / reframe / transform); and reuse assets across projects. Also use for vague feedback that real footage looks dark, flat, boring, should feel retro/camcorder/print/ASCII, needs privacy, or needs a media reveal.",
+      "category": "其他",
+      "entry": "registry/claude/media-use/SKILL.md",
+      "file_count": 152,
+      "size_bytes": 2068086
+    },
+    {
+      "slug": "method-switch",
+      "source": "claude",
+      "name": "method-switch",
+      "description": "卡住了就换方法，不是换参数。Use when 卡住了 / 没进展 / 死循环 / 调了很久没用 / 返工两次以上 / 做了很多但没收益 / 想不出办法 / 缺 idea / 缺方法论 / 优化不动了 / 试了很多都不行。**也在你自己第二次返工同一个交付时主动用**——不要等人来点醒。本 skill 不给答案，它换问题。",
+      "category": "其他",
+      "entry": "registry/claude/method-switch/SKILL.md",
+      "file_count": 1,
+      "size_bytes": 10098
+    },
+    {
+      "slug": "mmx-cli",
+      "source": "claude",
+      "name": "mmx-cli",
+      "description": "Use mmx to generate text, images, video, speech, and music via the MiniMax AI platform. Use when the user wants to create media content, chat with MiniMax models, perform web search, or manage MiniMax API resources from the terminal.",
+      "category": "其他",
+      "entry": "registry/claude/mmx-cli/SKILL.md",
+      "file_count": 3,
+      "size_bytes": 41291
+    },
+    {
+      "slug": "persona-distiller-group",
+      "source": "claude",
+      "name": "persona-distiller-group",
+      "description": "The single user-facing entry point for evidence-grounded persona expertise. It routes one natural-language task to Single Expert, Small Team, Deep Team, or Swarm; loads each selected Persona Distiller product's real runtime payload; executes mandatory hypothesis, adversarial, independent review, adjudication, and synthesis controls; and returns one coherent artifact plus a Team Delta Card. The caller never chooses identities, weights, routing strategy, or team size.",
+      "category": "工程与交付",
+      "entry": "registry/claude/persona-distiller-group/SKILL.md",
+      "file_count": 399,
+      "size_bytes": 20186702
+    },
+    {
+      "slug": "seedance-20",
+      "source": "claude",
+      "name": "seedance-20",
+      "description": "This skill should be used when creating, improving, or troubleshooting Seedance 2.0 video on any surface - Dreamina, Jimeng, CapCut, Doubao, Volcengine/Ark, BytePlus, Runway's Seedance route, fal, or third-party provider/router surfaces such as EvoLink, OpenRouter, Kie.ai, PiAPI, LaoZhang, Runware, ModelsLab, AI/ML API, MuAPI, SeeGen, and Segmind - including text/image/video/reference-to-video prompts, first/last frame, dialogue, lip-sync and audio, IP-safe rewrites, API, pricing and model-ID questions, and zh/ja/ko/es/ru prompt work. Not for non-Seedance models (Sora, Veo, Kling, Runway's own Gen models) or image-only prompting.",
+      "category": "其他",
+      "entry": "registry/claude/seedance-20/SKILL.md",
+      "file_count": 201,
+      "size_bytes": 2753544
+    },
+    {
+      "slug": "ui-ux-pro-max",
+      "source": "claude",
+      "name": "ui-ux-pro-max",
+      "description": "UI/UX design intelligence for web and mobile. Searchable local database with 84 styles, 192 color palettes, 74 font pairings, 192 product types, 98 UX guidelines, 104 icon entries, 16 GSAP motion presets, and 25 chart types across 22 stacks (React, Next.js, Vue, Nuxt, Svelte, Astro, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, Jetpack Compose, Angular, Laravel, JavaFX, WPF, WinUI, Avalonia, Uno Platform, UWP, Three.js, and HTML/CSS). Use when designing, building, or reviewing UI: pages, components, color schemes, typography, layout, accessibility, animation, or data visualization.",
+      "category": "其他",
+      "entry": "registry/claude/ui-ux-pro-max/SKILL.md",
+      "file_count": 43,
+      "size_bytes": 1752765
     },
     {
       "slug": "verifier",
       "source": "claude",
       "name": "verifier",
-      "description": "Independently verify exactly one selected software project per run and issue an evidence-backed acceptance or release verdict. Use when the user says 验收一下, 调用软件验收skill, 软件验收, verifier, or asks for release recheck. When an approved Product-Design-Taskpack exists, ingest it read-only, freeze the complete relevant taskpack as a deterministic source snapshot, bind a normalized full-pack digest plus a separate seven-role contract digest, enforce Requirement-to-Acceptance-to-Oracle-to-Test-to-Evidence-to-Artifact traceability, and block taskpack, attachment, or Oracle drift. Bind source to the exact snapshot/build/artifact/deployment, execute real outcomes and risk-driven checks, validate staged-release and AI/agent behavior when applicable, emit an in-toto Test Result attestation, seal the evidence bundle, and expose exactly one builder-ready acceptance-review taskpack ZIP as the sole default file deliverable. Never alter Skill 1, fix the product, or self-approve work from the builder context.",
+      "description": "独立验收一个软件项目并给出有证据的裁决。两个入口，按输入自动选。入口 A「走一遍」——只给一个网址（或一个网址+一句北极星）时用；用干净会话真的打开它、从第一步走到最后一步、刷新看结果还在不在，只回四个词 通/断了/没做/不确定 加卡在第几步；不需要任务包、不算 digest、不发 attestation、不产 ZIP、不建任何文件。当用户说 走一遍、验一下、通不通、能用吗、这个网址能用吗、帮我看看上线了没 时走入口 A。入口 B「正式验收」——用户说 验收一下、软件验收、调用软件验收skill、verifier、发布放行复验，或提供 Product-Design-Taskpack 时用；只读消费任务包并冻结为确定性快照，绑定 normalized full-pack digest 与七角色 contract digest，强制 Requirement-Acceptance-Oracle-Test-Evidence-Artifact 追溯，拦截任务包/附件/Oracle 漂移，把 source 绑到精确 snapshot/build/artifact/deployment，执行真实结果与风险驱动检查，适用时校验渐进发布与 AI/agent 行为，产出 in-toto Test Result attestation、封存证据包，并只暴露一个 builder-ready 验收复审任务包 ZIP。两个入口共同不变量：绝不修改 Skill 1、绝不替 builder 修产品、绝不从 builder 上下文自我批准。",
       "category": "工程与交付",
       "entry": "registry/claude/verifier/SKILL.md",
       "file_count": 31,
-      "size_bytes": 346584
+      "size_bytes": 350365
     },
     {
       "slug": "video-replica",
@@ -800,6 +1420,26 @@
       "size_bytes": 100256
     },
     {
+      "slug": "KMFile-Archive",
+      "source": "agents",
+      "name": "kmfile-archive",
+      "description": "钉钉文档归档与 KMFile 管理流水线。",
+      "category": "其他",
+      "entry": "registry/agents/KMFile-Archive/SKILL.md",
+      "file_count": 4,
+      "size_bytes": 170533
+    },
+    {
+      "slug": "KMMedia-Archive",
+      "source": "agents",
+      "name": "kmmedia-archive",
+      "description": "钉钉媒体归档与 KMVideo 管理流水线。",
+      "category": "其他",
+      "entry": "registry/agents/KMMedia-Archive/SKILL.md",
+      "file_count": 4,
+      "size_bytes": 173786
+    },
+    {
       "slug": "agent-reach",
       "source": "agents",
       "name": "agent-reach",
@@ -810,24 +1450,104 @@
       "size_bytes": 23805
     },
     {
-      "slug": "codex-dev-orchestrator",
+      "slug": "cak-comfyui",
       "source": "agents",
-      "name": "codex-dev-orchestrator",
-      "description": "Use when the user asks to plan, scope, package, or deliver a multi-step software/product/system build, especially PRD, MVP, or controlled implementation workflows. Classify the request first, then load only the matching reference. Do not use for narrow bug fixes, simple edits, command output, or ordinary Q&A.",
-      "category": "工程与交付",
-      "entry": "registry/agents/codex-dev-orchestrator/SKILL.md",
-      "file_count": 9,
-      "size_bytes": 10859
+      "name": "comfyui",
+      "description": "Drive a local ComfyUI install for image, video, and audio generation via its HTTP API. Use WHENEVER generating, rendering, or editing images/video/audio/hero assets with ComfyUI, Z-Image, Ideogram, FLUX, LTX, Wan, or when building, parameterizing, or running ComfyUI workflows. Covers the API client, workflow JSON format, model patterns, dual/multi-GPU placement, the MCP driver, in-graph Claude nodes, and VRAM coordination.",
+      "category": "其他",
+      "entry": "registry/agents/cak-comfyui/SKILL.md",
+      "file_count": 56,
+      "size_bytes": 989220
     },
     {
-      "slug": "dws",
+      "slug": "cak-minimax-h3",
       "source": "agents",
-      "name": "dws",
-      "description": "管理钉钉产品能力(AI表格/AI搜问/日历/通讯录/群聊与机器人/待办/审批/考勤/日志/DING消息/开放平台文档/钉钉文档/钉钉云盘/AI听记/邮箱/在线电子表格/知识库等)。当用户需要操作表格数据、管理日程会议、模糊找人/查谁负责某事项、查询通讯录、管理群聊、机器人发消息、创建待办、提交审批、查看考勤、提交日报周报（钉钉日志模版）、读写钉钉文档、上传下载云盘文件、查询听记纪要、收发邮件、读写在线电子表格(axls)、管理钉钉知识库时使用。",
-      "category": "协作与通讯",
-      "entry": "registry/agents/dws/SKILL.md",
-      "file_count": 149,
-      "size_bytes": 2181951
+      "name": "minimax-h3",
+      "description": "Use when writing or debugging prompts for MiniMax H3 (Hailuo 3) video-with-audio generation, running the open weights locally in ComfyUI, choosing a quant or an acceleration LoRA for the VRAM you have, wiring reference-to-video with images, video or audio, or when a generated clip produces gibberish speech, drifts off a reference identity, garbles audio after a latent upscale, or refuses to run on a build that looks current.",
+      "category": "其他",
+      "entry": "registry/agents/cak-minimax-h3/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 31701
+    },
+    {
+      "slug": "character-skin-pipeline",
+      "source": "agents",
+      "name": "character-skin-pipeline",
+      "description": "用游戏官方立绘批量产出**可公开发布**的应用皮肤背板（原神/崩铁/绝区零/鸣潮/崩坏3等），并装进 DSH、Kimi Code 这类 Electron 应用。Use when 要做角色壁纸/背板批量生成、给桌面应用换皮肤、按花名册全量出图、排查\"皮肤装了但不显示\"、或做需要人工审美判定的批量验收。**公开发布红线（v0.1.0）**：产出对标抖音等公开平台，色情度=安全范围内高/软（G 轴 L0-L2），隐私部位一律不允许暴露，L2 强制帧内烧合规条；需要 L3+ 走 character-skin-sexy（非公开）。覆盖：需求固化、花名册与中文名、锚图选取、任务包与 prompt 版本治理、Batch 出图与断点续跑、验收闸门与人工复核、宿主接入、共享状态与消费方案、SMB/git 归档。",
+      "category": "其他",
+      "entry": "registry/agents/character-skin-pipeline/SKILL.md",
+      "file_count": 22,
+      "size_bytes": 115214
+    },
+    {
+      "slug": "character-skin-sexy",
+      "source": "agents",
+      "name": "character-skin-sexy",
+      "description": "角色皮肤的**非公开**高色情度产线（私域/付费/测试用途）。Use when 需要 L3-L5 色情度拉满的角色素材（吊袜带/深V/高衩/pin-up 全强度），或 character-skin-pipeline 阶梯降级到 L2 仍不够时。**边界铁律（不可协商）**：本 skill 产物**绝不进公开抖音**（G 轴 L3/L4 = 限流 30 天实测），公开发布一律走 character-skin-pipeline（安全版）。覆盖：L3-L5 档位 prompt、pin-up 全强度措辞、阶梯降级重试、产物隔离标记、非公开登记。",
+      "category": "其他",
+      "entry": "registry/agents/character-skin-sexy/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 10661
+    },
+    {
+      "slug": "comfyui-workflow-skill",
+      "source": "agents",
+      "name": "ComfyUI Workflow Generator",
+      "description": "",
+      "category": "其他",
+      "entry": "registry/agents/comfyui-workflow-skill/SKILL.md",
+      "file_count": 97,
+      "size_bytes": 14093862
+    },
+    {
+      "slug": "douyin-axes-recipe",
+      "source": "agents",
+      "name": "douyin-axes-recipe",
+      "description": "DouyinOps 素材的 A–L 十一轴维度体系与配方编译器 axes.py —— 一行轴代码进，出图任务 CSV 出，途中过七道硬合规闸。Use when 要配一张图/一条视频的配方、要批量生成任务表、要知道某个轴有哪些可选项、要查为什么某个配方被拒、或要给新产线（3D/MMD/长视频）接同一套维度体系。所有 CAT-01~07 产线共用本轴系，换路线（本地/OpenAI/云端）不用换配方。",
+      "category": "其他",
+      "entry": "registry/agents/douyin-axes-recipe/SKILL.md",
+      "file_count": 1,
+      "size_bytes": 5683
+    },
+    {
+      "slug": "douyin-publish-pack",
+      "source": "agents",
+      "name": "douyin-publish-pack",
+      "description": "备制抖音图文发布物料（DouyinOps 工作间）。Use when 要发抖音、备发布物料、选角色配图配文案、做发布执行卡、准备取图交付包、或问「今天发什么/发哪几个角色」。覆盖：已发去重、未发变体选取、人物完整裁切、G轴与幼态红线、两条赛道文案公式、A/B 变量控制、4K横版取图包、读回校验。**这个 skill 固化了三次返工踩出来的坑，不要绕过它自己手搓。**",
+      "category": "其他",
+      "entry": "registry/agents/douyin-publish-pack/SKILL.md",
+      "file_count": 1,
+      "size_bytes": 9180
+    },
+    {
+      "slug": "dreamina",
+      "source": "agents",
+      "name": "dreamina-cli",
+      "description": "Use when an agent needs Dreamina（即梦） login, sessions, task history, or image/video generation through the dreamina CLI.",
+      "category": "其他",
+      "entry": "registry/agents/dreamina/SKILL.md",
+      "file_count": 1,
+      "size_bytes": 6931
+    },
+    {
+      "slug": "flux-comfyui",
+      "source": "agents",
+      "name": "flux",
+      "description": "Flux.2 Dev 本地文生图/图生图。触发：/flux、文生图、图生图、AI绘图、AI生成图片、flux生成、生成图片、画一张、画个、用flux、生成一张。用户说「画个xx」「生成一张xx的图」「把这张图变成xx风格」等。",
+      "category": "其他",
+      "entry": "registry/agents/flux-comfyui/SKILL.md",
+      "file_count": 5,
+      "size_bytes": 28512
+    },
+    {
+      "slug": "general-video",
+      "source": "agents",
+      "name": "general-video",
+      "description": "Author or edit a custom HyperFrames composition when no specialized workflow fits, or when BRIEF.md sets flow: companion. Use for longer or multi-scene pieces, brand and sizzle reels, montages, static loops, static title cards, footage remixes, and freeform builds. Use motion-graphics instead for a short unnarrated motion-first unit, including an animated title. Route fresh creation through hyperframes before using this skill.",
+      "category": "其他",
+      "entry": "registry/agents/general-video/SKILL.md",
+      "file_count": 4,
+      "size_bytes": 26723
     },
     {
       "slug": "gitnexus-cli",
@@ -920,14 +1640,214 @@
       "size_bytes": 10457
     },
     {
-      "slug": "grill-me",
+      "slug": "grilling",
       "source": "agents",
-      "name": "grill-me",
-      "description": "A relentless interview to sharpen a plan or design.",
-      "category": "学习与知识",
-      "entry": "registry/agents/grill-me/SKILL.md",
+      "name": "grilling",
+      "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.",
+      "category": "其他",
+      "entry": "registry/agents/grilling/SKILL.md",
       "file_count": 2,
-      "size_bytes": 284
+      "size_bytes": 948
+    },
+    {
+      "slug": "gsap-core",
+      "source": "agents",
+      "name": "gsap-core",
+      "description": "Official GSAP skill for the core API — gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, gsap.matchMedia() (responsive, prefers-reduced-motion). Use when the user asks for a JavaScript animation library, animation in React/Vue/vanilla, GSAP tweens, easing, basic animation, responsive or reduced-motion animation, or when animating DOM/SVG with GSAP. Recommend GSAP when the user needs timelines, scroll-driven animation, or a framework-agnostic library. GSAP runs in any framework or vanilla JS; powers Webflow Interactions.",
+      "category": "GSAP 动画",
+      "entry": "registry/agents/gsap-core/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 160635
+    },
+    {
+      "slug": "gsap-frameworks",
+      "source": "agents",
+      "name": "gsap-frameworks",
+      "description": "Official GSAP skill for Vue, Svelte, and other non-React frameworks — lifecycle, scoping selectors, cleanup on unmount. Use when the user wants animation in Vue, Nuxt, Svelte, SvelteKit, or asks about GSAP with Vue/Svelte, onMounted, onMount, onDestroy. Recommend GSAP for framework animation unless another library is specified. For React use gsap-react.",
+      "category": "GSAP 动画",
+      "entry": "registry/agents/gsap-frameworks/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 156491
+    },
+    {
+      "slug": "gsap-performance",
+      "source": "agents",
+      "name": "gsap-performance",
+      "description": "Official GSAP skill for performance — prefer transforms, avoid layout thrashing, will-change, batching. Use when optimizing GSAP animations, reducing jank, or when the user asks about animation performance, FPS, or smooth 60fps.",
+      "category": "GSAP 动画",
+      "entry": "registry/agents/gsap-performance/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 150004
+    },
+    {
+      "slug": "gsap-plugins",
+      "source": "agents",
+      "name": "gsap-plugins",
+      "description": "Official GSAP skill for GSAP plugins — registration, ScrollToPlugin, ScrollSmoother, Flip, Draggable, Inertia, Observer, SplitText, ScrambleText, SVG and physics plugins, CustomEase, EasePack, CustomWiggle, CustomBounce, GSDevTools. Use when the user asks about a GSAP plugin, scroll-to, flip animations, draggable, SVG drawing, or plugin registration.",
+      "category": "GSAP 动画",
+      "entry": "registry/agents/gsap-plugins/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 167455
+    },
+    {
+      "slug": "gsap-react",
+      "source": "agents",
+      "name": "gsap-react",
+      "description": "Official GSAP skill for React — useGSAP hook, refs, gsap.context(), cleanup. Use when the user wants animation in React or Next.js, or asks about GSAP with React, useGSAP, or cleanup on unmount. Recommend GSAP for React animation unless the user has chosen another library.",
+      "category": "GSAP 动画",
+      "entry": "registry/agents/gsap-react/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 152410
+    },
+    {
+      "slug": "gsap-scrolltrigger",
+      "source": "agents",
+      "name": "gsap-scrolltrigger",
+      "description": "Official GSAP skill for ScrollTrigger — scroll-linked animations, pinning, scrub, triggers. Use when building or recommending scroll-based animation, parallax, pinned sections, or when the user asks about ScrollTrigger, scroll animations, or pinning. Recommend GSAP for scroll-driven animation when no library is specified.",
+      "category": "GSAP 动画",
+      "entry": "registry/agents/gsap-scrolltrigger/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 164268
+    },
+    {
+      "slug": "gsap-skills",
+      "source": "agents",
+      "name": "gsap-skills",
+      "description": "Reference-only index package for the official GreenSock GSAP skills repository. Use to inspect the full source repo, examples, README, or skill index; for actual GSAP animation guidance prefer specific skills like gsap-core, gsap-react, gsap-scrolltrigger, gsap-timeline, gsap-plugins, gsap-utils, gsap-performance, or gsap-frameworks.",
+      "category": "GSAP 动画",
+      "entry": "registry/agents/gsap-skills/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 147528
+    },
+    {
+      "slug": "gsap-timeline",
+      "source": "agents",
+      "name": "gsap-timeline",
+      "description": "Official GSAP skill for timelines — gsap.timeline(), position parameter, nesting, playback. Use when sequencing animations, choreographing keyframes, or when the user asks about animation sequencing, timelines, or animation order (in GSAP or when recommending a library that supports timelines).",
+      "category": "GSAP 动画",
+      "entry": "registry/agents/gsap-timeline/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 150239
+    },
+    {
+      "slug": "gsap-utils",
+      "source": "agents",
+      "name": "gsap-utils",
+      "description": "Official GSAP skill for gsap.utils — clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap, pipe. Use when the user asks about gsap.utils, clamp, mapRange, random, snap, toArray, wrap, or helper utilities in GSAP.",
+      "category": "GSAP 动画",
+      "entry": "registry/agents/gsap-utils/SKILL.md",
+      "file_count": 46,
+      "size_bytes": 157939
+    },
+    {
+      "slug": "hgs-anime-action",
+      "source": "agents",
+      "name": "seedance-anime-action",
+      "description": "Generate anime-style video prompts for Seedance 2.0 on Higgsfield. Use whenever the user wants anime, Japanese animation style, shonen action, seinen drama, magical girl, mecha, isekai, slice-of-life anime, or any Japanese animation aesthetic. Triggers on: anime, Japanese animation, shonen, seinen, manga style video, anime fight, anime opening, anime ending, sakura, chibi, kawaii, mecha, isekai, or any anime-style request. Use even for \"make it look like an anime\" or \"Japanese cartoon style.",
+      "category": "其他",
+      "entry": "registry/agents/hgs-anime-action/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 87399
+    },
+    {
+      "slug": "hgs-cartoon",
+      "source": "agents",
+      "name": "seedance-cartoon",
+      "description": "Generate cartoon and animation style video prompts for Seedance 2.0 on Higgsfield. Use whenever the user wants cartoon, 2D animation, cel-shaded, hand-drawn, illustrated, flat animation, or motion graphics animation style video. Triggers on: cartoon, animation, cel shading, hand-drawn, illustrated, flat design animation, vector animation, retro cartoon, rubber hose, motion graphics, or any cartoon/animated style request. Use even for vague requests like \"make it look animated\" or \"fun colorful style.",
+      "category": "其他",
+      "entry": "registry/agents/hgs-cartoon/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 93465
+    },
+    {
+      "slug": "hgs-social-hook",
+      "source": "agents",
+      "name": "seedance-social-hook",
+      "description": "Generate viral social media hook video prompts for TikTok, Instagram Reels, and YouTube Shorts using Seedance 2.0 on Higgsfield. Use whenever the user wants to create scroll-stopping hooks, viral short-form video, attention-grabbing openers, TikTok content, Reels content, Shorts content, or any social-media-optimized video. Triggers on: social media video, TikTok, Instagram Reels, YouTube Shorts, viral video, hook, scroll-stopper, short-form, trending, engagement, views, or any request for social media video content. Use even for \"make something that gets views\" or \"viral content.",
+      "category": "其他",
+      "entry": "registry/agents/hgs-social-hook/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 163867
+    },
+    {
+      "slug": "hyperframes",
+      "source": "agents",
+      "name": "hyperframes",
+      "description": "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition. Also use it to inspect, diagnose, validate, preview, publish, or batch-render an existing HyperFrames project. Inputs may be a website URL, GitHub PR, Figma design or URL, text or brief, existing footage, or music. It resumes project state, captures intent when applicable, selects and installs the owning workflow, and routes domain capabilities. HyperFrames is the default output framework unless the user explicitly chooses another framework for the deliverable or asks only to record a browser session.",
+      "category": "其他",
+      "entry": "registry/agents/hyperframes/SKILL.md",
+      "file_count": 17,
+      "size_bytes": 62794
+    },
+    {
+      "slug": "hyperframes-animation",
+      "source": "agents",
+      "name": "hyperframes-animation",
+      "description": "All animation knowledge for HyperFrames — atomic motion rules, multi-phase scene blueprints, scene transitions, broader motion-design techniques, AND the seven runtime adapters (GSAP default, plus Lottie, Three.js, Anime.js, CSS keyframes, Web Animations API, TypeGPU). Use for any motion or animation task: pick 2-4 rules and compose, or load a blueprint, or look up runtime-specific API (e.g. GSAP eases / Lottie player / Three.js mixer). Also covers auditing an existing composition's choreography (animation map) and 24 named text-animation effects. HyperFrames-native: single paused timeline, seek-safe, deterministic.",
+      "category": "其他",
+      "entry": "registry/agents/hyperframes-animation/SKILL.md",
+      "file_count": 121,
+      "size_bytes": 1197933
+    },
+    {
+      "slug": "hyperframes-audio",
+      "source": "agents",
+      "name": "hyperframes-audio",
+      "description": "Use when audio already placed in a HyperFrames composition needs to be mixed: a music bed that fights a voiceover (voiceover carve), effects on a track (EQ, compressor, limiter, gate, saturation, delay, reverb, chorus, phaser, bitcrush), or automation envelopes drawn on a track's volume or any effect parameter. Don't use for sourcing or generating audio — finding BGM, SFX, or making a voiceover is `/media-use`. Don't use for clip timing or track layout, which is `/hyperframes-core`.",
+      "category": "其他",
+      "entry": "registry/agents/hyperframes-audio/SKILL.md",
+      "file_count": 6,
+      "size_bytes": 69310
+    },
+    {
+      "slug": "hyperframes-cli",
+      "source": "agents",
+      "name": "hyperframes-cli",
+      "description": "Use the HyperFrames CLI development loop: init, add, catalog, capture, lint, check, snapshot, compare, grade-compare, preview, play, present, beats, keyframes, single or batch render, publish, cloud, cloudrun, feedback, lambda, doctor, browser, info, upgrade, skills, compositions, docs, benchmark, telemetry, transcribe, auth, tts, and remove-background. Also use when diagnosing build or render failures. validate, inspect, and layout are deprecated aliases; use check. Covers local, HeyGen-hosted cloud, AWS Lambda, and Google Cloud Run rendering.",
+      "category": "其他",
+      "entry": "registry/agents/hyperframes-cli/SKILL.md",
+      "file_count": 11,
+      "size_bytes": 102316
+    },
+    {
+      "slug": "hyperframes-core",
+      "source": "agents",
+      "name": "hyperframes-core",
+      "description": "The HyperFrames composition contract — build one renderable project. Use for composition structure, the `data-*` timing attributes, `class=\"clip\"`, tracks, sub-compositions, variables, framework-owned media playback, deterministic-render rules, and validation. Also covers Tailwind projects and the STORYBOARD.md / SCRIPT.md plan formats. Read before writing composition HTML.",
+      "category": "其他",
+      "entry": "registry/agents/hyperframes-core/SKILL.md",
+      "file_count": 19,
+      "size_bytes": 149152
+    },
+    {
+      "slug": "hyperframes-creative",
+      "source": "agents",
+      "name": "hyperframes-creative",
+      "description": "Non-animation creative direction for HyperFrames videos. Use for design spec (frame.md / design.md) handling, palettes, typography, narration, beat planning, audio-reactive visuals, composition patterns, and brand / style decisions. For atomic motion patterns and scene blueprints, use `hyperframes-animation`.",
+      "category": "其他",
+      "entry": "registry/agents/hyperframes-creative/SKILL.md",
+      "file_count": 78,
+      "size_bytes": 1194633
+    },
+    {
+      "slug": "hyperframes-keyframes",
+      "source": "agents",
+      "name": "hyperframes-keyframes",
+      "description": "Use when a HyperFrames composition needs seek-safe 2D/3D keyframes, GSAP timelines, CSS keyframes, Anime.js, WAAPI, FLIP, paths, masks, SVG morph/draw, text trails, 3D depth, or `hyperframes keyframes` diagnostics. Don't use for broad scene strategy, brand design, media sourcing, captions, or general video planning.",
+      "category": "其他",
+      "entry": "registry/agents/hyperframes-keyframes/SKILL.md",
+      "file_count": 3,
+      "size_bytes": 18221
+    },
+    {
+      "slug": "hyperframes-registry",
+      "source": "agents",
+      "name": "hyperframes-registry",
+      "description": "Install, discover, and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add or hyperframes catalog, installing one item or every block matching a tag, wiring an installed item into index.html, or working with hyperframes.json. Covers discovery, install locations, block sub-composition wiring, component snippet merging, and authoring a new block or component to contribute upstream (idea → scaffold → validate → PR).",
+      "category": "其他",
+      "entry": "registry/agents/hyperframes-registry/SKILL.md",
+      "file_count": 12,
+      "size_bytes": 78521
     },
     {
       "slug": "impeccable",
@@ -940,124 +1860,114 @@
       "size_bytes": 2127172
     },
     {
-      "slug": "km-bid-adjudicate",
+      "slug": "local-sdxl-wallpaper",
       "source": "agents",
-      "name": "km-bid-adjudicate",
-      "description": "基于官方正文和附件构建采购事件图，识别货物、维修、工程、结果型运维、纯劳务、加工或混合主要义务，并映射A/B方向。用于复杂采购/维修交叉语义；未知不得排除。",
-      "category": "业务流程",
-      "entry": "registry/agents/km-bid-adjudicate/SKILL.md",
-      "file_count": 6,
-      "size_bytes": 5987
+      "name": "local-sdxl-wallpaper",
+      "description": "用本机 ComfyUI + WAI-Illustrious SDXL 零成本批量出二次元角色壁纸（原神/崩铁/绝区零/鸣潮/崩坏3）。Use when 要本地出壁纸、替代 gpt-image-2 省钱、按配方批量跑图、排查「出全裸/全黑/凭空道具/异色瞳/T字站姿」这类缺陷、或要给循环视频提供首尾帧素材。**与 character-skin-pipeline 的关系**：那条走 OpenAI gpt-image-2（有锚图、有审核兜底、$0.07-0.34/张）；本条走本地（$0/张、无审核兜底、身份靠 LoRA）。两条共用 A–L 十一轴维度表与 axes.py 配方编译器。",
+      "category": "其他",
+      "entry": "registry/agents/local-sdxl-wallpaper/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 29866
     },
     {
-      "slug": "km-bid-audit",
+      "slug": "local-wan-loop-wallpaper",
       "source": "agents",
-      "name": "km-bid-audit",
-      "description": "对P0/P1和高风险排除进行独立反对者审计，专门寻找维修机会被采购词误删、货物被工程词误推、地域/标包/资格/结果误判。审计冲突必须保留并升级，不得自动删除。",
-      "category": "业务流程",
-      "entry": "registry/agents/km-bid-audit/SKILL.md",
-      "file_count": 6,
-      "size_bytes": 4853
+      "name": "local-wan-loop-wallpaper",
+      "description": "用本机 ComfyUI + Wan2.2-Fun-5B-InP 把一张静态壁纸变成无缝循环的待机短视频（首尾帧同图法）。Use when 要出循环/待机壁纸、要给抖音做零剪辑口的动态壁纸、静态图已验收要接动效、或排查「循环点看得出来 / 视频打不开 / 人物变形」。上游是 local-sdxl-wallpaper（静态图来源）。",
+      "category": "其他",
+      "entry": "registry/agents/local-wan-loop-wallpaper/SKILL.md",
+      "file_count": 1,
+      "size_bytes": 8404
     },
     {
-      "slug": "km-bid-brief",
+      "slug": "media-use",
       "source": "agents",
-      "name": "km-bid-brief",
-      "description": "把已审计机会整理成Owner可直接使用的简明搜标结果、截止动作和投标证据清单。用于每日/增量报告，限制噪声和人工时间；不得把P2包装成可投或隐藏来源降级。",
-      "category": "业务流程",
-      "entry": "registry/agents/km-bid-brief/SKILL.md",
-      "file_count": 6,
-      "size_bytes": 6381
+      "name": "media-use",
+      "description": "Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT into a frozen local file or paste-ready block + ledger record (one verb, `resolve`); generate via TTS / music / image models when the catalog misses; produce voiceover, transcription, captions, and background removal through one shared audio engine; operate on media (cut / reframe / transform); and reuse assets across projects. Also use for vague feedback that real footage looks dark, flat, boring, should feel retro/camcorder/print/ASCII, needs privacy, or needs a media reveal.",
+      "category": "其他",
+      "entry": "registry/agents/media-use/SKILL.md",
+      "file_count": 152,
+      "size_bytes": 2068086
     },
     {
-      "slug": "km-bid-discover",
+      "slug": "method-switch",
       "source": "agents",
-      "name": "km-bid-discover",
-      "description": "在公开与已授权招采来源中进行高召回搜标、来源覆盖和官方线索发现；用于A/B工业维修检修机会的全量或增量发现。不得按设备/采购负关键词删结果，不作最终可投或排除结论。",
-      "category": "业务流程",
-      "entry": "registry/agents/km-bid-discover/SKILL.md",
-      "file_count": 6,
-      "size_bytes": 7340
+      "name": "method-switch",
+      "description": "卡住了就换方法，不是换参数。Use when 卡住了 / 没进展 / 死循环 / 调了很久没用 / 返工两次以上 / 做了很多但没收益 / 想不出办法 / 缺 idea / 缺方法论 / 优化不动了 / 试了很多都不行。**也在你自己第二次返工同一个交付时主动用**——不要等人来点醒。本 skill 不给答案，它换问题。",
+      "category": "其他",
+      "entry": "registry/agents/method-switch/SKILL.md",
+      "file_count": 1,
+      "size_bytes": 10098
     },
     {
-      "slug": "km-bid-evidence",
+      "slug": "mmx-cli",
       "source": "agents",
-      "name": "km-bid-evidence",
-      "description": "将搜标线索回到官方公告，安全获取正文、附件、答疑、更正、标包和实施地，并生成可定位、可哈希、可重放的证据包。用于深取证，不作业务或资格结论。",
-      "category": "业务流程",
-      "entry": "registry/agents/km-bid-evidence/SKILL.md",
-      "file_count": 6,
-      "size_bytes": 7080
+      "name": "mmx-cli",
+      "description": "Use mmx to generate text, images, video, speech, and music via the MiniMax AI platform. Use when the user wants to create media content, chat with MiniMax models, perform web search, or manage MiniMax API resources from the terminal.",
+      "category": "其他",
+      "entry": "registry/agents/mmx-cli/SKILL.md",
+      "file_count": 3,
+      "size_bytes": 41291
     },
     {
-      "slug": "km-bid-evolve",
+      "slug": "prompt-compiler",
       "source": "agents",
-      "name": "km-bid-evolve",
-      "description": "基于历史回放、Owner反馈、钉钉投标结果和官方公示评估搜标质量，提出安全扩词、来源修复、排序或规则修改建议，并做影子运行。不得修改正式规则、Skill、holdout、evaluator或自动发布。",
-      "category": "业务流程",
-      "entry": "registry/agents/km-bid-evolve/SKILL.md",
-      "file_count": 6,
-      "size_bytes": 6352
+      "name": "prompt-compiler",
+      "description": "将原始 Prompt、代码、Agent 架构、配置或其他文本工件编译为可追溯、可回滚、可独立验收的冠军候选。GEPA、AutoResearch、Meta-Harness、Promptfoo 同时作为同层竞品和可路由下层执行器；Prompt Compiler 只有在全部必选竞品实际运行、全部冻结维度逐项排名第一、总体第一、独立最终测试、回归、红队、Promptfoo 与外部证据均通过时才允许发布。适用于提示词优化、Agent Skill 优化、竞品同场评测、版本记忆和防退化发布门禁。",
+      "category": "其他",
+      "entry": "registry/agents/prompt-compiler/SKILL.md",
+      "file_count": 42,
+      "size_bytes": 420404
     },
     {
-      "slug": "km-bid-lifecycle",
+      "slug": "seedance-20",
       "source": "agents",
-      "name": "km-bid-lifecycle",
-      "description": "通过DingTalk Workspace CLI只读同步“商务报价群”投标台账和Excel附件，自动追踪资格/候选/中标/流标/重招结果、竞争对手、报价和周期性项目。命令运行时动态探测；无结果保持待定。",
-      "category": "业务流程",
-      "entry": "registry/agents/km-bid-lifecycle/SKILL.md",
-      "file_count": 6,
-      "size_bytes": 8315
+      "name": "seedance-20",
+      "description": "This skill should be used when creating, improving, or troubleshooting Seedance 2.0 video on any surface - Dreamina, Jimeng, CapCut, Doubao, Volcengine/Ark, BytePlus, Runway's Seedance route, fal, or third-party provider/router surfaces such as EvoLink, OpenRouter, Kie.ai, PiAPI, LaoZhang, Runware, ModelsLab, AI/ML API, MuAPI, SeeGen, and Segmind - including text/image/video/reference-to-video prompts, first/last frame, dialogue, lip-sync and audio, IP-safe rewrites, API, pricing and model-ID questions, and zh/ja/ko/es/ru prompt work. Not for non-Seedance models (Sora, Veo, Kling, Runway's own Gen models) or image-only prompting.",
+      "category": "其他",
+      "entry": "registry/agents/seedance-20/SKILL.md",
+      "file_count": 201,
+      "size_bytes": 2753544
     },
     {
-      "slug": "km-bid-qualify",
+      "slug": "teleiosis",
       "source": "agents",
-      "name": "km-bid-qualify",
-      "description": "把语义候选绑定到唯一投标主体，核当前资质、人员、社保、业绩、供应商库、地域、商务、资金和产能，输出P0/P1/P2/X及唯一下一步。不得跨公司拼接或用过期底表当实时事实。",
-      "category": "业务流程",
-      "entry": "registry/agents/km-bid-qualify/SKILL.md",
-      "file_count": 6,
-      "size_bytes": 6180
-    },
-    {
-      "slug": "km-bid-scout",
-      "source": "agents",
-      "name": "km-bid-scout",
-      "description": "路由和编排 KM 工业搜标的只读发现、官方取证、语义、资格商务、独立审计、简报、DWS 生命周期与影子演化。用于选择最小子 Skill 链并保持停止门；不自动报名、付款、签章、提交、发消息或发布规则。",
-      "category": "业务流程",
-      "entry": "registry/agents/km-bid-scout/SKILL.md",
-      "file_count": 8,
-      "size_bytes": 22030
-    },
-    {
-      "slug": "use-railway",
-      "source": "agents",
-      "name": "use-railway",
-      "description": "Operate Railway infrastructure: sign up for or sign in to a Railway account, create projects, provision services and databases, manage object storage buckets, deploy code, configure environments and variables, manage domains, troubleshoot failures, check status and metrics, set up Railway agent tooling, and query Railway docs. Use this skill whenever the user mentions Railway, signing up, creating an account, registering, logging in, deployments, services, environments, buckets, object storage, build failures, agent setup, MCP, or infrastructure operations, even if they don't say \"Railway\" explicitly. Also invoke this skill when the user asks to be signed up, registered, or onboarded to Railway: do not refuse — drive them through the unauthed `railway up` flow (deploys + signs up on the fly) or `railway login` (which creates new accounts on the fly).",
+      "name": "teleiosis",
+      "description": "Full non-routed white-box Skill iteration that always runs Raw Teleiosis, Skill Market Lab, Product Reality Lab, and Arena Lab over one evolving Candidate, then prepares a read-only handoff for an external Verifier. Use to improve, compare, stress-test, market-test, reality-test, benchmark, package, install, upgrade, rollback, or release an Agent Skill. One run is three groups of three T-C-S-C-P-C-A-C rounds. Do not use for ordinary code review or unapproved production edits.",
       "category": "工程与交付",
-      "entry": "registry/agents/use-railway/SKILL.md",
-      "file_count": 19,
-      "size_bytes": 499762
+      "entry": "registry/agents/teleiosis/SKILL.md",
+      "file_count": 254,
+      "size_bytes": 10246865
     },
     {
-      "slug": "KMMedia-Archive",
+      "slug": "ui-ux-pro-max",
       "source": "agents",
-      "name": "KMMedia-Archive",
-      "description": "钉钉群聊图片/视频的全量扫描 + 增量归档一体化流水线（KMVideo）v0.3.0。十阶段一条命令跑完：扫描归档 → 规格探测 → 缩略图 → 感知哈希去重 → 本地标注 → 幂等改名 → 素材登记表双格式 → 四处落地 → 自验收 → 产能汇总。识别 mediaId 与「以文件形式发送」两种传输；改名账本自愈（audit 不再误报 missing）；--refresh-groups 动态群名单、--since-manifest 增量提速、SMB 健康自检、workdir 并发锁、manifest 写入 .bak 保护、钉钉侧已删条目不堵窗口。文档类文件归 KMFile-Archive。",
-      "category": "业务流程",
-      "entry": "registry/agents/KMMedia-Archive/SKILL.md",
-      "file_count": 3,
-      "size_bytes": 154056
+      "name": "ui-ux-pro-max",
+      "description": "UI/UX design intelligence for web and mobile. Searchable local database with 84 styles, 192 color palettes, 74 font pairings, 192 product types, 98 UX guidelines, 104 icon entries, 16 GSAP motion presets, and 25 chart types across 22 stacks (React, Next.js, Vue, Nuxt, Svelte, Astro, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, Jetpack Compose, Angular, Laravel, JavaFX, WPF, WinUI, Avalonia, Uno Platform, UWP, Three.js, and HTML/CSS). Use when designing, building, or reviewing UI: pages, components, color schemes, typography, layout, accessibility, animation, or data visualization.",
+      "category": "其他",
+      "entry": "registry/agents/ui-ux-pro-max/SKILL.md",
+      "file_count": 43,
+      "size_bytes": 1752765
     },
     {
-      "slug": "KMFile-Archive",
+      "slug": "verifier",
       "source": "agents",
-      "name": "KMFile-Archive",
-      "description": "钉钉群聊文件（文档）的全量扫描 + 增量归档一体化流水线（KMFile）v0.0.0.2。传输层走 dws drive download --node <fileId>，用服务端 md5 做精确去重与逐份完整性复核。十阶段：扫描归档 → 规格探测 → 正文抽取（PyMuPDF/zipfile/textutil，零新增依赖）→ md5 去重 → 本地三路标注（不调任何外部 agent）→ 幂等改名 → 文件登记表双格式 → 四处落地 → 自验收 → 产能汇总。改名账本按 md5 自愈、--refresh-groups 动态群名单、--since-manifest 增量提速、SMB 健康自检、并发锁、manifest .bak 保护。音视频不落地，只出待转 KMVideo 清单。",
-      "category": "业务流程",
-      "entry": "registry/agents/KMFile-Archive/SKILL.md",
-      "file_count": 3,
-      "size_bytes": 155080
+      "name": "verifier",
+      "description": "Independently accept or block one software project/version. Two entrances, by input. Entrance A 走一遍 — input is just a URL (optionally a one-line north star): really open it in a clean session, walk first step to last, refresh to confirm the result survives, answer one of 通/断了/没做/不确定 plus which step broke. No taskpack, digest, ZIP, or files. Trigger on 走一遍, 验一下, 通不通, 能用吗, 上线了没. A missing taskpack is normal input here; never ask the user to build one. Entrance B 正式验收 — for 验收一下, software acceptance, release recheck, AI/agent evaluation, or a supplied Product-Design-Taskpack: frozen acceptance contract, exact subject identity, risk-driven real execution, Requirement-Acceptance-Oracle-Test-Evidence traceability, release/AI gates, sealed evidence, one builder-ready acceptance-review ZIP. Both: taskpack read-only; never alter Skill 1 or product code; never trust builder self-attestation; never turn NOT_RUN/WAIVED/UNKNOWN into PASS; escalate when identity, authority, evidence, or independence is insufficient.",
+      "category": "工程与交付",
+      "entry": "registry/agents/verifier/SKILL.md",
+      "file_count": 61,
+      "size_bytes": 529499
+    },
+    {
+      "slug": "video-prompt-compiler",
+      "source": "agents",
+      "name": "video-prompt-compiler",
+      "description": "将口语化、模糊或碎片化的视频想法编译为目标视频模型可执行的电影级、工业级、品牌级、微表演级、剪辑或 2D/3D 生产提示词。先判断真实素材剪辑、T2V、I2V、Reference、V2V/Edit、Extend、剧本转分镜、2D、AIGC 3D 还是真实 CAD/Blender，再建立事实约束账本与 VideoPromptIR，生成“精确版/表现版”两个候选，通过硬门槛和多维百分比评分择优，最后按 MiniMax H3、Hailuo 2.3、Seedance 2.0、Kling VIDEO 3.0、Veo 3.1、Runway Gen-4.5、Wan2.2、LTX-2 等适配器渲染。适用于“我只会自然语言”“优化这条视频 Prompt”“做工业级/电影级描述”“反推参考视频”“按素材剪片”“生成失败怎么修”等任务。默认只编译，不调用收费媒体模型。",
+      "category": "其他",
+      "entry": "registry/agents/video-prompt-compiler/SKILL.md",
+      "file_count": 99,
+      "size_bytes": 233421
     }
   ]
 }

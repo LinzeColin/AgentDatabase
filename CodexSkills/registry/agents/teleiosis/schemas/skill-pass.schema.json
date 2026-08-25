@@ -1,0 +1,19 @@
+{
+  "$id": "https://teleiosis.local/schemas/skill-pass.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "calls": {},
+    "developer_burden_delta": {},
+    "input_hash": {},
+    "pass": {}
+  },
+  "required": [
+    "pass",
+    "input_hash",
+    "calls",
+    "developer_burden_delta"
+  ],
+  "title": "teleiosis.skill_pass.v5",
+  "type": "object"
+}

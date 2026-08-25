@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "White-Box Premise Challenge",
+  "type": "object",
+  "required": ["completed_before_first_change", "target_baseline_tree_hash", "questions", "decision", "mutation_allowed"],
+  "properties": {
+    "completed_before_first_change": {"const": true},
+    "target_baseline_tree_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "questions": {"type": "array", "minItems": 4, "maxItems": 4},
+    "decision": {"enum": ["CONTINUE", "REPOSITION", "MERGE", "SPLIT", "RETIRE"]},
+    "mutation_allowed": {"type": "boolean"},
+    "architecture_or_exit_plan": {"type": ["object", "null"]}
+  },
+  "additionalProperties": true
+}

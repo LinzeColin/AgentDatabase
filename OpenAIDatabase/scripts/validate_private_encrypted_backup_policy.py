@@ -25,60 +25,34 @@ TASK_ID = "TSK.OpenAIDatabase.PEB1.0003"
 ACCEPTANCE_ID = "ACC.OpenAIDatabase.PEB1.0003"
 DEFAULT_POLICY = Path("config/storage/private_encrypted_backup_policy.json")
 DEFAULT_PUBLIC_POLICY = Path("config/storage/public_encrypted_backup_policy.json")
-EXPECTED_LOGICAL_SOURCES = [
-    "codex_state",
-    "codex_sessions",
-    "codex_archived_sessions",
-    "codex_memories",
-    "codex_attachments",
-    "codex_automations",
-    "codex_tasks",
-    "codex_skills",
-    "shared_agent_skills",
-    "claude_projects",
-    "claude_sessions",
-    "claude_tasks",
-    "claude_scheduled_tasks",
-    "claude_skills",
-    "dsh_sessions",
-    "dsh_attachments",
-    "dsh_cron_configuration",
-    "dsh_archived_sessions",
-    "kimi_code_sessions",
-    "kimi_code_user_history",
-    "kimi_code_file_state",
-    "kimi_code_files",
-    "kimi_code_cron_configuration",
-    "workbuddy_state_database",
-    "workbuddy_projects",
-    "workbuddy_sessions",
-    "workbuddy_tasks",
-    "workbuddy_plans",
-    "workbuddy_memory",
-    "workbuddy_skills",
-    "workbuddy_automation_backups",
-    "workbuddy_workspace",
-    "workbuddy_file_history",
-    "workbuddy_artifact_index",
-    "workbuddy_audit_log",
-    "automation_reports",
-    "codex_configuration",
-    "claude_backups",
-    "claude_hooks",
-    "dsh_profiles",
-    "dsh_storages",
-    "dsh_plugins",
-    "dsh_cron_flags",
-    "dsh_cron_logs",
-    "dsh_patches",
-    "kimi_code_server_state",
-    "workbuddy_project_resources",
-    "workbuddy_plugins",
-    "workbuddy_connectors",
-    "chatgpt_exports",
-    "openaidatabase_live_data",
-    "verified_evidence_adapters",
-]
+# 期望的来源集合**从注册表推导**，不在这里抄一份。
+# 2026-08-20 实测：这里曾硬编码 10 个（全是 codex/chatgpt），而注册表已经有 52 个。
+# 两份清单各自都「自洽」，于是 41 个标着 required 的本机来源（共 4.36GB，
+# 其中 claude_projects 3.09GB）连续三天没进备份，没有任何一处会变红。
+# 读不到注册表就抛错 —— 校验机制自己坏掉时必须失败，不能放行。
+SOURCE_REGISTRY = Path("ops/memory-atlas/source-registry.json")
+
+
+def expected_logical_sources(repo_root: Path | None = None) -> list[str]:
+    root = repo_root or Path.cwd()
+    path = root / SOURCE_REGISTRY
+    if not path.is_file():
+        for parent in (Path(__file__).resolve().parents):
+            candidate = parent / SOURCE_REGISTRY
+            if candidate.is_file():
+                path = candidate
+                break
+    if not path.is_file():
+        raise PrivateBackupPolicyError("source_registry_unreadable")
+    try:
+        registry = json.loads(path.read_text(encoding="utf-8"))
+        sources = registry["sources"]
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        raise PrivateBackupPolicyError("source_registry_invalid") from exc
+    ids = [str(item["source_id"]) for item in sources if isinstance(item, dict) and item.get("source_id")]
+    if not ids:
+        raise PrivateBackupPolicyError("source_registry_empty")
+    return ids
 EXPECTED_PREFLIGHT = [
     "age_binary_available",
     "unified_recipient_provisioned",
@@ -138,7 +112,7 @@ def validate_policy(
     automation = mapping(policy.get("automation"), "automation")
 
     if (
-        scope.get("logical_sources") != EXPECTED_LOGICAL_SOURCES
+        scope.get("logical_sources") != expected_logical_sources()
         or scope.get("full_recovery_intended") is not True
         or any(
             scope.get(key) is not False
@@ -219,13 +193,10 @@ def validate_policy(
                 "automatic_follow_up_task_allowed",
                 "shared_cwd_write_allowed",
                 "local_script_creation_allowed",
+                "local_persistent_state_allowed",
             )
         )
-        or automation.get("system_temporary_directory_only") is not False
-        or automation.get("ephemeral_payload_workspace_required") is not True
-        or automation.get("local_persistent_state_allowed") is not True
-        or automation.get("persistent_state_scope")
-        != "protected_incremental_journal_and_deduplication_index_only"
+        or automation.get("system_temporary_directory_only") is not True
         or automation.get("release_creation_requires_all_preflight") is not True
         or automation.get("private_identity_unavailable_action") != "ESCALATE"
         or automation.get("source_snapshot_unstable_action") != "STOP"
@@ -242,7 +213,7 @@ def validate_policy(
         "key_id": unified_key["key_id"],
         "release_repository": release["repository"],
         "release_transport": release["transport"],
-        "workspace_isolation": "protected_incremental_journal_plus_system_temporary_payloads",
+        "workspace_isolation": "system_temporary_directory_only",
     }
 
 

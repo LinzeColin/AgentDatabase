@@ -1,0 +1,149 @@
+import { esc, fmt, pct, go, enter } from '../../../core/app.js';
+import * as D from '../../../core/select.js';
+import { fitCanvas , cssVar } from '../../../core/g3d.js';
+import { sec, bento, orbit, drawer, table, warn, pill, rate, state } from '../kit.js';
+
+export async function render(host) {
+  const K = D.A().stack, T = D.tokens(), t = T.total;
+  const C = T.cost, A = T.attribution, F = T.fanout;
+  const RM = C.real_money || {};
+  const llm = K.harness.filter(r => r.kind === 'llm');
+  const tools = K.harness.filter(r => r.kind === 'tool');
+  let mode = 'slice';
+
+  host.innerHTML = `
+${sec('技术栈与 Token', esc(K.note))}
+${bento([
+  { k: '输入（含缓存）', v: fmt(t.input_total), n: `其中缓存 ${fmt(t.cached)}`, w: 3, tone: 'acc' },
+  { k: '缓存命中率', v: rate(t.hit_rate), n: `有用量数据 ${t.measured} / 无用量 ${t.unmeasured}`, w: 3, alt: true },
+  { k: '输入（不含缓存）', v: fmt(t.input_excl), n: '真正重新读进去的' },
+  { k: '输出', v: fmt(t.output), n: '模型写出来的' },
+  { k: 'LLM 应用', v: String(llm.length), n: `另有 ${tools.length} 个只是工具` },
+])}
+${sec('真实成本口径', '旧口径 cost = 输入 + 输出，只看得到十分之一的账单 —— 而缓存读取才是大头。')}
+${bento([
+  { k: '价格加权 token', v: fmt(C.bie_total), n: 'BIE：按各家单价折成"基础输入"当量', w: 3, tone: 'acc' },
+  { k: '旧口径能看到的', v: pct(C.coverage_by_cost), n: `按条数只有 ${pct(C.coverage_by_volume)} —— 只看条数会以为没漏`, w: 3, alt: true },
+  { k: '缓存读取占成本', v: pct(C.by_field.cache_read / C.bie_total), n: `${fmt(C.by_field.cache_read)} BIE` },
+  { k: '缓存写入', v: fmt(C.by_field.cache_write), n: '单价最高的那类输入，以前页面上根本没有' },
+  { k: '没有价目表', v: `${C.no_price.sessions} 场`, n: Object.keys(C.no_price.sources).join('、') || '—' },
+  { k: '没量到 token', v: `${C.no_usage.sessions} 场`, n: '有价目表，但日志里一个 token 都没记' },
+])}
+${RM.state === '通' ? bento([
+  { k: '真实账单', v: `¥${RM.total}`, w: 3, tone: 'acc',
+    n: `${RM.sessions} 场 / ${RM.days.length} 天 · ${RM.billing_steps} 条计费步骤${
+      RM.estimated_steps ? ` · 其中 ${RM.estimated_steps} 条是估算` : ''}` },
+  { k: '这是全部花费吗', v: '不是', w: 3, tone: 'warn', size: 'sm', n: esc(RM.coverage_note) },
+]) : warn(`<b>真实账单：${esc(RM.state || '没做')}</b>　${esc(RM.why || '')}`)}
+${warn(`<b>BIE 和真实账单是两个东西，别混着读。</b>
+  BIE 是无量纲倍数，回答「哪一块最贵」；上面那个 ¥ 是真钱，回答「到底花了多少」。
+  ${esc((RM.why_others_missing) || '')}`)}
+${warn(`<b>${esc(F.state)}：扇出成本</b> —— ${esc(F.why)}<br>${esc(F.impact)}
+  当前 ${F.sessions} 场扇出，其中只有 ${F.with_usage} 场有用量记录。`)}
+${warn(`<b>这些数不能跨家相加。</b>${C.caveats.map(esc).join('<br>')}<br>
+  按哪几家的价算的：${C.prices.map(x => `${esc(x.provider)}<span class="st" data-s="${x.confidence === 'verified' ? '通' : '不确定'}">${esc(x.confidence)}</span>`).join('　')}`)}
+
+${sec('token 记在哪一天', esc(A.note || ''))}
+${A.state === '通' ? bento([
+  { k: '记错日子的', v: pct(A.moved_share), n: '以前按会话开始那天整块记', w: 3, tone: 'warn' },
+  { k: '只能靠猜的', v: pct(A.guessed_share), n: '没有逐条时间戳的来源', w: 3 },
+  { k: '最贵的一天 · 修前', v: esc(A.peak_before.d), n: fmt(A.peak_before.tok), size: 'sm' },
+  { k: '最贵的一天 · 修后', v: esc(A.peak_after.d), n: fmt(A.peak_after.tok), size: 'sm', alt: true },
+  { k: '变了多少', v: (A.peak_delta * 100).toFixed(1) + '%', n: esc(A.verdict), w: 2, tone: 'acc' },
+]) : warn(`归日对照：${esc(A.state)}`)}
+
+${tools.length ? warn(`<b>${esc(K.tools_note || '这些不是 LLM，不产生 token')}</b><br>
+  ${tools.map(r => `<b>${esc(r.label)}</b>（${r.sessions} 场）—— ${esc(r.note)}`).join('<br>')}`) : ''}
+
+${sec('按应用', 'harness = 你操作的那个应用。')}
+<canvas class="viz" id="rings" height="240" role="img" aria-label="各应用的缓存命中率对照图。逐项明细见下方表格。"></canvas>
+${drawer('展开应用明细', table(
+  [{ t: '应用' }, { t: '厂商' }, { t: '会话', r: true }, { t: '输入(含缓存)', r: true },
+   { t: '输出', r: true }, { t: '命中率', r: true }, { t: '模型' }],
+  llm.map(r => [`<b>${esc(r.label)}</b>`, esc(r.vendor), String(r.sessions), fmt(r.input_total),
+    fmt(r.output), rate(r.hit_rate), r.models.map(m => pill(m)).join('')])))}
+
+${sec('按厂商', 'provider = 谁在服务这个模型。')}
+${orbit(K.provider.map(r => ({ k: r.provider, v: r.input_total,
+  label: `${fmt(r.input_total)}　${rate(r.hit_rate)}`, c: 'var(--acc)' })))}
+
+${sec('按模型', '一场会话换过模型的按模型数均分 —— 每个都记全量会把总量放大成模型个数倍。')}
+${orbit(K.model.map(r => ({ k: r.model, v: r.input_total,
+  label: `${fmt(r.input_total)}　${r.sessions.toFixed(1)} 场`, c: 'var(--acc2)' })))}
+${drawer('厂商 × 模型', table([{ t: '厂商' }, { t: '模型' }, { t: '会话', r: true }, { t: '输入(含缓存)', r: true }, { t: '命中率', r: true }],
+  K.provider_model.map(r => [esc(r.provider), esc(r.model), r.sessions.toFixed(1), fmt(r.input_total), rate(r.hit_rate)])))}
+
+${sec('切片')}
+<div class="ctl">
+  <button data-m="slice" aria-pressed="true">按时间切片</button>
+  <button data-m="session" aria-pressed="false">按会话切片</button>
+  <span class="pill" id="cnt"></span>
+</div>
+<div id="slot"></div>`;
+
+  const slot = host.querySelector('#slot'), cnt = host.querySelector('#cnt');
+  const bySlice = () => {
+    cnt.textContent = `${T.by_slice.length} 时段 · ${T.by_week.length} 周 · ${T.by_day.length} 天`;
+    return `<p class="hint">悉尼时段</p>${orbit(T.by_slice.map(r => ({ k: r.slice, v: r.input_total,
+      label: `${fmt(r.input_total)}　${rate(r.hit_rate)}`, c: 'var(--acc)' })))}
+      <p class="hint" style="margin-top:26px">最近 14 周</p>
+      ${orbit(T.by_week.slice(-14).reverse().map(r => ({ k: r.w, v: r.input_total,
+        label: `${fmt(r.input_total)}　${rate(r.hit_rate)}`, c: 'var(--acc2)' })))}
+      ${drawer('展开逐日（最近 45 天）', table(
+        [{ t: '日期' }, { t: '会话', r: true }, { t: '输入(含缓存)', r: true }, { t: '缓存', r: true }, { t: '命中率', r: true }],
+        T.by_day.slice(-45).reverse().map(r => [`<span class="lnk" data-day="${r.d}">${r.d}</span>`,
+          String(r.sessions), fmt(r.input_total), fmt(r.cached), rate(r.hit_rate)])))}`;
+  };
+  const bySession = () => {
+    cnt.textContent = `${T.sessions.length} 场有用量数据 / 共 ${T.sessions_total} 场`;
+    return `<p class="hint">最烧的 30 场</p>${orbit(T.sessions.slice(0, 30).map(r => ({
+      k: r.day, v: r.input_total, label: `${fmt(r.input_total)}　${rate(r.hit)}`,
+      c: 'var(--acc)', attr: `data-day="${r.day}"` })))}
+      ${drawer('展开全部会话', table([{ t: '时间' }, { t: '应用' }, { t: '模型' }, { t: '标题' },
+        { t: '输入(含缓存)', r: true }, { t: '命中率', r: true }],
+        T.sessions.slice(0, 300).map(r => [`<span class="lnk" data-day="${r.day}">${esc(r.at)}</span>`,
+          esc(r.src), (r.models || []).map(m => pill(m)).join('') || pill('未记录'),
+          esc((r.title || '(无标题)').slice(0, 34)), fmt(r.input_total), rate(r.hit)])))}`;
+  };
+  const draw = () => { slot.innerHTML = mode === 'slice' ? bySlice() : bySession(); enter('.orow', slot); };
+  host.querySelector('.ctl').addEventListener('click', e => {
+    const b = e.target.closest('[data-m]'); if (!b) return;
+    mode = b.dataset.m;
+    host.querySelectorAll('[data-m]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.m === mode)));
+    draw();
+  });
+  host.addEventListener('click', e => { const d = e.target.closest('[data-day]'); if (d) go('day', d.dataset.day); });
+
+  const css = k => cssVar(k);
+  const drawRings = () => {
+    const { ctx, w } = fitCanvas(host.querySelector('#rings'), 240);
+    const h = 240, n = Math.max(1, llm.length), cellW = w / n, R = Math.max(14, Math.min(cellW / 2 - 16, 54));
+    ctx.clearRect(0, 0, w, h);
+    llm.forEach((r, i) => {
+      const cx = cellW * (i + .5), cy = 98;
+      ctx.lineWidth = 13; ctx.lineCap = 'round';
+      ctx.strokeStyle = css('--track');
+      ctx.beginPath(); ctx.arc(cx, cy, R, 0, 6.2832); ctx.stroke();
+      if (r.hit_rate != null) {
+        const g = ctx.createLinearGradient(cx - R, cy - R, cx + R, cy + R);
+        g.addColorStop(0, css('--acc')); g.addColorStop(1, css('--acc2'));
+        ctx.strokeStyle = g;
+        ctx.beginPath(); ctx.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + r.hit_rate * 6.2832); ctx.stroke();
+      }
+      ctx.textAlign = 'center';
+      ctx.fillStyle = r.hit_rate == null ? css('--warn') : css('--fg');
+      ctx.font = '700 15px -apple-system, system-ui, sans-serif';
+      ctx.fillText(r.hit_rate == null ? '说不准' : (r.hit_rate * 100).toFixed(1) + '%', cx, cy + 5);
+      ctx.fillStyle = css('--dim'); ctx.font = '12px -apple-system, system-ui, sans-serif';
+      ctx.fillText(r.label.slice(0, 13), cx, cy + R + 26);
+      ctx.fillStyle = css('--dim2'); ctx.font = '11px -apple-system, system-ui, sans-serif';
+      ctx.fillText(`${r.vendor} · ${fmt(r.input_total)}`, cx, cy + R + 42);
+      ctx.textAlign = 'left';
+    });
+  };
+  drawRings();
+  const onR = () => drawRings();
+  addEventListener('resize', onR); addEventListener('atlas:theme', onR);
+  draw(); enter('.sec, .card, .orow', host);
+  return { dispose() { removeEventListener('resize', onR); removeEventListener('atlas:theme', onR); } };
+}

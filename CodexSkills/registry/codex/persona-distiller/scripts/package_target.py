@@ -165,25 +165,7 @@ def validate_team_card(
     return card
 
 
-# ★★★★ 2026-08-18（Seth Godin）：**零 error、只剩「判据自己说不是缺陷」的披露，也打不了包。**
-#   strict 下 warning 亦拦，而其中两条的原文就写着：
-#     「★ 短不等于坏，**本条是覆盖缺口不是缺陷**」（153/193 份博客短文落在两道门之间）
-#     「此产物的 delta **不得用于支持「比裸模型强」这类结论**」（基线来源当初没记，我不能编）
-#   ⇒ 一条**判据自己声明「不是缺陷」的条目**，把一个语料干净、引文干净、三道门全绿的
-#     人物永久挡在交付之外。代码注释里也写着 Carver #127 卡的正是后一条，
-#     而 Carver 的登记记录里**根本没有 `strict_release_quality` 字段**——
-#     他是在这道门覆盖这两项**之前**打的包。**没有先例路径，只有死路。**
-#
-#   ★ 本次**不动任何门槛**，加的是一条**最窄的具名承认**：
-#     - 有任何 **error** ⇒ 照旧硬拦，一个字都不放。
-#     - 有 warning 而**没被逐条具名列出** ⇒ 照旧硬拦。
-#     - 只有**你逐条写出原文关键片段**的那些 warning 才放行，并**写进 audit**。
-#     它做不到「一键放行」——每加一条都要你读过并把它抄进命令行。
-#   [[loosen-only-the-exonerating-side]]｜[[a-penalty-is-not-a-rule]]
-
-
-def run_quality_gate(target: Path, *, skip: bool,
-                     acknowledged: list[str] | None = None) -> dict[str, Any]:
+def run_quality_gate(target: Path, *, skip: bool) -> dict[str, Any]:
     if skip:
         return {
             "passed": False,
@@ -231,24 +213,6 @@ def run_quality_gate(target: Path, *, skip: bool,
         if not why:
             why.append(f"**判据没给出任何 error/warning，而 passed={payload.get('passed')!r}"
                        f"、returncode={completed.returncode}——原因不明，不许当成「无所谓」**")
-
-        # ★ 具名承认：**error 一条都不放**；warning 必须被逐条具名，否则照旧拦。
-        acks = list(acknowledged or [])
-        if acks and not errs:
-            wtexts = [(w.get("message") if isinstance(w, dict) else str(w)) for w in warns]
-            unmatched = [t for t in wtexts if not any(a and a in t for a in acks)]
-            unused = [a for a in acks if not any(a in t for t in wtexts)]
-            if unused:
-                raise ValueError(
-                    "这些 --acknowledge 片段在本次 warning 里**一条都没命中**，"
-                    "多半是抄错或已经修好了：\n  " + "\n  ".join(unused))
-            if not unmatched:
-                payload["acknowledged_disclosures"] = wtexts
-                payload["acknowledged_by_flag"] = acks
-                payload["passed"] = True
-                return payload
-            why.append("★ 已具名承认 %d 条，但**还有 %d 条没被承认**（见上）"
-                       % (len(acks), len(unmatched)))
         raise ValueError("strict release quality gate failed:\n  " + "\n  ".join(why))
     return payload
 
@@ -462,14 +426,6 @@ def main() -> int:
         help="Optional assertion; must equal the registry-derived next product version.",
     )
     parser.add_argument(
-        "--acknowledge-disclosure",
-        action="append",
-        default=[],
-        metavar="原文片段",
-        help="逐条承认一条 strict warning（抄它原文里的一个关键片段）。"
-             "**有 error 时一律无效**；没被具名的 warning 照旧拦；承认内容写进 audit。",
-    )
-    parser.add_argument(
         "--skip-quality",
         action="store_true",
         help="Development-only; the resulting audit records a skipped gate and is not release-ready.",
@@ -498,8 +454,7 @@ def main() -> int:
     if str(meta.get("status", "")).startswith("blocked"):
         parser.error(f"target status blocks release: {meta.get('status')}")
     try:
-        quality = run_quality_gate(target, skip=args.skip_quality,
-                                   acknowledged=args.acknowledge_disclosure)
+        quality = run_quality_gate(target, skip=args.skip_quality)
     except ValueError as exc:
         parser.error(str(exc))
     product_version = next_product_version_for(

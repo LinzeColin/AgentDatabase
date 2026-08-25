@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "",
+  "inputs": {
+    "request_sha256": "",
+    "capabilities_sha256": ""
+  },
+  "target": {
+    "project_name": "",
+    "project_path": "",
+    "expected_outcome": "",
+    "single_project": true
+  },
+  "decision_scope": "release_candidate",
+  "profile": {
+    "selected": "standard",
+    "reasons": []
+  },
+  "risk": {
+    "level": "medium",
+    "score": 0,
+    "triggers": [],
+    "reasons": []
+  },
+  "dimensions": [],
+  "execution_budget": {
+    "max_commands": 60,
+    "max_elapsed_seconds": 3600,
+    "max_output_bytes": 100000000,
+    "max_network_requests": 0,
+    "max_cost": null,
+    "budget_exhaustion_action": "STOP_AND_REPORT_PARTIAL"
+  },
+  "command_allowlist": [],
+  "command_policy": {
+    "allowed_working_directories": [],
+    "allowed_network_targets": [],
+    "forbidden_patterns": [
+      "curl ... | sh",
+      "shell=True",
+      "credential export"
+    ],
+    "budget_exhaustion_action": "STOP_AND_REPORT_PARTIAL"
+  },
+  "authorization": {},
+  "hard_stops": [],
+  "independence": {},
+  "required_artifacts": [],
+  "unknowns": []
+}

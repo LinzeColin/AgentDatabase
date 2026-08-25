@@ -1,0 +1,29 @@
+{
+  "canonical_key": "public:alierdemir",
+  "canonical_name": "Ali Erdemir",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "材料建工师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "ali-erdemir",
+  "subject_uid": "person-7fbc8d856b754939",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/ali-erdemir-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T12:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.6",
+      "distilled_with_note": "2026-07-26 十二族重组：70 人只重打包未重蒸，正文来自 ≤v0.0.0.5",
+      "distilled_with_source": "git-first-commit:bulk-repackage",
+      "model_version": "1.0.0",
+      "outer_sha256": "58d76360e9d85bbb370a691f98bee20534d596dc99757f7c67b35f25aa738897",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/ali-erdemir-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "3b40c7a6372000c1cbdda1df01ecbbbe7ef6fe7cabd07527bfe644d6ee22dca6",
+      "runtime_size_bytes": 73178,
+      "size_bytes": 81926
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "label": "verifier-handoff-build",
+  "returncode": 0,
+  "stdout_sha256": "9d1bdf7995ba93e6833f67b1a52ed336673d096870933ccc3216db76fb7cc96c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

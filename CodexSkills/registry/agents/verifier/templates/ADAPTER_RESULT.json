@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "adapter_type": "test_execution",
+  "adapter": {
+    "name": "example-runner",
+    "version": "1.0.0",
+    "source": "project-native"
+  },
+  "subject_identity": "sha256:replace-with-exact-subject-digest",
+  "execution": {
+    "argv": ["example-runner", "--machine-readable"],
+    "cwd": ".",
+    "exit_code": 0,
+    "timed_out": false
+  },
+  "status_mapping": {
+    "source_status": "passed",
+    "normalized_status": "PASS",
+    "mapping_rule": "documented adapter rule: source passed + exit 0 + complete raw result"
+  },
+  "raw_evidence": [
+    {
+      "path": "raw/example-result.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "size": 0,
+      "media_type": "application/json"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "TEST-EXAMPLE-001",
+      "status": "PASS",
+      "oracle": "Replace with an observable, falsifiable condition.",
+      "evidence_refs": ["raw/example-result.json"],
+      "notes": "Template only; zero hash is not valid evidence for a real run."
+    }
+  ],
+  "limitations": []
+}

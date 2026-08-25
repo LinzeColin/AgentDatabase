@@ -1,0 +1,19 @@
+{
+  "name": "reference_reverse",
+  "purpose": "reverse engineer video prompt grammar",
+  "priorities": [
+    "global_lock",
+    "shot_timing",
+    "motion",
+    "camera",
+    "light",
+    "audio",
+    "end_state",
+    "transferable_grammar"
+  ],
+  "avoid": [
+    "verbatim_transcription",
+    "copying_dialogue_or_characters",
+    "claiming_exact_original_prompt"
+  ]
+}

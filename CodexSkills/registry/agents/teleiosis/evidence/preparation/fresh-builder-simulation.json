@@ -1,0 +1,32 @@
+{
+  "actual_local_validation": {
+    "cold_extract": "PASS",
+    "doctor_runs": 3,
+    "full_test_runs": 3,
+    "install_upgrade_rollback": "PASS",
+    "tests_per_run": 164
+  },
+  "environment_bound_tasks": [
+    "LM-001",
+    "LM-002",
+    "LM-003"
+  ],
+  "formal_release_pass": "NOT_ISSUED",
+  "mode": "fresh_context_low_medium_reasoning",
+  "non_environment_tasks_left": 0,
+  "only_environment_bound_unknowns_remain": true,
+  "research_reopened": false,
+  "schema_version": "teleiosis.fresh_builder_simulation.v5",
+  "status": "ACCEPTANCE_PASS",
+  "subject_hash": "166a2284ab0749353ea9b898db55c3750347c9cfeca6321581779858519dce89",
+  "verified_contracts": [
+    "Project Input",
+    "Stage0 spec",
+    "Task DAG",
+    "Acceptance",
+    "Traceability",
+    "tests",
+    "rollback",
+    "evidence"
+  ]
+}

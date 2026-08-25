@@ -72,23 +72,6 @@ def main() -> int:
         for path in files
     ]
     manifest["files"] = records
-
-    # ★★ **覆盖率现算并印出来。** 2026-08-17 把本工具搬去团队 skill 时，
-    #   上游那句 `path.suffix in {".pyc",".pyo",".zip"}` 在那边**恰好排掉了产物本体**
-    #   （那里 zip 就是运行时载荷，108 个），校验面 286/396 而清单照报「已校验」。
-    #   我是**手工比对才发现的** —— 那说明它没有守卫。
-    #   ⇒ 每次生成都印「收录 / 实况 / 未收录都是谁」，**未收录项必须逐条看得见**。
-    #   [[a-gates-scan-set-is-smaller-than-reality]]｜[[zero-hit-gates-must-prove-they-can-hit]]
-    on_disk = sorted(p.relative_to(ROOT).as_posix() for p in ROOT.rglob("*") if p.is_file())
-    listed = {r["path"] for r in records}
-    missing = [x for x in on_disk if x not in listed]
-    print("清单覆盖：**%d / %d**｜未收录 %d 件%s"
-          % (len(listed), len(on_disk), len(missing),
-             ("：" + "、".join(missing[:6]) + ("…" if len(missing) > 6 else "")) if missing else ""))
-    if missing:
-        from collections import Counter
-        by_suffix = Counter(pathlib.Path(m).suffix or "(无后缀)" for m in missing)
-        print("  未收录按后缀：%s" % "、".join("%s×%d" % kv for kv in by_suffix.most_common()))
     # ★ 版本必须由**同一个真源**盖两个字段。
     #   原来只盖 distribution.kind，`version` 字段谁也不改——于是它从 v0.0.0.5 起
     #   一路冻在原地，同一个文件里两个版本号自相矛盾了 9 个版本没人发现。

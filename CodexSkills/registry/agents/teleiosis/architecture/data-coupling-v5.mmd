@@ -1,0 +1,17 @@
+flowchart TB
+  PI[Project Input] --> CS[CANONICAL_STATE]
+  CS --> AC[Acceptance Contract]
+  AC --> DAG[Stage-Phase-Task DAG]
+  DAG --> TM[Traceability Matrix]
+  TM --> Tests[Tests + Oracles]
+  Tests --> Evidence[Raw Evidence]
+  Evidence --> Manifest[MANIFEST + SHA256]
+  Manifest --> Subject[CandidateIdentity / SubjectIdentity]
+  Subject --> VH[Verifier Handoff]
+  V3[v3 Source Snapshots] --> Inherit[Semantic Inheritance]
+  Inherit --> CS
+  Catalog[Skill Catalog Snapshot] --> PassA[Pass A]
+  PassA --> PassB[Pass B]
+  PassB --> PassC[Pass C]
+  PassC --> Evidence
+  Corpus[8192 Regression Cases] --> Tests

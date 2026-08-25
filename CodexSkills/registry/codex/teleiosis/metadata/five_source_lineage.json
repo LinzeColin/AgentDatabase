@@ -1,0 +1,16 @@
+{
+  "schema_version": "teleiosis.five_source_lineage.v3",
+  "version": "v0.0.0.3",
+  "sources": [
+    "teleiosis_v0.0.0.1",
+    "assistant_teleiosis_v0.0.0.2",
+    "owner_teleiosis_v0.0.0.2",
+    "skill_market_lab_v0.0.0.1",
+    "product_reality_lab_v0.0.0.1"
+  ],
+  "standalone_market_skill_installed": false,
+  "standalone_product_skill_installed": false,
+  "single_candidate_lifecycle": true,
+  "product_reality_archive_bytes_available": false,
+  "product_reality_reconstruction": "SEMANTIC_FROM_OWNER_CONTRACT"
+}

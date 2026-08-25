@@ -78,33 +78,13 @@ def classify(text: str, crit: dict, year: int = None) -> dict:
         pat = r"(?<![A-Za-z])" + r"\s*".join(toks)
         if re.search(pat, t, re.I):
             return {"判定": "他人", "理由": f"命中排除名单：{bad}"}
-    # ★★★ 2026-08-17：**缺 `year` 时这两条规则的方向相反** ——
-    #   `before`：`year < int(bn.get("year", 0))` ⇒ `year < 0` 恒假，**失败关闭**（安全）；
-    #   `after`： `year > int(ba.get("year", 0))` ⇒ `year > 0` 对任何正年份**恒真**，
-    #            会把**所有**源提升为「目标本人」—— **失败打开**。
-    #   实测：全库 8 份 `namesake-criteria.json` 里含该规则的 2 份都写了 `year`，
-    #   **0 处够得到** ⇒ 这是潜伏的，不是现行缺陷；本次改动**移动的判定为 0**。
-    #   ⇒ 两条都改成「缺 `year` 就不触发，并把这件事说出来」。
-    #   [[a-pd-claim-with-no-year-satisfied-the-rule]]（凡「X ≤ 阈值」先问「X 存在吗」）
-    def _rule_year(rule, which):
-        """→ (阈值, 说明)。阈值为 None ⇒ **本条规则不触发**（不是「阈值 0」）。"""
-        v = rule.get("year")
-        if v in (None, ""):
-            return None, ("★ `%s` 写了但**没有 `year`** —— 本条规则**不触发**"
-                          "（不是「阈值 0」；缺阈值的比较在 `after` 方向上恒真）" % which)
-        try:
-            return int(v), ""
-        except (TypeError, ValueError):
-            return None, "★ `%s` 的 `year` 不是整数（%r）—— 本条规则**不触发**" % (which, v)
-
     bn = crit.get("bare_name_before_year") or {}
-    _bn_year, _bn_note = _rule_year(bn, "bare_name_before_year") if bn else (None, "")
-    if bn and _bn_year is not None and year is not None and year < _bn_year:
+    if bn and year is not None and year < int(bn.get("year", 0)):
         bare = _norm(bn.get("bare") or "")
         if bare and re.sub(r"\s+", "", bare.lower()) in re.sub(r"\s+", "", t.lower()):
             if not any(m.lower() in t.lower() for m in (crit.get("any_of_markers") or [])):
                 return {"判定": "他人",
-                        "理由": f"{year} < {_bn_year} 且只有「{bare}」这个署名"
+                        "理由": f"{year} < {bn['year']} 且只有「{bare}」这个署名"
                                 f"——{bn.get('reason', '默认归属更早的同名者')}"}
     # ★★★ v0.0.0.154：`bare_name_before_year` 的**对称一半**。
     #   原本只有「早于某年的裸名 → 归更早的同名者」，而反方向没有规则：
@@ -115,12 +95,11 @@ def classify(text: str, crit: dict, year: int = None) -> dict:
     #   ★ 它只把 `unknown` 提升为「目标本人」，**不会把任何东西判成他人**——
     #     排除名单在它之前跑，误收的风险面比 before_year 那条小。
     ba = crit.get("bare_name_after_year") or {}
-    _ba_year, _ba_note = _rule_year(ba, "bare_name_after_year") if ba else (None, "")
-    if ba and _ba_year is not None and year is not None and year > _ba_year:
+    if ba and year is not None and year > int(ba.get("year", 0)):
         bare2 = _norm(ba.get("bare") or "")
         if bare2 and re.sub(r"\s+", "", bare2.lower()) in re.sub(r"\s+", "", t.lower()):
             return {"判定": "目标本人",
-                    "理由": f"{year} > {_ba_year} 且署「{bare2}」"
+                    "理由": f"{year} > {ba['year']} 且署「{bare2}」"
                             f"——{ba.get('reason', '更早的同名者已不在世')}"}
     # ★★★ v0.0.0.154：区分符**必须贴着姓氏**，不许全篇找。
     #   Sorby #133 抓源实测：A8 是他自己的文，正文写着
@@ -302,32 +281,6 @@ def self_test() -> int:
 
     print("── ★ 反向对照⑤：忽略空格差异，`T.C. Sorby` 与 `T. C. Sorby` 同判 ──")
     chk("→ 他人", classify("By T.C. Sorby", CRIT)["判定"] == "他人")
-
-    # ── ★★★ 2026-08-17：**缺 `year` 时两条规则的方向相反** ──
-    #   before：`year < int(get("year", 0))` ⇒ 恒假，失败关闭（安全）
-    #   after： `year > int(get("year", 0))` ⇒ 对任何正年份**恒真**，失败打开
-    #   实测全库 8 份配置里含该规则的 2 份都写了 year ⇒ **0 处够得到**，是潜伏的。
-    print("\n── 缺 `year` 时必须**不触发**（失败关闭）──")
-    _C_after_noyear = {"any_of_markers": [], "exclude_names": [],
-                       "bare_name_after_year": {"bare": "Oliver Wendell Holmes"}}
-    _v = classify("By Oliver Wendell Holmes", _C_after_noyear, year=1920)
-    chk("★★★ `bare_name_after_year` 缺 year → **不许**判成「目标本人」（实得 %s）"
-        % _v["判定"], _v["判定"] != "目标本人")
-    _C_after_ok = {"any_of_markers": [], "exclude_names": [],
-                   "bare_name_after_year": {"bare": "Oliver Wendell Holmes", "year": 1894}}
-    _v2 = classify("By Oliver Wendell Holmes", _C_after_ok, year=1920)
-    chk("★★★ 反对照：**写了 year 就照旧判「目标本人」**（1920 > 1894，实得 %s）"
-        % _v2["判定"], _v2["判定"] == "目标本人")
-    _C_after_bad = {"any_of_markers": [], "exclude_names": [],
-                    "bare_name_after_year": {"bare": "Oliver Wendell Holmes", "year": "不是数字"}}
-    _v3 = classify("By Oliver Wendell Holmes", _C_after_bad, year=1920)
-    chk("★★ year 不是整数 → 也不触发（不许抛，也不许判「目标本人」）",
-        _v3["判定"] != "目标本人")
-    _C_before_noyear = {"any_of_markers": [], "exclude_names": [],
-                        "bare_name_before_year": {"bare": "Henry Sorby"}}
-    _v4 = classify("By Henry Sorby", _C_before_noyear, year=1845)
-    chk("★★ `bare_name_before_year` 缺 year → 照旧不触发（它本来就失败关闭）",
-        _v4["判定"] != "他人")
 
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
     return 0 if ok else 2

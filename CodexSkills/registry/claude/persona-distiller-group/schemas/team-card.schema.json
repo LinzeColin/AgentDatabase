@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "persona-distiller-group/team-card.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "application_scenarios": {
+      "items": {"minLength": 1, "type": "string"},
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "canonical_name": {"minLength": 1, "type": "string"},
+    "distillation_traits": {
+      "items": {"minLength": 1, "type": "string"},
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "hard_boundaries": {
+      "items": {"minLength": 1, "type": "string"},
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "identity_family_id": {"minLength": 1, "type": "string"},
+    "key_capabilities": {
+      "items": {"minLength": 1, "type": "string"},
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "latest_product_version": {
+      "pattern": "^0\\.0\\.0\\.([1-9][0-9]{0,2})$",
+      "type": "string"
+    },
+    "readiness": {"enum": ["ready", "provisional", "unavailable"]},
+    "research_cutoff": {"minLength": 1, "type": "string"},
+    "schema_version": {"const": "1.0"},
+    "selection_reasons": {
+      "items": {"minLength": 1, "type": "string"},
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "subject_slug": {
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "type": "string"
+    },
+    "subject_uid": {"pattern": "^person-[0-9a-f]{16}$", "type": "string"},
+    "user_value": {
+      "items": {"minLength": 1, "type": "string"},
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "subject_uid",
+    "canonical_name",
+    "subject_slug",
+    "identity_family_id",
+    "readiness",
+    "research_cutoff",
+    "latest_product_version",
+    "selection_reasons",
+    "distillation_traits",
+    "user_value",
+    "application_scenarios",
+    "key_capabilities",
+    "hard_boundaries"
+  ],
+  "title": "Persona team card",
+  "type": "object"
+}

@@ -1,0 +1,322 @@
+{
+  "capabilities": [
+    {
+      "acceptance": "校验永久 Genesis、追加式 Amendment、有效需求和版本一致性。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T001",
+      "mandatory": true,
+      "name_zh": "Genesis 与 Amendment 完整性"
+    },
+    {
+      "acceptance": "记录模型、运行时、工具、权限、网络、预算、来源截止日和未知项。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T002",
+      "mandatory": true,
+      "name_zh": "当前环境快照"
+    },
+    {
+      "acceptance": "给出 CONTINUE、REPOSITION、MERGE、SPLIT 或 RETIRE，并有证据。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T003",
+      "mandatory": true,
+      "name_zh": "存在性挑战"
+    },
+    {
+      "acceptance": "至少五个真实同行，覆盖直接、间接及基础设施或手艺同行。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T004",
+      "mandatory": true,
+      "name_zh": "真实同行与生态位"
+    },
+    {
+      "acceptance": "冻结 Baseline，只在 Candidate 中修改，并可精确回滚。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T005",
+      "mandatory": true,
+      "name_zh": "只读 Baseline 与独立 Candidate"
+    },
+    {
+      "acceptance": "首个变更前冻结范围、硬门、评测、隐藏集边界与污染规则。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T006",
+      "mandatory": true,
+      "name_zh": "Acceptance 与隐藏集密封"
+    },
+    {
+      "acceptance": "覆盖战略、仓库、产品、架构、数据、安全、运行、验收、Builder、反证。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T007",
+      "mandatory": true,
+      "name_zh": "十视角系统复审"
+    },
+    {
+      "acceptance": "外部结论记录来源、日期、版本；第三方复用记录许可证与义务。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T008",
+      "mandatory": true,
+      "name_zh": "来源与许可证治理"
+    },
+    {
+      "acceptance": "优先采用一次一个可归因变更；复杂交互必须显式升级和记录。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T009",
+      "mandatory": true,
+      "name_zh": "单变更归因"
+    },
+    {
+      "acceptance": "安全、权限、数据、真实性、关键路径任一失败不可被平均分抵消。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T010",
+      "mandatory": true,
+      "name_zh": "不可补偿硬门"
+    },
+    {
+      "acceptance": "冻结必须保持的能力、旧行为和恢复路径，并执行邻域回归。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T011",
+      "mandatory": true,
+      "name_zh": "保护任务与回归"
+    },
+    {
+      "acceptance": "保留失败 Candidate、被拒改动、NO_CHANGE、回退和停止理由。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T012",
+      "mandatory": true,
+      "name_zh": "失败与拒绝账本"
+    },
+    {
+      "acceptance": "仅在真实路由、dossier、claim_id 和角色隔离可证明时计为有效。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T013",
+      "mandatory": true,
+      "name_zh": "专家团队证据"
+    },
+    {
+      "acceptance": "Baseline、重大 Candidate Delta、Frozen Final 三次扫描并记录 Developer Burden Delta。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T014",
+      "mandatory": true,
+      "name_zh": "Skill Catalog 全量扫描"
+    },
+    {
+      "acceptance": "记录资源上限、成本驱动、P80/P95、机会成本、Kill Criteria。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T015",
+      "mandatory": true,
+      "name_zh": "成本容量与收益"
+    },
+    {
+      "acceptance": "新上下文只凭候选包即可执行，剩余事项仅限环境最后一公里。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T016",
+      "mandatory": true,
+      "name_zh": "Fresh Builder Readiness"
+    },
+    {
+      "acceptance": "先 staging、备份、原子替换、后验验证；失败恢复原树。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T017",
+      "mandatory": true,
+      "name_zh": "事务发布与精确回滚"
+    },
+    {
+      "acceptance": "结论携带有效期、失效事件、环境强度和有界 reheat 条件。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T018",
+      "mandatory": true,
+      "name_zh": "证据租约与 Reheat"
+    },
+    {
+      "acceptance": "v3 的全量非路由、连续 Candidate、T/S/P、移动仓库、证据与回滚语义有快照、矩阵和回归证据。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T019",
+      "mandatory": true,
+      "name_zh": "v3 非降级继承"
+    },
+    {
+      "acceptance": "最新 integration base 的每项任务按七类状态分类并保留更好的上游实现。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T020",
+      "mandatory": true,
+      "name_zh": "Stage 0 Semantic Reconcile"
+    },
+    {
+      "acceptance": "Pass A/B/C 均绑定不同输入 hash 并产生制品、Finding 或 Developer Burden Delta。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T021",
+      "mandatory": true,
+      "name_zh": "三次 Skill Catalog 扫描"
+    },
+    {
+      "acceptance": "十个正交视角均检查并记录新机制、Finding、制品、负担变化和决策。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T022",
+      "mandatory": true,
+      "name_zh": "十视角有界完善"
+    },
+    {
+      "acceptance": "无 dossier/claim_id/分歧时不得计为人物专家贡献，转中立功能角色。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T023",
+      "mandatory": true,
+      "name_zh": "人物专家 dossier 硬门"
+    },
+    {
+      "acceptance": "两轮六角色复审覆盖产品、架构、数据安全、SRE、测试证据和反证范围。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T024",
+      "mandatory": true,
+      "name_zh": "六角色两轮复审"
+    },
+    {
+      "acceptance": "Project Input、DAG、追踪、最后一公里和 Fresh Builder 均机器可验证。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T025",
+      "mandatory": true,
+      "name_zh": "Taskpack 与 Fresh Builder"
+    },
+    {
+      "acceptance": "生成绑定精确 Subject、Acceptance、Manifest 的只读 handoff，不签发正式 PASS。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "T026",
+      "mandatory": true,
+      "name_zh": "Verifier 冻结交接"
+    }
+  ],
+  "capability_count": 26,
+  "module": "T",
+  "schema_version": "teleiosis.capability_manifest.v5",
+  "scope_mode": "FULL_NO_ROUTING",
+  "slug": "raw_teleiosis",
+  "version": "v0.0.0.5"
+}

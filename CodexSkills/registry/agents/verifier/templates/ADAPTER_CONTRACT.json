@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "allowed_adapter_types": [
+    "static_analysis",
+    "test_execution",
+    "release_observation",
+    "ai_evaluation",
+    "supply_chain",
+    "human_manual"
+  ],
+  "decision_authority": "none",
+  "forbidden_authority_fields": [
+    "verdict",
+    "release_decision",
+    "approval",
+    "accepted",
+    "acceptance_status"
+  ],
+  "normalized_statuses": [
+    "PASS",
+    "FAIL",
+    "BLOCKED",
+    "NOT_RUN",
+    "WAIVED",
+    "UNKNOWN"
+  ],
+  "pass_requires": [
+    "exact subject_identity",
+    "explicit status mapping",
+    "hashed raw evidence",
+    "all claims PASS",
+    "no timeout"
+  ]
+}

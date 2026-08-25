@@ -1,0 +1,41 @@
+{
+  "$id": "teleiosis://schemas/promotion-packet.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_identity": {
+      "$ref": "candidate-identity.schema.json"
+    },
+    "external_verifier_required": {
+      "const": true
+    },
+    "hard_gate_status": {
+      "enum": [
+        "READY",
+        "BLOCKED"
+      ]
+    },
+    "lab_results": {
+      "minItems": 4,
+      "type": "array"
+    },
+    "rollback_target": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "teleiosis.promotion_packet.v1"
+    },
+    "waivers": {
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "candidate_identity",
+    "lab_results",
+    "hard_gate_status",
+    "rollback_target",
+    "external_verifier_required"
+  ],
+  "type": "object"
+}

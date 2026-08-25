@@ -1,0 +1,120 @@
+{
+  "candidate_revision_id": "C0000",
+  "capabilities": [
+    {
+      "evidence_refs": [],
+      "id": "T001",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T002",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T003",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T004",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T005",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T006",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T007",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T008",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T009",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T010",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T011",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T012",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T013",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T014",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T015",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T016",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T017",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    },
+    {
+      "evidence_refs": [],
+      "id": "T018",
+      "reason": "示例模板；正式运行必须替换为真实检查结论。",
+      "status": "NOT_APPLICABLE_WITH_REASON"
+    }
+  ],
+  "decision": "NO_CHANGE",
+  "evidence_files": [],
+  "module": "T",
+  "run_id": "RUN-EXAMPLE",
+  "schema_version": "teleiosis.capability_result.v5",
+  "stage_index": 0,
+  "summary": "填写本阶段的实质发现、变更、测试和边界。"
+}

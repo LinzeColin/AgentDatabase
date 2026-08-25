@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VideoPromptStructuralScore",
+  "type": "object",
+  "required": [
+    "status",
+    "overall_structural_score_percent",
+    "scope",
+    "native_model_evidence",
+    "dimensions"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "BLOCKED_BY_HARD_GATE",
+        "REVISE_BEFORE_MODEL_TEST",
+        "READY_FOR_MODEL_TEST"
+      ]
+    },
+    "overall_structural_score_percent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "scope": {
+      "const": "STRUCTURAL_SPECIFICATION_COVERAGE_ONLY"
+    },
+    "native_model_evidence": {
+      "enum": [
+        "NOT_RUN",
+        "PARTIAL",
+        "RUN"
+      ]
+    },
+    "human_visual_review": {
+      "enum": [
+        "NOT_RUN",
+        "PARTIAL",
+        "RUN"
+      ]
+    },
+    "external_verifier": {
+      "enum": [
+        "NOT_RUN",
+        "PASS",
+        "FAIL",
+        "BLOCKED"
+      ]
+    },
+    "dimensions": {
+      "type": "object"
+    },
+    "hard_gate_findings": {
+      "type": "array"
+    }
+  }
+}

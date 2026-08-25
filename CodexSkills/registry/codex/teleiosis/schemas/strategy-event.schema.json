@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://teleiosis.local/schemas/strategy-event.schema.json",
+  "title": "Evidence-bound strategy memory event",
+  "type": "object",
+  "required": ["schema_version", "event_id", "sequence", "candidate_id", "scope", "mechanism", "decision", "evidence_bindings", "previous_event_hash", "event_hash"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "decision": {"enum": ["KEEP", "REVERT", "NO_CHANGE"]},
+    "change_ratio": {"type": "number", "minimum": 0},
+    "previous_event_hash": {"type": "string"},
+    "event_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "additionalProperties": true
+}

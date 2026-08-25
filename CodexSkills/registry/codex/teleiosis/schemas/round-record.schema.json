@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["round", "perspective", "evidence_paths", "candidate_comparison", "decision", "actor_id", "residual_risk"],
+  "properties": {
+    "round": {"type": "integer", "minimum": 1},
+    "perspective": {"type": "string", "minLength": 1},
+    "evidence_paths": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "candidate_comparison": {"type": "object"},
+    "decision": {"enum": ["KEEP", "REVERT", "NO_CHANGE"]},
+    "actor_id": {"type": "string", "minLength": 1},
+    "residual_risk": {"type": "array"},
+    "unknowns": {"type": "array"}
+  },
+  "additionalProperties": true
+}

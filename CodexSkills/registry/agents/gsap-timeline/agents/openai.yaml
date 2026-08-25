@@ -1,0 +1,6 @@
+interface:
+  display_name: "GSAP Timeline"
+  short_description: "Timelines, sequencing, labels, nesting, playback"
+  default_prompt: "Use $gsap-timeline for sequencing animations with GSAP timelines."
+policy:
+  allow_implicit_invocation: true

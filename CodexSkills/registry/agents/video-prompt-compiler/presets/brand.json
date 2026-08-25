@@ -1,0 +1,18 @@
+{
+  "name": "brand",
+  "purpose": "corporate and commercial brand content",
+  "priorities": [
+    "single_claim",
+    "visible_proof",
+    "brand_consistency",
+    "clean_materials",
+    "controlled_palette",
+    "end_card"
+  ],
+  "avoid": [
+    "empty_slogans",
+    "fake_scale",
+    "unverified_superlatives",
+    "logo_distortion"
+  ]
+}

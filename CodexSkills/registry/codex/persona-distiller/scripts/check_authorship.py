@@ -126,13 +126,6 @@ def build_patterns(full_name: str) -> dict:
     这样两种写法互相都能命中（语料里写全中间名、账本里没写，反之亦然）。
     """
     tokens = [t for t in re.split(r"\s+", full_name.strip()) if t]
-    # ★ `meta.json` 的 `name` 缺失或为空串时，这里原本 `tokens[0]` 直接
-    #   IndexError —— **整个 quality_check 抛 traceback、一个 JSON 都不产出**，
-    #   解析 stdout 的调用方拿到的是空。判据可以说「判不了」，
-    #   但不许把自己炸掉让调用方读到空。[[a-refusal-to-check-prints-one-error]]
-    if not tokens:
-        raise ValueError("meta.json 的 name 为空 —— 署名判据没有可比对的姓名，"
-                         "**这是判不了，不是通过**")
 
     # ★ v0.0.0.26：**「名 + 姓」是一个西方近代假设，名册里有大量人物不满足它。**
     #
@@ -239,37 +232,6 @@ def build_patterns(full_name: str) -> dict:
     # 不用于署名判定，避免把「谈论他」的句子当成他的署名。
     surname_rx = re.escape(surname)
 
-    # ★★★★★ 2026-08-19：**拉丁化姓在题名页上是屈折的，主格匹配不到它。**
-    #
-    #   Comenius #182 实测（83 份逐份跑本判据）：56 份未过，逐份读开头后分成三类——
-    #     ② **署名的是译者/改编者** 5 份（`deutſch uͤberſetzt von Theophilus Elsner`、
-    #        `von einem Liebhaber der Comeniſchen Schriften`）⇒ **门判得对，不该放**；
-    #     ③ **有他的名字但模式没认出** 21 份，形态全是屈折形：
-    #        `JOH. AMOS COMENII` / `JOANNIS AMOS COMENII` / `Comenii operum Tomus I`
-    #        / `Auttore … Domino Tohanne Amoſo Comenio` / `A.COMENIL`（= A. COMENII 的讹形）；
-    #     ④ 开头确无署名线索 30 份。
-    #
-    #   ★ 我最初的假设是「属格是主因」。**先量后改救了一次**：前 4000 字符内
-    #     主格 `Comenius` 出现 65 次、属格 `Comenii` 15 次——**多数是主格**，
-    #     属格只解释这 21 份，不解释另外 30 份。**别把一个能解释 1/3 的原因当成全部。**
-    #
-    #   ★★ 射程刻意压得很窄，因为负对照就在手边（② 那 5 份）：
-    #     · 只认**拉丁式主格 `-us` 结尾的姓**按古典变格生成的形（`-i/-o/-um/-e`）；
-    #     · 只在**前 600 字符的题名页区**内算数；
-    #     · 该区内出现译者/编者标记（übersetzt / translated / traduit /
-    #       herausgegeben von / Liebhaber der …）**一律不算**。
-    #     三条缺一条，`② 译本`就会被放进来。
-    #   ★★★ 第一版把主格也放进屈折集、且非 `-us` 姓退回原姓，结果兜底变成
-    #     「姓在前 600 字出现即算署名」——**本文件 30 条既有负对照当场全红**
-    #     （`edited by`／`reported by`／机构名／他人署名的随笔…）。
-    #     那正是本文件早写过的一句：姓氏单独出现**不用于署名判定**，
-    #     否则「谈论他」的句子会被当成他的署名。
-    #   ⇒ 收窄两处：**只认屈折形（不含主格）**；**非拉丁式 `-us` 姓不生成本模式**。
-    if surname[-2:].lower() == "us" and len(surname) > 4:
-        infl_rx = rf"{re.escape(surname[:-2])}(?:i|o|um|e)"
-    else:
-        infl_rx = None
-
     # ★★★★ 2026-08-07：**OCR 会把姓拆成两段**——`BY JOSEPH WHIT WORTH, F.R.S.`
     #   Whitworth #152 实测：1858 年 NYPL 扫描本的标题页就是这样，整卷 335 KB 判成「无据」。
     #
@@ -357,20 +319,8 @@ def build_patterns(full_name: str) -> dict:
         #     而这里是 `\b`——同一份清单，锚点不同，安全性天差地别。
         #   → 撤回。**Martens 那条偏差仍然存在，作为已量的发现记着，
         #     不靠一个我验不动的放宽去掩盖它。**
-        #   ★★★★ 2026-08-19 `A-byline` 加法文 `Par`。
-        #     Eiffel #142 四份法文原著全被判「文中查无归属证据」，
-        #     而 1907 那部**第一行就写着** `PAR G. EIFFEL ANCIEN PRÉSIDENT DE LA SOCIÉTÉ…`
-        #     —— 判据认得出名字，认不出名字前面那个法文的 `Par`
-        #     （与 Rosenhain 的合著位、Martens 的德文 `Von` 同族：
-        #      [[regex-must-clear-the-corpus-language]]）。
-        #   ★ 收紧到底：法文 `par` 在正文里极常见（实测同一批语料里就有
-        #     `par le vent`、`par élément`、**`par Google dans le cadre d'un projet`**
-        #     —— 最后这句是 Google Books 的版权声明）。所以照抄 `By` 那一支的形状：
-        #     `Par` 与名字之间**只许敬称**，不许任何别的东西。
-        #     反对照见自测：报纸《La liberté》整版提到他而不是他写的，必须仍判「无据」。
         "BYLINE": re.compile(
-            rf"\b(?:By|Par)\s+(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady|"
-            rf"M|Mme|Mlle)\.?\s+)*"
+            rf"\bBy\s+(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?\s+)*"
             rf"{name_rx}\b", re.I),
         # ★★★★ v0.0.0.168 `A-byline-coauthor`：**他站在第二作者位。**
         #   Rosenhain #138 实测三份，题头都在、名字有一份一个字母都没错，全被判「无据」：
@@ -454,9 +404,6 @@ def build_patterns(full_name: str) -> dict:
             re.I | re.M),
         "MINE": re.compile(
             rf"{surname_rx}|^(?:{'|'.join(re.escape(i) for i in sorted(initials))})$", re.I),
-        "TITLE_GENITIVE": (re.compile(rf"\b{infl_rx}\b", re.I) if infl_rx else None),
-        "TRANSLATOR_MARK": re.compile(
-            r"\b(?:[üu]bersetzt|uebersetzt|translated|traduit|vertaald|p[řr]elo[žz]il|herausgegeben\s+von|Liebhaber\s+der)\b", re.I),
         "SURNAME": re.compile(surname_rx, re.I),
         # ★★★★ 2026-08-20（Telford #183）：19 世纪工程文献三种真实署名形态。
         #   议会证词 `Mr. Telford said…`（单姓讨论轮次，无名字）、
@@ -1984,24 +1931,6 @@ def _check_one(text, pat):
                             pat.get("own_titles"))
         if ev:
             return True, "A-byline-ocr", ev, counter
-    # ★★★★★ 兜底：**拉丁化姓的题名页屈折形**（Comenius #182 实测的 21 份）。
-    #   放在最后一个 return 之前 —— 只在**其他模式全不中**时才判，
-    #   不覆盖任何既有判定；理由码独立成 `A-title-genitive`，便于回溯与审计。
-    #   三条约束缺一不可（负对照就是同批的 5 份译本）：
-    #     ① 只看**前 600 字符的题名页区**；
-    #     ② 该区内出现译者/编者标记 ⇒ 一律不算；
-    #     ③ 屈折形只由**拉丁式 `-us` 主格**机械生成，非 `-us` 结尾时退回原姓。
-    #   ★★ 两个窗口**故意不等长**：屈折形只认前 600 字（题名页区），
-    #     而译者/编者标记在**前 3000 字内出现就否决**。
-    #     第一版两边都用 600，负对照当场抓到 **2 份译本被放了进来**——
-    #     题名页写着 `JOH. AMOS COMENII …`，译者署名落在扉页背面、在 600 字之外。
-    #     [[loosen-only-the-exonerating-side]]：放宽只许放在**否决**这一侧。
-    _head = text[:600]
-    _veto = text[:3000]
-    if pat.get("TITLE_GENITIVE") and not pat["TRANSLATOR_MARK"].search(_veto):
-        _m = pat["TITLE_GENITIVE"].search(_head)
-        if _m:
-            return True, "A-title-genitive", " ".join(_head[max(0, _m.start() - 60):_m.end() + 60].split()), counter
     return False, "", "", counter
 
 
@@ -3064,36 +2993,6 @@ def self_test() -> int:
                 _NSN, (), False, "By Alexander Nasmyth（父）—— 新判别器不许把它改坏")
     _title_case("James Nasmyth", "By Patrick Nasmyth\n\nA wooded landscape.",
                 _NSN, (), False, "By Patrick Nasmyth（兄）—— 新判别器不许把它改坏")
-
-    # ★★★★★ 2026-08-19：拉丁化姓的题名页屈折形（Comenius #182 实测 83 份）
-    print("\n★★★★★ 题名页屈折形 A-title-genitive")
-    _pc = build_patterns("John Amos Comenius")
-    for _t, _want, _lab in (
-        ("JOH. AMOS COMENII ORBIS SENSUALIUM PICTUS, QUEM AD USUM JUVENTUTIS", True,
-         "正例：拉丁属格题名页 `JOH. AMOS COMENII`"),
-        ("Auttore Reverendo Clarissimoque Viro, Domino Tohanne Amoso Comenio.", True,
-         "正例：拉丁夺格 `... Comenio`（Auctore 式）"),
-        ("Martyrologium Bohemicum. Comenii Geschichte, deutsch uebersetzt von "
-         "Theophilus Elsner, Diener des goettlichen Wortes.", False,
-         "★★ 反例：同段有译者标记 ⇒ 不算"),
-        ("Uebergang aus dem Labyrinth der Welt, ehemals Johann Amos Comenius "
-         "beschrieben, nun aber von einem Liebhaber der Comenischen Schriften.", False,
-         "★★ 反例：后人改编（`Liebhaber der`）⇒ 不算"),
-        ("Comenii Physicae Synopsis. " + "x " * 400 + " uebersetzt von N. N.", False,
-         "★★★ 反例：译者标记在 600 字外、3000 字内 ⇒ 仍要否决（第一版就漏在这）"),
-    ):
-        _ok, _code, _, _ = check_text(_t, _pc)
-        _got = bool(_ok and _code == "A-title-genitive")
-        print(f"  {'✓' if _got == _want else '✗'} {_lab}")
-        if _got != _want:
-            bad.append(f"题名页屈折形：{_lab}")
-    # ★★ 非拉丁式姓**不许**生成本模式，否则兜底退化成「姓出现即署名」——
-    #    第一版就是这样把本文件 30 条既有负对照全部打红的。
-    for _n in ("James Nasmyth", "Joseph Whitworth", "Galen"):
-        _none = build_patterns(_n).get("TITLE_GENITIVE") is None
-        print(f"  {'✓' if _none else '✗'} ★★ 非拉丁式姓 {_n!r} 不生成 TITLE_GENITIVE")
-        if not _none:
-            bad.append(f"题名页屈折形：{_n} 不该生成本模式")
 
     if bad:
 

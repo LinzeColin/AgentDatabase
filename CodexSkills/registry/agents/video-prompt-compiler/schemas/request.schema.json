@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VideoPromptCompilerRequest",
+  "type": "object",
+  "required": [
+    "idea"
+  ],
+  "properties": {
+    "idea": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_platform": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "target_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "input_mode": {
+      "enum": [
+        "auto",
+        "text_to_video",
+        "image_to_video",
+        "reference_to_video",
+        "video_edit",
+        "video_extend",
+        "footage_edit",
+        "screenplay_to_shots",
+        "prompt_optimize",
+        "2d_motion_graphics",
+        "aigc_3d_concept",
+        "true_3d_handoff",
+        "reference_reverse"
+      ]
+    },
+    "duration_seconds": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 600
+    },
+    "aspect_ratio": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "output_mode": {
+      "enum": [
+        "auto",
+        "copy",
+        "director",
+        "reverse",
+        "repair",
+        "minimax"
+      ]
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "hard_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "minimum_material_gain": 0.02,
+  "metrics": [
+    {
+      "metric_id": "market_category_error_prevention",
+      "direction": "higher",
+      "baseline": 0,
+      "candidate": 1,
+      "hard": true,
+      "evidence_ref": "tests/test_peer_taxonomy.py"
+    },
+    {
+      "metric_id": "non_negative_fallback_coverage",
+      "direction": "higher",
+      "baseline": 0,
+      "candidate": 1,
+      "hard": true,
+      "evidence_ref": "tests/test_utility_guard.py"
+    },
+    {
+      "metric_id": "operator_decision_steps",
+      "direction": "lower",
+      "baseline": 6,
+      "candidate": 3,
+      "hard": false,
+      "evidence_ref": "assets/showcase.html"
+    },
+    {
+      "metric_id": "activation_kernel_chars",
+      "direction": "lower",
+      "baseline": 3159,
+      "candidate": 3061,
+      "hard": false,
+      "regression_tolerance": 0.20,
+      "evidence_ref": "SKILL.md"
+    }
+  ],
+  "protected_checks": [
+    {
+      "check_id": "locked_genesis_sha256",
+      "baseline_pass": true,
+      "candidate_pass": true,
+      "evidence_ref": "constitution/genesis-lock.json"
+    },
+    {
+      "check_id": "release_install_rollback",
+      "baseline_pass": true,
+      "candidate_pass": true,
+      "evidence_ref": "tests/test_release.py"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "2d_explainer",
+  "purpose": "motion graphics, process and information design",
+  "priorities": [
+    "information_hierarchy",
+    "layout",
+    "icon_system",
+    "animation_order",
+    "editable_text",
+    "brand_palette"
+  ],
+  "avoid": [
+    "text_baked_into_generated_images",
+    "random_3d_rotation",
+    "decorative_motion_without_information"
+  ]
+}

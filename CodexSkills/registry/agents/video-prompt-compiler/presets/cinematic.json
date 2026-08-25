@@ -1,0 +1,19 @@
+{
+  "name": "cinematic",
+  "purpose": "generic cinematic prompt compilation",
+  "priorities": [
+    "story_or_claim_function",
+    "observable_action",
+    "single_camera_behavior",
+    "light_direction",
+    "sound_bed",
+    "end_state"
+  ],
+  "palette_default": "derive_from_user_or_reference",
+  "avoid": [
+    "adjective_soup",
+    "unmotivated_camera_moves",
+    "generic_8k_masterpiece"
+  ],
+  "default_prompt_language": "match_host_or_model"
+}

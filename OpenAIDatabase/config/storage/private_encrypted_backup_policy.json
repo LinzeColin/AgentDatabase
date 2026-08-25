@@ -62,7 +62,9 @@
     "full_recovery_intended": true,
     "plaintext_publication_allowed": false,
     "git_tracked_ciphertext_allowed": false,
-    "automatic_source_deletion_allowed": false
+    "automatic_source_deletion_allowed": false,
+    "logical_sources_source_of_truth": "ops/memory-atlas/source-registry.json#sources[].source_id",
+    "logical_sources_note_zh": "必须与 source-registry.json 逐字一致，校验器从注册表推导，硬编码一律判失败。2026-08-20 之前这里只写了 10 个（全是 codex/chatgpt），注册表却已有 52 个 —— 本机实际存在、标了 required、却一次都没备份过的有 41 个共 4.36GB，其中 claude_projects 单独 3.09GB / 2894 个对象。注册表当时已经写好但没推送，策略也没跟着改，于是三处互相印证着一个错的答案，谁都不报错。"
   },
   "release": {
     "repository": "LinzeColin/Private-Database",

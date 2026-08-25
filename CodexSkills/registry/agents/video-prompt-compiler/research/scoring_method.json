@@ -1,0 +1,24 @@
+{
+  "matrix_name": "video_prompt_compiler_goal_fit_v2",
+  "purpose": "Analyst-coded mechanism coverage for this user goal; not an empirical native-model benchmark.",
+  "goal_fit_weights_percent": {
+    "natural_language_compilation": 12,
+    "production_method_routing": 10,
+    "cinematic_directing": 10,
+    "model_adapter_depth": 12,
+    "continuity_reference_control": 8,
+    "industrial_physics": 10,
+    "editing_storyboard_breadth": 8,
+    "qc_delta_repair": 10,
+    "current_model_freshness": 8,
+    "installability_runtime_burden": 7,
+    "license_reuse_clarity": 5
+  },
+  "separate_non_aggregated_fields": [
+    "evidence_confidence_percent",
+    "native_model_validation_status",
+    "independent_acceptance_status"
+  ],
+  "score_precision": "whole-number inputs and one-decimal weighted output; values are directional, not measurement error claims",
+  "hard_rule": "A high goal-fit score cannot override NOT_RUN native-model or independent-acceptance gates."
+}

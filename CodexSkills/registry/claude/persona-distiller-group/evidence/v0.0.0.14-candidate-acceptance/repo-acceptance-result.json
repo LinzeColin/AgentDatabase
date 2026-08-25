@@ -1,0 +1,106 @@
+{
+  "schema_version": "persona-team.repo-acceptance.v1",
+  "created_at": "2026-08-16T12:49:06.463897+00:00",
+  "status": "PASS",
+  "taskpack_version": "V0.0.0.1",
+  "source_candidate_version": "v0.0.0.14",
+  "observations": {
+    "version_binding": [
+      "v0.0.0.14",
+      "v0.0.0.14",
+      "v0.0.0.14"
+    ],
+    "fleet_admission_summary": {
+      "registry_products": 102,
+      "admission_counts": {
+        "restricted": 1,
+        "eligible": 101
+      },
+      "admitted_category_counts": {
+        "农林牧渔师": 2,
+        "创业经营师": 7,
+        "客户营销师": 1,
+        "建造采购师": 12,
+        "思想教育师": 2,
+        "投资资本师": 21,
+        "政治法律师": 5,
+        "材料建工师": 15,
+        "艺术设计师": 1,
+        "财务合规师": 2,
+        "软件开发师": 34
+      },
+      "zero_roster_categories": [
+        "医疗护理师"
+      ],
+      "global_floor": 75,
+      "below_floor_count": 0
+    },
+    "mode_results": [
+      {
+        "mode": "single_expert",
+        "status": "PASS",
+        "persona_experts": 1,
+        "loaded_payloads": 1,
+        "control_stages": [
+          "counterevidence-adversary",
+          "decision-judge",
+          "hypothesis-framer",
+          "independent-reviewer",
+          "synthesis-lead"
+        ]
+      },
+      {
+        "mode": "small_team",
+        "status": "PASS",
+        "persona_experts": 5,
+        "loaded_payloads": 5,
+        "control_stages": [
+          "counterevidence-adversary",
+          "decision-judge",
+          "hypothesis-framer",
+          "independent-reviewer",
+          "synthesis-lead"
+        ]
+      },
+      {
+        "mode": "deep_team",
+        "status": "PASS",
+        "persona_experts": 10,
+        "loaded_payloads": 10,
+        "control_stages": [
+          "counterevidence-adversary",
+          "decision-judge",
+          "hypothesis-framer",
+          "independent-reviewer",
+          "synthesis-lead"
+        ]
+      },
+      {
+        "mode": "swarm",
+        "status": "PASS",
+        "persona_experts": 25,
+        "loaded_payloads": 25,
+        "control_stages": [
+          "counterevidence-adversary",
+          "decision-judge",
+          "hypothesis-framer",
+          "independent-reviewer",
+          "synthesis-lead"
+        ]
+      }
+    ],
+    "synthetic_acceptance": {
+      "returncode": 0,
+      "stdout": "{\"status\": \"PASS\", \"returncode\": 0}\n",
+      "stderr": "test_95_and_75_scoring_contract (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\ntest_auto_never_returns_solo (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\ntest_c_requires_real_calibration_and_falls_back_to_b (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\ntest_delta_card_keeps_user_output_concise (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\ntest_four_modes_and_mandatory_controls (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\ntest_outcome_telemetry_can_unlock_c_only_with_evidence (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\ntest_route_dossier_execution_contract_is_connected (test_market_leader_candidate.CandidateAcceptanceTests) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 1.921s\n\nOK\n\n"
+    }
+  },
+  "failures": [],
+  "market_leader_claim": "NOT_PROVEN",
+  "remaining_external_gates": [
+    "real host-agent task execution and paired outcome scoring",
+    "native competitor runs under the same budget",
+    "production blind tasks",
+    "external independent verifier"
+  ]
+}

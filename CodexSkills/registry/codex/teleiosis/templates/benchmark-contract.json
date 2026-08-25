@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "benchmark_id": "replace-with-benchmark-id",
+  "valid_as_of": "2026-07-26",
+  "created_at": "2026-07-26T00:00:00Z",
+  "production": true,
+  "minimum_targets": 6,
+  "tracks": [
+    "A_OPTIMIZATION",
+    "B_PRODUCTIZATION",
+    "C_ASSURANCE"
+  ],
+  "systems": [],
+  "targets": [],
+  "execution": {
+    "trials_per_cell": 3,
+    "runtime": "replace-with-runtime",
+    "model": "replace-with-model",
+    "tool_permissions": [],
+    "context_window": "replace-with-context-window",
+    "sampling": {
+      "temperature": 0,
+      "seed_policy": "record-all"
+    }
+  },
+  "budget": {
+    "max_model_tokens": 0,
+    "max_calls": 0,
+    "max_wall_seconds": 0,
+    "max_human_minutes": 0,
+    "max_monetary_cost": null
+  },
+  "judge_oracle_id": "replace-with-frozen-judge",
+  "normalization_policy": "replace-with-frozen-policy",
+  "blind_randomization_policy": "replace-with-frozen-policy",
+  "acceptance": {
+    "minimum_task_success_delta": 0,
+    "maximum_protected_regression": 0,
+    "hard_gate_compensation_allowed": false
+  },
+  "candidate_can_read_holdout": false,
+  "evidence_class": "REAL_TASK"
+}

@@ -1,0 +1,18 @@
+{
+  "status": "PASS|FAIL",
+  "records": [
+    {
+      "source_url": "https://github.com/owner/repo",
+      "source_type": "direct-peer|indirect-peer|craft-peer|method|specification",
+      "license_status": "observed license or not-applicable",
+      "mechanism": "",
+      "adopted_abstraction": "",
+      "copy_mode": "no-code-copied|attributed-code-copy",
+      "license_compatible": null,
+      "attribution_path": null,
+      "deliberately_not_adopted": "",
+      "teleiosis_extension": "",
+      "verification": []
+    }
+  ]
+}

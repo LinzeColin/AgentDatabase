@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "teleiosis://shared/LabResult/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "lab",
+    "candidate_hash",
+    "decision",
+    "findings",
+    "residual_risks",
+    "evidence_refs"
+  ],
+  "properties": {
+    "lab": {
+      "enum": [
+        "TELEIOSIS",
+        "SKILL_MARKET_LAB",
+        "PRODUCT_REALITY_LAB"
+      ]
+    },
+    "candidate_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "decision": {
+      "enum": [
+        "KEEP",
+        "REPAIR",
+        "REVERT",
+        "REHEAT",
+        "BLOCK",
+        "EVIDENCE_READY_FOR_TELEIOSIS",
+        "READY_FOR_VERIFIER",
+        "MORE_EVIDENCE_REQUIRED",
+        "FIELD_VALIDATION_PENDING"
+      ]
+    },
+    "findings": {
+      "type": "array"
+    },
+    "residual_risks": {
+      "type": "array"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

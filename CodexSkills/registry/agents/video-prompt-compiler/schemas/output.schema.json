@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VideoPromptCompilerOutput",
+  "type": "object",
+  "required": [
+    "status",
+    "route",
+    "preset",
+    "selected_prompt",
+    "evidence"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "COMPILED",
+        "ROUTED",
+        "NEEDS_REFERENCE",
+        "TRUE_3D_HANDOFF",
+        "UNKNOWN",
+        "BLOCKED"
+      ]
+    },
+    "route": {
+      "type": "string"
+    },
+    "preset": {
+      "type": "string"
+    },
+    "ir": {
+      "type": "object"
+    },
+    "precision_candidate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "expressive_candidate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "selected_prompt": {
+      "type": "string"
+    },
+    "selection_score": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "model_recommendation": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "interface_parameters": {
+      "type": "object"
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence": {
+      "type": "object"
+    }
+  }
+}

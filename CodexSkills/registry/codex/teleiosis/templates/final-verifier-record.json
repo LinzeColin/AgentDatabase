@@ -1,0 +1,22 @@
+{
+  "verifier_actor_id": "",
+  "context_id": "",
+  "provider_run_id": "",
+  "mode": "independent-read-only-verifier",
+  "read_only": true,
+  "write_actions": [],
+  "optimizer_actor_id": "",
+  "reviewed_packet_ids": [],
+  "finding_resolutions": [],
+  "verdict": "BLOCKED",
+  "evidence_paths": [],
+  "submitted_at": "",
+  "reviewed_review_hashes": {},
+  "evidence_bindings": [],
+  "attestation": {
+    "type": "runtime-tool-receipt",
+    "verification_status": "",
+    "receipt_path": "",
+    "receipt_sha256": ""
+  }
+}

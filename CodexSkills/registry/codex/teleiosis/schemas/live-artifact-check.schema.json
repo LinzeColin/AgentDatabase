@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Live Artifact Check",
+  "type": "object",
+  "required": ["status", "dry_run_only", "mock_only", "target_artifacts", "peer_artifacts"],
+  "properties": {
+    "status": {"enum": ["PASS", "BLOCKED"]},
+    "dry_run_only": {"const": false},
+    "mock_only": {"const": false},
+    "target_artifacts": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/artifact"}},
+    "peer_artifacts": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/artifact"}}
+  },
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "required": ["artifact_id", "observed_at", "observation", "freshness", "reproduction", "local_path", "sha256"],
+      "properties": {
+        "artifact_id": {"type": "string", "minLength": 1},
+        "freshness": {"enum": ["current", "current-with-limitations"]},
+        "reproduction": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    }
+  },
+  "additionalProperties": true
+}

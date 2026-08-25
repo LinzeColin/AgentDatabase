@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "teleiosis://shared/DecisionReceipt/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "candidate_hash",
+    "decision",
+    "authority",
+    "evidence_packet_hash",
+    "decided_at"
+  ],
+  "properties": {
+    "candidate_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "decision": {
+      "enum": [
+        "KEEP",
+        "REVERT",
+        "REHEAT",
+        "BLOCKED",
+        "EVIDENCE_READY_FOR_VERIFIER"
+      ]
+    },
+    "authority": {
+      "const": "teleiosis"
+    },
+    "evidence_packet_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "decided_at": {
+      "type": "string"
+    }
+  }
+}

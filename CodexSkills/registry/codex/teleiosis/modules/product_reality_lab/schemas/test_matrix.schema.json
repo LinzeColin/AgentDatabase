@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linze.local/schemas/product-reality-lab/test-matrix.schema.json",
+  "title": "Test Matrix",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "tests"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "test_id",
+          "risk",
+          "target_ids",
+          "action_sequence",
+          "oracle_ids",
+          "priority",
+          "status",
+          "critical"
+        ],
+        "properties": {
+          "test_id": {
+            "type": "string"
+          },
+          "requirement_or_claim": {
+            "type": "string"
+          },
+          "risk": {
+            "type": "string"
+          },
+          "target_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "data_condition": {
+            "type": "string"
+          },
+          "fault_condition": {
+            "type": "string"
+          },
+          "action_sequence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "oracle_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "priority": {
+            "type": "number"
+          },
+          "adapter": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "NOT_RUN",
+              "RUNNING",
+              "OBSERVED_EXPECTED",
+              "OBSERVED_DEVIATION",
+              "BLOCKED",
+              "WAIVED"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "defect_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "critical": {
+            "type": "boolean"
+          },
+          "negative_control": {
+            "type": "boolean"
+          },
+          "negative_control_effective": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

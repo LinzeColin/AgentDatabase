@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linze.local/schemas/product-reality-lab/coverage-ledger.schema.json",
+  "title": "Coverage Ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "dimensions",
+    "gates",
+    "waivers"
+  ],
+  "$defs": {
+    "coverage_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_id",
+        "source_ref",
+        "critical",
+        "status",
+        "evidence_refs"
+      ],
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "critical": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "UNCOVERED",
+            "COVERED",
+            "WAIVED"
+          ]
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "waiver_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "critical_total",
+        "critical_covered",
+        "critical_waived",
+        "noncritical_total",
+        "noncritical_covered",
+        "evidence_refs",
+        "waiver_ids",
+        "items"
+      ],
+      "properties": {
+        "critical_total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "critical_covered": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "critical_waived": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "noncritical_total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "noncritical_covered": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "waiver_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/coverage_item"
+          }
+        }
+      }
+    },
+    "waiver": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "scope",
+        "reason",
+        "owner",
+        "expires_at",
+        "compensating_control",
+        "evidence_refs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expires_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compensating_control": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "surface",
+        "state",
+        "transition",
+        "role",
+        "data",
+        "fault",
+        "oracle",
+        "evidence"
+      ],
+      "properties": {
+        "surface": {
+          "$ref": "#/$defs/dimension"
+        },
+        "state": {
+          "$ref": "#/$defs/dimension"
+        },
+        "transition": {
+          "$ref": "#/$defs/dimension"
+        },
+        "role": {
+          "$ref": "#/$defs/dimension"
+        },
+        "data": {
+          "$ref": "#/$defs/dimension"
+        },
+        "fault": {
+          "$ref": "#/$defs/dimension"
+        },
+        "oracle": {
+          "$ref": "#/$defs/dimension"
+        },
+        "evidence": {
+          "$ref": "#/$defs/dimension"
+        }
+      }
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "open_p0",
+        "open_p1",
+        "unwaived_inventory_diff",
+        "unresolved_contradictions",
+        "consecutive_deep_runs_without_new_p0_p1",
+        "field_validation_required",
+        "field_validation_complete",
+        "rollback_verified",
+        "subject_stable"
+      ],
+      "properties": {
+        "open_p0": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "open_p1": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unwaived_inventory_diff": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unresolved_contradictions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "consecutive_deep_runs_without_new_p0_p1": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "field_validation_required": {
+          "type": "boolean"
+        },
+        "field_validation_complete": {
+          "type": "boolean"
+        },
+        "rollback_verified": {
+          "type": "boolean"
+        },
+        "subject_stable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "waivers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/waiver"
+      }
+    },
+    "cost_metrics": {
+      "type": "object"
+    },
+    "discovery_curve": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "capabilities": [
+    {
+      "acceptance": "参赛对象、版本、代码或 Skill 哈希、适配器类型和原生状态可追溯。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A001",
+      "mandatory": true,
+      "name_zh": "参赛身份冻结"
+    },
+    {
+      "acceptance": "评分、预算、数据、模型、重复、种子、停止条件在运行前冻结哈希。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A002",
+      "mandatory": true,
+      "name_zh": "竞技协议冻结"
+    },
+    {
+      "acceptance": "同数据、同模型、同规则、同总预算；差异必须显式披露。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A003",
+      "mandatory": true,
+      "name_zh": "同场公平合同"
+    },
+    {
+      "acceptance": "开发场可迭代；密封场不可被 Candidate 读取或重复刷分。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A004",
+      "mandatory": true,
+      "name_zh": "开发场与密封场隔离"
+    },
+    {
+      "acceptance": "开发、选择、隐藏 IID、隐藏 OOD、红队、回归相互隔离。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A005",
+      "mandatory": true,
+      "name_zh": "数据分区"
+    },
+    {
+      "acceptance": "检测隐藏数据暴露、评分规则改写、跨 Candidate 拼证和删分母。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A006",
+      "mandatory": true,
+      "name_zh": "泄漏与污染防线"
+    },
+    {
+      "acceptance": "候选数、模型调用、Token、费用、墙钟、CPU/GPU、重试、人工干预齐全。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A007",
+      "mandatory": true,
+      "name_zh": "预算账本"
+    },
+    {
+      "acceptance": "重复次数、种子、失败运行和停止原因完整记录。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A008",
+      "mandatory": true,
+      "name_zh": "重复与随机种子"
+    },
+    {
+      "acceptance": "隐藏质量、最弱切片、硬约束、红队、回归、成本独立计算。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A009",
+      "mandatory": true,
+      "name_zh": "经验效果主榜"
+    },
+    {
+      "acceptance": "版本、谱系、数据隔离、证据、回滚、发布门独立计分，不混入效果主榜。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A010",
+      "mandatory": true,
+      "name_zh": "治理能力榜"
+    },
+    {
+      "acceptance": "质量、安全、稳定、成本等多目标前沿可复核。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A011",
+      "mandatory": true,
+      "name_zh": "Pareto 前沿"
+    },
+    {
+      "acceptance": "报告配对差值、置信区间、胜率、方差及样本规模。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A012",
+      "mandatory": true,
+      "name_zh": "配对统计与区间"
+    },
+    {
+      "acceptance": "安全、真实性、权限、数据、泄漏任一硬失败即阻断 Candidate。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A013",
+      "mandatory": true,
+      "name_zh": "硬门裁决"
+    },
+    {
+      "acceptance": "在冻结成本口径下计算，不以无限预算换取虚假领先。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A014",
+      "mandatory": true,
+      "name_zh": "成本效率"
+    },
+    {
+      "acceptance": "L1 结构、L2 模拟、L3 原生、L4 生产盲测不可混淆。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A015",
+      "mandatory": true,
+      "name_zh": "原生与代理证据等级"
+    },
+    {
+      "acceptance": "失败样本、诊断、尝试、保留或丢弃原因可用于下一轮但不污染密封场。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A016",
+      "mandatory": true,
+      "name_zh": "失败轨迹"
+    },
+    {
+      "acceptance": "协议、环境、输入、结果、哈希和重放结论完整。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A017",
+      "mandatory": true,
+      "name_zh": "可复现性"
+    },
+    {
+      "acceptance": "Arena 只能产证，不能自称正式 PASS 或修改终审规则。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A018",
+      "mandatory": true,
+      "name_zh": "外部 Verifier 交接"
+    },
+    {
+      "acceptance": "GEPA、AutoResearch、MetaHarness、Promptfoo 原生执行必须显式版本、命令、预算和证据。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A019",
+      "mandatory": true,
+      "name_zh": "官方原生 Adapter 合同"
+    },
+    {
+      "acceptance": "Arena 结果绑定 CandidateIdentity、Acceptance hash、数据 hash 和环境快照。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A020",
+      "mandatory": true,
+      "name_zh": "冻结 Subject 身份"
+    },
+    {
+      "acceptance": "主榜提供等候选、等 Token、等货币或明示不可比的预算证明。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A021",
+      "mandatory": true,
+      "name_zh": "预算平价证明"
+    },
+    {
+      "acceptance": "冻结模拟协议可重放并对非墙钟字段逐字段一致。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A022",
+      "mandatory": true,
+      "name_zh": "确定性重放"
+    },
+    {
+      "acceptance": "Arena 结果、失败轨迹、预算账本和哈希可直接进入 Verifier handoff。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "A023",
+      "mandatory": true,
+      "name_zh": "外部验收证据包"
+    }
+  ],
+  "capability_count": 23,
+  "module": "A",
+  "schema_version": "teleiosis.capability_manifest.v5",
+  "scope_mode": "FULL_NO_ROUTING",
+  "slug": "arena_lab",
+  "version": "v0.0.0.5"
+}

@@ -1,0 +1,12 @@
+{
+  "label": "review",
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "scripts/teleiosis.py",
+    "review"
+  ],
+  "returncode": 0,
+  "seconds": 0.548,
+  "stdout_sha256": "be90e474c85b3450ddbd6fae6bb5ecc7701edcd867cf2a1c6f5bb93b41818e76",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,52 @@
+{
+  "$id": "teleiosis://schemas/run-state.v5",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "current_candidate": {
+      "type": "object"
+    },
+    "events": {
+      "type": "array"
+    },
+    "hash_chain_head": {
+      "type": "string"
+    },
+    "next_stage_index": {
+      "maximum": 36,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "teleiosis.run_state.v5"
+    },
+    "sequence": {
+      "maxItems": 36,
+      "minItems": 36,
+      "type": "array"
+    },
+    "status": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "workspace": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_id",
+    "subject",
+    "workspace",
+    "status",
+    "sequence",
+    "next_stage_index",
+    "current_candidate"
+  ],
+  "type": "object"
+}

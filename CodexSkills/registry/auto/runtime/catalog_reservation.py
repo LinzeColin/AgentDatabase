@@ -129,22 +129,9 @@ def _canonical_json(value: object) -> bytes:
 
 
 def _alias_specs() -> Tuple[AliasSpec, ...]:
-    rows = [
-        AliasSpec(
-            "codex",
-            "frontend-slides/references/beautiful-html-templates",
-            "../../beautiful-html-templates/references/beautiful-html-templates",
-            "beautiful-html-templates/references/beautiful-html-templates",
-            "DIRECTORY",
-        ),
-        AliasSpec(
-            "codex",
-            "guizang-ppt-skill/references/beautiful-html-templates",
-            "../../beautiful-html-templates/references/beautiful-html-templates",
-            "beautiful-html-templates/references/beautiful-html-templates",
-            "DIRECTORY",
-        ),
-    ]
+    # 2026-08-24：删除 beautiful-html-templates 的两条 alias —— 该 skill 已从三侧移除，
+    # 留在合同里会让 walk 阶段恒报 SOURCE_ALIAS_TARGET_MISSING。
+    rows = []
     for skill in (
         "gsap-core",
         "gsap-frameworks",
@@ -156,16 +143,19 @@ def _alias_specs() -> Tuple[AliasSpec, ...]:
         "gsap-timeline",
         "gsap-utils",
     ):
-        for alias_name in ("CLAUDE.md", "GEMINI.md"):
-            rows.append(
-                AliasSpec(
-                    "codex",
-                    f"{skill}/references/gsap-skills/{alias_name}",
-                    "AGENTS.md",
-                    f"{skill}/references/gsap-skills/AGENTS.md",
-                    "REGULAR_FILE",
+        # 2026-08-24：gsap 这组 alias 在 codex / claude / agents 三侧都真实存在，
+        # 但合同此前只登记了 codex 一侧 —— 导致 SOURCE_ALIAS_SET_DRIFT 恒真，同步从未跑通。
+        for source_namespace in ("agents", "claude", "codex"):
+            for alias_name in ("CLAUDE.md", "GEMINI.md"):
+                rows.append(
+                    AliasSpec(
+                        source_namespace,
+                        f"{skill}/references/gsap-skills/{alias_name}",
+                        "AGENTS.md",
+                        f"{skill}/references/gsap-skills/AGENTS.md",
+                        "REGULAR_FILE",
+                    )
                 )
-            )
     return tuple(
         sorted(
             rows,
@@ -178,7 +168,7 @@ def _alias_specs() -> Tuple[AliasSpec, ...]:
 
 
 EXPECTED_SOURCE_ALIASES = _alias_specs()
-EXPECTED_SOURCE_ALIAS_COUNT = 20
+EXPECTED_SOURCE_ALIAS_COUNT = 54
 
 
 def alias_set_digest(aliases: Sequence[AliasSpec]) -> str:

@@ -1,0 +1,22 @@
+{
+  "allowed": [
+    {
+      "purpose": "semantic plan, install, candidate control, Arena scoring, frozen tests and rollback",
+      "skill": "teleiosis packaged implementation scripts"
+    },
+    {
+      "purpose": "environment-bound last-mile compatibility only",
+      "skill": "repository-native implementation/testing/deployment skills required by target AGENTS.md"
+    }
+  ],
+  "forbidden_during_build": [
+    "market re-research",
+    "new Teleiosis run",
+    "persona-distiller-group redesign",
+    "verifier scope redefinition",
+    "new product design",
+    "standalone Lab creation"
+  ],
+  "reason": "Preparation review and acceptance are frozen before Build Last Mile.",
+  "schema_version": "teleiosis.build_skill_allowlist.v5"
+}

@@ -1,0 +1,19 @@
+flowchart LR
+  Owner[Owner 冻结 Scope 与 Acceptance] --> Stage0[Stage 0 Semantic Reconcile]
+  Stage0 --> C0[(连续 Candidate)]
+  subgraph Suite[一个 Teleiosis Skill]
+    T[T / Raw Teleiosis] --> C1[(Candidate Revision)]
+    C1 --> S[S / Skill Market Lab]
+    S --> C2[(Candidate Revision)]
+    C2 --> P[P / Product Reality Lab]
+    P --> C3[(Candidate Revision)]
+    C3 --> A[A / Arena Lab]
+    A --> C4[(Candidate Revision)]
+    C4 --> T
+  end
+  C0 --> T
+  A --> DevArena[Development Arena]
+  A --> SealedArena[Sealed Arena]
+  SealedArena --> Handoff[冻结 Verifier Handoff]
+  Handoff --> Verifier[External Verifier / 唯一 Formal PASS]
+  Verifier -->|PASS/FAIL/CONDITIONAL| Owner

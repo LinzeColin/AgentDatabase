@@ -1,0 +1,18 @@
+{
+  "name": "product",
+  "purpose": "product, component, material and packshot",
+  "priorities": [
+    "shape_lock",
+    "surface_material",
+    "controlled_reflection",
+    "camera_path",
+    "scale_cues",
+    "brand_text"
+  ],
+  "avoid": [
+    "geometry_drift",
+    "extra_parts",
+    "illegible_text",
+    "unmotivated_particles"
+  ]
+}

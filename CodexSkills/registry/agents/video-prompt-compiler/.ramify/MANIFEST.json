@@ -1,0 +1,12 @@
+{
+  "project": "video-prompt-compiler",
+  "version": "v0.0.0.2",
+  "state": "PROPOSED_NOT_COMMITTED",
+  "generated_on": "2026-08-17",
+  "canonical_files": [
+    "KERNEL.md",
+    "DECISIONS.md",
+    "HANDOFF.md"
+  ],
+  "integrity_note": "Semantic draft manifest; no committed repository state is claimed."
+}

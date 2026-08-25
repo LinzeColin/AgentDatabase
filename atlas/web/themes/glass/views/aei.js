@@ -1,0 +1,166 @@
+import { esc, fmt, pct, go, enter, topicColor, S } from '../../../core/app.js';
+import * as D from '../../../core/select.js';
+import { fitCanvas, cssVar } from '../../../core/g3d.js';
+import { sec, bento, orbit, drawer, table, warn, pill, state } from '../kit.js';
+
+export async function render(host) {
+  const E = D.A().aei, P = E.primitives, N = E.sessions_total;
+  const modeOrder = ['指派', '反馈环', '迭代', '学习', '校验', '未归类'];
+  const MODE_COL = { '指派': '#5ce6b4', '反馈环': '#2fae86', '迭代': '#7cc4ff', '学习': '#b58cff', '校验': '#63d2ff', '未归类': '#5a6480' };
+  const css = k => cssVar(k);
+  // 五组原语共 59 条轨道条，同色同宽读起来是一堵墙。按组换色断开同质感。
+  const bands = (o, c) => orbit((o.bands || Object.keys(o.counts)).filter(b => o.counts[b])
+    .map(b => ({ k: b, v: o.counts[b], label: `${o.counts[b]}　${pct(o.counts[b] / N)}`, c: c || 'var(--acc)' })));
+
+  const AL = E.alignment || {}, SE = E.automation_series || {}, BH = E.by_harness || {}, EC = E.effective_coverage || {};
+  host.innerHTML = `
+${sec('对齐到什么程度', esc(AL.note || ''))}
+${bento([
+  { k: 'AEI 对齐度', v: `${((AL.score || 0) * 100).toFixed(0)}%`, w: 3, tone: 'acc',
+    n: `逐条算出来的，不是拍的：${esc(AL.formula || '')}` },
+  { k: '构成', v: `${AL.full || 0} 对齐 · ${AL.proxy || 0} 替代 · ${AL.none || 0} 做不到`,
+    size: 'sm', w: 3, n: '「做不到」那几条是原理上做不到，硬凑才是退步' },
+])}
+${drawer(`逐条看这 ${(AL.items || []).length} 项`, table(
+  [{ t: '项' }, { t: '程度' }, { t: '为什么' }],
+  (AL.items || []).map(it => [`<b>${esc(it.item)}</b>`,
+    state(it.level === 'full' ? '通' : it.level === 'proxy' ? '不确定' : '没做'),
+    esc(it.why)])))}
+
+${sec('automation 率是会翻方向的', esc(SE.verdict || ''))}
+${orbit((SE.weeks || []).map(w => ({ k: w.w, v: w.automation,
+  label: `${(w.automation * 100).toFixed(0)}%　${w.n} 场`,
+  c: w.automation >= 0.5 ? 'var(--acc)' : 'var(--acc2)' })))}
+${warn(esc(SE.note || ''))}
+
+${sec('按来源分开报', esc(BH.note || ''))}
+${orbit((BH.rows || []).map(r => ({ k: r.source, v: r.automation,
+  label: `${(r.automation * 100).toFixed(1)}%　${r.n} 场`, c: 'var(--acc)' })))}
+${BH.spread != null ? warn(`<b>各来源之间差 ${(BH.spread * 100).toFixed(1)} 个百分点。</b>
+  差得越大，「一个总的 automation 率」就越没有意义 —— 这正是 AEI v3 分开报的理由。`) : ''}
+
+${sec('覆盖率 vs 有效覆盖率', esc(EC.note || ''))}
+${bento([
+  { k: '覆盖率', v: pct(EC.coverage), n: '有多少场判得出领域' },
+  { k: '成功率', v: pct(EC.success_rate), n: esc(EC.denominator_note || '') },
+  { k: '有效覆盖率', v: pct(EC.effective), tone: 'acc', n: '两者相乘 —— AEI 明确区分这两个' },
+])}
+${warn(esc(EC.success_caveat || ''))}
+
+${sec('经济指数', esc(E.framework))}
+${bento([
+  { k: '自动化份额', v: pct(E.headline.automation), n: '指派 + 反馈环', w: 3, tone: 'acc' },
+  { k: '增强份额', v: pct(E.headline.augmentation), n: '迭代 + 学习 + 校验', w: 3, alt: true },
+  { k: '平均 AI 自主度', v: `${P.autonomy.avg}/5`, n: '1 全程在场 · 5 完全委派' },
+  { k: '中位加速', v: P.complexity.speedup_median ? P.complexity.speedup_median + '×' : '说不准', n: `能算的 ${P.complexity.speedup_n} 场` },
+  { k: '领域集中度', v: E.concentration.domain_hhi ?? '说不准', n: 'HHI 0 摊开 · 1 全压一件事' },
+])}
+<canvas class="viz" id="donut" height="250" role="img" aria-label="协作模式与作息节律图。判据与逐行明细见下方表格。"></canvas>
+${drawer('五种模式的判据（AEI 原定义）', table([{ t: '模式' }, { t: 'EN' }, { t: '归属' }, { t: '判据' }],
+  modeOrder.filter(m => E.modes[m]).map(m =>
+    [`<b>${esc(m)}</b>`, esc(E.mode_defs[m].en), esc(E.mode_defs[m].group), esc(E.mode_defs[m].desc)])))}
+
+${sec('五个经济原语', 'AEI 的骨架。每一项的口径都写在下面，做不到的在最后单独列。')}
+<div class="sub">① 任务有多难</div><p class="hint">${esc(P.complexity.note)}</p>${bands(P.complexity, 'var(--acc)')}
+<div class="sub">② 用到哪一层本事</div><p class="hint">${esc(P.skill.note)}</p>${bands(P.skill, 'var(--acc2)')}
+<div class="sub">③ 拿来干嘛</div>${bands({ counts: P.use_case.counts, bands: ['工作', '学习', '个人'] }, 'var(--ok)')}
+<div class="sub">④ 放手到什么程度</div><p class="hint">${esc(P.autonomy.note)}</p>
+${orbit(Object.entries(P.autonomy.counts).map(([k, v]) =>
+  ({ k: P.autonomy.labels[k] || k, v, label: `${v}　${pct(v / N)}`, c: 'var(--acc2)' })))}
+<div class="sub">⑤ 到底做成了没有</div><p class="hint">${esc(P.success.note)}</p>${bands(P.success, 'var(--warn)')}
+
+${sec('领域：碰过的比例与真做成的比例率', '真做成的比例率 = 碰过的比例 × 成功率。AEI 用它区分「碰过」与「真的做成了」。')}
+${orbit(E.domains.map(r => ({ k: r.domain, v: r.coverage,
+  label: `覆盖 ${pct(r.coverage)}　有效 ${r.effective_coverage == null ? '—' : pct(r.effective_coverage)}　${r.n} 场`,
+  c: 'var(--acc)' })))}
+${drawer('展开领域明细', table(
+  [{ t: '领域' }, { t: '会话', r: true }, { t: '碰过的比例', r: true }, { t: '真做成的比例', r: true },
+   { t: '成功率', r: true }, { t: '自动化', r: true }, { t: '自主度', r: true },
+   { t: '新token/场', r: true }, { t: '缓存占比', r: true }],
+  E.domains.map(r => [esc(r.domain), String(r.n), pct(r.coverage),
+    r.effective_coverage == null ? state('说不准') : pct(r.effective_coverage),
+    r.success_rate == null ? state('说不准') : pct(r.success_rate),
+    r.automation == null ? '—' : pct(r.automation), r.autonomy_avg ?? '—',
+    fmt(r.tokens_per_session), pct(r.cache_ratio)])))}
+${E.domains_unclassified ? warn(`另有 <b>${E.domains_unclassified}</b> 场一个领域词都没命中，如实标未归类。`) : ''}
+
+${sec('产物分类', esc(E.artifacts_note))}
+${orbit(E.artifacts.map(a => ({ k: a.artifact, v: a.n, label: `${fmt(a.n)}　${pct(a.share)}`, c: 'var(--acc2)' })))}
+
+${sec('上下文分布', esc(E.context.note))}
+${orbit(E.context.rows.slice(0, 14).map(r => ({ k: r.context, v: r.n,
+  label: `${r.n} 场　${fmt(r.tokens)} 新token`, c: 'var(--acc)' })))}
+
+${sec('Cadence', esc(E.cadence.note))}
+<canvas class="viz" id="cad" height="210" role="img" aria-label="协作模式与作息节律图。判据与逐行明细见下方表格。"></canvas>
+
+${sec('转换轨迹', esc(E.transition.note))}
+${orbit(E.transition.drift.map(x => ({ k: x.domain, v: Math.abs(x.delta) * 1000,
+  label: `${pct(x.early)} → ${pct(x.late)}　${x.delta >= 0 ? '↑' : '↓'}${(Math.abs(x.delta) * 100).toFixed(1)}`,
+  c: x.delta >= 0 ? 'var(--ok)' : 'var(--bad)' })))}
+
+${sec('ROI')}
+${E.roi.state === '通' ? bento([
+  { k: '每条提交平摊', v: fmt(E.roi.tokens_per_commit), n: '个新 token', w: 3, tone: 'warn' },
+  { k: '新 token 合计', v: fmt(E.roi.tokens_total), n: `缓存另有 ${fmt(E.roi.cache_total)}`, w: 3, alt: true },
+  { k: '每条提交要几场', v: String(E.roi.sessions_per_commit), n: '场会话' },
+  { k: '只聊没交付', v: `${E.roi.days_talk_only} 天`, n: `重合率 ${pct(E.roi.overlap_rate)}` },
+]) + warn(esc(E.roi.cost_basis) + '<br>' + esc(E.roi.note)) : warn(`<b>状态：说不准。</b>${esc(E.roi.why || '')}`)}
+
+${sec('机会挖掘', '三条规则：高委派＝已定型可产品化；低成功＋高投入＝在流血；低自主度＝护城河或负债。')}
+${E.opportunity.map(o => `<div class="card w6">
+  <div class="ck">${esc(o.kind)}　${pill(o.domain)}　${o.n} 场</div>
+  <div class="cn" style="margin-top:8px;font-size:13.5px">${esc(o.why)}</div></div>`).join('')}
+
+${sec('做不到的', 'AEI 有而这里没有的，逐条列出来 —— 不含糊过去。')}
+${drawer('展开', table([{ t: '项' }, { t: '为什么没有' }],
+  E.not_measured.map(x => [`<b>${esc(x.item)}</b>`, esc(x.why)])))}`;
+
+  const drawDonut = () => {
+    const cv = host.querySelector('#donut'); if (!cv) return;
+    const { ctx, w } = fitCanvas(cv, 250);
+    const h = 250, cx = w / 2, cy = h / 2, R = Math.max(24, Math.min(92, h / 2 - 34));
+    ctx.clearRect(0, 0, w, h);
+    let a0 = -Math.PI / 2; ctx.lineWidth = 32;
+    for (const m of modeOrder) {
+      const v = E.modes[m] || 0; if (!v) continue;
+      const a1 = a0 + (v / N) * 6.2832;
+      ctx.strokeStyle = MODE_COL[m];
+      ctx.beginPath(); ctx.arc(cx, cy, R, a0, a1); ctx.stroke();
+      const mid = (a0 + a1) / 2;
+      if (v / N > 0.05) { ctx.fillStyle = css('--fg'); ctx.textAlign = 'center';
+        ctx.font = '600 12.5px -apple-system, system-ui, sans-serif';
+        ctx.fillText(`${m} ${(v / N * 100).toFixed(0)}%`, cx + Math.cos(mid) * (R + 36), cy + Math.sin(mid) * (R + 36) + 4); }
+      a0 = a1;
+    }
+    ctx.textAlign = 'center'; ctx.fillStyle = css('--dim');
+    ctx.font = '12px -apple-system, system-ui, sans-serif'; ctx.fillText('自动化', cx, cy - 8);
+    ctx.fillStyle = css('--fg'); ctx.font = '700 26px -apple-system, system-ui, sans-serif';
+    ctx.fillText(pct(E.headline.automation), cx, cy + 20); ctx.textAlign = 'left';
+  };
+  const drawCad = () => {
+    const cv = host.querySelector('#cad'); if (!cv) return;
+    const { ctx, w } = fitCanvas(cv, 210);
+    const h = 210, padL = 48, padT = 20, padB = 16;
+    ctx.clearRect(0, 0, w, h);
+    const cw = (w - padL - 12) / 24, ch = (h - padT - padB) / 7;
+    const mx = Math.max(1, ...E.cadence.grid.map(g => g.n));
+    ctx.font = '10.5px -apple-system, system-ui, sans-serif'; ctx.fillStyle = css('--dim2');
+    E.cadence.weekday_labels.forEach((l, i) => ctx.fillText(l, 8, padT + i * ch + ch * .7));
+    for (let hh = 0; hh < 24; hh += 3) ctx.fillText(String(hh).padStart(2, '0'), padL + hh * cw, padT - 7);
+    for (const g of E.cadence.grid) {
+      const a = g.n / mx;
+      ctx.fillStyle = css('--acc'); ctx.globalAlpha = 0.1 + a * 0.9;
+      ctx.beginPath();
+      ctx.roundRect(padL + g.h * cw + 1, padT + g.wd * ch + 1, Math.max(1, cw - 2), Math.max(1, ch - 2), 3);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  };
+  const all = () => { drawDonut(); drawCad(); };
+  all();
+  const onR = () => all();
+  addEventListener('resize', onR); addEventListener('atlas:theme', onR);
+  enter('.sec, .card, .orow', host);
+  return { dispose() { removeEventListener('resize', onR); removeEventListener('atlas:theme', onR); } };
+}

@@ -1,0 +1,19 @@
+{
+  "name": "3d_concept",
+  "purpose": "aigc 3d-looking concept visualization",
+  "priorities": [
+    "geometry_readability",
+    "material",
+    "camera_angle",
+    "section_or_reveal",
+    "light",
+    "animation",
+    "concept_disclaimer"
+  ],
+  "avoid": [
+    "fake_measurements",
+    "fake_simulation",
+    "unexplained_parts",
+    "geometry_drift"
+  ]
+}

@@ -1,7 +1,7 @@
 interface:
   display_name: "信息费更新"
   short_description: "红圈查主合同并写入正式月份申请表和明细表"
-  default_prompt: "Use $info-fee-update to query 红圈主合同, then update the official current-month 信息费申请表 and the append-only 信息费明细表. Map the 信息费对象 to 收款人、联系方式、职务; use 其它说明 only for business remarks or opening requirements."
+  default_prompt: "Use $info-fee-update to query 红圈主合同, then update the official current-month 信息费申请表 and the append-only 信息费明细表. Continue through a saved-credential 红圈 login by clicking 登录 when authorized, but never type or expose credentials. Map the 信息费对象 to 收款人、联系方式、职务; retain supplied partial names such as 徐经理 without inventing a full name; use 其它说明 only for business remarks or opening requirements. Embed every user-supplied screenshot below the form on the matching original application sheet, never in a separate evidence sheet."
 
 policy:
   allow_implicit_invocation: true

@@ -1,0 +1,124 @@
+{
+  "schema_version": "2.2",
+  "owner_input": {
+    "repository": "",
+    "target_project": {
+      "name": "",
+      "path": ""
+    },
+    "expected_outcome": "",
+    "product_design_taskpack": {
+      "source": "",
+      "authorization_reference": "",
+      "authorized_pack_digest_sha256": ""
+    },
+    "delivery_reference": "",
+    "source_documents": [],
+    "environment_or_url": "",
+    "notes": ""
+  },
+  "preferences": {
+    "decision_scope": "release_candidate",
+    "profile": "auto",
+    "language": "zh-CN",
+    "release_intent": "none",
+    "baseline_reference": "",
+    "allow_safe_local_setup": true,
+    "allow_network_read": true,
+    "allow_third_party_write": false,
+    "allow_production_write": false,
+    "allow_real_payment_email_sms": false,
+    "load_test_authorized": false,
+    "active_security_scan_authorized": false,
+    "fault_injection_authorized": false,
+    "destructive_data_test_authorized": false
+  },
+  "access_and_data": {
+    "test_account_references": [],
+    "credential_source": "",
+    "data_classification": "synthetic",
+    "seed_or_snapshot": "",
+    "reset_command": "",
+    "cleanup_command": "",
+    "invariants": []
+  },
+  "quality_gates": {
+    "functional": [],
+    "data": [],
+    "performance": {
+      "workload_model": "",
+      "target_concurrency": null,
+      "target_rps": null,
+      "p95_ms_max": null,
+      "p99_ms_max": null,
+      "error_rate_max": null
+    },
+    "resilience": {
+      "recovery_seconds_max": null,
+      "rto_seconds_max": null,
+      "rpo_seconds_max": null
+    }
+  },
+  "release": {
+    "strategy": "",
+    "rollout_groups": [],
+    "health_signals": [],
+    "business_invariants": [],
+    "required_bake_seconds": null,
+    "abort_conditions": [],
+    "rollback_or_rollforward": ""
+  },
+  "ai_system": {
+    "expected_applicable": null,
+    "task_distribution_reference": "",
+    "external_action_limits": [],
+    "max_cost": null,
+    "max_steps": null,
+    "independent_evaluator_preference": "deterministic_or_cross_model"
+  },
+  "safety": {
+    "target_allowlist": [],
+    "max_vus": null,
+    "max_rps": null,
+    "max_duration_seconds": null,
+    "max_requests": null,
+    "max_cost": null,
+    "abort_conditions": [],
+    "kill_command": "",
+    "rollback_or_restore": ""
+  },
+  "evidence": {
+    "output_root": "",
+    "private_sensitive_evidence_root": "",
+    "retention_days": 30
+  },
+  "execution_budget": {
+    "max_commands": null,
+    "max_elapsed_seconds": null,
+    "max_output_bytes": null
+  },
+  "command_policy": {
+    "allowed_argv": [],
+    "allowed_working_directories": [],
+    "allowed_network_targets": [],
+    "forbidden_patterns": [
+      "curl ... | sh",
+      "shell=True",
+      "credential export"
+    ],
+    "budget_exhaustion_action": "STOP_AND_REPORT_PARTIAL"
+  },
+  "review_panel": {
+    "required_roles": 6,
+    "rounds": 2,
+    "require_fresh_context_for_critical_positive": true,
+    "same_context_roles_count_as_independent": false
+  },
+  "evidence_policy": {
+    "classification": "internal",
+    "private_evidence_root": "",
+    "external_sharing_authorized": false,
+    "redaction_required": true,
+    "retention_expires_at": ""
+  }
+}

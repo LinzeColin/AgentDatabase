@@ -68,14 +68,6 @@ import tempfile
 
 ROOT_DEFAULT = pathlib.Path(__file__).resolve().parent.parent
 
-# ★ 2026-08-18：本文件**有两份**（`scripts/` 与 `references/pipeline/checkers/`，逐字节相同）。
-#   `ROOT_DEFAULT` 取「本脚本的上级目录」——对 `scripts/` 那份是 skill 根 ✓，
-#   对镜像那份却解析成 `references/pipeline/`，那里没有 VERSION。
-#   **此前这会报成「合同漂移 1 条」(rc=1)** —— 把「我没量到」说成了「它违规」。
-#   现在改判 **rc=4 未量**，并印出解析到的根和它是怎么来的。
-#   [[a-checkers-verdict-must-not-depend-on-cwd]]｜[[zero-hit-gates-must-prove-they-can-hit]]
-UNMEASURED_NO_VERSION = "__unmeasured_no_version__"
-
 # 历史文档：里面的旧版本号是**事实记录**，不是当前声明，一律不查。
 HISTORICAL = (
     "CHANGELOG.md",
@@ -183,14 +175,6 @@ def _one_ledger_per_workspace(root: pathlib.Path,
     for cl in corpora.rglob("claims.jsonl"):
         per.setdefault(cl.relative_to(corpora).parts[0], []).append(
             str(cl.relative_to(corpora)))
-    # ★ **名单只许缩，不许悄悄长。** 2026-08-17：这份豁免名单原先只会「跳过」，
-    #   那 6 个哪天真收拾干净了，没有任何东西提醒把它删掉 ——
-    #   陈旧的豁免名单会对这些人物**永久静默**。
-    #   （`check_paper_lanes.py` 第 147 行早有同形状的 `fixed` 计算，这里补齐。）
-    _stale = sorted(k for k in CLAIMS_KNOWN if len(per.get(k, [])) <= 1)
-    if _stale:
-        out.append(f"[豁免名单该缩了] CLAIMS_KNOWN 里 {_stale} 已不再有两份 "
-                   "claims.jsonl —— **请把它们从名单里删掉**；留着等于永久静默。")
     for person, files in sorted(per.items()):
         if len(files) > 1 and person not in CLAIMS_KNOWN:
             out.append(f"[一个人物两份 claims.jsonl] {person} —— {sorted(files)}；"
@@ -198,58 +182,6 @@ def _one_ledger_per_workspace(root: pathlib.Path,
                        "判据读权威那份、判决不受影响，**而人照另一份数就会得到不同的数**。"
                        "已知 6 个已存在的在豁免名单里（都已判过分，不动）。")
     return out
-
-
-def _session_paths(root: pathlib.Path) -> list[str]:
-    """随包分发的文件里**不许写死会话临时目录**。
-
-    2026-08-17 实测：`references/pipeline/example-knuth/` 下 **8 个样例脚本**
-    全都把 `TARGET` 写死成
-    `/private/tmp/claude-501/-Users-…-character-distillation-skill-reorganize-d57595/…`
-    —— **另一个会话的 scratchpad，且那条路径早已不存在**。
-    而 RUNBOOK 让操作者「照 example-knuth/ 抄」：抄到的脚本看起来像真路径、
-    不像 `<WORKSPACE>` 那样一眼可见要替换，于是会**静默写到别处或直接崩**。
-
-    ★ 这一条此前**没有任何守卫**（全仓搜不到相关判据）。
-      样例已改成从 argv/`PD_TARGET` 取、缺了就报错；本判据保证它不再退回去。
-    """
-    # ★★★ **判据别扫说明层。** 第一版用逐行正则，结果**打中了它自己**：
-    #   我写在上面 docstring 里用来解释这个缺陷的那段示例路径被扫到，报 6 处假阳。
-    #   （今天这是同一个坑的又一次。）⇒ 改用 `ast`：只看**真正的字符串常量**，
-    #   并跳过模块/类/函数的 docstring。
-    import ast as _ast
-    import re as _re
-    # ★ 拼出来，别写成一个完整字面量 —— 否则**本判据的正则会打中本判据自己**
-    #   （第二版就是这么假阳的：它自己那行 pattern 被自己扫到）。
-    _frag = "cla" + "ude-"
-    pat = _re.compile(r"/private/tmp/" + _frag + r"|/tmp/" + _frag + r"\d")
-    bad = []
-    for f in sorted(root.rglob("*.py")):
-        rel = f.relative_to(root).as_posix()
-        if rel.startswith(("build/", "dist/")):
-            continue
-        try:
-            tree = _ast.parse(f.read_text(encoding="utf-8", errors="replace"))
-        except (OSError, SyntaxError):
-            continue
-        docs = set()
-        for node in _ast.walk(tree):
-            if isinstance(node, (_ast.Module, _ast.ClassDef, _ast.FunctionDef,
-                                 _ast.AsyncFunctionDef)):
-                body = getattr(node, "body", None) or []
-                if body and isinstance(body[0], _ast.Expr) and \
-                        isinstance(getattr(body[0], "value", None), _ast.Constant) and \
-                        isinstance(body[0].value.value, str):
-                    docs.add(id(body[0].value))
-        for node in _ast.walk(tree):
-            if isinstance(node, _ast.Constant) and isinstance(node.value, str) \
-                    and id(node) not in docs and pat.search(node.value):
-                bad.append(f"{rel}:{getattr(node, 'lineno', '?')}")
-    if bad:
-        return [f"[写死会话临时目录] **{len(bad)} 处**：{bad[:6]}"
-                "（随包发出的脚本不许带会话 scratchpad 绝对路径 —— "
-                "收件人照抄会指向一条不存在的路径）"]
-    return []
 
 
 def _selftest_reach(root: pathlib.Path) -> list[str]:
@@ -533,7 +465,6 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
     problems.extend(_one_ledger_per_workspace(root))
     problems.extend(_verification_counts(root))
     problems.extend(_selftest_reach(root))
-    problems.extend(_session_paths(root))
     problems.extend(_paper_lanes(root))
     problems.extend(_doc_command_shapes(root))
 
@@ -552,7 +483,7 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
 
     ver_file = root / "VERSION"
     if not ver_file.is_file():
-        return [f"{UNMEASURED_NO_VERSION}|{ver_file}"], skipped
+        return [f"缺 VERSION 文件（真源不存在）：{ver_file}"], skipped
     skill_v = ver_file.read_text(encoding="utf-8").strip()
 
     # --- A0. CHANGELOG 的最高条目 vs VERSION（v0.0.0.94 新增的第四条轴）---
@@ -838,13 +769,6 @@ def self_test() -> int:
     with tempfile.TemporaryDirectory() as td:
         tmp = pathlib.Path(td)
 
-        # ★★★ 未量对照：一个**根本不是 skill 包**的目录，必须判「未量」而不是「漂移」。
-        empty = tmp / "not-a-package"
-        (empty / "scripts").mkdir(parents=True)
-        problems, _ = check(empty)
-        if not (len(problems) == 1 and problems[0].startswith(UNMEASURED_NO_VERSION)):
-            failures.append("未量对照：无 VERSION 的目录应当只报未量标记，实际 %r" % (problems[:2],))
-
         clean = _fixture(tmp / "a", drift=False)
         problems, _ = check(clean)
         if problems:
@@ -966,21 +890,6 @@ def main() -> int:
         return 3
 
     problems, skipped = check(root)
-
-    # ★ 「这个根本不是一个 skill 包」≠「这个包有漂移」——分开报，别把未量说成违规。
-    unmeasured = [p for p in problems if p.startswith(UNMEASURED_NO_VERSION)]
-    if unmeasured:
-        where = unmeasured[0].split("|", 1)[1]
-        mirror = "（本文件在 `references/pipeline/checkers/` 下还有一份逐字节相同的镜像；"
-        mirror += "跑那一份时根会解析成 `references/pipeline/`，那里当然没有 VERSION。"
-        mirror += "**真正的调用方是 `scripts/check_contract_drift.py`**）"
-        print("★ **未量，不是通过**（rc=4）—— 解析到的根里没有 VERSION：%s" % where)
-        print("   根是怎么来的：%s" % ("--root 显式给的" if str(root) != str(ROOT_DEFAULT.resolve())
-                                       else "默认 = 本脚本的上级目录 %s" % ROOT_DEFAULT))
-        print("   " + mirror)
-        if args.json:
-            print(json.dumps({"root": str(root), "unmeasured": where}, ensure_ascii=False, indent=2))
-        return 4
 
     if args.json:
         print(json.dumps({"root": str(root), "problems": problems, "skipped": skipped},

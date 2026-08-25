@@ -1,0 +1,25 @@
+{
+  "name": "micro_performance",
+  "purpose": "subtle human performance and dialogue",
+  "priorities": [
+    "trigger",
+    "breath",
+    "gaze",
+    "blink",
+    "facial_asymmetry",
+    "hands_shoulders_weight",
+    "dialogue_timing",
+    "reaction_after_trigger",
+    "ending_breath"
+  ],
+  "camera_defaults": [
+    "locked_medium_closeup",
+    "very_slow_push_in"
+  ],
+  "avoid": [
+    "emotion_adjectives_without_behavior",
+    "reaction_too_early",
+    "oversized_body_motion_in_extreme_closeup",
+    "instant_cut_after_key_line"
+  ]
+}

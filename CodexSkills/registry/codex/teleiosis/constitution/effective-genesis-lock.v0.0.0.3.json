@@ -1,0 +1,73 @@
+{
+  "amendment_files": [
+    {
+      "amendment_id": "WBI-GB-AMENDMENT-001",
+      "authorization": "explicit-user-instruction-2026-07-26",
+      "path": "constitution/amendments/WBI-GB-AMENDMENT-001-v0.0.0.2.zh-CN.md",
+      "requirements": [
+        "WBI-GB-028"
+      ],
+      "sha256": "57d13f47d3a15c72a268d62d00987b5d2cfb763d5133fb8284ec47a93036bedb",
+      "version": "v0.0.0.2"
+    },
+    {
+      "amendment_id": "WBI-GB-AMENDMENT-002",
+      "authorization": "explicit-user-instruction-2026-07-29",
+      "path": "constitution/amendments/WBI-GB-AMENDMENT-002-v0.0.0.3.zh-CN.md",
+      "requirements": [
+        "WBI-GB-029"
+      ],
+      "sha256": "26698a59ec401512add59e8b12b9111fd7d149cd1c787746d9b7017b2aa6fde8",
+      "version": "v0.0.0.3"
+    }
+  ],
+  "base_files_byte_preserved": true,
+  "base_locked_sha256": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
+  "base_requirements_sha256": "80f3efc59b2e8660fb2dbcce799219e292cb0073a1bf567177cfcc7b6c10604c",
+  "composite_algorithm": "sha256-canonical-json-v2",
+  "effective_baseline_id": "WBI-GB-CANDIDATE-001+A001+A002",
+  "effective_composite_sha256": "65e5cd626836d7d76c753360977baa49a6b0f096a430d49222a5c25bed51248f",
+  "effective_projection": {
+    "path": "constitution/effective-requirements.v0.0.0.3.json",
+    "requirement_ids": [
+      "WBI-GB-001",
+      "WBI-GB-002",
+      "WBI-GB-003",
+      "WBI-GB-004",
+      "WBI-GB-005",
+      "WBI-GB-006",
+      "WBI-GB-007",
+      "WBI-GB-008",
+      "WBI-GB-009",
+      "WBI-GB-010",
+      "WBI-GB-011",
+      "WBI-GB-012",
+      "WBI-GB-013",
+      "WBI-GB-014",
+      "WBI-GB-015",
+      "WBI-GB-016",
+      "WBI-GB-017",
+      "WBI-GB-018",
+      "WBI-GB-019",
+      "WBI-GB-020",
+      "WBI-GB-021",
+      "WBI-GB-022",
+      "WBI-GB-023",
+      "WBI-GB-024",
+      "WBI-GB-025",
+      "WBI-GB-026",
+      "WBI-GB-027",
+      "WBI-GB-028",
+      "WBI-GB-029"
+    ],
+    "sha256": "39f7354c7328b40eb09c724f170cc3765ec2b0b492dd12fb35dcc3cfad47b9c9"
+  },
+  "effective_version": "v0.0.0.3",
+  "prior_effective_composite_sha256": "fe80c467f8ecbe8343ef0c09ef5e6f9fd9683803c8260c9188998c7e3dfca0a2",
+  "rollback_pointer": {
+    "lock": "constitution/effective-genesis-lock.v0.0.0.2.json",
+    "projection": "constitution/effective-requirements.v0.0.0.2.json",
+    "version": "v0.0.0.2"
+  },
+  "schema_version": "1.1"
+}

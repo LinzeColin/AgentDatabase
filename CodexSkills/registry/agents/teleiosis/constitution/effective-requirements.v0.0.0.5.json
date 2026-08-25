@@ -1,0 +1,377 @@
+{
+  "amendments": [
+    {
+      "amendment_id": "WBI-GB-AMENDMENT-001",
+      "authorization": "explicit-user-instruction-2026-07-26",
+      "path": "constitution/amendments/WBI-GB-AMENDMENT-001-v0.0.0.2.zh-CN.md",
+      "requirements": [
+        "WBI-GB-028"
+      ],
+      "sha256": "57d13f47d3a15c72a268d62d00987b5d2cfb763d5133fb8284ec47a93036bedb",
+      "version": "v0.0.0.2"
+    },
+    {
+      "amendment_id": "WBI-GB-AMENDMENT-002",
+      "authorization": "explicit-user-instruction-2026-07-29",
+      "path": "constitution/amendments/WBI-GB-AMENDMENT-002-v0.0.0.3.zh-CN.md",
+      "requirements": [
+        "WBI-GB-029"
+      ],
+      "sha256": "26698a59ec401512add59e8b12b9111fd7d149cd1c787746d9b7017b2aa6fde8",
+      "version": "v0.0.0.3"
+    },
+    {
+      "amendment_id": "WBI-GB-AMENDMENT-003",
+      "authorization": "explicit-owner-approval-2026-08-02",
+      "path": "constitution/amendments/WBI-GB-AMENDMENT-003-v0.0.0.4.zh-CN.md",
+      "requirements": [
+        "WBI-GB-030",
+        "WBI-GB-031",
+        "WBI-GB-032"
+      ],
+      "sha256": "5eb3c318e9bea4fcd3bcf3d07cafa5dc2005d77b3d14f90e5cb5ea5d69dcbcca",
+      "version": "v0.0.0.4"
+    },
+    {
+      "amendment_id": "WBI-GB-AMENDMENT-004",
+      "authorization": "explicit-owner-instruction-2026-08-03",
+      "path": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "requirements": [
+        "WBI-GB-033",
+        "WBI-GB-034",
+        "WBI-GB-035",
+        "WBI-GB-036",
+        "WBI-GB-037",
+        "WBI-GB-038",
+        "WBI-GB-039",
+        "WBI-GB-040",
+        "WBI-GB-041",
+        "WBI-GB-042"
+      ],
+      "sha256": "34f14297cbfc88bc9fc17797dd51f5856cf56ddb1a1bd248aa9c783ba799cb56",
+      "version": "v0.0.0.5"
+    }
+  ],
+  "base_baseline_id": "WBI-GB-CANDIDATE-001",
+  "base_locked_sha256": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
+  "base_version": "v0.0.0.1",
+  "effective_baseline_id": "WBI-GB-CANDIDATE-001+A001+A002+A003+A004",
+  "effective_composite_sha256": "d7349b951034ba2b5335c94ff7cfbc5bb472524c39010af66877c21c9e4f5b96",
+  "effective_version": "v0.0.0.5",
+  "implementation_parameters_are_not_genesis": [
+    "directory_layout",
+    "model",
+    "provider",
+    "adapter",
+    "scorer",
+    "data_source",
+    "budget",
+    "repository_head",
+    "file_hash_except_genesis"
+  ],
+  "requirements": [
+    {
+      "id": "WBI-GB-001",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "每次正式运行必须先执行时效性扫描，覆盖最新可获得的技术、方法、架构、模型、LLM、Agent 能力、评测、标准和竞品；记录查询日期、来源、版本和未知项。架构必须保持模块化、可替换、模型与平台中立，不得因固定 Prompt、规则、供应商、模型、工具或当前实现限制白箱迭代Skill及目标 Skill 的后续发展空间。",
+      "title": "持续前沿与未来适应"
+    },
+    {
+      "id": "WBI-GB-002",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "完善必须改善真实任务效果、可靠性、效率、适用范围、可用性、可维护性或治理质量；增加篇幅、规则、文件、模型调用或轮次本身不构成进步。",
+      "title": "真实成熟化，而非文字膨胀"
+    },
+    {
+      "id": "WBI-GB-003",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "必须持续吸收用户痛点、现实限制和新增信息。任何 Candidate 不得删除、模糊、条件化、重解释或降级用户已确认要求；目标特定要求可以增加约束，但不能削弱本基线。",
+      "title": "用户要求不可弱化"
+    },
+    {
+      "id": "WBI-GB-004",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "所有“完成、独立、真实运行、可安装、领先、超越、最佳”等结论必须有可复核证据。模拟、dry-run、角色替代、网络失败、权限不足、阻塞和未知必须明确标记，不能冒充 PASS。",
+      "title": "证据真实性"
+    },
+    {
+      "id": "WBI-GB-005",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "正式交付必须干净、无歧义、无污染、可验证、可回滚、安装后可直接调用；不得把本应完成的研究、设计、修复、测试或关键选择重新交给 Codex、其他 Agent 或用户猜测完成。",
+      "title": "最终安装即用"
+    },
+    {
+      "id": "WBI-GB-006",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "目标 Skill 的原始版本、需求、依赖、研究、每轮假设、精确 diff、Baseline/Candidate 结果、接受或拒绝理由、失败、未知、最终包和回滚点必须完整可见、可比较、可复现。",
+      "title": "目标 Skill 白箱"
+    },
+    {
+      "id": "WBI-GB-007",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "白箱迭代Skill的稳定版、Candidate、协议、Gate、评测、自我修改 diff、失败记录、晋级和回滚必须接受与目标 Skill 相同或更严格的证据要求；不得为自身设置更宽松的标准。",
+      "title": "白箱迭代Skill自身白箱"
+    },
+    {
+      "id": "WBI-GB-008",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "正在运行的稳定版只能生成和评测独立 Candidate，不得原地修改自己的规则或考试后由同一实例批准。Candidate 生成者不得兼任最终批准者；最终 verifier 必须只读、独立，并基于冻结证据作出裁决。",
+      "title": "禁止自改自批，修改与终审分离"
+    },
+    {
+      "id": "WBI-GB-009",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "每次运行前必须冻结 Baseline 及哈希，只修改 Candidate；Registry、Genesis、原始结果和历史账本保持只读。每项变更必须记录范围、假设、依据、前后哈希、精确 diff、来源、工具、命令、环境、原始结果、责任主体、时间、风险、决定和回滚指针。",
+      "title": "Baseline/Candidate 隔离与完整变更账本"
+    },
+    {
+      "id": "WBI-GB-010",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "失败 Candidate、被拒绝修改、回退和 `NO_CHANGE` 必须保留证据；不得删除失败历史、选择性报告或只展示成功样本。",
+      "title": "失败、拒绝与无修改透明"
+    },
+    {
+      "id": "WBI-GB-011",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "当前 Candidate 不得静默修改 Baseline 指标、硬门、评测集、sealed holdout、比较规则或终审标准。隐藏测试内容不得进入 Candidate 可读取的安装包；评测污染或泄漏立即阻断晋级。",
+      "title": "Candidate 不得控制考试"
+    },
+    {
+      "id": "WBI-GB-012",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "首个 patch 前必须回答：真实问题是否成立、是否具有独特价值、为何值得安装而不是临时询问、是否能产生真实可展示产物。结论只能为 `CONTINUE / REPOSITION / MERGE / SPLIT / RETIRE`；不是所有 Skill 都值得继续存在。",
+      "title": "修改前先挑战是否值得存在"
+    },
+    {
+      "id": "WBI-GB-013",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "修改前必须先对 GitHub、公开网络和可用一手资料进行只读研究，覆盖相似项目、方法、架构、模型、失败模式、许可证、生态和真实产物；研究证据冻结后才可进入 Candidate 修改阶段。",
+      "title": "先只读研究，再修改"
+    },
+    {
+      "id": "WBI-GB-014",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "竞品集必须包含不少于五个真实、可定位、可复核的同行项目，并覆盖直接同行、间接同行和手艺或基础设施同行。论文、文章、Issue、搜索结果或五条链接不能冒充五个同行。",
+      "title": "至少五个真实同行"
+    },
+    {
+      "id": "WBI-GB-015",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "在第 2.4 条授权边界内，Agent 必须能够自动发现或接收种子、拉取真实 GitHub 项目、固定仓库与 commit、记录来源和许可证、生成 inventory、真实产物索引、比较矩阵、失败状态和可复现 manifest，并自主完成静态或隔离动态 eval、候选修改、测试、打包和回滚。任何网络、权限、依赖或沙箱不足必须返回真实状态，不得生成虚假数据或虚假 PASS。",
+      "title": "真实 Competitor Dataset 与全权授权自运行"
+    },
+    {
+      "id": "WBI-GB-016",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "必须分析目标 Skill 的纵向演化、横向能力、应避让生态位、应争夺生态位和未来替代风险，并形成可测量、可证伪的优势假设；不得用营销定位代替比较证据。",
+      "title": "生态位与可证伪优势"
+    },
+    {
+      "id": "WBI-GB-017",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "必须检查真实输出、文件、命令结果、时间戳、新鲜度、渲染和复现路径；README、绿色 CI、mock、dry-run 或“代码看起来正确”不能代替真实产物。同时必须优化价值说明、最短安装、第一条调用、真实场景、showcase、release notes、确定性打包、回滚和 reheat 入口；不可复现、无回滚或已过时时不得称为 final。",
+      "title": "真实产物、安装发布与回炉闭环"
+    },
+    {
+      "id": "WBI-GB-018",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "每次正式完善必须完成十轮彼此有明确视角、证据和结论的审查；每轮允许 `KEEP / REVERT / NO_CHANGE`。十轮是十个系统审查面，不是强制制造十次文字或规则修改。",
+      "title": "十轮系统完善"
+    },
+    {
+      "id": "WBI-GB-019",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "十轮后必须完成两轮、每轮六个真正独立的 SubAgent 复审，并由独立只读 verifier 终审。运行环境不支持真实独立实例时必须返回 `INDEPENDENT_REVIEW_UNAVAILABLE / BLOCKED`；同一模型换角色、同一上下文多次输出或 fallback 不得冒充独立复审。",
+      "title": "两轮 × 六个真正独立 SubAgent"
+    },
+    {
+      "id": "WBI-GB-020",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "对同行成熟机制应优先借鉴以降低重复造轮子成本，同时记录来源、许可证、采用抽象、未采用部分和验证结果。超越必须表现为明确任务与指标上的可复现优势，而不是文件更多、Prompt 更长或主观宣言。",
+      "title": "优先借鉴并以证据超越"
+    },
+    {
+      "id": "WBI-GB-021",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "不得依赖不断变长的复杂 Prompt 控制模型。主 Skill 只保留必要目标、路由和判定；确定性规则进入 Gate、Schema、脚本和测试；详细知识按需加载。所有组件必须可替换、可扩展、可组合，允许未来模型、LLM、Agent runtime、工具、评测和架构无破坏接入。",
+      "title": "短 Prompt、强机制、开放架构"
+    },
+    {
+      "id": "WBI-GB-022",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "每个 run 必须有轮次、时间、网络、项目、评测、模型调用、token、成本和存储预算。重复 patch、连续无实质增益、证据耗尽、能力不可用、预算耗尽或状态不再变化时必须停止、回退、`NO_CHANGE`、`SATURATED` 或 `BLOCKED`；不得递归自调用形成死循环。",
+      "title": "有限循环与熔断"
+    },
+    {
+      "id": "WBI-GB-023",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "触发准确性、真实任务效果、安全、真实性、成本、时延、安装性、兼容性、跨模型迁移、维护性和未来适应性必须分别评测。任何硬性退化不得被其他维度提升或总分抵消。",
+      "title": "多维评测分离且硬退化不可补偿"
+    },
+    {
+      "id": "WBI-GB-024",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "必须穷尽当前可获得证据与可信改进空间，并争取超过比较集中最强同行；结论必须注明日期、同行集合、任务、环境、模型、指标、成本、风险和 `UNKNOWN`。任何结论超过有效期或触发第 2.3 条更新条件后，自动失效并进入 reheat，不得以“永久世界第一”驱动无限循环。",
+      "title": "领先结论必须具有时效性和边界"
+    },
+    {
+      "id": "WBI-GB-025",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "用户锁定后，任何模型、Skill、脚本、评分、SubAgent 或 verifier 均不得删除、弱化、重排、覆盖、重新解释或自动重签本基线。",
+      "title": "Genesis 不可自动修改"
+    },
+    {
+      "id": "WBI-GB-026",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "新增要求采用 append-only amendment；修改既有要求必须由用户明确指定 Requirement ID 和变更内容，并生成新基线版本、变更说明、旧版哈希和回滚点。普通任务指令不得被解释为隐式修改 Genesis。",
+      "title": "只有用户可以显式修订"
+    },
+    {
+      "id": "WBI-GB-027",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
+      "summary": "目录、语言、脚本名、测试数量、额外轮次、模型、供应商、平台、API、评分权重、UI 和当前代码结构均不自动成为不可变基线。实现可以被持续重构或替换，只要不削弱 WBI-GB-001—026；本基线不得被用作限制白箱迭代Skill或目标 Skill 技术上限的理由。",
+      "title": "基线与实现彻底分离"
+    },
+    {
+      "id": "WBI-GB-028",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-001-v0.0.0.2.zh-CN.md",
+      "summary": "用环境快照、证据租约、Pareto 与 bounded reheat 取代永久最好宣称。",
+      "title": "无静态时效局限与当前环境最强输出合同"
+    },
+    {
+      "id": "WBI-GB-029",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-002-v0.0.0.3.zh-CN.md",
+      "summary": "统一 Skill、连续 Candidate、全量非路由；其三引擎顺序由更晚 WBI-GB-030 最小范围扩展。",
+      "title": "五源统一、全量非路由与 Candidate 连续演化"
+    },
+    {
+      "id": "WBI-GB-030",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-003-v0.0.0.4.zh-CN.md",
+      "summary": "固定 T-C-S-C-P-C-A-C，三轮一组、三组一次 Run。",
+      "title": "四引擎统一、全量非路由与唯一 Candidate 生命周期"
+    },
+    {
+      "id": "WBI-GB-031",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-003-v0.0.0.4.zh-CN.md",
+      "summary": "冻结协议、同场公平、开发场与密封场隔离、隐藏数据防泄漏。",
+      "title": "公平竞技、双竞技场与密封数据合同"
+    },
+    {
+      "id": "WBI-GB-032",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-003-v0.0.0.4.zh-CN.md",
+      "summary": "效果、治理、Pareto 分榜；L1-L4 分级；外部 Verifier 唯一正式 PASS。",
+      "title": "三层榜单、证据等级与裁决分权"
+    },
+    {
+      "id": "WBI-GB-033",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "summary": "保留 v3 全量非路由、连续 Candidate、T/S/P、移动仓库适配、证据与回滚语义，并公开来源边界。",
+      "title": "v0.0.0.3 非降级继承与来源边界"
+    },
+    {
+      "id": "WBI-GB-034",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "summary": "按七类状态语义协调最新 integration base，保留更新、更好的上游实现，不以固定 SHA 阻断普通漂移。",
+      "title": "移动仓库 Stage 0 Semantic Reconcile"
+    },
+    {
+      "id": "WBI-GB-035",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "summary": "Baseline、Candidate 重大变化后和冻结前完成 A/B/C 三次扫描，每次产生可核验 Developer Burden Delta。",
+      "title": "三次真实 Skill Catalog 扫描"
+    },
+    {
+      "id": "WBI-GB-036",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "summary": "只有载入 dossier、claim_id、分歧和隔离控制角色才计人物专家调用；否则中立回退且不冒充。",
+      "title": "人物专家 dossier 硬门与中立回退"
+    },
+    {
+      "id": "WBI-GB-037",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "summary": "十视角与两轮六角色复审必须真实产生或确认机制，达到停止条件后不扩展范围。",
+      "title": "十视角六角色与有界停止"
+    },
+    {
+      "id": "WBI-GB-038",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "summary": "Project Input、状态机、DAG、追踪和 Fresh Builder 机器可验证，只剩环境绑定任务。",
+      "title": "可执行 Taskpack 与 Fresh Builder"
+    },
+    {
+      "id": "WBI-GB-039",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "summary": "内部仅生成绑定精确 Candidate 的只读 handoff，正式 PASS 只能由外部独立 Verifier 产生。",
+      "title": "冻结 Subject 与外部 Verifier 交接"
+    },
+    {
+      "id": "WBI-GB-040",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "summary": "发布包包含覆盖 T/S/P/A 六分区的记录级 checksum 与整体哈希回归语料，不冒充真实市场。",
+      "title": "大样本确定性回归语料"
+    },
+    {
+      "id": "WBI-GB-041",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "summary": "一键体检安装，支持新装、幂等、升级、保留、备份、回滚、冷解压和跨平台。",
+      "title": "零技术门槛事务安装与诊断"
+    },
+    {
+      "id": "WBI-GB-042",
+      "severity": "HARD_NON_COMPENSABLE",
+      "source": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "summary": "最终一个 ZIP，完整保存原始可复核证据、Roadmap、Pursuing Goal 和架构图。",
+      "title": "完整原始证据与唯一正式制品"
+    }
+  ],
+  "schema_version": "teleiosis.effective_requirements.v5",
+  "supersession": [
+    {
+      "effect": "T-C-S-C-P-C expands to T-C-S-C-P-C-A-C; all other WBI-GB-029 duties remain active",
+      "newer_requirement": "WBI-GB-030",
+      "older_requirement": "WBI-GB-029",
+      "scope": "three-engine sequence only"
+    }
+  ]
+}

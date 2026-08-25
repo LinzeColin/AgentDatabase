@@ -1,0 +1,10 @@
+{
+  "_comment": "复制此文件为 config.local.json 并修改为你的实际路径。This is a template — copy to config.local.json and edit.",
+  "comfyui_url": "http://localhost:8188",
+  "comfyui_dir": "E:\\ComfyUI",
+  "output_dir": "./outputs",
+  "flux_width": 1024,
+  "flux_height": 768,
+  "flux_steps": 20,
+  "flux_guidance": 3.5
+}

@@ -1,0 +1,11 @@
+{
+  "domains": {
+    "control_plane": {"status": "PASS", "evidence": "replace with a frozen receipt path or reason"},
+    "benchmark_integrity": {"status": "VALID", "evidence": "replace with a frozen receipt path or reason"},
+    "outcome": {"status": "NOT_PROVEN", "evidence": "no equal-budget real runtime benchmark supplied"},
+    "cost_evidence": {"status": "PARTIAL", "evidence": "unknown usage remains unknown"},
+    "independent_review": {"status": "UNAVAILABLE", "evidence": "no external 2x6+1 signed attestation"},
+    "engineering_release": {"status": "CANDIDATE", "evidence": "run release verification"},
+    "formal_promotion": {"status": "BLOCKED", "evidence": "outcome and review evidence incomplete"}
+  }
+}

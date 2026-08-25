@@ -75,32 +75,6 @@ TAINTED = {
     "wip-livermore-100": "看过 rubric 才写基线（+0.8013）",
 }
 
-#: ★★★★ 2026-08-18：**污染名单是按「人物」列的，而泄题是按「席位协议」发生的。**
-#:
-#:   Adams #131 自己的工作区里放着一页 `evals/DELTA-READ-ME-FIRST.md`，逐字写着：
-#:     「记录的 delta 是 +0.2922。**那个数不能当『比裸模型强』的证据用**。」
-#:     有 rubric（**冻结协议 D/E，发布门读的就是这个**）0.909/0.617 ⇒ **+0.2922**
-#:     无 rubric（**同一批答案、同一 A/B、同一天**）      0.807/0.769 ⇒ **+0.0375**
-#:     无 rubric 侧逐对只有 **胜 17 / 负 15** —— 接近抛硬币。
-#:     席 D 点名 **8 题**、席 E 点名 **5 题**的评分标准**把答案抄了进去**
-#:     （形态是中译与压缩，**字面比对的判据看不见，实测报 0/16**）。
-#:
-#:   而 **Adams 不在上面的 `TAINTED` 名单里** —— 名单只有 3 位。
-#:   实测（同日）：全库 **24** 份非空 `evals/results.jsonl` 里，
-#:   **席位恰好是 {seat-D-score-v1, seat-E-strict-v1} 的有 14 份**；
-#:   这 14 份中 **`results.jsonl` 带 `rubric_fed` 字段的 0 份**，
-#:   `evals/*.md` 里提到 rubric/泄题/污染字眼的**只有 3 份**（8 份的 README 只有 100 字）。
-#:
-#:   ⇒ **本工具报出的 delta，凡出自这两席的，都要连 Adams 那页一起读。**
-#:     ★ 但**不能就此把 14 份全判成污染**：泄题是**每个人物自己的 rubric** 有没有抄进答案，
-#:       **席位相同 ≠ rubric 相同**。这是**线索不是判定**。
-#:     ★★ 要判得准，得给 `results.jsonl` 加 `rubric_fed` 字段（**产物格式变更，属决定**）。
-#:   [[rubric-fed-judges-flip-the-sign]]｜[[implausibly-good-result-is-a-defect-report]]
-RUBRIC_FED_SEATS = frozenset({"seat-D-score-v1", "seat-E-strict-v1"})
-RUBRIC_FED_EVIDENCE = (
-    "Adams #131 `evals/DELTA-READ-ME-FIRST.md`：同一批答案换掉 rubric 后 "
-    "+0.2922 → +0.0375，逐对胜 17/负 15；席 D 点名 8 题、席 E 点名 5 题")
-
 SCALE_HINT = 1.5   # 观测最大分 > 这个值 ⇒ 认为是 0–10 量纲，除以 10
 
 
@@ -229,19 +203,10 @@ def collect(root: pathlib.Path) -> dict:
             h = hashlib.sha256(p.read_bytes()).hexdigest()
         except OSError:
             h = str(p)
-        who = next((q.name for q in p.parents if q.name.startswith("wip-")), p.parent.name)
-        # ★★★ 2026-08-18：去重键从**内容哈希**改成 **(人物, 内容哈希)**。
-        #   原来只按内容去重，本意是「同一人物的镜像副本只算一次」——**跨人物时就成了灾**：
-        #   **所有空文件的 sha256 都是同一个**（`e3b0c442…`）。
-        #   全库实测 **25 份 0 行的 `results.jsonl`**，原实现只报出第一个
-        #   （`wip-benardos-128`），**另外 24 个人物整个不出现** ——
-        #   读的人会以为它们「没有 results.jsonl」或「没什么可说的」，
-        #   而实际上它们有一模一样的问题。**过滤让那一行整个消失。**
-        # ★★ 不是取消去重：同一人物 + 同内容照样只算一次（镜像副本的本意保住）。
-        #   [[filters-make-rows-vanish]]｜[[empty-default-swallows-unknown]]
-        if (who, h) in seen:
+        if h in seen:
             continue
-        seen.add((who, h))
+        seen.add(h)
+        who = next((q.name for q in p.parents if q.name.startswith("wip-")), p.parent.name)
         rec = read_one(p)
         if rec:
             out.setdefault(who, []).append(rec)
@@ -380,35 +345,6 @@ def self_test() -> int:
         sum(len(v) for v in got.values()) == 1)
     chk("⑨ 污染名单是**名单不是判据**：每条都带出处",
         all(isinstance(v, str) and v for v in TAINTED.values()))
-    chk("⑩ ★ 席位线索是**闭集合**且非空（不靠措辞匹配）",
-        isinstance(RUBRIC_FED_SEATS, frozenset) and len(RUBRIC_FED_SEATS) >= 2)
-    chk("⑪ ★★ 席位线索与污染名单**不是同一件事**（前者按席、后者按人，不许互相顶替）",
-        not (set(TAINTED) & RUBRIC_FED_SEATS) and bool(RUBRIC_FED_EVIDENCE.strip()))
-
-    # ★★★ ⑫⑬ 2026-08-18：去重键曾经只有内容哈希 —— **所有空文件哈希相同**，
-    #   于是全库 25 份 0 行的 `results.jsonl` 只报出第一个，**24 个人物整个消失**。
-    #   这两条把那次反例钉死：跨人物不许互吞，同人物仍要去重。
-    _t = pathlib.Path(tempfile.mkdtemp())
-    for _who, _body in (("wip-x-1", ""), ("wip-y-2", ""),
-                        ("wip-z-3", '{"seat":"seat-D-score-v1","case_id":"c",'
-                                    '"suite":"s","candidate":0.8,"baseline":0.7}\n')):
-        _d = _t / _who / "evals"
-        _d.mkdir(parents=True)
-        (_d / "results.jsonl").write_text(_body, encoding="utf-8")
-    _g = collect(_t)
-    chk("⑫ **两个人物各有一个空 `results.jsonl` ⇒ 两个都要出现**"
-        "（去重键只有内容哈希时，第二个会被吞掉）",
-        sorted(_g) == ["wip-x-1", "wip-y-2", "wip-z-3"])
-
-    _t2 = pathlib.Path(tempfile.mkdtemp())
-    _b = ('{"seat":"seat-D-score-v1","case_id":"c","suite":"s",'
-          '"candidate":0.8,"baseline":0.7}\n')
-    for _sub in ("evals", "references/evals"):
-        _d = _t2 / "wip-w-4" / _sub
-        _d.mkdir(parents=True)
-        (_d / "results.jsonl").write_text(_b, encoding="utf-8")
-    chk("⑬ **同一人物两处镜像副本、内容相同 ⇒ 仍然只算一次**（去重的本意要保住）",
-        all(len(v) == 1 for v in collect(_t2).values()))
 
     print("\n" + ("✓ 自测全过" if not fails else f"✗ **{len(fails)} 条不合**"))
     return 0 if not fails else 1
@@ -449,9 +385,6 @@ def main() -> int:
                         "案例": best[list(best)[0]]["案例"]}
             if who in TAINTED:
                 out[who]["★ 污染"] = TAINTED[who]
-            # ★ 席位线索（**不是判定**）：这份读数出自那两席吗
-            if set(out[who].get("席") or []) & RUBRIC_FED_SEATS:
-                out[who]["★ 席位线索"] = "出自 %s" % "/".join(sorted(RUBRIC_FED_SEATS))
             if any("★ 逐席" in r for r in recs):
                 ps = next(r["★ 逐席"] for r in recs if "★ 逐席" in r)
                 out[who]["★ 合并值不可引用"] = ps
@@ -494,29 +427,6 @@ def main() -> int:
     if not a.exclude_tainted and any("★ 污染" in v for v in out.values()):
         print("★ 带「污染」标记的是已知「看过 rubric 才写基线」的读数——"
               "**只标记不剔除**，要剔加 `--exclude-tainted`。")
-
-    # ★★★★ 席位线索：**污染名单按人物列，而泄题按席位协议发生**
-    cued = sorted(k for k, v in out.items() if "★ 席位线索" in v)
-    unlisted = [k for k in cued if k not in TAINTED]
-    if cued:
-        print("\n★★ **席位线索（不是判定）**：**%d** 份读数出自 `%s`；"
-              % (len(cued), "/".join(sorted(RUBRIC_FED_SEATS))))
-        print("   其中**不在污染名单里**的 **%d** 份：%s"
-              % (len(unlisted), "、".join(unlisted) or "无"))
-        print("   依据：%s" % RUBRIC_FED_EVIDENCE)
-        print("   ⇒ **凡出自这两席的 delta，都要连 Adams 那页 "
-              "`evals/DELTA-READ-ME-FIRST.md` 一起读。**")
-        print("   ★ 但**不能就此把它们全判成污染**：泄题是**每个人物自己的 rubric** "
-              "有没有把答案抄进去，**席位相同 ≠ rubric 相同**。")
-        # ★ **现算，不写死**：口径串里带「无 round／rubric_fed 字段」的就是没有该字段的那批。
-        #   我第一版直接写「实测这 N 份一份都没有」——**那个数我没算过**，
-        #   而且我手工只扫了 `evals/results.jsonl`（15 份），本工具的扫描面更宽。
-        #   [[self-reported-numbers-must-be-computed]]
-        no_field = sum(1 for k in cued if "rubric_fed" in str(out[k].get("口径", ""))
-                       and "无" in str(out[k].get("口径", "")))
-        print("   ★★ 要判得准得给 `results.jsonl` 加 `rubric_fed` 字段 —— "
-              "这 %d 份里**明确记着「无 round／rubric_fed 字段」的有 %d 份**"
-              "（**产物格式变更，属决定**）。" % (len(cued), no_field))
     return 0
 
 

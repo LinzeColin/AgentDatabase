@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "waiver_id": "",
+  "finding_ids": [],
+  "scope": "",
+  "owner": "",
+  "approved_at": "",
+  "expires_at": "",
+  "reason": "",
+  "compensating_controls": [],
+  "evidence_paths": [],
+  "non_waivable_check": "PASS"
+}

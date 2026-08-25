@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linzezhang.com/schemas/teleiosis/expert-panel-request-1.0.json",
+  "title": "Teleiosis Persona Distiller Group Routing Request",
+  "type": "object",
+  "required": ["schema_version", "request_type", "panel_size", "role_requirements", "routing_policy"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "request_type": {"const": "persona-distiller-group-routing"},
+    "panel_size": {"type": "integer", "minimum": 5, "maximum": 20},
+    "role_requirements": {"type": "array", "minItems": 5, "maxItems": 20},
+    "routing_policy": {"type": "object"}
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "license_policy": "第三方原生 Adapter 在执行前必须锁定版本、许可证、数据传输与运行义务。",
+  "schema_version": "teleiosis.source_ledger.v5",
+  "sources": [
+    {
+      "code_copied": true,
+      "id": "SRC-V4-LOCAL-CANDIDATE",
+      "location": "conversation artifact Teleiosis v0.0.0.4.zip",
+      "sha256": "bd3c4098a2544ae237b07dd99dcb91fc770993c85df6946dd5a39c67b64f593a",
+      "type": "first_party_prior_candidate",
+      "use": "经 130 项测试的可执行基座；v5 在其上做增量实现、回归和证据扩展"
+    },
+    {
+      "code_copied": false,
+      "id": "SRC-OWNER-HOTKEY",
+      "location": "sources/OWNER_CONTRACT.source.txt",
+      "sha256": "7c062db3acfc0c19cee61d7c4e28157e67c6d04df45321ab0e3a7263b7458e45",
+      "type": "owner_input",
+      "use": "Preparation/Build/Verifier 合同与三次 Skill 扫描要求"
+    },
+    {
+      "accessed_at": "2026-08-03",
+      "code_copied": false,
+      "id": "SRC-TELEIOSIS-V3",
+      "manifest_entries": 444,
+      "observed_branch": "main",
+      "observed_version": "v0.0.0.3",
+      "snapshots": [
+        "legacy/v0.0.0.3/SKILL.md",
+        "legacy/v0.0.0.3/README.md",
+        "legacy/v0.0.0.3/MANIFEST.sha256"
+      ],
+      "type": "owner_repository",
+      "url": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/teleiosis",
+      "use": "非降级语义基线和来源边界"
+    },
+    {
+      "accessed_at": "2026-08-03",
+      "code_copied": false,
+      "id": "SRC-PERSONA",
+      "observed_version": "v0.0.0.7",
+      "snapshot": "sources/persona-distiller-group.SKILL.source.md",
+      "type": "owner_repository",
+      "url": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/persona-distiller-group",
+      "use": "dossier/claim_id/分歧/控制角色真实性硬门"
+    },
+    {
+      "accessed_at": "2026-08-03",
+      "code_copied": false,
+      "id": "SRC-VERIFIER",
+      "observed_version": "v0.0.2.2",
+      "snapshot": "sources/verifier.SKILL.source.md",
+      "type": "owner_repository",
+      "url": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/verifier",
+      "use": "冻结 Subject、追踪和外部 formal PASS 边界"
+    },
+    {
+      "accessed_at": "2026-08-03",
+      "code_copied": false,
+      "id": "SRC-SKILL-CATALOG",
+      "observed_branch": "main",
+      "type": "owner_repository_catalog",
+      "url": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/",
+      "use": "Pass A/B/C 路由扫描；移动 main 不冻结"
+    },
+    {
+      "accessed_at": "2026-08-02",
+      "code_copied": false,
+      "id": "SRC-GEPA",
+      "runtime_dependency": false,
+      "type": "official_project",
+      "url": "https://github.com/gepa-ai/gepa",
+      "use": "反思轨迹变异与 Pareto Adapter 角色"
+    },
+    {
+      "accessed_at": "2026-08-02",
+      "code_copied": false,
+      "id": "SRC-AUTORESEARCH",
+      "runtime_dependency": false,
+      "type": "official_project",
+      "url": "https://github.com/karpathy/autoresearch",
+      "use": "单变更保留/丢弃循环角色"
+    },
+    {
+      "accessed_at": "2026-08-02",
+      "code_copied": false,
+      "id": "SRC-METAHARNESS",
+      "runtime_dependency": false,
+      "type": "official_project",
+      "url": "https://github.com/stanford-iris-lab/meta-harness",
+      "use": "Harness/上下文/工具搜索角色"
+    },
+    {
+      "accessed_at": "2026-08-02",
+      "code_copied": false,
+      "id": "SRC-PROMPTFOO",
+      "runtime_dependency": false,
+      "type": "official_documentation",
+      "url": "https://www.promptfoo.dev/docs/usage/prompt-optimization/",
+      "use": "评测、validation split、红队与 CI Adapter 角色"
+    }
+  ],
+  "valid_as_of": "2026-08-03"
+}

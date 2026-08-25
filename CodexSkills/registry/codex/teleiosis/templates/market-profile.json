@@ -1,0 +1,13 @@
+{
+  "profile_status": "PASS",
+  "schema_version": "1.0",
+  "valid_as_of": "YYYY-MM-DD",
+  "target": "/absolute/path/to/target",
+  "target_class": "agent-skill|self-evolving-agent-skill|runtime-service|library-or-tooling|web-product|unknown-or-documentation",
+  "classification_reasons": [],
+  "markers": {},
+  "root_file_bindings": [],
+  "adoption_lanes": [],
+  "risk_flags": [],
+  "next_required_evidence": []
+}

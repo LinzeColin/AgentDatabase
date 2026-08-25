@@ -1,18 +1,7 @@
 #!/usr/bin/env python3
 """Render core model documents with substantive real Knuth content + claim markers (release-grade)."""
 import json
-# ★★ 2026-08-17：原先这里写死一条**别的会话的 scratchpad 绝对路径**
-#   （`/private/tmp/claude-501/-Users-…-character-distillation-skill-reorganize-d57595/…`），
-#   而那条路径**早已不存在**。RUNBOOK 让操作者「照 example-knuth/ 抄」——
-#   抄到的是一个指向死路径的脚本：它看起来像真路径，不像 `<WORKSPACE>` 那样
-#   一眼可见要替换，于是**会静默写到别处或直接崩**。
-#   ⇒ 改成从 argv/环境变量取，缺了就**明确报错**，不给默认值。
-import os as _os, sys as _sys
-_T = (_sys.argv[1] if len(_sys.argv) > 1 else _os.environ.get("PD_TARGET"))
-if not _T:
-    _sys.exit("用法：%s <工作区目录>（或设环境变量 PD_TARGET）——本脚本是**样例模板**，不带默认路径。" % _sys.argv[0])
-BASE = _T
-
+BASE = "/private/tmp/claude-501/-Users-linzezhang-Documents-Codex-AgentDatabase-character-distillation-skill-reorganize-d57595/c696b54c-ba7d-4598-8b2f-49420c27e567/scratchpad/pd-work"
 TARGET = BASE + "/workspaces/donald-knuth"
 cmap = json.load(open(BASE + "/claims_map.json", encoding="utf-8"))
 by_doc = {}

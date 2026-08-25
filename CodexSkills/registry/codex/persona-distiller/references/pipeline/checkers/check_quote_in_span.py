@@ -15,19 +15,12 @@ Fleming #111 实测：PMC 把旧 BMJ / Proc R Soc 按**整页**提供，
 
 ## 判据
 
-读一份**作者边界清单**（`raw/_BOUNDARIES.json`）。**全库有两种写法，两种都认**：
+读一份**作者边界清单**（`raw/_BOUNDARIES.json`），形如：
 
-    扁平（fleming / nightingale / slavyanov）
-        {"penicillin-letter-1941": {"start_line": 68, "end_line": 196, ...}}
-    区间数组（barton-117）—— 他的文字被别人的插段切成几块时只能这么写
-        {"rc-in-cuba-1898": {"hers": [[171, 838]], "not_hers": [[840, 922]], ...}}
+    {"penicillin-letter-1941": {"start_line": 68, "end_line": 196, ...}}
 
-对每条逐字引文：若它出现在某个有边界记录的文件里，就查它是否落在**任何一段**之内。
-**落在外面即报。**
-
-★ 2026-08-18 之前只认第一种 ⇒ **Barton 那 8 条一条也读不到**，
-  整份返回 rc=3「未检查」。守卫是对的（没报成通过），但**为 Barton 事故建的判据
-  读不了 Barton 自己的记录**。现在两种都认，且**认不出的形状会印出来**，不静默丢弃。
+对每条逐字引文：若它出现在某个有边界记录的文件里，
+就查它是否落在 `start_line..end_line` 之内。**落在外面即报。**
 
 ## 它判不了什么
 
@@ -104,78 +97,12 @@ def locate(corpus_dir, name):
     return None
 
 
-def ranges_of(b):
-    """→ 这条边界记录里「**属于他**」的行区间列表 `[(起, 止), …]`（1 起，闭区间）。
-
-    ★★★ 2026-08-18：**全库有两种 schema，此前只认一种。**
-
-        扁平（fleming / nightingale / slavyanov）：{"start_line": 68, "end_line": 196}
-        区间数组（barton-117）：              {"hers": [[171, 838]], "not_hers": [[840, 922]]}
-
-    第二种**更强**：他的文字被别人的插段切成几块时，单段 `start..end` 表达不了，
-    而 `not_hers` 还能明写「这几行确定是别人的」。
-    此前 `main()` 只收「同时有 start_line 与 end_line」的条目 ⇒
-    **Barton 那 8 条一条也读不到**，判据对他整个返回 rc=3「未检查」。
-    ★ 那**不是假绿**（守卫写对了），是**覆盖缺口** —— 而这件判据的开头写着
-    它就是「Barton 事故的引文版」。**为某人建的判据，读不了那个人的记录。**
-    [[eval-artifacts-have-five-schemas]]｜[[checkers-assume-a-shape-the-product-outgrows]]
-
-    纯函数，不碰磁盘。认不出的形状返回 `[]`（由调用方判「未检查」，不当通过）。
-    """
-    return verdict_of(b)[1]
-
-
-def verdict_of(b):
-    """→ (判定, 区间列表)。判定三取一，**不是两取一**：
-
-        "ranges"     有可用区间 ⇒ 查引文落不落在里面
-        "none_his"   `hers: []` **明写的空** ⇒ 这份文件里**没有一行是他的**
-                     ⇒ 落在这份文件里的引文**一律越界**（这是最强的信号，不是「没信息」）
-        "unknown"    形状认不出、或明标「切不出边界」 ⇒ **未检查，不当通过**
-
-    ★★★ 2026-08-18 我第一版把 `hers: []` 和「认不出」混成一档，双双跳过 ——
-      **等于把最强的信号读成了没有信息**。Barton 那 3 条实况：
-
-        heroines-of-service-1917       hers: []  why: 「群传…**没有一行是她的话**」
-        women-in-american-history-1919 hers: []  why: 「群传，全章是别人写她」
-        history-red-cross-1883         hers: []  mixed: [[1, 999999]]
-                                       why: 「目次 OCR 破碎…**不给行号**」
-
-      前两条是 `none_his`（任何引文落进去都该报）；第三条有 `mixed` ⇒ 边界确实切不出，
-      是真的 `unknown`。**「明写的空」与「没写」必须分开。**
-      [[empty-default-swallows-unknown]]｜[[negative-capability-claims-need-evidence-too]]
-    """
-    if not isinstance(b, dict):
-        return "unknown", []
-    out, saw_key = [], False
-    for key in ("hers", "his", "theirs", "mine"):        # 同义键，全库实测只有 `hers`
-        v = b.get(key)
-        if isinstance(v, list):
-            saw_key = True
-            for pair in v:
-                if (isinstance(pair, (list, tuple)) and len(pair) == 2
-                        and all(isinstance(x, int) for x in pair) and pair[0] <= pair[1]):
-                    out.append((pair[0], pair[1]))
-    if out:
-        return "ranges", out
-    if isinstance(b.get("start_line"), int) and isinstance(b.get("end_line"), int) \
-            and b["start_line"] <= b["end_line"]:
-        return "ranges", [(b["start_line"], b["end_line"])]
-    # ★ `mixed` 明说「他的和别人的混着、切不出边界」⇒ 真未知，不许当成 none_his
-    if saw_key and not b.get("mixed"):
-        return "none_his", []
-    return "unknown", []
-
-
 def check(quotes, spans, corpus_dir):
     """→ (查过的条数, [(来源, 文件, 引文)])——列出落在别人那一段里的。"""
     checked, bad = 0, []
     for tag, q in quotes:
         pq = _p(q)
         for name, b in spans.items():
-            kind, rs = verdict_of(b)
-            if kind == "unknown":
-                continue
             f = locate(corpus_dir, name)
             if not f:
                 continue
@@ -183,11 +110,8 @@ def check(quotes, spans, corpus_dir):
             if pq not in _p("\n".join(lines)):
                 continue
             checked += 1
-            # ★ `none_his`：这份文件里没有一行是他的 ⇒ 落进来就是越界，**不必再看区间**
-            # ★ 多段：落进**任何一段**都算在内（他的文字被别人的插段切开时的正解）
-            inside = (kind == "ranges"
-                      and any(pq in _p("\n".join(lines[s - 1:e])) for s, e in rs))
-            if not inside:
+            inside = _p("\n".join(lines[b["start_line"] - 1:b["end_line"]]))
+            if pq not in inside:
                 bad.append((tag, name, q[:90]))
             break
     return checked, bad
@@ -198,40 +122,6 @@ def check(quotes, spans, corpus_dir):
 def selftest() -> int:
     import tempfile
     fails = []
-
-    # ★★★ 2026-08-18 新增：两种 schema 都要认（纯函数，先于文件测试跑）
-    def _chk0(lbl, cond):
-        print(("  ✓ " if cond else "  ✗ ") + lbl)
-        if not cond:
-            fails.append(lbl)
-    _chk0("★★★ 正例：扁平 `{start_line, end_line}` ⇒ 认出 1 段",
-          ranges_of({"start_line": 68, "end_line": 196}) == [(68, 196)])
-    _chk0("★★★ 正例：**Barton 的形状** `{hers: [[171,838]]}` ⇒ 认出 1 段（逐字取自 wip-barton-117）",
-          ranges_of({"hers": [[171, 838]], "not_hers": [[840, 922]],
-                     "evidence_start": "The Red Cross in Cuba"}) == [(171, 838)])
-    _chk0("★★ 正例：多段 `hers` 全部收（他的文字被别人的插段切开时的正解）",
-          ranges_of({"hers": [[10, 20], [40, 55]]}) == [(10, 20), (40, 55)])
-    _chk0("★★★ 负例：`not_hers` **不算他的**（收错方向就把别人的话判成他的）",
-          ranges_of({"not_hers": [[840, 922]]}) == [])
-    _chk0("★★ 负例：两种都没有 ⇒ 返回空，由调用方判「未检查」，**不当通过**",
-          ranges_of({"caveat": "x"}) == [] and ranges_of({}) == [] and ranges_of(None) == [])
-    _chk0("★ 负例：区间写反 / 不是整数 ⇒ 不收（宁可未检查，不要错段）",
-          ranges_of({"hers": [[900, 100]]}) == []
-          and ranges_of({"hers": [["a", "b"]]}) == []
-          and ranges_of({"start_line": 9, "end_line": 3}) == [])
-    _chk0("★★ `hers` 存在时**优先于**扁平字段（更细的那个说了算）",
-          ranges_of({"hers": [[5, 6]], "start_line": 1, "end_line": 100}) == [(5, 6)])
-    # ★★★ 三态：`hers: []`（明写的空）≠ 没写。逐字取自 wip-barton-117。
-    _chk0("★★★★ `hers: []` + why「没有一行是她的话」⇒ **none_his**，不是 unknown",
-          verdict_of({"hers": [], "about_her": [[1918, 2696]],
-                      "why": "群传，她只占一章；★ 全章是别人写她，**没有一行是她的话**。"})
-          == ("none_his", []))
-    _chk0("★★★ `hers: []` **且有 `mixed`**（明标切不出边界）⇒ **unknown**，不许当 none_his",
-          verdict_of({"hers": [], "mixed": [[1, 999999]],
-                      "why": "目次 OCR 破碎，页码读不准，所以**不给行号**"})[0] == "unknown")
-    _chk0("★★ 连 `hers` 键都没有 ⇒ unknown（没写 ≠ 明写的空）",
-          verdict_of({"caveat": "x"})[0] == "unknown")
-    _chk0("★ 有区间 ⇒ ranges", verdict_of({"hers": [[1, 2]]})[0] == "ranges")
 
     def chk(label, cond):
         print(("  ✓ " if cond else "  ✗ ") + label)
@@ -316,22 +206,8 @@ def main() -> int:
     if not bp.is_file():
         print(f"✗ **{a.boundaries} 不在——本次未检查（不是通过）**")
         return 3
-    raw_spans = json.loads(bp.read_text(encoding="utf-8"))
-    ent = {k: v for k, v in raw_spans.items() if isinstance(v, dict) and not k.startswith("_")}
-    kinds = {k: verdict_of(v)[0] for k, v in ent.items()}
-    spans = {k: v for k, v in ent.items() if kinds[k] != "unknown"}
-    unknown = [k for k, kk in kinds.items() if kk == "unknown"]
-    none_his = [k for k, kk in kinds.items() if kk == "none_his"]
-    # ★ 三态都印出来 —— 「认不出」以前是**静默丢弃**，正是它让 Barton 那份整份变 rc=3。
-    print("边界记录 %d 条：有区间 **%d**｜**「整份都不是他的」%d**｜**认不出 %d**"
-          % (len(ent), len(ent) - len(unknown) - len(none_his), len(none_his), len(unknown)))
-    if none_his:
-        print("  ★ 「整份都不是他的」（`hers: []` 明写的空）：%s" % "、".join(none_his[:5]))
-        print("    ⇒ 引文只要落进这些文件就**一律越界** —— 这是最强的信号，不是「没信息」。")
-    if unknown:
-        print("  ★ 认不出 / 明标「切不出边界」的：%s" % "、".join(unknown[:5]))
-        print("    ⇒ **不当作通过**。支持的写法：`{start_line, end_line}` 或 `{hers: [[起,止],…]}`；"
-              "带 `mixed` 的表示边界确实切不出。")
+    spans = {k: v for k, v in json.loads(bp.read_text(encoding="utf-8")).items()
+             if isinstance(v, dict) and v.get("start_line") and v.get("end_line")}
     if not spans:
         print(f"✗ **{a.boundaries} 里没有一条可用的边界记录——本次未检查（不是通过）**")
         return 3

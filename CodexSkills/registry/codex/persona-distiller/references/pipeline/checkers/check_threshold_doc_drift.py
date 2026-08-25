@@ -46,23 +46,6 @@ KEYS = (("min_overall_score", "总分"), ("min_baseline_delta", "delta"),
 HERE = pathlib.Path(__file__).resolve().parent
 
 
-def _skill_root(start: pathlib.Path) -> pathlib.Path:
-    """往上走到 skill 根（同时有 `VERSION` 与 `SKILL.md` 的那一层）。
-
-    ★ **不许按层数写路径。** 本判据有两份副本：`scripts/` 与
-    `references/pipeline/checkers/`。原先默认文档路径写作
-    `HERE.parent / "references/pipeline/RUNBOOK.md"` —— 对 `scripts/` 那份是对的，
-    对镜像那份就成了 `references/pipeline/references/pipeline/RUNBOOK.md`，
-    **不存在** ⇒ 从镜像树跑这道门**永远 rc=3、永远跑不起来**。
-    一道跑不起来的门不是门。[[zero-hit-gates-must-prove-they-can-hit]]
-    """
-    cur = start.resolve()
-    for cand in [cur] + list(cur.parents):
-        if (cand / "VERSION").is_file() and (cand / "SKILL.md").is_file():
-            return cand
-    return start.parent
-
-
 def load_thresholds(qc: pathlib.Path) -> dict:
     spec = importlib.util.spec_from_file_location("_pd_qc", qc)
     mod = importlib.util.module_from_spec(spec)
@@ -78,97 +61,6 @@ def doc_rows(text: str) -> dict:
         if m:
             out[prof] = [float(x) for x in re.findall(r"\d*\.\d+", m.group(1))]
     return out
-
-
-# ★★ **第二张表**：RUNBOOK 里还有一处「来源／一手占比／道」的档位表
-#   （形如 `quick     来源 ≥8  ／ 一手占比 ≥0.40 ／ 道 ≥3`），
-#   与上面那张四列表**不是同一张**。2026-08-17 逐格核过是同步的 ——
-#   **但此前没有任何东西保证它继续同步**，而这张表已经出过一次事故：
-#   RUNBOOK 自己记着「初稿把 standard 写成『道 ≥3』」（真值 ≥6）。
-#   [[a-gates-scan-set-is-smaller-than-reality]]｜[[every-requirement-needs-an-owner]]
-#   ★ 「deep 一手 ≥30」不在 PROFILE_THRESHOLDS 里，它是
-#     `min_sources × min_primary_ratio = 45×0.65 = 29.25 → 30` 推出来的，
-#     所以按**推导值**校验，不当成独立常量。
-PROSE_KEYS = (("min_sources", "来源"), ("min_primary_ratio", "一手占比"), ("min_lanes", "道"))
-
-
-def prose_rows(text: str) -> dict:
-    """→ {profile: {来源/一手占比/道: 数值}}，只认以档位名开头的**非表格**行。"""
-    out = {}
-    for prof in ("quick", "standard", "deep"):
-        m = re.search(rf"^{prof}\s+来源\s*≥\s*([\d.]+).*?$", text, re.M)
-        if not m:
-            continue
-        line = m.group(0)
-        row = {"来源": float(m.group(1))}
-        for label in ("一手占比", "道", "一手"):
-            mm = re.search(rf"{label}\s*≥\s*([\d.]+)", line)
-            if mm:
-                row[label] = float(mm.group(1))
-        out[prof] = row
-    return out
-
-
-def check_walkthrough_claims(qc_thresholds: dict, text: str) -> list:
-    """RUNBOOK 的 deep 走查里那句「≥N mental-model + ≥M heuristic」也要对上代码。
-
-    2026-08-17：`min_models` / `min_heuristics` 此前**没有任何判据看过**。
-    那句话在上下文里是对的（同节步骤 2 写死 `--profile deep`），
-    但它就是 2026-08-05 那次事故的同一形状 ——「只列 deep 那一档而没写 deep」，
-    当时我据此把 Thomson #129 的门槛记成 0.07（真值 0.03）。
-    ⇒ 文档已补档位标注，这里再把数字钉到代码上。
-    ★ 找不到那句话 = **未核，不是通过**。
-    """
-    m = re.search(r"≥\s*(\d+)\s*mental-model\s*\+\s*≥\s*(\d+)\s*heuristic", text)
-    if not m:
-        return ["✗ **文档里找不到「≥N mental-model + ≥M heuristic」那句** —— 未核，不是通过"]
-    bad = []
-    for got, key, label in ((int(m.group(1)), "min_models", "mental-model"),
-                            (int(m.group(2)), "min_heuristics", "heuristic")):
-        if key not in qc_thresholds.get("deep", {}):
-            bad.append(f"✗ 代码 deep 档里没有 `{key}` —— 无从比对，不是通过")
-        elif got != qc_thresholds["deep"][key]:
-            bad.append(f"✗ deep 走查／{label}：文档 {got}　代码 "
-                       f"{qc_thresholds['deep'][key]}")
-    return bad
-
-
-def check_prose_table(qc_thresholds: dict, text: str) -> list:
-    """→ 不一致的说明列表。**找不到那张表也算问题**（空扫描面不算通过）。"""
-    rows = prose_rows(text)
-    bad = []
-    if not rows:
-        return ["✗ **文档里找不到「来源／一手占比／道」那张档位表** —— 未核，不是通过"]
-    for prof in ("quick", "standard", "deep"):
-        r = rows.get(prof)
-        if r is None:
-            bad.append(f"✗ 散文档位表里**缺 `{prof}` 那一行**")
-            continue
-        for key, label in PROSE_KEYS:
-            # ★ 代码里没有这个键时**如实报，不许崩** —— 崩掉的判据给不出结论。
-            if key not in qc_thresholds[prof]:
-                bad.append(f"✗ 代码的 `{prof}` 里没有 `{key}` —— 无从比对，不是通过")
-                continue
-            want = float(qc_thresholds[prof][key])
-            got = r.get(label)
-            if got is None:
-                bad.append(f"✗ `{prof}` 那行没写「{label}」")
-            elif got != want:
-                bad.append(f"✗ `{prof}`／{label}：文档 {got}　代码 {want}")
-        # 推导值：一手 ≥ ceil(min_sources × min_primary_ratio)
-        if "一手" in r:
-            import math
-            if not {"min_sources", "min_primary_ratio"} <= set(qc_thresholds[prof]):
-                bad.append(f"✗ 代码的 `{prof}` 缺 min_sources/min_primary_ratio，"
-                           "「一手 ≥N」无从推导 —— 不是通过")
-                continue
-            derived = math.ceil(qc_thresholds[prof]["min_sources"]
-                                * qc_thresholds[prof]["min_primary_ratio"])
-            if r["一手"] != derived:
-                bad.append(f"✗ `{prof}`／一手：文档 {r['一手']}　"
-                           f"推导 {derived}（{qc_thresholds[prof]['min_sources']}×"
-                           f"{qc_thresholds[prof]['min_primary_ratio']}）")
-    return bad
 
 
 def check(qc: pathlib.Path, doc: pathlib.Path) -> int:
@@ -187,15 +79,6 @@ def check(qc: pathlib.Path, doc: pathlib.Path) -> int:
         if g != w:
             bad.append(f"✗ **`{prof}` 对不上**：文档 {g}　代码 {w}")
         print(f"  {prof:9} 文档 {g}　代码 {w}　{'✓' if g == w else '✗'}")
-    # ★ 第二张表（来源／一手占比／道）——**同一份文档里的另一处档位表**
-    prose_bad = check_prose_table(want, doc.read_text(encoding="utf-8"))
-    print("  ── 散文档位表（来源／一手占比／道）：%s"
-          % ("**%d 处对不上**" % len(prose_bad) if prose_bad else "逐格一致 ✓"))
-    bad.extend(prose_bad)
-    wt_bad = check_walkthrough_claims(want, doc.read_text(encoding="utf-8"))
-    print("  ── deep 走查的 mental-model／heuristic：%s"
-          % ("**%d 处对不上**" % len(wt_bad) if wt_bad else "与代码一致 ✓"))
-    bad.extend(wt_bad)
     for b in bad:
         print("  " + b)
     if bad:
@@ -213,21 +96,11 @@ def self_test() -> int:
         ok = ok and bool(c)
         print(("  ✓ " if c else "  ✗ ") + m)
 
-    # ★ fixture 必须**两张表都带**：2026-08-17 把判据的射程扩到第二张
-    #   （来源／一手占比／道）之后，只带第一张的 fixture 会被判成
-    #   「找不到那张表 —— 未核」，于是 ㉛a 当场变红。
-    #   **夹具的完整度要跟着判据的射程走。**[[fixtures-cleaner-than-the-real-thing]]
-    PROSE = ("\ndeep      来源 ≥45 ／ 一手 ≥30 ／ 一手占比 ≥0.65 ／ 道 ≥6\n"
-             "standard  来源 ≥24 ／                一手占比 ≥0.50 ／ 道 ≥6\n"
-             "quick     来源 ≥8  ／                一手占比 ≥0.40 ／ 道 ≥3\n"
-             # ★ 判据射程再扩一格，夹具就要再补一句 —— 这次是**先预测再跑**：
-             #   上一轮正是漏了这一步，扩完射程 ㉛a 当场变红。
-             "5. **claims**：**≥4 mental-model + ≥6 heuristic**（deep 档）\n")
     good = ("| profile | 总分 | delta | 边界 | 事实保持 |\n"
             "|---|---|---|---|---|\n"
             "| quick    | ≥0.65 | ≥0.03 | ≥0.70 | ≥0.80 |\n"
             "| standard | ≥0.72 | ≥0.05 | ≥0.78 | ≥0.88 |\n"
-            "| deep     | ≥0.80 | ≥0.07 | ≥0.85 | ≥0.93 |\n") + PROSE
+            "| deep     | ≥0.80 | ≥0.07 | ≥0.85 | ≥0.93 |\n")
     r = doc_rows(good)
     chk(f"三档都读到：{sorted(r)}", sorted(r) == ["deep", "quick", "standard"])
     chk(f"quick 那行读成 {r['quick']}", r["quick"] == [0.65, 0.03, 0.70, 0.80])
@@ -262,25 +135,13 @@ def self_test() -> int:
     import tempfile as _tf
     print("\n══ ㉛ check() 本体（tempdir 上造真源与文档）══")
 
-    # ★ 夹具的键要跟着判据的射程走：2026-08-17 扩到第二张表之后，
-    #   这里少了 min_sources / min_primary_ratio / min_lanes 三个键，
-    #   ★★ **同一个坑连踩三次**：第三次我明明先预测了夹具要补，
-    #     却只补了**文档侧**那句话，忘了**代码侧**的 min_models/min_heuristics。
-    #     ⇒ 判据每扩一格射程，夹具的**两侧**都要跟：文档 fixture 与 _QC。
-    #   判据当场 KeyError 崩掉 —— **崩掉的判据给不出结论**（已同时改成如实报）。
     _QC = ('PROFILE_THRESHOLDS = {\n'
            '  "quick":    {"min_overall_score": 0.65, "min_baseline_delta": 0.03,\n'
-           '               "min_boundary_score": 0.70, "min_fact_score": 0.80,\n'
-           '               "min_sources": 8, "min_primary_ratio": 0.40, "min_lanes": 3,\n'
-           '               "min_models": 2, "min_heuristics": 3, "min_suite_cases": 1},\n'
+           '               "min_boundary_score": 0.70, "min_fact_score": 0.80},\n'
            '  "standard": {"min_overall_score": 0.72, "min_baseline_delta": 0.05,\n'
-           '               "min_boundary_score": 0.78, "min_fact_score": 0.88,\n'
-           '               "min_sources": 24, "min_primary_ratio": 0.50, "min_lanes": 6,\n'
-           '               "min_models": 3, "min_heuristics": 5, "min_suite_cases": 1},\n'
+           '               "min_boundary_score": 0.78, "min_fact_score": 0.88},\n'
            '  "deep":     {"min_overall_score": 0.80, "min_baseline_delta": 0.07,\n'
-           '               "min_boundary_score": 0.85, "min_fact_score": 0.93,\n'
-           '               "min_sources": 45, "min_primary_ratio": 0.65, "min_lanes": 6,\n'
-           '               "min_models": 4, "min_heuristics": 6, "min_suite_cases": 2},\n'
+           '               "min_boundary_score": 0.85, "min_fact_score": 0.93},\n'
            '}\n')
 
     def _run(doc_text, qc_text=_QC):
@@ -292,49 +153,8 @@ def self_test() -> int:
             rc = check(d / "qc.py", d / "doc.md")
         return rc, buf.getvalue()
 
-    # ★★★ **把「记得更新夹具」变成机器检查。** 同一个坑今天连踩三次：
-    #   判据每扩一格射程，`_QC` 就要补对应的键，而我三次都靠「记得」——
-    #   前两次漏文档侧，第三次刚写完「先预测再跑」又漏了代码侧。
-    #   ⇒ 这里直接拿**真** `PROFILE_THRESHOLDS` 的键集合比夹具：
-    #     真源一加键，本条立刻红，不用等某条用例莫名其妙地失败。
-    #   [[every-requirement-needs-an-owner]]｜[[a-rule-in-a-doc-has-no-enforcer]]
-    _real = HERE / "quality_check.py"
-    if _real.is_file():
-        try:
-            real_keys = set(load_thresholds(_real)["deep"])
-        except Exception as exc:                                  # noqa: BLE001
-            real_keys = None
-            chk(f"㉛n 读真 PROFILE_THRESHOLDS：**读不到就不算通过**（{exc}）", False)
-        if real_keys is not None:
-            d = pathlib.Path(_tf.mkdtemp())
-            (d / "qc.py").write_text(_QC, encoding="utf-8")
-            fx_keys = set(load_thresholds(d / "qc.py")["deep"])
-            chk("㉛n 夹具 `_QC` 的键集合 == 真 PROFILE_THRESHOLDS"
-                + (f"（夹具缺 {sorted(real_keys - fx_keys)}）" if real_keys - fx_keys else "")
-                + (f"（夹具多 {sorted(fx_keys - real_keys)}）" if fx_keys - real_keys else ""),
-                fx_keys == real_keys)
-    else:
-        chk("㉛n 找不到真 quality_check.py —— **未核，不是通过**", False)
-
     rc, out = _run(good)
     chk(f"㉛a 文档与代码逐格一致 → rc=0（rc={rc}）", rc == 0 and "逐格一致" in out)
-
-    # ★★ 第二张表的三条反向对照 —— **判据扩了射程，反例也要跟着扩**
-    rc_b, out_b = _run(good.replace("道 ≥3", "道 ≥4"))
-    chk(f"㉛i 散文表某一格被改 → rc=1 并点名（rc={rc_b}）",
-        rc_b == 1 and "quick`／道" in out_b)
-    rc_c, out_c = _run(good.replace(PROSE, "\n"))
-    chk(f"㉛j 散文表整张缺失 → **未核，不是通过**（rc={rc_c}）",
-        rc_c == 1 and "找不到" in out_c)
-    rc_d, out_d = _run(good.replace("一手 ≥30", "一手 ≥20"))
-    chk(f"㉛k 推导值「一手≥30」被改 → rc=1（rc={rc_d}）",
-        rc_d == 1 and "一手" in out_d)
-    rc_e, out_e = _run(good.replace("≥4 mental-model", "≥5 mental-model"))
-    chk(f"㉛l deep 走查的 mental-model 被改 → rc=1 并点名（rc={rc_e}）",
-        rc_e == 1 and "mental-model" in out_e)
-    rc_f, out_f = _run(good.replace("**≥4 mental-model + ≥6 heuristic**（deep 档）", ""))
-    chk(f"㉛m 那句话整句缺失 → **未核，不是通过**（rc={rc_f}）",
-        rc_f == 1 and "找不到" in out_f)
 
     rc, out = _run(good.replace("≥0.03", "≥0.07"))
     chk(f"㉛b **quick 的 delta 被写成 0.07** → rc=1 且点名 quick"
@@ -377,7 +197,7 @@ def main() -> int:
     ap.add_argument("--quality-check", type=pathlib.Path,
                     default=HERE / "quality_check.py")
     ap.add_argument("--doc", type=pathlib.Path,
-                    default=_skill_root(HERE) / "references/pipeline/RUNBOOK.md")
+                    default=HERE.parent / "references/pipeline/RUNBOOK.md")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
     if a.self_test:

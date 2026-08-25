@@ -1,0 +1,51 @@
+{
+  "$id": "teleiosis://schemas/arena-spec.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "arena_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "candidate_participant_id": {
+      "type": "string"
+    },
+    "declared_evidence_level": {
+      "enum": [
+        "L1",
+        "L2",
+        "L3",
+        "L4"
+      ]
+    },
+    "freeze": {
+      "type": "object"
+    },
+    "mode": {
+      "enum": [
+        "development",
+        "sealed"
+      ]
+    },
+    "participants": {
+      "minItems": 2,
+      "type": "array"
+    },
+    "protocol": {
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "teleiosis.arena_spec.v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "arena_id",
+    "mode",
+    "declared_evidence_level",
+    "candidate_participant_id",
+    "participants",
+    "protocol"
+  ],
+  "type": "object"
+}

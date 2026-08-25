@@ -1,9 +1,18 @@
 ---
 name: verifier
-description: Independently verify exactly one selected software project per run and issue an evidence-backed acceptance or release verdict. Use when the user says 验收一下, 调用软件验收skill, 软件验收, verifier, or asks for release recheck. When an approved Product-Design-Taskpack exists, ingest it read-only, freeze the complete relevant taskpack as a deterministic source snapshot, bind a normalized full-pack digest plus a separate seven-role contract digest, enforce Requirement-to-Acceptance-to-Oracle-to-Test-to-Evidence-to-Artifact traceability, and block taskpack, attachment, or Oracle drift. Bind source to the exact snapshot/build/artifact/deployment, execute real outcomes and risk-driven checks, validate staged-release and AI/agent behavior when applicable, emit an in-toto Test Result attestation, seal the evidence bundle, and expose exactly one builder-ready acceptance-review taskpack ZIP as the sole default file deliverable. Never alter Skill 1, fix the product, or self-approve work from the builder context.
+description: 独立验收一个软件项目并给出有证据的裁决。两个入口，按输入自动选。入口 A「走一遍」——只给一个网址（或一个网址+一句北极星）时用；用干净会话真的打开它、从第一步走到最后一步、刷新看结果还在不在，只回四个词 通/断了/没做/不确定 加卡在第几步；不需要任务包、不算 digest、不发 attestation、不产 ZIP、不建任何文件。当用户说 走一遍、验一下、通不通、能用吗、这个网址能用吗、帮我看看上线了没 时走入口 A。入口 B「正式验收」——用户说 验收一下、软件验收、调用软件验收skill、verifier、发布放行复验，或提供 Product-Design-Taskpack 时用；只读消费任务包并冻结为确定性快照，绑定 normalized full-pack digest 与七角色 contract digest，强制 Requirement-Acceptance-Oracle-Test-Evidence-Artifact 追溯，拦截任务包/附件/Oracle 漂移，把 source 绑到精确 snapshot/build/artifact/deployment，执行真实结果与风险驱动检查，适用时校验渐进发布与 AI/agent 行为，产出 in-toto Test Result attestation、封存证据包，并只暴露一个 builder-ready 验收复审任务包 ZIP。两个入口共同不变量：绝不修改 Skill 1、绝不替 builder 修产品、绝不从 builder 上下文自我批准。
 ---
 
-# Verifier v2.1 — 单项目独立验收与交付放行
+# Verifier v2.2 — 单项目独立验收与交付放行
+
+**两个入口，按输入自动选：**
+
+| 你手上有什么 | 走哪条 | 产出 |
+|---|---|---|
+| **只有一个网址** | 入口 A「走一遍」 | 七行文字，四个词之一。不建任何文件 |
+| 有 Product-Design-Taskpack / 要发布放行 | 入口 B「正式验收」 | 完整裁决 ＋ 一个验收复审任务包 ZIP |
+
+**缺任务包不是缺陷，是入口 A 的正常输入。不要要求用户先去造一个任务包。**
 
 ## 使命
 
@@ -22,6 +31,77 @@ description: Independently verify exactly one selected software project per run 
 “最小验收闭包”不只等于直接代码依赖，还包括证明核心用户结果所必需的共享 schema、鉴权、迁移、配置、Feature Flag、运行时服务和第三方接口切片。闭包外项目仍然不获得 verdict。
 
 若存在已授权 `Product-Design-Taskpack`，Verifier **只读消费，不修改 Skill 1 或其任务包**。它先冻结完整任务包（包括七个核心语义文件及其引用的 schema、fixture、ADR、附件等相关文件）为确定性 `TASKPACK_SOURCE_SNAPSHOT.zip`，再分别计算：`pack_digest_sha256`（规范化完整文件树）与 `contract_digest_sha256`（七个语义角色）。Task Graph 只用于覆盖追溯，不能降低、替换或删除 Acceptance/Oracle。完整性、语义兼容性与漂移审查必须分别举证，不能互相替代。
+
+---
+
+# 入口 A —— 走一遍（只有一个网址时，走这条）
+
+**触发**：用户只给了一个网址，或说「走一遍 / 验一下 / 通不通 / 能用吗 / 上线了没」。
+**没有任务包不是缺陷，是这条入口的正常输入。** 不要因为缺任务包就升级到入口 B，也不要要求用户先造一个。
+
+## 输入（只要这两样）
+
+```
+网址：<一个能点开的 http(s) 地址>
+北极星：<谁 用它 做成什么事>
+```
+
+北极星没给就去目标仓 `README.md` 第一行取。两样都拿不到 → 直接回 `不确定`，说缺哪样，结束。
+
+## 唯一要回答的问题
+
+**一个第一次来的人，能不能在这个网址上，从第一步走到最后一步，把北极星那句话说的事做成？**
+
+不回答别的。不评价代码、不评价架构、不主动提改进建议。
+
+## 怎么走
+
+用浏览器工具（`mcp__Claude_Browser__*` 或等价工具）**真的打开那个网址**，不许读代码推断。
+
+1. 干净会话打开网址（不带已登录状态、不带缓存假设）
+2. 按北极星那句话，**从第一步走到最后一步**；每步记下：点了什么、看到什么
+3. 做成之后 **刷新一次**，看结果还在不在
+4. 走不动就停在那一步，把屏幕上实际显示的东西原样抄下来
+
+## 只输出这七行
+
+```
+通 / 断了 / 没做 / 不确定
+
+走到第几步：<第 N 步，做什么的时候>
+屏幕上是什么：<原样抄下来，包括报错文字>
+刷新后还在吗：<在 / 不在 / 没走到这一步>
+```
+
+四个词不许混用：
+
+| 词 | 什么时候用 |
+|---|---|
+| **通** | 亲自从第一步走到了最后一步，结果对，刷新后还在 |
+| **断了** | 走到某一步走不下去，看到了具体的失败 |
+| **没做** | 那个功能根本不存在，不是坏了 |
+| **不确定** | 打不开、要凭据、我这边环境问题，或任何我没能亲自走完的情况 |
+
+## 入口 A 的硬规矩
+
+- **走不完就是「不确定」，永远不是「通」。** 失效方向必须是「看不见」，不能是「没问题」。
+- **别人说的只当线索。** builder 的总结、截图、CI 绿灯、「已完成」一律不作数。
+- **不许修产品。** 看到坏的就报，不动手。
+- **不许自我批准。** 自己写的东西不能自己判「通」——换一个会话来走。
+- **不许拿结构检查冒充走通。** 元素存在 ≠ 能用；接口 200 ≠ 结果对。
+- **不许用假数据走。** 用假数据走完的只能报「不确定」，并说明是假数据。
+- **算不出、字段缺失、不适用 —— 都不是「通」**，是「不确定」。
+
+## 入口 A 明确不做
+
+不算 digest、不做 SHA 校验、不发 attestation、不封证据包、不产出 ZIP、不写验收报告、不建任何文件。
+**输出就是上面那七行，说完结束。**
+
+需要冻结版本身份、发布放行裁决、任务包漂移审查时，才走下面的入口 B。
+
+---
+
+# 入口 B —— 正式验收
 
 ## Owner 的最小负担
 

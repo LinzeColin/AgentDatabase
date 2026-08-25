@@ -1,0 +1,53 @@
+{
+  "title": "Teleiosis Control Console",
+  "subtitle": "v0.0.0.3 full non-routed run, evidence boundaries and release state",
+  "version": "v0.0.0.3",
+  "status_domains": {
+    "control_plane": "PASS_LOCAL_VERIFIED",
+    "benchmark_integrity": "LAB_VALID_FIELD_PENDING",
+    "outcome": "OUTCOME_NOT_PROVEN",
+    "cost_evidence": "PARTIAL",
+    "independent_review": "UNAVAILABLE_NOT_CLAIMED",
+    "engineering_release": "INSTALLABLE_LOCAL_VERIFIED",
+    "formal_promotion": "BLOCKED_PENDING_EXTERNAL_VERIFIER",
+    "current_environment_strength": "NOT_PROVEN"
+  },
+  "improvements": [
+    "T/S/P use one full non-routed Candidate lifecycle.",
+    "C is the iteration object, not a fixed SHA checkpoint.",
+    "Install and moving-main integration are semantic, transactional and reversible.",
+    "Input/output, child processes, secrets and workspace surfaces are fail-closed."
+  ],
+  "blockers": [
+    "No authenticated real GitHub push/readback was performed in the preparation runtime.",
+    "No external 2x6+1 signed independent review is available.",
+    "No authorized real-market or field evidence is claimed."
+  ],
+  "next_actions": [
+    "Run the sealed taskpack one-click publisher in the authorized last-mile environment.",
+    "Return commit, remote main readback and required-check facts.",
+    "Collect authorized field evidence only after installation."
+  ],
+  "metrics": [
+    {
+      "name": "Payload regression suite",
+      "value": "93/93 PASS",
+      "evidence": "delivery/VERIFICATION_REPORT.md"
+    },
+    {
+      "name": "Base Genesis SHA-256",
+      "value": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
+      "evidence": "constitution/genesis-lock.json"
+    },
+    {
+      "name": "Effective Genesis SHA-256",
+      "value": "65e5cd626836d7d76c753360977baa49a6b0f096a430d49222a5c25bed51248f",
+      "evidence": "constitution/effective-genesis-lock.v0.0.0.3.json"
+    },
+    {
+      "name": "Canonical Skill archive",
+      "value": "Teleiosis-v0.0.0.3-skill.zip",
+      "evidence": "metadata/release.json"
+    }
+  ]
+}

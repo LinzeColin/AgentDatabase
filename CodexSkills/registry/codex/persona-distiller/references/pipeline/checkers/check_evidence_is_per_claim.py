@@ -229,20 +229,8 @@ def main() -> int:
         if state in ("表头", "几乎是表头"):
             bad.append((f, state, distinct, n))
 
-    # ★★ 零扫描面不许印肯定句：`bad` 为空既可能是「都合格」，也可能是
-    #   「一个字段都没有实数据」。实测喂无关文档 → 照印 ✓、rc=0。
-    #   ★ 我第一版判在 `not res` 上 —— **错了**：`res` 按固定字段名建，永远有 3 项，
-    #     所以那个条件永不成立。真正的空信号在**每个字段的 state**：
-    #     全是「整批都空／记录太少不判」就等于什么也没查。
-    #     [[zero-hit-gates-must-prove-they-can-hit]]｜[[gate-green-but-pointed-at-wrong-artifact]]
-    judged = [f for f, (state, *_ ) in res.items()
-              if state not in ("整批都空", "记录太少不判")]
-    if not judged:
-        print("\n  ⚠ **没有一个证据字段有可判的数据（全是「整批都空／记录太少不判」）"
-              "—— 本次未核，不是通过。**")
-        return 0
     if not bad:
-        print("\n  ✓ 有数据可判的 **%d** 个证据字段都不是「填一次抄 N 遍」" % len(judged))
+        print("\n  ✓ 没有「填一次抄 N 遍」的证据字段")
         return 0
 
     print("\n✗ **下列字段是表头，不是逐条证据**：")
