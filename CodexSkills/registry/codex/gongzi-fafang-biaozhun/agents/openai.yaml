@@ -1,6 +1,6 @@
 interface:
   display_name: "工资发放标准"
-  short_description: "精确金额、多原始数据工资发放表整理、校验与差异交付"
-  default_prompt: "Use $gongzi-fafang-biaozhun to分别整理当月原始工资数据集、完成ABExcel校验并交付跨原始数据一致性报告。"
+  short_description: "精确金额、独立或互补多原始数据工资发放表整理、校验与清晰差异交付"
+  default_prompt: "Use $gongzi-fafang-biaozhun to识别当月原始工资数据集的独立或互补角色，完成字段语义映射、ABExcel校验并交付可读的跨原始数据一致性报告。"
 policy:
   allow_implicit_invocation: true
