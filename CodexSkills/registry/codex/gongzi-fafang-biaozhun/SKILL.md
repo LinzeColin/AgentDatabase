@@ -1,126 +1,140 @@
 ---
 name: gongzi-fafang-biaozhun
-description: Use when Codex is asked to整理、生成、校验或复核工资/薪资/发放表 Excel，尤其是当月原始发放文件按上月模板生成最终发放版、ABExcel 校验、差异报告、金额分校验、B公司/报销路由或密码 123 打开校验。
+description: 用于整理、生成、校验或复核工资、薪资、发放表 Excel；覆盖单原始文件与多原始数据集、上月正确模板、ABExcel、精确金额差异、B公司/报销路由、历史差异复演和跨原始数据一致性报告。
 ---
 
 # 工资发放标准
 
-## Core Rule
+## 中文输出规则
 
-Treat every工资发放表 task as financial production work. Do not claim correctness unless source rows, amounts in cents, routing, formulas, styles, ABExcel, password-open, save-reopen, and mutation tests all pass.
+工资发放结果、复核结论、差异清单和交接说明均使用简体中文；原始系统字段、公式、路径和机器状态码可保留原样并附中文标签。详细口径见 `kmfa-monthly-close/references/中文输出与术语规则.md`。
 
-Before doing any workbook action, read `references/工资发放标准.md` completely and follow it as the business source of truth. Use the spreadsheet workflow/tooling available in the current environment for `.xlsx` authoring and verification.
+## 核心规则
 
-## Input Sufficiency Gate
+每个工资发放表任务都是财务生产工作。只有源行、金额、路由、公式、样式、ABExcel、密码打开、保存重开和变异验证全部有证据通过时，才允许签发“已通过”。
 
-If any required input is missing or ambiguous, stop before implementation and ask for the missing items with a numbered checklist.
+在任何工作簿动作前，完整阅读 `references/工资发放标准.md`，并以它作为业务真源。使用当前环境可用的表格工作流和工具处理 `.xlsx`。
 
-Required inputs:
+## 金额精度与差异纪律
 
-| Item | Requirement | Default |
+1. 金额先以原始十进制精度读取，再生成金额分视图；二进制浮点数不参与最终判断。
+2. 任意非零精确差异都是差异，包括 `0.00001` 元。
+3. 源金额超过两位小数时，保留原始精度并报告“金额精度异常”；正式结论保持“存在差异”。
+4. 人工认可可以标注业务处置状态，技术差异仍保留在差异报告、ABExcel 和总结果中。
+5. 总额相等不能替代逐行、逐字段、逐分区、逐路由和逐精度一致。
+
+## 凭据处理
+
+1. 打开口令由当前用户授权作为一次性运行配置提供；技能、Git 仓库、报告、日志、交接和机器可读结果只记录验证状态与文件范围。
+2. 对每个受保护文件逐一验证授权候选口令，形成“文件—验证结果”记录；成功口令值保持在运行内存中。
+3. 正式输出默认使用上月正确版本成功验证的打开口令；用户可在当前运行中明确指定其他输出保护策略。
+4. 每份正式输出分别执行加密打开和保存重开；任何一份失败均进入差异报告。
+
+## 输入充分性门槛
+
+资料缺失或语义含糊时，在实现前用编号清单索取最小补件。
+
+| 项目 | 要求 | 默认值 |
 |---|---|---|
-| 当月原始 Excel | Must be the unique data source; user must identify it clearly | none |
-| 模板 Excel / 上月最终正确版 | Provides only structure, style, formulas, Sheet order, sections | none |
-| 文件角色 | Which file is raw and which file is template | none |
-| 文件密码 | Opening password for protected workbooks | `123` |
-| 目标月份 | Used in workbook title and output filenames, e.g. `2026.05月发放` | none |
-| 发给 Agent 的日期 | `YYYYMMDD` used in output filenames | current date only if user accepts |
-| 输出位置 | Determined from the primary raw payroll input | Primary raw input's parent directory |
-| 特殊规则/例外 | Only if user wants rules beyond the standard | none |
+| 当月原始数据集 | 一个或多个原始 Excel；每份均是独立唯一数据源 | 无 |
+| 上月正确版本 / 模板 | 只提供结构、样式、公式、Sheet 顺序和分区 | 无 |
+| 文件角色 | 明确每份文件属于原始、模板、历史复演原始或历史复演结果 | 无 |
+| 运行时打开口令 | 当前运行授权的候选口令集 | 无 |
+| 输出保护策略 | 默认沿用成功打开的上月正确版本口令 | 模板已验证口令 |
+| 目标月份 | 用于工作簿标题和输出文件名 | 原始工作簿内目标月份；有冲突时停下确认 |
+| 发给 Agent 的日期 | `YYYYMMDD`，用于输出文件名 | 当前日期，除非用户指定 |
+| 原始数据集标识 | 多源同目录时为每个原始文件分配稳定来源标识 | `source_01`、`source_02`… |
+| 历史复演组 | 用户要求保留既往人工处置差异时，提供原始与结果文件 | 按需 |
+| 特殊规则/例外 | 仅限用户明确授权的额外业务规则 | 无 |
 
-Necessary and sufficient condition to proceed: raw file + template file + file-role mapping + target month + output date + readable password. If these are not satisfied, do not infer from filenames when doing so could change money, routing, or deliverable names.
+必要充分条件：原始数据集、模板、角色映射、目标月份、输出日期、每份受保护文件的可读路径和输出保护策略齐全。文件名只可作为待核对线索，不能替代业务字段、路由或正式金额依据。
 
-## Execution Contract
+## 执行约定
 
-Start every non-trivial run with a compact contract:
+每次非平凡执行先给出简洁约定：
 
-1. Goal.
-2. Minimal file scope.
-3. Files/directories to inspect.
-4. Files that may be written.
-5. Verification commands/checks.
-6. Risks and rollback.
-7. Stop conditions.
+1. 目标。
+2. 最小文件范围。
+3. 将读取的文件和目录。
+4. 将写入的文件和目录。
+5. 复核命令与检查项。
+6. 风险与回滚方式。
+7. 停止条件。
 
-Only write outputs to the declared output directory. Never modify input workbooks.
+输入工作簿始终保持原样；结果仅写入声明的交付位置。
 
-## Output Placement
+## 多原始数据集模式
 
-Unless the user explicitly specifies another directory, declare the output directory automatically as follows:
+当存在两份或更多当月原始文件时，使用统一的 `source_set` 模式：
 
-1. Use the parent directory of the primary raw payroll input.
-2. If the primary raw input is a compressed archive, use the archive's parent directory, never a temporary extraction directory.
-3. If several inputs are in different directories, the primary raw payroll input takes precedence; a template, detail workbook, or reference workbook never determines the output directory.
-4. Write every deliverable directly to that directory: final payroll workbook, ABExcel check workbook, difference report, and difference detail workbook. Do not create a separate output subdirectory.
-5. This payroll-specific placement rule takes precedence over a generic raw-data-directory write restriction. It permits only task deliverables in that directory and never permits modifying, moving, renaming, or overwriting an input workbook.
+1. 每份原始文件独立建立 Canonical Ledger、Oracle、最终发放版与 ABExcel。
+2. 上月正确版本只提供结构、样式、公式和分区；原始文件之间不互相补值、不以多数表决替代原始事实。
+3. 每份原始文件分别完成两轮六类检查、二十项测试、变异验证、密码重开和保存重开。
+4. 在独立处理完成后生成跨原始数据一致性报告：共同业务键金额、仅源 A、仅源 B、字段差异、路由差异、分区差异和覆盖范围差异分别列示。
+5. 共同键金额相等与全体覆盖相等是两个独立结论；报告必须同时给出。
+6. 历史复演用于校准和解释既往人工处置；它不改变本月原始数据、路由规则或精确差异判定。
 
-## Mandatory Workflow
+## 交付位置与命名
 
-Follow this order:
+除非用户另行指定：
 
-1. Read-only: inspect raw/template Sheet order, used ranges, headers, formulas, styles, merged cells, key fields, row counts, and anomalies.
-2. Plan: list files, output names, handled Sheets, routing rules, tests, rollback.
-3. Implement: build Canonical Ledger from raw; generate final workbook from template structure; generate independent Oracle/B workbook; generate ABExcel.
-4. Verify: run 2 rounds x 6 checks, 20 tests, password-open/save-reopen, formula-error scan, style fingerprint, and mutation tests.
-5. Deliver: use conditional delivery rules from the reference standard.
-
-## Accuracy Requirements
-
-- Convert money to exact integer cents for validation; do not use binary float as the final truth.
-- Reject or report source amounts with more than two decimals; do not silently round.
-- Keep amount cells numeric; keep identifiers such as bank card numbers and line numbers as text.
-- Do not reuse template people, old amounts, or old remarks.
-- Do not use historical person names, historical month cases, or hardcoded row fixes as business rules.
-- Do not treat matching totals as sufficient. Row-level, section-level, routing-level, formula-level, style-level, and file-level checks must also pass.
-
-## Routing Hard Stops
-
-Use `references/工资发放标准.md` section 7 exactly.
-
-Critical distinction:
-
-| Text form | Meaning |
-|---|---|
-| `公司名称/报销` | Slash form; may split B-company payment and invoice routing depending on whether B-company amount exists |
-| `公司名称报销` | Direct form; invoice routes to that company |
-
-Never merge these two forms. Never override `B公司/报销` using 社保公司. Unknown combinations must enter the difference report.
-
-## Conditional Delivery
-
-No-difference delivery only when all are true:
-
-- 2 rounds x 6 checks pass.
-- ABExcel passes.
-- 20 tests pass.
-- Mutation test proves validator catches deliberate errors.
-- No differences or unknown items.
-- Final file opens with password `123`.
-
-Deliver only:
-
-- `{目标月份}-{YYYYMMDD}_最终发放.xlsx`
-- `{目标月份}-{YYYYMMDD}_校验ABExcel检查.xlsx`
-
-If any difference, failed check, unknown item, password uncertainty, formula uncertainty, source uncertainty, or mutation-test failure exists, deliver:
-
-- `{目标月份}-{YYYYMMDD}_最终发放.xlsx`
-- `{目标月份}-{YYYYMMDD}_校验ABExcel检查.xlsx`
-- `{目标月份}-{YYYYMMDD}_差异报告.md`
-- `{目标月份}-{YYYYMMDD}_差异明细.xlsx`
-
-Do not say “准确无误”, “最终正确”, or “无差异通过” unless the reference standard’s final acceptance criteria all pass with evidence.
-
-## Insufficient Input Response Template
-
-When input is insufficient, respond in Chinese:
+1. 单源任务的全部交付物写入主原始工资文件的父目录。
+2. 多源任务中，每份原始文件的专属交付物写入该原始文件的父目录；跨原始数据报告写入主原始文件的父目录。
+3. 多个原始文件共用一个目录时，专属交付物使用来源标识，避免覆盖：
 
 ```text
-ACTION: ESCALATE
+{目标月份}-{YYYYMMDD}-{来源标识}_最终发放.xlsx
+{目标月份}-{YYYYMMDD}-{来源标识}_校验ABExcel检查.xlsx
+{目标月份}-{YYYYMMDD}-{来源标识}_差异报告.md
+{目标月份}-{YYYYMMDD}-{来源标识}_差异明细.xlsx
+```
+
+4. 多源任务固定增加：
+
+```text
+{目标月份}-{YYYYMMDD}_跨原始数据一致性报告.md
+{目标月份}-{YYYYMMDD}_跨原始数据一致性明细.xlsx
+```
+
+5. 不创建额外输出子目录，不修改、移动、重命名或覆盖输入文件。
+
+## 必经流程
+
+按以下顺序执行：
+
+1. 只读：验证口令，检查每份原始、模板和历史复演文件的 Sheet、范围、表头、公式、样式、合并、关键字段、行数和异常。
+2. 计划：列出来源标识、输出名、处理 Sheet、路由、精度规则、复核、回滚和停止条件。
+3. 历史复演：存在历史复演组时，逐行确认既往人工处置差异并形成独立校准记录。
+4. 实现：每份原始文件建立 Canonical Ledger，以模板结构生成最终发放版，独立重建 Oracle，并生成 ABExcel。
+5. 复核：执行精确金额、行级、覆盖、路由、公式、格式、文件完整性、ABExcel、两轮六类检查、二十项测试和变异验证。
+6. 跨源复核：生成共同键与覆盖范围的独立一致性报告。
+7. 交付：按参考标准的条件交付规则输出文件和结论。
+
+## 路由硬停止
+
+严格使用 `references/工资发放标准.md` 第 7 节。
+
+| 文本形式 | 含义 |
+|---|---|
+| `公司名称/报销` | 斜杠形式；B 公司支付与发票归属随金额列组合决定 |
+| `公司名称报销` | 直接形式；发票归该公司 |
+
+两种形式分别处理。社保公司不改变 `B公司/报销` 的含义。未知组合进入差异报告。
+
+## 条件交付
+
+单源“无差异通过”需要同时满足：两轮六类检查、ABExcel、二十项测试、变异验证、精确金额、路由、公式、样式、覆盖和文件打开全部通过，且不存在未知项或金额精度异常。
+
+多源任务还需要跨源共同键金额、路由和全体覆盖全部一致。任一非零精确差异、未知项、失败项、文件不确定性或跨源差异都保持“存在差异”，并交付对应差异报告；跨原始数据一致性报告在多源任务中始终交付。
+
+只有参考标准的最终验收条件全部成立时，才使用“准确无误”“最终正确”或“无差异通过”。
+
+## 资料不足回复模板
+
+```text
 缺少完成工资发放表任务的必要充分条件：
 1. ...
-默认值：文件密码按 123 处理。
 在补齐以上信息前，我不会生成或修改正式发放文件。
 ```
 
-Keep the list minimal and concrete. Ask only for missing items that block correctness.
+清单保持最小且具体，只索取阻断正确性的资料。
