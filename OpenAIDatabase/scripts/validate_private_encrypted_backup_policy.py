@@ -213,7 +213,7 @@ def validate_policy(
         "key_id": unified_key["key_id"],
         "release_repository": release["repository"],
         "release_transport": release["transport"],
-        "workspace_isolation": "system_temporary_directory_only",
+        "workspace_isolation": "protected_incremental_journal_plus_system_temporary_payloads",
     }
 
 
