@@ -9,11 +9,12 @@
     ".github/workflows/recurring-prompt-analysis.yml"
   ],
   "allowed_nested_workflows": [
-    "CodexSkills/registry/codex/book-to-skill/.github/workflows/ci.yml",
-    "CodexSkills/registry/codex/book-to-skill/.github/workflows/codeql.yml",
-    "CodexSkills/registry/codex/book-to-skill/.github/workflows/deploy-docs.yml",
-    "CodexSkills/registry/codex/graphify/references/graphify-repo/.github/workflows/ci.yml",
-    "CodexSkills/registry/codex/graphify/references/graphify-repo/.github/workflows/release-graph.yml",
+    "CodexSkills/registry/agents/seedance-20/.github/workflows/privileged-frame-publication.yml",
+    "CodexSkills/registry/agents/seedance-20/.github/workflows/source-freshness-review.yml",
+    "CodexSkills/registry/agents/seedance-20/.github/workflows/validate-skills.yml",
+    "CodexSkills/registry/claude/seedance-20/.github/workflows/privileged-frame-publication.yml",
+    "CodexSkills/registry/claude/seedance-20/.github/workflows/source-freshness-review.yml",
+    "CodexSkills/registry/claude/seedance-20/.github/workflows/validate-skills.yml",
     "CodexSkills/registry/codex/html-anything/references/html-anything/.github/workflows/ci.yml"
   ],
   "allowed_events": [
