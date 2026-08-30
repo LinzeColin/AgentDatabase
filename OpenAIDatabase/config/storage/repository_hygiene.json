@@ -1,6 +1,28 @@
 {
   "schema_version": "agent_database.repository_hygiene.v1",
   "default_blob_max_bytes": 1048576,
+  "registry_planes": [
+    "agents",
+    "claude",
+    "codex"
+  ],
+  "persona_delivery_archive_contract": {
+    "root": "CodexSkills/registry/codex/persona-distiller-group/",
+    "identity_families": [
+      "材料建工师",
+      "软件开发师",
+      "艺术设计师",
+      "创业经营师",
+      "投资资本师",
+      "思想教育师",
+      "政治法律师",
+      "客户营销师",
+      "建造采购师",
+      "财务合规师",
+      "医疗护理师",
+      "农林牧渔师"
+    ]
+  },
   "allowed_large_objects": [
     {
       "prefix": "OpenAIDatabase/data/public_raw/",
@@ -58,9 +80,14 @@
       "reason": "tracked Teleiosis v0.0.0.5 delivery backup; exact version directory and current byte ceiling"
     },
     {
-      "prefix": "CodexSkills/registry/codex/teleiosis/fixtures/regression/",
+      "prefix": "CodexSkills/registry/{registry_plane}/comfyui-workflow-skill/images/",
+      "max_bytes": 2742374,
+      "reason": "reviewed ComfyUI workflow images mirrored across the declared registry planes"
+    },
+    {
+      "prefix": "CodexSkills/registry/{registry_plane}/teleiosis/fixtures/regression/",
       "max_bytes": 9423294,
-      "reason": "tracked Teleiosis v0.0.0.5 regression corpus; exact current byte ceiling"
+      "reason": "reviewed Teleiosis regression corpus mirrored across the declared registry planes"
     },
     {
       "prefix": "CodexSkills/skill_log_evals/persona-distiller/_ledgers/",
@@ -73,9 +100,9 @@
       "reason": "First1KGreek 仓库树清单，machine/handoff/build_handoff_commit.sh 读它；不是可再取的语料"
     },
     {
-      "prefix": "CodexSkills/registry/codex/persona-distiller-group/evidence/",
+      "prefix": "CodexSkills/registry/{registry_plane}/persona-distiller-group/evidence/",
       "max_bytes": 2097152,
-      "reason": "v0.0.0.14 候选验收 dossier；验收证据不可再生"
+      "reason": "reviewed persona-distiller acceptance evidence mirrored across the declared registry planes"
     }
   ],
   "allowed_archive_prefixes": [
