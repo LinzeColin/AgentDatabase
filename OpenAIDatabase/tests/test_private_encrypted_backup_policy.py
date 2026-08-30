@@ -49,7 +49,10 @@ class PrivateEncryptedBackupPolicyTests(unittest.TestCase):
             self.policy["scope"]["logical_sources"],
             [row["source_id"] for row in registry["sources"]],
         )
-        self.assertEqual(self.policy["scope"]["logical_sources"], self.module.EXPECTED_LOGICAL_SOURCES)
+        self.assertEqual(
+            self.policy["scope"]["logical_sources"],
+            self.module.expected_logical_sources(DATABASE_DIR.parent),
+        )
 
     def test_policy_rejects_another_repository_or_shared_workspace_writes(self) -> None:
         candidate = copy.deepcopy(self.policy)
