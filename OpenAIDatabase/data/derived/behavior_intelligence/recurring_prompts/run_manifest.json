@@ -1,6 +1,6 @@
 {
   "algorithm_version": "recurring_prompt.v4.1.0",
-  "analysis_completed_at": "2026-08-25T00:00:00Z",
+  "analysis_completed_at": "2026-09-01T00:00:00Z",
   "appended_files_processed": 0,
   "automation_clusters": 1412,
   "automation_occurrences": 14214,
@@ -10,7 +10,7 @@
   "clusters": 3721,
   "config_sha256": "sha256:4c03f7a26c43c667a35de1b703d1ed9f1ef710cd42c0ec670bd8fbb2aa5adbb3",
   "deduplicated_event_copies": 0,
-  "derived_payload_sha256": "sha256:53900ec48bc3dbc8c1571f4ba8897833eae3fdc7c35fe06128393045be539ca5",
+  "derived_payload_sha256": "sha256:2fa4254f26c322c8bdb14007fb000dd99ff2090ece5d2abf6eea68e91aae64ef",
   "derived_prompt_text_included": true,
   "derived_prompt_text_redacted": true,
   "diagnostic_counter_scope": "processed_delta_for_this_run",
@@ -38,11 +38,11 @@
   "new_files_processed": 0,
   "occurrences": 62095,
   "output_hashes": {
-    "00_Recurring分析_最新.md": "7fc4eaba690c25be88982281ea410d4d637c91f68885666174e53f4b7073fac4",
-    "00_Recurring运行状态.md": "e5daa2d8345e7a9f540919dc3495daa403c3e0cdfb4e65250c7e6ac17b9459c1",
+    "00_Recurring分析_最新.md": "0f336ba8bf2fae28274feaaa398f5245b218c6fb047f629299438ee3ab48a41f",
+    "00_Recurring运行状态.md": "19e472a836d3cab3d0a938b2adde78a238b5617fae08e5cc2261113a6ada3cf6",
     "agent_context.json": "9951131be1e2b91dfae4062eb03b83bf83f78eabdadb3a03e09ef18cd3ccd234",
-    "clusters.jsonl": "8f28dcd479411f50ccf4a8dfb450a9fa82d0550b920d32872d3b55c07525d07d",
-    "freshness.json": "8bf4b988c41376e11e24463e0fc87c185880776a26e1caea459f7cd7370a1235",
+    "clusters.jsonl": "4af322e5b18cf0622fcf2031ed76e5874d009a608bbb72d0798622fed33a67fa",
+    "freshness.json": "14f9a58047cf3012887b9847a2b047f74e6910f2f8013adf92cb1b604d6aabcb",
     "occurrences.jsonl": "ef84781c9d6545f61a9a35cd9a9af20c8be8ce7bce35634cd080adfb7ad88eed",
     "state.json": "227434f43f96d6d6875eb861d013c6a8a623619c7694e2d641911cbb6ed0bac2"
   },

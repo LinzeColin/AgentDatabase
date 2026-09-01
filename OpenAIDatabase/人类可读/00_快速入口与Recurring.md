@@ -26,7 +26,7 @@
 - 验证状态：`PASS`
 - 数据状态：`过期`
 - 数据覆盖至：`2026-07-10T16:39:25Z`
-- 本次核验时间：`2026-08-25T00:00:00Z`
+- 本次核验时间：`2026-09-01T00:00:00Z`
 - 人工对话重复组：`2309`
 - Automation 重复组：`1412`（单独统计，不进入个人画像）
 - 三类数量：问题与纠正 `18`；规则与偏好 `399`；任务与主题 `1892`
@@ -40,14 +40,14 @@
 | 1 | 你为什么总是有这个bug, | 6 | 1 | 2026-07-10T03:19:14Z | falling | [查看原始记录](../data/public_raw/codex/sessions/019f3b48-4fec-7af2-bf59-f7f854cc5c72.1f09233fab0e.part-0001.jsonl#L3363) |
 | 2 | 为什么全部都不能使用了 赶紧解决这个问题 | 5 | 1 | 2026-07-09T04:01:52Z | falling | [查看原始记录](../data/public_raw/codex/sessions/019f3b48-4fec-7af2-bf59-f7f854cc5c72.1f09233fab0e.part-0001.jsonl#L129) |
 | 3 | 我不是让你修改报告模版了吗你为什么还发的是老模版 | 4 | 1 | 2026-07-07T03:35:36Z | falling | [查看原始记录](../data/public_raw/codex/sessions/019f3a17-b597-7a11-8a66-0fe03301ef55.c5a7771f2479.part-0001.jsonl#L2661) |
-| 4 | 不要再嵌套 YYYY/MM/DD 多层目录。 | 2 | 1 | 2026-07-05T11:08:29Z | falling | [查看原始记录](../data/public_raw/codex/sessions/019f2aa6-8374-7ca1-b0f2-546070adc26b.535432310d6a.part-0001.jsonl#L4771) |
+| 4 | 不要再嵌套 YYYY/MM/DD 多层目录。 | 2 | 1 | 2026-07-05T11:08:29Z | dormant | [查看原始记录](../data/public_raw/codex/sessions/019f2aa6-8374-7ca1-b0f2-546070adc26b.535432310d6a.part-0001.jsonl#L4771) |
 | 5 | 你的这个逻辑有问题, | 2 | 1 | 2026-07-08T01:04:43Z | falling | [查看原始记录](../data/public_raw/codex/sessions/019f3c0b-72bc-7d72-aa08-76f4aec0f7c8.893b056ca050.part-0001.jsonl#L8789) |
 | 6 | 请不要再启动 morning live collect, | 2 | 1 | 2026-07-08T00:46:52Z | falling | [查看原始记录](../data/public_raw/codex/sessions/019f3f27-c77c-7002-9fb6-720c4fb95ade.50cf278536e3.part-0001.jsonl#L197) |
 | 7 | 你需要我做什么我还没有搞懂。 | 2 | 1 | 2026-07-07T03:12:34Z | falling | [查看原始记录](../data/public_raw/codex/sessions/019f3a17-eeca-7af3-928c-982ab3c8cd04.744765e72a7f.part-0001.jsonl#L1337) |
 | 8 | 把你的规则清单 运行清单完整给我 我之前检查过一次 你并没有完整的暴露出来你的问题 | 2 | 1 | 2026-07-08T01:41:52Z | falling | [查看原始记录](../data/public_raw/codex/sessions/019f3c0b-72bc-7d72-aa08-76f4aec0f7c8.893b056ca050.part-0001.jsonl#L9780) |
 | 9 | 你不要再像你之前那样子不停地给我搞弹窗, | 2 | 1 | 2026-07-07T04:24:36Z | falling | [查看原始记录](../data/public_raw/codex/sessions/019f3a17-b597-7a11-8a66-0fe03301ef55.c5a7771f2479.part-0001.jsonl#L4239) |
 | 10 | 先不要再发送“今天一切良好”, | 2 | 1 | 2026-07-07T04:58:09Z | falling | [查看原始记录](../data/public_raw/codex/sessions/019f3a17-b597-7a11-8a66-0fe03301ef55.c5a7771f2479.part-0001.jsonl#L5103) |
-| 11 | 但不要再把它们包进每群 latest.zip。 | 2 | 1 | 2026-07-05T11:08:29Z | falling | [查看原始记录](../data/public_raw/codex/sessions/019f2aa6-8374-7ca1-b0f2-546070adc26b.535432310d6a.part-0001.jsonl#L4771) |
+| 11 | 但不要再把它们包进每群 latest.zip。 | 2 | 1 | 2026-07-05T11:08:29Z | dormant | [查看原始记录](../data/public_raw/codex/sessions/019f2aa6-8374-7ca1-b0f2-546070adc26b.535432310d6a.part-0001.jsonl#L4771) |
 | 12 | 你说今天没有考勤异常, | 2 | 1 | 2026-07-07T04:58:09Z | falling | [查看原始记录](../data/public_raw/codex/sessions/019f3a17-b597-7a11-8a66-0fe03301ef55.c5a7771f2479.part-0001.jsonl#L5103) |
 
 ## 规则与偏好
@@ -127,7 +127,7 @@
 | 总体验证 | **PASS** |
 | 数据状态 | **过期** |
 | 数据覆盖至 | `2026-07-10T16:39:25Z` |
-| 本次核验时间 | `2026-08-25T00:00:00Z` |
+| 本次核验时间 | `2026-09-01T00:00:00Z` |
 | 人工重复组 | `2309` |
 | Automation 重复组 | `1412`（隔离） |
 | 问题与纠正 | `18` |
@@ -137,7 +137,7 @@
 | 注入完整性防护 | **PASS** |
 | 修复后真实数据批次 | **候选通过 1/2** |
 | 原始文件 | `131` |
-| 派生数据指纹 | `sha256:53900ec48bc3dbc8c1571f4ba8897833eae3fdc7c35fe06128393045be539ca5` |
+| 派生数据指纹 | `sha256:2fa4254f26c322c8bdb14007fb000dd99ff2090ece5d2abf6eea68e91aae64ef` |
 
 ## 自动防护
 
