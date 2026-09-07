@@ -32,6 +32,8 @@ class SourceSpec:
     path_template: str
     kind: str
     required: bool
+    availability_tier: str = "A_CLOUD_NATIVE"
+    required_for_product: bool = True
     recursive: bool = True
     env_var: str | None = None
     include_globs: tuple[str, ...] = ("**/*",)
@@ -69,6 +71,8 @@ class SourceCoverage:
     label_zh: str
     required: bool
     state: SourceState
+    availability_tier: str = "A_CLOUD_NATIVE"
+    required_for_product: bool = True
     object_count: int = 0
     size_bytes: int = 0
     message_zh: str = ""

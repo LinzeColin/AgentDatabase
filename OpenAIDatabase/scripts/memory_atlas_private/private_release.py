@@ -430,12 +430,14 @@ def _encrypt_archive(
         if returncode != 0:
             raise PrivateReleaseBackupError("age_encryption_failed")
         return writer.close()
-    except BaseException:
+    except BaseException as exc:
         writer.abort()
         if process.poll() is None:
             process.kill()
         reader.join(timeout=5)
         process.wait(timeout=10)
+        if errors:
+            raise errors[0] from exc
         raise
 
 

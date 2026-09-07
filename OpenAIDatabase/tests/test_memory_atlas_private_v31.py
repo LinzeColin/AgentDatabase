@@ -8,6 +8,7 @@ import re
 import shutil
 import sqlite3
 import subprocess
+import sys
 import threading
 import urllib.error
 import urllib.request
@@ -768,6 +769,57 @@ def test_capture_pipeline_waits_when_required_source_is_missing(tmp_path: Path, 
     assert LocalPrivateDatabase(tmp_path / "private").get_json("memory-atlas/runs/latest.json")["state"] == "WAITING_SOURCE"
 
 
+def test_capture_pipeline_keeps_saving_when_a_local_optional_agent_is_absent(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = tmp_path / "source"
+    source.mkdir()
+    (source / "event.json").write_text(json.dumps(verified_payload()), encoding="utf-8")
+    registry = write_registry(tmp_path / "registry.json", [
+        {
+            "source_id": "present",
+            "label_zh": "可见 Agent",
+            "kind": "evidence_adapter",
+            "required": True,
+            "required_for_product": False,
+            "availability_tier": "B_LOCAL_OPTIONAL",
+            "env_var": "PRESENT_AGENT_PATH",
+            "include_globs": ["*", "**/*"],
+        },
+        {
+            "source_id": "absent",
+            "label_zh": "未安装 Agent",
+            "kind": "files",
+            "required": True,
+            "required_for_product": False,
+            "availability_tier": "B_LOCAL_OPTIONAL",
+            "env_var": "ABSENT_AGENT_PATH",
+        },
+    ])
+    monkeypatch.setenv("PRESENT_AGENT_PATH", str(source))
+    monkeypatch.delenv("ABSENT_AGENT_PATH", raising=False)
+    result = CapturePipeline(
+        make_config(tmp_path, registry),
+        LocalObjectStore(tmp_path / "objects"),
+        LocalPrivateDatabase(tmp_path / "private"),
+        clock=lambda: FIXED_TIME,
+    ).run()
+    coverage = {row["source_id"]: row for row in result["source_coverage"]}
+    assert result["state"] == "SUCCEEDED"
+    assert coverage["absent"] == {
+        "source_id": "absent",
+        "label_zh": "未安装 Agent",
+        "required": True,
+        "state": "MISSING_REQUIRED",
+        "availability_tier": "B_LOCAL_OPTIONAL",
+        "required_for_product": False,
+        "object_count": 0,
+        "size_bytes": 0,
+        "message_zh": "没有配置来源路径",
+    }
+
+
 def test_capture_and_remote_reconcile_end_to_end(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     source = tmp_path / "source"
     source.mkdir()
@@ -1439,6 +1491,46 @@ def test_private_release_archive_is_split_and_restores_exact_bytes(tmp_path: Pat
         identity[index] = 0
 
 
+def test_private_release_reports_part_capacity_without_masking_it_as_broken_pipe(tmp_path: Path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.private_release import (
+        PrivateReleaseBackupError,
+        _archive_manifest,
+        _encrypt_archive,
+    )
+
+    age = shutil.which("age") or str(Path.home() / ".local/bin/age")
+    age_keygen = shutil.which("age-keygen") or str(Path.home() / ".local/bin/age-keygen")
+    generated = subprocess.run([age_keygen], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+    recipient_match = re.search(rb"age1[0-9a-z]+", generated.stderr)
+    assert recipient_match
+    source = tmp_path / "source.bin"
+    source.write_bytes(os.urandom(4096))
+    record = InventoryRecord(
+        source_id="codex_sessions",
+        source_root=str(tmp_path),
+        relative_path="fixture/source.bin",
+        materialized_path=str(source),
+        kind="files",
+        size_bytes=source.stat().st_size,
+        mtime_ns=source.stat().st_mtime_ns,
+        sha256=sha256_file(source),
+        original_sha256=sha256_file(source),
+        snapshot_created=True,
+    )
+    encrypted = tmp_path / "encrypted"
+    encrypted.mkdir()
+    with pytest.raises(PrivateReleaseBackupError, match="ciphertext_part_limit_exceeded"):
+        _encrypt_archive(
+            records=[record],
+            manifest=_archive_manifest([record], backup_id="fixture-run", created_at=FIXED_TIME),
+            recipient=recipient_match.group(0).decode("ascii"),
+            age=age,
+            directory=encrypted,
+            max_part_bytes=512,
+            max_parts=1,
+        )
+
+
 def test_private_release_workflow_verifies_remote_restore_and_cleans_local_payload(
     tmp_path: Path,
 ) -> None:
@@ -1669,7 +1761,61 @@ def test_source_capture_entry_maps_pre_json_child_failure_without_stderr_leak() 
     assert entry._safe_child_failure_code(
         1, "PrivateReleaseBackupError: github_release_command_failed:release_upload"
     ) == "GITHUB_RELEASE_UPLOAD_FAILED"
+    assert entry._safe_child_failure_code(1, "ciphertext_part_limit_exceeded") == "PRIVATE_RELEASE_CAPACITY_EXCEEDED"
     assert entry._safe_child_failure_code(124, "") == "CHILD_CAPTURE_TIMEOUT"
+
+
+def test_capture_cli_serializes_a_terminal_capacity_failure(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private import cli
+    from OpenAIDatabase.scripts.memory_atlas_private.private_release import PrivateReleaseBackupError
+
+    def fail_capture(_: object) -> None:
+        raise PrivateReleaseBackupError("ciphertext_part_limit_exceeded")
+
+    monkeypatch.setattr(cli, "cmd_capture", fail_capture)
+    monkeypatch.setattr(sys, "argv", ["memory_atlas_private", "capture"])
+    with pytest.raises(SystemExit) as exit_info:
+        cli.main()
+    assert exit_info.value.code == 1
+    assert json.loads(capsys.readouterr().out) == {
+        "schema_version": "memory_atlas.capture_result.v1",
+        "state": "FAILED",
+        "failure_code": "ciphertext_part_limit_exceeded",
+        "retryable": False,
+    }
+
+
+def test_source_capture_entry_preserves_a_structured_child_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    import OpenAIDatabase.scripts.memory_atlas_source_capture_entry as entry
+
+    env_file = tmp_path / "memory_atlas.env"
+    env_file.write_text("", encoding="utf-8")
+    monkeypatch.setenv("MEMORY_ATLAS_ENV_FILE", str(env_file))
+    monkeypatch.setattr(entry, "find_repo_root", lambda _: tmp_path / "repo")
+    monkeypatch.setattr(
+        entry,
+        "_run_capture",
+        lambda command, *, cwd, env: subprocess.CompletedProcess(
+            command,
+            1,
+            json.dumps({"state": "FAILED", "failure_code": "ciphertext_part_limit_exceeded"}),
+            "",
+        ),
+    )
+    with pytest.raises(SystemExit) as exit_info:
+        entry.main()
+    assert exit_info.value.code == 1
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["child_returncode"] == 1
+    assert payload["failure_code"] == "ciphertext_part_limit_exceeded"
+    assert "child_failure_code" not in payload
 
 
 def test_github_release_client_names_the_failed_operation(

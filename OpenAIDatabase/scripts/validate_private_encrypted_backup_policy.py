@@ -133,7 +133,7 @@ def validate_policy(
         or not isinstance(release.get("max_ciphertext_part_bytes"), int)
         or int(release["max_ciphertext_part_bytes"]) != 94371840
         or not isinstance(release.get("max_parts"), int)
-        or int(release["max_parts"]) != 64
+        or int(release["max_parts"]) != 128
         or release.get("automatic_release_tag_prefix") != "memory-atlas-auto-backup-"
         or release.get("automatic_release_retention_count") != 3
         or release.get("retention_scope")

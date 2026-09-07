@@ -5,6 +5,7 @@ import argparse
 import fcntl
 import json
 import os
+import re
 import shutil
 import signal
 import subprocess
@@ -152,6 +153,8 @@ def _safe_child_failure_code(returncode: int, stderr: str) -> str:
         return "PRIVATE_BACKUP_SCOPE_POLICY_INVALID"
     if "private_identity_unavailable" in stderr:
         return "PRIVATE_BACKUP_IDENTITY_UNAVAILABLE"
+    if "ciphertext_part_limit_exceeded" in stderr:
+        return "PRIVATE_RELEASE_CAPACITY_EXCEEDED"
     for operation in (
         "REPO_VIEW",
         "RELEASE_CREATE",
@@ -171,6 +174,12 @@ def _safe_child_failure_code(returncode: int, stderr: str) -> str:
     if returncode != 0:
         return "CHILD_EXITED_BEFORE_STRUCTURED_RESULT"
     return "CHILD_STRUCTURED_RESULT_MISSING"
+
+
+def _structured_child_failure_code(value: object) -> str | None:
+    if isinstance(value, str) and re.fullmatch(r"[a-z0-9_]+", value):
+        return value
+    return None
 
 
 def _parse_args(argv: list[str] | None = None) -> None:
@@ -194,6 +203,8 @@ def _public_safe_source_coverage(value: object) -> list[dict[str, Any]] | None:
                 "source_id",
                 "label_zh",
                 "required",
+                "availability_tier",
+                "required_for_product",
                 "state",
                 "object_count",
                 "size_bytes",
@@ -311,7 +322,10 @@ def main(argv: list[str] | None = None) -> None:
         returncode = completed.returncode
         child_stderr = completed.stderr
         child = _child_payload(completed.stdout)
-        failure_code = "" if returncode == 0 else "capture_command_failed"
+        child_failure = _structured_child_failure_code(child.get("failure_code"))
+        failure_code = "" if returncode == 0 else (
+            child_failure or "capture_command_failed"
+        )
     except Exception as exc:
         failure_code = (
             str(exc)
