@@ -725,12 +725,12 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
             manifest.bytes_discovered = sum(item.size_bytes for item in records)
             required_bad = [
                 item for item in coverages
-                if item.required and item.state in {SourceState.MISSING_REQUIRED, SourceState.UNREADABLE}
+                if item.required_for_product and item.state in {SourceState.MISSING_REQUIRED, SourceState.UNREADABLE}
             ]
             if required_bad:
                 manifest.state = RunState.WAITING_SOURCE
                 manifest.completed_at = self.clock()
-                return self._publish_terminal(manifest, events=[], message="必需来源缺失，未伪报全量成功")
+                return self._publish_terminal(manifest, events=[], message="产品必需来源不可用，运行状态为 WAITING_SOURCE")
             logical_source_set = [item.spec.source_id for item in registry]
             if self.private_release_backup is not None:
                 # Reject registry/policy drift before publishing a large canonical

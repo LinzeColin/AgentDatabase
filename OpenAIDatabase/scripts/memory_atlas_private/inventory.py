@@ -15,6 +15,9 @@ from .models import InventoryRecord, SourceCoverage, SourceSpec, SourceState
 from .sqlite_snapshot import create_consistent_snapshot
 
 
+AVAILABILITY_TIERS = frozenset({"A_CLOUD_NATIVE", "B_LOCAL_OPTIONAL"})
+
+
 # Standalone credentials are configuration, not product memory. Embedded text inside an
 # in-scope conversation is kept byte-for-byte and is not inspected or altered here.
 DENY_STANDALONE = re.compile(
@@ -57,12 +60,18 @@ def load_source_registry(path: Path, env: dict[str, str] | None = None) -> list[
     resolved: list[ResolvedSource] = []
     seen: set[str] = set()
     for raw in payload.get("sources", []):
+        required = bool(raw.get("required", False))
+        availability_tier = str(raw.get("availability_tier", "A_CLOUD_NATIVE"))
+        if availability_tier not in AVAILABILITY_TIERS:
+            raise InventoryError(f"来源可用性层级无效：{availability_tier}")
         spec = SourceSpec(
             source_id=str(raw["source_id"]),
             label_zh=str(raw["label_zh"]),
             path_template=str(raw.get("path_template", "")),
             kind=str(raw["kind"]),
-            required=bool(raw.get("required", False)),
+            required=required,
+            availability_tier=availability_tier,
+            required_for_product=bool(raw.get("required_for_product", required)),
             recursive=bool(raw.get("recursive", True)),
             env_var=raw.get("env_var"),
             include_globs=tuple(raw.get("include_globs", ["**/*"])),
@@ -185,6 +194,8 @@ def discover_inventory(
                 label_zh=source.spec.label_zh,
                 required=source.spec.required,
                 state=state,
+                availability_tier=source.spec.availability_tier,
+                required_for_product=source.spec.required_for_product,
                 message_zh="没有配置来源路径",
             ))
             continue
@@ -231,6 +242,8 @@ def discover_inventory(
             label_zh=source.spec.label_zh,
             required=source.spec.required,
             state=state,
+            availability_tier=source.spec.availability_tier,
+            required_for_product=source.spec.required_for_product,
             object_count=len(source_records),
             size_bytes=sum(item.size_bytes for item in source_records),
             message_zh=message,

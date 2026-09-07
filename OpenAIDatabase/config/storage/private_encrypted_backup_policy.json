@@ -73,7 +73,7 @@
     "draft_release_required": true,
     "remote_verification_required_before_local_ciphertext_cleanup": true,
     "max_ciphertext_part_bytes": 94371840,
-    "max_parts": 64,
+    "max_parts": 128,
     "automatic_release_tag_prefix": "memory-atlas-auto-backup-",
     "automatic_release_retention_count": 3,
     "retention_scope": "automatic_releases_with_matching_tag_prefix_only",

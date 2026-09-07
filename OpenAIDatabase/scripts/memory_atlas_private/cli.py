@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -23,6 +24,15 @@ def _print(value: object) -> None:
 
 def _config() -> RuntimeConfig:
     return RuntimeConfig.from_env()
+
+
+def _capture_failure_code(exc: Exception) -> str:
+    """Return a stable terminal code suitable for a redacted receipt."""
+    message = str(exc).strip()
+    if re.fullmatch(r"[a-z0-9_]+", message):
+        return message
+    class_name = re.sub(r"(?<!^)(?=[A-Z])", "_", exc.__class__.__name__).lower()
+    return f"capture_{class_name}"
 
 
 def cmd_preflight(_: argparse.Namespace) -> None:
@@ -148,8 +158,18 @@ def main() -> None:
     try:
         args.func(args)
     except ConfigurationError as exc:
-        _print({"state": "BLOCKED", "message_zh": str(exc)})
+        _print({"state": "BLOCKED", "failure_code": _capture_failure_code(exc), "message_zh": str(exc)})
         raise SystemExit(2) from exc
+    except Exception as exc:
+        if args.command != "capture":
+            raise
+        _print({
+            "schema_version": "memory_atlas.capture_result.v1",
+            "state": "FAILED",
+            "failure_code": _capture_failure_code(exc),
+            "retryable": False,
+        })
+        raise SystemExit(1) from exc
 
 
 if __name__ == "__main__":
