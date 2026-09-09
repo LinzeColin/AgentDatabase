@@ -231,6 +231,29 @@ class SyncSkillsFailClosedTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "防止把缺失来源误判为删除"):
             sync_skills.inventory()
 
+    def test_selected_inventory_does_not_require_unselected_sources(self) -> None:
+        selected = self.root / "selected-source"
+        selected.mkdir()
+        (selected / "demo-skill").mkdir()
+        (selected / "unrelated").symlink_to("demo-skill")
+        missing = self.root / "missing-source"
+        sync_skills.SOURCES = {
+            "codex": {"path": str(selected), "label": "Selected source"},
+            "codex-system": {"path": str(missing), "label": "Missing system"},
+            "claude": {"path": str(missing), "label": "Missing claude"},
+            "agents": {"path": str(missing), "label": "Missing agents"},
+        }
+
+        observed = sync_skills.inventory(
+            source_namespaces=("codex",),
+            selected_skill_slugs={"codex": ("demo-skill",)},
+        )
+
+        self.assertEqual(
+            observed,
+            {("codex", "demo-skill"): str((selected / "demo-skill").resolve())},
+        )
+
     def test_deletion_propagation_fails_closed_when_removal_fails(self) -> None:
         obsolete = self.registry / "codex/obsolete"
         obsolete.mkdir(parents=True)
@@ -302,7 +325,11 @@ class SyncSkillsFailClosedTests(unittest.TestCase):
         ):
             self.assertEqual(sync_skills.main(), 0)
 
-        inventory.assert_called_once_with(enforce_exact_aliases=False)
+        inventory.assert_called_once_with(
+            enforce_exact_aliases=False,
+            source_namespaces=("codex",),
+            selected_skill_slugs={"codex": ("demo-skill",)},
+        )
         persona_shrink_gate.assert_not_called()
         mirror.assert_called_once_with(
             selected,
