@@ -74,9 +74,12 @@
     "remote_verification_required_before_local_ciphertext_cleanup": true,
     "max_ciphertext_part_bytes": 94371840,
     "max_parts": 128,
-    "automatic_release_tag_prefix": "memory-atlas-auto-backup-",
+    "release_layout": "incremental_file_snapshot_v1",
+    "automatic_release_tag_prefix": "memory-atlas-auto-snapshot-",
+    "automatic_pack_tag_prefix": "memory-atlas-auto-pack-",
     "automatic_release_retention_count": 3,
-    "retention_scope": "automatic_releases_with_matching_tag_prefix_only",
+    "maximum_archives_per_snapshot": 7,
+    "retention_scope": "automatic_snapshot_releases_with_matching_tag_prefix_only",
     "manual_or_nonmatching_release_mutation_allowed": false
   },
   "encryption": {

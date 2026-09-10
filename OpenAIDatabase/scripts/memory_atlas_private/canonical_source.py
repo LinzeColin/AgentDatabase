@@ -696,9 +696,11 @@ class BackupCoverage:
     covered_object_count: int = 0
     manifest_object_count: int = 0
     restored_files: int = 0
+    snapshot_file_count: int = 0
     release_tag: str | None = None
     asset_count: int = 0
     expected_parts: int = 0
+    verification_class: str = "ARCHIVE_RESTORE_PROOF_AT_BACKUP_TIME_NOT_LIVE_BYTE_READ"
     reason: str | None = None
 
     @property
@@ -711,10 +713,11 @@ class BackupCoverage:
             "covered_object_count": self.covered_object_count,
             "manifest_object_count": self.manifest_object_count,
             "restored_files": self.restored_files,
+            "snapshot_file_count": self.snapshot_file_count,
             "release_tag": self.release_tag,
             "asset_count": self.asset_count,
             "expected_parts": self.expected_parts,
-            "verification_class": "ARCHIVE_RESTORE_PROOF_AT_BACKUP_TIME_NOT_LIVE_BYTE_READ",
+            "verification_class": self.verification_class,
             "reason": self.reason,
         }
 
@@ -752,15 +755,53 @@ def verify_backup_coverage(
                               reason="remote_readback_not_verified")
 
     restored_files = int(restore.get("restored_files") or 0)
-    expected_parts = int(backup_record.get("ciphertext_part_count") or 0)
+    incremental_snapshot = (
+        str(backup_record.get("storage_mode") or "")
+        == "incremental_file_snapshot_v1"
+    )
+    snapshot_restore = backup_record.get("snapshot_index_restore")
+    snapshot_restore = snapshot_restore if isinstance(snapshot_restore, Mapping) else {}
+    snapshot_file_count = int(backup_record.get("snapshot_file_count") or 0)
+    archive_references_verified = backup_record.get("archive_references_verified") is True
+    if incremental_snapshot and (
+        str(snapshot_restore.get("state") or "") != "PASS"
+        or snapshot_restore.get("all_hashes_match") is not True
+        or snapshot_file_count < 0
+        or int(backup_record.get("snapshot_ciphertext_part_count") or 0) < 1
+        or not archive_references_verified
+    ):
+        return BackupCoverage(
+            state="ABSENT",
+            manifest_object_count=manifest_object_count,
+            restored_files=restored_files,
+            snapshot_file_count=snapshot_file_count,
+            reason="incremental_snapshot_proof_incomplete",
+        )
+    expected_parts = int(
+        (
+            backup_record.get("snapshot_ciphertext_part_count")
+            if incremental_snapshot
+            else backup_record.get("ciphertext_part_count")
+        )
+        or 0
+    )
     tag = str(backup_record.get("release_tag") or "")
     coverage = BackupCoverage(
         state="INSUFFICIENT", manifest_object_count=manifest_object_count,
-        restored_files=restored_files, release_tag=tag or None, expected_parts=expected_parts,
+        restored_files=restored_files,
+        snapshot_file_count=snapshot_file_count,
+        release_tag=tag or None,
+        expected_parts=expected_parts,
+        verification_class=(
+            "INCREMENTAL_SNAPSHOT_INDEX_AND_ARCHIVE_RESTORE_PROOF_NOT_LIVE_BYTE_READ"
+            if incremental_snapshot
+            else "ARCHIVE_RESTORE_PROOF_AT_BACKUP_TIME_NOT_LIVE_BYTE_READ"
+        ),
     )
     # The archive holds source files; the normalized event object is covered by
     # the canonical union instead. Together they must account for the manifest.
-    coverage.covered_object_count = restored_files + canonical_covered
+    source_coverage_count = snapshot_file_count if incremental_snapshot else restored_files
+    coverage.covered_object_count = source_coverage_count + canonical_covered
     if coverage.covered_object_count < manifest_object_count:
         coverage.reason = "archive_does_not_account_for_every_manifest_object"
         return coverage
