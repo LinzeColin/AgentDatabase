@@ -1531,6 +1531,26 @@ def test_private_release_reports_part_capacity_without_masking_it_as_broken_pipe
         )
 
 
+def test_private_release_groups_archive_parts_without_a_total_release_cap(tmp_path: Path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.private_release import (
+        CiphertextPart,
+        _release_part_groups,
+    )
+
+    parts = [
+        CiphertextPart(
+            path=tmp_path / f"payload.part-{number:04d}.age",
+            sha256=f"{number:064x}",
+            size_bytes=512,
+            part_number=number,
+        )
+        for number in range(1, 258)
+    ]
+    groups = _release_part_groups(parts, max_parts_per_release=128)
+    assert [len(group) for group in groups] == [128, 128, 1]
+    assert [part.part_number for group in groups for part in group] == list(range(1, 258))
+
+
 def test_private_release_workflow_verifies_remote_restore_and_cleans_local_payload(
     tmp_path: Path,
 ) -> None:
@@ -1565,46 +1585,66 @@ def test_private_release_workflow_verifies_remote_restore_and_cleans_local_paylo
 
     class FakeReleaseClient:
         def __init__(self) -> None:
-            self.assets: dict[str, bytes] = {}
-            self.tag = ""
-            self.draft = True
+            self.releases: dict[str, dict[str, object]] = {}
+            self.release_order: list[str] = []
 
         def assert_private_repository(self) -> None:
             return None
 
         def create_draft(self, tag: str, title: str) -> None:
             assert title.startswith("Memory Atlas")
-            self.tag = tag
-            self.draft = True
+            assert tag not in self.releases
+            self.releases[tag] = {"assets": {}, "draft": True}
+            self.release_order.append(tag)
 
         def upload(self, tag: str, paths: list[Path]) -> None:
-            assert tag == self.tag and self.draft
-            self.assets = {path.name: path.read_bytes() for path in paths}
+            release = self.releases[tag]
+            assert release["draft"] is True
+            release["assets"] = {path.name: path.read_bytes() for path in paths}
 
         def download(self, tag: str, destination: Path) -> None:
-            assert tag == self.tag
-            for name, payload in self.assets.items():
+            assets = self.releases[tag]["assets"]
+            assert isinstance(assets, dict)
+            for name, payload in assets.items():
+                assert isinstance(name, str) and isinstance(payload, bytes)
                 (destination / name).write_bytes(payload)
 
         def view(self, tag: str) -> dict[str, object]:
-            assert tag == self.tag
+            release = self.releases[tag]
+            assets = release["assets"]
+            assert isinstance(assets, dict)
             return {
                 "tagName": tag,
-                "isDraft": self.draft,
-                "url": "https://github.example.test/private/release",
+                "isDraft": release["draft"],
+                "url": f"https://github.example.test/private/release/{tag}",
                 "assets": [
                     {"name": name, "size": len(payload)}
-                    for name, payload in self.assets.items()
+                    for name, payload in assets.items()
                 ],
             }
 
         def publish(self, tag: str) -> None:
-            assert tag == self.tag
-            self.draft = False
+            self.releases[tag]["draft"] = False
+
+        def list_published(self, prefix: str) -> list[dict[str, object]]:
+            return [
+                {"tagName": tag, "isDraft": False, "publishedAt": f"{index:04d}"}
+                for index, tag in reversed(list(enumerate(self.release_order, start=1)))
+                if tag.startswith(prefix) and self.releases[tag]["draft"] is False
+            ]
+
+        def delete(self, tag: str) -> None:
+            del self.releases[tag]
+            self.release_order.remove(tag)
 
         def enforce_retention(self, prefix: str, keep: int) -> list[str]:
-            assert prefix == "memory-atlas-auto-backup-" and keep == 3
-            return []
+            assert prefix == "memory-atlas-auto-snapshot-" and keep == 3
+            deleted: list[str] = []
+            for row in self.list_published(prefix)[keep:]:
+                tag = str(row["tagName"])
+                self.delete(tag)
+                deleted.append(tag)
+            return deleted
 
     source = tmp_path / "source.jsonl"
     source.write_bytes(os.urandom(8192))
@@ -1627,6 +1667,9 @@ def test_private_release_workflow_verifies_remote_restore_and_cleans_local_paylo
         identity_loader=lambda: bytearray(identity_bytes),
         release_client=fake,  # type: ignore[arg-type]
     )
+    # Keep the production policy intact while exercising an archive that spans
+    # more than one Release group.
+    backup.policy = replace(backup.policy, max_part_bytes=256, max_parts=32)
     result = backup.run(
         records=[record],
         logical_source_set=list(private_policy["scope"]["logical_sources"]),
@@ -1637,6 +1680,70 @@ def test_private_release_workflow_verifies_remote_restore_and_cleans_local_paylo
     assert result["state"] == "PASS"
     assert result["remote_readback_verified"] is True
     assert result["isolated_restore"]["all_hashes_match"] is True
+    assert result["storage_mode"] == "incremental_file_snapshot_v1"
+    assert result["delta"]["new_or_changed_files"] == 1
+    assert result["snapshot_file_count"] == 1
+    assert result["snapshot_ciphertext_part_count"] >= 1
+    assert result["archive_references_verified"] is True
+    assert result["snapshot_index_restore"]["state"] == "PASS"
+    first_pack_count = len(fake.list_published("memory-atlas-auto-pack-"))
+    assert first_pack_count > 1
+    assert len(fake.list_published("memory-atlas-auto-snapshot-")) == 1
+
+    reused = backup.run(
+        records=[record],
+        logical_source_set=list(private_policy["scope"]["logical_sources"]),
+        backup_id="marun_fixture_unchanged",
+        created_at="2026-01-02T03:04:06Z",
+        work_root=tmp_path,
+    )
+    assert reused["state"] == "PASS"
+    assert reused["snapshot_reused"] is True
+    assert reused["delta"]["new_or_changed_files"] == 0
+    assert reused["snapshot_file_count"] == 1
+    assert reused["archive_references_verified"] is True
+    assert reused["snapshot_index_restore"]["state"] == "PASS"
+    assert len(fake.list_published("memory-atlas-auto-pack-")) == first_pack_count
+    assert len(fake.list_published("memory-atlas-auto-snapshot-")) == 1
+
+    source.write_bytes(os.urandom(16384))
+    changed_record = InventoryRecord(
+        source_id="codex_sessions",
+        source_root=str(tmp_path),
+        relative_path="fixture/source.jsonl",
+        materialized_path=str(source),
+        kind="files",
+        size_bytes=source.stat().st_size,
+        mtime_ns=source.stat().st_mtime_ns,
+        sha256=sha256_file(source),
+        original_sha256=sha256_file(source),
+        snapshot_created=True,
+    )
+    changed = backup.run(
+        records=[changed_record],
+        logical_source_set=list(private_policy["scope"]["logical_sources"]),
+        backup_id="marun_fixture_changed",
+        created_at="2026-01-03T03:04:06Z",
+        work_root=tmp_path,
+    )
+    assert changed["state"] == "PASS"
+    assert changed["delta"]["new_or_changed_files"] == 1
+    assert changed["delta"]["reused_files"] == 0
+    assert len(fake.list_published("memory-atlas-auto-pack-")) > first_pack_count
+    assert len(fake.list_published("memory-atlas-auto-snapshot-")) == 2
+
+    removed = backup.run(
+        records=[],
+        logical_source_set=list(private_policy["scope"]["logical_sources"]),
+        backup_id="marun_fixture_removed",
+        created_at="2026-01-04T03:04:06Z",
+        work_root=tmp_path,
+    )
+    assert removed["state"] == "PASS"
+    assert removed["delta"]["new_or_changed_files"] == 0
+    assert removed["delta"]["removed_files"] == 1
+    assert len(fake.list_published("memory-atlas-auto-pack-")) > first_pack_count
+    assert len(fake.list_published("memory-atlas-auto-snapshot-")) == 3
     assert result["local_payload_cleanup"] == {"state": "PASS", "remaining_paths": 0}
     assert not (tmp_path / "private-github-release").exists()
 

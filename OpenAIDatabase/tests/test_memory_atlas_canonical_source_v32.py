@@ -581,6 +581,56 @@ def test_a_passing_backup_that_still_exists_covers_the_source_store() -> None:
     assert coverage.to_fact()["verification_class"].startswith("ARCHIVE_RESTORE_PROOF")
 
 
+def test_an_incremental_snapshot_covers_the_source_store_without_reuploading_it() -> None:
+    github = _Releases(assets=2)
+    record = _backup(
+        schema_version="memory_atlas.private_release_backup.v2",
+        storage_mode="incremental_file_snapshot_v1",
+        release_tag="memory-atlas-auto-snapshot-20260910-fixture",
+        ciphertext_part_count=129,
+        snapshot_ciphertext_part_count=1,
+        snapshot_file_count=2301,
+        archive_references_verified=True,
+        isolated_restore={"state": "PASS", "all_hashes_match": True, "restored_files": 1},
+        snapshot_index_restore={"state": "PASS", "all_hashes_match": True, "restored_files": 1},
+    )
+    coverage = verify_backup_coverage(
+        github, record, run_id=RUN, manifest_object_count=2302, canonical_covered=1
+    )
+    assert coverage.state == "COVERED"
+    assert coverage.covered_object_count == 2302
+    assert coverage.restored_files == 1
+    assert coverage.snapshot_file_count == 2301
+    assert coverage.expected_parts == 1
+    assert coverage.to_fact()["verification_class"].startswith("INCREMENTAL_SNAPSHOT_INDEX")
+
+
+@pytest.mark.parametrize(
+    "broken",
+    [
+        {"archive_references_verified": False},
+        {"snapshot_index_restore": {"state": "FAILED", "all_hashes_match": True}},
+        {"snapshot_index_restore": {"state": "PASS", "all_hashes_match": False}},
+    ],
+)
+def test_an_incremental_snapshot_requires_index_and_archive_proof(broken: dict) -> None:
+    record = _backup(
+        schema_version="memory_atlas.private_release_backup.v2",
+        storage_mode="incremental_file_snapshot_v1",
+        release_tag="memory-atlas-auto-snapshot-20260910-fixture",
+        snapshot_ciphertext_part_count=1,
+        snapshot_file_count=2301,
+        archive_references_verified=True,
+        snapshot_index_restore={"state": "PASS", "all_hashes_match": True, "restored_files": 1},
+    )
+    record.update(broken)
+    coverage = verify_backup_coverage(
+        _Releases(assets=2), record, run_id=RUN, manifest_object_count=2302, canonical_covered=1
+    )
+    assert coverage.state == "ABSENT"
+    assert coverage.reason == "incremental_snapshot_proof_incomplete"
+
+
 def test_a_backup_whose_release_was_deleted_is_absent_not_covered() -> None:
     """A record saying a backup was made is not evidence it still exists."""
     coverage = verify_backup_coverage(

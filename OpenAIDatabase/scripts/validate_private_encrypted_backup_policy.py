@@ -134,10 +134,13 @@ def validate_policy(
         or int(release["max_ciphertext_part_bytes"]) != 94371840
         or not isinstance(release.get("max_parts"), int)
         or int(release["max_parts"]) != 128
-        or release.get("automatic_release_tag_prefix") != "memory-atlas-auto-backup-"
+        or release.get("release_layout") != "incremental_file_snapshot_v1"
+        or release.get("automatic_release_tag_prefix") != "memory-atlas-auto-snapshot-"
+        or release.get("automatic_pack_tag_prefix") != "memory-atlas-auto-pack-"
         or release.get("automatic_release_retention_count") != 3
+        or release.get("maximum_archives_per_snapshot") != 7
         or release.get("retention_scope")
-        != "automatic_releases_with_matching_tag_prefix_only"
+        != "automatic_snapshot_releases_with_matching_tag_prefix_only"
         or release.get("manual_or_nonmatching_release_mutation_allowed") is not False
     ):
         raise PrivateBackupPolicyError("release_policy_invalid")
