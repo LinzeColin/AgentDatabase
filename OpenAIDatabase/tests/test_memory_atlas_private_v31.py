@@ -2181,6 +2181,46 @@ def test_release_transfers_give_each_asset_its_own_deadline(monkeypatch: pytest.
     assert all(timeout == 3600 for _, timeout in calls)
 
 
+@pytest.mark.parametrize("stderr,http_status,reason", [
+    ("HTTP 403: secondary rate limit", "403", "rate_limit"),
+    ("HTTP 401: Bad credentials", "401", "authentication"),
+    ("HTTP 403: Resource not accessible by integration", "403", "permission"),
+    ("HTTP 422: already_exists", "422", "asset_exists"),
+    ("dial tcp: no such host", "unknown", "dns"),
+    ("net/http: TLS handshake timeout", "unknown", "tls"),
+    ("context deadline exceeded", "unknown", "network_timeout"),
+    ("read: connection reset by peer", "unknown", "connection"),
+    ("unexpected EOF", "unknown", "connection"),
+    ("no space left on device", "unknown", "local_storage"),
+    ("HTTP 502: upstream failure", "502", "unknown"),
+    ("unrecognized failure", "unknown", "unknown"),
+    ("", "unknown", "unknown"),
+])
+def test_release_failure_preserves_safe_diagnostics_in_receipt(
+    monkeypatch: pytest.MonkeyPatch, stderr: str, http_status: str, reason: str,
+) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private import cli, private_release
+
+    sensitive = " /private/fixture/person.txt https://fixture.test/?token=PRIVATE_TOKEN"
+    monkeypatch.setattr(private_release.subprocess, "run", lambda *a, **kw:
+        subprocess.CompletedProcess(a, 1, "PRIVATE_OUTPUT", stderr + sensitive))
+    client = private_release.GithubReleaseClient("fixture/private", "/fixture/gh")
+    with pytest.raises(private_release.PrivateReleaseBackupError) as caught:
+        client.upload("fixture-tag", [Path("private.txt")])
+    expected = f"github_release_command_failed:release_upload:exit_1:http_{http_status}:reason_{reason}"
+    assert str(caught.value) == expected
+    assert cli._capture_failure_code(caught.value) == expected.replace(":", "_")
+
+
+def test_release_diagnostic_receipt_rejects_arbitrary_text() -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private import cli, private_release
+
+    exc = private_release.PrivateReleaseBackupError(
+        "github_release_command_failed:release_upload:exit_1:http_403:reason_PRIVATE_TOKEN"
+    )
+    assert cli._capture_failure_code(exc) == "capture_private_release_backup_error"
+
+
 def test_release_timeout_keeps_operation_in_redacted_result(monkeypatch: pytest.MonkeyPatch) -> None:
     from OpenAIDatabase.scripts.memory_atlas_private import cli, private_release
 

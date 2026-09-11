@@ -26,6 +26,29 @@ class PrivateReleaseBackupError(RuntimeError):
     """Fail-closed error that never embeds plaintext backup content."""
 
 
+def _github_failure_details(stderr: str, returncode: int) -> str:
+    """Project CLI diagnostics onto public-safe enums; discard arbitrary text."""
+    message = stderr.lower()
+    status = re.search(r"\bhttp\s+([1-5][0-9]{2})\b", message)
+    http_status = status.group(1) if status else "unknown"
+    reason = "unknown"
+    for label, markers in (
+        ("rate_limit", ("rate limit", "secondary rate", "abuse detection")),
+        ("authentication", ("bad credentials", "authentication failed", "gh auth login")),
+        ("permission", ("resource not accessible", "permission denied")),
+        ("asset_exists", ("already_exists", "already exists")),
+        ("dns", ("no such host", "name resolution")),
+        ("tls", ("tls handshake", "x509:", "certificate verify failed")),
+        ("network_timeout", ("i/o timeout", "context deadline exceeded", "client.timeout")),
+        ("connection", ("connection reset", "connection refused", "broken pipe", "unexpected eof")),
+        ("local_storage", ("no space left on device",)),
+    ):
+        if any(marker in message for marker in markers):
+            reason = label
+            break
+    return f"exit_{returncode}:http_{http_status}:reason_{reason}"
+
+
 def _read_json(path: Path) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
@@ -246,7 +269,8 @@ class GithubReleaseClient:
                 ("release", "delete"): "release_delete",
             }.get(tuple(args[:2]), "unknown")
             raise PrivateReleaseBackupError(
-                f"github_release_command_failed:{operation}"
+                f"github_release_command_failed:{operation}:"
+                f"{_github_failure_details(completed.stderr, completed.returncode)}"
             )
         return completed.stdout
 

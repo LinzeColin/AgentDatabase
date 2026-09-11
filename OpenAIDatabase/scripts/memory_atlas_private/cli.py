@@ -29,6 +29,15 @@ def _config() -> RuntimeConfig:
 def _capture_failure_code(exc: Exception) -> str:
     """Return a stable terminal code suitable for a redacted receipt."""
     message = str(exc).strip()
+    if re.fullmatch(
+        r"github_release_command_failed:(?:repo_view|release_create|release_upload|"
+        r"release_download|release_view|release_edit|release_list|release_delete|unknown)"
+        r":exit_-?[0-9]+:http_(?:[1-5][0-9]{2}|unknown):reason_"
+        r"(?:rate_limit|authentication|permission|asset_exists|dns|tls|network_timeout|"
+        r"connection|local_storage|unknown)",
+        message,
+    ):
+        return message.replace(":", "_").replace("-", "signal_")
     if re.fullmatch(r"[a-z0-9_]+", message):
         return message
     class_name = re.sub(r"(?<!^)(?=[A-Z])", "_", exc.__class__.__name__).lower()
