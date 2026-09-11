@@ -1895,6 +1895,61 @@ def test_capture_cli_serializes_a_terminal_capacity_failure(
     }
 
 
+def test_source_capture_entry_reports_progress_without_changing_final_json(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str],
+) -> None:
+    import OpenAIDatabase.scripts.memory_atlas_source_capture_entry as entry
+
+    monkeypatch.setattr(entry, "PROGRESS_SECONDS", 0.02)
+    result = entry._run_capture(
+        [sys.executable, "-c", 'import time; time.sleep(0.12); print(\'{"state":"SUCCEEDED"}\')'],
+        cwd=tmp_path, env=os.environ.copy(),
+    )
+    assert result.returncode == 0
+    assert json.loads(result.stdout) == {"state": "SUCCEEDED"}
+    progress = capsys.readouterr()
+    assert progress.out == ""
+    assert progress.err.count("MEMORY_ATLAS_CAPTURE_RUNNING") >= 2
+
+
+def test_source_capture_entry_owns_timeout_and_reaps_child(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import OpenAIDatabase.scripts.memory_atlas_source_capture_entry as entry
+
+    monkeypatch.setattr(entry, "PROGRESS_SECONDS", 0.02)
+    monkeypatch.setattr(entry, "MAX_RUN_SECONDS", 0.08)
+    result = entry._run_capture(
+        [sys.executable, "-c", "import time; time.sleep(30)"],
+        cwd=tmp_path, env=os.environ.copy(),
+    )
+    assert result.returncode == 124
+
+
+def test_source_capture_entry_cancellation_reaps_before_return(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import OpenAIDatabase.scripts.memory_atlas_source_capture_entry as entry
+
+    operations = []
+
+    class Child:
+        pid = 123
+
+        def communicate(self, timeout=None):
+            if not operations:
+                raise KeyboardInterrupt
+            operations.append("reaped")
+            return "", ""
+
+    monkeypatch.setattr(entry.subprocess, "Popen", lambda *args, **kwargs: Child())
+    monkeypatch.setattr(entry.signal, "signal", lambda *args: operations.append("protect_cleanup"))
+    monkeypatch.setattr(entry.os, "killpg", lambda *args: operations.append("terminate_group"))
+    with pytest.raises(KeyboardInterrupt):
+        entry._run_capture(["fixture"], cwd=tmp_path, env={})
+    assert operations == ["protect_cleanup", "terminate_group", "reaped"]
+
+
 def test_source_capture_entry_preserves_a_structured_child_failure(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

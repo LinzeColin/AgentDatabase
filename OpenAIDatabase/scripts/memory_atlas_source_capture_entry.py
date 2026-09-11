@@ -18,6 +18,7 @@ from typing import Any
 
 TEMP_PREFIX = "memory-atlas-daily-"
 MAX_RUN_SECONDS = 6 * 60 * 60
+PROGRESS_SECONDS = 60
 STALE_SECONDS = 24 * 60 * 60
 
 
@@ -116,17 +117,37 @@ def _run_capture(command: list[str], *, cwd: Path, env: dict[str, str]) -> subpr
         stderr=subprocess.PIPE,
         start_new_session=True,
     )
-    try:
-        stdout, stderr = process.communicate(timeout=MAX_RUN_SECONDS)
-    except subprocess.TimeoutExpired:
+    started = time.monotonic()
+
+    def stop_child() -> tuple[str, str]:
         os.killpg(process.pid, signal.SIGTERM)
         try:
-            stdout, stderr = process.communicate(timeout=10)
+            return process.communicate(timeout=10)
         except subprocess.TimeoutExpired:
             os.killpg(process.pid, signal.SIGKILL)
-            stdout, stderr = process.communicate()
-        return subprocess.CompletedProcess(command, 124, stdout, stderr)
-    return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
+            return process.communicate()
+
+    print('MEMORY_ATLAS_CAPTURE_RUNNING elapsed_seconds=0', file=sys.stderr, flush=True)
+    try:
+        while True:
+            remaining = MAX_RUN_SECONDS - (time.monotonic() - started)
+            if remaining <= 0:
+                stdout, stderr = stop_child()
+                return subprocess.CompletedProcess(command, 124, stdout, stderr)
+            try:
+                stdout, stderr = process.communicate(timeout=min(PROGRESS_SECONDS, remaining))
+                return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
+            except subprocess.TimeoutExpired:
+                print(
+                    f'MEMORY_ATLAS_CAPTURE_RUNNING elapsed_seconds={int(time.monotonic() - started)}',
+                    file=sys.stderr, flush=True,
+                )
+    except KeyboardInterrupt:
+        # Reap the separate process group before main removes its working data.
+        # Repeated cancellation must not interrupt that cleanup sequence.
+        signal.signal(signal.SIGINT, signal.SIG_IGN)
+        stop_child()
+        raise
 
 
 def _child_payload(stdout: str) -> dict[str, Any]:
@@ -326,6 +347,9 @@ def main(argv: list[str] | None = None) -> None:
         failure_code = "" if returncode == 0 else (
             child_failure or "capture_command_failed"
         )
+    except KeyboardInterrupt:
+        returncode = 130
+        failure_code = "capture_cancelled"
     except Exception as exc:
         failure_code = (
             str(exc)
