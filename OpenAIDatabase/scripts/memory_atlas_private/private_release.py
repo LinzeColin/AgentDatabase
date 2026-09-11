@@ -222,13 +222,17 @@ class GithubReleaseClient:
         command = [self.gh, *args]
         if repository_flag:
             command.extend(["--repo", self.repository])
-        completed = subprocess.run(
-            command,
-            text=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            timeout=timeout,
-        )
+        try:
+            completed = subprocess.run(
+                command,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=timeout,
+            )
+        except subprocess.TimeoutExpired as exc:
+            operation = "_".join(args[:2])
+            raise PrivateReleaseBackupError(f"github_{operation}_timeout") from exc
         if completed.returncode != 0:
             operation = {
                 ("repo", "view"): "repo_view",
@@ -271,10 +275,17 @@ class GithubReleaseClient:
         )
 
     def upload(self, tag: str, paths: Sequence[Path]) -> None:
-        self._run(["release", "upload", tag, *(str(path) for path in paths)])
+        # A transfer deadline belongs to one asset. Total capture duration is
+        # owned by the entrypoint, independently of the number of assets.
+        for path in paths:
+            self._run(["release", "upload", tag, str(path)])
 
     def download(self, tag: str, destination: Path) -> None:
-        self._run(["release", "download", tag, "--dir", str(destination), "--clobber"])
+        for asset in self.view(tag)["assets"]:
+            self._run([
+                "release", "download", tag, "--pattern", asset["name"],
+                "--dir", str(destination), "--clobber",
+            ])
 
     def view(self, tag: str) -> dict[str, Any]:
         value = json.loads(self._run(["release", "view", tag, "--json", "assets,isDraft,url,tagName"]))
@@ -928,12 +939,12 @@ class PrivateReleaseBackup:
             )
             remote_parts.extend(
                 CiphertextPart(
-                    path=remote_path,
+                    path=verified_paths[index],
                     sha256=part.sha256,
                     size_bytes=part.size_bytes,
                     part_number=part.part_number,
                 )
-                for remote_path, part in zip(verified_paths, group, strict=True)
+                for index, part in enumerate(group)
             )
             group_rows.append(
                 {

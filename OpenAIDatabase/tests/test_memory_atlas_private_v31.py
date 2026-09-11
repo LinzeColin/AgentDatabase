@@ -1998,6 +1998,46 @@ def test_github_release_client_names_the_failed_operation(
         client.upload("tag", [Path("events.jsonl")])
 
 
+def test_release_transfers_give_each_asset_its_own_deadline(monkeypatch: pytest.MonkeyPatch) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private import private_release
+
+    calls = []
+
+    def run(command, **kwargs):
+        calls.append((command, kwargs["timeout"]))
+        stdout = json.dumps({"assets": [{"name": "part-1"}, {"name": "part-2"}]})
+        return subprocess.CompletedProcess(command, 0, stdout, "")
+
+    monkeypatch.setattr(private_release.subprocess, "run", run)
+    client = private_release.GithubReleaseClient("owner/private", "/usr/bin/gh")
+    client.upload("tag", [Path("part-1"), Path("part-2")])
+    client.download("tag", Path("destination"))
+    uploads = [command for command, _ in calls if command[1:3] == ["release", "upload"]]
+    downloads = [command for command, _ in calls if command[1:3] == ["release", "download"]]
+    assert [command[4:-2] for command in uploads] == [["part-1"], ["part-2"]]
+    assert [command[5] for command in downloads] == ["part-1", "part-2"]
+    assert all(timeout == 3600 for _, timeout in calls)
+
+
+def test_release_timeout_keeps_operation_in_redacted_result(monkeypatch: pytest.MonkeyPatch) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private import cli, private_release
+
+    def run(command, **kwargs):
+        raise subprocess.TimeoutExpired(command, kwargs["timeout"])
+
+    monkeypatch.setattr(private_release.subprocess, "run", run)
+    client = private_release.GithubReleaseClient("owner/private", "/usr/bin/gh")
+    with pytest.raises(private_release.PrivateReleaseBackupError) as caught:
+        client.upload("tag", [Path("private-path")])
+    assert cli._capture_failure_code(caught.value) == "github_release_upload_timeout"
+
+
+def test_canonical_transfer_uses_small_independent_assets() -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.canonical_source import CANONICAL_ASSET_MAX_BYTES
+
+    assert CANONICAL_ASSET_MAX_BYTES == 64 * 1024 * 1024
+
+
 def test_source_capture_entry_refuses_a_concurrent_capture(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

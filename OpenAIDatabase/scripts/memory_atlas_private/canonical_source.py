@@ -32,7 +32,9 @@ MANIFEST_ASSET = "MANIFEST.json"
 EVENTS_ASSET = "events.jsonl"
 MANIFEST_SCHEMA = "memory_atlas.canonical_events_manifest.v1"
 CANONICAL_RELEASE_RETENTION = 2
-CANONICAL_ASSET_MAX_BYTES = 1_900_000_000
+# Bound each independently transferred asset, rather than filling GitHub's
+# maximum asset size with an hour-long, restart-from-zero network request.
+CANONICAL_ASSET_MAX_BYTES = 64 * 1024 * 1024
 COPY_CHUNK_BYTES = 8 * 1024 * 1024
 
 
