@@ -12,6 +12,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import uuid
 from pathlib import Path
 from typing import Any
 
@@ -334,6 +335,8 @@ def main(argv: list[str] | None = None) -> None:
         ),
     })
     child: dict[str, Any] = {}
+    run_id = "marun_" + uuid.uuid4().hex
+    env["MEMORY_ATLAS_CAPTURE_RUN_ID"] = run_id
     returncode = 1
     failure_code = "capture_not_started"
     child_stderr = ""
@@ -342,6 +345,9 @@ def main(argv: list[str] | None = None) -> None:
         completed = _run_capture(command, cwd=repo, env=env)
         returncode = completed.returncode
         child_stderr = completed.stderr
+        if returncode == 124:
+            child_failure_code = "CHILD_CAPTURE_TIMEOUT"
+            raise RuntimeError("capture_timeout_expired")
         child = _child_payload(completed.stdout)
         child_failure = _structured_child_failure_code(child.get("failure_code"))
         failure_code = "" if returncode == 0 else (
@@ -353,7 +359,7 @@ def main(argv: list[str] | None = None) -> None:
     except Exception as exc:
         failure_code = (
             str(exc)
-            if str(exc) in {"capture_result_json_missing", "capture_result_json_invalid"}
+            if str(exc) in {"capture_result_json_missing", "capture_result_json_invalid", "capture_timeout_expired"}
             else f"entrypoint_exception_{exc.__class__.__name__}"
         )
         if failure_code == "capture_result_json_missing":
@@ -372,7 +378,7 @@ def main(argv: list[str] | None = None) -> None:
         "schema_version": "memory_atlas.daily_backup_entry_result.v1",
         "state": "SUCCEEDED" if succeeded else "FAILED",
         "child_returncode": returncode,
-        "run_id": child.get("run_id"),
+        "run_id": child.get("run_id") or run_id,
         "bytes_discovered": child.get("bytes_discovered"),
         "bytes_uploaded": child.get("bytes_uploaded"),
         "objects": child.get("objects"),

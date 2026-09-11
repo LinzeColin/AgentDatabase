@@ -138,7 +138,8 @@ def validate_policy(
         or release.get("automatic_release_tag_prefix") != "memory-atlas-auto-snapshot-"
         or release.get("automatic_pack_tag_prefix") != "memory-atlas-auto-pack-"
         or release.get("automatic_release_retention_count") != 3
-        or release.get("maximum_archives_per_snapshot") != 7
+        or release.get("full_compaction") != "explicit_only"
+        or release.get("max_batch_source_bytes") != 268435456
         or release.get("retention_scope")
         != "automatic_snapshot_releases_with_matching_tag_prefix_only"
         or release.get("manual_or_nonmatching_release_mutation_allowed") is not False

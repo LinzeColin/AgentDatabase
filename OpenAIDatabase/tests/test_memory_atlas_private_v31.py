@@ -1573,7 +1573,8 @@ def test_private_release_groups_archive_parts_without_a_total_release_cap(tmp_pa
     assert [part.part_number for group in groups for part in group] == list(range(1, 258))
 
 
-def test_private_release_workflow_verifies_remote_restore_and_cleans_local_payload(
+@pytest.fixture
+def private_release_fixture(
     tmp_path: Path,
 ) -> None:
     from OpenAIDatabase.scripts.memory_atlas_private.private_release import PrivateReleaseBackup
@@ -1692,6 +1693,14 @@ def test_private_release_workflow_verifies_remote_restore_and_cleans_local_paylo
     # Keep the production policy intact while exercising an archive that spans
     # more than one Release group.
     backup.policy = replace(backup.policy, max_part_bytes=256, max_parts=32)
+    return backup, record, fake, private_policy
+
+
+def test_private_release_workflow_verifies_remote_restore_and_cleans_local_payload(
+    tmp_path: Path, private_release_fixture,
+) -> None:
+    backup, record, fake, private_policy = private_release_fixture
+    source = Path(record.materialized_path)
     result = backup.run(
         records=[record],
         logical_source_set=list(private_policy["scope"]["logical_sources"]),
@@ -1768,6 +1777,110 @@ def test_private_release_workflow_verifies_remote_restore_and_cleans_local_paylo
     assert len(fake.list_published("memory-atlas-auto-snapshot-")) == 3
     assert result["local_payload_cleanup"] == {"state": "PASS", "remaining_paths": 0}
     assert not (tmp_path / "private-github-release").exists()
+
+
+@pytest.mark.parametrize("failure_stage", ["upload", "restore", "snapshot"])
+@pytest.mark.parametrize("inventory_change", ["same", "edited", "removed"])
+def test_private_release_resumes_completed_batches_after_process_restart(
+    tmp_path: Path, private_release_fixture, monkeypatch: pytest.MonkeyPatch, failure_stage: str, inventory_change: str,
+) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.private_release import PrivateReleaseBackup
+
+    backup, record, fake, private_policy = private_release_fixture
+    state = tmp_path / "protected-state"
+    backup.checkpoint_path = state / "completed-archive-batches.sqlite3"
+    backup.policy = replace(backup.policy, max_batch_source_bytes=record.size_bytes)
+    records = [replace(record, relative_path=f"fixture/{number}.jsonl") for number in range(3)]
+    upload = fake.upload
+    download = fake.download
+    snapshot = backup._publish_snapshot_index
+    failed_tags = []
+
+    def fail_upload(tag, paths):
+        if "-b000002-" in tag:
+            failed_tags.append(tag)
+            raise RuntimeError("fixture_transfer_interrupted")
+        return upload(tag, paths)
+
+    def fail_restore(tag, directory):
+        if "-b000002-" in tag:
+            failed_tags.append(tag)
+            raise RuntimeError("fixture_transfer_interrupted")
+        return download(tag, directory)
+
+    if failure_stage == "upload":
+        monkeypatch.setattr(fake, "upload", fail_upload)
+    elif failure_stage == "restore":
+        monkeypatch.setattr(fake, "download", fail_restore)
+    else:
+        def fail_snapshot(**kwargs):
+            raise RuntimeError("fixture_transfer_interrupted")
+        monkeypatch.setattr(backup, "_publish_snapshot_index", fail_snapshot)
+    arguments = dict(records=records, logical_source_set=list(private_policy["scope"]["logical_sources"]), work_root=tmp_path)
+    with pytest.raises(RuntimeError, match="fixture_transfer_interrupted"):
+        backup.run(**arguments, backup_id="marun_first_run", created_at=FIXED_TIME)
+    assert not (tmp_path / "private-github-release").exists()
+    completed = 3 if failure_stage == "snapshot" else 1
+    assert len(backup._load_checkpoint()["files"]) == completed
+    assert backup.checkpoint_path.stat().st_mode & 0o777 == 0o600
+    assert len(fake.list_published("memory-atlas-auto-pack-")) == completed * 2
+    assert not fake.list_published("memory-atlas-auto-snapshot-")
+    monkeypatch.setattr(fake, "upload", upload)
+    monkeypatch.setattr(fake, "download", download)
+    monkeypatch.setattr(backup, "_publish_snapshot_index", snapshot)
+    # A new instance and an empty payload directory represent a new process.
+    resumed = PrivateReleaseBackup(
+        private_policy_path=tmp_path / "private-policy.json",
+        public_policy_path=tmp_path / "public-policy.json",
+        identity_loader=backup.identity_loader,
+        release_client=fake,
+        checkpoint_dir=state,
+    )
+    resumed.policy = backup.policy
+    if failure_stage == "upload" and inventory_change == "same":
+        original_policy = resumed.policy
+        resumed.policy = replace(resumed.policy, recipient_fingerprint="different-recipient")
+        with pytest.raises(RuntimeError, match="archive_checkpoint_scope_mismatch"):
+            resumed._load_checkpoint()
+        resumed.policy = original_policy
+        completed_tag = str(fake.list_published("memory-atlas-auto-pack-")[0]["tagName"])
+        fake.releases[completed_tag]["draft"] = True
+        with pytest.raises(RuntimeError, match="incremental_archive_reference_unavailable"):
+            resumed.run(**arguments, backup_id="marun_reference_unavailable", created_at="2026-01-03T03:04:05Z")
+        assert resumed.checkpoint_path.exists()
+        fake.releases[completed_tag]["draft"] = False
+    if inventory_change == "edited":
+        edited_path = tmp_path / "edited.jsonl"
+        edited_path.write_bytes(os.urandom(record.size_bytes))
+        records[0] = replace(records[0], materialized_path=str(edited_path), sha256=sha256_file(edited_path), original_sha256=sha256_file(edited_path))
+    elif inventory_change == "removed":
+        records.pop(0)
+    expected_reused = completed - int(inventory_change != "same")
+    expected_new = len(records) - expected_reused
+    result = resumed.run(**arguments, backup_id="marun_second_run", created_at="2026-01-03T03:04:06Z")
+    assert result["state"] == "PASS"
+    assert result["delta"]["resumed_files"] == expected_reused
+    assert result["delta"]["new_or_changed_files"] == expected_new
+    assert result["snapshot_file_count"] == len(records)
+    assert len(result["archives"]) == len(records)
+    assert len(fake.list_published("memory-atlas-auto-pack-")) == (completed + expected_new) * 2
+    assert result["snapshot_index_restore"]["state"] == "PASS"
+    assert not resumed.checkpoint_path.exists()
+    assert not (tmp_path / "private-github-release").exists()
+
+
+def test_many_independent_batches_stay_incremental(tmp_path: Path, private_release_fixture) -> None:
+    backup, record, fake, private_policy = private_release_fixture
+    backup.policy = replace(backup.policy, max_batch_source_bytes=record.size_bytes, max_part_bytes=65536)
+    records = [replace(record, relative_path=f"fixture/{number}.jsonl") for number in range(9)]
+    args = dict(records=records, logical_source_set=list(private_policy["scope"]["logical_sources"]), work_root=tmp_path)
+    first = backup.run(**args, backup_id="marun_many_first", created_at=FIXED_TIME)
+    assert len(first["archives"]) == 9
+    before = len(fake.release_order)
+    reused = backup.run(**args, backup_id="marun_many_reuse", created_at="2026-01-03T03:04:06Z")
+    assert reused["snapshot_reused"] is True
+    assert reused["delta"]["new_or_changed_files"] == 0
+    assert len(fake.release_order) == before
 
 
 def test_canonical_publisher_reuses_a_verified_release_for_an_empty_delta(tmp_path: Path) -> None:
@@ -2003,6 +2116,30 @@ def test_source_capture_entry_preserves_a_structured_child_failure(
     saved = tmp_path / "memory-atlas-state" / "last-capture-result.json"
     assert json.loads(saved.read_text()) == payload
     assert saved.stat().st_mode & 0o777 == 0o600
+
+
+def test_source_capture_timeout_retains_parent_owned_run_identity(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str],
+) -> None:
+    import OpenAIDatabase.scripts.memory_atlas_source_capture_entry as entry
+
+    env_file = tmp_path / "memory_atlas.env"
+    env_file.write_text("", encoding="utf-8")
+    monkeypatch.setenv("MEMORY_ATLAS_ENV_FILE", str(env_file))
+    monkeypatch.setattr(entry, "find_repo_root", lambda _: tmp_path / "repo")
+    run_ids = []
+    def timeout(command, *, cwd, env):
+        run_ids.append(env["MEMORY_ATLAS_CAPTURE_RUN_ID"])
+        return subprocess.CompletedProcess(command, 124, "", "")
+    monkeypatch.setattr(entry, "_run_capture", timeout)
+    with pytest.raises(SystemExit):
+        entry.main()
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["run_id"] == run_ids[0]
+    assert re.fullmatch(r"marun_[0-9a-f]{32}", payload["run_id"])
+    assert payload["failure_code"] == "capture_timeout_expired"
+    assert payload["child_failure_code"] == "CHILD_CAPTURE_TIMEOUT"
+    assert payload["local_cleanup"]["state"] == "PASS"
 
 
 def test_github_release_client_names_the_failed_operation(

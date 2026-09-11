@@ -6,6 +6,7 @@ import json
 import os
 import re
 import shutil
+import sqlite3
 import subprocess
 import tarfile
 import threading
@@ -68,7 +69,7 @@ class BackupPolicy:
     snapshot_tag_prefix: str
     pack_tag_prefix: str
     retention_count: int
-    maximum_archives_per_snapshot: int
+    max_batch_source_bytes: int
     key_id: str
     keychain_account: str
     recipient: str
@@ -97,7 +98,7 @@ class BackupPolicy:
             snapshot_tag_prefix=str(release["automatic_release_tag_prefix"]),
             pack_tag_prefix=str(release["automatic_pack_tag_prefix"]),
             retention_count=int(release["automatic_release_retention_count"]),
-            maximum_archives_per_snapshot=int(release["maximum_archives_per_snapshot"]),
+            max_batch_source_bytes=int(release["max_batch_source_bytes"]),
             key_id=str(private_key["key_id"]),
             keychain_account=str(private_key["keychain_account"]),
             recipient=recipient,
@@ -789,8 +790,10 @@ class PrivateReleaseBackup:
         public_policy_path: Path,
         identity_loader: Callable[[], bytearray] | None = None,
         release_client: GithubReleaseClient | None = None,
+        checkpoint_dir: Path | None = None,
     ):
         self.policy = BackupPolicy.load(private_policy_path, public_policy_path)
+        self.checkpoint_path = checkpoint_dir / "completed-archive-batches.sqlite3" if checkpoint_dir else None
         self.age = _command_path(
             "MEMORY_ATLAS_AGE_BIN",
             (Path.home() / ".local/bin/age", shutil.which("age") or ""),
@@ -822,6 +825,57 @@ class PrivateReleaseBackup:
         finally:
             for index in range(len(identity)):
                 identity[index] = 0
+
+    def _load_checkpoint(self) -> dict[str, Any]:
+        if self.checkpoint_path is None or not self.checkpoint_path.exists():
+            return {"files": [], "archives": []}
+        files: dict[tuple[str, str], dict[str, Any]] = {}
+        archives: dict[str, dict[str, Any]] = {}
+        # SQLite recovers an interrupted journal transaction before reading.
+        connection = sqlite3.connect(self.checkpoint_path)
+        try:
+            connection.execute("CREATE TABLE IF NOT EXISTS batches (payload TEXT NOT NULL)")
+            for (payload,) in connection.execute("SELECT payload FROM batches ORDER BY rowid"):
+                value = _validate_snapshot_index(json.loads(payload))
+                if value.get("scope") != [self.policy.repository, self.policy.recipient_fingerprint, list(self.policy.logical_sources)]:
+                    raise PrivateReleaseBackupError("archive_checkpoint_scope_mismatch")
+                files.update((_index_file_key(row), row) for row in value["files"])
+                archives.update((row["archive_id"], row) for row in value["archives"])
+        finally:
+            connection.close()
+        return {"files": list(files.values()), "archives": list(archives.values())}
+
+    def _save_checkpoint(self, files: Mapping[tuple[str, str], dict[str, Any]], archives: Mapping[str, dict[str, Any]]) -> None:
+        if self.checkpoint_path is None:
+            return
+        referenced = {row["archive_id"] for row in files.values()}
+        value = {
+            "schema_version": SNAPSHOT_INDEX_SCHEMA,
+            "scope": [self.policy.repository, self.policy.recipient_fingerprint, list(self.policy.logical_sources)],
+            "files": list(files.values()),
+            "archives": [row for key, row in archives.items() if key in referenced],
+        }
+        self.checkpoint_path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        connection = sqlite3.connect(self.checkpoint_path)
+        try:
+            self.checkpoint_path.chmod(0o600)
+            with connection:
+                connection.execute("CREATE TABLE IF NOT EXISTS batches (payload TEXT NOT NULL)")
+                connection.execute("INSERT INTO batches VALUES (?)", (json.dumps(value, ensure_ascii=False, separators=(",", ":")),))
+        finally:
+            connection.close()
+
+    def _record_batches(self, records: Sequence[InventoryRecord]) -> Iterable[list[InventoryRecord]]:
+        batch: list[InventoryRecord] = []
+        size = 0
+        for record in records:
+            if batch and size + record.size_bytes > self.policy.max_batch_source_bytes:
+                yield batch
+                batch, size = [], 0
+            batch.append(record)
+            size += record.size_bytes
+        if batch:
+            yield batch
 
     def validate_logical_source_set(self, logical_source_set: Iterable[str]) -> None:
         observed_sources = tuple(logical_source_set)
@@ -1108,15 +1162,36 @@ class PrivateReleaseBackup:
                 if key in current:
                     raise PrivateReleaseBackupError("duplicate_archive_path")
                 current[key] = record
-            compact = previous is None or len(previous_archives) >= self.policy.maximum_archives_per_snapshot
+            # Completed batches survive a failed run as metadata only. Match
+            # against this run's inventory, so edited/deleted files stay exact.
+            checkpoint = self._load_checkpoint()
+            completed_files = dict(previous_files)
+            completed_archives = dict(previous_archives)
+            resumed_files = 0
+            checkpoint_archives = {row["archive_id"]: row for row in checkpoint["archives"]}
+            for row in checkpoint["files"]:
+                key = _index_file_key(row)
+                if key in current and row["sha256"] == current[key].sha256:
+                    if previous_files.get(key, {}).get("sha256") != row["sha256"]:
+                        resumed_files += 1
+                    completed_files[key] = row
+                    completed_archives[row["archive_id"]] = checkpoint_archives[row["archive_id"]]
+            completed_files = {
+                key: row for key, row in completed_files.items()
+                if key in current and row["sha256"] == current[key].sha256
+            }
+            referenced = {row["archive_id"] for row in completed_files.values()}
+            completed_archives = {key: row for key, row in completed_archives.items() if key in referenced}
+            self._verify_archive_references(list(completed_archives.values()))
+            compact = previous is None
             changed_keys = {
                 key
                 for key, record in current.items()
-                if compact or str(previous_files.get(key, {}).get("sha256", "")) != record.sha256
+                if key not in completed_files
             }
             changed = [record for key, record in current.items() if key in changed_keys]
             removed = set(previous_files) - set(current)
-            if previous is not None and not changed and not removed:
+            if previous is not None and not changed and not removed and not resumed_files:
                 self._verify_archive_references(list(previous_archives.values()))
                 result = {
                     "schema_version": "memory_atlas.private_release_backup.v2",
@@ -1148,34 +1223,40 @@ class PrivateReleaseBackup:
                     "retention_deleted_count": 0,
                 }
             else:
-                archive_id = f"{backup_id}-{'baseline' if compact else 'delta'}"
-                new_archive: dict[str, Any] | None = None
-                archive_restore: dict[str, Any] | None = None
-                if changed:
+                new_archives: list[dict[str, Any]] = []
+                restored_files = 0
+                for batch_number, batch in enumerate(self._record_batches(changed), start=1):
+                    archive_id = f"{backup_id}-b{batch_number:06d}"
+                    batch_dir = release_root / f"batch-{batch_number:06d}"
                     new_archive, archive_restore = self._publish_archive_groups(
-                        records=changed,
+                        records=batch,
                         archive_id=archive_id,
                         kind="baseline" if compact else "delta",
                         created_at=created_at,
-                        directory=release_root / "new-archive",
+                        directory=batch_dir,
                     )
+                    completed_archives[archive_id] = new_archive
+                    for record in batch:
+                        completed_files[(record.source_id, record.relative_path)] = _snapshot_file_row(record, archive_id)
+                    # Commit only after this independent archive has passed
+                    # remote readback, isolated restore and publication.
+                    self._save_checkpoint(
+                        {(record.source_id, record.relative_path): completed_files[(record.source_id, record.relative_path)] for record in batch},
+                        {archive_id: new_archive},
+                    )
+                    new_archives.append(new_archive)
+                    restored_files += int(archive_restore["restored_files"])
+                    shutil.rmtree(batch_dir)
                 file_rows: list[dict[str, Any]] = []
                 for key, record in current.items():
-                    if key in changed_keys:
-                        if new_archive is None:
-                            raise PrivateReleaseBackupError("incremental_archive_missing")
-                        selected_archive_id = archive_id
-                    else:
-                        selected_archive_id = str(previous_files[key]["archive_id"])
+                    selected_archive_id = str(completed_files[key]["archive_id"])
                     file_rows.append(_snapshot_file_row(record, selected_archive_id))
                 referenced_archive_ids = {str(row["archive_id"]) for row in file_rows}
                 archive_rows = [
                     row
-                    for archive_key, row in previous_archives.items()
-                    if not compact and archive_key in referenced_archive_ids
+                    for archive_key, row in completed_archives.items()
+                    if archive_key in referenced_archive_ids
                 ]
-                if new_archive is not None:
-                    archive_rows.append(new_archive)
                 snapshot_index = {
                     "schema_version": SNAPSHOT_INDEX_SCHEMA,
                     "snapshot_tag": self._snapshot_tag(backup_id, created_at),
@@ -1214,29 +1295,33 @@ class PrivateReleaseBackup:
                     "delta": {
                         "new_or_changed_files": len(changed),
                         "reused_files": len(current) - len(changed),
+                        "resumed_files": resumed_files,
                         "removed_files": len(removed),
                         "archive_kind": "baseline" if compact else "delta",
-                        "release_group_count": len(new_archive["groups"]) if new_archive is not None else 0,
+                        "release_group_count": sum(len(row["groups"]) for row in new_archives),
+                        "completed_batch_count": len(new_archives),
                     },
                     "archives": archive_rows,
                     "ciphertext_part_count": (
-                        (int(new_archive["ciphertext_part_count"]) if new_archive is not None else 0)
+                        sum(int(row["ciphertext_part_count"]) for row in new_archives)
                         + len(snapshot["parts"])
                     ),
                     "ciphertext_size_bytes": (
-                        (int(new_archive["ciphertext_size_bytes"]) if new_archive is not None else 0)
+                        sum(int(row["ciphertext_size_bytes"]) for row in new_archives)
                         + sum(int(part["ciphertext_size_bytes"]) for part in snapshot["parts"])
                     ),
                     "remote_readback_verified": True,
-                    "isolated_restore": archive_restore or {
+                    "isolated_restore": {
                         "state": "PASS",
-                        "mode": "reused_verified_archives",
-                        "restored_files": 0,
+                        "mode": "independent_batches" if new_archives else "reused_verified_archives",
+                        "restored_files": restored_files,
                         "all_hashes_match": True,
                     },
                     "snapshot_index_restore": snapshot["isolated_restore"],
                     "retention_deleted_count": len(deleted),
                 }
+            if self.checkpoint_path is not None and self.checkpoint_path.exists():
+                self.checkpoint_path.unlink()
         finally:
             shutil.rmtree(release_root, ignore_errors=False)
         if result is None:

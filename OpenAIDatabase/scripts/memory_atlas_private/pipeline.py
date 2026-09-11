@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import socket
 import sys
@@ -697,13 +698,16 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
             self.private_release_backup = PrivateReleaseBackup(
                 private_policy_path=config.private_release_policy,
                 public_policy_path=config.public_release_policy,
+                checkpoint_dir=config.runtime_dir,
             )
         else:
             self.private_release_backup = None
 
     def run(self) -> dict[str, Any]:
         started_at = self.clock()
-        run_id = _run_id(started_at, self.config.source_host_id)
+        run_id = os.environ.get("MEMORY_ATLAS_CAPTURE_RUN_ID") or _run_id(started_at, self.config.source_host_id)
+        if re.fullmatch(r"marun_[A-Za-z0-9_-]+", run_id) is None:
+            raise PipelineError("capture_run_id_invalid")
         work = self.config.work_dir / run_id
         snapshots = work / "snapshots"
         work.mkdir(parents=True, exist_ok=False)
