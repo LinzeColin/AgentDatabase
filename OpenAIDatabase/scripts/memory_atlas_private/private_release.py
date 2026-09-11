@@ -434,8 +434,10 @@ def _encrypt_archive(
             archive.addfile(info, io.BytesIO(encoded_manifest))
             for record in records:
                 source = Path(record.materialized_path)
-                if not source.is_file() or sha256_file(source) != record.sha256:
-                    raise PrivateReleaseBackupError("source_snapshot_unstable")
+                if not source.is_file():
+                    raise PrivateReleaseBackupError(f"source_snapshot_missing_{record.source_id}")
+                if sha256_file(source) != record.sha256:
+                    raise PrivateReleaseBackupError(f"source_snapshot_changed_{record.source_id}")
                 info = archive.gettarinfo(str(source), arcname=_safe_archive_path(record.source_id, record.relative_path))
                 info.uid = 0
                 info.gid = 0

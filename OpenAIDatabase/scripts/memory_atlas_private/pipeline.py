@@ -759,6 +759,16 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
             published_event_count = _write_jsonl(normalized_path, delta_events)
             event_count = len(all_events)
             normalized_sha = sha256_file(normalized_path)
+            # Preserve the source archive while its run-scoped snapshots are
+            # fresh, before the all-history event transfer can take hours.
+            if self.private_release_backup is not None:
+                manifest.github_private_release_backup = self.private_release_backup.run(
+                    records=records,
+                    logical_source_set=logical_source_set,
+                    backup_id=run_id,
+                    created_at=started_at,
+                    work_root=work,
+                )
             if self.canonical_publisher is not None:
                 conventional_delta_key = self.config.r2_primary_prefix + _normalized_delta_key(run_id)
                 canonical_object_key = self.config.r2_primary_prefix + CANONICAL_BASE_KEY
@@ -788,14 +798,6 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
             manifest.state = RunState.VERIFYING_OBJECTS
             if not all(item.readback_verified and item.readback_sha256 == item.sha256 for item in manifest.objects):
                 raise PipelineError("至少一个对象缺少完整读回证明")
-            if self.private_release_backup is not None:
-                manifest.github_private_release_backup = self.private_release_backup.run(
-                    records=records,
-                    logical_source_set=logical_source_set,
-                    backup_id=run_id,
-                    created_at=started_at,
-                    work_root=work,
-                )
             manifest.state = RunState.PUBLISHING_FACTS
             analytics = build_behavior_analytics(all_events, generated_at=self.clock())
             analytics["normalized_event_batch"] = _normalized_batch_fact(

@@ -365,7 +365,6 @@ def main(argv: list[str] | None = None) -> None:
                 shutil.rmtree(run_root)
             except OSError:
                 cleanup_error = True
-        capture_lock.close()
         cleanup_pass = not cleanup_error and not run_root.exists()
     state = str(child.get("state", "FAILED"))
     succeeded = returncode == 0 and state == "SUCCEEDED" and cleanup_pass
@@ -395,7 +394,16 @@ def main(argv: list[str] | None = None) -> None:
         result["failure_code"] = failure_code or f"child_state_{state.lower()}"
     if child_failure_code:
         result["child_failure_code"] = child_failure_code
-    print(json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2))
+    encoded_result = json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2)
+    try:
+        receipt = incremental_state_dir / "last-capture-result.json"
+        pending_receipt = receipt.with_suffix(".json.tmp")
+        pending_receipt.write_text(encoded_result + "\n", encoding="utf-8")
+        pending_receipt.chmod(0o600)
+        pending_receipt.replace(receipt)
+        print(encoded_result)
+    finally:
+        capture_lock.close()
     raise SystemExit(0 if succeeded else 1)
 
 

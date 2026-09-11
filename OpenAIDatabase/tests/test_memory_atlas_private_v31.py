@@ -1376,6 +1376,28 @@ def test_private_fact_backup_can_use_zero_charge_github_only_mode(tmp_path: Path
     assert result["github_private_database"]["readback_verified"] is True
 
 
+def test_source_archive_failure_precedes_canonical_network_work(tmp_path: Path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.private_release import PrivateReleaseBackupError
+
+    config = make_config(tmp_path, write_registry(tmp_path / "registry.json", [{
+        "source_id": "source", "label_zh": "fixture", "kind": "files", "required": False,
+    }]))
+    class Archive:
+        def validate_logical_source_set(self, sources):
+            pass
+        def run(self, **kwargs):
+            raise PrivateReleaseBackupError("source_snapshot_unstable")
+    class Publisher:
+        def run(self, **kwargs):
+            pytest.fail("canonical upload must follow source archive preparation")
+    with pytest.raises(PrivateReleaseBackupError, match="source_snapshot_unstable"):
+        CapturePipeline(
+            config, EphemeralVerificationObjectStore(), LocalPrivateDatabase(tmp_path / "private"),
+            clock=lambda: FIXED_TIME, private_release_backup=Archive(),
+            canonical_publisher=Publisher(), r2_fact_backup_required=False,
+        ).run()
+
+
 def test_capture_release_only_mode_keeps_r2_at_zero_requests(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -1978,6 +2000,9 @@ def test_source_capture_entry_preserves_a_structured_child_failure(
     assert payload["child_returncode"] == 1
     assert payload["failure_code"] == "ciphertext_part_limit_exceeded"
     assert "child_failure_code" not in payload
+    saved = tmp_path / "memory-atlas-state" / "last-capture-result.json"
+    assert json.loads(saved.read_text()) == payload
+    assert saved.stat().st_mode & 0o777 == 0o600
 
 
 def test_github_release_client_names_the_failed_operation(
