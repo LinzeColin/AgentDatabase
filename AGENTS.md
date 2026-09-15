@@ -51,234 +51,53 @@ App, live, authorization, readiness, or data-freshness facts remain UNKNOWN or
 FAILED until directly reverified.
 
 ---
+---
 
 ## 云成本红线：对象存储必须零付费（Owner 硬指令 · 长期有效）
 
-**云端账单必须恒为 $0.00。不允许任何 agent 触发收费行为。**
+红线全文与事故记录是工作区级规则，真源在 `GithubProject/README.md` **铁律 7**；
+本仓独有的**周期任务预算表**、**存储维度实测**和 social-archive 保留策略在
+[`文档/r2-成本红线与预算.md`](文档/r2-成本红线与预算.md)。**改任何周期任务的频率、范围或参数之前先读它。**
 
-1. **禁止 `InfrequentAccess` 存储类** —— 建桶、写对象、生命周期转换，一律不许。
-   R2 的免费额度（10GB 存储 / 100 万 Class A / 1000 万 Class B）**只覆盖 Standard**；
-   IA 从第 1 次操作起计费，且**按整计费单位向上取整**。
-   2026-08-07 实账单：**51 次 IA 操作 = $9.00**，同期 **301 万次 Standard 操作 = $0.00**。
-   根因是建桶时默认存储类选了 IA，写入端不指定存储类就全部继承 —— 一次手滑，之后静默自动计费。
-2. **禁止"整包下载来判断存在 / 做校验"的高频轮询。** 判断对象存在用 `HeadObject`
-   （写入时把 sha256 放进对象 `Metadata`，Head 就读得到）；真要逐字节复核，
-   **按天或按周跑，不许按分钟跑**。
-   反例：memory-atlas reconcile 每 15 分钟把 2466 个对象整包拉一遍核 sha256，
-   折合 71 万次 Class B/天、21.3M/月，直接打穿 10M/月免费额度。
-3. **新增或改动任何周期性任务，先算月操作量**：
-   `每轮操作数 × 每天轮数 × 31 < 免费额度 × 50%`。**算不出来就不上线。**
-4. **存储优先级**：**GitHub Release 资产 > R2 > OVH 本地**。
-   Release 资产不计仓库体积、没有操作计费，永远优先。
-5. **新项目与新周期任务默认不得写 R2。** 默认使用 GitHub Release 或既有本地/私有仓通道；
-   只有 Owner 单独授权、机器守卫同一计费周期直接证明全部 Bucket 默认 `Standard`、无非 Standard
-   对象，并且最坏情况月操作量与新增存储都低于免费额度 40% 时，才可提出启用 R2。证据缺失、
-   status 过期或任一指标达到 40% 时必须 fail-closed 跳过 R2，不得把“备份成功”与“R2 必须写入”绑定。
-6. **Memory Atlas 每日完整备份固定为 `GITHUB_RELEASE_ONLY`。** 原始来源进入 age 加密私有
-   Release，canonical 事件进入私有 Release；两者都必须远端读回，原始来源还必须隔离恢复。
-   Schedule 中 R2 必须报告 `SKIPPED_ZERO_CHARGE` 且 `billable_requests=0`。未经 Owner 新授权不得改回。
+动手前必须过的四道闸：
 
-- **结论**：canonical 事件超过单个 GitHub Release 资产容量时，发布端必须按 Manifest 分片，读取端按顺序重组，并继续兼容历史单文件资产。
-  **为什么**：2026-08-22 前台复现中，约 2.41 GB 的事件资产上传失败而 Manifest 已成功，导致每日无人值守任务连续停摆；此前约 1.99 GB 的单文件仍能成功。
-  **代价**：一次失败批次留下未发布草稿；发布、读回和零增量复用都必须同时理解分片 Manifest。
+1. **不用 `InfrequentAccess` 存储类** —— 建桶、写对象、生命周期转换都不用。免费额度只覆盖 Standard，IA 从第 1 次操作起计费。
+2. **不用「整包下载」判断对象存在或做校验。** 判断存在用 `HeadObject` 读 `Metadata.sha256`；逐字节复核按天或按周跑。
+3. **新增或改动周期性任务先算月操作量**：`每轮操作数 × 每天轮数 × 31 < 免费额度 × 50%`。算不出来就不上线。
+4. **不删这三类参数**：`--fast-list`、`--limit`、`UNCHANGED` / `--skip-if-unchanged`。它们是额度开关，不是性能调优。
 
-完整事故记录、账单逐行归因、免费额度速查表 → **`Private-Database` 仓 `OPS/AGENT_ONBOARDING.md` §9.7**。
-机器守卫 → OVH `/usr/local/bin/linze-r2-free-tier-guard.py`（每 6 小时，非 Standard 桶自动熔断改回；
-判定 `/srv/linze/apps/status/data/r2_free_tier_guard.json`）。
+存储优先级：**GitHub Release 资产 > R2 > OVH 本地**。新项目与新周期任务默认不写 R2，需 Owner 单独授权加机器守卫证据。
+Memory Atlas 每日完整备份固定 `GITHUB_RELEASE_ONLY`，R2 报 `SKIPPED_ZERO_CHARGE` 且 `billable_requests=0`。
+canonical 事件超过单个 Release 资产容量时按 Manifest 分片，读取端顺序重组并兼容历史单文件资产。
 
-### R2 周期任务清单与预算（改动前必读）
-
-云端账单恒为 $0.00，靠的是下面这份预算不被打破。**改这些任务的频率、范围或参数之前，先算月操作量。**
-数字为 2026-08-07 实测（Cloudflare GraphQL `r2OperationsAdaptiveGroups`，7 个完整日日均外推）。
-
-| 任务 | 频率 | 桶 | 作用 | 月 Class A | 月 Class B | **一碰就变收费的地方** |
-|---|---|---|---|---|---|---|
-| `weread-port-r2-oci-backup` | 每日 04:23 | weread-port-private | 加密用户对象镜像到 OCI 异地冷备 | 465 | 0 | **`rclone sync` 必须带 `--fast-list`**。删掉它 → 按前缀逐个列举，实测 15 次 → **9,300 次**（Class A 额度的 28.8%），且随对象数线性增长 |
-| `memory-atlas-reconcile` | **每日** | weread-port-private | 核对 R2 是否仍持有 manifest 里的字节 | 434 | **229,338 (2.3%)** | **频率**。原为每 15 分钟 = 21.3M/月，直接打穿 10M 额度。因为 `exists_with_hash()` 对每个对象**整包下载**（2 Head + 1 Get × 2466 对象 = 7,398/轮） |
-| `linze-status-r2-mirror.sh` | 每 5 分钟 | primary-objects | status 站数据镜像 | 31,872 (3.2%) | ~200 | **镜像的文件个数**。每多镜像 1 个文件 = +8,928 次/月 |
-| weread-port 平台写入（常驻） | 持续 ~56 次/小时 | weread-port-private | 加密笔记 / 跨设备同步的对象写入 | 41,664 (4.2%) | 0 | 随用户活跃度增长。**写入方未逐一归因**，但已确认不是 reconcile（降频后仍在） |
-| `social-archive-replication` | 每 15 分钟 | social-archive-e2n-v0004 | 对象复制到多存储 | 3,224 | 19,468 | **`--limit 200` 这个上限**，别放大 |
-| `weread-port-private-database-backup` | 每日 04:01 | backups | Private-Database git bundle 冷备 | 190 | ~30 | 有 `UNCHANGED` 短路，**别去掉** |
-| `linze-offsite-backup.sh` | 每日 03:40 | backups | 全量加密备份（单对象） | ~60 | ~30 | 别改成分片小块上传 |
-| `cyberboss-backup` | 每日 03:35 | cyberboss-cold | CyberBoss 冷备 | 35 | ~150 | — |
-| `memory-atlas-action-worker` | 每分钟 | weread-port-private | 有界 owner 动作队列 | ~0 | ~0 | 队列空时不发任何 R2 请求；**队列一旦长期非空，就会变成每分钟打 R2** |
-| 其余（adp / sl-* / kmfa / status-evidence） | 每日 | 各自 | 各项目产物 | <900 | <100 | — |
-| **合计** | | | | **≈ 8.0% 的 100 万/月** | **≈ 2.5% 的 1000 万/月** | |
-
-**余量**：Class B 有 **40 倍**余量；Class A 有 **12 倍**余量。两者都健康，但 **Class A 历来是先见底的那个**
-（修 `--fast-list` 之前它已经到 37%，而 Class B 只有 2.5%）—— 盯额度先盯 Class A。
-
-**改动这些任务时的三条硬规则**
-
-1. **别删这三类参数** —— 它们是额度的直接开关，不是性能调优：
-   `--fast-list`（rclone 列举方式）、`--limit`（单轮上限）、`UNCHANGED` / `--skip-if-unchanged`（无变化短路）。
-2. **别把日级任务改成分钟级。** 先算：`每轮操作数 × 每天轮数 × 31 < 免费额度 × 50%`。**算不出来就不上线。**
-3. **别用"整包下载"判断对象存在或做校验。** 判断存在用 `HeadObject` 读 `Metadata.sha256`；
-   逐字节复核按天/周跑，不许按分钟跑。（`exists_with_hash()` 就是反例，它是这次事故的第二个根因。）
-
-**改完自己核**（不要交给 owner 去发现）：
+改完自己核，不交给 Owner 去发现：
 
 ```bash
 ssh ovh 'sudo /usr/local/bin/linze-r2-free-tier-guard.py'
 ```
 
-它会打印本计费周期 Class A / Class B / 存储对免费额度的投影占比，≥40% 报 WARN、≥50% 报 CRIT，
-并把判定写进每日复审清单。完整事故记录见 `Private-Database` 仓 `OPS/AGENT_ONBOARDING.md` §9.7。
+## persona-distiller 实测经验
 
-**存储维度（唯一跨月累积的）**：操作次数每计费周期清零，**存储不清零**。2026-08-10 实测 **4.55 GB / 10 GB = 44.4%**。
+做 persona-distiller 相关任务时读 [`文档/persona-distiller-实测经验.md`](文档/persona-distiller-实测经验.md)（流水线 + 预筛/收尾两组结论，含为什么与代价）；其余任务不读。
 
-| 桶 | 当前 | 状态 |
-|---|---|---|
-| `weread-port-private` | 3.22 GB | 冻结（memory-atlas 迁出后不再增长） |
-| `backups` | 0.96 GB | 冻结（`linze-offsite-backup.sh` 的 R2 写入已停用：`R2_CODE=disabled_zero_charge_policy`） |
-| `social-archive-e2n-v0004` | 0.31 GB | **3 天保留封顶**（见下） |
-| 其余 7 个桶 | 合计 <0.06 GB | 冻结 |
+## worktree 落点
 
-**social-archive 的 3 天保留（Owner 2026-08-10 定）**
+规则真源是 `GithubProject/README.md` **铁律 2**：手开 worktree，不要用桌面版自动开的
+（`git worktree add ../_scratch/<repo>-<任务名> -b <分支名> origin/main`），自查脚本也在那里。
 
-`backups/runtime-db/` 每 15 分钟写一份 1.03 MB 加密快照，而 `prune_runtime_db_snapshots.py`
-**只清本地**——它的文件头明确写着「不碰远端副本(R2/OCI/GitHub)，保留期是另一个决定」，
-那个决定一直没给，于是 R2 上累积了 **512 份 / 521 MB、+99 MB/天**，是当时账号里唯一还在长的东西。
+本仓要额外记住的一条：**桌面版和 Codex 各有一个 `GithubProject/` 外的 worktree 根** ——
+桌面版算出来落在 `~/Documents/Codex/<REPO>/`，Codex 落在 `~/.codex/worktrees/`
+（2026-08-21 自查实测抓到 `~/.codex/worktrees/521b/MetaDatabase`）。所以自查要定期跑，不是换 agent 时才跑。
 
-现由 `social-archive/scripts/prune_r2_backup_replicas.py --apply` 承接（挂在
-`social-archive-backup.service`，每日 03:20），保留 **72 小时**，稳态约 290 MB。首次执行删了 258 个 / 234 MB。
+## 报路径一律用绝对路径
 
-> **改动禁区**：① 别删那条 `ExecStart`，② 别把 `--apply` 拿掉，③ 别放宽 `--hours`。
-> 脚本的安全底线也别削：**删 R2 对象前先 `HeadObject` 核对 OCI 上同 key 同大小，核不上就跳过不删**；
-> 最新一批永远保留；只碰 `backups/<组>/<时间戳>/`，**不碰 `primary-objects/`（那是制品字节，删了就是毁档）**。
-> 每份快照有 `r2`/`oci`/`github` 三个 verified 副本，删掉 R2 那份仍剩两份 —— 这是「卸载」不是「删除」。
+**结论**：报路径不 sed、不省略、不为对齐截断。界面把相对路径按**会话 cwd** 渲染成可点链接，
+而会话 cwd 可能是一棵开在别处的 worktree —— 剥掉前缀就等于把 Owner 指向错误的位置。
 
----
+**为什么**：2026-08-13 我把运维金库路径剥成 `_protected/ops_vault/...`，Owner 点开落在一棵公开仓工作树里，
+据此判我泄漏。文件从头到尾都在正确的 `GithubProject/_protected/` 下，**错的是汇报**。
+这类错比内容错更贵：内容错会被判据抓到，坐标错不会 —— 他必须先花时间证伪我，才能继续干活。
 
-## persona-distiller 流水线经验（2026-08-21 Telford#37 实测，供 T1/T2/T3 共用）
-
-- **结论**：模型文档里引文坐标必须写成 `（src-XXX，YYYY 年）`，裸 `（src-XXX）` 不算坐标。
-  **为什么**：check_quote_locator 的 LOCATOR 只认同段内的年份/页码/刊名/@偏移，不含 source_id；
-  10 份产物一次性扫出 65 条缺坐标，release 被拦。**代价**：65 条 × 8 文件逐条返工（约 1 段）。
-- **结论**：claims 层无排除机制——OCR 拼写变体（如 Pontcysyllte→Pontycysyllte）时，claim 文本必须
-  用语料拼写；答案/产物可留标准拼写，但要在 `raw/_EXCLUDED.txt` 记录（二手依据，脱「无依据」）。
-  **为什么**：check_claim_coverage 只看语料正文+台账，不读排除表；check_unsourced_names 读 raw/ 下
-  `_` 前缀 .txt。**代价**：两个名字各一次拦门 + 一轮排查。
-- **结论**：盲判载荷构建用 `--balanced-positions`（默认 sha256%2 可能偏，Telford 抽到 21/11）。
-  **为什么**：位次与系统相关会灌进 delta（Holmes#170 实测位次效应 +0.015~+0.027）。重建只重排
-  A/B 标签、不重生成答案，便宜。**代价**：重排后 judge 输入须重建（几行脚本）。
-- **结论**：release 门扫 `evals/judge_payload.v1.json`（候选侧），不扫 A/B 盲判载荷——baseline 侧
-  引文缺坐标不阻塞 release；基线 provenance warning 用 `package_target.py --acknowledge-disclosure
-  '<warning 原文子串>'` 具名承认，不是 error，不打回。**为什么**：裸模型基线本来就是「非能力证据」，
-  门拦的是冒充，不是发布。**代价**：0（按标准流程走）。
-- **结论**：case-known 类题有意测 holdout 记忆，rubric 里会要求 holdout 细节（如 "Appendices 7-13"）；
-  这类源标题词会穿过 holdout 泄漏门（非独有专名/数字）但被 unsourced-name 门抓——答案必须靠
-  `_EXCLUDED.txt` 记录兜底，别去改答案。**为什么**：holdout 密封源正文不在 raw/，checker 查不到属预期。
-  **代价**：Telford case-known-2 一次拦门。
-
-## persona-distiller 预筛/收尾经验（2026-08-22 T3 会话实测，供三线程共用）
-
-- **结论**：预筛 distinct 计数用 `creator:"姓, 名"` 全量检索，不用 title 检索。
-  **为什么**：title 检索易漏不同书/多扫描只算 1 标题；King#588 预筛判「distinct≈7 临界」，
-  creator 全量 70 条实得 13 部书/报告 + 15 篇期刊，上界 23、一手占比 0.957，正常走 REG。
-  **代价**：0（多一次 creator 检索）。
-- **结论**：「分类 ≠ IA 语料实况」——卒年/版次推断只是纸面，派发前必须 probe 实测。
-  **为什么**：财务合规 PD 池 6 人（Cotrugli/Cerboni/Besta/Sprague/May/Canning）纸面全「PD 可做」，
-  探源实测全 DEF（单著作天花板/独立著作<8/无 IA PD 语料）；Waksman#540 卒年推断归版权墙被实测推翻。
-  **代价**：1 轮 6 人探源 TSV（零 LLM，便宜），换回不烧整窗全流程。
-- **结论**：判分解析必须显式 `is None` 判空，禁止 `d.get("A") or ...`。
-  **为什么**：`or` 把 0 分吞成 falsy 落到 fallback，统计全错。**代价**：一次全批分数失真 + 重判。
-- **结论**：子代理（resume 尾段）后台任务随回合消亡——mandate 必须写明「前台阻塞跑完、
-  同回合 register+commit、禁后台任务」。
-  **为什么**：agent 两次 resume 都起后台 package_target 等自动通知，子代理一结束其后台任务即被杀。
-  **代价**：多轮空 resume 烧循环（本会话一次）。
-- **结论**：resume 代理不要信父代理「已生成」断言，先自查真实磁盘断点。
-  **为什么**：Lawes 父代理断言 results 已生成实测 0 行（死 eval prepare 后）；Boussingault 断言
-  claims/cases/results 已生成实测全 0 字节 + research gate FAIL 3 errors。**代价**：各补一段完整流水线。
-- **结论**：flash judge 空返回用 `--max-tokens 4000` 重判即稳（2000 被 reasoning 吃光）；外语人物
-  答案生成用「同长度硬帽 + 禁格式标记」双侧指令（泄题门 ratio>1.3 时）；`quality_check --cache`
-  只传一个 raw 目录（传多个误报 ocr_legibility 负对照）；team-card.json 占位
-  （provisional/not-yet-established/replace-with）在 package 阶段硬拦，打包前必填 ready。
-  **为什么**：四者均为本会话 3 个 resume 代理实测踩坑；quality_check 须用 `scripts/quality_check.py`
-  禁用 `references/pipeline/checkers/` 镜像（check_holdout_mention.py 模板路径 bug 必败）。
-  **代价**：每项一次返工。
-- **结论**：style-decoy 无数字题须禁中文量词全族（一/每/份/句/生/年/袋/匹），引文坐标用《书名》。
-  **为什么**：Say#248/Franklin#236/Babson#234/Carnegie#176/Wanamaker#193 五人多轮被
-  「一言以蔽之/每一分/一匹布/一生/身份」等判为违反无数字；check_self_reported_counts 把
-  `[中文数字]{1,3}字` 当自报字数（「服务二字」「职业二字」都触发）。
-  **代价**：每轮 1-2 题重生成+重建载荷+整份重判（约 15 分钟）。
-- **结论**：trajectory 生平密集题必须把 rubric 锚点逐条（含 OCR 引文）写进 refine 提示，生成后逐锚点 grep。
-  **为什么**：Say#248 traj-02 五轮才修完（漏 1813/1830/卒年/创办 vs 任编者）；Carnegie#176 traj-01/02
-  首判编造年份数额被双席 critical。
-  **代价**：每漏一锚点多一轮重判。
-- **结论**：改答案/rubric 后重建盲判载荷，旧 judge 分数全作废，须清空整份重判（非只判改动题）。
-  **为什么**：build_blind_payload 每次重新随机化 q 编号；Say#248 两轮、Babson#234 六轮均踩。
-  **代价**：一轮 64 次 flash 判分（约 25 分钟），比"只重判改动题"贵但必须。
-- **结论**：conversations 道手写信 OCR 常全灭（Edison#180：2 封 0-19 词乱码），探源须实测抓取核可用性。
-  **为什么**：Edison 探源报 3 道（writings/conversations/expression），实测 conversations 4 条书信全乱码
-  → 实际 2 道 <3 门槛，延后。
-  **代价**：1 次抓取核验（便宜），避免整窗全流程后才发现缺道。
-- **结论**：quick 档第 3 道可用 decisions 道补齐（JSTOR 政论文章归 decisions）。
-  **为什么**：Babson#234 timeline 自传 1935 printdisabled 不可抓，用 JSTOR 1916/1912/1920 政论文章
-  （A Business Man's View on Peace 等）补足 3 道。
-  **代价**：0（JSTOR Early Journal Content 免费开放）。
-- **结论**：三线程收敛回 main 用「复制 registry 新人物目录 + 同步切片台账」而非 git merge。
-  **为什么**：T2/T3 分支基于旧分叉点，merge 会带入大量无关文件（cak-comfyui 等）与冲突；
-  复制新人物（git ls-files 对比 main 独有 slug）干净可控。
-  **代价**：54 人复制 + team-index 重建（脚本化，约 2 分钟）。
-## worktree 位置：桌面版**没有**「Worktree location」这个设置（2026-08-13 实测，Claude Code 2.1.212）
-
-**结论**：`GithubProject/README.md` 里长期写着「桌面版可在 Settings → Claude Code → Worktree location
-指到 `~/Documents/Codex/GithubProject/_scratch/`」—— **那个设置不存在**。二进制里 0 处该文案；
-`~/.claude.json`、`~/.claude/settings.json`、桌面版 `claude_desktop_config.json` 里都没有对应键；
-搜「值为 `~/Documents/Codex` 的配置项」也是 0 处。这条是当初某个 agent **猜的**。
-
-真实规则是**算出来的**：worktree 固定落在 `<仓的祖父目录>/<仓名>/<worktree名>`。
-所以根指到 `GithubProject/AgentDatabase` 时，worktree 落在 `~/Documents/Codex/AgentDatabase/<名字>`，
-**在 `GithubProject/` 外面，违反铁律 2**。证据在桌面版自己的登记表
-`~/Library/Application Support/Claude/git-worktrees.json` 的 `untrackedDirGc.roots`，
-明写着 `~/Documents/Codex/AgentDatabase` 和 `~/Documents/Codex/MetaDatabase` 两个根。
-
-**代价**：这条铁律从写下那天起就不可执行，而后来每个 agent（包括我）都把它当「Owner 定的规矩」引用，
-**谁也没去点开看一眼**。我还差点把「你去 Settings 改」当成 Owner 的待办交回去 ——
-要他去改的那个东西本来就是 agent 写错的，交回去等于让他替我们的错买单。
-
-**怎么办**（README 已改成这两条）：
-① **手开 worktree，别用桌面版自动的** —— 在主树跑 `git worktree add ../_scratch/<repo>-<任务名> -b <分支> origin/main`。
-本机 MetaDatabase 的 worktree 全在 `_scratch/` 下就是因为都是手开的，**这条一直有效，只是从没被写下来**。
-② 已被自动开在外面的照常能用，但**收尾要多确认一步** `~/Documents/Codex/<REPO>/` 空了 ——
-否则会留下 `git worktree list` 里都没有的空壳目录（2026-08-10 留下过一个，里面躺着一份文件）。
-
-**自查**（已验四个方向：主树不报、`_scratch/` 下不报、`NotGithubProject/` 下报、别处报）：
-
-```bash
-ROOT=$(cd ~/Documents/Codex/GithubProject && pwd -P)   # 必须 pwd -P 取真实路径
-for r in "$ROOT"/*/; do
-  [ -d "$r/.git" ] || continue
-  git -C "$r" worktree list --porcelain 2>/dev/null | awk -v ROOT="$ROOT/" -v R="$(basename "$r")" \
-    '/^worktree /{p=substr($0,10); if (index(p, ROOT) != 1) print "✗ " R ": " p}'
-done
-```
-
-> 这条命令的两个坑都是造夹具才炸出来的，**别改回去**：
-> ① `!~ /GithubProject/` 是**子串**匹配，会放过 `/x/NotGithubProject/y`，也会把主树自己误报；必须 `index(p,ROOT)!=1` 做前缀。
-> ② `ROOT` 不 `pwd -P` 的话，在有软链的环境（macOS `/tmp`→`/private/tmp`）**100% 全报** ——
-> `git worktree list` 返回的是解析过软链的路径。本机 `~/Documents/` 没软链所以碰巧不发作，**换台机器就炸**。
->
-> **不止桌面版会这样**：2026-08-21 跑这条自查抓到
-> `/Users/linzezhang/.codex/worktrees/521b/MetaDatabase` —— **Codex 把 worktree 放在 `~/.codex/worktrees/`**，
-> 又是另一个 `GithubProject/` 外的根。所以这条自查要**定期跑**，别只在换 agent 时想起来。
-
-## 报路径一律用绝对路径 —— 剥前缀等于报错位置
-
-**结论**：交付运维金库时我为了好看用 `sed 's|.*/GithubProject/|  |'` 把前缀剥掉，打印成
-`_protected/ops_vault/LINZE_OPS_VAULT_20260813.tar.gz`。界面把相对路径按**会话 cwd** 渲染成可点链接，
-而那个会话的 cwd 恰好是一棵开在错位置的 worktree —— **Owner 点开看到的是一条指向公开仓工作树的凭据路径，据此判我泄漏**。
-
-文件从头到尾都在正确的 `GithubProject/_protected/` 下（`find` 全盘只有 3 处，全对）。**错的是我的汇报。**
-
-**代价**：他必须先花时间**证伪我**，才能继续干活。这类错比内容错更贵 —— 内容错会被判据抓到，坐标错不会。
-
-**规矩**：① 报路径一律绝对路径，不 sed、不省略、不为对齐截断；
-② **凭据 / 备份 / 交付物**这三类的位置尤其如此，报错位置是安全事故级的；
-③ 想让输出好看就用表格或缩进，**不要动路径本身的字符**；
-④ 自查加一条：**我打印的每条路径，从 Owner 的 cwd 出发点开，落在我以为的地方吗？**
-
-> 同一个错第二天在别人身上复现：Codex 报「`_protected` 里没东西」，因为它在
-> `_scratch/metadatabase-abd-v0001-s11-p01/` 里找相对路径 —— **`_protected/` 在 `GithubProject/` 根下，往上两级**。
-> 给别的 agent 指路时也只给绝对路径。
+**怎么做**：① 凭据 / 备份 / 交付物这三类的位置尤其用绝对路径，报错位置是安全事故级；
+② 想让输出好看用表格或缩进，不动路径本身的字符；③ 给别的 agent 指路也只给绝对路径；
+④ 自查加一条：我打印的每条路径，从 Owner 的 cwd 出发点开，落在我以为的地方吗？
