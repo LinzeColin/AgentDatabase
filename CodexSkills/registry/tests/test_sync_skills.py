@@ -339,5 +339,114 @@ class SyncSkillsFailClosedTests(unittest.TestCase):
         )
 
 
+class SyncSkillsVersionDowngradeGateTests(unittest.TestCase):
+    """「任何 Skill 不许降版本」硬门（2026-07-25 dynamic-personal-profile-update 事故）。"""
+
+    def setUp(self) -> None:
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        self.registry = self.root / "CodexSkills" / "registry"
+        self.source = self.root / "local"
+        self.source.mkdir()
+        self.original_sources = sync_skills.SOURCES
+        sync_skills.SOURCES = {
+            "codex": {"path": str(self.source), "label": "Codex test source"}
+        }
+
+    def tearDown(self) -> None:
+        sync_skills.SOURCES = self.original_sources
+        self.temp.cleanup()
+
+    def _skill(self, base: Path, slug: str, *, frontmatter_version=None, version_file=None, registry_version=None) -> Path:
+        directory = base / slug
+        directory.mkdir(parents=True, exist_ok=True)
+        extra = f"version: {frontmatter_version}\n" if frontmatter_version else ""
+        (directory / "SKILL.md").write_text(
+            f"---\nname: {slug}\ndescription: Test skill.\n{extra}---\n",
+            encoding="utf-8",
+        )
+        if version_file:
+            (directory / "VERSION").write_text(f"{version_file}\n", encoding="utf-8")
+        if registry_version:
+            (directory / "registry.yaml").write_text(
+                f'schema_version: "skill_registry.v1"\nversion: "{registry_version}"\n',
+                encoding="utf-8",
+            )
+        return directory
+
+    def test_replay_of_0725_stale_copy_is_blocked(self) -> None:
+        # 仓库：registry.yaml 声明 0.0.0.2；本机陈旧副本没有任何版本声明（事故原样）。
+        self._skill(self.registry / "codex", "dynamic-personal-profile-update", registry_version="0.0.0.2")
+        local = self._skill(self.source, "dynamic-personal-profile-update")
+        findings = sync_skills.version_downgrade_gate(
+            {("codex", "dynamic-personal-profile-update"): str(local)},
+            str(self.registry),
+            include_deletions=False,
+        )
+        self.assertEqual([row[:3] for row in findings], [("codex/dynamic-personal-profile-update", "0.0.0.2", None)])
+
+    def test_lower_local_version_is_blocked_and_equal_or_higher_passes(self) -> None:
+        self._skill(self.registry / "codex", "demo", version_file="0.0.0.2")
+        for local_version, blocked in (("0.0.0.1", True), ("0.0.0.2", False), ("v0.0.0.3", False)):
+            local = self._skill(self.source, "demo", version_file=local_version)
+            findings = sync_skills.version_downgrade_gate(
+                {("codex", "demo"): str(local)}, str(self.registry), include_deletions=False
+            )
+            self.assertEqual(bool(findings), blocked, local_version)
+
+    def test_versions_compare_numerically_not_lexically(self) -> None:
+        self._skill(self.registry / "codex", "demo", frontmatter_version='"v0.0.0.9"')
+        local = self._skill(self.source, "demo", version_file="v0.0.0.10")
+        self.assertEqual(
+            sync_skills.version_downgrade_gate(
+                {("codex", "demo"): str(local)}, str(self.registry), include_deletions=False
+            ),
+            [],
+        )
+        self.assertEqual(sync_skills._compare_versions((0, 0, 2), (0, 0, 0, 2)), 1)
+
+    def test_unversioned_repo_skill_and_new_skill_are_not_blocked(self) -> None:
+        self._skill(self.registry / "codex", "plain")
+        plain = self._skill(self.source, "plain")
+        fresh = self._skill(self.source, "fresh", version_file="0.0.0.1")
+        self.assertEqual(
+            sync_skills.version_downgrade_gate(
+                {("codex", "plain"): str(plain), ("codex", "fresh"): str(fresh)},
+                str(self.registry),
+                include_deletions=True,
+            ),
+            [],
+        )
+
+    def test_deleting_a_versioned_skill_is_blocked_only_on_full_sync(self) -> None:
+        self._skill(self.registry / "codex", "versioned", registry_version="0.0.0.2")
+        self._skill(self.registry / "codex", "unversioned")
+        full = sync_skills.version_downgrade_gate({}, str(self.registry), include_deletions=True)
+        self.assertEqual([row[:3] for row in full], [("codex/versioned", "0.0.0.2", None)])
+        self.assertEqual(sync_skills.version_downgrade_gate({}, str(self.registry), include_deletions=False), [])
+
+    def test_main_stops_before_mirror_and_explicit_allow_passes(self) -> None:
+        self._skill(self.registry / "codex", "demo", version_file="0.0.0.2")
+        local = self._skill(self.source, "demo", version_file="0.0.0.1")
+        selected = {("codex", "demo"): str(local)}
+        for argv, expected, mirror_called in (
+            (["sync_skills.py", "--only", "codex/demo", "--dry-run"], 2, False),
+            (["sync_skills.py", "--only", "codex/demo", "--dry-run", "--allow-version-downgrade", "codex/demo"], 0, True),
+        ):
+            with (
+                mock.patch.object(sync_skills, "repo_root", return_value=str(self.root)),
+                mock.patch.object(sync_skills, "inventory", return_value=dict(selected)),
+                mock.patch.object(
+                    sync_skills,
+                    "mirror",
+                    return_value={"added": [], "updated": ["codex/demo"], "removed": []},
+                ) as mirror,
+                mock.patch.object(sys, "argv", argv),
+            ):
+                self.assertEqual(sync_skills.main(), expected)
+            self.assertEqual(mirror.called, mirror_called)
+            self.assertEqual((self.registry / "codex/demo/VERSION").read_text(encoding="utf-8"), "0.0.0.2\n")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -17,6 +17,9 @@
 3. **按来源分目录**：四个来源里有 14 个重名（其中 `agent-reach` 内容还不同），
    拍平会互相覆盖，所以用 `registry/<来源>/<skill>/` 命名空间。
 4. **幂等**：没有变化就不产生提交。
+5. **不许降版本**：仓库里声明了版本的 Skill，本机副本版本更低、没有版本声明、
+   或（全量同步时）本机已不存在，都在写入前中止；有意回退/下线才用
+   `--allow-version-downgrade <source>/<slug>` 逐个放行（2026-07-25 事故）。
 """
 
 import argparse
@@ -928,6 +931,110 @@ def persona_shrink_gate(inv, mirror_root):
     return len(repo_slugs), len(local_slugs), repo_slugs - local_slugs
 
 
+_VERSION_TOKEN = re.compile(r"^[\"']?v?(\d+(?:\.\d+)*)")
+_FRONTMATTER_VERSION = re.compile(r"^\s*version:\s*(\S.*?)\s*$", flags=re.M)
+_REGISTRY_VERSION = re.compile(r"^version:\s*(\S.*?)\s*$", flags=re.M)
+
+
+def _version_key(text):
+    """'v0.0.0.24' / '"6.7.0"' → (0, 0, 0, 24) / (6, 7, 0)；解析不了返回 None。"""
+    m = _VERSION_TOKEN.match(str(text).strip())
+    return tuple(int(part) for part in m.group(1).split(".")) if m else None
+
+
+def _compare_versions(left, right):
+    width = max(len(left), len(right))
+    left = left + (0,) * (width - len(left))
+    right = right + (0,) * (width - len(right))
+    return (left > right) - (left < right)
+
+
+def declared_version(directory, *, include_repo_metadata):
+    """读取 Skill 目录里结构化声明的最高版本，返回 (key, 原文, 声明位置) 或 None。
+
+    声明位置：`VERSION` 首行、`SKILL.md` front matter 的 `version:`，以及
+    （仅仓库侧）仓库自有的 `registry.yaml` 顶层 `version:`。本机的
+    `registry.yaml` 不会被同步进仓库（见 repo_owned_files），所以本机侧不读它。
+    """
+    found = []
+
+    def read(name):
+        path = os.path.join(directory, name)
+        if not os.path.isfile(path) or os.path.islink(path):
+            return None
+        try:
+            with open(path, encoding="utf-8", errors="ignore") as handle:
+                return handle.read()
+        except OSError:
+            return None
+
+    text = read("VERSION")
+    if text and text.strip():
+        found.append((text.strip().splitlines()[0].strip(), "VERSION"))
+    text = read("SKILL.md")
+    if text:
+        m = re.match(r"^---\s*\n(.*?)\n---\s*\n", text, flags=re.S)
+        if m:
+            hit = _FRONTMATTER_VERSION.search(m.group(1))
+            if hit:
+                found.append((hit.group(1), "SKILL.md front matter"))
+    if include_repo_metadata:
+        text = read("registry.yaml")
+        if text:
+            hit = _REGISTRY_VERSION.search(text)
+            if hit:
+                found.append((hit.group(1), "registry.yaml"))
+
+    best = None
+    for raw, where in found:
+        key = _version_key(raw)
+        if key is None:
+            continue
+        if best is None or _compare_versions(key, best[0]) > 0:
+            best = (key, raw.strip().strip('"').strip("'"), where)
+    return best
+
+
+def version_downgrade_gate(inv, mirror_root, *, include_deletions):
+    """「任何 Skill 不许降版本」硬门 —— 在写任何东西之前跑。
+
+    2026-07-25 出过一次事故：「同步本机 Skill 到仓库（更新 4）」把本机一份
+    **陈旧的** dynamic-personal-profile-update（0.0.0.1）按「本机 → 仓库」方向
+    覆盖回仓库，而仓库那份是 0.0.0.2（`registry.yaml` 仍写 0.0.0.2）。
+    代码降级后，仓库里 0.0.0.2 生成的画像文件被判非法，定时工作流连败 23 次。
+    persona_shrink_gate 只护 persona-distiller-group，护不到这里。
+
+    规则：仓库镜像里结构化声明了版本的 Skill，本机副本必须声明**不低于**它的版本；
+    本机副本没有任何版本声明，同样无法证明不是降级，一并拦下。
+    include_deletions=True（全量同步会传播删除）时，本机已不存在、仓库声明了版本的
+    Skill 也视为降级（版本 → 无）。
+    返回 [(source/slug, 仓库版本, 本机版本或 None, 原因)]。
+    """
+    findings = []
+    for (src, slug), localpath in sorted(inv.items()):
+        rel = mirror_relative_path(src, slug)
+        repo_dir = os.path.join(mirror_root, rel)
+        if not os.path.isdir(repo_dir) or os.path.islink(repo_dir):
+            continue
+        repo = declared_version(repo_dir, include_repo_metadata=True)
+        if repo is None:
+            continue
+        local = declared_version(localpath, include_repo_metadata=False)
+        if local is None:
+            findings.append((rel, repo[1], None, f"本机副本没有版本声明（仓库见 {repo[2]}）"))
+        elif _compare_versions(local[0], repo[0]) < 0:
+            findings.append((rel, repo[1], local[1], f"本机 {local[2]} 低于仓库 {repo[2]}"))
+    if include_deletions:
+        want = {mirror_relative_path(src, slug) for src, slug in inv}
+        for rel in sorted(_enumerate_mirrored_skill_roots(mirror_root) - want):
+            repo = declared_version(
+                os.path.join(mirror_root, rel), include_repo_metadata=True
+            )
+            if repo is not None:
+                findings.append((rel, repo[1], None, "本机已不存在，全量同步会删除仓库镜像"))
+    return findings
+
+
 def build_index(mirror_root, catalog_root):
     skills = []
     for src, slug, rel, directory in iter_mirrored_skills(mirror_root):
@@ -1155,6 +1262,13 @@ def main():
         action="store_true",
         help="显式放行会减少已登记人物的同步（默认中止；只有确认是有意下线时才用）",
     )
+    ap.add_argument(
+        "--allow-version-downgrade",
+        metavar="SOURCE/SLUG",
+        action="append",
+        default=[],
+        help="显式放行某一个 Skill 的降版本或删除（可重复；默认中止；只有确认是有意回退/下线时才用）",
+    )
     args = ap.parse_args()
 
     root = repo_root()
@@ -1225,6 +1339,23 @@ def main():
             return 2
         if lost_persona:
             log(f"  ⚠ --allow-persona-shrink：已放行，将抹掉 {len(lost_persona)} 个已登记人物。")
+
+    downgrades = version_downgrade_gate(
+        inv, mirror_root, include_deletions=not bool(args.only)
+    )
+    allowed = set(args.allow_version_downgrade)
+    blocked = [row for row in downgrades if row[0] not in allowed]
+    for rel, repo_version, local_version, _ in downgrades:
+        if rel in allowed:
+            log(f"  ⚠ --allow-version-downgrade：已放行 {rel}（仓库 {repo_version} → 本机 {local_version or '无'}）")
+    if blocked:
+        log(f"  ✗ 本次同步会让 {len(blocked)} 个 Skill 降版本，**已中止，未写入任何内容**：")
+        for rel, repo_version, local_version, reason in blocked:
+            log(f"    - {rel}：仓库 {repo_version} → 本机 {local_version or '无'}（{reason}）")
+        log("    仓库里的更高版本才是真相源。正确动作是先从仓库更新本机副本：")
+        log("      rsync -a <仓库>/CodexSkills/registry/<source>/<slug>/ <本机来源目录>/<slug>/")
+        log("    确认确实要回退或下线某个 Skill 时，才加 --allow-version-downgrade <source>/<slug>。")
+        return 2
 
     log("\n=== 2/6 镜像与删除传播 ===")
     ch = mirror(

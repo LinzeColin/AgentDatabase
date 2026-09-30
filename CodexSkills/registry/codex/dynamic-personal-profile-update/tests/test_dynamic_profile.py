@@ -169,6 +169,41 @@ class DynamicProfileTests(unittest.TestCase):
         self.assertIn("NO_CHANGE", second.stdout)
         self.assertEqual(before, self.output.read_bytes())
 
+    def test_previous_patch_migrates_once_then_is_idempotent(self) -> None:
+        first = self.run_update()
+        self.assertEqual(first.returncode, 0, first.stderr)
+        machine, _ = update_module.split_profile(
+            self.output.read_text(encoding="utf-8")
+        )
+        machine["skill_version"] = "0.0.0.1"
+        for entry in machine["entries"]:
+            entry["counterevidence"] = [
+                value.replace("v0.0.0.2", "v0.0.0.1")
+                for value in entry["counterevidence"]
+            ]
+        machine["semantic_snapshot_sha256"] = update_module.semantic_hash(
+            machine["entries"]
+        )
+        previous_patch = (
+            "---\n"
+            + json.dumps(machine, ensure_ascii=False, indent=2)
+            + "\n---\n\n"
+            + update_module.render_human(machine["entries"])
+        )
+        self.output.write_text(previous_patch, encoding="utf-8")
+
+        migrated = self.run_update()
+        self.assertEqual(migrated.returncode, 0, migrated.stderr)
+        self.assertIn('"status": "CHANGED"', migrated.stdout)
+        self.assertEqual(self.machine_plane()["skill_version"], "0.0.0.2")
+        self.assertNotIn("v0.0.0.1", self.output.read_text(encoding="utf-8"))
+        migrated_bytes = self.output.read_bytes()
+
+        repeated = self.run_update()
+        self.assertEqual(repeated.returncode, 0, repeated.stderr)
+        self.assertIn("NO_CHANGE", repeated.stdout)
+        self.assertEqual(migrated_bytes, self.output.read_bytes())
+
     def test_check_only_does_not_create_output(self) -> None:
         checked = self.run_update(check_only=True)
         self.assertEqual(checked.returncode, 0, checked.stderr)

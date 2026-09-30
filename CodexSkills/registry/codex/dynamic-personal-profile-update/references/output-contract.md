@@ -43,9 +43,9 @@ The human layer is a projection of the machine entries. It must not contain fact
 
 ## Size and evidence rules
 
-- Keep the total file below 80 KiB in v0.0.0.1.
+- Keep the total file below 80 KiB in v0.0.0.2.
 - Keep at most 18 entries; prefer high-confidence and cross-source entries.
-- The fixed v0.0.0.1 allowlist contains only `CORE_PROFILE.md`, `behavior_intelligence/low_value_loops.json`, and `codex/codex_agent_recommendations.json` under `OpenAIDatabase/data/derived/`.
+- The fixed v0.0.0.2 runtime allowlist contains only `CORE_PROFILE.md`, `behavior_intelligence/low_value_loops.json`, and `codex/codex_agent_recommendations.json` under `OpenAIDatabase/data/derived/`. Stage 2 Phase 2A adds metadata-only readiness validation and does not expand this runtime allowlist.
 - Evidence references must be repository-relative and point only to allowlisted derived files.
 - Do not include full source text, transcript excerpts, credentials, raw paths, or personal secrets.
 - Do not synthesize exact timestamps when the source has no timestamp; say `source timestamp unavailable`.
