@@ -4,11 +4,11 @@
   "artifact": "dynamic_personal_profile",
   "artifact_status": "generated_derived_view",
   "skill_version": "0.0.0.2",
-  "generated_at": "2026-07-24T02:47:00Z",
+  "generated_at": "2026-09-30T09:05:25Z",
   "input_mode": "derived_only",
   "canonical_stable_profile_write": false,
   "source_snapshot_sha256": "sha256:b9cf4e6941c8967150af02ca7fd0ec1dda1b08b3e14cc544e5906b4411ec38a0",
-  "semantic_snapshot_sha256": "sha256:266c4b8d65f2228484fa884e612ea9d13a739f4c72a5ac066612d3d663f981a7",
+  "semantic_snapshot_sha256": "sha256:a901cec2e06420371a4e94ab84a5beb6b98c64d338644bfee884fe9ccaae7e27",
   "source_files": [
     {
       "path": "OpenAIDatabase/data/derived/behavior_intelligence/low_value_loops.json",
@@ -45,7 +45,7 @@
         "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
-      "observed_window": "recent_30d",
+      "observed_window": "long_baseline",
       "valid_until": null,
       "agent_action": "在下一次与“GitHub 上的 OpenAIDatabase 应作为任意 agent 可读取的长期记忆、画像、偏好和历史上下文数据库。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。",
       "asset_candidate": "observation",
@@ -64,7 +64,7 @@
         "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
-      "observed_window": "recent_30d",
+      "observed_window": "long_baseline",
       "valid_until": null,
       "agent_action": "在下一次与“GitHub 备份中不得提交 plaintext high-risk secrets；金融/交易 agent 使用 secret_ref 和受控本地 resolver。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。",
       "asset_candidate": "observation",
@@ -83,7 +83,7 @@
         "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
-      "observed_window": "recent_30d",
+      "observed_window": "long_baseline",
       "valid_until": null,
       "agent_action": "在下一次与“所有 agent 访问后都应能生成适配用户的 profile、preference、project context、rules 和 history summary。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。",
       "asset_candidate": "observation",
@@ -102,7 +102,7 @@
         "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
-      "observed_window": "recent_30d",
+      "observed_window": "long_baseline",
       "valid_until": null,
       "agent_action": "在下一次与“用户明确要求使用真实 Codex / ChatGPT / GitHub 数据，不接受 mock、伪进度或只给概念演示。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。",
       "asset_candidate": "observation",
@@ -121,7 +121,7 @@
         "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
-      "observed_window": "recent_30d",
+      "observed_window": "long_baseline",
       "valid_until": null,
       "agent_action": "在下一次与“用户说先不开始时必须先澄清需求；用户授权开始后应持续推进到可验证结果。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。",
       "asset_candidate": "observation",
@@ -140,7 +140,7 @@
         "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
-      "observed_window": "recent_30d",
+      "observed_window": "long_baseline",
       "valid_until": null,
       "agent_action": "在下一次与“用户长期偏好中文输出；代码、API、库名、错误信息和专业术语可保留英文。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。",
       "asset_candidate": "observation",
@@ -159,7 +159,7 @@
         "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
-      "observed_window": "recent_30d",
+      "observed_window": "long_baseline",
       "valid_until": null,
       "agent_action": "在下一次与“处理记忆或行为数据后，应输出人能直接使用的话题、行动、建议、机会、ROI、能力成长和风险提醒。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。",
       "asset_candidate": "observation",
@@ -273,7 +273,7 @@
         "The aggregation may reflect a temporary period of concentrated development rather than a durable work pattern."
       ],
       "confidence": "medium",
-      "observed_window": "recent_30d",
+      "observed_window": "long_baseline",
       "valid_until": null,
       "agent_action": "在下一次与“派生行为数据在 8 个主题簇中检测到高频细节迭代候选（累计 227 条事件）；下一次相关任务应先冻结质量上限，达到验收后停止扩张。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。",
       "asset_candidate": "workflow",
@@ -292,7 +292,7 @@
         "The aggregation may reflect a temporary period of concentrated development rather than a durable work pattern."
       ],
       "confidence": "medium",
-      "observed_window": "recent_30d",
+      "observed_window": "long_baseline",
       "valid_until": null,
       "agent_action": "在下一次与“派生行为数据在 5 个主题簇中检测到 scope creep 候选（累计 181 条事件）；下一次相关任务应先冻结 run contract、非目标和写入边界。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。",
       "asset_candidate": "workflow",
@@ -311,7 +311,7 @@
         "The aggregation may reflect a temporary period of concentrated development rather than a durable work pattern."
       ],
       "confidence": "medium",
-      "observed_window": "recent_30d",
+      "observed_window": "long_baseline",
       "valid_until": null,
       "agent_action": "在下一次与“派生行为数据在 13 个主题簇中检测到反复返工候选（累计 177 条事件）；下一次相关任务应先复用现有资产并设置一次复跑验收。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。",
       "asset_candidate": "workflow",
@@ -330,7 +330,7 @@
         "The aggregation may reflect a temporary period of concentrated development rather than a durable work pattern."
       ],
       "confidence": "medium",
-      "observed_window": "recent_30d",
+      "observed_window": "long_baseline",
       "valid_until": null,
       "agent_action": "在下一次与“派生行为数据在 5 个主题簇中检测到多次讨论但缺少落地产物（累计 54 条事件）；下一次相关任务先收口为一个交付件、一个验收命令和一个停止条件。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。",
       "asset_candidate": "workflow",
@@ -381,7 +381,7 @@
 - 观察：GitHub 上的 OpenAIDatabase 应作为任意 agent 可读取的长期记忆、画像、偏好和历史上下文数据库。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
 - 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
-- 置信度：`high`；时间窗口：`recent_30d`
+- 置信度：`high`；时间窗口：`long_baseline`
 - 临时 Agent 行为：在下一次与“GitHub 上的 OpenAIDatabase 应作为任意 agent 可读取的长期记忆、画像、偏好和历史上下文数据库。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
 ### dp-24c22481a927｜current
@@ -390,7 +390,7 @@
 - 观察：GitHub 备份中不得提交 plaintext high-risk secrets；金融/交易 agent 使用 secret_ref 和受控本地 resolver。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
 - 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
-- 置信度：`high`；时间窗口：`recent_30d`
+- 置信度：`high`；时间窗口：`long_baseline`
 - 临时 Agent 行为：在下一次与“GitHub 备份中不得提交 plaintext high-risk secrets；金融/交易 agent 使用 secret_ref 和受控本地 resolver。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
 ### dp-0131e7df4695｜current
@@ -399,7 +399,7 @@
 - 观察：所有 agent 访问后都应能生成适配用户的 profile、preference、project context、rules 和 history summary。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
 - 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
-- 置信度：`high`；时间窗口：`recent_30d`
+- 置信度：`high`；时间窗口：`long_baseline`
 - 临时 Agent 行为：在下一次与“所有 agent 访问后都应能生成适配用户的 profile、preference、project context、rules 和 history summary。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
 ### dp-8e45829f83b7｜current
@@ -408,7 +408,7 @@
 - 观察：用户明确要求使用真实 Codex / ChatGPT / GitHub 数据，不接受 mock、伪进度或只给概念演示。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
 - 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
-- 置信度：`high`；时间窗口：`recent_30d`
+- 置信度：`high`；时间窗口：`long_baseline`
 - 临时 Agent 行为：在下一次与“用户明确要求使用真实 Codex / ChatGPT / GitHub 数据，不接受 mock、伪进度或只给概念演示。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
 ### dp-7048dbe33903｜current
@@ -417,7 +417,7 @@
 - 观察：用户说先不开始时必须先澄清需求；用户授权开始后应持续推进到可验证结果。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
 - 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
-- 置信度：`high`；时间窗口：`recent_30d`
+- 置信度：`high`；时间窗口：`long_baseline`
 - 临时 Agent 行为：在下一次与“用户说先不开始时必须先澄清需求；用户授权开始后应持续推进到可验证结果。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
 ### dp-bd6e8a3c0ee6｜current
@@ -426,7 +426,7 @@
 - 观察：用户长期偏好中文输出；代码、API、库名、错误信息和专业术语可保留英文。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
 - 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
-- 置信度：`high`；时间窗口：`recent_30d`
+- 置信度：`high`；时间窗口：`long_baseline`
 - 临时 Agent 行为：在下一次与“用户长期偏好中文输出；代码、API、库名、错误信息和专业术语可保留英文。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
 ### dp-49cab09a94bf｜current
@@ -435,7 +435,7 @@
 - 观察：处理记忆或行为数据后，应输出人能直接使用的话题、行动、建议、机会、ROI、能力成长和风险提醒。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
 - 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
-- 置信度：`high`；时间窗口：`recent_30d`
+- 置信度：`high`；时间窗口：`long_baseline`
 - 临时 Agent 行为：在下一次与“处理记忆或行为数据后，应输出人能直接使用的话题、行动、建议、机会、ROI、能力成长和风险提醒。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
 ### dp-01da6cc16766｜current
@@ -489,7 +489,7 @@
 - 观察：派生行为数据在 8 个主题簇中检测到高频细节迭代候选（累计 227 条事件）；下一次相关任务应先冻结质量上限，达到验收后停止扩张。
 - 证据：`OpenAIDatabase/data/derived/behavior_intelligence/low_value_loops.json`
 - 反证：The aggregation may reflect a temporary period of concentrated development rather than a durable work pattern.
-- 置信度：`medium`；时间窗口：`recent_30d`
+- 置信度：`medium`；时间窗口：`long_baseline`
 - 临时 Agent 行为：在下一次与“派生行为数据在 8 个主题簇中检测到高频细节迭代候选（累计 227 条事件）；下一次相关任务应先冻结质量上限，达到验收后停止扩张。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
 ### dp-c451522dd196｜emerging
@@ -498,7 +498,7 @@
 - 观察：派生行为数据在 5 个主题簇中检测到 scope creep 候选（累计 181 条事件）；下一次相关任务应先冻结 run contract、非目标和写入边界。
 - 证据：`OpenAIDatabase/data/derived/behavior_intelligence/low_value_loops.json`
 - 反证：The aggregation may reflect a temporary period of concentrated development rather than a durable work pattern.
-- 置信度：`medium`；时间窗口：`recent_30d`
+- 置信度：`medium`；时间窗口：`long_baseline`
 - 临时 Agent 行为：在下一次与“派生行为数据在 5 个主题簇中检测到 scope creep 候选（累计 181 条事件）；下一次相关任务应先冻结 run contract、非目标和写入边界。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
 ### dp-391a0586617b｜emerging
@@ -507,7 +507,7 @@
 - 观察：派生行为数据在 13 个主题簇中检测到反复返工候选（累计 177 条事件）；下一次相关任务应先复用现有资产并设置一次复跑验收。
 - 证据：`OpenAIDatabase/data/derived/behavior_intelligence/low_value_loops.json`
 - 反证：The aggregation may reflect a temporary period of concentrated development rather than a durable work pattern.
-- 置信度：`medium`；时间窗口：`recent_30d`
+- 置信度：`medium`；时间窗口：`long_baseline`
 - 临时 Agent 行为：在下一次与“派生行为数据在 13 个主题簇中检测到反复返工候选（累计 177 条事件）；下一次相关任务应先复用现有资产并设置一次复跑验收。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
 ### dp-efb1c46181b4｜emerging
@@ -516,7 +516,7 @@
 - 观察：派生行为数据在 5 个主题簇中检测到多次讨论但缺少落地产物（累计 54 条事件）；下一次相关任务先收口为一个交付件、一个验收命令和一个停止条件。
 - 证据：`OpenAIDatabase/data/derived/behavior_intelligence/low_value_loops.json`
 - 反证：The aggregation may reflect a temporary period of concentrated development rather than a durable work pattern.
-- 置信度：`medium`；时间窗口：`recent_30d`
+- 置信度：`medium`；时间窗口：`long_baseline`
 - 临时 Agent 行为：在下一次与“派生行为数据在 5 个主题簇中检测到多次讨论但缺少落地产物（累计 54 条事件）；下一次相关任务先收口为一个交付件、一个验收命令和一个停止条件。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
 ### dp-eebd14f83885｜hypothesis
