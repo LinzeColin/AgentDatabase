@@ -5,6 +5,9 @@
 This checkout is the sole canonical `LinzeColin/AgentDatabase` repository.
 Its active product scopes are `OpenAIDatabase/`, top-level `MemoryAtlas/`, and
 `CodexSkills/`.
+Memory Atlas was retired on 2026-09-30 (Owner decision): its server units, timers and
+container are stopped and its code is kept only for restore; do not re-enable it
+without an explicit Owner instruction (see the README banner for the backup).
 Do not restore projects migrated to other repositories, the retired root
 governance tree, a second OpenAIDatabase fact source, private core, credentials,
 session material, `data/raw_archives/**`, or historical large archives.

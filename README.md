@@ -1,8 +1,15 @@
 # AgentDatabase
 
+> **⛔ Memory Atlas 已退役（2026-09-30，Owner 决定）。** VPS-3 上的网页容器、API、3 个定时器（action-worker / selfheal / reconcile）已停止并 disable，
+> 门户卡片已去掉；`MemoryAtlas/` 与 `ops/memory-atlas/` 代码原样保留。原因：它对相关 agent 与本机造成严重损耗、浪费 token。
+> **备份**：私有仓 `LinzeColin/Private-Database` 的 Release `memory-atlas-retired-20260930`（约 44MB：各版前端构建、运行状态 sqlite、systemd 单元、部署配置、`RESTORE.md`；不含凭据）。
+> 原始记忆数据的权威副本不变：Private-Database 里其余 `memory-atlas-*` Release（截至 2026-09-13）与本仓 `OpenAIDatabase/data`。
+> **恢复**：按包内 `RESTORE.md`；Cloudflare 侧 `memoryatlas.linzezhang.com` 的路由与 Access 应用未删。
+> **OpenAIDatabase「每周分析」（Recurring Prompt Analysis）的每周二定时触发已停用**，其余 workflow 不动。
+
 Agent 数据仓。三个活动范围：
 - **`OpenAIDatabase/`** —— Codex / OpenAI 会话与记忆运行时（记忆图谱、个性化、行为智能）。
-- **`MemoryAtlas/`** —— 记忆图谱发布件。
+- **`MemoryAtlas/`** —— 记忆图谱发布件（**已退役**，代码保留）。
 - **`CodexSkills/`** —— 本机 Codex Skill 的仓库镜像与治理登记（人物蒸馏等）。
 
 以及从旧 Mac 迁出的历史归档（作为 Release 资产，不占本地存储）。

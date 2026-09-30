@@ -33,10 +33,8 @@ on:
       - "OpenAIDatabase/tests/fixtures/human_readable_docs/**"
       - "OpenAIDatabase/data/public_raw/codex/sessions/**/*.jsonl"
       - "OpenAIDatabase/data/public_raw/codex/sessions/*.jsonl"
-  schedule:
-    # Raw-data push is primary. This non-hourly weekly run only reconciles missed pushes
-    # and refreshes the truthful current/delayed/stale state.
-    - cron: "47 4 * * 2"
+  # 每周二 04:47 UTC 的定时触发已于 2026-09-30 按 Owner 决定停用（它只改时间戳与哈希，来源数据已停在 2026-07-10）。
+  # 仅保留 push / PR / 手动触发。
   workflow_dispatch:
     inputs:
       force_full:
